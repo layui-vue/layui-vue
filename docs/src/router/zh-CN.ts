@@ -28,6 +28,10 @@ const zhCN = [
         path: '/zh-CN/components/icon',
         component: () => import('../../docs/zh-CN/components/icon.md'),
         meta: { title: '图标' },
+      },{
+        path: '/zh-CN/components/panel',
+        component: () => import('../../docs/zh-CN/components/panel.md'),
+        meta: { title: '面板' },
       }
     ],
   },

@@ -1,7 +1,7 @@
 ::: demo
 
 <template>
-  <lay-icon type="layui-icon-face-smile"></lay-icon>
+  <lay-panel><div style="padding: 30px;">面板</div></lay-panel>
 </template>
 
 <script>
