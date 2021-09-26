@@ -6,6 +6,7 @@
     <lay-side>
       <router-link to="/zh-CN/components/layout">布局</router-link>
       <router-link to="/zh-CN/components/button">按钮</router-link>
+      <router-link to="/zh-CN/components/icon">图标</router-link>
     </lay-side>
     <lay-body>
       <div style="padding: 20px">

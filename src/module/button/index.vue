@@ -1,5 +1,5 @@
 <template>
-    <button class="layui-btn" :class="[type ? 'layui-btn-' + type : '']">
+    <button class="layui-btn" :class="[type ? 'layui-btn-' + type : '',size ? 'layui-btn-' + size : '']">
         <slot></slot>
     </button>
 </template>
@@ -8,7 +8,8 @@
 import { defineProps } from "@vue/runtime-core";
 
 const props = defineProps<{
-  type?: string
+  type?: string,
+  size?: string
 }>()
 
 </script>

@@ -11,7 +11,7 @@ const zhCN = [
         path: '/zh-CN/guide/',
         component: () => import('../../docs/zh-CN/guide/home.md'),
         meta: { title: '介绍' },
-      }
+      },
     ],
   },
   {
@@ -24,6 +24,10 @@ const zhCN = [
         path: '/zh-CN/components/button',
         component: () => import('../../docs/zh-CN/components/button.md'),
         meta: { title: '按钮' },
+      },{
+        path: '/zh-CN/components/icon',
+        component: () => import('../../docs/zh-CN/components/icon.md'),
+        meta: { title: '图标' },
       }
     ],
   },
