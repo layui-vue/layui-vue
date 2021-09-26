@@ -1,0 +1,98 @@
+{
+  "name": "layui-vue",
+  "version": "0.3.7",
+  "description": "a component library for Vue 3 base on layui-vue",
+  "main": "lib/layui-vue.umd.js",
+  "module": "lib/layui-vue.es.js",
+  "exports": {
+    ".": {
+      "import": "./lib/layui-vue.es.js",
+      "require": "./lib/layui-vue.umd.js"
+    },
+    "./lib/": "./lib/"
+  },
+  "types": "types/index.d.ts",
+  "style": "lib/style.css",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build --emptyOutDir && npm run build:helper && npm run build:types",
+    "build:types": "rimraf types && tsc -d",
+    "build:helper": "node .helperrc.js",
+    "build:docs": "vite build docs",
+    "test": "jest",
+    "lint": "eslint . --fix --ext .ts,.vue,.js --ignore-pattern \"/lib/\" --ignore-pattern \"/types/\"",
+    "prettier": "prettier --check --write --ignore-unknown \"{example,src,docs,test}/**\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitee.com/Jmysy/layui-vue"
+  },
+  "keywords": [
+    "layui-vue",
+    "layui",
+    "vue"
+  ],
+  "author": "<就眠仪式 jmys1992@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://gitee.com/Jmysy/layui-vue/issues"
+  },
+  "homepage": "https://gitee.com/Jmysy/layui-vue/blob/master/README.md",
+  "peerDependencies": {
+    "vue": "^3.1.2",
+    "vue-router": "^4.0.10"
+  },
+  "dependencies": {
+    "vue": "^3.1.2",
+    "vue-router": "^4.0.10"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.14.0",
+    "@babel/preset-env": "^7.14.0",
+    "@babel/preset-typescript": "^7.13.0",
+    "@types/jest": "^26.0.23",
+    "@types/markdown-it": "^12.0.1",
+    "@types/markdown-it-container": "^2.0.3",
+    "@typescript-eslint/eslint-plugin": "^4.22.0",
+    "@typescript-eslint/parser": "^4.22.0",
+    "@vitejs/plugin-vue": "^1.2.2",
+    "@vue/compiler-sfc": "^3.1.2",
+    "@vue/server-renderer": "^3.1.1",
+    "@vue/test-utils": "^2.0.0-rc.6",
+    "babel-jest": "^26.6.3",
+    "components-helper": "^1.0.3",
+    "escape-html": "^1.0.3",
+    "eslint": "^7.25.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-vue": "^7.9.0",
+    "husky": "^4.3.6",
+    "jest": "^26.6.3",
+    "lint-staged": "^10.5.4",
+    "markdown-it-container": "^3.0.0",
+    "postcss": "^8.2.13",
+    "postcss-preset-env": "^6.7.0",
+    "prettier": "2.2.1",
+    "prismjs": "^1.23.0",
+    "rimraf": "^3.0.2",
+    "rollup-plugin-babel": "^4.4.0",
+    "ts-jest": "^26.5.5",
+    "typescript": "^4.2.4",
+    "vite": "2.3.7",
+    "vite-plugin-md": "^0.6.3",
+    "vue-jest": "^5.0.0-alpha.8"
+  },
+  "vetur": {
+    "tags": "lib/tags.json",
+    "attributes": "lib/attributes.json"
+  },
+  "web-types": "lib/web-types.json",
+  "files": [
+    "lib",
+    "types"
+  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  }
+}
