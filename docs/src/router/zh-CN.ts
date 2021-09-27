@@ -36,6 +36,10 @@ const zhCN = [
         path: '/zh-CN/components/card',
         component: () => import('../../docs/zh-CN/components/cards.md'),
         meta: { title: '卡片' },
+      },{
+        path: '/zh-CN/components/grid',
+        component: () => import('../../docs/zh-CN/components/grid.md'),
+        meta: { title: '栅格' },
       }
     ],
   },

@@ -1,7 +1,8 @@
 import type { App } from 'vue'
 import type { IDefineComponent, InstallOptions } from './module/type/index'
 
-import "./css/layui.css";
+import "./css/layui.css"
+import "./css/all.css"
 import LayRadio from './module/radio/index'
 import LayButton from './module/button/index'
 import LayButtonContainer from './module/buttonContainer/index'
@@ -16,6 +17,8 @@ import LayFooter from "./module/footer/index"
 import LayLogo from "./module/logo/index"
 import LayPanel from "./module/panel/index"
 import LayProgress from "./module/panel/index"
+import LayCol from "./module/col/index"
+import LayRow from "./module/row/index"
 
 const components: Record<string, IDefineComponent> = {
   LayRadio,
@@ -31,7 +34,9 @@ const components: Record<string, IDefineComponent> = {
   LayCard,
   LayProgress,
   LayButtonGroup,
-  LayButtonContainer
+  LayButtonContainer,
+  LayRow,
+  LayCol,
 }
 
 const install = (app: App, options?: InstallOptions): void => {
@@ -59,6 +64,8 @@ export {
   LayProgress,
   LayButtonGroup,
   LayButtonContainer,
+  LayRow,
+  LayCol,
   install,
 }
 

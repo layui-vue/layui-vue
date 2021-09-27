@@ -1,6 +1,18 @@
 <template>
-  <div class="layui-col" :class="[md?'layui-col-md' + md : '', xs?'layui-col-xs':'', sm?'layui-col-sm':'']">
-      <slot></slot>
+  <div
+    class="layui-col"
+    :class="[
+      md ? 'layui-col-md' + md : '',
+      xs ? 'layui-col-xs' + xs : '',
+      sm ? 'layui-col-sm' + sm : '',
+      lg ? 'layui-col-lg' + lg : '',
+      mdOffset ? 'layui-col-md-offset' + mdOffset : '',
+      xsOffset ? 'layui-col-xs-offset' + xsOffset : '',
+      smOffset ? 'layui-col-sm-offset' + smOffset : '',
+      lgOffset ? 'layui-col-lg-offset' + lgOffset : '',
+    ]"
+  >
+    <slot></slot>
   </div>
 </template>
 
@@ -12,5 +24,10 @@ const props =
     md?: string
     xs?: string
     sm?: string
+    lg?: string
+    mdOffset?: string
+    xsOffset?: string
+    smOffset?: string
+    lgOffset?: string
   }>()
 </script>
