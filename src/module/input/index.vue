@@ -1,8 +1,8 @@
 <template>
-    <i class="layui-icon" :class="[type]"></i>
+    <input type="text" class="layui-input" />
 </template>
 
-<script setup name="LayIcon" lang="ts">
+<script setup name="LayInput" lang="ts">
 import { defineProps } from '@vue/runtime-core'
 
 const props =

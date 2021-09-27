@@ -1,5 +1,7 @@
 <template>
-  <lay-layout>
+
+  <div class="width:100%;height:300px">
+      <lay-layout>
     <lay-header>
       <lay-logo>
         layui-vue
@@ -13,6 +15,8 @@
         <li><router-link to="/zh-CN/components/panel">面板</router-link></li>
         <li><router-link to="/zh-CN/components/card">卡片</router-link></li>
         <li><router-link to="/zh-CN/components/grid">栅格</router-link></li>
+        <li><router-link to="/zh-CN/components/form">表单</router-link></li>
+        <li><router-link to="/zh-CN/components/badge">徽章</router-link></li>
       </ul>
     </lay-side>
     <lay-body>
@@ -22,6 +26,7 @@
     </lay-body>
     <lay-footer></lay-footer>
   </lay-layout>
+  </div>
 </template>
 <script>
 import { ref } from 'vue'

@@ -21,6 +21,11 @@ const zhCN = [
     meta: { title: '组件', icon: 'el-icon-copy-document' },
     children: [
       {
+        path: '/zh-CN/components/layout',
+        component: () => import('../../docs/zh-CN/components/layout.md'),
+        meta: { title: '布局' },
+      },
+      {
         path: '/zh-CN/components/button',
         component: () => import('../../docs/zh-CN/components/button.md'),
         meta: { title: '按钮' },
@@ -40,6 +45,15 @@ const zhCN = [
         path: '/zh-CN/components/grid',
         component: () => import('../../docs/zh-CN/components/grid.md'),
         meta: { title: '栅格' },
+      },{
+        path: '/zh-CN/components/form',
+        component: () => import('../../docs/zh-CN/components/form.md'),
+        meta: { title: '表单' },
+      },
+      {
+        path: '/zh-CN/components/badge',
+        component: () => import('../../docs/zh-CN/components/badge.md'),
+        meta: { title: '徽章' },
       }
     ],
   },
