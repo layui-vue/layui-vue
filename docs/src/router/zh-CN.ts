@@ -32,6 +32,10 @@ const zhCN = [
         path: '/zh-CN/components/panel',
         component: () => import('../../docs/zh-CN/components/panel.md'),
         meta: { title: '面板' },
+      },{
+        path: '/zh-CN/components/card',
+        component: () => import('../../docs/zh-CN/components/cards.md'),
+        meta: { title: '卡片' },
       }
     ],
   },

@@ -5,9 +5,8 @@ import {
   Router,
 } from 'vue-router'
 import zhCN from './zh-CN'
-import type { IRouteRecordRaw } from '/@src/index'
 
-const routes: IRouteRecordRaw[] = [...zhCN]
+const routes = [...zhCN]
 
 export function createRouter(): Router {
   const baseUrl = import.meta.env.BASE_URL

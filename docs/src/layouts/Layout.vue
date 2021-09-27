@@ -11,6 +11,7 @@
         <li><router-link to="/zh-CN/components/button">按钮</router-link></li>
         <li><router-link to="/zh-CN/components/icon">图标</router-link></li>
         <li><router-link to="/zh-CN/components/panel">面板</router-link></li>
+        <li><router-link to="/zh-CN/components/card">卡片</router-link></li>
       </ul>
     </lay-side>
     <lay-body>

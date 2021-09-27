@@ -5,6 +5,7 @@ import "./css/layui.css";
 import LayRadio from './module/radio/index'
 import LayButton from './module/button/index'
 import LayIcon from './module/icon/index'
+import LayCard from './module/card/index'
 import LayLayout from "./module/layout/index"
 import LaySide from "./module/side/index"
 import LayBody from "./module/body/index"
@@ -23,7 +24,8 @@ const components: Record<string, IDefineComponent> = {
   LayBody,
   LayFooter,
   LayLogo,
-  LayPanel
+  LayPanel,
+  LayCard
 }
 
 const install = (app: App, options?: InstallOptions): void => {
@@ -47,6 +49,7 @@ export {
   LayFooter,
   LayLogo,
   LayPanel, 
+  LayCard,
   install,
 }
 
