@@ -1,7 +1,8 @@
 ::: demo
 
 <template>
-  <lay-icon type="layui-icon-face-smile"></lay-icon>
+  <lay-block>引用区域的文字</lay-block>
+  <lay-block nm>引用区域的文字</lay-block>
 </template>
 
 <script>

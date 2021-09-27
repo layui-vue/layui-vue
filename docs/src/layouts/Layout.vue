@@ -17,6 +17,7 @@
         <li><router-link to="/zh-CN/components/grid">栅格</router-link></li>
         <li><router-link to="/zh-CN/components/form">表单</router-link></li>
         <li><router-link to="/zh-CN/components/badge">徽章</router-link></li>
+        <li><router-link to="/zh-CN/components/block">区块</router-link></li>
       </ul>
     </lay-side>
     <lay-body>

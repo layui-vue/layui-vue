@@ -54,6 +54,11 @@ const zhCN = [
         path: '/zh-CN/components/badge',
         component: () => import('../../docs/zh-CN/components/badge.md'),
         meta: { title: '徽章' },
+      },
+      {
+        path: '/zh-CN/components/block',
+        component: () => import('../../docs/zh-CN/components/block.md'),
+        meta: { title: '辅助' },
       }
     ],
   },
