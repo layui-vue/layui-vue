@@ -22,6 +22,7 @@ import LayRow from "./module/row/index"
 import LayInput from "./module/input/index"
 import LayBadge from "./module/badge/index"
 import LayBlock from "./module/block/index"
+import LayLine from "./module/line/index"
 
 const components: Record<string, IDefineComponent> = {
   LayRadio,
@@ -42,7 +43,8 @@ const components: Record<string, IDefineComponent> = {
   LayCol,
   LayInput,
   LayBadge,
-  LayBlock
+  LayBlock,
+  LayLine
 }
 
 const install = (app: App, options?: InstallOptions): void => {
@@ -75,6 +77,7 @@ export {
   LayInput,
   LayBadge,
   LayBlock,
+  LayLine,
   install,
 }
 

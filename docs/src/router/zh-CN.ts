@@ -59,6 +59,11 @@ const zhCN = [
         path: '/zh-CN/components/block',
         component: () => import('../../docs/zh-CN/components/block.md'),
         meta: { title: '辅助' },
+      },
+      {
+        path: '/zh-CN/components/line',
+        component: () => import('../../docs/zh-CN/components/line.md'),
+        meta: { title: '分割' },
       }
     ],
   },
