@@ -102,16 +102,40 @@ export default {
 <template>
   <div>
     <lay-button-group>
-      <lay-button type="default" radius>默认按钮</lay-button>
-      <lay-button type="default" radius>默认按钮</lay-button>
-      <lay-button type="default" radius>默认按钮</lay-button>
+      <lay-button type="default">默认按钮</lay-button>
+      <lay-button type="default">默认按钮</lay-button>
+      <lay-button type="default">默认按钮</lay-button>
     </lay-button-group>
     <lay-button-group>
-      <lay-button type="primary" radius>默认按钮</lay-button>
-      <lay-button type="primary" radius>默认按钮</lay-button>
-      <lay-button type="primary" radius>默认按钮</lay-button>
+      <lay-button type="primary">默认按钮</lay-button>
+      <lay-button type="primary">默认按钮</lay-button>
+      <lay-button type="primary">默认按钮</lay-button>
     </lay-button-group>
   </div>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    return {
+    }
+  }
+}
+</script>
+
+:::
+
+::: demo 传入 columns 数据，自动生成表格
+
+<template>
+  <lay-button-container>
+      <lay-button type="default">新增</lay-button>
+      <lay-button type="default">删除</lay-button>
+      <lay-button type="default">修改</lay-button>
+  </lay-button-container>
 </template>
 
 <script>
