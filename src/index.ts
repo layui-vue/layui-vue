@@ -4,6 +4,7 @@ import type { IDefineComponent, InstallOptions } from './module/type/index'
 import "./css/layui.css";
 import LayRadio from './module/radio/index'
 import LayButton from './module/button/index'
+import LayButtonGroup from './module/buttonGroup/index'
 import LayIcon from './module/icon/index'
 import LayCard from './module/card/index'
 import LayLayout from "./module/layout/index"
@@ -27,7 +28,8 @@ const components: Record<string, IDefineComponent> = {
   LayLogo,
   LayPanel,
   LayCard,
-  LayProgress
+  LayProgress,
+  LayButtonGroup
 }
 
 const install = (app: App, options?: InstallOptions): void => {
@@ -53,6 +55,7 @@ export {
   LayPanel, 
   LayCard,
   LayProgress,
+  LayButtonGroup,
   install,
 }
 

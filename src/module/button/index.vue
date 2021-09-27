@@ -1,7 +1,7 @@
 <template>
   <button
     class="layui-btn"
-    :class="[type ? 'layui-btn-' + type : '', size ? 'layui-btn-' + size : '']"
+    :class="[type ? 'layui-btn-' + type : '', size ? 'layui-btn-' + size : '',fluid ? 'layui-btn-fluid':'',radius ? 'layui-btn-radius':'']"
   >
     <slot></slot>
   </button>
@@ -14,5 +14,7 @@ const props =
   defineProps<{
     type?: string
     size?: string
+    fluid?: boolean
+    radius?: boolean
   }>()
 </script>

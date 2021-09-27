@@ -47,3 +47,83 @@ export default {
 </script>
 
 :::
+
+
+::: demo 传入 columns 数据，自动生成表格
+
+<template>
+  <lay-button type="primary" fluid>最大化按钮</lay-button>
+  <br/>
+  <br/>
+  <lay-button type="default" fluid>最大化按钮</lay-button>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    return {
+    }
+  }
+}
+</script>
+
+:::
+
+::: demo 传入 columns 数据，自动生成表格
+
+<template>
+  <lay-button type="primary" radius>原始按钮</lay-button>
+  <lay-button type="default" radius>默认按钮</lay-button>
+  <lay-button type="normal" radius>百搭按钮</lay-button>
+  <lay-button type="warm" radius>暖色按钮</lay-button>
+  <lay-button type="danger" radius>警告按钮</lay-button>
+  <lay-button type="disabled" radius>禁用按钮</lay-button>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    return {
+    }
+  }
+}
+</script>
+
+:::
+
+::: demo 传入 columns 数据，自动生成表格
+
+<template>
+  <div>
+    <lay-button-group>
+      <lay-button type="default" radius>默认按钮</lay-button>
+      <lay-button type="default" radius>默认按钮</lay-button>
+      <lay-button type="default" radius>默认按钮</lay-button>
+    </lay-button-group>
+    <lay-button-group>
+      <lay-button type="primary" radius>默认按钮</lay-button>
+      <lay-button type="primary" radius>默认按钮</lay-button>
+      <lay-button type="primary" radius>默认按钮</lay-button>
+    </lay-button-group>
+  </div>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    return {
+    }
+  }
+}
+</script>
+
+:::
