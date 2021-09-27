@@ -13,6 +13,7 @@ import LayHeader from "./module/header/index"
 import LayFooter from "./module/footer/index"
 import LayLogo from "./module/logo/index"
 import LayPanel from "./module/panel/index"
+import LayProgress from "./module/panel/index"
 
 const components: Record<string, IDefineComponent> = {
   LayRadio,
@@ -25,7 +26,8 @@ const components: Record<string, IDefineComponent> = {
   LayFooter,
   LayLogo,
   LayPanel,
-  LayCard
+  LayCard,
+  LayProgress
 }
 
 const install = (app: App, options?: InstallOptions): void => {
@@ -50,6 +52,7 @@ export {
   LayLogo,
   LayPanel, 
   LayCard,
+  LayProgress,
   install,
 }
 

@@ -22,7 +22,7 @@
       class="control"
       @click="toggleShow"
     >
-      <i :class="[show ? 'el-icon-caret-top' : 'el-icon-caret-bottom']" />
+      <i :class="[show ? 'layui-icon layui-icon-up' : 'layui-icon layui-icon-down']" />
     </div>
   </div>
 </template>
@@ -124,6 +124,7 @@ function handleScroll() {
 .lay-code .control {
   height: 44px;
   box-sizing: border-box;
+  margin-top: 10px;
   border-top: 1px solid whitesmoke;
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
