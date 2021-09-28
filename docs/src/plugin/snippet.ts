@@ -1,4 +1,3 @@
-// copy from [vitepress](https://github.com/vuejs/vitepress)
 import fs from 'fs'
 import MarkdownIt from 'markdown-it'
 import { RuleBlock } from 'markdown-it/lib/parser_block'

@@ -2,10 +2,12 @@
   <div class="width:100%;height:300px">
     <lay-layout>
       <lay-header>
-        <lay-logo> layui-vue </lay-logo>
+        <lay-logo>
+          <img src="../assets/logo.png">
+        </lay-logo>
       </lay-header>
       <lay-side>
-        <ul>
+        <ul class="layui-menu layui-menu-lg">
           <li><router-link to="/zh-CN/components/layout">布局</router-link></li>
           <li><router-link to="/zh-CN/components/button">按钮</router-link></li>
           <li><router-link to="/zh-CN/components/icon">图标</router-link></li>
@@ -37,3 +39,13 @@ export default {
   },
 }
 </script>
+<style>
+.layui-logo img {
+  height: 31px;
+  width: 82px;
+  left: 15px;
+  top: 16px;
+
+}
+
+</style>
