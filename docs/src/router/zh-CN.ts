@@ -69,6 +69,11 @@ const zhCN = [
         path: '/zh-CN/components/progress',
         component: () => import('../../docs/zh-CN/components/progress.md'),
         meta: { title: '进度' },
+      },
+      {
+        path: '/zh-CN/components/timeline',
+        component: () => import('../../docs/zh-CN/components/timeline.md'),
+        meta: { title: '时间线' },
       }
     ],
   },

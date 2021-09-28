@@ -17,6 +17,7 @@
           <li><router-link to="/zh-CN/components/block">区块</router-link></li>
           <li><router-link to="/zh-CN/components/line">分割</router-link></li>
           <li><router-link to="/zh-CN/components/progress">进度</router-link></li>
+          <li><router-link to="/zh-CN/components/timeline">时间线</router-link></li>
         </ul>
       </lay-side>
       <lay-body>
