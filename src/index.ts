@@ -26,6 +26,7 @@ import LayLine from "./module/line/index"
 import LayTimeline from "./module/timeline/index"
 import LayTimelineItem from "./module/timelineItem/index"
 import LayTextarea from "./module/textarea/index"
+import LaySwitch from "./module/switch/index"
 
 const components: Record<string, IDefineComponent> = {
   LayRadio,
@@ -50,7 +51,8 @@ const components: Record<string, IDefineComponent> = {
   LayLine,
   LayTimeline,
   LayTimelineItem,
-  LayTextarea
+  LayTextarea,
+  LaySwitch
 }
 
 const install = (app: App, options?: InstallOptions): void => {
@@ -87,6 +89,7 @@ export {
   LayTimeline,
   LayTimelineItem,
   LayTextarea,
+  LaySwitch,
   install,
 }
 

@@ -19,6 +19,6 @@ import { defineProps } from '@vue/runtime-core'
 const props =
   defineProps<{
     title: string
-    simple: boolean
+    simple?: boolean
   }>()
 </script>

@@ -66,3 +66,49 @@ export default {
 </script>
 
 :::
+
+::: demo
+
+<template>
+  <lay-switch v-model="active"></lay-switch>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const active = ref(true);
+
+    return {
+        active
+    }
+  }
+}
+</script>
+
+:::
+
+::: demo
+
+<template>
+  <lay-switch v-model="active" disabled></lay-switch>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const active = ref(true);
+
+    return {
+        active
+    }
+  }
+}
+</script>
+
+:::
