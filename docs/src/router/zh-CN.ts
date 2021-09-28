@@ -64,6 +64,11 @@ const zhCN = [
         path: '/zh-CN/components/line',
         component: () => import('../../docs/zh-CN/components/line.md'),
         meta: { title: '分割' },
+      },
+      {
+        path: '/zh-CN/components/progress',
+        component: () => import('../../docs/zh-CN/components/progress.md'),
+        meta: { title: '进度' },
       }
     ],
   },

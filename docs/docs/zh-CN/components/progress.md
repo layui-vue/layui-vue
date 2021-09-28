@@ -1,7 +1,9 @@
 ::: demo
 
 <template>
-  <lay-input v-model="data"></lay-input>{{data}}
+  <lay-progress percent="80"></lay-progress>
+  <br>
+  <lay-progress percent="60"></lay-progress>
 </template>
 
 <script>
@@ -10,10 +12,7 @@ import { ref } from 'vue'
 export default {
   setup() {
 
-    const data = ref("内容");
-
     return {
-      data
     }
   }
 }

@@ -6,12 +6,12 @@
       :style="[
         this.color ? 'background-color: ' + this.color : '',
         {
-          width: this.percentage + '%',
+          width: this.percent + '%',
         },
       ]"
     >
       <span v-if="showText" class="layui-progress-text">
-        {{ text ? text : this.percentage + '%' }}
+        {{ text ? text : this.percent + '%' }}
       </span>
     </div>
   </div>
@@ -21,7 +21,7 @@ import { defineProps } from '@vue/runtime-core'
 
 const props =
   defineProps<{
-    percentage: Number
+    percent: Number
     theme: String
     color: String
     size: String
