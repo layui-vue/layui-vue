@@ -30,7 +30,23 @@ layui 是一款采用自身模块规范编写的前端 UI 框架，遵循原生 
 
 layui 定义为“经典模块化”，并非是自吹她自身有多优秀，而是有意避开当下 JS 社区的主流方案，试图以最简单的方式去诠释高效！<em>她的所谓经典，是在于对返璞归真的执念</em>，她以当前浏览器普通认可的方式去组织模块！我们认为，这恰是符合当下国内绝大多数程序员从旧时代过渡到未来新标准的最佳指引。所以 layui 本身也并不是完全遵循于 AMD 时代，准确地说，她试图建立自己的模式，所以你会看到：
 
-![输入图片说明](https://images.gitee.com/uploads/images/2021/0929/111315_d7c45185_4835367.png "屏幕截图.png")
+```js
+//layui模块的定义
+layui.define([mods], function(exports){
+  
+  //……
+  
+  exports('mod', api);
+});  
+ 
+//layui模块的使用
+layui.use(['mod1', 'mod2'], function(args){
+  var mod = layui.mod1;
+  
+  //……
+  
+});    
+```
 
 没错，她具备 AMD 的影子，又并非受限于 CommonJS 的那些条条框框，layui 认为这种轻量的组织方式，比 WebPack 更符合绝大多数场景。所以她坚持采用经典模块化，也正是能让人避开工具的复杂配置，回归简单，安静高效地撸一会原生态的HTML、CSS、JavaScript。
 
