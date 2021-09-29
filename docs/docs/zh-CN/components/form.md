@@ -168,3 +168,31 @@ export default {
 </script>
 
 :::
+
+::: demo
+
+<template>
+  <lay-form>
+    <lay-radio v-model="selected" name="action" label="1">写作</lay-radio>
+    <lay-radio v-model="selected" name="action" label="2">画画</lay-radio>
+    <lay-radio v-model="selected" name="action" label="3">运动</lay-radio>
+  </lay-form>
+  {{selected}}
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const selected = ref("1");
+
+    return {
+        selected
+    }
+  }
+}
+</script>
+
+:::

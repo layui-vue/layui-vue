@@ -43,6 +43,6 @@ const handleClick = function () {
   if (props.disabled) {
     return false
   }
-  emit('update:modelValue', !props.modelValue)
+  emit('update:modelValue', props.label)
 }
 </script>
