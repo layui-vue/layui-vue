@@ -50,7 +50,7 @@ npm install @layui/layui-vue
 ```js
 import { createApp } from 'vue'
 import App from './App.vue'
-import ElementEnhance from 'layui-vue'
+import Layui from 'layui-vue'
 import 'layui-vue/lib/layui.css'
 
 const app = createApp(App)
