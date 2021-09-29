@@ -1,7 +1,9 @@
 ::: demo
 
 <template>
-  <lay-container></lay-container>
+  <lay-container>
+    <div class="container-demo"></div>
+  </lay-container>
 </template>
 
 <script>
@@ -15,13 +17,23 @@ export default {
   }
 }
 </script>
+
+<style>
+    .container-demo {
+        width:100%;
+        height: 300px;
+        background: #79C48C;
+    }
+</style>
 
 :::
 
 ::: demo
 
 <template>
-  <lay-container fluid></lay-container>
+  <lay-container fluid>
+      <div class="container-demo"></div>
+  </lay-container>
 </template>
 
 <script>
@@ -35,5 +47,13 @@ export default {
   }
 }
 </script>
+
+<style>
+    .container-demo {
+        width:100%;
+        height: 300px;
+        background: #79C48C;
+    }
+</style>
 
 :::
