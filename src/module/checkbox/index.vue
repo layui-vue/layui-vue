@@ -20,7 +20,7 @@
 </template>
 
 <script setup name="LayCheckbox" lang="ts">
-import { defineProps, ref } from 'vue'
+import { defineProps, ref, watch } from 'vue'
 
 const props =
   defineProps<{
@@ -33,11 +33,13 @@ const props =
 
 const hasValue = ref(false)
 
-if (props.modelValue.includes(props.label)) {
-  hasValue.value = true
-} else {
-  hasValue.value = false
-}
+watch(props.modelValue, (val) => {
+  if (props.modelValue.includes(props.label)) {
+    hasValue.value = true
+  } else {
+    hasValue.value = false
+  }
+},{immediate: true})
 
 const emit = defineEmits(['update:modelValue'])
 
