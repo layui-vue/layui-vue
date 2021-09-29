@@ -24,28 +24,32 @@ const zhCN = [
         path: '/zh-CN/components/layout',
         component: () => import('../../docs/zh-CN/components/layout.md'),
         meta: { title: '布局' },
+      }, {
+        path: '/zh-CN/components/container',
+        component: () => import('../../docs/zh-CN/components/container.md'),
+        meta: { title: '容器' },
       },
       {
         path: '/zh-CN/components/button',
         component: () => import('../../docs/zh-CN/components/button.md'),
         meta: { title: '按钮' },
-      },{
+      }, {
         path: '/zh-CN/components/icon',
         component: () => import('../../docs/zh-CN/components/icon.md'),
         meta: { title: '图标' },
-      },{
+      }, {
         path: '/zh-CN/components/panel',
         component: () => import('../../docs/zh-CN/components/panel.md'),
         meta: { title: '面板' },
-      },{
+      }, {
         path: '/zh-CN/components/card',
         component: () => import('../../docs/zh-CN/components/cards.md'),
         meta: { title: '卡片' },
-      },{
+      }, {
         path: '/zh-CN/components/grid',
         component: () => import('../../docs/zh-CN/components/grid.md'),
         meta: { title: '栅格' },
-      },{
+      }, {
         path: '/zh-CN/components/form',
         component: () => import('../../docs/zh-CN/components/form.md'),
         meta: { title: '表单' },

@@ -9,6 +9,7 @@
       <lay-side>
         <ul class="layui-menu layui-menu-lg">
           <li><router-link to="/zh-CN/components/layout">布局</router-link></li>
+          <li><router-link to="/zh-CN/components/container">容器</router-link></li>
           <li><router-link to="/zh-CN/components/button">按钮</router-link></li>
           <li><router-link to="/zh-CN/components/icon">图标</router-link></li>
           <li><router-link to="/zh-CN/components/panel">面板</router-link></li>
