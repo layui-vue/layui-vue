@@ -12,12 +12,11 @@
     "./lib/": "./lib/"
   },
   "types": "types/index.d.ts",
-  "style": "lib/style.css",
+  "style": "lib/layui-vue.css",
   "scripts": {
     "dev": "vite",
-    "build": "vite build --emptyOutDir && npm run build:helper && npm run build:types",
+    "build": "vite build --emptyOutDir && npm run build:types",
     "build:types": "rimraf types && tsc -d",
-    "build:helper": "node .helperrc.js",
     "build:docs": "vite build docs",
     "test": "jest",
     "lint": "eslint . --fix --ext .ts,.vue,.js --ignore-pattern \"/lib/\" --ignore-pattern \"/types/\"",
@@ -32,7 +31,7 @@
     "layui",
     "vue"
   ],
-  "author": "<就眠仪式 jmys1992@gmail.com>",
+  "author": "就眠儀式",
   "license": "MIT",
   "bugs": {
     "url": "https://gitee.com/Jmysy/layui-vue/issues"
@@ -60,7 +59,6 @@
     "@vue/server-renderer": "^3.1.1",
     "@vue/test-utils": "^2.0.0-rc.6",
     "babel-jest": "^26.6.3",
-    "components-helper": "^1.0.3",
     "escape-html": "^1.0.3",
     "eslint": "^7.25.0",
     "eslint-plugin-prettier": "^3.4.0",
@@ -81,11 +79,6 @@
     "vite-plugin-md": "^0.6.3",
     "vue-jest": "^5.0.0-alpha.8"
   },
-  "vetur": {
-    "tags": "lib/tags.json",
-    "attributes": "lib/attributes.json"
-  },
-  "web-types": "lib/web-types.json",
   "files": [
     "lib",
     "types"

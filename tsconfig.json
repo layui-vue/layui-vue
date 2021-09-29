@@ -10,11 +10,21 @@
     "emitDeclarationOnly": true,
     "esModuleInterop": true,
     "declarationDir": "types",
-    "lib": ["ESNext", "DOM"],
+    "lib": [
+      "ESNext",
+      "DOM"
+    ],
     "paths": {
-      "/@src/*": ["./src/*"]
+      "/@src/*": [
+        "./src/*"
+      ]
     }
   },
-  "include": ["src/**/*", "shims-vue.d.ts"],
-  "exclude": ["node_modules"]
+  "include": [
+    "src/**/*",
+    "shims-vue.d.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

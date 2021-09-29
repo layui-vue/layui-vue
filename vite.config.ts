@@ -3,6 +3,7 @@ import { defineConfig } from 'vite'
 import babel from 'rollup-plugin-babel'
 import { name } from './package.json'
 import plugins from './docs/src/plugin/common-plugins'
+import { getSystemErrorMap } from 'util'
 
 const camelize = (name: string) =>
   name.replace(/(^|-)(\w)/g, (a, b, c) => c.toUpperCase())
@@ -20,7 +21,7 @@ export default defineConfig({
     lib: {
       entry: path.resolve(__dirname, 'src/index.ts'),
       name: camelize(name),
-    },
+    },    
     rollupOptions: {
       output: {
         exports: 'named',
@@ -28,9 +29,8 @@ export default defineConfig({
           const name = id.replace(/^@/, '').split('/')[0]
           return camelize(name)
         },
+        assetFileNames: `layui-vue.css`
       },
-      external: (id: string) =>
-        /^(vue|@vue|element-plus|resize-observer-polyfill)/.test(id),
       plugins: [
         babel({
           exclude: 'node_modules/**',
