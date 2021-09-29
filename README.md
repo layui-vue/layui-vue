@@ -5,7 +5,7 @@
   </a>
 </p>
 <p align="center">
-  Classic modular front-end UI framework
+  A component library for Vue 3 base on layui
 </p>
 
 <p align="center">  
