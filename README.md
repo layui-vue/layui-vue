@@ -42,37 +42,16 @@ layui 定义为“经典模块化”，并非是自吹她自身有多优秀，�
 获得 layui 后，将其完整地部署到你的静态资源项目目录，你只需要引入下述两个文件：
 
 ```
-./layui/css/layui.css
-./layui/layui.js
+npm install @layui/layui-vue
 ```
 
 这是一个基本的入门页面：
 
-```html
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <title>开始使用 layui</title>
-  <link rel="stylesheet" href="../layui/css/layui.css">
-</head>
-<body>
- 
-<!-- 你的HTML代码 -->
- 
-<script src="../layui/layui.js"></script>
-<script>
-//一般直接写在一个js文件中
-layui.use(['layer', 'form'], function(){
-  var layer = layui.layer
-  ,form = layui.form;
-  
-  layer.msg('Hello World');
-});
-</script> 
-</body>
-</html>
+```
+<template>
+  <lay-button>普通按钮</lay-button>
+</template>
+
 ```
 
 ## [阅读文档](http://www.layui.com/)

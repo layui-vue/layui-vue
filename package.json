@@ -1,5 +1,5 @@
 {
-  "name": "layui-vue",
+  "name": "@layui/layui-vue",
   "version": "0.0.1",
   "description": "a component library for Vue 3 base on layui-vue",
   "main": "lib/layui-vue.umd.js",
@@ -12,7 +12,7 @@
     "./lib/": "./lib/"
   },
   "types": "types/index.d.ts",
-  "style": "lib/layui-vue.css",
+  "style": "lib/layui.css",
   "scripts": {
     "dev": "vite",
     "build": "vite build --emptyOutDir && npm run build:types",

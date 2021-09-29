@@ -3,10 +3,8 @@ import { defineConfig } from 'vite'
 import babel from 'rollup-plugin-babel'
 import { name } from './package.json'
 import plugins from './docs/src/plugin/common-plugins'
-import { getSystemErrorMap } from 'util'
 
-const camelize = (name: string) =>
-  name.replace(/(^|-)(\w)/g, (a, b, c) => c.toUpperCase())
+const camelize = (name: string) => name.replace(/(^|-)(\w)/g, (a, b, c) => c.toUpperCase())
 
 export default defineConfig({
   root: path.resolve(__dirname, 'docs'),
@@ -29,7 +27,7 @@ export default defineConfig({
           const name = id.replace(/^@/, '').split('/')[0]
           return camelize(name)
         },
-        assetFileNames: `layui-vue.css`
+        assetFileNames: `layui.css`
       },
       plugins: [
         babel({
