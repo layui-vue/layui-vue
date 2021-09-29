@@ -45,11 +45,24 @@ layui 定义为“经典模块化”，并非是自吹她自身有多优秀，�
 npm install @layui/layui-vue
 ```
 
+在 main.ts 中
+
+```js
+import { createApp } from 'vue'
+import App from './App.vue'
+import ElementEnhance from 'layui-vue'
+import 'layui-vue/lib/layui.css'
+
+const app = createApp(App)
+app.use(Layui)
+app.mount('#app')
+```
+
 这是一个基本的入门页面：
 
-```
+```html
 <template>
-  <lay-button>普通按钮</lay-button>
+  <lay-button>默认按钮</lay-button>
 </template>
 
 ```
