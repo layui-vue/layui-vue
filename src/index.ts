@@ -29,6 +29,9 @@ import LayTextarea from "./module/textarea/index"
 import LaySwitch from "./module/switch/index"
 import LayCollapse from "./module/collapse/index"
 import LayContainer from "./module/container/index"
+import LayMenu from './module/menu/index'
+import LayMenuItem from './module/menuItem/index'
+import LayMenuChildItem from './module/menuChildItem/index'
 
 const components: Record<string, IDefineComponent> = {
   LayRadio,
@@ -56,7 +59,10 @@ const components: Record<string, IDefineComponent> = {
   LayTextarea,
   LaySwitch,
   LayCollapse,
-  LayContainer
+  LayContainer,
+  LayMenu,
+  LayMenuItem,
+  LayMenuChildItem
 }
 
 const install = (app: App, options?: InstallOptions): void => {
@@ -96,6 +102,9 @@ export {
   LaySwitch,
   LayCollapse,
   LayContainer,
+  LayMenu,
+  LayMenuItem,
+  LayMenuChildItem,
   install,
 }
 

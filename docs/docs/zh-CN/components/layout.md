@@ -1,23 +1,12 @@
-::: demo
-
-<template>
-  <lay-layout>
-    <lay-header></lay-header>
-    <lay-side></lay-side>
-    <lay-body></lay-body>
-  </lay-layout>
-</template>
-
-<script>
-import { ref } from 'vue'
-
-export default {
-  setup() {
-
-    return {
-    }
-  }
-}
-</script>
-
-:::
+```html
+<lay-layout>
+   <lay-header>
+     <lay-logo>Layui Admin</lay-logo>
+   </lay-header>
+   <lay-side></lay-side>
+   <lay-body>
+     <router-view></router-view>
+   </lay-body>
+   <lay-footer>pearadmin.com</lay-footer>
+</lay-layout>
+```

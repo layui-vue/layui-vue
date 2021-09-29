@@ -16,24 +16,25 @@
       </lay-header>
       <lay-side>
         <ul class="layui-menu layui-menu-lg">
-          <li><router-link to="/zh-CN/guide">介绍</router-link></li>
-          <li><router-link to="/zh-CN/guide/install">安装</router-link></li>
-          <li><router-link to="/zh-CN/components/layout">布局</router-link></li>
-          <li><router-link to="/zh-CN/components/container">容器</router-link></li>
-          <li><router-link to="/zh-CN/components/button">按钮</router-link></li>
-          <li><router-link to="/zh-CN/components/icon">图标</router-link></li>
-          <li><router-link to="/zh-CN/components/panel">面板</router-link></li>
-          <li><router-link to="/zh-CN/components/card">卡片</router-link></li>
-          <li><router-link to="/zh-CN/components/grid">栅格</router-link></li>
-          <li><router-link to="/zh-CN/components/form">表单</router-link></li>
-          <li><router-link to="/zh-CN/components/badge">徽章</router-link></li>
-          <li><router-link to="/zh-CN/components/block">区块</router-link></li>
-          <li><router-link to="/zh-CN/components/line">分割</router-link></li>
+          <li><div class="layui-menu-body-title"><router-link to="/zh-CN/guide">介绍</router-link></div></li>
+          <li><div class="layui-menu-body-title"><router-link to="/zh-CN/guide/install">安装</router-link></div></li>
+          <li><div class="layui-menu-body-title"><router-link to="/zh-CN/components/layout">布局</router-link></div></li>
+          <li><div class="layui-menu-body-title"><router-link to="/zh-CN/components/container">容器</router-link></div></li>
+          <li><div class="layui-menu-body-title"><router-link to="/zh-CN/components/button">按钮</router-link></div></li>
+          <li><div class="layui-menu-body-title"><router-link to="/zh-CN/components/icon">图标</router-link></div></li>
+          <li><div class="layui-menu-body-title"><router-link to="/zh-CN/components/panel">面板</router-link></div></li>
+          <li><div class="layui-menu-body-title"><router-link to="/zh-CN/components/card">卡片</router-link></div></li>
+          <li><div class="layui-menu-body-title"><router-link to="/zh-CN/components/grid">栅格</router-link></div></li>
+          <li><div class="layui-menu-body-title"><router-link to="/zh-CN/components/form">表单</router-link></div></li>
+          <li><div class="layui-menu-body-title"><router-link to="/zh-CN/components/badge">徽章</router-link></div></li>
+          <li><div class="layui-menu-body-title"><router-link to="/zh-CN/components/block">区块</router-link></div></li>
+          <li><div class="layui-menu-body-title"><router-link to="/zh-CN/components/line">分割</router-link></div></li>
+          <li><div class="layui-menu-body-title"><router-link to="/zh-CN/components/menu">菜单</router-link></div></li>
           <li>
-            <router-link to="/zh-CN/components/progress">进度</router-link>
+            <div class="layui-menu-body-title"><router-link to="/zh-CN/components/progress">进度</router-link></div>
           </li>
           <li>
-            <router-link to="/zh-CN/components/timeline">时间</router-link>
+            <div class="layui-menu-body-title"><router-link to="/zh-CN/components/timeline">时间</router-link></div>
           </li>
         </ul>
       </lay-side>

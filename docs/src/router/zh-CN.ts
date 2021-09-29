@@ -80,6 +80,11 @@ const zhCN = [
         meta: { title: '进度' },
       },
       {
+        path: '/zh-CN/components/menu',
+        component: () => import('../../docs/zh-CN/components/menu.md'),
+        meta: { title: '菜单' },
+      },
+      {
         path: '/zh-CN/components/timeline',
         component: () => import('../../docs/zh-CN/components/timeline.md'),
         meta: { title: '时间线' },
