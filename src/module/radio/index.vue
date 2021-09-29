@@ -27,7 +27,7 @@
 </template>
 
 <script setup name="LayRadio" lang="ts">
-import { defineProps, defineEmits } from '@vue/runtime-core'
+import { defineProps, defineEmits } from 'vue'
 
 const props =
   defineProps<{

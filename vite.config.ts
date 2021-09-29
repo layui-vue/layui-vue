@@ -1,6 +1,6 @@
 import path from 'path'
 import { defineConfig } from 'vite'
-import babel from 'rollup-plugin-babel'
+import babel from '@rollup/plugin-babel'
 import { name } from './package.json'
 import plugins from './docs/src/plugin/common-plugins'
 
@@ -36,6 +36,7 @@ export default defineConfig({
           presets: ['@babel/preset-env', '@babel/preset-typescript'],
         }),
       ],
+      external : [ 'vue', 'vue-router' ] 
     },
   },
   plugins,

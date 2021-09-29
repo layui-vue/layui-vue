@@ -5,7 +5,7 @@
 </template>
 
 <script setup name="LayBadge" lang="ts">
-import { defineProps } from '@vue/runtime-core'
+import { defineProps } from 'vue'
 
 const props =
   defineProps<{

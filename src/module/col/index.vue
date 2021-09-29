@@ -17,7 +17,7 @@
 </template>
 
 <script setup name="LayCol" lang="ts">
-import { defineProps } from '@vue/runtime-core'
+import { defineProps } from 'vue'
 
 const props =
   defineProps<{

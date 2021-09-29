@@ -2,10 +2,6 @@ import markdown from 'markdown-it'
 import highlight from './highlight'
 import type Token from 'markdown-it/lib/token'
 
-/**
- * Combine the script content
- * @param {string} script script string
- */
 function assignScript(script: string) {
   const dependencies = {} as Record<string, string[]>
   const attrs = {} as Record<string, string>

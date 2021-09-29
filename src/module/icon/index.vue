@@ -3,7 +3,7 @@
 </template>
 
 <script setup name="LayIcon" lang="ts">
-import { defineProps } from '@vue/runtime-core'
+import { defineProps } from 'vue'
 
 const props =
   defineProps<{

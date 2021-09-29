@@ -14,7 +14,7 @@
 </template>
 
 <script setup name="LayTimelineItem" lang="ts">
-import { defineProps } from '@vue/runtime-core'
+import { defineProps } from 'vue'
 
 const props =
   defineProps<{
