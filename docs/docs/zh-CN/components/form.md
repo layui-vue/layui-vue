@@ -112,3 +112,59 @@ export default {
 </script>
 
 :::
+
+::: demo
+
+<template>
+  <lay-form>
+    <lay-checkbox v-model="checked" label="1">写作</lay-checkbox>
+    <lay-checkbox v-model="checked" label="2">画画</lay-checkbox>
+    <lay-checkbox v-model="checked" label="3">运动</lay-checkbox>
+  </lay-form>
+  {{checked}}
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const checked = ref(['1','2']);
+
+    return {
+        checked
+    }
+  }
+}
+</script>
+
+:::
+
+::: demo
+
+<template>
+  <lay-form>
+    <lay-checkbox skin="primary" v-model="checked" label="1">写作</lay-checkbox>
+    <lay-checkbox skin="primary" v-model="checked" label="2">画画</lay-checkbox>
+    <lay-checkbox skin="primary" v-model="checked" label="3">运动</lay-checkbox>
+  </lay-form>
+  {{checked}}
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const checked = ref(['1','2']);
+
+    return {
+        checked
+    }
+  }
+}
+</script>
+
+:::

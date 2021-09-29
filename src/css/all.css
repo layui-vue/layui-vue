@@ -4,6 +4,7 @@
 .grid-demo {
     padding: 10px;
     line-height: 50px;
+    border-radius: 4px;
     text-align: center;
     background-color: #79C48C;
     color: #fff;
