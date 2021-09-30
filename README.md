@@ -26,7 +26,7 @@
 
 <br/>
 
-![输入图片说明](https://images.gitee.com/uploads/images/2021/0930/134128_da983e9a_4835367.png "屏幕截图.png")
+![输入图片说明](https://images.gitee.com/uploads/images/2021/0930/134403_3f460375_4835367.png "屏幕截图.png")
 
 
 ## 快速上手
