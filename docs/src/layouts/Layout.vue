@@ -25,90 +25,15 @@
         </ul>
       </lay-header>
       <lay-side>
-        <ul class="layui-menu layui-menu-lg">
-          <li>
+        <ul class="layui-menu layui-menu-lg layui-menu-docs">
+          <li
+            :key="menu"
+            v-for="menu in menus"
+            :class="[selected === menu.id ? 'layui-menu-item-checked2' : '']"
+            @click="handleClick(menu)"
+          >
             <div class="layui-menu-body-title">
-              <router-link to="/zh-CN/guide">介绍</router-link>
-            </div>
-          </li>
-          <li>
-            <div class="layui-menu-body-title">
-              <router-link to="/zh-CN/guide/install">安装</router-link>
-            </div>
-          </li>
-          <li>
-            <div class="layui-menu-body-title">
-              <router-link to="/zh-CN/components/layout">布局</router-link>
-            </div>
-          </li>
-          <li>
-            <div class="layui-menu-body-title">
-              <router-link to="/zh-CN/components/container">容器</router-link>
-            </div>
-          </li>
-          <li>
-            <div class="layui-menu-body-title">
-              <router-link to="/zh-CN/components/button">按钮</router-link>
-            </div>
-          </li>
-          <li>
-            <div class="layui-menu-body-title">
-              <router-link to="/zh-CN/components/icon">图标</router-link>
-            </div>
-          </li>
-          <li>
-            <div class="layui-menu-body-title">
-              <router-link to="/zh-CN/components/panel">面板</router-link>
-            </div>
-          </li>
-          <li>
-            <div class="layui-menu-body-title">
-              <router-link to="/zh-CN/components/card">卡片</router-link>
-            </div>
-          </li>
-          <li>
-            <div class="layui-menu-body-title">
-              <router-link to="/zh-CN/components/animation">动画</router-link>
-            </div>
-          </li>
-          <li>
-            <div class="layui-menu-body-title">
-              <router-link to="/zh-CN/components/grid">栅格</router-link>
-            </div>
-          </li>
-          <li>
-            <div class="layui-menu-body-title">
-              <router-link to="/zh-CN/components/form">表单</router-link>
-            </div>
-          </li>
-          <li>
-            <div class="layui-menu-body-title">
-              <router-link to="/zh-CN/components/badge">徽章</router-link>
-            </div>
-          </li>
-          <li>
-            <div class="layui-menu-body-title">
-              <router-link to="/zh-CN/components/block">区块</router-link>
-            </div>
-          </li>
-          <li>
-            <div class="layui-menu-body-title">
-              <router-link to="/zh-CN/components/line">分割</router-link>
-            </div>
-          </li>
-          <li>
-            <div class="layui-menu-body-title">
-              <router-link to="/zh-CN/components/menu">菜单</router-link>
-            </div>
-          </li>
-          <li>
-            <div class="layui-menu-body-title">
-              <router-link to="/zh-CN/components/progress">进度</router-link>
-            </div>
-          </li>
-          <li>
-            <div class="layui-menu-body-title">
-              <router-link to="/zh-CN/components/timeline">时间</router-link>
+              <router-link :to="menu.path">{{ menu.title }}</router-link>
             </div>
           </li>
         </ul>
@@ -124,9 +49,43 @@
 </template>
 <script>
 import { ref } from 'vue'
+import {  useRouter } from 'vue-router'
 export default {
   setup() {
-    return {}
+
+    const router = useRouter()
+    const menus = [
+      { id: 1, title: '介绍', path: '/zh-CN/guide' },
+      { id: 2, title: '安装', path: '/zh-CN/guide/install' },
+      { id: 3, title: '布局', path: '/zh-CN/components/layout' },
+      { id: 4, title: '容器', path: '/zh-CN/components/container' },
+      { id: 5, title: '按钮', path: '/zh-CN/components/button' },
+      { id: 6, title: '图标', path: '/zh-CN/components/icon' },
+      { id: 7, title: '面板', path: '/zh-CN/components/panel' },
+      { id: 8, title: '卡片', path: '/zh-CN/components/card' },
+      { id: 9, title: '动画', path: '/zh-CN/components/animation' },
+      { id: 10, title: '栅格', path: '/zh-CN/components/grid' },
+      { id: 11, title: '表单', path: '/zh-CN/components/form' },
+      { id: 12, title: '徽章', path: '/zh-CN/components/badge' },
+      { id: 13, title: '区块', path: '/zh-CN/components/block' },
+      { id: 14, title: '分割', path: '/zh-CN/components/line' },
+      { id: 15, title: '菜单', path: '/zh-CN/components/menu' },
+      { id: 16, title: '进度', path: '/zh-CN/components/progress' },
+      { id: 17, title: '时间', path: '/zh-CN/components/timeline' },
+    ]
+
+    const selected = ref(1)
+
+    const handleClick = function (menu) {
+      selected.value = menu.id
+      router.push(menu.path)
+    }
+
+    return {
+      menus,
+      selected,
+      handleClick,
+    }
   },
 }
 </script>
@@ -136,5 +95,8 @@ export default {
   width: 82px;
   left: 15px;
   top: 16px;
+}
+.layui-menu-docs {
+  padding-top: 10px;
 }
 </style>
