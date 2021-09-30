@@ -16,6 +16,10 @@ const zhCN = [
         path: '/zh-CN/guide/install',
         component: () => import('../../docs/zh-CN/guide/install.md'),
         meta: { title: '安装' },
+      },      {
+        path: '/zh-CN/guide/changelog',
+        component: () => import('../../docs/zh-CN/guide/changelog.md'),
+        meta: { title: '更新' },
       },
     ],
   },

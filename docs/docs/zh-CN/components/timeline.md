@@ -45,6 +45,7 @@ export default {
 
 <template>
     <lay-timeline>
+        <lay-timeline-item title="2021年，layui vue 里程碑版本 1.0 发布" simple></lay-timeline-item>
         <lay-timeline-item title="2017年，layui 里程碑版本 2.0 发布" simple></lay-timeline-item>
         <lay-timeline-item title="2016年，layui 首个版本发布" simple></lay-timeline-item>
         <lay-timeline-item title="2015年，layui 孵化" simple></lay-timeline-item>
