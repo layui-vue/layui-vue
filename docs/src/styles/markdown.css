@@ -120,7 +120,6 @@ ul {
 }
 
 p {
-  color: #454d64 !important;
   margin-top: 20px !important;
   font-size: 14px !important;
 }
@@ -175,18 +174,6 @@ ol {
 
 li > ul,
 li > ol {
-  margin: 0;
-}
-
-blockquote {
-  margin: 1rem 0;
-  border-left: 0.2rem solid #dfe2e5;
-  padding: 0.25rem 0 0.25rem 1rem;
-  font-size: 1rem;
-  color: #999;
-}
-
-blockquote > p {
   margin: 0;
 }
 

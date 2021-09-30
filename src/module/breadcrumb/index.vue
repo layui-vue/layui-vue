@@ -5,6 +5,5 @@
 </template>
 
 <script setup name="LayBreadcrumb" lang="ts">
-import { useSlots } from "vue";
 
 </script>

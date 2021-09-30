@@ -33,7 +33,13 @@ const zhCN = [
         path: '/zh-CN/components/layout',
         component: () => import('../../docs/zh-CN/components/layout.md'),
         meta: { title: '布局' },
-      }, {
+      }, 
+      {
+        path: '/zh-CN/components/color',
+        component: () => import('../../docs/zh-CN/components/color.md'),
+        meta: { title: '颜色' },
+      },
+      {
         path: '/zh-CN/components/container',
         component: () => import('../../docs/zh-CN/components/container.md'),
         meta: { title: '容器' },

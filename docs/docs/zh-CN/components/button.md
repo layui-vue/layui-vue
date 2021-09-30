@@ -151,3 +151,10 @@ export default {
 </script>
 
 :::
+
+|  |  |  |
+|--|--|--|
+| type | 主题 | `primary` `normal` `warm` `danger` `disabled`|
+| size | 尺寸 | `lg` `sm` `xs` |
+| fluid | 最大化 | `true` `false` |
+| radius | 圆角 | `true` `false` |

@@ -48,7 +48,6 @@
           <router-view></router-view>
         </div>
       </lay-body>
-      <lay-footer></lay-footer>
     </lay-layout>
   </div>
 </template>
@@ -79,6 +78,7 @@ export default {
       { id: 17, title: '面包屑',subTitle:"breadcrumb" ,path: '/zh-CN/components/breadcrumb' },
       { id: 18, title: '进度',subTitle:"progress" ,path: '/zh-CN/components/progress' },
       { id: 19, title: '时间线',subTitle:"timeline" ,path: '/zh-CN/components/timeline' },
+      { id: 20, title: '颜色',subTitle:"color" ,path: '/zh-CN/components/color' },
     ]
 
     const selected = ref(1)
