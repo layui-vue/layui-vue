@@ -24,7 +24,7 @@
 
 ---
 
-![输入图片说明](https://images.gitee.com/uploads/images/2021/0930/134403_3f460375_4835367.png "屏幕截图.png")
+![输入图片说明](https://images.gitee.com/uploads/images/2021/1001/030450_32d1d0a3_4835367.png "屏幕截图.png")
 
 
 ## 快速上手
@@ -58,7 +58,7 @@ app.mount('#app')
 
 ```
 
-## [阅读文档](http://www.layui.com/)
+## [阅读文档](http://layui-vue.pearadmin.com/)
 从现在开始，尽情地拥抱 layui 吧！但愿她能成为你长远的开发伴侣，化作你方寸屏幕前的亿万字节！
 
 ## 使用趋势
