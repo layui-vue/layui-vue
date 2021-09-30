@@ -1,4 +1,4 @@
-<img src="https://res.layui.com/static/images/layui/logo-2.png" />
+<img src="../../../src/assets/logo-2.png" />
 
 <lay-block>
 layui（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库 , Layui 的 另 一 种 呈 现 方 式
