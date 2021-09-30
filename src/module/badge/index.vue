@@ -9,9 +9,9 @@ import { defineProps } from 'vue'
 
 const props =
   defineProps<{
-   	type: string
-	theme: string
-	color: string
+   	type?: string
+	  theme?: string
+	  color?: string
   }>()
 
 const classList = [{

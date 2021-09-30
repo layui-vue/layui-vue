@@ -21,7 +21,7 @@ import { defineProps } from 'vue'
 
 const props =
   defineProps<{
-    percent: number
+    percent: number | string
     theme?: string
     color?: string
     size?: string

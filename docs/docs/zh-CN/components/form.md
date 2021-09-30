@@ -145,9 +145,9 @@ export default {
 
 <template>
   <lay-form>
-    <lay-checkbox skin="primary" v-model="checked" label="1">写作</lay-checkbox>
-    <lay-checkbox skin="primary" v-model="checked" label="2">画画</lay-checkbox>
-    <lay-checkbox skin="primary" v-model="checked" label="3">运动</lay-checkbox>
+    <lay-checkbox name="like" skin="primary" v-model="checked" label="1">写作</lay-checkbox>
+    <lay-checkbox name="like" skin="primary" v-model="checked" label="2">画画</lay-checkbox>
+    <lay-checkbox name="like" skin="primary" v-model="checked" label="3">运动</lay-checkbox>
   </lay-form>
   {{checked}}
 </template>

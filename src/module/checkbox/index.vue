@@ -26,9 +26,9 @@ const props =
   defineProps<{
     modelValue: Array<unknown>
     label: string
-    disabled: boolean
+    disabled?: boolean
     name: string
-    skin: string
+    skin?: string
   }>()
 
 const hasValue = ref(false)
