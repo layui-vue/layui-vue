@@ -24,6 +24,9 @@
 
 ---
 
+![输入图片说明](https://images.gitee.com/uploads/images/2021/0930/134403_3f460375_4835367.png "屏幕截图.png")
+
+
 ## 快速上手
 
 获得 layui-vue 你只需要使用 npm 引入下述文件：
