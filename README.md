@@ -24,7 +24,7 @@
 
 ---
 
-![输入图片说明](https://images.gitee.com/uploads/images/2021/1001/030450_32d1d0a3_4835367.png "屏幕截图.png")
+Vue 3.0 的 桌 面 端 组 件 库 , Layui 的 另 一 种 呈 现 方 式
 
 
 ## 快速上手
