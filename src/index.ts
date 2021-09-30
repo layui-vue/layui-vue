@@ -34,6 +34,8 @@ import LayMenuItem from './module/menuItem/index'
 import LayMenuChildItem from './module/menuChildItem/index'
 import LayCheckbox from './module/checkbox/index'
 import LayForm from './module/form/index'
+import LayBreadcrumb from './module/breadcrumb/index'
+import LayBreadcrumbItem from './module/breadcrumbItem/index'
 
 const components: Record<string, IDefineComponent> = {
   LayRadio,
@@ -66,7 +68,9 @@ const components: Record<string, IDefineComponent> = {
   LayMenuItem,
   LayMenuChildItem,
   LayCheckbox,
-  LayForm
+  LayForm,
+  LayBreadcrumb,
+  LayBreadcrumbItem
 }
 
 const install = (app: App, options?: InstallOptions): void => {
@@ -111,6 +115,8 @@ export {
   LayMenuChildItem,
   LayCheckbox,
   LayForm,
+  LayBreadcrumb,
+  LayBreadcrumbItem,
   install,
 }
 

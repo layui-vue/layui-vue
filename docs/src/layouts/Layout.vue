@@ -76,8 +76,9 @@ export default {
       { id: 14, title: '区块',subTitle:"block" ,path: '/zh-CN/components/block' },
       { id: 15, title: '分割',subTitle:"line" ,path: '/zh-CN/components/line' },
       { id: 16, title: '菜单',subTitle:"nav" ,path: '/zh-CN/components/menu' },
-      { id: 17, title: '进度',subTitle:"progress" ,path: '/zh-CN/components/progress' },
-      { id: 18, title: '时间线',subTitle:"timeline" ,path: '/zh-CN/components/timeline' },
+      { id: 17, title: '面包屑',subTitle:"breadcrumb" ,path: '/zh-CN/components/breadcrumb' },
+      { id: 18, title: '进度',subTitle:"progress" ,path: '/zh-CN/components/progress' },
+      { id: 19, title: '时间线',subTitle:"timeline" ,path: '/zh-CN/components/timeline' },
     ]
 
     const selected = ref(1)

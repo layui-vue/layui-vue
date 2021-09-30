@@ -37,6 +37,10 @@ const zhCN = [
         path: '/zh-CN/components/container',
         component: () => import('../../docs/zh-CN/components/container.md'),
         meta: { title: '容器' },
+      }, {
+        path: '/zh-CN/components/breadcrumb',
+        component: () => import('../../docs/zh-CN/components/breadcrumb.md'),
+        meta: { title: '面包屑' },
       },
       {
         path: '/zh-CN/components/button',
