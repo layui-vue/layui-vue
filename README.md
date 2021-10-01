@@ -52,8 +52,16 @@ app.mount('#app')
 
 ```html
 <template>
-  <lay-button>默认按钮</lay-button>
-  <lay-button type="primary">重要按钮</lay-button>
+   <lay-layout>
+      <lay-header>
+         <lay-logo>Layui Admin</lay-logo>
+      </lay-header>
+      <lay-side></lay-side>
+      <lay-body>
+         <router-view></router-view>
+      </lay-body>
+      <ay-footer>pearadmin.com</lay-footer>
+   </lay-layout>
 </template>
 
 ```
