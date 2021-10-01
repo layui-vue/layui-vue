@@ -81,6 +81,7 @@ export default {
       { id: 20, title: '颜色',subTitle:"color" ,path: '/zh-CN/components/color' },
       { id: 21, title: '手风琴',subTitle:"collapse" ,path: '/zh-CN/components/collapse' },
       { id: 22, title: '表格',subTitle:"table" ,path: '/zh-CN/components/table' },
+      { id: 23, title: '头像',subTitle:"avatar" ,path: '/zh-CN/components/avatar' },
     ]
 
     const selected = ref(1)

@@ -116,6 +116,11 @@ const zhCN = [
         path: '/zh-CN/components/table',
         component: () => import('../../docs/zh-CN/components/table.md'),
         meta: { title: '表格' },
+      },
+      {
+        path: '/zh-CN/components/avatar',
+        component: () => import('../../docs/zh-CN/components/avatar.md'),
+        meta: { title: '头像' },
       }
     ],
   },

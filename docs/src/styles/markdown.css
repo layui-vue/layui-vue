@@ -175,3 +175,7 @@ table th {
 table td {
   white-space: nowrap;
 }
+
+.source .layui-avatar {
+  margin-right: 30px;
+}

@@ -2,6 +2,8 @@ import type { App } from 'vue'
 import type { IDefineComponent, InstallOptions } from './module/type/index'
 
 import "./css/layui.css"
+import "./css/layui-vue.css"
+import LayAvatar from './module/avatar/index'
 import LayRadio from './module/radio/index'
 import LayButton from './module/button/index'
 import LayButtonContainer from './module/buttonContainer/index'
@@ -71,7 +73,8 @@ const components: Record<string, IDefineComponent> = {
   LayCheckbox,
   LayForm,
   LayBreadcrumb,
-  LayBreadcrumbItem
+  LayBreadcrumbItem,
+  LayAvatar
 }
 
 const install = (app: App, options?: InstallOptions): void => {
@@ -119,6 +122,7 @@ export {
   LayForm,
   LayBreadcrumb,
   LayBreadcrumbItem,
+  LayAvatar,
   install,
 }
 
