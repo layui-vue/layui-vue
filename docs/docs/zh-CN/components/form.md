@@ -121,7 +121,6 @@ export default {
     <lay-checkbox v-model="checked" label="2">画画</lay-checkbox>
     <lay-checkbox v-model="checked" label="3">运动</lay-checkbox>
   </lay-form>
-  {{checked}}
 </template>
 
 <script>
@@ -149,7 +148,6 @@ export default {
     <lay-checkbox name="like" skin="primary" v-model="checked" label="2">画画</lay-checkbox>
     <lay-checkbox name="like" skin="primary" v-model="checked" label="3">运动</lay-checkbox>
   </lay-form>
-  {{checked}}
 </template>
 
 <script>
@@ -177,7 +175,6 @@ export default {
     <lay-radio v-model="selected" name="action" label="2">画画</lay-radio>
     <lay-radio v-model="selected" name="action" label="3">运动</lay-radio>
   </lay-form>
-  {{selected}}
 </template>
 
 <script>
