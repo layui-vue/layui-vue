@@ -1,0 +1,23 @@
+{
+  "0 debug pnpm:scope": {
+    "selected": 1
+  },
+  "1 info pnpm": {
+    "err": {
+      "name": "Error",
+      "message": "not found: insta",
+      "code": "ENOENT",
+      "stack": "Error: not found: insta\n    at getNotFoundError (D:\\service\\Nvm\\v16.6.2\\node_global\\node_modules\\pnpm\\dist\\pnpm.cjs:47811:51)\n    at Function.whichSync [as sync] (D:\\service\\Nvm\\v16.6.2\\node_global\\node_modules\\pnpm\\dist\\pnpm.cjs:47888:13)\n    at getCommandAbsolutePathSync (D:\\service\\Nvm\\v16.6.2\\node_global\\node_modules\\pnpm\\dist\\pnpm.cjs:49453:44)\n    at Object.default_1 [as default] (D:\\service\\Nvm\\v16.6.2\\node_global\\node_modules\\pnpm\\dist\\pnpm.cjs:49462:32)\n    at D:\\service\\Nvm\\v16.6.2\\node_global\\node_modules\\pnpm\\dist\\pnpm.cjs:129798:34"
+    }
+  },
+  "2 error pnpm": {
+    "code": "ERR_PNPM_RECURSIVE_EXEC_FIRST_FAIL",
+    "prefix": "D:\\layui-vue",
+    "err": {
+      "name": "pnpm",
+      "message": "not found: insta",
+      "code": "ERR_PNPM_RECURSIVE_EXEC_FIRST_FAIL",
+      "stack": "Error: not found: insta\n    at getNotFoundError (D:\\service\\Nvm\\v16.6.2\\node_global\\node_modules\\pnpm\\dist\\pnpm.cjs:47811:51)\n    at Function.whichSync [as sync] (D:\\service\\Nvm\\v16.6.2\\node_global\\node_modules\\pnpm\\dist\\pnpm.cjs:47888:13)\n    at getCommandAbsolutePathSync (D:\\service\\Nvm\\v16.6.2\\node_global\\node_modules\\pnpm\\dist\\pnpm.cjs:49453:44)\n    at Object.default_1 [as default] (D:\\service\\Nvm\\v16.6.2\\node_global\\node_modules\\pnpm\\dist\\pnpm.cjs:49462:32)\n    at D:\\service\\Nvm\\v16.6.2\\node_global\\node_modules\\pnpm\\dist\\pnpm.cjs:129798:34"
+    }
+  }
+}

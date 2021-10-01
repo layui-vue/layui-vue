@@ -17,7 +17,6 @@ h5 {
 }
 
 h1,
-h2,
 h3,
 h4,
 h5,
@@ -28,7 +27,6 @@ h6 {
 }
 
 h1,
-h2,
 h3,
 h4,
 h5,
@@ -64,17 +62,8 @@ h1 {
   }
 }
 
-h2 {
-  margin-top: 2.25rem;
-  margin-bottom: 1.25rem;
-  border-bottom: 1px solid var(--c-divider);
-  padding-bottom: 0.3rem;
-  line-height: 1.25;
-  font-size: 1.65rem;
-  /* overflow-x: auto; */
-}
 
-h2 + h3 {
+h3 {
   margin-top: 1.5rem;
 }
 
@@ -93,19 +82,6 @@ h1 {
   color: #000000d9 !important;
   font-weight: 500 !important;
   font-size: 20px !important;
-  font-family: Avenir, -apple-system, BlinkMacSystemFont, segoe ui, Roboto,
-    helvetica neue, Arial, noto sans, sans-serif, apple color emoji,
-    segoe ui emoji, segoe ui symbol, noto color emoji, sans-serif;
-  line-height: 38px;
-}
-
-h2 {
-  margin-top: 4px !important;
-  margin-bottom: 16px !important;
-  color: #000000d9 !important;
-  font-weight: 500 !important;
-  font-size: 16px !important;
-  border-bottom: 0px;
   font-family: Avenir, -apple-system, BlinkMacSystemFont, segoe ui, Roboto,
     helvetica neue, Arial, noto sans, sans-serif, apple color emoji,
     segoe ui emoji, segoe ui symbol, noto color emoji, sans-serif;

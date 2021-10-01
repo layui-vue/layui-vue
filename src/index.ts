@@ -27,6 +27,7 @@ import LayTimelineItem from "./module/timelineItem/index"
 import LayTextarea from "./module/textarea/index"
 import LaySwitch from "./module/switch/index"
 import LayCollapse from "./module/collapse/index"
+import LayCollapseItem  from "./module/collapseItem/index"
 import LayContainer from "./module/container/index"
 import LayMenu from './module/menu/index'
 import LayMenuItem from './module/menuItem/index'
@@ -62,6 +63,7 @@ const components: Record<string, IDefineComponent> = {
   LayTextarea,
   LaySwitch,
   LayCollapse,
+  LayCollapseItem,
   LayContainer,
   LayMenu,
   LayMenuItem,
@@ -108,6 +110,7 @@ export {
   LayTextarea,
   LaySwitch,
   LayCollapse,
+  LayCollapseItem,
   LayContainer,
   LayMenu,
   LayMenuItem,
