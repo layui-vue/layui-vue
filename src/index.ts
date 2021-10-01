@@ -39,6 +39,7 @@ import LayForm from './module/form/index'
 import LayBreadcrumb from './module/breadcrumb/index'
 import LayBreadcrumbItem from './module/breadcrumbItem/index'
 import LayField from './module/field/index'
+import LaySelect from './module/select/index'
 
 const components: Record<string, IDefineComponent> = {
   LayRadio,
@@ -76,7 +77,8 @@ const components: Record<string, IDefineComponent> = {
   LayBreadcrumb,
   LayBreadcrumbItem,
   LayAvatar,
-  LayField
+  LayField,
+  LaySelect
 }
 
 const install = (app: App, options?: InstallOptions): void => {
@@ -128,6 +130,7 @@ export {
   LayBreadcrumbItem,
   LayAvatar,
   LayField,
+  LaySelect,
   install,
 }
 

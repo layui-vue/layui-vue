@@ -193,3 +193,25 @@ export default {
 </script>
 
 :::
+
+::: demo
+
+<template>
+  <lay-form>
+    <lay-select></lay-select>
+  </lay-form>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    return {
+    }
+  }
+}
+</script>
+
+:::
