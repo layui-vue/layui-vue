@@ -60,7 +60,7 @@ app.mount('#app')
       <lay-body>
          <router-view></router-view>
       </lay-body>
-      <ay-footer>pearadmin.com</lay-footer>
+      <lay-footer>pearadmin.com</lay-footer>
    </lay-layout>
 </template>
 
