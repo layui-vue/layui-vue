@@ -7,6 +7,8 @@
 </template>
 
 <script setup name="LaySide" lang="ts">
+import { defineProps } from 'vue'
+
 const props =
   defineProps<{
     black?: boolean

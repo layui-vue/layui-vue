@@ -179,3 +179,42 @@ table td {
 .source .layui-avatar {
   margin-right: 30px;
 }
+
+.site-doc-icon {
+  margin-bottom: 50px;
+  font-size: 0;
+}
+
+.site-doc-icon li .doc-icon-name, .site-doc-icon li .doc-icon-code {
+  color: #c2c2c2;
+}
+
+.site-doc-icon li .doc-icon-fontclass {
+  height: 40px;
+  line-height: 20px;
+  padding: 0 5px;
+  font-size: 13px;
+  color: #333;
+}
+
+.site-doc-icon li {
+  display: inline-block;
+  vertical-align: middle;
+  width: 16.5%;
+  height: 105px;
+  line-height: 25px;
+  padding: 20px 0;
+  margin-right: -1px;
+  margin-bottom: -1px;
+  border: 1px solid #e2e2e2;
+  font-size: 14px;
+  text-align: center;
+  color: #666;
+  transition: all .3s;
+  -webkit-transition: all .3s;
+}
+
+.site-doc-icon li .layui-icon {
+  display: inline-block;
+  font-size: 36px;
+}
