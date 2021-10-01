@@ -121,6 +121,11 @@ const zhCN = [
         path: '/zh-CN/components/avatar',
         component: () => import('../../docs/zh-CN/components/avatar.md'),
         meta: { title: '头像' },
+      },
+      {
+        path: '/zh-CN/components/field',
+        component: () => import('../../docs/zh-CN/components/field.md'),
+        meta: { title: '字段' },
       }
     ],
   },
