@@ -106,6 +106,16 @@ const zhCN = [
         path: '/zh-CN/components/timeline',
         component: () => import('../../docs/zh-CN/components/timeline.md'),
         meta: { title: '时间线' },
+      },
+      {
+        path: '/zh-CN/components/collapse',
+        component: () => import('../../docs/zh-CN/components/collapse.md'),
+        meta: { title: '手风琴' },
+      },
+      {
+        path: '/zh-CN/components/table',
+        component: () => import('../../docs/zh-CN/components/table.md'),
+        meta: { title: '表格' },
       }
     ],
   },

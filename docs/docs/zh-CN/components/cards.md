@@ -48,3 +48,8 @@ export default {
 </script>
 
 :::
+
+|  |  |  |
+|--|--|--|
+| header | 插槽 | `内容` |
+| body | 插槽 | `内容` |

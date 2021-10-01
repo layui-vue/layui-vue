@@ -79,6 +79,8 @@ export default {
       { id: 18, title: '进度',subTitle:"progress" ,path: '/zh-CN/components/progress' },
       { id: 19, title: '时间线',subTitle:"timeline" ,path: '/zh-CN/components/timeline' },
       { id: 20, title: '颜色',subTitle:"color" ,path: '/zh-CN/components/color' },
+      { id: 21, title: '手风琴',subTitle:"collapse" ,path: '/zh-CN/components/collapse' },
+      { id: 22, title: '表格',subTitle:"table" ,path: '/zh-CN/components/table' },
     ]
 
     const selected = ref(1)

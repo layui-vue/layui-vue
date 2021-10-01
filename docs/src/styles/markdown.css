@@ -88,16 +88,10 @@ h1 {
   line-height: 38px;
 }
 
-p,
 ol,
 ul {
   margin: 1rem 0;
   line-height: 1.7;
-}
-
-p {
-  margin-top: 20px !important;
-  font-size: 14px !important;
 }
 
 a,

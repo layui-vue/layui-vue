@@ -58,3 +58,7 @@ export default {
 </style>
 
 :::
+
+|  |  |  |
+|--|--|--|
+| fluid | 流模式 | `true` `false` |

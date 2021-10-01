@@ -12,10 +12,14 @@
 </template>
 
 <script setup name="LayCollapseItem" lang="ts">
-import { defineProps } from 'vue'
+import { defineProps, inject } from 'vue'
 
 const props =
   defineProps<{
+    key?: string
     title?: string
   }>()
+
+const openKeys = inject('openKeys');
+
 </script>

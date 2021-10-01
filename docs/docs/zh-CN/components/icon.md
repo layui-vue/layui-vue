@@ -20,4 +20,4 @@ export default {
 
 |  |  |  |
 |--|--|--|
-| type | 图标 | `layui-icon-home` `layui-icon-template`... |
+| type | 图标 | `layui-icon-home` |
