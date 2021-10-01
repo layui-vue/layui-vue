@@ -87,6 +87,8 @@ const install = (app: App, options?: InstallOptions): void => {
   }
 }
 
+console.log("document Site : http://layui-vue.pearadmin.com")
+
 export {
   LayRadio,
   LayIcon,

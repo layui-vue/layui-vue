@@ -7,7 +7,7 @@ import { defineProps } from 'vue'
 
 const props =
   defineProps<{
-    src?: boolean
+    src?: string
     radius?: boolean
     size?: string
   }>()
