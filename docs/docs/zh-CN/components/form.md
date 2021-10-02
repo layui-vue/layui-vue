@@ -198,7 +198,10 @@ export default {
 
 <template>
   <lay-form>
-    <lay-select></lay-select>
+    <lay-select>
+      <lay-select-option>北京</lay-select-option>
+      <lay-select-option>济南</lay-select-option>
+    </lay-select>
   </lay-form>
 </template>
 

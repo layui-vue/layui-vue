@@ -19,11 +19,7 @@
     </div>
     <dl class="layui-anim layui-anim-upbit" style="">
       <dd lay-value="" class="layui-select-tips">请选择</dd>
-      <dd lay-value="0" class="layui-this">北京</dd>
-      <dd lay-value="1" class="">上海</dd>
-      <dd lay-value="2" class="">广州</dd>
-      <dd lay-value="3" class="">深圳</dd>
-      <dd lay-value="4" class="">杭州</dd>
+      <slot></slot>
     </dl>
   </div>
 </template>
