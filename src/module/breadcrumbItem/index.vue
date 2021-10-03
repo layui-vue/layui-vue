@@ -1,15 +1,17 @@
 <template>
     <a href="">{{title}}</a>
-    <span lay-separator="">/</span>
+    <span lay-separator="">{{separator}}</span>
 </template>
 
 <script setup name="LayBreadcrumbItem" lang="ts">
-import { defineProps } from 'vue'
+import { defineProps, inject } from 'vue'
 
 const props =
   defineProps<{
     title: string
   }>()
+
+const separator =  inject("separator");
 
 
 </script>
