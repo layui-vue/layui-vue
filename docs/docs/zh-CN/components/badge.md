@@ -8,13 +8,13 @@
     <lay-badge type="dot" theme="blue"></lay-badge>&nbsp;
     <lay-badge type="dot" theme="black"></lay-badge>&nbsp;
     <lay-badge type="dot" theme="gray"></lay-badge>&nbsp;
-    <lay-badge  >赤</lay-badge>&nbsp;
-    <lay-badge  theme="orange">橙</lay-badge>&nbsp;
-    <lay-badge  theme="green">绿</lay-badge>&nbsp;
-    <lay-badge  theme="cyan">青</lay-badge>&nbsp;
-    <lay-badge  theme="blue">蓝</lay-badge>&nbsp;
-    <lay-badge  theme="black">黑</lay-badge>&nbsp;
-    <lay-badge  theme="gray">灰</lay-badge>&nbsp;
+    <lay-badge >赤</lay-badge>&nbsp;
+    <lay-badge theme="orange">橙</lay-badge>&nbsp;
+    <lay-badge theme="green">绿</lay-badge>&nbsp;
+    <lay-badge theme="cyan">青</lay-badge>&nbsp;
+    <lay-badge theme="blue">蓝</lay-badge>&nbsp;
+    <lay-badge theme="black">黑</lay-badge>&nbsp;
+    <lay-badge theme="gray">灰</lay-badge>&nbsp;
     <lay-badge type="rim">6</lay-badge>&nbsp;
     <lay-badge type="rim">Hot</lay-badge>&nbsp;
 </template>
