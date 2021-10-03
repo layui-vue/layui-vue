@@ -198,9 +198,9 @@ export default {
 
 <template>
   <lay-form>
-    <lay-select>
-      <lay-select-option>北京</lay-select-option>
-      <lay-select-option>济南</lay-select-option>
+    <lay-select v-model="select">
+      <lay-select-option value="beijing" label="北京"></lay-select-option>
+      <lay-select-option value="jinan" label="济南"></lay-select-option>
     </lay-select>
   </lay-form>
 </template>
@@ -211,7 +211,10 @@ import { ref } from 'vue'
 export default {
   setup() {
 
+    const select = ref("jinan")
+
     return {
+      select
     }
   }
 }
