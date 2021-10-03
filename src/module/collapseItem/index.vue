@@ -12,7 +12,7 @@
 </template>
 
 <script setup name="LayCollapseItem" lang="ts">
-import { defineProps, inject } from 'vue'
+import { defineProps, inject, ref } from 'vue'
 
 const props =
   defineProps<{

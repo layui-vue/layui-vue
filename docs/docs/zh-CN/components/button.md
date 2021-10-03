@@ -132,6 +132,30 @@ export default {
 
 <template>
   <lay-button-container>
+      <lay-button type="primary"><lay-icon type="layui-icon-left"></lay-icon></lay-button>
+      <lay-button type="primary"><lay-icon type="layui-icon-right"></lay-icon></lay-button>
+  </lay-button-container>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    return {
+    }
+  }
+}
+</script>
+
+:::
+
+
+::: demo 传入 columns 数据，自动生成表格
+
+<template>
+  <lay-button-container>
       <lay-button type="default">新增</lay-button>
       <lay-button type="default">删除</lay-button>
       <lay-button type="default">修改</lay-button>
