@@ -24,7 +24,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-input placeholder="请输入密码"></lay-input>
+  <lay-input placeholder="请输入密码" type="password"></lay-input>
 </template>
 
 <script>
