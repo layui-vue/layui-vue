@@ -83,6 +83,7 @@ export default {
       { id: 22, title: '表格',subTitle:"table" ,path: '/zh-CN/components/table' },
       { id: 23, title: '头像',subTitle:"avatar" ,path: '/zh-CN/components/avatar' },
       { id: 24, title: '字段',subTitle:"field" ,path: '/zh-CN/components/field' },
+      { id: 25, title: '空',subTitle:"empty" ,path: '/zh-CN/components/empty' },
     ]
 
     const selected = ref(1)

@@ -126,6 +126,11 @@ const zhCN = [
         path: '/zh-CN/components/field',
         component: () => import('../../docs/zh-CN/components/field.md'),
         meta: { title: '字段' },
+      },
+      {
+        path: '/zh-CN/components/empty',
+        component: () => import('../../docs/zh-CN/components/empty.md'),
+        meta: { title: '空' },
       }
     ],
   },

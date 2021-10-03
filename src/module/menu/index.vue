@@ -9,6 +9,6 @@ import { defineProps } from 'vue'
 
 const props =
   defineProps<{
-    tree: boolean
+    tree?: boolean
   }>()
 </script>
