@@ -44,6 +44,7 @@ import LaySelectOption from './module/selectOption/index'
 import LayScroll from './module/scroll/index'
 import LayEmpty from './module/empty/index'
 import LayFormItem from './module/formItem/index'
+import LayRate from './module/rate/index'
 
 const components: Record<string, IDefineComponent> = {
   LayRadio,
@@ -86,7 +87,8 @@ const components: Record<string, IDefineComponent> = {
   LayScroll,
   LaySelectOption,
   LayEmpty,
-  LayFormItem
+  LayFormItem,
+  LayRate
 }
 
 const install = (app: App, options?: InstallOptions): void => {
@@ -143,6 +145,7 @@ export {
   LaySelectOption,
   LayEmpty,
   LayFormItem,
+  LayRate,
   install,
 }
 

@@ -131,6 +131,11 @@ const zhCN = [
         path: '/zh-CN/components/empty',
         component: () => import('../../docs/zh-CN/components/empty.md'),
         meta: { title: '空' },
+      },
+      {
+        path: '/zh-CN/components/rate',
+        component: () => import('../../docs/zh-CN/components/rate.md'),
+        meta: { title: '评分' },
       }
     ],
   },
