@@ -10,10 +10,10 @@
           style="margin-top: 0px; margin-bottom: 0px"
         >
           <li class="layui-nav-item">
-            <a href="https://gitee.com/Jmysy/layui-vue-sample"> 案例 </a>
+            <a href="https://gitee.com/layui-vue/layui-vue-sample"> 案例 </a>
           </li>
           <li class="layui-nav-item">
-            <a href="https://gitee.com/Jmysy/layui-vue"> 仓库 </a>
+            <a href="https://gitee.com/layui-vue/layui-vue"> 仓库 </a>
           </li>
           <li class="layui-nav-item">
             <a

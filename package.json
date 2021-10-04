@@ -1,6 +1,6 @@
 {
   "name": "@layui/layui-vue",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "a component library for Vue 3 base on layui-vue",
   "main": "lib/layui-vue.umd.js",
   "module": "lib/layui-vue.es.js",
