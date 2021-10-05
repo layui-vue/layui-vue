@@ -94,7 +94,6 @@ ul {
   line-height: 1.7;
 }
 
-a,
 area,
 button,
 [role='button'],
@@ -104,15 +103,6 @@ select,
 summary,
 textarea {
   touch-action: manipulation;
-}
-
-a {
-  text-decoration: none;
-  color: var(--c-brand);
-}
-
-a:hover {
-  text-decoration: underline;
 }
 
 a.header-anchor {
