@@ -140,6 +140,10 @@ const zhCN = [
         path: '/zh-CN/components/dropdown',
         component: () => import('../../docs/zh-CN/components/dropdown.md'),
         meta: { title: '下拉' },
+      },{
+        path: '/zh-CN/components/tab',
+        component: () => import('../../docs/zh-CN/components/tab.md'),
+        meta: { title: '选项卡' },
       }
     ],
   },
