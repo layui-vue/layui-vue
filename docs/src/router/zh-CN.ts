@@ -136,6 +136,10 @@ const zhCN = [
         path: '/zh-CN/components/rate',
         component: () => import('../../docs/zh-CN/components/rate.md'),
         meta: { title: '评分' },
+      },{
+        path: '/zh-CN/components/dropdown',
+        component: () => import('../../docs/zh-CN/components/dropdown.md'),
+        meta: { title: '下拉' },
       }
     ],
   },

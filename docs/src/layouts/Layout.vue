@@ -85,6 +85,7 @@ export default {
       { id: 24, title: '字段',subTitle:"field" ,path: '/zh-CN/components/field' },
       { id: 25, title: '空',subTitle:"empty" ,path: '/zh-CN/components/empty' },
       { id: 26, title: '评分',subTitle:"rate" ,path: '/zh-CN/components/rate' },
+      { id: 27, title: '下拉', subTitle: "dropdown", path: '/zh-CN/components/dropdown'}
     ]
 
     const selected = ref(1)
