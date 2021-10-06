@@ -127,16 +127,6 @@ img {
   max-width: 100%;
 }
 
-ul,
-ol {
-  padding-left: 1.25em;
-}
-
-li > ul,
-li > ol {
-  margin: 0;
-}
-
 form {
   margin: 0;
 }

@@ -16,7 +16,7 @@ const zhCN = [
         path: '/zh-CN/guide/install',
         component: () => import('../../docs/zh-CN/guide/install.md'),
         meta: { title: '安装' },
-      },      {
+      }, {
         path: '/zh-CN/guide/changelog',
         component: () => import('../../docs/zh-CN/guide/changelog.md'),
         meta: { title: '更新' },
@@ -33,7 +33,7 @@ const zhCN = [
         path: '/zh-CN/components/layout',
         component: () => import('../../docs/zh-CN/components/layout.md'),
         meta: { title: '布局' },
-      }, 
+      },
       {
         path: '/zh-CN/components/color',
         component: () => import('../../docs/zh-CN/components/color.md'),
@@ -60,7 +60,7 @@ const zhCN = [
         path: '/zh-CN/components/panel',
         component: () => import('../../docs/zh-CN/components/panel.md'),
         meta: { title: '面板' },
-      },{
+      }, {
         path: '/zh-CN/components/animation',
         component: () => import('../../docs/zh-CN/components/animation.md'),
         meta: { title: '动画' },
@@ -136,14 +136,18 @@ const zhCN = [
         path: '/zh-CN/components/rate',
         component: () => import('../../docs/zh-CN/components/rate.md'),
         meta: { title: '评分' },
-      },{
+      }, {
         path: '/zh-CN/components/dropdown',
         component: () => import('../../docs/zh-CN/components/dropdown.md'),
         meta: { title: '下拉' },
-      },{
+      }, {
         path: '/zh-CN/components/tab',
         component: () => import('../../docs/zh-CN/components/tab.md'),
         meta: { title: '选项卡' },
+      }, {
+        path: '/zh-CN/components/iconPicker',
+        component: () => import('../../docs/zh-CN/components/iconPicker.md'),
+        meta: { title: '图标选择' },
       }
     ],
   },

@@ -243,6 +243,11 @@ export default {
         title: '选项卡',
         subTitle: 'tab',
         path: '/zh-CN/components/tab',
+      },{
+        id: 29,
+        title: '图标选择',
+        subTitle: 'iconPicker',
+        path: '/zh-CN/components/iconPicker',
       },
     ]
 
