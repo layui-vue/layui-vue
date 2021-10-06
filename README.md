@@ -39,13 +39,14 @@ npm install @layui/layui-vue
 
 ```js
 import { createApp } from 'vue'
+import Layui from '@layui/layui-vue'
+import '@layui/layui-vue/lib/layui.css'
 import App from './App.vue'
-import Layui from 'layui-vue'
-import 'layui-vue/lib/layui.css'
 
-const app = createApp(App)
-app.use(Layui)
-app.mount('#app')
+createApp(App)
+.use(Layui)
+.mount('#app')
+
 ```
 
 这是一个基本的入门页面：
