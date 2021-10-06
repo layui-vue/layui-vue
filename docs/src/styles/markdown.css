@@ -208,3 +208,25 @@ table td {
   display: inline-block;
   font-size: 32px;
 }
+
+.site-doc-color {
+  margin: 15px 0;
+}
+
+.site-doc-necolor li div {
+  border-radius: 0;
+  color: #000!important;
+}
+
+.site-doc-color li div {
+  padding: 20px 10px;
+  color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+.site-doc-bgcolor li {
+  padding: 20px 10px;
+}

@@ -85,3 +85,91 @@ export default {
 }
 </script>
 :::
+
+::: demo
+
+<template>
+<ul class="layui-row site-doc-color site-doc-necolor">
+      <li class="layui-col-md6">
+        <div style="background-color: #FAFAFA;">
+          <p>#FAFAFA</p><p>
+        </p></div>
+      </li>
+      <li class="layui-col-md6">
+        <div style="background-color: #f6f6f6;"><p>#F6F6F6</p><p></p></div>
+      </li>
+      <li class="layui-col-md2">
+        <div style="background-color: #eeeeee;"><p>#eeeeee</p><p></p></div>
+      </li>
+      <li class="layui-col-md2">
+        <div style="background-color: #e2e2e2;"><p>#e2e2e2</p><p></p></div>
+      </li>
+      <li class="layui-col-md2">
+        <div style="background-color: #dddddd;"><p>#dddddd</p><p></p></div>
+      </li>
+      <li class="layui-col-md2">
+        <div style="background-color: #d2d2d2;"><p>#d2d2d2</p><p></p></div>
+      </li>
+      <li class="layui-col-md2">
+        <div style="background-color: #cccccc;"><p>#cccccc</p><p></p></div>
+      </li>
+      <li class="layui-col-md2">
+        <div style="background-color: #c2c2c2;"><p>#c2c2c2</p><p></p></div>
+      </li>
+    </ul>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    return {
+    }
+  }
+}
+</script>
+:::
+
+
+::: demo
+
+<template>
+<ul class="site-doc-bgcolor">
+      <li class="layui-bg-red">
+        赤色：class="layui-bg-red"
+      </li>
+      <li class="layui-bg-orange">
+        橙色：class="layui-bg-orange"
+      </li>
+      <li class="layui-bg-green">
+        墨绿：class="layui-bg-green"
+      </li>
+      <li class="layui-bg-cyan">
+        藏青：class="layui-bg-cyan"
+      </li>
+      <li class="layui-bg-blue">
+        蓝色：class="layui-bg-blue"
+      </li>
+      <li class="layui-bg-black">
+        雅黑：class="layui-bg-black"
+      </li>
+      <li class="layui-bg-gray">
+        银灰：class="layui-bg-gray"
+      </li>
+    </ul>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    return {
+    }
+  }
+}
+</script>
+:::
