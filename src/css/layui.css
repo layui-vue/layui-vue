@@ -4225,8 +4225,6 @@ body .layui-table-tips .layui-layer-content {
 
 .layui-menu li {
 	position: relative;
-	margin: 1px 0;
-	width: calc(100% + 1px);
 	line-height: 26px;
 	color: rgba(0, 0, 0, .8);
 	font-size: 14px;

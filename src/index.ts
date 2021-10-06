@@ -45,6 +45,7 @@ import LayEmpty from './module/empty/index'
 import LayFormItem from './module/formItem/index'
 import LayRate from './module/rate/index'
 import LayDropdown from './module/dropdown/index'
+import LayDropdownItem from './module/dropdownItem/index'
 import LayTab from './module/tab/index'
 import LayTabItem from './module/tabItem/index'
 
@@ -92,6 +93,7 @@ const components: Record<string, IDefineComponent> = {
   LayFormItem,
   LayRate,
   LayDropdown,
+  LayDropdownItem,
   LayTab,
   LayTabItem
 }
@@ -152,6 +154,7 @@ export {
   LayFormItem,
   LayRate,
   LayDropdown,
+  LayDropdownItem,
   LayTab,
   LayTabItem,
   install,
