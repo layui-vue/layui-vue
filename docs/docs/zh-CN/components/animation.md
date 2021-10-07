@@ -1,6 +1,7 @@
 ::: demo
 
 <template>
+  <div class="anim">
     <ul class="layui-border-box site-doc-icon site-doc-anim">
       <li style="height:auto">
         <div class="layui-anim layui-anim-down">顶部往下滑入</div>
@@ -51,6 +52,7 @@
         <div class="code">追加：layui-anim-loop</div>
       </li>
     </ul>
+  </div>
 </template>
 
 <script>

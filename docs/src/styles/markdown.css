@@ -241,20 +241,20 @@ table td {
   text-align: center;
 }
 
-.site-doc-icon {
+.anim .site-doc-icon {
   margin-bottom: 50px;
   font-size: 0;
 }
 
-.site-doc-icon li {
+.anim .site-doc-icon li {
   width: 50%;
 }
 
-.site-doc-anim li {
+.anim .site-doc-anim li {
   height: auto;
 }
 
-.site-doc-icon li {
+.anim .site-doc-icon li {
   display: inline-block;
   vertical-align: middle;
   width: 16.5%;
@@ -271,7 +271,7 @@ table td {
   -webkit-transition: all .3s;
 }
 
-.site-doc-icon li .layui-anim {
+.anim .site-doc-icon li .layui-anim {
   width: 125px;
   height: 125px;
   line-height: 125px;
@@ -283,6 +283,6 @@ table td {
   border-radius: 50%;
 }
 
-.site-doc-icon li .code {
+.anim .site-doc-icon li .code {
   white-space: nowrap;
 }
