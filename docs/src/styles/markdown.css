@@ -228,6 +228,7 @@ table td {
   padding: 25px;
   line-height: 24px;
   border: 1px solid #d2d2d2;
+  border-radius: 6px;
 }
 
 .site-idea .layui-field-title {
@@ -238,4 +239,50 @@ table td {
   margin: 0 20px 20px 0;
   padding: 0 20px;
   text-align: center;
+}
+
+.site-doc-icon {
+  margin-bottom: 50px;
+  font-size: 0;
+}
+
+.site-doc-icon li {
+  width: 50%;
+}
+
+.site-doc-anim li {
+  height: auto;
+}
+
+.site-doc-icon li {
+  display: inline-block;
+  vertical-align: middle;
+  width: 16.5%;
+  height: 105px;
+  line-height: 25px;
+  padding: 20px 0;
+  margin-right: -1px;
+  margin-bottom: -1px;
+  border: 1px solid #e2e2e2;
+  font-size: 14px;
+  text-align: center;
+  color: #666;
+  transition: all .3s;
+  -webkit-transition: all .3s;
+}
+
+.site-doc-icon li .layui-anim {
+  width: 125px;
+  height: 125px;
+  line-height: 125px;
+  margin: 0 auto 10px;
+  text-align: center;
+  background-color: #009688;
+  cursor: pointer;
+  color: #fff;
+  border-radius: 50%;
+}
+
+.site-doc-icon li .code {
+  white-space: nowrap;
 }
