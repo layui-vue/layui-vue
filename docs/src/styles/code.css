@@ -22,7 +22,7 @@ div[class*='language-'] {
   margin: 1rem -1.5rem;
   background-color: #fafafa;
   overflow-x: auto;
-  border: 1px solid #eaeefb;
+  border: 1px solid whitesmoke;
 }
 
 li > div[class*='language-'] {

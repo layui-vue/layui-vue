@@ -60,3 +60,8 @@ export default {
 </script>
 
 :::
+
+
+|  |  |  |
+|--|--|--|
+| trigger | 触发方式 | `click` `hover` |

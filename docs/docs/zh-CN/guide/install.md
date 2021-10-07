@@ -30,3 +30,4 @@ createApp(App)
    <lay-footer>pearadmin.com</lay-footer>
 </lay-layout>
 ```
+完整案例, 前往: [layui-vue-sample](https://gitee.com/layui-vue/layui-vue-sample)

@@ -4312,6 +4312,7 @@ body .layui-table-tips .layui-layer-content {
 .layui-menu .layui-menu-item-checked,
 .layui-menu .layui-menu-item-checked2 {
 	background-color: #F6F6F6 !important;
+	border-radius: 2px;
 	color: #5FB878
 }
 

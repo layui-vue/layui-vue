@@ -98,7 +98,7 @@ function handleScroll() {
 .lay-code .meta .description {
   padding: 20px;
   margin: 10px 0;
-  border: 1px solid var(--c-divider);
+  border: 1px solid whitesmoke;
   box-sizing: border-box;
   background: var(--c-bg);
   font-size: 14px;
@@ -115,7 +115,7 @@ function handleScroll() {
   padding: 1px 5px;
   margin: 0 4px;
   height: 18px;
-  border-radius: 3px;
+  border-radius: 2px;
   background-color: var(--code-inline-bg-color);
   font-size: 12px;
   line-height: 18px;

@@ -37,7 +37,7 @@
         </ul>
       </lay-header>
       <lay-side>
-        <ul class="layui-menu layui-menu-lg layui-menu-docs">
+        <ul class="layui-menu layui-menu-lg layui-menu-docs" style="padding:6px">
           <li
             :key="menu"
             v-for="menu in menus"
