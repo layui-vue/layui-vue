@@ -15,10 +15,7 @@
     <template #content>
       <div class="layui-iconpicker-view layui-iconpicker-scroll">
         <div class="layui-iconpicker-search">
-          <div
-            class="layui-form layui-input-wrap layui-input-wrap-prefix"
-            lay-filter="LAY-ICON-FORM-DF-3"
-          >
+          <div class="layui-form layui-input-wrap layui-input-wrap-prefix">
             <div class="layui-input-prefix">
               <i class="layui-icon layui-icon-search"></i>
             </div>
@@ -28,7 +25,6 @@
               placeholder="search"
               autocomplete="off"
               class="layui-input"
-              lay-filter="LAY-ICON-INPUT-3"
               lay-affix="clear"
             />
             <div class="layui-input-suffix layui-input-affix-event layui-hide">
@@ -39,7 +35,7 @@
         <div class="layui-iconpicker-list">
           <ul>
             <li
-              v-for="icon in icons"
+              v-for="icon in icones"
               :key="icon"
               @click="selectIcon(icon.class)"
               :class="[selectedIcon === icon.class ? 'layui-this' : '']"
@@ -48,6 +44,33 @@
               <p class="layui-elip">{{ icon.name }}</p>
             </li>
           </ul>
+        </div>
+        <div class="layui-iconpicker-page" v-if="page">
+          <div
+            class="layui-box layui-laypage layui-laypage-default"
+            id="layui-laypage-1"
+          >
+            <span class="layui-laypage-count">共 {{ total }} 个</span
+            ><a
+              href="javascript:;"
+              @click="prev()"
+              class="layui-laypage-prev"
+              :class="[currentPage === 1 ? 'layui-disabled' : '']"
+              ><i class="layui-icon layui-icon-left"></i></a
+            ><span class="layui-laypage-curr"
+              ><em class="layui-laypage-em"></em
+              ><em>{{ currentPage }} / {{ totalPage }}</em></span
+            ><span class="layui-laypage-spr">…</span
+            ><a href="javascript:;" class="layui-laypage-last" title="尾页"
+              >14</a
+            ><a
+              href="javascript:;"
+              :class="[currentPage === totalPage ? 'layui-disabled' : '']"
+              class="layui-laypage-next"
+              @click="next()"
+              ><i class="layui-icon layui-icon-right"></i
+            ></a>
+          </div>
         </div>
       </div>
     </template>
@@ -58,10 +81,16 @@
 import { defineProps, Ref, ref } from 'vue'
 import icons from '../resource/icons'
 
-const props =
+const props = withDefaults(
   defineProps<{
     modelValue?: string
-  }>()
+    page?: boolean
+  }>(),
+  {
+    modelValue: 'layui-icon-face-smile',
+    page: false,
+  }
+)
 
 const emit = defineEmits(['update:modelValue'])
 
@@ -70,5 +99,37 @@ const selectedIcon: Ref<String> = ref(props.modelValue as String)
 const selectIcon = function (icon: String) {
   emit('update:modelValue', icon)
   selectedIcon.value = icon
+}
+
+const icones: Ref = ref([])
+
+const total = icons.length
+const totalPage = total / 12
+const currentPage: Ref = ref(1)
+
+if (props.page) {
+  icones.value = icons.slice(0, 12)
+} else {
+  icones.value = icons
+}
+
+const next = function () {
+  if (currentPage.value === totalPage) {
+    return
+  }
+  currentPage.value = currentPage.value + 1
+  const start = (currentPage.value - 1) * 12
+  const end = start + 12
+  icones.value = icons.slice(start, end)
+}
+
+const prev = function () {
+  if (currentPage.value === 1) {
+    return
+  }
+  currentPage.value = currentPage.value - 1
+  const start = (currentPage.value - 1) * 12
+  const end = start + 12
+  icones.value = icons.slice(start, end)
 }
 </script>

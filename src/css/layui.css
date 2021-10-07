@@ -4415,7 +4415,7 @@ body .layui-table-tips .layui-layer-content {
 	z-index: 899;
 	min-width: 100%;
 	border: 1px solid #eee;
-	max-height: 300px;
+	max-height: 360px;
 	overflow-y: auto;
 	background-color: #fff;
 	border-radius: 2px;
