@@ -17,4 +17,5 @@ const props = withDefaults(
 )
 
 provide("separator",props.separator);
+
 </script>

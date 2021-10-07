@@ -8,6 +8,7 @@ import LayButton from './module/button/index'
 import LayButtonContainer from './module/buttonContainer/index'
 import LayButtonGroup from './module/buttonGroup/index'
 import LayIcon from './module/icon/index'
+import LayIconPicker from './module/iconPicker/index'
 import LayCard from './module/card/index'
 import LayLayout from "./module/layout/index"
 import LaySide from "./module/side/index"
@@ -95,7 +96,8 @@ const components: Record<string, IDefineComponent> = {
   LayDropdown,
   LayDropdownItem,
   LayTab,
-  LayTabItem
+  LayTabItem,
+  LayIconPicker
 }
 
 const install = (app: App, options?: InstallOptions): void => {
@@ -157,6 +159,7 @@ export {
   LayDropdownItem,
   LayTab,
   LayTabItem,
+  LayIconPicker,
   install,
 }
 

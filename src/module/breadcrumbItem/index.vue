@@ -13,5 +13,4 @@ const props =
 
 const separator =  inject("separator");
 
-
 </script>
