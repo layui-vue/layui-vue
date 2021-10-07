@@ -4536,7 +4536,7 @@ body .layui-table-tips .layui-layer-content {
 }
 
 .layui-iconpicker-scroll .layui-iconpicker-list {
-	max-height: 194px;
+	max-height: 220px;
 	overflow: auto
 }
 

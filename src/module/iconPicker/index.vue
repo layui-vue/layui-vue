@@ -22,6 +22,7 @@
             <input
               type="text"
               value=""
+              @input="search"
               placeholder="search"
               autocomplete="off"
               class="layui-input"
@@ -78,7 +79,7 @@
 </template>
 
 <script setup name="LayIconPicker" lang="ts">
-import { defineProps, Ref, ref } from 'vue'
+import { defineProps, Ref, ref, watch } from 'vue'
 import icons from '../resource/icons'
 
 const props = withDefaults(
@@ -103,8 +104,8 @@ const selectIcon = function (icon: String) {
 
 const icones: Ref = ref([])
 
-const total = icons.length
-const totalPage = total / 12
+const total = ref(icons.length)
+const totalPage = ref(total.value / 12)
 const currentPage: Ref = ref(1)
 
 if (props.page) {
@@ -131,5 +132,63 @@ const prev = function () {
   const start = (currentPage.value - 1) * 12
   const end = start + 12
   icones.value = icons.slice(start, end)
+}
+
+const search = function (e: any) {
+  var text = e.target.value
+  currentPage.value = 1
+  const start = (currentPage.value - 1) * 12
+  const end = start + 12
+  if (text === '') {
+    if (props.page) {
+      icones.value = icons.slice(start, end)
+      total.value = icons.length
+      totalPage.value = Math.ceil(icons.length / 12)
+    } else {
+      icones.value = icons
+    }
+  } else {
+    if (props.page) {
+      icones.value = searchList(text, icons).slice(start, end)
+      total.value = searchList(text, icons).length
+      totalPage.value = Math.ceil(searchList(text, icons).length / 12)
+    } else {
+      icones.value = searchList(text, icons)
+    }
+  }
+}
+
+const searchList = function (str: String, container: any) {
+  var newList = []
+  var startChar = str.charAt(0)
+  var strLen = str.length
+  for (var i = 0; i < container.length; i++) {
+    var obj = container[i]
+    var isMatch = false
+    for (var p in obj) {
+      if (typeof obj[p] == 'function') {
+        obj[p]()
+      } else {
+        var curItem = ''
+        if (obj[p] != null) {
+          curItem = obj[p]
+        }
+        for (var j = 0; j < curItem.length; j++) {
+          if (curItem.charAt(j) == startChar) {
+            //如果匹配起始字符,开始查找
+            if (curItem.substring(j).substring(0, strLen) == str) {
+              //如果从j开始的字符与str匹配，那ok
+              isMatch = true
+              break
+            }
+          }
+        }
+      }
+    }
+    if (isMatch) {
+      newList.push(obj)
+    }
+  }
+  return newList
 }
 </script>

@@ -95,6 +95,34 @@ export default {
 
 :::
 
+::: demo
+
+<template>
+  <lay-container fluid>
+    <lay-row space="10">
+      <lay-col md="2" sm="6" xs="12"><div class="grid-demo">1</div></lay-col>
+      <lay-col md="2" sm="6" xs="12"><div class="grid-demo grid-demo-bg1">2</div></lay-col>
+      <lay-col md="2" sm="6" xs="12"><div class="grid-demo">3</div></lay-col>
+      <lay-col md="2" sm="6" xs="12"><div class="grid-demo grid-demo-bg1">4</div></lay-col>
+      <lay-col md="2" sm="6" xs="12"><div class="grid-demo">5</div></lay-col>
+      <lay-col md="2" sm="6" xs="12"><div class="grid-demo grid-demo-bg1">6</div></lay-col>
+    </lay-row>
+  </lay-container>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+    return {
+    }
+  }
+}
+</script>
+
+:::
+
 |  |  |  |  |
 |--|--|--|--|
 | xs | 尺寸 | 超小屏幕 (手机<768px) | 12 |
