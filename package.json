@@ -1,6 +1,6 @@
 {
   "name": "@layui/layui-vue",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "a component library for Vue 3 base on layui-vue",
   "main": "lib/layui-vue.umd.js",
   "module": "lib/layui-vue.es.js",
@@ -24,7 +24,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://gitee.com/Jmysy/layui-vue"
+    "url": "https://gitee.com/layui-vue/layui-vue"
   },
   "keywords": [
     "layui-vue",
@@ -34,9 +34,9 @@
   "author": "就眠儀式",
   "license": "MIT",
   "bugs": {
-    "url": "https://gitee.com/Jmysy/layui-vue/issues"
+    "url": "https://gitee.com/layui-vue/layui-vue/issues"
   },
-  "homepage": "https://gitee.com/Jmysy/layui-vue/blob/master/README.md",
+  "homepage": "https://gitee.com/layui-vue/layui-vue/blob/master/README.md",
   "peerDependencies": {
     "vue": "^3.2.19",
     "vue-router": "^4.0.10"

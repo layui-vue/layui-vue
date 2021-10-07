@@ -2,10 +2,11 @@
   <div
     v-if="trigger === 'click'"
     class="layui-dropdown"
-    @click="open"
     :class="[openState ? 'layui-dropdown-up' : '']"
   >
-    <slot></slot>
+    <div @click="open">
+      <slot></slot>
+    </div>
     <dl class="layui-anim layui-anim-upbit">
       <ul class="layui-menu layui-dropdown-menu">
         <slot name="content"></slot>
