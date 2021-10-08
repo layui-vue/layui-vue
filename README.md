@@ -75,7 +75,7 @@ createApp(App)
 [![Giteye chart](https://chart.giteye.net/gitee/Jmysy/layui-vue/54GMVA5A.png)](https://giteye.net/chart/54GMVA5A)
 
 ## 贡献者
-> 大概是因为 layui 让开发者变得更懒，所以贡献者才这么少？   
+> 大概是因为 layui - vue 让开发者变得更懒，所以贡献者才这么少？   
 > 好的，姑且就这样认为吧。
  
 [![Giteye chart](https://chart.giteye.net/gitee/Jmysy/layui-vue/NPJNE48U.png)](https://giteye.net/chart/NPJNE48U)
