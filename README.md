@@ -80,5 +80,9 @@ createApp(App)
  
 [![Giteye chart](https://chart.giteye.net/gitee/Jmysy/layui-vue/NPJNE48U.png)](https://giteye.net/chart/NPJNE48U)
 
+## 交流群
+
+![输入图片说明](https://images.gitee.com/uploads/images/2021/1008/090410_8b349271_4835367.png "QQ图片20211008090242.png")
+
 ## 相关
 [官网](http://www.layui.com/)、[更新日志](http://www.layui.com/doc/base/changelog.html)
