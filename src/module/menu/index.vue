@@ -7,15 +7,20 @@
 <script setup name="LayMenu" lang="ts">
 import { defineProps, provide, ref } from 'vue'
 
-const props =
+const props = withDefaults(
   defineProps<{
+    selectedKey?: string
     tree?: boolean
-    selectedKeys?: string[]
-  }>()
+  }>(),
+  {
+    selectedKey: "",
+    tree: false,
+  }
+)
 
 const isTree = ref(props.tree)
-const selectKeys = ref(props.selectedKeys)
+const selectKey = ref(props.selectedKey)
 
 provide("isTree",isTree);
-provide("selectKeys",selectKeys)
+provide("selectKey",selectKey)
 </script>

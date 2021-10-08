@@ -63,3 +63,8 @@ export default {
 </script>
 
 :::
+
+|  |  |  |
+|--|--|--|
+| v-model | 默认值 | -- |
+| page | 开启分页 | -- |

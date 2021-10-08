@@ -1,5 +1,5 @@
 <template>
-  <li class="layui-nav-item">
+  <li class="layui-nav-item" @click="selectHandle()" :class="[selectKey === id ? 'layui-this':'']">
     <a href="javascript:void(0)">{{ title }} </a>
   </li>
 
@@ -25,21 +25,25 @@
 </template>
 
 <script setup name="LayMenuItem" lang="ts">
-import { defineProps, inject, ref, useSlots } from 'vue'
+import { defineProps, inject, provide, Ref, ref, useSlots } from 'vue'
 const slots = useSlots()
 
 const props =
   defineProps<{
-    key: string
+    id: string
     title: string
   }>()
 
 const isOpen = ref(false)
 
 const isTree = inject('isTree')
-const selectKeys = inject('selectKeys')
+const selectKey: Ref<String> = inject('selectKey') as Ref<String>
 
 const openHandle = function () {
   isOpen.value = !isOpen.value
+}
+
+const selectHandle = function() {
+    selectKey.value = props.id
 }
 </script>
