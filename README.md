@@ -72,13 +72,17 @@ createApp(App)
 
 ## 使用趋势
 
-[![Giteye chart](https://chart.giteye.net/gitee/Jmysy/layui-vue/54GMVA5A.png)](https://giteye.net/chart/54GMVA5A)
+[![Giteye chart](https://chart.giteye.net/gitee/layui-vue/layui-vue/JJ9X4PZJ.png)](https://giteye.net/chart/JJ9X4PZJ)
 
 ## 贡献者
-> 大概是因为 layui 让开发者变得更懒，所以贡献者才这么少？   
+> 大概是因为 layui - vue 让开发者变得更懒，所以贡献者才这么少？   
 > 好的，姑且就这样认为吧。
  
 [![Giteye chart](https://chart.giteye.net/gitee/Jmysy/layui-vue/NPJNE48U.png)](https://giteye.net/chart/NPJNE48U)
 
+## 交流群
+
+![输入图片说明](https://images.gitee.com/uploads/images/2021/1008/090410_8b349271_4835367.png "QQ图片20211008090242.png")
+
 ## 相关
-[官网](http://www.layui.com/)、[更新日志](http://www.layui.com/doc/base/changelog.html)
+[官网](http://layui-vue.pearadmin.com/)、[更新日志](http://layui-vue.pearadmin.com/zh-CN/guide/changelog)、[交流群](https://jq.qq.com/?_wv=1027&k=ffiUQgnE)
