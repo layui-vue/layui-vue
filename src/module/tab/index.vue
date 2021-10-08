@@ -1,5 +1,5 @@
 <template>
-  <div class="layui-tab">
+  <div class="layui-tab" :class="[type?'layui-tab-' + type:'']">
     <ul class="layui-tab-title">
       <li class="layui-this">网站设置</li>
       <li>用户管理</li>
@@ -18,4 +18,10 @@
 </template>
 
 <script setup name="LayTab" lang="ts">
+import { defineProps, withDefaults } from 'vue'
+
+const props =
+  defineProps<{
+    type?: string
+  }>()
 </script>
