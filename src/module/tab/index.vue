@@ -1,27 +1,43 @@
 <template>
-  <div class="layui-tab" :class="[type?'layui-tab-' + type:'']">
+  <div class="layui-tab" :class="[type ? 'layui-tab-' + type : '']">
     <ul class="layui-tab-title">
-      <li class="layui-this">网站设置</li>
-      <li>用户管理</li>
-      <li>权限分配</li>
-      <li>商品管理</li>
-      <li>订单管理</li>
+      <li
+        @click="change(ss.props.id)"
+        v-for="ss in slots"
+        :key="ss"
+        :class="[ss.props.id === modelValue ? 'layui-this' : '']"
+      >
+        {{ ss.props.title }}
+      </li>
     </ul>
     <div class="layui-tab-content">
-      <div class="layui-tab-item layui-show"> 内容1 </div>
-      <div class="layui-tab-item"> 内容2 </div>
-      <div class="layui-tab-item"> 内容3 </div>
-      <div class="layui-tab-item"> 内容4 </div>
-      <div class="layui-tab-item"> 内容5 </div>
+      <slot></slot>
     </div>
   </div>
 </template>
 
 <script setup name="LayTab" lang="ts">
-import { defineProps, withDefaults } from 'vue'
+import { defineProps, inject, provide, ref, useSlots } from 'vue'
+
+const slot = useSlots() as any
+const slots = slot.default && slot.default()
 
 const props =
   defineProps<{
     type?: string
+    modelValue?: string
   }>()
+
+// select update 时, 通知 change 事件
+const emit = defineEmits(['update:modelValue'])
+
+const active = ref(props.modelValue)
+
+const change = function (id: any) {
+  emit('update:modelValue', id)
+  active.value = id
+}
+
+
+provide("active",active)
 </script>
