@@ -72,13 +72,13 @@ createApp(App)
 
 ## 使用趋势
 
-[![Giteye chart](https://chart.giteye.net/gitee/layui-vue/layui-vue/JJ9X4PZJ.png)](https://giteye.net/chart/JJ9X4PZJ)
+[![Giteye chart](https://chart.giteye.net/gitee/layui-vue/layui-vue/5ZQ67WWS.png)](https://giteye.net/chart/5ZQ67WWS)
 
 ## 贡献者
 > 大概是因为 layui - vue 让开发者变得更懒，所以贡献者才这么少？   
 > 好的，姑且就这样认为吧。
  
-[![Giteye chart](https://chart.giteye.net/gitee/Jmysy/layui-vue/NPJNE48U.png)](https://giteye.net/chart/NPJNE48U)
+[![Giteye chart](https://chart.giteye.net/gitee/layui-vue/layui-vue/DBC9Z6HQ.png)](https://giteye.net/chart/DBC9Z6HQ)
 
 ## 交流群
 
