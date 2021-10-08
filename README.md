@@ -67,6 +67,8 @@ createApp(App)
 
 ```
 
+![输入图片说明](https://images.gitee.com/uploads/images/2021/1008/094058_ac128899_4835367.png "屏幕截图.png")
+
 ## [阅读文档](http://layui-vue.pearadmin.com/)
 从现在开始，尽情地拥抱 layui 吧！但愿她能成为你长远的开发伴侣，化作你方寸屏幕前的亿万字节！
 
