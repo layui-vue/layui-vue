@@ -85,4 +85,4 @@ createApp(App)
 ![输入图片说明](https://images.gitee.com/uploads/images/2021/1008/090410_8b349271_4835367.png "QQ图片20211008090242.png")
 
 ## 相关
-[官网](http://www.layui.com/)、[更新日志](http://www.layui.com/doc/base/changelog.html)
+[官网](http://layui-vue.pearadmin.com/)、[更新日志](http://layui-vue.pearadmin.com/zh-CN/guide/changelog)、[交流群](https://jq.qq.com/?_wv=1027&k=ffiUQgnE)
