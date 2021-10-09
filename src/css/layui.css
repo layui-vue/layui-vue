@@ -2493,6 +2493,15 @@ a cite {
 	width: 100%
 }
 
+.layui-input-number[type="number"]{
+  -moz-appearance: textfield;
+}
+
+.layui-input-number::-webkit-outer-spin-button,
+.layui-input-number::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
 .layui-input,
 .layui-select,
 .layui-textarea {
