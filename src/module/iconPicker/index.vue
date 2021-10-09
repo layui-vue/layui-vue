@@ -175,9 +175,7 @@ const searchList = function (str: String, container: any) {
         }
         for (var j = 0; j < curItem.length; j++) {
           if (curItem.charAt(j) == startChar) {
-            //如果匹配起始字符,开始查找
             if (curItem.substring(j).substring(0, strLen) == str) {
-              //如果从j开始的字符与str匹配，那ok
               isMatch = true
               break
             }
