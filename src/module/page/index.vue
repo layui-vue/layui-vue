@@ -1,26 +1,19 @@
 <template>
-  <div
-    class="layui-box layui-laypage layui-laypage-default"
-    id="layui-laypage-10"
-  >
+  <div class="layui-box layui-laypage layui-laypage-default">
     <span class="layui-laypage-count">共 {{ total }} 条</span
-    ><a
-      href="javascript:;"
-      class="layui-laypage-prev layui-disabled"
-      @click="prev"
+    ><a href="javascript:;" class="layui-laypage-prev" :class="[currentPage === 1 ? 'layui-disabled':'']" @click="prev()"
       >上一页</a
-    ><span class="layui-laypage-curr"
-      ><em class="layui-laypage-em"></em><em>1</em></span
     >
-    <a href="javascript:;" data-page="5">5</a>
-    <span class="layui-laypage-spr">…</span
-    ><a
-      href="javascript:;"
-      class="layui-laypage-last"
-      title="尾页"
-      data-page="10"
-      >10</a
-    ><a href="javascript:;" class="layui-laypage-next" @click="next()">下一页</a
+    <template v-for="index of totalPage" :key="index">
+      <span class="layui-laypage-curr" v-if="index === currentPage"
+        ><em class="layui-laypage-em"></em><em>{{ index }}</em></span
+      >
+      <a href="javascript:;" @click="jump(index)" v-else>
+        {{ index }}
+      </a>
+    </template>
+
+    <a href="javascript:;" class="layui-laypage-next" :class="[currentPage === totalPage ? 'layui-disabled':'']" @click="next()">下一页</a
     ><span class="layui-laypage-limits"
       ><select lay-ignore="">
         <option value="10" selected="">{{ limit }} 条/页</option>
@@ -41,8 +34,8 @@
     >
   </div>
 </template>
-
-<script setup name="LayPage" lang="ts">
+<script setup name="LayPage"></script>
+<script setup lang="ts">
 import { defineProps, ref } from 'vue'
 
 const props =
@@ -51,13 +44,24 @@ const props =
     limit: number
   }>()
 
-const current = ref(1)
+const totalPage = ref(props.total / props.limit)
+const currentPage = ref(1)
 
 const prev = function () {
-  current.value--
+  if(currentPage.value === 1) {
+    return
+  }
+  currentPage.value--
 }
 
 const next = function () {
-  current.value--
+  if(currentPage.value === totalPage.value) {
+    return
+  }
+  currentPage.value++
+}
+
+const jump = function (page: number) {
+  currentPage.value = page
 }
 </script>

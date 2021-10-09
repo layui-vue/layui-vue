@@ -1,7 +1,7 @@
 ::: demo
 
 <template>
-  <lay-page></lay-page>
+  <lay-page limit=10 total=100></lay-page>
 </template>
 
 <script>
