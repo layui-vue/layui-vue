@@ -3650,9 +3650,14 @@ a cite {
 
 .layui-table-view .layui-table td,
 .layui-table-view .layui-table th {
-	padding: 5px 0;
+	padding: 5px 0px;
 	border-top: none;
 	border-left: none
+}
+
+.layui-table-view .layui-table td.layui-table-col-special, 
+.layui-table-view .layui-table th.layui-table-col-special {
+	padding: 5px 16px;
 }
 
 .layui-table-view .layui-table th.layui-unselect .layui-table-cell span {
