@@ -1,7 +1,7 @@
 import type { App } from 'vue'
 import type { IDefineComponent, InstallOptions } from './module/type/index'
 
-import "./css/layui.css"
+import './css/layui.css'
 import LayAvatar from './module/avatar/index'
 import LayRadio from './module/radio/index'
 import LayButton from './module/button/index'
@@ -10,27 +10,27 @@ import LayButtonGroup from './module/buttonGroup/index'
 import LayIcon from './module/icon/index'
 import LayIconPicker from './module/iconPicker/index'
 import LayCard from './module/card/index'
-import LayLayout from "./module/layout/index"
-import LaySide from "./module/side/index"
-import LayBody from "./module/body/index"
-import LayHeader from "./module/header/index"
-import LayFooter from "./module/footer/index"
-import LayLogo from "./module/logo/index"
-import LayPanel from "./module/panel/index"
-import LayProgress from "./module/progress/index"
-import LayCol from "./module/col/index"
-import LayRow from "./module/row/index"
-import LayInput from "./module/input/index"
-import LayBadge from "./module/badge/index"
-import LayBlock from "./module/block/index"
-import LayLine from "./module/line/index"
-import LayTimeline from "./module/timeline/index"
-import LayTimelineItem from "./module/timelineItem/index"
-import LayTextarea from "./module/textarea/index"
-import LaySwitch from "./module/switch/index"
-import LayCollapse from "./module/collapse/index"
-import LayCollapseItem  from "./module/collapseItem/index"
-import LayContainer from "./module/container/index"
+import LayLayout from './module/layout/index'
+import LaySide from './module/side/index'
+import LayBody from './module/body/index'
+import LayHeader from './module/header/index'
+import LayFooter from './module/footer/index'
+import LayLogo from './module/logo/index'
+import LayPanel from './module/panel/index'
+import LayProgress from './module/progress/index'
+import LayCol from './module/col/index'
+import LayRow from './module/row/index'
+import LayInput from './module/input/index'
+import LayBadge from './module/badge/index'
+import LayBlock from './module/block/index'
+import LayLine from './module/line/index'
+import LayTimeline from './module/timeline/index'
+import LayTimelineItem from './module/timelineItem/index'
+import LayTextarea from './module/textarea/index'
+import LaySwitch from './module/switch/index'
+import LayCollapse from './module/collapse/index'
+import LayCollapseItem  from './module/collapseItem/index'
+import LayContainer from './module/container/index'
 import LayMenu from './module/menu/index'
 import LayMenuItem from './module/menuItem/index'
 import LayMenuChildItem from './module/menuChildItem/index'
@@ -49,6 +49,7 @@ import LayDropdown from './module/dropdown/index'
 import LayDropdownItem from './module/dropdownItem/index'
 import LayTab from './module/tab/index'
 import LayTabItem from './module/tabItem/index'
+import LayTree from './module/tree/index'
 
 const components: Record<string, IDefineComponent> = {
   LayRadio,
@@ -97,11 +98,12 @@ const components: Record<string, IDefineComponent> = {
   LayDropdownItem,
   LayTab,
   LayTabItem,
-  LayIconPicker
+  LayIconPicker,
+  LayTree
 }
 
 const install = (app: App, options?: InstallOptions): void => {
-  const _options = options;
+  const _options = options
   app.config.globalProperties.$PROOPTIONS = _options
 
   for (const key in components) {
@@ -110,7 +112,7 @@ const install = (app: App, options?: InstallOptions): void => {
   }
 }
 
-console.log("document Site : http://layui-vue.pearadmin.com")
+console.log('document Site : http://layui-vue.pearadmin.com')
 
 export {
   LayRadio,
@@ -122,7 +124,7 @@ export {
   LayBody,
   LayFooter,
   LayLogo,
-  LayPanel, 
+  LayPanel,
   LayCard,
   LayProgress,
   LayButtonGroup,
@@ -160,6 +162,7 @@ export {
   LayTab,
   LayTabItem,
   LayIconPicker,
+  LayTree,
   install,
 }
 

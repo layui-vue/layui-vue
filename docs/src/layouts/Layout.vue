@@ -18,14 +18,10 @@
           style="margin-top: 0px; margin-bottom: 0px"
         >
           <li class="layui-nav-item">
-            <a href="https://gitee.com/layui-vue/layui-vue-sample">
-              案例
-            </a>
+            <a href="https://gitee.com/layui-vue/layui-vue-sample"> 案例 </a>
           </li>
           <li class="layui-nav-item">
-            <a href="https://gitee.com/layui-vue/layui-vue">
-              仓库
-            </a>
+            <a href="https://gitee.com/layui-vue/layui-vue"> 仓库 </a>
           </li>
           <li class="layui-nav-item">
             <a
@@ -37,11 +33,16 @@
         </ul>
       </lay-header>
       <lay-side>
-        <ul class="layui-menu layui-menu-lg layui-menu-docs" style="padding:6px">
+        <ul
+          class="layui-menu layui-menu-lg layui-menu-docs"
+          style="padding: 6px"
+        >
           <li
             :key="menu"
             v-for="menu in menus"
-            :class="[currentPath === menu.path ? 'layui-menu-item-checked2' : '']"
+            :class="[
+              currentPath === menu.path ? 'layui-menu-item-checked2' : '',
+            ]"
             @click="handleClick(menu)"
           >
             <div class="layui-menu-body-title">
@@ -70,7 +71,7 @@ export default {
   setup() {
     const route = useRoute()
     const router = useRouter()
-    const currentPath = ref("hahaha")
+    const currentPath = ref('hahaha')
 
     watch(
       () => route.path,
@@ -247,11 +248,18 @@ export default {
         title: '选项卡',
         subTitle: 'tab',
         path: '/zh-CN/components/tab',
-      },{
+      },
+      {
         id: 29,
         title: '图标选择',
         subTitle: 'iconPicker',
         path: '/zh-CN/components/iconPicker',
+      },
+      {
+        id: 30,
+        title: '树形组件',
+        subTitle: 'tree',
+        path: '/zh-CN/components/tree',
       },
     ]
 
