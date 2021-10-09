@@ -1,7 +1,7 @@
 <template>
   <div class="width:100%;height:300px">
     <lay-layout>
-      <lay-header>
+      <lay-header style="background:#393D49">
         <lay-logo>
           <img src="../assets/logo.png" />
         </lay-logo>
