@@ -254,6 +254,11 @@ export default {
         title: '图标选择',
         subTitle: 'iconPicker',
         path: '/zh-CN/components/iconPicker',
+      },{
+        id: 29,
+        title: '分页',
+        subTitle: 'page',
+        path: '/zh-CN/components/page',
       },
       {
         id: 30,

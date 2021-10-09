@@ -153,6 +153,11 @@ const zhCN = [
         component: () => import('../../docs/zh-CN/components/tree.md'),
         meta: { title: '树形组件' }
       },
+      {
+        path: '/zh-CN/components/page',
+        component: () => import('../../docs/zh-CN/components/page.md'),
+        meta: { title: '分页' },
+      }
     ],
   },
 ]
