@@ -75,3 +75,8 @@ export default {
 </script>
 
 :::
+
+|  |  |  |
+|--|--|--|
+| v-model | 当前激活 | -- |
+| type | 主题样式 | `card` `brief` |

@@ -148,6 +148,10 @@ const zhCN = [
         path: '/zh-CN/components/iconPicker',
         component: () => import('../../docs/zh-CN/components/iconPicker.md'),
         meta: { title: '图标选择' },
+      }, {
+        path: '/zh-CN/components/page',
+        component: () => import('../../docs/zh-CN/components/page.md'),
+        meta: { title: '分页' },
       }
     ],
   },
