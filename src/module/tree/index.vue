@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { VNode, VNodeChild } from 'vue'
+import { computed, unref, VNode, VNodeChild } from 'vue'
+import TreeEntity from './TreeEntity.vue'
 
 interface TreeData {
   /**
@@ -20,14 +21,17 @@ interface TreeData {
   children: TreeData[]
   /**
    * 点击节点弹出新窗口对应的 url。需开启 isJump 参数
+   * 废弃，通过 on-click事件用户控制
    */
   href: string | URL
   /**
    * 节点是否初始展开，默认 false
+   * 废弃：设置 v-model:spreadKeys
    */
   spread: boolean
   /**
    * 节点是否初始为选中状态（如果开启复选框的话），默认 false
+   * 废弃：设置 v-model:checkedKeys
    */
   checked: boolean
   /**
@@ -41,6 +45,18 @@ type EditAction = 'add' | 'update' | 'del'
 type EditType = boolean | EditAction[]
 
 interface TreeProps {
+  /**
+   * 指定唯一的id
+   */
+  id?: string
+  /**
+   * 选中的节点
+   */
+  checkedKeys?: any[]
+  /**
+   * 展开的节点
+   */
+  spreadKeys?: any[]
   /**
    * 数据源
    */
@@ -66,6 +82,7 @@ interface TreeProps {
   onlyIconControl?: boolean
   /**
    * 是否允许点击节点时弹出新窗口跳转。默认 false，若开启，需在节点数据中设定 link 参数（值为 url 格式
+   * 废弃：能过事件用户自行控制
    */
   isJump?: boolean
   /**
@@ -121,8 +138,9 @@ interface TreeEmits {
    * @param treeNode
    */
   (e: 'on-operate', treeNode: TreeNode): void
+  (e: 'update:checkedKeys', keys: any[]): void
+  (e: 'update:spreadKeys', keys: any[]): void
 }
-
 
 const props = withDefaults(defineProps<TreeProps>(), {
   showCheckbox: false,
@@ -133,7 +151,44 @@ const props = withDefaults(defineProps<TreeProps>(), {
   edit: true,
 })
 
-console.log(props)
+// tree wrapper style
+const treeWrapperClass = computed(() => {
+  const { showCheckbox, showLine } = unref(props)
+  return {
+    'layui-tree': true,
+    'layui-form': showCheckbox,
+    'layui-tree-line': showLine,
+  }
+})
+
+/**
+ * 按 layui的思路，这里改变数据
+ * @param data
+ * @param isRootNode
+ */
+function transformTreeData (data: TreeData[], parentExtend = false, isRootNode = true) {
+  data.forEach((item, index) => {
+    item._parentExtend = !parentExtend ? (index + 1) !== data.length: parentExtend
+    if(isRootNode) {
+      item._isRoot = true
+    }
+    if (item.children) {
+      item._hasChild = true
+      transformTreeData(item.children, item._parentExtend, false)
+    } else {
+      item._hasChild = false
+    }
+  })
+}
+
+const renderData = computed(() => {
+  const { data } = unref(props)
+  transformTreeData(data)
+  console.log(data)
+  return data
+})
+
+console.log(renderData)
 
 </script>
 <script lang="ts">
@@ -142,141 +197,145 @@ export default {
 }
 </script>
 <template>
-  <div id="test1" class="demo-tree demo-tree-box">
-    <div class="layui-tree layui-tree-line" lay-filter="LAY-tree-2">
+  <div :class="treeWrapperClass">
+    <TreeEntity
+      v-for="(node) in renderData"
+      :key="node.id"
+      :id="node.id"
+      :node="node"
+    ></TreeEntity>
+  </div>
+  <hr />
+  <div class="layui-tree layui-tree-line" lay-filter="LAY-tree-2">
+    <div
+      data-id="1"
+      class="layui-tree-set layui-tree-setHide layui-tree-spread"
+    >
+      <div class="layui-tree-entry">
+        <div class="layui-tree-main">
+          <span class="layui-tree-iconClick layui-tree-icon"
+            ><i class="layui-icon layui-icon-subtraction"></i></span
+          ><span class="layui-tree-txt">江西</span>
+        </div>
+      </div>
       <div
-        data-id="1"
-        class="layui-tree-set layui-tree-setHide layui-tree-spread"
+        class="layui-tree-pack layui-tree-lineExtend layui-tree-showLine"
+        style="display: block"
       >
-        <div class="layui-tree-entry">
-          <div class="layui-tree-main">
-            <span class="layui-tree-iconClick layui-tree-icon"
-              ><i class="layui-icon layui-icon-subtraction"></i></span
-            ><span class="layui-tree-txt">江西</span>
+        <div data-id="1000" class="layui-tree-set layui-tree-spread">
+          <div class="layui-tree-entry">
+            <div class="layui-tree-main">
+              <span class="layui-tree-iconClick layui-tree-icon"
+                ><i class="layui-icon layui-icon-subtraction"></i></span
+              ><span class="layui-tree-txt">南昌</span>
+            </div>
+          </div>
+          <div
+            class="layui-tree-pack layui-tree-lineExtend layui-tree-showLine"
+            style="display: block"
+          >
+            <div data-id="10001" class="layui-tree-set">
+              <div class="layui-tree-entry">
+                <div class="layui-tree-main">
+                  <span class="layui-tree-iconClick"
+                    ><i class="layui-icon layui-icon-file"></i></span
+                  ><span class="layui-tree-txt">青山湖区</span>
+                </div>
+              </div>
+            </div>
+            <div data-id="10002" class="layui-tree-set layui-tree-setLineShort">
+              <div class="layui-tree-entry">
+                <div class="layui-tree-main">
+                  <span class="layui-tree-iconClick"
+                    ><i class="layui-icon layui-icon-file"></i></span
+                  ><span class="layui-tree-txt">高新区</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div
-          class="layui-tree-pack layui-tree-lineExtend layui-tree-showLine"
-          style="display: block"
-        >
-          <div data-id="1000" class="layui-tree-set layui-tree-spread">
-            <div class="layui-tree-entry">
-              <div class="layui-tree-main">
-                <span class="layui-tree-iconClick layui-tree-icon"
-                  ><i class="layui-icon layui-icon-subtraction"></i></span
-                ><span class="layui-tree-txt">南昌</span>
-              </div>
-            </div>
-            <div
-              class="layui-tree-pack layui-tree-lineExtend layui-tree-showLine"
-              style="display: block"
-            >
-              <div data-id="10001" class="layui-tree-set">
-                <div class="layui-tree-entry">
-                  <div class="layui-tree-main">
-                    <span class="layui-tree-iconClick"
-                      ><i class="layui-icon layui-icon-file"></i></span
-                    ><span class="layui-tree-txt">青山湖区</span>
-                  </div>
-                </div>
-              </div>
-              <div
-                data-id="10002"
-                class="layui-tree-set layui-tree-setLineShort"
-              >
-                <div class="layui-tree-entry">
-                  <div class="layui-tree-main">
-                    <span class="layui-tree-iconClick"
-                      ><i class="layui-icon layui-icon-file"></i></span
-                    ><span class="layui-tree-txt">高新区</span>
-                  </div>
-                </div>
-              </div>
+        <div data-id="1001" class="layui-tree-set">
+          <div class="layui-tree-entry">
+            <div class="layui-tree-main">
+              <span class="layui-tree-iconClick"
+                ><i class="layui-icon layui-icon-file"></i></span
+              ><span class="layui-tree-txt">九江</span>
             </div>
           </div>
-          <div data-id="1001" class="layui-tree-set">
-            <div class="layui-tree-entry">
-              <div class="layui-tree-main">
-                <span class="layui-tree-iconClick"
-                  ><i class="layui-icon layui-icon-file"></i></span
-                ><span class="layui-tree-txt">九江</span>
-              </div>
-            </div>
-          </div>
-          <div data-id="1002" class="layui-tree-set">
-            <div class="layui-tree-entry">
-              <div class="layui-tree-main">
-                <span class="layui-tree-iconClick"
-                  ><i class="layui-icon layui-icon-file"></i></span
-                ><span class="layui-tree-txt">赣州</span>
-              </div>
+        </div>
+        <div data-id="1002" class="layui-tree-set">
+          <div class="layui-tree-entry">
+            <div class="layui-tree-main">
+              <span class="layui-tree-iconClick"
+                ><i class="layui-icon layui-icon-file"></i></span
+              ><span class="layui-tree-txt">赣州</span>
             </div>
           </div>
         </div>
       </div>
-      <div
-        data-id="2"
-        class="layui-tree-set layui-tree-setHide layui-tree-spread"
-      >
-        <div class="layui-tree-entry">
-          <div class="layui-tree-main">
-            <span class="layui-tree-iconClick layui-tree-icon"
-              ><i class="layui-icon layui-icon-subtraction"></i></span
-            ><span class="layui-tree-txt">广西</span>
-          </div>
+    </div>
+    <div
+      data-id="2"
+      class="layui-tree-set layui-tree-setHide layui-tree-spread"
+    >
+      <div class="layui-tree-entry">
+        <div class="layui-tree-main">
+          <span class="layui-tree-iconClick layui-tree-icon"
+            ><i class="layui-icon layui-icon-subtraction"></i></span
+          ><span class="layui-tree-txt">广西</span>
         </div>
-        <div
-          class="layui-tree-pack layui-tree-lineExtend layui-tree-showLine"
-          style="display: block"
-        >
-          <div data-id="2000" class="layui-tree-set">
-            <div class="layui-tree-entry">
-              <div class="layui-tree-main">
-                <span class="layui-tree-iconClick"
-                  ><i class="layui-icon layui-icon-file"></i></span
-                ><span class="layui-tree-txt">南宁</span>
-              </div>
+      </div>
+      <div
+        class="layui-tree-pack layui-tree-lineExtend layui-tree-showLine"
+        style="display: block"
+      >
+        <div data-id="2000" class="layui-tree-set">
+          <div class="layui-tree-entry">
+            <div class="layui-tree-main">
+              <span class="layui-tree-iconClick"
+                ><i class="layui-icon layui-icon-file"></i></span
+              ><span class="layui-tree-txt">南宁</span>
             </div>
           </div>
-          <div data-id="2001" class="layui-tree-set">
-            <div class="layui-tree-entry">
-              <div class="layui-tree-main">
-                <span class="layui-tree-iconClick"
-                  ><i class="layui-icon layui-icon-file"></i></span
-                ><span class="layui-tree-txt">桂林</span>
-              </div>
+        </div>
+        <div data-id="2001" class="layui-tree-set">
+          <div class="layui-tree-entry">
+            <div class="layui-tree-main">
+              <span class="layui-tree-iconClick"
+                ><i class="layui-icon layui-icon-file"></i></span
+              ><span class="layui-tree-txt">桂林</span>
             </div>
           </div>
         </div>
       </div>
-      <div
-        data-id="3"
-        class="layui-tree-set layui-tree-setHide layui-tree-setLineShort"
-      >
-        <div class="layui-tree-entry">
-          <div class="layui-tree-main">
-            <span class="layui-tree-iconClick layui-tree-icon"
-              ><i class="layui-icon layui-icon-addition"></i></span
-            ><span class="layui-tree-txt">陕西</span>
-          </div>
+    </div>
+    <div
+      data-id="3"
+      class="layui-tree-set layui-tree-setHide layui-tree-setLineShort layui-tree-spread"
+    >
+      <div class="layui-tree-entry">
+        <div class="layui-tree-main">
+          <span class="layui-tree-iconClick layui-tree-icon"
+            ><i class="layui-icon layui-icon-subtraction"></i></span
+          ><span class="layui-tree-txt">陕西</span>
         </div>
-        <div class="layui-tree-pack layui-tree-lineExtend">
-          <div data-id="3000" class="layui-tree-set">
-            <div class="layui-tree-entry">
-              <div class="layui-tree-main">
-                <span class="layui-tree-iconClick"
-                  ><i class="layui-icon layui-icon-file"></i></span
-                ><span class="layui-tree-txt">西安</span>
-              </div>
+      </div>
+      <div class="layui-tree-pack layui-tree-lineExtend" style="display: block">
+        <div data-id="3000" class="layui-tree-set">
+          <div class="layui-tree-entry">
+            <div class="layui-tree-main">
+              <span class="layui-tree-iconClick"
+                ><i class="layui-icon layui-icon-file"></i></span
+              ><span class="layui-tree-txt">西安</span>
             </div>
           </div>
-          <div data-id="3001" class="layui-tree-set layui-tree-setLineShort">
-            <div class="layui-tree-entry">
-              <div class="layui-tree-main">
-                <span class="layui-tree-iconClick"
-                  ><i class="layui-icon layui-icon-file"></i></span
-                ><span class="layui-tree-txt">延安</span>
-              </div>
+        </div>
+        <div data-id="3001" class="layui-tree-set layui-tree-setLineShort">
+          <div class="layui-tree-entry">
+            <div class="layui-tree-main">
+              <span class="layui-tree-iconClick"
+                ><i class="layui-icon layui-icon-file"></i></span
+              ><span class="layui-tree-txt">延安</span>
             </div>
           </div>
         </div>
