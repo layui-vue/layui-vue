@@ -38,6 +38,5 @@ const change = function (id: any) {
   active.value = id
 }
 
-
 provide("active",active)
 </script>

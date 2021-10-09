@@ -1,6 +1,7 @@
 ::: demo
 
 <template>
+  <lay-table></lay-table>
 </template>
 
 <script>

@@ -8,7 +8,7 @@
     <div class="layui-select-title">
       <input
         type="text"
-        placeholder="请选择"
+        placeholder="Search"
         class="layui-input layui-unselect"
         @input="change"
         :value="name"

@@ -264,58 +264,20 @@
     </div>
     <div class="layui-table-page">
       <div id="layui-table-page1">
-        <div
-          class="layui-box layui-laypage layui-laypage-default"
-          id="layui-laypage-1"
-        >
-          <a
-            href="javascript:;"
-            class="layui-laypage-prev layui-disabled"
-            data-page="0"
-            ><i class="layui-icon"></i></a
-          ><span class="layui-laypage-curr"
-            ><em class="layui-laypage-em"></em><em>1</em></span
-          ><a href="javascript:;" data-page="2">2</a
-          ><a href="javascript:;" data-page="3">3</a
-          ><span class="layui-laypage-spr">…</span
-          ><a
-            href="javascript:;"
-            class="layui-laypage-last"
-            title="尾页"
-            data-page="300000"
-            >300000</a
-          ><a href="javascript:;" class="layui-laypage-next" data-page="2"
-            ><i class="layui-icon"></i></a
-          ><span class="layui-laypage-skip"
-            >到第<input
-              type="text"
-              min="1"
-              value="1"
-              class="layui-input"
-            />页<button type="button" class="layui-laypage-btn">
-              确定
-            </button></span
-          ><span class="layui-laypage-count">共 3000000 条</span
-          ><span class="layui-laypage-limits"
-            ><select lay-ignore="">
-              <option value="10" selected="">10 条/页</option>
-              <option value="20">20 条/页</option>
-              <option value="30">30 条/页</option>
-              <option value="40">40 条/页</option>
-              <option value="50">50 条/页</option>
-              <option value="60">60 条/页</option>
-              <option value="70">70 条/页</option>
-              <option value="80">80 条/页</option>
-              <option value="90">90 条/页</option>
-            </select></span
-          >
-        </div>
+           <lay-page total="100" limit="10" showPage showLimit showSkip></lay-page>
       </div>
     </div>
   </div>
 </template>
 <script setup name="LayTable" lang="ts">
+import { defineProps, defineEmits } from 'vue'
+
+const props =
+  defineProps<{
+    columns?: Object[]
+    data?: Object[]
+  }>()
 </script>
 <style>
-.laytable-cell-1-0-0{ width: 48px; }.laytable-cell-1-0-1{ width: 80px; }.laytable-cell-1-0-2{ width: 120px; }.laytable-cell-1-0-3{ width: 150px; }.laytable-cell-1-0-4{ width: 80px; }.laytable-cell-1-0-5{ width: 80px; }.laytable-cell-1-0-6{ width: 100px; }.laytable-cell-1-0-7{  }.laytable-cell-1-0-8{ width: 100px; }.laytable-cell-1-0-9{ width: 120px; }.laytable-cell-1-0-10{ width: 120px; }.laytable-cell-1-0-11{ width: 150px; }
+
 </style>
