@@ -27,7 +27,7 @@ const props =
     modelValue: Array<unknown>
     label: string
     disabled?: boolean
-    name: string
+    name?: string
     skin?: string
   }>()
 

@@ -44,7 +44,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-rate v-model="all2" length="10"></lay-rate> {{all2}}
+  <lay-rate v-model="all2" length=10></lay-rate> {{all2}}
 </template>
 
 <script>

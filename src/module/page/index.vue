@@ -58,22 +58,16 @@ const props = withDefaults(
   defineProps<{
     total: number
     limit: number
-    theme: boolean
-    showPage: boolean
-    showSkip: boolean
-    showCount: boolean
-    showLimit: boolean
-    showInput: boolean
-    showRefresh: boolean
+    theme?: string
+    showPage?: boolean
+    showSkip?: boolean
+    showCount?: boolean
+    showLimit?: boolean
+    showInput?: boolean
+    showRefresh?: boolean
   }>(),
   {
-    limit: 10,
-    showSkip: false,
-    showPage: false,
-    showCount: false,
-    showLimit: false,
-    showInput: false,
-    showRefresh: false,
+    limit: 10
   }
 )
 
