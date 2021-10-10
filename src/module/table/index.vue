@@ -70,8 +70,24 @@
                     </div>
                   </td>
 
-                  <template v-for="(value, key, index) in data" :key="index">
-                    <template v-for="column in columns" :key="column">
+                  <template v-for="column in columns" :key="column">
+                  
+                    <template v-if="column.customSlot">
+                      <td>
+                        <div
+                          :style="{ width: column.width }"
+                          style="padding: 0px 16px"
+                        >
+                          <slot :name="column.customSlot" :data="data"></slot>
+                        </div>
+                      </td>
+                    </template>
+                    
+                    <template
+                      v-else
+                      v-for="(value, key, index) in data"
+                      :key="index"
+                    >
                       <td v-if="column.key == key">
                         <div
                           :style="{ width: column.width }"
@@ -84,6 +100,7 @@
                         </div>
                       </td>
                     </template>
+
                   </template>
                 </tr>
               </template>
