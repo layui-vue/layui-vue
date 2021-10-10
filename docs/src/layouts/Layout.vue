@@ -303,4 +303,20 @@ export default {
 .layui-menu-docs .layui-menu-body-title .layui-font-gray {
   padding-left: 10px;
 }
+
+@media screen and (max-width:768px) {
+	.layui-side {
+    width: 0px!important;
+  }
+  .layui-body {
+    left: 0px!important;
+    width: 100%!important;
+  }
+  .layui-logo {
+    display: none!important;
+  }
+  .layui-layout-left {
+    left: 0px!important;
+  }
+}
 </style>
