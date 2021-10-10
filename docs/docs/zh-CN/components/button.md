@@ -208,3 +208,4 @@ export default {
 | size | 尺寸 | `lg` `sm` `xs` |
 | fluid | 最大化 | `true` `false` |
 | radius | 圆角 | `true` `false` |
+| border | 边框 | `green` `blue`  `orange` `red` `black` |
