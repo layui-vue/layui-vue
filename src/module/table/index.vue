@@ -108,8 +108,8 @@
           </table>
         </div>
       </div>
-      <div class="layui-table-page">
-        <lay-page total="100" limit="10" showPage showLimit showSkip></lay-page>
+      <div v-if="page" class="layui-table-page">
+        <lay-page :total="page.total" :limit="page.limit" @jump="change" showPage showLimit showSkip></lay-page>
       </div>
     </div>
   </div>
@@ -122,8 +122,15 @@ const props =
     columns?: Object[]
     dataSource?: Object[]
     skin?: string
+    page?: Object
   }>()
+
+const emit = defineEmits(['change'])
 
 const slot = useSlots()
 const slots = slot.default && slot.default()
+
+const change = function(page: any){
+  emit('change',page)
+}
 </script>
