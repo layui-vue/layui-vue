@@ -157,6 +157,11 @@ const zhCN = [
         path: '/zh-CN/components/page',
         component: () => import('../../docs/zh-CN/components/page.md'),
         meta: { title: '分页' },
+      },
+      {
+        path: '/zh-CN/components/transfer',
+        component: () => import('../../docs/zh-CN/components/transfer.md'),
+        meta: { title: '穿梭框' },
       }
     ],
   },

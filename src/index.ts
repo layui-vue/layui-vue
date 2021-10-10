@@ -52,6 +52,7 @@ import LayTabItem from './module/tabItem/index'
 import LayTree from './module/tree/index'
 import LayTable from './module/table/index'
 import LayPage from './module/page/index'
+import LayTransfer from './module/transfer/index'
 
 const components: Record<string, IDefineComponent> = {
   LayRadio,
@@ -103,7 +104,8 @@ const components: Record<string, IDefineComponent> = {
   LayIconPicker,
   LayTree,
   LayTable,
-  LayPage
+  LayPage,
+  LayTransfer
 }
 
 const install = (app: App, options?: InstallOptions): void => {
@@ -169,6 +171,7 @@ export {
   LayTree,
   LayTable,
   LayPage,
+  LayTransfer,
   install,
 }
 

@@ -266,6 +266,12 @@ export default {
         subTitle: 'tree',
         path: '/zh-CN/components/tree',
       },
+      {
+        id: 31,
+        title: '穿梭框',
+        subTitle: 'tree',
+        path: '/zh-CN/components/transfer',
+      },
     ]
 
     const selected = ref(1)
