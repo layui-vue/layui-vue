@@ -81,3 +81,28 @@ export default {
 </script>
 
 :::
+
+::: demo
+
+<template>
+  <lay-page limit=20 total=100 @jump="jump" showPage></lay-page>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const jump = function({ current }) {
+       console.log("当前页:" + current)
+    }
+
+    return {
+      jump
+    }
+  }
+}
+</script>
+
+:::

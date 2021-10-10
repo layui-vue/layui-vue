@@ -82,6 +82,8 @@ const totalPage = ref(Math.ceil(props.total / inlimit.value))
 const currentPage: Ref<number> = ref(1)
 const currentPageShow: Ref<number> = ref(currentPage.value)
 
+const emit = defineEmits(['jump'])
+
 const prev = function () {
   if (currentPage.value === 1) {
     return
@@ -111,5 +113,7 @@ watch(inlimit, function () {
 
 watch(currentPage, function () {
   currentPageShow.value = currentPage.value
+  emit('jump', {current: currentPage.value})
 })
+
 </script>

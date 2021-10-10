@@ -269,7 +269,7 @@ export default {
       {
         id: 31,
         title: '穿梭框',
-        subTitle: 'tree',
+        subTitle: 'transfer',
         path: '/zh-CN/components/transfer',
       },
     ]
