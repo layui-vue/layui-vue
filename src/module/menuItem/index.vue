@@ -1,7 +1,4 @@
 <template>
-  <li class="layui-nav-item" @click="selectHandle()" :class="[selectKey === id ? 'layui-this':'']">
-    <a href="javascript:void(0)">{{ title }} </a>
-  </li>
 
   <li
     class="layui-nav-item"
@@ -21,6 +18,10 @@
     >
       <slot></slot>
     </dl>
+  </li>
+
+  <li v-else class="layui-nav-item" @click="selectHandle()" :class="[selectKey === id ? 'layui-this':'']">
+    <a href="javascript:void(0)">{{ title }} </a>
   </li>
 </template>
 
