@@ -106,3 +106,14 @@ export default {
 </script>
 
 :::
+
+|  |  |  |
+|--|--|--|
+| limit | 每页数量 | -- |
+| total | 总条数 | -- |
+| jump | 切换回调 | -- |
+| showCount | 显示总数 | -- |
+| showPage | 显示每页 | -- |
+| showLimit | 显示每页数量 | -- |
+| showRefresh | 显示刷新按钮 | -- |
+| showSkip | 显示跳转 | -- |
