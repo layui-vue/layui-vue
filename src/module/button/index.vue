@@ -6,6 +6,7 @@
       size ? 'layui-btn-' + size : '',
       fluid ? 'layui-btn-fluid' : '',
       radius ? 'layui-btn-radius' : '',
+      border ? 'layui-border-' + border : '',
     ]"
   >
     <slot></slot>
@@ -21,5 +22,6 @@ const props =
     size?: string
     fluid?: boolean
     radius?: boolean
+    border?: string 
   }>()
 </script>
