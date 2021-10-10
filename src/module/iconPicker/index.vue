@@ -14,7 +14,7 @@
     </div>
     <template #content>
       <div class="layui-iconpicker-view layui-iconpicker-scroll">
-        <div class="layui-iconpicker-search">
+        <div class="layui-iconpicker-search" v-if="showSearch">
           <div class="layui-form layui-input-wrap layui-input-wrap-prefix">
             <div class="layui-input-prefix">
               <i class="layui-icon layui-icon-search"></i>
@@ -86,10 +86,11 @@ const props = withDefaults(
   defineProps<{
     modelValue?: string
     page?: boolean
+    showSearch?: boolean
   }>(),
   {
     modelValue: 'layui-icon-face-smile',
-    page: false,
+    page: false
   }
 )
 

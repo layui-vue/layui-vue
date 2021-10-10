@@ -64,7 +64,30 @@ export default {
 
 :::
 
+::: demo
+
+<template>
+  <lay-icon-picker v-model="icon" type="layui-icon-face-smile" page showSearch></lay-icon-picker>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const icon = ref("layui-icon-home")
+
+    return {
+    }
+  }
+}
+</script>
+
+:::
+
 |  |  |  |
 |--|--|--|
 | v-model | 默认值 | -- |
 | page | 开启分页 | -- |
+| showSearch | 启用搜索 | -- |
