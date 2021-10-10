@@ -63,3 +63,9 @@ export default {
 </script>
 
 :::
+
+
+|  |  |  |
+|--|--|--|
+| v-model | 评分值 | -- |
+| length | 评分长度 | -- |
