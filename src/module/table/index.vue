@@ -4,13 +4,13 @@
     <div
       class="layui-form layui-border-box layui-table-view layui-table-view-1"
     >
-      <div class="layui-table-tool">
+      <div class="layui-table-tool" v-if="defaultToolbar || slot.toolbar">
         <div class="layui-table-tool-temp">
           <div class="layui-btn-container">
             <slot name="toolbar"></slot>
           </div>
         </div>
-        <div class="layui-table-tool-self">
+        <div class="layui-table-tool-self" v-if="defaultToolbar">
           <div class="layui-inline" title="筛选列" lay-event="LAYTABLE_COLS">
             <i class="layui-icon layui-icon-cols"></i>
           </div>
@@ -133,6 +133,7 @@ const props =
     dataSource?: Object[]
     skin?: string
     page?: Object
+    defaultToolbar?: Boolean
   }>()
 
 const emit = defineEmits(['change'])

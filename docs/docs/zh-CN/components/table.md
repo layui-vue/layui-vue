@@ -126,7 +126,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-table :columns="columns" :dataSource="dataSource">
+  <lay-table :columns="columns" :dataSource="dataSource" default-toolbar="true">
     <template v-slot:toolbar>
       <lay-button>新增</lay-button>
       <lay-button>删除</lay-button>
