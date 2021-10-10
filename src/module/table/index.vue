@@ -5,6 +5,11 @@
       class="layui-form layui-border-box layui-table-view layui-table-view-1"
     >
       <div class="layui-table-tool">
+        <div class="layui-table-tool-temp">
+          <div class="layui-btn-container">
+            <slot name="toolbar"></slot>
+          </div>
+        </div>
         <div class="layui-table-tool-self">
           <div class="layui-inline" title="筛选列" lay-event="LAYTABLE_COLS">
             <i class="layui-icon layui-icon-cols"></i>
@@ -71,7 +76,6 @@
                   </td>
 
                   <template v-for="column in columns" :key="column">
-                  
                     <template v-if="column.customSlot">
                       <td>
                         <div
@@ -82,7 +86,7 @@
                         </div>
                       </td>
                     </template>
-                    
+
                     <template
                       v-else
                       v-for="(value, key, index) in data"
@@ -100,7 +104,6 @@
                         </div>
                       </td>
                     </template>
-
                   </template>
                 </tr>
               </template>
@@ -109,7 +112,14 @@
         </div>
       </div>
       <div v-if="page" class="layui-table-page">
-        <lay-page :total="page.total" :limit="page.limit" @jump="change" showPage showLimit showSkip></lay-page>
+        <lay-page
+          :total="page.total"
+          :limit="page.limit"
+          @jump="change"
+          showPage
+          showLimit
+          showSkip
+        ></lay-page>
       </div>
     </div>
   </div>
@@ -130,7 +140,7 @@ const emit = defineEmits(['change'])
 const slot = useSlots()
 const slots = slot.default && slot.default()
 
-const change = function(page: any){
-  emit('change',page)
+const change = function (page: any) {
+  emit('change', page)
 }
 </script>
