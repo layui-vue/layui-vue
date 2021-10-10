@@ -126,7 +126,8 @@ export default {
 ::: demo
 
 <template>
-  <lay-table :columns="columns" :dataSource="dataSource" default-toolbar="true">
+  {{selectedKeys}}
+  <lay-table :columns="columns" id="id" :dataSource="dataSource" default-toolbar="true" :selectedKeys="selectedKeys" checkbox="true">
     <template v-slot:toolbar>
       <lay-button>新增</lay-button>
       <lay-button>删除</lay-button>
@@ -145,6 +146,8 @@ import { ref } from 'vue'
 
 export default {
   setup() {
+
+    const selectedKeys = ref(['1'])
 
     const columns = [
       {
@@ -170,16 +173,26 @@ export default {
     ]
 
     const dataSource = [
-      {username:"root", password:"root", age:"18"},
-      {username:"woow", password:"woow", age:"20"}
+      {id:"1", username:"root", password:"root", age:"18"},
+      {id:"2", username:"woow", password:"woow", age:"20"}
     ]
 
     return {
       columns,
-      dataSource
+      dataSource,
+      selectedKeys,
     }
   }
 }
 </script>
 
 :::
+
+|  |  |  |
+|--|--|--|
+| columns | 列配置 | -- |
+| dataSource | 数据源 | -- |
+| checkbox | 开启复现框 | -- |
+| id | 主键 | -- |
+| selectKeys | 选中项 | -- |
+| default-toolbar | 开启工具栏 | -- |

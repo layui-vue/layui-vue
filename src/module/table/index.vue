@@ -27,19 +27,9 @@
           <table cellspacing="0" cellpadding="0" border="0" class="layui-table">
             <thead>
               <tr>
-                <th class="layui-table-col-special">
+                <th class="layui-table-col-special" v-if="checkbox">
                   <div class="layui-table-cell laytable-cell-checkbox">
-                    <input
-                      type="checkbox"
-                      name="layTableCheckbox"
-                      lay-skin="primary"
-                    />
-                    <div
-                      class="layui-unselect layui-form-checkbox"
-                      lay-skin="primary"
-                    >
-                      <i class="layui-icon layui-icon-ok"></i>
-                    </div>
+                    <lay-checkbox skin="primary" v-model="tableSelectedKeys" label="all"></lay-checkbox>
                   </div>
                 </th>
                 <th v-for="column in columns" :key="column">
@@ -59,19 +49,9 @@
             <tbody>
               <template v-for="data in dataSource" :key="data">
                 <tr>
-                  <td class="layui-table-col-special">
+                  <td class="layui-table-col-special" v-if="checkbox">
                     <div class="layui-table-cell laytable-cell-checkbox">
-                      <input
-                        type="checkbox"
-                        name="layTableCheckbox"
-                        lay-skin="primary"
-                      />
-                      <div
-                        class="layui-unselect layui-form-checkbox"
-                        lay-skin="primary"
-                      >
-                        <i class="layui-icon layui-icon-ok"></i>
-                      </div>
+                      <lay-checkbox skin="primary" v-model="tableSelectedKeys" :label="data[id]"></lay-checkbox>
                     </div>
                   </td>
 
@@ -125,16 +105,26 @@
   </div>
 </template>
 <script setup name="LayTable" lang="ts">
-import { defineProps, useSlots } from 'vue'
+import { defineProps, ref, useSlots, watch, withDefaults, defineEmits } from 'vue'
 
-const props =
+const props = withDefaults(
   defineProps<{
     columns?: Object[]
     dataSource?: Object[]
     skin?: string
     page?: Object
     defaultToolbar?: Boolean
-  }>()
+    checkbox?: Boolean
+    id?: string,
+    selectedKeys: Array<String>
+  }>(),
+  {
+    id: "id",
+    selectedKeys: function() { return [] }
+  }
+)
+
+const tableSelectedKeys = ref(props.selectedKeys)
 
 const emit = defineEmits(['change'])
 
