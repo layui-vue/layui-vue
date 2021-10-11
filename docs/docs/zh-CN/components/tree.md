@@ -13,7 +13,7 @@
   <br/>
   <lay-switch v-model="iconCtrl"></lay-switch>
   <br/>
-  只能通过节点左侧图标来展开收缩：
+  是否开启连接线：
   <br/>
   <lay-switch v-model="showLine"></lay-switch>
   <br/>
