@@ -1,7 +1,7 @@
 <template>
   <div class="layui-colla-item">
     <h2 class="layui-colla-title" @click="showHandle">
-      {{ title }}<i class="layui-icon layui-colla-icon"></i>
+      {{ title }}<i class="layui-icon layui-colla-icon">{{ isShow ? "":"" }}</i>
     </h2>
     <div class="layui-colla-content" :class="isShow ? 'layui-show':''">
       <p>
