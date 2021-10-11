@@ -3,12 +3,13 @@ import { VNode, VNodeChild } from 'vue'
 import TreeEntity from './TreeEntity.vue'
 import { useTreeData } from '/@src/module/tree/useTreeData'
 import { TreeNode } from '/@src/module/tree/tree.type'
+import { getEmitNode } from '/@src/module/tree/treeHelper'
 
 type EditAction = 'add' | 'update' | 'del'
 
 type EditType = boolean | EditAction[]
 
-export declare interface TreeData {
+interface TreeData {
   /**
    * 节点唯一索引值，用于对指定节点进行各类操作
    */
@@ -107,40 +108,42 @@ export declare interface TreeProps {
 }
 
 
-export interface EmitData {
+interface EmitData {
   /**
    * 当前点击的节点数据
    */
   data: TreeData
   /**
    * 节点的展开状态
+   * remove
    */
-  state: 'open' | 'close' | 'normal'
+  state?: 'open' | 'close' | 'normal'
   /**
    * 当前节点元素
+   * remove
    */
-  elem: Element | VNode | VNodeChild
+  elem?: Element | VNode | VNodeChild
 }
 
-export interface TreeEmits {
+interface TreeEmits {
   /**
    * 节点被点击后触发
    * @param e 事件
    * @param treeNode
    */
-  (e: 'on-click', treeNode: EmitData): void
+  (e: 'node-click', treeNode: EmitData): void
   /**
    * 点击复选框时触发
    * @param e 事件
    * @param treeNode
    */
-  (e: 'on-check', treeNode: EmitData): void
-  /**
-   * 操作节点的回调
-   * @param e 事件
-   * @param treeNode
-   */
-  (e: 'on-operate', treeNode: EmitData): void
+  (e: 'node-check', treeNode: EmitData): void
+  // /**
+  //  * 操作节点的回调
+  //  * @param e 事件
+  //  * @param treeNode
+  //  */
+  // (e: 'node-operate', treeNode: EmitData): void
   (e: 'update:spreadKeys', spreadKeys: string[]): void
 }
 
@@ -163,6 +166,8 @@ const {
 
 function handleNodeClick(node: TreeNode) {
   updateInnerTreeData(innerTreeData.value, node)
+  const emitNode = getEmitNode(props.data!, node)
+  emit('node-click', { data: emitNode! })
 }
 
 </script>
@@ -177,6 +182,7 @@ export default {
       v-for="(node) in innerTreeData"
       :key="node.id"
       :node="node"
+      :onlyIconControl="onlyIconControl"
       @node-click="handleNodeClick"
     ></TreeEntity>
   </div>

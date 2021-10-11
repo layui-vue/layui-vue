@@ -12,7 +12,7 @@ export const useTreeData: UseTreeData = (props, emit) => {
       }
       return getTreeSpreadKeys(props.data)
     },
-    set: (value) => {
+    set: (value: (string | number)[]) => {
       emit('update:spreadKeys', value)
     }
   })

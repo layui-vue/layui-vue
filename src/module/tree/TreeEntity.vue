@@ -7,8 +7,9 @@ export default {
 import LayIcon from '../icon'
 import { TreeNode } from '/@src/module/tree/tree.type'
 
-interface TreeEntityProps {
+interface TreeEntityProps{
   node: TreeNode
+  onlyIconControl: boolean
 }
 
 interface EmitEvent {
@@ -31,7 +32,7 @@ const renderLineShort = (node: TreeNode): boolean => {
     (node._parentNode._nextSibling === null ||
       //上一层父级有延伸线
       (node._parentNode._nextSibling && !node._parentNode._nextSibling.children))
-  )
+  ) as boolean
 }
 /**
  * 展开收起 icon样式
@@ -41,7 +42,19 @@ const nodeIconType = (node: TreeNode): string => {
   return !node.spread ? 'layui-icon-addition' : 'layui-icon-subtraction'
 }
 
+/**
+ * 发射至外层
+ * @param node
+ */
 function handleNodeClick (node: TreeNode) {
+  emit('node-click', node)
+}
+
+/**
+ * 递归事件
+ * @param node
+ */
+function innerClick (node: TreeNode) {
   emit('node-click', node)
 }
 
@@ -56,9 +69,9 @@ function handleNodeClick (node: TreeNode) {
       }"
     >
       <div class="layui-tree-entry">
-        <div class="layui-tree-main" @click="handleNodeClick(node)">
+        <div class="layui-tree-main" @click.prevent.stop="!onlyIconControl && handleNodeClick(node)">
           <span class="layui-tree-iconClick layui-tree-icon">
-            <LayIcon :type="nodeIconType(node)"></LayIcon>
+            <LayIcon :type="nodeIconType(node)" @click.prevent.stop="handleNodeClick(node)"></LayIcon>
           </span>
           <span class="layui-tree-txt">{{ node.title }}</span>
         </div>
@@ -72,7 +85,8 @@ function handleNodeClick (node: TreeNode) {
           v-for="(item, index) in node.children"
           :key="index"
           :node="item"
-          @node-click="handleNodeClick"
+          @node-click="innerClick"
+          :onlyIconControl="onlyIconControl"
         ></LayTreeEntity>
       </div>
     </div>
@@ -85,9 +99,9 @@ function handleNodeClick (node: TreeNode) {
       }"
     >
       <div class="layui-tree-entry">
-        <div class="layui-tree-main">
+        <div class="layui-tree-main"  @click.prevent.stop="!onlyIconControl && handleNodeClick(node)">
           <span class="layui-tree-iconClick">
-            <LayIcon type="layui-icon-file"></LayIcon>
+            <LayIcon type="layui-icon-file" @click.prevent.stop="handleNodeClick(node)"></LayIcon>
           </span>
           <span class="layui-tree-txt">{{ node.title }}</span>
         </div>

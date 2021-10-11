@@ -1,4 +1,5 @@
 import { TreeData, TreeNode } from '/@src/module/tree/tree.type'
+import { Nullable } from '/@src/module/type'
 
 /**
  * 添加父级parentId
@@ -82,4 +83,27 @@ export const getTreeSpreadKeys = (data: TreeData[]): (string | number)[] => {
     }
   }
   return keys
+}
+
+/**
+ * 获取点击的原数据的节点
+ * @param data
+ * @param node
+ */
+export const getEmitNode = (data: TreeData[], node: TreeNode): Nullable<TreeData> => {
+  let item: Nullable<TreeData> = null
+  const len = data.length
+  for (let i = 0; i < len; i++) {
+    if (data[i].id === node.id) {
+      item = data[i]
+      break
+    }
+    if (data[i].children && data[i].children.length > 0) {
+      item = getEmitNode(data[i].children, node)
+      if (item) {
+        break
+      }
+    }
+  }
+  return item
 }

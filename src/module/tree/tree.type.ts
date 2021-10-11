@@ -116,32 +116,37 @@ export interface EmitData {
   /**
    * 节点的展开状态
    */
-  state: 'open' | 'close' | 'normal'
+  state?: 'open' | 'close' | 'normal'
   /**
    * 当前节点元素
    */
-  elem: Element | VNode | VNodeChild
+  elem?: Element | VNode | VNodeChild
 }
 
-export interface TreeEmits {
+export declare interface TreeEmits {
   /**
    * 节点被点击后触发
    * @param e 事件
    * @param treeNode
    */
-  (e: 'on-click', treeNode: EmitData): void
+  (e: 'node-click', treeNode: EmitData): void
   /**
    * 点击复选框时触发
    * @param e 事件
    * @param treeNode
    */
-  (e: 'on-check', treeNode: EmitData): void
+  (e: 'node-check', treeNode: EmitData): void
   /**
    * 操作节点的回调
    * @param e 事件
    * @param treeNode
    */
-  (e: 'on-operate', treeNode: EmitData): void
+  // (e: 'on-operate', treeNode: EmitData): void
+  /**
+   * update:spreadKeys
+   * @param e
+   * @param spreadKeys
+   */
   (e: 'update:spreadKeys', spreadKeys: (string | number)[]): void
 }
 
