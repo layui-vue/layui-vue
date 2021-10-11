@@ -26,7 +26,7 @@
 </template>
 
 <script setup name="LayMenuItem" lang="ts">
-import { defineProps, inject, provide, Ref, ref, useSlots } from 'vue'
+import { defineProps, inject, Ref, ref, useSlots } from 'vue'
 const slots = useSlots()
 
 const props =
