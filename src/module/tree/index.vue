@@ -1,8 +1,14 @@
 <script setup lang="ts">
-import { computed, unref, VNode, VNodeChild } from 'vue'
+import { VNode, VNodeChild } from 'vue'
 import TreeEntity from './TreeEntity.vue'
+import { useTreeData } from '/@src/module/tree/useTreeData'
+import { TreeNode } from '/@src/module/tree/tree.type'
 
-interface TreeData {
+type EditAction = 'add' | 'update' | 'del'
+
+type EditType = boolean | EditAction[]
+
+export declare interface TreeData {
   /**
    * 节点唯一索引值，用于对指定节点进行各类操作
    */
@@ -40,27 +46,23 @@ interface TreeData {
   disabled: boolean
 }
 
-type EditAction = 'add' | 'update' | 'del'
-
-type EditType = boolean | EditAction[]
-
-interface TreeProps {
+export declare interface TreeProps {
   /**
    * 指定唯一的id
    */
-  id?: string
+  key?: string
   /**
    * 选中的节点
    */
-  checkedKeys?: any[]
+  checkedKeys?: (string | number)[]
   /**
    * 展开的节点
    */
-  spreadKeys?: any[]
+  spreadKeys?: (string | number)[]
   /**
    * 数据源
    */
-  data?: TreeData
+  data?: TreeData[]
   /**
    * 是否显示复选框 默认 false
    */
@@ -100,11 +102,12 @@ interface TreeProps {
     /**
      * 数据为空时的提示文本
      */
-    none?: () => string | string | VNode | Element
+    none?: (() => string) | string | VNode | Element
   }
 }
 
-interface TreeNode {
+
+export interface EmitData {
   /**
    * 当前点击的节点数据
    */
@@ -119,27 +122,26 @@ interface TreeNode {
   elem: Element | VNode | VNodeChild
 }
 
-interface TreeEmits {
+export interface TreeEmits {
   /**
    * 节点被点击后触发
    * @param e 事件
    * @param treeNode
    */
-  (e: 'on-click', treeNode: TreeNode): void
+  (e: 'on-click', treeNode: EmitData): void
   /**
    * 点击复选框时触发
    * @param e 事件
    * @param treeNode
    */
-  (e: 'on-check', treeNode: TreeNode): void
+  (e: 'on-check', treeNode: EmitData): void
   /**
    * 操作节点的回调
    * @param e 事件
    * @param treeNode
    */
-  (e: 'on-operate', treeNode: TreeNode): void
-  (e: 'update:checkedKeys', keys: any[]): void
-  (e: 'update:spreadKeys', keys: any[]): void
+  (e: 'on-operate', treeNode: EmitData): void
+  (e: 'update:spreadKeys', spreadKeys: string[]): void
 }
 
 const props = withDefaults(defineProps<TreeProps>(), {
@@ -148,47 +150,20 @@ const props = withDefaults(defineProps<TreeProps>(), {
   onlyIconControl: false,
   isJump: false,
   showLine: true,
-  edit: true,
+  edit: () => true,
 })
 
-// tree wrapper style
-const treeWrapperClass = computed(() => {
-  const { showCheckbox, showLine } = unref(props)
-  return {
-    'layui-tree': true,
-    'layui-form': showCheckbox,
-    'layui-tree-line': showLine,
-  }
-})
+const emit = defineEmits<TreeEmits>()
 
-/**
- * 按 layui的思路，这里改变数据
- * @param data
- * @param isRootNode
- */
-function transformTreeData (data: TreeData[], parentExtend = false, isRootNode = true) {
-  data.forEach((item, index) => {
-    item._parentExtend = !parentExtend ? (index + 1) !== data.length: parentExtend
-    if(isRootNode) {
-      item._isRoot = true
-    }
-    if (item.children) {
-      item._hasChild = true
-      transformTreeData(item.children, item._parentExtend, false)
-    } else {
-      item._hasChild = false
-    }
-  })
+const {
+  innerTreeData,
+  updateInnerTreeData,
+  treeWrapperClass
+} = useTreeData(props, emit)
+
+function handleNodeClick(node: TreeNode) {
+  updateInnerTreeData(innerTreeData.value, node)
 }
-
-const renderData = computed(() => {
-  const { data } = unref(props)
-  transformTreeData(data)
-  console.log(data)
-  return data
-})
-
-console.log(renderData)
 
 </script>
 <script lang="ts">
@@ -199,148 +174,11 @@ export default {
 <template>
   <div :class="treeWrapperClass">
     <TreeEntity
-      v-for="(node) in renderData"
+      v-for="(node) in innerTreeData"
       :key="node.id"
-      :id="node.id"
       :node="node"
+      @node-click="handleNodeClick"
     ></TreeEntity>
-  </div>
-  <hr />
-  <div class="layui-tree layui-tree-line" lay-filter="LAY-tree-2">
-    <div
-      data-id="1"
-      class="layui-tree-set layui-tree-setHide layui-tree-spread"
-    >
-      <div class="layui-tree-entry">
-        <div class="layui-tree-main">
-          <span class="layui-tree-iconClick layui-tree-icon"
-            ><i class="layui-icon layui-icon-subtraction"></i></span
-          ><span class="layui-tree-txt">江西</span>
-        </div>
-      </div>
-      <div
-        class="layui-tree-pack layui-tree-lineExtend layui-tree-showLine"
-        style="display: block"
-      >
-        <div data-id="1000" class="layui-tree-set layui-tree-spread">
-          <div class="layui-tree-entry">
-            <div class="layui-tree-main">
-              <span class="layui-tree-iconClick layui-tree-icon"
-                ><i class="layui-icon layui-icon-subtraction"></i></span
-              ><span class="layui-tree-txt">南昌</span>
-            </div>
-          </div>
-          <div
-            class="layui-tree-pack layui-tree-lineExtend layui-tree-showLine"
-            style="display: block"
-          >
-            <div data-id="10001" class="layui-tree-set">
-              <div class="layui-tree-entry">
-                <div class="layui-tree-main">
-                  <span class="layui-tree-iconClick"
-                    ><i class="layui-icon layui-icon-file"></i></span
-                  ><span class="layui-tree-txt">青山湖区</span>
-                </div>
-              </div>
-            </div>
-            <div data-id="10002" class="layui-tree-set layui-tree-setLineShort">
-              <div class="layui-tree-entry">
-                <div class="layui-tree-main">
-                  <span class="layui-tree-iconClick"
-                    ><i class="layui-icon layui-icon-file"></i></span
-                  ><span class="layui-tree-txt">高新区</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div data-id="1001" class="layui-tree-set">
-          <div class="layui-tree-entry">
-            <div class="layui-tree-main">
-              <span class="layui-tree-iconClick"
-                ><i class="layui-icon layui-icon-file"></i></span
-              ><span class="layui-tree-txt">九江</span>
-            </div>
-          </div>
-        </div>
-        <div data-id="1002" class="layui-tree-set">
-          <div class="layui-tree-entry">
-            <div class="layui-tree-main">
-              <span class="layui-tree-iconClick"
-                ><i class="layui-icon layui-icon-file"></i></span
-              ><span class="layui-tree-txt">赣州</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div
-      data-id="2"
-      class="layui-tree-set layui-tree-setHide layui-tree-spread"
-    >
-      <div class="layui-tree-entry">
-        <div class="layui-tree-main">
-          <span class="layui-tree-iconClick layui-tree-icon"
-            ><i class="layui-icon layui-icon-subtraction"></i></span
-          ><span class="layui-tree-txt">广西</span>
-        </div>
-      </div>
-      <div
-        class="layui-tree-pack layui-tree-lineExtend layui-tree-showLine"
-        style="display: block"
-      >
-        <div data-id="2000" class="layui-tree-set">
-          <div class="layui-tree-entry">
-            <div class="layui-tree-main">
-              <span class="layui-tree-iconClick"
-                ><i class="layui-icon layui-icon-file"></i></span
-              ><span class="layui-tree-txt">南宁</span>
-            </div>
-          </div>
-        </div>
-        <div data-id="2001" class="layui-tree-set">
-          <div class="layui-tree-entry">
-            <div class="layui-tree-main">
-              <span class="layui-tree-iconClick"
-                ><i class="layui-icon layui-icon-file"></i></span
-              ><span class="layui-tree-txt">桂林</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div
-      data-id="3"
-      class="layui-tree-set layui-tree-setHide layui-tree-setLineShort layui-tree-spread"
-    >
-      <div class="layui-tree-entry">
-        <div class="layui-tree-main">
-          <span class="layui-tree-iconClick layui-tree-icon"
-            ><i class="layui-icon layui-icon-subtraction"></i></span
-          ><span class="layui-tree-txt">陕西</span>
-        </div>
-      </div>
-      <div class="layui-tree-pack layui-tree-lineExtend" style="display: block">
-        <div data-id="3000" class="layui-tree-set">
-          <div class="layui-tree-entry">
-            <div class="layui-tree-main">
-              <span class="layui-tree-iconClick"
-                ><i class="layui-icon layui-icon-file"></i></span
-              ><span class="layui-tree-txt">西安</span>
-            </div>
-          </div>
-        </div>
-        <div data-id="3001" class="layui-tree-set layui-tree-setLineShort">
-          <div class="layui-tree-entry">
-            <div class="layui-tree-main">
-              <span class="layui-tree-iconClick"
-                ><i class="layui-icon layui-icon-file"></i></span
-              ><span class="layui-tree-txt">延安</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 <style scoped></style>

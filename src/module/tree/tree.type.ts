@@ -1,36 +1,45 @@
 /**
- * defineProps 暂不支付外部导入的复杂类型，这里备用后续迁移。
+ * defineProps 暂不支持外部导入的复杂类型，这里备用后续迁移。
+ * @see https://github.com/vuejs/vue-next/issues/4294
  * 暂时 在index.vue内部单独实现一份
  */
-import { VNode, VNodeChild } from 'vue'
+import { ComputedRef, CSSProperties, Ref, UnwrapRef, VNode, VNodeChild, WritableComputedRef } from 'vue'
+import { Nullable, Recordable } from '/@src/module/type'
 
-export interface TreeData {
+type EditAction = 'add' | 'update' | 'del'
+
+type EditType = boolean | EditAction[]
+
+export declare interface TreeData {
   /**
    * 节点唯一索引值，用于对指定节点进行各类操作
    */
-  id: () => (string | number) | string | number
+  id: string | number
   /**
    * 节点标题
    */
-  title: (() => string) | string
+  title: string | (() => string)
   /**
    * 节点字段名
    */
-  field: (() => string) | string
+  field: string | (() => string)
   /**
    * 子节点。支持设定选项同父节点
    */
   children: TreeData[]
   /**
    * 点击节点弹出新窗口对应的 url。需开启 isJump 参数
+   * 废弃，通过 on-click事件用户控制
    */
   href: string | URL
   /**
    * 节点是否初始展开，默认 false
+   * 废弃：设置 v-model:spreadKeys
    */
   spread: boolean
   /**
    * 节点是否初始为选中状态（如果开启复选框的话），默认 false
+   * 废弃：设置 v-model:checkedKeys
    */
   checked: boolean
   /**
@@ -39,15 +48,23 @@ export interface TreeData {
   disabled: boolean
 }
 
-type EditAction = 'add' | 'update' | 'del'
-
-type EditType = boolean | EditAction[]
-
-export interface TreeProps {
+export declare interface TreeProps {
+  /**
+   * 指定唯一的id
+   */
+  key?: string
+  /**
+   * 选中的节点
+   */
+  checkedKeys?: (string | number)[]
+  /**
+   * 展开的节点
+   */
+  spreadKeys?: (string | number)[]
   /**
    * 数据源
    */
-  data?: TreeData
+  data?: TreeData[]
   /**
    * 是否显示复选框 默认 false
    */
@@ -69,6 +86,7 @@ export interface TreeProps {
   onlyIconControl?: boolean
   /**
    * 是否允许点击节点时弹出新窗口跳转。默认 false，若开启，需在节点数据中设定 link 参数（值为 url 格式
+   * 废弃：能过事件用户自行控制
    */
   isJump?: boolean
   /**
@@ -86,11 +104,11 @@ export interface TreeProps {
     /**
      * 数据为空时的提示文本
      */
-    none?: () => string | string | VNode | Element
+    none?: (() => string) | string | VNode | Element
   }
 }
 
-export interface TreeNode {
+export interface EmitData {
   /**
    * 当前点击的节点数据
    */
@@ -111,21 +129,21 @@ export interface TreeEmits {
    * @param e 事件
    * @param treeNode
    */
-  (e: 'on-click', treeNode: TreeNode): void
+  (e: 'on-click', treeNode: EmitData): void
   /**
    * 点击复选框时触发
    * @param e 事件
    * @param treeNode
    */
-  (e: 'on-check', treeNode: TreeNode): void
+  (e: 'on-check', treeNode: EmitData): void
   /**
    * 操作节点的回调
    * @param e 事件
    * @param treeNode
    */
-  (e: 'on-operate', treeNode: TreeNode): void
+  (e: 'on-operate', treeNode: EmitData): void
+  (e: 'update:spreadKeys', spreadKeys: (string | number)[]): void
 }
-
 
 export interface TreeExpose {
   /**
@@ -138,3 +156,22 @@ export interface TreeExpose {
 
 // 设置节点勾选 setChecked 变为v-model控制
 // 实例重载 reload 变为v-model控制
+
+export interface TreeNode extends TreeData {
+  parentId: string | number
+  children: TreeNode[]
+  _parentNode?: Nullable<TreeNode>
+  _nextSibling?: Nullable<TreeNode>
+  _expand?: boolean
+}
+
+/** hook type **/
+export type UseTreeData = (
+  props: TreeProps,
+  emit: TreeEmits
+) => {
+  innerTreeData: Ref<UnwrapRef<TreeData[]>>
+  spreadKeys: WritableComputedRef<(string | number)[]>
+  treeWrapperClass: ComputedRef<Recordable>
+  updateInnerTreeData: (treeData: TreeData[], node: TreeData) => void
+}

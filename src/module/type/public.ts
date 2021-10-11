@@ -1,4 +1,4 @@
-import type { App, DefineComponent } from 'vue'
+import type { App, DefineComponent, Ref } from 'vue'
 export type StringObject = Record<string, unknown>
 
 export type UnknownObject = Record<string | number, unknown>
@@ -15,3 +15,9 @@ export interface InstallOptions extends StringObject {
   /** Menu Attributes */
   menu?: null
 }
+
+export type Nullable<T> = T | null
+
+export type MaybeRef<T> = Ref<T> | T
+
+export type Recordable = Record<string, any>
