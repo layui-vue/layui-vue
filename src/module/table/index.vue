@@ -29,7 +29,11 @@
               <tr>
                 <th class="layui-table-col-special" v-if="checkbox">
                   <div class="layui-table-cell laytable-cell-checkbox">
-                    <lay-checkbox skin="primary" v-model="tableSelectedKeys" label="all"></lay-checkbox>
+                    <lay-checkbox
+                      skin="primary"
+                      v-model="allSelectedKeys"
+                      label="all"
+                    ></lay-checkbox>
                   </div>
                 </th>
                 <th v-for="column in columns" :key="column">
@@ -51,7 +55,11 @@
                 <tr>
                   <td class="layui-table-col-special" v-if="checkbox">
                     <div class="layui-table-cell laytable-cell-checkbox">
-                      <lay-checkbox skin="primary" v-model="tableSelectedKeys" :label="data[id]"></lay-checkbox>
+                      <lay-checkbox
+                        skin="primary"
+                        v-model="tableSelectedKeys"
+                        :label="data[id]"
+                      ></lay-checkbox>
                     </div>
                   </td>
 
@@ -105,28 +113,56 @@
   </div>
 </template>
 <script setup name="LayTable" lang="ts">
-import { defineProps, ref, useSlots, watch, withDefaults, defineEmits } from 'vue'
+import {
+  defineProps,
+  ref,
+  useSlots,
+  watch,
+  withDefaults,
+  defineEmits,
+  computed,
+} from 'vue'
 
 const props = withDefaults(
   defineProps<{
-    id?: string,
+    id?: string
     skin?: string
     page?: Object
     checkbox?: Boolean
     columns?: Object[]
-    dataSource?: Object[]
+    dataSource: Object[]
     defaultToolbar?: Boolean
     selectedKeys: Array<String>
   }>(),
   {
-    id: "id",
-    selectedKeys: function() { return [] }
+    id: 'id',
+    dataSource: function () {
+      return []
+    },
+    selectedKeys: function () {
+      return []
+    },
   }
 )
 
+const allSelectedKeys = ref([])
 const tableSelectedKeys = ref(props.selectedKeys)
 
-const emit = defineEmits(['change'])
+watch(
+  allSelectedKeys,
+  function (val: String[]) {
+    const ids = props.dataSource.map((item: any) => {
+      return item[props.id]
+    })
+    tableSelectedKeys.value.splice(0, ids.length)
+    if (val.includes('all')) {
+      ids.forEach(id => { tableSelectedKeys.value.push(id) })
+    } 
+  },
+  { deep: true }
+)
+
+const emit = defineEmits(['change', 'changeSelectedKeys'])
 
 const slot = useSlots()
 const slots = slot.default && slot.default()
