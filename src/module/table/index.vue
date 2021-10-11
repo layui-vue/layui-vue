@@ -109,13 +109,13 @@ import { defineProps, ref, useSlots, watch, withDefaults, defineEmits } from 'vu
 
 const props = withDefaults(
   defineProps<{
-    columns?: Object[]
-    dataSource?: Object[]
+    id?: string,
     skin?: string
     page?: Object
-    defaultToolbar?: Boolean
     checkbox?: Boolean
-    id?: string,
+    columns?: Object[]
+    dataSource?: Object[]
+    defaultToolbar?: Boolean
     selectedKeys: Array<String>
   }>(),
   {
