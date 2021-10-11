@@ -105,7 +105,7 @@
   </div>
 </template>
 <script setup name="LayTable" lang="ts">
-import { defineProps, ref, useSlots, watch, withDefaults, defineEmits } from 'vue'
+import { defineProps, ref, useSlots, watch, withDefaults, defineEmits, computed } from 'vue'
 
 const props = withDefaults(
   defineProps<{
@@ -124,9 +124,13 @@ const props = withDefaults(
   }
 )
 
-const tableSelectedKeys = ref(props.selectedKeys)
+const tableSelectedKeys = ref([...props.selectedKeys])
 
-const emit = defineEmits(['change'])
+watch(tableSelectedKeys, function(val){
+  emit('changeSelectedKeys',val)
+},{deep: true})
+
+const emit = defineEmits(['change','changeSelectedKeys'])
 
 const slot = useSlots()
 const slots = slot.default && slot.default()
