@@ -1,6 +1,6 @@
 <template>
   <span @click="handleClick">
-    <input type="checkbox" :name="name" title="写作" :value="label" />
+    <input type="checkbox" :name="name" :value="label" />
     <div
       class="layui-unselect"
       :class="[
@@ -22,13 +22,14 @@
 <script setup name="LayCheckbox" lang="ts">
 import { defineProps, ref, watch } from 'vue'
 
-const props = defineProps<{
-  modelValue: string[]
-  label: string
-  disabled?: boolean
-  name?: string
-  skin?: string
-}>()
+const props =
+  defineProps<{
+    modelValue: string[]
+    label: string
+    disabled?: boolean
+    name?: string
+    skin?: string
+  }>()
 
 const hasValue = ref(false)
 
