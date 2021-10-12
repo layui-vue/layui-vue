@@ -2,7 +2,7 @@
   <div class="layui-form-item">
     <label class="layui-form-label">{{ label }}</label>
     <div :class="[mode ? 'layui-input-' + mode : '']" class="layui-input-block">
-      <slot></slot>
+      <slot />
     </div>
   </div>
 </template>

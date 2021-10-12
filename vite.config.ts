@@ -4,7 +4,8 @@ import babel from '@rollup/plugin-babel'
 import { name } from './package.json'
 import plugins from './docs/src/plugin/common-plugins'
 
-const camelize = (name: string) => name.replace(/(^|-)(\w)/g, (a, b, c) => c.toUpperCase())
+const camelize = (name: string) =>
+  name.replace(/(^|-)(\w)/g, (a, b, c) => c.toUpperCase())
 
 export default defineConfig({
   root: path.resolve(__dirname, 'docs'),
@@ -19,7 +20,7 @@ export default defineConfig({
     lib: {
       entry: path.resolve(__dirname, 'src/index.ts'),
       name: camelize(name),
-    },    
+    },
     rollupOptions: {
       output: {
         exports: 'named',
@@ -27,7 +28,7 @@ export default defineConfig({
           const name = id.replace(/^@/, '').split('/')[0]
           return camelize(name)
         },
-        assetFileNames: `layui.css`
+        assetFileNames: 'layui.css',
       },
       plugins: [
         babel({
@@ -36,7 +37,7 @@ export default defineConfig({
           presets: ['@babel/preset-env', '@babel/preset-typescript'],
         }),
       ],
-      external : [ 'vue', 'vue-router' ] 
+      external: ['vue', 'vue-router'],
     },
   },
   plugins,

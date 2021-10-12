@@ -1,6 +1,6 @@
 <template>
-  <span class="layui-breadcrumb" style="visibility: visible;">
-      <slot></slot>
+  <span class="layui-breadcrumb" style="visibility: visible">
+    <slot />
   </span>
 </template>
 
@@ -15,10 +15,9 @@ const props = withDefaults(
     separator?: string
   }>(),
   {
-    separator: "/"
+    separator: '/',
   }
 )
 
-provide("separator",props.separator);
-
+provide('separator', props.separator)
 </script>

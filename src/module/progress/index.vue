@@ -19,13 +19,12 @@
 <script setup name="LayProgress" lang="ts">
 import { defineProps } from 'vue'
 
-const props =
-  defineProps<{
-    percent: number | string
-    theme?: string
-    color?: string
-    size?: string
-    showText?: boolean
-    text?: string
-  }>()
+const props = defineProps<{
+  percent: number | string
+  theme?: string
+  color?: string
+  size?: string
+  showText?: boolean
+  text?: string
+}>()
 </script>

@@ -5,25 +5,25 @@
     :class="[openState ? 'layui-dropdown-up' : '']"
   >
     <div @click="open">
-      <slot></slot>
+      <slot />
     </div>
     <dl class="layui-anim layui-anim-upbit">
       <ul class="layui-menu layui-dropdown-menu">
-        <slot name="content"></slot>
+        <slot name="content" />
       </ul>
     </dl>
   </div>
   <div
     v-if="trigger === 'hover'"
     class="layui-dropdown"
+    :class="[openState ? 'layui-dropdown-up' : '']"
     @mouseenter="open"
     @mouseleave="open"
-    :class="[openState ? 'layui-dropdown-up' : '']"
   >
-    <slot></slot>
+    <slot />
     <dl class="layui-anim layui-anim-upbit">
       <ul class="layui-menu layui-dropdown-menu">
-        <slot name="content"></slot>
+        <slot name="content" />
       </ul>
     </dl>
   </div>

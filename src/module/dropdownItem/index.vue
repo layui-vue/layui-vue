@@ -1,8 +1,9 @@
 <template>
-    <li><div class="layui-menu-body-title">
-        <slot></slot>
-    </div></li>
+  <li>
+    <div class="layui-menu-body-title">
+      <slot />
+    </div>
+  </li>
 </template>
 
-<script setup name="LayDropdownItem" lang="ts">
-</script>
+<script setup name="LayDropdownItem" lang="ts"></script>

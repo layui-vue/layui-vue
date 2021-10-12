@@ -3,14 +3,8 @@
     <div class="source">
       <slot />
     </div>
-    <div
-      ref="meta"
-      class="meta"
-    >
-      <div
-        v-if="$slots.description"
-        class="description"
-      >
+    <div ref="meta" class="meta">
+      <div v-if="$slots.description" class="description">
         <slot name="description" />
       </div>
       <div class="language-html">
@@ -22,7 +16,11 @@
       class="control"
       @click="toggleShow"
     >
-      <i :class="[show ? 'layui-icon layui-icon-up' : 'layui-icon layui-icon-down']" />
+      <i
+        :class="[
+          show ? 'layui-icon layui-icon-up' : 'layui-icon layui-icon-down',
+        ]"
+      />
     </div>
   </div>
 </template>
@@ -34,10 +32,10 @@ const meta = ref<HTMLElement>({} as HTMLElement)
 const isFixContorl = ref(false)
 const codeAreaHeight = ref(0)
 
-const show = ref(false);
+const show = ref(false)
 
-const toggleShow = function() {
-  show.value = !show.value;
+const toggleShow = function () {
+  show.value = !show.value
 }
 
 onMounted(() => {

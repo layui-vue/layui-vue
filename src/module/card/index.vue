@@ -1,14 +1,12 @@
 <template>
   <div class="layui-card">
     <div class="layui-card-header">
-        <slot name="header"></slot>
+      <slot name="header" />
     </div>
     <div class="layui-card-body">
-      <slot name="body"></slot>
+      <slot name="body" />
     </div>
   </div>
 </template>
 
-<script setup name="LayCard" lang="ts">
-
-</script>
+<script setup name="LayCard" lang="ts"></script>

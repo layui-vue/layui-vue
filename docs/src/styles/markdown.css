@@ -62,7 +62,6 @@ h1 {
   }
 }
 
-
 h3 {
   margin-top: 1.5rem;
 }
@@ -159,7 +158,8 @@ table td {
   font-size: 0;
 }
 
-.site-doc-icon li .doc-icon-name, .site-doc-icon li .doc-icon-code {
+.site-doc-icon li .doc-icon-name,
+.site-doc-icon li .doc-icon-code {
   color: #c2c2c2;
 }
 
@@ -184,8 +184,8 @@ table td {
   font-size: 14px;
   text-align: center;
   color: #666;
-  transition: all .3s;
-  -webkit-transition: all .3s;
+  transition: all 0.3s;
+  -webkit-transition: all 0.3s;
 }
 
 .site-doc-icon li .layui-icon {
@@ -199,7 +199,7 @@ table td {
 
 .site-doc-necolor li div {
   border-radius: 0;
-  color: #000!important;
+  color: #000 !important;
 }
 
 .site-doc-color li div {
@@ -268,8 +268,8 @@ table td {
   font-size: 14px;
   text-align: center;
   color: #666;
-  transition: all .3s;
-  -webkit-transition: all .3s;
+  transition: all 0.3s;
+  -webkit-transition: all 0.3s;
 }
 
 .anim .site-doc-icon li .layui-anim {

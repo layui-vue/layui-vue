@@ -4,9 +4,9 @@
       <div class="layui-transfer-box" style="width: 200px; height: 360px">
         <div class="layui-transfer-header">
           <lay-checkbox
+            v-model="allLeftSelectedKeys"
             skin="primary"
             label="all"
-            v-model="allLeftSelectedKeys"
           >
             <span>列表一</span>
           </lay-checkbox>
@@ -17,8 +17,9 @@
               v-model="leftSelectedKeys"
               skin="primary"
               :label="dataSource[id]"
-              ><span>{{ dataSource.title }}</span></lay-checkbox
             >
+              <span>{{ dataSource.title }}</span>
+            </lay-checkbox>
           </li>
         </ul>
       </div>
@@ -28,21 +29,21 @@
           class="layui-btn layui-btn-sm layui-btn-primary layui-btn-disabled"
           data-index="0"
         >
-          <i class="layui-icon layui-icon-next"></i></button
+          <i class="layui-icon layui-icon-next" /></button
         ><button
           type="button"
           class="layui-btn layui-btn-sm layui-btn-primary layui-btn-disabled"
           data-index="1"
         >
-          <i class="layui-icon layui-icon-prev"></i>
+          <i class="layui-icon layui-icon-prev" />
         </button>
       </div>
       <div class="layui-transfer-box" style="width: 200px; height: 360px">
         <div class="layui-transfer-header">
           <lay-checkbox
+            v-model="allRightSelectedKeys"
             skin="primary"
             label="all"
-            v-model="allRightSelectedKeys"
           >
             <span>列表二</span>
           </lay-checkbox>
@@ -53,8 +54,9 @@
               v-model="rightSelectedKeys"
               skin="primary"
               :label="dataSource[id]"
-              ><span>{{ dataSource.title }}</span></lay-checkbox
             >
+              <span>{{ dataSource.title }}</span>
+            </lay-checkbox>
           </li>
         </ul>
       </div>
@@ -64,12 +66,13 @@
 <script setup name="LayTransfer"></script>
 <script setup lang="ts">
 import { defineProps, ref } from 'vue'
+import { Recordable } from '/@src/module/type'
 
 const props = withDefaults(
   defineProps<{
     id?: string
-    dataSource: Object[]
-    selectedKeys: Array<String>
+    dataSource: Recordable[]
+    selectedKeys: Array<string>
   }>(),
   {
     id: 'id',

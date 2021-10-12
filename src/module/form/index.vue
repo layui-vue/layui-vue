@@ -1,8 +1,7 @@
 <template>
   <form class="layui-form">
-    <slot></slot>
+    <slot />
   </form>
 </template>
 
-<script setup name="LayForm" lang="ts">
-</script>
+<script setup name="LayForm" lang="ts"></script>

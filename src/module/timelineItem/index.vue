@@ -8,7 +8,7 @@
       <h3 v-else class="layui-timeline-title">
         {{ title }}
       </h3>
-      <slot></slot>
+      <slot />
     </div>
   </li>
 </template>
@@ -16,9 +16,8 @@
 <script setup name="LayTimelineItem" lang="ts">
 import { defineProps } from 'vue'
 
-const props =
-  defineProps<{
-    title: string
-    simple?: boolean
-  }>()
+const props = defineProps<{
+  title: string
+  simple?: boolean
+}>()
 </script>

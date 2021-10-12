@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref } from 'vue';
 
 export default {
   setup() {
@@ -48,12 +48,12 @@ export default {
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref } from 'vue';
 
 export default {
   setup() {
 
-    const all2 = ref(4)
+    const all2 = ref(4);
 
     return {
       all2
@@ -64,8 +64,7 @@ export default {
 
 :::
 
-
-|  |  |  |
-|--|--|--|
-| v-model | 评分值 | -- |
-| length | 评分长度 | -- |
+|         |          |     |
+| ------- | -------- | --- |
+| v-model | 评分值   | --  |
+| length  | 评分长度 | --  |

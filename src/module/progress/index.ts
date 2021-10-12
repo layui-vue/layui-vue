@@ -3,7 +3,7 @@ import Component from './index.vue'
 import type { IDefineComponent } from '../type/index'
 
 Component.install = (app: App) => {
-    app.component(Component.name || 'LayProgress', Component)
+  app.component(Component.name || 'LayProgress', Component)
 }
 
 export default Component as IDefineComponent

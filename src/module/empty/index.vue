@@ -3,7 +3,9 @@
     <div class="layui-empty-image">
       <img class="layui-empty-image-default" src="./index.svg" />
     </div>
-    <div class="layui-empty-description">{{ description }}</div>
+    <div class="layui-empty-description">
+      {{ description }}
+    </div>
   </div>
 </template>
 

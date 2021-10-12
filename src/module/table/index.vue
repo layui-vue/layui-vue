@@ -1,24 +1,24 @@
 <template>
   <div>
-    <table class="layui-hide" id="test" lay-filter="test"></table>
+    <table id="test" class="layui-hide" lay-filter="test" />
     <div
       class="layui-form layui-border-box layui-table-view layui-table-view-1"
     >
-      <div class="layui-table-tool" v-if="defaultToolbar || slot.toolbar">
+      <div v-if="defaultToolbar || slot.toolbar" class="layui-table-tool">
         <div class="layui-table-tool-temp">
           <div class="layui-btn-container">
-            <slot name="toolbar"></slot>
+            <slot name="toolbar" />
           </div>
         </div>
-        <div class="layui-table-tool-self" v-if="defaultToolbar">
+        <div v-if="defaultToolbar" class="layui-table-tool-self">
           <div class="layui-inline" title="筛选列" lay-event="LAYTABLE_COLS">
-            <i class="layui-icon layui-icon-cols"></i>
+            <i class="layui-icon layui-icon-cols" />
           </div>
           <div class="layui-inline" title="导出" lay-event="LAYTABLE_EXPORT">
-            <i class="layui-icon layui-icon-export"></i>
+            <i class="layui-icon layui-icon-export" />
           </div>
           <div class="layui-inline" title="打印" lay-event="LAYTABLE_PRINT">
-            <i class="layui-icon layui-icon-print"></i>
+            <i class="layui-icon layui-icon-print" />
           </div>
         </div>
       </div>
@@ -27,13 +27,13 @@
           <table cellspacing="0" cellpadding="0" border="0" class="layui-table">
             <thead>
               <tr>
-                <th class="layui-table-col-special" v-if="checkbox">
+                <th v-if="checkbox" class="layui-table-col-special">
                   <div class="layui-table-cell laytable-cell-checkbox">
                     <lay-checkbox
-                      skin="primary"
                       v-model="allSelectedKeys"
+                      skin="primary"
                       label="all"
-                    ></lay-checkbox>
+                    />
                   </div>
                 </th>
                 <th v-for="column in columns" :key="column">
@@ -53,13 +53,13 @@
             <tbody>
               <template v-for="data in dataSource" :key="data">
                 <tr>
-                  <td class="layui-table-col-special" v-if="checkbox">
+                  <td v-if="checkbox" class="layui-table-col-special">
                     <div class="layui-table-cell laytable-cell-checkbox">
                       <lay-checkbox
-                        skin="primary"
                         v-model="tableSelectedKeys"
+                        skin="primary"
                         :label="data[id]"
-                      ></lay-checkbox>
+                      />
                     </div>
                   </td>
 
@@ -70,14 +70,14 @@
                           :style="{ width: column.width }"
                           style="padding: 0px 16px"
                         >
-                          <slot :name="column.customSlot" :data="data"></slot>
+                          <slot :name="column.customSlot" :data="data" />
                         </div>
                       </td>
                     </template>
 
                     <template
-                      v-else
                       v-for="(value, key, index) in data"
+                      v-else
                       :key="index"
                     >
                       <td v-if="column.key == key">
@@ -86,7 +86,7 @@
                           style="padding: 0px 16px"
                         >
                           <span v-if="column.slot">
-                            <slot :name="column.slot" :data="data"></slot>
+                            <slot :name="column.slot" :data="data" />
                           </span>
                           <span v-else> {{ value }} </span>
                         </div>
@@ -103,11 +103,11 @@
         <lay-page
           :total="page.total"
           :limit="page.limit"
+          show-page
+          show-limit
+          show-skip
           @jump="change"
-          showPage
-          showLimit
-          showSkip
-        ></lay-page>
+        />
       </div>
     </div>
   </div>
@@ -122,17 +122,18 @@ import {
   defineEmits,
   computed,
 } from 'vue'
+import { Recordable } from '/@src/module/type'
 
 const props = withDefaults(
   defineProps<{
     id?: string
     skin?: string
-    page?: Object
-    checkbox?: Boolean
-    columns?: Object[]
-    dataSource: Object[]
-    defaultToolbar?: Boolean
-    selectedKeys: Array<String>
+    page?: Recordable
+    checkbox?: boolean
+    columns?: Recordable[]
+    dataSource: Recordable[]
+    defaultToolbar?: boolean
+    selectedKeys: Array<string>
   }>(),
   {
     id: 'id',
@@ -150,14 +151,16 @@ const tableSelectedKeys = ref(props.selectedKeys)
 
 watch(
   allSelectedKeys,
-  function (val: String[]) {
+  function (val: string[]) {
     const ids = props.dataSource.map((item: any) => {
       return item[props.id]
     })
     tableSelectedKeys.value.splice(0, ids.length)
     if (val.includes('all')) {
-      ids.forEach(id => { tableSelectedKeys.value.push(id) })
-    } 
+      ids.forEach((id) => {
+        tableSelectedKeys.value.push(id)
+      })
+    }
   },
   { deep: true }
 )

@@ -11,6 +11,6 @@ export function createRouter(): Router {
   const baseUrl = import.meta.env.BASE_URL
   return _createRouter({
     history: createWebHashHistory(baseUrl),
-    routes:  routes 
+    routes: routes,
   })
 }

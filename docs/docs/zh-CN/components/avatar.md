@@ -68,10 +68,11 @@ export default {
   }
 }
 </script>
+
 :::
 
-|  |  |  |
-|--|--|--|
-| src | 图源 | -- |
-| size | 尺寸 | `xs` `sm` `lg`|
-| radius | 圆形 | `true` `false`|
+|        |      |                |
+| ------ | ---- | -------------- |
+| src    | 图源 | --             |
+| size   | 尺寸 | `xs` `sm` `lg` |
+| radius | 圆形 | `true` `false` |

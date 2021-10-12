@@ -1,7 +1,7 @@
 <template>
   <div class="width:100%;height:300px">
     <lay-layout>
-      <lay-header style="background:#393D49">
+      <lay-header style="background: #393d49">
         <lay-logo>
           <img src="../assets/logo.png" />
         </lay-logo>
@@ -10,7 +10,7 @@
           style="margin-top: 10px; margin-bottom: 0px"
         >
           <lay-form>
-            <lay-search :datas="menus"></lay-search>
+            <lay-search :datas="menus" />
           </lay-form>
         </ul>
         <ul
@@ -38,8 +38,8 @@
           style="padding: 6px"
         >
           <li
-            :key="menu"
             v-for="menu in menus"
+            :key="menu"
             :class="[
               currentPath === menu.path ? 'layui-menu-item-checked2' : '',
             ]"
@@ -58,7 +58,7 @@
       </lay-side>
       <lay-body>
         <div style="padding: 20px">
-          <router-view></router-view>
+          <router-view />
         </div>
       </lay-body>
     </lay-layout>
@@ -254,7 +254,8 @@ export default {
         title: '图标选择',
         subTitle: 'iconPicker',
         path: '/zh-CN/components/iconPicker',
-      },{
+      },
+      {
         id: 29,
         title: '分页',
         subTitle: 'page',
@@ -304,19 +305,19 @@ export default {
   padding-left: 10px;
 }
 
-@media screen and (max-width:768px) {
-	.layui-side {
-    width: 0px!important;
+@media screen and (max-width: 768px) {
+  .layui-side {
+    width: 0px !important;
   }
   .layui-body {
-    left: 0px!important;
-    width: 100%!important;
+    left: 0px !important;
+    width: 100% !important;
   }
   .layui-logo {
-    display: none!important;
+    display: none !important;
   }
   .layui-layout-left {
-    left: 0px!important;
+    left: 0px !important;
   }
 }
 </style>

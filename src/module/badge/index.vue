@@ -1,18 +1,17 @@
 <template>
   <span :class="classList" :style="styleList">
-    <slot v-if="type != 'dot'"></slot>
+    <slot v-if="type != 'dot'" />
   </span>
 </template>
 
 <script setup name="LayBadge" lang="ts">
 import { defineProps } from 'vue'
 
-const props =
-  defineProps<{
-    type?: string
-    theme?: string
-    color?: string
-  }>()
+const props = defineProps<{
+  type?: string
+  theme?: string
+  color?: string
+}>()
 
 const classList = [
   {

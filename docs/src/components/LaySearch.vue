@@ -1,33 +1,33 @@
 <template>
-  <select :name="name" lay-verify="required"></select>
+  <select :name="name" lay-verify="required" />
   <div
     class="layui-unselect layui-form-select"
-    @click="open"
     :class="[openState ? 'layui-form-selected' : '']"
+    @click="open"
   >
     <div class="layui-select-title">
       <input
         type="text"
         placeholder="Search"
         class="layui-input layui-unselect"
-        @input="change"
         :value="name"
         style="
           background: rgba(255, 255, 255, 0.05);
           border: none;
           color: whitesmoke;
         "
-      /><i class="layui-edge"></i>
+        @input="change"
+      /><i class="layui-edge" />
     </div>
     <dl class="layui-anim layui-anim-upbit" style="">
       <dd v-if="menus.length <= 0" class="layui-select-tips">无内容</dd>
       <dd
-        v-else
         v-for="data in menus"
-        :value = "name"
-        @click="jump(data)"
+        v-else
         :key="data"
+        :value="name"
         class="layui-select-tips"
+        @click="jump(data)"
       >
         {{ data.title }}
       </dd>
@@ -38,11 +38,11 @@
 <script setup name="LaySelect" lang="ts">
 import { defineProps, Ref, ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
+import { Recordable } from '/@src/module/type'
 
-const props =
-  defineProps<{
-    datas?: object[]
-  }>()
+const props = defineProps<{
+  datas?: Recordable[]
+}>()
 
 const route = useRoute()
 const router = useRouter()
@@ -60,16 +60,16 @@ const jump = function (data: any) {
   router.push(data.path)
 }
 
-const change = function(e: any) {
+const change = function (e: any) {
   name.value = e.target.value
-  if(e.target.value === ""){
+  if (e.target.value === '') {
     menus.value = props.datas
-  }else{
-    menus.value = searchList(e.target.value, props.datas);
+  } else {
+    menus.value = searchList(e.target.value, props.datas)
   }
 }
 
-const searchList = function (str: String, container: any) {
+const searchList = function (str: string, container: any) {
   var newList = []
   var startChar = str.charAt(0)
   var strLen = str.length

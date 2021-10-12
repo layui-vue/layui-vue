@@ -193,11 +193,11 @@ export default {
 
 :::
 
-|  |  |  |
-|--|--|--|
-| columns | 列配置 | -- |
-| dataSource | 数据源 | -- |
-| checkbox | 开启复现框 | -- |
-| id | 主键 | -- |
-| selectKeys | 选中项 | -- |
-| default-toolbar | 开启工具栏 | -- |
+|                 |            |     |
+| --------------- | ---------- | --- |
+| columns         | 列配置     | --  |
+| dataSource      | 数据源     | --  |
+| checkbox        | 开启复现框 | --  |
+| id              | 主键       | --  |
+| selectKeys      | 选中项     | --  |
+| default-toolbar | 开启工具栏 | --  |

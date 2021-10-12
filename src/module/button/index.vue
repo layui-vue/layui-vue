@@ -9,19 +9,18 @@
       border ? 'layui-border-' + border : '',
     ]"
   >
-    <slot></slot>
+    <slot />
   </button>
 </template>
 
 <script setup name="LayButton" lang="ts">
 import { defineProps } from 'vue'
 
-const props =
-  defineProps<{
-    type?: string
-    size?: string
-    fluid?: boolean
-    radius?: boolean
-    border?: string 
-  }>()
+const props = defineProps<{
+  type?: string
+  size?: string
+  fluid?: boolean
+  radius?: boolean
+  border?: string
+}>()
 </script>

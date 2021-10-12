@@ -1,6 +1,6 @@
 <template>
   <div class="layui-box layui-laypage layui-laypage-default">
-    <span class="layui-laypage-count" v-if="showCount">共 {{ total }} 条</span
+    <span v-if="showCount" class="layui-laypage-count">共 {{ total }} 条</span
     ><a
       href="javascript:;"
       class="layui-laypage-prev"
@@ -10,14 +10,13 @@
     >
     <template v-if="showPage">
       <template v-for="index of totalPage" :key="index">
-        <span class="layui-laypage-curr" v-if="index === currentPage"
+        <span v-if="index === currentPage" class="layui-laypage-curr"
           ><em
             class="layui-laypage-em"
             :class="[theme ? 'layui-bg-' + theme : '']"
-          ></em
-          ><em>{{ index }}</em></span
+          /><em>{{ index }}</em></span
         >
-        <a href="javascript:;" @click="jump(index)" v-else>
+        <a v-else href="javascript:;" @click="jump(index)">
           {{ index }}
         </a>
       </template>
@@ -29,7 +28,7 @@
       :class="[currentPage === totalPage ? 'layui-disabled' : '']"
       @click="next()"
       >下一页</a
-    ><span class="layui-laypage-limits" v-if="showLimit"
+    ><span v-if="showLimit" class="layui-laypage-limits"
       ><select v-model="inlimit">
         <option value="10">10 条/页</option>
         <option value="20">20 条/页</option>
@@ -37,12 +36,12 @@
         <option value="40">40 条/页</option>
         <option value="50">50 条/页</option>
       </select></span
-    ><a href="javascript:;" v-if="showRefresh" class="layui-laypage-refresh"
-      ><i class="layui-icon layui-icon-refresh"></i></a
-    ><span class="layui-laypage-skip" v-if="showSkip"
+    ><a v-if="showRefresh" href="javascript:;" class="layui-laypage-refresh"
+      ><i class="layui-icon layui-icon-refresh" /></a
+    ><span v-if="showSkip" class="layui-laypage-skip"
       >到第<input
-        type="number"
         v-model="currentPageShow"
+        type="number"
         class="layui-input layui-input-number"
       />页<button type="button" class="layui-laypage-btn" @click="jumpPage()">
         确定
@@ -67,7 +66,7 @@ const props = withDefaults(
     showRefresh?: boolean
   }>(),
   {
-    limit: 10
+    limit: 10,
   }
 )
 
@@ -107,7 +106,6 @@ watch(inlimit, function () {
 
 watch(currentPage, function () {
   currentPageShow.value = currentPage.value
-  emit('jump', {current: currentPage.value})
+  emit('jump', { current: currentPage.value })
 })
-
 </script>

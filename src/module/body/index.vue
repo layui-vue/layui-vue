@@ -1,9 +1,7 @@
 <template>
   <div class="layui-body">
-      <slot></slot>
+    <slot />
   </div>
 </template>
 
-<script setup name="LayBody" lang="ts">
-
-</script>
+<script setup name="LayBody" lang="ts"></script>

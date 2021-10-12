@@ -1,9 +1,7 @@
 <template>
   <div class="layui-footer">
-      <slot></slot>
+    <slot />
   </div>
 </template>
 
-<script setup name="LayFooter" lang="ts">
-
-</script>
+<script setup name="LayFooter" lang="ts"></script>

@@ -1,7 +1,7 @@
 <template>
-   <ul class="layui-nav" :class="[tree ? 'layui-nav-tree':'']">
-       <slot></slot>
-   </ul>
+  <ul class="layui-nav" :class="[tree ? 'layui-nav-tree' : '']">
+    <slot />
+  </ul>
 </template>
 
 <script setup name="LayMenu" lang="ts">
@@ -13,7 +13,7 @@ const props = withDefaults(
     tree?: boolean
   }>(),
   {
-    selectedKey: "",
+    selectedKey: '',
     tree: false,
   }
 )
@@ -21,6 +21,6 @@ const props = withDefaults(
 const isTree = ref(props.tree)
 const selectKey = ref(props.selectedKey)
 
-provide("isTree",isTree);
-provide("selectKey",selectKey)
+provide('isTree', isTree)
+provide('selectKey', selectKey)
 </script>

@@ -5,8 +5,7 @@
 <script setup name="LayLine" lang="ts">
 import { defineProps } from 'vue'
 
-const props =
-  defineProps<{
-    theme?: string
-  }>()
+const props = defineProps<{
+  theme?: string
+}>()
 </script>

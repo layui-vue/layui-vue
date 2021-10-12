@@ -1,6 +1,9 @@
 import { TreeData, UseTreeData } from '/@src/module/tree/tree.type'
 import { computed, ref, unref, watch } from 'vue'
-import { getTreeSpreadKeys, initialTreeData } from '/@src/module/tree/treeHelper'
+import {
+  getTreeSpreadKeys,
+  initialTreeData,
+} from '/@src/module/tree/treeHelper'
 import { Recordable } from '/@src/module/type'
 
 export const useTreeData: UseTreeData = (props, emit) => {
@@ -14,21 +17,25 @@ export const useTreeData: UseTreeData = (props, emit) => {
     },
     set: (value: (string | number)[]) => {
       emit('update:spreadKeys', value)
-    }
+    },
   })
 
   /**
    * 渲染的data
    */
   const innerTreeData = ref<TreeData[]>([])
-  watch(() => props.data, (treeData) => {
-    if (treeData) {
-      innerTreeData.value = initialTreeData(treeData)
-    }
-  }, { immediate: true, deep: true })
+  watch(
+    () => props.data,
+    (treeData) => {
+      if (treeData) {
+        innerTreeData.value = initialTreeData(treeData)
+      }
+    },
+    { immediate: true, deep: true }
+  )
 
   function updateInnerTreeData(treeData: TreeData[], node: TreeData): void {
-    for(let i = 0; i <treeData.length; i++) {
+    for (let i = 0; i < treeData.length; i++) {
       if (treeData[i].id === node.id) {
         treeData[i].spread = !treeData[i].spread
         break
@@ -55,6 +62,6 @@ export const useTreeData: UseTreeData = (props, emit) => {
     spreadKeys,
     innerTreeData,
     updateInnerTreeData,
-    treeWrapperClass
+    treeWrapperClass,
   }
 }

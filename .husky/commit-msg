@@ -2,4 +2,4 @@
 . "$(dirname "$0")/_/husky.sh"
 
 pnpx pretty-quick --staged
-pnpx lint-staged
+#pnpx lint-staged

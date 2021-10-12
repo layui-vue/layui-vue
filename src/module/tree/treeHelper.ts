@@ -6,7 +6,10 @@ import { Nullable } from '/@src/module/type'
  * @param data
  * @param parentId
  */
-export const generatorTreeData = (data: TreeData[] | TreeNode[], parentId: TreeNode['parentId'] = ''): TreeNode[] => {
+export const generatorTreeData = (
+  data: TreeData[] | TreeNode[],
+  parentId: TreeNode['parentId'] = ''
+): TreeNode[] => {
   const innerTreeData: TreeNode[] = []
   const len = data.length
   for (let i = 0; i < len; i++) {
@@ -14,7 +17,7 @@ export const generatorTreeData = (data: TreeData[] | TreeNode[], parentId: TreeN
     const inner = {
       ...item,
       parentId: parentId,
-      spread: item.spread || false
+      spread: item.spread || false,
     }
     if (item.children && item.children.length > 0) {
       inner.children = generatorTreeData(item.children, item.id)
@@ -31,7 +34,7 @@ export const generatorTreeData = (data: TreeData[] | TreeNode[], parentId: TreeN
 export const setNextSiblings = (data: TreeNode[]): void => {
   const len = data.length
   for (let i = 0; i < len; i++) {
-    data[i]._nextSibling = (i + 1) < len ? data[i+1] : null
+    data[i]._nextSibling = i + 1 < len ? data[i + 1] : null
     if (data[i].children && data[i].children.length > 0) {
       setNextSiblings(data[i].children)
     }
@@ -43,7 +46,10 @@ export const setNextSiblings = (data: TreeNode[]): void => {
  * @param data
  * @param parentNode
  */
-export const setParentNode = (data: TreeNode[], parentNode?: TreeNode): void => {
+export const setParentNode = (
+  data: TreeNode[],
+  parentNode?: TreeNode
+): void => {
   const len = data.length
   for (let i = 0; i < len; i++) {
     data[i]._parentNode = parentNode ? parentNode : null
@@ -71,7 +77,7 @@ export const initialTreeData = (data: TreeData[]): TreeNode[] => {
  * @param data
  */
 export const getTreeSpreadKeys = (data: TreeData[]): (string | number)[] => {
-  let keys: (string | number) [] = []
+  let keys: (string | number)[] = []
   const len = data.length
   for (let i = 0; i < len; i++) {
     const id: number | string = data[i].id
@@ -90,7 +96,10 @@ export const getTreeSpreadKeys = (data: TreeData[]): (string | number)[] => {
  * @param data
  * @param node
  */
-export const getEmitNode = (data: TreeData[], node: TreeNode): Nullable<TreeData> => {
+export const getEmitNode = (
+  data: TreeData[],
+  node: TreeNode
+): Nullable<TreeData> => {
   let item: Nullable<TreeData> = null
   const len = data.length
   for (let i = 0; i < len; i++) {

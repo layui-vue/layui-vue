@@ -1,9 +1,7 @@
 <template>
   <div class="layui-header">
-      <slot></slot>
+    <slot />
   </div>
 </template>
 
-<script setup name="LayHeader" lang="ts">
-
-</script>
+<script setup name="LayHeader" lang="ts"></script>

@@ -3,7 +3,14 @@
  * @see https://github.com/vuejs/vue-next/issues/4294
  * 暂时 在index.vue内部单独实现一份
  */
-import { ComputedRef, CSSProperties, Ref, UnwrapRef, VNode, VNodeChild, WritableComputedRef } from 'vue'
+import {
+  ComputedRef,
+  Ref,
+  UnwrapRef,
+  VNode,
+  VNodeChild,
+  WritableComputedRef,
+} from 'vue'
 import { Nullable, Recordable } from '/@src/module/type'
 
 type EditAction = 'add' | 'update' | 'del'
@@ -31,21 +38,21 @@ export declare interface TreeData {
    * 点击节点弹出新窗口对应的 url。需开启 isJump 参数
    * 废弃，通过 on-click事件用户控制
    */
-  href: string | URL
+  href?: string | URL
   /**
    * 节点是否初始展开，默认 false
    * 废弃：设置 v-model:spreadKeys
    */
-  spread: boolean
+  spread?: boolean
   /**
    * 节点是否初始为选中状态（如果开启复选框的话），默认 false
    * 废弃：设置 v-model:checkedKeys
    */
-  checked: boolean
+  checked?: boolean
   /**
    * 节点是否为禁用状态。默认 false
    */
-  disabled: boolean
+  disabled?: boolean
 }
 
 export declare interface TreeProps {

@@ -33,7 +33,7 @@ export default {
 
 :::
 
-|  |  |  |
-|--|--|--|
-| type | 类型 | `dot` `rim` |
-| theme| 主题 | `orange` `green` `cyan` `blue` `black` `gray`|
+|       |      |                                               |
+| ----- | ---- | --------------------------------------------- |
+| type  | 类型 | `dot` `rim`                                   |
+| theme | 主题 | `orange` `green` `cyan` `blue` `black` `gray` |

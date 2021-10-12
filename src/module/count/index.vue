@@ -1,9 +1,5 @@
 <template>
-  <span class="layui-count">
-
-  </span>
+  <span class="layui-count" />
 </template>
 
-<script setup name="LayCount" lang="ts">
-
-</script>
+<script setup name="LayCount" lang="ts"></script>

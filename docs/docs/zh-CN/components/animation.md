@@ -65,19 +65,20 @@ export default {
   }
 }
 </script>
+
 :::
 
-|  |  |  |
-|--|--|--|
-| layui-anim-down | 顶部往下滑入 | `layui-anim layui-anim-down` |
-| layui-anim-downbit | 微微往下滑入 | `layui-anim layui-anim-downbit` |
-| layui-anim-up | 底部往上滑入 | `layui-anim layui-anim-up` |
-| layui-anim-upbit | 微微往上滑入 |  `layui-anim ayui-anim-upbit` |
-| layui-anim-scale | 平滑放大 | `layui-anim layui-anim-scale` |
-| layui-anim-scaleSpring | 弹簧式放大 | `layui-anim layui-anim-scaleSpring` |
-| layui-anim-scalesmall | 平滑放小 |`layui-anim layui-anim-scalesmall`|
-| layui-anim-scalesmall-spring | 弹簧式放小 | `layui-anim layui-anim-scalesmall-spring`|
-| layui-anim-fadein | 渐现 | `layui-anim layui-anim-fadein`|
-| layui-anim-fadeout | 渐隐 | `layui-anim layui-anim-fadeout`|
-| layui-anim-rotate | 360度旋转 | `layui-anim layui-anim-rotate`|
-| layui-anim-rotate layui-anim-loop | 循环动画 | `layui-anim layui-anim-rotate layui-anim-loop`|
+|                                   |              |                                                |
+| --------------------------------- | ------------ | ---------------------------------------------- |
+| layui-anim-down                   | 顶部往下滑入 | `layui-anim layui-anim-down`                   |
+| layui-anim-downbit                | 微微往下滑入 | `layui-anim layui-anim-downbit`                |
+| layui-anim-up                     | 底部往上滑入 | `layui-anim layui-anim-up`                     |
+| layui-anim-upbit                  | 微微往上滑入 | `layui-anim ayui-anim-upbit`                   |
+| layui-anim-scale                  | 平滑放大     | `layui-anim layui-anim-scale`                  |
+| layui-anim-scaleSpring            | 弹簧式放大   | `layui-anim layui-anim-scaleSpring`            |
+| layui-anim-scalesmall             | 平滑放小     | `layui-anim layui-anim-scalesmall`             |
+| layui-anim-scalesmall-spring      | 弹簧式放小   | `layui-anim layui-anim-scalesmall-spring`      |
+| layui-anim-fadein                 | 渐现         | `layui-anim layui-anim-fadein`                 |
+| layui-anim-fadeout                | 渐隐         | `layui-anim layui-anim-fadeout`                |
+| layui-anim-rotate                 | 360 度旋转   | `layui-anim layui-anim-rotate`                 |
+| layui-anim-rotate layui-anim-loop | 循环动画     | `layui-anim layui-anim-rotate layui-anim-loop` |

@@ -31,6 +31,6 @@ export default {
 
 :::
 
-|  |  |  |
-|--|--|--|
-| theme| 主题 | `orange` `green` `cyan` `blue` `black` `gray`|
+|       |      |                                               |
+| ----- | ---- | --------------------------------------------- |
+| theme | 主题 | `orange` `green` `cyan` `blue` `black` `gray` |

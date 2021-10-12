@@ -12,9 +12,9 @@
       ]"
       :lay-skin="skin"
     >
-      <span><slot></slot></span>
-      <i v-if="skin == 'primary'" class="layui-icon layui-icon-ok"></i>
-      <i v-if="!skin" class="layui-icon layui-icon-ok"></i>
+      <span><slot /></span>
+      <i v-if="skin == 'primary'" class="layui-icon layui-icon-ok" />
+      <i v-if="!skin" class="layui-icon layui-icon-ok" />
     </div>
   </span>
 </template>
@@ -22,14 +22,13 @@
 <script setup name="LayCheckbox" lang="ts">
 import { defineProps, ref, watch } from 'vue'
 
-const props =
-  defineProps<{
-    modelValue: string[]
-    label: string
-    disabled?: boolean
-    name?: string
-    skin?: string
-  }>()
+const props = defineProps<{
+  modelValue: string[]
+  label: string
+  disabled?: boolean
+  name?: string
+  skin?: string
+}>()
 
 const hasValue = ref(false)
 

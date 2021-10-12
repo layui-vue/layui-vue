@@ -30,39 +30,43 @@ interface TreeData {
    * 点击节点弹出新窗口对应的 url。需开启 isJump 参数
    * 废弃，通过 on-click事件用户控制
    */
-  href: string | URL
+  href?: string | URL
   /**
    * 节点是否初始展开，默认 false
    * 废弃：设置 v-model:spreadKeys
    */
-  spread: boolean
+  spread?: boolean
   /**
    * 节点是否初始为选中状态（如果开启复选框的话），默认 false
    * 废弃：设置 v-model:checkedKeys
    */
-  checked: boolean
+  checked?: boolean
   /**
    * 节点是否为禁用状态。默认 false
    */
-  disabled: boolean
+  disabled?: boolean
 }
 
-export declare interface TreeProps {
+interface TreeProps {
   /**
    * 指定唯一的id
    */
+  // eslint-disable-next-line vue/require-default-prop
   key?: string
   /**
    * 选中的节点
    */
+  // eslint-disable-next-line vue/require-default-prop
   checkedKeys?: (string | number)[]
   /**
    * 展开的节点
    */
+  // eslint-disable-next-line vue/require-default-prop
   spreadKeys?: (string | number)[]
   /**
    * 数据源
    */
+  // eslint-disable-next-line vue/require-default-prop
   data?: TreeData[]
   /**
    * 是否显示复选框 默认 false
@@ -95,6 +99,7 @@ export declare interface TreeProps {
   /**
    * 自定义各类默认文本，目前支持以下设定：
    */
+  // eslint-disable-next-line vue/require-default-prop
   text?: {
     /**
      * 节点默认名称
@@ -106,7 +111,6 @@ export declare interface TreeProps {
     none?: (() => string) | string | VNode | Element
   }
 }
-
 
 interface EmitData {
   /**
@@ -158,18 +162,16 @@ const props = withDefaults(defineProps<TreeProps>(), {
 
 const emit = defineEmits<TreeEmits>()
 
-const {
-  innerTreeData,
-  updateInnerTreeData,
-  treeWrapperClass
-} = useTreeData(props, emit)
+const { innerTreeData, updateInnerTreeData, treeWrapperClass } = useTreeData(
+  props,
+  emit
+)
 
 function handleNodeClick(node: TreeNode) {
   updateInnerTreeData(innerTreeData.value, node)
   const emitNode = getEmitNode(props.data!, node)
   emit('node-click', { data: emitNode! })
 }
-
 </script>
 <script lang="ts">
 export default {
@@ -179,12 +181,12 @@ export default {
 <template>
   <div :class="treeWrapperClass">
     <TreeEntity
-      v-for="(node) in innerTreeData"
-      :key="node.id"
+      v-for="(node, index) in innerTreeData"
+      :key="node.id || index"
       :node="node"
-      :onlyIconControl="onlyIconControl"
+      :only-icon-control="onlyIconControl"
       @node-click="handleNodeClick"
-    ></TreeEntity>
+    />
   </div>
 </template>
 <style scoped></style>

@@ -6,30 +6,30 @@
       "
     >
       <div class="layui-inline layui-iconpicker-main">
-        <i class="layui-inline layui-icon" :class="[selectedIcon]"></i>
+        <i class="layui-inline layui-icon" :class="[selectedIcon]" />
       </div>
       <span class="layui-inline layui-iconpicker-suffix"
-        ><i class="layui-icon layui-icon-down layui-anim"></i
-      ></span>
+        ><i class="layui-icon layui-icon-down layui-anim"
+      /></span>
     </div>
     <template #content>
       <div class="layui-iconpicker-view layui-iconpicker-scroll">
-        <div class="layui-iconpicker-search" v-if="showSearch">
+        <div v-if="showSearch" class="layui-iconpicker-search">
           <div class="layui-form layui-input-wrap layui-input-wrap-prefix">
             <div class="layui-input-prefix">
-              <i class="layui-icon layui-icon-search"></i>
+              <i class="layui-icon layui-icon-search" />
             </div>
             <input
               type="text"
               value=""
-              @input="search"
               placeholder="search"
               autocomplete="off"
               class="layui-input"
               lay-affix="clear"
+              @input="search"
             />
             <div class="layui-input-suffix layui-input-affix-event layui-hide">
-              <i class="layui-icon layui-icon-clear"></i>
+              <i class="layui-icon layui-icon-clear" />
             </div>
           </div>
         </div>
@@ -38,29 +38,32 @@
             <li
               v-for="icon in icones"
               :key="icon"
-              @click="selectIcon(icon.class)"
               :class="[selectedIcon === icon.class ? 'layui-this' : '']"
+              @click="selectIcon(icon.class)"
             >
-              <i class="layui-icon" :class="[icon.class]"></i>
-              <p class="layui-elip">{{ icon.name }}</p>
+              <i class="layui-icon" :class="[icon.class]" />
+              <p class="layui-elip">
+                {{ icon.name }}
+              </p>
             </li>
           </ul>
         </div>
-        <div class="layui-iconpicker-page" v-if="page">
+        <div v-if="page" class="layui-iconpicker-page">
           <div
-            class="layui-box layui-laypage layui-laypage-default"
             id="layui-laypage-1"
+            class="layui-box layui-laypage layui-laypage-default"
           >
             <span class="layui-laypage-count">共 {{ total }} 个</span
             ><a
               href="javascript:;"
-              @click="prev()"
               class="layui-laypage-prev"
               :class="[currentPage === 1 ? 'layui-disabled' : '']"
-              ><i class="layui-icon layui-icon-left"></i></a
+              @click="prev()"
+              ><i class="layui-icon layui-icon-left" /></a
             ><span class="layui-laypage-curr"
-              ><em class="layui-laypage-em"></em
-              ><em>{{ currentPage }} / {{ totalPage }}</em></span
+              ><em class="layui-laypage-em" /><em
+                >{{ currentPage }} / {{ totalPage }}</em
+              ></span
             ><span class="layui-laypage-spr">…</span
             ><a href="javascript:;" class="layui-laypage-last" title="尾页"
               >14</a
@@ -69,8 +72,8 @@
               :class="[currentPage === totalPage ? 'layui-disabled' : '']"
               class="layui-laypage-next"
               @click="next()"
-              ><i class="layui-icon layui-icon-right"></i
-            ></a>
+              ><i class="layui-icon layui-icon-right"
+            /></a>
           </div>
         </div>
       </div>
@@ -90,15 +93,15 @@ const props = withDefaults(
   }>(),
   {
     modelValue: 'layui-icon-face-smile',
-    page: false
+    page: false,
   }
 )
 
 const emit = defineEmits(['update:modelValue'])
 
-const selectedIcon: Ref<String> = ref(props.modelValue as String)
+const selectedIcon: Ref<string> = ref(props.modelValue as string)
 
-const selectIcon = function (icon: String) {
+const selectIcon = function (icon: string) {
   emit('update:modelValue', icon)
   selectedIcon.value = icon
 }
@@ -116,7 +119,7 @@ if (props.page) {
 }
 
 const next = function () {
-  if (currentPage.value === totalPage) {
+  if (currentPage.value === totalPage.value) {
     return
   }
   currentPage.value = currentPage.value + 1
@@ -159,7 +162,7 @@ const search = function (e: any) {
   }
 }
 
-const searchList = function (str: String, container: any) {
+const searchList = function (str: string, container: any) {
   var newList = []
   var startChar = str.charAt(0)
   var strLen = str.length

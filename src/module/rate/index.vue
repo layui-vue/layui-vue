@@ -1,19 +1,19 @@
 <template>
   <ul class="layui-rate">
     <li
-      class="layui-inline"
-      @mouseenter="mouseenter(index)"
       v-for="(rate, index) in rates"
       :key="rate"
+      class="layui-inline"
+      @mouseenter="mouseenter(index)"
     >
-      <i class="layui-icon" :class="[rate]"></i>
+      <i class="layui-icon" :class="[rate]" />
     </li>
   </ul>
 </template>
 <script setup lang="ts">
 import { defineProps, Ref, ref, withDefaults } from 'vue'
 
-const rates: Ref<Array<String>> = ref([])
+const rates: Ref<Array<string>> = ref([])
 
 const props = withDefaults(
   defineProps<{
@@ -46,7 +46,6 @@ const mouseenter = function (index: number) {
 
   // select update 时, 通知 change 事件
 
-  emit('update:modelValue', index+1)
-
+  emit('update:modelValue', index + 1)
 }
 </script>

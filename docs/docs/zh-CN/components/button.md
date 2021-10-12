@@ -48,7 +48,6 @@ export default {
 
 :::
 
-
 ::: demo 传入 columns 数据，自动生成表格
 
 <template>
@@ -73,7 +72,6 @@ export default {
 </script>
 
 :::
-
 
 ::: demo 传入 columns 数据，自动生成表格
 
@@ -177,7 +175,6 @@ export default {
 
 :::
 
-
 ::: demo 传入 columns 数据，自动生成表格
 
 <template>
@@ -202,10 +199,10 @@ export default {
 
 :::
 
-|  |  |  |
-|--|--|--|
-| type | 主题 | `primary` `normal` `warm` `danger` `disabled`|
-| size | 尺寸 | `lg` `sm` `xs` |
-| fluid | 最大化 | `true` `false` |
-| radius | 圆角 | `true` `false` |
-| border | 边框 | `green` `blue`  `orange` `red` `black` |
+|        |        |                                               |
+| ------ | ------ | --------------------------------------------- |
+| type   | 主题   | `primary` `normal` `warm` `danger` `disabled` |
+| size   | 尺寸   | `lg` `sm` `xs`                                |
+| fluid  | 最大化 | `true` `false`                                |
+| radius | 圆角   | `true` `false`                                |
+| border | 边框   | `green` `blue` `orange` `red` `black`         |

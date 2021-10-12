@@ -1,14 +1,20 @@
 <template>
-    <img :src="src" class="layui-avatar" :class="[radius ? 'layui-avatar-radius':'', size ? 'layui-avatar-' + size: '']"/>
+  <img
+    :src="src"
+    class="layui-avatar"
+    :class="[
+      radius ? 'layui-avatar-radius' : '',
+      size ? 'layui-avatar-' + size : '',
+    ]"
+  />
 </template>
 
 <script setup name="LayAvatar" lang="ts">
 import { defineProps } from 'vue'
 
-const props =
-  defineProps<{
-    src?: string
-    radius?: boolean
-    size?: string
-  }>()
+const props = defineProps<{
+  src?: string
+  radius?: boolean
+  size?: string
+}>()
 </script>

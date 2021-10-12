@@ -8,22 +8,22 @@ layui 之所以赢得如此多人的青睐，更多是在于它「前后界面�
 
 ```html
 <lay-layout>
-   <lay-header>
-     <lay-logo>Layui Admin</lay-logo>
-   </lay-header>
-   <lay-side></lay-side>
-   <lay-body>
-     <router-view></router-view>
-   </lay-body>
-   <lay-footer>pearadmin.com</lay-footer>
+  <lay-header>
+    <lay-logo>Layui Admin</lay-logo>
+  </lay-header>
+  <lay-side></lay-side>
+  <lay-body>
+    <router-view></router-view>
+  </lay-body>
+  <lay-footer>pearadmin.com</lay-footer>
 </lay-layout>
 ```
 
-|  |  |  |
-|--|--|--|
-| lay-layout | 容器 | -- |
-| lay-header | 顶部 | -- |
-| lay-logo | 图标  | -- |
-| lay-side | 侧边 | -- |
-| lay-body | 内容 | -- |
-| lay-footer | 底部  | -- |
+|            |      |     |
+| ---------- | ---- | --- |
+| lay-layout | 容器 | --  |
+| lay-header | 顶部 | --  |
+| lay-logo   | 图标 | --  |
+| lay-side   | 侧边 | --  |
+| lay-body   | 内容 | --  |
+| lay-footer | 底部 | --  |

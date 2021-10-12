@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref } from 'vue';
 
 export default {
   setup() {
@@ -19,7 +19,6 @@ export default {
 </script>
 
 :::
-
 
 ::: demo
 
@@ -68,12 +67,11 @@ export default {
 
 :::
 
-
-|  |  |  |
-|--|--|--|
-| percent | 进度 | -- |
-| theme| 主题 | `orange` `green` `cyan` `blue` `black` `gray`|
-| size | 尺寸 | `big` |
-| text | 提示 | -- |
-| color| 颜色 | -- |
-| showText | 展示描述 | -- |
+|          |          |                                               |
+| -------- | -------- | --------------------------------------------- |
+| percent  | 进度     | --                                            |
+| theme    | 主题     | `orange` `green` `cyan` `blue` `black` `gray` |
+| size     | 尺寸     | `big`                                         |
+| text     | 提示     | --                                            |
+| color    | 颜色     | --                                            |
+| showText | 展示描述 | --                                            |
