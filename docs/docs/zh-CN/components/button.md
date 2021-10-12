@@ -199,6 +199,8 @@ export default {
 
 :::
 
+<lay-field title="Button attributes" style="margin-top:40px"/>
+
 |        |        |                                               |
 | ------ | ------ | --------------------------------------------- |
 | type   | 主题   | `primary` `normal` `warm` `danger` `disabled` |

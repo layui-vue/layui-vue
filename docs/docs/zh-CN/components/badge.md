@@ -33,6 +33,8 @@ export default {
 
 :::
 
+<lay-field title="Badge attributes" style="margin-top:40px"/>
+
 |       |      |                                               |
 | ----- | ---- | --------------------------------------------- |
 | type  | 类型 | `dot` `rim`                                   |

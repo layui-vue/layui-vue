@@ -61,6 +61,8 @@ export default {
 
 :::
 
+<lay-field title="Dropdown attributes" style="margin-top:40px"/>
+
 |         |          |                 |
 | ------- | -------- | --------------- |
 | trigger | 触发方式 | `click` `hover` |

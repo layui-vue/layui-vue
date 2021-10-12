@@ -124,6 +124,14 @@ export default {
 
 :::
 
+<lay-field title="Col attributes" style="margin-top:40px"/>
+
+|          |      |                         |  
+| -------- | ---- | ----------------------- |
+| space    | 间隔 |  --  | 
+
+<lay-field title="Col attributes" style="margin-top:40px"/>
+
 |          |      |                         |     |
 | -------- | ---- | ----------------------- | --- |
 | xs       | 尺寸 | 超小屏幕 (手机<768px)   | 12  |

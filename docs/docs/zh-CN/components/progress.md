@@ -67,6 +67,8 @@ export default {
 
 :::
 
+<lay-field title="Progress attributes" style="margin-top:40px"/>
+
 |          |          |                                               |
 | -------- | -------- | --------------------------------------------- |
 | percent  | 进度     | --                                            |

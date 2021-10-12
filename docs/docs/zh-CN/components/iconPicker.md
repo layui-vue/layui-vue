@@ -86,6 +86,8 @@ export default {
 
 :::
 
+<lay-field title="IconPicker attributes" style="margin-top:40px"/>
+
 |            |          |     |
 | ---------- | -------- | --- |
 | v-model    | 默认值   | --  |

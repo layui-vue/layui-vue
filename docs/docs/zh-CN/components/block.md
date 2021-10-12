@@ -37,3 +37,9 @@ export default {
 </script>
 
 :::
+
+<lay-field title="Block attributes" style="margin-top:40px"/>
+
+|       |        |                |
+| ----- | ------ | -------------- |
+| nm | 灰色样式 | -- |

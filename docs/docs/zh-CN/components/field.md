@@ -58,6 +58,8 @@ export default {
 
 :::
 
+<lay-field title="Field attributes" style="margin-top:40px"/>
+
 |       |      |     |
 | ----- | ---- | --- |
 | title | 标题 | --  |

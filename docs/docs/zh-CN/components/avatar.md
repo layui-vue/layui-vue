@@ -71,6 +71,8 @@ export default {
 
 :::
 
+<lay-field title="Avatar attributes" style="margin-top:40px"/>
+
 |        |      |                |
 | ------ | ---- | -------------- |
 | src    | 图源 | --             |

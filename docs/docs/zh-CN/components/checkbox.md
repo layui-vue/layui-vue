@@ -80,6 +80,16 @@ export default {
 
 :::
 
+<lay-field title="Checkbox attributes" style="margin-top:40px"/>
+
 |          |      |                         |     |
 | -------- | ---- | ----------------------- | --- |
-| xs       | 尺寸 | 超小屏幕 (手机<768px)   | 12  |
+| name       | 尺寸 | 超小屏幕 (手机<768px)   | 12  |
+| skin       | 尺寸 | 超小屏幕 (手机<768px)   | 12  |
+| label       | 尺寸 | 超小屏幕 (手机<768px)   | 12  |
+
+<lay-field title="Checkbox events" style="margin-top:40px"/>
+
+|          |      |                         |     |
+| -------- | ---- | ----------------------- | --- |
+| change   | 切换事件 | 超小屏幕 (手机<768px)   | 12  |

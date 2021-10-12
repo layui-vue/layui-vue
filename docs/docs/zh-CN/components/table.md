@@ -193,6 +193,8 @@ export default {
 
 :::
 
+<lay-field title="Table attributes" style="margin-top:40px"/>
+
 |                 |            |     |
 | --------------- | ---------- | --- |
 | columns         | 列配置     | --  |

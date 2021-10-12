@@ -56,6 +56,8 @@ export default {
 
 :::
 
+<lay-field title="Menu attributes" style="margin-top:40px"/>
+
 |             |          |     |
 | ----------- | -------- | --- |
 | selectedKey | 默认选择 | --  |

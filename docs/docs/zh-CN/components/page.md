@@ -107,6 +107,8 @@ export default {
 
 :::
 
+<lay-field title="Page attributes" style="margin-top:40px"/>
+
 |             |              |         |
 | ----------- | ------------ | ------- |
 | limit       | 每页数量     | --      |

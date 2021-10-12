@@ -1047,6 +1047,8 @@ export default {
 
 :::
 
+<lay-field title="Icon attributes" style="margin-top:40px"/>
+
 |      |      |                   |
 | ---- | ---- | ----------------- |
 | type | 图标 | `layui-icon-home` |

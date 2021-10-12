@@ -49,6 +49,8 @@ export default {
 
 :::
 
+<lay-field title="Card attributes" style="margin-top:40px"/>
+
 |        |      |        |
 | ------ | ---- | ------ |
 | header | 插槽 | `内容` |

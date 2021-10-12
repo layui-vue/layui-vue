@@ -25,6 +25,8 @@ export default {
 
 :::
 
+<lay-field title="Collapse attributes" style="margin-top:40px"/>
+
 |       |        |                |
 | ----- | ------ | -------------- |
 | openKeys | 打开的目录 | `array` |

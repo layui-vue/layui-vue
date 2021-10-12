@@ -46,6 +46,8 @@ export default {
 
 :::
 
+<lay-field title="Breadcrumb attributes" style="margin-top:40px"/>
+
 |           |        |     |
 | --------- | ------ | --- |
 | separator | 分割符 | `/` |

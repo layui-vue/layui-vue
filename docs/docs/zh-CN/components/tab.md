@@ -76,6 +76,8 @@ export default {
 
 :::
 
+<lay-field title="Tab attributes" style="margin-top:40px"/>
+
 |         |          |                |
 | ------- | -------- | -------------- |
 | v-model | 当前激活 | --             |

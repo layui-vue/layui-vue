@@ -8,7 +8,7 @@
   </fieldset>
 
   <fieldset v-else class="layui-elem-field layui-field-title">
-    <legend><a name="docend">结语</a></legend>
+    <legend><a name="docend">{{title}}</a></legend>
   </fieldset>
 
 </template>

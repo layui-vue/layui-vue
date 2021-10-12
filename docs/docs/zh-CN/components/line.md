@@ -31,6 +31,8 @@ export default {
 
 :::
 
+<lay-field title="Line attributes" style="margin-top:40px"/>
+
 |       |      |                                               |
 | ----- | ---- | --------------------------------------------- |
 | theme | 主题 | `orange` `green` `cyan` `blue` `black` `gray` |

@@ -68,6 +68,8 @@ export default {
 
 :::
 
+<lay-field title="Animation class" style="margin-top:40px"/>
+
 |                                   |              |                                                |
 | --------------------------------- | ------------ | ---------------------------------------------- |
 | layui-anim-down                   | 顶部往下滑入 | `layui-anim layui-anim-down`                   |

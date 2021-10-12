@@ -65,3 +65,10 @@ export default {
 </script>
 
 :::
+
+<lay-field title="TimelineItem attributes" style="margin-top:40px"/>
+
+|                 |            |     |
+| --------------- | ---------- | --- |
+| simple         | 简单模式     | --  |
+| title     | 标题     | --  |

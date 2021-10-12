@@ -38,6 +38,8 @@ export default {
 
 :::
 
+<lay-field title="Empty attributes" style="margin-top:40px"/>
+
 |             |          |     |
 | ----------- | -------- | --- |
 | description | 描述信息 | --  |
