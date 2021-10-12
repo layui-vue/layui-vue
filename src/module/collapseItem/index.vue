@@ -13,16 +13,23 @@
 </template>
 
 <script setup name="LayCollapseItem" lang="ts">
-import { defineProps, Ref, ref } from 'vue'
+import { defineProps, inject, Ref, ref } from 'vue'
 
 const props = defineProps<{
-  show?: boolean
-  title?: string
+  id: string
+  title: string
 }>()
 
-const isShow = ref(props.show) as Ref
+const openKeys = inject("openKeys") as String[]
+
+const isShow = ref(openKeys.includes(props.id))
 
 const showHandle = function () {
   isShow.value = !isShow.value
+  if(openKeys.indexOf(props.id) != -1) {
+    openKeys.splice(openKeys.indexOf(props.id),1)
+  } else {
+    openKeys.push(props.id)
+  }
 }
 </script>

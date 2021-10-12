@@ -1,10 +1,11 @@
 ::: demo
 
 <template>
-  <lay-collapse>
-    <lay-collapse-item title="标题" show> 内容 </lay-collapse-item>
-    <lay-collapse-item title="标题" show> 内容 </lay-collapse-item>
-    <lay-collapse-item title="标题" show> 内容 </lay-collapse-item>
+{{openKeys}}
+  <lay-collapse :openKeys="openKeys">
+    <lay-collapse-item title="标题" id="1"> 内容 </lay-collapse-item>
+    <lay-collapse-item title="标题" id="2"> 内容 </lay-collapse-item>
+    <lay-collapse-item title="标题" id="3"> 内容 </lay-collapse-item>
   </lay-collapse>
 </template>
 
@@ -14,7 +15,10 @@ import { ref } from 'vue'
 export default {
   setup() {
 
+    const openKeys = ref(["1","2"])
+
     return {
+      openKeys
     }
   }
 }
