@@ -1,5 +1,5 @@
 <template>
-  <span @click="handleClick">
+  <span @click.stop="handleClick">
     <input type="checkbox" :name="name" :value="label" />
     <div
       class="layui-unselect"
@@ -7,43 +7,47 @@
         {
           'layui-checkbox-disbaled layui-disabled': disabled,
         },
+        {
+          'layui-form-checked': needCustomChecked
+            ? customChecked
+            : props.checked,
+        },
         'layui-form-checkbox',
-        props.modelValue.includes(props.label) ? 'layui-form-checked' : '',
       ]"
       :lay-skin="skin"
     >
       <span><slot /></span>
-      <i v-if="skin == 'primary'" class="layui-icon layui-icon-ok" />
-      <i v-if="!skin" class="layui-icon layui-icon-ok" />
+      <i class="layui-icon layui-icon-ok" />
     </div>
   </span>
 </template>
 
 <script setup name="LayCheckbox" lang="ts">
-import { defineProps, ref, watch } from 'vue'
+import { defineProps, ref } from 'vue'
 
 const props =
   defineProps<{
-    modelValue: string[]
-    label: string
-    disabled?: boolean
     name?: string
     skin?: string
+    label?: string
+    checked?: Boolean
+    disabled?: Boolean
   }>()
 
-const hasValue = ref(false)
+const customChecked = ref(false)
+const needCustomChecked = props.checked == undefined
 
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits(['update:checked', 'change'])
 
 const handleClick = function () {
   if (!props.disabled) {
-    if (!props.modelValue.includes(props.label)) {
-      props.modelValue.push(props.label)
+    if (needCustomChecked) {
+      customChecked.value = !customChecked.value
+      emit('change', !customChecked.value)
     } else {
-      let index = props.modelValue.indexOf(props.label)
-      props.modelValue.splice(index, 1)
+      emit('update:checked', !props.checked)
+      emit('change', !props.checked)
     }
-    emit('update:modelValue', props.modelValue)
   }
 }
 </script>

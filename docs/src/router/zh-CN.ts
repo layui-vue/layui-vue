@@ -174,6 +174,10 @@ const zhCN = [
         path: '/zh-CN/components/transfer',
         component: () => import('../../docs/zh-CN/components/transfer.md'),
         meta: { title: '穿梭框' },
+      },{
+        path: '/zh-CN/components/checkbox',
+        component: () => import('../../docs/zh-CN/components/checkbox.md'),
+        meta: { title: '复选框' },
       },
     ],
   },

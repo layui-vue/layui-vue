@@ -273,6 +273,12 @@ export default {
         subTitle: 'transfer',
         path: '/zh-CN/components/transfer',
       },
+      {
+        id: 32,
+        title: '复选框',
+        subTitle: 'checkbox',
+        path: '/zh-CN/components/checkbox',
+      },
     ]
 
     const selected = ref(1)
