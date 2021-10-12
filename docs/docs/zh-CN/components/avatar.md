@@ -1,7 +1,7 @@
 ::: demo
 
 <template>
-  <lay-avatar :src="avatar"></lay-avatar>
+  <lay-avatar :href="href"></lay-avatar>
 </template>
 
 <script>
@@ -10,10 +10,10 @@ import { ref } from 'vue'
 export default {
   setup() {
 
-    const avatar = "https://portrait.gitee.com/uploads/avatars/user/2813/8441097_shaynas_1610801433.png"
+    const href = ref("https://portrait.gitee.com/uploads/avatars/user/2813/8441097_shaynas_1610801433.png")
 
     return {
-        avatar
+        href
     }
   }
 }
@@ -24,7 +24,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-avatar :src="avatar" radius></lay-avatar>
+  <lay-avatar :href="avatar" radius></lay-avatar>
 </template>
 
 <script>
@@ -48,10 +48,10 @@ export default {
 ::: demo
 
 <template>
-  <lay-avatar :src="avatar" size="xs"></lay-avatar> 
-  <lay-avatar :src="avatar" size="sm"></lay-avatar>
-  <lay-avatar :src="avatar"></lay-avatar>
-  <lay-avatar :src="avatar" size="lg"></lay-avatar>
+  <lay-avatar :href="avatar" size="xs"></lay-avatar> 
+  <lay-avatar :href="avatar" size="sm"></lay-avatar>
+  <lay-avatar :href="avatar"></lay-avatar>
+  <lay-avatar :href="avatar" size="lg"></lay-avatar>
 </template>
 
 <script>

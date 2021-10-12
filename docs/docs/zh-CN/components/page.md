@@ -113,9 +113,14 @@ export default {
 | ----------- | ------------ | ------- |
 | limit       | 每页数量     | --      |
 | total       | 总条数       | --      |
-| jump        | 切换回调     | --      |
 | showCount   | 显示总数     | `false` |
 | showPage    | 显示每页     | `false` |
 | showLimit   | 显示每页数量 | `false` |
 | showRefresh | 显示刷新按钮 | `false` |
 | showSkip    | 显示跳转     | `false` |
+
+<lay-field title="Page events" style="margin-top:40px"/>
+
+|             |              |         |
+| ----------- | ------------ | ------- |
+| jump       | 切换回调     | --      |
