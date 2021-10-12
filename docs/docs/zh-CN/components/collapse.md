@@ -1,7 +1,6 @@
 ::: demo
 
 <template>
-{{openKeys}}
   <lay-collapse :openKeys="openKeys">
     <lay-collapse-item title="标题" id="1"> 内容 </lay-collapse-item>
     <lay-collapse-item title="标题" id="2"> 内容 </lay-collapse-item>
@@ -25,3 +24,7 @@ export default {
 </script>
 
 :::
+
+|       |        |                |
+| ----- | ------ | -------------- |
+| openKeys | 打开的目录 | `array` |

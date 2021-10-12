@@ -3,5 +3,5 @@
     <slot />
   </div>
 </template>
-
-<script setup name="LayHeader" lang="ts"></script>
+<script setup name="LayHeader"></script>
+<script setup lang="ts"></script>

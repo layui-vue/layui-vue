@@ -53,6 +53,7 @@ import LayTree from './module/tree/index'
 import LayTable from './module/table/index'
 import LayPage from './module/page/index'
 import LayTransfer from './module/transfer/index'
+import LayCheckboxGroup from './module/checkboxGroup/index'
 
 const components: Record<string, IDefineComponent> = {
   LayRadio,
@@ -106,6 +107,7 @@ const components: Record<string, IDefineComponent> = {
   LayTable,
   LayPage,
   LayTransfer,
+  LayCheckboxGroup
 }
 
 const install = (app: App, options?: InstallOptions): void => {
@@ -172,6 +174,7 @@ export {
   LayTable,
   LayPage,
   LayTransfer,
+  LayCheckboxGroup,
   install,
 }
 

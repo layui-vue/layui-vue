@@ -5,7 +5,7 @@ html {
 }
 
 h4 {
-  font-weight: 700 !important;
+  font-weight: 600 !important;
   font-size: 16.8px !important;
   margin-top: 20px !important;
   margin-bottom: 20px !important;
@@ -22,18 +22,8 @@ h4,
 h5,
 h6 {
   margin: 0;
-  color: #303133;
+  color: #333;
   line-height: 1.25;
-}
-
-h1,
-h3,
-h4,
-h5,
-h6,
-strong,
-b {
-  font-weight: 600;
 }
 
 h1:hover .header-anchor,
