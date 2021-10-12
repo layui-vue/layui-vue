@@ -1,11 +1,17 @@
 <template>
-  <i class="layui-icon" :class="[type]" />
+  <i :class="[prefix, type]" />
 </template>
 
 <script setup name="LayIcon" lang="ts">
 import { defineProps } from 'vue'
 
-const props = defineProps<{
-  type?: string
-}>()
+const props = withDefaults(
+  defineProps<{
+    type?: string
+    prefix?: string
+  }>(),
+  {
+    prefix: 'layui-icon',
+  }
+)
 </script>

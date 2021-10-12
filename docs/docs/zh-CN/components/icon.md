@@ -1052,3 +1052,4 @@ export default {
 |      |      |                   |
 | ---- | ---- | ----------------- |
 | type | 图标 | `layui-icon-home` |
+| prefix | 前缀 | `layui-icon` |

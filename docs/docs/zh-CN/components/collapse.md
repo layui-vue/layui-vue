@@ -14,7 +14,7 @@ import { ref } from 'vue'
 export default {
   setup() {
 
-    const openKeys = ref(["1","2"])
+    const openKeys = ref(["1","2","3"])
 
     return {
       openKeys

@@ -51,7 +51,30 @@ export default {
 
 :::
 
+::: demo
 
+<template>
+  <lay-form>
+    <lay-checkbox name="like" skin="primary" label="1" :disabled="disabled">禁用</lay-checkbox>
+ </lay-form>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const disabled = ref(false)
+
+    return {
+      disabled 
+    }
+  }
+}
+</script>
+
+:::
 
 ::: demo
 
@@ -82,14 +105,14 @@ export default {
 
 <lay-field title="Checkbox attributes" style="margin-top:40px"/>
 
-|          |      |                         |     |
-| -------- | ---- | ----------------------- | --- |
-| name       | 尺寸 | 超小屏幕 (手机<768px)   | 12  |
-| skin       | 尺寸 | 超小屏幕 (手机<768px)   | 12  |
-| label       | 尺寸 | 超小屏幕 (手机<768px)   | 12  |
+|          |      |                         |  
+| -------- | ---- | ----------------------- | 
+| name       | 原始属性 name | --  | 
+| skin       | 主题 | --  |
+| label       | 选中值 | --   | 
 
 <lay-field title="Checkbox events" style="margin-top:40px"/>
 
-|          |      |                         |     |
-| -------- | ---- | ----------------------- | --- |
-| change   | 切换事件 | 超小屏幕 (手机<768px)   | 12  |
+|          |      |                         |  
+| -------- | ---- | ----------------------- | 
+| change   | 切换事件 | -- | 
