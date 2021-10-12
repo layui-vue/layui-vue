@@ -167,6 +167,8 @@ const { innerTreeData, updateInnerTreeData, treeWrapperClass } = useTreeData(
   emit
 )
 
+console.log(emit)
+
 function handleNodeClick(node: TreeNode) {
   updateInnerTreeData(innerTreeData.value, node)
   const emitNode = getEmitNode(props.data!, node)
