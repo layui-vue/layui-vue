@@ -24,7 +24,7 @@ const slots = slot.default && slot.default()
 
 const props = defineProps<{
   type?: string
-  modelValue?: string
+  modelValue: string
 }>()
 
 // select update 时, 通知 change 事件

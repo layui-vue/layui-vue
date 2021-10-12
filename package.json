@@ -38,8 +38,8 @@
   },
   "homepage": "https://gitee.com/layui-vue/layui-vue/blob/master/README.md",
   "peerDependencies": {
-    "vue": "^3.2.19",
-    "vue-router": "^4.0.10"
+    "vue": "^3.2.20",
+    "vue-router": "^4.0.11"
   },
   "dependencies": {
     "vue": "^3.2.20",
