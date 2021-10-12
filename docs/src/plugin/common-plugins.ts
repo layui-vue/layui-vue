@@ -23,23 +23,7 @@ const plugins = [
       md.use(snippet)
         .use(preWrapper)
         .use(container, 'demo', demo)
-        .use(...createContainer('tip', 'TIP'))
-        .use(...createContainer('warning', 'WARNING'))
-        .use(...createContainer('danger', 'WARNING'))
-        .use(container, 'v-pre', {
-          render: (tokens: Token[], idx: number) =>
-            tokens[idx].nesting === 1 ? '<div v-pre>\n' : '</div>\n',
-        })
-        .use(container, 'details', {
-          render: (tokens: Token[], idx: number) => {
-            const info = tokens[idx].info.trim().slice(7).trim() // 7 = 'details'.length
-            return tokens[idx].nesting === 1
-              ? `<details class="custom-block details">${
-                  info ? `<summary>${info}</summary>` : ''
-                }\n`
-              : '</details>'
-          },
-        })
+        .use(...createContainer('field', '描述信息'))
     },
   }),
 ]

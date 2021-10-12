@@ -103,7 +103,9 @@ export default {
 
 :::
 
-<lay-field title="Checkbox attributes" style="margin-top:40px"/>
+::: field Checkbox attributes
+
+::: 
 
 |          |      |                         |  
 | -------- | ---- | ----------------------- | 
@@ -111,7 +113,9 @@ export default {
 | skin       | 主题 | --  |
 | label       | 选中值 | --   | 
 
-<lay-field title="Checkbox events" style="margin-top:40px"/>
+::: field Checkbox events
+
+::: 
 
 |          |      |                         |  
 | -------- | ---- | ----------------------- | 

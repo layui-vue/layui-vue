@@ -25,7 +25,10 @@ export default {
 
 :::
 
-<lay-field title="Collapse attributes" style="margin-top:40px"/>
+
+::: field Collapse attributes
+
+:::
 
 |       |        |                |
 | ----- | ------ | -------------- |

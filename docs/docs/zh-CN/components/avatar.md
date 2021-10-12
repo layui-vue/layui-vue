@@ -1,7 +1,7 @@
 ::: demo
 
 <template>
-  <lay-avatar :href="href"></lay-avatar>
+  <lay-avatar :src="src"></lay-avatar>
 </template>
 
 <script>
@@ -10,10 +10,10 @@ import { ref } from 'vue'
 export default {
   setup() {
 
-    const href = ref("https://portrait.gitee.com/uploads/avatars/user/2813/8441097_shaynas_1610801433.png")
+    const src = ref("https://portrait.gitee.com/uploads/avatars/user/2813/8441097_shaynas_1610801433.png")
 
     return {
-        href
+        src
     }
   }
 }
@@ -24,7 +24,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-avatar :href="avatar" radius></lay-avatar>
+  <lay-avatar :src="src" radius></lay-avatar>
 </template>
 
 <script>
@@ -34,10 +34,10 @@ export default {
 
     setup() {
 
-        const avatar = "https://portrait.gitee.com/uploads/avatars/user/2813/8441097_shaynas_1610801433.png"
+        const src = "https://portrait.gitee.com/uploads/avatars/user/2813/8441097_shaynas_1610801433.png"
         
         return {
-            avatar
+            src
         }
   }
 }
@@ -48,10 +48,10 @@ export default {
 ::: demo
 
 <template>
-  <lay-avatar :href="avatar" size="xs"></lay-avatar> 
-  <lay-avatar :href="avatar" size="sm"></lay-avatar>
-  <lay-avatar :href="avatar"></lay-avatar>
-  <lay-avatar :href="avatar" size="lg"></lay-avatar>
+  <lay-avatar :src="src" size="xs"></lay-avatar> 
+  <lay-avatar :src="src" size="sm"></lay-avatar>
+  <lay-avatar :src="src"></lay-avatar>
+  <lay-avatar :src="src" size="lg"></lay-avatar>
 </template>
 
 <script>
@@ -60,10 +60,10 @@ import { ref } from 'vue'
 export default {
     setup() {
 
-        const avatar = "https://portrait.gitee.com/uploads/avatars/user/2813/8441097_shaynas_1610801433.png"
+        const src = "https://portrait.gitee.com/uploads/avatars/user/2813/8441097_shaynas_1610801433.png"
 
         return {
-            avatar
+            src
         }
   }
 }
@@ -71,7 +71,9 @@ export default {
 
 :::
 
-<lay-field title="Avatar attributes" style="margin-top:40px"/>
+::: field Avatar attributes
+
+:::
 
 |        |      |                |
 | ------ | ---- | -------------- |

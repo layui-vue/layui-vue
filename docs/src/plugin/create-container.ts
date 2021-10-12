@@ -21,11 +21,11 @@ export default function createContainer(
         const token = tokens[idx]
         const info = token.info.trim().slice(klass.length).trim()
         if (token.nesting === 1) {
-          return `<div class="${klass} custom-block"><p class="custom-block-title">${
+          return `<lay-field title="${
             info || defaultTitle
-          }</p>\n`
+          }" style="margin-top:40px">`
         } else {
-          return '</div>\n'
+          return '</lay-field>\n'
         }
       },
     },

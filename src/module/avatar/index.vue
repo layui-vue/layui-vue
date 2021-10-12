@@ -1,6 +1,6 @@
 <template>
   <img
-    :src="href"
+    :src="src"
     class="layui-avatar"
     :class="[
       radius ? 'layui-avatar-radius' : '',
@@ -13,7 +13,7 @@
 import { defineProps } from 'vue'
 
 const props = defineProps<{
-  href?: String
+  src?: String
   radius?: boolean
   size?: string
 }>()
