@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <table id="test" class="layui-hide" lay-filter="test" />
+  <div id="lay-table">
+    <table class="layui-hide" lay-filter="test" />
     <div
       class="layui-form layui-border-box layui-table-view layui-table-view-1"
     >
@@ -14,10 +14,7 @@
           <div class="layui-inline" title="筛选列" lay-event="LAYTABLE_COLS">
             <i class="layui-icon layui-icon-cols" />
           </div>
-          <div class="layui-inline" title="导出" lay-event="LAYTABLE_EXPORT">
-            <i class="layui-icon layui-icon-export" />
-          </div>
-          <div class="layui-inline" title="打印" lay-event="LAYTABLE_PRINT">
+          <div class="layui-inline" title="打印" lay-event="LAYTABLE_PRINT" @click="print()">
             <i class="layui-icon layui-icon-print" />
           </div>
         </div>
@@ -166,7 +163,7 @@ const changeAll = function ({ checked, value }: any) {
       tableSelectedKeys.value.push(id)
     })
   }
-  emit('update:selectedKeys',tableSelectedKeys.value)
+  emit('update:selectedKeys', tableSelectedKeys.value)
 }
 
 watch(
@@ -177,12 +174,23 @@ watch(
     } else {
       allChecked.value = false
     }
-    emit('update:selectedKeys',tableSelectedKeys.value)
+    emit('update:selectedKeys', tableSelectedKeys.value)
   },
   { deep: true }
 )
 
 const change = function (page: any) {
   emit('change', page)
+}
+
+/// 表格打印
+const print = function () {
+  let subOutputRankPrint = document.getElementById('lay-table') as HTMLElement
+  let newContent = subOutputRankPrint.innerHTML
+  let oldContent = document.body.innerHTML
+  document.body.innerHTML = newContent
+  window.print()
+  window.location.reload()
+  document.body.innerHTML = oldContent
 }
 </script>
