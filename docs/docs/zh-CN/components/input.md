@@ -69,9 +69,34 @@ export default {
 :::
 
 
+::: demo
+
+<template>
+  <lay-input placeholder="禁止输入" :disabled="disabled"></lay-input>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const disabled = ref(true)
+
+    return {
+        disabled
+    }
+  }
+}
+</script>
+
+:::
+
+
 | Name   | Description | Accepted Values  |
 | -------- | ---- | ----------------------- | 
 | name       | 原始属性 name | --  | 
 | placeholder      | 提示信息 | --   | 
+| disabled      | 禁用 | `true` `false`   |
 | v-model     | 值 | --  | 
 | input   | 原生 input 事件 | val : 当前值  | 
