@@ -30,9 +30,10 @@
                 <th v-if="checkbox" class="layui-table-col-special">
                   <div class="layui-table-cell laytable-cell-checkbox">
                     <lay-checkbox
-                      v-model="allSelectedKeys"
+                      v-model:checked="allChecked"
                       skin="primary"
                       label="all"
+                      @change="changeAll"
                     />
                   </div>
                 </th>
@@ -55,14 +56,14 @@
                 <tr>
                   <td v-if="checkbox" class="layui-table-col-special">
                     <div class="layui-table-cell laytable-cell-checkbox">
-                      <lay-checkbox
-                        v-model="tableSelectedKeys"
+                      <table-item-checkbox
                         skin="primary"
                         :label="data[id]"
-                      />
+                        v-model="tableSelectedKeys"
+                      >
+                      </table-item-checkbox>
                     </div>
                   </td>
-
                   <template v-for="column in columns" :key="column">
                     <template v-if="column.customSlot">
                       <td>
@@ -112,7 +113,9 @@
     </div>
   </div>
 </template>
-<script setup name="LayTable" lang="ts">
+<script setup name="LayTable"></script>
+<script setup lang="ts">
+import tableItemCheckbox from './component/checkbox.vue'
 import {
   defineProps,
   ref,
@@ -120,7 +123,6 @@ import {
   watch,
   withDefaults,
   defineEmits,
-  computed,
 } from 'vue'
 import { Recordable } from '/@src/module/type'
 
@@ -146,29 +148,39 @@ const props = withDefaults(
   }
 )
 
-const allSelectedKeys = ref([])
-const tableSelectedKeys = ref(props.selectedKeys)
-
-watch(
-  allSelectedKeys,
-  function (val: string[]) {
-    const ids = props.dataSource.map((item: any) => {
-      return item[props.id]
-    })
-    tableSelectedKeys.value.splice(0, ids.length)
-    if (val.includes('all')) {
-      ids.forEach((id) => {
-        tableSelectedKeys.value.push(id)
-      })
-    }
-  },
-  { deep: true }
-)
-
-const emit = defineEmits(['change', 'changeSelectedKeys'])
+const emit = defineEmits(['change', 'update:selectedKeys'])
 
 const slot = useSlots()
 const slots = slot.default && slot.default()
+
+const allChecked = ref(false)
+const tableSelectedKeys = ref([...props.selectedKeys])
+
+const changeAll = function ({ checked, value }: any) {
+  const ids = props.dataSource.map((item: any) => {
+    return item[props.id]
+  })
+  tableSelectedKeys.value.splice(0, ids.length)
+  if (checked) {
+    ids.forEach((id) => {
+      tableSelectedKeys.value.push(id)
+    })
+  }
+  emit('update:selectedKeys',tableSelectedKeys.value)
+}
+
+watch(
+  tableSelectedKeys,
+  function () {
+    if (tableSelectedKeys.value.length === props.dataSource.length) {
+      allChecked.value = true
+    } else {
+      allChecked.value = false
+    }
+    emit('update:selectedKeys',tableSelectedKeys.value)
+  },
+  { deep: true }
+)
 
 const change = function (page: any) {
   emit('change', page)

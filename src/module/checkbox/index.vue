@@ -16,7 +16,7 @@
 </template>
 
 <script setup name="LayCheckbox" lang="ts">
-import { defineProps, ref } from 'vue'
+import { defineProps } from 'vue'
 
 const props =
   defineProps<{
@@ -32,7 +32,7 @@ const emit = defineEmits(['update:checked', 'change'])
 const handleClick = function () {
   if (!props.disabled) {
       emit('update:checked', !props.checked)
-      emit('change', !props.checked)
+      emit('change', { checked: !props.checked, value: props.label })
   }
 }
 </script>

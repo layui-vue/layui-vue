@@ -127,7 +127,7 @@ export default {
 
 <template>
   {{selectedKeys}}
-  <lay-table :columns="columns" id="id" :dataSource="dataSource" default-toolbar="true" :selectedKeys="selectedKeys" @changeSelectedKeys="changeSelectedKeys" checkbox="true">
+  <lay-table :columns="columns" id="id" :dataSource="dataSource" default-toolbar="true" v-model:selectedKeys="selectedKeys" @changeSelectedKeys="changeSelectedKeys" checkbox="true">
     <template v-slot:toolbar>
       <lay-button>新增</lay-button>
       <lay-button>删除</lay-button>
@@ -148,10 +148,6 @@ export default {
   setup() {
 
     const selectedKeys = ref(['1'])
-
-    const changeSelectedKeys = function(val) {
-      selectedKeys.value = val
-    }
 
     const columns = [
       {
@@ -184,8 +180,7 @@ export default {
     return {
       columns,
       dataSource,
-      selectedKeys,
-      changeSelectedKeys
+      selectedKeys
     }
   }
 }
@@ -199,9 +194,9 @@ export default {
 
 |                 |            |     |
 | --------------- | ---------- | --- |
-| columns         | 列配置     | --  |
-| dataSource      | 数据源     | --  |
-| checkbox        | 开启复现框 | --  |
+| columns         | 列配置      | --  |
+| dataSource      | 数据源      | --  |
+| checkbox        | 开启复现框  | --  |
 | id              | 主键       | --  |
-| selectKeys      | 选中项     | --  |
+| selectedKeys ( v-model )    | 选中项     | --  |
 | default-toolbar | 开启工具栏 | --  |
