@@ -5,19 +5,23 @@ export default {
 </script>
 <script setup lang="ts">
 import LayIcon from '../icon'
+import LayCheckbox from '../checkbox'
 import { TreeNode } from '/@src/module/tree/tree.type'
 
 type EventType = 'icon' | 'node'
 
 interface TreeEntityProps {
   node: TreeNode
+  showCheckbox?: boolean
 }
 
 interface EmitEvent {
   (e: 'node-click', node: TreeNode, type: EventType): void
 }
 
-const props = defineProps<TreeEntityProps>()
+const props = withDefaults(defineProps<TreeEntityProps>(), {
+  showCheckbox: false,
+})
 const emit = defineEmits<EmitEvent>()
 
 /**
@@ -45,7 +49,7 @@ const nodeIconType = (node: TreeNode): string => {
 }
 
 /**
- * Node Icon Click
+ * 节点Icon点击
  * @param node
  */
 function handleIconClick(node: TreeNode) {
@@ -53,7 +57,7 @@ function handleIconClick(node: TreeNode) {
 }
 
 /**
- * Node Font Click
+ * 节点点击
  * @param node
  */
 function handleNodeClick(node: TreeNode) {
@@ -61,12 +65,15 @@ function handleNodeClick(node: TreeNode) {
 }
 
 /**
- * 递归事件
+ * 递归emit事件
  * @param node
+ * @param type
  */
 function innerClick(node: TreeNode, type: EventType) {
   emit('node-click', node, type)
 }
+
+console.log(props.showCheckbox)
 </script>
 <template>
   <template v-if="node.children && node.children.length > 0">
@@ -85,11 +92,22 @@ function innerClick(node: TreeNode, type: EventType) {
               @click.prevent.stop="handleIconClick(node, 'icon')"
             />
           </span>
+          <LayCheckbox
+            v-if="showCheckbox"
+            name="name"
+            skin="primary"
+            label="1"
+            :checked="true"
+          >
+            {{ node.title }}
+          </LayCheckbox>
           <span
+            v-else
             class="layui-tree-txt"
             @click.prevent.stop="handleNodeClick(node, 'node')"
-            >{{ node.title }}</span
           >
+            {{ node.title }}
+          </span>
         </div>
       </div>
       <div
@@ -102,6 +120,7 @@ function innerClick(node: TreeNode, type: EventType) {
           :key="index"
           :node="item"
           @node-click="innerClick"
+          :showCheckbox="showCheckbox"
         />
       </div>
     </div>
@@ -121,11 +140,22 @@ function innerClick(node: TreeNode, type: EventType) {
               @click.prevent.stop="handleIconClick(node, 'icon')"
             />
           </span>
+          <LayCheckbox
+            v-if="showCheckbox"
+            name="name"
+            skin="primary"
+            label="1"
+            :checked="true"
+          >
+            {{ node.title }}
+          </LayCheckbox>
           <span
+            v-else
             class="layui-tree-txt"
             @click.prevent.stop="handleNodeClick(node, 'node')"
-            >{{ node.title }}</span
           >
+            {{ node.title }}
+          </span>
         </div>
       </div>
     </div>

@@ -1,4 +1,4 @@
-import { TreeData, UseTreeData } from '/@src/module/tree/tree.type'
+import { TreeData, TreeNode, UseTreeData } from '/@src/module/tree/tree.type'
 import { computed, ref, unref, watch } from 'vue'
 import {
   getTreeSpreadKeys,
@@ -20,15 +20,24 @@ export const useTreeData: UseTreeData = (props, emit) => {
     },
   })
 
+  const checkedKeys = computed({
+    get: () => {
+      return props.checkedKeys!
+    },
+    set: (value: (string | number)[]) => {
+      emit('update:checkedKeys', value)
+    },
+  })
+
   /**
    * 渲染的data
    */
-  const innerTreeData = ref<TreeData[]>([])
+  const innerTreeData = ref<TreeNode[]>([])
   watch(
     () => props.data,
     (treeData) => {
       if (treeData) {
-        innerTreeData.value = initialTreeData(treeData)
+        innerTreeData.value = initialTreeData(treeData, checkedKeys)
       }
     },
     { immediate: true, deep: true }
@@ -60,6 +69,7 @@ export const useTreeData: UseTreeData = (props, emit) => {
 
   return {
     spreadKeys,
+    checkedKeys,
     innerTreeData,
     updateInnerTreeData,
     treeWrapperClass,

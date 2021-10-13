@@ -63,7 +63,7 @@ export declare interface TreeProps {
   /**
    * 选中的节点
    */
-  checkedKeys?: (string | number)[]
+  checkedKeys?: NonNullable<(string | number)[]>
   /**
    * 展开的节点
    */
@@ -155,6 +155,7 @@ export declare interface TreeEmits {
    * @param spreadKeys
    */
   (e: 'update:spreadKeys', spreadKeys: (string | number)[]): void
+  (e: 'update:checkedKeys', checkedKeys: (string | number)[]): void
 }
 
 export interface TreeExpose {
@@ -182,7 +183,8 @@ export type UseTreeData = (
   props: TreeProps,
   emit: TreeEmits
 ) => {
-  innerTreeData: Ref<UnwrapRef<TreeData[]>>
+  innerTreeData: Ref<UnwrapRef<TreeNode[]>>
+  checkedKeys: WritableComputedRef<(string | number)[]>
   spreadKeys: WritableComputedRef<(string | number)[]>
   treeWrapperClass: ComputedRef<Recordable>
   updateInnerTreeData: (treeData: TreeData[], node: TreeData) => void

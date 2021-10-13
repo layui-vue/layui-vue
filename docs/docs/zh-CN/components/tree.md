@@ -5,9 +5,14 @@
     :data="data"
     :onlyIconControl="iconCtrl"
     :showLine="showLine"
+    :showCheckbox="showCheckbox"
     @node-click="handleClick"
   >
   </lay-tree>
+  <br/>
+  是否可开启选择框：
+  <br/>
+  <lay-switch v-model="showCheckbox"></lay-switch>
   <br/>
   只能通过节点左侧图标来展开收缩：
   <br/>
@@ -25,7 +30,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref } from 'vue';
 
 const data = ref([
   {
@@ -215,11 +220,12 @@ const data = ref([
       },
     ],
   },
-])
+]);
 
-const iconCtrl = ref(false)
-const showLine = ref(true)
-const clickNode = ref(null)
+const iconCtrl = ref(false);
+const showLine = ref(true);
+const clickNode = ref(null);
+const showCheckbox = ref(true);
 
 function handleClick(node) {
  clickNode.value = node

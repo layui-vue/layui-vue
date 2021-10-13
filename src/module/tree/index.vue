@@ -57,7 +57,7 @@ interface TreeProps {
    * 选中的节点
    */
   // eslint-disable-next-line vue/require-default-prop
-  checkedKeys?: (string | number)[]
+  checkedKeys?: NonNullable<(string | number)[]>
   /**
    * 展开的节点
    */
@@ -148,7 +148,8 @@ interface TreeEmits {
   //  * @param treeNode
   //  */
   // (e: 'node-operate', treeNode: EmitData): void
-  (e: 'update:spreadKeys', spreadKeys: string[]): void
+  (e: 'update:spreadKeys', spreadKeys: (string | number)[]): void
+  (e: 'update:checkedKeys', checkedKeys: (string | number)[]): void
 }
 
 const props = withDefaults(defineProps<TreeProps>(), {
@@ -176,7 +177,7 @@ function handleNodeClick(node: TreeNode, type: 'node' | 'icon') {
   }
   // icon 点击不emit出事件
   const emitNode = getEmitNode(props.data!, node)
-  type !== 'icon' &&  emit('node-click', { data: emitNode! })
+  type !== 'icon' && emit('node-click', { data: emitNode! })
 }
 </script>
 <script lang="ts">
@@ -191,6 +192,7 @@ export default {
       :key="node.id || index"
       :node="node"
       @node-click="handleNodeClick"
+      :showCheckbox="showCheckbox"
     />
   </div>
 </template>

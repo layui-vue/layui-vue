@@ -1,14 +1,17 @@
 import { TreeData, TreeNode } from '/@src/module/tree/tree.type'
 import { Nullable } from '/@src/module/type'
+import { WritableComputedRef } from 'vue'
 
 /**
  * 添加父级parentId
  * @param data
  * @param parentId
+ * @param checkedKeys
  */
 export const generatorTreeData = (
   data: TreeData[] | TreeNode[],
-  parentId: TreeNode['parentId'] = ''
+  parentId: TreeNode['parentId'] = '',
+  checkedKeys: WritableComputedRef<(string | number)[]>
 ): TreeNode[] => {
   const innerTreeData: TreeNode[] = []
   const len = data.length
@@ -20,7 +23,7 @@ export const generatorTreeData = (
       spread: item.spread || false,
     }
     if (item.children && item.children.length > 0) {
-      inner.children = generatorTreeData(item.children, item.id)
+      inner.children = generatorTreeData(item.children, item.id, checkedKeys)
     }
     innerTreeData.push(inner as TreeNode)
   }
@@ -62,9 +65,13 @@ export const setParentNode = (
 /**
  * 初始化内部tree结构
  * @param data
+ * @param checkedKeys
  */
-export const initialTreeData = (data: TreeData[]): TreeNode[] => {
-  const innerTree = generatorTreeData(data)
+export const initialTreeData = (
+  data: TreeData[],
+  checkedKeys: WritableComputedRef<(string | number)[]>
+): TreeNode[] => {
+  const innerTree = generatorTreeData(data, '', checkedKeys)
   setNextSiblings(innerTree)
   setParentNode(innerTree)
   return innerTree
