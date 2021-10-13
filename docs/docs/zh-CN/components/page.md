@@ -107,7 +107,9 @@ export default {
 
 :::
 
-<lay-field title="Page attributes" style="margin-top:40px"/>
+::: field Page attributes
+
+:::
 
 |             |              |         |
 | ----------- | ------------ | ------- |
@@ -119,7 +121,9 @@ export default {
 | showRefresh | 显示刷新按钮 | `false` |
 | showSkip    | 显示跳转     | `false` |
 
-<lay-field title="Page events" style="margin-top:40px"/>
+::: field Page events
+
+:::
 
 |             |              |         |
 | ----------- | ------------ | ------- |

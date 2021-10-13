@@ -1047,7 +1047,9 @@ export default {
 
 :::
 
-<lay-field title="Icon attributes" style="margin-top:40px"/>
+::: field Icon attributes
+
+:::
 
 |      |      |                   |
 | ---- | ---- | ----------------- |

@@ -22,6 +22,30 @@ export default {
 
 :::
 
+
+
+::: demo
+
+<template>
+  <lay-form>
+    <lay-checkbox name="like" label="1">普通</lay-checkbox>
+ </lay-form>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    return {
+    }
+  }
+}
+</script>
+
+:::
+
 ::: demo
 
 <template>

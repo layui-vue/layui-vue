@@ -86,7 +86,9 @@ export default {
 
 :::
 
-<lay-field title="IconPicker attributes" style="margin-top:40px"/>
+::: field IconPicker attributes
+
+:::
 
 |            |          |     |
 | ---------- | -------- | --- |

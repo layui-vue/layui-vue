@@ -56,7 +56,9 @@ export default {
 
 :::
 
-<lay-field title="Menu attributes" style="margin-top:40px"/>
+::: field Menu attributes
+
+:::
 
 |             |          |     |
 | ----------- | -------- | --- |

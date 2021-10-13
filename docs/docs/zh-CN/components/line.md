@@ -31,7 +31,9 @@ export default {
 
 :::
 
-<lay-field title="Line attributes" style="margin-top:40px"/>
+::: field Line attributes
+
+:::
 
 |       |      |                                               |
 | ----- | ---- | --------------------------------------------- |
