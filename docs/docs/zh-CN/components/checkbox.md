@@ -53,6 +53,7 @@ export default {
     <lay-checkbox name="like" skin="primary" v-model:checked="checked1" label="1">写作</lay-checkbox>
     <lay-checkbox name="like" skin="primary" v-model:checked="checked2" label="2">画画</lay-checkbox>
     <lay-checkbox name="like" skin="primary" v-model:checked="checked3" label="3">运动</lay-checkbox>
+    <lay-checkbox name="like" skin="primary" v-model:checked="checked4" label="4">测试</lay-checkbox>
   </lay-form>
 </template>
 
@@ -65,7 +66,7 @@ export default {
     const checked1 = ref(true);
     const checked2 = ref(true);
     const checked3 = ref(true);
-
+    const checked4 = false;
     return {
         checked1, checked2, checked3
     }
