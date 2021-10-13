@@ -186,6 +186,10 @@ const zhCN = [
         path: '/zh-CN/components/input',
         component: () => import('../../docs/zh-CN/components/input.md'),
         meta: { title: '输入框' },
+      },{
+        path: '/zh-CN/components/textarea',
+        component: () => import('../../docs/zh-CN/components/textarea.md'),
+        meta: { title: '文本域' },
       },
     ],
   },

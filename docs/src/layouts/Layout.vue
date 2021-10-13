@@ -288,6 +288,11 @@ export default {
         title: '输入框',
         subTitle: 'input',
         path: '/zh-CN/components/input',
+      },{
+        id: 35,
+        title: '文本域',
+        subTitle: 'textarea',
+        path: '/zh-CN/components/textarea',
       }
     ]
 

@@ -3,7 +3,9 @@
     :value="modelValue"
     :placeholder="placeholder"
     :name="name"
+    :disabled="disabled"
     class="layui-textarea"
+    :class="{ 'layui-disabled': disabled }"
     @input="updateValue"
   />
 </template>
@@ -15,11 +17,14 @@ const props = defineProps<{
   name?: string
   modelValue?: string
   placeholder?: string
+  disabled?: Boolean
 }>()
 
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits(['update:modelValue', 'input'])
 
 const updateValue = function (event: InputEvent) {
-  emit('update:modelValue', (event.target as HTMLInputElement).value)
+  const inputElement = event.target as HTMLInputElement
+  emit('update:modelValue', inputElement.value)
+  emit('input', inputElement.value)
 }
 </script>
