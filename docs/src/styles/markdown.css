@@ -277,3 +277,7 @@ table td {
 .anim .site-doc-icon li .code {
   white-space: nowrap;
 }
+
+.markdown-body th {
+  text-align: left;
+}

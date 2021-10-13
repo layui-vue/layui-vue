@@ -199,11 +199,7 @@ export default {
 
 :::
 
-::: field button attributes
-
-:::
-
-|        |        |                                               |
+| Name   | Description | Accepted Values                          |
 | ------ | ------ | --------------------------------------------- |
 | type   | 主题   | `primary` `normal` `warm` `danger` `disabled` |
 | size   | 尺寸   | `lg` `sm` `xs`                                |

@@ -2,18 +2,11 @@
   <span @click.stop="handleClick">
     <input type="checkbox" :name="name" :value="label" />
     <div
-      class="layui-unselect"
-      :class="[
-        {
-          'layui-checkbox-disbaled layui-disabled': disabled,
-        },
-        {
-          'layui-form-checked': needCustomChecked
-            ? customChecked
-            : props.checked,
-        },
-        'layui-form-checkbox',
-      ]"
+      class="layui-unselect layui-form-checkbox"
+      :class="{
+        'layui-checkbox-disbaled layui-disabled': disabled,
+        'layui-form-checked': needCustomChecked ? customChecked : props.checked,
+      }"
       :lay-skin="skin"
     >
       <span><slot /></span>
@@ -31,7 +24,7 @@ const props =
     skin?: string
     label?: string
     checked?: Boolean
-    disabled?: boolean
+    disabled?: Boolean
   }>()
 
 const customChecked = ref(false)

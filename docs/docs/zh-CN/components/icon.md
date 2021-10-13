@@ -1047,11 +1047,7 @@ export default {
 
 :::
 
-::: field icon attributes
-
-:::
-
-|      |      |                   |
+| Name   | Description | Default Value  |
 | ---- | ---- | ----------------- |
 | type | 图标 | `layui-icon-home` |
 | prefix | 前缀 | `layui-icon` |
