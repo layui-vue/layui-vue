@@ -1,5 +1,5 @@
 <template>
-  <span @click="handleClick">
+  <span @click.stop="handleClick">
     <div
       class="layui-unselect layui-form-switch"
       :class="{
@@ -7,7 +7,7 @@
         'layui-checkbox-disbaled layui-disabled': disabled,
       }"
     >
-      <em>{{ modelValue == true ? '启用' : '禁用' }}</em>
+      <em>{{ modelValue == true ? activeText : inactiveText }}</em>
       <i />
     </div>
   </span>
@@ -16,17 +16,26 @@
 <script setup name="LaySwitch" lang="ts">
 import { defineProps, defineEmits } from 'vue'
 
-const props = defineProps<{
-  modelValue: boolean
-  disabled?: boolean
-}>()
+const props = withDefaults(
+  defineProps<{
+    modelValue: boolean
+    disabled?: boolean
+    activeText: string
+    inactiveText: string
+  }>(),
+  {
+    activeText: '启用',
+    inactiveText: '禁用',
+  }
+)
 
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits(['update:modelValue', 'change'])
 
 const handleClick = function () {
   if (props.disabled) {
     return false
   }
   emit('update:modelValue', !props.modelValue)
+  emit('change', !props.modelValue)
 }
 </script>

@@ -293,6 +293,11 @@ export default {
         title: '文本域',
         subTitle: 'textarea',
         path: '/zh-CN/components/textarea',
+      },{
+        id: 36,
+        title: '开关',
+        subTitle: 'switch',
+        path: '/zh-CN/components/switch',
       }
     ]
 

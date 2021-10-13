@@ -190,6 +190,10 @@ const zhCN = [
         path: '/zh-CN/components/textarea',
         component: () => import('../../docs/zh-CN/components/textarea.md'),
         meta: { title: '文本域' },
+      },{
+        path: '/zh-CN/components/switch',
+        component: () => import('../../docs/zh-CN/components/switch.md'),
+        meta: { title: '开关' },
       },
     ],
   },

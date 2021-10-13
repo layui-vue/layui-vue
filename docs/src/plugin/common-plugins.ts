@@ -25,6 +25,6 @@ const plugins = [
         .use(...createContainer('field', '描述信息'))
     },
   }),
-]
+] as any
 
 export default plugins
