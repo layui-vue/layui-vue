@@ -23,8 +23,8 @@ const props =
     name?: string
     skin?: string
     label?: string
-    checked?: Boolean
-    disabled?: Boolean
+    checked?: boolean
+    disabled?: boolean
   }>()
 
 const customChecked = ref(false)

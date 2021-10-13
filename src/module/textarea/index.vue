@@ -17,7 +17,7 @@ const props = defineProps<{
   name?: string
   modelValue?: string
   placeholder?: string
-  disabled?: Boolean
+  disabled?: boolean
 }>()
 
 const emit = defineEmits(['update:modelValue', 'input'])
