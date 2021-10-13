@@ -107,7 +107,7 @@ export default {
 
 :::
 
-::: field Page attributes
+::: field page attributes
 
 :::
 
