@@ -46,7 +46,9 @@ export default {
 
 :::
 
-<lay-field title="Breadcrumb attributes" style="margin-top:40px"/>
+::: field breadcrumb attributes
+
+:::
 
 |           |        |     |
 | --------- | ------ | --- |

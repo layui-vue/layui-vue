@@ -33,3 +33,12 @@ export default {
 |       |        |                |
 | ----- | ------ | -------------- |
 | openKeys | 打开的目录 | `array` |
+
+::: field Collapse-item attributes
+
+:::
+
+|       |        |                |
+| ----- | ------ | -------------- |
+| id    | 编号   | -- |
+| title | 标题   | -- |

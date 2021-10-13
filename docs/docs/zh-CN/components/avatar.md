@@ -71,7 +71,7 @@ export default {
 
 :::
 
-::: field Avatar attributes
+::: field avatar attributes
 
 :::
 

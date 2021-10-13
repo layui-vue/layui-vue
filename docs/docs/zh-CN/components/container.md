@@ -59,7 +59,9 @@ export default {
 
 :::
 
-<lay-field title="Container attributes" style="margin-top:40px"/>
+::: field container attributes
+
+:::
 
 |       |        |                |
 | ----- | ------ | -------------- |

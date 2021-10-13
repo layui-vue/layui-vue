@@ -193,7 +193,9 @@ export default {
 
 :::
 
-<lay-field title="Table attributes" style="margin-top:40px"/>
+::: field table attributes
+
+:::
 
 |                 |            |     |
 | --------------- | ---------- | --- |

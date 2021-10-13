@@ -58,7 +58,9 @@ export default {
 
 :::
 
-<lay-field title="Field attributes" style="margin-top:40px"/>
+::: field field attributes
+
+:::
 
 |       |      |     |
 | ----- | ---- | --- |

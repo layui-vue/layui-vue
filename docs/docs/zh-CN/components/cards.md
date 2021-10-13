@@ -94,13 +94,17 @@ export default {
 :::
 
 
-<lay-field title="Card attributes" style="margin-top:40px"/>
+::: field card attributes
+
+:::
 
 |        |      |        |
 | ------ | ---- | ------ |
 | title | 标题 | -- |
 
-<lay-field title="Card slots" style="margin-top:40px"/>
+::: field card slots
+
+:::
 
 |        |      |        |
 | ------ | ---- | ------ |

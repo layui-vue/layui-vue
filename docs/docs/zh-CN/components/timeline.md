@@ -66,7 +66,9 @@ export default {
 
 :::
 
-<lay-field title="TimelineItem attributes" style="margin-top:40px"/>
+::: field timeline-item attributes
+
+:::
 
 |                 |            |     |
 | --------------- | ---------- | --- |

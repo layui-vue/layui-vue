@@ -38,7 +38,9 @@ export default {
 
 :::
 
-<lay-field title="Block attributes" style="margin-top:40px"/>
+::: field block attributes
+
+:::
 
 |       |        |                |
 | ----- | ------ | -------------- |

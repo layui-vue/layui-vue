@@ -64,7 +64,7 @@ export default {
 
 :::
 
-::: field Rate attributes
+::: field rate attributes
 
 :::
 

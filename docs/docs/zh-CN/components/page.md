@@ -121,7 +121,7 @@ export default {
 | showRefresh | 显示刷新按钮 | `false` |
 | showSkip    | 显示跳转     | `false` |
 
-::: field Page events
+::: field page events
 
 :::
 

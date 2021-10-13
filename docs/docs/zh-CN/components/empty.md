@@ -38,7 +38,9 @@ export default {
 
 :::
 
-<lay-field title="Empty attributes" style="margin-top:40px"/>
+::: field empty attributes
+
+:::
 
 |             |          |     |
 | ----------- | -------- | --- |

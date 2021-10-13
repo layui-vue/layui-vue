@@ -127,7 +127,7 @@ export default {
 
 :::
 
-::: field Checkbox attributes
+::: field checkbox attributes
 
 ::: 
 
@@ -137,7 +137,7 @@ export default {
 | skin       | 主题 | --  |
 | label       | 选中值 | --   | 
 
-::: field Checkbox events
+::: field checkbox events
 
 ::: 
 

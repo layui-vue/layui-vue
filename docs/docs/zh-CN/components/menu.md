@@ -56,7 +56,7 @@ export default {
 
 :::
 
-::: field Menu attributes
+::: field menu attributes
 
 :::
 

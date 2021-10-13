@@ -68,7 +68,9 @@ export default {
 
 :::
 
-<lay-field title="Animation class" style="margin-top:40px"/>
+::: field animation class
+
+:::
 
 |                                   |              |                                                |
 | --------------------------------- | ------------ | ---------------------------------------------- |

@@ -33,7 +33,9 @@ export default {
 
 :::
 
-<lay-field title="Badge attributes" style="margin-top:40px"/>
+::: field badge attributes
+
+:::
 
 |       |      |                                               |
 | ----- | ---- | --------------------------------------------- |

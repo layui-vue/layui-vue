@@ -61,7 +61,9 @@ export default {
 
 :::
 
-<lay-field title="Dropdown attributes" style="margin-top:40px"/>
+::: field dropdown attributes
+
+:::
 
 |         |          |                 |
 | ------- | -------- | --------------- |

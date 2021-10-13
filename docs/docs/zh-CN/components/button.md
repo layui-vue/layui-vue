@@ -199,7 +199,9 @@ export default {
 
 :::
 
-<lay-field title="Button attributes" style="margin-top:40px"/>
+::: field button attributes
+
+:::
 
 |        |        |                                               |
 | ------ | ------ | --------------------------------------------- |

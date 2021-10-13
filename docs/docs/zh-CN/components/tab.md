@@ -76,7 +76,7 @@ export default {
 
 :::
 
-::: field Tab attributes 
+::: field tab attributes 
 
 :::
 

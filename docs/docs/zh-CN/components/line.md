@@ -31,7 +31,7 @@ export default {
 
 :::
 
-::: field Line attributes
+::: field line attributes
 
 :::
 

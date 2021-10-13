@@ -124,13 +124,17 @@ export default {
 
 :::
 
-<lay-field title="Col attributes" style="margin-top:40px"/>
+::: field row attributes
+
+:::
 
 |          |      |                         |  
 | -------- | ---- | ----------------------- |
 | space    | 间隔 |  --  | 
 
-<lay-field title="Col attributes" style="margin-top:40px"/>
+::: field col attributes
+
+:::
 
 |          |      |                         |     |
 | -------- | ---- | ----------------------- | --- |

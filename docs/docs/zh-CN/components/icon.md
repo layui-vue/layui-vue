@@ -1047,7 +1047,7 @@ export default {
 
 :::
 
-::: field Icon attributes
+::: field icon attributes
 
 :::
 

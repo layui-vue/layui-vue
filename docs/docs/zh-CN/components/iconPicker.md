@@ -86,7 +86,7 @@ export default {
 
 :::
 
-::: field IconPicker attributes
+::: field icon-picker attributes
 
 :::
 
