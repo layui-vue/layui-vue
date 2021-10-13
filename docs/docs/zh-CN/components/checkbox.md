@@ -127,20 +127,10 @@ export default {
 
 :::
 
-::: field checkbox attributes
 
-::: 
-
-|          |      |                         |  
+| Name   | Description | Accepted Values  |
 | -------- | ---- | ----------------------- | 
 | name       | 原始属性 name | --  | 
 | skin       | 主题 | --  |
 | label       | 选中值 | --   | 
-
-::: field checkbox events
-
-::: 
-
-|          |      |                         |  
-| -------- | ---- | ----------------------- | 
-| change   | 切换事件 | -- | 
+| change   | 切换事件 | isChecked : 当前状态  | 
