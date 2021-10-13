@@ -4921,6 +4921,10 @@ body .layui-table-tips .layui-layer-content {
   font-size: 14px;
 }
 
+.layui-breadcrumb a {
+  color: #999;
+}
+
 .layui-breadcrumb a:hover {
   color: #5fb878 !important;
 }

@@ -20,8 +20,8 @@ const props = withDefaults(
   defineProps<{
     modelValue: boolean
     disabled?: boolean
-    activeText: string
-    inactiveText: string
+    activeText?: string
+    inactiveText?: string
   }>(),
   {
     activeText: '启用',

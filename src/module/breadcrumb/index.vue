@@ -1,14 +1,11 @@
 <template>
   <span class="layui-breadcrumb" style="visibility: visible">
-    <slot />
+    <slot></slot>
   </span>
 </template>
 
 <script setup name="LayBreadcrumb" lang="ts">
-import { defineProps, provide, withDefaults, useSlots } from 'vue'
-
-const slot = useSlots()
-const slots = slot.default && slot.default()
+import { defineProps, provide, withDefaults, useSlots, ref, Ref } from 'vue'
 
 const props = withDefaults(
   defineProps<{

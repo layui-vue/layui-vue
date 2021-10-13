@@ -5,7 +5,7 @@
       class="layui-unselect layui-form-checkbox"
       :class="{
         'layui-checkbox-disbaled layui-disabled': disabled,
-        'layui-form-checked': needCustomChecked ? customChecked : props.checked,
+        'layui-form-checked': props.checked,
       }"
       :lay-skin="skin"
     >
@@ -27,20 +27,12 @@ const props =
     disabled?: boolean
   }>()
 
-const customChecked = ref(false)
-const needCustomChecked = props.checked == undefined
-
 const emit = defineEmits(['update:checked', 'change'])
 
 const handleClick = function () {
   if (!props.disabled) {
-    if (needCustomChecked) {
-      customChecked.value = !customChecked.value
-      emit('change', !customChecked.value)
-    } else {
       emit('update:checked', !props.checked)
       emit('change', !props.checked)
-    }
   }
 }
 </script>
