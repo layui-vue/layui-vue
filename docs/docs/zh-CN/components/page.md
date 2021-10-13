@@ -107,6 +107,8 @@ export default {
 
 :::
 
+<lay-button></lay-button>
+
 ::: field page attributes
 
 :::

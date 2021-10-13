@@ -283,7 +283,12 @@ export default {
         title: '单选框',
         subTitle: 'radio',
         path: '/zh-CN/components/radio',
-      },
+      },{
+        id: 34,
+        title: '输入框',
+        subTitle: 'input',
+        path: '/zh-CN/components/input',
+      }
     ]
 
     const selected = ref(1)

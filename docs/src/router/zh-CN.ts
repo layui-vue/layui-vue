@@ -182,6 +182,10 @@ const zhCN = [
         path: '/zh-CN/components/radio',
         component: () => import('../../docs/zh-CN/components/radio.md'),
         meta: { title: '单选框' },
+      },{
+        path: '/zh-CN/components/input',
+        component: () => import('../../docs/zh-CN/components/input.md'),
+        meta: { title: '输入框' },
       },
     ],
   },

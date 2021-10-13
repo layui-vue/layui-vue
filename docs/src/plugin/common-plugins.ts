@@ -6,7 +6,6 @@ import snippet from './snippet'
 import demo from './demo'
 import createContainer from './create-container'
 import preWrapper from './pre-wrapper'
-import type Token from 'markdown-it/lib/token'
 
 const plugins = [
   vue({
