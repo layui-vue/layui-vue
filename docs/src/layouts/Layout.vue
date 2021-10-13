@@ -278,6 +278,11 @@ export default {
         title: '复选框',
         subTitle: 'checkbox',
         path: '/zh-CN/components/checkbox',
+      },{
+        id: 33,
+        title: '单选框',
+        subTitle: 'radio',
+        path: '/zh-CN/components/radio',
       },
     ]
 

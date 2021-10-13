@@ -178,6 +178,10 @@ const zhCN = [
         path: '/zh-CN/components/checkbox',
         component: () => import('../../docs/zh-CN/components/checkbox.md'),
         meta: { title: '复选框' },
+      },{
+        path: '/zh-CN/components/radio',
+        component: () => import('../../docs/zh-CN/components/radio.md'),
+        meta: { title: '单选框' },
       },
     ],
   },
