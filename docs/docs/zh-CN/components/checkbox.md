@@ -132,5 +132,6 @@ export default {
 | -------- | ---- | ----------------------- | 
 | name       | 原始属性 name | --  | 
 | skin       | 主题 | --  |
-| label       | 选中值 | --   | 
+| label      | 选中值 | --   | 
+| checked ( v-model )    | 是否选中 | `true` `false`   | 
 | change   | 切换事件 | isChecked : 当前状态  | 

@@ -67,3 +67,11 @@ export default {
 </script>
 
 :::
+
+
+| Name   | Description | Accepted Values  |
+| -------- | ---- | ----------------------- | 
+| name       | 原始属性 name | --  | 
+| placeholder      | 提示信息 | --   | 
+| v-model     | 值 | --  | 
+| input   | 原生 input 事件 | val : 当前值  | 
