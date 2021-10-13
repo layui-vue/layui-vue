@@ -167,10 +167,16 @@ const { innerTreeData, updateInnerTreeData, treeWrapperClass } = useTreeData(
   emit
 )
 
-function handleNodeClick(node: TreeNode) {
-  updateInnerTreeData(innerTreeData.value, node)
+function handleNodeClick(node: TreeNode, type: 'node' | 'icon') {
+  // 是否只通过icon控制展开收起
+  if (props.onlyIconControl) {
+    type === 'icon' && updateInnerTreeData(innerTreeData.value, node)
+  } else {
+    updateInnerTreeData(innerTreeData.value, node)
+  }
+  // icon 点击不emit出事件
   const emitNode = getEmitNode(props.data!, node)
-  emit('node-click', { data: emitNode! })
+  type !== 'icon' &&  emit('node-click', { data: emitNode! })
 }
 </script>
 <script lang="ts">
@@ -184,7 +190,6 @@ export default {
       v-for="(node, index) in innerTreeData"
       :key="node.id || index"
       :node="node"
-      :only-icon-control="onlyIconControl"
       @node-click="handleNodeClick"
     />
   </div>

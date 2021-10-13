@@ -7,13 +7,14 @@ export default {
 import LayIcon from '../icon'
 import { TreeNode } from '/@src/module/tree/tree.type'
 
+type EventType = 'icon' | 'node'
+
 interface TreeEntityProps {
   node: TreeNode
-  onlyIconControl: boolean
 }
 
 interface EmitEvent {
-  (e: 'node-click', node: TreeNode): void
+  (e: 'node-click', node: TreeNode, type: EventType): void
 }
 
 const props = defineProps<TreeEntityProps>()
@@ -44,19 +45,27 @@ const nodeIconType = (node: TreeNode): string => {
 }
 
 /**
- * 发射至外层
+ * Node Icon Click
+ * @param node
+ */
+function handleIconClick(node: TreeNode) {
+  emit('node-click', node, 'icon')
+}
+
+/**
+ * Node Font Click
  * @param node
  */
 function handleNodeClick(node: TreeNode) {
-  emit('node-click', node)
+  emit('node-click', node, 'node')
 }
 
 /**
  * 递归事件
  * @param node
  */
-function innerClick(node: TreeNode) {
-  emit('node-click', node)
+function innerClick(node: TreeNode, type: EventType) {
+  emit('node-click', node, type)
 }
 </script>
 <template>
@@ -69,17 +78,18 @@ function innerClick(node: TreeNode) {
       }"
     >
       <div class="layui-tree-entry">
-        <div
-          class="layui-tree-main"
-          @click.prevent.stop="!onlyIconControl && handleNodeClick(node)"
-        >
+        <div class="layui-tree-main">
           <span class="layui-tree-iconClick layui-tree-icon">
             <LayIcon
               :type="nodeIconType(node)"
-              @click.prevent.stop="handleNodeClick(node)"
+              @click.prevent.stop="handleIconClick(node, 'icon')"
             />
           </span>
-          <span class="layui-tree-txt">{{ node.title }}</span>
+          <span
+            class="layui-tree-txt"
+            @click.prevent.stop="handleNodeClick(node, 'node')"
+            >{{ node.title }}</span
+          >
         </div>
       </div>
       <div
@@ -91,7 +101,6 @@ function innerClick(node: TreeNode) {
           v-for="(item, index) in node.children"
           :key="index"
           :node="item"
-          :only-icon-control="onlyIconControl"
           @node-click="innerClick"
         />
       </div>
@@ -105,17 +114,18 @@ function innerClick(node: TreeNode) {
       }"
     >
       <div class="layui-tree-entry">
-        <div
-          class="layui-tree-main"
-          @click.prevent.stop="!onlyIconControl && handleNodeClick(node)"
-        >
+        <div class="layui-tree-main">
           <span class="layui-tree-iconClick">
             <LayIcon
               type="layui-icon-file"
-              @click.prevent.stop="handleNodeClick(node)"
+              @click.prevent.stop="handleIconClick(node, 'icon')"
             />
           </span>
-          <span class="layui-tree-txt">{{ node.title }}</span>
+          <span
+            class="layui-tree-txt"
+            @click.prevent.stop="handleNodeClick(node, 'node')"
+            >{{ node.title }}</span
+          >
         </div>
       </div>
     </div>
