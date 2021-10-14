@@ -2,9 +2,9 @@
 
 <template>
     <lay-breadcrumb>
-        <lay-breadcrumb-item title="哈哈"></lay-breadcrumb-item>
-        <lay-breadcrumb-item title="哈哈"></lay-breadcrumb-item>
-        <lay-breadcrumb-item title="哈哈"></lay-breadcrumb-item>
+        <lay-breadcrumb-item title="工作空间"></lay-breadcrumb-item>
+        <lay-breadcrumb-item title="控制台"></lay-breadcrumb-item>
+        <lay-breadcrumb-item title="访问量"></lay-breadcrumb-item>
     </lay-breadcrumb>
 </template>
 
@@ -26,9 +26,33 @@ export default {
 
 <template>
     <lay-breadcrumb separator=">">
-        <lay-breadcrumb-item title="哈哈"></lay-breadcrumb-item>
-        <lay-breadcrumb-item title="哈哈"></lay-breadcrumb-item>
-        <lay-breadcrumb-item title="哈哈"></lay-breadcrumb-item>
+        <lay-breadcrumb-item title="热门音乐"></lay-breadcrumb-item>
+        <lay-breadcrumb-item title="王杰"></lay-breadcrumb-item>
+        <lay-breadcrumb-item title="谁明浪子心"></lay-breadcrumb-item>
+    </lay-breadcrumb>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    return {
+    }
+  }
+}
+</script>
+
+:::
+
+::: demo
+
+<template>
+    <lay-breadcrumb separator="-">
+        <lay-breadcrumb-item title="可口可乐"></lay-breadcrumb-item>
+        <lay-breadcrumb-item title="美年达"></lay-breadcrumb-item>
+        <lay-breadcrumb-item title="芬达"></lay-breadcrumb-item>
     </lay-breadcrumb>
 </template>
 

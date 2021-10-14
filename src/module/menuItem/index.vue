@@ -5,7 +5,8 @@
     :class="[isOpen && isTree ? 'layui-nav-itemed' : '']"
   >
     <a href="javascript:void(0)" @click="openHandle">
-      {{ title }}
+      <slot v-if="slots.title" name="title"></slot>
+      <span v-else>{{ title }}</span>
       <i class="layui-icon layui-icon-down layui-nav-more" />
     </a>
     <dl
@@ -25,7 +26,10 @@
     :class="[selectKey === id ? 'layui-this' : '']"
     @click="selectHandle()"
   >
-    <a href="javascript:void(0)">{{ title }} </a>
+    <a href="javascript:void(0)"> 
+      <slot v-if="slots.title" name="title"></slot>
+      <span v-else> {{ title }} </span>  
+    </a>
   </li>
 </template>
 

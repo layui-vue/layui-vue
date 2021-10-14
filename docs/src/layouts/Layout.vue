@@ -30,6 +30,9 @@
               反馈
             </a>
           </li>
+          <li class="layui-nav-item">
+            <a href="javascript:void(0)"> 0.1.1 </a>
+          </li>
         </ul>
       </lay-header>
       <lay-side>

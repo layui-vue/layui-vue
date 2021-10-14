@@ -4802,8 +4802,8 @@ body .layui-table-tips .layui-layer-content {
 
 .layui-nav-tree .layui-nav-item a {
   position: relative;
-  height: 40px;
-  line-height: 40px;
+  height: 46px;
+  line-height: 46px;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;

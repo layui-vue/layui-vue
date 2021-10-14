@@ -129,9 +129,6 @@ table td {
   padding: 0 10px; /*内边距*/
 }
 
-table tr:hover {
-  background: #efefef;
-}
 table th {
   white-space: nowrap; /*表头内容强制在一行显示*/
 }

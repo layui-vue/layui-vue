@@ -29,7 +29,7 @@ export default {
 .grid-demo {
     padding: 10px;
     line-height: 50px;
-    border-radius: 4px;
+    border-radius: 2px;
     text-align: center;
     background-color: #79C48C;
     color: #fff;
@@ -65,7 +65,7 @@ export default {
 .grid-demo {
     padding: 10px;
     line-height: 50px;
-    border-radius: 4px;
+    border-radius: 2px;
     text-align: center;
     background-color: #79C48C;
     color: #fff;
