@@ -4,7 +4,7 @@
 
 <template>
   <lay-form>
-    <lay-checkbox name="like" skin="primary"  v-model:checked="checked1" label="1" >普通</lay-checkbox>
+    <lay-checkbox name="like" skin="primary"  v-model:checked="checked1" label="1" ></lay-checkbox>
  </lay-form>
 </template>
 

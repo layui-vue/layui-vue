@@ -16,7 +16,9 @@
 </template>
 
 <script setup name="LayCheckbox" lang="ts">
-import { defineProps } from 'vue'
+import { defineProps, useSlots } from 'vue'
+
+const slot = useSlots()
 
 const props =
   defineProps<{
