@@ -12,7 +12,7 @@ type EventType = 'icon' | 'node'
 
 interface TreeEntityProps {
   node: TreeNode
-  showCheckbox?: boolean,
+  showCheckbox?: boolean
   updateCheckedByNode: (node: TreeNode) => void
 }
 
@@ -79,7 +79,10 @@ function innerClick(node: TreeNode, type: EventType) {
  * @param arg
  * @param node
  */
-function handleCheckboxChange (arg: { checked: boolean, value: string }, node: TreeNode) {
+function handleCheckboxChange(
+  arg: { checked: boolean; value: string },
+  node: TreeNode
+) {
   props.updateCheckedByNode(node)
 }
 </script>
@@ -102,12 +105,16 @@ function handleCheckboxChange (arg: { checked: boolean, value: string }, node: T
           </span>
           <LayCheckbox
             v-if="showCheckbox"
+            v-model:checked="node._checked"
             name="name"
             skin="primary"
-            v-model:checked="node._checked"
-            @change="(args) => { handleCheckboxChange(args, node) }"
+            @change="
+              (args) => {
+                handleCheckboxChange(args, node)
+              }
+            "
           >
-<!--            {{ node.title }} || {{node.id}}-->
+            <!--            {{ node.title }} || {{node.id}}-->
           </LayCheckbox>
           <span
             class="layui-tree-txt"
@@ -127,8 +134,8 @@ function handleCheckboxChange (arg: { checked: boolean, value: string }, node: T
           :key="index"
           :node="item"
           :show-checkbox="showCheckbox"
+          :update-checked-by-node="updateCheckedByNode"
           @node-click="innerClick"
-          :updateCheckedByNode="updateCheckedByNode"
         />
       </div>
     </div>
@@ -150,11 +157,15 @@ function handleCheckboxChange (arg: { checked: boolean, value: string }, node: T
           </span>
           <LayCheckbox
             v-if="showCheckbox"
+            v-model:checked="node._checked"
             name="name"
             skin="primary"
             label="1"
-            v-model:checked="node._checked"
-            @change="(args) => { handleCheckboxChange(args, node) }"
+            @change="
+              (args) => {
+                handleCheckboxChange(args, node)
+              }
+            "
           >
           </LayCheckbox>
           <span

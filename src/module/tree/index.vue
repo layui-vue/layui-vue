@@ -194,8 +194,8 @@ export default {
       :key="node.id || index"
       :node="node"
       :show-checkbox="showCheckbox"
+      :update-checked-by-node="updateCheckedByNode"
       @node-click="handleNodeClick"
-      :updateCheckedByNode="updateCheckedByNode"
     />
   </div>
 </template>

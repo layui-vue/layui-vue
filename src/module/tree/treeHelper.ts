@@ -1,6 +1,6 @@
 import { TreeData, TreeNode } from '/@src/module/tree/tree.type'
 import { Nullable } from '/@src/module/type'
-import { Ref, WritableComputedRef } from "vue";
+import { Ref, WritableComputedRef } from 'vue'
 
 /**
  * 添加父级parentId
@@ -19,7 +19,7 @@ export const generatorTreeData = (
     const inner = {
       ...item,
       parentId: parentId,
-      spread: item.spread || false
+      spread: item.spread || false,
     }
     if (item.children && item.children.length > 0) {
       inner.children = generatorTreeData(item.children, item.id)
@@ -130,12 +130,16 @@ export const getEmitNode = (
  * @param checkedKeys
  * @param checked
  */
-export const patchCheckedKeys = (tree: TreeNode[], checkedKeys: WritableComputedRef<(string | number)[]>, checked = false): void => {
+export const patchCheckedKeys = (
+  tree: TreeNode[],
+  checkedKeys: WritableComputedRef<(string | number)[]>,
+  checked = false
+): void => {
   if (!checkedKeys.value) {
     return
   }
   const len = tree.length
-  for (let i = 0; i < len; i++){
+  for (let i = 0; i < len; i++) {
     tree[i]._checked = checked
     const node = tree[i]
     // 该节点是checked
@@ -148,7 +152,7 @@ export const patchCheckedKeys = (tree: TreeNode[], checkedKeys: WritableComputed
       if (node.children && node.children.length > 0) {
         patchCheckedKeys(node.children, checkedKeys, false)
         // 判断children是否为都选中，如果是都选中的情况下，父组件也得是选中
-        const allChildrenChecked = node.children.every(it => it._checked)
+        const allChildrenChecked = node.children.every((it) => it._checked)
         if (allChildrenChecked) {
           node._checked = true
         }
@@ -172,7 +176,11 @@ function updateChildren(data: TreeNode[], flag: boolean) {
  * @param clickNode
  * @param parentNode
  */
-export function updateInnerTreeDataChecked(data: TreeNode[], clickNode: TreeNode, parentNode?: TreeNode) {
+export function updateInnerTreeDataChecked(
+  data: TreeNode[],
+  clickNode: TreeNode,
+  parentNode?: TreeNode
+) {
   const len = data.length
   for (let i = 0; i < len; i++) {
     const currentNode = data[i]
@@ -189,13 +197,13 @@ export function updateInnerTreeDataChecked(data: TreeNode[], clickNode: TreeNode
     }
     // 当前节点有选中，父节点一定选中
     if (currentNode.children && currentNode.children.length > 0) {
-      currentNode._checked = currentNode.children.some(it => it._checked)
+      currentNode._checked = currentNode.children.some((it) => it._checked)
     }
   }
 }
 
 export function getCheckedKeys(tree: TreeNode[]): (string | number)[] {
-  let keys: (string | number) [] = []
+  let keys: (string | number)[] = []
   const len = tree.length
   for (let i = 0; i < len; i++) {
     const current = tree[i]
