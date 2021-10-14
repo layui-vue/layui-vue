@@ -5,11 +5,6 @@
       class="layui-form layui-border-box layui-table-view layui-table-view-1"
     >
       <div v-if="defaultToolbar || slot.toolbar" class="layui-table-tool">
-        <div class="layui-table-tool-temp">
-          <div class="layui-btn-container">
-            <slot name="toolbar" />
-          </div>
-        </div>
         <div v-if="defaultToolbar" class="layui-table-tool-self">
           <div class="layui-inline" title="筛选列" lay-event="LAYTABLE_COLS">
             <i class="layui-icon layui-icon-cols" />

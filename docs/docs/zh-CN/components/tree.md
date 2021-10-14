@@ -209,3 +209,20 @@ function handleClick(node) {
 </script>
 
 :::
+
+::: field tree attributes
+
+:::
+
+| Name   | Description | Accepted Values  |
+| -------- | ---- | ----------------------- | 
+| name       | 原始属性 name | --  | 
+
+
+::: field tree events
+
+:::
+
+| Name   | Description | Accepted Params  |
+| -------- | ---- | ----------------------- | 
+| name       | 原始属性 name | --  | 
