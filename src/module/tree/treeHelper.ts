@@ -1,6 +1,6 @@
 import { TreeData, TreeNode } from '/@src/module/tree/tree.type'
 import { Nullable } from '/@src/module/type'
-import { WritableComputedRef } from 'vue'
+import { Ref, WritableComputedRef } from "vue";
 
 /**
  * 添加父级parentId
@@ -10,8 +10,7 @@ import { WritableComputedRef } from 'vue'
  */
 export const generatorTreeData = (
   data: TreeData[] | TreeNode[],
-  parentId: TreeNode['parentId'] = '',
-  checkedKeys: WritableComputedRef<(string | number)[]>
+  parentId: TreeNode['parentId'] = ''
 ): TreeNode[] => {
   const innerTreeData: TreeNode[] = []
   const len = data.length
@@ -20,10 +19,10 @@ export const generatorTreeData = (
     const inner = {
       ...item,
       parentId: parentId,
-      spread: item.spread || false,
+      spread: item.spread || false
     }
     if (item.children && item.children.length > 0) {
-      inner.children = generatorTreeData(item.children, item.id, checkedKeys)
+      inner.children = generatorTreeData(item.children, item.id)
     }
     innerTreeData.push(inner as TreeNode)
   }
@@ -71,9 +70,10 @@ export const initialTreeData = (
   data: TreeData[],
   checkedKeys: WritableComputedRef<(string | number)[]>
 ): TreeNode[] => {
-  const innerTree = generatorTreeData(data, '', checkedKeys)
+  const innerTree = generatorTreeData(data, '')
   setNextSiblings(innerTree)
   setParentNode(innerTree)
+  patchCheckedKeys(innerTree, checkedKeys)
   return innerTree
 }
 
@@ -122,4 +122,89 @@ export const getEmitNode = (
     }
   }
   return item
+}
+
+/**
+ * checkedKes分发到node
+ * @param tree
+ * @param checkedKeys
+ * @param checked
+ */
+export const patchCheckedKeys = (tree: TreeNode[], checkedKeys: WritableComputedRef<(string | number)[]>, checked = false): void => {
+  if (!checkedKeys.value) {
+    return
+  }
+  const len = tree.length
+  for (let i = 0; i < len; i++){
+    tree[i]._checked = checked
+    const node = tree[i]
+    // 该节点是checked
+    if (checkedKeys.value.indexOf(node.id) > -1) {
+      node._checked = true
+      if (node.children && node.children.length > 0) {
+        patchCheckedKeys(node.children, checkedKeys, true)
+      }
+    } else {
+      if (node.children && node.children.length > 0) {
+        patchCheckedKeys(node.children, checkedKeys, false)
+        // 判断children是否为都选中，如果是都选中的情况下，父组件也得是选中
+        const allChildrenChecked = node.children.every(it => it._checked)
+        if (allChildrenChecked) {
+          node._checked = true
+        }
+      }
+    }
+  }
+}
+
+function updateChildren(data: TreeNode[], flag: boolean) {
+  for (let i = 0; i < data.length; i++) {
+    data[i]._checked = flag
+    if (data[i].children && data[i].children.length > 0) {
+      updateChildren(data[i].children, flag)
+    }
+  }
+}
+
+/**
+ * 更新树
+ * @param data
+ * @param clickNode
+ * @param parentNode
+ */
+export function updateInnerTreeDataChecked(data: TreeNode[], clickNode: TreeNode, parentNode?: TreeNode) {
+  const len = data.length
+  for (let i = 0; i < len; i++) {
+    const currentNode = data[i]
+    // 找到当前更新的节点
+    if (currentNode.id === clickNode.id) {
+      // 如果当前节点有子节点，更新子节点
+      if (currentNode.children && currentNode.children.length > 0) {
+        updateChildren(data[i].children, currentNode._checked!)
+      }
+    } else {
+      if (currentNode.children && currentNode.children.length > 0) {
+        updateInnerTreeDataChecked(currentNode.children, clickNode, currentNode)
+      }
+    }
+    // 当前节点有选中，父节点一定选中
+    if (currentNode.children && currentNode.children.length > 0) {
+      currentNode._checked = currentNode.children.some(it => it._checked)
+    }
+  }
+}
+
+export function getCheckedKeys(tree: TreeNode[]): (string | number)[] {
+  let keys: (string | number) [] = []
+  const len = tree.length
+  for (let i = 0; i < len; i++) {
+    const current = tree[i]
+    if (current._checked) {
+      keys.push(current.id)
+      if (current.children && current.children.length > 0) {
+        keys = [...keys, ...getCheckedKeys(current.children)]
+      }
+    }
+  }
+  return keys
 }

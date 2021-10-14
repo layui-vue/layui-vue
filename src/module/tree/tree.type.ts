@@ -176,6 +176,7 @@ export interface TreeNode extends TreeData {
   _parentNode?: Nullable<TreeNode>
   _nextSibling?: Nullable<TreeNode>
   _expand?: boolean
+  _checked?: boolean
 }
 
 /** hook type **/
@@ -188,4 +189,5 @@ export type UseTreeData = (
   spreadKeys: WritableComputedRef<(string | number)[]>
   treeWrapperClass: ComputedRef<Recordable>
   updateInnerTreeData: (treeData: TreeData[], node: TreeData) => void
+  updateCheckedByNode: (treeNode: TreeNode) => void
 }

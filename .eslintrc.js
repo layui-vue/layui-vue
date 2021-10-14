@@ -60,6 +60,7 @@ module.exports = {
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     'vue/one-component-per-file': 'off',
     '@typescript-eslint/no-non-null-assertion': 'off',
+    'vue/no-mutating-props': 'off',
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
   },

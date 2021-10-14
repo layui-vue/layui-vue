@@ -12,7 +12,8 @@ type EventType = 'icon' | 'node'
 
 interface TreeEntityProps {
   node: TreeNode
-  showCheckbox?: boolean
+  showCheckbox?: boolean,
+  updateCheckedByNode: (node: TreeNode) => void
 }
 
 interface EmitEvent {
@@ -73,7 +74,14 @@ function innerClick(node: TreeNode, type: EventType) {
   emit('node-click', node, type)
 }
 
-console.log(props.showCheckbox)
+/**
+ * checkbox click
+ * @param arg
+ * @param node
+ */
+function handleCheckboxChange (arg: { checked: boolean, value: string }, node: TreeNode) {
+  props.updateCheckedByNode(node)
+}
 </script>
 <template>
   <template v-if="node.children && node.children.length > 0">
@@ -96,13 +104,12 @@ console.log(props.showCheckbox)
             v-if="showCheckbox"
             name="name"
             skin="primary"
-            label="1"
-            :checked="true"
+            v-model:checked="node._checked"
+            @change="(args) => { handleCheckboxChange(args, node) }"
           >
-            {{ node.title }}
+<!--            {{ node.title }} || {{node.id}}-->
           </LayCheckbox>
           <span
-            v-else
             class="layui-tree-txt"
             @click.prevent.stop="handleNodeClick(node, 'node')"
           >
@@ -119,8 +126,9 @@ console.log(props.showCheckbox)
           v-for="(item, index) in node.children"
           :key="index"
           :node="item"
+          :show-checkbox="showCheckbox"
           @node-click="innerClick"
-          :showCheckbox="showCheckbox"
+          :updateCheckedByNode="updateCheckedByNode"
         />
       </div>
     </div>
@@ -145,12 +153,11 @@ console.log(props.showCheckbox)
             name="name"
             skin="primary"
             label="1"
-            :checked="true"
+            v-model:checked="node._checked"
+            @change="(args) => { handleCheckboxChange(args, node) }"
           >
-            {{ node.title }}
           </LayCheckbox>
           <span
-            v-else
             class="layui-tree-txt"
             @click.prevent.stop="handleNodeClick(node, 'node')"
           >

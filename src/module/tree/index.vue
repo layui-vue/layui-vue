@@ -163,10 +163,12 @@ const props = withDefaults(defineProps<TreeProps>(), {
 
 const emit = defineEmits<TreeEmits>()
 
-const { innerTreeData, updateInnerTreeData, treeWrapperClass } = useTreeData(
-  props,
-  emit
-)
+const {
+  innerTreeData,
+  updateInnerTreeData,
+  treeWrapperClass,
+  updateCheckedByNode,
+} = useTreeData(props, emit)
 
 function handleNodeClick(node: TreeNode, type: 'node' | 'icon') {
   // 是否只通过icon控制展开收起
@@ -191,8 +193,9 @@ export default {
       v-for="(node, index) in innerTreeData"
       :key="node.id || index"
       :node="node"
+      :show-checkbox="showCheckbox"
       @node-click="handleNodeClick"
-      :showCheckbox="showCheckbox"
+      :updateCheckedByNode="updateCheckedByNode"
     />
   </div>
 </template>

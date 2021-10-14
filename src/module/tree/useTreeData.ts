@@ -1,9 +1,10 @@
 import { TreeData, TreeNode, UseTreeData } from '/@src/module/tree/tree.type'
 import { computed, ref, unref, watch } from 'vue'
 import {
+  getCheckedKeys,
   getTreeSpreadKeys,
-  initialTreeData,
-} from '/@src/module/tree/treeHelper'
+  initialTreeData, updateInnerTreeDataChecked
+} from "/@src/module/tree/treeHelper";
 import { Recordable } from '/@src/module/type'
 
 export const useTreeData: UseTreeData = (props, emit) => {
@@ -43,6 +44,16 @@ export const useTreeData: UseTreeData = (props, emit) => {
     { immediate: true, deep: true }
   )
 
+  /**
+   * watch innerTreeDate to emit checkedKeys
+   * @param treeData
+   * @param node
+   */
+  watch(innerTreeData, tree => {
+    const emitCheckedKeys = getCheckedKeys(tree)
+    checkedKeys.value = emitCheckedKeys
+  }, { deep: true })
+
   function updateInnerTreeData(treeData: TreeData[], node: TreeData): void {
     for (let i = 0; i < treeData.length; i++) {
       if (treeData[i].id === node.id) {
@@ -67,11 +78,20 @@ export const useTreeData: UseTreeData = (props, emit) => {
     }
   })
 
+  /**
+   * 更新checked状态到node中
+   * @param node
+   */
+  function updateCheckedByNode (node: TreeNode) {
+    updateInnerTreeDataChecked(innerTreeData.value, node)
+  }
+
   return {
     spreadKeys,
     checkedKeys,
     innerTreeData,
     updateInnerTreeData,
     treeWrapperClass,
+    updateCheckedByNode
   }
 }
