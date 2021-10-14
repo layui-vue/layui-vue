@@ -1,6 +1,6 @@
 import { TreeData, TreeNode } from '/@src/module/tree/tree.type'
 import { Nullable } from '/@src/module/type'
-import { Ref, WritableComputedRef } from 'vue'
+import { WritableComputedRef } from 'vue'
 
 /**
  * 添加父级parentId
