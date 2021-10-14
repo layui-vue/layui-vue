@@ -217,6 +217,11 @@ function handleClick(node) {
 | Name   | Description | Accepted Values  |
 | -------- | ---- | ----------------------- | 
 | name       | 原始属性 name | --  | 
+| data       | 树型组件数据,类型TreeData[] | null | 
+| showCheckbox | 是否显示复选框 | false |
+| onlyIconControl | 是否仅允许节点左侧图标控制展开收缩 | false |
+| showLine | 是否开启连接线 | true |
+| checkedKeys(v-model:checkedKeys)    |  开启选中后选中的节点 | - |
 
 
 ::: field tree events
