@@ -7,7 +7,7 @@
       fluid ? 'layui-btn-fluid' : '',
       radius ? 'layui-btn-radius' : '',
       border ? 'layui-border-' + border : '',
-      disabled ? 'layui-btn-disabled': ''
+      disabled ? 'layui-btn-disabled' : '',
     ]"
   >
     <slot />

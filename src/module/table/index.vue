@@ -14,7 +14,12 @@
           <div class="layui-inline" title="筛选列" lay-event="LAYTABLE_COLS">
             <i class="layui-icon layui-icon-cols" />
           </div>
-          <div class="layui-inline" title="打印" lay-event="LAYTABLE_PRINT" @click="print()">
+          <div
+            class="layui-inline"
+            title="打印"
+            lay-event="LAYTABLE_PRINT"
+            @click="print()"
+          >
             <i class="layui-icon layui-icon-print" />
           </div>
         </div>
@@ -54,9 +59,9 @@
                   <td v-if="checkbox" class="layui-table-col-special">
                     <div class="layui-table-cell laytable-cell-checkbox">
                       <table-item-checkbox
+                        v-model="tableSelectedKeys"
                         skin="primary"
                         :label="data[id]"
-                        v-model="tableSelectedKeys"
                       >
                       </table-item-checkbox>
                     </div>

@@ -21,14 +21,13 @@
 <script setup name="LayCheckbox" lang="ts">
 import { defineProps, ref } from 'vue'
 
-const props =
-  defineProps<{
-    modelValue: string[]
-    label: string
-    disabled?: boolean
-    name?: string
-    skin?: string
-  }>()
+const props = defineProps<{
+  modelValue: string[]
+  label: string
+  disabled?: boolean
+  name?: string
+  skin?: string
+}>()
 
 const hasValue = ref(false)
 

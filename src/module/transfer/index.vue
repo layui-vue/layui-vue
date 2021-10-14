@@ -25,10 +25,16 @@
         </ul>
       </div>
       <div class="layui-transfer-active">
-        <lay-button @click="add" type="primary" :disabled="leftSelectedKeys.length==0"
+        <lay-button
+          type="primary"
+          :disabled="leftSelectedKeys.length == 0"
+          @click="add"
           ><i class="layui-icon layui-icon-next"
         /></lay-button>
-        <lay-button @click="remove" type="primary" :disabled="rightSelectedKeys.length==0"
+        <lay-button
+          type="primary"
+          :disabled="rightSelectedKeys.length == 0"
+          @click="remove"
           ><i class="layui-icon layui-icon-prev"
         /></lay-button>
       </div>
@@ -74,8 +80,8 @@ const props = withDefaults(
   }>(),
   {
     id: 'id',
-    title: function() {
-      return ['主列表','副列表']
+    title: function () {
+      return ['主列表', '副列表']
     },
     dataSource: function () {
       return []
@@ -106,13 +112,17 @@ const allLeftChange = function ({ checked }: any) {
   }
 }
 
-watch(leftSelectedKeys, function(){
-  if(leftDataSource.value.length === leftSelectedKeys.value.length ) {
-    allLeftChecked.value = true
-  } else {
-    allLeftChecked.value = false
-  }
-},{deep:true})
+watch(
+  leftSelectedKeys,
+  function () {
+    if (leftDataSource.value.length === leftSelectedKeys.value.length) {
+      allLeftChecked.value = true
+    } else {
+      allLeftChecked.value = false
+    }
+  },
+  { deep: true }
+)
 
 const allRightChange = function ({ checked }: any) {
   if (checked) {
@@ -125,25 +135,29 @@ const allRightChange = function ({ checked }: any) {
   }
 }
 
-watch(rightSelectedKeys, function(){
-  if(rightDataSource.value.length === rightSelectedKeys.value.length ) {
-    allRightChecked.value = true
-  } else {
-    allRightChecked.value = false
-  }
-},{deep:true})
+watch(
+  rightSelectedKeys,
+  function () {
+    if (rightDataSource.value.length === rightSelectedKeys.value.length) {
+      allRightChecked.value = true
+    } else {
+      allRightChecked.value = false
+    }
+  },
+  { deep: true }
+)
 
-const add = function() {
-    // 删除 leftDataSource 选中的元素
-    rightDataSource.value = leftDataSource.value.filter(
-      item => leftSelectedKeys.value.indexOf(item.id) != -1
-    )
+const add = function () {
+  // 删除 leftDataSource 选中的元素
+  rightDataSource.value = leftDataSource.value.filter(
+    (item) => leftSelectedKeys.value.indexOf(item.id) != -1
+  )
 }
 
-const remove = function() {
-    // 删除 rightDataSource 选中的元素
-    leftDataSource.value = rightDataSource.value.filter(
-      item => rightSelectedKeys.value.indexOf(item.id) != -1
-    )
+const remove = function () {
+  // 删除 rightDataSource 选中的元素
+  leftDataSource.value = rightDataSource.value.filter(
+    (item) => rightSelectedKeys.value.indexOf(item.id) != -1
+  )
 }
 </script>

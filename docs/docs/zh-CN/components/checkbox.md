@@ -1,5 +1,3 @@
-
-
 ::: demo
 
 <template>
@@ -24,8 +22,6 @@ export default {
 </script>
 
 :::
-
-
 
 ::: demo
 
@@ -138,11 +134,10 @@ export default {
 
 :::
 
-
-| Name   | Description | Accepted Values  |
-| -------- | ---- | ----------------------- | 
-| name       | 原始属性 name | --  | 
-| skin       | 主题 | --  |
-| label      | 选中值 | --   | 
-| checked ( v-model )    | 是否选中 | `true` `false`   | 
-| change   | 切换事件 | isChecked : 当前状态  | 
+| Name                | Description   | Accepted Values      |
+| ------------------- | ------------- | -------------------- |
+| name                | 原始属性 name | --                   |
+| skin                | 主题          | --                   |
+| label               | 选中值        | --                   |
+| checked ( v-model ) | 是否选中      | `true` `false`       |
+| change              | 切换事件      | isChecked : 当前状态 |

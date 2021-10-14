@@ -20,21 +20,20 @@ import { defineProps, useSlots } from 'vue'
 
 const slot = useSlots()
 
-const props =
-  defineProps<{
-    name?: string
-    skin?: string
-    label?: string
-    checked?: boolean
-    disabled?: boolean
-  }>()
+const props = defineProps<{
+  name?: string
+  skin?: string
+  label?: string
+  checked?: boolean
+  disabled?: boolean
+}>()
 
 const emit = defineEmits(['update:checked', 'change'])
 
 const handleClick = function () {
   if (!props.disabled) {
-      emit('update:checked', !props.checked)
-      emit('change', { checked: !props.checked, value: props.label })
+    emit('update:checked', !props.checked)
+    emit('change', { checked: !props.checked, value: props.label })
   }
 }
 </script>
