@@ -7,6 +7,7 @@
       fluid ? 'layui-btn-fluid' : '',
       radius ? 'layui-btn-radius' : '',
       border ? 'layui-border-' + border : '',
+      disabled ? 'layui-btn-disabled': ''
     ]"
   >
     <slot />
@@ -22,5 +23,6 @@ const props = defineProps<{
   fluid?: boolean
   radius?: boolean
   border?: string
+  disabled?: boolean
 }>()
 </script>

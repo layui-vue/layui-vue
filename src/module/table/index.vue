@@ -183,7 +183,6 @@ const change = function (page: any) {
   emit('change', page)
 }
 
-/// 表格打印
 const print = function () {
   let subOutputRankPrint = document.getElementById('lay-table') as HTMLElement
   let newContent = subOutputRankPrint.innerHTML
