@@ -230,4 +230,4 @@ function handleClick(node) {
 
 | Name   | Description | Accepted Params  |
 | -------- | ---- | ----------------------- | 
-| name       | 原始属性 name | --  | 
+| node-click       | 节点 click 事件 | --  | 

@@ -163,7 +163,6 @@ const add = function () {
 }
 
 const remove = function () {
-  // 删除 rightDataSource 选中的元素
   if(rightSelectedKeys.value.length === 0){
     return
   }
