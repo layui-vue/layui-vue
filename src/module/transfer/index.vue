@@ -115,7 +115,7 @@ const allLeftChange = function ({ checked }: any) {
 watch(
   leftSelectedKeys,
   function () {
-    if (leftDataSource.value.length === leftSelectedKeys.value.length) {
+    if (leftDataSource.value.length === leftSelectedKeys.value.length && leftDataSource.value.length != 0) {
       allLeftChecked.value = true
     } else {
       allLeftChecked.value = false
@@ -138,7 +138,7 @@ const allRightChange = function ({ checked }: any) {
 watch(
   rightSelectedKeys,
   function () {
-    if (rightDataSource.value.length === rightSelectedKeys.value.length) {
+    if (rightDataSource.value.length === rightSelectedKeys.value.length && rightDataSource.value.length != 0) {
       allRightChecked.value = true
     } else {
       allRightChecked.value = false
@@ -149,15 +149,30 @@ watch(
 
 const add = function () {
   // 删除 leftDataSource 选中的元素
+  if(leftSelectedKeys.value.length === 0){
+    return
+  }
+
   rightDataSource.value = leftDataSource.value.filter(
     (item) => leftSelectedKeys.value.indexOf(item.id) != -1
   )
+  leftDataSource.value = leftDataSource.value.filter(
+    (item) => leftSelectedKeys.value.indexOf(item.id) === -1
+  ) 
+  leftSelectedKeys.value = []
 }
 
 const remove = function () {
   // 删除 rightDataSource 选中的元素
+  if(rightSelectedKeys.value.length === 0){
+    return
+  }
   leftDataSource.value = rightDataSource.value.filter(
     (item) => rightSelectedKeys.value.indexOf(item.id) != -1
   )
+  rightDataSource.value = rightDataSource.value.filter(
+    (item) => rightSelectedKeys.value.indexOf(item.id) === -1
+  ) 
+  rightSelectedKeys.value = []
 }
 </script>
