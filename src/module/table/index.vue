@@ -5,6 +5,9 @@
       class="layui-form layui-border-box layui-table-view layui-table-view-1"
     >
       <div v-if="defaultToolbar || slot.toolbar" class="layui-table-tool">
+        <div v-if="slot.toolbar" class="layui-table-tool-temp">
+          <slot name="toolbar"></slot>
+        </div>
         <div v-if="defaultToolbar" class="layui-table-tool-self">
           <div
             class="layui-inline"
@@ -129,7 +132,7 @@ const props = withDefaults(
     columns?: Recordable[]
     dataSource: Recordable[]
     defaultToolbar?: boolean
-    selectedKeys: Array<string>
+    selectedKeys?: Array<string>
   }>(),
   {
     id: 'id',

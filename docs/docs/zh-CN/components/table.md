@@ -126,11 +126,10 @@ export default {
 ::: demo
 
 <template>
-  {{selectedKeys}}
-  <lay-table :columns="columns" id="id" :dataSource="dataSource" default-toolbar="true" v-model:selectedKeys="selectedKeys" @changeSelectedKeys="changeSelectedKeys" checkbox="true">
+  <lay-table :columns="columns" id="id" :dataSource="dataSource" v-model:selectedKeys="selectedKeys"  checkbox default-toolbar>
     <template v-slot:toolbar>
-      <lay-button>新增</lay-button>
-      <lay-button>删除</lay-button>
+      <lay-button size="sm">新增</lay-button>
+      <lay-button size="sm">删除</lay-button>
     </template>
     <template v-slot:username="{ data }"> {{data.username}} </template>
     <template v-slot:password="{ data }"> {{data.password}} </template>
@@ -200,3 +199,11 @@ export default {
 | id              | 主键       | --  |
 | selectedKeys ( v-model )    | 选中项     | --  |
 | default-toolbar | 开启工具栏 | --  |
+
+::: field table slots
+
+:::
+
+|                 |             |     |
+| --------------- | ----------- | --- |
+| toolbar         | 自定义工具栏 | --  |
