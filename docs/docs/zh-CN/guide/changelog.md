@@ -7,7 +7,9 @@
           [新增] table 表格 toolbar 插槽, 用于自定义工具栏。<br>
           [新增] icon 图标 color 属性, 用于自定义颜色。<br>
           [新增] icon 图标 size 属性, 用于自定义尺寸。<br>
+          [新增] breadcrumb-item 面包屑 default 插槽, 用于自定义标题。<br>
           [调整] menu 菜单 child-item 行高, 由 40 调整为 46。<br>
+          [调整] breadcrumb 面包屑样式, 让 Api 更合理。<br>
         </lay-timeline-item>
         <lay-timeline-item title="0.1.0">
           [新增] tree 树，支持 node-click，selectKeys 等<br>
