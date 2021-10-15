@@ -1,7 +1,13 @@
-::: demo
+::: field 更新记录
+:::
 
+::: demo
 <template>
     <lay-timeline>
+        <lay-timeline-item title="0.1.4">
+          [新增] menu 菜单 title 插槽，允许自定义菜单项。<br>
+          [新增] menu 菜单 title 插槽，允许自定义菜单项。<br>
+        </lay-timeline-item>
         <lay-timeline-item title="0.1.1">
           [新增] menu 菜单 title 插槽，允许自定义菜单项。<br>
           [新增] table 表格 toolbar 插槽, 用于自定义工具栏。<br>

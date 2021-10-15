@@ -31,7 +31,7 @@
             </a>
           </li>
           <li class="layui-nav-item">
-            <a href="javascript:void(0)"> 0.1.3 </a>
+            <a href="javascript:void(0)"> 0.1.4 </a>
           </li>
         </ul>
       </lay-header>
@@ -74,12 +74,15 @@ export default {
   setup() {
     const route = useRoute()
     const router = useRouter()
-    const currentPath = ref('hahaha')
+    const currentPath = ref('/zh-CN/guide')
 
     watch(
       () => route.path,
-      (newValue, oldValue) => {
-        currentPath.value = route.path
+      (val) => {
+        currentPath.value = val
+      },{
+        immediate: true,
+        deep: true
       }
     )
 
@@ -87,19 +90,19 @@ export default {
       {
         id: 1,
         title: '介绍',
-        subTitle: 'Getting Started',
-        path: '/zh-CN/guide',
+        subTitle: 'introduce',
+        path: '/zh-CN/guide/introduce',
       },
       {
         id: 2,
         title: '安装',
-        subTitle: 'install',
-        path: '/zh-CN/guide/install',
+        subTitle: 'get started',
+        path: '/zh-CN/guide/getStarted',
       },
       {
         id: 3,
         title: '更新',
-        subTitle: 'changelog',
+        subTitle: 'change log',
         path: '/zh-CN/guide/changelog',
       },
       {
@@ -301,6 +304,11 @@ export default {
         title: '开关',
         subTitle: 'switch',
         path: '/zh-CN/components/switch',
+      },{
+        id: 37,
+        title: '滑块',
+        subTitle: 'slider',
+        path: '/zh-CN/components/slider',
       }
     ]
 

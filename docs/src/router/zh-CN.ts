@@ -3,18 +3,18 @@ import BaseLayout from '../layouts/Layout.vue'
 const zhCN = [
   {
     path: '/',
-    redirect: '/zh-CN/guide/',
+    redirect: '/zh-CN/guide/introduce',
     component: BaseLayout,
     meta: { title: '指南', icon: 'el-icon-position' },
     children: [
       {
-        path: '/zh-CN/guide/',
-        component: () => import('../../docs/zh-CN/guide/home.md'),
+        path: '/zh-CN/guide/introduce',
+        component: () => import('../../docs/zh-CN/guide/introduce.md'),
         meta: { title: '介绍' },
       },
       {
-        path: '/zh-CN/guide/install',
-        component: () => import('../../docs/zh-CN/guide/install.md'),
+        path: '/zh-CN/guide/getStarted',
+        component: () => import('../../docs/zh-CN/guide/getStarted.md'),
         meta: { title: '安装' },
       },
       {
@@ -194,6 +194,10 @@ const zhCN = [
         path: '/zh-CN/components/switch',
         component: () => import('../../docs/zh-CN/components/switch.md'),
         meta: { title: '开关' },
+      },{
+        path: '/zh-CN/components/slider',
+        component: () => import('../../docs/zh-CN/components/slider.md'),
+        meta: { title: '滑块' },
       },
     ],
   },
