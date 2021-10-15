@@ -30,10 +30,10 @@ export default {
 ::: demo
 
 <template>
-  <lay-menu selectedKey="5" tree>
+  <lay-menu selectedKey="5" :tree="isTree">
     <lay-menu-item title="首页" id="1">
       <template v-slot:title> 
-        <router-link to="">哈哈哈</router-link>
+        <router-link to="">无感</router-link>
       </template>
     </lay-menu-item>
     <lay-menu-item title="用户" id="2"></lay-menu-item>
@@ -52,7 +52,10 @@ import { ref } from 'vue'
 export default {
   setup() {
 
+    const isTree = ref(true)
+
     return {
+      isTree
     }
   }
 }
