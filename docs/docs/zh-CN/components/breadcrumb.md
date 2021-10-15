@@ -49,10 +49,10 @@ export default {
 ::: demo
 
 <template>
-    <lay-breadcrumb separator="-">
-        <lay-breadcrumb-item title="可口可乐"></lay-breadcrumb-item>
-        <lay-breadcrumb-item title="美年达"></lay-breadcrumb-item>
-        <lay-breadcrumb-item title="芬达"></lay-breadcrumb-item>
+    <lay-breadcrumb separator="--">
+        <lay-breadcrumb-item>今天</lay-breadcrumb-item>
+        <lay-breadcrumb-item>有些</lay-breadcrumb-item>
+        <lay-breadcrumb-item>不开心</lay-breadcrumb-item>
     </lay-breadcrumb>
 </template>
 
@@ -77,3 +77,11 @@ export default {
 |           |        |     |
 | --------- | ------ | --- |
 | separator | 分割符 | `/` |
+
+::: field breadcrumb slots
+
+:::
+
+|           |        |     |
+| --------- | ------ | --- |
+| default | 默认插槽 | `--` |

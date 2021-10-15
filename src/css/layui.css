@@ -4929,9 +4929,13 @@ body .layui-table-tips .layui-layer-content {
   color: #5fb878 !important;
 }
 
-.layui-breadcrumb a cite {
-  color: #999;
+.layui-breadcrumb a:nth-last-child(2)  {
+  color: #666;
   font-style: normal;
+}
+
+.layui-breadcrumb span:last-child {
+  display: none;
 }
 
 .layui-breadcrumb span[lay-separator] {

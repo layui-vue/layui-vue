@@ -5,7 +5,7 @@
 </template>
 
 <script setup name="LayBreadcrumb" lang="ts">
-import { defineProps, provide, withDefaults, useSlots, ref, Ref } from 'vue'
+import { defineProps, provide, withDefaults } from 'vue'
 
 const props = withDefaults(
   defineProps<{
