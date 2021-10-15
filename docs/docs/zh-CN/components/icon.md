@@ -21,6 +21,32 @@ export default {
 ::: demo
 
 <template>
+  <lay-icon type="layui-icon-face-smile" color="red"></lay-icon> &nbsp;
+  <lay-icon type="layui-icon-face-smile" color="orange"></lay-icon> &nbsp;
+  <lay-icon type="layui-icon-face-smile" color="green"></lay-icon> &nbsp;
+  <lay-icon type="layui-icon-face-smile" color="cyan"></lay-icon> &nbsp;
+  <lay-icon type="layui-icon-face-smile" color="blue"></lay-icon> &nbsp;
+  <lay-icon type="layui-icon-face-smile" color="black"></lay-icon> &nbsp;
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    return {
+    }
+  }
+}
+</script>
+
+:::
+
+
+::: demo
+
+<template>
 <ul class="site-doc-icon">
       <li>
         <i class="layui-icon layui-icon-heart-fill"></i>
@@ -1051,3 +1077,5 @@ export default {
 | ---- | ---- | ----------------- |
 | type | 图标 | `layui-icon-home` |
 | prefix | 前缀 | `layui-icon` |
+| color | 颜色 | -- |
+| size | 尺寸 | -- |

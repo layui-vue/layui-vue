@@ -1,5 +1,5 @@
 <template>
-  <i :class="[prefix, type]" />
+  <i :class="[prefix, type]" :style="{ color: color , fontSize: size}"/>
 </template>
 
 <script setup name="LayIcon" lang="ts">
@@ -9,6 +9,8 @@ const props = withDefaults(
   defineProps<{
     type?: string
     prefix?: string
+    color?: string
+    size?: string
   }>(),
   {
     prefix: 'layui-icon',
