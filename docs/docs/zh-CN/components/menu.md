@@ -32,7 +32,7 @@ export default {
 <template>
   <lay-menu selectedKey="5" tree>
     <lay-menu-item title="首页" id="1">
-      <template v-slot:title> 哈哈哈 </template>
+      <template v-slot:title> 无感 </template>
     </lay-menu-item>
     <lay-menu-item title="用户" id="2"></lay-menu-item>
     <lay-menu-item title="角色" id="3"></lay-menu-item> 
@@ -65,3 +65,11 @@ export default {
 |             |          |     |
 | ----------- | -------- | --- |
 | selectedKey | 默认选择 | --  |
+
+::: field menu slots
+
+:::
+
+|             |          |     |
+| ----------- | -------- | --- |
+| title | 菜单标题 | --  |

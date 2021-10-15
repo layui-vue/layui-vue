@@ -6,9 +6,6 @@
     >
       <div v-if="defaultToolbar || slot.toolbar" class="layui-table-tool">
         <div v-if="defaultToolbar" class="layui-table-tool-self">
-          <div class="layui-inline" title="筛选列" lay-event="LAYTABLE_COLS">
-            <i class="layui-icon layui-icon-cols" />
-          </div>
           <div
             class="layui-inline"
             title="打印"

@@ -49,8 +49,8 @@
     >
   </div>
 </template>
-<script setup name="LayPage"></script>
-<script setup lang="ts">
+
+<script setup name="LayPage" lang="ts">
 import { defineProps, Ref, ref, watch } from 'vue'
 
 const props = withDefaults(

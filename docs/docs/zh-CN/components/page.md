@@ -1,7 +1,7 @@
 ::: demo
 
 <template>
-  <lay-page limit=20 total=100 showPage></lay-page>
+  <lay-page :limit="limit" :total="total" showPage></lay-page>
 </template>
 
 <script>
@@ -10,7 +10,12 @@ import { ref } from 'vue'
 export default {
   setup() {
 
+    const limit = ref(20)
+    const total = ref(100)
+
     return {
+      limit,
+      total
     }
   }
 }
@@ -21,7 +26,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-page limit=20 total=100 ></lay-page>
+  <lay-page :limit="limit" :total="total"></lay-page>
 </template>
 
 <script>
@@ -30,7 +35,12 @@ import { ref } from 'vue'
 export default {
   setup() {
 
+    const limit = ref(20)
+    const total = ref(100)
+
     return {
+      limit,
+      total
     }
   }
 }
@@ -41,11 +51,11 @@ export default {
 ::: demo
 
 <template>
-  <lay-page limit=20 total=100 showPage theme="red"></lay-page>
+  <lay-page :limit="limit" :total="total" showPage theme="red"></lay-page>
   <br>
-  <lay-page limit=20 total=100 showPage theme="blue"></lay-page>
+  <lay-page :limit="limit" :total="total" showPage theme="blue"></lay-page>
   <br>
-  <lay-page limit=20 total=100 showPage theme="orange"></lay-page>
+  <lay-page :limit="limit" :total="total" theme="orange"></lay-page>
 </template>
 
 <script>
@@ -54,7 +64,12 @@ import { ref } from 'vue'
 export default {
   setup() {
 
+    const limit = ref(20)
+    const total = ref(100)
+
     return {
+      limit,
+      total
     }
   }
 }
@@ -65,7 +80,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-page limit=20 total=100 showCount showPage showLimit showRefresh showSkip></lay-page>
+  <lay-page :limit="limit" :total="total" showCount showPage showLimit showRefresh showSkip></lay-page>
 </template>
 
 <script>
@@ -74,7 +89,12 @@ import { ref } from 'vue'
 export default {
   setup() {
 
+    const limit = ref(20)
+    const total = ref(100)
+
     return {
+      limit,
+      total
     }
   }
 }
@@ -85,7 +105,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-page limit=20 total=100 @jump="jump" showPage></lay-page>
+  <lay-page :limit="limit" :total="total" @jump="jump" showPage></lay-page>
 </template>
 
 <script>
@@ -94,11 +114,15 @@ import { ref } from 'vue'
 export default {
   setup() {
 
+    const limit = ref(20)
+    const total = ref(100)
     const jump = function({ current }) {
-       console.log("当前页:" + current)
+      console.log("当前页:" + current)
     }
 
     return {
+      limit,
+      total,
       jump
     }
   }
