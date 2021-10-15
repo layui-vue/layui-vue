@@ -198,7 +198,11 @@ const zhCN = [
         path: '/zh-CN/components/slider',
         component: () => import('../../docs/zh-CN/components/slider.md'),
         meta: { title: '滑块' },
-      },
+      },{
+        path: '/zh-CN/components/carousel',
+        component: () => import('../../docs/zh-CN/components/carousel.md'),
+        meta: { title: '轮播' },
+      }
     ],
   },
 ]

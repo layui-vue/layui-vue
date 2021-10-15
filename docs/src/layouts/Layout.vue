@@ -309,6 +309,11 @@ export default {
         title: '滑块',
         subTitle: 'slider',
         path: '/zh-CN/components/slider',
+      },{
+        id: 38,
+        title: '轮播',
+        subTitle: 'carousel',
+        path: '/zh-CN/components/carousel'
       }
     ]
 

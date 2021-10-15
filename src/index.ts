@@ -55,6 +55,8 @@ import LayPage from './module/page/index'
 import LayTransfer from './module/transfer/index'
 import LayCheckboxGroup from './module/checkboxGroup/index'
 import LaySlider from './module/slider/index'
+import LayCarousel from './module/carousel/index'
+
 
 const components: Record<string, IDefineComponent> = {
   LayRadio,
@@ -109,7 +111,8 @@ const components: Record<string, IDefineComponent> = {
   LayPage,
   LayTransfer,
   LayCheckboxGroup,
-  LaySlider
+  LaySlider,
+  LayCarousel
 }
 
 const install = (app: App, options?: InstallOptions): void => {
@@ -178,6 +181,7 @@ export {
   LayTransfer,
   LayCheckboxGroup,
   LaySlider,
+  LayCarousel,
   install,
 }
 
