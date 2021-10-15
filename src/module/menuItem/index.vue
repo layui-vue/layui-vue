@@ -5,8 +5,7 @@
     :class="[isOpen && isTree ? 'layui-nav-itemed' : '']"
   >
     <a href="javascript:void(0)" @click="openHandle">
-      <slot v-if="slots.title" name="title"></slot>
-      <span v-else>{{ title }}</span>
+      {{ title }}
       <i class="layui-icon layui-icon-down layui-nav-more" />
     </a>
     <dl
@@ -26,9 +25,9 @@
     :class="[selectKey === id ? 'layui-this' : '']"
     @click="selectHandle()"
   >
-    <a href="javascript:void(0)"> 
-      <slot v-if="slots.title" name="title"></slot>
-      <span v-else> {{ title }} </span>  
+    <slot v-if="slots.title" name="title"></slot>
+    <a v-else href="javascript:void(0)">
+      {{ title }}
     </a>
   </li>
 </template>
@@ -37,10 +36,11 @@
 import { defineProps, inject, Ref, ref, useSlots } from 'vue'
 const slots = useSlots()
 
-const props = defineProps<{
-  id: string
-  title: string
-}>()
+const props =
+  defineProps<{
+    id: string
+    title: string
+  }>()
 
 const isOpen = ref(false)
 

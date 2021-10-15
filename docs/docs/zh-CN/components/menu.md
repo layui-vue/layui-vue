@@ -32,7 +32,9 @@ export default {
 <template>
   <lay-menu selectedKey="5" tree>
     <lay-menu-item title="首页" id="1">
-      <template v-slot:title> 无感 </template>
+      <template v-slot:title> 
+        <router-link to="">哈哈哈</router-link>
+      </template>
     </lay-menu-item>
     <lay-menu-item title="用户" id="2"></lay-menu-item>
     <lay-menu-item title="角色" id="3"></lay-menu-item> 

@@ -126,7 +126,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-table :columns="columns" id="id" :dataSource="dataSource" v-model:selectedKeys="selectedKeys"  checkbox default-toolbar>
+  <lay-table :columns="columns" id="id" :dataSource="dataSource" v-model:selectedKeys="selectedKeys"  :checkbox="checkbox" :default-toolbar="defaultToolbar">
     <template v-slot:toolbar>
       <lay-button size="sm">新增</lay-button>
       <lay-button size="sm">删除</lay-button>
@@ -147,6 +147,8 @@ export default {
   setup() {
 
     const selectedKeys = ref(['1'])
+    const checkbox = ref(true)
+    const defaultToolbar = ref(true)
 
     const columns = [
       {
@@ -179,7 +181,9 @@ export default {
     return {
       columns,
       dataSource,
-      selectedKeys
+      selectedKeys,
+      checkbox,
+      defaultToolbar
     }
   }
 }

@@ -1,7 +1,7 @@
 ::: demo
 
 <template>
-  <lay-page :limit="limit" :total="total" showPage></lay-page>
+  <lay-page :limit="limit" :total="total" :show-page="showPage"></lay-page>
 </template>
 
 <script>
@@ -12,10 +12,12 @@ export default {
 
     const limit = ref(20)
     const total = ref(100)
+    const showPage = ref(true)
 
     return {
       limit,
-      total
+      total,
+      showPage
     }
   }
 }
@@ -51,11 +53,11 @@ export default {
 ::: demo
 
 <template>
-  <lay-page :limit="limit" :total="total" showPage theme="red"></lay-page>
+  <lay-page :limit="limit" :total="total" :show-page="showPage" theme="red"></lay-page>
   <br>
-  <lay-page :limit="limit" :total="total" showPage theme="blue"></lay-page>
+  <lay-page :limit="limit" :total="total" :show-page="showPage" theme="blue"></lay-page>
   <br>
-  <lay-page :limit="limit" :total="total" theme="orange"></lay-page>
+  <lay-page :limit="limit" :total="total" :show-page="showPage" theme="orange"></lay-page>
 </template>
 
 <script>
@@ -66,10 +68,12 @@ export default {
 
     const limit = ref(20)
     const total = ref(100)
+    const showPage = ref(true)
 
     return {
       limit,
-      total
+      total,
+      showPage
     }
   }
 }
@@ -80,7 +84,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-page :limit="limit" :total="total" showCount showPage showLimit showRefresh showSkip></lay-page>
+  <lay-page :limit="limit" :total="total" :show-count="showCount" :show-page="showPage" :show-limit="showLimit" :show-refresh="showRefresh" showSkip="showSkip"></lay-page>
 </template>
 
 <script>
@@ -91,10 +95,20 @@ export default {
 
     const limit = ref(20)
     const total = ref(100)
+    const showCount = ref(true)
+    const showPage = ref(true)
+    const showLimit = ref(true)
+    const showRefresh = ref(true)
+    const showSkip = ref(true)
 
     return {
       limit,
-      total
+      total,
+      showCount,
+      showPage,
+      showLimit,
+      showRefresh,
+      showSkip
     }
   }
 }
@@ -105,7 +119,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-page :limit="limit" :total="total" @jump="jump" showPage></lay-page>
+  <lay-page :limit="limit" :total="total" @jump="jump" :show-page="showSkip"></lay-page>
 </template>
 
 <script>
@@ -116,6 +130,7 @@ export default {
 
     const limit = ref(20)
     const total = ref(100)
+    const showPage = ref(true)
     const jump = function({ current }) {
       console.log("当前页:" + current)
     }
@@ -123,7 +138,8 @@ export default {
     return {
       limit,
       total,
-      jump
+      jump,
+      showPage
     }
   }
 }

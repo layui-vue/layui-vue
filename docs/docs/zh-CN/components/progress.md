@@ -47,10 +47,10 @@ export default {
 ::: demo
 
 <template>
-  <lay-progress percent="80" showText></lay-progress>
+  <lay-progress percent="80" :show-text="showText"></lay-progress>
   <br/>
   <br/>
-  <lay-progress percent="80" showText text="销售量"></lay-progress>
+  <lay-progress percent="80" :show-text="showText" text="销售量"></lay-progress>
 </template>
 
 <script>
@@ -59,7 +59,10 @@ import { ref } from 'vue'
 export default {
   setup() {
 
+    const showText = ref(true)
+
     return {
+      showText
     }
   }
 }

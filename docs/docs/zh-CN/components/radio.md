@@ -17,7 +17,7 @@ export default {
     const selected1 = ref("1");
 
     return {
-        selected
+        selected1
     }
   }
 }

@@ -44,7 +44,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-rate v-model="all2" length=10></lay-rate> {{all2}}
+  <lay-rate v-model="all2" :length="length"></lay-rate> {{all2}}
 </template>
 
 <script>
@@ -54,9 +54,11 @@ export default {
   setup() {
 
     const all2 = ref(4);
+    const length = ref(10)
 
     return {
-      all2
+      all2,
+      length
     }
   }
 }
