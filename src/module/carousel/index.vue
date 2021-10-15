@@ -1,13 +1,12 @@
 <template>
   <div
     class="layui-carousel"
-    id="test1"
-    lay-anim=""
+    lay-anim
     lay-indicator="inside"
     lay-arrow="always"
-    style="width: 100%; height: 280px"
+    :style="{width:width,height:height}"
   >
-    <div carousel-item="">
+    <div carousel-item>
       <div> </div>
       <div> </div>
       <div> </div>
@@ -28,4 +27,16 @@
   </div>
 </template>
 <script setup name="LayCarousel" lang="ts">
+import { withDefaults, defineProps } from 'vue'
+
+const props = withDefaults(
+  defineProps<{
+    width: string,
+    height: string
+  }>(),
+  {
+    width: '100%',
+    height: '280px'
+  }
+)
 </script>

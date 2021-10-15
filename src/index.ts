@@ -56,7 +56,7 @@ import LayTransfer from './module/transfer/index'
 import LayCheckboxGroup from './module/checkboxGroup/index'
 import LaySlider from './module/slider/index'
 import LayCarousel from './module/carousel/index'
-
+import LayCarouselItem from './module/carouselItem/index'
 
 const components: Record<string, IDefineComponent> = {
   LayRadio,
@@ -112,7 +112,8 @@ const components: Record<string, IDefineComponent> = {
   LayTransfer,
   LayCheckboxGroup,
   LaySlider,
-  LayCarousel
+  LayCarousel,
+  LayCarouselItem
 }
 
 const install = (app: App, options?: InstallOptions): void => {
@@ -124,8 +125,6 @@ const install = (app: App, options?: InstallOptions): void => {
     app.component(item.name || key, item)
   }
 }
-
-console.log('document Site : http://layui-vue.pearadmin.com')
 
 export {
   LayRadio,
@@ -182,6 +181,7 @@ export {
   LayCheckboxGroup,
   LaySlider,
   LayCarousel,
+  LayCarouselItem,
   install,
 }
 
