@@ -1,8 +1,8 @@
 <template>
   <dd :class="[selectKey === id ? 'layui-this' : '']" @click="selectHandle()">
-    <a href="javascript:void(0)">
-      <slot v-if="slots.title" name="title"></slot>
-      <span v-else> {{ title }} </span>
+    <slot v-if="slots.title" name="title"></slot>
+    <a v-else href="javascript:void(0)">
+      {{title}}
     </a>
   </dd>
 </template>
