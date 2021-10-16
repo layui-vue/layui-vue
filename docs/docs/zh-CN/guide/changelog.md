@@ -9,6 +9,7 @@
           [新增] tab 选项卡 allow-close 属性，支持 关闭。<br>
           [新增] tab 选项卡 close change 事件，扩展 tab 动态逻辑。<br>
           [新增] ClickOutside 工具。<br>
+          [新增] menu 菜单 selectedKey, openKeys 属性。<br>
           [修复] menu 菜单 layui-this 样式，多 a 标签样式重叠。<br>
         </lay-timeline-item>
         <lay-timeline-item title="0.1.1">
