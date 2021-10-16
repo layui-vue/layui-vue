@@ -1,5 +1,5 @@
 <template>
-  <dd :class="[selectKey === id ? 'layui-this' : '']" @click="selectHandle()">
+  <dd :class="[selectedKey === id ? 'layui-this' : '']" @click="selectHandle()">
     <slot v-if="slots.title" name="title"></slot>
     <a v-else href="javascript:void(0)">
       {{title}}
@@ -18,9 +18,9 @@ const props =
     title: string
   }>()
 
-const selectKey: Ref<string> = inject('selectKey') as Ref<string>
+const selectedKey: Ref<string> = inject('selectedKey') as Ref<string>
 
 const selectHandle = function () {
-  selectKey.value = props.id
+  selectedKey.value = props.id
 }
 </script>

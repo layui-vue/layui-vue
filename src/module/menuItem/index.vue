@@ -2,7 +2,7 @@
   <li
     v-if="slots.default"
     class="layui-nav-item"
-    :class="[isOpen && isTree ? 'layui-nav-itemed' : '']"
+    :class="[openKeys.includes(id) && isTree ? 'layui-nav-itemed' : '']"
   >
     <a href="javascript:void(0)" @click="openHandle">
       {{ title }}
@@ -11,7 +11,7 @@
     <dl
       class="layui-nav-child"
       :class="[
-        isOpen && !isTree ? 'layui-show' : '',
+        openKeys.includes(id) && !isTree ? 'layui-show' : '',
         !isTree ? 'layui-anim layui-anim-upbit' : '',
       ]"
     >
@@ -22,7 +22,7 @@
   <li
     v-else
     class="layui-nav-item"
-    :class="[selectKey === id ? 'layui-this' : '']"
+    :class="[selectedKey === id ? 'layui-this' : '']"
     @click="selectHandle()"
   >
     <slot v-if="slots.title" name="title"></slot>
@@ -42,16 +42,20 @@ const props =
     title: string
   }>()
 
-const isOpen = ref(false)
-
 const isTree = inject('isTree')
-const selectKey: Ref<string> = inject('selectKey') as Ref<string>
+const selectedKey: Ref<string> = inject('selectedKey') as Ref<string>
+const openKeys: Ref<string[]> = inject('openKeys') as Ref<string[]>
 
 const openHandle = function () {
-  isOpen.value = !isOpen.value
+
+  if(openKeys.value.includes(props.id))  {
+      openKeys.value.splice(openKeys.value.indexOf(props.id),1)
+  } else {
+      openKeys.value.push(props.id)
+  }
 }
 
 const selectHandle = function () {
-  selectKey.value = props.id
+  selectedKey.value = props.id
 }
 </script>

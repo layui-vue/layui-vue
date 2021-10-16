@@ -5,8 +5,11 @@
 <template>
     <lay-timeline>
         <lay-timeline-item title="0.1.4">
-          [新增] menu 菜单 title 插槽，允许自定义菜单项。<br>
-          [新增] menu 菜单 title 插槽，允许自定义菜单项。<br>
+          [新增] button 按钮 loading 属性, 提供 加载 状态。<br>
+          [新增] tab 选项卡 allow-close 属性，支持 关闭。<br>
+          [新增] tab 选项卡 close change 事件，扩展 tab 动态逻辑。<br>
+          [新增] ClickOutside 工具。<br>
+          [修复] menu 菜单 layui-this 样式，多 a 标签样式重叠。<br>
         </lay-timeline-item>
         <lay-timeline-item title="0.1.1">
           [新增] menu 菜单 title 插槽，允许自定义菜单项。<br>
