@@ -10,19 +10,31 @@
       disabled ? 'layui-btn-disabled' : '',
     ]"
   >
-    <slot />
+    <i
+      v-if="loading"
+      class="
+        layui-icon
+        layui-icon-loading-1
+        layui-anim
+        layui-anim-rotate
+        layui-anim-loop
+      "
+    ></i>
+    <slot v-else />
   </button>
 </template>
 
 <script setup name="LayButton" lang="ts">
 import { defineProps } from 'vue'
 
-const props = defineProps<{
-  type?: string
-  size?: string
-  fluid?: boolean
-  radius?: boolean
-  border?: string
-  disabled?: boolean
-}>()
+const props =
+  defineProps<{
+    type?: string
+    size?: string
+    fluid?: boolean
+    radius?: boolean
+    border?: string
+    disabled?: boolean
+    loading?: boolean
+  }>()
 </script>

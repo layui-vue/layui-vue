@@ -2,6 +2,7 @@
   <div
     v-if="trigger === 'click'"
     class="layui-dropdown"
+    ref="dropdownRef"
     :class="[openState ? 'layui-dropdown-up' : '']"
   >
     <div @click="open">
@@ -30,7 +31,10 @@
 </template>
 
 <script setup name="LaySelect" lang="ts">
-import { defineProps, ref } from 'vue'
+import { defineProps, ref, watch } from 'vue'
+import useClickOutside from '../use/useClickOutside'
+
+const dropdownRef = ref<null | HTMLElement>(null)
 
 const props = withDefaults(
   defineProps<{
@@ -46,4 +50,13 @@ const openState = ref(false)
 const open = function () {
   openState.value = !openState.value
 }
+// 控制点击事件
+const isClickOutside = useClickOutside(dropdownRef)
+
+// 通过 watch 去监听事件的变化
+watch(isClickOutside, () => {
+  if (isClickOutside.value) {
+    openState.value = false
+  }
+})
 </script>

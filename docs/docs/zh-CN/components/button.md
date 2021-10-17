@@ -199,6 +199,32 @@ export default {
 
 :::
 
+::: demo 传入 columns 数据，自动生成表格
+
+<template>
+  <lay-button-container>
+      <lay-button type="default" :loading="loading">加载</lay-button>
+      <lay-switch v-model="loading"></lay-switch>
+  </lay-button-container>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const loading = ref(true)
+
+    return {
+      loading
+    }
+  }
+}
+</script>
+
+:::
+
 | Name   | Description | Accepted Values                          |
 | ------ | ------ | --------------------------------------------- |
 | type   | 主题   | `primary` `normal` `warm` `danger` `disabled` |

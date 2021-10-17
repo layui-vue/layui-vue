@@ -30,7 +30,9 @@ export default {
 ::: demo
 
 <template>
-  <lay-menu selectedKey="5" :tree="isTree">
+  选中项: {{selectedKey}}
+  打开项: {{openKeys}}
+  <lay-menu v-model:selectedKey="selectedKey" v-model:openKeys="openKeys" v-model:tree="isTree">
     <lay-menu-item title="首页" id="1">
       <template v-slot:title> 
         <router-link to="">无感</router-link>
@@ -53,9 +55,13 @@ export default {
   setup() {
 
     const isTree = ref(true)
+    const selectedKey = ref("5")
+    const openKeys = ref(["7"])
 
     return {
-      isTree
+      isTree,
+      openKeys,
+      selectedKey
     }
   }
 }
@@ -69,7 +75,8 @@ export default {
 
 |             |          |     |
 | ----------- | -------- | --- |
-| selectedKey | 默认选择 | --  |
+| selectedKey (v-model) | 选中项 | --  |
+| openKeys (v-model) | 打开项 | --  |
 
 ::: field menu slots
 
