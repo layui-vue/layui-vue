@@ -70,7 +70,7 @@ function handleNodeClick(node: TreeNode) {
  * @param node
  * @param type
  */
-function innerClick(node: TreeNode, type: EventType) {
+function innerClick(node: TreeNode, type: EventType, e?: Event) {
   emit('node-click', node, type)
 }
 

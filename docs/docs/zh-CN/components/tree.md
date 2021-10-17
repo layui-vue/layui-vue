@@ -201,7 +201,7 @@ const iconCtrl = ref(false);
 const showLine = ref(true);
 const clickNode = ref(null);
 const showCheckbox = ref(true);
-const checkedKeys = ref([9, 10, 24]);
+const checkedKeys = ref([1]);
 
 function handleClick(node) {
  clickNode.value = node
@@ -215,9 +215,9 @@ function handleClick(node) {
 :::
 
 | Name   | Description | Accepted Values  |
-| -------- | ---- | ----------------------- | 
-| name       | 原始属性 name | --  | 
-| data       | 树型组件数据,类型TreeData[] | null | 
+| -------- | ---- | ----------------------- |
+| name       | 原始属性 name | --  |
+| data       | 树型组件数据,类型TreeData[] | null |
 | showCheckbox | 是否显示复选框 | false |
 | onlyIconControl | 是否仅允许节点左侧图标控制展开收缩 | false |
 | showLine | 是否开启连接线 | true |
@@ -229,5 +229,5 @@ function handleClick(node) {
 :::
 
 | Name   | Description | Accepted Params  |
-| -------- | ---- | ----------------------- | 
-| node-click       | 节点 click 事件 | --  | 
+| -------- | ---- | ----------------------- |
+| node-click       | 节点 click 事件 | --  |

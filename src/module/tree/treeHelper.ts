@@ -6,7 +6,6 @@ import { WritableComputedRef } from 'vue'
  * 添加父级parentId
  * @param data
  * @param parentId
- * @param checkedKeys
  */
 export const generatorTreeData = (
   data: TreeData[] | TreeNode[],
