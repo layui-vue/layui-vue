@@ -114,7 +114,7 @@ export default {
 
 :::
 
-::: field tab attributes 
+::: field tab attributes
 
 :::
 
@@ -124,11 +124,11 @@ export default {
 | type    | 主题样式 | --             |
 | allow-close | 允许关闭 | `true` `false` |
 
-::: field tab events  
+::: field tab events
 
 :::
 
 | Name   | Description | Accepted Params  |
-| -------- | ---- | ----------------------- | 
-| change       | 选中切换 | --  | 
-| close     | 关闭事件 | --  | 
+| -------- | ---- | ----------------------- |
+| change       | 选中切换 | --  |
+| close     | 关闭事件 | --  |

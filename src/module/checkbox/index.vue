@@ -9,7 +9,7 @@
       }"
       :lay-skin="skin"
     >
-      <span><slot /></span>
+      <span v-if="$slots?.default"><slot /></span>
       <i class="layui-icon layui-icon-ok" />
     </div>
   </span>

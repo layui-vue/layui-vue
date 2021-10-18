@@ -44,7 +44,7 @@ const emit = defineEmits<TreeNodeEmits>()
 function renderLineShort(node: TreeData) {
   return (
     !node.hasNextSibling &&
-    node.parentKey &&
+    node.parentNode &&
     // 外层最后一个
     (!node.parentNode.hasNextSibling ||
       //上一层父级有延伸线
@@ -84,30 +84,31 @@ function setChildrenChecked (checked: boolean, nodes: TreeData[]) {
   }
 }
 
-async function setParentChecked (checked: boolean, parent: TreeData) {
+function setParentChecked (checked: boolean, parent: TreeData) {
   if (!parent) {
     return
   }
   parent.isChecked.value = checked
+  const pChild = parent.children
+  const pChildChecked = pChild.some(c => c.isChecked.value)
+  if (pChildChecked) {
+    parent.isChecked.value = true
+  }
   if (parent.parentNode) {
-    await setParentChecked(checked, parent.parentNode)
-    // todo
-    await nextTick()
-    const pChild = parent.children
-    const pChildChecked = pChild.some(c => c.isChecked.value)
-    console.log(pChildChecked)
-    if (pChildChecked) {
-      parent.isChecked.value = true
-    }
+    setParentChecked(checked, parent.parentNode)
   }
 }
 
 function handleChange(checked: boolean, node: TreeData) {
   node.isChecked.value = checked
+  // 处理上级
+  if (node.parentNode) {
+    setParentChecked(checked, node.parentNode)
+  }
+  // 处理下级
   if (node.children) {
     setChildrenChecked(checked, node.children)
   }
-  setParentChecked(checked, node.parentNode)
 }
 
 function handleIconClick (node: TreeData) {
@@ -141,11 +142,17 @@ function handleIconClick (node: TreeData) {
         <LayCheckbox
           v-if="showCheckbox"
           v-model:checked="node.isChecked.value"
+          :disabled="node.isDisabled.value"
           skin="primary"
           @change="({ checked }) => { handleChange(checked, node) }"
         >
         </LayCheckbox>
-        <span class="layui-tree-txt">
+        <span
+          :class="{
+            'layui-tree-txt': true,
+            'layui-disabled': node.isDisabled.value,
+          }"
+        >
           {{ node.title }}
         </span>
       </div>

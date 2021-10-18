@@ -1,9 +1,3 @@
-/*
- * @Date: 2021-10-16 02:50:17
- * @LastEditors: 落小梅
- * @LastEditTime: 2021-10-16 13:07:14
- * @FilePath: \layui-vue\src\module\tree\new-tree\tree.ts
- */
 import {
   OriginalTreeData,
   StringOrNumber,
@@ -61,7 +55,10 @@ function getNode(
   const nodeDisabled = !!Reflect.get(origin, 'disabled')
   const nodeIsLeaf = !!Reflect.get(origin, 'spread')
 
-  // const parent = nodeMap.get(parentKey)
+  const parent = nodeMap.get(parentKey)
+  if (parent) {
+    console.log(parent.isChecked.value);
+  }
 
   // console.log((parent && parent.isChecked.value) || checkedKeys.includes(nodeKey))
 
