@@ -22,6 +22,11 @@ const zhCN = [
         component: () => import('../../docs/zh-CN/guide/changelog.md'),
         meta: { title: '更新' },
       },
+      {
+        path: '/zh-CN/guide/sandbox',
+        component: () => import('../../docs/zh-CN/guide/sandbox.md'),
+        meta: { title: '沙盒' },
+      },
     ],
   },
   {

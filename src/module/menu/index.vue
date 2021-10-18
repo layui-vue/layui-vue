@@ -5,7 +5,9 @@
 </template>
 
 <script setup name="LayMenu" lang="ts">
-import { defineProps, provide, ref, watch } from 'vue'
+import { computed, defineProps, provide, ref, watch } from 'vue'
+
+const emit = defineEmits(['update:selectedKey', 'update:openKeys'])
 
 const props = withDefaults(
   defineProps<{
@@ -15,28 +17,46 @@ const props = withDefaults(
   }>(),
   {
     selectedKey: '',
-    openKeys: function() {
+    openKeys: function () {
       return []
     },
     tree: false,
   }
 )
 
-const isTree = ref(props.tree)
-const selectedKey = ref(props.selectedKey)
-const openKeys = ref([...props.openKeys])
+const isTree = computed(() => props.tree)
+
+const openKeys = computed({
+  get() {
+    return props.openKeys
+  },
+  set(val) {
+    emit('update:selectedKey', val)
+  },
+})
+
+const selectedKey = computed({
+  get() {
+    return props.selectedKey
+  },
+  set(val) {
+    emit('update:selectedKey', val)
+  },
+})
+
+watch(selectedKey, function (val) {
+  emit('update:selectedKey', val)
+})
+
+watch(
+  openKeys,
+  function (val) {
+    emit('update:openKeys', val)
+  },
+  { deep: true }
+)
 
 provide('isTree', isTree)
 provide('selectedKey', selectedKey)
-provide('openKeys',openKeys)
-
-const emit = defineEmits(['update:selectedKey','update:openKeys'])
-
-watch(selectedKey, function(val) {
-  emit('update:selectedKey',val)
-})
-
-watch(openKeys, function(val) {
-  emit('update:openKeys',val)
-},{deep : true})
+provide('openKeys', openKeys)
 </script>

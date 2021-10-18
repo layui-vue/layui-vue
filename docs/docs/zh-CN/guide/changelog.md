@@ -4,6 +4,10 @@
 ::: demo
 <template>
     <lay-timeline>
+        <lay-timeline-item title="0.1.5">
+          [修复] menu 菜单 selectedKey 选中项 openKeys 打开项 props 双绑。<br>
+          [修复] tab 选项卡 v-model 激活项 双绑。<br>
+        </lay-timeline-item>
         <lay-timeline-item title="0.1.4">
           [新增] button 按钮 loading 属性, 提供 加载 状态。<br>
           [新增] tab 选项卡 allow-close 属性，支持 关闭。<br>

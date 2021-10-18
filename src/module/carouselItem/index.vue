@@ -12,5 +12,4 @@ const props =
   }>()
 
 const active = inject('active')
-
 </script>
