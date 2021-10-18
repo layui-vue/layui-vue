@@ -106,6 +106,12 @@ export default {
         path: '/zh-CN/guide/changelog',
       },
       {
+        id: 39,
+        title: '沙盒',
+        subTitle: 'sandbox',
+        path: '/zh-CN/guide/sandbox'
+      },
+      {
         id: 4,
         title: '布局',
         subTitle: 'layout',

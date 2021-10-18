@@ -1,7 +1,7 @@
 ::: demo
 
 <template>
-  <lay-menu selectedKey="5">
+  <lay-menu v-model:selectedKey="selectedKey" v-model:openKeys="openKeys">
     <lay-menu-item title="首页" id="1"></lay-menu-item>
     <lay-menu-item title="用户" id="2"></lay-menu-item>
     <lay-menu-item title="角色" id="3"></lay-menu-item> 
@@ -19,7 +19,11 @@ import { ref } from 'vue'
 export default {
   setup() {
 
+    const selectedKey = ref("5")
+    const openKeys = ref(["7"])   
     return {
+      selectedKey,
+      openKeys
     }
   }
 }
