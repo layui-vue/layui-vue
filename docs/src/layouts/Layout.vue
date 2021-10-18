@@ -80,9 +80,10 @@ export default {
       () => route.path,
       (val) => {
         currentPath.value = val
-      },{
+      },
+      {
         immediate: true,
-        deep: true
+        deep: true,
       }
     )
 
@@ -109,7 +110,7 @@ export default {
         id: 39,
         title: '沙盒',
         subTitle: 'sandbox',
-        path: '/zh-CN/guide/sandbox'
+        path: '/zh-CN/guide/sandbox',
       },
       {
         id: 4,
@@ -290,37 +291,43 @@ export default {
         title: '复选框',
         subTitle: 'checkbox',
         path: '/zh-CN/components/checkbox',
-      },{
+      },
+      {
         id: 33,
         title: '单选框',
         subTitle: 'radio',
         path: '/zh-CN/components/radio',
-      },{
+      },
+      {
         id: 34,
         title: '输入框',
         subTitle: 'input',
         path: '/zh-CN/components/input',
-      },{
+      },
+      {
         id: 35,
         title: '文本域',
         subTitle: 'textarea',
         path: '/zh-CN/components/textarea',
-      },{
+      },
+      {
         id: 36,
         title: '开关',
         subTitle: 'switch',
         path: '/zh-CN/components/switch',
-      },{
+      },
+      {
         id: 37,
         title: '滑块',
         subTitle: 'slider',
         path: '/zh-CN/components/slider',
-      },{
+      },
+      {
         id: 38,
         title: '轮播',
         subTitle: 'carousel',
-        path: '/zh-CN/components/carousel'
-      }
+        path: '/zh-CN/components/carousel',
+      },
     ]
 
     const selected = ref(1)

@@ -179,35 +179,42 @@ const zhCN = [
         path: '/zh-CN/components/transfer',
         component: () => import('../../docs/zh-CN/components/transfer.md'),
         meta: { title: '穿梭框' },
-      },{
+      },
+      {
         path: '/zh-CN/components/checkbox',
         component: () => import('../../docs/zh-CN/components/checkbox.md'),
         meta: { title: '复选框' },
-      },{
+      },
+      {
         path: '/zh-CN/components/radio',
         component: () => import('../../docs/zh-CN/components/radio.md'),
         meta: { title: '单选框' },
-      },{
+      },
+      {
         path: '/zh-CN/components/input',
         component: () => import('../../docs/zh-CN/components/input.md'),
         meta: { title: '输入框' },
-      },{
+      },
+      {
         path: '/zh-CN/components/textarea',
         component: () => import('../../docs/zh-CN/components/textarea.md'),
         meta: { title: '文本域' },
-      },{
+      },
+      {
         path: '/zh-CN/components/switch',
         component: () => import('../../docs/zh-CN/components/switch.md'),
         meta: { title: '开关' },
-      },{
+      },
+      {
         path: '/zh-CN/components/slider',
         component: () => import('../../docs/zh-CN/components/slider.md'),
         meta: { title: '滑块' },
-      },{
+      },
+      {
         path: '/zh-CN/components/carousel',
         component: () => import('../../docs/zh-CN/components/carousel.md'),
         meta: { title: '轮播' },
-      }
+      },
     ],
   },
 ]

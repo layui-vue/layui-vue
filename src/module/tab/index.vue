@@ -9,9 +9,9 @@
       >
         {{ ss.props.title }}
         <i
-          @click.stop="close(ss.props.id)"
           v-if="allowClose"
           class="layui-icon layui-icon-close layui-unselect layui-tab-close"
+          @click.stop="close(ss.props.id)"
         ></i>
       </li>
     </ul>
@@ -42,7 +42,7 @@ const active = computed({
   },
   set(val) {
     emit('update:modelValue', val)
-  }
+  },
 })
 
 const change = function (id: any) {

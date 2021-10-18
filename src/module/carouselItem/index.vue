@@ -6,10 +6,9 @@
 <script setup name="LayCarouselItem" lang="ts">
 import { defineProps, inject } from 'vue'
 
-const props =
-  defineProps<{
-    id: string
-  }>()
+const props = defineProps<{
+  id: string
+}>()
 
 const active = inject('active')
 </script>
