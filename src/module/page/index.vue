@@ -6,7 +6,8 @@
       class="layui-laypage-prev"
       :class="[currentPage === 1 ? 'layui-disabled' : '']"
       @click="prev()"
-      >上一页</a
+      ><slot name="prev" v-if="slots.prev"></slot>
+      <template v-else>上一页</template></a
     >
     <template v-if="showPage">
       <template v-for="index of totalPage" :key="index">
@@ -27,7 +28,8 @@
       class="layui-laypage-next"
       :class="[currentPage === totalPage ? 'layui-disabled' : '']"
       @click="next()"
-      >下一页</a
+      ><slot name="next" v-if="slots.next"></slot>
+      <template v-else>下一页</template></a
     ><span v-if="showLimit" class="layui-laypage-limits"
       ><select v-model="inlimit">
         <option value="10">10 条/页</option>
@@ -51,7 +53,9 @@
 </template>
 
 <script setup name="LayPage" lang="ts">
-import { defineProps, Ref, ref, watch } from 'vue'
+import { defineProps, Ref, ref, watch, useSlots } from 'vue'
+
+const slots = useSlots()
 
 const props = withDefaults(
   defineProps<{

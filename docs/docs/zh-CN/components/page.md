@@ -53,6 +53,35 @@ export default {
 ::: demo
 
 <template>
+  <lay-page :limit="limit" :total="total">
+    <template v-slot:prev>上</template>
+    <template v-slot:next>下</template>
+  </lay-page>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const limit = ref(20)
+    const total = ref(100)
+
+    return {
+      limit,
+      total
+    }
+  }
+}
+</script>
+
+:::
+
+
+::: demo
+
+<template>
   <lay-page :limit="limit" :total="total" :show-page="showPage" theme="red"></lay-page>
   <br>
   <lay-page :limit="limit" :total="total" :show-page="showPage" theme="blue"></lay-page>
@@ -168,3 +197,13 @@ export default {
 |             |              |         |
 | ----------- | ------------ | ------- |
 | jump       | 切换回调     | { current: 当前页面 }    |
+
+
+::: field page slots
+
+:::
+
+|             |              |         |
+| ----------- | ------------ | ------- |
+| prev       | 上一页     | 上一页    |
+| next       | 下一页     | 下一页    |

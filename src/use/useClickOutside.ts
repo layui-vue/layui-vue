@@ -1,6 +1,6 @@
 import { ref, onMounted, onUnmounted, Ref } from 'vue'
 
-// 案例详见 tab.vue
+// 案例详见 dropdown.vue
 const useClickOutside = (elementRef: Ref<HTMLElement | null>) => {
   // 设置一个导出值
   const isClickOutside = ref(false);

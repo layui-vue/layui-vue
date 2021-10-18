@@ -4,9 +4,11 @@
 ::: demo
 <template>
 <lay-timeline>
-<lay-timeline-item title="0.1.5">
+<lay-timeline-item title="0.1.6">
 [修复] menu 菜单 selectedKey 选中项 openKeys 打开项 props 双绑。<br>
 [修复] tab 选项卡 v-model 激活项 双绑。<br>
+[新增] page 分页 prev 插槽。<br>
+[新增] page 分页 next 插槽。<br>
 </lay-timeline-item>
 <lay-timeline-item title="0.1.4">
 [新增] button 按钮 loading 属性, 提供 加载 状态。<br>
