@@ -32,9 +32,10 @@
 
 <script setup name="LaySelect" lang="ts">
 import { defineProps, ref, watch } from 'vue'
-import useClickOutside from '../use/useClickOutside'
+import useClickOutside from '../../use/useClickOutside'
 
 const dropdownRef = ref<null | HTMLElement>(null)
+const isClickOutside = useClickOutside(dropdownRef)
 
 const props = withDefaults(
   defineProps<{
@@ -50,10 +51,7 @@ const openState = ref(false)
 const open = function () {
   openState.value = !openState.value
 }
-// 控制点击事件
-const isClickOutside = useClickOutside(dropdownRef)
 
-// 通过 watch 去监听事件的变化
 watch(isClickOutside, () => {
   if (isClickOutside.value) {
     openState.value = false

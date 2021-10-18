@@ -2,16 +2,16 @@
   <div class="layui-tab" :class="[type ? 'layui-tab-' + type : '']">
     <ul class="layui-tab-title">
       <li
-        v-for="ss in slots"
-        :key="ss"
-        :class="[ss.props.id === active ? 'layui-this' : '']"
-        @click.stop="change(ss.props.id)"
+        v-for="s in slots"
+        :key="s"
+        :class="[s.props.id === active ? 'layui-this' : '']"
+        @click.stop="change(s.props.id)"
       >
-        {{ ss.props.title }}
+        {{ s.props.title }}
         <i
           v-if="allowClose"
           class="layui-icon layui-icon-close layui-unselect layui-tab-close"
-          @click.stop="close(ss.props.id)"
+          @click.stop="close(s.props.id)"
         ></i>
       </li>
     </ul>
@@ -21,10 +21,16 @@
   </div>
 </template>
 
-<script setup name="LayTab" lang="ts">
+<script lang="ts">
+export default {
+  name: 'LayTab',
+}
+</script>
+
+<script setup lang="ts">
 import { computed, defineProps, provide, ref, useSlots } from 'vue'
 
-const slot = useSlots() as any
+const slot = useSlots()
 const slots = slot.default && slot.default()
 
 const props = defineProps<{
@@ -33,7 +39,6 @@ const props = defineProps<{
   allowClose?: boolean
 }>()
 
-// select update 时, 通知 change 事件
 const emit = defineEmits(['update:modelValue', 'change', 'close'])
 
 const active = computed({

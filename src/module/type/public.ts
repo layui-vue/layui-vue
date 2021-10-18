@@ -10,9 +10,7 @@ export type IDefineComponent<Props = UnknownObject> = DefineComponent<Props> & {
 }
 
 export interface InstallOptions extends StringObject {
-  /** Pagination Attributes */
   pagination?: null
-  /** Menu Attributes */
   menu?: null
 }
 

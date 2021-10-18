@@ -93,7 +93,7 @@ export default {
 
     const disabled = ref(true)
 
-    const checked6 = ref(true);
+    const checked6 = ref(false);
 
     return {
       disabled,checked6
