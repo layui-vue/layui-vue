@@ -57,7 +57,7 @@ function getNode(
 
   const parent = nodeMap.get(parentKey)
   if (parent) {
-    console.log(parent.isChecked.value);
+    console.log(parent.isChecked.value)
   }
 
   // console.log((parent && parent.isChecked.value) || checkedKeys.includes(nodeKey))

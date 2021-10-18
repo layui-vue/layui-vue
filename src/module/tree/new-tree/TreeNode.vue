@@ -68,29 +68,37 @@ const nodeIconType = (node: TreeData): string => {
   return 'layui-icon-file'
 }
 
-function handleNodeClick (args: { label: string, value: string }, node: TreeData) {
+function handleNodeClick(
+  args: { label: string; value: string },
+  node: TreeData
+) {
   emit('node-click', args, node)
 }
 
-function recursiveNodeClick (args: { label: string, value: string }, node: TreeData) {
+function recursiveNodeClick(
+  args: { label: string; value: string },
+  node: TreeData
+) {
   emit('node-click', args, node)
 }
 
-function setChildrenChecked (checked: boolean, nodes: TreeData[]) {
+function setChildrenChecked(checked: boolean, nodes: TreeData[]) {
   const len = nodes.length
   for (let i = 0; i < len; i++) {
     nodes[i].isChecked.value = checked
-    nodes[i].children && nodes[i].children.length > 0 && (setChildrenChecked(checked, nodes[i].children))
+    nodes[i].children &&
+      nodes[i].children.length > 0 &&
+      setChildrenChecked(checked, nodes[i].children)
   }
 }
 
-function setParentChecked (checked: boolean, parent: TreeData) {
+function setParentChecked(checked: boolean, parent: TreeData) {
   if (!parent) {
     return
   }
   parent.isChecked.value = checked
   const pChild = parent.children
-  const pChildChecked = pChild.some(c => c.isChecked.value)
+  const pChildChecked = pChild.some((c) => c.isChecked.value)
   if (pChildChecked) {
     parent.isChecked.value = true
   }
@@ -111,7 +119,7 @@ function handleChange(checked: boolean, node: TreeData) {
   }
 }
 
-function handleIconClick (node: TreeData) {
+function handleIconClick(node: TreeData) {
   node.isLeaf.value = !node.isLeaf.value
 }
 </script>
@@ -134,17 +142,18 @@ function handleIconClick (node: TreeData) {
             { 'layui-tree-iconClick': true },
           ]"
         >
-          <LayIcon
-            :type="nodeIconType(node)"
-            @click="handleIconClick(node)"
-          />
+          <LayIcon :type="nodeIconType(node)" @click="handleIconClick(node)" />
         </span>
         <LayCheckbox
           v-if="showCheckbox"
           v-model:checked="node.isChecked.value"
           :disabled="node.isDisabled.value"
           skin="primary"
-          @change="({ checked }) => { handleChange(checked, node) }"
+          @change="
+            ({ checked }) => {
+              handleChange(checked, node)
+            }
+          "
         >
         </LayCheckbox>
         <span

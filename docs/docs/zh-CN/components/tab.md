@@ -118,17 +118,17 @@ export default {
 
 :::
 
-| Name    | Description   | Accepted Values   |
-| ------- | -------- | -------------- |
-| v-model | 当前激活 | --             |
-| type    | 主题样式 | --             |
-| allow-close | 允许关闭 | `true` `false` |
+| Name        | Description | Accepted Values |
+| ----------- | ----------- | --------------- |
+| v-model     | 当前激活    | --              |
+| type        | 主题样式    | --              |
+| allow-close | 允许关闭    | `true` `false`  |
 
 ::: field tab events
 
 :::
 
-| Name   | Description | Accepted Params  |
-| -------- | ---- | ----------------------- |
-| change       | 选中切换 | --  |
-| close     | 关闭事件 | --  |
+| Name   | Description | Accepted Params |
+| ------ | ----------- | --------------- |
+| change | 选中切换    | --              |
+| close  | 关闭事件    | --              |
