@@ -20,3 +20,10 @@ export default {
 </script>
 
 :::
+
+::: field 面板插槽
+:::
+
+| Name   | Description | Accepted Values  |
+| ----- | ------ | -------------- |
+| default | 默认插槽 | -- |

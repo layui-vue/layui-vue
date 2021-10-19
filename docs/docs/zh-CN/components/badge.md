@@ -1,3 +1,6 @@
+::: field 基础使用
+:::
+
 ::: demo
 
 <template>
@@ -34,7 +37,6 @@ export default {
 :::
 
 ::: field 徽章属性
-
 :::
 
 |       |      |                                               |

@@ -21,7 +21,7 @@
       </div>
       <div class="layui-table-box">
         <div class="layui-table-header">
-          <table cellspacing="0" cellpadding="0" border="0" class="layui-table">
+          <table cellspacing="0" cellpadding="0" border="0" class="layui-table" lay-size="sm">
             <thead>
               <tr>
                 <th v-if="checkbox" class="layui-table-col-special">
@@ -47,7 +47,7 @@
           </table>
         </div>
         <div class="layui-table-body layui-table-main">
-          <table cellspacing="0" cellpadding="0" border="0" class="layui-table">
+          <table cellspacing="0" cellpadding="0" border="0" class="layui-table" lay-size="sm">
             <tbody>
               <template v-for="data in dataSource" :key="data">
                 <tr>
@@ -63,10 +63,9 @@
                   </td>
                   <template v-for="column in columns" :key="column">
                     <template v-if="column.customSlot">
-                      <td>
+                      <td class="layui-table-cell">
                         <div
                           :style="{ width: column.width }"
-                          style="padding: 0px 16px"
                         >
                           <slot :name="column.customSlot" :data="data" />
                         </div>
@@ -78,10 +77,9 @@
                       v-else
                       :key="index"
                     >
-                      <td v-if="column.key == key">
+                      <td class="layui-table-cell" v-if="column.key == key">
                         <div
                           :style="{ width: column.width }"
-                          style="padding: 0px 16px"
                         >
                           <span v-if="column.slot">
                             <slot :name="column.slot" :data="data" />
@@ -141,7 +139,7 @@ const props = withDefaults(
     },
     selectedKeys: function () {
       return []
-    },
+    }
   }
 )
 

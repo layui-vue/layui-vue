@@ -1,7 +1,7 @@
 <template>
   <div class="layui-form-item">
     <label class="layui-form-label">{{ label }}</label>
-    <div :class="[mode ? 'layui-input-' + mode : '']" class="layui-input-block">
+    <div :class="[mode ? 'layui-input-' + mode : '']">
       <slot />
     </div>
   </div>
@@ -15,7 +15,7 @@ const props = withDefaults(
     label?: string
   }>(),
   {
-    mode: 'block',
+    mode: 'block'
   }
 )
 </script>

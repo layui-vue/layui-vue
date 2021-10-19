@@ -1,138 +1,40 @@
-::: demo
-
-<template>
-  <lay-input v-model="data"></lay-input>
-</template>
-
-<script>
-import { ref } from 'vue'
-
-export default {
-  setup() {
-
-    const data = ref("内容");
-
-    return {
-      data
-    }
-  }
-}
-</script>
-
+::: field 基础使用
 :::
 
 ::: demo
 
 <template>
-  <lay-input placeholder="请输入密码" type="password"></lay-input>
-</template>
-
-<script>
-import { ref } from 'vue'
-
-export default {
-  setup() {
-
-    return {
-
-    }
-  }
-}
-</script>
-
-:::
-
-::: demo
-
-<template>
-  <lay-textarea placeholder="请输入密码"></lay-textarea>
-  <br>
-  <lay-textarea placeholder="请输入密码" v-model="data"></lay-textarea>
-</template>
-
-<script>
-import { ref } from 'vue'
-
-export default {
-  setup() {
-
-    const data = ref("内容");
-
-    return {
-      data
-    }
-  }
-}
-</script>
-
-:::
-
-::: demo
-
-<template>
-  <lay-switch v-model="active"></lay-switch>
-</template>
-
-<script>
-import { ref } from 'vue'
-
-export default {
-  setup() {
-
-    const active = ref(true);
-
-    return {
-        active
-    }
-  }
-}
-</script>
-
-:::
-
-::: demo
-
-<template>
-  <lay-switch v-model="active" disabled></lay-switch>
-</template>
-
-<script>
-import { ref } from 'vue'
-
-export default {
-  setup() {
-
-    const active = ref(true);
-
-    return {
-        active
-    }
-  }
-}
-</script>
-
-:::
-
-::: demo
-
-<template>
-  <lay-form>
-    <lay-checkbox v-model="checked" label="1">写作</lay-checkbox>
-    <lay-checkbox v-model="checked" label="2">画画</lay-checkbox>
-    <lay-checkbox v-model="checked" label="3">运动</lay-checkbox>
+  <lay-form @submit="submit" :model="model">
+    <lay-form-item label="账户">
+      <lay-input v-model="model.username"></lay-input>
+    </lay-form-item>
+    <lay-form-item label="密码">
+      <lay-input v-model="model.password"></lay-input>
+    </lay-form-item>
+    <lay-form-item>
+      <lay-button naive-type="submit">提交</lay-button>
+    </lay-form-item>
   </lay-form>
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, reactive } from 'vue'
 
 export default {
   setup() {
 
-    const checked = ref(['1','2']);
+    const model = reactive({
+        username: "admin",
+        password: "admin"
+    })
+
+    const submit = function(val) {
+      alert(JSON.stringify(val))
+    }
 
     return {
-        checked
+      model,
+      submit
     }
   }
 }
@@ -140,84 +42,23 @@ export default {
 
 :::
 
-::: demo
-
-<template>
-  <lay-form>
-    <lay-checkbox name="like" skin="primary" v-model="checked" label="1">写作</lay-checkbox>
-    <lay-checkbox name="like" skin="primary" v-model="checked" label="2">画画</lay-checkbox>
-    <lay-checkbox name="like" skin="primary" v-model="checked" label="3">运动</lay-checkbox>
-  </lay-form>
-</template>
-
-<script>
-import { ref } from 'vue'
-
-export default {
-  setup() {
-
-    const checked = ref(['1','2']);
-
-    return {
-        checked
-    }
-  }
-}
-</script>
-
+::: field 表单事件
 :::
 
-::: demo
+| Name   | Description | Accepted Values  |
+| ----- | ------ | -------------- |
+| model | 表单绑定值 | -- |
 
-<template>
-  <lay-form>
-    <lay-radio v-model="selected" name="action" label="1">写作</lay-radio>
-    <lay-radio v-model="selected" name="action" label="2">画画</lay-radio>
-    <lay-radio v-model="selected" name="action" label="3">运动</lay-radio>
-  </lay-form>
-</template>
-
-<script>
-import { ref } from 'vue'
-
-export default {
-  setup() {
-
-    const selected = ref("1");
-
-    return {
-        selected
-    }
-  }
-}
-</script>
-
+::: field 表单事件
 :::
 
-::: demo
+| Name   | Description | Accepted Values  |
+| ----- | ------ | -------------- |
+| submit | 提交事件 | -- |
 
-<template>
-  <lay-form>
-    <lay-select v-model="select">
-      <lay-select-option value="beijing" label="北京"></lay-select-option>
-      <lay-select-option value="jinan" label="济南"></lay-select-option>
-    </lay-select>
-  </lay-form>
-</template>
-
-<script>
-import { ref } from 'vue'
-
-export default {
-  setup() {
-
-    const select = ref("jinan")
-
-    return {
-      select
-    }
-  }
-}
-</script>
-
+::: field 表单项属性
 :::
+
+| Name   | Description | Accepted Values  |
+| ----- | ------ | -------------- |
+| label | 标题名称 | -- |
