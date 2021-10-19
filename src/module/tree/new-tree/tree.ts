@@ -117,8 +117,12 @@ class Tree {
     })
 
     node.isDisabled.value = nodeDisabled
-    node.isChecked.value = parentNode ? parentNode.isChecked.value : checkedKeys.includes(nodeKey)
-    node.isLeaf.value = parentNode ? parentNode.isLeaf.value : expandKeys.includes(nodeKey)
+    node.isChecked.value = parentNode
+      ? parentNode.isChecked.value
+      : checkedKeys.includes(nodeKey)
+    node.isLeaf.value = parentNode
+      ? parentNode.isLeaf.value
+      : expandKeys.includes(nodeKey)
     node.isLeaf.value = nodeIsLeaf
 
     if (!nodeMap.has(nodeKey)) {
@@ -172,7 +176,7 @@ class Tree {
     return this.treeData
   }
 
-  getKeys () {
+  getKeys() {
     const checkedKeys = []
     const expandKeys = []
     const iterator = this.config.nodeMap[Symbol.iterator]()
@@ -191,7 +195,7 @@ class Tree {
     return { checkedKeys, expandKeys }
   }
 
-  getOriginData (key: StringOrNumber): OriginalTreeData {
+  getOriginData(key: StringOrNumber): OriginalTreeData {
     return this.config.originMap.get(key)!
   }
 }

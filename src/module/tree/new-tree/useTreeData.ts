@@ -1,9 +1,10 @@
 import {
-  OriginalTreeData, StringFn,
-  StringOrNumber
-} from "/@src/module/tree/new-tree/tree.type";
-import { computed, ref, Ref } from "vue";
-import { Nullable } from "/@src/module/type";
+  OriginalTreeData,
+  StringFn,
+  StringOrNumber,
+} from '/@src/module/tree/new-tree/tree.type'
+import { computed, ref, Ref } from 'vue'
+import { Nullable } from '/@src/module/type'
 
 export interface TreeConfig {
   disabled: boolean
@@ -25,14 +26,24 @@ export const useTreeData = (
   })
 }
 
-function getTreeNodes(origin: OriginalTreeData[], config: TreeConfig, parentId = '') {
+function getTreeNodes(
+  origin: OriginalTreeData[],
+  config: TreeConfig,
+  parentId = ''
+) {
   const len = origin.length
   for (let i = 0; i < len; i++) {
     const node = createTreeNode(config, origin[i], i, len, parentId)
   }
 }
 
-function createTreeNode (config: TreeConfig, current: OriginalTreeData, i: number, len: number, parentId: string) {
+function createTreeNode(
+  config: TreeConfig,
+  current: OriginalTreeData,
+  i: number,
+  len: number,
+  parentId: string
+) {
   const treeNode = new TreeNode(current)
   const { disabled, spread } = config
   treeNode.isDisabled.value = disabled

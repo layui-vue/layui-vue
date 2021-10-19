@@ -32,4 +32,3 @@ export interface TreeEmits {
   (e: 'update:expandKeys', keys: KeysType): void
   (e: 'node-click', node: OriginalTreeData, event: Event): void
 }
-

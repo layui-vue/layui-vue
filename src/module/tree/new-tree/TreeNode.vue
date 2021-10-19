@@ -11,7 +11,7 @@ import { Nullable } from '/@src/module/type'
 import LayIcon from '../../icon'
 import LayCheckbox from '../../checkbox'
 import { nextTick, Ref } from 'vue'
-import { Tree } from "/@src/module/tree/new-tree/tree";
+import { Tree } from '/@src/module/tree/new-tree/tree'
 
 type CustomKey = string | number
 type CustomString = (() => string) | string
@@ -71,9 +71,7 @@ const nodeIconType = (node: TreeData): string => {
   return 'layui-icon-file'
 }
 
-function recursiveNodeClick(
-  node: TreeData
-) {
+function recursiveNodeClick(node: TreeData) {
   emit('node-click', node)
 }
 
@@ -146,9 +144,9 @@ function handleTitleClick(node: TreeData) {
           :node-list="node.children"
           :show-checkbox="showCheckbox"
           :show-line="showLine"
-          @node-click="recursiveNodeClick"
           :tree="tree"
           :only-icon-control="onlyIconControl"
+          @node-click="recursiveNodeClick"
         />
       </div>
     </transition>

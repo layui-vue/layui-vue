@@ -217,30 +217,29 @@ function handleClick(node) {
 
 :::
 
-| Name   | Description | Accepted Values  |
-| -------- | ---- | ----------------------- |
-| data       | 树型组件数据,类型 TreeData \| TreeData[] | null |
-| showCheckbox | 是否显示复选框 | false |
-| onlyIconControl | 是否仅允许节点左侧图标控制展开收缩 | false |
-| showLine | 是否开启连接线 | true |
-| checkedKeys(v-model:checkedKeys)    |  开启showCheckbox后, 选中的节点 | [] |
+| Name                             | Description                              | Accepted Values |
+| -------------------------------- | ---------------------------------------- | --------------- |
+| data                             | 树型组件数据,类型 TreeData \| TreeData[] | null            |
+| showCheckbox                     | 是否显示复选框                           | false           |
+| onlyIconControl                  | 是否仅允许节点左侧图标控制展开收缩       | false           |
+| showLine                         | 是否开启连接线                           | true            |
+| checkedKeys(v-model:checkedKeys) | 开启 showCheckbox 后, 选中的节点         | []              |
 
 ::: field TreeData
 
 :::
-| Name   | Description | Accepted Values  |
+| Name | Description | Accepted Values |
 | -------- | ---- | ----------------------- |
-| id       | 唯一值 | - |
+| id | 唯一值 | - |
 | title | 节点名称 | - |
 | children | 子节点 | [] |
 | disabled | 该节点是否禁用 | false |
-| spread | 该节点是否展开  |  false | - |
-
+| spread | 该节点是否展开 | false | - |
 
 ::: field tree events
 
 :::
 
-| Name   | Description | Accepted Params  |
-| -------- | ---- | ----------------------- |
-| node-click       | 节点 click 事件 | --  |
+| Name       | Description     | Accepted Params |
+| ---------- | --------------- | --------------- |
+| node-click | 节点 click 事件 | --              |
