@@ -2,16 +2,16 @@
   <div class="layui-tab" :class="[type ? 'layui-tab-' + type : '']">
     <ul class="layui-tab-title">
       <li
-        v-for="s in slots"
-        :key="s"
-        :class="[s.props.id === active ? 'layui-this' : '']"
-        @click.stop="change(s.props.id)"
+        v-for="children in childrens"
+        :key="children"
+        :class="[children.props.id === active ? 'layui-this' : '']"
+        @click.stop="change(children.props.id)"
       >
-        {{ s.props.title }}
+        {{ children.props.title }}
         <i
           v-if="allowClose"
           class="layui-icon layui-icon-close layui-unselect layui-tab-close"
-          @click.stop="close(s.props.id)"
+          @click.stop="close(children.props.id)"
         ></i>
       </li>
     </ul>
@@ -28,10 +28,34 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed, defineProps, provide, ref, useSlots } from 'vue'
+import tabItem from "../tabItem/index.vue"
+import {
+  Component,
+  computed,
+  defineProps,
+  provide,
+  Ref,
+  ref,
+  useSlots,
+  VNode
+} from 'vue'
 
 const slot = useSlots()
 const slots = slot.default && slot.default()
+const childrens: Ref<VNode[]> = ref([])
+
+const setItemInstanceBySlot = function (nodeList: VNode[]) {
+  nodeList?.map((item) => {
+    let component = item.type as Component
+    if (component.name != tabItem.name) {
+      setItemInstanceBySlot(item.children as VNode[])
+    } else {
+      childrens.value.push(item)
+    }
+  })
+}
+
+setItemInstanceBySlot(slots as any[])
 
 const props = defineProps<{
   type?: string

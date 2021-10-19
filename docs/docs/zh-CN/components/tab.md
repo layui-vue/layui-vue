@@ -79,7 +79,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-tab type="card" v-model="current3" :allow-close="allowClose" @change="change" @close="close">
+  <lay-tab type="card" v-model="current4" :allow-close="allowClose" @change="change" @close="close">
     <lay-tab-item title="选项一" id="1"><div style="padding:20px">选项一</div></lay-tab-item>
     <lay-tab-item title="选项二" id="2"><div style="padding:20px">选项二</div></lay-tab-item>
   </lay-tab>
@@ -103,10 +103,44 @@ export default {
     }
 
     return {
-      current3,
+      current4,
       allowClose,
       change,
       close
+    }
+  }
+}
+</script>
+
+:::
+
+
+::: demo
+
+<template>
+  <lay-tab type="card" v-model="current5">
+    <lay-tab-item v-for="a in arr" :key="a" :title="a.title" :id="a.id">
+      {{a}}
+    </lay-tab-item>
+  </lay-tab>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const current5 = ref('1')
+
+    const arr = [
+      {id:'1', title:'选项一'},
+      {id:'2', title:'选项二'}
+    ]
+
+    return {
+      current5,
+      arr
     }
   }
 }
