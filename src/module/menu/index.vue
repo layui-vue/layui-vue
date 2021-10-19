@@ -44,18 +44,6 @@ const selectedKey = computed({
   },
 })
 
-watch(selectedKey, function (val) {
-  emit('update:selectedKey', val)
-})
-
-watch(
-  openKeys,
-  function (val) {
-    emit('update:openKeys', val)
-  },
-  { deep: true }
-)
-
 provide('isTree', isTree)
 provide('selectedKey', selectedKey)
 provide('openKeys', openKeys)

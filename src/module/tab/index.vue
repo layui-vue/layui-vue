@@ -28,16 +28,18 @@ export default {
 </script>
 
 <script setup lang="ts">
-import tabItem from "../tabItem/index.vue"
+import tabItem from '../tabItem/index.vue'
 import {
+  defineProps,
   Component,
   computed,
-  defineProps,
+  useSlots,
   provide,
+  VNode,
   Ref,
   ref,
-  useSlots,
-  VNode
+  onUpdated,
+  onMounted,
 } from 'vue'
 
 const slot = useSlots()
@@ -55,7 +57,15 @@ const setItemInstanceBySlot = function (nodeList: VNode[]) {
   })
 }
 
-setItemInstanceBySlot(slots as any[])
+onUpdated(() => {
+  childrens.value = []
+  setItemInstanceBySlot((slot.default && slot.default()) as VNode[])
+})
+
+onMounted(() => {
+  childrens.value = []
+  setItemInstanceBySlot((slot.default && slot.default()) as VNode[])
+})
 
 const props = defineProps<{
   type?: string

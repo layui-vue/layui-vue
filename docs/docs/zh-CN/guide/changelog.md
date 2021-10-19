@@ -7,6 +7,7 @@
 <lay-timeline-item title="0.1.6">
 [修复] menu 菜单 selectedKey 选中项 openKeys 打开项 props 双绑。<br>
 [修复] tab 选项卡 v-model 激活项 双绑。<br>
+[修复] tab 选项卡 tab-item 组件套用 for 循环无法获取 props 属性。<br>
 [新增] page 分页 prev 插槽。<br>
 [新增] page 分页 next 插槽。<br>
 </lay-timeline-item>
