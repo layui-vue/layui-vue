@@ -10,6 +10,7 @@
 [修复] tab 选项卡 tab-item 组件套用 for 循环无法获取 props 属性。<br>
 [新增] page 分页 prev 插槽。<br>
 [新增] page 分页 next 插槽。<br>
+[新增] button 按钮 naiveType 属性, 原生 type 属性, 支持 button, submit 可选值。<br>
 </lay-timeline-item>
 <lay-timeline-item title="0.1.4">
 [新增] button 按钮 loading 属性, 提供 加载 状态。<br>

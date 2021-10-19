@@ -9,6 +9,7 @@
       border ? 'layui-border-' + border : '',
       disabled ? 'layui-btn-disabled' : '',
     ]"
+    :type="nativeType"
   >
     <i
       v-if="loading"
@@ -36,5 +37,6 @@ const props =
     border?: string
     disabled?: boolean
     loading?: boolean
+    nativeType?: string
   }>()
 </script>
