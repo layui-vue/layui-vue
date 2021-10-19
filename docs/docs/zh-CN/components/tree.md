@@ -8,6 +8,7 @@
     :showCheckbox="showCheckbox"
     v-model:checkedKeys="checkedKeys"
     @node-click="handleClick"
+    :disabled="disabled"
   >
   </lay-tree>
   <br/>
@@ -32,6 +33,7 @@
   <pre>
     {{ clickNode }}
   </pre>
+  <br/>
 </template>
 
 <script setup>
@@ -202,6 +204,7 @@ const showLine = ref(true);
 const clickNode = ref(null);
 const showCheckbox = ref(true);
 const checkedKeys = ref([1]);
+const disabled = ref(false);
 
 function handleClick(node) {
  clickNode.value = node
@@ -216,12 +219,22 @@ function handleClick(node) {
 
 | Name   | Description | Accepted Values  |
 | -------- | ---- | ----------------------- |
-| name       | 原始属性 name | --  |
-| data       | 树型组件数据,类型TreeData[] | null |
+| data       | 树型组件数据,类型 TreeData \| TreeData[] | null |
 | showCheckbox | 是否显示复选框 | false |
 | onlyIconControl | 是否仅允许节点左侧图标控制展开收缩 | false |
 | showLine | 是否开启连接线 | true |
-| checkedKeys(v-model:checkedKeys)    |  开启选中后选中的节点 | - |
+| checkedKeys(v-model:checkedKeys)    |  开启showCheckbox后, 选中的节点 | [] |
+
+::: field TreeData
+
+:::
+| Name   | Description | Accepted Values  |
+| -------- | ---- | ----------------------- |
+| id       | 唯一值 | - |
+| title | 节点名称 | - |
+| children | 子节点 | [] |
+| disabled | 该节点是否禁用 | false |
+| spread | 该节点是否展开  |  false | - |
 
 
 ::: field tree events

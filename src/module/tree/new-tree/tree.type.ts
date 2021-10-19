@@ -1,9 +1,3 @@
-/*
- * @Date: 2021-10-16 13:07:34
- * @LastEditors: 落小梅
- * @LastEditTime: 2021-10-16 13:29:06
- * @FilePath: \layui-vue\src\module\tree\new-tree\tree.type.ts
- */
 export type StringFn = () => string
 export type StringOrNumber = string | number
 export type KeysType = (number | string)[]
@@ -19,6 +13,7 @@ export interface OriginalTreeData {
 
 export interface TreeProps {
   checkedKeys?: KeysType
+  expandKeys?: KeysType
   data: OriginalTreeData
   showCheckbox?: boolean
   edit?: EditType
@@ -34,11 +29,7 @@ export interface TreeProps {
 
 export interface TreeEmits {
   (e: 'update:checkedKeys', keys: KeysType): void
+  (e: 'update:expandKeys', keys: KeysType): void
   (e: 'node-click', node: OriginalTreeData, event: Event): void
 }
 
-/**
- *  Tree
- */
-
-export interface Tree {}

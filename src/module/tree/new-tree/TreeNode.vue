@@ -11,6 +11,7 @@ import { Nullable } from '/@src/module/type'
 import LayIcon from '../../icon'
 import LayCheckbox from '../../checkbox'
 import { nextTick, Ref } from 'vue'
+import { Tree } from "/@src/module/tree/new-tree/tree";
 
 type CustomKey = string | number
 type CustomString = (() => string) | string
@@ -20,7 +21,7 @@ interface TreeData {
   title: CustomString
   children: TreeData[]
   parentKey: Nullable<StringOrNumber>
-  isRoot: Ref<boolean>
+  isRoot: boolean
   isChecked: Ref<boolean>
   isDisabled: Ref<boolean>
   isLeaf: Ref<boolean>
@@ -29,13 +30,15 @@ interface TreeData {
 }
 
 interface TreeNodeProps {
+  tree: Tree
   nodeList: TreeData[]
   showCheckbox: boolean
   showLine: boolean
+  onlyIconControl: boolean
 }
 
 interface TreeNodeEmits {
-  (e: 'node-click', event: Event): void
+  (e: 'node-click', node: TreeData): void
 }
 
 const props = defineProps<TreeNodeProps>()
@@ -68,59 +71,25 @@ const nodeIconType = (node: TreeData): string => {
   return 'layui-icon-file'
 }
 
-function handleNodeClick(
-  args: { label: string; value: string },
-  node: TreeData
-) {
-  emit('node-click', args, node)
-}
-
 function recursiveNodeClick(
-  args: { label: string; value: string },
   node: TreeData
 ) {
-  emit('node-click', args, node)
-}
-
-function setChildrenChecked(checked: boolean, nodes: TreeData[]) {
-  const len = nodes.length
-  for (let i = 0; i < len; i++) {
-    nodes[i].isChecked.value = checked
-    nodes[i].children &&
-      nodes[i].children.length > 0 &&
-      setChildrenChecked(checked, nodes[i].children)
-  }
-}
-
-function setParentChecked(checked: boolean, parent: TreeData) {
-  if (!parent) {
-    return
-  }
-  parent.isChecked.value = checked
-  const pChild = parent.children
-  const pChildChecked = pChild.some((c) => c.isChecked.value)
-  if (pChildChecked) {
-    parent.isChecked.value = true
-  }
-  if (parent.parentNode) {
-    setParentChecked(checked, parent.parentNode)
-  }
+  emit('node-click', node)
 }
 
 function handleChange(checked: boolean, node: TreeData) {
-  node.isChecked.value = checked
-  // 处理上级
-  if (node.parentNode) {
-    setParentChecked(checked, node.parentNode)
-  }
-  // 处理下级
-  if (node.children) {
-    setChildrenChecked(checked, node.children)
-  }
+  props.tree.setCheckedKeys(checked, node)
 }
 
 function handleIconClick(node: TreeData) {
   node.isLeaf.value = !node.isLeaf.value
+}
+
+function handleTitleClick(node: TreeData) {
+  if (!props.onlyIconControl) {
+    handleIconClick(node)
+  }
+  emit('node-click', node)
 }
 </script>
 
@@ -161,6 +130,7 @@ function handleIconClick(node: TreeData) {
             'layui-tree-txt': true,
             'layui-disabled': node.isDisabled.value,
           }"
+          @click="handleTitleClick(node)"
         >
           {{ node.title }}
         </span>
@@ -177,6 +147,8 @@ function handleIconClick(node: TreeData) {
           :show-checkbox="showCheckbox"
           :show-line="showLine"
           @node-click="recursiveNodeClick"
+          :tree="tree"
+          :only-icon-control="onlyIconControl"
         />
       </div>
     </transition>

@@ -28,82 +28,16 @@ interface ReplaceFields {
 }
 
 interface TreeConfig {
-  disabled: boolean
   showCheckbox: boolean
   checkedKeys: StringOrNumber[]
+  expandKeys: StringOrNumber[]
   nodeMap: Map<StringOrNumber, TreeData>
+  originMap: Map<StringOrNumber, OriginalTreeData>
   replaceFields: ReplaceFields
 }
 
-function getNode(
-  config: TreeConfig,
-  origin: OriginalTreeData,
-  parentKey: StringOrNumber,
-  hasNextSibling: boolean
-): TreeData {
-  const {
-    disabled,
-    checkedKeys,
-    showCheckbox,
-    nodeMap,
-    replaceFields: { children, id, title },
-  } = config
-
-  const nodeKey = Reflect.get(origin, id)
-  const nodeTitle = Reflect.get(origin, title)
-  const nodeChildren = Reflect.get(origin, children)
-  const nodeDisabled = !!Reflect.get(origin, 'disabled')
-  const nodeIsLeaf = !!Reflect.get(origin, 'spread')
-
-  const parent = nodeMap.get(parentKey)
-  if (parent) {
-    console.log(parent.isChecked.value)
-  }
-
-  // console.log((parent && parent.isChecked.value) || checkedKeys.includes(nodeKey))
-
-  // const isCheckedValue = (parent && parent.isChecked.value) || checkedKeys.includes(nodeKey)
-
-  const node = Object.assign({}, origin, {
-    id: nodeKey,
-    title: nodeTitle,
-    children: nodeChildren ? nodeChildren : [],
-    parentKey: parentKey,
-    isRoot: parentKey === '',
-    isDisabled: ref(nodeDisabled),
-    isChecked: showCheckbox ? ref(checkedKeys.includes(nodeKey)) : ref(false),
-    // isChecked: ref(isCheckedValue),
-    isLeaf: ref(nodeIsLeaf),
-    hasNextSibling: hasNextSibling,
-    parentNode: null,
-  })
-  // 如果全局设置了disabled,则全部至为true
-  if (disabled) {
-    node.isDisabled.value = true
-  }
-
-  if (!nodeMap.has(nodeKey)) {
-    nodeMap.set(nodeKey, node)
-  }
-
-  return node
-}
-
-export function setParentNode(
-  nodes: TreeData[],
-  parentNode: Nullable<TreeData> = null
-) {
-  const len = nodes.length
-  for (let i = 0; i < len; i++) {
-    Reflect.set(nodes[i], 'parentNode', parentNode)
-    if (nodes[i].children && nodes[i].children.length > 0) {
-      setParentNode(nodes[i].children, nodes[i])
-    }
-  }
-}
-
 class Tree {
-  private readonly config: TreeConfig
+  protected config: TreeConfig
   protected treeData: TreeData[]
 
   constructor(
@@ -111,7 +45,13 @@ class Tree {
     origin: OriginalTreeData | OriginalTreeData[]
   ) {
     this.config = config
-    this.treeData = this.createTree(origin)
+    this.treeData = []
+    this.init(origin)
+  }
+
+  init(origin: OriginalTreeData | OriginalTreeData[]): void {
+    const tree = this.createTree(origin)
+    this.treeData = tree
   }
 
   createTree(
@@ -120,15 +60,7 @@ class Tree {
   ): TreeData[] {
     let data
     if (!Array.isArray(origin)) {
-      data = Array.of(
-        Object.assign({}, origin, {
-          // isRoot: true,
-          // isChecked: ref(false),
-          // isExpand: ref(false),
-          // isDisabled: ref(false),
-          // isLeaf: ref(false),
-        })
-      )
+      data = Array.of(Object.assign({}, origin))
     } else {
       data = origin
     }
@@ -137,7 +69,7 @@ class Tree {
 
     const len = data.length
     for (let i = 0; i < len; i++) {
-      const node = getNode(this.config, data[i], parentKey, i < len - 1)
+      const node = this.getNode(data[i], parentKey, i < len - 1)
       const nodeChildren = Reflect.get(node, children)
       const nodeHasChildren = !!Reflect.get(node, children)
 
@@ -150,13 +82,117 @@ class Tree {
     return nodeList
   }
 
+  getNode(
+    origin: OriginalTreeData,
+    parentKey: StringOrNumber,
+    hasNextSibling: boolean
+  ): TreeData {
+    const {
+      nodeMap,
+      originMap,
+      checkedKeys,
+      expandKeys,
+      replaceFields: { children, id, title },
+    } = this.config
+
+    const nodeKey = Reflect.get(origin, id)
+    const nodeTitle = Reflect.get(origin, title)
+    const nodeChildren = Reflect.get(origin, children)
+    const nodeDisabled = !!Reflect.get(origin, 'disabled')
+    const nodeIsLeaf = !!Reflect.get(origin, 'spread')
+
+    const parentNode = nodeMap.get(parentKey)
+
+    const node = Object.assign({}, origin, {
+      id: nodeKey,
+      title: nodeTitle,
+      children: nodeChildren ? nodeChildren : [],
+      parentKey: parentKey,
+      isRoot: parentKey === '',
+      isDisabled: ref(false),
+      isChecked: ref(false),
+      isLeaf: ref(false),
+      hasNextSibling: hasNextSibling,
+      parentNode: parentNode || null,
+    })
+
+    node.isDisabled.value = nodeDisabled
+    node.isChecked.value = parentNode ? parentNode.isChecked.value : checkedKeys.includes(nodeKey)
+    node.isLeaf.value = parentNode ? parentNode.isLeaf.value : expandKeys.includes(nodeKey)
+    node.isLeaf.value = nodeIsLeaf
+
+    if (!nodeMap.has(nodeKey)) {
+      nodeMap.set(nodeKey, node)
+    }
+    if (!originMap.has(nodeKey)) {
+      originMap.set(nodeKey, origin)
+    }
+
+    return node
+  }
+
+  setChildrenChecked(checked: boolean, nodes: TreeData[]) {
+    const len = nodes.length
+    for (let i = 0; i < len; i++) {
+      nodes[i].isChecked.value = checked
+      nodes[i].children &&
+        nodes[i].children.length > 0 &&
+        this.setChildrenChecked(checked, nodes[i].children)
+    }
+  }
+
+  setParentChecked(checked: boolean, parent: TreeData) {
+    if (!parent) {
+      return
+    }
+    parent.isChecked.value = checked
+    const pChild = parent.children
+    const pChildChecked = pChild.some((c) => c.isChecked.value)
+    if (pChildChecked) {
+      parent.isChecked.value = true
+    }
+    if (parent.parentNode) {
+      this.setParentChecked(checked, parent.parentNode)
+    }
+  }
+
+  setCheckedKeys(checked: boolean, node: TreeData) {
+    node.isChecked.value = checked
+    // 处理上级
+    if (node.parentNode) {
+      this.setParentChecked(checked, node.parentNode)
+    }
+    // 处理下级
+    if (node.children) {
+      this.setChildrenChecked(checked, node.children)
+    }
+  }
+
   getData() {
     return this.treeData
   }
 
-  setChecked(node: TreeData) {
-    const item = this.config.nodeMap.get(node.id)
-    console.log(item)
+  getKeys () {
+    const checkedKeys = []
+    const expandKeys = []
+    const iterator = this.config.nodeMap[Symbol.iterator]()
+    let next = iterator.next()
+    while (!next.done) {
+      const [, node] = next.value
+      const id = Reflect.get(node, this.config.replaceFields.id)
+      if (node.isChecked.value) {
+        checkedKeys.push(id)
+      }
+      if (node.isLeaf.value) {
+        expandKeys.push(id)
+      }
+      next = iterator.next()
+    }
+    return { checkedKeys, expandKeys }
+  }
+
+  getOriginData (key: StringOrNumber): OriginalTreeData {
+    return this.config.originMap.get(key)!
   }
 }
 

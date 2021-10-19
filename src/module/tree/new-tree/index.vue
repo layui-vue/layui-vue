@@ -15,6 +15,7 @@ export default {
 import TreeNode from './TreeNode.vue'
 import { computed } from 'vue'
 import { useTree } from '/@src/module/tree/new-tree/useTree'
+import { TreeData } from '/@src/module/tree/new-tree/tree'
 
 type StringFn = () => string
 type StringOrNumber = string | number
@@ -37,6 +38,7 @@ interface TreeProps {
   accordion?: boolean
   onlyIconControl?: boolean
   showLine?: boolean
+  disabled?: boolean
   replaceFields?: {
     id?: string
     children?: string
@@ -46,7 +48,8 @@ interface TreeProps {
 
 interface TreeEmits {
   (e: 'update:checkedKeys', keys: KeysType): void
-  (e: 'node-click', args: any,  node: OriginalTreeData, event: Event): void
+  (e: 'update:expandKeys', keys: KeysType): void
+  (e: 'node-click', node: OriginalTreeData): void
 }
 
 const props = withDefaults(defineProps<TreeProps>(), {
@@ -54,6 +57,7 @@ const props = withDefaults(defineProps<TreeProps>(), {
   edit: false,
   accordion: false,
   onlyIconControl: false,
+  disabled: false,
   showLine: true,
   replaceFields: () => {
     return {
@@ -63,6 +67,7 @@ const props = withDefaults(defineProps<TreeProps>(), {
     }
   },
 })
+
 const emit = defineEmits<TreeEmits>()
 
 const className = computed(() => {
@@ -73,21 +78,21 @@ const className = computed(() => {
   }
 })
 
-const {
-  nodeList,
-  handleCheckbox
-} = useTree(props, emit)
+const { tree, nodeList } = useTree(props, emit)
 
-function handleClick (args, node) {
-  handleCheckbox(node)
+function handleClick(node: TreeData) {
+  const originNode = tree.getOriginData(node.id)
+  emit('node-click', originNode)
 }
 </script>
 <template>
   <div :class="className">
     <tree-node
-      :nodeList="nodeList"
-      :showCheckbox="showCheckbox"
-      :showLine="showLine"
+      :tree="tree"
+      :node-list="nodeList"
+      :show-checkbox="showCheckbox"
+      :show-line="showLine"
+      :only-icon-control="onlyIconControl"
       @node-click="handleClick"
     ></tree-node>
   </div>
