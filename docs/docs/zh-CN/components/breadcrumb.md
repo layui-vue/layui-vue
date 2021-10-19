@@ -70,18 +70,16 @@ export default {
 
 :::
 
-::: field breadcrumb attributes
-
+::: field 面包屑属性
 :::
 
-|           |        |     |
+| Name   | Description | Accepted Values  |
 | --------- | ------ | --- |
 | separator | 分割符 | `/` |
 
-::: field breadcrumb slots
-
+::: field 面包屑插槽
 :::
 
-|           |        |     |
+| Name   | Description | Accepted Values  |
 | --------- | ------ | --- |
 | default | 默认插槽 | `--` |

@@ -1,3 +1,6 @@
+::: field 基础使用
+:::
+
 ::: demo
 
 <template>
@@ -16,6 +19,9 @@ export default {
 }
 </script>
 
+:::
+
+::: field 响应结果
 :::
 
 ::: demo
@@ -39,6 +45,9 @@ export default {
 }
 </script>
 
+:::
+
+::: field 指定长度
 :::
 
 ::: demo
@@ -66,8 +75,7 @@ export default {
 
 :::
 
-::: field rate attributes
-
+::: field 评分属性
 :::
 
 |         |          |     |

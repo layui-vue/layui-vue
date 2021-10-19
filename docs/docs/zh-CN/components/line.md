@@ -31,10 +31,10 @@ export default {
 
 :::
 
-::: field line attributes
+::: field 分割属性
 
 :::
 
-|       |      |                                               |
+| Name   | Description | Accepted Values  |
 | ----- | ---- | --------------------------------------------- |
 | theme | 主题 | `orange` `green` `cyan` `blue` `black` `gray` |

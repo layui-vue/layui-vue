@@ -1,3 +1,6 @@
+::: field 基础使用
+:::
+
 ::: demo
 
 <template>
@@ -18,6 +21,9 @@ export default {
 }
 </script>
 
+:::
+
+::: field 尺寸大小
 :::
 
 ::: demo
@@ -42,6 +48,9 @@ export default {
 }
 </script>
 
+:::
+
+::: field 显示文字
 :::
 
 ::: demo
@@ -70,8 +79,7 @@ export default {
 
 :::
 
-::: field progress attributes
-
+::: field Progress 属性
 :::
 
 |          |          |                                               |

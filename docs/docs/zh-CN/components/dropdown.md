@@ -1,3 +1,6 @@
+::: field 基础使用
+:::
+
 ::: demo
 
 <template>
@@ -23,6 +26,9 @@ export default {
 }
 </script>
 
+:::
+
+::: field 触发方式
 :::
 
 ::: demo
@@ -61,10 +67,9 @@ export default {
 
 :::
 
-::: field dropdown attributes
-
+::: field Dropdown 属性
 :::
 
-|         |          |                 |
+| Name   | Description | Accepted Values  |
 | ------- | -------- | --------------- |
 | trigger | 触发方式 | `click` `hover` |

@@ -1,3 +1,6 @@
+::: field 基础使用
+:::
+
 ::: demo
 
 <template>
@@ -16,6 +19,9 @@ export default {
 }
 </script>
 
+:::
+
+::: field 指定描述
 :::
 
 ::: demo
@@ -38,10 +44,10 @@ export default {
 
 :::
 
-::: field empty attributes
+::: field empty 属性
 
 :::
 
-|             |          |     |
+| Name   | Description | Accepted Values  |
 | ----------- | -------- | --- |
 | description | 描述信息 | --  |

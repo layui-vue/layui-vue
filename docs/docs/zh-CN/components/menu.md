@@ -1,3 +1,6 @@
+::: field 基础使用
+:::
+
 ::: demo
 
 <template>
@@ -31,11 +34,12 @@ export default {
 
 :::
 
+::: field 垂直导航
+:::
+
 ::: demo
 
 <template>
-  选中项: {{selectedKey}}
-  打开项: {{openKeys}}
   <lay-menu v-model:selectedKey="selectedKey" v-model:openKeys="openKeys" v-model:tree="isTree">
     <lay-menu-item title="首页" id="1">
       <template v-slot:title> 
@@ -73,19 +77,17 @@ export default {
 
 :::
 
-::: field menu attributes
-
+::: field 菜单属性
 :::
 
-|                       |        |     |
+| Name   | Description | Accepted Values  |
 | --------------------- | ------ | --- |
 | selectedKey (v-model) | 选中项 | --  |
 | openKeys (v-model)    | 打开项 | --  |
 
-::: field menu slots
-
+::: field 菜单插槽
 :::
 
-|       |          |     |
+| Name   | Description | Accepted Values  |
 | ----- | -------- | --- |
 | title | 菜单标题 | --  |

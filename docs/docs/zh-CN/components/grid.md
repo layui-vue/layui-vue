@@ -1,3 +1,6 @@
+::: field 基础使用
+:::
+
 ::: demo
 
 <template>
@@ -38,6 +41,9 @@ export default {
 
 :::
 
+::: field 栅格偏移
+:::
+
 ::: demo
 
 <template>
@@ -74,6 +80,9 @@ export default {
 
 :::
 
+::: field 栅格适应
+:::
+
 ::: demo
 
 <template>
@@ -94,6 +103,9 @@ export default {
 }
 </script>
 
+:::
+
+::: field 流式布局
 :::
 
 ::: demo
@@ -124,19 +136,19 @@ export default {
 
 :::
 
-::: field row attributes
+::: field 行属性
 
 :::
 
-|          |      |                         |  
+| Name   | Description | Accepted Values  |
 | -------- | ---- | ----------------------- |
 | space    | 间隔 |  --  | 
 
-::: field col attributes
+::: field 列属性
 
 :::
 
-|          |      |                         |     |
+| Name   | Description | Description Info | Accepted Values  |
 | -------- | ---- | ----------------------- | --- |
 | xs       | 尺寸 | 超小屏幕 (手机<768px)   | 12  |
 | sm       | 尺寸 | 小屏幕 (平板 ≥768px)    | 12  |

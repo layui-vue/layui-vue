@@ -1,3 +1,6 @@
+::: field 基础使用
+:::
+
 ::: demo
 
 <template>
@@ -18,6 +21,9 @@ export default {
 }
 </script>
 
+:::
+
+::: field 默认选择
 :::
 
 ::: demo
@@ -42,6 +48,9 @@ export default {
 
 :::
 
+::: field 开启分页
+:::
+
 ::: demo
 
 <template>
@@ -62,6 +71,9 @@ export default {
 }
 </script>
 
+:::
+
+::: field 开启搜索
 :::
 
 ::: demo
@@ -86,8 +98,7 @@ export default {
 
 :::
 
-::: field icon-picker attributes
-
+::: field icon-picker 属性
 :::
 
 |            |          |     |

@@ -1,3 +1,6 @@
+::: field 基础使用
+:::
+
 ::: demo
 
 <template>
@@ -16,6 +19,9 @@ export default {
 }
 </script>
 
+:::
+
+::: field 灰色主题
 :::
 
 ::: demo
@@ -41,10 +47,9 @@ export default {
 
 :::
 
-::: field block attributes
-
+::: field Block 属性
 :::
 
-|       |        |                |
+| Name   | Description | Accepted Values  |
 | ----- | ------ | -------------- |
 | nm | 灰色样式 | -- |

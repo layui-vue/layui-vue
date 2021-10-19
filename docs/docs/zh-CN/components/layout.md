@@ -12,6 +12,9 @@
 
 <br>
 
+::: field 基础使用
+:::
+
 ```html
 <lay-layout>
   <lay-header>
@@ -25,8 +28,7 @@
 </lay-layout>
 ```
 
-::: field layout components
-
+::: field 布局组件
 :::
 
 |            |      |     |

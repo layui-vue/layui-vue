@@ -1,3 +1,6 @@
+::: field 基础使用
+:::
+
 ::: demo
 
 <template>
@@ -26,6 +29,9 @@ export default {
   padding: 20px;
 }
 </style>
+:::
+
+::: field 卡片插槽
 :::
 
 ::: demo
@@ -63,6 +69,9 @@ export default {
 </style>
 :::
 
+::: field 简单使用
+:::
+
 ::: demo
 
 <template>
@@ -94,16 +103,14 @@ export default {
 :::
 
 
-::: field card attributes
-
+::: field 卡片属性
 :::
 
 |        |      |        |
 | ------ | ---- | ------ |
 | title | 标题 | -- |
 
-::: field card slots
-
+::: field 卡片插槽
 :::
 
 |        |      |        |

@@ -1,3 +1,6 @@
+::: field 基础使用
+:::
+
 ::: demo
 
 <template>
@@ -39,6 +42,9 @@ export default {
 }
 </script>
 
+:::
+
+::: field 简单模式
 :::
 
 ::: demo

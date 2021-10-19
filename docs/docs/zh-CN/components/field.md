@@ -1,3 +1,4 @@
+
 ::: demo
 
 <template>
@@ -59,9 +60,8 @@ export default {
 :::
 
 ::: field field attributes
-
 :::
 
-|       |      |     |
+| Name   | Description | Accepted Values  |
 | ----- | ---- | --- |
 | title | 标题 | --  |

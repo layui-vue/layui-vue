@@ -1,3 +1,6 @@
+::: field 基础使用
+:::
+
 ::: demo
 
 <template>
@@ -25,6 +28,9 @@ export default {
 
 :::
 
+::: field 简单模式
+:::
+
 ::: demo
 
 <template>
@@ -48,6 +54,9 @@ export default {
 }
 </script>
 
+:::
+
+::: field 插槽使用
 :::
 
 ::: demo
@@ -78,6 +87,8 @@ export default {
 
 :::
 
+::: field 不同主题
+:::
 
 ::: demo
 
@@ -108,6 +119,9 @@ export default {
 }
 </script>
 
+:::
+
+::: field 完整分页
 :::
 
 ::: demo
@@ -145,6 +159,9 @@ export default {
 
 :::
 
+::: field 切换事件
+:::
+
 ::: demo
 
 <template>
@@ -176,8 +193,7 @@ export default {
 
 :::
 
-::: field page attributes
-
+::: field 分页属性
 :::
 
 |             |              |         |
@@ -190,8 +206,7 @@ export default {
 | showRefresh | 显示刷新按钮 | `false` |
 | showSkip    | 显示跳转     | `false` |
 
-::: field page events
-
+::: field 分页事件
 :::
 
 |             |              |         |
@@ -199,8 +214,7 @@ export default {
 | jump       | 切换回调     | { current: 当前页面 }    |
 
 
-::: field page slots
-
+::: field 分页插槽
 :::
 
 |             |              |         |

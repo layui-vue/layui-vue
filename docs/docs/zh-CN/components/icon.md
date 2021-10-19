@@ -1,3 +1,6 @@
+::: field 基础使用
+:::
+
 ::: demo
 
 <template>
@@ -16,6 +19,9 @@ export default {
 }
 </script>
 
+:::
+
+::: field 图标颜色
 :::
 
 ::: demo
@@ -43,6 +49,31 @@ export default {
 
 :::
 
+::: field 图标尺寸
+:::
+
+::: demo
+
+<template>
+  <lay-icon type="layui-icon-star" size="26px" color="red"></lay-icon>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    return {
+    }
+  }
+}
+</script>
+
+:::
+
+::: field 图标列表
+:::
 
 ::: demo
 
@@ -1071,6 +1102,9 @@ export default {
 }
 </script>
 
+:::
+
+::: field 图标属性
 :::
 
 | Name   | Description | Default Value  |

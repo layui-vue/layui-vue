@@ -1,3 +1,6 @@
+::: field 基础使用
+:::
+
 ::: demo
 
 <template>
@@ -30,7 +33,7 @@ export default {
 
 :::
 
-|       |        |                |
+| Name   | Description | Accepted Values  |
 | ----- | ------ | -------------- |
 | openKeys | 打开的目录 | `array` |
 
@@ -38,7 +41,7 @@ export default {
 
 :::
 
-|       |        |                |
+| Name   | Description | Accepted Values  |
 | ----- | ------ | -------------- |
 | id    | 编号   | -- |
 | title | 标题   | -- |

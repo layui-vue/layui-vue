@@ -1,3 +1,6 @@
+::: field 基础使用
+:::
+
 ::: demo
 
 <template>
@@ -19,6 +22,9 @@ export default {
 }
 </script>
 
+:::
+
+::: field 指定标题
 :::
 
 ::: demo
@@ -47,7 +53,7 @@ export default {
 
 :::
 
-::: field transfer attributes
+::: field transfer 属性
 
 :::
 

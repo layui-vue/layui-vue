@@ -3,13 +3,15 @@
 
 <br>
 
-使用 npm 下载
+- 使用 npm 下载
 
 ```
 npm install @layui/layui-vue --save
 ```
 
-在 main.ts 中
+<br>
+
+- 在 main.ts 中
 
 ```js
 import App from './App.vue'
@@ -20,7 +22,9 @@ import '@layui/layui-vue/lib/layui.css'
 createApp(App).use(Layui).mount('#app')
 ```
 
-这是一个基本的入门页面：
+<br>
+
+- 在 index.vue 使用：
 
 ```html
 <lay-layout>
@@ -35,4 +39,4 @@ createApp(App).use(Layui).mount('#app')
 </lay-layout>
 ```
 
-完整案例, 前往: [layui-vue-sample](https://gitee.com/layui-vue/layui-vue-sample)
+- 前往: [layui-vue-sample](https://gitee.com/layui-vue/layui-vue-sample)

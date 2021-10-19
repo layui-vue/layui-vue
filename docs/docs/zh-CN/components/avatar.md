@@ -1,3 +1,6 @@
+::: field 基础使用
+:::
+
 ::: demo
 
 <template>
@@ -19,6 +22,9 @@ export default {
 }
 </script>
 
+:::
+
+::: field 圆角头像
 :::
 
 ::: demo
@@ -43,6 +49,9 @@ export default {
 }
 </script>
 
+:::
+
+::: field 尺寸大小
 :::
 
 ::: demo
@@ -71,8 +80,7 @@ export default {
 
 :::
 
-::: field avatar attributes
-
+::: 头像属性
 :::
 
 |        |      |                |

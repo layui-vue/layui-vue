@@ -23,7 +23,7 @@ export default function createContainer(
         if (token.nesting === 1) {
           return `<lay-field title="${
             info || defaultTitle
-          }" style="margin-top:10px;margin-bottom: 10px;">`
+          }" style="margin-top:20px;margin-bottom: 20px;">`
         } else {
           return '</lay-field>\n'
         }

@@ -1,3 +1,6 @@
+::: field 普通容器
+:::
+
 ::: demo
 
 <template>
@@ -27,6 +30,9 @@ export default {
     }
 </style>
 
+:::
+
+::: field 流式容器
 :::
 
 ::: demo
@@ -59,10 +65,9 @@ export default {
 
 :::
 
-::: field container attributes
-
+::: field 容器属性
 :::
 
-|       |        |                |
+| Name   | Description | Accepted Values   |
 | ----- | ------ | -------------- |
 | fluid | 流模式 | `true` `false` |

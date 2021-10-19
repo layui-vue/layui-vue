@@ -4,7 +4,6 @@
 ::: demo
 
 <template>
-{{tabs}}
 <lay-menu v-model:selectedKey="selectedKey" v-model:openKeys="openKeys" :tree="isTree">
     <lay-menu-item title="工作空间" id="0">
         <lay-menu-child-item id="1" title="控制台">

@@ -1,3 +1,6 @@
+::: field 基础使用
+:::
+
 ::: demo
 
 <template>
@@ -22,6 +25,9 @@ export default {
 }
 </script>
 
+:::
+
+::: field 简约模式
 :::
 
 ::: demo
@@ -50,6 +56,9 @@ export default {
 
 :::
 
+::: field 卡片模式
+:::
+
 ::: demo
 
 <template>
@@ -74,6 +83,9 @@ export default {
 }
 </script>
 
+:::
+
+::: field 允许关闭
 :::
 
 ::: demo
@@ -114,13 +126,14 @@ export default {
 
 :::
 
+::: field 嵌套循环
+:::
 
 ::: demo
 
 <template>
-  <lay-tab type="card" v-model="current5">
+  <lay-tab type="card" v-model="current5" @change="change5">
     <lay-tab-item v-for="a in arr" :key="a" :title="a.title" :id="a.id">
-      {{a}}
     </lay-tab-item>
   </lay-tab>
 </template>
@@ -132,11 +145,16 @@ export default {
   setup() {
 
     const current5 = ref('1')
+    const change5 = function(id){
+      alert(id)
+    }
 
-    const arr = [
+    const arr = ref([
       {id:'1', title:'选项一'},
       {id:'2', title:'选项二'}
-    ]
+    ])
+
+    arr.value.push({id:'3', title:'选项三'})
 
     return {
       current5,
@@ -148,7 +166,7 @@ export default {
 
 :::
 
-::: field tab attributes
+::: field tab 属性
 
 :::
 
@@ -158,7 +176,7 @@ export default {
 | type        | 主题样式    | --              |
 | allow-close | 允许关闭    | `true` `false`  |
 
-::: field tab events
+::: field tab 事件
 
 :::
 

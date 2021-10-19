@@ -33,7 +33,7 @@ export default {
 
 :::
 
-::: field badge attributes
+::: field 徽章属性
 
 :::
 
