@@ -19,7 +19,8 @@
               skin="primary"
               :label="dataSource[id]"
             >
-              <span>{{ dataSource.title }}</span>
+              <slot v-if="slot.item" name="item" :data="dataSource" />
+              <span v-else>{{ dataSource.title }}</span>
             </transfer-checkbox>
           </li>
         </ul>
@@ -56,7 +57,8 @@
               skin="primary"
               :label="dataSource[id]"
             >
-              <span>{{ dataSource.title }}</span>
+              <slot v-if="slot.item" name="item" :data="dataSource" />
+              <span v-else>{{ dataSource.title }}</span>
             </transfer-checkbox>
           </li>
         </ul>
@@ -66,17 +68,18 @@
 </template>
 <script setup name="LayTransfer"></script>
 <script setup lang="ts">
-import { defineProps, Ref, ref, watch } from 'vue'
+import { computed, defineProps, Ref, ref, useSlots, watch } from 'vue'
 import { Recordable } from '/@src/module/type'
 import transferCheckbox from './component/checkbox.vue'
 import { check } from 'prettier'
+
+const slot = useSlots()
 
 const props = withDefaults(
   defineProps<{
     id?: string
     title?: string[]
     dataSource: Recordable[]
-    selectedKeys: Array<string>
   }>(),
   {
     id: 'id',
@@ -148,14 +151,15 @@ watch(
 )
 
 const add = function () {
-  // 删除 leftDataSource 选中的元素
+
   if(leftSelectedKeys.value.length === 0){
     return
   }
-
-  rightDataSource.value = leftDataSource.value.filter(
-    (item) => leftSelectedKeys.value.indexOf(item.id) != -1
-  )
+  leftDataSource.value.forEach(item => {
+    if( leftSelectedKeys.value.indexOf(item.id) != -1 ){
+      rightDataSource.value.push(item)
+    }
+  })
   leftDataSource.value = leftDataSource.value.filter(
     (item) => leftSelectedKeys.value.indexOf(item.id) === -1
   ) 
@@ -166,9 +170,11 @@ const remove = function () {
   if(rightSelectedKeys.value.length === 0){
     return
   }
-  leftDataSource.value = rightDataSource.value.filter(
-    (item) => rightSelectedKeys.value.indexOf(item.id) != -1
-  )
+  rightDataSource.value.forEach(item => {
+    if( rightSelectedKeys.value.indexOf(item.id) != -1 ){
+      leftDataSource.value.push(item)
+    }
+  })
   rightDataSource.value = rightDataSource.value.filter(
     (item) => rightSelectedKeys.value.indexOf(item.id) === -1
   ) 
