@@ -1,3 +1,6 @@
+::: field 基础使用
+::: 
+
 ::: demo
 
 <template>
@@ -54,6 +57,69 @@ export default {
 </script>
 
 :::
+
+::: field 不同尺寸
+::: 
+
+::: demo
+
+<template>
+  <lay-table :columns="columns" :dataSource="dataSource" size="lg">
+    <template v-slot:username="{ data }"> {{data.username}} </template>
+    <template v-slot:password="{ data }"> {{data.password}} </template>
+    <template v-slot:operator="{ data }">
+      <lay-button >修改</lay-button>
+      <lay-button type="primary">删除</lay-button>
+    </template>
+  </lay-table>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const columns = [
+      {
+        title:"账户",
+        width:"200px",
+        slot:"username",
+        key:"username"
+      },{
+        title:"密码",
+        width: "180px",
+        slot:"password",
+        key:"password"
+      },{
+        title:"年龄",
+        width: "180px",
+        key:"age"
+      },{
+        title:"操作",
+        width: "180px",
+        customSlot:"operator",
+        key:"operator"
+      }
+    ]
+
+    const dataSource = [
+      {username:"root", password:"root", age:"18"},
+      {username:"woow", password:"woow", age:"20"}
+    ]
+
+    return {
+      columns,
+      dataSource
+    }
+  }
+}
+</script>
+
+:::
+
+::: field 开启分页
+::: 
 
 ::: demo
 
@@ -122,6 +188,9 @@ export default {
 </script>
 
 :::
+
+::: field 完整表格
+::: 
 
 ::: demo
 
@@ -202,7 +271,8 @@ export default {
 | checkbox        | 开启复现框  | --  |
 | id              | 主键       | --  |
 | selectedKeys ( v-model )    | 选中项     | --  |
-| default-toolbar | 开启工具栏 | --  |
+| default-toolbar | 开启工具栏 | `lg` `md` `sm` |
+| size | 尺寸 | --  |
 
 ::: field table slots
 

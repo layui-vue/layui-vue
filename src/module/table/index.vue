@@ -21,7 +21,7 @@
       </div>
       <div class="layui-table-box">
         <div class="layui-table-header">
-          <table cellspacing="0" cellpadding="0" border="0" class="layui-table" lay-size="sm">
+          <table class="layui-table" :lay-size="size">
             <thead>
               <tr>
                 <th v-if="checkbox" class="layui-table-col-special">
@@ -47,7 +47,7 @@
           </table>
         </div>
         <div class="layui-table-body layui-table-main">
-          <table cellspacing="0" cellpadding="0" border="0" class="layui-table" lay-size="sm">
+          <table class="layui-table" :lay-size="size">
             <tbody>
               <template v-for="data in dataSource" :key="data">
                 <tr>
@@ -64,9 +64,7 @@
                   <template v-for="column in columns" :key="column">
                     <template v-if="column.customSlot">
                       <td class="layui-table-cell">
-                        <div
-                          :style="{ width: column.width }"
-                        >
+                        <div :style="{ width: column.width }">
                           <slot :name="column.customSlot" :data="data" />
                         </div>
                       </td>
@@ -78,9 +76,7 @@
                       :key="index"
                     >
                       <td class="layui-table-cell" v-if="column.key == key">
-                        <div
-                          :style="{ width: column.width }"
-                        >
+                        <div :style="{ width: column.width }">
                           <span v-if="column.slot">
                             <slot :name="column.slot" :data="data" />
                           </span>
@@ -103,12 +99,25 @@
           show-limit
           show-skip
           @jump="change"
-        />
+        >
+          <template v-slot:prev
+            ><lay-icon type="layui-icon-left"></lay-icon
+          ></template>
+          <template v-slot:next
+            ><lay-icon type="layui-icon-right"></lay-icon
+          ></template>
+        </lay-page>
       </div>
     </div>
   </div>
 </template>
-<script setup name="LayTable"></script>
+
+<script lang="ts">
+export default {
+  name: 'LayTable',
+}
+</script>
+
 <script setup lang="ts">
 import tableItemCheckbox from './component/checkbox.vue'
 import {
@@ -125,6 +134,7 @@ const props = withDefaults(
   defineProps<{
     id?: string
     skin?: string
+    size?: string
     page?: Recordable
     checkbox?: boolean
     columns?: Recordable[]
@@ -139,7 +149,8 @@ const props = withDefaults(
     },
     selectedKeys: function () {
       return []
-    }
+    },
+    size: 'md',
   }
 )
 

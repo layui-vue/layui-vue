@@ -15,19 +15,20 @@
 <script setup name="LayCollapseItem" lang="ts">
 import { defineProps, inject, ref } from 'vue'
 
-const props = defineProps<{
-  id: string
-  title: string
-}>()
+const props =
+  defineProps<{
+    id: string
+    title: string
+  }>()
 
-const openKeys = inject("openKeys") as String[]
+const openKeys = inject('openKeys') as String[]
 
 const isShow = ref(openKeys.includes(props.id))
 
 const showHandle = function () {
   isShow.value = !isShow.value
-  if(openKeys.indexOf(props.id) != -1) {
-    openKeys.splice(openKeys.indexOf(props.id),1)
+  if (openKeys.indexOf(props.id) != -1) {
+    openKeys.splice(openKeys.indexOf(props.id), 1)
   } else {
     openKeys.push(props.id)
   }
