@@ -7,6 +7,8 @@
 <lay-timeline-item title="0.1.8">
 [新增] table 表格 size 属性, 提供不同尺寸。<br>
 [新增] transfer 穿梭框 item 插槽, 允许自定义列表项。<br>
+[新增] select 下拉选择 change 事件, 值变动触发回调。<br>
+[新增] select-option 下拉选择项 disabled 属性, 允许可选项禁用。<br>
 [修复] transfer 穿梭框 切换 逻辑。<br>
 [删除] dropdown 下拉菜单 padding 样式。<br>
 </lay-timeline-item>

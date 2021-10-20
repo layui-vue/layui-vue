@@ -322,6 +322,12 @@ export default {
         subTitle: 'carousel',
         path: '/zh-CN/components/carousel',
       },
+      {
+        id: 39,
+        title: '下拉选择',
+        subTitle: 'select',
+        path: '/zh-CN/components/select',
+      },
     ]
 
     const selected = ref(1)
