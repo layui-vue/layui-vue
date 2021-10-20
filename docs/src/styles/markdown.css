@@ -278,3 +278,8 @@ table td {
 .markdown-body th {
   text-align: left;
 }
+
+body::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
+}
