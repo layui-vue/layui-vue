@@ -4426,7 +4426,6 @@ body .layui-table-tips .layui-layer-content {
   position: absolute;
   left: 0;
   top: 42px;
-  padding: 5px 0;
   z-index: 899;
   min-width: 100%;
   border: 1px solid #eee;
