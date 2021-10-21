@@ -1,4 +1,4 @@
-//@ts-noCheck
+// @ts-noCheck
 // 是否滚动
 export const hasScrollbar = () =>
   document.body.scrollHeight >
