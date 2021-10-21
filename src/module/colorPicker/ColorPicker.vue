@@ -4,7 +4,7 @@ export default {
 }
 </script>
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref } from 'vue'
 
 interface CProps {
   visible: boolean
@@ -16,15 +16,15 @@ const props = defineProps<CProps>()
 
 const domRefEl = ref<HTMLElement | null>(null)
 defineExpose({
-  teleportRefEl: domRefEl
+  teleportRefEl: domRefEl,
 })
 </script>
 <template>
   <teleport to="body">
     <div
       v-if="visible"
-      class="layui-anim layui-anim-downbit layui-colorpicker-main"
       ref="domRefEl"
+      class="layui-anim layui-anim-downbit layui-colorpicker-main"
     >
       <!--    //颜色面板-->
       <div class="layui-colorpicker-main-wrapper">

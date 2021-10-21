@@ -5,10 +5,10 @@ export default {
 </script>
 <script setup lang="ts">
 import { Nullable } from '/@src/module/type'
-import { computed, onMounted, ref } from "vue";
+import { computed, onMounted, ref } from 'vue'
 import { HSBToHEX, RGBSTo, RGBToHSB } from '/@src/module/colorPicker/colorUtil'
 import ColorPicker from './ColorPicker.vue'
-import { usePosition } from "/@src/use/usePosition";
+import { usePosition } from '/@src/use/usePosition'
 
 interface BoxProps {
   color?: string
@@ -16,7 +16,7 @@ interface BoxProps {
   alpha?: boolean
   format?: 'hex' | 'rgb'
   predefine?: boolean
-  colors?: string[],
+  colors?: string[]
 }
 
 const colorBoxProps = withDefaults(defineProps<BoxProps>(), {
@@ -71,9 +71,7 @@ const triggerSpanStyle = computed(() => {
 })
 
 const colorPickerWrapper = computed(() => {
-  return colorBoxProps.size
-    ? `layui-colorpicker-${colorBoxProps.size}`
-    : ''
+  return colorBoxProps.size ? `layui-colorpicker-${colorBoxProps.size}` : ''
 })
 
 const colorBoxRefEl = ref<HTMLElement | null>(null)
@@ -83,24 +81,19 @@ onMounted(() => {
   console.log('colorPickerRefEl =>>>', colorPickerRefEl.value.teleportRefEl)
   usePosition(colorBoxRefEl.value, colorPickerRefEl.value.teleportRefEl)
 })
-
 </script>
 <template>
-  <div class="layui-unselect layui-colorpicker" ref="colorBoxRefEl">
+  <div ref="colorBoxRefEl" class="layui-unselect layui-colorpicker">
     <span
       :class="[
         {
-          'layui-colorpicker-trigger-bgcolor':
-            format == 'rgb' && alpha,
+          'layui-colorpicker-trigger-bgcolor': format == 'rgb' && alpha,
         },
-        size ? colorPickerWrapper : ''
+        size ? colorPickerWrapper : '',
       ]"
     >
-      <span
-        class="layui-colorpicker-trigger-span"
-        :style="triggerSpanStyle"
-      >
-<!-- ICON_PICKER_DOWN = 'layui-icon-down', ICON_PICKER_CLOSE = 'layui-icon-close' -->
+      <span class="layui-colorpicker-trigger-span" :style="triggerSpanStyle">
+        <!-- ICON_PICKER_DOWN = 'layui-icon-down', ICON_PICKER_CLOSE = 'layui-icon-close' -->
         <i
           :class="[
             'layui-icon layui-colorpicker-trigger-i',
@@ -110,10 +103,10 @@ onMounted(() => {
       </span>
     </span>
     <ColorPicker
+      ref="colorPickerRefEl"
       :visible="true"
       :alpha="alpha"
       :predefine="predefine"
-      ref="colorPickerRefEl"
     ></ColorPicker>
   </div>
 </template>
