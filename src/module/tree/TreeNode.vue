@@ -5,13 +5,13 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { StringOrNumber } from '/@src/module/tree/new-tree/tree.type'
+import { StringOrNumber } from '/@src/module/tree/tree.type'
 import { Nullable } from '/@src/module/type'
 
-import LayIcon from '../../icon'
-import LayCheckbox from '../../checkbox'
-import { nextTick, Ref } from 'vue'
-import { Tree } from '/@src/module/tree/new-tree/tree'
+import LayIcon from '../icon'
+import LayCheckbox from '../checkbox'
+import { Ref } from 'vue'
+import { Tree } from '/@src/module/tree/tree'
 
 type CustomKey = string | number
 type CustomString = (() => string) | string
@@ -134,7 +134,9 @@ function handleTitleClick(node: TreeData) {
         </span>
       </div>
     </div>
-    <transition>
+    <transition
+      name="move"
+    >
       <div
         v-if="node.isLeaf.value"
         class="layui-tree-pack layui-tree-showLine"
@@ -153,4 +155,5 @@ function handleTitleClick(node: TreeData) {
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+</style>

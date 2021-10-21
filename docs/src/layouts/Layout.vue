@@ -328,6 +328,12 @@ export default {
         subTitle: 'select',
         path: '/zh-CN/components/select',
       },
+      {
+        id: 40,
+        title: '颜色选择器',
+        subTitle: 'colorPicker',
+        path: '/zh-CN/components/colorPicker',
+      },
     ]
 
     const selected = ref(1)

@@ -57,6 +57,7 @@ import LayCheckboxGroup from './module/checkboxGroup/index'
 import LaySlider from './module/slider/index'
 import LayCarousel from './module/carousel/index'
 import LayCarouselItem from './module/carouselItem/index'
+import LayColorPicker from './module/colorPicker/index'
 
 const components: Record<string, IDefineComponent> = {
   LayRadio,
@@ -113,7 +114,8 @@ const components: Record<string, IDefineComponent> = {
   LayCheckboxGroup,
   LaySlider,
   LayCarousel,
-  LayCarouselItem
+  LayCarouselItem,
+  LayColorPicker,
 }
 
 const install = (app: App, options?: InstallOptions): void => {
@@ -182,6 +184,7 @@ export {
   LaySlider,
   LayCarousel,
   LayCarouselItem,
+  LayColorPicker,
   install,
 }
 

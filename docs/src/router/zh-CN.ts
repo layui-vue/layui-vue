@@ -219,6 +219,11 @@ const zhCN = [
         component: () => import('../../docs/zh-CN/components/select.md'),
         meta: { title: '下拉选择' },
       },
+      {
+        path: '/zh-CN/components/colorPicker',
+        component: () => import('../../docs/zh-CN/components/colorPicker.md'),
+        meta: { title: '颜色选择器' },
+      },
     ],
   },
 ]
