@@ -20,7 +20,8 @@
     "build:docs": "vite build docs",
     "test": "jest",
     "lint": "eslint . --fix --ext .ts,.vue,.js --ignore-pattern \"/lib/\" --ignore-pattern \"/types/\"",
-    "prettier": "prettier --check --write --ignore-unknown \"{example,src,docs,test}/**\""
+    "prettier": "prettier --check --write --ignore-unknown \"{example,src,docs,test}/**\"",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -95,7 +96,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "lintstage",
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "commit-msg": "commitlint -E $HUSKY_GIT_PARAMS",
       "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
     }
   }
