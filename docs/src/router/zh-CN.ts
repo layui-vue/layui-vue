@@ -214,7 +214,8 @@ const zhCN = [
         path: '/zh-CN/components/carousel',
         component: () => import('../../docs/zh-CN/components/carousel.md'),
         meta: { title: '轮播' },
-      },{
+      },
+      {
         path: '/zh-CN/components/select',
         component: () => import('../../docs/zh-CN/components/select.md'),
         meta: { title: '下拉选择' },

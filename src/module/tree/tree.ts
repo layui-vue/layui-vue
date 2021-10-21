@@ -1,7 +1,4 @@
-import {
-  OriginalTreeData,
-  StringOrNumber,
-} from '/@src/module/tree/tree.type'
+import { OriginalTreeData, StringOrNumber } from '/@src/module/tree/tree.type'
 import { Nullable } from '/@src/module/type'
 import { Ref, ref } from 'vue'
 

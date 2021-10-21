@@ -134,9 +134,7 @@ function handleTitleClick(node: TreeData) {
         </span>
       </div>
     </div>
-    <transition
-      name="move"
-    >
+    <transition name="move">
       <div
         v-if="node.isLeaf.value"
         class="layui-tree-pack layui-tree-showLine"
@@ -155,5 +153,4 @@ function handleTitleClick(node: TreeData) {
   </div>
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>
