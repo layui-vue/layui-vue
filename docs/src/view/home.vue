@@ -216,7 +216,7 @@
   line-height: 28px;
   margin: 0 6px;
   padding: 0 8px;
-  border-radius: 2px;
+  border-radius: 4px;
   color: #c2c2c2;
   color: rgba(255, 255, 255, 0.8);
   border: 1px solid #c2c2c2;
