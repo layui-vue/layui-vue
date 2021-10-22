@@ -29,9 +29,7 @@
           style="margin-top: 0px; margin-bottom: 0px"
         >
           <li class="layui-nav-item">
-            <a
-              href="https://gitee.com/layui-vue"
-            >
+            <a href="https://gitee.com/layui-vue">
               <lay-icon type="layui-icon-fonts-code" size="18px"></lay-icon>
             </a>
           </li>

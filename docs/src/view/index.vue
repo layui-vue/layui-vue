@@ -106,8 +106,7 @@
     </div>
   </div>
 </template>
-<script>
-</script>
+<script></script>
 <style>
 .site-banner {
   position: relative;
@@ -240,11 +239,11 @@
   -webkit-transition: all 0.5s;
 }
 .footer {
-    width: 100%;
-    padding: 30px 15px;
-    line-height: 30px;
-    text-align: center;
-    color: #666;
-    font-weight: 300;
+  width: 100%;
+  padding: 30px 15px;
+  line-height: 30px;
+  text-align: center;
+  color: #666;
+  font-weight: 300;
 }
 </style>

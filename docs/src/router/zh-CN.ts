@@ -40,8 +40,8 @@ const zhCN = [
             path: '/zh-CN/guide/sandbox',
             component: () => import('../../docs/zh-CN/guide/sandbox.md'),
             meta: { title: '沙盒' },
-          }
-        ]
+          },
+        ],
       },
       {
         path: '/zh-CN/components',
@@ -66,7 +66,8 @@ const zhCN = [
           },
           {
             path: '/zh-CN/components/breadcrumb',
-            component: () => import('../../docs/zh-CN/components/breadcrumb.md'),
+            component: () =>
+              import('../../docs/zh-CN/components/breadcrumb.md'),
             meta: { title: '面包屑' },
           },
           {
@@ -176,7 +177,8 @@ const zhCN = [
           },
           {
             path: '/zh-CN/components/iconPicker',
-            component: () => import('../../docs/zh-CN/components/iconPicker.md'),
+            component: () =>
+              import('../../docs/zh-CN/components/iconPicker.md'),
             meta: { title: '图标选择' },
           },
           {
@@ -236,14 +238,14 @@ const zhCN = [
           },
           {
             path: '/zh-CN/components/colorPicker',
-            component: () => import('../../docs/zh-CN/components/colorPicker.md'),
+            component: () =>
+              import('../../docs/zh-CN/components/colorPicker.md'),
             meta: { title: '颜色选择器' },
           },
-        ]
-      }
-
-    ]
-  }
+        ],
+      },
+    ],
+  },
 ]
 
 export default zhCN
