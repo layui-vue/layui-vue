@@ -1,55 +1,28 @@
 <template>
-  <div class="width:100%;height:300px">
-    <lay-layout>
-      <lay-header style="background: #393d49; border-bottom: 1px solid #404553">
-        <lay-logo style="box-shadow: 0 0px 2px 0 rgba(0, 0, 0, 0.15)">
-          <img src="../assets/logo.png" />
-        </lay-logo>
-        <ul
-          class="layui-nav layui-layout-left"
-          style="margin-top: 0px; margin-bottom: 0px"
-        >
-          <li class="layui-nav-item">
-            <router-link to="/zh-CN/home"> 首页 </router-link>
-          </li>
-          <li class="layui-nav-item">
-            <router-link to="/zh-CN/guide"> 指南 </router-link>
-          </li>
-          <li class="layui-nav-item">
-            <router-link to="/zh-CN/components"> 组件 </router-link>
-          </li>
-          <li class="layui-nav-item">
-            <lay-form>
-              <lay-search :datas="menus" />
-            </lay-form>
-          </li>
-        </ul>
-        <ul
-          class="layui-nav layui-layout-right"
-          style="margin-top: 0px; margin-bottom: 0px"
-        >
-          <li class="layui-nav-item">
-            <a
-              href="https://gitee.com/layui-vue"
-            >
-              <lay-icon type="layui-icon-fonts-code" size="18px"></lay-icon>
-            </a>
-          </li>
-          <li class="layui-nav-item">
-            <a
-              href="https://gitee.com/layui-vue/layui-vue/issues?assignee_id=&author_id=&branch=&collaborator_ids=&issue_search=&label_ids=&label_text=&milestone_id=&priority=&private_issue=&program_id=&project_id=Jmysy%2Flayui-vue&project_type=&scope=&sort=&state=all&target_project="
-            >
-              <lay-icon type="layui-icon-chat" size="18px"></lay-icon>
-            </a>
-          </li>
-          <li class="layui-nav-item">
-            <a href="javascript:void(0)"> 0.1.8 </a>
-          </li>
-        </ul>
-      </lay-header>
-      <router-view></router-view>
-    </lay-layout>
-  </div>
+      <lay-side>
+    <ul class="layui-menu layui-menu-lg layui-menu-docs" style="padding: 8px">
+      <li
+        v-for="menu in menus"
+        :key="menu"
+        :class="[currentPath === menu.path ? 'layui-menu-item-checked2' : '']"
+        @click="handleClick(menu)"
+      >
+        <div class="layui-menu-body-title">
+          <router-link :to="menu.path">
+            <span>{{ menu.title }}</span>
+            <span class="layui-font-12 layui-font-gray">
+              {{ menu.subTitle }}
+            </span>
+          </router-link>
+        </div>
+      </li>
+    </ul>
+  </lay-side>
+  <lay-body>
+    <div style="padding: 20px">
+      <router-view />
+    </div>
+  </lay-body>
 </template>
 <script>
 import { ref, watch } from 'vue'
@@ -72,24 +45,6 @@ export default {
     )
 
     const menus = [
-      {
-        id: 1,
-        title: '介绍',
-        subTitle: 'introduce',
-        path: '/zh-CN/guide/introduce',
-      },
-      {
-        id: 2,
-        title: '安装',
-        subTitle: 'get started',
-        path: '/zh-CN/guide/getStarted',
-      },
-      {
-        id: 3,
-        title: '更新',
-        subTitle: 'change log',
-        path: '/zh-CN/guide/changelog',
-      },
       {
         id: 4,
         title: '布局',
@@ -336,33 +291,3 @@ export default {
   },
 }
 </script>
-<style>
-.layui-logo img {
-  height: 31px;
-  width: 82px;
-  left: 15px;
-  top: 16px;
-}
-.layui-menu-docs {
-  padding-top: 10px;
-}
-.layui-menu-docs .layui-menu-body-title .layui-font-gray {
-  padding-left: 10px;
-}
-
-@media screen and (max-width: 768px) {
-  .layui-side {
-    width: 0px !important;
-  }
-  .layui-body {
-    left: 0px !important;
-    width: 100% !important;
-  }
-  .layui-logo {
-    display: none !important;
-  }
-  .layui-layout-left {
-    left: 0px !important;
-  }
-}
-</style>

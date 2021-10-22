@@ -1,9 +1,10 @@
 <template>
   <select :name="name" lay-verify="required" />
   <div
-    class="layui-unselect layui-form-select"
+    class="layui-unselect layui-form-select layui-search"
     :class="[openState ? 'layui-form-selected' : '']"
     @click="open"
+    style="margin-left: 20px"
   >
     <div class="layui-select-title">
       <input
@@ -14,10 +15,12 @@
         style="
           background: rgba(255, 255, 255, 0.05);
           border: none;
-          color: whitesmoke;
+          color: rgba(255, 255, 255, 0.7);
+          width: 196px;
+          height: 34px;
         "
         @input="change"
-      /><i class="layui-edge" />
+      /><i class="layui-edge"></i>
     </div>
     <dl class="layui-anim layui-anim-upbit" style="">
       <dd v-if="menus.length <= 0" class="layui-select-tips">无内容</dd>
@@ -36,7 +39,7 @@
 </template>
 
 <script setup name="LaySelect" lang="ts">
-import { defineProps, Ref, ref } from 'vue'
+import { defineProps, ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { Recordable } from '/@src/module/type'
 
@@ -101,3 +104,21 @@ const searchList = function (str: string, container: any) {
   return newList
 }
 </script>
+
+<style>
+.layui-search .layui-anim::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.layui-search .layui-anim::-webkit-scrollbar-corner {
+  background: #f6f6f6;
+}
+.layui-search .layui-anim::-webkit-scrollbar-thumb {
+  background: #e6e6e6;
+  border-radius: 2px;
+}
+.layui-search .layui-anim::-webkit-scrollbar-track {
+  background: white;
+  border-radius: 2px;
+}
+</style>

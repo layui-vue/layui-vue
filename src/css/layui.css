@@ -1057,10 +1057,10 @@ a cite {
 }
 
 .layui-layout-admin .layui-header {
-  position: fixed;
   top: 0;
   left: 0;
   right: 0;
+  position: fixed;
   background-color: #23262e;
 }
 

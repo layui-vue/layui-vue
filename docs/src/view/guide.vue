@@ -1,0 +1,83 @@
+<template>
+  <lay-side>
+    <ul class="layui-menu layui-menu-lg layui-menu-docs" style="padding: 8px">
+      <li
+        v-for="menu in menus"
+        :key="menu"
+        :class="[currentPath === menu.path ? 'layui-menu-item-checked2' : '']"
+        @click="handleClick(menu)"
+      >
+        <div class="layui-menu-body-title">
+          <router-link :to="menu.path">
+            <span>{{ menu.title }}</span>
+            <span class="layui-font-12 layui-font-gray">
+              {{ menu.subTitle }}
+            </span>
+          </router-link>
+        </div>
+      </li>
+    </ul>
+  </lay-side>
+  <lay-body>
+    <div style="padding: 20px">
+      <router-view />
+    </div>
+  </lay-body>
+</template>
+<script>
+import { ref, watch } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
+export default {
+  setup() {
+    const route = useRoute()
+    const router = useRouter()
+    const currentPath = ref('/zh-CN/guide')
+
+    watch(
+      () => route.path,
+      (val) => {
+        currentPath.value = val
+      },
+      {
+        immediate: true,
+        deep: true,
+      }
+    )
+
+    const menus = [
+      {
+        id: 1,
+        title: '介绍',
+        subTitle: 'introduce',
+        path: '/zh-CN/guide/introduce',
+      },
+      {
+        id: 2,
+        title: '安装',
+        subTitle: 'get started',
+        path: '/zh-CN/guide/getStarted',
+      },
+      {
+        id: 3,
+        title: '更新',
+        subTitle: 'change log',
+        path: '/zh-CN/guide/changelog',
+      }
+    ]
+
+    const selected = ref(1)
+
+    const handleClick = function (menu) {
+      selected.value = menu.id
+      router.push(menu.path)
+    }
+
+    return {
+      menus,
+      selected,
+      currentPath,
+      handleClick,
+    }
+  },
+}
+</script>
