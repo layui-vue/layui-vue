@@ -1,9 +1,9 @@
 import type { App } from 'vue'
 import Component from './index.vue'
-import { DefineComponent } from 'vue'
+import type { IDefineComponent } from '../type/index'
 
 Component.install = (app: App) => {
   app.component(Component.name || 'LayColorPicker', Component)
 }
 
-export default Component as DefineComponent
+export default Component as IDefineComponent

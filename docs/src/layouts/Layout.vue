@@ -10,7 +10,7 @@
           style="margin-top: 0px; margin-bottom: 0px"
         >
           <li class="layui-nav-item">
-            <router-link to="/zh-CN/home"> 首页 </router-link>
+            <router-link to="/zh-CN/index"> 首页 </router-link>
           </li>
           <li class="layui-nav-item">
             <router-link to="/zh-CN/guide"> 指南 </router-link>
@@ -43,7 +43,7 @@
             </a>
           </li>
           <li class="layui-nav-item">
-            <a href="javascript:void(0)"> 0.1.8 </a>
+            <a href="javascript:void(0)"> 0.1.9 </a>
           </li>
         </ul>
       </lay-header>

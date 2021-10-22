@@ -1,18 +1,18 @@
 import BaseLayout from '../layouts/Layout.vue'
 import Component from '../view/component.vue'
 import Guide from '../view/guide.vue'
-import Home from '../view/home.vue'
+import Index from '../view/index.vue'
 
 const zhCN = [
   {
     path: '/',
-    redirect: '/zh-CN/home',
+    redirect: '/zh-CN/index',
     component: BaseLayout,
-    meta: { title: '首页', icon: 'el-icon-position' },
+    meta: { title: '首页' },
     children: [
       {
-        path: '/zh-CN/home',
-        component: Home,
+        path: '/zh-CN/index',
+        component: Index,
         meta: { title: '指南' },
       },
       {

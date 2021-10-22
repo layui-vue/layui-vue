@@ -1,5 +1,12 @@
 <template>
-  <div style="background-color: whitesmoke;height:100%;width:100%;margin-top:60px;">
+  <div
+    style="
+      background-color: whitesmoke;
+      height: 100%;
+      width: 100%;
+      margin-top: 60px;
+    "
+  >
     <div class="site-banner">
       <div class="site-banner-main">
         <div class="site-zfj site-zfj-anim">
@@ -10,18 +17,18 @@
           >
         </div>
         <div class="layui-anim site-desc site-desc-anim">
-          <p class="web-font-desc">layui - ui</p>
+          <p class="web-font-desc">layui - vue</p>
           <cite>layui vue, A component library for Vue 3 base on layui</cite>
         </div>
         <div class="site-download">
           <router-link
             class="layui-inline site-down"
             to="/zh-CN/guide/getStarted"
-            >开始使用</router-link
+            >Get Started</router-link
           >
         </div>
         <div class="site-version">
-          <span>当前版本：v<cite class="site-showv">2.6.8</cite></span>
+          <span>当前版本：v<cite class="site-showv">0.1.9</cite></span>
           <span
             ><router-link
               class="layui-inline site-down"
@@ -29,20 +36,20 @@
               >更新日志</router-link
             ></span
           >
-          <span>下载量：<em class="site-showdowns">2380233</em></span>
+          <span>下载量：<em class="site-showdowns">1824</em></span>
         </div>
       </div>
       <div class="site-banner-other">
         <a
-          href="https://github.com/sentsin/layui/"
+          href="https://gitee.com/layui-vue"
           target="_blank"
           rel="nofollow"
           class="site-star"
         >
-          <i class="layui-icon"></i> Star <cite id="getStars">25097</cite>
+          <i class="layui-icon"></i> Star <cite id="getStars">257</cite>
         </a>
         <a
-          href="https://gitee.com/sentsin/layui"
+          href="https://gitee.com/layui-vue"
           target="_blank"
           rel="nofollow"
           class="site-fork"
@@ -89,6 +96,13 @@
           </li>
         </ul>
       </div>
+    </div>
+    <div class="footer footer-index">
+      <p>
+        Copyright © 2021 <a href="/index.html">layui-vue.pearadmin.com</a> MIT
+        Licensed
+      </p>
+      <p></p>
     </div>
   </div>
 </template>
@@ -224,5 +238,13 @@
   font-size: 14px;
   transition: all 0.5s;
   -webkit-transition: all 0.5s;
+}
+.footer {
+    width: 100%;
+    padding: 30px 15px;
+    line-height: 30px;
+    text-align: center;
+    color: #666;
+    font-weight: 300;
 }
 </style>

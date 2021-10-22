@@ -4,6 +4,13 @@
 ::: demo
 <template>
 <lay-timeline>
+<lay-timeline-item title="0.1.9">
+[新增] carousel 轮播组件, 初步完成切换逻辑。<br>
+[新增] colorPicker 颜色选择器, 初步完成组件渲染。<br>
+[文档] 新增首页模块。<br>
+[文档] 拆分菜单为指南与组件模块。<br>
+[文档] 新增全局内容检索。<br>
+</lay-timeline-item>
 <lay-timeline-item title="0.1.8">
 [新增] table 表格 size 属性, 提供不同尺寸。<br>
 [新增] transfer 穿梭框 item 插槽, 允许自定义列表项。<br>
