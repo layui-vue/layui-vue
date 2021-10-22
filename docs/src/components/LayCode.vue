@@ -14,12 +14,12 @@
     <div
       :class="{ 'is-fixed': isFixContorl }"
       class="control"
-      @click="toggleShow"
     >
       <i
-        :class="[
-          show ? 'layui-icon layui-icon-up' : 'layui-icon layui-icon-down',
-        ]"
+        class="layui-icon layui-icon-file"
+      />
+      <i
+        class="layui-icon layui-icon-fonts-code"  @click="toggle"
       />
     </div>
   </div>
@@ -34,7 +34,7 @@ const codeAreaHeight = ref(0)
 
 const show = ref(false)
 
-const toggleShow = function () {
+const toggle = function () {
   show.value = !show.value
 }
 
@@ -147,5 +147,7 @@ function handleScroll() {
   font-size: 16px;
   line-height: 44px;
   transition: all 0.3s;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 </style>
