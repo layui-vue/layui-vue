@@ -106,7 +106,6 @@
     </div>
   </div>
 </template>
-<script></script>
 <style>
 .site-banner {
   position: relative;
