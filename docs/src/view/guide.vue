@@ -4,17 +4,30 @@
       <li
         v-for="menu in menus"
         :key="menu"
-        :class="[currentPath === menu.path ? 'layui-menu-item-checked2' : '']"
-        @click="handleClick(menu)"
+        class="layui-menu-item-group"
+        lay-options="{type: 'group', isAllowSpread: true}"
       >
-        <div class="layui-menu-body-title">
-          <router-link :to="menu.path">
-            <span>{{ menu.title }}</span>
-            <span class="layui-font-12 layui-font-gray">
-              {{ menu.subTitle }}
-            </span>
-          </router-link>
-        </div>
+        <div class="layui-menu-body-title">{{ menu.title }}</div>
+        <hr />
+        <ul>
+          <li
+            v-for="children in menu.children"
+            :key="children"
+            :class="[
+              currentPath === children.path ? 'layui-menu-item-checked2' : '',
+            ]"
+            @click="handleClick(children)"
+          >
+            <div class="layui-menu-body-title">
+              <router-link :to="children.path">
+                <span>{{ children.title }}</span>
+                <span class="layui-font-12 layui-font-gray">
+                  {{ children.subTitle }}
+                </span>
+              </router-link>
+            </div>
+          </li>
+        </ul>
       </li>
     </ul>
   </lay-side>
@@ -47,21 +60,27 @@ export default {
     const menus = [
       {
         id: 1,
-        title: '介绍',
-        subTitle: 'introduce',
-        path: '/zh-CN/guide/introduce',
-      },
-      {
-        id: 2,
-        title: '安装',
-        subTitle: 'get started',
-        path: '/zh-CN/guide/getStarted',
-      },
-      {
-        id: 3,
-        title: '更新',
-        subTitle: 'change log',
-        path: '/zh-CN/guide/changelog',
+        title: '基础',
+        children: [
+          {
+            id: 1,
+            title: '介绍',
+            subTitle: 'introduce',
+            path: '/zh-CN/guide/introduce',
+          },
+          {
+            id: 2,
+            title: '安装',
+            subTitle: 'get started',
+            path: '/zh-CN/guide/getStarted',
+          },
+          {
+            id: 3,
+            title: '更新',
+            subTitle: 'change log',
+            path: '/zh-CN/guide/changelog',
+          },
+        ],
       }
     ]
 
