@@ -283,3 +283,12 @@ body::-webkit-scrollbar {
   width: 0px;
   height: 0px;
 }
+
+.layui-menu-item-group {
+  padding-left: 10px!important;
+  padding-right: 10px!important;
+}
+
+.layui-menu .layui-menu-item-group > .layui-menu-body-title {
+  padding-left: 15px;
+}

@@ -4,6 +4,9 @@
 ::: demo
 <template>
 <lay-timeline>
+<lay-timeline-item title="0.2.0">
+[新增] carousel 轮播组件, 初步完成切换逻辑。<br>
+</lay-timeline-item>
 <lay-timeline-item title="0.1.9">
 [新增] carousel 轮播组件, 初步完成切换逻辑。<br>
 [新增] colorPicker 颜色选择器, 初步完成组件渲染。<br>

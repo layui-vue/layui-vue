@@ -4432,7 +4432,7 @@ body .layui-table-tips .layui-layer-content {
   max-height: 360px;
   overflow-y: auto;
   background-color: #fff;
-  border-radius: 2px;
+  border-radius: 4px;
   box-sizing: border-box;
 }
 

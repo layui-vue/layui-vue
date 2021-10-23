@@ -2,6 +2,7 @@ import type { App } from 'vue'
 import type { IDefineComponent, InstallOptions } from './module/type/index'
 
 import './css/layui.css'
+import './css/layer.css'
 import LayAvatar from './module/avatar/index'
 import LayRadio from './module/radio/index'
 import LayButton from './module/button/index'
