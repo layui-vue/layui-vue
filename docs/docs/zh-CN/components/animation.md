@@ -74,7 +74,7 @@ export default {
 ::: field 动画类名
 :::
 
-| Name   | Description | Accepted Values  |
+| Name                              | Description  | Accepted Values                                |
 | --------------------------------- | ------------ | ---------------------------------------------- |
 | layui-anim-down                   | 顶部往下滑入 | `layui-anim layui-anim-down`                   |
 | layui-anim-downbit                | 微微往下滑入 | `layui-anim layui-anim-downbit`                |
