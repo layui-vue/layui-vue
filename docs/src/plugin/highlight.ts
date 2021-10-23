@@ -1,9 +1,7 @@
-// copy from [vitepress](https://github.com/vuejs/vitepress)
 import prism from 'prismjs'
 import loadLanguages from 'prismjs/components/index'
 import escapeHtml from 'escape-html'
 
-// required to make embedded highlighting work...
 loadLanguages(['markup', 'css', 'javascript'])
 
 function wrap(code: string, lang: string): string {

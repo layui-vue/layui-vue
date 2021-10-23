@@ -6,7 +6,6 @@ function assignScript(script: string) {
   const dependencies = {} as Record<string, string[]>
   const attrs = {} as Record<string, string>
   const content = script
-    // import { ref } from 'vue' -> ''
     .replace(/import\s?\{.*\}.*/g, (item) => {
       const key = getInnerString(item.replace(/'/g, '"'), '"', '"')
       const value = getInnerString(item.replace(/\s+/g, ''), '{', '}')

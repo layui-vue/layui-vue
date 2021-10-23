@@ -1,6 +1,6 @@
 <template>
   <lay-side>
-    <ul class="layui-menu layui-menu-lg layui-menu-docs" style="padding: 8px">
+    <ul class="layui-menu layui-menu-lg layui-menu-docs">
       <li
         v-for="menu in menus"
         :key="menu"
@@ -81,7 +81,7 @@ export default {
             path: '/zh-CN/guide/changelog',
           },
         ],
-      }
+      },
     ]
 
     const selected = ref(1)

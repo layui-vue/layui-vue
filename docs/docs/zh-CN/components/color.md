@@ -1,3 +1,6 @@
+::: field 主色调
+:::
+
 ::: demo
 
 <template>
@@ -43,6 +46,9 @@ export default {
 
 :::
 
+::: field 次色调
+:::
+
 ::: demo
 
 <template>
@@ -86,6 +92,9 @@ export default {
 }
 </script>
 
+:::
+
+::: field 中性色
 :::
 
 ::: demo

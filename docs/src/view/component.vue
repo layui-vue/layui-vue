@@ -1,6 +1,6 @@
 <template>
   <lay-side>
-    <ul class="layui-menu layui-menu-lg layui-menu-docs" style="padding: 8px">
+    <ul class="layui-menu layui-menu-lg layui-menu-docs">
       <li
         v-for="menu in menus"
         :key="menu"
@@ -145,41 +145,12 @@ export default {
             title: '选项卡',
             subTitle: 'tab',
             path: '/zh-CN/components/tab',
-          },          {
+          },
+          {
             id: 27,
             title: '下拉菜单',
             subTitle: 'dropdown',
             path: '/zh-CN/components/dropdown',
-          },
-        ],
-      },
-      {
-        id: 1,
-        title: '辅助',
-        children: [
-          {
-            id: 13,
-            title: '徽章',
-            subTitle: 'badge',
-            path: '/zh-CN/components/badge',
-          },
-          {
-            id: 14,
-            title: '区块',
-            subTitle: 'block',
-            path: '/zh-CN/components/block',
-          },
-          {
-            id: 15,
-            title: '分割',
-            subTitle: 'line',
-            path: '/zh-CN/components/line',
-          },
-          {
-            id: 24,
-            title: '字段',
-            subTitle: 'field',
-            path: '/zh-CN/components/field',
           },
         ],
       },
@@ -318,6 +289,36 @@ export default {
             title: '轮播',
             subTitle: 'carousel',
             path: '/zh-CN/components/carousel',
+          },
+        ],
+      },
+      {
+        id: 1,
+        title: '辅助',
+        children: [
+          {
+            id: 13,
+            title: '徽章',
+            subTitle: 'badge',
+            path: '/zh-CN/components/badge',
+          },
+          {
+            id: 14,
+            title: '区块',
+            subTitle: 'block',
+            path: '/zh-CN/components/block',
+          },
+          {
+            id: 15,
+            title: '分割',
+            subTitle: 'line',
+            path: '/zh-CN/components/line',
+          },
+          {
+            id: 24,
+            title: '字段',
+            subTitle: 'field',
+            path: '/zh-CN/components/field',
           },
         ],
       },

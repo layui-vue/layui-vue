@@ -126,7 +126,7 @@
   height: 100%;
 }
 .site-download {
-  margin-top: 80px;
+  margin-top: 72px;
   font-size: 0;
 }
 .site-download a {
