@@ -21,5 +21,3 @@ const active = inject('active')
 const slotsChange: Ref<boolean> = inject('slotsChange') as Ref<boolean>
 slotsChange.value = !slotsChange.value
 </script>
-
-

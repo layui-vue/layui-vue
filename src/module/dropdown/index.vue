@@ -1,8 +1,8 @@
 <template>
   <div
     v-if="trigger === 'click'"
-    class="layui-dropdown"
     ref="dropdownRef"
+    class="layui-dropdown"
     :class="[openState ? 'layui-dropdown-up' : '']"
   >
     <div @click="open">

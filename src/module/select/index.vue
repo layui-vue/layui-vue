@@ -50,7 +50,7 @@ provide('selectItem', selectItem)
 provide('openState', openState)
 
 // select update 时, 通知 change 事件
-const emit = defineEmits(['update:modelValue','change'])
+const emit = defineEmits(['update:modelValue', 'change'])
 
 watch(selectItem, function (item) {
   emit('change', item.value)
