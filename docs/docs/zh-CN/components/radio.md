@@ -97,9 +97,9 @@ export default {
 ::: field radio 属性
 :::
 
-| Name   | Description | Accepted Values  |
-| -------- | ---- | ----------------------- | 
-| name       | 原始属性 name | --  | 
-| label      | 当前值 | --   | 
-| v-model     | 选中值 | --  | 
-| change   | 切换事件 | current : 当前值  | 
+| Name    | Description   | Accepted Values  |
+| ------- | ------------- | ---------------- |
+| name    | 原始属性 name | --               |
+| label   | 当前值        | --               |
+| v-model | 选中值        | --               |
+| change  | 切换事件      | current : 当前值 |

@@ -111,11 +111,11 @@ export default {
 ::: field switch 属性
 :::
 
-| Name   | Description | Accepted Values  |
-| -------- | ---- | ----------------------- | 
-| name       | 原生 name 属性 | --  | 
-| v-model     | 是否启用 | `true` `false`  | 
-| disabled      | 禁用 | `true` `false`   |
-| change   | 切换事件 | current : 当前值  | inactiveText
-| active-text     | 启用描述 | `启动`  | 
-| inactive-text   | 禁用描述 | `禁用`  |
+| Name          | Description    | Accepted Values  |
+| ------------- | -------------- | ---------------- | ------------ |
+| name          | 原生 name 属性 | --               |
+| v-model       | 是否启用       | `true` `false`   |
+| disabled      | 禁用           | `true` `false`   |
+| change        | 切换事件       | current : 当前值 | inactiveText |
+| active-text   | 启用描述       | `启动`           |
+| inactive-text | 禁用描述       | `禁用`           |
