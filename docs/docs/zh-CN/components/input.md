@@ -1,3 +1,6 @@
+::: field 基础使用
+:::
+
 ::: demo
 
 <template>
@@ -21,6 +24,9 @@ export default {
 
 :::
 
+::: field 提示信息
+:::
+
 ::: demo
 
 <template>
@@ -39,6 +45,9 @@ export default {
 }
 </script>
 
+:::
+
+::: field 事件回调
 :::
 
 ::: demo
@@ -68,6 +77,8 @@ export default {
 
 :::
 
+::: field 禁止输入
+:::
 
 ::: demo
 
@@ -92,6 +103,8 @@ export default {
 
 :::
 
+::: field input 属性
+:::
 
 | Name   | Description | Accepted Values  |
 | -------- | ---- | ----------------------- | 
