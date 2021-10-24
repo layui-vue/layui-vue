@@ -29,18 +29,21 @@ export default {
   line-height: 60px;
   text-align: center;
   background: #87ca9a;
+  color: white;
 }
 .lay-code .layui-side {
   display: flex;
   background: #77c38c;
   align-items: center;
   justify-content: center;
+  color: white;
 }
 .lay-code .layui-body {
   display: flex;
   background: #5FB878;
   align-items: center;
   justify-content: center;
+  color: white;
 }
 </style>
 

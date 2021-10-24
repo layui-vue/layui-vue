@@ -119,16 +119,16 @@ export default {
 ::: field 轮播属性
 :::
 
-| Name   | Description | Accepted Values  |
-| --------- | ------ | --- |
-| v-model | 当前激活项 | `--` |
-| anim | 切换方向 | `default` `updown` |
-| indicator | 控制器位置 | `inside` `outside` `none` |
-| arrow | 切换按钮状态 | `hover` `always` `none`|
+| Name      | Description  | Accepted Values           |
+| --------- | ------------ | ------------------------- |
+| v-model   | 当前激活项   | `--`                      |
+| anim      | 切换方向     | `default` `updown`        |
+| indicator | 控制器位置   | `inside` `outside` `none` |
+| arrow     | 切换按钮状态 | `hover` `always` `none`   |
 
 ::: field 轮播事件
 :::
 
-| Name   | Description | Accepted Values  |
-| --------- | ------ | --- |
-| change | 切换回调 | id |
+| Name   | Description | Accepted Values |
+| ------ | ----------- | --------------- |
+| change | 切换回调    | id              |

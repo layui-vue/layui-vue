@@ -1,6 +1,7 @@
 <template>
   <lay-layout>
     <lay-side>
+      <lay-scroll>
         <ul class="layui-menu layui-menu-lg layui-menu-docs">
           <li
             v-for="menu in menus"
@@ -33,6 +34,7 @@
             </ul>
           </li>
         </ul>
+      </lay-scroll>
     </lay-side>
     <lay-body>
       <div style="padding: 20px">

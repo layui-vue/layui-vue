@@ -35,7 +35,14 @@
   </div>
 </template>
 <script setup name="LayCarousel" lang="ts">
-import { withDefaults, defineProps, provide, useSlots, ref, computed } from 'vue'
+import {
+  withDefaults,
+  defineProps,
+  provide,
+  useSlots,
+  ref,
+  computed,
+} from 'vue'
 
 const slot = useSlots() as any
 const slots = slot.default && (slot.default() as any[])
@@ -54,7 +61,7 @@ const props = withDefaults(
     height: '280px',
     anim: 'default',
     arrow: 'hover',
-    indicator: 'inside'
+    indicator: 'inside',
   }
 )
 

@@ -1,53 +1,51 @@
 <template>
-  <div class="width:100%;height:300px">
-    <lay-layout>
-      <lay-header style="background: #393d49; border-bottom: 1px solid #404553"
-        ><lay-logo style="box-shadow: 0 0px 2px 0 rgba(0, 0, 0, 0.15)">
-          <img src="../assets/logo.png" />
-        </lay-logo>
-        <ul
-          class="layui-nav layui-layout-left"
-          style="margin-top: 0px; margin-bottom: 0px"
-        >
-          <li class="layui-nav-item">
-            <router-link to="/zh-CN/index"> 首页 </router-link>
-          </li>
-          <li class="layui-nav-item">
-            <router-link to="/zh-CN/guide"> 指南 </router-link>
-          </li>
-          <li class="layui-nav-item">
-            <router-link to="/zh-CN/components"> 组件 </router-link>
-          </li>
-          <li class="layui-nav-item">
-            <lay-form>
-              <lay-search :datas="menus" />
-            </lay-form>
-          </li>
-        </ul>
-        <ul
-          class="layui-nav layui-layout-right"
-          style="margin-top: 0px; margin-bottom: 0px"
-        >
-          <li class="layui-nav-item">
-            <a href="https://gitee.com/layui-vue">
-              <lay-icon type="layui-icon-fonts-code" size="14px"></lay-icon>
-            </a>
-          </li>
-          <li class="layui-nav-item">
-            <a
-              href="https://gitee.com/layui-vue/layui-vue/issues?assignee_id=&author_id=&branch=&collaborator_ids=&issue_search=&label_ids=&label_text=&milestone_id=&priority=&private_issue=&program_id=&project_id=Jmysy%2Flayui-vue&project_type=&scope=&sort=&state=all&target_project="
-            >
-              <lay-icon type="layui-icon-chat" size="14px"></lay-icon>
-            </a>
-          </li>
-          <li class="layui-nav-item">
-            <a href="javascript:void(0)"> 0.2.0 </a>
-          </li>
-        </ul>
-      </lay-header>
-      <router-view></router-view>
-    </lay-layout>
-  </div>
+  <lay-layout class="layui-layout-document">
+    <lay-header
+      ><lay-logo style="box-shadow: 0 0px 2px 0 rgba(0, 0, 0, 0.15)">
+        <img src="../assets/logo.png" />
+      </lay-logo>
+      <ul
+        class="layui-nav layui-layout-left"
+        style="margin-top: 0px; margin-bottom: 0px"
+      >
+        <li class="layui-nav-item">
+          <router-link to="/zh-CN/index"> 首页 </router-link>
+        </li>
+        <li class="layui-nav-item">
+          <router-link to="/zh-CN/guide"> 指南 </router-link>
+        </li>
+        <li class="layui-nav-item">
+          <router-link to="/zh-CN/components"> 组件 </router-link>
+        </li>
+        <li class="layui-nav-item">
+          <lay-form>
+            <lay-search :datas="menus" />
+          </lay-form>
+        </li>
+      </ul>
+      <ul
+        class="layui-nav layui-layout-right"
+        style="margin-top: 0px; margin-bottom: 0px"
+      >
+        <li class="layui-nav-item">
+          <a href="https://gitee.com/layui-vue">
+            <lay-icon type="layui-icon-fonts-code" size="14px"></lay-icon>
+          </a>
+        </li>
+        <li class="layui-nav-item">
+          <a
+            href="https://gitee.com/layui-vue/layui-vue/issues?assignee_id=&author_id=&branch=&collaborator_ids=&issue_search=&label_ids=&label_text=&milestone_id=&priority=&private_issue=&program_id=&project_id=Jmysy%2Flayui-vue&project_type=&scope=&sort=&state=all&target_project="
+          >
+            <lay-icon type="layui-icon-chat" size="14px"></lay-icon>
+          </a>
+        </li>
+        <li class="layui-nav-item">
+          <a href="javascript:void(0)"> 0.2.0 </a>
+        </li>
+      </ul>
+    </lay-header>
+    <router-view></router-view>
+  </lay-layout>
 </template>
 <script>
 import { ref, watch } from 'vue'
@@ -335,6 +333,29 @@ export default {
 }
 </script>
 <style>
+.layui-layout-document > .layui-header {
+  z-index: 9999;
+  width: 100%;
+  position: fixed;
+  background: #393d49;
+  border-bottom: 1px solid #404553;
+}
+
+.layui-layout-document > .layui-layout > .layui-side {
+  overflow-x: hidden;
+  position: fixed;
+  margin-top: 60px;
+  height: calc(100% - 60px);
+}
+
+.layui-layout-document > .layui-layout > .layui-body {
+  margin-top: 60px;
+  left: 200px;
+  position: absolute;
+  width: calc(100% - 200px);
+  height: calc(100% - 60px);
+}
+
 .layui-logo img {
   height: 31px;
   width: 82px;
@@ -349,6 +370,9 @@ export default {
 }
 .layui-menu-docs .layui-menu-body-title .layui-font-gray {
   padding-left: 10px;
+}
+.layui-side hr {
+  margin: 8px;
 }
 
 @media screen and (max-width: 768px) {
