@@ -18,6 +18,9 @@
           <router-link to="/zh-CN/components"> 组件 </router-link>
         </li>
         <li class="layui-nav-item">
+          <router-link to="/zh-CN/hooks"> hooks </router-link>
+        </li>
+        <li class="layui-nav-item">
           <lay-form>
             <lay-search :datas="menus" />
           </lay-form>

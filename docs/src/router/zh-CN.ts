@@ -1,5 +1,6 @@
 import BaseLayout from '../layouts/Layout.vue'
 import Component from '../view/component.vue'
+import Hooks from '../view/hooks.vue'
 import Guide from '../view/guide.vue'
 import Index from '../view/index.vue'
 
@@ -254,6 +255,19 @@ const zhCN = [
           },
         ],
       },
+      {
+        path: '/zh-CN/hooks',
+        redirect: '/zh-CN/hooks/useClickOutside',
+        component: Hooks,
+        meta: { title: 'hooks' },
+        children: [
+          {
+            path: '/zh-CN/hooks/useClickOutside',
+            component: () =>
+              import('../../docs/zh-CN/hooks/useClickOutside.md'),
+            meta: { title: 'useClickOutside' },
+          }
+        ]}
     ],
   },
 ]
