@@ -5,7 +5,11 @@
 <template>
 <lay-timeline>
 <lay-timeline-item title="0.2.0">
-[新增] carousel 轮播组件, 初步完成切换逻辑。<br>
+[新增] carousel 轮播 anim 属性, 支持 default updown 不同方向轮播。<br>
+[新增] carousel 轮播 arrow 属性, 支持 always hover none 不同状态切换按钮。<br>
+[新增] carousel 轮播 indicator 属性, 支持 none inside outside 不同位置轮播控制器。<br>
+[新增] carousel 轮播 change 事件, 用于自定义切换回调事件。<br>
+[重构] layout 系列组件, 支持 纵向布局, 横向布局, 嵌套布局等。<br>
 </lay-timeline-item>
 <lay-timeline-item title="0.1.9">
 [新增] carousel 轮播组件, 初步完成切换逻辑。<br>

@@ -1,9 +1,9 @@
 <template>
   <div
     class="layui-carousel"
-    lay-anim
-    lay-indicator="inside"
-    lay-arrow="always"
+    :lay-anim="anim"
+    :lay-indicator="indicator"
+    :lay-arrow="arrow"
     :style="{ width: width, height: height }"
   >
     <div carousel-item>
@@ -24,18 +24,18 @@
       lay-type="sub"
       @click="prev"
     >
-      </button
+      {{ anim === 'updown' ? '' : '' }}</button
     ><button
       class="layui-icon layui-carousel-arrow"
       lay-type="add"
       @click="next"
     >
-      
+      {{ anim === 'updown' ? '' : '' }}
     </button>
   </div>
 </template>
 <script setup name="LayCarousel" lang="ts">
-import { withDefaults, defineProps, provide, useSlots, ref } from 'vue'
+import { withDefaults, defineProps, provide, useSlots, ref, computed } from 'vue'
 
 const slot = useSlots() as any
 const slots = slot.default && (slot.default() as any[])
@@ -45,19 +45,31 @@ const props = withDefaults(
     width?: string
     height?: string
     modelValue: string
+    anim: string
+    arrow: string
+    indicator: string
   }>(),
   {
     width: '100%',
     height: '280px',
+    anim: 'default',
+    arrow: 'hover',
+    indicator: 'inside'
   }
 )
 
-const active = ref(props.modelValue)
+const active = computed({
+  get() {
+    return props.modelValue
+  },
+  set(val) {
+    emit('update:modelValue', val)
+  },
+})
 
-const emit = defineEmits(['update:modelValue', 'change', 'close'])
+const emit = defineEmits(['update:modelValue', 'change'])
 
 const change = function (id: any) {
-  emit('update:modelValue', id)
   emit('change', id)
   active.value = id
 }
@@ -65,25 +77,25 @@ const change = function (id: any) {
 provide('active', active)
 
 const prev = function () {
-  for(var i = 0; i< slots.length; i++) {
-    if(slots[i].props.id === active.value) {
-      if(i === 0) {
-        return false;
+  for (var i = 0; i < slots.length; i++) {
+    if (slots[i].props.id === active.value) {
+      if (i === 0) {
+        return false
       }
       active.value = slots[i - 1].props.id
-      break;
+      break
     }
   }
 }
 
 const next = function () {
-  for(var i = 0; i< slots.length; i++) {
-    if(slots[i].props.id === active.value) {
-      if(i === slots.length - 1) {
-        return false;
+  for (var i = 0; i < slots.length; i++) {
+    if (slots[i].props.id === active.value) {
+      if (i === slots.length - 1) {
+        return false
       }
       active.value = slots[i + 1].props.id
-      break;
+      break
     }
   }
 }

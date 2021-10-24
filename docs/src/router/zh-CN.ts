@@ -37,9 +37,14 @@ const zhCN = [
             meta: { title: '更新' },
           },
           {
-            path: '/zh-CN/guide/sandbox',
-            component: () => import('../../docs/zh-CN/guide/sandbox.md'),
-            meta: { title: '沙盒' },
+            path: '/zh-CN/guide/problem',
+            component: () => import('../../docs/zh-CN/guide/problem.md'),
+            meta: { title: '问题' },
+          },
+          {
+            path: '/zh-CN/guide/contribution',
+            component: () => import('../../docs/zh-CN/guide/contribution.md'),
+            meta: { title: '贡献' },
           },
         ],
       },

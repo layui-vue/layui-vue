@@ -19,7 +19,6 @@ body {
 }
 
 .layui-edge,
-.layui-header,
 .layui-inline,
 .layui-main {
   position: relative;
@@ -1020,95 +1019,22 @@ a cite {
   margin: 0 auto;
 }
 
-.layui-header {
-  z-index: 1000;
-  height: 60px;
-}
-
-.layui-header a:hover {
-  transition: all 0.5s;
-  -webkit-transition: all 0.5s;
-}
-
-.layui-side {
-  position: fixed;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  z-index: 999;
-  width: 200px;
-}
-
 .layui-side-scroll {
   position: relative;
   width: 220px;
   height: 100%;
 }
 
-.layui-body {
-  position: relative;
-  left: 200px;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  z-index: 900;
-  width: auto;
-  box-sizing: border-box;
-}
-
-.layui-layout-admin .layui-header {
-  top: 0;
-  left: 0;
-  right: 0;
-  position: fixed;
-  background-color: #23262e;
-}
-
-.layui-layout-admin .layui-side {
-  top: 60px;
-  width: 200px;
-  overflow-x: hidden;
-}
-
-.layui-layout-admin .layui-body {
-  position: absolute;
-  top: 60px;
-  padding-bottom: 44px;
-}
-
-.layui-layout-admin .layui-main {
-  width: auto;
-  margin: 0 15px;
-}
-
-.layui-layout-admin .layui-footer {
-  position: fixed;
-  left: 200px;
-  right: 0;
-  bottom: 0;
-  z-index: 990;
-  height: 44px;
-  line-height: 44px;
-  padding: 0 15px;
-  box-shadow: -1px 0 4px rgb(0 0 0 / 12%);
-  background-color: #fafafa;
-}
-
-.layui-layout-admin .layui-logo {
-  position: absolute;
+.layui-logo {
   left: 0;
   top: 0;
   width: 200px;
-  height: 100%;
+  height: 60px;
   line-height: 60px;
   text-align: center;
   color: #009688;
   font-size: 16px;
   box-shadow: 0 1px 2px 0 rgb(0 0 0 / 15%);
-}
-
-.layui-layout-admin .layui-header .layui-nav {
-  background: 0 0;
 }
 
 .layui-layout-left {
@@ -4826,10 +4752,6 @@ body .layui-table-tips .layui-layer-content {
   background-color: #009688;
 }
 
-.layui-side .layui-nav-tree .layui-nav-bar {
-  width: 2px;
-}
-
 .layui-nav-tree .layui-nav-child dd.layui-this,
 .layui-nav-tree .layui-nav-child dd.layui-this a,
 .layui-nav-tree .layui-this,
@@ -4927,7 +4849,7 @@ body .layui-table-tips .layui-layer-content {
   color: #5fb878 !important;
 }
 
-.layui-breadcrumb a:nth-last-child(2)  {
+.layui-breadcrumb a:nth-last-child(2) {
   color: #666;
   font-style: normal;
 }

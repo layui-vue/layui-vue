@@ -285,8 +285,8 @@ body::-webkit-scrollbar {
 }
 
 .layui-menu-item-group {
-  padding-left: 10px!important;
-  padding-right: 10px!important;
+  padding-left: 10px !important;
+  padding-right: 10px !important;
 }
 
 .layui-menu .layui-menu-item-group > .layui-menu-body-title {

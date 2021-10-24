@@ -19,6 +19,7 @@ const props = withDefaults(
   defineProps<{
     length?: number
     modelValue?: number
+    character?: string
   }>(),
   {
     length: 5,
@@ -45,7 +46,6 @@ const mouseenter = function (index: number) {
   }
 
   // select update 时, 通知 change 事件
-
   emit('update:modelValue', index + 1)
 }
 </script>

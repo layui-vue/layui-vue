@@ -4,4 +4,16 @@
   </div>
 </template>
 
-<script setup name="LayFooter" lang="ts"></script>
+<script lang="ts">
+export default {
+  name: 'LayFooter',
+}
+</script>
+
+<script setup lang="ts"></script>
+
+<style>
+.layui-footer {
+  box-sizing: border-box;
+}
+</style>

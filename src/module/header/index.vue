@@ -3,5 +3,15 @@
     <slot />
   </div>
 </template>
-<script setup name="LayHeader"></script>
+<script lang="ts">
+export default {
+  name: 'LayHeader',
+}
+</script>
 <script setup lang="ts"></script>
+<style>
+.layui-header {
+  box-sizing: border-box;
+  height: 60px;
+}
+</style>

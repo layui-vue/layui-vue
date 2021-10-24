@@ -1,8 +1,8 @@
 <template>
   <div class="width:100%;height:300px">
     <lay-layout>
-      <lay-header style="background: #393d49; border-bottom: 1px solid #404553">
-        <lay-logo style="box-shadow: 0 0px 2px 0 rgba(0, 0, 0, 0.15)">
+      <lay-header style="background: #393d49; border-bottom: 1px solid #404553"
+        ><lay-logo style="box-shadow: 0 0px 2px 0 rgba(0, 0, 0, 0.15)">
           <img src="../assets/logo.png" />
         </lay-logo>
         <ul
@@ -30,14 +30,14 @@
         >
           <li class="layui-nav-item">
             <a href="https://gitee.com/layui-vue">
-              <lay-icon type="layui-icon-fonts-code" size="18px"></lay-icon>
+              <lay-icon type="layui-icon-fonts-code" size="14px"></lay-icon>
             </a>
           </li>
           <li class="layui-nav-item">
             <a
               href="https://gitee.com/layui-vue/layui-vue/issues?assignee_id=&author_id=&branch=&collaborator_ids=&issue_search=&label_ids=&label_text=&milestone_id=&priority=&private_issue=&program_id=&project_id=Jmysy%2Flayui-vue&project_type=&scope=&sort=&state=all&target_project="
             >
-              <lay-icon type="layui-icon-chat" size="18px"></lay-icon>
+              <lay-icon type="layui-icon-chat" size="14px"></lay-icon>
             </a>
           </li>
           <li class="layui-nav-item">
@@ -340,6 +340,9 @@ export default {
   width: 82px;
   left: 15px;
   top: 16px;
+}
+.layui-header > .layui-nav {
+  background-color: transparent;
 }
 .layui-menu-docs {
   padding-top: 10px;
