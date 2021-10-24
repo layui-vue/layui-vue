@@ -8,7 +8,7 @@ import { Nullable } from '/@src/module/type'
 import { computed, onMounted, ref } from 'vue'
 import { HSBToHEX, RGBSTo, RGBToHSB } from '/@src/module/colorPicker/colorUtil'
 import ColorPicker from './ColorPicker.vue'
-import { usePosition } from '/@src/use/usePosition'
+import { usePosition } from '/@src/hooks/usePosition'
 
 interface BoxProps {
   color?: string

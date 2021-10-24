@@ -112,7 +112,7 @@ export default {
 :::
 
 | Name          | Description    | Accepted Values  |
-| ------------- | -------------- | ---------------- | ------------ |
+| ------------- | -------------- | ---------------- |
 | name          | 原生 name 属性 | --               |
 | v-model       | 是否启用       | `true` `false`   |
 | disabled      | 禁用           | `true` `false`   |

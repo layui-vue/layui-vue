@@ -32,7 +32,7 @@
 
 <script setup name="LaySelect" lang="ts">
 import { defineProps, ref, watch } from 'vue'
-import useClickOutside from '../../use/useClickOutside'
+import useClickOutside from '../../hooks/useClickOutside'
 
 const dropdownRef = ref<null | HTMLElement>(null)
 const isClickOutside = useClickOutside(dropdownRef)

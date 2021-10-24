@@ -46,6 +46,11 @@ const zhCN = [
             component: () => import('../../docs/zh-CN/guide/contribution.md'),
             meta: { title: '贡献' },
           },
+          {
+            path: '/zh-CN/guide/norms',
+            component: () => import('../../docs/zh-CN/guide/norms.md'),
+            meta: { title: '规范' },
+          },
         ],
       },
       {

@@ -87,6 +87,12 @@ export default {
             path: '/zh-CN/guide/changelog',
           },
           {
+            id: 6,
+            title: '规范',
+            subTitle: 'norms',
+            path: '/zh-CN/guide/norms',
+          },
+          {
             id: 4,
             title: '问题',
             subTitle: 'problem',

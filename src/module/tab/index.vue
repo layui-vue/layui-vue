@@ -40,6 +40,7 @@ import {
   ref,
   onUpdated,
   onMounted,
+  watch,
 } from 'vue'
 
 const slot = useSlots()
@@ -57,16 +58,6 @@ const setItemInstanceBySlot = function (nodeList: VNode[]) {
   })
 }
 
-onUpdated(() => {
-  childrens.value = []
-  setItemInstanceBySlot((slot.default && slot.default()) as VNode[])
-})
-
-onMounted(() => {
-  childrens.value = []
-  setItemInstanceBySlot((slot.default && slot.default()) as VNode[])
-})
-
 const props = defineProps<{
   type?: string
   modelValue: string
@@ -83,6 +74,7 @@ const active = computed({
     emit('update:modelValue', val)
   },
 })
+const slotsChange = ref(true)
 
 const change = function (id: any) {
   emit('update:modelValue', id)
@@ -93,5 +85,11 @@ const close = function (id: any) {
   emit('close', id)
 }
 
+watch(slotsChange, function () {
+  childrens.value = []
+  setItemInstanceBySlot((slot.default && slot.default()) as VNode[])
+})
+
 provide('active', active)
+provide('slotsChange', slotsChange)
 </script>
