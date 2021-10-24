@@ -73,7 +73,7 @@ export default {
             title: 'useClickOutside',
             subTitle: '',
             path: '/zh-CN/hooks/useClickOutside',
-          }
+          },
         ],
       },
     ]

@@ -266,8 +266,9 @@ const zhCN = [
             component: () =>
               import('../../docs/zh-CN/hooks/useClickOutside.md'),
             meta: { title: 'useClickOutside' },
-          }
-        ]}
+          },
+        ],
+      },
     ],
   },
 ]

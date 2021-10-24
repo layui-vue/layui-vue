@@ -2,14 +2,12 @@
 :::
 
 ```html
-<div ref='dropdownRef'></div>
+<div ref="dropdownRef"></div>
 ```
 
 ```javascript
-const dropdownRef = ref<null | HTMLElement>(null)
+const dropdownRef = (ref < null) | (HTMLElement > null)
 const isClickOutside = useClickOutside(dropdownRef)
 
-watch(isClickOutside, () => {
-    
-})
+watch(isClickOutside, () => {})
 ```
