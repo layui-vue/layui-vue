@@ -45,20 +45,20 @@ export default {
 ::: title 表单事件
 :::
 
-| Name   | Description | Accepted Values  |
-| ----- | ------ | -------------- |
-| model | 表单绑定值 | -- |
+| Name  | Description | Accepted Values |
+| ----- | ----------- | --------------- |
+| model | 表单绑定值  | --              |
 
 ::: title 表单事件
 :::
 
-| Name   | Description | Accepted Values  |
-| ----- | ------ | -------------- |
-| submit | 提交事件 | -- |
+| Name   | Description | Accepted Values |
+| ------ | ----------- | --------------- |
+| submit | 提交事件    | --              |
 
 ::: title 表单项属性
 :::
 
-| Name   | Description | Accepted Values  |
-| ----- | ------ | -------------- |
-| label | 标题名称 | -- |
+| Name  | Description | Accepted Values |
+| ----- | ----------- | --------------- |
+| label | 标题名称    | --              |

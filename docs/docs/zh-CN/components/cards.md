@@ -29,6 +29,7 @@ export default {
   padding: 20px;
 }
 </style>
+
 :::
 
 ::: title 卡片插槽
@@ -67,6 +68,7 @@ export default {
   padding: 20px;
 }
 </style>
+
 :::
 
 ::: title 简单使用
@@ -100,20 +102,20 @@ export default {
   padding: 20px;
 }
 </style>
-:::
 
+:::
 
 ::: title 卡片属性
 :::
 
-|        |      |        |
-| ------ | ---- | ------ |
-| title | 标题 | -- |
+|       |      |     |
+| ----- | ---- | --- |
+| title | 标题 | --  |
 
 ::: title 卡片插槽
 :::
 
-|        |      |        |
-| ------ | ---- | ------ |
-| header | 头部插槽 | -- |
-| body   | 内容插槽 | -- |
+|        |          |     |
+| ------ | -------- | --- |
+| header | 头部插槽 | --  |
+| body   | 内容插槽 | --  |

@@ -1,5 +1,12 @@
 <template>
-  <div style="margin-top:60px;background-color: whitesmoke; height: 100%; width: 100%">
+  <div
+    style="
+      margin-top: 60px;
+      background-color: whitesmoke;
+      height: 100%;
+      width: 100%;
+    "
+  >
     <div class="site-banner">
       <div class="site-banner-main">
         <div class="site-zfj site-zfj-anim">

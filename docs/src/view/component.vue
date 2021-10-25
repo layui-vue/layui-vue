@@ -1,7 +1,7 @@
 <template>
   <lay-layout>
     <lay-side>
-      <lay-scroll style="overflow-y: scroll;">
+      <lay-scroll style="overflow-y: scroll">
         <ul class="layui-menu layui-menu-lg layui-menu-docs">
           <li
             v-for="menu in menus"

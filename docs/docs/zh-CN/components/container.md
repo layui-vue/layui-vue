@@ -68,6 +68,6 @@ export default {
 ::: title 容器属性
 :::
 
-| Name   | Description | Accepted Values  |
-| ----- | ------ | -------------- |
-| fluid | 流模式 | `true` `false` |
+| Name  | Description | Accepted Values |
+| ----- | ----------- | --------------- |
+| fluid | 流模式      | `true` `false`  |

@@ -70,14 +70,13 @@ export default {
 ::: title Dropdown 属性
 :::
 
-| Name   | Description | Accepted Values  |
-| ------- | -------- | --------------- |
-| trigger | 触发方式 | `click` `hover` |
+| Name    | Description | Accepted Values |
+| ------- | ----------- | --------------- |
+| trigger | 触发方式    | `click` `hover` |
 
 ::: title Dropdown 插槽
 :::
 
-| Name   | Description | Accepted Values  |
-| ------- | -------- | --------------- |
-| content | 下拉内容 | -- |
-
+| Name    | Description | Accepted Values |
+| ------- | ----------- | --------------- |
+| content | 下拉内容    | --              |

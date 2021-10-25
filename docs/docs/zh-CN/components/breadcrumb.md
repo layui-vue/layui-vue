@@ -1,5 +1,5 @@
 ::: title 基础使用
-::: 
+:::
 
 ::: demo
 
@@ -26,7 +26,7 @@ export default {
 :::
 
 ::: title 指定分割
-::: 
+:::
 
 ::: demo
 
@@ -79,13 +79,13 @@ export default {
 ::: title 面包屑属性
 :::
 
-| Name   | Description | Accepted Values  |
-| --------- | ------ | --- |
-| separator | 分割符 | `/` |
+| Name      | Description | Accepted Values |
+| --------- | ----------- | --------------- |
+| separator | 分割符      | `/`             |
 
 ::: title 面包屑插槽
 :::
 
-| Name   | Description | Accepted Values  |
-| --------- | ------ | --- |
-| default | 默认插槽 | `--` |
+| Name    | Description | Accepted Values |
+| ------- | ----------- | --------------- |
+| default | 默认插槽    | `--`            |

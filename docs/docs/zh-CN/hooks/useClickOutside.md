@@ -10,6 +10,6 @@ const dropdownRef = (ref < null) | (HTMLElement > null)
 const isClickOutside = useClickOutside(dropdownRef)
 
 watch(isClickOutside, () => {
-    // do something
+  // do something
 })
 ```

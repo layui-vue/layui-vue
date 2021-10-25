@@ -48,6 +48,6 @@ export default {
 
 :::
 
-| Name   | Description | Accepted Values  |
-| ----------- | -------- | --- |
-| description | 描述信息 | --  |
+| Name        | Description | Accepted Values |
+| ----------- | ----------- | --------------- |
+| description | 描述信息    | --              |

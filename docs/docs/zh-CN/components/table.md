@@ -1,5 +1,5 @@
 ::: title 基础使用
-::: 
+:::
 
 ::: demo
 
@@ -59,7 +59,7 @@ export default {
 :::
 
 ::: title 不同尺寸
-::: 
+:::
 
 ::: demo
 
@@ -119,7 +119,7 @@ export default {
 :::
 
 ::: title 开启分页
-::: 
+:::
 
 ::: demo
 
@@ -190,7 +190,7 @@ export default {
 :::
 
 ::: title 完整表格
-::: 
+:::
 
 ::: demo
 
@@ -264,20 +264,20 @@ export default {
 
 :::
 
-|                 |            |     |
-| --------------- | ---------- | --- |
-| columns         | 列配置      | --  |
-| dataSource      | 数据源      | --  |
-| checkbox        | 开启复现框  | --  |
-| id              | 主键       | --  |
-| selectedKeys ( v-model )    | 选中项     | --  |
-| default-toolbar | 开启工具栏 | `lg` `md` `sm` |
-| size | 尺寸 | --  |
+|                          |            |                |
+| ------------------------ | ---------- | -------------- |
+| columns                  | 列配置     | --             |
+| dataSource               | 数据源     | --             |
+| checkbox                 | 开启复现框 | --             |
+| id                       | 主键       | --             |
+| selectedKeys ( v-model ) | 选中项     | --             |
+| default-toolbar          | 开启工具栏 | `lg` `md` `sm` |
+| size                     | 尺寸       | --             |
 
 ::: title table slots
 
 :::
 
-|                 |             |     |
-| --------------- | ----------- | --- |
-| toolbar         | 自定义工具栏 | --  |
+|         |              |     |
+| ------- | ------------ | --- |
+| toolbar | 自定义工具栏 | --  |

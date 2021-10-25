@@ -140,21 +140,21 @@ export default {
 
 :::
 
-| Name   | Description | Accepted Values  |
-| -------- | ---- | ----------------------- |
-| space    | 间隔 |  --  | 
+| Name  | Description | Accepted Values |
+| ----- | ----------- | --------------- |
+| space | 间隔        | --              |
 
 ::: title 列属性
 
 :::
 
-| Name   | Description | Description Info | Accepted Values  |
-| -------- | ---- | ----------------------- | --- |
-| xs       | 尺寸 | 超小屏幕 (手机<768px)   | 12  |
-| sm       | 尺寸 | 小屏幕 (平板 ≥768px)    | 12  |
-| md       | 尺寸 | 中等屏幕 (桌面 ≥992px)  | 12  |
-| lg       | 尺寸 | 大型屏幕 (桌面 ≥1200px) | 12  |
-| xsOffset | 偏移 | 超小屏幕 (手机<768px)   | 12  |
-| smOffset | 偏移 | 小屏幕 (平板 ≥768px)    | 12  |
-| mdOffset | 偏移 | 中等屏幕 (桌面 ≥992px)  | 12  |
-| lgOffset | 偏移 | 大型屏幕 (桌面 ≥1200px) | 12  |
+| Name     | Description | Description Info        | Accepted Values |
+| -------- | ----------- | ----------------------- | --------------- |
+| xs       | 尺寸        | 超小屏幕 (手机<768px)   | 12              |
+| sm       | 尺寸        | 小屏幕 (平板 ≥768px)    | 12              |
+| md       | 尺寸        | 中等屏幕 (桌面 ≥992px)  | 12              |
+| lg       | 尺寸        | 大型屏幕 (桌面 ≥1200px) | 12              |
+| xsOffset | 偏移        | 超小屏幕 (手机<768px)   | 12              |
+| smOffset | 偏移        | 小屏幕 (平板 ≥768px)    | 12              |
+| mdOffset | 偏移        | 中等屏幕 (桌面 ≥992px)  | 12              |
+| lgOffset | 偏移        | 大型屏幕 (桌面 ≥1200px) | 12              |

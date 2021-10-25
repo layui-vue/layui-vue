@@ -58,29 +58,29 @@ export default {
 ::: title select 属性
 :::
 
-| Name   | Description | Accepted Values  |
-| -------- | ---- | ----------------------- | 
-| name      | 原生 name 属性 | --   | 
-| v-model     | 选中值 | --  | 
+| Name    | Description    | Accepted Values |
+| ------- | -------------- | --------------- |
+| name    | 原生 name 属性 | --              |
+| v-model | 选中值         | --              |
 
 ::: title select-option 属性
 :::
 
-| Name   | Description | Accepted Values  |
-| -------- | ---- | ----------------------- | 
-| label      | 标签 | --   | 
-| value     | 值 | --  | 
+| Name  | Description | Accepted Values |
+| ----- | ----------- | --------------- |
+| label | 标签        | --              |
+| value | 值          | --              |
 
 ::: title select-option 插槽
 :::
 
-| Name   | Description | Accepted Values  |
-| -------- | ---- | ----------------------- | 
-| default      | 默认 | --   | 
+| Name    | Description | Accepted Values |
+| ------- | ----------- | --------------- |
+| default | 默认        | --              |
 
 ::: title select 事件
 :::
 
-| Name   | Description | Accepted Values  |
-| -------- | ---- | ----------------------- | 
-| change      | 切换事件 | value   | 
+| Name   | Description | Accepted Values |
+| ------ | ----------- | --------------- |
+| change | 切换事件    | value           |

@@ -35,6 +35,6 @@ export default {
 
 :::
 
-| Name   | Description | Accepted Values  |
-| ----- | ---- | --------------------------------------------- |
-| theme | 主题 | `orange` `green` `cyan` `blue` `black` `gray` |
+| Name  | Description | Accepted Values                               |
+| ----- | ----------- | --------------------------------------------- |
+| theme | 主题        | `orange` `green` `cyan` `blue` `black` `gray` |

@@ -57,7 +57,7 @@ export default {
 ::: title 按钮尺寸
 :::
 
-::: demo 传入 size 属性, 创建指定尺寸的按钮, 可选值 `lg` `sm` `xs` 
+::: demo 传入 size 属性, 创建指定尺寸的按钮, 可选值 `lg` `sm` `xs`
 
 <template>
   <lay-button type="primary" size="lg">原始按钮</lay-button>
@@ -226,7 +226,7 @@ export default {
 ::: title 加载按钮
 :::
 
-::: demo 传入 loading 属性, 控制按钮的加载状态 
+::: demo 传入 loading 属性, 控制按钮的加载状态
 
 <template>
   <lay-button-container>
@@ -255,10 +255,10 @@ export default {
 ::: title 按钮属性
 :::
 
-| Name   | Description | Accepted Values                          |
-| ------ | ------ | --------------------------------------------- |
-| type   | 主题   | `primary` `normal` `warm` `danger` `disabled` |
-| size   | 尺寸   | `lg` `sm` `xs`                                |
-| fluid  | 最大化 | `true` `false`                                |
-| radius | 圆角   | `true` `false`                                |
-| border | 边框   | `green` `blue` `orange` `red` `black`         |
+| Name   | Description | Accepted Values                               |
+| ------ | ----------- | --------------------------------------------- |
+| type   | 主题        | `primary` `normal` `warm` `danger` `disabled` |
+| size   | 尺寸        | `lg` `sm` `xs`                                |
+| fluid  | 最大化      | `true` `false`                                |
+| radius | 圆角        | `true` `false`                                |
+| border | 边框        | `green` `blue` `orange` `red` `black`         |
