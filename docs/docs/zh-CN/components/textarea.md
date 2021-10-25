@@ -1,4 +1,4 @@
-::: field 基本使用
+::: title 基本使用
 :::
 
 ::: demo
@@ -24,7 +24,7 @@ export default {
 
 :::
 
-::: field 事件回调
+::: title 事件回调
 :::
 
 ::: demo
@@ -55,7 +55,7 @@ export default {
 
 :::
 
-::: field 禁止输入
+::: title 禁止输入
 :::
 
 ::: demo
@@ -82,7 +82,7 @@ export default {
 
 :::
 
-::: field textarea 属性
+::: title textarea 属性
 :::
 
 | Name        | Description     | Accepted Values |

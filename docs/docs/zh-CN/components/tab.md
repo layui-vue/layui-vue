@@ -1,4 +1,4 @@
-::: field 基础使用
+::: title 基础使用
 :::
 
 ::: demo
@@ -27,7 +27,7 @@ export default {
 
 :::
 
-::: field 简约模式
+::: title 简约模式
 :::
 
 ::: demo
@@ -56,7 +56,7 @@ export default {
 
 :::
 
-::: field 卡片模式
+::: title 卡片模式
 :::
 
 ::: demo
@@ -85,7 +85,7 @@ export default {
 
 :::
 
-::: field 允许关闭
+::: title 允许关闭
 :::
 
 ::: demo
@@ -126,7 +126,7 @@ export default {
 
 :::
 
-::: field 嵌套循环
+::: title 嵌套循环
 :::
 
 ::: demo
@@ -166,7 +166,7 @@ export default {
 
 :::
 
-::: field tab 属性
+::: title tab 属性
 
 :::
 
@@ -176,7 +176,7 @@ export default {
 | type        | 主题样式    | --              |
 | allow-close | 允许关闭    | `true` `false`  |
 
-::: field tab 事件
+::: title tab 事件
 
 :::
 

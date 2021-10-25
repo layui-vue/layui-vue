@@ -1,4 +1,4 @@
-::: field 基础使用
+::: title 基础使用
 :::
 
 ::: demo
@@ -28,7 +28,7 @@ export default {
 
 :::
 
-::: field 触发方式
+::: title 触发方式
 :::
 
 ::: demo
@@ -67,14 +67,14 @@ export default {
 
 :::
 
-::: field Dropdown 属性
+::: title Dropdown 属性
 :::
 
 | Name   | Description | Accepted Values  |
 | ------- | -------- | --------------- |
 | trigger | 触发方式 | `click` `hover` |
 
-::: field Dropdown 插槽
+::: title Dropdown 插槽
 :::
 
 | Name   | Description | Accepted Values  |

@@ -1,4 +1,4 @@
-::: field 基础使用
+::: title 基础使用
 :::
 
 ::: demo
@@ -42,21 +42,21 @@ export default {
 
 :::
 
-::: field 表单事件
+::: title 表单事件
 :::
 
 | Name   | Description | Accepted Values  |
 | ----- | ------ | -------------- |
 | model | 表单绑定值 | -- |
 
-::: field 表单事件
+::: title 表单事件
 :::
 
 | Name   | Description | Accepted Values  |
 | ----- | ------ | -------------- |
 | submit | 提交事件 | -- |
 
-::: field 表单项属性
+::: title 表单项属性
 :::
 
 | Name   | Description | Accepted Values  |

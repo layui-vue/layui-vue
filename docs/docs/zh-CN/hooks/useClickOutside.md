@@ -1,4 +1,4 @@
-::: field useClickOutside
+::: title useClickOutside
 :::
 
 ```html
@@ -9,5 +9,7 @@
 const dropdownRef = (ref < null) | (HTMLElement > null)
 const isClickOutside = useClickOutside(dropdownRef)
 
-watch(isClickOutside, () => {})
+watch(isClickOutside, () => {
+    // do something
+})
 ```

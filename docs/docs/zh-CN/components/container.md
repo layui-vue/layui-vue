@@ -1,4 +1,4 @@
-::: field 普通容器
+::: title 普通容器
 :::
 
 ::: demo
@@ -32,7 +32,7 @@ export default {
 
 :::
 
-::: field 流式容器
+::: title 流式容器
 :::
 
 ::: demo
@@ -65,7 +65,7 @@ export default {
 
 :::
 
-::: field 容器属性
+::: title 容器属性
 :::
 
 | Name   | Description | Accepted Values  |

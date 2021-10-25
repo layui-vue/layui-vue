@@ -1,4 +1,4 @@
-::: field 基础使用
+::: title 基础使用
 :::
 
 ::: demo
@@ -28,7 +28,7 @@ export default {
 
 :::
 
-::: field 禁用状态
+::: title 禁用状态
 :::
 
 ::: demo
@@ -61,7 +61,7 @@ export default {
 
 :::
 
-::: field 事件回调
+::: title 事件回调
 :::
 
 ::: demo
@@ -94,7 +94,7 @@ export default {
 
 :::
 
-::: field radio 属性
+::: title radio 属性
 :::
 
 | Name    | Description   | Accepted Values  |

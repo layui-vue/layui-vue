@@ -1,4 +1,4 @@
-::: field 基础使用
+::: title 基础使用
 :::
 
 ::: demo
@@ -36,7 +36,7 @@ export default {
 
 :::
 
-::: field 徽章属性
+::: title 徽章属性
 :::
 
 |       |      |                                               |

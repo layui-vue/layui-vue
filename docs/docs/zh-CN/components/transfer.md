@@ -1,4 +1,4 @@
-::: field 基础使用
+::: title 基础使用
 :::
 
 ::: demo
@@ -24,7 +24,7 @@ export default {
 
 :::
 
-::: field 指定标题
+::: title 指定标题
 :::
 
 ::: demo
@@ -53,7 +53,7 @@ export default {
 
 :::
 
-::: field 使用插槽
+::: title 使用插槽
 :::
 
 ::: demo
@@ -83,7 +83,7 @@ export default {
 
 :::
 
-::: field transfer 属性
+::: title transfer 属性
 :::
 
 | Name   | Description | Accepted Values  |
@@ -92,7 +92,7 @@ export default {
 | title       | 标题 | --  | 
 | id       | 主键 | --  | 
 
-::: field transfer 插槽
+::: title transfer 插槽
 :::
 
 | Name   | Description | Accepted Values  |

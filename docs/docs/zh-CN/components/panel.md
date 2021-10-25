@@ -1,4 +1,4 @@
-::: field 基础使用
+::: title 基础使用
 :::
 
 ::: demo
@@ -21,7 +21,7 @@ export default {
 
 :::
 
-::: field 面板插槽
+::: title 面板插槽
 :::
 
 | Name   | Description | Accepted Values  |

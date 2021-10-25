@@ -1,4 +1,4 @@
-::: field 基础使用
+::: title 基础使用
 :::
 
 ::: demo
@@ -29,7 +29,7 @@ export default {
 :::
 
 
-::: field Collapse attributes
+::: title Collapse attributes
 
 :::
 
@@ -37,7 +37,7 @@ export default {
 | ----- | ------ | -------------- |
 | openKeys | 打开的目录 | `array` |
 
-::: field Collapse-item attributes
+::: title Collapse-item attributes
 
 :::
 

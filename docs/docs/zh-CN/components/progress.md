@@ -1,4 +1,4 @@
-::: field 基础使用
+::: title 基础使用
 :::
 
 ::: demo
@@ -23,7 +23,7 @@ export default {
 
 :::
 
-::: field 尺寸大小
+::: title 尺寸大小
 :::
 
 ::: demo
@@ -50,7 +50,7 @@ export default {
 
 :::
 
-::: field 显示文字
+::: title 显示文字
 :::
 
 ::: demo
@@ -79,7 +79,7 @@ export default {
 
 :::
 
-::: field Progress 属性
+::: title Progress 属性
 :::
 
 |          |          |                                               |

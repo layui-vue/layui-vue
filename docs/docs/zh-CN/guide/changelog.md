@@ -1,9 +1,18 @@
-::: field 更新记录
+::: title 更新记录
 :::
+
+<lay-timeline style="padding-left:30px;padding-top:30px;">
+  <lay-timeline-item title="修订版本号：日常 bugfix 更新" simple></lay-timeline-item>
+  <lay-timeline-item title="次版本号：带有新特性的向下兼容的版本。" simple></lay-timeline-item>
+  <lay-timeline-item title="主版本号：含有破坏性更新和新特性，不在发布周期内。" simple></lay-timeline-item>
+</lay-timeline>
 
 ::: demo
 <template>
 <lay-timeline>
+<lay-timeline-item title="0.2.1">
+[新增] useClickOutside 外部 click 事件 hooks。<br>
+</lay-timeline-item>
 <lay-timeline-item title="0.2.0">
 [新增] carousel 轮播 anim 属性, 支持 default updown 不同方向轮播。<br>
 [新增] carousel 轮播 arrow 属性, 支持 always hover none 不同状态切换按钮。<br>

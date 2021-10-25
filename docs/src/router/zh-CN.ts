@@ -56,7 +56,7 @@ const zhCN = [
       },
       {
         path: '/zh-CN/components',
-        redirect: '/zh-CN/components/button',
+        redirect: '/zh-CN/components/color',
         component: Component,
         meta: { title: '组件' },
         children: [

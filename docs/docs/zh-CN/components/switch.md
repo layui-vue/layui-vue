@@ -1,4 +1,4 @@
-::: field 基础使用
+::: title 基础使用
 :::
 
 ::: demo
@@ -24,7 +24,7 @@ export default {
 
 :::
 
-::: field 事件回调
+::: title 事件回调
 :::
 
 ::: demo
@@ -55,7 +55,7 @@ export default {
 
 :::
 
-::: field 禁用状态
+::: title 禁用状态
 :::
 
 ::: demo
@@ -82,7 +82,7 @@ export default {
 
 :::
 
-::: field 修改描述
+::: title 修改描述
 :::
 
 ::: demo
@@ -108,14 +108,14 @@ export default {
 
 :::
 
-::: field switch 属性
+::: title switch 属性
 :::
 
 | Name          | Description    | Accepted Values  |
-| ------------- | -------------- | ---------------- | ------------ |
+| ------------- | -------------- | ---------------- |
 | name          | 原生 name 属性 | --               |
 | v-model       | 是否启用       | `true` `false`   |
 | disabled      | 禁用           | `true` `false`   |
-| change        | 切换事件       | current : 当前值 | inactiveText |
+| change        | 切换事件       | current : 当前值 | 
 | active-text   | 启用描述       | `启动`           |
 | inactive-text | 禁用描述       | `禁用`           |

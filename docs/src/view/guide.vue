@@ -1,7 +1,7 @@
 <template>
   <lay-layout>
     <lay-side>
-      <lay-scroll>
+      <lay-scroll style="overflow-y: scroll;">
         <ul class="layui-menu layui-menu-lg layui-menu-docs">
           <li
             v-for="menu in menus"
@@ -85,25 +85,7 @@ export default {
             title: '更新',
             subTitle: 'change log',
             path: '/zh-CN/guide/changelog',
-          },
-          {
-            id: 6,
-            title: '规范',
-            subTitle: 'norms',
-            path: '/zh-CN/guide/norms',
-          },
-          {
-            id: 4,
-            title: '问题',
-            subTitle: 'problem',
-            path: '/zh-CN/guide/problem',
-          },
-          {
-            id: 5,
-            title: '贡献',
-            subTitle: 'contribution',
-            path: '/zh-CN/guide/contribution',
-          },
+          }
         ],
       },
     ]

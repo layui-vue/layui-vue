@@ -1,4 +1,4 @@
-::: field 基础使用
+::: title 基础使用
 :::
 
 ::: demo
@@ -21,7 +21,7 @@ export default {
 
 :::
 
-::: field 灰色主题
+::: title 灰色主题
 :::
 
 ::: demo
@@ -47,7 +47,7 @@ export default {
 
 :::
 
-::: field Block 属性
+::: title Block 属性
 :::
 
 | Name   | Description | Accepted Values  |

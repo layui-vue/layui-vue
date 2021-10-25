@@ -1,4 +1,4 @@
-::: field 基础使用
+::: title 基础使用
 :::
 
 ::: demo
@@ -37,7 +37,7 @@ export default {
 
 :::
 
-::: field 不同方向
+::: title 不同方向
 :::
 
 ::: demo
@@ -76,7 +76,7 @@ export default {
 
 :::
 
-::: field 控制位置
+::: title 控制位置
 :::
 
 ::: demo
@@ -116,7 +116,7 @@ export default {
 
 :::
 
-::: field 轮播属性
+::: title 轮播属性
 :::
 
 | Name      | Description  | Accepted Values           |
@@ -126,7 +126,7 @@ export default {
 | indicator | 控制器位置   | `inside` `outside` `none` |
 | arrow     | 切换按钮状态 | `hover` `always` `none`   |
 
-::: field 轮播事件
+::: title 轮播事件
 :::
 
 | Name   | Description | Accepted Values |

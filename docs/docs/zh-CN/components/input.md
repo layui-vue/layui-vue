@@ -1,4 +1,4 @@
-::: field 基础使用
+::: title 基础使用
 :::
 
 ::: demo
@@ -24,7 +24,7 @@ export default {
 
 :::
 
-::: field 提示信息
+::: title 提示信息
 :::
 
 ::: demo
@@ -47,7 +47,7 @@ export default {
 
 :::
 
-::: field 事件回调
+::: title 事件回调
 :::
 
 ::: demo
@@ -77,7 +77,7 @@ export default {
 
 :::
 
-::: field 禁止输入
+::: title 禁止输入
 :::
 
 ::: demo
@@ -103,7 +103,7 @@ export default {
 
 :::
 
-::: field input 属性
+::: title input 属性
 :::
 
 | Name        | Description     | Accepted Values |

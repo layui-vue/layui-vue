@@ -31,7 +31,7 @@ export default {
 
 :::
 
-::: field 分割属性
+::: title 分割属性
 
 :::
 

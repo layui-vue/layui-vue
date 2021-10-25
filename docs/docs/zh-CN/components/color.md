@@ -1,4 +1,4 @@
-::: field 主色调
+::: title 主色调
 :::
 
 ::: demo
@@ -46,7 +46,7 @@ export default {
 
 :::
 
-::: field 次色调
+::: title 次色调
 :::
 
 ::: demo
@@ -94,7 +94,7 @@ export default {
 
 :::
 
-::: field 中性色
+::: title 中性色
 :::
 
 ::: demo

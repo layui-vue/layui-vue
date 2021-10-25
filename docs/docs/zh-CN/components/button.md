@@ -1,4 +1,4 @@
-::: field 基础使用
+::: title 基础使用
 :::
 
 ::: demo 使用 lay-button 标签, 创建一个按钮
@@ -26,7 +26,7 @@ export default {
 
 :::
 
-::: field 简约按钮
+::: title 简约按钮
 :::
 
 ::: demo 使用 border 属性设置 主要按钮 边框主题
@@ -54,7 +54,7 @@ export default {
 
 :::
 
-::: field 按钮尺寸
+::: title 按钮尺寸
 :::
 
 ::: demo 传入 size 属性, 创建指定尺寸的按钮, 可选值 `lg` `sm` `xs` 
@@ -82,7 +82,7 @@ export default {
 
 :::
 
-::: field 流式按钮
+::: title 流式按钮
 :::
 
 ::: demo 传入 fluid 属性, 创建最大化按钮
@@ -108,7 +108,7 @@ export default {
 
 :::
 
-::: field 圆角按钮
+::: title 圆角按钮
 :::
 
 ::: demo 传入 radius 属性，创建圆角按钮
@@ -136,7 +136,7 @@ export default {
 
 :::
 
-::: field 按钮分组
+::: title 按钮分组
 :::
 
 ::: demo 使用 lay-button-group 标签, 创建一个按钮组
@@ -170,7 +170,7 @@ export default {
 
 :::
 
-::: field 图标按钮
+::: title 图标按钮
 :::
 
 ::: demo 结合 lay-icon 组件, 创建图标按钮
@@ -196,7 +196,7 @@ export default {
 
 :::
 
-::: field 按钮容器
+::: title 按钮容器
 :::
 
 ::: demo 使用 lay-button-container 标签, 创建一个按钮容器
@@ -223,7 +223,7 @@ export default {
 
 :::
 
-::: field 加载按钮
+::: title 加载按钮
 :::
 
 ::: demo 传入 loading 属性, 控制按钮的加载状态 
@@ -252,7 +252,7 @@ export default {
 
 :::
 
-::: field 按钮属性
+::: title 按钮属性
 :::
 
 | Name   | Description | Accepted Values                          |

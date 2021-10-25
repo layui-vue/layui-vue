@@ -59,7 +59,7 @@ export default {
 
 :::
 
-::: field field attributes
+::: title field attributes
 :::
 
 | Name   | Description | Accepted Values  |

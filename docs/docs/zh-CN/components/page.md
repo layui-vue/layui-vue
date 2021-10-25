@@ -1,4 +1,4 @@
-::: field 基础使用
+::: title 基础使用
 :::
 
 ::: demo
@@ -28,7 +28,7 @@ export default {
 
 :::
 
-::: field 简单模式
+::: title 简单模式
 :::
 
 ::: demo
@@ -56,7 +56,7 @@ export default {
 
 :::
 
-::: field 插槽使用
+::: title 插槽使用
 :::
 
 ::: demo
@@ -87,7 +87,7 @@ export default {
 
 :::
 
-::: field 不同主题
+::: title 不同主题
 :::
 
 ::: demo
@@ -121,7 +121,7 @@ export default {
 
 :::
 
-::: field 完整分页
+::: title 完整分页
 :::
 
 ::: demo
@@ -159,7 +159,7 @@ export default {
 
 :::
 
-::: field 切换事件
+::: title 切换事件
 :::
 
 ::: demo
@@ -193,7 +193,7 @@ export default {
 
 :::
 
-::: field 分页属性
+::: title 分页属性
 :::
 
 |             |              |         |
@@ -206,7 +206,7 @@ export default {
 | showRefresh | 显示刷新按钮 | `false` |
 | showSkip    | 显示跳转     | `false` |
 
-::: field 分页事件
+::: title 分页事件
 :::
 
 |             |              |         |
@@ -214,7 +214,7 @@ export default {
 | jump       | 切换回调     | { current: 当前页面 }    |
 
 
-::: field 分页插槽
+::: title 分页插槽
 :::
 
 |             |              |         |

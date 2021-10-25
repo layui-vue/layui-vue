@@ -1,4 +1,4 @@
-::: field 基础使用
+::: title 基础使用
 :::
 
 ::: demo
@@ -26,7 +26,7 @@ export default {
 
 :::
 
-::: field 默认样式
+::: title 默认样式
 :::
 
 ::: demo
@@ -54,7 +54,7 @@ export default {
 
 :::
 
-::: field 完整案例
+::: title 完整案例
 :::
 
 ::: demo
@@ -86,7 +86,7 @@ export default {
 
 :::
 
-::: field 禁用状态
+::: title 禁用状态
 :::
 
 ::: demo
@@ -116,7 +116,7 @@ export default {
 
 :::
 
-::: field 事件回调
+::: title 事件回调
 :::
 
 ::: demo
@@ -149,7 +149,7 @@ export default {
 
 :::
 
-::: field checkbox 属性
+::: title checkbox 属性
 :::
 
 | Name                | Description   | Accepted Values      |

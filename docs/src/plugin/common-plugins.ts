@@ -4,7 +4,9 @@ import container from 'markdown-it-container'
 import highlight from './highlight'
 import snippet from './snippet'
 import demo from './demo'
-import createContainer from './create-container'
+import createTitle from './create-title'
+import createBlock from './create-block'
+import createDescribe from './create-describe'
 import preWrapper from './pre-wrapper'
 
 const plugins = [
@@ -22,7 +24,9 @@ const plugins = [
       md.use(snippet)
         .use(preWrapper)
         .use(container, 'demo', demo)
-        .use(...createContainer('field', '描述信息'))
+        .use(...createBlock('block', '描述信息'))
+        .use(...createTitle('title', '标题信息'))
+        .use(...createDescribe('describe', '描述信息'))
     },
   }),
 ] as any

@@ -1,4 +1,4 @@
-::: field 基础使用
+::: title 基础使用
 :::
 
 ::: demo
@@ -44,7 +44,7 @@ export default {
 
 :::
 
-::: field 简单模式
+::: title 简单模式
 :::
 
 ::: demo
@@ -72,7 +72,7 @@ export default {
 
 :::
 
-::: field timeline-item attributes
+::: title timeline-item attributes
 
 :::
 

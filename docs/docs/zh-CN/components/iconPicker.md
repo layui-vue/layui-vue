@@ -1,4 +1,4 @@
-::: field 基础使用
+::: title 基础使用
 :::
 
 ::: demo
@@ -23,7 +23,7 @@ export default {
 
 :::
 
-::: field 默认选择
+::: title 默认选择
 :::
 
 ::: demo
@@ -48,7 +48,7 @@ export default {
 
 :::
 
-::: field 开启分页
+::: title 开启分页
 :::
 
 ::: demo
@@ -73,7 +73,7 @@ export default {
 
 :::
 
-::: field 开启搜索
+::: title 开启搜索
 :::
 
 ::: demo
@@ -98,7 +98,7 @@ export default {
 
 :::
 
-::: field icon-picker 属性
+::: title icon-picker 属性
 :::
 
 |            |          |     |

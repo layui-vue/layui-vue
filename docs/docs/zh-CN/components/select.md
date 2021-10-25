@@ -1,4 +1,4 @@
-::: field 基础使用
+::: title 基础使用
 :::
 
 ::: demo
@@ -25,7 +25,7 @@ export default {
 
 :::
 
-::: field 选择禁用
+::: title 选择禁用
 :::
 
 ::: demo
@@ -55,7 +55,7 @@ export default {
 
 :::
 
-::: field select 属性
+::: title select 属性
 :::
 
 | Name   | Description | Accepted Values  |
@@ -63,7 +63,7 @@ export default {
 | name      | 原生 name 属性 | --   | 
 | v-model     | 选中值 | --  | 
 
-::: field select-option 属性
+::: title select-option 属性
 :::
 
 | Name   | Description | Accepted Values  |
@@ -71,14 +71,14 @@ export default {
 | label      | 标签 | --   | 
 | value     | 值 | --  | 
 
-::: field select-option 插槽
+::: title select-option 插槽
 :::
 
 | Name   | Description | Accepted Values  |
 | -------- | ---- | ----------------------- | 
 | default      | 默认 | --   | 
 
-::: field select 事件
+::: title select 事件
 :::
 
 | Name   | Description | Accepted Values  |

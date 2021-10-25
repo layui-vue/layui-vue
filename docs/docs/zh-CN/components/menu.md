@@ -1,4 +1,4 @@
-::: field 基础使用
+::: title 基础使用
 :::
 
 ::: demo
@@ -34,7 +34,7 @@ export default {
 
 :::
 
-::: field 垂直导航
+::: title 垂直导航
 :::
 
 ::: demo
@@ -77,7 +77,7 @@ export default {
 
 :::
 
-::: field 菜单属性
+::: title 菜单属性
 :::
 
 | Name   | Description | Accepted Values  |
@@ -85,7 +85,7 @@ export default {
 | selectedKey (v-model) | 选中项 | --  |
 | openKeys (v-model)    | 打开项 | --  |
 
-::: field 菜单插槽
+::: title 菜单插槽
 :::
 
 | Name   | Description | Accepted Values  |

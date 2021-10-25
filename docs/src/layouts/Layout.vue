@@ -43,7 +43,7 @@
           </a>
         </li>
         <li class="layui-nav-item">
-          <a href="javascript:void(0)"> 0.2.0 </a>
+          <a href="javascript:void(0)"> 0.2.1 </a>
         </li>
       </ul>
     </lay-header>
@@ -349,6 +349,7 @@ export default {
   position: fixed;
   margin-top: 60px;
   height: calc(100% - 60px);
+  box-shadow: 2px 0 8px 0 rgb(29 35 41 / 5%);
 }
 
 .layui-layout-document > .layui-layout > .layui-body {

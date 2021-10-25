@@ -1,4 +1,4 @@
-::: field 基础使用
+::: title 基础使用
 :::
 
 ::: demo
@@ -71,7 +71,7 @@ export default {
 
 :::
 
-::: field 动画类名
+::: title 动画类名
 :::
 
 | Name                              | Description  | Accepted Values                                |

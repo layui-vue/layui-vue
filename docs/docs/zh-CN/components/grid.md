@@ -1,4 +1,4 @@
-::: field 基础使用
+::: title 基础使用
 :::
 
 ::: demo
@@ -41,7 +41,7 @@ export default {
 
 :::
 
-::: field 栅格偏移
+::: title 栅格偏移
 :::
 
 ::: demo
@@ -80,7 +80,7 @@ export default {
 
 :::
 
-::: field 栅格适应
+::: title 栅格适应
 :::
 
 ::: demo
@@ -105,7 +105,7 @@ export default {
 
 :::
 
-::: field 流式布局
+::: title 流式布局
 :::
 
 ::: demo
@@ -136,7 +136,7 @@ export default {
 
 :::
 
-::: field 行属性
+::: title 行属性
 
 :::
 
@@ -144,7 +144,7 @@ export default {
 | -------- | ---- | ----------------------- |
 | space    | 间隔 |  --  | 
 
-::: field 列属性
+::: title 列属性
 
 :::
 

@@ -1,4 +1,4 @@
-::: field 基础使用
+::: title 基础使用
 ::: 
 
 ::: demo
@@ -25,7 +25,7 @@ export default {
 
 :::
 
-::: field 指定分割
+::: title 指定分割
 ::: 
 
 ::: demo
@@ -76,14 +76,14 @@ export default {
 
 :::
 
-::: field 面包屑属性
+::: title 面包屑属性
 :::
 
 | Name   | Description | Accepted Values  |
 | --------- | ------ | --- |
 | separator | 分割符 | `/` |
 
-::: field 面包屑插槽
+::: title 面包屑插槽
 :::
 
 | Name   | Description | Accepted Values  |

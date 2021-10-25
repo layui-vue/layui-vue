@@ -1,4 +1,4 @@
-::: field 基础使用
+::: title 基础使用
 :::
 
 ::: demo
@@ -31,7 +31,7 @@ export default {
 </style>
 :::
 
-::: field 卡片插槽
+::: title 卡片插槽
 :::
 
 ::: demo
@@ -69,7 +69,7 @@ export default {
 </style>
 :::
 
-::: field 简单使用
+::: title 简单使用
 :::
 
 ::: demo
@@ -103,14 +103,14 @@ export default {
 :::
 
 
-::: field 卡片属性
+::: title 卡片属性
 :::
 
 |        |      |        |
 | ------ | ---- | ------ |
 | title | 标题 | -- |
 
-::: field 卡片插槽
+::: title 卡片插槽
 :::
 
 |        |      |        |

@@ -1,4 +1,4 @@
-::: field 基础使用
+::: title 基础使用
 :::
 
 ::: demo
@@ -24,7 +24,7 @@ export default {
 
 :::
 
-::: field 圆角头像
+::: title 圆角头像
 :::
 
 ::: demo
@@ -51,7 +51,7 @@ export default {
 
 :::
 
-::: field 尺寸大小
+::: title 尺寸大小
 :::
 
 ::: demo
@@ -80,7 +80,7 @@ export default {
 
 :::
 
-::: field 头像属性
+::: title 头像属性
 :::
 
 |        |      |                |

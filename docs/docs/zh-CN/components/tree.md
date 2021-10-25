@@ -213,7 +213,7 @@ function handleClick(node) {
 
 :::
 
-::: field tree attributes
+::: title tree attributes
 
 :::
 
@@ -225,7 +225,7 @@ function handleClick(node) {
 | showLine                         | 是否开启连接线                           | true            |
 | checkedKeys(v-model:checkedKeys) | 开启 showCheckbox 后, 选中的节点         | []              |
 
-::: field TreeData
+::: title TreeData
 
 :::
 | Name | Description | Accepted Values |
@@ -236,7 +236,7 @@ function handleClick(node) {
 | disabled | 该节点是否禁用 | false |
 | spread | 该节点是否展开 | false | - |
 
-::: field tree events
+::: title tree events
 
 :::
 
