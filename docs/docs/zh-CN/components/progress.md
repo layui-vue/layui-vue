@@ -29,15 +29,46 @@ export default {
 ::: demo
 
 <template>
-  <lay-progress percent="80" size="big"></lay-progress>
+  <lay-progress percent="40" size="big"></lay-progress>
   <br>
-  <lay-progress percent="60" size="big" theme="orange"></lay-progress>
+  <lay-progress percent="60" size="big" theme="green"></lay-progress>
   <br>
-  <lay-progress percent="60" size="big" theme="blue"></lay-progress>
+  <lay-progress percent="80" size="big" theme="cyan"></lay-progress>
 </template>
 
 <script>
 import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    return {
+    }
+  }
+}
+</script>
+
+:::
+
+::: title 指定主题
+:::
+
+::: demo
+
+<template>
+  <lay-progress percent="60" theme="red"></lay-progress>
+  <br>
+  <lay-progress percent="60" theme="orange"></lay-progress>
+  <br>
+  <lay-progress percent="60" theme="green"></lay-progress>
+  <br>
+  <lay-progress percent="60" theme="blue"></lay-progress>
+  <br>
+  <lay-progress percent="60" theme="cyan"></lay-progress>
+</template>
+
+<script>
+import { ref } from 'vue';
 
 export default {
   setup() {

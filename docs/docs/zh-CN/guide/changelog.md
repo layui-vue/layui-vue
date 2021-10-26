@@ -11,7 +11,13 @@
 <template>
 <lay-timeline>
 <lay-timeline-item title="0.2.1">
+[新增] hooks 文档
 [新增] useClickOutside 外部 click 事件 hooks。<br>
+[新增] rate 评分 readonly 属性, 支持只读模式。<br>
+[新增] rate 评分 theme 属性, 支持自定义主题。<br>
+[新增] progress 文档, 区分 theme 与 size 使用案例。<br>
+[新增] dropdown 下拉组件 dropdown-item 点击监听, 隐藏 content 内容。<br>
+[修复] rate 评分 modelValue 属性, 双绑逻辑。<br>
 </lay-timeline-item>
 <lay-timeline-item title="0.2.0">
 [新增] carousel 轮播 anim 属性, 支持 default updown 不同方向轮播。<br>

@@ -3,7 +3,19 @@
 
 <br>
 
-- 使用 npm 下载
+::: describe 这里是 Layui 的 Vue 实现，开发和服务于企业级后台产品。
+:::
+
+<img src="https://portrait.gitee.com/uploads/avatars/namespace/2849/8547475_layui-vue_1633242524.png" style="margin-left:24px;border-radius: 10px;" width="140px" />
+<span style="font-size: 30px;color: #aaa;margin: 0 20px;">+</span>
+<img src="https://qn.antdv.com/vue.png" width="160px" />
+
+<br>
+<br>
+<br>
+
+::: describe 1.使用 npm 下载
+:::
 
 ```
 npm install @layui/layui-vue --save
@@ -11,7 +23,8 @@ npm install @layui/layui-vue --save
 
 <br>
 
-- 在 main.ts 中
+::: describe 2.在 main.ts 中依赖
+:::
 
 ```js
 import App from './App.vue'
@@ -24,7 +37,8 @@ createApp(App).use(Layui).mount('#app')
 
 <br>
 
-- 在 index.vue 使用：
+::: describe 3.在 index.vue 使用
+:::
 
 ```html
 <lay-layout>

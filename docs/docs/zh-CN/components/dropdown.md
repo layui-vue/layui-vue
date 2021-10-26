@@ -5,7 +5,7 @@
 
 <template>
   <lay-dropdown>
-    <lay-button>下拉菜单</lay-button>
+    <lay-button type="primary">下拉菜单</lay-button>
     <template #content>
         <lay-dropdown-item>选项一</lay-dropdown-item>
         <lay-dropdown-item>选项二</lay-dropdown-item>

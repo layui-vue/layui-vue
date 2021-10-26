@@ -1,6 +1,8 @@
 ::: title 基本介绍
 :::
 
+<img src="http://layui-doc.pearadmin.com/static/images/layui/logo-2.png" />
+
 <br>
 
 ::: block

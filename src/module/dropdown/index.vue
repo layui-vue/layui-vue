@@ -5,7 +5,7 @@
     class="layui-dropdown"
     :class="[openState ? 'layui-dropdown-up' : '']"
   >
-    <div @click="open">
+    <div @click="toggle">
       <slot />
     </div>
     <dl class="layui-anim layui-anim-upbit">
@@ -18,10 +18,12 @@
     v-if="trigger === 'hover'"
     class="layui-dropdown"
     :class="[openState ? 'layui-dropdown-up' : '']"
-    @mouseenter="open"
-    @mouseleave="open"
+    @mouseenter="open" 
+    @mouseleave="hide"
   >
-    <slot />
+    <div>
+      <slot />
+    </div>
     <dl class="layui-anim layui-anim-upbit">
       <ul class="layui-menu layui-dropdown-menu">
         <slot name="content" />
@@ -31,7 +33,7 @@
 </template>
 
 <script setup name="LaySelect" lang="ts">
-import { defineProps, ref, watch } from 'vue'
+import { defineProps, provide, ref, watch } from 'vue'
 import useClickOutside from '../../hooks/useClickOutside'
 
 const dropdownRef = ref<null | HTMLElement>(null)
@@ -49,6 +51,14 @@ const props = withDefaults(
 const openState = ref(false)
 
 const open = function () {
+  openState.value = true
+}
+
+const hide = function () {
+  openState.value = false
+}
+
+const toggle = function () {
   openState.value = !openState.value
 }
 
@@ -57,4 +67,6 @@ watch(isClickOutside, () => {
     openState.value = false
   }
 })
+
+provide('openState', openState)
 </script>
