@@ -112,4 +112,6 @@ export default {
 | placeholder | 提示信息        | --              |
 | disabled    | 禁用            | `true` `false`  |
 | v-model     | 值              | --              |
-| input       | 原生 input 事件 | val : 当前值    |
+| input       | 原生 input 事件 | event : 事件对象  |
+| foucs       | 原生 foucs 事件 | event : 事件对象  |
+| blur        | 原生 blur 事件  | --  |

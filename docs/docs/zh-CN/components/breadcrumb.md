@@ -52,6 +52,9 @@ export default {
 
 :::
 
+::: title 使用插槽
+:::
+
 ::: demo
 
 <template>
