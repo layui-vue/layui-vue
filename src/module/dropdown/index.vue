@@ -18,7 +18,7 @@
     v-if="trigger === 'hover'"
     class="layui-dropdown"
     :class="[openState ? 'layui-dropdown-up' : '']"
-    @mouseenter="open" 
+    @mouseenter="open"
     @mouseleave="hide"
   >
     <div>

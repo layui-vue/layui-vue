@@ -35,15 +35,19 @@ const props = withDefaults(
   }
 )
 
-watch(props, function () {
-  rates.value = []
-  for (let index = 0; index < props.length; index++) {
-    rates.value.push(false)
-  }
-  for (let index = props.modelValue - 1; index >= 0; index--) {
-    rates.value[index] = true
-  }
-},{deep: true, immediate: true})
+watch(
+  props,
+  function () {
+    rates.value = []
+    for (let index = 0; index < props.length; index++) {
+      rates.value.push(false)
+    }
+    for (let index = props.modelValue - 1; index >= 0; index--) {
+      rates.value[index] = true
+    }
+  },
+  { deep: true, immediate: true }
+)
 
 const emit = defineEmits(['update:modelValue'])
 
