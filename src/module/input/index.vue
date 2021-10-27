@@ -16,14 +16,13 @@
 <script setup name="LayInput" lang="ts">
 import { defineProps, defineEmits } from 'vue'
 
-const props =
-  defineProps<{
-    name?: string
-    type?: string
-    modelValue?: string
-    placeholder?: string
-    disabled?: boolean
-  }>()
+const props = defineProps<{
+  name?: string
+  type?: string
+  modelValue?: string
+  placeholder?: string
+  disabled?: boolean
+}>()
 
 const emit = defineEmits(['update:modelValue', 'input', 'focus', 'blur'])
 

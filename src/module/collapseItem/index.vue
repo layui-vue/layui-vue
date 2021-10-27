@@ -1,7 +1,8 @@
 <template>
   <div class="layui-colla-item">
     <h2 class="layui-colla-title" @click="showHandle">
-      {{ title }}<i class="layui-icon layui-colla-icon">{{ isShow ? '' : '' }}</i>
+      {{ title
+      }}<i class="layui-icon layui-colla-icon">{{ isShow ? '' : '' }}</i>
     </h2>
     <div class="layui-colla-content" :class="isShow ? 'layui-show' : ''">
       <p>
@@ -14,13 +15,12 @@
 <script setup name="LayCollapseItem" lang="ts">
 import { defineProps, inject, ref } from 'vue'
 
-const props =
-  defineProps<{
-    id: string
-    title: string
-  }>()
+const props = defineProps<{
+  id: string
+  title: string
+}>()
 
-const openKeys = inject('openKeys') as String[]
+const openKeys = inject('openKeys') as string[]
 
 const isShow = ref(openKeys.includes(props.id))
 
