@@ -14,6 +14,7 @@
 [新增] useFullScreen 全屏 hooks。<br>
 [新增] useMove 拖拽 hooks。<br>
 [新增] textarea 文本域 blur foucs 获取焦点 失去焦点 事件。<br>
+[新增] layer 弹层。<br>
 </lay-timeline-item>
 <lay-timeline-item title="0.2.1">
 [新增] hooks 文档

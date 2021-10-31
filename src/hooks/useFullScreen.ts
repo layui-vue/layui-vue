@@ -4,7 +4,7 @@ const useFullScreen = () => {
   const isFullScreen = ref(false)
 
   const fullScreen = function () {
-    var docElm = document.documentElement
+    const docElm = document.documentElement
     switch (!isFullScreen.value) {
       case true:
         if (docElm.requestFullscreen) {

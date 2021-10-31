@@ -514,6 +514,7 @@ html #layuicss-layer {
   padding: 20px;
   line-height: 24px;
   word-break: break-all;
+  height: 100%;
   overflow: hidden;
   font-size: 14px;
   overflow-x: hidden;

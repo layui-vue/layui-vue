@@ -1,4 +1,12 @@
 <template>
+  <!-- 遮盖 -->
+  <div
+    class="layui-layer-shade"
+    style="z-index: 19891020; background-color: rgb(0, 0, 0); opacity: 0.1"
+    @click="shadeHandle"
+    v-if="visible && shade"
+  ></div>
+  <!-- 元素 -->
   <div
     v-if="visible"
     :id="id"
@@ -15,7 +23,7 @@
       {{ title }}
     </div>
     <div class="layui-layer-content">
-      <div :style="{ height: contentHeight }" v-if="type === 1">
+      <div v-if="type === 1" :style="{ height: contentHeight }">
         <slot v-if="slot.default"></slot>
         <template v-else>
           {{ content }}
@@ -39,10 +47,10 @@
         @click="minHandle"
         ><cite></cite></a
       ><a
+        v-if="maxmin"
         class="layui-layer-ico layui-layer-max"
         :class="[max ? 'layui-layer-maxmin' : '']"
         href="javascript:;"
-        v-if="maxmin"
         @click="maxHandle"
       ></a>
       <a
@@ -51,7 +59,7 @@
         @click="closeHandle"
       ></a
     ></span>
-    <div class="layui-layer-btn" v-if="btn && btn.length > 0">
+    <div v-if="btn && btn.length > 0" class="layui-layer-btn">
       <template v-for="(b, index) in btn" :key="index">
         <a :class="['layui-layer-btn' + index]" @click="b.callback">{{
           b.text
@@ -68,27 +76,17 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { onMounted, onUpdated, ref, useSlots } from 'vue'
+import { onMounted, onUpdated, ref, useSlots, watch } from 'vue'
 import useMove from '../../hooks/useMove'
 
 const slot = useSlots()
 
 onMounted(() => {
-  if (props.move) {
-    const el = document.getElementById(props.id)
-    if (el != null) {
-      useMove(el)
-    }
-  }
+  moveHandle()
 })
 
 onUpdated(() => {
-  if (props.move) {
-    const el = document.getElementById(props.id)
-    if (el != null) {
-      useMove(el)
-    }
-  }
+  moveHandle()
 })
 
 const props = withDefaults(
@@ -104,6 +102,8 @@ const props = withDefaults(
     move?: boolean
     type?: number
     content?: string
+    shade?: boolean
+    shadeClose?: boolean
   }>(),
   {
     id: 'layer',
@@ -116,6 +116,8 @@ const props = withDefaults(
     move: false,
     type: 1,
     btn: () => [],
+    shade: false,
+    shadeClose: true,
   }
 )
 
@@ -126,11 +128,27 @@ const height = ref(props.height)
 const max = ref(false)
 const contentHeight = ref(
   props.btn.length > 0
-    ? 'calc(' + props.height + ' - 100px)'
-    : 'calc(' + props.height + ' - 50px)'
+    ? 'calc(' + height.value + ' - 100px)'
+    : 'calc(' + height.value + ' - 50px)'
 )
 
 const emit = defineEmits(['close', 'update:visible'])
+
+const moveHandle = function () {
+  if (props.move) {
+    const el = document.getElementById(props.id)
+    if (el != null) {
+      useMove(el)
+    }
+  }
+}
+
+const shadeHandle = function () {
+  if (props.shadeClose) {
+    emit('close')
+    emit('update:visible', false)
+  }
+}
 
 const closeHandle = function () {
   emit('close')

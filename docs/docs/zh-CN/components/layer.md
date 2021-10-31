@@ -145,7 +145,7 @@ export default {
 
 <template>
   <lay-button @click="changeVisible5" type="primary">远程窗体</lay-button>
-  <lay-layer title="亦是此间少年" width="500px" height="400px" v-model:visible="visible5" move="true" :type="type5" content="http://www.pearadmin.com"></lay-layer>
+  <lay-layer title="亦是此间少年" width="500px" height="400px" maxmin="true" v-model:visible="visible5" move="true" :type="type5" content="http://www.pearadmin.com"></lay-layer>
 </template>
 
 <script>
@@ -211,6 +211,41 @@ export default {
 
 :::
 
+::: title 开启遮盖
+:::
+
+::: demo
+
+<template>
+  <lay-button @click="changeVisible7" type="primary">开启遮盖</lay-button>
+  <lay-layer title="身如不系之舟" move="true" shade="true" v-model:visible="visible7">
+    <div style="padding: 20px;">
+        忘了是怎么开始, 也许就是对你
+    </div>
+  </lay-layer>
+</template>
+
+<script>
+import { ref, watch } from "vue";
+import { useRoute, useRouter } from "vue-router";
+export default {
+  setup() {
+
+    const visible7 = ref(false)
+
+    const changeVisible7 = function() {
+        visible7.value = !visible7.value
+    }
+
+    return {
+        visible7
+    };
+  },
+};
+</script>
+
+:::
+
 ::: title 弹层属性
 :::
 
@@ -224,3 +259,5 @@ export default {
 | height          | 高            | --      |
 | v-model:visible | 展示 隐藏     | false   |
 | content         | 内容          | --      |
+| shade           | 开启遮盖          | --      |
+| shadeClose      | 遮盖点击关闭          | --      |
