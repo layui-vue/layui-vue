@@ -108,14 +108,20 @@ export default {
 
 :::
 
-::: title switch 属性
+::: title 开关属性
 :::
 
-| Name          | Description    | Accepted Values  |
-| ------------- | -------------- | ---------------- |
-| name          | 原生 name 属性 | --               |
-| v-model       | 是否启用       | `true` `false`   |
-| disabled      | 禁用           | `true` `false`   |
-| change        | 切换事件       | current : 当前值 |
-| active-text   | 启用描述       | `启动`           |
-| inactive-text | 禁用描述       | `禁用`           |
+| 属性          | 描述           | 可选值         |
+| ------------- | -------------- | -------------- |
+| name          | 原生 name 属性 | --             |
+| v-model       | 是否启用       | `true` `false` |
+| disabled      | 禁用           | `true` `false` |
+| active-text   | 启用描述       | `启动`         |
+| inactive-text | 禁用描述       | `禁用`         |
+
+::: title 开关事件
+:::
+
+| 属性   | 描述     | 可选值           |
+| ------ | -------- | ---------------- |
+| change | 切换事件 | current : 当前值 |

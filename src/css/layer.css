@@ -462,16 +462,16 @@ html #layuicss-layer {
 
 .layui-layer-btn {
   text-align: right;
-  padding: 0 15px 12px;
+  padding: 8px 15px 12px;
   pointer-events: auto;
   user-select: none;
   -webkit-user-select: none;
 }
 
 .layui-layer-btn a {
-  height: 28px;
-  line-height: 28px;
-  margin: 5px 5px 0;
+  height: 33px;
+  line-height: 33px;
+  margin: 0px 5px 0;
   padding: 0 15px;
   border: 1px solid #dedede;
   background-color: #fff;

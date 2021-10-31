@@ -172,7 +172,7 @@ export default {
 ::: title 布局组件
 :::
 
-|            |      |     |
+| 组件       | 描述 |     |
 | ---------- | ---- | --- |
 | lay-layout | 容器 | --  |
 | lay-header | 顶部 | --  |

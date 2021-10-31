@@ -119,7 +119,7 @@ export default {
 ::: title 轮播属性
 :::
 
-| Name      | Description  | Accepted Values           |
+| 属性      | 描述         | 可选值                    |
 | --------- | ------------ | ------------------------- |
 | v-model   | 当前激活项   | `--`                      |
 | anim      | 切换方向     | `default` `updown`        |
@@ -129,6 +129,6 @@ export default {
 ::: title 轮播事件
 :::
 
-| Name   | Description | Accepted Values |
-| ------ | ----------- | --------------- |
-| change | 切换回调    | id              |
+| 事件   | 描述     | 可选值 |
+| ------ | -------- | ------ |
+| change | 切换回调 | id     |

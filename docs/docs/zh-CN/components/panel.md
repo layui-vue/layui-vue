@@ -24,6 +24,6 @@ export default {
 ::: title 面板插槽
 :::
 
-| Name    | Description | Accepted Values |
-| ------- | ----------- | --------------- |
-| default | 默认插槽    | --              |
+| 插槽    | 描述     | 可选值 |
+| ------- | -------- | ------ |
+| default | 默认插槽 | --     |

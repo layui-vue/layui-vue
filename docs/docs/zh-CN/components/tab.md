@@ -166,21 +166,20 @@ export default {
 
 :::
 
-::: title tab 属性
+::: title 选项卡属性
 
 :::
 
-| Name        | Description | Accepted Values |
-| ----------- | ----------- | --------------- |
-| v-model     | 当前激活    | --              |
-| type        | 主题样式    | --              |
-| allow-close | 允许关闭    | `true` `false`  |
+| 属性        | 描述     | 可选值         |
+| ----------- | -------- | -------------- |
+| v-model     | 当前激活 | --             |
+| type        | 主题样式 | --             |
+| allow-close | 允许关闭 | `true` `false` |
 
-::: title tab 事件
-
+::: title 选项卡事件
 :::
 
-| Name   | Description | Accepted Params |
-| ------ | ----------- | --------------- |
-| change | 选中切换    | --              |
-| close  | 关闭事件    | --              |
+| 事件   | 描述     | 参数 |
+| ------ | -------- | ---- |
+| change | 选中切换 | --   |
+| close  | 关闭事件 | --   |

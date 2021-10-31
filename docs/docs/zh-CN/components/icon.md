@@ -1107,9 +1107,9 @@ export default {
 ::: title 图标属性
 :::
 
-| Name   | Description | Default Value     |
-| ------ | ----------- | ----------------- |
-| type   | 图标        | `layui-icon-home` |
-| prefix | 前缀        | `layui-icon`      |
-| color  | 颜色        | --                |
-| size   | 尺寸        | --                |
+| 属性   | 描述 | 默认值            |
+| ------ | ---- | ----------------- |
+| type   | 图标 | `layui-icon-home` |
+| prefix | 前缀 | `layui-icon`      |
+| color  | 颜色 | --                |
+| size   | 尺寸 | --                |

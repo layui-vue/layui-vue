@@ -328,6 +328,18 @@ export default {
           },
         ],
       },
+      {
+        id: 1,
+        title: '反馈',
+        children: [
+          {
+            id: 90,
+            title: '弹层',
+            subTitle: 'layer',
+            path: '/zh-CN/components/layer',
+          },
+        ],
+      },
     ]
 
     const selected = ref(1)

@@ -52,6 +52,11 @@ const zhCN = [
             component: () => import('../../docs/zh-CN/guide/norms.md'),
             meta: { title: '规范' },
           },
+          {
+            path: '/zh-CN/guide/sandbox',
+            component: () => import('../../docs/zh-CN/guide/sandbox.md'),
+            meta: { title: '沙盒' },
+          },
         ],
       },
       {
@@ -253,6 +258,11 @@ const zhCN = [
               import('../../docs/zh-CN/components/colorPicker.md'),
             meta: { title: '颜色选择器' },
           },
+          {
+            path: '/zh-CN/components/layer',
+            component: () => import('../../docs/zh-CN/components/layer.md'),
+            meta: { title: '弹层' },
+          },
         ],
       },
       {
@@ -266,6 +276,16 @@ const zhCN = [
             component: () =>
               import('../../docs/zh-CN/hooks/useClickOutside.md'),
             meta: { title: 'useClickOutside' },
+          },
+          {
+            path: '/zh-CN/hooks/useFullScreen',
+            component: () => import('../../docs/zh-CN/hooks/useFullScreen.md'),
+            meta: { title: 'useFullScreen' },
+          },
+          {
+            path: '/zh-CN/hooks/useMove',
+            component: () => import('../../docs/zh-CN/hooks/useMove.md'),
+            meta: { title: 'useMove' },
           },
         ],
       },

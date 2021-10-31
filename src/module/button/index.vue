@@ -25,18 +25,23 @@
   </button>
 </template>
 
-<script setup name="LayButton" lang="ts">
+<script lang="ts">
+export default {
+  name: 'LayButton',
+}
+</script>
+
+<script setup lang="ts">
 import { defineProps } from 'vue'
 
-const props =
-  defineProps<{
-    type?: string
-    size?: string
-    fluid?: boolean
-    radius?: boolean
-    border?: string
-    disabled?: boolean
-    loading?: boolean
-    nativeType?: string
-  }>()
+const props = defineProps<{
+  type?: string
+  size?: string
+  fluid?: boolean
+  radius?: boolean
+  border?: string
+  disabled?: boolean
+  loading?: boolean
+  nativeType?: string
+}>()
 </script>

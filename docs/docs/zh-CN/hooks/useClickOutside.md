@@ -1,10 +1,12 @@
 ::: title 基础使用
 :::
 
-::: demo 使用 useClickOutside 监听元素外的监听事件
+::: block 使 用 useClickOutside 监 听 元 素 外 click 事 件
+:::
 
+```vue
 <template>
-  <lay-button ref='buttonRef' type='primary'>当前元素</lay-button>
+  <lay-button type="primary" ref="buttonRef">当前元素</lay-button>
 </template>
 
 <script>
@@ -13,19 +15,24 @@ import useClickOutside from '/@src/hooks/useClickOutside'
 
 export default {
   setup() {
-
     const buttonRef = (ref < null) | (HTMLElement > null)
     const isClickOutside = useClickOutside(buttonRef)
 
     watch(isClickOutside, () => {
-      console.log("元素外 click 事件")
+      console.log('元素外 click 事件')
     })
 
     return {
-      buttonRef
+      buttonRef,
     }
-  }
+  },
 }
 </script>
+```
 
+::: title 使用备注
 :::
+
+| 备注           | 描述            | 类型 |
+| -------------- | --------------- | ---- |
+| isClickOutside | 使用 watch 监听 | Ref  |

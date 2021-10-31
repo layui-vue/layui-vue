@@ -260,11 +260,11 @@ export default {
 
 :::
 
-::: title table attributes
+::: title 表格属性
 
 :::
 
-|                          |            |                |
+| 属性                     | 描述       | 可选值         |
 | ------------------------ | ---------- | -------------- |
 | columns                  | 列配置     | --             |
 | dataSource               | 数据源     | --             |

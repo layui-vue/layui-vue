@@ -103,15 +103,21 @@ export default {
 
 :::
 
-::: title input 属性
+::: title 输入框属性
 :::
 
-| Name        | Description     | Accepted Values  |
-| ----------- | --------------- | ---------------- |
-| name        | 原始属性 name   | --               |
-| placeholder | 提示信息        | --               |
-| disabled    | 禁用            | `true` `false`   |
-| v-model     | 值              | --               |
-| input       | 原生 input 事件 | event : 事件对象 |
-| foucs       | 原生 foucs 事件 | event : 事件对象 |
-| blur        | 原生 blur 事件  | --               |
+| 属性        | 描述          | 可选值         |
+| ----------- | ------------- | -------------- |
+| name        | 原始属性 name | --             |
+| placeholder | 提示信息      | --             |
+| disabled    | 禁用          | `true` `false` |
+| v-model     | 值            | --             |
+
+::: title 输入框属性
+:::
+
+| 事件  | 描述            | 参数             |
+| ----- | --------------- | ---------------- |
+| input | 原生 input 事件 | event : 事件对象 |
+| foucs | 原生 foucs 事件 | event : 事件对象 |
+| blur  | 原生 blur 事件  | --               |

@@ -67,16 +67,16 @@ export default {
 
 :::
 
-::: title Dropdown 属性
+::: title 下拉属性
 :::
 
-| Name    | Description | Accepted Values |
-| ------- | ----------- | --------------- |
-| trigger | 触发方式    | `click` `hover` |
+| 属性    | 描述     | 可选值          |
+| ------- | -------- | --------------- |
+| trigger | 触发方式 | `click` `hover` |
 
-::: title Dropdown 插槽
+::: title 下拉插槽
 :::
 
-| Name    | Description | Accepted Values |
-| ------- | ----------- | --------------- |
-| content | 下拉内容    | --              |
+| 插槽    | 描述     | 可选值 |
+| ------- | -------- | ------ |
+| content | 下拉内容 | --     |

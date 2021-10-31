@@ -110,10 +110,10 @@ export default {
 
 :::
 
-::: title Progress 属性
+::: title 进度属性
 :::
 
-|          |          |                                               |
+| 属性     | 描述     | 可选值                                        |
 | -------- | -------- | --------------------------------------------- |
 | percent  | 进度     | --                                            |
 | theme    | 主题     | `orange` `green` `cyan` `blue` `black` `gray` |

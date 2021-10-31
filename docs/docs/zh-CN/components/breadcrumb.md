@@ -82,13 +82,13 @@ export default {
 ::: title 面包屑属性
 :::
 
-| Name      | Description | Accepted Values |
-| --------- | ----------- | --------------- |
-| separator | 分割符      | `/`             |
+| 属性      | 描述   | 默认值 |
+| --------- | ------ | ------ |
+| separator | 分割符 | `/`    |
 
 ::: title 面包屑插槽
 :::
 
-| Name    | Description | Accepted Values |
-| ------- | ----------- | --------------- |
-| default | 默认插槽    | `--`            |
+| 插槽    | 描述     | 默认值 |
+| ------- | -------- | ------ |
+| default | 默认插槽 | `--`   |

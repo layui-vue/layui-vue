@@ -143,3 +143,16 @@ export default {
 </script>
 
 :::
+
+::: title 颜色说明
+
+:::
+
+| Class           | 描述 | 使用                    |
+| --------------- | ---- | ----------------------- |
+| layui-bg-red    | 赤色 | class="layui-bg-red"    |
+| layui-bg-orange | 橙色 | class="layui-bg-orange" |
+| layui-bg-green  | 墨绿 | class="layui-bg-green"  |
+| layui-bg-cyan   | 藏青 | class="layui-bg-cyan"   |
+| layui-bg-blue   | 蓝色 | class="layui-bg-blue"   |
+| layui-bg-black  | 雅黑 | class="layui-bg-black"  |

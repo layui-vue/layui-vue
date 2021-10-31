@@ -43,7 +43,7 @@
           </a>
         </li>
         <li class="layui-nav-item">
-          <a href="javascript:void(0)"> 0.2.1 </a>
+          <a href="javascript:void(0)"> 0.2.2 </a>
         </li>
       </ul>
     </lay-header>

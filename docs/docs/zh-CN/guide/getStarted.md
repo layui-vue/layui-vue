@@ -7,8 +7,6 @@
 :::
 
 <img src="https://portrait.gitee.com/uploads/avatars/namespace/2849/8547475_layui-vue_1633242524.png" style="margin-left:24px;border-radius: 10px;" width="140px" />
-<span style="font-size: 30px;color: #aaa;margin: 0 20px;">+</span>
-<img src="https://qn.antdv.com/vue.png" width="160px" />
 
 <br>
 <br>

@@ -94,12 +94,18 @@ export default {
 
 :::
 
-::: title radio 属性
+::: title 单选框属性
 :::
 
-| Name    | Description   | Accepted Values  |
-| ------- | ------------- | ---------------- |
-| name    | 原始属性 name | --               |
-| label   | 当前值        | --               |
-| v-model | 选中值        | --               |
-| change  | 切换事件      | current : 当前值 |
+| 属性    | 描述          | 默认值 |
+| ------- | ------------- | ------ |
+| name    | 原始属性 name | --     |
+| label   | 当前值        | --     |
+| v-model | 选中值        | --     |
+
+::: title 单选框事件
+:::
+
+| 事件   | 描述     | 参数             |
+| ------ | -------- | ---------------- |
+| change | 切换事件 | current : 当前值 |

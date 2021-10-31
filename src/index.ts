@@ -59,6 +59,7 @@ import LaySlider from './module/slider/index'
 import LayCarousel from './module/carousel/index'
 import LayCarouselItem from './module/carouselItem/index'
 import LayColorPicker from './module/colorPicker/index'
+import LayLayer from './module/layer/index'
 
 const components: Record<string, IDefineComponent> = {
   LayRadio,
@@ -117,6 +118,7 @@ const components: Record<string, IDefineComponent> = {
   LayCarousel,
   LayCarouselItem,
   LayColorPicker,
+  LayLayer,
 }
 
 const install = (app: App, options?: InstallOptions): void => {
@@ -186,6 +188,7 @@ export {
   LayCarousel,
   LayCarouselItem,
   LayColorPicker,
+  LayLayer,
   install,
 }
 

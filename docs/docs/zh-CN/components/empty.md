@@ -45,9 +45,8 @@ export default {
 :::
 
 ::: title empty 属性
-
 :::
 
-| Name        | Description | Accepted Values |
-| ----------- | ----------- | --------------- |
-| description | 描述信息    | --              |
+| 属性        | 描述     | 可选值 |
+| ----------- | -------- | ------ |
+| description | 描述信息 | --     |

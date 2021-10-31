@@ -252,13 +252,48 @@ export default {
 
 :::
 
+::: title 事件处理
+:::
+
+::: demo 使用 @click 设置单击回调
+
+<template>
+  <lay-button type="default" @click="clickHandle">单击事件</lay-button>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+    
+    const clickHandle = function() {
+      console.log('点击事件')
+    }
+
+    return {
+      clickHandle
+    }
+  }
+}
+</script>
+
+:::
+
 ::: title 按钮属性
 :::
 
-| Name   | Description | Accepted Values                               |
-| ------ | ----------- | --------------------------------------------- |
-| type   | 主题        | `primary` `normal` `warm` `danger` `disabled` |
-| size   | 尺寸        | `lg` `sm` `xs`                                |
-| fluid  | 最大化      | `true` `false`                                |
-| radius | 圆角        | `true` `false`                                |
-| border | 边框        | `green` `blue` `orange` `red` `black`         |
+| 属性   | 描述   | 可选值                                        |
+| ------ | ------ | --------------------------------------------- |
+| type   | 主题   | `primary` `normal` `warm` `danger` `disabled` |
+| size   | 尺寸   | `lg` `sm` `xs`                                |
+| fluid  | 最大化 | `true` `false`                                |
+| radius | 圆角   | `true` `false`                                |
+| border | 边框   | `green` `blue` `orange` `red` `black`         |
+
+::: title 按钮事件
+:::
+
+| 事件  | 描述     | 参数 |
+| ----- | -------- | ---- |
+| click | 单击事件 | `--` |

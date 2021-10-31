@@ -70,9 +70,21 @@ export default {
         children: [
           {
             id: 1,
-            title: 'useClickOutside',
-            subTitle: '',
+            title: '事件',
+            subTitle: 'useClickOutside',
             path: '/zh-CN/hooks/useClickOutside',
+          },
+          {
+            id: 3,
+            title: '拖拽',
+            subTitle: 'useMove',
+            path: '/zh-CN/hooks/useMove',
+          },
+          {
+            id: 2,
+            title: '全屏',
+            subTitle: 'useFullScreen',
+            path: '/zh-CN/hooks/useFullScreen',
           },
         ],
       },

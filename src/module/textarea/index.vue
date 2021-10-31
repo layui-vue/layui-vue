@@ -6,7 +6,9 @@
     :disabled="disabled"
     class="layui-textarea"
     :class="{ 'layui-disabled': disabled }"
-    @input="updateValue"
+    @input="onInput"
+    @focus="onFocus"
+    @blur="onBlur"
   />
 </template>
 
@@ -20,11 +22,19 @@ const props = defineProps<{
   disabled?: boolean
 }>()
 
-const emit = defineEmits(['update:modelValue', 'input'])
+const emit = defineEmits(['update:modelValue', 'input', 'focus', 'blur'])
 
-const updateValue = function (event: InputEvent) {
+const onInput = function (event: InputEvent) {
   const inputElement = event.target as HTMLInputElement
   emit('update:modelValue', inputElement.value)
   emit('input', inputElement.value)
+}
+
+const onFocus = function (event: FocusEvent) {
+  emit('focus', event)
+}
+
+const onBlur = function () {
+  emit('blur')
 }
 </script>

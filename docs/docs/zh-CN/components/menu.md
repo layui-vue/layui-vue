@@ -80,14 +80,14 @@ export default {
 ::: title 菜单属性
 :::
 
-| Name                  | Description | Accepted Values |
-| --------------------- | ----------- | --------------- |
-| selectedKey (v-model) | 选中项      | --              |
-| openKeys (v-model)    | 打开项      | --              |
+| 属性                  | 描述   | 备注 |
+| --------------------- | ------ | ---- |
+| selectedKey (v-model) | 选中项 | --   |
+| openKeys (v-model)    | 打开项 | --   |
 
 ::: title 菜单插槽
 :::
 
-| Name  | Description | Accepted Values |
-| ----- | ----------- | --------------- |
-| title | 菜单标题    | --              |
+| 插槽  | 描述     | 备注 |
+| ----- | -------- | ---- |
+| title | 菜单标题 | --   |
