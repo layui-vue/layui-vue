@@ -85,7 +85,7 @@ export default {
             title: '更新',
             subTitle: 'change log',
             path: '/zh-CN/guide/changelog',
-          }
+          },
         ],
       },
     ]
