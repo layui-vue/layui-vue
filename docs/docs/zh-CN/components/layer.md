@@ -261,4 +261,4 @@ export default {
 | content         | 内容          | --      |
 | shade           | 开启遮盖      | --      |
 | shadeClose      | 遮盖点击关闭  | --      |
-| zIndex          | 自定义层级  | --      |
+| zIndex          | 自定义层级    | --      |
