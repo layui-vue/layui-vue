@@ -4,10 +4,10 @@
 ::: demo
 
 <template>
-  <lay-button @click="changeVisible1" type="primary">简单使用</lay-button>
-  <lay-layer title="身如不系之舟" v-model:visible="visible1">
+  <lay-button @click="changeVisible1" type="primary">基础使用</lay-button>
+  <lay-layer title="基础使用" v-model:visible="visible1">
     <div style="padding: 20px;">
-        忘了是怎么开始, 也许就是对你
+        这是一个基础弹窗
     </div>
   </lay-layer>
 </template>
@@ -40,9 +40,9 @@ export default {
 
 <template>
   <lay-button @click="changeVisible2" type="primary">允许拖动</lay-button>
-  <lay-layer title="身如不系之舟" v-model:visible="visible2" move="true">
+  <lay-layer title="允许拖动" v-model:visible="visible2" move="true">
     <div style="padding: 20px;">
-        忘了是怎么开始, 也许就是对你
+        这是一个可以拖拽的弹窗
     </div>
   </lay-layer>
 </template>
@@ -75,9 +75,9 @@ export default {
 
 <template>
   <lay-button @click="changeVisible3" type="primary">放大缩小</lay-button>
-  <lay-layer title="平胸女子" v-model:visible="visible3" move="true" maxmin="true">
+  <lay-layer title="放大缩小" v-model:visible="visible3" move="true" maxmin="true">
     <div style="padding: 20px;">
-        她是照相只照半边的女子
+        该弹窗支持放大缩小
     </div>
   </lay-layer>
 </template>
@@ -110,9 +110,9 @@ export default {
 
 <template>
   <lay-button @click="changeVisible4" type="primary">指定位置</lay-button>
-  <lay-layer title="亦是此间少年" v-model:visible="visible4" move="true" :offset="['100px','100px']">
+  <lay-layer title="指定位置" v-model:visible="visible4" move="true" :offset="['100px','100px']">
     <div style="padding: 20px;">
-        暗恋是一个人的事
+        指定弹窗显示的默认位置
     </div>
   </lay-layer>
 </template>
@@ -145,7 +145,7 @@ export default {
 
 <template>
   <lay-button @click="changeVisible5" type="primary">远程窗体</lay-button>
-  <lay-layer title="亦是此间少年" width="500px" height="400px" maxmin="true" v-model:visible="visible5" move="true" :type="type5" content="http://www.pearadmin.com"></lay-layer>
+  <lay-layer title="加载 Iframe 内容" width="500px" height="400px" maxmin="true" v-model:visible="visible5" move="true" :type="type5" content="http://www.pearadmin.com"></lay-layer>
 </template>
 
 <script>
@@ -178,9 +178,9 @@ export default {
 
 <template>
   <lay-button @click="changeVisible6" type="primary">定义操作</lay-button>
-  <lay-layer title="亦是此间少年" v-model:visible="visible6" move="true" :btn="btn6">
+  <lay-layer title="定义操作" v-model:visible="visible6" move="true" :btn="btn6">
     <div style="padding: 20px;">
-        你喜欢我吗？
+        定义一组弹窗操作按钮
     </div>
   </lay-layer>
 </template>
@@ -218,9 +218,9 @@ export default {
 
 <template>
   <lay-button @click="changeVisible7" type="primary">开启遮盖</lay-button>
-  <lay-layer title="身如不系之舟" move="true" shade="true" v-model:visible="visible7">
+  <lay-layer title="开启遮盖" move="true" shade="true" v-model:visible="visible7">
     <div style="padding: 20px;">
-        忘了是怎么开始, 也许就是对你
+        允许点击遮盖层关闭弹窗
     </div>
   </lay-layer>
 </template>
@@ -261,3 +261,4 @@ export default {
 | content         | 内容          | --      |
 | shade           | 开启遮盖      | --      |
 | shadeClose      | 遮盖点击关闭  | --      |
+| zIndex          | 自定义层级  | --      |

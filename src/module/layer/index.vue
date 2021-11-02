@@ -18,14 +18,14 @@
       left: left,
       width: width,
       height: height,
-      zIndex: zIndex
+      zIndex: zIndex,
     }"
   >
     <div class="layui-layer-title" style="cursor: move">
       {{ title }}
     </div>
     <div class="layui-layer-content" :style="{ height: contentHeight }">
-      <div v-if="type === 1"  style="height:100%">
+      <div v-if="type === 1" style="height: 100%">
         <slot v-if="slot.default"></slot>
         <template v-else>
           {{ content }}
@@ -37,7 +37,7 @@
         allowtransparency="true"
         frameborder="0"
         :src="content"
-        style="width: 100%;height:100%;"
+        style="width: 100%; height: 100%"
       ></iframe>
     </div>
     <span class="layui-layer-setwin"
@@ -138,9 +138,7 @@ const contentHeight = ref(
 watch(max, function () {
   if (max.value) {
     contentHeight.value =
-      props.btn.length > 0
-        ? 'calc(100% - 100px)'
-        : 'calc(100% - 50px)'
+      props.btn.length > 0 ? 'calc(100% - 100px)' : 'calc(100% - 50px)'
   } else {
     contentHeight.value =
       props.btn.length > 0
