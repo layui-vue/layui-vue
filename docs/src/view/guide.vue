@@ -85,13 +85,7 @@ export default {
             title: '更新',
             subTitle: 'change log',
             path: '/zh-CN/guide/changelog',
-          },
-          {
-            id: 4,
-            title: '沙盒',
-            subTitle: 'sandbox',
-            path: '/zh-CN/guide/sandbox',
-          },
+          }
         ],
       },
     ]
