@@ -259,5 +259,5 @@ export default {
 | height          | 高            | --      |
 | v-model:visible | 展示 隐藏     | false   |
 | content         | 内容          | --      |
-| shade           | 开启遮盖          | --      |
-| shadeClose      | 遮盖点击关闭          | --      |
+| shade           | 开启遮盖      | --      |
+| shadeClose      | 遮盖点击关闭  | --      |

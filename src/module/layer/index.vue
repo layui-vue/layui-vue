@@ -1,29 +1,31 @@
 <template>
   <!-- 遮盖 -->
   <div
-    class="layui-layer-shade"
-    style="z-index: 19891020; background-color: rgb(0, 0, 0); opacity: 0.1"
-    @click="shadeHandle"
     v-if="visible && shade"
+    class="layui-layer-shade"
+    style="background-color: rgb(0, 0, 0); opacity: 0.1"
+    :style="{ zIndex: zIndex }"
+    @click="shadeHandle"
   ></div>
   <!-- 元素 -->
   <div
     v-if="visible"
     :id="id"
     class="layui-layer"
-    style="z-index: 19891021; position: fixed"
+    style="position: fixed"
     :style="{
       top: top,
       left: left,
       width: width,
       height: height,
+      zIndex: zIndex
     }"
   >
     <div class="layui-layer-title" style="cursor: move">
       {{ title }}
     </div>
-    <div class="layui-layer-content">
-      <div v-if="type === 1" :style="{ height: contentHeight }">
+    <div class="layui-layer-content" :style="{ height: contentHeight }">
+      <div v-if="type === 1"  style="height:100%">
         <slot v-if="slot.default"></slot>
         <template v-else>
           {{ content }}
@@ -35,8 +37,7 @@
         allowtransparency="true"
         frameborder="0"
         :src="content"
-        style="width: 100%"
-        :style="{ height: contentHeight }"
+        style="width: 100%;height:100%;"
       ></iframe>
     </div>
     <span class="layui-layer-setwin"
@@ -92,6 +93,7 @@ onUpdated(() => {
 const props = withDefaults(
   defineProps<{
     id?: string
+    zIndex?: number
     title?: string
     offset?: string[]
     width?: string
@@ -107,6 +109,7 @@ const props = withDefaults(
   }>(),
   {
     id: 'layer',
+    zIndex: 99999999,
     title: '标题',
     offset: () => ['50%', '50%'],
     width: '390px',
@@ -131,6 +134,20 @@ const contentHeight = ref(
     ? 'calc(' + height.value + ' - 100px)'
     : 'calc(' + height.value + ' - 50px)'
 )
+
+watch(max, function () {
+  if (max.value) {
+    contentHeight.value =
+      props.btn.length > 0
+        ? 'calc(100% - 100px)'
+        : 'calc(100% - 50px)'
+  } else {
+    contentHeight.value =
+      props.btn.length > 0
+        ? 'calc(' + height.value + ' - 100px)'
+        : 'calc(' + height.value + ' - 50px)'
+  }
+})
 
 const emit = defineEmits(['close', 'update:visible'])
 
