@@ -19,7 +19,9 @@
           </div>
         </div>
       </div>
+
       <div class="layui-table-box">
+        <!-- 表格头部 -->
         <div class="layui-table-header">
           <table class="layui-table" :lay-size="size">
             <thead>
@@ -46,11 +48,12 @@
             </thead>
           </table>
         </div>
+        <!-- 表格数据 -->
         <div class="layui-table-body layui-table-main">
           <table class="layui-table" :lay-size="size">
             <tbody>
               <template v-for="data in dataSource" :key="data">
-                <tr>
+                <tr @click.stop="rowClick(data)" @dblclick.stop="rowDoubleClick(data)">
                   <td v-if="checkbox" class="layui-table-col-special">
                     <div class="layui-table-cell laytable-cell-checkbox">
                       <table-item-checkbox
@@ -154,7 +157,7 @@ const props = withDefaults(
   }
 )
 
-const emit = defineEmits(['change', 'update:selectedKeys'])
+const emit = defineEmits(['change','row','row-double', 'update:selectedKeys'])
 
 const slot = useSlots()
 const slots = slot.default && slot.default()
@@ -190,6 +193,14 @@ watch(
 
 const change = function (page: any) {
   emit('change', page)
+}
+
+const rowClick = function(data: any) {
+  emit('row', data)
+}
+
+const rowDoubleClick = function(data: any) {
+  emit('row-double', data)
 }
 
 const print = function () {

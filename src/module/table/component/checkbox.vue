@@ -1,5 +1,5 @@
 <template>
-  <span @click="handleClick">
+  <span @click.stop="handleClick">
     <input type="checkbox" :name="name" :value="label" />
     <div
       class="layui-unselect"

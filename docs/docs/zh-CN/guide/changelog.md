@@ -11,7 +11,7 @@
 <template>
 <lay-timeline>
 <lay-timeline-item title="0.2.3">
-[新增] useFullScreen 全屏 hooks。<br>
+[新增] table 表格 row 行单击, row-double 行双击事件。<br>
 </lay-timeline-item>
 <lay-timeline-item title="0.2.2">
 [新增] useFullScreen 全屏 hooks。<br>

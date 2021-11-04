@@ -195,7 +195,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-table :columns="columns" id="id" :dataSource="dataSource" v-model:selectedKeys="selectedKeys"  :checkbox="checkbox" :default-toolbar="defaultToolbar">
+  <lay-table :columns="columns" id="id" :dataSource="dataSource" v-model:selectedKeys="selectedKeys"  :checkbox="checkbox" :default-toolbar="defaultToolbar" @row="rowClick" @row-double="rowDoubleClick">
     <template v-slot:toolbar>
       <lay-button size="sm">新增</lay-button>
       <lay-button size="sm">删除</lay-button>
@@ -247,12 +247,22 @@ export default {
       {id:"2", username:"woow", password:"woow", age:"20"}
     ]
 
+    const rowClick = function(data) {
+      alert(JSON.stringify(data))
+    }
+    
+    const rowDoubleClick = function(data) {
+      alert(JSON.stringify(data))
+    }
+
     return {
       columns,
       dataSource,
       selectedKeys,
       checkbox,
-      defaultToolbar
+      defaultToolbar,
+      rowClick,
+      rowDoubleClick
     }
   }
 }
@@ -264,20 +274,29 @@ export default {
 
 :::
 
-| 属性                     | 描述       | 可选值         |
+| 属性                     | 描述        | 可选值         |
 | ------------------------ | ---------- | -------------- |
-| columns                  | 列配置     | --             |
-| dataSource               | 数据源     | --             |
+| columns                  | 列配置     | --              |
+| dataSource               | 数据源     | --              |
 | checkbox                 | 开启复现框 | --             |
 | id                       | 主键       | --             |
 | selectedKeys ( v-model ) | 选中项     | --             |
 | default-toolbar          | 开启工具栏 | `lg` `md` `sm` |
 | size                     | 尺寸       | --             |
 
-::: title table slots
+::: title 表格事件
 
 :::
 
-|         |              |     |
+| 属性                     | 描述        | 参数         |
+| ------------------------ | ---------- | -------------- |
+| row                  | 行单击     | data : 当前行       |
+| row-double           | 行双击     | data : 当前行       |
+
+::: title 表格插槽
+
+:::
+
+| 插槽     | 描述         | 默认     |
 | ------- | ------------ | --- |
 | toolbar | 自定义工具栏 | --  |
