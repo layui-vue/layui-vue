@@ -250,4 +250,4 @@ export default {
 | shade           | 开启遮盖      | --      |
 | shadeClose      | 遮盖点击关闭  | --      |
 | zIndex          | 自定义层级    | --      |
-| type            | 类型          | `1`,`2`      |
+| type            | 类型          | `1`,`2` |
