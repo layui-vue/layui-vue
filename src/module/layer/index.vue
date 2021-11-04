@@ -11,7 +11,11 @@
   <div
     v-if="visible"
     :id="id"
-    class="layui-layer"
+    class="layui-layer layui-layer-border"
+    :class="{
+      'layui-layer-dialog': type === 1,
+      'layui-layer-iframe': type === 2,
+    }"
     style="position: fixed"
     :style="{
       top: top,
@@ -67,6 +71,7 @@
         }}</a>
       </template>
     </div>
+    <span class="layui-layer-resize"></span>
   </div>
 </template>
 

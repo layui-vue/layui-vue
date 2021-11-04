@@ -10,6 +10,9 @@
 ::: demo
 <template>
 <lay-timeline>
+<lay-timeline-item title="0.2.3">
+[新增] useFullScreen 全屏 hooks。<br>
+</lay-timeline-item>
 <lay-timeline-item title="0.2.2">
 [新增] useFullScreen 全屏 hooks。<br>
 [新增] useMove 拖拽 hooks。<br>

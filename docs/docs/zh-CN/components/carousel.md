@@ -82,7 +82,6 @@ export default {
 ::: demo
 
 <template>
-  {{active}}
   <lay-carousel v-model="active" indicator="outside">
     <lay-carousel-item id="1">
       <div style="color: white;text-align: center;width:100%;height:300px;line-height:300px;background-color:#79C48C;">条目一</div>

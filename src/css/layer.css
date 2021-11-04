@@ -47,8 +47,6 @@ html #layuicss-layer {
 }
 
 .layui-layer-border {
-  border: 1px solid #b2b2b2;
-  border: 1px solid rgba(0, 0, 0, 0.1);
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
 }
 
@@ -570,7 +568,7 @@ html #layuicss-layer {
 .layui-layer-hui {
   min-width: 100px;
   background-color: #000;
-  filter: alpha(opacity=60);
+  opacity: 0.6;
   background-color: rgba(0, 0, 0, 0.6);
   color: #fff;
   border: none;

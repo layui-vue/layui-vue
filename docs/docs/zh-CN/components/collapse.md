@@ -28,7 +28,7 @@ export default {
 
 :::
 
-::: title Collapse attributes
+::: title Collapse 属性
 
 :::
 
@@ -36,7 +36,7 @@ export default {
 | -------- | ----------- | --------------- |
 | openKeys | 打开的目录  | `array`         |
 
-::: title Collapse-item attributes
+::: title Collapse-item 属性
 
 :::
 

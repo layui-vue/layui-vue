@@ -1172,9 +1172,9 @@ packages:
       '@babel/plugin-transform-unicode-regex': 7.14.5_@babel+core@7.15.8
       '@babel/preset-modules': 0.1.4_@babel+core@7.15.8
       '@babel/types': 7.15.6
-      babel-plugin-polyfill-corejs2: 0.2.2_@babel+core@7.15.8
+      babel-plugin-polyfill-corejs2: 0.2.3_@babel+core@7.15.8
       babel-plugin-polyfill-corejs3: 0.2.5_@babel+core@7.15.8
-      babel-plugin-polyfill-regenerator: 0.2.2_@babel+core@7.15.8
+      babel-plugin-polyfill-regenerator: 0.2.3_@babel+core@7.15.8
       core-js-compat: 3.18.2
       semver: 6.3.0
     transitivePeerDependencies:
@@ -2354,7 +2354,7 @@ packages:
       '@types/babel__traverse': 7.14.2
     dev: true
 
-  /babel-plugin-polyfill-corejs2/0.2.2_@babel+core@7.15.8:
+  /babel-plugin-polyfill-corejs2/0.2.3_@babel+core@7.15.8:
     resolution: {integrity: sha512-kISrENsJ0z5dNPq5eRvcctITNHYXWOA4DUZRFYCz3jYCcvTb/A546LIddmoGNMVYg2U38OyFeNosQwI9ENTqIQ==}
     peerDependencies:
       '@babel/core': ^7.0.0-0
@@ -2379,7 +2379,7 @@ packages:
       - supports-color
     dev: true
 
-  /babel-plugin-polyfill-regenerator/0.2.2_@babel+core@7.15.8:
+  /babel-plugin-polyfill-regenerator/0.2.3_@babel+core@7.15.8:
     resolution: {integrity: sha512-Goy5ghsc21HgPDFtzRkSirpZVW35meGoTmTOb2bxqdl60ghub4xOidgNTHaZfQ2FaxQsKmwvXtOAkcIS4SMBWg==}
     peerDependencies:
       '@babel/core': ^7.0.0-0
@@ -3507,7 +3507,7 @@ packages:
     resolution: {integrity: sha1-QpD60n8T6Jvn8zeZxrxaCr//DRk=}
     engines: {node: '>=0.10.0'}
     dependencies:
-      map-cache: 0.2.2
+      map-cache: 0.2.3
     dev: true
 
   /fs-extra/10.0.0:
@@ -4808,7 +4808,7 @@ packages:
       tmpl: 1.0.5
     dev: true
 
-  /map-cache/0.2.2:
+  /map-cache/0.2.3:
     resolution: {integrity: sha1-wyq9C9ZSXZsFFkW7TyasXcmKDb8=}
     engines: {node: '>=0.10.0'}
     dev: true
@@ -6096,7 +6096,7 @@ packages:
       debug: 2.6.9
       define-property: 0.2.5
       extend-shallow: 2.0.1
-      map-cache: 0.2.2
+      map-cache: 0.2.3
       source-map: 0.5.7
       source-map-resolve: 0.5.3
       use: 3.1.1
