@@ -53,7 +53,10 @@
           <table class="layui-table" :lay-size="size">
             <tbody>
               <template v-for="data in dataSource" :key="data">
-                <tr @click.stop="rowClick(data)" @dblclick.stop="rowDoubleClick(data)">
+                <tr
+                  @click.stop="rowClick(data)"
+                  @dblclick.stop="rowDoubleClick(data)"
+                >
                   <td v-if="checkbox" class="layui-table-col-special">
                     <div class="layui-table-cell laytable-cell-checkbox">
                       <table-item-checkbox
@@ -78,7 +81,7 @@
                       v-else
                       :key="index"
                     >
-                      <td class="layui-table-cell" v-if="column.key == key">
+                      <td v-if="column.key == key" class="layui-table-cell">
                         <div :style="{ width: column.width }">
                           <span v-if="column.slot">
                             <slot :name="column.slot" :data="data" />
@@ -103,10 +106,10 @@
           show-skip
           @jump="change"
         >
-          <template v-slot:prev
+          <template #prev
             ><lay-icon type="layui-icon-left"></lay-icon
           ></template>
-          <template v-slot:next
+          <template #next
             ><lay-icon type="layui-icon-right"></lay-icon
           ></template>
         </lay-page>
@@ -157,7 +160,7 @@ const props = withDefaults(
   }
 )
 
-const emit = defineEmits(['change','row','row-double', 'update:selectedKeys'])
+const emit = defineEmits(['change', 'row', 'row-double', 'update:selectedKeys'])
 
 const slot = useSlots()
 const slots = slot.default && slot.default()
@@ -195,11 +198,11 @@ const change = function (page: any) {
   emit('change', page)
 }
 
-const rowClick = function(data: any) {
+const rowClick = function (data: any) {
   emit('row', data)
 }
 
-const rowDoubleClick = function(data: any) {
+const rowDoubleClick = function (data: any) {
   emit('row-double', data)
 }
 

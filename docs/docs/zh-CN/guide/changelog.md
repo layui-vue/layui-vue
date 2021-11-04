@@ -12,6 +12,8 @@
 <lay-timeline>
 <lay-timeline-item title="0.2.3">
 [新增] table 表格 row 行单击, row-double 行双击事件。<br>
+[优化] layer 弹层 border 样式。<br>
+[升级] vue 3.2.21 版本。<br>
 </lay-timeline-item>
 <lay-timeline-item title="0.2.2">
 [新增] useFullScreen 全屏 hooks。<br>
