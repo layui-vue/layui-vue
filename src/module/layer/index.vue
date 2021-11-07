@@ -89,6 +89,7 @@ export default {
 <script lang="ts" setup>
 import { onMounted, onUpdated, ref, useSlots, watch } from 'vue'
 import useMove from '../../hooks/useMove'
+import { guid } from '../../tools/guidUtil'
 
 const slot = useSlots()
 
@@ -120,7 +121,7 @@ const props = withDefaults(
     btnAlign?: string
   }>(),
   {
-    id: 'layer',
+    id: 'layer-' + guid(),
     zIndex: 99999999,
     title: '标题',
     offset: () => ['50%', '50%'],
