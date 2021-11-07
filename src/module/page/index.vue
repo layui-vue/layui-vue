@@ -62,15 +62,22 @@ const props = withDefaults(
     total: number
     limit: number
     theme?: string
-    showPage?: boolean
-    showSkip?: boolean
-    showCount?: boolean
-    showLimit?: boolean
-    showInput?: boolean
-    showRefresh?: boolean
+    showPage?: boolean | string
+    showSkip?: boolean | string
+    showCount?: boolean | string
+    showLimit?: boolean | string
+    showInput?: boolean | string
+    showRefresh?: boolean | string
   }>(),
   {
     limit: 10,
+    theme: 'green',
+    showPage: false,
+    showSkip: false,
+    showCount: false,
+    showLimit: true,
+    showInput: false,
+    showRefresh: false,
   }
 )
 

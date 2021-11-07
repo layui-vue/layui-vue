@@ -15,10 +15,9 @@ import { defineProps, inject, useSlots } from 'vue'
 
 const slot = useSlots()
 
-const props =
-  defineProps<{
-    title: string
-  }>()
+const props = defineProps<{
+  title?: string
+}>()
 
 const separator = inject('separator')
 </script>

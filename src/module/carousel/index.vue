@@ -52,9 +52,9 @@ const props = withDefaults(
     width?: string
     height?: string
     modelValue: string
-    anim: string
-    arrow: string
-    indicator: string
+    anim?: string
+    arrow?: string
+    indicator?: string
   }>(),
   {
     width: '100%',

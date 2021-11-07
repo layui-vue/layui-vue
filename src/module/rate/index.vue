@@ -19,20 +19,20 @@
   </ul>
 </template>
 <script setup lang="ts">
-import { computed, defineProps, Ref, ref, watch, withDefaults } from 'vue'
+import { computed, defineProps, withDefaults } from 'vue'
 
 const props = withDefaults(
   defineProps<{
     length?: number
     modelValue: number
-    character?: string
-    readonly?: boolean
+    readonly?: boolean | string
     theme?: string
   }>(),
   {
     length: 5,
     modelValue: 0,
     readonly: false,
+    theme: 'green',
   }
 )
 

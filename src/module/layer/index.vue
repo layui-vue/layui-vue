@@ -110,15 +110,15 @@ const props = withDefaults(
     offset?: string[]
     width?: string
     height?: string
-    visible?: boolean
-    maxmin?: boolean
-    btn: Record<string, unknown>[]
-    move?: boolean
+    visible?: boolean | string
+    maxmin?: boolean | string
+    btn?: Record<string, unknown>[]
+    move?: boolean | string
     type?: number
     content?: string
-    shade?: boolean
-    shadeClose?: boolean
-    closeBtn?: boolean
+    shade?: boolean | string
+    shadeClose?: boolean | string
+    closeBtn?: boolean | string
     btnAlign?: string
     anim?: number
   }>(),
@@ -139,6 +139,7 @@ const props = withDefaults(
     closeBtn: true,
     btnAlign: 'l',
     anim: 0,
+    content: '',
   }
 )
 

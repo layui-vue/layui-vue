@@ -15,7 +15,7 @@ import { computed, CSSProperties, defineProps } from 'vue'
 
 const props = withDefaults(
   defineProps<{
-    width?: string
+    width?: string | number
   }>(),
   {
     width: '200',
