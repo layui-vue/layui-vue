@@ -254,5 +254,7 @@ export default {
 | zIndex          | 自定义层级    | --                         |
 | type            | 类型          | `1: component` `2: iframe` |
 | closeBtn        | 显示关闭      | true                       |
+| btn             | 按钮          |               |
+| btnAlign        | 按钮布局      | `l` `r` `c`                |
 
 :::

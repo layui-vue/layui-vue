@@ -14,6 +14,7 @@
 [新增] table 表格 列筛选功能。<br>
 [新增] table 表格 row 行单击, row-double 行双击事件。<br>
 [新增] layer 弹层 closeBtn 属性, 允许隐藏关闭操作。<br>
+[新增] layer 弹层 btnAlign 属性, 允许自定义按钮布局。<br>
 [修复] mackdown 文档 table 样式对 table 组件的污染。<br>
 [优化] layer 弹层 border 样式。<br>
 [优化] carousel 轮播逻辑, 允许循环切换。<br>
