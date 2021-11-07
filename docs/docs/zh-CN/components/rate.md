@@ -4,7 +4,7 @@
 ::: demo
 
 <template>
-  <lay-rate></lay-rate>
+  <lay-rate v-model="all1"></lay-rate>
 </template>
 
 <script>
@@ -13,7 +13,10 @@ import { ref } from 'vue';
 export default {
   setup() {
 
+     const all1 = ref(0)
+
     return {
+      all1
     }
   }
 }
@@ -134,8 +137,12 @@ export default {
 ::: title 评分属性
 :::
 
+::: table
+
 | 属性     | 描述     | 默认值 |
 | -------- | -------- | ------ |
 | v-model  | 评分值   | --     |
 | length   | 评分长度 | --     |
 | readonly | 只读模式 | --     |
+
+:::

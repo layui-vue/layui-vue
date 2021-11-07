@@ -39,7 +39,11 @@ export default {
 ::: title 徽章属性
 :::
 
+::: table
+
 |       |      |                                               |
 | ----- | ---- | --------------------------------------------- |
 | type  | 类型 | `dot` `rim`                                   |
 | theme | 主题 | `orange` `green` `cyan` `blue` `black` `gray` |
+
+:::

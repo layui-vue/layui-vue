@@ -59,6 +59,7 @@
         @click="maxHandle"
       ></a>
       <a
+        v-if="closeBtn"
         class="layui-layer-ico layui-layer-close layui-layer-close1"
         href="javascript:;"
         @click="closeHandle"
@@ -111,6 +112,7 @@ const props = withDefaults(
     content?: string
     shade?: boolean
     shadeClose?: boolean
+    closeBtn?: boolean
   }>(),
   {
     id: 'layer',
@@ -126,6 +128,7 @@ const props = withDefaults(
     btn: () => [],
     shade: false,
     shadeClose: true,
+    closeBtn: true,
   }
 )
 

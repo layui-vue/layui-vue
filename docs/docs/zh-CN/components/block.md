@@ -50,6 +50,10 @@ export default {
 ::: title Block 属性
 :::
 
+::: table
+
 | Name | Description | Accepted Values |
 | ---- | ----------- | --------------- |
 | nm   | 灰色样式    | --              |
+
+:::

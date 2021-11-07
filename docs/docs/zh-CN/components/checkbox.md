@@ -152,6 +152,8 @@ export default {
 ::: title 复选框属性
 :::
 
+::: table
+
 | 属性                | 描述          | 可选值               |
 | ------------------- | ------------- | -------------------- |
 | name                | 原始属性 name | --                   |
@@ -160,9 +162,15 @@ export default {
 | checked ( v-model ) | 是否选中      | `true` `false`       |
 | change              | 切换事件      | isChecked : 当前状态 |
 
+:::
+
 ::: title 复选框事件
 :::
+
+::: table
 
 | 事件   | 描述     | 可选值               |
 | ------ | -------- | -------------------- |
 | change | 切换事件 | isChecked : 当前状态 |
+
+:::

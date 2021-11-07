@@ -87,7 +87,7 @@ const prev = function () {
   for (var i = 0; i < slots.length; i++) {
     if (slots[i].props.id === active.value) {
       if (i === 0) {
-        return false
+        active.value = slots[slots.length - 1].props.id
       }
       active.value = slots[i - 1].props.id
       break
@@ -99,7 +99,7 @@ const next = function () {
   for (var i = 0; i < slots.length; i++) {
     if (slots[i].props.id === active.value) {
       if (i === slots.length - 1) {
-        return false
+        active.value = slots[0].props.id
       }
       active.value = slots[i + 1].props.id
       break

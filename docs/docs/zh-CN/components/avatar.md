@@ -72,7 +72,7 @@ export default {
         const src = "https://portrait.gitee.com/uploads/avatars/user/30/92529_sentsin_1578917144.jpg"
 
         return {
-            src
+          src
         }
   }
 }
@@ -83,8 +83,12 @@ export default {
 ::: title 头像属性
 :::
 
+::: table
+
 | 属性   | 描述 | 可选值         |
 | ------ | ---- | -------------- |
 | src    | 图源 | --             |
 | size   | 尺寸 | `xs` `sm` `lg` |
 | radius | 圆形 | `true` `false` |
+
+:::

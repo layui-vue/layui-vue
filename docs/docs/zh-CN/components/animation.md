@@ -74,6 +74,8 @@ export default {
 ::: title 动画类名
 :::
 
+::: table
+
 | 类名                              | 描述         | 使用                                           |
 | --------------------------------- | ------------ | ---------------------------------------------- |
 | layui-anim-down                   | 顶部往下滑入 | `layui-anim layui-anim-down`                   |
@@ -88,3 +90,5 @@ export default {
 | layui-anim-fadeout                | 渐隐         | `layui-anim layui-anim-fadeout`                |
 | layui-anim-rotate                 | 360 度旋转   | `layui-anim layui-anim-rotate`                 |
 | layui-anim-rotate layui-anim-loop | 循环动画     | `layui-anim layui-anim-rotate layui-anim-loop` |
+
+:::

@@ -1,29 +1,30 @@
 <template>
   <ul class="layui-rate">
     <li
-      v-for="(rate, index) in rates"
-      :key="rate"
+      v-for="index of length"
+      :key="index"
       class="layui-inline"
-      @mouseenter="mouseenter(index)"
+      @mouseenter="mouseenter(index, $event)"
     >
       <i
-        v-if="rate"
+        v-if="index <= currentValue"
         class="layui-icon layui-icon-rate-solid"
         :style="{ color: theme }"
       />
       <i v-else class="layui-icon layui-icon-rate" :style="{ color: theme }" />
     </li>
+    {{
+      currentValue
+    }}
   </ul>
 </template>
 <script setup lang="ts">
-import { defineProps, Ref, ref, watch, withDefaults } from 'vue'
-
-const rates: Ref<Array<boolean>> = ref([])
+import { computed, defineProps, Ref, ref, watch, withDefaults } from 'vue'
 
 const props = withDefaults(
   defineProps<{
     length?: number
-    modelValue?: number
+    modelValue: number
     character?: string
     readonly?: boolean
     theme?: string
@@ -35,32 +36,21 @@ const props = withDefaults(
   }
 )
 
-watch(
-  props,
-  function () {
-    rates.value = []
-    for (let index = 0; index < props.length; index++) {
-      rates.value.push(false)
-    }
-    for (let index = props.modelValue - 1; index >= 0; index--) {
-      rates.value[index] = true
-    }
-  },
-  { deep: true, immediate: true }
-)
-
 const emit = defineEmits(['update:modelValue'])
 
-const mouseenter = function (index: number) {
+const currentValue = computed({
+  get: function () {
+    return props.modelValue
+  },
+  set: function (val) {
+    emit('update:modelValue', val)
+  },
+})
+
+const mouseenter = function (index: number, event: any) {
   if (props.readonly) {
     return false
   }
-  for (let i = index; i >= 0; i--) {
-    rates.value[i] = true
-  }
-  for (let i = index + 1; i < props.length; i++) {
-    rates.value[i] = false
-  }
-  emit('update:modelValue', index + 1)
+  currentValue.value = index
 }
 </script>

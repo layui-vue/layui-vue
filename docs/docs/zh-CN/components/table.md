@@ -195,7 +195,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-table :columns="columns" id="id" :dataSource="dataSource" v-model:selectedKeys="selectedKeys"  :checkbox="checkbox" :default-toolbar="defaultToolbar" @row="rowClick" @row-double="rowDoubleClick">
+  <lay-table :columns="columns" id="id" :dataSource="dataSource" v-model:selectedKeys="selectedKeys"  :checkbox="checkbox" :default-toolbar="defaultToolbar" @row="rowClick">
     <template v-slot:toolbar>
       <lay-button size="sm">新增</lay-button>
       <lay-button size="sm">删除</lay-button>
@@ -271,8 +271,9 @@ export default {
 :::
 
 ::: title 表格属性
-
 :::
+
+::: table
 
 | 属性                     | 描述       | 可选值         |
 | ------------------------ | ---------- | -------------- |
@@ -284,19 +285,27 @@ export default {
 | default-toolbar          | 开启工具栏 | `lg` `md` `sm` |
 | size                     | 尺寸       | --             |
 
-::: title 表格事件
-
 :::
+
+::: title 表格事件
+:::
+
+::: table
 
 | 属性       | 描述   | 参数          |
 | ---------- | ------ | ------------- |
 | row        | 行单击 | data : 当前行 |
 | row-double | 行双击 | data : 当前行 |
 
-::: title 表格插槽
-
 :::
+
+::: title 表格插槽
+:::
+
+::: table
 
 | 插槽    | 描述         | 默认 |
 | ------- | ------------ | ---- |
 | toolbar | 自定义工具栏 | --   |
+
+:::

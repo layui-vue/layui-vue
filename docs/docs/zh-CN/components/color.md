@@ -148,6 +148,8 @@ export default {
 
 :::
 
+::: table
+
 | Class           | 描述 | 使用                    |
 | --------------- | ---- | ----------------------- |
 | layui-bg-red    | 赤色 | class="layui-bg-red"    |
@@ -156,3 +158,5 @@ export default {
 | layui-bg-cyan   | 藏青 | class="layui-bg-cyan"   |
 | layui-bg-blue   | 蓝色 | class="layui-bg-blue"   |
 | layui-bg-black  | 雅黑 | class="layui-bg-black"  |
+
+:::

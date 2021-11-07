@@ -29,18 +29,24 @@ export default {
 :::
 
 ::: title Collapse 属性
-
 :::
+
+::: table
 
 | Name     | Description | Accepted Values |
 | -------- | ----------- | --------------- |
 | openKeys | 打开的目录  | `array`         |
 
-::: title Collapse-item 属性
-
 :::
+
+::: title Collapse-item 属性
+:::
+
+::: table
 
 | Name  | Description | Accepted Values |
 | ----- | ----------- | --------------- |
 | id    | 编号        | --              |
 | title | 标题        | --              |
+
+:::

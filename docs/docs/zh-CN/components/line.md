@@ -32,9 +32,12 @@ export default {
 :::
 
 ::: title 分割属性
-
 :::
+
+::: table
 
 | Name  | Description | Accepted Values                               |
 | ----- | ----------- | --------------------------------------------- |
 | theme | 主题        | `orange` `green` `cyan` `blue` `black` `gray` |
+
+:::

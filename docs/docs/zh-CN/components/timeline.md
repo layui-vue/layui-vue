@@ -73,10 +73,13 @@ export default {
 :::
 
 ::: title timeline-item attributes
-
 :::
+
+::: table
 
 |        |          |     |
 | ------ | -------- | --- |
 | simple | 简单模式 | --  |
 | title  | 标题     | --  |
+
+:::

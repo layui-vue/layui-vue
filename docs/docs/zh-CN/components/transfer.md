@@ -86,15 +86,23 @@ export default {
 ::: title transfer 属性
 :::
 
+::: table
+
 | Name       | Description | Accepted Values |
 | ---------- | ----------- | --------------- |
 | dataSource | 数据来源    | --              |
 | title      | 标题        | --              |
 | id         | 主键        | --              |
 
+:::
+
 ::: title transfer 插槽
 :::
+
+::: table
 
 | Name | Description | Accepted Values |
 | ---- | ----------- | --------------- |
 | item | 列表项      | { data }        |
+
+:::

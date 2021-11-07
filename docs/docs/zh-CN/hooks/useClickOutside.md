@@ -33,6 +33,10 @@ export default {
 ::: title 使用备注
 :::
 
+::: table
+
 | 备注           | 描述            | 类型 |
 | -------------- | --------------- | ---- |
 | isClickOutside | 使用 watch 监听 | Ref  |
+
+:::

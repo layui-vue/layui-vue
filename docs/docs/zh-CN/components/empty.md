@@ -47,6 +47,10 @@ export default {
 ::: title empty 属性
 :::
 
+::: table
+
 | 属性        | 描述     | 可选值 |
 | ----------- | -------- | ------ |
 | description | 描述信息 | --     |
+
+:::

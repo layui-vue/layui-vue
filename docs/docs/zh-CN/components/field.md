@@ -58,9 +58,13 @@ export default {
 
 :::
 
-::: title field attributes
+::: title 字段属性
 :::
+
+::: table
 
 | Name  | Description | Accepted Values |
 | ----- | ----------- | --------------- |
 | title | 标题        | --              |
+
+:::

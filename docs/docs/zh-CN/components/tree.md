@@ -214,8 +214,9 @@ function handleClick(node) {
 :::
 
 ::: title tree attributes
-
 :::
+
+::: table
 
 | Name                             | Description                              | Accepted Values |
 | -------------------------------- | ---------------------------------------- | --------------- |
@@ -225,9 +226,13 @@ function handleClick(node) {
 | showLine                         | 是否开启连接线                           | true            |
 | checkedKeys(v-model:checkedKeys) | 开启 showCheckbox 后, 选中的节点         | []              |
 
-::: title TreeData
-
 :::
+
+::: title TreeData
+:::
+
+::: table
+
 | Name | Description | Accepted Values |
 | -------- | ---- | ----------------------- |
 | id | 唯一值 | - |
@@ -236,10 +241,15 @@ function handleClick(node) {
 | disabled | 该节点是否禁用 | false |
 | spread | 该节点是否展开 | false | - |
 
-::: title tree events
-
 :::
+
+::: title tree events
+:::
+
+::: table
 
 | Name       | Description     | Accepted Params |
 | ---------- | --------------- | --------------- |
 | node-click | 节点 click 事件 | --              |
+
+:::

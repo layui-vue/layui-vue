@@ -118,6 +118,8 @@ export default {
 ::: title 轮播属性
 :::
 
+::: table
+
 | 属性      | 描述         | 可选值                    |
 | --------- | ------------ | ------------------------- |
 | v-model   | 当前激活项   | `--`                      |
@@ -125,9 +127,15 @@ export default {
 | indicator | 控制器位置   | `inside` `outside` `none` |
 | arrow     | 切换按钮状态 | `hover` `always` `none`   |
 
+:::
+
 ::: title 轮播事件
 :::
+
+::: table
 
 | 事件   | 描述     | 可选值 |
 | ------ | -------- | ------ |
 | change | 切换回调 | id     |
+
+:::

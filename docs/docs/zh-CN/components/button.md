@@ -283,17 +283,26 @@ export default {
 ::: title 按钮属性
 :::
 
-| 属性   | 描述   | 可选值                                        |
-| ------ | ------ | --------------------------------------------- |
-| type   | 主题   | `primary` `normal` `warm` `danger` `disabled` |
-| size   | 尺寸   | `lg` `sm` `xs`                                |
-| fluid  | 最大化 | `true` `false`                                |
-| radius | 圆角   | `true` `false`                                |
-| border | 边框   | `green` `blue` `orange` `red` `black`         |
+::: table
+
+| 属性   | 描述         | 可选值                              |
+| ------ | -----------  | --------------------------------------------- |
+| type   | 主题         | `primary` `normal` `warm` `danger` `disabled` |
+| size   | 尺寸         | `lg` `sm` `xs`                                |
+| fluid  | 最大化       | `true` `false`                                |
+| radius | 圆角         | `true` `false`                                |
+| border | 边框         | `green` `blue` `orange` `red` `black`         |
+
+:::
 
 ::: title 按钮事件
 :::
 
-| 事件  | 描述     | 参数 |
-| ----- | -------- | ---- |
-| click | 单击事件 | `--` |
+::: table
+
+| 事件   | 描述         | 参数                              | 
+| ------ | -----------  | --------------------------------------------- |
+| click   | 单击事件         | `--` |
+
+:::
+

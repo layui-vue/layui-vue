@@ -1,6 +1,6 @@
 <template>
   <div class="lay-code">
-    <div class="source">
+    <div class="source" id="source">
       <slot />
     </div>
     <div ref="meta" class="meta">
@@ -16,7 +16,7 @@
       class="control"
     >
       <i
-        class="layui-icon layui-icon-file"
+        class="layui-icon layui-icon-file" @click="copy"
       />
       <i
         class="layui-icon layui-icon-fonts-code"  @click="toggle"
@@ -36,6 +36,12 @@ const show = ref(false)
 
 const toggle = function () {
   show.value = !show.value
+}
+
+const copy = function () {
+  var Url2  =document.getElementById("source") as any;
+  Url2.select();
+  document.execCommand("Copy");
 }
 
 onMounted(() => {

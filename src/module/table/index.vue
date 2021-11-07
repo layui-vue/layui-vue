@@ -9,6 +9,23 @@
           <slot name="toolbar"></slot>
         </div>
         <div v-if="defaultToolbar" class="layui-table-tool-self">
+          <lay-dropdown>
+            <div class="layui-inline" title="筛选列" lay-event="LAYTABLE_COLS">
+              <i class="layui-icon layui-icon-cols"></i>
+            </div>
+            <template #content>
+              <div style="padding:10px">
+              <table-item-checkbox
+                skin="primary"
+                v-for="column in columns"
+                v-model="tableColumns"
+                :label="column"
+                :key="column"
+                >{{ column.title }}</table-item-checkbox
+              >
+              </div>
+            </template>
+          </lay-dropdown>
           <div
             class="layui-inline"
             title="打印"
@@ -36,14 +53,16 @@
                     />
                   </div>
                 </th>
-                <th v-for="column in columns" :key="column">
-                  <div
-                    class="layui-table-cell"
-                    :style="{ width: column.width }"
-                  >
-                    <span>{{ column.title }}</span>
-                  </div>
-                </th>
+                <template v-for="column in columns" :key="column">
+                  <th v-if="tableColumns.includes(column)">
+                    <div
+                      class="layui-table-cell"
+                      :style="{ width: column.width }"
+                    >
+                      <span>{{ column.title }}</span>
+                    </div>
+                  </th>
+                </template>
               </tr>
             </thead>
           </table>
@@ -67,28 +86,31 @@
                       </table-item-checkbox>
                     </div>
                   </td>
-                  <template v-for="column in columns" :key="column">
-                    <template v-if="column.customSlot">
-                      <td class="layui-table-cell">
-                        <div :style="{ width: column.width }">
-                          <slot :name="column.customSlot" :data="data" />
-                        </div>
-                      </td>
-                    </template>
 
-                    <template
-                      v-for="(value, key, index) in data"
-                      v-else
-                      :key="index"
-                    >
-                      <td v-if="column.key == key" class="layui-table-cell">
-                        <div :style="{ width: column.width }">
-                          <span v-if="column.slot">
-                            <slot :name="column.slot" :data="data" />
-                          </span>
-                          <span v-else> {{ value }} </span>
-                        </div>
-                      </td>
+                  <template v-for="column in columns" :key="column">
+                    <template v-if="tableColumns.includes(column)">
+                      <template v-if="column.customSlot">
+                        <td class="layui-table-cell">
+                          <div :style="{ width: column.width }">
+                            <slot :name="column.customSlot" :data="data" />
+                          </div>
+                        </td>
+                      </template>
+
+                      <template
+                        v-else
+                        v-for="(value, key) in data"
+                        :key="value"
+                      >
+                        <td v-if="column.key == key" class="layui-table-cell">
+                          <div :style="{ width: column.width }">
+                            <span v-if="column.slot">
+                              <slot :name="column.slot" :data="data" />
+                            </span>
+                            <span v-else> {{ value }} </span>
+                          </div>
+                        </td>
+                      </template>
                     </template>
                   </template>
                 </tr>
@@ -132,7 +154,7 @@ import {
   useSlots,
   watch,
   withDefaults,
-  defineEmits,
+  defineEmits
 } from 'vue'
 import { Recordable } from '/@src/module/type'
 
@@ -167,6 +189,7 @@ const slots = slot.default && slot.default()
 
 const allChecked = ref(false)
 const tableSelectedKeys = ref([...props.selectedKeys])
+const tableColumns = ref([...props.columns])
 
 const changeAll = function ({ checked, value }: any) {
   const ids = props.dataSource.map((item: any) => {
@@ -216,3 +239,12 @@ const print = function () {
   document.body.innerHTML = oldContent
 }
 </script>
+
+<style scoped>
+.laytable-cell-checkbox {
+  width: 34px;
+}
+.layui-table-col-special {
+  width: 34px;
+}
+</style>

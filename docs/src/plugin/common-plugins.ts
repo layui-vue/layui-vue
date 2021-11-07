@@ -7,6 +7,7 @@ import demo from './demo'
 import createTitle from './create-title'
 import createBlock from './create-block'
 import createDescribe from './create-describe'
+import createTable from './create-table'
 import preWrapper from './pre-wrapper'
 
 const plugins = [
@@ -24,9 +25,10 @@ const plugins = [
       md.use(snippet)
         .use(preWrapper)
         .use(container, 'demo', demo)
-        .use(...createBlock('block', '描述信息'))
-        .use(...createTitle('title', '标题信息'))
-        .use(...createDescribe('describe', '描述信息'))
+        .use(...createTable('table',''))
+        .use(...createBlock('block', ''))
+        .use(...createTitle('title', ''))
+        .use(...createDescribe('describe', ''))
     },
   }),
 ] as any

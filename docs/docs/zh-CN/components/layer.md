@@ -237,6 +237,8 @@ export default {
 ::: title 弹层属性
 :::
 
+::: table
+
 | 备注            | 描述          | 默认值  |
 | --------------- | ------------- | ------- |
 | title           | 标题          | --      |
@@ -250,4 +252,7 @@ export default {
 | shade           | 开启遮盖      | --      |
 | shadeClose      | 遮盖点击关闭  | --      |
 | zIndex          | 自定义层级    | --      |
-| type            | 类型          | `1`,`2` |
+| type            | 类型          | `1: component` `2: iframe` |
+| closeBtn        | 显示关闭          | true |
+
+:::

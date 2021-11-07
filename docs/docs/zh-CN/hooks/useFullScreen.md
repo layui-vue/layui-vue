@@ -32,7 +32,11 @@ export default {
 ::: title 使用备注
 :::
 
+::: table
+
 | 事件         | 描述     | 类型     |
 | ------------ | -------- | -------- |
 | fullScreen   | 全屏切换 | Function |
 | isFullScreen | 当前状态 | Ref      |
+
+::: 

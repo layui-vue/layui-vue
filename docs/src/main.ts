@@ -5,6 +5,7 @@ import { Router } from 'vue-router'
 import Layui from '/@src/index'
 import LayCode from './components/LayCode.vue'
 import LaySearch from './components/LaySearch.vue'
+import LayTableBox from './components/LayTableBox.vue'
 import './styles/index.css'
 
 export function createApp(): {
@@ -21,6 +22,7 @@ export function createApp(): {
     .use(router)
     .component('LayCode', LayCode)
     .component('LaySearch', LaySearch)
+    .component('LayTableBox', LayTableBox)
     .use(Layui)
 
   return { app, router }

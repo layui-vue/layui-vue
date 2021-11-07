@@ -172,6 +172,8 @@ export default {
 ::: title 布局组件
 :::
 
+::: table
+
 | 组件       | 描述 |     |
 | ---------- | ---- | --- |
 | lay-layout | 容器 | --  |
@@ -180,3 +182,5 @@ export default {
 | lay-side   | 侧边 | --  |
 | lay-body   | 内容 | --  |
 | lay-footer | 底部 | --  |
+
+:::

@@ -1,5 +1,5 @@
 <template>
-  <span @click.stop="handleClick">
+  <div @click.stop="handleClick">
     <input type="checkbox" :name="name" :value="label" />
     <div
       class="layui-unselect"
@@ -15,7 +15,7 @@
       <span><slot /></span>
       <i class="layui-icon layui-icon-ok" />
     </div>
-  </span>
+  </div>
 </template>
 
 <script setup name="LayCheckbox" lang="ts">

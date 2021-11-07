@@ -19,8 +19,12 @@ export default {
 ::: title icon-picker 属性
 :::
 
+::: table
+
 |            |          |     |
 | ---------- | -------- | --- |
 | v-model    | 默认值   | --  |
 | page       | 开启分页 | --  |
 | showSearch | 启用搜索 | --  |
+
+:::
