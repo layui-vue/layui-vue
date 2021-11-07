@@ -15,7 +15,7 @@
     :class="[
       'layer-anim-0' + anim,
       type === 1 ? 'layui-layer-dialog' : '',
-      type === 2 ? 'layui-layer-iframe' : ''
+      type === 2 ? 'layui-layer-iframe' : '',
     ]"
     style="position: fixed"
     :style="{
