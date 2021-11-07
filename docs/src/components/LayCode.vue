@@ -1,6 +1,6 @@
 <template>
   <div class="lay-code">
-    <div class="source" id="source">
+    <div id="source" class="source">
       <slot />
     </div>
     <div ref="meta" class="meta">
@@ -11,16 +11,9 @@
         <slot name="code" />
       </div>
     </div>
-    <div
-      :class="{ 'is-fixed': isFixContorl }"
-      class="control"
-    >
-      <i
-        class="layui-icon layui-icon-file" @click="copy"
-      />
-      <i
-        class="layui-icon layui-icon-fonts-code"  @click="toggle"
-      />
+    <div :class="{ 'is-fixed': isFixContorl }" class="control">
+      <i class="layui-icon layui-icon-file" @click="copy" />
+      <i class="layui-icon layui-icon-fonts-code" @click="toggle" />
     </div>
   </div>
 </template>
@@ -39,9 +32,9 @@ const toggle = function () {
 }
 
 const copy = function () {
-  var Url2  =document.getElementById("source") as any;
-  Url2.select();
-  document.execCommand("Copy");
+  var Url2 = document.getElementById('source') as any
+  Url2.select()
+  document.execCommand('Copy')
 }
 
 onMounted(() => {

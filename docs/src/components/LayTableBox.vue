@@ -1,7 +1,7 @@
 <template>
-    <div class="lay-table-box">
-        <slot></slot>
-    </div>
+  <div class="lay-table-box">
+    <slot></slot>
+  </div>
 </template>
 <style>
 .lay-table-box table {

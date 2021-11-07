@@ -82,10 +82,10 @@ export default {
 
 ::: table
 
-| 属性                 | 描述   | 备注 |
-| ---------------------| ------ | ---- |
-| v-model:selectedKey  | 选中项 | --   |
-| v-model:openKeys     | 打开项 | --   |
+| 属性                | 描述   | 备注 |
+| ------------------- | ------ | ---- |
+| v-model:selectedKey | 选中项 | --   |
+| v-model:openKeys    | 打开项 | --   |
 
 :::
 

@@ -25,7 +25,7 @@ const plugins = [
       md.use(snippet)
         .use(preWrapper)
         .use(container, 'demo', demo)
-        .use(...createTable('table',''))
+        .use(...createTable('table', ''))
         .use(...createBlock('block', ''))
         .use(...createTitle('title', ''))
         .use(...createDescribe('describe', ''))

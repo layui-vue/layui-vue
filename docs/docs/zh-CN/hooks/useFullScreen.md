@@ -39,4 +39,4 @@ export default {
 | fullScreen   | 全屏切换 | Function |
 | isFullScreen | 当前状态 | Ref      |
 
-::: 
+:::

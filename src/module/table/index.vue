@@ -14,15 +14,15 @@
               <i class="layui-icon layui-icon-cols"></i>
             </div>
             <template #content>
-              <div style="padding:10px">
-              <table-item-checkbox
-                skin="primary"
-                v-for="column in columns"
-                v-model="tableColumns"
-                :label="column"
-                :key="column"
-                >{{ column.title }}</table-item-checkbox
-              >
+              <div style="padding: 10px">
+                <table-item-checkbox
+                  v-for="column in columns"
+                  :key="column"
+                  v-model="tableColumns"
+                  skin="primary"
+                  :label="column"
+                  >{{ column.title }}</table-item-checkbox
+                >
               </div>
             </template>
           </lay-dropdown>
@@ -98,8 +98,8 @@
                       </template>
 
                       <template
-                        v-else
                         v-for="(value, key) in data"
+                        v-else
                         :key="value"
                       >
                         <td v-if="column.key == key" class="layui-table-cell">
@@ -154,7 +154,7 @@ import {
   useSlots,
   watch,
   withDefaults,
-  defineEmits
+  defineEmits,
 } from 'vue'
 import { Recordable } from '/@src/module/type'
 

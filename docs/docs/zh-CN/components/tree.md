@@ -233,13 +233,13 @@ function handleClick(node) {
 
 ::: table
 
-| Name | Description | Accepted Values |
-| -------- | ---- | ----------------------- |
-| id | 唯一值 | - |
-| title | 节点名称 | - |
-| children | 子节点 | [] |
-| disabled | 该节点是否禁用 | false |
-| spread | 该节点是否展开 | false | - |
+| Name     | Description    | Accepted Values |
+| -------- | -------------- | --------------- | --- |
+| id       | 唯一值         | -               |
+| title    | 节点名称       | -               |
+| children | 子节点         | []              |
+| disabled | 该节点是否禁用 | false           |
+| spread   | 该节点是否展开 | false           | -   |
 
 :::
 
