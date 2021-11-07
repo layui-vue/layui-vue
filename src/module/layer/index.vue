@@ -65,7 +65,11 @@
         @click="closeHandle"
       ></a
     ></span>
-    <div v-if="btn && btn.length > 0" class="layui-layer-btn" :class="['layui-layer-btn-' + btnAlign]">
+    <div
+      v-if="btn && btn.length > 0"
+      class="layui-layer-btn"
+      :class="['layui-layer-btn-' + btnAlign]"
+    >
       <template v-for="(b, index) in btn" :key="index">
         <a :class="['layui-layer-btn' + index]" @click="b.callback">{{
           b.text
@@ -130,7 +134,7 @@ const props = withDefaults(
     shade: false,
     shadeClose: true,
     closeBtn: true,
-    btnAlign: 'l'
+    btnAlign: 'l',
   }
 )
 
