@@ -6,7 +6,9 @@
 <template>
   <lay-button @click="changeVisible1" type="primary">基础使用</lay-button>
   <lay-layer title="基础使用" v-model:visible="visible1">
+    <div style="padding:10px">
     这是一个基础弹窗
+    </div>
   </lay-layer>
 </template>
 
@@ -39,7 +41,9 @@ export default {
 <template>
   <lay-button @click="changeVisible2" type="primary">允许拖动</lay-button>
   <lay-layer title="允许拖动" v-model:visible="visible2" move="true">
-    这是一个可以拖拽的弹窗
+    <div style="padding:10px">
+      这是一个可以拖拽的弹窗
+    </div>
   </lay-layer>
 </template>
 
@@ -72,7 +76,9 @@ export default {
 <template>
   <lay-button @click="changeVisible3" type="primary">放大缩小</lay-button>
   <lay-layer title="放大缩小" v-model:visible="visible3" move="true" maxmin="true">
+      <div style="padding:10px">
         该弹窗支持放大缩小
+      </div>
   </lay-layer>
 </template>
 
@@ -105,7 +111,9 @@ export default {
 <template>
   <lay-button @click="changeVisible4" type="primary">指定位置</lay-button>
   <lay-layer title="指定位置" v-model:visible="visible4" move="true" :offset="['100px','100px']">
-        指定弹窗显示的默认位置
+      <div style="padding:10px">
+      指定弹窗显示的默认位置
+      </div>
   </lay-layer>
 </template>
 
@@ -171,7 +179,9 @@ export default {
 <template>
   <lay-button @click="changeVisible6" type="primary">定义操作</lay-button>
   <lay-layer title="定义操作" v-model:visible="visible6" move="true" :btn="btn6">
+    <div style="padding:10px">
     定义一组弹窗操作按钮
+    </div>
   </lay-layer>
 </template>
 
@@ -209,7 +219,9 @@ export default {
 <template>
   <lay-button @click="changeVisible7" type="primary">开启遮盖</lay-button>
   <lay-layer title="开启遮盖" move="true" shade="true" v-model:visible="visible7">
-        允许点击遮盖层关闭弹窗
+    <div style="padding:10px">
+      允许点击遮盖层关闭弹窗
+    </div>
   </lay-layer>
 </template>
 
@@ -256,5 +268,6 @@ export default {
 | closeBtn        | 显示关闭      | true                       |
 | btn             | 按钮          |                            |
 | btnAlign        | 按钮布局      | `l` `r` `c`                |
+| anim            | 弹层动画      | `0` `-` `6`                |
 
 :::

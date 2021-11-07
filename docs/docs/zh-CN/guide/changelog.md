@@ -17,6 +17,7 @@
 [新增] layer 弹层 btnAlign 属性, 允许自定义按钮布局。<br>
 [修复] mackdown 文档 table 样式对 table 组件的污染。<br>
 [优化] layer 弹层 border 样式。<br>
+[优化] layer 弹层 id 默认生成方式, 使用 Guid 作为编号。<br>
 [优化] carousel 轮播逻辑, 允许循环切换。<br>
 [升级] vue-router 4.0.12 版本。<br>
 [升级] vue 3.2.21 版本。<br>

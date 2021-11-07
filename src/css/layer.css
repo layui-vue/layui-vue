@@ -509,7 +509,6 @@ html #layuicss-layer {
 
 .layui-layer-dialog .layui-layer-content {
   position: relative;
-  padding: 20px;
   line-height: 24px;
   word-break: break-all;
   height: 100%;
@@ -754,10 +753,6 @@ html #layuicss-layer {
   height: 100px;
   line-height: 20px;
   padding: 6px 10px;
-}
-
-.layui-layer-prompt .layui-layer-content {
-  padding: 20px;
 }
 
 .layui-layer-prompt .layui-layer-btn {

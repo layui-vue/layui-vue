@@ -11,11 +11,12 @@
   <div
     v-if="visible"
     :id="id"
-    class="layui-layer layui-layer-border"
-    :class="{
-      'layui-layer-dialog': type === 1,
-      'layui-layer-iframe': type === 2,
-    }"
+    class="layui-layer layui-layer-border layer-anim"
+    :class="[
+      'layer-anim-0' + anim,
+      type === 1 ? 'layui-layer-dialog' : '',
+      type === 2 ? 'layui-layer-iframe' : ''
+    ]"
     style="position: fixed"
     :style="{
       top: top,
@@ -119,6 +120,7 @@ const props = withDefaults(
     shadeClose?: boolean
     closeBtn?: boolean
     btnAlign?: string
+    anim?: number
   }>(),
   {
     id: 'layer-' + guid(),
@@ -136,6 +138,7 @@ const props = withDefaults(
     shadeClose: true,
     closeBtn: true,
     btnAlign: 'l',
+    anim: 0,
   }
 )
 
