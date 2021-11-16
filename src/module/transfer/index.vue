@@ -71,7 +71,6 @@
 import { computed, defineProps, Ref, ref, useSlots, watch } from 'vue'
 import { Recordable } from '/@src/module/type'
 import transferCheckbox from './component/checkbox.vue'
-import { check } from 'prettier'
 
 const slot = useSlots()
 

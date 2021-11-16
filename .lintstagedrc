@@ -1,4 +1,0 @@
-{
-  "*.{ts,vue,js,tsx,jsx}": ["prettier --write --no-verify ", "eslint --fix"],
-  "*.{html,css,md,json}": "prettier --write",
-}

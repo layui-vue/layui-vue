@@ -47,7 +47,6 @@ function renderPreloadLink(file) {
   } else if (file.endsWith('.css')) {
     return `<link rel="stylesheet" href="${file}">`
   } else {
-    // TODO
     return ''
   }
 }

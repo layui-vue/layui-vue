@@ -1,5 +1,0 @@
-#!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
-pnpx --no-install commitlint --edit ""
-pnpx pretty-quick --staged
-pnpx lint-staged

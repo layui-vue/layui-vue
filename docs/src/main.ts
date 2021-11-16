@@ -6,7 +6,7 @@ import Layui from '/@src/index'
 import LayCode from './components/LayCode.vue'
 import LaySearch from './components/LaySearch.vue'
 import LayTableBox from './components/LayTableBox.vue'
-import './styles/index.css'
+import './assets/css/index.css'
 
 export function createApp(): {
   app: App<Element>
