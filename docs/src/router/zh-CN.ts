@@ -108,7 +108,7 @@ const zhCN = [
           },
           {
             path: '/zh-CN/components/card',
-            component: () => import('../../docs/zh-CN/components/cards.md'),
+            component: () => import('../../docs/zh-CN/components/card.md'),
             meta: { title: '卡片' },
           },
           {

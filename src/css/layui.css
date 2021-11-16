@@ -1258,14 +1258,6 @@ a cite {
   margin: 0;
 }
 
-.layui-panel {
-  border-width: 1px;
-  border-style: solid;
-  border-radius: 2px;
-  background-color: #fff;
-  color: #666;
-}
-
 .layui-bg-black,
 .layui-bg-blue,
 .layui-bg-cyan,

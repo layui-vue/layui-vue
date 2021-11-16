@@ -61,7 +61,7 @@
     <div style="margin-left: 10%; margin-right: 10%">
       <div>
         <ul class="layui-row layui-col-space30 site-idea">
-          <li class="layui-col-md4">
+          <li class="layui-col-md8">
             <div>
               <fieldset class="layui-elem-field layui-field-title">
                 <legend>返璞归真</legend>
@@ -72,7 +72,7 @@
               </fieldset>
             </div>
           </li>
-          <li class="layui-col-md4">
+          <li class="layui-col-md8">
             <div>
               <fieldset class="layui-elem-field layui-field-title">
                 <legend>双面体验</legend>
@@ -83,7 +83,7 @@
               </fieldset>
             </div>
           </li>
-          <li class="layui-col-md4">
+          <li class="layui-col-md8">
             <div>
               <fieldset class="layui-elem-field layui-field-title">
                 <legend>星辰大海</legend>
