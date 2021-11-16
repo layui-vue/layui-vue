@@ -6,17 +6,17 @@ export default {
 
 <script setup lang="ts">
 import "./index.less";
-import { computed } from 'vue';
+import { computed } from "vue";
 
 export interface LayButtonProps {
-    type?: 'primary' | 'normal' | 'warm' | 'danger'
-    size?: 'lg' | 'sm' | 'xs'
-    fluid?: boolean
-    radius?: boolean
-    border?: 'green' | 'blue' | 'orange' | 'red' | 'black'
-    disabled?: boolean
-    loading?: boolean
-    nativeType?: 'button' | 'submit' | 'reset'
+  type?: "primary" | "normal" | "warm" | "danger";
+  size?: "lg" | "sm" | "xs";
+  fluid?: boolean;
+  radius?: boolean;
+  border?: "green" | "blue" | "orange" | "red" | "black";
+  disabled?: boolean;
+  loading?: boolean;
+  nativeType?: "button" | "submit" | "reset";
 }
 
 const props = withDefaults(defineProps<LayButtonProps>(), {
@@ -29,11 +29,11 @@ const props = withDefaults(defineProps<LayButtonProps>(), {
 
 const classes = computed(() => {
   return [
-      props.type ? 'layui-btn-' + props.type : '',
-      props.size ? 'layui-btn-' + props.size : '',
-      props.border ? 'layui-border-' + props.border : '',
-  ]
-})
+    props.type ? `layui-btn-${props.type}` : "",
+    props.size ? `layui-btn-${props.size}` : "",
+    props.border ? `layui-border-${props.border}` : "",
+  ];
+});
 </script>
 
 <template>
@@ -41,11 +41,11 @@ const classes = computed(() => {
     class="layui-btn"
     :class="[
       {
-       'layui-btn-fluid' : fluid,
-       'layui-btn-radius' : radius,
-       'layui-btn-disabled' : disabled
+        'layui-btn-fluid': fluid,
+        'layui-btn-radius': radius,
+        'layui-btn-disabled': disabled
       },
-      classes
+      classes,
     ]"
     :type="nativeType"
   >

@@ -8,12 +8,14 @@ export default {
 import { computed, defineProps } from "vue";
 import "./index.less";
 
-const props = defineProps<{
+export interface LayRowProps {
   space?: string;
-}>();
+}
+
+const props = defineProps<LayRowProps>();
 
 const classes = computed(() => {
-  return [props.space ? "layui-col-space" + props.space : ""];
+  return [props.space ? `layui-col-space${props.space}` : ""];
 });
 </script>
 

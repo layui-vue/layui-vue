@@ -1,19 +1,15 @@
-<template>
-  <div class="layui-footer">
-    <slot />
-  </div>
-</template>
-
 <script lang="ts">
 export default {
   name: 'LayFooter',
 }
 </script>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import "./index.less"
+</script>
 
-<style>
-.layui-footer {
-  box-sizing: border-box;
-}
-</style>
+<template>
+  <div class="layui-footer">
+    <slot />
+  </div>
+</template>

@@ -1,38 +1,30 @@
-<template>
-  <div class="layui-side" :style="style">
-    <slot />
-  </div>
-</template>
-
 <script lang="ts">
 export default {
-  name: 'LaySide',
-}
+  name: "LaySide",
+};
 </script>
 
 <script setup lang="ts">
-import { computed, CSSProperties, defineProps } from 'vue'
+import { computed, defineProps, CSSProperties } from "vue";
+import "./index.less";
 
-const props = withDefaults(
-  defineProps<{
-    width?: string | number
-  }>(),
-  {
-    width: '200',
-  }
-)
+export interface LaySideProps {
+  width?: string | number;
+}
 
-const style = computed<CSSProperties>(() => {
+const props = withDefaults(defineProps<LaySideProps>(), {
+  width: "200",
+});
+
+const styles = computed<CSSProperties>(() => {
   return {
     width: `${props.width}px`,
-  }
-})
+  };
+});
 </script>
 
-<style>
-.layui-side {
-  overflow: auto;
-  box-sizing: border-box;
-  min-height: 300px;
-}
-</style>
+<template>
+  <div class="layui-side" :style="styles">
+    <slot />
+  </div>
+</template>
