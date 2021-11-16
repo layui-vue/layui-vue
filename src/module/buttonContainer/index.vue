@@ -4,4 +4,12 @@
   </div>
 </template>
 
-<script setup name="LayButtonContainer" lang="ts"></script>
+<script lang="ts">
+export default {
+  name: "LayButtonContainer",
+};
+</script>
+
+<script setup lang="ts">
+import "./index.less";
+</script>

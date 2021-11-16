@@ -12,9 +12,6 @@
     "esModuleInterop": true,
     "declarationDir": "types",
     "lib": ["ESNext", "DOM"],
-    "paths": {
-      "/@src/*": ["./src/*"]
-    }
   },
   "include": ["src/**/*", "shims-vue.d.ts"],
   "exclude": ["node_modules"]

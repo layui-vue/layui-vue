@@ -1,13 +1,51 @@
+<script lang="ts">
+export default {
+  name: "LayButton",
+};
+</script>
+
+<script setup lang="ts">
+import "./index.less";
+import { computed } from 'vue';
+
+export interface LayButtonProps {
+    type?: 'primary' | 'normal' | 'warm' | 'danger'
+    size?: 'lg' | 'sm' | 'xs'
+    fluid?: boolean
+    radius?: boolean
+    border?: 'green' | 'blue' | 'orange' | 'red' | 'black'
+    disabled?: boolean
+    loading?: boolean
+    nativeType?: 'button' | 'submit' | 'reset'
+}
+
+const props = withDefaults(defineProps<LayButtonProps>(), {
+  fluid: false,
+  radius: false,
+  disabled: false,
+  loading: false,
+  nativeType: "button",
+});
+
+const classes = computed(() => {
+  return [
+      props.type ? 'layui-btn-' + props.type : '',
+      props.size ? 'layui-btn-' + props.size : '',
+      props.border ? 'layui-border-' + props.border : '',
+  ]
+})
+</script>
+
 <template>
   <button
     class="layui-btn"
     :class="[
-      type ? 'layui-btn-' + type : '',
-      size ? 'layui-btn-' + size : '',
-      fluid ? 'layui-btn-fluid' : '',
-      radius ? 'layui-btn-radius' : '',
-      border ? 'layui-border-' + border : '',
-      disabled ? 'layui-btn-disabled' : '',
+      {
+       'layui-btn-fluid' : fluid,
+       'layui-btn-radius' : radius,
+       'layui-btn-disabled' : disabled
+      },
+      classes
     ]"
     :type="nativeType"
   >
@@ -24,24 +62,3 @@
     <slot v-else />
   </button>
 </template>
-
-<script lang="ts">
-export default {
-  name: 'LayButton',
-}
-</script>
-
-<script setup lang="ts">
-import { defineProps } from 'vue'
-
-const props = defineProps<{
-  type?: string
-  size?: string
-  fluid?: boolean
-  radius?: boolean
-  border?: string
-  disabled?: boolean
-  loading?: boolean
-  nativeType?: string
-}>()
-</script>
