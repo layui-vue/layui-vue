@@ -5281,27 +5281,6 @@ body .layui-util-face .layui-layer-content {
   width: 28px;
 }
 
-.layui-empty {
-  margin: 0 8px;
-  font-size: 14px;
-  line-height: 22px;
-  text-align: center;
-}
-
-.layui-empty-image {
-  height: 100px;
-  margin-bottom: 8px;
-}
-
-.layui-empty-image img {
-  height: 100%;
-  margin: auto;
-}
-
-.layui-empty-description {
-  margin: 0;
-}
-
 .layui-anim {
   -webkit-animation-duration: 0.3s;
   -webkit-animation-fill-mode: both;

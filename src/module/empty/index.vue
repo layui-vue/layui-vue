@@ -1,3 +1,23 @@
+<script lang="ts">
+export default {
+  name: "LayEmpty",
+};
+</script>
+
+<script setup lang="ts">
+import { defineProps, withDefaults } from "vue";
+import "./index.less";
+
+export interface LayEmptyProps {
+  description?: string;
+  image?: string;
+}
+
+const props = withDefaults(defineProps<LayEmptyProps>(), {
+  description: "暂无数据",
+});
+</script>
+
 <template>
   <div class="layui-empty">
     <div class="layui-empty-image">
@@ -8,16 +28,3 @@
     </div>
   </div>
 </template>
-
-<script setup name="LayEmpty" lang="ts">
-import { defineProps, withDefaults } from 'vue'
-
-const props = withDefaults(
-  defineProps<{
-    description?: string
-  }>(),
-  {
-    description: '暂无数据',
-  }
-)
-</script>
