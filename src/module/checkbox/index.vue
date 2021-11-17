@@ -1,3 +1,35 @@
+<script lang="ts">
+export default {
+  name: "LayCheckbox",
+};
+</script>
+
+<script setup name="LayCheckbox" lang="ts">
+import { computed, defineProps } from "vue";
+import "./index.less";
+
+export interface LayCheckbox {
+  name?: string;
+  skin?: string;
+  label?: string;
+  modelValue?: boolean;
+  disabled?: boolean;
+}
+
+const props = withDefaults(defineProps<LayCheckbox>(), {
+  modelValue: false
+});
+
+const emit = defineEmits(["update:modelValue", "change"]);
+
+const handleClick = function () {
+  if (!props.disabled) {
+    emit("update:modelValue", !props.modelValue);
+    emit("change", { checked: !props.modelValue, value: props.label });
+  }
+};
+</script>
+
 <template>
   <span @click.stop="handleClick">
     <input type="checkbox" :name="name" :value="label" />
@@ -14,26 +46,3 @@
     </div>
   </span>
 </template>
-
-<script setup name="LayCheckbox" lang="ts">
-import { defineProps, useSlots } from 'vue'
-
-const slot = useSlots()
-
-const props = defineProps<{
-  name?: string
-  skin?: string
-  label?: string
-  checked?: boolean
-  disabled?: boolean
-}>()
-
-const emit = defineEmits(['update:checked', 'change'])
-
-const handleClick = function () {
-  if (!props.disabled) {
-    emit('update:checked', !props.checked)
-    emit('change', { checked: !props.checked, value: props.label })
-  }
-}
-</script>

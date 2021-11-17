@@ -1049,19 +1049,6 @@ a cite {
   top: 0;
 }
 
-.layui-container {
-  position: relative;
-  margin: 0 auto;
-  padding: 0 15px;
-  box-sizing: border-box;
-}
-
-.layui-fluid {
-  position: relative;
-  margin: 0 auto;
-  padding: 0 15px;
-}
-
 .layui-btn,
 .layui-input,
 .layui-select,
@@ -1072,21 +1059,6 @@ a cite {
   transition: all 0.3s;
   -webkit-transition: all 0.3s;
   box-sizing: border-box;
-}
-
-.layui-elem-quote {
-  margin-bottom: 10px;
-  padding: 15px;
-  line-height: 1.6;
-  border-left: 5px solid #5fb878;
-  border-radius: 0 2px 2px 0;
-  background-color: #fafafa;
-}
-
-.layui-quote-nm {
-  border-style: solid;
-  border-width: 1px 1px 1px 5px;
-  background: 0 0;
 }
 
 .layui-elem-field {
@@ -1211,51 +1183,9 @@ a cite {
   position: relative;
 }
 
-.layui-card {
-  margin-bottom: 15px;
-  border-radius: 2px;
-  background-color: #fff;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-}
-
 .layui-form-select dl,
 .layui-panel {
   box-shadow: 1px 1px 4px rgb(0 0 0 / 8%);
-}
-
-.layui-card:last-child {
-  margin-bottom: 0;
-}
-
-.layui-card-header {
-  height: 42px;
-  line-height: 42px;
-  padding: 0 15px;
-  border-bottom: 1px solid #f6f6f6;
-  color: #333;
-  border-radius: 2px 2px 0 0;
-  font-size: 14px;
-}
-
-.layui-card-body {
-  padding: 10px 15px;
-  line-height: 24px;
-}
-
-.layui-card-body[pad15] {
-  padding: 15px;
-}
-
-.layui-card-body[pad20] {
-  padding: 20px;
-}
-
-.layui-card-body .layui-table {
-  margin: 5px 0;
-}
-
-.layui-card .layui-tab {
-  margin: 0;
 }
 
 .layui-bg-black,
@@ -4199,40 +4129,6 @@ body .layui-table-tips .layui-layer-content {
   position: relative;
   margin-bottom: 10px;
   line-height: 22px;
-}
-
-.layui-badge,
-.layui-badge-dot,
-.layui-badge-rim {
-  position: relative;
-  display: inline-block;
-  padding: 0 6px;
-  font-size: 12px;
-  text-align: center;
-  background-color: #ff5722;
-  color: #fff;
-  border-radius: 2px;
-}
-
-.layui-badge {
-  height: 18px;
-  line-height: 18px;
-}
-
-.layui-badge-dot {
-  width: 8px;
-  height: 8px;
-  padding: 0;
-  border-radius: 50%;
-}
-
-.layui-badge-rim {
-  height: 18px;
-  line-height: 18px;
-  border-width: 1px;
-  border-style: solid;
-  background-color: #fff;
-  color: #666;
 }
 
 .layui-btn .layui-badge,

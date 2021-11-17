@@ -12,12 +12,14 @@
 </template>
 
 <script setup name="LayCard" lang="ts">
-import { useSlots } from 'vue'
+import { useSlots } from "vue";
+import "./index.less";
 
-const slot = useSlots()
+const slot = useSlots();
 
-const props =
-  defineProps<{
-    title?: string
-  }>()
+export interface LayCardProps {
+  title?: string;
+}
+
+const props = defineProps<LayCardProps>();
 </script>

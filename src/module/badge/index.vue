@@ -1,26 +1,38 @@
+<script lang="ts">
+export default {
+  name: "LayBadge",
+};
+</script>
+
+<script setup lang="ts">
+import { computed, defineProps } from "vue";
+import "./index.less";
+
+export interface LayBadgeProps {
+  type?: "dot" | "rim";
+  theme?: string;
+  color?: string;
+}
+const props = defineProps<LayBadgeProps>();
+
+const classes = computed(() => {
+  return [
+    {
+      "layui-badge": !props.type,
+      "layui-badge-dot": props.type == "dot",
+      "layui-badge-rim": props.type == "rim",
+    },
+    `layui-bg-${props.theme}`,
+  ];
+});
+
+const styles = computed(() => {
+  props.color ? `background-color: ${props.color}` : "";
+});
+</script>
+
 <template>
-  <span :class="classList" :style="styleList">
+  <span :class="classes" :style="styles">
     <slot v-if="type != 'dot'" />
   </span>
 </template>
-
-<script setup name="LayBadge" lang="ts">
-import { defineProps } from 'vue'
-
-const props = defineProps<{
-  type?: string
-  theme?: string
-  color?: string
-}>()
-
-const classList = [
-  {
-    'layui-badge': !props.type,
-    'layui-badge-dot': props.type == 'dot',
-    'layui-badge-rim': props.type == 'rim',
-  },
-  'layui-bg-' + props.theme,
-]
-
-const styleList = props.color ? 'background-color: ' + props.color : ''
-</script>

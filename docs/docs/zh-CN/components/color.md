@@ -101,30 +101,30 @@ export default {
 
 <template>
 <ul class="layui-row site-doc-color site-doc-necolor">
-      <li class="layui-col-md6">
+      <li class="layui-col-md12">
         <div style="background-color: #FAFAFA;">
           <p>#FAFAFA</p><p>
         </p></div>
       </li>
-      <li class="layui-col-md6">
+      <li class="layui-col-md12">
         <div style="background-color: #f6f6f6;"><p>#F6F6F6</p><p></p></div>
       </li>
-      <li class="layui-col-md2">
+      <li class="layui-col-md4">
         <div style="background-color: #eeeeee;"><p>#eeeeee</p><p></p></div>
       </li>
-      <li class="layui-col-md2">
+      <li class="layui-col-md4">
         <div style="background-color: #e2e2e2;"><p>#e2e2e2</p><p></p></div>
       </li>
-      <li class="layui-col-md2">
+      <li class="layui-col-md4">
         <div style="background-color: #dddddd;"><p>#dddddd</p><p></p></div>
       </li>
-      <li class="layui-col-md2">
+      <li class="layui-col-md4">
         <div style="background-color: #d2d2d2;"><p>#d2d2d2</p><p></p></div>
       </li>
-      <li class="layui-col-md2">
+      <li class="layui-col-md4">
         <div style="background-color: #cccccc;"><p>#cccccc</p><p></p></div>
       </li>
-      <li class="layui-col-md2">
+      <li class="layui-col-md4">
         <div style="background-color: #c2c2c2;"><p>#c2c2c2</p><p></p></div>
       </li>
     </ul>
