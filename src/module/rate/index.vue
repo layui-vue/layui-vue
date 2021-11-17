@@ -1,3 +1,46 @@
+
+<script lang="ts">
+export default {
+  name: "LayRate",
+};
+</script>
+
+<script setup lang="ts">
+import { computed, defineProps, withDefaults } from "vue";
+import "./index.less";
+
+export interface LayRateProps {
+  theme?: string;
+  length?: number;
+  modelValue: number;
+  readonly?: boolean | string;
+}
+
+const props = withDefaults(defineProps<LayRateProps>(), {
+  length: 5,
+  modelValue: 0,
+  readonly: false,
+});
+
+const emit = defineEmits(["update:modelValue"]);
+
+const currentValue = computed({
+  get: function () {
+    return props.modelValue;
+  },
+  set: function (val) {
+    emit("update:modelValue", val);
+  },
+});
+
+const mouseenter = function (index: number, event: any) {
+  if (props.readonly) {
+    return false;
+  }
+  currentValue.value = index;
+};
+</script>
+
 <template>
   <ul class="layui-rate">
     <li
@@ -18,39 +61,3 @@
     }}
   </ul>
 </template>
-<script setup lang="ts">
-import { computed, defineProps, withDefaults } from 'vue'
-
-const props = withDefaults(
-  defineProps<{
-    length?: number
-    modelValue: number
-    readonly?: boolean | string
-    theme?: string
-  }>(),
-  {
-    length: 5,
-    modelValue: 0,
-    readonly: false,
-    theme: 'green',
-  }
-)
-
-const emit = defineEmits(['update:modelValue'])
-
-const currentValue = computed({
-  get: function () {
-    return props.modelValue
-  },
-  set: function (val) {
-    emit('update:modelValue', val)
-  },
-})
-
-const mouseenter = function (index: number, event: any) {
-  if (props.readonly) {
-    return false
-  }
-  currentValue.value = index
-}
-</script>

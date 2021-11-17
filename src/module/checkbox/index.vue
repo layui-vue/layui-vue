@@ -37,7 +37,7 @@ const handleClick = function () {
       class="layui-unselect layui-form-checkbox"
       :class="{
         'layui-checkbox-disbaled layui-disabled': disabled,
-        'layui-form-checked': props.checked,
+        'layui-form-checked': props.modelValue,
       }"
       :lay-skin="skin"
     >

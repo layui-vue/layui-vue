@@ -5,7 +5,7 @@
 
 <template>
   <lay-form>
-    <lay-checkbox name="like" skin="primary"  v-model:checked="checked1" label="1" ></lay-checkbox>
+    <lay-checkbox name="like" skin="primary"  v-model="checked1" label="1" ></lay-checkbox>
  </lay-form>
 </template>
 
@@ -33,7 +33,7 @@ export default {
 
 <template>
   <lay-form>
-    <lay-checkbox name="like" label="1" v-model:checked="checked2" >普通</lay-checkbox>
+    <lay-checkbox name="like" label="1" v-model="checked2" >普通</lay-checkbox>
  </lay-form>
 </template>
 
@@ -61,9 +61,9 @@ export default {
 
 <template>
   <lay-form>
-    <lay-checkbox name="like" skin="primary" v-model:checked="checked3" label="1">写作</lay-checkbox>
-    <lay-checkbox name="like" skin="primary" v-model:checked="checked4" label="2">画画</lay-checkbox>
-    <lay-checkbox name="like" skin="primary" v-model:checked="checked5" label="3">运动</lay-checkbox>
+    <lay-checkbox name="like" skin="primary" v-model="checked3" label="1">写作</lay-checkbox>
+    <lay-checkbox name="like" skin="primary" v-model="checked4" label="2">画画</lay-checkbox>
+    <lay-checkbox name="like" skin="primary" v-model="checked5" label="3">运动</lay-checkbox>
   </lay-form>
 </template>
 
@@ -93,7 +93,7 @@ export default {
 
 <template>
   <lay-form>
-    <lay-checkbox name="like" skin="primary" label="1" :disabled="disabled" v-model:checked="checked6">禁用</lay-checkbox>
+    <lay-checkbox name="like" skin="primary" label="1" :disabled="disabled" v-model="checked6">禁用</lay-checkbox>
  </lay-form>
 </template>
 
@@ -123,7 +123,7 @@ export default {
 
 <template>
   <lay-form>
-    <lay-checkbox name="like" skin="primary" label="1" @change="change" v-model:checked="checked7">回调</lay-checkbox>
+    <lay-checkbox name="like" skin="primary" label="1" @change="change" v-model="checked7">回调</lay-checkbox>
  </lay-form>
 </template>
 
@@ -159,7 +159,7 @@ export default {
 | name                | 原始属性 name | --                   |
 | skin                | 主题          | --                   |
 | label               | 选中值        | --                   |
-| checked ( v-model ) | 是否选中      | `true` `false`       |
+| v-model | 是否选中      | `true` `false`       |
 | change              | 切换事件      | isChecked : 当前状态 |
 
 :::
