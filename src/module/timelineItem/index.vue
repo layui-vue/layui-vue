@@ -13,11 +13,19 @@
   </li>
 </template>
 
-<script setup name="LayTimelineItem" lang="ts">
-import { defineProps } from 'vue'
+<script lang="ts">
+export default {
+  name: "LayTimelineItem",
+};
+</script>
 
-const props = defineProps<{
-  title: string
-  simple?: boolean
-}>()
+<script setup lang="ts">
+import { defineProps } from "vue";
+
+export interface LayTimelineItemProps {
+  title: string;
+  simple?: boolean;
+}
+
+const props = defineProps<LayTimelineItemProps>();
 </script>
