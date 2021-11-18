@@ -11,8 +11,8 @@ import "./index.less";
 export interface LayCheckboxProps {
   name?: string;
   skin?: string;
-  label: string;
-  modelValue: boolean | Array<string>;
+  label: string | object;
+  modelValue: boolean | Array<string | object>;
   disabled?: boolean;
 }
 

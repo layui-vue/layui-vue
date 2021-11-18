@@ -1,7 +1,7 @@
 <script lang="ts">
 export default {
-  name: 'LayTable',
-}
+  name: "LayTable",
+};
 </script>
 
 <script setup lang="ts">
@@ -12,39 +12,47 @@ import {
   defineProps,
   withDefaults,
   defineEmits,
-} from 'vue'
-import { Recordable } from '../type'
+} from "vue";
+import { Recordable } from "../type";
 
 const props = withDefaults(
   defineProps<{
-    id?: string
-    skin?: string
-    size?: string
-    page?: Recordable
-    checkbox?: boolean
-    columns: Recordable[]
-    dataSource: Recordable[]
-    defaultToolbar?: boolean
-    selectedKeys?: Array<string>
+    id?: string;
+    skin?: string;
+    size?: string;
+    page?: Recordable;
+    checkbox?: boolean;
+    columns: Recordable[];
+    dataSource: Recordable[];
+    defaultToolbar?: boolean;
+    selectedKeys?: Recordable[];
   }>(),
   {
-    id: 'id',
-    size: 'md',
+    id: "id",
+    size: "md",
     dataSource: () => [],
     selectedKeys: () => [],
   }
-)
+);
 
-const emit = defineEmits(['change', 'row', 'row-double', 'update:selectedKeys'])
+const emit = defineEmits([
+  "change",
+  "row",
+  "row-double",
+  "update:selectedKeys",
+]);
 
-const slot = useSlots()
-const slots = slot.default && slot.default()
+const slot = useSlots();
+const slots = slot.default && slot.default();
 
-const allChecked = ref(false)
-const tableSelectedKeys = ref([...props.selectedKeys])
-const tableColumns = ref([...props.columns])
+const allChecked = ref(false);
+const tableSelectedKeys = ref([...props.selectedKeys]);
+const tableColumns = ref([...props.columns]);
+const tableColumnKeys = ref(props.columns.map((item: any) => {
+  return item.key;
+}));
 
-const changeAll = function ( checked : any) {
+const changeAll = function (checked: any) {
   const ids = props.dataSource.map((item: any) => {
     return item[props.id];
   });
@@ -55,42 +63,42 @@ const changeAll = function ( checked : any) {
     });
   }
   emit("update:selectedKeys", tableSelectedKeys.value);
-}
+};
 
 watch(
   tableSelectedKeys,
   function () {
     if (tableSelectedKeys.value.length === props.dataSource.length) {
-      allChecked.value = true
+      allChecked.value = true;
     } else {
-      allChecked.value = false
+      allChecked.value = false;
     }
-    emit('update:selectedKeys', tableSelectedKeys.value)
+    emit("update:selectedKeys", tableSelectedKeys.value);
   },
   { deep: true }
-)
+);
 
 const change = function (page: any) {
-  emit('change', page)
-}
+  emit("change", page);
+};
 
 const rowClick = function (data: any) {
-  emit('row', data)
-}
+  emit("row", data);
+};
 
 const rowDoubleClick = function (data: any) {
-  emit('row-double', data)
-}
+  emit("row-double", data);
+};
 
 const print = function () {
-  let subOutputRankPrint = document.getElementById('lay-table') as HTMLElement
-  let newContent = subOutputRankPrint.innerHTML
-  let oldContent = document.body.innerHTML
-  document.body.innerHTML = newContent
-  window.print()
-  window.location.reload()
-  document.body.innerHTML = oldContent
-}
+  let subOutputRankPrint = document.getElementById("lay-table") as HTMLElement;
+  let newContent = subOutputRankPrint.innerHTML;
+  let oldContent = document.body.innerHTML;
+  document.body.innerHTML = newContent;
+  window.print();
+  window.location.reload();
+  document.body.innerHTML = oldContent;
+};
 </script>
 
 <template>
@@ -113,9 +121,9 @@ const print = function () {
                 <lay-checkbox
                   v-for="column in columns"
                   :key="column"
-                  v-model="tableColumns"
+                  v-model="tableColumnKeys"
                   skin="primary"
-                  :label="column"
+                  :label="column.key"
                   >{{ column.title }}</lay-checkbox
                 >
               </div>
@@ -149,7 +157,7 @@ const print = function () {
                   </div>
                 </th>
                 <template v-for="column in columns" :key="column">
-                  <th v-if="tableColumns.includes(column)">
+                  <th v-if="tableColumnKeys.includes(column.key)">
                     <div
                       class="layui-table-cell"
                       :style="{ width: column.width }"
@@ -183,7 +191,7 @@ const print = function () {
                   </td>
 
                   <template v-for="column in columns" :key="column">
-                    <template v-if="tableColumns.includes(column)">
+                    <template v-if="tableColumnKeys.includes(column.key)">
                       <template v-if="column.customSlot">
                         <td class="layui-table-cell">
                           <div :style="{ width: column.width }">
