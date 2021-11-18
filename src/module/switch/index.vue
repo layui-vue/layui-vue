@@ -5,27 +5,37 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { defineProps, defineEmits } from "vue";
-import "./index.less"
+import { defineProps, defineEmits, computed, ref } from "vue";
+import "./index.less";
 
 export interface LaySwitchProps {
-  modelValue: boolean;
   disabled?: boolean;
   activeText?: string;
+  modelValue?: boolean;
   inactiveText?: string;
 }
 
 const props = withDefaults(defineProps<LaySwitchProps>(), {
+  disabled: false,
   activeText: "启用",
   inactiveText: "禁用",
 });
 
 const emit = defineEmits(["update:modelValue", "change"]);
 
+const isActive = computed({
+  get() {
+    return props.modelValue;
+  },
+  set(val) {
+    emit("change", val);
+    emit("update:modelValue", val);
+  },
+});
+
 const handleClick = function () {
   if (!props.disabled) {
-    emit("update:modelValue", !props.modelValue);
-    emit("change", !props.modelValue);
+    isActive.value = !isActive.value;
   }
 };
 </script>
@@ -35,11 +45,12 @@ const handleClick = function () {
     <div
       class="layui-unselect layui-form-switch"
       :class="{
-        'layui-form-onswitch': modelValue,
-        'layui-checkbox-disbaled layui-disabled': disabled,
+        'layui-disabled': disabled,
+        'layui-form-onswitch': isActive,
+        'layui-checkbox-disbaled': disabled,
       }"
     >
-      <em>{{ modelValue == true ? activeText : inactiveText }}</em>
+      <em>{{ isActive == true ? activeText : inactiveText }}</em>
       <i />
     </div>
   </span>

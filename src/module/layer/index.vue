@@ -83,129 +83,128 @@
 
 <script lang="ts">
 export default {
-  name: 'LayLayer',
-}
+  name: "LayLayer",
+};
 </script>
 
 <script lang="ts" setup>
-import { onMounted, onUpdated, ref, useSlots, watch } from 'vue'
-import useMove from '../../hooks/useMove'
-import { guid } from '../../tools/guidUtil'
+import { onMounted, onUpdated, ref, useSlots, watch } from "vue";
+import useMove from "../../hooks/useMove";
+import { guid } from "../../tools/guidUtil";
 
-const slot = useSlots()
+const slot = useSlots();
 
 onMounted(() => {
-  moveHandle()
-})
+  moveHandle();
+});
 
 onUpdated(() => {
-  moveHandle()
-})
+  moveHandle();
+});
 
-const props = withDefaults(
-  defineProps<{
-    id?: string
-    zIndex?: number
-    title?: string
-    offset?: string[]
-    width?: string
-    height?: string
-    visible?: boolean | string
-    maxmin?: boolean | string
-    btn?: Record<string, unknown>[]
-    move?: boolean | string
-    type?: number
-    content?: string
-    shade?: boolean | string
-    shadeClose?: boolean | string
-    closeBtn?: boolean | string
-    btnAlign?: string
-    anim?: number
-  }>(),
-  {
-    id: 'layer-' + guid(),
-    zIndex: 99999999,
-    title: '标题',
-    offset: () => ['50%', '50%'],
-    width: '390px',
-    height: '330px',
-    visible: true,
-    maxmin: false,
-    move: false,
-    type: 1,
-    btn: () => [],
-    shade: false,
-    shadeClose: true,
-    closeBtn: true,
-    btnAlign: 'l',
-    anim: 0,
-    content: '',
-  }
-)
+export interface LayLayerProps {
+  id?: string;
+  zIndex?: number;
+  title?: string;
+  offset?: string[];
+  width?: string;
+  height?: string;
+  visible?: boolean | string;
+  maxmin?: boolean | string;
+  btn?: Record<string, unknown>[];
+  move?: boolean | string;
+  type?: number;
+  content?: string;
+  shade?: boolean | string;
+  shadeClose?: boolean | string;
+  closeBtn?: boolean | string;
+  btnAlign?: string;
+  anim?: number;
+}
 
-const top = ref(props.offset[0])
-const left = ref(props.offset[1])
-const width = ref(props.width)
-const height = ref(props.height)
-const max = ref(false)
+const props = withDefaults(defineProps<LayLayerProps>(), {
+  id: "layer-" + guid(),
+  zIndex: 99999999,
+  title: "标题",
+  offset: () => ["50%", "50%"],
+  width: "390px",
+  height: "330px",
+  visible: true,
+  maxmin: false,
+  move: false,
+  type: 1,
+  btn: () => [],
+  shade: false,
+  shadeClose: true,
+  closeBtn: true,
+  btnAlign: "l",
+  anim: 0,
+  content: "",
+});
+
+const top = ref(props.offset[0]);
+const left = ref(props.offset[1]);
+const width = ref(props.width);
+const height = ref(props.height);
+const max = ref(false);
 const contentHeight = ref(
   props.btn.length > 0
-    ? 'calc(' + height.value + ' - 100px)'
-    : 'calc(' + height.value + ' - 50px)'
-)
+    ? "calc(" + height.value + " - 100px)"
+    : "calc(" + height.value + " - 50px)"
+);
 
 watch(max, function () {
   if (max.value) {
     contentHeight.value =
-      props.btn.length > 0 ? 'calc(100% - 100px)' : 'calc(100% - 50px)'
+      props.btn.length > 0 ? "calc(100% - 100px)" : "calc(100% - 50px)";
   } else {
     contentHeight.value =
       props.btn.length > 0
-        ? 'calc(' + height.value + ' - 100px)'
-        : 'calc(' + height.value + ' - 50px)'
+        ? "calc(" + height.value + " - 100px)"
+        : "calc(" + height.value + " - 50px)";
   }
-})
+});
 
-const emit = defineEmits(['close', 'update:visible'])
+const emit = defineEmits(["close", "update:visible"]);
 
 const moveHandle = function () {
   if (props.move) {
-    const el = document.getElementById(props.id)
+    const el = document.getElementById(props.id);
     if (el != null) {
-      useMove(el)
+      useMove(el);
     }
   }
-}
+};
 
 const shadeHandle = function () {
   if (props.shadeClose) {
-    emit('close')
-    emit('update:visible', false)
+    emit("close");
+    emit("update:visible", false);
   }
-}
+};
 
 const closeHandle = function () {
-  emit('close')
-  emit('update:visible', false)
-}
+  emit("close");
+  emit("update:visible", false);
+};
 
 const minHandle = function () {
-  emit('close')
-  emit('update:visible', false)
-}
+  emit("close");
+  emit("update:visible", false);
+};
 
 const maxHandle = function () {
   if (max.value) {
-    width.value = props.width
-    height.value = props.height
-    top.value = props.offset[0]
-    left.value = props.offset[1]
+    width.value = props.width;
+    height.value = props.height;
+    top.value = props.offset[0];
+    left.value = props.offset[1];
   } else {
-    width.value = '100%'
-    height.value = '100%'
-    top.value = '0px'
-    left.value = '0px'
+    width.value = "100%";
+    height.value = "100%";
+    top.value = "0px";
+    left.value = "0px";
   }
-  max.value = !max.value
-}
+  max.value = !max.value;
+};
 </script>
