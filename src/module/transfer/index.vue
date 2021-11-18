@@ -4,7 +4,7 @@
       <div class="layui-transfer-box" style="width: 200px; height: 360px">
         <div class="layui-transfer-header">
           <lay-checkbox
-            v-model:checked="allLeftChecked"
+            v-model="allLeftChecked"
             skin="primary"
             label="all"
             @change="allLeftChange"
@@ -14,14 +14,14 @@
         </div>
         <ul class="layui-transfer-data" style="height: 320px">
           <li v-for="dataSource in leftDataSource" :key="dataSource">
-            <transfer-checkbox
+            <lay-checkbox
               v-model="leftSelectedKeys"
               skin="primary"
               :label="dataSource[id]"
             >
               <slot v-if="slot.item" name="item" :data="dataSource" />
               <span v-else>{{ dataSource.title }}</span>
-            </transfer-checkbox>
+            </lay-checkbox>
           </li>
         </ul>
       </div>
@@ -42,7 +42,7 @@
       <div class="layui-transfer-box" style="width: 200px; height: 360px">
         <div class="layui-transfer-header">
           <lay-checkbox
-            v-model:checked="allRightChecked"
+            v-model="allRightChecked"
             skin="primary"
             label="all"
             @change="allRightChange"
@@ -52,131 +52,139 @@
         </div>
         <ul class="layui-transfer-data" style="height: 320px">
           <li v-for="dataSource in rightDataSource" :key="dataSource">
-            <transfer-checkbox
+            <lay-checkbox
               v-model="rightSelectedKeys"
               skin="primary"
               :label="dataSource[id]"
             >
               <slot v-if="slot.item" name="item" :data="dataSource" />
               <span v-else>{{ dataSource.title }}</span>
-            </transfer-checkbox>
+            </lay-checkbox>
           </li>
         </ul>
       </div>
     </div>
   </div>
 </template>
-<script setup name="LayTransfer"></script>
+<script lang="ts">
+export default {
+  name: "LayTransfer",
+};
+</script>
 <script setup lang="ts">
-import { computed, defineProps, Ref, ref, useSlots, watch } from 'vue'
-import { Recordable } from '/@src/module/type'
-import transferCheckbox from './component/checkbox.vue'
+import { defineProps, Ref, ref, useSlots, watch } from "vue";
+import { Recordable } from "../type";
 
-const slot = useSlots()
+const slot = useSlots();
 
 const props = withDefaults(
   defineProps<{
-    id?: string
-    title?: string[]
-    dataSource: Recordable[]
+    id?: string;
+    title?: string[];
+    dataSource: Recordable[];
   }>(),
   {
-    id: 'id',
+    id: "id",
     title: function () {
-      return ['主列表', '副列表']
+      return ["主列表", "副列表"];
     },
     dataSource: function () {
-      return []
+      return [];
     },
     selectedKeys: function () {
-      return []
+      return [];
     },
   }
-)
+);
 
-const leftDataSource: Ref<any[]> = ref([...props.dataSource])
-const rightDataSource: Ref<any[]> = ref([])
+const leftDataSource: Ref<any[]> = ref([...props.dataSource]);
+const rightDataSource: Ref<any[]> = ref([]);
 
-const leftSelectedKeys: Ref<string[]> = ref([])
-const rightSelectedKeys: Ref<string[]> = ref([])
+const leftSelectedKeys: Ref<string[]> = ref([]);
+const rightSelectedKeys: Ref<string[]> = ref([]);
 
-const allLeftChecked = ref(false)
-const allRightChecked = ref(false)
+const allLeftChecked = ref(false);
+const allRightChecked = ref(false);
 
-const allLeftChange = function ({ checked }: any) {
+const allLeftChange = function (checked: any) {
   if (checked) {
     const ids = leftDataSource.value.map((item: any) => {
-      return item[props.id]
-    })
-    leftSelectedKeys.value = ids
+      return item[props.id];
+    });
+    leftSelectedKeys.value = ids;
   } else {
-    leftSelectedKeys.value = []
+    leftSelectedKeys.value = [];
   }
-}
+};
 
 watch(
   leftSelectedKeys,
   function () {
-    if (leftDataSource.value.length === leftSelectedKeys.value.length && leftDataSource.value.length != 0) {
-      allLeftChecked.value = true
+    if (
+      leftDataSource.value.length === leftSelectedKeys.value.length &&
+      leftDataSource.value.length != 0
+    ) {
+      allLeftChecked.value = true;
     } else {
-      allLeftChecked.value = false
+      allLeftChecked.value = false;
     }
   },
   { deep: true }
-)
+);
 
-const allRightChange = function ({ checked }: any) {
+const allRightChange = function (checked: any) {
   if (checked) {
     const ids = rightDataSource.value.map((item: any) => {
-      return item[props.id]
-    })
-    rightSelectedKeys.value = ids
+      return item[props.id];
+    });
+    rightSelectedKeys.value = ids;
   } else {
-    rightSelectedKeys.value = []
+    rightSelectedKeys.value = [];
   }
-}
+};
 
 watch(
   rightSelectedKeys,
   function () {
-    if (rightDataSource.value.length === rightSelectedKeys.value.length && rightDataSource.value.length != 0) {
-      allRightChecked.value = true
+    if (
+      rightDataSource.value.length === rightSelectedKeys.value.length &&
+      rightDataSource.value.length != 0
+    ) {
+      allRightChecked.value = true;
     } else {
-      allRightChecked.value = false
+      allRightChecked.value = false;
     }
   },
   { deep: true }
-)
+);
 
 const add = function () {
-
-  if(leftSelectedKeys.value.length === 0){
-    return
+  if (leftSelectedKeys.value.length === 0) {
+    return;
   }
-  leftDataSource.value.forEach(item => {
-    if( leftSelectedKeys.value.indexOf(item.id) != -1 ){
-      rightDataSource.value.push(item)
+  leftDataSource.value.forEach((item) => {
+    if (leftSelectedKeys.value.indexOf(item.id) != -1) {
+      rightDataSource.value.push(item);
     }
-  })
+  });
   leftDataSource.value = leftDataSource.value.filter(
     (item) => leftSelectedKeys.value.indexOf(item.id) === -1
-  ) 
-  leftSelectedKeys.value = []
-}
+  );
+  leftSelectedKeys.value = [];
+};
 
 const remove = function () {
-  if(rightSelectedKeys.value.length === 0){
-    return
+  if (rightSelectedKeys.value.length === 0) {
+    return;
   }
-  rightDataSource.value.forEach(item => {
-    if( rightSelectedKeys.value.indexOf(item.id) != -1 ){
-      leftDataSource.value.push(item)
+  rightDataSource.value.forEach((item) => {
+    if (rightSelectedKeys.value.indexOf(item.id) != -1) {
+      leftDataSource.value.push(item);
     }
-  })
+  });
   rightDataSource.value = rightDataSource.value.filter(
     (item) => rightSelectedKeys.value.indexOf(item.id) === -1
-  ) 
-  rightSelectedKeys.value = []
-}
+  );
+  rightSelectedKeys.value = [];
+};
 </script>

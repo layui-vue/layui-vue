@@ -1,3 +1,98 @@
+<script lang="ts">
+export default {
+  name: 'LayTable',
+}
+</script>
+
+<script setup lang="ts">
+import {
+  ref,
+  watch,
+  useSlots,
+  defineProps,
+  withDefaults,
+  defineEmits,
+} from 'vue'
+import { Recordable } from '../type'
+
+const props = withDefaults(
+  defineProps<{
+    id?: string
+    skin?: string
+    size?: string
+    page?: Recordable
+    checkbox?: boolean
+    columns: Recordable[]
+    dataSource: Recordable[]
+    defaultToolbar?: boolean
+    selectedKeys?: Array<string>
+  }>(),
+  {
+    id: 'id',
+    size: 'md',
+    dataSource: () => [],
+    selectedKeys: () => [],
+  }
+)
+
+const emit = defineEmits(['change', 'row', 'row-double', 'update:selectedKeys'])
+
+const slot = useSlots()
+const slots = slot.default && slot.default()
+
+const allChecked = ref(false)
+const tableSelectedKeys = ref([...props.selectedKeys])
+const tableColumns = ref([...props.columns])
+
+const changeAll = function ( checked : any) {
+  const ids = props.dataSource.map((item: any) => {
+    return item[props.id];
+  });
+  tableSelectedKeys.value.splice(0, ids.length);
+  if (checked) {
+    ids.forEach((id) => {
+      tableSelectedKeys.value.push(id);
+    });
+  }
+  emit("update:selectedKeys", tableSelectedKeys.value);
+}
+
+watch(
+  tableSelectedKeys,
+  function () {
+    if (tableSelectedKeys.value.length === props.dataSource.length) {
+      allChecked.value = true
+    } else {
+      allChecked.value = false
+    }
+    emit('update:selectedKeys', tableSelectedKeys.value)
+  },
+  { deep: true }
+)
+
+const change = function (page: any) {
+  emit('change', page)
+}
+
+const rowClick = function (data: any) {
+  emit('row', data)
+}
+
+const rowDoubleClick = function (data: any) {
+  emit('row-double', data)
+}
+
+const print = function () {
+  let subOutputRankPrint = document.getElementById('lay-table') as HTMLElement
+  let newContent = subOutputRankPrint.innerHTML
+  let oldContent = document.body.innerHTML
+  document.body.innerHTML = newContent
+  window.print()
+  window.location.reload()
+  document.body.innerHTML = oldContent
+}
+</script>
+
 <template>
   <div id="lay-table">
     <table class="layui-hide" lay-filter="test" />
@@ -15,13 +110,13 @@
             </div>
             <template #content>
               <div style="padding: 10px">
-                <table-item-checkbox
+                <lay-checkbox
                   v-for="column in columns"
                   :key="column"
                   v-model="tableColumns"
                   skin="primary"
                   :label="column"
-                  >{{ column.title }}</table-item-checkbox
+                  >{{ column.title }}</lay-checkbox
                 >
               </div>
             </template>
@@ -46,7 +141,7 @@
                 <th v-if="checkbox" class="layui-table-col-special">
                   <div class="layui-table-cell laytable-cell-checkbox">
                     <lay-checkbox
-                      v-model:checked="allChecked"
+                      v-model="allChecked"
                       skin="primary"
                       label="all"
                       @change="changeAll"
@@ -78,12 +173,12 @@
                 >
                   <td v-if="checkbox" class="layui-table-col-special">
                     <div class="layui-table-cell laytable-cell-checkbox">
-                      <table-item-checkbox
+                      <lay-checkbox
                         v-model="tableSelectedKeys"
                         skin="primary"
                         :label="data[id]"
                       >
-                      </table-item-checkbox>
+                      </lay-checkbox>
                     </div>
                   </td>
 
@@ -139,106 +234,6 @@
     </div>
   </div>
 </template>
-
-<script lang="ts">
-export default {
-  name: 'LayTable',
-}
-</script>
-
-<script setup lang="ts">
-import tableItemCheckbox from './component/checkbox.vue'
-import {
-  defineProps,
-  ref,
-  useSlots,
-  watch,
-  withDefaults,
-  defineEmits,
-} from 'vue'
-import { Recordable } from '/@src/module/type'
-
-const props = withDefaults(
-  defineProps<{
-    id?: string
-    skin?: string
-    size?: string
-    page?: Recordable
-    checkbox?: boolean
-    columns?: Recordable[]
-    dataSource: Recordable[]
-    defaultToolbar?: boolean
-    selectedKeys?: Array<string>
-  }>(),
-  {
-    id: 'id',
-    dataSource: function () {
-      return []
-    },
-    selectedKeys: function () {
-      return []
-    },
-    size: 'md',
-  }
-)
-
-const emit = defineEmits(['change', 'row', 'row-double', 'update:selectedKeys'])
-
-const slot = useSlots()
-const slots = slot.default && slot.default()
-
-const allChecked = ref(false)
-const tableSelectedKeys = ref([...props.selectedKeys])
-const tableColumns = ref([...props.columns])
-
-const changeAll = function ({ checked, value }: any) {
-  const ids = props.dataSource.map((item: any) => {
-    return item[props.id]
-  })
-  tableSelectedKeys.value.splice(0, ids.length)
-  if (checked) {
-    ids.forEach((id) => {
-      tableSelectedKeys.value.push(id)
-    })
-  }
-  emit('update:selectedKeys', tableSelectedKeys.value)
-}
-
-watch(
-  tableSelectedKeys,
-  function () {
-    if (tableSelectedKeys.value.length === props.dataSource.length) {
-      allChecked.value = true
-    } else {
-      allChecked.value = false
-    }
-    emit('update:selectedKeys', tableSelectedKeys.value)
-  },
-  { deep: true }
-)
-
-const change = function (page: any) {
-  emit('change', page)
-}
-
-const rowClick = function (data: any) {
-  emit('row', data)
-}
-
-const rowDoubleClick = function (data: any) {
-  emit('row-double', data)
-}
-
-const print = function () {
-  let subOutputRankPrint = document.getElementById('lay-table') as HTMLElement
-  let newContent = subOutputRankPrint.innerHTML
-  let oldContent = document.body.innerHTML
-  document.body.innerHTML = newContent
-  window.print()
-  window.location.reload()
-  document.body.innerHTML = oldContent
-}
-</script>
 
 <style scoped>
 .laytable-cell-checkbox {

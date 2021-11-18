@@ -11,13 +11,14 @@ import "./index.less";
 export interface LayCheckboxProps {
   name?: string;
   skin?: string;
-  label?: string;
-  modelValue?: boolean;
+  label: string;
+  modelValue: boolean | Array<string>;
   disabled?: boolean;
 }
 
 const props = withDefaults(defineProps<LayCheckboxProps>(), {
   modelValue: false,
+  disabled: false,
 });
 
 const checkboxGroup: any = inject("checkboxGroup", {});
@@ -35,19 +36,36 @@ const isChecked = computed({
     if (isGroup.value) {
       return checkboxGroup.modelValue.value.includes(props.label);
     } else {
-      return props.modelValue;
+      if (Array.isArray(props.modelValue)) {
+        return props.modelValue.includes(props.label);
+      } else {
+        return props.modelValue;
+      }
     }
   },
   set(val) {
     if (isGroup.value) {
-      setModelValue(val);
+      setGroupModelValue(val);
+    } else {
+      if (Array.isArray(props.modelValue)) {
+        setArrayModelValue(val);
+      } else {
+        emit("change", val);
+        emit("update:modelValue", val);
+      }
     }
-    emit("change", val);
-    emit("update:modelValue", val);
   },
 });
 
-const setModelValue = function (checked: any) {
+const arrayModelValue = computed(() => {
+  if (Array.isArray(props.modelValue)) {
+    return [...props.modelValue];
+  } else {
+    return [];
+  }
+});
+
+const setGroupModelValue = function (checked: any) {
   let groupModelValue = [...checkboxGroup.modelValue.value];
   if (!checked) {
     groupModelValue.splice(groupModelValue.indexOf(props.label), 1);
@@ -55,6 +73,17 @@ const setModelValue = function (checked: any) {
     groupModelValue.push(props.label);
   }
   checkboxGroup.modelValue.value = groupModelValue;
+};
+
+const setArrayModelValue = function (checked: any) {
+  let arr = [...arrayModelValue.value];
+  if (!checked) {
+    arr.splice(arr.indexOf(props.label), 1);
+  } else {
+    arr.push(props.label);
+  }
+  emit("change", arr);
+  emit("update:modelValue", arr);
 };
 
 const handleClick = function () {

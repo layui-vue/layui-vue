@@ -11,11 +11,13 @@
 <template>
 <lay-timeline>
 <lay-timeline-item title="0.2.4">
-[重构] row col 栅格组件, 支持 24 栅格。<br>
+[增强] checkbox 组件, v-model 支持 array 数据类型。<br>
+[重构] row col 栅格组件, 支持 24 粒度布局。<br>
 [重构] layui.css 样式, 集成 less 编译器。<br>
 [重构] button, button-group, button-container 非破坏性改进代码。<br>
 [修复] themeline 时间线，因 mackdown 造成的样式污染。<br>
 [新增] layer 弹层出场动画, 允许使用 isOutAmin 关闭。<br>
+[新增] checkbox-group 复选框组, 更方便的复选方式。<br>
 [删除] rate 评分 theme 属性默认值。<br>
 </lay-timeline-item>
 <lay-timeline-item title="0.2.3">
