@@ -4,29 +4,6 @@
 ::: demo
 
 <template>
-  <lay-switch></lay-switch>
-</template>
-
-<script>
-import { ref } from 'vue'
-
-export default {
-  setup() {
-
-    return {
-    }
-  }
-}
-</script>
-
-:::
-
-::: title 基础使用
-:::
-
-::: demo
-
-<template>
   <lay-switch v-model="active1"></lay-switch>
 </template>
 
@@ -36,7 +13,7 @@ import { ref } from 'vue'
 export default {
   setup() {
 
-    const active1 = ref(true);
+    const active1 = ref(false);
 
     return {
         active1

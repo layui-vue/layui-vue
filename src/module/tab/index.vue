@@ -38,8 +38,6 @@ import {
   VNode,
   Ref,
   ref,
-  onUpdated,
-  onMounted,
   watch,
 } from 'vue'
 

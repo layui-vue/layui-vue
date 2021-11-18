@@ -82,8 +82,8 @@
 </template>
 
 <script setup name="LayIconPicker" lang="ts">
-import { defineProps, Ref, ref, watch } from 'vue'
-import icons from '../resource/icons'
+import { defineProps, Ref, ref } from 'vue'
+import icons from "../../font/iconfont"
 
 const props = withDefaults(
   defineProps<{

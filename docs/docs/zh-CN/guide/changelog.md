@@ -2,7 +2,7 @@
 :::
 
 <lay-timeline style="padding-left:30px;padding-top:30px;">
-  <lay-timeline-item title="修订版本号：日常 bugfix 更新" simple></lay-timeline-item>
+  <lay-timeline-item title="尾版本号：日常 bugfix 更新" simple></lay-timeline-item>
   <lay-timeline-item title="次版本号：带有新特性的向下兼容的版本。" simple></lay-timeline-item>
   <lay-timeline-item title="主版本号：含有破坏性更新和新特性，不在发布周期内。" simple></lay-timeline-item>
 </lay-timeline>

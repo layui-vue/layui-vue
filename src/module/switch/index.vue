@@ -5,7 +5,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { defineProps, defineEmits, computed, ref } from "vue";
+import { defineProps, defineEmits, computed } from "vue";
 import "./index.less";
 
 export interface LaySwitchProps {
