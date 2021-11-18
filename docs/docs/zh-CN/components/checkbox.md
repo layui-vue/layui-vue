@@ -54,6 +54,42 @@ export default {
 
 :::
 
+::: title 复选框组
+:::
+
+::: demo
+
+<template>
+  <lay-form>
+    <lay-checkbox-group v-model="checkeds" @change="groupChange">
+      <lay-checkbox name="like" skin="primary" label="1">写作</lay-checkbox>
+      <lay-checkbox name="like" skin="primary" label="2">画画</lay-checkbox>
+      <lay-checkbox name="like" skin="primary" label="3">运动</lay-checkbox>
+    </lay-checkbox-group>
+  </lay-form>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const checkeds = ref(['1','2']);
+    const groupChange = function(val) {
+      console.log("回调:" + JSON.stringify(val))
+    }
+    
+    return {
+        checkeds,
+        groupChange
+    }
+  }
+}
+</script>
+
+:::
+
 ::: title 完整案例
 :::
 
