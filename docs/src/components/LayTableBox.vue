@@ -13,6 +13,10 @@
   border-radius: 4px;
 }
 
+.lay-table-box table tbody {
+  border-bottom: 1px solid whitesmoke;
+}
+
 .lay-table-box table th,
 .lay-table-box table td {
   font-size: 14px;

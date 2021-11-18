@@ -268,6 +268,7 @@ export default {
 | closeBtn        | 显示关闭      | true                       |
 | btn             | 按钮          |                            |
 | btnAlign        | 按钮布局      | `l` `r` `c`                |
-| anim            | 弹层动画      | `0` `-` `6`                |
+| anim            | 入场动画      | `0` `-` `6`                |
+| isOutAnim       | 关闭动画      | `true` `false`             |
 
 :::

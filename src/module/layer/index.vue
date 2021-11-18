@@ -1,86 +1,3 @@
-<template>
-  <!-- 遮盖 -->
-  <div
-    v-if="visible && shade"
-    class="layui-layer-shade"
-    style="background-color: rgb(0, 0, 0); opacity: 0.1"
-    :style="{ zIndex: zIndex }"
-    @click="shadeHandle"
-  ></div>
-  <!-- 元素 -->
-  <div
-    v-if="visible"
-    :id="id"
-    class="layui-layer layui-layer-border layer-anim"
-    :class="[
-      'layer-anim-0' + anim,
-      type === 1 ? 'layui-layer-dialog' : '',
-      type === 2 ? 'layui-layer-iframe' : '',
-    ]"
-    style="position: fixed"
-    :style="{
-      top: top,
-      left: left,
-      width: width,
-      height: height,
-      zIndex: zIndex,
-    }"
-  >
-    <div class="layui-layer-title" style="cursor: move">
-      {{ title }}
-    </div>
-    <div class="layui-layer-content" :style="{ height: contentHeight }">
-      <div v-if="type === 1" style="height: 100%">
-        <slot v-if="slot.default"></slot>
-        <template v-else>
-          {{ content }}
-        </template>
-      </div>
-      <iframe
-        v-if="type === 2"
-        scrolling="auto"
-        allowtransparency="true"
-        frameborder="0"
-        :src="content"
-        style="width: 100%; height: 100%"
-      ></iframe>
-    </div>
-    <span class="layui-layer-setwin"
-      ><a
-        v-if="maxmin"
-        class="layui-layer-min"
-        href="javascript:;"
-        @click="minHandle"
-        ><cite></cite></a
-      ><a
-        v-if="maxmin"
-        class="layui-layer-ico layui-layer-max"
-        :class="[max ? 'layui-layer-maxmin' : '']"
-        href="javascript:;"
-        @click="maxHandle"
-      ></a>
-      <a
-        v-if="closeBtn"
-        class="layui-layer-ico layui-layer-close layui-layer-close1"
-        href="javascript:;"
-        @click="closeHandle"
-      ></a
-    ></span>
-    <div
-      v-if="btn && btn.length > 0"
-      class="layui-layer-btn"
-      :class="['layui-layer-btn-' + btnAlign]"
-    >
-      <template v-for="(b, index) in btn" :key="index">
-        <a :class="['layui-layer-btn' + index]" @click="b.callback">{{
-          b.text
-        }}</a>
-      </template>
-    </div>
-    <span class="layui-layer-resize"></span>
-  </div>
-</template>
-
 <script lang="ts">
 export default {
   name: "LayLayer",
@@ -119,7 +36,8 @@ export interface LayLayerProps {
   shadeClose?: boolean | string;
   closeBtn?: boolean | string;
   btnAlign?: string;
-  anim?: number;
+  anim?: number | boolean;
+  isOutAnim?: boolean;
 }
 
 const props = withDefaults(defineProps<LayLayerProps>(), {
@@ -140,6 +58,7 @@ const props = withDefaults(defineProps<LayLayerProps>(), {
   btnAlign: "l",
   anim: 0,
   content: "",
+  isOutAnim: true
 });
 
 const top = ref(props.offset[0]);
@@ -208,3 +127,87 @@ const maxHandle = function () {
   max.value = !max.value;
 };
 </script>
+
+<template>
+  <!-- 遮盖 -->
+  <div
+    v-if="visible && shade"
+    class="layui-layer-shade"
+    style="background-color: rgb(0, 0, 0); opacity: 0.1"
+    :style="{ zIndex: zIndex }"
+    @click="shadeHandle"
+  ></div>
+  <!-- 元素 -->
+  <transition :leave-to-class="isOutAnim ? 'layer-anim-close':''">
+    <div
+      v-if="visible"
+      :id="id"
+      :class="[
+        anim!== false ? 'layer-anim layer-anim-0' + anim : '',
+        type === 1 ? 'layui-layer-dialog' : '',
+        type === 2 ? 'layui-layer-iframe' : '',
+      ]"
+      class="layui-layer layui-layer-border"
+      :style="{
+        top: top,
+        left: left,
+        width: width,
+        height: height,
+        zIndex: zIndex,
+      }"
+    >
+      <div class="layui-layer-title" style="cursor: move">
+        {{ title }}
+      </div>
+      <div class="layui-layer-content" :style="{ height: contentHeight }">
+        <div v-if="type === 1" style="height: 100%">
+          <slot v-if="slot.default"></slot>
+          <template v-else>
+            {{ content }}
+          </template>
+        </div>
+        <iframe
+          v-if="type === 2"
+          scrolling="auto"
+          allowtransparency="true"
+          frameborder="0"
+          :src="content"
+          style="width: 100%; height: 100%"
+        ></iframe>
+      </div>
+      <span class="layui-layer-setwin"
+        ><a
+          v-if="maxmin"
+          class="layui-layer-min"
+          href="javascript:;"
+          @click="minHandle"
+          ><cite></cite></a
+        ><a
+          v-if="maxmin"
+          class="layui-layer-ico layui-layer-max"
+          :class="[max ? 'layui-layer-maxmin' : '']"
+          href="javascript:;"
+          @click="maxHandle"
+        ></a>
+        <a
+          v-if="closeBtn"
+          class="layui-layer-ico layui-layer-close layui-layer-close1"
+          href="javascript:;"
+          @click="closeHandle"
+        ></a
+      ></span>
+      <div
+        v-if="btn && btn.length > 0"
+        class="layui-layer-btn"
+        :class="['layui-layer-btn-' + btnAlign]"
+      >
+        <template v-for="(b, index) in btn" :key="index">
+          <a :class="['layui-layer-btn' + index]" @click="b.callback">{{
+            b.text
+          }}</a>
+        </template>
+      </div>
+      <span class="layui-layer-resize"></span>
+    </div>
+  </transition>
+</template>

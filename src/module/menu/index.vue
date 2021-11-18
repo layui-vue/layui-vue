@@ -5,46 +5,43 @@
 </template>
 
 <script setup name="LayMenu" lang="ts">
-import { computed, defineProps, provide, ref, watch } from 'vue'
+import { computed, defineProps, provide, ref, watch } from "vue";
 
-const emit = defineEmits(['update:selectedKey', 'update:openKeys'])
+export interface LayMenuProps {
+  selectedKey?: string;
+  openKeys?: string[];
+  tree?: boolean;
+}
 
-const props = withDefaults(
-  defineProps<{
-    selectedKey?: string
-    openKeys?: string[]
-    tree?: boolean
-  }>(),
-  {
-    selectedKey: '',
-    openKeys: function () {
-      return []
-    },
-    tree: false,
-  }
-)
+const emit = defineEmits(["update:selectedKey", "update:openKeys"]);
 
-const isTree = computed(() => props.tree)
+const props = withDefaults(defineProps<LayMenuProps>(), {
+  selectedKey: "",
+  openKeys: () => [],
+  tree: false,
+});
+
+const isTree = computed(() => props.tree);
 
 const openKeys = computed({
   get() {
-    return props.openKeys
+    return props.openKeys;
   },
   set(val) {
-    emit('update:selectedKey', val)
+    emit("update:selectedKey", val);
   },
-})
+});
 
 const selectedKey = computed({
   get() {
-    return props.selectedKey
+    return props.selectedKey;
   },
   set(val) {
-    emit('update:selectedKey', val)
+    emit("update:selectedKey", val);
   },
-})
+});
 
-provide('isTree', isTree)
-provide('selectedKey', selectedKey)
-provide('openKeys', openKeys)
+provide("isTree", isTree);
+provide("selectedKey", selectedKey);
+provide("openKeys", openKeys);
 </script>
