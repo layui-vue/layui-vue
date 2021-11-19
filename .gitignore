@@ -10,7 +10,6 @@ yarn-error.log*
 yarn.lock
 package-lock.json
 
-
 # Editor directories and files
 .idea
 .vscode
