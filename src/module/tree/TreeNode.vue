@@ -5,13 +5,13 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { StringOrNumber } from '/@src/module/tree/tree.type'
-import { Nullable } from '/@src/module/type'
+import { StringOrNumber } from './tree.type'
+import { Nullable } from '../type'
 
 import LayIcon from '../icon'
 import LayCheckbox from '../checkbox'
 import { Ref } from 'vue'
-import { Tree } from '/@src/module/tree/tree'
+import { Tree } from './tree'
 
 type CustomKey = string | number
 type CustomString = (() => string) | string

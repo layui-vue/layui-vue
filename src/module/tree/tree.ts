@@ -1,5 +1,5 @@
-import { OriginalTreeData, StringOrNumber } from '/@src/module/tree/tree.type'
-import { Nullable } from '/@src/module/type'
+import { OriginalTreeData, StringOrNumber } from './tree.type'
+import { Nullable } from '../type'
 import { Ref, ref } from 'vue'
 
 type CustomKey = string | number

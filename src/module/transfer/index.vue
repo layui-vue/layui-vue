@@ -1,71 +1,3 @@
-<template>
-  <div>
-    <div class="layui-transfer layui-form layui-border-box">
-      <div class="layui-transfer-box" style="width: 200px; height: 360px">
-        <div class="layui-transfer-header">
-          <lay-checkbox
-            v-model="allLeftChecked"
-            skin="primary"
-            label="all"
-            @change="allLeftChange"
-          >
-            <span>{{ title[0] }}</span>
-          </lay-checkbox>
-        </div>
-        <ul class="layui-transfer-data" style="height: 320px">
-          <li v-for="dataSource in leftDataSource" :key="dataSource">
-            <lay-checkbox
-              v-model="leftSelectedKeys"
-              skin="primary"
-              :label="dataSource[id]"
-            >
-              <slot v-if="slot.item" name="item" :data="dataSource" />
-              <span v-else>{{ dataSource.title }}</span>
-            </lay-checkbox>
-          </li>
-        </ul>
-      </div>
-      <div class="layui-transfer-active">
-        <lay-button
-          type="primary"
-          :disabled="leftSelectedKeys.length == 0"
-          @click="add"
-          ><i class="layui-icon layui-icon-next"
-        /></lay-button>
-        <lay-button
-          type="primary"
-          :disabled="rightSelectedKeys.length == 0"
-          @click="remove"
-          ><i class="layui-icon layui-icon-prev"
-        /></lay-button>
-      </div>
-      <div class="layui-transfer-box" style="width: 200px; height: 360px">
-        <div class="layui-transfer-header">
-          <lay-checkbox
-            v-model="allRightChecked"
-            skin="primary"
-            label="all"
-            @change="allRightChange"
-          >
-            <span>{{ title[1] }}</span>
-          </lay-checkbox>
-        </div>
-        <ul class="layui-transfer-data" style="height: 320px">
-          <li v-for="dataSource in rightDataSource" :key="dataSource">
-            <lay-checkbox
-              v-model="rightSelectedKeys"
-              skin="primary"
-              :label="dataSource[id]"
-            >
-              <slot v-if="slot.item" name="item" :data="dataSource" />
-              <span v-else>{{ dataSource.title }}</span>
-            </lay-checkbox>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</template>
 <script lang="ts">
 export default {
   name: "LayTransfer",
@@ -77,25 +9,18 @@ import { Recordable } from "../type";
 
 const slot = useSlots();
 
-const props = withDefaults(
-  defineProps<{
-    id?: string;
-    title?: string[];
-    dataSource: Recordable[];
-  }>(),
-  {
-    id: "id",
-    title: function () {
-      return ["主列表", "副列表"];
-    },
-    dataSource: function () {
-      return [];
-    },
-    selectedKeys: function () {
-      return [];
-    },
-  }
-);
+export interface LayTransferProps {
+  id?: string;
+  title?: string[];
+  dataSource: Recordable[];
+}
+
+const props = withDefaults(defineProps<LayTransferProps>(), {
+  id: "id",
+  title: () => ["主列表", "副列表"],
+  dataSource: () => [],
+  selectedKeys: () => [],
+});
 
 const leftDataSource: Ref<any[]> = ref([...props.dataSource]);
 const rightDataSource: Ref<any[]> = ref([]);
@@ -188,3 +113,72 @@ const remove = function () {
   rightSelectedKeys.value = [];
 };
 </script>
+
+<template>
+  <div>
+    <div class="layui-transfer layui-form layui-border-box">
+      <div class="layui-transfer-box" style="width: 200px; height: 360px">
+        <div class="layui-transfer-header">
+          <lay-checkbox
+            v-model="allLeftChecked"
+            skin="primary"
+            label="all"
+            @change="allLeftChange"
+          >
+            <span>{{ title[0] }}</span>
+          </lay-checkbox>
+        </div>
+        <ul class="layui-transfer-data" style="height: 320px">
+          <li v-for="dataSource in leftDataSource" :key="dataSource">
+            <lay-checkbox
+              v-model="leftSelectedKeys"
+              skin="primary"
+              :label="dataSource[id]"
+            >
+              <slot v-if="slot.item" name="item" :data="dataSource" />
+              <span v-else>{{ dataSource.title }}</span>
+            </lay-checkbox>
+          </li>
+        </ul>
+      </div>
+      <div class="layui-transfer-active">
+        <lay-button
+          type="primary"
+          :disabled="leftSelectedKeys.length == 0"
+          @click="add"
+          ><i class="layui-icon layui-icon-next"
+        /></lay-button>
+        <lay-button
+          type="primary"
+          :disabled="rightSelectedKeys.length == 0"
+          @click="remove"
+          ><i class="layui-icon layui-icon-prev"
+        /></lay-button>
+      </div>
+      <div class="layui-transfer-box" style="width: 200px; height: 360px">
+        <div class="layui-transfer-header">
+          <lay-checkbox
+            v-model="allRightChecked"
+            skin="primary"
+            label="all"
+            @change="allRightChange"
+          >
+            <span>{{ title[1] }}</span>
+          </lay-checkbox>
+        </div>
+        <ul class="layui-transfer-data" style="height: 320px">
+          <li v-for="dataSource in rightDataSource" :key="dataSource">
+            <lay-checkbox
+              v-model="rightSelectedKeys"
+              skin="primary"
+              :label="dataSource[id]"
+            >
+              <slot v-if="slot.item" name="item" :data="dataSource" />
+              <span v-else>{{ dataSource.title }}</span>
+            </lay-checkbox>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</template>

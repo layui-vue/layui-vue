@@ -14,8 +14,8 @@ export default {
 <script lang="ts" setup>
 import TreeNode from './TreeNode.vue'
 import { computed } from 'vue'
-import { useTree } from '/@src/module/tree/useTree'
-import { TreeData } from '/@src/module/tree/tree'
+import { useTree } from './useTree'
+import { TreeData } from './tree'
 
 type StringFn = () => string
 type StringOrNumber = string | number

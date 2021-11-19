@@ -43,7 +43,7 @@
           </a>
         </li>
         <li class="layui-nav-item">
-          <a href="javascript:void(0)"> 0.2.3 </a>
+          <a href="javascript:void(0)"> 0.2.4 </a>
         </li>
       </ul>
     </lay-header>
@@ -319,16 +319,12 @@ export default {
       },
     ]
 
-    const selected = ref(1)
-
     const handleClick = function (menu) {
-      selected.value = menu.id
       router.push(menu.path)
     }
 
     return {
       menus,
-      selected,
       currentPath,
       handleClick,
     }

@@ -1,6 +1,6 @@
-import { TreeEmits, TreeProps } from '/@src/module/tree/tree.type'
+import { TreeEmits, TreeProps } from './tree.type'
 import { computed, ComputedRef, watch } from 'vue'
-import { Tree, TreeData } from '/@src/module/tree/tree'
+import { Tree, TreeData } from './tree'
 
 export declare type UseTree = (
   props: TreeProps,
