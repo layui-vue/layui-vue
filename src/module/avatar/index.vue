@@ -1,3 +1,20 @@
+<script lang="ts">
+export default {
+  name: "LayAvatar"
+}
+</script>
+
+<script setup lang="ts">
+import { defineProps } from 'vue'
+import "./index.less"
+
+const props = defineProps<{
+  src?: String
+  radius?: boolean
+  size?: string
+}>()
+</script>
+
 <template>
   <img
     :src="src"
@@ -8,13 +25,3 @@
     ]"
   />
 </template>
-
-<script setup name="LayAvatar" lang="ts">
-import { defineProps } from 'vue'
-
-const props = defineProps<{
-  src?: String
-  radius?: boolean
-  size?: string
-}>()
-</script>

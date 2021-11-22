@@ -13,7 +13,7 @@ import { ref } from 'vue'
 export default {
   setup() {
 
-    const src = ref("https://portrait.gitee.com/uploads/avatars/user/30/92529_sentsin_1578917144.jpg")
+    const src = ref("https://portrait.gitee.com/uploads/avatars/user/2813/8441097_shaynas_1610801433.png")
 
     return {
         src
@@ -40,7 +40,7 @@ export default {
 
     setup() {
 
-        const src = "https://portrait.gitee.com/uploads/avatars/user/30/92529_sentsin_1578917144.jpg"
+        const src = "https://portrait.gitee.com/uploads/avatars/user/2813/8441097_shaynas_1610801433.png"
         
         return {
             src
@@ -69,7 +69,7 @@ import { ref } from 'vue'
 export default {
     setup() {
 
-        const src = "https://portrait.gitee.com/uploads/avatars/user/30/92529_sentsin_1578917144.jpg"
+        const src = "https://portrait.gitee.com/uploads/avatars/user/2813/8441097_shaynas_1610801433.png"
 
         return {
           src

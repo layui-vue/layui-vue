@@ -61,11 +61,12 @@ const props = withDefaults(defineProps<LayLayerProps>(), {
   isOutAnim: true
 });
 
-const top = ref(props.offset[0]);
-const left = ref(props.offset[1]);
+const top = ref(props.offset[0].indexOf('%') != -1 ? "calc(" + props.offset[0] + " - (" + props.height + "/2 ))" : props.offset[0]);
+const left = ref(props.offset[1].indexOf('%') != -1 ? "calc(" + props.offset[1] + " - (" + props.width  + "/2 ))" : props.offset[1]);
 const width = ref(props.width);
 const height = ref(props.height);
 const max = ref(false);
+
 const contentHeight = ref(
   props.btn.length > 0
     ? "calc(" + height.value + " - 100px)"
@@ -112,13 +113,19 @@ const minHandle = function () {
   emit("update:visible", false);
 };
 
+const maxBeforeTop = ref()
+const maxBeforeLeft = ref()
+
 const maxHandle = function () {
   if (max.value) {
     width.value = props.width;
     height.value = props.height;
-    top.value = props.offset[0];
-    left.value = props.offset[1];
+    top.value = maxBeforeTop.value;
+    left.value = maxBeforeLeft.value;
   } else {
+    let dom = document.getElementById(props.id);
+    maxBeforeTop.value = dom?.style.top
+    maxBeforeLeft.value = dom?.style.left
     width.value = "100%";
     height.value = "100%";
     top.value = "0px";
