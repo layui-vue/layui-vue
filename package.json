@@ -32,6 +32,7 @@
     "vue-router": "^4.0.12"
   },
   "dependencies": {
+    "@types/node": "^16.11.9",
     "vue": "^3.2.22",
     "vue-router": "^4.0.12"
   },
@@ -50,6 +51,7 @@
     "markdown-it-container": "^3.0.0",
     "prismjs": "^1.25.0",
     "rimraf": "^3.0.2",
+    "rollup": "^2.0.0",
     "typescript": "^4.5.2",
     "vite": "2.6.14",
     "vite-plugin-md": "^0.11.4"
