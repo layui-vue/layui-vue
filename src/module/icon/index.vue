@@ -5,7 +5,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { defineProps } from "vue";
+import { computed, defineProps } from "vue";
 
 export interface LayIconProps {
   prefix?: string;
@@ -17,8 +17,15 @@ export interface LayIconProps {
 const props = withDefaults(defineProps<LayIconProps>(), {
   prefix: "layui-icon",
 });
+
+const styles = computed(() => {
+  return {
+    color: props.color,
+    fontSize: props.size,
+  };
+});
 </script>
 
 <template>
-  <i :class="[prefix, type]" :style="{ color: color, fontSize: size }" />
+  <i :class="[prefix, type]" :style="styles" />
 </template>

@@ -1,14 +1,14 @@
 import path from 'path'
 import { defineConfig } from 'vite'
-import babel from '@rollup/plugin-babel'
 import { name } from './package.json'
-import plugins from './docs/src/plugin/common-plugins'
+import babel from '@rollup/plugin-babel'
+import plugins from './example/src/plugin/common-plugins'
 
 const camelize = (name: string) =>
   name.replace(/(^|-)(\w)/g, (a, b, c) => c.toUpperCase())
 
 export default defineConfig({
-  root: path.resolve(__dirname, 'docs'),
+  root: path.resolve(__dirname, 'example'),
   resolve: {
     alias: {
       '/@src': path.resolve(__dirname, 'src'),
