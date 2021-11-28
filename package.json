@@ -18,7 +18,7 @@
     "dev": "vite",
     "build": "vite build --emptyOutDir && npm run build:types",
     "build:types": "rimraf types && tsc -d",
-    "build:docs": "vite build docs"
+    "build:example": "vite build example"
   },
   "keywords": [
     "layui-vue",
