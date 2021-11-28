@@ -335,8 +335,8 @@ export default {
           {
             id: 90,
             title: '弹层',
-            subTitle: 'layer',
-            path: '/zh-CN/components/layer',
+            subTitle: 'modal',
+            path: '/zh-CN/components/modal',
           },
         ],
       },

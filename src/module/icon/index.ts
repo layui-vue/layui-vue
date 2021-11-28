@@ -1,5 +1,5 @@
 import type { App } from 'vue'
-import Component from './index.vue'
+import { LayIcon as Component } from '@layui/icons-vue'
 import type { IDefineComponent } from '../type/index'
 
 Component.install = (app: App) => {

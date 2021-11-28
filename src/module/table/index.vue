@@ -14,6 +14,9 @@ import {
   defineEmits,
 } from "vue";
 import { Recordable } from "../type";
+import { guid } from "../../tools/guidUtil";
+
+const tableId = guid();
 
 const props = withDefaults(
   defineProps<{
@@ -91,7 +94,7 @@ const rowDoubleClick = function (data: any) {
 };
 
 const print = function () {
-  let subOutputRankPrint = document.getElementById("lay-table") as HTMLElement;
+  let subOutputRankPrint = document.getElementById(tableId) as HTMLElement;
   let newContent = subOutputRankPrint.innerHTML;
   let oldContent = document.body.innerHTML;
   document.body.innerHTML = newContent;
@@ -102,7 +105,7 @@ const print = function () {
 </script>
 
 <template>
-  <div id="lay-table">
+  <div :id="tableId">
     <table class="layui-hide" lay-filter="test" />
     <div
       class="layui-form layui-border-box layui-table-view layui-table-view-1"

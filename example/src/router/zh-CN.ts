@@ -259,8 +259,8 @@ const zhCN = [
             meta: { title: '颜色选择器' },
           },
           {
-            path: '/zh-CN/components/layer',
-            component: () => import('../../docs/zh-CN/components/layer.md'),
+            path: '/zh-CN/components/modal',
+            component: () => import('../../docs/zh-CN/components/modal.md'),
             meta: { title: '弹层' },
           },
         ],

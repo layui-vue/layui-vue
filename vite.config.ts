@@ -28,7 +28,7 @@ export default defineConfig({
           const name = id.replace(/^@/, '').split('/')[0]
           return camelize(name)
         },
-        assetFileNames: 'layui.css',
+        assetFileNames: 'index.css',
       },
       plugins: [
         babel({

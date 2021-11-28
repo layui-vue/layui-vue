@@ -5,11 +5,11 @@
 
 <template>
   <lay-button @click="changeVisible1" type="primary">基础使用</lay-button>
-  <lay-layer title="基础使用" v-model:visible="visible1">
+  <lay-modal title="基础使用" v-model:visible="visible1">
     <div style="padding:10px">
     这是一个基础弹窗
     </div>
-  </lay-layer>
+  </lay-modal>
 </template>
 
 <script>
@@ -40,11 +40,11 @@ export default {
 
 <template>
   <lay-button @click="changeVisible2" type="primary">允许拖动</lay-button>
-  <lay-layer title="允许拖动" v-model:visible="visible2" move="true">
+  <lay-modal title="允许拖动" v-model:visible="visible2" move="true">
     <div style="padding:10px">
       这是一个可以拖拽的弹窗
     </div>
-  </lay-layer>
+  </lay-modal>
 </template>
 
 <script>
@@ -75,11 +75,11 @@ export default {
 
 <template>
   <lay-button @click="changeVisible3" type="primary">放大缩小</lay-button>
-  <lay-layer title="放大缩小" v-model:visible="visible3" move="true" maxmin="true">
+  <lay-modal title="放大缩小" v-model:visible="visible3" move="true" maxmin="true">
       <div style="padding:10px">
         该弹窗支持放大缩小
       </div>
-  </lay-layer>
+  </lay-modal>
 </template>
 
 <script>
@@ -110,11 +110,11 @@ export default {
 
 <template>
   <lay-button @click="changeVisible4" type="primary">指定位置</lay-button>
-  <lay-layer title="指定位置" v-model:visible="visible4" move="true" :offset="['100px','100px']">
+  <lay-modal title="指定位置" v-model:visible="visible4" move="true" :offset="['100px','100px']">
       <div style="padding:10px">
       指定弹窗显示的默认位置
       </div>
-  </lay-layer>
+  </lay-modal>
 </template>
 
 <script>
@@ -145,7 +145,7 @@ export default {
 
 <template>
   <lay-button @click="changeVisible5" type="primary">远程窗体</lay-button>
-  <lay-layer title="加载 Iframe 内容" width="500px" height="400px" maxmin="true" v-model:visible="visible5" move="true" :type="type5" content="http://www.pearadmin.com"></lay-layer>
+  <lay-modal title="加载 Iframe 内容" width="500px" height="400px" maxmin="true" v-model:visible="visible5" move="true" :type="type5" content="http://www.pearadmin.com"></lay-modal>
 </template>
 
 <script>
@@ -178,11 +178,11 @@ export default {
 
 <template>
   <lay-button @click="changeVisible6" type="primary">定义操作</lay-button>
-  <lay-layer title="定义操作" v-model:visible="visible6" move="true" :btn="btn6">
+  <lay-modal title="定义操作" v-model:visible="visible6" move="true" :btn="btn6">
     <div style="padding:10px">
     定义一组弹窗操作按钮
     </div>
-  </lay-layer>
+  </lay-modal>
 </template>
 
 <script>
@@ -211,18 +211,18 @@ export default {
 
 :::
 
-::: title 开启遮盖
+::: title 关闭遮盖
 :::
 
 ::: demo
 
 <template>
   <lay-button @click="changeVisible7" type="primary">开启遮盖</lay-button>
-  <lay-layer title="开启遮盖" move="true" shade="true" v-model:visible="visible7">
+  <lay-modal title="开启遮盖" move="true" shade="false" v-model:visible="visible7">
     <div style="padding:10px">
       允许点击遮盖层关闭弹窗
     </div>
-  </lay-layer>
+  </lay-modal>
 </template>
 
 <script>
@@ -239,6 +239,49 @@ export default {
 
     return {
         visible7
+    };
+  },
+};
+</script>
+
+:::
+
+::: title 函数调用
+:::
+
+::: demo
+
+<template>
+  <lay-button @click="open" type="primary">open</lay-button>
+  <lay-button @click="close" type="primary">close</lay-button>
+  <lay-button @click="closeAll" type="primary">closeAll</lay-button>
+</template>
+
+<script>
+import { ref, watch } from "vue";
+import { layer } from "../../../../src/index.ts"
+import { useRoute, useRouter } from "vue-router";
+export default {
+  setup() {
+
+    let id = null;
+
+    const open = function() {
+      id = layer.open({title:"标题",content:"内容", shade: false})
+    }
+
+    const close = function() {
+      layer.close(id)
+    }
+
+    const closeAll = function() {
+      layer.closeAll()
+    }
+
+    return {
+        open,
+        close,
+        closeAll
     };
   },
 };

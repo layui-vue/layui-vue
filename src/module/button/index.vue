@@ -53,7 +53,7 @@ const classes = computed(() => {
       v-if="loading"
       class="
         layui-icon
-        layui-icon-loading-1
+        layui-icon-loading-one
         layui-anim
         layui-anim-rotate
         layui-anim-loop

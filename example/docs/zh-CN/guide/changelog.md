@@ -10,6 +10,16 @@
 ::: demo
 <template>
 <lay-timeline>
+<lay-timeline-item title="0.2.5">
+[新增] icons 组件化调用方式, 使用 class 作为组件名使用组件。<br>
+[新增] layer, 提供 layer.open, layer.close, layer.closeAll 函数式调用。<br>
+[修复] layer 的 id 属性不唯一, 调整 Guid 为 Uuid 策略。<br>
+[修改] lay-layer 组件为 lay-modal, 使用方式保持不变。<br>
+[修改] lay-layer 组件 move 默认为 true, 默认提供拖拽支持。<br> 
+[修稿] layer.css 为 @layui/layui-vue/lib/index.css。<br>
+[独立] layui-vue 项目, layer 与 lay-modal 组件仍内置, 亦支持单独引用。<br>
+[独立] icons-vue 项目, lay-icon 与 iconfont.less 仍内置, 亦支持单独引用。<br>
+</lay-timeline-item>
 <lay-timeline-item title="0.2.4">
 [增强] checkbox 组件, v-model 支持 array 数据类型。<br>
 [重构] row col 栅格组件, 支持 24 粒度布局。<br>

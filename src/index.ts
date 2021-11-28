@@ -1,8 +1,13 @@
 import type { App } from 'vue'
 import type { IDefineComponent, InstallOptions } from './module/type/index'
 
-import './css/layui.css'
-import './css/layer.css'
+import './css/layui.css';
+import '@layui/layer-vue/lib/layer.css';
+import '@layui/icons-vue/lib/index.css';
+
+import { layer } from '@layui/layer-vue'
+
+import LayModal from './module/layer/modal/index'
 import LayAvatar from './module/avatar/index'
 import LayRadio from './module/radio/index'
 import LayButton from './module/button/index'
@@ -59,7 +64,6 @@ import LaySlider from './module/slider/index'
 import LayCarousel from './module/carousel/index'
 import LayCarouselItem from './module/carouselItem/index'
 import LayColorPicker from './module/colorPicker/index'
-import LayLayer from './module/layer/index'
 
 const components: Record<string, IDefineComponent> = {
   LayRadio,
@@ -118,7 +122,7 @@ const components: Record<string, IDefineComponent> = {
   LayCarousel,
   LayCarouselItem,
   LayColorPicker,
-  LayLayer,
+  LayModal,
 }
 
 const install = (app: App, options?: InstallOptions): void => {
@@ -188,8 +192,9 @@ export {
   LayCarousel,
   LayCarouselItem,
   LayColorPicker,
-  LayLayer,
+  LayModal,
   install,
+  layer
 }
 
 export default { install }

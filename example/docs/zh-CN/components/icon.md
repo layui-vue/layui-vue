@@ -75,9 +75,6 @@ export default {
 ::: title 图标列表
 :::
 
-::: demo
-
-<template>
 <ul class="site-doc-icon">
       <li>
         <i class="layui-icon layui-icon-heart-fill"></i>
@@ -1088,21 +1085,6 @@ export default {
         <div class="doc-icon-fontclass">layui-icon-add-circle-fine</div>
       </li>
     </ul>
-</template>
-
-<script>
-import { ref } from 'vue'
-
-export default {
-  setup() {
-
-    return {
-    }
-  }
-}
-</script>
-
-:::
 
 ::: title 图标属性
 :::
