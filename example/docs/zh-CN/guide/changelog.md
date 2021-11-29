@@ -10,6 +10,11 @@
 ::: demo
 <template>
 <lay-timeline>
+<lay-timeline-item title="0.2.6">
+[依赖] hooks-vue 0.1.2。<br>
+[升级] layer-vue 1.0.3。<br>
+[修复] icons-vue 依赖 not found。<br> 
+</lay-timeline-item>
 <lay-timeline-item title="0.2.5">
 [新增] icons 组件化调用方式, 使用 class 作为组件名使用组件。<br>
 [新增] layer, 提供 layer.open, layer.close, layer.closeAll 函数式调用。<br>
