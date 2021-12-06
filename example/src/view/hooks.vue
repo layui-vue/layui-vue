@@ -69,6 +69,12 @@ export default {
         title: 'hooks',
         children: [
           {
+            id: 0,
+            title: '开始',
+            subTitle: 'useStarted',
+            path: '/zh-CN/hooks/useStarted',
+          },
+          {
             id: 1,
             title: '事件',
             subTitle: 'useClickOutside',
@@ -85,6 +91,16 @@ export default {
             title: '全屏',
             subTitle: 'useFullScreen',
             path: '/zh-CN/hooks/useFullScreen',
+          },{
+            id: 3,
+            title: '状态',
+            subTitle: 'useState',
+            path: '/zh-CN/hooks/useState',
+          },{
+            id: 4,
+            title: '布尔',
+            subTitle: 'useBoolean',
+            path: '/zh-CN/hooks/useBoolean',
           },
         ],
       },

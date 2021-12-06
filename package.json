@@ -1,6 +1,6 @@
 {
   "name": "@layui/layui-vue",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "description": "a component library for Vue 3 base on layui-vue",
   "homepage": "https://gitee.com/layui-vue/layui-vue/blob/master/README.md",
   "module": "lib/layui-vue.es.js",
@@ -13,7 +13,7 @@
     "./lib/": "./lib/"
   },
   "types": "types/index.d.ts",
-  "style": "lib/layui.css",
+  "style": "lib/index.css",
   "scripts": {
     "dev": "vite",
     "build": "vite build --emptyOutDir && npm run build:types",
@@ -28,18 +28,18 @@
   "author": "就眠儀式",
   "license": "MIT",
   "peerDependencies": {
-    "vue": "^3.2.22",
+    "vue": "^3.2.23",
     "vue-router": "^4.0.12",
-    "@layui/layer-vue": "^1.0.3",
+    "@layui/layer-vue": "^1.0.6",
     "@layui/icons-vue": "^1.0.0",
-    "@layui/hooks-vue": "^0.1.2"
+    "@layui/hooks-vue": "^0.1.6"
   },
   "dependencies": {
-    "vue": "^3.2.22",
+    "vue": "^3.2.23",
     "vue-router": "^4.0.12",
-    "@layui/layer-vue": "^1.0.3",
+    "@layui/layer-vue": "^1.0.6",
     "@layui/icons-vue": "^1.0.0",
-    "@layui/hooks-vue": "^0.1.2"
+    "@layui/hooks-vue": "^0.1.6"
   },
   "devDependencies": {
     "@babel/core": "^7.15.8",
@@ -50,8 +50,8 @@
     "@types/markdown-it": "^12.2.3",
     "@types/markdown-it-container": "^2.0.4",
     "@vitejs/plugin-vue": "^1.9.3",
-    "@vue/compiler-sfc": "^3.2.22",
-    "@vue/server-renderer": "^3.2.20",
+    "@vue/compiler-sfc": "^3.2.23",
+    "@vue/server-renderer": "^3.2.23",
     "escape-html": "^1.0.3",
     "less": "^4.1.2",
     "markdown-it-container": "^3.0.0",

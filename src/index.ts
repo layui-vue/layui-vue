@@ -2,7 +2,7 @@ import type { App } from 'vue'
 import type { IDefineComponent, InstallOptions } from './module/type/index'
 
 import './css/layui.css';
-import '@layui/layer-vue/lib/layer.css';
+import '@layui/layer-vue/lib/index.css';
 import '@layui/icons-vue/lib/index.css';
 
 import { layer } from '@layui/layer-vue'

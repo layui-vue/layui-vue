@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import useFullScreen from '/@src/hooks/useFullScreen'
+import { useFullScreen } from '@layui/hooks-vue'
 
 export default {
   setup() {

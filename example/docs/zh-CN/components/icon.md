@@ -72,6 +72,31 @@ export default {
 
 :::
 
+
+::: title 图标组件
+:::
+
+<br>
+
+::: describe 在 0.2.4 版本后, 我们支持使用组件化调用的方式使用图标, 但你需要安装 `@layui/icons-vue` 库。
+:::
+
+```
+npm install @layui/icons-vue
+```
+
+```vue
+<template>
+  <!-- 组件图标 -->
+  <AlignCenterIcon></AlignCenterIcon>
+  <DiamondIcon></DiamondIcon>
+</template>
+
+<script setup>
+  import { AlignCenterIcon, DiamondIcon } from '@layui/icons-vue';
+</script>
+```
+
 ::: title 图标列表
 :::
 

@@ -272,6 +272,12 @@ const zhCN = [
         meta: { title: 'hooks' },
         children: [
           {
+            path: '/zh-CN/hooks/useStarted',
+            component: () =>
+              import('../../docs/zh-CN/hooks/useStarted.md'),
+            meta: { title: 'useStarted' },
+          },
+          {
             path: '/zh-CN/hooks/useClickOutside',
             component: () =>
               import('../../docs/zh-CN/hooks/useClickOutside.md'),
@@ -286,6 +292,15 @@ const zhCN = [
             path: '/zh-CN/hooks/useMove',
             component: () => import('../../docs/zh-CN/hooks/useMove.md'),
             meta: { title: 'useMove' },
+          },          {
+            path: '/zh-CN/hooks/useState',
+            component: () => import('../../docs/zh-CN/hooks/useState.md'),
+            meta: { title: 'useState' },
+          },
+          {
+            path: '/zh-CN/hooks/useBoolean',
+            component: () => import('../../docs/zh-CN/hooks/useBoolean.md'),
+            meta: { title: 'useBoolean' },
           },
         ],
       },

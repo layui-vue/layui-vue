@@ -11,7 +11,7 @@
 
 <script>
 import { ref, watch, onMounted } from 'vue'
-import useMove from '/@src/hooks/useMove'
+import { useMove } from '@layui/hooks-vue'
 
 export default {
   setup() {

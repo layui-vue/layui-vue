@@ -11,7 +11,7 @@
 
 <script>
 import { ref, watch } from 'vue'
-import useClickOutside from '/@src/hooks/useClickOutside'
+import { useClickOutside } from '@layui/hooks-vue'
 
 export default {
   setup() {

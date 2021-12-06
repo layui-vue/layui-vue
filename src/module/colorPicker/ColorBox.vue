@@ -4,11 +4,11 @@ export default {
 }
 </script>
 <script setup lang="ts">
-import { Nullable } from '/@src/module/type'
+import { Nullable } from '../type'
 import { computed, onMounted, ref } from 'vue'
-import { HSBToHEX, RGBSTo, RGBToHSB } from '/@src/module/colorPicker/colorUtil'
+import { HSBToHEX, RGBSTo, RGBToHSB } from './colorUtil'
 import ColorPicker from './ColorPicker.vue'
-import { usePosition } from '/@src/hooks/usePosition'
+import { usePosition } from '@layui/hooks-vue'
 
 interface BoxProps {
   color?: string
