@@ -81,27 +81,27 @@ export default {
             path: '/zh-CN/hooks/useClickOutside',
           },
           {
-            id: 3,
+            id: 2,
             title: '拖拽',
             subTitle: 'useMove',
             path: '/zh-CN/hooks/useMove',
-          },
-          {
-            id: 2,
-            title: '全屏',
-            subTitle: 'useFullScreen',
-            path: '/zh-CN/hooks/useFullScreen',
           },{
             id: 3,
-            title: '状态',
-            subTitle: 'useState',
-            path: '/zh-CN/hooks/useState',
-          },{
-            id: 4,
             title: '布尔',
             subTitle: 'useBoolean',
             path: '/zh-CN/hooks/useBoolean',
+          },{
+            id: 4,
+            title: '状态',
+            subTitle: 'useState',
+            path: '/zh-CN/hooks/useState',
           },
+          {
+            id: 5,
+            title: '全屏',
+            subTitle: 'useFullScreen',
+            path: '/zh-CN/hooks/useFullScreen',
+          }
         ],
       },
     ]

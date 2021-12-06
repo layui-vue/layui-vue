@@ -262,6 +262,10 @@ const zhCN = [
             path: '/zh-CN/components/modal',
             component: () => import('../../docs/zh-CN/components/modal.md'),
             meta: { title: '弹层' },
+          },{
+            path: '/zh-CN/components/load',
+            component: () => import('../../docs/zh-CN/components/load.md'),
+            meta: { title: '加载' },
           },
         ],
       },

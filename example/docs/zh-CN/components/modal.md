@@ -72,9 +72,7 @@ export default {
 <template>
   <lay-button @click="changeVisible3" type="primary">放大缩小</lay-button>
   <lay-modal title="放大缩小" v-model="visible3" move="true" maxmin="true">
-      <div style="padding:10px">
-        该弹窗支持放大缩小
-      </div>
+      该弹窗支持放大缩小
   </lay-modal>
 </template>
 
@@ -107,9 +105,7 @@ export default {
 <template>
   <lay-button @click="changeVisible4" type="primary">指定位置</lay-button>
   <lay-modal title="指定位置" v-model="visible4" move="true" :offset="['100px','100px']">
-      <div style="padding:10px">
       指定弹窗显示的默认位置
-      </div>
   </lay-modal>
 </template>
 
@@ -175,9 +171,7 @@ export default {
 <template>
   <lay-button @click="changeVisible6" type="primary">定义操作</lay-button>
   <lay-modal title="定义操作" v-model="visible6" move="true" :btn="btn6">
-    <div style="padding:10px">
     定义一组弹窗操作按钮
-    </div>
   </lay-modal>
 </template>
 
@@ -215,9 +209,7 @@ export default {
 <template>
   <lay-button @click="changeVisible7" type="primary">开启遮盖</lay-button>
   <lay-modal title="开启遮盖" move="true" shade="false" v-model="visible7">
-    <div style="padding:10px">
       允许点击遮盖层关闭弹窗
-    </div>
   </lay-modal>
 </template>
 
@@ -248,9 +240,9 @@ export default {
 ::: demo
 
 <template>
-  <lay-button @click="open" type="primary">open</lay-button>
-  <lay-button @click="close" type="primary">close</lay-button>
-  <lay-button @click="closeAll" type="primary">closeAll</lay-button>
+  <lay-button @click="open" type="primary">打开</lay-button>
+  <lay-button @click="close" type="primary">关闭</lay-button>
+  <lay-button @click="closeAll" type="primary">关闭所有</lay-button>
 </template>
 
 <script>
@@ -296,9 +288,8 @@ export default {
 | move            | 允许拖拽      | `false`                    |
 | maxmin          | 最小化 最大化 | `false`                    |
 | offset          | 位置          | --                         |
-| width           | 宽            | --                         |
-| height          | 高            | --                         |
-| v-model:visible | 展示 隐藏     | false                      |
+| area            | 尺寸          | --                         |
+| v-model         | 展示 隐藏     | false                      |
 | content         | 内容          | --                         |
 | shade           | 开启遮盖      | --                         |
 | shadeClose      | 遮盖点击关闭  | --                         |
