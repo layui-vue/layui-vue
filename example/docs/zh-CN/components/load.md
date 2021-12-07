@@ -44,7 +44,7 @@ export default {
 ::: title 手动关闭
 :::
 
-::: demo
+::: demo 使用 layer.msg 创建弹出层, time 属性用于配置显示时长
 
 <template>
   <lay-button-container>

@@ -78,12 +78,15 @@ export default {
 
 <br>
 
-::: describe 在 0.2.4 版本后, 我们支持使用组件化调用的方式使用图标, 但你需要安装 `@layui/icons-vue` 库。
+::: describe 在 0.2.4 版本后, 图标支持组件化的调用方式, 首先你需要安装 `@layui/icons-vue` 依赖。
 :::
 
 ```
 npm install @layui/icons-vue
 ```
+
+::: describe 接下来, 你可以像之前使用组件一样去创建图标。
+:::
 
 ```vue
 <template>

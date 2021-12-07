@@ -1,30 +1,41 @@
+<script lang="ts">
+export default {
+  name: "LayProgress",
+};
+</script>
+
+<script setup lang="ts">
+import { computed, defineProps } from "vue";
+
+const props = defineProps<{
+  percent: number | string;
+  theme?: string;
+  color?: string;
+  size?: string;
+  showText?: boolean;
+  text?: string;
+}>();
+
+const styles = computed(() => {
+  return [
+    props.color ? "background-color: " + props.color : "",
+    {
+      width: props.percent + "%",
+    },
+  ];
+});
+</script>
+
 <template>
   <div class="layui-progress" :class="'layui-progress-' + size">
     <div
       class="layui-progress-bar"
       :class="'layui-bg-' + theme"
-      :style="[
-        color ? 'background-color: ' + color : '',
-        {
-          width: percent + '%',
-        },
-      ]"
+      :style="styles"
     >
       <span v-if="showText" class="layui-progress-text">
-        {{ text ? text : percent + '%' }}
+        {{ text ? text : percent + "%" }}
       </span>
     </div>
   </div>
 </template>
-<script setup name="LayProgress" lang="ts">
-import { defineProps } from 'vue'
-
-const props = defineProps<{
-  percent: number | string
-  theme?: string
-  color?: string
-  size?: string
-  showText?: boolean
-  text?: string
-}>()
-</script>

@@ -271,7 +271,7 @@ const zhCN = [
       },
       {
         path: '/zh-CN/hooks',
-        redirect: '/zh-CN/hooks/useClickOutside',
+        redirect: '/zh-CN/hooks/useStarted',
         component: Hooks,
         meta: { title: 'hooks' },
         children: [
