@@ -103,13 +103,7 @@ export default {
             title: '赞助',
             subTitle: 'sponsor',
             path: '/zh-CN/guide/sponsor',
-          },
-          {
-            id: 7,
-            title: '贡献',
-            subTitle: 'contribution',
-            path: '/zh-CN/guide/contribution',
-          },
+          }
         ],
       },
     ]

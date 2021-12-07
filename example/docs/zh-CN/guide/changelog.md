@@ -2,7 +2,7 @@
 :::
 
 <lay-timeline style="padding-left:30px;padding-top:30px;">
-  <lay-timeline-item title="尾版本号：日常 bugfix 更新" simple></lay-timeline-item>
+  <lay-timeline-item title="尾版本号：日常问题更新。" simple></lay-timeline-item>
   <lay-timeline-item title="次版本号：带有新特性的向下兼容的版本。" simple></lay-timeline-item>
   <lay-timeline-item title="主版本号：含有破坏性更新和新特性，不在发布周期内。" simple></lay-timeline-item>
 </lay-timeline>
@@ -11,8 +11,8 @@
 <template>
 <lay-timeline>
 <lay-timeline-item title="0.2.7">
-[新增] useState 状态管理 hooks。<br>
-[新增] useBoolean (特殊的 useState) 布尔状态管理 hooks。<br>
+[新增] useState 变量状态管理。<br>
+[新增] useBoolean 布尔变量状态管理。<br>
 [新增] layer 对象 load 方法, 通过 type 配置调用不同类型加载层。<br>
 [文档] icons-vue 组件化使用方式。<br>
 [文档] hooks-vue 安装文档。<br>

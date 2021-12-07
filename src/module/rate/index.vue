@@ -91,7 +91,7 @@ const action = function (index: number, event: any) {
           :class="[
             'layui-icon',
             `${
-              half && isHalf && index === Math.ceil(currentValue)
+              half && isHalf && currentValue%1 != 0 && index === Math.ceil(currentValue)
                 ? 'layui-icon-rate-half'
                 : 'layui-icon-rate-solid'
             }`,
