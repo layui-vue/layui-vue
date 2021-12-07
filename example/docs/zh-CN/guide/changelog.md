@@ -13,6 +13,8 @@
 <lay-timeline-item title="0.2.7">
 [新增] useState 变量状态管理。<br>
 [新增] useBoolean 布尔变量状态管理。<br>
+[新增] rate 评分组件 half 属性, 支持半选状态。<br>
+[新增] rate 评分组件 select 事件, 评分回调事件。<br>
 [新增] layer 对象 load 方法, 通过 type 配置调用不同类型加载层。<br>
 [文档] icons-vue 组件化使用方式。<br>
 [文档] hooks-vue 安装文档。<br>
