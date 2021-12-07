@@ -53,9 +53,14 @@ const zhCN = [
             meta: { title: '规范' },
           },
           {
-            path: '/zh-CN/guide/sandbox',
-            component: () => import('../../docs/zh-CN/guide/sandbox.md'),
-            meta: { title: '沙盒' },
+            path: '/zh-CN/guide/theme',
+            component: () => import('../../docs/zh-CN/guide/theme.md'),
+            meta: { title: '主题' },
+          },
+          {
+            path: '/zh-CN/guide/sponsor',
+            component: () => import('../../docs/zh-CN/guide/sponsor.md'),
+            meta: { title: '赞助' },
           },
         ],
       },
@@ -266,6 +271,10 @@ const zhCN = [
             path: '/zh-CN/components/load',
             component: () => import('../../docs/zh-CN/components/load.md'),
             meta: { title: '加载' },
+          },{
+            path: '/zh-CN/components/confirm',
+            component: () => import('../../docs/zh-CN/components/confirm.md'),
+            meta: { title: '确认' },
           },
         ],
       },

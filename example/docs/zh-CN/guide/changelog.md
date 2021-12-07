@@ -11,9 +11,14 @@
 <template>
 <lay-timeline>
 <lay-timeline-item title="0.2.7">
-[依赖] hooks-vue 0.1.2。<br>
+[新增] useState 状态管理 hooks。<br>
+[新增] useBoolean (特殊的 useState) 布尔状态管理 hooks。<br>
+[新增] layer 对象 load 方法, 通过 type 配置调用不同类型加载层。<br>
+[文档] icons-vue 组件化使用方式。<br>
+[文档] hooks-vue 安装文档。<br>
+[升级] hooks-vue 0.1.2。<br>
 [升级] layer-vue 1.0.3。<br>
-[修复] icons-vue 依赖 not found。<br> 
+[升级] vue 3.2.24。 
 </lay-timeline-item>
 <lay-timeline-item title="0.2.6">
 [依赖] hooks-vue 0.1.2。<br>
@@ -26,7 +31,7 @@
 [修复] layer 的 id 属性不唯一, 调整 Guid 为 Uuid 策略。<br>
 [修改] lay-layer 组件为 lay-modal, 使用方式保持不变。<br>
 [修改] lay-layer 组件 move 默认为 true, 默认提供拖拽支持。<br> 
-[修稿] layer.css 为 @layui/layui-vue/lib/index.css。<br>
+[修改] layer.css 为 @layui/layui-vue/lib/index.css。<br>
 [独立] layui-vue 项目, layer 与 lay-modal 组件仍内置, 亦支持单独引用。<br>
 [独立] icons-vue 项目, lay-icon 与 iconfont.less 仍内置, 亦支持单独引用。<br>
 </lay-timeline-item>

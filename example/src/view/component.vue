@@ -342,6 +342,11 @@ export default {
             title: '加载层',
             subTitle: 'modal',
             path: '/zh-CN/components/load',
+          },        {
+            id: 90,
+            title: '询问框',
+            subTitle: 'confirm',
+            path: '/zh-CN/components/confirm',
           },
         ],
       },

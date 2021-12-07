@@ -2,9 +2,8 @@
 :::
 
 <br>
-<br>
 
-::: describe 1.使用 npm 下载
+::: describe 1. 使用 npm 下载
 :::
 
 ```

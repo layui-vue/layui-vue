@@ -77,15 +77,39 @@ export default {
           {
             id: 2,
             title: '安装',
-            subTitle: 'get started',
+            subTitle: 'started',
             path: '/zh-CN/guide/getStarted',
           },
           {
             id: 3,
             title: '更新',
-            subTitle: 'change log',
+            subTitle: 'change',
             path: '/zh-CN/guide/changelog',
-          }
+          },
+          {
+            id: 4,
+            title: '问题',
+            subTitle: 'problem',
+            path: '/zh-CN/guide/problem',
+          },
+          {
+            id: 5,
+            title: '主题',
+            subTitle: 'theme',
+            path: '/zh-CN/guide/theme',
+          },
+          {
+            id: 6,
+            title: '赞助',
+            subTitle: 'sponsor',
+            path: '/zh-CN/guide/sponsor',
+          },
+          {
+            id: 7,
+            title: '贡献',
+            subTitle: 'contribution',
+            path: '/zh-CN/guide/contribution',
+          },
         ],
       },
     ]

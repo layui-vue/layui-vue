@@ -2,9 +2,8 @@
 :::
 
 <br>
-<br>
 
-::: describe 1.使用 npm 下载
+::: describe 1. 使用 npm 下载
 :::
 
 ```
@@ -13,7 +12,7 @@ npm install @layui/layui-vue --save
 
 <br>
 
-::: describe 2.在 main.ts 中依赖
+::: describe 2. 在 main.ts 中依赖
 :::
 
 ```js
@@ -27,7 +26,7 @@ createApp(App).use(Layui).mount('#app')
 
 <br>
 
-::: describe 3.在 index.vue 使用
+::: describe 3. 在 index.vue 使用
 :::
 
 ```html
