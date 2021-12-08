@@ -334,19 +334,24 @@ export default {
         children: [
           {
             id: 90,
-            title: '模态窗',
+            title: '弹层',
             subTitle: 'modal',
             path: '/zh-CN/components/modal',
-          },          {
-            id: 90,
-            title: '加载层',
+          },{
+            id: 91,
+            title: '加载',
             subTitle: 'modal',
             path: '/zh-CN/components/load',
-          },        {
-            id: 90,
-            title: '询问框',
+          },{
+            id: 92,
+            title: '询问',
             subTitle: 'confirm',
             path: '/zh-CN/components/confirm',
+          },{
+            id: 93,
+            title: '消息',
+            subTitle: 'msg',
+            path: '/zh-CN/components/msg',
           },
         ],
       },

@@ -14,7 +14,7 @@ export default {
   setup() {
 
     const openConfirm1 = function() {
-        layer.confirm("你没事吧???")
+        layer.confirm("layui-vue 1.0.0 已经发布")
     }
 
     return {
@@ -42,7 +42,7 @@ export default {
   setup() {
 
     const openConfirm2 = function() {
-        layer.confirm("你没事吧???", {btn: [{text:'确认'},{text:'取消'}]})
+        layer.confirm("你如何看待 layui-vue 的发布", {btn: [{text:'站着看'},{text:'坐着看'}]})
     }
 
     return {

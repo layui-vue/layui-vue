@@ -274,7 +274,11 @@ const zhCN = [
           },{
             path: '/zh-CN/components/confirm',
             component: () => import('../../docs/zh-CN/components/confirm.md'),
-            meta: { title: '确认' },
+            meta: { title: '询问' },
+          },{
+            path: '/zh-CN/components/msg',
+            component: () => import('../../docs/zh-CN/components/msg.md'),
+            meta: { title: '信息' },
           },
         ],
       },
