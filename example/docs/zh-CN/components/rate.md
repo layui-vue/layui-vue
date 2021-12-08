@@ -236,6 +236,36 @@ export default {
 
 :::
 
+::: title 自定义图标
+:::
+
+::: demo
+
+<template>
+  <lay-rate v-model="icons" :icons="['layui-icon-heart', 'layui-icon-heart-fill']" theme="#FE0000"></lay-rate><br>
+  <lay-rate v-model="halfIcons" :icons="['layui-icon-circle', 'layui-icon-radio', 'layui-icon-circle-dot']" half text></lay-rate><br>
+</template>
+
+<script>
+import { ref } from 'vue';
+
+export default {
+  setup() {
+
+    const icons = ref(4)
+    const halfIcons = ref(0.5)
+
+
+    return {
+      icons,
+      halfIcons
+    }
+  }
+}
+</script>
+
+:::
+
 ::: title 评分属性
 :::
 
@@ -243,13 +273,14 @@ export default {
 
 | 属性     | 描述      | 类型 | 默认值 |
 | -------- | -------- | ------ | ------ |
-| v-model  | 评分值   | number | 0     |
-| length   | 评分长度 | number | 5     |
-| readonly | 只读模式 | boolean | false     |
-| theme | 只读模式 | string | #ffb800     |
-| half     | 设定组件是否可以选择半星 |boolean | false     |
-| text | 是否显示评分对应的内容 | boolean | false     |
-| is-block | 评分是否显示为快元素 | boolean | false     |
+| v-model  | 评分值   | `number` | 0     |
+| length   | 评分长度 | `number` | 5     |
+| readonly | 只读模式 | `boolean` | false     |
+| theme    | 主题颜色 | `string` | #ffb800     |
+| half     | 设定组件是否可以选择半星 | `boolean` | false     |
+| text     | 是否显示评分对应的内容 | `boolean` | false     |
+| is-block | 评分是否显示为快元素 | `boolean` | false     |
+| icons    | 评分使用图标`class`；`["空心", "实心"]`/`["空心", "半心", "实心"]` | `string[]` | 星型     |
 
 :::
 
