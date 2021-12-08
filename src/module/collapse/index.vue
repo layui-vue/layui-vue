@@ -6,19 +6,34 @@
 
 <script setup name="LayCollapse"></script>
 <script setup lang="ts">
-import { withDefaults, defineProps, provide } from 'vue'
+import { withDefaults, defineProps, provide, ref, defineEmits, watch } from 'vue'
 
 const props = withDefaults(
   defineProps<{
-    openKeys: string[]
+    modelValue?: number | string | [];
+    accordion?: boolean;
   }>(),
   {
-    openKeys: function () {
-      return []
-    },
+    modelValue: () => [],
+    accordion: false
   }
 )
 
-provide("openKeys",props.openKeys)
+// 监听传入的值
+watch(
+  () => props.modelValue, 
+  (val, oldVal)=>{
+    activeValues.value = ([] as any[]).concat(val)
+  }
+)
+const emit = defineEmits(["update:modelValue", "change"])
+
+const activeValues = ref<Array<any>>(([] as any[]).concat(props.modelValue));
+
+provide("layCollapse", {
+  accordion : props.accordion,
+  activeValues,
+  emit
+})
 
 </script>

@@ -193,7 +193,7 @@ export default {
       },
       {
         id: 21,
-        title: '手风琴',
+        title: '折叠面板',
         subTitle: 'collapse',
         path: '/zh-CN/components/collapse',
       },
