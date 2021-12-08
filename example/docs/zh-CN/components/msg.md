@@ -4,6 +4,33 @@
 ::: demo
 
 <template>
+    <lay-button type="primary" @click="openMsg">普通消息</lay-button>
+</template>
+
+<script>
+import { layer } from "../../../../src/index.ts"
+
+export default {
+  setup() {
+
+    const openMsg = function() {
+        layer.msg("普通消息", { time: 1000 })
+    }
+    return {
+        openMsg
+    }
+  }
+}
+</script>
+
+:::
+
+::: title 指定图标
+:::
+
+::: demo
+
+<template>
     <lay-button type="primary" @click="openSuccess">成功消息</lay-button>
     <lay-button type="primary" @click="openFailure">失败消息</lay-button>
     <lay-button type="primary" @click="openWarning">警告消息</lay-button>

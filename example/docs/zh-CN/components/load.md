@@ -41,6 +41,34 @@ export default {
 
 :::
 
+::: title 其他方式
+:::
+
+::: demo
+
+<template>
+    <lay-button type="primary" @click="openLoading">加载消息</lay-button>
+</template>
+
+<script>
+import { layer } from "../../../../src/index.ts"
+
+export default {
+  setup() {
+
+    const openLoading = function() {
+        layer.msg("加载中...", { icon : 16, time: 1000})
+    }
+
+    return {
+        openLoading
+    }
+  }
+}
+</script>
+
+:::
+
 ::: title 手动关闭
 :::
 
@@ -48,7 +76,7 @@ export default {
 
 <template>
   <lay-button-container>
-    <lay-button @click="loading" type="primary">加载</lay-button>
+    <lay-button @click="loading" type="primary">关闭消息</lay-button>
   </lay-button-container>
 </template>
 
