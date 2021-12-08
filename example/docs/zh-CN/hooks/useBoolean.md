@@ -19,3 +19,14 @@ export default {
 }
 </script>
 ```
+
+::: title 使用备注
+:::
+
+::: table
+
+| 备注 | 描述           | 类型        |
+| ---- | -------------- | ----------- |
+| setTrue   | 设置值为 true | -- |
+| setFalse  | 设置值为 false | -- |
+:::
