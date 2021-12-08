@@ -1,35 +1,50 @@
 <template>
   <div class="layui-colla-item">
-    <h2 class="layui-colla-title" @click="showHandle">
-      {{ title
-      }}<i class="layui-icon layui-colla-icon">{{ isShow ? '' : '' }}</i>
+    <h2 :class="['layui-colla-title', {'layui-disabled' : disabled}]" @click="showHandle">
+      <slot name="title" :props="props">{{ title}}</slot>
+      <i class="layui-icon layui-colla-icon">{{ isShow ? '' : '' }}</i>
     </h2>
     <div class="layui-colla-content" :class="isShow ? 'layui-show' : ''">
       <p>
-        <slot />
+        <slot :props="props"/>
       </p>
     </div>
   </div>
 </template>
 
 <script setup name="LayCollapseItem" lang="ts">
-import { defineProps, inject, ref } from 'vue'
+import { withDefaults, defineProps, inject, computed, ref } from 'vue'
 
-const props = defineProps<{
-  id: string
-  title: string
-}>()
+const props = withDefaults(
+  defineProps<{
+    id: number | string
+    title: string
+    disabled?: boolean
+  }>(),
+  {
+    disabled: false
+  }
+)
 
-const openKeys = inject('openKeys') as string[]
+const {accordion, activeValues, emit} = inject('layCollapse') as any
 
-const isShow = ref(openKeys.includes(props.id))
+let isShow = computed(()=>{return activeValues.value.includes(props.id)})
 
 const showHandle = function () {
-  isShow.value = !isShow.value
-  if (openKeys.indexOf(props.id) != -1) {
-    openKeys.splice(openKeys.indexOf(props.id), 1)
-  } else {
-    openKeys.push(props.id)
+  if (props.disabled) {
+    return ;
   }
+  const _isShow = isShow.value;
+  // 手风琴效果
+  if (accordion) {
+    activeValues.value = !_isShow ? [props.id] : [];
+  } else if (_isShow) { // 普通折叠面板 --> 折叠
+    activeValues.value.splice(activeValues.value.indexOf(props.id), 1)
+  } else { // 普通折叠面板 --> 展开
+    activeValues.value.push(props.id)
+  }
+
+  emit("update:modelValue", (accordion ? activeValues.value[0] || null : activeValues.value));
+  emit("change", props.id, !_isShow, activeValues.value);
 }
 </script>

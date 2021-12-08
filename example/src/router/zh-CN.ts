@@ -159,7 +159,7 @@ const zhCN = [
           {
             path: '/zh-CN/components/collapse',
             component: () => import('../../docs/zh-CN/components/collapse.md'),
-            meta: { title: '手风琴' },
+            meta: { title: '折叠面板' },
           },
           {
             path: '/zh-CN/components/table',
