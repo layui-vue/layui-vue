@@ -53,3 +53,23 @@ export default {
 </script>
 
 :::
+
+
+::: title 组件方法
+:::
+
+```
+layer.confirm(content, options)
+```
+
+::: title 组件属性
+:::
+
+::: table
+
+| 属性                | 描述   | 备注 |
+| ------------------- | ------ | ---- |
+| content | 内容 | -- |
+| options | 选配属性 | { time: 加载时长, btn: 按钮组 }   |
+
+:::

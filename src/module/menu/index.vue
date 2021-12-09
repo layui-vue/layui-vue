@@ -5,7 +5,7 @@
 </template>
 
 <script setup name="LayMenu" lang="ts">
-import { computed, defineProps, provide, ref, watch } from "vue";
+import { computed, defineProps, provide } from "vue";
 
 export interface LayMenuProps {
   selectedKey?: string;

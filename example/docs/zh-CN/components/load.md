@@ -103,3 +103,23 @@ export default {
 </script>
 
 :::
+
+
+::: title 组件方法
+:::
+
+```
+layer.load(load, options)
+```
+
+::: title 组件属性
+:::
+
+::: table
+
+| 属性                | 描述   | 备注 |
+| ------------------- | ------ | ---- |
+| load | 组件类型 | `1` `2` `3` |
+| options | 选配属性 | { time: 加载时长 }   |
+
+:::
