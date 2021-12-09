@@ -11,12 +11,14 @@
 <template>
 <lay-timeline>
 <lay-timeline-item title="0.2.7">
+[完善] rate 评分组件。<br>
+[完善] collapse 手风琴组件。<br>
 [新增] useState 变量状态管理。<br>
 [新增] useBoolean 布尔变量状态管理。<br>
 [新增] rate 评分组件 half 属性, 支持半选状态。<br>
 [新增] rate 评分组件 select 事件, 评分回调事件。<br>
-[新增] layer 对象 load 方法, 通过 type 配置调用不同类型加载层。<br>
 [新增] layer 对象 confirm 方法, 函数式调用信息框。<br>
+[新增] layer 对象 load 方法, 通过 type 配置调用不同类型加载层。<br>
 [修复] layer 对象的函数调用, 导致弹层过渡动画失效的问题。<br>
 [文档] icons-vue 组件化使用方式。<br>
 [文档] hooks-vue 使用文档。<br>
@@ -27,17 +29,16 @@
 <lay-timeline-item title="0.2.6">
 [依赖] hooks-vue 0.1.2。<br>
 [升级] layer-vue 1.0.3。<br>
-[修复] icons-vue 依赖 not found。<br> 
 </lay-timeline-item>
 <lay-timeline-item title="0.2.5">
+[新增] layer 提供 open, close, closeAll 函数式调用。<br>
 [新增] icons 组件化调用方式, 使用 class 作为组件名使用组件。<br>
-[新增] layer, 提供 layer.open, layer.close, layer.closeAll 函数式调用。<br>
 [修复] layer 的 id 属性不唯一, 调整 Guid 为 Uuid 策略。<br>
-[修改] lay-layer 组件为 lay-modal, 使用方式保持不变。<br>
-[修改] lay-layer 组件 move 默认为 true, 默认提供拖拽支持。<br> 
+[修改] layer 组件 move 默认为 true, 默认提供拖拽支持。<br> 
 [修改] layer.css 为 @layui/layui-vue/lib/index.css。<br>
-[独立] layui-vue 项目, layer 与 lay-modal 组件仍内置, 亦支持单独引用。<br>
-[独立] icons-vue 项目, lay-icon 与 iconfont.less 仍内置, 亦支持单独引用。<br>
+[修改] layer 组件为 lay-modal, 使用方式保持不变。<br>
+[独立] layui-vue 项目, 亦支持单独引用。<br>
+[独立] icons-vue 项目, 亦支持单独引用。<br>
 </lay-timeline-item>
 <lay-timeline-item title="0.2.4">
 [增强] checkbox 组件, v-model 支持 array 数据类型。<br>

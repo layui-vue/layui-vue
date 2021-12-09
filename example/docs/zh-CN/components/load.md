@@ -33,7 +33,7 @@ export default {
     return {
         loading0,
         loading1,
-        loading2
+        loading2,
     }
   }
 }

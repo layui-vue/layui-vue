@@ -36,7 +36,7 @@
               >更新日志</router-link
             ></span
           >
-          <span>下载量：<em class="site-showdowns">1824</em></span>
+          <span>下载量：<em class="site-showdowns">2324</em></span>
         </div>
       </div>
       <div class="site-banner-other">
@@ -46,7 +46,7 @@
           rel="nofollow"
           class="site-star"
         >
-          <i class="layui-icon"></i> Star <cite id="getStars">257</cite>
+          <i class="layui-icon"></i> Star <cite id="getStars">336</cite>
         </a>
         <a
           href="https://gitee.com/layui-vue"
