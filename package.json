@@ -1,6 +1,6 @@
 {
   "name": "@layui/layui-vue",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "description": "a component library for Vue 3 base on layui-vue",
   "homepage": "https://gitee.com/layui-vue/layui-vue/blob/master/README.md",
   "module": "lib/layui-vue.es.js",

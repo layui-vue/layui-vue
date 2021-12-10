@@ -334,6 +334,12 @@ export default {
         children: [
           {
             id: 90,
+            title: '简介',
+            subTitle: 'layer',
+            path: '/zh-CN/components/layer',
+          },
+          {
+            id: 90,
             title: '弹层',
             subTitle: 'modal',
             path: '/zh-CN/components/modal',

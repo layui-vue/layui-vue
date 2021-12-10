@@ -3,6 +3,7 @@ import Component from '../view/component.vue'
 import Hooks from '../view/hooks.vue'
 import Guide from '../view/guide.vue'
 import Index from '../view/index.vue'
+import Ecology from '../view/ecology.vue'
 
 const zhCN = [
   {
@@ -15,6 +16,11 @@ const zhCN = [
         path: '/zh-CN/index',
         component: Index,
         meta: { title: '指南' },
+      },
+      {
+        path: '/zh-CN/ecology',
+        component: Ecology,
+        meta: { title: '生态' },
       },
       {
         path: '/zh-CN/guide',
@@ -262,6 +268,10 @@ const zhCN = [
             component: () =>
               import('../../docs/zh-CN/components/colorPicker.md'),
             meta: { title: '颜色选择器' },
+          },{
+            path: '/zh-CN/components/layer',
+            component: () => import('../../docs/zh-CN/components/layer.md'),
+            meta: { title: '简介' },
           },
           {
             path: '/zh-CN/components/modal',

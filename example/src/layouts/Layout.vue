@@ -18,7 +18,7 @@
           <router-link to="/zh-CN/components"> 组件 </router-link>
         </li>
         <li class="layui-nav-item">
-          <router-link to="/zh-CN/hooks"> hooks </router-link>
+          <router-link to="/zh-CN/ecology"> 生态 </router-link>
         </li>
         <li class="layui-nav-item">
           <lay-form>
@@ -43,7 +43,7 @@
           </a>
         </li>
         <li class="layui-nav-item">
-          <a href="javascript:void(0)"> 0.2.7 </a>
+          <a href="javascript:void(0)"> 0.2.8 </a>
         </li>
       </ul>
     </lay-header>

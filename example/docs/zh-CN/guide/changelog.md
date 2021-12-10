@@ -10,6 +10,9 @@
 ::: demo
 <template>
 <lay-timeline>
+<lay-timeline-item title="0.2.8">
+[完善] rate 评分组件。<br>
+</lay-timeline-item>
 <lay-timeline-item title="0.2.7">
 [完善] rate 评分组件。<br>
 [完善] collapse 手风琴组件。<br>
