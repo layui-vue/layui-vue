@@ -6,4 +6,5 @@ Component.install = (app: App) => {
   app.component(Component.name || 'LayButton', Component)
 }
 
+
 export default Component as IDefineComponent
