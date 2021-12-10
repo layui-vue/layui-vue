@@ -23,11 +23,11 @@
 
 ---
 
-Vue 3.0 的 桌 面 端 组 件 库 , Layui 的 另 一 种 呈 现 方 式
+基 于 vue 3.0 的 桌 面 端 组 件 库 , layui 的 另 一 种 呈 现 方 式
 
 ## 快速上手 : Beta
 
-获得 layui-vue 你只需要使用 npm 引入下述文件：
+获得 layui-vue 你只需要使用 npm 或 yarn 引入 @layui/layui-vue 依赖：
 
 ```
 npm install @layui/layui-vue
@@ -44,7 +44,7 @@ import App from './App.vue'
 createApp(App).use(Layui).mount('#app')
 ```
 
-这是一个基本的入门页面：
+接下来，你就可以使用 layui-vue 来开发你的应用：
 
 ```html
 <template>
@@ -63,7 +63,7 @@ createApp(App).use(Layui).mount('#app')
 
 ## [阅读文档](http://layui-vue.pearadmin.com/)
 
-从现在开始，尽情地拥抱 layui 吧！但愿她能成为你长远的开发伴侣，化作你方寸屏幕前的亿万字节！
+从现在开始，用另一种方式拥抱 layui, 继续化作你方寸屏幕前的亿万字节！
 
 ## 使用趋势
 
