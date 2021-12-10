@@ -11,11 +11,17 @@ export default {
 </script>
 
 <script setup name="LayTabItem" lang="ts">
-import { defineProps, inject, defineEmits, Ref } from 'vue'
+import { withDefaults, defineProps, inject, Ref } from 'vue'
 
-const props = defineProps<{
-  id?: string
-}>()
+const props = withDefaults(
+  defineProps<{
+    id: string
+    title: string
+    closable?: boolean
+  }>(),{
+    closable: true
+  }
+);
 
 const active = inject('active')
 const slotsChange: Ref<boolean> = inject('slotsChange') as Ref<boolean>

@@ -94,6 +94,7 @@ export default {
   <lay-tab type="card" v-model="current4" :allow-close="allowClose" @change="change" @close="close">
     <lay-tab-item title="选项一" id="1"><div style="padding:20px">选项一</div></lay-tab-item>
     <lay-tab-item title="选项二" id="2"><div style="padding:20px">选项二</div></lay-tab-item>
+    <lay-tab-item title="选项三" id="3"><div style="padding:20px">选项三</div></lay-tab-item>
   </lay-tab>
 </template>
 
@@ -111,7 +112,7 @@ export default {
     }
 
     const close = function(id){
-      console.log("需要关闭:" + id)
+      console.log("当前关闭:" + id)
     }
 
     return {
@@ -126,14 +127,64 @@ export default {
 
 :::
 
+::: title 控制是否关闭
+:::
+
+::: demo
+
+<template>
+  <lay-tab type="card" v-model="current5" allow-close @change="change5" @close="close5" :beforeClose="beforeClose">
+    <lay-tab-item title="选项一" id="1"><div style="padding:20px">选项一</div></lay-tab-item>
+    <lay-tab-item title="选项二" id="2"><div style="padding:20px">选项二</div></lay-tab-item>
+    <lay-tab-item title="选项三" id="3"><div style="padding:20px">选项三</div></lay-tab-item>
+    <lay-tab-item title="选项四" id="4"><div style="padding:20px">选项四</div></lay-tab-item>
+    <lay-tab-item title="选项五" id="5"><div style="padding:20px">选项五</div></lay-tab-item>
+  </lay-tab>
+  <div style="color:#ff5722;">id为单数的可以关闭</div>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const current5 = ref("1")
+
+    const change5 = function(id){
+      console.log("当前值:" +id)
+    }
+
+    const beforeClose = function(id){
+      return parseInt(id) % 2 === 1;
+    }
+
+    const close5 = function(id){
+      console.log("当前关闭:" + id)
+    }
+
+    return {
+      current5,
+      change5,
+      beforeClose，
+      close5
+    }
+  }
+}
+</script>
+
+:::
+
+
 ::: title 嵌套循环
 :::
 
 ::: demo
 
 <template>
-  <lay-tab type="card" v-model="current5" @change="change5">
+  <lay-tab type="card" v-model="current6" @change="change6">
     <lay-tab-item v-for="a in arr" :key="a" :title="a.title" :id="a.id">
+      内容{{a.id}}
     </lay-tab-item>
   </lay-tab>
 </template>
@@ -144,8 +195,8 @@ import { ref } from 'vue'
 export default {
   setup() {
 
-    const current5 = ref('1')
-    const change5 = function(id){
+    const current6 = ref('1')
+    const change6 = function(id){
       alert(id)
     }
 
@@ -157,7 +208,7 @@ export default {
     arr.value.push({id:'3', title:'选项三'})
 
     return {
-      current5,
+      current6,
       arr
     }
   }
@@ -176,6 +227,8 @@ export default {
 | v-model     | 当前激活 | --             |
 | type        | 主题样式 | --             |
 | allow-close | 允许关闭 | `true` `false` |
+| before-close  | `Function`关闭之前的回调钩子函数 | 参数(`id`), `return false` 表示不进行关闭   |
+| before-leave  | `Function`切换标签之前的回调钩子函数 | 参数(`id`), `return false` 表示不进行切换   |
 
 :::
 
@@ -186,7 +239,7 @@ export default {
 
 | 事件   | 描述     | 参数 |
 | ------ | -------- | ---- |
-| change | 选中切换 | --   |
-| close  | 关闭事件 | --   |
+| change | 选中切换 | id   |
+| close  | 关闭事件 | id   |
 
 :::
