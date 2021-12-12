@@ -280,6 +280,12 @@ export default {
         title: '输入框',
         subTitle: 'input',
         path: '/zh-CN/components/input',
+      }, 
+      {
+        id: 341,
+        title: '数字输入框',
+        subTitle: 'inputNumber',
+        path: '/zh-CN/components/inputNumber',
       },
       {
         id: 35,
@@ -316,6 +322,11 @@ export default {
         title: '颜色选择器',
         subTitle: 'colorPicker',
         path: '/zh-CN/components/colorPicker',
+      }, {
+        id: 41,
+        title: '文字提示',
+        subTitle: 'tooltip',
+        path: '/zh-CN/components/tooltip',
       },
     ]
 

@@ -20,7 +20,7 @@ export interface LayInputProps {
   name?: string;
   type?: string;
   disabled?: boolean;
-  modelValue?: string;
+  modelValue?: string | number;
   placeholder?: string;
 }
 
@@ -41,4 +41,5 @@ const onFocus = function (event: FocusEvent) {
 const onBlur = function () {
   emit("blur");
 };
+
 </script>

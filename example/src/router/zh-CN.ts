@@ -239,6 +239,11 @@ const zhCN = [
             meta: { title: '输入框' },
           },
           {
+            path: '/zh-CN/components/inputNumber',
+            component: () => import('../../docs/zh-CN/components/inputNumber.md'),
+            meta: { title: '数字输入框' },
+          },
+          {
             path: '/zh-CN/components/textarea',
             component: () => import('../../docs/zh-CN/components/textarea.md'),
             meta: { title: '文本域' },
@@ -272,6 +277,11 @@ const zhCN = [
             path: '/zh-CN/components/layer',
             component: () => import('../../docs/zh-CN/components/layer.md'),
             meta: { title: '简介' },
+          },
+          {
+            path: '/zh-CN/components/tooltip',
+            component: () => import('../../docs/zh-CN/components/tooltip.md'),
+            meta: { title: '文字提示' },
           },
           {
             path: '/zh-CN/components/modal',

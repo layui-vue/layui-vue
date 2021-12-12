@@ -64,6 +64,8 @@ import LaySlider from './module/slider/index'
 import LayCarousel from './module/carousel/index'
 import LayCarouselItem from './module/carouselItem/index'
 import LayColorPicker from './module/colorPicker/index'
+import LayTooltip from './module/tooltip/index'
+import LayInputNumber from './module/inputNumber/index'
 
 const components: Record<string, IDefineComponent> = {
   LayRadio,
@@ -123,6 +125,8 @@ const components: Record<string, IDefineComponent> = {
   LayCarouselItem,
   LayColorPicker,
   LayModal,
+  LayTooltip,
+  LayInputNumber,
 }
 
 const install = (app: App, options?: InstallOptions): void => {
