@@ -122,7 +122,7 @@ const longDown = function (fn: Function) {
   if (props.disabled) {
     return;
   }
-  timer = setInterval(() => fn.call(timer), 100);
+  timer = setInterval(() => fn.call(timer), 150);
   fn.call(timer);
 };
 

@@ -11,7 +11,10 @@
 <template>
 <lay-timeline>
 <lay-timeline-item title="0.2.8">
-[完善] rate 评分组件。<br>
+[新增] tooltip 提示信息组件。<br>
+[新增] input-number 数字输入框。<br>
+[新增] layer 弹层 area 属性 auto 类型。<br>
+[升级] layer-vue 1.1.3。<br>
 </lay-timeline-item>
 <lay-timeline-item title="0.2.7">
 [完善] rate 评分组件。<br>
