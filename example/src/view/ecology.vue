@@ -14,14 +14,14 @@
           <li class="layui-col-sm12">
             <div class="alone">
               <a href="https://gitee.com/layui-vue/layer-vue" target="_blank"
-                >layer - vue<cite>layer vue is a web elastic layer component</cite></a
+                >layer - vue<cite>通用型弹出层组件</cite></a
               >
             </div>
           </li>
           <li class="layui-col-sm12">
             <div class="alone">
               <a href="https://gitee.com/layui-vue/icons-vue" target="_blank"
-                >icons - vue<cite>the abstract trees of the layui iconfont icons.</cite></a
+                >icons - vue<cite>图标组件化解决方案</cite></a
               >
             </div>
           </li>
@@ -54,5 +54,6 @@
   display: block;
   padding-top: 10px;
   font-size: 14px;
+  letter-spacing:2px;
 }
 </style>
