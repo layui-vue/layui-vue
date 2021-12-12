@@ -1,4 +1,5 @@
 import type { App, DefineComponent, Ref } from 'vue'
+
 export type StringObject = Record<string, unknown>
 
 export type UnknownObject = Record<string | number, unknown>
