@@ -1,5 +1,5 @@
 <template>
-    <transition v-show="visible">
+    <transition v-if="visible">
         <div :class="['layui-popper', {'layui-dark' : isDark}]" :style="style" :position="innnerPosition">
             <slot>{{content}}</slot>
             <div class="layui-popper-arrow"></div>
@@ -16,7 +16,7 @@
 <script setup lang="ts">
     import "./index.less";
     import postionFns from "./calcPosition";
-    import { getCurrentInstance, CSSProperties, ref, watch, onUpdated, defineEmits, onMounted} from "vue";
+    import { getCurrentInstance, CSSProperties, ref, watch, onUpdated, defineEmits, onMounted, des} from "vue";
     import {on} from "../../tools/domUtil";
     const props = withDefaults(
         defineProps<{
@@ -65,12 +65,13 @@
     const doHidden = function(e : MouseEvent){
         if ((checkTarget.value && props.el.contains(e.target)) || (props.enterable && popper.value.contains(e.target))) return;
         style.value = {top: (-window.innerHeight) + 'px',left:0};
-        visible.value = false;
+        popper.value.remove();
+        // visible.value = false;
         innnerPosition.value = props.position;
     }
 
     // 事件绑定
-    on(props.el, triggerArr[0], doShow);
+    // on(props.el, triggerArr[0], doShow);
     on(triggerArr[1]??props.el, triggerArr[2], doHidden);
     checkTarget.value = triggerArr[3];
 
