@@ -32,14 +32,14 @@
       >
         <li class="layui-nav-item">
           <a href="https://gitee.com/layui-vue">
-            <lay-icon type="layui-icon-fonts-code" size="14px"></lay-icon>
+            <lay-icon type="layui-icon-fonts-code" size="15px"></lay-icon>
           </a>
         </li>
         <li class="layui-nav-item">
           <a
-            href="https://gitee.com/layui-vue/layui-vue/issues?assignee_id=&author_id=&branch=&collaborator_ids=&issue_search=&label_ids=&label_text=&milestone_id=&priority=&private_issue=&program_id=&project_id=Jmysy%2Flayui-vue&project_type=&scope=&sort=&state=all&target_project="
+            href="https://gitee.com/layui-vue/layui-vue/issues"
           >
-            <lay-icon type="layui-icon-chat" size="14px"></lay-icon>
+            <lay-icon type="layui-icon-chat" size="15px"></lay-icon>
           </a>
         </li>
         <li class="layui-nav-item">

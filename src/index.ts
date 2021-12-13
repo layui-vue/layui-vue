@@ -8,6 +8,7 @@ import '@layui/icons-vue/lib/index.css';
 import { layer } from '@layui/layer-vue'
 
 import LayModal from './module/layer/modal/index'
+import LayBacktop from './module/backTop/index'
 import LayAvatar from './module/avatar/index'
 import LayRadio from './module/radio/index'
 import LayButton from './module/button/index'
@@ -71,6 +72,7 @@ const components: Record<string, IDefineComponent> = {
   LayRadio,
   LayButton,
   LayIcon,
+  LayBacktop,
   LayLayout,
   LaySide,
   LayHeader,
@@ -143,6 +145,7 @@ export {
   LayRadio,
   LayIcon,
   LayButton,
+  LayBacktop,
   LayLayout,
   LaySide,
   LayHeader,

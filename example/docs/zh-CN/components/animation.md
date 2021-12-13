@@ -92,3 +92,6 @@ export default {
 | layui-anim-rotate layui-anim-loop | 循环动画     | `layui-anim layui-anim-rotate layui-anim-loop` |
 
 :::
+
+::: footer
+:::

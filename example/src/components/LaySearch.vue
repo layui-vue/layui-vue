@@ -41,7 +41,7 @@
 <script setup name="LaySelect" lang="ts">
 import { defineProps, ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import { Recordable } from '/@src/module/type'
+import { Recordable } from '../../../src/module/type'
 
 const props = defineProps<{
   datas?: Recordable[]

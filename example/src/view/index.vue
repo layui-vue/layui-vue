@@ -21,9 +21,7 @@
           <cite>layui vue, A component library for Vue 3 base on layui</cite>
         </div>
         <div class="site-download">
-          <router-link
-            class="layui-inline site-down"
-            to="/zh-CN/guide"
+          <router-link class="layui-inline site-down" to="/zh-CN/guide"
             >Get Started</router-link
           >
         </div>
@@ -55,6 +53,14 @@
           class="site-fork"
         >
           Gitee
+        </a>
+        <a
+          href="https://github.com/layui-vue"
+          target="_blank"
+          rel="nofollow"
+          class="site-fork"
+        >
+          Github
         </a>
       </div>
     </div>

@@ -346,7 +346,7 @@ export default {
         children: [
           {
             id: 90,
-            title: '简介',
+            title: '基础',
             subTitle: 'layer',
             path: '/zh-CN/components/layer',
           },
