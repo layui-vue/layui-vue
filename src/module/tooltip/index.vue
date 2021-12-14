@@ -1,8 +1,6 @@
 <script lang="ts">
 import usePopper from "../popper/usePopper";
-import { on } from "../../tools/domUtil";
-import { defineComponent, h, render} from "vue";
-import popper from "../popper/index.vue";
+import { defineComponent} from "vue";
 export default defineComponent({
   name: "LayTooltip",
   props: {
@@ -17,6 +15,10 @@ export default defineComponent({
     isDark: {
       type: Boolean,
       default: true,
+    },
+    disabled: {
+      type: Boolean,
+      default: false,
     }
   },
   render() {
@@ -25,12 +27,8 @@ export default defineComponent({
   mounted() {
     const _this = this;
     this.$nextTick(() => {
-      on(_this.$el, 'mouseenter', () => {
-          const container: HTMLDivElement = document.createElement("div");
-          render(h(popper, {...this.$props, el: this.$el}), container);
-          container.firstElementChild && document.body.appendChild(container.firstElementChild);
-      })
+      usePopper.createPopper(_this.$el, _this.$props, 'hover')
     });
-  },
+  }
 });
 </script>

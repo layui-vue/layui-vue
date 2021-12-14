@@ -31,7 +31,7 @@ const postionFns: any = {
             left = right;
         }
         return {
-            top: `${top - Math.abs(popper.offsetHeight - el.offsetHeight) / 2}px`,
+            top: `${top - (popper.offsetHeight - el.offsetHeight) / 2}px`,
             left: `${left}px`
         }
     },
@@ -42,7 +42,7 @@ const postionFns: any = {
             right = left - popper.offsetWidth - 6;
         }
         return {
-            top: `${top - Math.abs(popper.offsetHeight - el.offsetHeight) / 2}px`,
+            top: `${top - (popper.offsetHeight - el.offsetHeight) / 2}px`,
             left: `${right}px`
         }
     }

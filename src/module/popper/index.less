@@ -10,14 +10,16 @@
 @border-clor: #cecece;
 
 // 单一设置主题
-.single-theme(@position, @contrary_position, @margin_postion, @color) {
+.single-theme(@position, @contrary_position, @margin_postion, @color, @m-border-color) {
     @attr : ~'[position=@{position}]';
-    &.layui-popper@{attr}{
+    &{
+        border: 1px solid @m-border-color;
+        &.layui-popper@{attr}{
         margin-@{contrary_position}: 6px;
         .layui-popper-arrow {
             @{contrary_position}: -6px;
             border-@{contrary_position}-width: 0;
-            border-@{position}-color: @border-clor;
+            border-@{position}-color: @m-border-color;
             &::after{
                 @{contrary_position}: 1px;
                 border-@{contrary_position}-width: 0;
@@ -26,15 +28,16 @@
             }
         }
     }
+    }
 }
 // 统一设置四个方向的主题
-.theme(@background-color, @color) {
+.theme(@background-color, @color, @border-color) {
     background-color: @background-color;
     color: @color;
-    .single-theme(top, bottom, left, @background-color);
-    .single-theme(bottom, top, left, @background-color);
-    .single-theme(right, left, top, @background-color);
-    .single-theme(left, right, top, @background-color);
+    .single-theme(top, bottom, left, @background-color, @border-color);
+    .single-theme(bottom, top, left, @background-color, @border-color);
+    .single-theme(right, left, top, @background-color, @border-color);
+    .single-theme(left, right, top, @background-color, @border-color);
 }
 
 // 箭头默认居中
@@ -65,9 +68,8 @@
     min-height: 12px;
     font-size: 14px;
     box-sizing: border-box;
-    border: 1px solid @border-clor;
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.15);
-    .theme(@ligh-background, @ligh-color);
+    .theme(@ligh-background, @ligh-color, @border-clor);
     max-width: 300px;
     z-index: 9999;
 
@@ -93,8 +95,7 @@
 
     /* 深色主题 */
     &.layui-dark {
-        .theme(@dark-background, @dark-color);
-        border: 0;
+        .theme(@dark-background, @dark-color, @dark-background);
     }
 
 }

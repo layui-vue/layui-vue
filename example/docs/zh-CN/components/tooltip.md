@@ -52,11 +52,60 @@
 ::: demo
 
 <template>
-  <lay-tooltip content="假装这里有文字提示" :is-dark="false">
-    <lay-button>tooltip</lay-button>
+  <lay-tooltip content="不明白是是非非，只知我不会不在。" :is-dark="false">
+    <lay-button >tooltip</lay-button>
   </lay-tooltip>
 </template>
 
+<script>
+</script>
+:::
+
+::: title 是否禁用/动态属性
+:::
+
+::: demo
+
+<template>
+  <lay-tooltip :content="content" :is-dark="isDark" :disabled="!disabled">
+    <lay-button>tooltip</lay-button>
+  </lay-tooltip>
+  <lay-switch v-model="disabled" active-text="启用tooltip"  inactive-text="禁用tooltip" style="margin-left: 5px;"></lay-switch>
+  <lay-switch v-model="isDark" active-text="深色"  inactive-text="浅色" style="margin-left: 5px;"></lay-switch>
+</template>
+
+<script>
+  import { ref } from 'vue';
+
+  export default {
+    setup() {
+
+      const contentArr = [
+        "不明白是是非非，只知我不会不在。",
+        "千山万水，去程是你，归程也是你。",
+        "一约既定，万山无阻。",
+        "时光都淡了，我还伴着你。",
+        "只问深情，不问西东。",
+        "感谢曾经在我身边的，一直在我身边。",
+        "经年再相逢，魂梦与子同。"
+      ];
+      const rendonCotent = function(){
+        return contentArr[Math.floor(Math.random() * contentArr.length)];
+      };
+
+      const content = ref(rendonCotent())
+      const isDark = ref(false)
+      const disabled = ref(true)
+
+      setInterval(()=> content.value =  rendonCotent(), 1000)
+      return {
+        content,
+        isDark,
+        disabled
+      }
+    }
+  }
+</script>
 <style>
 </style>
 :::
@@ -71,5 +120,6 @@
 | content     | 显示内容 | --             |
 | position    | 显示位置 | `top`(默认值)、`bottom`、`left`、`right` |
 | isDark      | 是否为黑色主题 | `true`(默认值)、`false`(浅色)   |
+| disabled      | 是否禁用 | `false`(默认值)、`true`(禁用)   ||
 
 :::
