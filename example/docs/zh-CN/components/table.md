@@ -223,12 +223,12 @@ export default {
       {
         title:"账户",
         width:"200px",
-        slot:"username",
+        customSlot:"username",
         key:"username"
       },{
         title:"密码",
         width: "180px",
-        slot:"password",
+        customSlot:"password",
         key:"password"
       },{
         title:"年龄",
@@ -248,11 +248,11 @@ export default {
     ]
 
     const rowClick = function(data) {
-      alert(JSON.stringify(data))
+      console.log(JSON.stringify(data))
     }
     
     const rowDoubleClick = function(data) {
-      alert(JSON.stringify(data))
+      console.log(JSON.stringify(data))
     }
 
     return {
@@ -308,4 +308,17 @@ export default {
 | ------- | ------------ | ---- |
 | toolbar | 自定义工具栏 | --   |
 
+:::
+
+::: title 列配置
+:::
+
+::: table
+
+| 插槽    | 描述         | 默认 |
+| ------- | ------------ | ---- |
+| title | 列标题 | --   |
+| key | 数据字段 | --   |
+| customSlot | 插槽名称 | --   |
+| width | 宽度 | --   |
 :::
