@@ -4,18 +4,12 @@
 <script>
 export default {
   name: 'Utterances',
-  props: {
-    id: {
-        type: Number,
-        default: 6
-    }
-  },
   methods: {
     initValine () {
         const utterances = document.createElement('script');
         utterances.type = 'text/javascript';
         utterances.async = true;
-        utterances.setAttribute('issue-number', this.id)
+        utterances.setAttribute('issue-term', 'pathname')
         utterances.setAttribute('theme','github-light')
         utterances.setAttribute('repo',`layui-vue/layui-vue`)
         utterances.crossorigin = 'anonymous';

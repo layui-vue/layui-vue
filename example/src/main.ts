@@ -14,9 +14,7 @@ export function createApp(): {
   router: Router
 } {
   const app =
-    import.meta.env.MODE === 'production'
-      ? createSSRApp(Layout)
-      : _createApp(Layout)
+    import.meta.env.MODE === 'production' ? createSSRApp(Layout) : _createApp(Layout)
   const router = createRouter()
 
   app

@@ -19,6 +19,7 @@
           <li>[新增] tooltip 组件, 便捷的信息提示</li> 
           <li>[新增] input-number 组件, 数字输入框, 方便数字录入。</li> 
           <li>[加强] layer 组件 area 属性, 支持 字符串 与 数组 类型, 默认为 auto 宽高自适应。</li>
+          <li>[集成] utteranc.es 文档评论。</li>
           <li>[升级] layer-vue 1.1.7。</li>
         </ul> 
       </li>

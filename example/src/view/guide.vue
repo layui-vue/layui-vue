@@ -100,9 +100,9 @@ export default {
           },
           {
             id: 6,
-            title: '贡献',
-            subTitle: 'contribution',
-            path: '/zh-CN/guide/contribution',
+            title: '团队',
+            subTitle: 'team',
+            path: '/zh-CN/guide/team',
           }
         ],
       },
