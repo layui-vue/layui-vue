@@ -5,7 +5,7 @@ export default defineComponent({
   name: "LayTooltip",
   props: {
     content: {
-      type: String,
+      type: [Number, String],
       required: true,
     },
     position: {
@@ -19,6 +19,14 @@ export default defineComponent({
     disabled: {
       type: Boolean,
       default: false,
+    },
+    visible: {
+      type: Boolean,
+      default: true
+    },
+    isCanHide: {
+      type: Boolean,
+      default: true
     }
   },
   render() {

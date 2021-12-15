@@ -1,5 +1,5 @@
 <template>
-    <transition v-show="visible">
+    <transition v-show="innerVisible">
         <div ref="popper" :class="['layui-popper', {'layui-dark' : innnerIsDark}]" :style="style" :position="innnerPosition">
             <slot>{{content.value}}</slot>
             <div class="layui-popper-arrow"></div>
@@ -21,18 +21,19 @@
     const props = withDefaults(
         defineProps<{
             el : any,
-            content ?: Ref<string>,
+            content ?: Ref<string|Number>,
             position ?: Ref<string>,
             trigger ?: string,
             enterable ?: boolean,
             isDark ?: Ref<boolean>,
             disabled ?: Ref<boolean>,
-            modelValue ?: boolean
+            visible ?: Ref<boolean>,
+            isCanHide ?: Ref<boolean>,
+            updateVisible ?: Function
         }>(),
         {
             enterable : true,
-            trigger : 'hover',
-            modelValue : true
+            trigger : 'hover'
         }
     );
 
@@ -53,31 +54,32 @@
     const innnerPosition = ref(tempPosition.value);
     const innnerIsDark = ref(props.isDark??true);
     const innnerDisabled = ref(props.disabled??false);
-    const visible = ref(props.modelValue && !innnerDisabled.value);
+    const innerVisible = ref(props.visible??true);
 
-    const emit = defineEmits(['update:modelValue'])
-    watch(visible, (val)=>{
-        emit('update:modelValue', val);
-        val && (popper.value.offsetWidth === 0 ? setTimeout(showPosistion, 0) : showPosistion());
+    watch(innerVisible, (val)=>{
+        invokeShowPosistion();
+        props.updateVisible && props.updateVisible(val);
     })
     watch(innnerDisabled, (val)=>{
-        visible.value = false;
+        innerVisible.value = false;
     })
     watch(()=>props.content?.value, (val)=>{
-        visible.value && setTimeout(showPosistion, 5);
+        innerVisible.value && invokeShowPosistion();
     })
 
     const doShow = function(){
         if (!innnerDisabled.value) {
-            visible.value = true;
+            innerVisible.value = true;
         }
     }
 
     const doHidden = function(e : MouseEvent){
         if ((checkTarget.value && props.el.contains(e.target)) || (props.enterable && popper.value.contains(e.target as Node))) return;
-        style.value = {top: (-window.innerHeight) + 'px',left:0};
+        // style.value = {top: (-window.innerHeight) + 'px',left:0};
         // popper.value.remove();
-        visible.value = false;
+        if (props.isCanHide?.value !== false) {
+            innerVisible.value = false;
+        }
         innnerPosition.value = tempPosition.value;
     }
 
@@ -90,7 +92,14 @@
     const showPosistion = function(){
         postionFns[tempPosition.value] && (style.value = postionFns[tempPosition.value](props.el, popper.value, innnerPosition));
     }
+    const invokeShowPosistion = function(){
+        if (innerVisible.value) {
+            popper.value.offsetWidth === 0 ? setTimeout(showPosistion, 0) : showPosistion();
+            // 延时确保计算位置正确
+            setTimeout(()=>innerVisible.value && showPosistion(), 2);
+        };
+    }
     onMounted(()=>{
-        visible.value && (popper.value.offsetWidth === 0 ? setTimeout(showPosistion, 0) : showPosistion());
+        invokeShowPosistion();
     })
 </script>
