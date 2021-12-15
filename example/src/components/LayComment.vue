@@ -11,7 +11,7 @@ export default {
         utterances.async = true;
         utterances.setAttribute('issue-term', 'pathname')
         utterances.setAttribute('theme','github-light')
-        utterances.setAttribute('repo',`layui-vue/layui-vue`)
+        utterances.setAttribute('repo',`layui-vue/layui-doc`)
         utterances.crossorigin = 'anonymous';
         utterances.src = 'https://utteranc.es/client.js';
         window.document.getElementById('comment').appendChild(utterances);
