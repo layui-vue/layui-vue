@@ -8,6 +8,7 @@ import createTitle from './create-title'
 import createBlock from './create-block'
 import createDescribe from './create-describe'
 import createTable from './create-table'
+import createComment from './create-comment'
 import preWrapper from './pre-wrapper'
 
 const plugins = [
@@ -29,6 +30,7 @@ const plugins = [
         .use(...createBlock('block', ''))
         .use(...createTitle('title', ''))
         .use(...createDescribe('describe', ''))
+        .use(...createComment('comment', ''))
     },
   }),
 ] as any

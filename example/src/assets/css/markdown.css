@@ -1,3 +1,8 @@
+.utterances {
+  margin-top: 30px;
+  max-width: 100%;
+}
+
 html {
   line-height: 1.4;
   font-size: 16px;
