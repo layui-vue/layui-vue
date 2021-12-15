@@ -28,27 +28,28 @@
   "author": "就眠儀式",
   "license": "MIT",
   "peerDependencies": {
-    "vue": "^3.2.24",
-    "vue-router": "^4.0.12",
-    "@layui/layer-vue": "^1.1.7",
+    "@layui/hooks-vue": "^0.1.6",
     "@layui/icons-vue": "^1.0.1",
-    "@layui/hooks-vue": "^0.1.6"
+    "@layui/layer-vue": "^1.1.7",
+    "vue": "^3.2.24",
+    "vue-router": "^4.0.12"
   },
   "dependencies": {
-    "vue": "^3.2.24",
-    "vue-router": "^4.0.12",
-    "@layui/layer-vue": "^1.1.7",
+    "@layui/hooks-vue": "^0.1.6",
     "@layui/icons-vue": "^1.0.1",
-    "@layui/hooks-vue": "^0.1.6"
+    "@layui/layer-vue": "^1.1.7",
+    "evtd": "^0.2.3",
+    "vue": "^3.2.24",
+    "vue-router": "^4.0.12"
   },
   "devDependencies": {
     "@babel/core": "^7.15.8",
     "@babel/preset-env": "^7.15.8",
     "@babel/preset-typescript": "^7.15.0",
     "@rollup/plugin-babel": "^5.3.0",
-    "@types/node": "^16.11.9",
     "@types/markdown-it": "^12.2.3",
     "@types/markdown-it-container": "^2.0.4",
+    "@types/node": "^16.11.9",
     "@vitejs/plugin-vue": "^1.9.3",
     "@vue/compiler-sfc": "^3.2.24",
     "@vue/server-renderer": "^3.2.24",

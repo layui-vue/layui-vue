@@ -1,7 +1,7 @@
 ::: demo
 
 <template>
-  <lay-slider></lay-slider>
+  <lay-slider v-model="value"></lay-slider>
 </template>
 
 <script>
@@ -9,8 +9,9 @@ import { ref } from 'vue'
 
 export default {
   setup() {
-
+    const value = ref(50)
     return {
+      value
     }
   }
 }
