@@ -189,6 +189,12 @@ export default {
             path: '/zh-CN/components/input',
           },
           {
+            id: 341,
+            title: '数字输入框',
+            subTitle: 'inputNumber',
+            path: '/zh-CN/components/inputNumber',
+          },
+          {
             id: 35,
             title: '文本域',
             subTitle: 'textarea',
@@ -325,6 +331,12 @@ export default {
             title: '字段',
             subTitle: 'field',
             path: '/zh-CN/components/field',
+          },
+          {
+            id: 25,
+            title: '文字提示',
+            subTitle: 'tooltip',
+            path: '/zh-CN/components/tooltip',
           },
         ],
       },

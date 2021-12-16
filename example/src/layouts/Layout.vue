@@ -18,7 +18,7 @@
           <router-link to="/zh-CN/components"> 组件 </router-link>
         </li>
         <li class="layui-nav-item">
-          <router-link to="/zh-CN/hooks"> hooks </router-link>
+          <router-link to="/zh-CN/ecology"> 生态 </router-link>
         </li>
         <li class="layui-nav-item">
           <lay-form>
@@ -32,18 +32,18 @@
       >
         <li class="layui-nav-item">
           <a href="https://gitee.com/layui-vue">
-            <lay-icon type="layui-icon-fonts-code" size="14px"></lay-icon>
+            <lay-icon type="layui-icon-fonts-code" size="15px"></lay-icon>
           </a>
         </li>
         <li class="layui-nav-item">
           <a
-            href="https://gitee.com/layui-vue/layui-vue/issues?assignee_id=&author_id=&branch=&collaborator_ids=&issue_search=&label_ids=&label_text=&milestone_id=&priority=&private_issue=&program_id=&project_id=Jmysy%2Flayui-vue&project_type=&scope=&sort=&state=all&target_project="
+            href="https://gitee.com/layui-vue/layui-vue/issues"
           >
-            <lay-icon type="layui-icon-chat" size="14px"></lay-icon>
+            <lay-icon type="layui-icon-chat" size="15px"></lay-icon>
           </a>
         </li>
         <li class="layui-nav-item">
-          <a href="javascript:void(0)"> 0.2.7 </a>
+          <a href="javascript:void(0)"> 0.2.8 </a>
         </li>
       </ul>
     </lay-header>
@@ -280,6 +280,12 @@ export default {
         title: '输入框',
         subTitle: 'input',
         path: '/zh-CN/components/input',
+      }, 
+      {
+        id: 341,
+        title: '数字输入框',
+        subTitle: 'inputNumber',
+        path: '/zh-CN/components/inputNumber',
       },
       {
         id: 35,
@@ -316,6 +322,11 @@ export default {
         title: '颜色选择器',
         subTitle: 'colorPicker',
         path: '/zh-CN/components/colorPicker',
+      }, {
+        id: 41,
+        title: '文字提示',
+        subTitle: 'tooltip',
+        path: '/zh-CN/components/tooltip',
       },
     ]
 

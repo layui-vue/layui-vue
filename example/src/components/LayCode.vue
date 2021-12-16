@@ -19,6 +19,7 @@
 </template>
 
 <script setup lang="ts">
+import { layer } from '@layui/layer-vue'
 import { onMounted, onUnmounted, ref, watch } from 'vue'
 
 const meta = ref<HTMLElement>({} as HTMLElement)
@@ -32,9 +33,14 @@ const toggle = function () {
 }
 
 const copy = function () {
-  var Url2 = document.getElementById('source') as any
-  Url2.select()
-  document.execCommand('Copy')
+  const foundCodes = meta.value.getElementsByClassName('language-html')
+  if (document.hasFocus()) {
+    const text = foundCodes[0].textContent || "";
+    navigator.clipboard.writeText(text);
+    layer.msg("复制成功", { icon : 1, time: 1000}, ()=>{})
+  } else {
+    layer.msg("复制失败", { icon : 2, time: 1000}, ()=>{})
+  }
 }
 
 onMounted(() => {

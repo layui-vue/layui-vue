@@ -1,7 +1,11 @@
 ::: title 基本介绍
 :::
 
-<img src="http://layui-doc.pearadmin.com/static/images/layui/logo-2.png" />
+<p>
+  <a href="http://layui-vue.pearadmin.com">
+    <img src="https://sentsin.gitee.io/res/images/layui/layui.png" alt="layui" width="500">
+  </a>
+</p>
 
 <br>
 

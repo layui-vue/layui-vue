@@ -3,6 +3,7 @@ import Component from '../view/component.vue'
 import Hooks from '../view/hooks.vue'
 import Guide from '../view/guide.vue'
 import Index from '../view/index.vue'
+import Ecology from '../view/ecology.vue'
 
 const zhCN = [
   {
@@ -15,6 +16,11 @@ const zhCN = [
         path: '/zh-CN/index',
         component: Index,
         meta: { title: '指南' },
+      },
+      {
+        path: '/zh-CN/ecology',
+        component: Ecology,
+        meta: { title: '生态' },
       },
       {
         path: '/zh-CN/guide',
@@ -43,9 +49,9 @@ const zhCN = [
             meta: { title: '问题' },
           },
           {
-            path: '/zh-CN/guide/contribution',
-            component: () => import('../../docs/zh-CN/guide/contribution.md'),
-            meta: { title: '贡献' },
+            path: '/zh-CN/guide/member',
+            component: () => import('../../docs/zh-CN/guide/member.md'),
+            meta: { title: '团队' },
           },
           {
             path: '/zh-CN/guide/norms',
@@ -233,6 +239,11 @@ const zhCN = [
             meta: { title: '输入框' },
           },
           {
+            path: '/zh-CN/components/inputNumber',
+            component: () => import('../../docs/zh-CN/components/inputNumber.md'),
+            meta: { title: '数字输入框' },
+          },
+          {
             path: '/zh-CN/components/textarea',
             component: () => import('../../docs/zh-CN/components/textarea.md'),
             meta: { title: '文本域' },
@@ -262,6 +273,15 @@ const zhCN = [
             component: () =>
               import('../../docs/zh-CN/components/colorPicker.md'),
             meta: { title: '颜色选择器' },
+          },{
+            path: '/zh-CN/components/layer',
+            component: () => import('../../docs/zh-CN/components/layer.md'),
+            meta: { title: '简介' },
+          },
+          {
+            path: '/zh-CN/components/tooltip',
+            component: () => import('../../docs/zh-CN/components/tooltip.md'),
+            meta: { title: '文字提示' },
           },
           {
             path: '/zh-CN/components/modal',

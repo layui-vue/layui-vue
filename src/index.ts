@@ -8,6 +8,7 @@ import '@layui/icons-vue/lib/index.css';
 import { layer } from '@layui/layer-vue'
 
 import LayModal from './module/layer/modal/index'
+import LayBacktop from './module/backTop/index'
 import LayAvatar from './module/avatar/index'
 import LayRadio from './module/radio/index'
 import LayButton from './module/button/index'
@@ -64,11 +65,14 @@ import LaySlider from './module/slider/index'
 import LayCarousel from './module/carousel/index'
 import LayCarouselItem from './module/carouselItem/index'
 import LayColorPicker from './module/colorPicker/index'
+import LayTooltip from './module/tooltip/index'
+import LayInputNumber from './module/inputNumber/index'
 
 const components: Record<string, IDefineComponent> = {
   LayRadio,
   LayButton,
   LayIcon,
+  LayBacktop,
   LayLayout,
   LaySide,
   LayHeader,
@@ -123,6 +127,8 @@ const components: Record<string, IDefineComponent> = {
   LayCarouselItem,
   LayColorPicker,
   LayModal,
+  LayTooltip,
+  LayInputNumber,
 }
 
 const install = (app: App, options?: InstallOptions): void => {
@@ -139,6 +145,7 @@ export {
   LayRadio,
   LayIcon,
   LayButton,
+  LayBacktop,
   LayLayout,
   LaySide,
   LayHeader,

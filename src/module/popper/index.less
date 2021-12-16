@@ -1,0 +1,101 @@
+// 主题颜色
+// 浅色 --> 默认使用
+@ligh-background: #FFF;
+@ligh-color: #3a3a3a;
+
+// 深色
+@dark-background: #353535;
+@dark-color: #FFF;
+
+@border-clor: #cecece;
+
+// 单一设置主题
+.single-theme(@position, @contrary_position, @margin_postion, @color, @m-border-color) {
+    @attr : ~'[position=@{position}]';
+    &{
+        border: 1px solid @m-border-color;
+        &.layui-popper@{attr}{
+        margin-@{contrary_position}: 6px;
+        .layui-popper-arrow {
+            @{contrary_position}: -6px;
+            border-@{contrary_position}-width: 0;
+            border-@{position}-color: @m-border-color;
+            &::after{
+                @{contrary_position}: 1px;
+                border-@{contrary_position}-width: 0;
+                margin-@{margin_postion}: -6px;
+                border-@{position}-color: @color; 
+            }
+        }
+    }
+    }
+}
+// 统一设置四个方向的主题
+.theme(@background-color, @color, @border-color) {
+    background-color: @background-color;
+    color: @color;
+    .single-theme(top, bottom, left, @background-color, @border-color);
+    .single-theme(bottom, top, left, @background-color, @border-color);
+    .single-theme(right, left, top, @background-color, @border-color);
+    .single-theme(left, right, top, @background-color, @border-color);
+}
+
+// 箭头默认居中
+.arrow-default-center(@position, @prop) {
+    @attr : ~'[position=@{position}]';
+    &.layui-popper@{attr} {
+        .layui-popper-arrow{
+            @{prop}: -moz-calc(50% - 6px);
+            @{prop}: -webkit-calc(50% - 6px);
+            @{prop}: calc(50% - 6px);
+        }
+    }
+}
+.all-arrow-default-center() {
+    .arrow-default-center(top, left);
+    .arrow-default-center(bottom, left);
+    .arrow-default-center(left, top);
+    .arrow-default-center(right, top);
+}
+
+// 样式开始
+.layui-popper {
+    position: fixed;
+    padding: 10px;
+    border-radius: 3px;
+    word-wrap: break-word;
+    min-width: 12px;
+    min-height: 12px;
+    font-size: 14px;
+    box-sizing: border-box;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.15);
+    .theme(@ligh-background, @ligh-color, @border-clor);
+    max-width: 300px;
+    z-index: 9999;
+
+    // 箭头默认居中
+    .all-arrow-default-center();
+
+    .layui-popper-arrow {
+        &,&::after{
+             position: absolute;
+            display: block;
+            width: 0;
+            height: 0;
+            border-width: 6px;
+            border-style: solid;
+            border-color: transparent;
+        }
+
+        &::after{
+            content: ' ';
+        }
+
+    }
+
+    /* 深色主题 */
+    &.layui-dark {
+        .theme(@dark-background, @dark-color, @dark-background);
+    }
+
+}

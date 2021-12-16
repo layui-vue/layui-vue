@@ -6,6 +6,7 @@ import Layui from '../../src/index'
 import LayCode from './components/LayCode.vue'
 import LaySearch from './components/LaySearch.vue'
 import LayTableBox from './components/LayTableBox.vue'
+import LayComment from './components/LayComment.vue'
 import './assets/css/index.css'
 
 export function createApp(): {
@@ -13,9 +14,7 @@ export function createApp(): {
   router: Router
 } {
   const app =
-    import.meta.env.MODE === 'production'
-      ? createSSRApp(Layout)
-      : _createApp(Layout)
+    import.meta.env.MODE === 'production' ? createSSRApp(Layout) : _createApp(Layout)
   const router = createRouter()
 
   app
@@ -23,6 +22,7 @@ export function createApp(): {
     .component('LayCode', LayCode)
     .component('LaySearch', LaySearch)
     .component('LayTableBox', LayTableBox)
+    .component('LayComment', LayComment)
     .use(Layui)
 
   return { app, router }
