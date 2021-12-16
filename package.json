@@ -31,7 +31,7 @@
     "@layui/hooks-vue": "^0.1.6",
     "@layui/icons-vue": "^1.0.1",
     "@layui/layer-vue": "^1.1.9",
-    "vue": "^3.2.24",
+    "vue": "^3.2.26",
     "vue-router": "^4.0.12"
   },
   "dependencies": {
@@ -39,7 +39,7 @@
     "@layui/icons-vue": "^1.0.1",
     "@layui/layer-vue": "^1.1.9",
     "evtd": "^0.2.3",
-    "vue": "^3.2.24",
+    "vue": "^3.2.26",
     "vue-router": "^4.0.12"
   },
   "devDependencies": {
@@ -51,8 +51,8 @@
     "@types/markdown-it-container": "^2.0.4",
     "@types/node": "^16.11.9",
     "@vitejs/plugin-vue": "^1.9.3",
-    "@vue/compiler-sfc": "^3.2.24",
-    "@vue/server-renderer": "^3.2.24",
+    "@vue/compiler-sfc": "^3.2.26",
+    "@vue/server-renderer": "^3.2.26",
     "escape-html": "^1.0.3",
     "less": "^4.1.2",
     "markdown-it-container": "^3.0.0",

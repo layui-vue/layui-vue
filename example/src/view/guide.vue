@@ -101,8 +101,8 @@ export default {
           {
             id: 6,
             title: '团队',
-            subTitle: 'team',
-            path: '/zh-CN/guide/team',
+            subTitle: 'member',
+            path: '/zh-CN/guide/member',
           }
         ],
       },

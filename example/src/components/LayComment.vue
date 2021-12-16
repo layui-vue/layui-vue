@@ -15,7 +15,6 @@ export default {
         utterances.crossorigin = 'anonymous';
         utterances.src = 'https://utteranc.es/client.js';
         window.document.getElementById('comment').appendChild(utterances);
-
     }
   },
   mounted: function(){

@@ -49,8 +49,8 @@ const zhCN = [
             meta: { title: '问题' },
           },
           {
-            path: '/zh-CN/guide/team',
-            component: () => import('../../docs/zh-CN/guide/contribution.md'),
+            path: '/zh-CN/guide/member',
+            component: () => import('../../docs/zh-CN/guide/member.md'),
             meta: { title: '团队' },
           },
           {
