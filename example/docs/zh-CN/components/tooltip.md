@@ -125,3 +125,6 @@
 | isCanHide   | 控制是否可以隐藏,可参考`lay-slider`组件 | `true`(默认值)、`false`   ||
 
 :::
+
+::: comment
+:::

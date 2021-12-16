@@ -302,3 +302,6 @@ export default {
 | isOutAnim       | 关闭动画      | `true` `false`             |
 
 :::
+
+::: comment
+:::

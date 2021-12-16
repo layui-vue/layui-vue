@@ -59,5 +59,5 @@ export default {
 
 :::
 
-::: comment 1
+::: comment
 :::

@@ -16,9 +16,10 @@
       <li> 
         <h3>0.2.8 <span class="layui-badge-rim">2021-12-15</span></h3> 
         <ul> 
-          <li>[新增] tooltip 组件, 便捷的信息提示</li> 
-          <li>[新增] input-number 组件, 数字输入框, 方便数字录入。</li> 
+          <li>[新增] tooltip 警告提示，展现需要关注的信息。</li> 
+          <li>[新增] input-number 数字输入框, 通过鼠标或键盘，输入范围内的数值。</li> 
           <li>[加强] layer 组件 area 属性, 支持 字符串 与 数组 类型, 默认为 auto 宽高自适应。</li>
+          <li>[修复] layer 组件 body 禁用拖动, 仅支持标题拖动窗体。</li>
           <li>[集成] utteranc.es 文档评论。</li>
           <li>[升级] layer-vue 1.1.7。</li>
         </ul> 

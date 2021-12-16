@@ -91,3 +91,6 @@ layer.msg(content, options)
 | options | 选配属性 | { time: 加载时长, icon: 图标 }   |
 
 :::
+
+::: comment
+:::
