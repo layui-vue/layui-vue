@@ -22,6 +22,7 @@
           <li>[新增] layer 组件 resize 属性, 开启弹层尺寸拉伸, 常用于 页面层 与 Iframe 层。</li>
           <li>[加强] layer 组件 area 属性, 支持 字符串 与 数组 类型, 默认 auto 宽高根据内容自适应。</li>
           <li>[修复] layer 组件 body 禁用拖动, 仅支持标题拖动窗体。</li>
+          <li>[修复] icon-picker 组件 select 图标时, 自动隐藏选择内容。</li>
           <li>[修复] dropdown 组件触发方式为 hover 时，移动不到菜单子项的问题</li>
           <li>[集成] utteranc.es 插件, 基于 issues 提供为文档提供留言能力。</li>
           <li>[升级] layer-vue 1.2.0, 更稳定的 layer 版本。</li>
@@ -34,12 +35,9 @@
     <ul> 
       <a name="0-2-7"> </a> 
       <li> 
-        <h3>0.1.1 <span class="layui-badge-rim">2021-12-10</span></h3> 
+        <h3>0.1.0 <span class="layui-badge-rim">2021-12-10</span></h3> 
         <ul> 
-          <li>[重写] sort 方法，以便对数字、非数字及混合类等所有内容的排序进行支持</li> 
-          <li>[新增] dropdown 组件的 align 参数，用于控制下拉菜单水平对齐方式（支持 left、center、right），默认 left</li> 
-          <li>[加强] colorpicker 组件的坐标定位计算方式</li> 
-          <li>[修复] 低版本 ie 若干报错问题</li> 
+          <li>孵化。</li>
         </ul> 
       </li>
     </ul>

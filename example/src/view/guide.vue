@@ -93,12 +93,6 @@ export default {
             path: '/zh-CN/guide/problem',
           },
           {
-            id: 5,
-            title: '主题',
-            subTitle: 'theme',
-            path: '/zh-CN/guide/theme',
-          },
-          {
             id: 6,
             title: '团队',
             subTitle: 'member',
