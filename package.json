@@ -30,14 +30,14 @@
   "peerDependencies": {
     "@layui/hooks-vue": "^0.1.6",
     "@layui/icons-vue": "^1.0.1",
-    "@layui/layer-vue": "^1.1.8",
+    "@layui/layer-vue": "^1.1.9",
     "vue": "^3.2.24",
     "vue-router": "^4.0.12"
   },
   "dependencies": {
     "@layui/hooks-vue": "^0.1.6",
     "@layui/icons-vue": "^1.0.1",
-    "@layui/layer-vue": "^1.1.8",
+    "@layui/layer-vue": "^1.1.9",
     "evtd": "^0.2.3",
     "vue": "^3.2.24",
     "vue-router": "^4.0.12"
