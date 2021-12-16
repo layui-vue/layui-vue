@@ -22,6 +22,7 @@
           <li>[新增] layer 组件 resize 属性, 开启弹层尺寸拉伸, 常用于 页面层 与 Iframe 层。</li>
           <li>[加强] layer 组件 area 属性, 支持 字符串 与 数组 类型, 默认 auto 宽高根据内容自适应。</li>
           <li>[修复] layer 组件 body 禁用拖动, 仅支持标题拖动窗体。</li>
+          <li>[修复] dropdown 组件触发方式为 hover 时，移动不到菜单子项的问题</li>
           <li>[集成] utteranc.es 插件, 基于 issues 提供为文档提供留言能力。</li>
           <li>[升级] layer-vue 1.2.0, 更稳定的 layer 版本。</li>
           <li>[升级] vue 3.2.26 版本。</li>

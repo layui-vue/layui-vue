@@ -1,5 +1,5 @@
 <template>
-  <lay-dropdown>
+  <lay-dropdown ref="dropdownRef">
     <div
       class="
         layui-inline layui-border-box layui-iconpicker layui-iconpicker-split
@@ -85,17 +85,18 @@
 import { defineProps, Ref, ref } from 'vue'
 import { LayIconList as icons } from "@layui/icons-vue"
 
-const props = withDefaults(
-  defineProps<{
-    modelValue?: string
-    page?: boolean
+export interface LayIconPickerProps {
+    page?: boolean,
+    modelValue?: string,
     showSearch?: boolean
-  }>(),
-  {
+}
+
+const props = withDefaults(defineProps<LayIconPickerProps>(),{
     modelValue: 'layui-icon-face-smile',
     page: false,
-  }
-)
+})
+
+const dropdownRef = ref<null | HTMLElement>(null);
 
 const emit = defineEmits(['update:modelValue'])
 
@@ -104,6 +105,8 @@ const selectedIcon: Ref<string> = ref(props.modelValue as string)
 const selectIcon = function (icon: string) {
   emit('update:modelValue', icon)
   selectedIcon.value = icon
+  // @ts-ignore
+  dropdownRef.value.hide()
 }
 
 const icones: Ref = ref([])
