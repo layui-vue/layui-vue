@@ -73,3 +73,6 @@ layer.confirm(content, options)
 | options | 选配属性 | { time: 加载时长, btn: 按钮组 }   |
 
 :::
+
+::: comment
+:::

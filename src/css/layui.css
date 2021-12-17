@@ -2610,15 +2610,23 @@ body .layui-table-tips .layui-layer-content {
   display: none;
   position: absolute;
   left: 0;
-  top: 42px;
+  top: 38px;
   z-index: 899;
   min-width: 100%;
-  border: 1px solid #eee;
   max-height: 360px;
   overflow-y: auto;
   background-color: #fff;
-  border-radius: 4px;
   box-sizing: border-box;
+}
+.layui-dropdown dl::before{
+  content: ' ';
+  display: block;
+  height: 4px;
+  width: 100%;
+}
+.layui-dropdown dl>.layui-dropdown-menu{
+  border: 1px solid #eee;
+  border-radius: 4px;
 }
 
 .layui-dropdown-up dl {

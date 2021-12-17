@@ -120,6 +120,11 @@
 | content     | 显示内容 | --             |
 | position    | 显示位置 | `top`(默认值)、`bottom`、`left`、`right` |
 | isDark      | 是否为黑色主题 | `true`(默认值)、`false`(浅色)   |
-| disabled      | 是否禁用 | `false`(默认值)、`true`(禁用)   ||
+| disabled    | 是否禁用 | `false`(默认值)、`true`(禁用)   ||
+| visible     | 控制是否显示 | `true`(默认值)、`false`   ||
+| isCanHide   | 控制是否可以隐藏,可参考`lay-slider`组件 | `true`(默认值)、`false`   ||
 
+:::
+
+::: comment
 :::

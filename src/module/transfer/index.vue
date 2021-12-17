@@ -44,7 +44,7 @@ const allLeftChange = function (checked: any) {
 
 watch(
   leftSelectedKeys,
-  function () {
+  () => {
     if (
       leftDataSource.value.length === leftSelectedKeys.value.length &&
       leftDataSource.value.length != 0
@@ -70,7 +70,7 @@ const allRightChange = function (checked: any) {
 
 watch(
   rightSelectedKeys,
-  function () {
+  () => {
     if (
       rightDataSource.value.length === rightSelectedKeys.value.length &&
       rightDataSource.value.length != 0

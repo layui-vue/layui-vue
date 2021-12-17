@@ -17,3 +17,4 @@ package-lock.json
 *.ntvs*
 *.njsproj
 *.sln
+pnpm-lock.yaml

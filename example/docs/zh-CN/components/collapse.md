@@ -206,3 +206,6 @@ export default {
 | change   | 折叠面板变化触发事件   | (`id`, `isShow`, activeValues)<br> <br> `id`: (`number` / `string`)对应当前操作面板的值 <br> <br> `isShow`: (`boolean`)`true` -> 展开, `false` -> 折叠 <br> <br> `activeValues`: (`Array`)当前状态为展开的面板值集合|
 
 :::
+
+::: comment
+:::

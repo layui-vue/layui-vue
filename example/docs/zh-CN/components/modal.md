@@ -130,6 +130,39 @@ export default {
 
 :::
 
+::: title 尺寸拉伸
+:::
+
+::: demo
+
+<template>
+  <lay-button @click="changeVisible8" type="primary">尺寸拉伸</lay-button>
+  <lay-modal title="拉伸尺寸" resize="true" v-model="visible8" move="true">
+      内容  
+  </lay-modal>
+</template>
+
+<script>
+import { ref, watch } from "vue";
+import { useRoute, useRouter } from "vue-router";
+export default {
+  setup() {
+
+    const visible8 = ref(false)
+
+    const changeVisible8 = function() {
+        visible8.value = !visible8.value
+    }
+
+    return {
+        visible8
+    };
+  },
+};
+</script>
+
+:::
+
 ::: title 远程窗体
 :::
 
@@ -301,4 +334,7 @@ export default {
 | anim            | 入场动画      | `0` `-` `6`                |
 | isOutAnim       | 关闭动画      | `true` `false`             |
 
+:::
+
+::: comment
 :::

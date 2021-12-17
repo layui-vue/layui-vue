@@ -1,3 +1,49 @@
+<script lang="ts">
+export default {
+  name: "LayDropdown"
+}
+</script>
+
+<script setup lang="ts">
+import { defineProps, provide, ref, watch } from 'vue'
+import { useClickOutside } from '@layui/hooks-vue'
+
+const dropdownRef = ref<null | HTMLElement>(null)
+const isClickOutside = useClickOutside(dropdownRef)
+
+export interface LayDropdownProps {
+    trigger?: string
+}
+
+const props = withDefaults(defineProps<LayDropdownProps>(),{
+    trigger: 'click',
+})
+
+const openState = ref(false)
+
+const open = function () {
+  openState.value = true
+}
+
+const hide = function () {
+  openState.value = false
+}
+
+const toggle = function () {
+  openState.value = !openState.value
+}
+
+watch(isClickOutside, () => {
+  if (isClickOutside.value) {
+    openState.value = false
+  }
+})
+
+provide('openState', openState)
+
+defineExpose({ open, hide, toggle });
+</script>
+
 <template>
   <div
     v-if="trigger === 'click'"
@@ -31,42 +77,3 @@
     </dl>
   </div>
 </template>
-
-<script setup name="LaySelect" lang="ts">
-import { defineProps, provide, ref, watch } from 'vue'
-import { useClickOutside } from '@layui/hooks-vue'
-
-const dropdownRef = ref<null | HTMLElement>(null)
-const isClickOutside = useClickOutside(dropdownRef)
-
-const props = withDefaults(
-  defineProps<{
-    trigger?: string
-  }>(),
-  {
-    trigger: 'click',
-  }
-)
-
-const openState = ref(false)
-
-const open = function () {
-  openState.value = true
-}
-
-const hide = function () {
-  openState.value = false
-}
-
-const toggle = function () {
-  openState.value = !openState.value
-}
-
-watch(isClickOutside, () => {
-  if (isClickOutside.value) {
-    openState.value = false
-  }
-})
-
-provide('openState', openState)
-</script>

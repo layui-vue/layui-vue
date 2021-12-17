@@ -12,11 +12,9 @@
   border-left: 1px solid whitesmoke;
   border-radius: 4px;
 }
-
 .lay-table-box table tbody {
   border-bottom: 1px solid whitesmoke;
 }
-
 .lay-table-box table th,
 .lay-table-box table td {
   font-size: 14px;
@@ -27,14 +25,12 @@
   padding: 0 10px; /*内边距*/
   padding-left: 28px;
 }
-
 .lay-table-box table th {
   color: #666;
   font-weight: 500;
   white-space: nowrap; /*表头内容强制在一行显示*/
   background-color: #fafafa;
 }
-
 .lay-table-box table td {
   white-space: nowrap;
 }

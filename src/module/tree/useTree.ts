@@ -29,6 +29,7 @@ export const useTree: UseTree = (props: TreeProps, emit: TreeEmits) => {
 
   const nodeList = computed(() => {
     const nodes = tree.getData()
+    console.log(nodes);
     return nodes
   })
 
