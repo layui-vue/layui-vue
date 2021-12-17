@@ -113,11 +113,12 @@ function handleTitleClick(node: TreeData) {
         </span>
         <LayCheckbox
           v-if="showCheckbox"
-          v-model:checked="node.isChecked.value"
+          :modelValue="node.isChecked.value"
           :disabled="node.isDisabled.value"
           skin="primary"
+          label=""
           @change="
-            ({ checked }) => {
+            (checked) => {
               handleChange(checked, node)
             }
           "

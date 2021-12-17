@@ -4,7 +4,7 @@ export default {
 };
 </script>
 
-<script setup name="LayCheckbox" lang="ts">
+<script setup lang="ts">
 import { computed, defineProps, inject } from "vue";
 import "./index.less";
 
