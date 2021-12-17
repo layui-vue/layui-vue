@@ -5,11 +5,16 @@
       @mousedown.stop="handle_mousedown"
       class="layui-slider-vertical-track"
     >
+      <lay-tooltip :content="modelValue + ''">
+        <div
+          :style="{ bottom: modelValue + '%' }"
+          class="layui-slider-vertical-btn"
+        ></div>
+      </lay-tooltip>
       <div
-        :style="{ bottom: modelValue + '%' }"
-        class="layui-slider-vertical-btn"
+        :style="{ height: modelValue + '%' }"
+        class="layui-slider-vertical-rate"
       ></div>
-      <div :style="{ height: modelValue + '%' }" class="layui-slider-vertical-rate"></div>
       <div class="layui-slider-vertical-line"></div>
     </div>
   </div>
@@ -120,13 +125,13 @@ const verticalMove = (e: MouseEvent) => {
   let tracker_rect = verticaltracker.value.getBoundingClientRect();
   let origin_bottom = tracker_rect.bottom;
   let point_bottom = e.clientY;
-  let distance = (point_bottom - origin_bottom) * -1
+  let distance = (point_bottom - origin_bottom) * -1;
   if (distance < 0) {
     vertical_style.bottom = 0;
     vertical_style.height = 0;
   } else {
     let rate = (distance / tracker_rect.height) * 100;
-    console.log(rate)
+    console.log(rate);
     vertical_style.bottom = Math.floor(rate);
     vertical_style.height = Math.floor(rate);
     if (vertical_style.bottom > 100) {
