@@ -1,34 +1,102 @@
+// 横向样式
 .layui-slider-v {
-    width: 100%;
-    height: 50px;
-    /* background-color: palevioletred; */
-  }
-  
-  .layui-slider-track-v {
-    width: 100%;
-    height: 16px;
-    position: relative;
-    cursor: pointer;
-    z-index: 30;
-  }
-  
-  .layui-slider-btn-v {
-    width: 12px;
-    height: 12px;
-    background-color: white;
-    position: absolute;
-    // top: -7px;
-    border: 2px solid rgb(0, 150, 136);
-    border-radius: 50%;
-    cursor: pointer;
-    left: 0%;
-  }
-  
-  .layui-slider-rate-v {
-    width: 0%;
-    height: 4px;
-    position: absolute;
-    top: 6px;
-    left: 0;
-    background-color: rgb(0, 150, 136);
-  }
+  width: 100%;
+  height: 18px;
+  margin-bottom: 8px;
+}
+
+.layui-slider-track-v {
+  width: 100%;
+  height: 16px;
+  position: relative;
+  cursor: pointer;
+  z-index: 30;
+}
+
+.layui-slider-btn-v {
+  width: 12px;
+  height: 12px;
+  background-color: white;
+  position: absolute;
+  // top: -7px;
+  border: 2px solid rgb(0, 150, 136);
+  border-radius: 50%;
+  cursor: pointer;
+  left: 0%;
+  z-index: 2;
+}
+// .layui-slider-btn-v:hover {
+//   width: 14px;
+//   height: 14px;
+//   background-color: white;
+//   position: absolute;
+//   top: -2px;
+//   border: 2px solid rgb(0, 150, 136);
+//   border-radius: 50%;
+//   cursor: pointer;
+//   left: 0%;
+// }
+
+.layui-slider-rate-v {
+  width: 0%;
+  height: 4px;
+  position: absolute;
+  top: 6px;
+  left: 0;
+  background-color: rgb(0, 150, 136);
+  z-index: 1;
+}
+
+.layui-slider-line-v {
+  width: 100%;
+  height: 4px;
+  background-color: #eee;
+  position: absolute;
+  top: 6px;
+}
+
+// 纵向样式
+.layui-slider-vertical {
+  width: 18px;
+  height: 200px;
+  // background-color: red;
+}
+
+.layui-slider-vertical-track {
+  width: 100%;
+  height: 100%;
+  // background-color: #eee;
+  position: relative;
+}
+
+.layui-slider-vertical-btn {
+  width: 12px;
+  height: 12px;
+  background-color: white;
+  position: absolute;
+  // top: -7px;
+  border: 2px solid rgb(0, 150, 136);
+  border-radius: 50%;
+  cursor: pointer;
+  bottom: 0%;
+  left: 1px;
+  z-index: 2;
+}
+
+.layui-slider-vertical-rate {
+  width: 4px;
+  height: 30%;
+  position: absolute;
+  bottom: 0;
+  left: 7px;
+  background-color: rgb(0, 150, 136);
+  z-index: 1;
+}
+
+.layui-slider-vertical-line {
+  width: 4px;
+  height: 100%;
+  position: absolute;
+  left: 7px;
+  background-color: #eee;
+}

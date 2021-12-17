@@ -1,7 +1,7 @@
 ::: demo
 
 <template>
-  <lay-slider v-model="value"></lay-slider>
+  <lay-slider v-model="value1"></lay-slider>
 </template>
 
 <script>
@@ -9,9 +9,9 @@ import { ref } from 'vue'
 
 export default {
   setup() {
-    const value = ref(50)
+    const value1 = ref(50)
     return {
-      value
+      value1
     }
   }
 }
@@ -22,7 +22,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-slider :vertical="vertical"></lay-slider>
+  <lay-slider v-model="value2" :vertical="vertical"></lay-slider>
 </template>
 
 <script>
@@ -32,9 +32,11 @@ export default {
   setup() {
 
     const vertical = ref(true)
+    const value2 = ref(10)
 
     return {
-        vertical
+        vertical,
+        value2
     }
   }
 }
