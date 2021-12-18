@@ -41,10 +41,10 @@ const props = defineProps<{
 const openState = ref(false)
 
 const open = function () {
-  openState.value = true
+  openState.value = !openState.value
 }
 
-const selectItem = reactive({ label: '', value: props.modelValue })
+const selectItem = reactive({ label: null, value: props.modelValue })
 
 provide('selectItem', selectItem)
 provide('openState', openState)
@@ -55,5 +55,13 @@ const emit = defineEmits(['update:modelValue', 'change'])
 watch(selectItem, function (item) {
   emit('change', item.value)
   emit('update:modelValue', item.value)
+})
+
+watch(()=>props.modelValue, function (value) {
+   if (!value) {
+    selectItem.label = null;
+    selectItem.value = '';
+    emit('update:modelValue', null);
+  }
 })
 </script>

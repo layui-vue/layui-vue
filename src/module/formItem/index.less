@@ -1,0 +1,47 @@
+@error_color : red;
+
+.layui-required{
+    color: @error_color;
+    font-size: 12px;
+    line-height: 1;
+}
+
+.layui-form .layui-form-item{
+    .layui-input-block
+    ,.layui-input-inline{
+        .layui-form-danger {
+            border-color: #ff5722 !important;
+        }
+    }
+}
+ 
+.layui-error-message {
+    color: @error_color;
+    font-size: 12px;
+    line-height: 1;
+    padding-top: 2px;
+    position: absolute;
+    top: 100%;
+    left: 0;
+}
+
+.layui-error-message-anim {
+    -ms-transform-origin: 0 0; 
+    -webkit-transform-origin: 0 0; 
+    transform-origin: 0 0;
+    -webkit-animation: layui-top-show-anim 0.3s ease 1;
+    animation: layui-top-show-anim 0.3s ease 1;
+}
+
+
+@keyframes layui-top-show-anim {
+  0% {
+    opacity: 0.3;
+    transform: rotateX(45deg);
+  }
+
+  100% {
+    opacity: 1;
+    transform: rotateX(0);
+  }
+}
