@@ -1,7 +1,7 @@
 ::: demo
 
 <template>
-  <lay-slider v-model="value1"></lay-slider>
+  <lay-slider v-model="value1" :disabled="true"></lay-slider>
 </template>
 
 <script>

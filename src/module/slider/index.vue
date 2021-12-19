@@ -4,11 +4,13 @@
       ref="verticaltracker"
       @mousedown.stop="handle_mousedown"
       class="layui-slider-vertical-track"
+      :class="[props.disabled ? 'layui-slider-disabled' : '']"
     >
       <lay-tooltip :content="modelValue + ''">
         <div
           :style="{ bottom: modelValue + '%' }"
           class="layui-slider-vertical-btn"
+          :class="[props.disabled ? 'layui-slider-disabled' : '']"
         ></div>
       </lay-tooltip>
       <div
@@ -24,11 +26,13 @@
       ref="standardtracker"
       @mousedown.stop="handle_mousedown"
       class="layui-slider-track-v"
+      :class="[props.disabled ? 'layui-slider-disabled' : '']"
     >
       <lay-tooltip :content="modelValue + ''">
         <div
           :style="{ left: modelValue + '%' }"
           class="layui-slider-btn-v"
+          :class="[props.disabled ? 'layui-slider-disabled' : '']"
         ></div>
       </lay-tooltip>
       <div
@@ -52,11 +56,13 @@ interface LaySliderProps {
   min?: number;
   max?: number;
   step?: number;
+  disabled?: boolean;
 }
 
 const props = withDefaults(defineProps<LaySliderProps>(), {
   vertical: false,
   modelValue: 0,
+  disabled: false,
 });
 
 const standardtracker = ref<HTMLElement | null>(null);
@@ -78,6 +84,9 @@ function handle_mousedown() {
 }
 
 function handle_mousemove(e: MouseEvent) {
+  if (props.disabled === true) {
+    return false;
+  }
   if (props.vertical === false) {
     standardMove(e);
   } else {
