@@ -22,7 +22,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-slider v-model="value2" :vertical="vertical"></lay-slider>
+  <lay-slider v-model="value2" :vertical="vertical" :disabled="true"></lay-slider>
 </template>
 
 <script>

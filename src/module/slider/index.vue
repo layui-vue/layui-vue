@@ -16,6 +16,7 @@
       <div
         :style="{ height: modelValue + '%' }"
         class="layui-slider-vertical-rate"
+        :class="[props.disabled ? 'layui-slider-disabled-rate' : '']"
       ></div>
       <div class="layui-slider-vertical-line"></div>
     </div>
@@ -38,6 +39,7 @@
       <div
         :style="{ width: modelValue + '%' }"
         class="layui-slider-rate-v"
+        :class="[props.disabled ? 'layui-slider-disabled-rate' : '']"
       ></div>
       <div class="layui-slider-line-v"></div>
     </div>
@@ -140,7 +142,6 @@ const verticalMove = (e: MouseEvent) => {
     vertical_style.height = 0;
   } else {
     let rate = (distance / tracker_rect.height) * 100;
-    console.log(rate);
     vertical_style.bottom = Math.floor(rate);
     vertical_style.height = Math.floor(rate);
     if (vertical_style.bottom > 100) {
