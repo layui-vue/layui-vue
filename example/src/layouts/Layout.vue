@@ -327,6 +327,11 @@ export default {
         title: '文字提示',
         subTitle: 'tooltip',
         path: '/zh-CN/components/tooltip',
+      }, {
+        id: 42,
+        title: '返回顶部',
+        subTitle: 'backtop',
+        path: '/zh-CN/components/backtop',
       },
     ]
 

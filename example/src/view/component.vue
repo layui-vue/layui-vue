@@ -158,6 +158,12 @@ export default {
             subTitle: 'dropdown',
             path: '/zh-CN/components/dropdown',
           },
+          {
+            id: 42,
+            title: '返回顶部',
+            subTitle: 'backtop',
+            path: '/zh-CN/components/backtop',
+          },
         ],
       },
       {

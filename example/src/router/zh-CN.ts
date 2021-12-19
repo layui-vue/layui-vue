@@ -299,6 +299,10 @@ const zhCN = [
             path: '/zh-CN/components/msg',
             component: () => import('../../docs/zh-CN/components/msg.md'),
             meta: { title: '信息' },
+          },{
+            path: '/zh-CN/components/backtop',
+            component: () => import('../../docs/zh-CN/components/backtop.md'),
+            meta: { title: '返回顶部' },
           },
         ],
       },
