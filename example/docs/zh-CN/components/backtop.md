@@ -6,7 +6,7 @@
 ::: demo
 
 <template>
-  <Lay-backtop target=".layui-body"></Lay-backtop>
+  <lay-backtop target=".layui-body"></lay-backtop>
 </template>
 
 <script>
@@ -30,7 +30,7 @@ export default {
 ::: demo
 
 <template>
-  <Lay-backtop target=".layui-body" :showHeight="0" :bottom="100"  @click="handlerClick" disabled style="background-color:#FFFFFF">
+  <lay-backtop target=".layui-body" :showHeight="0" :bottom="100"  @click="handlerClick" disabled style="background-color:#FFFFFF">
     <div style="
         width:50px;
         height:50px;
@@ -40,7 +40,7 @@ export default {
         border-radius:50%">
         <lay-icon type="layui-icon-dialogue" size="30px"></lay-icon>
     </div>
-  </Lay-backtop>
+  </lay-backtop>
 </template>
 
 <script>
@@ -77,7 +77,7 @@ export default {
       {{index + ". &nbsp;layui-vue , 基 于 vue 3.0 的 桌 面 端 组 件 库 , layui 的 另 一 种 呈 现 方 式"}}
     </p>
   </div>
-  <Lay-backtop target="#scrollContainer" :showHeight="100" :bottom="30" position="absolute"></Lay-backtop>
+  <lay-backtop target="#scrollContainer" :showHeight="100" :bottom="30" position="absolute"></lay-backtop>
 </div>
 </template>
 
@@ -111,7 +111,7 @@ export default {
     </p>
   </div>
   <lay-tooltip content="backtop" position="left">
-    <Lay-backtop target="#scrollContainer2" :showHeight="100" :bottom="30" position="absolute" style="border-radius: 50%;background-color: #5FB878;"></Lay-backtop>
+    <lay-backtop target="#scrollContainer2" :showHeight="100" :bottom="30" position="absolute" style="border-radius: 50%;background-color: #5FB878;"></lay-backtop>
   </lay-tooltip>
 </div>
 </template>
