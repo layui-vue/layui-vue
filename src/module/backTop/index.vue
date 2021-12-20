@@ -1,4 +1,5 @@
 <template>
+<!-- FIXME style为临时方案 -->
   <div
     v-show="visible"
     ref="backtopRef"
@@ -6,14 +7,23 @@
     :style="{
       right: `${props.right}px`,
       bottom: `${props.bottom}px`,
-      backgroundColor: `${props.bgcolor}`
+      backgroundColor: `${props.bgcolor}`,
+      opacity:`${props.opacity}`,
+      color: `${props.color}`,
+      borderRadius:`${props.borderRadius}`,
     }"
     @click.stop="handleClick"
-    @mousedown="backtopRef.style.opacity=1"
-    @mouseup="backtopRef.style.opacity=0.95"
+    @mousedown="backtopRef.style.opacity = 1"
+    @mouseup="backtopRef.style.opacity = 0.95"
   >
+    <!-- <i v-if="!$slots.default" :class="`layui-icon ${props.icon}`" style="font-size: 30px;"></i> -->
     <slot>
-      <lay-icon type="layui-icon-top" size="40px"></lay-icon>
+      <lay-icon 
+      :type="`layui-icon ${props.icon}`" 
+      :size="`${props.iconSize}px`"
+      :prefix="`${props.iconPrefix}`"
+      :color="`${props.iconColor}`">
+      </lay-icon>
     </slot>
   </div>
 </template>
@@ -30,22 +40,34 @@ import layIcon from '../icon/index';
 import './index.less';
 
 export interface LayBacktopProps {
+  // 通用
   target?: string; // 触发滚动的对象
   showHeight?: number;
+  disabled?: boolean; // 禁用返回顶部
+  // 组件样式
   position?: 'fixed' | 'absolute';  // 定位方式,显示在特定容器内部需要设置为 absolute
   right?: number;
   bottom?: number;
-  bgcolor?: string;
-  disabled?: boolean; // 禁用返回顶部
+  bgcolor?: string; // 背景颜色
+  opacity?: number; // 不透明度0.01~1.00
+  color?: string; // 前景颜色
+  borderRadius?: string
+  // shape?: 'square' | 'circular';
+  // 图标样式
+  icon?: string;
+  iconSize?: number;
+  iconPrefix?: string;
+  iconColor?: string;
+
 }
 
 const props = withDefaults(defineProps<LayBacktopProps>(), {
   target: 'window',
   showHeight: 200,
-  position: 'fixed',
   right: 30,
   bottom: 40,
-  bgcolor: '#9F9F9F',
+  icon: 'layui-icon-top',
+  iconSize:30,
   disabled: false,
 });
 
@@ -64,7 +86,7 @@ const scrollToTop = () => {
       behavior: 'smooth' //smooth(平滑滚动),instant(瞬间滚动)，默认instant
     });
   } else {
-    // FIXME 初版待改进
+    // FIXME 临时动画方案待改进
     let step = scrollTarget.value.scrollTop / 4;
     if (scrollTarget.value.scrollTop > 0) {
       scrollTarget.value.scrollTop -= Math.max(step, 10);
