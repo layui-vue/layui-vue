@@ -98,7 +98,7 @@ const getScrollTarget = () => {
       if (!targetElement.parentElement) throw new Error(`target parent element is not existed: ${props.target}`);
       targetElement.parentElement.style.position = 'relative';
       console.log(backtopRef.value);
-      if (!backtopRef.value) throw new Error(`target ref is null: ${props.target}`);
+      if (!backtopRef.value) throw new Error(`backtop component ref is null: ${props.target}`);
       backtopRef.value.style.position = props.position;
     }
     return targetElement;
