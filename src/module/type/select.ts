@@ -1,4 +1,11 @@
+export type SelectValueType = string | string[] | number | number[] | null;
 export interface SelectItem {
-  label?: string
-  value?: string
+  value?: SelectValueType 
+  label?: null | string | string[]
+  disabled ?: boolean
+  multiple ?: boolean
+}
+
+export interface SelectItemHandle {
+  (selectItem: SelectItem, isChecked ?: boolean) : void
 }

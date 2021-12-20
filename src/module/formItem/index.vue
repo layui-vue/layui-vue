@@ -68,7 +68,7 @@ const ruleItems = computed(()=>{
 
 // 值 计算 和 监听
 const filedValue = computed(()=> props.prop ? layForm.model[props.prop] : undefined);
-watch(()=>filedValue.value, (val)=> validate());
+watch(()=>filedValue.value, (val)=> validate(), {deep: true});
 
 // 错误状态和信息
 const errorStatus = ref(false);

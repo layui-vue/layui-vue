@@ -1,0 +1,41 @@
+dl.layui-anim-upbit>dd input[type=checkbox] {
+    display: none;
+}
+
+dl.layui-anim-upbit>dd .layui-form-checkbox
+,.layui-form-item dl.layui-anim-upbit>dd .layui-form-checkbox[lay-skin] {
+    margin-top: -3px;
+}
+
+// 多选样式
+.layui-multiple-select-row {
+    position: absolute;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 30px;
+    padding: 5px 0 5px 10px;
+    box-sizing: border-box;
+    overflow: hidden;
+    cursor: pointer;
+    .layui-multiple-select-badge{
+        width: ms-max-content;
+        width: max-content;
+        .layui-badge {
+            margin-left: 5px;
+            height: 28px;
+            line-height: 28px;
+            &:first-of-type{
+                margin-left: 0;
+            }
+        }
+        .layui-icon {
+            font-size: 12px;
+            padding-left: 3px;
+            &:hover{
+                cursor: pointer;
+                color: #FF5722;
+            }
+        }
+    }
+}

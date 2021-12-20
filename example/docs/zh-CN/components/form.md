@@ -81,7 +81,7 @@ export default {
       <lay-input v-model="validateModel.password" type="password">></lay-input>
     </lay-form-item>
     <lay-form-item label="爱好" prop="hobby">
-      <lay-select v-model="validateModel.hobby">
+      <lay-select v-model="validateModel.hobby" multiple>
         <lay-select-option value="1" label="学习"></lay-select-option>
         <lay-select-option value="2" label="编码"></lay-select-option>
         <lay-select-option value="3" label="运动"></lay-select-option>
@@ -410,14 +410,14 @@ export default {
 
 | 属性          | 描述                                                            |   类型    |     可选值     | 默认值   |
 | ------------- | -------------------------------------------------------------- | --------- | -------------- | ------- |
-| model         | 表单绑定值                                                      | `object`  |        -       |    {}   |
+| v-model       | 表单绑定值                                                      | `object`  |        -       |    {}   |
 | required      | 是否必填                                                        | `boolean` | `true` `false` | `false` |
 | rules         | 表单校验规则; <br>可查看[async-validator](https://github.com/yiminghe/async-validator)  | `object`  |       -        |     -   |
 | initValidate  | 是否一开始就校验表单                                             | `boolean` | `true` `false` | `false` |
 | useCN         | 是否使用中文错误提示                                             | `boolean` | `true` `false` | `false` |
 | requiredIcons | 必填前缀图标`class`                                             | `string`  |         -      | `*` |
 | required-erroer-message | 必填错误提示信息                                    | `string`  |         -     | `%s不能为空`|
-| validate-message | 自定义校验错误提示信息; <br>由于内置了中文错误提示，可按需求增量增加<br>可参考 [layui-vue 内置中文错误提示](https://gitee.com/layui-vue/layui-vue/tree/master/src/module/formItem/cnValidateMessage.ts)   | `string`  |         -     | `%s不能为空`|
+| validate-message | 自定义校验错误提示信息; <br>由于内置了中文错误提示，可按需求增量增加<br>可查看 [async-validator 内置错误提示](https://github.com/yiminghe/async-validator/blob/master/src/messages.ts)<br>也可参考 [layui-vue 内置中文错误提示](https://gitee.com/layui-vue/layui-vue/tree/develop/src/module/formItem/cnValidateMessage.ts)   | `string`  |         -     | `%s不能为空`|
 
 :::
 
