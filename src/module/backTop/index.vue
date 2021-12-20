@@ -9,6 +9,8 @@
       backgroundColor: `${props.bgcolor}`
     }"
     @click.stop="handleClick"
+    @mousedown="backtopRef.style.opacity=1"
+    @mouseup="backtopRef.style.opacity=0.95"
   >
     <slot>
       <lay-icon type="layui-icon-top" size="40px"></lay-icon>
