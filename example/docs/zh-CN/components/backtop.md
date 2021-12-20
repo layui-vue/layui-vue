@@ -25,12 +25,13 @@ export default {
 
 :::title 自定义
 
-###### 回到顶部组件可自定义样式，限制宽高：50px \* 50px，<code>showHeight = 0</code> 将始终显示，<code>disabled</code> 属性可以禁用返回顶部效果。查看页面右下角的圆形按钮。
+###### 回到顶部组件可自定义样式，限制宽高：50px \* 50px，<code>showHeight = 0</code> 将始终显示，<code>disabled</code> 属性禁用返回顶部。查看页面右下角的圆形按钮。
 
 ::: demo
 
+<!-- 使用默认插槽自定义组件内容,也可以使用组件提供的样式属性快速定义常用样式 -->
 <template>
-  <lay-backtop target=".layui-body" :showHeight="0" :bottom="100"  @click="handlerClick" disabled style="background-color:#FFFFFF">
+  <lay-backtop target=".layui-body" :showHeight="0" :bottom="100"  @click="handlerClick" bgcolor="#FFFFFF" disabled >
     <div style="
         width:50px;
         height:50px;
@@ -38,7 +39,7 @@ export default {
         color: #FFFFFF;
         text-align: center;
         border-radius:50%">
-        <lay-icon type="layui-icon-dialogue" size="30px"></lay-icon>
+        <i class="layui-icon layui-icon-dialogue" style="font-size:30px"></i>
     </div>
   </lay-backtop>
 </template>
@@ -49,11 +50,14 @@ import { layer } from "../../../../src/index.ts"
 
 export default {
   setup() {
+    let count = 0;
     const handlerClick = () => {
-      layer.confirm("layui-vue 1.0.0 已经发布");
+      count++;
+      layer.msg(count, { time: 1000 })
     }
 
     return {
+      count,
       handlerClick,
     }
   }
@@ -70,14 +74,14 @@ export default {
 ::: demo
 
 <template>
-<!-- 需要用一个 div 包裹滚动容器和 Lay-backtop 组件 -->
-<div style="width:700px; height:300px;">
-  <div id="scrollContainer" style="overflow-y:auto; overflow-x:auto; width:700px; height:300px;">
-    <p v-for="(n,index) in 50" :key="n" style="height:40px;border-bottom:0.5px solid #5FB878;margin-bottom:10px;line-height:40px">
+<!-- 需要用一个 div 包裹滚动目标和 lay-backtop 组件 -->
+<div class="scrollContainer">
+  <div id="scrollContent" style="overflow-y:auto; overflow-x:auto; width:700px; height:300px;">
+    <p v-for="(n,index) in 50" :key="n" style="height:32px;border-bottom:0.5px solid #5FB878;margin-bottom:10px;line-height:35px">
       {{index + ". &nbsp;layui-vue , 基 于 vue 3.0 的 桌 面 端 组 件 库 , layui 的 另 一 种 呈 现 方 式"}}
     </p>
   </div>
-  <lay-backtop target="#scrollContainer" :showHeight="100" :bottom="30" position="absolute"></lay-backtop>
+  <lay-backtop target="#scrollContent" :showHeight="100" :bottom="30" position="absolute"></lay-backtop>
 </div>
 </template>
 
@@ -92,6 +96,12 @@ export default {
   }
 }
 </script>
+<style>
+.scrollContainer{
+  width:700px; 
+  height:300px;
+}
+</style>
 
 :::
 
@@ -104,14 +114,14 @@ export default {
 
 <template>
 <!-- 需要用一个 div 包裹滚动容器和 Lay-backtop 组件 -->
-<div style="width:700px; height:300px;">
-  <div id="scrollContainer2" style="overflow-y:auto; overflow-x:auto; width:700px; height:300px;">
+<div class="scrollContainer">
+  <div id="scrollContent2" style="overflow-y:auto; overflow-x:auto; width:700px; height:300px;">
     <p v-for="(n,index) in 50" :key="n" style="height:40px;border-bottom:0.5px solid #5FB878;margin-bottom:10px;line-height:40px">
       {{index + ". &nbsp;layui-vue , 基 于 vue 3.0 的 桌 面 端 组 件 库 , layui 的 另 一 种 呈 现 方 式"}}
     </p>
   </div>
   <lay-tooltip content="backtop" position="left">
-    <lay-backtop target="#scrollContainer2" :showHeight="100" :bottom="30" position="absolute" style="border-radius: 50%;background-color: #5FB878;"></lay-backtop>
+    <lay-backtop target="#scrollContent2" :showHeight="100" :bottom="30" position="absolute" border-radius="50%" bgcolor="#5FB878"></lay-backtop>
   </lay-tooltip>
 </div>
 </template>
@@ -127,6 +137,12 @@ export default {
   }
 }
 </script>
+<style>
+.scrollContainer{
+  width:700px; 
+  height:300px;
+}
+</style>
 
 :::
 
@@ -135,26 +151,26 @@ export default {
 
 ::: table
 
-| 属性         | 说明                                          | 类型    | 可选值                     |
-| ------------ | --------------------------------------------- | ------- | -------------------------- |
-| <strong>通用属性</strong>                                                                                           |
-| target       | 可选，触发滚动的对象                          | string  | 元素选择器 \| window(默认) |
-| showHeight   | 可选，滚动高度达到该值后显示回到顶部按钮      | number  | 200(默认)                  |
-| disabled     | 可选，禁用点击返回顶部                        | boolean | true \| false(默认)        |
-| <strong>组件样式</strong>                                                                                          |
-| position     | 可选，定位方式，特定容器内部需设置为 absolute | string  | absolute \| fixed(默认)    |
-| right        | 可选，按钮距离页面右边距，单位 px             | number  | 30(默认)                   |
-| bottom       | 可选，按钮距离页面底部位置，单位 px           | number  | 40(默认)                   |
-| bgcolor      | 可选，背景颜色                                | string  | \#9F9F9F(默认)             |
-| opacity      | 可选，不透明度                                | number  | 0.0-1.0                    |
-| color        | 可选，前景颜色                                | string  | #FFFFFF                    |
-| borderRadius | 可选，添加圆角                                | string  | 2px(默认)                  |
-| <strong>图标样式</strong>                                                                                         
-| icon         | 可选,图标类型                                 | string  | layui-icon-top(默认)       |
-| iconSize     | 可选,图标大小                                 | number  | 30                         |
-| iconPrefix   | 可选,图标前缀layui-icon  layui-icon-top       | string  | layui-icon(默认)           |
-| iconColor    | 可选,图标颜色                                 | string  | #FFFFFF(默认)              |
-
+| 属性                      | 说明                                          | 类型    | 可选值                     |
+| ------------------------- | --------------------------------------------- | ------- | -------------------------- |
+| <strong>通用属性</strong> |
+| target                    | 可选，触发滚动的对象                          | string  | 元素选择器 \| window(默认) |
+| showHeight                | 可选，滚动高度达到该值后显示回到顶部按钮      | number  | 200(默认)                  |
+| disabled                  | 可选，禁用点击返回顶部                        | boolean | true \| false(默认)        |
+| <strong>组件样式</strong> |
+| position                  | 可选，定位方式，特定容器内部需设置为 absolute | string  | absolute \| fixed(默认)    |
+| right                     | 可选，按钮距离页面右边距，单位 px             | number  | 30(默认)                   |
+| bottom                    | 可选，按钮距离页面底部位置，单位 px           | number  | 40(默认)                   |
+| bgcolor                   | 可选，背景颜色                                | string  | \#9F9F9F(默认)             |
+| opacity                   | 可选，不透明度                                | number  | 0.0-1.0                    |
+| color                     | 可选，前景颜色                                | string  | #FFFFFF                    |
+| borderRadius              | 可选，添加圆角                                | string  | 2px(默认)                  |
+|
+| <strong>图标样式</strong>  |
+| icon | 可选,图标类型 | string | layui-icon-top(默认) |
+| iconSize | 可选,图标大小 | number | 30 |
+| iconPrefix | 可选,图标前缀 layui-icon layui-icon-top | string | layui-icon(默认) |
+| iconColor | 可选,图标颜色 | string | #FFFFFF(默认) |
 
 :::
 
