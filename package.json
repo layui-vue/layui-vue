@@ -1,6 +1,6 @@
 {
   "name": "@layui/layui-vue",
-  "version": "0.2.8",
+  "version": "0.2.9",
   "description": "a component library for Vue 3 base on layui-vue",
   "homepage": "https://gitee.com/layui-vue/layui-vue/blob/master/README.md",
   "module": "lib/layui-vue.es.js",
@@ -30,14 +30,14 @@
   "peerDependencies": {
     "@layui/hooks-vue": "^0.1.6",
     "@layui/icons-vue": "^1.0.1",
-    "@layui/layer-vue": "^1.2.0",
+    "@layui/layer-vue": "^1.2.1",
     "vue": "^3.2.26",
     "vue-router": "^4.0.12"
   },
   "dependencies": {
     "@layui/hooks-vue": "^0.1.6",
     "@layui/icons-vue": "^1.0.1",
-    "@layui/layer-vue": "^1.2.0",
+    "@layui/layer-vue": "^1.2.1",
     "async-validator": "^4.0.7",
     "evtd": "^0.2.3",
     "vue": "^3.2.26",
