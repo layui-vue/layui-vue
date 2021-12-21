@@ -1,29 +1,20 @@
 <template>
-<!-- FIXME style为临时方案 -->
   <div
     v-show="visible"
     ref="backtopRef"
-    class="lay-backtop"
-    :style="{
-      right: `${props.right}px`,
-      bottom: `${props.bottom}px`,
-      backgroundColor: `${props.bgcolor}`,
-      opacity:`${props.opacity}`,
-      color: `${props.color}`,
-      borderRadius:`${props.borderRadius}`,
-    }"
+    class="layui-backtop"
+    :style="{ ...styleBacktop }"
     @click.stop="handleClick"
-    @mousedown="backtopRef.style.opacity = 1"
-    @mouseup="backtopRef.style.opacity = 0.95"
+    @mousedown="handlerMousedown"
+    @mouseup="handlerMouseup"
   >
-    <!-- <i v-if="!$slots.default" :class="`layui-icon ${props.icon}`" style="font-size: 30px;"></i> -->
     <slot>
-      <lay-icon 
-      :type="`layui-icon ${props.icon}`" 
-      :size="`${props.iconSize}px`"
-      :prefix="`${props.iconPrefix}`"
-      :color="`${props.iconColor}`">
-      </lay-icon>
+      <lay-icon
+        :type="props.icon"
+        :size="`${props.iconSize}px`"
+        :prefix="props.iconPrefix"
+        :color="props.iconColor"
+      ></lay-icon>
     </slot>
   </div>
 </template>
@@ -36,29 +27,28 @@ export default {
 
 <script lang="ts" setup>
 import { defineProps, defineEmits, ref, shallowRef, withDefaults, computed, onMounted, } from 'vue';
-import layIcon from '../icon/index';
+import LayIcon from '../icon/index';
 import './index.less';
 
 export interface LayBacktopProps {
-  // 通用
-  target?: string; // 触发滚动的对象
+  /**通用*/
+  target?: string;
   showHeight?: number;
-  disabled?: boolean; // 禁用返回顶部
-  // 组件样式
-  position?: 'fixed' | 'absolute';  // 定位方式,显示在特定容器内部需要设置为 absolute
+  disabled?: boolean;
+  /**组件样式*/
+  position?: 'fixed' | 'absolute';
   right?: number;
   bottom?: number;
-  bgcolor?: string; // 背景颜色
-  opacity?: number; // 不透明度0.01~1.00
-  color?: string; // 前景颜色
-  borderRadius?: string
-  // shape?: 'square' | 'circular';
-  // 图标样式
+  bgcolor?: string;
+  opacity?: number;
+  color?: string;
+  borderRadius?: number | string;
+  circular?: boolean;
+  /**图标样式*/
   icon?: string;
   iconSize?: number;
   iconPrefix?: string;
   iconColor?: string;
-
 }
 
 const props = withDefaults(defineProps<LayBacktopProps>(), {
@@ -67,26 +57,39 @@ const props = withDefaults(defineProps<LayBacktopProps>(), {
   right: 30,
   bottom: 40,
   icon: 'layui-icon-top',
-  iconSize:30,
+  iconSize: 30,
+  iconPrefix: 'layui-icon',
   disabled: false,
+  circular: false,
 });
 
 const emit = defineEmits(['click']);
 
-let visible = ref(props.showHeight === 0);
 const backtopRef = ref<HTMLElement | null>(null);
 const scrollTarget = shallowRef<Window | HTMLElement | undefined>(undefined);
+let visible = ref(props.showHeight === 0);
+const borderRadius = computed(() => {
+  if (props.circular) return "50%";
+  return typeof props.borderRadius === 'number' ? `${props.borderRadius}px` : props.borderRadius;
+});
+const styleBacktop = computed(() => {
+  return {
+    position: props.position,
+    right: `${props.right}px`,
+    bottom: `${props.bottom}px`,
+    backgroundColor: props.bgcolor,
+    opacity: props.opacity,
+    color: props.color,
+    borderRadius: borderRadius.value,
+  }
+});
 
+// TODO 临时动画方案
 const scrollToTop = () => {
   if (!scrollTarget.value) return;
   if (scrollTarget.value instanceof Window) {
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: 'smooth' //smooth(平滑滚动),instant(瞬间滚动)，默认instant
-    });
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' }); // smooth | instant(default)
   } else {
-    // FIXME 临时动画方案待改进
     let step = scrollTarget.value.scrollTop / 4;
     if (scrollTarget.value.scrollTop > 0) {
       scrollTarget.value.scrollTop -= Math.max(step, 10);
@@ -110,6 +113,14 @@ const handleClick = (event: MouseEvent) => {
   emit('click', event);
 };
 
+const handlerMousedown = () => {
+  backtopRef.value!.style.opacity = '1';
+}
+
+const handlerMouseup = () => {
+  backtopRef.value!.style.opacity = '0.95';
+}
+
 // 获取滚动目标元素
 const getScrollTarget = () => {
   if (props.target === 'window') {
@@ -121,8 +132,7 @@ const getScrollTarget = () => {
     if (props.position === 'absolute') {
       if (!targetElement.parentElement) throw new Error(`target parent element is not existed: ${props.target}`);
       targetElement.parentElement.style.position = 'relative';
-      if (!backtopRef.value) throw new Error(`backtop component ref is null: ${props.target}`);
-      backtopRef.value.style.position = props.position;
+      // backtopRef.value!.style.position = props.position;
     }
     return targetElement;
   }
@@ -131,7 +141,7 @@ const getScrollTarget = () => {
 onMounted(() => {
   let timer: any = undefined;
   scrollTarget.value = getScrollTarget();
-  // FIXME 节流待改进
+  // TODO 节流待改进
   scrollTarget.value.addEventListener('scroll', () => {
     clearTimeout(timer);
     timer = setTimeout(() => {
