@@ -83,7 +83,7 @@ export default {
 | 属性                      | 说明                                          | 类型    | 可选值                     |
 | ------------------------- | --------------------------------------------- | ------- | -------------------------- |
 | <strong>通用属性</strong> |
-| target                    | 可选，触发滚动的对象                          | string  | 元素选择器 \| window(默认) |
+| target                    | 可选，触发滚动事件的对象                      | string  | CSS 选择器 \| window(默认) |
 | showHeight                | 可选，滚动高度达到该值后显示回到顶部按钮       | number  | 200(默认)                  |
 | disabled                  | 可选，禁用点击返回顶部                        | boolean | true \| false(默认)        |
 | <strong>组件样式</strong> |
