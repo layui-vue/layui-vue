@@ -24,7 +24,7 @@
           <li>[修复] layer 弹层 v-model 切换状态后, 让其保持 area 与 offset 状态。</li>
           <li>[修复] transfer 穿梭框组件按钮样式, 使其增加减少操作按钮对齐。</li>
           <li>[修复] tree 树开启 checkbox 时, 无法选中的问题。</li>
-          <li>[升级] layui-vue 1.2.2。</li>      
+          <li>[升级] layer-vue 1.2.2。</li>      
         </ul> 
       </li>
     </ul>
