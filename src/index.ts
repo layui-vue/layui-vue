@@ -132,12 +132,11 @@ const components: Record<string, IDefineComponent> = {
 }
 
 const install = (app: App, options?: InstallOptions): void => {
-  const _options = options
-  app.config.globalProperties.$PROOPTIONS = _options
-
+  const _options = options;
+  app.config.globalProperties.$PROOPTIONS = _options;
   for (const key in components) {
-    const item = components[key]
-    app.component(item.name || key, item)
+    const item = components[key];
+    app.component(item.name || key, item);
   }
 }
 
