@@ -21,7 +21,7 @@
 <template>
   <!-- 使用默认插槽自定义 -->
   <lay-tooltip content="插槽自定义 backtop " position="left">
-    <lay-backtop target=".layui-body" :showHeight="0" :bottom="160" bgcolor="#5FB878" circular disabled>
+    <lay-backtop @click="handlerClick" target=".layui-body" :showHeight="0" :bottom="160" bgcolor="#5FB878" circular disabled>
       <lay-icon type="layui-icon-dialogue" size="30px"></lay-icon>
     </lay-backtop>
   </lay-tooltip>

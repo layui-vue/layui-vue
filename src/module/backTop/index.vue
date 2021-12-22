@@ -68,10 +68,12 @@ const emit = defineEmits(['click']);
 const backtopRef = ref<HTMLElement | null>(null);
 const scrollTarget = shallowRef<Window | HTMLElement | undefined>(undefined);
 let visible = ref(props.showHeight === 0);
+
 const borderRadius = computed(() => {
   if (props.circular) return "50%";
   return typeof props.borderRadius === 'number' ? `${props.borderRadius}px` : props.borderRadius;
 });
+
 const styleBacktop = computed(() => {
   return {
     position: props.position,
@@ -84,19 +86,28 @@ const styleBacktop = computed(() => {
   }
 });
 
-// TODO 临时动画方案
+const easeInOut = (value: number): number => {
+  return value < 0.5 ? 2 * value * value : 1 - 2 * (value - 1) * (value - 1);
+}
+
 const scrollToTop = () => {
   if (!scrollTarget.value) return;
   if (scrollTarget.value instanceof Window) {
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' }); // smooth | instant(default)
   } else {
-    let step = scrollTarget.value.scrollTop / 4;
-    if (scrollTarget.value.scrollTop > 0) {
-      scrollTarget.value.scrollTop -= Math.max(step, 10);
-      setTimeout(() => {
-        scrollToTop();
-      }, 1000 / 60);
+    const previous: number = Date.now();
+    const scrollHeight: number = scrollTarget.value.scrollTop;
+    const animationFunc = () => {
+      if (!scrollTarget.value || scrollTarget.value instanceof Window) return;
+      const elapsed = (Date.now() - previous) / 450;
+      if (elapsed < 1) {
+        scrollTarget.value.scrollTop = scrollHeight * (1 - easeInOut(elapsed));
+        window.requestAnimationFrame(animationFunc);
+      } else {
+        scrollTarget.value.scrollTop = 0;
+      }
     }
+    window.requestAnimationFrame(animationFunc);
   }
 };
 
@@ -138,15 +149,20 @@ const getScrollTarget = () => {
   }
 };
 
+const throttle = (func: Function, wait: number) => {
+  var timer: any = null;
+  return (...args: any) => {
+    if (!timer) {
+      timer = setTimeout(() => {
+        timer = null;
+        func.apply(this, args);
+      }, wait);
+    }
+  };
+}
+
 onMounted(() => {
-  let timer: any = undefined;
   scrollTarget.value = getScrollTarget();
-  // TODO 节流待改进
-  scrollTarget.value.addEventListener('scroll', () => {
-    clearTimeout(timer);
-    timer = setTimeout(() => {
-      handleScroll();
-    }, 100);
-  });
+  scrollTarget.value.addEventListener('scroll', throttle(handleScroll, 300));
 });
 </script>
