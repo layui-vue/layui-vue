@@ -15,9 +15,9 @@
   <a href="https://coveralls.io/r/sentsin/layui?branch=master"><img alt="Test Coverage" src="https://img.shields.io/coveralls/sentsin/layui/master.svg"></a>
 </p>
 
-Vue 3.0 的 桌 面 端 组 件 库 , Layui 的 另 一 种 呈 现 方 式
-
 ---
+
+Vue 3.0 的 桌 面 端 组 件 库 , Layui 的 另 一 种 呈 现 方 式
 
 ## 安装 / Install
 
@@ -38,7 +38,7 @@ import App from './App.vue'
 createApp(App).use(Layui).mount('#app')
 ```
 
-## 入门 / Started
+## 例子 / Example
 
 我们在主页上有不少例子，这是让你入门的第一个 :
 
@@ -56,8 +56,7 @@ createApp(App).use(Layui).mount('#app')
   </lay-layout>
 </template>
 ```
-
-## [查阅文档](http://layui-vue.pearadmin.com/)
+## [在线文档](http://layui-vue.pearadmin.com/)
 
 从现在开始，尽情地拥抱 layui 吧！但愿她能成为你长远的开发伴侣，化作你方寸屏幕前的亿万字节！
 
