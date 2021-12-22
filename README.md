@@ -8,16 +8,14 @@
   A component library for Vue 3 base on layui
 </p>
 
-<p align="center">
-  Vue 3.0 的 桌 面 端 组 件 库 , Layui 的 另 一 种 呈 现 方 式
-</p>
-
 <p align="center">  
   <a href="https://www.npmjs.com/package/@layui/layui-vue"><img src="https://img.shields.io/npm/v/@layui/layui-vue.svg?sanitize=true" alt="Version"></a>
   <a href="https://www.npmjs.com/package/layui"><img src="https://img.shields.io/npm/l/layui.svg?sanitize=true" alt="License"></a>
   <a href="https://travis-ci.org/sentsin/layui"><img alt="Build Status" src="https://img.shields.io/travis/sentsin/layui/master.svg"></a>
   <a href="https://coveralls.io/r/sentsin/layui?branch=master"><img alt="Test Coverage" src="https://img.shields.io/coveralls/sentsin/layui/master.svg"></a>
 </p>
+
+Vue 3.0 的 桌 面 端 组 件 库 , Layui 的 另 一 种 呈 现 方 式
 
 ---
 
@@ -40,9 +38,9 @@ import App from './App.vue'
 createApp(App).use(Layui).mount('#app')
 ```
 
-## 例子 / Example
+## 入门 / Started
 
-我们在主页上有不少例子，这是让你入门的第一个：
+我们在主页上有不少例子，这是让你入门的第一个 :
 
 ```html
 <template>
