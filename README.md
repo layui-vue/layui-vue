@@ -64,7 +64,7 @@ createApp(App).use(Layui).mount('#app')
 </template>
 ```
 
-### [阅读文档](http://layui-vue.pearadmin.com/)
+## [阅读文档](http://layui-vue.pearadmin.com/)
 
 从现在开始，用另一种方式拥抱 layui, 继续化作你方寸屏幕前的亿万字节！
 
