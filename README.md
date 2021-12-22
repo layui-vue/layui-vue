@@ -77,7 +77,7 @@ createApp(App).use(Layui).mount('#app')
 > 大概是因为 layui - vue 让开发者变得更懒，所以贡献者才这么少？  
 > 好的，姑且就这样认为吧。
 
-[![Giteye chart](https://images.gitee.com/uploads/images/2021/1213/173638_e7f746f3_4835367.png)](https://giteye.net/chart/DBC9Z6HQ)
+[![Giteye chart](https://chart.giteye.net/gitee/layui-vue/layui-vue/DBC9Z6HQ.png)](https://giteye.net/chart/DBC9Z6HQ)
 
 ## 交流群
 
