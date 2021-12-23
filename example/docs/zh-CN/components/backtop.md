@@ -1,12 +1,11 @@
 ::: title 基础使用
 
-###### 回到顶部组件的默认样式，通过滑动来查看页面右下角的正方形按钮。
+###### 回到顶部组件的默认样式，<code>lay-backtop</code> 会自动寻找最近的可滚动祖先元素，也可以使用 target 属性指定触发滚动事件的元素，通过滑动来查看页面右下角的正方形按钮。
 
 :::
 ::: demo
-
 <template>
-  <lay-backtop target=".layui-body"></lay-backtop>
+  <lay-backtop></lay-backtop>
 </template>
 
 :::
@@ -17,18 +16,17 @@
 
 ::: demo
 
-<!-- 使用默认插槽自定义组件内容,也可以使用组件提供的样式属性快速定义常用样式，样式属性能满足大多数场景,lay-backtop组件可搭配 lay-tooltip 组件使用-->
+<!-- 使用默认插槽自定义组件内容,也可以使用组件提供的样式属性快速定义常用样式，样式属性能满足大多数场景。lay-backtop组件可搭配 lay-tooltip 组件使用-->
 <template>
   <!-- 使用默认插槽自定义 -->
   <lay-tooltip content="插槽自定义 backtop " position="left">
-    <lay-backtop @click="handlerClick" target=".layui-body" :showHeight="0" :bottom="160" bgcolor="#5FB878" circular disabled>
+    <lay-backtop @click="handlerClick" :showHeight="0" :bottom="160" bgcolor="#5FB878" circle disabled>
       <lay-icon type="layui-icon-dialogue" size="30px"></lay-icon>
     </lay-backtop>
   </lay-tooltip>
   <!-- 使用样式属性自定义 -->
   <lay-tooltip content="属性自定义 backtop " position="left">
-    <lay-backtop target=".layui-body" :bottom="100" bgcolor="#5FB878" icon="layui-icon-up" circular>
-    </lay-backtop>
+    <lay-backtop :bottom="100" bgcolor="#5FB878" icon="layui-icon-up" circle></lay-backtop>
   </lay-tooltip>  
 </template>
 
@@ -53,7 +51,7 @@ export default {
 
 ::: title 滚动容器
 
-###### 通过设置 <code>target</code> 和 <code>position="absolute"</code>参数 ，可对特定容器进行返回顶部操作
+###### 通过设置 <code>target</code> 和 <code>position="absolute"</code>参数，可对特定容器进行返回顶部操作
 
 :::
 ::: demo
@@ -94,7 +92,7 @@ export default {
 | opacity                   | 可选，不透明度                                | number  | 0.0-1.0                    |
 | color                     | 可选，前景颜色                                | string  | #FFFFFF                    |
 | borderRadius              | 可选，添加圆角                                | string  | 2px(默认)                  |
-| circular                  | 可选, 使用圆形按钮                            | boolean | true \| false(默认)
+| circle                    | 可选, 使用圆形按钮                            | boolean | true \| false(默认)
 | <strong>图标样式</strong> |
 | icon                      | 可选,图标类型                                 | string  | layui-icon-top(默认)       |
 | iconSize                  | 可选,图标大小                                 | number  | 30                         |

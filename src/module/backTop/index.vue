@@ -43,7 +43,7 @@ export interface LayBacktopProps {
   opacity?: number;
   color?: string;
   borderRadius?: number | string;
-  circular?: boolean;
+  circle?: boolean;
   /**图标样式*/
   icon?: string;
   iconSize?: number;
@@ -54,13 +54,11 @@ export interface LayBacktopProps {
 const props = withDefaults(defineProps<LayBacktopProps>(), {
   target: 'window',
   showHeight: 200,
-  right: 30,
-  bottom: 40,
   icon: 'layui-icon-top',
   iconSize: 30,
   iconPrefix: 'layui-icon',
   disabled: false,
-  circular: false,
+  circle: false,
 });
 
 const emit = defineEmits(['click']);
@@ -70,7 +68,7 @@ const scrollTarget = shallowRef<Window | HTMLElement | undefined>(undefined);
 let visible = ref(props.showHeight === 0);
 
 const borderRadius = computed(() => {
-  if (props.circular) return "50%";
+  if (props.circle) return "50%";
   return typeof props.borderRadius === 'number' ? `${props.borderRadius}px` : props.borderRadius;
 });
 
@@ -86,6 +84,7 @@ const styleBacktop = computed(() => {
   }
 });
 
+// TODO 待改进
 const easeInOut = (value: number): number => {
   return value < 0.5 ? 2 * value * value : 1 - 2 * (value - 1) * (value - 1);
 }
@@ -135,7 +134,7 @@ const handlerMouseup = () => {
 // 获取滚动目标元素
 const getScrollTarget = () => {
   if (props.target === 'window') {
-    return window || document.documentElement || document.body;
+    return getScrollParent(backtopRef.value!, false);
   } else {
     const targetElement = document.querySelector<HTMLElement>(props.target);
     if (!targetElement) throw new Error(`target is not existed: ${props.target}`);
@@ -147,8 +146,23 @@ const getScrollTarget = () => {
     }
     return targetElement;
   }
-};
+}
 
+// 获取距离元素最近的可滚动祖先元素
+const getScrollParent = (element: HTMLElement, includeHidden: boolean): HTMLElement => {
+  let style: CSSStyleDeclaration = getComputedStyle(element);
+  let excludeStaticParent: boolean = style.position === "absolute";
+  let overflowRegex: RegExp = includeHidden ? /(auto|scroll|hidden)/ : /(auto|scroll)/;
+  //if (style.position === "fixed") return document.documentElement || document.body || window;
+  for (let parent: HTMLElement = element; (parent = parent.parentElement!);) {
+    style = getComputedStyle(parent);
+    if (excludeStaticParent && style.position === "static") continue;
+    if (overflowRegex.test(style.overflow + style.overflowY + style.overflowX)) return parent;
+  }
+  return document.documentElement || document.body || window;
+}
+
+// 节流
 const throttle = (func: Function, wait: number) => {
   var timer: any = null;
   return (...args: any) => {
@@ -158,10 +172,11 @@ const throttle = (func: Function, wait: number) => {
         func.apply(this, args);
       }, wait);
     }
-  };
+  }
 }
 
 onMounted(() => {
+  if (!props.target) return;
   scrollTarget.value = getScrollTarget();
   scrollTarget.value.addEventListener('scroll', throttle(handleScroll, 300));
 });
