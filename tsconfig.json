@@ -2,7 +2,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "module": "esnext",
-    "target": "es2015",
+    "target": "es2015",               
     "moduleResolution": "Node",
     "strict": true,
     "allowJs": true,
