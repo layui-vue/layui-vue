@@ -55,7 +55,7 @@
     "markdown-it-container": "^3.0.0",
     "prismjs": "^1.25.0",
     "rimraf": "^3.0.2",
-    "rollup": "^2.0.0",
+    "rollup": "^2.61.0",
     "typescript": "^4.5.2",
     "vite": "2.7.6",
     "vite-plugin-md": "^0.11.6"
