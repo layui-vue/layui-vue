@@ -35,7 +35,7 @@
   },
   "dependencies": {
     "@layui/hooks-vue": "^0.1.6",
-    "@layui/icons-vue": "^1.0.1",
+    "@layui/icons-vue": "^1.0.2",
     "@layui/layer-vue": "^1.2.2",
     "async-validator": "^4.0.7",
     "eslint-config-prettier": "^8.3.0",
