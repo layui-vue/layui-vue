@@ -38,22 +38,8 @@ module.exports = {
       '@typescript-eslint/ban-types': 'off',
       '@typescript-eslint/no-non-null-assertion': 'off',
       '@typescript-eslint/explicit-module-boundary-types': 'off',
-      '@typescript-eslint/no-unused-vars': [
-        'error',
-        {
-          argsIgnorePattern: '^_',
-          varsIgnorePattern: '^_'
-        }
-      ],
-      'no-unused-vars': [
-        'error',
-        {
-          argsIgnorePattern: '^_',
-          varsIgnorePattern: '^_'
-        }
-      ],
       'space-before-function-paren': 'off',
-      'vue/name-property-casing': ['error', 'PascalCase'], // vue/component-definition-name-casing 对组件定义名称强制使用特定的大小
+      'vue/name-property-casing': ['error', 'PascalCase'],
       'vue/attributes-order': 'off',
       'vue/one-component-per-file': 'off',
       'vue/html-closing-bracket-newline': 'off',
@@ -62,18 +48,6 @@ module.exports = {
       'vue/singleline-html-element-content-newline': 'off',
       'vue/attribute-hyphenation': 'off',
       'vue/require-default-prop': 'off',
-      'vue/script-setup-uses-vars': 'off',
-      'vue/html-self-closing': [
-        'error',
-        {
-          html: {
-            void: 'always',
-            normal: 'never',
-            component: 'always'
-          },
-          svg: 'always',
-          math: 'always'
-        }
-      ]
+      'vue/script-setup-uses-vars': 'off'
     }
   }
