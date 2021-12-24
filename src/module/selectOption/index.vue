@@ -43,23 +43,23 @@ const selectItem = inject("selectItem") as Ref<SelectItem>;
 
 const selectHandle = function () {
   !props.disabled && callSelectItemHandle(!selected.value);
-};
-const callSelectItemHandle = function (isChecked?: boolean) {
-  selectItemHandle(
-    {
-      value: props.value,
-      label: props.label,
-      disabled: props.disabled,
-    },
-    isChecked
-  );
-};
-const selected = computed(() => {
-  const selectValues = selectItem.value.value;
-  if (Array.isArray(selectValues)) {
-    return (selectValues as any[]).indexOf(props.value) > -1;
-  }
-  return selectItem.value.value === props.value;
-});
-onMounted(() => selected.value && callSelectItemHandle());
+}
+const callSelectItemHandle = function(isChecked ?: boolean){
+  selectItemHandle({
+    value : props.value,
+    label : props.label,
+    disabled : props.disabled
+  }, isChecked);
+}
+const selected = computed({
+  get(){
+    const selectValues = selectItem.value.value;
+    if (Array.isArray(selectValues)) {
+      return (selectValues as any[]).indexOf(props.value) > -1;
+    }
+    return selectItem.value.value === props.value
+  },
+  set(val){}
+})
+onMounted(() => selected.value && callSelectItemHandle())
 </script>
