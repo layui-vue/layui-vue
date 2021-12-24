@@ -5,7 +5,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import "./index.less"
+import "./index.less";
 </script>
 
 <template>

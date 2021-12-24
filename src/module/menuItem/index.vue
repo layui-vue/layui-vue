@@ -33,29 +33,27 @@
 </template>
 
 <script setup name="LayMenuItem" lang="ts">
-import { defineProps, inject, Ref, ref, useSlots } from 'vue'
-const slots = useSlots()
+import { defineProps, inject, Ref, ref, useSlots } from "vue";
+const slots = useSlots();
 
-const props =
-  defineProps<{
-    id: string
-    title: string
-  }>()
+const props = defineProps<{
+  id: string;
+  title: string;
+}>();
 
-const isTree = inject('isTree')
-const selectedKey: Ref<string> = inject('selectedKey') as Ref<string>
-const openKeys: Ref<string[]> = inject('openKeys') as Ref<string[]>
+const isTree = inject("isTree");
+const selectedKey: Ref<string> = inject("selectedKey") as Ref<string>;
+const openKeys: Ref<string[]> = inject("openKeys") as Ref<string[]>;
 
 const openHandle = function () {
-
-  if(openKeys.value.includes(props.id))  {
-      openKeys.value.splice(openKeys.value.indexOf(props.id),1)
+  if (openKeys.value.includes(props.id)) {
+    openKeys.value.splice(openKeys.value.indexOf(props.id), 1);
   } else {
-      openKeys.value.push(props.id)
+    openKeys.value.push(props.id);
   }
-}
+};
 
 const selectHandle = function () {
-  selectedKey.value = props.id
-}
+  selectedKey.value = props.id;
+};
 </script>

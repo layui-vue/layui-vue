@@ -1,48 +1,48 @@
 <script lang="ts">
 export default {
-  name: 'TreeNode',
-}
+  name: "TreeNode",
+};
 </script>
 
 <script setup lang="ts">
-import { StringOrNumber } from './tree.type'
-import { Nullable } from '../type'
+import { StringOrNumber } from "./tree.type";
+import { Nullable } from "../type";
 
-import LayIcon from '../icon'
-import LayCheckbox from '../checkbox'
-import { Ref } from 'vue'
-import { Tree } from './tree'
+import LayIcon from "../icon";
+import LayCheckbox from "../checkbox";
+import { Ref } from "vue";
+import { Tree } from "./tree";
 
-type CustomKey = string | number
-type CustomString = (() => string) | string
+type CustomKey = string | number;
+type CustomString = (() => string) | string;
 
 interface TreeData {
-  id: CustomKey
-  title: CustomString
-  children: TreeData[]
-  parentKey: Nullable<StringOrNumber>
-  isRoot: boolean
-  isChecked: Ref<boolean>
-  isDisabled: Ref<boolean>
-  isLeaf: Ref<boolean>
-  hasNextSibling: boolean
-  parentNode: Nullable<TreeData>
+  id: CustomKey;
+  title: CustomString;
+  children: TreeData[];
+  parentKey: Nullable<StringOrNumber>;
+  isRoot: boolean;
+  isChecked: Ref<boolean>;
+  isDisabled: Ref<boolean>;
+  isLeaf: Ref<boolean>;
+  hasNextSibling: boolean;
+  parentNode: Nullable<TreeData>;
 }
 
 interface TreeNodeProps {
-  tree: Tree
-  nodeList: TreeData[]
-  showCheckbox: boolean
-  showLine: boolean
-  onlyIconControl: boolean
+  tree: Tree;
+  nodeList: TreeData[];
+  showCheckbox: boolean;
+  showLine: boolean;
+  onlyIconControl: boolean;
 }
 
 interface TreeNodeEmits {
-  (e: 'node-click', node: TreeData): void
+  (e: "node-click", node: TreeData): void;
 }
 
-const props = defineProps<TreeNodeProps>()
-const emit = defineEmits<TreeNodeEmits>()
+const props = defineProps<TreeNodeProps>();
+const emit = defineEmits<TreeNodeEmits>();
 
 function renderLineShort(node: TreeData) {
   return (
@@ -52,7 +52,7 @@ function renderLineShort(node: TreeData) {
     (!node.parentNode.hasNextSibling ||
       //上一层父级有延伸线
       (node.parentNode.hasNextSibling && !node.parentNode.children))
-  )
+  );
 }
 /**
  * 展开收起 icon样式
@@ -61,33 +61,35 @@ function renderLineShort(node: TreeData) {
 const nodeIconType = (node: TreeData): string => {
   if (!props.showLine) {
     if (node.children.length > 0) {
-      return 'layui-tree-iconArrow '
+      return "layui-tree-iconArrow ";
     }
-    return ''
+    return "";
   }
   if (node.children.length !== 0) {
-    return !node.isLeaf.value ? 'layui-icon-addition' : 'layui-icon-subtraction'
+    return !node.isLeaf.value
+      ? "layui-icon-addition"
+      : "layui-icon-subtraction";
   }
-  return 'layui-icon-file'
-}
+  return "layui-icon-file";
+};
 
 function recursiveNodeClick(node: TreeData) {
-  emit('node-click', node)
+  emit("node-click", node);
 }
 
 function handleChange(checked: boolean, node: TreeData) {
-  props.tree.setCheckedKeys(checked, node)
+  props.tree.setCheckedKeys(checked, node);
 }
 
 function handleIconClick(node: TreeData) {
-  node.isLeaf.value = !node.isLeaf.value
+  node.isLeaf.value = !node.isLeaf.value;
 }
 
 function handleTitleClick(node: TreeData) {
   if (!props.onlyIconControl) {
-    handleIconClick(node)
+    handleIconClick(node);
   }
-  emit('node-click', node)
+  emit("node-click", node);
 }
 </script>
 
@@ -119,7 +121,7 @@ function handleTitleClick(node: TreeData) {
           label=""
           @change="
             (checked) => {
-              handleChange(checked, node)
+              handleChange(checked, node);
             }
           "
         >

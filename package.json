@@ -25,7 +25,8 @@
     "dev": "vite",
     "build": "vite build --emptyOutDir && npm run build:types",
     "build:types": "rimraf types && tsc -d",
-    "build:example": "vite build example"
+    "build:example": "vite build example",
+    "lint:prettier": "prettier --write  \"src/**/*.{js,json,tsx,css,less,scss,vue,html,md}\""
   },
   "peerDependencies": {
     "vue": "^3.2.26",
@@ -53,6 +54,7 @@
     "escape-html": "^1.0.3",
     "less": "^4.1.2",
     "markdown-it-container": "^3.0.0",
+    "prettier": "^2.5.1",
     "prismjs": "^1.25.0",
     "rimraf": "^3.0.2",
     "rollup": "^2.61.0",

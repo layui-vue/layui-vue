@@ -6,7 +6,7 @@ export default {
 
 <script setup lang="ts">
 import { defineProps } from "vue";
-import "./index.less"
+import "./index.less";
 
 const props = defineProps<{
   nm?: boolean;

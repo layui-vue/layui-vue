@@ -1,9 +1,7 @@
 <template>
   <lay-dropdown ref="dropdownRef">
     <div
-      class="
-        layui-inline layui-border-box layui-iconpicker layui-iconpicker-split
-      "
+      class="layui-inline layui-border-box layui-iconpicker layui-iconpicker-split"
     >
       <div class="layui-inline layui-iconpicker-main">
         <i class="layui-inline layui-icon" :class="[selectedIcon]" />
@@ -82,118 +80,118 @@
 </template>
 
 <script setup name="LayIconPicker" lang="ts">
-import { defineProps, Ref, ref } from 'vue'
-import { LayIconList as icons } from "@layui/icons-vue"
+import { defineProps, Ref, ref } from "vue";
+import { LayIconList as icons } from "@layui/icons-vue";
 
 export interface LayIconPickerProps {
-    page?: boolean,
-    modelValue?: string,
-    showSearch?: boolean
+  page?: boolean;
+  modelValue?: string;
+  showSearch?: boolean;
 }
 
-const props = withDefaults(defineProps<LayIconPickerProps>(),{
-    modelValue: 'layui-icon-face-smile',
-    page: false,
-})
+const props = withDefaults(defineProps<LayIconPickerProps>(), {
+  modelValue: "layui-icon-face-smile",
+  page: false,
+});
 
 const dropdownRef = ref<null | HTMLElement>(null);
 
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits(["update:modelValue"]);
 
-const selectedIcon: Ref<string> = ref(props.modelValue as string)
+const selectedIcon: Ref<string> = ref(props.modelValue as string);
 
 const selectIcon = function (icon: string) {
-  emit('update:modelValue', icon)
-  selectedIcon.value = icon
+  emit("update:modelValue", icon);
+  selectedIcon.value = icon;
   // @ts-ignore
-  dropdownRef.value.hide()
-}
+  dropdownRef.value.hide();
+};
 
-const icones: Ref = ref([])
+const icones: Ref = ref([]);
 
-const total = ref(icons.length)
-const totalPage = ref(total.value / 12)
-const currentPage: Ref = ref(1)
+const total = ref(icons.length);
+const totalPage = ref(total.value / 12);
+const currentPage: Ref = ref(1);
 
 if (props.page) {
-  icones.value = icons.slice(0, 12)
+  icones.value = icons.slice(0, 12);
 } else {
-  icones.value = icons
+  icones.value = icons;
 }
 
 const next = function () {
   if (currentPage.value === totalPage.value) {
-    return
+    return;
   }
-  currentPage.value = currentPage.value + 1
-  const start = (currentPage.value - 1) * 12
-  const end = start + 12
-  icones.value = icons.slice(start, end)
-}
+  currentPage.value = currentPage.value + 1;
+  const start = (currentPage.value - 1) * 12;
+  const end = start + 12;
+  icones.value = icons.slice(start, end);
+};
 
 const prev = function () {
   if (currentPage.value === 1) {
-    return
+    return;
   }
-  currentPage.value = currentPage.value - 1
-  const start = (currentPage.value - 1) * 12
-  const end = start + 12
-  icones.value = icons.slice(start, end)
-}
+  currentPage.value = currentPage.value - 1;
+  const start = (currentPage.value - 1) * 12;
+  const end = start + 12;
+  icones.value = icons.slice(start, end);
+};
 
 const search = function (e: any) {
-  var text = e.target.value
-  currentPage.value = 1
-  const start = (currentPage.value - 1) * 12
-  const end = start + 12
-  if (text === '') {
+  var text = e.target.value;
+  currentPage.value = 1;
+  const start = (currentPage.value - 1) * 12;
+  const end = start + 12;
+  if (text === "") {
     if (props.page) {
-      icones.value = icons.slice(start, end)
-      total.value = icons.length
-      totalPage.value = Math.ceil(icons.length / 12)
+      icones.value = icons.slice(start, end);
+      total.value = icons.length;
+      totalPage.value = Math.ceil(icons.length / 12);
     } else {
-      icones.value = icons
+      icones.value = icons;
     }
   } else {
     if (props.page) {
-      icones.value = searchList(text, icons).slice(start, end)
-      total.value = searchList(text, icons).length
-      totalPage.value = Math.ceil(searchList(text, icons).length / 12)
+      icones.value = searchList(text, icons).slice(start, end);
+      total.value = searchList(text, icons).length;
+      totalPage.value = Math.ceil(searchList(text, icons).length / 12);
     } else {
-      icones.value = searchList(text, icons)
+      icones.value = searchList(text, icons);
     }
   }
-}
+};
 
 const searchList = function (str: string, container: any) {
-  var newList = []
-  var startChar = str.charAt(0)
-  var strLen = str.length
+  var newList = [];
+  var startChar = str.charAt(0);
+  var strLen = str.length;
   for (var i = 0; i < container.length; i++) {
-    var obj = container[i]
-    var isMatch = false
+    var obj = container[i];
+    var isMatch = false;
     for (var p in obj) {
-      if (typeof obj[p] == 'function') {
-        obj[p]()
+      if (typeof obj[p] == "function") {
+        obj[p]();
       } else {
-        var curItem = ''
+        var curItem = "";
         if (obj[p] != null) {
-          curItem = obj[p]
+          curItem = obj[p];
         }
         for (var j = 0; j < curItem.length; j++) {
           if (curItem.charAt(j) == startChar) {
             if (curItem.substring(j).substring(0, strLen) == str) {
-              isMatch = true
-              break
+              isMatch = true;
+              break;
             }
           }
         }
       }
     }
     if (isMatch) {
-      newList.push(obj)
+      newList.push(obj);
     }
   }
-  return newList
-}
+  return newList;
+};
 </script>

@@ -11,13 +11,13 @@
 </template>
 
 <script setup name="LayBreadcrumbItem" lang="ts">
-import { defineProps, inject, useSlots } from 'vue'
+import { defineProps, inject, useSlots } from "vue";
 
-const slot = useSlots()
+const slot = useSlots();
 
 const props = defineProps<{
-  title?: string
-}>()
+  title?: string;
+}>();
 
-const separator = inject('separator')
+const separator = inject("separator");
 </script>

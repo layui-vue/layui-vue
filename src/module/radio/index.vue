@@ -25,23 +25,22 @@
 </template>
 
 <script setup name="LayRadio" lang="ts">
-import { defineProps, defineEmits } from 'vue'
+import { defineProps, defineEmits } from "vue";
 
-const props =
-  defineProps<{
-    modelValue: string
-    disabled?: boolean
-    label?: string
-    name: string
-  }>()
+const props = defineProps<{
+  modelValue: string;
+  disabled?: boolean;
+  label?: string;
+  name: string;
+}>();
 
-const emit = defineEmits(['update:modelValue','change'])
+const emit = defineEmits(["update:modelValue", "change"]);
 
 const handleClick = function () {
   if (props.disabled) {
-    return
+    return;
   }
-  emit('change', props.label)
-  emit('update:modelValue', props.label)
-}
+  emit("change", props.label);
+  emit("update:modelValue", props.label);
+};
 </script>

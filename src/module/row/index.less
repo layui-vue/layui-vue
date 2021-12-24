@@ -1,25 +1,24 @@
 .layui-row:after,
 .layui-row:before {
-    content: '';
-    display: block;
-    clear: both;
+  content: "";
+  display: block;
+  clear: both;
 }
 
 /** generate space */
 .generate-space(@a) {
+  .layui-col-space@{a} {
+    margin: -0.5px * @a;
+  }
 
-    .layui-col-space@{a} {
-        margin: -0.5px * @a;
-    }
-
-    .layui-col-space@{a}>* {
-        padding: 0.5px * @a;
-    }
+  .layui-col-space@{a} > * {
+    padding: 0.5px * @a;
+  }
 }
 
 .loop-generate-space(@index) when (@index <=30) {
-    .generate-space(@index);
-    .loop-generate-space(@index + 1);
+  .generate-space(@index);
+  .loop-generate-space(@index + 1);
 }
 
 .loop-generate-space(1);
@@ -27,175 +26,169 @@
 /** generate col xs */
 
 .generate-col-xs(@a) {
+  .layui-col-xs@{a} {
+    float: left;
+    display: block;
+    position: relative;
+    box-sizing: border-box;
+    width: 100% * (@a / 24);
+  }
 
-    .layui-col-xs@{a} {
-        float: left;
-        display: block;
-        position: relative;
-        box-sizing: border-box;
-        width: 100% * (@a / 24);
-    }
-
-    .layui-col-xs-offset@{a} {
-        margin-left: 100% * (@a / 24);
-    }
+  .layui-col-xs-offset@{a} {
+    margin-left: 100% * (@a / 24);
+  }
 }
 
 .generate-col-sm(@a) {
+  .layui-col-sm@{a} {
+    float: left;
+    display: block;
+    position: relative;
+    box-sizing: border-box;
+    width: 100% * (@a / 24);
+  }
 
-    .layui-col-sm@{a} {
-        float: left;
-        display: block;
-        position: relative;
-        box-sizing: border-box;
-        width: 100% * (@a / 24);
-    }
-
-    .layui-col-sm-offset@{a} {
-        margin-left: 100% * (@a / 24);
-    }
+  .layui-col-sm-offset@{a} {
+    margin-left: 100% * (@a / 24);
+  }
 }
 
 .generate-col-md(@a) {
+  .layui-col-md@{a} {
+    float: left;
+    display: block;
+    position: relative;
+    box-sizing: border-box;
+    width: 100% * (@a / 24);
+  }
 
-    .layui-col-md@{a} {
-        float: left;
-        display: block;
-        position: relative;
-        box-sizing: border-box;
-        width: 100% * (@a / 24);
-    }
-
-    .layui-col-md-offset@{a} {
-        margin-left: 100% * (@a / 24);
-    }
+  .layui-col-md-offset@{a} {
+    margin-left: 100% * (@a / 24);
+  }
 }
 
 .generate-col-lg(@a) {
+  .layui-col-lg@{a} {
+    float: left;
+    display: block;
+    position: relative;
+    box-sizing: border-box;
+    width: 100% * (@a / 24);
+  }
 
-    .layui-col-lg@{a} {
-        float: left;
-        display: block;
-        position: relative;
-        box-sizing: border-box;
-        width: 100% * (@a / 24);
-    }
-
-    .layui-col-lg-offset@{a} {
-        margin-left: 100% * (@a / 24);
-    }
+  .layui-col-lg-offset@{a} {
+    margin-left: 100% * (@a / 24);
+  }
 }
 
 .loop-generate-col-xs(@index) when (@index <=24) {
-    .generate-col-xs(@index);
-    .loop-generate-col-xs(@index + 1)
+  .generate-col-xs(@index);
+  .loop-generate-col-xs(@index + 1);
 }
 
 .loop-generate-col-sm(@index) when (@index <=24) {
-    .generate-col-sm(@index);
-    .loop-generate-col-sm(@index + 1)
+  .generate-col-sm(@index);
+  .loop-generate-col-sm(@index + 1);
 }
 
 .loop-generate-col-md(@index) when (@index <=24) {
-    .generate-col-md(@index);
-    .loop-generate-col-md(@index + 1)
+  .generate-col-md(@index);
+  .loop-generate-col-md(@index + 1);
 }
 
 .loop-generate-col-lg(@index) when (@index <=24) {
-    .generate-col-lg(@index);
-    .loop-generate-col-lg(@index + 1)
+  .generate-col-lg(@index);
+  .loop-generate-col-lg(@index + 1);
 }
 
 @media screen and (max-width: 768px) {
-    .layui-hide-xs {
-        display: none !important;
-    }
+  .layui-hide-xs {
+    display: none !important;
+  }
 
-    .layui-show-xs-block {
-        display: block !important;
-    }
+  .layui-show-xs-block {
+    display: block !important;
+  }
 
-    .layui-show-xs-inline {
-        display: inline !important;
-    }
+  .layui-show-xs-inline {
+    display: inline !important;
+  }
 
-    .layui-show-xs-inline-block {
-        display: inline-block !important;
-    }
+  .layui-show-xs-inline-block {
+    display: inline-block !important;
+  }
 
-    .loop-generate-col-xs(1);
+  .loop-generate-col-xs(1);
 }
-
 
 @media screen and (min-width: 768px) {
-    .layui-container {
-        width: 750px;
-    }
+  .layui-container {
+    width: 750px;
+  }
 
-    .layui-hide-sm {
-        display: none !important;
-    }
+  .layui-hide-sm {
+    display: none !important;
+  }
 
-    .layui-show-sm-block {
-        display: block !important;
-    }
+  .layui-show-sm-block {
+    display: block !important;
+  }
 
-    .layui-show-sm-inline {
-        display: inline !important;
-    }
+  .layui-show-sm-inline {
+    display: inline !important;
+  }
 
-    .layui-show-sm-inline-block {
-        display: inline-block !important;
-    }
+  .layui-show-sm-inline-block {
+    display: inline-block !important;
+  }
 
-    .loop-generate-col-sm(1)
+  .loop-generate-col-sm(1);
 }
 
-
 @media screen and (min-width: 992px) {
-    .layui-container {
-        width: 970px;
-    }
+  .layui-container {
+    width: 970px;
+  }
 
-    .layui-hide-md {
-        display: none !important;
-    }
+  .layui-hide-md {
+    display: none !important;
+  }
 
-    .layui-show-md-block {
-        display: block !important;
-    }
+  .layui-show-md-block {
+    display: block !important;
+  }
 
-    .layui-show-md-inline {
-        display: inline !important;
-    }
+  .layui-show-md-inline {
+    display: inline !important;
+  }
 
-    .layui-show-md-inline-block {
-        display: inline-block !important;
-    }
+  .layui-show-md-inline-block {
+    display: inline-block !important;
+  }
 
-    .loop-generate-col-md(1)
+  .loop-generate-col-md(1);
 }
 
 @media screen and (min-width: 1200px) {
-    .layui-container {
-        width: 1170px;
-    }
+  .layui-container {
+    width: 1170px;
+  }
 
-    .layui-hide-lg {
-        display: none !important;
-    }
+  .layui-hide-lg {
+    display: none !important;
+  }
 
-    .layui-show-lg-block {
-        display: block !important;
-    }
+  .layui-show-lg-block {
+    display: block !important;
+  }
 
-    .layui-show-lg-inline {
-        display: inline !important;
-    }
+  .layui-show-lg-inline {
+    display: inline !important;
+  }
 
-    .layui-show-lg-inline-block {
-        display: inline-block !important;
-    }
+  .layui-show-lg-inline-block {
+    display: inline-block !important;
+  }
 
-    .loop-generate-col-lg(1)
+  .loop-generate-col-lg(1);
 }

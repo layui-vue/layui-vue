@@ -1,6 +1,6 @@
 <script lang="ts">
 import usePopper from "../popper/usePopper";
-import { defineComponent} from "vue";
+import { defineComponent } from "vue";
 export default defineComponent({
   name: "LayTooltip",
   props: {
@@ -22,12 +22,12 @@ export default defineComponent({
     },
     visible: {
       type: Boolean,
-      default: true
+      default: true,
     },
     isCanHide: {
       type: Boolean,
-      default: true
-    }
+      default: true,
+    },
   },
   render() {
     return this.$slots.default && this.$slots.default()[0];
@@ -35,8 +35,8 @@ export default defineComponent({
   mounted() {
     const _this = this;
     this.$nextTick(() => {
-      usePopper.createPopper(_this.$el, _this.$props, 'hover')
+      usePopper.createPopper(_this.$el, _this.$props, "hover");
     });
-  }
+  },
 });
 </script>

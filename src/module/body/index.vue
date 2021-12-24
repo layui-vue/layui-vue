@@ -1,11 +1,11 @@
 <script lang="ts">
 export default {
-  name: 'LayBody',
-}
+  name: "LayBody",
+};
 </script>
 
 <script setup name="LayBody" lang="ts">
-import "./index.less"
+import "./index.less";
 </script>
 
 <template>

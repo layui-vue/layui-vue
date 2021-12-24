@@ -1,4 +1,3 @@
-
 <script lang="ts">
 export default {
   name: "LayRate",
@@ -27,7 +26,11 @@ const props = withDefaults(defineProps<LayRateProps>(), {
   half: false,
   text: false,
   isBlock: false,
-  icons: () => ['layui-icon-rate', 'layui-icon-rate-half', 'layui-icon-rate-solid']
+  icons: () => [
+    "layui-icon-rate",
+    "layui-icon-rate-half",
+    "layui-icon-rate-solid",
+  ],
 });
 
 const emit = defineEmits(["update:modelValue", "select"]);
@@ -36,7 +39,9 @@ const currentValue = ref<number>(props.modelValue);
 // 临时存储值
 const tempValue = ref(currentValue.value);
 // 是否存在半颗星
-const isHalf = computed(()=>props.half && Math.round(currentValue.value) !== currentValue.value);
+const isHalf = computed(
+  () => props.half && Math.round(currentValue.value) !== currentValue.value
+);
 
 // 计算评分星值
 const getValue = function (index: number, event: any): number {
@@ -89,18 +94,25 @@ const action = function (index: number, event: any) {
           :class="[
             'layui-icon',
             `${
-              icons[icons.length - (isHalf && index === Math.ceil(currentValue) ? 2: 1)]
+              icons[
+                icons.length -
+                  (isHalf && index === Math.ceil(currentValue) ? 2 : 1)
+              ]
             }`,
           ]"
           :style="{ color: theme }"
         />
-        <i v-else :class="['layui-icon'].concat(icons[0])" :style="{ color: theme }"/>
+        <i
+          v-else
+          :class="['layui-icon'].concat(icons[0])"
+          :style="{ color: theme }"
+        />
       </li>
     </ul>
     <template v-if="text">
       <span class="layui-inline">
         <slot :value="currentValue">
-          {{ currentValue + '星' }}
+          {{ currentValue + "星" }}
         </slot>
       </span>
     </template>

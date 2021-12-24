@@ -51,9 +51,11 @@ const slots = slot.default && slot.default();
 const allChecked = ref(false);
 const tableSelectedKeys = ref([...props.selectedKeys]);
 const tableColumns = ref([...props.columns]);
-const tableColumnKeys = ref(props.columns.map((item: any) => {
-  return item.key;
-}));
+const tableColumnKeys = ref(
+  props.columns.map((item: any) => {
+    return item.key;
+  })
+);
 
 const changeAll = function (checked: any) {
   const ids = props.dataSource.map((item: any) => {

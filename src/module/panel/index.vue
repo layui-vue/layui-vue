@@ -1,11 +1,11 @@
 <script lang="ts">
 export default {
-  name: "LayPanel"
-}
+  name: "LayPanel",
+};
 </script>
 
 <script setup lang="ts">
-import "./index.less"
+import "./index.less";
 </script>
 
 <template>
