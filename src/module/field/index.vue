@@ -2,7 +2,7 @@
   <fieldset v-if="slot.default" class="layui-elem-field">
     <legend>{{ title }}</legend>
     <div class="layui-field-box">
-      <slot />
+      <slot></slot>
     </div>
   </fieldset>
 

@@ -4,18 +4,18 @@
       class="layui-inline layui-border-box layui-iconpicker layui-iconpicker-split"
     >
       <div class="layui-inline layui-iconpicker-main">
-        <i class="layui-inline layui-icon" :class="[selectedIcon]" />
+        <i class="layui-inline layui-icon" :class="[selectedIcon]"></i>
       </div>
       <span class="layui-inline layui-iconpicker-suffix"
-        ><i class="layui-icon layui-icon-down layui-anim"
-      /></span>
+        ><i class="layui-icon layui-icon-down layui-anim"></i
+      ></span>
     </div>
     <template #content>
       <div class="layui-iconpicker-view layui-iconpicker-scroll">
         <div v-if="showSearch" class="layui-iconpicker-search">
           <div class="layui-form layui-input-wrap layui-input-wrap-prefix">
             <div class="layui-input-prefix">
-              <i class="layui-icon layui-icon-search" />
+              <i class="layui-icon layui-icon-search"></i>
             </div>
             <input
               type="text"
@@ -27,7 +27,7 @@
               @input="search"
             />
             <div class="layui-input-suffix layui-input-affix-event layui-hide">
-              <i class="layui-icon layui-icon-clear" />
+              <i class="layui-icon layui-icon-clear"></i>
             </div>
           </div>
         </div>
@@ -39,7 +39,7 @@
               :class="[selectedIcon === icon.class ? 'layui-this' : '']"
               @click="selectIcon(icon.class)"
             >
-              <i class="layui-icon" :class="[icon.class]" />
+              <i class="layui-icon" :class="[icon.class]"></i>
               <p class="layui-elip">
                 {{ icon.name }}
               </p>
@@ -57,11 +57,10 @@
               class="layui-laypage-prev"
               :class="[currentPage === 1 ? 'layui-disabled' : '']"
               @click="prev()"
-              ><i class="layui-icon layui-icon-left" /></a
+              ><i class="layui-icon layui-icon-left"></i></a
             ><span class="layui-laypage-curr"
-              ><em class="layui-laypage-em" /><em
-                >{{ currentPage }} / {{ totalPage }}</em
-              ></span
+              ><em class="layui-laypage-em"></em
+              ><em>{{ currentPage }} / {{ totalPage }}</em></span
             ><span class="layui-laypage-spr">…</span
             ><a href="javascript:;" class="layui-laypage-last" title="尾页"
               >14</a
@@ -70,8 +69,8 @@
               :class="[currentPage === totalPage ? 'layui-disabled' : '']"
               class="layui-laypage-next"
               @click="next()"
-              ><i class="layui-icon layui-icon-right"
-            /></a>
+              ><i class="layui-icon layui-icon-right"></i
+            ></a>
           </div>
         </div>
       </div>

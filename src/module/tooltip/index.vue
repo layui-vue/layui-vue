@@ -29,14 +29,14 @@ export default defineComponent({
       default: true,
     },
   },
-  render() {
-    return this.$slots.default && this.$slots.default()[0];
-  },
   mounted() {
     const _this = this;
     this.$nextTick(() => {
       usePopper.createPopper(_this.$el, _this.$props, "hover");
     });
+  },
+  render() {
+    return this.$slots.default && this.$slots.default()[0];
   },
 });
 </script>

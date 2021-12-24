@@ -15,6 +15,6 @@ const props = defineProps<{
 
 <template>
   <blockquote class="layui-elem-quote" :class="{ 'layui-quote-nm': nm }">
-    <slot />
+    <slot></slot>
   </blockquote>
 </template>

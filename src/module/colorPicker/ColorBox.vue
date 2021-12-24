@@ -107,7 +107,7 @@ onMounted(() => {
       :visible="true"
       :alpha="alpha"
       :predefine="predefine"
-    ></ColorPicker>
+    />
   </div>
 </template>
 <style scoped lang="less"></style>

@@ -20,7 +20,7 @@
       </li>
     </ul>
     <div class="layui-tab-content">
-      <slot />
+      <slot></slot>
     </div>
   </div>
 </template>

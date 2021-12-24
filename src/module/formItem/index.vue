@@ -17,7 +17,7 @@
     </label>
     <div :class="[mode ? 'layui-input-' + mode : '']">
       <div ref="slotParent">
-        <slot :props="{ ...props, model: layForm.model }" />
+        <slot :props="{ ...props, model: layForm.model }"></slot>
       </div>
       <span
         v-if="errorStatus"

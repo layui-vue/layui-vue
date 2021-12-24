@@ -53,6 +53,6 @@ const colorPickerProps = withDefaults(defineProps<ColorPickerProps>(), {
 
 <template>
   <div class="layui-inline'">
-    <ColorBox></ColorBox>
+    <ColorBox />
   </div>
 </template>

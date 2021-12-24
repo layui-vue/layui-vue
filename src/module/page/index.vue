@@ -15,7 +15,8 @@
           ><em
             class="layui-laypage-em"
             :class="[theme ? 'layui-bg-' + theme : '']"
-          /><em>{{ index }}</em></span
+          ></em
+          ><em>{{ index }}</em></span
         >
         <a v-else href="javascript:;" @click="jump(index)">
           {{ index }}
@@ -39,7 +40,7 @@
         <option value="50">50 条/页</option>
       </select></span
     ><a v-if="showRefresh" href="javascript:;" class="layui-laypage-refresh"
-      ><i class="layui-icon layui-icon-refresh" /></a
+      ><i class="layui-icon layui-icon-refresh"></i></a
     ><span v-if="showSkip" class="layui-laypage-skip"
       >到第<input
         v-model="currentPageShow"

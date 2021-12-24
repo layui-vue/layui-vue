@@ -10,6 +10,6 @@ import "./index.less";
 
 <template>
   <ul class="layui-timeline">
-    <slot />
+    <slot></slot>
   </ul>
 </template>

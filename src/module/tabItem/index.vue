@@ -1,6 +1,6 @@
 <template>
   <div class="layui-tab-item" :class="[active === id ? 'layui-show' : '']">
-    <slot />
+    <slot></slot>
   </div>
 </template>
 

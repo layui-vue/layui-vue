@@ -101,12 +101,12 @@ const action = function (index: number, event: any) {
             }`,
           ]"
           :style="{ color: theme }"
-        />
+        ></i>
         <i
           v-else
           :class="['layui-icon'].concat(icons[0])"
           :style="{ color: theme }"
-        />
+        ></i>
       </li>
     </ul>
     <template v-if="text">

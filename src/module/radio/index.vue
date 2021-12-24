@@ -19,7 +19,7 @@
         class="layui-anim layui-icon layui-anim-scaleSpring layui-form-radioed"
         >&#xe63f;</i
       >
-      <span><slot /></span>
+      <span><slot></slot></span>
     </div>
   </span>
 </template>

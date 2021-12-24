@@ -28,7 +28,7 @@
           { 'layui-disabled': disabled },
         ]"
       />
-      <i :class="['layui-edge', { 'layui-disabled': disabled }]" />
+      <i :class="['layui-edge', { 'layui-disabled': disabled }]"></i>
       <!-- 多选 -->
       <div
         v-if="selectItem.multiple && Array.isArray(selectItem.label)"
@@ -66,12 +66,9 @@
     <dl class="layui-anim layui-anim-upbit">
       <!-- 多选不支持空提示 -->
       <template v-if="!multiple && showEmpty">
-        <lay-select-option
-          :value="null"
-          :label="emptyMessage ?? placeholder"
-        ></lay-select-option>
+        <lay-select-option :value="null" :label="emptyMessage ?? placeholder" />
       </template>
-      <slot />
+      <slot></slot>
     </dl>
   </div>
 </template>

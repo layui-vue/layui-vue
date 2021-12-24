@@ -34,6 +34,6 @@ const classes = computed(() => {
 
 <template>
   <div class="layui-col" :class="classes">
-    <slot />
+    <slot></slot>
   </div>
 </template>

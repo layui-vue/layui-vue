@@ -10,6 +10,6 @@ import "./index.less";
 
 <template>
   <div class="layui-body">
-    <slot />
+    <slot></slot>
   </div>
 </template>

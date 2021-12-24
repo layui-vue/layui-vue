@@ -8,7 +8,7 @@
       <h3 v-else class="layui-timeline-title">
         {{ title }}
       </h3>
-      <slot />
+      <slot></slot>
     </div>
   </li>
 </template>

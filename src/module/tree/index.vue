@@ -94,6 +94,6 @@ function handleClick(node: TreeData) {
       :show-line="showLine"
       :only-icon-control="onlyIconControl"
       @node-click="handleClick"
-    ></tree-node>
+    />
   </div>
 </template>

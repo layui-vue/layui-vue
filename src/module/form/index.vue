@@ -1,6 +1,6 @@
 <template>
   <form class="layui-form" :onsubmit="submit">
-    <slot />
+    <slot></slot>
   </form>
 </template>
 

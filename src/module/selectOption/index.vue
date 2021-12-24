@@ -10,7 +10,7 @@
         v-model="selected"
         @change="selectHandle"
         label=""
-      ></lay-checkbox>
+      />
     </template>
     <slot>{{ label }}</slot>
   </dd>

@@ -26,6 +26,7 @@
     "build": "vite build --emptyOutDir && npm run build:types",
     "build:types": "rimraf types && tsc -d",
     "build:example": "vite build example",
+    "lint:eslint": "eslint --cache --max-warnings 0  \"src/**/*.{vue,ts,tsx}\" --fix",
     "lint:prettier": "prettier --write  \"src/**/*.{js,json,tsx,css,less,scss,vue,html,md}\""
   },
   "peerDependencies": {
@@ -33,12 +34,14 @@
     "vue-router": "^4.0.12"
   },
   "dependencies": {
-    "vue": "^3.2.26",
     "@layui/hooks-vue": "^0.1.6",
     "@layui/icons-vue": "^1.0.1",
     "@layui/layer-vue": "^1.2.2",
     "async-validator": "^4.0.7",
-    "evtd": "^0.2.3"
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "evtd": "^0.2.3",
+    "vue": "^3.2.26"
   },
   "devDependencies": {
     "@babel/core": "^7.15.8",
@@ -48,10 +51,14 @@
     "@types/markdown-it": "^12.2.3",
     "@types/markdown-it-container": "^2.0.4",
     "@types/node": "^16.11.9",
+    "@typescript-eslint/eslint-plugin": "^5.8.0",
+    "@typescript-eslint/parser": "^5.8.0",
     "@vitejs/plugin-vue": "^1.9.3",
     "@vue/compiler-sfc": "^3.2.26",
     "@vue/server-renderer": "^3.2.26",
     "escape-html": "^1.0.3",
+    "eslint": "^8.5.0",
+    "eslint-plugin-vue": "^8.2.0",
     "less": "^4.1.2",
     "markdown-it-container": "^3.0.0",
     "prettier": "^2.5.1",

@@ -108,7 +108,7 @@ const print = function () {
 
 <template>
   <div :id="tableId">
-    <table class="layui-hide" lay-filter="test" />
+    <table class="layui-hide" lay-filter="test"></table>
     <div
       class="layui-form layui-border-box layui-table-view layui-table-view-1"
     >
@@ -140,7 +140,7 @@ const print = function () {
             lay-event="LAYTABLE_PRINT"
             @click="print()"
           >
-            <i class="layui-icon layui-icon-print" />
+            <i class="layui-icon layui-icon-print"></i>
           </div>
         </div>
       </div>
@@ -190,8 +190,7 @@ const print = function () {
                         v-model="tableSelectedKeys"
                         skin="primary"
                         :label="data[id]"
-                      >
-                      </lay-checkbox>
+                      />
                     </div>
                   </td>
 
@@ -200,7 +199,7 @@ const print = function () {
                       <template v-if="column.customSlot">
                         <td class="layui-table-cell">
                           <div :style="{ width: column.width }">
-                            <slot :name="column.customSlot" :data="data" />
+                            <slot :name="column.customSlot" :data="data"></slot>
                           </div>
                         </td>
                       </template>
@@ -213,7 +212,7 @@ const print = function () {
                         <td v-if="column.key == key" class="layui-table-cell">
                           <div :style="{ width: column.width }">
                             <span v-if="column.slot">
-                              <slot :name="column.slot" :data="data" />
+                              <slot :name="column.slot" :data="data"></slot>
                             </span>
                             <span v-else> {{ value }} </span>
                           </div>
@@ -236,12 +235,8 @@ const print = function () {
           show-skip
           @jump="change"
         >
-          <template #prev
-            ><lay-icon type="layui-icon-left"></lay-icon
-          ></template>
-          <template #next
-            ><lay-icon type="layui-icon-right"></lay-icon
-          ></template>
+          <template #prev><lay-icon type="layui-icon-left" /></template>
+          <template #next><lay-icon type="layui-icon-right" /></template>
         </lay-page>
       </div>
     </div>

@@ -13,7 +13,7 @@
         :type="
           position === 'right' ? 'layui-icon-down' : 'layui-icon-subtraction'
         "
-      ></lay-icon>
+      />
     </lay-button>
     <div class="layui-input-number-input">
       <lay-input
@@ -22,7 +22,7 @@
         type="number"
         :name="name"
         @change="inputChange"
-      ></lay-input>
+      />
     </div>
     <lay-button
       type="primary"
@@ -35,7 +35,7 @@
     >
       <lay-icon
         :type="position === 'right' ? 'layui-icon-up' : 'layui-icon-addition'"
-      ></lay-icon>
+      />
     </lay-button>
   </div>
 </template>

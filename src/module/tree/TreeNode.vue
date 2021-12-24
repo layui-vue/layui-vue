@@ -124,8 +124,7 @@ function handleTitleClick(node: TreeData) {
               handleChange(checked, node);
             }
           "
-        >
-        </LayCheckbox>
+        />
         <span
           :class="{
             'layui-tree-txt': true,

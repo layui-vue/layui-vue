@@ -9,7 +9,7 @@
     </h2>
     <div class="layui-colla-content" :class="isShow ? 'layui-show' : ''">
       <p>
-        <slot :props="props" />
+        <slot :props="props"></slot>
       </p>
     </div>
   </div>

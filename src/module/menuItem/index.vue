@@ -6,7 +6,7 @@
   >
     <a href="javascript:void(0)" @click="openHandle">
       {{ title }}
-      <i class="layui-icon layui-icon-down layui-nav-more" />
+      <i class="layui-icon layui-icon-down layui-nav-more"></i>
     </a>
     <dl
       class="layui-nav-child"
@@ -15,7 +15,7 @@
         !isTree ? 'layui-anim layui-anim-upbit' : '',
       ]"
     >
-      <slot />
+      <slot></slot>
     </dl>
   </li>
 

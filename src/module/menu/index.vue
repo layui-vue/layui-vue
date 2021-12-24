@@ -1,6 +1,6 @@
 <template>
   <ul class="layui-nav" :class="[tree ? 'layui-nav-tree' : '']">
-    <slot />
+    <slot></slot>
   </ul>
 </template>
 

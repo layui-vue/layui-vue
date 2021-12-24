@@ -14,7 +14,7 @@
         :size="`${props.iconSize}px`"
         :prefix="props.iconPrefix"
         :color="props.iconColor"
-      ></lay-icon>
+      />
     </slot>
   </div>
 </template>

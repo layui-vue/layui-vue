@@ -104,8 +104,8 @@ const handleClick = function () {
       }"
       :lay-skin="skin"
     >
-      <span v-if="$slots?.default"><slot /></span>
-      <i class="layui-icon layui-icon-ok" />
+      <span v-if="$slots?.default"><slot></slot></span>
+      <i class="layui-icon layui-icon-ok"></i>
     </div>
   </span>
 </template>

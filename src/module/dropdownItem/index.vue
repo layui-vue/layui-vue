@@ -1,7 +1,7 @@
 <template>
   <li>
     <div class="layui-menu-body-title" @click="click">
-      <slot />
+      <slot></slot>
     </div>
   </li>
 </template>

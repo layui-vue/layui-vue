@@ -52,11 +52,11 @@ defineExpose({ open, hide, toggle });
     :class="[openState ? 'layui-dropdown-up' : '']"
   >
     <div @click="toggle">
-      <slot />
+      <slot></slot>
     </div>
     <dl class="layui-anim layui-anim-upbit">
       <ul class="layui-menu layui-dropdown-menu">
-        <slot name="content" />
+        <slot name="content"></slot>
       </ul>
     </dl>
   </div>
@@ -68,11 +68,11 @@ defineExpose({ open, hide, toggle });
     @mouseleave="hide"
   >
     <div>
-      <slot />
+      <slot></slot>
     </div>
     <dl class="layui-anim layui-anim-upbit">
       <ul class="layui-menu layui-dropdown-menu">
-        <slot name="content" />
+        <slot name="content"></slot>
       </ul>
     </dl>
   </div>

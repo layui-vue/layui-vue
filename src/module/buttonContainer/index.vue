@@ -1,6 +1,6 @@
 <template>
   <div class="layui-btn-container">
-    <slot />
+    <slot></slot>
   </div>
 </template>
 
