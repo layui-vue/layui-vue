@@ -60,7 +60,7 @@ const mousemove = function (index: number, event: any) {
 };
 
 // 离开评分星事件
-const mouseleave = function (index: number, event: any) {
+const mouseleave = function () {
   if (props.readonly) {
     return false;
   }
