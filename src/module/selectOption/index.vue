@@ -49,12 +49,15 @@ const callSelectItemHandle = function(isChecked ?: boolean){
     disabled : props.disabled
   }, isChecked);
 }
-const selected = computed(()=>{
-  const selectValues = selectItem.value.value;
-  if (Array.isArray(selectValues)) {
-    return (selectValues as any[]).indexOf(props.value) > -1;
-  }
-  return selectItem.value.value === props.value
+const selected = computed({
+  get(){
+    const selectValues = selectItem.value.value;
+    if (Array.isArray(selectValues)) {
+      return (selectValues as any[]).indexOf(props.value) > -1;
+    }
+    return selectItem.value.value === props.value
+  },
+  set(val){}
 })
 onMounted(() => selected.value && callSelectItemHandle())
 </script>
