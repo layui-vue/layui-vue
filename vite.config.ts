@@ -4,8 +4,7 @@ import { name } from './package.json'
 import babel from '@rollup/plugin-babel'
 import plugins from './example/src/plugin/common-plugins'
 
-const camelize = (name: string) =>
-  name.replace(/(^|-)(\w)/g, (a, b, c) => c.toUpperCase())
+const camelize = (name: string) => name.replace(/(^|-)(\w)/g, (a, b, c) => c.toUpperCase());
 
 export default defineConfig({
   root: path.resolve(__dirname, 'example'),
