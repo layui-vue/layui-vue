@@ -38,8 +38,6 @@
     "@layui/icons-vue": "^1.0.2",
     "@layui/layer-vue": "^1.2.2",
     "async-validator": "^4.0.7",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-prettier": "^4.0.0",
     "evtd": "^0.2.3",
     "vue": "^3.2.26"
   },
@@ -59,6 +57,8 @@
     "escape-html": "^1.0.3",
     "eslint": "^8.5.0",
     "eslint-plugin-vue": "^8.2.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
     "less": "^4.1.2",
     "markdown-it-container": "^3.0.0",
     "prettier": "^2.5.1",
