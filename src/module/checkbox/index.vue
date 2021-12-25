@@ -12,7 +12,7 @@ export interface LayCheckboxProps {
   name?: string;
   skin?: string;
   label: string | object;
-  modelValue: boolean | Array<string | object>;
+  modelValue?: boolean | Array<string | object>;
   disabled?: boolean;
 }
 
