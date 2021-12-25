@@ -270,24 +270,24 @@ export default {
 
 :::
 
-::: title 表格属性
+::: title Table 属性
 :::
 
 ::: table
 
-| 属性                     | 描述       | 可选值         |
-| ------------------------ | ---------- | -------------- |
-| columns                  | 列配置     | --             |
-| dataSource               | 数据源     | --             |
-| checkbox                 | 开启复现框 | --             |
-| id                       | 主键       | --             |
-| selectedKeys ( v-model ) | 选中项     | --             |
-| default-toolbar          | 开启工具栏 | `lg` `md` `sm` |
-| size                     | 尺寸       | --             |
+| 属性                 | 描述       | 类型 | 默认值 | 可选值         |
+| -------------------- | ---------- | ---- | ------ | -------------- |
+| columns              | 列配置     | --   | --     | --             |
+| dataSource           | 数据源     | --   | --     | --             |
+| checkbox             | 开启复选框 | --   | --     | --             |
+| id                   | 主键       | --   | --     | --             |
+| v-model:selectedKeys | 选中项     | --   | --     | --             |
+| default-toolbar      | 工具栏     | --   | --     | --             |
+| size                 | 尺寸       | --   | --     | `lg` `md` `sm` |
 
 :::
 
-::: title 表格事件
+::: title Table 事件
 :::
 
 ::: table
@@ -299,28 +299,29 @@ export default {
 
 :::
 
-::: title 表格插槽
+::: title Table 插槽
 :::
 
 ::: table
 
-| 插槽    | 描述         | 默认 |
+| 插槽    | 描述         | 参数 |
 | ------- | ------------ | ---- |
 | toolbar | 自定义工具栏 | --   |
 
 :::
 
-::: title 列配置
+::: title Table Column 属性
 :::
 
 ::: table
 
-| 插槽    | 描述         | 默认 |
-| ------- | ------------ | ---- |
-| title | 列标题 | --   |
-| key | 数据字段 | --   |
-| customSlot | 插槽名称 | --   |
-| width | 宽度 | --   |
+| 插槽       | 描述     | 默认 |
+| ---------- | -------- | ---- |
+| title      | 列标题   | --   |
+| key        | 数据字段 | --   |
+| customSlot | 自定义插槽 | --   |
+| width      | 宽度     | --   |
+
 :::
 
 ::: comment
