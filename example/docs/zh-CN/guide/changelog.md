@@ -16,6 +16,7 @@
       <li> 
         <h3>0.3.0 <span class="layui-badge-rim">2021-12-25</span></h3> 
         <ul> 
+          <li>[新增] button 按钮 disabled 属性, 删除 type 属性 disabled 值。</li>  
           <li>[修复] checkbox 复选框 modelValue 属性必填警告。</li>  
           <li>[修复] formItem 内下拉框组件校验不通过边框未标红问题。</li>  
           <li>[修复] rate 评分 mouseleave 事件绑定警告。</li>  
