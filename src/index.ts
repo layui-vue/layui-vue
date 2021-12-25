@@ -4,7 +4,6 @@ import type { IDefineComponent, InstallOptions } from "./module/type/index";
 import "./css/layui.css";
 import "@layui/layer-vue/lib/index.css";
 import "@layui/icons-vue/lib/index.css";
-
 import { layer } from "@layui/layer-vue";
 
 import LayModal from "./module/layer/modal/index";
@@ -198,9 +197,9 @@ export {
   LayCarousel,
   LayCarouselItem,
   LayColorPicker,
-  LayModal,
-  install,
-  layer,
+  LayModal
 };
+
+export { layer };
 
 export default { install };

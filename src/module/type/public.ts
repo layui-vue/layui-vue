@@ -10,10 +10,7 @@ export type IDefineComponent<Props = UnknownObject> = DefineComponent<Props> & {
   install: (app: App, options?: InstallOptions) => void;
 };
 
-export interface InstallOptions extends StringObject {
-  pagination?: null;
-  menu?: null;
-}
+export interface InstallOptions extends StringObject {}
 
 export type Nullable<T> = T | null;
 
