@@ -59,10 +59,8 @@ export default {
 <template>
 <!-- 需要用一个 div 包裹触发滚动事件的目标元素和 lay-backtop 组件 -->
 <div class="scrollContainer" style="width:700px; height:300px;">
-  <div id="scrollContent" style="overflow-y:auto; overflow-x:auto; width:700px; height:300px;">
-    <p v-for="(n,index) in 50" :key="n" style="height:32px;border-bottom:0.5px solid #5FB878;margin-bottom:10px;line-height:35px">
-      {{index + ". &nbsp;layui-vue , 基 于 vue 3.0 的 桌 面 端 组 件 库 , layui 的 另 一 种 呈 现 方 式"}}
-    </p>
+  <div id="scrollContent" style="overflow-y:auto; overflow-x:auto; width:700px; height:300px;background-color:whitesmoke;padding:10px;">
+    <lay-panel v-for="(n,index) in 50" :key="n" style="margin-top:5px;margin-bottom:5px;padding:10px;">内容</lay-panel>
   </div>
   <lay-backtop target="#scrollContent" :showHeight="100" :bottom="30" position="absolute"></lay-backtop>
 </div>
