@@ -4,7 +4,7 @@
   "author": "sleeprite",
   "license": "MIT",
   "description": "a component library for Vue 3 base on layui-vue",
-  "homepage": "https://gitee.com/layui-vue/layui-vue/blob/master/README.md",
+  "homepage": "http://layui-vue.pearadmin.com",
   "module": "lib/layui-vue.es.js",
   "main": "lib/layui-vue.umd.js",
   "types": "types/index.d.ts",
@@ -28,18 +28,14 @@
     "build:example": "vite build example",
     "lint:eslint": "eslint \"src/**/*.{vue,ts,tsx}\" --fix",
     "lint:prettier": "prettier --write  \"src/**/*.{js,json,tsx,css,less,scss,vue,html,md}\"",
-    "commit": "cz"
-  },
-  "peerDependencies": {
-    "vue": "^3.2.26",
-    "vue-router": "^4.0.12"
+    "commit": "git cz"
   },
   "dependencies": {
     "@layui/hooks-vue": "^0.1.6",
     "@layui/icons-vue": "^1.0.2",
     "@layui/layer-vue": "^1.2.2",
     "async-validator": "^4.0.7",
-    "commitizen": "^4.2.4",
+    "vue-router": "^4.0.12",
     "evtd": "^0.2.3",
     "vue": "^3.2.26"
   },
@@ -56,19 +52,20 @@
     "@vitejs/plugin-vue": "^1.9.3",
     "@vue/compiler-sfc": "^3.2.26",
     "@vue/server-renderer": "^3.2.26",
+    "commitizen": "^4.2.4",
     "cz-conventional-changelog": "3.3.0",
     "escape-html": "^1.0.3",
     "eslint": "^8.5.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-vue": "^8.2.0",
-    "less": "^4.1.2",
     "markdown-it-container": "^3.0.0",
     "prettier": "^2.5.1",
     "prismjs": "^1.25.0",
     "rimraf": "^3.0.2",
     "rollup": "^2.61.0",
     "typescript": "^4.5.2",
+    "less": "^4.1.2",
     "vite": "2.7.6",
     "vite-plugin-md": "^0.11.6"
   },
