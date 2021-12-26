@@ -5,16 +5,16 @@
 </template>
 
 <script setup name="LayBreadcrumb" lang="ts">
-import { defineProps, provide, withDefaults } from 'vue'
+import { defineProps, provide, withDefaults } from "vue";
 
 const props = withDefaults(
   defineProps<{
-    separator?: string
+    separator?: string;
   }>(),
   {
-    separator: '/',
+    separator: "/",
   }
-)
+);
 
-provide('separator', props.separator)
+provide("separator", props.separator);
 </script>

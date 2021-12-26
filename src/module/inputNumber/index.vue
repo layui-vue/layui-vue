@@ -9,7 +9,11 @@
       :disabled="minControl"
       class="layui-control-btn layui-subtraction-btn"
     >
-      <lay-icon :type="position==='right' ? 'layui-icon-down' : 'layui-icon-subtraction'"></lay-icon>
+      <lay-icon
+        :type="
+          position === 'right' ? 'layui-icon-down' : 'layui-icon-subtraction'
+        "
+      />
     </lay-button>
     <div class="layui-input-number-input">
       <lay-input
@@ -18,7 +22,7 @@
         type="number"
         :name="name"
         @change="inputChange"
-      ></lay-input>
+      />
     </div>
     <lay-button
       type="primary"
@@ -29,15 +33,17 @@
       :disabled="maxControl"
       class="layui-control-btn layui-addition-btn"
     >
-      <lay-icon :type="position==='right' ? 'layui-icon-up' : 'layui-icon-addition'"></lay-icon>
+      <lay-icon
+        :type="position === 'right' ? 'layui-icon-up' : 'layui-icon-addition'"
+      />
     </lay-button>
   </div>
 </template>
 
 <script lang="ts">
-  export default {
-    name: "LayInputNumber",
-  };
+export default {
+  name: "LayInputNumber",
+};
 </script>
 
 <script setup lang="ts">
@@ -94,11 +100,14 @@ watch(num, (val) => {
   }
 });
 
-watch(()=>props.modelValue, (val) => {
-  if (val !== num.value) {
-    num.value = props.modelValue;
+watch(
+  () => props.modelValue,
+  (val) => {
+    if (val !== num.value) {
+      num.value = props.modelValue;
+    }
   }
-});
+);
 const tempValue = ref(0);
 let timer: any = 0;
 

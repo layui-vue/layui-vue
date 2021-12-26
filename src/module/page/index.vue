@@ -15,7 +15,8 @@
           ><em
             class="layui-laypage-em"
             :class="[theme ? 'layui-bg-' + theme : '']"
-          /><em>{{ index }}</em></span
+          ></em
+          ><em>{{ index }}</em></span
         >
         <a v-else href="javascript:;" @click="jump(index)">
           {{ index }}
@@ -39,7 +40,7 @@
         <option value="50">50 条/页</option>
       </select></span
     ><a v-if="showRefresh" href="javascript:;" class="layui-laypage-refresh"
-      ><i class="layui-icon layui-icon-refresh" /></a
+      ><i class="layui-icon layui-icon-refresh"></i></a
     ><span v-if="showSkip" class="layui-laypage-skip"
       >到第<input
         v-model="currentPageShow"
@@ -53,25 +54,25 @@
 </template>
 
 <script setup name="LayPage" lang="ts">
-import { defineProps, Ref, ref, watch, useSlots } from 'vue'
+import { defineProps, Ref, ref, watch, useSlots } from "vue";
 
-const slots = useSlots()
+const slots = useSlots();
 
 const props = withDefaults(
   defineProps<{
-    total: number
-    limit: number
-    theme?: string
-    showPage?: boolean | string
-    showSkip?: boolean | string
-    showCount?: boolean | string
-    showLimit?: boolean | string
-    showInput?: boolean | string
-    showRefresh?: boolean | string
+    total: number;
+    limit: number;
+    theme?: string;
+    showPage?: boolean | string;
+    showSkip?: boolean | string;
+    showCount?: boolean | string;
+    showLimit?: boolean | string;
+    showInput?: boolean | string;
+    showRefresh?: boolean | string;
   }>(),
   {
     limit: 10,
-    theme: 'green',
+    theme: "green",
     showPage: false,
     showSkip: false,
     showCount: false,
@@ -79,44 +80,44 @@ const props = withDefaults(
     showInput: false,
     showRefresh: false,
   }
-)
+);
 
-const inlimit = ref(props.limit)
-const totalPage = ref(Math.ceil(props.total / inlimit.value))
-const currentPage: Ref<number> = ref(1)
-const currentPageShow: Ref<number> = ref(currentPage.value)
+const inlimit = ref(props.limit);
+const totalPage = ref(Math.ceil(props.total / inlimit.value));
+const currentPage: Ref<number> = ref(1);
+const currentPageShow: Ref<number> = ref(currentPage.value);
 
-const emit = defineEmits(['jump'])
+const emit = defineEmits(["jump"]);
 
 const prev = function () {
   if (currentPage.value === 1) {
-    return
+    return;
   }
-  currentPage.value--
-}
+  currentPage.value--;
+};
 
 const next = function () {
   if (currentPage.value === totalPage.value) {
-    return
+    return;
   }
-  currentPage.value++
-}
+  currentPage.value++;
+};
 
 const jump = function (page: number) {
-  currentPage.value = page
-}
+  currentPage.value = page;
+};
 
 const jumpPage = function () {
-  currentPage.value = currentPageShow.value
-}
+  currentPage.value = currentPageShow.value;
+};
 
 watch(inlimit, function () {
-  currentPage.value = 1
-  totalPage.value = Math.ceil(props.total / inlimit.value)
-})
+  currentPage.value = 1;
+  totalPage.value = Math.ceil(props.total / inlimit.value);
+});
 
 watch(currentPage, function () {
-  currentPageShow.value = currentPage.value
-  emit('jump', { current: currentPage.value })
-})
+  currentPageShow.value = currentPage.value;
+  emit("jump", { current: currentPage.value });
+});
 </script>

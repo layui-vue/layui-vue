@@ -1,26 +1,28 @@
 <script lang="ts">
 export default {
-  name: "LayContainer"
-}
+  name: "LayContainer",
+};
 </script>
 
 <script setup lang="ts">
-import { computed, defineProps } from 'vue'
-import "./index.less"
+import { computed, defineProps } from "vue";
+import "./index.less";
 
 export interface LayContainerProps {
-  fluid?: boolean
+  fluid?: boolean;
 }
 
 const props = withDefaults(defineProps<LayContainerProps>(), {
-  fluid: false
+  fluid: false,
 });
 
-const classes = computed(() => props.fluid ? 'layui-fluid' : 'layui-container')
+const classes = computed(() =>
+  props.fluid ? "layui-fluid" : "layui-container"
+);
 </script>
 
 <template>
   <div :class="classes">
-    <slot />
+    <slot></slot>
   </div>
 </template>

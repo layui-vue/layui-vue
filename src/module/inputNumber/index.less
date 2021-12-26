@@ -13,11 +13,11 @@
 @xs-wdith: 120px;
 @xs-right: 12px;
 
-.set-size(@width, @size, @right-size){
-  &{
+.set-size(@width, @size, @right-size) {
+  & {
     height: @size;
     width: @width;
-    .layui-input{
+    .layui-input {
       height: @size;
       line-height: @size;
       padding: 0 @size;
@@ -27,22 +27,22 @@
       height: @size;
       line-height: @size;
     }
-    &[position=right]{
-      .layui-input{
+    &[position="right"] {
+      .layui-input {
         padding: 0 @size 0 0;
       }
       .layui-control-btn {
         height: @right-size;
         line-height: @right-size;
       }
-      .layui-subtraction-btn{
+      .layui-subtraction-btn {
         top: @right-size - 1;
       }
     }
   }
 }
 
-.layui-input-number{
+.layui-input-number {
   position: relative;
   display: inline-block;
   box-sizing: border-box;
@@ -52,7 +52,7 @@
   overflow: hidden;
   .set-size(@lg-wdith, @lg, @lg-right);
   margin-left: 5px;
-  .layui-input{
+  .layui-input {
     text-align: center;
     border: 0;
   }
@@ -66,17 +66,17 @@
     padding: 0;
     text-align: center;
     top: 0;
-    &:hover{
+    &:hover {
       color: @hover-border-color;
     }
-    &.layui-subtraction-btn{
+    &.layui-subtraction-btn {
       border-right-width: 1px;
     }
-    &.layui-addition-btn{
+    &.layui-addition-btn {
       border-left-width: 1px;
       right: 0;
     }
-    .layui-icon{
+    .layui-icon {
       padding: 0px;
     }
   }
@@ -87,31 +87,30 @@
   }
 
   /* 火狐--去掉自带的控制按钮 */
-  input.layui-input[type="number"]{
+  input.layui-input[type="number"] {
     -moz-appearance: textfield;
   }
 
-  &[position=right]{
-    .layui-subtraction-btn{
+  &[position="right"] {
+    .layui-subtraction-btn {
       right: 0;
       border-right-width: 0px;
       border-left-width: 1px;
     }
-    .layui-addition-btn{
+    .layui-addition-btn {
       border-bottom-width: 1px;
     }
   }
 
-  &[size=md] {
-    .set-size(@md-wdith,@md, @md-right)
+  &[size="md"] {
+    .set-size(@md-wdith,@md, @md-right);
   }
 
-  &[size=sm] {
-    .set-size(@sm-wdith, @sm, @sm-right)
+  &[size="sm"] {
+    .set-size(@sm-wdith, @sm, @sm-right);
   }
 
-  &[size=xs] {
-    .set-size(@xs-wdith, @xs, @xs-right)
+  &[size="xs"] {
+    .set-size(@xs-wdith, @xs, @xs-right);
   }
-
 }

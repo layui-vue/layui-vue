@@ -3,9 +3,9 @@
 </template>
 
 <script setup name="LayLine" lang="ts">
-import { defineProps } from 'vue'
+import { defineProps } from "vue";
 
 const props = defineProps<{
-  theme?: string
-}>()
+  theme?: string;
+}>();
 </script>

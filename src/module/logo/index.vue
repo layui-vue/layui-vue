@@ -1,6 +1,6 @@
 <template>
   <div class="layui-logo">
-    <slot />
+    <slot></slot>
   </div>
 </template>
 

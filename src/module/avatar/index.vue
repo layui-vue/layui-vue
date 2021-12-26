@@ -1,18 +1,18 @@
 <script lang="ts">
 export default {
-  name: "LayAvatar"
-}
+  name: "LayAvatar",
+};
 </script>
 
 <script setup lang="ts">
-import { defineProps } from 'vue'
-import "./index.less"
+import { defineProps } from "vue";
+import "./index.less";
 
 const props = defineProps<{
-  src?: String
-  radius?: boolean
-  size?: string
-}>()
+  src?: String;
+  radius?: boolean;
+  size?: string;
+}>();
 </script>
 
 <template>

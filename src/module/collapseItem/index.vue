@@ -1,50 +1,60 @@
 <template>
   <div class="layui-colla-item">
-    <h2 :class="['layui-colla-title', {'layui-disabled' : disabled}]" @click="showHandle">
-      <slot name="title" :props="props">{{ title}}</slot>
-      <i class="layui-icon layui-colla-icon">{{ isShow ? '' : '' }}</i>
+    <h2
+      :class="['layui-colla-title', { 'layui-disabled': disabled }]"
+      @click="showHandle"
+    >
+      <slot name="title" :props="props">{{ title }}</slot>
+      <i class="layui-icon layui-colla-icon">{{ isShow ? "" : "" }}</i>
     </h2>
     <div class="layui-colla-content" :class="isShow ? 'layui-show' : ''">
       <p>
-        <slot :props="props"/>
+        <slot :props="props"></slot>
       </p>
     </div>
   </div>
 </template>
 
 <script setup name="LayCollapseItem" lang="ts">
-import { withDefaults, defineProps, inject, computed, ref } from 'vue'
+import { withDefaults, defineProps, inject, computed, ref } from "vue";
 
 const props = withDefaults(
   defineProps<{
-    id: number | string
-    title: string
-    disabled?: boolean
+    id: number | string;
+    title: string;
+    disabled?: boolean;
   }>(),
   {
-    disabled: false
+    disabled: false,
   }
-)
+);
 
-const {accordion, activeValues, emit} = inject('layCollapse') as any
+const { accordion, activeValues, emit } = inject("layCollapse") as any;
 
-let isShow = computed(()=>{return activeValues.value.includes(props.id)})
+let isShow = computed(() => {
+  return activeValues.value.includes(props.id);
+});
 
 const showHandle = function () {
   if (props.disabled) {
-    return ;
+    return;
   }
   const _isShow = isShow.value;
   // 手风琴效果
   if (accordion) {
     activeValues.value = !_isShow ? [props.id] : [];
-  } else if (_isShow) { // 普通折叠面板 --> 折叠
-    activeValues.value.splice(activeValues.value.indexOf(props.id), 1)
-  } else { // 普通折叠面板 --> 展开
-    activeValues.value.push(props.id)
+  } else if (_isShow) {
+    // 普通折叠面板 --> 折叠
+    activeValues.value.splice(activeValues.value.indexOf(props.id), 1);
+  } else {
+    // 普通折叠面板 --> 展开
+    activeValues.value.push(props.id);
   }
 
-  emit("update:modelValue", (accordion ? activeValues.value[0] || null : activeValues.value));
+  emit(
+    "update:modelValue",
+    accordion ? activeValues.value[0] || null : activeValues.value
+  );
   emit("change", props.id, !_isShow, activeValues.value);
-}
+};
 </script>

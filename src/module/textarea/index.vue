@@ -44,5 +44,5 @@ const onBlur = function () {
     @input="onInput"
     @focus="onFocus"
     @blur="onBlur"
-  />
+  ></textarea>
 </template>
