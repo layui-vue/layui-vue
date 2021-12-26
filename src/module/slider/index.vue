@@ -1,10 +1,13 @@
 <template>
   <div class="layui-slider-vertical" v-if="vertical">
+    <div v-if="range">range vertical slider</div>
+
     <div
       ref="verticaltracker"
       @mousedown.stop="handle_mousedown"
       class="layui-slider-vertical-track"
       :class="[props.disabled ? 'layui-slider-disabled' : '']"
+      v-else
     >
       <lay-tooltip :content="modelValue + ''">
         <div
@@ -23,11 +26,33 @@
   </div>
 
   <div class="layui-slider-v" v-else>
+
+
+
+
+
+    <div @mousedown.stop="handle_mousedown" ref="rangetracker1" class="layui-slider-srange" v-if="range">
+      <lay-tooltip :content="rangeValue[0] + ''">
+        <div :style="{ left: rangeValue[0] + '%' }" class="layui-slider-btn-v"></div>
+      </lay-tooltip>
+      <lay-tooltip :content="rangeValue[1]">
+        <div :style="{ left: rangeValue[1] + '%' }" class="layui-slider-btn-v"></div>
+      </lay-tooltip>
+      
+      <div class="layui-slider-line-v"></div>
+      <div :style="{ width:rangeValue[1]-rangeValue[0] +'%', left: rangeValue[0]+'%' }" class="layui-slider-rate-v"></div>
+    </div>
+    
+
+
+
+
     <div
       ref="standardtracker"
       @mousedown.stop="handle_mousedown"
       class="layui-slider-track-v"
       :class="[props.disabled ? 'layui-slider-disabled' : '']"
+      v-else
     >
       <lay-tooltip :content="modelValue + ''">
         <div
@@ -46,7 +71,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { defineProps, reactive, ref } from "vue";
+import { defineProps, onMounted, reactive, Ref, ref } from "vue";
 import { on, off } from "evtd";
 import "./index.less";
 
@@ -54,11 +79,12 @@ const emit = defineEmits(["update:modelValue"]);
 
 interface LaySliderProps {
   vertical?: boolean;
-  modelValue?: number;
+  modelValue?: number | Array<number>;
   min?: number;
   max?: number;
   step?: number;
   disabled?: boolean;
+  range?: boolean;
 }
 
 const props = withDefaults(defineProps<LaySliderProps>(), {
@@ -67,8 +93,13 @@ const props = withDefaults(defineProps<LaySliderProps>(), {
   disabled: false,
 });
 
+let rangeValue:Ref<number[]> = ref([0,0])
+if(Array.isArray(props.modelValue)){
+  rangeValue.value = props.modelValue
+}
 const standardtracker = ref<HTMLElement | null>(null);
 const verticaltracker = ref<HTMLElement | null>(null);
+const rangetracker1 = ref<HTMLElement | null>(null);
 const standard_style = reactive({
   left: props.modelValue,
   width: props.modelValue,
@@ -89,10 +120,16 @@ function handle_mousemove(e: MouseEvent) {
   if (props.disabled === true) {
     return false;
   }
-  if (props.vertical === false) {
+  if (props.vertical === false && props.range === false) {
     standardMove(e);
-  } else {
+  }
+
+  if (props.vertical === true && props.range === false) {
     verticalMove(e);
+  }
+
+  if (props.vertical === false && props.range === true) {
+    starndardRangeMove(e);
   }
 }
 
@@ -124,7 +161,6 @@ const standardMove = (e: MouseEvent) => {
     if (standard_style.left > 100) {
       standard_style.left = 100;
       standard_style.width = 100;
-      // props.modelValue = 100;
     }
   }
   emit("update:modelValue", standard_style.left);
@@ -147,9 +183,44 @@ const verticalMove = (e: MouseEvent) => {
     if (vertical_style.bottom > 100) {
       vertical_style.bottom = 100;
       vertical_style.height = 100;
-      // props.modelValue = 100;
     }
   }
   emit("update:modelValue", vertical_style.bottom);
 };
+
+const starndardRangeMove =(e:MouseEvent)=>{
+  if (!rangetracker1.value) {
+    return;
+  }
+  let tracker_rect = rangetracker1.value.getBoundingClientRect();
+  let origin_left = tracker_rect.left;
+  let point_left = e.clientX;
+  let distance = point_left - origin_left;
+  if(distance < 0){
+    rangeValue.value[0] = 0
+  } else {
+    let rate = (distance / tracker_rect.width) * 100;
+    let idx = moveNeighbor(Math.floor(rate))
+    rangeValue.value[idx] = Math.floor(rate)
+    if(rangeValue.value[1] > 100) {
+      rangeValue.value[1] = 100
+    }
+    if(rangeValue.value[0] < 0) {
+      rangeValue.value[0] = 0
+    }
+
+  }
+  emit("update:modelValue", rangeValue.value);
+}
+
+function moveNeighbor(rate: number) {
+  let d1 = Math.abs(rate - rangeValue.value[0]);
+  let d2 = Math.abs(rate - rangeValue.value[1]);
+
+  if(d1 > d2){
+    return 1
+  } else {
+    return 0
+  }
+}
 </script>
