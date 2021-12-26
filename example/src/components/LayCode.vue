@@ -34,9 +34,40 @@ const toggle = function () {
 
 const copy = function () {
   const foundCodes = meta.value.getElementsByClassName('language-html')
-  if (document.hasFocus()) {
-    const text = foundCodes[0].textContent || "";
+  const foundCode = foundCodes[0];
+  let successful = false;
+  // 使用原生系统剪贴板，只适用被授权安全的站点，http下不能使用
+  if (navigator.clipboard && document.hasFocus()) {
+    const text = foundCode.textContent || "";
     navigator.clipboard.writeText(text);
+    successful = true;
+  } else if (window.getSelection()){
+    // 使用document.execCommand
+    // 代码div显示状态直接使用，隐藏状态则创建一个div
+    var range = document.createRange();
+    let copyDiv;
+    if (show.value) {
+      range.selectNode(foundCode); 
+    } else {
+      copyDiv = document.createElement('div');
+      copyDiv.innerHTML = foundCode.innerHTML;
+      copyDiv.style.position="fixed";
+      copyDiv.style.left="-9999px";
+      document.body.appendChild(copyDiv);
+      range.selectNode(copyDiv); 
+    }
+    window.getSelection()?.addRange(range);  
+    try {  
+      successful = document.execCommand('copy');  
+    } catch(err) {  
+      successful = false;
+      console.error(err);
+    }
+    window.getSelection()?.removeAllRanges(); 
+    copyDiv?.remove();
+  }
+
+  if (successful) {
     layer.msg("复制成功", { icon : 1, time: 1000}, ()=>{})
   } else {
     layer.msg("复制失败", { icon : 2, time: 1000}, ()=>{})
