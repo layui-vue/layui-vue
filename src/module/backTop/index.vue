@@ -3,6 +3,7 @@
     v-show="visible"
     ref="backtopRef"
     class="layui-backtop"
+    :class="classBacktop"
     :style="{ ...styleBacktop }"
     @click.stop="handleClick"
     @mousedown="handlerMousedown"
@@ -12,7 +13,6 @@
       <lay-icon
         :type="props.icon"
         :size="`${props.iconSize}px`"
-        :prefix="props.iconPrefix"
         :color="props.iconColor"
       />
     </slot>
@@ -47,6 +47,7 @@ export interface LayBacktopProps {
   position?: "fixed" | "absolute";
   right?: number;
   bottom?: number;
+  size?: "medium" | "small";
   bgcolor?: string;
   opacity?: number;
   color?: string;
@@ -55,7 +56,6 @@ export interface LayBacktopProps {
   /**图标样式*/
   icon?: string;
   iconSize?: number;
-  iconPrefix?: string;
   iconColor?: string;
 }
 
@@ -64,7 +64,6 @@ const props = withDefaults(defineProps<LayBacktopProps>(), {
   showHeight: 200,
   icon: "layui-icon-top",
   iconSize: 30,
-  iconPrefix: "layui-icon",
   disabled: false,
   circle: false,
 });
@@ -75,8 +74,17 @@ const backtopRef = ref<HTMLElement | null>(null);
 const scrollTarget = shallowRef<Window | HTMLElement | undefined>(undefined);
 let visible = ref(props.showHeight === 0);
 
+const classBacktop = computed(() => {
+  return {
+    'layui-backtop-medium': props.size === "medium",
+    'layui-backtop-small': props.size === "small"
+  }
+});
+
 const borderRadius = computed(() => {
-  if (props.circle) return "50%";
+  if (props.circle) {
+    return "50%"
+  };
   return typeof props.borderRadius === "number"
     ? `${props.borderRadius}px`
     : props.borderRadius;
@@ -150,14 +158,14 @@ const getScrollTarget = () => {
     return getScrollParent(backtopRef.value!, false);
   } else {
     const targetElement = document.querySelector<HTMLElement>(props.target);
-    if (!targetElement)
+    if (!targetElement){
       throw new Error(`target is not existed: ${props.target}`);
+    }
     // 特定容器内部显示
     if (props.position === "absolute") {
-      if (!targetElement.parentElement)
-        throw new Error(
-          `target parent element is not existed: ${props.target}`
-        );
+      if (!targetElement.parentElement){
+        throw new Error( `target parent element is not existed: ${props.target}`);
+      }
       targetElement.parentElement.style.position = "relative";
       // backtopRef.value!.style.position = props.position;
     }
@@ -178,9 +186,12 @@ const getScrollParent = (
   //if (style.position === "fixed") return document.documentElement || document.body || window;
   for (let parent: HTMLElement = element; (parent = parent.parentElement!); ) {
     style = getComputedStyle(parent);
-    if (excludeStaticParent && style.position === "static") continue;
-    if (overflowRegex.test(style.overflow + style.overflowY + style.overflowX))
+    if (excludeStaticParent && style.position === "static") {
+      continue;
+    }
+    if (overflowRegex.test(style.overflow + style.overflowY + style.overflowX)){
       return parent;
+    }
   }
   return document.documentElement || document.body || window;
 };
