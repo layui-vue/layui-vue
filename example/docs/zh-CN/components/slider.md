@@ -1,3 +1,6 @@
+::: title 横向
+:::
+
 ::: demo
 
 <template>
@@ -19,10 +22,12 @@ export default {
 
 :::
 
+::: title 纵向
+:::
 ::: demo
 
 <template>
-  <lay-slider v-model="value2" :vertical="vertical" :disabled="true"></lay-slider>
+  <lay-slider v-model="value2" :vertical="true" :disabled="true"></lay-slider>
 </template>
 
 <script>
@@ -31,11 +36,9 @@ import { ref } from 'vue'
 export default {
   setup() {
 
-    const vertical = ref(true)
     const value2 = ref(10)
 
     return {
-        vertical,
         value2
     }
   }
@@ -44,23 +47,27 @@ export default {
 
 :::
 
+::: title 区间
+:::
+
 ::: demo
 
-<tempalte>
+<template>
   <lay-slider v-model="value3" :range="true"></lay-slider>
 </template>
 
 <script>
 import { ref } from 'vue'
-
 export default {
   setup() {
-    const value3 = ref(50)
+    const value3 = ref([20,50])
     return {
-      value1
+      value3
     }
   }
 }
 </script>
+:::
 
+::: comment
 :::
