@@ -1,6 +1,9 @@
 <template>
   <div class="layui-slider-vertical" v-if="vertical">
+    <div v-if="range">rang div</div>
+
     <div
+      v-else
       ref="verticaltracker"
       @mousedown.stop="handle_mousedown"
       class="layui-slider-vertical-track"
@@ -59,6 +62,7 @@ interface LaySliderProps {
   max?: number;
   step?: number;
   disabled?: boolean;
+  range?: boolean;
 }
 
 const props = withDefaults(defineProps<LaySliderProps>(), {

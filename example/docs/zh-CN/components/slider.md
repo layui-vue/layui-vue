@@ -1,7 +1,7 @@
 ::: demo
 
 <template>
-  <lay-slider v-model="value1" :disabled="true"></lay-slider>
+  <lay-slider v-model="value1" :disabled="false"></lay-slider>
 </template>
 
 <script>
@@ -44,5 +44,23 @@ export default {
 
 :::
 
-::: comment
+::: demo
+
+<tempalte>
+  <lay-slider v-model="value3" :range="true"></lay-slider>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+    const value3 = ref(50)
+    return {
+      value1
+    }
+  }
+}
+</script>
+
 :::
