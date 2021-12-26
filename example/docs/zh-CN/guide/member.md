@@ -6,6 +6,9 @@
         <lay-col md="1">
             <lay-avatar src="https://portrait.gitee.com/uploads/avatars/user/1611/4835367_Jmysy_1578975358.png"></lay-avatar>
         </lay-col>
+        <lay-col md="2">
+            就眠仪式
+        </lay-col>
         <lay-col md="6">
             焦点：layui-vue
         </lay-col>
@@ -15,8 +18,8 @@
         <lay-col md="5">
             生态：Pear Admin
         </lay-col>
-        <lay-col md="8">
-            Gitee Github
+        <lay-col md="6">
+            其他：Gitee Github
         </lay-col>
     </lay-row>
 </lay-card>
@@ -24,6 +27,9 @@
     <lay-row>
         <lay-col md="1">
             <lay-avatar src="https://portrait.gitee.com/uploads/avatars/user/1755/5267877_jobin_jia_1608578025.png"></lay-avatar>
+        </lay-col>
+        <lay-col md="2">
+            落小梅
         </lay-col>
         <lay-col md="6">
             焦点：tree table
@@ -34,8 +40,8 @@
         <lay-col md="5">
             生态：Pear Admin
         </lay-col>
-        <lay-col md="8">
-            Gitee Github
+        <lay-col md="6">
+            其他：Gitee Github
         </lay-col>
     </lay-row>
 </lay-card>
