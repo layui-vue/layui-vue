@@ -119,6 +119,67 @@ export default {
 }
 </script>
 
+
+
+:::
+
+::: title 设置每页数量选择范围
+:::
+
+::: demo
+
+<template>
+  <lay-page :limit="limit" :total="total" :limits="[10,50,100,200]"></lay-page>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const limit = ref(20)
+    const total = ref(100)
+
+    return {
+      limit,
+      total
+    }
+  }
+}
+</script>
+
+:::
+
+::: title 每页数量切换事件(limit)
+:::
+
+::: demo
+
+<template>
+  <lay-page :limit="limit" :total="total" @limit="limit=$event" :show-limit="showLimit" ></lay-page>
+  <div>每页数量:{{limit}}</div>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const limit = ref(5)
+    const total = ref(9999)
+    const showLimit = ref(true)
+
+    return {
+      limit,
+      total,
+      showLimit,
+    }
+  }
+}
+</script>
+
 :::
 
 ::: title 完整分页
@@ -127,7 +188,8 @@ export default {
 ::: demo
 
 <template>
-  <lay-page :limit="limit" :total="9999" :show-count="showCount" :show-page="showPage" :show-limit="showLimit" :show-refresh="showRefresh" showSkip="showSkip"></lay-page>
+  <lay-page :limit="limit" :total="9999" :show-count="showCount" @limit="limit=$event" :show-page="showPage" :show-limit="showLimit" :show-refresh="showRefresh" showSkip="showSkip"></lay-page>
+  每页数量:{{limit}}
 </template>
 
 <script>
@@ -208,6 +270,7 @@ export default {
 | showRefresh | 显示刷新按钮 | `false` |
 | showSkip    | 显示跳转     | `false` |
 | pages       | 显示切页按钮数量     | `10` |
+| limits       | 切换每页数量的选择项     | `[10,20,30,40,50]` |
 
 :::
 
@@ -219,6 +282,7 @@ export default {
 | 事件 | 描述     | 参数                  |
 | ---- | -------- | --------------------- |
 | jump | 切换回调 | { current: 当前页面 } |
+| limit | 每页数量变化 | 变化后的值 |
 
 :::
 
