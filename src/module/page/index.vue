@@ -31,11 +31,7 @@
     </a>
     <span v-if="showLimit" class="layui-laypage-limits">
       <select v-model="inlimit">
-        <option value="10">10 条/页</option>
-        <option value="20">20 条/页</option>
-        <option value="30">30 条/页</option>
-        <option value="40">40 条/页</option>
-        <option value="50">50 条/页</option>
+        <option v-for="val of limits" :key="val" :value="val">{{ val }} 条/页</option>
       </select>
     </span>
     <a v-if="showRefresh" href="javascript:;" class="layui-laypage-refresh">
@@ -65,7 +61,8 @@ const props = withDefaults(
     showLimit?: boolean | string;
     showInput?: boolean | string;
     showRefresh?: boolean | string;
-    pages?: number
+    pages?: number,
+    limits?: number[]
   }>(),
   {
     limit: 10,
@@ -76,9 +73,11 @@ const props = withDefaults(
     showLimit: true,
     showInput: false,
     showRefresh: false,
-    pages: 10
+    pages: 10,
+    limits: () => [10, 20, 30, 40, 50]
   }
 );
+const limits = ref(props.limits);
 const pages = props.pages / 2
 const inlimit = computed({ get() { return props.limit }, set(v: number) { emit('limit', v) } })
 const maxPage = ref(Math.ceil(props.total / props.limit));
