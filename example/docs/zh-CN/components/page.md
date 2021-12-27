@@ -127,7 +127,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-page :limit="limit" :total="total" :show-count="showCount" :show-page="showPage" :show-limit="showLimit" :show-refresh="showRefresh" showSkip="showSkip"></lay-page>
+  <lay-page :limit="limit" :total="9999" :show-count="showCount" :show-page="showPage" :show-limit="showLimit" :show-refresh="showRefresh" showSkip="showSkip"></lay-page>
 </template>
 
 <script>
@@ -136,8 +136,8 @@ import { ref } from 'vue'
 export default {
   setup() {
 
-    const limit = ref(20)
-    const total = ref(100)
+    const limit = ref(5)
+    const total = ref(9999)
     const showCount = ref(true)
     const showPage = ref(true)
     const showLimit = ref(true)
@@ -207,6 +207,7 @@ export default {
 | showLimit   | 显示每页数量 | `false` |
 | showRefresh | 显示刷新按钮 | `false` |
 | showSkip    | 显示跳转     | `false` |
+| pages       | 显示切页按钮数量     | `10` |
 
 :::
 
