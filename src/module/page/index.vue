@@ -1,6 +1,6 @@
 <template>
   <div class="layui-box layui-laypage layui-laypage-default">
-    <span v-if="showCount" class="layui-laypage-count">共 {{ total }} 条</span>
+    <span v-if="showCount" class="layui-laypage-count">共 {{ total }} 条 {{ maxPage }}页</span>
     <a
       href="javascript:;"
       class="layui-laypage-prev"
