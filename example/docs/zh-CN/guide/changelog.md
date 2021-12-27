@@ -12,9 +12,9 @@
 <lay-timeline>
   <lay-timeline-item title="0.3.x">
   <ul> 
-      <a name="0-3-0"> </a> 
+      <a name="0-3-1"> </a> 
       <li> 
-        <h3>0.3.0 <span class="layui-badge-rim">2021-12-28</span></h3> 
+        <h3>0.3.1 <span class="layui-badge-rim">2021-12-28</span></h3> 
         <ul> 
           <li>[新增] count-up 数字滚动组件。</li>
           <li>[新增] slider 滑块 range 属性, 支持区间取值。</li>
@@ -22,7 +22,8 @@
           <li>[修复] 演示站点剪贴板功能，http下不能使用的问题。</li>  
           <li>[修复] checkbox 复选框 modelValue 属性必填警告。</li>  
           <li>[修复] formItem 内下拉框组件校验不通过边框未标红问题。</li>  
-          <li>[修复] rate 评分 mouseleave 事件绑定警告。</li>  
+          <li>[修复] rate 评分 mouseleave 事件绑定警告。</li>
+          <li>[修复] npm 安装 layui-vue 不必要的依赖警告。</li>  
           <li>[集成] eslint, prettier 规范插件 。</li>  
           <li>[升级] icons-vue 1.0.2。</li>  
         </ul> 
