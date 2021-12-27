@@ -80,7 +80,7 @@ const props = withDefaults(
   }
 );
 const pages = props.pages / 2
-const inlimit = ref(props.limit);
+const inlimit = computed({ get() { return props.limit }, set(v: number) { emit('limit', v) } })
 const maxPage = ref(Math.ceil(props.total / props.limit));
 const totalPage = computed(() => {
   let r: number[] = [], end = maxPage.value
@@ -99,7 +99,7 @@ const totalPage = computed(() => {
 const currentPage: Ref<number> = ref(1);
 const currentPageShow: Ref<number> = ref(currentPage.value);
 
-const emit = defineEmits(["jump"]);
+const emit = defineEmits(["jump", "limit"]);
 
 const prev = function () {
   if (currentPage.value === 1) {

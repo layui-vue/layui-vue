@@ -119,6 +119,39 @@ export default {
 }
 </script>
 
+
+
+:::
+
+::: title 每页数量切换事件(limit)
+:::
+
+::: demo
+
+<template>
+  <lay-page :limit="limit" :total="total" @limit="limit=$event" :show-limit="showLimit" ></lay-page>
+  <div>每页数量:{{limit}}</div>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const limit = ref(5)
+    const total = ref(9999)
+    const showLimit = ref(true)
+
+    return {
+      limit,
+      total,
+      showLimit,
+    }
+  }
+}
+</script>
+
 :::
 
 ::: title 完整分页
@@ -127,7 +160,8 @@ export default {
 ::: demo
 
 <template>
-  <lay-page :limit="limit" :total="9999" :show-count="showCount" :show-page="showPage" :show-limit="showLimit" :show-refresh="showRefresh" showSkip="showSkip"></lay-page>
+  <lay-page :limit="limit" :total="9999" :show-count="showCount" @limit="limit=$event" :show-page="showPage" :show-limit="showLimit" :show-refresh="showRefresh" showSkip="showSkip"></lay-page>
+  每页数量:{{limit}}
 </template>
 
 <script>
