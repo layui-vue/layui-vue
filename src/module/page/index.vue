@@ -40,7 +40,12 @@
     <span v-if="showSkip" class="layui-laypage-skip">
       到第
       <input v-model="currentPageShow" type="number" class="layui-input layui-input-number" />页
-      <button type="button" class="layui-laypage-btn" @click="jumpPage()">确定</button>
+      <button
+        type="button"
+        class="layui-laypage-btn"
+        @click="jumpPage()"
+        :disabled="currentPageShow > maxPage"
+      >确定</button>
     </span>
   </div>
 </template>
