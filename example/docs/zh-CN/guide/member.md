@@ -46,6 +46,29 @@
     </lay-row>
 </lay-card>
 
+<lay-card>
+    <lay-row>
+        <lay-col md="1">
+            <lay-avatar src="https://portrait.gitee.com/uploads/avatars/user/702/2106738_wanglin300_1639442830.png"></lay-avatar>
+        </lay-col>
+        <lay-col md="2">
+            halo
+        </lay-col>
+        <lay-col md="6">
+            焦点：slider
+        </lay-col>
+        <lay-col md="4">
+            地点：China Beijing
+        </lay-col>
+        <lay-col md="5">
+            生态：暂无
+        </lay-col>
+        <lay-col md="6">
+            其他：
+        </lay-col>
+    </lay-row>
+</lay-card>
+
 <br>
 
 ::: title 社区伙伴
