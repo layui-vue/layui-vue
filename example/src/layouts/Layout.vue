@@ -333,6 +333,12 @@ export default {
         subTitle: 'backtop',
         path: '/zh-CN/components/backtop',
       },
+      {
+        id: 43,
+        title: '数字滚动',
+        subTitle: 'countup',
+        path: '/zh-CN/components/countup',
+      },
     ]
 
     const handleClick = function (menu) {

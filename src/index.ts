@@ -37,6 +37,7 @@ import LaySwitch from "./module/switch/index";
 import LayCollapse from "./module/collapse/index";
 import LayCollapseItem from "./module/collapseItem/index";
 import LayContainer from "./module/container/index";
+import LayCountUp from "./module/countUp/index";
 import LayMenu from "./module/menu/index";
 import LayMenuItem from "./module/menuItem/index";
 import LayMenuChildItem from "./module/menuChildItem/index";
@@ -128,6 +129,7 @@ const components: Record<string, IDefineComponent> = {
   LayModal,
   LayTooltip,
   LayInputNumber,
+  LayCountUp,
 };
 
 const install = (app: App, options?: InstallOptions): void => {

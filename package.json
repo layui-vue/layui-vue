@@ -35,9 +35,10 @@
     "@layui/icons-vue": "^1.0.2",
     "@layui/layer-vue": "^1.2.2",
     "async-validator": "^4.0.7",
-    "vue-router": "^4.0.12",
+    "countup.js": "^2.0.8",
     "evtd": "^0.2.3",
-    "vue": "^3.2.26"
+    "vue": "^3.2.26",
+    "vue-router": "^4.0.12"
   },
   "devDependencies": {
     "@babel/core": "^7.15.8",
