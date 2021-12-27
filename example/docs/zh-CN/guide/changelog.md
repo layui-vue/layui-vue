@@ -16,6 +16,7 @@
       <li> 
         <h3>0.3.0 <span class="layui-badge-rim">2021-12-25</span></h3> 
         <ul> 
+          <li>[新增] count-up 数字滚动组件。</li>
           <li>[新增] slider 滑块 range 属性, 支持区间过程。</li>
           <li>[新增] button 按钮 disabled 属性, 删除 type 属性 disabled 值。</li>  
           <li>[修复] 演示站点剪贴板功能，http下不能使用的问题。</li>  
