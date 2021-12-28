@@ -87,15 +87,11 @@ const pages = props.pages / 2
 const inlimit = computed({ get() { return props.limit }, set(v: number) { emit('limit', v) } })
 const maxPage = ref(Math.ceil(props.total / props.limit));
 const totalPage = computed(() => {
-  let r: number[] = [], end = maxPage.value
-  if (currentPage.value <= pages) {
-    end = props.pages + 1
-  } else if (currentPage.value + pages > end) {
-
-  } else {
-    end = currentPage.value + pages
-  }
-  for (let i = currentPage.value > pages ? currentPage.value - pages : 1; i < end; i++) {
+  let r: number[] = [], start = (maxPage.value <= props.pages ? 1 : currentPage.value > pages ? currentPage.value - pages : 1)
+  for (let i = start; ; i++) {
+    if (r.length >= props.pages || i > maxPage.value) {
+      break;
+    }
     r.push(i)
   }
   return r;

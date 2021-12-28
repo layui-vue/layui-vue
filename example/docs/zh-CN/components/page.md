@@ -129,7 +129,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-page :limit="limit" :total="total" :limits="[10,50,100,200]"></lay-page>
+  <lay-page :limit="limit" :total="total" showCount showPage :limits="[10,50,100,200]" @limit="limit=$event"></lay-page>
 </template>
 
 <script>
@@ -157,7 +157,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-page :limit="limit" :total="total" @limit="limit=$event" :show-limit="showLimit" ></lay-page>
+  <lay-page :limit="limit" showPage showCount :total="total" @limit="limit=$event" :show-limit="showLimit" ></lay-page>
   <div>每页数量:{{limit}}</div>
 </template>
 
