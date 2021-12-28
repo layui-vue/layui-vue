@@ -1,6 +1,11 @@
 <template>
   <div class="layui-slider-vertical" v-if="vertical">
-    <div v-if="range">range vertical slider</div>
+    <div ref="rangetracker2" class="layui-slider-vrange" v-if="range">
+      <div class="layui-slider-vertical-btn"></div>
+      <div class="layui-slider-vertical-btn"></div>
+      <div class="layui-slider-vertical-line"></div>
+      <div class="layui-slider-vertical-rate"></div>
+    </div>
 
     <div
       ref="verticaltracker"
@@ -26,26 +31,34 @@
   </div>
 
   <div class="layui-slider-v" v-else>
-
-
-
-
-
-    <div @mousedown.stop="handle_mousedown" ref="rangetracker1" class="layui-slider-srange" v-if="range">
+    <div
+      @mousedown.stop="handle_mousedown"
+      ref="rangetracker1"
+      class="layui-slider-srange"
+      v-if="range"
+    >
       <lay-tooltip :content="rangeValue[0] + ''">
-        <div :style="{ left: rangeValue[0] + '%' }" class="layui-slider-btn-v"></div>
+        <div
+          :style="{ left: rangeValue[0] + '%' }"
+          class="layui-slider-btn-v"
+        ></div>
       </lay-tooltip>
       <lay-tooltip :content="rangeValue[1]">
-        <div :style="{ left: rangeValue[1] + '%' }" class="layui-slider-btn-v"></div>
+        <div
+          :style="{ left: rangeValue[1] + '%' }"
+          class="layui-slider-btn-v"
+        ></div>
       </lay-tooltip>
-      
+
       <div class="layui-slider-line-v"></div>
-      <div :style="{ width:rangeValue[1]-rangeValue[0] +'%', left: rangeValue[0]+'%' }" class="layui-slider-rate-v"></div>
+      <div
+        :style="{
+          width: rangeValue[1] - rangeValue[0] + '%',
+          left: rangeValue[0] + '%',
+        }"
+        class="layui-slider-rate-v"
+      ></div>
     </div>
-    
-
-
-
 
     <div
       ref="standardtracker"
@@ -71,7 +84,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { defineProps, onMounted, reactive, Ref, ref } from "vue";
+import { defineProps, reactive, Ref, ref } from "vue";
 import { on, off } from "evtd";
 import "./index.less";
 
@@ -93,13 +106,23 @@ const props = withDefaults(defineProps<LaySliderProps>(), {
   disabled: false,
 });
 
-let rangeValue:Ref<number[]> = ref([0,0])
-if(Array.isArray(props.modelValue)){
-  rangeValue.value = props.modelValue
+let rangeValue: Ref<number[]> = ref([0, 0]);
+if (Array.isArray(props.modelValue)) {
+  // eslint-disable-next-line vue/no-setup-props-destructure
+  rangeValue.value = props.modelValue;
 }
+
+let verticalRangeValue: Ref<number[]> = ref([0, 0]);
+if (Array.isArray(props.modelValue)) {
+  // eslint-disable-next-line vue/no-setup-props-destructure
+  verticalRangeValue.value = props.modelValue;
+}
+
 const standardtracker = ref<HTMLElement | null>(null);
 const verticaltracker = ref<HTMLElement | null>(null);
 const rangetracker1 = ref<HTMLElement | null>(null);
+const rangetracker2 = ref<HTMLElement | null>(null);
+
 const standard_style = reactive({
   left: props.modelValue,
   width: props.modelValue,
@@ -130,6 +153,10 @@ function handle_mousemove(e: MouseEvent) {
 
   if (props.vertical === false && props.range === true) {
     starndardRangeMove(e);
+  }
+
+  if (props.vertical === true && props.range === true) {
+    verticalRangeMove(e);
   }
 }
 
@@ -188,7 +215,7 @@ const verticalMove = (e: MouseEvent) => {
   emit("update:modelValue", vertical_style.bottom);
 };
 
-const starndardRangeMove =(e:MouseEvent)=>{
+const starndardRangeMove = (e: MouseEvent) => {
   if (!rangetracker1.value) {
     return;
   }
@@ -196,31 +223,32 @@ const starndardRangeMove =(e:MouseEvent)=>{
   let origin_left = tracker_rect.left;
   let point_left = e.clientX;
   let distance = point_left - origin_left;
-  if(distance < 0){
-    rangeValue.value[0] = 0
+  if (distance < 0) {
+    rangeValue.value[0] = 0;
   } else {
     let rate = (distance / tracker_rect.width) * 100;
-    let idx = moveNeighbor(Math.floor(rate))
-    rangeValue.value[idx] = Math.floor(rate)
-    if(rangeValue.value[1] > 100) {
-      rangeValue.value[1] = 100
+    let idx = moveNeighbor(Math.floor(rate));
+    rangeValue.value[idx] = Math.floor(rate);
+    if (rangeValue.value[1] > 100) {
+      rangeValue.value[1] = 100;
     }
-    if(rangeValue.value[0] < 0) {
-      rangeValue.value[0] = 0
+    if (rangeValue.value[0] < 0) {
+      rangeValue.value[0] = 0;
     }
-
   }
   emit("update:modelValue", rangeValue.value);
-}
+};
+
+const verticalRangeMove = (e: MouseEvent) => {};
 
 function moveNeighbor(rate: number) {
   let d1 = Math.abs(rate - rangeValue.value[0]);
   let d2 = Math.abs(rate - rangeValue.value[1]);
 
-  if(d1 > d2){
-    return 1
+  if (d1 > d2) {
+    return 1;
   } else {
-    return 0
+    return 0;
   }
 }
 </script>
