@@ -119,11 +119,9 @@ export default {
 }
 </script>
 
-
-
 :::
 
-::: title 设置每页数量选择范围
+::: title 完整分页
 :::
 
 ::: demo
@@ -269,8 +267,6 @@ export default {
 | showLimit   | 显示每页数量 | `false` |
 | showRefresh | 显示刷新按钮 | `false` |
 | showSkip    | 显示跳转     | `false` |
-| pages       | 显示切页按钮数量     | `10` |
-| limits       | 切换每页数量的选择项     | `[10,20,30,40,50]` |
 
 :::
 
@@ -282,7 +278,6 @@ export default {
 | 事件 | 描述     | 参数                  |
 | ---- | -------- | --------------------- |
 | jump | 切换回调 | { current: 当前页面 } |
-| limit | 每页数量变化 | 变化后的值 |
 
 :::
 

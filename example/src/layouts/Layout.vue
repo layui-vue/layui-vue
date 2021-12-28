@@ -43,7 +43,7 @@
           </a>
         </li>
         <li class="layui-nav-item">
-          <a href="javascript:void(0)"> 0.3.0 </a>
+          <a href="javascript:void(0)"> 0.3.1 </a>
         </li>
       </ul>
     </lay-header>
@@ -332,6 +332,12 @@ export default {
         title: '返回顶部',
         subTitle: 'backtop',
         path: '/zh-CN/components/backtop',
+      },
+      {
+        id: 43,
+        title: '数字滚动',
+        subTitle: 'countup',
+        path: '/zh-CN/components/countup',
       },
     ]
 

@@ -1,6 +1,6 @@
 {
   "name": "@layui/layui-vue",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "author": "sleeprite",
   "license": "MIT",
   "description": "a component library for Vue 3 base on layui-vue",
@@ -35,9 +35,10 @@
     "@layui/icons-vue": "^1.0.2",
     "@layui/layer-vue": "^1.2.2",
     "async-validator": "^4.0.7",
-    "vue-router": "^4.0.12",
+    "countup.js": "^2.0.8",
     "evtd": "^0.2.3",
-    "vue": "^3.2.26"
+    "vue": "^3.2.26",
+    "vue-router": "^4.0.12"
   },
   "devDependencies": {
     "@babel/core": "^7.15.8",
@@ -77,10 +78,5 @@
     "current node",
     "last 2 versions and > 2%",
     "ie > 10"
-  ],
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
-  }
+  ]
 }
