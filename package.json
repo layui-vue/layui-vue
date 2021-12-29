@@ -26,8 +26,9 @@
     "build": "vite build --emptyOutDir && npm run build:types",
     "build:types": "rimraf types && tsc -d",
     "build:example": "vite build example",
-    "lint:eslint": "eslint \"src/**/*.{vue,ts,tsx}\" --fix",
-    "lint:prettier": "prettier --write  \"src/**/*.{js,json,tsx,css,less,scss,vue,html,md}\"",
+    "lint:eslint": "eslint 'src/**/*.{vue,ts,tsx}' --fix",
+    "lint:prettier": "prettier --write  'src/**/*'",
+    "publish": "npm run build && npm publish --access=public",
     "commit": "git cz"
   },
   "dependencies": {
