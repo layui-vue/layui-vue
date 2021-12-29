@@ -77,6 +77,11 @@ const zhCN = [
         meta: { title: '组件' },
         children: [
           {
+            path: '/zh-CN/components/skeleton',
+            component: () => import('../../docs/zh-CN/components/skeleton.md'),
+            meta: { title: '骨架屏' },
+          },
+          {
             path: '/zh-CN/components/layout',
             component: () => import('../../docs/zh-CN/components/layout.md'),
             meta: { title: '布局' },

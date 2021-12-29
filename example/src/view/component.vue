@@ -99,6 +99,12 @@ export default {
         title: '布局',
         children: [
           {
+            id: 111,
+            title: '骨架屏',
+            subTitle: 'skeleton',
+            path: '/zh-CN/components/skeleton',
+          },
+          {
             id: 4,
             title: '布局',
             subTitle: 'layout',
