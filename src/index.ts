@@ -67,6 +67,8 @@ import LayCarouselItem from './module/carouselItem/index'
 import LayColorPicker from './module/colorPicker/index'
 import LayTooltip from './module/tooltip/index'
 import LayInputNumber from './module/inputNumber/index'
+import LaySkeleton from './module/skeleton/index'
+import LaySkeletonItem from './module/skeletonItem/index'
 
 const components: Record<string, IDefineComponent> = {
   LayRadio,
@@ -129,6 +131,8 @@ const components: Record<string, IDefineComponent> = {
   LayModal,
   LayTooltip,
   LayInputNumber,
+  LaySkeleton,
+  LaySkeletonItem,
 }
 
 const install = (app: App, options?: InstallOptions): void => {
@@ -142,6 +146,8 @@ const install = (app: App, options?: InstallOptions): void => {
 }
 
 export {
+  LaySkeleton,
+  LaySkeletonItem,
   LayRadio,
   LayIcon,
   LayButton,
