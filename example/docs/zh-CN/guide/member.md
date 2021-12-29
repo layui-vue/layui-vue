@@ -81,13 +81,13 @@
             焦点：layui-vue
         </lay-col>
         <lay-col md="4">
-            地点：未知
+            地点：China GuangZhou
         </lay-col>
         <lay-col md="5">
             生态：暂无
         </lay-col>
         <lay-col md="6">
-            其他：Gitee Github
+            其他：<a href="https://gitee.com/xumisky">Gitee</a> <a href="https://github.com/xumiSky">Github</a>
         </lay-col>
     </lay-row>
 </lay-card>
