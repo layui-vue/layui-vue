@@ -33,6 +33,6 @@ const styles = computed(() => {
 
 <template>
   <span :class="classes" :style="styles">
-    <slot v-if="type != 'dot'" />
+    <slot v-if="type != 'dot'"></slot>
   </span>
 </template>

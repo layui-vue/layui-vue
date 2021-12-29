@@ -1,7 +1,7 @@
 ::: title 基础使用
 :::
 
-::: demo 使用 lay-button 标签, 创建一个按钮
+::: demo 使用 `lay-button` 标签, 创建一个按钮
 
 <template>
   <lay-button type="primary">原始按钮</lay-button>
@@ -29,7 +29,7 @@ export default {
 ::: title 简约按钮
 :::
 
-::: demo 使用 border 属性设置 主要按钮 边框主题
+::: demo 使用 `border` 属性设置边框主题
 
 <template>
   <lay-button type="primary">原始按钮</lay-button>
@@ -57,7 +57,7 @@ export default {
 ::: title 按钮尺寸
 :::
 
-::: demo 传入 size 属性, 创建指定尺寸的按钮, 可选值 `lg` `sm` `xs`
+::: demo 传入 `size` 属性, 创建指定尺寸的按钮, 可选值 `lg` `sm` `xs`
 
 <template>
   <lay-button type="primary" size="lg">原始按钮</lay-button>
@@ -85,7 +85,7 @@ export default {
 ::: title 流式按钮
 :::
 
-::: demo 传入 fluid 属性, 创建最大化按钮
+::: demo 传入 `size` 属性, 创建最大化按钮
 
 <template>
   <lay-button type="primary" fluid>最大化按钮</lay-button>
@@ -111,7 +111,7 @@ export default {
 ::: title 圆角按钮
 :::
 
-::: demo 传入 radius 属性，创建圆角按钮
+::: demo 传入 `radius` 属性，创建圆角按钮
 
 <template>
   <lay-button type="primary" radius>原始按钮</lay-button>
@@ -139,7 +139,7 @@ export default {
 ::: title 按钮分组
 :::
 
-::: demo 使用 lay-button-group 标签, 创建一个按钮组
+::: demo 使用 `lay-button-group` 标签, 创建一个按钮组
 
 <template>
   <div>
@@ -173,7 +173,7 @@ export default {
 ::: title 图标按钮
 :::
 
-::: demo 结合 lay-icon 组件, 创建图标按钮
+::: demo 结合 `lay-icon` 组件, 创建图标按钮
 
 <template>
   <lay-button-container>
@@ -199,7 +199,7 @@ export default {
 ::: title 按钮容器
 :::
 
-::: demo 使用 lay-button-container 标签, 创建一个按钮容器
+::: demo 使用 `lay-button-container` 标签, 创建一个按钮容器
 
 <template>
   <lay-button-container>
@@ -226,7 +226,7 @@ export default {
 ::: title 加载按钮
 :::
 
-::: demo 传入 loading 属性, 控制按钮的加载状态
+::: demo 传入 `loading` 属性, 控制按钮的加载状态
 
 <template>
   <lay-button-container>
@@ -255,7 +255,7 @@ export default {
 ::: title 事件处理
 :::
 
-::: demo 使用 @click 设置单击回调
+::: demo 使用 `@click` 设置单击回调
 
 <template>
   <lay-button type="default" @click="clickHandle">单击事件</lay-button>
@@ -280,29 +280,55 @@ export default {
 
 :::
 
-::: title 按钮属性
+::: title Button 属性
 :::
 
 ::: table
 
-| 属性   | 描述   | 可选值                                        |
-| ------ | ------ | --------------------------------------------- |
-| type   | 主题   | `primary` `normal` `warm` `danger` `disabled` |
-| size   | 尺寸   | `lg` `sm` `xs`                                |
-| fluid  | 最大化 | `true` `false`                                |
-| radius | 圆角   | `true` `false`                                |
-| border | 边框   | `green` `blue` `orange` `red` `black`         |
+| 属性        | 描述     | 类型    | 默认值    | 可选值                             |
+| ----------- | -------- | ------- | --------- | ----------------------------------|
+| type        | 主题     | string  | `primary` | `primary` `normal` `warm` `danger` |
+| size        | 尺寸     | string  | --        | `lg` `sm` `xs`                     |
+| fluid       | 最大化   | boolean | `false`   | `true` `false`                     |
+| radius      | 圆角     | boolean | `false`   | `true` `false`                     |
+| border      | 边框     | string  | `green`   | `green` `blue` `orange` `red`      |
+| disabled    | 禁用     | boolean | `false`   | `true` `false`                     |
+| loading     | 加载     | boolean | `false`   | `true` `false`                     |
+| native-type | 原生类型 | string  | `button`  | `button` `submit` `reset`          |
 
 :::
 
-::: title 按钮事件
+::: title Button 插槽
+:::
+
+::: table
+
+| 名称    | 描述     | 参数 |
+| -----   | -------- | ---- |
+| default | 默认内容 | -- |
+
+:::
+
+::: title Button Group 属性
+:::
+
+::: table
+
+
+| 属性        | 描述     | 类型    | 默认值    | 可选值                             |
+| ----------- | -------- | ------- | --------- | ----------------------------------|
+| - | - | - | - |
+
+:::
+
+::: title Button Group 插槽
 :::
 
 ::: table
 
 | 事件  | 描述     | 参数 |
 | ----- | -------- | ---- |
-| click | 单击事件 | `--` |
+| default | 默认内容 | -- |
 
 :::
 

@@ -1,45 +1,45 @@
 <script lang="ts">
 export default {
-  name: "LayDropdown"
-}
+  name: "LayDropdown",
+};
 </script>
 
 <script setup lang="ts">
-import { defineProps, provide, ref, watch } from 'vue'
-import { useClickOutside } from '@layui/hooks-vue'
+import { defineProps, provide, ref, watch } from "vue";
+import { useClickOutside } from "@layui/hooks-vue";
 
-const dropdownRef = ref<null | HTMLElement>(null)
-const isClickOutside = useClickOutside(dropdownRef)
+const dropdownRef = ref<null | HTMLElement>(null);
+const isClickOutside = useClickOutside(dropdownRef);
 
 export interface LayDropdownProps {
-    trigger?: string
+  trigger?: string;
 }
 
-const props = withDefaults(defineProps<LayDropdownProps>(),{
-    trigger: 'click',
-})
+const props = withDefaults(defineProps<LayDropdownProps>(), {
+  trigger: "click",
+});
 
-const openState = ref(false)
+const openState = ref(false);
 
 const open = function () {
-  openState.value = true
-}
+  openState.value = true;
+};
 
 const hide = function () {
-  openState.value = false
-}
+  openState.value = false;
+};
 
 const toggle = function () {
-  openState.value = !openState.value
-}
+  openState.value = !openState.value;
+};
 
 watch(isClickOutside, () => {
   if (isClickOutside.value) {
-    openState.value = false
+    openState.value = false;
   }
-})
+});
 
-provide('openState', openState)
+provide("openState", openState);
 
 defineExpose({ open, hide, toggle });
 </script>
@@ -52,11 +52,11 @@ defineExpose({ open, hide, toggle });
     :class="[openState ? 'layui-dropdown-up' : '']"
   >
     <div @click="toggle">
-      <slot />
+      <slot></slot>
     </div>
     <dl class="layui-anim layui-anim-upbit">
       <ul class="layui-menu layui-dropdown-menu">
-        <slot name="content" />
+        <slot name="content"></slot>
       </ul>
     </dl>
   </div>
@@ -68,11 +68,11 @@ defineExpose({ open, hide, toggle });
     @mouseleave="hide"
   >
     <div>
-      <slot />
+      <slot></slot>
     </div>
     <dl class="layui-anim layui-anim-upbit">
       <ul class="layui-menu layui-dropdown-menu">
-        <slot name="content" />
+        <slot name="content"></slot>
       </ul>
     </dl>
   </div>

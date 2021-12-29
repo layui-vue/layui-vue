@@ -314,6 +314,12 @@ export default {
             subTitle: 'carousel',
             path: '/zh-CN/components/carousel',
           },
+          {
+            id: 43,
+            title: '数字滚动',
+            subTitle: 'countUp',
+            path: '/zh-CN/components/countup',
+          },
         ],
       },
       {

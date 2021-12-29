@@ -6,7 +6,7 @@ export default {
 
 <script setup lang="ts">
 import { defineProps } from "vue";
-import "./index.less"
+import "./index.less";
 
 const props = defineProps<{
   nm?: boolean;
@@ -15,6 +15,6 @@ const props = defineProps<{
 
 <template>
   <blockquote class="layui-elem-quote" :class="{ 'layui-quote-nm': nm }">
-    <slot />
+    <slot></slot>
   </blockquote>
 </template>

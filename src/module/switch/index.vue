@@ -51,7 +51,7 @@ const handleClick = function () {
       }"
     >
       <em>{{ isActive == true ? activeText : inactiveText }}</em>
-      <i />
+      <i></i>
     </div>
   </span>
 </template>

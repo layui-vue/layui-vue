@@ -1,15 +1,15 @@
 <script lang="ts">
 export default {
-  name: 'LayFooter',
-}
+  name: "LayFooter",
+};
 </script>
 
 <script setup lang="ts">
-import "./index.less"
+import "./index.less";
 </script>
 
 <template>
   <div class="layui-footer">
-    <slot />
+    <slot></slot>
   </div>
 </template>

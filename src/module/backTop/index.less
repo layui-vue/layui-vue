@@ -1,10 +1,13 @@
 /** backtop **/
+@width: 50px;
+@height: @width;
+
 .layui-backtop {
   position: fixed;
   right: 30px;
   bottom: 40px;
-  width: 50px;
-  height: 50px;
+  width: @width;
+  height: @height;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -18,4 +21,16 @@
   :hover {
     opacity: 0.85;
   }
+}
+
+.layui-backtop-medium{
+  width: @width - 10px;
+  height: @height - 10px;
+  font-size: 30px;
+}
+
+.layui-backtop-small{
+  width: @width - 20px;
+  height: @height - 20px;
+  font-size: 20px;
 }

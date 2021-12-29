@@ -41,5 +41,4 @@ const onFocus = function (event: FocusEvent) {
 const onBlur = function () {
   emit("blur");
 };
-
 </script>

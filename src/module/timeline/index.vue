@@ -5,11 +5,11 @@ export default {
 </script>
 
 <script setup lang="ts">
-import "./index.less"
+import "./index.less";
 </script>
 
 <template>
   <ul class="layui-timeline">
-    <slot />
+    <slot></slot>
   </ul>
 </template>

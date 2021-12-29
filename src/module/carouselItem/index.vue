@@ -4,11 +4,11 @@
   </li>
 </template>
 <script setup name="LayCarouselItem" lang="ts">
-import { defineProps, inject } from 'vue'
+import { defineProps, inject } from "vue";
 
 const props = defineProps<{
-  id: string
-}>()
+  id: string;
+}>();
 
-const active = inject('active')
+const active = inject("active");
 </script>

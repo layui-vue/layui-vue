@@ -51,14 +51,8 @@ const classes = computed(() => {
   >
     <i
       v-if="loading"
-      class="
-        layui-icon
-        layui-icon-loading-one
-        layui-anim
-        layui-anim-rotate
-        layui-anim-loop
-      "
+      class="layui-icon layui-icon-loading-one layui-anim layui-anim-rotate layui-anim-loop"
     ></i>
-    <slot v-else />
+    <slot v-else></slot>
   </button>
 </template>

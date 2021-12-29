@@ -25,6 +25,6 @@ const styles = computed<CSSProperties>(() => {
 
 <template>
   <div class="layui-side" :style="styles">
-    <slot />
+    <slot></slot>
   </div>
 </template>

@@ -1,10 +1,19 @@
 {
   "name": "@layui/layui-vue",
-  "version": "0.2.9",
+  "version": "0.3.1",
+  "author": "sleeprite",
+  "license": "MIT",
   "description": "a component library for Vue 3 base on layui-vue",
-  "homepage": "https://gitee.com/layui-vue/layui-vue/blob/master/README.md",
+  "homepage": "http://layui-vue.pearadmin.com",
   "module": "lib/layui-vue.es.js",
   "main": "lib/layui-vue.umd.js",
+  "types": "types/index.d.ts",
+  "style": "lib/index.css",
+  "keywords": [
+    "layui-vue",
+    "layui",
+    "vue"
+  ],
   "exports": {
     ".": {
       "import": "./lib/layui-vue.es.js",
@@ -12,33 +21,21 @@
     },
     "./lib/": "./lib/"
   },
-  "types": "types/index.d.ts",
-  "style": "lib/index.css",
   "scripts": {
     "dev": "vite",
     "build": "vite build --emptyOutDir && npm run build:types",
     "build:types": "rimraf types && tsc -d",
-    "build:example": "vite build example"
-  },
-  "keywords": [
-    "layui-vue",
-    "layui",
-    "vue"
-  ],
-  "author": "就眠儀式",
-  "license": "MIT",
-  "peerDependencies": {
-    "@layui/hooks-vue": "^0.1.6",
-    "@layui/icons-vue": "^1.0.1",
-    "@layui/layer-vue": "^1.2.2",
-    "vue": "^3.2.26",
-    "vue-router": "^4.0.12"
+    "build:example": "vite build example",
+    "lint:eslint": "eslint \"src/**/*.{vue,ts,tsx}\" --fix",
+    "lint:prettier": "prettier --write  \"src/**/*.{js,json,tsx,css,less,scss,vue,html,md}\"",
+    "commit": "git cz"
   },
   "dependencies": {
     "@layui/hooks-vue": "^0.1.6",
-    "@layui/icons-vue": "^1.0.1",
+    "@layui/icons-vue": "^1.0.2",
     "@layui/layer-vue": "^1.2.2",
     "async-validator": "^4.0.7",
+    "countup.js": "^2.0.8",
     "evtd": "^0.2.3",
     "vue": "^3.2.26",
     "vue-router": "^4.0.12"
@@ -51,18 +48,27 @@
     "@types/markdown-it": "^12.2.3",
     "@types/markdown-it-container": "^2.0.4",
     "@types/node": "^16.11.9",
+    "@typescript-eslint/eslint-plugin": "^5.8.0",
+    "@typescript-eslint/parser": "^5.8.0",
     "@vitejs/plugin-vue": "^1.9.3",
     "@vue/compiler-sfc": "^3.2.26",
     "@vue/server-renderer": "^3.2.26",
+    "commitizen": "^4.2.4",
+    "cz-conventional-changelog": "3.3.0",
     "escape-html": "^1.0.3",
-    "less": "^4.1.2",
+    "eslint": "^8.5.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-vue": "^8.2.0",
     "markdown-it-container": "^3.0.0",
+    "prettier": "^2.5.1",
     "prismjs": "^1.25.0",
     "rimraf": "^3.0.2",
-    "rollup": "^2.0.0",
+    "rollup": "^2.61.0",
     "typescript": "^4.5.2",
-    "vite": "2.6.14",
-    "vite-plugin-md": "^0.11.4"
+    "less": "^4.1.2",
+    "vite": "2.7.6",
+    "vite-plugin-md": "^0.11.6"
   },
   "files": [
     "lib",

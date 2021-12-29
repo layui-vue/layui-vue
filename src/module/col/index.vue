@@ -22,7 +22,7 @@ const classes = computed(() => {
   return [
     props.md ? `layui-col-md${props.md}` : "",
     props.xs ? `layui-col-xs${props.xs}` : "",
-    props.sm ? `layui-col-sm${props.sm}` : "", 
+    props.sm ? `layui-col-sm${props.sm}` : "",
     props.lg ? `layui-col-lg${props.lg}` : "",
     props.mdOffset ? `layui-col-md-offset${props.mdOffset}` : "",
     props.xsOffset ? `layui-col-xs-offset${props.xsOffset}` : "",
@@ -34,6 +34,6 @@ const classes = computed(() => {
 
 <template>
   <div class="layui-col" :class="classes">
-    <slot />
+    <slot></slot>
   </div>
 </template>

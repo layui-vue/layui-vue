@@ -136,7 +136,7 @@ const remove = function () {
               skin="primary"
               :label="dataSource[id]"
             >
-              <slot v-if="slot.item" name="item" :data="dataSource" />
+              <slot v-if="slot.item" name="item" :data="dataSource"></slot>
               <span v-else>{{ dataSource.title }}</span>
             </lay-checkbox>
           </li>
@@ -147,14 +147,14 @@ const remove = function () {
           type="primary"
           :disabled="leftSelectedKeys.length == 0"
           @click="add"
-          ><i class="layui-icon layui-icon-next"
-        /></lay-button>
+          ><i class="layui-icon layui-icon-next"></i
+        ></lay-button>
         <lay-button
           type="primary"
           :disabled="rightSelectedKeys.length == 0"
           @click="remove"
-          ><i class="layui-icon layui-icon-prev"
-        /></lay-button>
+          ><i class="layui-icon layui-icon-prev"></i
+        ></lay-button>
       </div>
       <div class="layui-transfer-box" style="width: 200px; height: 360px">
         <div class="layui-transfer-header">
@@ -174,7 +174,7 @@ const remove = function () {
               skin="primary"
               :label="dataSource[id]"
             >
-              <slot v-if="slot.item" name="item" :data="dataSource" />
+              <slot v-if="slot.item" name="item" :data="dataSource"></slot>
               <span v-else>{{ dataSource.title }}</span>
             </lay-checkbox>
           </li>

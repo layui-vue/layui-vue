@@ -1,10 +1,15 @@
 <p align="center">
   <a href="http://www.layui.com">
-    <img src="https://sentsin.gitee.io/res/images/layui/layui.png" alt="layui" width="360">
+    <img src="https://images.gitee.com/uploads/images/2021/1213/173638_d6911839_4835367.png" alt="layui" width="360">
   </a>
 </p>
+
 <p align="center">
   A component library for Vue 3 base on layui
+</p>
+
+<p align="center">
+  基 于 vue 3.0 的 组 件 库 桌 面 级 , layui 的 另 一 种 呈 现 方 式
 </p>
 
 <p align="center">  
@@ -23,11 +28,9 @@
 
 ---
 
-Vue 3.0 的 桌 面 端 组 件 库 , Layui 的 另 一 种 呈 现 方 式
+### 快速上手 : Beta
 
-## 快速上手 : Beta
-
-获得 layui-vue 你只需要使用 npm 引入下述文件：
+获得 layui-vue 你只需要使用 npm 引入 :
 
 ```
 npm install @layui/layui-vue
@@ -44,7 +47,7 @@ import App from './App.vue'
 createApp(App).use(Layui).mount('#app')
 ```
 
-这是一个基本的入门页面：
+接下来，你就可以使用 layui-vue 来开发你的应用 :
 
 ```html
 <template>
@@ -63,13 +66,13 @@ createApp(App).use(Layui).mount('#app')
 
 ## [阅读文档](http://layui-vue.pearadmin.com/)
 
-从现在开始，尽情地拥抱 layui 吧！但愿她能成为你长远的开发伴侣，化作你方寸屏幕前的亿万字节！
+从现在开始，用另一种方式拥抱 layui, 继续化作你方寸屏幕前的亿万字节！
 
-## 使用趋势
+### 使用趋势
 
-[![Giteye chart](https://chart.giteye.net/gitee/layui-vue/layui-vue/5ZQ67WWS.png)](https://giteye.net/chart/5ZQ67WWS)
+[![Giteye chart](https://images.gitee.com/uploads/images/2021/1222/233241_e13a5449_4835367.png)](https://giteye.net/chart/5ZQ67WWS)
 
-## 贡献者
+### 贡献代码
 
 > 大概是因为 layui - vue 让开发者变得更懒，所以贡献者才这么少？  
 > 好的，姑且就这样认为吧。

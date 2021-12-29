@@ -309,6 +309,11 @@ const zhCN = [
             component: () => import('../../docs/zh-CN/components/backtop.md'),
             meta: { title: '返回顶部' },
           },
+          {
+            path: '/zh-CN/components/countup',
+            component: () => import('../../docs/zh-CN/components/countup.md'),
+            meta: { title: '数字滚动' },
+          },
         ],
       },
       {

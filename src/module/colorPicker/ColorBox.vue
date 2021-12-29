@@ -1,86 +1,86 @@
 <script lang="ts">
 export default {
-  name: 'ColorBox',
-}
+  name: "ColorBox",
+};
 </script>
 <script setup lang="ts">
-import { Nullable } from '../type'
-import { computed, onMounted, ref } from 'vue'
-import { HSBToHEX, RGBSTo, RGBToHSB } from './colorUtil'
-import ColorPicker from './ColorPicker.vue'
-import { usePosition } from '@layui/hooks-vue'
+import { Nullable } from "../type";
+import { computed, onMounted, ref } from "vue";
+import { HSBToHEX, RGBSTo, RGBToHSB } from "./colorUtil";
+import ColorPicker from "./ColorPicker.vue";
+import { usePosition } from "@layui/hooks-vue";
 
 interface BoxProps {
-  color?: string
-  size?: Nullable<string>
-  alpha?: boolean
-  format?: 'hex' | 'rgb'
-  predefine?: boolean
-  colors?: string[]
+  color?: string;
+  size?: Nullable<string>;
+  alpha?: boolean;
+  format?: "hex" | "rgb";
+  predefine?: boolean;
+  colors?: string[];
 }
 
 const colorBoxProps = withDefaults(defineProps<BoxProps>(), {
-  color: '',
+  color: "",
   size: () => null,
   alpha: false,
-  format: 'hex',
+  format: "hex",
   predefine: false,
   colors: () => [
     //默认预定义颜色列表
-    '#009688',
-    '#5FB878',
-    '#1E9FFF',
-    '#FF5722',
-    '#FFB800',
-    '#01AAED',
-    '#999',
-    '#c00',
-    '#ff8c00',
-    '#ffd700',
-    '#90ee90',
-    '#00ced1',
-    '#1e90ff',
-    '#c71585',
-    'rgb(0, 186, 189)',
-    'rgb(255, 120, 0)',
-    'rgb(250, 212, 0)',
-    '#393D49',
-    'rgba(0,0,0,.5)',
-    'rgba(255, 69, 0, 0.68)',
-    'rgba(144, 240, 144, 0.5)',
-    'rgba(31, 147, 255, 0.73)',
+    "#009688",
+    "#5FB878",
+    "#1E9FFF",
+    "#FF5722",
+    "#FFB800",
+    "#01AAED",
+    "#999",
+    "#c00",
+    "#ff8c00",
+    "#ffd700",
+    "#90ee90",
+    "#00ced1",
+    "#1e90ff",
+    "#c71585",
+    "rgb(0, 186, 189)",
+    "rgb(255, 120, 0)",
+    "rgb(250, 212, 0)",
+    "#393D49",
+    "rgba(0,0,0,.5)",
+    "rgba(255, 69, 0, 0.68)",
+    "rgba(144, 240, 144, 0.5)",
+    "rgba(31, 147, 255, 0.73)",
   ],
-})
+});
 
 const triggerSpanStyle = computed(() => {
-  let bgstr = ''
+  let bgstr = "";
   if (colorBoxProps.color) {
-    bgstr = colorBoxProps.color
+    bgstr = colorBoxProps.color;
 
     if ((colorBoxProps.color.match(/[0-9]{1,3}/g) || []).length > 3) {
       //需要优化
-      if (!(colorBoxProps.alpha && colorBoxProps.format == 'rgb')) {
-        bgstr = '#' + HSBToHEX(RGBToHSB(RGBSTo(colorBoxProps.color)))
+      if (!(colorBoxProps.alpha && colorBoxProps.format == "rgb")) {
+        bgstr = "#" + HSBToHEX(RGBToHSB(RGBSTo(colorBoxProps.color)));
       }
     }
   }
 
   return {
     background: bgstr,
-  }
-})
+  };
+});
 
 const colorPickerWrapper = computed(() => {
-  return colorBoxProps.size ? `layui-colorpicker-${colorBoxProps.size}` : ''
-})
+  return colorBoxProps.size ? `layui-colorpicker-${colorBoxProps.size}` : "";
+});
 
-const colorBoxRefEl = ref<HTMLElement | null>(null)
-const colorPickerRefEl = ref<HTMLElement | null>(null)
+const colorBoxRefEl = ref<HTMLElement | null>(null);
+const colorPickerRefEl = ref<HTMLElement | null>(null);
 
 onMounted(() => {
-  console.log('colorPickerRefEl =>>>', colorPickerRefEl.value.teleportRefEl)
-  usePosition(colorBoxRefEl.value, colorPickerRefEl.value.teleportRefEl)
-})
+  console.log("colorPickerRefEl =>>>", colorPickerRefEl.value.teleportRefEl);
+  usePosition(colorBoxRefEl.value, colorPickerRefEl.value.teleportRefEl);
+});
 </script>
 <template>
   <div ref="colorBoxRefEl" class="layui-unselect layui-colorpicker">
@@ -107,7 +107,7 @@ onMounted(() => {
       :visible="true"
       :alpha="alpha"
       :predefine="predefine"
-    ></ColorPicker>
+    />
   </div>
 </template>
 <style scoped lang="less"></style>

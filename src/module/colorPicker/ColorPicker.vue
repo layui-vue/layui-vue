@@ -1,23 +1,23 @@
 <script lang="ts">
 export default {
-  name: 'ColorPicker',
-}
+  name: "ColorPicker",
+};
 </script>
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref } from "vue";
 
 interface CProps {
-  visible: boolean
-  alpha: boolean
-  predefine: boolean
+  visible: boolean;
+  alpha: boolean;
+  predefine: boolean;
 }
 
-const props = defineProps<CProps>()
+const props = defineProps<CProps>();
 
-const domRefEl = ref<HTMLElement | null>(null)
+const domRefEl = ref<HTMLElement | null>(null);
 defineExpose({
   teleportRefEl: domRefEl,
-})
+});
 </script>
 <template>
   <teleport to="body">

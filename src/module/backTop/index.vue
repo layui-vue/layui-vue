@@ -3,6 +3,7 @@
     v-show="visible"
     ref="backtopRef"
     class="layui-backtop"
+    :class="classBacktop"
     :style="{ ...styleBacktop }"
     @click.stop="handleClick"
     @mousedown="handlerMousedown"
@@ -12,23 +13,30 @@
       <lay-icon
         :type="props.icon"
         :size="`${props.iconSize}px`"
-        :prefix="props.iconPrefix"
         :color="props.iconColor"
-      ></lay-icon>
+      />
     </slot>
   </div>
 </template>
 
 <script lang="ts">
 export default {
-  name: 'LayBacktop',
+  name: "LayBacktop",
 };
 </script>
 
 <script lang="ts" setup>
-import { defineProps, defineEmits, ref, shallowRef, withDefaults, computed, onMounted, } from 'vue';
-import LayIcon from '../icon/index';
-import './index.less';
+import {
+  defineProps,
+  defineEmits,
+  ref,
+  shallowRef,
+  withDefaults,
+  computed,
+  onMounted,
+} from "vue";
+import LayIcon from "../icon/index";
+import "./index.less";
 
 export interface LayBacktopProps {
   /**通用*/
@@ -36,42 +44,52 @@ export interface LayBacktopProps {
   showHeight?: number;
   disabled?: boolean;
   /**组件样式*/
-  position?: 'fixed' | 'absolute';
+  position?: "fixed" | "absolute";
   right?: number;
   bottom?: number;
+  size?: "medium" | "small";
   bgcolor?: string;
   opacity?: number;
   color?: string;
   borderRadius?: number | string;
-  circular?: boolean;
+  circle?: boolean;
   /**图标样式*/
   icon?: string;
   iconSize?: number;
-  iconPrefix?: string;
   iconColor?: string;
 }
 
 const props = withDefaults(defineProps<LayBacktopProps>(), {
-  target: 'window',
+  target: "window",
   showHeight: 200,
-  right: 30,
-  bottom: 40,
-  icon: 'layui-icon-top',
+  icon: "layui-icon-top",
   iconSize: 30,
-  iconPrefix: 'layui-icon',
   disabled: false,
-  circular: false,
+  circle: false,
 });
 
-const emit = defineEmits(['click']);
+const emit = defineEmits(["click"]);
 
 const backtopRef = ref<HTMLElement | null>(null);
 const scrollTarget = shallowRef<Window | HTMLElement | undefined>(undefined);
 let visible = ref(props.showHeight === 0);
-const borderRadius = computed(() => {
-  if (props.circular) return "50%";
-  return typeof props.borderRadius === 'number' ? `${props.borderRadius}px` : props.borderRadius;
+
+const classBacktop = computed(() => {
+  return {
+    'layui-backtop-medium': props.size === "medium",
+    'layui-backtop-small': props.size === "small"
+  }
 });
+
+const borderRadius = computed(() => {
+  if (props.circle) {
+    return "50%"
+  };
+  return typeof props.borderRadius === "number"
+    ? `${props.borderRadius}px`
+    : props.borderRadius;
+});
+
 const styleBacktop = computed(() => {
   return {
     position: props.position,
@@ -81,72 +99,119 @@ const styleBacktop = computed(() => {
     opacity: props.opacity,
     color: props.color,
     borderRadius: borderRadius.value,
-  }
+  };
 });
 
-// TODO 临时动画方案
+// TODO 待改进
+const easeInOut = (value: number): number => {
+  return value < 0.5 ? 2 * value * value : 1 - 2 * (value - 1) * (value - 1);
+};
+
 const scrollToTop = () => {
   if (!scrollTarget.value) return;
   if (scrollTarget.value instanceof Window) {
-    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' }); // smooth | instant(default)
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" }); // smooth | instant(default)
   } else {
-    let step = scrollTarget.value.scrollTop / 4;
-    if (scrollTarget.value.scrollTop > 0) {
-      scrollTarget.value.scrollTop -= Math.max(step, 10);
-      setTimeout(() => {
-        scrollToTop();
-      }, 1000 / 60);
-    }
+    const previous: number = Date.now();
+    const scrollHeight: number = scrollTarget.value.scrollTop;
+    const animationFunc = () => {
+      if (!scrollTarget.value || scrollTarget.value instanceof Window) return;
+      const elapsed = (Date.now() - previous) / 450;
+      if (elapsed < 1) {
+        scrollTarget.value.scrollTop = scrollHeight * (1 - easeInOut(elapsed));
+        window.requestAnimationFrame(animationFunc);
+      } else {
+        scrollTarget.value.scrollTop = 0;
+      }
+    };
+    window.requestAnimationFrame(animationFunc);
   }
 };
 
 const handleScroll = () => {
   if (!scrollTarget.value) return;
-  const scrollTop = scrollTarget.value instanceof Window ? window.pageYOffset : scrollTarget.value.scrollTop;
+  const scrollTop =
+    scrollTarget.value instanceof Window
+      ? window.pageYOffset
+      : scrollTarget.value.scrollTop;
   visible.value = scrollTop >= props.showHeight;
 };
 
 const handleClick = (event: MouseEvent) => {
   if (!props.disabled) {
-    scrollToTop()
-  };
-  emit('click', event);
+    scrollToTop();
+  }
+  emit("click", event);
 };
 
 const handlerMousedown = () => {
-  backtopRef.value!.style.opacity = '1';
-}
+  backtopRef.value!.style.opacity = "1";
+};
 
 const handlerMouseup = () => {
-  backtopRef.value!.style.opacity = '0.95';
-}
+  backtopRef.value!.style.opacity = "0.95";
+};
 
 // 获取滚动目标元素
 const getScrollTarget = () => {
-  if (props.target === 'window') {
-    return window || document.documentElement || document.body;
+  if (props.target === "window") {
+    return getScrollParent(backtopRef.value!, false);
   } else {
     const targetElement = document.querySelector<HTMLElement>(props.target);
-    if (!targetElement) throw new Error(`target is not existed: ${props.target}`);
+    if (!targetElement){
+      throw new Error(`target is not existed: ${props.target}`);
+    }
     // 特定容器内部显示
-    if (props.position === 'absolute') {
-      if (!targetElement.parentElement) throw new Error(`target parent element is not existed: ${props.target}`);
-      targetElement.parentElement.style.position = 'relative';
+    if (props.position === "absolute") {
+      if (!targetElement.parentElement){
+        throw new Error( `target parent element is not existed: ${props.target}`);
+      }
+      targetElement.parentElement.style.position = "relative";
       // backtopRef.value!.style.position = props.position;
     }
     return targetElement;
   }
 };
 
+// 获取距离元素最近的可滚动祖先元素
+const getScrollParent = (
+  element: HTMLElement,
+  includeHidden: boolean
+): HTMLElement => {
+  let style: CSSStyleDeclaration = getComputedStyle(element);
+  let excludeStaticParent: boolean = style.position === "absolute";
+  let overflowRegex: RegExp = includeHidden
+    ? /(auto|scroll|hidden)/
+    : /(auto|scroll)/;
+  //if (style.position === "fixed") return document.documentElement || document.body || window;
+  for (let parent: HTMLElement = element; (parent = parent.parentElement!); ) {
+    style = getComputedStyle(parent);
+    if (excludeStaticParent && style.position === "static") {
+      continue;
+    }
+    if (overflowRegex.test(style.overflow + style.overflowY + style.overflowX)){
+      return parent;
+    }
+  }
+  return document.documentElement || document.body || window;
+};
+
+// 节流
+const throttle = (func: Function, wait: number) => {
+  var timer: any = null;
+  return (...args: any) => {
+    if (!timer) {
+      timer = setTimeout(() => {
+        timer = null;
+        func.apply(this, args);
+      }, wait);
+    }
+  };
+};
+
 onMounted(() => {
-  let timer: any = undefined;
+  if (!props.target) return;
   scrollTarget.value = getScrollTarget();
-  // TODO 节流待改进
-  scrollTarget.value.addEventListener('scroll', () => {
-    clearTimeout(timer);
-    timer = setTimeout(() => {
-      handleScroll();
-    }, 100);
-  });
+  scrollTarget.value.addEventListener("scroll", throttle(handleScroll, 300));
 });
 </script>
