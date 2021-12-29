@@ -28,9 +28,9 @@ export default function createContainer(
             }
           }
           // 此处仅支持 string | number | boolean 类型
-          return `<lay-aside-anchor anchors="${anchors}" :currIndex="-1" :show="true">`;
+          return `<lay-anchor anchors="${anchors}" :currIndex="-1" :show="true">`;
         } else {
-          return "</lay-aside-anchor>\n";
+          return "</lay-anchor>\n";
         }
       },
     },

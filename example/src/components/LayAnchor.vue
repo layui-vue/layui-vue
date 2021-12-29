@@ -103,11 +103,11 @@ const handlerBtnClick = () => {
   cursor: pointer;
   transition: all 0.1s cubic-bezier(0, 0, 1, 1);
   &:hover {
-    background-color: #eeeeee;
+    background-color: #f6f6f6 !important;
     color: #5fb878;
   }
   &:active {
-    background-color: #eeeeee;
+    background-color: #f6f6f6 !important;
     color: #89d89f;
   }
 }
@@ -119,12 +119,12 @@ const handlerBtnClick = () => {
   border-radius: 2px;
   list-style: none;
   &:hover {
-    background-color: #eeeeee;
+    background-color: #f6f6f6 !important;
     color: #5fb878;
   }
 }
 .active {
-  background-color: #eeeeee !important;
+  background-color: #f6f6f6 !important;
   color: #5fb878 !important;
 }
 
@@ -135,26 +135,27 @@ const handlerBtnClick = () => {
 
 .lay-aside-collapse-btn {
   position: fixed;
-  right: 167px;
-  top: 20%;
+  right: 197px;
+  top: calc(50% - 20px);
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 30px;
-  height: 30px;
-  border: none;
+  width: 18px;
+  height: 40px;
   background-color: #f6f6f6;
-  border-radius: 50%;
-  opacity: 0.7;
+  border-radius: 0px;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+  border: rgb(229 230 235) 1px solid;
+  border-right: none;
+  transition: right 200ms;
   box-shadow: 2px 0 8px 0 rgb(29 35 41 / 5%);
   &:hover {
     background-color: #e2e2e2;
-    width: 32px;
-    height: 32px;
   }
 }
 .lay-aside-collapse-btn-collapse {
-  right: 15px;
+  right:0px;
 }
 
 @media screen and (max-width: 768px) {
