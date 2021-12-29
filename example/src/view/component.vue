@@ -37,7 +37,7 @@
       </lay-scroll>
     </lay-side>
     <lay-body>
-      <div style="padding: 20px">
+      <div style="padding: 20px; margin-right: 180px">
         <router-view />
       </div>
     </lay-body>
