@@ -1,15 +1,17 @@
 <template>
-  <transition v-show="innerVisible">
-    <div
-      ref="popper"
-      :class="['layui-popper', { 'layui-dark': innnerIsDark }]"
-      :style="style"
-      :position="innnerPosition"
-    >
-      <slot>{{ content.value }}</slot>
-      <div class="layui-popper-arrow"></div>
-    </div>
-  </transition>
+  <teleport to="body" v-if="isExist">
+    <transition v-show="innerVisible">
+      <div
+        ref="popper"
+        :class="['layui-popper', { 'layui-dark': isDark }]"
+        :style="style"
+        :position="position"
+      >
+        <slot>{{ content }}</slot>
+        <div class="layui-popper-arrow"></div>
+      </div>
+    </transition>
+  </teleport>
 </template>
 <script lang="ts">
 const NAME = "LayPopper";
@@ -25,30 +27,33 @@ import {
   CSSProperties,
   ref,
   watch,
-  onUpdated,
   defineEmits,
   onMounted,
-  Ref,
 } from "vue";
 import { on } from "../../tools/domUtil";
 const props = withDefaults(
   defineProps<{
     el: any;
-    content?: Ref<string | Number>;
-    position?: Ref<string>;
+    content?: string | Number;
+    position?: string;
     trigger?: string;
     enterable?: boolean;
-    isDark?: Ref<boolean>;
-    disabled?: Ref<boolean>;
-    visible?: Ref<boolean>;
-    isCanHide?: Ref<boolean>;
-    updateVisible?: Function;
+    isDark?: boolean;
+    disabled?: boolean;
+    visible?: boolean;
+    isCanHide?: boolean;
   }>(),
   {
+    position: 'top',
+    isDark: true,
+    disabled: false,
     enterable: true,
+    visible: true,
+    isCanHide: true,
     trigger: "hover",
   }
 );
+const emit = defineEmits(["update:visible"]);
 
 const EVENT_MAP: any = {
   hover: ["mouseenter", null, "mouseleave", false],
@@ -63,55 +68,52 @@ if (!triggerArr) {
 const style = ref<CSSProperties>({ top: -window.innerHeight + "px", left: 0 });
 const checkTarget = ref(false);
 const popper = ref<HTMLDivElement>({} as HTMLDivElement);
-const tempPosition = props.position ?? ref("top");
-const innnerPosition = ref(tempPosition.value);
-const innnerIsDark = ref(props.isDark ?? true);
-const innnerDisabled = ref(props.disabled ?? false);
+const innnerPosition = ref(props.position);
 const innerVisible = ref(props.visible ?? true);
+const isExist = ref(false);
 
 watch(innerVisible, (val) => {
   invokeShowPosistion();
-  props.updateVisible && props.updateVisible(val);
+  emit("update:visible", val);
 });
-watch(innnerDisabled, (val) => {
-  innerVisible.value = false;
+watch(popper, (val) => {
+  if (props.trigger === 'hover' && props.enterable) {
+    on(popper.value, EVENT_MAP['hover'][0], doShow);
+    on(popper.value, EVENT_MAP['hover'][2], doHidden);
+  }
 });
 watch(
-  () => props.content?.value,
+  () => props.content,
   (val) => {
     innerVisible.value && invokeShowPosistion();
   }
 );
 
 const doShow = function () {
-  if (!innnerDisabled.value) {
+  if (!props.disabled) {
     innerVisible.value = true;
+    isExist.value = true;
   }
 };
 
 const doHidden = function (e: MouseEvent) {
+  // ||(props.enterable && popper.value.contains(e.target as Node))
   if (
-    (checkTarget.value && props.el.contains(e.target)) ||
-    (props.enterable && popper.value.contains(e.target as Node))
+    (checkTarget.value && props.el.contains(e.target)) 
   )
     return;
   // style.value = {top: (-window.innerHeight) + 'px',left:0};
   // popper.value.remove();
-  if (props.isCanHide?.value !== false) {
+  if (props.isCanHide !== false) {
     innerVisible.value = false;
   }
-  innnerPosition.value = tempPosition.value;
+  innnerPosition.value = props.position;
 };
-
-// 事件绑定
-on(props.el, triggerArr[0], doShow);
-on(triggerArr[1] ?? props.el, triggerArr[2], doHidden);
-checkTarget.value = triggerArr[3];
 
 // 计算位置显示
 const showPosistion = function () {
-  postionFns[tempPosition.value] &&
-    (style.value = postionFns[tempPosition.value](
+  postionFns[props.position] &&
+    (style.value = postionFns[props.position](
       props.el,
       popper.value,
       innnerPosition
@@ -126,6 +128,12 @@ const invokeShowPosistion = function () {
     setTimeout(() => innerVisible.value && showPosistion(), 2);
   }
 };
+
+// 事件绑定
+on(props.el, triggerArr[0], doShow);
+on(triggerArr[1] ?? props.el, triggerArr[2], doHidden);
+checkTarget.value = triggerArr[3];
+
 onMounted(() => {
   invokeShowPosistion();
 });
