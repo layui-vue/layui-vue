@@ -54,7 +54,7 @@
 </template>
 
 <script setup name="LayPage" lang="ts">
-import { defineProps, Ref, ref, watch, useSlots } from "vue";
+import { defineProps, Ref, ref, watch, useSlots, computed, ComputedRef } from "vue";
 
 const slots = useSlots();
 
@@ -86,7 +86,6 @@ const inlimit = ref(props.limit);
 const totalPage = ref(Math.ceil(props.total / inlimit.value));
 const currentPage: Ref<number> = ref(1);
 const currentPageShow: Ref<number> = ref(currentPage.value);
-
 const emit = defineEmits(["jump"]);
 
 const prev = function () {

@@ -1,6 +1,6 @@
 {
   "name": "@layui/layui-vue",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "author": "sleeprite",
   "license": "MIT",
   "description": "a component library for Vue 3 base on layui-vue",
@@ -26,8 +26,9 @@
     "build": "vite build --emptyOutDir && npm run build:types",
     "build:types": "rimraf types && tsc -d",
     "build:example": "vite build example",
-    "lint:eslint": "eslint \"src/**/*.{vue,ts,tsx}\" --fix",
-    "lint:prettier": "prettier --write  \"src/**/*.{js,json,tsx,css,less,scss,vue,html,md}\"",
+    "lint:eslint": "eslint 'src/**/*.{vue,ts,tsx}' --fix",
+    "lint:prettier": "prettier --write  'src/**/*'",
+    "publish": "npm run build && npm publish --access=public",
     "commit": "git cz"
   },
   "dependencies": {
@@ -78,10 +79,5 @@
     "current node",
     "last 2 versions and > 2%",
     "ie > 10"
-  ],
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
-  }
+  ]
 }

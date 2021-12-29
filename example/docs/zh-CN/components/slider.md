@@ -72,5 +72,27 @@ export default {
 </script>
 :::
 
+::: title 纵向区间
+:::
+
+::: demo
+
+<template>
+  <lay-slider v-model="value3" :range="true" :vertical="true"></lay-slider>
+</template>
+
+<script>
+import { ref } from 'vue'
+export default {
+  setup() {
+    const value4 = ref([20,50])
+    return {
+      value4
+    }
+  }
+}
+</script>
+:::
+
 ::: comment
 :::
