@@ -17,11 +17,11 @@ export default function createContainer(
     container,
     klass,
     {
-      render(tokens, idx) {
+      render(tokens, idx) {    
         const token = tokens[idx]
         const info = token.info.trim().slice(klass.length).trim()
         if (token.nesting === 1) {
-          return `<lay-field title="${
+          return `<lay-field id="${info || defaultTitle}" title="${
             info || defaultTitle
           }" style="margin-top:20px;margin-bottom: 20px;">`
         } else {
