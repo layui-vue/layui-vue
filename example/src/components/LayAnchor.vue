@@ -67,6 +67,7 @@ const classAsideBtn = computed(() => [
 const handlerBtnClick = () => {
   show.value = !show.value;
   iconType.value = show.value ? "layui-icon-right" : "layui-icon-left";
+  scrollRefEl.value!.firstElementChild!.style.marginRight = show.value ? "180px" : "0px";
 };
 
 const handlerListItemClick = (index: number, id: string) => {
