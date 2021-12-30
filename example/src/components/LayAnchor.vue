@@ -2,29 +2,30 @@
   <aside :class="classAside">
     <div class="lay-aside-top">
       <lay-button
-        @click="handlerBtnClick()"
         type="primary"
         size="xs"
         :class="classAsideBtn"
+        @click="handlerBtnClick()"
       >
         <lay-icon :type="iconType" size="40"> </lay-icon>
       </lay-button>
     </div>
     <lay-scroll
-      class="layui-side-scroll-bar layui-side-scroll::-webkit-scrollbar" >
+      class="layui-side-scroll-bar layui-side-scroll::-webkit-scrollbar"
+    >
       <ul>
         <li
-          v-for="(item, index) in anchorsComput"
+          v-for="(anchor, index) in anchorList"
           :key="index"
           class="lay-aside-list"
-          :class="{ active: index === curridx }"
-          @click="curridx = index"
+          :class="{ active: index === activeIndex }"
+          @click.prevent="handlerListItemClick(index, anchor)"
         >
           <a
-            :href="`#${item}`"
+            :href="`#${anchor}`"
             class="lay-aside-link"
-            :class="{ active: index === curridx }"
-            >{{ item }}</a
+            :class="{ active: index === activeIndex }"
+            >{{ anchor }}</a
           >
         </li>
       </ul>
@@ -32,21 +33,25 @@
   </aside>
 </template>
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { computed, onMounted, ref, shallowRef } from "vue";
 
 const props = defineProps<{
   anchors?: Array<string> | string;
   currIndex: number;
-  show: boolean | string;
+  show: boolean;
 }>();
 
-let curridx = ref(props.currIndex);
-const show = ref(props.show);
-const iconType = ref("layui-icon-right");
-const anchor = props.anchors;
+let activeIndex = ref<number>(0);
+const show = ref<boolean>(props.show);
+const iconType = ref<string>("layui-icon-right");
+const anchors: string | string[] | undefined = props.anchors;
+/**滚动条高度 */
+const scrollTop = ref<number>(0);
+/**要监听的滚动元素 */
+const scrollRefEl = shallowRef<HTMLElement | undefined>(undefined);
 
-const anchorsComput = computed(() => {
-  return typeof anchor === "string" ? anchor?.split(",") : anchor;
+const anchorList = computed(() => {
+  return typeof anchors === "string" ? anchors?.split(",") : anchors;
 });
 
 const classAside = computed(() => [
@@ -63,10 +68,68 @@ const handlerBtnClick = () => {
   show.value = !show.value;
   iconType.value = show.value ? "layui-icon-right" : "layui-icon-left";
 };
+
+const handlerListItemClick = (index: number, id: string) => {
+  activeIndex.value = index;
+  scrollToTitle(id);
+};
+
+const handlerScroll = () => {
+  // 距离顶部 90 改变 activeIndex
+  scrollTop.value = getScrollTop(scrollRefEl.value) + 90;
+  anchorList.value?.forEach((item, index) => {
+    const elOffsetTop = document.getElementById(item)?.offsetTop;
+    if (elOffsetTop) {
+      if (index === 0 && scrollTop.value < elOffsetTop) {
+        activeIndex.value = 0;
+      } else if (scrollTop.value >= elOffsetTop) {
+        activeIndex.value = index;
+      }
+    }
+  });
+}
+
+onMounted(() => {
+  // TODO 封装 hooks
+  scrollRefEl.value = document.querySelector(".layui-body");
+  if (!scrollRefEl.value) throw new Error("");
+  scrollRefEl.value.scrollTop = 0;
+  scrollRefEl.value?.addEventListener("scroll", throttle(handlerScroll, 500));
+});
+
+/**获取滚动高度 */
+const getScrollTop = (el: HTMLElement | undefined): number => {
+  return el
+    ? el.scrollTop
+    : window.pageYOffset ||
+        document.documentElement.scrollTop ||
+        document.body.scrollTop ||
+        0;
+}
+/**平滑滚动 */
+const scrollToTitle = (id: string): void =>{
+  document.getElementById(id)?.scrollIntoView({
+    behavior: "smooth",
+    block: "start",
+    inline: "nearest",
+  });
+}
+
+const throttle = (func: Function, wait: number) => {
+  var timer: any = null;
+  return (...args: any) => {
+    if (!timer) {
+      timer = setTimeout(() => {
+        timer = null;
+        func.apply(this, args);
+      }, wait);
+    }
+  };
+};
 </script>
 <style lang="less" scoped>
-.layui-side-scroll-bar{
-  overflow-y: scroll; 
+.layui-side-scroll-bar {
+  overflow-y: scroll;
   max-width: 156px;
 }
 .layui-side-scroll::-webkit-scrollbar {
@@ -155,7 +218,7 @@ const handlerBtnClick = () => {
   }
 }
 .lay-aside-collapse-btn-collapse {
-  right:0px;
+  right: 0px;
 }
 
 @media screen and (max-width: 768px) {
@@ -171,8 +234,8 @@ const handlerBtnClick = () => {
   .lay-aside-list {
     max-width: 68px;
   }
-  .layui-side-scroll-bar{
+  .layui-side-scroll-bar {
     max-width: 68px;
-  }   
+  }
 }
 </style>
