@@ -37,7 +37,13 @@
       </lay-scroll>
     </lay-side>
     <lay-body>
-      <div style="padding: 20px; margin-right: 180px">
+      <div
+        style="
+          padding: 20px;
+          margin-right: 180px;
+          transition: margin 240ms 60ms;
+        "
+      >
         <router-view />
       </div>
     </lay-body>
