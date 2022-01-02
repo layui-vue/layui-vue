@@ -2900,7 +2900,7 @@ body .layui-table-tips .layui-layer-content {
   left: 0;
   top: 0;
   width: 0;
-  height: 5px;
+  height: 3px;
   background-color: #5fb878;
   transition: all 0.2s;
   -webkit-transition: all 0.2s;
@@ -3007,13 +3007,13 @@ body .layui-table-tips .layui-layer-content {
 .layui-nav-tree .layui-nav-item {
   display: block;
   width: 100%;
-  line-height: 40px;
+  line-height: 42px;
 }
 
 .layui-nav-tree .layui-nav-item a {
   position: relative;
-  height: 46px;
-  line-height: 46px;
+  height: 42px;
+  line-height: 42px;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
