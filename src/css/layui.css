@@ -2844,6 +2844,25 @@ body .layui-table-tips .layui-layer-content {
   color: #5fb878;
 }
 
+.layui-nav .layui-show.layui-anim-upbit .layui-show.layui-anim-upbit {
+  top: 0px;
+  left: 106px;
+}
+
+.layui-nav .layui-show.layui-anim-upbit .layui-nav-item {
+  display: block;
+  height: 40px;
+  line-height: 40px;
+}
+
+.layui-nav .layui-show.layui-anim-upbit .layui-nav-item.layui-this {
+  background-color: whitesmoke;
+}
+
+.layui-nav .layui-show.layui-anim-upbit .layui-nav-item.layui-this:after {
+  display: none;
+}
+
 .layui-nav {
   position: relative;
   padding: 0 20px;
@@ -2868,7 +2887,7 @@ body .layui-table-tips .layui-layer-content {
 
 .layui-nav .layui-nav-item a {
   display: block;
-  padding: 0 20px;
+  padding: 0 30px;
   color: #fff;
   color: rgba(255, 255, 255, 0.7);
   -webkit-transition: all 0.3s;
@@ -2917,7 +2936,7 @@ body .layui-table-tips .layui-layer-content {
 .layui-nav .layui-nav-more {
   position: absolute;
   top: 0;
-  right: 3px;
+  right: 8px;
   left: auto !important;
   margin-top: 0;
   font-size: 12.5px !important;
