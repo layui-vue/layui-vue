@@ -19,8 +19,10 @@
           <li>[新增] skeleton 骨架屏组件。</li>
           <li>[重构] tooltip 内部 popper 组件，支持移动到 tooltip 内部。</li>
           <li>[增强] layer 部分函数 msg open confirm 等, content 支持 VNode 类型。</li>
+          <li>[增强] menu 菜单组件, 初步支持无限级嵌套。</li>
           <li>[修复] layer.close layer.closeAll 函数无法触发 OutAnim 过度动画问题。</li>
-          <li>[升级] layer-vue 1.2.3。</li>
+          <li>[废弃] menu-child-item 组件, 使用 menu-item 替代。</li>
+          <li>[升级] layer-vue 1.2.4。</li>
         </ul> 
       </li>
     </ul>
