@@ -206,14 +206,6 @@ const throttle = (func: Function, wait: number) => {
   border-radius: 2px;
   cursor: pointer;
   transition: all 0.1s cubic-bezier(0, 0, 1, 1);
-  &:hover {
-    background-color: #f6f6f6 !important;
-    color: #5fb878;
-  }
-  &:active {
-    background-color: #f6f6f6 !important;
-    color: #89d89f;
-  }
 }
 .lay-aside-list {
   position: relative;
@@ -226,10 +218,16 @@ const throttle = (func: Function, wait: number) => {
     background-color: #f6f6f6 !important;
     color: #5fb878;
   }
-}
-.active {
-  background-color: #f6f6f6 !important;
-  color: #5fb878 !important;
+  &:active {
+    background-color: #f6f6f6 !important;
+    color: #89d89f;
+  }
+  &.active {
+    background-color: #f6f6f6 !important;
+    * {
+      color: #5fb878 !important;
+    }
+  }
 }
 
 .lay-aside-collapse-btn {
