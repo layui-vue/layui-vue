@@ -108,6 +108,7 @@ const handlerScroll = () => {
 
 const handlerCollapse = () => {
   iconType.value = show.value ? "layui-icon-right" : "layui-icon-left";
+  // @ts-ignore
   scrollRefEl.value!.firstElementChild!.style.marginRight = show.value
     ? "180px"
     : "0px";
@@ -118,7 +119,7 @@ watch(show, () => {
 });
 
 onMounted(() => {
-  // TODO 封装 hooks
+  // @ts-ignore TODO 封装 hooks
   scrollRefEl.value = document.querySelector(".layui-body");
   if (!scrollRefEl.value) {
     throw new Error(`scroll element is not existed: ".layui-body"`);
@@ -126,8 +127,8 @@ onMounted(() => {
   scrollRefEl.value.scrollTop = 0;
   scrollRefEl.value?.addEventListener("scroll", throttle(handlerScroll, 500));
   // 如果已折叠,关闭组件初始渲染时的动画,然后自动开启
-  show.value =
-    scrollRefEl.value!.firstElementChild!.style.marginRight !== "0px";
+  // @ts-ignore
+  show.value = scrollRefEl.value!.firstElementChild!.style.marginRight !== "0px";
   enableAnimation = show.value;
 });
 
