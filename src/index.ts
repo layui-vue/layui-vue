@@ -6,7 +6,7 @@ import "@layui/layer-vue/lib/index.css";
 import "@layui/icons-vue/lib/index.css";
 import { layer } from "@layui/layer-vue";
 
-import LayModal from "./module/layer/modal/index";
+import LayLayer from "./module/layer/index";
 import LayBacktop from "./module/backTop/index";
 import LayAvatar from "./module/avatar/index";
 import LayRadio from "./module/radio/index";
@@ -128,7 +128,7 @@ const components: Record<string, IDefineComponent> = {
   LayCarousel,
   LayCarouselItem,
   LayColorPicker,
-  LayModal,
+  LayLayer,
   LayTooltip,
   LayInputNumber,
   LaySkeleton,
@@ -205,7 +205,7 @@ export {
   LayCarousel,
   LayCarouselItem,
   LayColorPicker,
-  LayModal
+  LayLayer
 };
 
 export { layer };
