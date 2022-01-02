@@ -34,7 +34,7 @@
   "dependencies": {
     "@layui/hooks-vue": "^0.1.6",
     "@layui/icons-vue": "^1.0.2",
-    "@layui/layer-vue": "^1.2.3",
+    "@layui/layer-vue": "^1.2.4",
     "async-validator": "^4.0.7",
     "countup.js": "^2.0.8",
     "evtd": "^0.2.3",
