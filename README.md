@@ -76,7 +76,7 @@ createApp(App).use(Layui).mount('#app')
 
 > 在人的尺度里，世界既无始也无终，唯一的信仰是，总有人认得你站在暴风雪里的样子。  
 
-[![Giteye chart](https://images.gitee.com/uploads/images/2021/1223/004106_ca3f4b34_4835367.png)](https://giteye.net/chart/DBC9Z6HQ)
+[![Giteye chart](https://chart.giteye.net/gitee/layui-vue/layui-vue/DBC9Z6HQ.png)](https://giteye.net/chart/DBC9Z6HQ)
 
 ## 交流群
 
