@@ -1,0 +1,191 @@
+@width-height-pace: 20px;
+@step-color: #5FB878;
+
+.lay-step{
+  display: flex;
+  flex-wrap: nowrap;
+  .lay-step-item{
+    flex-grow: 1;
+  }
+
+  .is-item-center{
+    text-align: center;
+  }
+
+  .lay-step-item-last {
+    flex-grow: 0 !important;
+  }
+  .lay-step-item-pace{
+    width: @width-height-pace;
+    height: @width-height-pace;
+    border: 2px #8D8D8D solid;
+    border-radius: 50%;
+    text-align: center;
+    line-height: @width-height-pace;
+    background: #FFFFFF;
+  }
+  .is-center{
+    margin: 0 auto;
+  }
+  .lay-step-item-active{
+    border: 2px @step-color solid;
+    color: #FFFFFF;
+    background: @step-color;
+  }
+  .lay-step-item-wait{
+    border: 2px #000000 solid;
+    color: #000000;
+  }
+
+  .lay-step-item--success {
+    border: 2px @step-color solid;
+    color: #FFFFFF;
+    background: @step-color;
+  }
+
+  .lay-step-item--fail{
+    border: 2px #FF5722 solid;
+    color: #FFFFFF;
+    background: #FF5722;
+  }
+
+  .lay-step-item--warning{
+    border: 2px #FFB800 solid;
+    color: #FFFFFF;
+    background: #FFB800;
+  }
+  .lay-step-item--primary{
+    border: 2px #1E9FFF solid;
+    color: #FFFFFF;
+    background: #1E9FFF;
+  }
+
+  .lay-step-item-success {
+    border: 2px @step-color solid;
+    color: #FFFFFF;
+    background: @step-color;
+  }
+
+  .lay-step-item-fail{
+    border: 2px #FF5722 solid;
+    color: #FFFFFF;
+    background: #FF5722;
+  }
+
+  .lay-step-item-warning{
+    border: 2px #FFB800 solid;
+    color: #FFFFFF;
+    background: #FFB800;
+  }
+  .lay-step-item-primary{
+    border: 2px #1E9FFF solid;
+    color: #FFFFFF;
+    background: #1E9FFF;
+  }
+
+  .lay-step-item-content{
+    color: #8D8D8D;
+    .lay-step-item-content-title{
+      font-weight: bold;
+      font-size: 16px;
+    }
+  }
+
+  .lay-step-item-content-active{
+    color: @step-color;
+  }
+
+  .lay-step-item-content--success{
+    color: @step-color;
+  }
+  .lay-step-item-content--fail{
+    color: #FF5722;
+  }
+  .lay-step-item-content--warning{
+    color: #FFB800;
+  }
+  .lay-step-item-content--primary{
+    color: #1E9FFF;
+  }
+
+  .lay-step-item-content-wait{
+    color: #000000;
+  }
+  .lay-step-item-content-success{
+    color: @step-color;
+  }
+  .lay-step-item-content-fail{
+    color: #FF5722;
+  }
+  .lay-step-item-content-warning{
+    color: #FFB800;
+  }
+  .lay-step-item-content-primary{
+    color: #1E9FFF;
+  }
+
+
+  .lay-step-item-line{
+    position: relative;
+  }
+
+  .lay-step-item-line:before {
+    z-index: -1;
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: block;
+    height: 2px;
+    width: 100%;
+    background: #C9C5C5;
+  }
+  .is-line-center:before {
+    left: 50%;
+  }
+
+  .lay-step-item-line-active:before {
+    transition: background 150ms;
+    background: #5FB878 !important;
+  }
+
+  .lay-step-item-line-fail:before {
+    transition: background 150ms;
+    background: #FF5722 !important;
+  }
+
+  .lay-step-item-line-warning:before {
+    transition: background 150ms;
+    background: #FFB800 !important;
+  }
+
+  .lay-step-item-line-primary:before {
+    transition: background 150ms;
+    background: #1E9FFF !important;
+  }
+
+}
+.lay-step-column {
+  height: 100%;
+  flex-flow: column;
+  .lay-step-item-line{
+    position: relative;
+    height: 100%;
+    width: 24px;
+  }
+  .lay-step-item-line:before {
+    z-index: -1;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    display: block;
+    width: 2px;
+    height: 100%;
+    background: #C9C5C5;
+  }
+  .is-vertical{
+    display: flex;
+  }
+}
