@@ -74,8 +74,7 @@ createApp(App).use(Layui).mount('#app')
 
 ### 贡献代码
 
-> 大概是因为 layui - vue 让开发者变得更懒，所以贡献者才这么少？  
-> 好的，姑且就这样认为吧。
+> 在人的尺度里，世界既无始也无终，唯一的信仰是，总有人认得你站在暴风雪里的样子。？  
 
 [![Giteye chart](https://images.gitee.com/uploads/images/2021/1223/004106_ca3f4b34_4835367.png)](https://giteye.net/chart/DBC9Z6HQ)
 
