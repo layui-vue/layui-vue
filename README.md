@@ -70,7 +70,7 @@ createApp(App).use(Layui).mount('#app')
 
 ### 使用趋势
 
-[![Giteye chart](https://images.gitee.com/uploads/images/2021/1222/233241_e13a5449_4835367.png)](https://giteye.net/chart/5ZQ67WWS)
+[![Giteye chart](https://chart.giteye.net/gitee/layui-vue/layui-vue/5ZQ67WWS.png)](https://giteye.net/chart/5ZQ67WWS)
 
 ### 贡献代码
 
