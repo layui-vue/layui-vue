@@ -67,8 +67,10 @@ import LayCarouselItem from "./module/carouselItem/index";
 import LayColorPicker from "./module/colorPicker/index";
 import LayTooltip from "./module/tooltip/index";
 import LayInputNumber from "./module/inputNumber/index";
-import LaySkeleton from './module/skeleton/index';
-import LaySkeletonItem from './module/skeletonItem/index';
+import LaySkeleton from "./module/skeleton/index";
+import LaySkeletonItem from "./module/skeletonItem/index";
+import LayStep from "./module/step/index";
+import LayStepItem from "./module/stepItem/index";
 
 const components: Record<string, IDefineComponent> = {
   LayRadio,
@@ -134,6 +136,8 @@ const components: Record<string, IDefineComponent> = {
   LaySkeleton,
   LaySkeletonItem,
   LayCountUp,
+  LayStep,
+  LayStepItem,
 };
 
 const install = (app: App, options?: InstallOptions): void => {
@@ -146,6 +150,8 @@ const install = (app: App, options?: InstallOptions): void => {
 };
 
 export {
+  LayStep,
+  LayStepItem,
   LaySkeleton,
   LaySkeletonItem,
   LayRadio,
@@ -205,7 +211,7 @@ export {
   LayCarousel,
   LayCarouselItem,
   LayColorPicker,
-  LayModal
+  LayModal,
 };
 
 export { layer };

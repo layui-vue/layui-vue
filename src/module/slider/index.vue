@@ -108,13 +108,13 @@ const props = withDefaults(defineProps<LaySliderProps>(), {
 
 let rangeValue: Ref<number[]> = ref([0, 0]);
 if (Array.isArray(props.modelValue)) {
-  // eslint-disable-next-line vue/no-setup-props-destructure
+  // eslint-disable-next-line vue/no-step-props-destructure
   rangeValue.value = props.modelValue;
 }
 
 let verticalRangeValue: Ref<number[]> = ref([0, 0]);
 if (Array.isArray(props.modelValue)) {
-  // eslint-disable-next-line vue/no-setup-props-destructure
+  // eslint-disable-next-line vue/no-step-props-destructure
   verticalRangeValue.value = props.modelValue;
 }
 
