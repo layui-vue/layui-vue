@@ -1,6 +1,6 @@
 <p align="center">
   <a href="http://www.layui.com">
-    <img src="https://images.gitee.com/uploads/images/2021/1213/173638_d6911839_4835367.png" alt="layui" width="360">
+    <img src="https://images.gitee.com/uploads/images/2022/0104/135039_3f41c467_4835367.png" alt="layui" width="360">
   </a>
 </p>
 
@@ -74,14 +74,15 @@ createApp(App).use(Layui).mount('#app')
 
 ### 贡献代码
 
-> 大概是因为 layui - vue 让开发者变得更懒，所以贡献者才这么少？  
-> 好的，姑且就这样认为吧。
+> 在人的尺度里，世界既无始也无终，唯一的信仰是，总有人认得你站在暴风雪里的样子。  
 
 [![Giteye chart](https://chart.giteye.net/gitee/layui-vue/layui-vue/DBC9Z6HQ.png)](https://giteye.net/chart/DBC9Z6HQ)
 
 ## 交流群
 
-![输入图片说明](https://images.gitee.com/uploads/images/2021/1008/090410_8b349271_4835367.png 'QQ图片20211008090242.png')
+| QQ | 微信 |
+|----|----|
+| <img src="https://images.gitee.com/uploads/images/2021/1008/090410_8b349271_4835367.png" width="180px" />  | <img src="https://images.gitee.com/uploads/images/2022/0103/195713_7e626723_4835367.png" width="180px" /> |
 
 ## 相关
 

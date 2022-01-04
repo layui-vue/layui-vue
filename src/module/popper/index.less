@@ -14,20 +14,20 @@
     @attr : ~'[position=@{position}]';
     &{
         border: 1px solid @m-border-color;
-        &.layui-popper@{attr}{
-        margin-@{contrary_position}: 6px;
-        .layui-popper-arrow {
-            @{contrary_position}: -6px;
-            border-@{contrary_position}-width: 0;
-            border-@{position}-color: @m-border-color;
-            &::after{
-                @{contrary_position}: 1px;
+        &@{attr}{
+            margin-@{contrary_position}: 6px;
+            .layui-popper-arrow {
+                @{contrary_position}: -6px;
                 border-@{contrary_position}-width: 0;
-                margin-@{margin_postion}: -6px;
-                border-@{position}-color: @color; 
+                border-@{position}-color: @m-border-color;
+                &::after{
+                    @{contrary_position}: 1px;
+                    border-@{contrary_position}-width: 0;
+                    margin-@{margin_postion}: -6px;
+                    border-@{position}-color: @color; 
+                }
             }
         }
-    }
     }
 }
 // 统一设置四个方向的主题
@@ -43,7 +43,7 @@
 // 箭头默认居中
 .arrow-default-center(@position, @prop) {
     @attr : ~'[position=@{position}]';
-    &.layui-popper@{attr} {
+    &@{attr} {
         .layui-popper-arrow{
             @{prop}: -moz-calc(50% - 6px);
             @{prop}: -webkit-calc(50% - 6px);
@@ -56,6 +56,23 @@
     .arrow-default-center(bottom, left);
     .arrow-default-center(left, top);
     .arrow-default-center(right, top);
+}
+
+// 填充popper，支持可以移动到popper使用到
+.single-fill-popper(@position, @contrary_position, @zeroPosition, @all, @seven){
+    @attr : ~'[position=@{position}]';
+    &@{attr}::after{
+        @{contrary_position}: -7px;
+        @{zeroPosition}: 0;
+        @{all}: 100%;
+        @{seven}: 7px;
+    }
+}
+.fill-popper(){
+    .single-fill-popper(top, bottom, left, width, height);
+    .single-fill-popper(bottom, top, left, width, height);
+    .single-fill-popper(left, right, bottom, height, width);
+    .single-fill-popper(right, left, bottom, height, width);
 }
 
 // 样式开始
@@ -76,9 +93,17 @@
     // 箭头默认居中
     .all-arrow-default-center();
 
+    &::after{
+        content: " ";
+        position: absolute;
+        display: block;
+    }
+    // 填充
+    .fill-popper();
+
     .layui-popper-arrow {
         &,&::after{
-             position: absolute;
+            position: absolute;
             display: block;
             width: 0;
             height: 0;

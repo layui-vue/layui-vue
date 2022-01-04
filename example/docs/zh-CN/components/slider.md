@@ -1,3 +1,6 @@
+::: anchor
+:::
+
 ::: title 横向
 :::
 
@@ -63,6 +66,28 @@ export default {
     const value3 = ref([20,50])
     return {
       value3
+    }
+  }
+}
+</script>
+:::
+
+::: title 纵向区间
+:::
+
+::: demo
+
+<template>
+  <lay-slider v-model="value3" :range="true" :vertical="true"></lay-slider>
+</template>
+
+<script>
+import { ref } from 'vue'
+export default {
+  setup() {
+    const value4 = ref([20,50])
+    return {
+      value4
     }
   }
 }

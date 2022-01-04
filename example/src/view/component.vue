@@ -37,7 +37,13 @@
       </lay-scroll>
     </lay-side>
     <lay-body>
-      <div style="padding: 20px">
+      <div
+        style="
+          padding: 20px;
+          margin-right: 180px;
+          transition: margin 240ms 60ms;
+        "
+      >
         <router-view />
       </div>
     </lay-body>
@@ -98,6 +104,12 @@ export default {
         id: 1,
         title: '布局',
         children: [
+          {
+            id: 111,
+            title: '骨架屏',
+            subTitle: 'skeleton',
+            path: '/zh-CN/components/skeleton',
+          },
           {
             id: 4,
             title: '布局',

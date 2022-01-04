@@ -9,14 +9,11 @@
         <lay-col md="2">
             就眠仪式
         </lay-col>
-        <lay-col md="6">
+        <lay-col md="10">
             焦点：layui-vue
         </lay-col>
         <lay-col md="4">
-            地点：China Beijing
-        </lay-col>
-        <lay-col md="5">
-            生态：Pear Admin
+            地点：中国 北京
         </lay-col>
         <lay-col md="6">
             其他：Gitee Github
@@ -31,14 +28,11 @@
         <lay-col md="2">
             落小梅
         </lay-col>
-        <lay-col md="6">
+        <lay-col md="10">
             焦点：tree table
         </lay-col>
         <lay-col md="4">
-            地点：China Hunan
-        </lay-col>
-        <lay-col md="5">
-            生态：Pear Admin
+            地点：中国 湖南
         </lay-col>
         <lay-col md="6">
             其他：Gitee Github
@@ -54,14 +48,11 @@
         <lay-col md="2">
             halo
         </lay-col>
-        <lay-col md="6">
+        <lay-col md="10">
             焦点：slider
         </lay-col>
         <lay-col md="4">
-            地点：China Beijing
-        </lay-col>
-        <lay-col md="5">
-            生态：暂无
+            地点：中国 北京
         </lay-col>
         <lay-col md="6">
             其他：Gitee Github
@@ -77,17 +68,14 @@
         <lay-col md="2">
             须弥
         </lay-col>
-        <lay-col md="6">
+        <lay-col md="10">
             焦点：layui-vue
         </lay-col>
         <lay-col md="4">
-            地点：未知
-        </lay-col>
-        <lay-col md="5">
-            生态：暂无
+            地点：中国 广州
         </lay-col>
         <lay-col md="6">
-            其他：Gitee Github
+            其他：<a href="https://gitee.com/xumisky">Gitee</a> <a href="https://github.com/xumiSky">Github</a>
         </lay-col>
     </lay-row>
 </lay-card>
@@ -100,14 +88,11 @@
         <lay-col md="2">
             Sight
         </lay-col>
-        <lay-col md="6">
+        <lay-col md="10">
             焦点：count-up backtop
         </lay-col>
         <lay-col md="4">
-            地点：未知
-        </lay-col>
-        <lay-col md="5">
-            生态：暂无
+            地点：中国 未知
         </lay-col>
         <lay-col md="6">
             其他：Gitee Github
@@ -123,14 +108,31 @@
         <lay-col md="2">
             finalsummer
         </lay-col>
-        <lay-col md="6">
+        <lay-col md="10">
             焦点：layer-vue
         </lay-col>
         <lay-col md="4">
-            地点：未知
+            地点：中国 未知
         </lay-col>
-        <lay-col md="5">
-            生态：暂无
+        <lay-col md="6">
+            其他：Gitee Github
+        </lay-col>
+    </lay-row>
+</lay-card>
+
+<lay-card>
+    <lay-row>
+        <lay-col md="1">
+            <lay-avatar src="http://mms0.baidu.com/it/u=1690972933,1482111264&fm=253&app=138&f=JPEG&fmt=auto&q=75?w=500&h=500"></lay-avatar>
+        </lay-col>
+        <lay-col md="2">
+            莫名点
+        </lay-col>
+        <lay-col md="10">
+            焦点：skeleton
+        </lay-col>
+        <lay-col md="4">
+            地点：中国 未知
         </lay-col>
         <lay-col md="6">
             其他：Gitee Github

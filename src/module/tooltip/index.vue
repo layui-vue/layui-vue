@@ -1,8 +1,15 @@
+<template>
+  <slot></slot>
+  <lay-popper v-if="isMounted" v-bind="innerProps"></lay-popper>
+</template>
 <script lang="ts">
-import usePopper from "../popper/usePopper";
-import { defineComponent } from "vue";
+import LayPopper from "../popper/index.vue";
+import { defineComponent, ref } from "vue";
 export default defineComponent({
   name: "LayTooltip",
+  components: {
+    LayPopper
+  },
   props: {
     content: {
       type: [Number, String],
@@ -22,21 +29,26 @@ export default defineComponent({
     },
     visible: {
       type: Boolean,
-      default: true,
+      default: false,
     },
     isCanHide: {
       type: Boolean,
       default: true,
     },
   },
+  setup(){
+    const isMounted = ref(false);
+    return {
+      isMounted
+    }
+  },
+  computed: {
+    innerProps(){
+      return {el: this.$el.nextElementSibling, ...this.$props};
+    }
+  },
   mounted() {
-    const _this = this;
-    this.$nextTick(() => {
-      usePopper.createPopper(_this.$el, _this.$props, "hover");
-    });
-  },
-  render() {
-    return this.$slots.default && this.$slots.default()[0];
-  },
+    this.$nextTick(() => this.isMounted = true);
+  }
 });
 </script>

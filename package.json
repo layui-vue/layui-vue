@@ -1,6 +1,6 @@
 {
   "name": "@layui/layui-vue",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "author": "sleeprite",
   "license": "MIT",
   "description": "a component library for Vue 3 base on layui-vue",
@@ -26,14 +26,14 @@
     "build": "vite build --emptyOutDir && npm run build:types",
     "build:types": "rimraf types && tsc -d",
     "build:example": "vite build example",
-    "lint:eslint": "eslint \"src/**/*.{vue,ts,tsx}\" --fix",
-    "lint:prettier": "prettier --write  \"src/**/*.{js,json,tsx,css,less,scss,vue,html,md}\"",
+    "lint:eslint": "eslint 'src/**/*.{vue,ts,tsx}' --fix",
+    "lint:prettier": "prettier --write  'src/**/*'",
     "commit": "git cz"
   },
   "dependencies": {
     "@layui/hooks-vue": "^0.1.6",
     "@layui/icons-vue": "^1.0.2",
-    "@layui/layer-vue": "^1.2.2",
+    "@layui/layer-vue": "^1.2.4",
     "async-validator": "^4.0.7",
     "countup.js": "^2.0.8",
     "evtd": "^0.2.3",
