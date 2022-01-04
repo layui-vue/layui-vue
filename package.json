@@ -28,7 +28,8 @@
     "build:example": "vite build example",
     "lint:eslint": "eslint 'src/**/*.{vue,ts,tsx}' --fix",
     "lint:prettier": "prettier --write  'src/**/*'",
-    "commit": "git cz"
+    "commit": "git cz",
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
     "@layui/hooks-vue": "^0.1.6",
