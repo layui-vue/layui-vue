@@ -75,7 +75,40 @@ export default {
 
 :::
 
-::: title timeline-item attributes
+
+::: title 节点插槽
+:::
+
+::: demo
+
+<template>
+    <lay-timeline>
+        <lay-timeline-item title="2021年，layui vue 里程碑版本 1.0 发布" simple></lay-timeline-item>
+        <lay-timeline-item title="2017年，layui 里程碑版本 2.0 发布" simple></lay-timeline-item>
+        <lay-timeline-item title="2016年，layui 首个版本发布" simple></lay-timeline-item>
+        <lay-timeline-item title="2015年，layui 孵化" simple>
+            <template #dot>
+                <lay-icon type="layui-icon-face-smile" color="red"></lay-icon>
+            </template>
+        </lay-timeline-item>
+    </lay-timeline>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    return {
+    }
+  }
+}
+</script>
+
+:::
+
+::: title Timeline Item 属性
 :::
 
 ::: table
@@ -84,6 +117,17 @@ export default {
 | ------ | -------- | --- |
 | simple | 简单模式 | --  |
 | title  | 标题     | --  |
+
+:::
+
+::: title Timeline Item 属性
+:::
+
+::: table
+
+|        |          |     |
+| ------ | -------- | --- |
+| dot | 节点 | --  |
 
 :::
 
