@@ -2,11 +2,8 @@ import container from 'markdown-it-container'
 import type Token from 'markdown-it/lib/token'
 
 type ContainerArgs = [
-  typeof container,
-  string,
-  {
-    render(tokens: Token[], idx: number): string
-  }
+  typeof container, string,
+  { render(tokens: Token[], idx: number): string }
 ]
 
 export default function createContainer(

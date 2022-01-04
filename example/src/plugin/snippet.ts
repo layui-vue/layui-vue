@@ -19,13 +19,8 @@ export default (md: MarkdownIt): void => {
     }
     const start = pos + 3
     const end = state.skipSpacesBack(max, pos)
-    const rawPath = state.src
-      .slice(start, end)
-      .trim()
-      .replace(/^@/, process.cwd())
-    const content = fs.existsSync(rawPath)
-      ? fs.readFileSync(rawPath).toString()
-      : 'Not found: ' + rawPath
+    const rawPath = state.src.slice(start, end).trim().replace(/^@/, process.cwd())
+    const content = fs.existsSync(rawPath) ? fs.readFileSync(rawPath).toString() : 'Not found: ' + rawPath
     const meta = rawPath.replace(rawPath, '')
     state.line = startLine + 1
     const token = state.push('fence', 'code', 0)

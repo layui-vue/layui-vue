@@ -8,9 +8,9 @@
 
 <template>
   <lay-button @click="changeVisible1" type="primary">基础使用</lay-button>
-  <lay-modal title="基础使用" v-model="visible1">
+  <lay-layer title="基础使用" v-model="visible1">
       内容  
-  </lay-modal>
+  </lay-layer>
 </template>
 
 <script>
@@ -41,9 +41,9 @@ export default {
 
 <template>
   <lay-button @click="changeVisible2" type="primary">允许拖动</lay-button>
-  <lay-modal title="允许拖动" v-model="visible2">
+  <lay-layer title="允许拖动" v-model="visible2">
       内容  
-  </lay-modal>
+  </lay-layer>
 </template>
 
 <script>
@@ -74,9 +74,9 @@ export default {
 
 <template>
   <lay-button @click="changeVisible3" type="primary">放大缩小</lay-button>
-  <lay-modal title="放大缩小" v-model="visible3" move="true" maxmin="true">
+  <lay-layer title="放大缩小" v-model="visible3" move="true" maxmin="true">
       内容  
-  </lay-modal>
+  </lay-layer>
 </template>
 
 <script>
@@ -107,9 +107,9 @@ export default {
 
 <template>
   <lay-button @click="changeVisible4" type="primary">指定位置</lay-button>
-  <lay-modal title="指定位置" v-model="visible4" move="true" :offset="['100px','100px']">
+  <lay-layer title="指定位置" v-model="visible4" move="true" :offset="['100px','100px']">
       内容  
-  </lay-modal>
+  </lay-layer>
 </template>
 
 <script>
@@ -140,9 +140,9 @@ export default {
 
 <template>
   <lay-button @click="changeVisible8" type="primary">尺寸拉伸</lay-button>
-  <lay-modal title="拉伸尺寸" resize="true" v-model="visible8" move="true">
+  <lay-layer title="拉伸尺寸" resize="true" v-model="visible8" move="true">
       内容  
-  </lay-modal>
+  </lay-layer>
 </template>
 
 <script>
@@ -173,7 +173,7 @@ export default {
 
 <template>
   <lay-button @click="changeVisible5" type="primary">远程窗体</lay-button>
-  <lay-modal title="加载 Iframe 内容" width="500px" height="400px" maxmin="true" v-model="visible5" move="true" :type="type5" content="http://www.pearadmin.com"></lay-modal>
+  <lay-layer title="加载 Iframe 内容" width="500px" height="400px" maxmin="true" v-model="visible5" move="true" :type="type5" content="http://www.pearadmin.com"></lay-layer>
 </template>
 
 <script>
@@ -206,9 +206,9 @@ export default {
 
 <template>
   <lay-button @click="changeVisible6" type="primary">定义操作</lay-button>
-  <lay-modal title="定义操作" v-model="visible6" move="true" :btn="btn6">
+  <lay-layer title="定义操作" v-model="visible6" move="true" :btn="btn6">
       内容  
-  </lay-modal>
+  </lay-layer>
 </template>
 
 <script>
@@ -244,9 +244,9 @@ export default {
 
 <template>
   <lay-button @click="changeVisible7" type="primary">开启遮盖</lay-button>
-  <lay-modal title="开启遮盖" move="true" shade="false" v-model="visible7">
+  <lay-layer title="开启遮盖" move="true" shade="false" v-model="visible7">
     内容  
-  </lay-modal>
+  </lay-layer>
 </template>
 
 <script>
@@ -329,6 +329,7 @@ export default {
 | content         | 内容          | --                         |
 | shade           | 开启遮盖      | --                         |
 | shadeClose      | 遮盖点击关闭  | --                         |
+| shadeOpacity    | 遮盖层透明度  | `0.1`                         |
 | zIndex          | 自定义层级    | --                         |
 | type            | 类型          | `1: component` `2: iframe` |
 | closeBtn        | 显示关闭      | true                       |
@@ -336,6 +337,8 @@ export default {
 | btnAlign        | 按钮布局      | `l` `r` `c`                |
 | anim            | 入场动画      | `0` `-` `6`                |
 | isOutAnim       | 关闭动画      | `true` `false`             |
+| success            | 显示回调   | --                |
+| end       | 关闭回调      | --             |
 
 :::
 

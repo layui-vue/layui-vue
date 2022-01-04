@@ -6,7 +6,7 @@ import "@layui/layer-vue/lib/index.css";
 import "@layui/icons-vue/lib/index.css";
 import { layer } from "@layui/layer-vue";
 
-import LayModal from "./module/layer/modal/index";
+import LayLayer from "./module/layer/index";
 import LayBacktop from "./module/backTop/index";
 import LayAvatar from "./module/avatar/index";
 import LayRadio from "./module/radio/index";
@@ -40,7 +40,6 @@ import LayContainer from "./module/container/index";
 import LayCountUp from "./module/countUp/index";
 import LayMenu from "./module/menu/index";
 import LayMenuItem from "./module/menuItem/index";
-import LayMenuChildItem from "./module/menuChildItem/index";
 import LayCheckbox from "./module/checkbox/index";
 import LayCheckboxGroup from "./module/checkboxGroup/index";
 import LayForm from "./module/form/index";
@@ -103,7 +102,6 @@ const components: Record<string, IDefineComponent> = {
   LayContainer,
   LayMenu,
   LayMenuItem,
-  LayMenuChildItem,
   LayCheckbox,
   LayForm,
   LayBreadcrumb,
@@ -130,7 +128,7 @@ const components: Record<string, IDefineComponent> = {
   LayCarousel,
   LayCarouselItem,
   LayColorPicker,
-  LayModal,
+  LayLayer,
   LayTooltip,
   LayInputNumber,
   LaySkeleton,
@@ -184,7 +182,6 @@ export {
   LayContainer,
   LayMenu,
   LayMenuItem,
-  LayMenuChildItem,
   LayCheckbox,
   LayForm,
   LayBreadcrumb,
@@ -211,7 +208,7 @@ export {
   LayCarousel,
   LayCarouselItem,
   LayColorPicker,
-  LayModal,
+  LayLayer
 };
 
 export { layer };
