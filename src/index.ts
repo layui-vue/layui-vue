@@ -70,6 +70,7 @@ import LaySkeleton from "./module/skeleton/index";
 import LaySkeletonItem from "./module/skeletonItem/index";
 import LayStep from "./module/step/index";
 import LayStepItem from "./module/stepItem/index";
+import LaySubMenu from "./module/subMenu/index"
 
 const components: Record<string, IDefineComponent> = {
   LayRadio,
@@ -136,6 +137,7 @@ const components: Record<string, IDefineComponent> = {
   LayCountUp,
   LayStep,
   LayStepItem,
+  LaySubMenu
 };
 
 const install = (app: App, options?: InstallOptions): void => {
@@ -148,13 +150,9 @@ const install = (app: App, options?: InstallOptions): void => {
 };
 
 export {
-  LayStep,
-  LayStepItem,
-  LaySkeleton,
-  LaySkeletonItem,
   LayRadio,
-  LayIcon,
   LayButton,
+  LayIcon,
   LayBacktop,
   LayLayout,
   LaySide,
@@ -208,7 +206,15 @@ export {
   LayCarousel,
   LayCarouselItem,
   LayColorPicker,
-  LayLayer
+  LayLayer,
+  LayTooltip,
+  LayInputNumber,
+  LaySkeleton,
+  LaySkeletonItem,
+  LayCountUp,
+  LayStep,
+  LayStepItem,
+  LaySubMenu
 };
 
 export { layer };

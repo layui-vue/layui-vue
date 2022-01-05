@@ -2885,12 +2885,10 @@ body .layui-table-tips .layui-layer-content {
   line-height: 60px;
 }
 
-.layui-nav .layui-nav-item a {
+.layui-nav .layui-nav-item >  a {
   display: block;
   padding: 0 30px;
-  color: #fff;
   color: rgba(255, 255, 255, 0.7);
-  -webkit-transition: all 0.3s;
 }
 
 .layui-nav .layui-this:after,
@@ -3010,18 +3008,18 @@ body .layui-table-tips .layui-layer-content {
   line-height: 42px;
 }
 
-.layui-nav-tree .layui-nav-item a {
+.layui-nav-tree .layui-nav-item > a {
   position: relative;
   height: 42px;
   line-height: 42px;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
+  padding: 5px 30px 5px 30px;
 }
 
-.layui-nav-tree .layui-nav-item > a {
-  padding-top: 5px;
-  padding-bottom: 5px;
+.layui-nav-tree .layui-nav-item * {
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .layui-nav-tree .layui-nav-more {
