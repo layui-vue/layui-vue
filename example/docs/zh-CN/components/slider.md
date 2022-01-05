@@ -75,14 +75,14 @@ export default {
 ::: demo
 
 <template>
-  <lay-slider v-model="value3" :range="true" :vertical="true"></lay-slider>
+  <lay-slider v-model:verticalrange="value4" :range="true" :vertical="true"></lay-slider>
 </template>
 
 <script>
 import { ref } from 'vue'
 export default {
   setup() {
-    const value4 = ref([20,50])
+    const value4 = ref([23,56])
     return {
       value4
     }
