@@ -5,7 +5,14 @@
 </template>
 
 <script setup name="layStep" lang="ts">
-import { ref, watch, provide, defineProps, withDefaults } from "vue";
+import {
+  ref,
+  watch,
+  provide,
+  defineProps,
+  withDefaults,
+  defineEmits,
+} from "vue";
 import "./index.less";
 
 export interface LayStepProps {
@@ -14,6 +21,8 @@ export interface LayStepProps {
   direction?: string;
   space?: string;
   currentStatus?: string;
+  composition?: string;
+  simple?: boolean;
 }
 
 const props = withDefaults(defineProps<LayStepProps>(), {
@@ -21,10 +30,18 @@ const props = withDefaults(defineProps<LayStepProps>(), {
   center: false,
   direction: "horizontal",
   space: "auto",
-  currentStatus: "primary",
+  currentStatus: "success",
+  composition: "default",
+  simple: false,
 });
 
 const steps = ref([]);
+
+const emits = defineEmits(["onChange"]);
+
+const change = (index) => {
+  emits("onChange", index - 1);
+};
 
 watch(steps, () => {
   steps.value.forEach(
@@ -37,6 +54,7 @@ watch(steps, () => {
 provide("LayStep", {
   props,
   steps,
+  change,
 });
 </script>
 

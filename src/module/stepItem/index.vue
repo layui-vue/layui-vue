@@ -1,8 +1,9 @@
 <template>
   <div
+    v-if="!simple"
     :class="[
       'lay-step-item',
-      isLast && !isCenter ? 'lay-step-item-last' : '',
+      isLast && !isCenter && composition !== 'row' ? 'lay-step-item-last' : '',
       isCenter ? 'is-item-center' : '',
       isVertical ? 'is-vertical' : '',
     ]"
@@ -27,6 +28,7 @@
           isWait ? 'lay-step-item-wait' : '',
           isCenter ? 'is-center' : '',
         ]"
+        @click="onChange(index + 1)"
       >
         <slot name="pace">
           <template v-if="icon">
@@ -42,20 +44,40 @@
         </slot>
       </div>
     </div>
-    <slot>
-      <div
-        :class="[
-          'lay-step-item-content',
-          isActive ? `lay-step-item-content-active` : '',
-          isCurrent === index ? `lay-step-item-content--${currentStatus}` : '',
-          status ? `lay-step-item-content-${status}` : '',
-          isWait ? 'lay-step-item-content-wait' : '',
-        ]"
-      >
+    <div
+      :class="[
+        'lay-step-item-content',
+        composition === 'row' ? 'lay-step-item-content-row' : '',
+        isActive ? `lay-step-item-content-active` : '',
+        isCurrent === index ? `lay-step-item-content--${currentStatus}` : '',
+        status ? `lay-step-item-content-${status}` : '',
+        isWait ? 'lay-step-item-content-wait' : '',
+      ]"
+      @click="onChange(index + 1)"
+    >
+      <slot>
         <div class="lay-step-item-content-title">{{ title }}</div>
         <p>{{ content }}</p>
-      </div>
-    </slot>
+      </slot>
+    </div>
+  </div>
+  <div
+    v-else
+    :class="[
+      'lay-step-item',
+      'lay-step-simple',
+      !isStart ? 'lay-step-item-simple' : '',
+      'lay-step-item-simple-border',
+      isActive ? 'lay-step-item-simple-active' : '',
+      isCurrent === index ? `lay-step-item-simple-${currentStatus}` : '',
+      isCurrentBorder === index
+        ? `lay-step-item-simple-${currentStatus}-border`
+        : '',
+      isSimpleActive ? 'lay-step-item-simple-active-border' : '',
+    ]"
+    @click="onChange(index + 1)"
+  >
+    <slot>{{ index + 1 }}.{{ title }}</slot>
   </div>
 </template>
 
@@ -95,6 +117,10 @@ const setIndex = (val: number) => {
   index.value = val;
 };
 
+const onChange = (index) => {
+  parents.change(index);
+};
+
 const stepsCount = computed(() => {
   return parents.steps.value.length;
 });
@@ -102,10 +128,21 @@ const stepsCount = computed(() => {
 const currentStatus = computed(() => {
   return parents.props.currentStatus;
 });
+
+const simple = computed(() => {
+  return parents.props.simple;
+});
+
+const composition = computed(() => {
+  return parents.props.composition;
+});
 const isCurrent = computed(() => {
   return parents.props.active;
 });
-console.log(isCurrent);
+
+const isCurrentBorder = computed(() => {
+  return parents.props.active + 1;
+});
 const space = computed(() => {
   return parents.props.space;
 });
@@ -126,6 +163,10 @@ const isWait: ComputedRef<boolean> = computed(() => {
   return index.value === parents.props.active + 1;
 });
 
+const isSimpleActive: ComputedRef<boolean> = computed(() => {
+  return index.value - 1 <= parents.props.active;
+});
+
 const isActive: ComputedRef<boolean> = computed(() => {
   return index.value <= parents.props.active;
 });
@@ -133,6 +174,10 @@ const isLast: ComputedRef<boolean> = computed(() => {
   return (
     parents.steps.value[stepsCount.value - 1]?.itemId === currentInstance.uid
   );
+});
+
+const isStart: ComputedRef<boolean> = computed(() => {
+  return parents.steps.value[0]?.itemId === currentInstance.uid;
 });
 
 const stepItemState = reactive({

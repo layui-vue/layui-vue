@@ -15,8 +15,50 @@
         <lay-step-item></lay-step-item>
         <lay-step-item></lay-step-item>
     </lay-step>
-<lay-button size="xs" @click="nexts">下一步</lay-button>
-<lay-button size="xs" @click="previous">上一步</lay-button>
+    <div style="margin-top: 10px">
+        <lay-button size="xs" @click="previous">上一步</lay-button>
+        <lay-button size="xs" @click="nexts">下一步</lay-button>
+    </div>
+</div>
+</template>
+
+<script>
+import { ref } from 'vue';
+
+export default {
+  setup() {
+    const loading = ref(true);
+    const active = ref(-1);
+    const nexts = () => {
+      if (active.value++ >=3) active.value = 0
+    };
+    const previous = () => {
+      if (active.value-- ===0) active.value = 0
+    };
+    return {
+        loading,
+        active
+    }
+  }
+}
+</script>
+
+:::
+
+::: title composition 为row 的排版
+:::
+
+
+::: demo
+
+<template>
+<div>
+    <lay-step :active="active" composition="row">
+        <lay-step-item title="First" content="First step"></lay-step-item>
+        <lay-step-item title="Second" content="Second step"></lay-step-item>
+        <lay-step-item title="Third" content="Third step"></lay-step-item>
+        <lay-step-item title="Fourth" content="Fourth step"></lay-step-item>
+    </lay-step>
 </div>
 </template>
 
@@ -96,8 +138,8 @@ export default {
         <lay-step-item title="Second" content="Second step"></lay-step-item>
         <lay-step-item title="Third" content="Third step"></lay-step-item>
     </lay-step>
-<lay-button size="xs" @click="next">下一步</lay-button>
 <lay-button size="xs" @click="previous">上一步</lay-button>
+<lay-button size="xs" @click="next">下一步</lay-button>
 </div>
 </template>
 
@@ -139,8 +181,8 @@ export default {
         <lay-step-item title="Third" content="Third step"></lay-step-item>
         <lay-step-item title="Fourth" content="Fourth step"></lay-step-item>
     </lay-step>
-<lay-button size="xs" @click="nexts">下一步</lay-button>
 <lay-button size="xs" @click="previous">上一步</lay-button>
+<lay-button size="xs" @click="nexts">下一步</lay-button>
 </div>
 </template>
 
@@ -180,8 +222,8 @@ export default {
         <lay-step-item title="Second" content="Second step"></lay-step-item>
         <lay-step-item title="Third" content="Third step"></lay-step-item>
     </lay-step>
-<lay-button size="xs" @click="next">下一步</lay-button>
 <lay-button size="xs" @click="previous">上一步</lay-button>
+<lay-button size="xs" @click="next">下一步</lay-button>
 </div>
 </template>
 
@@ -221,8 +263,8 @@ export default {
         <lay-step-item title="Second" content="Second step" icon="layui-icon-tree"></lay-step-item>
         <lay-step-item title="Third" content="Third step" icon="layui-icon-share"></lay-step-item>
     </lay-step>
-<lay-button size="xs" @click="next">下一步</lay-button>
 <lay-button size="xs" @click="previous">上一步</lay-button>
+<lay-button size="xs" @click="next">下一步</lay-button>
 </div>
 </template>
 
@@ -266,8 +308,8 @@ export default {
         <lay-step-item title="Second" content="Second step"></lay-step-item>
         <lay-step-item title="Third" content="Third step"></lay-step-item>
     </lay-step>
-<lay-button size="xs" @click="next">下一步</lay-button>
 <lay-button size="xs" @click="previous">上一步</lay-button>
+<lay-button size="xs" @click="next">下一步</lay-button>
 </div>
 </template>
 
@@ -337,6 +379,50 @@ export default {
 
 :::
 
+::: title 简洁版
+:::
+
+简洁版不支持`垂直``横向``描述``排版`
+
+::: demo
+
+<template>
+<div>
+    <lay-step :active="active" simple @onChange="onChange">
+        <lay-step-item title="First"></lay-step-item>
+        <lay-step-item title="Second"></lay-step-item>
+        <lay-step-item title="Third"></lay-step-item>
+    </lay-step>
+</div>
+</template>
+
+<script>
+import { ref } from 'vue';
+
+export default {
+  setup() {
+    const loading = ref(true);
+    const active = ref(0);
+    const next = () => {
+      if (active.value++ >=2) active.value = 0
+    };
+    const previous = () => {
+      if (active.value-- ===0) active.value = 0
+    };
+
+    const onChange = (index) => {
+        active.value = index
+    };
+    return {
+        loading,
+        active
+    }
+  }
+}
+</script>
+
+:::
+
 ::: title step步骤条属性
 :::
 
@@ -348,7 +434,10 @@ export default {
 | center | 居中布局 | boolean | `true` `false` | `false`  |
 | direction | 垂直/平行布局 | string |`horizontal` `vertical` | `horizontal` |
 | space | 宽度 | string | -    | `auto` |
-| currentStatus | 当前状态显示 | string | `primary` `success` `fail` `warning` | `primary` |
+| currentStatus | 当前状态显示 | string | `primary` `success` `fail` `warning` | `success` |
+| composition | 排版 | string | `default` `row` | `default` |
+| simple | 简洁版 | boolean | `true` `false` |`false`|
+| onChange | 点击切换时监听 | function | - |function(index){}|
 
 :::
 

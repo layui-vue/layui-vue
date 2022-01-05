@@ -365,7 +365,7 @@ export default {
           {
             id: 99,
             title: "分步",
-            subTitle: "setup",
+            subTitle: "step",
             path: "/zh-CN/components/step",
           },
         ],
