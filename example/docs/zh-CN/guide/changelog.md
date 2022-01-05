@@ -12,6 +12,19 @@
 <lay-timeline>
   <lay-timeline-item title="0.3.x">
     <ul> 
+      <a name="0-3-3"> </a> 
+      <li> 
+        <h3>0.3.3 <span class="layui-badge-rim">2022-01-05</span></h3> 
+        <ul> 
+          <li>[新增] setup 步骤条组件。</li>
+          <li>[新增] slider 滑块组件 vertical 属性, 支持垂直布局。</li>
+          <li>[新增] timeline-item 时间线组件 dot 插槽, 支持自定义节点内容。</li>
+          <li>[新增] sub-menu 目录组件, 与 menu-item 组合使用。</li>
+          <li>[修复] menu 组件 layui-nav-more 切换动画。</li>
+        </ul> 
+      </li>
+    </ul>
+    <ul> 
       <a name="0-3-2"> </a> 
       <li> 
         <h3>0.3.2 <span class="layui-badge-rim">2022-01-03</span></h3> 

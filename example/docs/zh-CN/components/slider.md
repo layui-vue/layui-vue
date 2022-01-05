@@ -1,6 +1,3 @@
-::: anchor
-:::
-
 ::: title 横向
 :::
 
@@ -56,7 +53,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-slider v-model="value3" :range="true"></lay-slider>
+  <lay-slider v-model:standardrange="value3" :range="true"></lay-slider>
 </template>
 
 <script>
@@ -78,20 +75,35 @@ export default {
 ::: demo
 
 <template>
-  <lay-slider v-model="value3" :range="true" :vertical="true"></lay-slider>
+  <lay-slider v-model:verticalrange="value4" :range="true" :vertical="true"></lay-slider>
 </template>
 
 <script>
 import { ref } from 'vue'
 export default {
   setup() {
-    const value4 = ref([20,50])
+    const value4 = ref([23,56])
     return {
       value4
     }
   }
 }
 </script>
+:::
+
+::: title slider 属性
+:::
+
+::: table
+
+| 属性          |         描述          |             类型          |     可选值      |   默认值 |
+| ------------ | --------------------- | ------------------------- | -------------- | -------- |
+| v-model      | 选中值                | `number`  |        -       |    -    |
+| vertical  |  是否垂直     | `Boolean`                   |        -       |    -    |
+| range  |  是否区间     | `Boolean`                   |        -       |    -    |
+| verticalrange  |  垂直区间值     | `Array`                   |        -       |    -    |
+| standardrange  |  水平区间值     | `Array`                   |        -       |    -    |
+
 :::
 
 ::: comment
