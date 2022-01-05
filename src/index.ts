@@ -6,7 +6,7 @@ import "@layui/layer-vue/lib/index.css";
 import "@layui/icons-vue/lib/index.css";
 import { layer } from "@layui/layer-vue";
 
-import LayModal from "./module/layer/modal/index";
+import LayLayer from "./module/layer/index";
 import LayBacktop from "./module/backTop/index";
 import LayAvatar from "./module/avatar/index";
 import LayRadio from "./module/radio/index";
@@ -40,7 +40,6 @@ import LayContainer from "./module/container/index";
 import LayCountUp from "./module/countUp/index";
 import LayMenu from "./module/menu/index";
 import LayMenuItem from "./module/menuItem/index";
-import LayMenuChildItem from "./module/menuChildItem/index";
 import LayCheckbox from "./module/checkbox/index";
 import LayCheckboxGroup from "./module/checkboxGroup/index";
 import LayForm from "./module/form/index";
@@ -67,6 +66,10 @@ import LayCarouselItem from "./module/carouselItem/index";
 import LayColorPicker from "./module/colorPicker/index";
 import LayTooltip from "./module/tooltip/index";
 import LayInputNumber from "./module/inputNumber/index";
+import LaySkeleton from "./module/skeleton/index";
+import LaySkeletonItem from "./module/skeletonItem/index";
+import LayStep from "./module/step/index";
+import LayStepItem from "./module/stepItem/index";
 
 const components: Record<string, IDefineComponent> = {
   LayRadio,
@@ -99,7 +102,6 @@ const components: Record<string, IDefineComponent> = {
   LayContainer,
   LayMenu,
   LayMenuItem,
-  LayMenuChildItem,
   LayCheckbox,
   LayForm,
   LayBreadcrumb,
@@ -126,10 +128,14 @@ const components: Record<string, IDefineComponent> = {
   LayCarousel,
   LayCarouselItem,
   LayColorPicker,
-  LayModal,
+  LayLayer,
   LayTooltip,
   LayInputNumber,
+  LaySkeleton,
+  LaySkeletonItem,
   LayCountUp,
+  LayStep,
+  LayStepItem,
 };
 
 const install = (app: App, options?: InstallOptions): void => {
@@ -142,6 +148,10 @@ const install = (app: App, options?: InstallOptions): void => {
 };
 
 export {
+  LayStep,
+  LayStepItem,
+  LaySkeleton,
+  LaySkeletonItem,
   LayRadio,
   LayIcon,
   LayButton,
@@ -172,7 +182,6 @@ export {
   LayContainer,
   LayMenu,
   LayMenuItem,
-  LayMenuChildItem,
   LayCheckbox,
   LayForm,
   LayBreadcrumb,
@@ -199,7 +208,7 @@ export {
   LayCarousel,
   LayCarouselItem,
   LayColorPicker,
-  LayModal
+  LayLayer
 };
 
 export { layer };

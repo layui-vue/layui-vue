@@ -7,6 +7,7 @@ import LayCode from './components/LayCode.vue'
 import LaySearch from './components/LaySearch.vue'
 import LayTableBox from './components/LayTableBox.vue'
 import LayComment from './components/LayComment.vue'
+import LayAnchor from './components/LayAnchor.vue'
 import './assets/css/index.css'
 
 export function createApp(): {
@@ -23,6 +24,7 @@ export function createApp(): {
     .component('LaySearch', LaySearch)
     .component('LayTableBox', LayTableBox)
     .component('LayComment', LayComment)
+    .component('LayAnchor',LayAnchor)
     .use(Layui)
 
   return { app, router }

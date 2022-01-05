@@ -1,3 +1,6 @@
+::: anchor
+:::
+
 ::: title 基础使用
 :::
 
@@ -9,9 +12,13 @@
     <lay-menu-item title="用户" id="2"></lay-menu-item>
     <lay-menu-item title="角色" id="3"></lay-menu-item> 
     <lay-menu-item title="目录" id="7">
-        <lay-menu-child-item title="菜单一" id="4"></lay-menu-child-item> 
-        <lay-menu-child-item title="菜单二" id="5"></lay-menu-child-item>
-        <lay-menu-child-item title="菜单三" id="6"></lay-menu-child-item>
+        <lay-menu-item title="菜单一" id="8"></lay-menu-item> 
+        <lay-menu-item title="菜单二" id="9"></lay-menu-item>
+        <lay-menu-item title="菜单三" id="10">
+            <lay-menu-item title="菜单一" id="11"></lay-menu-item> 
+            <lay-menu-item title="菜单二" id="12"></lay-menu-item>
+            <lay-menu-item title="菜单三" id="13"></lay-menu-item>
+        </lay-menu-item>
     </lay-menu-item> 
   </lay-menu>
 </template>
@@ -49,9 +56,13 @@ export default {
     <lay-menu-item title="用户" id="2"></lay-menu-item>
     <lay-menu-item title="角色" id="3"></lay-menu-item> 
     <lay-menu-item title="目录" id="7">
-        <lay-menu-child-item title="菜单一" id="4"></lay-menu-child-item> 
-        <lay-menu-child-item title="菜单二" id="5"></lay-menu-child-item>
-        <lay-menu-child-item title="菜单三" id="6"></lay-menu-child-item>
+        <lay-menu-item title="菜单一" id="8"></lay-menu-item> 
+        <lay-menu-item title="菜单二" id="9"></lay-menu-item>
+        <lay-menu-item title="菜单三" id="10">
+            <lay-menu-item title="菜单一" id="11"></lay-menu-item> 
+            <lay-menu-item title="菜单二" id="12"></lay-menu-item>
+            <lay-menu-item title="菜单三" id="13"></lay-menu-item>
+        </lay-menu-item>
     </lay-menu-item> 
   </lay-menu>
 </template>

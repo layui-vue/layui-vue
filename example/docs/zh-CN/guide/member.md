@@ -3,20 +3,17 @@
 
 <lay-card>
     <lay-row>
-        <lay-col md="1">
+        <lay-col md="2">
             <lay-avatar src="https://portrait.gitee.com/uploads/avatars/user/1611/4835367_Jmysy_1578975358.png"></lay-avatar>
         </lay-col>
-        <lay-col md="2">
+        <lay-col md="3">
             就眠仪式
         </lay-col>
-        <lay-col md="6">
+        <lay-col md="8">
             焦点：layui-vue
         </lay-col>
         <lay-col md="4">
-            地点：China Beijing
-        </lay-col>
-        <lay-col md="5">
-            生态：Pear Admin
+            地点：中国 北京
         </lay-col>
         <lay-col md="6">
             其他：Gitee Github
@@ -25,20 +22,17 @@
 </lay-card>
 <lay-card>
     <lay-row>
-        <lay-col md="1">
+        <lay-col md="2">
             <lay-avatar src="https://portrait.gitee.com/uploads/avatars/user/1755/5267877_jobin_jia_1608578025.png"></lay-avatar>
         </lay-col>
-        <lay-col md="2">
+        <lay-col md="3">
             落小梅
         </lay-col>
-        <lay-col md="6">
+        <lay-col md="8">
             焦点：tree table
         </lay-col>
         <lay-col md="4">
-            地点：China Hunan
-        </lay-col>
-        <lay-col md="5">
-            生态：Pear Admin
+            地点：中国 湖南
         </lay-col>
         <lay-col md="6">
             其他：Gitee Github
@@ -48,20 +42,17 @@
 
 <lay-card>
     <lay-row>
-        <lay-col md="1">
+        <lay-col md="2">
             <lay-avatar src="https://portrait.gitee.com/uploads/avatars/user/702/2106738_wanglin300_1639442830.png"></lay-avatar>
         </lay-col>
-        <lay-col md="2">
+        <lay-col md="3">
             halo
         </lay-col>
-        <lay-col md="6">
+        <lay-col md="8">
             焦点：slider
         </lay-col>
         <lay-col md="4">
-            地点：China Beijing
-        </lay-col>
-        <lay-col md="5">
-            生态：暂无
+            地点：中国 北京
         </lay-col>
         <lay-col md="6">
             其他：Gitee Github
@@ -71,43 +62,37 @@
 
 <lay-card>
     <lay-row>
-        <lay-col md="1">
+        <lay-col md="2">
             <lay-avatar src="https://portrait.gitee.com/uploads/avatars/user/1871/5614379_xumisky_1607057214.png"></lay-avatar>
         </lay-col>
-        <lay-col md="2">
+        <lay-col md="3">
             须弥
         </lay-col>
-        <lay-col md="6">
+        <lay-col md="8">
             焦点：layui-vue
         </lay-col>
         <lay-col md="4">
-            地点：未知
-        </lay-col>
-        <lay-col md="5">
-            生态：暂无
+            地点：中国 广州
         </lay-col>
         <lay-col md="6">
-            其他：Gitee Github
+            其他：<a href="https://gitee.com/xumisky">Gitee</a> <a href="https://github.com/xumiSky">Github</a>
         </lay-col>
     </lay-row>
 </lay-card>
 
 <lay-card>
     <lay-row>
-        <lay-col md="1">
+        <lay-col md="2">
             <lay-avatar src="https://portrait.gitee.com/uploads/avatars/user/2469/7407590_wcg666_1640528494.png"></lay-avatar>
         </lay-col>
-        <lay-col md="2">
+        <lay-col md="3">
             Sight
         </lay-col>
-        <lay-col md="6">
+        <lay-col md="8">
             焦点：count-up backtop
         </lay-col>
         <lay-col md="4">
-            地点：未知
-        </lay-col>
-        <lay-col md="5">
-            生态：暂无
+            地点：中国 未知
         </lay-col>
         <lay-col md="6">
             其他：Gitee Github
@@ -117,20 +102,37 @@
 
 <lay-card>
     <lay-row>
-        <lay-col md="1">
+        <lay-col md="2">
             <lay-avatar src="https://portrait.gitee.com/uploads/avatars/user/2596/7789823_finalsummer_1613993823.png"></lay-avatar>
         </lay-col>
-        <lay-col md="2">
+        <lay-col md="3">
             finalsummer
         </lay-col>
-        <lay-col md="6">
+        <lay-col md="8">
             焦点：layer-vue
         </lay-col>
         <lay-col md="4">
-            地点：未知
+            地点：中国 未知
         </lay-col>
-        <lay-col md="5">
-            生态：暂无
+        <lay-col md="6">
+            其他：Gitee Github
+        </lay-col>
+    </lay-row>
+</lay-card>
+
+<lay-card>
+    <lay-row>
+        <lay-col md="2">
+            <lay-avatar src="http://mms0.baidu.com/it/u=1690972933,1482111264&fm=253&app=138&f=JPEG&fmt=auto&q=75?w=500&h=500"></lay-avatar>
+        </lay-col>
+        <lay-col md="3">
+            莫名点
+        </lay-col>
+        <lay-col md="8">
+            焦点：skeleton setup
+        </lay-col>
+        <lay-col md="4">
+            地点：中国 未知
         </lay-col>
         <lay-col md="6">
             其他：Gitee Github

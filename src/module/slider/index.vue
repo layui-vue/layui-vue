@@ -130,7 +130,7 @@ if (Array.isArray(props.modelValue)) {
   rangeValue.value = props.modelValue;
 }
 
-let verticalRangeValue: any = toRef(props, "verticalrange");
+let verticalRangeValue: Ref<number[]> | any = toRef(props, "verticalrange");
 
 const standardtracker = ref<HTMLElement | null>(null);
 const verticaltracker = ref<HTMLElement | null>(null);

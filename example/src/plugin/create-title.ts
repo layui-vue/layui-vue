@@ -2,11 +2,8 @@ import container from 'markdown-it-container'
 import type Token from 'markdown-it/lib/token'
 
 type ContainerArgs = [
-  typeof container,
-  string,
-  {
-    render(tokens: Token[], idx: number): string
-  }
+  typeof container, string,
+  { render(tokens: Token[], idx: number): string }
 ]
 
 export default function createContainer(
@@ -17,13 +14,13 @@ export default function createContainer(
     container,
     klass,
     {
-      render(tokens, idx) {
+      render(tokens, idx) {    
         const token = tokens[idx]
         const info = token.info.trim().slice(klass.length).trim()
         if (token.nesting === 1) {
-          return `<lay-field title="${
+          return `<lay-field id="${info || defaultTitle}" title="${
             info || defaultTitle
-          }" style="margin-top:20px;margin-bottom: 20px;">`
+          }" style="margin-top:21px;margin-bottom: 20px;">`
         } else {
           return '</lay-field>\n'
         }

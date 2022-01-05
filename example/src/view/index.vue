@@ -26,7 +26,7 @@
           >
         </div>
         <div class="site-version">
-          <span>当前版本：v<cite class="site-showv">0.3.1</cite></span>
+          <span>当前版本：v<cite class="site-showv">0.3.2</cite></span>
           <span
             ><router-link
               class="layui-inline site-down"
@@ -34,7 +34,7 @@
               >更新日志</router-link
             ></span
           >
-          <span>下载量：<em class="site-showdowns">2324</em></span>
+          <span>下载量：<em class="site-showdowns">3124</em></span>
         </div>
       </div>
       <div class="site-banner-other">
@@ -44,7 +44,7 @@
           rel="nofollow"
           class="site-star"
         >
-          <i class="layui-icon"></i> Star <cite id="getStars">521</cite>
+          <i class="layui-icon"></i> Star <cite id="getStars">544</cite>
         </a>
         <a
           href="https://gitee.com/layui-vue"

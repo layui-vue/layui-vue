@@ -1,3 +1,6 @@
+::: anchor
+:::
+
 ::: demo
 
 <template>

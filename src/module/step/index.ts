@@ -3,7 +3,7 @@ import Component from "./index.vue";
 import type { IDefineComponent } from "../type/index";
 
 Component.install = (app: App) => {
-  app.component(Component.name || "LayMenuChildItem", Component);
+  app.component(Component.name || "laySetup", Component);
 };
 
 export default Component as IDefineComponent;

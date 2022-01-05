@@ -1,0 +1,112 @@
+::: anchor
+:::
+
+::: title 基础使用
+:::
+
+
+::: demo
+
+<template>
+<div>
+<div style="margin-bottom: 10px">
+<lay-switch v-model="loading" active-text="加载" inactive-text="关闭"></lay-switch>
+</div>
+  <lay-skeleton :rows="4" :loading="loading" animated>
+    <p style="margin-bottom: 18px">1 layui-vue , 基 于 vue 3.0 的 桌 面 端 组 件 库 , layui 的 另 一 种 呈 现 方 式</p>
+    <p style="margin-bottom: 18px">2 layui-vue , 基 于 vue 3.0 的 桌 面 端 组 件 库 , layui 的 另 一 种 呈 现 方 式</p>
+    <p style="margin-bottom: 18px">3 layui-vue , 基 于 vue 3.0 的 桌 面 端 组 件 库 , layui 的 另 一 种 呈 现 方 式</p>
+    <p style="margin-bottom: 18px">4 layui-vue , 基 于 vue 3.0 的 桌 面 端 组 件 库 , layui 的 另 一 种 呈 现 方 式</p>
+  </lay-skeleton>
+</div>
+</template>
+
+<script>
+import { ref } from 'vue';
+
+export default {
+  setup() {
+    const loading = ref(true);
+    return {
+        loading,
+    }
+  }
+}
+</script>
+
+:::
+
+::: title 图片
+:::
+
+
+::: demo
+
+<template>
+<div>
+<div style="margin-bottom: 10px">
+<lay-switch v-model="loading" active-text="加载" inactive-text="关闭"></lay-switch>
+</div>
+  <lay-skeleton :loading="loading" animated>
+        <template #skeleton>
+            <lay-skeleton-item type="image"/>
+            <lay-skeleton-item type="p" style="width: 240px"/>
+        </template>
+    <div class="img-content">
+        <img src="https://portrait.gitee.com/uploads/avatars/user/2813/8441097_shaynas_1610801433.png" />
+        <p style="margin-top: 18px">layui-vue 发展史....</p>
+    </div>
+  </lay-skeleton>
+</div>
+</template>
+
+<script>
+import { ref } from 'vue';
+
+export default {
+  setup() {
+    const loading = ref(true);
+    return {
+        loading,
+    }
+  }
+}
+</script>
+
+<style>
+    .img-content {
+        width: 240px;
+        height: 240px;
+    }
+</style>
+
+:::
+
+::: title 骨架屏属性
+:::
+
+::: table
+
+| 属性  | 描述 | 可选值 |
+| ----- | ---- | ------ |
+| loading | 是否显示 | `true` `false`     |
+| rows | 显示行数 | --     |
+| animated | 是否动画 | `true` `false`    |
+| type | 展示类型 | `p` `image`    |
+
+:::
+
+::: title 骨架屏插槽
+:::
+
+::: table
+
+| 插槽   | 描述     | 可选值 |
+| ------ | -------- | ------ |
+| default| 默认插槽 | --     |
+| skeleton | 自定义插槽 | --     |
+
+:::
+
+::: comment
+:::
