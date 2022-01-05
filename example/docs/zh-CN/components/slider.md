@@ -53,7 +53,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-slider v-model="value3" :range="true"></lay-slider>
+  <lay-slider v-model:standardrange="value3" :range="true"></lay-slider>
 </template>
 
 <script>
@@ -89,6 +89,21 @@ export default {
   }
 }
 </script>
+:::
+
+::: title slider 属性
+:::
+
+::: table
+
+| 属性          |         描述          |             类型          |     可选值      |   默认值 |
+| ------------ | --------------------- | ------------------------- | -------------- | -------- |
+| v-model      | 选中值                | `number`  |        -       |    -    |
+| vertical  |  是否垂直     | `Boolean`                   |        -       |    -    |
+| range  |  是否区间     | `Boolean`                   |        -       |    -    |
+| verticalrange  |  垂直区间值     | `Array`                   |        -       |    -    |
+| standardrange  |  水平区间值     | `Array`                   |        -       |    -    |
+
 :::
 
 ::: comment

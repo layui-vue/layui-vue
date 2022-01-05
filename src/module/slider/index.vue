@@ -116,6 +116,7 @@ interface LaySliderProps {
   disabled?: boolean;
   range?: boolean;
   verticalrange?: number[];
+  standardrange?: number[];
 }
 
 const props = withDefaults(defineProps<LaySliderProps>(), {
@@ -124,11 +125,12 @@ const props = withDefaults(defineProps<LaySliderProps>(), {
   disabled: false,
 });
 
-let rangeValue: Ref<number[]> = ref([0, 0]);
-if (Array.isArray(props.modelValue)) {
-  // eslint-disable-next-line vue/no-setup-props-destructure
-  rangeValue.value = props.modelValue;
-}
+// let rangeValue: Ref<number[]> = ref([0, 0]);
+let rangeValue: Ref<number[]> | any = toRef(props, "standardrange");
+// if (Array.isArray(props.modelValue)) {
+//   // eslint-disable-next-line vue/no-setup-props-destructure
+//   rangeValue.value = props.modelValue;
+// }
 
 let verticalRangeValue: Ref<number[]> | any = toRef(props, "verticalrange");
 
