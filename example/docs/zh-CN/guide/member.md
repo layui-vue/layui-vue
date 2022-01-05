@@ -129,13 +129,13 @@
             莫名点
         </lay-col>
         <lay-col md="8">
-            焦点：skeleton setup
+            焦点：skeleton step
         </lay-col>
         <lay-col md="4">
-            地点：中国 未知
+            地点：中国 上海
         </lay-col>
         <lay-col md="6">
-            其他：Gitee Github
+            其他：<a href="https://gitee.com/dingyongya">Gitee</a> <a href="https://github.com/dyywork">Github</a>
         </lay-col>
     </lay-row>
 </lay-card>
