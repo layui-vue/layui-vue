@@ -1,6 +1,6 @@
 {
   "name": "@ctsy/layui-vue",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "author": "sleeprite",
   "license": "MIT",
   "description": "a component library for Vue 3 base on layui-vue",
@@ -61,13 +61,13 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-vue": "^8.2.0",
+    "less": "^4.1.2",
     "markdown-it-container": "^3.0.0",
     "prettier": "^2.5.1",
     "prismjs": "^1.25.0",
     "rimraf": "^3.0.2",
     "rollup": "^2.61.0",
     "typescript": "^4.5.2",
-    "less": "^4.1.2",
     "vite": "2.7.6",
     "vite-plugin-md": "^0.11.6"
   },
