@@ -69,7 +69,7 @@ import LayInputNumber from "./module/inputNumber/index";
 import LaySkeleton from './module/skeleton/index';
 import LaySkeletonItem from './module/skeletonItem/index';
 
-const components: Record<string, IDefineComponent> = {
+export const components: Record<string, IDefineComponent> = {
   LayRadio,
   LayButton,
   LayIcon,
@@ -144,11 +144,9 @@ const install = (app: App, options?: InstallOptions): void => {
 };
 
 export {
-  LaySkeleton,
-  LaySkeletonItem,
   LayRadio,
-  LayIcon,
   LayButton,
+  LayIcon,
   LayBacktop,
   LayLayout,
   LaySide,
@@ -202,7 +200,12 @@ export {
   LayCarousel,
   LayCarouselItem,
   LayColorPicker,
-  LayLayer
+  LayLayer,
+  LayTooltip,
+  LayInputNumber,
+  LaySkeleton,
+  LaySkeletonItem,
+  LayCountUp,
 };
 
 export { layer };
