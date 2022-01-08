@@ -72,7 +72,7 @@ import LayStep from "./module/step/index";
 import LayStepItem from "./module/stepItem/index";
 import LaySubMenu from "./module/subMenu/index"
 
-const components: Record<string, IDefineComponent> = {
+export const components: Record<string, IDefineComponent> = {
   LayRadio,
   LayButton,
   LayIcon,
