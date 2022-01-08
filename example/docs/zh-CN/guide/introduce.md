@@ -3,7 +3,7 @@
 
 <p>
   <a href="http://layui-vue.pearadmin.com">
-    <img src="https://sentsin.gitee.io/res/images/layui/layui.png" alt="layui" width="500">
+    <img src="../../../src/assets/logo-new.png" alt="layui" width="500">
   </a>
 </p>
 
