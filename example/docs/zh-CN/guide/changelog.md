@@ -20,7 +20,9 @@
           <li>[新增] slider 滑块组件 vertical 属性, 支持垂直布局。</li>
           <li>[新增] timeline-item 时间线组件 dot 插槽, 支持自定义节点内容。</li>
           <li>[新增] sub-menu 目录组件, 与 menu-item 组合使用。</li>
-          <li>[修复] menu 组件 layui-nav-more 切换动画。</li>
+          <li>[修复] menu 菜单组件 layui-nav-more 切换动画。</li>
+          <li>[修复] select 下拉选择组件外部参数变更组件内的数值不生效的问题</li>
+          <li>[修复] page 分页组件 limit 数量过多时, 展示部分页数。</li>
         </ul> 
       </li>
     </ul>
