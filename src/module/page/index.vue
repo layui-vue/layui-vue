@@ -48,6 +48,7 @@
 			到第
 			<input
 				v-model="currentPageShow"
+				@keypress.enter="jumpPage()"
 				type="number"
 				class="layui-input layui-input-number"
 			/>页
