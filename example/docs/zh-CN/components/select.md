@@ -27,6 +27,40 @@ export default {
 }
 </script>
 
+
+::: title 数据联动
+:::
+
+::: demo
+
+<template>
+  <lay-select v-model="value">
+    <lay-select-option value="1" label="学习"></lay-select-option>
+    <lay-select-option value="2" label="编码"></lay-select-option>
+    <lay-select-option value="3" label="运动"></lay-select-option>
+  </lay-select>
+  <lay-button @click="change1">点击切换(当前值:{{value}})</lay-button>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  name:'selectChange',
+  setup() {
+    const value = ref(null);
+    var i = 1;
+    function change1(){
+      value.value=i++%3+1
+    }
+    return {
+      value,
+      change1
+    }
+  }
+}
+</script>
+
 :::
 
 ::: title 选择禁用
@@ -74,6 +108,7 @@ export default {
     <lay-select-option value="6" label="打篮球"></lay-select-option>
     <lay-select-option value="7" label="rap"></lay-select-option>
   </lay-select>
+  <lay-button @click="mvalue=[1,5,7]">点击切换(当前值:{{mvalue.join()}})</lay-button>
 </template>
 
 <script>
