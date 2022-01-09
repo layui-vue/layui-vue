@@ -23,6 +23,7 @@
           <li>[修复] menu 菜单组件 layui-nav-more 切换动画。</li>
           <li>[修复] select 下拉选择组件外部参数变更组件内的数值不生效的问题</li>
           <li>[修复] page 分页组件 limit 数量过多时, 展示部分页数。</li>
+          <li>[推出] layui-vue-admin 后台模板 </li>
         </ul> 
       </li>
     </ul>
