@@ -11,6 +11,16 @@
 <template>
 <lay-timeline>
   <lay-timeline-item title="0.3.x">
+      <ul> 
+      <a name="0-3-4"> </a> 
+      <li> 
+        <h3>0.3.4 <span class="layui-badge-rim">2022-01-09</span></h3> 
+        <ul> 
+          <li>[新增] avatar-list 头像列表组件。</li>
+          <li>[修复] menu-item 与 sub-menu 组件的 title 属性必填警告。</li>
+        </ul> 
+      </li>
+    </ul>
     <ul> 
       <a name="0-3-3"> </a> 
       <li> 

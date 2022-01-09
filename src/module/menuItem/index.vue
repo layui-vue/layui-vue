@@ -11,7 +11,7 @@ const slots = useSlots();
 
 const props = defineProps<{
   id: string;
-  title: string;
+  title?: string;
 }>();
 
 const selectedKey: Ref<string> = inject("selectedKey") as Ref<string>;
