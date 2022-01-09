@@ -28,6 +28,20 @@
         </ul>
       </div>
     </fieldset>
+    <fieldset class="layui-elem-field layui-field-title">
+      <legend style="margin-bottom: 20px; text-align: center">后台模板</legend>
+      <div class="layui-field-box">
+        <ul class="layui-row layui-col-space6">
+          <li class="layui-col-sm24">
+            <div class="alone">
+              <a href="https://gitee.com/layui-vue/layui-vue-admin" target="_blank"
+                >layui - admin<cite>通用型 vue 3.0 后台模板</cite></a
+              >
+            </div>
+          </li>
+        </ul>
+      </div>
+    </fieldset>
   </div>
 </template>
 
