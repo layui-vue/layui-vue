@@ -130,7 +130,7 @@ export default {
 
 :::
 
-::: title select 属性
+::: title Select 属性
 :::
 
 ::: table
@@ -147,7 +147,18 @@ export default {
 
 :::
 
-::: title select-option 属性
+::: title Select 事件
+:::
+
+::: table
+
+| 属性    | 描述       |     接收值      |
+| ------ | ---------- | --------------- |
+| change | 切换事件    | value           |
+
+:::
+
+::: title Select Option 属性
 :::
 
 ::: table
@@ -163,7 +174,7 @@ export default {
 
 :::
 
-::: title select-option 插槽
+::: title Select Option 插槽
 :::
 
 ::: table
@@ -171,17 +182,6 @@ export default {
 | 属性    |         描述       |     接收值      |
 | ------- | ----------------- | --------------- |
 | default | 默认(`label`)      |        -       |
-
-:::
-
-::: title select 事件
-:::
-
-::: table
-
-| 属性    | 描述       |     接收值      |
-| ------ | ---------- | --------------- |
-| change | 切换事件    | value           |
 
 :::
 

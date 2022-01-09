@@ -116,7 +116,7 @@ export default {
 
 :::
 
-::: title 头像属性
+::: title Avatar 属性
 :::
 
 ::: table

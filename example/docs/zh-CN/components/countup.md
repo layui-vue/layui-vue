@@ -77,7 +77,7 @@ export default {
 
 :::
 
-::: title countUp 属性
+::: title Count Up 属性
 :::
 
 ::: table
@@ -96,8 +96,19 @@ export default {
 
 :::
 
+::: title Count Up 插槽
+:::
 
-::: title CountUpOptions 属性
+::: table
+
+| 名称    | 描述     | 参数 |
+| -----   | -------- | ---- |
+| prefix  | 前缀     | --   |
+| suffix  | 后缀     | --   |
+
+:::
+
+::: title Count Up Options 属性
 ::: 
 
 ::: table
@@ -112,17 +123,5 @@ export default {
 | duration      | 动画持续时间                                                 | number         | `2`    | —             |
 | prefix        | 前缀                                                         | string         | —    | —             |
 | suffix        | 后缀                                                         | string         | —     | —             |   |
-
-:::
-
-::: title countUp 插槽
-:::
-
-::: table
-
-| 名称    | 描述     | 参数 |
-| -----   | -------- | ---- |
-| prefix  | 前缀     | --   |
-| suffix  | 后缀     | --   |
 
 :::

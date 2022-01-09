@@ -86,7 +86,7 @@ export default {
 
 :::
 
-::: title transfer 属性
+::: title Transfer 属性
 :::
 
 ::: table
@@ -99,7 +99,7 @@ export default {
 
 :::
 
-::: title transfer 插槽
+::: title Transfer 插槽
 :::
 
 ::: table

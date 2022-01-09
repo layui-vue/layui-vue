@@ -256,7 +256,7 @@ export default {
 
 :::
 
-::: title 分页属性
+::: title Page 属性
 :::
 
 ::: table
@@ -275,7 +275,7 @@ export default {
 
 :::
 
-::: title 分页事件
+::: title Page 事件
 :::
 
 ::: table
@@ -287,7 +287,7 @@ export default {
 
 :::
 
-::: title 分页插槽
+::: title Page 插槽
 :::
 
 ::: table

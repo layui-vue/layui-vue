@@ -19,7 +19,7 @@ export default {
 }
 </script>
 
-::: title icon-picker 属性
+::: title Icon Picker 属性
 :::
 
 ::: table

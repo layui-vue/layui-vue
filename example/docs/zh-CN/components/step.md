@@ -423,7 +423,7 @@ export default {
 
 :::
 
-::: title step步骤条属性
+::: title Step 属性
 :::
 
 ::: table
@@ -442,7 +442,7 @@ export default {
 :::
 
 
-::: title stepItem步骤条属性
+::: title Step Item 属性
 :::
 
 ::: table
@@ -457,7 +457,7 @@ export default {
 
 :::
 
-::: title stepItem步骤条slot
+::: title Step Item 插槽
 :::
 
 ::: table

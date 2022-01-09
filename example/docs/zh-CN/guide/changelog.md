@@ -18,6 +18,7 @@
         <ul> 
           <li>[新增] avatar-list 头像列表组件。</li>
           <li>[修复] menu-item 与 sub-menu 组件的 title 属性必填警告。</li>
+          <li>[升级] vite 2.7.10。</li>        
         </ul> 
       </li>
     </ul>

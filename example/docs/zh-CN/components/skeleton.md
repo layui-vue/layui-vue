@@ -82,7 +82,7 @@ export default {
 
 :::
 
-::: title 骨架屏属性
+::: title Skeleton 属性
 :::
 
 ::: table
@@ -96,7 +96,7 @@ export default {
 
 :::
 
-::: title 骨架屏插槽
+::: title Skeleton 插槽
 :::
 
 ::: table

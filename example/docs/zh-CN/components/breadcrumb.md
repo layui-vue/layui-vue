@@ -82,7 +82,7 @@ export default {
 
 :::
 
-::: title 面包屑属性
+::: title Breadcrumb 属性
 :::
 
 ::: table
@@ -93,7 +93,7 @@ export default {
 
 :::
 
-::: title 面包屑插槽
+::: title Breadcrumb 插槽
 :::
 
 ::: table

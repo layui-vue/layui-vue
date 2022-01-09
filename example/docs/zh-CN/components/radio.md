@@ -97,7 +97,7 @@ export default {
 
 :::
 
-::: title 单选框属性
+::: title Radio 属性
 :::
 
 ::: table
@@ -110,7 +110,7 @@ export default {
 
 :::
 
-::: title 单选框事件
+::: title Radio 事件
 :::
 
 ::: table
