@@ -185,3 +185,6 @@ export default {
 
 ::: comment
 :::
+
+::: previousNext nav
+:::

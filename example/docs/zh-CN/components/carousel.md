@@ -145,3 +145,6 @@ export default {
 
 ::: comment
 :::
+
+::: previousNext carousel
+:::

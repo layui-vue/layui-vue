@@ -129,3 +129,6 @@ layer.load(load, options)
 
 ::: comment
 :::
+
+::: previousNext load
+:::

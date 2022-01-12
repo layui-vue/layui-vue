@@ -212,3 +212,6 @@ export default {
 
 ::: comment
 :::
+
+::: previousNext collapse
+:::

@@ -125,3 +125,6 @@ export default {
 | suffix        | 后缀                                                         | string         | —     | —             |   |
 
 :::
+
+::: previousNext countUp
+:::

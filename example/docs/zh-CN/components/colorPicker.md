@@ -34,3 +34,6 @@ export default {
 
 ::: comment
 :::
+
+::: previousNext colorPicker
+:::

@@ -106,3 +106,6 @@ export default {
 
 ::: comment
 :::
+
+::: previousNext breadcrumb
+:::
