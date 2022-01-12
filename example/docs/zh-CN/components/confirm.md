@@ -79,3 +79,6 @@ layer.confirm(content, options)
 
 ::: comment
 :::
+
+::: previousNext confirm
+:::

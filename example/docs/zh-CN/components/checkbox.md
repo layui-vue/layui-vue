@@ -216,3 +216,6 @@ export default {
 
 ::: comment
 :::
+
+::: previousNext checkbox
+:::

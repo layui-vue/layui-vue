@@ -116,3 +116,6 @@ export default {
 
 ::: comment
 :::
+
+::: previousNext iconPicker
+:::

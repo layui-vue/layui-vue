@@ -152,3 +152,6 @@ export default {
 
 ::: comment
 :::
+
+::: previousNext select
+:::

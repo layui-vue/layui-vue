@@ -265,3 +265,6 @@ body::-webkit-scrollbar {
 .layui-menu .layui-menu-item-group > .layui-menu-body-title {
   padding-left: 15px;
 }
+.lay-link:hover{
+  color: #5FB878;
+}

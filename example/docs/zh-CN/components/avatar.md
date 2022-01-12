@@ -98,3 +98,6 @@ export default {
 
 ::: comment
 :::
+
+::: previousNext avatar
+:::

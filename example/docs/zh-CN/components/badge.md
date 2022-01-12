@@ -64,3 +64,6 @@ export default {
 
 ::: comment
 :::
+
+::: previousNext badge
+:::

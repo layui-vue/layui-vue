@@ -124,3 +124,6 @@ export default {
 | suffix  | 后缀     | --   |
 
 :::
+
+::: previousNext countUp
+:::
