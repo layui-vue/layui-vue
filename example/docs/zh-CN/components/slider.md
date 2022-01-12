@@ -111,3 +111,6 @@ export default {
 
 ::: comment
 :::
+
+::: previousNext slider
+:::

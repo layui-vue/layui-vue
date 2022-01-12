@@ -97,3 +97,6 @@ layer.msg(content, options)
 
 ::: comment
 :::
+
+::: previousNext msg
+:::

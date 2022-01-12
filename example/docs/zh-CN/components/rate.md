@@ -311,3 +311,6 @@ export default {
 
 ::: comment
 :::
+
+::: previousNext rate
+:::
