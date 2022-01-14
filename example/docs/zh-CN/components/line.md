@@ -37,7 +37,7 @@ export default {
 
 :::
 
-::: title 分割属性
+::: title Line 属性
 :::
 
 ::: table
@@ -49,4 +49,7 @@ export default {
 :::
 
 ::: comment
+:::
+
+::: previousNext line
 :::

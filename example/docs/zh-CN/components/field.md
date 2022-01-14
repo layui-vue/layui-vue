@@ -64,7 +64,7 @@ export default {
 
 :::
 
-::: title 字段属性
+::: title Field 属性
 :::
 
 ::: table
@@ -76,4 +76,7 @@ export default {
 :::
 
 ::: comment
+:::
+
+::: previousNext field
 :::

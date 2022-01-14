@@ -1,9 +1,3 @@
-<!--
- * @Date: 2021-10-16 13:22:38
- * @LastEditors: 落小梅
- * @LastEditTime: 2021-10-16 13:53:14
- * @FilePath: \layui-vue\src\module\tree\new-tree\index.vue
--->
 <script lang="ts">
 export default {
   name: "LayTree",
@@ -16,6 +10,7 @@ import TreeNode from "./TreeNode.vue";
 import { computed } from "vue";
 import { useTree } from "./useTree";
 import { TreeData } from "./tree";
+import "./index.less";
 
 type StringFn = () => string;
 type StringOrNumber = string | number;

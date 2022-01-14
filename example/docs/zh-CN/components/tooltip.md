@@ -113,7 +113,7 @@
 </style>
 :::
 
-::: title tooltip属性
+::: title Tooltip 属性
 :::
 
 ::: table
@@ -130,4 +130,7 @@
 :::
 
 ::: comment
+:::
+
+::: previousNext tooltip
 :::

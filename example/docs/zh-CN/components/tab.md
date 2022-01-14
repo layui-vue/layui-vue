@@ -169,7 +169,7 @@ export default {
     return {
       current5,
       change5,
-      beforeClose，
+      beforeClose,
       close5
     }
   }
@@ -220,7 +220,7 @@ export default {
 
 :::
 
-::: title 选项卡属性
+::: title Tab 属性
 :::
 
 ::: table
@@ -235,7 +235,7 @@ export default {
 
 :::
 
-::: title 选项卡事件
+::: title Tab 事件
 :::
 
 ::: table
@@ -248,4 +248,7 @@ export default {
 :::
 
 ::: comment
+:::
+
+::: previousNext tab
 :::

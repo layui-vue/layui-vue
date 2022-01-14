@@ -139,7 +139,7 @@ export default {
 
 :::
 
-::: title 行属性
+::: title Row 属性
 :::
 
 ::: table
@@ -150,7 +150,7 @@ export default {
 
 :::
 
-::: title 列属性
+::: title Col 属性
 :::
 
 ::: table
@@ -169,4 +169,7 @@ export default {
 :::
 
 ::: comment
+:::
+
+::: previousNext grid
 :::

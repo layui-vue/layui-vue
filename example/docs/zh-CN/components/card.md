@@ -108,7 +108,7 @@ export default {
 
 :::
 
-::: title 卡片属性
+::: title Card 属性
 :::
 
 ::: table
@@ -119,7 +119,7 @@ export default {
 
 :::
 
-::: title 卡片插槽
+::: title Card 插槽
 :::
 
 ::: table
@@ -133,4 +133,7 @@ export default {
 :::
 
 ::: comment
+:::
+
+::: previousNext card
 :::

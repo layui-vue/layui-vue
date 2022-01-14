@@ -315,7 +315,7 @@ export default {
 
 ### <div id="tableColumn"></div>
 
-::: title Table Column 属性
+::: title Table 数据
 :::
 
 ::: table
@@ -330,4 +330,7 @@ export default {
 :::
 
 ::: comment
+:::
+
+::: previousNext table
 :::

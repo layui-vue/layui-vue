@@ -120,7 +120,7 @@ export default {
 
 :::
 
-::: title Timeline Item 属性
+::: title Timeline Item 插槽
 :::
 
 ::: table
@@ -132,4 +132,7 @@ export default {
 :::
 
 ::: comment
+:::
+
+::: previousNext timeline
 :::

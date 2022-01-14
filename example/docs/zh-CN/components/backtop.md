@@ -99,7 +99,7 @@ export default {
 
 :::
 
-::: title 事件
+::: title Backtop 事件
 :::
 
 ::: table
@@ -110,7 +110,7 @@ export default {
 
 :::
 
-::: title 插槽
+::: title Backtop 插槽
 :::
 
 ::: table
@@ -119,4 +119,7 @@ export default {
 | ------ | ---------- |
 | default| 自定义内容 |
 
+:::
+
+::: previousNext backtop
 :::

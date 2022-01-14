@@ -9,6 +9,7 @@ import { layer } from "@layui/layer-vue";
 import LayLayer from "./module/layer/index";
 import LayBacktop from "./module/backTop/index";
 import LayAvatar from "./module/avatar/index";
+import LayAvatarList from "./module/avatarList/index";
 import LayRadio from "./module/radio/index";
 import LayButton from "./module/button/index";
 import LayButtonContainer from "./module/buttonContainer/index";
@@ -70,8 +71,9 @@ import LaySkeleton from "./module/skeleton/index";
 import LaySkeletonItem from "./module/skeletonItem/index";
 import LayStep from "./module/step/index";
 import LayStepItem from "./module/stepItem/index";
+import LaySubMenu from "./module/subMenu/index"
 
-const components: Record<string, IDefineComponent> = {
+export const components: Record<string, IDefineComponent> = {
   LayRadio,
   LayButton,
   LayIcon,
@@ -107,6 +109,7 @@ const components: Record<string, IDefineComponent> = {
   LayBreadcrumb,
   LayBreadcrumbItem,
   LayAvatar,
+  LayAvatarList,
   LayField,
   LaySelect,
   LayScroll,
@@ -136,6 +139,7 @@ const components: Record<string, IDefineComponent> = {
   LayCountUp,
   LayStep,
   LayStepItem,
+  LaySubMenu
 };
 
 const install = (app: App, options?: InstallOptions): void => {
@@ -148,13 +152,9 @@ const install = (app: App, options?: InstallOptions): void => {
 };
 
 export {
-  LayStep,
-  LayStepItem,
-  LaySkeleton,
-  LaySkeletonItem,
   LayRadio,
-  LayIcon,
   LayButton,
+  LayIcon,
   LayBacktop,
   LayLayout,
   LaySide,
@@ -187,6 +187,7 @@ export {
   LayBreadcrumb,
   LayBreadcrumbItem,
   LayAvatar,
+  LayAvatarList,
   LayField,
   LaySelect,
   LayScroll,
@@ -208,7 +209,15 @@ export {
   LayCarousel,
   LayCarouselItem,
   LayColorPicker,
-  LayLayer
+  LayLayer,
+  LayTooltip,
+  LayInputNumber,
+  LaySkeleton,
+  LaySkeletonItem,
+  LayCountUp,
+  LayStep,
+  LayStepItem,
+  LaySubMenu
 };
 
 export { layer };

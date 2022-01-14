@@ -111,7 +111,7 @@
 :::
 
 
-::: title input-number属性
+::: title Input Number 属性
 :::
 
 ::: table
@@ -130,7 +130,7 @@
 
 :::
 
-::: title 事件
+::: title Input Number 事件
 :::
 
 ::: table
@@ -142,4 +142,7 @@
 :::
 
 ::: comment
+:::
+
+::: previousNext inputNumber
 :::

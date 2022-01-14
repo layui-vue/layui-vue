@@ -111,7 +111,7 @@ export default {
 
 :::
 
-::: title 开关属性
+::: title Switch 属性
 :::
 
 ::: table
@@ -126,7 +126,7 @@ export default {
 
 :::
 
-::: title 开关事件
+::: title Switch 事件
 :::
 
 ::: table
@@ -138,4 +138,7 @@ export default {
 :::
 
 ::: comment
+:::
+
+::: previousNext switch
 :::

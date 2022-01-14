@@ -113,7 +113,7 @@ export default {
 
 :::
 
-::: title 进度属性
+::: title Progress 属性
 :::
 
 ::: table
@@ -130,4 +130,7 @@ export default {
 :::
 
 ::: comment
+:::
+
+::: previousNext progress
 :::

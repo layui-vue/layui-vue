@@ -1,3 +1,6 @@
+::: anchor
+:::
+
 ::: title 横向
 :::
 
@@ -91,7 +94,7 @@ export default {
 </script>
 :::
 
-::: title slider 属性
+::: title Slider 属性
 :::
 
 ::: table
@@ -107,4 +110,7 @@ export default {
 :::
 
 ::: comment
+:::
+
+::: previousNext slider
 :::

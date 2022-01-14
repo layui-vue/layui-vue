@@ -216,7 +216,7 @@ function handleClick(node) {
 
 :::
 
-::: title tree attributes
+::: title Tree 属性
 :::
 
 ::: table
@@ -231,7 +231,7 @@ function handleClick(node) {
 
 :::
 
-::: title TreeData
+::: title Tree 数据
 :::
 
 ::: table
@@ -246,7 +246,7 @@ function handleClick(node) {
 
 :::
 
-::: title tree events
+::: title Tree 事件
 :::
 
 ::: table
@@ -258,4 +258,7 @@ function handleClick(node) {
 :::
 
 ::: comment
+:::
+
+::: previousNext tree
 :::

@@ -269,7 +269,7 @@ export default {
 
 :::
 
-::: title 评分属性
+::: title Rate 属性
 :::
 
 ::: table
@@ -287,7 +287,7 @@ export default {
 
 :::
 
-::: title 插槽
+::: title Rate 插槽
 :::
 
 ::: table
@@ -298,7 +298,7 @@ export default {
 
 :::
 
-::: title 事件
+::: title Rate 事件
 :::
 
 ::: table
@@ -310,4 +310,7 @@ export default {
 :::
 
 ::: comment
+:::
+
+::: previousNext rate
 :::

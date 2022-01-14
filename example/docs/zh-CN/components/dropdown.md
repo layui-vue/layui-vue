@@ -70,7 +70,7 @@ export default {
 
 :::
 
-::: title 下拉属性
+::: title Dropdown 属性
 :::
 
 ::: table
@@ -81,7 +81,7 @@ export default {
 
 :::
 
-::: title 下拉插槽
+::: title Dropdown 插槽
 :::
 
 ::: table
@@ -93,4 +93,7 @@ export default {
 :::
 
 ::: comment
+:::
+
+::: previousNext dropdown
 :::

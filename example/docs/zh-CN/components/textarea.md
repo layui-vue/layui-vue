@@ -85,7 +85,7 @@ export default {
 
 :::
 
-::: title 文本域属性
+::: title Textarea 属性
 :::
 
 ::: table
@@ -99,7 +99,7 @@ export default {
 
 :::
 
-::: title 文本域事件
+::: title Textarea 事件
 :::
 
 ::: table
@@ -113,4 +113,7 @@ export default {
 :::
 
 ::: comment
+:::
+
+::: previousNext textarea
 :::

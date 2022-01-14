@@ -39,7 +39,7 @@ export default {
 
 :::
 
-::: title 徽章属性
+::: title Badge 属性
 :::
 
 ::: table
@@ -51,7 +51,7 @@ export default {
 
 :::
 
-::: title 徽章插槽
+::: title Badge 插槽
 :::
 
 ::: table
@@ -63,4 +63,7 @@ export default {
 :::
 
 ::: comment
+:::
+
+::: previousNext badge
 :::

@@ -11,14 +11,31 @@
 <template>
 <lay-timeline>
   <lay-timeline-item title="0.3.x">
+      <ul> 
+      <a name="0-3-4"> </a> 
+      <li> 
+        <h3>0.3.4 <span class="layui-badge-rim">2022-01-09</span></h3> 
+        <ul> 
+          <li>[新增] avatar-list 头像列表组件。</li>
+          <li>[修复] button 按钮 disabled 为 true 时, 仍触发 click 事件。</li>
+          <li>[修复] menu-item 与 sub-menu 组件的 title 属性必填警告。</li>
+          <li>[升级] vite 2.7.10。</li>        
+        </ul> 
+      </li>
+    </ul>
     <ul> 
       <a name="0-3-3"> </a> 
       <li> 
-        <h3>0.3.3 <span class="layui-badge-rim">2022-01-03</span></h3> 
+        <h3>0.3.3 <span class="layui-badge-rim">2022-01-09</span></h3> 
         <ul> 
           <li>[新增] setup 步骤条组件。</li>
+          <li>[新增] slider 滑块组件 vertical 属性, 支持垂直布局。</li>
           <li>[新增] timeline-item 时间线组件 dot 插槽, 支持自定义节点内容。</li>
-          <li>[修复] menu 组件 layui-nav-more 切换动画。</li>
+          <li>[新增] sub-menu 目录组件, 与 menu-item 组合使用。</li>
+          <li>[修复] menu 菜单组件 layui-nav-more 切换动画。</li>
+          <li>[修复] select 下拉选择组件外部参数变更组件内的数值不生效的问题</li>
+          <li>[修复] page 分页组件 limit 数量过多时, 展示部分页数。</li>
+          <li>[推出] layui-vue-admin 后台模板 </li>
         </ul> 
       </li>
     </ul>

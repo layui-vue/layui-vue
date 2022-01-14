@@ -24,7 +24,7 @@ export default {
 
 :::
 
-::: title 面板插槽
+::: title Panel 插槽
 :::
 
 ::: table
@@ -36,4 +36,7 @@ export default {
 :::
 
 ::: comment
+:::
+
+::: previousNext panel
 :::

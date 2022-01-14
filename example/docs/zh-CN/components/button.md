@@ -122,7 +122,7 @@ export default {
   <lay-button type="normal" radius>百搭按钮</lay-button>
   <lay-button type="warm" radius>暖色按钮</lay-button>
   <lay-button type="danger" radius>警告按钮</lay-button>
-  <lay-button type="disabled" radius>禁用按钮</lay-button>
+  <lay-button @click="onClick" disabled radius>禁用按钮</lay-button>
 </template>
 
 <script>
@@ -131,7 +131,12 @@ import { ref } from 'vue'
 export default {
   setup() {
 
+    const onClick = () => {
+      console.log("click event");
+    }
+
     return {
+      onClick
     }
   }
 }
@@ -336,4 +341,7 @@ export default {
 :::
 
 ::: comment
+:::
+
+::: previousNext button
 :::
