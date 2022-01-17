@@ -130,15 +130,15 @@ export default {
 
 :::
 
-::: title 控制是否关闭
+::: title 关闭前置
 :::
 
 ::: demo
 
 <template>
   <lay-tab type="card" v-model="current5" allow-close @change="change5" @close="close5" :beforeClose="beforeClose">
-    <lay-tab-item title="选项一" id="1"><div style="padding:20px">选项一</div></lay-tab-item>
-    <lay-tab-item title="选项二" id="2"><div style="padding:20px">选项二</div></lay-tab-item>
+    <lay-tab-item title="选项一" id="1" closable="true"><div style="padding:20px">选项一</div></lay-tab-item>
+    <lay-tab-item title="选项二" id="2" closable="false"><div style="padding:20px">选项二</div></lay-tab-item>
     <lay-tab-item title="选项三" id="3"><div style="padding:20px">选项三</div></lay-tab-item>
     <lay-tab-item title="选项四" id="4"><div style="padding:20px">选项四</div></lay-tab-item>
     <lay-tab-item title="选项五" id="5"><div style="padding:20px">选项五</div></lay-tab-item>
@@ -178,15 +178,14 @@ export default {
 
 :::
 
-
 ::: title 嵌套循环
 :::
 
 ::: demo
 
 <template>
-  <lay-tab type="card" v-model="current6" @change="change6">
-    <lay-tab-item v-for="a in arr" :key="a" :title="a.title" :id="a.id">
+  <lay-tab type="card" allow-close v-model="current6" @change="change6">
+    <lay-tab-item v-for="a in arr" :key="a" :title="a.title" :id="a.id" :closable="a.closable">
       内容{{a.id}}
     </lay-tab-item>
   </lay-tab>
@@ -204,11 +203,10 @@ export default {
     }
 
     const arr = ref([
-      {id:'1', title:'选项一'},
-      {id:'2', title:'选项二'}
+      {id:'1', title:'选项一', closable: false},
+      {id:'2', title:'选项二'},
+      {id:'3', title:'选项三'}
     ])
-
-    arr.value.push({id:'3', title:'选项三'})
 
     return {
       current6,
@@ -225,13 +223,13 @@ export default {
 
 ::: table
 
-| 属性        | 描述     | 可选值         |
-| ----------- | -------- | -------------- |
-| v-model     | 当前激活 | --             |
-| type        | 主题样式 | --             |
-| allow-close | 允许关闭 | `true` `false` |
-| before-close  | `Function`关闭之前的回调钩子函数 | 参数(`id`), `return false` 表示不进行关闭   |
-| before-leave  | `Function`切换标签之前的回调钩子函数 | 参数(`id`), `return false` 表示不进行切换   |
+| 属性         | 描述                                 | 可选值                                    |
+| ------------ | ------------------------------------ | ----------------------------------------- |
+| v-model      | 当前激活                             | --                                        |
+| type         | 主题样式                             | --                                        |
+| allow-close  | 允许关闭                             | `true` `false`                            |
+| before-close | `Function`关闭之前的回调钩子函数     | 参数(`id`), `return false` 表示不进行关闭 |
+| before-leave | `Function`切换标签之前的回调钩子函数 | 参数(`id`), `return false` 表示不进行切换 |
 
 :::
 
@@ -244,6 +242,19 @@ export default {
 | ------ | -------- | ---- |
 | change | 选中切换 | id   |
 | close  | 关闭事件 | id   |
+
+:::
+
+::: title Tab Item 属性
+:::
+
+::: table
+
+| 属性     | 描述     | 可选值 |
+| -------- | -------- | ------ |
+| id       | 唯一标识 | --     |
+| title    | 头部标题 | --     |
+| closable | 允许关闭 | --     |
 
 :::
 

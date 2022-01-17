@@ -13,7 +13,7 @@
       >
         {{ children.props.title }}
         <i
-          v-if="allowClose"
+          v-if="allowClose && children.props.closable != false"
           class="layui-icon layui-icon-close layui-unselect layui-tab-close"
           @click.stop="close(index, children.props.id)"
         ></i>
