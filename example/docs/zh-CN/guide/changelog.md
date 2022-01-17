@@ -18,8 +18,9 @@
         <ul> 
           <li>[新增] avatar-list 头像列表组件。</li>
           <li>[修复] button 按钮 disabled 为 true 时, 仍触发 click 事件。</li>
-          <li>[修复] menu-item 与 sub-menu 组件的 title 属性必填警告。</li>
-          <li>[升级] vite 2.7.10。</li>        
+          <li>[修复] menu-item 与 sub-menu 组件的 title 属性必填警告。</li> 
+          <li>[升级] vite 2.7.12。</li>        
+          <li>[升级] vue 3.2.27。</li>   
         </ul> 
       </li>
     </ul>
