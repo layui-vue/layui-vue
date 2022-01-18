@@ -20,6 +20,7 @@
           <li>[新增] tab-item 选项卡组件 closable 属性, 控制当前选项卡 close 支持。</li>
           <li>[修复] button 按钮 disabled 为 true 时, 触发 click 事件。</li>
           <li>[修复] menu-item 与 sub-menu 组件的 title 属性必填警告。</li> 
+          <li>[修复] layout 组件 side 因 flex 布局宽度不固定。</li>
           <li>[优化] layer 的 children slot 渲染机制。</li>
           <li>[升级] layer-vue 1.2.5。</li>
           <li>[升级] vue 3.2.27。</li>   
