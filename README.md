@@ -68,6 +68,22 @@ createApp(App).use(Layui).mount('#app')
 
 从现在开始，用另一种方式拥抱 layui, 继续化作你方寸屏幕前的亿万字节！
 
+### 使用趋势
+
+[![Giteye chart](https://chart.giteye.net/gitee/layui-vue/layui-vue/5ZQ67WWS.png)](https://giteye.net/chart/5ZQ67WWS)
+
+### 贡献代码
+
+> 在人的尺度里，世界既无始也无终，唯一的信仰是，总有人认得你站在暴风雪里的样子。  
+
+[![Giteye chart](https://chart.giteye.net/gitee/layui-vue/layui-vue/DBC9Z6HQ.png)](https://giteye.net/chart/DBC9Z6HQ)
+
+## 交流群
+
+| QQ | 微信 |
+|----|----|
+| <img src="https://images.gitee.com/uploads/images/2021/1008/090410_8b349271_4835367.png" width="180px" />  | <img src="https://images.gitee.com/uploads/images/2022/0103/195713_7e626723_4835367.png" width="180px" /> |
+
 ## 相关
 
 [官网](http://layui-vue.pearadmin.com/)、[更新日志](http://layui-vue.pearadmin.com/zh-CN/guide/changelog)、[交流群](https://jq.qq.com/?_wv=1027&k=ffiUQgnE)
