@@ -14,7 +14,7 @@
       <ul> 
       <a name="0-3-4"> </a> 
       <li> 
-        <h3>0.3.4 <span class="layui-badge-rim">2022-01-09</span></h3> 
+        <h3>0.3.4 <span class="layui-badge-rim">2022-01-19</span></h3> 
         <ul> 
           <li>[新增] avatar-list 头像列表组件。</li>
           <li>[新增] tab-item 选项卡组件 closable 属性, 控制当前选项卡 close 支持。</li>
@@ -22,8 +22,8 @@
           <li>[修复] menu-item 与 sub-menu 组件的 title 属性必填警告。</li> 
           <li>[修复] layout 组件 side 因 flex 布局宽度不固定。</li>
           <li>[优化] layer 的 children slot 渲染机制。</li>
-          <li>[升级] layer-vue 1.2.5。</li>
-          <li>[升级] vue 3.2.27。</li>   
+          <li>[升级] layer-vue 1.2.5 版本。</li>
+          <li>[升级] vue 3.2.27 版本。</li>   
         </ul> 
       </li>
     </ul>
@@ -54,7 +54,7 @@
           <li>[增强] menu 菜单组件, 初步支持无限级嵌套。</li>
           <li>[修复] layer.close layer.closeAll 函数无法触发 OutAnim 过度动画问题。</li>
           <li>[废弃] menu-child-item 组件, 使用 menu-item 替代。</li>
-          <li>[升级] layer-vue 1.2.4。</li>
+          <li>[升级] layer-vue 1.2.4 版本。</li>
         </ul> 
       </li>
     </ul>
@@ -72,7 +72,7 @@
           <li>[修复] rate 评分 mouseleave 事件绑定警告。</li>
           <li>[修复] npm 安装 layui-vue 不必要的依赖警告。</li>  
           <li>[集成] eslint, prettier 规范插件 。</li>  
-          <li>[升级] icons-vue 1.0.2。</li>  
+          <li>[升级] icons-vue 1.0.2 版本。</li>  
         </ul> 
       </li>
     </ul>
@@ -91,7 +91,7 @@
           <li>[修复] layer 弹层 v-model 切换状态后, 让其保持 area 与 offset 状态。</li>
           <li>[修复] transfer 穿梭框组件按钮样式, 使其增加减少操作按钮对齐。</li>
           <li>[修复] tree 树开启 checkbox 时, 无法选中的问题。</li>
-          <li>[升级] layer-vue 1.2.2。</li>      
+          <li>[升级] layer-vue 1.2.2 版本。</li>      
         </ul> 
       </li>
     </ul>
