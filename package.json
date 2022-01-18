@@ -24,12 +24,12 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build --emptyOutDir && npm run build:types",
+    "build:es": "es use",
+    "build:umd": "umd use",
     "build:types": "rimraf types && tsc -d",
     "build:example": "vite build example",
     "lint:eslint": "eslint 'src/**/*.{vue,ts,tsx}' --fix",
-    "lint:prettier": "prettier --write  'src/**/*'",
-    "commit": "git cz",
-    "prepublishOnly": "npm run build"
+    "lint:prettier": "prettier --write  'src/**/*'"
   },
   "dependencies": {
     "@layui/hooks-vue": "^0.1.6",
@@ -66,7 +66,7 @@
     "prettier": "^2.5.1",
     "prismjs": "^1.25.0",
     "rimraf": "^3.0.2",
-    "rollup": "^2.61.0",
+    "rollup": "^2.64.0",
     "typescript": "^4.5.2",
     "vite": "2.7.12",
     "vite-plugin-md": "^0.11.6"

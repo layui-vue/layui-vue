@@ -30,11 +30,12 @@ export default defineConfig({
         assetFileNames: 'index.css',
       },
       plugins: [
+        // @ts-ignore
         babel({
           exclude: 'node_modules/**',
           extensions: ['.js', '.jsx', '.ts', '.tsx', '.vue'],
           presets: ['@babel/preset-env', '@babel/preset-typescript'],
-        }),
+        })
       ],
       external: ['vue', 'vue-router'],
     },
