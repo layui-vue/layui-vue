@@ -1,0 +1,34 @@
+.lay-split-panel{
+  height: 100%;
+  display: flex;
+  .lay-split-panel-item {
+    height: 100%;
+    flex-grow: 1;
+    border: 1px #eeeeee solid;
+  }
+  .lay-split-panel-item-move{
+    user-select: none;
+    pointer-events: none;
+    cursor: col-resize;
+  }
+  .lay-split-panel-line{
+    height: 100%;
+    width: 3px;
+    border: 1px #eeeeee solid;
+    background-color: #e8e8e8;
+    border-left: none;
+    border-right: none;
+    cursor: col-resize;
+  }
+
+  //.lay-split-panel-line:before{
+  //  content: '';
+  //  position: relative;
+  //  height: 100%;
+  //  left: -5px;
+  //  top: -1px;
+  //  width: 3px;
+  //  border: 1px #eeeeee solid;
+  //  cursor: col-resize;
+  //}
+}

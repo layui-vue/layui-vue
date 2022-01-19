@@ -70,9 +70,13 @@ import LaySkeleton from "./module/skeleton/index";
 import LaySkeletonItem from "./module/skeletonItem/index";
 import LayStep from "./module/step/index";
 import LayStepItem from "./module/stepItem/index";
-import LaySubMenu from "./module/subMenu/index"
+import LaySubMenu from "./module/subMenu/index";
+import LaySplitPanel from "./module/splitPanel/index";
+import LaySplitPanelItem from "./module/splitPanelItem/index";
 
 const components: Record<string, IDefineComponent> = {
+  LaySplitPanel,
+  LaySplitPanelItem,
   LayRadio,
   LayButton,
   LayIcon,
@@ -137,7 +141,7 @@ const components: Record<string, IDefineComponent> = {
   LayCountUp,
   LayStep,
   LayStepItem,
-  LaySubMenu
+  LaySubMenu,
 };
 
 const install = (app: App, options?: InstallOptions): void => {
@@ -150,6 +154,8 @@ const install = (app: App, options?: InstallOptions): void => {
 };
 
 export {
+  LaySplitPanel,
+  LaySplitPanelItem,
   LayRadio,
   LayButton,
   LayIcon,
@@ -214,7 +220,7 @@ export {
   LayCountUp,
   LayStep,
   LayStepItem,
-  LaySubMenu
+  LaySubMenu,
 };
 
 export { layer };
