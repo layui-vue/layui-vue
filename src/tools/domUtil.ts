@@ -3,7 +3,7 @@
  * <p>
  * @param elem dom
  * */
-export function getTop(elem) {
+export function getTop(elem: any) : any {
   return (
     elem.offsetTop + ((elem.offsetParent && getTop(elem.offsetParent)) || 0)
   );
@@ -14,7 +14,7 @@ export function getTop(elem) {
  * <p>
  * @param elem dom
  * */
-export function getLeft(elem) {
+export function getLeft(elem: any) : any {
   return (
     elem.offsetLeft + ((elem.offsetParent && getLeft(elem.offsetParent)) || 0)
   );
@@ -27,7 +27,7 @@ export function getLeft(elem) {
  * @param events 事件
  * @param handler 事件回调
  * */
-export function on(elem, events, handler) {
+export function on(elem: any, events: any, handler: any) {
   []
     .concat(events)
     .forEach((event) => elem.addEventListener(event, handler, false));
@@ -40,8 +40,8 @@ export function on(elem, events, handler) {
  * @param events 事件
  * @param handler 事件回调
  * */
-export function once(elem, events, handler) {
-  const listener = function (_this, args) {
+export function once(elem: any, events: any, handler: any) {
+  const listener = function (_this: any, args: any) {
     handler.apply(_this, args);
     off(elem, events, listener);
   };
@@ -55,7 +55,7 @@ export function once(elem, events, handler) {
  * @param events 事件
  * @param handler 事件回调
  * */
-export function off(elem, events, handler) {
+export function off(elem: any, events: any, handler: any) {
   []
     .concat(events)
     .forEach((event) => elem.removeEventListener(event, handler, false));
