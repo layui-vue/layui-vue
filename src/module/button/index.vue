@@ -27,6 +27,14 @@ const props = withDefaults(defineProps<LayButtonProps>(), {
   nativeType: "button",
 });
 
+const emit = defineEmits(["click"]);
+
+const onClick = (event : any) => {
+  if(!props.disabled) {
+    emit("click", event);
+  }
+}
+
 const classes = computed(() => {
   return [
     props.type ? `layui-btn-${props.type}` : "",
@@ -48,6 +56,7 @@ const classes = computed(() => {
       classes,
     ]"
     :type="nativeType"
+    @click="onClick"
   >
     <i
       v-if="loading"

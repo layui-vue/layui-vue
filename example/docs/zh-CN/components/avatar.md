@@ -38,9 +38,7 @@ export default {
 
 <script>
 import { ref } from 'vue'
-
 export default {
-
     setup() {
 
         const src = "https://portrait.gitee.com/uploads/avatars/user/2813/8441097_shaynas_1610801433.png"
@@ -61,8 +59,11 @@ export default {
 
 <template>
   <lay-avatar :src="src" size="xs"></lay-avatar> 
+  &nbsp;&nbsp; 
   <lay-avatar :src="src" size="sm"></lay-avatar>
+  &nbsp;&nbsp;
   <lay-avatar :src="src"></lay-avatar>
+  &nbsp;&nbsp;
   <lay-avatar :src="src" size="lg"></lay-avatar>
 </template>
 
@@ -83,7 +84,39 @@ export default {
 
 :::
 
-::: title 头像属性
+::: title 头像列表
+:::
+
+::: demo
+
+<template>
+  <lay-avatar-list>
+    <lay-avatar :src="src" radius></lay-avatar>
+    <lay-avatar :src="src" radius></lay-avatar>
+    <lay-avatar :src="src" radius></lay-avatar>
+    <lay-avatar :src="src" radius></lay-avatar>
+    <lay-avatar :src="src" radius></lay-avatar>
+  </lay-avatar-list>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+    setup() {
+
+        const src = "https://portrait.gitee.com/uploads/avatars/user/2813/8441097_shaynas_1610801433.png"
+
+        return {
+          src
+        }
+  }
+}
+</script>
+
+:::
+
+::: title Avatar 属性
 :::
 
 ::: table

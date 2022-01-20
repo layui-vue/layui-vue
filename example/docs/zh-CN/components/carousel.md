@@ -118,7 +118,7 @@ export default {
 
 :::
 
-::: title 轮播属性
+::: title Carousel 属性
 :::
 
 ::: table
@@ -132,7 +132,7 @@ export default {
 
 :::
 
-::: title 轮播事件
+::: title Carousel 事件
 :::
 
 ::: table

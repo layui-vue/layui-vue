@@ -26,7 +26,7 @@
           >
         </div>
         <div class="site-version">
-          <span>当前版本：v<cite class="site-showv">0.3.2</cite></span>
+          <span>当前版本：v<cite class="site-showv">0.3.4</cite></span>
           <span
             ><router-link
               class="layui-inline site-down"

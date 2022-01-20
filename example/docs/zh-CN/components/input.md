@@ -106,7 +106,7 @@ export default {
 
 :::
 
-::: title 输入框属性
+::: title Input 属性
 :::
 
 ::: table
@@ -120,7 +120,7 @@ export default {
 
 :::
 
-::: title 输入框属性
+::: title Input 属性
 :::
 
 ::: table

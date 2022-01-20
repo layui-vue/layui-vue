@@ -47,7 +47,7 @@ export default {
 
 :::
 
-::: title empty 属性
+::: title Empty 属性
 :::
 
 ::: table

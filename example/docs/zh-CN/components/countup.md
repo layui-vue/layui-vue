@@ -33,14 +33,17 @@ export default {
 ::: demo
 
 <template>
+  <lay-button @click="handlerClick" type="primary" size="sm">更新</lay-button>
+  <br/>
+  <br/>
   <!-- 属性 -->
-  <lay-card style="width:200px;height:120px;display:inline-block; border:1px solid #eeeeee;box-shadow: 3px 3px 5px #888888">
+  <lay-card style="width:200px;height:120px;display:inline-block;">
     <h1 style="padding:20px 15px">
       <lay-count-up :end-val="countVal2" prefix="¥" suffix="↑"></lay-count-up>
     </h1>
   </lay-card>
   <!-- 插槽 -->
-  <lay-card style="width:200px;height:120px;display:inline-block; margin-left:50px; border:1px solid #eeeeee;box-shadow: 3px 3px 5px #888888">
+  <lay-card style="width:200px;height:120px;display:inline-block;">
     <h1 style="padding:20px 15px">
       <lay-count-up :end-val="18" :duration="1">
         <template #prefix>
@@ -54,7 +57,6 @@ export default {
       </lay-count-up>
     </h1>
   </lay-card>
-  <lay-button @click="handlerClick" type="primary" border="blue" size="sm" style="margin:0px 30px;">更新</lay-button>
 </template>
 
 <script>
@@ -75,7 +77,7 @@ export default {
 
 :::
 
-::: title countUp 属性
+::: title Count Up 属性
 :::
 
 ::: table
@@ -94,8 +96,19 @@ export default {
 
 :::
 
+::: title Count Up 插槽
+:::
 
-::: title CountUpOptions 属性
+::: table
+
+| 名称    | 描述     | 参数 |
+| -----   | -------- | ---- |
+| prefix  | 前缀     | --   |
+| suffix  | 后缀     | --   |
+
+:::
+
+::: title Count Up Options 属性
 ::: 
 
 ::: table
@@ -110,18 +123,6 @@ export default {
 | duration      | 动画持续时间                                                 | number         | `2`    | —             |
 | prefix        | 前缀                                                         | string         | —    | —             |
 | suffix        | 后缀                                                         | string         | —     | —             |   |
-
-:::
-
-::: title countUp 插槽
-:::
-
-::: table
-
-| 名称    | 描述     | 参数 |
-| -----   | -------- | ---- |
-| prefix  | 前缀     | --   |
-| suffix  | 后缀     | --   |
 
 :::
 

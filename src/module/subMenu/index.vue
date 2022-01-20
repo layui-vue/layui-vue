@@ -11,7 +11,7 @@ const slots = useSlots();
 
 const props = defineProps<{
   id: string;
-  title: string;
+  title?: string;
 }>();
 
 const isTree = inject("isTree");

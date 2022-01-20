@@ -9,3 +9,7 @@ export interface SelectItem {
 export interface SelectItemHandle {
   (selectItem: SelectItem, isChecked?: boolean): void;
 }
+
+export interface SelectItemPush {
+  (selectItem: SelectItem): void
+}

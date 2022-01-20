@@ -188,7 +188,7 @@ export default {
 
 :::
 
-::: title 复选框属性
+::: title Checkbox 属性
 :::
 
 ::: table
@@ -203,7 +203,7 @@ export default {
 
 :::
 
-::: title 复选框事件
+::: title Checkbox 事件
 :::
 
 ::: table

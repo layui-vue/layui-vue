@@ -149,10 +149,24 @@ const vertical_style = reactive({
   height: props.modelValue,
 });
 
+function throttle(func: Function) {
+  let timer: any = null;
+  return function (args: any) {
+    if (!timer) {
+      timer = setTimeout(() => {
+        timer = null;
+        func(args);
+      }, 60);
+    }
+  };
+}
+const moveAction = throttle(handle_mousemove);
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function handle_mousedown() {
   on("selectstart", window, handle_select, { once: true });
   on("mouseup", window, handle_mouseup);
-  on("mousemove", window, handle_mousemove);
+  on("mousemove", window, moveAction);
 }
 
 function handle_mousemove(e: MouseEvent) {
@@ -179,7 +193,7 @@ function handle_mousemove(e: MouseEvent) {
 function handle_mouseup() {
   // off('selectstart', document, handle_select)
   off("mouseup", window, handle_mouseup);
-  off("mousemove", window, handle_mousemove);
+  off("mousemove", window, moveAction);
 }
 
 function handle_select(e: Event): void {

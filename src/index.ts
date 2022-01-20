@@ -9,6 +9,7 @@ import { layer } from "@layui/layer-vue";
 import LayLayer from "./module/layer/index";
 import LayBacktop from "./module/backTop/index";
 import LayAvatar from "./module/avatar/index";
+import LayAvatarList from "./module/avatarList/index";
 import LayRadio from "./module/radio/index";
 import LayButton from "./module/button/index";
 import LayButtonContainer from "./module/buttonContainer/index";
@@ -112,6 +113,7 @@ const components: Record<string, IDefineComponent> = {
   LayBreadcrumb,
   LayBreadcrumbItem,
   LayAvatar,
+  LayAvatarList,
   LayField,
   LaySelect,
   LayScroll,
@@ -191,6 +193,7 @@ export {
   LayBreadcrumb,
   LayBreadcrumbItem,
   LayAvatar,
+  LayAvatarList,
   LayField,
   LaySelect,
   LayScroll,
