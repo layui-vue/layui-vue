@@ -2,12 +2,22 @@
   <div
     v-if="!isStart"
     :class="[!isStart ? 'lay-split-panel-line' : '']"
-    :style="{ cursor: 'col-resize' }"
     ref="el"
     v-on="{ mousedown: mousedown, mouseup: mouseup }"
   ></div>
-  <div :class="['lay-split-panel-item']">
-    <slot> {{ parents.elementX }}{{ pressed }}</slot>
+  <div
+    v-if="isVertical"
+    :class="['lay-split-panel-item']"
+    :style="{ height: `${space ? space : (100 + space) / stepsCount}%` }"
+  >
+    <slot></slot>
+  </div>
+  <div
+    v-else
+    :class="['lay-split-panel-item']"
+    :style="{ width: `${space ? space : (100 + space) / stepsCount}%` }"
+  >
+    <slot></slot>
   </div>
 </template>
 
@@ -28,19 +38,12 @@ import {
 import type { ComputedRef } from "vue";
 
 export interface LayStepItemProps {
-  title?: string;
-  content?: string;
-  icon?: string;
-  status?: string;
+  space?: number;
 }
 
 const props = withDefaults(defineProps<LayStepItemProps>(), {
-  title: "",
-  content: "",
-  icon: "",
-  status: "",
+  space: 0,
 });
-
 const index = ref(-1);
 const parents: any = inject("laySplitPanel");
 const currentInstance: any = getCurrentInstance();
@@ -51,15 +54,10 @@ const setIndex = (val: number) => {
 
 const mousedown = (event: any) => {
   moveStatus.value = true;
-  const prevDomWidth = event.target.previousElementSibling.offsetWidth;
-  const lineOffsetLeft = event.target.offsetLeft;
   parents.moveChange(event, true);
-
-  console.log(prevDomWidth);
-  console.log(lineOffsetLeft);
 };
 
-const mouseup = (event: any, index: any) => {
+const mouseup = (event: any) => {
   moveStatus.value = false;
 };
 
@@ -68,7 +66,7 @@ const stepsCount = computed(() => {
 });
 
 const isVertical = computed(() => {
-  return parents.props.direction === "vertical";
+  return parents.props.vertical;
 });
 
 const isLast: ComputedRef<boolean> = computed(() => {
@@ -80,10 +78,10 @@ const isLast: ComputedRef<boolean> = computed(() => {
 const isStart: ComputedRef<boolean> = computed(() => {
   return parents.steps.value[0]?.itemId === currentInstance.uid;
 });
-
 const stepItemState = reactive({
   itemId: computed(() => currentInstance?.uid),
   setIndex,
+  width: [],
 });
 
 parents.steps.value = [...parents.steps.value, stepItemState];

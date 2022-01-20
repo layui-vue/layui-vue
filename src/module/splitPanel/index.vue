@@ -1,8 +1,10 @@
 <template>
   <div
     ref="target"
-    class="lay-split-panel"
-    :style="{ cursor: domStatus ? 'col-resize' : '' }"
+    :class="['lay-split-panel', vertical ? 'lay-split-panel-vertical' : '']"
+    :style="{
+      cursor: domStatus ? (!vertical ? 'col-resize' : 'row-resize') : '',
+    }"
     v-on="{ mouseup: mouseup }"
   >
     <slot></slot>
@@ -10,59 +12,91 @@
 </template>
 
 <script setup name="laySplitPanel" lang="ts">
-import {
-  ref,
-  watch,
-  provide,
-  defineProps,
-  withDefaults,
-  defineEmits,
-  onMounted,
-} from "vue";
+import { ref, watch, provide, defineProps, withDefaults, onMounted } from "vue";
 import "./index.less";
 
 // 属性接口定义
 export interface LayStepProps {
-  active?: number;
+  vertical?: boolean;
+  minSize?: number;
 }
 // props初始化数据定义
 const props = withDefaults(defineProps<LayStepProps>(), {
-  active: 0,
+  vertical: false,
+  minSize: 50,
 });
 let domEvent = ref();
 let domStatus = ref(false);
-let otherDom = ref(0);
 const target = ref();
 
-const divSetInterval = (width, event) => {
-  console.log(width);
-  const boxLeft = target.value.offsetLeft;
-  const boxWidth = target.value.offsetWidth;
-  const prevDom = domEvent.value.target.previousElementSibling;
-  const nextDom = domEvent.value.target.nextElementSibling;
-  const timer = setInterval(() => {
-    const prevDomLeft = domEvent.value.target.previousElementSibling.offsetLeft;
-    const lineOffsetLeft = domEvent.value.target.offsetLeft;
-    prevDom.style.width = ((event.layerX - prevDomLeft) / boxWidth) * 100 + "%";
-    nextDom.style.width =
-      ((boxWidth - boxLeft - event.layerX - 5) / boxWidth) * 100 + "%";
-    console.log(event.layerX, prevDomLeft);
-  }, 100);
-  if (prevDom?.clientWidth === width) {
-    clearInterval(timer);
-  }
-};
-
 onMounted(() => {
-  const boxLeft = target.value.offsetLeft;
   const boxWidth = target.value.offsetWidth;
-  const prevDomLeft = domEvent.value.target.previousElementSibling.offsetLeft;
-  target.value.addEventListener("mousemove", (event: { layerX: any }) => {
-    if (domStatus.value) {
-      divSetInterval(event.layerX - prevDomLeft, event);
-      console.log(event.layerX, prevDomLeft);
-    }
+  const boxHeight = target.value.offsetHeight;
+  window.addEventListener("scroll", (event) => {
+    console.log(event);
   });
+  target.value.addEventListener(
+    "mousemove",
+    (event: { layerX: any; layerY: any }) => {
+      if (domStatus.value) {
+        const prevDom = domEvent.value.target.previousElementSibling;
+        const nextDom = domEvent.value.target.nextElementSibling;
+        if (!props.vertical) {
+          const prevDomLeft =
+            domEvent.value.target.previousElementSibling.offsetLeft;
+          const prevDomWidth =
+            domEvent.value.target.previousElementSibling.offsetWidth;
+          const nextDomWidth =
+            domEvent.value.target.nextElementSibling.offsetWidth;
+          const otherWidth = boxWidth - (prevDomWidth + nextDomWidth + 5);
+          const otherWidthPercentage =
+            ((prevDomWidth + nextDomWidth + 5) / boxWidth) * 100;
+          if (
+            event.layerX - prevDomLeft < props.minSize ||
+            boxWidth - (event.layerX - prevDomLeft) - otherWidth < props.minSize
+          ) {
+            return false;
+          }
+          prevDom.style.width =
+            ((event.layerX - prevDomLeft) / (prevDomWidth + nextDomWidth + 5)) *
+              otherWidthPercentage +
+            "%";
+          nextDom.style.width =
+            ((boxWidth - (event.layerX - prevDomLeft) - otherWidth) /
+              (prevDomWidth + nextDomWidth + 5)) *
+              otherWidthPercentage +
+            "%";
+        } else {
+          const prevDomTop =
+            domEvent.value.target.previousElementSibling.offsetTop;
+          const prevDomHeight =
+            domEvent.value.target.previousElementSibling.offsetHeight;
+          const nextDomHeight =
+            domEvent.value.target.nextElementSibling.offsetHeight;
+          const otherHeight = boxHeight - (prevDomHeight + nextDomHeight + 5);
+          const otherHeightPercentage =
+            ((prevDomHeight + nextDomHeight + 5) / boxHeight) * 100;
+          if (
+            event.layerY - prevDomTop < props.minSize ||
+            boxHeight - (event.layerY - prevDomTop) - otherHeight <
+              props.minSize
+          ) {
+            return false;
+          }
+          prevDom.style.height =
+            ((event.layerY - prevDomTop) /
+              (prevDomHeight + nextDomHeight + 5)) *
+              otherHeightPercentage +
+            "%";
+          nextDom.style.height =
+            ((boxHeight - (event.layerY - prevDomTop) - otherHeight) /
+              (prevDomHeight + nextDomHeight + 5)) *
+              otherHeightPercentage +
+            "%";
+        }
+      }
+    }
+  );
 });
 
 const moveChange = (event: any, status: boolean) => {
@@ -74,9 +108,6 @@ const mouseup = () => {
   domStatus.value = false;
 };
 
-// 绑定事件
-const emits = defineEmits(["onChange"]);
-
 // 定义初始化个数数组
 const steps = ref([]);
 // 监听有几个lay-split-panel-item
@@ -87,6 +118,7 @@ watch(steps, () => {
     }
   );
 });
+
 // 向lay-split-panel-item传递参数
 provide("laySplitPanel", {
   props,
