@@ -129,7 +129,7 @@
             莫名点
         </lay-col>
         <lay-col md="8">
-            焦点：skeleton step
+            焦点：skeleton step splitPanel
         </lay-col>
         <lay-col md="4">
             地点：中国 上海
