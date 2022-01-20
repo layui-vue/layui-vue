@@ -322,6 +322,11 @@ const zhCN = [
             meta: { title: "信息" },
           },
           {
+            path: "/zh-CN/components/drawer",
+            component: () => import("../../docs/zh-CN/components/drawer.md"),
+            meta: { title: "抽屉" },
+          },
+          {
             path: "/zh-CN/components/backtop",
             component: () => import("../../docs/zh-CN/components/backtop.md"),
             meta: { title: "返回顶部" },

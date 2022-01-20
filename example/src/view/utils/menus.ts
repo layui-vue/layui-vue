@@ -333,6 +333,12 @@ const menus = [
         subTitle: "msg",
         path: "/zh-CN/components/msg",
       },
+      {
+        id: 94,
+        title: "抽屉",
+        subTitle: "drawer",
+        path: "/zh-CN/components/drawer",
+      },
     ],
   },
 ];
