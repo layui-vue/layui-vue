@@ -77,6 +77,12 @@ const zhCN = [
         meta: { title: "组件" },
         children: [
           {
+            path: "/zh-CN/components/splitPanel",
+            component: () =>
+              import("../../docs/zh-CN/components/splitPanel.md"),
+            meta: { title: "分割面板" },
+          },
+          {
             path: "/zh-CN/components/skeleton",
             component: () => import("../../docs/zh-CN/components/skeleton.md"),
             meta: { title: "骨架屏" },
