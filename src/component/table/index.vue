@@ -14,7 +14,7 @@ import {
   defineEmits,
 } from "vue";
 import { Recordable } from "../type";
-import { guid } from "../../tools/guidUtil";
+import { guid } from "../../utils/guidUtil";
 
 const tableId = guid();
 
