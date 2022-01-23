@@ -20,6 +20,7 @@
           <li>[新增] layer 弹层 type 属性 drawer 值, 支持抽屉模式。</li>
           <li>[修复] dropdown 下拉菜单 content 显示位置问题。</li>
           <li>[升级] icons-vue 1.0.3 版本。</li>
+          <li>[升级] layer-vue 1.3.1 版本。</li>
         </ul> 
       </li>
     </ul>
