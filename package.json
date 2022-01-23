@@ -1,6 +1,6 @@
 {
   "name": "@layui/layui-vue",
-  "version": "0.3.4",
+  "version": "0.3.5",
   "author": "sleeprite",
   "license": "MIT",
   "description": "a component library for Vue 3 base on layui-vue",
@@ -33,8 +33,8 @@
   },
   "dependencies": {
     "@layui/hooks-vue": "^0.1.6",
-    "@layui/icons-vue": "^1.0.2",
-    "@layui/layer-vue": "^1.2.5",
+    "@layui/icons-vue": "^1.0.3",
+    "@layui/layer-vue": "^1.3.1",
     "async-validator": "^4.0.7",
     "countup.js": "^2.0.8",
     "evtd": "^0.2.3",

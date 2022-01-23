@@ -77,6 +77,12 @@ const zhCN = [
         meta: { title: "组件" },
         children: [
           {
+            path: "/zh-CN/components/splitPanel",
+            component: () =>
+              import("../../docs/zh-CN/components/splitPanel.md"),
+            meta: { title: "分割面板" },
+          },
+          {
             path: "/zh-CN/components/skeleton",
             component: () => import("../../docs/zh-CN/components/skeleton.md"),
             meta: { title: "骨架屏" },
@@ -314,6 +320,11 @@ const zhCN = [
             path: "/zh-CN/components/msg",
             component: () => import("../../docs/zh-CN/components/msg.md"),
             meta: { title: "信息" },
+          },
+          {
+            path: "/zh-CN/components/drawer",
+            component: () => import("../../docs/zh-CN/components/drawer.md"),
+            meta: { title: "抽屉" },
           },
           {
             path: "/zh-CN/components/backtop",

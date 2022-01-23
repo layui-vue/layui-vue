@@ -1,79 +1,83 @@
 import type { App } from "vue";
-import type { IDefineComponent, InstallOptions } from "./module/type/index";
+import type { IDefineComponent, InstallOptions } from "./component/type/index";
 
-import "./css/layui.css";
+import "./theme/layui.css";
 import "@layui/layer-vue/lib/index.css";
 import "@layui/icons-vue/lib/index.css";
-import { layer } from "@layui/layer-vue";
+import { layer, useLayer } from "@layui/layer-vue";
 
-import LayLayer from "./module/layer/index";
-import LayBacktop from "./module/backTop/index";
-import LayAvatar from "./module/avatar/index";
-import LayAvatarList from "./module/avatarList/index";
-import LayRadio from "./module/radio/index";
-import LayButton from "./module/button/index";
-import LayButtonContainer from "./module/buttonContainer/index";
-import LayButtonGroup from "./module/buttonGroup/index";
-import LayIcon from "./module/icon/index";
-import LayIconPicker from "./module/iconPicker/index";
-import LayCard from "./module/card/index";
-import LayLayout from "./module/layout/index";
-import LaySide from "./module/side/index";
-import LayBody from "./module/body/index";
-import LayHeader from "./module/header/index";
-import LayFooter from "./module/footer/index";
-import LayLogo from "./module/logo/index";
-import LayPanel from "./module/panel/index";
-import LayProgress from "./module/progress/index";
-import LayCol from "./module/col/index";
-import LayRow from "./module/row/index";
-import LayInput from "./module/input/index";
-import LayBadge from "./module/badge/index";
-import LayBlock from "./module/block/index";
-import LayLine from "./module/line/index";
-import LayTimeline from "./module/timeline/index";
-import LayTimelineItem from "./module/timelineItem/index";
-import LayTextarea from "./module/textarea/index";
-import LaySwitch from "./module/switch/index";
-import LayCollapse from "./module/collapse/index";
-import LayCollapseItem from "./module/collapseItem/index";
-import LayContainer from "./module/container/index";
-import LayCountUp from "./module/countUp/index";
-import LayMenu from "./module/menu/index";
-import LayMenuItem from "./module/menuItem/index";
-import LayCheckbox from "./module/checkbox/index";
-import LayCheckboxGroup from "./module/checkboxGroup/index";
-import LayForm from "./module/form/index";
-import LayBreadcrumb from "./module/breadcrumb/index";
-import LayBreadcrumbItem from "./module/breadcrumbItem/index";
-import LayField from "./module/field/index";
-import LaySelect from "./module/select/index";
-import LaySelectOption from "./module/selectOption/index";
-import LayScroll from "./module/scroll/index";
-import LayEmpty from "./module/empty/index";
-import LayFormItem from "./module/formItem/index";
-import LayRate from "./module/rate/index";
-import LayDropdown from "./module/dropdown/index";
-import LayDropdownItem from "./module/dropdownItem/index";
-import LayTab from "./module/tab/index";
-import LayTabItem from "./module/tabItem/index";
-import LayTree from "./module/tree/index";
-import LayTable from "./module/table/index";
-import LayPage from "./module/page/index";
-import LayTransfer from "./module/transfer/index";
-import LaySlider from "./module/slider/index";
-import LayCarousel from "./module/carousel/index";
-import LayCarouselItem from "./module/carouselItem/index";
-import LayColorPicker from "./module/colorPicker/index";
-import LayTooltip from "./module/tooltip/index";
-import LayInputNumber from "./module/inputNumber/index";
-import LaySkeleton from "./module/skeleton/index";
-import LaySkeletonItem from "./module/skeletonItem/index";
-import LayStep from "./module/step/index";
-import LayStepItem from "./module/stepItem/index";
-import LaySubMenu from "./module/subMenu/index"
+import LayLayer from "./component/layer/index";
+import LayBacktop from "./component/backTop/index";
+import LayAvatar from "./component/avatar/index";
+import LayAvatarList from "./component/avatarList/index";
+import LayRadio from "./component/radio/index";
+import LayButton from "./component/button/index";
+import LayButtonContainer from "./component/buttonContainer/index";
+import LayButtonGroup from "./component/buttonGroup/index";
+import LayIcon from "./component/icon/index";
+import LayIconPicker from "./component/iconPicker/index";
+import LayCard from "./component/card/index";
+import LayLayout from "./component/layout/index";
+import LaySide from "./component/side/index";
+import LayBody from "./component/body/index";
+import LayHeader from "./component/header/index";
+import LayFooter from "./component/footer/index";
+import LayLogo from "./component/logo/index";
+import LayPanel from "./component/panel/index";
+import LayProgress from "./component/progress/index";
+import LayCol from "./component/col/index";
+import LayRow from "./component/row/index";
+import LayInput from "./component/input/index";
+import LayBadge from "./component/badge/index";
+import LayBlock from "./component/block/index";
+import LayLine from "./component/line/index";
+import LayTimeline from "./component/timeline/index";
+import LayTimelineItem from "./component/timelineItem/index";
+import LayTextarea from "./component/textarea/index";
+import LaySwitch from "./component/switch/index";
+import LayCollapse from "./component/collapse/index";
+import LayCollapseItem from "./component/collapseItem/index";
+import LayContainer from "./component/container/index";
+import LayCountUp from "./component/countUp/index";
+import LayMenu from "./component/menu/index";
+import LayMenuItem from "./component/menuItem/index";
+import LayCheckbox from "./component/checkbox/index";
+import LayCheckboxGroup from "./component/checkboxGroup/index";
+import LayForm from "./component/form/index";
+import LayBreadcrumb from "./component/breadcrumb/index";
+import LayBreadcrumbItem from "./component/breadcrumbItem/index";
+import LayField from "./component/field/index";
+import LaySelect from "./component/select/index";
+import LaySelectOption from "./component/selectOption/index";
+import LayScroll from "./component/scroll/index";
+import LayEmpty from "./component/empty/index";
+import LayFormItem from "./component/formItem/index";
+import LayRate from "./component/rate/index";
+import LayDropdown from "./component/dropdown/index";
+import LayDropdownItem from "./component/dropdownItem/index";
+import LayTab from "./component/tab/index";
+import LayTabItem from "./component/tabItem/index";
+import LayTree from "./component/tree/index";
+import LayTable from "./component/table/index";
+import LayPage from "./component/page/index";
+import LayTransfer from "./component/transfer/index";
+import LaySlider from "./component/slider/index";
+import LayCarousel from "./component/carousel/index";
+import LayCarouselItem from "./component/carouselItem/index";
+import LayColorPicker from "./component/colorPicker/index";
+import LayTooltip from "./component/tooltip/index";
+import LayInputNumber from "./component/inputNumber/index";
+import LaySkeleton from "./component/skeleton/index";
+import LaySkeletonItem from "./component/skeletonItem/index";
+import LayStep from "./component/step/index";
+import LayStepItem from "./component/stepItem/index";
+import LaySubMenu from "./component/subMenu/index";
+import LaySplitPanel from "./component/splitPanel/index";
+import LaySplitPanelItem from "./component/splitPanelItem/index";
 
-export const components: Record<string, IDefineComponent> = {
+const components: Record<string, IDefineComponent> = {
+  LaySplitPanel,
+  LaySplitPanelItem,
   LayRadio,
   LayButton,
   LayIcon,
@@ -139,7 +143,7 @@ export const components: Record<string, IDefineComponent> = {
   LayCountUp,
   LayStep,
   LayStepItem,
-  LaySubMenu
+  LaySubMenu,
 };
 
 const install = (app: App, options?: InstallOptions): void => {
@@ -152,6 +156,8 @@ const install = (app: App, options?: InstallOptions): void => {
 };
 
 export {
+  LaySplitPanel,
+  LaySplitPanelItem,
   LayRadio,
   LayButton,
   LayIcon,
@@ -217,9 +223,9 @@ export {
   LayCountUp,
   LayStep,
   LayStepItem,
-  LaySubMenu
+  LaySubMenu,
 };
 
-export { layer };
+export { layer, useLayer };
 
 export default { install };

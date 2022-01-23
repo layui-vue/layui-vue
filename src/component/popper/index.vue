@@ -30,7 +30,7 @@ import {
   defineEmits,
   onMounted,
 } from "vue";
-import { on } from "../../tools/domUtil";
+import { on } from "../../utils/domUtil";
 const props = withDefaults(
   defineProps<{
     el: any;

@@ -2610,7 +2610,6 @@ body .layui-table-tips .layui-layer-content {
   display: none;
   position: absolute;
   left: 0;
-  top: 38px;
   z-index: 899;
   min-width: 100%;
   max-height: 360px;
