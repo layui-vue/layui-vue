@@ -17,7 +17,7 @@ const props = withDefaults(
   defineProps<{
     id: string;
     title: string;
-    closable?: boolean;
+    closable?: boolean | string;
   }>(),
   {
     closable: true,

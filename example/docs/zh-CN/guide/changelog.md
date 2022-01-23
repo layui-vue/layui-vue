@@ -14,10 +14,11 @@
     <ul> 
       <a name="0-3-5"> </a> 
       <li> 
-        <h3>0.3.5 <span class="layui-badge-rim">2022-01-19</span></h3> 
+        <h3>0.3.5 <span class="layui-badge-rim">2022-01-24</span></h3> 
         <ul> 
           <li>[新增] split-panel 分割面板, 高度灵活的布局组件。</li>
-          <li>[新增] layer 弹层 type 属性 drawer 值, 支持抽屉模式。</li>
+          <li>[新增] layer 弹层 type 属性 drawer 可选值, 提供抽屉模式。</li>
+          <li>[修复] tab-item 组件 closable 属性警告, 兼容 string 类型。</li>
           <li>[修复] dropdown 下拉菜单 content 显示位置问题。</li>
           <li>[升级] icons-vue 1.0.3 版本。</li>
           <li>[升级] layer-vue 1.3.1 版本。</li>

@@ -149,7 +149,6 @@ const components: Record<string, IDefineComponent> = {
 const install = (app: App, options?: InstallOptions): void => {
   const _options = options;
   app.config.globalProperties.$PROOPTIONS = _options;
-  app.config.globalProperties.$layer = useLayer(app._context);
   for (const key in components) {
     const item = components[key];
     app.component(item.name || key, item);
@@ -227,6 +226,6 @@ export {
   LaySubMenu,
 };
 
-export { layer };
+export { layer, useLayer };
 
 export default { install };
