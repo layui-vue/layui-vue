@@ -4,7 +4,7 @@ import type { IDefineComponent, InstallOptions } from "./component/type/index";
 import "./theme/layui.css";
 import "@layui/layer-vue/lib/index.css";
 import "@layui/icons-vue/lib/index.css";
-import { layer } from "@layui/layer-vue";
+import { layer, useLayer } from "@layui/layer-vue";
 
 import LayLayer from "./component/layer/index";
 import LayBacktop from "./component/backTop/index";
@@ -149,6 +149,7 @@ const components: Record<string, IDefineComponent> = {
 const install = (app: App, options?: InstallOptions): void => {
   const _options = options;
   app.config.globalProperties.$PROOPTIONS = _options;
+  app.config.globalProperties.$layer = useLayer(app._context);
   for (const key in components) {
     const item = components[key];
     app.component(item.name || key, item);
