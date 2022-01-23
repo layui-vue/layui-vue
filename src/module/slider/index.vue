@@ -123,14 +123,10 @@ const props = withDefaults(defineProps<LaySliderProps>(), {
   vertical: false,
   modelValue: 0,
   disabled: false,
+  step: 1,
 });
 
-// let rangeValue: Ref<number[]> = ref([0, 0]);
 let rangeValue: Ref<number[]> | any = toRef(props, "standardrange");
-// if (Array.isArray(props.modelValue)) {
-//   // eslint-disable-next-line vue/no-setup-props-destructure
-//   rangeValue.value = props.modelValue;
-// }
 
 let verticalRangeValue: Ref<number[]> | any = toRef(props, "verticalrange");
 
@@ -139,10 +135,10 @@ const verticaltracker = ref<HTMLElement | null>(null);
 const rangetracker1 = ref<HTMLElement | null>(null);
 const rangetracker2 = ref<HTMLElement | null>(null);
 
-const standard_style = reactive({
-  left: props.modelValue,
-  width: props.modelValue,
-});
+// const standard_style = reactive({
+//   left: props.modelValue,
+//   width: props.modelValue,
+// });
 
 const vertical_style = reactive({
   bottom: props.modelValue,
@@ -156,7 +152,7 @@ function throttle(func: Function) {
       timer = setTimeout(() => {
         timer = null;
         func(args);
-      }, 60);
+      }, 50);
     }
   };
 }
@@ -199,6 +195,7 @@ function handle_mouseup() {
 function handle_select(e: Event): void {
   e.preventDefault();
 }
+let standard_style: Ref<number> = ref<number>(props.modelValue as number);
 
 const standardMove = (e: MouseEvent) => {
   if (!standardtracker.value) {
@@ -209,18 +206,16 @@ const standardMove = (e: MouseEvent) => {
   let point_left = e.clientX;
   let distance = point_left - origin_left;
   if (distance < 0) {
-    standard_style.left = 0;
-    standard_style.width = 0;
+    standard_style.value = 0;
+    // standard_style.width = 0;
   } else {
     let rate = (distance / tracker_rect.width) * 100;
-    standard_style.left = Math.floor(rate);
-    standard_style.width = Math.floor(rate);
-    if (standard_style.left > 100) {
-      standard_style.left = 100;
-      standard_style.width = 100;
+    calcWithStep(rate, standard_style);
+    if (standard_style.value > 100) {
+      standard_style.value = 100;
     }
   }
-  emit("update:modelValue", standard_style.left);
+  emit("update:modelValue", standard_style.value);
 };
 const verticalMove = (e: MouseEvent) => {
   if (!verticaltracker.value) {
@@ -300,6 +295,20 @@ function moveNeighbors(rate: number, rangeValues: any) {
     return 1;
   } else {
     return 0;
+  }
+}
+
+function calcWithStep(rate: number | undefined, val: Ref<number>) {
+  if (typeof rate === "undefined") return false;
+  let r = rate - val.value;
+  if (Math.abs(r) < props.step) {
+    return false;
+  }
+
+  if (r < 0) {
+    val.value -= props.step;
+  } else {
+    val.value += props.step;
   }
 }
 </script>

@@ -7,7 +7,7 @@
 ::: demo
 
 <template>
-  <lay-slider v-model="value1" :disabled="false"></lay-slider>
+  <lay-slider :step="5" v-model="value1" :disabled="false"></lay-slider>
 </template>
 
 <script>
