@@ -73,6 +73,7 @@
   },
   "files": [
     "lib",
+    "src",
     "types"
   ],
   "browserslist": [

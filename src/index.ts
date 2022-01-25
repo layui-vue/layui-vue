@@ -1,7 +1,7 @@
 import type { App } from "vue";
 import type { IDefineComponent, InstallOptions } from "./component/type/index";
 
-import "./theme/layui.css";
+import "./theme/index.less";
 import "@layui/layer-vue/lib/index.css";
 import "@layui/icons-vue/lib/index.css";
 import { layer, useLayer } from "@layui/layer-vue";

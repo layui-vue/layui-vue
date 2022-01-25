@@ -36,9 +36,7 @@
           </a>
         </li>
         <li class="layui-nav-item">
-          <a
-            href="https://gitee.com/layui-vue/layui-vue/issues"
-          >
+          <a href="https://gitee.com/layui-vue/layui-vue/issues">
             <lay-icon type="layui-icon-chat" size="15px"></lay-icon>
           </a>
         </li>
@@ -51,45 +49,47 @@
   </lay-layout>
 </template>
 <script>
-import { ref, watch } from 'vue'
-import { useRouter, useRoute } from 'vue-router'
-import menu from '../view/utils/menus'
+import { ref, watch } from "vue";
+import { useRouter, useRoute } from "vue-router";
+import menu from "../view/utils/menus";
 export default {
   setup() {
-    const route = useRoute()
-    const router = useRouter()
-    const currentPath = ref('/zh-CN/guide')
+    const route = useRoute();
+    const router = useRouter();
+    const currentPath = ref("/zh-CN/guide");
+    const theme = ref(false)
 
-    const menus = []
+    const menus = [];
 
-    menu.forEach(m => {
-      m.children.forEach(c => {
+    menu.forEach((m) => {
+      m.children.forEach((c) => {
         menus.push(c);
-      })
-    })
+      });
+    });
 
     watch(
       () => route.path,
       (val) => {
-        currentPath.value = val
+        currentPath.value = val;
       },
       {
         immediate: true,
         deep: true,
       }
-    )
+    );
 
     const handleClick = function (menu) {
-      router.push(menu.path)
-    }
+      router.push(menu.path);
+    };
 
     return {
       menus,
+      theme,
       currentPath,
       handleClick,
-    }
+    };
   },
-}
+};
 </script>
 <style>
 .layui-layout-document > .layui-header {
