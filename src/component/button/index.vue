@@ -17,6 +17,7 @@ export interface LayButtonProps {
   disabled?: boolean | string;
   loading?: boolean | string;
   nativeType?: "button" | "submit" | "reset";
+  icon?: string;
 }
 
 const props = withDefaults(defineProps<LayButtonProps>(), {
@@ -25,6 +26,7 @@ const props = withDefaults(defineProps<LayButtonProps>(), {
   loading: false,
   disabled: false,
   nativeType: "button",
+  icon: "",
 });
 
 const emit = defineEmits(["click"]);
@@ -58,6 +60,7 @@ const classes = computed(() => {
     :type="nativeType"
     @click="onClick"
   >
+    <i v-if="icon" :class="'layui-icon ' + icon"></i>
     <i
       v-if="loading"
       class="layui-icon layui-icon-loading-one layui-anim layui-anim-rotate layui-anim-loop"
