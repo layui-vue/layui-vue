@@ -4,4 +4,12 @@
   </div>
 </template>
 
-<script setup name="LayLogo" lang="ts"></script>
+<script lang="ts">
+export default {
+  name: "LayLogo"
+}
+</script>
+
+<script setup lang="ts">
+import { defineProps } from "vue";
+</script>

@@ -1,5 +1,4 @@
-import type { App } from "vue";
-import type { IDefineComponent, InstallOptions } from "./component/type/index";
+import type { App, Component } from "vue";
 
 import "./theme/index.less";
 import "@layui/layer-vue/lib/index.css";
@@ -75,7 +74,7 @@ import LaySubMenu from "./component/subMenu/index";
 import LaySplitPanel from "./component/splitPanel/index";
 import LaySplitPanelItem from "./component/splitPanelItem/index";
 
-const components: Record<string, IDefineComponent> = {
+const components: Record<string, Component> = {
   LaySplitPanel,
   LaySplitPanelItem,
   LayRadio,
@@ -146,9 +145,7 @@ const components: Record<string, IDefineComponent> = {
   LaySubMenu,
 };
 
-const install = (app: App, options?: InstallOptions): void => {
-  const _options = options;
-  app.config.globalProperties.$PROOPTIONS = _options;
+const install = (app: App): void => {
   for (const key in components) {
     const item = components[key];
     app.component(item.name || key, item);

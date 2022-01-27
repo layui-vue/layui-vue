@@ -21,7 +21,13 @@
   </div>
 </template>
 
-<script setup name="laySplitPanelItem" lang="ts">
+<script lang="ts">
+export default {
+  name: "LaySplitPanelItem"
+}
+</script>
+
+<script setup lang="ts">
 import {
   ref,
   inject,

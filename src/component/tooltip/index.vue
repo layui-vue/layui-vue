@@ -2,6 +2,7 @@
   <slot></slot>
   <lay-popper v-if="isMounted" v-bind="innerProps"></lay-popper>
 </template>
+
 <script lang="ts">
 import LayPopper from "../popper/index.vue";
 import { defineComponent, ref } from "vue";

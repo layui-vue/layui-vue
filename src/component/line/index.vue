@@ -2,7 +2,13 @@
   <hr :class="['layui-border-' + theme]" />
 </template>
 
-<script setup name="LayLine" lang="ts">
+<script lang="ts">
+export default {
+  name: "LayLine"
+}
+</script>
+
+<script setup lang="ts">
 import { defineProps } from "vue";
 
 const props = defineProps<{

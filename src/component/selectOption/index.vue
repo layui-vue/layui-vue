@@ -24,7 +24,7 @@ export default {
 
 <script setup lang="ts">
 import LayCheckbox from "../checkbox";
-import { SelectItem, SelectItemHandle, SelectItemPush } from "../type";
+import { SelectItem, SelectItemHandle, SelectItemPush } from "../../types";
 import { computed, defineProps, inject, onMounted, Ref } from "vue";
 
 const props = withDefaults(
@@ -72,6 +72,7 @@ const callSelectItemPush = function () {
 		label: props.label,
 		disabled: props.disabled,
 	};
+	// @ts-ignore
 	selectItemPush(item);
 };
 onMounted(() => {

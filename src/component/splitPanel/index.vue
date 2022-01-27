@@ -11,7 +11,13 @@
   </div>
 </template>
 
-<script setup name="laySplitPanel" lang="ts">
+<script lang="ts">
+export default {
+  name: "laySplitPanel"
+}
+</script>
+
+<script setup lang="ts">
 import { ref, watch, provide, defineProps, withDefaults, onMounted } from "vue";
 import "./index.less";
 

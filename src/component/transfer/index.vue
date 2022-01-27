@@ -3,10 +3,11 @@ export default {
   name: "LayTransfer",
 };
 </script>
+
 <script setup lang="ts">
 import "./index.less";
 import { defineProps, Ref, ref, useSlots, watch } from "vue";
-import { Recordable } from "../type";
+import { Recordable } from "../../types";
 
 const slot = useSlots();
 

@@ -1,9 +1,3 @@
-<template>
-  <form class="layui-form" :onsubmit="submit">
-    <slot></slot>
-  </form>
-</template>
-
 <script lang="ts">
 export default {
   name: "LayForm",
@@ -14,11 +8,10 @@ export default {
 import { toRefs, provide, reactive, onMounted } from "vue";
 import { Rule, ValidateError, ValidateMessages } from "async-validator";
 import {
-  layFormKey,
   LayFormItemContext,
   FormCallback,
   modelType,
-} from "../type/form";
+} from "../../types/form";
 
 const props = withDefaults(
   defineProps<{
@@ -150,7 +143,7 @@ const addField = function (item: LayFormItemContext) {
 defineExpose({ validate, clearValidate, reset });
 
 provide(
-  layFormKey,
+  'LayForm',
   reactive({
     formItems,
     addField,
@@ -160,3 +153,9 @@ provide(
   })
 );
 </script>
+
+<template>
+  <form class="layui-form" :onsubmit="submit">
+    <slot></slot>
+  </form>
+</template>

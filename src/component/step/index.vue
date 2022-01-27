@@ -1,10 +1,10 @@
-<template>
-  <div :class="['lay-step', direction !== 'vertical' ? '' : 'lay-step-column']">
-    <slot></slot>
-  </div>
-</template>
+<script lang="ts">
+export default {
+  name: "LayStep"
+}
+</script>
 
-<script setup name="layStep" lang="ts">
+<script setup lang="ts">
 import {
   ref,
   watch,
@@ -39,7 +39,7 @@ const steps = ref([]);
 
 const emits = defineEmits(["onChange"]);
 
-const change = (index) => {
+const change = (index: any) => {
   emits("onChange", index - 1);
 };
 
@@ -58,4 +58,8 @@ provide("LayStep", {
 });
 </script>
 
-<style scoped></style>
+<template>
+  <div :class="['lay-step', direction !== 'vertical' ? '' : 'lay-step-column']">
+    <slot></slot>
+  </div>
+</template>

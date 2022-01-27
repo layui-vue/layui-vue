@@ -4,8 +4,6 @@ import type {
   ValidateMessages,
 } from "async-validator";
 
-export const layFormKey = "LayForm";
-
 export interface LayFormContext {
   model: modelType;
   required?: boolean;

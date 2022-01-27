@@ -1,30 +1,3 @@
-<template>
-  <div
-    class="layui-tab"
-    :class="[type ? 'layui-tab-' + type : '']"
-    v-if="active"
-  >
-    <ul class="layui-tab-title">
-      <li
-        v-for="(children, index) in childrens"
-        :key="children"
-        :class="[children.props.id === active ? 'layui-this' : '']"
-        @click.stop="change(children.props.id)"
-      >
-        {{ children.props.title }}
-        <i
-          v-if="allowClose && children.props.closable != false"
-          class="layui-icon layui-icon-close layui-unselect layui-tab-close"
-          @click.stop="close(index, children.props.id)"
-        ></i>
-      </li>
-    </ul>
-    <div class="layui-tab-content">
-      <slot></slot>
-    </div>
-  </div>
-</template>
-
 <script lang="ts">
 export default {
   name: "LayTab",
@@ -114,3 +87,30 @@ watch(slotsChange, function () {
 provide("active", active);
 provide("slotsChange", slotsChange);
 </script>
+
+<template>
+  <div
+    class="layui-tab"
+    :class="[type ? 'layui-tab-' + type : '']"
+    v-if="active"
+  >
+    <ul class="layui-tab-title">
+      <li
+        v-for="(children, index) in childrens"
+        :key="children"
+        :class="[children.props.id === active ? 'layui-this' : '']"
+        @click.stop="change(children.props.id)"
+      >
+        {{ children.props.title }}
+        <i
+          v-if="allowClose && children.props.closable != false"
+          class="layui-icon layui-icon-close layui-unselect layui-tab-close"
+          @click.stop="close(index, children.props.id)"
+        ></i>
+      </li>
+    </ul>
+    <div class="layui-tab-content">
+      <slot></slot>
+    </div>
+  </div>
+</template>

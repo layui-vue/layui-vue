@@ -4,4 +4,12 @@
   </div>
 </template>
 
-<script setup name="LayScroll" lang="ts"></script>
+<script lang="ts">
+export default {
+  name: "LayScroll"
+}
+</script>
+
+<script setup lang="ts">
+import { defineProps } from "vue";
+</script>

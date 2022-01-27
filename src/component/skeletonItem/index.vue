@@ -1,12 +1,10 @@
-<template>
-  <div :class="['lay-skeleton-item',`lay-skeleton-type--${type}`]" v-bind="$attrs">
-    <div v-if="type==='image'" >
-      <lay-icon type="layui-icon-picture"></lay-icon>
-    </div>
-  </div>
-</template>
+<script lang="ts">
+export default {
+  name: "LaySkeletonItem"
+}
+</script>
 
-<script setup name="LaySkeletonItem" lang="ts">
+<script setup lang="ts">
 import { defineProps, withDefaults} from "vue";
 
 export interface LaySkeletonProps {
@@ -16,4 +14,12 @@ export interface LaySkeletonProps {
 const props = withDefaults(defineProps<LaySkeletonProps>(), {
   type: 'p',
 });
-</script>-
+</script>
+
+<template>
+  <div :class="['lay-skeleton-item',`lay-skeleton-type--${type}`]" v-bind="$attrs">
+    <div v-if="type==='image'" >
+      <lay-icon type="layui-icon-picture"></lay-icon>
+    </div>
+  </div>
+</template>

@@ -1,12 +1,11 @@
 {
   "name": "@layui/layui-vue",
-  "version": "0.3.5",
-  "author": "sleeprite",
+  "version": "0.3.6-alpha.2",
+  "author": "SleepRite",
   "license": "MIT",
   "description": "a component library for Vue 3 base on layui-vue",
   "homepage": "http://layui-vue.pearadmin.com",
-  "module": "lib/layui-vue.es.js",
-  "main": "lib/layui-vue.umd.js",
+  "main": "es/index.js",
   "types": "types/index.d.ts",
   "style": "lib/index.css",
   "keywords": [
@@ -16,16 +15,16 @@
   ],
   "exports": {
     ".": {
-      "import": "./lib/layui-vue.es.js",
-      "require": "./lib/layui-vue.umd.js"
+      "import": "./es/index.js"
     },
-    "./lib/": "./lib/"
+    "./lib/": "./lib/",
+    "./es/": "./es/"
   },
   "scripts": {
-    "dev": "vite",
-    "build": "vite build --emptyOutDir && npm run build:types",
-    "build:es": "es use",
-    "build:umd": "umd use",
+    "serve": "vite example",
+    "build": "npm run build:all && npm run build:es && npm run build:types && npm run build:example",
+    "build:es": "vite build --emptyOutDir --config ./build.es.ts",
+    "build:all": "vite build --emptyOutDir --config ./build.all.ts",
     "build:types": "rimraf types && tsc -d",
     "build:example": "vite build example",
     "lint:eslint": "eslint 'src/**/*.{vue,ts,tsx}' --fix",
@@ -73,7 +72,7 @@
   },
   "files": [
     "lib",
-    "src",
+    "es",
     "types"
   ],
   "browserslist": [

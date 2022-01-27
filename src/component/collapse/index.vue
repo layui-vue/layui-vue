@@ -1,10 +1,9 @@
-<template>
-  <div class="layui-collapse">
-    <slot></slot>
-  </div>
-</template>
+<script lang="ts">
+export default {
+  name:"LayCollapse"
+}
+</script>
 
-<script setup name="LayCollapse"></script>
 <script setup lang="ts">
 import {
   withDefaults,
@@ -43,3 +42,9 @@ provide("layCollapse", {
   emit,
 });
 </script>
+
+<template>
+  <div class="layui-collapse">
+    <slot></slot>
+  </div>
+</template>

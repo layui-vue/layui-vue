@@ -81,7 +81,13 @@
   </div>
 </template>
 
-<script setup name="LayStepItem" lang="ts">
+<script lang="ts">
+export default {
+  name: "LayStepItem"
+}
+</script>
+
+<script setup lang="ts">
 import {
   ref,
   inject,
@@ -117,7 +123,7 @@ const setIndex = (val: number) => {
   index.value = val;
 };
 
-const onChange = (index) => {
+const onChange = (index: any) => {
   parents.change(index);
 };
 

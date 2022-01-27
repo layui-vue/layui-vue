@@ -1,45 +1,3 @@
-<template>
-  <div class="layui-input-number" :position="position" :size="size">
-    <lay-button
-      type="primary"
-      size="gl"
-      @mousedown="longDown(subtraction)"
-      @mouseup="cancelLongDown"
-      @blur="cancelLongDown"
-      :disabled="minControl"
-      class="layui-control-btn layui-subtraction-btn"
-    >
-      <lay-icon
-        :type="
-          position === 'right' ? 'layui-icon-down' : 'layui-icon-subtraction'
-        "
-      />
-    </lay-button>
-    <div class="layui-input-number-input">
-      <lay-input
-        v-model="num"
-        :readonly="disabledInput || disabled"
-        type="number"
-        :name="name"
-        @change="inputChange"
-      />
-    </div>
-    <lay-button
-      type="primary"
-      size="gl"
-      @mousedown="longDown(addition)"
-      @mouseup="cancelLongDown"
-      @blur="cancelLongDown"
-      :disabled="maxControl"
-      class="layui-control-btn layui-addition-btn"
-    >
-      <lay-icon
-        :type="position === 'right' ? 'layui-icon-up' : 'layui-icon-addition'"
-      />
-    </lay-button>
-  </div>
-</template>
-
 <script lang="ts">
 export default {
   name: "LayInputNumber",
@@ -151,3 +109,45 @@ const isNumber = function (num: any) {
   return /^\d+(\.\d+)?$/.test(num);
 };
 </script>
+
+<template>
+  <div class="layui-input-number" :position="position" :size="size">
+    <lay-button
+      type="primary"
+      size="gl"
+      @mousedown="longDown(subtraction)"
+      @mouseup="cancelLongDown"
+      @blur="cancelLongDown"
+      :disabled="minControl"
+      class="layui-control-btn layui-subtraction-btn"
+    >
+      <lay-icon
+        :type="
+          position === 'right' ? 'layui-icon-down' : 'layui-icon-subtraction'
+        "
+      />
+    </lay-button>
+    <div class="layui-input-number-input">
+      <lay-input
+        v-model="num"
+        :readonly="disabledInput || disabled"
+        type="number"
+        :name="name"
+        @change="inputChange"
+      />
+    </div>
+    <lay-button
+      type="primary"
+      size="gl"
+      @mousedown="longDown(addition)"
+      @mouseup="cancelLongDown"
+      @blur="cancelLongDown"
+      :disabled="maxControl"
+      class="layui-control-btn layui-addition-btn"
+    >
+      <lay-icon
+        :type="position === 'right' ? 'layui-icon-up' : 'layui-icon-addition'"
+      />
+    </lay-button>
+  </div>
+</template>

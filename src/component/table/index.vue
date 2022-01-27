@@ -13,8 +13,9 @@ import {
   withDefaults,
   defineEmits,
 } from "vue";
-import { Recordable } from "../type";
+import { Recordable } from "../../types";
 import { guid } from "../../utils/guidUtil";
+import "./index.less";
 
 const tableId = guid();
 
@@ -242,12 +243,3 @@ const print = function () {
     </div>
   </div>
 </template>
-
-<style scoped>
-.laytable-cell-checkbox {
-  width: 34px;
-}
-.layui-table-col-special {
-  width: 34px;
-}
-</style>

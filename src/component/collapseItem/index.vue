@@ -15,7 +15,13 @@
   </div>
 </template>
 
-<script setup name="LayCollapseItem" lang="ts">
+<script lang="ts">
+export default {
+  name:"LayCollapseItem"
+}
+</script>
+
+<script setup lang="ts">
 import { withDefaults, defineProps, inject, computed, ref } from "vue";
 
 const props = withDefaults(
