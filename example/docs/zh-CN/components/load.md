@@ -16,7 +16,7 @@
 
 <script>
 import { ref } from 'vue'
-import { layer } from "../../../../src/index.ts"
+import { layer } from "@layui/layer-vue"
 
 export default {
   setup() {
@@ -54,7 +54,7 @@ export default {
 </template>
 
 <script>
-import { layer } from "../../../../src/index.ts"
+import { layer } from "@layui/layer-vue"
 
 export default {
   setup() {
@@ -85,7 +85,7 @@ export default {
 
 <script>
 import { ref } from 'vue'
-import { layer } from "../../../../src/index.ts"
+import { layer } from "@layui/layer-vue"
 
 export default {
   setup() {

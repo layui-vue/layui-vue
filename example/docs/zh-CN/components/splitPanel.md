@@ -18,11 +18,6 @@
 </template>
 
 <script>
-
-export default {
-  setup() {
-  }
-}
 </script>
 
 :::
@@ -44,11 +39,6 @@ export default {
 </template>
 
 <script>
-
-export default {
-  setup() {
-  }
-}
 </script>
 
 :::
@@ -70,11 +60,6 @@ export default {
 </template>
 
 <script>
-
-export default {
-  setup() {
-  }
-}
 </script>
 
 :::
@@ -100,11 +85,6 @@ export default {
 </template>
 
 <script>
-
-export default {
-  setup() {
-  }
-}
 </script>
 
 :::
