@@ -31,6 +31,14 @@
         style="margin-top: 0px; margin-bottom: 0px"
       >
         <li class="layui-nav-item">
+          <a
+            href="https://layui-vue.gitee.io/layui-vue-playground"
+            target="_blank"
+          >
+            <lay-icon type="layui-icon-util" size="15px"></lay-icon>
+          </a>
+        </li>
+        <li class="layui-nav-item">
           <a href="https://gitee.com/layui-vue">
             <lay-icon type="layui-icon-fonts-code" size="15px"></lay-icon>
           </a>
@@ -57,7 +65,7 @@ export default {
     const route = useRoute();
     const router = useRouter();
     const currentPath = ref("/zh-CN/guide");
-    const theme = ref(false)
+    const theme = ref(false);
 
     const menus = [];
 
