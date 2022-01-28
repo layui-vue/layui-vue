@@ -15,6 +15,7 @@ import {
 } from "vue";
 import { Recordable } from "../../types";
 import { guid } from "../../utils/guidUtil";
+import LayCheckbox from "../checkbox";
 import "./index.less";
 
 const tableId = guid();

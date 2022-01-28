@@ -100,6 +100,24 @@ export default {
           }
         ],
       },
+            {
+        id: 1,
+        title: '高级',
+        children: [
+          {
+            id: 1,
+            title: '语言',
+            subTitle: 'lang',
+            path: '/zh-CN/guide/lang',
+          },
+          {
+            id: 2,
+            title: '主题',
+            subTitle: 'theme',
+            path: '/zh-CN/guide/theme',
+          },
+        ],
+      },
     ]
 
     const selected = ref(1)
