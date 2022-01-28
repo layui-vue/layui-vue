@@ -6,6 +6,7 @@
 
 <script setup name="LayMenu" lang="ts">
 import { computed, defineProps, provide } from "vue";
+import "./index.less";
 
 export interface LayMenuProps {
   selectedKey?: string;
