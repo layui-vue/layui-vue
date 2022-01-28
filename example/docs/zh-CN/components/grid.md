@@ -105,6 +105,19 @@ export default {
   }
 }
 </script>
+<style>
+.grid-demo-bg1 {
+    background-color: #63BA79;
+}
+.grid-demo {
+    padding: 10px;
+    line-height: 50px;
+    border-radius: 2px;
+    text-align: center;
+    background-color: #79C48C;
+    color: #fff;
+}
+</style>
 
 :::
 
@@ -136,6 +149,19 @@ export default {
   }
 }
 </script>
+<style>
+.grid-demo-bg1 {
+    background-color: #63BA79;
+}
+.grid-demo {
+    padding: 10px;
+    line-height: 50px;
+    border-radius: 2px;
+    text-align: center;
+    background-color: #79C48C;
+    color: #fff;
+}
+</style>
 
 :::
 

@@ -7,7 +7,7 @@
 ::: demo
 
 <template>
-  <lay-layout>
+  <lay-layout class="example">
     <lay-header>header</lay-header>
     <lay-body>content</lay-body>
     <lay-footer>footer</lay-footer>
@@ -27,21 +27,21 @@ export default {
 </script>
 
 <style>
-.lay-code .layui-footer,
-.lay-code .layui-header {
+.example .layui-footer,
+.example .layui-header {
   line-height: 60px;
   text-align: center;
   background: #87ca9a;
   color: white;
 }
-.lay-code .layui-side {
+.example .layui-side {
   display: flex;
   background: #77c38c;
   align-items: center;
   justify-content: center;
   color: white;
 }
-.lay-code .layui-body {
+.example .layui-body {
   display: flex;
   background: #5FB878;
   align-items: center;
@@ -58,7 +58,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-layout>
+  <lay-layout class="example">
     <lay-side>left</lay-side>
     <lay-body>content</lay-body>
     <lay-side>right</lay-side>
@@ -76,6 +76,29 @@ export default {
   }
 }
 </script>
+<style>
+.example .layui-footer,
+.example .layui-header {
+  line-height: 60px;
+  text-align: center;
+  background: #87ca9a;
+  color: white;
+}
+.example .layui-side {
+  display: flex;
+  background: #77c38c;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+.example .layui-body {
+  display: flex;
+  background: #5FB878;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+</style>
 
 :::
 
@@ -85,7 +108,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-layout>
+  <lay-layout class="example">
     <lay-header>header</lay-header>
     <lay-layout>
       <lay-side>side</lay-side>
@@ -105,6 +128,29 @@ export default {
   }
 }
 </script>
+<style>
+.example .layui-footer,
+.example .layui-header {
+  line-height: 60px;
+  text-align: center;
+  background: #87ca9a;
+  color: white;
+}
+.example .layui-side {
+  display: flex;
+  background: #77c38c;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+.example .layui-body {
+  display: flex;
+  background: #5FB878;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+</style>
 
 :::
 
@@ -114,7 +160,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-layout>
+  <lay-layout class="example">
     <lay-side>side</lay-side>
     <lay-layout>
       <lay-header>header</lay-header>
@@ -123,7 +169,7 @@ export default {
     </lay-layout>
   </lay-layout>
   <hr>
-  <lay-layout>
+  <lay-layout class="example">
     <lay-layout>
       <lay-header>header</lay-header>
       <lay-body>body</lay-body>
@@ -132,7 +178,7 @@ export default {
     <lay-side>side</lay-side>
   </lay-layout>
   <hr>
-  <lay-layout>
+  <lay-layout class="example">
     <lay-header>Header</lay-header>
     <lay-body>
       <lay-layout>
@@ -143,7 +189,7 @@ export default {
     <lay-footer>Footer</lay-footer>
   </lay-layout>
   <hr>
-  <lay-layout>
+  <lay-layout class="example">
     <lay-header>Header</lay-header>
     <lay-body>
       <lay-layout>
@@ -166,6 +212,29 @@ export default {
   }
 }
 </script>
+<style>
+.example .layui-footer,
+.example .layui-header {
+  line-height: 60px;
+  text-align: center;
+  background: #87ca9a;
+  color: white;
+}
+.example .layui-side {
+  display: flex;
+  background: #77c38c;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+.example .layui-body {
+  display: flex;
+  background: #5FB878;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+</style>
 
 :::
 
