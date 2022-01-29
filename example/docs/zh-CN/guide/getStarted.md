@@ -1,18 +1,21 @@
 ::: title 快速上手
 :::
 
-<br>
-
-::: describe 1. 使用 npm 下载
-:::
-
 ```
 npm install @layui/layui-vue --save
 ```
 
+```
+yarn add @layui/layui-vue --save
+```
+
+```
+pnpm install @layui/layui-vue --save
+```
+
 <br>
 
-::: describe 2. 在 main.ts 中依赖
+::: title 全局注册
 :::
 
 ```js
@@ -26,7 +29,28 @@ createApp(App).use(Layui).mount('#app')
 
 <br>
 
-::: describe 3. 在 index.vue 使用
+::: title 按需引入
+:::
+
+```js
+import App from './App.vue'
+import { createApp } from 'vue'
+import { LayButton, LayTable } from '@layui/layui-vue'
+import '@layui/layui-vue/es/button/index.css';
+import '@layui/layui-vue/es/table/index.css';
+
+var app = createApp(App).
+
+app.component("LayButton", LayButton);
+app.component("LayTable", LayTable);
+
+app.mount('#app')
+
+```
+<br>
+
+
+::: title 简单使用
 :::
 
 ```html
@@ -41,5 +65,3 @@ createApp(App).use(Layui).mount('#app')
   <lay-footer>pearadmin.com</lay-footer>
 </lay-layout>
 ```
-
-- 前往: [layui-vue-sample](https://gitee.com/layui-vue/layui-vue-sample)
