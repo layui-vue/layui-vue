@@ -4,11 +4,13 @@
 ```
 npm install @layui/layui-vue --save
 ```
-
+:::describe 或
+:::
 ```
 yarn add @layui/layui-vue --save
 ```
-
+:::describe 或
+:::
 ```
 pnpm install @layui/layui-vue --save
 ```
@@ -45,12 +47,11 @@ app.component("LayButton", LayButton);
 app.component("LayTable", LayTable);
 
 app.mount('#app')
-
 ```
 <br>
 
 
-::: title 简单使用
+::: title 基础示例
 :::
 
 ```html
