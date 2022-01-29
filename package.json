@@ -28,7 +28,8 @@
     "build:types": "rimraf types && tsc -d",
     "build:example": "vite build example",
     "lint:eslint": "eslint 'src/**/*.{vue,ts,tsx}' --fix",
-    "lint:prettier": "prettier --write  'src/**/*'"
+    "lint:prettier": "prettier --write  'src/**/*'",
+    "publish": "npm publish --access=public"
   },
   "dependencies": {
     "@layui/hooks-vue": "^0.1.6",
