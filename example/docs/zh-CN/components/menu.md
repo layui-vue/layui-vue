@@ -7,7 +7,7 @@
 ::: demo
 
 <template>
-  <lay-menu v-model:selectedKey="selectedKey" theme="light" v-model:openKeys="openKeys">
+  <lay-menu v-model:selectedKey="selectedKey" v-model:openKeys="openKeys">
     <lay-menu-item title="首页" id="1"></lay-menu-item>
     <lay-menu-item title="用户" id="2"></lay-menu-item>
     <lay-menu-item title="角色" id="3"></lay-menu-item> 
@@ -178,6 +178,7 @@ export default {
 | ------------------- | ------ | ---- |
 | v-model:selectedKey | 选中项 | --   |
 | v-model:openKeys    | 打开项 | --   |
+| theme    | 菜单主题 | `dark` `light`   |
 
 :::
 
