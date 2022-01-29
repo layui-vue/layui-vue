@@ -12,6 +12,7 @@ import {
   defineProps,
   withDefaults,
   defineEmits,
+  onMounted,
 } from "vue";
 import { Recordable } from "../../types";
 import { guid } from "../../utils/guidUtil";
@@ -109,6 +110,16 @@ const print = function () {
   window.location.reload();
   document.body.innerHTML = oldContent;
 };
+
+let tableHeader = ref<HTMLElement | null>(null);
+let tableBody = ref<HTMLElement | null>(null);
+
+onMounted(() => {
+  tableBody.value?.addEventListener('scroll', () => {
+    tableHeader.value!.scrollLeft = tableBody.value?.scrollLeft || 0;  
+  })
+})
+
 </script>
 
 <template>
@@ -152,7 +163,7 @@ const print = function () {
 
       <div class="layui-table-box">
         <!-- 表格头部 -->
-        <div class="layui-table-header">
+        <div class="layui-table-header" ref="tableHeader">
           <table class="layui-table" :lay-size="size">
             <thead>
               <tr>
@@ -181,7 +192,7 @@ const print = function () {
           </table>
         </div>
         <!-- 表格数据 -->
-        <div class="layui-table-body layui-table-main">
+        <div class="layui-table-body layui-table-main" ref="tableBody">
           <table class="layui-table" :lay-size="size">
             <tbody>
               <template v-for="data in dataSource" :key="data">
