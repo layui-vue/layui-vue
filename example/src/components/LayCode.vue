@@ -12,8 +12,9 @@
       </div>
     </div>
     <div :class="{ 'is-fixed': isFixContorl }" class="control">
-      <i class="layui-icon layui-icon-file" @click="copy" />
-      <i class="layui-icon layui-icon-fonts-code" @click="toggle" />
+      <i class="layui-icon layui-icon-play btn" @click="onPlayground" title="在 Playground 中打开" />
+      <i class="layui-icon layui-icon-file btn" @click="copy" title="复制代码" />
+      <i class="layui-icon layui-icon-fonts-code btn" @click="toggle"  title="查看代码"/>
     </div>
   </div>
 </template>
@@ -21,6 +22,8 @@
 <script setup lang="ts">
 import { layer } from '@layui/layer-vue'
 import { onMounted, onUnmounted, ref, watch } from 'vue'
+
+import { usePlayGround } from '../plugin/usePlayground'
 
 const meta = ref<HTMLElement>({} as HTMLElement)
 const isFixContorl = ref(false)
@@ -30,6 +33,15 @@ const show = ref(false)
 
 const toggle = function () {
   show.value = !show.value
+}
+
+const onPlayground = function(){
+  const foundCodes = meta.value.getElementsByClassName('language-html')
+  const foundCode = foundCodes[0];
+  const text = foundCode.textContent || "";
+  
+  const { link } = usePlayGround(text)
+  window.open(link)
 }
 
 const copy = function () {
@@ -185,5 +197,8 @@ function handleScroll() {
   transition: all 0.3s;
   padding-left: 10px;
   padding-right: 10px;
+}
+.btn:hover::before {
+  color: #5FB878;
 }
 </style>
