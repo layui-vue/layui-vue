@@ -336,6 +336,11 @@ const zhCN = [
             component: () => import("../../docs/zh-CN/components/countup.md"),
             meta: { title: "数字滚动" },
           },
+          {
+            path: "/zh-CN/components/exception",
+            component: () => import("../../docs/zh-CN/components/exception.md"),
+            meta: { title: "异常" },
+          },
         ],
       },
       {

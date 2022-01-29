@@ -303,6 +303,12 @@ const menus = [
         subTitle: "splitPanel",
         path: "/zh-CN/components/splitPanel",
       },
+      {
+        id: 100,
+        title: "异常",
+        subTitle: "exception",
+        path: "/zh-CN/components/exception",
+      },
     ],
   },
   {

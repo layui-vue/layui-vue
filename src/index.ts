@@ -73,6 +73,7 @@ import LayStepItem from "./component/stepItem/index";
 import LaySubMenu from "./component/subMenu/index";
 import LaySplitPanel from "./component/splitPanel/index";
 import LaySplitPanelItem from "./component/splitPanelItem/index";
+import LayException from "./component/exception/index"
 
 const components: Record<string, Component> = {
   LaySplitPanel,
@@ -143,6 +144,7 @@ const components: Record<string, Component> = {
   LayStep,
   LayStepItem,
   LaySubMenu,
+  LayException
 };
 
 const install = (app: App): void => {
@@ -221,6 +223,7 @@ export {
   LayStep,
   LayStepItem,
   LaySubMenu,
+  LayException
 };
 
 export { layer, useLayer };
