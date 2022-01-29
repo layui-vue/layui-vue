@@ -16,6 +16,9 @@ import {
 import { Recordable } from "../../types";
 import { guid } from "../../utils/guidUtil";
 import LayCheckbox from "../checkbox";
+import LayDropdown from "../dropdown";
+import LayPage from "../page";
+import LayIcon from "../icon";
 import "./index.less";
 
 const tableId = guid();
@@ -119,23 +122,23 @@ const print = function () {
           <slot name="toolbar"></slot>
         </div>
         <div v-if="defaultToolbar" class="layui-table-tool-self">
-          <lay-dropdown>
+          <LayDropdown>
             <div class="layui-inline" title="筛选列" lay-event="LAYTABLE_COLS">
               <i class="layui-icon layui-icon-cols"></i>
             </div>
             <template #content>
               <div style="padding: 10px">
-                <lay-checkbox
+                <LayCheckbox
                   v-for="column in columns"
                   :key="column"
                   v-model="tableColumnKeys"
                   skin="primary"
                   :label="column.key"
-                  >{{ column.title }}</lay-checkbox
+                  >{{ column.title }}</LayCheckbox
                 >
               </div>
             </template>
-          </lay-dropdown>
+          </LayDropdown>
           <div
             class="layui-inline"
             title="打印"
@@ -155,7 +158,7 @@ const print = function () {
               <tr>
                 <th v-if="checkbox" class="layui-table-col-special">
                   <div class="layui-table-cell laytable-cell-checkbox">
-                    <lay-checkbox
+                    <LayCheckbox
                       v-model="allChecked"
                       skin="primary"
                       label="all"
@@ -188,7 +191,7 @@ const print = function () {
                 >
                   <td v-if="checkbox" class="layui-table-col-special">
                     <div class="layui-table-cell laytable-cell-checkbox">
-                      <lay-checkbox
+                      <LayCheckbox
                         v-model="tableSelectedKeys"
                         skin="primary"
                         :label="data[id]"
@@ -229,7 +232,7 @@ const print = function () {
         </div>
       </div>
       <div v-if="page" class="layui-table-page">
-        <lay-page
+        <LayPage
           :total="page.total"
           :limit="page.limit"
           show-page
@@ -237,9 +240,9 @@ const print = function () {
           show-skip
           @jump="change"
         >
-          <template #prev><lay-icon type="layui-icon-left" /></template>
-          <template #next><lay-icon type="layui-icon-right" /></template>
-        </lay-page>
+          <template #prev><LayIcon type="layui-icon-left" /></template>
+          <template #next><LayIcon type="layui-icon-right" /></template>
+        </LayPage>
       </div>
     </div>
   </div>

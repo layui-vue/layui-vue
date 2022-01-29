@@ -1,6 +1,6 @@
 {
   "name": "@layui/layui-vue",
-  "version": "0.3.6-alpha.3",
+  "version": "0.3.6-alpha.4",
   "author": "SleepRite",
   "license": "MIT",
   "description": "a component library for Vue 3 base on layui-vue",
@@ -65,9 +65,9 @@
     "prettier": "^2.5.1",
     "prismjs": "^1.25.0",
     "rimraf": "^3.0.2",
-    "rollup": "^2.64.0",
-    "typescript": "^4.5.2",
-    "vite": "2.7.12",
+    "rollup": "^2.66.1",
+    "typescript": "^4.5.5",
+    "vite": "2.7.13",
     "vite-plugin-md": "^0.11.6"
   },
   "files": [
