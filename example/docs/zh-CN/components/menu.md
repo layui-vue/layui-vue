@@ -7,7 +7,7 @@
 ::: demo
 
 <template>
-  <lay-menu v-model:selectedKey="selectedKey" v-model:openKeys="openKeys">
+  <lay-menu v-model:selectedKey="selectedKey" theme="light" v-model:openKeys="openKeys">
     <lay-menu-item title="首页" id="1"></lay-menu-item>
     <lay-menu-item title="用户" id="2"></lay-menu-item>
     <lay-menu-item title="角色" id="3"></lay-menu-item> 
@@ -81,6 +81,48 @@ export default {
 </script>
 
 :::
+
+::: title 切换主题
+:::
+
+::: demo
+
+<template>
+  <lay-menu v-model:selectedKey="selectedKey" theme="light" v-model:openKeys="openKeys" :tree="true">
+    <lay-menu-item title="首页" id="1"></lay-menu-item>
+    <lay-menu-item title="用户" id="2"></lay-menu-item>
+    <lay-menu-item title="角色" id="3"></lay-menu-item> 
+    <lay-sub-menu title="目录" id="7">
+        <lay-menu-item title="菜单一" id="8"></lay-menu-item> 
+        <lay-menu-item title="菜单二" id="9"></lay-menu-item>
+        <lay-sub-menu title="菜单三" id="10">
+            <lay-menu-item title="菜单一" id="11"></lay-menu-item> 
+            <lay-menu-item title="菜单二" id="12"></lay-menu-item>
+            <lay-menu-item title="菜单三" id="13"></lay-menu-item>
+        </lay-sub-menu>
+    </lay-sub-menu> 
+  </lay-menu>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const openKeys = ref(["7"])
+    const selectedKey = ref("5")
+
+    return {
+      openKeys,
+      selectedKey
+    }
+  }
+}
+</script>
+
+:::
+
 
 ::: title 菜单插槽
 :::

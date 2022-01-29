@@ -1,5 +1,5 @@
 <template>
-  <ul class="layui-nav" :class="[tree ? 'layui-nav-tree' : '']">
+  <ul class="layui-nav" :class="[tree ? 'layui-nav-tree' : '', theme === 'dark' ? 'layui-nav-dark':'layui-nav-light' ]">
     <slot></slot>
   </ul>
 </template>
@@ -12,6 +12,7 @@ export interface LayMenuProps {
   selectedKey?: string;
   openKeys?: string[];
   tree?: boolean;
+  theme?: string;
 }
 
 const emit = defineEmits(["update:selectedKey", "update:openKeys"]);
@@ -20,6 +21,7 @@ const props = withDefaults(defineProps<LayMenuProps>(), {
   selectedKey: "",
   openKeys: () => [],
   tree: false,
+  theme: 'dark'
 });
 
 const isTree = computed(() => props.tree);
