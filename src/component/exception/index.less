@@ -4,10 +4,12 @@
         display: inline-block;
         vertical-align: top;
         > div {
-            width: 200px;
             height: 200px;
             background-size: 100% 100%;
             background-repeat: no-repeat;
+        }
+        .error-401 {
+            background-image: url(./image/401.svg);
         }
         .error-403 {
             background-image: url(./image/403.svg);
@@ -21,16 +23,17 @@
     }
     .layui-exception-details{
         .layui-exception-details-content {
+            margin-left: 100px;
             .layui-exception-details-title{
-                font-size: 68px;
+                font-size: 60px;
                 color: #434e59;
                 margin-bottom: 24px;
                 font-weight: 600;
             }
             .layui-exception-details-describe{
-                font-size: 20px;
+                font-size: 18px;
                 color: rgba(0, 0, 0, .45);
-                margin-bottom: 16px;
+                margin-bottom: 26px;
             }
         }
         width: 50%;
