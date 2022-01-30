@@ -1,10 +1,10 @@
 <script lang="ts">
-import { useSlots } from '@vue/runtime-core';
 export default {
     name: "LayException"
 }
 </script>
 <script setup lang="ts">
+import { defineProps, useSlots } from "vue";
 import "./index.less";
 
 export interface LayDropdownProps {
@@ -13,7 +13,7 @@ export interface LayDropdownProps {
   describe?: string
 }
 
-const slot = useSlots();
+const slots = useSlots();
 
 const props = withDefaults(defineProps<LayDropdownProps>(), {
   title: "Exception",
@@ -23,7 +23,7 @@ const props = withDefaults(defineProps<LayDropdownProps>(), {
 <template>
     <div class="layui-exception">
         <div class="layui-exception-image">
-            <slot name="image" v-if="slot.default"></slot>
+            <slot name="image" v-if="slots.default"></slot>
             <template v-else>
                 <div v-if="status=='401'" class="error-401" />
                 <div v-if="status=='403'" class="error-403" />

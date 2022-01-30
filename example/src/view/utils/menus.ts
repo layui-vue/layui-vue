@@ -308,6 +308,12 @@ const menus = [
         title: "异常",
         subTitle: "exception",
         path: "/zh-CN/components/exception",
+      },      
+      {
+        id: 100,
+        title: "结果",
+        subTitle: "result",
+        path: "/zh-CN/components/result",
       },
     ],
   },
