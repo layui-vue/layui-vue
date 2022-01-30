@@ -82,6 +82,47 @@ export default {
 
 :::
 
+::: title 反转样式
+:::
+
+::: demo
+
+<template>
+  <lay-menu v-model:selectedKey="selectedKey" inverted="true" v-model:openKeys="openKeys" :tree="true">
+    <lay-menu-item title="首页" id="1"></lay-menu-item>
+    <lay-menu-item title="用户" id="2"></lay-menu-item>
+    <lay-menu-item title="角色" id="3"></lay-menu-item> 
+    <lay-sub-menu title="目录" id="7">
+        <lay-menu-item title="菜单一" id="8"></lay-menu-item> 
+        <lay-menu-item title="菜单二" id="9"></lay-menu-item>
+        <lay-sub-menu title="菜单三" id="10">
+            <lay-menu-item title="菜单一" id="11"></lay-menu-item> 
+            <lay-menu-item title="菜单二" id="12"></lay-menu-item>
+            <lay-menu-item title="菜单三" id="13"></lay-menu-item>
+        </lay-sub-menu>
+    </lay-sub-menu> 
+  </lay-menu>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const openKeys = ref(["7"])
+    const selectedKey = ref("5")
+
+    return {
+      openKeys,
+      selectedKey
+    }
+  }
+}
+</script>
+
+:::
+
 ::: title 切换主题
 :::
 
@@ -122,7 +163,6 @@ export default {
 </script>
 
 :::
-
 
 ::: title 菜单插槽
 :::
@@ -179,6 +219,7 @@ export default {
 | v-model:selectedKey | 选中项 | --   |
 | v-model:openKeys    | 打开项 | --   |
 | theme    | 菜单主题 | `dark` `light`   |
+| inverted    | 特殊的激活样式 | `true` `false`  |
 
 :::
 

@@ -4,8 +4,8 @@
 }
 
 .layui-nav .layui-show.layui-anim-upbit .layui-nav-item {
-  display: block;
   height: 40px;
+  display: block;
   line-height: 40px;
 }
 
@@ -164,8 +164,8 @@
 
 .layui-nav-tree .layui-nav-item > a {
   position: relative;
-  height: 42px;
-  line-height: 42px;
+  height: 40px;
+  line-height: 40px;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
@@ -190,10 +190,8 @@
   background-color: #009688;
 }
 
-.layui-nav-tree .layui-nav-child dd.layui-this,
-.layui-nav-tree .layui-nav-child dd.layui-this a,
 .layui-nav-tree .layui-this,
-.layui-nav-tree .layui-this > a,
+.layui-nav-tree .layui-nav-child dd.layui-this,
 .layui-nav-tree .layui-this > a:hover {
   background-color: #009688;
   color: #fff;
@@ -281,6 +279,27 @@
   }
 }
 
+.layui-nav-tree {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
 .layui-nav-tree .layui-this * {
   color: white!important;
+}
+
+.layui-nav-tree.inverted .layui-this, 
+.layui-nav-tree.inverted .layui-this:hover {
+  border-radius: 4px;
+  margin: 0px 6px;
+  width: auto;
+}
+
+.layui-nav-tree.inverted .layui-this > a, 
+.layui-nav-tree.inverted .layui-this:hover > a  {
+  border-radius: 4px;
+}
+
+.layui-nav-tree.inverted .layui-this > a{
+  padding: 5px 24px 5px 24px;
 }
