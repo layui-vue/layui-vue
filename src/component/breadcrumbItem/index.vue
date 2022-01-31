@@ -10,7 +10,13 @@
   <span lay-separator>{{ separator }}</span>
 </template>
 
-<script setup name="LayBreadcrumbItem" lang="ts">
+<script lang="ts">
+export default {
+  name: "LayBreadcrumbItem"
+}
+</script>
+
+<script setup lang="ts">
 import { defineProps, inject, useSlots } from "vue";
 
 const slot = useSlots();

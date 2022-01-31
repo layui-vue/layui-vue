@@ -1,10 +1,10 @@
-<template>
-  <ul class="layui-nav" :class="[level? 'level':'',inverted ? 'inverted':'',tree ? 'layui-nav-tree' : '', theme === 'dark' ? 'layui-nav-dark':'layui-nav-light' ]">
-    <slot></slot>
-  </ul>
-</template>
+<script lang="ts">
+export default {
+  name: "LayMenu"
+}
+</script>
 
-<script setup name="LayMenu" lang="ts">
+<script setup lang="ts">
 import { computed, defineProps, provide } from "vue";
 import "./index.less";
 
@@ -52,3 +52,9 @@ provide("isTree", isTree);
 provide("selectedKey", selectedKey);
 provide("openKeys", openKeys);
 </script>
+
+<template>
+  <ul class="layui-nav" :class="[level? 'level':'',inverted ? 'inverted':'',tree ? 'layui-nav-tree' : '', theme === 'dark' ? 'layui-nav-dark':'layui-nav-light' ]">
+    <slot></slot>
+  </ul>
+</template>

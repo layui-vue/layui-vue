@@ -1,3 +1,30 @@
+<script lang="ts">
+export default {
+  name: "LayRadio"
+}
+</script>
+
+<script setup lang="ts">
+import { defineProps, defineEmits } from "vue";
+
+const props = defineProps<{
+  modelValue: string;
+  disabled?: boolean;
+  label?: string;
+  name: string;
+}>();
+
+const emit = defineEmits(["update:modelValue", "change"]);
+
+const handleClick = function () {
+  if (props.disabled) {
+    return;
+  }
+  emit("change", props.label);
+  emit("update:modelValue", props.label);
+};
+</script>
+
 <template>
   <span>
     <input type="radio" :value="label" :name="name" />
@@ -23,24 +50,3 @@
     </div>
   </span>
 </template>
-
-<script setup name="LayRadio" lang="ts">
-import { defineProps, defineEmits } from "vue";
-
-const props = defineProps<{
-  modelValue: string;
-  disabled?: boolean;
-  label?: string;
-  name: string;
-}>();
-
-const emit = defineEmits(["update:modelValue", "change"]);
-
-const handleClick = function () {
-  if (props.disabled) {
-    return;
-  }
-  emit("change", props.label);
-  emit("update:modelValue", props.label);
-};
-</script>

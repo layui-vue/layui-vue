@@ -1,20 +1,3 @@
-<template>
-  <div class="layui-colla-item">
-    <h2
-      :class="['layui-colla-title', { 'layui-disabled': disabled }]"
-      @click="showHandle"
-    >
-      <slot name="title" :props="props">{{ title }}</slot>
-      <i class="layui-icon layui-colla-icon">{{ isShow ? "" : "" }}</i>
-    </h2>
-    <div class="layui-colla-content" :class="isShow ? 'layui-show' : ''">
-      <p>
-        <slot :props="props"></slot>
-      </p>
-    </div>
-  </div>
-</template>
-
 <script lang="ts">
 export default {
   name:"LayCollapseItem"
@@ -64,3 +47,20 @@ const showHandle = function () {
   emit("change", props.id, !_isShow, activeValues.value);
 };
 </script>
+
+<template>
+  <div class="layui-colla-item">
+    <h2
+      :class="['layui-colla-title', { 'layui-disabled': disabled }]"
+      @click="showHandle"
+    >
+      <slot name="title" :props="props">{{ title }}</slot>
+      <i class="layui-icon layui-colla-icon">{{ isShow ? "" : "" }}</i>
+    </h2>
+    <div class="layui-colla-content" :class="isShow ? 'layui-show' : ''">
+      <p>
+        <slot :props="props"></slot>
+      </p>
+    </div>
+  </div>
+</template>

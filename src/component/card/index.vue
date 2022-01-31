@@ -1,3 +1,22 @@
+<script lang="ts">
+export default {
+  name: "LayCard"
+}
+</script>
+
+<script setup lang="ts">
+import { useSlots } from "vue";
+import "./index.less";
+
+const slot = useSlots();
+
+export interface LayCardProps {
+  title?: string;
+}
+
+const props = defineProps<LayCardProps>();
+</script>
+
 <template>
   <div class="layui-card">
     <div class="layui-card-header" v-if="slot.header || title">
@@ -10,16 +29,3 @@
     </div>
   </div>
 </template>
-
-<script setup name="LayCard" lang="ts">
-import { useSlots } from "vue";
-import "./index.less";
-
-const slot = useSlots();
-
-export interface LayCardProps {
-  title?: string;
-}
-
-const props = defineProps<LayCardProps>();
-</script>

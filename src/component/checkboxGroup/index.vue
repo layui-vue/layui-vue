@@ -1,9 +1,3 @@
-<template>
-  <div class="layui-checkbox-group">
-    <slot></slot>
-  </div>
-</template>
-
 <script lang="ts">
 export default {
   name: "LayCheckboxGroup",
@@ -12,7 +6,7 @@ export default {
 
 <script setup lang="ts">
 import { computed, defineProps, provide, ref, watch } from "vue";
-import { Recordable } from "../type";
+import { Recordable } from "../../types";
 
 export interface LayCheckboxGroupProps {
   modelValue?: Recordable[];
@@ -42,3 +36,9 @@ watch(
   (val) => (modelValue.value = val)
 );
 </script>
+
+<template>
+  <div class="layui-checkbox-group">
+    <slot></slot>
+  </div>
+</template>

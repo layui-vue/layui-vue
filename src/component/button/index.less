@@ -1,14 +1,16 @@
+@import "../../theme/variable.less";
+
 .layui-btn {
   height: 38px;
   line-height: 36px;
-  border: 1px solid transparent;
   padding: 0 18px;
-  background-color: #009688;
   color: #fff;
-  white-space: nowrap;
-  text-align: center;
   font-size: 14px;
-  border-radius: 2px;
+  text-align: center;
+  white-space: nowrap;
+  border: 1px solid transparent;
+  background-color: @button-primary-color;
+  border-radius: @button-border-radius;
   cursor: pointer;
 }
 
@@ -44,34 +46,19 @@
 }
 
 .layui-btn-primary:hover {
-  border-color: #009688;
   color: #333;
 }
 
 .layui-btn-normal {
-  background-color: #1e9fff;
+  background-color: @global-normal-color;
 }
 
 .layui-btn-warm {
-  background-color: #ffb800;
+  background-color: @global-warm-color;
 }
 
 .layui-btn-danger {
-  background-color: #ff5722;
-}
-
-.layui-btn-checked {
-  background-color: #5fb878;
-}
-
-.layui-btn-disabled,
-.layui-btn-disabled:active,
-.layui-btn-disabled:hover {
-  border-color: #eee !important;
-  background-color: #fbfbfb !important;
-  color: #d2d2d2 !important;
-  cursor: not-allowed !important;
-  opacity: 1;
+  background-color: @global-danger-color;
 }
 
 .layui-btn-lg {
@@ -93,12 +80,21 @@
   line-height: 22px;
   padding: 0 5px;
   font-size: 12px;
-}
-
-.layui-btn-xs i {
-  font-size: 12px !important;
+  i {
+    font-size: 12px !important;
+  }
 }
 
 .layui-btn-fluid {
   width: 100%;
+}
+
+.layui-btn-disabled,
+.layui-btn-disabled:active,
+.layui-btn-disabled:hover {
+  border-color: #eee !important;
+  background-color: #fbfbfb !important;
+  color: #d2d2d2 !important;
+  cursor: not-allowed !important;
+  opacity: 1;
 }

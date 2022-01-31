@@ -2,11 +2,11 @@
   <div class="lay-code">
     <div id="source" class="source">
       <slot />
-    </div>
-    <div ref="meta" class="meta">
       <div v-if="$slots.description" class="description">
         <slot name="description" />
       </div>
+    </div>
+    <div ref="meta" class="meta">
       <div class="language-html">
         <slot name="code" />
       </div>
@@ -133,6 +133,7 @@ function handleScroll() {
 }
 .lay-code .source {
   padding: 24px;
+  padding-bottom:15px;
 }
 .lay-code .meta {
   padding: 0 10px;
@@ -141,9 +142,10 @@ function handleScroll() {
   overflow: hidden;
   transition: height 0.2s;
 }
-.lay-code .meta .description {
+.lay-code .source .description {
   padding: 20px;
-  margin: 10px 0;
+  margin: 20px 0;
+  margin-bottom: 0px;
   border: 1px solid whitesmoke;
   box-sizing: border-box;
   background: var(--c-bg);
@@ -152,11 +154,11 @@ function handleScroll() {
   color: var(--c-text-light-1);
   word-break: break-word;
 }
-.lay-code .meta .description p {
+.lay-code .source .description p {
   margin: 0 !important;
   line-height: 26px !important;
 }
-.lay-code .meta .description code {
+.lay-code .source .description code {
   display: inline-block;
   padding: 1px 5px;
   margin: 0 4px;
@@ -167,6 +169,7 @@ function handleScroll() {
   line-height: 18px;
   color: var(--c-text-light);
 }
+
 .lay-code .control {
   height: 44px;
   box-sizing: border-box;

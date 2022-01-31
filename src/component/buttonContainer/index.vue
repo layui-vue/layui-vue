@@ -1,9 +1,3 @@
-<template>
-  <div class="layui-btn-container">
-    <slot></slot>
-  </div>
-</template>
-
 <script lang="ts">
 export default {
   name: "LayButtonContainer",
@@ -13,3 +7,9 @@ export default {
 <script setup lang="ts">
 import "./index.less";
 </script>
+
+<template>
+  <div class="layui-btn-container">
+    <slot></slot>
+  </div>
+</template>

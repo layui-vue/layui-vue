@@ -1,21 +1,3 @@
-<template>
-	<dd
-		:value="value"
-		:class="[{ 'layui-this': selected }, { 'layui-disabled': disabled }]"
-		@click="selectHandle"
-	>
-		<template v-if="selectItem.multiple">
-			<lay-checkbox
-				skin="primary"
-				v-model="selected"
-				@change="selectHandle"
-				label=""
-			/>
-		</template>
-		<slot>{{ label }}</slot>
-	</dd>
-</template>
-
 <script lang="ts">
 export default {
 	name: "LaySelectOption",
@@ -80,3 +62,21 @@ onMounted(() => {
 	selected.value && callSelectItemHandle();
 });
 </script>
+
+<template>
+	<dd
+		:value="value"
+		:class="[{ 'layui-this': selected }, { 'layui-disabled': disabled }]"
+		@click="selectHandle"
+	>
+		<template v-if="selectItem.multiple">
+			<lay-checkbox
+				skin="primary"
+				v-model="selected"
+				@change="selectHandle"
+				label=""
+			/>
+		</template>
+		<slot>{{ label }}</slot>
+	</dd>
+</template>

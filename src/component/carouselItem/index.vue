@@ -1,9 +1,10 @@
-<template>
-  <li :class="[active === id ? 'layui-this' : '']">
-    <slot></slot>
-  </li>
-</template>
-<script setup name="LayCarouselItem" lang="ts">
+<script lang="ts">
+export default {
+  name: "LayCarouselItem"
+}
+</script>
+
+<script setup lang="ts">
 import { defineProps, inject } from "vue";
 
 const props = defineProps<{
@@ -12,3 +13,9 @@ const props = defineProps<{
 
 const active = inject("active");
 </script>
+
+<template>
+  <li :class="[active === id ? 'layui-this' : '']">
+    <slot></slot>
+  </li>
+</template>

@@ -12,7 +12,6 @@
   <lay-button type="normal">百搭按钮</lay-button>
   <lay-button type="warm">暖色按钮</lay-button>
   <lay-button type="danger">警告按钮</lay-button>
-  <lay-button type="disabled">禁用按钮</lay-button>
 </template>
 
 <script>

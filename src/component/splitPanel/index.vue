@@ -1,16 +1,3 @@
-<template>
-  <div
-    ref="target"
-    :class="['lay-split-panel', vertical ? 'lay-split-panel-vertical' : '']"
-    :style="{
-      cursor: domStatus ? (!vertical ? 'col-resize' : 'row-resize') : '',
-    }"
-    v-on="{ mouseup: mouseup }"
-  >
-    <slot></slot>
-  </div>
-</template>
-
 <script lang="ts">
 export default {
   name: "laySplitPanel"
@@ -132,3 +119,16 @@ provide("laySplitPanel", {
   moveChange,
 });
 </script>
+
+<template>
+  <div
+    ref="target"
+    :class="['lay-split-panel', vertical ? 'lay-split-panel-vertical' : '']"
+    :style="{
+      cursor: domStatus ? (!vertical ? 'col-resize' : 'row-resize') : '',
+    }"
+    v-on="{ mouseup: mouseup }"
+  >
+    <slot></slot>
+  </div>
+</template>

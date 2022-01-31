@@ -1,24 +1,3 @@
-<template>
-  <div
-    v-show="visible"
-    ref="backtopRef"
-    class="layui-backtop"
-    :class="classBacktop"
-    :style="{ ...styleBacktop }"
-    @click.stop="handleClick"
-    @mousedown="handlerMousedown"
-    @mouseup="handlerMouseup"
-  >
-    <slot>
-      <lay-icon
-        :type="props.icon"
-        :size="`${props.iconSize}px`"
-        :color="props.iconColor"
-      />
-    </slot>
-  </div>
-</template>
-
 <script lang="ts">
 export default {
   name: "LayBacktop",
@@ -215,3 +194,24 @@ onMounted(() => {
   scrollTarget.value.addEventListener("scroll", throttle(handleScroll, 300));
 });
 </script>
+
+<template>
+  <div
+    v-show="visible"
+    ref="backtopRef"
+    class="layui-backtop"
+    :class="classBacktop"
+    :style="{ ...styleBacktop }"
+    @click.stop="handleClick"
+    @mousedown="handlerMousedown"
+    @mouseup="handlerMouseup"
+  >
+    <slot>
+      <lay-icon
+        :type="props.icon"
+        :size="`${props.iconSize}px`"
+        :color="props.iconColor"
+      />
+    </slot>
+  </div>
+</template>

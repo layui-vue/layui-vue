@@ -1,26 +1,3 @@
-<template>
-  <div
-    v-if="!isStart"
-    :class="[!isStart ? 'lay-split-panel-line' : '']"
-    ref="el"
-    v-on="{ mousedown: mousedown, mouseup: mouseup }"
-  ></div>
-  <div
-    v-if="isVertical"
-    :class="['lay-split-panel-item']"
-    :style="{ height: `${space ? space : (100 + space) / stepsCount}%` }"
-  >
-    <slot></slot>
-  </div>
-  <div
-    v-else
-    :class="['lay-split-panel-item']"
-    :style="{ width: `${space ? space : (100 + space) / stepsCount}%` }"
-  >
-    <slot></slot>
-  </div>
-</template>
-
 <script lang="ts">
 export default {
   name: "LaySplitPanelItem"
@@ -100,3 +77,26 @@ onBeforeUnmount(() => {
   );
 });
 </script>
+
+<template>
+  <div
+    v-if="!isStart"
+    :class="[!isStart ? 'lay-split-panel-line' : '']"
+    ref="el"
+    v-on="{ mousedown: mousedown, mouseup: mouseup }"
+  ></div>
+  <div
+    v-if="isVertical"
+    :class="['lay-split-panel-item']"
+    :style="{ height: `${space ? space : (100 + space) / stepsCount}%` }"
+  >
+    <slot></slot>
+  </div>
+  <div
+    v-else
+    :class="['lay-split-panel-item']"
+    :style="{ width: `${space ? space : (100 + space) / stepsCount}%` }"
+  >
+    <slot></slot>
+  </div>
+</template>

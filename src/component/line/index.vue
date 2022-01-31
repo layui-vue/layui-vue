@@ -1,7 +1,3 @@
-<template>
-  <hr :class="['layui-border-' + theme]" />
-</template>
-
 <script lang="ts">
 export default {
   name: "LayLine"
@@ -15,3 +11,7 @@ const props = defineProps<{
   theme?: string;
 }>();
 </script>
+
+<template>
+  <hr :class="['layui-border-' + theme]" />
+</template>

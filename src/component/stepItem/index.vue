@@ -1,86 +1,3 @@
-<template>
-  <div
-    v-if="!simple"
-    :class="[
-      'lay-step-item',
-      isLast && !isCenter && composition !== 'row' ? 'lay-step-item-last' : '',
-      isCenter ? 'is-item-center' : '',
-      isVertical ? 'is-vertical' : '',
-    ]"
-    :style="{ flexBasis: space, flexGrow: space === 'auto' ? 1 : 0 }"
-  >
-    <div
-      :class="[
-        !isLast
-          ? isLineActive
-            ? `lay-step-item-line lay-step-item-line-${status || 'active'}`
-            : 'lay-step-item-line'
-          : '',
-        isCenter ? 'is-line-center' : '',
-      ]"
-    >
-      <div
-        :class="[
-          'lay-step-item-pace',
-          isActive ? `lay-step-item-active` : '',
-          isCurrent === index ? `lay-step-item--${currentStatus}` : '',
-          status ? `lay-step-item-${status}` : '',
-          isWait ? 'lay-step-item-wait' : '',
-          isCenter ? 'is-center' : '',
-        ]"
-        @click="onChange(index + 1)"
-      >
-        <slot name="pace">
-          <template v-if="icon">
-            <lay-icon :type="icon"></lay-icon>
-          </template>
-          <template v-else>
-            <span v-if="!isActive">{{ index + 1 }}</span>
-            <lay-icon
-              v-else
-              :type="status === 'fail' ? 'layui-icon-close' : 'layui-icon-ok'"
-            ></lay-icon>
-          </template>
-        </slot>
-      </div>
-    </div>
-    <div
-      :class="[
-        'lay-step-item-content',
-        composition === 'row' ? 'lay-step-item-content-row' : '',
-        isActive ? `lay-step-item-content-active` : '',
-        isCurrent === index ? `lay-step-item-content--${currentStatus}` : '',
-        status ? `lay-step-item-content-${status}` : '',
-        isWait ? 'lay-step-item-content-wait' : '',
-      ]"
-      @click="onChange(index + 1)"
-    >
-      <slot>
-        <div class="lay-step-item-content-title">{{ title }}</div>
-        <p>{{ content }}</p>
-      </slot>
-    </div>
-  </div>
-  <div
-    v-else
-    :class="[
-      'lay-step-item',
-      'lay-step-simple',
-      !isStart ? 'lay-step-item-simple' : '',
-      'lay-step-item-simple-border',
-      isActive ? 'lay-step-item-simple-active' : '',
-      isCurrent === index ? `lay-step-item-simple-${currentStatus}` : '',
-      isCurrentBorder === index
-        ? `lay-step-item-simple-${currentStatus}-border`
-        : '',
-      isSimpleActive ? 'lay-step-item-simple-active-border' : '',
-    ]"
-    @click="onChange(index + 1)"
-  >
-    <slot>{{ index + 1 }}.{{ title }}</slot>
-  </div>
-</template>
-
 <script lang="ts">
 export default {
   name: "LayStepItem"
@@ -201,3 +118,86 @@ onBeforeUnmount(() => {
   );
 });
 </script>
+
+<template>
+  <div
+    v-if="!simple"
+    :class="[
+      'lay-step-item',
+      isLast && !isCenter && composition !== 'row' ? 'lay-step-item-last' : '',
+      isCenter ? 'is-item-center' : '',
+      isVertical ? 'is-vertical' : '',
+    ]"
+    :style="{ flexBasis: space, flexGrow: space === 'auto' ? 1 : 0 }"
+  >
+    <div
+      :class="[
+        !isLast
+          ? isLineActive
+            ? `lay-step-item-line lay-step-item-line-${status || 'active'}`
+            : 'lay-step-item-line'
+          : '',
+        isCenter ? 'is-line-center' : '',
+      ]"
+    >
+      <div
+        :class="[
+          'lay-step-item-pace',
+          isActive ? `lay-step-item-active` : '',
+          isCurrent === index ? `lay-step-item--${currentStatus}` : '',
+          status ? `lay-step-item-${status}` : '',
+          isWait ? 'lay-step-item-wait' : '',
+          isCenter ? 'is-center' : '',
+        ]"
+        @click="onChange(index + 1)"
+      >
+        <slot name="pace">
+          <template v-if="icon">
+            <lay-icon :type="icon"></lay-icon>
+          </template>
+          <template v-else>
+            <span v-if="!isActive">{{ index + 1 }}</span>
+            <lay-icon
+              v-else
+              :type="status === 'fail' ? 'layui-icon-close' : 'layui-icon-ok'"
+            ></lay-icon>
+          </template>
+        </slot>
+      </div>
+    </div>
+    <div
+      :class="[
+        'lay-step-item-content',
+        composition === 'row' ? 'lay-step-item-content-row' : '',
+        isActive ? `lay-step-item-content-active` : '',
+        isCurrent === index ? `lay-step-item-content--${currentStatus}` : '',
+        status ? `lay-step-item-content-${status}` : '',
+        isWait ? 'lay-step-item-content-wait' : '',
+      ]"
+      @click="onChange(index + 1)"
+    >
+      <slot>
+        <div class="lay-step-item-content-title">{{ title }}</div>
+        <p>{{ content }}</p>
+      </slot>
+    </div>
+  </div>
+  <div
+    v-else
+    :class="[
+      'lay-step-item',
+      'lay-step-simple',
+      !isStart ? 'lay-step-item-simple' : '',
+      'lay-step-item-simple-border',
+      isActive ? 'lay-step-item-simple-active' : '',
+      isCurrent === index ? `lay-step-item-simple-${currentStatus}` : '',
+      isCurrentBorder === index
+        ? `lay-step-item-simple-${currentStatus}-border`
+        : '',
+      isSimpleActive ? 'lay-step-item-simple-active-border' : '',
+    ]"
+    @click="onChange(index + 1)"
+  >
+    <slot>{{ index + 1 }}.{{ title }}</slot>
+  </div>
+</template>

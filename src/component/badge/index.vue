@@ -13,6 +13,7 @@ export interface LayBadgeProps {
   theme?: string;
   color?: string;
 }
+
 const props = defineProps<LayBadgeProps>();
 
 const classes = computed(() => {

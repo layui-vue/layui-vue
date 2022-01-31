@@ -1,21 +1,10 @@
-<template>
-  <div :class="['lay-skeleton', animated ? 'lay-skeleton-animated': '',]" v-bind="$attrs">
-    <template v-if="loading">
-      <slot name="skeleton">
-        <lay-skeleton-item
-            v-for="item in rows"
-            :class="[
-              item===1? 'lay-skeleton-first': '',
-              item === rows? 'lay-skeleton-last': '']"
-            type="p"
-        ></lay-skeleton-item>
-      </slot>
-    </template>
-    <slot v-else></slot>
-  </div>
-</template>
+<script lang="ts">
+export default {
+  name: "LaySkeleton"
+}
+</script>
 
-<script setup name="LaySkeleton" lang="ts">
+<script setup lang="ts">
 import LaySkeletonItem from '../skeletonItem/index.vue'
 import './index.less'
 import { defineProps, withDefaults} from "vue";
@@ -31,4 +20,22 @@ const props = withDefaults(defineProps<LaySkeletonProps>(), {
   loading: false,
   animated: false,
 });
-</script>-
+</script>
+
+<template>
+  <div :class="['lay-skeleton', animated ? 'lay-skeleton-animated': '',]" v-bind="$attrs">
+    <template v-if="loading">
+      <slot name="skeleton">
+        <lay-skeleton-item
+            v-for="item in rows"
+            :key="item"
+            :class="[
+              item===1? 'lay-skeleton-first': '',
+              item === rows? 'lay-skeleton-last': '']"
+            type="p"
+        ></lay-skeleton-item>
+      </slot>
+    </template>
+    <slot v-else></slot>
+  </div>
+</template>

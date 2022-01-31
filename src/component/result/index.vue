@@ -1,4 +1,7 @@
 <script lang="ts">
+export default {
+  name: "LayResult"
+}
 </script>
 
 <script setup lang="ts">

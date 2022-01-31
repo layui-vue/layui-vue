@@ -4,7 +4,7 @@ export default {
 };
 </script>
 
-<script setup name="LayBody" lang="ts">
+<script setup lang="ts">
 import "./index.less";
 </script>
 

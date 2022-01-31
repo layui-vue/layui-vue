@@ -1,9 +1,3 @@
-<template>
-  <div class="layui-side-scroll">
-    <slot></slot>
-  </div>
-</template>
-
 <script lang="ts">
 export default {
   name: "LayScroll"
@@ -13,3 +7,9 @@ export default {
 <script setup lang="ts">
 import { defineProps } from "vue";
 </script>
+
+<template>
+  <div class="layui-side-scroll">
+    <slot></slot>
+  </div>
+</template>

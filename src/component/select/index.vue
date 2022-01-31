@@ -1,79 +1,10 @@
-<template>
-	<div
-		ref="selectRef"
-		class="layui-unselect layui-form-select"
-		:class="{ 'layui-form-selected': openState }"
-	>
-		<div class="layui-select-title" @click="open">
-			<input
-				type="text"
-				:placeholder="
-					selectItem.value !== null &&
-					Array.isArray(selectItem.value) &&
-					selectItem.value.length > 0
-						? ''
-						: emptyMessage ?? placeholder
-				"
-				:disabled="disabled"
-				readonly
-				:value="
-					!selectItem.multiple && selectItem.value !== null
-						? selectItem.label
-						: null
-				"
-				:name="name"
-				:class="[
-					'layui-input',
-					'layui-unselect',
-					{ 'layui-disabled': disabled },
-				]"
-			/>
-			<i :class="['layui-edge', { 'layui-disabled': disabled }]"></i>
-			<!-- 多选 -->
-			<div
-				v-if="selectItem.multiple && Array.isArray(selectItem.label)"
-				class="layui-multiple-select-row"
-			>
-				<div class="layui-multiple-select-badge">
-					<template v-for="(item, index) in selectItem.label" :key="index">
-						<lay-badge theme="green">
-							<span>{{ item }}</span>
-							<i
-								:class="['layui-icon', { 'layui-icon-close': true }]"
-								v-if="
-									!disabled &&
-									!(
-										Array.isArray(selectItem.value) &&
-										selectItem.value.length > 0 &&
-										disabledItemMap[selectItem.value[index]]
-									)
-								"
-								@click="
-									removeItemHandle($event, {
-										label: item,
-										value: Array.isArray(selectItem.value)
-											? selectItem.value[index]
-											: null,
-									})
-								"
-							>
-							</i>
-						</lay-badge>
-					</template>
-				</div>
-			</div>
-		</div>
-		<dl class="layui-anim layui-anim-upbit">
-			<!-- 多选不支持空提示 -->
-			<template v-if="!multiple && showEmpty">
-				<lay-select-option :value="null" :label="emptyMessage ?? placeholder" />
-			</template>
-			<slot></slot>
-		</dl>
-	</div>
-</template>
+<script lang="ts">
+export default {
+	name: "LaySelect"
+}
+</script>
 
-<script setup name="LaySelect" lang="ts">
+<script setup lang="ts">
 import "./index.less";
 import LaySelectOption from "../selectOption/index.vue";
 import {
@@ -88,7 +19,7 @@ import {
 	Ref,
 } from "vue";
 import { useClickOutside } from "@layui/hooks-vue";
-import { SelectItem } from "../type";
+import { SelectItem } from "../../types";
 
 const selectRef = ref<null | HTMLElement>(null);
 const isClickOutside = useClickOutside(selectRef);
@@ -218,3 +149,78 @@ provide("selectItemHandle", selectItemHandle);
 provide("selectItem", selectItem);
 provide("selectItemPush", selectItemPush);
 </script>
+
+<template>
+	<div
+		ref="selectRef"
+		class="layui-unselect layui-form-select"
+		:class="{ 'layui-form-selected': openState }"
+	>
+		<div class="layui-select-title" @click="open">
+			<input
+				type="text"
+				:placeholder="
+					selectItem.value !== null &&
+					Array.isArray(selectItem.value) &&
+					selectItem.value.length > 0
+						? ''
+						: emptyMessage ?? placeholder
+				"
+				:disabled="disabled"
+				readonly
+				:value="
+					!selectItem.multiple && selectItem.value !== null
+						? selectItem.label
+						: null
+				"
+				:name="name"
+				:class="[
+					'layui-input',
+					'layui-unselect',
+					{ 'layui-disabled': disabled },
+				]"
+			/>
+			<i :class="['layui-edge', { 'layui-disabled': disabled }]"></i>
+			<!-- 多选 -->
+			<div
+				v-if="selectItem.multiple && Array.isArray(selectItem.label)"
+				class="layui-multiple-select-row"
+			>
+				<div class="layui-multiple-select-badge">
+					<template v-for="(item, index) in selectItem.label" :key="index">
+						<lay-badge theme="green">
+							<span>{{ item }}</span>
+							<i
+								:class="['layui-icon', { 'layui-icon-close': true }]"
+								v-if="
+									!disabled &&
+									!(
+										Array.isArray(selectItem.value) &&
+										selectItem.value.length > 0 &&
+										disabledItemMap[selectItem.value[index]]
+									)
+								"
+								@click="
+									removeItemHandle($event, {
+										label: item,
+										value: Array.isArray(selectItem.value)
+											? selectItem.value[index]
+											: null,
+									})
+								"
+							>
+							</i>
+						</lay-badge>
+					</template>
+				</div>
+			</div>
+		</div>
+		<dl class="layui-anim layui-anim-upbit">
+			<!-- 多选不支持空提示 -->
+			<template v-if="!multiple && showEmpty">
+				<lay-select-option :value="null" :label="emptyMessage ?? placeholder" />
+			</template>
+			<slot></slot>
+		</dl>
+	</div>
+</template>

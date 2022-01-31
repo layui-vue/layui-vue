@@ -4,6 +4,12 @@
   <slot name="suffix"></slot>
 </template>
 
+<script lang="ts">
+export default {
+  name: "LayCountUp",
+};
+</script>
+
 <script setup lang="ts">
 import { onMounted, ref, watch } from 'vue'
 import { CountUp } from 'countup.js'

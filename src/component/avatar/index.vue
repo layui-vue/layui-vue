@@ -10,8 +10,8 @@ import "./index.less";
 
 const props = defineProps<{
   src?: String;
-  radius?: boolean;
   size?: string;
+  radius?: boolean;
 }>();
 </script>
 

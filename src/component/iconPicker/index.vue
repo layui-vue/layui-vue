@@ -78,7 +78,13 @@
   </lay-dropdown>
 </template>
 
-<script setup name="LayIconPicker" lang="ts">
+<script lang="ts">
+export default {
+  name: "LayIconPicker"
+}
+</script>
+
+<script setup lang="ts">
 import { defineProps, Ref, ref } from "vue";
 import { LayIconList as icons } from "@layui/icons-vue";
 

@@ -1,19 +1,10 @@
-<template>
-  <input
-    :type="type"
-    :name="name"
-    :value="modelValue"
-    :disabled="disabled"
-    :placeholder="placeholder"
-    :class="{ 'layui-disabled': disabled }"
-    class="layui-input"
-    @input="onInput"
-    @focus="onFocus"
-    @blur="onBlur"
-  />
-</template>
+<script lang="ts">
+export default {
+  name: "LayInput"
+}
+</script>
 
-<script setup name="LayInput" lang="ts">
+<script setup lang="ts">
 import { defineProps, defineEmits } from "vue";
 
 export interface LayInputProps {
@@ -42,3 +33,18 @@ const onBlur = function () {
   emit("blur");
 };
 </script>
+
+<template>
+  <input
+    :type="type"
+    :name="name"
+    :value="modelValue"
+    :disabled="disabled"
+    :placeholder="placeholder"
+    :class="{ 'layui-disabled': disabled }"
+    class="layui-input"
+    @input="onInput"
+    @focus="onFocus"
+    @blur="onBlur"
+  />
+</template>
