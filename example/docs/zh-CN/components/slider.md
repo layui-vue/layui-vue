@@ -4,7 +4,7 @@
 ::: title 横向
 :::
 
-::: demo
+::: demo 使用 `lay-slider` 标签, 创建滑块
 
 <template>
   <lay-slider v-model="value1" :disabled="false"></lay-slider>

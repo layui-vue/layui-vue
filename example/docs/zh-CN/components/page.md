@@ -4,7 +4,7 @@
 ::: title 基础使用
 :::
 
-::: demo
+::: demo 使用 `lay-page` 标签, 创建分页
 
 <template>
   <lay-page :limit="limit" 	@limit="limit = $event" :total="total" :show-page="showPage"></lay-page>

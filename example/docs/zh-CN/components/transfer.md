@@ -4,7 +4,7 @@
 ::: title 基础使用
 :::
 
-::: demo
+::: demo 使用 `lay-transfer` 标签, 创建穿梭框
 
 <template>
   <lay-transfer :dataSource="dataSource1"></lay-transfer>

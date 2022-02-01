@@ -4,7 +4,7 @@
 ::: title 基础使用
 :::
 
-::: demo
+::: demo 使用 `lay-radio` 标签, 创建一个单选框
 
 <template>
   <lay-form>
