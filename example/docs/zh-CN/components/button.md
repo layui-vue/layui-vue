@@ -59,7 +59,7 @@ export default {
 ::: title 按钮尺寸
 :::
 
-::: demo 传入 `size` 属性, 创建指定尺寸的按钮, 可选值 `lg` `sm` `xs`
+::: demo 使用 `size` 属性, 创建指定尺寸的按钮, 可选值 `lg` `sm` `xs`
 
 <template>
   <lay-button type="primary" size="lg">原始按钮</lay-button>

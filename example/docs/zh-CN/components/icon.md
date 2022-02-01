@@ -4,7 +4,7 @@
 ::: title 基础使用
 :::
 
-::: demo
+::: demo 使用 `lay-icon` 标签, 创建图标组件
 
 <template>
   <lay-icon type="layui-icon-face-smile"></lay-icon>
@@ -27,7 +27,7 @@ export default {
 ::: title 图标颜色
 :::
 
-::: demo
+::: demo 使用 `color` 属性设置颜色
 
 <template>
   <lay-icon type="layui-icon-face-smile" color="red"></lay-icon> &nbsp;
@@ -55,7 +55,7 @@ export default {
 ::: title 图标尺寸
 :::
 
-::: demo
+::: demo 使用 `size` 属性设置尺寸
 
 <template>
   <lay-icon type="layui-icon-star" size="26px" color="red"></lay-icon>
