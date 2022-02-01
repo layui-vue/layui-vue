@@ -113,3 +113,33 @@ export default {
 </script>
 
 :::
+
+::: title Exception 属性
+:::
+
+::: table
+
+| 属性        | 描述     | 可选值 |
+| ----------- | -------- | ------ |
+| title | 标题 | --     |
+| status | 状态 | `403` `404` `500` |
+| describe | 描述信息 | -- |
+
+:::
+
+::: title Exception 插槽
+:::
+
+::: table
+
+| 属性        | 描述     | 可选值 |
+| ----------- | -------- | ------ |
+| action | 操作 | --     |
+
+:::
+
+::: comment
+:::
+
+::: previousNext field
+:::

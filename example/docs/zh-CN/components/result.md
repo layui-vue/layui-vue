@@ -4,7 +4,7 @@
 ::: title 成功
 :::
 
-::: demo 使用 `lay-exception` 标签, 创建一个异常页面
+::: demo 使用 `lay-result` 标签, 创建一个结果页面
 
 <template>
   <lay-result></lay-result>
@@ -27,7 +27,7 @@ export default {
 ::: title 失败
 :::
 
-::: demo 使用 `lay-exception` 标签, 创建一个异常页面
+::: demo 使用 `lay-result` 标签, 创建一个结果页面
 
 <template>
   <lay-result status="failure"></lay-result>
@@ -45,4 +45,35 @@ export default {
 }
 </script>
 
+:::
+
+::: title Result 属性
+:::
+
+::: table
+
+| 属性        | 描述     | 可选值 |
+| ----------- | -------- | ------ |
+| title | 标题 | --     |
+| status | 状态 | `success` `failure` |
+| describe | 描述信息 | -- |
+
+:::
+
+::: title Result 插槽
+:::
+
+::: table
+
+| 属性        | 描述     | 可选值 |
+| ----------- | -------- | ------ |
+| content | 内容 | --     |
+| action | 操作 | --     |
+
+:::
+
+::: comment
+:::
+
+::: previousNext field
 :::
