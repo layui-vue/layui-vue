@@ -87,7 +87,7 @@ export default {
 ::: title 流式按钮
 :::
 
-::: demo 传入 `size` 属性, 创建最大化按钮
+::: demo 使用 `fluid` 属性, 创建最大化按钮
 
 <template>
   <lay-button type="primary" fluid>最大化按钮</lay-button>
@@ -113,7 +113,7 @@ export default {
 ::: title 圆角按钮
 :::
 
-::: demo 传入 `radius` 属性，创建圆角按钮
+::: demo 使用 `radius` 属性，创建圆角按钮
 
 <template>
   <lay-button type="primary" radius>原始按钮</lay-button>
@@ -233,7 +233,7 @@ export default {
 ::: title 加载按钮
 :::
 
-::: demo 传入 `loading` 属性, 控制按钮的加载状态
+::: demo 使用 `loading` 属性, 控制按钮的加载状态
 
 <template>
   <lay-button-container>

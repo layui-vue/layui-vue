@@ -4,7 +4,7 @@
 ::: title 基础使用
 :::
 
-::: demo
+::: demo 使用 `lay-card` 标签, 创建卡片组件
 
 <template>
 <div class="card-container">

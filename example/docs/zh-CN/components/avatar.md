@@ -4,7 +4,7 @@
 ::: title 基础使用
 :::
 
-::: demo
+::: demo 使用 `lay-avatar` 标签, 创建头像
 
 <template>
   <lay-avatar :src="src"></lay-avatar>

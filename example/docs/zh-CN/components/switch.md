@@ -4,7 +4,7 @@
 ::: title 基础使用
 :::
 
-::: demo
+::: demo 使用 `lay-switch` 标签, 创建开关
 
 <template>
   <lay-switch v-model="active1"></lay-switch>
