@@ -1,6 +1,6 @@
 {
   "name": "@layui/layui-vue",
-  "version": "0.3.6-alpha.7",
+  "version": "0.3.6",
   "author": "SleepRite",
   "license": "MIT",
   "description": "a component library for Vue 3 base on layui-vue",
