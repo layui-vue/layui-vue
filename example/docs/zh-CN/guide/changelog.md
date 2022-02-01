@@ -14,7 +14,7 @@
     <ul> 
       <a name="0-3-6"> </a> 
       <li> 
-        <h3>0.3.6 <span class="layui-badge-rim">2022-01-24</span></h3> 
+        <h3>0.3.6 <span class="layui-badge-rim">2022-02-02</span></h3> 
         <ul> 
           <li>[新增] result 结果组件, 提供 success error 通用状态页。</li>
           <li>[新增] exception 异常组件, 提供 403, 404, 500 通用异常页。</li>
