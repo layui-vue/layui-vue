@@ -5,7 +5,7 @@
 :::
 
 
-::: demo
+::: demo 使用 `lay-skeleton` 标签, 创建骨架屏
 
 <template>
 <div>

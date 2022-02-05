@@ -303,6 +303,18 @@ const menus = [
         subTitle: "splitPanel",
         path: "/zh-CN/components/splitPanel",
       },
+      {
+        id: 100,
+        title: "异常",
+        subTitle: "exception",
+        path: "/zh-CN/components/exception",
+      },      
+      {
+        id: 100,
+        title: "结果",
+        subTitle: "result",
+        path: "/zh-CN/components/result",
+      },
     ],
   },
   {
@@ -332,6 +344,12 @@ const menus = [
         title: "消息",
         subTitle: "msg",
         path: "/zh-CN/components/msg",
+      },
+      {
+        id: 94,
+        title: "抽屉",
+        subTitle: "drawer",
+        path: "/zh-CN/components/drawer",
       },
     ],
   },

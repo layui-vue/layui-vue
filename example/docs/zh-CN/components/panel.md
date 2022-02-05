@@ -4,7 +4,7 @@
 ::: title 基础使用
 :::
 
-::: demo
+::: demo 使用 `lay-panel` 标签, 创建面板组件
 
 <template>
   <lay-panel><div style="padding: 30px;">面板</div></lay-panel>

@@ -5,7 +5,7 @@ import plugins from './src/plugin/common-plugins'
 export default defineConfig({
   resolve: {
     alias: {
-      '/@src': path.resolve(__dirname, '../src'),
+      '/@src': path.resolve(__dirname, './src'),
     },
   },
   plugins,

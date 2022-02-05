@@ -2,18 +2,19 @@
   <div class="lay-code">
     <div id="source" class="source">
       <slot />
-    </div>
-    <div ref="meta" class="meta">
       <div v-if="$slots.description" class="description">
         <slot name="description" />
       </div>
+    </div>
+    <div ref="meta" class="meta">
       <div class="language-html">
         <slot name="code" />
       </div>
     </div>
     <div :class="{ 'is-fixed': isFixContorl }" class="control">
-      <i class="layui-icon layui-icon-file" @click="copy" />
-      <i class="layui-icon layui-icon-fonts-code" @click="toggle" />
+      <i class="layui-icon layui-icon-play btn" @click="onPlayground" title="在 Playground 中打开" />
+      <i class="layui-icon layui-icon-file btn" @click="copy" title="复制代码" />
+      <i class="layui-icon layui-icon-fonts-code btn" @click="toggle"  title="查看代码"/>
     </div>
   </div>
 </template>
@@ -21,6 +22,8 @@
 <script setup lang="ts">
 import { layer } from '@layui/layer-vue'
 import { onMounted, onUnmounted, ref, watch } from 'vue'
+
+import { usePlayGround } from '../plugin/usePlayground'
 
 const meta = ref<HTMLElement>({} as HTMLElement)
 const isFixContorl = ref(false)
@@ -30,6 +33,15 @@ const show = ref(false)
 
 const toggle = function () {
   show.value = !show.value
+}
+
+const onPlayground = function(){
+  const foundCodes = meta.value.getElementsByClassName('language-html')
+  const foundCode = foundCodes[0];
+  const text = foundCode.textContent || "";
+  
+  const { link } = usePlayGround(text)
+  window.open(link)
 }
 
 const copy = function () {
@@ -121,6 +133,7 @@ function handleScroll() {
 }
 .lay-code .source {
   padding: 24px;
+  padding-bottom:15px;
 }
 .lay-code .meta {
   padding: 0 10px;
@@ -129,9 +142,10 @@ function handleScroll() {
   overflow: hidden;
   transition: height 0.2s;
 }
-.lay-code .meta .description {
+.lay-code .source .description {
   padding: 20px;
-  margin: 10px 0;
+  margin: 20px 0;
+  margin-bottom: 0px;
   border: 1px solid whitesmoke;
   box-sizing: border-box;
   background: var(--c-bg);
@@ -140,11 +154,11 @@ function handleScroll() {
   color: var(--c-text-light-1);
   word-break: break-word;
 }
-.lay-code .meta .description p {
+.lay-code .source .description p {
   margin: 0 !important;
   line-height: 26px !important;
 }
-.lay-code .meta .description code {
+.lay-code .source .description code {
   display: inline-block;
   padding: 1px 5px;
   margin: 0 4px;
@@ -155,6 +169,7 @@ function handleScroll() {
   line-height: 18px;
   color: var(--c-text-light);
 }
+
 .lay-code .control {
   height: 44px;
   box-sizing: border-box;
@@ -185,5 +200,8 @@ function handleScroll() {
   transition: all 0.3s;
   padding-left: 10px;
   padding-right: 10px;
+}
+.btn:hover::before {
+  color: #5FB878;
 }
 </style>

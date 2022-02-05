@@ -12,7 +12,6 @@
   <lay-button type="normal">百搭按钮</lay-button>
   <lay-button type="warm">暖色按钮</lay-button>
   <lay-button type="danger">警告按钮</lay-button>
-  <lay-button type="disabled">禁用按钮</lay-button>
 </template>
 
 <script>
@@ -60,7 +59,7 @@ export default {
 ::: title 按钮尺寸
 :::
 
-::: demo 传入 `size` 属性, 创建指定尺寸的按钮, 可选值 `lg` `sm` `xs`
+::: demo 使用 `size` 属性, 创建指定尺寸的按钮, 可选值 `lg` `sm` `xs`
 
 <template>
   <lay-button type="primary" size="lg">原始按钮</lay-button>
@@ -88,7 +87,7 @@ export default {
 ::: title 流式按钮
 :::
 
-::: demo 传入 `size` 属性, 创建最大化按钮
+::: demo 使用 `fluid` 属性, 创建最大化按钮
 
 <template>
   <lay-button type="primary" fluid>最大化按钮</lay-button>
@@ -114,7 +113,7 @@ export default {
 ::: title 圆角按钮
 :::
 
-::: demo 传入 `radius` 属性，创建圆角按钮
+::: demo 使用 `radius` 属性，创建圆角按钮
 
 <template>
   <lay-button type="primary" radius>原始按钮</lay-button>
@@ -234,7 +233,7 @@ export default {
 ::: title 加载按钮
 :::
 
-::: demo 传入 `loading` 属性, 控制按钮的加载状态
+::: demo 使用 `loading` 属性, 控制按钮的加载状态
 
 <template>
   <lay-button-container>

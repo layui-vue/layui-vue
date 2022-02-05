@@ -4,7 +4,7 @@
 ::: title 基础使用
 :::
 
-::: demo
+::: demo 使用 `lay-badge` 标签, 创建徽章
 
 <template>
     <lay-badge type="dot"></lay-badge>&nbsp;

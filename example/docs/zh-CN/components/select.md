@@ -46,7 +46,6 @@ export default {
 import { ref } from 'vue'
 
 export default {
-  name:'selectChange',
   setup() {
     const value = ref(null);
     var i = 1;

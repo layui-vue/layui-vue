@@ -11,13 +11,13 @@
 </template>
 
 <script>
-import { layer } from "../../../../src/index.ts"
+import { layer } from "@layui/layer-vue"
 
 export default {
   setup() {
 
     const openMsg = function() {
-        layer.msg("普通消息", { time: 1000 })
+        layer.msg("普通消息", { time: 100000 })
     }
     return {
         openMsg
@@ -42,13 +42,13 @@ export default {
 </template>
 
 <script>
-import { layer } from "../../../../src/index.ts"
+import { layer } from "@layui/layer-vue"
 
 export default {
   setup() {
 
     const openSuccess = function() {
-        layer.msg("成功消息", { icon : 1, time: 1000})
+        layer.msg("成功消息", { icon : 1, time: 100000})
     }
 
     const openFailure = function() {

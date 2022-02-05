@@ -4,7 +4,7 @@
 ::: title 基础使用
 :::
 
-::: demo
+::: demo 使用 `lay-table` 标签, 创建表格
 
 <template>
   <lay-table :columns="columns" :dataSource="dataSource">

@@ -11,6 +11,9 @@
   <lay-backtop></lay-backtop>
 </template>
 
+<script>
+</script>
+
 :::
 
 :::title 自定义
@@ -35,7 +38,7 @@
 
 <script>
 import { ref } from 'vue'
-import { layer } from "../../../../src/index.ts"
+import { layer } from "@layui/layer-vue"
 
 export default {
   setup() {

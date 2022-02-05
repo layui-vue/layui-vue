@@ -1,0 +1,26 @@
+<script lang="ts">
+export default {
+  name: "LayBreadcrumb",
+};
+</script>
+
+<script setup lang="ts">
+import { defineProps, provide, withDefaults } from "vue";
+
+const props = withDefaults(
+  defineProps<{
+    separator?: string;
+  }>(),
+  {
+    separator: "/",
+  }
+);
+
+provide("separator", props.separator);
+</script>
+
+<template>
+  <span class="layui-breadcrumb" style="visibility: visible">
+    <slot></slot>
+  </span>
+</template>

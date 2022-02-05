@@ -4,7 +4,7 @@
 ::: title 基础使用
 :::
 
-::: demo
+::: demo 使用 `lay-checkbox` 标签, 创建一个复选框
 
 <template>
   <lay-form>

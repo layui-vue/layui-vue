@@ -28,7 +28,7 @@ export default {
     return {
         visible1
     };
-  },
+  }
 };
 </script>
 
@@ -61,7 +61,7 @@ export default {
     return {
         visible2
     };
-  },
+  }
 };
 </script>
 
@@ -94,7 +94,7 @@ export default {
     return {
         visible3
     };
-  },
+  }
 };
 </script>
 
@@ -127,7 +127,7 @@ export default {
     return {
         visible4
     };
-  },
+  }
 };
 </script>
 
@@ -160,7 +160,7 @@ export default {
     return {
         visible8
     };
-  },
+  }
 };
 </script>
 
@@ -193,7 +193,7 @@ export default {
         type5,
         visible5
     };
-  },
+  }
 };
 </script>
 
@@ -231,7 +231,7 @@ export default {
         btn6,
         visible6
     };
-  },
+  }
 };
 </script>
 
@@ -264,7 +264,7 @@ export default {
     return {
         visible7
     };
-  },
+  }
 };
 </script>
 
@@ -283,7 +283,7 @@ export default {
 
 <script>
 import { ref, watch } from "vue";
-import { layer } from "../../../../src/index.ts"
+import { layer } from "@layui/layer-vue"
 import { useRoute, useRouter } from "vue-router";
 export default {
   setup() {
@@ -307,7 +307,7 @@ export default {
         close,
         closeAll
     };
-  },
+  }
 };
 </script>
 

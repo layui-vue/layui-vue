@@ -4,7 +4,7 @@
 ::: title 基础使用
 :::
 
-::: demo
+::: demo 使用 `lay-textarea` 标签, 创建文本域
 
 <template>
   <lay-textarea placeholder="请输入描述" v-model="data1"></lay-textarea>

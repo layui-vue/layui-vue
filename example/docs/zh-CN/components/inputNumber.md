@@ -4,7 +4,7 @@
 ::: title 基础使用
 :::
 
-::: demo
+::: demo 使用 `lay-input-number` 标签, 创建数字输入框
 
 <template>
   <lay-input-number v-model="data"></lay-input-number>
