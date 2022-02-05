@@ -4,7 +4,7 @@
 ::: title 主色调
 :::
 
-::: demo
+::: demo layui 主要是以象征包容的墨绿作为主色调，由于它给人以深沉感，所以通常会以浅黑色的作为其陪衬，又会以蓝色这种比较鲜艳的色调来弥补它的色觉疲劳，整体让人清新自然，愈发耐看。【取色意义】：我们执着于务实，不盲目攀比，又始终不忘绽放活力。这正是 layui 所追求的价值。
 
 <template>
     <ul class="layui-row layui-col-space15">
@@ -52,7 +52,7 @@ export default {
 ::: title 次色调
 :::
 
-::: demo
+::: demo 事实上，layui 并非不敢去尝试一些亮丽的颜色，但许多情况下一个它可能并不是那么合适，所以我们把这些颜色归为“场景色”，即按照实际场景来呈现对应的颜色，比如你想给人以警觉感，可以尝试用上面的红色。他们一般会出现在 layui 的按钮、提示和修饰性元素，以及一些侧边元素上。
 
 <template>
 <ul class="layui-row layui-col-space15">
@@ -100,7 +100,7 @@ export default {
 ::: title 中性色
 :::
 
-::: demo
+::: demo layui 认为灰色系代表极简，因为这是一种神奇的颜色，几乎可以与任何元素搭配，不易形成视觉疲劳，且永远不会过时。低调而优雅！
 
 <template>
 <ul class="layui-row site-doc-color site-doc-necolor">
