@@ -23,12 +23,7 @@ export default {
 <script setup lang="ts">
 import "./index.less";
 import postionFns from "./calcPosition";
-import {
-  CSSProperties,
-  ref,
-  watch,
-  onMounted,
-} from "vue";
+import { CSSProperties, ref, watch, onMounted } from "vue";
 import { on } from "../../utils/domUtil";
 
 export interface LayPopperProps {
@@ -54,6 +49,7 @@ const props = withDefaults(defineProps<LayPopperProps>(),
     trigger: "hover",
   }
 );
+
 const emit = defineEmits(["update:visible"]);
 
 const EVENT_MAP: any = {

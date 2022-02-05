@@ -21,7 +21,7 @@
     "./es/": "./es/"
   },
   "scripts": {
-    "serve": "vite example",
+    "dev": "vite example",
     "build": "npm run build:all && npm run build:es && npm run build:types && npm run build:example",
     "build:es": "vite build --emptyOutDir --config ./build.es.ts",
     "build:all": "vite build --emptyOutDir --config ./build.all.ts",
@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "@layui/hooks-vue": "^0.1.6",
-    "@layui/icons-vue": "^1.0.3",
+    "@layui/icons-vue": "^1.0.4",
     "@layui/layer-vue": "^1.3.3",
     "async-validator": "^4.0.7",
     "countup.js": "^2.0.8",
