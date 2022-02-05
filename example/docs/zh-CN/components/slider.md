@@ -102,11 +102,12 @@ export default {
 
 | 属性          |         描述          |             类型          |     可选值      |   默认值 |
 | ------------ | --------------------- | ------------------------- | -------------- | -------- |
-| v-model      | 选中值                | `number`  |        -       |    -    |
+| v-model      | 选中值                | `Number`  |        -       |    -    |
 | vertical  |  是否垂直     | `Boolean`                   |        -       |    -    |
 | range  |  是否区间     | `Boolean`                   |        -       |    -    |
 | verticalrange  |  垂直区间值     | `Array`                   |        -       |    -    |
 | standardrange  |  水平区间值     | `Array`                   |        -       |    -    |
+| step  |  步长     | `Number`                   |        -       |    -    |
 
 :::
 
