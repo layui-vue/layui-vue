@@ -7,7 +7,7 @@ export default {
 <script setup lang="ts">
 import LaySkeletonItem from '../skeletonItem/index.vue'
 import './index.less'
-import { defineProps, withDefaults} from "vue";
+import { withDefaults} from "vue";
 
 export interface LaySkeletonProps {
   rows?: number;

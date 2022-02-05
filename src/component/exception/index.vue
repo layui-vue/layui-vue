@@ -4,7 +4,7 @@ export default {
 }
 </script>
 <script setup lang="ts">
-import { defineProps, useSlots } from "vue";
+import { useSlots } from "vue";
 import "./index.less";
 
 export interface LayDropdownProps {

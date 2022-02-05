@@ -5,7 +5,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { defineProps, inject, Ref, useSlots } from "vue";
+import { inject, Ref, useSlots } from "vue";
 
 const slots = useSlots();
 

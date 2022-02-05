@@ -27,7 +27,6 @@ import {
   CSSProperties,
   ref,
   watch,
-  defineEmits,
   onMounted,
 } from "vue";
 import { on } from "../../utils/domUtil";

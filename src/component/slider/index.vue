@@ -102,7 +102,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, Ref, ref, toRef } from "vue";
+import { Ref, ref, toRef } from "vue";
 import { on, off } from "evtd";
 import "./index.less";
 

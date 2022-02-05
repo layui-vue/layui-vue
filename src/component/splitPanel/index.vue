@@ -5,7 +5,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ref, watch, provide, defineProps, withDefaults, onMounted } from "vue";
+import { ref, watch, provide, withDefaults, onMounted } from "vue";
 import "./index.less";
 
 // 属性接口定义

@@ -7,7 +7,6 @@ export default {
 <script setup lang="ts">
 import tabItem from "../tabItem/index.vue";
 import {
-  defineProps,
   Component,
   computed,
   useSlots,

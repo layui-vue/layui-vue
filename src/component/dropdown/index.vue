@@ -5,7 +5,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { defineProps, provide, ref, watch } from "vue";
+import { provide, ref, watch } from "vue";
 import { useClickOutside } from "@layui/hooks-vue";
 
 const dropdownRef = ref<null | HTMLElement>(null);

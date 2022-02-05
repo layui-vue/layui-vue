@@ -5,7 +5,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed, defineProps, CSSProperties } from "vue";
+import { computed, CSSProperties } from "vue";
 import "./index.less";
 
 export interface LaySideProps {

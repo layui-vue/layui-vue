@@ -7,7 +7,6 @@ export default {
 <script setup lang="ts">
 import "./index.less";
 import {
-  defineProps,
   inject,
   withDefaults,
   ref,

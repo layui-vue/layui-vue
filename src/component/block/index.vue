@@ -5,7 +5,6 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { defineProps } from "vue";
 import "./index.less";
 
 const props = defineProps<{

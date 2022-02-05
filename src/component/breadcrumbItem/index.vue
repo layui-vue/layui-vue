@@ -17,7 +17,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { defineProps, inject, useSlots } from "vue";
+import { inject, useSlots } from "vue";
 
 const slot = useSlots();
 

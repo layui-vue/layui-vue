@@ -9,9 +9,7 @@ import {
   ref,
   watch,
   useSlots,
-  defineProps,
   withDefaults,
-  defineEmits,
   onMounted,
 } from "vue";
 import { Recordable } from "../../types";

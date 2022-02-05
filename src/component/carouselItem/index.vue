@@ -5,7 +5,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { defineProps, inject } from "vue";
+import { inject } from "vue";
 
 const props = defineProps<{
   id: string;

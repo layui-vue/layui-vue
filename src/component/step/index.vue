@@ -9,9 +9,7 @@ import {
   ref,
   watch,
   provide,
-  defineProps,
   withDefaults,
-  defineEmits,
 } from "vue";
 import "./index.less";
 

@@ -7,7 +7,6 @@ export default {
 <script setup lang="ts">
 import {
   withDefaults,
-  defineProps,
   provide,
   useSlots,
   ref,

@@ -6,7 +6,7 @@ export default {
 
 <script setup lang="ts">
 import "./index.less";
-import { defineProps, useSlots } from "vue";
+import { useSlots } from "vue";
 
 export interface LayResultProps {
   title?: string;

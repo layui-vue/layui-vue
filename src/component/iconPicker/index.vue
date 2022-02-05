@@ -85,7 +85,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { defineProps, Ref, ref } from "vue";
+import { Ref, ref } from "vue";
 import { LayIconList as icons } from "@layui/icons-vue";
 
 export interface LayIconPickerProps {

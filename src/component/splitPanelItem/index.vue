@@ -13,7 +13,6 @@ import {
   getCurrentInstance,
   onBeforeUnmount,
   reactive,
-  defineProps,
   withDefaults,
   watch,
 } from "vue";

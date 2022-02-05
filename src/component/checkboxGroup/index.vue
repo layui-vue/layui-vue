@@ -5,7 +5,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed, defineProps, provide, ref, watch } from "vue";
+import { provide, ref, watch } from "vue";
 import { Recordable } from "../../types";
 
 export interface LayCheckboxGroupProps {

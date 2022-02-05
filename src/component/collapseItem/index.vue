@@ -5,7 +5,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { withDefaults, defineProps, inject, computed, ref } from "vue";
+import { withDefaults, inject, computed, ref } from "vue";
 
 const props = withDefaults(
   defineProps<{

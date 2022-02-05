@@ -7,10 +7,8 @@ export default {
 <script setup lang="ts">
 import {
   withDefaults,
-  defineProps,
   provide,
   ref,
-  defineEmits,
   watch,
 } from "vue";
 

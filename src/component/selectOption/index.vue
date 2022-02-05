@@ -7,7 +7,7 @@ export default {
 <script setup lang="ts">
 import LayCheckbox from "../checkbox";
 import { SelectItem, SelectItemHandle, SelectItemPush } from "../../types";
-import { computed, defineProps, inject, onMounted, Ref } from "vue";
+import { computed, inject, onMounted, Ref } from "vue";
 
 const props = withDefaults(
 	defineProps<{

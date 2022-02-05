@@ -5,7 +5,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed, defineProps, ref, withDefaults } from "vue";
+import { computed, ref, withDefaults } from "vue";
 import "./index.less";
 
 export interface LayRateProps {

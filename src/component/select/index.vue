@@ -8,7 +8,6 @@ export default {
 import "./index.less";
 import LaySelectOption from "../selectOption/index.vue";
 import {
-	defineProps,
 	provide,
 	isProxy,
 	ref,

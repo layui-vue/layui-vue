@@ -5,8 +5,6 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { defineProps, defineEmits } from "vue";
-
 export interface LayTextareaProps {
   name?: string;
   modelValue?: string;

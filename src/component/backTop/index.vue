@@ -6,8 +6,6 @@ export default {
 
 <script lang="ts" setup>
 import {
-  defineProps,
-  defineEmits,
   ref,
   shallowRef,
   withDefaults,

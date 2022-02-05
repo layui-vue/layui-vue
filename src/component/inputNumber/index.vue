@@ -10,8 +10,6 @@ import layIcon from "../icon/index";
 import layInput from "../input/index";
 import "./index.less";
 import {
-  defineProps,
-  defineEmits,
   ref,
   watch,
   withDefaults,

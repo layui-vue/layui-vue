@@ -5,7 +5,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { defineProps, withDefaults} from "vue";
+import { withDefaults} from "vue";
 
 export interface LaySkeletonProps {
   type?: string;
