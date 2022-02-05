@@ -1,9 +1,14 @@
 ::: anchor
 :::
 
-::: title 基础使用
+::: title 基本介绍
 :::
 
+::: describe 在需要等待加载内容的位置提供一个占位图形组合。
+:::
+
+::: title 基础使用
+:::
 
 ::: demo 使用 `lay-skeleton` 标签, 创建骨架屏
 

@@ -9,7 +9,7 @@ import { computed, CSSProperties } from "vue";
 import "./index.less";
 
 export interface LaySideProps {
-  width?: string | number;
+    width?: string | number;
 }
 
 const props = withDefaults(defineProps<LaySideProps>(), {

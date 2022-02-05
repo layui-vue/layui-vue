@@ -7,12 +7,14 @@ export default {
 <script setup lang="ts">
 import { withDefaults, inject, Ref } from "vue";
 
-const props = withDefaults(
-  defineProps<{
+export interface LayTabItemProps {
     id: string;
     title: string;
-    closable?: boolean | string;
-  }>(),
+    closable?: boolean | string;  
+}
+
+const props = withDefaults(
+  defineProps<LayTabItemProps>(),
   {
     closable: true,
   }

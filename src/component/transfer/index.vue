@@ -9,13 +9,13 @@ import "./index.less";
 import { Ref, ref, useSlots, watch } from "vue";
 import { Recordable } from "../../types";
 
-const slot = useSlots();
-
 export interface LayTransferProps {
   id?: string;
   title?: string[];
   dataSource: Recordable[];
 }
+
+const slot = useSlots();
 
 const props = withDefaults(defineProps<LayTransferProps>(), {
   id: "id",

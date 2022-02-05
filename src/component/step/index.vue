@@ -14,13 +14,13 @@ import {
 import "./index.less";
 
 export interface LayStepProps {
-  active?: number;
-  center?: boolean;
-  direction?: string;
-  space?: string;
-  currentStatus?: string;
-  composition?: string;
-  simple?: boolean;
+    active?: number;
+    center?: boolean;
+    direction?: string;
+    space?: string;
+    currentStatus?: string;
+    composition?: string;
+    simple?: boolean;
 }
 
 const props = withDefaults(defineProps<LayStepProps>(), {

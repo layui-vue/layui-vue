@@ -8,16 +8,16 @@ export default {
 import { ref, watch, provide, withDefaults, onMounted } from "vue";
 import "./index.less";
 
-// 属性接口定义
 export interface LayStepProps {
-  vertical?: boolean;
-  minSize?: number;
+    vertical?: boolean;
+    minSize?: number;
 }
-// props初始化数据定义
+
 const props = withDefaults(defineProps<LayStepProps>(), {
   vertical: false,
   minSize: 50,
 });
+
 let domEvent = ref();
 let domStatus = ref(false);
 const target = ref();

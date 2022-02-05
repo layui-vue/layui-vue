@@ -17,6 +17,14 @@ import {
   watch,
 } from "vue";
 
+export interface LayTabProps {
+  type?: string;
+  modelValue: string;
+  allowClose?: boolean;
+  beforeClose?: Function;
+  beforeLeave?: Function;
+}
+
 const slot = useSlots();
 const slots = slot.default && slot.default();
 const childrens: Ref<VNode[]> = ref([]);
@@ -32,13 +40,7 @@ const setItemInstanceBySlot = function (nodeList: VNode[]) {
   });
 };
 
-const props = defineProps<{
-  type?: string;
-  modelValue: string;
-  allowClose?: boolean;
-  beforeClose?: Function;
-  beforeLeave?: Function;
-}>();
+const props = defineProps<LayTabProps>();
 
 const emit = defineEmits(["update:modelValue", "change", "close"]);
 

@@ -12,11 +12,12 @@ import {
   watch,
 } from "vue";
 
-const props = withDefaults(
-  defineProps<{
+export interface LayCollapseProps {
     modelValue?: number | string | [];
     accordion?: boolean;
-  }>(),
+}
+
+const props = withDefaults(defineProps<LayCollapseProps>(),
   {
     modelValue: () => [],
     accordion: false,

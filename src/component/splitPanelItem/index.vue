@@ -20,7 +20,7 @@ import {
 import type { ComputedRef } from "vue";
 
 export interface LayStepItemProps {
-  space?: number;
+    space?: number;
 }
 
 const props = withDefaults(defineProps<LayStepItemProps>(), {

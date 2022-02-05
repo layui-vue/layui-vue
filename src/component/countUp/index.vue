@@ -20,7 +20,7 @@ export interface LayCountupProps {
   decimalPlaces?: number; // 小数位数
   useGrouping?: boolean; // 是否使用千位分隔符
   separator?: string; // 千位分隔符
-  useEasing?: boolean;  // 使用动画
+  useEasing?: boolean; // 使用动画
   duration?: number; // 动画持续时间
   prefix?: string; // 前缀
   suffix?: string; // 后缀

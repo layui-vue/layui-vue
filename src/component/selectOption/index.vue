@@ -9,12 +9,13 @@ import LayCheckbox from "../checkbox";
 import { SelectItem, SelectItemHandle, SelectItemPush } from "../../types";
 import { computed, inject, onMounted, Ref } from "vue";
 
-const props = withDefaults(
-	defineProps<{
-		value: string | null | undefined;
-		label?: string;
-		disabled?: boolean;
-	}>(),
+export interface LaySelectOptionProps {
+    value: string | null | undefined;
+    label?: string;
+    disabled?: boolean;
+}
+
+const props = withDefaults(defineProps<LaySelectOptionProps>(),
 	{
 		disabled: false,
 	}

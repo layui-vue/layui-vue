@@ -9,9 +9,11 @@ import { useSlots } from "vue";
 
 const slot = useSlots();
 
-const props = defineProps<{
-  title?: string;
-}>();
+export interface LayFieldProps {
+  title?: string;  
+}
+
+const props = defineProps<LayFieldProps>();
 </script>
 
 <template>

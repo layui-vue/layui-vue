@@ -6,10 +6,10 @@ export default {
 
 <script setup lang="ts">
 export interface LayTextareaProps {
-  name?: string;
-  modelValue?: string;
-  placeholder?: string;
-  disabled?: boolean;
+    name?: string;
+    modelValue?: string;
+    placeholder?: string;
+    disabled?: boolean;
 }
 
 const props = defineProps<LayTextareaProps>();

@@ -8,9 +8,9 @@ import { useSlots } from "vue";
 import "./index.less";
 
 export interface LayDropdownProps {
-  title?: string,
-  status?: '401' | '403' | '404' | '500',
-  describe?: string
+  title?: string;
+  status?: "401" | "403" | "404" | "500";
+  describe?: string;
 }
 
 const slots = useSlots();

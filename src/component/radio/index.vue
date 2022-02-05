@@ -5,12 +5,14 @@ export default {
 </script>
 
 <script setup lang="ts">
-const props = defineProps<{
+export interface LayRadioProps {
   modelValue: string;
   disabled?: boolean;
   label?: string;
   name: string;
-}>();
+}
+
+const props = defineProps<LayRadioProps>();
 
 const emit = defineEmits(["update:modelValue", "change"]);
 

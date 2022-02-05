@@ -7,14 +7,16 @@ export default {
 <script setup lang="ts">
 import { computed } from "vue";
 
-const props = defineProps<{
+export interface LayProgressProps {
   percent: number | string;
   theme?: string;
   color?: string;
   size?: string;
   showText?: boolean;
   text?: string;
-}>();
+}
+
+const props = defineProps<LayProgressProps>();
 
 const styles = computed(() => {
   return [

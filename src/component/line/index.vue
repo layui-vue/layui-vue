@@ -5,9 +5,11 @@ export default {
 </script>
 
 <script setup lang="ts">
-const props = defineProps<{
-  theme?: string;
-}>();
+export interface LayLineProps {
+  theme?: string; 
+}
+
+const props = defineProps<LayLineProps>();
 </script>
 
 <template>

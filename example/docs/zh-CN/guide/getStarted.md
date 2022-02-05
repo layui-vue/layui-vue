@@ -4,13 +4,11 @@
 ```
 npm install @layui/layui-vue --save
 ```
-:::describe 或
-:::
+
 ```
 yarn add @layui/layui-vue --save
 ```
-:::describe 或
-:::
+
 ```
 pnpm install @layui/layui-vue --save
 ```

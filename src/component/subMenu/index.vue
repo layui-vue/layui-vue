@@ -7,12 +7,14 @@ export default {
 <script setup lang="ts">
 import { computed, inject, Ref, useSlots } from "vue";
 
-const slots = useSlots();
-
-const props = defineProps<{
+export interface LaySubMenuProps {
   id: string;
   title?: string;
-}>();
+}
+
+const slots = useSlots();
+
+const props = defineProps<LaySubMenuProps>();
 
 const isTree = inject("isTree");
 const selectedKey: Ref<string> = inject("selectedKey") as Ref<string>;

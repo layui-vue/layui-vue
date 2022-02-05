@@ -20,6 +20,16 @@ import {
 import { useClickOutside } from "@layui/hooks-vue";
 import { SelectItem } from "../../types";
 
+export interface LaySelectProps {
+    modelValue?: string | number | [] | null;
+    name?: string;
+    placeholder?: string;
+    disabled?: boolean;
+    showEmpty?: boolean;
+    emptyMessage?: string;
+    multiple?: boolean;
+}
+
 const selectRef = ref<null | HTMLElement>(null);
 const isClickOutside = useClickOutside(selectRef);
 
@@ -30,15 +40,7 @@ watch(isClickOutside, () => {
 });
 
 const props = withDefaults(
-	defineProps<{
-		modelValue?: string | number | [] | null;
-		name?: string;
-		placeholder?: string;
-		disabled?: boolean;
-		showEmpty?: boolean;
-		emptyMessage?: string;
-		multiple?: boolean;
-	}>(),
+	defineProps<LaySelectProps>(),
 	{
 		modelValue: null,
 		placeholder: "请选择",

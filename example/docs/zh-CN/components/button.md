@@ -1,6 +1,12 @@
 ::: anchor
 :::
 
+::: title 基本介绍
+:::
+
+::: describe 按钮用于开始一个即时操作。
+:::
+
 ::: title 基础使用
 :::
 
@@ -206,7 +212,7 @@ export default {
 ::: title 按钮容器
 :::
 
-::: demo 使用 `lay-button-container` 标签, 创建一个按钮容器
+::: demo 尽管按钮在同节点并排时会自动拉开间距，但在按钮太多的情况，效果并不是很美好。因为你需要用到按钮容器
 
 <template>
   <lay-button-container>

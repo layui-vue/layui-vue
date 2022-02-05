@@ -13,8 +13,7 @@ import {
   modelType,
 } from "../../types/form";
 
-const props = withDefaults(
-  defineProps<{
+export interface LayFormProps {
     model?: modelType;
     required?: boolean;
     rules?: Rule;
@@ -23,7 +22,9 @@ const props = withDefaults(
     requiredErrorMessage?: string;
     validateMessage?: ValidateMessages;
     useCN?: boolean;
-  }>(),
+}
+
+const props = withDefaults(defineProps<LayFormProps>(),
   {
     model: function () {
       return {};

@@ -8,11 +8,11 @@ export default {
 import { useSlots } from "vue";
 import "./index.less";
 
-const slot = useSlots();
-
 export interface LayCardProps {
   title?: string;
 }
+
+const slot = useSlots();
 
 const props = defineProps<LayCardProps>();
 </script>

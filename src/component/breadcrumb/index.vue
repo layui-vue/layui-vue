@@ -7,10 +7,11 @@ export default {
 <script setup lang="ts">
 import { provide, withDefaults } from "vue";
 
-const props = withDefaults(
-  defineProps<{
+export interface LayBreadcrumbProps {
     separator?: string;
-  }>(),
+}
+
+const props = withDefaults(defineProps<LayBreadcrumbProps>(),
   {
     separator: "/",
   }

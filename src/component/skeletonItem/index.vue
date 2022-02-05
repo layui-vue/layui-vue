@@ -8,7 +8,7 @@ export default {
 import { withDefaults} from "vue";
 
 export interface LaySkeletonProps {
-  type?: string;
+    type?: string;
 }
 
 const props = withDefaults(defineProps<LaySkeletonProps>(), {

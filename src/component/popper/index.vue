@@ -30,8 +30,8 @@ import {
   onMounted,
 } from "vue";
 import { on } from "../../utils/domUtil";
-const props = withDefaults(
-  defineProps<{
+
+export interface LayPopperProps {
     el: any;
     content?: string | Number;
     position?: string;
@@ -41,7 +41,9 @@ const props = withDefaults(
     disabled?: boolean;
     visible?: boolean;
     isCanHide?: boolean;
-  }>(),
+}
+
+const props = withDefaults(defineProps<LayPopperProps>(),
   {
     position: 'top',
     isDark: true,

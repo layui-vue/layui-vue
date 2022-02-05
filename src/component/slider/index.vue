@@ -106,19 +106,19 @@ import { Ref, ref, toRef } from "vue";
 import { on, off } from "evtd";
 import "./index.less";
 
-const emit = defineEmits(["update:modelValue"]);
-
-interface LaySliderProps {
-  vertical?: boolean;
-  modelValue?: number | Array<number>;
-  min?: number;
-  max?: number;
-  step?: number;
-  disabled?: boolean;
-  range?: boolean;
-  verticalrange?: number[];
-  standardrange?: number[];
+export interface LaySliderProps {
+    vertical?: boolean;
+    modelValue?: number | Array<number>;
+    min?: number;
+    max?: number;
+    step?: number;
+    disabled?: boolean;
+    range?: boolean;
+    verticalrange?: number[];
+    standardrange?: number[];
 }
+
+const emit = defineEmits(["update:modelValue"]);
 
 const props = withDefaults(defineProps<LaySliderProps>(), {
   vertical: false,

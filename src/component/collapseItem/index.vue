@@ -7,12 +7,13 @@ export default {
 <script setup lang="ts">
 import { withDefaults, inject, computed, ref } from "vue";
 
-const props = withDefaults(
-  defineProps<{
+export interface LayCollapseItemProps {
     id: number | string;
     title: string;
-    disabled?: boolean;
-  }>(),
+    disabled?: boolean;  
+}
+
+const props = withDefaults(defineProps<LayCollapseItemProps>(),
   {
     disabled: false,
   }

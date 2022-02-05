@@ -7,11 +7,13 @@ export default {
 <script setup lang="ts">
 import "./index.less";
 
-const props = defineProps<{
+export interface LayAvatarProps {
   src?: String;
   size?: string;
   radius?: boolean;
-}>();
+}
+
+const props = withDefaults(defineProps<LayAvatarProps>(), {});
 </script>
 
 <template>

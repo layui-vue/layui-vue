@@ -16,11 +16,9 @@ import LayIcon from "../icon/index";
 import "./index.less";
 
 export interface LayBacktopProps {
-  /**通用*/
   target?: string;
   showHeight?: number;
   disabled?: boolean;
-  /**组件样式*/
   position?: "fixed" | "absolute";
   right?: number;
   bottom?: number;
@@ -30,7 +28,6 @@ export interface LayBacktopProps {
   color?: string;
   borderRadius?: number | string;
   circle?: boolean;
-  /**图标样式*/
   icon?: string;
   iconSize?: number;
   iconColor?: string;

@@ -8,12 +8,12 @@ export default {
 import { provide, ref, watch } from "vue";
 import { useClickOutside } from "@layui/hooks-vue";
 
-const dropdownRef = ref<null | HTMLElement>(null);
-const isClickOutside = useClickOutside(dropdownRef);
-
 export interface LayDropdownProps {
   trigger?: string;
 }
+
+const dropdownRef = ref<null | HTMLElement>(null);
+const isClickOutside = useClickOutside(dropdownRef);
 
 const props = withDefaults(defineProps<LayDropdownProps>(), {
   trigger: "click",

@@ -7,7 +7,7 @@ export default {
 <script setup lang="ts">
 import { computed } from "vue";
 
-const props = defineProps<{
+export interface LayColProps {
   md?: string;
   xs?: string;
   sm?: string;
@@ -15,8 +15,10 @@ const props = defineProps<{
   mdOffset?: string;
   xsOffset?: string;
   smOffset?: string;
-  lgOffset?: string;
-}>();
+  lgOffset?: string; 
+}
+
+const props = defineProps<LayColProps>();
 
 const classes = computed(() => {
   return [

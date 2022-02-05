@@ -22,8 +22,7 @@ import "./index.less";
 
 const tableId = guid();
 
-const props = withDefaults(
-  defineProps<{
+export interface LayTableProps {
     id?: string;
     skin?: string;
     size?: string;
@@ -32,8 +31,10 @@ const props = withDefaults(
     columns: Recordable[];
     dataSource: Recordable[];
     defaultToolbar?: boolean;
-    selectedKeys?: Recordable[];
-  }>(),
+    selectedKeys?: Recordable[];  
+}
+
+const props = withDefaults(defineProps<LayTableProps>(),
   {
     id: "id",
     size: "md",

@@ -31,15 +31,16 @@ import Schema, {
 } from "async-validator";
 import cnValidateMessage from "./cnValidateMessage";
 
-const props = withDefaults(
-  defineProps<{
+export interface LayFormItemProps {
     prop?: string;
     mode?: string;
     label?: string;
     errorMessage?: string;
     rules?: Rule;
     required?: boolean;
-  }>(),
+}
+
+const props = withDefaults(defineProps<LayFormItemProps>(),
   {
     mode: "block",
   }
