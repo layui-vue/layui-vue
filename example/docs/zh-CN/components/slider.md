@@ -7,7 +7,8 @@
 ::: demo
 
 <template>
-  <lay-slider :step="5" v-model="value1" :disabled="false"></lay-slider>
+  <lay-slider v-model="value1" :disabled="false"></lay-slider>
+  <lay-input-number v-model="value1"></lay-input-number>
 </template>
 
 <script>
@@ -30,7 +31,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-slider v-model="value2" :vertical="true" :disabled="true"></lay-slider>
+  <lay-slider v-model="value2" :vertical="true" :disabled="false"></lay-slider>
 </template>
 
 <script>
