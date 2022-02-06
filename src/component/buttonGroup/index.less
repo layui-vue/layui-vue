@@ -1,3 +1,5 @@
+@import "../../theme/variable.less";
+
 .layui-btn-group {
   vertical-align: middle;
   font-size: 0;
@@ -16,12 +18,12 @@
 
 .layui-btn-group .layui-btn-primary:hover {
   border-color: #d2d2d2;
-  color: #009688;
+  color: @global-primary-color;
 }
 
 .layui-btn-group .layui-btn:first-child {
   border-left: none;
-  border-radius: 2px 0 0 2px;
+  border-radius: @global-border-radius 0 0 @global-border-radius;
 }
 
 .layui-btn-group .layui-btn-primary:first-child {
@@ -29,7 +31,7 @@
 }
 
 .layui-btn-group .layui-btn:last-child {
-  border-radius: 0 2px 2px 0;
+  border-radius: 0 @global-border-radius @global-border-radius 0;
 }
 
 .layui-btn-group .layui-btn + .layui-btn {

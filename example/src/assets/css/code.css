@@ -31,12 +31,18 @@ li > div[class*='language-'] {
 
 @media (min-width: 420px) {
   div[class*='language-'] {
-    margin: 1rem 0;
+    margin: 1rem 1.8rem;
     border-radius: 6px;
   }
 
   li > div[class*='language-'] {
     margin: 1rem 0 1rem 0rem;
+    border-radius: 6px;
+  }
+
+  .lay-code div[class*='language-'] {
+    margin: 1rem 0.8rem;
+    margin: 0.5rem 0.8rem 1rem 0.8rem;
     border-radius: 6px;
   }
 }

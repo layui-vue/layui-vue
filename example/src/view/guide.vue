@@ -87,6 +87,12 @@ export default {
             path: '/zh-CN/guide/changelog',
           },
           {
+            id: 3,
+            title: '主题',
+            subTitle: 'theme',
+            path: '/zh-CN/guide/theme',
+          },
+          {
             id: 4,
             title: '问题',
             subTitle: 'problem',
