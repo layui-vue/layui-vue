@@ -1,3 +1,5 @@
+@import "./variable.less";
+
 .layui-inline,
 img {
   display: inline-block;
@@ -278,7 +280,7 @@ a cite {
   height: 60px;
   line-height: 60px;
   text-align: center;
-  color: #009688;
+  color: @global-primary-color;
   font-size: 16px;
   box-shadow: 0 1px 2px 0 rgb(0 0 0 / 15%);
 }
@@ -350,7 +352,7 @@ a cite {
   height: 6px;
   border-radius: 20px;
   text-align: right;
-  background-color: #5fb878;
+  background-color: @global-checked-color;
   transition: all 0.3s;
   -webkit-transition: all 0.3s;
 }
@@ -483,7 +485,7 @@ a cite {
 }
 
 .layui-bg-green {
-  background-color: #009688 !important;
+  background-color: @global-primary-color !important;
 }
 
 .layui-bg-cyan {
@@ -539,8 +541,8 @@ a cite {
 }
 
 .layui-border-green {
-  border-color: #009688 !important;
-  color: #009688 !important;
+  border-color: @global-primary-color !important;
+  color: @global-primary-color !important;
 }
 
 .layui-border-cyan {
@@ -664,7 +666,7 @@ a cite {
 }
 
 .layui-font-green {
-  color: #009688 !important;
+  color: @global-primary-color !important;
 }
 
 .layui-font-cyan {
@@ -1007,7 +1009,7 @@ a cite {
 
 .layui-form-select dl dd.layui-this {
   background-color: #f6f6f6;
-  color: #5fb878;
+  color: @global-checked-color;
   font-weight: 700;
 }
 
@@ -1105,17 +1107,17 @@ a cite {
 
 .layui-form-checked,
 .layui-form-checked:hover {
-  border-color: #5fb878;
+  border-color: @global-checked-color;
 }
 
 .layui-form-checked span,
 .layui-form-checked:hover span {
-  background-color: #5fb878;
+  background-color: @global-checked-color;
 }
 
 .layui-form-checked i,
 .layui-form-checked:hover i {
-  color: #5fb878;
+  color: @global-checked-color;
 }
 
 .layui-form-item .layui-form-checkbox {
@@ -1157,13 +1159,13 @@ a cite {
 }
 
 .layui-form-checkbox[lay-skin="primary"]:hover i {
-  border-color: #5fb878;
+  border-color: @global-checked-color;
   color: #fff;
 }
 
 .layui-form-checked[lay-skin="primary"] i {
-  border-color: #5fb878 !important;
-  background-color: #5fb878;
+  border-color: @global-checked-color !important;
+  background-color: @global-checked-color;
   color: #fff;
 }
 
@@ -1219,8 +1221,8 @@ a cite {
 }
 
 .layui-form-onswitch {
-  border-color: #5fb878;
-  background-color: #5fb878;
+  border-color: @global-checked-color;
+  background-color: @global-checked-color;
 }
 
 .layui-checkbox-disabled,
@@ -1283,7 +1285,7 @@ a cite {
 .layui-form-radio:hover *,
 .layui-form-radioed,
 .layui-form-radioed > i {
-  color: #5fb878;
+  color: @global-checked-color;
 }
 
 .layui-radio-disabled > i {
@@ -1570,7 +1572,7 @@ a cite {
 }
 
 .layui-laypage a:hover {
-  color: #009688;
+  color: @global-primary-color;
 }
 
 .layui-laypage em {
@@ -1602,7 +1604,7 @@ a cite {
   padding: 1px;
   width: 100%;
   height: 100%;
-  background-color: #009688;
+  background-color: @global-primary-color;
 }
 
 .layui-laypage-em {
@@ -1668,7 +1670,7 @@ a cite {
 
 .layui-laypage input:focus,
 .layui-laypage select:focus {
-  border-color: #009688 !important;
+  border-color: @global-primary-color !important;
 }
 
 .layui-laypage button {
@@ -1765,11 +1767,11 @@ a cite {
 
 .layui-upload-drag .layui-icon {
   font-size: 50px;
-  color: #009688;
+  color: @global-primary-color;
 }
 
 .layui-upload-drag[lay-over] {
-  border-color: #009688;
+  border-color: @global-primary-color;
 }
 
 .layui-upload-iframe {
@@ -1904,12 +1906,12 @@ a cite {
 .layui-menu .layui-menu-item-checked2 {
   background-color: #f6f6f6 !important;
   border-radius: 2px;
-  color: #5fb878;
+  color: @global-checked-color;
 }
 
 .layui-menu .layui-menu-item-checked a,
 .layui-menu .layui-menu-item-checked2 a {
-  color: #5fb878;
+  color: @global-checked-color;
 }
 
 .layui-menu .layui-menu-item-checked:after {
@@ -1917,7 +1919,7 @@ a cite {
   right: 0;
   top: 0;
   bottom: 0;
-  border-right: 3px solid #5fb878;
+  border-right: 3px solid @global-checked-color;
   content: "";
 }
 
@@ -1981,7 +1983,7 @@ a cite {
 .layui-menu-lg .layui-menu-body-title a:hover,
 .layui-menu-lg li:hover {
   background: 0 0;
-  color: #5fb878;
+  color: @global-checked-color;
 }
 
 .layui-menu-lg li .layui-menu-body-panel {
@@ -2114,8 +2116,8 @@ a cite {
 }
 
 .layui-iconpicker-list li.layui-this {
-  border-color: #5fb878;
-  color: #5fb878;
+  border-color: @global-checked-color;
+  color: @global-checked-color;
 }
 
 .layui-iconpicker-list li .layui-icon {
@@ -2196,7 +2198,7 @@ a cite {
   height: 20px;
   line-height: 20px;
   border: none;
-  color: #009688;
+  color: @global-primary-color;
 }
 
 .layui-keyboard-header button:first-child {
@@ -2230,8 +2232,8 @@ a cite {
 }
 
 .layui-keyboard-list li.layui-this {
-  border-color: #5fb878;
-  color: #5fb878;
+  border-color: @global-checked-color;
+  color: @global-checked-color;
 }
 
 .layui-breadcrumb {
@@ -2247,7 +2249,7 @@ a cite {
 }
 
 .layui-breadcrumb a:hover {
-  color: #5fb878 !important;
+  color: @global-checked-color !important;
 }
 
 .layui-breadcrumb a:nth-last-child(2) {
@@ -2402,14 +2404,14 @@ a cite {
 }
 
 .layui-tab-brief > .layui-tab-title .layui-this {
-  color: #009688;
+  color: @global-primary-color;
 }
 
 .layui-tab-brief > .layui-tab-more li.layui-this:after,
 .layui-tab-brief > .layui-tab-title .layui-this:after {
   border: none;
   border-radius: 0;
-  border-bottom: 2px solid #5fb878;
+  border-bottom: 2px solid @global-checked-color;
 }
 
 .layui-tab-brief[overflow] > .layui-tab-title .layui-this:after {
@@ -2452,7 +2454,7 @@ a cite {
 
 .layui-tab-card > .layui-tab-more .layui-this {
   background: 0 0;
-  color: #5fb878;
+  color: @global-checked-color;
 }
 
 .layui-tab-card > .layui-tab-more .layui-this:after {
@@ -2910,8 +2912,8 @@ body .layui-util-face .layui-layer-content {
   display: block;
   margin: 0;
   padding: 0 15px;
-  background-color: #5fb878;
-  border-color: #5fb878;
+  background-color: @global-checked-color;
+  border-color: @global-checked-color;
   color: #fff;
 }
 
@@ -3306,7 +3308,7 @@ body .layui-util-face .layui-layer-content {
 }
 
 .layui-slider-input-btn i:hover {
-  color: #009688;
+  color: @global-primary-color;
 }
 
 .layui-slider-vertical {

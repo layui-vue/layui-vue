@@ -24,7 +24,7 @@
         if(exists){
             var c = fs.readFileSync(path);
             content += c.toString() + '\n\n';
-            // 如何删除所有 @import 关键字
+            // @ts-ignore
             content = content.replaceAll(/\@import.*?\;/g,"");
             fs.writeFileSync('./lib/index.less',content);
         }
