@@ -1,3 +1,5 @@
+@import "../../theme/variable.less";
+
 // 横向样式
 .layui-slider-v {
   width: 100%;
@@ -18,7 +20,7 @@
   height: 12px;
   background-color: white;
   position: absolute;
-  border: 2px solid rgb(0, 150, 136);
+  border: 2px solid @global-primary-color;
   border-radius: 50%;
   cursor: pointer;
   left: 0%;
@@ -31,7 +33,7 @@
   position: absolute;
   top: 6px;
   left: 0;
-  background-color: rgb(0, 150, 136);
+  background-color: @global-primary-color;
   z-index: 1;
 }
 
@@ -46,7 +48,7 @@
   cursor: not-allowed !important;
 }
 .layui-slider-disabled-rate {
-  background-color: rgb(0, 150, 136) !important;
+  background-color: @global-primary-color !important;
 }
 
 // 纵向样式
@@ -67,7 +69,7 @@
   background-color: white;
   position: absolute;
   // top: -7px;
-  border: 2px solid rgb(0, 150, 136);
+  border: 2px solid @global-primary-color;
   border-radius: 50%;
   cursor: pointer;
   bottom: 0%;
@@ -81,7 +83,7 @@
   position: absolute;
   bottom: 0;
   left: 7px;
-  background-color: rgb(0, 150, 136);
+  background-color: @global-primary-color;
   z-index: 1;
 }
 

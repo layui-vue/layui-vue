@@ -1,3 +1,5 @@
+@import "../../theme/variable.less";
+
 .layui-nav .layui-show.layui-anim-upbit .layui-show.layui-anim-upbit {
   top: 0px;
   left: 94px;
@@ -53,7 +55,7 @@
   top: 0;
   width: 0;
   height: 3px;
-  background-color: #5fb878;
+  background-color: @global-checked-color;
   transition: all 0.2s;
   -webkit-transition: all 0.2s;
   pointer-events: none;
@@ -187,13 +189,13 @@
 .layui-nav-tree .layui-nav-bar {
   width: 5px;
   height: 0;
-  background-color: #009688;
+  background-color: @global-primary-color;
 }
 
 .layui-nav-tree .layui-this,
 .layui-nav-tree .layui-nav-child dd.layui-this,
 .layui-nav-tree .layui-this > a:hover {
-  background-color: #009688;
+  background-color: @global-primary-color;
   color: #fff;
 }
 
@@ -252,12 +254,12 @@
 .layui-nav-tree.layui-bg-gray .layui-nav-child dd.layui-this,
 .layui-nav-tree.layui-bg-gray .layui-nav-child dd.layui-this a {
   background: 0 0 !important;
-  color: #5fb878 !important;
+  color: @global-checked-color !important;
   font-weight: 700;
 }
 
 .layui-nav.layui-bg-gray .layui-nav-bar {
-  background-color: #5fb878;
+  background-color: @global-checked-color;
 }
 
 .layui-nav-side {
