@@ -22,9 +22,10 @@
   },
   "scripts": {
     "dev": "vite example",
-    "build": "npm run build:all && npm run build:es && npm run build:types && npm run build:example",
+    "build": "npm run build:all && npm run build:es && npm run build:less && npm run build:types && npm run build:example",
     "build:es": "vite build --emptyOutDir --config ./build.es.ts",
     "build:all": "vite build --emptyOutDir --config ./build.all.ts",
+    "build:less": "node build.less.ts",
     "build:types": "rimraf types && tsc -d",
     "build:example": "vite build example",
     "lint:eslint": "eslint 'src/**/*.{vue,ts,tsx}' --fix",
