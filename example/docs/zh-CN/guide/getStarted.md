@@ -1,20 +1,18 @@
 ::: title 快速上手
 :::
 
+<img style="margin:20px;margin-left:30px;width:380px;" src="../../../src/assets/start.svg"/>
+
+::: describe 使用 (npm, yarn, pnpm) 工具安装 layui vue, 然后你就可以使用打包工具, 如 vite
+:::
+
 ```
 npm install @layui/layui-vue --save
-```
 
-```
+或
+
 yarn add @layui/layui-vue --save
 ```
-
-```
-pnpm install @layui/layui-vue --save
-```
-
-<br>
-
 ::: title 全局注册
 :::
 
@@ -26,8 +24,8 @@ import '@layui/layui-vue/lib/index.css'
 
 createApp(App).use(Layui).mount('#app')
 ```
-
-<br>
+::: describe 以上代码便完成了 layui-vue 的引入。需要注意的是，样式文件需要单独引入。
+:::
 
 ::: title 按需引入
 :::
@@ -46,8 +44,6 @@ app.component("LayTable", LayTable);
 
 app.mount('#app')
 ```
-<br>
-
 
 ::: title 基础示例
 :::
@@ -64,3 +60,6 @@ app.mount('#app')
   <lay-footer>pearadmin.com</lay-footer>
 </lay-layout>
 ```
+::: describe 您可以从现在起启动您的项目。 对于每个组件的用法，请参考单个组件对应的文档。
+:::
+

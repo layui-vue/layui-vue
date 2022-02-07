@@ -293,6 +293,14 @@ export default {
 
 :::
 
+::: title 主题配置
+:::
+
+```
+@button-primary-color: #009688; // 主题色
+@button-border-radius: 2px; // 圆角
+```
+
 ::: title Button 属性
 :::
 

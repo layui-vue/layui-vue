@@ -1,5 +1,8 @@
 @import "../../theme/variable.less";
 
+@button-primary-color: @global-primary-color;
+@button-border-radius: @global-border-radius;
+
 .layui-btn {
   height: 38px;
   line-height: 36px;
@@ -9,8 +12,8 @@
   text-align: center;
   white-space: nowrap;
   border: 1px solid transparent;
-  background-color: @global-primary-color;
-  border-radius: @global-border-radius;
+  background-color: @button-primary-color;
+  border-radius: @button-border-radius;
   cursor: pointer;
 }
 
