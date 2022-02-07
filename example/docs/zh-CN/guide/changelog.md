@@ -22,7 +22,7 @@
           <li>[修复] menu 组件 inverted 属性不兼容 string 类型。</li>
           <li>[修复] menu 组件 level 属性不兼容 string 类型。</li>
           <li>[升级] icons-vue 1.0.4 版本。</li>
-          <li>[升级] layer-vue 1.3.3 版本</li>
+          <li>[升级] layer-vue 1.3.3 版本。</li>
         </ul> 
       </li>
     </ul>
