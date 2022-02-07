@@ -4,10 +4,6 @@
 ::: describe Layui 支持一定程度的主题定制，以满足业务和品牌上多样化的视觉需求，包括但不限于主色、圆角、边框和部分组件的视觉定制。
 :::
 
-|    |    |
-| -- | -- |
-| <img style="margin:50px;width:60%;" src="../../../src/assets/theme1.svg" />   | <img style="margin:50px;width:60%;" src="../../../src/assets/theme2.svg" /> |
-
 ::: describe 以下是一些最常用的通用变量，所有样式变量可以在 这里 找到。
 :::
 

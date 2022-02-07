@@ -13,8 +13,8 @@ export interface LayMenuProps {
   openKeys?: string[];
   tree?: boolean;
   theme?: string;
-  inverted?: boolean;
-  level?: boolean;
+  inverted?: boolean | string;
+  level?: boolean | string;
 }
 
 const emit = defineEmits(["update:selectedKey", "update:openKeys"]);

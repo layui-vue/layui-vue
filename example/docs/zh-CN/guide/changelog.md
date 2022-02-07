@@ -16,8 +16,11 @@
       <li> 
         <h3>0.3.7 <span class="layui-badge-rim">2022-02-07</span></h3> 
         <ul> 
-          <li>[新增] index.less 样式文件, 支持一定程度的主题定制。</li>
           <li>[新增] slider 滑块组件 setp 属性, 支持设置步长。</li>
+          <li>[新增] index.less 样式文件, 支持一定程度的主题定制。</li>
+          <li>[移除] `defineProps`,`defineEmits` 两个全局宏命令引入，消除控制台警告。</li>
+          <li>[修复] menu 组件 inverted 属性不兼容 string 类型。</li>
+          <li>[修复] menu 组件 level 属性不兼容 string 类型。</li>
           <li>[升级] icons-vue 1.0.4 版本。</li>
           <li>[升级] layer-vue 1.3.3 版本</li>
         </ul> 
