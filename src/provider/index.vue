@@ -8,32 +8,41 @@ export default {
 <script setup lang="ts">
 
 export interface LayConfigProviderProps {
-    theme?: object;
+    local?: string;
+    theme?: string;
+    themeVariable?: object;
 }
 
 const props = withDefaults(defineProps<LayConfigProviderProps>(),
   {
-    
+    local: 'zh_cn', 
+    theme: 'light',
   }
 );
 
+const changeTheme = (theme: string) => {
+  document.body.removeAttribute("lay-theme");
+  document.body.setAttribute("lay-theme", theme);
+}
 
-const changeTheme = (vars: any) => {
-  // @ts-ignore
-  if (!window.less || !window.less.modifyVars) {
-    return;
-  }
-  // @ts-ignore
-  window.less.modifyVars(vars).then((res) => {
-      console.log(res);
-  }).catch((res: any) => {
-      console.log(res);
-  });
+const changeThemeVariable = (vars: any) => {
+    if(vars!=null){
+      const keys = Object.keys(vars);
+      for(let i=0;i<keys.length;i++){
+        const key = keys[i];
+        const value=vars[key];
+        document.documentElement.style.setProperty(key,value);
+      }
+    }
 };
 
-watch(() => props.theme, (vars) => {
-    changeTheme(vars);
-},{immediate: true})
+watch(() => props.theme, (theme) => {
+  changeTheme(theme);
+},{immediate: true});
+
+watch(() => props.themeVariable, (vars) => {
+    changeThemeVariable(vars);
+},{immediate: true, deep: true});
 
 </script>
 

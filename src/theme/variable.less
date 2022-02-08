@@ -1,14 +1,30 @@
-// 主题色
-@global-primary-color: #009688;
+@global-primary-color: var(--global-primary-color);
 
-// 选中色
-@global-checked-color: #5FB878;
+@global-checked-color: var(--global-checked-color);
 
-// 圆角度
-@global-border-radius: 2px;
+@global-border-radius: var(--global-border-radius);
 
-// 前景色  
-@global-fore-color: #393D49;
+@global-fore-color: var(--global-fore-color);
 
-// 背景色
-@global-back-color: #ffffff;
+@global-back-color: var(--global-back-color);
+
+:root {
+
+  --global-primary-color: #009688;
+
+  --global-checked-color: #5fb878;
+
+  --global-border-radius: 2px;
+
+  --global-fore-color: #393d49;
+
+  --global-back-color: #ffffff;
+
+}
+
+body[lay-theme='dark'] {
+
+  --global-fore-color: #ffffff;
+
+  --global-back-color: #393d49;
+}

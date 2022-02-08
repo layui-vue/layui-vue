@@ -234,7 +234,7 @@ form {
   line-height: 125px;
   margin: 0 auto 10px;
   text-align: center;
-  background-color: #009688;
+  background-color: var(--global-primary-color);
   cursor: pointer;
   color: #fff;
   border-radius: 50%;
@@ -261,6 +261,7 @@ body::-webkit-scrollbar {
 .layui-menu .layui-menu-item-group > .layui-menu-body-title {
   padding-left: 15px;
 }
+
 .lay-link:hover{
   color: #5FB878;
 }

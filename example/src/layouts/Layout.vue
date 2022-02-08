@@ -1,5 +1,5 @@
 <template>
-  <lay-config-provider :theme="theme">
+  <lay-config-provider :themeVariable="themeVariable">
     <lay-layout class="layui-layout-document">
       <lay-header
         ><lay-logo style="box-shadow: 0 0px 2px 0 rgba(0, 0, 0, 0.15)">
@@ -77,27 +77,24 @@ export default {
     });
 
     watch(
-      () => route.path,
-      (val) => {
+      () => route.path, (val) => {
         currentPath.value = val;
-      },
-      {
-        immediate: true,
-        deep: true,
-      }
+      },{immediate: true, deep: true}
     );
 
     const handleClick = function (menu) {
       router.push(menu.path);
     };
 
-    const theme = {
-      "@global-primary-color":"red"
+    const theme = "light";
+
+    const themeVariable = {
     }
 
     return {
       menus,
       theme,
+      themeVariable,
       currentPath,
       handleClick,
     };
