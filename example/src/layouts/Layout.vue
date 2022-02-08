@@ -1,60 +1,62 @@
 <template>
-  <lay-layout class="layui-layout-document">
-    <lay-header
-      ><lay-logo style="box-shadow: 0 0px 2px 0 rgba(0, 0, 0, 0.15)">
-        <img src="../assets/logo.png" />
-      </lay-logo>
-      <ul
-        class="layui-nav layui-layout-left"
-        style="margin-top: 0px; margin-bottom: 0px"
-      >
-        <li class="layui-nav-item">
-          <router-link to="/zh-CN/index"> 首页 </router-link>
-        </li>
-        <li class="layui-nav-item">
-          <router-link to="/zh-CN/guide"> 指南 </router-link>
-        </li>
-        <li class="layui-nav-item">
-          <router-link to="/zh-CN/components"> 组件 </router-link>
-        </li>
-        <li class="layui-nav-item">
-          <router-link to="/zh-CN/ecology"> 生态 </router-link>
-        </li>
-        <li class="layui-nav-item">
-          <lay-form>
-            <lay-search :datas="menus" />
-          </lay-form>
-        </li>
-      </ul>
-      <ul
-        class="layui-nav layui-layout-right"
-        style="margin-top: 0px; margin-bottom: 0px"
-      >
-        <li class="layui-nav-item">
-          <a
-            href="https://layui-vue.gitee.io/layui-vue-playground"
-            target="_blank"
-          >
-            <lay-icon type="layui-icon-util" size="15px"></lay-icon>
-          </a>
-        </li>
-        <li class="layui-nav-item">
-          <a href="https://gitee.com/layui-vue">
-            <lay-icon type="layui-icon-fonts-code" size="15px"></lay-icon>
-          </a>
-        </li>
-        <li class="layui-nav-item">
-          <a href="https://gitee.com/layui-vue/layui-vue/issues">
-            <lay-icon type="layui-icon-chat" size="15px"></lay-icon>
-          </a>
-        </li>
-        <li class="layui-nav-item">
-          <a href="javascript:void(0)"> 0.3.7 </a>
-        </li>
-      </ul>
-    </lay-header>
-    <router-view></router-view>
-  </lay-layout>
+  <lay-config-provider :theme="theme">
+    <lay-layout class="layui-layout-document">
+      <lay-header
+        ><lay-logo style="box-shadow: 0 0px 2px 0 rgba(0, 0, 0, 0.15)">
+          <img src="../assets/logo.png" />
+        </lay-logo>
+        <ul
+          class="layui-nav layui-layout-left"
+          style="margin-top: 0px; margin-bottom: 0px"
+        >
+          <li class="layui-nav-item">
+            <router-link to="/zh-CN/index"> 首页 </router-link>
+          </li>
+          <li class="layui-nav-item">
+            <router-link to="/zh-CN/guide"> 指南 </router-link>
+          </li>
+          <li class="layui-nav-item">
+            <router-link to="/zh-CN/components"> 组件 </router-link>
+          </li>
+          <li class="layui-nav-item">
+            <router-link to="/zh-CN/ecology"> 生态 </router-link>
+          </li>
+          <li class="layui-nav-item">
+            <lay-form>
+              <lay-search :datas="menus" />
+            </lay-form>
+          </li>
+        </ul>
+        <ul
+          class="layui-nav layui-layout-right"
+          style="margin-top: 0px; margin-bottom: 0px"
+        >
+          <li class="layui-nav-item">
+            <a
+              href="https://layui-vue.gitee.io/layui-vue-playground"
+              target="_blank"
+            >
+              <lay-icon type="layui-icon-util" size="15px"></lay-icon>
+            </a>
+          </li>
+          <li class="layui-nav-item">
+            <a href="https://gitee.com/layui-vue">
+              <lay-icon type="layui-icon-fonts-code" size="15px"></lay-icon>
+            </a>
+          </li>
+          <li class="layui-nav-item">
+            <a href="https://gitee.com/layui-vue/layui-vue/issues">
+              <lay-icon type="layui-icon-chat" size="15px"></lay-icon>
+            </a>
+          </li>
+          <li class="layui-nav-item">
+            <a href="javascript:void(0)"> 0.3.7 </a>
+          </li>
+        </ul>
+      </lay-header>
+      <router-view></router-view>
+    </lay-layout>
+  </lay-config-provider>
 </template>
 <script>
 import { ref, watch } from "vue";
@@ -65,7 +67,6 @@ export default {
     const route = useRoute();
     const router = useRouter();
     const currentPath = ref("/zh-CN/guide");
-    const theme = ref(false);
 
     const menus = [];
 
@@ -89,6 +90,10 @@ export default {
     const handleClick = function (menu) {
       router.push(menu.path);
     };
+
+    const theme = {
+      "@global-primary-color":"red"
+    }
 
     return {
       menus,

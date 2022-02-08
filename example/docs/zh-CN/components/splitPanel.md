@@ -1,9 +1,14 @@
 ::: anchor
 :::
 
-::: title 基础使用
+::: title 基本介绍
 :::
 
+::: describe 更灵活的布局方案。
+:::
+
+::: title 基础使用
+:::
 
 ::: demo
 

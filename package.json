@@ -38,7 +38,7 @@
     "async-validator": "^4.0.7",
     "countup.js": "^2.0.8",
     "evtd": "^0.2.3",
-    "vue": "^3.2.29",
+    "vue": "^3.2.30",
     "vue-router": "^4.0.12"
   },
   "devDependencies": {
@@ -52,8 +52,8 @@
     "@typescript-eslint/eslint-plugin": "^5.8.0",
     "@typescript-eslint/parser": "^5.8.0",
     "@vitejs/plugin-vue": "^1.9.3",
-    "@vue/compiler-sfc": "^3.2.29",
-    "@vue/server-renderer": "^3.2.29",
+    "@vue/compiler-sfc": "^3.2.30",
+    "@vue/server-renderer": "^3.2.30",
     "commitizen": "^4.2.4",
     "cz-conventional-changelog": "3.3.0",
     "escape-html": "^1.0.3",

@@ -18,7 +18,7 @@ export default function createContainer(
         const token = tokens[idx]
         const info = token.info.trim().slice(klass.length).trim()
         if (token.nesting === 1) {
-          return `<lay-block style="margin-left:8px;margin-bottom:40px;">${info}`
+          return `<lay-block style="margin-left:0px;margin-right:0px;margin-top:20px;margin-bottom:40px;">${info}`
         } else {
           return '</lay-block>\n'
         }

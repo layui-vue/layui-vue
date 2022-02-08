@@ -8,7 +8,7 @@ export default {
 import "./index.less";
 
 const props = defineProps<{
-  nm?: boolean;
+  nm?: boolean | string;
 }>();
 </script>
 

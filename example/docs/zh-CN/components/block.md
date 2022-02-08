@@ -30,7 +30,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-block :nm="nm">引用区域的文字</lay-block>
+  <lay-block nm="true">引用区域的文字</lay-block>
 </template>
 
 <script>
