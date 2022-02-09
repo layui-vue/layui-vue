@@ -38,9 +38,9 @@ const toggle = function () {
 const onPlayground = function(){
   const foundCodes = meta.value.getElementsByClassName('language-html')
   const foundCode = foundCodes[0];
-  const text = foundCode.textContent || "";
+  const SourceCode = foundCode.textContent || "";
   
-  const { link } = usePlayGround(text)
+  const { link } = usePlayGround(SourceCode, true)
   window.open(link)
 }
 
