@@ -6,14 +6,19 @@
       class="layui-slider-vrange"
       v-if="range"
     >
-      <div
-        :style="{ bottom: verticalRangeValue[1] + '%' }"
-        class="layui-slider-vertical-btn"
-      ></div>
-      <div
-        :style="{ bottom: verticalRangeValue[0] + '%' }"
-        class="layui-slider-vertical-btn"
-      ></div>
+        <lay-tooltip :content="'' + verticalRangeValue[1]" :is-can-hide="tooptipHide">
+            <div
+                :style="{ bottom: verticalRangeValue[1] + '%' }"
+                class="layui-slider-vertical-btn"
+            ></div>
+        </lay-tooltip>
+        <lay-tooltip :content="'' + verticalRangeValue[0]" :is-can-hide="tooptipHide">
+            <div
+                :style="{ bottom: verticalRangeValue[0] + '%' }"
+                class="layui-slider-vertical-btn"
+            ></div>
+        </lay-tooltip>
+        
       <div class="layui-slider-vertical-line"></div>
       <div
         :style="{
@@ -31,7 +36,7 @@
       :class="[props.disabled ? 'layui-slider-disabled' : '']"
       v-else
     >
-      <lay-tooltip :content="modelValue + ''">
+      <lay-tooltip :content="modelValue + ''"  :is-can-hide="tooptipHide">
         <div
           :style="{ bottom: modelValue + '%' }"
           class="layui-slider-vertical-btn"
@@ -54,13 +59,13 @@
       class="layui-slider-srange"
       v-if="range"
     >
-      <lay-tooltip :content="rangeValue[0] + ''">
+      <lay-tooltip :content="rangeValue[0] + ''"  :is-can-hide="tooptipHide">
         <div
           :style="{ left: rangeValue[0] + '%' }"
           class="layui-slider-btn-v"
         ></div>
       </lay-tooltip>
-      <lay-tooltip :content="rangeValue[1] + ''">
+      <lay-tooltip :content="rangeValue[1] + ''"  :is-can-hide="tooptipHide">
         <div
           :style="{ left: rangeValue[1] + '%' }"
           class="layui-slider-btn-v"
@@ -84,7 +89,7 @@
       :class="[props.disabled ? 'layui-slider-disabled' : '']"
       v-else
     >
-      <lay-tooltip :visible="true" :content="'' + modelValue">
+      <lay-tooltip :content="'' + modelValue" :is-can-hide="tooptipHide">
         <div
           :style="{ left: modelValue + '%' }"
           class="layui-slider-btn-v"
@@ -147,6 +152,7 @@ function throttle(func: Function) {
 }
 const moveAction = throttle(handle_mousemove);
 
+const tooptipHide = ref<Boolean>(true);
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function handle_mousedown() {
   on("selectstart", window, handle_select, { once: true });
@@ -155,6 +161,7 @@ function handle_mousedown() {
 }
 
 function handle_mousemove(e: MouseEvent) {
+  tooptipHide.value = false;
   if (props.disabled === true) {
     return false;
   }
@@ -181,6 +188,7 @@ function handle_mouseup() {
   // off('selectstart', document, handle_select)
   off("mouseup", window, handle_mouseup);
   off("mousemove", window, moveAction);
+  tooptipHide.value = true;
   currbtn = -1;
 }
 
