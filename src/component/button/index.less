@@ -3,11 +3,17 @@
 @button-primary-color: var(--button-primary-color);
 @button-border-radius: var(--button-border-radius);
 @button-border-color: var(--button-border-color);
+@button-normal-color: var(--button-normal-color);
+@button-warm-color: var(--button-warm-color);
+@button-danger-color: var(--button-danger-color);
 
 :root {
   --button-primary-color: @global-primary-color;
   --button-border-radius: @global-border-radius;
   --button-border-color: #d2d2d2;
+  --button-normal-color: @global-normal-color;
+  --button-warm-color: @global-warm-color;
+  --button-danger-color: @global-danger-color;
 }
 
 .layui-btn {
@@ -60,15 +66,15 @@
 }
 
 .layui-btn-normal {
-  background-color: #1e9fff;
+  background-color: @button-normal-color;
 }
 
 .layui-btn-warm {
-  background-color: #ffb800;
+  background-color: @button-warm-color;
 }
 
 .layui-btn-danger {
-  background-color: #ff5722;
+  background-color: @button-danger-color;
 }
 
 .layui-btn-lg {
