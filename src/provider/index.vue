@@ -1,24 +1,30 @@
 <script lang="ts">
 import { watch } from '@vue/runtime-core';
+import { useI18n } from 'vue-i18n';
 export default {
   name: "lay-config-provider",
 };
 </script>
 
 <script setup lang="ts">
+const { locale } = useI18n(); 
 
 export interface LayConfigProviderProps {
-    local?: string;
+    locale?: string;
     theme?: string;
     themeVariable?: object;
 }
 
 const props = withDefaults(defineProps<LayConfigProviderProps>(),
   {
-    local: 'zh_cn', 
+    locale: 'en_US', 
     theme: 'light',
   }
 );
+
+const changeLocale = (lang: string) => {
+  locale.value = lang
+}
 
 const changeTheme = (theme: string) => {
   document.body.removeAttribute("lay-theme");
@@ -35,6 +41,10 @@ const changeThemeVariable = (vars: any) => {
       }
     }
 };
+
+watch(() => props.locale, (lang) => {
+  changeLocale(lang)
+},{immediate: true})
 
 watch(() => props.theme, (theme) => {
   changeTheme(theme);

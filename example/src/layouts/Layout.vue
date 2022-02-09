@@ -1,5 +1,8 @@
 <template>
-  <lay-config-provider :themeVariable="themeVariable">
+  <lay-config-provider
+    :locale="locale"
+    :theme="theme" 
+    :themeVariable="themeVariable">
     <lay-layout class="layui-layout-document">
       <lay-header
         ><lay-logo style="box-shadow: 0 0px 2px 0 rgba(0, 0, 0, 0.15)">
@@ -86,14 +89,19 @@ export default {
       router.push(menu.path);
     };
 
+    const locale = "en_US";
+
     const theme = "light";
 
     const themeVariable = {
+      "--global-primary-color":"red",
+      "--global-checked-color":"red"
     }
 
     return {
       menus,
       theme,
+      locale,
       themeVariable,
       currentPath,
       handleClick,

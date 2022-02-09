@@ -4,6 +4,7 @@ import "./theme/index.less";
 import "@layui/layer-vue/lib/index.css";
 import "@layui/icons-vue/lib/index.css";
 import { layer, useLayer } from "@layui/layer-vue";
+import i18n from "./locales";
 
 import LayLayer from "./component/layer/index";
 import LayBacktop from "./component/backTop/index";
@@ -156,6 +157,7 @@ const install = (app: App): void => {
     const item = components[key];
     app.component(item.name || key, item);
   }
+  app.use(i18n);
 };
 
 export {
