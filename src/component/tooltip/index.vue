@@ -28,10 +28,6 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
-    visible: {
-      type: Boolean,
-      default: false,
-    },
     isCanHide: {
       type: Boolean,
       default: true,
