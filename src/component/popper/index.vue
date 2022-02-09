@@ -34,7 +34,6 @@ export interface LayPopperProps {
     enterable?: boolean;
     isDark?: boolean;
     disabled?: boolean;
-    visible?: boolean;
     isCanHide?: boolean;
 }
 
@@ -44,13 +43,11 @@ const props = withDefaults(defineProps<LayPopperProps>(),
     isDark: true,
     disabled: false,
     enterable: true,
-    visible: true,
     isCanHide: true,
     trigger: "hover",
   }
 );
 
-const emit = defineEmits(["update:visible"]);
 
 const EVENT_MAP: any = {
   hover: ["mouseenter", null, "mouseleave", false],
@@ -66,19 +63,24 @@ const style = ref<CSSProperties>({ top: -window.innerHeight + "px", left: 0 });
 const checkTarget = ref(false);
 const popper = ref<HTMLDivElement>({} as HTMLDivElement);
 const innnerPosition = ref(props.position);
-const innerVisible = ref(props.visible ?? true);
-const isExist = ref(false);
+const innerVisible = ref(!props.isCanHide);
+const isExist = ref(!props.isCanHide);
+
+watch(() => props.isCanHide, (val) => {
+  innerVisible.value = !val;
+});
 
 watch(innerVisible, (val) => {
   invokeShowPosistion();
-  emit("update:visible", val);
 });
+
 watch(popper, (val) => {
   if (props.trigger === 'hover' && props.enterable) {
     on(popper.value, EVENT_MAP['hover'][0], doShow);
     on(popper.value, EVENT_MAP['hover'][2], doHidden);
   }
 });
+
 watch(
   () => props.content,
   (val) => {
@@ -88,23 +90,27 @@ watch(
 
 const doShow = function () {
   if (!props.disabled) {
-    innerVisible.value = true;
-    isExist.value = true;
+    if (!isExist.value) {
+        isExist.value = true;
+        setTimeout(()=>innerVisible.value = true, 0);
+    } else {
+        innerVisible.value = true;
+    }
   }
 };
 
 const doHidden = function (e: MouseEvent) {
-  // ||(props.enterable && popper.value.contains(e.target as Node))
-  if (
-    (checkTarget.value && props.el.contains(e.target)) 
-  )
+  if (checkTarget.value && props.el.contains(e.target)) {
     return;
-  // style.value = {top: (-window.innerHeight) + 'px',left:0};
-  // popper.value.remove();
-  if (props.isCanHide !== false) {
-    innerVisible.value = false;
   }
+  
+  // isCanHide参数由外控制
+  if (props.isCanHide === false) {
+    return;
+  }
+  innerVisible.value = false;
   innnerPosition.value = props.position;
+  style.value = { top: -window.innerHeight + "px", left: 0 }
 };
 
 // 计算位置显示
