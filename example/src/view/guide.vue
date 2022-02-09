@@ -93,6 +93,12 @@ export default {
             path: '/zh-CN/guide/theme',
           },
           {
+            id: 3,
+            title: '语言',
+            subTitle: 'locale',
+            path: '/zh-CN/guide/locale',
+          },
+          {
             id: 4,
             title: '问题',
             subTitle: 'problem',

@@ -57,7 +57,5 @@ watch(() => props.themeVariable, (vars) => {
 </script>
 
 <template>
-  <div class="lay-config-provider">
-    <slot></slot>
-  </div>
+  <slot></slot>
 </template>

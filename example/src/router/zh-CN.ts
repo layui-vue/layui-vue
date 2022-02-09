@@ -64,6 +64,11 @@ const zhCN = [
             meta: { title: "主题" },
           },
           {
+            path: "/zh-CN/guide/locale",
+            component: () => import("../../docs/zh-CN/guide/locale.md"),
+            meta: { title: "语言" },
+          },
+          {
             path: "/zh-CN/guide/sponsor",
             component: () => import("../../docs/zh-CN/guide/sponsor.md"),
             meta: { title: "赞助" },

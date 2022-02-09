@@ -94,8 +94,6 @@ export default {
     const theme = "light";
 
     const themeVariable = {
-      "--global-primary-color":"red",
-      "--global-checked-color":"red"
     }
 
     return {
