@@ -1,0 +1,37 @@
+@import "../../theme/variable.less";
+
+@textarea-border-radius: var(--textarea-border-radius);
+@textarea-border-color: var(--textarea-border-color);
+
+:root {
+  --textarea-border-radius: @global-border-radius;
+  --textarea-border-color: @global-border-color;
+}
+
+.layui-textarea {
+  border-width: 1px;
+  border-style: solid;
+  background-color: #fff;
+  color: rgba(0, 0, 0, 0.85);
+  border-radius: @textarea-border-radius;
+  border-color: @textarea-border-color;
+  display: block;
+  width: 100%;
+  height: auto;
+  line-height: 20px;
+  min-height: 100px;
+  padding: 6px 10px;
+  resize: vertical;
+}
+
+.layui-textarea:hover {
+  border-color: #eee !important;
+}
+
+.layui-textarea:focus {
+  border-color: #d2d2d2 !important;
+}
+
+.layui-textarea::-webkit-input-placeholder {
+  line-height: 1.3;
+}

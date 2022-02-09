@@ -1,9 +1,23 @@
 @import "../../theme/variable.less";
 
+
+@panel-border-color: var(--panel-border-color);
+@panel-border-radius: var(--panel-border-radius);
+@panel-fore-color: var(--panel-fore-color);
+@panel-back-color: var(--panel-back-color);
+
+:root {
+  --panel-border-color: @global-border-color;
+  --panel-border-radius: @global-border-radius;
+  --panel-fore-color: @global-fore-color;
+  --panel-back-color: @global-back-color;
+}
+
 .layui-panel {
   border-width: 1px;
   border-style: solid;
-  border-radius: @global-border-radius;
-  background-color: #fff;
-  color: #666;
+  border-radius: @panel-border-radius;
+  border-color: @panel-border-color;
+  background-color: @panel-back-color;
+  color: @panel-fore-color;
 }

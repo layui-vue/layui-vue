@@ -30,6 +30,27 @@ export default {
 
 :::
 
+::: title 主题配置
+:::
+
+<p style="margin-left: 30px">less</p>
+
+```
+@panel-border-color: #eee;
+@panel-border-radius: 2px;
+@panel-fore-color: #333;
+@panel-back-color: #fff;
+```
+
+<p style="margin-left: 30px">css</p>
+
+```
+--panel-border-color: #eee;
+--panel-border-radius: 2px;
+--panel-fore-color: #333;
+--panel-back-color: #fff;
+```
+
 ::: title Panel 插槽
 :::
 

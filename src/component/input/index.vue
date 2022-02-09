@@ -5,6 +5,8 @@ export default {
 </script>
 
 <script setup lang="ts">
+import "./index.less"
+
 export interface LayInputProps {
   name?: string;
   type?: string;

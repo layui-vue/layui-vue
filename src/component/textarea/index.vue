@@ -5,6 +5,8 @@ export default {
 </script>
 
 <script setup lang="ts">
+import "./index.less";
+
 export interface LayTextareaProps {
     name?: string;
     modelValue?: string;

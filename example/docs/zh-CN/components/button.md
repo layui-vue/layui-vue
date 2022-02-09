@@ -296,9 +296,20 @@ export default {
 ::: title 主题配置
 :::
 
+<p style="margin-left: 30px">less</p>
+
 ```
 @button-primary-color: #009688; // 主题色
 @button-border-radius: 2px; // 圆角
+@button-border-color: #d2d2d2; // 边框色
+```
+
+<p style="margin-left: 30px">css</p>
+
+```
+--button-primary-color: #009688; // 主题色
+--button-border-radius: 2px; // 圆角
+--button-border-color: #d2d2d2; // 边框色
 ```
 
 ::: title Button 属性
