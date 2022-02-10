@@ -5,11 +5,7 @@
 </p>
 
 <p align="center">
-  A component library for Vue 3 base on layui
-</p>
-
-<p align="center">
-  基 于 vue 3.0 的 组 件 库 桌 面 级 , layui 的 另 一 种 呈 现 方 式
+  基 于 vue 3.0 的 桌 面 级 组 件 库
 </p>
 
 <p align="center">  
@@ -20,17 +16,11 @@
   <!--<a href="https://saucelabs.com/beta/builds/7e6196205e4f492496203388fc003b65"><img src="https://saucelabs.com/buildstatus/layui" alt="Build Status"></a>-->
 </p>
 
-<!--
-<p align="center">
-  <a href="https://saucelabs.com/beta/builds/7e6196205e4f492496203388fc003b65"><img src="https://saucelabs.com/browser-matrix/layui.svg" alt="Browser Matrix"></a>
-</p>
--->
-
 ---
 
-### 快速上手 : Beta
+### 快速上手
 
-获得 layui-vue 你只需要使用 npm 引入 :
+使用 (npm, yarn, pnpm) 工具安装 layui-vue
 
 ```
 npm install @layui/layui-vue
@@ -47,43 +37,19 @@ import App from './App.vue'
 createApp(App).use(Layui).mount('#app')
 ```
 
-接下来，你就可以使用 layui-vue 来开发你的应用 :
-
-```html
-<template>
-  <lay-layout>
-    <lay-header>
-      <lay-logo>Layui Admin</lay-logo>
-    </lay-header>
-    <lay-side></lay-side>
-    <lay-body>
-      <router-view></router-view>
-    </lay-body>
-    <lay-footer>pearadmin.com</lay-footer>
-  </lay-layout>
-</template>
-```
-
 ## [阅读文档](http://layui-vue.pearadmin.com/)
 
 从现在开始，用另一种方式拥抱 layui, 继续化作你方寸屏幕前的亿万字节！
 
-### 使用趋势
-
-[![Giteye chart](https://chart.giteye.net/gitee/layui-vue/layui-vue/5ZQ67WWS.png)](https://giteye.net/chart/5ZQ67WWS)
-
 ### 贡献代码
-
-> 在人的尺度里，世界既无始也无终，唯一的信仰是，总有人认得你站在暴风雪里的样子。  
 
 [![Giteye chart](https://chart.giteye.net/gitee/layui-vue/layui-vue/DBC9Z6HQ.png)](https://giteye.net/chart/DBC9Z6HQ)
 
-## 交流群
-
-| QQ | 微信 |
-|----|----|
-| <img src="https://images.gitee.com/uploads/images/2021/1008/090410_8b349271_4835367.png" width="180px" />  | <img src="https://images.gitee.com/uploads/images/2022/0103/195713_7e626723_4835367.png" width="180px" /> |
-
-## 相关
+## 相关链接
 
 [官网](http://layui-vue.pearadmin.com/)、[更新日志](http://layui-vue.pearadmin.com/zh-CN/guide/changelog)、[交流群](https://jq.qq.com/?_wv=1027&k=ffiUQgnE)
+
+## 开源协议
+
+layui-vue is open source software licensed as
+[MIT](https://gitee.com/layui-vue/layui-vue/blob/master/LICENSE).
