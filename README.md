@@ -45,11 +45,10 @@ createApp(App).use(Layui).mount('#app')
 
 [![Giteye chart](https://chart.giteye.net/gitee/layui-vue/layui-vue/DBC9Z6HQ.png)](https://giteye.net/chart/DBC9Z6HQ)
 
-## 相关链接
+### 相关链接
 
 [官网](http://layui-vue.pearadmin.com/)、[更新日志](http://layui-vue.pearadmin.com/zh-CN/guide/changelog)、[交流群](https://jq.qq.com/?_wv=1027&k=ffiUQgnE)
 
-## 开源协议
+### 开源协议
 
-layui-vue is open source software licensed as
-[MIT](https://gitee.com/layui-vue/layui-vue/blob/master/LICENSE).
+Layui vue 是作为 [MIT](https://gitee.com/layui-vue/layui-vue/blob/master/LICENSE) 许可的开源软件。
