@@ -1,60 +1,65 @@
-<p align="center">
-  <a href="http://www.layui.com">
-    <img src="https://images.gitee.com/uploads/images/2022/0104/135039_3f41c467_4835367.png" alt="layui" width="360">
-  </a>
-</p>
+## Introduction
 
-<p align="center">
-  基 于 vue 3.0 的 桌 面 级 组 件 库
-</p>
-
-<p align="center">  
+<p>  
   <a href="https://www.npmjs.com/package/@layui/layui-vue"><img src="https://img.shields.io/npm/v/@layui/layui-vue.svg?sanitize=true" alt="Version"></a>
-  <a href="https://www.npmjs.com/package/layui"><img src="https://img.shields.io/npm/l/layui.svg?sanitize=true" alt="License"></a>
+  <a href="https://www.npmjs.com/package/@layui/layui-vue"><img src="https://img.shields.io/npm/l/@layui/layui-vue.svg?sanitize=true" alt="License"></a>
   <a href="https://travis-ci.org/sentsin/layui"><img alt="Build Status" src="https://img.shields.io/travis/sentsin/layui/master.svg"></a>
   <a href="https://coveralls.io/r/sentsin/layui?branch=master"><img alt="Test Coverage" src="https://img.shields.io/coveralls/sentsin/layui/master.svg"></a>
-  <!--<a href="https://saucelabs.com/beta/builds/7e6196205e4f492496203388fc003b65"><img src="https://saucelabs.com/buildstatus/layui" alt="Build Status"></a>-->
 </p>
 
----
+An enterprise-class UI components based on Layui and Vue.
 
-### 快速上手
+**Run with code Sandbox.**
 
-使用 (npm, yarn, pnpm) 工具安装 layui-vue
+[![Edit layui-vue](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/11mvy)
 
+## Features
+
+A few of the things you can do with layui vue:
+
+* Review and merge pull requests
+* Create new issues
+* Star, watch and fork repositories
+* Control your unread and participating notifications
+
+## Get Started
+
+Use npm to install.
+
+```bash
+npm i @layui/layui-vue
 ```
-npm install @layui/layui-vue
-```
+We have several examples on the [website](http://layui.pearadmin.com). Here is the first one to get you started:
 
-在 main.ts 中：
+## Feedback
 
-```js
-import { createApp } from 'vue'
-import Layui from '@layui/layui-vue'
-import '@layui/layui-vue/lib/index.css'
-import App from './App.vue'
+Feel free to send us feedback on [file an issue](https://github.com/layui-vue/layui-vue/issues/new). Feature requests are always welcome. If you wish to contribute, please take a quick look at the [guidelines](./CONTRIBUTING.md)!
 
-createApp(App).use(Layui).mount('#app')
-```
+If there's anything you'd like to chat about, please feel free to join our [Gitter chat](https://gitter.im/layui-vue/community)!
 
-## [阅读文档](http://layui-vue.pearadmin.com/)
+## Contributors
 
-从现在开始，用另一种方式拥抱 layui, 继续化作你方寸屏幕前的亿万字节！
-
-### 贡献代码
-
-欢迎提交 pull request，注意对应提交对应 master 分支
-
-欢迎提交 issue，请写清楚遇到问题的原因、开发环境、复显步骤。
+This project follows the [all-contributors](https://github.com/layui-vue/layui-vue/graphs/contributors) specification and is brought to you by these [awesome contributors](https://github.com/layui-vue/layui-vue/graphs/contributors).
 
 <a href="https://github.com/layui-vue/layui-vue/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=layui-vue/layui-vue" />
 </a>
 
-### 相关链接
+## Build Process
 
-[官网](http://layui-vue.pearadmin.com/)、[更新日志](http://layui-vue.pearadmin.com/zh-CN/guide/changelog)、[交流群](https://jq.qq.com/?_wv=1027&k=ffiUQgnE)
+- Clone or download the repo
+- Clone or download the repo
 
-### 开源协议
+Please take a look at the [contributing guidelines](./CONTRIBUTING.md) for a detailed process on how to build your application as well as troubleshooting information.
 
-Layui vue 是作为 [MIT](https://gitee.com/layui-vue/layui-vue/blob/master/LICENSE) 许可的开源软件。
+## Backers 
+
+Thank you to all our backers! 🙏 [[Become a backers](https://opencollective.com/layui-vue#backer)]
+
+## Sponsors 
+
+Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](https://opencollective.com/layui-vue#sponsor)]
+
+## Open Source Licence
+
+Layui vue is licensed under the [MIT license](https://opensource.org/licenses/MIT).
