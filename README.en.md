@@ -30,7 +30,7 @@ Use npm to install.
 ```bash
 npm i @layui/layui-vue
 ```
-We have several examples on the [website](http://layui.pearadmin.com). Here is the first one to get you started:
+We have several examples on the [website](http://layui-vue.pearadmin.com). Here is the first one to get you started:
 
 ```
 <template>
