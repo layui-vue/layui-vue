@@ -13,8 +13,8 @@
 
 <script setup>
 const themeVariable = { 
-    '--global-primary-color':'red',
-    '--global-checked-color':'red'
+    "--global-primary-color":"red",
+    "--global-checked-color":"red"
 }
 </script>
 ```
@@ -25,4 +25,6 @@ const themeVariable = {
 --global-primary-color: #009688;
 
 --global-checked-color: #5fb878;
+
+--global-border-radius: 2px;
 ```

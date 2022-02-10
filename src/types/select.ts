@@ -1,4 +1,5 @@
 export type SelectValueType = string | string[] | number | number[] | null;
+
 export interface SelectItem {
   value?: SelectValueType;
   label?: null | string | string[];

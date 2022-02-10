@@ -54,11 +54,6 @@ const zhCN = [
             meta: { title: "团队" },
           },
           {
-            path: "/zh-CN/guide/norms",
-            component: () => import("../../docs/zh-CN/guide/norms.md"),
-            meta: { title: "规范" },
-          },
-          {
             path: "/zh-CN/guide/theme",
             component: () => import("../../docs/zh-CN/guide/theme.md"),
             meta: { title: "主题" },
@@ -67,12 +62,7 @@ const zhCN = [
             path: "/zh-CN/guide/locale",
             component: () => import("../../docs/zh-CN/guide/locale.md"),
             meta: { title: "语言" },
-          },
-          {
-            path: "/zh-CN/guide/sponsor",
-            component: () => import("../../docs/zh-CN/guide/sponsor.md"),
-            meta: { title: "赞助" },
-          },
+          }
         ],
       },
       {
@@ -351,46 +341,7 @@ const zhCN = [
             meta: { title: "结果" },
           },
         ],
-      },
-      {
-        path: "/zh-CN/hooks",
-        redirect: "/zh-CN/hooks/useStarted",
-        component: Hooks,
-        meta: { title: "hooks" },
-        children: [
-          {
-            path: "/zh-CN/hooks/useStarted",
-            component: () => import("../../docs/zh-CN/hooks/useStarted.md"),
-            meta: { title: "useStarted" },
-          },
-          {
-            path: "/zh-CN/hooks/useClickOutside",
-            component: () =>
-              import("../../docs/zh-CN/hooks/useClickOutside.md"),
-            meta: { title: "useClickOutside" },
-          },
-          {
-            path: "/zh-CN/hooks/useFullScreen",
-            component: () => import("../../docs/zh-CN/hooks/useFullScreen.md"),
-            meta: { title: "useFullScreen" },
-          },
-          {
-            path: "/zh-CN/hooks/useMove",
-            component: () => import("../../docs/zh-CN/hooks/useMove.md"),
-            meta: { title: "useMove" },
-          },
-          {
-            path: "/zh-CN/hooks/useState",
-            component: () => import("../../docs/zh-CN/hooks/useState.md"),
-            meta: { title: "useState" },
-          },
-          {
-            path: "/zh-CN/hooks/useBoolean",
-            component: () => import("../../docs/zh-CN/hooks/useBoolean.md"),
-            meta: { title: "useBoolean" },
-          },
-        ],
-      },
+      }
     ],
   },
 ];
