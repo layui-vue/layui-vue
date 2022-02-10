@@ -43,7 +43,13 @@ createApp(App).use(Layui).mount('#app')
 
 ### 贡献代码
 
-[![Giteye chart](https://chart.giteye.net/gitee/layui-vue/layui-vue/DBC9Z6HQ.png)](https://giteye.net/chart/DBC9Z6HQ)
+欢迎提交 pull request，注意对应提交对应 master 分支
+
+欢迎提交 issue，请写清楚遇到问题的原因、开发环境、复显步骤。
+
+<a href="https://github.com/layui-vue/layui-vue/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=layui-vue/layui-vue" />
+</a>
 
 ### 相关链接
 
