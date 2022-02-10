@@ -5,7 +5,9 @@
   <a href="https://www.npmjs.com/package/@layui/layui-vue"><img src="https://img.shields.io/npm/l/@layui/layui-vue.svg?sanitize=true" alt="License"></a>
   <a href="https://travis-ci.org/sentsin/layui"><img alt="Build Status" src="https://img.shields.io/travis/sentsin/layui/master.svg"></a>
   <a href="https://coveralls.io/r/sentsin/layui?branch=master"><img alt="Test Coverage" src="https://img.shields.io/coveralls/sentsin/layui/master.svg"></a>
-</p>
+</p>  
+
+**[🔶 Reading Document](http://layui-vue.pearadmin.com)**
 
 An enterprise-class UI components based on Layui and Vue.
 
