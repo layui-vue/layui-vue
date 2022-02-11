@@ -5,6 +5,7 @@ export default {
 </script>
 
 <script setup lang="ts">
+import "./index.less";
 import { useSlots } from "vue";
 
 const slot = useSlots();
@@ -17,14 +18,14 @@ const props = defineProps<LayFieldProps>();
 </script>
 
 <template>
-  <fieldset v-if="slot.default" class="layui-elem-field">
+  <fieldset v-if="slot.default" class="layui-field">
     <legend>{{ title }}</legend>
     <div class="layui-field-box">
       <slot></slot>
     </div>
   </fieldset>
 
-  <fieldset v-else class="layui-elem-field layui-field-title">
+  <fieldset v-else class="layui-field layui-field-title">
     <legend>
       <a name="docend">{{ title }}</a>
     </legend>

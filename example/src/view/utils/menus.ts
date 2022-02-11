@@ -269,9 +269,9 @@ const menus = [
       },
       {
         id: 14,
-        title: "区块",
-        subTitle: "block",
-        path: "/zh-CN/components/block",
+        title: "引用",
+        subTitle: "quote",
+        path: "/zh-CN/components/quote",
       },
       {
         id: 15,

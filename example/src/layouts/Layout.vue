@@ -1,7 +1,7 @@
 <template>
   <lay-config-provider
-    :locale="locale"
     :theme="theme" 
+    :locale="locale"
     :locales="locales"
     :themeVariable="themeVariable">
     <lay-layout class="layui-layout-document">
@@ -79,23 +79,16 @@ export default {
   setup() {
 
     const { t } = useI18n(); 
-
     const route = useRoute();
     const router = useRouter();
-    const currentPath = ref("/zh-CN/guide");
-    // 当前语言
     const locale = ref('zh_CN');
-    // 扩展语言包
+    const currentPath = ref("/zh-CN/guide");
     const locales = [
       {name:'zh_CN',locale: zh_CN, merge: true},
-      {name:'en_US',locale: en_US, merge: true}
-    ]
-    // 当前主题
+      {name:'en_US',locale: en_US, merge: true},
+    ];
     const theme = "light";
-    // 主题变量
-    const themeVariable = {
-
-    }
+    const themeVariable = {}
 
     const menus = [];
 
@@ -105,11 +98,9 @@ export default {
       });
     });
 
-    watch(
-      () => route.path, (val) => {
+    watch(() => route.path, (val) => {
         currentPath.value = val;
-      },{immediate: true, deep: true}
-    );
+      },{immediate: true, deep: true});
 
     const handleClick = function (menu) {
       router.push(menu.path);
@@ -125,15 +116,17 @@ export default {
       theme,
       locale,
       locales,
-      themeVariable,
       currentPath,
       handleClick,
       changeLocale,
+      themeVariable
     };
   },
 };
 </script>
+
 <style>
+
 .layui-layout-document > .layui-header {
   z-index: 9999;
   width: 100%;
@@ -164,6 +157,7 @@ export default {
   left: 15px;
   top: 16px;
 }
+
 .layui-header > .layui-nav {
   background-color: transparent;
 }
@@ -183,9 +177,11 @@ export default {
 .layui-menu-docs {
   padding-top: 10px;
 }
+
 .layui-menu-docs .layui-menu-body-title .layui-font-gray {
   padding-left: 10px;
 }
+
 .layui-side hr {
   margin: 8px;
 }

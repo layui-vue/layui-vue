@@ -7,7 +7,7 @@
 ::: demo
 
 <template>
-  <lay-block>引用区域的文字</lay-block>
+  <lay-quote>引用区域的文字</lay-quote>
 </template>
 
 <script>
@@ -30,7 +30,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-block nm="true">引用区域的文字</lay-block>
+  <lay-quote type="nm">引用区域的文字</lay-quote>
 </template>
 
 <script>
@@ -50,7 +50,7 @@ export default {
 
 :::
 
-::: title Block 属性
+::: title Quote 属性
 :::
 
 ::: table

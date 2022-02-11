@@ -1,0 +1,22 @@
+@import "../../theme/variable.less";
+
+@block-default-color: var(--block-default-color);
+@block-border-radius: var(--block-border-radius);
+
+:root {
+  --block-default-color: @global-checked-color;
+  --block-border-radius: @global-border-radius;
+}
+
+.layui-quote {
+  padding: 15px;
+  line-height: 1.6;
+  margin-bottom: 10px;
+  border-left: 5px solid @block-default-color;
+  border-radius: @block-border-radius;
+  background-color: #fafafa;
+}
+
+.layui-quote-nm {
+  border-left: 5px solid #eee;
+}

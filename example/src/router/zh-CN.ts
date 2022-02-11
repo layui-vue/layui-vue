@@ -144,8 +144,8 @@ const zhCN = [
             meta: { title: "徽章" },
           },
           {
-            path: "/zh-CN/components/block",
-            component: () => import("../../docs/zh-CN/components/block.md"),
+            path: "/zh-CN/components/quote",
+            component: () => import("../../docs/zh-CN/components/quote.md"),
             meta: { title: "辅助" },
           },
           {

@@ -29,7 +29,7 @@ import LayCol from "./component/col/index";
 import LayRow from "./component/row/index";
 import LayInput from "./component/input/index";
 import LayBadge from "./component/badge/index";
-import LayBlock from "./component/block/index";
+import LayQuote from "./component/quote/index";
 import LayLine from "./component/line/index";
 import LayTimeline from "./component/timeline/index";
 import LayTimelineItem from "./component/timelineItem/index";
@@ -100,7 +100,7 @@ const components: Record<string, Component> = {
   LayCol,
   LayInput,
   LayBadge,
-  LayBlock,
+  LayQuote,
   LayLine,
   LayTimeline,
   LayTimelineItem,
@@ -182,7 +182,7 @@ export {
   LayCol,
   LayInput,
   LayBadge,
-  LayBlock,
+  LayQuote,
   LayLine,
   LayTimeline,
   LayTimelineItem,

@@ -3,11 +3,11 @@
     style="margin-top: 60px; height: 100%; width: 80%"
     class="layui-container"
   >
-    <blockquote class="layui-elem-quote layui-text" style="margin: 30px 0">
+    <blockquote class="layui-quote layui-text" style="margin: 30px 0">
       尽管 layui-vue 中包含了这些组件，但因为它们受众群体广泛或应用广泛，特从 layui-vue
       中抽取出来个副本，可独立引用。我们也会对它们进行同步维护。
     </blockquote>
-    <fieldset class="layui-elem-field layui-field-title">
+    <fieldset class="layui-field layui-field-title">
       <legend style="margin-bottom: 20px; text-align: center">独立组件</legend>
       <div class="layui-field-box">
         <ul class="layui-row layui-col-space6">
@@ -28,7 +28,7 @@
         </ul>
       </div>
     </fieldset>
-    <fieldset class="layui-elem-field layui-field-title">
+    <fieldset class="layui-field layui-field-title">
       <legend style="margin-bottom: 20px; text-align: center">后台模板</legend>
       <div class="layui-field-box">
         <ul class="layui-row layui-col-space6">
@@ -42,7 +42,7 @@
         </ul>
       </div>
     </fieldset>
-    <fieldset class="layui-elem-field layui-field-title">
+    <fieldset class="layui-field layui-field-title">
       <legend style="margin-bottom: 20px; text-align: center">设计资源</legend>
       <div class="layui-field-box">
         <ul class="layui-row layui-col-space6">
