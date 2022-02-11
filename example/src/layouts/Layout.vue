@@ -17,13 +17,13 @@
             <router-link to="/zh-CN/index"> {{ t('nav.home')}} </router-link>
           </li>
           <li class="layui-nav-item">
-            <router-link to="/zh-CN/guide"> 指南 </router-link>
+            <router-link to="/zh-CN/guide"> {{ t('nav.guide')}} </router-link>
           </li>
           <li class="layui-nav-item">
-            <router-link to="/zh-CN/components"> 组件 </router-link>
+            <router-link to="/zh-CN/components"> {{ t('nav.components') }} </router-link>
           </li>
           <li class="layui-nav-item">
-            <router-link to="/zh-CN/ecology"> 生态 </router-link>
+            <router-link to="/zh-CN/environment"> {{ t('nav.environment') }} </router-link>
           </li>
           <li class="layui-nav-item">
             <lay-form>
@@ -73,6 +73,8 @@ import { ref, watch } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import menu from "../view/utils/menus";
 import { useI18n } from 'vue-i18n';
+import zh_CN from "../locales/zh_CN.ts";
+import en_US from "../locales/en_US.ts";
 export default {
   setup() {
 
@@ -85,8 +87,8 @@ export default {
     const locale = ref('zh_CN');
     // 扩展语言包
     const locales = [
-      {name:'zh_CN',locale: {nav: { home: '首页' }}, merge: true},
-      {name:'en_US',locale: {nav: { home: 'Home' }}, merge: true}
+      {name:'zh_CN',locale: zh_CN, merge: true},
+      {name:'en_US',locale: en_US, merge: true}
     ]
     // 当前主题
     const theme = "light";

@@ -3,7 +3,7 @@ import Component from "../view/component.vue";
 import Hooks from "../view/hooks.vue";
 import Guide from "../view/guide.vue";
 import Index from "../view/index.vue";
-import Ecology from "../view/ecology.vue";
+import Environment from "../view/environment.vue";
 
 const zhCN = [
   {
@@ -18,8 +18,8 @@ const zhCN = [
         meta: { title: "指南" },
       },
       {
-        path: "/zh-CN/ecology",
-        component: Ecology,
+        path: "/zh-CN/environment",
+        component: Environment,
         meta: { title: "生态" },
       },
       {
