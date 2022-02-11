@@ -2,6 +2,7 @@
   <lay-config-provider
     :locale="locale"
     :theme="theme" 
+    :locales="locales"
     :themeVariable="themeVariable">
     <lay-layout class="layui-layout-document">
       <lay-header
@@ -13,7 +14,7 @@
           style="margin-top: 0px; margin-bottom: 0px"
         >
           <li class="layui-nav-item">
-            <router-link to="/zh-CN/index"> 首页 </router-link>
+            <router-link to="/zh-CN/index"> {{ t('nav.home')}} </router-link>
           </li>
           <li class="layui-nav-item">
             <router-link to="/zh-CN/guide"> 指南 </router-link>
@@ -48,6 +49,12 @@
             </a>
           </li>
           <li class="layui-nav-item">
+            <a href="javascript:void(0)"> 
+              <lay-badge type="rim" class="layui-local-badge" v-if="locale === 'en_US'" @click="changeLocale('zh_CN')">中 文</lay-badge>
+              <lay-badge type="rim" class="layui-local-badge" v-else @click="changeLocale('en_US')">英 文</lay-badge>    
+            </a>
+          </li>
+          <li class="layui-nav-item">
             <a href="https://gitee.com/layui-vue/layui-vue/issues">
               <lay-icon type="layui-icon-chat" size="15px"></lay-icon>
             </a>
@@ -65,11 +72,28 @@
 import { ref, watch } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import menu from "../view/utils/menus";
+import { useI18n } from 'vue-i18n';
 export default {
   setup() {
+
+    const { t } = useI18n(); 
+
     const route = useRoute();
     const router = useRouter();
     const currentPath = ref("/zh-CN/guide");
+    // 当前语言
+    const locale = ref('zh_CN');
+    // 扩展语言包
+    const locales = [
+      {name:'zh_CN',locale: {nav: { home: '首页' }}, merge: true},
+      {name:'en_US',locale: {nav: { home: 'Home' }}, merge: true}
+    ]
+    // 当前主题
+    const theme = "light";
+    // 主题变量
+    const themeVariable = {
+
+    }
 
     const menus = [];
 
@@ -89,20 +113,20 @@ export default {
       router.push(menu.path);
     };
 
-    const locale = "en_US";
-
-    const theme = "light";
-
-    const themeVariable = {
+    const changeLocale = function(lang) {
+      locale.value = lang;
     }
 
     return {
+      t,
       menus,
       theme,
       locale,
+      locales,
       themeVariable,
       currentPath,
       handleClick,
+      changeLocale,
     };
   },
 };
@@ -141,6 +165,19 @@ export default {
 .layui-header > .layui-nav {
   background-color: transparent;
 }
+
+.layui-header .layui-local-badge {
+  font-size: 12.4px;
+  background: transparent;
+  color:rgba(255, 255, 255, 0.7);
+  border-color:rgba(255, 255, 255, 0.7);
+}
+
+.layui-header > .layui-local:hover {
+  color:white;
+  border-color:white;
+}
+
 .layui-menu-docs {
   padding-top: 10px;
 }
