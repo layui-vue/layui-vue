@@ -49,6 +49,12 @@ Feel free to send us feedback on [file an issue](https://github.com/layui-vue/la
 
 If there's anything you'd like to chat about, please feel free to join our [Gitter chat](https://gitter.im/layui-vue/community)!
 
+## Build Process
+
+- `build` Packaged component library
+
+Please take a look at the [contributing guidelines](./CONTRIBUTING.md) for a detailed process on how to build your application as well as troubleshooting information.
+
 ## Contributors
 
 This project follows the [all-contributors](https://github.com/layui-vue/layui-vue/graphs/contributors) specification and is brought to you by these [awesome contributors](https://github.com/layui-vue/layui-vue/graphs/contributors).
@@ -56,12 +62,6 @@ This project follows the [all-contributors](https://github.com/layui-vue/layui-v
 <a href="https://github.com/layui-vue/layui-vue/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=layui-vue/layui-vue" />
 </a>
-
-## Build Process
-
-- `build` Packaged component library
-
-Please take a look at the [contributing guidelines](./CONTRIBUTING.md) for a detailed process on how to build your application as well as troubleshooting information.
 
 ## Backers 
 
