@@ -11,6 +11,19 @@
 <template>
 <lay-timeline>
   <lay-timeline-item title="0.3.x">
+    <ul> 
+      <a name="0-3-8"> </a> 
+      <li> 
+        <h3>0.3.8 <span class="layui-badge-rim">2022-02-14</span></h3> 
+        <ul> 
+          <li>[新增] icon-picker 颜色选择器。</li>
+          <li>[新增] config-provider 全局配置, 用于主题与国际化切换。</li>
+          <li>[修复] container 容器在不同的分辨率无法自适应的问题</li>
+          <li>[修复] quote 引用的 nm 灰色主题失效。</li>
+          <li>[升级] icons-vue 1.0.5 版本。</li>
+        </ul> 
+      </li>
+    </ul>
      <ul> 
       <a name="0-3-7"> </a> 
       <li> 
