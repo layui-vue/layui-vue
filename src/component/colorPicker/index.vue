@@ -1,79 +1,93 @@
 <template>
-  <div class="layui-color-picker">
-    <div
-      class="saturation-value"
-      ref="saturationValue"
-      @mousedown="mousedownSV"
-    >
-      <div :style="`background-color: hsl(${hue}, 100%, 50%);`">
-        <div class="point" :style="pointStyle"></div>
-      </div>
-      <div class="saturation-value-2"></div>
-      <div class="saturation-value-3"></div>
-    </div>
-    <div class="layui-color-picker-middle">
-      <div style="flex: auto">
-        <div class="hue-slider" ref="hueSlider" @mousedown="mousedownHue">
-          <div class="slider" :style="hueSliderStyle"></div>
-        </div>
-        <div
-          class="alpha-slider"
-          ref="alphaSlider"
-          @mousedown="mousedownAlpha"
+  <lay-dropdown>
+    <div class="layui-unselect layui-colorpicker">
+      <span>
+        <span
+          class="layui-colorpicker-trigger-span"
+          lay-type=""
+          :style="`background-color: ${colorObj.rgba}`"
         >
-          <div class="slider" :style="alphaSliderStyle"></div>
-          <div
-            :style="`background: linear-gradient(to right, rgba(0,0,0,0), ${colorObj.rgb});width: 100%;height: 100%`"
-          ></div>
-        </div>
-      </div>
-      <div class="color-diamond">
+          <i class="layui-icon layui-colorpicker-trigger-i layui-icon-down"></i>
+        </span>
+      </span>
+    </div>
+    <template #content>
+      <div class="layui-color-picker">
         <div
-          :style="`background-color: ${colorObj.rgba};width: 100%;height: 100%;box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .15), inset 0 0 4px rgba(0, 0, 0, .25);`"
-        ></div>
+          class="saturation-value"
+          ref="saturationValue"
+          @mousedown="mousedownSV"
+        >
+          <div :style="`background-color: hsl(${hue}, 100%, 50%);`">
+            <div class="point" :style="pointStyle"></div>
+          </div>
+          <div class="saturation-value-2"></div>
+          <div class="saturation-value-3"></div>
+        </div>
+        <div class="layui-color-picker-middle">
+          <div style="flex: auto">
+            <div class="hue-slider" ref="hueSlider" @mousedown="mousedownHue">
+              <div class="slider" :style="hueSliderStyle"></div>
+            </div>
+            <div
+              class="alpha-slider"
+              ref="alphaSlider"
+              @mousedown="mousedownAlpha"
+            >
+              <div class="slider" :style="alphaSliderStyle"></div>
+              <div
+                :style="`background: linear-gradient(to right, rgba(0,0,0,0), ${colorObj.rgb});width: 100%;height: 100%`"
+              ></div>
+            </div>
+          </div>
+          <div class="color-diamond">
+            <div
+              :style="`background-color: ${colorObj.rgba};width: 100%;height: 100%;box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .15), inset 0 0 4px rgba(0, 0, 0, .25);`"
+            ></div>
+          </div>
+        </div>
+        <div class="color-value">
+          <div class="hex">
+            <label>
+              <input
+                :value="colorObj.hex8"
+                @input="hexChange"
+                spellcheck="false"
+              />
+            </label>
+          </div>
+          <div class="rgba-r">
+            <label>
+              <input :value="red" @input="redChange" />
+            </label>
+          </div>
+          <div class="rgba-g">
+            <label>
+              <input :value="green" @input="greenChange" />
+            </label>
+          </div>
+          <div class="rgba-b">
+            <label>
+              <input :value="blue" @input="blueChange" />
+            </label>
+          </div>
+          <div class="rgba-a">
+            <label>
+              <input :value="alpha" @input="alphaChange" />
+            </label>
+          </div>
+        </div>
+        <ul class="preset">
+          <li
+            v-for="item in preset"
+            :key="item"
+            :style="`background-color: ${item}`"
+            @click="presetChange(item)"
+          ></li>
+        </ul>
       </div>
-    </div>
-    <div class="color-value">
-      <div class="hex">
-        <label>
-          <input :value="colorObj.hex8" @input="hexChange" spellcheck="false" />
-        </label>
-        <p>Hex</p>
-      </div>
-      <div class="rgba-r">
-        <label>
-          <input :value="red" @input="redChange" />
-        </label>
-        <p>R</p>
-      </div>
-      <div class="rgba-g">
-        <label>
-          <input :value="green" @input="greenChange" />
-        </label>
-        <p>G</p>
-      </div>
-      <div class="rgba-b">
-        <label>
-          <input :value="blue" @input="blueChange" />
-        </label>
-        <p>B</p>
-      </div>
-      <div class="rgba-a">
-        <label>
-          <input :value="alpha" @input="alphaChange" />
-        </label>
-        <p>A</p>
-      </div>
-    </div>
-    <ul class="preset">
-      <li
-        v-for="item in preset"
-        :key="item"
-        :style="`background-color: ${item}`"
-        @click="presetChange(item)"
-      ></li>
-    </ul>
-  </div>
+    </template>
+  </lay-dropdown>
 </template>
 
 <script lang="ts">
@@ -83,7 +97,8 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import "./index.less"
+import "./index.less";
+import LayDropdown from "../dropdown/index.vue";
 import { ref, computed, watch, onMounted } from "vue";
 
 const emit = defineEmits(["update:color"]);
@@ -96,27 +111,17 @@ export interface LayColorPicker {
 const props = withDefaults(defineProps<LayColorPicker>(), {
   modelValue: { r: 217, g: 128, b: 95, a: 1 },
   preset: [
-    "#D0021B",
-    "#F5A623",
-    "#F8E71C",
-    "#8B572A",
-    "#7ED321",
-    "#417505",
-    "#BD10E0",
-    "#9013FE",
-    "#4A90E2",
-    "#50E3C2",
-    "#B8E986",
-    "#000000",
-    "#4A4A4A",
-    "#9B9B9B",
-    "#FFFFFF",
-  ],
+    "#009688",
+    "#1e9fff",
+    "#ffb800",
+    "#ff5722",
+    "#5fb878",
+  ]
 });
 
 const saturationValue = ref<null | HTMLElement>(null);
-const hueSlider = ref<null | HTMLElement>(null)
-const alphaSlider = ref<null | HTMLElement>(null)
+const hueSlider = ref<null | HTMLElement>(null);
+const alphaSlider = ref<null | HTMLElement>(null);
 
 let pointStyle = ref("top: 25%;left: 80%;");
 let hueSliderStyle = ref("left: 0;");
@@ -294,7 +299,7 @@ function mouseupSV(e: any) {
 function handleChangeHue(e: any) {
   // @ts-ignore
   let w = hueSlider.value.clientWidth;
-    // @ts-ignore
+  // @ts-ignore
   let x = e.pageX - saturationValue.value.getBoundingClientRect().left;
   x = x < w && x > 0 ? x : x > w ? w : 0;
   // 计算色调
@@ -321,9 +326,9 @@ function mouseupHue(e: any) {
 
 // 透明度
 function handleChangeAlpha(e: any) {
-    // @ts-ignore
+  // @ts-ignore
   let w = alphaSlider.value.clientWidth;
-    // @ts-ignore
+  // @ts-ignore
   let x = e.pageX - saturationValue.value.getBoundingClientRect().left;
   x = x < w && x > 0 ? x : x > w ? w : 0;
   // 计算透明度
