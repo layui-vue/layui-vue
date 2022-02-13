@@ -18,7 +18,7 @@
         </div>
         <div class="layui-anim site-desc site-desc-anim">
           <p class="web-font-desc">layui - vue</p>
-          <cite>layui vue, A component library for Vue 3 base on layui</cite>
+          <cite>An enterprise-class UI components based on Layui and Vue.</cite>
         </div>
         <div class="site-download">
           <router-link class="layui-inline site-down" to="/zh-CN/guide"
@@ -44,7 +44,7 @@
           rel="nofollow"
           class="site-star"
         >
-          <i class="layui-icon"></i> Star <cite id="getStars">612</cite>
+          <i class="layui-icon"></i> Star <cite id="getStars">657</cite>
         </a>
         <a
           href="https://gitee.com/layui-vue"
@@ -119,6 +119,9 @@
   text-align: center;
   overflow: hidden;
   background-color: #393d49;
+  background-image: url(../assets/background.svg);
+  background-repeat: no-repeat;
+  background-size: 100%;
 }
 .site-banner-bg {
   background-position: center 0;

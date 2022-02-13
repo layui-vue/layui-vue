@@ -1,0 +1,167 @@
+.layui-color-picker {
+  position: relative;
+  user-select: none;
+  width: 100%;
+  background: #fff;
+  padding: 10px;
+}
+
+/* 饱和度和亮度 */
+.saturation-value {
+  cursor: pointer;
+  width: 100%;
+  height: 200px;
+  position: relative;
+  margin-bottom: 10px;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.saturation-value > div {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* 圆圈 */
+.point {
+  box-sizing: border-box;
+  width: 6px;
+  height: 6px;
+  background-color: transparent;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  z-index: 9;
+}
+
+.saturation-value-2 {
+  background: linear-gradient(to right, white, #ffffff00);
+}
+
+.saturation-value-3 {
+  background: linear-gradient(to top, black, #ffffff00);
+}
+
+/* 色调 透明度 */
+.layui-color-picker-middle {
+  width: 100%;
+  display: flex;
+  margin-bottom: 10px;
+}
+
+/* 色调滑块条 */
+.hue-slider {
+  position: relative;
+  margin-bottom: 6px;
+  height: 10px;
+  background: linear-gradient(
+    90deg,
+    red 0,
+    #ff0 17%,
+    #0f0 33%,
+    #0ff 50%,
+    #00f 67%,
+    #f0f 83%,
+    red
+  );
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+/* 透明度滑块条 */
+.alpha-slider {
+  position: relative;
+  height: 10px;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+  background: #fff
+    url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAWElEQVRIiWM8fubkfwYygKWJOSM5+mCAhRLNoxaPWjxq8ajFoxbTyeL/DAfJ0Xjs3Cl7Siwmu4Yht1aDgZEYx6MWj1o8avGoxaMWD3qLya5X//4nqx6HAQC7RBGFzolqTAAAAABJRU5ErkJggg==");
+  background-size: 10px 10px;
+}
+
+/* 滑块 */
+.slider {
+  position: absolute;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.6);
+  box-sizing: border-box;
+  width: 6px;
+  height: 100%;
+  background-color: #fff;
+}
+
+/* 颜色方块 */
+.color-diamond {
+  position: relative;
+  margin-left: 5px;
+  width: 26px;
+  height: 26px;
+  border-radius: 2px;
+  overflow: hidden;
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAWElEQVRIiWM8fubkfwYygKWJOSM5+mCAhRLNoxaPWjxq8ajFoxbTyeL/DAfJ0Xjs3Cl7Siwmu4Yht1aDgZEYx6MWj1o8avGoxaMWD3qLya5X//4nqx6HAQC7RBGFzolqTAAAAABJRU5ErkJggg==");
+  background-size: 10px 10px;
+}
+
+/* 颜色的值 hex rgba */
+.color-value {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.color-value div {
+  padding: 0 3px;
+  text-align: center;
+}
+
+.color-value input {
+  font-size: 12px;
+  box-sizing: border-box;
+  width: 34px;
+  height: 24px;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  text-align: center;
+  border-radius: 2px;
+  border: 1px solid #ccc;
+}
+
+.color-value p {
+  font-size: 12px;
+  margin: 3px 0 0;
+}
+
+.color-value .rgba-a {
+  padding-right: 0;
+}
+
+.color-value .hex {
+  flex: 1;
+  padding-left: 0;
+}
+
+.color-value .hex input {
+  width: 100%;
+  height: 24px;
+}
+
+/* 预设颜色  */
+.preset {
+  width: 100%;
+  padding: 0;
+  margin: 10px 0 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.preset li {
+  width: 20px;
+  height: 20px;
+  margin-right: 6px;
+  margin-bottom: 6px;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+}
