@@ -19,6 +19,8 @@ export default {
 }
 </script>
 
+:::
+
 ::: title Icon Picker 属性
 :::
 

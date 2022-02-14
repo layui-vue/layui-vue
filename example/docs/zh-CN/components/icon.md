@@ -4,7 +4,7 @@
 ::: title 基本介绍
 :::
 
-::: describe 语义化的矢量图形。使用图标组件，你需要安装 @layui/icons-vue 图标组件包
+::: describe 语义化的矢量图形。使用图标组件，你需要安装 `@layui/icons-vue` 图标组件包
 :::
 
 ::: title 基础使用

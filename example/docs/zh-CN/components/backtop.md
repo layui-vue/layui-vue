@@ -10,7 +10,7 @@
 ::: title 基础使用
 
 :::
-::: demo 回到顶部组件的默认样式，<code>lay-backtop</code> 会自动寻找最近的可滚动祖先元素，也可以使用 `target` 属性指定触发滚动事件的元素，通过滑动来查看页面右下角的正方形按钮。
+::: demo 回到顶部组件的默认样式，`lay-backtop` 会自动寻找最近的可滚动祖先元素，也可以使用 `target` 属性指定触发滚动事件的元素，通过滑动来查看页面右下角的正方形按钮。
 <template>
   <lay-backtop></lay-backtop>
 </template>
@@ -22,7 +22,7 @@
 
 :::title 自定义
 
-::: demo 回到顶部组件可自定义样式，限制宽高：50px \* 50px，<code>showHeight = 0</code> 将始终显示，<code>disabled</code> 属性禁用返回顶部。查看页面右下角的圆形按钮。
+::: demo 回到顶部组件可自定义样式，限制宽高：50px \* 50px，`showHeight = 0` 将始终显示，`disabled` 属性禁用返回顶部。查看页面右下角的圆形按钮。
 
 <template>
   <!-- 使用默认插槽自定义 -->
@@ -59,7 +59,7 @@ export default {
 ::: title 挂载容器
 
 :::
-::: demo 通过设置 <code>target</code> 和 <code>position="absolute"</code>参数，可对特定容器进行返回顶部操作
+::: demo 通过设置 `target` 和 `position="absolute"` 参数，可对特定容器进行返回顶部操作
 
 <template>
 <!-- 需要用一个 div 包裹触发滚动事件的目标元素和 lay-backtop 组件 -->
@@ -72,6 +72,14 @@ export default {
 </template>
 
 <script>
+export default {
+  setup() {
+    
+    return {
+      
+    }
+  }
+}
 </script>
 
 :::
