@@ -29,7 +29,11 @@
     "build:types": "rimraf types && tsc -d",
     "build:example": "vite build example",
     "lint:eslint": "eslint 'src/**/*.{vue,ts,tsx}' --fix",
-    "lint:prettier": "prettier --write  'src/**/*'"
+    "lint:prettier": "prettier --write \"src/**/*\"",
+    "prepare": "husky install",
+    "postinstall": "npm run prepare",
+    "commit": "git-cz",
+    "commit:push": "git add . && git-cz && git push"
   },
   "dependencies": {
     "@layui/hooks-vue": "^0.1.6",
@@ -46,6 +50,8 @@
     "@babel/core": "^7.15.8",
     "@babel/preset-env": "^7.15.8",
     "@babel/preset-typescript": "^7.15.0",
+    "@commitlint/cli": "^16.2.1",
+    "@commitlint/config-conventional": "^16.2.1",
     "@rollup/plugin-babel": "^5.3.0",
     "@types/markdown-it": "^12.2.3",
     "@types/markdown-it-container": "^2.0.4",
@@ -56,12 +62,13 @@
     "@vue/compiler-sfc": "^3.2.30",
     "@vue/server-renderer": "^3.2.30",
     "commitizen": "^4.2.4",
-    "cz-conventional-changelog": "3.3.0",
+    "cz-conventional-changelog": "^3.3.0",
     "escape-html": "^1.0.3",
     "eslint": "^8.5.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-vue": "^8.2.0",
+    "husky": "^7.0.4",
     "less": "^4.1.2",
     "markdown-it-container": "^3.0.0",
     "prettier": "^2.5.1",
@@ -81,5 +88,15 @@
     "current node",
     "last 2 versions and > 2%",
     "ie > 10"
-  ]
+  ],
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  }
 }
