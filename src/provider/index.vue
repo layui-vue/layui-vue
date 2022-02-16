@@ -63,7 +63,8 @@ watch(
     locals?.forEach((item: any) => {
       changeLocales(item.name, item.locale, item.merge);
     });
-  }, { immediate: true, deep: true}
+  },
+  { immediate: true, deep: true }
 );
 
 watch(

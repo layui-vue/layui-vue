@@ -12,11 +12,13 @@ export interface LayQuoteProps {
 }
 
 const props = defineProps<LayQuoteProps>();
-
 </script>
 
 <template>
-  <blockquote class="layui-quote" :class="[type ? `layui-quote-${props.type}` : '']">
+  <blockquote
+    class="layui-quote"
+    :class="[type ? `layui-quote-${props.type}` : '']"
+  >
     <slot></slot>
   </blockquote>
 </template>

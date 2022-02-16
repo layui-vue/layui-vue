@@ -1,4 +1,4 @@
-.lay-split-panel{
+.lay-split-panel {
   height: 100%;
   display: flex;
   position: relative;
@@ -7,12 +7,12 @@
     flex-grow: 1;
     border: 1px #eeeeee solid;
   }
-  .lay-split-panel-item-move{
+  .lay-split-panel-item-move {
     user-select: none;
     pointer-events: none;
     cursor: col-resize;
   }
-  .lay-split-panel-line{
+  .lay-split-panel-line {
     height: 100%;
     width: 3px;
     border: 1px #eeeeee solid;
@@ -22,7 +22,7 @@
     cursor: col-resize;
     display: flex;
     align-items: center;
-    &:before{
+    &:before {
       content: "";
       height: 6px;
       width: 100%;
@@ -33,15 +33,15 @@
   }
 }
 
-.lay-split-panel-vertical{
+.lay-split-panel-vertical {
   flex-direction: column;
   position: relative;
-  .lay-split-panel-item-move{
+  .lay-split-panel-item-move {
     user-select: none;
     pointer-events: none;
     cursor: row-resize;
   }
-  .lay-split-panel-line{
+  .lay-split-panel-line {
     display: flex;
     justify-content: center;
     width: 100%;
@@ -51,7 +51,7 @@
     background-color: #fafafa;
     border-top: none;
     border-bottom: none;
-    &:before{
+    &:before {
       content: "";
       height: 100%;
       width: 6px;

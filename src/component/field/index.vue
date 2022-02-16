@@ -1,7 +1,7 @@
 <script lang="ts">
 export default {
-  name: "LayField"
-}
+  name: "LayField",
+};
 </script>
 
 <script setup lang="ts">
@@ -11,7 +11,7 @@ import { useSlots } from "vue";
 const slot = useSlots();
 
 export interface LayFieldProps {
-  title?: string;  
+  title?: string;
 }
 
 const props = defineProps<LayFieldProps>();

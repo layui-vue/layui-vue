@@ -1,7 +1,7 @@
 <script lang="ts">
 export default {
-  name: "LayCarouselItem"
-}
+  name: "LayCarouselItem",
+};
 </script>
 
 <script setup lang="ts">

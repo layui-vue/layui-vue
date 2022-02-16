@@ -1,7 +1,7 @@
 <script lang="ts">
 export default {
-  name: "LayRadio"
-}
+  name: "LayRadio",
+};
 </script>
 
 <script setup lang="ts">

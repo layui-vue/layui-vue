@@ -3,7 +3,7 @@
  * <p>
  * @param elem dom
  * */
-export function getTop(elem: any) : any {
+export function getTop(elem: any): any {
   return (
     elem.offsetTop + ((elem.offsetParent && getTop(elem.offsetParent)) || 0)
   );
@@ -14,7 +14,7 @@ export function getTop(elem: any) : any {
  * <p>
  * @param elem dom
  * */
-export function getLeft(elem: any) : any {
+export function getLeft(elem: any): any {
   return (
     elem.offsetLeft + ((elem.offsetParent && getLeft(elem.offsetParent)) || 0)
   );

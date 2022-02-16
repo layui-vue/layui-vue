@@ -13,9 +13,7 @@ export interface LayAvatarProps {
   radius?: boolean;
 }
 
-const props = withDefaults(defineProps<LayAvatarProps>(), {
-  
-});
+const props = withDefaults(defineProps<LayAvatarProps>(), {});
 </script>
 
 <template>

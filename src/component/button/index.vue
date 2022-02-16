@@ -31,11 +31,11 @@ const props = withDefaults(defineProps<LayButtonProps>(), {
 
 const emit = defineEmits(["click"]);
 
-const onClick = (event : any) => {
-  if(!props.disabled) {
+const onClick = (event: any) => {
+  if (!props.disabled) {
     emit("click", event);
   }
-}
+};
 
 const classes = computed(() => {
   return [

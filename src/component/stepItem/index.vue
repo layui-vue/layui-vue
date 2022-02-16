@@ -1,7 +1,7 @@
 <script lang="ts">
 export default {
-  name: "LayStepItem"
-}
+  name: "LayStepItem",
+};
 </script>
 
 <script setup lang="ts">
@@ -19,10 +19,10 @@ import {
 import type { ComputedRef } from "vue";
 
 export interface LayStepItemProps {
-    title?: string;
-    content?: string;
-    icon?: string;
-    status?: string;
+  title?: string;
+  content?: string;
+  icon?: string;
+  status?: string;
 }
 
 const props = withDefaults(defineProps<LayStepItemProps>(), {

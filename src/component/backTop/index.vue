@@ -5,13 +5,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import {
-  ref,
-  shallowRef,
-  withDefaults,
-  computed,
-  onMounted,
-} from "vue";
+import { ref, shallowRef, withDefaults, computed, onMounted } from "vue";
 import LayIcon from "../icon/index";
 import "./index.less";
 
@@ -50,15 +44,15 @@ let visible = ref(props.showHeight === 0);
 
 const classBacktop = computed(() => {
   return {
-    'layui-backtop-medium': props.size === "medium",
-    'layui-backtop-small': props.size === "small"
-  }
+    "layui-backtop-medium": props.size === "medium",
+    "layui-backtop-small": props.size === "small",
+  };
 });
 
 const borderRadius = computed(() => {
   if (props.circle) {
-    return "50%"
-  };
+    return "50%";
+  }
   return typeof props.borderRadius === "number"
     ? `${props.borderRadius}px`
     : props.borderRadius;
@@ -132,13 +126,15 @@ const getScrollTarget = () => {
     return getScrollParent(backtopRef.value!, false);
   } else {
     const targetElement = document.querySelector<HTMLElement>(props.target);
-    if (!targetElement){
+    if (!targetElement) {
       throw new Error(`target is not existed: ${props.target}`);
     }
     // 特定容器内部显示
     if (props.position === "absolute") {
-      if (!targetElement.parentElement){
-        throw new Error( `target parent element is not existed: ${props.target}`);
+      if (!targetElement.parentElement) {
+        throw new Error(
+          `target parent element is not existed: ${props.target}`
+        );
       }
       targetElement.parentElement.style.position = "relative";
       // backtopRef.value!.style.position = props.position;
@@ -163,7 +159,9 @@ const getScrollParent = (
     if (excludeStaticParent && style.position === "static") {
       continue;
     }
-    if (overflowRegex.test(style.overflow + style.overflowY + style.overflowX)){
+    if (
+      overflowRegex.test(style.overflow + style.overflowY + style.overflowX)
+    ) {
       return parent;
     }
   }

@@ -6,7 +6,7 @@ export default {
 
 <script setup lang="ts">
 import { Ref, ref, watch, useSlots, computed } from "vue";
-import { useI18n } from 'vue-i18n';
+import { useI18n } from "vue-i18n";
 
 export interface LayPageProps {
   total: number;
@@ -116,7 +116,7 @@ watch(currentPage, function () {
       @click="prev()"
     >
       <slot v-if="slots.prev" name="prev"></slot>
-      <template v-else>{{ t('page.prev') }}</template>
+      <template v-else>{{ t("page.prev") }}</template>
     </a>
     <template v-if="showPage">
       <template v-for="index of totalPage" :key="index">
@@ -138,7 +138,7 @@ watch(currentPage, function () {
       @click="next()"
     >
       <slot v-if="slots.next" name="next"></slot>
-      <template v-else>{{ t('page.next') }}</template>
+      <template v-else>{{ t("page.next") }}</template>
     </a>
     <span v-if="showLimit" class="layui-laypage-limits">
       <select v-model="inlimit">

@@ -110,13 +110,7 @@ export interface LayColorPicker {
 
 const props = withDefaults(defineProps<LayColorPicker>(), {
   modelValue: { r: 217, g: 128, b: 95, a: 1 },
-  preset: [
-    "#009688",
-    "#1e9fff",
-    "#ffb800",
-    "#ff5722",
-    "#5fb878",
-  ]
+  preset: ["#009688", "#1e9fff", "#ffb800", "#ff5722", "#5fb878"],
 });
 
 const saturationValue = ref<null | HTMLElement>(null);

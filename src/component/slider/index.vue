@@ -6,19 +6,25 @@
       class="layui-slider-vrange"
       v-if="range"
     >
-        <lay-tooltip :content="'' + verticalRangeValue[1]" :is-can-hide="tooptipHide">
-            <div
-                :style="{ bottom: verticalRangeValue[1] + '%' }"
-                class="layui-slider-vertical-btn"
-            ></div>
-        </lay-tooltip>
-        <lay-tooltip :content="'' + verticalRangeValue[0]" :is-can-hide="tooptipHide">
-            <div
-                :style="{ bottom: verticalRangeValue[0] + '%' }"
-                class="layui-slider-vertical-btn"
-            ></div>
-        </lay-tooltip>
-        
+      <lay-tooltip
+        :content="'' + verticalRangeValue[1]"
+        :is-can-hide="tooptipHide"
+      >
+        <div
+          :style="{ bottom: verticalRangeValue[1] + '%' }"
+          class="layui-slider-vertical-btn"
+        ></div>
+      </lay-tooltip>
+      <lay-tooltip
+        :content="'' + verticalRangeValue[0]"
+        :is-can-hide="tooptipHide"
+      >
+        <div
+          :style="{ bottom: verticalRangeValue[0] + '%' }"
+          class="layui-slider-vertical-btn"
+        ></div>
+      </lay-tooltip>
+
       <div class="layui-slider-vertical-line"></div>
       <div
         :style="{
@@ -36,7 +42,7 @@
       :class="[props.disabled ? 'layui-slider-disabled' : '']"
       v-else
     >
-      <lay-tooltip :content="modelValue + ''"  :is-can-hide="tooptipHide">
+      <lay-tooltip :content="modelValue + ''" :is-can-hide="tooptipHide">
         <div
           :style="{ bottom: modelValue + '%' }"
           class="layui-slider-vertical-btn"
@@ -59,13 +65,13 @@
       class="layui-slider-srange"
       v-if="range"
     >
-      <lay-tooltip :content="rangeValue[0] + ''"  :is-can-hide="tooptipHide">
+      <lay-tooltip :content="rangeValue[0] + ''" :is-can-hide="tooptipHide">
         <div
           :style="{ left: rangeValue[0] + '%' }"
           class="layui-slider-btn-v"
         ></div>
       </lay-tooltip>
-      <lay-tooltip :content="rangeValue[1] + ''"  :is-can-hide="tooptipHide">
+      <lay-tooltip :content="rangeValue[1] + ''" :is-can-hide="tooptipHide">
         <div
           :style="{ left: rangeValue[1] + '%' }"
           class="layui-slider-btn-v"
@@ -112,15 +118,15 @@ import { on, off } from "evtd";
 import "./index.less";
 
 export interface LaySliderProps {
-    vertical?: boolean;
-    modelValue?: number | Array<number>;
-    min?: number;
-    max?: number;
-    step?: number;
-    disabled?: boolean;
-    range?: boolean;
-    verticalrange?: number[];
-    standardrange?: number[];
+  vertical?: boolean;
+  modelValue?: number | Array<number>;
+  min?: number;
+  max?: number;
+  step?: number;
+  disabled?: boolean;
+  range?: boolean;
+  verticalrange?: number[];
+  standardrange?: number[];
 }
 
 const emit = defineEmits(["update:modelValue"]);
@@ -302,7 +308,7 @@ const verticalRangeMove = (e: MouseEvent) => {
   emit("update:modelValue", verticalRangeValue.value);
 };
 
-function moveNeighbors(rate: number, rangeValues: any) { 
+function moveNeighbors(rate: number, rangeValues: any) {
   let d1 = Math.abs(rate - rangeValues.value[0]);
   let d2 = Math.abs(rate - rangeValues.value[1]);
   if (d1 > d2) {
@@ -341,7 +347,7 @@ function calcWithStep(
     }
 
     if (props.step === 0) val.value[idx] = Math.floor(rate);
-    
+
     if (Array.isArray(val.value)) {
       if (r < 0 && props.step !== 0) {
         val.value[idx] -= props.step;

@@ -1,7 +1,7 @@
 <script lang="ts">
 export default {
-  name: "LayMenuItem"
-}
+  name: "LayMenuItem",
+};
 </script>
 
 <script setup lang="ts">
@@ -9,7 +9,7 @@ import { inject, Ref, useSlots } from "vue";
 
 export interface LayMenuItemProps {
   id: string;
-  title?: string; 
+  title?: string;
 }
 
 const slots = useSlots();

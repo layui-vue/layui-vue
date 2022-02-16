@@ -15,7 +15,7 @@ export interface LayColProps {
   mdOffset?: string;
   xsOffset?: string;
   smOffset?: string;
-  lgOffset?: string; 
+  lgOffset?: string;
 }
 
 const props = defineProps<LayColProps>();
