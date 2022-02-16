@@ -49,7 +49,7 @@
           <li class="layui-col-sm24">
             <div class="alone">
               <a href="https://www.axured.cn/assets/axurefiles/d959191ea7d3a46378456fbd7d72f44f_215/start.html?#g=1&p=%E4%BD%9C%E5%93%81%E4%BB%8B%E7%BB%8D" target="_blank"
-                >axure - layui<cite>基于 layui 的 axure 原型库</cite></a
+                >layui - axure<cite>基于 layui 的 axure 原型库</cite></a
               >
             </div>
           </li>

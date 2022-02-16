@@ -85,6 +85,7 @@ export default {
 </script>
 
 <script setup lang="ts">
+import "./index.less";
 import { Ref, ref } from "vue";
 import { LayIconList as icons } from "@layui/icons-vue";
 

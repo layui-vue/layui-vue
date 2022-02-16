@@ -1,0 +1,160 @@
+@import "../../theme/variable.less";
+
+@icon-picker-border-radius: var(--icon-picker-border-radius);
+@icon-picker-checked-color: var(--icon-picker-checked-color);
+
+:root {
+    --icon-picker-border-radius: @global-border-radius;
+    --icon-picker-checked-color: @global-checked-color;
+}
+
+.layui-iconpicker {
+  position: relative;
+  height: 38px;
+  line-height: 38px;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: @icon-picker-border-radius;
+  cursor: pointer;
+}
+
+.layui-iconpicker .layui-inline {
+  height: 36px;
+  line-height: 36px;
+  vertical-align: top;
+}
+
+.layui-iconpicker-title {
+  padding-left: 5px;
+}
+
+.layui-iconpicker-main {
+  padding: 0 10px;
+}
+
+.layui-iconpicker-main .layui-icon {
+  font-size: 20px;
+}
+
+.layui-iconpicker-main .layui-inline {
+  vertical-align: top;
+}
+
+.layui-iconpicker-split .layui-iconpicker-main {
+  padding: 0 15px;
+  border-right-width: 1px;
+  border-right-style: solid;
+}
+
+.layui-iconpicker-suffix {
+  position: relative;
+  width: 35px;
+  text-align: center;
+}
+
+.layui-iconpicker-suffix .layui-icon {
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.5);
+  transition: all 0.3s;
+}
+
+.layui-iconpicker-down .layui-iconpicker-suffix .layui-icon-down {
+  transform: rotate(180deg);
+}
+
+.layui-iconpicker-none {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.layui-iconpicker-search {
+  padding: 10px;
+  box-shadow: 0 2px 8px #f0f1f2;
+  border-bottom: 1px solid whitesmoke;
+}
+
+.layui-iconpicker-list {
+  padding: 10px 10px 5px;
+}
+
+.layui-iconpicker-list ul {
+  width: 262px;
+  margin-right: -6px;
+}
+
+.layui-iconpicker-list li {
+  display: inline-block;
+  vertical-align: top;
+  width: 60px;
+  margin: 0 5px 5px 0;
+  padding: 5px;
+  border: 1px solid #eee;
+  border-radius: 2px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.layui-iconpicker-list li:hover {
+  background-color: #fafafa;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.layui-iconpicker-list li.layui-this {
+  border-color: @icon-picker-checked-color;
+  color: @icon-picker-checked-color;
+}
+
+.layui-iconpicker-list li .layui-icon {
+  font-size: 20px;
+}
+
+.layui-iconpicker-list li .layui-elip {
+  margin-top: 2px;
+  line-height: 20px;
+  font-size: 12px;
+}
+
+.layui-iconpicker-list .layui-none {
+  margin: 30px 0 35px;
+}
+
+.layui-iconpicker-scroll .layui-iconpicker-list {
+  max-height: 220px;
+  overflow: auto;
+}
+
+.layui-iconpicker-page {
+  position: relative;
+  padding: 10px 10px 5px;
+  border-top: 1px solid #eee;
+  text-align: right;
+}
+
+.layui-iconpicker-page .layui-laypage {
+  margin: 0;
+}
+
+.layui-iconpicker-page .layui-laypage a,
+.layui-iconpicker-page .layui-laypage span {
+  padding: 0 10px;
+  color: #666;
+}
+
+.layui-iconpicker-page .layui-laypage-count {
+  position: absolute;
+  left: 10px;
+}
+
+.layui-iconpicker-page .layui-laypage-curr .layui-laypage-em {
+  background: 0 0;
+}
+
+.layui-iconpicker-page .layui-laypage-curr em {
+  color: #666;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.layui-iconpicker-page .layui-laypage-first,
+.layui-iconpicker-page .layui-laypage-last,
+.layui-iconpicker-page .layui-laypage-spr {
+  display: none;
+}
