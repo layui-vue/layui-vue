@@ -1,12 +1,12 @@
 <script lang="ts">
 export default {
-  name: "LayLine"
-}
+  name: "LayLine",
+};
 </script>
 
 <script setup lang="ts">
 export interface LayLineProps {
-  theme?: string; 
+  theme?: string;
 }
 
 const props = defineProps<LayLineProps>();

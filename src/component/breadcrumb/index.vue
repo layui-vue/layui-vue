@@ -8,14 +8,12 @@ export default {
 import { provide, withDefaults } from "vue";
 
 export interface LayBreadcrumbProps {
-    separator?: string;
+  separator?: string;
 }
 
-const props = withDefaults(defineProps<LayBreadcrumbProps>(),
-  {
-    separator: "/",
-  }
-);
+const props = withDefaults(defineProps<LayBreadcrumbProps>(), {
+  separator: "/",
+});
 
 provide("separator", props.separator);
 </script>

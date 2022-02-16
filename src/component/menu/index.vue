@@ -1,7 +1,7 @@
 <script lang="ts">
 export default {
-  name: "LayMenu"
-}
+  name: "LayMenu",
+};
 </script>
 
 <script setup lang="ts">
@@ -23,9 +23,9 @@ const props = withDefaults(defineProps<LayMenuProps>(), {
   selectedKey: "",
   openKeys: () => [],
   tree: false,
-  theme: 'dark',
+  theme: "dark",
   inverted: false,
-  level: false
+  level: false,
 });
 
 const isTree = computed(() => props.tree);
@@ -54,7 +54,15 @@ provide("openKeys", openKeys);
 </script>
 
 <template>
-  <ul class="layui-nav" :class="[level? 'level':'',inverted ? 'inverted':'',tree ? 'layui-nav-tree' : '', theme === 'dark' ? 'layui-nav-dark':'layui-nav-light' ]">
+  <ul
+    class="layui-nav"
+    :class="[
+      level ? 'level' : '',
+      inverted ? 'inverted' : '',
+      tree ? 'layui-nav-tree' : '',
+      theme === 'dark' ? 'layui-nav-dark' : 'layui-nav-light',
+    ]"
+  >
     <slot></slot>
   </ul>
 </template>

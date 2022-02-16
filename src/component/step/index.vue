@@ -1,26 +1,21 @@
 <script lang="ts">
 export default {
-  name: "LayStep"
-}
+  name: "LayStep",
+};
 </script>
 
 <script setup lang="ts">
-import {
-  ref,
-  watch,
-  provide,
-  withDefaults,
-} from "vue";
+import { ref, watch, provide, withDefaults } from "vue";
 import "./index.less";
 
 export interface LayStepProps {
-    active?: number;
-    center?: boolean;
-    direction?: string;
-    space?: string;
-    currentStatus?: string;
-    composition?: string;
-    simple?: boolean;
+  active?: number;
+  center?: boolean;
+  direction?: string;
+  space?: string;
+  currentStatus?: string;
+  composition?: string;
+  simple?: boolean;
 }
 
 const props = withDefaults(defineProps<LayStepProps>(), {

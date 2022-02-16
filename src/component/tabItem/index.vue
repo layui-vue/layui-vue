@@ -8,17 +8,14 @@ export default {
 import { withDefaults, inject, Ref } from "vue";
 
 export interface LayTabItemProps {
-    id: string;
-    title: string;
-    closable?: boolean | string;  
+  id: string;
+  title: string;
+  closable?: boolean | string;
 }
 
-const props = withDefaults(
-  defineProps<LayTabItemProps>(),
-  {
-    closable: true,
-  }
-);
+const props = withDefaults(defineProps<LayTabItemProps>(), {
+  closable: true,
+});
 
 const active = inject("active");
 const slotsChange: Ref<boolean> = inject("slotsChange") as Ref<boolean>;

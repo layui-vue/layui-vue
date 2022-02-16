@@ -12,5 +12,5 @@ export interface SelectItemHandle {
 }
 
 export interface SelectItemPush {
-  (selectItem: SelectItem): void
+  (selectItem: SelectItem): void;
 }

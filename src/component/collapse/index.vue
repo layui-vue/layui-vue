@@ -1,28 +1,21 @@
 <script lang="ts">
 export default {
-  name:"LayCollapse"
-}
+  name: "LayCollapse",
+};
 </script>
 
 <script setup lang="ts">
-import {
-  withDefaults,
-  provide,
-  ref,
-  watch,
-} from "vue";
+import { withDefaults, provide, ref, watch } from "vue";
 
 export interface LayCollapseProps {
-    modelValue?: number | string | [];
-    accordion?: boolean;
+  modelValue?: number | string | [];
+  accordion?: boolean;
 }
 
-const props = withDefaults(defineProps<LayCollapseProps>(),
-  {
-    modelValue: () => [],
-    accordion: false,
-  }
-);
+const props = withDefaults(defineProps<LayCollapseProps>(), {
+  modelValue: () => [],
+  accordion: false,
+});
 
 // 监听传入的值
 watch(

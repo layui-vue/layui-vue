@@ -12,8 +12,8 @@
 
 <script lang="ts">
 export default {
-  name: "LayBreadcrumbItem"
-}
+  name: "LayBreadcrumbItem",
+};
 </script>
 
 <script setup lang="ts">

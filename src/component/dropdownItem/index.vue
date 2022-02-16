@@ -1,7 +1,7 @@
 <script lang="ts">
 export default {
-  name: "LayDropdownItem"
-}
+  name: "LayDropdownItem",
+};
 </script>
 
 <script setup lang="ts">

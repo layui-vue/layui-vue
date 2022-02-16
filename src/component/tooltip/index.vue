@@ -9,7 +9,7 @@ import { defineComponent, ref } from "vue";
 export default defineComponent({
   name: "LayTooltip",
   components: {
-    LayPopper
+    LayPopper,
   },
   props: {
     content: {
@@ -33,19 +33,19 @@ export default defineComponent({
       default: true,
     },
   },
-  setup(){
+  setup() {
     const isMounted = ref(false);
     return {
-      isMounted
-    }
+      isMounted,
+    };
   },
   computed: {
-    innerProps(){
-      return {el: this.$el.nextElementSibling, ...this.$props};
-    }
+    innerProps() {
+      return { el: this.$el.nextElementSibling, ...this.$props };
+    },
   },
   mounted() {
-    this.$nextTick(() => this.isMounted = true);
-  }
+    this.$nextTick(() => (this.isMounted = true));
+  },
 });
 </script>

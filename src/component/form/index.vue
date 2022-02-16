@@ -7,33 +7,27 @@ export default {
 <script setup lang="ts">
 import { toRefs, provide, reactive, onMounted } from "vue";
 import { Rule, ValidateError, ValidateMessages } from "async-validator";
-import {
-  LayFormItemContext,
-  FormCallback,
-  modelType,
-} from "../../types/form";
+import { LayFormItemContext, FormCallback, modelType } from "../../types/form";
 
 export interface LayFormProps {
-    model?: modelType;
-    required?: boolean;
-    rules?: Rule;
-    initValidate?: boolean;
-    requiredIcons?: string;
-    requiredErrorMessage?: string;
-    validateMessage?: ValidateMessages;
-    useCN?: boolean;
+  model?: modelType;
+  required?: boolean;
+  rules?: Rule;
+  initValidate?: boolean;
+  requiredIcons?: string;
+  requiredErrorMessage?: string;
+  validateMessage?: ValidateMessages;
+  useCN?: boolean;
 }
 
-const props = withDefaults(defineProps<LayFormProps>(),
-  {
-    model: function () {
-      return {};
-    },
-    useCN: true,
-    requiredIcons: "",
-    initValidate: false,
-  }
-);
+const props = withDefaults(defineProps<LayFormProps>(), {
+  model: function () {
+    return {};
+  },
+  useCN: true,
+  requiredIcons: "",
+  initValidate: false,
+});
 
 const formItems: LayFormItemContext[] = [];
 const formItemMap: { [key: string]: LayFormItemContext } = {};
@@ -144,7 +138,7 @@ const addField = function (item: LayFormItemContext) {
 defineExpose({ validate, clearValidate, reset });
 
 provide(
-  'LayForm',
+  "LayForm",
   reactive({
     formItems,
     addField,

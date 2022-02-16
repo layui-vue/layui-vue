@@ -1,23 +1,21 @@
 <script lang="ts">
 export default {
-  name:"LayCollapseItem"
-}
+  name: "LayCollapseItem",
+};
 </script>
 
 <script setup lang="ts">
 import { withDefaults, inject, computed, ref } from "vue";
 
 export interface LayCollapseItemProps {
-    id: number | string;
-    title: string;
-    disabled?: boolean;  
+  id: number | string;
+  title: string;
+  disabled?: boolean;
 }
 
-const props = withDefaults(defineProps<LayCollapseItemProps>(),
-  {
-    disabled: false,
-  }
-);
+const props = withDefaults(defineProps<LayCollapseItemProps>(), {
+  disabled: false,
+});
 
 const { accordion, activeValues, emit } = inject("layCollapse") as any;
 
