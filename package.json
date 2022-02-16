@@ -29,7 +29,7 @@
     "build:types": "rimraf types && tsc -d",
     "build:example": "vite build example",
     "lint:eslint": "eslint 'src/**/*.{vue,ts,tsx}' --fix",
-    "lint:prettier": "prettier --write \"src/**/*\"",
+    "lint:prettier": "prettier --write \"src/**/*.{vue,ts}\"",
     "prepare": "husky install",
     "postinstall": "npm run prepare",
     "commit": "git-cz",
