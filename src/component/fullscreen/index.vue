@@ -118,14 +118,18 @@ async function enter(targetEl: HTMLElement | undefined) {
   let fullscreenEnter = null;
   if (props.immersive) {
     // @ts-ignore
-    fullscreenEnter = Promise.resolve(targetEl[fullscreenAPI.requestFullscreen]());
+    fullscreenEnter = Promise.resolve(
+      targetEl[fullscreenAPI.requestFullscreen]()
+    );
   } else {
     styleLayFullscreen(targetEl, false);
-    fullscreenEnter = Promise.resolve(targetEl?.classList.add('layui-fullscreen'));
+    fullscreenEnter = Promise.resolve(
+      targetEl?.classList.add("layui-fullscreen")
+    );
   }
   return await fullscreenEnter?.then(() => {
     isFullscreen.value = true;
-    emit('fullscreenchange', isFullscreen.value);
+    emit("fullscreenchange", isFullscreen.value);
     return !!document.fullscreenElement;
   });
 }
@@ -144,11 +148,13 @@ async function exit(targetEl: HTMLElement | Document | undefined) {
   } else {
     if (targetEl instanceof Document) return;
     styleLayFullscreen(targetEl, true);
-    fullscreenExit = Promise.resolve(targetEl?.classList.remove('layui-fullscreen'))
+    fullscreenExit = Promise.resolve(
+      targetEl?.classList.remove("layui-fullscreen")
+    );
   }
   return await fullscreenExit?.then(() => {
     isFullscreen.value = false;
-    emit('fullscreenchange', isFullscreen.value);
+    emit("fullscreenchange", isFullscreen.value);
     return !!document.fullscreenElement;
   });
 }
@@ -158,28 +164,31 @@ async function exit(targetEl: HTMLElement | Document | undefined) {
  */
 async function toggle() {
   if (isFullscreen.value) {
-    await exit(activeEl.value)
+    await exit(activeEl.value);
   } else {
-    await enter(activeEl.value)
-  };
+    await enter(activeEl.value);
+  }
 }
 
 /**
- * 
+ *
  * @param el HTML 元素
  * @param isRemove 是否移除样式
  */
-const styleLayFullscreen = function (el: HTMLElement, isRemove: boolean = false) {
-  el.style.position = isRemove ? "" : (props.position || "");
-  el.style.zIndex = isRemove ? "" : (props.zIndex || "");
+const styleLayFullscreen = function (
+  el: HTMLElement,
+  isRemove: boolean = false
+) {
+  el.style.position = isRemove ? "" : props.position || "";
+  el.style.zIndex = isRemove ? "" : props.zIndex || "";
   // 实验内容
   // el.style.top = isRemove ? "" : (props.top || "");
   // el.style.left = isRemove ? "" : (props.left || "");
   // el.style.width = isRemove ? "" : (props.width || "");
   // el.style.height = isRemove ? "" : (props.height || "");
-}
+};
 
-const activeEl = computed(() => targetEl.value = props.target);
+const activeEl = computed(() => (targetEl.value = props.target));
 
 /**
  * 处理 fullscreenchange 和浏览器窗口内全屏 Escape 按键事件
@@ -189,26 +198,32 @@ const onFullscreenchange = function (event: KeyboardEvent) {
   if (isFullscreen.value && !document.fullscreenElement) {
     if (props.immersive) {
       isFullscreen.value = false;
-      emit('fullscreenchange', isFullscreen.value);
-    } else if (event.key === 'Escape') {
+      emit("fullscreenchange", isFullscreen.value);
+    } else if (event.key === "Escape") {
       exit(activeEl.value);
     }
   }
-}
+};
 
 onMounted(() => {
   //@ts-ignore
   document.addEventListener(fullscreenAPI.fullscreenchange, onFullscreenchange);
-  document.addEventListener('keydown', onFullscreenchange);
+  document.addEventListener("keydown", onFullscreenchange);
 });
 
 onBeforeUnmount(() => {
   //@ts-ignore
   document.addEventListener(fullscreenAPI.fullscreenchange, onFullscreenchange);
-  document.addEventListener('keydown', onFullscreenchange);
+  document.addEventListener("keydown", onFullscreenchange);
 });
 </script>
 
 <template>
-  <slot name="default" :isFullscreen="isFullscreen" :enter="enter" :exit="exit" :toggle="toggle"></slot>
+  <slot
+    name="default"
+    :isFullscreen="isFullscreen"
+    :enter="enter"
+    :exit="exit"
+    :toggle="toggle"
+  ></slot>
 </template>
