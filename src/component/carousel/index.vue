@@ -1,17 +1,11 @@
 <script lang="ts">
 export default {
-  name: "LayCarousel"
-}
+  name: "LayCarousel",
+};
 </script>
 
 <script setup lang="ts">
-import {
-  withDefaults,
-  provide,
-  useSlots,
-  ref,
-  computed,
-} from "vue";
+import { withDefaults, provide, useSlots, ref, computed } from "vue";
 
 const slot = useSlots() as any;
 const slots = slot.default && (slot.default() as any[]);

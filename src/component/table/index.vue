@@ -5,13 +5,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import {
-  ref,
-  watch,
-  useSlots,
-  withDefaults,
-  onMounted,
-} from "vue";
+import { ref, watch, useSlots, withDefaults, onMounted } from "vue";
 import { Recordable } from "../../types";
 import { guid } from "../../utils/guidUtil";
 import LayCheckbox from "../checkbox";
@@ -23,25 +17,23 @@ import "./index.less";
 const tableId = guid();
 
 export interface LayTableProps {
-    id?: string;
-    skin?: string;
-    size?: string;
-    page?: Recordable;
-    checkbox?: boolean;
-    columns: Recordable[];
-    dataSource: Recordable[];
-    defaultToolbar?: boolean;
-    selectedKeys?: Recordable[];  
+  id?: string;
+  skin?: string;
+  size?: string;
+  page?: Recordable;
+  checkbox?: boolean;
+  columns: Recordable[];
+  dataSource: Recordable[];
+  defaultToolbar?: boolean;
+  selectedKeys?: Recordable[];
 }
 
-const props = withDefaults(defineProps<LayTableProps>(),
-  {
-    id: "id",
-    size: "md",
-    dataSource: () => [],
-    selectedKeys: () => [],
-  }
-);
+const props = withDefaults(defineProps<LayTableProps>(), {
+  id: "id",
+  size: "md",
+  dataSource: () => [],
+  selectedKeys: () => [],
+});
 
 const emit = defineEmits([
   "change",
@@ -114,11 +106,10 @@ let tableHeader = ref<HTMLElement | null>(null);
 let tableBody = ref<HTMLElement | null>(null);
 
 onMounted(() => {
-  tableBody.value?.addEventListener('scroll', () => {
-    tableHeader.value!.scrollLeft = tableBody.value?.scrollLeft || 0;  
-  })
-})
-
+  tableBody.value?.addEventListener("scroll", () => {
+    tableHeader.value!.scrollLeft = tableBody.value?.scrollLeft || 0;
+  });
+});
 </script>
 
 <template>

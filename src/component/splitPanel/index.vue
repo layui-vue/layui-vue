@@ -1,7 +1,7 @@
 <script lang="ts">
 export default {
-  name: "laySplitPanel"
-}
+  name: "laySplitPanel",
+};
 </script>
 
 <script setup lang="ts">
@@ -9,8 +9,8 @@ import { ref, watch, provide, withDefaults, onMounted } from "vue";
 import "./index.less";
 
 export interface LayStepProps {
-    vertical?: boolean;
-    minSize?: number;
+  vertical?: boolean;
+  minSize?: number;
 }
 
 const props = withDefaults(defineProps<LayStepProps>(), {

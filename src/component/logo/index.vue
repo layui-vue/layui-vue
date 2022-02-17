@@ -6,9 +6,8 @@
 
 <script lang="ts">
 export default {
-  name: "LayLogo"
-}
+  name: "LayLogo",
+};
 </script>
 
-<script setup lang="ts">
-</script>
+<script setup lang="ts"></script>

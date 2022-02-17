@@ -1,12 +1,12 @@
 <script lang="ts">
 export default {
-  name: "LayInput"
-}
+  name: "LayInput",
+};
 </script>
 
 <script setup lang="ts">
-import "./index.less"
-import { useI18n } from 'vue-i18n'
+import "./index.less";
+import { useI18n } from "vue-i18n";
 
 const { t } = useI18n();
 
@@ -18,8 +18,7 @@ export interface LayInputProps {
   placeholder?: string;
 }
 
-const props = withDefaults(defineProps<LayInputProps>(), {
-});
+const props = withDefaults(defineProps<LayInputProps>(), {});
 
 const emit = defineEmits(["update:modelValue", "input", "focus", "blur"]);
 

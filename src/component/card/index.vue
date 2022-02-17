@@ -1,7 +1,7 @@
 <script lang="ts">
 export default {
-  name: "LayCard"
-}
+  name: "LayCard",
+};
 </script>
 
 <script setup lang="ts">

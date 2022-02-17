@@ -5,7 +5,15 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed, inject, onBeforeUnmount, ref, Ref, useSlots, watch } from "vue";
+import {
+  computed,
+  inject,
+  onBeforeUnmount,
+  ref,
+  Ref,
+  useSlots,
+  watch,
+} from "vue";
 
 export interface LaySubMenuProps {
   id: string;
@@ -36,23 +44,26 @@ const isOpen = computed(() => {
 const layuiNavChild = ref<HTMLElement>();
 const position = ref<String>();
 watch(isOpen, () => {
-  if (isOpen.value && position.value !== 'left-nav') {
+  if (isOpen.value && position.value !== "left-nav") {
     setTimeout(setPosition, 0);
   }
 });
-const setPosition = function() {
+const setPosition = function () {
   if (!isTree || !layuiNavChild.value) {
     return;
   }
   const offsetWidth = layuiNavChild.value.offsetWidth;
-  if (window.innerWidth < layuiNavChild.value.getBoundingClientRect().left + offsetWidth + 10) {
-    position.value = 'left-nav';
+  if (
+    window.innerWidth <
+    layuiNavChild.value.getBoundingClientRect().left + offsetWidth + 10
+  ) {
+    position.value = "left-nav";
   } else {
-    position.value = '';
+    position.value = "";
   }
-}
-window.addEventListener('resize', setPosition);
-onBeforeUnmount(()=>window.removeEventListener('resize', setPosition));
+};
+window.addEventListener("resize", setPosition);
+onBeforeUnmount(() => window.removeEventListener("resize", setPosition));
 </script>
 
 <template>

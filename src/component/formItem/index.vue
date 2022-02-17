@@ -1,7 +1,7 @@
 <script lang="ts">
 export default {
-  name: 'LayFormItem'
-}
+  name: "LayFormItem",
+};
 </script>
 
 <script setup lang="ts">
@@ -32,21 +32,19 @@ import Schema, {
 import cnValidateMessage from "./cnValidateMessage";
 
 export interface LayFormItemProps {
-    prop?: string;
-    mode?: string;
-    label?: string;
-    errorMessage?: string;
-    rules?: Rule;
-    required?: boolean;
+  prop?: string;
+  mode?: string;
+  label?: string;
+  errorMessage?: string;
+  rules?: Rule;
+  required?: boolean;
 }
 
-const props = withDefaults(defineProps<LayFormItemProps>(),
-  {
-    mode: "block",
-  }
-);
+const props = withDefaults(defineProps<LayFormItemProps>(), {
+  mode: "block",
+});
 
-const layForm = inject('LayForm', {} as LayFormContext);
+const layForm = inject("LayForm", {} as LayFormContext);
 const formItemRef = ref<HTMLDivElement>();
 const slotParent = ref<HTMLDivElement>();
 
