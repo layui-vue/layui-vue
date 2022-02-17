@@ -76,6 +76,7 @@ import LaySplitPanel from "./component/splitPanel/index";
 import LaySplitPanelItem from "./component/splitPanelItem/index";
 import LayException from "./component/exception/index";
 import LayResult from "./component/result/index";
+import LayFullscreen from "./component/fullscreen/index";
 import LayConfigProvider from "./provider";
 
 const components: Record<string, Component> = {
@@ -149,6 +150,7 @@ const components: Record<string, Component> = {
   LaySubMenu,
   LayException,
   LayResult,
+  LayFullscreen,
   LayConfigProvider,
 };
 
@@ -231,6 +233,7 @@ export {
   LaySubMenu,
   LayException,
   LayResult,
+  LayFullscreen,
   LayConfigProvider,
 };
 

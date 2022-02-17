@@ -27,6 +27,12 @@ const menus = [
         subTitle: "animation",
         path: "/zh-CN/components/animation",
       },
+      {
+        id: 101,
+        title: "全屏",
+        subTitle: "fullscreen",
+        path: "/zh-CN/components/fullscreen",
+      },
     ],
   },
   {
@@ -308,7 +314,7 @@ const menus = [
         title: "异常",
         subTitle: "exception",
         path: "/zh-CN/components/exception",
-      },      
+      },
       {
         id: 100,
         title: "结果",
