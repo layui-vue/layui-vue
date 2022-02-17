@@ -4,7 +4,7 @@ import "./theme/index.less";
 import "@layui/layer-vue/lib/index.css";
 import "@layui/icons-vue/lib/index.css";
 import { layer, useLayer } from "@layui/layer-vue";
-import i18n from "./locales";
+import i18n from "./language";
 
 import LayLayer from "./component/layer/index";
 import LayBacktop from "./component/backTop/index";
