@@ -335,9 +335,15 @@ const zhCN = [
             path: "/zh-CN/components/exception",
             component: () => import("../../docs/zh-CN/components/exception.md"),
             meta: { title: "异常" },
-          },          {
+          },
+          {
             path: "/zh-CN/components/result",
             component: () => import("../../docs/zh-CN/components/result.md"),
+            meta: { title: "结果" },
+          },
+          {
+            path: "/zh-CN/components/fullscreen",
+            component: () => import("../../docs/zh-CN/components/fullscreen.md"),
             meta: { title: "结果" },
           },
         ],
