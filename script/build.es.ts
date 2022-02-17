@@ -3,7 +3,7 @@ import vue from '@vitejs/plugin-vue'
 import { resolve } from 'path'
 import * as fs from 'fs'
 
-const inputDir = resolve(__dirname, './src/component')
+const inputDir = resolve(process.cwd(), './src/component')
 
 const inputsArray = fs.readdirSync(inputDir).filter((name) => {
   const componentDir = resolve(inputDir, name)
@@ -12,11 +12,11 @@ const inputsArray = fs.readdirSync(inputDir).filter((name) => {
 })
 
 const inputs = inputsArray.reduce((backObj, pkgName) => {
-  backObj[pkgName] = resolve(__dirname, `./src/component/${pkgName}/index.ts`)
+  backObj[pkgName] = resolve(process.cwd(), `./src/component/${pkgName}/index.ts`)
   return backObj
 }, {})
 
-inputs['index'] = resolve(__dirname, './src/index.ts')
+inputs['index'] = resolve(process.cwd(), './src/index.ts')
 
 export default (): UserConfigExport => {
   return {
@@ -25,7 +25,7 @@ export default (): UserConfigExport => {
       alias: [
         {
           find: '@',
-          replacement: resolve(__dirname, './')
+          replacement: resolve(process.cwd(), './')
         }
       ]
     },

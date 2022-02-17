@@ -9,7 +9,7 @@ export default (): UserConfigExport => {
       alias: [
         {
           find: '@',
-          replacement: resolve(__dirname, './')
+          replacement: resolve(process.cwd(), './')
         }
       ]
     },
@@ -21,7 +21,7 @@ export default (): UserConfigExport => {
       outDir: 'lib',
       emptyOutDir: true,
       lib: {
-        entry: resolve(__dirname, './src/index.ts'),
+        entry: resolve(process.cwd(), './src/index.ts'),
         name: 'layui-vue',
         formats: ['es'],
         fileName: (name) => `index.js`
