@@ -26,6 +26,9 @@
             <router-link to="/zh-CN/environment"> {{ t('nav.environment') }} </router-link>
           </li>
           <li class="layui-nav-item">
+            <router-link to="/zh-CN/material"> {{ t('nav.material') }} </router-link>
+          </li>
+          <li class="layui-nav-item">
             <lay-form>
               <lay-search :datas="menus" />
             </lay-form>

@@ -3,6 +3,7 @@ export default {
         home:"Home",
         guide: "Guide",
         components: "Components",
-        environment: "Environment"
+        environment: "Environment",
+        material: "Material"
     }
 }

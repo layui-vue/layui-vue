@@ -119,6 +119,7 @@ async function enter(targetEl: HTMLElement | undefined) {
   if (props.immersive) {
     // @ts-ignore
     fullscreenEnter = Promise.resolve(
+      // @ts-ignore
       targetEl[fullscreenAPI.requestFullscreen]()
     );
   } else {

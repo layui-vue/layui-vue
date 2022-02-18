@@ -4,7 +4,7 @@ import Hooks from "../view/hooks.vue";
 import Guide from "../view/guide.vue";
 import Index from "../view/index.vue";
 import Environment from "../view/environment.vue";
-
+import Material from "../view/material.vue";
 const zhCN = [
   {
     path: "/",
@@ -21,6 +21,11 @@ const zhCN = [
         path: "/zh-CN/environment",
         component: Environment,
         meta: { title: "生态" },
+      },
+      {
+        path: "/zh-CN/material",
+        component: Material,
+        meta: { title: "物料" },
       },
       {
         path: "/zh-CN/guide",
@@ -62,7 +67,7 @@ const zhCN = [
             path: "/zh-CN/guide/locale",
             component: () => import("../../docs/zh-CN/guide/locale.md"),
             meta: { title: "语言" },
-          }
+          },
         ],
       },
       {
@@ -343,11 +348,12 @@ const zhCN = [
           },
           {
             path: "/zh-CN/components/fullscreen",
-            component: () => import("../../docs/zh-CN/components/fullscreen.md"),
+            component: () =>
+              import("../../docs/zh-CN/components/fullscreen.md"),
             meta: { title: "结果" },
           },
         ],
-      }
+      },
     ],
   },
 ];
