@@ -7,13 +7,46 @@
 ::: demo
 
 <template>
-  <lay-color-picker></lay-color-picker>
+  <lay-color-picker v-model="color"></lay-color-picker>
 </template>
 
 <script>
+import { ref } from "vue";
+
 export default {
   setup() {
+    const color = ref("#009688");
+
     return {
+      color
+    }
+  }
+}
+</script>
+
+:::
+
+::: title 预设颜色
+:::
+
+::: demo
+
+<template>
+  <lay-color-picker v-model="color" :preset="preset"></lay-color-picker>
+</template>
+
+<script>
+import { ref } from "vue";
+
+export default {
+  setup() {
+    const color = ref("#009688");
+
+    const preset = ref(["#009688", "#1e9fff", "#ffb800", "#ff5722", "#5fb878"])
+
+    return {
+      color,
+      preset
     }
   }
 }
@@ -28,9 +61,8 @@ export default {
 
 |            |          |     |
 | ---------- | -------- | --- |
-| v-model    | 默认值   | --  |
-| page       | 开启分页 | --  |
-| showSearch | 启用搜索 | --  |
+| v-model    | 选中色   | --  |
+| preset | 预设颜色 | --  |
 
 :::
 
