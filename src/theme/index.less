@@ -1925,23 +1925,18 @@ a cite {
   left: 0;
   z-index: 899;
   min-width: 100%;
-  max-height: 360px;
+  //max-height: 360px;
   overflow-y: auto;
   background-color: #fff;
   box-sizing: border-box;
 }
-.layui-dropdown dl::before {
-  content: " ";
-  display: block;
-  height: 4px;
-  width: 100%;
-}
+
 .layui-dropdown dl > .layui-dropdown-menu {
   border: 1px solid #eee;
   border-radius: @global-border-radius;
 }
 
-.layui-dropdown-up dl {
+.layui-dropdown-up > dl {
   display: block;
 }
 
@@ -2619,11 +2614,9 @@ body .layui-util-face .layui-layer-content {
 }
 
 .layui-colorpicker {
-  width: 26px;
-  height: 26px;
   border: 1px solid #eee;
   padding: 5px;
-  border-radius: 2px;
+  border-radius: @global-border-radius;
   line-height: 24px;
   display: inline-block;
   cursor: pointer;
@@ -2664,7 +2657,7 @@ body .layui-util-face .layui-layer-content {
   height: 100%;
   box-sizing: border-box;
   border: 1px solid rgba(0, 0, 0, 0.15);
-  border-radius: 2px;
+  border-radius: @global-border-radius;
   text-align: center;
 }
 

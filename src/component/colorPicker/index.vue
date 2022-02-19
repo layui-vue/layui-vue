@@ -101,7 +101,7 @@ import "./index.less";
 import LayDropdown from "../dropdown/index.vue";
 import { ref, computed, watch, onMounted } from "vue";
 
-const emit = defineEmits(["update:color"]);
+const emit = defineEmits(["update:modelValue"]);
 
 export interface LayColorPicker {
   modelValue?: any;
@@ -128,7 +128,6 @@ let value = ref(1);
 let red = ref(255);
 let green = ref(0);
 let blue = ref(0);
-
 let alpha = ref(1);
 
 onMounted(() => {
@@ -140,12 +139,11 @@ onMounted(() => {
 });
 
 watch([red, green, blue], (newValue) => {
-  emit("update:color", {
-    r: red.value,
-    g: green.value,
-    b: blue.value,
-    a: alpha.value,
-  });
+  
+  emit("update:modelValue", rgba2hex(red.value,
+    green.value,
+    blue.value,
+    alpha.value));
 
   let { h, s, v } = rgb2hsv(red.value, green.value, blue.value);
 
@@ -160,12 +158,10 @@ watch([red, green, blue], (newValue) => {
 });
 
 watch(alpha, () => {
-  emit("update:color", {
-    r: red.value,
-    g: green.value,
-    b: blue.value,
-    a: alpha.value,
-  });
+  emit("update:modelValue", rgba2hex(red.value,
+    green.value,
+    blue.value,
+    alpha.value));
   // 移动透明度滑块
   alphaSliderStyle.value = `left: ${
     alpha.value >= 1 ? "calc(100% - 6px)" : alpha.value * 100 + "%"
@@ -351,9 +347,7 @@ function parseColor(color: any) {
     let r, g, b, a;
     if (typeof color === "string") {
       if (
-        /^#?([0-9a-fA-F]{6}|[0-9a-fA-F]{8}|[0-9a-fA-F]{3}|[0-9a-fA-F]{4})$/.test(
-          color
-        )
+        /^#?([0-9a-fA-F]{6}|[0-9a-fA-F]{8}|[0-9a-fA-F]{3}|[0-9a-fA-F]{4})$/.test(color)
       ) {
         return hex2rgba(color);
       }

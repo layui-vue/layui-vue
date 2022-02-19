@@ -1,9 +1,10 @@
 <template>
   <lay-config-provider
-    :theme="theme" 
+    :theme="theme"
     :locale="locale"
     :locales="locales"
-    :themeVariable="themeVariable">
+    :themeVariable="themeVariable"
+  >
     <lay-layout class="layui-layout-document">
       <lay-header
         ><lay-logo style="box-shadow: 0 0px 2px 0 rgba(0, 0, 0, 0.15)">
@@ -14,19 +15,25 @@
           style="margin-top: 0px; margin-bottom: 0px"
         >
           <li class="layui-nav-item">
-            <router-link to="/zh-CN/index"> {{ t('nav.home')}} </router-link>
+            <router-link to="/zh-CN/index"> {{ t("nav.home") }} </router-link>
           </li>
           <li class="layui-nav-item">
-            <router-link to="/zh-CN/guide"> {{ t('nav.guide')}} </router-link>
+            <router-link to="/zh-CN/guide"> {{ t("nav.guide") }} </router-link>
           </li>
           <li class="layui-nav-item">
-            <router-link to="/zh-CN/components"> {{ t('nav.components') }} </router-link>
+            <router-link to="/zh-CN/components">
+              {{ t("nav.components") }}
+            </router-link>
           </li>
           <li class="layui-nav-item">
-            <router-link to="/zh-CN/environment"> {{ t('nav.environment') }} </router-link>
+            <router-link to="/zh-CN/environment">
+              {{ t("nav.environment") }}
+            </router-link>
           </li>
           <li class="layui-nav-item">
-            <router-link to="/zh-CN/material"> {{ t('nav.material') }} </router-link>
+            <router-link to="/zh-CN/material">
+              {{ t("nav.material") }}
+            </router-link>
           </li>
           <li class="layui-nav-item">
             <lay-form>
@@ -39,12 +46,30 @@
           style="margin-top: 0px; margin-bottom: 0px"
         >
           <li class="layui-nav-item">
-            <a
-              href="https://layui-vue.gitee.io/layui-vue-playground"
-              target="_blank"
-            >
-              <lay-icon type="layui-icon-util" size="15px"></lay-icon>
-            </a>
+            <lay-dropdown>
+              <a href="javascript:void(0);">
+                <lay-icon
+                  type="layui-icon-theme"
+                  size="15px"
+                  style="
+                    color: rgba(255, 255, 255, 0.7);
+                    padding-left: 30px;
+                    padding-right: 30px;
+                  "
+                ></lay-icon>
+              </a>
+              <template #content>
+                <div style="width: 400px; padding:0px 10px 10px 10px;">
+                  <lay-color-picker v-model="themeVariable['--global-primary-color']"></lay-color-picker>&nbsp;
+                  <lay-color-picker v-model="themeVariable['--global-normal-color']"></lay-color-picker>&nbsp;
+                  <lay-color-picker v-model="themeVariable['--global-warm-color']"></lay-color-picker>&nbsp;
+                  <lay-color-picker v-model="themeVariable['--global-danger-color']"></lay-color-picker>&nbsp;
+                  <lay-color-picker v-model="themeVariable['--global-checked-color']"></lay-color-picker>&nbsp;
+                  <lay-input style="display:inline-block;width:150px;" v-model="themeVariable['--global-border-radius']"></lay-input>
+                  <lay-button fluid>导 出 配 置</lay-button>
+                </div>
+              </template>
+            </lay-dropdown>
           </li>
           <li class="layui-nav-item">
             <a href="https://gitee.com/layui-vue">
@@ -52,9 +77,21 @@
             </a>
           </li>
           <li class="layui-nav-item">
-            <a href="javascript:void(0)"> 
-              <lay-badge type="rim" class="layui-local-badge" v-if="locale === 'en_US'" @click="changeLocale('zh_CN')">中 文</lay-badge>
-              <lay-badge type="rim" class="layui-local-badge" v-else @click="changeLocale('en_US')">英 文</lay-badge>    
+            <a href="javascript:void(0)">
+              <lay-badge
+                type="rim"
+                class="layui-local-badge"
+                v-if="locale === 'en_US'"
+                @click="changeLocale('zh_CN')"
+                >中 文</lay-badge
+              >
+              <lay-badge
+                type="rim"
+                class="layui-local-badge"
+                v-else
+                @click="changeLocale('en_US')"
+                >英 文</lay-badge
+              >
             </a>
           </li>
           <li class="layui-nav-item">
@@ -72,26 +109,33 @@
   </lay-config-provider>
 </template>
 <script>
-import { ref, watch } from "vue";
+import { computed, ref, watch } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import menu from "../view/utils/menus";
-import { useI18n } from 'vue-i18n';
+import { useI18n } from "vue-i18n";
 import zh_CN from "../locales/zh_CN.ts";
 import en_US from "../locales/en_US.ts";
 export default {
   setup() {
-
-    const { t } = useI18n(); 
+    const { t } = useI18n();
     const route = useRoute();
     const router = useRouter();
-    const locale = ref('zh_CN');
+    const locale = ref("zh_CN");
     const currentPath = ref("/zh-CN/guide");
     const locales = [
-      {name:'zh_CN',locale: zh_CN, merge: true},
-      {name:'en_US',locale: en_US, merge: true},
+      { name: "zh_CN", locale: zh_CN, merge: true },
+      { name: "en_US", locale: en_US, merge: true },
     ];
+
     const theme = "light";
-    const themeVariable = {}
+    const themeVariable = ref({
+      "--global-primary-color": "#009688",
+      "--global-normal-color": "#1e9fff",
+      "--global-warm-color": "#ffb800",
+      "--global-danger-color": "#ff5722",
+      "--global-checked-color": "#5fb878",
+      "--global-border-radius": "2px"
+    });
 
     const menus = [];
 
@@ -101,17 +145,21 @@ export default {
       });
     });
 
-    watch(() => route.path, (val) => {
+    watch(
+      () => route.path,
+      (val) => {
         currentPath.value = val;
-      },{immediate: true, deep: true});
+      },
+      { immediate: true, deep: true }
+    );
 
     const handleClick = function (menu) {
       router.push(menu.path);
     };
 
-    const changeLocale = function(lang) {
+    const changeLocale = function (lang) {
       locale.value = lang;
-    }
+    };
 
     return {
       t,
@@ -122,14 +170,13 @@ export default {
       currentPath,
       handleClick,
       changeLocale,
-      themeVariable
+      themeVariable,
     };
   },
 };
 </script>
 
 <style>
-
 .layui-layout-document > .layui-header {
   z-index: 9999;
   width: 100%;
@@ -168,13 +215,13 @@ export default {
 .layui-header .layui-local-badge {
   font-size: 12.4px;
   background: transparent;
-  color:rgba(255, 255, 255, 0.7);
-  border-color:rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 0.7);
+  border-color: rgba(255, 255, 255, 0.7);
 }
 
 .layui-header > .layui-local:hover {
-  color:white;
-  border-color:white;
+  color: white;
+  border-color: white;
 }
 
 .layui-menu-docs {
