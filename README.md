@@ -32,6 +32,16 @@ Use npm to install.
 ```bash
 npm i @layui/layui-vue
 ```
+Before using, you need to mount layui Vue to Vue and introduce index.css style file
+
+```
+import App from './App.vue'
+import { createApp } from 'vue'
+import layui from '@layui/layui-vue'
+import '@layui/layui-vue/lib/index.css'
+
+createApp(App).use(layui).mount('#app')
+```
 
 We have several examples on the [website](http://layui-vue.pearadmin.com). Here is the first one to get you started:
 
