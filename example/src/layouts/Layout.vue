@@ -26,8 +26,8 @@
             </router-link>
           </li>
           <li class="layui-nav-item">
-            <router-link to="/zh-CN/environment">
-              {{ t("nav.environment") }}
+            <router-link to="/zh-CN/extend">
+              {{ t("nav.extend") }}
             </router-link>
           </li>
           <li class="layui-nav-item">
