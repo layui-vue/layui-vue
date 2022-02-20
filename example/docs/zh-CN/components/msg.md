@@ -15,9 +15,8 @@ import { layer } from "@layui/layer-vue"
 
 export default {
   setup() {
-
     const openMsg = function() {
-        layer.msg("普通消息", { time: 100000 })
+        layer.msg("普通消息", { time: 1000 })
     }
     return {
         openMsg
@@ -46,27 +45,21 @@ import { layer } from "@layui/layer-vue"
 
 export default {
   setup() {
-
     const openSuccess = function() {
         layer.msg("成功消息", { icon : 1, time: 100000})
     }
-
     const openFailure = function() {
         layer.msg("失败消息", { icon : 2, time: 1000})
     }
-
     const openWarning = function() {
         layer.msg("警告消息", { icon : 3, time: 1000})
     }
-
     const openPrimary = function() {
         layer.msg("详情消息", { icon : 4, time: 1000})
     }
-
     const openLoading = function() {
         layer.msg("加载消息", { icon : 16, time: 1000})
     }
-
     return {
         openSuccess, openFailure, openWarning, openPrimary, openLoading
     }

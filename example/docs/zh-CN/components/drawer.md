@@ -16,13 +16,10 @@ import { ref } from 'vue'
 
 export default {
   setup() {
-
     const visible = ref(false)
-
     const changeVisible = function() {
         visible.value = !visible.value;
     }
-
     return {
         visible,
         changeVisible
@@ -54,19 +51,14 @@ import { ref } from 'vue'
 
 export default {
   setup() {
-
     const visible1 = ref(false)
-
     const changeVisible1 = function() {
         visible1.value = !visible1.value;
     }
-
     const visible2 = ref(false)
-
     const changeVisible2 = function() {
         visible2.value = !visible2.value;
     }
-
     return {
         visible1,
         visible2,
@@ -94,14 +86,12 @@ import { layer } from "@layui/layer-vue"
 
 export default {
   setup() {
-
     const openDrawer = function() {
         layer.drawer({
             title: "标题",
             content: "内容"
         })
     }
-
     return {
         openDrawer
     }
@@ -129,7 +119,6 @@ import { layer } from "@layui/layer-vue"
 
 export default {
   setup() {
-
     const openTopDrawer = function() {
         layer.drawer({
             title: "标题",
@@ -137,7 +126,6 @@ export default {
             offset: "t"
         })
     }
-
     const openBottomDrawer = function() {
         layer.drawer({
             title: "标题",
@@ -145,7 +133,6 @@ export default {
             offset: "b"
         })
     }
-
     const openLeftDrawer = function() {
         layer.drawer({
             title: "标题",
@@ -153,7 +140,6 @@ export default {
             offset: "l"
         })
     }
-
     const openRightDrawer = function() {
         layer.drawer({
             title: "标题",
@@ -161,7 +147,6 @@ export default {
             offset: "r"
         })
     }
-
     return {
         openTopDrawer,
         openBottomDrawer,

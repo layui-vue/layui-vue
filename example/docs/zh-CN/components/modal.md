@@ -18,13 +18,10 @@ import { ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 export default {
   setup() {
-
     const visible1 = ref(false)
-
     const changeVisible1 = function() {
         visible1.value = !visible1.value
     }
-
     return {
         visible1
     };
@@ -51,13 +48,10 @@ import { ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 export default {
   setup() {
-
     const visible2 = ref(false)
-
     const changeVisible2 = function() {
         visible2.value = !visible2.value
     }
-
     return {
         visible2
     };
@@ -84,13 +78,10 @@ import { ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 export default {
   setup() {
-
     const visible3 = ref(false)
-
     const changeVisible3 = function() {
         visible3.value = !visible3.value
     }
-
     return {
         visible3
     };
@@ -117,13 +108,10 @@ import { ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 export default {
   setup() {
-
     const visible4 = ref(false)
-
     const changeVisible4 = function() {
         visible4.value = !visible4.value
     }
-
     return {
         visible4
     };
@@ -150,13 +138,10 @@ import { ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 export default {
   setup() {
-
     const visible8 = ref(false)
-
     const changeVisible8 = function() {
         visible8.value = !visible8.value
     }
-
     return {
         visible8
     };
@@ -181,14 +166,11 @@ import { ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 export default {
   setup() {
-
     const type5 = ref(2)
     const visible5 = ref(false)
-
     const changeVisible5 = function() {
         visible5.value = !visible5.value
     }
-
     return {
         type5,
         visible5
@@ -216,17 +198,14 @@ import { ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 export default {
   setup() {
-
     const visible6 = ref(false)
     const btn6 = [
         {text:'确认', callback: ()=>{ alert("确认事件") }},
         {text:'取消', callback: ()=>{ alert("取消事件") }}
     ]
-
     const changeVisible6 = function() {
         visible6.value = !visible6.value
     }
-
     return {
         btn6,
         visible6
@@ -254,13 +233,10 @@ import { ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 export default {
   setup() {
-
     const visible7 = ref(false)
-
     const changeVisible7 = function() {
         visible7.value = !visible7.value
     }
-
     return {
         visible7
     };
@@ -287,21 +263,16 @@ import { layer } from "@layui/layer-vue"
 import { useRoute, useRouter } from "vue-router";
 export default {
   setup() {
-
     let id = null;
-
     const open = function() {
       id = layer.open({title:"标题",content:"内容", shade: false})
     }
-
     const close = function() {
       layer.close(id)
     }
-
     const closeAll = function() {
       layer.closeAll()
     }
-
     return {
         open,
         close,
