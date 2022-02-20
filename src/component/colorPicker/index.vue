@@ -139,11 +139,10 @@ onMounted(() => {
 });
 
 watch([red, green, blue], (newValue) => {
-  
-  emit("update:modelValue", rgba2hex(red.value,
-    green.value,
-    blue.value,
-    alpha.value));
+  emit(
+    "update:modelValue",
+    rgba2hex(red.value, green.value, blue.value, alpha.value)
+  );
 
   let { h, s, v } = rgb2hsv(red.value, green.value, blue.value);
 
@@ -158,10 +157,10 @@ watch([red, green, blue], (newValue) => {
 });
 
 watch(alpha, () => {
-  emit("update:modelValue", rgba2hex(red.value,
-    green.value,
-    blue.value,
-    alpha.value));
+  emit(
+    "update:modelValue",
+    rgba2hex(red.value, green.value, blue.value, alpha.value)
+  );
   // 移动透明度滑块
   alphaSliderStyle.value = `left: ${
     alpha.value >= 1 ? "calc(100% - 6px)" : alpha.value * 100 + "%"
@@ -347,7 +346,9 @@ function parseColor(color: any) {
     let r, g, b, a;
     if (typeof color === "string") {
       if (
-        /^#?([0-9a-fA-F]{6}|[0-9a-fA-F]{8}|[0-9a-fA-F]{3}|[0-9a-fA-F]{4})$/.test(color)
+        /^#?([0-9a-fA-F]{6}|[0-9a-fA-F]{8}|[0-9a-fA-F]{3}|[0-9a-fA-F]{4})$/.test(
+          color
+        )
       ) {
         return hex2rgba(color);
       }
