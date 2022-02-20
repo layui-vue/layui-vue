@@ -13,7 +13,7 @@ export interface LayConfigProviderProps {
   locale?: string;
   locales?: [];
   theme?: string;
-  themeVariable?: object;
+  themeVariable?: any;
 }
 
 const props = withDefaults(defineProps<LayConfigProviderProps>(), {
@@ -82,6 +82,7 @@ watch(
   },
   { immediate: true, deep: true }
 );
+
 </script>
 
 <template>
