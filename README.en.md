@@ -13,7 +13,7 @@ An enterprise-class UI components based on Layui and Vue.
 
 **Run with code Sandbox.**
 
-[![Edit layui-vue](./sandbox.svg)](https://codesandbox.io/s/11mvy)
+[![Edit layui-vue](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/11mvy)
 
 ## Features
 
