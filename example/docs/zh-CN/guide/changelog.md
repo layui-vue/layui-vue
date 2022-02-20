@@ -23,7 +23,8 @@
           <li>[修复] dropdown 组件无法嵌套使用的问题。</li>
           <li>[修复] menu 组件导航模式菜单错位问题。 </li>
           <li>[修复] quote 引用的 nm 灰色主题失效。</li>
-          <li>[升级] icons-vue 1.0.5 版本。</li>
+          <li>[升级] icons-vue 1.0.6 版本。</li>
+          <li>[升级] layer-vue 1.3.4 版本。</li>
         </ul> 
       </li>
     </ul>
