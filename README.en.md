@@ -7,13 +7,13 @@
   <a href="https://coveralls.io/r/sentsin/layui?branch=master"><img alt="Test Coverage" src="https://img.shields.io/coveralls/sentsin/layui/master.svg"></a>
 </p>  
 
-**[🔶 Read Document](http://layui-vue.pearadmin.com)**
+**[🔶 Explore the docs »](http://layui-vue.pearadmin.com)**
 
 An enterprise-class UI components based on Layui and Vue.
 
 **Run with code Sandbox.**
 
-[![Edit layui-vue](./example/src/assets/sandbox.svg)](https://codesandbox.io/s/11mvy)
+[![Edit layui-vue](./sandbox.svg)](https://codesandbox.io/s/11mvy)
 
 ## Features
 
@@ -32,6 +32,7 @@ Use npm to install.
 ```bash
 npm i @layui/layui-vue
 ```
+
 We have several examples on the [website](http://layui-vue.pearadmin.com). Here is the first one to get you started:
 
 ```
@@ -48,6 +49,12 @@ Feel free to send us feedback on [file an issue](https://github.com/layui-vue/la
 
 If there's anything you'd like to chat about, please feel free to join our [Gitter chat](https://gitter.im/layui-vue/community)!
 
+## Build Process
+
+- `build` Packaged component library
+
+Please take a look at the [contributing guidelines](./CONTRIBUTING.md) for a detailed process on how to build your application as well as troubleshooting information.
+
 ## Contributors
 
 This project follows the [all-contributors](https://github.com/layui-vue/layui-vue/graphs/contributors) specification and is brought to you by these [awesome contributors](https://github.com/layui-vue/layui-vue/graphs/contributors).
@@ -55,12 +62,6 @@ This project follows the [all-contributors](https://github.com/layui-vue/layui-v
 <a href="https://github.com/layui-vue/layui-vue/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=layui-vue/layui-vue" />
 </a>
-
-## Build Process
-
-- `build` Packaged component library
-
-Please take a look at the [contributing guidelines](./CONTRIBUTING.md) for a detailed process on how to build your application as well as troubleshooting information.
 
 ## Backers 
 
