@@ -2,12 +2,12 @@
   <div class="alone-banner layui-bg-black">
     <div class="layui-main">
       <h1>物 料 市 场</h1>
-      <p class="layui-hide-xs">让 每 一 个 轮 子 产 生 价 值 ✨</p>
+      <p class="layui-hide-xs">让 每 一 个 轮 子 产 生 价 值 ✨<a style="color:white;">【投递】</a></p>
     </div>
   </div>
   <br />
   <div class="layui-container" style="width: 80%">
-    <div class="layui-row">
+    <div class="layui-row layui-col-space16">
       <div class="layui-col layui-col-md6">
         <div class="project-list-item">
           <img
@@ -18,7 +18,26 @@
           <div class="project-list-item-body">
             <h2>Sandbox</h2>
             <div class="project-list-item-text layui-text">
-              生命就像一盒巧克力，结果往往出人意料
+              生命就像一盒巧克力，结果往往出人意料。
+            </div>
+            <div class="project-list-item-desc">
+              <span class="time">几秒前</span>
+              <div class="ew-head-list"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+            <div class="layui-col layui-col-md6">
+        <div class="project-list-item">
+          <img
+            class="project-list-item-cover"
+            src="https://gw.alipayobjects.com/zos/rmsportal/iZBVOIhGJiAnhplqjvZW.png"
+          />
+
+          <div class="project-list-item-body">
+            <h2>Sandbox</h2>
+            <div class="project-list-item-text layui-text">
+              没有锚的船当然也可以航行，只是紧张充满你的一生。
             </div>
             <div class="project-list-item-desc">
               <span class="time">几秒前</span>
