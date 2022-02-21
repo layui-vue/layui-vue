@@ -2,7 +2,7 @@
   <div class="alone-banner layui-bg-black">
     <div class="layui-main">
       <h1>物 料 市 场</h1>
-      <p class="layui-hide-xs">让 每 一 个 轮 子 产 生 价 值 ✨<a style="color:white;">【投递】</a></p>
+      <p class="layui-hide-xs">让 每 一 个 轮 子 产 生 价 值 ✨<a style="color:white;" href="https://gitee.com/layui-vue/layui-vue/issues/new?issue%5Bassignee_id%5D=0&issue%5Bmilestone_id%5D=0">【投递】</a></p>
     </div>
   </div>
   <br />
