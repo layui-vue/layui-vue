@@ -14,7 +14,7 @@
     <ul> 
       <a name="0-3-8"> </a> 
       <li> 
-        <h3>0.3.8 <span class="layui-badge-rim">2022-02-14</span></h3> 
+        <h3>0.3.8 <span class="layui-badge-rim">2022-02-21</span></h3> 
         <ul> 
           <li>[新增] fullscreen 全屏组件。</li>
           <li>[新增] icon-picker 颜色选择器。</li>
@@ -23,8 +23,8 @@
           <li>[修复] dropdown 组件无法嵌套使用的问题。</li>
           <li>[修复] menu 组件导航模式菜单错位问题。 </li>
           <li>[修复] quote 引用的 nm 灰色主题失效。</li>
-          <li>[升级] icons-vue 1.0.6 版本。</li>
-          <li>[升级] layer-vue 1.3.4 版本。</li>
+          <li>[升级] icons-vue 1.0.7 版本。</li>
+          <li>[升级] layer-vue 1.3.5 版本。</li>
         </ul> 
       </li>
     </ul>
