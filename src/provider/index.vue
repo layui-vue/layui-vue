@@ -1,12 +1,12 @@
 <script lang="ts">
-import { watch } from "@vue/runtime-core";
-import { useI18n } from "vue-i18n";
 export default {
   name: "lay-config-provider",
 };
 </script>
 
 <script setup lang="ts">
+import { watch } from "vue";
+import { useI18n } from "vue-i18n";
 const { locale, setLocaleMessage, mergeLocaleMessage } = useI18n();
 
 export interface LayConfigProviderProps {

@@ -87,4 +87,4 @@ Layui vue is licensed under the [MIT license](https://opensource.org/licenses/MI
 
 ## About
 
-[web site](http://layui-vue.pearadmin.com/)、[change log](http://layui-vue.pearadmin.com/zh-CN/guide/changelog)、[community](https://jq.qq.com/?_wv=1027&k=ffiUQgnE)
+[web site](http://layui-vue.pearadmin.com/)、[change log](http://layui-vue.pearadmin.com/zh-CN/guide/changelog)、[交流群](https://jq.qq.com/?_wv=1027&k=ffiUQgnE)
