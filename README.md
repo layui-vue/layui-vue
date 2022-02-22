@@ -19,11 +19,11 @@ layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.
 
 A few of the things you can do with layui vue:
 
+* Up to 60 high quality components
 * Writing components using setup script
 * Provide Axure design resources
 * Support theme customization
 * Support internationalization
-* Use typescript to provide complete type definition
 
 ## 安装
 
@@ -81,6 +81,6 @@ Thank you to all our backers! 🙏 [[Become a backers](https://opencollective.co
 
 Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](https://opencollective.com/layui-vue#sponsor)]
 
-## 许可证
+## 开源
 
 Layui vue is licensed under the [MIT license](https://opensource.org/licenses/MIT).

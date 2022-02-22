@@ -20,10 +20,10 @@ An enterprise-class UI components based on Layui and Vue.
 A few of the things you can do with layui vue:
 
 * Writing components using setup script
+* Up to 60 high quality components
 * Provide Axure design resources
 * Support theme customization
 * Support internationalization
-* Use typescript to provide complete type definition
 
 ## Get Started
 
