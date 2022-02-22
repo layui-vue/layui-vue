@@ -78,6 +78,7 @@ import LayException from "./component/exception/index";
 import LayResult from "./component/result/index";
 import LayFullscreen from "./component/fullscreen/index";
 import LayConfigProvider from "./provider";
+import { InstallOptions } from "./types";
 
 const components: Record<string, Component> = {
   LaySplitPanel,
@@ -154,7 +155,7 @@ const components: Record<string, Component> = {
   LayConfigProvider,
 };
 
-const install = (app: App): void => {
+const install = (app: App, options?: InstallOptions): void => {
   for (const key in components) {
     const item = components[key];
     app.component(item.name || key, item);
