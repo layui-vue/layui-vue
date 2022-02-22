@@ -19,8 +19,8 @@ layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.
 
 A few of the things you can do with layui vue:
 
-* Up to 60 high quality components
 * Writing components using setup script
+* Up to 60 high quality components
 * Provide Axure design resources
 * Support theme customization
 * Support internationalization
