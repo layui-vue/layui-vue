@@ -84,7 +84,3 @@ Support this project by becoming a sponsor. Your logo will show up here with a l
 ## Open Source Licence
 
 Layui vue is licensed under the [MIT license](https://opensource.org/licenses/MIT).
-
-## About
-
-[web site](http://layui-vue.pearadmin.com/)、[change log](http://layui-vue.pearadmin.com/zh-CN/guide/changelog)、[community](https://jq.qq.com/?_wv=1027&k=ffiUQgnE)

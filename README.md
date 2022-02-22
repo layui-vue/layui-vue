@@ -1,4 +1,4 @@
-## Introduction
+## 介绍
 
 <p>  
   <a href="https://www.npmjs.com/package/@layui/layui-vue"><img src="https://img.shields.io/npm/v/@layui/layui-vue.svg?sanitize=true" alt="Version"></a>
@@ -9,13 +9,13 @@
 
 **[🔶 Explore the docs »](http://layui-vue.pearadmin.com)**
 
-An enterprise-class UI components based on Layui and Vue.
+layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.
 
 **Run with code Sandbox.**
 
 [![Edit layui-vue](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/11mvy)
 
-## Features
+## 特性
 
 A few of the things you can do with layui vue:
 
@@ -25,7 +25,7 @@ A few of the things you can do with layui vue:
 * Support internationalization
 * Use typescript to provide complete type definition
 
-## Get Started
+## 安装
 
 Use npm to install.
 
@@ -53,19 +53,19 @@ We have several examples on the [website](http://layui-vue.pearadmin.com). Here 
 </template>
 ```
 
-## Feedback
+## 反馈
 
 Feel free to send us feedback on [file an issue](https://github.com/layui-vue/layui-vue/issues/new). Feature requests are always welcome. If you wish to contribute, please take a quick look at the [guidelines](./CONTRIBUTING.md)!
 
 If there's anything you'd like to chat about, please feel free to join our [Gitter chat](https://gitter.im/layui-vue/community)!
 
-## Build Process
+## 构建
 
 - `build` Packaged component library
 
 Please take a look at the [contributing guidelines](./CONTRIBUTING.md) for a detailed process on how to build your application as well as troubleshooting information.
 
-## Contributors
+## 贡献
 
 This project follows the [all-contributors](https://github.com/layui-vue/layui-vue/graphs/contributors) specification and is brought to you by these [awesome contributors](https://github.com/layui-vue/layui-vue/graphs/contributors).
 
@@ -73,18 +73,14 @@ This project follows the [all-contributors](https://github.com/layui-vue/layui-v
   <img src="https://contrib.rocks/image?repo=layui-vue/layui-vue" />
 </a>
 
-## Backers 
+## 支持 
 
 Thank you to all our backers! 🙏 [[Become a backers](https://opencollective.com/layui-vue#backer)]
 
-## Sponsors 
+## 赞助 
 
 Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](https://opencollective.com/layui-vue#sponsor)]
 
-## Open Source Licence
+## 许可证
 
 Layui vue is licensed under the [MIT license](https://opensource.org/licenses/MIT).
-
-## About
-
-[web site](http://layui-vue.pearadmin.com/)、[change log](http://layui-vue.pearadmin.com/zh-CN/guide/changelog)、[community](https://jq.qq.com/?_wv=1027&k=ffiUQgnE)
