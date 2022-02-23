@@ -1,3 +1,5 @@
+@import "../../theme/variable.less";
+
 .lay-split-panel {
   height: 100%;
   display: flex;
@@ -16,7 +18,7 @@
     height: 100%;
     width: 3px;
     border: 1px #eeeeee solid;
-    background-color: #fafafa;
+    background-color: @global-neutral-color-1;
     border-left: none;
     border-right: none;
     cursor: col-resize;
@@ -48,7 +50,7 @@
     height: 3px;
     cursor: row-resize;
     border: 1px #eeeeee solid;
-    background-color: #fafafa;
+    background-color: @global-neutral-color-1;
     border-top: none;
     border-bottom: none;
     &:before {

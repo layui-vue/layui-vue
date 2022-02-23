@@ -131,6 +131,7 @@ let blue = ref(0);
 let alpha = ref(1);
 
 onMounted(() => {
+  console.log(props.modelValue)
   let { r, g, b, a } = parseColor(props.modelValue);
   red.value = r;
   green.value = g;

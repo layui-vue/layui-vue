@@ -59,13 +59,21 @@
                 ></lay-icon>
               </a>
               <template #content>
-                <div style="width: 400px; padding:0px 10px 10px 10px;">
+                <div style="width: 380px; padding:0px 10px 10px 10px;">
                   <lay-color-picker v-model="themeVariable['--global-primary-color']"></lay-color-picker>&nbsp;
                   <lay-color-picker v-model="themeVariable['--global-normal-color']"></lay-color-picker>&nbsp;
                   <lay-color-picker v-model="themeVariable['--global-warm-color']"></lay-color-picker>&nbsp;
                   <lay-color-picker v-model="themeVariable['--global-danger-color']"></lay-color-picker>&nbsp;
                   <lay-color-picker v-model="themeVariable['--global-checked-color']"></lay-color-picker>&nbsp;
-                  <lay-input style="display:inline-block;width:150px;" v-model="themeVariable['--global-border-radius']"></lay-input>
+                  <lay-input v-model="themeVariable['--global-border-radius']" style="display:inline-block;width:130px;"></lay-input>
+                  <lay-color-picker v-model="themeVariable['--global-neutral-color-1']"></lay-color-picker>&nbsp;
+                  <lay-color-picker v-model="themeVariable['--global-neutral-color-2']"></lay-color-picker>&nbsp;
+                  <lay-color-picker v-model="themeVariable['--global-neutral-color-3']"></lay-color-picker>&nbsp;
+                  <lay-color-picker v-model="themeVariable['--global-neutral-color-4']"></lay-color-picker>&nbsp;
+                  <lay-color-picker v-model="themeVariable['--global-neutral-color-5']"></lay-color-picker>&nbsp;
+                  <lay-color-picker v-model="themeVariable['--global-neutral-color-6']"></lay-color-picker>&nbsp;
+                  <lay-color-picker v-model="themeVariable['--global-neutral-color-7']"></lay-color-picker>&nbsp;
+                  <lay-color-picker v-model="themeVariable['--global-neutral-color-8']"></lay-color-picker>
                   <lay-button fluid>导 出 配 置</lay-button>
                 </div>
               </template>
@@ -117,6 +125,7 @@ import zh_CN from "../locales/zh_CN.ts";
 import en_US from "../locales/en_US.ts";
 export default {
   setup() {
+
     const { t } = useI18n();
     const route = useRoute();
     const router = useRouter();
@@ -134,7 +143,15 @@ export default {
       "--global-warm-color": "#ffb800",
       "--global-danger-color": "#ff5722",
       "--global-checked-color": "#5fb878",
-      "--global-border-radius": "2px"
+      "--global-border-radius": "2px",
+      "--global-neutral-color-1": "#FAFAFA",
+      "--global-neutral-color-2": "#F6F6F6",
+      "--global-neutral-color-3": "#eeeeee",
+      "--global-neutral-color-4": "#e2e2e2",
+      "--global-neutral-color-5": "#dddddd",
+      "--global-neutral-color-6": "#d2d2d2",
+      "--global-neutral-color-7": "#cccccc",
+      "--global-neutral-color-8": "#c2c2c2",
     });
 
     const menus = [];
