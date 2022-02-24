@@ -4,6 +4,12 @@
 ::: title 基础使用
 :::
 
+::: describe 常用于行数据的交互筛选，在浩瀚的业务需求中，值得一用。
+:::
+
+::: title 基础使用
+:::
+
 ::: demo 使用 `lay-transfer` 标签, 创建穿梭框
 
 <template>

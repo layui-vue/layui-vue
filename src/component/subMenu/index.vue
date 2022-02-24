@@ -14,6 +14,7 @@ import {
   useSlots,
   watch,
 } from "vue";
+import { onClickOutside } from "@vueuse/core";
 
 export interface LaySubMenuProps {
   id: string;
@@ -24,9 +25,22 @@ const slots = useSlots();
 
 const props = defineProps<LaySubMenuProps>();
 
-const isTree = inject("isTree");
+const isTree: Ref<boolean> = inject("isTree") as Ref<boolean>;
 const selectedKey: Ref<string> = inject("selectedKey") as Ref<string>;
 const openKeys: Ref<string[]> = inject("openKeys") as Ref<string[]>;
+
+const isOpen = computed(() => {
+  return openKeys.value.includes(props.id);
+});
+
+const subMenuRef = ref<HTMLElement>();
+const position = ref<String>();
+
+watch(isOpen, () => {
+  if (isOpen.value && position.value !== "left-nav") {
+    setTimeout(setPosition, 0);
+  }
+});
 
 const openHandle = function () {
   if (openKeys.value.includes(props.id)) {
@@ -36,32 +50,30 @@ const openHandle = function () {
   }
 };
 
-const isOpen = computed(() => {
-  return openKeys.value.includes(props.id);
-});
-
-// 菜单显示位置
-const layuiNavChild = ref<HTMLElement>();
-const position = ref<String>();
-watch(isOpen, () => {
-  if (isOpen.value && position.value !== "left-nav") {
-    setTimeout(setPosition, 0);
-  }
-});
 const setPosition = function () {
-  if (!isTree || !layuiNavChild.value) {
+  if (!isTree.value || !subMenuRef.value) {
     return;
   }
-  const offsetWidth = layuiNavChild.value.offsetWidth;
+  const offsetWidth = subMenuRef.value.offsetWidth;
   if (
     window.innerWidth <
-    layuiNavChild.value.getBoundingClientRect().left + offsetWidth + 10
+    subMenuRef.value.getBoundingClientRect().left + offsetWidth + 10
   ) {
     position.value = "left-nav";
   } else {
     position.value = "";
   }
 };
+
+onClickOutside(subMenuRef, (event: PointerEvent) => {
+  if (!isTree.value) {
+    let index = openKeys.value.indexOf(props.id);
+    if (index != -1) {
+      openKeys.value.splice(index, 1);
+    }
+  }
+});
+
 window.addEventListener("resize", setPosition);
 onBeforeUnmount(() => window.removeEventListener("resize", setPosition));
 </script>
@@ -81,7 +93,7 @@ onBeforeUnmount(() => window.removeEventListener("resize", setPosition));
     </a>
     <dl
       class="layui-nav-child"
-      ref="layuiNavChild"
+      ref="subMenuRef"
       :class="[
         position,
         isOpen && !isTree ? 'layui-show' : '',

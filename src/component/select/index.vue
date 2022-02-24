@@ -34,7 +34,7 @@ const selectRef = ref<null | HTMLElement>(null);
 
 onClickOutside(selectRef, (event) => {
   openState.value = false;
-})
+});
 
 const props = withDefaults(defineProps<LaySelectProps>(), {
   modelValue: null,

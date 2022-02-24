@@ -22,32 +22,31 @@ const themeVariable = {
 :::
 
 ```
---global-primary-color: #009688;
+--global-primary-color: #009688; // 主题色
 
---global-normal-color: #1e9fff;
+--global-normal-color: #1e9fff; // 通用色
 
---global-warm-color: #ffb800;
+--global-warm-color: #ffb800; // 警告色
 
---global-danger-color: #ff5722;
+--global-danger-color: #ff5722; // 危险色
 
---global-checked-color: #5fb878;
+--global-checked-color: #5fb878; // 选中色
 
---global-border-radius: 2px;
+--global-border-radius: 2px; // 圆角度
 
---global-neutral-color-1: #FAFAFA;
+--global-neutral-color-1: #FAFAFA; // 辅助色-1
 
---global-neutral-color-2: #F6F6F6;
+--global-neutral-color-2: #F6F6F6; // 辅助色-2
+    
+--global-neutral-color-3: #eeeeee; // 辅助色-3
+    
+--global-neutral-color-4: #e2e2e2; // 辅助色-4
   
---global-neutral-color-3: #eeeeee;
+--global-neutral-color-5: #dddddd; // 辅助色-5
   
---global-neutral-color-4: #e2e2e2;
+--global-neutral-color-6: #d2d2d2; // 辅助色-6
   
---global-neutral-color-5: #dddddd;
+--global-neutral-color-7: #cccccc; // 辅助色-7
   
---global-neutral-color-6: #d2d2d2;
-  
---global-neutral-color-7: #cccccc;
-  
---global-neutral-color-8: #c2c2c2;
-
+--global-neutral-color-8: #c2c2c2; // 辅助色-8
 ```

@@ -13,7 +13,7 @@
 ::: demo
 
 <template>
-  <lay-menu v-model:selectedKey="selectedKey" v-model:openKeys="openKeys">
+  <lay-menu v-model:selectedKey="selectedKey" v-model:openKeys="openKeys1">
     <lay-menu-item title="首页" id="1"></lay-menu-item>
     <lay-menu-item title="用户" id="2"></lay-menu-item>
     <lay-menu-item title="角色" id="3"></lay-menu-item> 
@@ -40,10 +40,10 @@ export default {
   setup() {
 
     const selectedKey = ref("5")
-    const openKeys = ref(["7"])   
+    const openKeys1 = ref(["7"])   
     return {
       selectedKey,
-      openKeys
+      openKeys1
     }
   }
 }
@@ -57,7 +57,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-menu v-model:selectedKey="selectedKey" v-model:openKeys="openKeys" :tree="true">
+  <lay-menu v-model:selectedKey="selectedKey" v-model:openKeys="openKeys2" :tree="true">
     <lay-menu-item title="首页" id="1"></lay-menu-item>
     <lay-menu-item title="用户" id="2"></lay-menu-item>
     <lay-menu-item title="角色" id="3"></lay-menu-item> 
@@ -79,11 +79,11 @@ import { ref } from 'vue'
 export default {
   setup() {
 
-    const openKeys = ref(["7"])
+    const openKeys2 = ref(["7"])
     const selectedKey = ref("5")
 
     return {
-      openKeys,
+      openKeys2,
       selectedKey
     }
   }
@@ -98,7 +98,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-menu level="true" v-model:selectedKey="selectedKey" inverted="true" v-model:openKeys="openKeys" :tree="true">
+  <lay-menu level="true" v-model:selectedKey="selectedKey" inverted="true" v-model:openKeys="openKeys3" :tree="true">
     <lay-menu-item title="首页" id="1"></lay-menu-item>
     <lay-menu-item title="用户" id="2"></lay-menu-item>
     <lay-menu-item title="角色" id="3"></lay-menu-item> 
@@ -120,11 +120,11 @@ import { ref } from 'vue'
 export default {
   setup() {
 
-    const openKeys = ref(["7"])
+    const openKeys3 = ref(["7"])
     const selectedKey = ref("5")
 
     return {
-      openKeys,
+      openKeys3,
       selectedKey
     }
   }
@@ -139,7 +139,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-menu v-model:selectedKey="selectedKey" theme="light" v-model:openKeys="openKeys" :tree="true">
+  <lay-menu v-model:selectedKey="selectedKey" theme="light" v-model:openKeys="openKeys4" :tree="true">
     <lay-menu-item title="首页" id="1"></lay-menu-item>
     <lay-menu-item title="用户" id="2"></lay-menu-item>
     <lay-menu-item title="角色" id="3"></lay-menu-item> 
@@ -161,11 +161,11 @@ import { ref } from 'vue'
 export default {
   setup() {
 
-    const openKeys = ref(["7"])
+    const openKeys4 = ref(["7"])
     const selectedKey = ref("5")
 
     return {
-      openKeys,
+      openKeys4,
       selectedKey
     }
   }
@@ -180,7 +180,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-menu v-model:selectedKey="selectedKey" v-model:openKeys="openKeys" v-model:tree="isTree">
+  <lay-menu v-model:selectedKey="selectedKey" v-model:openKeys="openKeys5" v-model:tree="isTree">
     <lay-menu-item id="1">
       <router-link to="">
         <lay-icon type="layui-icon-home"></lay-icon> 
@@ -218,11 +218,11 @@ export default {
 
     const isTree = ref(true)
     const selectedKey = ref("5")
-    const openKeys = ref(["7"])
+    const openKeys5 = ref(["7"])
 
     return {
       isTree,
-      openKeys,
+      openKeys5,
       selectedKey
     }
   }

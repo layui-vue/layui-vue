@@ -5,8 +5,8 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { provide, ref, watch } from "vue"
-import { onClickOutside } from "@vueuse/core"
+import { provide, ref, watch } from "vue";
+import { onClickOutside } from "@vueuse/core";
 
 export interface LayDropdownProps {
   trigger?: string;
@@ -19,8 +19,8 @@ const props = withDefaults(defineProps<LayDropdownProps>(), {
 });
 
 onClickOutside(dropdownRef, (event) => {
-   openState.value = false;
-})
+  openState.value = false;
+});
 
 const openState = ref(false);
 
