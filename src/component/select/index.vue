@@ -17,7 +17,7 @@ import {
   toRefs,
   Ref,
 } from "vue";
-import { useClickOutside } from "@layui/hooks-vue";
+import { onClickOutside } from "@vueuse/core";
 import { SelectItem } from "../../types";
 
 export interface LaySelectProps {
@@ -31,13 +31,10 @@ export interface LaySelectProps {
 }
 
 const selectRef = ref<null | HTMLElement>(null);
-const isClickOutside = useClickOutside(selectRef);
 
-watch(isClickOutside, () => {
-  if (isClickOutside.value) {
-    openState.value = false;
-  }
-});
+onClickOutside(selectRef, (event) => {
+  openState.value = false;
+})
 
 const props = withDefaults(defineProps<LaySelectProps>(), {
   modelValue: null,

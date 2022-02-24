@@ -13,11 +13,8 @@ export interface LayMenuItemProps {
 }
 
 const slots = useSlots();
-
 const props = defineProps<LayMenuItemProps>();
-
 const selectedKey: Ref<string> = inject("selectedKey") as Ref<string>;
-
 const selectHandle = function () {
   selectedKey.value = props.id;
 };

@@ -5,19 +5,22 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { provide, ref, watch } from "vue";
-import { useClickOutside } from "@layui/hooks-vue";
+import { provide, ref, watch } from "vue"
+import { onClickOutside } from "@vueuse/core"
 
 export interface LayDropdownProps {
   trigger?: string;
 }
 
 const dropdownRef = ref<null | HTMLElement>(null);
-const isClickOutside = useClickOutside(dropdownRef);
 
 const props = withDefaults(defineProps<LayDropdownProps>(), {
   trigger: "click",
 });
+
+onClickOutside(dropdownRef, (event) => {
+   openState.value = false;
+})
 
 const openState = ref(false);
 
@@ -32,12 +35,6 @@ const hide = function () {
 const toggle = function () {
   openState.value = !openState.value;
 };
-
-watch(isClickOutside, () => {
-  if (isClickOutside.value) {
-    openState.value = false;
-  }
-});
 
 provide("openState", openState);
 
