@@ -231,6 +231,57 @@ export default {
 
 :::
 
+::: title 菜单折叠
+:::
+
+::: demo
+
+<template>
+  <lay-switch v-model="collapse"></lay-switch>
+  <br/>
+  <br/>
+  <lay-menu v-model:selectedKey="selectedKey" v-model:tree="isTree" v-model:openKeys="openKeys6" :collapse="collapse">
+    <lay-menu-item title="首页" id="1"></lay-menu-item>
+    <lay-menu-item title="用户" id="2"></lay-menu-item>
+    <lay-menu-item title="角色" id="3"></lay-menu-item> 
+    <lay-sub-menu title="目录" id="7">
+        <lay-menu-item title="菜单1" id="8"></lay-menu-item> 
+        <lay-menu-item title="菜单2" id="9"></lay-menu-item>
+        <lay-sub-menu title="菜单3" id="10">
+            <lay-menu-item title="菜单3-1" id="11"></lay-menu-item> 
+            <lay-menu-item title="菜单3-2" id="12"></lay-menu-item>
+            <lay-sub-menu title="菜单3-3" id="13">
+              <lay-menu-item title="菜单3-3-1" id="14"></lay-menu-item> 
+              <lay-menu-item title="菜单3-3-2" id="15"></lay-menu-item>
+              <lay-menu-item title="菜单3-3-3" id="16"></lay-menu-item>
+          </lay-sub-menu>
+        </lay-sub-menu>
+    </lay-sub-menu> 
+  </lay-menu>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const selectedKey = ref("5")
+    const openKeys6 = ref(["7"])
+    const collapse = ref(true)   
+    const isTree = ref(true)
+    return {
+      selectedKey,
+      openKeys6,
+      colapse,
+      isTree
+    }
+  }
+}
+</script>
+
+:::
+
 ::: title Menu 属性
 :::
 
