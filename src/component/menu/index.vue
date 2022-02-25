@@ -15,7 +15,7 @@ export interface LayMenuProps {
   theme?: string;
   inverted?: boolean | string;
   level?: boolean | string;
-  collapse?: boolean | string
+  collapse?: boolean | string;
 }
 
 const emit = defineEmits(["update:selectedKey", "update:openKeys"]);
@@ -27,7 +27,7 @@ const props = withDefaults(defineProps<LayMenuProps>(), {
   theme: "dark",
   inverted: false,
   level: false,
-  collapse: false
+  collapse: false,
 });
 
 const isTree = computed(() => props.tree);
@@ -63,7 +63,7 @@ provide("openKeys", openKeys);
       inverted ? 'inverted' : '',
       tree ? 'layui-nav-tree' : '',
       theme === 'dark' ? 'layui-nav-dark' : 'layui-nav-light',
-      collapse ? 'layui-nav-collapse':''
+      collapse ? 'layui-nav-collapse' : '',
     ]"
   >
     <slot></slot>
