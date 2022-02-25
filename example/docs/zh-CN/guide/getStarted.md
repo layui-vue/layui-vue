@@ -1,17 +1,29 @@
 ::: title 快速上手
 :::
 
-<img style="margin:20px;margin-left:30px;width:380px;" src="../../../src/assets/start.svg"/>
+<br>
+
+<p>
+  <a href="http://layui-vue.pearadmin.com" style="margin-left:30px;">
+    <img src="https://portrait.gitee.com/uploads/avatars/namespace/2868/8605626_layui_1634311144.png" alt="layui" width="110" style="border-radius:12px;">
+  </a>
+  <span style="font-size:30px;color:#e2e2e2;margin:30px;">+</span>
+  <a href="http://layui-vue.pearadmin.com">
+    <img src="https://qn.antdv.com/vue.png" alt="layui" width="110" style="border-radius:12px;">
+  </a>
+  <span style="font-size:30px;color:#e2e2e2;margin:30px;">=</span>
+  <a href="http://layui-vue.pearadmin.com">
+    <img src="../../../src/assets/logo.jpg" alt="layui" width="110" style="border-radius:12px;">
+  </a>
+</p>
+
+<br>
 
 ::: describe 使用 (npm, yarn, pnpm) 工具安装 layui vue, 然后你就可以使用打包工具, 如 vite
 :::
 
 ```
 npm install @layui/layui-vue --save
-
-或
-
-yarn add @layui/layui-vue --save
 ```
 ::: title 全局注册
 :::

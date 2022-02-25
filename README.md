@@ -27,7 +27,7 @@ A few of the things you can do with layui vue:
 
 ## 安装
 
-Use npm to install.
+使用 npm 安装.
 
 ```bash
 npm i @layui/layui-vue
@@ -43,7 +43,7 @@ import '@layui/layui-vue/lib/index.css'
 createApp(App).use(layui).mount('#app')
 ```
 
-We have several examples on the [website](http://layui-vue.pearadmin.com). Here is the first one to get you started:
+我们在[主页](http://layui-vue.pearadmin.com)上有不少例子，这是让您入门的第一个：
 
 ```
 <template>

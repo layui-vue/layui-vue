@@ -10,15 +10,11 @@
     <div class="site-banner">
       <div class="site-banner-main">
         <div class="site-zfj site-zfj-anim">
-          <i
-            class="layui-icon"
-            style="color: #fff; color: rgba(255, 255, 255, 0.6)"
-            ></i
-          >
+          <img src="../assets/logo.jpg" style="width: 200px;border-radius: 10px;box-shadow: 2px 0 6px rgb(0 21 41 / 35%);" />
         </div>
         <div class="layui-anim site-desc site-desc-anim">
           <p class="web-font-desc">layui - vue</p>
-          <cite>An enterprise-class UI components based on Layui and Vue.</cite>
+          <cite>layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.</cite>
         </div>
         <div class="site-download">
           <router-link class="layui-inline site-down" to="/zh-CN/guide"
