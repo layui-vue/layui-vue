@@ -1,20 +1,20 @@
 <template>
-  <div
-    style="
-      margin-top: 60px;
-      background-color: whitesmoke;
-      height: 100%;
-      width: 100%;
-    "
+  <div class="site-container"
   >
     <div class="site-banner">
       <div class="site-banner-main">
         <div class="site-zfj site-zfj-anim">
-          <img src="../assets/logo.jpg" style="width: 200px;border-radius: 10px;box-shadow: 2px 0 6px rgb(0 21 41 / 35%);" />
+          <img
+            src="../assets/logo.jpg"
+            style="width: 220px; border-radius: 10px"
+          />
         </div>
         <div class="layui-anim site-desc site-desc-anim">
           <p class="web-font-desc">layui - vue</p>
-          <cite>layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.</cite>
+          <cite
+            >layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件
+            库.</cite
+          >
         </div>
         <div class="site-download">
           <router-link class="layui-inline site-down" to="/zh-CN/guide"
@@ -109,15 +109,18 @@
   </div>
 </template>
 <style>
+.site-container {
+  margin-top: 60px;
+  background-color: whitesmoke;
+  height: 100%;
+  width: 100%;
+}
 .site-banner {
   position: relative;
   height: 600px;
   text-align: center;
   overflow: hidden;
   background-color: #393d49;
-  background-image: url(../assets/background.svg);
-  background-repeat: no-repeat;
-  background-size: 100%;
 }
 .site-banner-bg {
   background-position: center 0;

@@ -27,8 +27,15 @@ const selectHandle = function () {
     @click="selectHandle()"
   >
     <a href="javascript:void(0)">
-      <slot v-if="slots.default"></slot>
-      <span v-else>{{ title }}</span>
+      <i v-if="slots.icon">
+        <slot name="icon"></slot>
+      </i>
+      <span v-if="slots.title">
+        <slot name="title"></slot>
+      </span>
+      <span v-else>
+        <slot></slot>
+      </span>
     </a>
   </li>
 </template>

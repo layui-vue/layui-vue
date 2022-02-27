@@ -59,7 +59,6 @@
   height: 190px;
   text-align: center;
   font-weight: 300;
-  background-color: #009688;
   color: #fff;
 }
 .alone-banner h1 {

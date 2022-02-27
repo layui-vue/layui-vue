@@ -5,21 +5,21 @@
 
 <p>
   <a href="http://layui-vue.pearadmin.com" style="margin-left:30px;">
-    <img src="https://portrait.gitee.com/uploads/avatars/namespace/2868/8605626_layui_1634311144.png" alt="layui" width="110" style="border-radius:12px;">
+    <img src="https://portrait.gitee.com/uploads/avatars/namespace/2868/8605626_layui_1634311144.png" alt="layui" width="105" style="border-radius:12px;">
   </a>
-  <span style="font-size:30px;color:#e2e2e2;margin:30px;">+</span>
+  <span style="font-size:32px;color:#e2e2e2;margin:30px;">+</span>
   <a href="http://layui-vue.pearadmin.com">
-    <img src="https://qn.antdv.com/vue.png" alt="layui" width="110" style="border-radius:12px;">
+    <img src="https://qn.antdv.com/vue.png" alt="layui" width="105" style="border-radius:12px;">
   </a>
-  <span style="font-size:30px;color:#e2e2e2;margin:30px;">=</span>
+  <span style="font-size:32px;color:#e2e2e2;margin:30px;">=</span>
   <a href="http://layui-vue.pearadmin.com">
-    <img src="../../../src/assets/logo.jpg" alt="layui" width="110" style="border-radius:12px;">
+    <img src="../../../src/assets/logo.jpg" alt="layui" width="105" style="border-radius:12px;">
   </a>
 </p>
 
 <br>
 
-::: describe 使用 (npm, yarn, pnpm) 工具安装 layui vue, 然后你就可以使用打包工具, 如 vite
+::: describe 使用 npm 工具安装 layui vue, 然后你就可以使用打包工具, 如 vite rollup.
 :::
 
 ```

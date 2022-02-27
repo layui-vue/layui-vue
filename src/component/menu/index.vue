@@ -5,7 +5,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed, provide } from "vue";
+import { computed, provide, ref, watch } from "vue";
 import "./index.less";
 
 export interface LayMenuProps {
@@ -30,14 +30,17 @@ const props = withDefaults(defineProps<LayMenuProps>(), {
   collapse: false,
 });
 
+let oldOpenKeys = ref<string[]>([]);
+
 const isTree = computed(() => props.tree);
+const isCollapse = computed(() => props.collapse);
 
 const openKeys = computed({
   get() {
     return props.openKeys;
   },
   set(val) {
-    emit("update:selectedKey", val);
+    emit("update:openKeys", val);
   },
 });
 
@@ -50,9 +53,24 @@ const selectedKey = computed({
   },
 });
 
+watch(
+  () => props.collapse,
+  () => {
+    if (props.collapse) {
+      // 删除所有打开
+      oldOpenKeys.value = props.openKeys;
+      emit("update:openKeys", []);
+    } else {
+      // 赋值所有打开
+      emit("update:openKeys", oldOpenKeys.value);
+    }
+  }, { immediate: true}
+);
+
 provide("isTree", isTree);
 provide("selectedKey", selectedKey);
 provide("openKeys", openKeys);
+provide("isCollapse", isCollapse);
 </script>
 
 <template>
