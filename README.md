@@ -1,4 +1,4 @@
-## 介绍
+## Introduction
 
 <p>  
   <a href="https://www.npmjs.com/package/@layui/layui-vue"><img src="https://img.shields.io/npm/v/@layui/layui-vue.svg?sanitize=true" alt="Version"></a>
@@ -9,13 +9,13 @@
 
 **[🔶 Explore the docs »](http://layui-vue.pearadmin.com)**
 
-layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.
+An enterprise-class UI components based on Layui and Vue.
 
 **Run with code Sandbox.**
 
 [![Edit layui-vue](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/11mvy)
 
-## 特性
+## Features
 
 A few of the things you can do with layui vue:
 
@@ -25,9 +25,9 @@ A few of the things you can do with layui vue:
 * Support theme customization
 * Support internationalization
 
-## 安装
+## Get Started
 
-使用 npm 安装.
+Use npm to install.
 
 ```bash
 npm i @layui/layui-vue
@@ -43,7 +43,7 @@ import '@layui/layui-vue/lib/index.css'
 createApp(App).use(layui).mount('#app')
 ```
 
-我们在[主页](http://layui-vue.pearadmin.com)上有不少例子，这是让您入门的第一个：
+We have several examples on the [website](http://layui-vue.pearadmin.com). Here is the first one to get you started:
 
 ```
 <template>
@@ -53,19 +53,19 @@ createApp(App).use(layui).mount('#app')
 </template>
 ```
 
-## 反馈
+## Feedback
 
 Feel free to send us feedback on [file an issue](https://github.com/layui-vue/layui-vue/issues/new). Feature requests are always welcome. If you wish to contribute, please take a quick look at the [guidelines](./CONTRIBUTING.md)!
 
 If there's anything you'd like to chat about, please feel free to join our [Gitter chat](https://gitter.im/layui-vue/community)!
 
-## 构建
+## Build Process
 
 - `build` Packaged component library
 
 Please take a look at the [contributing guidelines](./CONTRIBUTING.md) for a detailed process on how to build your application as well as troubleshooting information.
 
-## 贡献
+## Contributors
 
 This project follows the [all-contributors](https://github.com/layui-vue/layui-vue/graphs/contributors) specification and is brought to you by these [awesome contributors](https://github.com/layui-vue/layui-vue/graphs/contributors).
 
@@ -73,6 +73,6 @@ This project follows the [all-contributors](https://github.com/layui-vue/layui-v
   <img src="https://contrib.rocks/image?repo=layui-vue/layui-vue" />
 </a>
 
-## 许可证
+## Licence
 
 Layui vue is licensed under the [MIT license](https://opensource.org/licenses/MIT).
