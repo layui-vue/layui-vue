@@ -73,14 +73,6 @@ This project follows the [all-contributors](https://github.com/layui-vue/layui-v
   <img src="https://contrib.rocks/image?repo=layui-vue/layui-vue" />
 </a>
 
-## 支持 
-
-Thank you to all our backers! 🙏 [[Become a backers](https://opencollective.com/layui-vue#backer)]
-
-## 赞助 
-
-Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](https://opencollective.com/layui-vue#sponsor)]
-
-## 开源
+## 许可证
 
 Layui vue is licensed under the [MIT license](https://opensource.org/licenses/MIT).
