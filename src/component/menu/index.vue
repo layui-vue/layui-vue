@@ -64,7 +64,8 @@ watch(
       // 赋值所有打开
       emit("update:openKeys", oldOpenKeys.value);
     }
-  }, { immediate: true}
+  },
+  { immediate: true }
 );
 
 provide("isTree", isTree);
