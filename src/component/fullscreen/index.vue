@@ -20,10 +20,6 @@ export interface LayFullscreenProps {
   immersive?: boolean;
   position?: string;
   zIndex?: string;
-  // top?: string;
-  // left?: string;
-  // width?: string;
-  // height?: string;
 }
 
 const props = withDefaults(defineProps<LayFullscreenProps>(), {
@@ -182,11 +178,6 @@ const styleLayFullscreen = function (
 ) {
   el.style.position = isRemove ? "" : props.position || "";
   el.style.zIndex = isRemove ? "" : props.zIndex || "";
-  // 实验内容
-  // el.style.top = isRemove ? "" : (props.top || "");
-  // el.style.left = isRemove ? "" : (props.left || "");
-  // el.style.width = isRemove ? "" : (props.width || "");
-  // el.style.height = isRemove ? "" : (props.height || "");
 };
 
 const activeEl = computed(() => (targetEl.value = props.target));
