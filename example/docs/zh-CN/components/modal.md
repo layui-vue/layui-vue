@@ -16,6 +16,8 @@
 <script>
 import { ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
+import { LayLayer } from "@layui/layer-vue";
+
 export default {
   setup() {
     const visible1 = ref(false)

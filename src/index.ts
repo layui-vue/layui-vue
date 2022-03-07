@@ -3,10 +3,10 @@ import type { App, Component } from "vue";
 import "./theme/index.less";
 import "@layui/layer-vue/lib/index.css";
 import "@layui/icons-vue/lib/index.css";
-import { layer, useLayer } from "@layui/layer-vue";
+import { layer } from "@layui/layer-vue";
+import layerInstall from "@layui/layer-vue";
 import i18n from "./language";
 
-import LayLayer from "./component/layer/index";
 import LayBacktop from "./component/backTop/index";
 import LayAvatar from "./component/avatar/index";
 import LayAvatarList from "./component/avatarList/index";
@@ -140,7 +140,6 @@ const components: Record<string, Component> = {
   LayCarousel,
   LayCarouselItem,
   LayColorPicker,
-  LayLayer,
   LayTooltip,
   LayInputNumber,
   LaySkeleton,
@@ -161,6 +160,7 @@ const install = (app: App, options?: InstallOptions): void => {
     app.component(item.name || key, item);
   }
   app.use(i18n);
+  app.use(layerInstall);
 };
 
 export {
@@ -223,7 +223,6 @@ export {
   LayCarousel,
   LayCarouselItem,
   LayColorPicker,
-  LayLayer,
   LayTooltip,
   LayInputNumber,
   LaySkeleton,
@@ -238,6 +237,6 @@ export {
   LayConfigProvider,
 };
 
-export { layer, useLayer };
+export { layer };
 
 export default { install };
