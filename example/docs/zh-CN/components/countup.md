@@ -7,8 +7,8 @@
 ::: demo
 
 <template>
-  <h1 style="padding:20px 15px">
-      <lay-count-up :end-val="countVal" :decimalPlaces="2"></lay-count-up>
+  <h1 style="padding:20px 15px; font-family: sans-serif">
+      <lay-count-up :startVal="0" :endVal="3600" :decimalPlaces="2"></lay-count-up>
   </h1>
 </template>
 
@@ -17,9 +17,9 @@ import { ref } from 'vue'
 
 export default {
   setup() {
-    const countVal = 2862.9888;
+
     return {
-      
+
     }
   }
 }
@@ -38,14 +38,14 @@ export default {
   <br/>
   <!-- 属性 -->
   <lay-card style="width:200px;height:120px;display:inline-block;">
-    <h1 style="padding:20px 15px">
+    <h1 style="padding:20px 15px; font-family: sans-serif">
       <lay-count-up :end-val="countVal2" prefix="¥" suffix="↑"></lay-count-up>
     </h1>
   </lay-card>
   <!-- 插槽 -->
   <lay-card style="width:200px;height:120px;display:inline-block;">
     <h1 style="padding:20px 15px">
-      <lay-count-up :end-val="18" :duration="1">
+      <lay-count-up :end-val="18" :duration="2000">
         <template #prefix>
           <span style="font-size:75%">雷雨&nbsp</span>
         </template>
@@ -84,15 +84,18 @@ export default {
 
 | 属性          | 描述                                                         | 类型           | 默认值 | 可选值         |
 | ------------- | ------------------------------------------------------------ | -------------- | ------ | -------------- |
+| startVal      | 起始值                                                     | number         | `0`    | —             |
 | endVal        | 显示的值                                                     | number         | `0`    | —             |
+| decimal       | 小数点                                                    | string         | `.`    | —             |
 | decimalPlaces | 小数位数                                                     | number         | `0`    | —             |
-| useGrouping   | 使用千位分隔符                                               | boolean        | `true` | `true` `false` |
+| useGrouping   | 是否使用千位分隔符                                               | boolean        | `true` | `true` `false` |
 | separator     | 分隔符                                                       | string         | `,`    | —             |
-| useEasing     | 使用动画                                                     | boolean        | `true` | `true` `false` |
-| duration      | 动画持续时间                                                 | number         | `2`    | —             |
+| autoplay     | 是否自动播放                                                     | boolean        | `true` | `true` `false` |
+| useEasing     | 是否使用动画                                                     | boolean        | `true` | `true` `false` |
+| easingFn      | 动画类型                                                 | Array \| Function \| string         | `easeInOutCubic`    | —             |
+| duration      | 动画持续时间,单位: ms                                                 | number         | `2000`    | —             |
 | prefix        | 前缀                                                         | string         | —    | —             |
 | suffix        | 后缀                                                         | string         | —     | —             |
-| option        | 选项，用于多实例的总体设置，<br>props会覆盖option的属性，使用更灵活 | CountUpOptions | —     | 参见[CountUpOptions](#opts)   |
 
 :::
 
@@ -108,23 +111,45 @@ export default {
 
 :::
 
-::: title Count Up Options 属性
+::: title Count Up 动画类型
 ::: 
 
-::: table
-
-| 属性          | 描述                                                         | 类型           | 默认值 | 可选值         |
-| ------------- | ------------------------------------------------------------ | -------------- | ------ | -------------- |
-| startVal      | 开始值                                                      | number         | `0`    | —             |
-| decimalPlaces | 小数位数                                                     | number         | `0`    | —             |
-| useGrouping   | 使用千位分隔符                                               | boolean        | `true` | `true` `false` |
-| separator     | 分隔符                                                       | string         | `,`    | —             |
-| useEasing     | 使用动画                                                     | boolean        | `true` | `true` `false` |
-| duration      | 动画持续时间                                                 | number         | `2`    | —             |
-| prefix        | 前缀                                                         | string         | —    | —             |
-| suffix        | 后缀                                                         | string         | —     | —             |   |
-
+::: describe 可使用贝塞尔曲线定义动画
 :::
+
+```
+easingFn: [0.75, 0, 0.25, 1]
+```
+
+::: describe 也可以使用自定义函数
+:::
+
+```
+const easeOutElastic = (n) => {
+  return n === 0
+    ? 0
+    : n === 1
+      ? 1
+      : (2 ** (-10 * n)) * Math.sin((n * 10 - 0.75) * ((2 * Math.PI) / 3)) + 1
+}
+
+easingFn: easeOutElastic
+```
+
+::: describe 通过以下字符串快速设置动画类型
+:::
+
+```
+easeInSine    easeOutSine    easeInOutSine
+easeInQuad    easeOutQuad    easeInOutQuad
+easeInCubic   easeOutCubic   easeInOutCubic
+easeInQuart   easeOutQuart   easeInOutQuart
+easeInQuint   easeOutQuint   easeInOutQuint
+easeInExpo    easeOutExpo    easeInOutExpo
+easeInCirc    easeOutCirc    easeInOutCirc
+easeInBack    easeOutBack    easeInOutBack
+linear
+```
 
 ::: previousNext countUp
 :::

@@ -1,9 +1,3 @@
-<template>
-  <slot name="prefix"></slot>
-  <span ref="counterRef" style="font-family: sans-serif" />
-  <slot name="suffix"></slot>
-</template>
-
 <script lang="ts">
 export default {
   name: "LayCountUp",
@@ -11,77 +5,100 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { onMounted, ref, watch } from "vue";
-import { CountUp } from "countup.js";
-import type { CountUpOptions } from "countup.js";
+import { computed, onMounted, Ref, ref, watch } from "vue";
+import { TransitionPresets, useTransition } from '@vueuse/core'
 
 export interface LayCountupProps {
+  startVal?:number // 起始值
   endVal?: number; //显示的值
+  decimal?: string; // 小数点
   decimalPlaces?: number; // 小数位数
   useGrouping?: boolean; // 是否使用千位分隔符
   separator?: string; // 千位分隔符
+  autoplay?: boolean; //是否自动播放
   useEasing?: boolean; // 使用动画
+  easingFn?: any; //动画类型
   duration?: number; // 动画持续时间
   prefix?: string; // 前缀
   suffix?: string; // 后缀
-  option?: CountUpOptions; // 选项
 }
 
 const props = withDefaults(defineProps<LayCountupProps>(), {
+  startVal: 0,
   endVal: 0,
-  option: () => {
-    return {};
-  },
+  decimal: '.',
+  decimalPlaces: 0,
+  useGrouping: true,
+  separator: ',',
+  autoplay: true,
+  useEasing: true,
+  easingFn: TransitionPresets.easeInOutCubic,
+  duration: 2000,
+  prefix: '',
+  suffix:'',
 });
 
-const counterRef = ref<HTMLDivElement | null>(null);
-const instance = ref<CountUp | null>(null);
-const {
-  decimalPlaces,
-  useGrouping,
-  separator,
-  useEasing,
-  duration,
-  prefix,
-  suffix,
-} = props;
-const defaultOptions: CountUpOptions = {
-  startVal: 0, // 开始数字
-  decimalPlaces: decimalPlaces ? decimalPlaces : 0, // 小数位数
-  useEasing: useEasing ? useEasing : true, // 使用缓动动画
-  duration: duration ? duration : 2, // 动画持续时间
-  useGrouping: useGrouping ? useGrouping : true, // 是否使用千位分隔符
-  separator: separator ? separator : ",", // 千位分隔符
-  decimal: ".", // 小数点分隔符
-  prefix: prefix ? prefix : "", // 前缀
-  suffix: suffix ? suffix : "", // 后缀
-};
+let localStartVal: Ref<number> = ref(props.startVal);
+const isNumber = (val: string) => !isNaN(parseFloat(val));
+
+/**
+ * from: https://github.com/PanJiaChen/vue-countTo/blob/master/src/vue-countTo.vue
+ * @description 格式化数字
+ * @param num 要格式化的数字
+ * @returns 格式化后的数字
+ */
+const formatNumber = (num: number | string): string =>{
+  if(typeof num != 'number')return '0';
+  num = num.toFixed(props.decimalPlaces);
+  num += '';
+  const x = num.split('.');
+  let x1 = x[0];
+  const x2 = x.length > 1 ? props.decimal + x[1] : '';
+  const rgx = /(\d+)(\d{3})/;
+  if (props.separator && !isNumber(props.separator)) {
+    while (rgx.test(x1)) {
+      x1 = x1.replace(rgx, '$1' + props.separator + '$2');
+    }
+  }
+  return props.prefix + x1 + x2 + props.suffix;
+}
+
+const printVal = useTransition(localStartVal, {
+  delay: 0,
+  duration: props.duration,
+  disabled: !props.useEasing,
+  transition: typeof props.easingFn === "string" ? TransitionPresets[props.easingFn] : props.easingFn,
+})
+
+const displayValue = computed(() => formatNumber(printVal.value));
+
+const start = function(){
+  localStartVal.value = props.endVal;
+}
 
 watch(
   () => props.endVal,
   () => {
-    update(props.endVal);
+    if(props.autoplay){
+     localStartVal.value = props.endVal;
+    }
   }
 );
 
 onMounted(() => {
-  createCounter();
+  if(props.autoplay){
+     start();
+  }
 });
 
-const createCounter = () => {
-  if (!counterRef.value) return;
-  const opts: CountUpOptions = Object.assign(defaultOptions, props.option);
-  instance.value = new CountUp(counterRef?.value, props.endVal, opts);
-  start();
-};
-
-const start = () => {
-  if (!instance.value) return;
-  instance?.value.start();
-};
-
-const update = (newEndVal: number) => {
-  if (!instance.value) return;
-  instance?.value.update(newEndVal);
-};
+defineExpose({ 
+  start,
+});
 </script>
+
+<template>
+  <slot name="prefix"></slot>
+  <!-- <span style="font-family: sans-serif" /> -->
+  <span >{{ displayValue }}</span>
+  <slot name="suffix"></slot>
+</template>
