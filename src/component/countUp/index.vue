@@ -6,10 +6,10 @@ export default {
 
 <script setup lang="ts">
 import { computed, onMounted, Ref, ref, watch } from "vue";
-import { TransitionPresets, useTransition } from '@vueuse/core'
+import { TransitionPresets, useTransition } from "@vueuse/core";
 
 export interface LayCountupProps {
-  startVal?:number // 起始值
+  startVal?: number; // 起始值
   endVal?: number; //显示的值
   decimal?: string; // 小数点
   decimalPlaces?: number; // 小数位数
@@ -26,16 +26,16 @@ export interface LayCountupProps {
 const props = withDefaults(defineProps<LayCountupProps>(), {
   startVal: 0,
   endVal: 0,
-  decimal: '.',
+  decimal: ".",
   decimalPlaces: 0,
   useGrouping: true,
-  separator: ',',
+  separator: ",",
   autoplay: true,
   useEasing: true,
   easingFn: TransitionPresets.easeInOutCubic,
   duration: 2000,
-  prefix: '',
-  suffix:'',
+  prefix: "",
+  suffix: "",
 });
 
 let localStartVal: Ref<number> = ref(props.startVal);
@@ -47,51 +47,54 @@ const isNumber = (val: string) => !isNaN(parseFloat(val));
  * @param num 要格式化的数字
  * @returns 格式化后的数字
  */
-const formatNumber = (num: number | string): string =>{
-  if(typeof num != 'number')return '0';
+const formatNumber = (num: number | string): string => {
+  if (typeof num != "number") return "0";
   num = num.toFixed(props.decimalPlaces);
-  num += '';
-  const x = num.split('.');
+  num += "";
+  const x = num.split(".");
   let x1 = x[0];
-  const x2 = x.length > 1 ? props.decimal + x[1] : '';
+  const x2 = x.length > 1 ? props.decimal + x[1] : "";
   const rgx = /(\d+)(\d{3})/;
   if (props.separator && !isNumber(props.separator)) {
     while (rgx.test(x1)) {
-      x1 = x1.replace(rgx, '$1' + props.separator + '$2');
+      x1 = x1.replace(rgx, "$1" + props.separator + "$2");
     }
   }
   return props.prefix + x1 + x2 + props.suffix;
-}
+};
 
 const printVal = useTransition(localStartVal, {
   delay: 0,
   duration: props.duration,
   disabled: !props.useEasing,
-  transition: typeof props.easingFn === "string" ? TransitionPresets[props.easingFn] : props.easingFn,
-})
+  transition:
+    typeof props.easingFn === "string"
+      ? TransitionPresets[props.easingFn]
+      : props.easingFn,
+});
 
 const displayValue = computed(() => formatNumber(printVal.value));
 
-const start = function(){
+const start = function () {
   localStartVal.value = props.endVal;
-}
+};
 
 watch(
   () => props.endVal,
   () => {
-    if(props.autoplay){
-     localStartVal.value = props.endVal;
+    if (props.autoplay) {
+      localStartVal.value = props.endVal;
     }
   }
 );
 
 onMounted(() => {
-  if(props.autoplay){
-     start();
+  if (props.autoplay) {
+    start();
   }
 });
 
-defineExpose({ 
+defineExpose({
   start,
 });
 </script>
@@ -99,6 +102,6 @@ defineExpose({
 <template>
   <slot name="prefix"></slot>
   <!-- <span style="font-family: sans-serif" /> -->
-  <span >{{ displayValue }}</span>
+  <span>{{ displayValue }}</span>
   <slot name="suffix"></slot>
 </template>
