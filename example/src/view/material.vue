@@ -29,6 +29,27 @@
         </div>
         </a>
       </div>
+      <div class="layui-col layui-col-md6">
+        <a href="https://github.com/rstacruz/nprogress">
+          <div class="project-list-item">
+          <img
+            class="project-list-item-cover"
+            src="https://gw.alipayobjects.com/zos/rmsportal/iZBVOIhGJiAnhplqjvZW.png"
+          />
+
+          <div class="project-list-item-body">
+            <h2>Nprogress</h2>
+            <div class="project-list-item-text layui-text">
+              For slim progress bars like on YouTube, Medium。
+            </div>
+            <div class="project-list-item-desc">
+              <span class="time">几秒前</span>
+              <div class="ew-head-list"></div>
+            </div>
+          </div>
+        </div>
+        </a>
+      </div>
     </div>
   </div>
 </template>
