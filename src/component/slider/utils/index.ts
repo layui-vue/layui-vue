@@ -1,11 +1,3 @@
-export function sleep(wait: number) {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(1);
-    }, wait);
-  });
-}
-
 export function throttle(func: Function) {
   let timer: any = null;
   return function (args: any) {
