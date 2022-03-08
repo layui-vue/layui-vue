@@ -13,7 +13,7 @@ onMounted(() => {
     container: "#docsearch",
     appId: "Y8NT7MICRP",
     apiKey: "fb23e7bbc001828e56c50d66e6be26b2",
-    indexName: "indexName",
+    indexName: "indexName"
   });
 });
 </script>

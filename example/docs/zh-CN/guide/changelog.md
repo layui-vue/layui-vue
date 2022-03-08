@@ -12,14 +12,18 @@
 <lay-timeline>
   <lay-timeline-item title="0.3.x">
       <ul> 
-      <a name="0-3-9"> </a> 
+      <a name="0-3-9"></a> 
       <li> 
         <h3>0.3.9 <span class="layui-badge-rim">2022-03-08</span></h3> 
         <ul> 
+          <li>[重构] count-up 组件。</li>
+          <li>[新增] algolia 文档搜索引擎。</li>
           <li>[新增] theme 主题 neutral 辅色配置。</li>
+          <li>[新增] menuItem 与 subMenu 组件 title 与 icon 插槽。</li>
           <li>[新增] menu 菜单 collapse 属性, 支持折叠。</li>
           <li>[修复] menu 菜单 inverted 跟随主题配置。</li>
-          <li>[重构] count-up 组件, 使用 vueUse 实现。</li>
+          <li>[删除] menuItem 菜单项 title 属性。</li>
+          <li>[删除] subMenu 菜单集 title 属性。</li>
           <li>[升级] layer-vue 1.3.8 版本。</li>
         </ul> 
       </li>

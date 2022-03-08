@@ -13,7 +13,7 @@
         <ul class="layui-row layui-col-space6">
           <li class="layui-col-sm12">
             <div class="alone">
-              <a href="https://gitee.com/layui-vue/layer-vue" target="_blank"
+              <a href="http://layer.layui-vue.com" target="_blank"
                 >layer - vue<cite>通用型弹出层组件</cite></a
               >
             </div>
