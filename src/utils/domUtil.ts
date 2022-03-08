@@ -10,7 +10,6 @@ export function getTop(elem: any): any {
 }
 
 /**
- * 随便写的
  * 获取 left 属性值
  * <p>
  * @param elem dom

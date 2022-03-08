@@ -5,14 +5,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import {
-  ref,
-  shallowRef,
-  withDefaults,
-  computed,
-  onMounted,
-  onBeforeUnmount,
-} from "vue";
+import { ref, shallowRef, withDefaults, computed, onMounted, onBeforeUnmount } from "vue";
 import { useThrottle } from "@vueuse/core";
 import LayIcon from "../icon/index";
 import "./index.less";

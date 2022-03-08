@@ -8,6 +8,7 @@ import LaySearch from './components/LaySearch.vue'
 import LayTableBox from './components/LayTableBox.vue'
 import LayComment from './components/LayComment.vue'
 import LayAnchor from './components/LayAnchor.vue'
+import InstantSearch from 'vue-instantsearch/vue3/es';
 import './assets/css/index.css'
 
 export function createApp(): {
@@ -21,6 +22,7 @@ export function createApp(): {
   app
     .use(layui)
     .use(router)
+    .use(InstantSearch)
     .component('LayCode', LayCode)
     .component('LaySearch', LaySearch)
     .component('LayTableBox', LayTableBox)
