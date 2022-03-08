@@ -21,19 +21,19 @@ onMounted(() => {
 
 .DocSearch-Button {
   outline: none;
-  box-shadow:var(--docsearch-searchbox-shadow)
+  box-shadow: none;
 }
 
-.DocSearch-Button .DocSearch-Search-Icon,
+.DocSearch-Button .DocSearch-Search-Icon, 
 .DocSearch-Button-Placeholder {
   color: whitesmoke;
 }
 
 :root {
-
   --docsearch-primary-color: var(--global-primary-color) ;
-  --docsearch-searchbox-background: transparent;
-  --docsearch-searchbox-focus-background: transparent;
+  --docsearch-searchbox-background: rgba(255, 255, 255, 0.05);
+  --docsearch-searchbox-focus-background: rgba(255, 255, 255, 0.05);
   --docsearch-logo-color: var(--global-primary-color);
+  --docsearch-container-background: rgba(0, 0, 0, 0.1);;
 }
 </style>
