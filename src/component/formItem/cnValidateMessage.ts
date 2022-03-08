@@ -29,7 +29,7 @@ export default {
     len: "%s必须是长度为%s个字符",
     min: "%s最小长度为%s个字符",
     max: "%s最长%s个字符",
-    range: "%s字符长度需要在%s和%s直接",
+    range: "%s字符长度需要在%s和%s之间",
   },
   number: {
     len: "%s长度必须为%s",

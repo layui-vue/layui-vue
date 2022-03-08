@@ -16,6 +16,7 @@
 <script>
 import { ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
+
 export default {
   setup() {
     const visible1 = ref(false)
@@ -158,7 +159,7 @@ export default {
 
 <template>
   <lay-button @click="changeVisible5" type="primary">远程窗体</lay-button>
-  <lay-layer title="加载 Iframe 内容" width="500px" height="400px" maxmin="true" v-model="visible5" move="true" :type="type5" content="http://www.pearadmin.com"></lay-layer>
+  <lay-layer title="加载 Iframe 内容" :area="['500px','400px']" maxmin="true" v-model="visible5" move="true" :type="type5" content="http://www.pearadmin.com"></lay-layer>
 </template>
 
 <script>

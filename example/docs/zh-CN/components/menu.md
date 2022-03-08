@@ -14,20 +14,22 @@
 
 <template>
   <lay-menu v-model:selectedKey="selectedKey" v-model:openKeys="openKeys1">
-    <lay-menu-item title="首页" id="1"></lay-menu-item>
-    <lay-menu-item title="用户" id="2"></lay-menu-item>
-    <lay-menu-item title="角色" id="3"></lay-menu-item> 
-    <lay-sub-menu title="目录" id="7">
-        <lay-menu-item title="菜单1" id="8"></lay-menu-item> 
-        <lay-menu-item title="菜单2" id="9"></lay-menu-item>
-        <lay-sub-menu title="菜单3" id="10">
-            <lay-menu-item title="菜单3-1" id="11"></lay-menu-item> 
-            <lay-menu-item title="菜单3-2" id="12"></lay-menu-item>
-            <lay-sub-menu title="菜单3-3" id="13">
-              <lay-menu-item title="菜单3-3-1" id="14"></lay-menu-item> 
-              <lay-menu-item title="菜单3-3-2" id="15"></lay-menu-item>
-              <lay-menu-item title="菜单3-3-3" id="16"></lay-menu-item>
-          </lay-sub-menu>
+    <lay-menu-item id="1">首页</lay-menu-item>
+    <lay-menu-item id="2">首页</lay-menu-item>
+    <lay-menu-item id="3">首页</lay-menu-item> 
+    <lay-sub-menu id="7">
+        <template #title>
+          首页
+        </template>
+        <lay-menu-item id="8">首页</lay-menu-item> 
+        <lay-menu-item id="9">首页</lay-menu-item>
+        <lay-sub-menu title="菜单" id="10">
+            <template #title>
+              首页
+            </template>
+            <lay-menu-item id="11">首页</lay-menu-item> 
+            <lay-menu-item id="12">首页</lay-menu-item>
+            <lay-menu-item id="13">首页</lay-menu-item>
         </lay-sub-menu>
     </lay-sub-menu> 
   </lay-menu>
@@ -58,16 +60,22 @@ export default {
 
 <template>
   <lay-menu v-model:selectedKey="selectedKey" v-model:openKeys="openKeys2" :tree="true">
-    <lay-menu-item title="首页" id="1"></lay-menu-item>
-    <lay-menu-item title="用户" id="2"></lay-menu-item>
-    <lay-menu-item title="角色" id="3"></lay-menu-item> 
-    <lay-sub-menu title="目录" id="7">
-        <lay-menu-item title="菜单" id="8"></lay-menu-item> 
-        <lay-menu-item title="菜单" id="9"></lay-menu-item>
+    <lay-menu-item id="1">首页</lay-menu-item>
+    <lay-menu-item id="2">首页</lay-menu-item>
+    <lay-menu-item id="3">首页</lay-menu-item> 
+    <lay-sub-menu id="7">
+        <template #title>
+          首页
+        </template>
+        <lay-menu-item id="8">首页</lay-menu-item> 
+        <lay-menu-item id="9">首页</lay-menu-item>
         <lay-sub-menu title="菜单" id="10">
-            <lay-menu-item title="菜单" id="11"></lay-menu-item> 
-            <lay-menu-item title="菜单" id="12"></lay-menu-item>
-            <lay-menu-item title="菜单" id="13"></lay-menu-item>
+            <template #title>
+              首页
+            </template>
+            <lay-menu-item id="11">首页</lay-menu-item> 
+            <lay-menu-item id="12">首页</lay-menu-item>
+            <lay-menu-item id="13">首页</lay-menu-item>
         </lay-sub-menu>
     </lay-sub-menu> 
   </lay-menu>
@@ -99,16 +107,22 @@ export default {
 
 <template>
   <lay-menu level="true" v-model:selectedKey="selectedKey" inverted="true" v-model:openKeys="openKeys3" :tree="true">
-    <lay-menu-item title="首页" id="1"></lay-menu-item>
-    <lay-menu-item title="用户" id="2"></lay-menu-item>
-    <lay-menu-item title="角色" id="3"></lay-menu-item> 
-    <lay-sub-menu title="目录" id="7">
-        <lay-menu-item title="菜单" id="8"></lay-menu-item> 
-        <lay-menu-item title="菜单" id="9"></lay-menu-item>
-        <lay-sub-menu title="菜单" id="10">
-            <lay-menu-item title="菜单" id="11"></lay-menu-item> 
-            <lay-menu-item title="菜单" id="12"></lay-menu-item>
-            <lay-menu-item title="菜单" id="13"></lay-menu-item>
+    <lay-menu-item id="1">首页</lay-menu-item>
+    <lay-menu-item id="2">首页</lay-menu-item>
+    <lay-menu-item id="3">首页</lay-menu-item> 
+    <lay-sub-menu id="7">
+        <template #title>
+          首页
+        </template>
+        <lay-menu-item id="8">首页</lay-menu-item> 
+        <lay-menu-item id="9">首页</lay-menu-item>
+        <lay-sub-menu id="10">
+            <template #title>
+              首页
+            </template>
+            <lay-menu-item id="11">首页</lay-menu-item> 
+            <lay-menu-item id="12">首页</lay-menu-item>
+            <lay-menu-item id="13">首页</lay-menu-item>
         </lay-sub-menu>
     </lay-sub-menu> 
   </lay-menu>
@@ -140,16 +154,44 @@ export default {
 
 <template>
   <lay-menu v-model:selectedKey="selectedKey" theme="light" v-model:openKeys="openKeys4" :tree="true">
-    <lay-menu-item title="首页" id="1"></lay-menu-item>
-    <lay-menu-item title="用户" id="2"></lay-menu-item>
-    <lay-menu-item title="角色" id="3"></lay-menu-item> 
-    <lay-sub-menu title="目录" id="7">
-        <lay-menu-item title="菜单" id="8"></lay-menu-item> 
-        <lay-menu-item title="菜单" id="9"></lay-menu-item>
+    <lay-menu-item id="1">
+      <template #title>
+        菜单
+      </template>
+    </lay-menu-item>
+    <lay-menu-item id="2">
+      <template #title>
+        菜单
+      </template>
+    </lay-menu-item>
+    <lay-menu-item id="3">
+      <template #title>
+        菜单
+      </template>
+    </lay-menu-item> 
+    <lay-sub-menu id="7">
+        <template #title>
+          目录
+        </template>
+        <lay-menu-item id="8">
+          菜单
+        </lay-menu-item> 
+        <lay-menu-item id="9">
+          菜单
+        </lay-menu-item>
         <lay-sub-menu title="菜单" id="10">
-            <lay-menu-item title="菜单" id="11"></lay-menu-item> 
-            <lay-menu-item title="菜单" id="12"></lay-menu-item>
-            <lay-menu-item title="菜单" id="13"></lay-menu-item>
+            <template #title>
+              目录
+            </template>
+            <lay-menu-item id="11">
+              菜单
+            </lay-menu-item> 
+            <lay-menu-item id="12">
+              菜单
+            </lay-menu-item>
+            <lay-menu-item id="13">
+              菜单
+            </lay-menu-item>
         </lay-sub-menu>
     </lay-sub-menu> 
   </lay-menu>
@@ -241,19 +283,107 @@ export default {
   <br/>
   <br/>
   <lay-menu v-model:selectedKey="selectedKey" v-model:tree="isTree" v-model:openKeys="openKeys6" :collapse="collapse">
-    <lay-menu-item title="首页" id="1"></lay-menu-item>
-    <lay-menu-item title="用户" id="2"></lay-menu-item>
-    <lay-menu-item title="角色" id="3"></lay-menu-item> 
+    <lay-menu-item id="1">
+        <template #icon>
+          <lay-icon type="layui-icon-home"></lay-icon> 
+        </template>
+        <template #title>
+          首页
+        </template>
+    </lay-menu-item>
+    <lay-menu-item id="2">
+        <template #icon>
+          <lay-icon type="layui-icon-home"></lay-icon> 
+        </template>
+        <template #title>
+          首页
+        </template>
+    </lay-menu-item>
+    <lay-menu-item id="3">
+        <template #icon>
+          <lay-icon type="layui-icon-home"></lay-icon> 
+        </template>
+        <template #title>
+          首页
+        </template>
+    </lay-menu-item> 
     <lay-sub-menu title="目录" id="7">
-        <lay-menu-item title="菜单1" id="8"></lay-menu-item> 
-        <lay-menu-item title="菜单2" id="9"></lay-menu-item>
-        <lay-sub-menu title="菜单3" id="10">
-            <lay-menu-item title="菜单3-1" id="11"></lay-menu-item> 
-            <lay-menu-item title="菜单3-2" id="12"></lay-menu-item>
-            <lay-sub-menu title="菜单3-3" id="13">
-              <lay-menu-item title="菜单3-3-1" id="14"></lay-menu-item> 
-              <lay-menu-item title="菜单3-3-2" id="15"></lay-menu-item>
-              <lay-menu-item title="菜单3-3-3" id="16"></lay-menu-item>
+        <template #icon>
+          <lay-icon type="layui-icon-home"></lay-icon> 
+        </template>
+        <template #title>
+          首页
+        </template>
+        <lay-menu-item id="8">
+                  <template #icon>
+          <lay-icon type="layui-icon-home"></lay-icon> 
+        </template>
+        <template #title>
+          首页
+        </template>
+        </lay-menu-item> 
+        <lay-menu-item id="9">
+                  <template #icon>
+          <lay-icon type="layui-icon-home"></lay-icon> 
+        </template>
+        <template #title>
+          首页
+        </template>
+        </lay-menu-item>
+        <lay-sub-menu id="10">
+            <template #icon>
+              <lay-icon type="layui-icon-home"></lay-icon> 
+            </template>
+            <template #title>
+              首页
+            </template>
+            <lay-menu-item id="11">
+                      <template #icon>
+          <lay-icon type="layui-icon-home"></lay-icon> 
+        </template>
+        <template #title>
+          首页
+        </template>
+            </lay-menu-item> 
+            <lay-menu-item id="12">
+                      <template #icon>
+          <lay-icon type="layui-icon-home"></lay-icon> 
+        </template>
+        <template #title>
+          首页
+        </template>
+            </lay-menu-item>
+            <lay-sub-menu id="13">
+              <template #icon>
+                <lay-icon type="layui-icon-home"></lay-icon> 
+              </template>
+              <template #title>
+              首页
+              </template>
+              <lay-menu-item id="14">
+                        <template #icon>
+          <lay-icon type="layui-icon-home"></lay-icon> 
+        </template>
+        <template #title>
+          首页
+        </template>
+              </lay-menu-item> 
+              <lay-menu-item id="15">
+                        <template #icon>
+          <lay-icon type="layui-icon-home"></lay-icon> 
+        </template>
+        <template #title>
+          首页
+        </template>
+              </lay-menu-item>
+              <lay-menu-item id="16">
+                        <template #icon>
+          <lay-icon type="layui-icon-home"></lay-icon> 
+        </template>
+        <template #title>
+          首页
+        </template>
+              </lay-menu-item>
           </lay-sub-menu>
         </lay-sub-menu>
     </lay-sub-menu> 
@@ -287,13 +417,13 @@ export default {
 
 ::: table
 
-| 属性                | 描述   | 备注 |
-| ------------------- | ------ | ---- |
-| v-model:selectedKey | 选中项 | --   |
-| v-model:openKeys    | 打开项 | --   |
-| theme    | 菜单主题 | `dark` `light`   |
-| inverted    | 特殊的激活样式 | `true` `false`  |
-| level    | 菜单层级 | `true` `false`  |
+| 属性                | 描述           | 备注           |
+| ------------------- | -------------- | -------------- |
+| v-model:selectedKey | 选中项         | --             |
+| v-model:openKeys    | 打开项         | --             |
+| theme               | 菜单主题       | `dark` `light` |
+| inverted            | 特殊的激活样式 | `true` `false` |
+| level               | 菜单层级       | `true` `false` |
 
 :::
 

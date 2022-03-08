@@ -59,8 +59,7 @@ export const usePlayGround = (source: string, convertSetupSugar: boolean) => {
   }
 
   const encoded = utoa(JSON.stringify(originCode))
-  const link = `https://layui-vue.gitee.io/layui-vue-playground/#${encoded}`
-  //const link = `http://localhost:3001/layui-vue-playground/#${encoded}`
+  const link = `https://layui-vue.gitee.io/sandbox-vue/#${encoded}`
   return {
     code,
     encoded,

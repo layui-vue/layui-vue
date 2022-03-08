@@ -111,7 +111,7 @@ export default {
 <template>
 <ul class="layui-row site-doc-color site-doc-necolor">
       <li class="layui-col-md12">
-        <div style="background-color: @global-neutral-color-1;">
+        <div style="background-color: #FAFAFA;">
           <p>#FAFAFA</p><p>
         </p></div>
       </li>

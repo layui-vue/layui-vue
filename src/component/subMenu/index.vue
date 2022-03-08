@@ -28,6 +28,7 @@ const props = defineProps<LaySubMenuProps>();
 const isTree: Ref<boolean> = inject("isTree") as Ref<boolean>;
 const selectedKey: Ref<string> = inject("selectedKey") as Ref<string>;
 const openKeys: Ref<string[]> = inject("openKeys") as Ref<string[]>;
+const isCollapse: Ref<boolean> = inject("isCollapse") as Ref<boolean>;
 
 const isOpen = computed(() => {
   return openKeys.value.includes(props.id);
@@ -43,10 +44,12 @@ watch(isOpen, () => {
 });
 
 const openHandle = function () {
-  if (openKeys.value.includes(props.id)) {
-    openKeys.value.splice(openKeys.value.indexOf(props.id), 1);
-  } else {
-    openKeys.value.push(props.id);
+  if (!isCollapse.value) {
+    if (openKeys.value.includes(props.id)) {
+      openKeys.value.splice(openKeys.value.indexOf(props.id), 1);
+    } else {
+      openKeys.value.push(props.id);
+    }
   }
 };
 
@@ -84,8 +87,12 @@ onBeforeUnmount(() => window.removeEventListener("resize", setPosition));
     :class="[isOpen && isTree ? 'layui-nav-itemed' : '']"
   >
     <a href="javascript:void(0)" @click="openHandle()">
-      <slot v-if="slots.title" name="title"></slot>
-      <span v-else>{{ title }}</span>
+      <i>
+        <slot v-if="slots.icon" name="icon"></slot>
+      </i>
+      <span>
+        <slot v-if="slots.title" name="title"></slot>
+      </span>
       <i
         :class="[isOpen && !isTree ? 'layui-nav-mored' : '']"
         class="layui-icon layui-icon-down layui-nav-more"

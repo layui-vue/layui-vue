@@ -9,35 +9,17 @@
   <div class="layui-container" style="width: 80%">
     <div class="layui-row layui-col-space16">
       <div class="layui-col layui-col-md6">
-        <div class="project-list-item">
-          <img
-            class="project-list-item-cover"
-            src="https://gw.alipayobjects.com/zos/rmsportal/iXjVmWVHbCJAyqvDxdtx.png"
-          />
-
-          <div class="project-list-item-body">
-            <h2>Sandbox</h2>
-            <div class="project-list-item-text layui-text">
-              生命就像一盒巧克力，结果往往出人意料。
-            </div>
-            <div class="project-list-item-desc">
-              <span class="time">几秒前</span>
-              <div class="ew-head-list"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-            <div class="layui-col layui-col-md6">
-        <div class="project-list-item">
+        <a href="https://github.com/scopewu/qrcode.vue">
+          <div class="project-list-item">
           <img
             class="project-list-item-cover"
             src="https://gw.alipayobjects.com/zos/rmsportal/iZBVOIhGJiAnhplqjvZW.png"
           />
 
           <div class="project-list-item-body">
-            <h2>Sandbox</h2>
+            <h2>Qrcode.vue</h2>
             <div class="project-list-item-text layui-text">
-              没有锚的船当然也可以航行，只是紧张充满你的一生。
+              A Vue.js component to generate qrcode。
             </div>
             <div class="project-list-item-desc">
               <span class="time">几秒前</span>
@@ -45,13 +27,32 @@
             </div>
           </div>
         </div>
+        </a>
+      </div>
+      <div class="layui-col layui-col-md6">
+        <a href="https://github.com/rstacruz/nprogress">
+          <div class="project-list-item">
+          <img
+            class="project-list-item-cover"
+            src="https://gw.alipayobjects.com/zos/rmsportal/iZBVOIhGJiAnhplqjvZW.png"
+          />
+
+          <div class="project-list-item-body">
+            <h2>Nprogress</h2>
+            <div class="project-list-item-text layui-text">
+              For slim progress bars like on YouTube, Medium。
+            </div>
+            <div class="project-list-item-desc">
+              <span class="time">几秒前</span>
+              <div class="ew-head-list"></div>
+            </div>
+          </div>
+        </div>
+        </a>
       </div>
     </div>
   </div>
 </template>
-
-<script>
-</script>
 
 <style>
 .alone-banner {
@@ -59,7 +60,6 @@
   height: 190px;
   text-align: center;
   font-weight: 300;
-  background-color: #009688;
   color: #fff;
 }
 .alone-banner h1 {

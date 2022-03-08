@@ -7,7 +7,7 @@
   <a href="https://coveralls.io/r/sentsin/layui?branch=master"><img alt="Test Coverage" src="https://img.shields.io/coveralls/sentsin/layui/master.svg"></a>
 </p>  
 
-**[🔶 Explore the docs »](http://layui-vue.pearadmin.com)**
+**[🔶 Explore the docs »](http://www.layui-vue.com)**
 
 An enterprise-class UI components based on Layui and Vue.
 
@@ -73,14 +73,6 @@ This project follows the [all-contributors](https://github.com/layui-vue/layui-v
   <img src="https://contrib.rocks/image?repo=layui-vue/layui-vue" />
 </a>
 
-## Backers 
-
-Thank you to all our backers! 🙏 [[Become a backers](https://opencollective.com/layui-vue#backer)]
-
-## Sponsors 
-
-Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](https://opencollective.com/layui-vue#sponsor)]
-
-## Open Source Licence
+## Licence
 
 Layui vue is licensed under the [MIT license](https://opensource.org/licenses/MIT).

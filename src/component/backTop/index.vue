@@ -5,7 +5,15 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { ref, shallowRef, withDefaults, computed, onMounted } from "vue";
+import {
+  ref,
+  shallowRef,
+  withDefaults,
+  computed,
+  onMounted,
+  onBeforeUnmount,
+} from "vue";
+import { useThrottle } from "@vueuse/core";
 import LayIcon from "../icon/index";
 import "./index.less";
 
@@ -185,6 +193,13 @@ onMounted(() => {
   if (!props.target) return;
   scrollTarget.value = getScrollTarget();
   scrollTarget.value.addEventListener("scroll", throttle(handleScroll, 300));
+});
+
+onBeforeUnmount(() => {
+  scrollTarget.value?.removeEventListener(
+    "scroll",
+    throttle(handleScroll, 300)
+  );
 });
 </script>
 
