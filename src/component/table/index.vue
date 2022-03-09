@@ -6,8 +6,8 @@ export default {
 
 <script setup lang="ts">
 import { ref, watch, useSlots, withDefaults, onMounted } from "vue";
-import { Recordable } from "../../types";
 import { guid } from "../../utils/guidUtil";
+import { Recordable } from "../../types";
 import LayCheckbox from "../checkbox";
 import LayDropdown from "../dropdown";
 import LayPage from "../page";
@@ -36,8 +36,8 @@ const props = withDefaults(defineProps<LayTableProps>(), {
 });
 
 const emit = defineEmits([
-  "change",
   "row",
+  "change",
   "row-double",
   "update:selectedKeys",
 ]);
@@ -152,7 +152,7 @@ onMounted(() => {
       </div>
 
       <div class="layui-table-box">
-        <!-- 表格头部 -->
+        <!-- table header -->
         <div class="layui-table-header" ref="tableHeader">
           <table class="layui-table" :lay-size="size">
             <thead>
@@ -181,7 +181,7 @@ onMounted(() => {
             </thead>
           </table>
         </div>
-        <!-- 表格数据 -->
+        <!-- table body -->
         <div class="layui-table-body layui-table-main" ref="tableBody">
           <table class="layui-table" :lay-size="size">
             <tbody>
@@ -190,6 +190,7 @@ onMounted(() => {
                   @click.stop="rowClick(data)"
                   @dblclick.stop="rowDoubleClick(data)"
                 >
+
                   <td v-if="checkbox" class="layui-table-col-special">
                     <div class="layui-table-cell laytable-cell-checkbox">
                       <LayCheckbox
@@ -202,6 +203,7 @@ onMounted(() => {
 
                   <template v-for="column in columns" :key="column">
                     <template v-if="tableColumnKeys.includes(column.key)">
+                      <!-- 插 槽 Column -->
                       <template v-if="column.customSlot">
                         <td class="layui-table-cell">
                           <div :style="{ width: column.width }">
@@ -209,21 +211,19 @@ onMounted(() => {
                           </div>
                         </td>
                       </template>
-
+                      <!-- 匹 配 Column -->
                       <template
-                        v-for="(value, key) in data"
                         v-else
+                        v-for="(value, key) in data"
                         :key="value"
                       >
                         <td v-if="column.key == key" class="layui-table-cell">
                           <div :style="{ width: column.width }">
-                            <span v-if="column.slot">
-                              <slot :name="column.slot" :data="data"></slot>
-                            </span>
-                            <span v-else> {{ value }} </span>
+                            <span> {{ value }} </span>
                           </div>
                         </td>
                       </template>
+                    
                     </template>
                   </template>
                 </tr>

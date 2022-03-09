@@ -10,7 +10,7 @@
 :root {
   --button-primary-color: @global-primary-color;
   --button-border-radius: @global-border-radius;
-  --button-border-color: #d2d2d2;
+  --button-border-color: @global-neutral-color-6;
   --button-normal-color: @global-normal-color;
   --button-warm-color: @global-warm-color;
   --button-danger-color: @global-danger-color;
@@ -31,9 +31,9 @@
 }
 
 .layui-btn:hover {
+  color: #fff;
   opacity: 0.8;
   filter: alpha(opacity=80);
-  color: #fff;
 }
 
 .layui-btn:active {
