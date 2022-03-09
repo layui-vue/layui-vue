@@ -19,8 +19,11 @@ const props = withDefaults(defineProps<Prop>(), {
 let rv = toRef(props, "rangeValue");
 
 const moveAction = throttle(rangeMove);
+let currbtn = -1;
 
 function handle_mousedown() {
+  currbtn = -1;
+  tooptipHide.value = false;
   on("selectstart", window, handle_select, { once: true });
   on("mouseup", window, handle_mouseup);
   on("mousemove", window, moveAction);
@@ -31,7 +34,6 @@ function handle_mouseup() {
   off("selectstart", document, handle_select);
   off("mouseup", window, handle_mouseup);
   off("mousemove", window, moveAction);
-  currbtn = -1;
 }
 function handle_select(e: Event): void {
   e.preventDefault();
@@ -39,11 +41,11 @@ function handle_select(e: Event): void {
 
 const tracker = ref<HTMLElement | null>(null);
 const emit = defineEmits(["link-val-hook"]);
-let currbtn = -1;
+
 const tooptipHide = ref<Boolean>(true);
 
 function rangeMove(e: MouseEvent) {
-  tooptipHide.value = false;
+  // tooptipHide.value = false;
   if (!tracker.value) {
     return;
   }

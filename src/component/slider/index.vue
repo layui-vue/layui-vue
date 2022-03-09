@@ -41,7 +41,7 @@ function valHook(val: any) {
       <div v-if="range">
         <!-- 纵向区间 -->
         <VerticalRange
-          :step="10"
+          :step="step"
           @linkValHook="valHook"
           :disabled="disabled"
           :rangeValue="rangeValues"
@@ -65,7 +65,7 @@ function valHook(val: any) {
       <div v-if="range">
         <!-- 横向区间 -->
         <StandardRange
-          :step="10"
+          :step="step"
           @linkValHook="valHook"
           :disabled="disabled"
           :rangeValue="rangeValues"
