@@ -12,8 +12,7 @@
         <div class="layui-anim site-desc site-desc-anim">
           <p class="web-font-desc">layui - vue</p>
           <cite
-            >layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件
-            库.</cite
+            >{{ t('home.description') }}</cite
           >
         </div>
         <div class="site-download">
@@ -22,15 +21,15 @@
           >
         </div>
         <div class="site-version">
-          <span>当前版本：v<cite class="site-showv">0.3.8</cite></span>
+          <span>{{ t('home.version') }}：v<cite class="site-showv">0.3.8</cite></span>
           <span
             ><router-link
               class="layui-inline site-down"
               to="/zh-CN/guide/changelog"
-              >更新日志</router-link
+              >{{ t('home.changelog') }}</router-link
             ></span
           >
-          <span>下载量：<em class="site-showdowns">4680</em></span>
+          <span>{{ t('home.download') }}：<em class="site-showdowns">4680</em></span>
         </div>
       </div>
       <div class="site-banner-other">
@@ -40,7 +39,7 @@
           rel="nofollow"
           class="site-star"
         >
-          <i class="layui-icon"></i> Star <cite id="getStars">657</cite>
+          <i class="layui-icon"></i> Star <cite id="getStars">699</cite>
         </a>
         <a
           href="https://gitee.com/layui-vue"
@@ -101,13 +100,27 @@
     </div>
     <div class="footer footer-index">
       <p>
-        Copyright © 2021 <a href="/index.html">layui-vue.pearadmin.com</a> MIT
-        Licensed
+        Copyright © 2022 <a href="/index.html">www.layui-vue.com</a> mit
+        licence
       </p>
       <p></p>
     </div>
   </div>
 </template>
+
+<script>
+import { useI18n } from 'vue-i18n';
+export default {
+  name: "index",
+  setup() {
+    const { t } = useI18n();
+
+    return {
+      t
+    }
+  }
+}
+</script>
 <style>
 .site-container {
   margin-top: 60px;

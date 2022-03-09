@@ -13,5 +13,5 @@ export function S4() {
  * @param null 无参
  * */
 export function guid() {
-  return (S4() + S4() + S4() + S4() + S4() + S4() + S4() + S4());
+  return S4() + S4() + S4() + S4() + S4() + S4() + S4() + S4();
 }

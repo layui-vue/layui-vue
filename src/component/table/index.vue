@@ -190,7 +190,6 @@ onMounted(() => {
                   @click.stop="rowClick(data)"
                   @dblclick.stop="rowDoubleClick(data)"
                 >
-
                   <td v-if="checkbox" class="layui-table-col-special">
                     <div class="layui-table-cell laytable-cell-checkbox">
                       <LayCheckbox
@@ -223,7 +222,6 @@ onMounted(() => {
                           </div>
                         </td>
                       </template>
-                    
                     </template>
                   </template>
                 </tr>

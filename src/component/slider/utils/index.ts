@@ -13,5 +13,3 @@ export function throttle(func: Function) {
 export function handle_select(e: Event): void {
   e.preventDefault();
 }
-
-
