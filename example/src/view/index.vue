@@ -1,6 +1,5 @@
 <template>
-  <div class="site-container"
-  >
+  <div class="site-container">
     <div class="site-banner">
       <div class="site-banner-main">
         <div class="site-zfj site-zfj-anim">
@@ -21,7 +20,7 @@
           >
         </div>
         <div class="site-version">
-          <span>{{ t('home.version') }}：v<cite class="site-showv">0.3.8</cite></span>
+          <span>{{ t('home.version') }}：v<cite class="site-showv">0.3.9</cite></span>
           <span
             ><router-link
               class="layui-inline site-down"

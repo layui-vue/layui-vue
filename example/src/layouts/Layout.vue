@@ -49,38 +49,75 @@
             <lay-dropdown>
               <a href="javascript:void(0);">
                 <lay-icon
-                  type="layui-icon-theme"
                   size="15px"
-                  style="
-                    color: rgba(255, 255, 255, 0.7);
-                    padding-left: 30px;
-                    padding-right: 30px;
-                  "
+                  type="layui-icon-theme"
+                  style="color: rgba(255, 255, 255, 0.7);padding-left: 30px;padding-right: 30px;"
                 ></lay-icon>
               </a>
               <template #content>
-                <div style="width: 380px; padding:0px 10px 10px 10px;">
-                  <lay-color-picker v-model="themeVariable['--global-primary-color']"></lay-color-picker>&nbsp;
-                  <lay-color-picker v-model="themeVariable['--global-normal-color']"></lay-color-picker>&nbsp;
-                  <lay-color-picker v-model="themeVariable['--global-warm-color']"></lay-color-picker>&nbsp;
-                  <lay-color-picker v-model="themeVariable['--global-danger-color']"></lay-color-picker>&nbsp;
-                  <lay-color-picker v-model="themeVariable['--global-checked-color']"></lay-color-picker>&nbsp;
-                  <lay-input v-model="themeVariable['--global-border-radius']" style="display:inline-block;width:130px;"></lay-input>
-                  <lay-color-picker v-model="themeVariable['--global-neutral-color-1']"></lay-color-picker>&nbsp;
-                  <lay-color-picker v-model="themeVariable['--global-neutral-color-2']"></lay-color-picker>&nbsp;
-                  <lay-color-picker v-model="themeVariable['--global-neutral-color-3']"></lay-color-picker>&nbsp;
-                  <lay-color-picker v-model="themeVariable['--global-neutral-color-4']"></lay-color-picker>&nbsp;
-                  <lay-color-picker v-model="themeVariable['--global-neutral-color-5']"></lay-color-picker>&nbsp;
-                  <lay-color-picker v-model="themeVariable['--global-neutral-color-6']"></lay-color-picker>&nbsp;
-                  <lay-color-picker v-model="themeVariable['--global-neutral-color-7']"></lay-color-picker>&nbsp;
-                  <lay-color-picker v-model="themeVariable['--global-neutral-color-8']"></lay-color-picker>
+                <div style="width: 380px; padding: 0px 10px 10px 10px">
+                  <lay-color-picker
+                    v-model="themeVariable['--global-primary-color']"
+                  ></lay-color-picker
+                  >&nbsp;
+                  <lay-color-picker
+                    v-model="themeVariable['--global-normal-color']"
+                  ></lay-color-picker
+                  >&nbsp;
+                  <lay-color-picker
+                    v-model="themeVariable['--global-warm-color']"
+                  ></lay-color-picker
+                  >&nbsp;
+                  <lay-color-picker
+                    v-model="themeVariable['--global-danger-color']"
+                  ></lay-color-picker
+                  >&nbsp;
+                  <lay-color-picker
+                    v-model="themeVariable['--global-checked-color']"
+                  ></lay-color-picker
+                  >&nbsp;
+                  <lay-input
+                    v-model="themeVariable['--global-border-radius']"
+                    style="display: inline-block; width: 130px"
+                  ></lay-input>
+                  <lay-color-picker
+                    v-model="themeVariable['--global-neutral-color-1']"
+                  ></lay-color-picker
+                  >&nbsp;
+                  <lay-color-picker
+                    v-model="themeVariable['--global-neutral-color-2']"
+                  ></lay-color-picker
+                  >&nbsp;
+                  <lay-color-picker
+                    v-model="themeVariable['--global-neutral-color-3']"
+                  ></lay-color-picker
+                  >&nbsp;
+                  <lay-color-picker
+                    v-model="themeVariable['--global-neutral-color-4']"
+                  ></lay-color-picker
+                  >&nbsp;
+                  <lay-color-picker
+                    v-model="themeVariable['--global-neutral-color-5']"
+                  ></lay-color-picker
+                  >&nbsp;
+                  <lay-color-picker
+                    v-model="themeVariable['--global-neutral-color-6']"
+                  ></lay-color-picker
+                  >&nbsp;
+                  <lay-color-picker
+                    v-model="themeVariable['--global-neutral-color-7']"
+                  ></lay-color-picker
+                  >&nbsp;
+                  <lay-color-picker
+                    v-model="themeVariable['--global-neutral-color-8']"
+                  ></lay-color-picker>
                   <lay-button fluid>导 出 配 置</lay-button>
                 </div>
               </template>
             </lay-dropdown>
           </li>
           <li class="layui-nav-item">
-            <a href="https://gitee.com/layui-vue">
+            <a href="https://gitee.com/layui-vue/layui-vue">
               <lay-icon type="layui-icon-fonts-code" size="15px"></lay-icon>
             </a>
           </li>
@@ -108,7 +145,7 @@
             </a>
           </li>
           <li class="layui-nav-item">
-            <a href="javascript:void(0)"> 0.3.8 </a>
+            <a href="javascript:void(0)"> 0.3.9 </a>
           </li>
         </ul>
       </lay-header>
@@ -117,7 +154,7 @@
   </lay-config-provider>
 </template>
 <script>
-import { computed, ref, watch } from "vue";
+import { ref, watch } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import menu from "../view/utils/menus";
 import { useI18n } from "vue-i18n";
@@ -125,7 +162,6 @@ import zh_CN from "../locales/zh_CN.ts";
 import en_US from "../locales/en_US.ts";
 export default {
   setup() {
-
     const { t } = useI18n();
     const route = useRoute();
     const router = useRouter();
@@ -135,7 +171,6 @@ export default {
       { name: "zh_CN", locale: zh_CN, merge: true },
       { name: "en_US", locale: en_US, merge: true },
     ];
-
     const theme = "light";
     const themeVariable = ref({
       "--global-primary-color": "#009688",
@@ -194,6 +229,7 @@ export default {
 </script>
 
 <style>
+
 .layui-layout-document > .layui-header {
   z-index: 9999;
   width: 100%;
