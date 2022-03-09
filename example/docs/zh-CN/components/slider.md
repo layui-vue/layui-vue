@@ -13,7 +13,7 @@
 ::: demo 使用 `lay-slider` 标签, 创建滑块
 
 <template>
-  <lay-slider v-model="value1" :disabled="false"></lay-slider>
+  <lay-slider :max="88" v-model="value1" :disabled="false"></lay-slider>
   <lay-input-number v-model="value1"></lay-input-number>
 </template>
 
@@ -63,7 +63,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-slider v-model:standardrange="value3" :range="true"></lay-slider>
+  <lay-slider :disabled="false" :min="10" :max="80" v-model:rangeValue="value3" :range="true"></lay-slider>
 </template>
 
 <script>
@@ -85,7 +85,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-slider v-model:verticalrange="value4" :range="true" :vertical="true"></lay-slider>
+  <lay-slider v-model:rangeValue="value4" :range="true" :vertical="true" :disabled="false"></lay-slider>
 </template>
 
 <script>
@@ -111,10 +111,10 @@ export default {
 | v-model      | 选中值                | `Number`  |        -       |    -    |
 | vertical  |  是否垂直     | `Boolean`                   |        -       |    -    |
 | range  |  是否区间     | `Boolean`                   |        -       |    -    |
-| verticalrange  |  垂直区间值     | `Array`                   |        -       |    -    |
-| standardrange  |  水平区间值     | `Array`                   |        -       |    -    |
+| rangeValue  |  区间值     | `Array`                   |        -       |    -    |
 | step  |  步长     | `Number`                   |        -       |    -    |
-
+| min  |  最小值     | `Number`                   |        -       |    -    |
+| max  |  最大值     | `Number`                   |        -       |    -    |
 :::
 
 ::: comment
