@@ -5,7 +5,7 @@ export function throttle(func: Function) {
       timer = setTimeout(() => {
         timer = null;
         func(args);
-      }, 20);
+      }, 30);
     }
   };
 }
