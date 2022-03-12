@@ -9,107 +9,107 @@
 const matchComponents = [
   {
     pattern: /^LayAvatarList$/,
-    styleDir: 'avatar',
+    styleDir: "avatar",
   },
   {
     pattern: /^(LayBreadcrumb|LayBreadcrumbItem)$/,
-    styleDir: '',
+    styleDir: "",
   },
   {
     pattern: /^(LayCarousel|LayCarouselItem)$/,
-    styleDir: '',
+    styleDir: "",
   },
   {
     pattern: /^(LayCheckbox|LayCheckboxGroup)$/,
-    styleDir: '',
+    styleDir: "",
   },
   {
     pattern: /^LayCol$/,
-    styleDir: '',
+    styleDir: "",
   },
   {
     pattern: /^(LayCollapse|LayCollapseItem)$/,
-    styleDir: '',
+    styleDir: "",
   },
   // 无 css
   {
     pattern: /^LayCountUp$/,
-    styleDir: '',
+    styleDir: "",
   },
   {
     pattern: /^(LayDropdown|LayDropdownItem)$/,
-    styleDir: '',
+    styleDir: "",
   },
   // 可能有未拆分的
   {
     pattern: /^(LayForm|LayFormItem)$/,
-    styleDir: 'formItem',
+    styleDir: "formItem",
   },
   {
     pattern: /^(LayHeader)$/,
-    styleDir: '',
+    styleDir: "",
   },
   {
     pattern: /^LayLine$/,
-    styleDir: '',
+    styleDir: "",
   },
   {
     pattern: /^LayLogo$/,
-    styleDir: '',
+    styleDir: "",
   },
   {
     pattern: /^(LayMenuItem|LaySubMenu)$/,
-    styleDir: 'menu',
+    styleDir: "menu",
   },
   {
     pattern: /^LayPage$/,
-    styleDir: '',
+    styleDir: "",
   },
   {
     pattern: /^LayProgress$/,
-    styleDir: '',
+    styleDir: "",
   },
   {
     pattern: /^LayRadio$/,
-    styleDir: '',
+    styleDir: "",
   },
   {
     pattern: /^LayScroll$/,
-    styleDir: '',
+    styleDir: "",
   },
   {
     pattern: /^LaySelectOption$/,
-    styleDir: 'select',
+    styleDir: "select",
   },
   {
     pattern: /^LaySkeletonItem$/,
-    styleDir: 'skeleton',
+    styleDir: "skeleton",
   },
   {
     pattern: /^LaySplitPanelItem$/,
-    styleDir: 'splitPanel',
+    styleDir: "splitPanel",
   },
   {
     pattern: /^LayStepItem$/,
-    styleDir: 'step',
+    styleDir: "step",
   },
   {
     pattern: /^LaySwitch$/,
-    styleDir: '',
+    styleDir: "",
   },
   {
     pattern: /^(LayTab|LayTabItem)$/,
-    styleDir: '',
+    styleDir: "",
   },
   {
     pattern: /^LayTimelineItem$/,
-    styleDir: 'timeline',
+    styleDir: "timeline",
   },
   {
     pattern: /^LayTolltip$/,
-    styleDir: 'popper',
+    styleDir: "popper",
   },
-]
+];
 
 export interface LayuiVueResolverOptions {
   /**
@@ -117,7 +117,7 @@ export interface LayuiVueResolverOptions {
    *
    * @default 'css'
    */
-  importStyle?: boolean | 'css'
+  importStyle?: boolean | "css";
 
   /**
    * resolve `@layui/layui-vue' icons
@@ -125,47 +125,46 @@ export interface LayuiVueResolverOptions {
    *
    * @default false
    */
-  resolveIcons?: boolean
+  resolveIcons?: boolean;
 
   /**
    * exclude components that do not require automatic import
    * @default []
-   * 
+   *
    */
-  exclude?: string[]
+  exclude?: string[];
 }
 
-const libRE = /^Lay[A-Z]/
-const layerRE = /^(layer|LayLayer)$/
-const iconsRE = /^([A-Z][\w]+Icon|LayIcon)$/
-const esComponentsFolder = '@layui/layui-vue/es'
+const libRE = /^Lay[A-Z]/;
+const layerRE = /^(layer|LayLayer)$/;
+const iconsRE = /^([A-Z][\w]+Icon|LayIcon)$/;
+const esComponentsFolder = "@layui/layui-vue/es";
 
 function lowerCamelCase(str: string) {
-  return str.charAt(0).toLowerCase() + str.slice(1)
+  return str.charAt(0).toLowerCase() + str.slice(1);
 }
 
 function getSideEffects(importName: string, options: LayuiVueResolverOptions) {
-  const { importStyle = true } = options
-  if (!importStyle) return
+  const { importStyle = true } = options;
+  if (!importStyle) return;
 
-  let styleDir: string | undefined = undefined
+  let styleDir: string | undefined = undefined;
   if (importName.match(iconsRE)) {
-    return `@layui/icons-vue/lib/index.css`
+    return `@layui/icons-vue/lib/index.css`;
   } else if (importName.match(layerRE)) {
-    return `@layui/layer-vue/lib/index.css`
+    return `@layui/layer-vue/lib/index.css`;
   } else if (importName.match(libRE)) {
-    styleDir = lowerCamelCase(importName.slice(3))// LayBackTop -> backTop
+    styleDir = lowerCamelCase(importName.slice(3)); // LayBackTop -> backTop
     for (const item of matchComponents) {
       if (item.pattern.test(importName)) {
-        styleDir = item.styleDir
-        break
+        styleDir = item.styleDir;
+        break;
       }
     }
     // FIXME 临时方案,部分组件样式未拆分
     // return styleDir ? `${esComponentsFolder}/${styleDir}/index.css` : `@layui/layui-vue/lib/index.css`
-    return styleDir ? `${esComponentsFolder}/${styleDir}/index.css` : undefined
+    return styleDir ? `${esComponentsFolder}/${styleDir}/index.css` : undefined;
   }
-
 }
 
 function resolveComponent(name: string, options: LayuiVueResolverOptions) {
@@ -174,33 +173,33 @@ function resolveComponent(name: string, options: LayuiVueResolverOptions) {
   let sideEffects: string | string[] | undefined;
 
   if (options.resolveIcons && name.match(iconsRE)) {
-    importName = name
-    path = `@layui/icons-vue`
-    sideEffects = getSideEffects(name, options)
+    importName = name;
+    path = `@layui/icons-vue`;
+    sideEffects = getSideEffects(name, options);
   } else if (name.match(layerRE)) {
-    importName = name
-    path = `@layui/layer-vue`
-    sideEffects = getSideEffects(name, options)
+    importName = name;
+    path = `@layui/layer-vue`;
+    sideEffects = getSideEffects(name, options);
   } else if (name.match(libRE) && !options?.exclude?.includes(name)) {
     importName = name;
-    path = `@layui/layui-vue`
-    sideEffects = getSideEffects(name, options)
+    path = `@layui/layui-vue`;
+    sideEffects = getSideEffects(name, options);
   }
 
-  return importName ? { importName, path, sideEffects } : null
+  return importName ? { importName, path, sideEffects } : null;
 }
 
 /**
  * Resolver for layui-vue
  * Requires @layui/layui-vue@v0.3.X(版本待定) or later
- * @param options 
- * @returns 
+ * @param options
+ * @returns
  */
 export function LayuiVueResolver(options: LayuiVueResolverOptions = {}) {
   return {
-    type: 'component',
+    type: "component",
     resolve: (name: string) => {
-      return resolveComponent(name, options)
-    }
-  }
+      return resolveComponent(name, options);
+    },
+  };
 }
