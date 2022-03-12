@@ -5,6 +5,7 @@ export default {
 </script>
 
 <script setup lang="ts">
+import "./index.less";
 import { computed } from "vue";
 
 export interface LayProgressProps {

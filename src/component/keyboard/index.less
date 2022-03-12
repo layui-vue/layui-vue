@@ -1,0 +1,61 @@
+@import "../../theme/variable.less";
+
+.layui-keyboard-header {
+  height: 40px;
+  line-height: 40px;
+  padding: 0 60px;
+  text-align: center;
+  background-color: #fff;
+  box-shadow: 0 2px 8px #f0f1f2;
+  border-bottom: 1px solid whitesmoke;
+}
+
+.layui-keyboard-list {
+  padding: 10px 10px 5px;
+  text-align: center;
+}
+
+.layui-keyboard-header button {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  height: 20px;
+  line-height: 20px;
+  border: none;
+  color: @global-primary-color;
+}
+
+.layui-keyboard-header button:first-child {
+  left: 10px;
+  right: auto;
+  color: #999;
+}
+
+.layui-keyboard-list ul {
+  margin-right: -5px;
+}
+
+.layui-keyboard-list li {
+  display: inline-block;
+  vertical-align: top;
+  margin: 0 5px 5px 0;
+  padding: 5px;
+  width: 30px;
+  height: 36px;
+  line-height: 26px;
+  border: 1px solid @global-neutral-color-3;
+  border-radius: 2px;
+  cursor: pointer;
+  text-align: center;
+  background-color: #fff;
+}
+
+.layui-keyboard-list li:hover {
+  background-color: @global-neutral-color-1;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.layui-keyboard-list li.layui-this {
+  border-color: @global-checked-color;
+  color: @global-checked-color;
+}

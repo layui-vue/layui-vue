@@ -169,6 +169,7 @@ onMounted(() => {
                 </th>
                 <template v-for="column in columns" :key="column">
                   <th v-if="tableColumnKeys.includes(column.key)">
+                    <!-- TODO Table header slot  -->
                     <div
                       class="layui-table-cell"
                       :style="{ width: column.width }"

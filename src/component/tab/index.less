@@ -1,0 +1,196 @@
+@import "../../theme/variable.less";
+
+.layui-tab {
+  margin: 10px 0;
+  text-align: left !important;
+}
+
+.layui-tab[overflow] > .layui-tab-title {
+  overflow: hidden;
+}
+
+.layui-tab-title {
+  position: relative;
+  left: 0;
+  height: 40px;
+  white-space: nowrap;
+  font-size: 0;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  transition: all 0.2s;
+  -webkit-transition: all 0.2s;
+}
+
+.layui-tab-title li {
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+  vertical-align: middle;
+  font-size: 14px;
+  transition: all 0.2s;
+  -webkit-transition: all 0.2s;
+  position: relative;
+  line-height: 40px;
+  min-width: 65px;
+  padding: 0 15px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.layui-tab-title li a {
+  display: block;
+  padding: 0 15px;
+  margin: 0 -15px;
+}
+
+.layui-tab-title .layui-this {
+  color: #000;
+}
+
+.layui-tab-title .layui-this:after {
+  position: absolute;
+  left: 0;
+  top: 0;
+  content: "";
+  width: 100%;
+  height: 41px;
+  border-width: 1px;
+  border-style: solid;
+  border-bottom-color: #fff;
+  border-radius: 2px 2px 0 0;
+  box-sizing: border-box;
+  pointer-events: none;
+}
+
+.layui-tab-bar {
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 10;
+  width: 30px;
+  height: 39px;
+  line-height: 39px;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 2px;
+  text-align: center;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.layui-tab-bar .layui-icon {
+  position: relative;
+  display: inline-block;
+  top: 3px;
+  transition: all 0.3s;
+  -webkit-transition: all 0.3s;
+}
+
+.layui-tab-item {
+  display: none;
+}
+
+.layui-tab-more {
+  padding-right: 30px;
+  height: auto !important;
+  white-space: normal !important;
+}
+
+.layui-tab-more li.layui-this:after {
+  border-bottom-color: @global-neutral-color-3;
+  border-radius: 2px;
+}
+
+.layui-tab-more .layui-tab-bar .layui-icon {
+  top: -2px;
+  top: 3px\9;
+  -webkit-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+:root .layui-tab-more .layui-tab-bar .layui-icon {
+  top: -2px\0 / IE9;
+}
+
+.layui-tab-content {
+  padding: 15px 0;
+}
+
+.layui-tab-title li .layui-tab-close {
+  position: relative;
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  line-height: 20px;
+  margin-left: 8px;
+  top: 1px;
+  text-align: center;
+  font-size: 14px;
+  color: @global-neutral-color-8;
+  transition: all 0.2s;
+  -webkit-transition: all 0.2s;
+}
+
+.layui-tab-title li .layui-tab-close:hover {
+  border-radius: 2px;
+  background-color: #ff5722;
+  color: #fff;
+}
+
+.layui-tab-brief > .layui-tab-title .layui-this {
+  color: @global-primary-color;
+}
+
+.layui-tab-brief > .layui-tab-more li.layui-this:after,
+.layui-tab-brief > .layui-tab-title .layui-this:after {
+  border: none;
+  border-radius: 0;
+  border-bottom: 2px solid @global-checked-color;
+}
+
+.layui-tab-brief[overflow] > .layui-tab-title .layui-this:after {
+  top: -1px;
+}
+
+.layui-tab-card {
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 2px;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1);
+}
+
+.layui-tab-card > .layui-tab-title {
+  background-color: @global-neutral-color-1;
+}
+
+.layui-tab-card > .layui-tab-title li {
+  margin-right: -1px;
+  margin-left: -1px;
+}
+
+.layui-tab-card > .layui-tab-title .layui-this {
+  background-color: #fff;
+}
+
+.layui-tab-card > .layui-tab-title .layui-this:after {
+  border-top: none;
+  border-width: 1px;
+  border-bottom-color: #fff;
+}
+
+.layui-tab-card > .layui-tab-title .layui-tab-bar {
+  height: 40px;
+  line-height: 40px;
+  border-radius: 0;
+  border-top: none;
+  border-right: none;
+}
+
+.layui-tab-card > .layui-tab-more .layui-this {
+  background: 0 0;
+  color: @global-checked-color;
+}
+
+.layui-tab-card > .layui-tab-more .layui-this:after {
+  border: none;
+}

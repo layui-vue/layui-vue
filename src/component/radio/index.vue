@@ -5,6 +5,8 @@ export default {
 </script>
 
 <script setup lang="ts">
+import "./index.less";
+
 export interface LayRadioProps {
   modelValue: string;
   disabled?: boolean;
@@ -32,7 +34,7 @@ const handleClick = function () {
       class="layui-unselect layui-form-radio"
       :class="{
         'layui-form-radioed': modelValue == label,
-        'layui-radio-disbaled layui-disabled': disabled,
+        'layui-radio-disabled layui-disabled': disabled,
       }"
       @click.stop="handleClick"
     >

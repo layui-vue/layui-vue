@@ -1,0 +1,39 @@
+@import "../../theme/variable.less";
+
+.layui-form-radio,
+.layui-form-radio * {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.layui-form-radio {
+  line-height: 28px;
+  margin: 6px 10px 0 0;
+  padding-right: 10px;
+  cursor: pointer;
+  font-size: 0;
+}
+
+.layui-form-radio * {
+  font-size: 14px;
+}
+
+.layui-form-radio > i {
+  margin-right: 8px;
+  font-size: 22px;
+  color: @global-neutral-color-8;
+}
+
+.layui-form-radio:hover *,
+.layui-form-radioed,
+.layui-form-radioed > i {
+  color: @global-checked-color;
+}
+
+.layui-radio-disabled > i {
+  color: @global-neutral-color-3 !important;
+}
+
+.layui-radio-disabled * {
+  color: @global-neutral-color-8 !important;
+}

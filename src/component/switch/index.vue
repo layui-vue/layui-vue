@@ -47,7 +47,7 @@ const handleClick = function () {
       :class="{
         'layui-disabled': disabled,
         'layui-form-onswitch': isActive,
-        'layui-checkbox-disbaled': disabled,
+        'layui-switch-disabled': disabled,
       }"
     >
       <em>{{ isActive == true ? activeText : inactiveText }}</em>

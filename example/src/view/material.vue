@@ -9,6 +9,27 @@
   <div class="layui-container" style="width: 80%">
     <div class="layui-row layui-col-space16">
       <div class="layui-col layui-col-md6">
+        <a href="https://github.com/rstacruz/nprogress">
+          <div class="project-list-item">
+          <img
+            class="project-list-item-cover"
+            src="https://gw.alipayobjects.com/zos/rmsportal/iZBVOIhGJiAnhplqjvZW.png"
+          />
+
+          <div class="project-list-item-body">
+            <h2>vueUse</h2>
+            <div class="project-list-item-text layui-text">
+              Collection of essential Vue Composition Utilities for Vue 2 and 3
+            </div>
+            <div class="project-list-item-desc">
+              <span class="time">几秒前</span>
+              <div class="ew-head-list"></div>
+            </div>
+          </div>
+        </div>
+        </a>
+      </div>
+      <div class="layui-col layui-col-md6">
         <a href="https://github.com/scopewu/qrcode.vue">
           <div class="project-list-item">
           <img

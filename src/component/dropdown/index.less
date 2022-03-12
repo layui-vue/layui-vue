@@ -1,1 +1,26 @@
 @import "../../theme/variable.less";
+
+.layui-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.layui-dropdown dl {
+  display: none;
+  position: absolute;
+  left: 0;
+  margin-top: 2px;
+  z-index: 899;
+  min-width: 100%;
+  background-color: #fff;
+  box-sizing: border-box;
+}
+
+.layui-dropdown dl > .layui-dropdown-menu {
+  border: 1px solid @global-neutral-color-3;
+  border-radius: @global-border-radius;
+}
+
+.layui-dropdown-up > dl {
+  display: block;
+}

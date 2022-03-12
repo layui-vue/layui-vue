@@ -1,1 +1,128 @@
 @import "../../theme/variable.less";
+
+.layui-form-checkbox {
+  position: relative;
+  height: 30px;
+  line-height: 30px;
+  margin-right: 10px;
+  padding-right: 30px;
+  cursor: pointer;
+  font-size: 0;
+  -webkit-transition: 0.1s linear;
+  transition: 0.1s linear;
+  box-sizing: border-box;
+}
+
+.layui-form-checkbox span {
+  padding: 0 10px;
+  height: 100%;
+  font-size: 14px;
+  border-radius: 2px 0 0 2px;
+  background-color: @global-neutral-color-6;
+  color: #fff;
+  overflow: hidden;
+}
+
+.layui-form-checkbox:hover span {
+  background-color: @global-neutral-color-8;
+}
+
+.layui-form-checkbox i {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 30px;
+  height: 28px;
+  border: 1px solid @global-neutral-color-6;
+  border-left: none;
+  border-radius: 0 2px 2px 0;
+  color: #fff;
+  font-size: 20px;
+  text-align: center;
+}
+
+.layui-form-checkbox:hover i {
+  border-color: @global-neutral-color-8;
+  color: @global-neutral-color-8;
+}
+
+.layui-form-checkbox[lay-skin="primary"] {
+  height: auto !important;
+  line-height: normal !important;
+  min-width: 18px;
+  min-height: 18px;
+  border: none !important;
+  margin-right: 0;
+  padding-left: 28px;
+  padding-right: 0;
+  background: 0 0;
+}
+
+.layui-form-checkbox[lay-skin="primary"] span {
+  padding-left: 0;
+  padding-right: 15px;
+  line-height: 18px;
+  background: 0 0;
+  color: #666;
+}
+
+.layui-form-checkbox[lay-skin="primary"] i {
+  right: auto;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  line-height: 16px;
+  border: 1px solid @global-neutral-color-6;
+  font-size: 12px;
+  border-radius: 2px;
+  background-color: #fff;
+  -webkit-transition: 0.1s linear;
+  transition: 0.1s linear;
+}
+
+.layui-form-checkbox[lay-skin="primary"]:hover i {
+  border-color: @global-checked-color;
+  color: #fff;
+}
+
+.layui-form-checked,
+.layui-form-checked:hover {
+  border-color: @global-checked-color;
+}
+
+.layui-form-checked i,
+.layui-form-checked:hover i {
+  color: @global-checked-color;
+}
+
+.layui-form-checked[lay-skin="primary"] i {
+  border-color: @global-checked-color !important;
+  background-color: @global-checked-color;
+  color: #fff;
+}
+
+.layui-checkbox-disabled[lay-skin="primary"] span {
+  background: 0 0 !important;
+  color: @global-neutral-color-8 !important;
+}
+
+.layui-checkbox-disabled[lay-skin="primary"]:hover i {
+  border-color: @global-neutral-color-6;
+}
+
+.layui-checkbox-disabled,
+.layui-checkbox-disabled i {
+  border-color: @global-neutral-color-3 !important;
+}
+
+.layui-checkbox-disabled span {
+  background-color: @global-neutral-color-3 !important;
+}
+
+.layui-checkbox-disabled em {
+  color: @global-neutral-color-6 !important;
+}
+
+.layui-checkbox-disabled:hover i {
+  color: #fff !important;
+}

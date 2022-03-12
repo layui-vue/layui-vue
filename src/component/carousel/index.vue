@@ -5,6 +5,7 @@ export default {
 </script>
 
 <script setup lang="ts">
+import "./index.less";
 import { withDefaults, provide, useSlots, ref, computed } from "vue";
 
 const slot = useSlots() as any;

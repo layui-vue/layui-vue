@@ -5,6 +5,7 @@ export default {
 </script>
 
 <script setup lang="ts">
+import "./index.less";
 import { withDefaults, inject, computed, ref } from "vue";
 
 export interface LayCollapseItemProps {

@@ -5,6 +5,7 @@ export default {
 </script>
 
 <script setup lang="ts">
+import "./index.less";
 import { provide, ref, watch } from "vue";
 import { onClickOutside } from "@vueuse/core";
 
