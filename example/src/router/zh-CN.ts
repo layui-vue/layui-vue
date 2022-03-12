@@ -1,10 +1,10 @@
-import BaseLayout from "../layouts/Layout.vue";
-import Component from "../view/component.vue";
-import Hooks from "../view/hooks.vue";
 import Guide from "../view/guide.vue";
 import Index from "../view/index.vue";
-import Extend from "../view/extend.vue";
+import Resource from "../view/resource.vue";
 import Material from "../view/material.vue";
+import BaseLayout from "../layouts/Layout.vue";
+import Component from "../view/component.vue";
+
 const zhCN = [
   {
     path: "/",
@@ -18,8 +18,8 @@ const zhCN = [
         meta: { title: "指南" },
       },
       {
-        path: "/zh-CN/extend",
-        component: Extend,
+        path: "/zh-CN/resources",
+        component: Resource,
         meta: { title: "生态" },
       },
       {

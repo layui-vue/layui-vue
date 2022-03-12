@@ -3,7 +3,7 @@ export default {
         home:"首页",
         guide: "指南",
         components: "组件",
-        extend: "生态",
+        resources: "生态",
         material: "物料"
     },
     home: {
