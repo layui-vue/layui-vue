@@ -1,11 +1,10 @@
 /**
- * Layui Vue Resolver
+ * Layui-vue Resolver
+ * 
  * √ On-demand import components for @layui/layui-vue
  * √ component and style resolver for @layui/icons-vue
  * √ layer API
- * TODO On-demand import style
  */
-// TODO 待 css 完善,以下除特殊注释的外, styleDir: '' 为未拆分的
 const matchComponents = [
   {
     pattern: /^LayAvatarList$/,
@@ -112,6 +111,7 @@ const matchComponents = [
 ];
 
 export interface LayuiVueResolverOptions {
+
   /**
    * import style along with components
    *
@@ -133,6 +133,7 @@ export interface LayuiVueResolverOptions {
    *
    */
   exclude?: string[];
+
 }
 
 const libRE = /^Lay[A-Z]/;
@@ -147,7 +148,6 @@ function lowerCamelCase(str: string) {
 function getSideEffects(importName: string, options: LayuiVueResolverOptions) {
   const { importStyle = true } = options;
   if (!importStyle) return;
-
   let styleDir: string | undefined = undefined;
   if (importName.match(iconsRE)) {
     return `@layui/icons-vue/lib/index.css`;
@@ -161,8 +161,6 @@ function getSideEffects(importName: string, options: LayuiVueResolverOptions) {
         break;
       }
     }
-    // FIXME 临时方案,部分组件样式未拆分
-    // return styleDir ? `${esComponentsFolder}/${styleDir}/index.css` : `@layui/layui-vue/lib/index.css`
     return styleDir ? `${esComponentsFolder}/${styleDir}/index.css` : undefined;
   }
 }
@@ -191,7 +189,7 @@ function resolveComponent(name: string, options: LayuiVueResolverOptions) {
 
 /**
  * Resolver for layui-vue
- * Requires @layui/layui-vue@v0.3.X(版本待定) or later
+ * 
  * @param options
  * @returns
  */
