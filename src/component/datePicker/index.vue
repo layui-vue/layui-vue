@@ -18,7 +18,7 @@
               >
               <div class="laydate-set-ym">
                 <span @click="showYearPanel">{{ curYear }} 年</span
-                ><span @click="showPanel = 'month'">{{ curMonth }} 月</span>
+                ><span @click="showPanel = 'month'">{{ curMonth + 1 }} 月</span>
               </div>
               <i
                 class="layui-icon laydate-icon laydate-next-m"
@@ -82,28 +82,29 @@
           </div>
         </div>
 
-        <div
-          class="layui-laydate" v-show="showPanel === 'year'"
-        >
+        <div class="layui-laydate" v-show="showPanel === 'year'">
           <div class="layui-laydate-main laydate-main-list-0 laydate-ym-show">
             <div class="layui-laydate-header">
               <div class="laydate-set-ym">
                 <span class="laydate-time-text">选择年份</span>
               </div>
             </div>
-            <div class="layui-laydate-content" style="height: 220px;overflow-y: auto;">
+            <div
+              class="layui-laydate-content"
+              style="height: 220px; overflow-y: auto"
+            >
               <ul class="layui-laydate-list laydate-year-list">
-           <li
-            v-for="item of yearList"
-            :key="item"
-            :class="[{ 'layui-this': curYear === item }]"
-            @click="
-              curYear = item;
-              showPanel = 'date';
-            "
-          >
-            {{ item }}
-          </li>
+                <li
+                  v-for="item of yearList"
+                  :key="item"
+                  :class="[{ 'layui-this': curYear === item }]"
+                  @click="
+                    curYear = item;
+                    showPanel = 'date';
+                  "
+                >
+                  {{ item }}
+                </li>
               </ul>
             </div>
           </div>
@@ -132,7 +133,7 @@
               >
               <div class="laydate-set-ym">
                 <span @click="showYearPanel">{{ curYear }} 年</span
-                ><span @click="showPanel = 'month'">{{ curMonth }} 月</span>
+                ><span @click="showPanel = 'month'">{{ curMonth + 1 }} 月</span>
               </div>
               <i
                 class="layui-icon laydate-icon laydate-next-y"
@@ -231,7 +232,6 @@ import LayDropdown from "../dropdown/index.vue";
 
 defineProps({
   modelValue: { type: String, required: false },
-  frontText: { type: String, required: false },
 });
 
 const $emits = defineEmits(["update:modelValue"]);
