@@ -1,6 +1,6 @@
 /**
  * Layui-vue Resolver
- * 
+ *
  * √ On-demand import components for @layui/layui-vue
  * √ component and style resolver for @layui/icons-vue
  * √ layer API
@@ -111,7 +111,6 @@ const matchComponents = [
 ];
 
 export interface LayuiVueResolverOptions {
-
   /**
    * import style along with components
    *
@@ -133,7 +132,6 @@ export interface LayuiVueResolverOptions {
    *
    */
   exclude?: string[];
-
 }
 
 const libRE = /^Lay[A-Z]/;
@@ -189,7 +187,7 @@ function resolveComponent(name: string, options: LayuiVueResolverOptions) {
 
 /**
  * Resolver for layui-vue
- * 
+ *
  * @param options
  * @returns
  */

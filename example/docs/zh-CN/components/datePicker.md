@@ -7,8 +7,7 @@
 ::: demo
 
 <template>
-  <lay-date-picker>
-  </lay-date-picker>
+  <lay-date-picker  v-model="endTime"  frontText="结束时间:"></lay-date-picker>
 </template>
 
 <script>
@@ -17,7 +16,10 @@ import { ref } from 'vue'
 export default {
   setup() {
 
+   const endTime = ref("2022-03-04 17:35:00");
+
     return {
+      endTime
     }
   }
 }

@@ -292,6 +292,12 @@ const zhCN = [
             meta: { title: "颜色选择器" },
           },
           {
+            path: "/zh-CN/components/datePicker",
+            component: () =>
+              import("../../docs/zh-CN/components/datePicker.md"),
+            meta: { title: "日期选择器" },
+          },
+          {
             path: "/zh-CN/components/layer",
             component: () => import("../../docs/zh-CN/components/layer.md"),
             meta: { title: "简介" },

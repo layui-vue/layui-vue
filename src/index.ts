@@ -77,6 +77,7 @@ import LaySplitPanelItem from "./component/splitPanelItem/index";
 import LayException from "./component/exception/index";
 import LayResult from "./component/result/index";
 import LayFullscreen from "./component/fullscreen/index";
+import LayDatePicker from "./component/datePicker/index";
 import LayConfigProvider from "./provider";
 import { InstallOptions } from "./types";
 
@@ -152,6 +153,7 @@ const components: Record<string, Component> = {
   LayResult,
   LayFullscreen,
   LayConfigProvider,
+  LayDatePicker
 };
 
 const install = (app: App, options?: InstallOptions): void => {
@@ -235,6 +237,7 @@ export {
   LayResult,
   LayFullscreen,
   LayConfigProvider,
+  LayDatePicker
 };
 
 export { layer };

@@ -166,6 +166,12 @@ const menus = [
         path: "/zh-CN/components/colorPicker",
       },
       {
+        id: 40,
+        title: "日期选择器",
+        subTitle: "datePicker",
+        path: "/zh-CN/components/datePicker",
+      },
+      {
         id: 29,
         title: "图标选择器",
         subTitle: "iconPicker",
