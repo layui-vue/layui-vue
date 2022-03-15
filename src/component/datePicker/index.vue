@@ -261,9 +261,9 @@ const MONTH_NAME = [
 ];
 
 const hms = ref({
-  hh: "23",
-  mm: "59",
-  ss: "59",
+  hh: "00",
+  mm: "00",
+  ss: "00",
   insertEls: [
     {
       count: 24,

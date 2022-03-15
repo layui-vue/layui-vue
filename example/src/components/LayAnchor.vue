@@ -10,9 +10,6 @@
         <lay-icon :type="iconType" size="40"> </lay-icon>
       </lay-button>
     </div>
-    <lay-scroll
-      class="layui-side-scroll-bar layui-side-scroll::-webkit-scrollbar"
-    >
       <ul>
         <li
           v-for="(anchor, index) in anchorList"
@@ -29,7 +26,6 @@
           >
         </li>
       </ul>
-    </lay-scroll>
   </aside>
 </template>
 <script setup lang="ts">
