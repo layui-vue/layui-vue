@@ -13,6 +13,7 @@ const { t } = useI18n();
 export interface LayInputProps {
   name?: string;
   type?: string;
+  value?: string;
   disabled?: boolean;
   modelValue?: string | number;
   placeholder?: string;
@@ -41,7 +42,7 @@ const onBlur = function () {
   <input
     :type="type"
     :name="name"
-    :value="modelValue"
+    :value="modelValue || value"
     :disabled="disabled"
     :placeholder="placeholder"
     :class="{ 'layui-disabled': disabled }"

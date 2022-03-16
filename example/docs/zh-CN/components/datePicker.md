@@ -1,13 +1,20 @@
 ::: anchor
 :::
 
+
+::: title 基本介绍
+:::
+
+::: describe 高级 Web 日历组件，完全开源无偿且颜值与功能兼备，足以应对日期相关的各种业务场景。
+:::
+
 ::: title 基础使用
 :::
 
 ::: demo
 
 <template>
-  <lay-date-picker  v-model="endTime"  frontText="结束时间:"></lay-date-picker>
+  <lay-date-picker v-model="endTime"></lay-date-picker>
 </template>
 
 <script>

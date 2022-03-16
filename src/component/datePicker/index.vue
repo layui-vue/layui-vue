@@ -1,7 +1,7 @@
 <template>
   <div>
     <lay-dropdown>
-      <lay-input v-model="dateValue" readonly />
+      <lay-input :value="dateValue || modelValue" readonly />
       <template #content>
         <!-- 日期选择 -->
         <div class="layui-laydate" v-show="showPanel === 'date'">
@@ -230,7 +230,7 @@ import { computed, nextTick, ref, watch, defineProps, defineEmits } from "vue";
 import LayInput from "../input/index.vue";
 import LayDropdown from "../dropdown/index.vue";
 
-defineProps({
+const props = defineProps({
   modelValue: { type: String, required: false },
 });
 
@@ -241,7 +241,6 @@ const dateList = ref<any[]>([]);
 const curYear = ref(currentDate.getFullYear());
 const curMonth = ref(currentDate.getMonth());
 const showPanel = ref("date");
-const showDropdown = ref(false);
 const selectedDay = ref<number>();
 
 const WEEK_NAME = ["日", "一", "二", "三", "四", "五", "六"];
@@ -309,35 +308,33 @@ const setDateList = (year: number, month: number) => {
   const prevDays = getDayLength(year, month - 1); // 上月天数
   const curFirstDayWeek = new Date(year, month, 1).getDay(); // 当月第一天星期几
   const list: any[] = [];
-  // 填充上月最后几天
+  // 填充上月天数
   for (let i = prevDays - curFirstDayWeek + 1; i <= prevDays; i++) {
     list.push({
       day: i,
-      value: +new Date(year, month - 1, i),
+      value: + new Date(year, month - 1, i),
       isRange: false,
       isSelected: false,
       type: "prev",
     });
   }
-
-  // 填充当月
+  // 填充当月天数
   for (let i = 1; i <= curDays; i++) {
     list.push({
       day: i,
-      value: +new Date(year, month, i),
+      value: + new Date(year, month, i),
       isRange: false,
       isSelected: false,
       type: "current",
     });
   }
-
+  // 填充下月天数
   const nextDays = 7 - (list.length % 7);
   if (nextDays !== 7) {
-    // 填充下月
     for (let i = 1; i <= nextDays; i++) {
       list.push({
         day: i,
-        value: +new Date(year, month + 1, i),
+        value: + new Date(year, month + 1, i),
         isRange: false,
         isSelected: false,
         type: "next",
@@ -362,8 +359,12 @@ const handleDayClick = (item: any) => {
     curMonth.value =
       item.type === "prev" ? curMonth.value - 1 : curMonth.value + 1;
   }
-  showDropdown.value = false;
 };
+
+// 确认事件
+const ok = () => {
+  
+}
 
 // 切换年月
 const changeYearOrMonth = (type: "year" | "month", num: number) => {
