@@ -47,7 +47,6 @@ export default defineComponent({
   name: "LayScroll",
   props: {
     height: {
-      //:height="'200px'"
       type: String,
       default: "100%",
     },

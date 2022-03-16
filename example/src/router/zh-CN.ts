@@ -357,6 +357,11 @@ const zhCN = [
             component: () =>
               import("../../docs/zh-CN/components/fullscreen.md"),
             meta: { title: "结果" },
+          },          {
+            path: "/zh-CN/components/scroll",
+            component: () =>
+              import("../../docs/zh-CN/components/scroll.md"),
+            meta: { title: "虚拟滚动" },
           },
         ],
       },

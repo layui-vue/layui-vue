@@ -327,6 +327,12 @@ const menus = [
         subTitle: "result",
         path: "/zh-CN/components/result",
       },
+      {
+        id: 100,
+        title: "虚拟滚动",
+        subTitle: "result",
+        path: "/zh-CN/components/scroll",
+      },
     ],
   },
   {
