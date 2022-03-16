@@ -7,7 +7,7 @@
   <a href="https://coveralls.io/r/sentsin/layui?branch=master"><img alt="Test Coverage" src="https://img.shields.io/coveralls/sentsin/layui/master.svg"></a>
 </p>  
 
-**[🔶 Explore the docs »](http://www.layui-vue.com)**
+**[🔶 Explore the docs »](http://www.layui-vue.com)** **[Join us](https://jq.qq.com/?_wv=1027&k=ffiUQgnE)**
 
 An enterprise-class UI components based on Layui and Vue.
 

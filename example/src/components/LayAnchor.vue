@@ -159,13 +159,6 @@ const throttle = (func: Function, wait: number) => {
 };
 </script>
 <style lang="less" scoped>
-.layui-side-scroll-bar {
-  overflow-y: scroll;
-  max-width: 156px;
-}
-.layui-side-scroll::-webkit-scrollbar {
-  width: 0;
-}
 .lay-aside {
   position: fixed;
   top: 65px;
@@ -268,9 +261,6 @@ const throttle = (func: Function, wait: number) => {
     right: 15px;
   }
   .lay-aside-list {
-    max-width: 68px;
-  }
-  .layui-side-scroll-bar {
     max-width: 68px;
   }
 }

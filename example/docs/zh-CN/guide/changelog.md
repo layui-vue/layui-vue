@@ -16,8 +16,9 @@
       <li> 
         <h3>0.4.0 <span class="layui-badge-rim">2022-03-08</span></h3> 
         <ul>
-          <li>[重构] scroll 虚拟滚动, 代替浏览器原生滚动。</li> 
-          <li>[新增] date-picker 日期选择组件, 支持 年月,日期,时间。</li>
+          <li>[新增] scroll 虚拟滚动组件。</li> 
+          <li>[新增] water-marker 水印组件。</li>
+          <li>[新增] date-picker 日期选择组件, 支持年月, 日期, 时间。</li>
           <li>[修复] slider 滑块组件, 默认 step 值异常。</li>
           <li>[升级] layer-vue 1.3.10 版本。</li>
         </ul> 
