@@ -13,8 +13,8 @@
 ::: demo 使用 `lay-scroll` 标签, 创建一个虚拟滚动容器
 
 <template>
-  <lay-scroll height="200px">
-    <li v-for="i of 100">内容</li>
+  <lay-scroll height="200px" style="background-color:whitesmoke;">
+    <lay-panel v-for="(n,index) in 50" :key="n" style="margin:10px;padding:10px;">内容</lay-panel>
   </lay-scroll>
 </template>
 
