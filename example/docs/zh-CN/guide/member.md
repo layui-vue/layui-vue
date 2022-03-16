@@ -89,7 +89,7 @@
             Sight
         </lay-col>
         <lay-col md="8">
-            焦点：count-up backtop
+            焦点：layui-vue layer-vue
         </lay-col>
         <lay-col md="4">
             地点：中国 未知

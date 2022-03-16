@@ -13,6 +13,7 @@ export interface LayPageProps {
   total: number;
   limit: number;
   theme?: string;
+  modelValue?: number;
   showPage?: boolean | string;
   showSkip?: boolean | string;
   showCount?: boolean | string;
@@ -36,9 +37,11 @@ const props = withDefaults(defineProps<LayPageProps>(), {
   showLimit: true,
   showInput: false,
   showRefresh: false,
+  modelValue: 1,
   pages: 10,
   limits: () => [10, 20, 30, 40, 50],
 });
+
 const limits = ref(props.limits);
 const pages = props.pages / 2;
 const inlimit = computed({
@@ -67,7 +70,8 @@ const totalPage = computed(() => {
   }
   return r;
 });
-const currentPage: Ref<number> = ref(1);
+
+const currentPage: Ref<number> = ref(props.modelValue);
 const currentPageShow: Ref<number> = ref(currentPage.value);
 
 const emit = defineEmits(["jump", "limit"]);

@@ -312,7 +312,7 @@ const setDateList = (year: number, month: number) => {
   for (let i = prevDays - curFirstDayWeek + 1; i <= prevDays; i++) {
     list.push({
       day: i,
-      value: + new Date(year, month - 1, i),
+      value: +new Date(year, month - 1, i),
       isRange: false,
       isSelected: false,
       type: "prev",
@@ -322,7 +322,7 @@ const setDateList = (year: number, month: number) => {
   for (let i = 1; i <= curDays; i++) {
     list.push({
       day: i,
-      value: + new Date(year, month, i),
+      value: +new Date(year, month, i),
       isRange: false,
       isSelected: false,
       type: "current",
@@ -334,7 +334,7 @@ const setDateList = (year: number, month: number) => {
     for (let i = 1; i <= nextDays; i++) {
       list.push({
         day: i,
-        value: + new Date(year, month + 1, i),
+        value: +new Date(year, month + 1, i),
         isRange: false,
         isSelected: false,
         type: "next",
@@ -362,9 +362,7 @@ const handleDayClick = (item: any) => {
 };
 
 // 确认事件
-const ok = () => {
-  
-}
+const ok = () => {};
 
 // 切换年月
 const changeYearOrMonth = (type: "year" | "month", num: number) => {

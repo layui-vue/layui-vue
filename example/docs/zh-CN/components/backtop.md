@@ -64,7 +64,7 @@ export default {
 <template>
 <!-- 需要用一个 div 包裹触发滚动事件的目标元素和 lay-backtop 组件 -->
 <div class="wrapper" style="width:700px; height:300px;">
-  <div id="scrollContent" style="overflow-y:auto; overflow-x:auto; width:700px; height:300px;background-color:whitesmoke;padding:10px;">
+  <div id="scrollContent" style="overflow-y:auto; overflow-x:auto; width:700px; height:300px;background-color:whitesmoke;">
     <lay-panel v-for="(n,index) in 50" :key="n" style="margin:10px;padding:10px;">内容</lay-panel>
   </div>
   <lay-backtop target="#scrollContent" :showHeight="100" :bottom="30" position="absolute"></lay-backtop>
