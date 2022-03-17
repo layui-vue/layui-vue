@@ -47,7 +47,10 @@ onMounted(() => {
 });
 
 watch([red, green, blue], (newValue) => {
-  emit("update:modelValue",rgba2hex(red.value, green.value, blue.value, alpha.value));
+  emit(
+    "update:modelValue",
+    rgba2hex(red.value, green.value, blue.value, alpha.value)
+  );
   let { h, s, v } = rgb2hsv(red.value, green.value, blue.value);
   hue.value = h;
   saturation.value = s;

@@ -95,10 +95,19 @@
   color: @global-checked-color;
 }
 
+.layui-form-checked span,
+.layui-form-checked:hover span {
+  background-color: @global-checked-color;
+}
+
 .layui-form-checked[lay-skin="primary"] i {
   border-color: @global-checked-color !important;
   background-color: @global-checked-color;
   color: #fff;
+}
+
+.layui-form-checked[lay-skin="primary"] span {
+  background: 0 0 !important;
 }
 
 .layui-checkbox-disabled[lay-skin="primary"] span {
