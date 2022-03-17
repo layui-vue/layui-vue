@@ -79,3 +79,18 @@ export default {
 </script>
 
 :::
+
+
+::: title Notice Bar 事件
+:::
+
+::: table
+
+| 事件 | 描述     | 参数                  |
+| ---- | -------- | --------------------- |
+| mode | 模式 | { current: 当前页面 } |
+| text | 内容 | 滚动内容 |
+| leftIcon | 左侧图标 | { current: 当前页面 } |
+| rightIcon | 右侧图标 | 滚动内容 |
+
+:::

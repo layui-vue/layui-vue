@@ -16,6 +16,7 @@
       <li> 
         <h3>0.4.0 <span class="layui-badge-rim">2022-03-17</span></h3> 
         <ul>
+          <li>[新增] notice-bar 通告栏。</li>
           <li>[新增] scroll 虚拟滚动组件。</li> 
           <li>[新增] water-marker 水印组件。</li>
           <li>[新增] table 表格组件 excel 导出工具栏。</li>
