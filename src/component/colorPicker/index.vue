@@ -47,20 +47,12 @@ onMounted(() => {
 });
 
 watch([red, green, blue], (newValue) => {
-  emit(
-    "update:modelValue",
-    rgba2hex(red.value, green.value, blue.value, alpha.value)
-  );
-
+  emit("update:modelValue",rgba2hex(red.value, green.value, blue.value, alpha.value));
   let { h, s, v } = rgb2hsv(red.value, green.value, blue.value);
-
   hue.value = h;
   saturation.value = s;
   value.value = v;
-
-  // 移动背景板圆圈
   pointStyle.value = `top: ${100 - v * 100}%;left: ${s * 100}%;`;
-  // 移动色调滑块
   hueSliderStyle.value = `left: ${(hue.value / 360) * 100}%;`;
 });
 

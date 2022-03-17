@@ -106,19 +106,19 @@ const print = function () {
 const exportData = () => {
   const wb = XLSX.utils.book_new();
   let arr: any[] = [];
-  props.dataSource.forEach(item => {
-    let obj = {}
-    tableColumns.value.forEach(tableColumn => {
-        // @ts-ignore
-        Object.keys(item).forEach((name) => {
-            if(tableColumn.key === name) {
-              // @ts-ignore
-               obj[tableColumn.title] = item[name] 
-            }
-        })
-    })
+  props.dataSource.forEach((item) => {
+    let obj = {};
+    tableColumns.value.forEach((tableColumn) => {
+      // @ts-ignore
+      Object.keys(item).forEach((name) => {
+        if (tableColumn.key === name) {
+          // @ts-ignore
+          obj[tableColumn.title] = item[name];
+        }
+      });
+    });
     arr.push(obj);
-  })
+  });
   const ws = XLSX.utils.json_to_sheet(arr);
   XLSX.utils.book_append_sheet(wb, ws, "sheet");
   XLSX.writeFile(wb, "export.xls", {

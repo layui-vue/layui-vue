@@ -44,7 +44,7 @@ export default {
 
 <template>
   <lay-fullscreen :target="elRef" v-slot="{ enter, exit, toggle, isFullscreen }" @fullscreenchange=fullscreen2>
-    <div ref="elRef" class="wrapper">
+    <div ref="elRef" class="wrapper-fullscreen">
       <lay-button type="normal" @click="enter()">进入全屏</lay-button>  
       <lay-button type="normal" @click="exit()">退出</lay-button> 
       <lay-button type="warm" @click="toggle()"> 切换: {{isFullscreen ? "退出" : "进入全屏"}} </lay-button>
@@ -69,7 +69,7 @@ export default {
 }
 </script>
 <style>
-.wrapper{
+.wrapper-fullscreen{
   padding:10px;
   border:1px solid #dddddd;
   background-color:#F6F6F6;
@@ -117,7 +117,7 @@ export default {
 }
 </script>
 <style>
-.wrapper{
+.wrapper-fullscreen{
   padding:10px;
   border:1px solid #dddddd;
   background-color:#F6F6F6;
@@ -141,7 +141,7 @@ export default {
     position="absolute"  
     v-slot="{ enter, exit, toggle, isFullscreen }" 
     @fullscreenchange=fullscreen4>
-    <div ref="fullscreenTargetRef2" class="wrapper">
+    <div ref="fullscreenTargetRef2" class="wrapper-fullscreen">
       <lay-button type="normal" @click="enter()">进入全屏</lay-button>  
       <lay-button type="normal" @click="exit()">退出</lay-button> 
       <lay-button type="warm" @click="toggle()"> 切换: {{isFullscreen ? "退出" : "进入全屏"}} </lay-button>
@@ -175,7 +175,7 @@ export default {
   background-color: red;
   border:1px solid #dddddd;
 };
-.wrapper{
+.wrapper-fullscreen{
   padding:10px;
   border:1px solid #dddddd;
   background-color:#F6F6F6;
