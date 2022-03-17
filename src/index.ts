@@ -78,6 +78,7 @@ import LayException from "./component/exception/index";
 import LayResult from "./component/result/index";
 import LayFullscreen from "./component/fullscreen/index";
 import LayDatePicker from "./component/datePicker/index";
+import LayNoticeBar from "./component/noticeBar/index";
 import LayConfigProvider from "./provider";
 import { InstallOptions } from "./types";
 
@@ -154,6 +155,7 @@ const components: Record<string, Component> = {
   LayFullscreen,
   LayConfigProvider,
   LayDatePicker,
+  LayNoticeBar
 };
 
 const install = (app: App, options?: InstallOptions): void => {
@@ -238,6 +240,7 @@ export {
   LayFullscreen,
   LayConfigProvider,
   LayDatePicker,
+  LayNoticeBar
 };
 
 export { layer };
