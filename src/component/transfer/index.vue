@@ -6,12 +6,14 @@ export default {
 
 <script setup lang="ts">
 import "./index.less";
+import LayScroll from "../scroll";
 import { Ref, ref, useSlots, watch } from "vue";
 import { Recordable } from "../../types";
 
 export interface LayTransferProps {
   id?: string;
   title?: string[];
+  showSearch?: boolean;
   dataSource: Recordable[];
 }
 
@@ -21,11 +23,15 @@ const props = withDefaults(defineProps<LayTransferProps>(), {
   id: "id",
   title: () => ["主列表", "副列表"],
   dataSource: () => [],
+  showSearch: false,
   selectedKeys: () => [],
 });
 
 const leftDataSource: Ref<any[]> = ref([...props.dataSource]);
 const rightDataSource: Ref<any[]> = ref([]);
+
+const _leftDataSource: Ref<any[]> = ref([...props.dataSource]);
+const _rightDataSource: Ref<any[]> = ref([]);
 
 const leftSelectedKeys: Ref<string[]> = ref([]);
 const rightSelectedKeys: Ref<string[]> = ref([]);
@@ -97,6 +103,14 @@ const add = function () {
   leftDataSource.value = leftDataSource.value.filter(
     (item) => leftSelectedKeys.value.indexOf(item.id) === -1
   );
+  _leftDataSource.value.forEach((item) => {
+    if (leftSelectedKeys.value.indexOf(item.id) != -1) {
+      _rightDataSource.value.push(item);
+    }
+  });
+  _leftDataSource.value = _leftDataSource.value.filter(
+    (item) => leftSelectedKeys.value.indexOf(item.id) === -1
+  );
   leftSelectedKeys.value = [];
 };
 
@@ -112,8 +126,38 @@ const remove = function () {
   rightDataSource.value = rightDataSource.value.filter(
     (item) => rightSelectedKeys.value.indexOf(item.id) === -1
   );
+  _rightDataSource.value.forEach((item) => {
+    if (rightSelectedKeys.value.indexOf(item.id) != -1) {
+      _leftDataSource.value.push(item);
+    }
+  });
+  _rightDataSource.value = _rightDataSource.value.filter(
+    (item) => rightSelectedKeys.value.indexOf(item.id) === -1
+  );
   rightSelectedKeys.value = [];
 };
+
+const searchLeft = (e: any) => {
+    if(e.target.value === "") {
+      leftDataSource.value = _leftDataSource.value;
+    }
+    leftDataSource.value = _leftDataSource.value.filter((item) => {
+      if(item.title.indexOf(e.target.value) != -1) {
+        return item;
+      };
+    })
+}
+
+const searchRight = (e: any) => {
+    if(e.target.value === "") {
+      rightDataSource.value = _rightDataSource.value;
+    }
+    rightDataSource.value = _rightDataSource.value.filter((item) => {
+      if(item.title.indexOf(e.target.value) != -1) {
+        return item;
+      };
+    })
+}
 </script>
 
 <template>
@@ -129,6 +173,10 @@ const remove = function () {
           >
             <span>{{ title[0] }}</span>
           </lay-checkbox>
+        </div>
+        <div class="layui-transfer-search" v-if="showSearch">
+          <i class="layui-icon layui-icon-search"></i
+          ><input type="input" class="layui-input" @input="searchLeft" placeholder="关键词搜索" />
         </div>
         <ul class="layui-transfer-data" style="height: 320px">
           <li v-for="dataSource in leftDataSource" :key="dataSource">
@@ -167,6 +215,10 @@ const remove = function () {
           >
             <span>{{ title[1] }}</span>
           </lay-checkbox>
+        </div>
+        <div class="layui-transfer-search" v-if="showSearch">
+          <i class="layui-icon layui-icon-search"></i
+          ><input type="input" class="layui-input" @input="searchRight" placeholder="关键词搜索" />
         </div>
         <ul class="layui-transfer-data" style="height: 320px">
           <li v-for="dataSource in rightDataSource" :key="dataSource">

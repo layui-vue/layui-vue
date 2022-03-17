@@ -50,7 +50,7 @@ export default {
 
 ::: table
 
-| 属性  | 描述   | 可选值                                               |
+| 属性  | 描述   | 可选值                                       |
 | ----- | ---- | --------------------------------------------- |
 | type  | 类型 | `dot` `rim`                                   |
 | theme | 主题 | `orange` `green` `cyan` `blue` `black` `gray` |

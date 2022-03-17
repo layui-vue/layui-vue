@@ -56,12 +56,7 @@ const maxPage = ref(0);
 const totalPage = computed(() => {
   maxPage.value = Math.ceil(props.total / props.limit);
   let r: number[] = [],
-    start =
-      maxPage.value <= props.pages
-        ? 1
-        : currentPage.value > pages
-        ? currentPage.value - pages
-        : 1;
+    start = maxPage.value <= props.pages ? 1 : currentPage.value > pages ? currentPage.value - pages : 1;
   for (let i = start; ; i++) {
     if (r.length >= props.pages || i > maxPage.value) {
       break;
@@ -100,7 +95,6 @@ const jumpPage = function () {
 
 watch(inlimit, function () {
   currentPage.value = 1;
-  // maxPage.value = Math.ceil(props.total / inlimit.value);
 });
 
 watch(currentPage, function () {
