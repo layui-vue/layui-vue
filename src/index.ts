@@ -155,7 +155,7 @@ const components: Record<string, Component> = {
   LayFullscreen,
   LayConfigProvider,
   LayDatePicker,
-  LayNoticeBar
+  LayNoticeBar,
 };
 
 const install = (app: App, options?: InstallOptions): void => {
@@ -240,7 +240,7 @@ export {
   LayFullscreen,
   LayConfigProvider,
   LayDatePicker,
-  LayNoticeBar
+  LayNoticeBar,
 };
 
 export { layer };

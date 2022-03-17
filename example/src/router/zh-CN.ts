@@ -356,12 +356,19 @@ const zhCN = [
             path: "/zh-CN/components/fullscreen",
             component: () =>
               import("../../docs/zh-CN/components/fullscreen.md"),
-            meta: { title: "结果" },
-          },          {
+            meta: { title: "全屏" },
+          },
+          {
             path: "/zh-CN/components/scroll",
             component: () =>
               import("../../docs/zh-CN/components/scroll.md"),
             meta: { title: "虚拟滚动" },
+          },
+          {
+            path: "/zh-CN/components/noticeBar",
+            component: () =>
+              import("../../docs/zh-CN/components/noticeBar.md"),
+            meta: { title: "通知栏" },
           },
         ],
       },

@@ -14,9 +14,9 @@
 <script lang="ts">
 import { toRefs, reactive, defineComponent, ref, onMounted, nextTick } from 'vue';
 export default defineComponent({
-	name: 'noticeBar',
+	name: 'LayNoticeBar',
 	props: {
-		// 通知栏模式，可选值为 closeable link
+		// 选值为 closeable link
 		mode: {
 			type: String,
 			default: () => '',
@@ -61,7 +61,7 @@ export default defineComponent({
 			type: Boolean,
 			default: () => false,
 		},
-        		// 自定义左侧图标
+        // 自定义左侧图标
 		leftIcon: {
 			type: String,
 			default: () => '',

@@ -330,8 +330,14 @@ const menus = [
       {
         id: 100,
         title: "虚拟滚动",
-        subTitle: "result",
+        subTitle: "scroll",
         path: "/zh-CN/components/scroll",
+      },
+      {
+        id: 100,
+        title: "通知栏",
+        subTitle: "noticeBar",
+        path: "/zh-CN/components/noticeBar",
       },
     ],
   },
