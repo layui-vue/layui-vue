@@ -5,6 +5,7 @@ export default {
 </script>
 
 <script setup lang="ts">
+import * as XLSX from "xlsx";
 import { ref, watch, useSlots, withDefaults, onMounted } from "vue";
 import { guid } from "../../utils/guidUtil";
 import { Recordable } from "../../types";
@@ -102,9 +103,34 @@ const print = function () {
   document.body.innerHTML = oldContent;
 };
 
+const exportData = () => {
+  const wb = XLSX.utils.book_new();
+  let arr: any[] = [];
+  props.dataSource.forEach(item => {
+    let obj = {}
+    tableColumns.value.forEach(tableColumn => {
+        // @ts-ignore
+        Object.keys(item).forEach((name) => {
+            if(tableColumn.key === name) {
+              // @ts-ignore
+               obj[tableColumn.title] = item[name] 
+            }
+        })
+    })
+    arr.push(obj);
+  })
+  const ws = XLSX.utils.json_to_sheet(arr);
+  XLSX.utils.book_append_sheet(wb, ws, "sheet");
+  XLSX.writeFile(wb, "export.xls", {
+    bookType: "xls",
+  });
+  return;
+};
+
 let tableHeader = ref<HTMLElement | null>(null);
 let tableBody = ref<HTMLElement | null>(null);
 
+// 拖动监听
 onMounted(() => {
   tableBody.value?.addEventListener("scroll", () => {
     tableHeader.value!.scrollLeft = tableBody.value?.scrollLeft || 0;
@@ -115,16 +141,14 @@ onMounted(() => {
 <template>
   <div :id="tableId">
     <table class="layui-hide" lay-filter="test"></table>
-    <div
-      class="layui-form layui-border-box layui-table-view layui-table-view-1"
-    >
+    <div class="layui-form layui-border-box layui-table-view">
       <div v-if="defaultToolbar || slot.toolbar" class="layui-table-tool">
         <div v-if="slot.toolbar" class="layui-table-tool-temp">
           <slot name="toolbar"></slot>
         </div>
         <div v-if="defaultToolbar" class="layui-table-tool-self">
           <LayDropdown>
-            <div class="layui-inline" title="筛选列" lay-event="LAYTABLE_COLS">
+            <div class="layui-inline" title="筛选列" lay-event="LAYTABLE_PRINT">
               <i class="layui-icon layui-icon-cols"></i>
             </div>
             <template #content>
@@ -140,6 +164,14 @@ onMounted(() => {
               </div>
             </template>
           </LayDropdown>
+          <div
+            class="layui-inline"
+            title="导出"
+            lay-event="LAYTABLE_PRINT"
+            @click="exportData()"
+          >
+            <i class="layui-icon layui-icon-export"></i>
+          </div>
           <div
             class="layui-inline"
             title="打印"
