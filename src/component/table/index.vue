@@ -235,6 +235,7 @@ onMounted(() => {
         <LayPage
           :total="page.total"
           :limit="page.limit"
+          v-model="page.current"
           show-page
           show-limit
           show-skip

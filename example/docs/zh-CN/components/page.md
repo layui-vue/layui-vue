@@ -13,7 +13,7 @@
 ::: demo 使用 `lay-page` 标签, 创建分页
 
 <template>
-  <lay-page :limit="limit" 	@limit="limit = $event" :total="total" :show-page="showPage"></lay-page>
+  <lay-page v-model="currentPage" :limit="limit" 	@limit="limit = $event" :total="total" :show-page="showPage"></lay-page>
 </template>
 
 <script>
@@ -25,11 +25,13 @@ export default {
     const limit = ref(20)
     const total = ref(100)
     const showPage = ref(true)
+    const currentPage = ref(2);
 
     return {
       limit,
       total,
-      showPage
+      showPage,
+      currentPage
     }
   }
 }

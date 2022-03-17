@@ -151,7 +151,8 @@ export default {
     
     const page = {
       total: 100,
-      limit: 10
+      limit: 10,
+      current: 2
     }
 
     const change = function({ current }){
