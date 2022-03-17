@@ -138,26 +138,26 @@ const remove = function () {
 };
 
 const searchLeft = (e: any) => {
-    if(e.target.value === "") {
-      leftDataSource.value = _leftDataSource.value;
+  if (e.target.value === "") {
+    leftDataSource.value = _leftDataSource.value;
+  }
+  leftDataSource.value = _leftDataSource.value.filter((item) => {
+    if (item.title.indexOf(e.target.value) != -1) {
+      return item;
     }
-    leftDataSource.value = _leftDataSource.value.filter((item) => {
-      if(item.title.indexOf(e.target.value) != -1) {
-        return item;
-      };
-    })
-}
+  });
+};
 
 const searchRight = (e: any) => {
-    if(e.target.value === "") {
-      rightDataSource.value = _rightDataSource.value;
+  if (e.target.value === "") {
+    rightDataSource.value = _rightDataSource.value;
+  }
+  rightDataSource.value = _rightDataSource.value.filter((item) => {
+    if (item.title.indexOf(e.target.value) != -1) {
+      return item;
     }
-    rightDataSource.value = _rightDataSource.value.filter((item) => {
-      if(item.title.indexOf(e.target.value) != -1) {
-        return item;
-      };
-    })
-}
+  });
+};
 </script>
 
 <template>
@@ -176,7 +176,12 @@ const searchRight = (e: any) => {
         </div>
         <div class="layui-transfer-search" v-if="showSearch">
           <i class="layui-icon layui-icon-search"></i
-          ><input type="input" class="layui-input" @input="searchLeft" placeholder="关键词搜索" />
+          ><input
+            type="input"
+            class="layui-input"
+            @input="searchLeft"
+            placeholder="关键词搜索"
+          />
         </div>
         <ul class="layui-transfer-data" style="height: 320px">
           <li v-for="dataSource in leftDataSource" :key="dataSource">
@@ -218,7 +223,12 @@ const searchRight = (e: any) => {
         </div>
         <div class="layui-transfer-search" v-if="showSearch">
           <i class="layui-icon layui-icon-search"></i
-          ><input type="input" class="layui-input" @input="searchRight" placeholder="关键词搜索" />
+          ><input
+            type="input"
+            class="layui-input"
+            @input="searchRight"
+            placeholder="关键词搜索"
+          />
         </div>
         <ul class="layui-transfer-data" style="height: 320px">
           <li v-for="dataSource in rightDataSource" :key="dataSource">
