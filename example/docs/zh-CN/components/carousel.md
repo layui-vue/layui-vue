@@ -118,6 +118,45 @@ export default {
 
 :::
 
+::: title 动态遍历
+:::
+
+::: demo
+
+<template>
+  <lay-carousel v-model="active">
+    <lay-carousel-item :id="item.id" v-for="item in arrays">
+      <div style="color: white;text-align: center;width:100%;height:300px;line-height:300px;background-color:#79C48C;">{{ item.text }}</div>
+    </lay-carousel-item>
+  </lay-carousel>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const active = ref("1")
+
+    const arrays = ref([
+      {id: "1", text: ""},
+      {id: "2", text: ""},
+      {id: "3", text: ""},
+      {id: "4", text: ""}
+    ])
+
+    return {
+      active,
+      arrays
+    }
+  }
+}
+</script>
+
+:::
+
+
 ::: title Carousel 属性
 :::
 

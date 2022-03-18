@@ -29,6 +29,7 @@ export interface LayTabProps {
 const slot = useSlots();
 const slots = slot.default && slot.default();
 const childrens: Ref<VNode[]> = ref([]);
+const slotsChange = ref(true);
 
 const setItemInstanceBySlot = function (nodeList: VNode[]) {
   nodeList?.map((item) => {
@@ -53,7 +54,6 @@ const active = computed({
     emit("update:modelValue", val);
   },
 });
-const slotsChange = ref(true);
 
 const change = function (id: any) {
   // 回调切换标签之前的回调钩子函数，只要不是return false, 则进行切换该tab

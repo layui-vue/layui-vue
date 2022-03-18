@@ -6,7 +6,8 @@ export default {
 
 <script setup lang="ts">
 import "./index.less";
-import { withDefaults, provide, useSlots, ref, computed } from "vue";
+import { withDefaults, provide, useSlots, ref, computed, VNode, Ref, Component, watch, onMounted } from "vue";
+import CarouselItem from "../carouselItem"
 
 const slot = useSlots() as any;
 const slots = slot.default && (slot.default() as any[]);
@@ -17,14 +18,18 @@ const props = withDefaults(
     height?: string;
     modelValue: string;
     anim?: string;
+    autoplay?: boolean;
     arrow?: string;
+    interval?: number;
     indicator?: string;
   }>(),
   {
     width: "100%",
     height: "280px",
     anim: "default",
+    autoplay: true,
     arrow: "hover",
+    interval: 3000,
     indicator: "inside",
   }
 );
@@ -45,27 +50,55 @@ const change = function (id: any) {
   active.value = id;
 };
 
-provide("active", active);
+const childrens: Ref<VNode[]> = ref([]);
+const slotsChange = ref(true);
 
+const setItemInstanceBySlot = function (nodeList: VNode[]) {
+  nodeList?.map((item) => {
+    let component = item.type as Component;
+    if (component.name != CarouselItem.name) {
+      setItemInstanceBySlot(item.children as VNode[]);
+    } else {
+      childrens.value.push(item);
+    }
+  });
+};
+
+watch(slotsChange, function () {
+  childrens.value = [];
+  setItemInstanceBySlot((slot.default && slot.default()) as VNode[]);
+});
+
+provide("active", active);
+provide("slotsChange", slotsChange);
+
+// 上一页
 const prev = function () {
-  for (var i = 0; i < slots.length; i++) {
-    if (slots[i].props.id === active.value) {
+  for (var i = 0; i < childrens.value.length; i++) {
+    // @ts-ignore
+    if (childrens.value[i].props.id === active.value) {
       if (i === 0) {
-        active.value = slots[slots.length - 1].props.id;
+        // @ts-ignore
+        active.value = childrens.value[slots.length - 1].props.id;
       }
-      active.value = slots[i - 1].props.id;
+      // @ts-ignore
+      active.value = childrens.value[i - 1].props.id;
       break;
     }
   }
 };
 
+// 下一页
 const next = function () {
-  for (var i = 0; i < slots.length; i++) {
-    if (slots[i].props.id === active.value) {
-      if (i === slots.length - 1) {
-        active.value = slots[0].props.id;
+  for (var i = 0; i < childrens.value.length; i++) {
+    // @ts-ignore
+    if (childrens.value[i].props.id === active.value) {
+      if (i === childrens.value.length - 1) {
+        // @ts-ignore
+        active.value = childrens.value[0].props.id;
       }
-      active.value = slots[i + 1].props.id;
+      // @ts-ignore
+      active.value = childrens.value[i + 1].props.id;
       break;
     }
   }
@@ -86,7 +119,7 @@ const next = function () {
     <div class="layui-carousel-ind">
       <ul>
         <li
-          v-for="ss in slots"
+          v-for="ss in childrens"
           :key="ss"
           :class="[ss.props.id === active ? 'layui-this' : '']"
           @click.stop="change(ss.props.id)"
