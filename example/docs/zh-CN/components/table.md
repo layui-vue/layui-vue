@@ -199,6 +199,56 @@ export default {
 
 :::
 
+
+::: title 开启排序
+:::
+
+::: demo
+
+<template>
+  <lay-table :columns="columns1" :dataSource="dataSource1"></lay-table>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const columns1 = [
+      {
+        title:"姓名",
+        width:"200px",
+        key:"name"
+      },{
+        title:"成绩",
+        width: "180px",
+        key:"score",
+        sort: true
+      }
+    ]
+
+    const dataSource1 = [
+      {name:"张三", score:100},
+      {name:"李四", score:80},
+      {name:"王二", score:99},
+      {name:"麻子", score:92},
+      {name:"无名", score:60},
+      {name:"有名", score:70},
+    ]
+
+    return {
+      page,
+      change,
+      columns,
+      dataSource
+    }
+  }
+}
+</script>
+
+:::
+
 ::: title 完整表格
 :::
 
@@ -334,6 +384,7 @@ export default {
 | key        | 数据字段   | --   |
 | customSlot | 自定义插槽 | --   |
 | width      | 宽度       | --   |
+| sort      | 排序       | --   |
 
 :::
 

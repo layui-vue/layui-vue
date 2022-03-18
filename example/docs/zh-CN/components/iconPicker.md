@@ -107,6 +107,31 @@ export default {
 
 :::
 
+::: title 静态面板
+:::
+
+::: demo
+
+<template>
+  <lay-icon-picker v-model="icon" type="layui-icon-face-smile" page showSearch position="static"></lay-icon-picker>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const icon = ref("layui-icon-home")
+
+    return {
+    }
+  }
+}
+</script>
+
+:::
+
 ::: title icon-picker 属性
 :::
 
