@@ -14,6 +14,7 @@ import LayDropdown from "../dropdown";
 import LayPage from "../page";
 import LayIcon from "../icon";
 import "./index.less";
+import { AnyARecord } from "dns";
 
 const tableId = guid();
 
@@ -47,12 +48,20 @@ const slot = useSlots();
 const slots = slot.default && slot.default();
 
 const allChecked = ref(false);
+const tableDataSource = ref([...props.dataSource]);
 const tableSelectedKeys = ref([...props.selectedKeys]);
 const tableColumns = ref([...props.columns]);
 const tableColumnKeys = ref(
   props.columns.map((item: any) => {
     return item.key;
   })
+);
+
+watch(
+  () => props.dataSource,
+  () => {
+    tableDataSource.value = [...props.dataSource];
+  }
 );
 
 const changeAll = function (checked: any) {
@@ -125,6 +134,41 @@ const exportData = () => {
     bookType: "xls",
   });
   return;
+};
+
+const sortTable = (e: any, key: string, sort: string) => {
+  // 当前排序
+  let currentSort = e.target.parentNode.getAttribute("lay-sort");
+  // 点击排序
+  if (sort === "desc") {
+    if (currentSort === sort) {
+      // 取消排序
+      e.target.parentNode.setAttribute("lay-sort", "");
+      tableDataSource.value = [...props.dataSource];
+    } else {
+      // 进行 desc 排序
+      e.target.parentNode.setAttribute("lay-sort", "desc");
+      tableDataSource.value.sort((x, y) => {
+        if (x[key] < y[key]) return 1;
+        else if (x[key] > y[key]) return -1;
+        else return 0;
+      });
+    }
+  } else {
+    if (currentSort === sort) {
+      // 取消排序
+      e.target.parentNode.setAttribute("lay-sort", "");
+      tableDataSource.value = [...props.dataSource];
+    } else {
+      // 进行 asc 排序
+      e.target.parentNode.setAttribute("lay-sort", "asc");
+      tableDataSource.value.sort((x, y) => {
+        if (x[key] < y[key]) return -1;
+        else if (x[key] > y[key]) return 1;
+        else return 0;
+      });
+    }
+  }
 };
 
 let tableHeader = ref<HTMLElement | null>(null);
@@ -210,13 +254,15 @@ onMounted(() => {
                       <span
                         v-if="column.sort"
                         class="layui-table-sort layui-inline"
-                        lay-sort=""
+                        lay-sort="desc"
                       >
                         <i
+                          @click.stop="sortTable($event, column.key, 'asc')"
                           class="layui-edge layui-table-sort-asc"
                           title="升序"
                         ></i>
                         <i
+                          @click.stop="sortTable($event, column.key, 'desc')"
                           class="layui-edge layui-table-sort-desc"
                           title="降序"
                         ></i>
@@ -232,11 +278,12 @@ onMounted(() => {
         <div class="layui-table-body layui-table-main" ref="tableBody">
           <table class="layui-table" :lay-size="size">
             <tbody>
-              <template v-for="data in dataSource" :key="data">
+              <template v-for="data in tableDataSource" :key="data">
                 <tr
                   @click.stop="rowClick(data)"
                   @dblclick.stop="rowDoubleClick(data)"
                 >
+                  <!-- 复选框 -->
                   <td v-if="checkbox" class="layui-table-col-special">
                     <div class="layui-table-cell laytable-cell-checkbox">
                       <LayCheckbox
@@ -247,6 +294,7 @@ onMounted(() => {
                     </div>
                   </td>
 
+                  <!-- 数据列 -->
                   <template v-for="column in columns" :key="column">
                     <template v-if="tableColumnKeys.includes(column.key)">
                       <!-- 插 槽 Column -->

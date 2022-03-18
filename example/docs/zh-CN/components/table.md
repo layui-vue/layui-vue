@@ -243,7 +243,8 @@ export default {
       },{
         title:"年龄",
         width: "180px",
-        key:"age"
+        key:"age",
+        sort: true
       },{
         title:"操作",
         width: "180px",
