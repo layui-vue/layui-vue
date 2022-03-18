@@ -254,7 +254,7 @@ onMounted(() => {
                       <span
                         v-if="column.sort"
                         class="layui-table-sort layui-inline"
-                        lay-sort="desc"
+                        lay-sort=""
                       >
                         <i
                           @click.stop="sortTable($event, column.key, 'asc')"
