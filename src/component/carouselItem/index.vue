@@ -17,7 +17,7 @@ slotsChange.value = !slotsChange.value;
 </script>
 
 <template>
-    <li :class="[active === id ? 'layui-this' : '']">
-      <slot></slot>
-    </li>
+  <li :class="[active === id ? 'layui-this' : '']">
+    <slot></slot>
+  </li>
 </template>

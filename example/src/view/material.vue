@@ -71,9 +71,31 @@
         </div>
         </a>
       </div>
+      <div class="layui-col layui-col-md6">
+        <a href="https://github.com/buuing/lucky-canvas">
+          <div class="project-list-item">
+          <img
+            class="project-list-item-cover"
+            src="https://gw.alipayobjects.com/zos/rmsportal/iZBVOIhGJiAnhplqjvZW.png"
+          />
+
+          <div class="project-list-item-body">
+            <h2>Lucky-Canvas</h2>
+            <div class="project-list-item-text layui-text">
+              转盘 / 九宫格 / 老虎机 / 抽奖插件。
+            </div>
+            <div class="project-list-item-desc">
+              <span class="time">几秒前</span>
+              <div class="ew-head-list"></div>
+            </div>
+          </div>
+        </div>
+        </a>
+      </div>
     </div>
   </div>
 </template>
+lucky-canvas
 
 <style>
 .alone-banner {
