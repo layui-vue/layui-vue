@@ -18,8 +18,8 @@
         <ul>
           <li>[新增] notice-bar 通告栏。</li>
           <li>[新增] scroll 虚拟滚动组件。</li> 
-          <li>[新增] water-marker 水印组件。</li>
           <li>[新增] table 表格组件 excel 导出工具栏。</li>
+          <li>[新增] table column 选项 sort 属性, 开启字段排序。</li>
           <li>[新增] page 分页组件 v-model 属性, 支持默认页设置。</li>
           <li>[新增] date-picker 日期选择组件, 支持年月, 日期, 时间。</li>
           <li>[新增] transfer 穿梭框组件 showSearch 开启搜索属性。</li>

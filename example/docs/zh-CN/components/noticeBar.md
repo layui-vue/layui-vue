@@ -13,7 +13,7 @@
 ::: demo
 
 <template>
-    <lay-notice-bar text="要不要作为我的家人，搬来我家。" mode="link"></lay-notice-bar>
+    <lay-notice-bar text="以写作为工具，为道途，先帮助自己一程，再以自己的领悟帮助他人一程, 这是一种服务 。" mode="link"></lay-notice-bar>
 </template>
 
 <script>
@@ -36,7 +36,7 @@ export default {
 ::: demo
 
 <template>
-    <lay-notice-bar leftIcon="layui-icon-mute" text="要不要作为我的家人, 搬来我家" mode="closeable"></lay-notice-bar>
+    <lay-notice-bar leftIcon="layui-icon-mute" text="最好的爱是两个人彼此做个伴，不要束缚，不要缠绕，不要占有，不渴望从对方那里得到，只是并肩站在一起，看看这个世界。"></lay-notice-bar>
 </template>
 
 <script>
@@ -60,7 +60,7 @@ export default {
 ::: demo
 
 <template>
-    <lay-notice-bar leftIcon="layui-icon-mute" rightIcon="layui-icon-close" text="多的是你不知道的事" mode="closeable"></lay-notice-bar>
+    <lay-notice-bar leftIcon="layui-icon-mute" rightIcon="layui-icon-close" text="所有发生过的都是既定的。是应该发生。只能发生。" mode="closeable"></lay-notice-bar>
 </template>
 
 <script>
@@ -81,16 +81,22 @@ export default {
 :::
 
 
-::: title Notice Bar 事件
+::: title Notice Bar 属性
 :::
 
 ::: table
 
 | 事件 | 描述     | 参数                  |
 | ---- | -------- | --------------------- |
-| mode | 模式 | { current: 当前页面 } |
+| mode | 模式 | 'link' 'closeable' |
 | text | 内容 | 滚动内容 |
-| leftIcon | 左侧图标 | { current: 当前页面 } |
-| rightIcon | 右侧图标 | 滚动内容 |
+| leftIcon | 左侧图标 | -- |
+| rightIcon | 右侧图标 | -- |
 
+:::
+
+::: comment
+:::
+
+::: previousNext transfer
 :::

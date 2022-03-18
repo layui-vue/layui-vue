@@ -6,8 +6,19 @@ export default {
 
 <script setup lang="ts">
 import "./index.less";
-import { withDefaults, provide, useSlots, ref, computed, VNode, Ref, Component, watch, onMounted } from "vue";
-import CarouselItem from "../carouselItem"
+import {
+  withDefaults,
+  provide,
+  useSlots,
+  ref,
+  computed,
+  VNode,
+  Ref,
+  Component,
+  watch,
+  onMounted,
+} from "vue";
+import CarouselItem from "../carouselItem";
 
 const slot = useSlots() as any;
 const slots = slot.default && (slot.default() as any[]);

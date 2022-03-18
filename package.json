@@ -1,10 +1,10 @@
 {
   "name": "@layui/layui-vue",
-  "version": "0.4.0",
+  "version": "0.4.0-alpha.1",
   "author": "就眠儀式",
   "license": "MIT",
   "description": "a component library for Vue 3 base on layui-vue",
-  "homepage": "http://layui-vue.pearadmin.com",
+  "homepage": "http://www.layui-vue.com",
   "main": "es/index.js",
   "types": "types/index.d.ts",
   "style": "lib/index.css",
