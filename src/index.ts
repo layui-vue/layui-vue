@@ -54,7 +54,8 @@ import LayEmpty from "./component/empty/index";
 import LayFormItem from "./component/formItem/index";
 import LayRate from "./component/rate/index";
 import LayDropdown from "./component/dropdown/index";
-import LayDropdownItem from "./component/dropdownItem/index";
+import LayDropdownMenu from "./component/dropdownMenu/index";
+import LayDropdownMenuItem from "./component/dropdownMenuItem/index";
 import LayTab from "./component/tab/index";
 import LayTabItem from "./component/tabItem/index";
 import LayTree from "./component/tree/index";
@@ -129,7 +130,8 @@ const components: Record<string, Component> = {
   LayFormItem,
   LayRate,
   LayDropdown,
-  LayDropdownItem,
+  LayDropdownMenu,
+  LayDropdownMenuItem,
   LayTab,
   LayTabItem,
   LayIconPicker,
@@ -214,7 +216,8 @@ export {
   LayFormItem,
   LayRate,
   LayDropdown,
-  LayDropdownItem,
+  LayDropdownMenu, 
+  LayDropdownMenuItem,
   LayTab,
   LayTabItem,
   LayIconPicker,

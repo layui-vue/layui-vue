@@ -16,9 +16,11 @@
   <lay-dropdown>
     <lay-button type="primary">下拉菜单</lay-button>
     <template #content>
-        <lay-dropdown-item>选项一</lay-dropdown-item>
-        <lay-dropdown-item>选项二</lay-dropdown-item>
-        <lay-dropdown-item>选项三</lay-dropdown-item>
+        <lay-dropdown-menu>
+          <lay-dropdown-menu-item>选项一</lay-dropdown-menu-item>
+          <lay-dropdown-menu-item>选项二</lay-dropdown-menu-item>
+          <lay-dropdown-menu-item>选项三</lay-dropdown-menu-item>
+        </lay-dropdown-menu>
     </template>
   </lay-dropdown>
 </template>
@@ -46,18 +48,22 @@ export default {
   <lay-dropdown trigger="hover">
     <lay-button>Hover 触发</lay-button>
     <template #content>
-        <lay-dropdown-item>选项一</lay-dropdown-item>
-        <lay-dropdown-item>选项二</lay-dropdown-item>
-        <lay-dropdown-item>选项三</lay-dropdown-item>
+        <lay-dropdown-menu>
+          <lay-dropdown-menu-item>选项一</lay-dropdown-menu-item>
+          <lay-dropdown-menu-item>选项二</lay-dropdown-menu-item>
+          <lay-dropdown-menu-item>选项三</lay-dropdown-menu-item>
+        </lay-dropdown-menu>
     </template>
   </lay-dropdown>
   &nbsp;&nbsp;
     <lay-dropdown>
     <lay-button>Click 触发</lay-button>
     <template #content>
-        <lay-dropdown-item>选项一</lay-dropdown-item>
-        <lay-dropdown-item>选项二</lay-dropdown-item>
-        <lay-dropdown-item>选项三</lay-dropdown-item>
+        <lay-dropdown-menu>
+          <lay-dropdown-menu-item>选项一</lay-dropdown-menu-item>
+          <lay-dropdown-menu-item>选项二</lay-dropdown-menu-item>
+          <lay-dropdown-menu-item>选项三</lay-dropdown-menu-item>
+        </lay-dropdown-menu>
     </template>
   </lay-dropdown>
 </template>

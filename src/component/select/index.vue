@@ -17,6 +17,7 @@ import {
   toRefs,
   Ref,
 } from "vue";
+import LayScroll from "../scroll";
 import { onClickOutside } from "@vueuse/core";
 import { SelectItem } from "../../types";
 
@@ -141,8 +142,8 @@ const selectItemPush = function (p: SelectItem) {
   }
 };
 provide("selectItemHandle", selectItemHandle);
-provide("selectItem", selectItem);
 provide("selectItemPush", selectItemPush);
+provide("selectItem", selectItem);
 </script>
 
 <template>
@@ -210,12 +211,14 @@ provide("selectItemPush", selectItemPush);
         </div>
       </div>
     </div>
+    
+    <!-- 下拉内容 -->
     <dl class="layui-anim layui-anim-upbit">
-      <!-- 多选不支持空提示 -->
       <template v-if="!multiple && showEmpty">
         <lay-select-option :value="null" :label="emptyMessage ?? placeholder" />
       </template>
       <slot></slot>
     </dl>
+
   </div>
 </template>

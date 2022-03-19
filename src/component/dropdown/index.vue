@@ -44,34 +44,17 @@ defineExpose({ open, hide, toggle });
 
 <template>
   <div
-    v-if="trigger === 'click'"
     ref="dropdownRef"
     class="layui-dropdown"
-    :class="[openState ? 'layui-dropdown-up' : '']"
+    @mouseenter="trigger === 'hover' && open()"
+    @mouseleave="trigger === 'hover' && hide()"
+    :class="{'layui-dropdown-up' : openState}"
   >
-    <div @click="toggle">
+    <div @click="trigger === 'click' && toggle()">
       <slot></slot>
     </div>
     <dl class="layui-anim layui-anim-upbit">
-      <ul class="layui-menu layui-dropdown-menu">
-        <slot name="content"></slot>
-      </ul>
-    </dl>
-  </div>
-  <div
-    v-if="trigger === 'hover'"
-    class="layui-dropdown"
-    :class="[openState ? 'layui-dropdown-up' : '']"
-    @mouseenter="open"
-    @mouseleave="hide"
-  >
-    <div>
-      <slot></slot>
-    </div>
-    <dl class="layui-anim layui-anim-upbit">
-      <ul class="layui-menu layui-dropdown-menu">
-        <slot name="content"></slot>
-      </ul>
+      <slot name="content"></slot>
     </dl>
   </div>
 </template>

@@ -98,6 +98,49 @@ export default {
 
 :::
 
+::: title 海量数据 
+:::
+
+::: demo
+
+<template>
+  <lay-select v-model="selected">
+    <lay-select-option value="1" label="学习"></lay-select-option>
+    <lay-select-option value="3" label="运动"></lay-select-option>
+    <lay-select-option value="1" label="学习"></lay-select-option>
+    <lay-select-option value="3" label="运动"></lay-select-option>
+    <lay-select-option value="1" label="学习"></lay-select-option>
+    <lay-select-option value="3" label="运动"></lay-select-option>
+    <lay-select-option value="1" label="学习"></lay-select-option>
+    <lay-select-option value="3" label="运动"></lay-select-option>
+    <lay-select-option value="1" label="学习"></lay-select-option>
+    <lay-select-option value="3" label="运动"></lay-select-option>
+    <lay-select-option value="1" label="学习"></lay-select-option>
+    <lay-select-option value="3" label="运动"></lay-select-option>
+    <lay-select-option value="1" label="学习"></lay-select-option>
+    <lay-select-option value="3" label="运动"></lay-select-option>
+    <lay-select-option value="1" label="学习"></lay-select-option>
+    <lay-select-option value="3" label="运动"></lay-select-option>
+  </lay-select>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const selected = ref('1')
+
+    return {
+      selected
+    }
+  }
+}
+</script>
+
+:::
+
 ::: title 多选使用
 :::
 
