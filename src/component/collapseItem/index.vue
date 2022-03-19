@@ -39,7 +39,10 @@ const showHandle = function () {
     // 普通折叠面板 --> 展开
     activeValues.value.push(props.id);
   }
-  emit("update:modelValue",accordion ? activeValues.value[0] || null : activeValues.value);
+  emit(
+    "update:modelValue",
+    accordion ? activeValues.value[0] || null : activeValues.value
+  );
   emit("change", props.id, !_isShow, activeValues.value);
 };
 </script>
