@@ -39,11 +39,7 @@ const showHandle = function () {
     // 普通折叠面板 --> 展开
     activeValues.value.push(props.id);
   }
-
-  emit(
-    "update:modelValue",
-    accordion ? activeValues.value[0] || null : activeValues.value
-  );
+  emit("update:modelValue",accordion ? activeValues.value[0] || null : activeValues.value);
   emit("change", props.id, !_isShow, activeValues.value);
 };
 </script>
@@ -57,10 +53,12 @@ const showHandle = function () {
       <slot name="title" :props="props">{{ title }}</slot>
       <i class="layui-icon layui-colla-icon">{{ isShow ? "" : "" }}</i>
     </h2>
-    <div class="layui-colla-content" :class="isShow ? 'layui-show' : ''">
-      <p>
-        <slot :props="props"></slot>
-      </p>
-    </div>
+    <lay-transition>
+      <div class="layui-colla-content" v-if="isShow">
+        <p>
+          <slot :props="props"></slot>
+        </p>
+      </div>
+    </lay-transition>
   </div>
 </template>

@@ -17,9 +17,13 @@
   <br/>
   <br/>
   <lay-transition>
-    <div v-show="visible">
-        <ul style="width:300px;background: #79C48C;border-radius: 4px;height:200px;">
-        </ul>
+    <div v-show="visible" style="width:300px;background: #79C48C;border-radius: 4px;padding:20px;">
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
+        <li>1</li>
     </div>
   </lay-transition>
 </template>
