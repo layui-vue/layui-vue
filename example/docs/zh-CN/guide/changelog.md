@@ -18,6 +18,7 @@
         <ul>
           <li>[新增] notice-bar 通告栏。</li>
           <li>[新增] scroll 虚拟滚动组件。</li> 
+          <li>[新增] transition 过渡动画组件。</li>
           <li>[新增] table 表格组件 excel 导出工具栏。</li>
           <li>[新增] table column 选项 sort 属性, 开启字段排序。</li>
           <li>[新增] page 分页组件 v-model 属性, 支持默认页设置。</li>

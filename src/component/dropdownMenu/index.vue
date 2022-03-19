@@ -1,11 +1,11 @@
 <template>
-    <ul class="layui-menu layui-dropdown-menu">
-        <slot></slot>
-    </ul>
+  <ul class="layui-menu layui-dropdown-menu">
+    <slot></slot>
+  </ul>
 </template>
 
 <script lang="ts">
 export default {
-    name: "LayDropdownMenu"
-}
+  name: "LayDropdownMenu",
+};
 </script>

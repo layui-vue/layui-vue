@@ -370,6 +370,12 @@ const zhCN = [
               import("../../docs/zh-CN/components/noticeBar.md"),
             meta: { title: "通知栏" },
           },
+          {
+            path: "/zh-CN/components/transition",
+            component: () =>
+              import("../../docs/zh-CN/components/transition.md"),
+            meta: { title: "通知栏" },
+          },
         ],
       },
     ],

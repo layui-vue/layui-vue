@@ -80,6 +80,7 @@ import LayResult from "./component/result/index";
 import LayFullscreen from "./component/fullscreen/index";
 import LayDatePicker from "./component/datePicker/index";
 import LayNoticeBar from "./component/noticeBar/index";
+import LayTransition from "./component/transition/index";
 import LayConfigProvider from "./provider";
 import { InstallOptions } from "./types";
 
@@ -158,6 +159,7 @@ const components: Record<string, Component> = {
   LayConfigProvider,
   LayDatePicker,
   LayNoticeBar,
+  LayTransition
 };
 
 const install = (app: App, options?: InstallOptions): void => {
@@ -216,7 +218,7 @@ export {
   LayFormItem,
   LayRate,
   LayDropdown,
-  LayDropdownMenu, 
+  LayDropdownMenu,
   LayDropdownMenuItem,
   LayTab,
   LayTabItem,
@@ -244,6 +246,7 @@ export {
   LayConfigProvider,
   LayDatePicker,
   LayNoticeBar,
+  LayTransition
 };
 
 export { layer };

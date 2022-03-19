@@ -211,7 +211,7 @@ provide("selectItem", selectItem);
         </div>
       </div>
     </div>
-    
+
     <!-- 下拉内容 -->
     <dl class="layui-anim layui-anim-upbit">
       <template v-if="!multiple && showEmpty">
@@ -219,6 +219,5 @@ provide("selectItem", selectItem);
       </template>
       <slot></slot>
     </dl>
-
   </div>
 </template>

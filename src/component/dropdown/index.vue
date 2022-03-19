@@ -48,7 +48,7 @@ defineExpose({ open, hide, toggle });
     class="layui-dropdown"
     @mouseenter="trigger === 'hover' && open()"
     @mouseleave="trigger === 'hover' && hide()"
-    :class="{'layui-dropdown-up' : openState}"
+    :class="{ 'layui-dropdown-up': openState }"
   >
     <div @click="trigger === 'click' && toggle()">
       <slot></slot>

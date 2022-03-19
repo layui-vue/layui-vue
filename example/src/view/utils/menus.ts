@@ -26,13 +26,18 @@ const menus = [
         title: "动画",
         subTitle: "animation",
         path: "/zh-CN/components/animation",
+      },{
+        id: 101,
+        title: "过渡",
+        subTitle: "transition",
+        path: "/zh-CN/components/transition",
       },
       {
         id: 101,
         title: "全屏",
         subTitle: "fullscreen",
         path: "/zh-CN/components/fullscreen",
-      },
+      }
     ],
   },
   {
