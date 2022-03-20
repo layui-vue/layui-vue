@@ -3,7 +3,6 @@
     <lay-dropdown>
       <lay-input :value="dateValue || modelValue" readonly />
       <template #content>
-
         <!-- 日期选择 -->
         <div class="layui-laydate" v-show="showPanel === 'date'">
           <div class="layui-laydate-main laydate-main-list-0">
@@ -76,7 +75,7 @@
             >
               {{ `${hms.hh}:${hms.mm}:${hms.ss}` }}
             </span>
-            
+
             <div class="laydate-footer-btns">
               <span lay-type="clear" class="laydate-btns-clear">清空</span
               ><span lay-type="now" class="laydate-btns-now">现在</span
@@ -238,12 +237,12 @@ import LayDropdown from "../dropdown/index.vue";
 
 export interface LayDatePickerProps {
   modelValue?: string;
-  type: 'date' | 'datetime' | 'year' | 'time' | 'month';
+  type: "date" | "datetime" | "year" | "time" | "month";
 }
 
 const props = withDefaults(defineProps<LayDatePickerProps>(), {
-  modelValue: '',
-  type: 'date'
+  modelValue: "",
+  type: "date",
 });
 
 const $emits = defineEmits(["update:modelValue"]);
