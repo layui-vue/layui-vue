@@ -34,6 +34,32 @@ export default {
 
 :::
 
+::: title 日期时间
+:::
+
+::: demo
+
+<template>
+  <lay-date-picker type="datetime" v-model="endTime"></lay-date-picker>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+   const endTime = ref("2022-03-04 17:35:00");
+
+    return {
+      endTime
+    }
+  }
+}
+</script>
+
+:::
+
 ::: comment
 :::
 

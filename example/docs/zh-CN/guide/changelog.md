@@ -29,6 +29,7 @@
           <li>[修复] carousel-item 轮播项使用 v-for 无法渲染。</li>
           <li>[修复] checkbox 复选框组件, 选中颜色丢失。</li>
           <li>[修复] slider 滑块组件, 默认 step 值异常。</li>
+          <li>[修复] form 表单错误提示没有间距的问题。</li>
           <li>[升级] layer-vue 1.3.10 版本。</li>
         </ul> 
       </li>

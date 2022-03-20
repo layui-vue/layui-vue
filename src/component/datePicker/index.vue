@@ -3,6 +3,7 @@
     <lay-dropdown>
       <lay-input :value="dateValue || modelValue" readonly />
       <template #content>
+
         <!-- 日期选择 -->
         <div class="layui-laydate" v-show="showPanel === 'date'">
           <div class="layui-laydate-main laydate-main-list-0">
@@ -68,12 +69,14 @@
           </div>
           <div class="layui-laydate-footer">
             <span
+              v-if="type === 'datetime'"
               @click="showPanel = 'time'"
               class="layui-laydate-preview"
               style="color: rgb(102, 102, 102)"
             >
               {{ `${hms.hh}:${hms.mm}:${hms.ss}` }}
             </span>
+            
             <div class="laydate-footer-btns">
               <span lay-type="clear" class="laydate-btns-clear">清空</span
               ><span lay-type="now" class="laydate-btns-now">现在</span
@@ -82,6 +85,7 @@
           </div>
         </div>
 
+        <!-- 年份选择器 -->
         <div class="layui-laydate" v-show="showPanel === 'year'">
           <div class="layui-laydate-main laydate-main-list-0 laydate-ym-show">
             <div class="layui-laydate-header">
@@ -123,6 +127,7 @@
           </div>
         </div>
 
+        <!-- 月份选择器 -->
         <div class="layui-laydate" v-show="showPanel === 'month'">
           <div class="layui-laydate-main laydate-main-list-0 laydate-ym-show">
             <div class="layui-laydate-header">
@@ -174,6 +179,7 @@
           </div>
         </div>
 
+        <!-- 事件选择器 -->
         <div class="layui-laydate" v-if="showPanel == 'time'">
           <div class="layui-laydate-main laydate-main-list-0 laydate-time-show">
             <div class="layui-laydate-header">
@@ -230,8 +236,14 @@ import { computed, nextTick, ref, watch, defineProps, defineEmits } from "vue";
 import LayInput from "../input/index.vue";
 import LayDropdown from "../dropdown/index.vue";
 
-const props = defineProps({
-  modelValue: { type: String, required: false },
+export interface LayDatePickerProps {
+  modelValue?: string;
+  type: 'date' | 'datetime' | 'year' | 'time' | 'month';
+}
+
+const props = withDefaults(defineProps<LayDatePickerProps>(), {
+  modelValue: '',
+  type: 'date'
 });
 
 const $emits = defineEmits(["update:modelValue"]);

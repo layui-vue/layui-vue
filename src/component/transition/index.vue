@@ -59,11 +59,7 @@ const beforeLeave = (el: any) => {
   el.dataset.oldPaddingBottom = el.style.paddingBottom;
   el.dataset.oldOverflow = el.style.overflow;
   var computedStyle = getComputedStyle(el, null);
-  el.style.height =
-    el.scrollHeight -
-    parseInt(computedStyle.paddingTop) -
-    parseInt(computedStyle.paddingBottom) +
-    "px";
+  el.style.height = el.scrollHeight - parseInt(computedStyle.paddingTop) - parseInt(computedStyle.paddingBottom) + "px";
   el.style.overflow = "hidden";
 };
 

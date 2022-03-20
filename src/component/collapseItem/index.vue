@@ -6,6 +6,7 @@ export default {
 
 <script setup lang="ts">
 import "./index.less";
+import LayTransition from "../transition/index.vue";
 import { withDefaults, inject, computed, ref } from "vue";
 
 export interface LayCollapseItemProps {
@@ -57,10 +58,12 @@ const showHandle = function () {
       <i class="layui-icon layui-colla-icon">{{ isShow ? "" : "" }}</i>
     </h2>
     <lay-transition>
-      <div class="layui-colla-content" v-if="isShow">
-        <p>
-          <slot :props="props"></slot>
-        </p>
+      <div v-if="isShow">
+        <div class="layui-colla-content">
+          <p>
+            <slot :props="props"></slot>
+          </p>
+        </div>
       </div>
     </lay-transition>
   </div>
