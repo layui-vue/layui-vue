@@ -18,14 +18,6 @@
         >
           {{ text }}
         </div>
-      <div class="notice-bar-warp-slot " v-else>  
-            <lay-carousel v-model="active" indicator="none" anim="updown" arrow="none" style="height:40px;">
-              <lay-carousel-item v-for="(item, ind) in textlist" :key="ind" :id="ind" class="layui-anim layui-anim-up" style="padding-top:8px;">
-              {{ item }}
-              </lay-carousel-item>
-            </lay-carousel>
-        </div>  
-        <!-- <slot />  -->
       </div>
       <lay-icon
         :type="rightIcon"
@@ -49,21 +41,18 @@ import {
 export default defineComponent({
   name: "LayNoticeBar",
   props: {
-    // 选值为 closeable link
     mode: {
       type: String,
       default: () => "",
     },
-    // 通知文本内容
     text: {
       type: String,
       default: () => "",
     },
-   // 多条通知文本内容
-   textlist: {
-	 type: Array,
-	 default: [],
-	  },
+    textlist: {
+      type: Array,
+      default: [],
+    },
     // 通知文本颜色
     color: {
       type: String,
@@ -172,36 +161,6 @@ export default defineComponent({
         emit("link");
       }
     };
-    //设置轮播默认内容和自动播放
-    const active = ref(0)
-    if(props.scrollable == true){
-        console.log(props.speed)
-    let gdsd 
-    if(props.speed == 100){
-        gdsd = 2000
-    }else{
-        gdsd = props.speed
-    }
-     nextTick(() => {
-      let pe = document.querySelector(".layui-carousel")
-      let i = 0
-      setInterval(() => {
-        i = ++i
-        if (pe) {
-          let lbsl = pe.children[0].children.length
-          console.log(pe.children[0])
-          if (i < lbsl) {
-            pe.children[0].children[i - 1].classList.remove("layui-this");
-            pe.children[0].children[i].classList.add("layui-this");
-          } else if (i == lbsl) {
-            pe.children[0].children[lbsl - 1].classList.remove("layui-this");
-            pe.children[0].children[0].classList.add("layui-this");
-            i = 0
-          }
-        }
-      }, gdsd);
-     })
-    }
     // 页面加载时
     onMounted(() => {
       if (props.scrollable) return false;
@@ -213,7 +172,6 @@ export default defineComponent({
       noticeBarTextRef,
       onRightIconClick,
       ...toRefs(state),
-      active
     };
   },
 });
@@ -268,5 +226,4 @@ export default defineComponent({
 .notice-bar .notice-bar-warp .notice-bar-warp-right-icon:hover {
   cursor: pointer;
 }
-
 </style>
