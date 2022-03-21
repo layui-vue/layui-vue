@@ -2,8 +2,6 @@
 export default {
   name: "LayTree",
 };
-
-// import { TreeEmits, TreeProps as Tp } from './tree.type'
 </script>
 <script lang="ts" setup>
 import TreeNode from "./TreeNode.vue";
