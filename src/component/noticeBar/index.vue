@@ -18,13 +18,12 @@
         >
           {{ text }}
         </div>
-        <!-- <div class="notice-bar-warp-slot " v-else>  -->
-		<div  v-else> 
-		<div class="content_container">
-			 <ul class="content_container_list" >
-                 <li class="content_container_list_item" v-for="(v, index) in textlist" :key="index">{{v}}</li>
-             </ul> 
-		 </div> 
+      <div class="notice-bar-warp-slot " v-else>  
+            <lay-carousel v-model="active" indicator="none" anim="updown" arrow="none" style="height:40px;">
+              <lay-carousel-item v-for="(item, ind) in textlist" :key="ind" :id="ind" class="layui-anim layui-anim-up" style="padding-top:8px;">
+              {{ item }}
+              </lay-carousel-item>
+            </lay-carousel>
         </div>  
         <!-- <slot />  -->
       </div>
@@ -173,6 +172,36 @@ export default defineComponent({
         emit("link");
       }
     };
+    //设置轮播默认内容和自动播放
+    const active = ref(0)
+    if(props.scrollable == true){
+        console.log(props.speed)
+    let gdsd 
+    if(props.speed == 100){
+        gdsd = 2000
+    }else{
+        gdsd = props.speed
+    }
+     nextTick(() => {
+      let pe = document.querySelector(".layui-carousel")
+      let i = 0
+      setInterval(() => {
+        i = ++i
+        if (pe) {
+          let lbsl = pe.children[0].children.length
+          console.log(pe.children[0])
+          if (i < lbsl) {
+            pe.children[0].children[i - 1].classList.remove("layui-this");
+            pe.children[0].children[i].classList.add("layui-this");
+          } else if (i == lbsl) {
+            pe.children[0].children[lbsl - 1].classList.remove("layui-this");
+            pe.children[0].children[0].classList.add("layui-this");
+            i = 0
+          }
+        }
+      }, gdsd);
+     })
+    }
     // 页面加载时
     onMounted(() => {
       if (props.scrollable) return false;
@@ -184,6 +213,7 @@ export default defineComponent({
       noticeBarTextRef,
       onRightIconClick,
       ...toRefs(state),
+      active
     };
   },
 });
@@ -238,100 +268,5 @@ export default defineComponent({
 .notice-bar .notice-bar-warp .notice-bar-warp-right-icon:hover {
   cursor: pointer;
 }
-.content_container {
-    font-weight: 600;
-    overflow: hidden;
-    height: 40px;
-    padding: 0 5px;
-}
 
-.content_container_list {
-    margin-top: 0;
-    padding-left: 0px;
-    text-align: left;
-    list-style: none;
-    -webkit-animation-name: change;
-            animation-name: change;
-    -webkit-animation-duration: 10s;
-            animation-duration: 10s;
-    -webkit-animation-iteration-count: infinite;
-            animation-iteration-count: infinite;
-}
-
-.content_container_list_item {
-    line-height: 40px;
-    margin: 0;
-}
-
-@-webkit-keyframes opacity {
-    0%, 100% {
-        opacity: 0;
-    }
-
-    50% {
-        opacity: 1;
-    }
-}
-
-@keyframes opacity {
-    0%, 100% {
-        opacity: 0;
-    }
-
-    50% {
-        opacity: 1;
-    }
-}
-
-@-webkit-keyframes change {
-    0%, 12.66%, 100% {
-        transform: translate3d(0, 0, 0);
-    }
-
-    16.66%, 29.32% {
-        transform: translate3d(0, -25%, 0);
-    }
-
-    33.32%, 45.98% {
-        transform: translate3d(0, -50%, 0);
-    }
-
-    49.98%, 62.64% {
-        transform: translate3d(0, -75%, 0);
-    }
-
-    66.64%, 79.3% {
-        transform: translate3d(0, -50%, 0);
-    }
-
-    83.3%, 95.96% {
-        transform: translate3d(0, -25%, 0);
-    }
-}
-
-@keyframes change {
-    0%, 12.66%, 100% {
-        transform: translate3d(0, 0, 0);
-    }
-
-    16.66%, 29.32% {
-        transform: translate3d(0, -25%, 0);
-    }
-
-    33.32%, 45.98% {
-        transform: translate3d(0, -50%, 0);
-    }
-
-    49.98%, 62.64% {
-        transform: translate3d(0, -75%, 0);
-    }
-
-    66.64%, 79.3% {
-        transform: translate3d(0, -50%, 0);
-    }
-
-    83.3%, 95.96% {
-        transform: translate3d(0, -25%, 0);
-    }
-}
 </style>
