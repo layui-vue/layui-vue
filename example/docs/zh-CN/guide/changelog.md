@@ -11,6 +11,15 @@
 <template>
 <lay-timeline>
   <lay-timeline-item title="0.4.0">
+      <ul> 
+      <a name="0-4-0"> </a> 
+      <li> 
+        <h3>0.4.1 <span class="layui-badge-rim">2022-03-17</span></h3> 
+        <ul>
+          <li>[新增] transition 组件 type 属性, 默认为 collapse 过渡。</li>
+        </ul> 
+      </li>
+    </ul>
     <ul> 
       <a name="0-4-0"> </a> 
       <li> 

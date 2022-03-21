@@ -1,4 +1,3 @@
-
 <template>
   <transition name="fade">
     <slot></slot>
