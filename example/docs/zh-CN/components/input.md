@@ -56,6 +56,33 @@ export default {
 
 :::
 
+
+::: title 前缀后缀
+:::
+
+::: demo
+
+<template>
+  <lay-input>
+    <template #prefix>0</template>
+    <template #suffix>0</template>
+  </lay-input>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    return {
+    }
+  }
+}
+</script>
+
+:::
+
 ::: title 事件回调
 :::
 

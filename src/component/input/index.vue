@@ -7,8 +7,10 @@ export default {
 <script setup lang="ts">
 import "./index.less";
 import { useI18n } from "vue-i18n";
+import { useSlots } from "vue-demi";
 
 const { t } = useI18n();
+const slots = useSlots();
 
 export interface LayInputProps {
   name?: string;
@@ -39,16 +41,24 @@ const onBlur = function () {
 </script>
 
 <template>
-  <input
-    :type="type"
-    :name="name"
-    :value="modelValue || value"
-    :disabled="disabled"
-    :placeholder="placeholder"
-    :class="{ 'layui-disabled': disabled }"
-    class="layui-input"
-    @input="onInput"
-    @focus="onFocus"
-    @blur="onBlur"
-  />
+  <div class="layui-input-wrapper">
+    <span class="layui-input-prefix" v-if="slots.prefix">
+      <slot name="prefix"></slot>
+    </span>
+    <input
+      :type="type"
+      :name="name"
+      :value="modelValue || value"
+      :disabled="disabled"
+      :placeholder="placeholder"
+      :class="{ 'layui-disabled': disabled }"
+      class="layui-input"
+      @input="onInput"
+      @focus="onFocus"
+      @blur="onBlur"
+    />
+    <span class="layui-input-suffix" v-if="slots.suffix">
+      <slot name="suffix"></slot>
+    </span>
+  </div>
 </template>

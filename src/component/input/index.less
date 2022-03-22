@@ -10,17 +10,34 @@
 
 .layui-input {
   height: 38px;
-  line-height: 1.3;
-  line-height: 38px\9;
-  border-width: 1px;
-  border-style: solid;
+  line-height: 38px;
   background-color: #fff;
   color: rgba(0, 0, 0, 0.85);
-  border-radius: @input-border-radius;
-  border-color: @input-border-color;
-  display: block;
-  width: 100%;
   padding-left: 10px;
+  display: inline-block;
+  border: none;
+  width: 100%;
+}
+
+.layui-input-wrapper {
+  width: 100%;
+  border-width: 1px;
+  border-style: solid;
+  display: inline-flex;
+  border-color: @input-border-color;
+  border-radius:  @input-border-radius;
+}
+
+.layui-input-prefix {
+  display: flex;
+  flex: none;
+  align-items: center;
+}
+
+.layui-input-suffix {
+  display: flex;
+  flex: none;
+  align-items: center;
 }
 
 .layui-input:hover {
