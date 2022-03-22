@@ -7,7 +7,7 @@ export default {
 <script setup lang="ts">
 import "./index.less";
 import { useI18n } from "vue-i18n";
-import { useSlots } from "vue-demi";
+import { computed, useSlots } from "vue-demi";
 
 const { t } = useI18n();
 const slots = useSlots();
@@ -17,8 +17,9 @@ export interface LayInputProps {
   type?: string;
   value?: string;
   disabled?: boolean;
-  modelValue?: string | number;
+  modelValue?: string;
   placeholder?: string;
+  allowClear?: boolean;
 }
 
 const props = withDefaults(defineProps<LayInputProps>(), {});
@@ -38,6 +39,10 @@ const onFocus = function (event: FocusEvent) {
 const onBlur = function () {
   emit("blur");
 };
+
+const clear = () => {
+    emit("update:modelValue", "");
+}
 </script>
 
 <template>
@@ -59,6 +64,9 @@ const onBlur = function () {
     />
     <span class="layui-input-suffix" v-if="slots.suffix">
       <slot name="suffix"></slot>
+    </span>
+    <span class="layui-input-clear" v-if="allowClear">
+      <lay-icon type="layui-icon-close-fill" @click="clear"></lay-icon>
     </span>
   </div>
 </template>

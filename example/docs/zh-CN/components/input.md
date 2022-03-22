@@ -83,6 +83,32 @@ export default {
 
 :::
 
+::: title 允许清空
+:::
+
+::: demo
+
+<template>
+  <lay-input allow-clear="true" v-model="value1"></lay-input>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const value1 = ref("内容")
+
+    return {
+      value1
+    }
+  }
+}
+</script>
+
+:::
+
 ::: title 事件回调
 :::
 

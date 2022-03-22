@@ -128,14 +128,12 @@ class Tree {
     if (!originMap.has(nodeKey)) {
       originMap.set(nodeKey, origin);
     }
-
     return node;
   }
 
   setChildrenChecked(checked: boolean, nodes: TreeData[]) {
     const len = nodes.length;
     for (let i = 0; i < len; i++) {
-      //console.log(nodes[i], checked);
       nodes[i].isChecked.value = checked;
       nodes[i].children &&
         nodes[i].children.length > 0 &&
