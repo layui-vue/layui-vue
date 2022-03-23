@@ -17,7 +17,7 @@ slotsChange.value = !slotsChange.value;
 </script>
 
 <template>
-  <li v-if="active === id ">
+  <li v-if="active === id">
     <slot></slot>
   </li>
 </template>

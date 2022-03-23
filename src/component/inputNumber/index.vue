@@ -106,7 +106,6 @@ const isNumber = function (num: any) {
 <template>
   <div class="layui-input-number" :position="position" :size="size">
     <lay-button
-      type="primary"
       size="gl"
       @mousedown="longDown(subtraction)"
       @mouseup="cancelLongDown"
@@ -130,7 +129,6 @@ const isNumber = function (num: any) {
       />
     </div>
     <lay-button
-      type="primary"
       size="gl"
       @mousedown="longDown(addition)"
       @mouseup="cancelLongDown"

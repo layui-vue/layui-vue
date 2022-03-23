@@ -16,11 +16,13 @@
       <li> 
         <h3>0.4.1 <span class="layui-badge-rim">2022-03-17</span></h3> 
         <ul>
-          <li>[新增] input 组件 prefix 插槽, 提供前缀设置。</li>
-          <li>[新增] input 组件 suffix 插槽, 提供后缀设置。</li>
-          <li>[新增] input 组件 allow-clear 属性, 提供输入清空。</li>
+          <li>[新增] switch 组件 onswitch-icon 插槽。</li>
+          <li>[新增] switch 组件 unswitch-icon 插槽。</li>
           <li>[新增] transition 组件 type 属性, 默认为 collapse 过渡。</li>
           <li>[新增] transition 组件 type 属性 fade 值, 提供淡出淡入效果。</li>
+          <li>[新增] input 组件 allow-clear 属性, 提供输入清空。</li>
+          <li>[新增] input 组件 prefix 插槽, 提供前缀设置。</li>
+          <li>[新增] input 组件 suffix 插槽, 提供后缀设置。</li>
         </ul> 
       </li>
     </ul>

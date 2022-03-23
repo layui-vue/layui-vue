@@ -206,10 +206,6 @@ div[class*='language-'].line-numbers-mode {
   font-weight: bold;
 }
 
-.token.italic {
-  font-style: italic;
-}
-
 .token.entity {
   cursor: help;
 }

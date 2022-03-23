@@ -170,6 +170,7 @@ export default {
 | dataSource | 数据来源    | --              |
 | title      | 标题        | --              |
 | id         | 主键        | --              |
+| showSearch | 开启搜索        | --              |
 
 :::
 

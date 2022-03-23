@@ -140,19 +140,11 @@ const add = function () {
       </ul>
     </div>
     <!-- 操作 -->
-    <button
-      class="layui-icon layui-carousel-arrow"
-      lay-type="sub"
-      @click="sub"
-    >
-      {{ anim === "updown" ? "" : "" }}</button
-    >
-    
-    <button
-      class="layui-icon layui-carousel-arrow"
-      lay-type="add"
-      @click="add"
-    >
+    <button class="layui-icon layui-carousel-arrow" lay-type="sub" @click="sub">
+      {{ anim === "updown" ? "" : "" }}
+    </button>
+
+    <button class="layui-icon layui-carousel-arrow" lay-type="add" @click="add">
       {{ anim === "updown" ? "" : "" }}
     </button>
   </div>
