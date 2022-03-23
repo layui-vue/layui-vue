@@ -14,7 +14,6 @@ import LayDropdown from "../dropdown";
 import LayPage from "../page";
 import LayIcon from "../icon";
 import "./index.less";
-import { AnyARecord } from "dns";
 
 const tableId = guid();
 
@@ -102,6 +101,7 @@ const rowDoubleClick = function (data: any) {
   emit("row-double", data);
 };
 
+// 打印 table 数据
 const print = function () {
   let subOutputRankPrint = document.getElementById(tableId) as HTMLElement;
   let newContent = subOutputRankPrint.innerHTML;
@@ -112,6 +112,7 @@ const print = function () {
   document.body.innerHTML = oldContent;
 };
 
+// 导出 table 数据
 const exportData = () => {
   const wb = XLSX.utils.book_new();
   let arr: any[] = [];

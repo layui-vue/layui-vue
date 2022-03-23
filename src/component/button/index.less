@@ -20,25 +20,21 @@
   height: 38px;
   line-height: 36px;
   padding: 0 18px;
-  color: #fff;
   font-size: 14px;
   text-align: center;
   white-space: nowrap;
-  border: 1px solid transparent;
-  background-color: @button-primary-color;
   border-radius: @button-border-radius;
+  border-color: @button-border-color;
+  border-width: 1px;
+  border-style: solid;
+  background: 0 0;
+  color: #666;
   cursor: pointer;
 }
 
-.layui-btn:hover {
-  color: #fff;
-  opacity: 0.8;
-  filter: alpha(opacity=80);
-}
-
+.layui-btn:hover,
 .layui-btn:active {
-  opacity: 1;
-  filter: alpha(opacity=100);
+  color: #333;
 }
 
 .layui-btn + .layui-btn {
@@ -56,25 +52,36 @@
 }
 
 .layui-btn-primary {
-  border-color: @button-border-color;
-  background: 0 0;
-  color: #666;
-}
-
-.layui-btn-primary:hover {
-  color: #333;
+  color: #fff;
+  background-color: @button-primary-color;
+  border-color: @button-primary-color;
 }
 
 .layui-btn-normal {
+  color: #fff;
   background-color: @button-normal-color;
+  border-color: @button-normal-color;
 }
 
 .layui-btn-warm {
+  color: #fff;
   background-color: @button-warm-color;
+  border-color: @button-warm-color;
 }
 
 .layui-btn-danger {
+  color: #fff;
   background-color: @button-danger-color;
+  border-color: @button-danger-color;
+}
+
+.layui-btn-primary:hover,
+.layui-btn-normal:hover,
+.layui-btn-warm:hover,
+.layui-btn-danger:hover {
+  color: #fff;
+  opacity: 0.8;
+  filter: alpha(opacity=80);
 }
 
 .layui-btn-lg {
