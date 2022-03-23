@@ -84,7 +84,7 @@ provide("active", active);
 provide("slotsChange", slotsChange);
 
 // 上一页
-const prev = function () {
+const sub = function () {
   for (var i = 0; i < childrens.value.length; i++) {
     // @ts-ignore
     if (childrens.value[i].props.id === active.value) {
@@ -100,7 +100,7 @@ const prev = function () {
 };
 
 // 下一页
-const next = function () {
+const add = function () {
   for (var i = 0; i < childrens.value.length; i++) {
     // @ts-ignore
     if (childrens.value[i].props.id === active.value) {
@@ -124,9 +124,11 @@ const next = function () {
     :lay-arrow="arrow"
     :style="{ width: width, height: height }"
   >
+    <!-- 内容 -->
     <div carousel-item>
       <slot></slot>
     </div>
+    <!-- 轮播 -->
     <div class="layui-carousel-ind">
       <ul>
         <li
@@ -137,16 +139,19 @@ const next = function () {
         ></li>
       </ul>
     </div>
+    <!-- 操作 -->
     <button
       class="layui-icon layui-carousel-arrow"
       lay-type="sub"
-      @click="prev"
+      @click="sub"
     >
       {{ anim === "updown" ? "" : "" }}</button
-    ><button
+    >
+    
+    <button
       class="layui-icon layui-carousel-arrow"
       lay-type="add"
-      @click="next"
+      @click="add"
     >
       {{ anim === "updown" ? "" : "" }}
     </button>
