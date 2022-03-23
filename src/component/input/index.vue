@@ -41,8 +41,8 @@ const onBlur = function () {
 };
 
 const clear = () => {
-    emit("update:modelValue", "");
-}
+  emit("update:modelValue", "");
+};
 </script>
 
 <template>
