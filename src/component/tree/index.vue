@@ -85,6 +85,7 @@ function handleClick(node: TreeData) {
       :node-list="nodeList"
       :show-checkbox="showCheckbox"
       :show-line="showLine"
+      :accordion="accordion"
       :only-icon-control="onlyIconControl"
       @node-click="handleClick"
     />

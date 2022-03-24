@@ -6,13 +6,12 @@ export default {
 
 <script setup lang="ts">
 import { StringOrNumber } from "./tree.type";
-import { Nullable } from "../type";
-
 import LayIcon from "../icon";
 import LayCheckbox from "../checkbox";
 import { Ref } from "vue";
 import { Tree } from "./tree";
-
+import { Nullable } from "../../types";
+import LayTransition from "../transition/index.vue";
 type CustomKey = string | number;
 type CustomString = (() => string) | string;
 
@@ -34,6 +33,7 @@ interface TreeNodeProps {
   nodeList: TreeData[];
   showCheckbox: boolean;
   showLine: boolean;
+  accordion: boolean;
   onlyIconControl: boolean;
 }
 
@@ -136,7 +136,7 @@ function handleTitleClick(node: TreeData) {
         </span>
       </div>
     </div>
-    <transition name="move">
+    <LayTransition :enable="accordion">
       <div
         v-if="node.isLeaf.value"
         class="layui-tree-pack layui-tree-showLine"
@@ -146,12 +146,13 @@ function handleTitleClick(node: TreeData) {
           :node-list="node.children"
           :show-checkbox="showCheckbox"
           :show-line="showLine"
+          :accordion="accordion"
           :tree="tree"
           :only-icon-control="onlyIconControl"
           @node-click="recursiveNodeClick"
         />
       </div>
-    </transition>
+    </LayTransition>
   </div>
 </template>
 

@@ -9,6 +9,7 @@
     :onlyIconControl="iconCtrl"
     :showLine="showLine"
     :showCheckbox="showCheckbox"
+    accordion
     v-model:checkedKeys="checkedKeys"
     @node-click="handleClick"
     :disabled="disabled"
