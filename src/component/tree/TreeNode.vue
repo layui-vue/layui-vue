@@ -136,7 +136,7 @@ function handleTitleClick(node: TreeData) {
         </span>
       </div>
     </div>
-    <LayTransition :enable="accordion">
+    <LayTransition>
       <div
         v-if="node.isLeaf.value"
         class="layui-tree-pack layui-tree-showLine"

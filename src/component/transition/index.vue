@@ -25,6 +25,6 @@ export interface LayTransitionProps {
 
 const props = withDefaults(defineProps<LayTransitionProps>(), {
   type: "collapse",
-  enable: true
+  enable: true,
 });
 </script>
