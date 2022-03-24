@@ -17,7 +17,7 @@ export interface LayCollapseProps {
 const props = withDefaults(defineProps<LayCollapseProps>(), {
   modelValue: () => [],
   accordion: false,
-  isAmin: true
+  isAmin: true,
 });
 
 // 监听传入的值
