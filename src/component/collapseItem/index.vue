@@ -50,7 +50,10 @@ const showHandle = function () {
 
 <template>
   <div class="layui-colla-item">
-    <h2 :class="['layui-colla-title', { 'layui-disabled': disabled }]" @click="showHandle">
+    <h2
+      :class="['layui-colla-title', { 'layui-disabled': disabled }]"
+      @click="showHandle"
+    >
       <slot name="title" :props="props">{{ title }}</slot>
       <i class="layui-icon layui-colla-icon">{{ isShow ? "" : "" }}</i>
     </h2>
