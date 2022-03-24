@@ -53,8 +53,8 @@ const handleClick = function () {
       <em>{{ isActive == true ? activeText : inactiveText }}</em>
       <span>
         <div>
-        <slot v-if="isActive" name="onswitch-icon"></slot>
-        <slot v-else name="unswitch-icon"></slot>
+          <slot v-if="isActive" name="onswitch-icon"></slot>
+          <slot v-else name="unswitch-icon"></slot>
         </div>
       </span>
     </div>
