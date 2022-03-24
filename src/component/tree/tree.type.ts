@@ -17,7 +17,7 @@ export interface TreeProps {
   data: OriginalTreeData;
   showCheckbox?: boolean;
   edit?: EditType;
-  accordion?: boolean;
+  collapseTransition?: boolean;
   onlyIconControl?: boolean;
   showLine?: boolean;
   replaceFields?: {

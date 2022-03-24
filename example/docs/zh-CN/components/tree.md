@@ -18,7 +18,7 @@
     :onlyIconControl="iconCtrl"
     :showLine="showLine"
     :showCheckbox="showCheckbox"
-    accordion
+    collapseTransition
     v-model:checkedKeys="checkedKeys"
     @node-click="handleClick"
     :disabled="disabled"
@@ -246,14 +246,14 @@ function handleClick(node) {
 
 ::: table
 
-| Name     | Description | Accepted Values |
-| -------- |-------------| --------------- |
-| id       | 唯一值         | -               |
-| title    | 节点名称        | -               |
-| children | 子节点         | []              |
-| disabled | 该节点是否禁用     | false           |
-| spread   | 该节点是否展开     | false           |
-| accordion   | 是否开启展示收起动画  | false           |
+| Name                | Description | Accepted Values |
+|---------------------|-------------| --------------- |
+| id                  | 唯一值         | -               |
+| title               | 节点名称        | -               |
+| children            | 子节点         | []              |
+| disabled            | 该节点是否禁用     | false           |
+| spread              | 该节点是否展开     | false           |
+| collapse-transition | 是否开启展示收起动画  | false           |
 
 :::
 

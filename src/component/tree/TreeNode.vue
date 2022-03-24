@@ -33,7 +33,7 @@ interface TreeNodeProps {
   nodeList: TreeData[];
   showCheckbox: boolean;
   showLine: boolean;
-  accordion: boolean;
+  collapseTransition: boolean;
   onlyIconControl: boolean;
 }
 
@@ -136,7 +136,7 @@ function handleTitleClick(node: TreeData) {
         </span>
       </div>
     </div>
-    <LayTransition :enable="accordion">
+    <LayTransition :enable="collapseTransition">
       <div
         v-if="node.isLeaf.value"
         class="layui-tree-pack layui-tree-showLine"
@@ -146,7 +146,7 @@ function handleTitleClick(node: TreeData) {
           :node-list="node.children"
           :show-checkbox="showCheckbox"
           :show-line="showLine"
-          :accordion="accordion"
+          :collapse-transition="collapseTransition"
           :tree="tree"
           :only-icon-control="onlyIconControl"
           @node-click="recursiveNodeClick"

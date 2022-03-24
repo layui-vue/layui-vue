@@ -28,7 +28,7 @@ interface TreeProps {
   data: OriginalTreeData;
   showCheckbox?: boolean;
   edit?: EditType;
-  accordion?: boolean;
+  collapseTransition?: boolean;
   onlyIconControl?: boolean;
   showLine?: boolean;
   disabled?: boolean;
@@ -48,7 +48,7 @@ interface TreeEmits {
 const props = withDefaults(defineProps<TreeProps>(), {
   showCheckbox: false,
   edit: false,
-  accordion: false,
+  collapseTransition: false,
   onlyIconControl: false,
   disabled: false,
   showLine: true,
@@ -85,7 +85,7 @@ function handleClick(node: TreeData) {
       :node-list="nodeList"
       :show-checkbox="showCheckbox"
       :show-line="showLine"
-      :accordion="accordion"
+      :collapse-transition="collapseTransition"
       :only-icon-control="onlyIconControl"
       @node-click="handleClick"
     />
