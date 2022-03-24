@@ -133,6 +133,39 @@ export default {
 
 :::
 
+
+::: title 关闭动画
+:::
+
+::: demo
+
+<template>
+  <lay-collapse v-model="openKeys5" :isAmin="isAmin">
+    <lay-collapse-item title="标题1" id="1"> 内容1 </lay-collapse-item>
+    <lay-collapse-item title="标题2" id="2"> 内容2 </lay-collapse-item>
+    <lay-collapse-item title="标题3" id="3"> 内容3 </lay-collapse-item>
+  </lay-collapse>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const isAmin = ref(false)
+    const openKeys5 = ref("2")
+
+    return {
+      openKeys5,
+      isAmin
+    }
+  }
+}
+</script>
+
+:::
+
 ::: title 事件使用
 :::
 
