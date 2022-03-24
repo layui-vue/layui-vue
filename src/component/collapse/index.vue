@@ -11,13 +11,13 @@ import { withDefaults, provide, ref, watch } from "vue";
 export interface LayCollapseProps {
   modelValue?: number | string | [];
   accordion?: boolean;
-  isAmin?: boolean;
+  collapseTransition?: boolean;
 }
 
 const props = withDefaults(defineProps<LayCollapseProps>(), {
   modelValue: () => [],
   accordion: false,
-  isAmin: true,
+  collapseTransition: true,
 });
 
 // 监听传入的值
@@ -33,7 +33,7 @@ const activeValues = ref<Array<any>>(([] as any[]).concat(props.modelValue));
 
 provide("layCollapse", {
   accordion: props.accordion,
-  isAmin: props.isAmin,
+  collapseTransition: props.collapseTransition,
   activeValues,
   emit,
 });

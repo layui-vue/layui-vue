@@ -16,6 +16,7 @@ export interface LayMenuProps {
   inverted?: boolean | string;
   level?: boolean | string;
   collapse?: boolean | string;
+  collapseTransition?: boolean | string;
 }
 
 const emit = defineEmits(["update:selectedKey", "update:openKeys"]);
@@ -28,12 +29,14 @@ const props = withDefaults(defineProps<LayMenuProps>(), {
   inverted: false,
   level: false,
   collapse: false,
+  collapseTransition: true
 });
 
 let oldOpenKeys = ref<string[]>([]);
 
 const isTree = computed(() => props.tree);
 const isCollapse = computed(() => props.collapse);
+const isCollapseTransition = computed(() => props.collapseTransition);
 
 const openKeys = computed({
   get() {
@@ -72,6 +75,7 @@ provide("isTree", isTree);
 provide("selectedKey", selectedKey);
 provide("openKeys", openKeys);
 provide("isCollapse", isCollapse);
+provide("isCollapseTransition", isCollapseTransition);
 </script>
 
 <template>

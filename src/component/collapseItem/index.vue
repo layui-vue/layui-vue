@@ -19,7 +19,7 @@ const props = withDefaults(defineProps<LayCollapseItemProps>(), {
   disabled: false,
 });
 
-const { accordion, activeValues, emit, isAmin } = inject("layCollapse") as any;
+const { accordion, activeValues, emit, collapseTransition } = inject("layCollapse") as any;
 
 let isShow = computed(() => {
   return activeValues.value.includes(props.id);
@@ -57,7 +57,7 @@ const showHandle = function () {
       <slot name="title" :props="props">{{ title }}</slot>
       <i class="layui-icon layui-colla-icon">{{ isShow ? "" : "" }}</i>
     </h2>
-    <lay-transition :enable="isAmin">
+    <lay-transition :enable="collapseTransition">
       <div v-if="isShow">
         <div class="layui-colla-content">
           <p>

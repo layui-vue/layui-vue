@@ -21,7 +21,8 @@
           <li>[新增] transition 组件 type 属性, 默认为 collapse 过渡。</li>
           <li>[新增] transition 组件 enable 属性, 默认为 true 启用动画。</li>
           <li>[新增] transition 组件 type 属性 fade 值, 提供淡出淡入效果。</li>
-          <li>[新增] collapse 组件 isAmin 属性, 是否启用折叠动画, 默认为 true。</li>
+          <li>[新增] collapse 组件 collapseTransition 属性, 是否启用折叠动画, 默认为 true。</li>
+          <li>[新增] tree 组件 collapseTransition 属性, 是否启用折叠动画, 默认为 true。</li>
           <li>[新增] input 组件 allow-clear 属性, 提供输入清空。</li>
           <li>[新增] input 组件 prefix 插槽, 提供前缀设置。</li>
           <li>[新增] input 组件 suffix 插槽, 提供后缀设置。</li>

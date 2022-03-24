@@ -15,6 +15,7 @@ import {
   watch,
 } from "vue";
 import { onClickOutside } from "@vueuse/core";
+import LayTransition from "../transition";
 
 export interface LaySubMenuProps {
   id: string;
@@ -29,6 +30,9 @@ const isTree: Ref<boolean> = inject("isTree") as Ref<boolean>;
 const selectedKey: Ref<string> = inject("selectedKey") as Ref<string>;
 const openKeys: Ref<string[]> = inject("openKeys") as Ref<string[]>;
 const isCollapse: Ref<boolean> = inject("isCollapse") as Ref<boolean>;
+const isCollapseTransition: Ref<boolean> = inject(
+  "isCollapseTransition"
+) as Ref<boolean>;
 
 const isOpen = computed(() => {
   return openKeys.value.includes(props.id);
@@ -84,7 +88,6 @@ onBeforeUnmount(() => window.removeEventListener("resize", setPosition));
 <template>
   <li
     class="layui-nav-item"
-    :class="[isOpen && isTree ? 'layui-nav-itemed' : '']"
   >
     <a href="javascript:void(0)" @click="openHandle()">
       <i>
@@ -98,16 +101,23 @@ onBeforeUnmount(() => window.removeEventListener("resize", setPosition));
         class="layui-icon layui-icon-down layui-nav-more"
       ></i>
     </a>
-    <dl
-      class="layui-nav-child"
-      ref="subMenuRef"
-      :class="[
-        position,
-        isOpen && !isTree ? 'layui-show' : '',
-        !isTree ? 'layui-anim layui-anim-upbit' : '',
-      ]"
-    >
-      <slot></slot>
-    </dl>
+    <template v-if="isTree">
+      <lay-transition :enable="isCollapseTransition">
+        <div v-if="isOpen">
+          <dl class="layui-nav-child" v-if="isOpen">
+            <slot></slot>
+          </dl>
+        </div>
+      </lay-transition>
+    </template>
+    <template v-else>
+      <dl
+        ref="subMenuRef"
+        class="layui-nav-child layui-anim layui-anim-upbit"
+        :class="{ 'layui-show': isOpen, position }"
+      >
+        <slot></slot>
+      </dl>
+    </template>
   </li>
 </template>
