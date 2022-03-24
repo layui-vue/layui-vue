@@ -29,7 +29,7 @@ const props = withDefaults(defineProps<LayMenuProps>(), {
   inverted: false,
   level: false,
   collapse: false,
-  collapseTransition: true
+  collapseTransition: true,
 });
 
 let oldOpenKeys = ref<string[]>([]);

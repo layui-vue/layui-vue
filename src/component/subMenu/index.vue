@@ -86,9 +86,7 @@ onBeforeUnmount(() => window.removeEventListener("resize", setPosition));
 </script>
 
 <template>
-  <li
-    class="layui-nav-item"
-  >
+  <li class="layui-nav-item">
     <a href="javascript:void(0)" @click="openHandle()">
       <i>
         <slot v-if="slots.icon" name="icon"></slot>

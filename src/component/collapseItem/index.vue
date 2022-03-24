@@ -19,7 +19,9 @@ const props = withDefaults(defineProps<LayCollapseItemProps>(), {
   disabled: false,
 });
 
-const { accordion, activeValues, emit, collapseTransition } = inject("layCollapse") as any;
+const { accordion, activeValues, emit, collapseTransition } = inject(
+  "layCollapse"
+) as any;
 
 let isShow = computed(() => {
   return activeValues.value.includes(props.id);
