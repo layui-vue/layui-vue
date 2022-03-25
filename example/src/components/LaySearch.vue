@@ -3,12 +3,10 @@
 </template>
 
 <script setup name="LaySelect" lang="ts">
-// @ts-ignore
-import docsearch from "@docsearch/js";
 import { onMounted } from "vue";
-import "@docsearch/css";
 
 onMounted(() => {
+  // @ts-ignore
   docsearch({
     appId: "BIYZTK0F0Q",
     apiKey: "de599990b844bc1b325310f61ad19a78",
