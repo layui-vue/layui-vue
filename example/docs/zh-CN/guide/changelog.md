@@ -11,8 +11,19 @@
 <template>
 <lay-timeline>
   <lay-timeline-item title="0.4.0">
-      <ul> 
-      <a name="0-4-0"> </a> 
+    <ul> 
+      <a name="0-4-2"> </a> 
+      <li> 
+        <h3>0.4.2 <span class="layui-badge-rim">2022-03-25</span></h3> 
+        <ul>
+          <li>[优化] switch 组件 in-active-text 为 unswitch-text 属性, 默认不显示。</li>
+          <li>[优化] switch 组件 active-text 为 onswitch-text 属性, 默认不显示。
+          <li>[优化] switch 组件样式。</li>
+        </ul> 
+      </li>
+    </ul>
+    <ul> 
+      <a name="0-4-1"> </a> 
       <li> 
         <h3>0.4.1 <span class="layui-badge-rim">2022-03-25</span></h3> 
         <ul>

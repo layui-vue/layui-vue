@@ -10,15 +10,13 @@ import "./index.less";
 
 export interface LaySwitchProps {
   disabled?: boolean;
-  activeText?: string;
   modelValue?: boolean;
-  inactiveText?: string;
+  onswitchText?: string;
+  unswitchText?: string;
 }
 
 const props = withDefaults(defineProps<LaySwitchProps>(), {
-  disabled: false,
-  activeText: "启用",
-  inactiveText: "禁用",
+  disabled: false
 });
 
 const emit = defineEmits(["update:modelValue", "change"]);
@@ -50,7 +48,7 @@ const handleClick = function () {
         'layui-switch-disabled': disabled,
       }"
     >
-      <em>{{ isActive == true ? activeText : inactiveText }}</em>
+      <em>{{ isActive == true ? onswitchText : unswitchText }}</em>
       <span>
         <div>
           <slot v-if="isActive" name="onswitch-icon"></slot>
