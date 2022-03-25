@@ -424,6 +424,8 @@ export default {
 | theme               | 菜单主题       | `dark` `light` |
 | inverted            | 特殊的激活样式 | `true` `false` |
 | level               | 菜单层级       | `true` `false` |
+| collapse            | 折叠状态       | `true` `false` |
+| collapse-transition  | 折叠动画       | `true` `false` |
 
 :::
 

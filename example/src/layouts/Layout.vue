@@ -149,7 +149,7 @@
             </a>
           </li>
           <li class="layui-nav-item">
-            <a href="javascript:void(0)"> 0.4.0 </a>
+            <a href="javascript:void(0)"> 0.4.1 </a>
           </li>
         </ul>
       </lay-header>

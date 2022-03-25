@@ -20,7 +20,7 @@
           >
         </div>
         <div class="site-version">
-          <span>{{ t('home.version') }}：v<cite class="site-showv">0.4.0</cite></span>
+          <span>{{ t('home.version') }}：v<cite class="site-showv">0.4.1</cite></span>
           <span
             ><router-link
               class="layui-inline site-down"

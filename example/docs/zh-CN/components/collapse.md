@@ -210,7 +210,7 @@ export default {
 | --------- | ----------------------- | --------------- | --------------- | 
 | openKeys  | 默认打开的折叠面板子项key | `string`/`array`| --              |
 | accordion | 是否开启手风琴效果        | `boolean`       |  `false`        |
-
+| collapse-transition  | 折叠动画       | `true` `false` |   `true` |
 :::
 
 ::: title Collapse 事件

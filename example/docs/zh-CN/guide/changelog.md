@@ -14,7 +14,7 @@
       <ul> 
       <a name="0-4-0"> </a> 
       <li> 
-        <h3>0.4.1 <span class="layui-badge-rim">2022-03-17</span></h3> 
+        <h3>0.4.1 <span class="layui-badge-rim">2022-03-25</span></h3> 
         <ul>
           <li>[新增] switch 组件 onswitch-icon 插槽。</li>
           <li>[新增] switch 组件 unswitch-icon 插槽。</li>
