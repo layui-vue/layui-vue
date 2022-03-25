@@ -16,7 +16,7 @@ export interface LaySwitchProps {
 }
 
 const props = withDefaults(defineProps<LaySwitchProps>(), {
-  disabled: false
+  disabled: false,
 });
 
 const emit = defineEmits(["update:modelValue", "change"]);
