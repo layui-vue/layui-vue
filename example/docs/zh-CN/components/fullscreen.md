@@ -91,7 +91,7 @@ export default {
     zIndex="10000"  
     v-slot="{ enter, exit, toggle, isFullscreen }" 
     @fullscreenchange=fullscreen3>
-    <div ref="fullscreenTargetRef" class="wrapper">
+    <div ref="fullscreenTargetRef" class="wrapper-fullscreen">
       <lay-button type="normal" @click="enter()">进入全屏</lay-button>  
       <lay-button type="normal" @click="exit()">退出</lay-button> 
       <lay-button type="warm" @click="toggle()"> 切换: {{isFullscreen ? "退出" : "进入全屏"}} </lay-button>
