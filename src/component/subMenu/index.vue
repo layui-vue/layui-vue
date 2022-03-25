@@ -102,7 +102,7 @@ onBeforeUnmount(() => window.removeEventListener("resize", setPosition));
     <template v-if="isTree">
       <lay-transition :enable="isCollapseTransition">
         <div v-if="isOpen">
-          <dl class="layui-nav-child" v-if="isOpen">
+          <dl class="layui-nav-child">
             <slot></slot>
           </dl>
         </div>
@@ -112,7 +112,7 @@ onBeforeUnmount(() => window.removeEventListener("resize", setPosition));
       <dl
         ref="subMenuRef"
         class="layui-nav-child layui-anim layui-anim-upbit"
-        :class="{ 'layui-show': isOpen, position }"
+        :class="[{ 'layui-show': isOpen }, position ]"
       >
         <slot></slot>
       </dl>

@@ -144,24 +144,6 @@
             </a>
           </li>
           <li class="layui-nav-item">
-            <a href="javascript:void(0)">
-              <lay-badge
-                type="rim"
-                class="layui-local-badge"
-                v-if="isDark"
-                @click="toggleDark"
-                >白天</lay-badge
-              >
-              <lay-badge
-                type="rim"
-                class="layui-local-badge"
-                v-else
-                @click="toggleDark"
-                >黑夜</lay-badge
-              >
-            </a>
-          </li>
-          <li class="layui-nav-item">
             <a href="https://gitee.com/layui-vue/layui-vue/issues">
               <lay-icon type="layui-icon-chat" size="15px"></lay-icon>
             </a>
@@ -182,7 +164,6 @@ import menu from "../view/utils/menus";
 import { useI18n } from "vue-i18n";
 import zh_CN from "../locales/zh_CN.ts";
 import en_US from "../locales/en_US.ts";
-import { useDark, useToggle } from "@vueuse/core";
 
 export default {
   setup() {
@@ -221,9 +202,6 @@ export default {
       });
     });
 
-    const isDark = useDark();
-    const toggleDark = useToggle(isDark);
-
     watch(
       () => route.path,
       (val) => {
@@ -246,8 +224,6 @@ export default {
       theme,
       locale,
       locales,
-      isDark,
-      toggleDark,
       currentPath,
       handleClick,
       changeLocale,
