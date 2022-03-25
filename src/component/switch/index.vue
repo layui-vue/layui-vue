@@ -13,6 +13,8 @@ export interface LaySwitchProps {
   modelValue?: boolean;
   onswitchText?: string;
   unswitchText?: string;
+  onswitchColor?: string;
+  unswitchColor?: string;
 }
 
 const props = withDefaults(defineProps<LaySwitchProps>(), {
@@ -36,12 +38,19 @@ const handleClick = function () {
     isActive.value = !isActive.value;
   }
 };
+
+
+const styles = computed(() => {
+  return { 'background-color': isActive.value ? props.onswitchColor : props.unswitchColor}
+})
 </script>
 
 <template>
   <span @click.stop="handleClick">
     <div
+
       class="layui-unselect layui-form-switch"
+      :style="styles"
       :class="{
         'layui-disabled': disabled,
         'layui-form-onswitch': isActive,
