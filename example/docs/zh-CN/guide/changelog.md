@@ -12,6 +12,15 @@
 <lay-timeline>
   <lay-timeline-item title="0.4.0">
     <ul> 
+      <a name="0-4-3"> </a> 
+      <li> 
+        <h3>0.4.3 <span class="layui-badge-rim">2022-03-27</span></h3> 
+        <ul>
+          <li>[修复] menu 组件 level 属性不生效。</li>
+        </ul> 
+      </li>
+    </ul>
+    <ul> 
       <a name="0-4-2"> </a> 
       <li> 
         <h3>0.4.2 <span class="layui-badge-rim">2022-03-26</span></h3> 

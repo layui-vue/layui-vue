@@ -27,7 +27,7 @@ const props = withDefaults(defineProps<LayMenuProps>(), {
   tree: false,
   theme: "dark",
   inverted: false,
-  level: false,
+  level: true,
   collapse: false,
   collapseTransition: true,
 });
@@ -82,7 +82,7 @@ provide("isCollapseTransition", isCollapseTransition);
   <ul
     class="layui-nav"
     :class="[
-      level ? 'level' : '',
+      level ? '' : 'not-level',
       inverted ? 'inverted' : '',
       tree ? 'layui-nav-tree' : '',
       theme === 'dark' ? 'layui-nav-dark' : 'layui-nav-light',
