@@ -26,7 +26,7 @@ const props = defineProps<LayCardProps>();
       </span>
       <span class="layui-card-header-extra">
         <slot name="extra" v-if="slot.extra"></slot>
-      </span> 
+      </span>
     </div>
     <div class="layui-card-body">
       <slot name="body" v-if="slot.body"></slot>
@@ -37,10 +37,8 @@ const props = defineProps<LayCardProps>();
 
 <style scoped>
 .layui-card-header-title {
-
 }
 
 .layui-card-header-extra {
-
 }
 </style>
