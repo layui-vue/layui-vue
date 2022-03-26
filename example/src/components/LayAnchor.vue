@@ -166,7 +166,6 @@ const throttle = (func: Function, wait: number) => {
   box-sizing: border-box;
   width: 180px;
   padding: 0 25px;
-  background-color: #ffffff;
   border-left: 1px solid rgb(229 230 235);
   transition: none;
   -webkit-transition: none;

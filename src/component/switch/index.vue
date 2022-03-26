@@ -39,16 +39,18 @@ const handleClick = function () {
   }
 };
 
-
 const styles = computed(() => {
-  return { 'background-color': isActive.value ? props.onswitchColor : props.unswitchColor}
-})
+  return {
+    "background-color": isActive.value
+      ? props.onswitchColor
+      : props.unswitchColor,
+  };
+});
 </script>
 
 <template>
   <span @click.stop="handleClick">
     <div
-
       class="layui-unselect layui-form-switch"
       :style="styles"
       :class="{

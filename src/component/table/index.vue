@@ -7,7 +7,7 @@ export default {
 <script setup lang="ts">
 import * as XLSX from "xlsx";
 import { ref, watch, useSlots, withDefaults, onMounted } from "vue";
-import { guid } from "../../utils/guidUtil";
+import { v4 as uuidv4 } from '../../utils/guidUtil';
 import { Recordable } from "../../types";
 import LayCheckbox from "../checkbox";
 import LayDropdown from "../dropdown";
@@ -15,7 +15,7 @@ import LayPage from "../page";
 import LayIcon from "../icon";
 import "./index.less";
 
-const tableId = guid();
+const tableId = uuidv4();
 
 export interface LayTableProps {
   id?: string;
