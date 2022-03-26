@@ -41,58 +41,65 @@ const slot = useSlots();
 const slots = slot.default && slot.default();
 const isDragEnter = ref(false);
 
-interface localUploadOption{
-    url:string,
-    file?:unknown,
-    otherRequestData?:any
+interface localUploadOption {
+  url: string;
+  file?: unknown;
+  otherRequestData?: any;
 }
 
-const localUpload = (option:any) => {
-    let file, formData, xhr: XMLHttpRequest, loadedevt, total, per: number, url, uploading;
-    formData = new FormData();
-    xhr = new XMLHttpRequest();
-    url = option.url;
-    file = option.file;
-    formData.append("files", file);
-    //append 其他数据
-    if (option.otherRequestData instanceof Object) {
-      var _requestDate = option.otherRequestData;
-      for (var key in _requestDate) {
-        formData.append(key, _requestDate[key]);
-      }
+const localUpload = (option: any) => {
+  let file,
+    formData,
+    xhr: XMLHttpRequest,
+    loadedevt,
+    total,
+    per: number,
+    url,
+    uploading;
+  formData = new FormData();
+  xhr = new XMLHttpRequest();
+  url = option.url;
+  file = option.file;
+  formData.append("files", file);
+  //append 其他数据
+  if (option.otherRequestData instanceof Object) {
+    var _requestDate = option.otherRequestData;
+    for (var key in _requestDate) {
+      formData.append(key, _requestDate[key]);
     }
-    //事件回调
-    // event callbacks
-    xhr.onreadystatechange = function () {
-      if (xhr.readyState === 4) {
-        if ((xhr.status >= 200 && xhr.status <= 300) || xhr.status === 304) {
-          option.successF instanceof Function &&
-            option.successF(xhr.responseText);
-        } else {
-          option.errorF instanceof Function && option.errorF(xhr.responseText);
-        }
+  }
+  //事件回调
+  // event callbacks
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4) {
+      if ((xhr.status >= 200 && xhr.status <= 300) || xhr.status === 304) {
+        option.successF instanceof Function &&
+          option.successF(xhr.responseText);
       } else {
-        option.errorF instanceof Function && option.errorF();
+        option.errorF instanceof Function && option.errorF(xhr.responseText);
       }
-    };
-    //侦查当前附件上传情况
-    /**
-     * 附件的上传进度条方法在xhr.upload.onprogeress上，
-     * 还有一个xhr.onprogress,是下载时候的进度条,***
-     * */
-    xhr.upload.onprogress = function (event) {
-      // event.total是需要传输的总字节，event.loaded是已经传输的字节。如果event.lengthComputable不为真，则event.total等于0
-      if (event.lengthComputable) {
-        loadedevt = event.loaded;
-        total = event.total;
-        per = Math.floor((100 * loadedevt) / total);
-      }
-      //执行回调
-      option.uploadProgress instanceof Function && option.uploadProgress(per);
-    };
-    xhr.open("post", url, true); //不能是GET, get请求数据发送只能拼接在URL后面
-    xhr.setRequestHeader("Accept", "application/json, text/javascript");
-    xhr.send(formData);
+    } else {
+      option.errorF instanceof Function && option.errorF();
+    }
+  };
+  //侦查当前附件上传情况
+  /**
+   * 附件的上传进度条方法在xhr.upload.onprogeress上，
+   * 还有一个xhr.onprogress,是下载时候的进度条,***
+   * */
+  xhr.upload.onprogress = function (event) {
+    // event.total是需要传输的总字节，event.loaded是已经传输的字节。如果event.lengthComputable不为真，则event.total等于0
+    if (event.lengthComputable) {
+      loadedevt = event.loaded;
+      total = event.total;
+      per = Math.floor((100 * loadedevt) / total);
+    }
+    //执行回调
+    option.uploadProgress instanceof Function && option.uploadProgress(per);
+  };
+  xhr.open("post", url, true); //不能是GET, get请求数据发送只能拼接在URL后面
+  xhr.setRequestHeader("Accept", "application/json, text/javascript");
+  xhr.send(formData);
 };
 
 const getUploadChange = (e: any) => {
@@ -102,12 +109,11 @@ const getUploadChange = (e: any) => {
   if (props.url) {
     // 表单提交
     localUpload({
-        url:props.url,
-        file:file
+      url: props.url,
+      file: file,
     });
   } else {
     //
-    
   }
 };
 const uploadDragOver = (e: any) => {
