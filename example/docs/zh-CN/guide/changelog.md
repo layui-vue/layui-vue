@@ -17,6 +17,7 @@
         <h3>0.4.3 <span class="layui-badge-rim">2022-03-27</span></h3> 
         <ul>
           <li>[修复] menu 组件 level 属性不生效。</li>
+          <li>[修复] step 组件 line 连线不显示。
         </ul> 
       </li>
     </ul>
