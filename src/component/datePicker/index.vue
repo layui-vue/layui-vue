@@ -18,7 +18,9 @@
               >
               <div class="laydate-set-ym">
                 <span @click="showYearPanel">{{ currentYear }} 年</span
-                ><span @click="showPanel = 'month'">{{ currentMonth + 1 }} 月</span>
+                ><span @click="showPanel = 'month'"
+                  >{{ currentMonth + 1 }} 月</span
+                >
               </div>
               <i
                 class="layui-icon laydate-icon laydate-next-m"
@@ -137,7 +139,9 @@
               >
               <div class="laydate-set-ym">
                 <span @click="showYearPanel">{{ currentYear }} 年</span
-                ><span @click="showPanel = 'month'">{{ currentMonth + 1 }} 月</span>
+                ><span @click="showPanel = 'month'"
+                  >{{ currentMonth + 1 }} 月</span
+                >
               </div>
               <i
                 class="layui-icon laydate-icon laydate-next-y"
@@ -188,11 +192,7 @@
             </div>
             <div class="layui-laydate-content" style="height: 210px">
               <ul class="layui-laydate-list laydate-time-list">
-                <li
-                  class="num-list"
-                  v-for="item in els"
-                  :key="item.type"
-                >
+                <li class="num-list" v-for="item in els" :key="item.type">
                   <ol class="scroll" @click="choseTime">
                     <li
                       v-for="(it, index) in item.count"
@@ -231,7 +231,15 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, nextTick, ref, watch, defineProps, defineEmits, onMounted } from "vue";
+import {
+  computed,
+  nextTick,
+  ref,
+  watch,
+  defineProps,
+  defineEmits,
+  onMounted,
+} from "vue";
 import LayInput from "../input/index.vue";
 import LayDropdown from "../dropdown/index.vue";
 import { getDayLength, getYears } from "./day";
@@ -239,12 +247,25 @@ import { getDayLength, getYears } from "./day";
 const $emits = defineEmits(["update:modelValue"]);
 
 const WEEK_NAME = ["日", "一", "二", "三", "四", "五", "六"];
-const MONTH_NAME = ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"];
-const hms = ref({hh: "00",mm: "00",ss: "00"});
+const MONTH_NAME = [
+  "1月",
+  "2月",
+  "3月",
+  "4月",
+  "5月",
+  "6月",
+  "7月",
+  "8月",
+  "9月",
+  "10月",
+  "11月",
+  "12月",
+];
+const hms = ref({ hh: "00", mm: "00", ss: "00" });
 const els = [
-  {count: 24, type: "hh"},
-  {count: 60, type: "mm"},
-  {count: 60, type: "ss"},
+  { count: 24, type: "hh" },
+  { count: 60, type: "mm" },
+  { count: 60, type: "ss" },
 ];
 
 export interface LayDatePickerProps {
@@ -310,7 +331,7 @@ const setDateList = (year: number, month: number) => {
     for (let i = 1; i <= nextDays; i++) {
       list.push({
         day: i,
-        value: + new Date(year, month + 1, i),
+        value: +new Date(year, month + 1, i),
         isRange: false,
         isSelected: false,
         type: "next",
@@ -333,7 +354,8 @@ watch(
 const handleDayClick = (item: any) => {
   selectedDay.value = item.value;
   if (item.type !== "current") {
-    currentMonth.value = item.type === "prev" ? currentMonth.value - 1 : currentMonth.value + 1;
+    currentMonth.value =
+      item.type === "prev" ? currentMonth.value - 1 : currentMonth.value + 1;
   }
 };
 
@@ -361,7 +383,9 @@ const changeYearOrMonth = (type: "year" | "month", num: number) => {
 const showYearPanel = () => {
   showPanel.value = "year";
   nextTick(() => {
-    (document.querySelector(".year-panel-item.active") as HTMLElement).scrollIntoView({ block: "center" });
+    (
+      document.querySelector(".year-panel-item.active") as HTMLElement
+    ).scrollIntoView({ block: "center" });
   });
 };
 
