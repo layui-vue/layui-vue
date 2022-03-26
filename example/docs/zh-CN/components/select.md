@@ -40,12 +40,14 @@ export default {
 ::: demo
 
 <template>
+  <lay-button @click="change1">切换-当前值 : {{value}}</lay-button>
+  <br/>
+  <br/>
   <lay-select v-model="value">
     <lay-select-option value="1" label="学习"></lay-select-option>
     <lay-select-option value="2" label="编码"></lay-select-option>
     <lay-select-option value="3" label="运动"></lay-select-option>
   </lay-select>
-  <lay-button @click="change1">点击切换(当前值:{{value}})</lay-button>
 </template>
 
 <script>

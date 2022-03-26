@@ -412,6 +412,65 @@ export default {
 
 :::
 
+::: title 过渡动画
+:::
+
+::: demo
+
+<template>
+  <lay-menu v-model:selectedKey="selectedKey" :collapse-transition="collapseTransition" v-model:openKeys="openKeys7" v-model:tree="isTree">
+    <lay-menu-item id="1">
+      <router-link to="">
+        <lay-icon type="layui-icon-home"></lay-icon> 
+        首页
+      </router-link>
+    </lay-menu-item>
+    <lay-sub-menu id="7">
+        <template v-slot:title> 
+          <router-link to="">
+            <lay-icon type="layui-icon-home"></lay-icon> 
+            目录
+          </router-link>
+        </template>
+        <lay-menu-item id="8">
+            <router-link to="">
+              <lay-icon type="layui-icon-home"></lay-icon> 
+              菜单
+            </router-link>
+        </lay-menu-item> 
+        <lay-menu-item id="9">
+            <router-link to="">
+              <lay-icon type="layui-icon-home"></lay-icon> 
+              菜单
+            </router-link>
+        </lay-menu-item>
+    </lay-sub-menu> 
+  </lay-menu>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const isTree = ref(true)
+    const collapseTransition = ref(false);
+    const selectedKey = ref("5")
+    const openKeys7 = ref(["7"])
+
+    return {
+      isTree,
+      openKeys7,
+      selectedKey,
+      collapseTransition
+    }
+  }
+}
+</script>
+
+:::
+
 ::: title Menu 属性
 :::
 

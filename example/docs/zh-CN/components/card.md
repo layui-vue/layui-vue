@@ -49,7 +49,7 @@ export default {
 <template>
 <div class="card-container">
   <lay-card>
-      <template v-slot:header>
+      <template v-slot:title>
       标题
       </template>
       <template v-slot:body>
@@ -89,6 +89,45 @@ export default {
 <div class="card-container">
   <lay-card>
       内容
+  </lay-card>
+</div>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    return {
+    }
+  }
+}
+</script>
+
+<style>
+.card-container {
+  background: whitesmoke;
+  padding: 20px;
+}
+</style>
+
+:::
+
+::: demo
+
+<template>
+<div class="card-container">
+  <lay-card>
+      <template v-slot:title>
+        标题
+      </template>
+      <template v-slot:extra>
+        更多
+      </template>
+      <template v-slot:body>
+        内容
+      </template>
   </lay-card>
 </div>
 </template>

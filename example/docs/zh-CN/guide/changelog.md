@@ -16,9 +16,12 @@
       <li> 
         <h3>0.4.2 <span class="layui-badge-rim">2022-03-26</span></h3> 
         <ul>
+          <li>[新增] card 组件 extra 插槽。</li>
           <li>[新增] switch 组件 onswitch-color 属性。</li>
           <li>[新增] switch 组件 unswitch-color 属性。</li>
-          <li>[修复] docsearch 检索插件引起的 peer dependencies 警告。</li>
+          <li>[修复] docsearch peer dependencies 警告。</li>
+          <li>[修复] select 组件 input border 显示问题。</li>
+          <li>[优化] card 组件 header 插槽为 title 插槽。</li>
           <li>[优化] switch 组件 in-active-text 为 unswitch-text 属性, 默认不显示。</li>
           <li>[优化] switch 组件 active-text 为 onswitch-text 属性, 默认不显示。</li>
           <li>[优化] switch 组件样式。</li>

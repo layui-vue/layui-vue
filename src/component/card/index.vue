@@ -19,9 +19,14 @@ const props = defineProps<LayCardProps>();
 
 <template>
   <div class="layui-card">
-    <div class="layui-card-header" v-if="slot.header || title">
-      <slot name="header" v-if="slot.header"></slot>
-      <span v-else>{{ title }}</span>
+    <div class="layui-card-header" v-if="slot.title || title || slot.extra">
+      <span class="layui-card-header-title">
+        <slot name="title" v-if="slot.title"></slot>
+        <template v-else>{{ title }}</template>
+      </span>
+      <span class="layui-card-header-extra">
+        <slot name="extra" v-if="slot.extra"></slot>
+      </span> 
     </div>
     <div class="layui-card-body">
       <slot name="body" v-if="slot.body"></slot>
@@ -29,3 +34,13 @@ const props = defineProps<LayCardProps>();
     </div>
   </div>
 </template>
+
+<style scoped>
+.layui-card-header-title {
+
+}
+
+.layui-card-header-extra {
+
+}
+</style>
