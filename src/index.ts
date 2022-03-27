@@ -81,6 +81,7 @@ import LayFullscreen from "./component/fullscreen/index";
 import LayDatePicker from "./component/datePicker/index";
 import LayNoticeBar from "./component/noticeBar/index";
 import LayTransition from "./component/transition/index";
+import LayUpload from "./component/upload/index";
 import LayConfigProvider from "./provider";
 import { InstallOptions } from "./types";
 
@@ -160,6 +161,7 @@ const components: Record<string, Component> = {
   LayDatePicker,
   LayNoticeBar,
   LayTransition,
+  LayUpload,
 };
 
 const install = (app: App, options?: InstallOptions): void => {
@@ -247,6 +249,7 @@ export {
   LayDatePicker,
   LayNoticeBar,
   LayTransition,
+  LayUpload,
 };
 
 export { layer };

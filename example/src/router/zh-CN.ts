@@ -298,6 +298,12 @@ const zhCN = [
             meta: { title: "日期选择器" },
           },
           {
+            path: "/zh-CN/components/upload",
+            component: () =>
+              import("../../docs/zh-CN/components/upload.md"),
+            meta: { title: "文件上传" },
+          },
+          {
             path: "/zh-CN/components/layer",
             component: () => import("../../docs/zh-CN/components/layer.md"),
             meta: { title: "简介" },

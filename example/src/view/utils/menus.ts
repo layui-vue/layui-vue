@@ -177,6 +177,12 @@ const menus = [
         path: "/zh-CN/components/datePicker",
       },
       {
+        id: 40,
+        title: "文件上传",
+        subTitle: "upload",
+        path: "/zh-CN/components/upload",
+      },
+      {
         id: 29,
         title: "图标选择器",
         subTitle: "iconPicker",

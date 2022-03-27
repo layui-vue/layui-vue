@@ -1,11 +1,17 @@
 @import "../../theme/variable.less";
 
 .layui-upload-file {
-  display: none !important;
+  // display: none !important;
   opacity: 0.01;
+  position: relative;
   filter: Alpha(opacity=1);
+  cursor: pointer;
+  
 }
-
+.layui-upload-btn-box{
+  position:relative;
+  overflow: hidden;
+}
 .layui-upload-drag,
 .layui-upload-form,
 .layui-upload-wrap {
@@ -44,6 +50,9 @@
 .layui-upload-drag[lay-over] {
   border-color: @global-primary-color;
 }
+.layui-upload-drag-draging{
+  border-color: @global-primary-color;
+}
 
 .layui-upload-iframe {
   position: absolute;
@@ -56,6 +65,7 @@
 .layui-upload-wrap {
   position: relative;
   vertical-align: middle;
+  cursor: pointer;
 }
 
 .layui-upload-wrap .layui-upload-file {
@@ -65,8 +75,8 @@
   top: 0;
   z-index: 10;
   font-size: 100px;
-  width: 100%;
-  height: 100%;
+  width: 1px;
+  height: 1px;
   opacity: 0.01;
   filter: Alpha(opacity=1);
   cursor: pointer;
