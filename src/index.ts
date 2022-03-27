@@ -161,7 +161,7 @@ const components: Record<string, Component> = {
   LayDatePicker,
   LayNoticeBar,
   LayTransition,
-  LayUpload
+  LayUpload,
 };
 
 const install = (app: App, options?: InstallOptions): void => {
@@ -249,7 +249,7 @@ export {
   LayDatePicker,
   LayNoticeBar,
   LayTransition,
-  LayUpload
+  LayUpload,
 };
 
 export { layer };
