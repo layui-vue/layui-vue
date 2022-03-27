@@ -246,12 +246,19 @@ onMounted(() => {
                 </th>
                 <template v-for="column in columns" :key="column">
                   <th v-if="tableColumnKeys.includes(column.key)">
-                    <!-- TODO Table header slot  -->
                     <div
                       class="layui-table-cell"
                       :style="{ width: column.width }"
                     >
-                      <span>{{ column.title }}</span>
+                      <span v-if="column.titleSlot">
+                          <template v-if="column.titleSlot">
+                              <slot :name="column.titleSlot"></slot>
+                          </template>
+                          <template>
+                            {{column.title}}
+                          </template>
+                      </span>
+                      <span v-else>{{ column.title }}</span>
                       <span
                         v-if="column.sort"
                         class="layui-table-sort layui-inline"
