@@ -24,6 +24,13 @@ const getYear = () => {
 };
 
 /**
+ * 获取当前月份 
+ */
+const getMonth = () => {
+  return getDate().getMonth();
+}
+
+/**
  * 获取月份天数
  *
  * @param year
@@ -33,4 +40,4 @@ const getDayLength = (year: number, month: number): number => {
   return new Date(year, month + 1, 0).getDate();
 };
 
-export { getDayLength, getYears };
+export { getDayLength, getYears, getDate, getMonth, getYear };

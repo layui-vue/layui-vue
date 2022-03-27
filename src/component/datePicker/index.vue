@@ -242,25 +242,13 @@ import {
 } from "vue";
 import LayInput from "../input/index.vue";
 import LayDropdown from "../dropdown/index.vue";
-import { getDayLength, getYears } from "./day";
+import { getDayLength, getYears, getDate, getMonth, getYear } from "./day";
 
 const $emits = defineEmits(["update:modelValue"]);
 
 const WEEK_NAME = ["日", "一", "二", "三", "四", "五", "六"];
-const MONTH_NAME = [
-  "1月",
-  "2月",
-  "3月",
-  "4月",
-  "5月",
-  "6月",
-  "7月",
-  "8月",
-  "9月",
-  "10月",
-  "11月",
-  "12月",
-];
+const MONTH_NAME = ["1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月"];
+
 const hms = ref({ hh: "00", mm: "00", ss: "00" });
 const els = [
   { count: 24, type: "hh" },
@@ -278,9 +266,9 @@ const props = withDefaults(defineProps<LayDatePickerProps>(), {
   type: "date",
 });
 
-const currentDate = new Date();
-const currentYear = ref(currentDate.getFullYear());
-const currentMonth = ref(currentDate.getMonth());
+const currentDate = getDate();
+const currentYear = ref(getYear());
+const currentMonth = ref(getMonth());
 
 const yearList = ref<number[]>(getYears());
 const dateList = ref<any[]>([]);
