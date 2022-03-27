@@ -1,9 +1,9 @@
 <template>
   <div>
     <lay-dropdown>
-      <lay-input :name="name" :value="dateValue || modelValue" readonly >
+      <lay-input :name="name" :value="dateValue || modelValue" readonly>
         <template #prefix>
-           <lay-icon type="layui-icon-date"></lay-icon>
+          <lay-icon type="layui-icon-date"></lay-icon>
         </template>
       </lay-input>
       <template #content>
@@ -73,18 +73,12 @@
             </div>
           </div>
           <div class="layui-laydate-footer">
-            <span
-              v-if="type === 'datetime'"
-              @click="showPane = 'time'"
-              class="layui-laydate-preview"
-              style="color: rgb(102, 102, 102)"
+            <span v-if="type === 'datetime'" @click="showPane = 'time'" class="laydate-btns-time"
+              >选择时间</span
             >
-              {{ `${hms.hh}:${hms.mm}:${hms.ss}` }}
-            </span>
-
             <div class="laydate-footer-btns">
               <span lay-type="clear" class="laydate-btns-clear">清空</span
-              ><span lay-type="now" class="laydate-btns-now">现在</span
+              ><span lay-type="now" class="laydate-btns-now" @click="now">现在</span
               ><span lay-type="confirm" class="laydate-btns-confirm">确定</span>
             </div>
           </div>
@@ -126,7 +120,7 @@
             >
             <div class="laydate-footer-btns">
               <span lay-type="clear" class="laydate-btns-clear">清空</span
-              ><span lay-type="now" class="laydate-btns-now">现在</span
+              ><span lay-type="now" class="laydate-btns-now" @click="now">现在</span
               ><span lay-type="confirm" class="laydate-btns-confirm">确定</span>
             </div>
           </div>
@@ -180,7 +174,7 @@
             >
             <div class="laydate-footer-btns">
               <span lay-type="clear" class="laydate-btns-clear">清空</span
-              ><span lay-type="now" class="laydate-btns-now">现在</span
+              ><span lay-type="now" class="laydate-btns-now" @click="now">现在</span
               ><span lay-type="confirm" class="laydate-btns-confirm">确定</span>
             </div>
           </div>
@@ -219,12 +213,12 @@
             </div>
           </div>
           <div class="layui-laydate-footer">
-            <span @click="showPane = 'date'" class="layui-laydate-preview"
-              >返回</span
+            <span @click="showPane = 'date'" class="laydate-btns-time"
+              >返回日期</span
             >
             <div class="laydate-footer-btns">
               <span lay-type="clear" class="laydate-btns-clear">清空</span
-              ><span lay-type="now" class="laydate-btns-now">现在</span
+              ><span lay-type="now" class="laydate-btns-now" @click="now">现在</span
               ><span lay-type="confirm" class="laydate-btns-confirm">确定</span>
             </div>
           </div>
@@ -235,16 +229,9 @@
 </template>
 
 <script lang="ts" setup>
-import {
-  computed,
-  nextTick,
-  ref,
-  watch,
-  defineProps,
-  defineEmits
-} from "vue";
+import { computed, nextTick, ref, watch, defineProps, defineEmits } from "vue";
 
-import moment from 'moment';
+import moment from "moment";
 import LayIcon from "../icon/index";
 import LayInput from "../input/index.vue";
 import LayDropdown from "../dropdown/index.vue";
@@ -296,12 +283,27 @@ const showPane = ref("date");
 
 // 计算结果日期
 const dateValue = computed<string>(() => {
-  let momentObj = moment(currentDay.value).hour(hms.value.hh).minute(hms.value.mm).second(hms.value.ss);
-  let momentVal = "";
-  if(props.type === 'datetime') {
-    momentVal = momentObj.format('YYYY-MM-DD hh:mm:ss')
-  } else if(props.type === 'date') {
-    momentVal = momentObj.format('YYYY-MM-DD');
+  let momentVal;
+  let momentObj = moment(currentDay.value)
+    .hour(hms.value.hh)
+    .minute(hms.value.mm)
+    .second(hms.value.ss);
+  switch(props.type)
+  {
+    case 'date':
+        momentVal = momentObj.format("YYYY-MM-DD");
+        break;
+    case 'datetime':
+        momentVal = momentObj.format("YYYY-MM-DD hh:mm:ss");
+        break;
+    case 'year':
+        momentVal = momentObj.format("YYYY");
+        break;
+    case 'month':
+        momentVal = momentObj.format("MM");
+        break;
+    default:
+        momentVal = momentObj.format();
   }
   $emits("update:modelValue", momentVal);
   return momentVal;
@@ -362,12 +364,25 @@ watch(
 const handleDayClick = (item: any) => {
   currentDay.value = item.value;
   if (item.type !== "current") {
-    currentMonth.value = item.type === "prev" ? currentMonth.value - 1 : currentMonth.value + 1;
+    currentMonth.value =
+      item.type === "prev" ? currentMonth.value - 1 : currentMonth.value + 1;
   }
 };
 
 // 确认事件
-const ok = () => {};
+const ok = () => {
+
+};
+
+// 现在时间
+const now = () => {
+  currentDay.value = moment().valueOf();
+}
+
+// 清空日期
+const clear = () => {
+
+}
 
 // 切换年月
 const changeYearOrMonth = (type: "year" | "month", num: number) => {
