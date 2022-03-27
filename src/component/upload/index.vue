@@ -120,14 +120,10 @@ const uploadDragOver = (e: any) => {
   //console.log("uploadDrag9ikme",e);
 };
 const uploadDragDrop = (e: any) => {
-  console.log("uploadDragDrop", e);
   isDragEnter.value = false;
 };
-const uploadDragStop = (e: any) => {
-  console.log("uploadDragStop", e);
-};
+const uploadDragStop = (e: any) => {};
 const uploadDragEnter = (e: any) => {
-  console.log("", e);
   isDragEnter.value = true;
 };
 const uploadDragLeave = (e: any) => {
