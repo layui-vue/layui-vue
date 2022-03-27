@@ -247,7 +247,20 @@ import { getDayLength, getYears, getDate, getMonth, getYear } from "./day";
 const $emits = defineEmits(["update:modelValue"]);
 
 const WEEK_NAME = ["日", "一", "二", "三", "四", "五", "六"];
-const MONTH_NAME = ["1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月"];
+const MONTH_NAME = [
+  "1月",
+  "2月",
+  "3月",
+  "4月",
+  "5月",
+  "6月",
+  "7月",
+  "8月",
+  "9月",
+  "10月",
+  "11月",
+  "12月",
+];
 
 const hms = ref({ hh: "00", mm: "00", ss: "00" });
 const els = [

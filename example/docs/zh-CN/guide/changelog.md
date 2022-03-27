@@ -16,8 +16,9 @@
       <li> 
         <h3>0.4.3 <span class="layui-badge-rim">2022-03-27</span></h3> 
         <ul>
-          <li>[修复] menu 组件 level 属性不生效。</li>
-          <li>[修复] step 组件 line 连线不显示。</li>
+          <li>[修复] menu 组件 level 属性的语义与实际功能相悖。</li>
+          <li>[修复] input 组件 height 高度固定 38 px。</li>
+          <li>[修复] step 组件 line 样式。</li>
         </ul> 
       </li>
     </ul>

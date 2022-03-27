@@ -24,11 +24,11 @@ const getYear = () => {
 };
 
 /**
- * 获取当前月份 
+ * 获取当前月份
  */
 const getMonth = () => {
   return getDate().getMonth();
-}
+};
 
 /**
  * 获取月份天数
