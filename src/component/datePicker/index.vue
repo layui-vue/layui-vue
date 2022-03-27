@@ -17,8 +17,10 @@
                 ></i
               >
               <div class="laydate-set-ym">
-                <span @click="showYearPanel">{{ curYear }} 年</span
-                ><span @click="showPanel = 'month'">{{ curMonth + 1 }} 月</span>
+                <span @click="showYearPanel">{{ currentYear }} 年</span
+                ><span @click="showPanel = 'month'"
+                  >{{ currentMonth + 1 }} 月</span
+                >
               </div>
               <i
                 class="layui-icon laydate-icon laydate-next-m"
@@ -100,9 +102,9 @@
                 <li
                   v-for="item of yearList"
                   :key="item"
-                  :class="[{ 'layui-this': curYear === item }]"
+                  :class="[{ 'layui-this': currentYear === item }]"
                   @click="
-                    curYear = item;
+                    currentYear = item;
                     showPanel = 'date';
                   "
                 >
@@ -136,8 +138,10 @@
                 ></i
               >
               <div class="laydate-set-ym">
-                <span @click="showYearPanel">{{ curYear }} 年</span
-                ><span @click="showPanel = 'month'">{{ curMonth + 1 }} 月</span>
+                <span @click="showYearPanel">{{ currentYear }} 年</span
+                ><span @click="showPanel = 'month'"
+                  >{{ currentMonth + 1 }} 月</span
+                >
               </div>
               <i
                 class="layui-icon laydate-icon laydate-next-y"
@@ -151,10 +155,10 @@
                   v-for="item of MONTH_NAME"
                   :key="item"
                   :class="[
-                    { 'layui-this': MONTH_NAME.indexOf(item) === curMonth },
+                    { 'layui-this': MONTH_NAME.indexOf(item) === currentMonth },
                   ]"
                   @click="
-                    curMonth = MONTH_NAME.indexOf(item);
+                    currentMonth = MONTH_NAME.indexOf(item);
                     showPanel = 'date';
                   "
                 >
@@ -178,7 +182,7 @@
           </div>
         </div>
 
-        <!-- 事件选择器 -->
+        <!-- 时间选择器 -->
         <div class="layui-laydate" v-if="showPanel == 'time'">
           <div class="layui-laydate-main laydate-main-list-0 laydate-time-show">
             <div class="layui-laydate-header">
@@ -188,12 +192,8 @@
             </div>
             <div class="layui-laydate-content" style="height: 210px">
               <ul class="layui-laydate-list laydate-time-list">
-                <li
-                  class="num-list"
-                  v-for="item in hms.insertEls"
-                  :key="item.type"
-                >
-                  <ol class="scroll" @click="chooseTime">
+                <li class="num-list" v-for="item in els" :key="item.type">
+                  <ol class="scroll" @click="choseTime">
                     <li
                       v-for="(it, index) in item.count"
                       :id="item.type + index.toString()"
@@ -231,28 +231,20 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, nextTick, ref, watch, defineProps, defineEmits } from "vue";
+import {
+  computed,
+  nextTick,
+  ref,
+  watch,
+  defineProps,
+  defineEmits,
+  onMounted,
+} from "vue";
 import LayInput from "../input/index.vue";
 import LayDropdown from "../dropdown/index.vue";
-
-export interface LayDatePickerProps {
-  modelValue?: string;
-  type: "date" | "datetime" | "year" | "time" | "month";
-}
-
-const props = withDefaults(defineProps<LayDatePickerProps>(), {
-  modelValue: "",
-  type: "date",
-});
+import { getDayLength, getYears, getDate, getMonth, getYear } from "./day";
 
 const $emits = defineEmits(["update:modelValue"]);
-const currentDate = new Date();
-const yearList = ref<number[]>([]);
-const dateList = ref<any[]>([]);
-const curYear = ref(currentDate.getFullYear());
-const curMonth = ref(currentDate.getMonth());
-const showPanel = ref("date");
-const selectedDay = ref<number>();
 
 const WEEK_NAME = ["日", "一", "二", "三", "四", "五", "六"];
 const MONTH_NAME = [
@@ -270,26 +262,33 @@ const MONTH_NAME = [
   "12月",
 ];
 
-const hms = ref({
-  hh: "00",
-  mm: "00",
-  ss: "00",
-  insertEls: [
-    {
-      count: 24,
-      type: "hh",
-    },
-    {
-      count: 60,
-      type: "mm",
-    },
-    {
-      count: 60,
-      type: "ss",
-    },
-  ],
+const hms = ref({ hh: "00", mm: "00", ss: "00" });
+const els = [
+  { count: 24, type: "hh" },
+  { count: 60, type: "mm" },
+  { count: 60, type: "ss" },
+];
+
+export interface LayDatePickerProps {
+  modelValue?: string;
+  type: "date" | "datetime" | "year" | "time" | "month";
+}
+
+const props = withDefaults(defineProps<LayDatePickerProps>(), {
+  modelValue: "",
+  type: "date",
 });
 
+const currentDate = getDate();
+const currentYear = ref(getYear());
+const currentMonth = ref(getMonth());
+
+const yearList = ref<number[]>(getYears());
+const dateList = ref<any[]>([]);
+const showPanel = ref("date");
+const selectedDay = ref<number>();
+
+// 最终结果
 const dateValue = computed<string>(() => {
   if (!selectedDay.value) return "";
   const d = new Date(selectedDay.value);
@@ -300,18 +299,6 @@ const dateValue = computed<string>(() => {
   $emits("update:modelValue", currentValue);
   return currentValue;
 });
-
-// 生成近100年的年份列表
-(() => {
-  for (let i = 1970; i < curYear.value + 100; i++) {
-    yearList.value.push(i);
-  }
-})();
-
-// 获取传入的月份有多少天
-const getDayLength = (year: number, month: number): number => {
-  return new Date(year, month + 1, 0).getDate();
-};
 
 // 设置日期列表
 const setDateList = (year: number, month: number) => {
@@ -355,10 +342,11 @@ const setDateList = (year: number, month: number) => {
   dateList.value = list;
 };
 
+// 监听年月, 刷新日期
 watch(
-  [curYear, curMonth],
+  [currentYear, currentMonth],
   () => {
-    setDateList(curYear.value, curMonth.value);
+    setDateList(currentYear.value, currentMonth.value);
   },
   { immediate: true }
 );
@@ -367,8 +355,8 @@ watch(
 const handleDayClick = (item: any) => {
   selectedDay.value = item.value;
   if (item.type !== "current") {
-    curMonth.value =
-      item.type === "prev" ? curMonth.value - 1 : curMonth.value + 1;
+    currentMonth.value =
+      item.type === "prev" ? currentMonth.value - 1 : currentMonth.value + 1;
   }
 };
 
@@ -378,18 +366,17 @@ const ok = () => {};
 // 切换年月
 const changeYearOrMonth = (type: "year" | "month", num: number) => {
   if (type === "year") {
-    curYear.value += num;
+    currentYear.value += num;
   } else {
-    let month = curMonth.value + num;
-
+    let month = currentMonth.value + num;
     if (month > 11) {
       month = 0;
-      curYear.value++;
+      currentYear.value++;
     } else if (month < 0) {
       month = 11;
-      curYear.value--;
+      currentYear.value--;
     }
-    curMonth.value = month;
+    currentMonth.value = month;
   }
 };
 
@@ -403,23 +390,8 @@ const showYearPanel = () => {
   });
 };
 
-const showHmPanel = ref(false);
-
-const openHmPanel = () => {
-  let activeEl = document.querySelectorAll(".hms-change .isactive") as any;
-  let count = 0;
-  const initScrollIntoView = () => {
-    if (count > activeEl.length) return;
-    activeEl[count].scrollIntoView({ behavior: "smooth" });
-    count++;
-    setTimeout(initScrollIntoView, Number(activeEl[count].dataset.value) * 16);
-  };
-
-  initScrollIntoView();
-  showHmPanel.value = !showHmPanel.value;
-};
-
-const chooseTime = (e: any) => {
+// 点击时间 - hms
+const choseTime = (e: any) => {
   if (e.target.nodeName == "LI") {
     let { value, type } = e.target.dataset;
     hms.value[type as keyof typeof hms.value] = value;

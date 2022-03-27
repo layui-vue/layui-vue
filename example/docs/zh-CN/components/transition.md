@@ -42,7 +42,7 @@ export default {
 
 :::
 
-::: title 基础使用
+::: title 淡入淡出
 :::
 
 ::: demo 使用 `lay-transition` 标签, 为元素提供过渡动画
@@ -75,4 +75,27 @@ export default {
 }
 </script>
 
+:::
+
+::: title Transition 属性
+:::
+
+::: table
+
+| 属性         | 描述               | 类型                     |默认值    | 可选值   |
+| ------------ | ---------------- | ------------- | ---- | ----   |
+| enable       | 启用               | `boolean`   | `true` | `true` `false`   |
+| type         | 类型               | `string`   |  `collapse` | --   |
+
+:::
+
+::: title Transition 属性值
+:::
+
+::: table
+
+| 属性值         | 描述               | 
+| ------------ | ---------------- | 
+| collapse       | 折叠动画               |
+| fade           | 淡入淡出               |
 :::

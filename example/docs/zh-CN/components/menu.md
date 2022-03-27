@@ -106,7 +106,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-menu level="true" v-model:selectedKey="selectedKey" inverted="true" v-model:openKeys="openKeys3" :tree="true">
+  <lay-menu :level="isLevel" v-model:selectedKey="selectedKey" inverted="true" v-model:openKeys="openKeys3" :tree="true">
     <lay-menu-item id="1">首页</lay-menu-item>
     <lay-menu-item id="2">首页</lay-menu-item>
     <lay-menu-item id="3">首页</lay-menu-item> 
@@ -134,10 +134,12 @@ import { ref } from 'vue'
 export default {
   setup() {
 
-    const openKeys3 = ref(["7"])
-    const selectedKey = ref("5")
+    const isLevel = ref(false);
+    const openKeys3 = ref(["7"]);
+    const selectedKey = ref("5");
 
     return {
+      isLevel,
       openKeys3,
       selectedKey
     }

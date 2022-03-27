@@ -308,7 +308,7 @@ export default {
 
 <style>
 .layui-layout-document > .layui-header {
-  z-index: 9999;
+  z-index: 99;
   width: 100%;
   position: fixed;
   background: #393d49;
@@ -319,6 +319,7 @@ export default {
   overflow-x: hidden;
   position: fixed;
   margin-top: 60px;
+  z-index: 99;
   height: calc(100% - 60px);
   box-shadow: 2px 0 8px 0 rgb(29 35 41 / 5%);
 }
