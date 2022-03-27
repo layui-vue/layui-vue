@@ -1,10 +1,14 @@
 <template>
   <div>
     <lay-dropdown>
-      <lay-input :value="dateValue || modelValue" readonly />
+      <lay-input :name="name" :value="dateValue || modelValue" readonly >
+        <template #prefix>
+           <lay-icon type="layui-icon-date"></lay-icon>
+        </template>
+      </lay-input>
       <template #content>
         <!-- 日期选择 -->
-        <div class="layui-laydate" v-show="showPanel === 'date'">
+        <div class="layui-laydate" v-show="showPane === 'date'">
           <div class="layui-laydate-main laydate-main-list-0">
             <div class="layui-laydate-header">
               <i
@@ -18,7 +22,7 @@
               >
               <div class="laydate-set-ym">
                 <span @click="showYearPanel">{{ currentYear }} 年</span
-                ><span @click="showPanel = 'month'"
+                ><span @click="showPane = 'month'"
                   >{{ currentMonth + 1 }} 月</span
                 >
               </div>
@@ -56,7 +60,7 @@
                         :data-unix="item.value"
                         :class="{
                           'laydate-day-prev': item.type !== 'current',
-                          'layui-this': item.value === selectedDay,
+                          'layui-this': item.value === currentDay,
                         }"
                         @click="handleDayClick(item)"
                       >
@@ -71,7 +75,7 @@
           <div class="layui-laydate-footer">
             <span
               v-if="type === 'datetime'"
-              @click="showPanel = 'time'"
+              @click="showPane = 'time'"
               class="layui-laydate-preview"
               style="color: rgb(102, 102, 102)"
             >
@@ -87,7 +91,7 @@
         </div>
 
         <!-- 年份选择器 -->
-        <div class="layui-laydate" v-show="showPanel === 'year'">
+        <div class="layui-laydate" v-show="showPane === 'year'">
           <div class="layui-laydate-main laydate-main-list-0 laydate-ym-show">
             <div class="layui-laydate-header">
               <div class="laydate-set-ym">
@@ -105,7 +109,7 @@
                   :class="[{ 'layui-this': currentYear === item }]"
                   @click="
                     currentYear = item;
-                    showPanel = 'date';
+                    showPane = 'date';
                   "
                 >
                   {{ item }}
@@ -129,7 +133,7 @@
         </div>
 
         <!-- 月份选择器 -->
-        <div class="layui-laydate" v-show="showPanel === 'month'">
+        <div class="layui-laydate" v-show="showPane === 'month'">
           <div class="layui-laydate-main laydate-main-list-0 laydate-ym-show">
             <div class="layui-laydate-header">
               <i
@@ -139,7 +143,7 @@
               >
               <div class="laydate-set-ym">
                 <span @click="showYearPanel">{{ currentYear }} 年</span
-                ><span @click="showPanel = 'month'"
+                ><span @click="showPane = 'month'"
                   >{{ currentMonth + 1 }} 月</span
                 >
               </div>
@@ -159,7 +163,7 @@
                   ]"
                   @click="
                     currentMonth = MONTH_NAME.indexOf(item);
-                    showPanel = 'date';
+                    showPane = 'date';
                   "
                 >
                   {{ item.slice(0, 3) }}
@@ -183,7 +187,7 @@
         </div>
 
         <!-- 时间选择器 -->
-        <div class="layui-laydate" v-if="showPanel == 'time'">
+        <div class="layui-laydate" v-if="showPane == 'time'">
           <div class="layui-laydate-main laydate-main-list-0 laydate-time-show">
             <div class="layui-laydate-header">
               <div class="laydate-set-ym">
@@ -215,7 +219,7 @@
             </div>
           </div>
           <div class="layui-laydate-footer">
-            <span @click="showPanel = 'date'" class="layui-laydate-preview"
+            <span @click="showPane = 'date'" class="layui-laydate-preview"
               >返回</span
             >
             <div class="laydate-footer-btns">
@@ -237,9 +241,11 @@ import {
   ref,
   watch,
   defineProps,
-  defineEmits,
-  onMounted,
+  defineEmits
 } from "vue";
+
+import moment from 'moment';
+import LayIcon from "../icon/index";
 import LayInput from "../input/index.vue";
 import LayDropdown from "../dropdown/index.vue";
 import { getDayLength, getYears, getDate, getMonth, getYear } from "./day";
@@ -262,7 +268,7 @@ const MONTH_NAME = [
   "12月",
 ];
 
-const hms = ref({ hh: "00", mm: "00", ss: "00" });
+const hms = ref({ hh: 0, mm: 0, ss: 0 });
 const els = [
   { count: 24, type: "hh" },
   { count: 60, type: "mm" },
@@ -272,6 +278,7 @@ const els = [
 export interface LayDatePickerProps {
   modelValue?: string;
   type: "date" | "datetime" | "year" | "time" | "month";
+  name: string;
 }
 
 const props = withDefaults(defineProps<LayDatePickerProps>(), {
@@ -279,25 +286,25 @@ const props = withDefaults(defineProps<LayDatePickerProps>(), {
   type: "date",
 });
 
-const currentDate = getDate();
 const currentYear = ref(getYear());
 const currentMonth = ref(getMonth());
+const currentDay = ref<number>();
 
 const yearList = ref<number[]>(getYears());
 const dateList = ref<any[]>([]);
-const showPanel = ref("date");
-const selectedDay = ref<number>();
+const showPane = ref("date");
 
-// 最终结果
+// 计算结果日期
 const dateValue = computed<string>(() => {
-  if (!selectedDay.value) return "";
-  const d = new Date(selectedDay.value);
-  const y = d.getFullYear();
-  const m = (d.getMonth() + 1).toString().padStart(2, "0");
-  const day = d.getDate().toString().padStart(2, "0");
-  const currentValue = `${y}-${m}-${day} ${hms.value.hh}:${hms.value.mm}:${hms.value.ss}`;
-  $emits("update:modelValue", currentValue);
-  return currentValue;
+  let momentObj = moment(currentDay.value).hour(hms.value.hh).minute(hms.value.mm).second(hms.value.ss);
+  let momentVal = "";
+  if(props.type === 'datetime') {
+    momentVal = momentObj.format('YYYY-MM-DD hh:mm:ss')
+  } else if(props.type === 'date') {
+    momentVal = momentObj.format('YYYY-MM-DD');
+  }
+  $emits("update:modelValue", momentVal);
+  return momentVal;
 });
 
 // 设置日期列表
@@ -353,10 +360,9 @@ watch(
 
 // 点击日期
 const handleDayClick = (item: any) => {
-  selectedDay.value = item.value;
+  currentDay.value = item.value;
   if (item.type !== "current") {
-    currentMonth.value =
-      item.type === "prev" ? currentMonth.value - 1 : currentMonth.value + 1;
+    currentMonth.value = item.type === "prev" ? currentMonth.value - 1 : currentMonth.value + 1;
   }
 };
 
@@ -382,7 +388,7 @@ const changeYearOrMonth = (type: "year" | "month", num: number) => {
 
 // 显示年列表面板
 const showYearPanel = () => {
-  showPanel.value = "year";
+  showPane.value = "year";
   nextTick(() => {
     (
       document.querySelector(".year-panel-item.active") as HTMLElement

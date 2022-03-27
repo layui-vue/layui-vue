@@ -1,6 +1,6 @@
 {
   "name": "@layui/layui-vue",
-  "version": "0.4.2",
+  "version": "0.4.3-alpha.1",
   "author": "就眠儀式",
   "license": "MIT",
   "description": "a component library for Vue 3 base on layui-vue",
@@ -41,10 +41,11 @@
     "@vueuse/core": "^7.6.2",
     "async-validator": "^4.0.7",
     "evtd": "^0.2.3",
+    "moment": "^2.29.1",
+    "uuid": "^8.3.2",
     "vue": "^3.2.31",
     "vue-i18n": "^9.2.0-beta.33",
     "vue-router": "^4.0.12",
-    "uuid": "^8.3.2",
     "xlsx": "^0.18.4"
   },
   "devDependencies": {
