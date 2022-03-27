@@ -21,7 +21,7 @@
           <li>[新增] date-picker 组件 type 属性 date 值, 支持日期选择。 </li>
           <li>[新增] date-picker 组件 type 属性 datetime 值, 支持日期时间选择。</li>
           <li>[新增] date-picker 组件 now 操作, 将 年 月 日 重置为当前日期。</li>
-          <li>[新增] table 组件 data 属性 titleSlot 选项, 自定义标题插槽。
+          <li>[新增] table 组件 data 属性 titleSlot 选项, 自定义标题插槽。</li>
           <li>[修复] menu 组件 level 属性的语义与实际功能相悖。</li>
           <li>[修复] input 组件 height 高度固定 38 px。</li>
           <li>[修复] step 组件 line 样式。</li>

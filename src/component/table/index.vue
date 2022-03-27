@@ -251,12 +251,12 @@ onMounted(() => {
                       :style="{ width: column.width }"
                     >
                       <span v-if="column.titleSlot">
-                          <template v-if="column.titleSlot">
-                              <slot :name="column.titleSlot"></slot>
-                          </template>
-                          <template>
-                            {{column.title}}
-                          </template>
+                        <template v-if="column.titleSlot">
+                          <slot :name="column.titleSlot"></slot>
+                        </template>
+                        <template>
+                          {{ column.title }}
+                        </template>
                       </span>
                       <span v-else>{{ column.title }}</span>
                       <span
