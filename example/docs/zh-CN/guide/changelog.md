@@ -16,6 +16,7 @@
       <li> 
         <h3>0.4.3 <span class="layui-badge-rim">2022-03-27</span></h3> 
         <ul>
+          <li>[新增] upload 文件上传组件。</li>
           <li>[新增] date-picker 组件 name 属性, 等同原生 name 属性。</li>
           <li>[新增] date-picker 组件 type 属性 date 值, 支持日期选择。 </li>
           <li>[新增] date-picker 组件 type 属性 datetime 值, 支持日期时间选择。</li>

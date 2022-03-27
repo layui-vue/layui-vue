@@ -73,12 +73,16 @@
             </div>
           </div>
           <div class="layui-laydate-footer">
-            <span v-if="type === 'datetime'" @click="showPane = 'time'" class="laydate-btns-time"
+            <span
+              v-if="type === 'datetime'"
+              @click="showPane = 'time'"
+              class="laydate-btns-time"
               >选择时间</span
             >
             <div class="laydate-footer-btns">
               <span lay-type="clear" class="laydate-btns-clear">清空</span
-              ><span lay-type="now" class="laydate-btns-now" @click="now">现在</span
+              ><span lay-type="now" class="laydate-btns-now" @click="now"
+                >现在</span
               ><span lay-type="confirm" class="laydate-btns-confirm">确定</span>
             </div>
           </div>
@@ -120,7 +124,8 @@
             >
             <div class="laydate-footer-btns">
               <span lay-type="clear" class="laydate-btns-clear">清空</span
-              ><span lay-type="now" class="laydate-btns-now" @click="now">现在</span
+              ><span lay-type="now" class="laydate-btns-now" @click="now"
+                >现在</span
               ><span lay-type="confirm" class="laydate-btns-confirm">确定</span>
             </div>
           </div>
@@ -174,7 +179,8 @@
             >
             <div class="laydate-footer-btns">
               <span lay-type="clear" class="laydate-btns-clear">清空</span
-              ><span lay-type="now" class="laydate-btns-now" @click="now">现在</span
+              ><span lay-type="now" class="laydate-btns-now" @click="now"
+                >现在</span
               ><span lay-type="confirm" class="laydate-btns-confirm">确定</span>
             </div>
           </div>
@@ -218,7 +224,8 @@
             >
             <div class="laydate-footer-btns">
               <span lay-type="clear" class="laydate-btns-clear">清空</span
-              ><span lay-type="now" class="laydate-btns-now" @click="now">现在</span
+              ><span lay-type="now" class="laydate-btns-now" @click="now"
+                >现在</span
               ><span lay-type="confirm" class="laydate-btns-confirm">确定</span>
             </div>
           </div>
@@ -288,22 +295,21 @@ const dateValue = computed<string>(() => {
     .hour(hms.value.hh)
     .minute(hms.value.mm)
     .second(hms.value.ss);
-  switch(props.type)
-  {
-    case 'date':
-        momentVal = momentObj.format("YYYY-MM-DD");
-        break;
-    case 'datetime':
-        momentVal = momentObj.format("YYYY-MM-DD hh:mm:ss");
-        break;
-    case 'year':
-        momentVal = momentObj.format("YYYY");
-        break;
-    case 'month':
-        momentVal = momentObj.format("MM");
-        break;
+  switch (props.type) {
+    case "date":
+      momentVal = momentObj.format("YYYY-MM-DD");
+      break;
+    case "datetime":
+      momentVal = momentObj.format("YYYY-MM-DD hh:mm:ss");
+      break;
+    case "year":
+      momentVal = momentObj.format("YYYY");
+      break;
+    case "month":
+      momentVal = momentObj.format("MM");
+      break;
     default:
-        momentVal = momentObj.format();
+      momentVal = momentObj.format();
   }
   $emits("update:modelValue", momentVal);
   return momentVal;
@@ -370,19 +376,15 @@ const handleDayClick = (item: any) => {
 };
 
 // 确认事件
-const ok = () => {
-
-};
+const ok = () => {};
 
 // 现在时间
 const now = () => {
   currentDay.value = moment().valueOf();
-}
+};
 
 // 清空日期
-const clear = () => {
-
-}
+const clear = () => {};
 
 // 切换年月
 const changeYearOrMonth = (type: "year" | "month", num: number) => {
