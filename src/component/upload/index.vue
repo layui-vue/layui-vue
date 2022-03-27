@@ -6,121 +6,190 @@ export default {
 <script lang="ts" setup>
 import "./index.less";
 import { Recordable } from "../../types";
-import { ref, watch, useSlots, withDefaults, onMounted } from "vue";
+import { layer } from "@layui/layer-vue";
+import { ref, useSlots, withDefaults, onMounted, defineExpose } from "vue";
+import { templateRef } from '@vueuse/core'
+
+// 组件的参数字段类型
 //https://www.layuiweb.com/doc/modules/upload.html#options
 export interface LayUploadProps {
-  elem?: string | HTMLElement;
   url?: string;
-  data?: Recordable;
+  data?: any;
   headers?: Recordable;
-  accept?: "images" | "file" | "video" | "audio";
   acceptMime?: "images" | "file" | "video" | "audio";
-  exts?: "jpg" | "png" | "gif" | "bmp" | "jpeg";
-  auto?: boolean;
-  bindAction?: string | HTMLElement;
   field?: string;
   size?: number;
   multiple?: boolean;
   number: number;
   drag?: boolean;
 }
+
 const props = withDefaults(defineProps<LayUploadProps>(), {
-  accept: "images",
   acceptMime: "images",
-  auto: true,
   field: "file",
   size: 0,
   multiple: false,
   number: 0,
   drag: false,
 });
-
-const emit = defineEmits(["choose", "before", "done", "error"]);
-
 const slot = useSlots();
 const slots = slot.default && slot.default();
+const emit = defineEmits(["choose", "before", "done", "error"]);
+
+// 内部变量
 const isDragEnter = ref(false);
 
+const orgFileInput = templateRef<HTMLElement>('orgFileInput')
+// 统一异常提示的常量
+const defaultErrorMsg = "上传失败";
+const urlErrorMsg = "上传地址格式不合法";
+const numberErrorMsg = "文件上传超过规定的个数";
+const sizeErrorMsg = "文件大小超过限制";
+const uploadRemoteErrorMsg = "请求上传接口出现异常";
+const uploadSuccess = "上传成功";
+
+//内部方法 -> start
+//文件上传事务流程的方法参数类型
+interface localUploadTransaction {
+  url: string;
+  files: File[] | Blob[];
+  [propMame: string]: any;
+}
+const localUploadTransaction = (option: localUploadTransaction) => {
+  const { url, files } = option;
+  let formData = new FormData();
+  if (url.length <= 5) {
+    errorF(urlErrorMsg);
+    return;
+  }
+  if (Array.isArray(files) && files.length > 0) {
+    for (let i = 0; i < files.length; i++) {
+      let _file = files[i];
+      formData.append("file[" + i + "]", _file);
+    }
+    // 对应Upload属性的data字段,额外的上传参数
+    if (props.data && props.data instanceof Object) {
+      let _requestDate = props.data;
+      for (const key in _requestDate) {
+        formData.append(key, _requestDate[key]);
+      }
+    }
+    let utimer = window.setTimeout(()=>{
+      localUpload({ url,formData },function(){
+        clearTimeout(utimer);
+      });
+    },200)
+  }
+};
+
+//单文件上传的方法参数类型
 interface localUploadOption {
   url: string;
-  file?: unknown;
-  otherRequestData?: any;
+  [propMame: string]: any;
 }
 
-const localUpload = (option: any) => {
-  let file,
-    formData,
-    xhr: XMLHttpRequest,
-    loadedevt,
-    total,
-    per: number,
-    url,
-    uploading;
-  formData = new FormData();
+const errorF = (errorText: string) => {
+  let currentTimeStamp = (new Date()).valueOf();
+  let errorMsg = errorText ? errorText : defaultErrorMsg;
+  errorMsg = `layui-vue:${errorMsg}`;
+  console.warn(errorMsg);
+  layer.msg(errorMsg, { icon: 2, time: 1000 }, function (res: unknown) {});
+  emit("error",Object.assign({currentTimeStamp,msg:errorMsg}));
+};
+
+const localUpload = (option: localUploadOption,callback:Function) => {
+  let xhr: XMLHttpRequest, loadedevt, total, per: number, url, uploading;
   xhr = new XMLHttpRequest();
   url = option.url;
-  file = option.file;
-  formData.append("files", file);
-  //append 其他数据
-  if (option.otherRequestData instanceof Object) {
-    var _requestDate = option.otherRequestData;
-    for (var key in _requestDate) {
-      formData.append(key, _requestDate[key]);
-    }
-  }
+  let formData = option.formData;
+  const cb = callback;
   //事件回调
   // event callbacks
   xhr.onreadystatechange = function () {
     if (xhr.readyState === 4) {
       if ((xhr.status >= 200 && xhr.status <= 300) || xhr.status === 304) {
-        option.successF instanceof Function &&
-          option.successF(xhr.responseText);
+        let currentTimeStamp = (new Date()).valueOf();
+        let successText = xhr.responseText?xhr.responseText:uploadSuccess;
+        emit("before",Object.assign({currentTimeStamp,msg:successText,...option}));
       } else {
-        option.errorF instanceof Function && option.errorF(xhr.responseText);
+        errorF(xhr.responseText);
       }
     } else {
-      option.errorF instanceof Function && option.errorF();
+      errorF(defaultErrorMsg);
     }
-  };
-  //侦查当前附件上传情况
-  /**
-   * 附件的上传进度条方法在xhr.upload.onprogeress上，
-   * 还有一个xhr.onprogress,是下载时候的进度条,***
-   * */
-  xhr.upload.onprogress = function (event) {
-    // event.total是需要传输的总字节，event.loaded是已经传输的字节。如果event.lengthComputable不为真，则event.total等于0
-    if (event.lengthComputable) {
-      loadedevt = event.loaded;
-      total = event.total;
-      per = Math.floor((100 * loadedevt) / total);
-    }
-    //执行回调
-    option.uploadProgress instanceof Function && option.uploadProgress(per);
   };
   xhr.open("post", url, true); //不能是GET, get请求数据发送只能拼接在URL后面
-  xhr.setRequestHeader("Accept", "application/json, text/javascript");
+  // 对应Upload属性的headers字段,额外的上传参数
+  if(props.headers){
+    for(let key in props.headers){
+      xhr.setRequestHeader(key,props.headers[key]);
+    }
+  }else{
+    xhr.setRequestHeader("Accept", "application/json, text/javascript");
+  }
+  // 上传事务开启前的回调
+  let currentTimeStamp = (new Date()).valueOf();
+  emit("before",Object.assign(option,currentTimeStamp));
   xhr.send(formData);
+  if(cb&&typeof cb == "function"){
+    cb();
+  }
 };
 
 const getUploadChange = (e: any) => {
-  // console.log(e.srcElement);
-  const file = e.target.files[0];
-  console.log(file);
+  const files = e.target.files;
+  const _files = [...files];
+  // 对应Upload属性的number字段,控制单次上传个数
+  if(props.multiple&&props.number!=0&&props.number<_files.length){
+    errorF(numberErrorMsg);
+    return;
+  }
+  // 对应Upload属性的size字段,控制上传图片的大小
+  if(props.size&&props.size!=0){
+    let _cache = [];
+    for(let i =0;i<_files.length;i++){
+      let _file= _files[i];
+      let _size = _file.size;
+      if(_size>props.size*1024){
+        _cache.push(_file);
+      }
+    }
+    if(_cache&&_cache.length>0){
+      for(let i =0;i<_cache.length;i++){
+        let _sizeErrorFile = _cache[i];
+        let errorMsg = `文件 ${_sizeErrorFile.name} ${sizeErrorMsg},文件最大不可超过${props.size*1000}kb`;
+        errorF(errorMsg);
+      }
+    }
+  }
   if (props.url) {
     // 表单提交
-    localUpload({
+    localUploadTransaction({
       url: props.url,
-      file: file,
+      files: _files,
     });
   } else {
-    //
+    // 抛出上传文件信息
+    emit("done", _files);
   }
 };
-const uploadDragOver = (e: any) => {
-  //console.log("uploadDrag9ikme",e);
+const chooseFile =()=>{
+  console.log(orgFileInput.value);
+  let _target = orgFileInput.value;
+  if(_target){
+      _target.click();
+  }
+  // _target?.onclick();
 };
+const clickOrgInput = ()=>{
+  let currentTimeStamp = (new Date()).valueOf();
+  //console.log(currentTimeStamp);
+  emit("choose",currentTimeStamp);
+};
+const uploadDragOver = (e: any) => {};
 const uploadDragDrop = (e: any) => {
   isDragEnter.value = false;
+  console.log(e);
 };
 const uploadDragStop = (e: any) => {};
 const uploadDragEnter = (e: any) => {
@@ -129,46 +198,45 @@ const uploadDragEnter = (e: any) => {
 const uploadDragLeave = (e: any) => {
   isDragEnter.value = false;
 };
+//内部方法 -> end
 </script>
 <template>
-  <div class="layui-upload" v-if="!drag">
-    <div class="layui-upload-btn-box">
-      <button type="button" class="layui-btn">上传图片</button>
+  <div class="layui-upload layui-upload-wrap">
       <input
         class="layui-upload-file"
+        @click="clickOrgInput"
         :multiple="multiple"
         type="file"
-        :accept="accept"
+        :accept="acceptMime"
         :name="field"
         @change="getUploadChange"
+        :field="field"
+        ref="orgFileInput"
       />
+    <div v-if="!drag">
+      <div class="layui-upload-btn-box">
+        <lay-button type="primary" @click.stop="chooseFile">上传图片</lay-button>
+      </div>
+    </div>
+    <div
+      v-else
+      class="layui-upload-drag"
+      :class="isDragEnter ? 'layui-upload-drag-draging' : ''"
+      @dragleave.stop="uploadDragLeave"
+      @dragenter.stop="uploadDragEnter"
+      @dragover.stop="uploadDragOver"
+      @drop="uploadDragDrop"
+      @click.stop="chooseFile"
+    >
+      <i class="layui-icon"></i>
+      <p>点击上传，或将文件拖拽到此处</p>
+      <div class="layui-hide" id="uploadDemoView">
+        <hr />
+        <img src="" alt="上传成功后渲染" style="max-width: 196px" />
+      </div>
     </div>
     <div class="layui-upload-list">
-      <img class="layui-upload-img" id="demo1" />
-      <p id="demoText"></p>
+      <slot name="preview"></slot>
     </div>
-  </div>
-  <div
-    v-else
-    class="layui-upload-drag"
-    :class="isDragEnter ? 'layui-upload-drag-draging' : ''"
-    @dragleave.stop="uploadDragLeave"
-    @dragenter.stop="uploadDragEnter"
-    @dragover.stop="uploadDragOver"
-    @drop="uploadDragDrop"
-  >
-    <i class="layui-icon"></i>
-    <p>点击上传，或将文件拖拽到此处</p>
-    <div class="layui-hide" id="uploadDemoView">
-      <hr />
-      <img src="" alt="上传成功后渲染" style="max-width: 196px" />
-    </div>
-    <input
-      class="layui-upload-file"
-      type="file"
-      :accept="accept"
-      :name="field"
-      @change="getUploadChange"
-    />l
   </div>
 </template>
