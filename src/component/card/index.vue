@@ -7,8 +7,8 @@ export default {
 <script setup lang="ts">
 import { computed, useSlots } from "vue";
 import "./index.less";
-import { String } from 'src/types';
-import { CardShadow } from './interface';
+import { String } from "src/types";
+import { CardShadow } from "./interface";
 
 const slot = useSlots();
 
@@ -18,15 +18,15 @@ export interface LayCardProps {
 }
 
 const props = withDefaults(defineProps<LayCardProps>(), {
-  shadow:'always'
+  shadow: "always",
 });
 
 const classes = computed(() => {
   return {
-    'shadow': props.shadow === 'always',
-    'is-hover-shadow': props.shadow === 'hover'
-  }
-})
+    shadow: props.shadow === "always",
+    "is-hover-shadow": props.shadow === "hover",
+  };
+});
 </script>
 
 <template>
