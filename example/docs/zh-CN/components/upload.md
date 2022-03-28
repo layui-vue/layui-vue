@@ -13,19 +13,47 @@
 ::: demo 使用 `lay-upload` 标签, 创建一个按钮上传单文件
 
 <template>
-  <lay-upload @done="getUploadFile"/>
+  <lay-upload @done="getUploadFile" @choose="beginChoose">
+    <template #preview>
+      <div v-for="(item,index) in picList" :key="`demo1-pic-'${index}`">
+        <img :src="item"/>
+      </div>
+    </template>
+  </lay-upload>
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref,reactive } from 'vue'
 
 export default {
   setup() {
-    const getUploadFile = (file)=>{
-      console.log(file);
+    const picList = ref([]);
+    const filetoDataURL=(file,fn)=>{
+      const reader = new FileReader();
+      reader.onloadend = function(e){
+        fn(e.target.result);
+      };
+      reader.readAsDataURL(file);
+    };
+    const getUploadFile=(files)=>{
+      if(Array.isArray(files)&&files.length>0){
+        files.forEach((file,index,array)=>{
+          filetoDataURL(file,(res)=>{
+            console.log(res);
+            picList.value.push(res);
+            console.log(picList.value);
+          });
+        });
+      }
+    };
+    const beginChoose =(e)=>{
+      console.log("beginChoose",e);
     };
     return {
-      getUploadFile
+      getUploadFile,
+      filetoDataURL,
+      beginChoose,
+      picList
     }
   }
 }
@@ -84,7 +112,7 @@ export default {
 ::: demo 使用 `lay-upload` 标签, 使用 `#preview` 自定义预览的UI交互
 
 <template>
-  <lay-upload @done="getUploadFile">
+  <lay-upload @done="getUploadFile2">
     <template #preview>
       <div class="easy-wrap">
         <img src="https://chixian.oss-cn-hangzhou.aliyuncs.com/20211023003617_0706a.jpg" style="width:62.9px;height:63.2px"/>
@@ -101,11 +129,11 @@ export default {
 import { ref } from 'vue'
 export default {
   setup() {
-    const getUploadFile = (file)=>{
+    const getUploadFile2 = (file)=>{
       console.log(file);
     };
     return {
-      getUploadFile
+      getUploadFile2
     }
   }
 }
