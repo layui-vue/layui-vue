@@ -250,6 +250,7 @@ export {
   LayNoticeBar,
   LayTransition,
   LayUpload,
+  install,
 };
 
 export { layer };
