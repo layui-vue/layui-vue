@@ -180,7 +180,6 @@ const getUploadChange = (e: any) => {
   }
 };
 const chooseFile = () => {
-  console.log(orgFileInput.value);
   let _target = orgFileInput.value;
   if (_target) {
     _target.click();
