@@ -93,12 +93,16 @@ const change = function (page: any) {
   emit("change", page);
 };
 
-const rowClick = function (data: any) {
-  emit("row", data);
+const rowClick = function (data: any,evt:MouseEvent) {
+  emit("row", data,evt);
 };
 
-const rowDoubleClick = function (data: any) {
-  emit("row-double", data);
+const rowDoubleClick = function (data: any,evt:MouseEvent) {
+  emit("row-double", data,evt);
+};
+
+const contextmenu = function (data: any,evt:MouseEvent) {
+  emit("contextmenu", data,evt);
 };
 
 // 打印 table 数据
@@ -246,12 +250,19 @@ onMounted(() => {
                 </th>
                 <template v-for="column in columns" :key="column">
                   <th v-if="tableColumnKeys.includes(column.key)">
-                    <!-- TODO Table header slot  -->
                     <div
                       class="layui-table-cell"
                       :style="{ width: column.width }"
                     >
-                      <span>{{ column.title }}</span>
+                      <span v-if="column.titleSlot">
+                        <template v-if="column.titleSlot">
+                          <slot :name="column.titleSlot"></slot>
+                        </template>
+                        <template>
+                          {{ column.title }}
+                        </template>
+                      </span>
+                      <span v-else>{{ column.title }}</span>
                       <span
                         v-if="column.sort"
                         class="layui-table-sort layui-inline"
@@ -281,8 +292,9 @@ onMounted(() => {
             <tbody>
               <template v-for="data in tableDataSource" :key="data">
                 <tr
-                  @click.stop="rowClick(data)"
-                  @dblclick.stop="rowDoubleClick(data)"
+                  @click.stop="rowClick(data,$event)"
+                  @dblclick.stop="rowDoubleClick(data,$event)"
+                  @contextmenu.stop="contextmenu(data,$event)"
                 >
                   <!-- 复选框 -->
                   <td v-if="checkbox" class="layui-table-col-special">

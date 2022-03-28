@@ -261,6 +261,7 @@ export default {
       <lay-button size="sm">删除</lay-button>
     </template>
     <template v-slot:username="{ data }"> {{data.username}} </template>
+    <template v-slot:username-title>😊</template>
     <template v-slot:password="{ data }"> {{data.password}} </template>
     <template v-slot:operator="{ data }">
       <lay-button >修改</lay-button>
@@ -283,6 +284,7 @@ export default {
       {
         title:"账户",
         width:"200px",
+        titleSlot: "username-title",
         customSlot:"username",
         key:"username"
       },{
@@ -384,8 +386,8 @@ export default {
 | key        | 数据字段   | --   |
 | customSlot | 自定义插槽 | --   |
 | width      | 宽度       | --   |
-| sort      | 排序       | --   |
-
+| sort       | 排序       | --   |
+| titleSlot  | 标题插槽   | --   |
 :::
 
 ::: comment

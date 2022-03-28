@@ -7,7 +7,7 @@ export default {
 import "./index.less";
 import { Recordable } from "../../types";
 import { layer } from "@layui/layer-vue";
-import { ref, useSlots, withDefaults, onMounted, defineExpose } from "vue";
+import { ref, useSlots, withDefaults } from "vue";
 import { templateRef } from "@vueuse/core";
 
 // 组件的参数字段类型
@@ -32,6 +32,7 @@ const props = withDefaults(defineProps<LayUploadProps>(), {
   number: 0,
   drag: false,
 });
+
 const slot = useSlots();
 const slots = slot.default && slot.default();
 const emit = defineEmits(["choose", "before", "done", "error"]);
