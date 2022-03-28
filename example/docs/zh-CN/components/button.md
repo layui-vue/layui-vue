@@ -288,13 +288,6 @@ export default {
 
 :::
 
-::: title Button 变量
-:::
-
-```
-
-```
-
 ::: title Button 属性
 :::
 

@@ -1,19 +1,27 @@
 @import "../../theme/variable.less";
 
 @button-primary-color: var(--button-primary-color);
+@button-primary-border-color: var(--button-primary-border-color);
+@button-normal-color: var(--button-normal-color);
+@button-normal-border-color: var(--button-normal-border-color);
+@button-warm-color: var(--button-warm-color);
+@button-warm-border-color: var(--button-warm-border-color);
+@button-danger-color: var(--button-danger-color);
+@button-danger-border-color: var(--button-danger-border-color);
 @button-border-radius: var(--button-border-radius);
 @button-border-color: var(--button-border-color);
-@button-normal-color: var(--button-normal-color);
-@button-warm-color: var(--button-warm-color);
-@button-danger-color: var(--button-danger-color);
 
 :root {
   --button-primary-color: @global-primary-color;
+  --button-primary-border-color: @global-primary-color;
+  --button-normal-color: @global-normal-color;
+  --button-normal-border-color: @global-normal-color;
+  --button-warm-color: @global-warm-color;
+  --button-warm-border-color: @global-warm-color;
+  --button-danger-color: @global-danger-color;
+  --button-danger-border-color: @global-danger-color;
   --button-border-radius: @global-border-radius;
   --button-border-color: @global-neutral-color-6;
-  --button-normal-color: @global-normal-color;
-  --button-warm-color: @global-warm-color;
-  --button-danger-color: @global-danger-color;
 }
 
 .layui-btn {
@@ -54,25 +62,25 @@
 .layui-btn-primary {
   color: #fff;
   background-color: @button-primary-color;
-  border-color: @button-primary-color;
+  border-color: @button-primary-border-color;
 }
 
 .layui-btn-normal {
   color: #fff;
   background-color: @button-normal-color;
-  border-color: @button-normal-color;
+  border-color: @button-normal-border-color;
 }
 
 .layui-btn-warm {
   color: #fff;
   background-color: @button-warm-color;
-  border-color: @button-warm-color;
+  border-color: @button-warm-border-color;
 }
 
 .layui-btn-danger {
   color: #fff;
   background-color: @button-danger-color;
-  border-color: @button-danger-color;
+  border-color: @button-danger-border-color;
 }
 
 .layui-btn-primary:hover,

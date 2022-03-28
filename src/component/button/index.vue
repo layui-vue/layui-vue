@@ -7,12 +7,7 @@ export default {
 <script setup lang="ts">
 import "./index.less";
 import { computed } from "vue";
-import {
-  ButtonBorder,
-  ButtonNativeType,
-  ButtonSize,
-  ButtonType,
-} from "./interface";
+import { ButtonBorder, ButtonNativeType, ButtonSize, ButtonType} from "./interface";
 import { BooleanOrString, String } from "src/types";
 
 export interface LayButtonProps {
@@ -68,13 +63,7 @@ const classes = computed(() => {
     <i v-if="prefixIcon" :class="`layui-icon ${prefixIcon}`"></i>
     <i
       v-if="loading"
-      class="
-        layui-icon
-        layui-icon-loading-one
-        layui-anim
-        layui-anim-rotate
-        layui-anim-loop
-      "
+      class="layui-icon layui-icon-loading-one layui-anim layui-anim-rotate layui-anim-loop"
     ></i>
     <slot v-else></slot>
     <i v-if="suffixIcon" :class="`layui-icon ${suffixIcon}`"></i>
