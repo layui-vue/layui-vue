@@ -16,6 +16,8 @@
       <li> 
         <h3>0.4.4 <span class="layui-badge-rim">2022-03-29</span></h3> 
         <ul>
+          <li>[新增] button 组件 prefix-icon 属性。
+          <li>[新增] button 组件 suffix-icon 属性。</li>
           <li>[新增] table 组件 row 和 row-double 时间的 event 参数。</li>
           <li>[新增] table 组件 contextmenu 行右键事件。</li>
           <li>[支持] Cdn 直接导入。</li>

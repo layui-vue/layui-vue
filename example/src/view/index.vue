@@ -28,7 +28,7 @@
               >{{ t('home.changelog') }}</router-link
             ></span
           >
-          <span>{{ t('home.download') }}：<em class="site-showdowns">4680</em></span>
+          <span>{{ t('home.download') }}：<em class="site-showdowns">5463</em></span>
         </div>
       </div>
       <div class="site-banner-other">

@@ -7,17 +7,25 @@ export default {
 <script setup lang="ts">
 import "./index.less";
 import { computed } from "vue";
+import {
+  ButtonBorder,
+  ButtonNativeType,
+  ButtonSize,
+  ButtonType,
+} from "./interface";
+import { BooleanOrString, String } from "src/types";
 
 export interface LayButtonProps {
-  type?: "primary" | "normal" | "warm" | "danger";
-  size?: "lg" | "sm" | "xs";
-  fluid?: boolean | string;
-  radius?: boolean | string;
-  border?: "green" | "blue" | "orange" | "red" | "black";
-  disabled?: boolean | string;
-  loading?: boolean | string;
-  nativeType?: "button" | "submit" | "reset";
-  icon?: string;
+  type?: ButtonType;
+  size?: ButtonSize;
+  prefixIcon?: String;
+  suffixIcon?: String;
+  border?: ButtonBorder;
+  fluid?: BooleanOrString;
+  radius?: BooleanOrString;
+  loading?: BooleanOrString;
+  disabled?: BooleanOrString;
+  nativeType?: ButtonNativeType;
 }
 
 const props = withDefaults(defineProps<LayButtonProps>(), {
@@ -26,7 +34,6 @@ const props = withDefaults(defineProps<LayButtonProps>(), {
   loading: false,
   disabled: false,
   nativeType: "button",
-  icon: "",
 });
 
 const emit = defineEmits(["click"]);
@@ -39,6 +46,11 @@ const onClick = (event: any) => {
 
 const classes = computed(() => {
   return [
+    {
+      "layui-btn-fluid": props.fluid,
+      "layui-btn-radius": props.radius,
+      "layui-btn-disabled": props.disabled,
+    },
     props.type ? `layui-btn-${props.type}` : "",
     props.size ? `layui-btn-${props.size}` : "",
     props.border ? `layui-border-${props.border}` : "",
@@ -49,22 +61,22 @@ const classes = computed(() => {
 <template>
   <button
     class="layui-btn"
-    :class="[
-      {
-        'layui-btn-fluid': fluid,
-        'layui-btn-radius': radius,
-        'layui-btn-disabled': disabled,
-      },
-      classes,
-    ]"
+    :class="classes"
     :type="nativeType"
     @click="onClick"
   >
-    <i v-if="icon" :class="'layui-icon ' + icon"></i>
+    <i v-if="prefixIcon" :class="`layui-icon ${prefixIcon}`"></i>
     <i
       v-if="loading"
-      class="layui-icon layui-icon-loading-one layui-anim layui-anim-rotate layui-anim-loop"
+      class="
+        layui-icon
+        layui-icon-loading-one
+        layui-anim
+        layui-anim-rotate
+        layui-anim-loop
+      "
     ></i>
     <slot v-else></slot>
+    <i v-if="suffixIcon" :class="`layui-icon ${suffixIcon}`"></i>
   </button>
 </template>

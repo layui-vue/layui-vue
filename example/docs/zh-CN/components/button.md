@@ -95,10 +95,10 @@ export default {
 ::: demo 使用 `fluid` 属性, 创建最大化按钮
 
 <template>
-  <lay-button type="primary" fluid>最大化按钮</lay-button>
+  <lay-button type="primary" fluid="true">最大化按钮</lay-button>
   <br/>
   <br/>
-  <lay-button type="default" fluid>最大化按钮</lay-button>
+  <lay-button type="default" fluid="true">最大化按钮</lay-button>
 </template>
 
 <script>
@@ -186,6 +186,7 @@ export default {
   <lay-button-container>
       <lay-button type="primary"><lay-icon type="layui-icon-left"></lay-icon></lay-button>
       <lay-button type="primary"><lay-icon type="layui-icon-right"></lay-icon></lay-button>
+      <lay-button prefix-icon="layui-icon-left" suffix-icon="layui-icon-right"></lay-button>
   </lay-button-container>
 </template>
 
@@ -309,6 +310,8 @@ export default {
 | disabled    | 禁用     | boolean | `false`   | `true` `false`                     |
 | loading     | 加载     | boolean | `false`   | `true` `false`                     |
 | native-type | 原生类型 | string  | `button`  | `button` `submit` `reset`          |
+| prefix-icon | 前置图标 | string  | --   | 内置 icon 集                     |
+| suffix-icon | 后置图标 | string  | --   | 内置 icon 集          |
 
 :::
 

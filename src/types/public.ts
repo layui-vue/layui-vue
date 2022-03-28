@@ -17,3 +17,15 @@ export type Nullable<T> = T | null;
 export type MaybeRef<T> = Ref<T> | T;
 
 export type Recordable = Record<string, any>;
+
+/************************/
+
+export type Number = number;
+
+export type String = string;
+
+export type Boolean = boolean;
+
+export type NumberOrString = number | string;
+
+export type BooleanOrString = boolean | string;
