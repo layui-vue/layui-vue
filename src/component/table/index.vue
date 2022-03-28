@@ -101,6 +101,10 @@ const rowDoubleClick = function (data: any,evt:MouseEvent) {
   emit("row-double", data,evt);
 };
 
+const contextmenu = function (data: any,evt:MouseEvent) {
+  emit("contextmenu", data,evt);
+};
+
 // 打印 table 数据
 const print = function () {
   let subOutputRankPrint = document.getElementById(tableId) as HTMLElement;
@@ -290,6 +294,7 @@ onMounted(() => {
                 <tr
                   @click.stop="rowClick(data,$event)"
                   @dblclick.stop="rowDoubleClick(data,$event)"
+                  @contextmenu.stop="contextmenu(data,$event)"
                 >
                   <!-- 复选框 -->
                   <td v-if="checkbox" class="layui-table-col-special">
