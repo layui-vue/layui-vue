@@ -114,6 +114,9 @@ export default {
 
 :::
 
+::: title 使用插槽
+:::
+
 ::: demo
 
 <template>
@@ -128,6 +131,46 @@ export default {
       <template v-slot:body>
         内容
       </template>
+  </lay-card>
+</div>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    return {
+    }
+  }
+}
+</script>
+
+<style>
+.card-container {
+  background: whitesmoke;
+  padding: 20px;
+}
+</style>
+
+:::
+
+::: title 边框阴影
+:::
+
+::: demo 通过 shadow 属性设置卡片阴影出现的时机。 该属性的值可以是：always、hover或never。
+
+<template>
+<div class="card-container">
+  <lay-card>
+      内容
+  </lay-card>
+    <lay-card shadow="hover">
+      内容
+  </lay-card>
+    <lay-card shadow="never">
+      内容
   </lay-card>
 </div>
 </template>
@@ -169,11 +212,11 @@ export default {
 
 ::: table
 
-| 插槽   | 描述     | 可选值 |
-| ------ | -------- | ------ |
-| default| 默认插槽 | --     |
-| header | 头部插槽 | --     |
-| body   | 内容插槽 | --     |
+| 插槽    | 描述     | 可选值 |
+| ------- | -------- | ------ |
+| default | 默认插槽 | --     |
+| header  | 头部插槽 | --     |
+| body    | 内容插槽 | --     |
 
 :::
 

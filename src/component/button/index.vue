@@ -7,7 +7,12 @@ export default {
 <script setup lang="ts">
 import "./index.less";
 import { computed } from "vue";
-import { ButtonBorder, ButtonNativeType, ButtonSize, ButtonType} from "./interface";
+import {
+  ButtonBorder,
+  ButtonNativeType,
+  ButtonSize,
+  ButtonType,
+} from "./interface";
 import { BooleanOrString, String } from "src/types";
 
 export interface LayButtonProps {

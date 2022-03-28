@@ -5,20 +5,32 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { useSlots } from "vue";
+import { computed, useSlots } from "vue";
 import "./index.less";
-
-export interface LayCardProps {
-  title?: string;
-}
+import { String } from 'src/types';
+import { CardShadow } from './interface';
 
 const slot = useSlots();
 
-const props = defineProps<LayCardProps>();
+export interface LayCardProps {
+  title?: String;
+  shadow?: CardShadow;
+}
+
+const props = withDefaults(defineProps<LayCardProps>(), {
+  shadow:'always'
+});
+
+const classes = computed(() => {
+  return {
+    'shadow': props.shadow === 'always',
+    'is-hover-shadow': props.shadow === 'hover'
+  }
+})
 </script>
 
 <template>
-  <div class="layui-card">
+  <div class="layui-card" :class="classes">
     <div class="layui-card-header" v-if="slot.title || title || slot.extra">
       <span class="layui-card-header-title">
         <slot name="title" v-if="slot.title"></slot>
@@ -34,11 +46,3 @@ const props = defineProps<LayCardProps>();
     </div>
   </div>
 </template>
-
-<style scoped>
-.layui-card-header-title {
-}
-
-.layui-card-header-extra {
-}
-</style>

@@ -14,7 +14,6 @@
   margin-bottom: 15px;
   border-radius: @card-border-radius;
   background-color: @card-back-color;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   .layui-card-header {
     height: 42px;
     line-height: 42px;
@@ -22,9 +21,9 @@
     border-bottom: 1px solid #f6f6f6;
     color: @card-fore-color;
     font-size: 14px;
-  }
-  .layui-card-header-extra {
-    float: right;
+    .layui-card-header-extra {
+      float: right;
+    }
   }
   .layui-card-body {
     padding: 10px 15px;
@@ -34,4 +33,12 @@
 
 .layui-card:last-child {
   margin-bottom: 0;
+}
+
+.layui-card.is-hover-shadow:hover {
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.layui-card.shadow {
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
 }
