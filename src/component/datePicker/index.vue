@@ -83,10 +83,13 @@
               >选择时间</span
             >
             <div class="laydate-footer-btns">
-              <span lay-type="clear" class="laydate-btns-clear" @click="clear">清空</span
+              <span lay-type="clear" class="laydate-btns-clear" @click="clear"
+                >清空</span
               ><span lay-type="now" class="laydate-btns-now" @click="now"
                 >现在</span
-              ><span lay-type="confirm" class="laydate-btns-confirm" @click="ok">确定</span>
+              ><span lay-type="confirm" class="laydate-btns-confirm" @click="ok"
+                >确定</span
+              >
             </div>
           </div>
         </div>
@@ -123,10 +126,13 @@
               >2022</span
             >
             <div class="laydate-footer-btns">
-              <span lay-type="clear" class="laydate-btns-clear" @click="clear">清空</span
+              <span lay-type="clear" class="laydate-btns-clear" @click="clear"
+                >清空</span
               ><span lay-type="now" class="laydate-btns-now" @click="now"
                 >现在</span
-              ><span lay-type="confirm" class="laydate-btns-confirm" @click="ok">确定</span>
+              ><span lay-type="confirm" class="laydate-btns-confirm" @click="ok"
+                >确定</span
+              >
             </div>
           </div>
         </div>
@@ -141,8 +147,11 @@
                 ></i
               >
               <div class="laydate-set-ym">
-
-                <span @click="showYearPanel" v-if="showPane === 'date' || showPane === 'datetime'">{{ currentYear }} 年</span>
+                <span
+                  @click="showYearPanel"
+                  v-if="showPane === 'date' || showPane === 'datetime'"
+                  >{{ currentYear }} 年</span
+                >
                 <span @click="showPane = 'month'"
                   >{{ currentMonth + 1 }} 月</span
                 >
@@ -176,10 +185,13 @@
               >2022-03</span
             >
             <div class="laydate-footer-btns">
-              <span lay-type="clear" class="laydate-btns-clear" @click="clear">清空</span
+              <span lay-type="clear" class="laydate-btns-clear" @click="clear"
+                >清空</span
               ><span lay-type="now" class="laydate-btns-now" @click="now"
                 >现在</span
-              ><span lay-type="confirm" class="laydate-btns-confirm" @click="ok">确定</span>
+              ><span lay-type="confirm" class="laydate-btns-confirm" @click="ok"
+                >确定</span
+              >
             </div>
           </div>
         </div>
@@ -221,10 +233,13 @@
               >返回日期</span
             >
             <div class="laydate-footer-btns">
-              <span lay-type="clear" class="laydate-btns-clear" @click="clear">清空</span
+              <span lay-type="clear" class="laydate-btns-clear" @click="clear"
+                >清空</span
               ><span lay-type="now" class="laydate-btns-now" @click="now"
                 >现在</span
-              ><span lay-type="confirm" class="laydate-btns-confirm" @click="ok">确定</span>
+              ><span lay-type="confirm" class="laydate-btns-confirm" @click="ok"
+                >确定</span
+              >
             </div>
           </div>
         </div>
@@ -297,7 +312,7 @@ watch(
 
 // 计算结果日期
 const dateValue = computed<string>(() => {
-  if(currentDay.value === -1) {
+  if (currentDay.value === -1) {
     $emits("update:modelValue", "");
     return "";
   }
@@ -429,9 +444,9 @@ const handleYearClick = (item: any) => {
 const handleMonthClick = (item: any) => {
   currentMonth.value = MONTH_NAME.indexOf(item);
   if (props.type === "month") {
-      currentDay.value = moment().month(MONTH_NAME.indexOf(item)).valueOf();
+    currentDay.value = moment().month(MONTH_NAME.indexOf(item)).valueOf();
   } else {
-      showPane.value = "date";
+    showPane.value = "date";
   }
 };
 
