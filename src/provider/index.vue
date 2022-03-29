@@ -7,6 +7,11 @@ export default {
 <script setup lang="ts">
 import { watch } from "vue";
 import { useI18n } from "vue-i18n";
+import {
+  enable as enableDarkMode,
+  disable as disableDarkMode,
+} from "darkreader";
+
 const { locale, setLocaleMessage, mergeLocaleMessage } = useI18n();
 
 export interface LayConfigProviderProps {
@@ -34,8 +39,15 @@ const changeLocales = (lang: string, locales: any, merge: boolean) => {
 };
 
 const changeTheme = (theme: string) => {
-  document.body.removeAttribute("lay-theme");
-  document.body.setAttribute("lay-theme", theme);
+  if (theme === "dark") {
+    enableDarkMode({
+      brightness: 100,
+      contrast: 90,
+      sepia: 10,
+    });
+  } else {
+    disableDarkMode();
+  }
 };
 
 const changeThemeVariable = (vars: any) => {

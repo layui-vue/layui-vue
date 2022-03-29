@@ -7,7 +7,7 @@ export default {
 <script setup lang="ts">
 import { computed, useSlots } from "vue";
 import "./index.less";
-import { String } from "src/types";
+import { String } from "../../types";
 import { CardShadow } from "./interface";
 
 const slot = useSlots();

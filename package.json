@@ -43,6 +43,7 @@
     "@layui/layer-vue": "^1.3.11",
     "@vueuse/core": "^7.6.2",
     "async-validator": "^4.0.7",
+    "darkreader": "^4.9.46",
     "evtd": "^0.2.3",
     "moment": "^2.29.1",
     "uuid": "^8.3.2",
