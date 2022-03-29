@@ -186,7 +186,6 @@ export default {
 :::
 
 
-::: comment
-:::
+ 
 
 ::: previousNext button

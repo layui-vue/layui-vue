@@ -170,8 +170,7 @@ export default {
 
 :::
 
-::: comment
-:::
+ 
 
 ::: previousNext color
 :::

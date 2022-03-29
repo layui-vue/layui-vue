@@ -62,8 +62,7 @@ export default {
 
 :::
 
-::: comment
-:::
+ 
 
 ::: previousNext panel
 :::

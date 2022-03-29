@@ -220,8 +220,7 @@ export default {
 
 :::
 
-::: comment
-:::
+ 
 
 ::: previousNext card
 :::

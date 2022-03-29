@@ -118,8 +118,7 @@ export default {
 
 :::
 
-::: comment
-:::
+ 
 
 ::: previousNext textarea
 :::

@@ -4,7 +4,7 @@
       <div class="site-banner-main">
         <div class="site-zfj site-zfj-anim">
           <img
-            src="../assets/logo.jpg"
+            src="../assets/logo-png.png"
             style="width: 220px; border-radius: 10px"
           />
         </div>
@@ -20,14 +20,7 @@
           >
         </div>
         <div class="site-version">
-          <span>{{ t('home.version') }}：v<cite class="site-showv">0.4.4</cite></span>
-          <span
-            ><router-link
-              class="layui-inline site-down"
-              to="/zh-CN/guide/changelog"
-              >{{ t('home.changelog') }}</router-link
-            ></span
-          >
+          <span>{{ t('home.version') }}：<cite class="site-showv">0.4.4</cite></span>
           <span>{{ t('home.download') }}：<em class="site-showdowns">5463</em></span>
         </div>
       </div>
@@ -121,18 +114,27 @@ export default {
 }
 </script>
 <style>
+#app,
+html,
+body {
+  height: 100%;
+}
+
 .site-container {
+  background: #fff;
   margin-top: 60px;
-  background-color: whitesmoke;
   height: 100%;
   width: 100%;
 }
 .site-banner {
+  border-bottom: 1px solid #eee;
   position: relative;
-  height: 600px;
+  height: 100%;
   text-align: center;
   overflow: hidden;
-  background-color: #393d49;
+  background-image: url(../assets/background.svg);
+  background-size: 100%;
+  background-repeat: no-repeat;
 }
 .site-banner-bg {
   background-position: center 0;
@@ -155,17 +157,15 @@ export default {
   height: 60px;
   line-height: 60px;
   border-radius: 4px;
-  border: 1px solid #c2c2c2;
-  border-color: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(60, 60, 60, .7);
   font-size: 24px;
-  color: #ccc;
+  color: rgba(60, 60, 60, .7);
   transition: all 0.5s;
   -webkit-transition: all 0.5s;
 }
 .site-download a:hover {
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: rgba(255, 255, 255, 0.1);
   border-radius: 50px;
-  color: #ccc;
 }
 .site-zfj {
   padding-top: 25px;
@@ -200,7 +200,7 @@ export default {
 }
 .site-desc .web-font-desc {
   color: #fff;
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(60, 60, 60, .7);
   font-size: 51px;
 }
 .web-font-desc {
@@ -212,14 +212,13 @@ export default {
   bottom: -40px;
   left: 0;
   width: 100%;
-  color: #c2c2c2;
-  color: rgba(255, 255, 255, 0.66);
+  color: rgba(60, 60, 60, .7);
   font-style: normal;
 }
 .site-version {
   position: relative;
   margin-top: 18px;
-  color: #ccc;
+  color: rgba(60, 60, 60, .7);
   font-size: 12px;
 }
 .site-version span {
@@ -229,7 +228,7 @@ export default {
   font-style: normal;
 }
 .site-version a {
-  color: #e2e2e2;
+  color: rgba(60, 60, 60, .7);
   text-decoration: none;
   margin-top: -4px;
 }
@@ -249,10 +248,8 @@ export default {
   margin: 0 6px;
   padding: 0 8px;
   border-radius: 4px;
-  color: #c2c2c2;
-  color: rgba(255, 255, 255, 0.8);
-  border: 1px solid #c2c2c2;
-  border-color: rgba(255, 255, 255, 0.2);
+  color: rgba(60, 60, 60, .7);
+  border: 1px solid rgba(60, 60, 60, .7);
   font-size: 14px;
   transition: all 0.5s;
   -webkit-transition: all 0.5s;
