@@ -60,6 +60,58 @@ export default {
 
 :::
 
+::: title 年份选择
+:::
+
+::: demo
+
+<template>
+  <lay-date-picker type="year" v-model="endTime"></lay-date-picker>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+   const endTime = ref("2022-03-04 17:35:00");
+
+    return {
+      endTime
+    }
+  }
+}
+</script>
+
+:::
+
+::: title 月份选择
+:::
+
+::: demo
+
+<template>
+  <lay-date-picker type="month" v-model="endTime"></lay-date-picker>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+   const endTime = ref("2022-03-04 17:35:00");
+
+    return {
+      endTime
+    }
+  }
+}
+</script>
+
+:::
+
 ::: comment
 :::
 

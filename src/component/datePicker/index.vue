@@ -1,6 +1,6 @@
 <template>
   <div>
-    <lay-dropdown>
+    <lay-dropdown ref="dropdownRef">
       <lay-input :name="name" :value="dateValue || modelValue" readonly>
         <template #prefix>
           <lay-icon type="layui-icon-date"></lay-icon>
@@ -8,7 +8,10 @@
       </lay-input>
       <template #content>
         <!-- 日期选择 -->
-        <div class="layui-laydate" v-show="showPane === 'date'">
+        <div
+          class="layui-laydate"
+          v-show="showPane === 'date' || showPane === 'datetime'"
+        >
           <div class="layui-laydate-main laydate-main-list-0">
             <div class="layui-laydate-header">
               <i
@@ -80,10 +83,10 @@
               >选择时间</span
             >
             <div class="laydate-footer-btns">
-              <span lay-type="clear" class="laydate-btns-clear">清空</span
+              <span lay-type="clear" class="laydate-btns-clear" @click="clear">清空</span
               ><span lay-type="now" class="laydate-btns-now" @click="now"
                 >现在</span
-              ><span lay-type="confirm" class="laydate-btns-confirm">确定</span>
+              ><span lay-type="confirm" class="laydate-btns-confirm" @click="ok">确定</span>
             </div>
           </div>
         </div>
@@ -105,10 +108,7 @@
                   v-for="item of yearList"
                   :key="item"
                   :class="[{ 'layui-this': currentYear === item }]"
-                  @click="
-                    currentYear = item;
-                    showPane = 'date';
-                  "
+                  @click="handleYearClick(item)"
                 >
                   {{ item }}
                 </li>
@@ -123,10 +123,10 @@
               >2022</span
             >
             <div class="laydate-footer-btns">
-              <span lay-type="clear" class="laydate-btns-clear">清空</span
+              <span lay-type="clear" class="laydate-btns-clear" @click="clear">清空</span
               ><span lay-type="now" class="laydate-btns-now" @click="now"
                 >现在</span
-              ><span lay-type="confirm" class="laydate-btns-confirm">确定</span>
+              ><span lay-type="confirm" class="laydate-btns-confirm" @click="ok">确定</span>
             </div>
           </div>
         </div>
@@ -141,8 +141,9 @@
                 ></i
               >
               <div class="laydate-set-ym">
-                <span @click="showYearPanel">{{ currentYear }} 年</span
-                ><span @click="showPane = 'month'"
+
+                <span @click="showYearPanel" v-if="showPane === 'date' || showPane === 'datetime'">{{ currentYear }} 年</span>
+                <span @click="showPane = 'month'"
                   >{{ currentMonth + 1 }} 月</span
                 >
               </div>
@@ -160,10 +161,7 @@
                   :class="[
                     { 'layui-this': MONTH_NAME.indexOf(item) === currentMonth },
                   ]"
-                  @click="
-                    currentMonth = MONTH_NAME.indexOf(item);
-                    showPane = 'date';
-                  "
+                  @click="handleMonthClick(item)"
                 >
                   {{ item.slice(0, 3) }}
                 </li>
@@ -178,10 +176,10 @@
               >2022-03</span
             >
             <div class="laydate-footer-btns">
-              <span lay-type="clear" class="laydate-btns-clear">清空</span
+              <span lay-type="clear" class="laydate-btns-clear" @click="clear">清空</span
               ><span lay-type="now" class="laydate-btns-now" @click="now"
                 >现在</span
-              ><span lay-type="confirm" class="laydate-btns-confirm">确定</span>
+              ><span lay-type="confirm" class="laydate-btns-confirm" @click="ok">确定</span>
             </div>
           </div>
         </div>
@@ -223,10 +221,10 @@
               >返回日期</span
             >
             <div class="laydate-footer-btns">
-              <span lay-type="clear" class="laydate-btns-clear">清空</span
+              <span lay-type="clear" class="laydate-btns-clear" @click="clear">清空</span
               ><span lay-type="now" class="laydate-btns-now" @click="now"
                 >现在</span
-              ><span lay-type="confirm" class="laydate-btns-confirm">确定</span>
+              ><span lay-type="confirm" class="laydate-btns-confirm" @click="ok">确定</span>
             </div>
           </div>
         </div>
@@ -242,8 +240,9 @@ import moment from "moment";
 import LayIcon from "../icon/index";
 import LayInput from "../input/index.vue";
 import LayDropdown from "../dropdown/index.vue";
-import { getDayLength, getYears, getDate, getMonth, getYear } from "./day";
+import { getDayLength, getYears, getMonth, getYear } from "./day";
 
+const dropdownRef = ref(null);
 const $emits = defineEmits(["update:modelValue"]);
 
 const WEEK_NAME = ["日", "一", "二", "三", "四", "五", "六"];
@@ -271,8 +270,8 @@ const els = [
 
 export interface LayDatePickerProps {
   modelValue?: string;
-  type: "date" | "datetime" | "year" | "time" | "month";
-  name: string;
+  type?: "date" | "datetime" | "year" | "time" | "month";
+  name?: string;
 }
 
 const props = withDefaults(defineProps<LayDatePickerProps>(), {
@@ -288,8 +287,20 @@ const yearList = ref<number[]>(getYears());
 const dateList = ref<any[]>([]);
 const showPane = ref("date");
 
+watch(
+  () => props.type,
+  () => {
+    showPane.value = props.type;
+  },
+  { immediate: true }
+);
+
 // 计算结果日期
 const dateValue = computed<string>(() => {
+  if(currentDay.value === -1) {
+    $emits("update:modelValue", "");
+    return "";
+  }
   let momentVal;
   let momentObj = moment(currentDay.value)
     .hour(hms.value.hh)
@@ -366,17 +377,11 @@ watch(
   { immediate: true }
 );
 
-// 点击日期
-const handleDayClick = (item: any) => {
-  currentDay.value = item.value;
-  if (item.type !== "current") {
-    currentMonth.value =
-      item.type === "prev" ? currentMonth.value - 1 : currentMonth.value + 1;
-  }
-};
-
 // 确认事件
-const ok = () => {};
+const ok = () => {
+  // @ts-ignore
+  dropdownRef.value.hide();
+};
 
 // 现在时间
 const now = () => {
@@ -384,7 +389,9 @@ const now = () => {
 };
 
 // 清空日期
-const clear = () => {};
+const clear = () => {
+  currentDay.value = -1;
+};
 
 // 切换年月
 const changeYearOrMonth = (type: "year" | "month", num: number) => {
@@ -406,11 +413,35 @@ const changeYearOrMonth = (type: "year" | "month", num: number) => {
 // 显示年列表面板
 const showYearPanel = () => {
   showPane.value = "year";
-  nextTick(() => {
-    (
-      document.querySelector(".year-panel-item.active") as HTMLElement
-    ).scrollIntoView({ block: "center" });
-  });
+};
+
+// 点击年份
+const handleYearClick = (item: any) => {
+  currentYear.value = item;
+  if (props.type === "year") {
+    currentDay.value = moment().year(item).valueOf();
+  } else {
+    showPane.value = "date";
+  }
+};
+
+// 点击月份
+const handleMonthClick = (item: any) => {
+  currentMonth.value = MONTH_NAME.indexOf(item);
+  if (props.type === "month") {
+      currentDay.value = moment().month(MONTH_NAME.indexOf(item)).valueOf();
+  } else {
+      showPane.value = "date";
+  }
+};
+
+// 点击日期
+const handleDayClick = (item: any) => {
+  currentDay.value = item.value;
+  if (item.type !== "current") {
+    currentMonth.value =
+      item.type === "prev" ? currentMonth.value - 1 : currentMonth.value + 1;
+  }
 };
 
 // 点击时间 - hms

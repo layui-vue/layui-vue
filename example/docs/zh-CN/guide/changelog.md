@@ -18,10 +18,15 @@
         <ul>
           <li>[新增] button 组件 prefix-icon 属性。</li>
           <li>[新增] button 组件 suffix-icon 属性。</li>
+          <li>[新增] date-picker 组件 清空 操作, 清空选择日期。</li>
+          <li>[新增] date-picker 组件 确认 操作, 关闭选择面板。</li>
+          <li>[新增] date-picker 组件 type 属性 year 值, 支持 年份 选择。</li>
+          <li>[新增] date-picker 组件 type 属性 month 值, 支持 月份 选择。</li>
+          <li>[修复] date-picker 组件 type 属性为 datetime 时候面板不显示。</li>
           <li>[新增] card 组件 shadow 属性, 可选值 hover, always, never。</li>
           <li>[新增] table 组件 row 和 row-double 时间的 event 参数。</li>
           <li>[新增] table 组件 contextmenu 行右键事件。</li>
-          <li>[支持] Cdn 直接导入。</li>
+          <li>[支持] cdn 直接导入使用。</li>
         </ul> 
       </li>
     </ul>
