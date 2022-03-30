@@ -36,6 +36,7 @@
   text-align: center;
   cursor: pointer;
 }
+
 /** 位置开始 */
 .layui-tab.is-right {
   display: flex;
@@ -216,26 +217,36 @@
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1);
 }
 
-.layui-tab-card > .layui-tab-title {
+.layui-tab-card > .layui-tab-head.is-top,
+.layui-tab-card > .layui-tab-head.is-bottom {
+  width: 100%;
+}
+
+.layui-tab-card > .layui-tab-head > .layui-tab-title.is-top,
+.layui-tab-card > .layui-tab-head > .layui-tab-title.is-bottom {
+  width: 100%;
+}
+
+.layui-tab-card > .layui-tab-head > .layui-tab-title {
   background-color: @global-neutral-color-1;
 }
 
-.layui-tab-card > .layui-tab-title li {
+.layui-tab-card > .layui-tab-head > .layui-tab-title li {
   margin-right: -1px;
   margin-left: -1px;
 }
 
-.layui-tab-card > .layui-tab-title .layui-this {
+.layui-tab-card > .layui-tab-head > .layui-tab-title .layui-this {
   background-color: #fff;
 }
 
-.layui-tab-card > .layui-tab-title .layui-this:after {
+.layui-tab-card > .layui-tab-head > .layui-tab-title .layui-this:after {
   border-top: none;
   border-width: 1px;
   border-bottom-color: #fff;
 }
 
-.layui-tab-card > .layui-tab-title .layui-tab-bar {
+.layui-tab-card > .layui-tab-head > .layui-tab-title .layui-tab-bar {
   height: 40px;
   line-height: 40px;
   border-radius: 0;
