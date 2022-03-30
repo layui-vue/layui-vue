@@ -20,7 +20,7 @@
           >
         </div>
         <div class="site-version">
-          <span>{{ t('home.version') }}：<cite class="site-showv">0.4.4</cite></span>
+          <span>{{ t('home.version') }}：<cite class="site-showv">1.0.0</cite></span>
           <span>{{ t('home.download') }}：<em class="site-showdowns">5463</em></span>
         </div>
       </div>
@@ -51,7 +51,7 @@
         </a>
       </div>
     </div>
-    <div style="margin-left: 10%; margin-right: 10%">
+    <div style="margin-left: 10%; margin-right: 10%;margin-top:40px;">
       <div>
         <ul class="layui-row layui-col-space30 site-idea">
           <li class="layui-col-md8">
@@ -92,10 +92,11 @@
     </div>
     <div class="footer footer-index">
       <p>
-        Copyright © 2022 <a href="/index.html">www.layui-vue.com</a> mit
-        licence
+        Released under the <a href="/index.html">MIT License</a>.
       </p>
-      <p></p>
+      <p>
+        Copyright © 2021-2022 layui-vue.com
+      </p>
     </div>
   </div>
 </template>
@@ -119,7 +120,6 @@ html,
 body {
   height: 100%;
 }
-
 .site-container {
   background: #fff;
   margin-top: 60px;
@@ -127,18 +127,19 @@ body {
   width: 100%;
 }
 .site-banner {
-  border-bottom: 1px solid #eee;
-  position: relative;
   height: 100%;
-  text-align: center;
   overflow: hidden;
+  text-align: center;
+  position: relative;
+  border-bottom: 1px solid #eee;
   background-image: url(../assets/background.svg);
-  background-size: 100%;
   background-repeat: no-repeat;
+  background-size: 100%;
 }
 .site-banner-bg {
   background-position: center 0;
 }
+
 .site-banner-bg,
 .site-banner-main {
   position: absolute;
@@ -200,12 +201,17 @@ body {
 }
 .site-desc .web-font-desc {
   color: #fff;
-  color: rgba(60, 60, 60, .7);
-  font-size: 51px;
+  color: #213547;
+  font-size: 52px;
+  opacity: 0.9;
 }
 .web-font-desc {
-  font-style: normal;
-  font-weight: 300;
+  font-size: 76px;
+  line-height: 1.25;
+  font-weight: 900;
+  letter-spacing: -1.5px;
+  max-width: 960px;
+  margin: 0 auto;
 }
 .site-desc cite {
   position: absolute;
@@ -235,7 +241,7 @@ body {
 .site-banner-other {
   position: absolute;
   left: 0;
-  bottom: 35px;
+  bottom: 90px;
   width: 100%;
   text-align: center;
   font-size: 0;
@@ -259,7 +265,9 @@ body {
   padding: 30px 15px;
   line-height: 30px;
   text-align: center;
-  color: #666;
+  color: rgba(60, 60, 60, .7);
   font-weight: 300;
+  font-size: 13.6px;
+  background: #f9f9f9;
 }
 </style>

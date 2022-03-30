@@ -8,7 +8,7 @@
     <lay-layout class="layui-layout-document" style="height:100%">
       <lay-header
         ><lay-logo>
-          <img src="../assets/logo-png.png" />
+          <img src="../assets/logo-png.png" /><span style="margin-left:12px;font-size:20px;color: #213547;letter-spacing: -0.2px;opacity: 0.8;">layui - vue</span>
         </lay-logo>
         <ul
           class="layui-nav layui-layout-left"
@@ -116,7 +116,7 @@
           </li>
           <li class="layui-nav-item">
             <a href="https://gitee.com/layui-vue/layui-vue">
-              <lay-icon type="layui-icon-fonts-code" size="15px"></lay-icon>
+              Gitee
             </a>
           </li>
           <li class="layui-nav-item">
@@ -201,7 +201,7 @@
             </a>
           </li>
           <li class="layui-nav-item">
-            <a href="javascript:void(0)"> 0.4.4 </a>
+            <a href="javascript:void(0)"> 1.0.0 </a>
           </li>
         </ul>
       </lay-header>
@@ -326,9 +326,14 @@ export default {
   background-color: #f1f1f1!important;
 }
 
-.layui-layout-document .layui-nav .layui-nav-item > a,
-.layui-layout-document .layui-nav .layui-nav-item > a:hover {
+.layui-layout-document .layui-header .layui-nav .layui-nav-item > a,
+.layui-layout-document .layui-header .layui-nav .layui-nav-item > a:hover {
   color: rgba(0, 0, 0, 0.8);
+}
+
+.layui-layout-document .layui-header .layui-logo {
+  text-align: left;
+  padding-left: 15px;
 }
 
 .layui-logo img {

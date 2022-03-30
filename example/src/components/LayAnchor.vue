@@ -236,6 +236,7 @@ const throttle = (func: Function, wait: number) => {
   box-shadow: 2px 0 8px 0 rgb(29 35 41 / 5%);
   transition: none;
   -webkit-transition: none;
+  color: rgba(0, 0, 0, 0.8);
   &:hover {
     background-color: #e2e2e2;
   }

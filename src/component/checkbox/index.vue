@@ -105,7 +105,7 @@ const handleClick = function () {
       :lay-skin="skin"
     >
       <span v-if="$slots?.default"><slot></slot></span>
-      <i :class="{'layui-icon layui-icon-ok': isChecked}"></i>
+      <i :class="{ 'layui-icon layui-icon-ok': isChecked }"></i>
     </div>
   </span>
 </template>
