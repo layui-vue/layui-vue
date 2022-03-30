@@ -18,10 +18,13 @@ import {
   watch,
 } from "vue";
 
+export type tabPositionType = "top" | "bottom" | "left" | "right" ;
+
 export interface LayTabProps {
   type?: string;
   modelValue: string;
   allowClose?: boolean;
+  tabPosition?: tabPositionType;
   beforeClose?: Function;
   beforeLeave?: Function;
 }
@@ -42,7 +45,9 @@ const setItemInstanceBySlot = function (nodeList: VNode[]) {
   });
 };
 
-const props = defineProps<LayTabProps>();
+const props = withDefaults(defineProps<LayTabProps>(), {
+  tabPosition: "top"
+});
 
 const emit = defineEmits(["update:modelValue", "change", "close"]);
 
@@ -93,14 +98,26 @@ provide("slotsChange", slotsChange);
 <template>
   <div
     class="layui-tab"
-    :class="[type ? 'layui-tab-' + type : '']"
+    :class="[type ? 'layui-tab-' + type : '',
+     props.tabPosition ? `is-${tabPosition}` : '']"
     v-if="active"
   >
-    <ul class="layui-tab-title">
+    <div v-if="tabPosition === 'bottom'" class="layui-tab-content">
+      <slot></slot>
+    </div>
+
+    <div :class="[
+      'layui-tab-head',
+      props.tabPosition ? `is-${tabPosition}` : ''
+    ]">
+    <ul :class="[
+      'layui-tab-title',
+      props.tabPosition ? `is-${tabPosition}` : ''
+    ]">
       <li
         v-for="(children, index) in childrens"
         :key="children"
-        :class="[children.props.id === active ? 'layui-this' : '']"
+        :class="[children.props.id === active ? 'layui-this' : '',]"
         @click.stop="change(children.props.id)"
       >
         {{ children.props.title }}
@@ -111,7 +128,9 @@ provide("slotsChange", slotsChange);
         ></i>
       </li>
     </ul>
-    <div class="layui-tab-content">
+    </div>
+
+    <div v-if="tabPosition != 'bottom'" class="layui-tab-content">
       <slot></slot>
     </div>
   </div>

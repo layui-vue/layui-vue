@@ -42,7 +42,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-tab type="brief" v-model="current2">
+  <lay-tab type="brief" v-model="current2" tabPosition = "right">
     <lay-tab-item title="选项一" id="1"><div style="padding:20px">选项一</div></lay-tab-item>
     <lay-tab-item title="选项二" id="2"><div style="padding:20px">选项二</div></lay-tab-item>
   </lay-tab>
@@ -224,6 +224,45 @@ export default {
 
 :::
 
+::: title 位置设置
+:::
+
+::: demo
+
+<template>
+  <lay-button-group>
+      <lay-button type="default" size="sm" @click = "tabPosition = 'left'">left</lay-button>
+      <lay-button type="default" size="sm" @click = "tabPosition = 'right'">right</lay-button>
+      <lay-button type="default" size="sm" @click = "tabPosition = 'top'">top</lay-button>
+      <lay-button type="default" size="sm" @click = "tabPosition = 'bottom'">bottom</lay-button>
+  </lay-button-group>
+  <lay-tab type="brief" v-model="current7" :tabPosition = "tabPosition">
+    <lay-tab-item title="选项一" id="1"><div style="padding:20px">选项一</div></lay-tab-item>
+    <lay-tab-item title="选项二" id="2"><div style="padding:20px">选项二</div></lay-tab-item>
+    <lay-tab-item title="选项三" id="3"><div style="padding:20px">选项三</div></lay-tab-item>
+    <lay-tab-item title="选项四" id="4"><div style="padding:20px">选项四</div></lay-tab-item>
+  </lay-tab>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const current7 = ref("1");
+    const tabPosition = ref("left");
+
+    return {
+      current2,
+      tabPosition
+    }
+  }
+}
+</script>
+
+:::
+
 ::: title Tab 属性
 :::
 
@@ -233,6 +272,7 @@ export default {
 | ------------ | ------------------------------------ | ----------------------------------------- |
 | v-model      | 当前激活                             | --                                        |
 | type         | 主题样式                             | --                                        |
+| tabPosition  | 位置                                 | `top`  `bottom` `left` `right`         |
 | allow-close  | 允许关闭                             | `true` `false`                            |
 | before-close | `Function`关闭之前的回调钩子函数     | 参数(`id`), `return false` 表示不进行关闭 |
 | before-leave | `Function`切换标签之前的回调钩子函数 | 参数(`id`), `return false` 表示不进行切换 |

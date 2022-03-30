@@ -36,6 +36,63 @@
   text-align: center;
   cursor: pointer;
 }
+/** 位置开始 */
+.layui-tab.is-right {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between
+}
+
+.layui-tab-head{
+  display: inline-block;
+}
+
+.layui-tab-title.is-right,
+.layui-tab-title.is-left {
+  height: 100%;
+  min-width: 60px;
+  border-bottom-width: 0px;
+  border-bottom-style: none;
+}
+
+.layui-tab-title.is-left li,
+.layui-tab-title.is-right li {
+   border: none;
+   border-radius: 0;
+   display: list-item;
+}
+
+.layui-tab-head.is-right + .layui-tab-content,
+.layui-tab-head.is-left + .layui-tab-content {
+  height: 100%;
+  padding: 0 10px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.layui-tab-brief > .layui-tab-head.is-left > .layui-tab-more li.layui-this:after,
+.layui-tab-brief > .layui-tab-head.is-left > .layui-tab-title .layui-this:after {
+  border: none;
+  border-radius: 0;
+  border-right: 2px solid @global-checked-color;
+}
+
+.layui-tab-brief > .layui-tab-head.is-right > .layui-tab-more li.layui-this:after,
+.layui-tab-brief > .layui-tab-head.is-right > .layui-tab-title .layui-this:after {
+  border: none;
+  border-radius: 0;
+  border-left: 2px solid @global-checked-color;
+}
+
+// .layui-tab-title.is-right li{
+//   border-left: 2px solid @global-neutral-color-6;
+// }
+
+// .layui-tab-title.is-left li{
+//   border-right: 2px solid @global-neutral-color-6;
+// }
+
+/** 位置结束*/
 
 .layui-tab-title li a {
   display: block;
@@ -137,18 +194,18 @@
   color: #fff;
 }
 
-.layui-tab-brief > .layui-tab-title .layui-this {
+.layui-tab-brief > .layui-tab-head > .layui-tab-title .layui-this {
   color: @global-primary-color;
 }
 
-.layui-tab-brief > .layui-tab-more li.layui-this:after,
-.layui-tab-brief > .layui-tab-title .layui-this:after {
+.layui-tab-brief > .layui-tab-head > .layui-tab-more li.layui-this:after,
+.layui-tab-brief > .layui-tab-head > .layui-tab-title .layui-this:after {
   border: none;
   border-radius: 0;
   border-bottom: 2px solid @global-checked-color;
 }
 
-.layui-tab-brief[overflow] > .layui-tab-title .layui-this:after {
+.layui-tab-brief[overflow] > .layui-tab-head > .layui-tab-title .layui-this:after {
   top: -1px;
 }
 
