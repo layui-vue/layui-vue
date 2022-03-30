@@ -8,7 +8,7 @@
     <lay-layout class="layui-layout-document" style="height:100%">
       <lay-header
         ><lay-logo>
-          <img src="../assets/logo-png.png" /><span style="margin-left:12px;font-size:20px;color: #213547;letter-spacing: -0.2px;opacity: 0.8;">layui - vue</span>
+          <img src="../assets/logo-png.png" /><span style="margin-left:12px;font-size:20px;color: rgba(0, 0, 0, 0.8);letter-spacing: -0.2px;opacity: 0.8;">layui - vue</span>
         </lay-logo>
         <ul
           class="layui-nav layui-layout-left"

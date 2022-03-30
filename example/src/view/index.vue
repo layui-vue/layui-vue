@@ -10,18 +10,27 @@
         </div>
         <div class="layui-anim site-desc site-desc-anim">
           <p class="web-font-desc">layui - vue</p>
-          <cite
-            >{{ t('home.description') }}</cite
-          >
+          <cite>{{ t("home.description") }}</cite>
         </div>
         <div class="site-download">
-          <router-link class="layui-inline site-down" to="/zh-CN/guide"
-            >Get Started</router-link
-          >
+          <router-link class="layui-inline site-down" to="/zh-CN/guide">
+            Get Started
+          </router-link>
+          <router-link class="layui-inline site-down" to="/zh-CN/guide">
+            Switch Dark
+          </router-link>
         </div>
         <div class="site-version">
-          <span>{{ t('home.version') }}：<cite class="site-showv">1.0.0</cite></span>
-          <span>{{ t('home.download') }}：<em class="site-showdowns">5463</em></span>
+          <span
+            >{{ t("home.version") }}：<cite class="site-showv"
+              >1.0.0</cite
+            ></span
+          >
+          <span
+            >{{ t("home.download") }}：<em class="site-showdowns"
+              >5463</em
+            ></span
+          >
         </div>
       </div>
       <div class="site-banner-other">
@@ -51,7 +60,7 @@
         </a>
       </div>
     </div>
-    <div style="margin-left: 10%; margin-right: 10%;margin-top:40px;">
+    <div style="margin-left: 10%; margin-right: 10%; margin-top: 40px">
       <div>
         <ul class="layui-row layui-col-space30 site-idea">
           <li class="layui-col-md8">
@@ -91,28 +100,24 @@
       </div>
     </div>
     <div class="footer footer-index">
-      <p>
-        Released under the <a href="/index.html">MIT License</a>.
-      </p>
-      <p>
-        Copyright © 2021-2022 layui-vue.com
-      </p>
+      <p>Released under the <a href="/index.html">MIT License</a>.</p>
+      <p>Copyright © 2021-2022 layui-vue.com</p>
     </div>
   </div>
 </template>
 
 <script>
-import { useI18n } from 'vue-i18n';
+import { useI18n } from "vue-i18n";
 export default {
   name: "index",
   setup() {
     const { t } = useI18n();
 
     return {
-      t
-    }
-  }
-}
+      t,
+    };
+  },
+};
 </script>
 <style>
 #app,
@@ -154,19 +159,29 @@ body {
 }
 .site-download a {
   position: relative;
-  padding: 0 50px 0 50px;
-  height: 60px;
-  line-height: 60px;
-  border-radius: 4px;
-  border: 1px solid rgba(60, 60, 60, .7);
-  font-size: 24px;
-  color: rgba(60, 60, 60, .7);
+  padding: 0 20px 0 20px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 6px;
+  background: #f1f1f1;
+  border: 1px solid #f1f1f1;
+  font-size: 16px;
+  color: #476582;
+  font-weight: 500;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   transition: all 0.5s;
   -webkit-transition: all 0.5s;
+  letter-spacing: 0.2px;
 }
 .site-download a:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 50px;
+  border-radius: 10px;
+}
+.site-download a:first-child {
+  background: #009688;
+  color: white;
+}
+.site-download a+a {
+  margin-left: 20px;
 }
 .site-zfj {
   padding-top: 25px;
@@ -218,13 +233,13 @@ body {
   bottom: -40px;
   left: 0;
   width: 100%;
-  color: rgba(60, 60, 60, .7);
+  color: rgba(60, 60, 60, 0.7);
   font-style: normal;
 }
 .site-version {
   position: relative;
   margin-top: 18px;
-  color: rgba(60, 60, 60, .7);
+  color: rgba(60, 60, 60, 0.7);
   font-size: 12px;
 }
 .site-version span {
@@ -234,7 +249,7 @@ body {
   font-style: normal;
 }
 .site-version a {
-  color: rgba(60, 60, 60, .7);
+  color: rgba(60, 60, 60, 0.7);
   text-decoration: none;
   margin-top: -4px;
 }
@@ -246,6 +261,11 @@ body {
   text-align: center;
   font-size: 0;
 }
+
+.site-container .layui-field-title {
+  border-top: 1px solid #d2d2d2;
+}
+
 .site-banner-other a {
   display: inline-block;
   vertical-align: middle;
@@ -254,8 +274,8 @@ body {
   margin: 0 6px;
   padding: 0 8px;
   border-radius: 4px;
-  color: rgba(60, 60, 60, .7);
-  border: 1px solid rgba(60, 60, 60, .7);
+  color: rgba(60, 60, 60, 0.7);
+  border: 1px solid rgba(60, 60, 60, 0.7);
   font-size: 14px;
   transition: all 0.5s;
   -webkit-transition: all 0.5s;
@@ -265,7 +285,7 @@ body {
   padding: 30px 15px;
   line-height: 30px;
   text-align: center;
-  color: rgba(60, 60, 60, .7);
+  color: rgba(60, 60, 60, 0.7);
   font-weight: 300;
   font-size: 13.6px;
   background: #f9f9f9;

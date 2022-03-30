@@ -68,6 +68,11 @@ const zhCN = [
             component: () => import("../../docs/zh-CN/guide/locale.md"),
             meta: { title: "语言" },
           },
+          {
+            path: "/zh-CN/guide/dark",
+            component: () => import("../../docs/zh-CN/guide/dark.md"),
+            meta: { title: "夜间" },
+          },
         ],
       },
       {
