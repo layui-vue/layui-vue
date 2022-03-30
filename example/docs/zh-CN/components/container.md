@@ -85,8 +85,7 @@ export default {
 
 :::
 
-::: comment
-:::
+ 
 
 ::: previousNext container
 :::

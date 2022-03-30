@@ -147,8 +147,7 @@
 
 :::
 
-::: comment
-:::
+ 
 
 ::: previousNext inputNumber
 :::

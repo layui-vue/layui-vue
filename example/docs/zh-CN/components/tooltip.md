@@ -128,8 +128,7 @@
 
 :::
 
-::: comment
-:::
+ 
 
 ::: previousNext tooltip
 :::

@@ -18,7 +18,7 @@ import {
   watch,
 } from "vue";
 
-export type tabPositionType = "top" | "bottom" | "left" | "right" ;
+export type tabPositionType = "top" | "bottom" | "left" | "right";
 
 export interface LayTabProps {
   type?: string;
@@ -46,7 +46,7 @@ const setItemInstanceBySlot = function (nodeList: VNode[]) {
 };
 
 const props = withDefaults(defineProps<LayTabProps>(), {
-  tabPosition: "top"
+  tabPosition: "top",
 });
 
 const emit = defineEmits(["update:modelValue", "change", "close"]);
@@ -98,36 +98,39 @@ provide("slotsChange", slotsChange);
 <template>
   <div
     class="layui-tab"
-    :class="[type ? 'layui-tab-' + type : '',
-     props.tabPosition ? `is-${tabPosition}` : '']"
+    :class="[
+      type ? 'layui-tab-' + type : '',
+      props.tabPosition ? `is-${tabPosition}` : '',
+    ]"
     v-if="active"
   >
     <div v-if="tabPosition === 'bottom'" class="layui-tab-content">
       <slot></slot>
     </div>
 
-    <div :class="[
-      'layui-tab-head',
-      props.tabPosition ? `is-${tabPosition}` : ''
-    ]">
-    <ul :class="[
-      'layui-tab-title',
-      props.tabPosition ? `is-${tabPosition}` : ''
-    ]">
-      <li
-        v-for="(children, index) in childrens"
-        :key="children"
-        :class="[children.props.id === active ? 'layui-this' : '',]"
-        @click.stop="change(children.props.id)"
+    <div
+      :class="['layui-tab-head', props.tabPosition ? `is-${tabPosition}` : '']"
+    >
+      <ul
+        :class="[
+          'layui-tab-title',
+          props.tabPosition ? `is-${tabPosition}` : '',
+        ]"
       >
-        {{ children.props.title }}
-        <i
-          v-if="allowClose && children.props.closable != false"
-          class="layui-icon layui-icon-close layui-unselect layui-tab-close"
-          @click.stop="close(index, children.props.id)"
-        ></i>
-      </li>
-    </ul>
+        <li
+          v-for="(children, index) in childrens"
+          :key="children"
+          :class="[children.props.id === active ? 'layui-this' : '']"
+          @click.stop="change(children.props.id)"
+        >
+          {{ children.props.title }}
+          <i
+            v-if="allowClose && children.props.closable != false"
+            class="layui-icon layui-icon-close layui-unselect layui-tab-close"
+            @click.stop="close(index, children.props.id)"
+          ></i>
+        </li>
+      </ul>
     </div>
 
     <div v-if="tabPosition != 'bottom'" class="layui-tab-content">

@@ -5,10 +5,10 @@
     :locales="locales"
     :themeVariable="themeVariable"
   >
-    <lay-layout class="layui-layout-document">
+    <lay-layout class="layui-layout-document" style="height:100%">
       <lay-header
-        ><lay-logo style="box-shadow: 0 0px 2px 0 rgba(0, 0, 0, 0.15)">
-          <img src="../assets/logo.png" />
+        ><lay-logo>
+          <img src="../assets/logo-png.png" /><span style="margin-left:12px;font-size:20px;color: rgba(0, 0, 0, 0.8);letter-spacing: -0.2px;opacity: 0.8;">layui - vue</span>
         </lay-logo>
         <ul
           class="layui-nav layui-layout-left"
@@ -31,11 +31,6 @@
             </router-link>
           </li>
           <li class="layui-nav-item">
-            <router-link to="/zh-CN/material">
-              {{ t("nav.material") }}
-            </router-link>
-          </li>
-          <li class="layui-nav-item">
             <lay-form>
               <lay-search :datas="menus" />
             </lay-form>
@@ -52,7 +47,6 @@
                   size="15px"
                   type="layui-icon-theme"
                   style="
-                    color: rgba(255, 255, 255, 0.7);
                     padding-left: 30px;
                     padding-right: 30px;
                   "
@@ -122,7 +116,7 @@
           </li>
           <li class="layui-nav-item">
             <a href="https://gitee.com/layui-vue/layui-vue">
-              <lay-icon type="layui-icon-fonts-code" size="15px"></lay-icon>
+              Gitee
             </a>
           </li>
           <li class="layui-nav-item">
@@ -141,11 +135,6 @@
                 @click="changeLocale('en_US')"
                 >英 文</lay-badge
               >
-            </a>
-          </li>
-          <li class="layui-nav-item">
-            <a href="https://gitee.com/layui-vue/layui-vue/issues">
-              <lay-icon type="layui-icon-chat" size="15px"></lay-icon>
             </a>
           </li>
           <li class="layui-nav-item">
@@ -298,6 +287,9 @@ export default {
     };
 
     provide('LayuiVueVersion', layuiVueVersion)
+    provide("isDark",isDark);
+    provide("theme",theme);
+
     return {
       t,
       menus,
@@ -320,8 +312,8 @@ export default {
   z-index: 99;
   width: 100%;
   position: fixed;
-  background: #393d49;
-  border-bottom: 1px solid #404553;
+  background: #ffffff;
+  border-bottom: 1px solid #EEEEEE;
 }
 
 .layui-layout-document > .layui-layout > .layui-side {
@@ -330,13 +322,7 @@ export default {
   margin-top: 60px;
   z-index: 99;
   height: calc(100% - 60px);
-  box-shadow: 2px 0 8px 0 rgb(29 35 41 / 5%);
-}
-
-.layui-layout-document .layui-body,
-.layui-layout-document .layui-menu,
-.layui-layout-document .lay-aside {
-  background-color: var(--global-back-color);
+  border-right: 1px solid #EEEEEE;
 }
 
 .layui-layout-document > .layui-layout > .layui-body {
@@ -347,11 +333,25 @@ export default {
   height: calc(100% - 60px);
 }
 
+.layui-layout-document .layui-header .layui-form-switch {
+  border: 1px solid rgba(60, 60, 60, .29);
+  background-color: #f1f1f1!important;
+}
+
+.layui-layout-document .layui-header .layui-nav .layui-nav-item > a,
+.layui-layout-document .layui-header .layui-nav .layui-nav-item > a:hover {
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.layui-layout-document .layui-header .layui-logo {
+  text-align: left;
+  padding-left: 15px;
+}
+
 .layui-logo img {
-  height: 31px;
-  width: 82px;
+  height: 45px;
   left: 15px;
-  top: 16px;
+  top: 0px;
 }
 
 .layui-header > .layui-nav {
@@ -361,13 +361,6 @@ export default {
 .layui-header .layui-local-badge {
   font-size: 12.4px;
   background: transparent;
-  color: rgba(255, 255, 255, 0.7);
-  border-color: rgba(255, 255, 255, 0.7);
-}
-
-.layui-header > .layui-local:hover {
-  color: white;
-  border-color: white;
 }
 
 .layui-menu-docs {

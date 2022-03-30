@@ -46,8 +46,7 @@ export default {
 
 :::
 
-::: comment
-:::
+ 
 
 ::: previousNext field
 :::

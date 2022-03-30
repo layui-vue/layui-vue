@@ -8,7 +8,6 @@ import createTitle from "./create-title";
 import createQuote from "./create-quote";
 import createDescribe from "./create-describe";
 import createTable from "./create-table";
-import createComment from "./create-comment";
 import createAnchor from "./create-anchor";
 import preWrapper from "./pre-wrapper";
 import previousNext from "./previous-next";
@@ -32,7 +31,6 @@ const plugins = [
         .use(...createQuote("quote", ""))
         .use(...createTitle("title", ""))
         .use(...createDescribe("describe", ""))
-        .use(...createComment("comment", ""))
         .use(...createAnchor("anchor", ""))
         .use(...previousNext("previousNext", ""));
     },
