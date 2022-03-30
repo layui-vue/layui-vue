@@ -203,7 +203,7 @@ body {
   color: #fff;
   color: #213547;
   font-size: 52px;
-  opacity: 0.9;
+  opacity: 0.82;
 }
 .web-font-desc {
   font-size: 76px;
