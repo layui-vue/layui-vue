@@ -45,12 +45,12 @@ const changeTheme = (theme: string) => {
       brightness: 100,
       contrast: 90,
       sepia: 0,
-     // darkSchemeTextColor: 'rgba(255, 255, 255, 0.9)',
-     // darkSchemeBackgroundColor: '#22272E'
+      // darkSchemeTextColor: 'rgba(255, 255, 255, 0.9)',
+      // darkSchemeBackgroundColor: '#22272E'
     }, {
-        invert: ['.scrollbar-thumb'],
+        invert: [],
         css: ``,
-        ignoreInlineStyle: ['.layui-colorpicker-trigger-span','layui-color-picker,div'],
+        ignoreInlineStyle: ['.layui-colorpicker-trigger-span','div.layui-color-picker *'],
         ignoreImageAnalysis: [],
         disableStyleSheetsProxy: false,
     });
