@@ -212,7 +212,7 @@
             </a>
           </li>
           <li class="layui-nav-item">
-            <a href="javascript:void(0)"> 0.4.4 </a>
+            <a href="javascript:void(0)"> {{ layuiVueVersion }} </a>
           </li>
         </ul>
       </lay-header>
@@ -221,12 +221,13 @@
   </lay-config-provider>
 </template>
 <script>
-import { ref, watch } from "vue";
+import { ref, watch, computed, provide } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import menu from "../view/utils/menus";
 import { useI18n } from "vue-i18n";
 import zh_CN from "../locales/zh_CN.ts";
 import en_US from "../locales/en_US.ts";
+import { getLayuiVueVersion }  from "../../../src/utils/getLayuiVueVersion.ts"
 
 export default {
   setup() {
@@ -266,6 +267,12 @@ export default {
       });
     });
 
+    const latestVer = getLayuiVueVersion();
+    const layuiVueVersion = computed(() => 
+      latestVer.value 
+      ?? import.meta.env.LAYUI_VUE_VERSION
+    )
+
     watch(isDark, () => {
       if (isDark.value) {
         theme.value = "dark";
@@ -290,6 +297,7 @@ export default {
       locale.value = lang;
     };
 
+    provide('LayuiVueVersion', layuiVueVersion)
     return {
       t,
       menus,
@@ -301,6 +309,7 @@ export default {
       handleClick,
       changeLocale,
       themeVariable,
+      layuiVueVersion,
     };
   },
 };

@@ -20,7 +20,7 @@
           >
         </div>
         <div class="site-version">
-          <span>{{ t('home.version') }}：v<cite class="site-showv">0.4.4</cite></span>
+          <span>{{ t('home.version') }}：v<cite class="site-showv">{{ layuiVueVersion }}</cite></span>
           <span
             ><router-link
               class="layui-inline site-down"
@@ -108,14 +108,17 @@
 </template>
 
 <script>
+import { inject } from "vue";
 import { useI18n } from 'vue-i18n';
 export default {
   name: "index",
   setup() {
     const { t } = useI18n();
+    const layuiVueVersion = inject('LayuiVueVersion')
 
     return {
-      t
+      t,
+      layuiVueVersion
     }
   }
 }
