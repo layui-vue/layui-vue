@@ -16,9 +16,10 @@
           <router-link class="layui-inline site-down" to="/zh-CN/guide">
             Get Started
           </router-link>
-          <router-link class="layui-inline site-down" to="/zh-CN/guide">
-            Switch Dark
-          </router-link>
+          <a class="layui-inline site-down" href="javascript:void(0);" @click="changeTheme">
+            
+            {{ isDark ? 'Turn Off' : 'Turn On'}}
+          </a>
         </div>
         <div class="site-version">
           <span
@@ -40,7 +41,7 @@
           rel="nofollow"
           class="site-star"
         >
-          <i class="layui-icon"></i> Star <cite id="getStars">716</cite>
+          <i class="layui-icon"></i> Star <cite id="getStars">741</cite>
         </a>
         <a
           href="https://gitee.com/layui-vue"
@@ -107,14 +108,30 @@
 </template>
 
 <script>
+import { inject, provide } from 'vue';
 import { useI18n } from "vue-i18n";
 export default {
   name: "index",
   setup() {
     const { t } = useI18n();
 
+    const isDark = inject("isDark");
+    const theme = inject("theme");
+
+    const changeTheme = () => {
+      isDark.value = !isDark.value;
+      if(theme.value === 'dark') {
+        theme.value = 'light';
+      } else {
+        theme.value = 'dark';
+      }
+    }
+
     return {
       t,
+      isDark,
+      theme,
+      changeTheme
     };
   },
 };
@@ -162,7 +179,7 @@ body {
   padding: 0 20px 0 20px;
   height: 40px;
   line-height: 40px;
-  border-radius: 6px;
+  border-radius: 4px;
   background: #f1f1f1;
   border: 1px solid #f1f1f1;
   font-size: 16px;

@@ -210,7 +210,7 @@
   </lay-config-provider>
 </template>
 <script>
-import { ref, watch } from "vue";
+import { provide, ref, watch } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import menu from "../view/utils/menus";
 import { useI18n } from "vue-i18n";
@@ -278,6 +278,9 @@ export default {
     const changeLocale = function (lang) {
       locale.value = lang;
     };
+
+    provide("isDark",isDark);
+    provide("theme",theme);
 
     return {
       t,
