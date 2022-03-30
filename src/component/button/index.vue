@@ -13,7 +13,7 @@ import {
   ButtonSize,
   ButtonType,
 } from "./interface";
-import { BooleanOrString, String } from "src/types";
+import { BooleanOrString, String } from "../../types";
 
 export interface LayButtonProps {
   type?: ButtonType;

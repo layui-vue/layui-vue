@@ -91,6 +91,11 @@ export default {
             title: '主题',
             subTitle: 'theme',
             path: '/zh-CN/guide/theme',
+          },{
+            id: 3,
+            title: '夜间',
+            subTitle: 'dark',
+            path: '/zh-CN/guide/dark',
           },
           {
             id: 3,

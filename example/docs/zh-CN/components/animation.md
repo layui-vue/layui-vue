@@ -102,8 +102,7 @@ export default {
 
 :::
 
-::: comment
-:::
+ 
 
 ::: previousNext animation
 :::

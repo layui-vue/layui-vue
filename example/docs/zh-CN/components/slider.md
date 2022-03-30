@@ -117,8 +117,7 @@ export default {
 | max  |  最大值     | `Number`                   |        -       |    -    |
 :::
 
-::: comment
-:::
+ 
 
 ::: previousNext slider
 :::

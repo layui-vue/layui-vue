@@ -320,8 +320,7 @@ export default {
 
 :::
 
-::: comment
-:::
+ 
 
 ::: previousNext modal
 :::

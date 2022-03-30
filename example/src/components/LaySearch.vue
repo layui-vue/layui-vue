@@ -31,8 +31,28 @@ onMounted(() => {
 :root {
   --docsearch-logo-color: var(--global-primary-color);
   --docsearch-primary-color: var(--global-primary-color);
-  --docsearch-searchbox-background: rgba(255, 255, 255, 0.05);
-  --docsearch-searchbox-focus-background: rgba(255, 255, 255, 0.05);
+  --docsearch-searchbox-background: rgba(255, 255, 255, 0.02);
+  --docsearch-searchbox-focus-background: rgba(255, 255, 255, 0.02);
   --docsearch-container-background: rgba(0, 0, 0, 0.1);
+}
+
+.DocSearch-Button,
+.DocSearch-Button:hover,
+.DocSearch-Button:active,
+.DocSearch-Button:focus {
+  border: 1px solid rgb(224, 224, 230);
+  box-shadow: none;
+}
+
+.DocSearch-Button-Key {
+  border: 1px solid rgba(60, 60, 60, .29);
+  background: transparent;
+  box-shadow: none;
+}
+
+.DocSearch-Button 
+.DocSearch-Search-Icon, 
+.DocSearch-Button-Placeholder {
+  color: rgba(0, 0, 0, 0.6);
 }
 </style>
