@@ -41,9 +41,18 @@ const changeLocales = (lang: string, locales: any, merge: boolean) => {
 const changeTheme = (theme: string) => {
   if (theme === "dark") {
     enableDarkMode({
+      mode: 1,
       brightness: 100,
       contrast: 90,
-      sepia: 10,
+      sepia: 0,
+      // darkSchemeTextColor: 'rgba(255, 255, 255, 0.9)',
+      // darkSchemeBackgroundColor: '#22272E'
+    }, {
+        invert: [],
+        css: ``,
+        ignoreInlineStyle: ['.layui-colorpicker-trigger-span','div.layui-color-picker *'],
+        ignoreImageAnalysis: [],
+        disableStyleSheetsProxy: false,
     });
   } else {
     disableDarkMode();
