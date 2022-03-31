@@ -23,16 +23,13 @@ export interface LaySubMenuProps {
 }
 
 const slots = useSlots();
-
 const props = defineProps<LaySubMenuProps>();
 
 const isTree: Ref<boolean> = inject("isTree") as Ref<boolean>;
 const selectedKey: Ref<string> = inject("selectedKey") as Ref<string>;
 const openKeys: Ref<string[]> = inject("openKeys") as Ref<string[]>;
 const isCollapse: Ref<boolean> = inject("isCollapse") as Ref<boolean>;
-const isCollapseTransition: Ref<boolean> = inject(
-  "isCollapseTransition"
-) as Ref<boolean>;
+const isCollapseTransition: Ref<boolean> = inject("isCollapseTransition") as Ref<boolean>;
 
 const isOpen = computed(() => {
   return openKeys.value.includes(props.id);

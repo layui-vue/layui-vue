@@ -41,7 +41,7 @@ const emit = defineEmits([
   "change",
   "row-double",
   "update:selectedKeys",
-  "contextmenu"
+  "contextmenu",
 ]);
 
 const slot = useSlots();

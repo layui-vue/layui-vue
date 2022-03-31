@@ -20,6 +20,7 @@
           <li>[修复] transfer 组件 showSearch 属性类型警告。</li>
           <li>[修复] upload 组件 number 属性必填警告。</li>
           <li>[修复] variable 全局变量重复导入的问题。</li>
+          <li>[修复] menu 组件 openKeys 属性失效。</li>
           <li>[支持] icon 列表复制。</li>
           <li>[支持] 夜间模式。</li>
         </ul> 
