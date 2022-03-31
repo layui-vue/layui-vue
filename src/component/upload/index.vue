@@ -20,7 +20,7 @@ export interface LayUploadProps {
   field?: string;
   size?: number;
   multiple?: boolean;
-  number: number;
+  number?: number;
   drag?: boolean;
 }
 
