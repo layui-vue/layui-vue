@@ -257,10 +257,17 @@ export default {
     });
 
     const latestVer = getLayuiVueVersion();
-    const layuiVueVersion = computed(() => 
-      latestVer.value 
-      ?? import.meta.env.LAYUI_VUE_VERSION
-    )
+    const layuiVueVersion = computed(() => {
+      if(!latestVer.value){
+        const ver = import.meta.env.LAYUI_VUE_VERSION;
+        const idx = ver.indexOf("-");
+        const isPreRelease = (idx != -1);
+        if(isPreRelease){
+          latestVer.value = ver.substring(0, idx)
+        }
+      }
+      return latestVer.value;
+    })
 
     watch(isDark, () => {
       if (isDark.value) {
@@ -286,9 +293,9 @@ export default {
       locale.value = lang;
     };
 
-    provide('LayuiVueVersion', layuiVueVersion)
     provide("isDark",isDark);
     provide("theme",theme);
+    provide('LayuiVueVersion', layuiVueVersion);
 
     return {
       t,
