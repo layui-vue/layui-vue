@@ -14,7 +14,7 @@
     <ul> 
       <a name="0-4-5"> </a> 
       <li> 
-        <h3>0.4.5 <span class="layui-badge-rim">2022-03-29</span></h3> 
+        <h3>0.4.5 <span class="layui-badge-rim">2022-04-01</span></h3> 
         <ul>
           <li>[新增] switch 组件 onswitch-value 属性。</li>
           <li>[新增] switch 组件 unswitch-value 属性。</li>
@@ -23,6 +23,7 @@
           <li>[修复] upload 组件 number 属性必填警告。</li>
           <li>[修复] variable 全局变量重复导入的问题。</li>
           <li>[修复] menu 组件 openKeys 属性失效。</li>
+          <li>[支持] animation 点击演示。</li>
           <li>[支持] icon 列表复制。</li>
           <li>[支持] 夜间模式。</li>
         </ul> 
@@ -31,7 +32,7 @@
     <ul> 
       <a name="0-4-4"> </a> 
       <li> 
-        <h3>0.4.5 <span class="layui-badge-rim">2022-04-01</span></h3> 
+        <h3>0.4.4 <span class="layui-badge-rim">2022-03-29</span></h3> 
         <ul>
           <li>[新增] button 组件 prefix-icon 属性。</li>
           <li>[新增] button 组件 suffix-icon 属性。</li>

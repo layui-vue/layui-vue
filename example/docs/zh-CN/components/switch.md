@@ -182,8 +182,10 @@ export default {
 | name          | 原生 name 属性 | --             |
 | v-model       | 是否启用       | `true` `false` |
 | disabled      | 禁用           | `true` `false` |
-| active-text   | 启用描述       | `启动`         |
-| inactive-text | 禁用描述       | `禁用`         |
+| onswitch-text | 启用描述       | `启动`        |
+| unswitch-text | 禁用描述       | `禁用`         |
+| onswitch-value | 启用值       | `true`        |
+| unswitch-value | 禁用值       | `false`         |
 
 :::
 
@@ -199,6 +201,16 @@ export default {
 :::
 
  
+::: title Switch 插槽
+:::
+
+::: table
+
+| 属性   | 描述     | 参数           |
+| ------ | -------- | ---------------- |
+| onswitch-icon | 启用图标 | -- |
+| unswitch-icon | 禁用图标 | -- |
+:::
 
 ::: previousNext switch
 :::

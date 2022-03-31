@@ -32,7 +32,7 @@ const isActive = computed({
     return props.modelValue === props.onswitchValue;
   },
   set(val) {
-    if(val) {
+    if (val) {
       emit("change", props.onswitchValue);
       emit("update:modelValue", props.onswitchValue);
     } else {
