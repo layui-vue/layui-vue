@@ -8,12 +8,12 @@ export default {
 import "./index.less";
 import LayScroll from "../scroll";
 import { Ref, ref, useSlots, watch } from "vue";
-import { Recordable } from "../../types";
+import { BooleanOrString, Recordable } from "../../types";
 
 export interface LayTransferProps {
   id?: string;
   title?: string[];
-  showSearch?: boolean;
+  showSearch?: BooleanOrString;
   dataSource: Recordable[];
 }
 

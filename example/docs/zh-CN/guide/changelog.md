@@ -17,9 +17,11 @@
         <h3>0.4.4 <span class="layui-badge-rim">2022-03-29</span></h3> 
         <ul>
           <li>[新增] tab 组件 position 属性, 不同方向的选项卡标题。</li>
-          <li>[修复] variable 全局变量重复导入的问题</li>
+          <li>[修复] transfer 组件 showSearch 属性类型警告。</li>
+          <li>[修复] upload 组件 number 属性必填警告。</li>
+          <li>[修复] variable 全局变量重复导入的问题。</li>
           <li>[支持] icon 列表复制。</li>
-          <li>[支持] 夜间模式</li>
+          <li>[支持] 夜间模式。</li>
         </ul> 
       </li>
     </ul>
