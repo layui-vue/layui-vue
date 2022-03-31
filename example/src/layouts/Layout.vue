@@ -257,17 +257,10 @@ export default {
     });
 
     const latestVer = getLayuiVueVersion();
-    const layuiVueVersion = computed(() => {
-      if(!latestVer.value){
-        const ver = import.meta.env.LAYUI_VUE_VERSION;
-        const idx = ver.indexOf("-");
-        const isPreRelease = (idx != -1);
-        if(isPreRelease){
-          latestVer.value = ver.substring(0, idx)
-        }
-      }
-      return latestVer.value;
-    })
+    const layuiVueVersion = computed(() => 
+      latestVer.value 
+      ?? import.meta.env.LAYUI_VUE_VERSION
+    )
 
     watch(isDark, () => {
       if (isDark.value) {
