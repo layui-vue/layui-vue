@@ -42,7 +42,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-tab type="brief" v-model="current2" tabPosition = "right">
+  <lay-tab type="brief" v-model="current2">
     <lay-tab-item title="选项一" id="1"><div style="padding:20px">选项一</div></lay-tab-item>
     <lay-tab-item title="选项二" id="2"><div style="padding:20px">选项二</div></lay-tab-item>
   </lay-tab>
@@ -236,7 +236,12 @@ export default {
       <lay-button type="default" size="sm" @click = "tabPosition = 'top'">top</lay-button>
       <lay-button type="default" size="sm" @click = "tabPosition = 'bottom'">bottom</lay-button>
   </lay-button-group>
-  <lay-tab type="brief" v-model="current7" :tabPosition = "tabPosition">
+  <lay-button-group>
+      <lay-button type="default" size="sm" @click = "tabType = ''">默认</lay-button>
+      <lay-button type="default" size="sm" @click = "tabType = 'brief'">简约</lay-button>
+      <lay-button type="default" size="sm" @click = "tabType = 'card'">卡片</lay-button>
+  </lay-button-group>
+  <lay-tab :type="tabType" v-model="current7" :tabPosition = "tabPosition">
     <lay-tab-item title="选项一" id="1"><div style="padding:20px">选项一</div></lay-tab-item>
     <lay-tab-item title="选项二" id="2"><div style="padding:20px">选项二</div></lay-tab-item>
     <lay-tab-item title="选项三" id="3"><div style="padding:20px">选项三</div></lay-tab-item>
@@ -252,10 +257,12 @@ export default {
 
     const current7 = ref("1");
     const tabPosition = ref("left");
+    const tabType = ref("brief");
 
     return {
       current2,
-      tabPosition
+      tabPosition,
+      tabType
     }
   }
 }

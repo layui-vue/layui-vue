@@ -76,6 +76,7 @@
   border: none;
   border-radius: 0;
   border-right: 2px solid @global-checked-color;
+  margin-left: 1px;
 }
 
 .layui-tab-brief > .layui-tab-head.is-right > .layui-tab-more li.layui-this:after,
@@ -83,15 +84,16 @@
   border: none;
   border-radius: 0;
   border-left: 2px solid @global-checked-color;
+  margin-right: 1px;
 }
 
-// .layui-tab-title.is-right li{
-//   border-left: 2px solid @global-neutral-color-6;
-// }
+.layui-tab-brief > .layui-tab-head.is-right > .layui-tab-title{
+  border-left: 1px solid @global-neutral-color-3;
+}
 
-// .layui-tab-title.is-left li{
-//   border-right: 2px solid @global-neutral-color-6;
-// }
+.layui-tab-brief > .layui-tab-head.is-left > .layui-tab-title{
+  border-right: 1px solid @global-neutral-color-3;
+}
 
 /** 位置结束*/
 
@@ -118,6 +120,16 @@
   border-radius: 2px 2px 0 0;
   box-sizing: border-box;
   pointer-events: none;
+}
+
+.layui-tab-title.is-left .layui-this:after {
+  border: 1px solid @global-neutral-color-3;
+  border-right-color: #FFF;
+}
+
+.layui-tab-title.is-right .layui-this:after {
+  border: 1px solid @global-neutral-color-3;
+  border-left-color: #FFF;
 }
 
 .layui-tab-bar {
@@ -236,14 +248,31 @@
   margin-left: -1px;
 }
 
+.layui-tab-card > .layui-tab-head > .layui-tab-title.is-left li,
+.layui-tab-card > .layui-tab-head > .layui-tab-title.is-right li{
+  margin-top: -1px;
+  margin-bottom: -1px;
+}
+
 .layui-tab-card > .layui-tab-head > .layui-tab-title .layui-this {
   background-color: #fff;
 }
 
-.layui-tab-card > .layui-tab-head > .layui-tab-title .layui-this:after {
-  border-top: none;
-  border-width: 1px;
+.layui-tab-card > .layui-tab-head > .layui-tab-title.is-top .layui-this:after {
+  border: 1px solid @global-neutral-color-3;
   border-bottom-color: #fff;
+}
+.layui-tab-card > .layui-tab-head > .layui-tab-title.is-bottom .layui-this:after {
+  border: 1px solid @global-neutral-color-3;
+  border-top-color: #fff;
+}
+.layui-tab-card > .layui-tab-head > .layui-tab-title.is-left .layui-this:after {
+  border: 1px solid @global-neutral-color-3;
+  border-right-color: #fff;
+}
+.layui-tab-card > .layui-tab-head > .layui-tab-title.is-right .layui-this:after {
+  border: 1px solid @global-neutral-color-3;
+  border-left-color: #fff;
 }
 
 .layui-tab-card > .layui-tab-head > .layui-tab-title .layui-tab-bar {
