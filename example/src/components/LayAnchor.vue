@@ -204,16 +204,16 @@ const throttle = (func: Function, wait: number) => {
   list-style: none;
   &:hover {
     background-color: #f6f6f6 !important;
-    color: #5fb878;
+    color: var(--global-checked-color);
   }
   &:active {
     background-color: #f6f6f6 !important;
-    color: #89d89f;
+    color: var(--global-checked-color);
   }
   &.active {
     background-color: #f6f6f6 !important;
     * {
-      color: #5fb878 !important;
+      color: var(--global-checked-color);
     }
   }
 }

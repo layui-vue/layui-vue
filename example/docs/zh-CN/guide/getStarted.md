@@ -81,7 +81,7 @@ app.mount('#app')
 ::: describe 根据不同的 CDN 提供商有不同的引入方式， 根据不同的 CDN 提供商有不同的引入方式， 我们在这里以 unpkg 举例。
 :::
 
-```
+```html
 <!DOCTYPE html>
 <html lang="en">
 
