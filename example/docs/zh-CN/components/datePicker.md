@@ -40,7 +40,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-date-picker type="datetime" v-model="endTime"></lay-date-picker>
+  <lay-date-picker type="datetime" v-model="endTime2"></lay-date-picker>
 </template>
 
 <script>
@@ -49,10 +49,10 @@ import { ref } from 'vue'
 export default {
   setup() {
 
-   const endTime = ref("2022-03-04 17:35:00");
+   const endTime2 = ref("2022-03-04 17:35:00");
 
     return {
-      endTime
+      endTime2
     }
   }
 }
@@ -66,7 +66,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-date-picker type="year" v-model="endTime"></lay-date-picker>
+  <lay-date-picker type="year" v-model="endTime3"></lay-date-picker>
 </template>
 
 <script>
@@ -75,10 +75,10 @@ import { ref } from 'vue'
 export default {
   setup() {
 
-   const endTime = ref("2022-03-04 17:35:00");
+   const endTime3 = ref("2022-03-04 17:35:00");
 
     return {
-      endTime
+      endTime3
     }
   }
 }
@@ -92,7 +92,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-date-picker type="month" v-model="endTime"></lay-date-picker>
+  <lay-date-picker type="month" v-model="endTime4"></lay-date-picker>
 </template>
 
 <script>
@@ -101,10 +101,10 @@ import { ref } from 'vue'
 export default {
   setup() {
 
-   const endTime = ref("2022-03-04 17:35:00");
+   const endTime4 = ref("2022-03-04 17:35:00");
 
     return {
-      endTime
+      endTime4
     }
   }
 }
