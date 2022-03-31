@@ -8,7 +8,7 @@ export default {
 import "./index.less";
 import { useSlots } from "vue";
 import { useI18n } from "vue-i18n";
-import { Boolean, String } from 'src/types';
+import { Boolean, String } from "src/types";
 
 const { t } = useI18n();
 const slots = useSlots();
@@ -25,7 +25,13 @@ export interface LayInputProps {
 
 const props = withDefaults(defineProps<LayInputProps>(), {});
 
-const emit = defineEmits(["update:modelValue", "input", "change", "focus", "blur"]);
+const emit = defineEmits([
+  "update:modelValue",
+  "input",
+  "change",
+  "focus",
+  "blur",
+]);
 
 const onInput = function (event: InputEvent) {
   const inputElement = event.target as HTMLInputElement;
@@ -43,7 +49,7 @@ const onFocus = (event: FocusEvent) => {
 
 const onChange = () => {
   emit("change");
-}
+};
 
 const onBlur = () => {
   emit("blur");

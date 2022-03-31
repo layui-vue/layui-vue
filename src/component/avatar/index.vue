@@ -9,13 +9,13 @@ import "./index.less";
 
 export interface LayAvatarProps {
   src?: string;
-  size?: 'xs' | 'sm' | 'md' | 'lg';
+  size?: "xs" | "sm" | "md" | "lg";
   radius?: boolean;
 }
 
 const props = withDefaults(defineProps<LayAvatarProps>(), {
-  size: 'md',
-  radius: false
+  size: "md",
+  radius: false,
 });
 </script>
 

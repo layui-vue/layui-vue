@@ -6,8 +6,8 @@ export default {
 
 <script setup lang="ts">
 import "./index.less";
-import {computed} from "vue";
-import {PanelShadow} from "./interface";
+import { computed } from "vue";
+import { PanelShadow } from "./interface";
 
 export interface LayPanelProps {
   shadow?: PanelShadow;
