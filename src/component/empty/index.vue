@@ -5,12 +5,13 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { withDefaults } from "vue";
 import "./index.less";
+import { withDefaults } from "vue";
+import { String } from 'src/types';
 
 export interface LayEmptyProps {
-  description?: string;
-  image?: string;
+  description?: String;
+  image?: String;
 }
 
 const props = withDefaults(defineProps<LayEmptyProps>(), {

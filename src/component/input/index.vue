@@ -6,25 +6,26 @@ export default {
 
 <script setup lang="ts">
 import "./index.less";
+import { useSlots } from "vue";
 import { useI18n } from "vue-i18n";
-import { computed, useSlots } from "vue-demi";
+import { Boolean, String } from 'src/types';
 
 const { t } = useI18n();
 const slots = useSlots();
 
 export interface LayInputProps {
-  name?: string;
-  type?: string;
-  value?: string;
-  disabled?: boolean;
-  modelValue?: string;
-  placeholder?: string;
-  allowClear?: boolean;
+  name?: String;
+  type?: String;
+  value?: String;
+  disabled?: Boolean;
+  modelValue?: String;
+  placeholder?: String;
+  allowClear?: Boolean;
 }
 
 const props = withDefaults(defineProps<LayInputProps>(), {});
 
-const emit = defineEmits(["update:modelValue", "input", "focus", "blur"]);
+const emit = defineEmits(["update:modelValue", "input", "change", "focus", "blur"]);
 
 const onInput = function (event: InputEvent) {
   const inputElement = event.target as HTMLInputElement;
@@ -32,16 +33,20 @@ const onInput = function (event: InputEvent) {
   emit("input", event);
 };
 
-const onFocus = function (event: FocusEvent) {
+const onClear = () => {
+  emit("update:modelValue", "");
+};
+
+const onFocus = (event: FocusEvent) => {
   emit("focus", event);
 };
 
-const onBlur = function () {
-  emit("blur");
-};
+const onChange = () => {
+  emit("change");
+}
 
-const clear = () => {
-  emit("update:modelValue", "");
+const onBlur = () => {
+  emit("blur");
 };
 </script>
 
@@ -61,12 +66,13 @@ const clear = () => {
       @input="onInput"
       @focus="onFocus"
       @blur="onBlur"
+      @change="onChange"
     />
     <span class="layui-input-suffix" v-if="slots.suffix">
       <slot name="suffix"></slot>
     </span>
     <span class="layui-input-clear" v-if="allowClear">
-      <lay-icon type="layui-icon-close-fill" @click="clear"></lay-icon>
+      <lay-icon type="layui-icon-close-fill" @click="onClear"></lay-icon>
     </span>
   </div>
 </template>

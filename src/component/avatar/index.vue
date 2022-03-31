@@ -8,12 +8,15 @@ export default {
 import "./index.less";
 
 export interface LayAvatarProps {
-  src?: String;
-  size?: string;
+  src?: string;
+  size?: 'xs' | 'sm' | 'md' | 'lg';
   radius?: boolean;
 }
 
-const props = withDefaults(defineProps<LayAvatarProps>(), {});
+const props = withDefaults(defineProps<LayAvatarProps>(), {
+  size: 'md',
+  radius: false
+});
 </script>
 
 <template>

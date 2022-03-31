@@ -6,24 +6,24 @@ export default {
 
 <script setup lang="ts">
 import "./index.less";
-import { provide, ref, watch } from "vue";
+import { provide, ref } from "vue";
 import { onClickOutside } from "@vueuse/core";
+import { DropdownTrigger } from "./interface";
 
 export interface LayDropdownProps {
-  trigger?: string;
+  trigger?: DropdownTrigger;
 }
-
-const dropdownRef = ref<null | HTMLElement>(null);
 
 const props = withDefaults(defineProps<LayDropdownProps>(), {
   trigger: "click",
 });
 
+const openState = ref(false);
+const dropdownRef = ref<null | HTMLElement>(null);
+
 onClickOutside(dropdownRef, (event) => {
   openState.value = false;
 });
-
-const openState = ref(false);
 
 const open = function () {
   openState.value = true;
