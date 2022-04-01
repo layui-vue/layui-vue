@@ -26,7 +26,7 @@ export interface LayButtonProps {
   loading?: BooleanOrString;
   disabled?: BooleanOrString;
   nativeType?: ButtonNativeType;
-  borderStyle: String;
+  borderStyle?: String;
 }
 
 const props = withDefaults(defineProps<LayButtonProps>(), {

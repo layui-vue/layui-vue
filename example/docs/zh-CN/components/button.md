@@ -37,7 +37,7 @@ export default {
 ::: title 简约按钮
 :::
 
-::: demo 使用 `border` 属性设置边框主题
+::: demo 使用 `border` 属性设置边框颜色
 
 <template>
   <lay-button>原始按钮</lay-button>
@@ -64,7 +64,7 @@ export default {
 ::: title 不同边框
 :::
 
-::: demo 使用 `border` 属性设置边框主题
+::: demo 使用 `border-style` 属性设置边框样式
 
 <template>
   <lay-button border-style="dashed">原始按钮</lay-button>
@@ -332,6 +332,7 @@ export default {
 | native-type | 原生类型 | string  | `button`  | `button` `submit` `reset`          |
 | prefix-icon | 前置图标 | string  | --   | 内置 icon 集                     |
 | suffix-icon | 后置图标 | string  | --   | 内置 icon 集          |
+| border-style | 边框样式 | string  | `soild`   | border-style css  |
 
 :::
 

@@ -1,7 +1,7 @@
 <template>
   <div>
     <lay-dropdown ref="dropdownRef">
-      <lay-input :name="name" :value="dateValue" readonly>
+      <lay-input :name="name" :value="dateValue || modelValue" readonly>
         <template #prefix>
           <lay-icon type="layui-icon-date"></lay-icon>
         </template>
@@ -18,15 +18,14 @@
                 class="layui-icon laydate-icon laydate-prev-y"
                 @click="changeYearOrMonth('year', -1)"
                 ></i
-              >
-              <i
+              ><i
                 class="layui-icon laydate-icon laydate-prev-m"
                 @click="changeYearOrMonth('month', -1)"
                 ></i
               >
               <div class="laydate-set-ym">
-                <span @click="showYearPanel">{{ currentYear }} 年</span>
-                <span @click="showPane = 'month'"
+                <span @click="showYearPanel">{{ currentYear }} 年</span
+                ><span @click="showPane = 'month'"
                   >{{ currentMonth + 1 }} 月</span
                 >
               </div>
@@ -34,8 +33,7 @@
                 class="layui-icon laydate-icon laydate-next-m"
                 @click="changeYearOrMonth('month', 1)"
                 ></i
-              >
-              <i
+              ><i
                 class="layui-icon laydate-icon laydate-next-y"
                 @click="changeYearOrMonth('year', 1)"
                 ></i
@@ -87,11 +85,9 @@
             <div class="laydate-footer-btns">
               <span lay-type="clear" class="laydate-btns-clear" @click="clear"
                 >清空</span
-              >
-              <span lay-type="now" class="laydate-btns-now" @click="now"
+              ><span lay-type="now" class="laydate-btns-now" @click="now"
                 >现在</span
-              >
-              <span lay-type="confirm" class="laydate-btns-confirm" @click="ok"
+              ><span lay-type="confirm" class="laydate-btns-confirm" @click="ok"
                 >确定</span
               >
             </div>
@@ -132,11 +128,9 @@
             <div class="laydate-footer-btns">
               <span lay-type="clear" class="laydate-btns-clear" @click="clear"
                 >清空</span
-              >
-              <span lay-type="now" class="laydate-btns-now" @click="now"
+              ><span lay-type="now" class="laydate-btns-now" @click="now"
                 >现在</span
-              >
-              <span lay-type="confirm" class="laydate-btns-confirm" @click="ok"
+              ><span lay-type="confirm" class="laydate-btns-confirm" @click="ok"
                 >确定</span
               >
             </div>
@@ -193,11 +187,9 @@
             <div class="laydate-footer-btns">
               <span lay-type="clear" class="laydate-btns-clear" @click="clear"
                 >清空</span
-              >
-              <span lay-type="now" class="laydate-btns-now" @click="now"
+              ><span lay-type="now" class="laydate-btns-now" @click="now"
                 >现在</span
-              >
-              <span lay-type="confirm" class="laydate-btns-confirm" @click="ok"
+              ><span lay-type="confirm" class="laydate-btns-confirm" @click="ok"
                 >确定</span
               >
             </div>
@@ -237,17 +229,15 @@
             </div>
           </div>
           <div class="layui-laydate-footer">
-            <span @click="showPane = 'date'" class="laydate-btns-time"
+            <span @click="showPane = 'date'" v-if="type!='time'" class="laydate-btns-time"
               >返回日期</span
             >
             <div class="laydate-footer-btns">
               <span lay-type="clear" class="laydate-btns-clear" @click="clear"
                 >清空</span
-              >
-              <span lay-type="now" class="laydate-btns-now" @click="now"
+              ><span lay-type="now" class="laydate-btns-now" @click="now"
                 >现在</span
-              >
-              <span lay-type="confirm" class="laydate-btns-confirm" @click="ok"
+              ><span lay-type="confirm" class="laydate-btns-confirm" @click="ok"
                 >确定</span
               >
             </div>
@@ -259,7 +249,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, nextTick, ref, watch, defineProps, defineEmits } from "vue";
+import { computed, nextTick, ref, watch, defineProps, defineEmits, onMounted } from "vue";
 
 import moment from "moment";
 import LayIcon from "../icon/index";
@@ -319,14 +309,7 @@ watch(
   },
   { immediate: true }
 );
-// 格式化
-const fmtMap = {
-  date: "YYYY-MM-DD",
-  datetime: "YYYY-MM-DD hh:mm:ss",
-  year: "YYYY",
-  month: "MM",
-  "": "",
-};
+
 // 计算结果日期
 const dateValue = computed<string>(() => {
   if (currentDay.value === -1) {
@@ -334,9 +317,27 @@ const dateValue = computed<string>(() => {
     return "";
   }
   let momentVal;
-  let momentObj = moment(props.modelValue || currentDay.value);
-  momentVal = momentObj.format(fmtMap[props.type]);
-  if (momentVal != props.modelValue) $emits("update:modelValue", momentVal);
+  let momentObj = moment(currentDay.value).hour(hms.value.hh).minute(hms.value.mm).second(hms.value.ss);
+  switch (props.type) {
+    case "date":
+      momentVal = momentObj.format("YYYY-MM-DD");
+      break;
+    case "datetime":
+      momentVal = momentObj.format("YYYY-MM-DD HH:mm:ss");
+      break;
+    case "year":
+      momentVal = momentObj.format("YYYY");
+      break;
+    case "month":
+      momentVal = momentObj.format("MM");
+      break;
+    case "time":
+      momentVal = momentObj.format("HH:mm:ss");
+      break;
+    default:
+      momentVal = momentObj.format();
+  }
+  $emits("update:modelValue", momentVal);
   return momentVal;
 });
 
@@ -400,6 +401,9 @@ const ok = () => {
 // 现在时间
 const now = () => {
   currentDay.value = moment().valueOf();
+  hms.value.hh = moment().hour();
+  hms.value.mm = moment().minute();
+  hms.value.ss = moment().second();
 };
 
 // 清空日期
@@ -466,4 +470,10 @@ const choseTime = (e: any) => {
     e.target.scrollIntoView({ behavior: "smooth" });
   }
 };
+
+onMounted(() => {
+  hms.value.hh = moment(currentDay.value).hour();
+  hms.value.mm = moment(currentDay.value).minute();
+  hms.value.ss = moment(currentDay.value).second();
+})
 </script>
