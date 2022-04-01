@@ -22,10 +22,9 @@
           </a>
         </div>
         <div class="site-version">
-          <span>{{ t('home.version') }}：v<cite class="site-showv">{{ layuiVueVersion }}</cite></span>
           <span
             >{{ t("home.version") }}：<cite class="site-showv"
-              >1.0.0</cite
+              >{{ layuiVueVersion }}</cite
             ></span
           >
           <span
