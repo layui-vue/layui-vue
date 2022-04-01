@@ -5,6 +5,7 @@
   <lay-timeline-item title="尾版本号：日常问题更新。" simple></lay-timeline-item>
   <lay-timeline-item title="次版本号：带有新特性的向下兼容的版本。" simple></lay-timeline-item>
   <lay-timeline-item title="主版本号：含有破坏性更新和新特性，不在发布周期内。" simple></lay-timeline-item>
+  <lay-timeline-item title="版本说明：1.0.0 正式 1.0.0-beta.* 公测 1.0.0-alpha.* 内测。" simple></lay-timeline-item>
 </lay-timeline>
 
 ::: demo
@@ -14,7 +15,7 @@
     <ul> 
       <a name="1-0-0"> </a> 
       <li> 
-        <h3>1.0.0 <span class="layui-badge-rim">2022-04-01</span></h3> 
+        <h3>1.0.0 <span class="layui-badge-rim">2022-04-02</span></h3> 
         <ul>
           <li>[重要] 修订 version 为 1.0.0。</li>
           <li>[新增] empty 组件 extra 插槽, 支持扩展内容。</li>
@@ -25,7 +26,6 @@
           <li>[新增] date-picker 组件 time 属性, 支持 时 分 秒 选择。</li>
           <li>[新增] date-picker 组件 yearmonth 属性, 支持 年 月 选择。</li>
           <li>[新增] tab 组件 position 属性, 用于支持不同方向的选项卡标题。</li>
-          <li>[新增] button 组件 border-style 属性, 可选值 dashed dotted 等。</li>
           <li>[修复] date-picker 组件 type 属性为 time 时, v-model 默认不生效。</li>
           <li>[修复] date-picker 组件 12 小时制为 24 小时制。</li>
           <li>[修复] transfer 组件 showSearch 属性类型警告。</li>              
