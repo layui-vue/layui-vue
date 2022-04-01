@@ -27,5 +27,8 @@ const props = withDefaults(defineProps<LayEmptyProps>(), {
     <div class="layui-empty-description">
       {{ description }}
     </div>
+    <div class="layui-empty-extra">
+      <slot name="extra"></slot>  
+    </div> 
   </div>
 </template>

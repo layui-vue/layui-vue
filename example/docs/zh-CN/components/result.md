@@ -53,6 +53,34 @@ export default {
 
 :::
 
+::: title 完整
+:::
+
+::: demo 使用 `lay-result` 标签, 创建一个结果页面
+
+<template>
+  <lay-result status="failure">
+    <template #extra>
+      <lay-button type="primary">再来一次</lay-button>
+      <lay-button >返回首页</lay-button>
+    </template>
+  </lay-result>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    return {
+    }
+  }
+}
+</script>
+
+:::
+
 ::: title Result 属性
 :::
 
@@ -74,7 +102,7 @@ export default {
 | 属性        | 描述     | 可选值 |
 | ----------- | -------- | ------ |
 | content | 内容 | --     |
-| action | 操作 | --     |
+| extra | 扩展 | --     |
 
 :::
 

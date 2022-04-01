@@ -14,7 +14,7 @@
 
 <template>
   <lay-exception status="401" title="401" describe="暂无相关权限">
-      <template #action>
+      <template #extra>
         <lay-button>刷新</lay-button>
         <lay-button type="primary">返回</lay-button>
     </template>
@@ -42,7 +42,7 @@ export default {
 
 <template>
   <lay-exception status="403" title="403" describe="暂无相关权限">
-      <template #action>
+      <template #extra>
         <lay-button>刷新</lay-button>
         <lay-button type="primary">返回</lay-button>
     </template>
@@ -70,7 +70,7 @@ export default {
 
 <template>
   <lay-exception status="404" title="404" describe="跳转页面失败">
-    <template #action>
+    <template #extra>
         <lay-button>刷新</lay-button>
         <lay-button type="primary">返回</lay-button>
     </template>
@@ -99,7 +99,7 @@ export default {
 
 <template>
   <lay-exception status="500" title="500" describe="服务发生错误">
-      <template #action>
+      <template #extra>
         <lay-button>刷新</lay-button>
         <lay-button type="primary">返回</lay-button>
     </template>
@@ -140,7 +140,7 @@ export default {
 
 | 属性        | 描述     | 可选值 |
 | ----------- | -------- | ------ |
-| action | 操作 | --     |
+| extra | 操作 | --     |
 
 :::
 

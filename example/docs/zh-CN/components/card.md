@@ -217,7 +217,7 @@ export default {
 | default | 默认插槽 | --     |
 | header  | 头部插槽 | --     |
 | body    | 内容插槽 | --     |
-
+| extra   | 扩展插槽 | --     |
 :::
 
  

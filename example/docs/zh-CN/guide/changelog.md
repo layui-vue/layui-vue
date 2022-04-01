@@ -17,6 +17,9 @@
         <h3>1.0.0 <span class="layui-badge-rim">2022-04-01</span></h3> 
         <ul>
           <li>[重要] 修订 version 为 1.0.0。</li>
+          <li>[新增] empty 组件 extra 插槽, 支持扩展内容。</li>
+          <li>[新增] result 组件 extra 插槽, 支持扩展内容。</li>
+          <li>[新增] exception 组件 extra 插槽, 支持扩展内容。</li>
           <li>[新增] switch 组件 onswitch-value 属性, 默认为 true。</li>
           <li>[新增] switch 组件 unswitch-value 属性, 默认为 false。</li>
           <li>[新增] date-picker 组件 time 属性, 支持 时 分 秒 选择。</li>

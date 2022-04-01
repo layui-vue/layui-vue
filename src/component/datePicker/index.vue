@@ -255,14 +255,7 @@
 </template>
 
 <script lang="ts" setup>
-import {
-  ref,
-  watch,
-  computed,
-  defineProps,
-  defineEmits,
-  onMounted,
-} from "vue";
+import { ref, watch, computed, defineProps, defineEmits, onMounted } from "vue";
 
 import moment from "moment";
 import LayIcon from "../icon/index";
@@ -300,7 +293,11 @@ const MONTH_NAME = [
   "12月",
 ];
 
-const hms = ref({ hh: moment(props.modelValue).hour(), mm: moment(props.modelValue).minute(), ss:  moment(props.modelValue).second() });
+const hms = ref({
+  hh: moment(props.modelValue).hour(),
+  mm: moment(props.modelValue).minute(),
+  ss: moment(props.modelValue).second(),
+});
 const els = [
   { count: 24, type: "hh" },
   { count: 60, type: "mm" },
@@ -324,10 +321,10 @@ watch(
 );
 
 onMounted(() => {
-    hms.value.hh = moment(props.modelValue).hour();
-    hms.value.mm = moment(props.modelValue).minute();
-    hms.value.ss = moment(props.modelValue).second();
-})
+  hms.value.hh = moment(props.modelValue).hour();
+  hms.value.mm = moment(props.modelValue).minute();
+  hms.value.ss = moment(props.modelValue).second();
+});
 
 // 计算结果日期
 const dateValue = computed<string>(() => {

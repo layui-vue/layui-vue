@@ -53,6 +53,33 @@ export default {
 
 :::
 
+::: title 扩展插槽
+:::
+
+::: demo
+
+<template>
+  <lay-empty description="刷新试试">
+    <template #extra>
+      <lay-button>刷新页面</lay-button>
+    </template> 
+  </lay-empty>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    return {
+    }
+  }
+}
+</script>
+
+:::
+
 ::: title Empty 属性
 :::
 
@@ -64,7 +91,16 @@ export default {
 
 :::
 
- 
+::: title Empty 插槽
+:::
+
+::: table
+
+| 属性        | 描述     | 可选值 |
+| ----------- | -------- | ------ |
+| extra | 扩展插槽 | --     |
+
+:::
 
 ::: previousNext empty
 :::
