@@ -95,7 +95,10 @@
         </div>
 
         <!-- 年份选择器 -->
-        <div class="layui-laydate" v-show="showPane === 'year' || showPane === 'yearmonth'">
+        <div
+          class="layui-laydate"
+          v-show="showPane === 'year' || showPane === 'yearmonth'"
+        >
           <div class="layui-laydate-main laydate-main-list-0 laydate-ym-show">
             <div class="layui-laydate-header">
               <div class="laydate-set-ym">
@@ -253,10 +256,9 @@
 
 <script lang="ts" setup>
 import {
-  computed,
-  nextTick,
   ref,
   watch,
+  computed,
   defineProps,
   defineEmits,
   onMounted,
@@ -267,6 +269,17 @@ import LayIcon from "../icon/index";
 import LayInput from "../input/index.vue";
 import LayDropdown from "../dropdown/index.vue";
 import { getDayLength, getYears, getMonth, getYear } from "./day";
+
+export interface LayDatePickerProps {
+  modelValue?: string;
+  type?: "date" | "datetime" | "year" | "time" | "month" | "yearmonth";
+  name?: string;
+}
+
+const props = withDefaults(defineProps<LayDatePickerProps>(), {
+  modelValue: "",
+  type: "date",
+});
 
 const dropdownRef = ref(null);
 const $emits = defineEmits(["update:modelValue"]);
@@ -287,23 +300,12 @@ const MONTH_NAME = [
   "12月",
 ];
 
-const hms = ref({ hh: 0, mm: 0, ss: 0 });
+const hms = ref({ hh: moment(props.modelValue).hour(), mm: moment(props.modelValue).minute(), ss:  moment(props.modelValue).second() });
 const els = [
   { count: 24, type: "hh" },
   { count: 60, type: "mm" },
   { count: 60, type: "ss" },
 ];
-
-export interface LayDatePickerProps {
-  modelValue?: string;
-  type?: "date" | "datetime" | "year" | "time" | "month" | "yearmonth";
-  name?: string;
-}
-
-const props = withDefaults(defineProps<LayDatePickerProps>(), {
-  modelValue: "",
-  type: "date",
-});
 
 const currentYear = ref(getYear());
 const currentMonth = ref(getMonth());
@@ -321,6 +323,12 @@ watch(
   { immediate: true }
 );
 
+onMounted(() => {
+    hms.value.hh = moment(props.modelValue).hour();
+    hms.value.mm = moment(props.modelValue).minute();
+    hms.value.ss = moment(props.modelValue).second();
+})
+
 // 计算结果日期
 const dateValue = computed<string>(() => {
   if (currentDay.value === -1) {
@@ -328,7 +336,10 @@ const dateValue = computed<string>(() => {
     return "";
   }
   let momentVal;
-  let momentObj = moment(currentDay.value).hour(hms.value.hh).minute(hms.value.mm).second(hms.value.ss);
+  let momentObj = moment(currentDay.value)
+    .hour(hms.value.hh)
+    .minute(hms.value.mm)
+    .second(hms.value.ss);
 
   switch (props.type) {
     case "date":
@@ -351,6 +362,7 @@ const dateValue = computed<string>(() => {
       break;
     default:
       momentVal = momentObj.format();
+      break;
   }
   $emits("update:modelValue", momentVal);
   return momentVal;
@@ -453,7 +465,7 @@ const handleYearClick = (item: any) => {
   currentYear.value = item;
   if (props.type === "year") {
     currentDay.value = moment().year(item).valueOf();
-  } else if(props.type === 'yearmonth') {
+  } else if (props.type === "yearmonth") {
     currentDay.value = moment().year(item).valueOf();
     showPane.value = "month";
   } else {
@@ -465,9 +477,13 @@ const handleYearClick = (item: any) => {
 const handleMonthClick = (item: any) => {
   currentMonth.value = MONTH_NAME.indexOf(item);
   if (props.type === "month") {
-    currentDay.value = moment(currentDay.value).month(MONTH_NAME.indexOf(item)).valueOf();
-  } else if(props.type === "yearmonth") {
-    currentDay.value = moment(currentDay.value).month(MONTH_NAME.indexOf(item)).valueOf();
+    currentDay.value = moment(currentDay.value)
+      .month(MONTH_NAME.indexOf(item))
+      .valueOf();
+  } else if (props.type === "yearmonth") {
+    currentDay.value = moment(currentDay.value)
+      .month(MONTH_NAME.indexOf(item))
+      .valueOf();
   } else {
     showPane.value = "date";
   }
@@ -489,11 +505,4 @@ const choseTime = (e: any) => {
     hms.value[type as keyof typeof hms.value] = value;
   }
 };
-
-onMounted(() => {
-  hms.value.hh = moment(props.modelValue).hour();
-  hms.value.mm = moment(props.modelValue).minute();
-  hms.value.ss = moment(props.modelValue).second();
-  console.log(JSON.stringify(hms.value));
-});
 </script>

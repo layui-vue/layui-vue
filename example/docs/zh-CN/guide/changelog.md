@@ -23,8 +23,9 @@
           <li>[新增] date-picker 组件 yearmonth 属性, 支持 年 月 选择。</li>
           <li>[新增] tab 组件 position 属性, 用于支持不同方向的选项卡标题。</li>
           <li>[新增] button 组件 border-style 属性, 可选值 dashed dotted 等。</li>
+          <li>[修复] date-picker 组件 type 属性为 time 时, v-model 默认不生效。</li>
+          <li>[修复] date-picker 组件 12 小时制为 24 小时制。</li>
           <li>[修复] transfer 组件 showSearch 属性类型警告。</li>              
-          <li>[修复] date-picker 默认 12 小时制为 24 小时制。</li>
           <li>[修复] upload 组件 number 属性必填警告。</li>
           <li>[修复] variable 全局变量重复导入的问题。</li>
           <li>[修复] menu 组件 openKeys 属性失效。</li>
