@@ -229,7 +229,10 @@
             </div>
           </div>
           <div class="layui-laydate-footer">
-            <span @click="showPane = 'date'" v-if="type!='time'" class="laydate-btns-time"
+            <span
+              @click="showPane = 'date'"
+              v-if="type != 'time'"
+              class="laydate-btns-time"
               >返回日期</span
             >
             <div class="laydate-footer-btns">
@@ -249,7 +252,15 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, nextTick, ref, watch, defineProps, defineEmits, onMounted } from "vue";
+import {
+  computed,
+  nextTick,
+  ref,
+  watch,
+  defineProps,
+  defineEmits,
+  onMounted,
+} from "vue";
 
 import moment from "moment";
 import LayIcon from "../icon/index";
@@ -317,7 +328,10 @@ const dateValue = computed<string>(() => {
     return "";
   }
   let momentVal;
-  let momentObj = moment(currentDay.value).hour(hms.value.hh).minute(hms.value.mm).second(hms.value.ss);
+  let momentObj = moment(currentDay.value)
+    .hour(hms.value.hh)
+    .minute(hms.value.mm)
+    .second(hms.value.ss);
   switch (props.type) {
     case "date":
       momentVal = momentObj.format("YYYY-MM-DD");
@@ -475,5 +489,5 @@ onMounted(() => {
   hms.value.hh = moment(currentDay.value).hour();
   hms.value.mm = moment(currentDay.value).minute();
   hms.value.ss = moment(currentDay.value).second();
-})
+});
 </script>

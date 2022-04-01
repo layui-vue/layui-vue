@@ -138,5 +138,17 @@ export default {
 
 :::
 
+::: title Date Picker 属性
+:::
+
+::: table
+
+| 属性          | 描述                                                         | 类型           | 默认值 | 可选值         |
+| ------------- | ------------------------------------------------------------ | -------------- | ------ | -------------- |
+| v-model      | 当前时间                                                     | `string`         | --    | —             |
+| type        | 选择类型                                                   | `string`         | `date`    | `date` `datetime` `year` `month` `time`             |
+
+:::
+
 ::: previousNext transfer
 :::

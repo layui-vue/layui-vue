@@ -10,19 +10,19 @@
 ::: demo
 <template>
 <lay-timeline>
-  <lay-timeline-item title="0.4.0">
+  <lay-timeline-item title="1.0.x">
     <ul> 
-      <a name="0-4-5"> </a> 
+      <a name="1-0-0"> </a> 
       <li> 
-        <h3>0.4.5 <span class="layui-badge-rim">2022-04-01</span></h3> 
+        <h3>1.0.0 <span class="layui-badge-rim">2022-04-01</span></h3> 
         <ul>
-          <li>[新增] switch 组件 onswitch-value 属性。</li>
-          <li>[新增] switch 组件 unswitch-value 属性。</li>
-          <li>[新增] date-picker 组件 time 属性, 支持时分秒选择。</li>
-          <li>[新增] tab 组件 position 属性, 不同方向的选项卡标题。</li>
+          <li>[新增] switch 组件 onswitch-value 属性, 默认为 true。</li>
+          <li>[新增] switch 组件 unswitch-value 属性, 默认为 false。</li>
+          <li>[新增] date-picker 组件 time 属性, 支持 时 分 秒 选择。</li>
+          <li>[新增] tab 组件 position 属性, 用于支持不同方向的选项卡标题。</li>
           <li>[新增] button 组件 border-style 属性, 可选值 dashed dotted 等。</li>
+          <li>[修复] transfer 组件 showSearch 属性类型警告。</li>              
           <li>[修复] date-picker 默认 12 小时制为 24 小时制。</li>
-          <li>[修复] transfer 组件 showSearch 属性类型警告。</li>
           <li>[修复] upload 组件 number 属性必填警告。</li>
           <li>[修复] variable 全局变量重复导入的问题。</li>
           <li>[修复] menu 组件 openKeys 属性失效。</li>
@@ -32,6 +32,8 @@
         </ul> 
       </li>
     </ul>
+  </lay-timeline-item>
+  <lay-timeline-item title="0.4.x">
     <ul> 
       <a name="0-4-4"> </a> 
       <li> 
