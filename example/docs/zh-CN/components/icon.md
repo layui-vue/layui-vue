@@ -116,7 +116,7 @@ npm install @layui/icons-vue
 
 <template>
   <ul class="site-doc-icon">
-    <li v-for="(layIcon, index) of LayIconList" @click="copyIconClass(layIcon.class)">
+    <li v-for="(layIcon, index) of LayIconList" @click="copy(layIcon.class)">
         <i :class="[`layui-icon ${layIcon.class}`]"></i>
         <div class="doc-icon-name">{{ layIcon.name }}</div>
         <div class="doc-icon-code">&amp;#x{{ iconsUnicode[index] }};</div>
@@ -133,7 +133,7 @@ npm install @layui/icons-vue
 
   const iconsUnicode = reactive([]);
 
-  function copyIconClass(iconClass) {
+  function copy(iconClass) {
     const { isSupported, copy, copied } = useClipboard()
     const permissionWrite = usePermission('clipboard-write')
     if (isSupported && permissionWrite.value === 'granted') {
