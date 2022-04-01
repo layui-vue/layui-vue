@@ -14,18 +14,18 @@
           class="layui-nav layui-layout-left"
           style="margin-top: 0px; margin-bottom: 0px"
         >
-          <li class="layui-nav-item">
+          <li class="layui-nav-item" :class="{ 'layui-active':currentPath.includes('/zh-CN/index') }">
             <router-link to="/zh-CN/index"> {{ t("nav.home") }} </router-link>
           </li>
-          <li class="layui-nav-item">
+          <li class="layui-nav-item" :class="{ 'layui-active':currentPath.includes('/zh-CN/guide') }">
             <router-link to="/zh-CN/guide"> {{ t("nav.guide") }} </router-link>
           </li>
-          <li class="layui-nav-item">
+          <li class="layui-nav-item" :class="{ 'layui-active':currentPath.includes('/zh-CN/components') }">
             <router-link to="/zh-CN/components">
               {{ t("nav.components") }}
             </router-link>
           </li>
-          <li class="layui-nav-item">
+          <li class="layui-nav-item" :class="{ 'layui-active':currentPath.includes('/zh-CN/resources') }">
             <router-link to="/zh-CN/resources">
               {{ t("nav.resources") }}
             </router-link>
@@ -224,7 +224,6 @@ export default {
     const route = useRoute();
     const router = useRouter();
     const locale = ref("zh_CN");
-    const currentPath = ref("/zh-CN/guide");
     const isDark = ref(false);
     const locales = [
       { name: "zh_CN", locale: zh_CN, merge: true },
@@ -249,7 +248,17 @@ export default {
     });
 
     const menus = [];
-
+    const currentPath = ref("/zh-CN/guide");
+    watch(
+      () => route.path,
+      (val) => {
+        currentPath.value = val;
+      },
+      {
+        immediate: true,
+        deep: true,
+      }
+    );
     menu.forEach((m) => {
       m.children.forEach((c) => {
         menus.push(c);
@@ -301,6 +310,7 @@ export default {
       handleClick,
       changeLocale,
       themeVariable,
+      currentPath,
       layuiVueVersion,
     };
   },
@@ -308,6 +318,7 @@ export default {
 </script>
 
 <style>
+
 .layui-layout-document > .layui-header {
   z-index: 99;
   width: 100%;
@@ -356,6 +367,10 @@ export default {
 
 .layui-header > .layui-nav {
   background-color: transparent;
+}
+
+.layui-header > .layui-nav .layui-active * {
+  color: var(--global-checked-color)!important;
 }
 
 .layui-header .layui-local-badge {
