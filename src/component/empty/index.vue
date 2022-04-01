@@ -28,7 +28,7 @@ const props = withDefaults(defineProps<LayEmptyProps>(), {
       {{ description }}
     </div>
     <div class="layui-empty-extra">
-      <slot name="extra"></slot>  
-    </div> 
+      <slot name="extra"></slot>
+    </div>
   </div>
 </template>

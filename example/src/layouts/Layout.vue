@@ -140,8 +140,10 @@
           <li class="layui-nav-item">
             <a href="javascript:void(0)">
               <lay-switch
-                v-model="isDark"
+                v-model="theme"
                 class="switch"
+                onswitch-value="dark"
+                unswitch-value="light"
                 onswitch-color="rgba(255, 255, 255, 0.05)"
                 unswitch-color="rgba(255, 255, 255, 0.05)"
               >
@@ -223,7 +225,6 @@ export default {
     const route = useRoute();
     const router = useRouter();
     const locale = ref("zh_CN");
-    const isDark = ref(false);
     const locales = [
       { name: "zh_CN", locale: zh_CN, merge: true },
       { name: "en_US", locale: en_US, merge: true },
@@ -268,14 +269,6 @@ export default {
        import.meta.env.LAYUI_VUE_VERSION
     )
 
-    watch(isDark, () => {
-      if (isDark.value) {
-        theme.value = "dark";
-      } else {
-        theme.value = "light";
-      }
-    });
-
     watch(
       () => route.path,
       (val) => {
@@ -292,7 +285,6 @@ export default {
       locale.value = lang;
     };
 
-    provide("isDark",isDark);
     provide("theme",theme);
     provide('LayuiVueVersion', layuiVueVersion);
 
@@ -301,7 +293,6 @@ export default {
       menus,
       theme,
       locale,
-      isDark,
       locales,
       currentPath,
       handleClick,

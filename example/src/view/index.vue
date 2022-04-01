@@ -18,7 +18,7 @@
           </router-link>
           <a class="layui-inline site-down" href="javascript:void(0);" @click="changeTheme">
             
-            {{ isDark ? 'Turn Off' : 'Turn On'}}
+            {{ theme === 'dark' ? 'Turn Off' : 'Turn On'}}
           </a>
         </div>
         <div class="site-version">
@@ -115,11 +115,9 @@ export default {
   setup() {
     const { t } = useI18n();
     const layuiVueVersion = inject('LayuiVueVersion')
-    const isDark = inject("isDark");
     const theme = inject("theme");
 
     const changeTheme = () => {
-      isDark.value = !isDark.value;
       if(theme.value === 'dark') {
         theme.value = 'light';
       } else {
@@ -129,7 +127,6 @@ export default {
 
     return {
       t,
-      isDark,
       theme,
       changeTheme,
       layuiVueVersion
