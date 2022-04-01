@@ -10,26 +10,35 @@ import "./index.less";
 
 export interface LaySwitchProps {
   disabled?: boolean;
-  modelValue?: boolean;
+  modelValue?: string | number | boolean;
   onswitchText?: string;
   unswitchText?: string;
   onswitchColor?: string;
   unswitchColor?: string;
+  onswitchValue?: string | number | boolean;
+  unswitchValue?: string | number | boolean;
 }
 
 const props = withDefaults(defineProps<LaySwitchProps>(), {
   disabled: false,
+  onswitchValue: true,
+  unswitchValue: false,
 });
 
 const emit = defineEmits(["update:modelValue", "change"]);
 
 const isActive = computed({
   get() {
-    return props.modelValue;
+    return props.modelValue === props.onswitchValue;
   },
   set(val) {
-    emit("change", val);
-    emit("update:modelValue", val);
+    if(val) {
+      emit("change", props.onswitchValue);
+      emit("update:modelValue", props.onswitchValue);
+    } else {
+      emit("change", props.unswitchValue);
+      emit("update:modelValue", props.unswitchValue);
+    }
   },
 });
 

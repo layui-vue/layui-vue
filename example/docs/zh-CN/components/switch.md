@@ -146,6 +146,32 @@ export default {
 
 :::
 
+::: title 自定义值
+:::
+
+::: demo
+
+<template>
+  <lay-switch v-model="active6" onswitch-value="dark"  unswitch-value="light"></lay-switch>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const active6 = ref('dark')
+
+    return {
+        active6
+    }
+  }
+}
+</script>
+
+:::
+
 ::: title Switch 属性
 :::
 

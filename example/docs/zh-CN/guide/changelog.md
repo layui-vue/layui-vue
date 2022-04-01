@@ -14,8 +14,10 @@
     <ul> 
       <a name="0-4-5"> </a> 
       <li> 
-        <h3>0.4.4 <span class="layui-badge-rim">2022-03-29</span></h3> 
+        <h3>0.4.5 <span class="layui-badge-rim">2022-03-29</span></h3> 
         <ul>
+          <li>[新增] switch 组件 onswitch-value 属性。</li>
+          <li>[新增] switch 组件 unswitch-value 属性。</li>
           <li>[新增] tab 组件 position 属性, 不同方向的选项卡标题。</li>
           <li>[修复] transfer 组件 showSearch 属性类型警告。</li>
           <li>[修复] upload 组件 number 属性必填警告。</li>
@@ -29,7 +31,7 @@
     <ul> 
       <a name="0-4-4"> </a> 
       <li> 
-        <h3>0.4.4 <span class="layui-badge-rim">2022-03-29</span></h3> 
+        <h3>0.4.5 <span class="layui-badge-rim">2022-04-01</span></h3> 
         <ul>
           <li>[新增] button 组件 prefix-icon 属性。</li>
           <li>[新增] button 组件 suffix-icon 属性。</li>

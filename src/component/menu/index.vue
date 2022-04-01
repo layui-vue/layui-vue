@@ -32,7 +32,6 @@ const props = withDefaults(defineProps<LayMenuProps>(), {
   collapseTransition: true,
 });
 
-
 const isTree = computed(() => props.tree);
 const isCollapse = computed(() => props.collapse);
 const isCollapseTransition = computed(() => props.collapseTransition);
@@ -67,7 +66,8 @@ watch(
       // 赋值所有打开
       emit("update:openKeys", oldOpenKeys.value);
     }
-  }, { immediate: true }
+  },
+  { immediate: true }
 );
 
 provide("isTree", isTree);
