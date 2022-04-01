@@ -135,7 +135,5 @@ export default {
 
 :::
 
- 
-
 ::: previousNext avatar
 :::

@@ -111,7 +111,5 @@ export default {
 
 :::
 
- 
-
 ::: previousNext animation
 :::

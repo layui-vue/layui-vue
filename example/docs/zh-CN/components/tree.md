@@ -238,6 +238,7 @@ function handleClick(node) {
 | onlyIconControl                  | 是否仅允许节点左侧图标控制展开收缩       | false           |
 | showLine                         | 是否开启连接线                           | true            |
 | checkedKeys(v-model:checkedKeys) | 开启 showCheckbox 后, 选中的节点         | []              |
+| collapse-transition              | 是否开启展示收起动画                     | false           |
 
 :::
 
@@ -253,7 +254,6 @@ function handleClick(node) {
 | children            | 子节点         | []              |
 | disabled            | 该节点是否禁用     | false           |
 | spread              | 该节点是否展开     | false           |
-| collapse-transition | 是否开启展示收起动画  | false           |
 
 :::
 

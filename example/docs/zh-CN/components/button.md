@@ -61,6 +61,33 @@ export default {
 
 :::
 
+::: title 不同边框
+:::
+
+::: demo 使用 `border` 属性设置边框主题
+
+<template>
+  <lay-button border-style="dashed">原始按钮</lay-button>
+  <lay-button border="green" border-style="dashed">默认按钮</lay-button>
+  <lay-button border="blue" border-style="dashed">百搭按钮</lay-button>
+  <lay-button border="orange" border-style="dashed">暖色按钮</lay-button>
+  <lay-button border="red" border-style="dashed">警告按钮</lay-button>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    return {
+    }
+  }
+}
+</script>
+
+:::
+
 ::: title 按钮尺寸
 :::
 

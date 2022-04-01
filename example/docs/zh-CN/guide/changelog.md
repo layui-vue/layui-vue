@@ -19,6 +19,7 @@
           <li>[新增] switch 组件 onswitch-value 属性。</li>
           <li>[新增] switch 组件 unswitch-value 属性。</li>
           <li>[新增] tab 组件 position 属性, 不同方向的选项卡标题。</li>
+          <li>[新增] button 组件 border-style 属性, 可选值 dashed dotted 等。</li>
           <li>[修复] transfer 组件 showSearch 属性类型警告。</li>
           <li>[修复] upload 组件 number 属性必填警告。</li>
           <li>[修复] variable 全局变量重复导入的问题。</li>

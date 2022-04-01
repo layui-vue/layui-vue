@@ -17,8 +17,8 @@ export default {
 </script>
 
 <script setup lang="ts">
-import LayCollapseTransition from "./collapseTransition.vue";
-import LayFadeTransition from "./fadeTransition.vue";
+import LayCollapseTransition from "./transitions/collapseTransition.vue";
+import LayFadeTransition from "./transitions/fadeTransition.vue";
 
 export interface LayTransitionProps {
   type?: string;
