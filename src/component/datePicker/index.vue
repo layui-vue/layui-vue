@@ -95,7 +95,7 @@
         </div>
 
         <!-- 年份选择器 -->
-        <div class="layui-laydate" v-show="showPane === 'year'">
+        <div class="layui-laydate" v-show="showPane === 'year' || showPane === 'yearmonth'">
           <div class="layui-laydate-main laydate-main-list-0 laydate-ym-show">
             <div class="layui-laydate-header">
               <div class="laydate-set-ym">
@@ -296,7 +296,7 @@ const els = [
 
 export interface LayDatePickerProps {
   modelValue?: string;
-  type?: "date" | "datetime" | "year" | "time" | "month";
+  type?: "date" | "datetime" | "year" | "time" | "month" | "yearmonth";
   name?: string;
 }
 
@@ -328,10 +328,8 @@ const dateValue = computed<string>(() => {
     return "";
   }
   let momentVal;
-  let momentObj = moment(currentDay.value)
-    .hour(hms.value.hh)
-    .minute(hms.value.mm)
-    .second(hms.value.ss);
+  let momentObj = moment(currentDay.value).hour(hms.value.hh).minute(hms.value.mm).second(hms.value.ss);
+
   switch (props.type) {
     case "date":
       momentVal = momentObj.format("YYYY-MM-DD");
@@ -347,6 +345,9 @@ const dateValue = computed<string>(() => {
       break;
     case "time":
       momentVal = momentObj.format("HH:mm:ss");
+      break;
+    case "yearmonth":
+      momentVal = momentObj.format("YYYY-MM");
       break;
     default:
       momentVal = momentObj.format();
@@ -452,6 +453,9 @@ const handleYearClick = (item: any) => {
   currentYear.value = item;
   if (props.type === "year") {
     currentDay.value = moment().year(item).valueOf();
+  } else if(props.type === 'yearmonth') {
+    currentDay.value = moment().year(item).valueOf();
+    showPane.value = "month";
   } else {
     showPane.value = "date";
   }
@@ -461,7 +465,9 @@ const handleYearClick = (item: any) => {
 const handleMonthClick = (item: any) => {
   currentMonth.value = MONTH_NAME.indexOf(item);
   if (props.type === "month") {
-    currentDay.value = moment().month(MONTH_NAME.indexOf(item)).valueOf();
+    currentDay.value = moment(currentDay.value).month(MONTH_NAME.indexOf(item)).valueOf();
+  } else if(props.type === "yearmonth") {
+    currentDay.value = moment(currentDay.value).month(MONTH_NAME.indexOf(item)).valueOf();
   } else {
     showPane.value = "date";
   }
@@ -481,13 +487,13 @@ const choseTime = (e: any) => {
   if (e.target.nodeName == "LI") {
     let { value, type } = e.target.dataset;
     hms.value[type as keyof typeof hms.value] = value;
-    e.target.scrollIntoView({ behavior: "smooth" });
   }
 };
 
 onMounted(() => {
-  hms.value.hh = moment(currentDay.value).hour();
-  hms.value.mm = moment(currentDay.value).minute();
-  hms.value.ss = moment(currentDay.value).second();
+  hms.value.hh = moment(props.modelValue).hour();
+  hms.value.mm = moment(props.modelValue).minute();
+  hms.value.ss = moment(props.modelValue).second();
+  console.log(JSON.stringify(hms.value));
 });
 </script>

@@ -216,7 +216,6 @@ import menu from "../view/utils/menus";
 import { useI18n } from "vue-i18n";
 import zh_CN from "../locales/zh_CN.ts";
 import en_US from "../locales/en_US.ts";
-import { getLayuiVueVersion }  from "../../../src/utils/getLayuiVueVersion.ts"
 
 export default {
   setup() {
@@ -265,10 +264,8 @@ export default {
       });
     });
 
-    const latestVer = getLayuiVueVersion();
     const layuiVueVersion = computed(() => 
-      latestVer.value 
-      ?? import.meta.env.LAYUI_VUE_VERSION
+       import.meta.env.LAYUI_VUE_VERSION
     )
 
     watch(isDark, () => {
