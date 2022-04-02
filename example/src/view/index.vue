@@ -16,16 +16,19 @@
           <router-link class="layui-inline site-down" to="/zh-CN/guide">
             Get Started
           </router-link>
-          <a class="layui-inline site-down" href="javascript:void(0);" @click="changeTheme">
-            
-            {{ theme === 'dark' ? 'Turn Off' : 'Turn On'}}
+          <a
+            class="layui-inline site-down"
+            href="javascript:void(0);"
+            @click="changeTheme"
+          >
+            {{ theme === "dark" ? "Turn Off" : "Turn On" }}
           </a>
         </div>
         <div class="site-version">
           <span
-            >{{ t("home.version") }}：<cite class="site-showv"
-              >{{ layuiVueVersion }}</cite
-            ></span
+            >{{ t("home.version") }}：<cite class="site-showv">{{
+              layuiVueVersion
+            }}</cite></span
           >
           <span
             >{{ t("home.download") }}：<em class="site-showdowns"
@@ -33,32 +36,32 @@
             ></span
           >
         </div>
-      </div>
-      <div class="site-banner-other">
-        <a
-          href="https://gitee.com/layui-vue"
-          target="_blank"
-          rel="nofollow"
-          class="site-star"
-        >
-          <i class="layui-icon"></i> Star <cite id="getStars">746</cite>
-        </a>
-        <a
-          href="https://gitee.com/layui-vue"
-          target="_blank"
-          rel="nofollow"
-          class="site-fork"
-        >
-          Gitee
-        </a>
-        <a
-          href="https://github.com/layui-vue"
-          target="_blank"
-          rel="nofollow"
-          class="site-fork"
-        >
-          Github
-        </a>
+        <div class="site-banner-other">
+          <a
+            href="https://gitee.com/layui-vue"
+            target="_blank"
+            rel="nofollow"
+            class="site-star"
+          >
+            <i class="layui-icon"></i> Star <cite id="getStars">746</cite>
+          </a>
+          <a
+            href="https://gitee.com/layui-vue"
+            target="_blank"
+            rel="nofollow"
+            class="site-fork"
+          >
+            Gitee
+          </a>
+          <a
+            href="https://github.com/layui-vue"
+            target="_blank"
+            rel="nofollow"
+            class="site-fork"
+          >
+            Github
+          </a>
+        </div>
       </div>
     </div>
     <div style="margin-left: 10%; margin-right: 10%; margin-top: 40px">
@@ -108,28 +111,28 @@
 </template>
 
 <script>
-import { inject, provide } from 'vue';
+import { inject, provide } from "vue";
 import { useI18n } from "vue-i18n";
 export default {
   name: "index",
   setup() {
     const { t } = useI18n();
-    const layuiVueVersion = inject('LayuiVueVersion')
+    const layuiVueVersion = inject("LayuiVueVersion");
     const theme = inject("theme");
 
     const changeTheme = () => {
-      if(theme.value === 'dark') {
-        theme.value = 'light';
+      if (theme.value === "dark") {
+        theme.value = "light";
       } else {
-        theme.value = 'dark';
+        theme.value = "dark";
       }
-    }
+    };
 
     return {
       t,
       theme,
       changeTheme,
-      layuiVueVersion
+      layuiVueVersion,
     };
   },
 };
@@ -183,7 +186,9 @@ body {
   font-size: 16px;
   color: #476582;
   font-weight: 500;
-  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
   transition: all 0.5s;
   -webkit-transition: all 0.5s;
   letter-spacing: 0.2px;
@@ -195,7 +200,7 @@ body {
   background: #009688;
   color: white;
 }
-.site-download a+a {
+.site-download a + a {
   margin-left: 20px;
 }
 .site-zfj {
@@ -269,8 +274,9 @@ body {
   margin-top: -4px;
 }
 .site-banner-other {
-  position: absolute;
+  position: relative;
   left: 0;
+  top: 40px;
   bottom: 90px;
   width: 100%;
   text-align: center;
