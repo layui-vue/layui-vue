@@ -33,7 +33,7 @@ const props = withDefaults(defineProps<LayButtonProps>(), {
   radius: false,
   loading: false,
   disabled: false,
-  nativeType: "button"
+  nativeType: "button",
 });
 
 const emit = defineEmits(["click"]);

@@ -5,7 +5,6 @@
   <lay-timeline-item title="尾版本号：日常问题更新。" simple></lay-timeline-item>
   <lay-timeline-item title="次版本号：带有新特性的向下兼容的版本。" simple></lay-timeline-item>
   <lay-timeline-item title="主版本号：含有破坏性更新和新特性，不在发布周期内。" simple></lay-timeline-item>
-  <lay-timeline-item title="版本说明：1.0.0 正式 1.0.0-beta.* 公测 1.0.0-alpha.* 内测。" simple></lay-timeline-item>
 </lay-timeline>
 
 ::: demo
