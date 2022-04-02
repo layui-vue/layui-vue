@@ -104,10 +104,6 @@ provide("slotsChange", slotsChange);
     ]"
     v-if="active"
   >
-    <div v-if="tabPosition === 'bottom'" class="layui-tab-content">
-      <slot></slot>
-    </div>
-
     <div
       :class="['layui-tab-head', props.tabPosition ? `is-${tabPosition}` : '']"
     >
@@ -133,7 +129,7 @@ provide("slotsChange", slotsChange);
       </ul>
     </div>
 
-    <div v-if="tabPosition != 'bottom'" class="layui-tab-content">
+    <div class="layui-tab-content">
       <slot></slot>
     </div>
   </div>
