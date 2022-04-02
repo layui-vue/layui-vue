@@ -229,7 +229,9 @@ export default {
       { name: "zh_CN", locale: zh_CN, merge: true },
       { name: "en_US", locale: en_US, merge: true },
     ];
-    const theme = ref("light");
+    let isDark = (localStorage.getItem('layui-vue-theme-dark') !== "false") ||
+                 window.matchMedia('prefers-color-scheme: dark').matches;
+    const theme = ref(isDark ? "dark":"light");
     const themeVariable = ref({
       "--global-primary-color": "#009688",
       "--global-normal-color": "#1e9fff",
@@ -284,6 +286,9 @@ export default {
     const changeLocale = function (lang) {
       locale.value = lang;
     };
+
+    window.matchMedia('(prefers-color-scheme: dark)')
+      .addListener(e => theme.value = e.matches ? "dark" : "light");
 
     provide("theme",theme);
     provide('LayuiVueVersion', layuiVueVersion);
