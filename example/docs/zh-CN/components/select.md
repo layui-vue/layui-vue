@@ -100,6 +100,37 @@ export default {
 
 :::
 
+::: title 关键词变化事件，可作为远程搜索处理算法
+:::
+
+::: demo
+
+<template>
+  <lay-select @search="search" v-model="selected">
+    <lay-select-option value="1" label="学习"></lay-select-option>
+    <lay-select-option value="2" label="编码" disabled></lay-select-option>
+    <lay-select-option value="3" label="运动"></lay-select-option>
+  </lay-select>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+    const selected = ref('1');
+    function search(txt){
+      console.log('关键词:',txt)
+    }
+    return {
+      selected,search
+    }
+  }
+}
+</script>
+
+:::
+
 ::: title 海量数据 
 :::
 

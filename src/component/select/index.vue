@@ -56,7 +56,7 @@ const open = function () {
   openState.value = !openState.value;
 };
 
-const emit = defineEmits(["update:modelValue", "change"]);
+const emit = defineEmits(["update:modelValue", "change", 'search']);
 const selectItem = ref<SelectItem>({
   value: !props.multiple
     ? props.modelValue
@@ -101,6 +101,7 @@ const input = ref(false)
 const value = computed({
   set(v: any) {
     txt.value = v;
+    emit('search', v)
   },
   get() {
     if (input.value) {
