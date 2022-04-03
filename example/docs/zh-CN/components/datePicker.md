@@ -14,6 +14,7 @@
 ::: demo
 
 <template>
+  选择的时间：{{endTime}}
   <lay-date-picker v-model="endTime"></lay-date-picker>
 </template>
 
@@ -23,7 +24,7 @@ import { ref } from 'vue'
 export default {
   setup() {
 
-   const endTime = ref("2022-03-04 17:35:00");
+   const endTime = ref("2022-03-14 17:35:00");
 
     return {
       endTime
@@ -40,6 +41,7 @@ export default {
 ::: demo
 
 <template>
+  选择的时间：{{endTime2}}
   <lay-date-picker type="datetime" v-model="endTime2"></lay-date-picker>
 </template>
 
@@ -66,6 +68,7 @@ export default {
 ::: demo
 
 <template>
+  选择的时间：{{endTime3}}
   <lay-date-picker type="year" v-model="endTime3"></lay-date-picker>
 </template>
 
@@ -92,6 +95,7 @@ export default {
 ::: demo
 
 <template>
+  选择的时间：{{endTime4}}
   <lay-date-picker type="month" v-model="endTime4"></lay-date-picker>
 </template>
 

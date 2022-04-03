@@ -8,19 +8,19 @@ export default {
 import "./index.less";
 import { useSlots } from "vue";
 import { useI18n } from "vue-i18n";
-import { Boolean, String } from "../../types";
 
 const { t } = useI18n();
 const slots = useSlots();
 
 export interface LayInputProps {
-  name?: String;
-  type?: String;
-  value?: String;
-  disabled?: Boolean;
-  modelValue?: String;
-  placeholder?: String;
-  allowClear?: Boolean;
+  name?: string;
+  type?: string;
+  value?: string;
+  disabled?: boolean;
+  readonly?: boolean;
+  modelValue?: string;
+  placeholder?: string;
+  allowClear?: boolean;
 }
 
 const props = withDefaults(defineProps<LayInputProps>(), {});
@@ -73,6 +73,7 @@ const onBlur = () => {
       @focus="onFocus"
       @blur="onBlur"
       @change="onChange"
+      :readonly="props.readonly"
     />
     <span class="layui-input-suffix" v-if="slots.suffix">
       <slot name="suffix"></slot>
