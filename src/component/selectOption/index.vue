@@ -22,6 +22,7 @@ const props = withDefaults(defineProps<LaySelectOptionProps>(), {
 const selectItemHandle = inject("selectItemHandle") as SelectItemHandle;
 const selectItem = inject("selectItem") as Ref<SelectItem>;
 const selectItemPush = inject("selectItemPush") as Ref<SelectItemPush>;
+const keyword = inject('keyword') as Ref<string>
 
 const selectHandle = function () {
   !props.disabled && callSelectItemHandle(!selected.value);
@@ -45,7 +46,7 @@ const selected = computed({
     }
     return selectItem.value.value === props.value;
   },
-  set(val) {},
+  set(val) { },
 });
 const callSelectItemPush = function () {
   let item = {
@@ -64,17 +65,13 @@ onMounted(() => {
 
 <template>
   <dd
+    v-show="keyword ? props.label.includes(keyword) : true"
     :value="value"
     :class="[{ 'layui-this': selected }, { 'layui-disabled': disabled }]"
     @click="selectHandle"
   >
     <template v-if="selectItem.multiple">
-      <lay-checkbox
-        skin="primary"
-        v-model="selected"
-        @change="selectHandle"
-        label=""
-      />
+      <lay-checkbox skin="primary" v-model="selected" @change="selectHandle" label />
     </template>
     <slot>{{ label }}</slot>
   </dd>

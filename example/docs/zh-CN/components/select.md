@@ -4,7 +4,7 @@
 ::: title 基本介绍
 :::
 
-::: describe 用于代替原生的选择器，或者需要一个更优雅的多选器时。
+::: describe 用于代替原生的选择器，或者需要一个更优雅的多选器时。支持关键词查询
 :::
 
 ::: title 基础使用
@@ -40,10 +40,10 @@ export default {
 ::: demo
 
 <template>
-  <lay-button @click="change1">切换-当前值 : {{value}}</lay-button>
+  <lay-button @click="change1">切换-当前值 : {{value2}}</lay-button>
   <br/>
   <br/>
-  <lay-select v-model="value">
+  <lay-select v-model="value2">
     <lay-select-option value="1" label="学习"></lay-select-option>
     <lay-select-option value="2" label="编码"></lay-select-option>
     <lay-select-option value="3" label="运动"></lay-select-option>
@@ -55,13 +55,13 @@ import { ref } from 'vue'
 
 export default {
   setup() {
-    const value = ref(null);
+    const value2 = ref(null);
     var i = 1;
     function change1(){
-      value.value=i++%3+1
+      value2.value=i++%3+1
     }
     return {
-      value,
+      value2,
       change1
     }
   }
@@ -106,7 +106,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-select v-model="selected">
+  <lay-select v-model="selected2">
     <lay-select-option value="1" label="学习"></lay-select-option>
     <lay-select-option value="3" label="运动"></lay-select-option>
     <lay-select-option value="1" label="学习"></lay-select-option>
@@ -132,10 +132,10 @@ import { ref } from 'vue'
 export default {
   setup() {
 
-    const selected = ref('1')
+    const selected2 = ref('1')
 
     return {
-      selected
+      selected2
     }
   }
 }
