@@ -7,16 +7,19 @@ export default {
 <script setup lang="ts">
 import LayCheckbox from "../checkbox";
 import { SelectItem, SelectItemHandle, SelectItemPush } from "../../types";
-import { computed, inject, onMounted, Ref } from "vue";
+import { computed, inject, onMounted, Ref, ref } from "vue";
 
 export interface LaySelectOptionProps {
   value: string | null | undefined;
-  label?: string;
+  label: string;
+  keyword?: string;
   disabled?: boolean;
 }
 
 const props = withDefaults(defineProps<LaySelectOptionProps>(), {
   disabled: false,
+  keyword: "",
+  label: ""
 });
 
 const selectItemHandle = inject("selectItemHandle") as SelectItemHandle;
@@ -57,15 +60,18 @@ const callSelectItemPush = function () {
   // @ts-ignore
   selectItemPush(item);
 };
+const search = ref("")
 onMounted(() => {
+  search.value = props.keyword || props.label
   callSelectItemPush();
   selected.value && callSelectItemHandle();
+
 });
 </script>
 
 <template>
   <dd
-    v-show="keyword ? props.label.includes(keyword) : true"
+    v-show="keyword ? search.includes(keyword) : true"
     :value="value"
     :class="[{ 'layui-this': selected }, { 'layui-disabled': disabled }]"
     @click="selectHandle"

@@ -131,6 +131,34 @@ export default {
 
 :::
 
+::: title 选择项自定义搜索内容，可以在keyword属性中传入拼音用于支持拼音搜索
+:::
+
+::: demo
+
+<template>
+  <lay-select v-model="selected">
+    <lay-select-option value="1" label="学习" keyword="学习xuexi"></lay-select-option>
+    <lay-select-option value="2" label="编码" disabled></lay-select-option>
+    <lay-select-option value="3" label="运动"></lay-select-option>
+  </lay-select>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+    const selected = ref('1');
+    return {
+      selected
+    }
+  }
+}
+</script>
+
+:::
+
 ::: title 海量数据 
 :::
 
@@ -236,6 +264,7 @@ export default {
 | 属性    | 描述       |     接收值      |
 | ------ | ---------- | --------------- |
 | change | 切换事件    | value           |
+| search | 关键词变化事件    | 用户输入的关键词 string           |
 
 :::
 
@@ -251,6 +280,7 @@ export default {
 | ------------ | --------------------- | ------------------------- | -------------- | -------- |
 | label        | 标签值(`必填`)         | `string`                  |        -       |    -    |
 | value        | 值                    | `string` / `number`       |        -       |    -    |
+| keyword        | 用于匹配关键词的数据，传入文本+拼音可以支持拼音搜索   | `string`        |        -       |    -    |
 | disabled     | 是否禁用              | `boolean`                  | `true` `false` | `false` |
 
 :::
