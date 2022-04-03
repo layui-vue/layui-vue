@@ -10,7 +10,7 @@ import { SelectItem, SelectItemHandle, SelectItemPush } from "../../types";
 import { computed, inject, onMounted, Ref, ref } from "vue";
 
 export interface LaySelectOptionProps {
-  value: string | null | undefined;
+  value: string | null | undefined | number;
   label: string;
   keyword?: string;
   disabled?: boolean;

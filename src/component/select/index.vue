@@ -29,6 +29,7 @@ export interface LaySelectProps {
   showEmpty?: boolean;
   emptyMessage?: string;
   multiple?: boolean;
+  items?: { label: string, value: string | number | [] | null, key: string }[]
 }
 
 const selectRef = ref<null | HTMLElement>(null);
@@ -231,6 +232,15 @@ provide("keyword", txt)
     <dl class="layui-anim layui-anim-upbit">
       <template v-if="!multiple && showEmpty">
         <lay-select-option :value="null" :label="emptyMessage ?? placeholder" />
+      </template>
+      <template v-if="props.items">
+        <lay-select-option
+          v-for="(v, k) in props.items"
+          :key="k"
+          :value="v.value"
+          :label="v.label"
+          :keyword="v.keyword"
+        ></lay-select-option>
       </template>
       <slot></slot>
     </dl>

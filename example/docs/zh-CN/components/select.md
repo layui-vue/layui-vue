@@ -159,6 +159,37 @@ export default {
 
 :::
 
+::: title 传入items属性进行选项渲染
+:::
+
+::: demo
+
+<template>
+  <lay-select v-model="selected" :items="items">
+  </lay-select>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+    const selected = ref('1');
+    const items=ref([
+      {label:'选项1',value:1,keyword:'选项xuanxiang1'},
+      {label:'选项2',value:2,keyword:'选项xuanxiang2'},
+      {label:'选项3',value:3,keyword:'选项xuanxiang3'},
+    ])
+    return {
+      selected,items
+    }
+  }
+}
+</script>
+
+
+:::
+
 ::: title 海量数据 
 :::
 
