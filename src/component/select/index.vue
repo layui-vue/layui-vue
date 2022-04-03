@@ -239,6 +239,7 @@ provide("keyword", txt)
           :key="k"
           :value="v.value"
           :label="v.label"
+          :disabled="v.disabled"
           :keyword="v.keyword"
         ></lay-select-option>
       </template>

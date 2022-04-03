@@ -178,7 +178,7 @@ export default {
     const items=ref([
       {label:'选项1',value:1,keyword:'选项xuanxiang1'},
       {label:'选项2',value:2,keyword:'选项xuanxiang2'},
-      {label:'选项3',value:3,keyword:'选项xuanxiang3'},
+      {label:'选项3',value:3,keyword:'选项xuanxiang3',disabled:true},
     ])
     return {
       selected,items
