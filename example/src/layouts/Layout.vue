@@ -109,7 +109,15 @@
                   <lay-color-picker
                     v-model="themeVariable['--global-neutral-color-8']"
                   ></lay-color-picker>
-                  <lay-button fluid>导 出 配 置</lay-button>
+                  <lay-color-picker
+                    v-model="themeVariable['--global-dark-text-color']"
+                  ></lay-color-picker
+                  >&nbsp;
+                  <lay-color-picker
+                    v-model="themeVariable['--global-dark-background-color']"
+                  ></lay-color-picker>
+
+                  <lay-button fluid="true">导 出 配 置</lay-button>
                 </div>
               </template>
             </lay-dropdown>
@@ -231,6 +239,7 @@ export default {
     ];
     let isDark = (localStorage.getItem('layui-vue-theme-dark') !== "false") ||
                  window.matchMedia('prefers-color-scheme: dark').matches;
+    
     const theme = ref(isDark ? "dark":"light");
     const themeVariable = ref({
       "--global-primary-color": "#009688",
@@ -247,6 +256,8 @@ export default {
       "--global-neutral-color-6": "#d2d2d2",
       "--global-neutral-color-7": "#cccccc",
       "--global-neutral-color-8": "#c2c2c2",
+      "--global-dark-text-color": "#FFFFFFc9",
+      "--global-dark-background-color": "#22272E",
     });
 
     const menus = [];
