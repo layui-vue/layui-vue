@@ -46,8 +46,12 @@ const changeTheme = (theme: string) => {
         brightness: 100,
         contrast: 90,
         sepia: 0,
-        darkSchemeTextColor: getComputedStyle(document.documentElement).getPropertyValue("--global-dark-text-color"),
-        darkSchemeBackgroundColor: getComputedStyle(document.documentElement).getPropertyValue("--global-dark-background-color")
+        darkSchemeTextColor: getComputedStyle(
+          document.documentElement
+        ).getPropertyValue("--global-dark-text-color"),
+        darkSchemeBackgroundColor: getComputedStyle(
+          document.documentElement
+        ).getPropertyValue("--global-dark-background-color"),
       },
       {
         invert: [],
@@ -60,10 +64,10 @@ const changeTheme = (theme: string) => {
         disableStyleSheetsProxy: false,
       }
     );
-    localStorage.setItem('layui-vue-theme-dark','true')
+    localStorage.setItem("layui-vue-theme-dark", "true");
   } else {
     disableDarkMode();
-    localStorage.setItem('layui-vue-theme-dark','false')
+    localStorage.setItem("layui-vue-theme-dark", "false");
   }
 };
 
