@@ -7,11 +7,10 @@ export default {
 <script setup lang="ts">
 import "./index.less";
 import { withDefaults } from "vue";
-import { String } from "src/types";
 
 export interface LayEmptyProps {
-  description?: String;
-  image?: String;
+  description?: string;
+  image?: string;
 }
 
 const props = withDefaults(defineProps<LayEmptyProps>(), {
@@ -24,8 +23,6 @@ const props = withDefaults(defineProps<LayEmptyProps>(), {
     <div class="layui-empty-image">
       <img class="layui-empty-image-default" src="./index.svg" />
     </div>
-    <div class="layui-empty-description">
-      {{ description }}
-    </div>
+    <div class="layui-empty-description">{{ description }}</div>
   </div>
 </template>
