@@ -4,7 +4,7 @@
 ::: title 基本介绍
 :::
 
-::: describe 用于代替原生的选择器，或者需要一个更优雅的多选器时。
+::: describe 用于代替原生的选择器，或者需要一个更优雅的多选器时。支持关键词查询
 :::
 
 ::: title 基础使用
@@ -40,10 +40,10 @@ export default {
 ::: demo
 
 <template>
-  <lay-button @click="change1">切换-当前值 : {{value}}</lay-button>
+  <lay-button @click="change1">切换-当前值 : {{value2}}</lay-button>
   <br/>
   <br/>
-  <lay-select v-model="value">
+  <lay-select v-model="value2">
     <lay-select-option value="1" label="学习"></lay-select-option>
     <lay-select-option value="2" label="编码"></lay-select-option>
     <lay-select-option value="3" label="运动"></lay-select-option>
@@ -55,13 +55,13 @@ import { ref } from 'vue'
 
 export default {
   setup() {
-    const value = ref(null);
+    const value2 = ref(null);
     var i = 1;
     function change1(){
-      value.value=i++%3+1
+      value2.value=i++%3+1
     }
     return {
-      value,
+      value2,
       change1
     }
   }
@@ -100,13 +100,141 @@ export default {
 
 :::
 
-::: title 海量数据 
+::: title 关键词变化事件，可作为远程搜索处理算法
+:::
+
+::: demo
+
+<template>
+  <lay-select @search="search" v-model="selected">
+    <lay-select-option value="1" label="学习"></lay-select-option>
+    <lay-select-option value="2" label="编码" disabled></lay-select-option>
+    <lay-select-option value="3" label="运动"></lay-select-option>
+  </lay-select>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+    const selected = ref('1');
+    function search(txt){
+      console.log('关键词:',txt)
+    }
+    return {
+      selected,search
+    }
+  }
+}
+</script>
+
+:::
+
+::: title 选择项自定义搜索内容，可以在keyword属性中传入拼音用于支持拼音搜索
 :::
 
 ::: demo
 
 <template>
   <lay-select v-model="selected">
+    <lay-select-option value="1" label="学习" keyword="学习xuexi"></lay-select-option>
+    <lay-select-option value="2" label="编码" disabled></lay-select-option>
+    <lay-select-option value="3" label="运动"></lay-select-option>
+  </lay-select>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+    const selected = ref('1');
+    return {
+      selected
+    }
+  }
+}
+</script>
+
+:::
+
+::: title 传入items属性进行选项渲染
+:::
+
+::: demo
+
+<template>
+  <lay-select v-model="selected" :items="items">
+  </lay-select>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+    const selected = ref('1');
+    const items=ref([
+      {label:'选项1',value:1,keyword:'选项xuanxiang1'},
+      {label:'选项2',value:2,keyword:'选项xuanxiang2'},
+      {label:'选项3',value:3,keyword:'选项xuanxiang3',disabled:true},
+    ])
+    return {
+      selected,items
+    }
+  }
+}
+</script>
+
+
+:::
+
+::: title 传入create属性和接收create事件用于开启创建子项功能
+:::
+
+::: demo
+
+<template>
+  <lay-select v-model="selected" :items="items" :create="true"  @create="createEvent">
+  </lay-select>
+  当前元素: {{items.map(o=>o.label).join()}}
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+    const selected = ref('1');
+    const items=ref([
+      {label:'选项1',value:'1',keyword:'选项xuanxiang1'},
+      {label:'选项2',value:2,keyword:'选项xuanxiang2'},
+      {label:'选项3',value:3,keyword:'选项xuanxiang3',disabled:true},
+    ]);
+    function createEvent(v){
+      items.value.push({
+        label:v,
+        value:items.value.length
+      })
+    }
+    return {
+      selected,items,createEvent
+    }
+  }
+}
+</script>
+
+
+:::
+
+::: title 海量数据 
+:::
+
+::: demo
+
+<template>
+  <lay-select v-model="selected2">
     <lay-select-option value="1" label="学习"></lay-select-option>
     <lay-select-option value="3" label="运动"></lay-select-option>
     <lay-select-option value="1" label="学习"></lay-select-option>
@@ -132,10 +260,10 @@ import { ref } from 'vue'
 export default {
   setup() {
 
-    const selected = ref('1')
+    const selected2 = ref('1')
 
     return {
-      selected
+      selected2
     }
   }
 }
@@ -193,6 +321,7 @@ export default {
 | disabled     | 是否禁用              | `boolean`                  | `true` `false` | `false` |
 | showEmpty    | 是否增加空提示选项     | `boolean`                  | `true` `false` | `true` |
 | multiple     | 是否为多选            | `boolean`                  | `true` `false` | `false` |
+| create       | 是否允许创建            | `boolean`                  | `true` `false` | `false` |
 
 
 :::
@@ -205,6 +334,8 @@ export default {
 | 属性    | 描述       |     接收值      |
 | ------ | ---------- | --------------- |
 | change | 切换事件    | value           |
+| search | 关键词变化事件    | 用户输入的关键词 string           |
+| create | 允许创建情况下的创建回调事件    | 用户输入的关键词 string           |
 
 :::
 
@@ -220,6 +351,7 @@ export default {
 | ------------ | --------------------- | ------------------------- | -------------- | -------- |
 | label        | 标签值(`必填`)         | `string`                  |        -       |    -    |
 | value        | 值                    | `string` / `number`       |        -       |    -    |
+| keyword        | 用于匹配关键词的数据，传入文本+拼音可以支持拼音搜索   | `string`        |        -       |    -    |
 | disabled     | 是否禁用              | `boolean`                  | `true` `false` | `false` |
 
 :::

@@ -29,6 +29,8 @@ export interface LaySelectProps {
   showEmpty?: boolean;
   emptyMessage?: string;
   multiple?: boolean;
+  create?: boolean;
+  items?: { label: string, value: string | number | [] | null, key: string }[]
 }
 
 const selectRef = ref<null | HTMLElement>(null);
@@ -43,6 +45,7 @@ const props = withDefaults(defineProps<LaySelectProps>(), {
   disabled: false,
   showEmpty: true,
   multiple: false,
+  create: false
 });
 
 const openState = ref(false);
@@ -54,15 +57,16 @@ const open = function () {
     return;
   }
   openState.value = !openState.value;
+  console.log(props.create)
 };
 
-const emit = defineEmits(["update:modelValue", "change"]);
+const emit = defineEmits(["update:modelValue", "change", 'search', 'create']);
 const selectItem = ref<SelectItem>({
   value: !props.multiple
     ? props.modelValue
     : props.modelValue
-    ? ([] as any[]).concat(props.modelValue)
-    : [],
+      ? ([] as any[]).concat(props.modelValue)
+      : [],
   label: props.multiple ? [] : null,
   multiple: props.multiple,
 } as SelectItem);
@@ -96,13 +100,31 @@ watch(props, () => {
 
 // 禁止操作子项
 const disabledItemMap: { [key: string | number]: boolean } = {};
-const selectItemHandle = function (
+const txt = ref("")
+const input = ref(false)
+const value = computed({
+  set(v: any) {
+    txt.value = v;
+    emit('search', v)
+  },
+  get() {
+    if (input.value) {
+      return txt.value;
+    }
+    // return txt.value;
+    return !selectItem.value.multiple && selectItem.value.value !== null
+      ? selectItem.value.label
+      : null
+  }
+})
+const selectItemHandle = async function (
   _selectItem: SelectItem,
   isChecked?: boolean
 ) {
   if (!props.multiple) {
     openState.value = false;
   }
+  txt.value = ""
   disabledItemMap[_selectItem.value as string | number] =
     _selectItem.disabled as boolean;
   if (typeof isChecked !== "boolean") {
@@ -144,6 +166,7 @@ const selectItemPush = function (p: SelectItem) {
 provide("selectItemHandle", selectItemHandle);
 provide("selectItemPush", selectItemPush);
 provide("selectItem", selectItem);
+provide("keyword", txt)
 </script>
 
 <template>
@@ -157,18 +180,15 @@ provide("selectItem", selectItem);
         type="text"
         :placeholder="
           selectItem.value !== null &&
-          Array.isArray(selectItem.value) &&
-          selectItem.value.length > 0
+            Array.isArray(selectItem.value) &&
+            selectItem.value.length > 0
             ? ''
             : emptyMessage ?? placeholder
         "
         :disabled="disabled"
-        readonly
-        :value="
-          !selectItem.multiple && selectItem.value !== null
-            ? selectItem.label
-            : null
-        "
+        v-model="value"
+        @input="input = true"
+        @blur="input = false"
         :name="name"
         :class="[
           'layui-input',
@@ -204,8 +224,7 @@ provide("selectItem", selectItem);
                       : null,
                   })
                 "
-              >
-              </i>
+              ></i>
             </lay-badge>
           </template>
         </div>
@@ -214,8 +233,21 @@ provide("selectItem", selectItem);
 
     <!-- 下拉内容 -->
     <dl class="layui-anim layui-anim-upbit">
-      <template v-if="!multiple && showEmpty">
+      <template v-if="!multiple && showEmpty && !props.create">
         <lay-select-option :value="null" :label="emptyMessage ?? placeholder" />
+      </template>
+      <template v-if="props.create">
+        <dd @click="emit('create', txt)">{{ txt }}</dd>
+      </template>
+      <template v-if="props.items">
+        <lay-select-option
+          v-for="(v, k) in props.items"
+          :key="k"
+          :value="v.value"
+          :label="v.label"
+          :disabled="v.disabled"
+          :keyword="v.keyword"
+        ></lay-select-option>
       </template>
       <slot></slot>
     </dl>

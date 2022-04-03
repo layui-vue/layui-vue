@@ -7,21 +7,25 @@ export default {
 <script setup lang="ts">
 import LayCheckbox from "../checkbox";
 import { SelectItem, SelectItemHandle, SelectItemPush } from "../../types";
-import { computed, inject, onMounted, Ref } from "vue";
+import { computed, inject, onMounted, Ref, ref } from "vue";
 
 export interface LaySelectOptionProps {
-  value: string | null | undefined;
-  label?: string;
+  value: string | null | undefined | number;
+  label: string;
+  keyword?: string;
   disabled?: boolean;
 }
 
 const props = withDefaults(defineProps<LaySelectOptionProps>(), {
   disabled: false,
+  keyword: "",
+  label: ""
 });
 
 const selectItemHandle = inject("selectItemHandle") as SelectItemHandle;
 const selectItem = inject("selectItem") as Ref<SelectItem>;
 const selectItemPush = inject("selectItemPush") as Ref<SelectItemPush>;
+const keyword = inject('keyword') as Ref<string>
 
 const selectHandle = function () {
   !props.disabled && callSelectItemHandle(!selected.value);
@@ -45,7 +49,7 @@ const selected = computed({
     }
     return selectItem.value.value === props.value;
   },
-  set(val) {},
+  set(val) { },
 });
 const callSelectItemPush = function () {
   let item = {
@@ -56,25 +60,24 @@ const callSelectItemPush = function () {
   // @ts-ignore
   selectItemPush(item);
 };
+const search = ref("")
 onMounted(() => {
+  search.value = props.keyword || props.label
   callSelectItemPush();
   selected.value && callSelectItemHandle();
+
 });
 </script>
 
 <template>
   <dd
+    v-show="keyword ? search.includes(keyword) : true"
     :value="value"
     :class="[{ 'layui-this': selected }, { 'layui-disabled': disabled }]"
     @click="selectHandle"
   >
     <template v-if="selectItem.multiple">
-      <lay-checkbox
-        skin="primary"
-        v-model="selected"
-        @change="selectHandle"
-        label=""
-      />
+      <lay-checkbox skin="primary" v-model="selected" @change="selectHandle" label />
     </template>
     <slot>{{ label }}</slot>
   </dd>
