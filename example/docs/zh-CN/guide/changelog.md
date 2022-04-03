@@ -10,22 +10,47 @@
 ::: demo
 <template>
 <lay-timeline>
-  <lay-timeline-item title="0.4.0">
-    <ul> 
-      <a name="0-4-5"> </a> 
+  <lay-timeline-item title="1.0.x">
+  <ul> 
+      <a name="1-0-1"> </a> 
       <li> 
-        <h3>0.4.4 <span class="layui-badge-rim">2022-03-29</span></h3> 
+        <h3>1.0.1 <span class="layui-badge-rim">2022-04-03</span></h3> 
         <ul>
-          <li>[新增] tab 组件 position 属性, 不同方向的选项卡标题。</li>
-          <li>[修复] transfer 组件 showSearch 属性类型警告。</li>
+          <li>[新增] upload 组件 cut cutOptions 属性, 支持上传裁剪。</li>
+          <li>[新增] timeline 组件 direction 属性, 支持垂直与水平布局。</li>
+          <li>[新增] config-proivder 组件 global-dark-background-color 夜间模式背景颜色变量。</li>
+          <li>[新增] config-proivder 组件 global-dark-text-color 夜间模式文字颜色变量。</li>
+        </ul> 
+      </li>
+    </ul>
+    <ul> 
+      <a name="1-0-0"> </a> 
+      <li> 
+        <h3>1.0.0 <span class="layui-badge-rim">2022-04-02</span></h3> 
+        <ul>
+          <li>[重要] 修订 version 为 1.0.0。</li>
+          <li>[新增] empty 组件 extra 插槽, 支持扩展内容。</li>
+          <li>[新增] result 组件 extra 插槽, 支持扩展内容。</li>
+          <li>[新增] exception 组件 extra 插槽, 支持扩展内容。</li>
+          <li>[新增] switch 组件 onswitch-value 属性, 默认为 true。</li>
+          <li>[新增] switch 组件 unswitch-value 属性, 默认为 false。</li>
+          <li>[新增] date-picker 组件 time 属性, 支持 时 分 秒 选择。</li>
+          <li>[新增] date-picker 组件 yearmonth 属性, 支持 年 月 选择。</li>
+          <li>[新增] tab 组件 position 属性, 用于支持不同方向的选项卡标题。</li>
+          <li>[修复] date-picker 组件 type 属性为 time 时, v-model 默认不生效。</li>
+          <li>[修复] date-picker 组件 12 小时制为 24 小时制。</li>
+          <li>[修复] transfer 组件 showSearch 属性类型警告。</li>              
           <li>[修复] upload 组件 number 属性必填警告。</li>
           <li>[修复] variable 全局变量重复导入的问题。</li>
           <li>[修复] menu 组件 openKeys 属性失效。</li>
+          <li>[支持] animation 点击演示。</li>
           <li>[支持] icon 列表复制。</li>
           <li>[支持] 夜间模式。</li>
         </ul> 
       </li>
     </ul>
+  </lay-timeline-item>
+  <lay-timeline-item title="0.4.x">
     <ul> 
       <a name="0-4-4"> </a> 
       <li> 

@@ -37,7 +37,7 @@ export default {
 ::: title 简约按钮
 :::
 
-::: demo 使用 `border` 属性设置边框主题
+::: demo 使用 `border` 属性设置边框颜色
 
 <template>
   <lay-button>原始按钮</lay-button>

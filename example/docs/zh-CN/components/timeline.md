@@ -111,6 +111,44 @@ export default {
   }
 }
 </script>
+:::
+
+::: title 水平方向
+:::
+
+::: demo
+
+<template>
+    <lay-timeline direction="horizontal">
+        <lay-timeline-item title="2015年" >2015年，layui 孵化</lay-timeline-item>
+        <lay-timeline-item title="2016年" >2016年，layui 首个版本发布</lay-timeline-item>
+        <lay-timeline-item title="2017年" >layui里程碑版本1.0发布</lay-timeline-item>
+        <lay-timeline-item title="2021年" >layui里程碑版本2.0发布</lay-timeline-item>
+    </lay-timeline>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    return {
+    }
+  }
+}
+</script>
+
+:::
+
+::: title Timeline 属性
+:::
+
+::: table
+
+| 属性        | 描述   | 可选值 |
+|-----------|------|-----|
+| direction | 排列方向 | `horizontal` `vertical`  |
 
 :::
 
@@ -119,10 +157,10 @@ export default {
 
 ::: table
 
-|        |          |     |
-| ------ | -------- | --- |
+| 属性     | 描述   | 可选值 |
+|--------|------|-----|
 | simple | 简单模式 | --  |
-| title  | 标题     | --  |
+| title  | 标题   | --  |
 
 :::
 
@@ -131,9 +169,9 @@ export default {
 
 ::: table
 
-|        |          |     |
-| ------ | -------- | --- |
-| dot | 节点 | --  |
+| 插槽名 | 描述  |     |
+|-----|-----| --- |
+| dot | 节点  | --  |
 
 :::
 

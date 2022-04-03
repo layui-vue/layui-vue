@@ -14,18 +14,18 @@
           class="layui-nav layui-layout-left"
           style="margin-top: 0px; margin-bottom: 0px"
         >
-          <li class="layui-nav-item">
+          <li class="layui-nav-item" :class="{ 'layui-active':currentPath.includes('/zh-CN/index') }">
             <router-link to="/zh-CN/index"> {{ t("nav.home") }} </router-link>
           </li>
-          <li class="layui-nav-item">
+          <li class="layui-nav-item" :class="{ 'layui-active':currentPath.includes('/zh-CN/guide') }">
             <router-link to="/zh-CN/guide"> {{ t("nav.guide") }} </router-link>
           </li>
-          <li class="layui-nav-item">
+          <li class="layui-nav-item" :class="{ 'layui-active':currentPath.includes('/zh-CN/components') }">
             <router-link to="/zh-CN/components">
               {{ t("nav.components") }}
             </router-link>
           </li>
-          <li class="layui-nav-item">
+          <li class="layui-nav-item" :class="{ 'layui-active':currentPath.includes('/zh-CN/resources') }">
             <router-link to="/zh-CN/resources">
               {{ t("nav.resources") }}
             </router-link>
@@ -109,7 +109,15 @@
                   <lay-color-picker
                     v-model="themeVariable['--global-neutral-color-8']"
                   ></lay-color-picker>
-                  <lay-button fluid>导 出 配 置</lay-button>
+                  <lay-color-picker
+                    v-model="themeVariable['--global-dark-text-color']"
+                  ></lay-color-picker
+                  >&nbsp;
+                  <lay-color-picker
+                    v-model="themeVariable['--global-dark-background-color']"
+                  ></lay-color-picker>
+
+                  <lay-button fluid="true">导 出 配 置</lay-button>
                 </div>
               </template>
             </lay-dropdown>
@@ -140,8 +148,10 @@
           <li class="layui-nav-item">
             <a href="javascript:void(0)">
               <lay-switch
-                v-model="isDark"
+                v-model="theme"
                 class="switch"
+                onswitch-value="dark"
+                unswitch-value="light"
                 onswitch-color="rgba(255, 255, 255, 0.05)"
                 unswitch-color="rgba(255, 255, 255, 0.05)"
               >
@@ -216,7 +226,6 @@ import menu from "../view/utils/menus";
 import { useI18n } from "vue-i18n";
 import zh_CN from "../locales/zh_CN.ts";
 import en_US from "../locales/en_US.ts";
-import { getLayuiVueVersion }  from "../../../src/utils/getLayuiVueVersion.ts"
 
 export default {
   setup() {
@@ -224,13 +233,14 @@ export default {
     const route = useRoute();
     const router = useRouter();
     const locale = ref("zh_CN");
-    const currentPath = ref("/zh-CN/guide");
-    const isDark = ref(false);
     const locales = [
       { name: "zh_CN", locale: zh_CN, merge: true },
       { name: "en_US", locale: en_US, merge: true },
     ];
-    const theme = ref("light");
+    let isDark = (localStorage.getItem('layui-vue-theme-dark') !== "false") ||
+                 window.matchMedia('prefers-color-scheme: dark').matches;
+    
+    const theme = ref(isDark ? "dark":"light");
     const themeVariable = ref({
       "--global-primary-color": "#009688",
       "--global-normal-color": "#1e9fff",
@@ -246,29 +256,31 @@ export default {
       "--global-neutral-color-6": "#d2d2d2",
       "--global-neutral-color-7": "#cccccc",
       "--global-neutral-color-8": "#c2c2c2",
+      "--global-dark-text-color": "#FFFFFFc9",
+      "--global-dark-background-color": "#22272E",
     });
 
     const menus = [];
-
+    const currentPath = ref("/zh-CN/guide");
+    watch(
+      () => route.path,
+      (val) => {
+        currentPath.value = val;
+      },
+      {
+        immediate: true,
+        deep: true,
+      }
+    );
     menu.forEach((m) => {
       m.children.forEach((c) => {
         menus.push(c);
       });
     });
 
-    const latestVer = getLayuiVueVersion();
     const layuiVueVersion = computed(() => 
-      latestVer.value 
-      ?? import.meta.env.LAYUI_VUE_VERSION
+       import.meta.env.LAYUI_VUE_VERSION
     )
-
-    watch(isDark, () => {
-      if (isDark.value) {
-        theme.value = "dark";
-      } else {
-        theme.value = "light";
-      }
-    });
 
     watch(
       () => route.path,
@@ -286,7 +298,9 @@ export default {
       locale.value = lang;
     };
 
-    provide("isDark",isDark);
+    window.matchMedia('(prefers-color-scheme: dark)')
+      .addListener(e => theme.value = e.matches ? "dark" : "light");
+
     provide("theme",theme);
     provide('LayuiVueVersion', layuiVueVersion);
 
@@ -295,12 +309,12 @@ export default {
       menus,
       theme,
       locale,
-      isDark,
       locales,
       currentPath,
       handleClick,
       changeLocale,
       themeVariable,
+      currentPath,
       layuiVueVersion,
     };
   },
@@ -308,6 +322,7 @@ export default {
 </script>
 
 <style>
+
 .layui-layout-document > .layui-header {
   z-index: 99;
   width: 100%;
@@ -356,6 +371,10 @@ export default {
 
 .layui-header > .layui-nav {
   background-color: transparent;
+}
+
+.layui-header > .layui-nav .layui-active * {
+  color: var(--global-checked-color)!important;
 }
 
 .layui-header .layui-local-badge {

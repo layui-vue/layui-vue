@@ -34,6 +34,18 @@ onMounted(() => {
   --docsearch-searchbox-background: rgba(255, 255, 255, 0.02);
   --docsearch-searchbox-focus-background: rgba(255, 255, 255, 0.02);
   --docsearch-container-background: rgba(0, 0, 0, 0.1);
+  --docsearch-searchbox-shadow: inset 0 0 0 1px var(--docsearch-primary-color);
+}
+.DocSearch-Button{
+  width: 150px;
+  border-radius: 50px;
+}
+.DocSearch-Button-Container {
+  padding-left: 2px;
+}
+
+.DocSearch-Button-Placeholder {
+  padding-left: 8px;
 }
 
 .DocSearch-Button,
@@ -54,5 +66,9 @@ onMounted(() => {
 .DocSearch-Search-Icon, 
 .DocSearch-Button-Placeholder {
   color: rgba(0, 0, 0, 0.6);
+}
+
+.DocSearch-Button-Keys {
+  display: none;
 }
 </style>

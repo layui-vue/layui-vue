@@ -59,3 +59,42 @@
 .layui-timeline-item:before {
   background-color: #eee;
 }
+
+.layui-timeline-horizontal .layui-timeline-item {
+  display: inline-block;
+  width: 25%;
+  text-align: center;
+  padding-top: 10px;
+  vertical-align: top;
+}
+
+.layui-timeline-horizontal .layui-timeline-axis {
+  left: 47%;
+  top: -4px;
+}
+
+.layui-timeline-horizontal .layui-timeline-item:before {
+  left: 0px;
+  top: 5px;
+  width: 100%;
+  height: 1px;
+}
+
+.layui-timeline-horizontal .layui-timeline-item:first-child:before {
+  display: block;
+}
+
+.layui-timeline-horizontal .layui-timeline-item:last-child:before {
+  display: block;
+}
+
+.layui-timeline-horizontal .layui-timeline-content {
+  padding: 15px;
+}
+
+.layui-timeline-horizontal .layui-timeline-title {
+  text-align: center;
+  position: relative;
+  margin-bottom: 10px;
+  line-height: 22px;
+}

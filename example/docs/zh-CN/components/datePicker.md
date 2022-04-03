@@ -116,7 +116,69 @@ export default {
 
 :::
 
- 
+::: title 时间选择
+:::
+
+::: demo
+
+<template>
+  <lay-date-picker type="time" v-model="endTime5"></lay-date-picker>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+   const endTime5 = ref("2022-03-04 17:35:00");
+
+    return {
+      endTime5
+    }
+  }
+}
+</script>
+
+:::
+
+::: title 年月选择
+:::
+
+::: demo
+
+<template>
+  <lay-date-picker type="yearmonth" v-model="endTime6"></lay-date-picker>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+   const endTime6 = ref("2022-03-04 17:35:00");
+
+    return {
+      endTime6
+    }
+  }
+}
+</script>
+
+:::
+
+::: title Date Picker 属性
+:::
+
+::: table
+
+| 属性          | 描述                                                         | 类型           | 默认值 | 可选值         |
+| ------------- | ------------------------------------------------------------ | -------------- | ------ | -------------- |
+| v-model      | 当前时间                                                     | `string`         | --    | —             |
+| type        | 选择类型                                                   | `string`         | `date`    | `date` `datetime` `year` `month` `time` `yearmonth`             |
+
+:::
 
 ::: previousNext transfer
 :::

@@ -35,8 +35,8 @@ const props = withDefaults(defineProps<LayDropdownProps>(), {
       <div class="layui-exception-details-content">
         <div class="layui-exception-details-title">{{ title }}</div>
         <div class="layui-exception-details-describe">{{ describe }}</div>
-        <div class="layui-exception-details-operate">
-          <slot name="action"></slot>
+        <div class="layui-exception-details-extra">
+          <slot name="extra"></slot>
         </div>
       </div>
     </div>

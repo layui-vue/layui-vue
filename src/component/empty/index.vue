@@ -24,5 +24,8 @@ const props = withDefaults(defineProps<LayEmptyProps>(), {
       <img class="layui-empty-image-default" src="./index.svg" />
     </div>
     <div class="layui-empty-description">{{ description }}</div>
+    <div class="layui-empty-extra">
+      <slot name="extra"></slot>
+    </div>
   </div>
 </template>

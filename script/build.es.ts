@@ -55,7 +55,7 @@ export default (): UserConfigExport => {
           entryFileNames: ({ name }) => {
             return name === 'index' ? 'index.js' : '[name]/index.js'
           },
-          assetFileNames: '[name]/index.css'
+          assetFileNames: '[name]/index.css',
         },
         external: ['vue', 'vue-router']
       }

@@ -71,8 +71,8 @@ const props = withDefaults(defineProps<LayResultProps>(), {
     <div class="content">
       <slot name="content"></slot>
     </div>
-    <div class="action">
-      <slot name="action"></slot>
+    <div class="extra">
+      <slot name="extra"></slot>
     </div>
   </div>
 </template>
