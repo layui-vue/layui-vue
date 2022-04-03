@@ -190,6 +190,44 @@ export default {
 
 :::
 
+::: title 传入create属性和接收create事件用于开启创建子项功能
+:::
+
+::: demo
+
+<template>
+  <lay-select v-model="selected" :items="items" :create="true"  @create="createEvent">
+  </lay-select>
+  当前元素: {{items.map(o=>o.label).join()}}
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+    const selected = ref('1');
+    const items=ref([
+      {label:'选项1',value:'1',keyword:'选项xuanxiang1'},
+      {label:'选项2',value:2,keyword:'选项xuanxiang2'},
+      {label:'选项3',value:3,keyword:'选项xuanxiang3',disabled:true},
+    ]);
+    function createEvent(v){
+      items.value.push({
+        label:v,
+        value:items.value.length
+      })
+    }
+    return {
+      selected,items,createEvent
+    }
+  }
+}
+</script>
+
+
+:::
+
 ::: title 海量数据 
 :::
 
@@ -283,6 +321,7 @@ export default {
 | disabled     | 是否禁用              | `boolean`                  | `true` `false` | `false` |
 | showEmpty    | 是否增加空提示选项     | `boolean`                  | `true` `false` | `true` |
 | multiple     | 是否为多选            | `boolean`                  | `true` `false` | `false` |
+| create       | 是否允许创建            | `boolean`                  | `true` `false` | `false` |
 
 
 :::
@@ -296,6 +335,7 @@ export default {
 | ------ | ---------- | --------------- |
 | change | 切换事件    | value           |
 | search | 关键词变化事件    | 用户输入的关键词 string           |
+| create | 允许创建情况下的创建回调事件    | 用户输入的关键词 string           |
 
 :::
 

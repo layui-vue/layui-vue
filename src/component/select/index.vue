@@ -29,6 +29,7 @@ export interface LaySelectProps {
   showEmpty?: boolean;
   emptyMessage?: string;
   multiple?: boolean;
+  create?: boolean;
   items?: { label: string, value: string | number | [] | null, key: string }[]
 }
 
@@ -44,6 +45,7 @@ const props = withDefaults(defineProps<LaySelectProps>(), {
   disabled: false,
   showEmpty: true,
   multiple: false,
+  create: false
 });
 
 const openState = ref(false);
@@ -55,9 +57,10 @@ const open = function () {
     return;
   }
   openState.value = !openState.value;
+  console.log(props.create)
 };
 
-const emit = defineEmits(["update:modelValue", "change", 'search']);
+const emit = defineEmits(["update:modelValue", "change", 'search', 'create']);
 const selectItem = ref<SelectItem>({
   value: !props.multiple
     ? props.modelValue
@@ -114,7 +117,7 @@ const value = computed({
       : null
   }
 })
-const selectItemHandle = function (
+const selectItemHandle = async function (
   _selectItem: SelectItem,
   isChecked?: boolean
 ) {
@@ -230,8 +233,11 @@ provide("keyword", txt)
 
     <!-- 下拉内容 -->
     <dl class="layui-anim layui-anim-upbit">
-      <template v-if="!multiple && showEmpty">
+      <template v-if="!multiple && showEmpty && !props.create">
         <lay-select-option :value="null" :label="emptyMessage ?? placeholder" />
+      </template>
+      <template v-if="props.create">
+        <dd @click="emit('create', txt)">{{ txt }}</dd>
       </template>
       <template v-if="props.items">
         <lay-select-option
