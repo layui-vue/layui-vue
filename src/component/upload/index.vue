@@ -72,7 +72,6 @@ const getCutDownResult = () => {
     let currentTimeStamp = new Date().valueOf();
     emit("cutdone", Object.assign({ currentTimeStamp, msg: imgData }));
     let newFile = dataURLtoFile(imgData);
-    console.log(newFile);
     commonUploadTransaction([newFile]);
     nextTick(() => clearAllCutEffect());
   } else {
@@ -80,7 +79,6 @@ const getCutDownResult = () => {
   }
 };
 const closeCutDownModal = () => {
-  console.log("closeCutDownModal");
   let currentTimeStamp = new Date().valueOf();
   emit("cutcancel", Object.assign({ currentTimeStamp }));
   nextTick(() => clearAllCutEffect());
@@ -89,7 +87,6 @@ const clearAllCutEffect = () => {
   activeUploadFiles.value = [];
   activeUploadFilesImgs.value = [];
   innerCutVisible.value = false;
-  console.log("clearAllCutEffect");
 };
 
 let defaultCutLayerOption: LayerModal = {
@@ -312,7 +309,6 @@ const getUploadChange = (e: any) => {
     innerCutVisible.value = true;
     setTimeout(() => {
       let _imgs = document.getElementsByClassName("_lay_upload_img");
-      console.log("293", _imgs);
       let _img = _imgs[0];
       _cropper = new Cropper(_img, {
         aspectRatio: 16 / 9,
@@ -346,7 +342,6 @@ const chooseFile = () => {
 };
 const clickOrgInput = () => {
   let currentTimeStamp = new Date().valueOf();
-  //console.log(currentTimeStamp);
   emit("choose", currentTimeStamp);
 };
 const cutTransaction = () => {};
