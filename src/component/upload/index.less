@@ -1,5 +1,5 @@
 @import (reference) "../../theme/variable.less";
-
+@import "./cropper.min.css";
 .layui-upload-file {
   // display: none !important;
   opacity: 0.01;
@@ -84,4 +84,18 @@
 
 .layui-btn-container .layui-upload-choose {
   padding-left: 0;
+}
+
+.layui-upload-drag-disable{
+  opacity:0.8;
+  z-index:1;
+  cursor: not-allowed;
+}
+
+.copper-container{
+  // width:1000px;
+}
+._lay_upload_img{
+  display: block;
+  max-width: 100%;
 }

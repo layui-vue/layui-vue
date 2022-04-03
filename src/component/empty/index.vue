@@ -7,7 +7,7 @@ export default {
 <script setup lang="ts">
 import "./index.less";
 import { withDefaults } from "vue";
-import { String } from "src/types";
+import { String } from "../../types";
 
 export interface LayEmptyProps {
   description?: String;

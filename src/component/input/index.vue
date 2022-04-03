@@ -8,7 +8,7 @@ export default {
 import "./index.less";
 import { useSlots } from "vue";
 import { useI18n } from "vue-i18n";
-import { Boolean, String } from "src/types";
+import { Boolean, String } from "../../types";
 
 const { t } = useI18n();
 const slots = useSlots();

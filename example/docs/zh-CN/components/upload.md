@@ -106,13 +106,13 @@ export default {
 
 :::
 
-::: title 自定义预览
+::: title 自定义预览/上传禁用
 :::
 
-::: demo 使用 `lay-upload` 标签, 使用 `#preview` 自定义预览的UI交互
+::: demo 使用 `lay-upload` 标签, 使用 `#preview` 自定义预览的UI交互,使用  `disabled` 添加上传禁用
 
 <template>
-  <lay-upload @done="getUploadFile2">
+  <lay-upload @done="getUploadFile2" :disabled="true">
     <template #preview>
       <div class="easy-wrap">
         <img src="https://chixian.oss-cn-hangzhou.aliyuncs.com/20211023003617_0706a.jpg" style="width:62.9px;height:63.2px"/>
@@ -141,6 +141,49 @@ export default {
 
 :::
 
+:::
+
+::: title 提供默认剪裁功能
+
+::: demo 使用 `lay-upload` 标签, 添加 `cut` 开启 选择文件后剪裁功能
+
+<template>
+  <lay-upload @cutdone="getCutDone" @cutcancel="getCutCancel" :cut="true" :multiple="false" @done="getFileDone">
+    <template #preview>
+      <div class="easy-wrap" v-if="cutUrl">
+        <img :src="cutUrl"/>
+      </div>
+    </template>
+  </lay-upload>
+</template>
+
+<script>
+import { ref } from 'vue'
+export default {
+  setup() {
+    const cutUrl = ref("");
+    const getCutDone=(res)=>{
+      console.log("getCutDone",res);
+      cutUrl.value = res.msg;
+    };
+    const getCutCancel=(res)=>{
+      console.log("getCutCancel",res);
+    };
+    const getFileDone=(res)=>{
+      console.log("getFileDone",res);
+    };
+    return {
+      getCutDone,
+      getCutCancel,
+      getFileDone,
+      cutUrl
+    }
+  }
+}
+</script>
+
+:::
+
 ::: title Upload 属性
 :::
 
@@ -157,6 +200,9 @@ export default {
 | multiple | 是否允许多文件上传。设置 true即可开启。不支持ie8/9 | boolean  | false  | -- |
 | number | 设置同时可上传的文件数量，一般配合 multiple 参数出现。 | number  | `0(不限制)`  | -- |
 | drag | 是否接受拖拽的文件上传，设置 false 可禁用。不支持ie8/9 | boolean  | true  | -- |
+| disabled | 设置文件禁用 | boolean  | false  | -- |
+| cut | 是否开启选择图片后检测,设置true可开启 | boolean  | false  | -- |
+| cutOptions | 开启剪裁的模态弹窗与剪裁框的配置 | object  | { layerOption,copperOption }  | -- |
 
 :::
 
@@ -182,7 +228,8 @@ export default {
 | before | 上传事务开启前的回调 | --   |
 | done | 上传事务结束的回调 | --   |
 | error | 上传事务中出现错误的回调 | --   |
-
+| cutdown | 剪裁完成 | --   |
+| cutclose | 剪裁取消 | --   |
 :::
 
 

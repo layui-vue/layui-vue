@@ -7,11 +7,49 @@ export default {
 import "./index.less";
 import { Recordable } from "../../types";
 import { layer } from "@layui/layer-vue";
-import { ref, useSlots, withDefaults } from "vue";
+import {
+  computed,
+  ComputedRef,
+  getCurrentInstance,
+  nextTick,
+  ref,
+  toRaw,
+  useSlots,
+  withDefaults,
+} from "vue";
 import { templateRef } from "@vueuse/core";
-
+import { LayLayer } from "@layui/layer-vue";
+import Cropper from "cropperjs";
 // 组件的参数字段类型
 //https://www.layuiweb.com/doc/modules/upload.html#options
+export interface LayerButton {
+  text: string;
+  callback: Function;
+}
+export interface LayerModal {
+  title?: string;
+  resize?: boolean;
+  move?: boolean;
+  maxmin?: boolean;
+  offset?: string[];
+  content?: string;
+  shade?: boolean;
+  shadeClose?: boolean;
+  shadeOpacity?: number;
+  zIndex?: number;
+  type?: "component" | "iframe";
+  closeBtn?: boolean;
+  area: string[];
+  btn?: LayerButton[];
+  btnAlign?: "l" | "r" | "c";
+  anim?: boolean;
+  isOutAnim?: boolean;
+}
+export interface cutOptions {
+  layerOption: LayerModal;
+  copperOption?: typeof Cropper;
+}
+
 export interface LayUploadProps {
   url?: string;
   data?: any;
@@ -22,8 +60,50 @@ export interface LayUploadProps {
   multiple?: boolean;
   number?: number;
   drag?: boolean;
+  disabled?: boolean;
+  cut?: boolean;
+  cutOptions: cutOptions;
 }
 
+const getCutDownResult = () => {
+  if (_cropper) {
+    const canvas = _cropper.getCroppedCanvas();
+    let imgData = canvas.toDataURL('"image/png"');
+    let currentTimeStamp = new Date().valueOf();
+    emit("cutdone", Object.assign({ currentTimeStamp, msg: imgData }));
+    let newFile = dataURLtoFile(imgData);
+    commonUploadTransaction([newFile]);
+    nextTick(() => clearAllCutEffect());
+  } else {
+    errorF(cutInitErrorMsg);
+  }
+};
+const closeCutDownModal = () => {
+  let currentTimeStamp = new Date().valueOf();
+  emit("cutcancel", Object.assign({ currentTimeStamp }));
+  nextTick(() => clearAllCutEffect());
+};
+const clearAllCutEffect = () => {
+  activeUploadFiles.value = [];
+  activeUploadFilesImgs.value = [];
+  innerCutVisible.value = false;
+};
+
+let defaultCutLayerOption: LayerModal = {
+  title: "标题",
+  move: true,
+  maxmin: false,
+  offset: [],
+  btn: [
+    { text: "导出", callback: getCutDownResult },
+    { text: "取消", callback: closeCutDownModal },
+  ],
+  area: ["640px", "640px"],
+  content: "11",
+  shade: true,
+  shadeClose: true,
+  type: "component",
+};
 const props = withDefaults(defineProps<LayUploadProps>(), {
   acceptMime: "images",
   field: "file",
@@ -31,22 +111,48 @@ const props = withDefaults(defineProps<LayUploadProps>(), {
   multiple: false,
   number: 0,
   drag: false,
+  disabled: false,
+  cut: false,
+  cutOptions: void 0,
 });
 
 const slot = useSlots();
 const slots = slot.default && slot.default();
-const emit = defineEmits(["choose", "before", "done", "error"]);
+const context = getCurrentInstance();
+const emit = defineEmits([
+  "choose",
+  "before",
+  "done",
+  "error",
+  "cutdone",
+  "cutcancel",
+]);
 
 // 内部变量
 const isDragEnter = ref(false);
-
+// 待处理的上传文件
+const activeUploadFiles = ref<any[]>([]);
+// 待处理的上传图片
+const activeUploadFilesImgs = ref<any[]>([]);
 const orgFileInput = templateRef<HTMLElement>("orgFileInput");
+let _cropper: any = null;
+let computedCutLayerOption: ComputedRef<LayerModal>;
+if (props.cutOptions && props.cutOptions.layerOption) {
+  computedCutLayerOption = computed(() =>
+    Object.assign(defaultCutLayerOption, props.cutOptions.layerOption)
+  );
+} else {
+  computedCutLayerOption = computed(() => defaultCutLayerOption);
+}
+
 // 统一异常提示的常量
 const defaultErrorMsg = "上传失败";
 const urlErrorMsg = "上传地址格式不合法";
 const numberErrorMsg = "文件上传超过规定的个数";
 const sizeErrorMsg = "文件大小超过限制";
 const uploadRemoteErrorMsg = "请求上传接口出现异常";
+const cutInitErrorMsg = "剪裁插件初始化失败";
+// 统一成功提示
 const uploadSuccess = "上传成功";
 
 //内部方法 -> start
@@ -56,6 +162,8 @@ interface localUploadTransaction {
   files: File[] | Blob[];
   [propMame: string]: any;
 }
+
+const innerCutVisible = ref<boolean>(false);
 const localUploadTransaction = (option: localUploadTransaction) => {
   const { url, files } = option;
   let formData = new FormData();
@@ -88,6 +196,20 @@ interface localUploadOption {
   url: string;
   [propMame: string]: any;
 }
+const dataURLtoFile = (dataurl: string) => {
+  let arr: any[] = dataurl.split(",");
+  let mime: string = "";
+  if (arr.length > 0) {
+    mime = arr[0].match(/:(.*?);/)[1];
+  }
+  let bstr = atob(arr[1]);
+  let n = bstr.length;
+  let u8arr = new Uint8Array(n);
+  while (n--) {
+    u8arr[n] = bstr.charCodeAt(n);
+  }
+  return new Blob([u8arr], { type: mime });
+};
 
 const errorF = (errorText: string) => {
   let currentTimeStamp = new Date().valueOf();
@@ -139,7 +261,13 @@ const localUpload = (option: localUploadOption, callback: Function) => {
     cb();
   }
 };
-
+const filetoDataURL = (file: File, fn: Function) => {
+  const reader = new FileReader();
+  reader.onloadend = function (e: any) {
+    fn(e.target.result);
+  };
+  reader.readAsDataURL(file);
+};
 const getUploadChange = (e: any) => {
   const files = e.target.files;
   const _files = [...files];
@@ -165,17 +293,43 @@ const getUploadChange = (e: any) => {
           _sizeErrorFile.name
         } ${sizeErrorMsg},文件最大不可超过${props.size * 1000}kb`;
         errorF(errorMsg);
+        return;
       }
     }
   }
+  for (let item of _files) {
+    activeUploadFiles.value.push(item);
+    filetoDataURL(item, function (res: any) {
+      activeUploadFilesImgs.value.push(res);
+    });
+  }
+  let arm1 = props.cut && props.acceptMime == "images" && !props.multiple;
+  let arm2 = props.cut && props.acceptMime == "images" && props.multiple;
+  if (arm1) {
+    innerCutVisible.value = true;
+    setTimeout(() => {
+      let _imgs = document.getElementsByClassName("_lay_upload_img");
+      let _img = _imgs[0];
+      _cropper = new Cropper(_img, {
+        aspectRatio: 16 / 9,
+      });
+    }, 400);
+  } else {
+    if (arm2) {
+      console.warn(
+        "layui-vue:当前版本暂不支持单次多文件剪裁,尝试设置 multiple 为false,通过@done获取返回文件对象"
+      );
+    }
+    commonUploadTransaction(_files);
+  }
+};
+const commonUploadTransaction = (_files: any[]) => {
   if (props.url) {
-    // 表单提交
     localUploadTransaction({
       url: props.url,
       files: _files,
     });
   } else {
-    // 抛出上传文件信息
     emit("done", _files);
   }
 };
@@ -188,21 +342,9 @@ const chooseFile = () => {
 };
 const clickOrgInput = () => {
   let currentTimeStamp = new Date().valueOf();
-  //console.log(currentTimeStamp);
   emit("choose", currentTimeStamp);
 };
-const uploadDragOver = (e: any) => {};
-const uploadDragDrop = (e: any) => {
-  isDragEnter.value = false;
-  console.log(e);
-};
-const uploadDragStop = (e: any) => {};
-const uploadDragEnter = (e: any) => {
-  isDragEnter.value = true;
-};
-const uploadDragLeave = (e: any) => {
-  isDragEnter.value = false;
-};
+const cutTransaction = () => {};
 //内部方法 -> end
 </script>
 <template>
@@ -216,11 +358,12 @@ const uploadDragLeave = (e: any) => {
       :name="field"
       @change="getUploadChange"
       :field="field"
+      :disabled="disabled"
       ref="orgFileInput"
     />
     <div v-if="!drag">
       <div class="layui-upload-btn-box">
-        <lay-button type="primary" @click.stop="chooseFile"
+        <lay-button type="primary" @click.stop="chooseFile" :disabled="disabled"
           >上传图片</lay-button
         >
       </div>
@@ -228,11 +371,13 @@ const uploadDragLeave = (e: any) => {
     <div
       v-else
       class="layui-upload-drag"
-      :class="isDragEnter ? 'layui-upload-drag-draging' : ''"
-      @dragleave.stop="uploadDragLeave"
-      @dragenter.stop="uploadDragEnter"
-      @dragover.stop="uploadDragOver"
-      @drop="uploadDragDrop"
+      :class="
+        disabled
+          ? 'layui-upload-drag-disable'
+          : isDragEnter
+          ? 'layui-upload-drag-draging'
+          : ''
+      "
       @click.stop="chooseFile"
     >
       <i class="layui-icon"></i>
@@ -242,6 +387,34 @@ const uploadDragLeave = (e: any) => {
         <img src="" alt="上传成功后渲染" style="max-width: 196px" />
       </div>
     </div>
+    <lay-layer
+      :title="computedCutLayerOption.title"
+      :move="computedCutLayerOption.move"
+      :resize="computedCutLayerOption.resize"
+      :shade="computedCutLayerOption.shade"
+      :shadeClose="computedCutLayerOption.shadeClose"
+      :shadeOpacity="computedCutLayerOption.shadeOpacity"
+      :zIndex="computedCutLayerOption.zIndex"
+      :btnAlign="computedCutLayerOption.btnAlign"
+      :area="computedCutLayerOption.area"
+      :anim="computedCutLayerOption.anim"
+      :isOutAnim="computedCutLayerOption.isOutAnim"
+      :btn="computedCutLayerOption.btn"
+      v-model="innerCutVisible"
+      @close="clearAllCutEffect"
+    >
+      <div
+        class="copper-container"
+        v-for="(base64str, index) in activeUploadFilesImgs"
+        :key="`file${index}`"
+      >
+        <img
+          :src="base64str"
+          :id="`_lay_upload_img${index}`"
+          class="_lay_upload_img"
+        />
+      </div>
+    </lay-layer>
     <div class="layui-upload-list">
       <slot name="preview"></slot>
     </div>
