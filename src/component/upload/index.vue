@@ -7,38 +7,47 @@ export default {
 import "./index.less";
 import { Recordable } from "../../types";
 import { layer } from "@layui/layer-vue";
-import { computed, ComputedRef, getCurrentInstance, nextTick, ref, toRaw, useSlots, withDefaults } from "vue";
+import {
+  computed,
+  ComputedRef,
+  getCurrentInstance,
+  nextTick,
+  ref,
+  toRaw,
+  useSlots,
+  withDefaults,
+} from "vue";
 import { templateRef } from "@vueuse/core";
 import { LayLayer } from "@layui/layer-vue";
 import Cropper from "cropperjs";
 // 组件的参数字段类型
 //https://www.layuiweb.com/doc/modules/upload.html#options
-export interface LayerButton{
-  text:string;
-  callback:Function
+export interface LayerButton {
+  text: string;
+  callback: Function;
 }
-export interface LayerModal{
-  title?:string;
-  resize?:boolean;
-  move?:boolean;
-  maxmin?:boolean;
-  offset?:string[];
-  content?:string;
-  shade?:boolean;
-  shadeClose?:boolean;
-  shadeOpacity?:number;
-  zIndex?:number;
-  type?:"component"|"iframe";
-  closeBtn?:boolean;
-  area:string[],
-  btn?:LayerButton[];
-  btnAlign?:"l"|"r"|"c";
-  anim?:boolean;
-  isOutAnim?:boolean;
+export interface LayerModal {
+  title?: string;
+  resize?: boolean;
+  move?: boolean;
+  maxmin?: boolean;
+  offset?: string[];
+  content?: string;
+  shade?: boolean;
+  shadeClose?: boolean;
+  shadeOpacity?: number;
+  zIndex?: number;
+  type?: "component" | "iframe";
+  closeBtn?: boolean;
+  area: string[];
+  btn?: LayerButton[];
+  btnAlign?: "l" | "r" | "c";
+  anim?: boolean;
+  isOutAnim?: boolean;
 }
-export interface cutOptions{
-  layerOption:LayerModal;
-  copperOption?:typeof Cropper
+export interface cutOptions {
+  layerOption: LayerModal;
+  copperOption?: typeof Cropper;
 }
 
 export interface LayUploadProps {
@@ -51,52 +60,52 @@ export interface LayUploadProps {
   multiple?: boolean;
   number?: number;
   drag?: boolean;
-  disabled?:boolean;
-  cut?:boolean;
-  cutOptions:cutOptions;
-};
+  disabled?: boolean;
+  cut?: boolean;
+  cutOptions: cutOptions;
+}
 
-const getCutDownResult=()=>{
-  if(_cropper){
+const getCutDownResult = () => {
+  if (_cropper) {
     const canvas = _cropper.getCroppedCanvas();
     let imgData = canvas.toDataURL('"image/png"');
     let currentTimeStamp = new Date().valueOf();
-    emit("cutdone",Object.assign({ currentTimeStamp, msg:imgData }));
+    emit("cutdone", Object.assign({ currentTimeStamp, msg: imgData }));
     let newFile = dataURLtoFile(imgData);
     console.log(newFile);
     commonUploadTransaction([newFile]);
-    nextTick(()=>clearAllCutEffect());
-  }else{
+    nextTick(() => clearAllCutEffect());
+  } else {
     errorF(cutInitErrorMsg);
   }
 };
-const closeCutDownModal =()=>{
+const closeCutDownModal = () => {
   console.log("closeCutDownModal");
   let currentTimeStamp = new Date().valueOf();
-  emit("cutcancel",Object.assign({ currentTimeStamp }));
-  nextTick(()=>clearAllCutEffect());
-}
-const clearAllCutEffect=()=>{
+  emit("cutcancel", Object.assign({ currentTimeStamp }));
+  nextTick(() => clearAllCutEffect());
+};
+const clearAllCutEffect = () => {
   activeUploadFiles.value = [];
   activeUploadFilesImgs.value = [];
   innerCutVisible.value = false;
   console.log("clearAllCutEffect");
 };
 
-let defaultCutLayerOption:LayerModal = {
-  title:"标题",
-  move:true,
-  maxmin:false,
-  offset:[],
-  btn:[
-    { text:"导出",callback:getCutDownResult },
-    { text:"取消" ,callback:closeCutDownModal }
+let defaultCutLayerOption: LayerModal = {
+  title: "标题",
+  move: true,
+  maxmin: false,
+  offset: [],
+  btn: [
+    { text: "导出", callback: getCutDownResult },
+    { text: "取消", callback: closeCutDownModal },
   ],
-  area:["640px","640px"],
-  content:"11",
-  shade:true,
-  shadeClose:true,
-  type:"component"
+  area: ["640px", "640px"],
+  content: "11",
+  shade: true,
+  shadeClose: true,
+  type: "component",
 };
 const props = withDefaults(defineProps<LayUploadProps>(), {
   acceptMime: "images",
@@ -105,15 +114,22 @@ const props = withDefaults(defineProps<LayUploadProps>(), {
   multiple: false,
   number: 0,
   drag: false,
-  disabled:false,
-  cut:false,
-  cutOptions:void 0
+  disabled: false,
+  cut: false,
+  cutOptions: void 0,
 });
 
 const slot = useSlots();
 const slots = slot.default && slot.default();
 const context = getCurrentInstance();
-const emit = defineEmits(["choose", "before", "done", "error","cutdone","cutcancel"]);
+const emit = defineEmits([
+  "choose",
+  "before",
+  "done",
+  "error",
+  "cutdone",
+  "cutcancel",
+]);
 
 // 内部变量
 const isDragEnter = ref(false);
@@ -122,12 +138,14 @@ const activeUploadFiles = ref<any[]>([]);
 // 待处理的上传图片
 const activeUploadFilesImgs = ref<any[]>([]);
 const orgFileInput = templateRef<HTMLElement>("orgFileInput");
-let _cropper:any = null;
-let computedCutLayerOption:ComputedRef<LayerModal>;
-if(props.cutOptions&&props.cutOptions.layerOption){
-  computedCutLayerOption = computed(()=>Object.assign(defaultCutLayerOption,props.cutOptions.layerOption));
-}else{
-  computedCutLayerOption = computed(()=>defaultCutLayerOption);
+let _cropper: any = null;
+let computedCutLayerOption: ComputedRef<LayerModal>;
+if (props.cutOptions && props.cutOptions.layerOption) {
+  computedCutLayerOption = computed(() =>
+    Object.assign(defaultCutLayerOption, props.cutOptions.layerOption)
+  );
+} else {
+  computedCutLayerOption = computed(() => defaultCutLayerOption);
 }
 
 // 统一异常提示的常量
@@ -181,19 +199,19 @@ interface localUploadOption {
   url: string;
   [propMame: string]: any;
 }
-const dataURLtoFile=(dataurl:string)=> {
-  let arr:any[] = dataurl.split(',');
-  let mime:string = "";
-  if(arr.length>0){
+const dataURLtoFile = (dataurl: string) => {
+  let arr: any[] = dataurl.split(",");
+  let mime: string = "";
+  if (arr.length > 0) {
     mime = arr[0].match(/:(.*?);/)[1];
   }
   let bstr = atob(arr[1]);
   let n = bstr.length;
   let u8arr = new Uint8Array(n);
-  while(n--){
+  while (n--) {
     u8arr[n] = bstr.charCodeAt(n);
   }
-  return new Blob([u8arr], {type:mime});
+  return new Blob([u8arr], { type: mime });
 };
 
 const errorF = (errorText: string) => {
@@ -246,9 +264,9 @@ const localUpload = (option: localUploadOption, callback: Function) => {
     cb();
   }
 };
-const filetoDataURL=(file:File,fn:Function)=>{
+const filetoDataURL = (file: File, fn: Function) => {
   const reader = new FileReader();
-  reader.onloadend = function(e:any){
+  reader.onloadend = function (e: any) {
     fn(e.target.result);
   };
   reader.readAsDataURL(file);
@@ -282,38 +300,40 @@ const getUploadChange = (e: any) => {
       }
     }
   }
-  for(let item of _files){
+  for (let item of _files) {
     activeUploadFiles.value.push(item);
-    filetoDataURL(item,function(res:any){
+    filetoDataURL(item, function (res: any) {
       activeUploadFilesImgs.value.push(res);
     });
   }
-  let arm1 = props.cut&&props.acceptMime=="images"&&!props.multiple;
-  let arm2 = props.cut&&props.acceptMime=="images"&&props.multiple;
-  if(arm1){
+  let arm1 = props.cut && props.acceptMime == "images" && !props.multiple;
+  let arm2 = props.cut && props.acceptMime == "images" && props.multiple;
+  if (arm1) {
     innerCutVisible.value = true;
-    setTimeout(()=>{
+    setTimeout(() => {
       let _imgs = document.getElementsByClassName("_lay_upload_img");
-      console.log("293",_imgs);
+      console.log("293", _imgs);
       let _img = _imgs[0];
       _cropper = new Cropper(_img, {
         aspectRatio: 16 / 9,
       });
-    },400);
-  }else{
-    if(arm2){
-      console.warn("layui-vue:当前版本暂不支持单次多文件剪裁,尝试设置 multiple 为false,通过@done获取返回文件对象");
+    }, 400);
+  } else {
+    if (arm2) {
+      console.warn(
+        "layui-vue:当前版本暂不支持单次多文件剪裁,尝试设置 multiple 为false,通过@done获取返回文件对象"
+      );
     }
     commonUploadTransaction(_files);
   }
 };
-const commonUploadTransaction=(_files:any[])=>{
-  if(props.url){
+const commonUploadTransaction = (_files: any[]) => {
+  if (props.url) {
     localUploadTransaction({
       url: props.url,
-      files: _files
+      files: _files,
     });
-  }else{
+  } else {
     emit("done", _files);
   }
 };
@@ -329,9 +349,7 @@ const clickOrgInput = () => {
   //console.log(currentTimeStamp);
   emit("choose", currentTimeStamp);
 };
-const cutTransaction =()=>{
-  
-};
+const cutTransaction = () => {};
 //内部方法 -> end
 </script>
 <template>
@@ -358,7 +376,13 @@ const cutTransaction =()=>{
     <div
       v-else
       class="layui-upload-drag"
-      :class="disabled?'layui-upload-drag-disable':isDragEnter ? 'layui-upload-drag-draging' : ''"
+      :class="
+        disabled
+          ? 'layui-upload-drag-disable'
+          : isDragEnter
+          ? 'layui-upload-drag-draging'
+          : ''
+      "
       @click.stop="chooseFile"
     >
       <i class="layui-icon"></i>
@@ -368,7 +392,7 @@ const cutTransaction =()=>{
         <img src="" alt="上传成功后渲染" style="max-width: 196px" />
       </div>
     </div>
-    <lay-layer 
+    <lay-layer
       :title="computedCutLayerOption.title"
       :move="computedCutLayerOption.move"
       :resize="computedCutLayerOption.resize"
@@ -381,11 +405,20 @@ const cutTransaction =()=>{
       :anim="computedCutLayerOption.anim"
       :isOutAnim="computedCutLayerOption.isOutAnim"
       :btn="computedCutLayerOption.btn"
-      v-model="innerCutVisible" @close="clearAllCutEffect">
-      <div class="copper-container" v-for="(base64str,index) in activeUploadFilesImgs" :key="`file${index}`">
-        <img :src="base64str" :id="`_lay_upload_img${index}`" class="_lay_upload_img">
+      v-model="innerCutVisible"
+      @close="clearAllCutEffect"
+    >
+      <div
+        class="copper-container"
+        v-for="(base64str, index) in activeUploadFilesImgs"
+        :key="`file${index}`"
+      >
+        <img
+          :src="base64str"
+          :id="`_lay_upload_img${index}`"
+          class="_lay_upload_img"
+        />
       </div>
-
     </lay-layer>
     <div class="layui-upload-list">
       <slot name="preview"></slot>

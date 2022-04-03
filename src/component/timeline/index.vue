@@ -19,7 +19,7 @@ const props = withDefaults(defineProps<LayTimelineProps>(), {
 const timeLineClass = computed(() => [
   "layui-timeline",
   props.direction === "horizontal" ? "layui-timeline-horizontal" : "",
-])
+]);
 </script>
 
 <template>

@@ -60,10 +60,10 @@ const changeTheme = (theme: string) => {
         disableStyleSheetsProxy: false,
       }
     );
-    localStorage.setItem('layui-vue-theme-dark','true')
+    localStorage.setItem("layui-vue-theme-dark", "true");
   } else {
     disableDarkMode();
-    localStorage.setItem('layui-vue-theme-dark','false')
+    localStorage.setItem("layui-vue-theme-dark", "false");
   }
 };
 
