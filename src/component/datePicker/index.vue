@@ -1,7 +1,7 @@
 <template>
   <div>
     <lay-dropdown ref="dropdownRef">
-      <lay-input :name="name" :value="dateValue" readonly>
+      <lay-input :name="name" :value="dateValue" readonly="readonly">
         <template #prefix>
           <lay-icon type="layui-icon-date"></lay-icon>
         </template>
@@ -100,11 +100,11 @@
             </div>
           </div>
           <div class="layui-laydate-footer">
-            <span
+            <!-- <span
               class="layui-laydate-preview"
               title="当前选中的结果"
               style="color: rgb(102, 102, 102)"
-            >2022</span>
+            >2022</span>-->
             <div class="laydate-footer-btns">
               <span lay-type="clear" class="laydate-btns-clear" @click="clear">清空</span>
               <span lay-type="now" class="laydate-btns-now" @click="now">现在</span>
@@ -147,11 +147,11 @@
             </div>
           </div>
           <div class="layui-laydate-footer">
-            <span
+            <!-- <span
               class="layui-laydate-preview"
               title="当前选中的结果"
               style="color: rgb(102, 102, 102)"
-            >2022-03</span>
+            >2021-03</span>-->
             <div class="laydate-footer-btns">
               <span lay-type="clear" class="laydate-btns-clear" @click="clear">清空</span>
               <span lay-type="now" class="laydate-btns-now" @click="now">现在</span>
@@ -280,7 +280,7 @@ const dateValue = computed<string>(() => {
     return "";
   }
   let momentVal;
-  let momentObj = moment(props.modelValue || currentDay.value)
+  let momentObj = moment(currentDay.value || props.modelValue)
   momentVal = momentObj.format(fmtMap[props.type])
   if (momentVal != props.modelValue)
     $emits("update:modelValue", momentVal);
