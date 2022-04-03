@@ -141,8 +141,6 @@ export default {
 
 :::
 
-:::
-
 ::: title 提供默认剪裁功能
 
 ::: demo 使用 `lay-upload` 标签, 添加 `cut` 开启 选择文件后剪裁功能
