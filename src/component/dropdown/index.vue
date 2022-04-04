@@ -12,12 +12,14 @@ import { DropdownTrigger } from "./interface";
 
 export interface LayDropdownProps {
   trigger?: DropdownTrigger;
+  disabled?: boolean
 }
 
 const props = withDefaults(defineProps<LayDropdownProps>(), {
   trigger: "click",
+  disabled: false
 });
-
+const emit = defineEmits(['open', 'hide'])
 const openState = ref(false);
 const dropdownRef = ref<null | HTMLElement>(null);
 
@@ -26,15 +28,24 @@ onClickOutside(dropdownRef, (event) => {
 });
 
 const open = function () {
-  openState.value = true;
+  if (props.disabled === false) {
+    openState.value = true;
+    emit('open')
+  }
 };
 
 const hide = function () {
   openState.value = false;
+  emit('hide')
 };
 
 const toggle = function () {
-  openState.value = !openState.value;
+  if (props.disabled === false)
+    if (openState.value) {
+      hide()
+    } else {
+      open()
+    }
 };
 
 provide("openState", openState);

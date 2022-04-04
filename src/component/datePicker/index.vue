@@ -1,6 +1,6 @@
 <template>
   <div>
-    <lay-dropdown ref="dropdownRef">
+    <lay-dropdown ref="dropdownRef" :disabled="props.disabled">
       <lay-input :name="name" :value="dateValue || modelValue" readonly>
         <template #prefix>
           <lay-icon type="layui-icon-date"></lay-icon>
@@ -217,11 +217,17 @@ export interface LayDatePickerProps {
   modelValue?: string;
   type?: "date" | "datetime" | "year" | "time" | "month" | "yearmonth";
   name?: string;
+  max?: string;
+  min?: string;
+  disabled?: boolean;
+  simple?: boolean
 }
 
 const props = withDefaults(defineProps<LayDatePickerProps>(), {
   modelValue: "",
   type: "date",
+  disabled: false,
+  simple: false,
 });
 
 const dropdownRef = ref(null);
@@ -312,6 +318,9 @@ const dateValue = computed<string>(() => {
       break;
   }
   $emits("update:modelValue", momentVal);
+  if (props.simple) {
+    ok()
+  }
   return momentVal;
 });
 
@@ -368,8 +377,9 @@ watch(
 
 // 确认事件
 const ok = () => {
-  // @ts-ignore
-  dropdownRef.value.hide();
+  if (dropdownRef.value)
+    // @ts-ignore
+    dropdownRef.value.hide();
 };
 
 // 现在时间
