@@ -81,14 +81,15 @@ export default {
 </script>
 
 
+:::
 ::: title 禁用弹出
 :::
 
 ::: demo
 
 <template>
-  <lay-dropdown>
-    <lay-button type="primary" disabled>点击无效</lay-button>
+  <lay-dropdown disabled>
+    <lay-button type="primary" >禁用弹出</lay-button>
     <template #content>
         <lay-dropdown-menu>
           <lay-dropdown-menu-item>选项一</lay-dropdown-menu-item>
@@ -106,6 +107,39 @@ export default {
   setup() {
 
     return {
+    }
+  }
+}
+</script>
+
+
+:::
+::: title 事件处理
+:::
+
+::: demo
+
+<template>
+  <lay-dropdown @open="stat='开启'" @hide="stat='关闭'">
+    <lay-button type="primary" >当前状态:{{stat}}</lay-button>
+    <template #content>
+        <lay-dropdown-menu>
+          <lay-dropdown-menu-item>选项一</lay-dropdown-menu-item>
+          <lay-dropdown-menu-item>选项二</lay-dropdown-menu-item>
+          <lay-dropdown-menu-item>选项三</lay-dropdown-menu-item>
+        </lay-dropdown-menu>
+    </template>
+  </lay-dropdown>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+    const stat=ref("关闭")
+    return {
+      stat
     }
   }
 }
@@ -137,6 +171,17 @@ export default {
 :::
 
  
+::: title Dropdown 事件
+:::
+
+::: table
+
+| 插槽    | 描述     | 参数 |
+| ------- | -------- | ------ |
+| hide | 隐藏下拉内容后触发 | --     |
+| open | 显示下拉内容后触发 | --     |
+
+:::
 
 ::: previousNext dropdown
 :::
