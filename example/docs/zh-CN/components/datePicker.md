@@ -62,6 +62,33 @@ export default {
 
 :::
 
+::: title 禁止修改
+:::
+
+::: demo
+
+<template>
+  <!-- 选择的时间：{{endTime3}} -->
+  <lay-date-picker disabled type="year" v-model="endTime3"></lay-date-picker>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+   const endTime3 = ref("2022-03-04 17:35:00");
+
+    return {
+      endTime3
+    }
+  }
+}
+</script>
+
+:::
+
 ::: title 年份选择
 :::
 
@@ -177,6 +204,7 @@ export default {
 | ------------- | ------------------------------------------------------------ | -------------- | ------ | -------------- |
 | v-model      | 当前时间                                                     | `string`         | --    | —             |
 | type        | 选择类型                                                   | `string`         | `date`    | `date` `datetime` `year` `month` `time` `yearmonth`             |
+| disabled      | 是否禁止修改                                                     | `boolean`         | false    | —             |
 
 :::
 

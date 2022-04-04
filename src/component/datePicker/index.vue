@@ -1,6 +1,6 @@
 <template>
   <div>
-    <lay-dropdown ref="dropdownRef">
+    <lay-dropdown ref="dropdownRef" :disabled="props.disabled">
       <lay-input :name="name" :value="dateValue || modelValue" readonly>
         <template #prefix>
           <lay-icon type="layui-icon-date"></lay-icon>
@@ -217,11 +217,15 @@ export interface LayDatePickerProps {
   modelValue?: string;
   type?: "date" | "datetime" | "year" | "time" | "month" | "yearmonth";
   name?: string;
+  max?: string;
+  min?: string;
+  disabled?: boolean
 }
 
 const props = withDefaults(defineProps<LayDatePickerProps>(), {
   modelValue: "",
   type: "date",
+  disabled: false
 });
 
 const dropdownRef = ref(null);
