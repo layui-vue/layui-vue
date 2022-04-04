@@ -80,6 +80,37 @@ export default {
 }
 </script>
 
+
+::: title 禁用弹出
+:::
+
+::: demo
+
+<template>
+  <lay-dropdown>
+    <lay-button type="primary" disabled>点击无效</lay-button>
+    <template #content>
+        <lay-dropdown-menu>
+          <lay-dropdown-menu-item>选项一</lay-dropdown-menu-item>
+          <lay-dropdown-menu-item>选项二</lay-dropdown-menu-item>
+          <lay-dropdown-menu-item>选项三</lay-dropdown-menu-item>
+        </lay-dropdown-menu>
+    </template>
+  </lay-dropdown>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    return {
+    }
+  }
+}
+</script>
+
 :::
 
 ::: title Dropdown 属性
@@ -90,6 +121,7 @@ export default {
 | 属性    | 描述     | 可选值          |
 | ------- | -------- | --------------- |
 | trigger | 触发方式 | `click` `hover` |
+| disabled | 是否禁用触发 | `true` `false` |
 
 :::
 

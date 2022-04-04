@@ -12,10 +12,12 @@ import { DropdownTrigger } from "./interface";
 
 export interface LayDropdownProps {
   trigger?: DropdownTrigger;
+  disabled?: boolean
 }
 
 const props = withDefaults(defineProps<LayDropdownProps>(), {
   trigger: "click",
+  disabled: false
 });
 
 const openState = ref(false);
@@ -26,7 +28,8 @@ onClickOutside(dropdownRef, (event) => {
 });
 
 const open = function () {
-  openState.value = true;
+  if (props.disabled === false)
+    openState.value = true;
 };
 
 const hide = function () {
@@ -34,7 +37,8 @@ const hide = function () {
 };
 
 const toggle = function () {
-  openState.value = !openState.value;
+  if (props.disabled === false)
+    openState.value = !openState.value;
 };
 
 provide("openState", openState);
