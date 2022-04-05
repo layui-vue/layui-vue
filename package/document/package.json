@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "vue-router": "^4.0.12",
-    "vue-i18n": "^9.2.0-beta.33",
+    "vue-i18n": "^9.2.0-beta.34",
     "@vueuse/core": "^7.6.2"
   },
   "devDependencies": {
@@ -31,9 +31,9 @@
     "prismjs": "^1.25.0",
     "rimraf": "^3.0.2",
     "rollup": "^2.70.1",
-    "typescript": "^4.5.5",
+    "typescript": "^4.6.3",
     "vite": "2.9.1",
-    "vite-plugin-md": "^0.11.6"
+    "vite-plugin-md": "^0.12.4"
   },
   "files": [
     "lib",

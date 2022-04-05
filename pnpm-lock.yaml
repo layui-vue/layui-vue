@@ -63,11 +63,11 @@ importers:
       prismjs: ^1.25.0
       rimraf: ^3.0.2
       rollup: ^2.70.1
-      typescript: ^4.5.5
+      typescript: ^4.6.3
       uuid: ^8.3.2
       vite: 2.9.1
-      vite-plugin-md: ^0.11.6
-      vue-i18n: ^9.2.0-beta.33
+      vite-plugin-md: ^0.12.4
+      vue-i18n: ^9.2.0-beta.34
       xlsx: ^0.18.4
     dependencies:
       '@vueuse/core': 7.7.1_vue@3.2.31
@@ -98,7 +98,7 @@ importers:
       rollup: 2.70.1
       typescript: 4.6.3
       vite: 2.9.1_less@4.1.2
-      vite-plugin-md: 0.11.9_vite@2.9.1
+      vite-plugin-md: 0.12.4_vite@2.9.1
 
   package/document:
     specifiers:
@@ -119,10 +119,10 @@ importers:
       prismjs: ^1.25.0
       rimraf: ^3.0.2
       rollup: ^2.70.1
-      typescript: ^4.5.5
+      typescript: ^4.6.3
       vite: 2.9.1
-      vite-plugin-md: ^0.11.6
-      vue-i18n: ^9.2.0-beta.33
+      vite-plugin-md: ^0.12.4
+      vue-i18n: ^9.2.0-beta.34
       vue-router: ^4.0.12
     dependencies:
       '@vueuse/core': 7.7.1_vue@3.2.31
@@ -147,7 +147,7 @@ importers:
       rollup: 2.70.1
       typescript: 4.6.3
       vite: 2.9.1_less@4.1.2
-      vite-plugin-md: 0.11.9_vite@2.9.1
+      vite-plugin-md: 0.12.4_vite@2.9.1
 
   package/iconfont:
     specifiers:
@@ -167,9 +167,9 @@ importers:
       prismjs: ^1.25.0
       rimraf: ^3.0.2
       rollup: ^2.70.1
-      typescript: ^4.5.5
+      typescript: ^4.6.3
       vite: 2.9.1
-      vite-plugin-md: ^0.11.6
+      vite-plugin-md: ^0.12.4
     devDependencies:
       '@babel/core': 7.17.8
       '@babel/preset-env': 7.16.11_@babel+core@7.17.8
@@ -189,7 +189,7 @@ importers:
       rollup: 2.70.1
       typescript: 4.6.3
       vite: 2.9.1_less@4.1.2
-      vite-plugin-md: 0.11.9_vite@2.9.1
+      vite-plugin-md: 0.12.4_vite@2.9.1
 
   package/modal:
     specifiers:
@@ -209,9 +209,9 @@ importers:
       prismjs: ^1.25.0
       rimraf: ^3.0.2
       rollup: ^2.70.1
-      typescript: ^4.5.5
+      typescript: ^4.6.3
       vite: 2.9.1
-      vite-plugin-md: ^0.11.6
+      vite-plugin-md: ^0.12.4
     devDependencies:
       '@babel/core': 7.17.8
       '@babel/preset-env': 7.16.11_@babel+core@7.17.8
@@ -231,7 +231,7 @@ importers:
       rollup: 2.70.1
       typescript: 4.6.3
       vite: 2.9.1_less@4.1.2
-      vite-plugin-md: 0.11.9_vite@2.9.1
+      vite-plugin-md: 0.12.4_vite@2.9.1
 
 packages:
 
@@ -1968,14 +1968,12 @@ packages:
     resolution: {integrity: sha512-HVr0l211gbhpEKYr2hYe7hRsV91uIVGFYNHj73njbARVGHQvIojkImKMaZNDdoDZOIkMsBc9a1sMqR+WZwfSCw==}
     dependencies:
       '@vue/shared': 3.2.31
-    dev: false
 
   /@vue/runtime-core/3.2.31:
     resolution: {integrity: sha512-Kcog5XmSY7VHFEMuk4+Gap8gUssYMZ2+w+cmGI6OpZWYOEIcbE0TPzzPHi+8XTzAgx1w/ZxDFcXhZeXN5eKWsA==}
     dependencies:
       '@vue/reactivity': 3.2.31
       '@vue/shared': 3.2.31
-    dev: false
 
   /@vue/runtime-dom/3.2.31:
     resolution: {integrity: sha512-N+o0sICVLScUjfLG7u9u5XCjvmsexAiPt17GNnaWHJUfsKed5e85/A3SWgKxzlxx2SW/Hw7RQxzxbXez9PtY3g==}
@@ -4684,14 +4682,15 @@ packages:
       spdx-expression-parse: 3.0.1
     dev: true
 
-  /vite-plugin-md/0.11.9_vite@2.9.1:
-    resolution: {integrity: sha512-0uD2BPIct3FbEA1hAm56hlrBByEn542HTsS/FoWf33lJIgijVBDDV6FE12ud0SHS6sculITKliF2ntog2kiHmQ==}
+  /vite-plugin-md/0.12.4_vite@2.9.1:
+    resolution: {integrity: sha512-qtkzpHAvdp/Zo/2ntmCpfph2JD4F0+tOl1vK3QVAZztpWyoO7Yi8Y2Dqu7Urrnh/fPH7PnIWlrrQy1XV/D92Pg==}
     peerDependencies:
       vite: ^2.0.0
     dependencies:
       '@antfu/utils': 0.5.0
       '@rollup/pluginutils': 4.2.0
       '@types/markdown-it': 12.2.3
+      '@vue/runtime-core': 3.2.31
       gray-matter: 4.0.3
       markdown-it: 12.3.2
       vite: 2.9.1_less@4.1.2
