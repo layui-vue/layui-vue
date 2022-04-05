@@ -9,6 +9,7 @@
     "build:component": "pnpm -C ./package/component build",
     "build:icons": "pnpm -C ./package/icons build",
     "build:layer": "pnpm -C ./package/layer build",
+    "publish:component": "pnpm -C ./package/component publish",
     "generate:icons": "pnpm -C ./package/icons generate",
     "lint:eslint": "eslint 'package/**/*.{vue,ts,tsx}' --fix",
     "lint:prettier": "prettier --write \"package/**/*.{vue,ts}\"",

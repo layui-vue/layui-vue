@@ -233,7 +233,7 @@
             </a>
           </li>
           <li class="layui-nav-item">
-            <a href="javascript:void(0)"> 1.0.0 </a>
+            <a href="javascript:void(0)"> {{ version }} </a>
           </li>
         </ul>
       </lay-header>
@@ -242,13 +242,14 @@
   </lay-config-provider>
 </template>
 <script>
-import { ref, watch, provide } from "vue";
+import { provide, ref, watch } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import menu from "../view/utils/menus";
 import { useI18n } from "vue-i18n";
 import zh_CN from "../language/zh_CN.ts";
 import en_US from "../language/en_US.ts";
 import { useAppStore } from "../store/app";
+import config from '../../../component/package.json';
 
 export default {
   setup() {
@@ -297,10 +298,15 @@ export default {
       locale.value = lang;
     };
 
+    const version = config.version;
+
+    provide("version", version);
+
     return {
       t,
       menus,
       locale,
+      version,
       locales,
       appStore,
       currentPath,

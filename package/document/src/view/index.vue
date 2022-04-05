@@ -27,7 +27,7 @@
         <div class="site-version">
           <span
             >{{ t("home.version") }}：<cite class="site-showv">
-              1.0.0
+              {{ version }}
             </cite></span
           >
           <span
@@ -111,6 +111,7 @@
 </template>
 
 <script>
+import { inject } from 'vue';
 import { useI18n } from "vue-i18n";
 import { useAppStore } from "../store/app";
 
@@ -128,8 +129,11 @@ export default {
       }
     };
 
+    const version = inject("version");
+
     return {
       t,
+      version,
       appStore,
       changeTheme,
     };

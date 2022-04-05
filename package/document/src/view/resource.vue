@@ -1,6 +1,6 @@
 <template>
   <div
-    style="margin-top: 60px; height: 100%; width: 80%"
+    style="margin-top: 60px; width: 80%"
     class="layui-container"
   >
     <blockquote class="layui-quote layui-text" style="margin: 30px 0">
@@ -60,6 +60,10 @@
         </ul>
       </div>
     </fieldset>
+  </div>
+  <div class="footer footer-index">
+    <p>Released under the <a href="/index.html">MIT License</a>.</p>
+    <p>Copyright © 2021-2022 layui-vue.com</p>
   </div>
 </template>
 

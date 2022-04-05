@@ -14,11 +14,18 @@
   <ul> 
       <a name="1-0-1"> </a> 
       <li> 
-        <h3>1.0.1 <span class="layui-badge-rim">2022-04-03</span></h3> 
+        <h3>1.0.1 <span class="layui-badge-rim">2022-04-06</span></h3> 
         <ul>
+          <li>[新增] select 组件 search 事件, 搜索回调。</li>
+          <li>[新增] select 组件 keyword 属性, 提供关键词检索。</li>
           <li>[新增] upload 组件 cut cutOptions 属性, 支持上传裁剪。</li>
           <li>[新增] timeline 组件 direction 属性, 支持垂直与水平布局。</li>
+          <li>[新增] dropdown 组件 open 与 hide 事件,于打开与关闭后的逻辑处理。</li>
+          <li>[新增] dropdown 组件 disabled 属性, 禁止下拉框展示。</li>
+          <li>[新增] date-picker 组件 disabled 属性, 禁止修改。</li>
+          <li>[修复] date-picker 组件右下角实时数据无法联动。</li>
           <li>[修复] table 组件 datasource 属性丢失响应。 </li>
+          <li>[修复] input 组件 readonly 属性不生效。</li> 
         </ul> 
       </li>
     </ul>
