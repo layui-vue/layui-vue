@@ -145,7 +145,7 @@
             </lay-dropdown>
           </li>
           <li class="layui-nav-item">
-            <a href="https://gitee.com/layui-vue/layui-vue"> Gitee </a>
+            <a href="https://gitee.com/layui/layui-vue"> Gitee </a>
           </li>
           <li class="layui-nav-item">
             <a href="javascript:void(0)">

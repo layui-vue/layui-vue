@@ -61,7 +61,8 @@ watch(
   () => props.dataSource,
   () => {
     tableDataSource.value = [...props.dataSource];
-  }, {deep: true}
+  },
+  { deep: true }
 );
 
 const changeAll = function (checked: any) {

@@ -420,7 +420,7 @@ export default {
 | useCN         | 是否使用中文错误提示                                             | `boolean` | `true` `false` | `false` |
 | requiredIcons | 必填前缀图标`class`                                             | `string`  |         -      | `*` |
 | required-erroer-message | 必填错误提示信息                                    | `string`  |         -     | `%s不能为空`|
-| validate-message | 自定义校验错误提示信息; <br>由于内置了中文错误提示，可按需求增量增加<br>可查看 [async-validator 内置错误提示](https://github.com/yiminghe/async-validator/blob/master/src/messages.ts)<br>也可参考 [layui-vue 内置中文错误提示](https://gitee.com/layui-vue/layui-vue/tree/develop/src/module/formItem/cnValidateMessage.ts)   | `string`  |         -     | `%s不能为空`|
+| validate-message | 自定义校验错误提示信息; <br>由于内置了中文错误提示，可按需求增量增加<br>可查看 [async-validator 内置错误提示](https://github.com/yiminghe/async-validator/blob/master/src/messages.ts)<br>也可参考 [layui-vue 内置中文错误提示](https://gitee.com/layui/layui-vue/blob/next/package/component/src/component/formItem/cnValidateMessage.ts)   | `string`  |         -     | `%s不能为空`|
 
 :::
 
