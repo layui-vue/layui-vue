@@ -4,11 +4,11 @@
   "homepage": "http://www.layui-vue.com",
   "scripts": {
     "dev": "pnpm -C ./package/document dev",
-    "build:component": "pnpm -C ./package/component build",
-    "build:iconfont": "pnpm -C ./package/iconfont build",
-    "build:modal": "pnpm -C ./package/modal build",
     "build:document": "pnpm -C ./package/document build",
-    "generate:iconfont": "pnpm -C ./package/iconfont generate",
+    "build:component": "pnpm -C ./package/component build",
+    "build:icons": "pnpm -C ./package/icons build",
+    "build:layer": "pnpm -C ./package/layer build",
+    "generate:icons": "pnpm -C ./package/icons generate",
     "lint:eslint": "eslint 'package/**/*.{vue,ts,tsx}' --fix",
     "lint:prettier": "prettier --write \"package/**/*.{vue,ts}\"",
     "prepare": "husky install"

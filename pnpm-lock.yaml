@@ -21,8 +21,8 @@ importers:
       prettier: ^2.5.1
       vue: ^3.2.31
     dependencies:
-      '@layui/icons-vue': link:package/iconfont
-      '@layui/layer-vue': link:package/modal
+      '@layui/icons-vue': link:package/icons
+      '@layui/layer-vue': link:package/layer
       '@layui/layui-vue': link:package/component
       vue: 3.2.31
     devDependencies:
@@ -149,7 +149,7 @@ importers:
       vite: 2.9.1_less@4.1.2
       vite-plugin-md: 0.12.4_vite@2.9.1
 
-  package/iconfont:
+  package/icons:
     specifiers:
       '@babel/core': ^7.15.8
       '@babel/preset-env': ^7.15.8
@@ -191,7 +191,7 @@ importers:
       vite: 2.9.1_less@4.1.2
       vite-plugin-md: 0.12.4_vite@2.9.1
 
-  package/modal:
+  package/layer:
     specifiers:
       '@babel/core': ^7.15.8
       '@babel/preset-env': ^7.15.8
