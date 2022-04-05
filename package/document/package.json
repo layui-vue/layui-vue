@@ -12,7 +12,9 @@
   "dependencies": {
     "vue-router": "^4.0.12",
     "vue-i18n": "^9.2.0-beta.34",
-    "@vueuse/core": "^7.6.2"
+    "@vueuse/core": "^7.6.2",
+    "pinia": "^2.0.9",
+    "pinia-plugin-persist": "^1.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.15.8",

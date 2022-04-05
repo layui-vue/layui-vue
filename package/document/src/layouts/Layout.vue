@@ -1,9 +1,9 @@
 <template>
   <lay-config-provider
-    :theme="theme"
     :locale="locale"
     :locales="locales"
-    :themeVariable="themeVariable"
+    :theme="appStore.theme"
+    :themeVariable="appStore.themeVariable"
   >
     <lay-layout class="layui-layout-document" style="height: 100%">
       <lay-header
@@ -77,66 +77,66 @@
               <template #content>
                 <div style="width: 380px; padding: 0px 10px 10px 10px">
                   <lay-color-picker
-                    v-model="themeVariable['--global-primary-color']"
+                    v-model="appStore.themeVariable['--global-primary-color']"
                   ></lay-color-picker
                   >&nbsp;
                   <lay-color-picker
-                    v-model="themeVariable['--global-normal-color']"
+                    v-model="appStore.themeVariable['--global-normal-color']"
                   ></lay-color-picker
                   >&nbsp;
                   <lay-color-picker
-                    v-model="themeVariable['--global-warm-color']"
+                    v-model="appStore.themeVariable['--global-warm-color']"
                   ></lay-color-picker
                   >&nbsp;
                   <lay-color-picker
-                    v-model="themeVariable['--global-danger-color']"
+                    v-model="appStore.themeVariable['--global-danger-color']"
                   ></lay-color-picker
                   >&nbsp;
                   <lay-color-picker
-                    v-model="themeVariable['--global-checked-color']"
+                    v-model="appStore.themeVariable['--global-checked-color']"
                   ></lay-color-picker
                   >&nbsp;
                   <lay-input
-                    v-model="themeVariable['--global-border-radius']"
+                    v-model="appStore.themeVariable['--global-border-radius']"
                     style="display: inline-block; width: 130px"
                   ></lay-input>
                   <lay-color-picker
-                    v-model="themeVariable['--global-neutral-color-1']"
+                    v-model="appStore.themeVariable['--global-neutral-color-1']"
                   ></lay-color-picker
                   >&nbsp;
                   <lay-color-picker
-                    v-model="themeVariable['--global-neutral-color-2']"
+                    v-model="appStore.themeVariable['--global-neutral-color-2']"
                   ></lay-color-picker
                   >&nbsp;
                   <lay-color-picker
-                    v-model="themeVariable['--global-neutral-color-3']"
+                    v-model="appStore.themeVariable['--global-neutral-color-3']"
                   ></lay-color-picker
                   >&nbsp;
                   <lay-color-picker
-                    v-model="themeVariable['--global-neutral-color-4']"
+                    v-model="appStore.themeVariable['--global-neutral-color-4']"
                   ></lay-color-picker
                   >&nbsp;
                   <lay-color-picker
-                    v-model="themeVariable['--global-neutral-color-5']"
+                    v-model="appStore.themeVariable['--global-neutral-color-5']"
                   ></lay-color-picker
                   >&nbsp;
                   <lay-color-picker
-                    v-model="themeVariable['--global-neutral-color-6']"
+                    v-model="appStore.themeVariable['--global-neutral-color-6']"
                   ></lay-color-picker
                   >&nbsp;
                   <lay-color-picker
-                    v-model="themeVariable['--global-neutral-color-7']"
+                    v-model="appStore.themeVariable['--global-neutral-color-7']"
                   ></lay-color-picker
                   >&nbsp;
                   <lay-color-picker
-                    v-model="themeVariable['--global-neutral-color-8']"
+                    v-model="appStore.themeVariable['--global-neutral-color-8']"
                   ></lay-color-picker>
                   <lay-color-picker
-                    v-model="themeVariable['--global-dark-text-color']"
+                    v-model="appStore.themeVariable['--global-dark-text-color']"
                   ></lay-color-picker
                   >&nbsp;
                   <lay-color-picker
-                    v-model="themeVariable['--global-dark-background-color']"
+                    v-model="appStore.themeVariable['--global-dark-background-color']"
                   ></lay-color-picker>
 
                   <lay-button fluid="true">导 出 配 置</lay-button>
@@ -168,7 +168,7 @@
           <li class="layui-nav-item">
             <a href="javascript:void(0)">
               <lay-switch
-                v-model="theme"
+                v-model="appStore.theme"
                 class="switch"
                 onswitch-value="dark"
                 unswitch-value="light"
@@ -240,12 +240,13 @@
   </lay-config-provider>
 </template>
 <script>
-import { ref, watch, computed, provide } from "vue";
+import { ref, watch, provide } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import menu from "../view/utils/menus";
 import { useI18n } from "vue-i18n";
 import zh_CN from "../language/zh_CN.ts";
 import en_US from "../language/en_US.ts";
+import { useAppStore } from "../store/app";
 
 export default {
   setup() {
@@ -257,32 +258,10 @@ export default {
       { name: "zh_CN", locale: zh_CN, merge: true },
       { name: "en_US", locale: en_US, merge: true },
     ];
-    let isDark =
-      localStorage.getItem("layui-vue-theme-dark") !== "false" ||
-      window.matchMedia("prefers-color-scheme: dark").matches;
-
-    const theme = ref(isDark ? "dark" : "light");
-    const themeVariable = ref({
-      "--global-primary-color": "#009688",
-      "--global-normal-color": "#1e9fff",
-      "--global-warm-color": "#ffb800",
-      "--global-danger-color": "#ff5722",
-      "--global-checked-color": "#5fb878",
-      "--global-border-radius": "2px",
-      "--global-neutral-color-1": "#FAFAFA",
-      "--global-neutral-color-2": "#F6F6F6",
-      "--global-neutral-color-3": "#eeeeee",
-      "--global-neutral-color-4": "#e2e2e2",
-      "--global-neutral-color-5": "#dddddd",
-      "--global-neutral-color-6": "#d2d2d2",
-      "--global-neutral-color-7": "#cccccc",
-      "--global-neutral-color-8": "#c2c2c2",
-      "--global-dark-text-color": "#FFFFFFc9",
-      "--global-dark-background-color": "#22272E",
-    });
-
+    const appStore = useAppStore();
     const menus = [];
     const currentPath = ref("/zh-CN/guide");
+
     watch(
       () => route.path,
       (val) => {
@@ -293,6 +272,7 @@ export default {
         deep: true,
       }
     );
+    
     menu.forEach((m) => {
       m.children.forEach((c) => {
         menus.push(c);
@@ -315,22 +295,15 @@ export default {
       locale.value = lang;
     };
 
-    window
-      .matchMedia("(prefers-color-scheme: dark)")
-      .addListener((e) => (theme.value = e.matches ? "dark" : "light"));
-
-    provide("theme", theme);
-
     return {
       t,
       menus,
-      theme,
       locale,
       locales,
+      appStore,
       currentPath,
       handleClick,
       changeLocale,
-      themeVariable,
     };
   },
 };

@@ -21,7 +21,7 @@
             href="javascript:void(0);"
             @click="changeTheme"
           >
-            {{ theme === "dark" ? "Turn Off" : "Turn On" }}
+            {{ appStore.theme === "dark" ? "Turn Off" : "Turn On" }}
           </a>
         </div>
         <div class="site-version">
@@ -111,25 +111,26 @@
 </template>
 
 <script>
-import { inject, provide } from "vue";
 import { useI18n } from "vue-i18n";
+import { useAppStore } from "../store/app";
+
 export default {
   name: "index",
   setup() {
     const { t } = useI18n();
-    const theme = inject("theme");
-
+    const appStore = useAppStore();
+    
     const changeTheme = () => {
-      if (theme.value === "dark") {
-        theme.value = "light";
+      if (appStore.theme === "dark") {
+        appStore.theme = "light";
       } else {
-        theme.value = "dark";
+        appStore.theme = "dark";
       }
     };
 
     return {
       t,
-      theme,
+      appStore,
       changeTheme,
     };
   },

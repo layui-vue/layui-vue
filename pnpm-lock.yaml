@@ -116,6 +116,8 @@ importers:
       escape-html: ^1.0.3
       less: ^4.1.2
       markdown-it-container: ^3.0.0
+      pinia: ^2.0.9
+      pinia-plugin-persist: ^1.0.0
       prismjs: ^1.25.0
       rimraf: ^3.0.2
       rollup: ^2.70.1
@@ -126,6 +128,8 @@ importers:
       vue-router: ^4.0.12
     dependencies:
       '@vueuse/core': 7.7.1_vue@3.2.31
+      pinia: 2.0.13_typescript@4.6.3+vue@3.2.31
+      pinia-plugin-persist: 1.0.0_pinia@2.0.13+vue@3.2.31
       vue-i18n: 9.2.0-beta.34_vue@3.2.31
       vue-router: 4.0.14_vue@3.2.31
     devDependencies:
@@ -4040,6 +4044,39 @@ packages:
     engines: {node: '>=6'}
     dev: true
     optional: true
+
+  /pinia-plugin-persist/1.0.0_pinia@2.0.13+vue@3.2.31:
+    resolution: {integrity: sha512-M4hBBd8fz/GgNmUPaaUsC29y1M09lqbXrMAHcusVoU8xlQi1TqgkWnnhvMikZwr7Le/hVyMx8KUcumGGrR6GVw==}
+    peerDependencies:
+      '@vue/composition-api': ^1.0.0
+      pinia: ^2.0.0
+      vue: ^2.0.0 || >=3.0.0
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
+    dependencies:
+      pinia: 2.0.13_typescript@4.6.3+vue@3.2.31
+      vue: 3.2.31
+      vue-demi: 0.12.5_vue@3.2.31
+    dev: false
+
+  /pinia/2.0.13_typescript@4.6.3+vue@3.2.31:
+    resolution: {integrity: sha512-B7rSqm1xNpwcPMnqns8/gVBfbbi7lWTByzS6aPZ4JOXSJD4Y531rZHDCoYWBwLyHY/8hWnXljgiXp6rRyrofcw==}
+    peerDependencies:
+      '@vue/composition-api': ^1.4.0
+      typescript: '>=4.4.4'
+      vue: ^2.6.14 || ^3.2.0
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
+      typescript:
+        optional: true
+    dependencies:
+      '@vue/devtools-api': 6.1.4
+      typescript: 4.6.3
+      vue: 3.2.31
+      vue-demi: 0.12.5_vue@3.2.31
+    dev: false
 
   /postcss/8.4.12:
     resolution: {integrity: sha512-lg6eITwYe9v6Hr5CncVbK70SoioNQIq81nsaG86ev5hAidQvmOeETBqs7jm43K2F5/Ley3ytDtriImV6TpNiSg==}
