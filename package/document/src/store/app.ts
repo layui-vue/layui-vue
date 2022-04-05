@@ -1,10 +1,10 @@
-import { defineStore } from 'pinia'
+import { defineStore } from "pinia";
 
 export const useAppStore = defineStore({
-  id: 'app',
+  id: "app",
   state: () => {
     return {
-      theme: 'light',
+      theme: "light",
       themeVariable: {
         "--global-primary-color": "#009688",
         "--global-normal-color": "#1e9fff",
@@ -21,24 +21,21 @@ export const useAppStore = defineStore({
         "--global-neutral-color-7": "#cccccc",
         "--global-neutral-color-8": "#c2c2c2",
       },
-    }
+    };
   },
-  getters: {
-    
-  },
-  actions: {
-
-  },
+  getters: {},
+  actions: {},
   persist: {
-      enabled: true,
-      strategies: [
-        {
-          key: 'theme',
-          storage: localStorage
-        },{
-          key: 'themeVariable',
-          storage: localStorage
-        }
-      ]
-  }
-})
+    enabled: true,
+    strategies: [
+      {
+        key: "theme",
+        storage: localStorage,
+      },
+      {
+        key: "themeVariable",
+        storage: localStorage,
+      },
+    ],
+  },
+});

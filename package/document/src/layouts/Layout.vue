@@ -136,7 +136,9 @@
                   ></lay-color-picker
                   >&nbsp;
                   <lay-color-picker
-                    v-model="appStore.themeVariable['--global-dark-background-color']"
+                    v-model="
+                      appStore.themeVariable['--global-dark-background-color']
+                    "
                   ></lay-color-picker>
 
                   <lay-button fluid="true">导 出 配 置</lay-button>
@@ -272,7 +274,7 @@ export default {
         deep: true,
       }
     );
-    
+
     menu.forEach((m) => {
       m.children.forEach((c) => {
         menus.push(c);

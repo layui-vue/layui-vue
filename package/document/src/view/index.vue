@@ -119,7 +119,7 @@ export default {
   setup() {
     const { t } = useI18n();
     const appStore = useAppStore();
-    
+
     const changeTheme = () => {
       if (appStore.theme === "dark") {
         appStore.theme = "light";
