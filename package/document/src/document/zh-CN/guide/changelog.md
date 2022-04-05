@@ -18,8 +18,7 @@
         <ul>
           <li>[新增] upload 组件 cut cutOptions 属性, 支持上传裁剪。</li>
           <li>[新增] timeline 组件 direction 属性, 支持垂直与水平布局。</li>
-          <li>[新增] config-proivder 组件 global-dark-background-color 夜间模式背景颜色变量。</li>
-          <li>[新增] config-proivder 组件 global-dark-text-color 夜间模式文字颜色变量。</li>
+          <li>[修复] table 组件 datasource 属性丢失响应。 </li>
         </ul> 
       </li>
     </ul>
