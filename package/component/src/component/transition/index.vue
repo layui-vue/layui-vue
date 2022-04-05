@@ -1,8 +1,10 @@
 <template>
   <template v-if="enable">
-    <LayCollapseTransition v-if="type === 'collapse'"><slot></slot></LayCollapseTransition>
+    <LayCollapseTransition v-if="type === 'collapse'"
+      ><slot></slot
+    ></LayCollapseTransition>
     <LayFadeTransition v-if="type === 'fade'"><slot></slot></LayFadeTransition>
- </template>
+  </template>
   <template v-else>
     <slot></slot>
   </template>

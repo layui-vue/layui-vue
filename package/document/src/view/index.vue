@@ -111,7 +111,7 @@
 </template>
 
 <script>
-import { inject } from 'vue';
+import { inject } from "vue";
 import { useI18n } from "vue-i18n";
 import { useAppStore } from "../store/app";
 
