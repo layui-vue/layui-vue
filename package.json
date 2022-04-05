@@ -1,103 +1,41 @@
 {
-  "name": "@layui/layui-vue",
-  "version": "1.0.0",
-  "author": "就眠儀式",
   "license": "MIT",
   "description": "a component library for Vue 3 base on layui-vue",
   "homepage": "http://www.layui-vue.com",
-  "main": "es/index.js",
-  "unpkg": "umd/index.js",
-  "jsdelivr": "umd/index.js",
-  "types": "types/index.d.ts",
-  "style": "lib/index.css",
-  "keywords": [
-    "layui-vue",
-    "layui",
-    "vue"
-  ],
-  "exports": {
-    ".": {
-      "import": "./es/index.js"
-    },
-    "./lib/": "./lib/",
-    "./es/": "./es/"
-  },
   "scripts": {
-    "dev": "vite example",
-    "build": "npm run build:all && npm run build:es && npm run build:umd && npm run build:types && npm run build:example",
-    "build:es": "vite build --emptyOutDir --config ./script/build.es.ts",
-    "build:all": "vite build --emptyOutDir --config ./script/build.all.ts",
-    "build:umd": "vite build --emptyOutDir --config ./script/build.umd.ts",
-    "build:types": "rimraf types && tsc -d",
-    "build:example": "vite build example",
-    "lint:eslint": "eslint 'src/**/*.{vue,ts,tsx}' --fix",
-    "lint:prettier": "prettier --write \"src/**/*.{vue,ts}\"",
-    "commit": "git add . && git-cz && git push",
+    "dev": "pnpm -C ./package/document dev",
+    "build": "pnpm -C ./package/component build",
+    "build:icons": "pnpm -C ./package/iconfont build",
+    "build:modal": "pnpm -C ./package/modal build",
+    "build:document": "pnpm -C ./package/document build",
+    "generate:icons": "pnpm -C ./package/iconfont generate",
+    "lint:eslint": "eslint 'package/**/*.{vue,ts,tsx}' --fix",
+    "lint:prettier": "prettier --write \"package/**/*.{vue,ts}\"",
     "prepare": "husky install"
+  },
+  "dependencies": {
+    "@layui/layui-vue": "workspace:*",
+    "@layui/icons-vue": "workspace:*",
+    "@layui/layer-vue": "workspace:*",
+    "vue": "^3.2.31"
   },
   "peerDependencies": {
     "vue": "^3.2.31"
   },
-  "dependencies": {
-    "@layui/icons-vue": "^1.0.7",
-    "@layui/layer-vue": "^1.3.11",
-    "@vueuse/core": "^7.6.2",
-    "async-validator": "^4.0.7",
-    "cropperjs": "^1.5.12",
-    "darkreader": "^4.9.46",
-    "evtd": "^0.2.3",
-    "moment": "^2.29.1",
-    "uuid": "^8.3.2",
-    "vue": "^3.2.31",
-    "vue-i18n": "^9.2.0-beta.33",
-    "vue-router": "^4.0.12",
-    "xlsx": "^0.18.4"
-  },
   "devDependencies": {
-    "@babel/core": "^7.15.8",
-    "@babel/preset-env": "^7.15.8",
-    "@babel/preset-typescript": "^7.15.0",
-    "@babel/types": "7.17.0",
     "@commitlint/cli": "^16.2.1",
     "@commitlint/config-conventional": "^16.2.1",
-    "@rollup/plugin-babel": "^5.3.0",
-    "@types/markdown-it": "^12.2.3",
-    "@types/markdown-it-container": "^2.0.4",
-    "@types/node": "^16.11.9",
     "@typescript-eslint/eslint-plugin": "^5.8.0",
     "@typescript-eslint/parser": "^5.8.0",
-    "@vitejs/plugin-vue": "^1.9.3",
-    "@vue/compiler-sfc": "^3.2.31",
-    "@vue/server-renderer": "^3.2.31",
     "commitizen": "^4.2.4",
     "cz-conventional-changelog": "^3.3.0",
-    "escape-html": "^1.0.3",
     "eslint": "^8.5.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-vue": "^8.2.0",
     "husky": "^7.0.4",
-    "less": "^4.1.2",
-    "markdown-it-container": "^3.0.0",
-    "prettier": "^2.5.1",
-    "prismjs": "^1.25.0",
-    "rimraf": "^3.0.2",
-    "rollup": "^2.66.1",
-    "typescript": "^4.5.5",
-    "vite": "2.7.13",
-    "vite-plugin-md": "^0.11.6"
+    "prettier": "^2.5.1"
   },
-  "files": [
-    "lib",
-    "es",
-    "umd",
-    "types"
-  ],
-  "browserslist": [
-    "current node",
-    "last 2 versions and > 2%",
-    "ie > 10"
-  ],
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"

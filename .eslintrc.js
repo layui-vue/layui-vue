@@ -20,9 +20,9 @@ module.exports = {
       AMapUI: false
     },
     extends: [
+      'prettier',
       'plugin:vue/vue3-recommended',
       'plugin:@typescript-eslint/recommended',
-      'prettier',
       'plugin:prettier/recommended'
     ],
     rules: {
