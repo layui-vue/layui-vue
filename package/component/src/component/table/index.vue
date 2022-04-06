@@ -293,6 +293,7 @@ onMounted(() => {
           <table class="layui-table" :lay-size="size">
             <tbody>
               <template v-for="data in tableDataSource" :key="data">
+                <!-- sub table impl -->
                 <tr
                   @click.stop="rowClick(data, $event)"
                   @dblclick.stop="rowDoubleClick(data, $event)"

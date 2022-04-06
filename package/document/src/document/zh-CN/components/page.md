@@ -197,7 +197,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-page :limit="limit" :total="9999" :show-count="showCount" @limit="limit=$event" :show-page="showPage" :show-limit="showLimit" :show-refresh="showRefresh" showSkip="showSkip"></lay-page>
+  <lay-page :limit="limit1" :pages="pages1" :total="9999" :show-count="showCount1" @limit="limit1=$event" :show-page="showPage1" :show-limit="showLimit1" :show-refresh="showRefresh1" showSkip="showSkip1"></lay-page>
   每页数量:{{limit}}
 </template>
 
@@ -207,22 +207,24 @@ import { ref } from 'vue'
 export default {
   setup() {
 
-    const limit = ref(5)
-    const total = ref(9999)
-    const showCount = ref(true)
-    const showPage = ref(true)
-    const showLimit = ref(true)
-    const showRefresh = ref(true)
-    const showSkip = ref(true)
+    const limit1 = ref(5)
+    const total1 = ref(9999)
+    const showCount1 = ref(true)
+    const showPage1 = ref(true)
+    const showLimit1 = ref(true)
+    const showRefresh1 = ref(true)
+    const showSkip1 = ref(true)
+    const pages1 = ref(3);
 
     return {
-      limit,
-      total,
-      showCount,
-      showPage,
-      showLimit,
-      showRefresh,
-      showSkip
+      limit1,
+      total1,
+      pages1,
+      showCount1,
+      showPage1,
+      showLimit1,
+      showRefresh1,
+      showSkip1
     }
   }
 }

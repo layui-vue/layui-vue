@@ -43,7 +43,8 @@ const props = withDefaults(defineProps<LayPageProps>(), {
 });
 
 const limits = ref(props.limits);
-const pages = props.pages / 2;
+const pages = Math.ceil(props.pages / 2);
+
 const inlimit = computed({
   get() {
     return props.limit;
@@ -52,7 +53,9 @@ const inlimit = computed({
     emit("limit", v);
   },
 });
+
 const maxPage = ref(0);
+
 const totalPage = computed(() => {
   maxPage.value = Math.ceil(props.total / props.limit);
   let r: number[] = [],
