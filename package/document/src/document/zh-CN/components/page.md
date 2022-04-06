@@ -197,8 +197,8 @@ export default {
 ::: demo
 
 <template>
-  <lay-page :limit="limit1" :pages="pages1" :total="9999" :show-count="showCount1" @limit="limit1=$event" :show-page="showPage1" :show-limit="showLimit1" :show-refresh="showRefresh1" showSkip="showSkip1"></lay-page>
-  每页数量:{{limit}}
+  <lay-page :limit="limit1" :pages="pages1" :total="total1" :show-count="showCount1" @limit="limit1=$event" :show-page="showPage1" :show-limit="showLimit1" :show-refresh="showRefresh1" showSkip="showSkip1"></lay-page>
+  每页数量:{{limit1}}
 </template>
 
 <script>
@@ -208,13 +208,13 @@ export default {
   setup() {
 
     const limit1 = ref(5)
-    const total1 = ref(9999)
+    const total1 = ref(99)
     const showCount1 = ref(true)
     const showPage1 = ref(true)
     const showLimit1 = ref(true)
     const showRefresh1 = ref(true)
     const showSkip1 = ref(true)
-    const pages1 = ref(3);
+    const pages1 = ref(6);
 
     return {
       limit1,

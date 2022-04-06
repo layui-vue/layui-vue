@@ -43,7 +43,7 @@ const props = withDefaults(defineProps<LayPageProps>(), {
 });
 
 const limits = ref(props.limits);
-const pages = Math.ceil(props.pages / 2);
+const pages = Math.floor(props.pages / 2);
 
 const inlimit = computed({
   get() {
