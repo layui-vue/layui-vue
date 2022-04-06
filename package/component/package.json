@@ -4,7 +4,7 @@
   "author": "就眠儀式",
   "license": "MIT",
   "description": "a component library for Vue 3 base on layui-vue",
-  "homepage": "http://www.layui-vue.com",
+  "homepage": "https://gitee.com/layui/layui-vue/blob/next/README.md",
   "main": "es/index.js",
   "unpkg": "umd/index.js",
   "jsdelivr": "umd/index.js",
@@ -39,7 +39,8 @@
     "moment": "^2.29.1",
     "uuid": "^8.3.2",
     "vue-i18n": "^9.2.0-beta.34",
-    "xlsx": "^0.18.4"
+    "xlsx": "^0.18.4",
+    "animate.css": "^4.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.15.8",

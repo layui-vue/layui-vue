@@ -10,6 +10,8 @@ import { useI18n } from "vue-i18n";
 import {
   enable as enableDarkMode,
   disable as disableDarkMode,
+  Theme,
+  DynamicThemeFix,
 } from "darkreader";
 
 const { locale, setLocaleMessage, mergeLocaleMessage } = useI18n();
@@ -19,6 +21,7 @@ export interface LayConfigProviderProps {
   locales?: [];
   theme?: string;
   themeVariable?: any;
+  darkPartial?: any;
 }
 
 const props = withDefaults(defineProps<LayConfigProviderProps>(), {
@@ -39,28 +42,33 @@ const changeLocales = (lang: string, locales: any, merge: boolean) => {
 };
 
 const changeTheme = (theme: string) => {
+
+  const defaultPartial: Partial<Theme> = {
+    mode: 1,
+    brightness: 100,
+    contrast: 90,
+    sepia: 0,
+    grayscale: 0
+  };
+
+  const defaultFixes: DynamicThemeFix = {
+    css: "",
+    invert: [],
+    ignoreImageAnalysis: [],
+    disableStyleSheetsProxy: false,
+    ignoreInlineStyle: [
+      ".layui-colorpicker-trigger-span",
+      "div.layui-color-picker *",
+    ]
+  };
+
+  Object.assign(defaultPartial, props.darkPartial);
+
   if (theme === "dark") {
-    enableDarkMode(
-      {
-        mode: 1,
-        brightness: 100,
-        contrast: 90,
-        sepia: 0,
-      },
-      {
-        invert: [],
-        css: ``,
-        ignoreInlineStyle: [
-          ".layui-colorpicker-trigger-span",
-          "div.layui-color-picker *",
-        ],
-        ignoreImageAnalysis: [],
-        disableStyleSheetsProxy: false,
-      }
-    );
-  } else {
+    enableDarkMode(defaultPartial, defaultFixes);
+  } else if(theme === "light"){
     disableDarkMode();
-  }
+  } 
 };
 
 const changeThemeVariable = (vars: any) => {
