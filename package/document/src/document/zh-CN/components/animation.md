@@ -52,7 +52,7 @@
         <div class="code">layui-anim-fadein</div>
       </li>
       <li style="height:auto">
-        <div class="layui-anim layui-anim-fadeout" @click="replay">渐隐</div>
+        <div class="layui-anim" @click="replay($event,'layui-anim-fadeout')">渐隐</div>
         <div class="code">layui-anim-fadeout</div>
       </li>
       <li style="height:auto">
@@ -72,13 +72,17 @@ import { ref } from 'vue'
 
 export default {
   setup() {
-    const replay = (e) => {
+    const replay = (e, aninClass) => {
       const el = e.currentTarget;
       const targetClass = el.classList[1];
-      el.classList.remove(targetClass);
-      setTimeout(() => {
-        el.classList.add(targetClass);
-      },100) 
+      if(!targetClass){
+        el.classList.add(aninClass);
+      }else{
+        el.classList.remove(targetClass);
+        setTimeout(() => {
+          el.classList.add(targetClass);
+        },100) 
+      }
     }
     return {
       replay
