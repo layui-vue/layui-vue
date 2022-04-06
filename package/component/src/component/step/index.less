@@ -23,6 +23,8 @@
     flex-grow: 0 !important;
   }
   .lay-step-item-pace {
+    position: relative;
+    z-index: 10;
     cursor: pointer;
     width: @width-height-pace;
     height: @width-height-pace;
@@ -156,7 +158,6 @@
   }
 
   .lay-step-item-line:before {
-    z-index: -1;
     content: "";
     position: absolute;
     top: 50%;
@@ -279,7 +280,6 @@
     width: 24px;
   }
   .lay-step-item-line:before {
-    z-index: -1;
     content: "";
     position: absolute;
     top: 0;
