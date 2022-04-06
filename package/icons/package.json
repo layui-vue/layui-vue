@@ -2,7 +2,7 @@
   "name": "@layui/icons-vue",
   "version": "1.0.7",
   "description": "a component library for Vue 3 base on layui-vue",
-  "homepage": "https://gitee.com/layui-vue/icons-vue/blob/master/README.md",
+  "homepage": "https://gitee.com/layui/layui-vue/blob/next/README.md",
   "module": "lib/icons-vue.es.js",
   "main": "lib/icons-vue.umd.js",
   "exports": {

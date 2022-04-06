@@ -17,6 +17,7 @@
         <h3>1.0.2 <span class="layui-badge-rim">2022-04-07</span></h3> 
         <ul>
           <li>[修复] page 组件 pages 属性为单数时, 页码计算错误。(by @就眠儀式)</li>
+          <li>[修复] dark 模式 step 组件线条不显示。(by @莫名点)</li>
         </ul> 
       </li>
     </ul>
