@@ -15,9 +15,10 @@
   "types": "types/index.d.ts",
   "style": "lib/index.css",
   "scripts": {
+    "generate": "node ./scripts/generate.ts",
     "build": "vite build --emptyOutDir && npm run build:types",
     "build:types": "rimraf types && tsc -d",
-    "generate": "node ./scripts/generate.ts"
+    "postinstall": "npm run build"
   },
   "keywords": [
     "layui-icon",

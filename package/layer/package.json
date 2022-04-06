@@ -16,7 +16,8 @@
   "style": "lib/index.css",
   "scripts": {
     "build": "vite build --emptyOutDir && npm run build:types",
-    "build:types": "rimraf types && tsc -d"
+    "build:types": "rimraf types && tsc -d",
+    "postinstall": "npm run build"
   },
   "keywords": [
     "layui-vue",

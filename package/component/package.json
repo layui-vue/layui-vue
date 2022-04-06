@@ -27,7 +27,8 @@
     "build:es": "vite build --emptyOutDir --config ./script/build.es.ts",
     "build:all": "vite build --emptyOutDir --config ./script/build.all.ts",
     "build:umd": "vite build --emptyOutDir --config ./script/build.umd.ts",
-    "build:types": "rimraf types && tsc -d"
+    "build:types": "rimraf types && tsc -d",
+    "postinstall": "npm run build"
   },
   "dependencies": {
     "@vueuse/core": "^7.6.2",
