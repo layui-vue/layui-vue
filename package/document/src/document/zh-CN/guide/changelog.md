@@ -11,7 +11,16 @@
 <template>
 <lay-timeline>
   <lay-timeline-item title="1.0.x">
-  <ul> 
+    <ul> 
+      <a name="1-0-2"> </a> 
+      <li> 
+        <h3>1.0.2 <span class="layui-badge-rim">2022-04-07</span></h3> 
+        <ul>
+          <li>[修复] page 组件 pages 属性为单数时, 页码计算错误。(by @就眠儀式)</li>
+        </ul> 
+      </li>
+    </ul>
+    <ul> 
       <a name="1-0-1"> </a> 
       <li> 
         <h3>1.0.1 <span class="layui-badge-rim">2022-04-06</span></h3> 
