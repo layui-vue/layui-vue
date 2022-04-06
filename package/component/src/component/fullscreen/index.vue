@@ -205,8 +205,8 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
   //@ts-ignore
-  document.addEventListener(fullscreenAPI.fullscreenchange, onFullscreenchange);
-  document.addEventListener("keydown", onFullscreenchange);
+  document.removeEventListener(fullscreenAPI.fullscreenchange, onFullscreenchange);
+  document.removeEventListener("keydown", onFullscreenchange);
 });
 </script>
 
