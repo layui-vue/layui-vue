@@ -174,33 +174,6 @@ form {
   padding: 20px 10px;
 }
 
-.site-idea {
-  margin: 30px 0;
-  margin-top: 16px;
-  font-weight: 300;
-}
-
-.site-idea li {
-  font-size: 14px;
-}
-
-.site-idea li div {
-  padding: 25px;
-  line-height: 24px;
-  border: 1px solid #d2d2d2;
-  border-radius: 6px;
-}
-
-.site-idea .layui-field-title {
-  border-color: #d2d2d2;
-}
-
-.site-idea .layui-field-title legend {
-  margin: 0 20px 20px 0;
-  padding: 0 20px;
-  text-align: center;
-}
-
 .anim .site-doc-icon {
   margin-bottom: 50px;
   font-size: 0;

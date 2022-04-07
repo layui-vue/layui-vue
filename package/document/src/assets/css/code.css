@@ -85,7 +85,6 @@ li > div[class*='language-'] {
 }
 
 /* Line highlighting */
-
 .highlight-lines {
   position: absolute;
   top: 0;
@@ -105,7 +104,6 @@ li > div[class*='language-'] {
 }
 
 /* Line numbers mode */
-
 div[class*='language-'].line-numbers-mode {
   padding-left: 3.5rem;
 }
@@ -127,7 +125,6 @@ div[class*='language-'].line-numbers-mode {
 }
 
 /* Language marker */
-
 [class*='language-']:before {
   position: absolute;
   top: 0.6em;
