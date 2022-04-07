@@ -42,13 +42,12 @@ const changeLocales = (lang: string, locales: any, merge: boolean) => {
 };
 
 const changeTheme = (theme: string) => {
-
   const defaultPartial: Partial<Theme> = {
     mode: 1,
     brightness: 100,
     contrast: 90,
     sepia: 0,
-    grayscale: 0
+    grayscale: 0,
   };
 
   const defaultFixes: DynamicThemeFix = {
@@ -59,16 +58,16 @@ const changeTheme = (theme: string) => {
     ignoreInlineStyle: [
       ".layui-colorpicker-trigger-span",
       "div.layui-color-picker *",
-    ]
+    ],
   };
 
   Object.assign(defaultPartial, props.darkPartial);
 
   if (theme === "dark") {
     enableDarkMode(defaultPartial, defaultFixes);
-  } else if(theme === "light"){
+  } else if (theme === "light") {
     disableDarkMode();
-  } 
+  }
 };
 
 const changeThemeVariable = (vars: any) => {

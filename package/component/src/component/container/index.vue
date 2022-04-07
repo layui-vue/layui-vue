@@ -9,7 +9,7 @@ import { computed } from "vue";
 import "./index.less";
 
 export interface LayContainerProps {
-  fluid?: boolean;
+  fluid?: boolean  | string;
 }
 
 const props = withDefaults(defineProps<LayContainerProps>(), {
