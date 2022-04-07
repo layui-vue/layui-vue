@@ -18,6 +18,7 @@
         <ul>
           <li>[新增] config-provider 组件 dark-partial 属性, 夜间主题偏好配置。(by @就眠儀式)</li>
           <li>[修复] page 组件 pages 属性为单数时, 页码计算错误。(by @就眠儀式)</li>
+          <li>[修复] button-group 组件 first-child 样式。(by @就眠儀式)</li>
           <li>[修复] dark 模式 step 组件线条不显示。(by @莫名点)</li>
         </ul> 
       </li>
