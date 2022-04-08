@@ -238,20 +238,16 @@ export default defineComponent({
   overflow: hidden !important;
 }
 
-.scrollbar-box ::-webkit-scrollbar {
-  width: 0px !important;
-}
-
 .scrollbar-y {
   position: relative;
   height: 100%;
   .scroll-wrap {
     height: 100%;
     overflow-y: scroll;
-    scrollbar-color: transparent transparent;
-    scrollbar-track-color: transparent;
-    -ms-scrollbar-track-color: transparent;
+    scrollbar-width: none; /* firefox */
+    -ms-overflow-style: none;
   }
+
   .scrollbar-track {
     position: absolute;
     top: 0;
@@ -266,12 +262,19 @@ export default defineComponent({
     }
   }
 }
+.scrollbar-y ::-webkit-scrollbar{
+  display: none;
+}
 //移动端隐藏自定义滚动条
 .hide.scrollbar-box .scrollbar-track {
   display: none;
 }
 //移动端显示原生滑块
-.hide.scrollbar-box .scrollbar-y {
-  margin: 0;
+.hide.scrollbar-box .scrollbar-y ::-webkit-scrollbar{
+  display: block;
+}
+.hide.scrollbar-box .scrollbar-y .scroll-wrap{
+  scrollbar-width: auto;
+  -ms-overflow-style: scrollbar;
 }
 </style>
