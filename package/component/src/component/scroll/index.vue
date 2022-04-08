@@ -237,6 +237,11 @@ export default defineComponent({
   height: 100%;
   overflow: hidden !important;
 }
+
+.scrollbar-box ::-webkit-scrollbar {
+  width: 0px !important;
+}
+
 .scrollbar-y {
   position: relative;
   height: 100%;
@@ -244,6 +249,9 @@ export default defineComponent({
   .scroll-wrap {
     height: 100%;
     overflow-y: scroll;
+    scrollbar-color: transparent transparent;
+    scrollbar-track-color: transparent;
+    -ms-scrollbar-track-color: transparent;
   }
   .scrollbar-track {
     position: absolute;
