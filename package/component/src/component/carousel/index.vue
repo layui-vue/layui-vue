@@ -86,13 +86,10 @@ provide("slotsChange", slotsChange);
 // 上一页
 const sub = function () {
   for (var i = 0; i < childrens.value.length; i++) {
-    // @ts-ignore
     if (childrens.value[i].props.id === active.value) {
       if (i === 0) {
-        // @ts-ignore
         active.value = childrens.value[slots.length - 1].props.id;
       }
-      // @ts-ignore
       active.value = childrens.value[i - 1].props.id;
       break;
     }
@@ -102,18 +99,36 @@ const sub = function () {
 // 下一页
 const add = function () {
   for (var i = 0; i < childrens.value.length; i++) {
-    // @ts-ignore
     if (childrens.value[i].props.id === active.value) {
       if (i === childrens.value.length - 1) {
-        // @ts-ignore
         active.value = childrens.value[0].props.id;
       }
-      // @ts-ignore
       active.value = childrens.value[i + 1].props.id;
       break;
     }
   }
 };
+
+// 自动播放
+const autoplay = () => {
+  for (var i = 0; i < childrens.value.length; i++) {
+    if (childrens.value[i].props.id === active.value) {
+      if (i === childrens.value.length - 1) {
+        active.value = childrens.value[0].props.id;
+      }
+      active.value = childrens.value[i + 1].props.id;
+      break;
+    }
+  }
+};
+
+watch(
+  () => props.autoplay,
+  () => {
+    setInterval(autoplay, props.interval);
+  },
+  { immediate: true }
+);
 </script>
 
 <template>

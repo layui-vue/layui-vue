@@ -7,7 +7,7 @@
 ::: demo
 
 <template>
-  <lay-carousel v-model="active">
+  <lay-carousel v-model="active1">
     <lay-carousel-item id="1">
       <div style="color: white;text-align: center;width:100%;height:300px;line-height:300px;background-color:#79C48C;">条目一</div>
     </lay-carousel-item>
@@ -29,10 +29,10 @@ import { ref } from 'vue'
 export default {
   setup() {
 
-    const active = ref("1")
+    const active1 = ref("1")
 
     return {
-      active
+      active1
     }
   }
 }
@@ -46,7 +46,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-carousel v-model="active" anim="updown">
+  <lay-carousel v-model="active2" anim="updown">
     <lay-carousel-item id="1">
       <div style="color: white;text-align: center;width:100%;height:300px;line-height:300px;background-color:#79C48C;">条目一</div>
     </lay-carousel-item>
@@ -68,10 +68,10 @@ import { ref } from 'vue'
 export default {
   setup() {
 
-    const active = ref("1")
+    const active2 = ref("1")
 
     return {
-      active
+      active2
     }
   }
 }
@@ -85,7 +85,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-carousel v-model="active" indicator="outside">
+  <lay-carousel v-model="active3" indicator="outside">
     <lay-carousel-item id="1">
       <div style="color: white;text-align: center;width:100%;height:300px;line-height:300px;background-color:#79C48C;">条目一</div>
     </lay-carousel-item>
@@ -107,10 +107,10 @@ import { ref } from 'vue'
 export default {
   setup() {
 
-    const active = ref("1")
+    const active3 = ref("1")
 
     return {
-      active
+      active3
     }
   }
 }
@@ -124,7 +124,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-carousel v-model="active">
+  <lay-carousel v-model="active4">
     <lay-carousel-item :id="item.id" v-for="item in arrays">
       <div style="color: white;text-align: center;width:100%;height:300px;line-height:300px;background-color:#79C48C;">{{ item.text }}</div>
     </lay-carousel-item>
@@ -137,7 +137,7 @@ import { ref } from 'vue'
 export default {
   setup() {
 
-    const active = ref("1")
+    const active4 = ref("1")
 
     const arrays = ref([
       {id: "1", text: ""},
@@ -147,7 +147,7 @@ export default {
     ])
 
     return {
-      active,
+      active4,
       arrays
     }
   }

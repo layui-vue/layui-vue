@@ -35,7 +35,7 @@ const props = withDefaults(defineProps<LayButtonProps>(), {
   loading: false,
   disabled: false,
   nativeType: "button",
-  borderStyle: "soild"
+  borderStyle: "soild",
 });
 
 const emit = defineEmits(["click"]);
@@ -47,10 +47,10 @@ const onClick = (event: any) => {
 };
 
 const styles = computed(() => {
-  return { 
-    border: `1px ${props.borderStyle}`
-  }
-})
+  return {
+    border: `1px ${props.borderStyle}`,
+  };
+});
 
 const classes = computed(() => {
   return [

@@ -262,7 +262,7 @@ export default defineComponent({
     }
   }
 }
-.scrollbar-y ::-webkit-scrollbar{
+.scrollbar-y ::-webkit-scrollbar {
   display: none;
 }
 //移动端隐藏自定义滚动条
@@ -270,10 +270,10 @@ export default defineComponent({
   display: none;
 }
 //移动端显示原生滑块
-.hide.scrollbar-box .scrollbar-y ::-webkit-scrollbar{
+.hide.scrollbar-box .scrollbar-y ::-webkit-scrollbar {
   display: block;
 }
-.hide.scrollbar-box .scrollbar-y .scroll-wrap{
+.hide.scrollbar-box .scrollbar-y .scroll-wrap {
   scrollbar-width: auto;
   -ms-overflow-style: scrollbar;
 }
