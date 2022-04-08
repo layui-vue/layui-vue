@@ -16,6 +16,7 @@
       <li> 
         <h3>1.0.2 <span class="layui-badge-rim">2022-04-07</span></h3> 
         <ul>
+          <li>[新增] button 组件 border-style 属性, 允许自定义边框样式。(by @就眠儀式)</li>
           <li>[新增] config-provider 组件 dark-partial 属性, 夜间主题偏好配置。(by @就眠儀式)</li>
           <li>[修复] page 组件 pages 属性为单数时, 页码计算错误。(by @就眠儀式)</li>
           <li>[修复] panel 组件 background-color 为透明的问题。(by @就眠儀式)</li>

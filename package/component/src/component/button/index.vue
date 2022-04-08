@@ -13,7 +13,7 @@ import {
   ButtonSize,
   ButtonType,
 } from "./interface";
-import { Boolean, BooleanOrString, String } from "../../types";
+import { BooleanOrString, String } from "../../types";
 
 export interface LayButtonProps {
   type?: ButtonType;
@@ -26,6 +26,7 @@ export interface LayButtonProps {
   loading?: BooleanOrString;
   disabled?: BooleanOrString;
   nativeType?: ButtonNativeType;
+  borderStyle?: String;
 }
 
 const props = withDefaults(defineProps<LayButtonProps>(), {
@@ -34,6 +35,7 @@ const props = withDefaults(defineProps<LayButtonProps>(), {
   loading: false,
   disabled: false,
   nativeType: "button",
+  borderStyle: "soild"
 });
 
 const emit = defineEmits(["click"]);
@@ -43,6 +45,12 @@ const onClick = (event: any) => {
     emit("click", event);
   }
 };
+
+const styles = computed(() => {
+  return { 
+    border: `1px ${props.borderStyle}`
+  }
+})
 
 const classes = computed(() => {
   return [
@@ -62,6 +70,7 @@ const classes = computed(() => {
   <button
     class="layui-btn"
     :class="classes"
+    :style="styles"
     :type="nativeType"
     @click="onClick"
   >

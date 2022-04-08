@@ -61,6 +61,33 @@ export default {
 
 :::
 
+::: title 次要按钮
+:::
+
+::: demo 使用 `border-style` 属性设置边框样式
+
+<template>
+  <lay-button border-style="dashed">原始按钮</lay-button>
+  <lay-button border="green" border-style="dashed">默认按钮</lay-button>
+  <lay-button border="blue" border-style="dashed">百搭按钮</lay-button>
+  <lay-button border="orange" border-style="dashed">暖色按钮</lay-button>
+  <lay-button border="red" border-style="dashed">警告按钮</lay-button>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    return {
+    }
+  }
+}
+</script>
+
+:::
+
 ::: title 按钮尺寸
 :::
 
@@ -300,6 +327,7 @@ export default {
 | fluid       | 最大化   | boolean | `false`   | `true` `false`                     |
 | radius      | 圆角     | boolean | `false`   | `true` `false`                     |
 | border      | 边框     | string  | `green`   | `green` `blue` `orange` `red`      |
+| border-style      | 边框样式    | string  | `soild`   | `soild` `dashed` `dotted`     |
 | disabled    | 禁用     | boolean | `false`   | `true` `false`                     |
 | loading     | 加载     | boolean | `false`   | `true` `false`                     |
 | native-type | 原生类型 | string  | `button`  | `button` `submit` `reset`          |
