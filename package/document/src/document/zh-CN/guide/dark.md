@@ -22,7 +22,7 @@ const theme = ref('dark')
 ::: title 偏好设置
 :::
 
-::: describe 当内置的夜间样式不满足要求时, 我们提供 dark-partial 配置偏好。
+::: describe 若内置的夜间模式不满足要求时, 可通过 dark-partial 属性进行偏好设置。
 :::
 
 ```vue
@@ -44,13 +44,18 @@ const darkPartial = {
 }
 </script>
 ```
-::: describe brightness: 亮度
+
+::: title  Dark Partial 属性
 :::
-::: describe contrast: 对比度
-:::
-::: describe grayscale: 灰度值
-:::
-::: describe darkSchemeBackgroundColor: 背景颜色
-:::
-::: describe darkSchemeTextColor: 文字颜色
+
+::: table
+
+| 属性        | 描述     | 类型    | 默认值    | 可选值                             |
+| ----------- | -------- | ------- | --------- | ---------------------------------- |
+| brightness        | 亮度     | `number`  | `100` | `0 - 100` |
+| contrast        | 对比度     | `number`  | `100` | `0 - 100` |
+| grayscale        | 灰度值     | `number`  | `0` | `0 - 100` |
+| darkSchemeBackgroundColor  | 背景颜色   | `string`  | -- | -- |
+| darkSchemeTextColor        | 前景颜色   | `string`  | -- | -- |
+
 :::
