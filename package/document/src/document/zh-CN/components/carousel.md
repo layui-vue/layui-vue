@@ -162,12 +162,14 @@ export default {
 
 ::: table
 
-| 属性      | 描述         | 可选值                    |
-| --------- | ------------ | ------------------------- |
-| v-model   | 当前激活项   | `--`                      |
-| anim      | 切换方向     | `default` `updown`        |
-| indicator | 控制器位置   | `inside` `outside` `none` |
-| arrow     | 切换按钮状态 | `hover` `always` `none`   |
+| 属性      | 描述         | 类型          |类型             |可选值                    |
+| --------- | ------------ |--------------| --------------- | -------------------------|
+| v-model   | 当前激活项   | `number`      | --             | --                      |
+| anim      | 切换方向     | `string`      | `default`      | `default` `updown`       |
+| indicator | 控制器位置   | `string`      | `inside`       |`inside` `outside` `none` |
+| arrow     | 切换按钮状态 | `string`      | `hover`        |`hover` `always` `none`   |
+| autoplay  | 自动播放     | `boolean`     | `true`         | `true` `false`           |
+| interval  | 轮播间隔     | `number`      | `3000`         |  --                  |
 
 :::
 

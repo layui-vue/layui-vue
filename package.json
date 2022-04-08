@@ -13,6 +13,7 @@
     "generate:icons": "pnpm -C ./package/icons generate",
     "lint:eslint": "eslint 'package/**/*.{vue,ts,tsx}' --fix",
     "lint:prettier": "prettier --write \"package/**/*.{vue,ts}\"",
+    "postinstall": "npm run build",
     "prepare": "husky install"
   },
   "dependencies": {
