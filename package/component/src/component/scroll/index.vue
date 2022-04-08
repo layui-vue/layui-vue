@@ -245,7 +245,6 @@ export default defineComponent({
 .scrollbar-y {
   position: relative;
   height: 100%;
-  margin-right: -17px; //遮住浏览器自带滚动条
   .scroll-wrap {
     height: 100%;
     overflow-y: scroll;
@@ -256,7 +255,7 @@ export default defineComponent({
   .scrollbar-track {
     position: absolute;
     top: 0;
-    right: 17px;
+    right: 0;
     bottom: 0;
     border-radius: 8px;
     z-index: 20;

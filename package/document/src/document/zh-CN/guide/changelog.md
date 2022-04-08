@@ -22,6 +22,7 @@
           <li>[修复] tab 组件 layui-tab-head 默认存在背景色。(by @就眠儀式)</li>
           <li>[修复] button-group 组件 first-child 样式。(by @就眠儀式)</li>
           <li>[修复] dark 模式 step 组件线条不显示。(by @莫名点)</li>
+          <li>[修复] scroll 组件屏幕缩放时样式异常。(by @Sight)</li>
         </ul> 
       </li>
     </ul>
