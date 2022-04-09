@@ -82,6 +82,25 @@
    border: none;
    border-radius: 0;
    display: list-item;
+   margin-right: -1px;
+   margin-left: -1px;
+}
+
+
+.layui-tab-title.is-right {
+  border-left: 1px solid @global-neutral-color-3;
+}
+
+.layui-tab-title.is-left {
+  border-right: 1px solid @global-neutral-color-3;
+}
+
+.layui-tab-title.is-right .layui-this {
+  border-left-color: #FFF;
+}
+
+.layui-tab-title.is-left .layui-this {
+  border-right-color: #FFF;
 }
 
 .layui-tab-title .layui-this {
@@ -129,7 +148,9 @@
   border-bottom: 2px solid @global-checked-color;
 }
 
-.layui-tab-brief>.layui-tab-head.is-right>.layui-tab-title,
+.layui-tab-brief>.layui-tab-head.is-right>.layui-tab-title{
+  border-left: 1px solid @global-neutral-color-3;
+}
 .layui-tab-brief>.layui-tab-head.is-left>.layui-tab-title {
   border-right: 1px solid @global-neutral-color-3;
 }
