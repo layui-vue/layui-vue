@@ -30,6 +30,17 @@ export default {
 
 :::
 
+::: title Panel 属性
+:::
+
+::: table
+
+| 插槽    | 描述     | 类型 | 默认值 | 可选值 |
+| ------- | -------- | ------ | ------ | ----- |
+| shadow | 阴影 | `string`     | `always` | `always`  `hover`  `never` |
+
+:::
+
 ::: title Panel 插槽
 :::
 

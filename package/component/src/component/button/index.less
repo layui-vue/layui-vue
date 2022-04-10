@@ -1,27 +1,22 @@
 @import (reference) "../../theme/variable.less";
 
-@button-primary-color: var(--button-primary-color);
-@button-primary-border-color: var(--button-primary-border-color);
-@button-normal-color: var(--button-normal-color);
-@button-normal-border-color: var(--button-normal-border-color);
-@button-warm-color: var(--button-warm-color);
-@button-warm-border-color: var(--button-warm-border-color);
-@button-danger-color: var(--button-danger-color);
-@button-danger-border-color: var(--button-danger-border-color);
-@button-border-radius: var(--button-border-radius);
-@button-border-color: var(--button-border-color);
-
 :root {
-  --button-primary-color: @global-primary-color;
-  --button-primary-border-color: @global-primary-color;
-  --button-normal-color: @global-normal-color;
-  --button-normal-border-color: @global-normal-color;
-  --button-warm-color: @global-warm-color;
-  --button-warm-border-color: @global-warm-color;
-  --button-danger-color: @global-danger-color;
-  --button-danger-border-color: @global-danger-color;
-  --button-border-radius: @global-border-radius;
-  --button-border-color: @global-neutral-color-6;
+  --button-primary-text-color: #fff;
+  --button-primary-background-color: var(--global-primary-color);
+  --button-primary-border-color: var(--global-primary-color);
+  --button-normal-text-color: #fff;
+  --button-normal-background-color: var(--global-normal-color);
+  --button-normal-border-color: var(--global-normal-color);
+  --button-warm-text-color: #fff;
+  --button-warm-background-color: var(--global-warm-color);
+  --button-warm-border-color: var(--global-warm-color);
+  --button-danger-text-color: #fff;
+  --button-danger-background-color: var(--global-danger-color);
+  --button-danger-border-color: var(--global-danger-color);
+  --button-border-radius: var(--global-border-radius);
+  --button-border-color: var(--global-neutral-color-6);
+  --button-background-color: 0 0;
+  --button-text-color: #666;
 }
 
 .layui-btn {
@@ -31,63 +26,47 @@
   font-size: 14px;
   text-align: center;
   white-space: nowrap;
-  border-radius: @button-border-radius;
-  border-color: @button-border-color;
+  color: var(--button-text-color);
+  background: var(--button-background-color);
+  border-radius: var(--button-border-radius);
+  border-color: var(--button-border-color);
   border-width: 1px;
   border-style: solid;
-  background: 0 0;
-  color: #666;
   cursor: pointer;
-}
-
-.layui-btn:hover,
-.layui-btn:active {
-  color: #333;
-}
-
-.layui-btn + .layui-btn {
-  margin-left: 10px;
-}
-
-.layui-btn-radius {
-  border-radius: 100px;
-}
-
-.layui-btn .layui-icon {
-  padding: 0 2px;
-  vertical-align: middle\9;
-  vertical-align: bottom;
+  :hover,
+  :active {
+    color: #333;
+  }
 }
 
 .layui-btn-primary {
-  color: #fff;
-  background-color: @button-primary-color;
-  border-color: @button-primary-border-color;
+  color: var(--button-primary-text-color);
+  background-color: var(--button-primary-background-color);
+  border-color: var(--button-primary-border-color);
 }
 
 .layui-btn-normal {
-  color: #fff;
-  background-color: @button-normal-color;
-  border-color: @button-normal-border-color;
+  color: var(--button-normal-text-color);
+  background-color: var(--button-normal-background-color);
+  border-color: var(--button-normal-border-color);
 }
 
 .layui-btn-warm {
-  color: #fff;
-  background-color: @button-warm-color;
-  border-color: @button-warm-border-color;
+  color: var(--button-warm-text-color);
+  background-color: var(--button-warm-background-color);
+  border-color: var(--button-warm-border-color);
 }
 
 .layui-btn-danger {
-  color: #fff;
-  background-color: @button-danger-color;
-  border-color: @button-danger-border-color;
+  color: var(--button-danger-text-color);
+  background-color: var(--button-danger-background-color);
+  border-color: var(--button-danger-border-color);
 }
 
 .layui-btn-primary:hover,
 .layui-btn-normal:hover,
 .layui-btn-warm:hover,
 .layui-btn-danger:hover {
-  color: #fff;
   opacity: 0.8;
   filter: alpha(opacity=80);
 }
@@ -120,6 +99,10 @@
   width: 100%;
 }
 
+.layui-btn-radius {
+  border-radius: 100px;
+}
+
 .layui-btn-disabled,
 .layui-btn-disabled:active,
 .layui-btn-disabled:hover {
@@ -128,4 +111,14 @@
   color: #d2d2d2 !important;
   cursor: not-allowed !important;
   opacity: 1;
+}
+
+.layui-btn + .layui-btn {
+  margin-left: 10px;
+}
+
+.layui-btn .layui-icon {
+  padding: 0 2px;
+  vertical-align: middle\9;
+  vertical-align: bottom;
 }

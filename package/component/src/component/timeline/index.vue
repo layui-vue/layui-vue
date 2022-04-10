@@ -9,7 +9,7 @@ import "./index.less";
 import { computed, withDefaults } from "vue";
 
 export interface LayTimelineProps {
-  direction: "horizontal" | "vertical";
+  direction?: "horizontal" | "vertical";
 }
 
 const props = withDefaults(defineProps<LayTimelineProps>(), {

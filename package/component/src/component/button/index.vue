@@ -1,3 +1,4 @@
+<!-- done -->
 <script lang="ts">
 export default {
   name: "LayButton",
@@ -9,6 +10,7 @@ import "./index.less";
 import { computed } from "vue";
 import {
   ButtonBorder,
+  ButtonEmits,
   ButtonNativeType,
   ButtonSize,
   ButtonType,
@@ -38,9 +40,9 @@ const props = withDefaults(defineProps<LayButtonProps>(), {
   borderStyle: "soild",
 });
 
-const emit = defineEmits(["click"]);
+const emit = defineEmits(ButtonEmits);
 
-const onClick = (event: any) => {
+const onClick = (event: MouseEvent) => {
   if (!props.disabled) {
     emit("click", event);
   }

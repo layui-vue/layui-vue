@@ -5,11 +5,12 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed } from "vue";
 import "./index.less";
+import { computed } from "vue";
+import { BooleanOrString } from '../../types';
 
 export interface LayContainerProps {
-  fluid?: boolean | string;
+  fluid?: BooleanOrString;
 }
 
 const props = withDefaults(defineProps<LayContainerProps>(), {

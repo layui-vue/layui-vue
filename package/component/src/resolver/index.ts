@@ -6,6 +6,44 @@
  * √ layer API
  */
 const matchComponents = [
+  // done
+  {
+    pattern: /^LayButton$/,
+    styleDir: "button",
+  },
+  {
+    pattern: /^LayButtonContainer$/,
+    styleDir: "container",
+  },
+  {
+    pattern: /^LayButtonGroup$/,
+    styleDir: "buttonGroup",
+  },
+  {
+    pattern: /^LayContainer$/,
+    styleDir: "container",
+  },
+  {
+    pattern: /^LayCard$/,
+    styleDir: "card",
+  },
+  {
+    pattern: /^LayPanel$/,
+    styleDir: "panel",
+  },
+  {
+    pattern: /^LayFooter$/,
+    styleDir: "footer",
+  },
+  {
+    pattern: /^LayBody$/,
+    styleDir: "body",
+  }, 
+  {
+    pattern: /^LayEmpty$/,
+    styleDir: "empty",
+  },
+  // ....
   {
     pattern: /^LayAvatarList$/,
     styleDir: "avatar",

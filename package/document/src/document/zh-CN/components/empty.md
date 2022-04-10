@@ -80,6 +80,33 @@ export default {
 
 :::
 
+::: title 图片插槽
+:::
+
+::: demo
+
+<template>
+  <lay-empty description="刷新试试">
+    <template #image>
+      图片
+    </template>
+  </lay-empty>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    return {
+    }
+  }
+}
+</script>
+
+:::
+
 ::: title Empty 属性
 :::
 

@@ -1,32 +1,30 @@
 @import (reference) "../../theme/variable.less";
 
-@card-border-radius: var(--card-border-radius);
-@card-fore-color: var(--card-fore-color);
-
 :root {
-  --card-border-radius: @global-border-radius;
-  --card-fore-color: @global-fore-color;
+  --card-border-radius: var(--global-border-radius);
 }
 
 .layui-card {
   margin-bottom: 15px;
-  border-radius: @card-border-radius;
   background-color: #ffffff;
-  .layui-card-header {
-    height: 42px;
-    line-height: 42px;
-    padding: 0 15px;
-    border-bottom: 1px solid #f6f6f6;
-    color: @card-fore-color;
-    font-size: 14px;
-    .layui-card-header-extra {
-      float: right;
-    }
-  }
-  .layui-card-body {
-    padding: 10px 15px;
-    line-height: 24px;
-  }
+  border-radius: var(--card-border-radius);
+}
+
+.layui-card .layui-card-header {
+  height: 42px;
+  line-height: 42px;
+  padding: 0 15px;
+  border-bottom: 1px solid #f6f6f6;
+  font-size: 14px;
+}
+
+.layui-card .layui-card-header .layui-card-header-extra {
+  float: right;
+}
+
+.layui-card .layui-card-body {
+  padding: 10px 15px;
+  line-height: 24px; 
 }
 
 .layui-card:last-child {
