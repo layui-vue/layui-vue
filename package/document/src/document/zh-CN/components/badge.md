@@ -45,6 +45,25 @@ export default {
 
 :::
 
+::: title 动画
+:::
+
+::: demo 使用 `ripple` 属性, 添加水波纹动画, 仅支持 `dot` 类型
+<template>
+    <lay-badge type="dot" ripple></lay-badge>&nbsp;
+    <lay-badge type="dot" theme="orange" ripple></lay-badge>&nbsp;
+    <lay-badge type="dot" theme="green" ripple></lay-badge>&nbsp;
+    <lay-badge type="dot" theme="cyan" ripple></lay-badge>&nbsp;
+    <lay-badge type="dot" theme="blue" ripple></lay-badge>&nbsp;
+    <lay-badge type="dot" theme="black" ripple></lay-badge>&nbsp;
+    <lay-badge type="dot" theme="gray" ripple></lay-badge>&nbsp;
+</template>
+
+<script>
+</script>
+:::
+
+
 ::: title Badge 属性
 :::
 

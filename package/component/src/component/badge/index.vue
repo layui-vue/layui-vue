@@ -12,6 +12,7 @@ export interface LayBadgeProps {
   type?: "dot" | "rim";
   theme?: string;
   color?: string;
+  ripple?: boolean;
 }
 
 const props = defineProps<LayBadgeProps>();
@@ -22,8 +23,10 @@ const classes = computed(() => {
       "layui-badge": !props.type,
       "layui-badge-dot": props.type == "dot",
       "layui-badge-rim": props.type == "rim",
+      "layui-badge-dot-ripple": props.ripple,
     },
     `layui-bg-${props.theme}`,
+    
   ];
 });
 
@@ -34,6 +37,11 @@ const styles = computed(() => {
 
 <template>
   <span :class="classes" :style="styles">
-    <slot v-if="type != 'dot'"></slot>
+      <span v-if="type === 'dot'" 
+        :class="props.theme ? `layui-bg-${props.theme}` : ``" 
+        :style="styles ?? `background-color: #ff5722;`">
+      </span>
+    
+      <slot v-if="type != 'dot'"></slot>
   </span>
 </template>
