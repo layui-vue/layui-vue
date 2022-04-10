@@ -11,6 +11,16 @@
 <template>
 <lay-timeline>
   <lay-timeline-item title="1.0.x">
+      <ul> 
+      <a name="1-0-3"> </a> 
+      <li> 
+        <h3>1.0.3 <span class="layui-badge-rim">2022-04-10</span></h3> 
+        <ul>
+          <li>[新增] empty 组件 image 插槽, 支持自定义 image。</li>
+          <li>[其他] ...</li>
+        </ul> 
+      </li>
+    </ul>
     <ul> 
       <a name="1-0-2"> </a> 
       <li> 
