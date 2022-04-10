@@ -38,7 +38,7 @@ const matchComponents = [
   {
     pattern: /^LayBody$/,
     styleDir: "body",
-  }, 
+  },
   {
     pattern: /^LayEmpty$/,
     styleDir: "empty",

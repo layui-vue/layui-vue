@@ -4,5 +4,5 @@ export type ButtonBorder = "green" | "blue" | "orange" | "red" | "black";
 export type ButtonNativeType = "button" | "submit" | "reset";
 
 export const ButtonEmits = {
-    click: (evt: MouseEvent) => evt instanceof MouseEvent,
-}
+  click: (evt: MouseEvent) => evt instanceof MouseEvent,
+};

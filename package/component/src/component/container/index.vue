@@ -7,7 +7,7 @@ export default {
 <script setup lang="ts">
 import "./index.less";
 import { computed } from "vue";
-import { BooleanOrString } from '../../types';
+import { BooleanOrString } from "../../types";
 
 export interface LayContainerProps {
   fluid?: BooleanOrString;

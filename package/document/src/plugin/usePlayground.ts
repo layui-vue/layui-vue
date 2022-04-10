@@ -1,4 +1,4 @@
-import type { BuiltInParserName } from 'prettier'
+import type { BuiltInParserName } from "prettier";
 
 const scriptRe = /<script[^>]*>([\s\S]*)<\/script>/;
 const exportDefaultRe = /export\s*default\s*\{([\s\S]*)\}\;?\s*<\/script>/;
@@ -16,7 +16,10 @@ const MAIN_FILE_NAME = "App.vue";
  * @returns 处理后的代码，URI hsah， playground 链接
   }
  */
-export const usePlayGround = async (source: string, convertSetupSugar: boolean) => {
+export const usePlayGround = async (
+  source: string,
+  convertSetupSugar: boolean
+) => {
   const decodeCode = source;
   const scriptResult = decodeCode.match(scriptRe);
 
@@ -77,8 +80,8 @@ export const usePlayGround = async (source: string, convertSetupSugar: boolean) 
 
 /**
  * 编码
- * @param data 
- * @returns 
+ * @param data
+ * @returns
  */
 function utoa(data: string): string {
   return btoa(unescape(encodeURIComponent(data)));
@@ -86,46 +89,48 @@ function utoa(data: string): string {
 
 /**
  * 去除字符串两端的空白行
- * @param str 
- * @returns 
+ * @param str
+ * @returns
  */
 function trimBr(str: string): string {
   return str.replace(/(^[\r\n]*)|([\r\n]*$)/, "");
 }
 
 /**
- * 
+ *
  * @returns 格式化代码
  */
 async function formatCode(filename: string, data: string) {
-  const { format } = await import('prettier/standalone')
-  const parserTypeScript = await import('prettier/parser-typescript').then(
+  const { format } = await import("prettier/standalone");
+  const parserTypeScript = await import("prettier/parser-typescript").then(
     (m) => m.default
-  )
-  const parserBabel = await import('prettier/parser-babel').then(
+  );
+  const parserBabel = await import("prettier/parser-babel").then(
     (m) => m.default
-  )
-  const parserHtml = await import('prettier/parser-html').then((m) => m.default)
+  );
+  const parserHtml = await import("prettier/parser-html").then(
+    (m) => m.default
+  );
   let code = data;
-  let parser: BuiltInParserName
-  if (filename.endsWith('.vue')) {
-    parser = 'vue'
-  } else if (filename.endsWith('.js')) {
-    parser = 'babel'
-  } else if (filename.endsWith('.ts')) {
-    parser = 'typescript'
-  } else if (filename.endsWith('.json')) {
-    parser = 'json'
+  let parser: BuiltInParserName;
+  if (filename.endsWith(".vue")) {
+    parser = "vue";
+  } else if (filename.endsWith(".js")) {
+    parser = "babel";
+  } else if (filename.endsWith(".ts")) {
+    parser = "typescript";
+  } else if (filename.endsWith(".json")) {
+    parser = "json";
   } else {
-    return
+    return;
   }
   code = format(code, {
     parser,
     plugins: [parserHtml, parserTypeScript, parserBabel],
     semi: false, // 语句末尾打印分号
-    singleQuote: true,  // 使用单引号
+    singleQuote: true, // 使用单引号
     vueIndentScriptAndStyle: false, // 是否缩进 Vue 文件中的 script 和 style 标签
-  })
+  });
 
   return code;
 }
