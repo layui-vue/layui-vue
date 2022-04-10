@@ -47,12 +47,12 @@ const toggle = function () {
   show.value = !show.value;
 };
 
-const onPlayground = function () {
+const onPlayground = async function () {
   const foundCodes = meta.value.getElementsByClassName("language-html");
   const foundCode = foundCodes[0];
   const SourceCode = foundCode.textContent || "";
 
-  const { link } = usePlayGround(SourceCode, true);
+  const { link } = await usePlayGround(SourceCode, true);
   window.open(link);
 };
 

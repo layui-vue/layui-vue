@@ -1,3 +1,5 @@
+import type { BuiltInParserName } from 'prettier'
+
 const scriptRe = /<script[^>]*>([\s\S]*)<\/script>/;
 const exportDefaultRe = /export\s*default\s*\{([\s\S]*)\}\;?\s*<\/script>/;
 const setupRe = /setup\s*\(\)\s*\{([\s\S]*)return\s*\{([\s\S]*)\}\;?\s*\}\;?/;
@@ -14,13 +16,13 @@ const MAIN_FILE_NAME = "App.vue";
  * @returns 处理后的代码，URI hsah， playground 链接
   }
  */
-export const usePlayGround = (source: string, convertSetupSugar: boolean) => {
+export const usePlayGround = async (source: string, convertSetupSugar: boolean) => {
   const decodeCode = source;
   const scriptResult = decodeCode.match(scriptRe);
 
   // 替换 script 标签
   // $1 正则第一个括号匹配的内容
-  let code: string = decodeCode;
+  let code: string | undefined = decodeCode;
   if (convertSetupSugar) {
     if (scriptResult) {
       code = decodeCode.replace(
@@ -58,6 +60,8 @@ export const usePlayGround = (source: string, convertSetupSugar: boolean) => {
     code = code.replace(layerRe, `import { layer } from "@layui/layui-vue"`);
     // console.log("layer",code);
   }
+
+  code = await formatCode(MAIN_FILE_NAME, code);
   const originCode = {
     [MAIN_FILE_NAME]: code,
   };
@@ -71,12 +75,57 @@ export const usePlayGround = (source: string, convertSetupSugar: boolean) => {
   };
 };
 
-//编码
+/**
+ * 编码
+ * @param data 
+ * @returns 
+ */
 function utoa(data: string): string {
   return btoa(unescape(encodeURIComponent(data)));
 }
 
-// 去除字符串两端的空白行
+/**
+ * 去除字符串两端的空白行
+ * @param str 
+ * @returns 
+ */
 function trimBr(str: string): string {
   return str.replace(/(^[\r\n]*)|([\r\n]*$)/, "");
+}
+
+/**
+ * 
+ * @returns 格式化代码
+ */
+async function formatCode(filename: string, data: string) {
+  const { format } = await import('prettier/standalone')
+  const parserTypeScript = await import('prettier/parser-typescript').then(
+    (m) => m.default
+  )
+  const parserBabel = await import('prettier/parser-babel').then(
+    (m) => m.default
+  )
+  const parserHtml = await import('prettier/parser-html').then((m) => m.default)
+  let code = data;
+  let parser: BuiltInParserName
+  if (filename.endsWith('.vue')) {
+    parser = 'vue'
+  } else if (filename.endsWith('.js')) {
+    parser = 'babel'
+  } else if (filename.endsWith('.ts')) {
+    parser = 'typescript'
+  } else if (filename.endsWith('.json')) {
+    parser = 'json'
+  } else {
+    return
+  }
+  code = format(code, {
+    parser,
+    plugins: [parserHtml, parserTypeScript, parserBabel],
+    semi: false, // 语句末尾打印分号
+    singleQuote: true,  // 使用单引号
+    vueIndentScriptAndStyle: false, // 是否缩进 Vue 文件中的 script 和 style 标签
+  })
+
+  return code;
 }
