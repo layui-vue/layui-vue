@@ -19,7 +19,7 @@
           {{ text }}
         </div>
  				<div class="notice-bar-warp-slot " v-else> 
-					  <lay-carousel v-model="active4" :interval="2000" :autoplay="true" anim="updown"  indicator="none" arrow="none"  style="height:40px;">
+					  <lay-carousel v-model="active4" :interval="3000" :autoplay="true" anim="updown"  indicator="none" arrow="none"  style="height:40px;">
                        <lay-carousel-item :id="ind" v-for="(item,ind) in arrays">
                    <div>{{ item }}</div>
                   </lay-carousel-item>
