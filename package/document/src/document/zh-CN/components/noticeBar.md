@@ -96,9 +96,9 @@ export default {
 
     const list = reactive([
       '通知一：users !',
-      '通知一：world !',
-      '通知一：friend !',
-      '通知一：ok!',  
+      '通知二：world !',
+      '通知三：friend !',
+      '通知四：ok!',  
     ])
 
     return {
