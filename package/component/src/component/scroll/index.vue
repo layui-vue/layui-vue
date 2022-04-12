@@ -35,6 +35,7 @@
 </template>
 
 <script>
+import "./index.less";
 import {
   defineComponent,
   toRefs,
@@ -232,49 +233,3 @@ export default defineComponent({
   },
 });
 </script>
-<style lang="less" scoped>
-.scrollbar-box {
-  height: 100%;
-  overflow: hidden !important;
-}
-
-.scrollbar-y {
-  position: relative;
-  height: 100%;
-  .scroll-wrap {
-    height: 100%;
-    overflow-y: scroll;
-    scrollbar-width: none; /* firefox */
-    -ms-overflow-style: none;
-  }
-
-  .scrollbar-track {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    border-radius: 8px;
-    z-index: 20;
-    .scrollbar-thumb {
-      margin: 0 auto;
-      border-radius: 6px;
-      cursor: default;
-    }
-  }
-}
-.scrollbar-y ::-webkit-scrollbar {
-  display: none;
-}
-//移动端隐藏自定义滚动条
-.hide.scrollbar-box .scrollbar-track {
-  display: none;
-}
-//移动端显示原生滑块
-.hide.scrollbar-box .scrollbar-y ::-webkit-scrollbar {
-  display: block;
-}
-.hide.scrollbar-box .scrollbar-y .scroll-wrap {
-  scrollbar-width: auto;
-  -ms-overflow-style: scrollbar;
-}
-</style>

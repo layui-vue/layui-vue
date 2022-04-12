@@ -83,6 +83,10 @@ const matchComponents = [
     pattern: /^LayBreadcrumbItem$/,
     styleDir: "breadcrumb",
   },
+  {
+    pattern: /^LayScroll$/,
+    styleDir: "scroll",
+  },
   // ....
   {
     pattern: /^(LayCarousel|LayCarouselItem)$/,
@@ -128,10 +132,6 @@ const matchComponents = [
   },
   {
     pattern: /^LayRadio$/,
-    styleDir: "",
-  },
-  {
-    pattern: /^LayScroll$/,
     styleDir: "",
   },
   {
