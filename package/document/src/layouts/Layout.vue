@@ -131,16 +131,6 @@
                   <lay-color-picker
                     v-model="appStore.themeVariable['--global-neutral-color-8']"
                   ></lay-color-picker>
-                  <lay-color-picker
-                    v-model="appStore.themeVariable['--global-dark-text-color']"
-                  ></lay-color-picker
-                  >&nbsp;
-                  <lay-color-picker
-                    v-model="
-                      appStore.themeVariable['--global-dark-background-color']
-                    "
-                  ></lay-color-picker>
-
                   <lay-button fluid="true">导 出 配 置</lay-button>
                 </div>
               </template>
