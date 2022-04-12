@@ -31,29 +31,54 @@
   border-width: 1px;
   border-style: solid;
   background-color: #fff;
+  border-color: @global-neutral-color-3;
   color: #666;
 }
 
-.layui-badge-dot-ripple > span{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: block;
-    border-radius: 50%;
-    box-sizing: border-box;
-    animation: layui-badge-dot-anim-ripple 1.2s ease-in-out infinite;
+.layui-badge-dot-ripple > span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  border-radius: 50%;
+  box-sizing: border-box;
+  animation: layui-badge-dot-anim-ripple 1.2s ease-in-out infinite;
+}
+
+@keyframes layui-badge-dot-anim-ripple {
+  from {
+    transform: scale(0.8);
+    opacity: 0.6;
   }
-  
-  @keyframes layui-badge-dot-anim-ripple {
-    from {
-      transform: scale(0.8);
-      opacity: 0.6;
-    }
-  
-    to {
-      transform: scale(2.4);
-      opacity: 0;
-    }
+
+  to {
+    transform: scale(2.4);
+    opacity: 0;
   }
+}
+
+/** Badge 在与其他组件配合使用时的辅助样式 */
+
+.layui-btn .layui-badge,
+.layui-btn .layui-badge-dot {
+  margin-left: 5px;
+}
+
+.layui-nav .layui-badge,
+.layui-nav .layui-badge-dot {
+  position: absolute;
+  top: 50%;
+  margin: -5px 6px 0;
+}
+
+.layui-nav .layui-badge {
+  margin-top: -10px;
+}
+
+.layui-tab-title .layui-badge,
+.layui-tab-title .layui-badge-dot {
+  left: 5px;
+  top: -2px;
+}

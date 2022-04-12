@@ -43,6 +43,10 @@ const matchComponents = [
     pattern: /^LayEmpty$/,
     styleDir: "empty",
   },
+  {
+    pattern: /^LayBadge$/,
+    styleDir: "badge",
+  },
   // ....
   {
     pattern: /^LayAvatarList$/,
