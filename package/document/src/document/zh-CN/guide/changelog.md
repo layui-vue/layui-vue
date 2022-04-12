@@ -17,6 +17,7 @@
         <h3>1.0.3 <span class="layui-badge-rim">2022-04-10</span></h3> 
         <ul>
           <li>[新增] empty 组件 image 插槽, 支持自定义 image。</li>
+          <li>[新增] badge 组件 ripple 属性, 开启水波纹动画, 仅适用于 type 为 dot 时。</li>
           <li>[其他] ...</li>
         </ul> 
       </li>

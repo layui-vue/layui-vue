@@ -78,7 +78,7 @@ const matchComponents = [
   {
     pattern: /^LayBreadcrumb$/,
     styleDir: "breadcrumb",
-  },  
+  },
   {
     pattern: /^LayBreadcrumbItem$/,
     styleDir: "breadcrumb",
@@ -90,10 +90,6 @@ const matchComponents = [
   },
   {
     pattern: /^(LayCheckbox|LayCheckboxGroup)$/,
-    styleDir: "",
-  },
-  {
-    pattern: /^LayCol$/,
     styleDir: "",
   },
   {
