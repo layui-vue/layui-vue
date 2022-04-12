@@ -166,7 +166,7 @@
 import { reactive, ref, defineComponent, onMounted, watch, nextTick, toRefs } from 'vue'
 
 export default defineComponent({
-	name: 'Area',
+	name: 'LayArea',
 	props: {
 		// 是否点击区县关闭下拉框
 		simple:{
