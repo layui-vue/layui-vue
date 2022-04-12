@@ -123,18 +123,16 @@ body {
   background-repeat: no-repeat;
   background-size: 100%;
 }
-.site-banner-bg {
-  background-position: center 0;
+
+.site-banner-main {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 180px);
+  justify-content: center;
+  position: relative;
+  text-align: center;
 }
 
-.site-banner-bg,
-.site-banner-main {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-}
 .site-download {
   margin-top: 72px;
   font-size: 0;
