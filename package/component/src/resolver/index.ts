@@ -55,6 +55,10 @@ const matchComponents = [
     pattern: /^LayLogo$/,
     styleDir: "logo",
   },
+  {
+    pattern: /^LayLayout$/,
+    styleDir: "layout",
+  },
   // ....
   {
     pattern: /^LayAvatarList$/,
