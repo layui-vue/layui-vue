@@ -47,6 +47,14 @@ const matchComponents = [
     pattern: /^LayBadge$/,
     styleDir: "badge",
   },
+  {
+    pattern: /^(LayHeader)$/,
+    styleDir: "header",
+  },
+  {
+    pattern: /^LayLogo$/,
+    styleDir: "logo",
+  },
   // ....
   {
     pattern: /^LayAvatarList$/,
@@ -87,15 +95,7 @@ const matchComponents = [
     styleDir: "formItem",
   },
   {
-    pattern: /^(LayHeader)$/,
-    styleDir: "",
-  },
-  {
     pattern: /^LayLine$/,
-    styleDir: "",
-  },
-  {
-    pattern: /^LayLogo$/,
     styleDir: "",
   },
   {
