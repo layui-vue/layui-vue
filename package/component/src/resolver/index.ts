@@ -75,11 +75,15 @@ const matchComponents = [
     pattern: /^LayCol$/,
     styleDir: "row",
   },
-  // ....
   {
-    pattern: /^(LayBreadcrumb|LayBreadcrumbItem)$/,
-    styleDir: "",
+    pattern: /^LayBreadcrumb$/,
+    styleDir: "breadcrumb",
+  },  
+  {
+    pattern: /^LayBreadcrumbItem$/,
+    styleDir: "breadcrumb",
   },
+  // ....
   {
     pattern: /^(LayCarousel|LayCarouselItem)$/,
     styleDir: "",

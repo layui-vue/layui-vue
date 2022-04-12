@@ -20,7 +20,7 @@ provide("separator", props.separator);
 </script>
 
 <template>
-  <span class="layui-breadcrumb" style="visibility: visible">
+  <span class="layui-breadcrumb">
     <slot></slot>
   </span>
 </template>
