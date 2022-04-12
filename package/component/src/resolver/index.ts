@@ -67,6 +67,14 @@ const matchComponents = [
     pattern: /^LayAvatarList$/,
     styleDir: "avatar",
   },
+  {
+    pattern: /^LayRow$/,
+    styleDir: "row",
+  },
+  {
+    pattern: /^LayCol$/,
+    styleDir: "row",
+  },
   // ....
   {
     pattern: /^(LayBreadcrumb|LayBreadcrumbItem)$/,
