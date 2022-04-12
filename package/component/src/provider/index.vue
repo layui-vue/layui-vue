@@ -25,7 +25,7 @@ export interface LayConfigProviderProps {
 }
 
 const props = withDefaults(defineProps<LayConfigProviderProps>(), {
-  locale: "en_US",
+  locale: "zh_CN",
   theme: "light",
 });
 
