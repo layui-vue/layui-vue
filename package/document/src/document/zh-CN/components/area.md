@@ -68,76 +68,21 @@ export default {
 
 :::
 
-::: title 允许关闭
-:::
-
-::: demo
-
-<template>
-    <lay-notice-bar leftIcon="layui-icon-mute" rightIcon="layui-icon-close" text="所有发生过的都是既定的。是应该发生。只能发生。" mode="closeable"></lay-notice-bar>
-</template>
-
-<script>
-import { ref } from "vue"
-
-export default {
-  setup() {
-
-    const visible = ref(true);
-
-    return {
-        visible
-    }
-  }
-}
-</script>
 
 :::
 
-:::  垂直滚动
-:::
-
-::: demo
-
-<template>
-    <lay-notice-bar  :scrollable="true" :textlist="list"></lay-notice-bar>
-</template>
-
-<script>
-import { ref,reactive } from "vue"
-
-export default {
-  setup() {
-
-    const list = reactive([
-      '通知一：users !',
-      '通知二：world !',
-      '通知三：friend !',
-      '通知四：ok!',  
-    ])
-
-    return {
-        list
-    }
-  }
-}
-</script>
-
-:::
-
-::: title Notice Bar 属性
+::: title area 属性
 :::
 
 ::: table
 
 | 事件 | 描述     | 参数                  |
 | ---- | -------- | --------------------- |
-| mode | 模式 | 'link' 'closeable' |
-| text | 内容 | 滚动内容 |
-| leftIcon | 左侧图标 | -- |
-| rightIcon | 右侧图标 | -- |
-| scrollable | 是否开启垂直滚动|true,false|
-|  textlist  | 垂直滚动内容| Array|
+| cust | 是否开启自定义 | false true |
+| simple | 是否选择完成后关闭 | false true |
+| title| 标题数据 | Array |
+| data| 自定义数据 | object |
+| bool | 是否只选择最后的数据|true,false|
 :::
 
  
