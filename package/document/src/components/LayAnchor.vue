@@ -123,7 +123,8 @@ onMounted(() => {
   scrollRefEl.value?.addEventListener("scroll", throttle(handlerScroll, 500));
   // 如果已折叠,关闭组件初始渲染时的动画,然后自动开启
   // @ts-ignore
-  show.value = scrollRefEl.value!.firstElementChild!.style.marginRight !== "0px";
+  show.value =
+    scrollRefEl.value!.firstElementChild!.style.marginRight !== "0px";
   enableAnimation = show.value;
 });
 

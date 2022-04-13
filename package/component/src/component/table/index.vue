@@ -251,31 +251,35 @@ onMounted(() => {
                   </div>
                 </th>
                 <template v-for="column in columns" :key="column">
-                  <th class="layui-table-cell" :style="{ width: column.width, textAlign: column.align }" v-if="tableColumnKeys.includes(column.key)">
-                      <span>
-                        <template v-if="column.titleSlot">
-                          <slot :name="column.titleSlot"></slot>
-                        </template>
-                        <template v-else>
-                          {{ column.title }}
-                        </template>
-                      </span>
-                      <span
-                        v-if="column.sort"
-                        class="layui-table-sort layui-inline"
-                        lay-sort=""
-                      >
-                        <i
-                          @click.stop="sortTable($event, column.key, 'asc')"
-                          class="layui-edge layui-table-sort-asc"
-                          title="升序"
-                        ></i>
-                        <i
-                          @click.stop="sortTable($event, column.key, 'desc')"
-                          class="layui-edge layui-table-sort-desc"
-                          title="降序"
-                        ></i>
-                      </span>
+                  <th
+                    class="layui-table-cell"
+                    :style="{ width: column.width, textAlign: column.align }"
+                    v-if="tableColumnKeys.includes(column.key)"
+                  >
+                    <span>
+                      <template v-if="column.titleSlot">
+                        <slot :name="column.titleSlot"></slot>
+                      </template>
+                      <template v-else>
+                        {{ column.title }}
+                      </template>
+                    </span>
+                    <span
+                      v-if="column.sort"
+                      class="layui-table-sort layui-inline"
+                      lay-sort=""
+                    >
+                      <i
+                        @click.stop="sortTable($event, column.key, 'asc')"
+                        class="layui-edge layui-table-sort-asc"
+                        title="升序"
+                      ></i>
+                      <i
+                        @click.stop="sortTable($event, column.key, 'desc')"
+                        class="layui-edge layui-table-sort-desc"
+                        title="降序"
+                      ></i>
+                    </span>
                   </th>
                 </template>
               </tr>
@@ -309,11 +313,14 @@ onMounted(() => {
                     <template v-if="tableColumnKeys.includes(column.key)">
                       <!-- 插 槽 Column -->
                       <template v-if="column.customSlot">
-                        <td class="layui-table-cell" :style="{
-                              width: column.width,
-                              textAlign: column.align,
-                            }">
-                            <slot :name="column.customSlot" :data="data"></slot>
+                        <td
+                          class="layui-table-cell"
+                          :style="{
+                            width: column.width,
+                            textAlign: column.align,
+                          }"
+                        >
+                          <slot :name="column.customSlot" :data="data"></slot>
                         </td>
                       </template>
                       <!-- 匹 配 Column -->
@@ -322,11 +329,15 @@ onMounted(() => {
                         v-for="(value, key) in data"
                         :key="value"
                       >
-                        <td v-if="column.key == key" class="layui-table-cell" :style="{
-                              width: column.width,
-                              textAlign: column.align,
-                            }">
-                            <span> {{ value }} </span>
+                        <td
+                          v-if="column.key == key"
+                          class="layui-table-cell"
+                          :style="{
+                            width: column.width,
+                            textAlign: column.align,
+                          }"
+                        >
+                          <span> {{ value }} </span>
                         </td>
                       </template>
                     </template>
