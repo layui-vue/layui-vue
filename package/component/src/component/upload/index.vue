@@ -61,6 +61,7 @@ export interface LayUploadProps {
   number?: number;
   drag?: boolean;
   disabled?: boolean;
+  disabledPreview?:boolean;
   cut?: boolean;
   cutOptions: cutOptions;
 }
@@ -112,6 +113,7 @@ const props = withDefaults(defineProps<LayUploadProps>(), {
   number: 0,
   drag: false,
   disabled: false,
+  disabledPreview:false,
   cut: false,
   cutOptions: void 0,
 });
@@ -348,7 +350,7 @@ const cutTransaction = () => {};
 //内部方法 -> end
 </script>
 <template>
-  <div class="layui-upload layui-upload-wrap">
+  <div class="layui-upload layui-upload-wrap" :class="disabledPreview?'layui-upload-file-disabled':''">
     <input
       class="layui-upload-file"
       @click="clickOrgInput"
@@ -415,7 +417,7 @@ const cutTransaction = () => {};
         />
       </div>
     </lay-layer>
-    <div class="layui-upload-list">
+    <div class="layui-upload-list" :class="disabledPreview?'layui-upload-list-disabled':''">
       <slot name="preview"></slot>
     </div>
   </div>

@@ -79,9 +79,10 @@
   height: 1px;
   opacity: 0.01;
   filter: Alpha(opacity=1);
-  cursor: pointer;
 }
-
+.layui-upload-file-disabled{
+  cursor:not-allowed !important;
+}
 .layui-btn-container .layui-upload-choose {
   padding-left: 0;
 }
@@ -98,4 +99,11 @@
 ._lay_upload_img{
   display: block;
   max-width: 100%;
+}
+.layui-upload-list-disabled{
+  width:auto;
+  height:auto;
+  pointer-events: none !important;
+  background-color: #fbfbfb!important;
+  filter: opacity(0.9);
 }

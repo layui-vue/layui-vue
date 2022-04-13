@@ -109,10 +109,10 @@ export default {
 ::: title 自定义预览/上传禁用
 :::
 
-::: demo 使用 `lay-upload` 标签, 使用 `#preview` 自定义预览的UI交互,使用  `disabled` 添加上传禁用
+::: demo 使用 `lay-upload` 标签, 使用 `#preview` 自定义预览的UI交互,使用  `disabled` 对上传按钮添加禁用状态,使用  `disabledPreview` 对上传预览区域添加禁用状态
 
 <template>
-  <lay-upload @done="getUploadFile2" :disabled="true">
+  <lay-upload @done="getUploadFile2" :disabled="true" :disabledPreview="true">
     <template #preview>
       <div class="easy-wrap">
         <img src="https://chixian.oss-cn-hangzhou.aliyuncs.com/20211023003617_0706a.jpg" style="width:62.9px;height:63.2px"/>
@@ -199,6 +199,7 @@ export default {
 | number | 设置同时可上传的文件数量，一般配合 multiple 参数出现。 | number  | `0(不限制)`  | -- |
 | drag | 是否接受拖拽的文件上传，设置 false 可禁用。不支持ie8/9 | boolean  | true  | -- |
 | disabled | 设置文件禁用 | boolean  | false  | -- |
+| disabledPreview | 设置文件预览插槽区域为禁用状态 | boolean  | false  | -- |
 | cut | 是否开启选择图片后检测,设置true可开启 | boolean  | false  | -- |
 | cutOptions | 开启剪裁的模态弹窗与剪裁框的配置 | object  | { layerOption,copperOption }  | -- |
 
