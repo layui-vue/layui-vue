@@ -59,6 +59,11 @@ export default {
 ::: demo
 
 <template>
+  <lay-form>
+    <lay-radio v-model="size2" name="action" label="sm">sm</lay-radio>
+    <lay-radio v-model="size2" name="action" label="md">md</lay-radio>
+    <lay-radio v-model="size2" name="action" label="lg">lg</lay-radio>
+  </lay-form>
   <lay-table :columns="columns2" :dataSource="dataSource2" :size="size2"></lay-table>
 </template>
 
