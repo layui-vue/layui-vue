@@ -13,14 +13,7 @@
 ::: demo 使用 `lay-table` 标签, 创建表格
 
 <template>
-  <lay-table :columns="columns" :dataSource="dataSource">
-    <template v-slot:username="{ data }"> {{data.username}} </template>
-    <template v-slot:password="{ data }"> {{data.password}} </template>
-    <template v-slot:operator="{ data }">
-      <lay-button size="xs">修改</lay-button>
-      <lay-button size="xs" type="primary">删除</lay-button>
-    </template>
-  </lay-table>
+  <lay-table :columns="columns1" :dataSource="dataSource1"></lay-table>
 </template>
 
 <script>
@@ -29,37 +22,30 @@ import { ref } from 'vue'
 export default {
   setup() {
 
-    const columns = [
+    const columns1 = [
       {
         title:"账户",
         width:"200px",
-        slot:"username",
         key:"username"
       },{
         title:"密码",
         width: "180px",
-        slot:"password",
         key:"password"
       },{
         title:"年龄",
         width: "180px",
         key:"age"
-      },{
-        title:"操作",
-        width: "180px",
-        customSlot:"operator",
-        key:"operator"
       }
     ]
 
-    const dataSource = [
+    const dataSource1 = [
       {username:"root", password:"root", age:"18"},
       {username:"woow", password:"woow", age:"20"}
     ]
 
     return {
-      columns,
-      dataSource
+      columns1,
+      dataSource1
     }
   }
 }
@@ -73,14 +59,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-table :columns="columns" :dataSource="dataSource" size="lg">
-    <template v-slot:username="{ data }"> {{data.username}} </template>
-    <template v-slot:password="{ data }"> {{data.password}} </template>
-    <template v-slot:operator="{ data }">
-      <lay-button size="xs">修改</lay-button>
-      <lay-button size="xs" type="primary">删除</lay-button>
-    </template>
-  </lay-table>
+  <lay-table :columns="columns2" :dataSource="dataSource2" :size="size2"></lay-table>
 </template>
 
 <script>
@@ -89,37 +68,33 @@ import { ref } from 'vue'
 export default {
   setup() {
 
-    const columns = [
+    const columns2 = [
       {
         title:"账户",
         width:"200px",
-        slot:"username",
         key:"username"
       },{
         title:"密码",
         width: "180px",
-        slot:"password",
         key:"password"
       },{
         title:"年龄",
         width: "180px",
         key:"age"
-      },{
-        title:"操作",
-        width: "180px",
-        customSlot:"operator",
-        key:"operator"
       }
     ]
 
-    const dataSource = [
+    const dataSource2 = [
       {username:"root", password:"root", age:"18"},
       {username:"woow", password:"woow", age:"20"}
     ]
+    
+    const size2 = ref('md');
 
     return {
-      columns,
-      dataSource
+      size2,
+      columns2,
+      dataSource2
     }
   }
 }
@@ -133,14 +108,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-table :columns="columns" :dataSource="dataSource" :page="page" @change="change">
-    <template v-slot:username="{ data }"> {{data.username}} </template>
-    <template v-slot:password="{ data }"> {{data.password}} </template>
-    <template v-slot:operator="{ data }">
-      <lay-button size="xs">修改</lay-button>
-      <lay-button size="xs" type="primary">删除</lay-button>
-    </template>
-  </lay-table>
+  <lay-table :columns="columns3" :dataSource="dataSource3" :page="page3" @change="change3"></lay-table>
 </template>
 
 <script>
@@ -149,17 +117,17 @@ import { ref } from 'vue'
 export default {
   setup() {
     
-    const page = {
+    const page3 = {
       total: 100,
       limit: 10,
       current: 2
     }
 
-    const change = function({ current }){
+    const change3 = function({ current }){
       console.log("当前页:" + JSON.stringify(current))
     }
 
-    const columns = [
+    const columns3 = [
       {
         title:"账户",
         width:"200px",
@@ -174,24 +142,19 @@ export default {
         title:"年龄",
         width: "180px",
         key:"age"
-      },{
-        title:"操作",
-        width: "180px",
-        customSlot:"operator",
-        key:"operator"
       }
     ]
 
-    const dataSource = [
+    const dataSource3 = [
       {username:"root", password:"root", age:"18"},
       {username:"woow", password:"woow", age:"20"}
     ]
 
     return {
-      page,
-      change,
-      columns,
-      dataSource
+      page3,
+      change3,
+      columns3,
+      dataSource3
     }
   }
 }
@@ -206,7 +169,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-table :columns="columns1" :dataSource="dataSource1"></lay-table>
+  <lay-table :columns="columns4" :dataSource="dataSource4"></lay-table>
 </template>
 
 <script>
@@ -215,7 +178,7 @@ import { ref } from 'vue'
 export default {
   setup() {
 
-    const columns1 = [
+    const columns4 = [
       {
         title:"姓名",
         width:"200px",
@@ -228,7 +191,7 @@ export default {
       }
     ]
 
-    const dataSource1 = [
+    const dataSource4 = [
       {name:"张三", score:100},
       {name:"李四", score:80},
       {name:"王二", score:99},
@@ -238,10 +201,8 @@ export default {
     ]
 
     return {
-      page,
-      change,
-      columns,
-      dataSource
+      columns4,
+      dataSource4
     }
   }
 }
@@ -255,7 +216,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-table :columns="columns" id="id" :dataSource="dataSource" v-model:selectedKeys="selectedKeys"  :checkbox="checkbox" :default-toolbar="defaultToolbar" @row="rowClick">
+  <lay-table :columns="columns5" id="id" :dataSource="dataSource5" v-model:selectedKeys="selectedKeys5"  :checkbox="checkbox5" :default-toolbar="defaultToolbar5" @row="rowClick5">
     <template v-slot:toolbar>
       <lay-button size="sm">新增</lay-button>
       <lay-button size="sm">删除</lay-button>
@@ -276,11 +237,11 @@ import { ref } from 'vue'
 export default {
   setup() {
 
-    const selectedKeys = ref(['1'])
-    const checkbox = ref(true)
-    const defaultToolbar = ref(true)
+    const selectedKeys5 = ref(['1'])
+    const checkbox5 = ref(true)
+    const defaultToolbar5 = ref(true)
 
-    const columns = [
+    const columns5 = [
       {
         title:"账户",
         width:"200px",
@@ -308,27 +269,27 @@ export default {
       }
     ]
 
-    const dataSource = [
+    const dataSource5 = [
       {id:"1", username:"root", password:"root", age:"18"},
       {id:"2", username:"woow", password:"woow", age:"20"}
     ]
 
-    const rowClick = function(data) {
+    const rowClick5 = function(data) {
       console.log(JSON.stringify(data))
     }
     
-    const rowDoubleClick = function(data) {
+    const rowDoubleClick5 = function(data) {
       console.log(JSON.stringify(data))
     }
 
     return {
-      columns,
-      dataSource,
-      selectedKeys,
-      checkbox,
-      defaultToolbar,
-      rowClick,
-      rowDoubleClick
+      columns5,
+      dataSource5,
+      selectedKeys5,
+      checkbox5,
+      defaultToolbar5,
+      rowClick5,
+      rowDoubleClick5
     }
   }
 }
@@ -345,11 +306,11 @@ export default {
 | -------------------- | ----------------------------- | ---- | ------ | -------------- |
 | columns              | 列配置 - [更多](#tableColumn) | --   | --     | --             |
 | dataSource           | 数据源                        | --   | --     | --             |
-| checkbox             | 开启复选框                    | --   | --     | --             |
-| id                   | 主键                          | --   | --     | --             |
+| checkbox             | 开启复选框                    | `boolean`   | `false`     | `true` `false`             |
+| id                   | 主键                          | `string`   | --     | --             |
 | v-model:selectedKeys | 选中项                        | --   | --     | --             |
-| default-toolbar      | 工具栏                        | --   | --     | --             |
-| size                 | 尺寸                          | --   | --     | `lg` `md` `sm` |
+| default-toolbar      | 工具栏                        | `boolean`   | `false`     | `true` `false` |
+| size                 | 尺寸                          | `string`   | `md`     | `lg` `md` `sm` |
 
 :::
 
@@ -383,14 +344,15 @@ export default {
 
 ::: table
 
-| 插槽       | 描述       | 默认 |
-| ---------- | ---------- | ---- |
-| title      | 列标题     | --   |
-| key        | 数据字段   | --   |
-| customSlot | 自定义插槽 | --   |
-| width      | 宽度       | --   |
-| sort       | 排序       | --   |
-| titleSlot  | 标题插槽   | --   |
+| 插槽       | 描述       | 类型 | 默认值 | 可选值 |
+| ---------- | ---------- | ---- |---- |---- |
+| title      | 列标题     | --   |--   |--   |
+| key        | 数据字段   | --   |--   |--   |
+| customSlot | 自定义插槽 | --   |--   |--   |
+| width      | 宽度       | --   |--   |--   |
+| sort       | 排序       | --   |--   |--   |
+| titleSlot  | 标题插槽   | --   |--   |--   |
+| align      | 对齐方式   | `string` | `left` | `left` `right` `center`   |
 :::
 
  
