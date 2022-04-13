@@ -47,10 +47,12 @@ import {
   nextTick,
 } from "vue";
 import LayCarousel from '../carousel/index.vue'
+import LayCarouselItem from '../carouselItem/index.vue'
 export default defineComponent({
   name: "LayNoticeBar",
   components: {
-    LayCarousel
+    LayCarousel,
+    LayCarouselItem 
   },
   props: {
     mode: {
