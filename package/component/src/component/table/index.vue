@@ -254,7 +254,7 @@ onMounted(() => {
                   <th v-if="tableColumnKeys.includes(column.key)">
                     <div
                       class="layui-table-cell"
-                      :style="{ width: column.width ,textAlign: column.align}"
+                      :style="{ width: column.width, textAlign: column.align }"
                     >
                       <span>
                         <template v-if="column.titleSlot">
@@ -315,7 +315,12 @@ onMounted(() => {
                       <!-- 插 槽 Column -->
                       <template v-if="column.customSlot">
                         <td class="layui-table-cell">
-                          <div :style="{ width: column.width,textAlign: column.align }">
+                          <div
+                            :style="{
+                              width: column.width,
+                              textAlign: column.align,
+                            }"
+                          >
                             <slot :name="column.customSlot" :data="data"></slot>
                           </div>
                         </td>
@@ -327,7 +332,12 @@ onMounted(() => {
                         :key="value"
                       >
                         <td v-if="column.key == key" class="layui-table-cell">
-                          <div :style="{ width: column.width, textAlign: column.align }">
+                          <div
+                            :style="{
+                              width: column.width,
+                              textAlign: column.align,
+                            }"
+                          >
                             <span> {{ value }} </span>
                           </div>
                         </td>

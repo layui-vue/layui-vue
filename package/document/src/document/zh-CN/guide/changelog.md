@@ -18,6 +18,8 @@
         <ul>
           <li>[新增] empty 组件 image 插槽, 支持自定义 image。</li>
           <li>[新增] badge 组件 ripple 属性, 开启水波纹动画, 仅适用于 type 为 dot 时。</li>
+          <li>[新增] table 组件 column 配置 align 属性, 支持 left center right 对齐方式。</li>
+          <li>[修复] table 组件 column 存在 1px 宽度误差。</li>
           <li>[其他] ...</li>
         </ul> 
       </li>
