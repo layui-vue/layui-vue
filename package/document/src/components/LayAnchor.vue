@@ -43,11 +43,8 @@ let activeIndex = ref<number>(0);
 const show = ref<boolean>(props.show);
 const iconType = ref<string>("layui-icon-right");
 const anchors: string | string[] | undefined = props.anchors;
-/**滚动条高度 */
 const scrollTop = ref<number>(0);
-/**要监听的滚动元素 */
 const scrollRefEl = shallowRef<HTMLElement | undefined>(undefined);
-/**折叠动画 */
 let enableAnimation = false;
 
 const anchorList = computed(() => {
@@ -126,8 +123,7 @@ onMounted(() => {
   scrollRefEl.value?.addEventListener("scroll", throttle(handlerScroll, 500));
   // 如果已折叠,关闭组件初始渲染时的动画,然后自动开启
   // @ts-ignore
-  show.value =
-    scrollRefEl.value!.firstElementChild!.style.marginRight !== "0px";
+  show.value = scrollRefEl.value!.firstElementChild!.style.marginRight !== "0px";
   enableAnimation = show.value;
 });
 

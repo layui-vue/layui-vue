@@ -17,8 +17,8 @@
     <template v-slot:username="{ data }"> {{data.username}} </template>
     <template v-slot:password="{ data }"> {{data.password}} </template>
     <template v-slot:operator="{ data }">
-      <lay-button >修改</lay-button>
-      <lay-button type="primary">删除</lay-button>
+      <lay-button size="xs">修改</lay-button>
+      <lay-button size="xs" type="primary">删除</lay-button>
     </template>
   </lay-table>
 </template>
@@ -77,8 +77,8 @@ export default {
     <template v-slot:username="{ data }"> {{data.username}} </template>
     <template v-slot:password="{ data }"> {{data.password}} </template>
     <template v-slot:operator="{ data }">
-      <lay-button >修改</lay-button>
-      <lay-button type="primary">删除</lay-button>
+      <lay-button size="xs">修改</lay-button>
+      <lay-button size="xs" type="primary">删除</lay-button>
     </template>
   </lay-table>
 </template>
@@ -137,8 +137,8 @@ export default {
     <template v-slot:username="{ data }"> {{data.username}} </template>
     <template v-slot:password="{ data }"> {{data.password}} </template>
     <template v-slot:operator="{ data }">
-      <lay-button >修改</lay-button>
-      <lay-button type="primary">删除</lay-button>
+      <lay-button size="xs">修改</lay-button>
+      <lay-button size="xs" type="primary">删除</lay-button>
     </template>
   </lay-table>
 </template>
@@ -264,8 +264,8 @@ export default {
     <template v-slot:username-title>😊</template>
     <template v-slot:password="{ data }"> {{data.password}} </template>
     <template v-slot:operator="{ data }">
-      <lay-button >修改</lay-button>
-      <lay-button type="primary">删除</lay-button>
+      <lay-button size="xs">修改</lay-button>
+      <lay-button size="xs" type="primary">删除</lay-button>
     </template>
   </lay-table>
 </template>

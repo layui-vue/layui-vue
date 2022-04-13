@@ -251,11 +251,7 @@ onMounted(() => {
                   </div>
                 </th>
                 <template v-for="column in columns" :key="column">
-                  <th v-if="tableColumnKeys.includes(column.key)">
-                    <div
-                      class="layui-table-cell"
-                      :style="{ width: column.width, textAlign: column.align }"
-                    >
+                  <th class="layui-table-cell" :style="{ width: column.width, textAlign: column.align }" v-if="tableColumnKeys.includes(column.key)">
                       <span>
                         <template v-if="column.titleSlot">
                           <slot :name="column.titleSlot"></slot>
@@ -280,7 +276,6 @@ onMounted(() => {
                           title="降序"
                         ></i>
                       </span>
-                    </div>
                   </th>
                 </template>
               </tr>
@@ -314,15 +309,11 @@ onMounted(() => {
                     <template v-if="tableColumnKeys.includes(column.key)">
                       <!-- 插 槽 Column -->
                       <template v-if="column.customSlot">
-                        <td class="layui-table-cell">
-                          <div
-                            :style="{
+                        <td class="layui-table-cell" :style="{
                               width: column.width,
                               textAlign: column.align,
-                            }"
-                          >
+                            }">
                             <slot :name="column.customSlot" :data="data"></slot>
-                          </div>
                         </td>
                       </template>
                       <!-- 匹 配 Column -->
@@ -331,15 +322,11 @@ onMounted(() => {
                         v-for="(value, key) in data"
                         :key="value"
                       >
-                        <td v-if="column.key == key" class="layui-table-cell">
-                          <div
-                            :style="{
+                        <td v-if="column.key == key" class="layui-table-cell" :style="{
                               width: column.width,
                               textAlign: column.align,
-                            }"
-                          >
+                            }">
                             <span> {{ value }} </span>
-                          </div>
                         </td>
                       </template>
                     </template>
