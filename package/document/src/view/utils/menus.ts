@@ -34,11 +34,17 @@ const menus = [
         path: "/zh-CN/components/transition",
       },
       {
-        id: 101,
+        id: 102,
         title: "全屏",
         subTitle: "fullscreen",
         path: "/zh-CN/components/fullscreen",
       },
+      {
+        id: 103,
+        title: "水波纹",
+        subTitle: "ripple",
+        path: "/zh-CN/components/ripple",
+      }, 
     ],
   },
   {
