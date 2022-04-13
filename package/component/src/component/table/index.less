@@ -360,8 +360,15 @@
 .layui-table-body {
   position: relative;
   overflow: auto;
-  margin-right: -1px;
   margin-bottom: -1px;
+}
+
+.layui-table-header tr th:last-child {
+  border-right: none;
+}
+
+.layui-table-body tr td:last-child {
+  border-right: none;
 }
 
 .layui-table-body .layui-none {
