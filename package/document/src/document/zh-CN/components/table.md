@@ -286,17 +286,20 @@ export default {
         width:"200px",
         titleSlot: "username-title",
         customSlot:"username",
-        key:"username"
+        key:"username",
+        align: "left"
       },{
         title:"密码",
         width: "180px",
         customSlot:"password",
-        key:"password"
+        key:"password",
+        align: "center"
       },{
         title:"年龄",
         width: "180px",
         key:"age",
-        sort: true
+        sort: true,
+        align: "right"
       },{
         title:"操作",
         width: "180px",

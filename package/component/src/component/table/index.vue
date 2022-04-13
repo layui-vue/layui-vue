@@ -256,15 +256,14 @@ onMounted(() => {
                       class="layui-table-cell"
                       :style="{ width: column.width }"
                     >
-                      <span v-if="column.titleSlot">
+                      <span>
                         <template v-if="column.titleSlot">
                           <slot :name="column.titleSlot"></slot>
                         </template>
-                        <template>
-                          {{ column.title }}
+                        <template v-else>
+                          {{ column.title }} 
                         </template>
                       </span>
-                      <span v-else>{{ column.title }}</span>
                       <span
                         v-if="column.sort"
                         class="layui-table-sort layui-inline"

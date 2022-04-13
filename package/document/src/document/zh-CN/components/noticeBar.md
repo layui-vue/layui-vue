@@ -94,7 +94,5 @@ export default {
 
 :::
 
- 
-
 ::: previousNext transfer
 :::
