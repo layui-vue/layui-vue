@@ -85,7 +85,7 @@ export default {
 ::: demo
 
 <template>
-    <lay-notice-bar  :scrollable="true" :textlist="list"></lay-notice-bar>
+    <lay-notice-bar  :scrollable="true" leftIcon="layui-icon-mute" :textlist="list"></lay-notice-bar>
 </template>
 
 <script>
