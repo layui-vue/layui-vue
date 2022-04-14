@@ -1,10 +1,10 @@
 {
   "name": "@layui/layui-vue",
-  "version": "1.0.3-alpha.1",
+  "version": "1.0.3-alpha.2",
   "author": "就眠儀式",
   "license": "MIT",
   "description": "a component library for Vue 3 base on layui-vue",
-  "homepage": "https://gitee.com/layui/layui-vue/blob/next/README.md",
+  "homepage": "http://wwww.layui-vue.com",
   "main": "es/index.js",
   "unpkg": "umd/index.js",
   "jsdelivr": "umd/index.js",
