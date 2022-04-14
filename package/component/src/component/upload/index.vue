@@ -73,7 +73,10 @@ const getCutDownResult = () => {
     let currentTimeStamp = new Date().valueOf();
     let orgInfo = activeUploadFiles.value[0];
     console.log(orgInfo);
-    emit("cutdone", Object.assign({ currentTimeStamp, cutResult: imgData,orginal:orgInfo }));
+    emit(
+      "cutdone",
+      Object.assign({ currentTimeStamp, cutResult: imgData, orginal: orgInfo })
+    );
     let newFile = dataURLtoFile(imgData);
     commonUploadTransaction([newFile]);
     nextTick(() => clearAllCutEffect());
