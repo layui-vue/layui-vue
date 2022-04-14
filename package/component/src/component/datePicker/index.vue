@@ -8,38 +8,17 @@
       </lay-input>
       <template #content>
         <!-- 日期选择 -->
-        <div
-          class="layui-laydate"
-          v-show="showPane === 'date' || showPane === 'datetime'"
-        >
+        <div class="layui-laydate" v-show="showPane === 'date' || showPane === 'datetime'">
           <div class="layui-laydate-main laydate-main-list-0">
             <div class="layui-laydate-header">
-              <i
-                class="layui-icon laydate-icon laydate-prev-y"
-                @click="changeYearOrMonth('year', -1)"
-                ></i
-              >
-              <i
-                class="layui-icon laydate-icon laydate-prev-m"
-                @click="changeYearOrMonth('month', -1)"
-                ></i
-              >
+              <i class="layui-icon laydate-icon laydate-prev-y" @click="changeYearOrMonth('year', -1)"></i>
+              <i class="layui-icon laydate-icon laydate-prev-m" @click="changeYearOrMonth('month', -1)"></i>
               <div class="laydate-set-ym">
                 <span @click="showYearPanel">{{ currentYear }} 年</span>
-                <span @click="showPane = 'month'"
-                  >{{ currentMonth + 1 }} 月</span
-                >
+                <span @click="showPane = 'month'">{{ currentMonth + 1 }} 月</span>
               </div>
-              <i
-                class="layui-icon laydate-icon laydate-next-m"
-                @click="changeYearOrMonth('month', 1)"
-                ></i
-              >
-              <i
-                class="layui-icon laydate-icon laydate-next-y"
-                @click="changeYearOrMonth('year', 1)"
-                ></i
-              >
+              <i class="layui-icon laydate-icon laydate-next-m" @click="changeYearOrMonth('month', 1)"></i>
+              <i class="layui-icon laydate-icon laydate-next-y" @click="changeYearOrMonth('year', 1)"></i>
             </div>
             <div class="layui-laydate-content">
               <table>
@@ -49,26 +28,17 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <template
-                    v-for="(o, i) of dateList.length % 7 == 0
-                      ? dateList.length / 7
-                      : Math.floor(dateList.length / 7) + 1"
-                    :key="i"
-                  >
+                  <template v-for="(o, i) of dateList.length % 7 == 0
+                  ? dateList.length / 7
+                  : Math.floor(dateList.length / 7) + 1" :key="i">
                     <tr>
-                      <td
-                        v-for="(item, index) of dateList.slice(
-                          i * 7,
-                          i * 7 + 7
-                        )"
-                        :key="index"
-                        :data-unix="item.value"
-                        :class="{
-                          'laydate-day-prev': item.type !== 'current',
-                          'layui-this': item.value === currentDay,
-                        }"
-                        @click="handleDayClick(item)"
-                      >
+                      <td v-for="(item, index) of dateList.slice(
+                        i * 7,
+                        i * 7 + 7
+                      )" :key="index" :data-unix="item.value" :class="{
+  'laydate-day-prev': item.type !== 'current',
+  'layui-this': item.value === currentDay,
+}" @click="handleDayClick(item)">
                         {{ item.day }}
                       </td>
                     </tr>
@@ -78,135 +48,71 @@
             </div>
           </div>
           <div class="layui-laydate-footer">
-            <span
-              v-if="type === 'datetime'"
-              @click="showPane = 'time'"
-              class="laydate-btns-time"
-              >选择时间</span
-            >
+            <span v-if="type === 'datetime'" @click="showPane = 'time'" class="laydate-btns-time">选择时间</span>
             <div class="laydate-footer-btns">
-              <span lay-type="clear" class="laydate-btns-clear" @click="clear"
-                >清空</span
-              >
-              <span lay-type="now" class="laydate-btns-now" @click="now"
-                >现在</span
-              >
-              <span lay-type="confirm" class="laydate-btns-confirm" @click="ok"
-                >确定</span
-              >
+              <span lay-type="clear" class="laydate-btns-clear" @click="clear">清空</span>
+              <span lay-type="now" class="laydate-btns-now" @click="now">现在</span>
+              <span lay-type="confirm" class="laydate-btns-confirm" @click="ok">确定</span>
             </div>
           </div>
         </div>
-
         <!-- 年份选择器 -->
-        <div
-          class="layui-laydate"
-          v-show="showPane === 'year' || showPane === 'yearmonth'"
-        >
+        <div class="layui-laydate" v-show="showPane === 'year' || showPane === 'yearmonth'">
           <div class="layui-laydate-main laydate-main-list-0 laydate-ym-show">
             <div class="layui-laydate-header">
               <div class="laydate-set-ym">
                 <span class="laydate-time-text">选择年份</span>
               </div>
             </div>
-            <div
-              class="layui-laydate-content"
-              style="height: 220px; overflow-y: auto"
-            >
+            <div class="layui-laydate-content" style="height: 220px; overflow-y: auto">
               <ul class="layui-laydate-list laydate-year-list">
-                <li
-                  v-for="item of yearList"
-                  :key="item"
-                  :class="[{ 'layui-this': currentYear === item }]"
-                  @click="handleYearClick(item)"
-                >
+                <li v-for="item of yearList" :key="item" :class="[{ 'layui-this': currentYear === item }]"
+                  @click="handleYearClick(item)">
                   {{ item }}
                 </li>
               </ul>
             </div>
           </div>
           <div class="layui-laydate-footer">
-            <span
-              class="layui-laydate-preview"
-              title="当前选中的结果"
-              style="color: rgb(102, 102, 102)"
-              >{{ dateValue }}</span
-            >
+            <span class="layui-laydate-preview" title="当前选中的结果" style="color: rgb(102, 102, 102)">{{ dateValue }}</span>
             <div class="laydate-footer-btns">
-              <span lay-type="clear" class="laydate-btns-clear" @click="clear"
-                >清空</span
-              >
-              <span lay-type="now" class="laydate-btns-now" @click="now"
-                >现在</span
-              >
-              <span lay-type="confirm" class="laydate-btns-confirm" @click="ok"
-                >确定</span
-              >
+              <span lay-type="clear" class="laydate-btns-clear" @click="clear">清空</span>
+              <span lay-type="now" class="laydate-btns-now" @click="now">现在</span>
+              <span lay-type="confirm" class="laydate-btns-confirm" @click="ok">确定</span>
             </div>
           </div>
         </div>
-
         <!-- 月份选择器 -->
         <div class="layui-laydate" v-show="showPane === 'month'">
           <div class="layui-laydate-main laydate-main-list-0 laydate-ym-show">
             <div class="layui-laydate-header">
-              <i
-                class="layui-icon laydate-icon laydate-prev-y"
-                @click="changeYearOrMonth('year', -1)"
-                ></i
-              >
+              <i class="layui-icon laydate-icon laydate-prev-y" @click="changeYearOrMonth('year', -1)"></i>
               <div class="laydate-set-ym">
-                <span
-                  @click="showYearPanel"
-                  v-if="showPane === 'date' || showPane === 'datetime'"
-                  >{{ currentYear }} 年</span
-                >
-                <span @click="showPane = 'month'"
-                  >{{ currentMonth + 1 }} 月</span
-                >
+                <span @click="showYearPanel" v-if="showPane === 'date' || showPane === 'datetime'">{{ currentYear }}
+                  年</span>
+                <span @click="showPane = 'month'">{{ currentMonth + 1 }} 月</span>
               </div>
-              <i
-                class="layui-icon laydate-icon laydate-next-y"
-                @click="changeYearOrMonth('year', 1)"
-                ></i
-              >
+              <i class="layui-icon laydate-icon laydate-next-y" @click="changeYearOrMonth('year', 1)"></i>
             </div>
             <div class="layui-laydate-content" style="height: 220px">
               <ul class="layui-laydate-list laydate-month-list">
-                <li
-                  v-for="item of MONTH_NAME"
-                  :key="item"
-                  :class="[
-                    { 'layui-this': MONTH_NAME.indexOf(item) === currentMonth },
-                  ]"
-                  @click="handleMonthClick(item)"
-                >
+                <li v-for="item of MONTH_NAME" :key="item" :class="[
+                  { 'layui-this': MONTH_NAME.indexOf(item) === currentMonth },
+                ]" @click="handleMonthClick(item)">
                   {{ item.slice(0, 3) }}
                 </li>
               </ul>
             </div>
           </div>
           <div class="layui-laydate-footer">
-            <span
-              class="layui-laydate-preview"
-              title="当前选中的结果"
-              style="color: rgb(102, 102, 102)"
-              >{{ dateValue }}</span
-            >
+            <span class="layui-laydate-preview" title="当前选中的结果" style="color: rgb(102, 102, 102)">{{ dateValue }}</span>
             <div class="laydate-footer-btns">
-              <span lay-type="clear" class="laydate-btns-clear" @click="clear"
-                >清空</span
-              >
-              <span lay-type="now" class="laydate-btns-now" @click="now"
-                >现在</span
-              >
-              <span lay-type="confirm" class="laydate-btns-confirm" @click="ok"
-                >确定</span
-              >
+              <span lay-type="clear" class="laydate-btns-clear" @click="clear">清空</span>
+              <span lay-type="now" class="laydate-btns-now" @click="now">现在</span>
+              <span lay-type="confirm" class="laydate-btns-confirm" @click="ok">确定</span>
             </div>
           </div>
         </div>
-
         <!-- 时间选择器 -->
         <div class="layui-laydate" v-if="showPane == 'time'">
           <div class="layui-laydate-main laydate-main-list-0 laydate-time-show">
@@ -219,19 +125,13 @@
               <ul class="layui-laydate-list laydate-time-list">
                 <li class="num-list" v-for="item in els" :key="item.type">
                   <ol class="scroll" @click="choseTime">
-                    <li
-                      v-for="(it, index) in item.count"
-                      :id="item.type + index.toString()"
-                      :data-value="index.toString().padStart(2, '0')"
-                      :data-type="item.type"
-                      :key="it"
-                      :class="[
+                    <li v-for="(it, index) in item.count" :id="item.type + index.toString()"
+                      :data-value="index.toString().padStart(2, '0')" :data-type="item.type" :key="it" :class="[
                         'num',
                         index.toString().padStart(2, '0') == hms[item.type]
                           ? 'layui-this'
                           : '',
-                      ]"
-                    >
+                      ]">
                       {{ index.toString().padStart(2, "0") }}
                     </li>
                   </ol>
@@ -240,22 +140,11 @@
             </div>
           </div>
           <div class="layui-laydate-footer">
-            <span
-              @click="showPane = 'date'"
-              v-if="type != 'time'"
-              class="laydate-btns-time"
-              >返回日期</span
-            >
+            <span @click="showPane = 'date'" v-if="type != 'time'" class="laydate-btns-time">返回日期</span>
             <div class="laydate-footer-btns">
-              <span lay-type="clear" class="laydate-btns-clear" @click="clear"
-                >清空</span
-              >
-              <span lay-type="now" class="laydate-btns-now" @click="now"
-                >现在</span
-              >
-              <span lay-type="confirm" class="laydate-btns-confirm" @click="ok"
-                >确定</span
-              >
+              <span lay-type="clear" class="laydate-btns-clear" @click="clear">清空</span>
+              <span lay-type="now" class="laydate-btns-now" @click="now">现在</span>
+              <span lay-type="confirm" class="laydate-btns-confirm" @click="ok">确定</span>
             </div>
           </div>
         </div>
@@ -267,7 +156,7 @@
 <script lang="ts" setup>
 import { ref, watch, computed, defineProps, defineEmits, onMounted } from "vue";
 
-import moment from "moment";
+import dayjs from "dayjs";
 import LayIcon from "../icon/index";
 import LayInput from "../input/index.vue";
 import LayDropdown from "../dropdown/index.vue";
@@ -310,9 +199,9 @@ const MONTH_NAME = [
 ];
 
 const hms = ref({
-  hh: moment(props.modelValue).hour(),
-  mm: moment(props.modelValue).minute(),
-  ss: moment(props.modelValue).second(),
+  hh: dayjs(props.modelValue).hour(),
+  mm: dayjs(props.modelValue).minute(),
+  ss: dayjs(props.modelValue).second(),
 });
 const els = [
   { count: 24, type: "hh" },
@@ -337,9 +226,9 @@ watch(
 );
 
 onMounted(() => {
-  hms.value.hh = moment(props.modelValue).hour();
-  hms.value.mm = moment(props.modelValue).minute();
-  hms.value.ss = moment(props.modelValue).second();
+  hms.value.hh = dayjs(props.modelValue).hour();
+  hms.value.mm = dayjs(props.modelValue).minute();
+  hms.value.ss = dayjs(props.modelValue).second();
 });
 
 // 计算结果日期
@@ -348,40 +237,40 @@ const dateValue = computed<string>(() => {
     $emits("update:modelValue", "");
     return "";
   }
-  let momentVal;
-  let momentObj = moment(currentDay.value)
+  let dayjsVal;
+  let dayjsObj = dayjs(currentDay.value)
     .hour(hms.value.hh)
     .minute(hms.value.mm)
     .second(hms.value.ss);
 
   switch (props.type) {
     case "date":
-      momentVal = momentObj.format("YYYY-MM-DD");
+      dayjsVal = dayjsObj.format("YYYY-MM-DD");
       break;
     case "datetime":
-      momentVal = momentObj.format("YYYY-MM-DD HH:mm:ss");
+      dayjsVal = dayjsObj.format("YYYY-MM-DD HH:mm:ss");
       break;
     case "year":
-      momentVal = momentObj.format("YYYY");
+      dayjsVal = dayjsObj.format("YYYY");
       break;
     case "month":
-      momentVal = momentObj.format("MM");
+      dayjsVal = dayjsObj.format("MM");
       break;
     case "time":
-      momentVal = momentObj.format("HH:mm:ss");
+      dayjsVal = dayjsObj.format("HH:mm:ss");
       break;
     case "yearmonth":
-      momentVal = momentObj.format("YYYY-MM");
+      dayjsVal = dayjsObj.format("YYYY-MM");
       break;
     default:
-      momentVal = momentObj.format();
+      dayjsVal = dayjsObj.format();
       break;
   }
-  $emits("update:modelValue", momentVal);
+  $emits("update:modelValue", dayjsVal);
   if (props.simple) {
     ok();
   }
-  return momentVal;
+  return dayjsVal;
 });
 
 // 设置日期列表
@@ -444,10 +333,10 @@ const ok = () => {
 
 // 现在时间
 const now = () => {
-  currentDay.value = moment().valueOf();
-  hms.value.hh = moment().hour();
-  hms.value.mm = moment().minute();
-  hms.value.ss = moment().second();
+  currentDay.value = dayjs().valueOf();
+  hms.value.hh = dayjs().hour();
+  hms.value.mm = dayjs().minute();
+  hms.value.ss = dayjs().second();
 };
 
 // 清空日期
@@ -481,9 +370,9 @@ const showYearPanel = () => {
 const handleYearClick = (item: any) => {
   currentYear.value = item;
   if (props.type === "year") {
-    currentDay.value = moment().year(item).valueOf();
+    currentDay.value = dayjs().year(item).valueOf();
   } else if (props.type === "yearmonth") {
-    currentDay.value = moment().year(item).valueOf();
+    currentDay.value = dayjs().year(item).valueOf();
     showPane.value = "month";
   } else {
     showPane.value = "date";
@@ -494,11 +383,11 @@ const handleYearClick = (item: any) => {
 const handleMonthClick = (item: any) => {
   currentMonth.value = MONTH_NAME.indexOf(item);
   if (props.type === "month") {
-    currentDay.value = moment(currentDay.value)
+    currentDay.value = dayjs(currentDay.value)
       .month(MONTH_NAME.indexOf(item))
       .valueOf();
   } else if (props.type === "yearmonth") {
-    currentDay.value = moment(currentDay.value)
+    currentDay.value = dayjs(currentDay.value)
       .month(MONTH_NAME.indexOf(item))
       .valueOf();
   } else {
