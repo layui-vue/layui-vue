@@ -387,7 +387,7 @@ const zhCN = [
             path: "/zh-CN/components/area",
             component: () =>
               import("../document/zh-CN/components/area.md"),
-            meta: { title: "地址选择器 },
+            meta: { title: "地址选择器" },
           },
         ],
       },
