@@ -79,6 +79,36 @@ export default {
 
 :::
 
+:::  垂直滚动
+:::
+
+::: demo
+
+<template>
+    <lay-notice-bar  :scrollable="true" leftIcon="layui-icon-mute" :textlist="list"></lay-notice-bar>
+</template>
+
+<script>
+import { ref,reactive } from "vue"
+
+export default {
+  setup() {
+
+    const list = reactive([
+      '通知一：users !',
+      '通知二：world !',
+      '通知三：friend !',
+      '通知四：ok!',  
+    ])
+
+    return {
+        list
+    }
+  }
+}
+</script>
+
+:::
 
 ::: title Notice Bar 属性
 :::
@@ -91,7 +121,8 @@ export default {
 | text | 内容 | 滚动内容 |
 | leftIcon | 左侧图标 | -- |
 | rightIcon | 右侧图标 | -- |
-
+| scrollable | 是否开启垂直滚动|true,false|
+|  textlist  | 垂直滚动内容| Array|
 :::
 
 ::: previousNext transfer

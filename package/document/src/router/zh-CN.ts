@@ -383,6 +383,12 @@ const zhCN = [
               import("../document/zh-CN/components/transition.md"),
             meta: { title: "通知栏" },
           },
+          {
+            path: "/zh-CN/components/area",
+            component: () =>
+              import("../document/zh-CN/components/area.md"),
+            meta: { title: "地址选择器 },
+          },
         ],
       },
     ],
