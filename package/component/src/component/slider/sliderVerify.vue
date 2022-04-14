@@ -1,7 +1,7 @@
 <template>
     <div id="sliderVerify" class="slider-item">
         <div class="slider-bg layui-bg-green"></div>
-        <div class="slider-text">{{ prototype.isOk == false ? '请拖动滑块验证' : '验证通过' }}</div>
+        <div class="slider-text">{{ prototype.isOk == false ? prototype.text : prototype.success}}</div>
         <div :class="prototype.isOk == false ? 'slider-btn layui-icon layui-icon-next' : 'slider-btn layui-icon layui-icon-ok-circle slider-btn-success'"
             @mousedown.stop="down"></div>
 
@@ -27,8 +27,8 @@ const props = withDefaults(defineProps<Prop>(), {
 const prototype = reactive({
     isOk: false,
     bg: props.bg, //默认滑块颜色
-    text: props.text,
-    success: props.end,
+    text: props.text ? props.text : '请拖动滑块验证',
+    success: props.end ? props.end : '验证通过',
     ok: props.success
 });
 
