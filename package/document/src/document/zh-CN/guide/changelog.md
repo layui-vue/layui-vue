@@ -22,7 +22,6 @@
           <li>[新增] upload 组件 disabled-preview 属性, 上传预览区域添加禁用状态。</li>
           <li>[修复] upload 组件 cut 属性, 开启时丢失图片信息。</li>
           <li>[修复] table 组件 column 存在 1px 宽度误差。</li>
-
         </ul> 
       </li>
     </ul>
