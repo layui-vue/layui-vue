@@ -381,7 +381,13 @@ const zhCN = [
             path: "/zh-CN/components/transition",
             component: () =>
               import("../document/zh-CN/components/transition.md"),
-            meta: { title: "通知栏" },
+            meta: { title: "过渡" },
+          },
+          {
+            path: "/zh-CN/components/ripple",
+            component: () =>
+              import("../document/zh-CN/components/ripple.md"),
+            meta: { title: "水波纹" },
           },
           {
             path: "/zh-CN/components/area",
