@@ -87,6 +87,10 @@ const matchComponents = [
     pattern: /^LayScroll$/,
     styleDir: "scroll",
   },
+  {
+    pattern: /^LayResult$/,
+    styleDir: "result",
+  },
   // ....
   {
     pattern: /^(LayCarousel|LayCarouselItem)$/,

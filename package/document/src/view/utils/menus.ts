@@ -350,7 +350,7 @@ const menus = [
         title: "虚拟滚动",
         subTitle: "scroll",
         path: "/zh-CN/components/scroll",
-      }
+      },
     ],
   },
   {

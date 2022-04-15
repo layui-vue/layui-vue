@@ -173,6 +173,7 @@ const getScrollParent = (
       return parent;
     }
   }
+  // @ts-ignore
   return document.documentElement || document.body || window;
 };
 
