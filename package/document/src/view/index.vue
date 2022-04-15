@@ -32,7 +32,7 @@
           >
           <span
             >{{ t("home.download") }}：<em class="site-showdowns"
-              >5463</em
+              >7,668</em
             ></span
           >
         </div>
