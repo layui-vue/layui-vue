@@ -16,12 +16,15 @@
       <li> 
         <h3>1.0.3 <span class="layui-badge-rim">2022-04-14</span></h3> 
         <ul>
+          <li>[新增] ripple 组件, 提供 水波纹 效果。</li>
           <li>[新增] empty 组件 image 插槽, 支持自定义 image。</li>
           <li>[新增] badge 组件 ripple 属性, 开启水波纹动画, 仅适用于 type 为 dot 时。</li>
           <li>[新增] table 组件 column 配置 align 属性, 支持 left center right 对齐方式。</li>
           <li>[新增] upload 组件 disabled-preview 属性, 上传预览区域添加禁用状态。</li>
           <li>[修复] upload 组件 cut 属性, 开启时丢失图片信息。</li>
           <li>[修复] table 组件 column 存在 1px 宽度误差。</li>
+          <li>[优化] date-picker 组件 monent 为 day.js。</li>
+          <li>[优化] table 组件 html document 结构。</li>
         </ul> 
       </li>
     </ul>
