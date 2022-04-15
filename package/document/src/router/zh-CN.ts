@@ -372,12 +372,6 @@ const zhCN = [
             meta: { title: "虚拟滚动" },
           },
           {
-            path: "/zh-CN/components/noticeBar",
-            component: () =>
-              import("../document/zh-CN/components/noticeBar.md"),
-            meta: { title: "通知栏" },
-          },
-          {
             path: "/zh-CN/components/transition",
             component: () =>
               import("../document/zh-CN/components/transition.md"),

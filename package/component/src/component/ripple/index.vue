@@ -46,8 +46,11 @@ const onActive = function (event: Event) {
   // 跟随鼠标点击
   if (props.type === "inset" && !props.spreadSize && !props.center) {
     const el = event.currentTarget;
+    // @ts-ignore
     const rect = el.getBoundingClientRect();
+    // @ts-ignore
     const rippleOffsetLeft = event.clientX - rect.left;
+    // @ts-ignore
     const rippleOffsetTop = event.clientY - rect.top;
     const sizeX = Math.max(rippleOffsetLeft, rect.width - rippleOffsetLeft);
     const sizeY = Math.max(rippleOffsetTop, rect.height - rippleOffsetTop);

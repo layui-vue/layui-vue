@@ -79,7 +79,6 @@ import LayException from "./component/exception/index";
 import LayResult from "./component/result/index";
 import LayFullscreen from "./component/fullscreen/index";
 import LayDatePicker from "./component/datePicker/index";
-import LayNoticeBar from "./component/noticeBar/index";
 import LayTransition from "./component/transition/index";
 import LayUpload from "./component/upload/index";
 import LayRipple from "./component/ripple/index";
@@ -160,7 +159,6 @@ const components: Record<string, Component> = {
   LayFullscreen,
   LayConfigProvider,
   LayDatePicker,
-  LayNoticeBar,
   LayTransition,
   LayUpload,
   LayRipple,
@@ -249,7 +247,6 @@ export {
   LayFullscreen,
   LayConfigProvider,
   LayDatePicker,
-  LayNoticeBar,
   LayTransition,
   LayUpload,
   LayRipple,

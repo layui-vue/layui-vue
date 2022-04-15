@@ -41,7 +41,7 @@ const menus = [
       },
       {
         id: 103,
-        title: "水波纹",
+        title: "波纹",
         subTitle: "ripple",
         path: "/zh-CN/components/ripple",
       },
@@ -350,13 +350,7 @@ const menus = [
         title: "虚拟滚动",
         subTitle: "scroll",
         path: "/zh-CN/components/scroll",
-      },
-      {
-        id: 100,
-        title: "通知栏",
-        subTitle: "noticeBar",
-        path: "/zh-CN/components/noticeBar",
-      },
+      }
     ],
   },
   {
