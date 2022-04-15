@@ -18,14 +18,22 @@
         >
           {{ text }}
         </div>
- 				<div class="notice-bar-warp-slot " v-else> 
-					  <lay-carousel v-model="active4" :interval="3000" :autoplay="true" anim="updown"  indicator="none" arrow="none"  style="height:40px;">
-                       <lay-carousel-item :id="ind" v-for="(item,ind) in arrays">
-                   <div>{{ item }}</div>
-                  </lay-carousel-item>
-                 </lay-carousel>
-               <!--  <slot />  -->
-				</div>       
+        <div class="notice-bar-warp-slot" v-else>
+          <lay-carousel
+            v-model="active4"
+            :interval="3000"
+            :autoplay="true"
+            anim="updown"
+            indicator="none"
+            arrow="none"
+            style="height: 40px"
+          >
+            <lay-carousel-item :id="ind" v-for="(item, ind) in arrays">
+              <div>{{ item }}</div>
+            </lay-carousel-item>
+          </lay-carousel>
+          <!--  <slot />  -->
+        </div>
       </div>
       <lay-icon
         :type="rightIcon"
@@ -46,13 +54,13 @@ import {
   onMounted,
   nextTick,
 } from "vue";
-import LayCarousel from '../carousel/index.vue'
-import LayCarouselItem from '../carouselItem/index.vue'
+import LayCarousel from "../carousel/index.vue";
+import LayCarouselItem from "../carouselItem/index.vue";
 export default defineComponent({
   name: "LayNoticeBar",
   components: {
     LayCarousel,
-    LayCarouselItem 
+    LayCarouselItem,
   },
   props: {
     mode: {
@@ -220,7 +228,13 @@ export default defineComponent({
   width: 100%;
   white-space: nowrap;
 }
-.notice-bar .notice-bar-warp .notice-bar-warp-text-box .notice-bar-warp-slot  .layui-carousel  >[carousel-item] * {
+.notice-bar
+  .notice-bar-warp
+  .notice-bar-warp-text-box
+  .notice-bar-warp-slot
+  .layui-carousel
+  > [carousel-item]
+  * {
   display: flex;
   align-items: center;
 }

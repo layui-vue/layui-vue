@@ -44,7 +44,7 @@ const menus = [
         title: "水波纹",
         subTitle: "ripple",
         path: "/zh-CN/components/ripple",
-      }, 
+      },
     ],
   },
   {
