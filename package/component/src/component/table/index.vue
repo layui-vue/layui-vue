@@ -117,20 +117,24 @@ const print = function () {
   document.body.innerHTML = oldContent;
 };
 
-// 导出 table 数据
 const exportData = () => {
   const head = [];
   const body = [];
   tableColumns.value.forEach((item) => {
-    head.push(item.title);
+    try {
+      tableDataSource.value.forEach((dataItem) => {
+        if (dataItem[item.key] != undefined) {
+          head.push(item.title);
+          throw new Error("exception");
+        }
+      });
+    } catch (e) {}
   });
   tableDataSource.value.forEach((item) => {
     let obj = [];
     tableColumns.value.forEach((tableColumn) => {
-      // @ts-ignore
       Object.keys(item).forEach((name) => {
         if (tableColumn.key === name) {
-          // @ts-ignore
           obj.push(item[name]);
         }
       });

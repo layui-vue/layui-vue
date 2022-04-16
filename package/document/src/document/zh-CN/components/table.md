@@ -261,16 +261,16 @@ export default {
         key:"password",
         align: "center"
       },{
+        title:"操作",
+        width: "180px",
+        customSlot:"operator",
+        key:"operator"
+      },{
         title:"年龄",
         width: "180px",
         key:"age",
         sort: true,
         align: "right"
-      },{
-        title:"操作",
-        width: "180px",
-        customSlot:"operator",
-        key:"operator"
       }
     ]
 
