@@ -121,9 +121,9 @@ const print = function () {
 const exportData = () => {
   const head = [];
   const body = [];
-  tableColumns.value.forEach(item => {
+  tableColumns.value.forEach((item) => {
     head.push(item.title);
-  })
+  });
   tableDataSource.value.forEach((item) => {
     let obj = [];
     tableColumns.value.forEach((tableColumn) => {
@@ -137,19 +137,19 @@ const exportData = () => {
     });
     body.push(obj);
   });
-  exportToExcel(head, body)
+  exportToExcel(head, body);
   return;
 };
 
-function exportToExcel(headerList, bodyList){  
+function exportToExcel(headerList, bodyList) {
   let excelList = [];
   excelList.push(headerList.join("\t,"));
   excelList.push("\n");
-  bodyList.forEach(item=>{
-     excelList.push(item.join("\t,"));
-     excelList.push("\n");
-  })
-  var merged = excelList .join("");
+  bodyList.forEach((item) => {
+    excelList.push(item.join("\t,"));
+    excelList.push("\n");
+  });
+  var merged = excelList.join("");
   let link = document.createElement("a");
   link.href = "data:text/xls;charset=utf-8,\ufeff" + encodeURIComponent(merged);
   link.download = `table.xls`;
