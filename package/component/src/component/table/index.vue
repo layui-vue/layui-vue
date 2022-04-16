@@ -5,7 +5,6 @@ export default {
 </script>
 
 <script setup lang="ts">
-import * as XLSX from "xlsx";
 import { ref, watch, useSlots, withDefaults, onMounted } from "vue";
 import { v4 as uuidv4 } from "../../utils/guidUtil";
 import { Recordable } from "../../types";
@@ -120,28 +119,42 @@ const print = function () {
 
 // 导出 table 数据
 const exportData = () => {
-  const wb = XLSX.utils.book_new();
-  let arr: any[] = [];
-  props.dataSource.forEach((item) => {
-    let obj = {};
+  const head = [];
+  const body = [];
+  tableColumns.value.forEach(item => {
+    head.push(item.title);
+  })
+  tableDataSource.value.forEach((item) => {
+    let obj = [];
     tableColumns.value.forEach((tableColumn) => {
       // @ts-ignore
       Object.keys(item).forEach((name) => {
         if (tableColumn.key === name) {
           // @ts-ignore
-          obj[tableColumn.title] = item[name];
+          obj.push(item[name]);
         }
       });
     });
-    arr.push(obj);
+    body.push(obj);
   });
-  const ws = XLSX.utils.json_to_sheet(arr);
-  XLSX.utils.book_append_sheet(wb, ws, "sheet");
-  XLSX.writeFile(wb, "export.xls", {
-    bookType: "xls",
-  });
+  exportToExcel(head, body)
   return;
 };
+
+function exportToExcel(headerList, bodyList){  
+  let excelList = [];
+  excelList.push(headerList.join("\t,"));
+  excelList.push("\n");
+  bodyList.forEach(item=>{
+     excelList.push(item.join("\t,"));
+     excelList.push("\n");
+  })
+  var merged = excelList .join("");
+  let link = document.createElement("a");
+  link.href = "data:text/xls;charset=utf-8,\ufeff" + encodeURIComponent(merged);
+  link.download = `table.xls`;
+  link.click();
+}
 
 const sortTable = (e: any, key: string, sort: string) => {
   // 当前排序
