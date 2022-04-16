@@ -221,8 +221,8 @@ export default {
 :::table
 | 属性 | 描述 | 类型 | 参数 |
 | --------- | --------------| ------------- | ------ |
-| enter | 进入全屏 | Function | 可选,HTMLElement |
-| exit | 退出全屏 | Function | 可选,HTMLElement /| Document |
+| enter | 进入全屏 | Function | 可选,`HTMLElement` |
+| exit | 退出全屏 | Function | 可选,`HTMLElement` `Document` |
 | toggle | 进入/退出全屏 | Function | - |
 | isFullscreen | 是否全屏 | boolean | - |
 :::

@@ -28,7 +28,6 @@ const props = withDefaults(defineProps<LayRippletProps>(), {
 });
 
 const isActiveRef = ref(false);
-// 波纹宽高
 const spreadSizeRef = ref<string>("0px");
 const ripplesRefEl = ref<HTMLElement | null>(null);
 const waterRipplesContainerRefEl = ref<HTMLElement | null>(null);
@@ -43,7 +42,7 @@ const rippleY = ref<string | number | undefined>(undefined);
 const onActive = function (event: Event) {
   isActiveRef.value = true;
 
-  // 跟随鼠标点击
+  // 计算点击位置和波纹大小
   if (props.type === "inset" && !props.spreadSize && !props.center) {
     const el = event.currentTarget;
     // @ts-ignore

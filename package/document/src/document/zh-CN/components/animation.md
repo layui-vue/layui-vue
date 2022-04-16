@@ -72,11 +72,11 @@ import { ref } from 'vue'
 
 export default {
   setup() {
-    const replay = (e, aninClass) => {
+    const replay = (e, animClass) => {
       const el = e.currentTarget;
       const targetClass = el.classList[1];
       if(!targetClass){
-        el.classList.add(aninClass);
+        el.classList.add(animClass);
       }else{
         el.classList.remove(targetClass);
         setTimeout(() => {
