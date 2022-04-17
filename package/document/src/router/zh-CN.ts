@@ -381,7 +381,7 @@ const zhCN = [
             path: "/zh-CN/components/ripple",
             component: () => import("../document/zh-CN/components/ripple.md"),
             meta: { title: "水波纹" },
-          }
+          },
         ],
       },
     ],
