@@ -11,8 +11,7 @@
 }
 
 .layui-table tr {
-  transition: all 0.3s;
-  -webkit-transition: all 0.3s;
+  display: flex;
 }
 
 .layui-table th {
@@ -57,6 +56,7 @@
   position: relative;
   padding: 9px 15px;
   min-height: 20px;
+  height: 40px;
   line-height: 20px;
   font-size: 14px;
 }
@@ -353,14 +353,6 @@
   position: relative;
   overflow: auto;
   margin-bottom: -1px;
-}
-
-.layui-table-header tr th:last-child {
-  border-right: none;
-}
-
-.layui-table-body tr td:last-child {
-  border-right: none;
 }
 
 .layui-table-body .layui-none {
