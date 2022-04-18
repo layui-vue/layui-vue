@@ -270,7 +270,6 @@ export default {
       }
       ,{
         title:"操作",
-        width: "180px",
         customSlot:"operator",
         key:"operator"
       }

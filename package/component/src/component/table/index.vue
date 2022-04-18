@@ -270,7 +270,11 @@ onMounted(() => {
                 <template v-for="column in columns" :key="column">
                   <th
                     class="layui-table-cell"
-                    :style="{ width: column.width, textAlign: column.align }"
+                    :style="{
+                      width: column.width,
+                      textAlign: column.align,
+                      flex: column.width ? 'none' : 'auto',
+                    }"
                     v-if="tableColumnKeys.includes(column.key)"
                   >
                     <span>
@@ -335,6 +339,7 @@ onMounted(() => {
                           :style="{
                             width: column.width,
                             textAlign: column.align,
+                            flex: column.width ? 'none' : 'auto',
                           }"
                         >
                           <slot :name="column.customSlot" :data="data"></slot>
@@ -352,6 +357,7 @@ onMounted(() => {
                           :style="{
                             width: column.width,
                             textAlign: column.align,
+                            flex: column.width ? 'none' : 'auto',
                           }"
                         >
                           <span> {{ value }} </span>
