@@ -11,7 +11,16 @@
 <template>
 <lay-timeline>
   <lay-timeline-item title="1.0.x">
-      <ul> 
+    <ul> 
+      <a name="1-0-3"> </a> 
+      <li> 
+        <h3>1.0.4 <span class="layui-badge-rim">2022-04-17</span></h3> 
+        <ul>
+          <li>[修复] table 组件 columns 配置 width 属性不生效。</li>
+        </ul> 
+      </li>
+    </ul>
+    <ul> 
       <a name="1-0-3"> </a> 
       <li> 
         <h3>1.0.3 <span class="layui-badge-rim">2022-04-17</span></h3> 
