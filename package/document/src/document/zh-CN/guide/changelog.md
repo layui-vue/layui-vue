@@ -16,6 +16,7 @@
       <li> 
         <h3>1.0.4 <span class="layui-badge-rim">2022-04-17</span></h3> 
         <ul>
+          <li>[修复] build 构建时产生的异常信息。</li>
           <li>[修复] checkbox 组件夜间模式样式不兼容。</li>
           <li>[修复] table 组件 columns 配置 width 属性不生效。</li>
           <li>[优化] table 组件 columns 配置 width 未设置时自动分配宽度。</li>
