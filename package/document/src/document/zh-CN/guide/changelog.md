@@ -20,6 +20,7 @@
           <li>[修复] checkbox 组件夜间模式样式不兼容。</li>
           <li>[修复] table 组件 columns 配置 width 属性不生效。</li>
           <li>[优化] table 组件 columns 配置 width 未设置时自动分配宽度。</li>
+          <li>[优化] layer 方法 option callback 参数为可选。</li>
         </ul> 
       </li>
     </ul>

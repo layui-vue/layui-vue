@@ -256,7 +256,6 @@ export default {
         align: "left"
       },{
         title:"密码",
-        width: "180px",
         customSlot:"password",
         key:"password",
         align: "center"

@@ -77,7 +77,7 @@ const layer = {
     return layer.create(option, defaultOption, callback);
   },
   // 消息
-  msg: (message: string, option: any, callback: Function) => {
+  msg: (message: string, option?: any, callback?: Function) => {
     let defaultOption = {
       type: 0,
       title: false,
@@ -92,7 +92,7 @@ const layer = {
     return layer.create(option, defaultOption, callback);
   },
   // 加载
-  load: (load: number, option: any, callback: Function) => {
+  load: (load: number, option?: any, callback?: Function) => {
     let defaultOption = {
       type: 3,
       load: load,
@@ -103,7 +103,7 @@ const layer = {
     return layer.create(option, defaultOption, callback);
   },
   // 确认
-  confirm: (msg: string, option: any, callback: Function) => {
+  confirm: (msg: string, option?: any, callback?: Function) => {
     let defaultOption = {
       type: 0,
       content: msg,
@@ -112,7 +112,7 @@ const layer = {
     return layer.create(option, defaultOption, callback);
   },
   // 创建弹出层
-  create: (option: any, defaultOption: any, callback: Function) => {
+  create: (option: any, defaultOption: any, callback?: Function) => {
     // 销毁定时
     let timer: NodeJS.Timeout;
     // 聚合配置 Opt
