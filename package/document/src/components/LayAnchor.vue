@@ -124,6 +124,7 @@ onMounted(() => {
   // 如果已折叠,关闭组件初始渲染时的动画,然后自动开启
   // @ts-ignore
   show.value =
+    // @ts-ignore
     scrollRefEl.value!.firstElementChild!.style.marginRight !== "0px";
   enableAnimation = show.value;
 });
