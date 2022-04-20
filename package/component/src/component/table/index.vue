@@ -273,7 +273,7 @@ onMounted(() => {
                     :style="{
                       width: column.width,
                       textAlign: column.align,
-                      flex: column.width ? 'none' : 'auto',
+                      flex: column.width ? '0 0 auto' : '1',
                     }"
                     v-if="tableColumnKeys.includes(column.key)"
                   >
@@ -339,7 +339,7 @@ onMounted(() => {
                           :style="{
                             width: column.width,
                             textAlign: column.align,
-                            flex: column.width ? 'none' : 'auto',
+                            flex: column.width ? '0 0 auto' : '1',
                           }"
                         >
                           <slot :name="column.customSlot" :data="data"></slot>
@@ -357,7 +357,7 @@ onMounted(() => {
                           :style="{
                             width: column.width,
                             textAlign: column.align,
-                            flex: column.width ? 'none' : 'auto',
+                            flex: column.width ? '0 0 auto' : '1',
                           }"
                         >
                           <span> {{ value }} </span>
