@@ -351,6 +351,12 @@ const menus = [
         subTitle: "scroll",
         path: "/zh-CN/components/scroll",
       },
+      {
+        id: 114,
+        title: "通告栏",
+        subTitle: "noticeBar",
+        path: "/zh-CN/components/noticeBar",
+      },
     ],
   },
   {
