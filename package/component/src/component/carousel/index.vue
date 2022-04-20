@@ -89,7 +89,7 @@ const sub = function () {
     if (childrens.value[i].props.id === active.value) {
       if (i === 0) {
         active.value = childrens.value[slots.length - 1].props.id;
-      }else{
+      } else {
         active.value = childrens.value[i - 1].props.id;
       }
       break;
@@ -103,7 +103,7 @@ const add = function () {
     if (childrens.value[i].props.id === active.value) {
       if (i === childrens.value.length - 1) {
         active.value = childrens.value[0].props.id;
-      }else{
+      } else {
         active.value = childrens.value[i + 1].props.id;
       }
       break;
@@ -117,7 +117,7 @@ const autoplay = () => {
     if (childrens.value[i].props.id === active.value) {
       if (i === childrens.value.length - 1) {
         active.value = childrens.value[0].props.id;
-      }else{
+      } else {
         active.value = childrens.value[i + 1].props.id;
       }
       break;

@@ -8,10 +8,11 @@ export default {
 import { StringOrNumber } from "./tree.type";
 import LayIcon from "../icon";
 import LayCheckbox from "../checkbox";
-import { Ref } from "vue";
+import { Ref, useSlots } from "vue";
 import { Tree } from "./tree";
 import { Nullable } from "../../types";
 import LayTransition from "../transition/index.vue";
+
 type CustomKey = string | number;
 type CustomString = (() => string) | string;
 
@@ -41,6 +42,7 @@ interface TreeNodeEmits {
   (e: "node-click", node: TreeData): void;
 }
 
+const slots = useSlots();
 const props = defineProps<TreeNodeProps>();
 const emit = defineEmits<TreeNodeEmits>();
 

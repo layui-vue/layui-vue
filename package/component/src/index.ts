@@ -163,7 +163,7 @@ const components: Record<string, Component> = {
   LayTransition,
   LayUpload,
   LayRipple,
-  LayNoticeBar
+  LayNoticeBar,
 };
 
 const install = (app: App, options?: InstallOptions): void => {

@@ -4,27 +4,46 @@
     :style="{ background, height: `${height}px` }"
     v-show="!isMode"
   >
-    <div class="layui-notice-bar-warp" :style="{ color, fontSize: `${size}px` }">
+    <div
+      class="layui-notice-bar-warp"
+      :style="{ color, fontSize: `${size}px` }"
+    >
       <lay-icon
         v-if="leftIcon"
         class="layui-notice-bar-warp-left-icon"
         :type="leftIcon"
       ></lay-icon>
-      <div class="layui-notice-bar-warp-text-box" ref="noticeBarWarpRef" :style="'--textWidth--:'+ text.length+'em'">
+      <div
+        class="layui-notice-bar-warp-text-box"
+        ref="noticeBarWarpRef"
+        :style="'--textWidth--:' + text.length + 'em'"
+      >
         <div
           class="layui-notice-bar-warp-text"
           ref="noticeBarTextRef"
           v-if="!scrollable"
-        >{{ text }}
+        >
+          {{ text }}
         </div>
-			<div class="layui-notice-bar-warp-slot " v-else> 
-        <lay-carousel v-model="active" indicator="none" anim="updown" arrow="none"  :style="{height:`40px`}">
-              <lay-carousel-item v-for="(item) in textlist" :key="item.id" :id="item.id" class="layui-anim layui-anim-up">
-              {{item.text}}
-              </lay-carousel-item>  
-        </lay-carousel>  
-                <!-- <slot />   -->
-				</div>             
+        <div class="layui-notice-bar-warp-slot" v-else>
+          <lay-carousel
+            v-model="active"
+            indicator="none"
+            anim="updown"
+            arrow="none"
+            :style="{ height: `40px` }"
+          >
+            <lay-carousel-item
+              v-for="item in textlist"
+              :key="item.id"
+              :id="item.id"
+              class="layui-anim layui-anim-up"
+            >
+              {{ item.text }}
+            </lay-carousel-item>
+          </lay-carousel>
+          <!-- <slot />   -->
+        </div>
       </div>
       <lay-icon
         :type="rightIcon"
@@ -45,10 +64,10 @@ import {
   onMounted,
   nextTick,
 } from "vue";
-import LayCarousel from '../carousel/index.vue'
+import LayCarousel from "../carousel/index.vue";
 export default defineComponent({
   name: "LayNoticeBar",
-    components: {
+  components: {
     LayCarousel,
   },
   props: {
@@ -113,8 +132,8 @@ export default defineComponent({
   setup(props, { emit }) {
     const noticeBarWarpRef = ref();
     const noticeBarTextRef = ref();
-	//@ts-ignore	
-        const active = ref(props.textlist[0]?.id)
+    //@ts-ignore
+    const active = ref(props.textlist[0]?.id);
     const state = reactive({
       order: 1,
       oneTime: 0,
@@ -122,7 +141,7 @@ export default defineComponent({
       warpOWidth: 0,
       textOWidth: 0,
       isMode: false,
-      height : 40,
+      height: 40,
     });
     // 初始化 animation 各项参数
     const initAnimation = () => {
@@ -182,7 +201,7 @@ export default defineComponent({
       noticeBarTextRef,
       onRightIconClick,
       ...toRefs(state),
-      active
+      active,
     };
   },
 });
@@ -208,36 +227,48 @@ export default defineComponent({
   overflow: hidden;
   position: relative;
 }
-.layui-notice-bar .layui-notice-bar-warp .layui-notice-bar-warp-text-box .layui-notice-bar-warp-text {
+.layui-notice-bar
+  .layui-notice-bar-warp
+  .layui-notice-bar-warp-text-box
+  .layui-notice-bar-warp-text {
   white-space: nowrap;
   position: absolute;
   left: 0;
 }
 
 @keyframes around1 {
-	from {
-		left: 0;
-	}
-	to {
-		left: calc(0px - var(--textWidth--));
-		/* left: -100%; */
-	}
+  from {
+    left: 0;
+  }
+  to {
+    left: calc(0px - var(--textWidth--));
+    /* left: -100%; */
+  }
 }
 @keyframes around2 {
-	from {
-		left: calc(var(--textWidth--));
-		/* left: 100%; */
-	}
-	to {
+  from {
+    left: calc(var(--textWidth--));
+    /* left: 100%; */
+  }
+  to {
     /* left: calc(0px - var(--textWidth--) - 10px); */
-		left: 0;
-	}
+    left: 0;
+  }
 }
-.layui-notice-bar .layui-notice-bar-warp .layui-notice-bar-warp-text-box .layui-notice-bar-warp-slot {
+.layui-notice-bar
+  .layui-notice-bar-warp
+  .layui-notice-bar-warp-text-box
+  .layui-notice-bar-warp-slot {
   width: 100%;
   white-space: nowrap;
 }
-.layui-notice-bar .layui-notice-bar-warp .layui-notice-bar-warp-text-box .layui-notice-bar-warp-slot  .layui-carousel  >[carousel-item] * {
+.layui-notice-bar
+  .layui-notice-bar-warp
+  .layui-notice-bar-warp-text-box
+  .layui-notice-bar-warp-slot
+  .layui-carousel
+  > [carousel-item]
+  * {
   display: flex;
   align-items: center;
 }
@@ -251,7 +282,9 @@ export default defineComponent({
   text-align: right;
   font-size: inherit !important;
 }
-.layui-notice-bar .layui-notice-bar-warp .layui-notice-bar-warp-right-icon:hover {
+.layui-notice-bar
+  .layui-notice-bar-warp
+  .layui-notice-bar-warp-right-icon:hover {
   cursor: pointer;
 }
 </style>

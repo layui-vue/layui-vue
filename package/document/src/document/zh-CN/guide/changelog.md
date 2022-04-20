@@ -12,17 +12,19 @@
 <lay-timeline>
   <lay-timeline-item title="1.0.x">
     <ul> 
-      <a name="1-0-3"> </a> 
+      <a name="1-0-4"> </a> 
       <li> 
-        <h3>1.0.4 <span class="layui-badge-rim">2022-04-17</span></h3> 
+        <h3>1.0.4 <span class="layui-badge-rim">2022-04-20</span></h3> 
         <ul>
-          <li>[新增] notice-bar 组件 scrollable 属性, 支持垂直方向滚动。 </li>
-          <li>[修复] carousel 组件 index 索引下标越界。</li>
+          <li>[重构] notice-bar 通告栏。</li>
+          <li>[修复] carousel 组件 index 下标越界。</li>
           <li>[修复] checkbox 组件夜间模式下边框无法适配。</li>
-          <li>[修复] 依赖项目 vite build 构建时产生的异常。</li>
           <li>[修复] table 组件 columns 配置 width 属性不生效。</li>
           <li>[优化] table 组件 columns 配置 width 未设置时自动分配宽度。</li>
-          <li>[优化] layer 方法 option callback 参数为可选。</li>
+          <li>[优化] layer 方法 option, callback 参数为可选。</li>
+          <li>[升级] vueuse 8.3.0 版本。</li>
+          <li>[升级] vue 3.2.33 版本。</li>
+          <li>[升级] vite 2.9.2 版本。</li>
         </ul> 
       </li>
     </ul>

@@ -21,10 +21,10 @@
     "@layui/layui-vue": "workspace:*",
     "@layui/icons-vue": "workspace:*",
     "@layui/layer-vue": "workspace:*",
-    "vue": "^3.2.31"
+    "vue": "^3.2.33"
   },
   "peerDependencies": {
-    "vue": "^3.2.31"
+    "vue": "^3.2.33"
   },
   "devDependencies": {
     "@commitlint/cli": "^16.2.1",

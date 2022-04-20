@@ -384,7 +384,8 @@ const zhCN = [
           },
           {
             path: "/zh-CN/components/noticeBar",
-            component: () => import("../document/zh-CN/components/noticeBar.md"),
+            component: () =>
+              import("../document/zh-CN/components/noticeBar.md"),
             meta: { title: "通告栏" },
           },
         ],

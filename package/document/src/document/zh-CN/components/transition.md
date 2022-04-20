@@ -77,41 +77,6 @@ export default {
 
 :::
 
-::: title 滑入滑出
-:::
-
-::: demo 使用 `lay-transition` 标签, 为元素提供过渡动画
-
-<template>
-  <lay-button @click="changeVisible2">开始</lay-button>
-  <br/>
-  <br/>
-  <lay-transition type="slide">
-      <lay-card title="标题" v-if="visible2">内容</lay-card>
-  </lay-transition>
-</template>
-
-<script>
-import { ref } from 'vue'
-
-export default {
-  setup() {
-
-    const visible2 = ref(true);
-
-    const changeVisible2 = () => {
-        visible2.value = !visible2.value;
-    }
-
-    return {
-        changeVisible2
-    }
-  }
-}
-</script>
-
-:::
-
 ::: title Transition 属性
 :::
 
