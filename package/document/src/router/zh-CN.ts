@@ -382,6 +382,11 @@ const zhCN = [
             component: () => import("../document/zh-CN/components/ripple.md"),
             meta: { title: "水波纹" },
           },
+          {
+            path: "/zh-CN/components/noticeBar",
+            component: () => import("../document/zh-CN/components/noticeBar.md"),
+            meta: { title: "通告栏" },
+          },
         ],
       },
     ],

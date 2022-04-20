@@ -82,6 +82,7 @@ import LayDatePicker from "./component/datePicker/index";
 import LayTransition from "./component/transition/index";
 import LayUpload from "./component/upload/index";
 import LayRipple from "./component/ripple/index";
+import LayNoticeBar from "./component/noticeBar/index";
 import LayConfigProvider from "./provider";
 import { InstallOptions } from "./types";
 
@@ -162,6 +163,7 @@ const components: Record<string, Component> = {
   LayTransition,
   LayUpload,
   LayRipple,
+  LayNoticeBar
 };
 
 const install = (app: App, options?: InstallOptions): void => {
@@ -250,6 +252,7 @@ export {
   LayTransition,
   LayUpload,
   LayRipple,
+  LayNoticeBar,
   install,
 };
 
