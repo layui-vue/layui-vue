@@ -23,7 +23,7 @@ const props = defineProps<LayTimelineItemProps>();
       <slot name="dot"></slot>
     </i>
     <i class="layui-icon layui-timeline-axis" v-else></i>
-    <div class="layui-timeline-content layui-text">
+    <div class="layui-timeline-content">
       <div v-if="simple" class="layui-timeline-title">
         {{ title }}
       </div>

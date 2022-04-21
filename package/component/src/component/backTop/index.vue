@@ -131,6 +131,7 @@ const handlerMouseup = () => {
 // 获取滚动目标元素
 const getScrollTarget = () => {
   if (props.target === "window") {
+    // @ts-ignore
     return getScrollParent(backtopRef.value!, false);
   } else {
     const targetElement = document.querySelector<HTMLElement>(props.target);
