@@ -153,6 +153,7 @@ defineExpose({ validate, clearValidate });
 onMounted(() => {
   if (props.prop) {
     layForm.addField(
+      // @ts-ignore
       reactive({
         ...toRefs(props),
         $el: formItemRef,

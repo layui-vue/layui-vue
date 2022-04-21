@@ -1,3 +1,187 @@
 @import './code.css';
 @import './markdown.css';
 @import './vars.css';
+
+.layui-menu {
+    position: relative;
+    background-color: #fff;
+  }
+  
+  .layui-menu li,
+  .layui-menu-body-title a {
+    padding: 5px 15px;
+  }
+  
+  .layui-menu li {
+    position: relative;
+    line-height: 26px;
+    color: rgba(0, 0, 0, 0.8);
+    font-size: 14px;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+  
+  .layui-menu li:hover {
+    background-color: var(--global-neutral-color-2);
+  }
+  
+  .layui-menu-item-parent:hover > .layui-menu-body-panel {
+    display: block;
+    animation-name: layui-fadein;
+    animation-duration: 0.3s;
+    animation-fill-mode: both;
+    animation-delay: 0.2s;
+  }
+  
+  .layui-menu-item-group .layui-menu-body-title,
+  .layui-menu-item-parent .layui-menu-body-title {
+    padding-right: 25px;
+  }
+  
+  .layui-menu .layui-menu-item-divider:hover,
+  .layui-menu .layui-menu-item-group:hover,
+  .layui-menu .layui-menu-item-none:hover {
+    background: 0 0;
+    cursor: default;
+  }
+  
+  .layui-menu .layui-menu-item-group > ul {
+    margin: 5px 0 -5px;
+  }
+  
+  .layui-menu .layui-menu-item-group > .layui-menu-body-title {
+    color: rgba(0, 0, 0, 0.35);
+    user-select: none;
+  }
+  
+  .layui-menu .layui-menu-item-none {
+    color: rgba(0, 0, 0, 0.35);
+    cursor: default;
+    text-align: center;
+  }
+  
+  .layui-menu .layui-menu-item-divider {
+    margin: 5px 0;
+    padding: 0;
+    height: 0;
+    line-height: 0;
+    border-bottom: 1px solid var(--global-neutral-color-3);
+    overflow: hidden;
+  }
+  
+  .layui-menu .layui-menu-item-down:hover,
+  .layui-menu .layui-menu-item-up:hover {
+    cursor: pointer;
+  }
+  
+  .layui-menu .layui-menu-item-up > .layui-menu-body-title {
+    color: rgba(0, 0, 0, 0.8);
+  }
+  
+  .layui-menu .layui-menu-item-up > ul {
+    visibility: hidden;
+    height: 0;
+    overflow: hidden;
+  }
+  
+  .layui-menu .layui-menu-item-down:hover > .layui-menu-body-title > .layui-icon,
+  .layui-menu .layui-menu-item-up > .layui-menu-body-title:hover > .layui-icon {
+    color: rgba(0, 0, 0, 1);
+  }
+  
+  .layui-menu .layui-menu-item-down > ul {
+    visibility: visible;
+    height: auto;
+  }
+  
+  .layui-menu .layui-menu-item-checked,
+  .layui-menu .layui-menu-item-checked2 {
+    background-color: var(--global-neutral-color-2) !important;
+    border-radius: 2px;
+    color: var(--global-checked-color);
+  }
+  
+  .layui-menu .layui-menu-item-checked a,
+  .layui-menu .layui-menu-item-checked2 a {
+    color: var(--global-checked-color);
+  }
+  
+  .layui-menu .layui-menu-item-checked:after {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    border-right: 3px solid var(--global-checked-color);
+    content: "";
+  }
+  
+  .layui-menu-body-title {
+    position: relative;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .layui-menu-body-title a {
+    display: block;
+    margin: -5px -15px;
+    color: rgba(0, 0, 0, 0.8);
+  }
+  
+  .layui-menu-body-title > .layui-icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-size: 14px;
+  }
+  
+  .layui-menu-body-title > .layui-icon-right {
+    right: -1px;
+  }
+  
+  .layui-menu-body-panel {
+    display: none;
+    position: absolute;
+    top: -7px;
+    left: 100%;
+    z-index: 1000;
+    margin-left: 13px;
+    padding: 5px 0;
+  }
+  
+  .layui-menu-body-panel:before {
+    content: "";
+    position: absolute;
+    width: 20px;
+    left: -16px;
+    top: 0;
+    bottom: 0;
+  }
+  
+  .layui-menu-body-panel-left {
+    left: auto;
+    right: 100%;
+    margin: 0 13px;
+  }
+  
+  .layui-menu-body-panel-left:before {
+    left: auto;
+    right: -16px;
+  }
+  
+  .layui-menu-lg li {
+    line-height: 32px;
+  }
+  
+  .layui-menu-lg .layui-menu-body-title a:hover,
+  .layui-menu-lg li:hover {
+    background: 0 0;
+    color: var(--global-checked-color);
+  }
+  
+  .layui-menu-lg li .layui-menu-body-panel {
+    margin-left: 14px;
+  }
+  
+  .layui-menu-lg li .layui-menu-body-panel-left {
+    margin: 0 15px;
+  }

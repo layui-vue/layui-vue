@@ -1,0 +1,408 @@
+// layui background-color.css
+.layui-bg-black,
+.layui-bg-blue,
+.layui-bg-cyan,
+.layui-bg-green,
+.layui-bg-orange,
+.layui-bg-red {
+  color: #fff !important;
+}
+
+.layui-bg-red {
+  background-color: #ff5722 !important;
+}
+
+.layui-bg-orange {
+  background-color: #ffb800 !important;
+}
+
+.layui-bg-green {
+  background-color: #009688 !important;
+}
+
+.layui-bg-cyan {
+  background-color: #2f4056 !important;
+}
+
+.layui-bg-blue {
+  background-color: #1e9fff !important;
+}
+
+.layui-bg-black {
+  background-color: #393d49 !important;
+}
+
+.layui-bg-gray {
+  background-color: #fafafa !important;
+  color: #666 !important;
+}
+
+// layui font-color.css
+.layui-font-red {
+  color: #ff5722 !important;
+}
+
+.layui-font-orange {
+  color: #ffb800 !important;
+}
+
+.layui-font-green {
+  color: #009688 !important;
+}
+
+.layui-font-cyan {
+  color: #2f4056 !important;
+}
+
+.layui-font-blue {
+  color: #01aaed !important;
+}
+
+.layui-font-black {
+  color: #000 !important;
+}
+
+.layui-font-gray {
+  color: #c2c2c2 !important;
+}
+
+// layui font-size.css
+
+.layui-font-12 {
+  font-size: 12px !important;
+}
+
+.layui-font-14 {
+  font-size: 14px !important;
+}
+
+.layui-font-16 {
+  font-size: 16px !important;
+}
+
+.layui-font-18 {
+  font-size: 18px !important;
+}
+
+.layui-font-20 {
+  font-size: 20px !important;
+}
+
+.layui-font-22 {
+  font-size: 22px !important;
+}
+
+.layui-font-24 {
+  font-size: 24px !important;
+}
+
+.layui-font-26 {
+  font-size: 26px !important;
+}
+
+.layui-font-28 {
+  font-size: 28px !important;
+}
+
+.layui-font-30 {
+  font-size: 30px !important;
+}
+
+// layui anim.css
+.layui-anim {
+  -webkit-animation-duration: 0.3s;
+  -webkit-animation-fill-mode: both;
+  animation-duration: 0.3s;
+  animation-fill-mode: both;
+}
+
+.layui-anim.layui-icon {
+  display: inline-block;
+}
+
+.layui-anim-loop {
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+}
+
+.layui-trans,
+.layui-trans a {
+  transition: all 0.2s;
+  -webkit-transition: all 0.2s;
+}
+
+@-webkit-keyframes layui-rotate {
+  from {
+    -webkit-transform: rotate(0);
+  }
+
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes layui-rotate {
+  from {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.layui-anim-rotate {
+  -webkit-animation-name: layui-rotate;
+  animation-name: layui-rotate;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-timing-function: linear;
+  animation-timing-function: linear;
+}
+
+@-webkit-keyframes layui-up {
+  from {
+    -webkit-transform: translate3d(0, 100%, 0);
+    opacity: 0.3;
+  }
+
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+
+@keyframes layui-up {
+  from {
+    transform: translate3d(0, 100%, 0);
+    opacity: 0.3;
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+
+.layui-anim-up {
+  -webkit-animation-name: layui-up;
+  animation-name: layui-up;
+}
+
+@-webkit-keyframes layui-upbit {
+  from {
+    -webkit-transform: translate3d(0, 15px, 0);
+    opacity: 0.3;
+  }
+
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+
+@keyframes layui-upbit {
+  from {
+    transform: translate3d(0, 15px, 0);
+    opacity: 0.3;
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+
+.layui-anim-upbit {
+  -webkit-animation-name: layui-upbit;
+  animation-name: layui-upbit;
+}
+
+@keyframes layui-down {
+  0% {
+    opacity: 0.3;
+    transform: translate3d(0, -100%, 0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.layui-anim-down {
+  animation-name: layui-down;
+}
+
+@keyframes layui-downbit {
+  0% {
+    opacity: 0.3;
+    transform: translate3d(0, -5px, 0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.layui-anim-downbit {
+  animation-name: layui-downbit;
+}
+
+@-webkit-keyframes layui-scale {
+  0% {
+    opacity: 0.3;
+    -webkit-transform: scale(0.5);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: scale(1);
+  }
+}
+
+@keyframes layui-scale {
+  0% {
+    opacity: 0.3;
+    -ms-transform: scale(0.5);
+    transform: scale(0.5);
+  }
+
+  100% {
+    opacity: 1;
+    -ms-transform: scale(1);
+    transform: scale(1);
+  }
+}
+
+.layui-anim-scale {
+  -webkit-animation-name: layui-scale;
+  animation-name: layui-scale;
+}
+
+@-webkit-keyframes layui-scale-spring {
+  0% {
+    opacity: 0.5;
+    -webkit-transform: scale(0.5);
+  }
+
+  80% {
+    opacity: 0.8;
+    -webkit-transform: scale(1.1);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: scale(1);
+  }
+}
+
+@keyframes layui-scale-spring {
+  0% {
+    opacity: 0.5;
+    transform: scale(0.5);
+  }
+
+  80% {
+    opacity: 0.8;
+    transform: scale(1.1);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.layui-anim-scaleSpring {
+  -webkit-animation-name: layui-scale-spring;
+  animation-name: layui-scale-spring;
+}
+
+@keyframes layui-scalesmall {
+  0% {
+    opacity: 0.3;
+    transform: scale(1.5);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.layui-anim-scalesmall {
+  animation-name: layui-scalesmall;
+}
+
+@keyframes layui-scalesmall-spring {
+  0% {
+    opacity: 0.3;
+    transform: scale(1.5);
+  }
+
+  80% {
+    opacity: 0.8;
+    transform: scale(0.9);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.layui-anim-scalesmall-spring {
+  animation-name: layui-scalesmall-spring;
+}
+
+@-webkit-keyframes layui-fadein {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes layui-fadein {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.layui-anim-fadein {
+  -webkit-animation-name: layui-fadein;
+  animation-name: layui-fadein;
+}
+
+@-webkit-keyframes layui-fadeout {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes layui-fadeout {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+.layui-anim-fadeout {
+  -webkit-animation-name: layui-fadeout;
+  animation-name: layui-fadeout;
+}
