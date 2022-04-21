@@ -66,6 +66,17 @@ export default {
         </lay-dropdown-menu>
     </template>
   </lay-dropdown>
+    &nbsp;&nbsp;
+    <lay-dropdown trigger="contextMenu">
+    <lay-button>contextMenu 触发</lay-button>
+    <template #content>
+        <lay-dropdown-menu>
+          <lay-dropdown-menu-item>选项一</lay-dropdown-menu-item>
+          <lay-dropdown-menu-item>选项二</lay-dropdown-menu-item>
+          <lay-dropdown-menu-item>选项三</lay-dropdown-menu-item>
+        </lay-dropdown-menu>
+    </template>
+  </lay-dropdown>
 </template>
 
 <script>
@@ -154,7 +165,7 @@ export default {
 
 | 属性    | 描述     | 可选值          |
 | ------- | -------- | --------------- |
-| trigger | 触发方式 | `click` `hover` |
+| trigger | 触发方式 | `click` `hover` `contextMenu` |
 | disabled | 是否禁用触发 | `true` `false` |
 
 :::

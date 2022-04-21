@@ -1,1 +1,1 @@
-export type DropdownTrigger = "click" | "hover";
+export type DropdownTrigger = "click" | "hover" | "contextMenu";
