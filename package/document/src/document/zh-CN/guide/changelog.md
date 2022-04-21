@@ -14,15 +14,19 @@
     <ul> 
       <a name="1-0-4"> </a> 
       <li> 
-        <h3>1.0.4 <span class="layui-badge-rim">2022-04-20</span></h3> 
+        <h3>1.0.4 <span class="layui-badge-rim">2022-04-21</span></h3> 
         <ul>
-          <li>[重构] notice-bar 通告栏。</li>
-          <li>[修复] carousel 组件 index 下标越界。</li>
-          <li>[修复] checkbox 组件夜间模式下边框无法适配。</li>
+          <li>[新增] line 组件 direction 属性, 支持垂直分割。</li>
+          <li>[新增] line 组件 offset 属性, 设置内容的偏移量。</li>
+          <li>[新增] notice-bar 组件 scrollable 属性, 支持垂直滚动。</li>
+          <li>[新增] line 组件 border-style 属性, 设置分割线的样式。</li>
+          <li>[新增] line 组件 border-wdith 属性, 设置分割线的宽度。</li>
+          <li>[新增] line 组件 content-position 属性, 设置内容的对齐方式。</li>
           <li>[修复] table 组件 columns 配置 width 属性不生效。</li>
-          <li>[优化] table 组件 columns 配置 width 未设置时自动分配宽度。</li>
-          <li>[优化] layer 方法 option, callback 参数为可选。</li>
-          <li>[升级] vueuse 8.3.0 版本。</li>
+          <li>[修复] checkbox 组件夜间模式下边框颜色不兼容。</li>
+          <li>[修复] carousel 组件 index 索引下标越界。</li>
+          <li>[优化] layer 方法 option 参数为可选。</li>
+          <li>[升级] vueuse/core 8.3.0 版本。</li>
           <li>[升级] vue 3.2.33 版本。</li>
           <li>[升级] vite 2.9.2 版本。</li>
         </ul> 
