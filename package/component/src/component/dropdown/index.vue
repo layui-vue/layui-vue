@@ -31,7 +31,7 @@ onClickOutside(dropdownRef, (event) => {
 
 const open = function (event?: Event) {
   if (props.disabled === false) {
-    if(event){
+    if (event) {
       const el = event.currentTarget;
       // @ts-ignore
       const rect = el.getBoundingClientRect();
@@ -40,7 +40,7 @@ const open = function (event?: Event) {
       // @ts-ignore
       dropdownY.value = event.clientY - rect.top + "px";
     }
-    
+
     openState.value = true;
     emit("open");
   }
@@ -61,9 +61,9 @@ const toggle = function (event?: Event) {
 };
 
 const dropdownStyle = computed(() => ({
-  '--layui-dropdown-left': dropdownX.value,
-  '--layui-dropdown-top': dropdownY.value,
-}))
+  "--layui-dropdown-left": dropdownX.value,
+  "--layui-dropdown-top": dropdownY.value,
+}));
 
 provide("openState", openState);
 
@@ -79,7 +79,7 @@ defineExpose({ open, hide, toggle });
     :class="{ 'layui-dropdown-up': openState }"
     :style="dropdownStyle"
   >
-    <div 
+    <div
       @click="trigger === 'click' && toggle()"
       @contextmenu.prevent="trigger === 'contextMenu' && toggle($event)"
     >
