@@ -112,7 +112,7 @@ watch(currentPage, function () {
 </script>
 
 <template>
-  <div class="layui-box layui-laypage layui-laypage-default">
+  <div class="layui-laypage layui-laypage-default">
     <span v-if="showCount" class="layui-laypage-count"
       >共 {{ total }} 条 {{ maxPage }} 页</span
     >

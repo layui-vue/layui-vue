@@ -91,6 +91,14 @@ const matchComponents = [
     pattern: /^LayResult$/,
     styleDir: "result",
   },
+  {
+    pattern: /^LayNoticeBar$/,
+    styleDir: "noticeBar",
+  },
+  {
+    pattern: /^LayLine$/,
+    styleDir: "line",
+  },
   // ....
   {
     pattern: /^(LayCarousel|LayCarouselItem)$/,
@@ -117,10 +125,6 @@ const matchComponents = [
   {
     pattern: /^(LayForm|LayFormItem)$/,
     styleDir: "formItem",
-  },
-  {
-    pattern: /^LayLine$/,
-    styleDir: "",
   },
   {
     pattern: /^(LayMenuItem|LaySubMenu)$/,

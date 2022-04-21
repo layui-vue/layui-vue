@@ -170,7 +170,7 @@ const searchList = function (str: string, container: any) {
         <div v-if="page" class="layui-iconpicker-page">
           <div
             id="layui-laypage-1"
-            class="layui-box layui-laypage layui-laypage-default"
+            class="layui-laypage layui-laypage-default"
           >
             <span class="layui-laypage-count">共 {{ total }} 个</span
             ><a
