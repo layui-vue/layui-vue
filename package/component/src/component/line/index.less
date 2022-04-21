@@ -1,0 +1,57 @@
+@import (reference) "../../theme/variable.less";
+
+.layui-line {
+  &-horizontal {
+    position: relative;
+    clear: both;
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+    margin: 10px 0;
+    border-bottom: var(--layui-line-border-width) var(--layui-line-border-style) @global-neutral-color-5;
+    border-top-style: none;
+    border-left-style: none;
+    border-right-style: none;
+
+    &.layui-line-with-text {
+      margin: 14px 0;
+    }
+  }
+
+  &-vertical {
+    display: inline-block;
+    min-width: 1px;
+    max-width: 1px;
+    height: 1em;
+    margin: 0 8px;
+    vertical-align: middle;
+    border-left: var(--layui-line-border-width) var(--layui-line-border-style) @global-neutral-color-5;
+    border-top-style: none;
+    border-bottom-style: none;
+    border-right-style: none;
+  }
+
+  &-text {
+    position: absolute;
+    top: 50%;
+    box-sizing: border-box;
+    padding: 0 10px;
+    color: currentColor;
+    line-height: 2;
+    background-color: #FFF;
+    transform: translateY(-50%);
+
+    &-center {
+      left: var(--layui-line-text-offset);
+      transform: translate(-50%, -50%);
+    }
+
+    &-left {
+      left: var(--layui-line-text-offset);
+    }
+
+    &-right {
+      right: var(--layui-line-text-offset);
+    }
+  }
+}
