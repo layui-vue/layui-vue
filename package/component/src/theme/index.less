@@ -2,12 +2,6 @@
 @import "./public.less";
 @import "./date.less";
 
-.layui-inline,
-img {
-  display: inline-block;
-  vertical-align: middle;
-}
-
 h1,
 h2,
 h3,
@@ -22,38 +16,20 @@ body {
   color: #333;
 }
 
-.layui-edge,
-.layui-inline 
-{
+li {
+  list-style: none;
+}
+
+.layui-inline {
   position: relative;
-}
-
-.layui-edge,
-hr {
-  height: 0;
-  overflow: hidden;
-}
-
-.layui-edge,
-.layui-elip,
-hr {
-  overflow: hidden;
-}
-
-.layui-btn,
-.layui-edge,
-.layui-inline,
-img {
+  display: inline-block;
   vertical-align: middle;
 }
 
 .layui-btn,
-.layui-disabled,
-.layui-icon,
-.layui-unselect {
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
+.layui-edge,
+.layui-inline {
+  vertical-align: middle;
 }
 
 .layui-elip,
@@ -87,20 +63,12 @@ th,
 ul {
   margin: 0;
   padding: 0;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}
-
-a:active,
-a:hover {
-  outline: 0;
 }
 
 img {
   border: none;
-}
-
-li {
-  list-style: none;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 table {
@@ -134,11 +102,11 @@ body {
 }
 
 hr {
+  padding: 0;
   line-height: 0;
   margin: 10px 0;
-  padding: 0;
   border: none !important;
-  border-bottom: 1px solid @global-neutral-color-3 !important;
+  border-bottom: 1px solid #EEEEEE!important;
   clear: both;
   background: 0 0;
 }
@@ -151,19 +119,9 @@ a:hover {
   color: #777;
 }
 
-a cite {
-  font-style: normal;
-  *cursor: pointer;
-}
-
 .layui-border-box,
 .layui-border-box * {
   box-sizing: border-box;
-}
-
-.layui-inline {
-  *display: inline;
-  *zoom: 1;
 }
 
 .layui-btn,
@@ -241,8 +199,8 @@ a cite {
 
 .layui-colorpicker-alpha-slider,
 .layui-colorpicker-side-slider,
-.layui-menu,
 .layui-menu *,
+.layui-menu,
 .layui-nav {
   box-sizing: border-box;
 }

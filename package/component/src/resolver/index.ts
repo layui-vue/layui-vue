@@ -99,6 +99,14 @@ const matchComponents = [
     pattern: /^LayLine$/,
     styleDir: "line",
   },
+  {
+    pattern: /^LayStepItem$/,
+    styleDir: "step",
+  },
+  {
+    pattern: /^LayStep$/,
+    styleDir: "step",
+  },
   // ....
   {
     pattern: /^(LayCarousel|LayCarouselItem)$/,
@@ -153,10 +161,6 @@ const matchComponents = [
   {
     pattern: /^LaySplitPanelItem$/,
     styleDir: "splitPanel",
-  },
-  {
-    pattern: /^LayStepItem$/,
-    styleDir: "step",
   },
   {
     pattern: /^LaySwitch$/,
