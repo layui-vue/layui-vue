@@ -264,6 +264,7 @@
 <script lang="ts" setup>
 import { ref, watch, computed, defineProps, defineEmits, onMounted } from "vue";
 
+import "./index.less";
 import dayjs from "dayjs";
 import LayIcon from "../icon/index";
 import LayInput from "../input/index.vue";

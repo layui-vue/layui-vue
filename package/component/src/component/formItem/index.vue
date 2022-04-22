@@ -5,7 +5,6 @@ export default {
 </script>
 
 <script setup lang="ts">
-import "./index.less";
 import {
   inject,
   withDefaults,

@@ -8,58 +8,6 @@
 const matchComponents = [
   // done
   {
-    pattern: /^LayButton$/,
-    styleDir: "button",
-  },
-  {
-    pattern: /^LayButtonContainer$/,
-    styleDir: "container",
-  },
-  {
-    pattern: /^LayButtonGroup$/,
-    styleDir: "buttonGroup",
-  },
-  {
-    pattern: /^LayContainer$/,
-    styleDir: "container",
-  },
-  {
-    pattern: /^LayCard$/,
-    styleDir: "card",
-  },
-  {
-    pattern: /^LayPanel$/,
-    styleDir: "panel",
-  },
-  {
-    pattern: /^LayFooter$/,
-    styleDir: "footer",
-  },
-  {
-    pattern: /^LayBody$/,
-    styleDir: "body",
-  },
-  {
-    pattern: /^LayEmpty$/,
-    styleDir: "empty",
-  },
-  {
-    pattern: /^LayBadge$/,
-    styleDir: "badge",
-  },
-  {
-    pattern: /^(LayHeader)$/,
-    styleDir: "header",
-  },
-  {
-    pattern: /^LayLogo$/,
-    styleDir: "logo",
-  },
-  {
-    pattern: /^LayLayout$/,
-    styleDir: "layout",
-  },
-  {
     pattern: /^LayAvatar$/,
     styleDir: "avatar",
   },
@@ -68,12 +16,16 @@ const matchComponents = [
     styleDir: "avatar",
   },
   {
-    pattern: /^LayRow$/,
-    styleDir: "row",
+    pattern: /^LayBackTop$/,
+    styleDir: "backTop",
   },
   {
-    pattern: /^LayCol$/,
-    styleDir: "row",
+    pattern: /^LayBadge$/,
+    styleDir: "badge",
+  },
+  {
+    pattern: /^LayBody$/,
+    styleDir: "body",
   },
   {
     pattern: /^LayBreadcrumb$/,
@@ -84,20 +36,212 @@ const matchComponents = [
     styleDir: "breadcrumb",
   },
   {
-    pattern: /^LayScroll$/,
-    styleDir: "scroll",
+    pattern: /^LayButton$/,
+    styleDir: "button",
   },
   {
-    pattern: /^LayResult$/,
-    styleDir: "result",
+    pattern: /^LayButtonContainer$/,
+    styleDir: "buttonContainer",
+  },
+  {
+    pattern: /^LayButtonGroup$/,
+    styleDir: "buttonGroup",
+  },
+  {
+    pattern: /^LayCard$/,
+    styleDir: "card",
+  },
+  {
+    pattern: /^(LayCarouselItem)$/,
+    styleDir: "carousel",
+  },
+  {
+    pattern: /^(LayCarousel)$/,
+    styleDir: "carousel",
+  },
+  {
+    pattern: /^(LayCheckboxGroup)$/,
+    styleDir: "checkbox",
+  },
+  {
+    pattern: /^(LayCheckbox)$/,
+    styleDir: "checkbox",
+  },
+  {
+    pattern: /^LayRow$/,
+    styleDir: "row",
+  },
+  {
+    pattern: /^LayCol$/,
+    styleDir: "row",
+  },
+  {
+    pattern: /^(LayCollapseItem)$/,
+    styleDir: "collapse",
+  },
+  {
+    pattern: /^(LayCollapse)$/,
+    styleDir: "collapse",
+  },
+  {
+    pattern: /^(LayColorPicker)$/,
+    styleDir: "colorPicker",
+  },
+  {
+    pattern: /^LayContainer$/,
+    styleDir: "container",
+  },
+  {
+    pattern: /^LayCountUp$/,
+    styleDir: "",
+  },
+  {
+    pattern: /^LayDatePicker$/,
+    styleDir: "datePicker",
+  },
+  {
+    pattern: /^(LayDropdownMenuItem)$/,
+    styleDir: "dropdown",
+  },
+  {
+    pattern: /^(LayDropdownMenu)$/,
+    styleDir: "dropdown",
+  },
+  {
+    pattern: /^(LayDropdown)$/,
+    styleDir: "dropdown",
+  },
+  {
+    pattern: /^LayEmpty$/,
+    styleDir: "empty",
+  },
+  {
+    pattern: /^LayException$/,
+    styleDir: "exception",
+  },
+  {
+    pattern: /^LayField$/,
+    styleDir: "field",
+  },
+  {
+    pattern: /^LayFooter$/,
+    styleDir: "footer",
+  },
+  {
+    pattern: /^(LayFormItem)$/,
+    styleDir: "form",
+  },
+  {
+    pattern: /^(LayForm)$/,
+    styleDir: "form",
+  },
+  {
+    pattern: /^(LayFullscreen)$/,
+    styleDir: "fullscreen",
+  },
+  {
+    pattern: /^(LayHeader)$/,
+    styleDir: "header",
+  },
+  {
+    pattern: /^(LayIconPicker)$/,
+    styleDir: "iconPicker",
+  },
+  {
+    pattern: /^(LayInput)$/,
+    styleDir: "input",
+  },
+  {
+    pattern: /^(LayInputNumber)$/,
+    styleDir: "inputNumber",
+  },
+  {
+    pattern: /^LayLayout$/,
+    styleDir: "layout",
+  },
+  {
+    pattern: /^LayLine$/,
+    styleDir: "line",
+  },
+  {
+    pattern: /^LayLogo$/,
+    styleDir: "logo",
+  },
+  {
+    pattern: /^(LayMenu|LayMenuItem|LaySubMenu)$/,
+    styleDir: "menu",
   },
   {
     pattern: /^LayNoticeBar$/,
     styleDir: "noticeBar",
   },
   {
-    pattern: /^LayLine$/,
-    styleDir: "line",
+    pattern: /^LayPage$/,
+    styleDir: "page",
+  },
+  {
+    pattern: /^LayPanel$/,
+    styleDir: "panel",
+  },
+  {
+    pattern: /^LayProgress$/,
+    styleDir: "progress",
+  },
+  {
+    pattern: /^LayQuote$/,
+    styleDir: "quote",
+  },
+  {
+    pattern: /^LayRadio$/,
+    styleDir: "radio",
+  },
+  {
+    pattern: /^LayRate$/,
+    styleDir: "rate",
+  },
+  {
+    pattern: /^LayResult$/,
+    styleDir: "result",
+  },
+  {
+    pattern: /^LayRipple$/,
+    styleDir: "ripple",
+  },
+  {
+    pattern: /^LayScroll$/,
+    styleDir: "scroll",
+  },
+  {
+    pattern: /^LaySelectOption$/,
+    styleDir: "select",
+  },
+  {
+    pattern: /^LaySelect$/,
+    styleDir: "select",
+  },
+  {
+    pattern: /^LaySide$/,
+    styleDir: "side",
+  },
+  {
+    pattern: /^LaySkeletonItem$/,
+    styleDir: "skeleton",
+  },
+  {
+    pattern: /^LaySkeleton$/,
+    styleDir: "skeleton",
+  },
+  {
+    pattern: /^LaySlider$/,
+    styleDir: "slider",
+  },
+  {
+    pattern: /^LaySplitPanelItem$/,
+    styleDir: "splitPanel",
+  },
+  {
+    pattern: /^LaySplitPanel$/,
+    styleDir: "splitPanel",
   },
   {
     pattern: /^LayStepItem$/,
@@ -107,76 +251,49 @@ const matchComponents = [
     pattern: /^LayStep$/,
     styleDir: "step",
   },
-  // ....
-  {
-    pattern: /^(LayCarousel|LayCarouselItem)$/,
-    styleDir: "",
-  },
-  {
-    pattern: /^(LayCheckbox|LayCheckboxGroup)$/,
-    styleDir: "",
-  },
-  {
-    pattern: /^(LayCollapse|LayCollapseItem)$/,
-    styleDir: "",
-  },
-  // 无 css
-  {
-    pattern: /^LayCountUp$/,
-    styleDir: "",
-  },
-  {
-    pattern: /^(LayDropdown|LayDropdownItem)$/,
-    styleDir: "",
-  },
-  // 可能有未拆分的
-  {
-    pattern: /^(LayForm|LayFormItem)$/,
-    styleDir: "formItem",
-  },
-  {
-    pattern: /^(LayMenuItem|LaySubMenu)$/,
-    styleDir: "menu",
-  },
-  {
-    pattern: /^LayPage$/,
-    styleDir: "",
-  },
-  {
-    pattern: /^LayProgress$/,
-    styleDir: "",
-  },
-  {
-    pattern: /^LayRadio$/,
-    styleDir: "",
-  },
-  {
-    pattern: /^LaySelectOption$/,
-    styleDir: "select",
-  },
-  {
-    pattern: /^LaySkeletonItem$/,
-    styleDir: "skeleton",
-  },
-  {
-    pattern: /^LaySplitPanelItem$/,
-    styleDir: "splitPanel",
-  },
   {
     pattern: /^LaySwitch$/,
-    styleDir: "",
+    styleDir: "switch",
   },
   {
     pattern: /^(LayTab|LayTabItem)$/,
-    styleDir: "",
+    styleDir: "tab",
+  },
+  {
+    pattern: /^(LayTable)$/,
+    styleDir: "table",
+  },
+  {
+    pattern: /^(LayTextarea)$/,
+    styleDir: "textarea",
   },
   {
     pattern: /^LayTimelineItem$/,
     styleDir: "timeline",
   },
   {
+    pattern: /^LayTimeline$/,
+    styleDir: "timeline",
+  },
+  {
     pattern: /^LayTolltip$/,
     styleDir: "popper",
+  },
+  {
+    pattern: /^LayTransfer$/,
+    styleDir: "transfer",
+  },
+  {
+    pattern: /^LayTransition$/,
+    styleDir: "transition",
+  },
+  {
+    pattern: /^LayTree$/,
+    styleDir: "tree",
+  },
+  {
+    pattern: /^LayUpload$/,
+    styleDir: "upload",
   },
 ];
 

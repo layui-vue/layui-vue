@@ -25,6 +25,7 @@ const dropdownRef = ref<null | HTMLElement>(null);
 const dropdownX = ref<number | string>(0);
 const dropdownY = ref<number | string>("auto");
 
+// @ts-ignore
 onClickOutside(dropdownRef, (event) => {
   openState.value = false;
 });
