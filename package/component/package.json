@@ -20,11 +20,10 @@
       "import": "./esm/index.js"
     },
     "./lib/": "./lib/",
-    "./es/": "./es/"
+    "./esm/": "./esm/"
   },
   "scripts": {
-    "build": "npm run build:all && npm run build:es && npm run build:esm && npm run build:umd && npm run build:types",
-    "build:es": "vite build --emptyOutDir --config ./script/build.es.ts",
+    "build": "npm run build:all && npm run build:esm && npm run build:umd && npm run build:types",
     "build:esm": "vite build --emptyOutDir --config ./script/build.esm.ts",
     "build:all": "vite build --emptyOutDir --config ./script/build.all.ts",
     "build:umd": "vite build --emptyOutDir --config ./script/build.umd.ts",
@@ -60,7 +59,7 @@
   },
   "files": [
     "lib",
-    "es",
+    "esm",
     "umd",
     "types"
   ],

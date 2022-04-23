@@ -324,7 +324,7 @@ export interface LayuiVueResolverOptions {
 const libRE = /^Lay[A-Z]/;
 const layerRE = /^(layer|LayLayer)$/;
 const iconsRE = /^([A-Z][\w]+Icon|LayIcon)$/;
-const esComponentsFolder = "@layui/layui-vue/es";
+const esComponentsFolder = "@layui/layui-vue/esm";
 
 function lowerCamelCase(str: string) {
   return str.charAt(0).toLowerCase() + str.slice(1);

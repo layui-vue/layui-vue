@@ -59,9 +59,7 @@ export default (): UserConfigExport => {
           globals: {
             vue: "Vue",
           },
-          manualChunks(id) {   
-            console.log("mmmmm",id);
-                   
+          manualChunks(id) {                      
             let arr = id.toString().split('/');
             if (id.includes('node_modules')) {
               //id => layui-vue/node_modules/.pnpm/@vue+devtools-api@6.1.4/node_modules/@vue/devtools-api/lib/esm/api/app.js
