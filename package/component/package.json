@@ -5,7 +5,7 @@
   "license": "MIT",
   "description": "a component library for Vue 3 base on layui-vue",
   "homepage": "http://www.layui-vue.com",
-  "main": "es/index.js",
+  "main": "esm/index.js",
   "unpkg": "umd/index.js",
   "jsdelivr": "umd/index.js",
   "types": "types/index.d.ts",
@@ -17,14 +17,15 @@
   ],
   "exports": {
     ".": {
-      "import": "./es/index.js"
+      "import": "./esm/index.js"
     },
     "./lib/": "./lib/",
     "./es/": "./es/"
   },
   "scripts": {
-    "build": "npm run build:all && npm run build:es && npm run build:umd && npm run build:types",
+    "build": "npm run build:all && npm run build:es && npm run build:esm && npm run build:umd && npm run build:types",
     "build:es": "vite build --emptyOutDir --config ./script/build.es.ts",
+    "build:esm": "vite build --emptyOutDir --config ./script/build.esm.ts",
     "build:all": "vite build --emptyOutDir --config ./script/build.all.ts",
     "build:umd": "vite build --emptyOutDir --config ./script/build.umd.ts",
     "build:types": "rimraf types && tsc -d"

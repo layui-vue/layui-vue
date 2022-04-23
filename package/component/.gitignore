@@ -5,6 +5,7 @@ example/dist/
 lib/
 es/
 umd/
+esm/
 /types/
 npm-debug.log*
 yarn-debug.log*
