@@ -51,3 +51,4 @@ module.exports = {
       'vue/script-setup-uses-vars': 'off'
     }
   }
+  

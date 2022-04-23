@@ -15,7 +15,7 @@
     "lint:prettier": "prettier --write \"package/**/*.{vue,ts}\"",
     "postinstall": "npm run build",
     "prepare": "husky install",
-    "commit": "git-cz && git push"
+    "commit": "git add . && git-cz && git push"
   },
   "dependencies": {
     "@layui/layui-vue": "workspace:*",
