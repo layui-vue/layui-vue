@@ -21,8 +21,16 @@ const inputs = inputsArray.reduce((backObj, pkgName) => {
 
 inputs["index"] = resolve(process.cwd(), "./src/index.ts");
 const matchModule: string[] = [
-  'input', 'dropdown', 'carousel', 'transition', 'datePicker', 'header',
-  'selectOption', 'skeletonItem', 'tabItem', 'upload'
+  "input",
+  "dropdown",
+  "carousel",
+  "transition",
+  "datePicker",
+  "header",
+  "selectOption",
+  "skeletonItem",
+  "tabItem",
+  "upload",
 ];
 
 export default (): UserConfigExport => {
@@ -48,7 +56,7 @@ export default (): UserConfigExport => {
     build: {
       cssCodeSplit: true,
       emptyOutDir: true,
-      outDir: "esm",
+      outDir: "es",
       lib: {
         entry: resolve(process.cwd(), "./src/index.ts"),
         formats: ["es"],
@@ -59,28 +67,32 @@ export default (): UserConfigExport => {
           globals: {
             vue: "Vue",
           },
-          manualChunks(id) {                      
-            let arr = id.toString().split('/');
-            if (id.includes('node_modules')) {
+          manualChunks(id) {
+            let arr = id.toString().split("/");
+            if (id.includes("node_modules")) {
               //id => layui-vue/node_modules/.pnpm/@vue+devtools-api@6.1.4/node_modules/@vue/devtools-api/lib/esm/api/app.js
               const chunksName = "_chunks/";
-              return chunksName + id.toString().split('node_modules/')[2].split('/')[0].toString();
-            } else if (arr.length >= 2){
+              return (
+                chunksName +
+                id.toString().split("node_modules/")[2].split("/")[0].toString()
+              );
+            } else if (arr.length >= 2) {
               //if (arr.length >= 2 && arr[arr.length - 1].split('.')[1] != 'ts'){
-              let entryPoint = arr[arr.length - 2].toString()
+              let entryPoint = arr[arr.length - 2].toString();
               if (matchModule.includes(entryPoint)) {
                 return entryPoint;
               }
             }
           },
           chunkFileNames: ({ name }) => {
+            console.log(name);
             return name === "index" ? "index.js" : "[name]/index.js";
           },
           entryFileNames: ({ name }) => {
             return name === "index" ? "index.js" : "[name]/index.js";
           },
           assetFileNames: "[name]/index.css",
-        },        
+        },
         external: ["vue", "vue-router"],
       },
     },
