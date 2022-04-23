@@ -59,10 +59,16 @@ export default (): UserConfigExport => {
           globals: {
             vue: "Vue",
           },
-          manualChunks(id) {          
+          manualChunks(id) {   
+            console.log("mmmmm",id);
+                   
             let arr = id.toString().split('/');
-            if (arr.length >= 2) {
-            //if (arr.length >= 2 && arr[arr.length - 1].split('.')[1] != 'ts'){
+            if (id.includes('node_modules')) {
+              //id => layui-vue/node_modules/.pnpm/@vue+devtools-api@6.1.4/node_modules/@vue/devtools-api/lib/esm/api/app.js
+              const chunksName = "_chunks/";
+              return chunksName + id.toString().split('node_modules/')[2].split('/')[0].toString();
+            } else if (arr.length >= 2){
+              //if (arr.length >= 2 && arr[arr.length - 1].split('.')[1] != 'ts'){
               let entryPoint = arr[arr.length - 2].toString()
               if (matchModule.includes(entryPoint)) {
                 return entryPoint;
