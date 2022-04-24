@@ -31,6 +31,10 @@ const matchModule: string[] = [
   "skeletonItem",
   "tabItem",
   "upload",
+  "checkbox",
+  "badge",
+  "button",
+  "tooltip",
 ];
 
 export default (): UserConfigExport => {

@@ -18,6 +18,7 @@ import {
   Ref,
 } from "vue";
 import LayScroll from "../scroll";
+import LayBadge from "../badge/index.vue";
 import { onClickOutside } from "@vueuse/core";
 import { SelectItem } from "../../types";
 

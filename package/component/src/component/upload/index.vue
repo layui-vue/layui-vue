@@ -19,6 +19,7 @@ import {
 } from "vue";
 import { templateRef } from "@vueuse/core";
 import { LayLayer } from "@layui/layer-vue";
+import LayButton from "../button/index.vue";
 import Cropper from "cropperjs";
 // 组件的参数字段类型
 //https://www.layuiweb.com/doc/modules/upload.html#options

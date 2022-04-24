@@ -6,6 +6,7 @@ export default {
 
 <script setup lang="ts">
 import { withDefaults } from "vue";
+import { LayIcon } from "@layui/icons-vue";
 
 export interface LaySkeletonProps {
   type?: string;

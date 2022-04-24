@@ -8,11 +8,11 @@
       class="layui-notice-bar-warp"
       :style="{ color, fontSize: `${size}px` }"
     >
-      <lay-icon
+      <LayIcon
         v-if="leftIcon"
         class="layui-notice-bar-warp-left-icon"
         :type="leftIcon"
-      ></lay-icon>
+      ></LayIcon>
       <div
         class="layui-notice-bar-warp-text-box"
         ref="noticeBarWarpRef"
@@ -45,12 +45,12 @@
           <!-- <slot />   -->
         </div>
       </div>
-      <lay-icon
+      <LayIcon
         :type="rightIcon"
         v-if="rightIcon"
         class="layui-notice-bar-warp-right-icon"
         @click="onRightIconClick"
-      ></lay-icon>
+      ></LayIcon>
     </div>
   </div>
 </template>
@@ -65,10 +65,14 @@ import {
   nextTick,
 } from "vue";
 import LayCarousel from "../carousel/index.vue";
+import LayCarouselItem from "../carouselItem/index.vue";
+import { LayIcon } from "@layui/icons-vue";
 export default defineComponent({
   name: "LayNoticeBar",
   components: {
     LayCarousel,
+    LayCarouselItem,
+    LayIcon,
   },
   props: {
     mode: {

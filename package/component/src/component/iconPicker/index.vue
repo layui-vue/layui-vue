@@ -8,6 +8,7 @@ export default {
 import "./index.less";
 import { Ref, ref } from "vue";
 import { LayIconList as icons } from "@layui/icons-vue";
+import LayDropdown from "../dropdown/index.vue";
 
 export interface LayIconPickerProps {
   page?: boolean;

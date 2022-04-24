@@ -15,7 +15,7 @@ import {
   reactive,
   withDefaults,
 } from "vue";
-
+import { LayIcon } from "@layui/icons-vue";
 import type { ComputedRef } from "vue";
 
 export interface LayStepItemProps {

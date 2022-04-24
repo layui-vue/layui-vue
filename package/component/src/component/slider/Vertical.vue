@@ -2,6 +2,7 @@
 import { Ref, ref } from "vue";
 import { on, off } from "evtd";
 import { throttle } from "./utils/index";
+import LayTooltip from "../tooltip/index.vue";
 
 interface Prop {
   val?: number | Array<number>;

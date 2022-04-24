@@ -7,6 +7,8 @@ export default {
 <script setup lang="ts">
 import "./index.less";
 import LayScroll from "../scroll";
+import LayButton from "../button/index.vue";
+import LayCheckbox from "../checkbox/index.vue";
 import { Ref, ref, useSlots, watch } from "vue";
 import { BooleanOrString, Recordable } from "../../types";
 
@@ -165,14 +167,14 @@ const searchRight = (e: any) => {
     <div class="layui-transfer layui-form layui-border-box">
       <div class="layui-transfer-box" style="width: 200px; height: 360px">
         <div class="layui-transfer-header">
-          <lay-checkbox
+          <LayCheckbox
             v-model="allLeftChecked"
             skin="primary"
             label="all"
             @change="allLeftChange"
           >
             <span>{{ title[0] }}</span>
-          </lay-checkbox>
+          </LayCheckbox>
         </div>
         <div class="layui-transfer-search" v-if="showSearch">
           <i class="layui-icon layui-icon-search"></i
@@ -185,41 +187,41 @@ const searchRight = (e: any) => {
         </div>
         <ul class="layui-transfer-data" style="height: 320px">
           <li v-for="dataSource in leftDataSource" :key="dataSource">
-            <lay-checkbox
+            <LayCheckbox
               v-model="leftSelectedKeys"
               skin="primary"
               :label="dataSource[id]"
             >
               <slot v-if="slot.item" name="item" :data="dataSource"></slot>
               <span v-else>{{ dataSource.title }}</span>
-            </lay-checkbox>
+            </LayCheckbox>
           </li>
         </ul>
       </div>
       <div class="layui-transfer-active">
-        <lay-button
+        <LayButton
           type="primary"
           :disabled="leftSelectedKeys.length == 0"
           @click="add"
           ><i class="layui-icon layui-icon-next"></i
-        ></lay-button>
-        <lay-button
+        ></LayButton>
+        <LayButton
           type="primary"
           :disabled="rightSelectedKeys.length == 0"
           @click="remove"
           ><i class="layui-icon layui-icon-prev"></i
-        ></lay-button>
+        ></LayButton>
       </div>
       <div class="layui-transfer-box" style="width: 200px; height: 360px">
         <div class="layui-transfer-header">
-          <lay-checkbox
+          <LayCheckbox
             v-model="allRightChecked"
             skin="primary"
             label="all"
             @change="allRightChange"
           >
             <span>{{ title[1] }}</span>
-          </lay-checkbox>
+          </LayCheckbox>
         </div>
         <div class="layui-transfer-search" v-if="showSearch">
           <i class="layui-icon layui-icon-search"></i
@@ -232,14 +234,14 @@ const searchRight = (e: any) => {
         </div>
         <ul class="layui-transfer-data" style="height: 320px">
           <li v-for="dataSource in rightDataSource" :key="dataSource">
-            <lay-checkbox
+            <LayCheckbox
               v-model="rightSelectedKeys"
               skin="primary"
               :label="dataSource[id]"
             >
               <slot v-if="slot.item" name="item" :data="dataSource"></slot>
               <span v-else>{{ dataSource.title }}</span>
-            </lay-checkbox>
+            </LayCheckbox>
           </li>
         </ul>
       </div>
