@@ -36,6 +36,7 @@ export interface LaySelectProps {
 
 const selectRef = ref<null | HTMLElement>(null);
 
+// @ts-ignore
 onClickOutside(selectRef, (event) => {
   openState.value = false;
 });

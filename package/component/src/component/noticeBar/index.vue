@@ -56,6 +56,12 @@
 </template>
 
 <script lang="ts">
+export default {
+  name: "LayNoticeBar",
+};
+</script>
+
+<script lang="ts" setup>
 import {
   toRefs,
   reactive,
@@ -67,147 +73,101 @@ import {
 import LayCarousel from "../carousel/index.vue";
 import LayCarouselItem from "../carouselItem/index.vue";
 import { LayIcon } from "@layui/icons-vue";
-export default defineComponent({
-  name: "LayNoticeBar",
-  components: {
-    LayCarousel,
-    LayCarouselItem,
-    LayIcon,
-  },
-  props: {
-    mode: {
-      type: String,
-      default: () => "",
+
+export interface LayNoticeBarProps {
+  mode?: string;
+  text?: string;
+  textlist?: string[];
+  color?: Function;
+  background?: Function;
+  size?: number | string;
+  height?: number | string;
+  delay?: number;
+  speed?: number;
+  scrollable?: boolean;
+  leftIcon?: string;
+  rightIcon?: string;
+}
+
+const props = withDefaults(defineProps<LayNoticeBarProps>(), {
+  color: () => "var(--color-warning)",
+  background: () => "var(--color-warning-light-9)",
+  text: "",
+  textlist: () => [],
+  size: 14,
+  height: 40,
+  delay: 1,
+  speed: 100,
+  scrollable: false,
+});
+
+const emit = defineEmits(["close", "link"]);
+
+const noticeBarWarpRef = ref();
+const noticeBarTextRef = ref();
+//@ts-ignore
+const active = ref(props.textlist[0]?.id);
+const state = reactive({
+  order: 1,
+  oneTime: 0,
+  twoTime: 0,
+  warpOWidth: 0,
+  textOWidth: 0,
+  isMode: false,
+  height: 40,
+});
+// 初始化 animation 各项参数
+const initAnimation = () => {
+  nextTick(() => {
+    state.warpOWidth = noticeBarWarpRef.value.offsetWidth;
+    state.textOWidth = noticeBarTextRef.value.offsetWidth;
+    computeAnimationTime();
+    setTimeout(() => {
+      changeAnimation();
+    }, props.delay * 1000);
+  });
+};
+// 计算 animation 滚动时长
+const computeAnimationTime = () => {
+  state.oneTime = state.textOWidth / props.speed;
+  state.twoTime = (state.textOWidth + state.warpOWidth) / props.speed;
+};
+// 改变 animation 动画调用
+const changeAnimation = () => {
+  if (state.order === 1) {
+    //noticeBarTextRef.value.style.cssText = `animation: oneAnimation ${state.oneTime}s linear; opactity: 1;}`;
+    noticeBarTextRef.value.style.cssText = `animation: around1 ${state.oneTime}s  linear; opactity: 1;`;
+    state.order = 2;
+  } else {
+    noticeBarTextRef.value.style.cssText = `animation: around2 ${state.twoTime}s linear  ; opactity: 1;`;
+    state.order = 1;
+  }
+};
+// 监听 animation 动画的结束
+const listenerAnimationend = () => {
+  noticeBarTextRef.value.addEventListener(
+    "animationend",
+    () => {
+      changeAnimation();
     },
-    text: {
-      type: String,
-      default: () => "",
-    },
-    textlist: {
-      type: Array,
-      default: [],
-    },
-    // 通知文本颜色
-    color: {
-      type: String,
-      default: () => "var(--color-warning)",
-    },
-    // 通知背景色
-    background: {
-      type: String,
-      default: () => "var(--color-warning-light-9)",
-    },
-    // 字体大小，单位px
-    size: {
-      type: [Number, String],
-      default: () => 14,
-    },
-    // 通知栏高度，单位px
-    height: {
-      type: Number,
-      default: () => 40,
-    },
-    // 动画延迟时间 (s)
-    delay: {
-      type: Number,
-      default: () => 1,
-    },
-    // 滚动速率 (px/s)
-    speed: {
-      type: Number,
-      default: () => 100,
-    },
-    // 是否开启垂直滚动
-    scrollable: {
-      type: Boolean,
-      default: () => false,
-    },
-    // 自定义左侧图标
-    leftIcon: {
-      type: String,
-      default: () => "",
-    },
-    // 自定义右侧图标
-    rightIcon: {
-      type: String,
-      default: () => "",
-    },
-  },
-  setup(props, { emit }) {
-    const noticeBarWarpRef = ref();
-    const noticeBarTextRef = ref();
-    //@ts-ignore
-    const active = ref(props.textlist[0]?.id);
-    const state = reactive({
-      order: 1,
-      oneTime: 0,
-      twoTime: 0,
-      warpOWidth: 0,
-      textOWidth: 0,
-      isMode: false,
-      height: 40,
-    });
-    // 初始化 animation 各项参数
-    const initAnimation = () => {
-      nextTick(() => {
-        state.warpOWidth = noticeBarWarpRef.value.offsetWidth;
-        state.textOWidth = noticeBarTextRef.value.offsetWidth;
-        computeAnimationTime();
-        setTimeout(() => {
-          changeAnimation();
-        }, props.delay * 1000);
-      });
-    };
-    // 计算 animation 滚动时长
-    const computeAnimationTime = () => {
-      state.oneTime = state.textOWidth / props.speed;
-      state.twoTime = (state.textOWidth + state.warpOWidth) / props.speed;
-    };
-    // 改变 animation 动画调用
-    const changeAnimation = () => {
-      if (state.order === 1) {
-        //noticeBarTextRef.value.style.cssText = `animation: oneAnimation ${state.oneTime}s linear; opactity: 1;}`;
-        noticeBarTextRef.value.style.cssText = `animation: around1 ${state.oneTime}s  linear; opactity: 1;`;
-        state.order = 2;
-      } else {
-        noticeBarTextRef.value.style.cssText = `animation: around2 ${state.twoTime}s linear  ; opactity: 1;`;
-        state.order = 1;
-      }
-    };
-    // 监听 animation 动画的结束
-    const listenerAnimationend = () => {
-      noticeBarTextRef.value.addEventListener(
-        "animationend",
-        () => {
-          changeAnimation();
-        },
-        false
-      );
-    };
-    // 右侧 icon 图标点击
-    const onRightIconClick = () => {
-      if (!props.mode) return false;
-      if (props.mode === "closeable") {
-        state.isMode = true;
-        emit("close");
-      } else if (props.mode === "link") {
-        emit("link");
-      }
-    };
-    // 页面加载时
-    onMounted(() => {
-      if (props.scrollable) return false;
-      initAnimation();
-      listenerAnimationend();
-    });
-    return {
-      noticeBarWarpRef,
-      noticeBarTextRef,
-      onRightIconClick,
-      ...toRefs(state),
-      active,
-    };
-  },
+    false
+  );
+};
+// 右侧 icon 图标点击
+const onRightIconClick = () => {
+  if (!props.mode) return false;
+  if (props.mode === "closeable") {
+    state.isMode = true;
+    emit("close");
+  } else if (props.mode === "link") {
+    emit("link");
+  }
+};
+// 页面加载时
+onMounted(() => {
+  if (props.scrollable) return false;
+  initAnimation();
+  listenerAnimationend();
 });
 </script>
 
