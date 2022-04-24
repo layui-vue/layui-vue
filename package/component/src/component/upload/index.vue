@@ -317,6 +317,7 @@ const getUploadChange = (e: any) => {
     setTimeout(() => {
       let _imgs = document.getElementsByClassName("_lay_upload_img");
       let _img = _imgs[0];
+      // @ts-ignore
       _cropper = new Cropper(_img, {
         aspectRatio: 16 / 9,
       });
