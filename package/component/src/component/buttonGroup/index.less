@@ -1,8 +1,7 @@
-@import (reference) "../../theme/variable.less";
-@import (reference) "../../theme/public.less";
-
-@button-primary-color: @global-primary-color;
-@button-border-radius: @global-border-radius;
+:root {
+  --button-primary-color: var(--global-primary-color);
+  --button-border-radius: var(--global-border-radius);
+}
 
 .layui-btn-group {
   vertical-align: middle;
@@ -20,11 +19,11 @@
 }
 
 .layui-btn-group .layui-btn:first-child {
-  border-radius: @button-border-radius 0 0 @button-border-radius;
+  border-radius: var(--button-border-radius) 0 0 var(--button-border-radius);
 }
 
 .layui-btn-group .layui-btn:last-child {
-  border-radius: 0 @button-border-radius @button-border-radius 0;
+  border-radius: 0 var(--button-border-radius) var(--button-border-radius) 0;
 }
 
 .layui-btn-group .layui-btn + .layui-btn {

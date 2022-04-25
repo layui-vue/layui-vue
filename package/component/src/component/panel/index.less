@@ -1,19 +1,13 @@
-@import (reference) "../../theme/variable.less";
-@import (reference) "../../theme/public.less";
-
-@panel-border-color: var(--panel-border-color);
-@panel-border-radius: var(--panel-border-radius);
-
 :root {
-  --panel-border-color: @global-neutral-color-3;
-  --panel-border-radius: @global-border-radius;
+  --panel-border-color: var(--global-neutral-color-3);
+  --panel-border-radius: var(--global-border-radius);
 }
 
 .layui-panel {
   border-width: 1px;
   border-style: solid;
-  border-radius: @panel-border-radius;
-  border-color: @panel-border-color;
+  border-radius: var(--panel-border-radius);
+  border-color: var(--panel-border-color);
   background-color: #fff;
 }
 

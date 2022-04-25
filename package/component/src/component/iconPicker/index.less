@@ -1,12 +1,6 @@
-@import (reference) "../../theme/variable.less";
-@import (reference) "../../theme/public.less";
-
-@icon-picker-border-radius: var(--icon-picker-border-radius);
-@icon-picker-checked-color: var(--icon-picker-checked-color);
-
 :root {
-    --icon-picker-border-radius: @global-border-radius;
-    --icon-picker-checked-color: @global-checked-color;
+    --icon-picker-border-radius: var(--global-border-radius);
+    --icon-picker-checked-color: var(--global-checked-color);
 }
 
 .layui-iconpicker {
@@ -15,7 +9,7 @@
   line-height: 38px;
   border-width: 1px;
   border-style: solid;
-  border-radius: @icon-picker-border-radius;
+  border-radius: var(--icon-picker-border-radius);
   cursor: pointer;
 }
 
@@ -95,13 +89,13 @@
 }
 
 .layui-iconpicker-list li:hover {
-  background-color: @global-neutral-color-1;
+  background-color: var(--global-neutral-color-1);
   color: rgba(0, 0, 0, 0.5);
 }
 
 .layui-iconpicker-list li.layui-this {
-  border-color: @icon-picker-checked-color;
-  color: @icon-picker-checked-color;
+  border-color: var(--icon-picker-checked-color);
+  color: var(--icon-picker-checked-color);
 }
 
 .layui-iconpicker-list li .layui-icon {

@@ -1,8 +1,5 @@
-@import (reference) "../../theme/variable.less";
-@import (reference) "../../theme/public.less";
-
 @border-color: #eee;
-@hover-border-color: @global-primary-color;
+@hover-border-color: var(--global-primary-color);
 @lg: 40px;
 @lg-wdith: 200px;
 @lg-right: 20px;
@@ -51,7 +48,7 @@
   box-sizing: border-box;
   border: 1px solid @border-color;
   border-color: @border-color;
-  border-radius: @global-border-radius;
+  border-radius: var(--global-border-radius);
   overflow: hidden;
   .set-size(@lg-wdith, @lg, @lg-right);
   margin-left: 5px;

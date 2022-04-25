@@ -1,21 +1,15 @@
-@import (reference) "../../theme/variable.less";
-@import (reference) "../../theme/public.less";
-
-@block-default-color: var(--block-default-color);
-@block-border-radius: var(--block-border-radius);
-
 :root {
-  --block-default-color: @global-checked-color;
-  --block-border-radius: @global-border-radius;
+  --block-default-color: var(--global-checked-color);
+  --block-border-radius: var(--global-border-radius);
 }
 
 .layui-quote {
   padding: 15px;
   line-height: 1.6;
   margin-bottom: 10px;
-  border-left: 5px solid @block-default-color;
-  border-radius: @block-border-radius;
-  background-color: @global-neutral-color-1;
+  border-left: 5px solid var(--block-default-color);
+  border-radius: var(--block-border-radius);
+  background-color: var(--global-neutral-color-1);
 }
 
 .layui-quote-nm {

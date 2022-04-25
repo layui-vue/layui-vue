@@ -89,7 +89,6 @@ export default (): UserConfigExport => {
             }
           },
           chunkFileNames: ({ name }) => {
-            console.log(name);
             return name === "index" ? "index.js" : "[name]/index.js";
           },
           entryFileNames: ({ name }) => {
