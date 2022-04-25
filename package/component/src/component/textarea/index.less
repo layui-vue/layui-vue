@@ -1,12 +1,6 @@
-@import (reference) "../../theme/variable.less";
-@import (reference) "../../theme/public.less";
-
-@textarea-border-radius: var(--textarea-border-radius);
-@textarea-border-color: var(--textarea-border-color);
-
 :root {
-  --textarea-border-radius: @global-border-radius;
-  --textarea-border-color: @global-neutral-color-3;
+  --textarea-border-radius: var(--global-border-radius);
+  --textarea-border-color: var(--global-neutral-color-3);
 }
 
 .layui-textarea {
@@ -14,8 +8,8 @@
   border-style: solid;
   background-color: #fff;
   color: rgba(0, 0, 0, 0.85);
-  border-radius: @textarea-border-radius;
-  border-color: @textarea-border-color;
+  border-radius: var(--textarea-border-radius);
+  border-color: var(--textarea-border-color);
   display: block;
   width: 100%;
   height: auto;

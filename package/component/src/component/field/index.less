@@ -1,19 +1,13 @@
-@import (reference) "../../theme/variable.less";
-@import (reference) "../../theme/public.less";
-
-@field-border-color: var(--field-border-color);
-@field-border-radius: var(--field-border-radius);
-
 :root {
-  --field-border-color: @global-neutral-color-3;
-  --field-border-radius: @global-border-radius;
+  --field-border-color: var(--global-neutral-color-3);
+  --field-border-radius: var(--global-border-radius);
 }
 
 .layui-field {
   margin-bottom: 10px;
   padding: 0;
   border-width: 1px;
-  border-color: @field-border-color;
+  border-color: var(--field-border-color);
   border-style: solid;
 }
 

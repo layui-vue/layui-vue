@@ -1,12 +1,6 @@
-@import (reference) "../../theme/variable.less";
-@import (reference) "../../theme/public.less";
-
-@input-border-radius: var(--input-border-radius);
-@input-border-color: var(--input-border-color);
-
 :root {
-  --input-border-radius: @global-border-radius;
-  --input-border-color: @global-neutral-color-3;
+  --input-border-radius: var(--global-border-radius);
+  --input-border-color: var(--global-neutral-color-3);
 }
 
 .layui-input {
@@ -27,8 +21,8 @@
   border-width: 1px;
   border-style: solid;
   display: inline-flex;
-  border-color: @input-border-color;
-  border-radius:  @input-border-radius;
+  border-color: var(--input-border-color);
+  border-radius:  var(--input-border-radius);
 }
 
 .layui-input-prefix {

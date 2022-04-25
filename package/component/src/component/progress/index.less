@@ -1,11 +1,8 @@
-@import (reference) "../../theme/variable.less";
-@import (reference) "../../theme/public.less";
-
 .layui-progress {
   position: relative;
   height: 6px;
   border-radius: 20px;
-  background-color: @global-neutral-color-3;
+  background-color: var(--global-neutral-color-3);
 }
 
 .layui-progress-bar {
@@ -17,7 +14,7 @@
   height: 6px;
   border-radius: 20px;
   text-align: right;
-  background-color: @global-checked-color;
+  background-color: var(--global-checked-color);
   transition: all 0.3s;
   -webkit-transition: all 0.3s;
 }

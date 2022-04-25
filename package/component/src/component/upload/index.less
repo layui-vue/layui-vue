@@ -1,17 +1,13 @@
-@import (reference) "../../theme/variable.less";
-@import (reference) "../../theme/public.less";
 @import "./cropper.min.css";
 
 .layui-upload-file {
-  // display: none !important;
   opacity: 0.01;
   position: relative;
   filter: Alpha(opacity=1);
   cursor: pointer;
-  
 }
-.layui-upload-btn-box{
-  position:relative;
+.layui-upload-btn-box {
+  position: relative;
   overflow: hidden;
 }
 .layui-upload-drag,
@@ -37,7 +33,7 @@
 .layui-upload-drag {
   position: relative;
   padding: 30px;
-  border: 1px dashed @global-neutral-color-4;
+  border: 1px dashed var(--global-neutral-color-4);
   background-color: #fff;
   text-align: center;
   cursor: pointer;
@@ -46,14 +42,14 @@
 
 .layui-upload-drag .layui-icon {
   font-size: 50px;
-  color: @global-primary-color;
+  color: var(--global-primary-color);
 }
 
 .layui-upload-drag[lay-over] {
-  border-color: @global-primary-color;
+  border-color: var(--global-primary-color);
 }
-.layui-upload-drag-draging{
-  border-color: @global-primary-color;
+.layui-upload-drag-draging {
+  border-color: var(--global-primary-color);
 }
 
 .layui-upload-iframe {
@@ -82,27 +78,27 @@
   opacity: 0.01;
   filter: Alpha(opacity=1);
 }
-.layui-upload-file-disabled{
-  cursor:not-allowed !important;
+.layui-upload-file-disabled {
+  cursor: not-allowed !important;
 }
 .layui-btn-container .layui-upload-choose {
   padding-left: 0;
 }
 
-.layui-upload-drag-disable{
-  opacity:0.8;
-  z-index:1;
+.layui-upload-drag-disable {
+  opacity: 0.8;
+  z-index: 1;
   cursor: not-allowed;
 }
 
-._lay_upload_img{
+._lay_upload_img {
   display: block;
   max-width: 100%;
 }
-.layui-upload-list-disabled{
-  width:auto;
-  height:auto;
+.layui-upload-list-disabled {
+  width: auto;
+  height: auto;
   pointer-events: none !important;
-  background-color: #fbfbfb!important;
+  background-color: #fbfbfb !important;
   filter: opacity(0.9);
 }
