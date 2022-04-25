@@ -266,7 +266,7 @@ import { ref, watch, computed, defineProps, defineEmits, onMounted } from "vue";
 
 import "./index.less";
 import dayjs from "dayjs";
-import LayIcon from "../icon/index";
+import { LayIcon } from "@layui/icons-vue";
 import LayInput from "../input/index.vue";
 import LayDropdown from "../dropdown/index.vue";
 import { getDayLength, getYears, getMonth, getYear } from "./day";

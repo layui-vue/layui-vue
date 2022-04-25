@@ -13,8 +13,7 @@ import {
   onMounted,
   onBeforeUnmount,
 } from "vue";
-import { useThrottle } from "@vueuse/core";
-import LayIcon from "../icon/index";
+import { LayIcon } from "@layui/icons-vue";
 import "./index.less";
 
 export interface LayBacktopProps {

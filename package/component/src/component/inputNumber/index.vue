@@ -5,9 +5,9 @@ export default {
 </script>
 
 <script setup lang="ts">
-import layButton from "../button/index";
-import layInput from "../input/index";
-import layIcon from "../icon/index";
+import layButton from "../button/index.vue";
+import layInput from "../input/index.vue";
+import { LayIcon } from "@layui/icons-vue";
 import "./index.less";
 import { ref, watch, withDefaults, computed } from "vue";
 

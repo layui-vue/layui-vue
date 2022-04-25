@@ -6,6 +6,7 @@ export default {
 
 <script setup lang="ts">
 import "./index.less";
+import { LayIcon } from "@layui/icons-vue";
 import { useSlots } from "vue";
 import { useI18n } from "vue-i18n";
 
