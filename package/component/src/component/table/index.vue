@@ -271,9 +271,8 @@ onMounted(() => {
                   <th
                     class="layui-table-cell"
                     :style="{
-                      width: column.width,
                       textAlign: column.align,
-                      flex: column.width ? '0 0 auto' : '1',
+                      flex: column.width ? '0 0 ' + column.width : '1',
                     }"
                     v-if="tableColumnKeys.includes(column.key)"
                   >
@@ -337,9 +336,8 @@ onMounted(() => {
                         <td
                           class="layui-table-cell"
                           :style="{
-                            width: column.width,
                             textAlign: column.align,
-                            flex: column.width ? '0 0 auto' : '1',
+                            flex: column.width ? '0 0 ' + column.width : '1',
                           }"
                         >
                           <slot :name="column.customSlot" :data="data"></slot>
@@ -355,9 +353,8 @@ onMounted(() => {
                           v-if="column.key == key"
                           class="layui-table-cell"
                           :style="{
-                            width: column.width,
                             textAlign: column.align,
-                            flex: column.width ? '0 0 auto' : '1',
+                            flex: column.width ? '0 0 ' + column.width : '1',
                           }"
                         >
                           <span> {{ value }} </span>

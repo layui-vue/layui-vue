@@ -1,6 +1,5 @@
 @import './code.css';
 @import './markdown.css';
-@import './vars.css';
 
 .layui-menu-lg li {
   line-height: 32px;
