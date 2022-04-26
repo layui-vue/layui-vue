@@ -176,7 +176,7 @@ function handleScroll() {
   margin: 0 4px;
   height: 18px;
   border-radius: 2px;
-  background-color:rgba(27, 31, 35, 0.05);
+  background-color: rgba(27, 31, 35, 0.05);
   font-size: 12px;
   line-height: 18px;
   color: var(--c-text-light);
