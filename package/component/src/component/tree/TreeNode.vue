@@ -6,8 +6,8 @@ export default {
 
 <script setup lang="ts">
 import { StringOrNumber } from "./tree.type";
-import LayIcon from "../icon";
-import LayCheckbox from "../checkbox";
+import LayIcon from "@layui/icons-vue";
+import LayCheckbox from "../checkbox/index.vue";
 import { Ref, useSlots } from "vue";
 import { Tree } from "./tree";
 import { Nullable } from "../../types";

@@ -15,7 +15,7 @@ import {
   watch,
 } from "vue";
 import { onClickOutside } from "@vueuse/core";
-import LayTransition from "../transition";
+import LayTransition from "../transition/index.vue";
 
 export interface LaySubMenuProps {
   id: string;

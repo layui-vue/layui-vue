@@ -8,10 +8,10 @@ export default {
 import { ref, watch, useSlots, withDefaults, onMounted } from "vue";
 import { v4 as uuidv4 } from "../../utils/guidUtil";
 import { Recordable } from "../../types";
-import LayCheckbox from "../checkbox";
-import LayDropdown from "../dropdown";
-import LayPage from "../page";
-import LayIcon from "../icon";
+import LayCheckbox from "../checkbox/index.vue";
+import LayDropdown from "../dropdown/index.vue";
+import LayPage from "../page/index.vue";
+import LayIcon from "@layui/icons-vue";
 import "./index.less";
 
 const tableId = uuidv4();

@@ -101,7 +101,6 @@ defineExpose({
 
 <template>
   <slot name="prefix"></slot>
-  <!-- <span style="font-family: sans-serif" /> -->
   <span>{{ displayValue }}</span>
   <slot name="suffix"></slot>
 </template>

@@ -18,7 +18,7 @@ import {
   watch,
   onMounted,
 } from "vue";
-import CarouselItem from "../carouselItem";
+import CarouselItem from "../carouselItem/index.vue";
 
 const slot = useSlots() as any;
 const slots = slot.default && (slot.default() as any[]);

@@ -172,6 +172,8 @@ onMounted(() => {
 </script>
 
 <style>
+@import "../carousel/index.less";
+
 .layui-notice-bar {
   padding: 0 15px;
   width: 100%;

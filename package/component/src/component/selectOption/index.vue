@@ -5,7 +5,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import LayCheckbox from "../checkbox";
+import LayCheckbox from "../checkbox/index.vue";
 import { SelectItem, SelectItemHandle, SelectItemPush } from "../../types";
 import { computed, inject, onMounted, Ref, ref } from "vue";
 
