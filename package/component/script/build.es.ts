@@ -35,6 +35,7 @@ const matchModule: string[] = [
   "badge",
   "button",
   "tooltip",
+  "page",
 ];
 
 export default (): UserConfigExport => {
