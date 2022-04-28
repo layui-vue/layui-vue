@@ -68,13 +68,14 @@ const changeAll = function (checked: any) {
   const ids = props.dataSource.map((item: any) => {
     return item[props.id];
   });
-  tableSelectedKeys.value.splice(0, ids.length);
+  let arr = [...tableSelectedKeys.value];
+  arr.splice(0, ids.length);
   if (checked) {
     ids.forEach((id) => {
-      tableSelectedKeys.value.push(id);
+      arr.push(id);
     });
   }
-  emit("update:selectedKeys", tableSelectedKeys.value);
+  tableSelectedKeys.value = arr;
 };
 
 watch(

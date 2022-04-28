@@ -237,7 +237,7 @@ export default {
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 
 export default {
   setup() {
@@ -286,6 +286,10 @@ export default {
     const rowDoubleClick5 = function(data) {
       console.log(JSON.stringify(data))
     }
+
+    watch(selectedKeys5, () => {
+      console.log("复选框监听:" + selectedKeys5.value);
+    })
 
     return {
       columns5,
