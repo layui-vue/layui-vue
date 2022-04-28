@@ -4,7 +4,7 @@ import en_US from "./locales/en_US";
 
 const i18n = createI18n({
   legacy: false,
-  locale: "en_US",
+  locale: "zh_CN",
   messages: {
     zh_CN: zh_CN,
     en_US: en_US,

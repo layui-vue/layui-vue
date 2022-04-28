@@ -386,20 +386,4 @@ export default {
   top: 3px;
   left: 3px;
 }
-
-@media screen and (max-width: 768px) {
-  .layui-side {
-    width: 0px !important;
-  }
-  .layui-body {
-    left: 0px !important;
-    width: 100% !important;
-  }
-  .layui-logo {
-    display: none !important;
-  }
-  .layui-layout-left {
-    left: 0px !important;
-  }
-}
 </style>
