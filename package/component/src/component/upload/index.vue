@@ -184,19 +184,19 @@ const localUploadTransaction = (option: localUploadTransaction) => {
       let _file = files[i];
       formData.append("file[" + i + "]", _file);
     }
+  }
     // 对应Upload属性的data字段,额外的上传参数
-    if (props.data && props.data instanceof Object) {
-      let _requestDate = props.data;
-      for (const key in _requestDate) {
-        formData.append(key, _requestDate[key]);
-      }
+  if (props.data && props.data instanceof Object) {
+    let _requestDate = props.data;
+    for (const key in _requestDate) {
+      formData.append(key, _requestDate[key]);
     }
+  }
     let utimer = window.setTimeout(() => {
       localUpload({ url, formData }, function () {
         clearTimeout(utimer);
       });
     }, 200);
-  }
 };
 
 //单文件上传的方法参数类型
@@ -237,19 +237,24 @@ const localUpload = (option: localUploadOption, callback: Function) => {
   //事件回调
   // event callbacks
   xhr.onreadystatechange = function () {
-    if (xhr.readyState === 4) {
-      if ((xhr.status >= 200 && xhr.status <= 300) || xhr.status === 304) {
-        let currentTimeStamp = new Date().valueOf();
-        let successText = xhr.responseText ? xhr.responseText : uploadSuccess;
+    // 发起
+    let currentTimeStamp = new Date().valueOf();
+    if (xhr.readyState === 1) {
+      if ((xhr.status >= 200 && xhr.status <= 300) || xhr.status === 304||xhr.status == 0) {
+        let successText = "上传开始";
         emit(
           "before",
           Object.assign({ currentTimeStamp, msg: successText, ...option })
         );
-      } else {
-        errorF(xhr.responseText);
       }
-    } else {
-      errorF(defaultErrorMsg);
+    }else if(xhr.readyState === 4){
+      // 完成
+      let successText = xhr.responseText ? xhr.responseText : uploadSuccess;
+      console.log(xhr);
+      if((xhr.status >= 200 && xhr.status <= 300) || xhr.status === 304||xhr.status == 0){
+          let data = xhr.responseText;
+          emit("done", {currentTimeStamp,msg:successText,data:data});
+        }
     }
   };
   xhr.open("post", url, true); //不能是GET, get请求数据发送只能拼接在URL后面
@@ -333,13 +338,15 @@ const getUploadChange = (e: any) => {
   }
 };
 const commonUploadTransaction = (_files: any[]) => {
+  let currentTimeStamp = new Date().valueOf();
+  let successText = uploadSuccess;
   if (props.url) {
     localUploadTransaction({
       url: props.url,
       files: _files,
     });
   } else {
-    emit("done", _files);
+    emit("done", {currentTimeStamp,msg:successText,data:_files});
   }
 };
 const chooseFile = () => {
