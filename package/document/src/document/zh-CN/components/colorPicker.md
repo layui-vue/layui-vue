@@ -54,6 +54,31 @@ export default {
 
 :::
 
+::: title 取色器
+:::
+
+::: demo
+
+<template>
+  <lay-color-picker v-model="color" eyeDropper></lay-color-picker>
+</template>
+
+<script>
+import { ref } from "vue";
+
+export default {
+  setup() {
+    const color = ref("#009688");
+
+    return {
+      color
+    }
+  }
+}
+</script>
+
+:::
+
 ::: title Icon Picker 属性
 :::
 
@@ -63,6 +88,7 @@ export default {
 | ---------- | -------- | --- |
 | v-model    | 选中色   | --  |
 | preset | 预设颜色 | --  |
+| eyeDropper | 取色器 | Boolean  |
 
 :::
 

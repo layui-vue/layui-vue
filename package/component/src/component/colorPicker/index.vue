@@ -7,13 +7,16 @@ export default {
 <script lang="ts" setup>
 import "./index.less";
 import LayDropdown from "../dropdown/index.vue";
-import { ref, computed, watch, onMounted } from "vue";
+import EyeDropper from "./EyeDropper.vue";
+import { ref, computed, watch, onMounted, } from "vue";
+import { useEyeDropper } from '@vueuse/core'
 
 const emit = defineEmits(["update:modelValue"]);
 
 export interface LayColorPicker {
   modelValue?: any;
   preset?: any;
+  eyeDropper?: boolean;
 }
 
 const props = withDefaults(defineProps<LayColorPicker>(), {
@@ -24,6 +27,7 @@ const props = withDefaults(defineProps<LayColorPicker>(), {
 const saturationValue = ref<null | HTMLElement>(null);
 const hueSlider = ref<null | HTMLElement>(null);
 const alphaSlider = ref<null | HTMLElement>(null);
+const { isSupported, open, sRGBHex } = useEyeDropper()
 
 let pointStyle = ref("top: 25%;left: 80%;");
 let hueSliderStyle = ref("left: 0;");
@@ -38,6 +42,14 @@ let green = ref(0);
 let blue = ref(0);
 let alpha = ref(1);
 
+const openEyeDropper = function(){
+  if(isSupported){
+    open();
+  }else{
+    console.warn("LayColorPicker: Eye dropper not supported by your browser!");
+  }
+}
+
 onMounted(() => {
   let { r, g, b, a } = parseColor(props.modelValue);
   red.value = r;
@@ -45,6 +57,14 @@ onMounted(() => {
   blue.value = b;
   alpha.value = a;
 });
+
+watch(sRGBHex, (sRGBHex) => {
+  let { r, g, b, a } = hex2rgba(sRGBHex);
+  red.value = r;
+  green.value = g;
+  blue.value = b;
+  alpha.value = a;
+})
 
 watch([red, green, blue], (newValue) => {
   emit(
@@ -429,6 +449,12 @@ function hex2rgba(s: any) {
                 :style="`background: linear-gradient(to right, rgba(0,0,0,0), ${colorObj.rgb});width: 100%;height: 100%`"
               ></div>
             </div>
+          </div>
+          <div 
+            v-if="eyeDropper"
+            @click="openEyeDropper" 
+            style="margin-left: 5px;">
+            <EyeDropper />
           </div>
           <div class="color-diamond">
             <div
