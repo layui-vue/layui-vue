@@ -24,7 +24,8 @@
             height: data.barHeight + 'px',
             width: scrollWidth + 'px',
             transform: 'translateY(' + data.translateY + 'px)',
-            backgroundColor: data.heightPre == 1 ? 'rgba(0,0,0,0)' : scrollColor,
+            backgroundColor:
+              data.heightPre == 1 ? 'rgba(0,0,0,0)' : scrollColor,
           }"
           class="layui-scroll-thumb"
           @mousedown.stop.prevent="moveStart"
@@ -36,8 +37,8 @@
 
 <script lang="ts">
 export default {
-  name: "LayScroll"
-}
+  name: "LayScroll",
+};
 </script>
 
 <script lang="ts" setup>

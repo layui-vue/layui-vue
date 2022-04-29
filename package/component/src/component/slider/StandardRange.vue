@@ -3,6 +3,7 @@ import { ref, toRef, Ref } from "vue";
 import { on, off } from "evtd";
 import { throttle } from "./utils/index";
 import LayTooltip from "../tooltip/index.vue";
+
 interface Prop {
   rangeValue: Array<number>;
   disabled?: boolean;
@@ -17,6 +18,7 @@ const props = withDefaults(defineProps<Prop>(), {
   max: 100,
   disabled: false,
 });
+
 let rv = toRef(props, "rangeValue");
 
 const moveAction = throttle(rangeMove);

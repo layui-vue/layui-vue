@@ -11,6 +11,7 @@ interface Prop {
   min?: number;
   max?: number;
 }
+
 const props = withDefaults(defineProps<Prop>(), {
   disabled: true,
   val: 0,
