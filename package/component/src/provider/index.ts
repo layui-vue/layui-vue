@@ -1,8 +1,5 @@
-import type { App } from "vue";
+import { withInstall } from "../utils"
 import Component from "./index.vue";
 
-Component.install = (app: App) => {
-  app.component(Component.name, Component);
-};
-
-export default Component;
+export const component = withInstall(Component);
+export default component;

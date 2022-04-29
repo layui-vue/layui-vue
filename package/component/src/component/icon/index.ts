@@ -1,8 +1,6 @@
-import type { App } from "vue";
+
 import { LayIcon as Component } from "@layui/icons-vue";
+import { withInstall } from "../../utils"
 
-Component.install = (app: App) => {
-  app.component(Component.name, Component);
-};
-
-export default Component;
+export const component = withInstall(Component);
+export default component;
