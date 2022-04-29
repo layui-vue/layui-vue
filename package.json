@@ -4,6 +4,7 @@
   "homepage": "http://www.layui-vue.com",
   "scripts": {
     "dev": "pnpm -C ./package/document dev",
+    "dev:demand": "pnpm -C ./package/document dev:demand",
     "build": "npm run build:icons && npm run build:layer && npm run build:component && npm run build:document",
     "build:document": "pnpm -C ./package/document build",
     "build:component": "pnpm -C ./package/component build",

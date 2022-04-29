@@ -1,4 +1,4 @@
-import { withInstall } from "../../utils"
+import { withInstall } from "../../utils";
 import Component from "./index.vue";
 
 export const component = withInstall(Component);
