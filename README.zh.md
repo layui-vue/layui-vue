@@ -7,11 +7,11 @@
   <a href="https://coveralls.io/r/sentsin/layui?branch=master"><img alt="Test Coverage" src="https://img.shields.io/coveralls/sentsin/layui/master.svg"></a>
 </p>  
 
-**[🔶 探索文档 »](http://www.layui-vue.com)** **[加入我们](https://jq.qq.com/?_wv=1027&k=ffiUQgnE)**
+**[🔶 www.layui-vue.com »](http://www.layui-vue.com)**
 
-一个基于 Layui 和 Vue 的企业级 UI 组件。
+layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.
 
-**在代码沙箱运行**
+**Run with code Sandbox.**
 
 [![Edit layui-vue](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/11mvy)
 
@@ -19,11 +19,12 @@
 
 你可以用layui vue做的一些事情：
 
-* 使用安装脚本编写组件
+* 使用 setup script 编写组件
 * 多达 60 个高品质组件
 * 提供 Axure 设计资源
-* 支持主题定制
-* 支持国际化
+* 支持 夜间模式
+* 支持 多主题
+* 支持 国际化
 
 ## 开始使用
 
