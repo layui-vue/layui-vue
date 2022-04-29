@@ -1,3 +1,9 @@
+<script lang="ts">
+export default {
+  name: "Vertical"
+}
+</script>
+
 <script setup lang="ts">
 import { Ref, ref } from "vue";
 import { on, off } from "evtd";

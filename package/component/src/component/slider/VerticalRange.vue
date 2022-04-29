@@ -1,3 +1,9 @@
+<script lang="ts">
+export default {
+  name: "VerticalRange"
+}
+</script>
+
 <script setup lang="ts">
 import { ref, toRef, Ref } from "vue";
 import { on, off } from "evtd";
