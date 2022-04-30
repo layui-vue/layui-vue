@@ -11,6 +11,20 @@
 <template>
 <lay-timeline>
   <lay-timeline-item title="1.0.x">
+      <ul> 
+      <a name="1-0-5"> </a> 
+      <li> 
+        <h3>1.0.5 <span class="layui-badge-rim">2022-05-01</span></h3> 
+        <ul>
+          <li>[新增] dropdown 组件 context-menu 属性。。</li>
+          <li>[修复] layer 组件 tooltip 组件 index 层级冲突。</li>
+          <li>[修复] table 组件 columns 宽度超出 table-box 错位。</li>
+          <li>[修复] table 组件 selected-keys 属性 deep 监听。</li>
+          <li>[修复] slider 组件 btn 背景色。</li>
+          <li>[修复] upload 组件 url 失效。</li>
+        </ul> 
+      </li>
+    </ul>
     <ul> 
       <a name="1-0-4"> </a> 
       <li> 

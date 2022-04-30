@@ -5,6 +5,7 @@ export default {
 </script>
 
 <script setup lang="ts">
+import Column from "./Column.vue";
 import { ref, watch, useSlots, withDefaults, onMounted } from "vue";
 import { v4 as uuidv4 } from "../../utils/guidUtil";
 import { Recordable } from "../../types";
@@ -55,6 +56,19 @@ const tableColumnKeys = ref(
     return item.key;
   })
 );
+
+const tableColumns1 = [];
+
+
+/**
+ * 复杂表头 
+ * 
+ * 思路：将 Column 处理为多级别 tr。
+ */
+tableColumns.value.forEach((tableColumn) => {
+  
+})
+
 
 watch(
   () => props.dataSource,
@@ -268,27 +282,12 @@ onMounted(() => {
                     />
                   </div>
                 </th>
-                <template v-for="column in columns" :key="column">
-                  <th
-                    class="layui-table-cell"
-                    :style="{
-                      textAlign: column.align,
-                      flex: column.width ? '0 0 ' + column.width : '1',
-                    }"
-                    v-if="tableColumnKeys.includes(column.key)"
-                  >
-                    <span>
-                      <template v-if="column.titleSlot">
-                        <slot :name="column.titleSlot"></slot>
-                      </template>
-                      <template v-else>
-                        {{ column.title }}
-                      </template>
-                    </span>
+                <template v-for="column in columns" :key="column">  
+                  <column :tableColumnKeys="tableColumnKeys" :column="column">
                     <span
                       v-if="column.sort"
                       class="layui-table-sort layui-inline"
-                      lay-sort=""
+                      lay-sort
                     >
                       <i
                         @click.stop="sortTable($event, column.key, 'asc')"
@@ -301,7 +300,7 @@ onMounted(() => {
                         title="降序"
                       ></i>
                     </span>
-                  </th>
+                  </column>
                 </template>
               </tr>
             </thead>

@@ -1,7 +1,7 @@
 <script lang="ts">
 export default {
-  name: "VerticalRange"
-}
+  name: "VerticalRange",
+};
 </script>
 
 <script setup lang="ts">

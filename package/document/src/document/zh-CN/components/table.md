@@ -167,7 +167,6 @@ export default {
 
 :::
 
-
 ::: title 开启排序
 :::
 
@@ -311,15 +310,15 @@ export default {
 
 ::: table
 
-| 属性                 | 描述                          | 类型 | 默认值 | 可选值         |
-| -------------------- | ----------------------------- | ---- | ------ | -------------- |
-| columns              | 列配置 - [更多](#tableColumn) | --   | --     | --             |
-| dataSource           | 数据源                        | --   | --     | --             |
-| checkbox             | 开启复选框                    | `boolean`   | `false`     | `true` `false`             |
-| id                   | 主键                          | `string`   | --     | --             |
-| v-model:selectedKeys | 选中项                        | --   | --     | --             |
-| default-toolbar      | 工具栏                        | `boolean`   | `false`     | `true` `false` |
-| size                 | 尺寸                          | `string`   | `md`     | `lg` `md` `sm` |
+| 属性                 | 描述                          | 类型      | 默认值  | 可选值         |
+| -------------------- | ----------------------------- | --------- | ------- | -------------- |
+| columns              | 列配置 - [更多](#tableColumn) | --        | --      | --             |
+| dataSource           | 数据源                        | --        | --      | --             |
+| checkbox             | 开启复选框                    | `boolean` | `false` | `true` `false` |
+| id                   | 主键                          | `string`  | --      | --             |
+| v-model:selectedKeys | 选中项                        | --        | --      | --             |
+| default-toolbar      | 工具栏                        | `boolean` | `false` | `true` `false` |
+| size                 | 尺寸                          | `string`  | `md`    | `lg` `md` `sm` |
 
 :::
 
@@ -353,18 +352,17 @@ export default {
 
 ::: table
 
-| 插槽       | 描述       | 类型 | 默认值 | 可选值 |
-| ---------- | ---------- | ---- |---- |---- |
-| title      | 列标题     | --   |--   |--   |
-| key        | 数据字段   | --   |--   |--   |
-| customSlot | 自定义插槽 | --   |--   |--   |
-| width      | 宽度       | --   |--   |--   |
-| sort       | 排序       | --   |--   |--   |
-| titleSlot  | 标题插槽   | --   |--   |--   |
-| align      | 对齐方式   | `string` | `left` | `left` `right` `center`   |
-:::
+| 插槽       | 描述       | 类型     | 默认值 | 可选值                  |
+| ---------- | ---------- | -------- | ------ | ----------------------- |
+| title      | 列标题     | --       | --     | --                      |
+| key        | 数据字段   | --       | --     | --                      |
+| customSlot | 自定义插槽 | --       | --     | --                      |
+| width      | 宽度       | --       | --     | --                      |
+| sort       | 排序       | --       | --     | --                      |
+| titleSlot  | 标题插槽   | --       | --     | --                      |
+| align      | 对齐方式   | `string` | `left` | `left` `right` `center` |
 
- 
+:::
 
 ::: previousNext table
 :::
