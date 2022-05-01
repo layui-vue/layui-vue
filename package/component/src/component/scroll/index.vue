@@ -12,7 +12,7 @@
         ref="barRef"
         class="layui-scroll-track"
         :style="{
-          backgroundColor: heightPre == 1 ? 'rgba(0,0,0,0)' : slotColor,
+          backgroundColor: data.heightPre == 1 ? 'rgba(0,0,0,0)' : slotColor,
         }"
       >
         <!--
@@ -44,7 +44,6 @@ export default {
 <script lang="ts" setup>
 import "./index.less";
 import {
-  defineComponent,
   toRefs,
   onMounted,
   nextTick,
@@ -54,10 +53,10 @@ import {
 } from "vue";
 
 export interface LayScrollProps {
-  height: string;
-  slotColor: string;
-  scrollColor: string;
-  scrollWidth: number;
+  height?: string;
+  slotColor?: string;
+  scrollColor?: string;
+  scrollWidth?: number;
 }
 
 const props = withDefaults(defineProps<LayScrollProps>(), {
