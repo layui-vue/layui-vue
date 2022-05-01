@@ -5,7 +5,6 @@ export default {
 </script>
 
 <script setup lang="ts">
-import Column from "./Column.vue";
 import { ref, watch, useSlots, withDefaults, onMounted } from "vue";
 import { v4 as uuidv4 } from "../../utils/guidUtil";
 import { Recordable } from "../../types";
@@ -56,19 +55,6 @@ const tableColumnKeys = ref(
     return item.key;
   })
 );
-
-const tableColumns1 = [];
-
-
-/**
- * 复杂表头 
- * 
- * 思路：将 Column 处理为多级别 tr。
- */
-tableColumns.value.forEach((tableColumn) => {
-  
-})
-
 
 watch(
   () => props.dataSource,
@@ -282,8 +268,24 @@ onMounted(() => {
                     />
                   </div>
                 </th>
-                <template v-for="column in columns" :key="column">  
-                  <column :tableColumnKeys="tableColumnKeys" :column="column">
+                <template v-for="column in columns" :key="column">
+                  <th
+                    v-if="tableColumnKeys.includes(column.key)"
+                    class="layui-table-cell"
+                    :style="{
+                      textAlign: column.align,
+                      flex: column.width ? '0 0 ' + column.width : '1',
+                    }"
+                  >
+                    <span>
+                      <template v-if="column.titleSlot">
+                        <slot :name="column.titleSlot"></slot>
+                      </template>
+                      <template v-else>
+                        {{ column.title }}
+                      </template>
+                    </span>
+                    <!-- 插槽 -->
                     <span
                       v-if="column.sort"
                       class="layui-table-sort layui-inline"
@@ -300,7 +302,7 @@ onMounted(() => {
                         title="降序"
                       ></i>
                     </span>
-                  </column>
+                  </th>
                 </template>
               </tr>
             </thead>
