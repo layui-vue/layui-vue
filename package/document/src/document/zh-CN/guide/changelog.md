@@ -18,6 +18,11 @@
         <ul>
           <li>[修复] scroll 组件 height 属性必填警告。</li>
           <li>[修复] scroll 组件 slotColor 属性必填警告。</li>
+          <li>[修复] scroll 组件 scrollColor 属性必填警告。</li>
+          <li>[修复] scroll 组件 scrollWidth 属性必填警告。</li>
+          <li>[修正] scroll 组件 slotColor 属性为 thackColor。</li>
+          <li>[修正] scroll 组件 scrollColor 属性为 thumbColor。</li>
+          <li>[修正] scroll 组件 scrollWidth 属性为 thumbWidth。</li>
         </ul> 
       </li>
     </ul>

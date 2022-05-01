@@ -20,8 +20,7 @@
             height: data.barHeight + 'px',
             width: thumbWidth + 'px',
             transform: 'translateY(' + data.translateY + 'px)',
-            backgroundColor:
-              data.heightPre == 1 ? 'rgba(0,0,0,0)' : thumbColor,
+            backgroundColor: data.heightPre == 1 ? 'rgba(0,0,0,0)' : thumbColor,
           }"
           class="layui-scroll-thumb"
           @mousedown.stop.prevent="moveStart"
