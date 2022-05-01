@@ -23,6 +23,8 @@
           <li>[修正] scroll 组件 slotColor 属性为 thackColor。</li>
           <li>[修正] scroll 组件 scrollColor 属性为 thumbColor。</li>
           <li>[修正] scroll 组件 scrollWidth 属性为 thumbWidth。</li>
+          <li>[升级] vueuse/core 8.3.1。</li>
+          <li>[升级] vue-i18n 9.1.9。</li>
         </ul> 
       </li>
     </ul>
