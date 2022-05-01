@@ -11,8 +11,8 @@
 <template>
 <lay-timeline>
   <lay-timeline-item title="1.0.x">
-        <ul> 
-      <a name="1-0-6"> </a> 
+    <ul> 
+      <a name="1-0-6"></a> 
       <li> 
         <h3>1.0.6 <span class="layui-badge-rim">2022-05-02</span></h3> 
         <ul>
@@ -28,8 +28,8 @@
         </ul> 
       </li>
     </ul>
-      <ul> 
-      <a name="1-0-5"> </a> 
+    <ul> 
+      <a name="1-0-5"></a> 
       <li> 
         <h3>1.0.5 <span class="layui-badge-rim">2022-05-01</span></h3> 
         <ul>
@@ -43,7 +43,7 @@
       </li>
     </ul>
     <ul> 
-      <a name="1-0-4"> </a> 
+      <a name="1-0-4"></a> 
       <li> 
         <h3>1.0.4 <span class="layui-badge-rim">2022-04-21</span></h3> 
         <ul>
@@ -64,7 +64,7 @@
       </li>
     </ul>
     <ul> 
-      <a name="1-0-3"> </a> 
+      <a name="1-0-3"></a> 
       <li> 
         <h3>1.0.3 <span class="layui-badge-rim">2022-04-17</span></h3> 
         <ul>
@@ -100,7 +100,7 @@
       </li>
     </ul>
     <ul> 
-      <a name="1-0-1"> </a> 
+      <a name="1-0-1"></a> 
       <li> 
         <h3>1.0.1 <span class="layui-badge-rim">2022-04-06</span></h3> 
         <ul>
