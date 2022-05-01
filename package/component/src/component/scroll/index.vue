@@ -43,14 +43,7 @@ export default {
 
 <script lang="ts" setup>
 import "./index.less";
-import {
-  toRefs,
-  onMounted,
-  nextTick,
-  reactive,
-  onUnmounted,
-  ref,
-} from "vue";
+import { toRefs, onMounted, nextTick, reactive, onUnmounted, ref } from "vue";
 
 export interface LayScrollProps {
   height?: string;
