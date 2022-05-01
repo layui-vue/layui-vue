@@ -11,12 +11,22 @@
 <template>
 <lay-timeline>
   <lay-timeline-item title="1.0.x">
+        <ul> 
+      <a name="1-0-6"> </a> 
+      <li> 
+        <h3>1.0.6 <span class="layui-badge-rim">2022-05-02</span></h3> 
+        <ul>
+          <li>[修复] scroll 组件 height 属性必填警告。</li>
+          <li>[修复] scroll 组件 slotColor 属性必填警告。</li>
+        </ul> 
+      </li>
+    </ul>
       <ul> 
       <a name="1-0-5"> </a> 
       <li> 
         <h3>1.0.5 <span class="layui-badge-rim">2022-05-01</span></h3> 
         <ul>
-          <li>[新增] dropdown 组件 context-menu 属性。。</li>
+          <li>[新增] dropdown 组件 context-menu 属性。</li>
           <li>[修复] layer 组件 tooltip 组件 index 层级冲突。</li>
           <li>[修复] table 组件 columns 宽度超出 table-box 错位。</li>
           <li>[修复] table 组件 selected-keys 属性 deep 监听。</li>

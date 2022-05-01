@@ -12,20 +12,16 @@
         ref="barRef"
         class="layui-scroll-track"
         :style="{
-          backgroundColor: data.heightPre == 1 ? 'rgba(0,0,0,0)' : slotColor,
+          backgroundColor: data.heightPre == 1 ? 'rgba(0,0,0,0)' : trackColor,
         }"
       >
-        <!--
-        没有滑块方式，背景色透明：使用v-show窗口变大，滑块不出现，所以使用背景色控制
-        backgroundColor: heightPre == 1 ? 'rgba(0,0,0,0)' : scrollColor,
-       -->
         <div
           :style="{
             height: data.barHeight + 'px',
-            width: scrollWidth + 'px',
+            width: thumbWidth + 'px',
             transform: 'translateY(' + data.translateY + 'px)',
             backgroundColor:
-              data.heightPre == 1 ? 'rgba(0,0,0,0)' : scrollColor,
+              data.heightPre == 1 ? 'rgba(0,0,0,0)' : thumbColor,
           }"
           class="layui-scroll-thumb"
           @mousedown.stop.prevent="moveStart"
@@ -47,16 +43,16 @@ import { toRefs, onMounted, nextTick, reactive, onUnmounted, ref } from "vue";
 
 export interface LayScrollProps {
   height?: string;
-  slotColor?: string;
-  scrollColor?: string;
-  scrollWidth?: number;
+  trackColor?: string;
+  thumbColor?: string;
+  thumbWidth?: number;
 }
 
 const props = withDefaults(defineProps<LayScrollProps>(), {
   height: "100%",
-  slotColor: "rgba(0,0,0,0)",
-  scrollColor: "#eeeeee",
-  scrollWidth: 6,
+  trackColor: "rgba(0,0,0,0)",
+  thumbColor: "#eeeeee",
+  thumbWidth: 6,
 });
 
 const emit = defineEmits(["arrive"]);
@@ -70,6 +66,7 @@ const data = reactive({
   barHeight: 0, // 滑块高度
   winWidth: document.body.clientWidth, //初始化浏览器页面宽度
 });
+
 let time = null; // 定时器
 let isMove = false; // 判断鼠标是否点击滑块（为松开）
 let moveClientY = 0; // 鼠标点击滑块时，相对滑块的位置
@@ -86,11 +83,13 @@ onMounted(() => {
     calculationLength(); //初始化延迟更新滚动条
   });
 });
+
 // 页面卸载清除定时器
 onUnmounted(() => {
   window.clearInterval(time);
   time = null;
 });
+
 // 监听页面尺寸改变计算滚动条
 const monitorWindow = function () {
   let time; //定时器，防抖，窗口持续变化，延迟更新滚动条
@@ -120,7 +119,6 @@ const monitorScrollBar = function () {
     initScrollListner();
   });
 
-  // childList  观察子节点变动
   // 监听子节点增加或者内容撑起的尺寸
   observer.observe(monitorUl, {
     attributes: true,
@@ -143,6 +141,7 @@ const calculationLength = function () {
     time = null;
   }, 2000);
 };
+
 // 计算滚动条高度
 const initScrollListner = function () {
   let scroll = scrollRef.value;
@@ -159,6 +158,7 @@ const initScrollListner = function () {
     data.barHeight = data.heightPre * trackHeight;
   }
 };
+
 // 内容滚动时，计算滑块移动的距离
 const onMosewheel = function (e) {
   // scrollTop页面顶部滚出的高度
@@ -177,10 +177,12 @@ const onMosewheel = function (e) {
     arrive("bottom");
   }
 };
+
 // 到达顶部或者底部通知父级元素
 const arrive = function name(tb) {
   emit("arrive", tb);
 };
+
 // 鼠标点击滑块时
 const moveStart = function (e) {
   isMove = true;
@@ -191,6 +193,7 @@ const moveStart = function (e) {
   moveTo(); //移动时
   moveEnd(); //鼠标松开时
 };
+
 // 鼠标移动，改变thumb的位置以及容器scrollTop的位置
 const moveTo = function () {
   document.onmousemove = (e) => {
@@ -212,6 +215,7 @@ const moveTo = function () {
     }
   };
 };
+
 // 鼠标从滑块松开时，不在监听滑块移动操作
 const moveEnd = function () {
   document.onmouseup = (e) => {
