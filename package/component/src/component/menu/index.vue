@@ -19,7 +19,12 @@ export interface LayMenuProps {
   collapseTransition?: boolean | string;
 }
 
-const emit = defineEmits(["update:selectedKey", "update:openKeys","changeSelectedKey","changeOpenKeys"]);
+const emit = defineEmits([
+  "update:selectedKey",
+  "update:openKeys",
+  "changeSelectedKey",
+  "changeOpenKeys",
+]);
 
 const props = withDefaults(defineProps<LayMenuProps>(), {
   selectedKey: "",
