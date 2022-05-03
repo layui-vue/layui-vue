@@ -188,7 +188,7 @@ export default {
     <lay-header>Header</lay-header>
     <lay-body>
       <lay-layout>
-        <lay-side :width="160">Left</lay-side>
+        <lay-side>Left</lay-side>
         <lay-body>Content</lay-body>
       </lay-layout>
     </lay-body>
@@ -200,7 +200,7 @@ export default {
     <lay-body>
       <lay-layout>
         <lay-body>Content</lay-body>
-        <lay-side :width="160">Right</lay-side>
+        <lay-side>Right</lay-side>
       </lay-layout>
     </lay-body>
     <lay-footer>Footer</lay-footer>

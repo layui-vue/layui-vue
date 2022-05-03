@@ -19,6 +19,7 @@
           <li>[新增] menu 组件 changeOpenKeys 事件。</li>
           <li>[新增] menu 组件 changeSelectedKey 事件。</li>
           <li>[新增] slider 组件 showDots 属性, 显示步长断点。</li>
+          <li>[修复] side 组件 width 属性失效, 随内容宽度自适应的问题。</li>
         </ul> 
       </li>
     </ul>
