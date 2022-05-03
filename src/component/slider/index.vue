@@ -15,6 +15,7 @@ export interface LaySliderProps {
   disabled?: boolean;
   range?: boolean;
   rangeValue?: number[];
+  showDots?: boolean
 }
 
 const emit = defineEmits(["update:modelValue"]);
@@ -26,6 +27,7 @@ const props = withDefaults(defineProps<LaySliderProps>(), {
   step: 0,
   min: 0,
   max: 100,
+  showDots: false
 });
 
 let rangeValues: Ref<number[]> | any = toRef(props, "rangeValue");
@@ -47,6 +49,7 @@ function valHook(val: any) {
           :rangeValue="rangeValues"
           :min="min"
           :max="max"
+          :showDots="showDots"
         />
       </div>
       <div v-else>
@@ -58,6 +61,7 @@ function valHook(val: any) {
           :val="modelValue"
           :min="min"
           :max="max"
+          :showDots="showDots"
         />
       </div>
     </div>
@@ -71,6 +75,7 @@ function valHook(val: any) {
           :rangeValue="rangeValues"
           :min="min"
           :max="max"
+          :showDots="showDots"
         />
       </div>
       <div v-else>
@@ -82,6 +87,7 @@ function valHook(val: any) {
           :step="step"
           :min="min"
           :max="max"
+          :showDots="showDots"
         ></StandardVue>
       </div>
     </div>

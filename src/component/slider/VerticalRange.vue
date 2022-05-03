@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import { ref, toRef, Ref } from "vue";
 import { on, off } from "evtd";
-import { throttle } from "./utils/index";
+import { throttle, makeDots } from "./utils/index";
 interface Prop {
   rangeValue: Array<number>;
   disabled?: boolean;
   step?: number;
   min?: number;
   max?: number;
+  showDots?: boolean;
 }
 
 const props = withDefaults(defineProps<Prop>(), {
@@ -15,6 +16,7 @@ const props = withDefaults(defineProps<Prop>(), {
   min: 0,
   max: 100,
   disabled: false,
+  showDots: false,
 });
 
 let rv = toRef(props, "rangeValue");
@@ -120,6 +122,15 @@ function cross(val: any) {
     currbtn = currbtn === 0 ? 1 : 0;
   }
 }
+// 断点
+const dots = makeDots(props);
+console.log(dots);
+
+const focusDot = (item: number) => {
+  let currbtn = moveNeighbors(item, rv);
+  rv.value[currbtn] = item;
+  emit("link-val-hook", rv.value);
+};
 </script>
 
 <template>
@@ -154,6 +165,14 @@ function cross(val: any) {
         }"
         class="layui-slider-vertical-rate"
         :class="[props.disabled ? 'layui-slider-disabled disable-line' : '']"
+      ></div>
+      <div
+        v-show="showDots"
+        @click="focusDot(item)"
+        class="layui-slider-vertical-dots"
+        v-for="(item, index) in dots"
+        :key="index"
+        :style="{ bottom: item + '%' }"
       ></div>
     </div>
   </div>
