@@ -18,6 +18,7 @@
         <ul>
           <li>[新增] menu 组件 changeOpenKeys 事件。</li>
           <li>[新增] menu 组件 changeSelectedKey 事件。</li>
+          <li>[新增] slider 组件 showDots 属性, 显示步长断点。</li>
         </ul> 
       </li>
     </ul>
