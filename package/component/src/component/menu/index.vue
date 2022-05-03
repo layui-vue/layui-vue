@@ -19,7 +19,7 @@ export interface LayMenuProps {
   collapseTransition?: boolean | string;
 }
 
-const emit = defineEmits(["update:selectedKey", "update:openKeys"]);
+const emit = defineEmits(["update:selectedKey", "update:openKeys","changeSelectedKey","changeOpenKeys"]);
 
 const props = withDefaults(defineProps<LayMenuProps>(), {
   selectedKey: "",
@@ -43,6 +43,7 @@ const openKeys = computed({
   },
   set(val) {
     emit("update:openKeys", val);
+    emit("changeOpenKeys", val);
   },
 });
 
@@ -52,6 +53,7 @@ const selectedKey = computed({
   },
   set(val) {
     emit("update:selectedKey", val);
+    emit("changeSelectedKey", val);
   },
 });
 
@@ -59,12 +61,10 @@ watch(
   () => props.collapse,
   () => {
     if (props.collapse) {
-      // 删除所有打开
       oldOpenKeys.value = props.openKeys;
-      emit("update:openKeys", []);
+      openKeys.value = [];
     } else {
-      // 赋值所有打开
-      emit("update:openKeys", oldOpenKeys.value);
+      openKeys.value = oldOpenKeys.value;
     }
   },
   { immediate: true }
