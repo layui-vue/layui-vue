@@ -40,9 +40,9 @@ export default {
 | 属性        | 描述     | 可选值 |
 | ----------- | -------- | ------ |
 | height      |   高度   | --     |
-| scrollWidth |   滑块宽度   | --     |
-| scrollColor |   滑块颜色   | --     |
-| slotColor   |   滑槽颜色   | --     |
+| thumbWidth |   滑块宽度   | --     |
+| thumbColor |   滑块颜色   | --     |
+| trackColor   |   滑槽颜色   | --     |
 
 :::
 

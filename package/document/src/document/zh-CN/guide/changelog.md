@@ -12,7 +12,38 @@
 <lay-timeline>
   <lay-timeline-item title="1.0.x">
     <ul> 
-      <a name="1-0-4"> </a> 
+      <a name="1-0-6"></a> 
+      <li> 
+        <h3>1.0.6 <span class="layui-badge-rim">2022-05-02</span></h3> 
+        <ul>
+          <li>[修复] scroll 组件 height 属性必填警告。</li>
+          <li>[修复] scroll 组件 slotColor 属性必填警告。</li>
+          <li>[修复] scroll 组件 scrollColor 属性必填警告。</li>
+          <li>[修复] scroll 组件 scrollWidth 属性必填警告。</li>
+          <li>[修正] scroll 组件 slotColor 属性为 thackColor。</li>
+          <li>[修正] scroll 组件 scrollColor 属性为 thumbColor。</li>
+          <li>[修正] scroll 组件 scrollWidth 属性为 thumbWidth。</li>
+          <li>[升级] vueuse/core 8.3.1。</li>
+          <li>[升级] vue-i18n 9.1.9。</li>
+        </ul> 
+      </li>
+    </ul>
+    <ul> 
+      <a name="1-0-5"></a> 
+      <li> 
+        <h3>1.0.5 <span class="layui-badge-rim">2022-05-01</span></h3> 
+        <ul>
+          <li>[新增] dropdown 组件 context-menu 属性。</li>
+          <li>[修复] layer 组件 tooltip 组件 index 层级冲突。</li>
+          <li>[修复] table 组件 columns 宽度超出 table-box 错位。</li>
+          <li>[修复] table 组件 selected-keys 属性 deep 监听。</li>
+          <li>[修复] slider 组件 btn 背景色。</li>
+          <li>[修复] upload 组件 url 失效。</li>
+        </ul> 
+      </li>
+    </ul>
+    <ul> 
+      <a name="1-0-4"></a> 
       <li> 
         <h3>1.0.4 <span class="layui-badge-rim">2022-04-21</span></h3> 
         <ul>
@@ -33,7 +64,7 @@
       </li>
     </ul>
     <ul> 
-      <a name="1-0-3"> </a> 
+      <a name="1-0-3"></a> 
       <li> 
         <h3>1.0.3 <span class="layui-badge-rim">2022-04-17</span></h3> 
         <ul>
@@ -69,7 +100,7 @@
       </li>
     </ul>
     <ul> 
-      <a name="1-0-1"> </a> 
+      <a name="1-0-1"></a> 
       <li> 
         <h3>1.0.1 <span class="layui-badge-rim">2022-04-06</span></h3> 
         <ul>

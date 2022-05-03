@@ -1,6 +1,12 @@
+<script lang="ts">
+export default {
+  name: "LaySlider",
+};
+</script>
+
 <script setup lang="ts">
-import { Ref, toRef } from "vue";
 import "./index.less";
+import { Ref, toRef } from "vue";
 import StandardVue from "./Standard.vue";
 import StandardRange from "./StandardRange.vue";
 import Vertical from "./Vertical.vue";

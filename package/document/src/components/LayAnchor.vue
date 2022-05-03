@@ -10,7 +10,7 @@
         <lay-icon :type="iconType" size="40"> </lay-icon>
       </lay-button>
     </div>
-    <lay-scroll :scrollWidth="0">
+    <lay-scroll :thumbWidth="0">
       <ul>
         <li
           v-for="(anchor, index) in anchorList"

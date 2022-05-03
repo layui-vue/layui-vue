@@ -43,7 +43,7 @@
             rel="nofollow"
             class="site-star"
           >
-            <i class="layui-icon"></i> Star <cite id="getStars">746</cite>
+            <i class="layui-icon"></i> Star <cite id="getStars">863</cite>
           </a>
           <a
             href="https://gitee.com/layui-vue"

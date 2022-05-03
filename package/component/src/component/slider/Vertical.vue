@@ -1,3 +1,9 @@
+<script lang="ts">
+export default {
+  name: "Vertical",
+};
+</script>
+
 <script setup lang="ts">
 import { Ref, ref } from "vue";
 import { on, off } from "evtd";
@@ -11,6 +17,7 @@ interface Prop {
   min?: number;
   max?: number;
 }
+
 const props = withDefaults(defineProps<Prop>(), {
   disabled: true,
   val: 0,

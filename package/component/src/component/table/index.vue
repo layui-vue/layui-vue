@@ -270,12 +270,12 @@ onMounted(() => {
                 </th>
                 <template v-for="column in columns" :key="column">
                   <th
+                    v-if="tableColumnKeys.includes(column.key)"
                     class="layui-table-cell"
                     :style="{
                       textAlign: column.align,
                       flex: column.width ? '0 0 ' + column.width : '1',
                     }"
-                    v-if="tableColumnKeys.includes(column.key)"
                   >
                     <span>
                       <template v-if="column.titleSlot">
@@ -285,10 +285,11 @@ onMounted(() => {
                         {{ column.title }}
                       </template>
                     </span>
+                    <!-- 插槽 -->
                     <span
                       v-if="column.sort"
                       class="layui-table-sort layui-inline"
-                      lay-sort=""
+                      lay-sort
                     >
                       <i
                         @click.stop="sortTable($event, column.key, 'asc')"
