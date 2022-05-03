@@ -33,7 +33,7 @@ layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.
 ```bash
 npm i @layui/layui-vue
 ```
-使用前需要将layui vue挂载到vue并引入index.css样式文件
+在使用前需要将 layui-vue 挂载到 vue 并引入 index.css 样式
 
 ```
 import App from './App.vue'
