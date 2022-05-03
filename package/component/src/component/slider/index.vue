@@ -21,7 +21,7 @@ export interface LaySliderProps {
   disabled?: boolean;
   range?: boolean;
   rangeValue?: number[];
-  showDots?: boolean
+  showDots?: boolean;
 }
 
 const emit = defineEmits(["update:modelValue"]);
@@ -33,7 +33,7 @@ const props = withDefaults(defineProps<LaySliderProps>(), {
   step: 0,
   min: 0,
   max: 100,
-  showDots: false
+  showDots: false,
 });
 
 let rangeValues: Ref<number[]> | any = toRef(props, "rangeValue");
