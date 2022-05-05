@@ -17,6 +17,7 @@ export interface LayMenuProps {
   level?: boolean | string;
   collapse?: boolean | string;
   collapseTransition?: boolean | string;
+  childSpacing?: boolean;
 }
 
 const emit = defineEmits([
@@ -35,6 +36,7 @@ const props = withDefaults(defineProps<LayMenuProps>(), {
   level: true,
   collapse: false,
   collapseTransition: true,
+  childSpacing: false,
 });
 
 const isTree = computed(() => props.tree);
@@ -91,6 +93,7 @@ provide("isCollapseTransition", isCollapseTransition);
       tree ? 'layui-nav-tree' : '',
       theme === 'dark' ? 'layui-nav-dark' : 'layui-nav-light',
       collapse ? 'layui-nav-collapse' : '',
+      childSpacing ? 'layui-nav-child-spacing' : '',
     ]"
   >
     <slot></slot>
