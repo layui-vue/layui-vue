@@ -13,12 +13,13 @@ export interface LaySideProps {
 }
 
 const props = withDefaults(defineProps<LaySideProps>(), {
-  width: "200",
+  width: "200px",
 });
 
 const styles = computed<CSSProperties>(() => {
   return {
-    width: `${props.width}px`,
+    "flex": `0 0 ${props.width}`,
+    "width": `${props.width}`
   };
 });
 </script>

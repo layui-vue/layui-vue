@@ -13,7 +13,7 @@
 ::: demo 使用 `lay-slider` 标签, 创建滑块
 
 <template>
-  <lay-slider :max="88" v-model="value1" :disabled="false"></lay-slider>
+  <lay-slider :showDots="true" :step="10" :max="100" v-model="value1" :disabled="false"></lay-slider>
   <lay-input-number v-model="value1"></lay-input-number>
 </template>
 
@@ -37,7 +37,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-slider v-model="value2" :vertical="true" :disabled="false"></lay-slider>
+  <lay-slider :showDots="false" :step="10" v-model="value2" :vertical="true" :disabled="false"></lay-slider>
 </template>
 
 <script>
@@ -63,7 +63,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-slider :disabled="false" :min="10" :max="80" v-model:rangeValue="value3" :range="true"></lay-slider>
+  <lay-slider :disabled="false" :min="0" :max="100" v-model:rangeValue="value3" :range="true"></lay-slider>
 </template>
 
 <script>
@@ -115,6 +115,7 @@ export default {
 | step  |  步长     | `Number`                   |        -       |    -    |
 | min  |  最小值     | `Number`                   |        -       |    -    |
 | max  |  最大值     | `Number`                   |        -       |    -    |
+| showDots  |  是否显示断点     | `Boolean`                   |        -       |    false    |
 :::
 
  

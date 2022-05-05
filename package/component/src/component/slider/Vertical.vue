@@ -16,6 +16,7 @@ interface Prop {
   step?: number;
   min?: number;
   max?: number;
+  showDots: boolean;
 }
 
 const props = withDefaults(defineProps<Prop>(), {
@@ -24,6 +25,7 @@ const props = withDefaults(defineProps<Prop>(), {
   step: 0,
   min: 0,
   max: 100,
+  showDots: false,
 });
 
 const moveAction = throttle(verticalMove);
@@ -91,6 +93,22 @@ function calcWithStep(
     }
   }
 }
+// 断点
+const makeDots = () => {
+  if (props.step === 0) return [];
+  let val = 0;
+  let dots = [];
+  let count = Math.floor(100 / props.step) - 1;
+  for (let i = 0; i < count; i++) {
+    val += props.step;
+    dots.push(val);
+  }
+  return dots;
+};
+const dots = makeDots();
+const focusDot = (val: number) => {
+  emit("link-val-hook", val);
+};
 </script>
 
 <template>
@@ -115,6 +133,14 @@ function calcWithStep(
         class="layui-slider-vertical-rate"
       ></div>
       <div class="layui-slider-vertical-line"></div>
+      <div
+        v-show="showDots"
+        @click="focusDot(item)"
+        class="layui-slider-vertical-dots"
+        v-for="(item, index) in dots"
+        :key="index"
+        :style="{ bottom: item + '%' }"
+      ></div>
     </div>
   </div>
 </template>

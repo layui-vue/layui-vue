@@ -43,7 +43,7 @@
 <lay-card>
     <lay-row>
         <lay-col md="2">
-            <lay-avatar src="https://portrait.gitee.com/uploads/avatars/user/702/2106738_wanglin300_1639442830.png"></lay-avatar>
+            <lay-avatar src="https://portrait.gitee.com/uploads/avatars/user/702/2106738_wanglin300_1639442830.png!avatar200"></lay-avatar>
         </lay-col>
         <lay-col md="3">
             halo
@@ -83,7 +83,7 @@
 <lay-card>
     <lay-row>
         <lay-col md="2">
-            <lay-avatar src="https://portrait.gitee.com/uploads/avatars/user/2469/7407590_wcg666_1640528494.png"></lay-avatar>
+            <lay-avatar src="https://portrait.gitee.com/uploads/avatars/user/2469/7407590_wcg666_1640528494.png!avatar200"></lay-avatar>
         </lay-col>
         <lay-col md="3">
             Sight
@@ -103,7 +103,7 @@
 <lay-card>
     <lay-row>
         <lay-col md="2">
-            <lay-avatar src="https://portrait.gitee.com/uploads/avatars/user/2596/7789823_finalsummer_1613993823.png"></lay-avatar>
+            <lay-avatar src="https://portrait.gitee.com/uploads/avatars/user/2596/7789823_finalsummer_1613993823.png!avatar200"></lay-avatar>
         </lay-col>
         <lay-col md="3">
             finalsummer
@@ -151,6 +151,8 @@
 
 ::: describe 
 
-[![Giteye chart](https://chart.giteye.net/gitee/layui-vue/layui-vue/DBC9Z6HQ.png)](https://giteye.net/chart/DBC9Z6HQ)
+<a href="https://github.com/layui-vue/layui-vue/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=layui-vue/layui-vue" />
+</a>
 
 :::

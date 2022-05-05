@@ -12,6 +12,18 @@
 <lay-timeline>
   <lay-timeline-item title="1.0.x">
     <ul> 
+      <a name="1-0-7"></a> 
+      <li> 
+        <h3>1.0.7 <span class="layui-badge-rim">2022-05-03</span></h3> 
+        <ul>
+          <li>[新增] menu 组件 changeOpenKeys 事件。</li>
+          <li>[新增] menu 组件 changeSelectedKey 事件。</li>
+          <li>[新增] slider 组件 showDots 属性, 显示步长断点。</li>
+          <li>[修复] side 组件 width 属性失效, 随内容宽度自适应的问题。</li>
+        </ul> 
+      </li>
+    </ul>
+    <ul> 
       <a name="1-0-6"></a> 
       <li> 
         <h3>1.0.6 <span class="layui-badge-rim">2022-05-02</span></h3> 

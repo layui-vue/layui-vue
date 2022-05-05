@@ -7,8 +7,9 @@ export default {
 <script setup lang="ts">
 import { Ref, ref } from "vue";
 import { on, off } from "evtd";
-import { throttle, handle_select } from "./utils/index";
+// import { throttle, handle_select } from "./utils/index";
 import LayTooltip from "../tooltip/index.vue";
+import { throttle, handle_select, makeDots } from "./utils/index";
 
 interface Prop {
   val?: number | Array<number>;
@@ -16,6 +17,7 @@ interface Prop {
   step?: number;
   min?: number;
   max?: number;
+  showDots?: boolean;
 }
 
 const props = withDefaults(defineProps<Prop>(), {
@@ -24,6 +26,7 @@ const props = withDefaults(defineProps<Prop>(), {
   step: 0,
   min: 0,
   max: 100,
+  showDots: false,
 });
 
 const moveAction = throttle(standardMove);
@@ -88,6 +91,15 @@ function calcWithStep(
     }
   }
 }
+// 断点
+const dots = makeDots(props);
+const focusDot = (val: number) => {
+  emit("link-val-hook", val);
+};
+// const focusClick = (e: MouseEvent)=>{
+//   console.log(e);
+//   standardMove(e)
+// }
 </script>
 
 <template>
@@ -111,5 +123,13 @@ function calcWithStep(
       :class="[disabled ? 'layui-slider-disabled disable-line' : '']"
     ></div>
     <div class="layui-slider-line-v"></div>
+    <div
+      v-show="showDots"
+      @click="focusDot(item)"
+      class="layui-slider-dots"
+      v-for="(item, index) in dots"
+      :key="index"
+      :style="{ left: item + '%' }"
+    ></div>
   </div>
 </template>

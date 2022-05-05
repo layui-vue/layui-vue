@@ -17,9 +17,15 @@ export interface LayMenuProps {
   level?: boolean | string;
   collapse?: boolean | string;
   collapseTransition?: boolean | string;
+  childSpacing?: boolean;
 }
 
-const emit = defineEmits(["update:selectedKey", "update:openKeys"]);
+const emit = defineEmits([
+  "update:selectedKey",
+  "update:openKeys",
+  "changeSelectedKey",
+  "changeOpenKeys",
+]);
 
 const props = withDefaults(defineProps<LayMenuProps>(), {
   selectedKey: "",
@@ -30,6 +36,7 @@ const props = withDefaults(defineProps<LayMenuProps>(), {
   level: true,
   collapse: false,
   collapseTransition: true,
+  childSpacing: false,
 });
 
 const isTree = computed(() => props.tree);
@@ -43,6 +50,7 @@ const openKeys = computed({
   },
   set(val) {
     emit("update:openKeys", val);
+    emit("changeOpenKeys", val);
   },
 });
 
@@ -52,6 +60,7 @@ const selectedKey = computed({
   },
   set(val) {
     emit("update:selectedKey", val);
+    emit("changeSelectedKey", val);
   },
 });
 
@@ -59,12 +68,10 @@ watch(
   () => props.collapse,
   () => {
     if (props.collapse) {
-      // 删除所有打开
       oldOpenKeys.value = props.openKeys;
-      emit("update:openKeys", []);
+      openKeys.value = [];
     } else {
-      // 赋值所有打开
-      emit("update:openKeys", oldOpenKeys.value);
+      openKeys.value = oldOpenKeys.value;
     }
   },
   { immediate: true }
@@ -86,6 +93,7 @@ provide("isCollapseTransition", isCollapseTransition);
       tree ? 'layui-nav-tree' : '',
       theme === 'dark' ? 'layui-nav-dark' : 'layui-nav-light',
       collapse ? 'layui-nav-collapse' : '',
+      childSpacing ? 'layui-nav-child-spacing' : '',
     ]"
   >
     <slot></slot>

@@ -8,10 +8,10 @@ export default {
 import { watch } from "vue";
 import { useI18n } from "vue-i18n";
 import {
-  enable as enableDarkMode,
-  disable as disableDarkMode,
   Theme,
   DynamicThemeFix,
+  enable as enableDarkMode,
+  disable as disableDarkMode,
 } from "darkreader";
 
 const { locale, setLocaleMessage, mergeLocaleMessage } = useI18n();
@@ -60,9 +60,7 @@ const changeTheme = (theme: string) => {
       "div.layui-color-picker *",
     ],
   };
-
   Object.assign(defaultPartial, props.darkPartial);
-
   if (theme === "dark") {
     enableDarkMode(defaultPartial, defaultFixes);
   } else if (theme === "light") {
