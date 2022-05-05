@@ -65,6 +65,9 @@
 </template>
 
 <style>
+@import '@layui/layui-vue/es/container/index.css';
+@import '@layui/layui-vue/es/quote/index.css';
+@import '@layui/layui-vue/es/field/index.css';
 .alone {
   text-align: center;
   background-color: #009688;
