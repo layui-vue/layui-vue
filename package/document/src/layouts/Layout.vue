@@ -376,8 +376,8 @@ export default {
   padding-left: 10px;
 }
 
-.layui-menu-docs .layui-menu li,
-.layui-menu-docs .layui-menu-body-title a {
+.layui-menu li,
+.layui-menu-body-title a {
   padding: 5px 15px;
 }
 
