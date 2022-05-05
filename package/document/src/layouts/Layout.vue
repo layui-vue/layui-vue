@@ -308,6 +308,7 @@ export default {
 </script>
 
 <style>
+@import "@layui/layui-vue/es/menu/index.css";
 .layui-layout-document > .layui-header {
   z-index: 99;
   width: 100%;
@@ -373,6 +374,11 @@ export default {
 
 .layui-menu-docs .layui-menu-body-title .layui-font-gray {
   padding-left: 10px;
+}
+
+.layui-menu-docs .layui-menu li,
+.layui-menu-docs .layui-menu-body-title a {
+  padding: 5px 15px;
 }
 
 .layui-side hr {
