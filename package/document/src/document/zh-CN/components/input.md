@@ -13,6 +13,7 @@
 ::: demo 使用 `lay-input` 标签, 创建输入框
 
 <template>
+  {{ data1 }}
   <lay-input v-model="data1"></lay-input>
 </template>
 
@@ -175,6 +176,7 @@ export default {
 | name         | 原始属性 name         | --             |
 | placeholder  | 提示信息              | --             |
 | disabled     | 禁用                  | `true` `false` |
+| readonly     | 原生属性 readonly     | `true` `false` |
 | v-model      | 值                    | --             |
 | autofocus    | 原生属性 autofocus    | `true` `false` |
 | autocomplete | 原生属性 autocomplete | `true` `false` |
@@ -186,15 +188,15 @@ export default {
 
 ::: table
 
-| 事件  | 描述            | 参数             |
-| ----- | --------------- | ---------------- |
-| input | 原生 input 事件 | event : 事件对象 |
-| foucs | 原生 foucs 事件 | event : 事件对象 |
-| blur  | 原生 blur 事件  | --               |
+| 事件  | 描述                | 参数             |
+| ----- | ------------------- | ----------------|
+| input | 原生 input 事件     | event : Event    |
+| foucs | 原生 foucs 事件     | event : Event    |
+| blur  | 原生 blur 事件      | event : Event    |
+| change| 原生 change 事件    | event : Event    |
+| clear | 清空 事件           | --               |
 
 :::
-
- 
 
 ::: previousNext input
 :::

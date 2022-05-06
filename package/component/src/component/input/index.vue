@@ -42,9 +42,10 @@ const emit = defineEmits([
   "blur",
 ]);
 
-const onInput = function (event: InputEvent) {
+const onInput = function (event: Event) {
   const inputElement = event.target as HTMLInputElement;
-  emit("update:modelValue", inputElement.value);
+  const value = inputElement.value;
+  emit("update:modelValue", value);
   emit("input", event);
 };
 
@@ -52,16 +53,16 @@ const onClear = () => {
   emit("update:modelValue", "");
 };
 
-const onFocus = (event: FocusEvent) => {
+const onFocus = (event: Event) => {
   emit("focus", event);
 };
 
-const onChange = () => {
-  emit("change");
+const onChange = (event: Event) => {
+  emit("change", event);
 };
 
-const onBlur = () => {
-  emit("blur");
+const onBlur = (event: Event) => {
+  emit("blur", event);
 };
 </script>
 
