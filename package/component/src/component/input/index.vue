@@ -31,7 +31,7 @@ const props = withDefaults(defineProps<LayInputProps>(), {
   readonly: false,
   allowClear: false,
   autofocus: false,
-  autocomplete: false
+  autocomplete: false,
 });
 
 const emit = defineEmits([
@@ -78,13 +78,13 @@ const onBlur = () => {
       :placeholder="placeholder"
       :autofocus="autofocus"
       :autocomplete="autocomplete"
+      :readonly="readonly"
       :class="{ 'layui-disabled': disabled }"
       class="layui-input"
       @input="onInput"
       @focus="onFocus"
       @blur="onBlur"
       @change="onChange"
-      :readonly="props.readonly"
     />
     <span class="layui-input-suffix" v-if="slots.suffix">
       <slot name="suffix"></slot>
