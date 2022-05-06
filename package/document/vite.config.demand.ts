@@ -33,7 +33,6 @@ export default defineConfig({
       imports: ["vue"],
       // 自动导入 layer-vue 相关函数,例如 layer 等
       resolvers: [
-        // @ts-ignore
         LayuiVueResolver({
           exclude: [/^Lay[A-Z]/],
         }),
@@ -49,7 +48,6 @@ export default defineConfig({
       include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
       // 自动解析 layui-vue 组件
       resolvers: [
-        // @ts-ignore
         LayuiVueResolver({
           resolveIcons: true,
           exclude: [
@@ -57,10 +55,10 @@ export default defineConfig({
             "LayAnchor",
             "LayTableBox",
             "LayCode",
-            "component",
-            "guide",
-            "index",
-            "resource",
+            // "component",
+            // "guide",
+            // "index",
+            // "resource",
           ],
         }),
       ],
