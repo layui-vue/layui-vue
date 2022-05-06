@@ -22,9 +22,15 @@ export interface LayInputProps {
   modelValue?: string;
   placeholder?: string;
   allowClear?: boolean;
+  autofocus?: boolean;
 }
 
-const props = withDefaults(defineProps<LayInputProps>(), {});
+const props = withDefaults(defineProps<LayInputProps>(), {
+  disabled: false,
+  readonly: false,
+  allowClear: false,
+  autofocus: false
+});
 
 const emit = defineEmits([
   "update:modelValue",
@@ -68,6 +74,7 @@ const onBlur = () => {
       :value="modelValue || value"
       :disabled="disabled"
       :placeholder="placeholder"
+      :autofocus="autofocus"
       :class="{ 'layui-disabled': disabled }"
       class="layui-input"
       @input="onInput"
