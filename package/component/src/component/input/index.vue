@@ -23,13 +23,15 @@ export interface LayInputProps {
   placeholder?: string;
   allowClear?: boolean;
   autofocus?: boolean;
+  autocomplete?: boolean;
 }
 
 const props = withDefaults(defineProps<LayInputProps>(), {
   disabled: false,
   readonly: false,
   allowClear: false,
-  autofocus: false
+  autofocus: false,
+  autocomplete: false
 });
 
 const emit = defineEmits([
@@ -75,6 +77,7 @@ const onBlur = () => {
       :disabled="disabled"
       :placeholder="placeholder"
       :autofocus="autofocus"
+      :autocomplete="autocomplete"
       :class="{ 'layui-disabled': disabled }"
       class="layui-input"
       @input="onInput"

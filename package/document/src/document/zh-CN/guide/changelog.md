@@ -20,6 +20,7 @@
           <li>[新增] menu 组件 changeSelectedKey 事件。</li>
           <li>[新增] menu 组件 childSpacing 属性, 开启菜单层级缩进。</li>
           <li>[新增] slider 组件 showDots 属性, 显示步长断点。</li>
+          <li>[新增] input 组件 autocomplete 原生属性。</li>
           <li>[新增] input 组件 autofocus 原生属性。</li>
           <li>[修复] side 组件 width 属性无效。</li>
         </ul> 

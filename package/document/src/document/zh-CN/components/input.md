@@ -170,16 +170,18 @@ export default {
 
 ::: table
 
-| 属性        | 描述          | 可选值         |
-| ----------- | ------------- | -------------- |
-| name        | 原始属性 name | --             |
-| placeholder | 提示信息      | --             |
-| disabled    | 禁用          | `true` `false` |
-| v-model     | 值            | --             |
+| 属性         | 描述                  | 可选值         |
+| -----------  | -------------------- | -------------- |
+| name         | 原始属性 name         | --             |
+| placeholder  | 提示信息              | --             |
+| disabled     | 禁用                  | `true` `false` |
+| v-model      | 值                    | --             |
+| autofocus    | 原生属性 autofocus    | `true` `false` |
+| autocomplete | 原生属性 autocomplete | `true` `false` |
 
 :::
 
-::: title Input 属性
+::: title Input 事件
 :::
 
 ::: table
