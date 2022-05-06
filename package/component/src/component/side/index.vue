@@ -18,8 +18,8 @@ const props = withDefaults(defineProps<LaySideProps>(), {
 
 const styles = computed<CSSProperties>(() => {
   return {
-    "flex": `0 0 ${props.width}`,
-    "width": `${props.width}`
+    flex: `0 0 ${props.width}`,
+    width: `${props.width}`,
   };
 });
 </script>
