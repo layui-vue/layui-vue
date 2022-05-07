@@ -23,6 +23,8 @@
           <li>[新增] input 组件 autocomplete 原生属性。</li>
           <li>[新增] input 组件 autofocus 原生属性。</li>
           <li>[修复] side 组件 width 属性无效。</li>
+          <li>[修复] checkbox 组件无 from 包裹时隐藏原生 checkbox。</li>
+          <li>[修复] radio 组件无 from 包裹时隐藏原生 radio。</li>
         </ul> 
       </li>
     </ul>

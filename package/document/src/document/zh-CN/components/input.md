@@ -171,15 +171,15 @@ export default {
 
 ::: table
 
-| 属性         | 描述                  | 可选值         |
-| -----------  | -------------------- | -------------- |
-| name         | 原始属性 name         | --             |
-| placeholder  | 提示信息              | --             |
-| disabled     | 禁用                  | `true` `false` |
-| readonly     | 原生属性 readonly     | `true` `false` |
-| v-model      | 值                    | --             |
-| autofocus    | 原生属性 autofocus    | `true` `false` |
-| autocomplete | 原生属性 autocomplete | `true` `false` |
+| 属性                     | 描述                  | 可选值         |
+| -----------------------  | -------------------- | -------------- |
+| name                     | 原始属性 name         | --             |
+| placeholder              | 提示信息              | --             |
+| disabled                 | 禁用                  | `true` `false` |
+| readonly                 | 原生属性 readonly     | `true` `false` |
+| v-model / modelValue     | 值                   | --             |
+| autofocus                | 原生属性 autofocus    | `true` `false` |
+| autocomplete             | 原生属性 autocomplete | `true` `false` |
 
 :::
 

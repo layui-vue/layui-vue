@@ -28,7 +28,7 @@ const handleClick = function () {
 </script>
 
 <template>
-  <span>
+  <span class="layui-radio">
     <input type="radio" :value="label" :name="name" />
     <div
       class="layui-unselect layui-form-radio"
