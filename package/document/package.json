@@ -40,7 +40,7 @@
     "vite-plugin-md": "^0.12.4",
     "unplugin-auto-import": "^0.7.1",
     "unplugin-vue-components": "^0.19.3",
-    "unplugin-layui-vue-resolver": "0.0.8"
+    "unplugin-layui-vue-resolver": "0.0.10"
   },
   "files": [
     "lib",
