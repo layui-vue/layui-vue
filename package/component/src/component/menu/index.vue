@@ -5,7 +5,15 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed, ComputedRef, provide, Ref, ref, watch, WritableComputedRef } from "vue";
+import {
+  computed,
+  ComputedRef,
+  provide,
+  Ref,
+  ref,
+  watch,
+  WritableComputedRef,
+} from "vue";
 import "./index.less";
 
 export interface LayMenuProps {
@@ -41,7 +49,9 @@ const props = withDefaults(defineProps<LayMenuProps>(), {
 
 const isTree: ComputedRef = computed(() => props.tree);
 const isCollapse: ComputedRef = computed(() => props.collapse);
-const isCollapseTransition: ComputedRef = computed(() => props.collapseTransition);
+const isCollapseTransition: ComputedRef = computed(
+  () => props.collapseTransition
+);
 const oldOpenKeys: Ref = ref<string[]>(props.openKeys);
 
 const openKeys = computed({

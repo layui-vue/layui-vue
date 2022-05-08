@@ -50,7 +50,7 @@ const openHandle = function () {
   if (!isCollapse.value) {
     let newOpenKeys = [...openKeys.value];
     if (openKeys.value.includes(props.id)) {
-      newOpenKeys.splice(newOpenKeys.indexOf(props.id), 1)
+      newOpenKeys.splice(newOpenKeys.indexOf(props.id), 1);
     } else {
       newOpenKeys.push(props.id);
     }

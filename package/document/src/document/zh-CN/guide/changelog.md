@@ -14,7 +14,7 @@
     <ul> 
       <a name="1-0-7"></a> 
       <li> 
-        <h3>1.0.7 <span class="layui-badge-rim">2022-05-03</span></h3> 
+        <h3>1.0.7 <span class="layui-badge-rim">2022-05-09</span></h3> 
         <ul>
           <li>[新增] menu 组件 changeOpenKeys 事件。</li>
           <li>[新增] menu 组件 changeSelectedKey 事件。</li>
