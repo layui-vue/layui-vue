@@ -48,11 +48,13 @@ watch(isOpen, () => {
 
 const openHandle = function () {
   if (!isCollapse.value) {
+    let newOpenKeys = [...openKeys.value];
     if (openKeys.value.includes(props.id)) {
-      openKeys.value.splice(openKeys.value.indexOf(props.id), 1);
+      newOpenKeys.splice(newOpenKeys.indexOf(props.id), 1)
     } else {
-      openKeys.value.push(props.id);
+      newOpenKeys.push(props.id);
     }
+    openKeys.value = newOpenKeys;
   }
 };
 

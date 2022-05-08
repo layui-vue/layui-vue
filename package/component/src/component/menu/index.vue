@@ -5,7 +5,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed, provide, ref, watch } from "vue";
+import { computed, ComputedRef, provide, Ref, ref, watch, WritableComputedRef } from "vue";
 import "./index.less";
 
 export interface LayMenuProps {
@@ -39,10 +39,10 @@ const props = withDefaults(defineProps<LayMenuProps>(), {
   childSpacing: false,
 });
 
-const isTree = computed(() => props.tree);
-const isCollapse = computed(() => props.collapse);
-const isCollapseTransition = computed(() => props.collapseTransition);
-let oldOpenKeys = ref<string[]>(props.openKeys);
+const isTree: ComputedRef = computed(() => props.tree);
+const isCollapse: ComputedRef = computed(() => props.collapse);
+const isCollapseTransition: ComputedRef = computed(() => props.collapseTransition);
+const oldOpenKeys: Ref = ref<string[]>(props.openKeys);
 
 const openKeys = computed({
   get() {

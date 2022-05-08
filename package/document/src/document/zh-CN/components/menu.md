@@ -59,7 +59,8 @@ export default {
 ::: demo
 
 <template>
-  <lay-menu v-model:selectedKey="selectedKey" v-model:openKeys="openKeys2" :tree="true">
+  选中：{{ selectedKey }} 打开： {{ openKeys2 }}
+  <lay-menu :selectedKey="selectedKey" @changeSelectedKey="changeSelectedKey" @changeOpenKeys="changeOpenKeys" v-model:openKeys="openKeys2" :tree="true">
     <lay-menu-item id="1">首页</lay-menu-item>
     <lay-menu-item id="2">首页</lay-menu-item>
     <lay-menu-item id="3">首页</lay-menu-item> 
@@ -89,10 +90,19 @@ export default {
 
     const openKeys2 = ref(["7"])
     const selectedKey = ref("5")
+    const changeSelectedKey = (val) => {
+      selectedKey.value = val;
+    }
+
+    const changeOpenKeys = (val) => {
+      openKeys2.value = val;
+    }
 
     return {
       openKeys2,
-      selectedKey
+      selectedKey,
+      changeOpenKeys,
+      changeSelectedKey
     }
   }
 }
