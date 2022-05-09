@@ -542,9 +542,76 @@ export default {
 
 :::
 
+::: title 手风琴模式
+:::
+::: demo
+
+<template>
+         <lay-menu :selectedKey="selectedKey2" @changeSelectedKey="changeSelectedKey" @changeOpenKeys="changeOpenKeys"
+          v-model:openKeys="openKeys2" :tree="true">
+            <lay-sub-menu id="1"  @click="change('1')">
+            <template #title>
+              首页1
+            </template>
+            <lay-menu-item id="10">首页</lay-menu-item>
+            <lay-menu-item id="11">首页</lay-menu-item>
+          </lay-sub-menu>
+          <lay-sub-menu id="7" @click="change('7')">
+            <template #title>
+              首页2
+            </template>
+            <lay-menu-item id="8">首页</lay-menu-item>
+            <lay-menu-item id="9">首页</lay-menu-item>
+          </lay-sub-menu>
+         <lay-sub-menu id="3" @click="change('3')">
+            <template #title>
+              首页3
+            </template>
+            <lay-menu-item id="4">首页</lay-menu-item>
+            <lay-menu-item id="5">首页</lay-menu-item>
+          </lay-sub-menu>
+        </lay-menu>
+</template>
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+    const openKeys2 = ref(["7"])
+    const selectedKey2 = ref("5")
+    const close = ref(false)
+    const changeSelectedKey = (val) => {
+      selectedKey2.value = val;
+    }
+
+    const changeOpenKeys = (val) => {
+      console.log(val)
+      if(val.length ==0){
+        close.value = false
+      }else{
+        close.value = true
+      }
+    }
+    const change = (id) =>{
+      if(close.value == true){
+      openKeys2.value = [id]
+      }else{
+        openKeys2.value = []
+      }
+    }
+      return {
+      openKeys2,
+      selectedKey2,
+      changeOpenKeys,
+      changeSelectedKey,
+      change
+    }
+   }
+  }
+</script>
+:::
 ::: title Menu 属性
 :::
-
 ::: table
 
 | 属性                | 描述           | 备注           |
