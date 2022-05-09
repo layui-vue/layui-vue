@@ -610,6 +610,8 @@ export default {
   }
 </script>
 :::
+::: title Menu 属性
+:::
 ::: table
 
 | 属性                | 描述           | 备注           |
