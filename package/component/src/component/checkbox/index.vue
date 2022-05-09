@@ -94,7 +94,7 @@ const handleClick = function () {
 </script>
 
 <template>
-  <span @click.stop="handleClick">
+  <span @click.stop="handleClick" class="layui-checkbox">
     <input type="checkbox" :name="name" :value="label" />
     <div
       class="layui-unselect layui-form-checkbox"

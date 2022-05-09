@@ -22,9 +22,17 @@ export interface LayInputProps {
   modelValue?: string;
   placeholder?: string;
   allowClear?: boolean;
+  autofocus?: boolean;
+  autocomplete?: boolean;
 }
 
-const props = withDefaults(defineProps<LayInputProps>(), {});
+const props = withDefaults(defineProps<LayInputProps>(), {
+  disabled: false,
+  readonly: false,
+  allowClear: false,
+  autofocus: false,
+  autocomplete: false,
+});
 
 const emit = defineEmits([
   "update:modelValue",
@@ -34,9 +42,10 @@ const emit = defineEmits([
   "blur",
 ]);
 
-const onInput = function (event: InputEvent) {
+const onInput = function (event: Event) {
   const inputElement = event.target as HTMLInputElement;
-  emit("update:modelValue", inputElement.value);
+  const value = inputElement.value;
+  emit("update:modelValue", value);
   emit("input", event);
 };
 
@@ -44,16 +53,16 @@ const onClear = () => {
   emit("update:modelValue", "");
 };
 
-const onFocus = (event: FocusEvent) => {
+const onFocus = (event: Event) => {
   emit("focus", event);
 };
 
-const onChange = () => {
-  emit("change");
+const onChange = (event: Event) => {
+  emit("change", event);
 };
 
-const onBlur = () => {
-  emit("blur");
+const onBlur = (event: Event) => {
+  emit("blur", event);
 };
 </script>
 
@@ -68,13 +77,15 @@ const onBlur = () => {
       :value="modelValue || value"
       :disabled="disabled"
       :placeholder="placeholder"
+      :autofocus="autofocus"
+      :autocomplete="autocomplete"
+      :readonly="readonly"
       :class="{ 'layui-disabled': disabled }"
       class="layui-input"
       @input="onInput"
       @focus="onFocus"
       @blur="onBlur"
       @change="onChange"
-      :readonly="props.readonly"
     />
     <span class="layui-input-suffix" v-if="slots.suffix">
       <slot name="suffix"></slot>

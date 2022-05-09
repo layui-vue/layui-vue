@@ -36,7 +36,7 @@
     "rimraf": "^3.0.2",
     "rollup": "^2.70.1",
     "typescript": "^4.6.3",
-    "vite": "2.9.2",
+    "vite": "2.9.8",
     "vite-plugin-md": "^0.12.4",
     "unplugin-auto-import": "^0.7.1",
     "unplugin-vue-components": "^0.19.3",

@@ -13,9 +13,7 @@
 ::: demo 使用 `lay-checkbox` 标签, 创建一个复选框
 
 <template>
-  <lay-form>
     <lay-checkbox name="like" skin="primary"  v-model="checked1" label="1" ></lay-checkbox>
- </lay-form>
 </template>
 
 <script>
@@ -41,9 +39,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-form>
     <lay-checkbox name="like" label="1" v-model="checked2" >普通</lay-checkbox>
- </lay-form>
 </template>
 
 <script>
@@ -69,13 +65,11 @@ export default {
 ::: demo
 
 <template>
-  <lay-form>
     <lay-checkbox-group v-model="checkeds" @change="groupChange">
       <lay-checkbox name="like" skin="primary" label="1">写作</lay-checkbox>
       <lay-checkbox name="like" skin="primary" label="2">画画</lay-checkbox>
       <lay-checkbox name="like" skin="primary" label="3">运动</lay-checkbox>
     </lay-checkbox-group>
-  </lay-form>
 </template>
 
 <script>
@@ -105,11 +99,9 @@ export default {
 ::: demo
 
 <template>
-  <lay-form>
     <lay-checkbox name="like" skin="primary" v-model="checked3" label="1">写作</lay-checkbox>
     <lay-checkbox name="like" skin="primary" v-model="checked4" label="2">画画</lay-checkbox>
     <lay-checkbox name="like" skin="primary" v-model="checked5" label="3">运动</lay-checkbox>
-  </lay-form>
 </template>
 
 <script>
@@ -137,9 +129,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-form>
     <lay-checkbox name="like" skin="primary" label="1" :disabled="disabled" v-model="checked6">禁用</lay-checkbox>
- </lay-form>
 </template>
 
 <script>
@@ -167,9 +157,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-form>
     <lay-checkbox name="like" skin="primary" label="1" @change="change" v-model="checked7">回调</lay-checkbox>
- </lay-form>
 </template>
 
 <script>

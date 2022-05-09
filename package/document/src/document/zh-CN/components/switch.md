@@ -194,13 +194,12 @@ export default {
 
 ::: table
 
-| 属性   | 描述     | 可选值           |
+| 属性   | 描述     | 参数           |
 | ------ | -------- | ---------------- |
-| change | 切换事件 | current : 当前值 |
+| change | 切换事件 | val : 当前值 |
 
 :::
 
- 
 ::: title Switch 插槽
 :::
 

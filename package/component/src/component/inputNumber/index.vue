@@ -5,10 +5,10 @@ export default {
 </script>
 
 <script setup lang="ts">
-import layButton from "../button/index.vue";
+import "./index.less";
 import layInput from "../input/index.vue";
 import { LayIcon } from "@layui/icons-vue";
-import "./index.less";
+import layButton from "../button/index.vue";
 import { ref, watch, withDefaults, computed } from "vue";
 
 export interface LayInputNumberProps {
@@ -65,6 +65,7 @@ let timer: any = 0;
 const minControl = computed(
   () => props.min !== -Infinity && Number(props.min) >= num.value
 );
+
 const maxControl = computed(
   () => props.max !== Infinity && Number(props.max) <= num.value
 );

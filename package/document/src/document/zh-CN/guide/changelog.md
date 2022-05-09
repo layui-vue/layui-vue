@@ -14,12 +14,18 @@
     <ul> 
       <a name="1-0-7"></a> 
       <li> 
-        <h3>1.0.7 <span class="layui-badge-rim">2022-05-03</span></h3> 
+        <h3>1.0.7 <span class="layui-badge-rim">2022-05-09</span></h3> 
         <ul>
           <li>[新增] menu 组件 changeOpenKeys 事件。</li>
           <li>[新增] menu 组件 changeSelectedKey 事件。</li>
+          <li>[新增] menu 组件 childSpacing 属性, 开启菜单层级缩进。</li>
           <li>[新增] slider 组件 showDots 属性, 显示步长断点。</li>
-          <li>[修复] side 组件 width 属性失效, 随内容宽度自适应的问题。</li>
+          <li>[新增] input 组件 autocomplete 原生属性。</li>
+          <li>[新增] input 组件 autofocus 原生属性。</li>
+          <li>[修复] side 组件 width 属性无效。</li>
+          <li>[优化] checkbox 组件 css 样式。</li>
+          <li>[优化] radio 组件 css 样式。</li>
+          <li>[升级] vueuse/core 8.4.2。</li>
         </ul> 
       </li>
     </ul>

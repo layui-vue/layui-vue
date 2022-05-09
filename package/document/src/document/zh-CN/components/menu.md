@@ -59,7 +59,8 @@ export default {
 ::: demo
 
 <template>
-  <lay-menu v-model:selectedKey="selectedKey" v-model:openKeys="openKeys2" :tree="true">
+  选中：{{ selectedKey }} 打开： {{ openKeys2 }}
+  <lay-menu :selectedKey="selectedKey" @changeSelectedKey="changeSelectedKey" @changeOpenKeys="changeOpenKeys" v-model:openKeys="openKeys2" :tree="true">
     <lay-menu-item id="1">首页</lay-menu-item>
     <lay-menu-item id="2">首页</lay-menu-item>
     <lay-menu-item id="3">首页</lay-menu-item> 
@@ -89,10 +90,19 @@ export default {
 
     const openKeys2 = ref(["7"])
     const selectedKey = ref("5")
+    const changeSelectedKey = (val) => {
+      selectedKey.value = val;
+    }
+
+    const changeOpenKeys = (val) => {
+      openKeys2.value = val;
+    }
 
     return {
       openKeys2,
-      selectedKey
+      selectedKey,
+      changeOpenKeys,
+      changeSelectedKey
     }
   }
 }
@@ -473,6 +483,65 @@ export default {
 
 :::
 
+::: title 层级缩进
+:::
+
+::: demo
+
+<template>
+  <lay-menu v-model:selectedKey="selectedKey" v-model:openKeys="openKeys7" :child-spacing="childSpacing" v-model:tree="isTree">
+    <lay-menu-item id="1">
+      <router-link to="">
+        <lay-icon type="layui-icon-home"></lay-icon> 
+        首页
+      </router-link>
+    </lay-menu-item>
+    <lay-sub-menu id="7">
+        <template v-slot:title> 
+          <router-link to="">
+            <lay-icon type="layui-icon-home"></lay-icon> 
+            目录
+          </router-link>
+        </template>
+        <lay-menu-item id="8">
+            <router-link to="">
+              <lay-icon type="layui-icon-home"></lay-icon> 
+              菜单
+            </router-link>
+        </lay-menu-item> 
+        <lay-menu-item id="9">
+            <router-link to="">
+              <lay-icon type="layui-icon-home"></lay-icon> 
+              菜单
+            </router-link>
+        </lay-menu-item>
+    </lay-sub-menu> 
+  </lay-menu>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const isTree = ref(true)
+    const selectedKey = ref("5")
+    const openKeys7 = ref(["7"])
+    const childSpacing = ref(true); 
+
+    return {
+      isTree,
+      openKeys7,
+      selectedKey,
+      childSpacing
+    }
+  }
+}
+</script>
+
+:::
+
 ::: title Menu 属性
 :::
 
@@ -534,8 +603,6 @@ export default {
 | title | 菜单标题 | --   |
 
 :::
-
- 
 
 ::: previousNext nav
 :::
