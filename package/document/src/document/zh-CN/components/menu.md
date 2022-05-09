@@ -542,10 +542,7 @@ export default {
 
 :::
 
-
-::: 手风琴模式
-:::
-::: title Menu 属性
+::: title 手风琴模式
 :::
 ::: demo
 
