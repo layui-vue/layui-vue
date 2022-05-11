@@ -15,7 +15,7 @@
       <i
         class="layui-icon layui-icon-play btn"
         @click="onPlayground"
-        title="在 Playground 中打开"
+        title="运行代码"
       />
       <i
         class="layui-icon layui-icon-file btn"
@@ -181,7 +181,6 @@ function handleScroll() {
   line-height: 18px;
   color: var(--c-text-light);
 }
-
 .lay-code .control {
   height: 44px;
   box-sizing: border-box;
