@@ -76,4 +76,4 @@ createApp(App).use(layui).mount('#app')
 
 ## 开源许可
 
-Layui vue是基于[MIT协议](https://opensource.org/licenses/MIT)提供。
+Layui Vue 采用 [MIT](https://opensource.org/licenses/MIT) 开源许可证。
