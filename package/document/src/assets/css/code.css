@@ -1,9 +1,10 @@
 code {
   margin: 0;
-  border-radius: 3px;
   padding: 0.25rem 0.5rem;
-  font-size: 0.85em;
+  border-radius: 3px;
   background-color: rgba(27, 31, 35, 0.05);
+  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+  font-size: 0.85em;
 }
 
 code .token.deleted {
@@ -72,10 +73,11 @@ li > div[class*='language-'] {
 
 [class*='language-'] code {
   padding: 0;
-  line-height: 24px;
-  font-size: 14px;
-  color: #000;
+  color: #303133;
   background-color: #fafafa;
+  letter-spacing: 0.5px;
+  line-height: 23px;
+  font-size: 14px;
 }
 
 /**
@@ -110,14 +112,14 @@ li > div[class*='language-'] {
 .token.boolean,
 .token.number,
 .token.function {
-  color: #f08d49;
+  color: #f5871f;
 }
 
 .token.property,
 .token.class-name,
 .token.constant,
 .token.symbol {
-  color: #f8c555;
+  color: #f5871f;
 }
 
 .token.selector,
