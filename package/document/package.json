@@ -22,7 +22,7 @@
     "@types/prettier": "^2.4.4",
     "escape-html": "^1.0.3",
     "markdown-it-container": "^3.0.0",
-    "prismjs": "^1.25.0",
+    "prismjs": "^1.28.0",
     "vite-plugin-md": "^0.12.4"
   },
   "files": [
