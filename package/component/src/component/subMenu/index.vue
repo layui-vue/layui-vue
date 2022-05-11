@@ -89,14 +89,17 @@ onBeforeUnmount(() => window.removeEventListener("resize", setPosition));
 <template>
   <li class="layui-nav-item">
     <a href="javascript:void(0)" @click="openHandle()">
+      <!-- 图标 -->
       <i>
         <slot v-if="slots.icon" name="icon"></slot>
       </i>
+      <!-- 标题 -->
       <span>
         <slot v-if="slots.title" name="title"></slot>
       </span>
+      <!-- 扩展 -->
       <i
-        :class="[isOpen && !isTree ? 'layui-nav-mored' : '']"
+        :class="[isOpen ? 'layui-nav-mored' : '']"
         class="layui-icon layui-icon-down layui-nav-more"
       ></i>
     </a>

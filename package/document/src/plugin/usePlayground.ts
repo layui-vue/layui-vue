@@ -37,7 +37,7 @@ export const usePlayGround = async (
       code = `${decodeCode}
       <script lang="ts" setup>
 
-      </script>`
+      </script>`;
     }
 
     // 去除 export default,保留其中的内容
