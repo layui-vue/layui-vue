@@ -198,17 +198,18 @@ const onFullscreenchange = function (event: KeyboardEvent) {
 };
 
 /**
- * 屏蔽 F11 按键原生事件,用 fullscreenAPI 代替 
+ * 屏蔽 F11 按键原生事件,用 fullscreenAPI 代替
  * @param event 键盘事件
  */
-const onKeydownF11 = function(event: KeyboardEvent) {
+const onKeydownF11 = function (event: KeyboardEvent) {
   // DOM 根节点全屏
-  let isRootNodeFullscreen = props.immersive && (!activeEl.value || activeEl.value === defaultElement)
-  if(event.key === "F11" && isRootNodeFullscreen){
+  let isRootNodeFullscreen =
+    props.immersive && (!activeEl.value || activeEl.value === defaultElement);
+  if (event.key === "F11" && isRootNodeFullscreen) {
     event.preventDefault();
     toggle();
   }
-}
+};
 
 onMounted(() => {
   //@ts-ignore

@@ -20,7 +20,7 @@
   font-size: 14px;
   width: 50px;
   max-width: 180px;
-  height: 50px; 
+  height: 50px;
   border-top: 1px solid whitesmoke;
   padding: 0 10px;
   padding-left: 28px;
