@@ -12,6 +12,17 @@
 <lay-timeline>
   <lay-timeline-item title="1.0.x">
     <ul> 
+      <a name="1-0-8"></a> 
+      <li> 
+        <h3>1.0.8 <span class="layui-badge-rim">2022-05-11</span></h3> 
+        <ul>
+          <li>[重构] table 组件 columns 渲染。</li>
+          <li>[修复] table 组件 datasource 缺失属性 column 错位。</li>
+          <li>[修复] fullscreen 组件按 F11 进入全屏, 退出全屏不生效。</li>
+        </ul> 
+      </li>
+    </ul>
+    <ul> 
       <a name="1-0-7"></a> 
       <li> 
         <h3>1.0.7 <span class="layui-badge-rim">2022-05-09</span></h3> 
