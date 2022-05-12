@@ -503,6 +503,9 @@ export default {
             目录
           </router-link>
         </template>
+        <template v-slot:expandIcon={isExpand}>
+          {{isExpand}}
+        </template>
         <lay-menu-item id="8">
             <router-link to="">
               <lay-icon type="layui-icon-home"></lay-icon> 

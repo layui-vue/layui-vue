@@ -98,9 +98,15 @@ onBeforeUnmount(() => window.removeEventListener("resize", setPosition));
         <slot v-if="slots.title" name="title"></slot>
       </span>
       <!-- 扩展 -->
+      <i v-if="slots.expandIcon" class="layui-nav-more">
+        <slot name="expandIcon" :isExpand="isOpen"></slot>
+      </i>
       <i
-        :class="[isOpen ? 'layui-nav-mored' : '']"
-        class="layui-icon layui-icon-down layui-nav-more"
+        v-else
+        :class="[isOpen ? 
+        'layui-nav-mored' : '', 
+        'layui-icon layui-icon-down', 
+        'layui-nav-more']"
       ></i>
     </a>
     <template v-if="isTree">
