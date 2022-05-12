@@ -103,10 +103,11 @@ onBeforeUnmount(() => window.removeEventListener("resize", setPosition));
       </i>
       <i
         v-else
-        :class="[isOpen ? 
-        'layui-nav-mored' : '', 
-        'layui-icon layui-icon-down', 
-        'layui-nav-more']"
+        :class="[
+          isOpen ? 'layui-nav-mored' : '',
+          'layui-icon layui-icon-down',
+          'layui-nav-more',
+        ]"
       ></i>
     </a>
     <template v-if="isTree">
