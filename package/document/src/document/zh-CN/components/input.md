@@ -13,7 +13,6 @@
 ::: demo 使用 `lay-input` 标签, 创建输入框
 
 <template>
-  {{ data1 }}
   <lay-input v-model="data1"></lay-input>
 </template>
 

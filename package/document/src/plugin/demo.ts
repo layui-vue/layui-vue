@@ -131,7 +131,6 @@ export default {
         }
       }
     }
-
     return `
     <lay-code>
       ${description ? `<template #description>${descTemplate}</template>` : ""}

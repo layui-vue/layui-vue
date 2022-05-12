@@ -137,11 +137,7 @@ function handleScroll() {
   margin: 1rem 0;
   border: 1px solid whitesmoke;
   border-radius: 3px;
-  background: var(--c-bg);
   transition: all 0.2s;
-}
-.lay-code:hover {
-  box-shadow: var(--shadow-2);
 }
 .lay-code .source {
   padding: 24px;
@@ -150,7 +146,6 @@ function handleScroll() {
 .lay-code .meta {
   padding: 0 10px;
   height: 0;
-  background-color: var(--c-page-background);
   overflow: hidden;
   transition: height 0.2s;
 }
@@ -160,10 +155,8 @@ function handleScroll() {
   margin-bottom: 0px;
   border: 1px solid whitesmoke;
   box-sizing: border-box;
-  background: var(--c-bg);
   font-size: 14px;
   line-height: 22px;
-  color: var(--c-text-light-1);
   word-break: break-word;
 }
 .lay-code .source .description p {
@@ -179,7 +172,6 @@ function handleScroll() {
   background-color: rgba(27, 31, 35, 0.05);
   font-size: 12px;
   line-height: 18px;
-  color: var(--c-text-light);
 }
 .lay-code .control {
   height: 44px;
@@ -188,9 +180,8 @@ function handleScroll() {
   border-top: 1px solid whitesmoke;
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
-  background: var(--c-bg);
+  background-color: white;
   text-align: center;
-  color: var(--c-text);
   cursor: pointer;
   width: 100%;
   user-select: none;
@@ -199,10 +190,6 @@ function handleScroll() {
   position: sticky;
   z-index: 11;
   bottom: 0;
-}
-.lay-code .control:hover {
-  background-color: var(--c-page-background);
-  color: var(--c-brand);
 }
 .lay-code .control > i {
   display: inline-block;

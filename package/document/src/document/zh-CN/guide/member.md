@@ -43,7 +43,7 @@
 <lay-card>
     <lay-row>
         <lay-col md="2">
-            <lay-avatar src="https://portrait.gitee.com/uploads/avatars/user/702/2106738_wanglin300_1639442830.png!avatar200"></lay-avatar>
+            <lay-avatar src="https://portrait.gitee.com/uploads/avatars/user/702/2106738_wanglin300_1639442830.png"></lay-avatar>
         </lay-col>
         <lay-col md="3">
             halo
@@ -103,7 +103,7 @@
 <lay-card>
     <lay-row>
         <lay-col md="2">
-            <lay-avatar src="https://portrait.gitee.com/uploads/avatars/user/2596/7789823_finalsummer_1613993823.png!avatar200"></lay-avatar>
+            <lay-avatar src="https://portrait.gitee.com/uploads/avatars/user/2596/7789823_finalsummer_1613993823.png"></lay-avatar>
         </lay-col>
         <lay-col md="3">
             finalsummer
