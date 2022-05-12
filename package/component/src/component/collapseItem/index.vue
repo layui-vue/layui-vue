@@ -56,7 +56,9 @@ const showHandle = function () {
       @click="showHandle"
     >
       <slot name="title" :props="props">{{ title }}</slot>
-      <i class="layui-icon layui-colla-icon">{{ isShow ? "" : "" }}</i>
+      <i class="layui-icon layui-colla-icon">
+        {{ isShow ? "" : "" }}
+      </i>
     </h2>
     <lay-transition :enable="collapseTransition">
       <div v-if="isShow">
