@@ -5,15 +5,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import {
-  computed,
-  ComputedRef,
-  provide,
-  Ref,
-  ref,
-  watch,
-  WritableComputedRef,
-} from "vue";
+import { computed, ComputedRef, provide, Ref, ref, watch } from "vue";
 import "./index.less";
 
 export interface LayMenuProps {
@@ -25,7 +17,6 @@ export interface LayMenuProps {
   level?: boolean | string;
   collapse?: boolean | string;
   collapseTransition?: boolean | string;
-  childSpacing?: boolean;
 }
 
 const emit = defineEmits([
@@ -44,7 +35,6 @@ const props = withDefaults(defineProps<LayMenuProps>(), {
   level: true,
   collapse: false,
   collapseTransition: true,
-  childSpacing: false,
 });
 
 const isTree: ComputedRef = computed(() => props.tree);
@@ -103,7 +93,6 @@ provide("isCollapseTransition", isCollapseTransition);
       tree ? 'layui-nav-tree' : '',
       theme === 'dark' ? 'layui-nav-dark' : 'layui-nav-light',
       collapse ? 'layui-nav-collapse' : '',
-      childSpacing ? 'layui-nav-child-spacing' : '',
     ]"
   >
     <slot></slot>

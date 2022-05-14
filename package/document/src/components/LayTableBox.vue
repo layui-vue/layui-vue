@@ -20,9 +20,9 @@
   font-size: 14px;
   width: 50px;
   max-width: 180px;
-  height: 50px; /*统一每一行的默认高度*/
-  border-top: 1px solid whitesmoke; /*内部边框样式*/
-  padding: 0 10px; /*内边距*/
+  height: 50px;
+  border-top: 1px solid whitesmoke;
+  padding: 0 10px;
   padding-left: 28px;
 }
 .lay-table-box table th {

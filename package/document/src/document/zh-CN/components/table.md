@@ -274,8 +274,8 @@ export default {
     ]
 
     const dataSource5 = [
-      {id:"1", username:"root", password:"root", age:"18"},
-      {id:"2", username:"woow", password:"woow", age:"20"}
+      {id:"1", username:"root", age:"18"},
+      {id:"2", username:"woow", age:"20"}
     ]
 
     const rowClick5 = function(data) {

@@ -201,9 +201,10 @@ export default {
 
 ::: table
 
-| 属性  | 描述 | 可选值 |
-| ----- | ---- | ------ |
-| title | 标题 | --     |
+| 属性  | 描述 | 类型 | 可选值 | 可选值 |
+| ----- | ---- | ------ | ----- | ----- |
+| title | 标题 | `string` | -- | -- |
+| shadow | 阴影 | `string` | `always` | `always` `hover` `never` |
 
 :::
 

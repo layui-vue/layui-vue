@@ -483,13 +483,13 @@ export default {
 
 :::
 
-::: title 层级缩进
+::: title 扩展图标
 :::
 
 ::: demo
 
 <template>
-  <lay-menu v-model:selectedKey="selectedKey" v-model:openKeys="openKeys7" :child-spacing="childSpacing" v-model:tree="isTree">
+  <lay-menu v-model:selectedKey="selectedKey" v-model:openKeys="openKeys7" v-model:tree="isTree">
     <lay-menu-item id="1">
       <router-link to="">
         <lay-icon type="layui-icon-home"></lay-icon> 
@@ -502,6 +502,9 @@ export default {
             <lay-icon type="layui-icon-home"></lay-icon> 
             目录
           </router-link>
+        </template>
+        <template v-slot:expandIcon={isExpand}>
+          {{isExpand}}
         </template>
         <lay-menu-item id="8">
             <router-link to="">
@@ -526,15 +529,13 @@ export default {
   setup() {
 
     const isTree = ref(true)
-    const selectedKey = ref("5")
     const openKeys7 = ref(["7"])
-    const childSpacing = ref(true); 
+    const selectedKey = ref("5")
 
     return {
       isTree,
       openKeys7,
       selectedKey,
-      childSpacing
     }
   }
 }
@@ -590,6 +591,7 @@ export default {
 | 插槽  | 描述     | 备注 |
 | ----- | -------- | ---- |
 | title | 菜单标题 | --   |
+| expandIcon | 扩展图标 | --   |
 
 :::
 

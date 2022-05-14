@@ -184,7 +184,7 @@ const activeEl = computed(() => (targetEl.value = props.target));
 
 /**
  * 处理 fullscreenchange 和浏览器窗口内全屏 Escape 按键事件
- * @param event Escape 键盘事件
+ * @param event 键盘事件
  */
 const onFullscreenchange = function (event: KeyboardEvent) {
   if (isFullscreen.value && !document.fullscreenElement) {
@@ -197,10 +197,25 @@ const onFullscreenchange = function (event: KeyboardEvent) {
   }
 };
 
+/**
+ * 屏蔽 F11 按键原生事件,用 fullscreenAPI 代替
+ * @param event 键盘事件
+ */
+const onKeydownF11 = function (event: KeyboardEvent) {
+  // DOM 根节点全屏
+  let isRootNodeFullscreen =
+    props.immersive && (!activeEl.value || activeEl.value === defaultElement);
+  if (event.key === "F11" && isRootNodeFullscreen) {
+    event.preventDefault();
+    toggle();
+  }
+};
+
 onMounted(() => {
   //@ts-ignore
   document.addEventListener(fullscreenAPI.fullscreenchange, onFullscreenchange);
   document.addEventListener("keydown", onFullscreenchange);
+  document.addEventListener("keydown", onKeydownF11);
 });
 
 onBeforeUnmount(() => {
@@ -210,6 +225,7 @@ onBeforeUnmount(() => {
     onFullscreenchange
   );
   document.removeEventListener("keydown", onFullscreenchange);
+  document.removeEventListener("keydown", onKeydownF11);
 });
 </script>
 
