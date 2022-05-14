@@ -14,12 +14,13 @@
     <ul> 
       <a name="1-0-8"></a> 
       <li> 
-        <h3>1.0.8 <span class="layui-badge-rim">2022-05-11</span></h3> 
+        <h3>1.0.8 <span class="layui-badge-rim">2022-05-14</span></h3> 
         <ul>
-          <li>[重构] table 组件 columns 渲染。</li>
+          <li>[新增] resolver 按需解析器。</li>
           <li>[新增] sub-menu 组件 expandIcon 插槽。</li>
           <li>[修复] table 组件 datasource 缺失属性 column 错位。</li>
           <li>[修复] fullscreen 组件按 F11 进入全屏, 退出全屏不生效。</li>
+          <li>[重构] table 组件 columns 渲染。</li>
         </ul> 
       </li>
     </ul>

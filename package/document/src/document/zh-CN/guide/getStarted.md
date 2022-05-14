@@ -42,7 +42,7 @@ createApp(App).use(Layui).mount('#app')
 ::: describe 以上代码便完成了 layui-vue 的引入。需要注意的是，样式文件需要单独引入。
 :::
 
-::: title 按需引入（自动）
+::: title 自动按需
 :::
 
 ::: describe 安装 <a href="https://github.com/antfu/unplugin-vue-components" target="_blank" style="color:#5FB878"><code>unplugin-vue-components</code></a> 和 <a href="https://github.com/antfu/unplugin-auto-import" target="_blank" style="color:#5FB878"><code>unplugin-auto-import</code></a> 插件，插件会自动解析模板中用到的组件，并引入组件和样式。
@@ -52,7 +52,7 @@ createApp(App).use(Layui).mount('#app')
 npm install -D unplugin-vue-components unplugin-auto-import
 ```
 
-::: describe vite 配置
+::: describe 修改 vite.config.js 文件
 :::
 
 ```js
@@ -64,8 +64,6 @@ import { LayuiVueResolver } from 'unplugin-vue-components/resolvers'
 export default {
   plugins: [
     // ...其它插件
-    
-    // 自动导入 layer-vue 相关函数,例如 layer 等
     AutoImport({
       resolvers: [LayuiVueResolver()],
     }),
@@ -109,7 +107,7 @@ export interface LayuiVueResolverOptions {
 }
 ```
 
-::: title 按需引入（手动）
+::: title 手动按需
 :::
 
 ::: describe 需要手动引入组件样式

@@ -8,6 +8,7 @@ export default {
 import { computed, inject } from "vue";
 import "./index.less";
 
+
 export interface LayCheckboxProps {
   name?: string;
   skin?: string;

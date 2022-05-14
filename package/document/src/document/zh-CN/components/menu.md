@@ -557,7 +557,6 @@ export default {
 | level               | 菜单层级       | `true` `false` |
 | collapse            | 折叠状态       | `true` `false` |
 | collapse-transition  | 折叠动画       | `true` `false` |
-| child-spacing       | 子菜单增加间距  | `true` `false` |
 
 :::
 
