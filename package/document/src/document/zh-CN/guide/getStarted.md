@@ -28,7 +28,7 @@
 ```
 npm install @layui/layui-vue --save
 ```
-::: title 全局注册
+::: title 完整引入
 :::
 
 ```js
@@ -42,7 +42,77 @@ createApp(App).use(Layui).mount('#app')
 ::: describe 以上代码便完成了 layui-vue 的引入。需要注意的是，样式文件需要单独引入。
 :::
 
-::: title 按需引入
+::: title 按需引入（自动）
+:::
+
+::: describe 安装 <a href="https://github.com/antfu/unplugin-vue-components" target="_blank" style="color:#5FB878"><code>unplugin-vue-components</code></a> 和 <a href="https://github.com/antfu/unplugin-auto-import" target="_blank" style="color:#5FB878"><code>unplugin-auto-import</code></a> 插件，插件会自动解析模板中用到的组件，并引入组件和样式。
+:::
+
+```
+npm install -D unplugin-vue-components unplugin-auto-import
+```
+
+::: describe vite 配置
+:::
+
+```js
+// vite.config.ts
+import AutoImport from 'unplugin-auto-import/vite'
+import Components from 'unplugin-vue-components/vite'
+import { LayuiVueResolver } from 'unplugin-vue-components/resolvers'
+
+export default {
+  plugins: [
+    // ...其它插件
+    
+    // 自动导入 layer-vue 相关函数,例如 layer 等
+    AutoImport({
+      resolvers: [LayuiVueResolver()],
+    }),
+    // 自动解析 layui-vue 组件
+    Components({
+      resolvers: [LayuiVueResolver()],
+    }),
+  ],
+}
+```
+
+::: describe LayuiVueResolver 选项类型声明
+:::
+
+```ts
+export declare function LayuiVueResolver(
+  options?: LayuiVueResolverOptions = {}
+): ComponentResolver
+
+export interface LayuiVueResolverOptions {
+  /**
+   * 将样式与组件一起导入
+   *
+   * @default 'css'
+   */
+  importStyle?: boolean | 'css'
+
+  /**
+   * 是否解析图标
+   *
+   * @default false
+   */
+  resolveIcons?: boolean
+
+  /**
+   * 排除不需要自动导入的组件
+   * 
+   * eg: exclude: ['LayDocTable', /^LayDoc[A-Z]/,]
+   */
+  exclude?: Array<string | RegExp>;
+}
+```
+
+::: title 按需引入（手动）
+:::
+
+::: describe 需要手动引入组件样式
 :::
 
 ```js
@@ -78,7 +148,7 @@ app.mount('#app')
 ::: title 浏览器导入
 :::
 
-::: describe 根据不同的 CDN 提供商有不同的引入方式， 根据不同的 CDN 提供商有不同的引入方式， 我们在这里以 unpkg 举例。
+::: describe 根据不同的 CDN 提供商有不同的引入方式，我们在这里以 unpkg 举例。
 :::
 
 ```html
@@ -100,8 +170,7 @@ app.mount('#app')
 
 <body>
   <div id="app">
-    <lay-button @click="sayHello">选项API</lay-button>
-    <lay-button @click="openLayer">组合API</lay-button>
+    <lay-button @click="openLayer">Hello</lay-button>
   </div>
 </body>
 <script>
