@@ -1,11 +1,10 @@
-import type { App, Component } from "vue";
+import type { App, Plugin } from "vue";
 
 import "./theme/index.less";
 import "@layui/layer-vue/lib/index.css";
 import "@layui/icons-vue/lib/index.css";
 import { layer } from "@layui/layer-vue";
 import layerInstall from "@layui/layer-vue";
-import i18n from "./language";
 
 import LayBacktop from "./component/backTop/index";
 import LayAvatar from "./component/avatar/index";
@@ -86,7 +85,7 @@ import LayNoticeBar from "./component/noticeBar/index";
 import LayConfigProvider from "./provider";
 import { InstallOptions } from "./types";
 
-const components: Record<string, Component> = {
+const components: Record<string, Plugin> = {
   LaySplitPanel,
   LaySplitPanelItem,
   LayRadio,
@@ -167,11 +166,9 @@ const components: Record<string, Component> = {
 };
 
 const install = (app: App, options?: InstallOptions): void => {
-  for (const key in components) {
-    const item = components[key];
-    app.component(item.name || key, item);
+  for (const key of Object.keys(components)) {
+    app.use(components[key], options);
   }
-  app.use(i18n);
   app.use(layerInstall);
 };
 

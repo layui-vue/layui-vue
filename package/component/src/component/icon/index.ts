@@ -1,5 +1,5 @@
 import { LayIcon as Component } from "@layui/icons-vue";
-import { withInstall } from "../../utils";
+import { withInstall, WithInstallType } from "../../utils";
 
-const component = withInstall(Component);
+const component: WithInstallType<typeof Component> = withInstall(Component);
 export default component;
