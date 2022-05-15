@@ -5,6 +5,7 @@ import "@layui/layer-vue/lib/index.css";
 import "@layui/icons-vue/lib/index.css";
 import { layer } from "@layui/layer-vue";
 import layerInstall from "@layui/layer-vue";
+import i18n from "./language";
 
 import LayBacktop from "./component/backTop/index";
 import LayAvatar from "./component/avatar/index";
@@ -169,6 +170,7 @@ const install = (app: App, options?: InstallOptions): void => {
   for (const key of Object.keys(components)) {
     app.use(components[key], options);
   }
+  app.use(i18n);
   app.use(layerInstall);
 };
 

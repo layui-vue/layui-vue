@@ -75,7 +75,7 @@ export default {
 }
 ```
 
-::: describe LayuiVueResolver 选项类型声明
+::: describe LayuiVueResolver 类型声明
 :::
 
 ```ts

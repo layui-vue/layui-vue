@@ -7,7 +7,7 @@ export default {
 <script setup lang="ts">
 import "./index.less";
 import { Ref, ref, watch, useSlots, computed } from "vue";
-import { useI18n } from "vue-i18n";
+import { useI18n }  from "../../language";
 
 export interface LayPageProps {
   total: number;

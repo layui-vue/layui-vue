@@ -8,7 +8,7 @@ export default {
 import "./index.less";
 import { LayIcon } from "@layui/icons-vue";
 import { useSlots } from "vue";
-import { useI18n } from "vue-i18n";
+import { useI18n }  from "../../language";
 
 const { t } = useI18n();
 const slots = useSlots();

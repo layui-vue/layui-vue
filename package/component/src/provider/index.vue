@@ -6,7 +6,7 @@ export default {
 
 <script setup lang="ts">
 import { watch } from "vue";
-import { useI18n } from "vue-i18n";
+import { useI18n }  from "../language";
 import {
   Theme,
   DynamicThemeFix,
