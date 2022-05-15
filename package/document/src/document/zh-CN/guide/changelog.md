@@ -10,11 +10,11 @@
 ::: demo
 <template>
 <lay-timeline>
-  <lay-timeline-item title="1.0.x">
+  <lay-timeline-item title="1.1.x">
     <ul> 
-      <a name="1-0-8"></a> 
+      <a name="1-1-0"></a> 
       <li> 
-        <h3>1.0.8 <span class="layui-badge-rim">2022-05-14</span></h3> 
+        <h3>1.1.0 <span class="layui-badge-rim">2022-05-15</span></h3> 
         <ul>
           <li>[新增] resolver 按需解析器。</li>
           <li>[新增] sub-menu 组件 expandIcon 插槽。</li>
@@ -24,6 +24,8 @@
         </ul> 
       </li>
     </ul>
+  </lay-timeline-item>
+  <lay-timeline-item title="1.0.x">
     <ul> 
       <a name="1-0-7"></a> 
       <li> 
