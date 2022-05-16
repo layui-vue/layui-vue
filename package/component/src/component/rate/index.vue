@@ -1,6 +1,6 @@
 <script lang="ts">
 export default {
-  name: "LayRate",
+  name: "LayRate"
 };
 </script>
 
@@ -16,6 +16,8 @@ export interface LayRateProps {
   half?: boolean;
   text?: boolean;
   isBlock?: boolean;
+  hasClear?: boolean;
+  clearIcon?: string;
   icons?: string[];
 }
 
@@ -26,6 +28,8 @@ const props = withDefaults(defineProps<LayRateProps>(), {
   half: false,
   text: false,
   isBlock: false,
+  hasClear: false,
+  clearIcon: "layui-icon-close-fill",
   icons: () => [
     "layui-icon-rate",
     "layui-icon-rate-half",
@@ -33,7 +37,7 @@ const props = withDefaults(defineProps<LayRateProps>(), {
   ],
 });
 
-const emit = defineEmits(["update:modelValue", "select"]);
+const emit = defineEmits(["update:modelValue", "select", "clear"]);
 
 const currentValue = ref<number>(props.modelValue);
 // 临时存储值
@@ -77,6 +81,16 @@ const action = function (index: number, event: any) {
   emit("update:modelValue", currentValue.value);
   emit("select", currentValue.value);
 };
+
+// 清除评分图标
+const showClearIcon = computed(
+  () => !props.readonly && props.hasClear
+);
+const clearRate = function(){
+  tempValue.value = 0;
+  currentValue.value = 0;
+  emit("clear", currentValue.value);
+}
 </script>
 
 <template>
@@ -115,6 +129,9 @@ const action = function (index: number, event: any) {
           {{ currentValue + "星" }}
         </slot>
       </span>
+    </template>
+    <template v-if="showClearIcon">
+      <i :class="['layui-icon', 'layui-rate-clear-icon', clearIcon]" @click="clearRate" title="清除评分"></i>
     </template>
   </div>
 </template>

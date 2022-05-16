@@ -89,6 +89,30 @@ export default {
 
 :::
 
+::: title 清除功能
+:::
+
+::: demo
+
+<template>
+    <lay-rate v-model="clearHalf" :half="true" :is-block="true" has-clear></lay-rate>
+</template>
+
+<script>
+import { ref } from 'vue';
+
+export default {
+  setup() {
+    const clearHalf = ref(0.5)
+    return {
+      clearHalf
+    }
+  }
+}
+</script>
+
+:::
+
 ::: title 自定义内容
 :::
 
@@ -289,6 +313,8 @@ export default {
 | half     | 设定组件是否可以选择半星 | `boolean` | false     |
 | text     | 是否显示评分对应的内容 | `boolean` | false     |
 | is-block | 评分是否显示为快元素 | `boolean` | false     |
+| has-clear | 评分是否需要清除功能 | `boolean` | false     |
+| clear-icon | 评分清除功能使用的图标`class` | `string` | `layui-icon-close-fill`     |
 | icons    | 评分使用图标`class`；`["空心", "实心"]`/`["空心", "半心", "实心"]` | `string[]` | 星型     |
 
 :::
@@ -312,6 +338,7 @@ export default {
 | 属性     | 描述      | 回调参数 |
 | -------- | -------- | ------ |
 | select  | 选中之后触发事件   | (value: number) |
+| clear  | 清除之后触发事件   | (value: number) |
 
 :::
 
