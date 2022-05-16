@@ -16,7 +16,7 @@ importers:
       '@types/node': ^16.11.9
       '@typescript-eslint/eslint-plugin': ^5.8.0
       '@typescript-eslint/parser': ^5.8.0
-      '@vitejs/plugin-vue': ^2.3.1
+      '@vitejs/plugin-vue': ^2.3.3
       '@vue/compiler-sfc': ^3.2.33
       '@vue/server-renderer': ^3.2.33
       commitizen: ^4.2.4
@@ -33,7 +33,7 @@ importers:
       rimraf: ^3.0.2
       rollup: ^2.70.1
       typescript: ^4.6.3
-      vite: 2.9.8
+      vite: 2.9.9
       vue: ^3.2.33
     dependencies:
       '@layui/icons-vue': link:package/icons
@@ -50,7 +50,7 @@ importers:
       '@types/node': 16.11.26
       '@typescript-eslint/eslint-plugin': 5.17.0_689ff565753ecf7c3328c07fad067df5
       '@typescript-eslint/parser': 5.17.0_eslint@8.12.0+typescript@4.6.3
-      '@vitejs/plugin-vue': 2.3.1_vite@2.9.8+vue@3.2.33
+      '@vitejs/plugin-vue': 2.3.3_vite@2.9.9+vue@3.2.33
       '@vue/compiler-sfc': 3.2.33
       '@vue/server-renderer': 3.2.33_vue@3.2.33
       commitizen: 4.2.4
@@ -67,7 +67,7 @@ importers:
       rimraf: 3.0.2
       rollup: 2.70.1
       typescript: 4.6.3
-      vite: 2.9.8_less@4.1.2
+      vite: 2.9.9_less@4.1.2
 
   package/component:
     specifiers:
@@ -1877,14 +1877,14 @@ packages:
       eslint-visitor-keys: 3.3.0
     dev: true
 
-  /@vitejs/plugin-vue/2.3.1_vite@2.9.8+vue@3.2.33:
-    resolution: {integrity: sha512-YNzBt8+jt6bSwpt7LP890U1UcTOIZZxfpE5WOJ638PNxSEKOqAi0+FSKS0nVeukfdZ0Ai/H7AFd6k3hayfGZqQ==}
+  /@vitejs/plugin-vue/2.3.3_vite@2.9.9+vue@3.2.33:
+    resolution: {integrity: sha512-SmQLDyhz+6lGJhPELsBdzXGc+AcaT8stgkbiTFGpXPe8Tl1tJaBw1A6pxDqDuRsVkD8uscrkx3hA7QDOoKYtyw==}
     engines: {node: '>=12.0.0'}
     peerDependencies:
       vite: ^2.5.10
       vue: ^3.2.25
     dependencies:
-      vite: 2.9.8_less@4.1.2
+      vite: 2.9.9_less@4.1.2
       vue: 3.2.33
     dev: true
 
@@ -4931,6 +4931,31 @@ packages:
 
   /vite/2.9.8_less@4.1.2:
     resolution: {integrity: sha512-zsBGwn5UT3YS0NLSJ7hnR54+vUKfgzMUh/Z9CxF1YKEBVIe213+63jrFLmZphgGI5zXwQCSmqIdbPuE8NJywPw==}
+    engines: {node: '>=12.2.0'}
+    hasBin: true
+    peerDependencies:
+      less: '*'
+      sass: '*'
+      stylus: '*'
+    peerDependenciesMeta:
+      less:
+        optional: true
+      sass:
+        optional: true
+      stylus:
+        optional: true
+    dependencies:
+      esbuild: 0.14.31
+      less: 4.1.2
+      postcss: 8.4.13
+      resolve: 1.22.0
+      rollup: 2.70.1
+    optionalDependencies:
+      fsevents: 2.3.2
+    dev: true
+
+  /vite/2.9.9_less@4.1.2:
+    resolution: {integrity: sha512-ffaam+NgHfbEmfw/Vuh6BHKKlI/XIAhxE5QSS7gFLIngxg171mg1P3a4LSRME0z2ZU1ScxoKzphkipcYwSD5Ew==}
     engines: {node: '>=12.2.0'}
     hasBin: true
     peerDependencies:
