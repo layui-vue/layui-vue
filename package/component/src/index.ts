@@ -258,5 +258,3 @@ export {
 export { layer };
 
 export default { install };
-
-export * from "./resolver";
