@@ -16,8 +16,11 @@
       <li> 
         <h3>1.1.1 <span class="layui-badge-rim">2022-05-16</span></h3> 
         <ul>
+          <li>[新增] rate 组件 has-clear 属性。</li>
           <li>[修复] table 组件 size 属性 sm 与 lg 样式。</li>
+          <li>[升级] async-validator 4.1.1。</li>
           <li>[升级] vueuse/core 8.5.0。</li>
+          <li>[升级] vue-i18n 9.1.10。</li>
         </ul> 
       </li>
     </ul>
