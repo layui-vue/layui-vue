@@ -1,6 +1,6 @@
 <script lang="ts">
 export default {
-  name: "LayRate"
+  name: "LayRate",
 };
 </script>
 
@@ -83,14 +83,12 @@ const action = function (index: number, event: any) {
 };
 
 // 清除评分图标
-const showClearIcon = computed(
-  () => !props.readonly && props.hasClear
-);
-const clearRate = function(){
+const showClearIcon = computed(() => !props.readonly && props.hasClear);
+const clearRate = function () {
   tempValue.value = 0;
   currentValue.value = 0;
   emit("clear", currentValue.value);
-}
+};
 </script>
 
 <template>
@@ -131,7 +129,11 @@ const clearRate = function(){
       </span>
     </template>
     <template v-if="showClearIcon">
-      <i :class="['layui-icon', 'layui-rate-clear-icon', clearIcon]" @click="clearRate" title="清除评分"></i>
+      <i
+        :class="['layui-icon', 'layui-rate-clear-icon', clearIcon]"
+        @click="clearRate"
+        title="清除评分"
+      ></i>
     </template>
   </div>
 </template>
