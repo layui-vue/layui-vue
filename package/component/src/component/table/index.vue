@@ -13,6 +13,7 @@ import LayDropdown from "../dropdown/index.vue";
 import LayPage from "../page/index.vue";
 import { LayIcon } from "@layui/icons-vue";
 import "./index.less";
+import LayTooltip from "../tooltip/index.vue";
 
 const tableId = uuidv4();
 
@@ -275,7 +276,8 @@ onMounted(() => {
                     class="layui-table-cell"
                     :style="{
                       textAlign: column.align,
-                      flex: column.width ? '0 0 ' + column.width : '1',
+                      width: column.width ? column.width : '0',
+                      minWidth: column.minWidth ? column.minWidth : '47px',
                     }"
                   >
                     <span>
@@ -340,10 +342,31 @@ onMounted(() => {
                           class="layui-table-cell"
                           :style="{
                             textAlign: column.align,
-                            flex: column.width ? '0 0 ' + column.width : '1',
+                            width: column.width ? column.width : '0',
+                            minWidth: column.minWidth
+                              ? column.minWidth
+                              : '47px',
+                            whiteSpace: column.ellipsisTooltip
+                              ? 'nowrap'
+                              : 'normal',
                           }"
                         >
-                          <slot :name="column.customSlot" :data="data"></slot>
+                          <lay-tooltip
+                            v-if="column.ellipsisTooltip"
+                            :content="data[column.key]"
+                          >
+                            <div class="layui-table-call-ellipsis">
+                              <slot
+                                :name="column.customSlot"
+                                :data="data"
+                              ></slot>
+                            </div>
+                          </lay-tooltip>
+                          <slot
+                            v-else
+                            :name="column.customSlot"
+                            :data="data"
+                          ></slot>
                         </td>
                       </template>
                       <!-- 匹 配 Column -->
@@ -353,10 +376,24 @@ onMounted(() => {
                             class="layui-table-cell"
                             :style="{
                               textAlign: column.align,
-                              flex: column.width ? '0 0 ' + column.width : '1',
+                              width: column.width ? column.width : '0',
+                              minWidth: column.minWidth
+                                ? column.minWidth
+                                : '47px',
+                              whiteSpace: column.ellipsisTooltip
+                                ? 'nowrap'
+                                : 'normal',
                             }"
                           >
-                            <span> {{ data[column.key] }} </span>
+                            <lay-tooltip
+                              v-if="column.ellipsisTooltip"
+                              :content="data[column.key]"
+                            >
+                              <div class="layui-table-call-ellipsis">
+                                {{ data[column.key] }}
+                              </div>
+                            </lay-tooltip>
+                            <span v-else> {{ data[column.key] }} </span>
                           </td>
                         </template>
                       </template>
