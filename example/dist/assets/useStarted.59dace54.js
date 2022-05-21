@@ -1,2 +1,0 @@
-import{r as n,o as s,h as a,e as r,f as e}from"./vendor.e7911ee1.js";const l={class:"markdown-body"},c=e("br",null,null,-1),p=e("p",{style:{"margin-left":"24px","margin-bottom":"20px"}},"1. \u4F7F\u7528 npm \u4E0B\u8F7D",-1),i=e("div",{class:"language-"},[e("pre",null,[e("code",{"v-pre":""},`npm install @layui/hooks-vue --save
-`)])],-1),h={setup(m,{expose:t}){return t({frontmatter:{}}),(d,u)=>{const o=n("lay-field");return s(),a("div",l,[r(o,{title:"\u5FEB\u901F\u4E0A\u624B",style:{"margin-top":"20px","margin-bottom":"20px"}}),c,p,i])}}};export{h as default};
