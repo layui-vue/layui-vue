@@ -14,7 +14,7 @@
     <ul> 
       <a name="1-1-1"></a> 
       <li> 
-        <h3>1.1.1 <span class="layui-badge-rim">2022-05-16</span></h3> 
+        <h3>1.1.1 <span class="layui-badge-rim">2022-05-21</span></h3> 
         <ul>
           <li>[新增] rate 组件 has-clear 属性。</li>
           <li>[新增] tabke 组件 minWidth 属性, 自适应最小列宽。</li>
