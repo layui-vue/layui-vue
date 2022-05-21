@@ -35,12 +35,16 @@ export default {
         title:"年龄",
         width: "180px",
         key:"age"
+      },{
+        title:"备注",
+        width: "180px",
+        key:"remark",
       }
     ]
 
     const dataSource1 = [
-      {username:"root", password:"root", age:"18"},
-      {username:"woow", password:"woow", age:"20"}
+      {username:"root", password:"root", age:"18", remark: 'layui - vue（谐音：类 UI) '},
+      {username:"woow", password:"woow", age:"20", remark: 'layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.'}
     ]
 
     return {
@@ -256,26 +260,34 @@ export default {
       },{
         title:"密码",
         customSlot:"password",
+        width:"200px",
         key:"password",
         align: "center"
       },
       {
         title:"年龄",
-        width: "180px",
+        width: "200px",
         key:"age",
         sort: true,
         align: "right"
+      },
+{
+        title:"备注",
+        width: "180px",
+        key:"remark",
+        ellipsisTooltip: true,
       }
       ,{
         title:"操作",
+        width:"100px",
         customSlot:"operator",
         key:"operator"
       }
     ]
 
     const dataSource5 = [
-      {id:"1", username:"root", age:"18"},
-      {id:"2", username:"woow", age:"20"}
+      {id:"1", username:"root",password: '**',age:"18",remark: 'layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.'},
+      {id:"2", username:"woow",password: '**', age:"20",remark: 'layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.'}
     ]
 
     const rowClick5 = function(data) {
@@ -358,9 +370,11 @@ export default {
 | key        | 数据字段   | --       | --     | --                      |
 | customSlot | 自定义插槽 | --       | --     | --                      |
 | width      | 宽度       | --       | --     | --                      |
+| minWidth      | 最小宽度       | --       | --     | --                      |
 | sort       | 排序       | --       | --     | --                      |
 | titleSlot  | 标题插槽   | --       | --     | --                      |
 | align      | 对齐方式   | `string` | `left` | `left` `right` `center` |
+| textOverflowTooltip  | 当内容过长被隐藏时显示 tooltip   | `boolean` | `false` | `true` `false` |
 
 :::
 

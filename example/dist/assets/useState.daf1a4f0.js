@@ -1,0 +1,14 @@
+import{r as a,o as u,h as k,e as s,d as e,g as n,f as t}from"./vendor.e7911ee1.js";const r={class:"markdown-body"},i=n("\u4F7F \u7528 useState \u521B \u5EFA Ref \u54CD \u5E94 \u53D8 \u91CF"),d=t("div",{class:"language-vue"},[t("pre",null,[t("code",{"v-pre":""},[t("span",{class:"token tag"},[t("span",{class:"token tag"},[t("span",{class:"token punctuation"},"<"),n("script")]),t("span",{class:"token punctuation"},">")]),t("span",{class:"token script"},[t("span",{class:"token language-javascript"},[n(`
+`),t("span",{class:"token keyword"},"import"),n(),t("span",{class:"token punctuation"},"{"),n(" useState "),t("span",{class:"token punctuation"},"}"),n(),t("span",{class:"token keyword"},"from"),n(),t("span",{class:"token string"},"'@layui/hooks-vue'"),n(`
+
+`),t("span",{class:"token keyword"},"export"),n(),t("span",{class:"token keyword"},"default"),n(),t("span",{class:"token punctuation"},"{"),n(`
+  `),t("span",{class:"token function"},"setup"),t("span",{class:"token punctuation"},"("),t("span",{class:"token punctuation"},")"),n(),t("span",{class:"token punctuation"},"{"),n(`
+    `),t("span",{class:"token keyword"},"const"),n(),t("span",{class:"token punctuation"},"{"),n(" state"),t("span",{class:"token punctuation"},","),n(" setState "),t("span",{class:"token punctuation"},"}"),n(),t("span",{class:"token operator"},"="),n(),t("span",{class:"token function"},"useState"),t("span",{class:"token punctuation"},"("),t("span",{class:"token number"},"0"),t("span",{class:"token punctuation"},")"),n(`
+    `),t("span",{class:"token keyword"},"return"),n(),t("span",{class:"token punctuation"},"{"),n(`
+        state`),t("span",{class:"token punctuation"},","),n(`
+        setState
+    `),t("span",{class:"token punctuation"},"}"),n(`
+  `),t("span",{class:"token punctuation"},"}"),t("span",{class:"token punctuation"},","),n(`
+`),t("span",{class:"token punctuation"},"}"),n(`
+`)])]),t("span",{class:"token tag"},[t("span",{class:"token tag"},[t("span",{class:"token punctuation"},"</"),n("script")]),t("span",{class:"token punctuation"},">")]),n(`
+`)])])],-1),_=t("table",null,[t("thead",null,[t("tr",null,[t("th",null,"\u5907\u6CE8"),t("th",null,"\u63CF\u8FF0"),t("th",null,"\u7C7B\u578B")])]),t("tbody",null,[t("tr",null,[t("td",null,"state"),t("td",null,"\u503C\u672C\u8EAB"),t("td",null,"\u2013")]),t("tr",null,[t("td",null,"setState"),t("td",null,"\u8BBE\u7F6E\u503C"),t("td",null,"\u2013")])])],-1),x={setup(m,{expose:l}){return l({frontmatter:{}}),(f,g)=>{const o=a("lay-field"),c=a("lay-block"),p=a("lay-table-box");return u(),k("div",r,[s(o,{title:"\u57FA\u7840\u4F7F\u7528",style:{"margin-top":"20px","margin-bottom":"20px"}}),s(c,{style:{"margin-left":"8px","margin-bottom":"40px"}},{default:e(()=>[i]),_:1}),d,s(o,{title:"\u4F7F\u7528\u5907\u6CE8",style:{"margin-top":"20px","margin-bottom":"20px"}}),s(p,null,{default:e(()=>[_]),_:1})])}}};export{x as default};

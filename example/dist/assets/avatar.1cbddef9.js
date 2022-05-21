@@ -1,0 +1,59 @@
+import{b as g,r as p,o as d,h as m,e as s,d as o,z as e,f as n,g as a}from"./vendor.e7911ee1.js";const y={class:"markdown-body"},_=n("pre",null,[n("code",{"v-pre":""},[n("span",{class:"token tag"},[n("span",{class:"token tag"},[n("span",{class:"token punctuation"},"<"),a("template")]),n("span",{class:"token punctuation"},">")]),a(`
+  `),n("span",{class:"token tag"},[n("span",{class:"token tag"},[n("span",{class:"token punctuation"},"<"),a("lay-avatar")]),a(),n("span",{class:"token attr-name"},":src"),n("span",{class:"token attr-value"},[n("span",{class:"token punctuation attr-equals"},"="),n("span",{class:"token punctuation"},'"'),a("src"),n("span",{class:"token punctuation"},'"')]),n("span",{class:"token punctuation"},">")]),n("span",{class:"token tag"},[n("span",{class:"token tag"},[n("span",{class:"token punctuation"},"</"),a("lay-avatar")]),n("span",{class:"token punctuation"},">")]),a(`
+`),n("span",{class:"token tag"},[n("span",{class:"token tag"},[n("span",{class:"token punctuation"},"</"),a("template")]),n("span",{class:"token punctuation"},">")]),a(`
+
+`),n("span",{class:"token tag"},[n("span",{class:"token tag"},[n("span",{class:"token punctuation"},"<"),a("script")]),n("span",{class:"token punctuation"},">")]),n("span",{class:"token script"},[n("span",{class:"token language-javascript"},[a(`
+`),n("span",{class:"token keyword"},"import"),a(),n("span",{class:"token punctuation"},"{"),a(" ref "),n("span",{class:"token punctuation"},"}"),a(),n("span",{class:"token keyword"},"from"),a(),n("span",{class:"token string"},"'vue'"),a(`
+
+`),n("span",{class:"token keyword"},"export"),a(),n("span",{class:"token keyword"},"default"),a(),n("span",{class:"token punctuation"},"{"),a(`
+  `),n("span",{class:"token function"},"setup"),n("span",{class:"token punctuation"},"("),n("span",{class:"token punctuation"},")"),a(),n("span",{class:"token punctuation"},"{"),a(`
+
+    `),n("span",{class:"token keyword"},"const"),a(" src "),n("span",{class:"token operator"},"="),a(),n("span",{class:"token function"},"ref"),n("span",{class:"token punctuation"},"("),n("span",{class:"token string"},'"https://portrait.gitee.com/uploads/avatars/user/2813/8441097_shaynas_1610801433.png"'),n("span",{class:"token punctuation"},")"),a(`
+
+    `),n("span",{class:"token keyword"},"return"),a(),n("span",{class:"token punctuation"},"{"),a(`
+        src
+    `),n("span",{class:"token punctuation"},"}"),a(`
+  `),n("span",{class:"token punctuation"},"}"),a(`
+`),n("span",{class:"token punctuation"},"}"),a(`
+`)])]),n("span",{class:"token tag"},[n("span",{class:"token tag"},[n("span",{class:"token punctuation"},"</"),a("script")]),n("span",{class:"token punctuation"},">")]),a(`
+`)])],-1),v=n("pre",null,[n("code",{"v-pre":""},[n("span",{class:"token tag"},[n("span",{class:"token tag"},[n("span",{class:"token punctuation"},"<"),a("template")]),n("span",{class:"token punctuation"},">")]),a(`
+  `),n("span",{class:"token tag"},[n("span",{class:"token tag"},[n("span",{class:"token punctuation"},"<"),a("lay-avatar")]),a(),n("span",{class:"token attr-name"},":src"),n("span",{class:"token attr-value"},[n("span",{class:"token punctuation attr-equals"},"="),n("span",{class:"token punctuation"},'"'),a("src"),n("span",{class:"token punctuation"},'"')]),a(),n("span",{class:"token attr-name"},"radius"),n("span",{class:"token punctuation"},">")]),n("span",{class:"token tag"},[n("span",{class:"token tag"},[n("span",{class:"token punctuation"},"</"),a("lay-avatar")]),n("span",{class:"token punctuation"},">")]),a(`
+`),n("span",{class:"token tag"},[n("span",{class:"token tag"},[n("span",{class:"token punctuation"},"</"),a("template")]),n("span",{class:"token punctuation"},">")]),a(`
+
+`),n("span",{class:"token tag"},[n("span",{class:"token tag"},[n("span",{class:"token punctuation"},"<"),a("script")]),n("span",{class:"token punctuation"},">")]),n("span",{class:"token script"},[n("span",{class:"token language-javascript"},[a(`
+`),n("span",{class:"token keyword"},"import"),a(),n("span",{class:"token punctuation"},"{"),a(" ref "),n("span",{class:"token punctuation"},"}"),a(),n("span",{class:"token keyword"},"from"),a(),n("span",{class:"token string"},"'vue'"),a(`
+
+`),n("span",{class:"token keyword"},"export"),a(),n("span",{class:"token keyword"},"default"),a(),n("span",{class:"token punctuation"},"{"),a(`
+
+    `),n("span",{class:"token function"},"setup"),n("span",{class:"token punctuation"},"("),n("span",{class:"token punctuation"},")"),a(),n("span",{class:"token punctuation"},"{"),a(`
+
+        `),n("span",{class:"token keyword"},"const"),a(" src "),n("span",{class:"token operator"},"="),a(),n("span",{class:"token string"},'"https://portrait.gitee.com/uploads/avatars/user/2813/8441097_shaynas_1610801433.png"'),a(`
+        
+        `),n("span",{class:"token keyword"},"return"),a(),n("span",{class:"token punctuation"},"{"),a(`
+            src
+        `),n("span",{class:"token punctuation"},"}"),a(`
+  `),n("span",{class:"token punctuation"},"}"),a(`
+`),n("span",{class:"token punctuation"},"}"),a(`
+`)])]),n("span",{class:"token tag"},[n("span",{class:"token tag"},[n("span",{class:"token punctuation"},"</"),a("script")]),n("span",{class:"token punctuation"},">")]),a(`
+`)])],-1),f=n("pre",null,[n("code",{"v-pre":""},[n("span",{class:"token tag"},[n("span",{class:"token tag"},[n("span",{class:"token punctuation"},"<"),a("template")]),n("span",{class:"token punctuation"},">")]),a(`
+  `),n("span",{class:"token tag"},[n("span",{class:"token tag"},[n("span",{class:"token punctuation"},"<"),a("lay-avatar")]),a(),n("span",{class:"token attr-name"},":src"),n("span",{class:"token attr-value"},[n("span",{class:"token punctuation attr-equals"},"="),n("span",{class:"token punctuation"},'"'),a("src"),n("span",{class:"token punctuation"},'"')]),a(),n("span",{class:"token attr-name"},"size"),n("span",{class:"token attr-value"},[n("span",{class:"token punctuation attr-equals"},"="),n("span",{class:"token punctuation"},'"'),a("xs"),n("span",{class:"token punctuation"},'"')]),n("span",{class:"token punctuation"},">")]),n("span",{class:"token tag"},[n("span",{class:"token tag"},[n("span",{class:"token punctuation"},"</"),a("lay-avatar")]),n("span",{class:"token punctuation"},">")]),a(` 
+  `),n("span",{class:"token tag"},[n("span",{class:"token tag"},[n("span",{class:"token punctuation"},"<"),a("lay-avatar")]),a(),n("span",{class:"token attr-name"},":src"),n("span",{class:"token attr-value"},[n("span",{class:"token punctuation attr-equals"},"="),n("span",{class:"token punctuation"},'"'),a("src"),n("span",{class:"token punctuation"},'"')]),a(),n("span",{class:"token attr-name"},"size"),n("span",{class:"token attr-value"},[n("span",{class:"token punctuation attr-equals"},"="),n("span",{class:"token punctuation"},'"'),a("sm"),n("span",{class:"token punctuation"},'"')]),n("span",{class:"token punctuation"},">")]),n("span",{class:"token tag"},[n("span",{class:"token tag"},[n("span",{class:"token punctuation"},"</"),a("lay-avatar")]),n("span",{class:"token punctuation"},">")]),a(`
+  `),n("span",{class:"token tag"},[n("span",{class:"token tag"},[n("span",{class:"token punctuation"},"<"),a("lay-avatar")]),a(),n("span",{class:"token attr-name"},":src"),n("span",{class:"token attr-value"},[n("span",{class:"token punctuation attr-equals"},"="),n("span",{class:"token punctuation"},'"'),a("src"),n("span",{class:"token punctuation"},'"')]),n("span",{class:"token punctuation"},">")]),n("span",{class:"token tag"},[n("span",{class:"token tag"},[n("span",{class:"token punctuation"},"</"),a("lay-avatar")]),n("span",{class:"token punctuation"},">")]),a(`
+  `),n("span",{class:"token tag"},[n("span",{class:"token tag"},[n("span",{class:"token punctuation"},"<"),a("lay-avatar")]),a(),n("span",{class:"token attr-name"},":src"),n("span",{class:"token attr-value"},[n("span",{class:"token punctuation attr-equals"},"="),n("span",{class:"token punctuation"},'"'),a("src"),n("span",{class:"token punctuation"},'"')]),a(),n("span",{class:"token attr-name"},"size"),n("span",{class:"token attr-value"},[n("span",{class:"token punctuation attr-equals"},"="),n("span",{class:"token punctuation"},'"'),a("lg"),n("span",{class:"token punctuation"},'"')]),n("span",{class:"token punctuation"},">")]),n("span",{class:"token tag"},[n("span",{class:"token tag"},[n("span",{class:"token punctuation"},"</"),a("lay-avatar")]),n("span",{class:"token punctuation"},">")]),a(`
+`),n("span",{class:"token tag"},[n("span",{class:"token tag"},[n("span",{class:"token punctuation"},"</"),a("template")]),n("span",{class:"token punctuation"},">")]),a(`
+
+`),n("span",{class:"token tag"},[n("span",{class:"token tag"},[n("span",{class:"token punctuation"},"<"),a("script")]),n("span",{class:"token punctuation"},">")]),n("span",{class:"token script"},[n("span",{class:"token language-javascript"},[a(`
+`),n("span",{class:"token keyword"},"import"),a(),n("span",{class:"token punctuation"},"{"),a(" ref "),n("span",{class:"token punctuation"},"}"),a(),n("span",{class:"token keyword"},"from"),a(),n("span",{class:"token string"},"'vue'"),a(`
+
+`),n("span",{class:"token keyword"},"export"),a(),n("span",{class:"token keyword"},"default"),a(),n("span",{class:"token punctuation"},"{"),a(`
+    `),n("span",{class:"token function"},"setup"),n("span",{class:"token punctuation"},"("),n("span",{class:"token punctuation"},")"),a(),n("span",{class:"token punctuation"},"{"),a(`
+
+        `),n("span",{class:"token keyword"},"const"),a(" src "),n("span",{class:"token operator"},"="),a(),n("span",{class:"token string"},'"https://portrait.gitee.com/uploads/avatars/user/2813/8441097_shaynas_1610801433.png"'),a(`
+
+        `),n("span",{class:"token keyword"},"return"),a(),n("span",{class:"token punctuation"},"{"),a(`
+          src
+        `),n("span",{class:"token punctuation"},"}"),a(`
+  `),n("span",{class:"token punctuation"},"}"),a(`
+`),n("span",{class:"token punctuation"},"}"),a(`
+`)])]),n("span",{class:"token tag"},[n("span",{class:"token tag"},[n("span",{class:"token punctuation"},"</"),a("script")]),n("span",{class:"token punctuation"},">")]),a(`
+`)])],-1),h=n("table",null,[n("thead",null,[n("tr",null,[n("th",null,"\u5C5E\u6027"),n("th",null,"\u63CF\u8FF0"),n("th",null,"\u53EF\u9009\u503C")])]),n("tbody",null,[n("tr",null,[n("td",null,"src"),n("td",null,"\u56FE\u6E90"),n("td",null,"\u2013")]),n("tr",null,[n("td",null,"size"),n("td",null,"\u5C3A\u5BF8"),n("td",null,[n("code",null,"xs"),a(),n("code",null,"sm"),a(),n("code",null,"lg")])]),n("tr",null,[n("td",null,"radius"),n("td",null,"\u5706\u5F62"),n("td",null,[n("code",null,"true"),a(),n("code",null,"false")])])])],-1),j={setup(w,{expose:k}){k({frontmatter:{}});let t=g("https://portrait.gitee.com/uploads/avatars/user/2813/8441097_shaynas_1610801433.png");return t="https://portrait.gitee.com/uploads/avatars/user/2813/8441097_shaynas_1610801433.png",t="https://portrait.gitee.com/uploads/avatars/user/2813/8441097_shaynas_1610801433.png",(b,q)=>{const l=p("lay-field"),c=p("lay-avatar"),u=p("lay-code"),r=p("lay-table-box"),i=p("lay-comment");return d(),m("div",y,[s(l,{title:"\u57FA\u7840\u4F7F\u7528",style:{"margin-top":"20px","margin-bottom":"20px"}}),s(u,null,{code:o(()=>[_]),default:o(()=>[s(c,{src:e(t)},null,8,["src"])]),_:1}),s(l,{title:"\u5706\u89D2\u5934\u50CF",style:{"margin-top":"20px","margin-bottom":"20px"}}),s(u,null,{code:o(()=>[v]),default:o(()=>[s(c,{src:e(t),radius:""},null,8,["src"])]),_:1}),s(l,{title:"\u5C3A\u5BF8\u5927\u5C0F",style:{"margin-top":"20px","margin-bottom":"20px"}}),s(u,null,{code:o(()=>[f]),default:o(()=>[s(c,{src:e(t),size:"xs"},null,8,["src"]),s(c,{src:e(t),size:"sm"},null,8,["src"]),s(c,{src:e(t)},null,8,["src"]),s(c,{src:e(t),size:"lg"},null,8,["src"])]),_:1}),s(l,{title:"\u5934\u50CF\u5C5E\u6027",style:{"margin-top":"20px","margin-bottom":"20px"}}),s(r,null,{default:o(()=>[h]),_:1}),s(i)])}}};export{j as default};

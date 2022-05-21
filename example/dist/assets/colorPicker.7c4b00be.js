@@ -1,0 +1,13 @@
+import{r as s,o as k,h as i,e as a,d as o,f as n,g as t}from"./vendor.e7911ee1.js";const d={class:"markdown-body"},_=n("pre",null,[n("code",{"v-pre":""},[n("span",{class:"token tag"},[n("span",{class:"token tag"},[n("span",{class:"token punctuation"},"<"),t("template")]),n("span",{class:"token punctuation"},">")]),t(`
+  `),n("span",{class:"token tag"},[n("span",{class:"token tag"},[n("span",{class:"token punctuation"},"<"),t("lay-color-picker")]),n("span",{class:"token punctuation"},">")]),n("span",{class:"token tag"},[n("span",{class:"token tag"},[n("span",{class:"token punctuation"},"</"),t("lay-color-picker")]),n("span",{class:"token punctuation"},">")]),t(`
+`),n("span",{class:"token tag"},[n("span",{class:"token tag"},[n("span",{class:"token punctuation"},"</"),t("template")]),n("span",{class:"token punctuation"},">")]),t(`
+
+`),n("span",{class:"token tag"},[n("span",{class:"token tag"},[n("span",{class:"token punctuation"},"<"),t("script")]),n("span",{class:"token punctuation"},">")]),n("span",{class:"token script"},[n("span",{class:"token language-javascript"},[t(`
+`),n("span",{class:"token keyword"},"export"),t(),n("span",{class:"token keyword"},"default"),t(),n("span",{class:"token punctuation"},"{"),t(`
+  `),n("span",{class:"token function"},"setup"),n("span",{class:"token punctuation"},"("),n("span",{class:"token punctuation"},")"),t(),n("span",{class:"token punctuation"},"{"),t(`
+    `),n("span",{class:"token keyword"},"return"),t(),n("span",{class:"token punctuation"},"{"),t(`
+    `),n("span",{class:"token punctuation"},"}"),t(`
+  `),n("span",{class:"token punctuation"},"}"),t(`
+`),n("span",{class:"token punctuation"},"}"),t(`
+`)])]),n("span",{class:"token tag"},[n("span",{class:"token tag"},[n("span",{class:"token punctuation"},"</"),t("script")]),n("span",{class:"token punctuation"},">")]),t(`
+`)])],-1),m=n("table",null,[n("thead",null,[n("tr",null,[n("th"),n("th"),n("th")])]),n("tbody",null,[n("tr",null,[n("td",null,"v-model"),n("td",null,"\u9ED8\u8BA4\u503C"),n("td",null,"\u2013")]),n("tr",null,[n("td",null,"page"),n("td",null,"\u5F00\u542F\u5206\u9875"),n("td",null,"\u2013")]),n("tr",null,[n("td",null,"showSearch"),n("td",null,"\u542F\u7528\u641C\u7D22"),n("td",null,"\u2013")])])],-1),b={setup(g,{expose:l}){return l({frontmatter:{}}),(f,h)=>{const e=s("lay-field"),c=s("lay-color-picker"),p=s("lay-code"),u=s("lay-table-box"),r=s("lay-comment");return k(),i("div",d,[a(e,{title:"\u57FA\u7840\u4F7F\u7528",style:{"margin-top":"20px","margin-bottom":"20px"}}),a(p,null,{code:o(()=>[_]),default:o(()=>[a(c),a(e,{title:"icon-picker \u5C5E\u6027",style:{"margin-top":"20px","margin-bottom":"20px"}})]),_:1}),a(u,null,{default:o(()=>[m]),_:1}),a(r)])}}};export{b as default};

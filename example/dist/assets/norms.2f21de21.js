@@ -1,0 +1,1 @@
+import{r as o,o as r,h as n,e as a}from"./vendor.e7911ee1.js";const s={class:"markdown-body"},d={setup(c,{expose:e}){return e({frontmatter:{}}),(m,p)=>{const t=o("lay-field");return r(),n("div",s,[a(t,{title:"\u5F00\u53D1\u89C4\u8303",style:{"margin-top":"20px","margin-bottom":"20px"}})])}}};export{d as default};

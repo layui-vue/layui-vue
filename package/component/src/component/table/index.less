@@ -9,10 +9,11 @@
   width: 100%;
   background-color: #fff;
   color: #666;
+  table-layout: fixed;
 }
 
 .layui-table tr {
-  display: flex;
+  // display: flex;
 }
 
 .layui-table th {
@@ -55,7 +56,7 @@
 .layui-table td,
 .layui-table th {
   position: relative;
-  padding: 9px 15px;
+  padding: 9px 8px;
   min-height: 20px;
   height: 40px;
   line-height: 20px;
@@ -105,6 +106,7 @@
 .layui-table-box {
   position: relative;
   overflow: hidden;
+
 }
 
 .layui-table-view .layui-table {
@@ -238,7 +240,14 @@
 .layui-table-tool-panel li {
   overflow: hidden;
   text-overflow: ellipsis;
+  // white-space: nowrap;
+}
+.layui-table-call-ellipsis{
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
   white-space: nowrap;
+  cursor: pointer;
 }
 
 .layui-table-tool-panel li {
@@ -355,6 +364,29 @@
   position: relative;
   overflow: auto;
   margin-bottom: -1px;
+  &::-webkit-scrollbar {
+    width: 13px;
+    height: 13px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.4);
+    background-clip: padding-box;
+    border: 3px solid transparent;
+    border-radius: 7px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar-track:hover {
+    background-color: #f8fafc;
+  }
 }
 
 .layui-table-body .layui-none {
