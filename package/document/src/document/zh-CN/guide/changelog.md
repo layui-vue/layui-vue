@@ -17,8 +17,8 @@
         <h3>1.1.1 <span class="layui-badge-rim">2022-05-21</span></h3> 
         <ul>
           <li>[新增] rate 组件 has-clear 属性。</li>
-          <li>[新增] tabke 组件 minWidth 属性, 自适应最小列宽。</li>
-          <li>[新增] tabke 组件 ellipsisTooltip 属性, 缩略长文本并提供 tooltip 提示。</li>
+          <li>[新增] table 组件 minWidth 属性, 自适应最小列宽。</li>
+          <li>[新增] table 组件 ellipsisTooltip 属性, 缩略长文本并提供 tooltip 提示。</li>
           <li>[修复] table 组件 size 属性 sm 与 lg 样式。</li>
           <li>[升级] async-validator 4.1.1。</li>
           <li>[升级] vueuse/core 8.5.0。</li>
