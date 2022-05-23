@@ -18,13 +18,13 @@ export function createApp(): {
   const router = createRouter();
 
   app
-  .use(layui)
-  .use(router)
-  .use(Store)
-  .component("LayCode", LayCode)
-  .component("LaySearch", LaySearch)
-  .component("LayTableBox", LayTableBox)
-  .component("LayAnchor", LayAnchor);
+    .use(layui)
+    .use(router)
+    .use(Store)
+    .component("LayCode", LayCode)
+    .component("LaySearch", LaySearch)
+    .component("LayTableBox", LayTableBox)
+    .component("LayAnchor", LayAnchor);
 
   return { app, router };
 }

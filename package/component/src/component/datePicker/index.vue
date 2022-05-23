@@ -263,8 +263,8 @@
 
 <script lang="ts">
 export default {
-  name: "LayDatePicker"
-}
+  name: "LayDatePicker",
+};
 </script>
 
 <script lang="ts" setup>
