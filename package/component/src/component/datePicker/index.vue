@@ -261,15 +261,20 @@
   </div>
 </template>
 
-<script lang="ts" setup>
-import { ref, watch, computed, defineProps, defineEmits, onMounted } from "vue";
+<script lang="ts">
+export default {
+  name: "LayDatePicker"
+}
+</script>
 
+<script lang="ts" setup>
 import "./index.less";
 import dayjs from "dayjs";
 import { LayIcon } from "@layui/icons-vue";
 import LayInput from "../input/index.vue";
 import LayDropdown from "../dropdown/index.vue";
 import { getDayLength, getYears, getMonth, getYear } from "./day";
+import { ref, watch, computed, defineProps, defineEmits, onMounted } from "vue";
 
 export interface LayDatePickerProps {
   modelValue?: string;
@@ -312,6 +317,7 @@ const hms = ref({
   mm: dayjs(props.modelValue).minute(),
   ss: dayjs(props.modelValue).second(),
 });
+
 const els = [
   { count: 24, type: "hh" },
   { count: 60, type: "mm" },
