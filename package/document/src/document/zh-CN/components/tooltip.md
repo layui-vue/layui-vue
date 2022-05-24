@@ -7,6 +7,38 @@
 ::: demo
 
 <template>
+<div style="width: 125px; ">
+ <lay-tooltip content="假装这里有文字提示" ref="tooltip" :isAutoShow="true">
+      假装这里有文字提示
+  </lay-tooltip>
+</div>
+<div style="width: 126px; margin-top: 20px">
+ <lay-tooltip content="假装这里有文字提示" ref="tooltip" :isAutoShow="true">
+      假装这里有文字提示
+  </lay-tooltip>
+</div>
+</template>
+
+<script>
+  import { ref } from 'vue';
+
+export default {
+setup() {
+
+    }
+}
+</script>
+
+<style>
+</style>
+:::
+
+::: title 基础使用
+:::
+
+::: demo
+
+<template>
   <lay-tooltip content="假装这里有文字提示">
     <lay-button>tooltip</lay-button>
   </lay-tooltip>
@@ -125,6 +157,7 @@
 | isDark      | 是否为黑色主题 | `true`(默认值)、`false`(浅色)   |
 | disabled    | 是否禁用 | `false`(默认值)、`true`(禁用)   ||
 | isCanHide   | 控制是否可以隐藏,可参考`lay-slider`组件 | `true`(默认值)、`false`   ||
+| isAutoShow   | 控制超出文本 `...` 时自动展示， 没有 `...` 时不展示 | `false`(默认值)、`true`   ||
 
 :::
 

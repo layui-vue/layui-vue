@@ -39,6 +39,7 @@ export default {
         title:"备注",
         width: "180px",
         key:"remark",
+        ellipsisTooltip: true,
       }
     ]
 
