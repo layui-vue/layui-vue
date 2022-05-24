@@ -11,6 +11,7 @@
       "emitDeclarationOnly": true,
       "esModuleInterop": true,
       "declarationDir": "types",
+      "jsx": "preserve",
       "lib": ["ESNext","DOM"]
     },
     "include": ["src/**/*","shims-vue.d.ts"],
