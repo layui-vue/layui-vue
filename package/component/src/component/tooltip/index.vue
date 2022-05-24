@@ -1,9 +1,13 @@
 <template>
-  <slot></slot>
+  <div v-if="isAutoShow" class="lay-tooltip-content" ref="refTooltip">
+    <span><slot></slot></span>
+  </div>
+  <slot v-else></slot>
   <lay-popper v-if="isMounted" v-bind="innerProps"></lay-popper>
 </template>
 
 <script lang="ts">
+import "./index.less";
 import LayPopper from "../popper/index.vue";
 import { defineComponent, ref } from "vue";
 export default defineComponent({
@@ -32,11 +36,17 @@ export default defineComponent({
       type: Boolean,
       default: true,
     },
+    isAutoShow: {
+      type: Boolean,
+      default: false,
+    },
   },
   setup() {
     const isMounted = ref(false);
+    const refTooltip = ref(null);
     return {
       isMounted,
+      refTooltip,
     };
   },
   computed: {
@@ -45,7 +55,19 @@ export default defineComponent({
     },
   },
   mounted() {
-    this.$nextTick(() => (this.isMounted = true));
+    this.$nextTick(() => {
+      if (this.refTooltip) {
+        if (
+          this.refTooltip.offsetWidth >= this.refTooltip.firstChild.offsetWidth
+        ) {
+          this.isMounted = false;
+        } else {
+          this.isMounted = true;
+        }
+      } else {
+        this.isMounted = true;
+      }
+    });
   },
 });
 </script>

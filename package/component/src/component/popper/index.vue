@@ -35,6 +35,7 @@ export interface LayPopperProps {
   isDark?: boolean;
   disabled?: boolean;
   isCanHide?: boolean;
+  isAutoShow?: boolean;
 }
 
 const props = withDefaults(defineProps<LayPopperProps>(), {
@@ -43,6 +44,7 @@ const props = withDefaults(defineProps<LayPopperProps>(), {
   disabled: false,
   enterable: true,
   isCanHide: true,
+  isAutoShow: false,
   trigger: "hover",
 });
 

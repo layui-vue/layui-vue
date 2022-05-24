@@ -354,13 +354,9 @@ onMounted(() => {
                           <lay-tooltip
                             v-if="column.ellipsisTooltip"
                             :content="data[column.key]"
+                            :isAutoShow="true"
                           >
-                            <div class="layui-table-call-ellipsis">
-                              <slot
-                                :name="column.customSlot"
-                                :data="data"
-                              ></slot>
-                            </div>
+                            <slot :name="column.customSlot" :data="data"></slot>
                           </lay-tooltip>
                           <slot
                             v-else
@@ -388,10 +384,9 @@ onMounted(() => {
                             <lay-tooltip
                               v-if="column.ellipsisTooltip"
                               :content="data[column.key]"
+                              :isAutoShow="true"
                             >
-                              <div class="layui-table-call-ellipsis">
-                                {{ data[column.key] }}
-                              </div>
+                              {{ data[column.key] }}
                             </lay-tooltip>
                             <span v-else> {{ data[column.key] }} </span>
                           </td>
