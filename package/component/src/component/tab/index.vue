@@ -61,7 +61,6 @@ const active = computed({
 });
 
 const change = function (id: any) {
-  // 回调切换标签之前的回调钩子函数，只要不是return false, 则进行切换该tab
   if (props.beforeLeave && props.beforeLeave(id) === false) {
     return;
   }
@@ -70,17 +69,12 @@ const change = function (id: any) {
 };
 
 const close = function (index: number, id: any) {
-  // 回调关闭之前的回调函数，只要不是return false, 则进行关闭该tab
   if (props.beforeClose && props.beforeClose(id) === false) {
     return;
   }
-
-  // 删除当前tab
   childrens.value.splice(index, 1);
-  // 点击的是当前激活的tab，则需要切换到下一个tab
   if (active.value === id) {
-    const nextChildren =
-      childrens.value[index === childrens.value.length ? 0 : index];
+    const nextChildren = childrens.value[index === childrens.value.length ? 0 : index];
     change(nextChildren && nextChildren.props ? nextChildren.props.id : "");
   }
   emit("close", id);
@@ -89,7 +83,7 @@ const close = function (index: number, id: any) {
 watch(slotsChange, function () {
   childrens.value = [];
   setItemInstanceBySlot((slot.default && slot.default()) as VNode[]);
-});
+}, { immediate: true });
 
 provide("active", active);
 provide("slotsChange", slotsChange);
@@ -102,7 +96,6 @@ provide("slotsChange", slotsChange);
       type ? 'layui-tab-' + type : '',
       props.tabPosition ? `is-${tabPosition}` : '',
     ]"
-    v-if="active"
   >
     <div
       :class="['layui-tab-head', props.tabPosition ? `is-${tabPosition}` : '']"
@@ -115,20 +108,19 @@ provide("slotsChange", slotsChange);
       >
         <li
           v-for="(children, index) in childrens"
-          :key="children"
-          :class="[children.props.id === active ? 'layui-this' : '']"
-          @click.stop="change(children.props.id)"
+          :key="children.props?.id"
+          :class="[children.props?.id === active ? 'layui-this' : '']"
+          @click.stop="change(children.props?.id)"
         >
-          {{ children.props.title }}
+          {{ children.props?.title }}
           <i
-            v-if="allowClose && children.props.closable != false"
+            v-if="allowClose && children.props?.closable != false"
             class="layui-icon layui-icon-close layui-unselect layui-tab-close"
-            @click.stop="close(index, children.props.id)"
+            @click.stop="close(index, children.props?.id)"
           ></i>
         </li>
       </ul>
     </div>
-
     <div class="layui-tab-content">
       <slot></slot>
     </div>

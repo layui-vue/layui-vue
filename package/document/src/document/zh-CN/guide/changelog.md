@@ -8,11 +8,23 @@
 </lay-timeline>
 
 ::: demo
-
 <template>
-  <lay-timeline>
-    <a href>前往查看</a>
-  </lay-timeline>
+<lay-timeline>
+  <lay-timeline-item title="1.1.x">
+    <ul> 
+      <a name="1-1-3"></a> 
+      <li> 
+        <h3>1.1.3 <span class="layui-badge-rim">2022-05-21</span></h3> 
+        <ul>
+          <li>[新增] input 组件 clear 事件, 清空内容时触发的无参事件</li>
+          <li>[修复] tab 组件初始化时, 因无法监听到 slots 变化, 而导致 layui-tab-title 无法正常显示的问题</li>
+          <li>[优化] input 组件 allow-clear 触发策略, 由始终显示调整为 v-model 不为空显示</li>
+          <li>[优化] icon-picker 组件 search 功能, 为 input 输入框增加清空操作</li>
+        </ul> 
+      </li>
+    </ul>
+  </lay-timeline-item>
+</lay-timeline>
 </template>
 
 <script>
