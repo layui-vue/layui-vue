@@ -9,6 +9,7 @@ import "./index.less";
 import { Ref, ref } from "vue";
 import { LayIconList as icons } from "@layui/icons-vue";
 import LayDropdown from "../dropdown/index.vue";
+import layInput from "../input/index.vue";
 
 export interface LayIconPickerProps {
   page?: boolean;
@@ -21,21 +22,22 @@ const props = withDefaults(defineProps<LayIconPickerProps>(), {
   page: false,
 });
 
-const emit = defineEmits(["update:modelValue"]);
-const dropdownRef = ref<null | HTMLElement>(null);
+const emit = defineEmits(["update:modelValue", "change"]);
 const selectedIcon: Ref<string> = ref(props.modelValue as string);
+const dropdownRef = ref<any>(null);
 
 const selectIcon = function (icon: string) {
   emit("update:modelValue", icon);
+  emit("change", icon);
   selectedIcon.value = icon;
-  // @ts-ignore
-  dropdownRef.value.hide();
+  dropdownRef.value?.hide();
 };
 
 const icones: Ref = ref([]);
 const total = ref(icons.length);
 const totalPage = ref(total.value / 12);
 const currentPage: Ref = ref(1);
+const searchValue = ref();
 
 if (props.page) {
   icones.value = icons.slice(0, 12);
@@ -63,26 +65,38 @@ const prev = function () {
   icones.value = icons.slice(start, end);
 };
 
+const clear = () => {
+  const start = (currentPage.value - 1) * 12;
+  const end = start + 12;
+  if (props.page) {
+    icones.value = icons.slice(start, end);
+    total.value = icons.length;
+    totalPage.value = Math.ceil(icons.length / 12);
+  } else {
+    icones.value = icons;
+  }
+};
+
 const search = function (e: any) {
-  var text = e.target.value;
   currentPage.value = 1;
   const start = (currentPage.value - 1) * 12;
   const end = start + 12;
-  if (text === "") {
-    if (props.page) {
-      icones.value = icons.slice(start, end);
-      total.value = icons.length;
-      totalPage.value = Math.ceil(icons.length / 12);
-    } else {
-      icones.value = icons;
-    }
-  } else {
+  const text = e.target.value;
+  if (text) {
     if (props.page) {
       icones.value = searchList(text, icons).slice(start, end);
       total.value = searchList(text, icons).length;
       totalPage.value = Math.ceil(searchList(text, icons).length / 12);
     } else {
       icones.value = searchList(text, icons);
+    }
+  } else {
+    if (props.page) {
+      icones.value = icons.slice(start, end);
+      total.value = icons.length;
+      totalPage.value = Math.ceil(icons.length / 12);
+    } else {
+      icones.value = icons;
     }
   }
 };
@@ -135,23 +149,17 @@ const searchList = function (str: string, container: any) {
     <template #content>
       <div class="layui-iconpicker-view layui-iconpicker-scroll">
         <div v-if="showSearch" class="layui-iconpicker-search">
-          <div class="layui-form layui-input-wrap layui-input-wrap-prefix">
-            <div class="layui-input-prefix">
+          <lay-input
+            @input="search"
+            @clear="clear"
+            v-model="searchValue"
+            :autocomplete="true"
+            :allow-clear="true"
+          >
+            <template #prefix>
               <i class="layui-icon layui-icon-search"></i>
-            </div>
-            <input
-              type="text"
-              value=""
-              placeholder="search"
-              autocomplete="off"
-              class="layui-input"
-              lay-affix="clear"
-              @input="search"
-            />
-            <div class="layui-input-suffix layui-input-affix-event layui-hide">
-              <i class="layui-icon layui-icon-clear"></i>
-            </div>
-          </div>
+            </template>
+          </lay-input>
         </div>
         <div class="layui-iconpicker-list">
           <ul>

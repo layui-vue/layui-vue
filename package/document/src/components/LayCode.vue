@@ -66,8 +66,7 @@ const copy = function () {
     navigator.clipboard.writeText(text);
     successful = true;
   } else if (window.getSelection()) {
-    // 使用document.execCommand
-    // 代码div显示状态直接使用，隐藏状态则创建一个div
+    // 使用 document.execCommand
     var range = document.createRange();
     let copyDiv;
     if (show.value) {
@@ -103,8 +102,7 @@ onMounted(() => {
   const foundCodes = meta.value.getElementsByClassName("language-html");
 
   if (foundDescs.length) {
-    codeAreaHeight.value =
-      foundDescs[0].clientHeight + foundCodes[0].clientHeight + 30;
+    codeAreaHeight.value = foundDescs[0].clientHeight + foundCodes[0].clientHeight + 30;
   } else {
     codeAreaHeight.value = foundCodes[0].clientHeight + 20;
   }

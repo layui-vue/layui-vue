@@ -7,11 +7,12 @@ export default {
 <script setup lang="ts">
 import "./index.less";
 import { LayIcon } from "@layui/icons-vue";
-import { useSlots } from "vue";
+import { computed, useSlots } from "vue";
 import { useI18n } from "../../language";
 
 const { t } = useI18n();
 const slots = useSlots();
+const hasContent = computed(() => props.modelValue?.length > 0);
 
 export interface LayInputProps {
   name?: string;
@@ -36,9 +37,10 @@ const props = withDefaults(defineProps<LayInputProps>(), {
 
 const emit = defineEmits([
   "update:modelValue",
-  "input",
   "change",
+  "input",
   "focus",
+  "clear",
   "blur",
 ]);
 
@@ -50,7 +52,8 @@ const onInput = function (event: Event) {
 };
 
 const onClear = () => {
-  emit("update:modelValue", "");
+  emit("update:modelValue");
+  emit("clear");
 };
 
 const onFocus = (event: Event) => {
@@ -64,6 +67,10 @@ const onChange = (event: Event) => {
 const onBlur = (event: Event) => {
   emit("blur", event);
 };
+
+const classes = computed(() => {
+  return { "layui-disabled": props.disabled };
+});
 </script>
 
 <template>
@@ -80,7 +87,7 @@ const onBlur = (event: Event) => {
       :autofocus="autofocus"
       :autocomplete="autocomplete"
       :readonly="readonly"
-      :class="{ 'layui-disabled': disabled }"
+      :class="classes"
       class="layui-input"
       @input="onInput"
       @focus="onFocus"
@@ -90,7 +97,7 @@ const onBlur = (event: Event) => {
     <span class="layui-input-suffix" v-if="slots.suffix">
       <slot name="suffix"></slot>
     </span>
-    <span class="layui-input-clear" v-if="allowClear">
+    <span class="layui-input-clear" v-if="allowClear && hasContent">
       <lay-icon type="layui-icon-close-fill" @click="onClear"></lay-icon>
     </span>
   </div>

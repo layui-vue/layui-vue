@@ -3,6 +3,7 @@
     <slot></slot>
   </div>
 </template>
+
 <style>
 .lay-table-box table {
   width: 100%;

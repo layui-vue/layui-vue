@@ -24,9 +24,7 @@ import Schema, {
   Rule,
   RuleItem,
   Rules,
-  ValidateCallback,
-  ValidateError,
-  ValidateMessages,
+  ValidateCallback
 } from "async-validator";
 import cnValidateMessage from "./cnValidateMessage";
 

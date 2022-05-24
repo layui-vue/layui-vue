@@ -33,8 +33,8 @@ const props = withDefaults(defineProps<LayInputNumberProps>(), {
 });
 
 const emit = defineEmits(["update:modelValue", "change"]);
-
 let num = ref(props.modelValue);
+
 watch(num, (val) => {
   if (props.max !== Infinity && val > props.max) {
     num.value = props.max;

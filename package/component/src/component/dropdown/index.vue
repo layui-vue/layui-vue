@@ -19,18 +19,18 @@ const props = withDefaults(defineProps<LayDropdownProps>(), {
   trigger: "click",
   disabled: false,
 });
-const emit = defineEmits(["open", "hide"]);
+
 const openState = ref(false);
 const dropdownRef = ref<null | HTMLElement>(null);
 const dropdownX = ref<number | string>(0);
 const dropdownY = ref<number | string>("auto");
-
+const emit = defineEmits(["open", "hide"]);
 // @ts-ignore
 onClickOutside(dropdownRef, (event) => {
   openState.value = false;
 });
 
-const open = function (event?: Event) {
+const open = function (event?: Event) : void {
   if (props.disabled === false) {
     if (event) {
       const el = event.currentTarget;
@@ -47,12 +47,12 @@ const open = function (event?: Event) {
   }
 };
 
-const hide = function () {
+const hide = function () : void {
   openState.value = false;
   emit("hide");
 };
 
-const toggle = function (event?: Event) {
+const toggle = function (event?: Event) : void {
   if (props.disabled === false)
     if (openState.value) {
       hide();
