@@ -102,7 +102,8 @@ onMounted(() => {
   const foundCodes = meta.value.getElementsByClassName("language-html");
 
   if (foundDescs.length) {
-    codeAreaHeight.value = foundDescs[0].clientHeight + foundCodes[0].clientHeight + 30;
+    codeAreaHeight.value =
+      foundDescs[0].clientHeight + foundCodes[0].clientHeight + 30;
   } else {
     codeAreaHeight.value = foundCodes[0].clientHeight + 20;
   }

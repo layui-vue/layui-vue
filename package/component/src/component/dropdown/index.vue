@@ -30,7 +30,7 @@ onClickOutside(dropdownRef, (event) => {
   openState.value = false;
 });
 
-const open = function (event?: Event) : void {
+const open = function (event?: Event): void {
   if (props.disabled === false) {
     if (event) {
       const el = event.currentTarget;
@@ -47,12 +47,12 @@ const open = function (event?: Event) : void {
   }
 };
 
-const hide = function () : void {
+const hide = function (): void {
   openState.value = false;
   emit("hide");
 };
 
-const toggle = function (event?: Event) : void {
+const toggle = function (event?: Event): void {
   if (props.disabled === false)
     if (openState.value) {
       hide();
