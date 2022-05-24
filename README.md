@@ -1,4 +1,4 @@
-## Introduction
+## 介绍
 
 <p>  
   <a href="https://www.npmjs.com/package/@layui/layui-vue"><img src="https://img.shields.io/npm/v/@layui/layui-vue.svg?sanitize=true" alt="Version"></a>
@@ -7,32 +7,35 @@
   <a href="https://coveralls.io/r/sentsin/layui?branch=master"><img alt="Test Coverage" src="https://img.shields.io/coveralls/sentsin/layui/master.svg"></a>
 </p>  
 
-**[🔶 Explore the docs »](http://www.layui-vue.com)** **[Join us](https://jq.qq.com/?_wv=1027&k=ffiUQgnE)**
+**[🔶 www.layui-vue.com »](http://www.layui-vue.com)**
 
-An enterprise-class UI components based on Layui and Vue.
+layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库. 
+
+QQ 群 ：[➀ 336720831](https://jq.qq.com/?_wv=1027&k=oQA1SC80)
 
 **Run with code Sandbox.**
 
 [![Edit layui-vue](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/11mvy)
 
-## Features
+## 功能
 
-A few of the things you can do with layui vue:
+你可以用layui vue做的一些事情：
 
-* Writing components using setup script
-* Up to 60 high quality components
-* Provide Axure design resources
-* Support theme customization
-* Support internationalization
+* 使用 setup script 编写组件
+* 多达 60 个高品质组件
+* 提供 Axure 设计资源
+* 支持 夜间模式
+* 支持 多主题
+* 支持 国际化
 
-## Get Started
+## 开始使用
 
-Use npm to install.
+使用 npm 安装
 
 ```bash
 npm i @layui/layui-vue
 ```
-Before using, you need to mount layui Vue to Vue and introduce index.css style file
+在使用前需要将 layui-vue 挂载到 vue 并引入 index.css 样式
 
 ```
 import App from './App.vue'
@@ -43,7 +46,7 @@ import '@layui/layui-vue/lib/index.css'
 createApp(App).use(layui).mount('#app')
 ```
 
-We have several examples on the [website](http://layui-vue.pearadmin.com). Here is the first one to get you started:
+我们在[网站](http://layui-vue.pearadmin.com)上有几个例子。这是第一个让您入门的方法：
 
 ```
 <template>
@@ -53,26 +56,26 @@ We have several examples on the [website](http://layui-vue.pearadmin.com). Here 
 </template>
 ```
 
-## Feedback
+## 反馈
 
-Feel free to send us feedback on [file an issue](https://github.com/layui-vue/layui-vue/issues/new). Feature requests are always welcome. If you wish to contribute, please take a quick look at the [guidelines](./CONTRIBUTING.md)!
+欢迎在[提交问题](https://github.com/layui-vue/layui-vue/issues/new)上向我们反馈。欢迎功能请求。如果您想贡献，请查看[快速指南](./CONTRIBUTING.md)！
 
-If there's anything you'd like to chat about, please feel free to join our [Gitter chat](https://gitter.im/layui-vue/community)!
+如果您有什么想聊的，请随时加入我们的[Gitter chat](https://gitter.im/layui-vue/community)！
 
-## Build Process
+## 构建过程
 
-- `build` Packaged component library
+- `build` 打包组件库
 
-Please take a look at the [contributing guidelines](./CONTRIBUTING.md) for a detailed process on how to build your application as well as troubleshooting information.
+请看一下[贡献指南](./CONTRIBUTING.md)，以获得关于如何构建应用程序的详细过程以及排除故障的信息。
 
-## Contributors
+## 贡献者
 
-This project follows the [all-contributors](https://github.com/layui-vue/layui-vue/graphs/contributors) specification and is brought to you by these [awesome contributors](https://github.com/layui-vue/layui-vue/graphs/contributors).
+这个项目遵循[所有贡献者](https://github.com/layui-vue/layui-vue/graphs/contributors)规范，感谢这些[出色的贡献者](https://github.com/layui-vue/layui-vue/graphs/contributors)。
 
 <a href="https://github.com/layui-vue/layui-vue/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=layui-vue/layui-vue" />
 </a>
 
-## Licence
+## 开源许可
 
-Layui vue is licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Layui Vue 采用 [MIT](https://opensource.org/licenses/MIT) 开源许可证。
