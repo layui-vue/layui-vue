@@ -1,5 +1,5 @@
 <script lang="ts">
-import { computed } from 'vue';
+import { computed } from "vue";
 export default {
   name: "LayAvatar",
 };
@@ -22,17 +22,13 @@ const props = withDefaults(defineProps<LayAvatarProps>(), {
 
 const classes = computed(() => {
   return [
-      'layui-avatar',
-      props.radius ? 'layui-avatar-radius' : '',
-      props.size ? `layui-avatar-${props.size}` : '',
-  ]
-})
+    "layui-avatar",
+    props.radius ? "layui-avatar-radius" : "",
+    props.size ? `layui-avatar-${props.size}` : "",
+  ];
+});
 </script>
 
 <template>
-  <img
-    :alt="alt"
-    :src="src"
-    :class="classes"
-  />
+  <img :alt="alt" :src="src" :class="classes" />
 </template>

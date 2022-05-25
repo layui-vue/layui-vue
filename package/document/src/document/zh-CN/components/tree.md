@@ -10,43 +10,14 @@
 ::: title 基础使用
 :::
 
-::: demo 使用 `lay-tree` 标签, 创建树形组件
+::: demo 使用 `lay-tree` 标签, 创建树形组件, @node-click 监听节点点击。
 
 <template>
   <lay-tree
     :data="data"
-    :onlyIconControl="iconCtrl"
-    :showLine="showLine"
-    :showCheckbox="showCheckbox"
-    collapseTransition
-    v-model:checkedKeys="checkedKeys"
     @node-click="handleClick"
-    :disabled="disabled"
   >
   </lay-tree>
-  <br/>
-  是否可开启选择框：
-  <br/>
-  <lay-switch v-model="showCheckbox"></lay-switch>
-  <br/>
-  checkedKeys：
-  <pre>
-    {{ checkedKeys }}
-  </pre>
-  只能通过节点左侧图标来展开收缩：
-  <br/>
-  <lay-switch v-model="iconCtrl"></lay-switch>
-  <br/>
-  是否开启连接线：
-  <br/>
-  <lay-switch v-model="showLine"></lay-switch>
-  <br/>
-  当前点击的节点：
-  <br/>
-  <pre>
-    {{ clickNode }}
-  </pre>
-  <br/>
 </template>
 
 <script setup>
@@ -212,16 +183,72 @@ const data = ref([{
 	}]
 }]);
 
-const iconCtrl = ref(false);
-const showLine = ref(true);
-const clickNode = ref(null);
-const showCheckbox = ref(true);
-const checkedKeys = ref([1]);
-const disabled = ref(false);
-
 function handleClick(node) {
  clickNode.value = node
 }
+</script>
+
+:::
+
+::: title 选择节点
+:::
+
+::: demo 使用 `showCheckbox` 属性开启复选框
+
+<template>
+  <lay-tree
+    :data="data"
+	v-model:checkedKeys="checkedKeys"
+	:showCheckbox="showCheckbox"
+  >
+  </lay-tree>
+</template>
+
+<script setup>
+import { ref } from 'vue';
+
+const checkedKeys = ref([])
+const showCheckbox = ref(true)
+</script>
+
+:::
+
+::: title 关闭连线
+:::
+
+::: demo 使用 `showLine` 属性关闭节点连线
+
+<template>
+  <lay-tree
+    :data="data"
+	:showLine="showLine"
+  >
+  </lay-tree>
+</template>
+
+<script setup>
+import { ref } from 'vue';
+
+const showLine=ref(false)
+</script>
+
+:::
+
+::: title 过渡动画
+:::
+
+::: demo 使用 `collapse-transition` 属性开启展开过渡动画
+
+<template>
+  <lay-tree
+    :data="data"
+	collapse-transition
+  >
+  </lay-tree>
+</template>
+
+<script setup>
+import { ref } from 'vue';
 </script>
 
 :::
