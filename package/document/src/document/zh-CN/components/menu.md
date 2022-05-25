@@ -540,6 +540,150 @@ export default {
   }
 }
 </script>
+:::
+
+::: title 手风琴模式
+:::
+
+::: demo
+
+<template>
+    <br />
+    <br />
+    <lay-switch v-model="collapse"></lay-switch>
+    <br />
+    <br />
+    <lay-menu :selectedKey="selectedKey2" @changeSelectedKey="changeSelectedKey" @changeOpenKeys="changeOpenKeys"
+        v-model:openKeys="openKeys2" :tree="true" :childSpacing="true" :collapse="collapse" >
+        <lay-sub-menu id="1" @click.stop="changekey('1')" @mousedown.stop="change">
+            <template #icon>
+                <lay-icon type="layui-icon-home" ></lay-icon>
+            </template>
+            <template #title>
+                首页1
+            </template>
+            <lay-menu-item id="10" @click="">首页</lay-menu-item>
+            <lay-menu-item id="11" @click="">首页</lay-menu-item>
+            <lay-sub-menu id="20" @click.stop="changekey('20')" @mousedown.stop="change">
+                <template #title>
+                    首页20
+                </template>
+                <lay-menu-item id="21">首页</lay-menu-item>
+                <lay-menu-item id="22">首页</lay-menu-item>
+                <lay-sub-menu id="220" @click.stop="changekey('220')" @mousedown.stop="change">
+                    <template #title>
+                        首页220
+                    </template>
+                    <lay-menu-item id="221">首页</lay-menu-item>
+                    <lay-menu-item id="222">首页</lay-menu-item>
+                    <lay-menu-item id="223">首页</lay-menu-item>
+                </lay-sub-menu>
+                <lay-sub-menu id="230" @click.stop="changekey('230')" @mousedown.stop="change">
+                    <template #title>
+                        首页230
+                    </template>
+                    <lay-menu-item id="231">首页</lay-menu-item>
+                    <lay-menu-item id="232">首页</lay-menu-item>
+                    <lay-menu-item id="233">首页</lay-menu-item>
+                </lay-sub-menu>
+            </lay-sub-menu>
+            <lay-sub-menu id="30" @click.stop="changekey('30')" @mousedown.stop="change">
+                <template #title>
+                    首页30
+                </template>
+                <lay-menu-item id="31">首页</lay-menu-item>
+                <lay-menu-item id="32">首页</lay-menu-item>
+                <lay-menu-item id="33">首页</lay-menu-item>
+            </lay-sub-menu>
+        </lay-sub-menu>
+        <lay-sub-menu id="7" @mousedown.stop="change" @click.stop="changekey('7')">
+            <template #icon>
+                <lay-icon type="layui-icon-home"></lay-icon>
+            </template>
+            <template #title>
+                首页2
+            </template>
+            <lay-menu-item id="8">首页</lay-menu-item>
+            <lay-menu-item id="9">首页</lay-menu-item>
+        </lay-sub-menu>
+        <lay-sub-menu id="3" @mousedown.stop="change" @click.stop="changekey('3')">
+            <template #icon>
+                <lay-icon type="layui-icon-home"></lay-icon>
+            </template>
+            <template #title>
+                首页3
+            </template>           
+                <lay-menu-item id="4">首页</lay-menu-item>
+                <lay-menu-item id="5">首页</lay-menu-item>
+        </lay-sub-menu>
+    </lay-menu>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+const openKeys2 = ref([''])
+const selectedKey2 = ref("10")
+let index
+let open
+let idx
+const map = new Map()
+const changeSelectedKey = (val) => {
+    selectedKey2.value = val;
+
+}
+const changeOpenKeys = (val) => {
+
+    setTimeout(function () {
+        if (collapse.value == false) {
+            if (index != undefined) map.set(index, idx)
+            open = val.includes(idx)
+            // console.log(open)
+            if (open == false) {
+                map.delete(index)
+                
+                openKeys2.value = Array.from(map.values())
+            } else {
+                
+                openKeys2.value = Array.from(map.values())
+            }
+        }
+    }, 150);
+}
+
+const changekey = (id) => {
+    idx = id
+}
+const change = (val) => {
+    //console.log(val)
+    let lis = Array.from(val.path).filter(function (v) {
+        //@ts-ignore
+        if (v.tagName == 'DL') {
+            return v
+        }
+    })
+    index = lis.length
+}
+
+
+
+const collapse = ref(false)
+
+    return {
+      openKeys2,
+      collapse,
+      selectedKey2,
+      changeSelectedKey,
+      changeOpenKeys,
+      changekey,
+      change
+    }
+  }
+}
+</script>
 
 :::
 
