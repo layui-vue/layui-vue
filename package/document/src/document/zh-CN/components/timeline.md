@@ -10,7 +10,7 @@
 ::: title 基础使用
 :::
 
-::: demo
+::: demo 使用 `lay-timeline` 与 `lay-timeline-item` 标签, 创建时间线
 
 <template>
     <lay-timeline>

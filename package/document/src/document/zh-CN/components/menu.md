@@ -59,7 +59,6 @@ export default {
 ::: demo
 
 <template>
-  选中：{{ selectedKey }} 打开： {{ openKeys2 }}
   <lay-menu :selectedKey="selectedKey" @changeSelectedKey="changeSelectedKey" @changeOpenKeys="changeOpenKeys" v-model:openKeys="openKeys2" :tree="true">
     <lay-menu-item id="1">首页</lay-menu-item>
     <lay-menu-item id="2">首页</lay-menu-item>
@@ -335,7 +334,7 @@ export default {
         </template>
         </lay-menu-item> 
         <lay-menu-item id="9">
-                  <template #icon>
+        <template #icon>
           <lay-icon type="layui-icon-home"></lay-icon> 
         </template>
         <template #title>
@@ -540,6 +539,7 @@ export default {
   }
 }
 </script>
+
 :::
 
 ::: title Menu 属性

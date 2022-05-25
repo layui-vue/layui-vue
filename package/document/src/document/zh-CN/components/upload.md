@@ -4,13 +4,13 @@
 ::: title 基本介绍
 :::
 
-::: describe 按钮用于开始一个即时操作。
+::: describe 文件上传
 :::
 
 ::: title 基础使用
 :::
 
-::: demo 使用 `lay-upload` 标签, 创建一个按钮上传单文件
+::: demo 使用 `lay-upload` 标签, 创建一个上传按钮
 
 <template>
   <lay-upload @done="getUploadFile" @choose="beginChoose">

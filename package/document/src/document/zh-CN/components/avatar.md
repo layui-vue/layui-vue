@@ -132,6 +132,7 @@ export default {
 | src    | 图源 | --             |
 | size   | 尺寸 | `xs` `sm` `lg` |
 | radius | 圆形 | `true` `false` |
+| alt    | 描述图像的替换文本 | -- |
 
 :::
 

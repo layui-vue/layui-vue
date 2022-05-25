@@ -17,6 +17,7 @@
         <h3>1.1.3 <span class="layui-badge-rim">2022-05-21</span></h3> 
         <ul>
           <li>[新增] input 组件 clear 事件, 清空内容时触发的无参事件</li>
+          <li>[新增] avatar 组件 alt 属性, 用于设置描述图像无法正常显示时的替换文本</li>
           <li>[修复] tab 组件初始化时, 因无法监听到 slots 变化, 而导致 layui-tab-title 无法正常显示的问题</li>
           <li>[优化] input 组件 allow-clear 触发策略, 由始终显示调整为 v-model 不为空显示</li>
           <li>[优化] icon-picker 组件 search 功能, 为 input 输入框增加清空操作</li>

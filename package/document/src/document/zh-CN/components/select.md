@@ -10,7 +10,7 @@
 ::: title 基础使用
 :::
 
-::: demo
+::: demo 使用 `lay-select` 标签, 创建下拉选择框
 
 <template>
   <lay-select v-model="value">
@@ -33,6 +33,7 @@ export default {
 }
 </script>
 
+:::
 
 ::: title 数据联动
 :::
