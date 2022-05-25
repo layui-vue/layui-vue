@@ -74,16 +74,21 @@ const close = function (index: number, id: any) {
   }
   childrens.value.splice(index, 1);
   if (active.value === id) {
-    const nextChildren = childrens.value[index === childrens.value.length ? 0 : index];
+    const nextChildren =
+      childrens.value[index === childrens.value.length ? 0 : index];
     change(nextChildren && nextChildren.props ? nextChildren.props.id : "");
   }
   emit("close", id);
 };
 
-watch(slotsChange, function () {
-  childrens.value = [];
-  setItemInstanceBySlot((slot.default && slot.default()) as VNode[]);
-}, { immediate: true });
+watch(
+  slotsChange,
+  function () {
+    childrens.value = [];
+    setItemInstanceBySlot((slot.default && slot.default()) as VNode[]);
+  },
+  { immediate: true }
+);
 
 provide("active", active);
 provide("slotsChange", slotsChange);
