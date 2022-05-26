@@ -5,17 +5,15 @@ export default {
 </script>
 
 <script setup lang="ts">
+import "./index.less";
 import { ref, watch, useSlots, withDefaults, onMounted } from "vue";
 import { v4 as uuidv4 } from "../../utils/guidUtil";
 import { Recordable } from "../../types";
 import LayCheckbox from "../checkbox/index.vue";
 import LayDropdown from "../dropdown/index.vue";
-import LayPage from "../page/index.vue";
-import { LayIcon } from "@layui/icons-vue";
-import "./index.less";
 import LayTooltip from "../tooltip/index.vue";
-
-const tableId = uuidv4();
+import { LayIcon } from "@layui/icons-vue";
+import LayPage from "../page/index.vue";
 
 export interface LayTableProps {
   id?: string;
@@ -35,6 +33,8 @@ const props = withDefaults(defineProps<LayTableProps>(), {
   dataSource: () => [],
   selectedKeys: () => [],
 });
+
+const tableId = uuidv4();
 
 const emit = defineEmits([
   "row",
@@ -120,8 +120,8 @@ const print = function () {
 };
 
 const exportData = () => {
-  const head = [];
-  const body = [];
+  const head: any = [];
+  const body: any = [];
   tableColumns.value.forEach((item) => {
     try {
       tableDataSource.value.forEach((dataItem) => {
@@ -133,7 +133,7 @@ const exportData = () => {
     } catch (e) {}
   });
   tableDataSource.value.forEach((item) => {
-    let obj = [];
+    let obj: any = [];
     tableColumns.value.forEach((tableColumn) => {
       Object.keys(item).forEach((name) => {
         if (tableColumn.key === name) {
@@ -147,11 +147,11 @@ const exportData = () => {
   return;
 };
 
-function exportToExcel(headerList, bodyList) {
+function exportToExcel(headerList: any, bodyList: any) {
   let excelList = [];
   excelList.push(headerList.join("\t,"));
   excelList.push("\n");
-  bodyList.forEach((item) => {
+  bodyList.forEach((item: any) => {
     excelList.push(item.join("\t,"));
     excelList.push("\n");
   });
@@ -218,23 +218,23 @@ onMounted(() => {
           <slot name="toolbar"></slot>
         </div>
         <div v-if="defaultToolbar" class="layui-table-tool-self">
-          <LayDropdown>
+          <lay-dropdown>
             <div class="layui-inline" title="筛选列" lay-event="LAYTABLE_PRINT">
               <i class="layui-icon layui-icon-cols"></i>
             </div>
             <template #content>
               <div style="padding: 10px">
-                <LayCheckbox
+                <lay-checkbox
                   v-for="column in columns"
-                  :key="column"
                   v-model="tableColumnKeys"
-                  skin="primary"
+                   skin="primary"
+                  :key="column.key"
                   :label="column.key"
-                  >{{ column.title }}</LayCheckbox
+                  >{{ column.title }}</lay-checkbox
                 >
               </div>
             </template>
-          </LayDropdown>
+          </lay-dropdown>
           <div
             class="layui-inline"
             title="导出"
@@ -262,7 +262,7 @@ onMounted(() => {
               <tr>
                 <th v-if="checkbox" class="layui-table-col-special">
                   <div class="layui-table-cell laytable-cell-checkbox">
-                    <LayCheckbox
+                    <lay-checkbox
                       v-model="allChecked"
                       skin="primary"
                       label="all"
@@ -324,7 +324,7 @@ onMounted(() => {
                   <!-- 复选框 -->
                   <td v-if="checkbox" class="layui-table-col-special">
                     <div class="layui-table-cell laytable-cell-checkbox">
-                      <LayCheckbox
+                      <lay-checkbox
                         v-model="tableSelectedKeys"
                         skin="primary"
                         :label="data[id]"
@@ -401,7 +401,7 @@ onMounted(() => {
         </div>
       </div>
       <div v-if="page" class="layui-table-page">
-        <LayPage
+        <lay-page
           :total="page.total"
           :limit="page.limit"
           v-model="page.current"
@@ -410,9 +410,9 @@ onMounted(() => {
           show-skip
           @jump="change"
         >
-          <template #prev><LayIcon type="layui-icon-left" /></template>
-          <template #next><LayIcon type="layui-icon-right" /></template>
-        </LayPage>
+          <template #prev><lay-icon type="layui-icon-left" /></template>
+          <template #next><lay-icon type="layui-icon-right" /></template>
+        </lay-page>
       </div>
     </div>
   </div>
