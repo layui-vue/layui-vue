@@ -37,7 +37,6 @@ const icones: Ref = ref([]);
 const total = ref(icons.length);
 const totalPage = ref(total.value / 12);
 const currentPage: Ref = ref(1);
-const searchValue = ref();
 
 if (props.page) {
   icones.value = icons.slice(0, 12);
@@ -45,7 +44,7 @@ if (props.page) {
   icones.value = icons;
 }
 
-const next = function () {
+const next = () => {
   if (currentPage.value === totalPage.value) {
     return;
   }
@@ -55,7 +54,7 @@ const next = function () {
   icones.value = icons.slice(start, end);
 };
 
-const prev = function () {
+const prev = () => {
   if (currentPage.value === 1) {
     return;
   }
@@ -77,7 +76,7 @@ const clear = () => {
   }
 };
 
-const search = function (e: any) {
+const search = (e: any) => {
   currentPage.value = 1;
   const start = (currentPage.value - 1) * 12;
   const end = start + 12;
@@ -101,7 +100,7 @@ const search = function (e: any) {
   }
 };
 
-const searchList = function (str: string, container: any) {
+const searchList = (str: string, container: any) => {
   var newList = [];
   var startChar = str.charAt(0);
   var strLen = str.length;
@@ -152,7 +151,6 @@ const searchList = function (str: string, container: any) {
           <lay-input
             @input="search"
             @clear="clear"
-            v-model="searchValue"
             :autocomplete="true"
             :allow-clear="true"
           >

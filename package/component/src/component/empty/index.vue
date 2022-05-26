@@ -13,11 +13,11 @@ export interface LayEmptyProps {
   image?: string;
 }
 
-const slots = useSlots();
-
 const props = withDefaults(defineProps<LayEmptyProps>(), {
   description: "暂无数据",
 });
+
+const slots = useSlots();
 </script>
 
 <template>

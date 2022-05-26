@@ -227,7 +227,7 @@ onMounted(() => {
                 <lay-checkbox
                   v-for="column in columns"
                   v-model="tableColumnKeys"
-                   skin="primary"
+                  skin="primary"
                   :key="column.key"
                   :label="column.key"
                   >{{ column.title }}</lay-checkbox

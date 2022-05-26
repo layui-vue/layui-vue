@@ -8,12 +8,11 @@ export default {
 import "./index.less";
 import { useSlots } from "vue";
 
-const slot = useSlots();
-
 export interface LayFieldProps {
   title?: string;
 }
 
+const slot = useSlots();
 const props = defineProps<LayFieldProps>();
 </script>
 
@@ -24,7 +23,6 @@ const props = defineProps<LayFieldProps>();
       <slot></slot>
     </div>
   </fieldset>
-
   <fieldset v-else class="layui-field layui-field-title">
     <legend>
       <a name="docend">{{ title }}</a>
