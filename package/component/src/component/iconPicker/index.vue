@@ -26,7 +26,7 @@ const emit = defineEmits(["update:modelValue", "change"]);
 const selectedIcon: Ref<string> = ref(props.modelValue as string);
 const dropdownRef = ref<any>(null);
 
-const selectIcon = function (icon: string) : void {
+const selectIcon = function (icon: string): void {
   emit("update:modelValue", icon);
   emit("change", icon);
   selectedIcon.value = icon;

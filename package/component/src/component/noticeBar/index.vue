@@ -1,12 +1,12 @@
 <template>
   <div
     class="layui-notice-bar"
-    :style="{ 'background': background, 'height': `${height}px` }"
+    :style="{ background: background, height: `${height}px` }"
     v-show="!state.isMode"
   >
     <div
       class="layui-notice-bar-warp"
-      :style="{ 'color': color , 'font-size': `${size}px` }"
+      :style="{ color: color, 'font-size': `${size}px` }"
     >
       <lay-icon
         v-if="leftIcon"
@@ -62,12 +62,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import {
-  onMounted,
-  reactive,
-  nextTick,
-  ref
-} from "vue";
+import { onMounted, reactive, nextTick, ref } from "vue";
 import LayCarousel from "../carousel/index.vue";
 import LayCarouselItem from "../carouselItem/index.vue";
 import { LayIcon } from "@layui/icons-vue";
