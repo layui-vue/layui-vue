@@ -1,18 +1,18 @@
 <template>
   <div
     class="layui-notice-bar"
-    :style="{ background, height: `${height}px` }"
-    v-show="!isMode"
+    :style="{ 'background': background, 'height': `${height}px` }"
+    v-show="!state.isMode"
   >
     <div
       class="layui-notice-bar-warp"
-      :style="{ color, fontSize: `${size}px` }"
+      :style="{ 'color': color , 'font-size': `${size}px` }"
     >
-      <LayIcon
+      <lay-icon
         v-if="leftIcon"
         class="layui-notice-bar-warp-left-icon"
         :type="leftIcon"
-      ></LayIcon>
+      ></lay-icon>
       <div
         class="layui-notice-bar-warp-text-box"
         ref="noticeBarWarpRef"
@@ -45,12 +45,12 @@
           <!-- <slot />   -->
         </div>
       </div>
-      <LayIcon
+      <lay-icon
         :type="rightIcon"
         v-if="rightIcon"
         class="layui-notice-bar-warp-right-icon"
         @click="onRightIconClick"
-      ></LayIcon>
+      ></lay-icon>
     </div>
   </div>
 </template>
@@ -63,12 +63,10 @@ export default {
 
 <script lang="ts" setup>
 import {
-  toRefs,
-  reactive,
-  defineComponent,
-  ref,
   onMounted,
+  reactive,
   nextTick,
+  ref
 } from "vue";
 import LayCarousel from "../carousel/index.vue";
 import LayCarouselItem from "../carouselItem/index.vue";
@@ -77,7 +75,7 @@ import { LayIcon } from "@layui/icons-vue";
 export interface LayNoticeBarProps {
   mode?: string;
   text?: string;
-  textlist?: string[];
+  textlist?: any[];
   color?: Function;
   background?: Function;
   size?: number | string;
@@ -105,7 +103,7 @@ const emit = defineEmits(["close", "link"]);
 
 const noticeBarWarpRef = ref();
 const noticeBarTextRef = ref();
-//@ts-ignore
+
 const active = ref(props.textlist[0]?.id);
 const state = reactive({
   order: 1,

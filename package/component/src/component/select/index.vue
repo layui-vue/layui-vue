@@ -34,10 +34,9 @@ export interface LaySelectProps {
   items?: { label: string; value: string | number | [] | null; key: string }[];
 }
 
-const selectRef = ref<null | HTMLElement>(null);
+const selectRef = ref<null | HTMLElement>();
 
-// @ts-ignore
-onClickOutside(selectRef, (event) => {
+onClickOutside(selectRef, (event: Event) => {
   openState.value = false;
 });
 
@@ -53,7 +52,6 @@ const props = withDefaults(defineProps<LaySelectProps>(), {
 const openState = ref(false);
 
 const open = function () {
-  // 禁用
   if (props.disabled) {
     openState.value = false;
     return;

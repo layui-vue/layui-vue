@@ -1,4 +1,5 @@
 <script lang="ts">
+import { computed, inject } from "vue";
 export default {
   name: "LayRadio",
 };
@@ -8,7 +9,7 @@ export default {
 import "./index.less";
 
 export interface LayRadioProps {
-  modelValue: string;
+  modelValue?: string | boolean;
   disabled?: boolean;
   label?: string;
   name: string;
@@ -18,12 +19,36 @@ const props = defineProps<LayRadioProps>();
 
 const emit = defineEmits(["update:modelValue", "change"]);
 
+const radioGroup: any = inject("radioGroup", {});
+
+const isGroup = computed(() => {
+  return radioGroup != undefined && radioGroup?.name === "LayRadioGroup";
+});
+
+const isChecked = computed({
+  get() {
+    if (isGroup.value) {
+      return radioGroup.modelValue.value === props.label;
+    } else {
+      return props.modelValue === props.label;
+    }
+  },
+  set(val) {
+    if (isGroup.value) {
+      radioGroup.modelValue.value = props.label;
+    } else {
+      if (val) {
+        emit("change", props.label);
+        emit("update:modelValue", props.label);
+      }
+    }
+  },
+});
+
 const handleClick = function () {
-  if (props.disabled) {
-    return;
+  if (!props.disabled) {
+    isChecked.value = !isChecked.value;
   }
-  emit("change", props.label);
-  emit("update:modelValue", props.label);
 };
 </script>
 
@@ -33,14 +58,12 @@ const handleClick = function () {
     <div
       class="layui-unselect layui-form-radio"
       :class="{
-        'layui-form-radioed': modelValue == label,
+        'layui-form-radioed': isChecked,
         'layui-radio-disabled layui-disabled': disabled,
       }"
       @click.stop="handleClick"
     >
-      <i
-        v-if="modelValue == label"
-        class="layui-anim layui-icon layui-anim-scaleSpring"
+      <i v-if="isChecked" class="layui-anim layui-icon layui-anim-scaleSpring"
         >&#xe643;</i
       >
       <i

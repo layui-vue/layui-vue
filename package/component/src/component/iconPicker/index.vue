@@ -9,7 +9,7 @@ import "./index.less";
 import { Ref, ref } from "vue";
 import { LayIconList as icons } from "@layui/icons-vue";
 import LayDropdown from "../dropdown/index.vue";
-import layInput from "../input/index.vue";
+import LayInput from "../input/index.vue";
 
 export interface LayIconPickerProps {
   page?: boolean;
@@ -26,7 +26,7 @@ const emit = defineEmits(["update:modelValue", "change"]);
 const selectedIcon: Ref<string> = ref(props.modelValue as string);
 const dropdownRef = ref<any>(null);
 
-const selectIcon = function (icon: string) {
+const selectIcon = function (icon: string) : void {
   emit("update:modelValue", icon);
   emit("change", icon);
   selectedIcon.value = icon;
@@ -34,9 +34,9 @@ const selectIcon = function (icon: string) {
 };
 
 const icones: Ref = ref([]);
-const total = ref(icons.length);
-const totalPage = ref(total.value / 12);
-const currentPage: Ref = ref(1);
+const total: Ref<number> = ref(icons.length);
+const totalPage: Ref<number> = ref(total.value / 12);
+const currentPage: Ref<number> = ref(1);
 
 if (props.page) {
   icones.value = icons.slice(0, 12);

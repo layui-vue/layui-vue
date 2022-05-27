@@ -11,6 +11,7 @@ import LayBacktop from "./component/backTop/index";
 import LayAvatar from "./component/avatar/index";
 import LayAvatarList from "./component/avatarList/index";
 import LayRadio from "./component/radio/index";
+import LayRadioGroup from "./component/radioGroup/index";
 import LayButton from "./component/button/index";
 import LayButtonContainer from "./component/buttonContainer/index";
 import LayButtonGroup from "./component/buttonGroup/index";
@@ -90,6 +91,7 @@ const components: Record<string, Plugin> = {
   LaySplitPanel,
   LaySplitPanelItem,
   LayRadio,
+  LayRadioGroup,
   LayButton,
   LayIcon,
   LayBacktop,
@@ -178,6 +180,7 @@ export {
   LaySplitPanel,
   LaySplitPanelItem,
   LayRadio,
+  LayRadioGroup,
   LayButton,
   LayIcon,
   LayBacktop,
