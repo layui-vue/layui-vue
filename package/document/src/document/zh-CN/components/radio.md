@@ -154,7 +154,27 @@ export default {
 
 :::
 
- 
+::: title RadioGroup 属性
+:::
+
+::: table
+
+| 属性    | 描述          | 默认值 |
+| ------- | ------------- | ------ |
+| v-model | 选中值        | --     |
+
+:::
+
+::: title RadioGroup 事件
+:::
+
+::: table
+
+| 事件   | 描述     | 参数             |
+| ------ | -------- | ---------------- |
+| change | 切换事件 | current : 当前值 |
+
+:::
 
 ::: previousNext radio
 :::

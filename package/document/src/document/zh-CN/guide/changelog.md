@@ -14,7 +14,7 @@
     <ul> 
       <a name="1-1-3"></a> 
       <li> 
-        <h3>1.1.3 <span class="layui-badge-rim">2022-05-21</span></h3> 
+        <h3>1.1.3 <span class="layui-badge-rim">2022-05-27</span></h3> 
         <ul>
           <li>[新增] input 组件 clear 事件, 清空内容时触发的无参事件</li>
           <li>[新增] avatar 组件 alt 属性, 用于设置描述图像无法正常显示时的替换文本</li>
