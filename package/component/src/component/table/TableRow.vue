@@ -8,7 +8,7 @@ export default {
 import { computed, ref, useSlots, WritableComputedRef } from "vue";
 import { Recordable } from "../../types";
 
-export interface LayTableProps {
+export interface LayTableRowProps {
   selectedKeys: Recordable[];
   tableColumnKeys: Recordable[];
   columns: Recordable[];
@@ -25,8 +25,8 @@ const emit = defineEmits([
   "update:selectedKeys",
 ]);
 
-const props = withDefaults(defineProps<LayTableProps>(), {
-  checkbox: false,
+const props = withDefaults(defineProps<LayTableRowProps>(), {
+  checkbox: false
 });
 
 const tableSelectedKeys: WritableComputedRef<Recordable[]> = computed({
