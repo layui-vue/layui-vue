@@ -65,7 +65,7 @@ const expandIconType = computed(() => {
 
 const handleExpand = () => {
   isExpand.value = !isExpand.value;
-}
+};
 </script>
 
 <template>
@@ -100,12 +100,12 @@ const handleExpand = () => {
               whiteSpace: column.ellipsisTooltip ? 'nowrap' : 'normal',
             }"
           >
-              <lay-icon
-                v-if="(slot.expand || data.children) && index === 0"
-                class="layui-table-cell-expand-icon"
-                :type="expandIconType"
-                @click="handleExpand"
-              ></lay-icon>
+            <lay-icon
+              v-if="(slot.expand || data.children) && index === 0"
+              class="layui-table-cell-expand-icon"
+              :type="expandIconType"
+              @click="handleExpand"
+            ></lay-icon>
 
             <lay-tooltip
               v-if="column.ellipsisTooltip"

@@ -141,7 +141,7 @@ function handleTitleClick(node: TreeData) {
         class="layui-tree-pack layui-tree-showLine"
         style="display: block"
       >
-        <tree-node 
+        <tree-node
           :node-list="node.children"
           :show-checkbox="showCheckbox"
           :show-line="showLine"
