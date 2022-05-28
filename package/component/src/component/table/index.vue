@@ -6,7 +6,7 @@ export default {
 
 <script setup lang="ts">
 import "./index.less";
-import { ref, watch, useSlots, withDefaults, onMounted } from "vue";
+import { ref, watch, useSlots, withDefaults, onMounted, Ref } from "vue";
 import { v4 as uuidv4 } from "../../utils/guidUtil";
 import { Recordable } from "../../types";
 import LayCheckbox from "../checkbox/index.vue";
@@ -14,6 +14,7 @@ import LayDropdown from "../dropdown/index.vue";
 import LayTooltip from "../tooltip/index.vue";
 import { LayIcon } from "@layui/icons-vue";
 import LayPage from "../page/index.vue";
+import TableRow from "./TableRow.vue";
 
 export interface LayTableProps {
   id?: string;
@@ -49,7 +50,7 @@ const slots = slot.default && slot.default();
 
 const allChecked = ref(false);
 const tableDataSource = ref([...props.dataSource]);
-const tableSelectedKeys = ref([...props.selectedKeys]);
+const tableSelectedKeys = ref<Recordable[]>([...props.selectedKeys]);
 const tableColumns = ref([...props.columns]);
 const tableColumnKeys = ref(
   props.columns.map((item: any) => {
@@ -81,7 +82,7 @@ const changeAll = function (checked: any) {
 
 watch(
   tableSelectedKeys,
-  function () {
+  () => {
     if (tableSelectedKeys.value.length === props.dataSource.length) {
       allChecked.value = true;
     } else {
@@ -108,7 +109,6 @@ const contextmenu = function (data: any, evt: MouseEvent) {
   emit("contextmenu", data, evt);
 };
 
-// 打印 table 数据
 const print = function () {
   let subOutputRankPrint = document.getElementById(tableId) as HTMLElement;
   let newContent = subOutputRankPrint.innerHTML;
@@ -163,16 +163,12 @@ function exportToExcel(headerList: any, bodyList: any) {
 }
 
 const sortTable = (e: any, key: string, sort: string) => {
-  // 当前排序
   let currentSort = e.target.parentNode.getAttribute("lay-sort");
-  // 点击排序
   if (sort === "desc") {
     if (currentSort === sort) {
-      // 取消排序
       e.target.parentNode.setAttribute("lay-sort", "");
       tableDataSource.value = [...props.dataSource];
     } else {
-      // 进行 desc 排序
       e.target.parentNode.setAttribute("lay-sort", "desc");
       tableDataSource.value.sort((x, y) => {
         if (x[key] < y[key]) return 1;
@@ -182,11 +178,9 @@ const sortTable = (e: any, key: string, sort: string) => {
     }
   } else {
     if (currentSort === sort) {
-      // 取消排序
       e.target.parentNode.setAttribute("lay-sort", "");
       tableDataSource.value = [...props.dataSource];
     } else {
-      // 进行 asc 排序
       e.target.parentNode.setAttribute("lay-sort", "asc");
       tableDataSource.value.sort((x, y) => {
         if (x[key] < y[key]) return -1;
@@ -200,11 +194,18 @@ const sortTable = (e: any, key: string, sort: string) => {
 let tableHeader = ref<HTMLElement | null>(null);
 let tableBody = ref<HTMLElement | null>(null);
 
-// 拖动监听
 onMounted(() => {
   tableBody.value?.addEventListener("scroll", () => {
     tableHeader.value!.scrollLeft = tableBody.value?.scrollLeft || 0;
   });
+});
+
+const slotsData = ref<string[]>([]);
+
+props.columns.map((value: any) => {
+  if (value.customSlot) {
+    slotsData.value.push(value.customSlot);
+  }
 });
 </script>
 
@@ -315,86 +316,26 @@ onMounted(() => {
         <div class="layui-table-body layui-table-main" ref="tableBody">
           <table class="layui-table" :lay-size="size">
             <tbody>
+              <!-- 渲染 -->
               <template v-for="data in tableDataSource" :key="data">
-                <tr
-                  @click.stop="rowClick(data, $event)"
-                  @dblclick.stop="rowDoubleClick(data, $event)"
-                  @contextmenu.stop="contextmenu(data, $event)"
+                <table-row
+                  :id="id"
+                  :data="data"
+                  :columns="columns"
+                  :checkbox="checkbox"
+                  :tableColumnKeys="tableColumnKeys"
+                  @row="rowClick"
+                  @row-double="rowDoubleClick"
+                  @contextmenu="contextmenu"
+                  v-model:selectedKeys="tableSelectedKeys"
                 >
-                  <!-- 复选框 -->
-                  <td v-if="checkbox" class="layui-table-col-special">
-                    <div class="layui-table-cell laytable-cell-checkbox">
-                      <lay-checkbox
-                        v-model="tableSelectedKeys"
-                        skin="primary"
-                        :label="data[id]"
-                      />
-                    </div>
-                  </td>
-
-                  <!-- 数据列 -->
-                  <template v-for="column in columns" :key="column">
-                    <!-- 展示否 -->
-                    <template v-if="tableColumnKeys.includes(column.key)">
-                      <!-- 插槽列 -->
-                      <template v-if="column.customSlot">
-                        <td
-                          class="layui-table-cell"
-                          :style="{
-                            textAlign: column.align,
-                            width: column.width ? column.width : '0',
-                            minWidth: column.minWidth
-                              ? column.minWidth
-                              : '47px',
-                            whiteSpace: column.ellipsisTooltip
-                              ? 'nowrap'
-                              : 'normal',
-                          }"
-                        >
-                          <lay-tooltip
-                            v-if="column.ellipsisTooltip"
-                            :content="data[column.key]"
-                            :isAutoShow="true"
-                          >
-                            <slot :name="column.customSlot" :data="data"></slot>
-                          </lay-tooltip>
-                          <slot
-                            v-else
-                            :name="column.customSlot"
-                            :data="data"
-                          ></slot>
-                        </td>
-                      </template>
-                      <!-- 匹 配 Column -->
-                      <template v-else>
-                        <template v-if="column.key in data">
-                          <td
-                            class="layui-table-cell"
-                            :style="{
-                              textAlign: column.align,
-                              width: column.width ? column.width : '0',
-                              minWidth: column.minWidth
-                                ? column.minWidth
-                                : '47px',
-                              whiteSpace: column.ellipsisTooltip
-                                ? 'nowrap'
-                                : 'normal',
-                            }"
-                          >
-                            <lay-tooltip
-                              v-if="column.ellipsisTooltip"
-                              :content="data[column.key]"
-                              :isAutoShow="true"
-                            >
-                              {{ data[column.key] }}
-                            </lay-tooltip>
-                            <span v-else> {{ data[column.key] }} </span>
-                          </td>
-                        </template>
-                      </template>
-                    </template>
+                  <template v-for="name in slotsData" #[name]>
+                    <slot :name="name" :data="data"></slot>
                   </template>
-                </tr>
+                  <template v-if="slot.expand" #expand>
+                    <slot name="expand" :data="data"></slot>
+                  </template>
+                </table-row>
               </template>
             </tbody>
           </table>
@@ -410,8 +351,12 @@ onMounted(() => {
           show-skip
           @jump="change"
         >
-          <template #prev><lay-icon type="layui-icon-left" /></template>
-          <template #next><lay-icon type="layui-icon-right" /></template>
+          <template #prev>
+            <lay-icon type="layui-icon-left" />
+          </template>
+          <template #next>
+            <lay-icon type="layui-icon-right" />
+          </template>
         </lay-page>
       </div>
     </div>

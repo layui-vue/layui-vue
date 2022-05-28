@@ -32,3 +32,6 @@ export interface TreeEmits {
   (e: "update:expandKeys", keys: KeysType): void;
   (e: "node-click", node: OriginalTreeData, event: Event): void;
 }
+
+export type CustomKey = string | number;
+export type CustomString = (() => string) | string;

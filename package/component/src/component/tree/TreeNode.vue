@@ -5,7 +5,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { StringOrNumber } from "./tree.type";
+import { StringOrNumber, CustomKey, CustomString } from "./tree.type";
 import { LayIcon } from "@layui/icons-vue";
 import LayCheckbox from "../checkbox/index.vue";
 import { Ref, useSlots } from "vue";
@@ -13,10 +13,7 @@ import { Tree } from "./tree";
 import { Nullable } from "../../types";
 import LayTransition from "../transition/index.vue";
 
-type CustomKey = string | number;
-type CustomString = (() => string) | string;
-
-interface TreeData {
+export interface TreeData {
   id: CustomKey;
   title: CustomString;
   children: TreeData[];
@@ -29,7 +26,7 @@ interface TreeData {
   parentNode: Nullable<TreeData>;
 }
 
-interface TreeNodeProps {
+export interface TreeNodeProps {
   tree: Tree;
   nodeList: TreeData[];
   showCheckbox: boolean;
@@ -113,9 +110,9 @@ function handleTitleClick(node: TreeData) {
             { 'layui-tree-iconClick': true },
           ]"
         >
-          <LayIcon :type="nodeIconType(node)" @click="handleIconClick(node)" />
+          <lay-icon :type="nodeIconType(node)" @click="handleIconClick(node)" />
         </span>
-        <LayCheckbox
+        <lay-checkbox
           v-if="showCheckbox"
           :modelValue="node.isChecked.value"
           :disabled="node.isDisabled.value"
@@ -138,13 +135,13 @@ function handleTitleClick(node: TreeData) {
         </span>
       </div>
     </div>
-    <LayTransition :enable="collapseTransition">
+    <lay-transition :enable="collapseTransition">
       <div
         v-if="node.isLeaf.value"
         class="layui-tree-pack layui-tree-showLine"
         style="display: block"
       >
-        <TreeNode
+        <tree-node 
           :node-list="node.children"
           :show-checkbox="showCheckbox"
           :show-line="showLine"
@@ -154,8 +151,6 @@ function handleTitleClick(node: TreeData) {
           @node-click="recursiveNodeClick"
         />
       </div>
-    </LayTransition>
+    </lay-transition>
   </div>
 </template>
-
-<style scoped></style>

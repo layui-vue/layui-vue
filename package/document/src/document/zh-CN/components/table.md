@@ -237,6 +237,11 @@ export default {
       <lay-button size="xs">修改</lay-button>
       <lay-button size="xs" type="primary">删除</lay-button>
     </template>
+    <template v-slot:expand="{ data }"> 
+      <div style="height:100px;">
+        内容
+      </div>
+    </template>
   </lay-table>
 </template>
 
@@ -311,6 +316,103 @@ export default {
       defaultToolbar5,
       rowClick5,
       rowDoubleClick5
+    }
+  }
+}
+</script>
+
+:::
+
+::: title 开启子表
+:::
+
+::: demo 当表格内容较多不能一次性完全展示时。
+
+<template>
+  <lay-table :columns="columns6" :dataSource="dataSource6">
+      <template v-slot:expand="{ data }"> 
+        {{ data }} 
+      </template>
+  </lay-table>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const columns6 = [
+      {
+        title:"姓名",
+        width:"200px",
+        key:"name"
+      },{
+        title:"成绩",
+        width: "180px",
+        key:"score"
+      }
+    ]
+
+    const dataSource6 = [
+      {name:"张三", score:100},
+      {name:"李四", score:80},
+      {name:"王二", score:99},
+      {name:"麻子", score:92},
+      {name:"无名", score:60},
+      {name:"有名", score:70},
+    ]
+
+    return {
+      columns6,
+      dataSource6
+    }
+  }
+}
+</script>
+
+:::
+
+::: title 树形表格
+:::
+
+::: demo 树形数据的展示，当数据中有 children 字段时会自动展示为树形表格
+
+<template>
+  <lay-table :columns="columns7" :dataSource="dataSource7">
+  </lay-table>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const columns7 = [
+      {
+        title:"姓名",
+        width:"200px",
+        key:"name"
+      },{
+        title:"成绩",
+        width: "180px",
+        key:"score"
+      },
+    ]
+
+    const dataSource7 = [
+      {name:"张三", score:100, children: [{name:"张三", score:100},{name:"张三", score:100}]},
+      {name:"李四", score:80, children: [{name:"张三", score:100},{name:"张三", score:100}]},
+      {name:"王二", score:99, children: [{name:"张三", score:100},{name:"张三", score:100}]},
+      {name:"麻子", score:92, children: [{name:"张三", score:100},{name:"张三", score:100}]},
+      {name:"无名", score:60, children: [{name:"张三", score:100},{name:"张三", score:100}]},
+      {name:"有名", score:70, children: [{name:"张三", score:100},{name:"张三", score:100}]},
+    ]
+
+    return {
+      columns7,
+      dataSource7
     }
   }
 }
