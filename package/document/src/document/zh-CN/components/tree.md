@@ -253,6 +253,28 @@ import { ref } from 'vue';
 
 :::
 
+::: title 定义标题
+:::
+
+::: demo 使用 `title` 插槽自定义节点标题
+
+<template>
+  <lay-tree
+    :data="data"
+	collapse-transition
+  >	
+	<template v-slot:title="{ data }">
+		{{ data.id }}
+	</template>
+  </lay-tree>
+</template>
+
+<script setup>
+import { ref } from 'vue';
+</script>
+
+:::
+
 ::: title Tree 属性
 :::
 

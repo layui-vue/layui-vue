@@ -5,13 +5,13 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { StringOrNumber, CustomKey, CustomString } from "./tree.type";
 import { LayIcon } from "@layui/icons-vue";
 import LayCheckbox from "../checkbox/index.vue";
 import { Ref, useSlots } from "vue";
 import { Tree } from "./tree";
 import { Nullable } from "../../types";
 import LayTransition from "../transition/index.vue";
+import { StringOrNumber, CustomKey, CustomString } from "./tree.type";
 
 export interface TreeData {
   id: CustomKey;
@@ -131,7 +131,12 @@ function handleTitleClick(node: TreeData) {
           }"
           @click="handleTitleClick(node)"
         >
-          {{ node.title }}
+          <template v-if="slots.title">
+            <slot name="title" :data="node"></slot>
+          </template> 
+          <template v-else>
+            {{ node.title }}
+          </template>
         </span>
       </div>
     </div>
@@ -149,7 +154,11 @@ function handleTitleClick(node: TreeData) {
           :tree="tree"
           :only-icon-control="onlyIconControl"
           @node-click="recursiveNodeClick"
-        />
+        >
+          <template v-if="slots.title" v-slot:title="{ data }">
+            <slot name="title" :data="data"></slot>
+          </template>
+        </tree-node>
       </div>
     </lay-transition>
   </div>

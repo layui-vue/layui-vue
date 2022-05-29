@@ -3,19 +3,16 @@ export default {
   name: "LayTree",
 };
 </script>
+
 <script lang="ts" setup>
 import TreeNode from "./TreeNode.vue";
-import { computed } from "vue";
+import { computed, useSlots } from "vue";
 import { useTree } from "./useTree";
 import { TreeData } from "./tree";
+import { StringFn, StringOrNumber, KeysType, EditType } from "./tree.type";
 import "./index.less";
 
-type StringFn = () => string;
-type StringOrNumber = string | number;
-type KeysType = (number | string)[];
-type EditType = boolean | ("add" | "update" | "delete");
-
-interface OriginalTreeData {
+export interface OriginalTreeData {
   title: StringFn | string;
   id: StringOrNumber;
   field: StringFn | string;
@@ -23,7 +20,7 @@ interface OriginalTreeData {
   disabled?: boolean;
 }
 
-interface TreeProps {
+export interface TreeProps {
   checkedKeys?: KeysType;
   data: OriginalTreeData;
   showCheckbox?: boolean;
@@ -61,6 +58,8 @@ const props = withDefaults(defineProps<TreeProps>(), {
   },
 });
 
+const slots = useSlots();
+
 const emit = defineEmits<TreeEmits>();
 
 const className = computed(() => {
@@ -88,6 +87,10 @@ function handleClick(node: TreeData) {
       :collapse-transition="collapseTransition"
       :only-icon-control="onlyIconControl"
       @node-click="handleClick"
-    />
+    >
+      <template v-if="slots.title" v-slot:title="{ data }">
+          <slot name="title" :data="data"></slot>
+      </template>
+    </tree-node>
   </div>
 </template>
