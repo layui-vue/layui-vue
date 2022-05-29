@@ -207,6 +207,15 @@ props.columns.map((value: any) => {
     slotsData.value.push(value.customSlot);
   }
 });
+
+// is tree
+const childrenExpandSpace = ref(false);
+
+props.dataSource.map((value: any) => {
+  if(value.children) {
+    childrenExpandSpace.value = true;
+  } 
+})
 </script>
 
 <template>
@@ -324,6 +333,7 @@ props.columns.map((value: any) => {
                   :columns="columns"
                   :checkbox="checkbox"
                   :tableColumnKeys="tableColumnKeys"
+                  :expandSpace="childrenExpandSpace"
                   @row="rowClick"
                   @row-double="rowDoubleClick"
                   @contextmenu="contextmenu"

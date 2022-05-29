@@ -9,6 +9,7 @@ import { computed, ref, useSlots, WritableComputedRef } from "vue";
 import { Recordable } from "../../types";
 
 export interface LayTableRowProps {
+  expandSpace: boolean;
   selectedKeys: Recordable[];
   tableColumnKeys: Recordable[];
   columns: Recordable[];
@@ -26,7 +27,7 @@ const emit = defineEmits([
 ]);
 
 const props = withDefaults(defineProps<LayTableRowProps>(), {
-  checkbox: false
+  checkbox: false,
 });
 
 const tableSelectedKeys: WritableComputedRef<Recordable[]> = computed({
@@ -166,6 +167,7 @@ const handleExpand = () => {
         :columns="columns"
         :checkbox="checkbox"
         :tableColumnKeys="tableColumnKeys"
+        :expandSpace="expandSpace"
         @row="rowClick"
         @row-double="rowDoubleClick"
         @contextmenu="contextmenu"
