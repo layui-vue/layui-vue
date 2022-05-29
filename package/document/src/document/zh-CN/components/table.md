@@ -376,7 +376,7 @@ export default {
 ::: title 树形表格
 :::
 
-::: demo 树形数据的展示，当数据中有 children 字段时会自动展示为树形表格
+::: demo 树形数据的展示，当数据中有 children 字段时会自动展示为树形表格, 通过设置 indentSize 以控制每一层的缩进宽度
 
 <template>
   <lay-table :columns="columns7" :dataSource="dataSource7">
@@ -402,12 +402,8 @@ export default {
     ]
 
     const dataSource7 = [
-      {name:"张三", score:100, children: [{name:"张三", score:100},{name:"张三", score:100}]},
-      {name:"李四", score:80, children: [{name:"张三", score:100},{name:"张三", score:100}]},
-      {name:"王二", score:99, children: [{name:"张三", score:100},{name:"张三", score:100}]},
-      {name:"麻子", score:92, children: [{name:"张三", score:100},{name:"张三", score:100}]},
-      {name:"无名", score:60, children: [{name:"张三", score:100},{name:"张三", score:100}]},
-      {name:"有名", score:70, children: [{name:"张三", score:100},{name:"张三", score:100}]},
+      {name:"系统管理", score:100, children: [{name:"用户管理", score:100, children: [{name:"用户修改", score:100},{name:"用户删除", score:100}]},{name:"角色管理", score:100}]},
+      {name:"电商管理", score:100, children: [{name:"商品管理", score:100},{name:"分类管理", score:100}]},
     ]
 
     return {
@@ -467,17 +463,17 @@ export default {
 
 ::: table
 
-| 插槽       | 描述       | 类型     | 默认值 | 可选值                  |
-| ---------- | ---------- | -------- | ------ | ----------------------- |
-| title      | 列标题     | --       | --     | --                      |
-| key        | 数据字段   | --       | --     | --                      |
-| customSlot | 自定义插槽 | --       | --     | --                      |
-| width      | 宽度       | --       | --     | --                      |
-| minWidth      | 最小宽度       | --       | --     | --                      |
-| sort       | 排序       | --       | --     | --                      |
-| titleSlot  | 标题插槽   | --       | --     | --                      |
-| align      | 对齐方式   | `string` | `left` | `left` `right` `center` |
-| ellipsisTooltip  | 当内容过长被隐藏时显示 tooltip   | `boolean` | `false` | `true` `false` |
+| 插槽            | 描述                           | 类型      | 默认值  | 可选值                  |
+| --------------- | ------------------------------ | --------- | ------- | ----------------------- |
+| title           | 列标题                         | --        | --      | --                      |
+| key             | 数据字段                       | --        | --      | --                      |
+| customSlot      | 自定义插槽                     | --        | --      | --                      |
+| width           | 宽度                           | --        | --      | --                      |
+| minWidth        | 最小宽度                       | --        | --      | --                      |
+| sort            | 排序                           | --        | --      | --                      |
+| titleSlot       | 标题插槽                       | --        | --      | --                      |
+| align           | 对齐方式                       | `string`  | `left`  | `left` `right` `center` |
+| ellipsisTooltip | 当内容过长被隐藏时显示 tooltip | `boolean` | `false` | `true` `false`          |
 
 :::
 

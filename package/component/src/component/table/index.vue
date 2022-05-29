@@ -26,11 +26,13 @@ export interface LayTableProps {
   dataSource: Recordable[];
   defaultToolbar?: boolean;
   selectedKeys?: Recordable[];
+  indentSize?: number;
 }
 
 const props = withDefaults(defineProps<LayTableProps>(), {
   id: "id",
   size: "md",
+  indentSize: 30,
   dataSource: () => [],
   selectedKeys: () => [],
 });
@@ -208,14 +210,14 @@ props.columns.map((value: any) => {
   }
 });
 
-// is tree
 const childrenExpandSpace = ref(false);
+const currentIndentSize = ref(0);
 
 props.dataSource.map((value: any) => {
-  if(value.children) {
+  if (value.children) {
     childrenExpandSpace.value = true;
-  } 
-})
+  }
+});
 </script>
 
 <template>
@@ -332,6 +334,8 @@ props.dataSource.map((value: any) => {
                   :data="data"
                   :columns="columns"
                   :checkbox="checkbox"
+                  :indent-size="indentSize"
+                  :currentIndentSize="currentIndentSize"
                   :tableColumnKeys="tableColumnKeys"
                   :expandSpace="childrenExpandSpace"
                   @row="rowClick"

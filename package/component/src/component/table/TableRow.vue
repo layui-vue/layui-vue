@@ -9,6 +9,8 @@ import { computed, ref, useSlots, WritableComputedRef } from "vue";
 import { Recordable } from "../../types";
 
 export interface LayTableRowProps {
+  indentSize: number;
+  currentIndentSize: number;
   expandSpace: boolean;
   selectedKeys: Recordable[];
   tableColumnKeys: Recordable[];
@@ -67,6 +69,8 @@ const expandIconType = computed(() => {
 const handleExpand = () => {
   isExpand.value = !isExpand.value;
 };
+
+const childrenIndentSize = props.currentIndentSize + props.indentSize;
 </script>
 
 <template>
@@ -101,11 +105,18 @@ const handleExpand = () => {
               whiteSpace: column.ellipsisTooltip ? 'nowrap' : 'normal',
             }"
           >
+
+
+            <!-- 树表占位与缩进 -->
+            <span v-if="expandSpace && index === 0" :style="{'margin-right': currentIndentSize + 'px'}"></span> 
+
+            <span v-if="expandSpace && (!data.children && !slot.expand) && index === 0" class="layui-table-cell-expand-icon-spaced"></span>
+
             <lay-icon
-              v-if="(slot.expand || data.children) && index === 0"
-              class="layui-table-cell-expand-icon"
-              :type="expandIconType"
-              @click="handleExpand"
+                v-if="(slot.expand || data.children) && index === 0"
+                class="layui-table-cell-expand-icon"
+                :type="expandIconType"
+                @click="handleExpand"
             ></lay-icon>
 
             <lay-tooltip
@@ -131,6 +142,12 @@ const handleExpand = () => {
                 whiteSpace: column.ellipsisTooltip ? 'nowrap' : 'normal',
               }"
             >
+
+              <!-- 树表占位与缩进 -->
+              <span v-if="expandSpace && index === 0" :style="{'margin-right': currentIndentSize + 'px'}"></span> 
+
+              <span v-if="expandSpace && (!data.children && !slot.expand) && index === 0" class="layui-table-cell-expand-icon-spaced"></span>
+
               <lay-icon
                 v-if="(slot.expand || data.children) && index === 0"
                 class="layui-table-cell-expand-icon"
@@ -165,6 +182,8 @@ const handleExpand = () => {
         :id="id"
         :data="children"
         :columns="columns"
+        :indent-size="indentSize"
+        :current-indent-size="childrenIndentSize"
         :checkbox="checkbox"
         :tableColumnKeys="tableColumnKeys"
         :expandSpace="expandSpace"
