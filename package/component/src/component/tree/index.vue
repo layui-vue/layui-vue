@@ -89,7 +89,7 @@ function handleClick(node: TreeData) {
       @node-click="handleClick"
     >
       <template v-if="slots.title" v-slot:title="{ data }">
-          <slot name="title" :data="data"></slot>
+        <slot name="title" :data="data"></slot>
       </template>
     </tree-node>
   </div>

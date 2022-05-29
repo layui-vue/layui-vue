@@ -18,6 +18,7 @@
         <ul>
           <li>[新增] table 组件 expand 插槽, 内容较多不能一次性完全展示时使用, 参数 data 为当前行数据</li>
           <li>[新增] table 组件 children 字段解析, 当字段中存在 children 时会自动转化为树表, 通过设置 indentSize 以控制每一层的缩进宽度</li>
+          <li>[新增] tree 组件 title 插槽, 参数 data 为当前行数据, 用于自定义节点标题</li>
         </ul> 
       </li>
     </ul>

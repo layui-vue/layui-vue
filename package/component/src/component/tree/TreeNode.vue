@@ -133,7 +133,7 @@ function handleTitleClick(node: TreeData) {
         >
           <template v-if="slots.title">
             <slot name="title" :data="node"></slot>
-          </template> 
+          </template>
           <template v-else>
             {{ node.title }}
           </template>

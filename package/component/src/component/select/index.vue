@@ -17,21 +17,21 @@ import {
   toRefs,
   Ref,
 } from "vue";
-import LayScroll from "../scroll";
 import LayBadge from "../badge/index.vue";
+import LayScroll from "../scroll/index.vue";
 import { onClickOutside } from "@vueuse/core";
 import { SelectItem } from "../../types";
 
 export interface LaySelectProps {
-  modelValue?: string | number | [] | null;
   name?: string;
   placeholder?: string;
   disabled?: boolean;
   showEmpty?: boolean;
   emptyMessage?: string;
+  modelValue?: any;
   multiple?: boolean;
   create?: boolean;
-  items?: { label: string; value: string | number | [] | null; key: string }[];
+  items?: { label: string; value: any; key: string, disabled: boolean; keyword: string }[];
 }
 
 const selectRef = ref<null | HTMLElement>();
@@ -57,10 +57,10 @@ const open = function () {
     return;
   }
   openState.value = !openState.value;
-  console.log(props.create);
 };
 
 const emit = defineEmits(["update:modelValue", "change", "search", "create"]);
+
 const selectItem = ref<SelectItem>({
   value: !props.multiple
     ? props.modelValue
@@ -77,9 +77,7 @@ watch(
     emit("update:modelValue", val);
     emit("change", val);
   },
-  {
-    deep: true,
-  }
+  { deep: true }
 );
 
 watch(props, () => {
@@ -93,7 +91,7 @@ watch(props, () => {
     }
   } else {
     selectItem.value.value = value;
-    //@ts-ignore
+    //
     selectItem.value.label = ItemsMap.value[value] || "";
   }
 });
@@ -111,12 +109,12 @@ const value = computed({
     if (input.value) {
       return txt.value;
     }
-    // return txt.value;
     return !selectItem.value.multiple && selectItem.value.value !== null
       ? selectItem.value.label
       : null;
   },
 });
+
 const selectItemHandle = async function (
   _selectItem: SelectItem,
   isChecked?: boolean
@@ -163,6 +161,7 @@ const selectItemPush = function (p: SelectItem) {
     ItemsMap.value[p.value] = p.label;
   }
 };
+
 provide("selectItemHandle", selectItemHandle);
 provide("selectItemPush", selectItemPush);
 provide("selectItem", selectItem);
@@ -227,6 +226,7 @@ provide("keyword", txt);
               ></i>
             </lay-badge>
           </template>
+          <input>
         </div>
       </div>
     </div>
