@@ -11,13 +11,13 @@ import EyeDropper from "./EyeDropper.vue";
 import { ref, computed, watch, onMounted } from "vue";
 import { useEyeDropper } from "@vueuse/core";
 
-const emit = defineEmits(["update:modelValue"]);
-
 export interface LayColorPicker {
   modelValue?: any;
   preset?: any;
   eyeDropper?: boolean;
 }
+
+const emit = defineEmits(["update:modelValue"]);
 
 const props = withDefaults(defineProps<LayColorPicker>(), {
   modelValue: { r: 255, g: 255, b: 255, a: 1 },

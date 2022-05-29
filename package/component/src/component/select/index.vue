@@ -31,7 +31,13 @@ export interface LaySelectProps {
   modelValue?: any;
   multiple?: boolean;
   create?: boolean;
-  items?: { label: string; value: any; key: string, disabled: boolean; keyword: string }[];
+  items?: {
+    label: string;
+    value: any;
+    key: string;
+    disabled: boolean;
+    keyword: string;
+  }[];
 }
 
 const selectRef = ref<null | HTMLElement>();
@@ -226,7 +232,7 @@ provide("keyword", txt);
               ></i>
             </lay-badge>
           </template>
-          <input>
+          <input />
         </div>
       </div>
     </div>
