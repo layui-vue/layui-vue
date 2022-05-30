@@ -27,12 +27,14 @@ export interface LayTableProps {
   defaultToolbar?: boolean;
   selectedKeys?: Recordable[];
   indentSize?: number;
+  childrenColumnName: string;
 }
 
 const props = withDefaults(defineProps<LayTableProps>(), {
   id: "id",
   size: "md",
   indentSize: 30,
+  childrenColumnName: "children",
   dataSource: () => [],
   selectedKeys: () => [],
 });
@@ -214,7 +216,7 @@ const childrenExpandSpace = ref(false);
 const currentIndentSize = ref(0);
 
 props.dataSource.map((value: any) => {
-  if (value.children) {
+  if (value[props.childrenColumnName]) {
     childrenExpandSpace.value = true;
   }
 });

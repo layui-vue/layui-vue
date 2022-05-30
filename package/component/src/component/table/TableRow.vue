@@ -14,6 +14,7 @@ export interface LayTableRowProps {
   expandSpace: boolean;
   selectedKeys: Recordable[];
   tableColumnKeys: Recordable[];
+  childrenColumnName: string;
   columns: Recordable[];
   checkbox?: boolean;
   id: string;
@@ -30,6 +31,7 @@ const emit = defineEmits([
 
 const props = withDefaults(defineProps<LayTableRowProps>(), {
   checkbox: false,
+  childrenColumnName: 'children'
 });
 
 const tableSelectedKeys: WritableComputedRef<Recordable[]> = computed({
@@ -113,13 +115,13 @@ const childrenIndentSize = props.currentIndentSize + props.indentSize;
 
             <span
               v-if="
-                expandSpace && !data.children && !slot.expand && index === 0
+                expandSpace && !data[childrenColumnName] && !slot.expand && index === 0
               "
               class="layui-table-cell-expand-icon-spaced"
             ></span>
 
             <lay-icon
-              v-if="(slot.expand || data.children) && index === 0"
+              v-if="(slot.expand || data[childrenColumnName]) && index === 0"
               class="layui-table-cell-expand-icon"
               :type="expandIconType"
               @click="handleExpand"
@@ -156,13 +158,13 @@ const childrenIndentSize = props.currentIndentSize + props.indentSize;
 
               <span
                 v-if="
-                  expandSpace && !data.children && !slot.expand && index === 0
+                  expandSpace && !data[childrenColumnName] && !slot.expand && index === 0
                 "
                 class="layui-table-cell-expand-icon-spaced"
               ></span>
 
               <lay-icon
-                v-if="(slot.expand || data.children) && index === 0"
+                v-if="(slot.expand || data[childrenColumnName]) && index === 0"
                 class="layui-table-cell-expand-icon"
                 :type="expandIconType"
                 @click="handleExpand"
@@ -189,8 +191,8 @@ const childrenIndentSize = props.currentIndentSize + props.indentSize;
   </tr>
 
   <!-- 树形结构 -->
-  <template v-if="data.children && isExpand">
-    <template v-for="(children, index) in data.children" :key="index">
+  <template v-if="data[childrenColumnName] && isExpand">
+    <template v-for="(children, index) in data[childrenColumnName]" :key="index">
       <table-row
         :id="id"
         :data="children"

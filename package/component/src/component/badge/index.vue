@@ -5,7 +5,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, StyleValue } from "vue";
 import "./index.less";
 
 export interface LayBadgeProps {
@@ -29,7 +29,7 @@ const classes = computed(() => {
   ];
 });
 
-const styles = computed(() => {
+const styles = computed<StyleValue>(() => {
   props.color ? `background-color: ${props.color}` : "";
 });
 </script>
