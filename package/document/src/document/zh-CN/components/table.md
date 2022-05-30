@@ -376,7 +376,7 @@ export default {
 ::: title 树形表格
 :::
 
-::: demo 树形数据的展示，当数据中有 children 字段时会自动展示为树形表格, 通过设置 indentSize 以控制每一层的缩进宽度
+::: demo 树形数据的展示，当数据中有 children 字段时会自动展示为树形表格, 通过设置 indentSize 以控制每一层的缩进宽度, 使用 childrenColumnName 替换默认字段
 
 <template>
   <lay-table :columns="columns7" :dataSource="dataSource7">
@@ -430,6 +430,8 @@ export default {
 | v-model:selectedKeys | 选中项                        | --        | --      | --             |
 | default-toolbar      | 工具栏                        | `boolean` | `false` | `true` `false` |
 | size                 | 尺寸                          | `string`  | `md`    | `lg` `md` `sm` |
+| children-column-name | 树节点字段                    | `string` | `children`| --            |
+| indent-size          | 树表行级缩进                   | `number`  | `30`    | -- |
 
 :::
 

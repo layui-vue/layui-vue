@@ -31,7 +31,7 @@ const emit = defineEmits([
 
 const props = withDefaults(defineProps<LayTableRowProps>(), {
   checkbox: false,
-  childrenColumnName: 'children'
+  childrenColumnName: "children",
 });
 
 const tableSelectedKeys: WritableComputedRef<Recordable[]> = computed({
@@ -115,7 +115,10 @@ const childrenIndentSize = props.currentIndentSize + props.indentSize;
 
             <span
               v-if="
-                expandSpace && !data[childrenColumnName] && !slot.expand && index === 0
+                expandSpace &&
+                !data[childrenColumnName] &&
+                !slot.expand &&
+                index === 0
               "
               class="layui-table-cell-expand-icon-spaced"
             ></span>
@@ -158,7 +161,10 @@ const childrenIndentSize = props.currentIndentSize + props.indentSize;
 
               <span
                 v-if="
-                  expandSpace && !data[childrenColumnName] && !slot.expand && index === 0
+                  expandSpace &&
+                  !data[childrenColumnName] &&
+                  !slot.expand &&
+                  index === 0
                 "
                 class="layui-table-cell-expand-icon-spaced"
               ></span>
@@ -192,7 +198,10 @@ const childrenIndentSize = props.currentIndentSize + props.indentSize;
 
   <!-- 树形结构 -->
   <template v-if="data[childrenColumnName] && isExpand">
-    <template v-for="(children, index) in data[childrenColumnName]" :key="index">
+    <template
+      v-for="(children, index) in data[childrenColumnName]"
+      :key="index"
+    >
       <table-row
         :id="id"
         :data="children"
