@@ -123,7 +123,7 @@
 }
 
 .layui-tab-brief>.layui-tab-head{
-  background-color: #FFF;
+  background-color: transparent;
 }
 
 .layui-tab-brief>.layui-tab-head>.layui-tab-title .layui-this {
@@ -319,15 +319,16 @@
   bottom: 0px;
   left: 0;
   height: 1.5px;
-  background-color: #409eff;
+  background-color: var(--global-checked-color);
   z-index: 2;
   transition: transform .3s;
   list-style: none;
   box-sizing: border-box;
   pointer-events: none;
 }
+
 .is-top .layui-tab-active-bar{
-  bottom: 0px;
+  bottom: -1px;
   height: 1.5px;
 }
 
