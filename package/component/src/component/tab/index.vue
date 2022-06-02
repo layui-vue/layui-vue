@@ -16,12 +16,12 @@ import {
   Ref,
   ref,
   watch,
-shallowRef,
-onMounted,
-nextTick,
-CSSProperties,
+  shallowRef,
+  onMounted,
+  nextTick,
+  CSSProperties,
 } from "vue";
-import { useResizeObserver } from '@vueuse/core'
+import { useResizeObserver } from "@vueuse/core";
 
 export type tabPositionType = "top" | "bottom" | "left" | "right";
 
@@ -88,29 +88,32 @@ const close = function (index: number, id: any) {
 
 const activeBarRef = shallowRef<HTMLElement>();
 const activeEl = shallowRef<HTMLElement | undefined>();
-const tabBarStyle = ref<CSSProperties>()
+const tabBarStyle = ref<CSSProperties>();
 const getBarStyle = () => {
   let offset = 0;
   let tabSize = 0;
-  const sizeName = props.tabPosition === "top" || props.tabPosition === "bottom" ? "width" : "height";
+  const sizeName =
+    props.tabPosition === "top" || props.tabPosition === "bottom"
+      ? "width"
+      : "height";
   const axis = sizeName === "width" ? "X" : "Y";
-  const position = axis === 'X' ? 'left' : 'top'
+  const position = axis === "X" ? "left" : "top";
   const el = activeEl.value;
-  if(!el || !el.parentElement) return;
+  if (!el || !el.parentElement) return;
   const rect = el.getBoundingClientRect();
   const parentRect = el.parentElement?.getBoundingClientRect();
   offset = rect[position] - parentRect[position];
   tabSize = el.getBoundingClientRect()[sizeName];
   return {
     [sizeName]: `${tabSize}px`,
-     transform: `translate${axis}(${offset}px)`,
-  }
-}
+    transform: `translate${axis}(${offset}px)`,
+  };
+};
 const update = () => {
   const parentEL = activeBarRef.value?.parentNode;
   activeEl.value = parentEL?.querySelector(" .layui-this") as HTMLElement;
   tabBarStyle.value = getBarStyle();
-}
+};
 
 const containerSize = "";
 const navSize = "";
@@ -130,11 +133,11 @@ watch(
     await nextTick();
     update();
   }
-)
+);
 
 onMounted(() => {
   update();
-})
+});
 
 provide("active", active);
 provide("slotsChange", slotsChange);
@@ -157,13 +160,17 @@ provide("slotsChange", slotsChange);
           props.tabPosition ? `is-${tabPosition}` : '',
         ]"
       >
-        <div ref="activeBarRef" v-if="type === 'brief'" class="layui-tab-active-bar" :style="tabBarStyle"></div>
+        <div
+          ref="activeBarRef"
+          v-if="type === 'brief'"
+          class="layui-tab-active-bar"
+          :style="tabBarStyle"
+        ></div>
         <li
           v-for="(children, index) in childrens"
           :key="children.props?.id"
           :class="[children.props?.id === active ? 'layui-this' : '']"
           @click.stop="change(children.props?.id)"
-         
         >
           {{ children.props?.title }}
           <i
@@ -173,7 +180,6 @@ provide("slotsChange", slotsChange);
           ></i>
         </li>
       </ul>
-
     </div>
     <div class="layui-tab-content">
       <slot></slot>
