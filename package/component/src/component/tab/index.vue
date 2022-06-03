@@ -6,6 +6,7 @@ export default {
 
 <script setup lang="ts">
 import "./index.less";
+import { LayIcon } from "@layui/icons-vue";
 import tabItem from "../tabItem/index.vue";
 import {
   Component,
@@ -16,12 +17,12 @@ import {
   Ref,
   ref,
   watch,
-shallowRef,
-onMounted,
-nextTick,
-CSSProperties,
+  shallowRef,
+  onMounted,
+  nextTick,
+  CSSProperties,
 } from "vue";
-import { useResizeObserver } from '@vueuse/core'
+import { useResizeObserver } from "@vueuse/core";
 
 export type tabPositionType = "top" | "bottom" | "left" | "right";
 
@@ -86,34 +87,153 @@ const close = function (index: number, id: any) {
   emit("close", id);
 };
 
-const activeBarRef = shallowRef<HTMLElement>();
-const activeEl = shallowRef<HTMLElement | undefined>();
-const tabBarStyle = ref<CSSProperties>()
+const activeBarRef = shallowRef<HTMLElement | undefined>(undefined);
+const activeEl = shallowRef<HTMLElement | undefined>(undefined);
+const tabBarStyle = ref<CSSProperties>();
 const getBarStyle = () => {
   let offset = 0;
   let tabSize = 0;
-  const sizeName = props.tabPosition === "top" || props.tabPosition === "bottom" ? "width" : "height";
+  const sizeName =
+    props.tabPosition === "top" || props.tabPosition === "bottom"
+      ? "width"
+      : "height";
   const axis = sizeName === "width" ? "X" : "Y";
-  const position = axis === 'X' ? 'left' : 'top'
+  const position = axis === "X" ? "left" : "top";
   const el = activeEl.value;
-  if(!el || !el.parentElement) return;
-  const rect = el.getBoundingClientRect();
-  const parentRect = el.parentElement?.getBoundingClientRect();
+  const activeElParentElement = navRef.value;
+  if (!el || !activeElParentElement) return;
+  const rect = el?.getBoundingClientRect();
+  const parentRect = activeElParentElement?.getBoundingClientRect();
   offset = rect[position] - parentRect[position];
   tabSize = el.getBoundingClientRect()[sizeName];
   return {
     [sizeName]: `${tabSize}px`,
-     transform: `translate${axis}(${offset}px)`,
-  }
-}
-const update = () => {
-  const parentEL = activeBarRef.value?.parentNode;
-  activeEl.value = parentEL?.querySelector(" .layui-this") as HTMLElement;
-  tabBarStyle.value = getBarStyle();
-}
+    transform: `translate${axis}(${offset}px)`,
+    //  transition: `transform .3s`, // activeBar 动画
+  };
+};
 
-const containerSize = "";
-const navSize = "";
+const navRef = shallowRef<HTMLElement | undefined>(undefined);
+const scrollable = ref(false);
+const navOffset = ref<number>(0);
+const navStyle = computed<CSSProperties>(() => {
+  const axis =
+    props.tabPosition === "top" || props.tabPosition === "bottom" ? "X" : "Y";
+  const position = axis === "X" ? "left" : "top";
+  const scrollPrevSize = scrollPrevRef.value?.[`offset${sizeName.value}`] ?? 0;
+  return {
+    transform: `translate${axis}(-${navOffset.value}px)`,
+    [position]: scrollable.value ? `${scrollPrevSize}px` : 0,
+  };
+});
+const sizeName = computed(() => {
+  return props.tabPosition === "top" || props.tabPosition === "bottom"
+    ? "Width"
+    : "Height";
+});
+
+const getNavSize = function () {
+  let size = 0;
+  const nodeList = navRef.value?.querySelectorAll("li");
+  nodeList?.forEach((item) => {
+    size += item[`offset${sizeName.value}`];
+  });
+  return size;
+};
+
+const scrollPrev = function () {
+  if (!navRef.value) return;
+  const containerSize = navRef.value[`offset${sizeName.value}`];
+  const currentOffset = navOffset.value;
+  if (!currentOffset) return;
+  let newOffset =
+    currentOffset > containerSize ? currentOffset - containerSize : 0;
+  navOffset.value = newOffset;
+};
+
+const scrollNextRef = shallowRef<HTMLElement | undefined>(undefined);
+const scrollPrevRef = shallowRef<HTMLElement | undefined>(undefined);
+const scrollNext = function () {
+  if (!navRef.value) return;
+  const navSize = getNavSize();
+  const containerSize = navRef.value[`offset${sizeName.value}`];
+  const currentOffset = navOffset.value;
+  const scrollNextSize = scrollNextRef.value?.[`offset${sizeName.value}`] ?? 0;
+  const scrollPrevSize = scrollPrevRef.value?.[`offset${sizeName.value}`] ?? 0;
+  if (navSize - currentOffset <= containerSize) return;
+  let newOffset =
+    navSize - currentOffset > containerSize * 2
+      ? currentOffset + containerSize
+      : navSize - containerSize + scrollNextSize + scrollPrevSize;
+  navOffset.value = newOffset;
+};
+
+const headRef = shallowRef<HTMLDivElement | undefined>(undefined);
+const scrollToActiveTab = function () {
+  if (!scrollable.value) return;
+  const activeTab = activeEl.value;
+  const container = headRef.value;
+  if (!activeTab || !container) return;
+  const activeTabRect = activeTab?.getBoundingClientRect();
+  const containerRect = container?.getBoundingClientRect();
+  const isHorizontal = ["top", "bottom"].includes(props.tabPosition);
+  const currentOffset = navOffset.value;
+  let newOffset = currentOffset;
+  const navSize = getNavSize();
+  const scrollNextSize = scrollNextRef.value?.[`offset${sizeName.value}`] ?? 0;
+  const scrollPrevSize = scrollPrevRef.value?.[`offset${sizeName.value}`] ?? 0;
+  const maxOffset = isHorizontal
+    ? navSize - containerRect.width + scrollNextSize + scrollPrevSize
+    : navSize - containerRect.height + scrollNextSize + scrollPrevSize;
+  if (isHorizontal) {
+    if (activeTabRect.left < containerRect.left) {
+      newOffset = currentOffset - (containerRect.left - activeTabRect.left);
+      newOffset -= scrollPrevSize;
+    }
+    if (activeTabRect.right > containerRect.right) {
+      newOffset = currentOffset + activeTabRect.right - containerRect.right;
+      newOffset += scrollNextSize;
+    }
+  } else {
+    if (activeTabRect.top < containerRect.top) {
+      newOffset = currentOffset - (containerRect.top - activeTabRect.top);
+    }
+    if (activeTabRect.bottom > containerRect.bottom) {
+      newOffset = currentOffset + (activeTabRect.bottom - containerRect.bottom);
+    }
+  }
+  newOffset = Math.max(newOffset, 0);
+  navOffset.value = Math.min(newOffset, maxOffset);
+};
+
+const update = () => {
+  if (!navRef.value) return;
+  activeEl.value = navRef.value?.querySelector(".layui-this") as HTMLElement;
+  tabBarStyle.value = getBarStyle();
+
+  if (props.tabPosition !== "top" && props.tabPosition !== "bottom") return; // 暂时屏蔽垂直方向
+  const navSize = getNavSize();
+  const containerSize = navRef.value[`offset${sizeName.value}`];
+  const currentOffset = navOffset.value;
+  const scrollNextSize = scrollNextRef.value?.[`offset${sizeName.value}`] ?? 0;
+  const scrollPrevSize = scrollPrevRef.value?.[`offset${sizeName.value}`] ?? 0;
+  if (containerSize < navSize) {
+    const currentOffset = navOffset.value;
+    scrollable.value = true;
+    if (navSize - currentOffset < containerSize) {
+      navOffset.value =
+        navSize - containerSize + scrollNextSize + scrollPrevSize;
+    }
+    scrollToActiveTab();
+  } else {
+    scrollable.value = false;
+    if (currentOffset > 0) {
+      navOffset.value = 0;
+    }
+  }
+};
+
+useResizeObserver(navRef, update);
 
 watch(
   slotsChange,
@@ -125,16 +245,22 @@ watch(
 );
 
 watch(
-  () => [props.modelValue, props.tabPosition, props.type],
+  () => [
+    props.modelValue,
+    props.tabPosition,
+    props.type,
+    childrens.value.length,
+  ],
   async () => {
     await nextTick();
     update();
   }
-)
+);
 
 onMounted(() => {
   update();
-})
+  scrollToActiveTab();
+});
 
 provide("active", active);
 provide("slotsChange", slotsChange);
@@ -149,21 +275,28 @@ provide("slotsChange", slotsChange);
     ]"
   >
     <div
+      ref="headRef"
       :class="['layui-tab-head', props.tabPosition ? `is-${tabPosition}` : '']"
     >
       <ul
+        ref="navRef"
         :class="[
           'layui-tab-title',
           props.tabPosition ? `is-${tabPosition}` : '',
         ]"
+        :style="navStyle"
       >
-        <div ref="activeBarRef" v-if="type === 'brief'" class="layui-tab-active-bar" :style="tabBarStyle"></div>
+        <div
+          ref="activeBarRef"
+          v-if="type === 'brief'"
+          class="layui-tab-active-bar"
+          :style="tabBarStyle"
+        ></div>
         <li
           v-for="(children, index) in childrens"
           :key="children.props?.id"
           :class="[children.props?.id === active ? 'layui-this' : '']"
           @click.stop="change(children.props?.id)"
-         
         >
           {{ children.props?.title }}
           <i
@@ -173,7 +306,22 @@ provide("slotsChange", slotsChange);
           ></i>
         </li>
       </ul>
-
+      <span
+        ref="scrollPrevRef"
+        v-if="scrollable"
+        class="layui-unselect layui-tab-bar prev"
+        @click="scrollPrev"
+      >
+        <LayIcon type="layui-icon-left"></LayIcon>
+      </span>
+      <span
+        ref="scrollNextRef"
+        v-if="scrollable"
+        class="layui-unselect layui-tab-bar"
+        @click="scrollNext"
+      >
+        <LayIcon type="layui-icon-right"></LayIcon>
+      </span>
     </div>
     <div class="layui-tab-content">
       <slot></slot>

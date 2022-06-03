@@ -224,6 +224,53 @@ export default {
 
 :::
 
+::: title 动态添加
+:::
+
+::: demo
+
+<template>
+  <lay-button @click="addTab">添加</lay-button>
+  <lay-tab type="card" allow-close v-model="current8">
+    <lay-tab-item v-for="a in arr2" :key="a" :title="a.title" :id="a.id" :closable="a.closable">
+      内容{{a.id}}
+    </lay-tab-item>
+  </lay-tab>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+    let index = 4;
+    const current8 = ref('1')
+    const arr2 = ref([
+      {id:'1', title:'选项一', closable: false},
+      {id:'2', title:'选项二'},
+      {id:'3', title:'选项三'}
+    ])
+    const addTab = function(){
+      index++;
+      arr2.value.push({
+        id: String(index), 
+        title:'新选项卡' + index
+      })
+      current8.value = String(index);
+    }
+
+    return {
+      arr2,
+      addTab,
+      current8
+    }
+  }
+}
+</script>
+
+:::
+
+
 ::: title 位置设置
 :::
 

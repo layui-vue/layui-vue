@@ -3,7 +3,7 @@
   text-align: left !important;
 }
 
-.layui-tab[overflow] > .layui-tab-title {
+.layui-tab[overflow] > .layui-tab-head > .layui-tab-title {
   overflow: hidden;
 }
 
@@ -20,6 +20,7 @@
 
 .layui-tab-head {
   display: inline-block;
+  overflow: hidden;
 }
 
 .layui-tab-card .layui-tab-head {
@@ -52,6 +53,7 @@
   padding: 0 15px;
   text-align: center;
   cursor: pointer;
+  user-select: none;
 }
 
 .layui-tab-title li a {
@@ -65,6 +67,7 @@
 .layui-tab-title.is-top,
 .layui-tab-title.is-bottom {
   width: 100%;
+  position: relative;
 }
 
 .layui-tab-title.is-right,
@@ -84,6 +87,13 @@
   margin-left: -1px;
 }
 
+.layui-tab-title.is-top li,
+.layui-tab-title.is-bottom li {
+  border-bottom: 1px solid #eeeeee;
+}
+
+
+
 .layui-tab-title.is-right {
   border-left: 1px solid var(--global-neutral-color-3);
 }
@@ -94,7 +104,7 @@
 
 .layui-tab-title .layui-this {
   color: #000;
-  background-color: #fff
+  background-color: #fff;
 }
 
 .layui-tab-title .layui-this:after {
@@ -167,6 +177,7 @@
 
 .layui-tab-card>.layui-tab-head>.layui-tab-title.is-top {
   margin-top: -1px;
+  margin-left: -1px;
 }
 
 .layui-tab-card>.layui-tab-head>.layui-tab-title.is-right,
@@ -182,9 +193,11 @@
 .layui-tab-card>.layui-tab-head>.layui-tab-title .layui-this:after{
   border-radius: 0;
 }
+
 .layui-tab-card>.layui-tab-head>.layui-tab-title.is-bottom{
   border-top: 1px solid var(--global-neutral-color-3);
   margin-bottom: -2px;
+  margin-left: -1px;
 }
 
 .layui-tab-card>.layui-tab-head>.layui-tab-title.is-left li,
@@ -213,8 +226,7 @@
   border-left-color: #fff;
 }
 
-.layui-tab-card>.layui-tab-head>.layui-tab-title .layui-tab-bar {
-  height: 40px;
+.layui-tab-card>.layui-tab-head .layui-tab-bar {
   line-height: 40px;
   border-radius: 0;
   border-top: none;
@@ -244,6 +256,13 @@
   text-align: center;
   background-color: #fff;
   cursor: pointer;
+}
+
+.layui-tab-bar.prev{
+  left: 0;
+  right:auto;
+  border-right: 1px solid var(--global-neutral-color-3) !important;
+  border-left: none !important;
 }
 
 .layui-tab-bar .layui-icon {
@@ -319,9 +338,8 @@
   bottom: 0px;
   left: 0;
   height: 1.5px;
-  background-color: #409eff;
+  background-color: var(--global-checked-color);
   z-index: 2;
-  transition: transform .3s;
   list-style: none;
   box-sizing: border-box;
   pointer-events: none;
