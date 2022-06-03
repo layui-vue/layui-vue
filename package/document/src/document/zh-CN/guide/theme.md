@@ -49,4 +49,5 @@ const themeVariable = {
 --global-neutral-color-7: #cccccc; // 辅助色-7
   
 --global-neutral-color-8: #c2c2c2; // 辅助色-8
+
 ```
