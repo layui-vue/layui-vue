@@ -12,6 +12,17 @@
 <lay-timeline>
   <lay-timeline-item title="1.1.x">
     <ul> 
+      <a name="1-1-5"></a> 
+      <li> 
+        <h3>1.1.5 <span class="layui-badge-rim">2022-06-04</span></h3> 
+        <ul>
+          <li>[修复] tab 组件 brief 风格 background-color 为 transparent 透明色</li>
+          <li>[修复] tab 组件 brief 风格 position 为 bottom 时 active-bar 的位置</li>
+          <li>[优化] tab 组件 tab-panel 宽度超出当前组件宽度时, 增加左右滑动的能力</li>
+        </ul>
+      </li>
+    </ul>
+    <ul> 
       <a name="1-1-4"></a> 
       <li> 
         <h3>1.1.4 <span class="layui-badge-rim">2022-05-29</span></h3> 
