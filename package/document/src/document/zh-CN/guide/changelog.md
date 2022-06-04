@@ -19,6 +19,8 @@
           <li>[修复] tab 组件 brief 风格 background-color 为 transparent 透明色</li>
           <li>[修复] tab 组件 brief 风格 position 为 bottom 时 active-bar 的位置</li>
           <li>[优化] tab 组件 tab-panel 宽度超出当前组件宽度时, 增加左右滑动的能力</li>
+          <li>[优化] layer 组件 夜间模式 无边框的问题</li>
+          <li>[其他] 本地化 docsearch 静态资源</li>
         </ul>
       </li>
     </ul>

@@ -50,7 +50,8 @@ html #layuicss-layer {
 }
 
 .layui-layer-border {
-    box-shadow: 1px 1px 5px rgba(0, 0, 0, .2)
+    border: 1px solid #eeeeee;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, .2);
 }
 
 .layui-layer-load {
