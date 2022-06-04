@@ -70,6 +70,78 @@ export default {
 
 :::
 
+::: title 对齐方式
+:::
+
+::: demo
+
+<template>
+  <lay-form :model="model">
+    <lay-form-item label="账户" :label-position="labelPosition" prop="username">
+      <lay-input v-model="model.username"></lay-input>
+    </lay-form-item>
+    <lay-form-item label="密码" :label-position="labelPosition" prop="password">
+      <lay-input v-model="model.password" type="password"></lay-input>
+    </lay-form-item>
+    <lay-form-item label="爱好" :label-position="labelPosition" prop="hobby">
+      <lay-select v-model="model.hobby">
+        <lay-select-option value="1" label="学习"></lay-select-option>
+        <lay-select-option value="2" label="编码"></lay-select-option>
+        <lay-select-option value="3" label="运动"></lay-select-option>
+      </lay-select>
+    </lay-form-item>
+    <lay-form-item label="特长" :label-position="labelPosition" prop="specialty">
+      <lay-radio v-model="labelPosition" name="labelPosition" label="left">左</lay-radio>
+      <lay-radio v-model="labelPosition" name="labelPosition" label="top">上</lay-radio>
+      <lay-radio v-model="labelPosition" name="labelPosition" label="right">右</lay-radio>
+    </lay-form-item>
+    <lay-form-item label="描述" :label-position="labelPosition" prop="desc">
+      <lay-textarea placeholder="请输入描述" v-model="model.desc"></lay-textarea>
+    </lay-form-item>
+    <lay-form-item>
+      <lay-button @click="submitClick">提交</lay-button>
+    </lay-form-item>
+  </lay-form>
+</template>
+
+<script>
+import { ref, reactive } from 'vue'
+import {layer} from '@layui/layer-vue'
+
+export default {
+  setup() {
+
+    const model = reactive({
+        username: "admin",
+        password: "123456",
+        specialty: "1"
+    })
+    
+    const labelPosition = ref('right');
+
+    const submitClick = function(){
+      layer.open({
+        type: 1,
+        title:"表单结果", 
+        content: `<div style="padding: 10px">${JSON.stringify(model)}</div>`, 
+        shade: false,
+        isHtmlFragment: true,
+        btn : [{ text: '确认', callback(index) {  layer.close(index) }}],
+        area : '500px'
+      });
+    };
+
+    return {
+      model,
+      submitClick,
+      labelPosition
+    }
+  }
+}
+</script>
+
+:::
+
 ::: title 表单基本校验功能
 :::
 
