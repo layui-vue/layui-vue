@@ -232,7 +232,6 @@ provide("keyword", txt);
               ></i>
             </lay-badge>
           </template>
-          <input />
         </div>
       </div>
     </div>

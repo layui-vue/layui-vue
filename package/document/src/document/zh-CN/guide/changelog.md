@@ -16,6 +16,7 @@
       <li> 
         <h3>1.1.5 <span class="layui-badge-rim">2022-06-04</span></h3> 
         <ul>
+          <li>[新增] input 组件 label-position 属性, 通过设置改变表单域标签的位置, top、left 为可选值</li>
           <li>[修复] tab 组件 brief 风格 position 为 bottom 时 active-bar 的位置</li>
           <li>[修复] tab 组件 brief 风格 background-color 为 transparent 透明色</li>
           <li>[优化] tab 组件 tab-panel 宽度超出当前组件宽度时, 增加左右滑动的能力</li>

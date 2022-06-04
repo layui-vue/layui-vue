@@ -40,7 +40,7 @@ export interface LayFormItemProps {
 
 const props = withDefaults(defineProps<LayFormItemProps>(), {
   mode: "block",
-  labelPosition: 'right'
+  labelPosition: "right",
 });
 
 const layForm = inject("LayForm", {} as LayFormContext);
@@ -165,7 +165,11 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="layui-form-item" :class="[`layui-form-item-${labelPosition}`]" ref="formItemRef">
+  <div
+    class="layui-form-item"
+    :class="[`layui-form-item-${labelPosition}`]"
+    ref="formItemRef"
+  >
     <label class="layui-form-label">
       <span
         v-if="props.prop && isRequired"

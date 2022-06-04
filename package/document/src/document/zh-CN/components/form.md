@@ -73,7 +73,7 @@ export default {
 ::: title 对齐方式
 :::
 
-::: demo
+::: demo 通过设置 label-position 属性可以改变表单域标签的位置，可选值为 top、left， 当设为 top 时标签会置于表单域的顶部
 
 <template>
   <lay-form :model="model">
@@ -531,6 +531,7 @@ export default {
 | ------------- | -------------------------------------------------------------- | --------- | -------------- | ------- |
 | prop          | 在表单绑定值(`model`)中字段`key`                                 | `string`  |        -       |    -    |
 | label         | 子项前边描述值，**尽量填写**，中文校验错误需要用到                 | `string`  |        -       |    -    |
+| label-position| 子项前边描述值的位置                                              | `string`  | `left` `top` `right` |`right` |
 | required      | 是否必填                                                        | `boolean` | `true` `false` | `false` |
 | rules         |  表单校验规则; <br>可查看[async-validator](https://github.com/yiminghe/async-validator)  | `object` | - | - |
 | error-message | 表单校验失败固定提示语                                           | `string`  |`block` `inline`| `block` |
