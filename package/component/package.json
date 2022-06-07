@@ -10,10 +10,12 @@
   "jsdelivr": "umd/index.js",
   "types": "types/index.d.ts",
   "style": "lib/index.css",
-  "keywords": [
+  "keywords": [  
+    "vue",
+    "vue-component",
+    "component-library",
     "layui-vue",
-    "layui",
-    "vue"
+    "layui"
   ],
   "exports": {
     ".": {
@@ -32,7 +34,7 @@
   "dependencies": {
     "@layui/icons-vue": "^1.0.9",
     "@layui/layer-vue": "^1.3.16",
-    "@vueuse/core": "^8.5.0",
+    "@vueuse/core": "^8.6.0",
     "async-validator": "^4.1.1",
     "cropperjs": "^1.5.12",
     "darkreader": "^4.9.51",
