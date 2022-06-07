@@ -21,27 +21,18 @@ const props = withDefaults(defineProps<LayDropdownProps>(), {
 });
 
 const openState = ref(false);
-const dropdownRef = ref<null | HTMLElement>(null);
+const dropdownRef = ref<null | HTMLElement>();
 const dropdownX = ref<number | string>(0);
 const dropdownY = ref<number | string>("auto");
 const emit = defineEmits(["open", "hide"]);
-// @ts-ignore
-onClickOutside(dropdownRef, (event) => {
+
+onClickOutside(dropdownRef, () => {
   openState.value = false;
 });
 
 const open = function (event?: Event): void {
   if (props.disabled === false) {
-    if (event) {
-      const el = event.currentTarget;
-      // @ts-ignore
-      const rect = el.getBoundingClientRect();
-      // @ts-ignore
-      dropdownX.value = event.clientX - rect.left + "px";
-      // @ts-ignore
-      dropdownY.value = event.clientY - rect.top + "px";
-    }
-
+    
     openState.value = true;
     emit("open");
   }
@@ -61,11 +52,6 @@ const toggle = function (event?: Event): void {
     }
 };
 
-const dropdownStyle = computed(() => ({
-  "--layui-dropdown-left": dropdownX.value,
-  "--layui-dropdown-top": dropdownY.value,
-}));
-
 provide("openState", openState);
 
 defineExpose({ open, hide, toggle });
@@ -78,7 +64,6 @@ defineExpose({ open, hide, toggle });
     @mouseenter="trigger === 'hover' && open()"
     @mouseleave="trigger === 'hover' && hide()"
     :class="{ 'layui-dropdown-up': openState }"
-    :style="dropdownStyle"
   >
     <div
       @click="trigger === 'click' && toggle()"

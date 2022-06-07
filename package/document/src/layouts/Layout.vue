@@ -76,27 +76,27 @@
                 </lay-icon>
               </a>
               <template #content>
-                <div style="width: 380px; padding: 0px 10px 10px 10px">
+                <div class="theme-panel">
                   <lay-color-picker
                     v-model="appStore.themeVariable['--global-primary-color']"
                   ></lay-color-picker
-                  >&nbsp;
+                  >
                   <lay-color-picker
                     v-model="appStore.themeVariable['--global-normal-color']"
                   ></lay-color-picker
-                  >&nbsp;
+                  >
                   <lay-color-picker
                     v-model="appStore.themeVariable['--global-warm-color']"
                   ></lay-color-picker
-                  >&nbsp;
+                  >
                   <lay-color-picker
                     v-model="appStore.themeVariable['--global-danger-color']"
                   ></lay-color-picker
-                  >&nbsp;
+                  >
                   <lay-color-picker
                     v-model="appStore.themeVariable['--global-checked-color']"
                   ></lay-color-picker
-                  >&nbsp;
+                  >
                   <lay-input
                     v-model="appStore.themeVariable['--global-border-radius']"
                     style="display: inline-block; width: 130px"
@@ -104,31 +104,24 @@
                   <lay-color-picker
                     v-model="appStore.themeVariable['--global-neutral-color-1']"
                   ></lay-color-picker>
-                  &nbsp;
                   <lay-color-picker
                     v-model="appStore.themeVariable['--global-neutral-color-2']"
                   ></lay-color-picker>
-                  &nbsp;
                   <lay-color-picker
                     v-model="appStore.themeVariable['--global-neutral-color-3']"
                   ></lay-color-picker>
-                  &nbsp;
                   <lay-color-picker
                     v-model="appStore.themeVariable['--global-neutral-color-4']"
                   ></lay-color-picker>
-                  &nbsp;
                   <lay-color-picker
                     v-model="appStore.themeVariable['--global-neutral-color-5']"
                   ></lay-color-picker>
-                  &nbsp;
                   <lay-color-picker
                     v-model="appStore.themeVariable['--global-neutral-color-6']"
                   ></lay-color-picker>
-                  &nbsp;
                   <lay-color-picker
                     v-model="appStore.themeVariable['--global-neutral-color-7']"
                   ></lay-color-picker>
-                  &nbsp;
                   <lay-color-picker
                     v-model="appStore.themeVariable['--global-neutral-color-8']"
                   ></lay-color-picker>
@@ -393,5 +386,14 @@ export default {
   height: 12px;
   top: 3px;
   left: 3px;
+}
+
+.theme-panel {
+  width: 380px; 
+  padding: 0px 10px 10px 10px
+}
+
+.theme-panel > * {
+  margin-right: 9px;
 }
 </style>

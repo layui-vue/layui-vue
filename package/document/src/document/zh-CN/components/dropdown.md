@@ -158,6 +158,34 @@ export default {
 
 :::
 
+::: title 位置优化
+:::
+
+::: demo
+
+<template>
+  <lay-dropdown>
+    <lay-button type="primary">下拉菜单</lay-button>
+    <template #content>
+      <div style="width:300px;height:200px;"></div> 
+    </template>
+  </lay-dropdown>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    return {
+    }
+  }
+}
+</script>
+
+:::
+
 ::: title Dropdown 属性
 :::
 
