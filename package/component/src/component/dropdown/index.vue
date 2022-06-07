@@ -6,7 +6,7 @@ export default {
 
 <script setup lang="ts">
 import "./index.less";
-import { computed, provide, ref } from "vue";
+import { provide, ref } from "vue";
 import { onClickOutside } from "@vueuse/core";
 import { DropdownTrigger } from "./interface";
 
@@ -22,33 +22,30 @@ const props = withDefaults(defineProps<LayDropdownProps>(), {
 
 const openState = ref(false);
 const dropdownRef = ref<null | HTMLElement>();
-const dropdownX = ref<number | string>(0);
-const dropdownY = ref<number | string>("auto");
 const emit = defineEmits(["open", "hide"]);
 
 onClickOutside(dropdownRef, () => {
   openState.value = false;
 });
 
-const open = function (event?: Event): void {
-  if (props.disabled === false) {
-    
+const open = (): void => {
+  if (props.disabled == false) {
     openState.value = true;
     emit("open");
   }
 };
 
-const hide = function (): void {
+const hide = (): void => {
   openState.value = false;
   emit("hide");
 };
 
-const toggle = function (event?: Event): void {
-  if (props.disabled === false)
+const toggle = (): void => {
+  if (props.disabled == false)
     if (openState.value) {
       hide();
     } else {
-      open(event);
+      open();
     }
 };
 
@@ -61,13 +58,13 @@ defineExpose({ open, hide, toggle });
   <div
     ref="dropdownRef"
     class="layui-dropdown"
-    @mouseenter="trigger === 'hover' && open()"
-    @mouseleave="trigger === 'hover' && hide()"
+    @mouseenter="trigger == 'hover' && open()"
+    @mouseleave="trigger == 'hover' && hide()"
     :class="{ 'layui-dropdown-up': openState }"
   >
     <div
-      @click="trigger === 'click' && toggle()"
-      @contextmenu.prevent="trigger === 'contextMenu' && toggle($event)"
+      @click="trigger == 'click' && toggle()"
+      @contextmenu.prevent="trigger == 'contextMenu' && toggle()"
     >
       <slot></slot>
     </div>

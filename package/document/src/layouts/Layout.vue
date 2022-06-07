@@ -79,24 +79,19 @@
                 <div class="theme-panel">
                   <lay-color-picker
                     v-model="appStore.themeVariable['--global-primary-color']"
-                  ></lay-color-picker
-                  >
+                  ></lay-color-picker>
                   <lay-color-picker
                     v-model="appStore.themeVariable['--global-normal-color']"
-                  ></lay-color-picker
-                  >
+                  ></lay-color-picker>
                   <lay-color-picker
                     v-model="appStore.themeVariable['--global-warm-color']"
-                  ></lay-color-picker
-                  >
+                  ></lay-color-picker>
                   <lay-color-picker
                     v-model="appStore.themeVariable['--global-danger-color']"
-                  ></lay-color-picker
-                  >
+                  ></lay-color-picker>
                   <lay-color-picker
                     v-model="appStore.themeVariable['--global-checked-color']"
-                  ></lay-color-picker
-                  >
+                  ></lay-color-picker>
                   <lay-input
                     v-model="appStore.themeVariable['--global-border-radius']"
                     style="display: inline-block; width: 130px"
@@ -389,8 +384,8 @@ export default {
 }
 
 .theme-panel {
-  width: 380px; 
-  padding: 0px 10px 10px 10px
+  width: 380px;
+  padding: 0px 10px 10px 10px;
 }
 
 .theme-panel > * {
