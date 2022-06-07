@@ -10,14 +10,14 @@
         <ul class="layui-row layui-col-space6">
           <li class="layui-col-sm12">
             <div class="alone">
-              <a href="http://layer.layui-vue.com" target="_blank"
+              <a href="https://gitee.com/layui/layui-vue/tree/next/package/layer" target="_blank"
                 >layer - vue<cite>通用型弹出层组件</cite></a
               >
             </div>
           </li>
           <li class="layui-col-sm12">
             <div class="alone">
-              <a href="https://gitee.com/layui-vue/icons-vue" target="_blank"
+              <a href="https://gitee.com/layui/layui-vue/tree/next/package/icons" target="_blank"
                 >icons - vue<cite>图标组件化解决方案</cite></a
               >
             </div>
