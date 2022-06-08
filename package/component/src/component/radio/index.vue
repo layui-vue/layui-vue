@@ -25,6 +25,14 @@ const isGroup = computed(() => {
   return radioGroup != undefined && radioGroup?.name === "LayRadioGroup";
 });
 
+const naiveName = computed(() => {
+  if(radioGroup.naiveName) {
+    return radioGroup.naiveName;
+  } else {
+    return props.name;
+  }
+})
+
 const isChecked = computed({
   get() {
     if (isGroup.value) {
@@ -54,7 +62,7 @@ const handleClick = function () {
 
 <template>
   <span class="layui-radio">
-    <input type="radio" :value="label" :name="name" />
+    <input type="radio" :value="label" :name="naiveName" />
     <div
       class="layui-unselect layui-form-radio"
       :class="{

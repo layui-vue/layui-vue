@@ -103,10 +103,10 @@ export default {
 ::: demo
 
 <template>
-    <lay-radio-group v-model="selected4" @change="change4">
-      <lay-radio name="action" label="1">写作</lay-radio>
-      <lay-radio name="action" label="2">画画</lay-radio>
-      <lay-radio name="action" label="3">运动</lay-radio>
+    <lay-radio-group name="action" v-model="selected4" @change="change4">
+      <lay-radio label="1">写作</lay-radio>
+      <lay-radio label="2">画画</lay-radio>
+      <lay-radio label="3">运动</lay-radio>
     </lay-radio-group>
 </template>
 
