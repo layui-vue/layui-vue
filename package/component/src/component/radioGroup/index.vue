@@ -18,7 +18,11 @@ const emit = defineEmits(["update:modelValue", "change"]);
 
 const modelValue = ref(props.modelValue);
 
-provide("radioGroup", { name: "LayRadioGroup", modelValue: modelValue, naiveName: props.name });
+provide("radioGroup", {
+  name: "LayRadioGroup",
+  modelValue: modelValue,
+  naiveName: props.name,
+});
 
 watch(
   () => modelValue,

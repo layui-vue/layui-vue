@@ -97,7 +97,7 @@ export default {
 
 :::
 
-::: title 事件回调
+::: title 单选分组
 :::
 
 ::: demo

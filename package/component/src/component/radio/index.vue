@@ -26,12 +26,12 @@ const isGroup = computed(() => {
 });
 
 const naiveName = computed(() => {
-  if(radioGroup.naiveName) {
+  if (radioGroup.naiveName) {
     return radioGroup.naiveName;
   } else {
     return props.name;
   }
-})
+});
 
 const isChecked = computed({
   get() {
