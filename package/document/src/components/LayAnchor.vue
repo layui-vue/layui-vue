@@ -138,6 +138,7 @@ const getScrollTop = (el: HTMLElement | undefined): number => {
         document.body.scrollTop ||
         0;
 };
+
 /**平滑滚动 */
 const scrollToTitle = (id: string): void => {
   document.getElementById(id)?.scrollIntoView({

@@ -341,6 +341,7 @@ watch(
 );
 
 onMounted(() => {
+  currentDay.value = new Date(props.modelValue).getTime();
   hms.value.hh = dayjs(props.modelValue).hour();
   hms.value.mm = dayjs(props.modelValue).minute();
   hms.value.ss = dayjs(props.modelValue).second();
