@@ -78,7 +78,11 @@ const classes = computed(() => {
   <div class="layui-input-wrapper">
     <span class="layui-input-prefix" v-if="slots.prefix || props.prefixIcon">
       <slot name="prefix" v-if="slots.prefix"></slot>
-      <lay-icon v-else :type="props.prefixIcon" class="layui-input-prefix-icon"></lay-icon>
+      <lay-icon
+        v-else
+        :type="props.prefixIcon"
+        class="layui-input-prefix-icon"
+      ></lay-icon>
     </span>
     <input
       :type="type"
@@ -98,7 +102,11 @@ const classes = computed(() => {
     />
     <span class="layui-input-suffix" v-if="slots.suffix || props.suffixIcon">
       <slot name="suffix" v-if="slots.suffix"></slot>
-      <lay-icon v-else :type="props.suffixIcon" class="layui-input-suffix-icon"></lay-icon>
+      <lay-icon
+        v-else
+        :type="props.suffixIcon"
+        class="layui-input-suffix-icon"
+      ></lay-icon>
     </span>
     <span class="layui-input-clear" v-if="allowClear && hasContent">
       <lay-icon type="layui-icon-close-fill" @click="onClear"></lay-icon>

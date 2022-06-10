@@ -204,6 +204,8 @@ export default {
 | autofocus                | 原生属性 autofocus    | `true` `false` |
 | autocomplete             | 原生属性 autocomplete | `true` `false` |
 | allow-clear              | 允许清空 allow-clear  | `true` `false` |
+| prefix-icon              | 前置图标              | --             |
+| suffix-icon              | 后置图标              | --             |
 
 :::
 

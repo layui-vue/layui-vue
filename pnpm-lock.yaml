@@ -29,7 +29,7 @@ importers:
       eslint-plugin-vue: ^8.2.0
       husky: ^8.0.1
       less: ^4.1.2
-      prettier: ^2.5.1
+      prettier: ^2.6.2
       rimraf: ^3.0.2
       rollup: ^2.75.5
       typescript: ^4.7.3
@@ -113,13 +113,13 @@ importers:
       vite: 2.9.8
       vite-plugin-md: ^0.13.1
       vue-i18n: ^9.1.10
-      vue-router: ^4.0.12
+      vue-router: ^4.0.15
     dependencies:
       '@vueuse/core': 8.3.0_vue@3.2.37
       pinia: 2.0.14_typescript@4.6.3+vue@3.2.37
       pinia-plugin-persist: 1.0.0_pinia@2.0.14+vue@3.2.37
       vue-i18n: 9.1.10_vue@3.2.37
-      vue-router: 4.0.14_vue@3.2.37
+      vue-router: 4.0.16_vue@3.2.37
     devDependencies:
       '@types/markdown-it': 12.2.3
       '@types/markdown-it-container': 2.0.5
@@ -5014,8 +5014,8 @@ packages:
       vue: 3.2.37
     dev: false
 
-  /vue-router/4.0.14_vue@3.2.37:
-    resolution: {integrity: sha512-wAO6zF9zxA3u+7AkMPqw9LjoUCjSxfFvINQj3E/DceTt6uEz1XZLraDhdg2EYmvVwTBSGlLYsUw8bDmx0754Mw==}
+  /vue-router/4.0.16_vue@3.2.37:
+    resolution: {integrity: sha512-JcO7cb8QJLBWE+DfxGUL3xUDOae/8nhM1KVdnudadTAORbuxIC/xAydC5Zr/VLHUDQi1ppuTF5/rjBGzgzrJNA==}
     peerDependencies:
       vue: ^3.2.0
     dependencies:

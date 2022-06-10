@@ -14,11 +14,14 @@
     <ul> 
       <a name="1-1-6"></a> 
       <li> 
-        <h3>1.1.6 <span class="layui-badge-rim">2022-06-07</span></h3> 
+        <h3>1.1.6 <span class="layui-badge-rim">2022-06-11</span></h3> 
         <ul>
+          <li>[新增] input 组件 prefix-icon 属性, 用于设置输入框前置图标</li>
+          <li>[新增] input 组件 suffix-icon 属性, 用于设置输入框后置图标</li>
           <li>[修复] date-picker 组件 v-model 无法解析 yy-mm-dd 年月日, 会显示现在日期的问题</li>
           <li>[优化] dropdown 组件 trigger 属性为 context-menu 值, 不再根据鼠标位置展示内容</li>
           <li>[优化] input-number 组件 v-model 内容默认对齐方式为 center, 更符合普遍的审美</li>
+          <li>[升级] vue, vueuse, vue-i18n, darkreader, rollup 等核心依赖 </li>
         </ul>
       </li>
     </ul>
