@@ -10,21 +10,17 @@ import { LayIcon } from "@layui/icons-vue";
 import { computed, useSlots } from "vue";
 import { useI18n } from "../../language";
 
-const { t } = useI18n();
-const slots = useSlots();
-const hasContent = computed(() => props.modelValue?.length > 0);
-
 export interface LayInputProps {
   name?: string;
   type?: string;
   value?: string;
   disabled?: boolean;
   readonly?: boolean;
-  modelValue?: string;
+  modelValue: string;
   placeholder?: string;
   allowClear?: boolean;
   autofocus?: boolean;
-  autocomplete?: boolean;
+  autocomplete?: string;
 }
 
 const props = withDefaults(defineProps<LayInputProps>(), {
@@ -32,7 +28,6 @@ const props = withDefaults(defineProps<LayInputProps>(), {
   readonly: false,
   allowClear: false,
   autofocus: false,
-  autocomplete: false,
 });
 
 const emit = defineEmits([
@@ -43,6 +38,10 @@ const emit = defineEmits([
   "clear",
   "blur",
 ]);
+
+const { t } = useI18n();
+const slots = useSlots();
+const hasContent = computed(() => props.modelValue?.length > 0);
 
 const onInput = function (event: Event) {
   const inputElement = event.target as HTMLInputElement;
