@@ -179,6 +179,7 @@ export default {
 | v-model / modelValue     | 值                   | --             |
 | autofocus                | 原生属性 autofocus    | `true` `false` |
 | autocomplete             | 原生属性 autocomplete | `true` `false` |
+| allow-clear              | 允许清空 allow-clear  | `true` `false` |
 
 :::
 
@@ -194,6 +195,18 @@ export default {
 | blur  | 原生 blur 事件      | event : Event    |
 | change| 原生 change 事件    | event : Event    |
 | clear | 清空 事件           | --               |
+
+:::
+
+::: title Input 事件
+:::
+
+::: table
+
+| 事件   | 描述                | 参数             |
+| -----  | ------------------- | ----------------|
+| prefix | 输入框前置内容     | --    |
+| suffix | 输入框后置内容     | --    |
 
 :::
 

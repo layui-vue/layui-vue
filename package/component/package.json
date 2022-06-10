@@ -1,6 +1,6 @@
 {
   "name": "@layui/layui-vue",
-  "version": "1.1.5",
+  "version": "1.1.6-alpha.1",
   "author": "就眠儀式",
   "license": "MIT",
   "description": "a component library for Vue 3 base on layui-vue",
@@ -10,6 +10,7 @@
   "jsdelivr": "umd/index.js",
   "types": "types/index.d.ts",
   "style": "lib/index.css",
+  "type": "module",
   "keywords": [  
     "vue",
     "vue-component",
