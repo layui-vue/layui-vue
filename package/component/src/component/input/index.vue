@@ -21,6 +21,8 @@ export interface LayInputProps {
   allowClear?: boolean;
   autofocus?: boolean;
   autocomplete?: string;
+  prefixIcon?: string;
+  suffixIcon?: string;
 }
 
 const props = withDefaults(defineProps<LayInputProps>(), {
@@ -74,8 +76,9 @@ const classes = computed(() => {
 
 <template>
   <div class="layui-input-wrapper">
-    <span class="layui-input-prefix" v-if="slots.prefix">
-      <slot name="prefix"></slot>
+    <span class="layui-input-prefix" v-if="slots.prefix || props.prefixIcon">
+      <slot name="prefix" v-if="slots.prefix"></slot>
+      <lay-icon v-else :type="props.prefixIcon" class="layui-input-prefix-icon"></lay-icon>
     </span>
     <input
       :type="type"
@@ -93,8 +96,9 @@ const classes = computed(() => {
       @blur="onBlur"
       @change="onChange"
     />
-    <span class="layui-input-suffix" v-if="slots.suffix">
-      <slot name="suffix"></slot>
+    <span class="layui-input-suffix" v-if="slots.suffix || props.suffixIcon">
+      <slot name="suffix" v-if="slots.suffix"></slot>
+      <lay-icon v-else :type="props.suffixIcon" class="layui-input-suffix-icon"></lay-icon>
     </span>
     <span class="layui-input-clear" v-if="allowClear && hasContent">
       <lay-icon type="layui-icon-close-fill" @click="onClear"></lay-icon>

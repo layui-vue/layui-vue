@@ -83,6 +83,30 @@ export default {
 
 :::
 
+::: title 设置图标
+:::
+
+::: demo
+
+<template>
+  <lay-input prefix-icon="layui-icon-home" suffix-icon="layui-icon-home">
+  </lay-input>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    return {
+    }
+  }
+}
+</script>
+
+:::
+
 ::: title 允许清空
 :::
 
