@@ -1,7 +1,7 @@
 ::: anchor
 :::
 
-::: title 基础使用
+::: title 字体使用
 :::
 
 ::: demo

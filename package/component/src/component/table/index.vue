@@ -15,6 +15,7 @@ import LayTooltip from "../tooltip/index.vue";
 import { LayIcon } from "@layui/icons-vue";
 import LayPage from "../page/index.vue";
 import TableRow from "./TableRow.vue";
+import number from "async-validator/dist-types/validator/number";
 
 export interface LayTableProps {
   id?: string;
@@ -28,6 +29,8 @@ export interface LayTableProps {
   selectedKeys?: Recordable[];
   indentSize?: number;
   childrenColumnName: string;
+  height?: number;
+  maxHeight?: string;
 }
 
 const props = withDefaults(defineProps<LayTableProps>(), {
@@ -37,6 +40,7 @@ const props = withDefaults(defineProps<LayTableProps>(), {
   childrenColumnName: "children",
   dataSource: () => [],
   selectedKeys: () => [],
+  maxHeight: "auto",
 });
 
 const tableId = uuidv4();
@@ -197,8 +201,19 @@ const sortTable = (e: any, key: string, sort: string) => {
 
 let tableHeader = ref<HTMLElement | null>(null);
 let tableBody = ref<HTMLElement | null>(null);
+let scrollWidthCell = ref(0);
 
 onMounted(() => {
+  const scrollWidth: number = tableBody.value?.scrollWidth || 0;
+  const offsetWidth: number = tableBody.value?.offsetWidth || 0;
+
+  console.dir(tableBody.value);
+  console.log(scrollWidth < offsetWidth);
+  console.log(scrollWidth, offsetWidth);
+  if (scrollWidth < offsetWidth) {
+    scrollWidthCell.value = offsetWidth - scrollWidth;
+  }
+  console.log(props.columns);
   tableBody.value?.addEventListener("scroll", () => {
     tableHeader.value!.scrollLeft = tableBody.value?.scrollLeft || 0;
   });
@@ -272,6 +287,16 @@ props.dataSource.map((value: any) => {
         <!-- 表头 -->
         <div class="layui-table-header" ref="tableHeader">
           <table class="layui-table" :lay-size="size">
+            <colgroup>
+              <template v-for="column in columns" :key="column">
+                <col
+                  :width="column.width"
+                  :style="{
+                    minWidth: column.minWidth ? column.minWidth : '100px',
+                  }"
+                />
+              </template>
+            </colgroup>
             <thead>
               <tr>
                 <th v-if="checkbox" class="layui-table-col-special">
@@ -290,8 +315,6 @@ props.dataSource.map((value: any) => {
                     class="layui-table-cell"
                     :style="{
                       textAlign: column.align,
-                      width: column.width ? column.width : '0',
-                      minWidth: column.minWidth ? column.minWidth : '47px',
                     }"
                   >
                     <span>
@@ -321,13 +344,34 @@ props.dataSource.map((value: any) => {
                     </span>
                   </th>
                 </template>
+                <th
+                  v-if="scrollWidthCell > 0"
+                  :style="{
+                    padding: 0,
+                    width: `${scrollWidthCell}px`,
+                  }"
+                ></th>
               </tr>
             </thead>
           </table>
         </div>
         <!-- 表身 -->
-        <div class="layui-table-body layui-table-main" ref="tableBody">
+        <div
+          class="layui-table-body layui-table-main"
+          :style="{ height: height, maxHeight: maxHeight }"
+          ref="tableBody"
+        >
           <table class="layui-table" :lay-size="size">
+            <colgroup>
+              <template v-for="column in columns" :key="column">
+                <col
+                  :width="column.width"
+                  :style="{
+                    minWidth: column.minWidth ? column.minWidth : '100px',
+                  }"
+                />
+              </template>
+            </colgroup>
             <tbody>
               <!-- 渲染 -->
               <template v-for="data in tableDataSource" :key="data">

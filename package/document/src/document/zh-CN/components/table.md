@@ -45,6 +45,7 @@ export default {
 
     const dataSource1 = [
       {username:"root", password:"root", age:"18", remark: 'layui - vue（谐音：类 UI) '},
+      {username:"root", password:"root", age:"18", remark: 'layui - vue（谐音：类 UI) '},
       {username:"woow", password:"woow", age:"20", remark: 'layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.'}
     ]
 
@@ -416,6 +417,65 @@ export default {
 
 :::
 
+::: title 固定表头
+:::
+
+::: demo 设置 `height` 或者 `max-height` 即可实现
+
+<template>
+  <lay-table :columns="columns8" :dataSource="dataSource8" max-height="300px"></lay-table>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const columns8 = [
+      {
+        title:"账户",
+        width:"200px",
+        key:"username"
+      },{
+        title:"密码",
+        width: "180px",
+        key:"password"
+      },{
+        title:"年龄",
+        width: "180px",
+        key:"age"
+      },{
+        title:"备注",
+        key:"remark",
+        ellipsisTooltip: true,
+      }
+    ]
+
+    const dataSource8 = [
+      {username:"root", password:"root", age:"18", remark: 'layui - vue（谐音：类 UI) '},
+      {username:"root", password:"root", age:"18", remark: 'layui - vue（谐音：类 UI) '},
+      {username:"root", password:"root", age:"18", remark: 'layui - vue（谐音：类 UI) '},
+      {username:"root", password:"root", age:"18", remark: 'layui - vue（谐音：类 UI) '},
+      {username:"root", password:"root", age:"18", remark: 'layui - vue（谐音：类 UI) '},
+      {username:"root", password:"root", age:"18", remark: 'layui - vue（谐音：类 UI) '},
+      {username:"root", password:"root", age:"18", remark: 'layui - vue（谐音：类 UI) '},
+      {username:"woow", password:"woow", age:"20", remark: 'layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.'},
+      {username:"woow", password:"woow", age:"20", remark: 'layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.'},
+      {username:"woow", password:"woow", age:"20", remark: 'layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.'},
+      {username:"woow", password:"woow", age:"20", remark: 'layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.'},
+    ]
+
+    return {
+      columns8,
+      dataSource8
+    }
+  }
+}
+</script>
+
+:::
+
 ::: title Table 属性
 :::
 
@@ -432,6 +492,8 @@ export default {
 | size                 | 尺寸                          | `string`  | `md`    | `lg` `md` `sm` |
 | children-column-name | 树节点字段                    | `string` | `children`| --            |
 | indent-size          | 树表行级缩进                   | `number`  | `30`    | -- |
+| height          | 表格高度                   | `number`  | --   | -- |
+| maxHeight          | 表格最大高度                   | `number`  | --   | -- |
 
 :::
 
@@ -471,7 +533,7 @@ export default {
 | key             | 数据字段                       | --        | --      | --                      |
 | customSlot      | 自定义插槽                     | --        | --      | --                      |
 | width           | 宽度                           | --        | --      | --                      |
-| minWidth        | 最小宽度                       | --        | --      | --                      |
+| minWidth        | 最小宽度                       | --        | `100px`      | --                      |
 | sort            | 排序                           | --        | --      | --                      |
 | titleSlot       | 标题插槽                       | --        | --      | --                      |
 | align           | 对齐方式                       | `string`  | `left`  | `left` `right` `center` |
