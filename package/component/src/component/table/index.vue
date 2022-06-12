@@ -6,13 +6,12 @@ export default {
 
 <script setup lang="ts">
 import "./index.less";
-import { ref, watch, useSlots, withDefaults, onMounted, Ref } from "vue";
+import { ref, watch, useSlots, withDefaults, onMounted } from "vue";
 import { v4 as uuidv4 } from "../../utils/guidUtil";
 import { Recordable } from "../../types";
+import { LayIcon } from "@layui/icons-vue";
 import LayCheckbox from "../checkbox/index.vue";
 import LayDropdown from "../dropdown/index.vue";
-import LayTooltip from "../tooltip/index.vue";
-import { LayIcon } from "@layui/icons-vue";
 import LayPage from "../page/index.vue";
 import TableRow from "./TableRow.vue";
 
