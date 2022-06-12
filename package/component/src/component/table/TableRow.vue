@@ -102,8 +102,6 @@ const childrenIndentSize = props.currentIndentSize + props.indentSize;
             class="layui-table-cell"
             :style="{
               textAlign: column.align,
-              width: column.width ? column.width : '0',
-              minWidth: column.minWidth ? column.minWidth : '47px',
               whiteSpace: column.ellipsisTooltip ? 'nowrap' : 'normal',
             }"
           >
@@ -148,8 +146,6 @@ const childrenIndentSize = props.currentIndentSize + props.indentSize;
               class="layui-table-cell"
               :style="{
                 textAlign: column.align,
-                width: column.width ? column.width : '0',
-                minWidth: column.minWidth ? column.minWidth : '47px',
                 whiteSpace: column.ellipsisTooltip ? 'nowrap' : 'normal',
               }"
             >
