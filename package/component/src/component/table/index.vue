@@ -15,7 +15,6 @@ import LayTooltip from "../tooltip/index.vue";
 import { LayIcon } from "@layui/icons-vue";
 import LayPage from "../page/index.vue";
 import TableRow from "./TableRow.vue";
-import number from "async-validator/dist-types/validator/number";
 
 export interface LayTableProps {
   id?: string;
