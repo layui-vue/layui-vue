@@ -17,7 +17,9 @@
         <h3>1.1.7 <span class="layui-badge-rim">2022-06-13</span></h3> 
         <ul>
           <li>[新增] upload 组件 default 插槽, 允许自定义上传入口</li>
+          <li>[新增] transfer 组件 width 与 height 属性, 允许自定义盒子尺寸</li>
           <li>[新增] table 组件 max-height 与 height 属性, 超出指定高度标题固定</li>
+          <li>[修复] transfer 组件 input 样式, 由原生 input 修改为 lay-input</li> 
           <li>[修复] table 组件 按需加载 时, 内置 checkbox 无法正常解析</li>
         </ul>
       </li>

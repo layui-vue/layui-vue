@@ -171,6 +171,8 @@ export default {
 | title      | 标题        | --              |
 | id         | 主键        | --              |
 | showSearch | 开启搜索        | --              |
+| width      | 左右盒子宽度        | `200px`              |
+| height     | 左右盒子高度        |  `360px`              |
 
 :::
 

@@ -6,17 +6,22 @@ export default {
 
 <script setup lang="ts">
 import "./index.less";
-import LayScroll from "../scroll";
+import LayInput from "../input/index.vue";
+import LayScroll from "../scroll/index.vue";
 import LayButton from "../button/index.vue";
 import LayCheckbox from "../checkbox/index.vue";
-import { Ref, ref, useSlots, watch } from "vue";
+import { computed, Ref, ref, useSlots, watch } from "vue";
 import { BooleanOrString, Recordable } from "../../types";
+import { computedAsync } from '@vueuse/core';
 
 export interface LayTransferProps {
   id?: string;
   title?: string[];
+  width?: string;
+  height?: string;
   showSearch?: BooleanOrString;
   dataSource: Recordable[];
+  selectedKeys: Recordable[];
 }
 
 const slot = useSlots();
@@ -27,6 +32,8 @@ const props = withDefaults(defineProps<LayTransferProps>(), {
   dataSource: () => [],
   showSearch: false,
   selectedKeys: () => [],
+  width: "200px",
+  height: "360px"
 });
 
 const leftDataSource: Ref<any[]> = ref([...props.dataSource]);
@@ -160,12 +167,20 @@ const searchRight = (e: any) => {
     }
   });
 };
+
+const boxStyle = computed(() => {
+  return {
+    width: props.width,
+    height: props.height
+  }
+})
+
 </script>
 
 <template>
   <div>
     <div class="layui-transfer layui-form layui-border-box">
-      <div class="layui-transfer-box" style="width: 200px; height: 360px">
+      <div class="layui-transfer-box" :style="boxStyle">
         <div class="layui-transfer-header">
           <LayCheckbox
             v-model="allLeftChecked"
@@ -177,15 +192,9 @@ const searchRight = (e: any) => {
           </LayCheckbox>
         </div>
         <div class="layui-transfer-search" v-if="showSearch">
-          <i class="layui-icon layui-icon-search"></i
-          ><input
-            type="input"
-            class="layui-input"
-            @input="searchLeft"
-            placeholder="关键词搜索"
-          />
+          <lay-input prefix-icon="layui-icon-search" @input="searchLeft" placeholder="关键词搜索"></lay-input>
         </div>
-        <ul class="layui-transfer-data" style="height: 320px">
+        <ul class="layui-transfer-data" style="height:320px">
           <li v-for="dataSource in leftDataSource" :key="dataSource">
             <LayCheckbox
               v-model="leftSelectedKeys"
@@ -212,7 +221,7 @@ const searchRight = (e: any) => {
           ><i class="layui-icon layui-icon-prev"></i
         ></LayButton>
       </div>
-      <div class="layui-transfer-box" style="width: 200px; height: 360px">
+      <div class="layui-transfer-box" :style="boxStyle">
         <div class="layui-transfer-header">
           <LayCheckbox
             v-model="allRightChecked"
@@ -224,13 +233,7 @@ const searchRight = (e: any) => {
           </LayCheckbox>
         </div>
         <div class="layui-transfer-search" v-if="showSearch">
-          <i class="layui-icon layui-icon-search"></i
-          ><input
-            type="input"
-            class="layui-input"
-            @input="searchRight"
-            placeholder="关键词搜索"
-          />
+           <lay-input prefix-icon="layui-icon-search" @input="searchRight" placeholder="关键词搜索"></lay-input>
         </div>
         <ul class="layui-transfer-data" style="height: 320px">
           <li v-for="dataSource in rightDataSource" :key="dataSource">

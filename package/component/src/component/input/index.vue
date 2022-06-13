@@ -16,7 +16,7 @@ export interface LayInputProps {
   value?: string;
   disabled?: boolean;
   readonly?: boolean;
-  modelValue: string;
+  modelValue?: string;
   placeholder?: string;
   allowClear?: boolean;
   autofocus?: boolean;
@@ -30,6 +30,7 @@ const props = withDefaults(defineProps<LayInputProps>(), {
   readonly: false,
   allowClear: false,
   autofocus: false,
+  modelValue: ""
 });
 
 const emit = defineEmits([
