@@ -160,6 +160,7 @@ const throttle = (func: Function, wait: number) => {
   };
 };
 </script>
+
 <style lang="less" scoped>
 .lay-aside {
   position: fixed;
