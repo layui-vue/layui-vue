@@ -61,6 +61,63 @@ export default {
 
 :::
 
+::: title 默认插槽
+:::
+
+::: demo 使用 `default` 插槽, 自定义入口
+
+<template>
+  <lay-upload @done="getUploadFile" @choose="beginChoose">
+    <template v-slot:default="params">
+      <lay-button>上传 - 是否禁用 - {{ params.disabled }}</lay-button>
+    </template>
+    <template #preview>
+      <div v-for="(item,index) in picList" :key="`demo1-pic-'${index}`">
+        <img :src="item"/>
+      </div>
+    </template>
+  </lay-upload>
+</template>
+
+<script>
+import { ref,reactive } from 'vue'
+
+export default {
+  setup() {
+    const picList = ref([]);
+    const filetoDataURL=(file,fn)=>{
+      const reader = new FileReader();
+      reader.onloadend = function(e){
+        fn(e.target.result);
+      };
+      reader.readAsDataURL(file);
+    };
+    const getUploadFile=(files)=>{
+      if(Array.isArray(files)&&files.length>0){
+        files.forEach((file,index,array)=>{
+          filetoDataURL(file,(res)=>{
+            console.log(res);
+            picList.value.push(res);
+            console.log(picList.value);
+          });
+        });
+      }
+    };
+    const beginChoose =(e)=>{
+      console.log("beginChoose",e);
+    };
+    return {
+      getUploadFile,
+      filetoDataURL,
+      beginChoose,
+      picList
+    }
+  }
+}
+</script>
+
+:::
+
 ::: title 多文件上传
 :::
 

@@ -362,37 +362,39 @@ const chooseFile = () => {
   if (_target) {
     _target.click();
   }
-  // _target?.onclick();
 };
 const clickOrgInput = () => {
   let currentTimeStamp = new Date().valueOf();
   emit("choose", currentTimeStamp);
 };
 const cutTransaction = () => {};
-//内部方法 -> end
 </script>
+
 <template>
   <div
     class="layui-upload layui-upload-wrap"
     :class="disabledPreview ? 'layui-upload-file-disabled' : ''"
   >
     <input
-      class="layui-upload-file"
-      @click="clickOrgInput"
-      :multiple="multiple"
       type="file"
+      ref="orgFileInput"
+      class="layui-upload-file"
+      :multiple="multiple"
       :accept="acceptMime"
       :name="field"
-      @change="getUploadChange"
       :field="field"
       :disabled="disabled"
-      ref="orgFileInput"
+      @click="clickOrgInput"
+      @change="getUploadChange"
     />
     <div v-if="!drag">
-      <div class="layui-upload-btn-box">
-        <lay-button type="primary" @click.stop="chooseFile" :disabled="disabled"
-          >上传图片</lay-button
-        >
+      <div class="layui-upload-btn-box" @click.stop="chooseFile">
+        <template v-if="slot.default">
+          <slot :disabled="disabled"></slot>
+        </template>
+        <template v-else>
+          <lay-button type="primary" :disabled="disabled">上传文件</lay-button>
+        </template>
       </div>
     </div>
     <div
@@ -415,6 +417,7 @@ const cutTransaction = () => {};
       </div>
     </div>
     <lay-layer
+      v-model="innerCutVisible"
       :title="computedCutLayerOption.title"
       :move="computedCutLayerOption.move"
       :resize="computedCutLayerOption.resize"
@@ -427,7 +430,6 @@ const cutTransaction = () => {};
       :anim="computedCutLayerOption.anim"
       :isOutAnim="computedCutLayerOption.isOutAnim"
       :btn="computedCutLayerOption.btn"
-      v-model="innerCutVisible"
       @close="clearAllCutEffect"
     >
       <div
