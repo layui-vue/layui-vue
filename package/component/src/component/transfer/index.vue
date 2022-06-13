@@ -177,9 +177,9 @@ const boxStyle = computed(() => {
 
 const dataStyle = computed(() => {
   return {
-    height: props.showSearch ? 'calc(100% - 97px)' : 'calc(100% - 38px)'
-  }
-})
+    height: props.showSearch ? "calc(100% - 97px)" : "calc(100% - 38px)",
+  };
+});
 </script>
 
 <template>
