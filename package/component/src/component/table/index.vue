@@ -205,13 +205,9 @@ onMounted(() => {
   const scrollWidth: number = tableBody.value?.scrollWidth || 0;
   const offsetWidth: number = tableBody.value?.offsetWidth || 0;
 
-  console.dir(tableBody.value);
-  console.log(scrollWidth < offsetWidth);
-  console.log(scrollWidth, offsetWidth);
   if (scrollWidth < offsetWidth) {
     scrollWidthCell.value = offsetWidth - scrollWidth;
   }
-  console.log(props.columns);
   tableBody.value?.addEventListener("scroll", () => {
     tableHeader.value!.scrollLeft = tableBody.value?.scrollLeft || 0;
   });
@@ -286,6 +282,7 @@ props.dataSource.map((value: any) => {
         <div class="layui-table-header" ref="tableHeader">
           <table class="layui-table" :lay-size="size">
             <colgroup>
+              <col v-if="checkbox" class="layui-table-col-special" />
               <template v-for="column in columns" :key="column">
                 <col
                   :width="column.width"
@@ -294,6 +291,7 @@ props.dataSource.map((value: any) => {
                   }"
                 />
               </template>
+              <col v-if="scrollWidthCell > 0" :width="scrollWidthCell" />
             </colgroup>
             <thead>
               <tr>
@@ -361,6 +359,7 @@ props.dataSource.map((value: any) => {
         >
           <table class="layui-table" :lay-size="size">
             <colgroup>
+              <col v-if="checkbox" class="layui-table-col-special" />
               <template v-for="column in columns" :key="column">
                 <col
                   :width="column.width"
