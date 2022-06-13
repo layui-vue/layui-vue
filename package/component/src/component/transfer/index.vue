@@ -12,7 +12,7 @@ import LayButton from "../button/index.vue";
 import LayCheckbox from "../checkbox/index.vue";
 import { computed, Ref, ref, useSlots, watch } from "vue";
 import { BooleanOrString, Recordable } from "../../types";
-import { computedAsync } from '@vueuse/core';
+import { computedAsync } from "@vueuse/core";
 
 export interface LayTransferProps {
   id?: string;
@@ -33,7 +33,7 @@ const props = withDefaults(defineProps<LayTransferProps>(), {
   showSearch: false,
   selectedKeys: () => [],
   width: "200px",
-  height: "360px"
+  height: "360px",
 });
 
 const leftDataSource: Ref<any[]> = ref([...props.dataSource]);
@@ -171,10 +171,15 @@ const searchRight = (e: any) => {
 const boxStyle = computed(() => {
   return {
     width: props.width,
-    height: props.height
+    height: props.height,
+  };
+});
+
+const dataStyle = computed(() => {
+  return {
+    height: props.showSearch ? 'calc(100% - 97px)' : 'calc(100% - 38px)'
   }
 })
-
 </script>
 
 <template>
@@ -192,9 +197,13 @@ const boxStyle = computed(() => {
           </LayCheckbox>
         </div>
         <div class="layui-transfer-search" v-if="showSearch">
-          <lay-input prefix-icon="layui-icon-search" @input="searchLeft" placeholder="关键词搜索"></lay-input>
+          <lay-input
+            prefix-icon="layui-icon-search"
+            @input="searchLeft"
+            placeholder="关键词搜索"
+          ></lay-input>
         </div>
-        <ul class="layui-transfer-data" style="height:320px">
+        <ul class="layui-transfer-data" :style="dataStyle">
           <li v-for="dataSource in leftDataSource" :key="dataSource">
             <LayCheckbox
               v-model="leftSelectedKeys"
@@ -233,9 +242,13 @@ const boxStyle = computed(() => {
           </LayCheckbox>
         </div>
         <div class="layui-transfer-search" v-if="showSearch">
-           <lay-input prefix-icon="layui-icon-search" @input="searchRight" placeholder="关键词搜索"></lay-input>
+          <lay-input
+            prefix-icon="layui-icon-search"
+            @input="searchRight"
+            placeholder="关键词搜索"
+          ></lay-input>
         </div>
-        <ul class="layui-transfer-data" style="height: 320px">
+        <ul class="layui-transfer-data" :style="dataStyle">
           <li v-for="dataSource in rightDataSource" :key="dataSource">
             <LayCheckbox
               v-model="rightSelectedKeys"

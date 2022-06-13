@@ -30,7 +30,7 @@ const props = withDefaults(defineProps<LayInputProps>(), {
   readonly: false,
   allowClear: false,
   autofocus: false,
-  modelValue: ""
+  modelValue: "",
 });
 
 const emit = defineEmits([
