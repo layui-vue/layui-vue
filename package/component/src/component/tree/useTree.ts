@@ -38,7 +38,6 @@ export const useTree: UseTree = (props: TreeProps, emit: TreeEmits) => {
     (list) => {
       const { checkedKeys, expandKeys } = tree.getKeys();
       emit("update:checkedKeys", checkedKeys);
-      // emit('update:expandKeys', expandKeys)
     },
     { deep: true }
   );

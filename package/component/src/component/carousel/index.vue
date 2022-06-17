@@ -15,8 +15,7 @@ import {
   VNode,
   Ref,
   Component,
-  watch,
-  onMounted,
+  watch
 } from "vue";
 import CarouselItem from "../carouselItem/index.vue";
 
@@ -75,7 +74,7 @@ const setItemInstanceBySlot = function (nodeList: VNode[]) {
   });
 };
 
-watch(slotsChange, function () {
+watch(slotsChange, () => {
   childrens.value = [];
   setItemInstanceBySlot((slot.default && slot.default()) as VNode[]);
 });
@@ -83,14 +82,13 @@ watch(slotsChange, function () {
 provide("active", active);
 provide("slotsChange", slotsChange);
 
-// 上一页
 const sub = function () {
   for (var i = 0; i < childrens.value.length; i++) {
-    if (childrens.value[i].props.id === active.value) {
+    if (childrens.value[i].props?.id === active.value) {
       if (i === 0) {
-        active.value = childrens.value[slots.length - 1].props.id;
+        active.value = childrens.value[slots.length - 1].props?.id;
       } else {
-        active.value = childrens.value[i - 1].props.id;
+        active.value = childrens.value[i - 1].props?.id;
       }
       break;
     }
@@ -100,11 +98,11 @@ const sub = function () {
 // 下一页
 const add = function () {
   for (var i = 0; i < childrens.value.length; i++) {
-    if (childrens.value[i].props.id === active.value) {
+    if (childrens.value[i].props?.id === active.value) {
       if (i === childrens.value.length - 1) {
-        active.value = childrens.value[0].props.id;
+        active.value = childrens.value[0].props?.id;
       } else {
-        active.value = childrens.value[i + 1].props.id;
+        active.value = childrens.value[i + 1].props?.id;
       }
       break;
     }
@@ -114,11 +112,11 @@ const add = function () {
 // 自动播放
 const autoplay = () => {
   for (var i = 0; i < childrens.value.length; i++) {
-    if (childrens.value[i].props.id === active.value) {
+    if (childrens.value[i].props?.id === active.value) {
       if (i === childrens.value.length - 1) {
-        active.value = childrens.value[0].props.id;
+        active.value = childrens.value[0].props?.id;
       } else {
-        active.value = childrens.value[i + 1].props.id;
+        active.value = childrens.value[i + 1].props?.id;
       }
       break;
     }
@@ -140,24 +138,21 @@ watch(
     :lay-anim="anim"
     :lay-indicator="indicator"
     :lay-arrow="arrow"
-    :style="{ width: width, height: height }"
+    :style="{ 'width': width, 'height': height }"
   >
-    <!-- 内容 -->
     <div carousel-item>
       <slot></slot>
     </div>
-    <!-- 轮播 -->
     <div class="layui-carousel-ind">
       <ul>
         <li
-          v-for="ss in childrens"
-          :key="ss"
-          :class="[ss.props.id === active ? 'layui-this' : '']"
-          @click.stop="change(ss.props.id)"
+          v-for="(ss, index) in childrens"
+          :key="index"
+          :class="[ss.props?.id === active ? 'layui-this' : '']"
+          @click.stop="change(ss.props?.id)"
         ></li>
       </ul>
     </div>
-    <!-- 操作 -->
     <button class="layui-icon layui-carousel-arrow" lay-type="sub" @click="sub">
       {{ anim === "updown" ? "" : "" }}
     </button>
