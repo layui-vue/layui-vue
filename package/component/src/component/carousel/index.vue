@@ -75,7 +75,7 @@ const setItemInstanceBySlot = function (nodeList: VNode[]) {
 };
 
 watch(slotsChange, () => {
-  alert("111111111111")
+  alert("111111111111");
   childrens.value = [];
   setItemInstanceBySlot((slot.default && slot.default()) as VNode[]);
 });
@@ -139,7 +139,7 @@ watch(
     :lay-anim="anim"
     :lay-indicator="indicator"
     :lay-arrow="arrow"
-    :style="{ 'width': width, 'height': height }"
+    :style="{ width: width, height: height }"
   >
     <div carousel-item>
       <slot></slot>

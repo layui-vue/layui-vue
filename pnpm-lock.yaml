@@ -33,7 +33,7 @@ importers:
       rimraf: ^3.0.2
       rollup: ^2.75.5
       typescript: ^4.7.3
-      vite: 2.9.9
+      vite: 2.9.12
       vue: ^3.2.37
     dependencies:
       '@layui/icons-vue': link:package/icons
@@ -50,7 +50,7 @@ importers:
       '@types/node': 16.11.26
       '@typescript-eslint/eslint-plugin': 5.17.0_ec46de5930d083862c6e4af5d970d096
       '@typescript-eslint/parser': 5.17.0_eslint@8.12.0+typescript@4.7.3
-      '@vitejs/plugin-vue': 2.3.3_vite@2.9.9+vue@3.2.37
+      '@vitejs/plugin-vue': 2.3.3_vite@2.9.12+vue@3.2.37
       '@vue/compiler-sfc': 3.2.37
       '@vue/server-renderer': 3.2.37_vue@3.2.37
       commitizen: 4.2.4
@@ -67,7 +67,7 @@ importers:
       rimraf: 3.0.2
       rollup: 2.75.5
       typescript: 4.7.3
-      vite: 2.9.9_less@4.1.2
+      vite: 2.9.12_less@4.1.2
 
   package/component:
     specifiers:
@@ -98,7 +98,7 @@ importers:
       '@types/markdown-it': ^12.2.3
       '@types/markdown-it-container': ^2.0.4
       '@types/prettier': ^2.4.4
-      '@vueuse/core': ^8.3.0
+      '@vueuse/core': ^8.7.3
       escape-html: ^1.0.3
       markdown-it-container: ^3.0.0
       pinia: ^2.0.14
@@ -115,7 +115,7 @@ importers:
       vue-i18n: ^9.1.10
       vue-router: ^4.0.15
     dependencies:
-      '@vueuse/core': 8.3.0_vue@3.2.37
+      '@vueuse/core': 8.7.3_vue@3.2.37
       pinia: 2.0.14_typescript@4.6.3+vue@3.2.37
       pinia-plugin-persist: 1.0.0_pinia@2.0.14+vue@3.2.37
       vue-i18n: 9.1.10_vue@3.2.37
@@ -130,7 +130,7 @@ importers:
       rimraf: 3.0.2
       rollup: 2.70.1
       typescript: 4.6.3
-      unplugin-auto-import: 0.7.1_a76dd822845d361a45aae51d061c9f01
+      unplugin-auto-import: 0.7.1_c54aa28e08c708432d31be79d67bf805
       unplugin-layui-vue-resolver: 0.0.10
       unplugin-vue-components: 0.19.5_6ec97c80cb79088f5d5236213edbde81
       vite: 2.9.8_less@4.1.2
@@ -1837,14 +1837,14 @@ packages:
       eslint-visitor-keys: 3.3.0
     dev: true
 
-  /@vitejs/plugin-vue/2.3.3_vite@2.9.9+vue@3.2.37:
+  /@vitejs/plugin-vue/2.3.3_vite@2.9.12+vue@3.2.37:
     resolution: {integrity: sha512-SmQLDyhz+6lGJhPELsBdzXGc+AcaT8stgkbiTFGpXPe8Tl1tJaBw1A6pxDqDuRsVkD8uscrkx3hA7QDOoKYtyw==}
     engines: {node: '>=12.0.0'}
     peerDependencies:
       vite: ^2.5.10
       vue: ^3.2.25
     dependencies:
-      vite: 2.9.9_less@4.1.2
+      vite: 2.9.12_less@4.1.2
       vue: 3.2.37
     dev: true
 
@@ -1945,23 +1945,6 @@ packages:
   /@vue/shared/3.2.37:
     resolution: {integrity: sha512-4rSJemR2NQIo9Klm1vabqWjD8rs/ZaJSzMxkMNeJS6lHiUjjUeYFbooN19NgFjztubEKh3WlZUeOLVdbbUWHsw==}
 
-  /@vueuse/core/8.3.0_vue@3.2.37:
-    resolution: {integrity: sha512-GDHM0vr/E3mw1fbh3yj4DJCJ/KvTXtOtT0OR2kCKuEUOo0Btk45MDGI6MdIqsHMjI0OXBJl8jH8WFv64KU2mOQ==}
-    peerDependencies:
-      '@vue/composition-api': ^1.1.0
-      vue: ^2.6.0 || ^3.2.0
-    peerDependenciesMeta:
-      '@vue/composition-api':
-        optional: true
-      vue:
-        optional: true
-    dependencies:
-      '@vueuse/metadata': 8.3.0
-      '@vueuse/shared': 8.3.0_vue@3.2.37
-      vue: 3.2.37
-      vue-demi: 0.12.5_vue@3.2.37
-    dev: false
-
   /@vueuse/core/8.7.3_vue@3.2.37:
     resolution: {integrity: sha512-jpBnyG9b4wXgk0Dz3I71lfhD0o53t1tZR+NoAQ+17zJy7MP/VDfGIkq8GcqpDwmptLCmGiGVipkPbWmDGMic8Q==}
     peerDependencies:
@@ -1979,27 +1962,8 @@ packages:
       vue-demi: 0.12.5_vue@3.2.37
     dev: false
 
-  /@vueuse/metadata/8.3.0:
-    resolution: {integrity: sha512-7R/LNPQWp1r/owa2e71l3dFlJ21p89YE3ks14ZclP2VOTvhC6AzDRcpk+ChISNetv8spsFbWZj/Z7sFjbFZfuw==}
-    dev: false
-
   /@vueuse/metadata/8.7.3:
     resolution: {integrity: sha512-spf9kgCsBEFbQb90I6SIqAWh1yP5T1JoJGj+/04+VTMIHXKzn3iecmHUalg8QEOCPNtnFQGNEw5OLg0L39eizg==}
-    dev: false
-
-  /@vueuse/shared/8.3.0_vue@3.2.37:
-    resolution: {integrity: sha512-xehtLfevPw9nsVIGFe/tWMtFvbvZjeAfXh7DT9Fptt/6/C5rLwpJtxsVguIBtPybjwobO4KCpQYS78aa9fg5Sw==}
-    peerDependencies:
-      '@vue/composition-api': ^1.1.0
-      vue: ^2.6.0 || ^3.2.0
-    peerDependenciesMeta:
-      '@vue/composition-api':
-        optional: true
-      vue:
-        optional: true
-    dependencies:
-      vue: 3.2.37
-      vue-demi: 0.12.5_vue@3.2.37
     dev: false
 
   /@vueuse/shared/8.7.3_vue@3.2.37:
@@ -4783,7 +4747,7 @@ packages:
     engines: {node: '>= 10.0.0'}
     dev: true
 
-  /unplugin-auto-import/0.7.1_a76dd822845d361a45aae51d061c9f01:
+  /unplugin-auto-import/0.7.1_c54aa28e08c708432d31be79d67bf805:
     resolution: {integrity: sha512-9865OV9eP99PNxHR2mtTDExeN01m4M9boT5U2BtIwsU1wDRsaFIYWLwcCBEjvXzXfTTC2NNMskhHGVAMfL2WgA==}
     engines: {node: '>=14'}
     peerDependencies:
@@ -4794,7 +4758,7 @@ packages:
     dependencies:
       '@antfu/utils': 0.5.2
       '@rollup/pluginutils': 4.2.0
-      '@vueuse/core': 8.3.0_vue@3.2.37
+      '@vueuse/core': 8.7.3_vue@3.2.37
       local-pkg: 0.4.1
       magic-string: 0.26.2
       resolve: 1.22.0
@@ -4917,6 +4881,31 @@ packages:
       vite: 2.9.8_less@4.1.2
     dev: true
 
+  /vite/2.9.12_less@4.1.2:
+    resolution: {integrity: sha512-suxC36dQo9Rq1qMB2qiRorNJtJAdxguu5TMvBHOc/F370KvqAe9t48vYp+/TbPKRNrMh/J55tOUmkuIqstZaew==}
+    engines: {node: '>=12.2.0'}
+    hasBin: true
+    peerDependencies:
+      less: '*'
+      sass: '*'
+      stylus: '*'
+    peerDependenciesMeta:
+      less:
+        optional: true
+      sass:
+        optional: true
+      stylus:
+        optional: true
+    dependencies:
+      esbuild: 0.14.31
+      less: 4.1.2
+      postcss: 8.4.13
+      resolve: 1.22.0
+      rollup: 2.75.5
+    optionalDependencies:
+      fsevents: 2.3.2
+    dev: true
+
   /vite/2.9.8_less@4.1.2:
     resolution: {integrity: sha512-zsBGwn5UT3YS0NLSJ7hnR54+vUKfgzMUh/Z9CxF1YKEBVIe213+63jrFLmZphgGI5zXwQCSmqIdbPuE8NJywPw==}
     engines: {node: '>=12.2.0'}
@@ -4938,31 +4927,6 @@ packages:
       postcss: 8.4.13
       resolve: 1.22.0
       rollup: 2.70.1
-    optionalDependencies:
-      fsevents: 2.3.2
-    dev: true
-
-  /vite/2.9.9_less@4.1.2:
-    resolution: {integrity: sha512-ffaam+NgHfbEmfw/Vuh6BHKKlI/XIAhxE5QSS7gFLIngxg171mg1P3a4LSRME0z2ZU1ScxoKzphkipcYwSD5Ew==}
-    engines: {node: '>=12.2.0'}
-    hasBin: true
-    peerDependencies:
-      less: '*'
-      sass: '*'
-      stylus: '*'
-    peerDependenciesMeta:
-      less:
-        optional: true
-      sass:
-        optional: true
-      stylus:
-        optional: true
-    dependencies:
-      esbuild: 0.14.31
-      less: 4.1.2
-      postcss: 8.4.13
-      resolve: 1.22.0
-      rollup: 2.75.5
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
