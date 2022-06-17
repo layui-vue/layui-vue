@@ -15,7 +15,7 @@ import {
   VNode,
   Ref,
   Component,
-  watch
+  watch,
 } from "vue";
 import CarouselItem from "../carouselItem/index.vue";
 
@@ -75,6 +75,7 @@ const setItemInstanceBySlot = function (nodeList: VNode[]) {
 };
 
 watch(slotsChange, () => {
+  alert("111111111111")
   childrens.value = [];
   setItemInstanceBySlot((slot.default && slot.default()) as VNode[]);
 });
