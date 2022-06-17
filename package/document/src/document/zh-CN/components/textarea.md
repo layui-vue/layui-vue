@@ -91,6 +91,37 @@ export default {
 
 :::
 
+::: title 显示字数
+:::
+
+::: demo
+
+<template>
+  <lay-textarea placeholder="显示字数" v-model="data4" show-count></lay-textarea>
+  <br>
+  <lay-textarea placeholder="最大输入长度" v-model="data5" show-count maxlength="10"></lay-textarea>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const data4 = ref("");
+    const data5 = ref("");
+    return {
+      data4,
+      data5
+    }
+  }
+}
+</script>
+
+:::
+
+:::
+
 ::: title Textarea 属性
 :::
 
@@ -100,6 +131,7 @@ export default {
 | ----------- | ------------- | -------------- |
 | name        | 原始属性 name | --             |
 | placeholder | 提示信息      | --             |
+| show-count | 显示字数       | `true` `false`  |
 | disabled    | 禁用          | `true` `false` |
 | v-model     | 值            | --             |
 
