@@ -16,7 +16,7 @@ export interface LayInputProps {
   value?: string;
   disabled?: boolean;
   readonly?: boolean;
-  modelValue?: string;
+  modelValue?: string | number;
   placeholder?: string;
   allowClear?: boolean;
   autofocus?: boolean;
@@ -44,7 +44,7 @@ const emit = defineEmits([
 
 const { t } = useI18n();
 const slots = useSlots();
-const hasContent = computed(() => props.modelValue?.length > 0);
+const hasContent = computed(() => (props.modelValue as string)?.length > 0);
 
 const onInput = function (event: Event) {
   const inputElement = event.target as HTMLInputElement;

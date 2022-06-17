@@ -9,7 +9,7 @@ import "./index.less";
 import layInput from "../input/index.vue";
 import { LayIcon } from "@layui/icons-vue";
 import layButton from "../button/index.vue";
-import { ref, watch, withDefaults, computed } from "vue";
+import { ref, watch, withDefaults, computed, Ref } from "vue";
 
 export interface LayInputNumberProps {
   modelValue?: number;
@@ -33,7 +33,7 @@ const props = withDefaults(defineProps<LayInputNumberProps>(), {
 });
 
 const emit = defineEmits(["update:modelValue", "change"]);
-let num = ref(props.modelValue);
+let num: Ref<number> = ref(props.modelValue);
 
 watch(num, (val) => {
   if (props.max !== Infinity && val > props.max) {
@@ -107,7 +107,7 @@ const isNumber = function (num: any) {
 <template>
   <div class="layui-input-number" :position="position" :size="size">
     <lay-button
-      size="gl"
+      size="lg"
       @mousedown="longDown(subtraction)"
       @mouseup="cancelLongDown"
       @blur="cancelLongDown"
@@ -130,7 +130,7 @@ const isNumber = function (num: any) {
       />
     </div>
     <lay-button
-      size="gl"
+      size="lg"
       @mousedown="longDown(addition)"
       @mouseup="cancelLongDown"
       @blur="cancelLongDown"
