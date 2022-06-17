@@ -61,6 +61,22 @@
         </ul>
       </div>
     </fieldset>
+    <fieldset class="layui-field layui-field-title">
+      <legend style="margin-bottom: 20px; text-align: center">开发插件</legend>
+      <div class="layui-field-box">
+        <ul class="layui-row layui-col-space6">
+          <li class="layui-col-sm24">
+            <div class="alone">
+              <a
+                href="https://marketplace.visualstudio.com/items?itemName=morning-star.layui-vue-helper"
+                target="_blank"
+                >layui - helper<cite> Visual Studio Code 辅助开发插件</cite></a
+              >
+            </div>
+          </li>
+        </ul>
+      </div>
+    </fieldset>
   </div>
   <div class="footer footer-index">
     <p>Released under the <a href="/index.html">MIT License</a>.</p>
