@@ -68,6 +68,11 @@ const zhCN = [
             component: () => import("../document/zh-CN/guide/dark.md"),
             meta: { title: "夜间" },
           },
+          {
+            path: "/zh-CN/guide/plugin",
+            component: () => import("../document/zh-CN/guide/plugin.md"),
+            meta: { title: "插件" },
+          },
         ],
       },
       {

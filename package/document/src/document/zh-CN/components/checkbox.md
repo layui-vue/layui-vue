@@ -182,6 +182,32 @@ export default {
 
 :::
 
+::: title 半选状态
+:::
+
+::: demo
+
+<template>
+    <lay-checkbox name="like" skin="primary" label="1" isIndeterminate="true" v-model="checked8">半选</lay-checkbox>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const checked8 = ref(true);
+
+    return {
+        checked8
+    }
+  }
+}
+</script>
+
+:::
+
 ::: title Checkbox 属性
 :::
 
@@ -192,8 +218,8 @@ export default {
 | name                | 原始属性 name | --                   |
 | skin                | 主题          | --                   |
 | label               | 选中值        | --                   |
-| v-model | 是否选中      | `true` `false`       |
-| change              | 切换事件      | isChecked : 当前状态 |
+| v-model             | 是否选中      | `true` `false`       |
+| isIndeterminate     | 半选状态      | `true` `false`       |
 
 :::
 

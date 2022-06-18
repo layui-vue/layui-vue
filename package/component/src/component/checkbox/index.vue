@@ -12,11 +12,13 @@ export interface LayCheckboxProps {
   name?: string;
   skin?: string;
   label: string | object;
+  isIndeterminate: boolean;
   modelValue?: boolean | Array<string | object>;
   disabled?: boolean;
 }
 
 const props = withDefaults(defineProps<LayCheckboxProps>(), {
+  isIndeterminate: false,
   modelValue: false,
   disabled: false,
 });
@@ -105,7 +107,9 @@ const handleClick = function () {
       :lay-skin="skin"
     >
       <span v-if="$slots?.default"><slot></slot></span>
-      <i :class="{ 'layui-icon layui-icon-ok': isChecked }"></i>
+      
+      <i :class="{ 'layui-icon layui-icon-subtraction' : isChecked }" v-if="props.isIndeterminate"></i>
+      <i :class="{ 'layui-icon layui-icon-ok': isChecked }" v-else></i>
     </div>
   </span>
 </template>
