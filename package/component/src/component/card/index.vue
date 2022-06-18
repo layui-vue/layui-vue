@@ -10,8 +10,6 @@ import "./index.less";
 import { String } from "../../types";
 import { CardShadow } from "./interface";
 
-const slot = useSlots();
-
 export interface LayCardProps {
   title?: String;
   shadow?: CardShadow;
@@ -20,6 +18,8 @@ export interface LayCardProps {
 const props = withDefaults(defineProps<LayCardProps>(), {
   shadow: "always",
 });
+
+const slot = useSlots();
 
 const classes = computed(() => {
   return {

@@ -6,17 +6,7 @@ export default {
 
 <script setup lang="ts">
 import "./index.less";
-import {
-  withDefaults,
-  provide,
-  useSlots,
-  ref,
-  computed,
-  VNode,
-  Ref,
-  Component,
-  watch,
-} from "vue";
+import { withDefaults, provide, useSlots, ref, computed, VNode, Ref, Component, watch } from "vue";
 import CarouselItem from "../carouselItem/index.vue";
 
 const slot = useSlots() as any;
@@ -74,15 +64,19 @@ const setItemInstanceBySlot = function (nodeList: VNode[]) {
   });
 };
 
-watch(slotsChange, () => {
-  childrens.value = [];
-  setItemInstanceBySlot((slot.default && slot.default()) as VNode[]);
-}, { immediate: true });
+watch(
+  slotsChange,
+  () => {
+    childrens.value = [];
+    setItemInstanceBySlot((slot.default && slot.default()) as VNode[]);
+  },
+  { immediate: true }
+);
 
 provide("active", active);
 provide("slotsChange", slotsChange);
 
-const sub = function () {
+const sub = () => {
   for (var i = 0; i < childrens.value.length; i++) {
     if (childrens.value[i].props?.id === active.value) {
       if (i === 0) {
@@ -95,7 +89,7 @@ const sub = function () {
   }
 };
 
-const add = function () {
+const add = () => {
   for (var i = 0; i < childrens.value.length; i++) {
     if (childrens.value[i].props?.id === active.value) {
       if (i === childrens.value.length - 1) {
@@ -154,7 +148,6 @@ watch(
     <button class="layui-icon layui-carousel-arrow" lay-type="sub" @click="sub">
       {{ anim === "updown" ? "" : "" }}
     </button>
-
     <button class="layui-icon layui-carousel-arrow" lay-type="add" @click="add">
       {{ anim === "updown" ? "" : "" }}
     </button>

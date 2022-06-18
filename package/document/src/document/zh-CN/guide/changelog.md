@@ -12,6 +12,19 @@
 <lay-timeline>
   <lay-timeline-item title="1.1.x">
     <ul> 
+      <a name="1-1-8"></a> 
+      <li> 
+        <h3>1.1.8 <span class="layui-badge-rim">2022-06-18</span></h3> 
+        <ul>
+          <li>[新增] layui-vue-helper 插件, 用于 Visual Studio Code 辅助开发</li>
+          <li>[新增] checkbox 组件 is-indeterminate 属性, 用于展示半选状态, 默认为 false</li>
+          <li>[新增] textarea 组件 show-count 属性, 用于展示输入长度与 max-length, 默认为 false</li>
+          <li>[修复] carousel 组件加载时无法获取 carousel-item 轮播项</li>
+          <li>[修复] input-number 组件 modelValue 属性类型错误</li>
+        </ul>
+      </li>
+    </ul>
+    <ul> 
       <a name="1-1-7"></a> 
       <li> 
         <h3>1.1.7 <span class="layui-badge-rim">2022-06-13</span></h3> 
