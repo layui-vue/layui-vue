@@ -108,7 +108,13 @@ const handleClick = function () {
       :lay-skin="skin"
     >
       <span v-if="$slots?.default"><slot></slot></span>
-      <lay-icon :type="props.isIndeterminate && isChecked ? 'layui-icon-subtraction' : 'layui-icon-ok'"></lay-icon>
+      <lay-icon
+        :type="
+          props.isIndeterminate && isChecked
+            ? 'layui-icon-subtraction'
+            : 'layui-icon-ok'
+        "
+      ></lay-icon>
     </div>
   </span>
 </template>

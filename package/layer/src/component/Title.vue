@@ -6,7 +6,7 @@ export default {
 
 <script lang="ts" setup>
 export interface HeaderProps {
-  title: string;
+  title: string | boolean | Function;
 }
 
 const renderContent = function (content: any) {

@@ -5,19 +5,19 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { computed, defineEmits } from "vue";
-
-const emit = defineEmits(["shadeClick"]);
+import { computed, defineEmits, StyleValue } from "vue";
 
 export interface ShadeProps {
-  index: number;
   opacity: string;
-  visible: boolean;
+  index: number | Function;
+  visible: boolean | string;
 }
 
 const props = defineProps<ShadeProps>();
 
-const styles = computed(() => {
+const emit = defineEmits(["shadeClick"]);
+
+const styles = computed<any>(() => {
   return {
     opacity: props.opacity,
     zIndex: props.index,
