@@ -5,6 +5,7 @@ export default {
 </script>
 
 <script setup lang="ts">
+import { LayIcon } from "@layui/icons-vue";
 import { computed, inject } from "vue";
 import "./index.less";
 
@@ -107,9 +108,7 @@ const handleClick = function () {
       :lay-skin="skin"
     >
       <span v-if="$slots?.default"><slot></slot></span>
-      
-      <i :class="{ 'layui-icon layui-icon-subtraction' : isChecked }" v-if="props.isIndeterminate"></i>
-      <i :class="{ 'layui-icon layui-icon-ok': isChecked }" v-else></i>
+      <lay-icon :type="props.isIndeterminate && isChecked ? 'layui-icon-subtraction' : 'layui-icon-ok'"></lay-icon>
     </div>
   </span>
 </template>
