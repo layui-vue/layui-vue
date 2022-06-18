@@ -16,7 +16,6 @@ html #layuicss-layer {
 .layui-layer,
 .layui-layer-shade {
     position: fixed;
-    _position: absolute;
     pointer-events: auto
 }
 
@@ -26,7 +25,6 @@ html #layuicss-layer {
     width: 100%;
     height: 100%;
     background-color: rgb(0, 0, 0);
-    _height: expression(document.body.offsetHeight+"px")
 }
 
 .layui-layer {
@@ -66,15 +64,12 @@ html #layuicss-layer {
 .layui-layer-dialog .layui-layer-ico,
 .layui-layer-setwin a {
     display: inline-block;
-    *display: inline;
-    *zoom: 1;
     vertical-align: top
 }
 
 .layui-layer-move {
     display: none;
     position: fixed;
-    *position: absolute;
     left: 0;
     top: 0;
     width: 100%;
@@ -675,7 +670,6 @@ html #layuicss-layer {
 .layui-layer-setwin {
     position: absolute;
     right: 15px;
-    *right: 0;
     top: 17px;
     font-size: 0;
     line-height: initial
@@ -687,7 +681,6 @@ html #layuicss-layer {
     height: 16px;
     margin-left: 10px;
     font-size: 12px;
-    _overflow: hidden
 }
 
 .layui-layer-setwin .layui-layer-min cite {
@@ -699,7 +692,6 @@ html #layuicss-layer {
     margin-top: -1px;
     background-color: #2E2D3C;
     cursor: pointer;
-    _overflow: hidden
 }
 
 .layui-layer-setwin .layui-layer-min:hover cite {
@@ -739,8 +731,6 @@ html #layuicss-layer {
     height: 30px;
     margin-left: 0;
     background-position: -149px -31px;
-    *right: -18px;
-    _display: none
 }
 
 .layui-layer-setwin .layui-layer-close2:hover {
@@ -934,7 +924,6 @@ html #layuicss-layer {
     min-width: 12px;
     padding: 8px 15px;
     font-size: 12px;
-    _float: left;
     border-radius: 2px;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, .2);
     background-color: #000;
@@ -953,7 +942,6 @@ html #layuicss-layer {
     border-width: 8px;
     border-color: transparent;
     border-style: dashed;
-    *overflow: hidden
 }
 
 .layui-layer-tips i.layui-layer-TipsB,
@@ -1116,8 +1104,6 @@ html #layuicss-layer {
     position: relative;
     width: 100%;
     display: inline-block;
-    *display: inline;
-    *zoom: 1;
     vertical-align: top
 }
 
@@ -1126,34 +1112,27 @@ html #layuicss-layer {
     position: fixed;
     top: 50%;
     width: 27px;
-    _width: 44px;
     height: 44px;
     margin-top: -22px;
     outline: 0;
-    blr: expression(this.onFocus=this.blur())
 }
 
 .layui-layer-imgprev {
     left: 30px;
     background-position: -5px -5px;
-    _background-position: -70px -5px
 }
 
 .layui-layer-imgprev:hover {
     background-position: -33px -5px;
-    _background-position: -120px -5px
 }
 
 .layui-layer-imgnext {
     right: 30px;
-    _right: 8px;
     background-position: -5px -50px;
-    _background-position: -70px -50px
 }
 
 .layui-layer-imgnext:hover {
     background-position: -33px -50px;
-    _background-position: -120px -50px
 }
 
 .layui-layer-imgbar {
@@ -1164,7 +1143,6 @@ html #layuicss-layer {
     width: 100%;
     height: 40px;
     line-height: 40px;
-    background-color: #000\9;
     filter: Alpha(opacity=60);
     background-color: rgba(2, 0, 0, .35);
     color: #fff;
@@ -1174,8 +1152,6 @@ html #layuicss-layer {
 
 .layui-layer-imgtit * {
     display: inline-block;
-    *display: inline;
-    *zoom: 1;
     vertical-align: top;
     font-size: 12px
 }
