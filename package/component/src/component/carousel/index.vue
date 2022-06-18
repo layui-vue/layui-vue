@@ -75,10 +75,9 @@ const setItemInstanceBySlot = function (nodeList: VNode[]) {
 };
 
 watch(slotsChange, () => {
-  alert("111111111111");
   childrens.value = [];
   setItemInstanceBySlot((slot.default && slot.default()) as VNode[]);
-});
+}, { immediate: true });
 
 provide("active", active);
 provide("slotsChange", slotsChange);
@@ -96,7 +95,6 @@ const sub = function () {
   }
 };
 
-// 下一页
 const add = function () {
   for (var i = 0; i < childrens.value.length; i++) {
     if (childrens.value[i].props?.id === active.value) {
@@ -110,7 +108,6 @@ const add = function () {
   }
 };
 
-// 自动播放
 const autoplay = () => {
   for (var i = 0; i < childrens.value.length; i++) {
     if (childrens.value[i].props?.id === active.value) {

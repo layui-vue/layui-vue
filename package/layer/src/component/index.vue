@@ -10,8 +10,31 @@ import Iframe from "./Iframe.vue";
 import Title from "./Title.vue";
 import CloseBtn from "./CloseBtn.vue";
 import Resize from "./Resize.vue";
-import { Ref, ref, watch, computed, useSlots, VNodeTypes, nextTick, inject } from "vue";
-import { nextId, maxArea, maxOffset, getArea, calculateArea, calculateOffset, calculateContent, calculateType, minArea, minOffset, updateMinArrays, getDrawerAnimationClass, calculateDrawerArea } from "../utils";
+import {
+  Ref,
+  ref,
+  watch,
+  computed,
+  useSlots,
+  VNodeTypes,
+  nextTick,
+  inject,
+} from "vue";
+import {
+  nextId,
+  maxArea,
+  maxOffset,
+  getArea,
+  calculateArea,
+  calculateOffset,
+  calculateContent,
+  calculateType,
+  minArea,
+  minOffset,
+  updateMinArrays,
+  getDrawerAnimationClass,
+  calculateDrawerArea,
+} from "../utils";
 import useMove from "../composable/useMove";
 import useResize from "../composable/useResize";
 import { zIndexKey } from "../tokens";
@@ -53,7 +76,7 @@ export interface LayModalProps {
 }
 
 const props = withDefaults(defineProps<LayModalProps>(), {
-  domId: '',
+  domId: "",
   title: "标题",
   setTop: false,
   offset: () => ["50%", "50%"],
@@ -89,10 +112,18 @@ const min: Ref<boolean> = ref(false);
 const id: Ref<string> = ref(nextId());
 const layero = ref<HTMLElement | null>(null);
 const type: number = calculateType(props.type);
-const area: Ref<string[]> = ref(calculateArea(props.type, props.area, props.offset));
-const offset: Ref<string[]> = ref(calculateOffset(props.offset, area.value, props.type));
-const contentHeight = ref(calculateContent(area.value[1], props.btn, type, props.isMessage));
-const index: Ref<number | Function> = ref(props.zIndex ?? inject(zIndexKey, 99999));
+const area: Ref<string[]> = ref(
+  calculateArea(props.type, props.area, props.offset)
+);
+const offset: Ref<string[]> = ref(
+  calculateOffset(props.offset, area.value, props.type)
+);
+const contentHeight = ref(
+  calculateContent(area.value[1], props.btn, type, props.isMessage)
+);
+const index: Ref<number | Function> = ref(
+  props.zIndex ?? inject(zIndexKey, 99999)
+);
 const visible: Ref<boolean> = ref(false);
 const first: Ref<boolean> = ref(true);
 
