@@ -54,7 +54,6 @@ const emit = defineEmits([
 const slot = useSlots();
 const slots = slot.default && slot.default();
 
-
 const allChecked = ref(false);
 const hasChecked = ref(false);
 const tableDataSource = ref([...props.dataSource]);

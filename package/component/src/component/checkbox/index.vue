@@ -112,7 +112,9 @@ const handleClick = function () {
         :type="
           props.isIndeterminate && isChecked
             ? 'layui-icon-subtraction'
-            : isChecked ? 'layui-icon-ok' : ''
+            : isChecked
+            ? 'layui-icon-ok'
+            : ''
         "
       ></lay-icon>
     </div>

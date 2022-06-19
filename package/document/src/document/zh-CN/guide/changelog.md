@@ -22,6 +22,7 @@
           <li>[修复] carousel 组件加载时无法获取 carousel-item 轮播项</li>
           <li>[修复] input-number 组件 modelValue 属性类型错误</li>
           <li>[修复] checkbox 组件 夜间模式 选中状态异常</li>
+          <li>[优化] table 组件 checkedKeys 属性, 加入半选状态</li>
         </ul>
       </li>
     </ul>

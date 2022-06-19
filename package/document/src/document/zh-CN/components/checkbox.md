@@ -62,7 +62,7 @@ export default {
 ::: title 复选框组
 :::
 
-::: demo
+::: demo 方便通过数组生成 checkbox 复选框。
 
 <template>
     <lay-checkbox-group v-model="checkeds" @change="groupChange">
@@ -185,7 +185,7 @@ export default {
 ::: title 半选状态
 :::
 
-::: demo
+::: demo 在实现全选效果时，你可能会用到 indeterminate 属性。
 
 <template>
     <lay-checkbox name="like" skin="primary" label="1" isIndeterminate="true" v-model="checked8">半选</lay-checkbox>
