@@ -155,8 +155,8 @@ function handleTitleClick(node: TreeData) {
           :only-icon-control="onlyIconControl"
           @node-click="recursiveNodeClick"
         >
-          <template v-if="slots.title" v-slot:title="{ data }">
-            <slot name="title" :data="data"></slot>
+          <template v-if="slots.title">
+            <slot name="title" :data="node"></slot>
           </template>
         </tree-node>
       </div>
