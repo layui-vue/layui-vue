@@ -54,7 +54,9 @@ const emit = defineEmits([
 const slot = useSlots();
 const slots = slot.default && slot.default();
 
+
 const allChecked = ref(false);
+const hasChecked = ref(false);
 const tableDataSource = ref([...props.dataSource]);
 const tableSelectedKeys = ref<Recordable[]>([...props.selectedKeys]);
 const tableColumns = ref([...props.columns]);
@@ -94,9 +96,14 @@ watch(
     } else {
       allChecked.value = false;
     }
+    if (tableSelectedKeys.value.length > 0) {
+      hasChecked.value = true;
+    } else {
+      hasChecked.value = false;
+    }
     emit("update:selectedKeys", tableSelectedKeys.value);
   },
-  { deep: true }
+  { deep: true, immediate: true }
 );
 
 const change = function (page: any) {
@@ -298,7 +305,8 @@ props.dataSource.map((value: any) => {
                 <th v-if="checkbox" class="layui-table-col-special">
                   <div class="layui-table-cell laytable-cell-checkbox">
                     <lay-checkbox
-                      v-model="allChecked"
+                      v-model="hasChecked"
+                      :is-indeterminate="!allChecked"
                       skin="primary"
                       label="all"
                       @change="changeAll"

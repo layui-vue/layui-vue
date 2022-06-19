@@ -14,13 +14,14 @@
     <ul> 
       <a name="1-1-8"></a> 
       <li> 
-        <h3>1.1.8 <span class="layui-badge-rim">2022-06-18</span></h3> 
+        <h3>1.1.8 <span class="layui-badge-rim">2022-06-19</span></h3> 
         <ul>
           <li>[新增] checkbox 组件 is-indeterminate 属性, 用于展示半选状态</li>
           <li>[新增] layui-vue-helper 插件, 用于 Visual Studio Code 辅助开发</li>
           <li>[新增] textarea 组件 show-count 属性, 用于展示输入长度与 max-length</li>
           <li>[修复] carousel 组件加载时无法获取 carousel-item 轮播项</li>
           <li>[修复] input-number 组件 modelValue 属性类型错误</li>
+          <li>[修复] checkbox 组件 夜间模式 选中状态异常</li>
         </ul>
       </li>
     </ul>

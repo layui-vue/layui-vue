@@ -207,7 +207,7 @@ function handleClick(node) {
 <script setup>
 import { ref } from 'vue';
 
-const checkedKeys = ref([])
+const checkedKeys = ref([30,31])
 const showCheckbox = ref(true)
 </script>
 
