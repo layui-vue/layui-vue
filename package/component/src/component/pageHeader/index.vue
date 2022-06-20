@@ -4,7 +4,10 @@
       <i class="layui-icon layui-icon-return"></i>
       <div class="lay-page-header__title">{{ backText }}</div>
     </div>
-    <div class="lay-page-header__content">{{ content }}</div>
+    <div class="lay-page-header__content">
+      <slot v-if="slots.default"></slot>
+      <template v-else> {{ content }}</template>
+    </div>
   </div>
 </template>
 
@@ -14,7 +17,9 @@ export default {
 };
 </script>
 <script lang="ts" setup>
+import { useSlots } from "vue";
 import "./index.less";
+
 export interface LayPageHeaderProps {
   content?: string;
   backText?: string;
@@ -25,4 +30,6 @@ const props = withDefaults(defineProps<LayPageHeaderProps>(), {
 });
 
 const emits = defineEmits(["back"]);
+
+const slots = useSlots();
 </script>
