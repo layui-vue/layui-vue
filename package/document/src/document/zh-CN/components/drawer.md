@@ -10,7 +10,7 @@
 ::: title 基础使用
 :::
 
-::: demo
+::: demo 基础抽屉，点击触发按钮抽屉从右滑出，点击遮罩区关闭。
 
 <template>
   <lay-button @click="changeVisible" type="primary">打开</lay-button>
@@ -40,7 +40,7 @@ export default {
 ::: title 抽屉嵌套
 :::
 
-::: demo
+::: demo 在抽屉内打开新的抽屉，用以解决多分支任务的复杂状况。
 
 <template>
   <lay-button @click="changeVisible1" type="primary">打开</lay-button>
@@ -80,7 +80,7 @@ export default {
 ::: title 函数调用
 :::
 
-::: demo
+::: demo 通过函数 layer.drawer(options) 打开抽屉
 
 <template>
   <lay-button @click="openDrawer" type="primary">调用</lay-button>
@@ -110,7 +110,7 @@ export default {
 ::: title 不同方向
 :::
 
-::: demo
+::: demo 自定义位置，点击触发按钮抽屉从相应的位置滑出
 
 <template>
     <lay-button @click="openTopDrawer" type="primary">上</lay-button>

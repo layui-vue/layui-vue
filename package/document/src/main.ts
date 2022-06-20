@@ -19,8 +19,8 @@ export function createApp(): {
 
   app
     .use(layui)
-    .use(router)
     .use(Store)
+    .use(router)
     .component("LayCode", LayCode)
     .component("LaySearch", LaySearch)
     .component("LayTableBox", LayTableBox)

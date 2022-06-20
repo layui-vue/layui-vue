@@ -2,7 +2,7 @@
   <div style="margin-top: 60px; width: 80%" class="layui-container">
     <blockquote
       class="layui-quote layui-text"
-      style="margin: 30px 0; letter-spacing: 2.5px"
+      style="margin: 30px 0; letter-spacing: 1px"
     >
       以写作为工具，为道途，先帮助自己一程，再以自己的领悟帮助他人一程,
       这是一种服务 - 庆山
