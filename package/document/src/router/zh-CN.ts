@@ -395,7 +395,8 @@ const zhCN = [
           },
           {
             path: "/zh-CN/components/pageheader",
-            component: () =>import("../document/zh-CN/components/pageHeader.md"),
+            component: () =>
+              import("../document/zh-CN/components/pageHeader.md"),
             meta: { title: "页头" },
           },
         ],
