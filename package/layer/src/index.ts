@@ -184,7 +184,8 @@ const layer = {
       instance.modalInstance.component?.exposed?.close();
       setTimeout(() => {
         render(null, instance.modalContainer);
-        if (document.body.contains(instance.modalContainer)) document.body.removeChild(instance.modalContainer);
+        if (document.body.contains(instance.modalContainer))
+          document.body.removeChild(instance.modalContainer);
       }, 2000);
     }
     // 销毁实例

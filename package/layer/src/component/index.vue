@@ -587,11 +587,9 @@ defineExpose({ reset, open, close });
         >
           <template v-if="btn && btn.length > 0">
             <template v-for="(b, index) in btn" :key="index">
-              <a
-                :class="[`layui-layer-btn${index}`]"
-                @click="b.callback(id)"
-                >{{ b.text }}</a
-              >
+              <a :class="[`layui-layer-btn${index}`]" @click="b.callback(id)">{{
+                b.text
+              }}</a>
             </template>
           </template>
           <template v-else>
