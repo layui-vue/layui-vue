@@ -40,7 +40,7 @@ import useResize from "../composable/useResize";
 import { zIndexKey } from "../tokens";
 
 export interface LayModalProps {
-  domId?: string;
+  id?: string;
   title?: string | boolean | Function;
   icon?: string | number;
   skin?: string;
@@ -76,7 +76,6 @@ export interface LayModalProps {
 }
 
 const props = withDefaults(defineProps<LayModalProps>(), {
-  domId: "",
   title: "标题",
   setTop: false,
   offset: () => ["50%", "50%"],
@@ -109,7 +108,7 @@ const emit = defineEmits(["close", "update:modelValue"]);
 const slots = useSlots();
 const max: Ref<boolean> = ref(false);
 const min: Ref<boolean> = ref(false);
-const id: Ref<string> = ref(nextId());
+const id: Ref<string> = ref(props.id || nextId());
 const layero = ref<HTMLElement | null>(null);
 const type: number = calculateType(props.type);
 const area: Ref<string[]> = ref(
@@ -590,7 +589,7 @@ defineExpose({ reset, open, close });
             <template v-for="(b, index) in btn" :key="index">
               <a
                 :class="[`layui-layer-btn${index}`]"
-                @click="b.callback(props.domId)"
+                @click="b.callback(id)"
                 >{{ b.text }}</a
               >
             </template>

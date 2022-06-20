@@ -38,6 +38,16 @@ const isExist = (id: any) => {
   return b;
 };
 
+const findById = (id: any) => {
+  let instance = null;
+  layerInstance.forEach((item: any, index: number) => {
+    if (item.modalContainer.id === id) {
+      instance = item;
+    }
+  });
+  return instance;
+};
+
 // 聚合 modal 配置
 const mergeOption = (option: any, defaultOption: any) => {
   if (option) defaultOption = Object.assign(defaultOption, option);
@@ -119,7 +129,7 @@ const layer = {
     const options = mergeOption(option, defaultOption);
     // 创建容器 Dom
     const modalContainer = createContainer();
-    options.id = modalContainer;
+    options.id = modalContainer.id;
     // 创建虚拟 Dom
     const modalInstance = h(
       LayLayer,
@@ -164,20 +174,21 @@ const layer = {
     // 维护实例
     addInstance({ modalContainer, modalInstance });
     // 返回实例
-    return { modalContainer, modalInstance };
+    return modalContainer.id;
   },
   // 关闭弹出层
-  close: (instance: any) => {
-    if (instance != null && isExist(instance.modalContainer.id)) {
+  close: (id: any) => {
+    if (id != null && isExist(id)) {
+      // 找到这个实例
+      const instance: any = findById(id);
       instance.modalInstance.component?.exposed?.close();
       setTimeout(() => {
         render(null, instance.modalContainer);
-        if (document.body.contains(instance.modalContainer))
-          document.body.removeChild(instance.modalContainer);
+        if (document.body.contains(instance.modalContainer)) document.body.removeChild(instance.modalContainer);
       }, 2000);
     }
     // 销毁实例
-    delInstance(instance.modalContainer.id);
+    delInstance(id);
   },
   // 关闭所有弹出层
   closeAll: () => {

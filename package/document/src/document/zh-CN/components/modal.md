@@ -272,7 +272,11 @@ export default {
   setup() {
     let id = null;
     const open = function() {
-      id = layer.open({title:"标题",content:"内容", shade: false})
+      id = layer.open({title:"标题",content:"内容", shade: false, btn: [
+        {text:"关闭", callback: function(ids) {
+          layer.close(ids);
+        }}
+      ]})
     }
     const close = function() {
       layer.close(id)
