@@ -106,6 +106,12 @@ const menus = [
         path: "/zh-CN/components/breadcrumb",
       },
       {
+        id: 17,
+        title: "页头",
+        subTitle: "pageHeader",
+        path: "/zh-CN/components/pageheader",
+      },
+      {
         id: 28,
         title: "选项卡",
         subTitle: "tab",

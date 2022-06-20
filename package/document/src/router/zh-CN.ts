@@ -393,6 +393,11 @@ const zhCN = [
               import("../document/zh-CN/components/noticeBar.md"),
             meta: { title: "通告栏" },
           },
+          {
+            path: "/zh-CN/components/pageheader",
+            component: () =>import("../document/zh-CN/components/pageHeader.md"),
+            meta: { title: "页头" },
+          },
         ],
       },
     ],
