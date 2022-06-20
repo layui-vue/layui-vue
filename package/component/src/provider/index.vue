@@ -12,9 +12,8 @@ import {
   DynamicThemeFix,
   enable as enableDarkMode,
   disable as disableDarkMode,
+  auto as followSystemColorScheme,
 } from "darkreader";
-
-const { locale, setLocaleMessage, mergeLocaleMessage } = useI18n();
 
 export interface LayConfigProviderProps {
   locale?: string;
@@ -28,6 +27,10 @@ const props = withDefaults(defineProps<LayConfigProviderProps>(), {
   locale: "zh_CN",
   theme: "light",
 });
+
+const { locale, setLocaleMessage, mergeLocaleMessage } = useI18n();
+
+const ignoreInlineStyle = [".layui-colorpicker-trigger-span","div.layui-color-picker *"];
 
 const changeLocale = (lang: string) => {
   locale.value = lang;
@@ -55,16 +58,15 @@ const changeTheme = (theme: string) => {
     invert: [],
     ignoreImageAnalysis: [],
     disableStyleSheetsProxy: false,
-    ignoreInlineStyle: [
-      ".layui-colorpicker-trigger-span",
-      "div.layui-color-picker *",
-    ],
+    ignoreInlineStyle: ignoreInlineStyle,
   };
   Object.assign(defaultPartial, props.darkPartial);
   if (theme === "dark") {
     enableDarkMode(defaultPartial, defaultFixes);
   } else if (theme === "light") {
     disableDarkMode();
+  } else if (theme === "auto") {
+    followSystemColorScheme(defaultPartial, defaultFixes);
   }
 };
 
