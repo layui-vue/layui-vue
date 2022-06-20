@@ -1,7 +1,11 @@
 <template>
   <div style="margin-top: 60px; width: 80%" class="layui-container">
-    <blockquote class="layui-quote layui-text" style="margin: 30px 0;letter-spacing: 2.5px;">
-      以写作为工具，为道途，先帮助自己一程，再以自己的领悟帮助他人一程, 这是一种服务 - 庆山
+    <blockquote
+      class="layui-quote layui-text"
+      style="margin: 30px 0; letter-spacing: 2.5px"
+    >
+      以写作为工具，为道途，先帮助自己一程，再以自己的领悟帮助他人一程,
+      这是一种服务 - 庆山
     </blockquote>
     <fieldset class="layui-field layui-field-title">
       <legend style="margin-bottom: 20px; text-align: center">独立组件</legend>

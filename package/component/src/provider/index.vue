@@ -30,7 +30,10 @@ const props = withDefaults(defineProps<LayConfigProviderProps>(), {
 
 const { locale, setLocaleMessage, mergeLocaleMessage } = useI18n();
 
-const ignoreInlineStyle = [".layui-colorpicker-trigger-span","div.layui-color-picker *"];
+const ignoreInlineStyle = [
+  ".layui-colorpicker-trigger-span",
+  "div.layui-color-picker *",
+];
 
 const changeLocale = (lang: string) => {
   locale.value = lang;
