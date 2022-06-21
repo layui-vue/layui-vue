@@ -14,6 +14,16 @@
       <ul> 
       <a name="1-1-9"></a> 
       <li> 
+        <h3>1.1.10 <span class="layui-badge-rim">2022-06-21</span></h3> 
+        <ul>
+          <li>[修复] darkreader 依赖不存在的问题</li>
+          <li>[修复] cascader 组件的样式文件污染</li>
+        </ul>
+      </li>
+    </ul>
+      <ul> 
+      <a name="1-1-9"></a> 
+      <li> 
         <h3>1.1.9 <span class="layui-badge-rim">2022-06-21</span></h3> 
         <ul>
           <li>[新增] progress 组件 circle 属性, 支持环形进度条</li>
