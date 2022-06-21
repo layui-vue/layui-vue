@@ -13,7 +13,7 @@ import {
   enable as enableDarkMode,
   disable as disableDarkMode,
   auto as followSystemColorScheme,
-} from "darkreader";
+} from "@umijs/ssr-darkreader";
 
 export interface LayConfigProviderProps {
   locale?: string;
