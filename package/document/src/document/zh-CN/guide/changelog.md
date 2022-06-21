@@ -14,12 +14,14 @@
       <ul> 
       <a name="1-1-9"></a> 
       <li> 
-        <h3>1.1.9 <span class="layui-badge-rim">2022-06-20</span></h3> 
+        <h3>1.1.9 <span class="layui-badge-rim">2022-06-21</span></h3> 
         <ul>
-          <li>[新增] cascader 级联组件, 将数据按照指定的格式传入后分层分级，通过此组件逐级查看并选择。</li>
+          <li>[新增] progress 组件 circle 属性, 支持环形进度条</li>
+          <li>[新增] cascader 组件, 将数据按照指定的格式传入后分层分级，通过此组件逐级查看并选择</li>
           <li>[新增] page-header 组件,页面的路径比较简单,则使用页头组件要,比面包屑更直观一点</li>
           <li>[修复] layer 组件 btn 属性 callback 回调参数 id 为空的问题</li>
           <li>[优化] layer 组件 callback 回调 id 参数, 配合 layer.close() 关闭当前弹层</li>
+          <li>[优化] layui-vue 在 nuxt3 中的使用, 将 darkreader 替换为 ssr-darkreader</li>
         </ul>
       </li>
     </ul>
