@@ -401,7 +401,7 @@ const zhCN = [
           },
           {
             path: "/zh-CN/components/Cascader",
-            component: () =>import("../document/zh-CN/components/cascader.md"),
+            component: () => import("../document/zh-CN/components/cascader.md"),
             meta: { title: "级联选择器" },
           },
         ],

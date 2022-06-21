@@ -59,13 +59,13 @@ export interface LayCascaderProps {
   options?: Array<any> | null;
   modelValue?: string;
   decollator?: string;
-  placeholder?:string;
+  placeholder?: string;
 }
 const props = withDefaults(defineProps<LayCascaderProps>(), {
   options: null,
   modelValue: "",
   decollator: "/",
-  placeholder:''
+  placeholder: "",
 });
 const emit = defineEmits(["update:modelValue", "change", "clear"]);
 
