@@ -85,6 +85,7 @@ import LayUpload from "./component/upload/index";
 import LayRipple from "./component/ripple/index";
 import LayNoticeBar from "./component/noticeBar/index";
 import LayPageHeader from "./component/pageHeader/index";
+import LayCascader from "./component/cascader/index";
 import LayConfigProvider from "./provider";
 import { InstallOptions } from "./types";
 
@@ -168,6 +169,7 @@ const components: Record<string, Plugin> = {
   LayRipple,
   LayNoticeBar,
   LayPageHeader,
+  LayCascader,
 };
 
 const install = (app: App, options?: InstallOptions): void => {
@@ -258,6 +260,7 @@ export {
   LayRipple,
   LayNoticeBar,
   LayPageHeader,
+  LayCascader,
   install,
 };
 

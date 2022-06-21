@@ -191,6 +191,12 @@ const menus = [
       },
       {
         id: 40,
+        title: "级联选择器",
+        subTitle: "cascader",
+        path: "/zh-CN/components/cascader",
+      },
+      {
+        id: 40,
         title: "文件上传",
         subTitle: "upload",
         path: "/zh-CN/components/upload",
