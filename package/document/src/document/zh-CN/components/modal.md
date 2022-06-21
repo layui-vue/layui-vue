@@ -253,6 +253,36 @@ export default {
 
 :::
 
+::: title 关闭标题
+:::
+
+::: demo
+
+<template>
+  <lay-button @click="changeVisible9" type="primary">关闭标题</lay-button>
+  <lay-layer title="false" move="true" shade="false" v-model="visible9">
+    内容  
+  </lay-layer>
+</template>
+
+<script>
+import { ref, watch } from "vue";
+import { useRoute, useRouter } from "vue-router";
+export default {
+  setup() {
+    const visible9 = ref(false)
+    const changeVisible9 = function() {
+        visible9.value = !visible9.value
+    }
+    return {
+        visible9
+    };
+  }
+};
+</script>
+
+:::
+
 ::: title 函数调用
 :::
 
@@ -270,20 +300,25 @@ import { layer } from "@layui/layer-vue"
 import { useRoute, useRouter } from "vue-router";
 export default {
   setup() {
+    
     let id = null;
+    
     const open = function() {
       id = layer.open({title:"标题",content:"内容", shade: false, btn: [
-        {text:"关闭", callback: function(ids) {
-          layer.close(ids);
+        {text:"关闭", callback: function(layerId) {
+          layer.close(layerId);
         }}
       ]})
     }
+
     const close = function() {
       layer.close(id)
     }
+    
     const closeAll = function() {
       layer.closeAll()
     }
+    
     return {
         open,
         close,

@@ -176,7 +176,7 @@ const selectBar = (item: any, selectIndex: number, parentIndex: number) => {
 
   if (!item.children) {
     //输入框数据更新
-    let data: never[] = [];
+    let data: any[] = [];
     function extractData(orginData: any, dataContainer: any, index: number) {
       const element = orginData[index].data;
       const selectIndex = orginData[index].selectIndex;
