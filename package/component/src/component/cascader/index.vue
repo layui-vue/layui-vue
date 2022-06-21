@@ -1,48 +1,45 @@
 <template>
-  <div
-    class="layui-cascader"
-    :class="[{ 'layui-cascader-open': open }]"
-    ref="cascaderRef"
-  >
-    <div @click="open = !open">
-      <lay-input
-        v-model="displayValue"
-        readonly
-        suffix-icon="layui-icon-down"
-        :placeholder="placeholder"
-        v-if="!slots.default"
-      ></lay-input>
-      <slot v-else></slot>
-    </div>
+  <lay-dropdown class="layui-cascader" ref="dropdownRef">
+    <lay-input
+      v-model="displayValue"
+      readonly
+      suffix-icon="layui-icon-down"
+      :placeholder="placeholder"
+      v-if="!slots.default"
+    ></lay-input>
+    <slot v-else></slot>
 
-    <dl class="layui-cascader-panel layui-anim layui-anim-upbit">
-      <template v-for="(itemCol, index) in treeData">
-        <ul
-          class="layui-cascader-menu"
-          :key="'cascader-menu' + index"
-          v-if="itemCol.data.length"
-        >
-          <li
-            class="layui-cascader-menu-item"
-            v-for="(item, i) in itemCol.data"
-            :key="index + i"
-            @click="selectBar(item, i, index)"
-            :class="[
-              {
-                'layui-cascader-selected': itemCol.selectIndex === i,
-              },
-            ]"
+    <template #content>
+      <div class="layui-cascader-panel">
+        <template v-for="(itemCol, index) in treeData">
+          <lay-scroll
+            height="180px"
+            class="layui-cascader-menu"
+            :key="'cascader-menu' + index"
+            v-if="itemCol.data.length"
           >
-            {{ item.label }}
-            <i
-              class="layui-icon layui-icon-right"
-              v-if="item.children && item.children.length"
-            ></i>
-          </li>
-        </ul>
-      </template>
-    </dl>
-  </div>
+            <div
+              class="layui-cascader-menu-item"
+              v-for="(item, i) in itemCol.data"
+              :key="index + i"
+              @click="selectBar(item, i, index)"
+              :class="[
+                {
+                  'layui-cascader-selected': itemCol.selectIndex === i,
+                },
+              ]"
+            >
+              {{ item.label }}
+              <i
+                class="layui-icon layui-icon-right"
+                v-if="item.children && item.children.length"
+              ></i>
+            </div>
+          </lay-scroll>
+        </template>
+      </div>
+    </template>
+  </lay-dropdown>
 </template>
 
 <script lang="ts">
@@ -54,7 +51,6 @@ export default {
 <script setup lang="ts">
 import "./index.less";
 import { ref, onMounted, watch, useSlots } from "vue";
-import { onClickOutside } from "@vueuse/core";
 export interface LayCascaderProps {
   options?: Array<any> | null;
   modelValue?: string;
@@ -199,15 +195,13 @@ const selectBar = (item: any, selectIndex: number, parentIndex: number) => {
       .join(props.decollator);
     emit("update:modelValue", value);
     emit("change", displayValue.value);
-    open.value = false;
+    if (dropdownRef.value)
+      // @ts-ignore
+      dropdownRef.value.hide();
   }
 };
 
-const open = ref<boolean>(false);
 const displayValue = ref<string | number | null>(null);
 const slots = useSlots();
-const cascaderRef = ref<null | HTMLElement>();
-onClickOutside(cascaderRef, () => {
-  open.value = false;
-});
+const dropdownRef = ref(null);
 </script>

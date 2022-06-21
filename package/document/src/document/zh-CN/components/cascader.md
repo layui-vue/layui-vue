@@ -13,7 +13,7 @@
 ::: demo 使用 `lay-cascader` 标签创建级联选择器
 
 <template>
-  <lay-cascader :options="options" v-model="value" placeholder="点我试一试"></lay-cascader>
+  <lay-cascader :options="options" v-model="value" placeholder="点我试一试" style="width:250px"></lay-cascader>
   <br>
   <span>输出的值：{{value}}</span>
 </template>
@@ -297,7 +297,7 @@ const options = [
 :::
 ::: demo 使用 `decollator` 属性 自定义分割符号
 <template>
-  <lay-cascader :options="options" v-model="value1" decollator="-" placeholder="我可以自定义分割符号"></lay-cascader>
+  <lay-cascader :options="options" v-model="value1" decollator="-" placeholder="我可以自定义分割符号" style="width:250px"></lay-cascader>
   <br>
   <span>输出的值：{{value1}}</span>
 </template>
