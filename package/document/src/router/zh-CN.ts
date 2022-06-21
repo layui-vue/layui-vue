@@ -399,6 +399,11 @@ const zhCN = [
               import("../document/zh-CN/components/pageHeader.md"),
             meta: { title: "页头" },
           },
+          {
+            path: "/zh-CN/components/Cascader",
+            component: () =>import("../document/zh-CN/components/cascader.md"),
+            meta: { title: "级联选择器" },
+          },
         ],
       },
     ],

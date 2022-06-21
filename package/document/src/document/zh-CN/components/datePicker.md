@@ -238,5 +238,5 @@ export default {
 
 :::
 
-::: previousNext transfer
+::: previousNext datePicker
 :::

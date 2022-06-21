@@ -1,0 +1,55 @@
+.layui-cascader {
+  position: relative;
+}
+.layui-cascader .layui-icon-down {
+  transition: all 0.3s ease-in-out;
+  transform: rotate(0);
+}
+.layui-cascader-open .layui-icon-down {
+  transform: rotate(180deg);
+}
+
+.layui-cascader .layui-cascader-panel {
+  position: absolute;
+  margin-top: 2px;
+  z-index: 899;
+  background-color: #fff;
+  box-sizing: border-box;
+  border: 1px solid #e4e7ed;
+  border-radius: 2px;
+  box-shadow: 0 2px 12px #0000001a;
+  line-height: 26px;
+  color: #000c;
+  font-size: 14px;
+  white-space: nowrap;
+  display: none;
+}
+.layui-cascader-menu {
+  border-right: 1px solid var(--global-neutral-color-3);
+  max-height: 360px;
+  overflow-y: scroll;
+}
+.layui-cascader-menu:last-child {
+  border-right: none;
+}
+.layui-cascader-menu-item {
+  min-width: 130px;
+  padding: 5px 15px;
+  box-sizing: border-box;
+  transition: all 0.1s ease-in-out;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 9px;
+}
+.layui-cascader-menu-item:hover {
+  background-color: var(--global-checked-color);
+  color: white;
+}
+.layui-cascader-selected {
+  background-color: var(--global-checked-color);
+  color: white;
+}
+.layui-cascader-open .layui-cascader-panel {
+  display: flex !important;
+}
