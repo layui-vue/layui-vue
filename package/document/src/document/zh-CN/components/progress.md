@@ -119,6 +119,31 @@ export default {
 
 :::
 
+::: title 环形进度条
+:::
+::: demo
+
+<template>
+  <lay-progress percent="70" circle :show-text="showText" style="margin-right:10px"></lay-progress>
+  <lay-progress percent="60" circle :show-text="showText" text="销售量"></lay-progress>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const showText = ref(true)
+
+    return {
+      showText
+    }
+  }
+}
+</script>
+:::
+
 ::: title Progress 属性
 :::
 
@@ -131,7 +156,8 @@ export default {
 | size     | 尺寸     | `big`                                         |
 | text     | 提示     | --                                            |
 | color    | 颜色     | --                                            |
-| showText | 展示描述 | --                                            |
+| showText | 展示描述  | --                                            |
+|circle    | 环形进度条| 默认为 `false`                                 |
 
 :::
 
