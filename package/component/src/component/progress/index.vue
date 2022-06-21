@@ -86,12 +86,11 @@ const getCircleColor = computed(() => {
         ></path>
         <path
           d="M 530 530 m 0, -500 a 500, 500 0 1, 1 0, 1000 a 500, 500 0 1, 1 0, -1000"
-          style="
-            stroke-width: 51px;
-            fill: none;
-            stroke-linecap: round;
-          "
-          :style="{ strokeDasharray: getStrokeDasharray,stroke:getCircleColor }"
+          style="stroke-width: 51px; fill: none; stroke-linecap: round"
+          :style="{
+            strokeDasharray: getStrokeDasharray,
+            stroke: getCircleColor,
+          }"
         ></path>
       </svg>
       <div class="lay-progress-circle__text" v-if="showText">
