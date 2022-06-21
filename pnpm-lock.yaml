@@ -73,10 +73,10 @@ importers:
     specifiers:
       '@layui/icons-vue': ^1.0.9
       '@layui/layer-vue': ^1.3.18
+      '@umijs/ssr-darkreader': ^4.9.45
       '@vueuse/core': ^8.7.3
       async-validator: ^4.1.1
       cropperjs: ^1.5.12
-      darkreader: ^4.9.51
       dayjs: ^1.11.0
       evtd: ^0.2.3
       uuid: ^8.3.2
@@ -84,10 +84,10 @@ importers:
     dependencies:
       '@layui/icons-vue': link:../icons
       '@layui/layer-vue': link:../layer
+      '@umijs/ssr-darkreader': 4.9.45
       '@vueuse/core': 8.7.3_vue@3.2.37
       async-validator: 4.1.1
       cropperjs: 1.5.12
-      darkreader: 4.9.51
       dayjs: 1.11.0
       evtd: 0.2.3
       uuid: 8.3.2
@@ -1823,6 +1823,10 @@ packages:
       eslint-visitor-keys: 3.3.0
     dev: true
 
+  /@umijs/ssr-darkreader/4.9.45:
+    resolution: {integrity: sha512-XlcwzSYQ/SRZpHdwIyMDS4FOGX5kP4U/2g2mykyn/iPQTK4xTiQAyBu6UnnDnn7d5P8s7Atzh1C7H0ETNOypJg==}
+    dev: false
+
   /@vitejs/plugin-vue/2.3.3_vite@2.9.12+vue@3.2.37:
     resolution: {integrity: sha512-SmQLDyhz+6lGJhPELsBdzXGc+AcaT8stgkbiTFGpXPe8Tl1tJaBw1A6pxDqDuRsVkD8uscrkx3hA7QDOoKYtyw==}
     engines: {node: '>=12.0.0'}
@@ -2435,10 +2439,6 @@ packages:
     resolution: {integrity: sha512-2iy1EkLdlBzQGvbweYRFxmFath8+K7+AKB0TlhHWkNuH+TmovaMH/Wp7V7R4u7f4SnX3OgLsU9t1NI9ioDnUpg==}
     engines: {node: '>=8'}
     dev: true
-
-  /darkreader/4.9.51:
-    resolution: {integrity: sha512-GdvcCv8w6SEr7m9m8qEm7u55i5xPsfOahjRHPH33gTbG6KvJl/WXTK93MyVJRHRGtrgyapvrnC5fm2gYNbHQFQ==}
-    dev: false
 
   /dayjs/1.11.0:
     resolution: {integrity: sha512-JLC809s6Y948/FuCZPm5IX8rRhQwOiyMb2TfVVQEixG7P8Lm/gt5S7yoQZmC8x1UehI9Pb7sksEt4xx14m+7Ug==}
