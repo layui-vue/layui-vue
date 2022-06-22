@@ -164,10 +164,67 @@ export default {
 ::: demo
 
 <template>
-  <lay-dropdown>
-    <lay-button type="primary">下拉菜单</lay-button>
+  <lay-dropdown placement="top-left">
+    <lay-button type="primary">topLeft</lay-button>
     <template #content>
       <div style="width:300px;height:200px;"></div> 
+    </template>
+  </lay-dropdown>
+  &nbsp;&nbsp;
+  <lay-dropdown placement="top">
+    <lay-button type="primary">top</lay-button>
+    <template #content>
+      <div style="width:300px;height:200px;"></div> 
+    </template>
+  </lay-dropdown>
+  &nbsp;&nbsp;
+  <lay-dropdown placement="top-right">
+    <lay-button type="primary">topRight</lay-button>
+    <template #content>
+      <div style="width:300px;height:200px;"></div> 
+    </template>
+  </lay-dropdown>
+  &nbsp;&nbsp;
+  <lay-dropdown placement="bottom-left">
+    <lay-button type="primary">bottomLeft</lay-button>
+    <template #content>
+      <div style="width:300px;height:200px;"></div> 
+    </template>
+  </lay-dropdown>
+    &nbsp;&nbsp;
+  <lay-dropdown placement="bottom">
+    <lay-button type="primary">bottom</lay-button>
+    <template #content>
+      <div style="width:300px;height:200px;"></div> 
+    </template>
+  </lay-dropdown>
+    &nbsp;&nbsp;
+  <lay-dropdown placement="bottom-right">
+    <lay-button type="primary">bottomRight</lay-button>
+    <template #content>
+      <div style="width:300px;height:200px;"></div> 
+    </template>
+  </lay-dropdown>
+  &nbsp;&nbsp;
+  <lay-dropdown placement="bottom-left" :autoFitWidth="true">
+    <lay-button type="primary">开启 autoFitWidth</lay-button>
+    <template #content>
+      <lay-dropdown-menu>
+        <lay-dropdown-menu-item>选项一</lay-dropdown-menu-item>
+        <lay-dropdown-menu-item>选项二1111111111111111111111</lay-dropdown-menu-item>
+        <lay-dropdown-menu-item>选项三</lay-dropdown-menu-item>
+      </lay-dropdown-menu>
+    </template>
+  </lay-dropdown>
+  &nbsp;&nbsp;
+  <lay-dropdown placement="bottom-left" :autoFitMinWidth="false">
+    <lay-button type="primary">关闭 autoFitMinWidth</lay-button>
+    <template #content>
+      <lay-dropdown-menu>
+        <lay-dropdown-menu-item>选项一</lay-dropdown-menu-item>
+        <lay-dropdown-menu-item>选项二111111111</lay-dropdown-menu-item>
+        <lay-dropdown-menu-item>选项三</lay-dropdown-menu-item>
+      </lay-dropdown-menu> 
     </template>
   </lay-dropdown>
 </template>
@@ -195,6 +252,11 @@ export default {
 | ------- | -------- | --------------- |
 | trigger | 触发方式 | `click` `hover` `contextMenu` |
 | disabled | 是否禁用触发 | `true` `false` |
+| placement | 下拉面板位置 |`top` `top-left` `top-right` `bottom` `bottom-left` `bottom-right`|
+| autoFitPlacement| 是否自适应下拉面板位置，默认 `true` | `true` `false` | 
+| autoFitWidth | 是否将下拉面板宽度设置为触发器宽度, 默认 `false` | `true` `false` |
+| autoFitMinWidth | 是否将下拉面板最小宽度设置为触发器宽度, 默认 `true` | `true` `false` |
+
 
 :::
 

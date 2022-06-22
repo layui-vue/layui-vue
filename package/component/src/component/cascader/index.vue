@@ -1,5 +1,5 @@
 <template>
-  <lay-dropdown class="layui-cascader" ref="dropdownRef">
+  <lay-dropdown class="layui-cascader" ref="dropdownRef"  :autoFitMinWidth="false">
     <lay-input
       v-model="displayValue"
       readonly
