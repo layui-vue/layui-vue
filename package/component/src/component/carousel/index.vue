@@ -53,6 +53,15 @@ const active = computed({
   },
 });
 
+const anim = computed({
+  get() {
+    return props.anim;
+  },
+  set() {
+    
+  },
+});
+
 const emit = defineEmits(["update:modelValue", "change"]);
 
 const change = function (id: any) {
@@ -85,6 +94,7 @@ watch(
 
 provide("active", active);
 provide("slotsChange", slotsChange);
+provide("anim", anim);
 
 const sub = () => {
   for (var i = 0; i < childrens.value.length; i++) {
@@ -128,6 +138,7 @@ const autoplay = () => {
 watch(
   () => props.autoplay,
   () => {
+    if(props.autoplay)
     setInterval(autoplay, props.interval);
   },
   { immediate: true }
