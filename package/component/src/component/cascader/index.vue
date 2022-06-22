@@ -3,6 +3,7 @@
     class="layui-cascader"
     ref="dropdownRef"
     :autoFitMinWidth="false"
+    :updateAtScroll="true"
   >
     <lay-input
       v-model="displayValue"
