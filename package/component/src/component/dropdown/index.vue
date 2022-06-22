@@ -9,33 +9,46 @@ import "./index.less";
 import {
   CSSProperties,
   nextTick,
+  onBeforeUnmount,
+  onMounted,
   provide,
   ref,
   shallowRef,
 } from "vue";
-import { onClickOutside, useResizeObserver, useScroll, useWindowSize } from "@vueuse/core";
+import {
+  onClickOutside,
+  useResizeObserver,
+  useThrottleFn,
+  useWindowSize,
+} from "@vueuse/core";
 import { DropdownTrigger, dropdownPlacement } from "./interface";
 
 export interface LayDropdownProps {
   trigger?: DropdownTrigger;
   placement?: dropdownPlacement;
   disabled?: boolean;
-  autoFitPlacement?: boolean;
+  autoFitPosition?: boolean;
   autoFitWidth?: boolean;
   autoFitMinWidth?: boolean;
+  updateAtScroll?: boolean;
+  autoFixPosition?: boolean;
+  clickOutsideToClose?: boolean;
 }
 
 const props = withDefaults(defineProps<LayDropdownProps>(), {
   trigger: "click",
   disabled: false,
   placement: "bottom-left",
-  autoFitPlacement: true,
+  autoFitPosition: true,
   autoFitMinWidth: true,
   autoFitWidth: false,
+  updateAtScroll: false,
+  autoFixPosition: true,
+  clickOutsideToClose: true,
 });
 
-const dropdownRef = shallowRef<null | HTMLElement>();
-const contentRef = shallowRef<null | HTMLElement>();
+const dropdownRef = shallowRef<HTMLElement | undefined>();
+const contentRef = shallowRef<HTMLElement | undefined>();
 const contentStyle = ref<CSSProperties>({});
 const { width: windowWidth, height: windowHeight } = useWindowSize();
 const openState = ref(false);
@@ -44,7 +57,9 @@ const contentSpace = 2;
 const emit = defineEmits(["open", "hide"]);
 
 onClickOutside(dropdownRef, () => {
-  changeVisible(false);
+  if (props.clickOutsideToClose) {
+    changeVisible(false);
+  }
 });
 
 const open = (): void => {
@@ -85,7 +100,7 @@ const updateContentStyle = () => {
   const triggerRect = dropdownRef.value.getBoundingClientRect();
   const contentRect = contentRef.value.getBoundingClientRect();
   const { style } = getContentStyle(props.placement, triggerRect, contentRect, {
-    autoFitPlacement: props.autoFitPlacement,
+    autoFitPosition: props.autoFitPosition,
   });
 
   if (props.autoFitMinWidth) {
@@ -103,15 +118,15 @@ const getContentStyle = (
   triggerRect: DOMRect,
   contentRect: DOMRect,
   {
-    autoFitPlacement = false,
+    autoFitPosition = false,
     customStyle = {},
   }: {
-    autoFitPlacement?: boolean;
+    autoFitPosition?: boolean;
     customStyle?: CSSProperties;
   } = {}
 ) => {
   let { top, left } = getContentOffset(placement, triggerRect, contentRect);
-  if (autoFitPlacement) {
+  if (autoFitPosition) {
     const { top: fitTop, left: fitLeft } = getFitPlacement(
       top,
       left,
@@ -229,13 +244,72 @@ const getContentOffset = (
   }
 };
 
-useResizeObserver(contentRef, () => {
-  if (openState.value) {
-    updateContentStyle()
-  }
-})
+const isScrollElement = (element: HTMLElement) => {
+  return (
+    element.scrollHeight > element.offsetHeight ||
+    element.scrollWidth > element.offsetWidth
+  );
+};
 
-provide("openState", openState);
+const getScrollElements = (container: HTMLElement | undefined) => {
+  const scrollElements: HTMLElement[] = [];
+  let element: HTMLElement | undefined = container;
+  while (element && element !== document.documentElement) {
+    if (isScrollElement(element)) {
+      scrollElements.push(element);
+    }
+    element = element.parentElement ?? undefined;
+  }
+  return scrollElements;
+};
+
+const handleScroll = useThrottleFn(() => {
+  if (openState.value) {
+    updateContentStyle();
+  }
+}, 300);
+
+const { stop: removeContentResizeObserver } = useResizeObserver(
+  contentRef,
+  () => {
+    if (openState.value && props.autoFixPosition) {
+      updateContentStyle();
+    }
+  }
+);
+
+const { stop: removeTriggerResizeObserver } = useResizeObserver(
+  dropdownRef,
+  () => {
+    if (openState.value && props.autoFixPosition) {
+      updateContentStyle();
+    }
+  }
+);
+
+let scrollElements: HTMLElement[] | undefined;
+
+onMounted(() => {
+  if (props.updateAtScroll) {
+    scrollElements = getScrollElements(dropdownRef.value);
+    for (const item of scrollElements) {
+      item.addEventListener("scroll", handleScroll);
+    }
+  }
+});
+
+onBeforeUnmount(() => {
+  if (scrollElements) {
+    for (const item of scrollElements) {
+      item.removeEventListener("scroll", handleScroll);
+    }
+    scrollElements = undefined;
+  }
+
+  removeContentResizeObserver();
+  removeTriggerResizeObserver();
+}),
+  provide("openState", openState);
 
 defineExpose({ open, hide, toggle });
 </script>

@@ -206,8 +206,9 @@ export default {
     </template>
   </lay-dropdown>
   &nbsp;&nbsp;
-  <lay-dropdown placement="bottom-left" :autoFitWidth="true">
-    <lay-button type="primary">开启 autoFitWidth</lay-button>
+  <br><br>
+  <lay-dropdown placement="bottom-left" autoFitWidth>
+    <lay-button type="primary">autoFitWidth</lay-button>
     <template #content>
       <lay-dropdown-menu>
         <lay-dropdown-menu-item>选项一</lay-dropdown-menu-item>
@@ -227,6 +228,30 @@ export default {
       </lay-dropdown-menu> 
     </template>
   </lay-dropdown>
+    &nbsp;&nbsp;
+  <lay-dropdown placement="bottom-left" updateAtScroll>
+    <lay-button type="primary">updateAtScroll</lay-button>
+    <template #content>
+      <lay-dropdown-menu>
+        <lay-dropdown-menu-item>选项一</lay-dropdown-menu-item>
+        <lay-dropdown-menu-item>选项二111111111</lay-dropdown-menu-item>
+        <lay-dropdown-menu-item>选项三</lay-dropdown-menu-item>
+      </lay-dropdown-menu> 
+    </template>
+  </lay-dropdown>
+      &nbsp;&nbsp;
+  <lay-dropdown placement="bottom-left" :autoFixPosition="true" :clickOutsideToClose="false">
+    <lay-button type="primary" :size="btnSize">autoFixPosition</lay-button>
+    <template #content>
+      <lay-dropdown-menu>
+        <lay-dropdown-menu-item>选项一</lay-dropdown-menu-item>
+        <lay-dropdown-menu-item>选项二111111111</lay-dropdown-menu-item>
+        <lay-dropdown-menu-item>选项三</lay-dropdown-menu-item>
+      </lay-dropdown-menu> 
+    </template>
+  </lay-dropdown>
+  &nbsp;&nbsp;
+  <lay-button  @click="toogleSize">切换左边按钮</lay-button>
 </template>
 
 <script>
@@ -235,7 +260,14 @@ import { ref } from 'vue'
 export default {
   setup() {
 
+    const btnSize = ref('')
+    const toogleSize = () => {
+      btnSize.value =  btnSize.value ? '' : 'lg'
+    }
+
     return {
+      btnSize,
+      toogleSize
     }
   }
 }
@@ -253,9 +285,12 @@ export default {
 | trigger | 触发方式 | `click` `hover` `contextMenu` |
 | disabled | 是否禁用触发 | `true` `false` |
 | placement | 下拉面板位置 |`top` `top-left` `top-right` `bottom` `bottom-left` `bottom-right`|
-| autoFitPlacement| 是否自适应下拉面板位置，默认 `true` | `true` `false` | 
+| autoFitPosition| 是否自动调整下拉面板位置，默认 `true` | `true` `false` | 
 | autoFitWidth | 是否将下拉面板宽度设置为触发器宽度, 默认 `false` | `true` `false` |
 | autoFitMinWidth | 是否将下拉面板最小宽度设置为触发器宽度, 默认 `true` | `true` `false` |
+| updateAtScroll | 是否在容器滚动时更新下拉面板的位置,默认 `false` | `true` `false` |
+| autoFixPosition | 是否在触发器或下拉面板尺寸变化时更新下拉面板位置,面板尺寸变化参见级联选择器,默认 `true` | `true` `false` |
+| clickOutsideToClose| 是否点击外部关闭下拉面板,默认 `true`| `true` `false`|
 
 
 :::
