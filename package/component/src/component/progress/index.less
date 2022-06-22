@@ -38,16 +38,36 @@
   padding: 0 10px;
   color: #fff;
 }
-.lay-progress-circle {
+.lay-progress-circle-container {
   position: relative;
   display: inline-block;
-  width: 120px;
-  height: 120px;
-  text-align: center;
 }
+
+.lay-progress-circle,
+.lay-progress-circle-bg {
+  width: 150px;
+  height: 150px;
+  position: relative;
+  border-radius: 50%;
+  -webkit-mask: radial-gradient(transparent 69px, #000 45px);
+}
+
+.lay-progress-circle-bg {
+  background-color: var(--global-neutral-color-3);
+}
+
 .lay-progress-circle__text {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.lay-progress-circle-corner {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  top: 72px;
+  left: 72px;
 }
