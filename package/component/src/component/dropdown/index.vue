@@ -6,7 +6,15 @@ export default {
 
 <script setup lang="ts">
 import "./index.less";
-import { CSSProperties, nextTick, provide, ref, shallowRef, watch, watchEffect } from "vue";
+import {
+  CSSProperties,
+  nextTick,
+  provide,
+  ref,
+  shallowRef,
+  watch,
+  watchEffect,
+} from "vue";
 import { onClickOutside, useWindowSize } from "@vueuse/core";
 import { DropdownTrigger, dropdownPlacement } from "./interface";
 
@@ -16,13 +24,13 @@ export interface LayDropdownProps {
   disabled?: boolean;
   autoFitPlacement?: boolean;
   autoFitWidth?: boolean;
-  autoFitMinWidth?: boolean; 
+  autoFitMinWidth?: boolean;
 }
 
 const props = withDefaults(defineProps<LayDropdownProps>(), {
   trigger: "click",
   disabled: false,
-  placement: 'bottom-left',
+  placement: "bottom-left",
   autoFitPlacement: true,
   autoFitMinWidth: true,
   autoFitWidth: false,
@@ -38,7 +46,7 @@ const contentSpace = 2;
 const emit = defineEmits(["open", "hide"]);
 
 onClickOutside(dropdownRef, () => {
-  changeVisible(false)
+  changeVisible(false);
 });
 
 const open = (): void => {
@@ -70,30 +78,27 @@ const changeVisible = (visible: boolean) => {
   nextTick(() => {
     updateContentStyle();
   });
-}
+};
 
 const updateContentStyle = () => {
-  if (!dropdownRef.value || !contentRef.value){
-    return
+  if (!dropdownRef.value || !contentRef.value) {
+    return;
   }
-  const triggerRect = dropdownRef.value.getBoundingClientRect()
-  const contentRect = contentRef.value.getBoundingClientRect()
-  const { style } = getContentStyle(
-    props.placement, 
-    triggerRect, 
-    contentRect, 
-    {autoFitPlacement: props.autoFitPlacement}
-  );
+  const triggerRect = dropdownRef.value.getBoundingClientRect();
+  const contentRect = contentRef.value.getBoundingClientRect();
+  const { style } = getContentStyle(props.placement, triggerRect, contentRect, {
+    autoFitPlacement: props.autoFitPlacement,
+  });
 
   if (props.autoFitMinWidth) {
     style.minWidth = `${triggerRect.width}px`;
-  } 
+  }
   if (props.autoFitWidth) {
     style.width = `${triggerRect.width}px`;
   }
-  
-  contentStyle.value = style
-}
+
+  contentStyle.value = style;
+};
 
 const getContentStyle = (
   placement: dropdownPlacement,
@@ -101,15 +106,21 @@ const getContentStyle = (
   contentRect: DOMRect,
   {
     autoFitPlacement = false,
-    customStyle = {}
+    customStyle = {},
   }: {
     autoFitPlacement?: boolean;
     customStyle?: CSSProperties;
   } = {}
 ) => {
-  let { top, left } = getContentOffset(placement, triggerRect, contentRect)
-  if(autoFitPlacement){
-    const { top: fitTop, left: fitLeft } = getFitPlacement(top, left, placement, triggerRect, contentRect)
+  let { top, left } = getContentOffset(placement, triggerRect, contentRect);
+  if (autoFitPlacement) {
+    const { top: fitTop, left: fitLeft } = getFitPlacement(
+      top,
+      left,
+      placement,
+      triggerRect,
+      contentRect
+    );
     top = fitTop;
     left = fitLeft;
   }
@@ -117,104 +128,108 @@ const getContentStyle = (
     top: `${top}px`,
     left: `${left}px`,
     ...customStyle,
-  }
+  };
   return {
-    style
-  }
-}
+    style,
+  };
+};
 
 const getFitPlacement = (
-  top: number, 
-  left: number, 
+  top: number,
+  left: number,
   placement: dropdownPlacement,
   triggerRect: DOMRect,
   contentRect: DOMRect
 ) => {
   // 溢出屏幕底部
   if (triggerRect.bottom + contentRect.height > windowHeight.value) {
-    top = -contentRect.height - contentSpace
+    top = -contentRect.height - contentSpace;
   }
   // 溢出屏幕顶部
   if (triggerRect.top - contentRect.height < 0) {
-    top = triggerRect.height + contentSpace
+    top = triggerRect.height + contentSpace;
   }
-  if(["bottom-right", "top-right"].includes(placement) ){
+  if (["bottom-right", "top-right"].includes(placement)) {
     // 溢出屏幕左边
-    const contentRectLeft = triggerRect.left - (contentRect.width - triggerRect.width)
+    const contentRectLeft =
+      triggerRect.left - (contentRect.width - triggerRect.width);
     if (contentRectLeft < 0) {
-      left = left + (0 - contentRectLeft)
+      left = left + (0 - contentRectLeft);
     }
   }
 
-  if(["bottom-left", "top-left"].includes(placement)){
+  if (["bottom-left", "top-left"].includes(placement)) {
     // 溢出屏幕右边
-    const contentRectRight = triggerRect.right + (contentRect.width - triggerRect.width)
+    const contentRectRight =
+      triggerRect.right + (contentRect.width - triggerRect.width);
     if (contentRectRight > windowWidth.value) {
-      left = left - (contentRectRight - windowWidth.value)
+      left = left - (contentRectRight - windowWidth.value);
     }
   }
 
-  if(["bottom", "top"].includes(placement)){
-    const contentRectLeft = triggerRect.left - (contentRect.width - triggerRect.width) / 2
-    const contentRectRight = triggerRect.right + (contentRect.width - triggerRect.width) / 2
+  if (["bottom", "top"].includes(placement)) {
+    const contentRectLeft =
+      triggerRect.left - (contentRect.width - triggerRect.width) / 2;
+    const contentRectRight =
+      triggerRect.right + (contentRect.width - triggerRect.width) / 2;
     // 溢出屏幕左边
     if (contentRectLeft < 0) {
-      left = left + (0 - contentRectLeft)
+      left = left + (0 - contentRectLeft);
     }
     // 溢出屏幕右边
     if (contentRectRight > windowWidth.value) {
-      left = left - (contentRectRight - windowWidth.value)
+      left = left - (contentRectRight - windowWidth.value);
     }
   }
   return {
     top,
-    left
-  }
-}
+    left,
+  };
+};
 
 const getContentOffset = (
   placement: dropdownPlacement,
-  triggerRect: DOMRect, 
+  triggerRect: DOMRect,
   contentRect: DOMRect
 ) => {
   switch (placement) {
     case "top":
       return {
         top: -contentRect.height - contentSpace,
-        left: -(contentRect.width - triggerRect.width) / 2
-      }
+        left: -(contentRect.width - triggerRect.width) / 2,
+      };
     case "top-left":
       return {
         top: -contentRect.height - contentSpace,
-        left: 0
-      }
+        left: 0,
+      };
     case "top-right":
       return {
         top: -contentRect.height - contentSpace,
-        left: -(contentRect.width - triggerRect.width)
-      }
+        left: -(contentRect.width - triggerRect.width),
+      };
     case "bottom":
       return {
         top: triggerRect.height + contentSpace,
-        left: -(contentRect.width - triggerRect.width) / 2
-      }
+        left: -(contentRect.width - triggerRect.width) / 2,
+      };
     case "bottom-left":
       return {
         top: triggerRect.height + contentSpace,
-        left: 0
-      }
+        left: 0,
+      };
     case "bottom-right":
       return {
         top: triggerRect.height + contentSpace,
-        left: -(contentRect.width - triggerRect.width)
-      }
+        left: -(contentRect.width - triggerRect.width),
+      };
     default:
       return {
         left: 0,
         top: 0,
       };
   }
-}
+};
 
 provide("openState", openState);
 
@@ -222,12 +237,24 @@ defineExpose({ open, hide, toggle });
 </script>
 
 <template>
-  <div ref="dropdownRef" class="layui-dropdown" @mouseenter="trigger == 'hover' && open()"
-    @mouseleave="trigger == 'hover' && hide()" :class="{ 'layui-dropdown-up': openState }">
-    <div @click="trigger == 'click' && toggle()" @contextmenu.prevent="trigger == 'contextMenu' && toggle()">
+  <div
+    ref="dropdownRef"
+    class="layui-dropdown"
+    @mouseenter="trigger == 'hover' && open()"
+    @mouseleave="trigger == 'hover' && hide()"
+    :class="{ 'layui-dropdown-up': openState }"
+  >
+    <div
+      @click="trigger == 'click' && toggle()"
+      @contextmenu.prevent="trigger == 'contextMenu' && toggle()"
+    >
       <slot></slot>
     </div>
-    <dl ref="contentRef" class="layui-anim layui-anim-upbit" :style="contentStyle">
+    <dl
+      ref="contentRef"
+      class="layui-anim layui-anim-upbit"
+      :style="contentStyle"
+    >
       <slot name="content"></slot>
     </dl>
   </div>
