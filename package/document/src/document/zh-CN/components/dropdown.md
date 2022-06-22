@@ -240,6 +240,17 @@ export default {
     </template>
   </lay-dropdown>
       &nbsp;&nbsp;
+  <lay-dropdown placement="bottom-left" updateAtScroll :contentOffset="8">
+    <lay-button type="primary">contentOffset: 8px</lay-button>
+    <template #content>
+      <lay-dropdown-menu>
+        <lay-dropdown-menu-item>选项一</lay-dropdown-menu-item>
+        <lay-dropdown-menu-item>选项二</lay-dropdown-menu-item>
+        <lay-dropdown-menu-item>选项三</lay-dropdown-menu-item>
+      </lay-dropdown-menu> 
+    </template>
+  </lay-dropdown>
+      &nbsp;&nbsp;
   <lay-dropdown placement="bottom-left" :autoFixPosition="true" :clickOutsideToClose="false">
     <lay-button type="primary" :size="btnSize">autoFixPosition</lay-button>
     <template #content>
@@ -291,6 +302,7 @@ export default {
 | updateAtScroll | 是否在容器滚动时更新下拉面板的位置,默认 `false` | `true` `false` |
 | autoFixPosition | 是否在触发器或下拉面板尺寸变化时更新下拉面板位置,面板尺寸变化参见级联选择器,默认 `true` | `true` `false` |
 | clickOutsideToClose| 是否点击外部关闭下拉面板,默认 `true`| `true` `false`|
+| contentOffset | 下拉面板距离触发器的偏移距离，默认 2| -| 
 
 
 :::

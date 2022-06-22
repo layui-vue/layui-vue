@@ -33,6 +33,7 @@ export interface LayDropdownProps {
   updateAtScroll?: boolean;
   autoFixPosition?: boolean;
   clickOutsideToClose?: boolean;
+  contentOffset?: number;
 }
 
 const props = withDefaults(defineProps<LayDropdownProps>(), {
@@ -45,6 +46,7 @@ const props = withDefaults(defineProps<LayDropdownProps>(), {
   updateAtScroll: false,
   autoFixPosition: true,
   clickOutsideToClose: true,
+  contentOffset: 2,
 });
 
 const dropdownRef = shallowRef<HTMLElement | undefined>();
@@ -52,7 +54,6 @@ const contentRef = shallowRef<HTMLElement | undefined>();
 const contentStyle = ref<CSSProperties>({});
 const { width: windowWidth, height: windowHeight } = useWindowSize();
 const openState = ref(false);
-const contentSpace = 2;
 
 const emit = defineEmits(["open", "hide"]);
 
@@ -156,11 +157,11 @@ const getFitPlacement = (
 ) => {
   // 溢出屏幕底部
   if (triggerRect.bottom + contentRect.height > windowHeight.value) {
-    top = -contentRect.height - contentSpace;
+    top = -contentRect.height - props.contentOffset;
   }
   // 溢出屏幕顶部
   if (triggerRect.top - contentRect.height < 0) {
-    top = triggerRect.height + contentSpace;
+    top = triggerRect.height + props.contentOffset;
   }
   if (["bottom-right", "top-right"].includes(placement)) {
     // 溢出屏幕左边
@@ -208,32 +209,32 @@ const getContentOffset = (
   switch (placement) {
     case "top":
       return {
-        top: -contentRect.height - contentSpace,
+        top: -contentRect.height - props.contentOffset,
         left: -(contentRect.width - triggerRect.width) / 2,
       };
     case "top-left":
       return {
-        top: -contentRect.height - contentSpace,
+        top: -contentRect.height - props.contentOffset,
         left: 0,
       };
     case "top-right":
       return {
-        top: -contentRect.height - contentSpace,
+        top: -contentRect.height - props.contentOffset,
         left: -(contentRect.width - triggerRect.width),
       };
     case "bottom":
       return {
-        top: triggerRect.height + contentSpace,
+        top: triggerRect.height + props.contentOffset,
         left: -(contentRect.width - triggerRect.width) / 2,
       };
     case "bottom-left":
       return {
-        top: triggerRect.height + contentSpace,
+        top: triggerRect.height + props.contentOffset,
         left: 0,
       };
     case "bottom-right":
       return {
-        top: triggerRect.height + contentSpace,
+        top: triggerRect.height + props.contentOffset,
         left: -(contentRect.width - triggerRect.width),
       };
     default:
