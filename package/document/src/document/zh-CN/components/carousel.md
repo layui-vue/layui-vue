@@ -9,16 +9,16 @@
 <template>
   <lay-carousel v-model="active1">
     <lay-carousel-item id="1">
-      <div style="color: white;text-align: center;width:100%;height:300px;line-height:300px;background-color:#79C48C;">条目一</div>
+      <div style="color: white;text-align: center;width:100%;height:300px;line-height:300px;background-color:#009688;">条目一</div>
     </lay-carousel-item>
     <lay-carousel-item id="2">
-      <div style="color: white;text-align: center;width:100%;height:300px;line-height:300px;background-color:#79C48C;">条目二</div>
+      <div style="color: white;text-align: center;width:100%;height:300px;line-height:300px;background-color:#5FB878;">条目二</div>
     </lay-carousel-item>
     <lay-carousel-item id="3">
-      <div style="color: white;text-align: center;width:100%;height:300px;line-height:300px;background-color:#79C48C;">条目三</div>
+      <div style="color: white;text-align: center;width:100%;height:300px;line-height:300px;background-color:#FFB800;">条目三</div>
     </lay-carousel-item>
     <lay-carousel-item id="4">
-      <div style="color: white;text-align: center;width:100%;height:300px;line-height:300px;background-color:#79C48C;">条目四</div>
+      <div style="color: white;text-align: center;width:100%;height:300px;line-height:300px;background-color:#FF5722;">条目四</div>
     </lay-carousel-item>
   </lay-carousel>
 </template>
@@ -40,26 +40,56 @@ export default {
 
 :::
 
-::: title 不同方向
+::: title 不同方向与不同切换动画
 :::
 
-::: demo
+::: demo 通过 `anim` 属性来控制切换的放向与动画，支持 `default`左右切换(默认)、`updown`上线切换、`fade`渐隐渐显切换
 
 <template>
-  <lay-carousel v-model="active2" anim="updown">
+  <div style="display:flex;justify-content: space-around;flex-wrap:wrap">
+  <lay-carousel v-model="activeAnmi1" anim="updown" style="display:inline-block;width:32%" :autoplay="true">
     <lay-carousel-item id="1">
-      <div style="color: white;text-align: center;width:100%;height:300px;line-height:300px;background-color:#79C48C;">条目一</div>
+      <div style="color: white;text-align: center;width:100%;height:300px;line-height:300px;background-color:#009688;">条目一</div>
     </lay-carousel-item>
     <lay-carousel-item id="2">
-      <div style="color: white;text-align: center;width:100%;height:300px;line-height:300px;background-color:#79C48C;">条目二</div>
+      <div style="color: white;text-align: center;width:100%;height:300px;line-height:300px;background-color:#5FB878;">条目二</div>
     </lay-carousel-item>
     <lay-carousel-item id="3">
-      <div style="color: white;text-align: center;width:100%;height:300px;line-height:300px;background-color:#79C48C;">条目三</div>
+      <div style="color: white;text-align: center;width:100%;height:300px;line-height:300px;background-color:#FFB800;">条目三</div>
     </lay-carousel-item>
     <lay-carousel-item id="4">
-      <div style="color: white;text-align: center;width:100%;height:300px;line-height:300px;background-color:#79C48C;">条目四</div>
+      <div style="color: white;text-align: center;width:100%;height:300px;line-height:300px;background-color:#FF5722;">条目四</div>
     </lay-carousel-item>
   </lay-carousel>
+  <lay-carousel v-model="activeAnmi2" style="width:32%">
+    <lay-carousel-item id="1">
+      <div style="color: white;text-align: center;width:100%;height:300px;line-height:300px;background-color:#009688;">条目一</div>
+    </lay-carousel-item>
+    <lay-carousel-item id="2">
+      <div style="color: white;text-align: center;width:100%;height:300px;line-height:300px;background-color:#5FB878;">条目二</div>
+    </lay-carousel-item>
+    <lay-carousel-item id="3">
+      <div style="color: white;text-align: center;width:100%;height:300px;line-height:300px;background-color:#FFB800;">条目三</div>
+    </lay-carousel-item>
+    <lay-carousel-item id="4">
+      <div style="color: white;text-align: center;width:100%;height:300px;line-height:300px;background-color:#FF5722;">条目四</div>
+    </lay-carousel-item>
+  </lay-carousel>
+  <lay-carousel v-model="activeAnmi3" anim="fade" style="width:32%;">
+    <lay-carousel-item id="1">
+      <div style="color: white;text-align: center;width:100%;height:300px;line-height:300px;background-color:#009688;">条目一</div>
+    </lay-carousel-item>
+    <lay-carousel-item id="2">
+      <div style="color: white;text-align: center;width:100%;height:300px;line-height:300px;background-color:#5FB878;">条目二</div>
+    </lay-carousel-item>
+    <lay-carousel-item id="3">
+      <div style="color: white;text-align: center;width:100%;height:300px;line-height:300px;background-color:#FFB800;">条目三</div>
+    </lay-carousel-item>
+    <lay-carousel-item id="4">
+      <div style="color: white;text-align: center;width:100%;height:300px;line-height:300px;background-color:#FF5722;">条目四</div>
+    </lay-carousel-item>
+  </lay-carousel>
+  </div>
 </template>
 
 <script>
@@ -67,11 +97,11 @@ import { ref } from 'vue'
 
 export default {
   setup() {
-
-    const active2 = ref("1")
-
+    const activeAnmi1 = ref("1")
+    const activeAnmi2 = ref("1")
+    const activeAnmi3 = ref("1")
     return {
-      active2
+      activeAnmi1,activeAnmi2,activeAnmi3,activeAnmi4
     }
   }
 }
@@ -79,7 +109,7 @@ export default {
 
 :::
 
-::: title 控制位置
+::: title 控制器位置
 :::
 
 ::: demo
@@ -87,16 +117,16 @@ export default {
 <template>
   <lay-carousel v-model="active3" indicator="outside">
     <lay-carousel-item id="1">
-      <div style="color: white;text-align: center;width:100%;height:300px;line-height:300px;background-color:#79C48C;">条目一</div>
+      <div style="color: white;text-align: center;width:100%;height:300px;line-height:300px;background-color:#009688;">条目一</div>
     </lay-carousel-item>
     <lay-carousel-item id="2">
-      <div style="color: white;text-align: center;width:100%;height:300px;line-height:300px;background-color:#79C48C;">条目二</div>
+      <div style="color: white;text-align: center;width:100%;height:300px;line-height:300px;background-color:#5FB878;">条目二</div>
     </lay-carousel-item>
     <lay-carousel-item id="3">
-      <div style="color: white;text-align: center;width:100%;height:300px;line-height:300px;background-color:#79C48C;">条目三</div>
+      <div style="color: white;text-align: center;width:100%;height:300px;line-height:300px;background-color:#FFB800;">条目三</div>
     </lay-carousel-item>
     <lay-carousel-item id="4">
-      <div style="color: white;text-align: center;width:100%;height:300px;line-height:300px;background-color:#79C48C;">条目四</div>
+      <div style="color: white;text-align: center;width:100%;height:300px;line-height:300px;background-color:#FF5722;">条目四</div>
     </lay-carousel-item>
   </lay-carousel>
 </template>
@@ -140,10 +170,10 @@ export default {
     const active4 = ref("1")
 
     const arrays = ref([
-      {id: "1", text: ""},
-      {id: "2", text: ""},
-      {id: "3", text: ""},
-      {id: "4", text: ""}
+      {id: "1", text: "1️⃣"},
+      {id: "2", text: "2️⃣"},
+      {id: "3", text: "3️⃣"},
+      {id: "4", text: "4️⃣"}
     ])
 
     return {
@@ -165,7 +195,7 @@ export default {
 | 属性      | 描述         | 类型          |类型             |可选值                    |
 | --------- | ------------ |--------------| --------------- | -------------------------|
 | v-model   | 当前激活项   | `number`      | --             | --                      |
-| anim      | 切换方向     | `string`      | `default`      | `default` `updown`       |
+| anim      | 切换方向     | `string`      | `default`      | `default` `updown` `fade`      |
 | indicator | 控制器位置   | `string`      | `inside`       |`inside` `outside` `none` |
 | arrow     | 切换按钮状态 | `string`      | `hover`        |`hover` `always` `none`   |
 | autoplay  | 自动播放     | `boolean`     | `true`         | `true` `false`           |
