@@ -9,13 +9,14 @@ import "./index.less";
 import {
   CSSProperties,
   nextTick,
+  onUpdated,
   provide,
   ref,
   shallowRef,
   watch,
   watchEffect,
 } from "vue";
-import { onClickOutside, useWindowSize } from "@vueuse/core";
+import { onClickOutside, useResizeObserver, useWindowSize } from "@vueuse/core";
 import { DropdownTrigger, dropdownPlacement } from "./interface";
 
 export interface LayDropdownProps {
