@@ -58,7 +58,7 @@ const changeTheme = (theme: string) => {
 
   const defaultFixes: DynamicThemeFix = {
     css: "",
-    invert: ['.lay-progress-circle svg'],
+    invert: [".lay-progress-circle svg"],
     ignoreImageAnalysis: [],
     disableStyleSheetsProxy: false,
     ignoreInlineStyle: ignoreInlineStyle,
