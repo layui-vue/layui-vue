@@ -293,15 +293,18 @@ export default {
 
 | 属性    | 描述     | 可选值          |
 | ------- | -------- | --------------- |
-| trigger | 触发方式 | `click` `hover` `contextMenu` |
+| visible | 下拉面板是否可见 |`true` `false`|
+| trigger | 触发方式,类型 `string` 或 trigger 数组  | `click` `hover` `focus` `contextMenu` |
 | disabled | 是否禁用触发 | `true` `false` |
 | placement | 下拉面板位置 |`top` `top-left` `top-right` `bottom` `bottom-left` `bottom-right`|
-| autoFitPosition| 是否自动调整下拉面板位置，默认 `true` | `true` `false` | 
-| autoFitWidth | 是否将下拉面板宽度设置为触发器宽度, 默认 `false` | `true` `false` |
-| autoFitMinWidth | 是否将下拉面板最小宽度设置为触发器宽度, 默认 `true` | `true` `false` |
+| autoFitPosition| 是否自动调整下拉面板位置，默认 `true` |`true` `false` | 
+| autoFitWidth | 是否将下拉面板宽度设置为触发器宽度, 默认 `false` |`true` `false` |
+| autoFitMinWidth | 是否将下拉面板最小宽度设置为触发器宽度, 默认 `true` |`true` `false` |
 | updateAtScroll | 是否在容器滚动时更新下拉面板的位置,默认 `false` | `true` `false` |
-| autoFixPosition | 是否在触发器或下拉面板尺寸变化时更新下拉面板位置,面板尺寸变化参见级联选择器,默认 `true` | `true` `false` |
-| clickOutsideToClose| 是否点击外部关闭下拉面板,默认 `true`| `true` `false`|
+| autoFixPosition | 是否在触发器或下拉面板尺寸变化时更新下拉面板位置,面板尺寸变化参见级联选择器,默认 `true` |`true` `false` |
+| clickToClose | 是否在点击触发器时关闭面板 |`true` `false`|
+| blurToClose | 是否在触发器失去焦点时关闭面板 |`true` `false`|
+| clickOutsideToClose| 是否点击外部关闭下拉面板,默认 `true`|`true` `false`|
 | contentOffset | 下拉面板距离触发器的偏移距离，默认 2| -| 
 
 

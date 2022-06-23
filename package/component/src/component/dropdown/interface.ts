@@ -1,5 +1,5 @@
-export type DropdownTrigger = "click" | "hover" | "contextMenu";
-export type dropdownPlacement =
+export type DropdownTrigger = "click" | "hover" | "focus" | "contextMenu";
+export type DropdownPlacement =
   | "top"
   | "top-left"
   | "top-right"

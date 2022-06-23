@@ -6,14 +6,16 @@ export default {
 
 <script setup lang="ts">
 import "./index.less";
+import type { CSSProperties } from "vue";
 import {
-  CSSProperties,
+  computed,
   nextTick,
   onBeforeUnmount,
   onMounted,
   provide,
   ref,
   shallowRef,
+  watch,
 } from "vue";
 import {
   onClickOutside,
@@ -21,22 +23,28 @@ import {
   useThrottleFn,
   useWindowSize,
 } from "@vueuse/core";
-import { DropdownTrigger, dropdownPlacement } from "./interface";
+import type { DropdownPlacement } from "./interface";
+
+export type DropdownTrigger = "click" | "hover" | "focus" | "contextMenu";
 
 export interface LayDropdownProps {
-  trigger?: DropdownTrigger;
-  placement?: dropdownPlacement;
+  visible?: boolean;
+  trigger?: DropdownTrigger | DropdownTrigger[];
+  placement?: DropdownPlacement;
   disabled?: boolean;
   autoFitPosition?: boolean;
   autoFitWidth?: boolean;
   autoFitMinWidth?: boolean;
   updateAtScroll?: boolean;
   autoFixPosition?: boolean;
+  clickToClose?: boolean;
+  blurToClose?: boolean;
   clickOutsideToClose?: boolean;
   contentOffset?: number;
 }
 
 const props = withDefaults(defineProps<LayDropdownProps>(), {
+  visible: false,
   trigger: "click",
   disabled: false,
   placement: "bottom-left",
@@ -45,6 +53,8 @@ const props = withDefaults(defineProps<LayDropdownProps>(), {
   autoFitWidth: false,
   updateAtScroll: false,
   autoFixPosition: true,
+  clickToClose: true,
+  blurToClose: true,
   clickOutsideToClose: true,
   contentOffset: 2,
 });
@@ -55,23 +65,30 @@ const contentStyle = ref<CSSProperties>({});
 const { width: windowWidth, height: windowHeight } = useWindowSize();
 const openState = ref(false);
 
+const triggerMethods = computed(() =>
+  ([] as Array<DropdownTrigger>).concat(props.trigger)
+);
+
 const emit = defineEmits(["open", "hide"]);
 
-onClickOutside(dropdownRef, () => {
-  if (props.clickOutsideToClose) {
-    changeVisible(false);
-  }
-});
+let delayTimer = 0;
 
-const open = (): void => {
+const cleanDelayTimer = () => {
+  if (delayTimer) {
+    window.clearTimeout(delayTimer);
+    delayTimer = 0;
+  }
+};
+
+const open = (delay?: number): void => {
   if (props.disabled == false) {
-    changeVisible(true);
+    changeVisible(true, delay);
     emit("open");
   }
 };
 
-const hide = (): void => {
-  changeVisible(false);
+const hide = (delay?: number): void => {
+  changeVisible(false, delay);
   emit("hide");
 };
 
@@ -84,14 +101,25 @@ const toggle = (): void => {
     }
 };
 
-const changeVisible = (visible: boolean) => {
-  if (visible === openState.value) {
+const changeVisible = (visible: boolean, delay?: number) => {
+  if (visible === openState.value && delayTimer === 0) {
     return;
   }
-  openState.value = visible;
-  nextTick(() => {
-    updateContentStyle();
-  });
+  const update = () => {
+    openState.value = visible;
+    nextTick(() => {
+      updateContentStyle();
+    });
+  }
+
+  if(delay){
+    cleanDelayTimer();
+    if (visible !== openState.value) {
+      delayTimer = window.setTimeout(update, delay);
+    }
+  }else{
+    update();
+  }
 };
 
 const updateContentStyle = () => {
@@ -115,7 +143,7 @@ const updateContentStyle = () => {
 };
 
 const getContentStyle = (
-  placement: dropdownPlacement,
+  placement: DropdownPlacement,
   triggerRect: DOMRect,
   contentRect: DOMRect,
   {
@@ -151,7 +179,7 @@ const getContentStyle = (
 const getFitPlacement = (
   top: number,
   left: number,
-  placement: dropdownPlacement,
+  placement: DropdownPlacement,
   triggerRect: DOMRect,
   contentRect: DOMRect
 ) => {
@@ -202,7 +230,7 @@ const getFitPlacement = (
 };
 
 const getContentOffset = (
-  placement: dropdownPlacement,
+  placement: DropdownPlacement,
   triggerRect: DOMRect,
   contentRect: DOMRect
 ) => {
@@ -268,7 +296,47 @@ const handleScroll = useThrottleFn(() => {
   if (openState.value) {
     updateContentStyle();
   }
-}, 300);
+}, 250);
+
+const handleClick = () => {
+  if (props.disabled || (openState.value && !props.clickToClose)) {
+    return;
+  }
+  if (triggerMethods.value.includes("click") || triggerMethods.value.includes("contextMenu")){
+    toggle()
+  }
+}
+
+const handleMouseEnter = () => {
+  if (props.disabled || !triggerMethods.value.includes('hover')) {
+    return;
+  }
+  open(250);
+}
+
+const handleMouseLeave = () => {
+  if (props.disabled || !triggerMethods.value.includes('hover')) {
+    return;
+  }
+  hide(150);
+}
+
+const handleFocusin = () => {
+  if (props.disabled || !triggerMethods.value.includes('focus')) {
+    return;
+  }
+  open()
+}
+
+const handleFocusout = () => {
+  if (props.disabled || !triggerMethods.value.includes('focus')) {
+    return;
+  }
+  if (!props.blurToClose) {
+    return;
+  }
+  hide();
+}
 
 const { stop: removeContentResizeObserver } = useResizeObserver(
   contentRef,
@@ -288,6 +356,12 @@ const { stop: removeTriggerResizeObserver } = useResizeObserver(
   }
 );
 
+onClickOutside(dropdownRef, () => {
+  if (props.clickOutsideToClose) {
+    hide();
+  }
+});
+
 let scrollElements: HTMLElement[] | undefined;
 
 onMounted(() => {
@@ -306,11 +380,19 @@ onBeforeUnmount(() => {
     }
     scrollElements = undefined;
   }
-
   removeContentResizeObserver();
   removeTriggerResizeObserver();
-}),
-  provide("openState", openState);
+})
+
+watch(
+  () => props.visible,
+  (newVal, oldVal) => {
+    openState.value = newVal;
+  },
+  { immediate: true }
+);
+
+provide("openState", openState);
 
 defineExpose({ open, hide, toggle });
 </script>
@@ -319,13 +401,15 @@ defineExpose({ open, hide, toggle });
   <div
     ref="dropdownRef"
     class="layui-dropdown"
-    @mouseenter="trigger == 'hover' && open()"
-    @mouseleave="trigger == 'hover' && hide()"
+    @mouseenter="handleMouseEnter()"
+    @mouseleave="handleMouseLeave()"
+    @focusin="handleFocusin()"
+    @focusout="handleFocusout()"
     :class="{ 'layui-dropdown-up': openState }"
   >
     <div
-      @click="trigger == 'click' && toggle()"
-      @contextmenu.prevent="trigger == 'contextMenu' && toggle()"
+      @click="handleClick()"
+      @contextmenu.prevent="handleClick()"
     >
       <slot></slot>
     </div>
