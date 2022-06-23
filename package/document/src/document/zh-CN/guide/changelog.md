@@ -24,9 +24,11 @@
           <li>[新增] dropdown 组件 autoFixPosition 属性, 是否在触发器或下拉面板尺寸变化时更新下拉面板位置, 默认 true。</li>
           <li>[新增] dropdown 组件 clickOutsideToClose 属性, 点击面板外部关闭下拉, 默认 true。</li>
           <li>[新增] dropdown 组件 contentOffset 属性, 下拉面板距离触发器的偏移距离，默认 2。</li>
+          <li>[新增] progress 组件 circleSize 和 circleWidth 属性, 用于控制环形进度条尺寸与线条宽度。</li>    
+          <li>[修复] progress 组件 circle 模式夜间主题不兼容的问题。</li>
           <li>[新增] carousel 组件渡动画，默认为滑动。</li>
           <li>[修复] carousel 组件 autoplay 属性为false时仍自动播放问题。</li>
-          <li>[修复] progress 组件 circle 模式夜间主题不兼容的问题。</li>
+          <li>[修复] cascader 按需加载无法正常引入使用。</li>
         </ul>
       </li>
     </ul>

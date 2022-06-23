@@ -57,9 +57,7 @@ const anim = computed({
   get() {
     return props.anim;
   },
-  set() {
-    
-  },
+  set() {},
 });
 
 const emit = defineEmits(["update:modelValue", "change"]);
@@ -138,8 +136,7 @@ const autoplay = () => {
 watch(
   () => props.autoplay,
   () => {
-    if(props.autoplay)
-    setInterval(autoplay, props.interval);
+    if (props.autoplay) setInterval(autoplay, props.interval);
   },
   { immediate: true }
 );
