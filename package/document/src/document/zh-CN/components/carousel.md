@@ -186,7 +186,6 @@ export default {
 
 :::
 
-
 ::: title Carousel 属性
 :::
 

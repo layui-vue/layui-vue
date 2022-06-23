@@ -5,7 +5,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { inject, Ref, computed, ref, VNodeChild } from "vue";
+import { inject, Ref, computed, ref } from "vue";
 
 const props = defineProps<{
   id: string;

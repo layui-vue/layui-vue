@@ -1,16 +1,26 @@
 <template>
   <div class="contributor">
-    <lay-tooltip :content="contributor.login" v-for="contributor in contributors" :key="contributor.id"
-      :is-dark="false">
+    <lay-tooltip
+      :content="contributor.login"
+      v-for="contributor in contributors"
+      :key="contributor.id"
+      :is-dark="false"
+    >
       <a :href="contributor.htmlUrl" target="_blank">
         <lay-avatar :src="contributor.avatarUrl" radius></lay-avatar>
       </a>
     </lay-tooltip>
   </div>
   <lay-tooltip content="在线编辑" :is-dark="false">
-    <a class="online-edit"
-      :href="'https://github.com/layui/layui-vue/edit/next/package/document/src/document/zh-CN/components/' + filePath + '.md'"
-      target="_blank">
+    <a
+      class="online-edit"
+      :href="
+        'https://github.com/layui/layui-vue/edit/next/package/document/src/document/zh-CN/components/' +
+        filePath +
+        '.md'
+      "
+      target="_blank"
+    >
       <lay-icon type="layui-icon-edit"></lay-icon>
     </a>
   </lay-tooltip>
