@@ -99,3 +99,9 @@ export default {
 | collapse       | 折叠动画               |
 | fade           | 淡入淡出               |
 :::
+
+::: contributor transition
+:::
+
+::: previousNext transition
+:::

@@ -319,5 +319,8 @@ import { ref } from 'vue';
 
  
 
-::: previousNext tree
+::: contributor transition
+:::
+
+::: previousNext transition
 :::

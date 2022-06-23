@@ -170,7 +170,8 @@ export default {
 
 :::
 
- 
+::: contributor color
+:::
 
 ::: previousNext color
 :::

@@ -52,7 +52,8 @@ export default {
 
 :::
 
- 
+::: contributor panel
+:::  
 
 ::: previousNext panel
 :::

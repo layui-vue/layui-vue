@@ -468,7 +468,8 @@ export default {
 
 :::
 
- 
+::: contributor step
+::: 
 
 ::: previousNext step
 :::

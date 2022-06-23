@@ -310,7 +310,8 @@ export default {
 
 :::
 
- 
+::: contributor page
+:::  
 
 ::: previousNext page
 :::

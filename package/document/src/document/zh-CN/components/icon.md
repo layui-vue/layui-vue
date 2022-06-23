@@ -272,5 +272,8 @@ npm install @layui/icons-vue
 
 :::
 
-::: previousNext iconfont
+::: contributor icon
+::: 
+
+::: previousNext icon
 :::

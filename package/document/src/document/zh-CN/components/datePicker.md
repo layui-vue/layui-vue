@@ -238,5 +238,8 @@ export default {
 
 :::
 
+::: contributor datePicker
+:::
+
 ::: previousNext datePicker
 :::

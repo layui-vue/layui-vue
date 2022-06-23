@@ -188,7 +188,8 @@ export default {
 
 :::
 
- 
+::: contributor grid
+::: 
 
 ::: previousNext grid
 :::

@@ -604,5 +604,8 @@ export default {
 
 :::
 
-::: previousNext nav
+::: contributor menu
+:::  
+
+::: previousNext menu
 :::

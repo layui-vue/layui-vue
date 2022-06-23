@@ -164,3 +164,9 @@ export default {
 </script>
 
 :::
+
+::: contributor drawer
+:::
+
+::: previousNext drawer
+:::

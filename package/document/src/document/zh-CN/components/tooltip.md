@@ -161,7 +161,8 @@ setup() {
 
 :::
 
- 
+::: contributor tooltip
+:::
 
 ::: previousNext tooltip
 :::

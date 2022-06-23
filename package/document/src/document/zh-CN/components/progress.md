@@ -164,7 +164,8 @@ export default {
 | circleWidth| 环形进度条线条宽度| 默认为 `6` 单位是px                       |
 :::
 
- 
+::: contributor progress
+::: 
 
 ::: previousNext progress
 :::

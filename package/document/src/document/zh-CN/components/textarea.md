@@ -148,7 +148,8 @@ export default {
 
 :::
 
- 
+::: contributor textarea
+:::
 
 ::: previousNext textarea
 :::

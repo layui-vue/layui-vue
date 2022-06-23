@@ -106,7 +106,8 @@ export default {
 
 :::
 
- 
+::: contributor result
+:::  
 
-::: previousNext field
+::: previousNext result
 :::

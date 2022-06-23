@@ -640,5 +640,8 @@ const options2 = [
 
 :::
 
+::: contributor cascader
+:::
+
 ::: previousNext cascader
 :::

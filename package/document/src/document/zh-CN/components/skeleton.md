@@ -113,7 +113,8 @@ export default {
 
 :::
 
- 
+::: contributor skeleton
+:::
 
 ::: previousNext skeleton
 :::

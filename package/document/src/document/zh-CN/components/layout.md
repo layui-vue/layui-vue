@@ -263,7 +263,8 @@ export default {
 
 :::
 
- 
+::: contributor layout
+:::  
 
 ::: previousNext layout
 :::

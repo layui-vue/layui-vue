@@ -359,7 +359,8 @@ export default {
 
 :::
 
- 
+::: contributor modal
+:::  
 
 ::: previousNext modal
 :::

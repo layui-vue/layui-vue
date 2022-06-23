@@ -46,7 +46,8 @@ export default {
 
 :::
 
- 
+::: contributor scroll
+:::  
 
-::: previousNext field
+::: previousNext scroll
 :::

@@ -226,3 +226,9 @@ export default {
 | toggle | 进入/退出全屏 | Function | - |
 | isFullscreen | 是否全屏 | boolean | - |
 :::
+
+::: contributor fullscreen
+::: 
+
+::: previousNext fullscreen
+:::

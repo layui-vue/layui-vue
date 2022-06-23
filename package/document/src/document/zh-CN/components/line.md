@@ -122,7 +122,8 @@ export default {
 
 :::
 
- 
+::: contributor line
+:::   
 
 ::: previousNext line
 :::

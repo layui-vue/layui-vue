@@ -118,7 +118,8 @@ export default {
 | showDots  |  是否显示断点     | `Boolean`                   |        -       |    false    |
 :::
 
- 
+::: contributor slider
+::: 
 
 ::: previousNext slider
 :::

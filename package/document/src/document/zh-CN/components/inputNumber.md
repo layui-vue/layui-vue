@@ -147,7 +147,8 @@
 
 :::
 
- 
+::: contributor inputNumber
+:::  
 
 ::: previousNext inputNumber
 :::

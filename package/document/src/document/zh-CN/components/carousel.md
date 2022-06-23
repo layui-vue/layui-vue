@@ -214,7 +214,8 @@ export default {
 
 :::
 
- 
+::: contributor carousel
+:::
 
 ::: previousNext carousel
 :::

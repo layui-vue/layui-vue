@@ -96,3 +96,9 @@ export default {
 |------ |----------|-----------|
 | default | 默认插槽 | - |
 :::
+
+::: contributor ripple
+:::  
+
+::: previousNext ripple
+:::

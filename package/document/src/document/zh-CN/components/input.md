@@ -236,5 +236,8 @@ export default {
 
 :::
 
+::: contributor input
+:::  
+
 ::: previousNext input
 :::

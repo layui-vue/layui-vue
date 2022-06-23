@@ -249,7 +249,8 @@ export default {
 
 :::
 
- 
+::: contributor collapse
+:::
 
 ::: previousNext collapse
 :::

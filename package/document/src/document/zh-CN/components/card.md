@@ -221,7 +221,8 @@ export default {
 | extra   | 扩展插槽 | --     |
 :::
 
- 
+::: contributor card
+:::
 
 ::: previousNext card
 :::

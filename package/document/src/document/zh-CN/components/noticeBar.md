@@ -124,7 +124,8 @@ export default {
 |  textlist  | 垂直滚动内容| Array|
 :::
 
- 
+::: contributor noticeBar
+:::  
 
-::: previousNext transfer
+::: previousNext noticeBar
 :::

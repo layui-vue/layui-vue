@@ -92,7 +92,8 @@ export default {
 
 :::
 
- 
+::: contributor colorPicker
+:::
 
 ::: previousNext colorPicker
 :::

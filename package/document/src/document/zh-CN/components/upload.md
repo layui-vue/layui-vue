@@ -288,7 +288,9 @@ export default {
 | cutclose | 剪裁取消 | --   |
 :::
 
+::: contributor upload
+:::
 
- 
+::: previousNext upload
+:::
 
-::: previousNext button

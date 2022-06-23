@@ -61,7 +61,8 @@ export default {
 
 :::
 
- 
+::: contributor quote
+:::  
 
-::: previousNext block
+::: previousNext quote
 :::

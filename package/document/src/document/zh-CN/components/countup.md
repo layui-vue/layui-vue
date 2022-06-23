@@ -150,6 +150,8 @@ easeInCirc    easeOutCirc    easeInOutCirc
 easeInBack    easeOutBack    easeInOutBack
 linear
 ```
+::: contributor countUp
+:::
 
 ::: previousNext countUp
 :::

@@ -34,7 +34,7 @@ const plugins = [
         .use(...createDescribe("describe", ""))
         .use(...createAnchor("anchor", ""))
         .use(...previousNext("previousNext", ""))
-        .use(...contributor("contributor",""));
+        .use(...contributor("contributor", ""));
     },
   }),
 ] as any;

@@ -96,7 +96,7 @@ const menus = [
       {
         id: 16,
         title: "菜单",
-        subTitle: "nav",
+        subTitle: "menu",
         path: "/zh-CN/components/menu",
       },
       {

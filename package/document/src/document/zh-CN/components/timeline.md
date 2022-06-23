@@ -175,7 +175,8 @@ export default {
 
 :::
 
- 
+::: contributor timeline
+:::
 
 ::: previousNext timeline
 :::

@@ -115,8 +115,8 @@
 | space | 默认每个站多大比例（`%`）, 设置一个，<br/> 其他的都需要设置，合计为（`100` ） | number | - | 按照个数平分 |
 :::
 
-
- 
+::: contributor splitPanel
+::: 
 
 ::: previousNext splitPanel
 :::
