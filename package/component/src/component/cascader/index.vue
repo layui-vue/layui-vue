@@ -55,6 +55,9 @@ export default {
 
 <script setup lang="ts">
 import "./index.less";
+import LayInput from "../input/index.vue";
+import LayScroll from "../scroll/index.vue";
+import LayDropdown from "../dropdown/index.vue";
 import { ref, onMounted, watch, useSlots } from "vue";
 export interface LayCascaderProps {
   options?: Array<any> | null;
