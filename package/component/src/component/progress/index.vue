@@ -16,9 +16,15 @@ export interface LayProgressProps {
   showText?: boolean;
   text?: string;
   circle?: boolean;
+  circleSize?: number;
+  circleWidth?: number;
 }
 
-const props = defineProps<LayProgressProps>();
+const props = withDefaults(defineProps<LayProgressProps>(), {
+  circle: false,
+  circleSize: 150,
+  circleWidth: 6,
+});
 
 const styles = computed(() => {
   return [
@@ -70,44 +76,59 @@ const getCircleRotate = computed(() => {
   }
   return (percent / 100) * 360;
 });
+
+const getStrokeDasharray = computed(() => {
+  let percent;
+  if (typeof props.percent == "string") {
+    percent = parseInt(props.percent);
+  } else {
+    percent = props.percent;
+  }
+  let radii = props.circleSize / 2 - props.circleWidth / 2;
+  let perimeter = Math.PI * 2 * radii;
+  return `${(percent / 100) * perimeter}px ${perimeter}px`;
+});
+
+const getPathD = computed(() => {
+  let circleSize = props.circleSize;
+  let circleWidth = props.circleWidth;
+  return `M ${circleSize / 2} ${circleSize / 2} m 0, -${
+    (circleSize - circleWidth) / 2
+  } a ${(circleSize - circleWidth) / 2}, ${
+    (circleSize - circleWidth) / 2
+  } 0 1, 1 0, ${circleSize - circleWidth} a ${
+    (circleSize - circleWidth) / 2
+  }, ${(circleSize - circleWidth) / 2} 0 1, 1 0, -${circleSize - circleWidth}`;
+});
 </script>
 
 <template>
-  <template v-if="circle">
-    <div class="lay-progress-circle-container">
-      <div class="lay-progress-circle-bg">
-        <div
-          class="lay-progress-circle"
-          :style="{
-            background: `conic-gradient(${getCircleColor} 0, ${getCircleColor} ${props.percent}%, transparent ${percent}%, transparent)`,
-          }"
-        ></div>
-      </div>
-      <div style="position: absolute; top: 0; left: 0">
-        <div
-          class="lay-progress-circle-corner"
-          :style="{
-            backgroundColor: getCircleColor,
-            transform: `translate(0, -72px)`,
-          }"
-        ></div>
-        <div
-          class="lay-progress-circle-corner"
-          :style="{
-            backgroundColor: getCircleColor,
-            transform: `rotate(${getCircleRotate}deg) translate(0, -72px)`,
-          }"
-        ></div>
-      </div>
-
-      <div
-        class="layui-progress-text lay-progress-circle__text"
-        v-if="showText"
-      >
-        {{ text ? text : percent + "%" }}
-      </div>
+  <div class="lay-progress-circle" v-if="circle">
+    <svg
+      :viewBox="`0 0 ${circleSize} ${circleSize}`"
+      :width="circleSize"
+      :height="circleSize"
+    >
+      <path
+        :d="getPathD"
+        style="fill: none; stroke: var(--global-neutral-color-3)"
+        :style="{ strokeWidth: `${circleWidth}px` }"
+      ></path>
+      <path
+        :d="getPathD"
+        style="fill: none; stroke-linecap: round"
+        :style="{
+          strokeDasharray: getStrokeDasharray,
+          stroke: getCircleColor,
+          strokeWidth: `${circleWidth}px`,
+        }"
+      ></path>
+    </svg>
+    <div class="layui-progress-text lay-progress-circle__text" v-if="showText">
+      {{ text ? text : percent + "%" }}
     </div>
-  </template>
+  </div>
+
   <div class="layui-progress" :class="'layui-progress-' + size" v-else>
     <div
       class="layui-progress-bar"

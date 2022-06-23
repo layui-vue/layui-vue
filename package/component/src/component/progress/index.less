@@ -43,17 +43,10 @@
   display: inline-block;
 }
 
-.lay-progress-circle,
-.lay-progress-circle-bg {
-  width: 150px;
-  height: 150px;
+.lay-progress-circle{
   position: relative;
   border-radius: 50%;
-  -webkit-mask: radial-gradient(transparent 69px, #000 45px);
-}
-
-.lay-progress-circle-bg {
-  background-color: var(--global-neutral-color-3);
+  display: inline-block;
 }
 
 .lay-progress-circle__text {
@@ -63,11 +56,3 @@
   transform: translate(-50%, -50%);
 }
 
-.lay-progress-circle-corner {
-  position: absolute;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  top: 72px;
-  left: 72px;
-}
