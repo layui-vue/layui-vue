@@ -36,7 +36,7 @@ const ignoreInlineStyle = [
 ];
 
 const fixCss = `
-.lay-progress-circle svg path {
+.lay-progress-circle svg {
     filter: invert(98%) hue-rotate(180deg) contrast(80%) !important;
 }
 `
