@@ -28,10 +28,10 @@ const getStyle = computed<any>(() => {
     for (let index = 0; index < allChild.length; index++) {
       const element = allChild[index];
       // @ts-ignore
-      if (element.__vnode.props["data-id"] === active.value) {
+      if (element.getAttribute("data-id") === active.value) {
         activeIndex = index;
       }
-      if (element.__vnode.props["data-id"] === props.id) {
+      if (element.getAttribute("data-id") === props.id) {
         currentIndex = index;
       }
     }
