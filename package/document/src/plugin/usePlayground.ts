@@ -100,16 +100,14 @@ function trimBr(str: string): string {
  * @returns 格式化代码
  */
 async function formatCode(filename: string, data: string) {
-  const { format } = await import("prettier/standalone");
-  const parserTypeScript = await import("prettier/parser-typescript").then(
-    (m) => m.default
-  );
-  const parserBabel = await import("prettier/parser-babel").then(
-    (m) => m.default
-  );
-  const parserHtml = await import("prettier/parser-html").then(
-    (m) => m.default
-  );
+  const [format, parserHtml, parserTypeScript, parserBabel, parserPostcss] =
+    await Promise.all([
+      import("prettier/standalone").then((r) => r.format),
+      import("prettier/parser-html").then((m) => m.default),
+      import("prettier/parser-typescript").then((m) => m.default),
+      import("prettier/parser-babel").then((m) => m.default),
+      import("prettier/parser-postcss").then((m) => m.default),
+    ]);
   let code = data;
   let parser: BuiltInParserName;
   if (filename.endsWith(".vue")) {
@@ -125,7 +123,7 @@ async function formatCode(filename: string, data: string) {
   }
   code = format(code, {
     parser,
-    plugins: [parserHtml, parserTypeScript, parserBabel],
+    plugins: [parserHtml, parserTypeScript, parserBabel, parserPostcss],
     semi: false, // 语句末尾打印分号
     singleQuote: true, // 使用单引号
     vueIndentScriptAndStyle: false, // 是否缩进 Vue 文件中的 script 和 style 标签
