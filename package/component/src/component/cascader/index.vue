@@ -34,7 +34,11 @@
                 },
               ]"
             >
-              {{ item.label }}
+              <slot
+                :name="item.slot"
+                v-if="item.slot && slots[item.slot]"
+              ></slot>
+              <template v-else>{{ item.label }}</template>
               <i
                 class="layui-icon layui-icon-right"
                 v-if="item.children && item.children.length"
@@ -153,6 +157,7 @@ function findData(orginData: any, level: number) {
       data.push({
         value: element.value,
         label: element.label,
+        slot: element.slot || false,
         children: element.children ?? false,
       });
     }
