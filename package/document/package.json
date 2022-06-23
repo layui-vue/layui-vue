@@ -14,7 +14,8 @@
     "vue-i18n": "^9.1.10",
     "@vueuse/core": "^8.7.3",
     "pinia": "^2.0.14",
-    "pinia-plugin-persist": "^1.0.0"
+    "pinia-plugin-persist": "^1.0.0",
+    "axios": "^0.27.2"
   },
   "devDependencies": {
     "@types/markdown-it": "^12.2.3",

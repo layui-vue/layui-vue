@@ -8,6 +8,7 @@ import LayCode from "./components/LayCode.vue";
 import LaySearch from "./components/LaySearch.vue";
 import LayTableBox from "./components/LayTableBox.vue";
 import LayAnchor from "./components/LayAnchor.vue";
+import LayContributor from "./components/LayContributor.vue";
 import "./assets/css/index.css";
 
 export function createApp(): {
@@ -24,7 +25,8 @@ export function createApp(): {
     .component("LayCode", LayCode)
     .component("LaySearch", LaySearch)
     .component("LayTableBox", LayTableBox)
-    .component("LayAnchor", LayAnchor);
+    .component("LayAnchor", LayAnchor)
+    .component("LayContributor", LayContributor);
 
   return { app, router };
 }

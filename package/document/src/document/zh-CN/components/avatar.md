@@ -136,5 +136,8 @@ export default {
 
 :::
 
+::: contributor avatar
+:::
+
 ::: previousNext avatar
 :::

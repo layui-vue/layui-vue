@@ -11,6 +11,7 @@ import createTable from "./create-table";
 import createAnchor from "./create-anchor";
 import preWrapper from "./pre-wrapper";
 import previousNext from "./previous-next";
+import contributor from "./contributor";
 
 const plugins = [
   vue({
@@ -32,7 +33,8 @@ const plugins = [
         .use(...createTitle("title", ""))
         .use(...createDescribe("describe", ""))
         .use(...createAnchor("anchor", ""))
-        .use(...previousNext("previousNext", ""));
+        .use(...previousNext("previousNext", ""))
+        .use(...contributor("contributor",""));
     },
   }),
 ] as any;
