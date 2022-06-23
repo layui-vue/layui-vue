@@ -1,16 +1,19 @@
 <template>
   <div class="contributor">
-    <lay-tooltip
-      :content="contributor.login"
-      v-for="contributor in contributors"
-      :key="contributor.id"
-      :is-dark="false"
-    >
+    <lay-tooltip :content="contributor.login" v-for="contributor in contributors" :key="contributor.id"
+      :is-dark="false">
       <a :href="contributor.htmlUrl" target="_blank">
         <lay-avatar :src="contributor.avatarUrl" radius></lay-avatar>
       </a>
     </lay-tooltip>
   </div>
+  <lay-tooltip content="在线编辑" :is-dark="false">
+    <a class="online-edit"
+      :href="'https://github.com/layui/layui-vue/edit/next/package/document/src/document/zh-CN/components/' + filePath + '.md'"
+      target="_blank">
+      <lay-icon type="layui-icon-edit"></lay-icon>
+    </a>
+  </lay-tooltip>
 </template>
 
 <script lang="ts" setup>
@@ -26,7 +29,8 @@ const props = withDefaults(defineProps<LayContributor>(), {
 });
 
 const suffix = ".md";
-const githubAPI = "https://api.github.com/repos/layui/layui-vue/commits?path=/package/document/src/document/zh-CN/components/";
+const githubAPI =
+  "https://api.github.com/repos/layui/layui-vue/commits?path=/package/document/src/document/zh-CN/components/";
 const contributors: Ref<any> = ref([]);
 
 var compare = function (x: any, y: any) {
@@ -72,9 +76,20 @@ fetchContributors();
 <style>
 .contributor {
   text-align: left;
-  margin: 30px 20px;
+  margin: 30px 15px 30px 20px;
+  display: inline-block;
 }
+
+.contributor a {
+  height: 40px;
+  display: inline-block;
+}
+
 .contributor img {
   margin: 5px;
+}
+
+.online-edit {
+  display: inline-block;
 }
 </style>
