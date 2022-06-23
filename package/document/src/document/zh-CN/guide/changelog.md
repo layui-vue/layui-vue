@@ -14,7 +14,7 @@
     <ul> 
       <a name="1-2-0"></a> 
       <li> 
-        <h3>1.2.0 <span class="layui-badge-rim">2022-06-21</span></h3> 
+        <h3>1.2.1 <span class="layui-badge-rim">2022-06-21</span></h3> 
         <ul>
           <li>[新增] dropdown 组件 placement 属性, 设置下拉面板位置。</li>
           <li>[新增] dropdown 组件 autoFitPosition 属性, 超出浏览器边界自动调整下拉面板位置, 默认为 true。</li>
