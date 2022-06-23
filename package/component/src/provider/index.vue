@@ -35,6 +35,12 @@ const ignoreInlineStyle = [
   "div.layui-color-picker *",
 ];
 
+const fixCss = `
+.lay-progress-circle svg path {
+    filter: invert(98%) hue-rotate(180deg) contrast(80%) !important;
+}
+`
+
 const changeLocale = (lang: string) => {
   locale.value = lang;
 };
@@ -57,7 +63,7 @@ const changeTheme = (theme: string) => {
   };
 
   const defaultFixes: DynamicThemeFix = {
-    css: "",
+    css: fixCss,
     invert: [".lay-progress-circle svg"],
     ignoreImageAnalysis: [],
     disableStyleSheetsProxy: false,
