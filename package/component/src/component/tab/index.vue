@@ -33,6 +33,7 @@ export interface LayTabProps {
   tabPosition?: tabPositionType;
   beforeClose?: Function;
   beforeLeave?: Function;
+  activeBarTransition?: boolean;
 }
 
 const slot = useSlots();
@@ -109,7 +110,7 @@ const getBarStyle = () => {
   return {
     [sizeName]: `${tabSize}px`,
     transform: `translate${axis}(${offset}px)`,
-    //  transition: `transform .3s`, // activeBar 动画
+    transition: props.activeBarTransition ? `transform .3s` : "",
   };
 };
 

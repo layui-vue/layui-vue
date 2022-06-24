@@ -330,6 +330,7 @@ export default {
 | allow-close  | 允许关闭                             | `true` `false`                            |
 | before-close | `Function`关闭之前的回调钩子函数     | 参数(`id`), `return false` 表示不进行关闭 |
 | before-leave | `Function`切换标签之前的回调钩子函数 | 参数(`id`), `return false` 表示不进行切换 |
+| activeBarTransition| 是否开启 activeBar 动画,仅 brief 有效,默认 `false`| `true` `false`|
 
 :::
 
