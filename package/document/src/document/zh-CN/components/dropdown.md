@@ -77,6 +77,96 @@ export default {
         </lay-dropdown-menu>
     </template>
   </lay-dropdown>
+        &nbsp;&nbsp;
+    <lay-dropdown trigger="focus">
+    <lay-input placeholder="Focus 触发"></lay-input>
+    <template #content>
+        <lay-dropdown-menu>
+          <lay-dropdown-menu-item>选项一</lay-dropdown-menu-item>
+          <lay-dropdown-menu-item>选项二</lay-dropdown-menu-item>
+          <lay-dropdown-menu-item>选项三</lay-dropdown-menu-item>
+        </lay-dropdown-menu>
+    </template>
+  </lay-dropdown>
+          &nbsp;&nbsp;
+    <lay-dropdown :trigger="['hover','focus','click']">
+    <lay-input placeholder="hover focus click"></lay-input>
+    <template #content>
+        <lay-dropdown-menu>
+          <lay-dropdown-menu-item>选项一</lay-dropdown-menu-item>
+          <lay-dropdown-menu-item>选项二</lay-dropdown-menu-item>
+          <lay-dropdown-menu-item>选项三</lay-dropdown-menu-item>
+        </lay-dropdown-menu>
+    </template>
+  </lay-dropdown>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    return {
+    }
+  }
+}
+</script>
+:::
+
+::: title 手动打开或关闭
+:::
+
+::: demo
+
+<template>
+  <lay-button @click="manualRef.open()">打开</lay-button>
+  <lay-button @click="manualRef.hide()">关闭</lay-button>
+  <br><br>
+  <lay-dropdown ref="manualRef" :clickOutsideToClose="false" :clickToClose="false">
+    <lay-button type="primary">下拉菜单</lay-button>
+    <template #content>
+        <lay-dropdown-menu>
+          <lay-dropdown-menu-item>选项一</lay-dropdown-menu-item>
+          <lay-dropdown-menu-item>选项二</lay-dropdown-menu-item>
+          <lay-dropdown-menu-item>选项三</lay-dropdown-menu-item>
+        </lay-dropdown-menu>
+    </template>
+  </lay-dropdown>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+    const manualRef = ref()
+
+    return {
+      manualRef,
+    }
+  }
+}
+</script>
+
+:::
+
+::: title 默认打开
+:::
+
+::: demo
+
+<template>
+  <lay-dropdown :visible="true" updateAtScroll>
+    <lay-button type="primary">下拉菜单</lay-button>
+    <template #content>
+        <lay-dropdown-menu>
+          <lay-dropdown-menu-item>选项一</lay-dropdown-menu-item>
+          <lay-dropdown-menu-item>选项二</lay-dropdown-menu-item>
+          <lay-dropdown-menu-item>选项三</lay-dropdown-menu-item>
+        </lay-dropdown-menu>
+    </template>
+  </lay-dropdown>
 </template>
 
 <script>
@@ -91,8 +181,9 @@ export default {
 }
 </script>
 
-
 :::
+
+
 ::: title 禁用弹出
 :::
 
@@ -158,7 +249,7 @@ export default {
 
 :::
 
-::: title 位置优化
+::: title 弹出位置
 :::
 
 ::: demo
@@ -205,9 +296,36 @@ export default {
       <div style="width:300px;height:200px;"></div> 
     </template>
   </lay-dropdown>
-  &nbsp;&nbsp;
-  <br><br>
-  <lay-dropdown placement="bottom-left" autoFitWidth>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const btnSize = ref('')
+    const toogleSize = () => {
+      btnSize.value =  btnSize.value ? '' : 'lg'
+    }
+
+    return {
+      btnSize,
+      toogleSize
+    }
+  }
+}
+</script>
+
+:::
+
+::: title 其它属性
+:::
+
+::: demo
+
+<template>
+   <lay-dropdown placement="bottom-left" autoFitWidth>
     <lay-button type="primary">autoFitWidth</lay-button>
     <template #content>
       <lay-dropdown-menu>
@@ -251,22 +369,20 @@ export default {
     </template>
   </lay-dropdown>
       &nbsp;&nbsp;
-  <lay-dropdown placement="bottom-left" :autoFixPosition="true" :clickOutsideToClose="false">
-    <lay-button type="primary" :size="btnSize">autoFixPosition</lay-button>
+      <br><br>
+  <lay-button  @click="triggerHeight += 100">改变触发器尺寸</lay-button>
+  <lay-button  @click="contentHeight += 100">改变面板尺寸</lay-button>
+  <br><br>
+  <lay-dropdown placement="bottom-left" trigger="focus" :autoFitPosition="true" :autoFixPosition="true" :blurToClose="false" :clickOutsideToClose="false">
+    <lay-input placeholder="autoFixPosition" :style="{height: triggerHeight + 'px'}"></lay-input>
     <template #content>
-      <lay-dropdown-menu>
-        <lay-dropdown-menu-item>选项一</lay-dropdown-menu-item>
-        <lay-dropdown-menu-item>选项二111111111</lay-dropdown-menu-item>
-        <lay-dropdown-menu-item>选项三</lay-dropdown-menu-item>
-      </lay-dropdown-menu> 
+     <div :style="{width:'350px', height: contentHeight + 'px'}"></div>
     </template>
   </lay-dropdown>
-  &nbsp;&nbsp;
-  <lay-button  @click="toogleSize">切换左边按钮</lay-button>
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 
 export default {
   setup() {
@@ -276,9 +392,14 @@ export default {
       btnSize.value =  btnSize.value ? '' : 'lg'
     }
 
+    const triggerHeight = ref(100)
+    const contentHeight = ref(200)
+
     return {
       btnSize,
-      toogleSize
+      toogleSize,
+      triggerWidth,
+      triggerStyle,
     }
   }
 }
@@ -301,9 +422,9 @@ export default {
 | autoFitWidth | 是否将下拉面板宽度设置为触发器宽度, 默认 `false` |`true` `false` |
 | autoFitMinWidth | 是否将下拉面板最小宽度设置为触发器宽度, 默认 `true` |`true` `false` |
 | updateAtScroll | 是否在容器滚动时更新下拉面板的位置,默认 `false` | `true` `false` |
-| autoFixPosition | 是否在触发器或下拉面板尺寸变化时更新下拉面板位置,面板尺寸变化参见级联选择器,默认 `true` |`true` `false` |
-| clickToClose | 是否在点击触发器时关闭面板 |`true` `false`|
-| blurToClose | 是否在触发器失去焦点时关闭面板 |`true` `false`|
+| autoFixPosition | 是否在触发器或下拉面板尺寸变化时更新下拉面板位置,<br>面板尺寸变化参见级联选择器,默认 `true` |`true` `false` |
+| clickToClose | 是否在点击触发器时关闭面板,默认 `true` |`true` `false`|
+| blurToClose | 是否在触发器失去焦点时关闭面板,默认 `true` |`true` `false`|
 | clickOutsideToClose| 是否点击外部关闭下拉面板,默认 `true`|`true` `false`|
 | contentOffset | 下拉面板距离触发器的偏移距离，默认 2| -| 
 

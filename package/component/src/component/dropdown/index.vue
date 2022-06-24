@@ -302,10 +302,16 @@ const handleClick = () => {
   if (props.disabled || (openState.value && !props.clickToClose)) {
     return;
   }
-  if (
-    triggerMethods.value.includes("click") ||
-    triggerMethods.value.includes("contextMenu")
-  ) {
+  if (triggerMethods.value.includes("click")) {
+    toggle();
+  }
+};
+
+const handleContextMenuClick = () => {
+  if (props.disabled || (openState.value && !props.clickToClose)) {
+    return;
+  }
+  if (triggerMethods.value.includes("contextMenu")) {
     toggle();
   }
 };
@@ -397,7 +403,7 @@ watch(
 
 provide("openState", openState);
 
-defineExpose({ open, hide, toggle });
+defineExpose({open, hide, toggle});
 </script>
 
 <template>
@@ -410,7 +416,9 @@ defineExpose({ open, hide, toggle });
     @focusout="handleFocusout()"
     :class="{ 'layui-dropdown-up': openState }"
   >
-    <div @click="handleClick()" @contextmenu.prevent="handleClick()">
+    <div
+      @click="handleClick()" 
+      @contextmenu.prevent="handleContextMenuClick()">
       <slot></slot>
     </div>
     <dl
