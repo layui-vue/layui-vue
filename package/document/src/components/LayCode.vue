@@ -34,8 +34,7 @@
 <script setup lang="ts">
 import { layer } from "@layui/layer-vue";
 import { onMounted, onUnmounted, ref, watch } from "vue";
-
-import { usePlayGround } from "../plugin/usePlayground";
+import { usePlayGround } from "../composable/usePlayground";
 
 const meta = ref<HTMLElement>({} as HTMLElement);
 const isFixContorl = ref(false);

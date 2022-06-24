@@ -1,6 +1,6 @@
 import path from "path";
 import { defineConfig } from "vite";
-import plugins from "./src/plugin/common-plugins";
+import plugins from "./src/plugin/all-plugins";
 
 export default defineConfig({
   resolve: {

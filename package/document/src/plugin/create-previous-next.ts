@@ -10,8 +10,7 @@ type ContainerArgs = [
 ];
 
 export default function createContainer(
-  klass: string,
-  defaultTitle: string
+  klass: string
 ): ContainerArgs {
   return [
     container,
