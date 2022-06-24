@@ -1,10 +1,10 @@
 import type { App, Plugin } from "vue";
 
 import "./theme/index.less";
-// import "@layui/layer-vue/lib/index.css";
+import "@layui/layer-vue/lib/index.css";
 import "@layui/icons-vue/lib/index.css";
-import { layer } from "../../layer/src/index";
-import layerInstall from "../../layer/src/index";
+import { layer } from "@layui/layer-vue";
+import layerInstall from "@layui/layer-vue";
 import i18n from "./language";
 
 import LayBacktop from "./component/backTop/index";
