@@ -9,9 +9,7 @@ type ContainerArgs = [
   }
 ];
 
-export default function createContainer(
-  klass: string
-): ContainerArgs {
+export default function createContainer(klass: string): ContainerArgs {
   return [
     container,
     klass,

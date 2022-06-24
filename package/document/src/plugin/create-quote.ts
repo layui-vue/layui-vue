@@ -7,9 +7,7 @@ type ContainerArgs = [
   { render(tokens: Token[], idx: number): string }
 ];
 
-export default function createContainer(
-  klass: string
-): ContainerArgs {
+export default function createContainer(klass: string): ContainerArgs {
   return [
     container,
     klass,
