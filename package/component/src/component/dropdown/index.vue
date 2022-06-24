@@ -110,14 +110,14 @@ const changeVisible = (visible: boolean, delay?: number) => {
     nextTick(() => {
       updateContentStyle();
     });
-  }
+  };
 
-  if(delay){
+  if (delay) {
     cleanDelayTimer();
     if (visible !== openState.value) {
       delayTimer = window.setTimeout(update, delay);
     }
-  }else{
+  } else {
     update();
   }
 };
@@ -302,41 +302,44 @@ const handleClick = () => {
   if (props.disabled || (openState.value && !props.clickToClose)) {
     return;
   }
-  if (triggerMethods.value.includes("click") || triggerMethods.value.includes("contextMenu")){
-    toggle()
+  if (
+    triggerMethods.value.includes("click") ||
+    triggerMethods.value.includes("contextMenu")
+  ) {
+    toggle();
   }
-}
+};
 
 const handleMouseEnter = () => {
-  if (props.disabled || !triggerMethods.value.includes('hover')) {
+  if (props.disabled || !triggerMethods.value.includes("hover")) {
     return;
   }
   open(250);
-}
+};
 
 const handleMouseLeave = () => {
-  if (props.disabled || !triggerMethods.value.includes('hover')) {
+  if (props.disabled || !triggerMethods.value.includes("hover")) {
     return;
   }
   hide(150);
-}
+};
 
 const handleFocusin = () => {
-  if (props.disabled || !triggerMethods.value.includes('focus')) {
+  if (props.disabled || !triggerMethods.value.includes("focus")) {
     return;
   }
-  open()
-}
+  open();
+};
 
 const handleFocusout = () => {
-  if (props.disabled || !triggerMethods.value.includes('focus')) {
+  if (props.disabled || !triggerMethods.value.includes("focus")) {
     return;
   }
   if (!props.blurToClose) {
     return;
   }
   hide();
-}
+};
 
 const { stop: removeContentResizeObserver } = useResizeObserver(
   contentRef,
@@ -382,7 +385,7 @@ onBeforeUnmount(() => {
   }
   removeContentResizeObserver();
   removeTriggerResizeObserver();
-})
+});
 
 watch(
   () => props.visible,
@@ -407,10 +410,7 @@ defineExpose({ open, hide, toggle });
     @focusout="handleFocusout()"
     :class="{ 'layui-dropdown-up': openState }"
   >
-    <div
-      @click="handleClick()"
-      @contextmenu.prevent="handleClick()"
-    >
+    <div @click="handleClick()" @contextmenu.prevent="handleClick()">
       <slot></slot>
     </div>
     <dl
