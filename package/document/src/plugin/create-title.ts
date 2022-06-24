@@ -7,10 +7,7 @@ type ContainerArgs = [
   { render(tokens: Token[], idx: number): string }
 ];
 
-export default function createContainer(
-  klass: string,
-  defaultTitle: string
-): ContainerArgs {
+export default function createContainer(klass: string): ContainerArgs {
   return [
     container,
     klass,
@@ -19,9 +16,7 @@ export default function createContainer(
         const token = tokens[idx];
         const info = token.info.trim().slice(klass.length).trim();
         if (token.nesting === 1) {
-          return `<lay-field id="${info || defaultTitle}" title="${
-            info || defaultTitle
-          }" style="margin-top:21px;margin-bottom: 20px;">`;
+          return `<lay-field id="${info}" title="${info}" style="margin-top:21px;margin-bottom: 20px;">`;
         } else {
           return "</lay-field>\n";
         }
