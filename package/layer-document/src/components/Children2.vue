@@ -5,17 +5,15 @@
   </form>
 </template>
 <script setup>
-
-const emit = defineEmits('add','sub')
+const emit = defineEmits("add", "sub");
 
 const add = () => {
-    emit('add')
-}
+  emit("add");
+};
 
 const sub = () => {
-    emit('sub')
-}
-
+  emit("sub");
+};
 </script>
 
 <style scoped>

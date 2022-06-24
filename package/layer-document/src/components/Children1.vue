@@ -4,13 +4,11 @@
   </form>
 </template>
 <script setup>
-
-const emit = defineEmits('called')
+const emit = defineEmits("called");
 
 const props = defineProps({
-  data: Object
-})
-
+  data: Object,
+});
 </script>
 
 <style scoped>

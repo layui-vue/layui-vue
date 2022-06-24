@@ -18,7 +18,7 @@ const plugins = [
       highlight,
     },
     markdownItSetup(md) {
-      md.use(snippet).use(preWrapper).use(container, "demo", demo)
+      md.use(snippet).use(preWrapper).use(container, "demo", demo);
     },
   }),
 ] as any;

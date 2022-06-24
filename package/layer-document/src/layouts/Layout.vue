@@ -1,9 +1,21 @@
 <template>
   <div class="markdown-body light-scheme">
     <div class="alone-header">
-      <img class="alone-logo" src="../assets/logo.png" /> 
-      <a style="position: absolute; right: 16%; line-height: 60px;color:white;font-size:15px;">1.3.10</a>
-      <a href="https://gitee.com/layui-vue/layer-vue" style="position: absolute; right: 10%; line-height: 75px">
+      <img class="alone-logo" src="../assets/logo.png" />
+      <a
+        style="
+          position: absolute;
+          right: 16%;
+          line-height: 60px;
+          color: white;
+          font-size: 15px;
+        "
+        >1.3.10</a
+      >
+      <a
+        href="https://gitee.com/layui-vue/layer-vue"
+        style="position: absolute; right: 10%; line-height: 75px"
+      >
         <svg width="1.7em" height="1.7em" viewBox="0 0 24 24">
           <path
             fill="#fff"

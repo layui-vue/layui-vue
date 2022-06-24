@@ -403,7 +403,7 @@ watch(
 
 provide("openState", openState);
 
-defineExpose({open, hide, toggle});
+defineExpose({ open, hide, toggle });
 </script>
 
 <template>
@@ -416,9 +416,7 @@ defineExpose({open, hide, toggle});
     @focusout="handleFocusout()"
     :class="{ 'layui-dropdown-up': openState }"
   >
-    <div
-      @click="handleClick()" 
-      @contextmenu.prevent="handleContextMenuClick()">
+    <div @click="handleClick()" @contextmenu.prevent="handleContextMenuClick()">
       <slot></slot>
     </div>
     <dl
