@@ -1148,7 +1148,9 @@ html #layuicss-layer {
     background-color: rgba(2, 0, 0, .35);
     color: #fff;
     overflow: hidden;
-    font-size: 0
+    font-size: 0;
+    opacity: 0;
+    transition: all 1s ease-in-out;
 }
 
 .layui-layer-imgtit * {

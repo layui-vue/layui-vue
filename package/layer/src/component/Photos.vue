@@ -18,6 +18,7 @@
         class="layui-layer-imgbar"
         style="display: block"
         v-if="imgList.length > 1 || imgList[index].alt"
+        :style="{opacity:showLayerImgBar?1:0}"
       >
         <span class="layui-layer-imgtit">
           <span v-if="imgList[index].alt">{{ imgList[index].alt }}</span>
@@ -35,7 +36,7 @@ export default {
 };
 </script>
 <script lang="ts" setup>
-import { watch, ref } from "vue";
+import { watch, ref, onMounted, nextTick } from "vue";
 
 export interface LayPhotoProps {
   imgList: { src: string; alt: string }[];
@@ -62,4 +63,11 @@ const changeIndex = (step: number) => {
   }
   index.value = next;
 };
+
+const showLayerImgBar=ref(false)
+onMounted(()=>{
+  nextTick(()=>{
+    showLayerImgBar.value=true
+  })
+})
 </script>

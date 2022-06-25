@@ -238,27 +238,9 @@ export function getDrawerAnimationClass(offset: any, isClose: boolean = false) {
   return isClose ? `${prefix}-${suffix}-close` : `${prefix}-${suffix}`;
 }
 
-//图片预加载
-export function loadImage(url: string, callback: Function, error: any) {
-  let img = new Image();
-  img.src = url;
-  if (img.complete) {
-    return callback(img);
-  }
-  img.onload = function () {
-    img.onload = null;
-    callback(img);
-  };
-  img.onerror = function (e) {
-    img.onerror = null;
-    error(e);
-  };
-}
-
 export async function calculatePhotosArea(url: string, options: object) {
   let img = new Image();
   img.src = url;
-
   return new Promise((resolve, reject) => {
     if (img.complete) {
       resolve(area(img));
