@@ -151,7 +151,7 @@ const searchList = (str: string, container: any) => {
           <lay-input
             @input="search"
             @clear="clear"
-            :autocomplete="true"
+            autocomplete="true"
             :allow-clear="true"
           >
             <template #prefix>
