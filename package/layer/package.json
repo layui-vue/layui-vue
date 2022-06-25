@@ -31,5 +31,8 @@
     "current node",
     "last 2 versions and > 2%",
     "ie > 10"
-  ]
+  ],
+  "devDependencies": {
+    "@babel/plugin-transform-runtime": "^7.18.5"
+  }
 }
