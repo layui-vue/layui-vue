@@ -10,6 +10,7 @@ import Iframe from "./Iframe.vue";
 import Title from "./Title.vue";
 import CloseBtn from "./CloseBtn.vue";
 import Resize from "./Resize.vue";
+import Photos from "./Photos.vue";
 import {
   Ref,
   ref,
@@ -34,6 +35,7 @@ import {
   updateMinArrays,
   getDrawerAnimationClass,
   calculateDrawerArea,
+  calculatePhotosArea,
 } from "../utils";
 import useMove from "../composable/useMove";
 import useResize from "../composable/useResize";
@@ -53,7 +55,7 @@ export interface LayModalProps {
   btn?: Record<string, Function>[] | false;
   move?: boolean | string;
   resize?: boolean | string;
-  type?: 0 | 1 | 2 | 3 | "dialog" | "page" | "iframe" | "loading" | "drawer";
+  type?: 0 | 1 | 2 | 3 | "dialog" | "page" | "iframe" | "loading" | "drawer" | "photos";
   content?: string | Function | object | VNodeTypes;
   isHtmlFragment?: boolean;
   shade?: boolean | string;
@@ -73,6 +75,8 @@ export interface LayModalProps {
   isFunction?: boolean;
   isMessage?: boolean;
   appContext?: any;
+  startIndex?: number;
+  imgList?: { src: string; alt: string }[];
 }
 
 const props = withDefaults(defineProps<LayModalProps>(), {
@@ -101,6 +105,8 @@ const props = withDefaults(defineProps<LayModalProps>(), {
   yesText: "确定",
   isFunction: false,
   isMessage: false,
+  startIndex: 0,
+  imgList: () => [],
 });
 
 const emit = defineEmits(["close", "update:modelValue"]);
@@ -141,10 +147,17 @@ const _l: Ref<string> = ref(offset.value[1]);
  * <p>
  */
 const firstOpenDelayCalculation = function () {
-  nextTick(() => {
+  nextTick(async () => {
     area.value = getArea(layero.value);
     if (props.type === "drawer") {
       area.value = calculateDrawerArea(props.offset, props.area);
+    }
+    if (props.type === "photos") {
+      // @ts-ignore
+      area.value = await calculatePhotosArea(
+        props.imgList[props.startIndex].src,
+        props
+      );
     }
     offset.value = calculateOffset(props.offset, area.value, props.type);
     w.value = area.value[0];
@@ -334,6 +347,7 @@ const boxClasses = computed(() => {
     type === 1 ? "layui-layer-page" : "",
     type === 2 ? "layui-layer-iframe" : "",
     type === 3 ? "layui-layer-loading" : "",
+    type === 4 ? "layui-layer-photos" : "",
     props.isMessage ? "layui-layer-msg" : "",
     props.isMessage && !props.icon ? "layui-layer-hui" : "",
     props.skin,
@@ -511,8 +525,27 @@ const showResize = computed(() => {
  * @param type  类型
  */
 const showTitle = computed(() => {
-  return props.title && props.type != 3;
+  return props.title && props.type != 3 && props.type != "photos";
 });
+
+/*
+ * 图片弹层重新计算
+ */
+const resetCalculationPohtosArea = function (index: number) {
+  nextTick(async () => {
+    // @ts-ignore
+    area.value = await calculatePhotosArea(props.imgList[index].src, props);
+    offset.value = calculateOffset(props.offset, area.value, props.type);
+    w.value = area.value[0];
+    h.value = area.value[1];
+    t.value = offset.value[0];
+    l.value = offset.value[1];
+    _w.value = area.value[0];
+    _l.value = area.value[1];
+    _t.value = offset.value[0];
+    _l.value = offset.value[1];
+  });
+};
 
 defineExpose({ reset, open, close });
 </script>
@@ -558,9 +591,15 @@ defineExpose({ reset, open, close });
             </template>
           </template>
           <Iframe v-if="type === 2" :src="props.content"></Iframe>
+          <Photos
+            v-if="type === 4"
+            :imgList="props.imgList"
+            :startIndex="props.startIndex"
+            @resetCalculationPohtosArea="resetCalculationPohtosArea"
+          ></Photos>
         </div>
         <!-- 工具栏 -->
-        <span class="layui-layer-setwin" v-if="type != 3">
+        <span class="layui-layer-setwin" v-if="type != 3 && type != 4">
           <a
             v-if="maxmin && !max"
             class="layui-layer-min"

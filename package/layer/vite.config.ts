@@ -1,6 +1,5 @@
 import { defineConfig } from "vite";
 import { name } from "./package.json";
-import babel from "@rollup/plugin-babel";
 import vue from "@vitejs/plugin-vue";
 import path from "path";
 
@@ -30,14 +29,6 @@ export default defineConfig({
         },
         assetFileNames: "index.css",
       },
-      plugins: [
-        // @ts-ignore
-        babel({
-          exclude: "node_modules/**",
-          extensions: [".js", ".jsx", ".ts", ".tsx", ".vue"],
-          presets: ["@babel/preset-env", "@babel/preset-typescript"],
-        }),
-      ],
       external: ["vue"],
     },
   },

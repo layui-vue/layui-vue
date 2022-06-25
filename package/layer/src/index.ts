@@ -121,6 +121,23 @@ const layer = {
     };
     return layer.create(option, defaultOption, callback);
   },
+  //图片预览
+  photos: (option: any, callback?: Function) => {
+    if (typeof option === 'string') {
+      option = {
+        imgList: [{ src: option }]
+      }
+    }
+    let defaultOption = {
+      type: 'photos',
+      anim: 2,
+      startIndex: 0,
+      isOutAnim: true,
+      shadeClose: true,
+      shadeOpacity: '0.7'
+    };
+    return layer.create(option, defaultOption, callback);
+  },
   // 创建弹出层
   create: (option: any, defaultOption: any, callback?: Function) => {
     // 销毁定时

@@ -1092,7 +1092,8 @@ html #layuicss-layer {
 
 .layui-layer-photos {
     background: 0 0;
-    box-shadow: none
+    box-shadow: none;
+    border:none
 }
 
 .layui-layer-photos .layui-layer-content {

@@ -351,6 +351,42 @@ const openRight = function() {
 :::
 
 <fieldset class="layui-elem-field layui-field-title">
+    <legend>图片层</legend>
+</fieldset>
+
+::: demo 通过 layer.photos(options) 创建图片预览弹层, 参数`options`主要传入预览的图片链接。
+
+<template>
+    <button @click="signleImg">快速预览一张图片</button>
+    <button @click="signleImg2">单张图片带文字描述</button>
+    <button @click="groupImg">图片组</button>
+</template>
+
+<script>
+import { layer } from  "../../../layer/src/index"
+
+const signleImg = function() {
+    layer.photos("/src/assets/logo.jpg")
+}
+const signleImg2 = function() {
+    layer.photos({
+      imgList:[ {src:'/src/assets/logo.jpg',alt:'layer for vue'}]
+    })
+}
+const groupImg = function() {
+  layer.photos({
+    imgList:[
+      { src:'http://www.pearadmin.com/assets/images/un8.svg', alt:'图片1'},
+      { src:'http://www.pearadmin.com/assets/images/un32.svg', alt:'图片2'}
+    ]
+  })
+}
+</script>
+
+:::
+
+
+<fieldset class="layui-elem-field layui-field-title">
     <legend>通讯</legend>
 </fieldset>
 
@@ -496,7 +532,7 @@ const changeVisible = () => {
 | shadeClose | 遮盖层关闭 | boolean | `true` | `true` `false` |
 | shadeOpacity | 遮盖层透明度 | string | `0.1` | `0.1` - `1` |
 | isHtmlFragment | 解析 html 字符 | boolean | `false` | `true` `false` |
-
+| imgList | 图片数据数组 | array[{src:图片链接,alt:图片名字可选'}] | - | - |
 <fieldset class="layui-elem-field layui-field-title">
     <legend>动画</legend>
 </fieldset>

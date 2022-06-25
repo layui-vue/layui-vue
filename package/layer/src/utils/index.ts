@@ -1,3 +1,5 @@
+import { layer } from  "../index"
+
 // 随机数
 export function nextId() {
   var s: any = [];
@@ -121,6 +123,8 @@ export function calculateType(modalType: number | string) {
     return 2;
   } else if (modalType === "loading" || modalType === 3 || modalType === "3") {
     return 3;
+  } else if (modalType === "photos") {
+    return 4;
   }
   return 0;
 }
@@ -232,4 +236,62 @@ export function getDrawerAnimationClass(offset: any, isClose: boolean = false) {
     suffix = "bt";
   }
   return isClose ? `${prefix}-${suffix}-close` : `${prefix}-${suffix}`;
+}
+
+//图片预加载
+export function loadImage(url: string, callback: Function, error: any) {
+  let img = new Image();
+  img.src = url;
+  if (img.complete) {
+    return callback(img);
+  }
+  img.onload = function () {
+    img.onload = null;
+    callback(img);
+  };
+  img.onerror = function (e) {
+    img.onerror = null;
+    error(e);
+  };
+}
+
+export async function calculatePhotosArea(url: string,options:object) {
+  let img = new Image();
+  img.src = url;
+
+  return new Promise((resolve, reject) => {
+    if (img.complete) {
+      resolve(area(img))
+      return
+    }
+    const layerId=layer.load(2)
+    img.onload = () => {
+      layer.close(layerId)
+      resolve(area(img))
+    };
+    img.onerror = () => {
+      layer.close(layerId)
+      layer.msg('图片加载失败')
+      reject(false)
+    }
+  })
+
+  function area(img:{width:number,height:number}){
+    var imgarea = [img.width, img.height];
+    var winarea = [window.innerWidth - 100, window.innerHeight - 100];
+    //如果 实际图片的宽或者高比 屏幕大（那么进行缩放）
+    if ( imgarea[0] > winarea[0] || imgarea[1] > winarea[1]) {
+      let wh = [imgarea[0] / winarea[0], imgarea[1] / winarea[1]]; //取宽度缩放比例、高度缩放比例
+      if (wh[0] > wh[1]) {
+        //取缩放比例最大的进行缩放
+        imgarea[0] = imgarea[0] / wh[0];
+        imgarea[1] = imgarea[1] / wh[0];
+      } else if (wh[0] < wh[1]) {
+        imgarea[0] = imgarea[0] / wh[1];
+        imgarea[1] = imgarea[1] / wh[1];
+      }
+    }
+    return [imgarea[0] + "px", imgarea[1] + "px"];
+  }
+
 }
