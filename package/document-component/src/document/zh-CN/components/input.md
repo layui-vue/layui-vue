@@ -113,7 +113,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-input allow-clear="true" v-model="value1"></lay-input>
+  <lay-input :allow-clear="true" v-model="value1"></lay-input>
 </template>
 
 <script>
