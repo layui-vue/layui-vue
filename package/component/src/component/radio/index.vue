@@ -12,7 +12,7 @@ export interface LayRadioProps {
   modelValue?: string | boolean;
   disabled?: boolean;
   label?: string;
-  name: string;
+  name?: string;
 }
 
 const props = defineProps<LayRadioProps>();
