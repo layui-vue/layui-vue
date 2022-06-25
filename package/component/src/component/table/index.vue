@@ -26,7 +26,7 @@ export interface LayTableProps {
   defaultToolbar?: boolean;
   selectedKeys?: Recordable[];
   indentSize?: number;
-  childrenColumnName: string;
+  childrenColumnName?: string;
   height?: number;
   maxHeight?: string;
 }
