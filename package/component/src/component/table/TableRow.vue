@@ -17,7 +17,7 @@ export interface LayTableRowProps {
   expandSpace: boolean;
   selectedKeys: Recordable[];
   tableColumnKeys: Recordable[];
-  childrenColumnName: string;
+  childrenColumnName?: string;
   columns: Recordable[];
   checkbox?: boolean;
   id: string;

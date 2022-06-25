@@ -157,7 +157,7 @@ watch(currentPage, function () {
     <a v-if="showRefresh" href="javascript:;" class="layui-laypage-refresh">
       <i class="layui-icon layui-icon-refresh"></i>
     </a>
-    <span v-if="showSkip" class="layui-laypage-skip">
+    <span v-if="props.showSkip" class="layui-laypage-skip">
       到第
       <input
         v-model="currentPageShow"

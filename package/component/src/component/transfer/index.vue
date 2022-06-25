@@ -21,7 +21,7 @@ export interface LayTransferProps {
   height?: string;
   showSearch?: BooleanOrString;
   dataSource: Recordable[];
-  selectedKeys: Recordable[];
+  selectedKeys?: Recordable[];
 }
 
 const slot = useSlots();

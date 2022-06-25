@@ -71,8 +71,8 @@ export interface LayNoticeBarProps {
   mode?: string;
   text?: string;
   textlist?: any[];
-  color?: Function;
-  background?: Function;
+  color?: string;
+  background?: string;
   size?: number | string;
   height?: number | string;
   delay?: number;

@@ -197,7 +197,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-page :limit="limit1" :pages="pages1" :total="total1" :show-count="showCount1" @limit="limit1=$event" :show-page="showPage1" :show-limit="showLimit1" :show-refresh="showRefresh1" showSkip="showSkip1"></lay-page>
+  <lay-page :limit="limit1" :pages="pages1" :total="total1" :show-count="showCount1" @limit="limit1=$event" :show-page="showPage1" :show-limit="showLimit1" :show-refresh="showRefresh1" :showSkip="showSkip1"></lay-page>
   每页数量:{{limit1}}
 </template>
 
@@ -250,6 +250,7 @@ export default {
     const limit = ref(20)
     const total = ref(100)
     const showPage = ref(true)
+    const showSkip = ref(true)
     const jump = function({ current }) {
       console.log("当前页:" + current)
     }
@@ -258,7 +259,8 @@ export default {
       limit,
       total,
       jump,
-      showPage
+      showPage,
+      showSkip
     }
   }
 }
