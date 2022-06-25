@@ -64,7 +64,7 @@ export interface LayUploadProps {
   disabled?: boolean;
   disabledPreview?: boolean;
   cut?: boolean;
-  cutOptions: cutOptions;
+  cutOptions?: cutOptions;
 }
 
 const getCutDownResult = () => {
