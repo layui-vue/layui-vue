@@ -182,8 +182,7 @@ const selectBar = (item: any, selectIndex: number, parentIndex: number) => {
     treeData.value[index].selectIndex = null;
     treeData.value[index].data = [];
   }
-
-  if (!item.children) {
+  if (!item.children||item.children.length===0) {
     //输入框数据更新
     let data: any[] = [];
     function extractData(orginData: any, dataContainer: any, index: number) {
