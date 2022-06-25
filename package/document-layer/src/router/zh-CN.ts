@@ -9,7 +9,7 @@ const zhCN = [
     children: [
       {
         path: "/zh-CN/index",
-        component: () => import("../../docs/zh-CN/index.md"),
+        component: () => import("../document/zh-CN/index.md"),
 
         meta: { title: "指南" },
       },

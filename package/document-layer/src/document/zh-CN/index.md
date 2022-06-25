@@ -85,7 +85,7 @@ const changeVisible = () => {
 </template>
 
 <script>
-import { layer } from  "../../../layer/src/index"
+import { layer } from  "../../index"
 
 const msg = function() {
     layer.msg("普通消息", { time: 1000 })
@@ -124,7 +124,7 @@ const info = function() {
 </template>
 
 <script setup>
-import { layer } from  "../../../layer/src/index"
+import { layer } from  "../../index"
 
 const load1 = function() {
     layer.load(0, {time: 2000})
@@ -166,7 +166,7 @@ const load4 = function() {
 </template>
 
 <script setup>
-import { layer } from  "../../../layer/src/index"
+import { layer } from  "../../index"
 
 const open = function() {
     layer.open({
@@ -284,7 +284,7 @@ const openBtns = function(){
 </template>
 
 <script setup>
-import { layer } from  "../../../layer/src/index"
+import { layer } from  "../../index"
 
 const openConfirm1 = function() {
     layer.confirm("layui-vue 1.0.0 已经发布")
@@ -314,7 +314,7 @@ const openConfirm2 = function() {
 </template>
 
 <script setup>
-import { layer } from  "../../../layer/src/index"
+import { layer } from  "../../index"
 
 const openTop = function() {
     layer.drawer({
@@ -399,7 +399,7 @@ const groupImg = function() {
 
 <script setup>
 import { reactive, h, resolveComponent } from 'vue'
-import { layer } from  "../../../layer/src/index"
+import { layer } from  "../../index"
 
 const data = reactive({
     remark: "信息"
@@ -425,7 +425,7 @@ const openComponent1 = () => {
 
 <script setup>
 import { reactive, h, resolveComponent } from 'vue'
-import { layer } from  "../../../layer/src/index"
+import { layer } from  "../../index"
 
 const prop = reactive({})
 const numb = ref(1000)  
@@ -496,7 +496,7 @@ const closeAll = function() {
 
 <script setup>
 import { ref, reactive, h } from 'vue'
-import { LayLayer } from  "../../../layer/src/index"
+import { layer } from  "../../index"
 
 const visible = ref(false)
 const changeVisible = () => {

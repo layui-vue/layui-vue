@@ -486,7 +486,7 @@ const enterActiveClass = computed(() => {
  * @param isOutAnim 离场动画
  */
 const leaveActiveClass = computed(() => {
-  if (props.type === "drawer") {
+  if (type === 4) {
     return getDrawerAnimationClass(props.offset, true);
   }
   return props.isOutAnim ? `layer-anim-close` : "";
