@@ -9,7 +9,7 @@ import { computed } from "vue";
 import "./index.less";
 
 export interface LayRowProps {
-  space?: string;
+  space?: string | number;
 }
 
 const props = defineProps<LayRowProps>();

@@ -25,11 +25,11 @@ export default defineConfig({
       compress: {
         drop_console: true,
         drop_debugger: true,
-        pure_funcs: ['console.log']
+        pure_funcs: ["console.log"],
       },
       output: {
-        comments: true
-      }
+        comments: true,
+      },
     },
     rollupOptions: {
       output: {

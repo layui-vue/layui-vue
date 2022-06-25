@@ -8,14 +8,14 @@ export default {
 import { computed } from "vue";
 
 export interface LayColProps {
-  md?: string;
-  xs?: string;
-  sm?: string;
-  lg?: string;
-  mdOffset?: string;
-  xsOffset?: string;
-  smOffset?: string;
-  lgOffset?: string;
+  md?: string | number;
+  xs?: string | number;
+  sm?: string | number;
+  lg?: string | number;
+  mdOffset?: string | number;
+  xsOffset?: string | number;
+  smOffset?: string | number;
+  lgOffset?: string | number;
 }
 
 const props = defineProps<LayColProps>();
