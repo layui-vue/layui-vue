@@ -55,7 +55,17 @@ export interface LayModalProps {
   btn?: Record<string, Function>[] | false;
   move?: boolean | string;
   resize?: boolean | string;
-  type?: 0 | 1 | 2 | 3 | "dialog" | "page" | "iframe" | "loading" | "drawer" | "photos";
+  type?:
+    | 0
+    | 1
+    | 2
+    | 3
+    | "dialog"
+    | "page"
+    | "iframe"
+    | "loading"
+    | "drawer"
+    | "photos";
   content?: string | Function | object | VNodeTypes;
   isHtmlFragment?: boolean;
   shade?: boolean | string;

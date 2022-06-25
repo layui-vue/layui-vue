@@ -123,18 +123,18 @@ const layer = {
   },
   //图片预览
   photos: (option: any, callback?: Function) => {
-    if (typeof option === 'string') {
+    if (typeof option === "string") {
       option = {
-        imgList: [{ src: option }]
-      }
+        imgList: [{ src: option }],
+      };
     }
     let defaultOption = {
-      type: 'photos',
+      type: "photos",
       anim: 2,
       startIndex: 0,
       isOutAnim: true,
       shadeClose: true,
-      shadeOpacity: '0.7'
+      shadeOpacity: "0.7",
     };
     return layer.create(option, defaultOption, callback);
   },

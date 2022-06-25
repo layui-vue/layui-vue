@@ -32,15 +32,11 @@ export default defineConfig({
       },
       plugins: [
         babel({
-          babelHelpers: 'runtime',
+          babelHelpers: "runtime",
           exclude: "node_modules/**",
           extensions: [".js", ".jsx", ".ts", ".tsx", ".vue"],
           presets: ["@babel/preset-env", "@babel/preset-typescript"],
-          plugins: [
-            [
-              '@babel/plugin-transform-runtime',
-            ],
-          ]
+          plugins: [["@babel/plugin-transform-runtime"]],
         }),
       ],
       external: ["vue"],
