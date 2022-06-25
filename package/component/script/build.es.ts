@@ -66,6 +66,16 @@ export default (): UserConfigExport => {
         entry: resolve(process.cwd(), "./src/index.ts"),
         formats: ["es"],
       },
+      terserOptions: {
+        compress: {
+          drop_console: true,
+          drop_debugger: true,
+          pure_funcs: ['console.log']
+        },
+        output: {
+          comments: true
+        }
+      },
       rollupOptions: {
         input: inputs,
         output: {

@@ -21,6 +21,16 @@ export default defineConfig({
       entry: path.resolve(__dirname, "src/index.ts"),
       name: camelize(name),
     },
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
+        pure_funcs: ['console.log']
+      },
+      output: {
+        comments: true
+      }
+    },
     rollupOptions: {
       output: {
         exports: "named",
