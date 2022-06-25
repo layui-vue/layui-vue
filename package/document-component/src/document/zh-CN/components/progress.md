@@ -126,8 +126,8 @@ export default {
 <template>
   <lay-progress percent="10" circle :show-text="showText" style="margin-right:10px"></lay-progress>
   <lay-progress percent="20" circle :show-text="showText" text="销售量" theme="red" style="margin-right:10px"></lay-progress>
-  <lay-progress percent="30" circle :show-text="showText" theme="blue" text="不同尺寸" circleSize="200" circleWidth="20" style="margin-right:10px"></lay-progress>
-  <lay-progress percent="70" circle :show-text="showText" text="宽度控制" theme="orange" circleSize="200" circleWidth="40"></lay-progress>
+  <lay-progress percent="30" circle :show-text="showText" theme="blue" text="不同尺寸" :circleSize="200" :circleWidth="20" style="margin-right:10px"></lay-progress>
+  <lay-progress percent="70" circle :show-text="showText" text="宽度控制" theme="orange" :circleSize="200" :circleWidth="40"></lay-progress>
 </template>
 
 <script>
