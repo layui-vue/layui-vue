@@ -60,6 +60,8 @@ export interface LayModalProps {
     | 1
     | 2
     | 3
+    | 4
+    | 5
     | "dialog"
     | "page"
     | "iframe"
@@ -159,10 +161,10 @@ const _l: Ref<string> = ref(offset.value[1]);
 const firstOpenDelayCalculation = function () {
   nextTick(async () => {
     area.value = getArea(layero.value);
-    if (props.type === "drawer") {
+    if (type == 4) {
       area.value = calculateDrawerArea(props.offset, props.area);
     }
-    if (props.type === "photos") {
+    if (type == 5) {
       // @ts-ignore
       area.value = await calculatePhotosArea(
         props.imgList[props.startIndex].src,
@@ -357,7 +359,7 @@ const boxClasses = computed(() => {
     type === 1 ? "layui-layer-page" : "",
     type === 2 ? "layui-layer-iframe" : "",
     type === 3 ? "layui-layer-loading" : "",
-    type === 4 ? "layui-layer-photos" : "",
+    type === 5 ? "layui-layer-photos" : "",
     props.isMessage ? "layui-layer-msg" : "",
     props.isMessage && !props.icon ? "layui-layer-hui" : "",
     props.skin,
@@ -602,14 +604,14 @@ defineExpose({ reset, open, close });
           </template>
           <Iframe v-if="type === 2" :src="props.content"></Iframe>
           <Photos
-            v-if="type === 4"
+            v-if="type === 5"
             :imgList="props.imgList"
             :startIndex="props.startIndex"
             @resetCalculationPohtosArea="resetCalculationPohtosArea"
           ></Photos>
         </div>
         <!-- 工具栏 -->
-        <span class="layui-layer-setwin" v-if="type != 3 && type != 4">
+        <span class="layui-layer-setwin" v-if="type != 3 && type != 5">
           <a
             v-if="maxmin && !max"
             class="layui-layer-min"

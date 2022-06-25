@@ -110,21 +110,21 @@ export function calculateOffset(offset: any, area: any, type: any) {
 
 // 窗体类型
 export function calculateType(modalType: number | string) {
-  if (modalType === "dialog" || modalType === 0 || modalType === "0") {
+  if (modalType === "dialog" || modalType == 0) {
     return 0;
   } else if (
     modalType === "page" ||
     modalType === "drawer" ||
-    modalType === 1 ||
-    modalType === "1"
+    modalType == 1 ||
+    modalType == 4
   ) {
     return 1;
-  } else if (modalType === "iframe" || modalType === 2 || modalType === "2") {
+  } else if (modalType === "iframe" || modalType == 2) {
     return 2;
-  } else if (modalType === "loading" || modalType === 3 || modalType === "3") {
+  } else if (modalType === "loading" || modalType == 3) {
     return 3;
   } else if (modalType === "photos") {
-    return 4;
+    return 5;
   }
   return 0;
 }
