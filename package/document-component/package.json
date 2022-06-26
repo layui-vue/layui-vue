@@ -28,7 +28,8 @@
     "rollup": "^2.70.1",
     "typescript": "^4.6.3",
     "vite-plugin-md": "^0.13.1",
-    "vite": "2.9.8"
+    "vite": "2.9.8",
+    "fflate": "^0.7.3"
   },
   "files": [
     "lib",
