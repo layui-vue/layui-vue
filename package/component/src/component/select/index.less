@@ -21,6 +21,9 @@ dl.layui-anim-upbit > dd .layui-form-checkbox,
   box-sizing: border-box;
   overflow: hidden;
   cursor: pointer;
+  background-color: #fff;
+  border: 1px solid var(--input-border-color);
+  border-right: unset;
   .layui-multiple-select-badge {
     width: ms-max-content;
     width: max-content;
@@ -148,4 +151,24 @@ dl.layui-anim-upbit > dd .layui-form-checkbox,
 
 .layui-form-selected dl {
   display: block;
+}
+
+.layui-multiple-select-input {
+  margin-bottom: 5px;
+  padding: 0 10px;
+  cursor: pointer;
+
+  .layui-input-wrapper {
+    border: unset;
+    border-bottom: 1px solid var(--input-border-color);
+
+    .layui-input {
+      border: unset;
+      padding-left: 0;
+    }
+  }
+
+  .layui-input-wrapper:focus-within {
+    border-color: var(--input-border-color);
+  }
 }

@@ -16,6 +16,8 @@ import {
   reactive,
   toRefs,
   Ref,
+  nextTick,
+  shallowRef,
 } from "vue";
 import LayBadge from "../badge/index.vue";
 import LayScroll from "../scroll/index.vue";
@@ -40,7 +42,8 @@ export interface LaySelectProps {
   }[];
 }
 
-const selectRef = ref<null | HTMLElement>();
+const selectRef = shallowRef<undefined | HTMLElement>(undefined);
+const multipleSearchInputRef = shallowRef<HTMLElement | undefined>(undefined);
 
 onClickOutside(selectRef, (event: Event) => {
   openState.value = false;
@@ -63,6 +66,9 @@ const open = function () {
     return;
   }
   openState.value = !openState.value;
+  nextTick(() => {
+    multipleSearchInputRef.value?.querySelector('input')?.focus();
+  })
 };
 
 const emit = defineEmits(["update:modelValue", "change", "search", "create"]);
@@ -238,6 +244,21 @@ provide("keyword", txt);
 
     <!-- 下拉内容 -->
     <dl class="layui-anim layui-anim-upbit">
+      <div 
+        ref="multipleSearchInputRef" 
+        class="layui-multiple-select-input">
+        <lay-input 
+          v-if="multiple" 
+          v-model="value"
+          @input="input = true"
+          @blur="input = false"
+          :placeholder="placeholder"
+          prefix-icon="layui-icon-search" 
+          allow-clear 
+          autocomplete
+         >
+        </lay-input>
+      </div>
       <template v-if="!multiple && showEmpty && !props.create">
         <lay-select-option :value="null" :label="emptyMessage ?? placeholder" />
       </template>
