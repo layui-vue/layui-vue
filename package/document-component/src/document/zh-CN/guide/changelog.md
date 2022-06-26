@@ -11,6 +11,16 @@
 <template>
 <lay-timeline>
   <lay-timeline-item title="1.2.x">
+        <ul> 
+      <a name="1-2-3"></a> 
+      <li> 
+        <h3>1.2.3 <span class="layui-badge-rim">2022-06-26</span></h3> 
+        <ul>
+          <li>[新增] select 组件 多选模式下 的搜索功能。 </li>
+          <li>[修复] scroll 组件 按需加载时 index.css 不存在的问题。</li>
+        </ul>
+      </li>
+    </ul>
       <ul> 
       <a name="1-2-2"></a> 
       <li> 

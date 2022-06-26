@@ -166,7 +166,6 @@ class Tree {
     if (node.children) {
       this.setChildrenChecked(checked, node.children);
     }
-    //console.log(this.getData());
   }
 
   getData() {

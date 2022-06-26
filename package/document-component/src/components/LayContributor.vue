@@ -15,7 +15,7 @@
     <a
       class="online-edit"
       :href="
-        'https://github.com/layui/layui-vue/edit/next/package/document/src/document/zh-CN/components/' +
+        'https://github.com/layui/layui-vue/edit/next/package/document-component/src/document/zh-CN/components/' +
         filePath +
         '.md'
       "
@@ -40,7 +40,7 @@ const props = withDefaults(defineProps<LayContributor>(), {
 
 const suffix = ".md";
 const githubAPI =
-  "https://api.github.com/repos/layui/layui-vue/commits?path=/package/document/src/document/zh-CN/components/";
+  "https://api.github.com/repos/layui/layui-vue/commits?path=/package/document-component/src/document/zh-CN/components/";
 const contributors: Ref<any> = ref([]);
 
 var compare = function (x: any, y: any) {

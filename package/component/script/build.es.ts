@@ -36,6 +36,7 @@ const matchModule: string[] = [
   "button",
   "tooltip",
   "page",
+  "scroll"
 ];
 
 export default (): UserConfigExport => {
@@ -65,16 +66,6 @@ export default (): UserConfigExport => {
       lib: {
         entry: resolve(process.cwd(), "./src/index.ts"),
         formats: ["es"],
-      },
-      terserOptions: {
-        compress: {
-          drop_console: true,
-          drop_debugger: true,
-          pure_funcs: ["console.log"],
-        },
-        output: {
-          comments: true,
-        },
       },
       rollupOptions: {
         input: inputs,

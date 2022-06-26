@@ -24,16 +24,6 @@ export default (): UserConfigExport => {
         formats: ["es"],
         fileName: (name) => `index.js`,
       },
-      terserOptions: {
-        compress: {
-          drop_console: true,
-          drop_debugger: true,
-          pure_funcs: ["console.log"],
-        },
-        output: {
-          comments: true,
-        },
-      },
       rollupOptions: {
         output: {
           globals: {
