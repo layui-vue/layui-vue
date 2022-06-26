@@ -41,6 +41,9 @@ export interface LayDropdownProps {
   blurToClose?: boolean;
   clickOutsideToClose?: boolean;
   contentOffset?: number;
+  mouseEnterDelay?: number;
+  mouseLeaveDelay?: number;
+  focusDelay?: number;
 }
 
 const props = withDefaults(defineProps<LayDropdownProps>(), {
@@ -57,6 +60,9 @@ const props = withDefaults(defineProps<LayDropdownProps>(), {
   blurToClose: true,
   clickOutsideToClose: true,
   contentOffset: 2,
+  mouseEnterDelay: 150,
+  mouseLeaveDelay: 150,
+  focusDelay: 150,
 });
 
 const dropdownRef = shallowRef<HTMLElement | undefined>();
@@ -128,9 +134,7 @@ const updateContentStyle = () => {
   }
   const triggerRect = dropdownRef.value.getBoundingClientRect();
   const contentRect = contentRef.value.getBoundingClientRect();
-  const { style } = getContentStyle(props.placement, triggerRect, contentRect, {
-    autoFitPosition: props.autoFitPosition,
-  });
+  const { style } = getContentStyle(props.placement, triggerRect, contentRect);
 
   if (props.autoFitMinWidth) {
     style.minWidth = `${triggerRect.width}px`;
@@ -138,8 +142,29 @@ const updateContentStyle = () => {
   if (props.autoFitWidth) {
     style.width = `${triggerRect.width}px`;
   }
-
   contentStyle.value = style;
+
+  if (props.autoFitPosition) {
+    nextTick(() => {
+      const triggerRect = dropdownRef.value!.getBoundingClientRect();
+      const contentRect = contentRef.value!.getBoundingClientRect();
+      let { top, left } = style;
+      top = Number(top.toString().replace("px", ""))
+      left = Number(left.toString().replace("px", ""))
+      const { top: fitTop, left: fitLeft } = getFitPlacement(
+        top,
+        left,
+        props.placement,
+        triggerRect,
+        contentRect
+      );
+      style.top = `${fitTop}px`;
+      style.left = `${fitLeft}px`;
+      contentStyle.value = { 
+        ...style 
+      }
+    })
+  }
 };
 
 const getContentStyle = (
@@ -147,25 +172,12 @@ const getContentStyle = (
   triggerRect: DOMRect,
   contentRect: DOMRect,
   {
-    autoFitPosition = false,
     customStyle = {},
   }: {
-    autoFitPosition?: boolean;
     customStyle?: CSSProperties;
   } = {}
 ) => {
   let { top, left } = getContentOffset(placement, triggerRect, contentRect);
-  if (autoFitPosition) {
-    const { top: fitTop, left: fitLeft } = getFitPlacement(
-      top,
-      left,
-      placement,
-      triggerRect,
-      contentRect
-    );
-    top = fitTop;
-    left = fitLeft;
-  }
   const style = {
     top: `${top}px`,
     left: `${left}px`,
@@ -184,50 +196,29 @@ const getFitPlacement = (
   contentRect: DOMRect
 ) => {
   // 溢出屏幕底部
-  if (triggerRect.bottom + contentRect.height > windowHeight.value) {
+  if (contentRect.bottom > windowHeight.value) {
     top = -contentRect.height - props.contentOffset;
   }
   // 溢出屏幕顶部
-  if (triggerRect.top - contentRect.height < 0) {
+  if (contentRect.top < 0) {
     top = triggerRect.height + props.contentOffset;
   }
-  if (["bottom-right", "top-right"].includes(placement)) {
-    // 溢出屏幕左边
-    const contentRectLeft =
-      triggerRect.left - (contentRect.width - triggerRect.width);
-    if (contentRectLeft < 0) {
-      left = left + (0 - contentRectLeft);
-    }
+
+  // 溢出屏幕左边
+  if(contentRect.left < 0){
+    left = left + (0 - contentRect.left)
   }
 
-  if (["bottom-left", "top-left"].includes(placement)) {
-    // 溢出屏幕右边
-    const contentRectRight =
-      triggerRect.right + (contentRect.width - triggerRect.width);
-    if (contentRectRight > windowWidth.value) {
-      left = left - (contentRectRight - windowWidth.value);
-    }
+  // 溢出屏幕右边
+  if(contentRect.right > windowWidth.value){
+    left = left - (contentRect.right - windowWidth.value)
   }
 
-  if (["bottom", "top"].includes(placement)) {
-    const contentRectLeft =
-      triggerRect.left - (contentRect.width - triggerRect.width) / 2;
-    const contentRectRight =
-      triggerRect.right + (contentRect.width - triggerRect.width) / 2;
-    // 溢出屏幕左边
-    if (contentRectLeft < 0) {
-      left = left + (0 - contentRectLeft);
-    }
-    // 溢出屏幕右边
-    if (contentRectRight > windowWidth.value) {
-      left = left - (contentRectRight - windowWidth.value);
-    }
-  }
   return {
     top,
     left,
   };
-};
+}
 
 const getContentOffset = (
   placement: DropdownPlacement,
@@ -320,21 +311,21 @@ const handleMouseEnter = () => {
   if (props.disabled || !triggerMethods.value.includes("hover")) {
     return;
   }
-  open(250);
+  open(props.mouseEnterDelay);
 };
 
 const handleMouseLeave = () => {
   if (props.disabled || !triggerMethods.value.includes("hover")) {
     return;
   }
-  hide(150);
+  hide(props.mouseLeaveDelay);
 };
 
 const handleFocusin = () => {
   if (props.disabled || !triggerMethods.value.includes("focus")) {
     return;
   }
-  open();
+  open(props.focusDelay);
 };
 
 const handleFocusout = () => {
