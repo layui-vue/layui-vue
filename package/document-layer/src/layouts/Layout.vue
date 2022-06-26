@@ -10,7 +10,7 @@
           color: white;
           font-size: 15px;
         "
-        >1.3.10</a
+        >{{ version }}</a
       >
       <a
         href="https://gitee.com/layui-vue/layer-vue"
@@ -37,6 +37,13 @@
     </div>
   </div>
 </template>
+
+<script setup>
+import config from "../../../layer/package.json";
+
+const version = config.version;
+</script>
+
 
 <style>
 body {
