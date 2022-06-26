@@ -11,10 +11,28 @@
 <template>
 <lay-timeline>
   <lay-timeline-item title="1.2.x">
-    <ul> 
-      <a name="1-2-0"></a> 
+      <ul> 
+      <a name="1-2-2"></a> 
       <li> 
-        <h3>1.2.1 <span class="layui-badge-rim">2022-06-21</span></h3> 
+        <h3>1.2.2 <span class="layui-badge-rim">2022-06-26</span></h3> 
+        <ul>
+          <li>[新增] tab 组件 activeBarTransition 属性, 启用 activeBar 过渡动画。 </li>
+          <li>[新增] cascader 组件 onlyLastLevel 属性 控制 displayValue 回显数据层级。</li>
+          <li>[修复] cascader 组件 children 不能为空的问题。</li>
+          <li>[优化] icon-picker 组件 lay-input 引用使用类型错误</li>
+          <li>[优化] row 与 col 组件的所有属性同时兼容 number 与 string 类型。</li>
+          <li>[优化] table 组件 childrenColumnName 属性为非必填。</li>
+          <li>[优化] notice-bar 组件 color 与 background 属性的类型警告。</li>
+          <li>[优化] upload 组件 cutOptions 属性非必填, 在 cut 为 false 时。</li>
+          <li>[优化] radio 组件 name 属性非必填, 在一些应用场景下 name 没有存在的必要。</li>
+          <li>[优化] checkbox 组件 isIndeterminate 属性类型非必填。</li>
+        </ul>
+      </li>
+    </ul>
+    <ul> 
+      <a name="1-2-1"></a> 
+      <li> 
+        <h3>1.2.1 <span class="layui-badge-rim">2022-06-23</span></h3> 
         <ul>
           <li>[新增] dropdown 组件 placement 属性, 设置下拉面板位置。</li>
           <li>[新增] dropdown 组件 autoFitPosition 属性, 超出浏览器边界自动调整下拉面板位置, 默认为 true。</li>

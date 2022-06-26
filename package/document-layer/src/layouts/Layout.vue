@@ -44,7 +44,6 @@ import config from "../../../layer/package.json";
 const version = config.version;
 </script>
 
-
 <style>
 body {
   margin: 0px;

@@ -18,7 +18,7 @@
         class="layui-layer-imgbar"
         style="display: block"
         v-if="imgList.length > 1 || imgList[index].alt"
-        :style="{opacity:showLayerImgBar?1:0}"
+        :style="{ opacity: showLayerImgBar ? 1 : 0 }"
       >
         <span class="layui-layer-imgtit">
           <span v-if="imgList[index].alt">{{ imgList[index].alt }}</span>
@@ -64,10 +64,10 @@ const changeIndex = (step: number) => {
   index.value = next;
 };
 
-const showLayerImgBar=ref(false)
-onMounted(()=>{
-  nextTick(()=>{
-    showLayerImgBar.value=true
-  })
-})
+const showLayerImgBar = ref(false);
+onMounted(() => {
+  nextTick(() => {
+    showLayerImgBar.value = true;
+  });
+});
 </script>
