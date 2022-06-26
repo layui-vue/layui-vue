@@ -149,8 +149,8 @@ const updateContentStyle = () => {
       const triggerRect = dropdownRef.value!.getBoundingClientRect();
       const contentRect = contentRef.value!.getBoundingClientRect();
       let { top, left } = style;
-      top = Number(top.toString().replace("px", ""))
-      left = Number(left.toString().replace("px", ""))
+      top = Number(top.toString().replace("px", ""));
+      left = Number(left.toString().replace("px", ""));
       const { top: fitTop, left: fitLeft } = getFitPlacement(
         top,
         left,
@@ -160,10 +160,10 @@ const updateContentStyle = () => {
       );
       style.top = `${fitTop}px`;
       style.left = `${fitLeft}px`;
-      contentStyle.value = { 
-        ...style 
-      }
-    })
+      contentStyle.value = {
+        ...style,
+      };
+    });
   }
 };
 
@@ -188,6 +188,22 @@ const getContentStyle = (
   };
 };
 
+const getPosition = (placement: DropdownPlacement) => {
+  if (["top", "top-left", "top-right"].includes(placement)) {
+    return "top";
+  }
+  if (["bottom", "bottom-left", "bottom-right"].includes(placement)) {
+    return "bottom";
+  }
+  if (["left", "left-bottom", "left-top"].includes(placement)) {
+    return "left";
+  }
+  if (["right", "right-bottom", "right-top"].includes(placement)) {
+    return "right";
+  }
+  return "bottom";
+};
+
 const getFitPlacement = (
   top: number,
   left: number,
@@ -195,30 +211,50 @@ const getFitPlacement = (
   triggerRect: DOMRect,
   contentRect: DOMRect
 ) => {
-  // 溢出屏幕底部
-  if (contentRect.bottom > windowHeight.value) {
-    top = -contentRect.height - props.contentOffset;
+  // FIXME 反转后仍溢出的场景
+  const position = getPosition(placement);
+  if (["top", "bottom"].includes(position)) {
+    // 溢出屏幕底部
+    if (contentRect.bottom > windowHeight.value) {
+      top = -contentRect.height - props.contentOffset;
+    }
+    // 溢出屏幕顶部
+    if (contentRect.top < 0) {
+      top = triggerRect.height + props.contentOffset;
+    }
+    // 溢出屏幕左边
+    if (contentRect.left < 0) {
+      left = left + (0 - contentRect.left);
+    }
+    // 溢出屏幕右边
+    if (contentRect.right > windowWidth.value) {
+      left = left - (contentRect.right - windowWidth.value);
+    }
   }
-  // 溢出屏幕顶部
-  if (contentRect.top < 0) {
-    top = triggerRect.height + props.contentOffset;
-  }
-
-  // 溢出屏幕左边
-  if(contentRect.left < 0){
-    left = left + (0 - contentRect.left)
-  }
-
-  // 溢出屏幕右边
-  if(contentRect.right > windowWidth.value){
-    left = left - (contentRect.right - windowWidth.value)
+  if (["left", "right"].includes(position)) {
+    // 溢出屏幕底部
+    if (contentRect.bottom > windowHeight.value) {
+      top = top - (contentRect.bottom - windowHeight.value);
+    }
+    // 溢出屏幕顶部
+    if (contentRect.top < 0) {
+      top = top + (0 - contentRect.top);
+    }
+    // 溢出屏幕左边
+    if (contentRect.left < 0) {
+      left = triggerRect.width + props.contentOffset;
+    }
+    // 溢出屏幕右边
+    if (contentRect.right > windowWidth.value) {
+      left = -(contentRect.width + props.contentOffset);
+    }
   }
 
   return {
     top,
     left,
   };
-}
+};
 
 const getContentOffset = (
   placement: DropdownPlacement,
@@ -255,6 +291,36 @@ const getContentOffset = (
       return {
         top: triggerRect.height + props.contentOffset,
         left: -(contentRect.width - triggerRect.width),
+      };
+    case "right":
+      return {
+        top: -(contentRect.height - triggerRect.height) / 2,
+        left: triggerRect.width + props.contentOffset,
+      };
+    case "right-top":
+      return {
+        top: 0,
+        left: triggerRect.width + props.contentOffset,
+      };
+    case "right-bottom":
+      return {
+        top: -(contentRect.height - triggerRect.height),
+        left: triggerRect.width + props.contentOffset,
+      };
+    case "left":
+      return {
+        top: -(contentRect.height - triggerRect.height) / 2,
+        left: -(contentRect.width + props.contentOffset),
+      };
+    case "left-top":
+      return {
+        top: 0,
+        left: -(contentRect.width + props.contentOffset),
+      };
+    case "left-bottom":
+      return {
+        top: -(contentRect.height - triggerRect.height),
+        left: -(contentRect.width + props.contentOffset),
       };
     default:
       return {

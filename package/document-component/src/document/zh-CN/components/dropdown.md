@@ -296,6 +296,49 @@ export default {
       <div style="width:300px;height:200px;"></div> 
     </template>
   </lay-dropdown>
+  <br><br>
+    &nbsp;&nbsp;
+  <lay-dropdown placement="right-top">
+    <lay-button type="primary">right-top</lay-button>
+    <template #content>
+      <div style="width:300px;height:200px;"></div> 
+    </template>
+  </lay-dropdown>
+    &nbsp;&nbsp;
+  <lay-dropdown placement="right">
+    <lay-button type="primary">right</lay-button>
+    <template #content>
+      <div style="width:300px;height:200px;"></div> 
+    </template>
+  </lay-dropdown>
+    &nbsp;&nbsp;
+  <lay-dropdown placement="right-bottom">
+    <lay-button type="primary">right-bottom</lay-button>
+    <template #content>
+      <div style="width:300px;height:200px;"></div> 
+    </template>
+  </lay-dropdown>
+   &nbsp;&nbsp;
+    <lay-dropdown placement="left-top">
+    <lay-button type="primary">left-top</lay-button>
+    <template #content>
+      <div style="width:300px;height:200px;"></div> 
+    </template>
+  </lay-dropdown>
+  &nbsp;&nbsp;
+  <lay-dropdown placement="left">
+    <lay-button type="primary">left</lay-button>
+    <template #content>
+      <div style="width:300px;height:200px;"></div> 
+    </template>
+  </lay-dropdown>
+  &nbsp;&nbsp;
+  <lay-dropdown placement="left-bottom">
+    <lay-button type="primary">left-bottom</lay-button>
+    <template #content>
+      <div style="width:300px;height:200px;"></div> 
+    </template>
+  </lay-dropdown>
 </template>
 
 <script>

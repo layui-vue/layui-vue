@@ -5,4 +5,10 @@ export type DropdownPlacement =
   | "top-right"
   | "bottom"
   | "bottom-left"
-  | "bottom-right";
+  | "bottom-right"
+  | "right"
+  | "right-top"
+  | "right-bottom"
+  | "left"
+  | "left-top"
+  | "left-bottom";
