@@ -36,7 +36,7 @@ const matchModule: string[] = [
   "button",
   "tooltip",
   "page",
-  "scroll"
+  "scroll",
 ];
 
 export default (): UserConfigExport => {

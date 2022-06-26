@@ -67,8 +67,8 @@ const open = function () {
   }
   openState.value = !openState.value;
   nextTick(() => {
-    multipleSearchInputRef.value?.querySelector('input')?.focus();
-  })
+    multipleSearchInputRef.value?.querySelector("input")?.focus();
+  });
 };
 
 const emit = defineEmits(["update:modelValue", "change", "search", "create"]);
@@ -244,19 +244,17 @@ provide("keyword", txt);
 
     <!-- 下拉内容 -->
     <dl class="layui-anim layui-anim-upbit">
-      <div 
-        ref="multipleSearchInputRef" 
-        class="layui-multiple-select-input">
-        <lay-input 
-          v-if="multiple" 
+      <div ref="multipleSearchInputRef" class="layui-multiple-select-input">
+        <lay-input
+          v-if="multiple"
           v-model="value"
           @input="input = true"
           @blur="input = false"
           :placeholder="placeholder"
-          prefix-icon="layui-icon-search" 
-          allow-clear 
+          prefix-icon="layui-icon-search"
+          allow-clear
           autocomplete
-         >
+        >
         </lay-input>
       </div>
       <template v-if="!multiple && showEmpty && !props.create">
