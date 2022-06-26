@@ -19,6 +19,7 @@ import {
 } from "vue";
 import {
   onClickOutside,
+  useMouse,
   useResizeObserver,
   useThrottleFn,
   useWindowSize,
@@ -41,9 +42,11 @@ export interface LayDropdownProps {
   blurToClose?: boolean;
   clickOutsideToClose?: boolean;
   contentOffset?: number;
+  // 以下暂不开放
   mouseEnterDelay?: number;
   mouseLeaveDelay?: number;
   focusDelay?: number;
+  alignPoint?: boolean;
 }
 
 const props = withDefaults(defineProps<LayDropdownProps>(), {
@@ -63,12 +66,14 @@ const props = withDefaults(defineProps<LayDropdownProps>(), {
   mouseEnterDelay: 150,
   mouseLeaveDelay: 150,
   focusDelay: 150,
+  alignPoint: false,
 });
 
 const dropdownRef = shallowRef<HTMLElement | undefined>();
 const contentRef = shallowRef<HTMLElement | undefined>();
 const contentStyle = ref<CSSProperties>({});
 const { width: windowWidth, height: windowHeight } = useWindowSize();
+const { x: mouseLeft, y: mouseTop } = useMouse();
 const openState = ref(false);
 
 const triggerMethods = computed(() =>
@@ -132,9 +137,14 @@ const updateContentStyle = () => {
   if (!dropdownRef.value || !contentRef.value) {
     return;
   }
-  const triggerRect = dropdownRef.value.getBoundingClientRect();
+  const triggerRect = dropdownRef.value!.getBoundingClientRect();
   const contentRect = contentRef.value.getBoundingClientRect();
-  const { style } = getContentStyle(props.placement, triggerRect, contentRect);
+  const { style } = getContentStyle(
+    props.placement,
+    triggerRect,
+    contentRect,
+    props.alignPoint
+  );
 
   if (props.autoFitMinWidth) {
     style.minWidth = `${triggerRect.width}px`;
@@ -171,13 +181,19 @@ const getContentStyle = (
   placement: DropdownPlacement,
   triggerRect: DOMRect,
   contentRect: DOMRect,
+  isAlignPoint?: boolean,
   {
     customStyle = {},
   }: {
     customStyle?: CSSProperties;
   } = {}
 ) => {
-  let { top, left } = getContentOffset(placement, triggerRect, contentRect);
+  let { top, left } = getContentOffset(
+    placement,
+    triggerRect,
+    contentRect,
+    isAlignPoint
+  );
   const style = {
     top: `${top}px`,
     left: `${left}px`,
@@ -259,8 +275,15 @@ const getFitPlacement = (
 const getContentOffset = (
   placement: DropdownPlacement,
   triggerRect: DOMRect,
-  contentRect: DOMRect
+  contentRect: DOMRect,
+  isAlignPoint?: boolean
 ) => {
+  if (isAlignPoint) {
+    return {
+      top: mouseTop.value - triggerRect.top,
+      left: mouseLeft.value - triggerRect.left,
+    };
+  }
   switch (placement) {
     case "top":
       return {
@@ -457,6 +480,21 @@ watch(
   },
   { immediate: true }
 );
+
+const getTriggerRect = (isAlignPoint: boolean) => {
+  return isAlignPoint
+    ? ({
+        top: mouseTop.value,
+        bottom: mouseTop.value,
+        left: mouseLeft.value,
+        right: mouseLeft.value,
+        width: 0,
+        height: 0,
+        x: mouseLeft.value,
+        y: mouseTop.value,
+      } as DOMRect)
+    : dropdownRef.value!.getBoundingClientRect();
+};
 
 provide("openState", openState);
 
