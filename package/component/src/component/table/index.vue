@@ -29,6 +29,7 @@ export interface LayTableProps {
   childrenColumnName?: string;
   height?: number;
   maxHeight?: string;
+  even?: boolean;
 }
 
 const props = withDefaults(defineProps<LayTableProps>(), {
@@ -39,6 +40,7 @@ const props = withDefaults(defineProps<LayTableProps>(), {
   dataSource: () => [],
   selectedKeys: () => [],
   maxHeight: "auto",
+  even: false,
 });
 
 const tableId = uuidv4();
@@ -364,7 +366,7 @@ props.dataSource.map((value: any) => {
           :style="{ height: height, maxHeight: maxHeight }"
           ref="tableBody"
         >
-          <table class="layui-table" :lay-size="size">
+          <table class="layui-table" :class="{'layui-table-even': props.even}" :lay-size="size">
             <colgroup>
               <col v-if="checkbox" class="layui-table-col-special" />
               <template v-for="column in columns" :key="column">

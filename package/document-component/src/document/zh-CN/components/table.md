@@ -476,6 +476,60 @@ export default {
 
 :::
 
+::: title 斑马条纹
+:::
+
+::: demo 通过 `even` 属性, 开启斑马条纹, 默认为 false。
+
+<template>
+  <lay-table :columns="columns1" :dataSource="dataSource1" even></lay-table>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const columns1 = [
+      {
+        title:"账户",
+        width:"200px",
+        key:"username"
+      },{
+        title:"密码",
+        width: "180px",
+        key:"password"
+      },{
+        title:"年龄",
+        width: "180px",
+        key:"age"
+      },{
+        title:"备注",
+        width: "180px",
+        key:"remark",
+        ellipsisTooltip: true,
+      }
+    ]
+
+    const dataSource1 = [
+      {username:"root", password:"root", age:"18", remark: 'layui - vue（谐音：类 UI) '},
+      {username:"root", password:"root", age:"18", remark: 'layui - vue（谐音：类 UI) '},
+      {username:"woow", password:"woow", age:"20", remark: 'layui - vue（谐音：类 UI) '},
+      {username:"woow", password:"woow", age:"20", remark: 'layui - vue（谐音：类 UI) '},
+      {username:"woow", password:"woow", age:"20", remark: 'layui - vue（谐音：类 UI) '}
+    ]
+
+    return {
+      columns1,
+      dataSource1
+    }
+  }
+}
+</script>
+
+:::
+
 ::: title Table 属性
 :::
 
