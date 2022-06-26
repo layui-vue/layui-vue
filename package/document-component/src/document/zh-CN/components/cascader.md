@@ -300,10 +300,19 @@ const options = [
   <lay-cascader :options="options" v-model="value1" decollator="-" placeholder="我可以自定义分割符号" style="width:250px"></lay-cascader>
   <span style="margin-left:20px">输出的值：{{value1}}</span>
 </template>
+:::
+
+::: title 控制回显层级
+:::
+::: demo 使用 `onlyLastLevel` 属性 可以仅在回显的displayValue显示选中项最后一级的标签，而不是完整路径, 注意绑定的v-model仍然是完整的。
+<template>
+  <lay-cascader :options="options" v-model="valueLv" :onlyLastLevel="true" placeholder="仅显示最后一级" style="width:250px"></lay-cascader>
+  <span style="margin-left:20px">输出的值：{{valueLv}}</span>
+</template>
 
 <script setup>
 import { ref } from "vue";
-const value1=ref(null)
+const valueLv=ref(null)
 </script>
 :::
 
@@ -626,7 +635,7 @@ const options2 = [
 | v-model / modelValue     | 值                   | 
 | decollator               | 分割符号，默认为 /     |
 | options                  | 选项参数 格式请见上面的demo  |
-
+| onlyLastLevel            | 回显displayValue仅显示最后一级，默认为 `false`  |
 :::
 
 ::: title Cascader 事件
@@ -634,7 +643,7 @@ const options2 = [
 
 ::: table
 
-| 属性 | 描述         |
+| 方法名 | 描述         |
 | ---- | ------------ |
 | change | 选中后数据改变的回调 |
 

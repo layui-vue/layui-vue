@@ -1,48 +1,23 @@
 <template>
-  <lay-dropdown
-    class="layui-cascader"
-    ref="dropdownRef"
-    :autoFitMinWidth="false"
-    :updateAtScroll="true"
-  >
-    <lay-input
-      v-model="displayValue"
-      readonly
-      suffix-icon="layui-icon-down"
-      :placeholder="placeholder"
-      v-if="!slots.default"
-    ></lay-input>
+  <lay-dropdown class="layui-cascader" ref="dropdownRef" :autoFitMinWidth="false" :updateAtScroll="true">
+    <lay-input v-model="displayValue" readonly suffix-icon="layui-icon-down" :placeholder="placeholder"
+      v-if="!slots.default"></lay-input>
     <slot v-else></slot>
 
     <template #content>
       <div class="layui-cascader-panel">
         <template v-for="(itemCol, index) in treeData">
-          <lay-scroll
-            height="180px"
-            class="layui-cascader-menu"
-            :key="'cascader-menu' + index"
-            v-if="itemCol.data.length"
-          >
-            <div
-              class="layui-cascader-menu-item"
-              v-for="(item, i) in itemCol.data"
-              :key="index + i"
-              @click="selectBar(item, i, index)"
-              :class="[
+          <lay-scroll height="180px" class="layui-cascader-menu" :key="'cascader-menu' + index"
+            v-if="itemCol.data.length">
+            <div class="layui-cascader-menu-item" v-for="(item, i) in itemCol.data" :key="index + i"
+              @click="selectBar(item, i, index)" :class="[
                 {
                   'layui-cascader-selected': itemCol.selectIndex === i,
                 },
-              ]"
-            >
-              <slot
-                :name="item.slot"
-                v-if="item.slot && slots[item.slot]"
-              ></slot>
+              ]">
+              <slot :name="item.slot" v-if="item.slot && slots[item.slot]"></slot>
               <template v-else>{{ item.label }}</template>
-              <i
-                class="layui-icon layui-icon-right"
-                v-if="item.children && item.children.length"
-              ></i>
+              <i class="layui-icon layui-icon-right" v-if="item.children && item.children.length"></i>
             </div>
           </lay-scroll>
         </template>
@@ -68,12 +43,14 @@ export interface LayCascaderProps {
   modelValue?: string;
   decollator?: string;
   placeholder?: string;
+  onlyLastLevel?: boolean
 }
 const props = withDefaults(defineProps<LayCascaderProps>(), {
   options: null,
   modelValue: "",
   decollator: "/",
   placeholder: "",
+  onlyLastLevel: false
 });
 const emit = defineEmits(["update:modelValue", "change", "clear"]);
 
@@ -195,11 +172,16 @@ const selectBar = (item: any, selectIndex: number, parentIndex: number) => {
       }
     }
     extractData(treeData.value, data, 0);
-    displayValue.value = data
-      .map((e: any) => {
-        return e.label;
-      })
-      .join(` ${props.decollator} `);
+    if (!props.onlyLastLevel) {
+      displayValue.value = data
+        .map((e: any) => {
+          return e.label;
+        })
+        .join(` ${props.decollator} `);
+    } else {
+      let _data = data.map((e: any) => { return e.label; })
+      displayValue.value = _data[_data.length - 1];
+    }
     let value = data
       .map((e: any) => {
         return e.value;
