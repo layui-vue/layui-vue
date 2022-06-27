@@ -112,18 +112,15 @@ export function calculateOffset(offset: any, area: any, type: any) {
 export function calculateType(modalType: number | string) {
   if (modalType === "dialog" || modalType == 0) {
     return 0;
-  } else if (
-    modalType === "page" ||
-    modalType === "drawer" ||
-    modalType == 1 ||
-    modalType == 4
-  ) {
+  } else if (modalType === "page" || modalType == 1) {
     return 1;
   } else if (modalType === "iframe" || modalType == 2) {
     return 2;
   } else if (modalType === "loading" || modalType == 3) {
     return 3;
-  } else if (modalType === "photos") {
+  } else if (modalType === "drawer" || modalType == 4) {
+    return 4;
+  }  else if (modalType === "photos") {
     return 5;
   }
   return 0;

@@ -5,6 +5,7 @@ import { Router } from "vue-router";
 import LayCode from "./src/components/LayCode.vue";
 import Children1 from "./src/components/Children1.vue";
 import Children2 from "./src/components/Children2.vue";
+import layer from "../layer/src/index";
 import "./src/assets/css/index.css";
 
 export function createApp(): {
@@ -15,6 +16,7 @@ export function createApp(): {
   const router = createRouter();
 
   app
+    .use(layer)
     .use(router)
     .component("LayCode", LayCode)
     .component("Children1", Children1)

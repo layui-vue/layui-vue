@@ -39,13 +39,13 @@ const getStyle = computed(() => {
       position: "fixed !important",
       top: "unset",
       bottom: "unset",
-      left: orginOffsetLeft - marginLeft + 'px',
+      left: orginOffsetLeft - marginLeft + "px",
     };
     if (affixTop.value) {
       style.top = fixedTop - marginTop + "px";
       return style;
     } else {
-      if (props.hasOwnProperty('bottom')) {
+      if (props.hasOwnProperty("bottom")) {
         style.bottom = props.bottom + "px";
         return style;
       } else {
@@ -60,7 +60,7 @@ const checkInWindow = () => {
     let offsetTop = dom.value.offsetTop;
     let scrollTop = props.target?.scrollTop;
 
-    if (typeof props.bottom === 'undefined') {
+    if (typeof props.bottom === "undefined") {
       //top检查 当前元素与容器顶部距离-减去滚动条的高度+容器offsetTop
       let result = offsetTop - scrollTop + props.target.offsetTop;
       if (result < fixedTop) {
@@ -69,7 +69,7 @@ const checkInWindow = () => {
             outWindow.value = false;
           }
         } else {
-          changeScrollTop = scrollTop
+          changeScrollTop = scrollTop;
           outWindow.value = true;
           affixTop.value = true;
         }
@@ -77,19 +77,22 @@ const checkInWindow = () => {
       }
     } else {
       //bottom检查 可视区窗口高度 + 文档滚动高度 - 当前元素与容器顶部距离 - 当前元素高度
-      let viewHeight = props.target.offsetHeight > window.innerHeight ? window.innerHeight : props.target.offsetHeight
+      let viewHeight =
+        props.target.offsetHeight > window.innerHeight
+          ? window.innerHeight
+          : props.target.offsetHeight;
       let result = viewHeight + scrollTop - offsetTop - dom.value.offsetHeight;
       if (outWindow.value) {
         if (scrollTop >= changeScrollTop) {
           if (props.bottom == 0) {
-            console.log(scrollTop)
+            console.log(scrollTop);
           }
           outWindow.value = false;
         }
       } else {
         if (result < fixedBottom) {
-          changeScrollTop = scrollTop - result + props.bottom
-          console.log(changeScrollTop)
+          changeScrollTop = scrollTop - result + props.bottom;
+          console.log(changeScrollTop);
           outWindow.value = true;
           affixTop.value = false;
         }
@@ -105,17 +108,18 @@ const getDomStyle = (dom: any, attr: string) => {
     // @ts-ignore
     return document.defaultView.getComputedStyle(dom, null)[attr];
   }
-}
+};
 
 onMounted(() => {
   nextTick(() => {
-    orginOffsetLeft = dom.value.getBoundingClientRect().left
-    fixedTop = props.top + props.target.offsetTop
-    if (typeof props.bottom !== 'undefined') {
-      fixedBottom = props.bottom + parseFloat(getDomStyle(dom.value, 'marginBottom'))
+    orginOffsetLeft = dom.value.getBoundingClientRect().left;
+    fixedTop = props.top + props.target.offsetTop;
+    if (typeof props.bottom !== "undefined") {
+      fixedBottom =
+        props.bottom + parseFloat(getDomStyle(dom.value, "marginBottom"));
     }
-    marginLeft = parseFloat(getDomStyle(dom.value, 'marginLeft'))
-    marginTop = parseFloat(getDomStyle(dom.value, 'marginTop'))
+    marginLeft = parseFloat(getDomStyle(dom.value, "marginLeft"));
+    marginTop = parseFloat(getDomStyle(dom.value, "marginTop"));
     props.target.addEventListener("scroll", checkInWindow, true);
     checkInWindow();
   });

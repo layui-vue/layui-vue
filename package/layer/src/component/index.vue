@@ -359,6 +359,7 @@ const boxClasses = computed(() => {
     type === 1 ? "layui-layer-page" : "",
     type === 2 ? "layui-layer-iframe" : "",
     type === 3 ? "layui-layer-loading" : "",
+    type === 4 ? "layui-layer-drawer" : "",
     type === 5 ? "layui-layer-photos" : "",
     props.isMessage ? "layui-layer-msg" : "",
     props.isMessage && !props.icon ? "layui-layer-hui" : "",
@@ -371,7 +372,7 @@ const boxClasses = computed(() => {
  * <p>
  */
 const supportMove = function () {
-  if (props.move && props.type != "drawer") {
+  if (props.move && type != 4) {
     nextTick(() => {
       // @ts-ignore 拖拽
       useMove(layero.value, (left, top) => {
@@ -473,7 +474,7 @@ const iconClass = computed(() => {
  * @param anim 入场动画
  */
 const enterActiveClass = computed(() => {
-  if (props.type === "drawer") {
+  if (type === 4) {
     return getDrawerAnimationClass(props.offset);
   }
   return `layer-anim layer-anim-0${props.anim}`;
@@ -592,7 +593,7 @@ defineExpose({ reset, open, close });
           :style="{ height: contentHeight }"
           :class="contentClasses"
         >
-          <template v-if="type === 0 || type === 1">
+          <template v-if="type === 0 || type === 1 || type === 4">
             <i v-if="icon" :class="iconClass"></i>
             <slot v-if="slots.default"></slot>
             <template v-else>

@@ -866,11 +866,17 @@ html #layuicss-layer {
     text-align: left
 }
 
+.layui-layer-drawer {
+    border-radius: 0px;
+}
+
+.layui-layer-drawer .layui-layer-content,
 .layui-layer-page .layui-layer-content {
     position: relative;
     overflow: auto
 }
 
+.layui-layer-drawer .layui-layer-btn,
 .layui-layer-iframe .layui-layer-btn,
 .layui-layer-page .layui-layer-btn {
     padding-top: 10px
