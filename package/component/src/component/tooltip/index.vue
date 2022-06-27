@@ -3,7 +3,9 @@
     <span><slot></slot></span>
   </div>
   <slot v-else></slot>
-  <lay-popper v-if="isMounted" v-bind="innerProps"></lay-popper>
+  <lay-popper v-if="isMounted" v-bind="innerProps">
+    <slot name="content"></slot>  
+  </lay-popper>
 </template>
 
 <script lang="ts">
@@ -18,7 +20,7 @@ export default defineComponent({
   props: {
     content: {
       type: [Number, String],
-      required: true,
+      required: false,
     },
     position: {
       type: String,

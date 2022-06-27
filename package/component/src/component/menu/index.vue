@@ -6,6 +6,7 @@ export default {
 
 <script setup lang="ts">
 import { computed, ComputedRef, provide, Ref, ref, watch } from "vue";
+import { provideLevel} from "./useLevel"
 import "./index.less";
 
 export interface LayMenuProps {
@@ -37,8 +38,8 @@ const props = withDefaults(defineProps<LayMenuProps>(), {
   collapseTransition: true,
 });
 
-const isTree: ComputedRef = computed(() => props.tree);
-const isCollapse: ComputedRef = computed(() => props.collapse);
+const isTree: ComputedRef<boolean> = computed(() => props.tree);
+const isCollapse: ComputedRef<boolean | string> = computed(() => props.collapse);
 const isCollapseTransition: ComputedRef = computed(
   () => props.collapseTransition
 );
@@ -77,6 +78,7 @@ watch(
   { immediate: true }
 );
 
+provideLevel(1);
 provide("isTree", isTree);
 provide("selectedKey", selectedKey);
 provide("openKeys", openKeys);
