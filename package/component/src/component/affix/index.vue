@@ -18,12 +18,12 @@ export interface LayAiffxProps {
 }
 const props = withDefaults(defineProps<LayAiffxProps>(), {
   offset: 0,
-  position: 'top',
+  position: "top",
   target: () => {
     return document.body;
   },
 });
-const emit = defineEmits(['scroll'])
+const emit = defineEmits(["scroll"]);
 const outWindow = ref(false);
 const dom = ref();
 
@@ -43,7 +43,7 @@ const getStyle = computed(() => {
       bottom: "unset",
       left: orginOffsetLeft - marginLeft + "px",
     };
-    if (props.position === 'top') {
+    if (props.position === "top") {
       style.top = fixedOffset - marginTop + "px";
     } else {
       style.bottom = fixedOffset - marginBottom + "px";
@@ -56,7 +56,7 @@ const checkInWindow = () => {
   if (dom.value) {
     let offsetTop = dom.value.offsetTop;
     let scrollTop = props.target?.scrollTop;
-    if (props.position === 'top') {
+    if (props.position === "top") {
       //top检查 当前元素与容器顶部距离-减去滚动条的高度+容器offsetTop
       let result = offsetTop - scrollTop + props.target.offsetTop;
       if (result < fixedOffset) {
@@ -82,15 +82,15 @@ const checkInWindow = () => {
         }
       } else {
         if (result < fixedOffset) {
-          changeScrollTop = scrollTop - result + props.offset
+          changeScrollTop = scrollTop - result + props.offset;
           outWindow.value = true;
         }
       }
     }
-    emit('scroll', {
+    emit("scroll", {
       targetScroll: scrollTop,
       affixed: outWindow.value,
-      offset: !outWindow.value ? 0 : Math.abs(scrollTop - changeScrollTop)
+      offset: !outWindow.value ? 0 : Math.abs(scrollTop - changeScrollTop),
     });
   }
 };
@@ -106,14 +106,14 @@ const getDomStyle = (dom: any, attr: string) => {
 
 onMounted(() => {
   nextTick(() => {
-    orginOffsetTop = dom.value.offsetTop - props.target.offsetTop
-    orginOffsetLeft = dom.value.getBoundingClientRect().left
-    marginLeft = parseFloat(getDomStyle(dom.value, 'marginLeft'))
-    marginTop = parseFloat(getDomStyle(dom.value, 'marginTop'))
-    marginBottom = parseFloat(getDomStyle(dom.value, 'marginBottom'))
-    fixedOffset = props.offset + props.target.offsetTop
-    if (props.position === 'bottom') {
-      fixedOffset = props.offset
+    orginOffsetTop = dom.value.offsetTop - props.target.offsetTop;
+    orginOffsetLeft = dom.value.getBoundingClientRect().left;
+    marginLeft = parseFloat(getDomStyle(dom.value, "marginLeft"));
+    marginTop = parseFloat(getDomStyle(dom.value, "marginTop"));
+    marginBottom = parseFloat(getDomStyle(dom.value, "marginBottom"));
+    fixedOffset = props.offset + props.target.offsetTop;
+    if (props.position === "bottom") {
+      fixedOffset = props.offset;
     }
     props.target.addEventListener("scroll", checkInWindow, true);
     checkInWindow();

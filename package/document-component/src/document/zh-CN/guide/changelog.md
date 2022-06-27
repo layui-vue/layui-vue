@@ -11,7 +11,23 @@
 <template>
 <lay-timeline>
   <lay-timeline-item title="1.2.x">
-        <ul> 
+    <ul> 
+      <a name="1-2-4"></a> 
+      <li> 
+        <h3>1.2.4 <span class="layui-badge-rim">2022-06-27</span></h3> 
+        <ul>
+          <li>[新增] table 组件 even 属性, 用于开启斑马条纹背景样式。</li>
+          <li>[新增] dropdown 组件 placement 属性 right left right-bottom right-top left-bottom left-top 值。</li>
+          <li>[新增] affix 组件, 使用锚点，可以将内容固定在容器内，并且不随容器的滚动而滚动，常用于侧边菜单导航等。 </li>
+          <li>[新增] affix 组件 position 属性, 用于设置固定的位置, 可选值为 top 与 bottom。</li>
+          <li>[新增] affix 组件 offset 属性, 定位偏移量, 默认为 0。</li>
+          <li>[新增] affix 组件 target 属性, 定位时的参考容器, 默认为 document.body。</li>
+          <li>[修复] date-picker 组件 prefix-icon 前置图标无边距的问题。</li>
+          <li>[修复] input 组件 foucs 状态时 border 颜色为 #d2d2d2。</li>
+        </ul>
+      </li>
+    </ul>
+    <ul> 
       <a name="1-2-3"></a> 
       <li> 
         <h3>1.2.3 <span class="layui-badge-rim">2022-06-26</span></h3> 

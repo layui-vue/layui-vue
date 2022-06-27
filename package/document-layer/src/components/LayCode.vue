@@ -1,14 +1,14 @@
 <template>
   <div class="lay-code">
     <div id="source" class="source">
-      <slot ></slot>
+      <slot></slot>
       <div v-if="$slots.description" class="description">
-        <slot name="description" ></slot>
+        <slot name="description"></slot>
       </div>
     </div>
     <div ref="meta" class="meta">
       <div class="language-html">
-        <slot name="code" ></slot>
+        <slot name="code"></slot>
       </div>
     </div>
     <div :class="{ 'is-fixed': isFixContorl }" class="control">
