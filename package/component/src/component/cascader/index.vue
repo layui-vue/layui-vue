@@ -174,7 +174,7 @@ function findData(orginData: any, level: number) {
 const dataContainer = ref<any>([]);
 const selectBar = (item: any, selectIndex: number, parentIndex: number) => {
   treeData.value[parentIndex].selectIndex = selectIndex;
-  if (item.children) {
+  if (item.children && item.children.length > 0) {
     treeData.value[parentIndex + 1].selectIndex = null;
     treeData.value[parentIndex + 1].data = findData(item.children, 1);
   }
