@@ -12,27 +12,29 @@ export default {
 import "./index.less";
 import { ref, onMounted, onUnmounted, nextTick, computed } from "vue";
 export interface LayAiffxProps {
-  top?: number;
-  bottom?: number;
+  offset?: number;
   target?: HTMLElement;
+  position?: string;
 }
 const props = withDefaults(defineProps<LayAiffxProps>(), {
-  top: 0,
+  offset: 0,
+  position: 'top',
   target: () => {
     return document.body;
   },
 });
-
+const emit = defineEmits(['scroll'])
 const outWindow = ref(false);
-const affixTop = ref(false);
 const dom = ref();
 
 let changeScrollTop = 0;
 let orginOffsetLeft = 0;
+let orginOffsetTop = 0;
 let marginLeft = 0;
 let marginTop = 0;
-let fixedTop = 0;
-let fixedBottom = 0;
+let marginBottom = 0;
+let fixedOffset = 0;
+
 const getStyle = computed(() => {
   if (outWindow.value && dom.value) {
     let style = {
@@ -41,17 +43,12 @@ const getStyle = computed(() => {
       bottom: "unset",
       left: orginOffsetLeft - marginLeft + "px",
     };
-    if (affixTop.value) {
-      style.top = fixedTop - marginTop + "px";
-      return style;
+    if (props.position === 'top') {
+      style.top = fixedOffset - marginTop + "px";
     } else {
-      if (props.hasOwnProperty("bottom")) {
-        style.bottom = props.bottom + "px";
-        return style;
-      } else {
-        return {};
-      }
+      style.bottom = fixedOffset - marginBottom + "px";
     }
+    return style;
   }
 });
 //检查是否在窗口内
@@ -59,11 +56,10 @@ const checkInWindow = () => {
   if (dom.value) {
     let offsetTop = dom.value.offsetTop;
     let scrollTop = props.target?.scrollTop;
-
-    if (typeof props.bottom === "undefined") {
+    if (props.position === 'top') {
       //top检查 当前元素与容器顶部距离-减去滚动条的高度+容器offsetTop
       let result = offsetTop - scrollTop + props.target.offsetTop;
-      if (result < fixedTop) {
+      if (result < fixedOffset) {
         if (outWindow.value) {
           if (scrollTop <= changeScrollTop) {
             outWindow.value = false;
@@ -71,9 +67,7 @@ const checkInWindow = () => {
         } else {
           changeScrollTop = scrollTop;
           outWindow.value = true;
-          affixTop.value = true;
         }
-        return;
       }
     } else {
       //bottom检查 可视区窗口高度 + 文档滚动高度 - 当前元素与容器顶部距离 - 当前元素高度
@@ -84,20 +78,20 @@ const checkInWindow = () => {
       let result = viewHeight + scrollTop - offsetTop - dom.value.offsetHeight;
       if (outWindow.value) {
         if (scrollTop >= changeScrollTop) {
-          if (props.bottom == 0) {
-            console.log(scrollTop);
-          }
           outWindow.value = false;
         }
       } else {
-        if (result < fixedBottom) {
-          changeScrollTop = scrollTop - result + props.bottom;
-          console.log(changeScrollTop);
+        if (result < fixedOffset) {
+          changeScrollTop = scrollTop - result + props.offset
           outWindow.value = true;
-          affixTop.value = false;
         }
       }
     }
+    emit('scroll', {
+      targetScroll: scrollTop,
+      affixed: outWindow.value,
+      offset: !outWindow.value ? 0 : Math.abs(scrollTop - changeScrollTop)
+    });
   }
 };
 
@@ -112,14 +106,15 @@ const getDomStyle = (dom: any, attr: string) => {
 
 onMounted(() => {
   nextTick(() => {
-    orginOffsetLeft = dom.value.getBoundingClientRect().left;
-    fixedTop = props.top + props.target.offsetTop;
-    if (typeof props.bottom !== "undefined") {
-      fixedBottom =
-        props.bottom + parseFloat(getDomStyle(dom.value, "marginBottom"));
+    orginOffsetTop = dom.value.offsetTop - props.target.offsetTop
+    orginOffsetLeft = dom.value.getBoundingClientRect().left
+    marginLeft = parseFloat(getDomStyle(dom.value, 'marginLeft'))
+    marginTop = parseFloat(getDomStyle(dom.value, 'marginTop'))
+    marginBottom = parseFloat(getDomStyle(dom.value, 'marginBottom'))
+    fixedOffset = props.offset + props.target.offsetTop
+    if (props.position === 'bottom') {
+      fixedOffset = props.offset
     }
-    marginLeft = parseFloat(getDomStyle(dom.value, "marginLeft"));
-    marginTop = parseFloat(getDomStyle(dom.value, "marginTop"));
     props.target.addEventListener("scroll", checkInWindow, true);
     checkInWindow();
   });
