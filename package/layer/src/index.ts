@@ -31,7 +31,7 @@ const cleanInstance = () => {
 const isExist = (id: any) => {
   let b = false;
   layerInstance.forEach((item: any, index: number) => {
-    if (item.modalContainer.id === id) {
+    if (item.modalContainer.id == id) {
       b = true;
     }
   });

@@ -461,19 +461,20 @@ const openComponent2 = () => {
 </template>
 
 <script setup>
-import { layer } from  "../../../../layer/src/index"
+import { layer } from  "../../../../layer/src/index";
+
+let id = null;
 
 const open = function() {
-  const id = layer.open({
+    id = layer.open({
         title: "标题",
         content: "内容",
         shade: false
     })
-    return id;
 }
 
 const close = function() {
-    layer.close(open);
+    layer.close(id);
 }
 
 const closeAll = function() {

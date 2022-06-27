@@ -120,7 +120,7 @@ export function calculateType(modalType: number | string) {
     return 3;
   } else if (modalType === "drawer" || modalType == 4) {
     return 4;
-  }  else if (modalType === "photos") {
+  } else if (modalType === "photos") {
     return 5;
   }
   return 0;
