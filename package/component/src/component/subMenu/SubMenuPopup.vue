@@ -35,7 +35,11 @@ const isOpen = computed(() => {
     'layui-nav-item sub-menu-popup', 
     level > 2 ? 'original': '' ,
     ]">
-    <lay-dropdown trigger="hover" placement="right-top">
+    <lay-dropdown 
+      trigger="hover" 
+      placement="right-top"
+      :autoFitMinWidth="false"
+      :contentOffset="3">
       <a href="javascript:void(0)">
         <!-- 图标 -->
         <i>
@@ -47,10 +51,10 @@ const isOpen = computed(() => {
         </span>
         <!-- 扩展 -->
         <i v-if="slots.expandIcon" class="layui-nav-more">
-          <slot name="expandIcon" :isExpand="isOpen">
+          <slot name="expandIcon">
+            <lay-icon type="layui-icon-right"></lay-icon>
           </slot>
         </i>
-        <i v-else class="layui-icon layui-icon-down layui-nav-more"></i>
       </a>
       <template #content>
         <slot></slot>
@@ -59,7 +63,14 @@ const isOpen = computed(() => {
   </li>
 </template>
 <style lang="less">
+
+
+.sub-menu-popup{
+  line-height: inherit;
+}
+
 .sub-menu-popup>.layui-dropdown>div>a {
+  width: auto;
   display: block;
   text-overflow: clip;
   height: 40px;
@@ -72,6 +83,7 @@ const isOpen = computed(() => {
 }
 
 .sub-menu-popup>.layui-dropdown dl {
+  border-radius: 4px;
   background-color: #393d49;
 }
 
@@ -102,6 +114,8 @@ const isOpen = computed(() => {
 
   .layui-nav-more {
     display: inline-block;
+    right: 2px;
+    top: 5.5px;
   }
 }
 </style>
