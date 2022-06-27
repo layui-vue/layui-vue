@@ -539,16 +539,16 @@ export default {
 | -------------------- | ----------------------------- | --------- | ------- | -------------- |
 | columns              | 列配置 - [更多](#tableColumn) | --        | --      | --             |
 | dataSource           | 数据源                        | --        | --      | --             |
-| checkbox             | 开启复选框                    | `boolean` | `false` | `true` `false` |
+| checkbox             | 开启复选框                    | `boolean`  | `false` | `true` `false` |
 | id                   | 主键                          | `string`  | --      | --             |
 | v-model:selectedKeys | 选中项                        | --        | --      | --             |
 | default-toolbar      | 工具栏                        | `boolean` | `false` | `true` `false` |
 | size                 | 尺寸                          | `string`  | `md`    | `lg` `md` `sm` |
-| children-column-name | 树节点字段                    | `string` | `children`| --            |
-| indent-size          | 树表行级缩进                   | `number`  | `30`    | -- |
-| height          | 表格高度                   | `number`  | --   | -- |
-| maxHeight          | 表格最大高度                   | `number`  | --   | -- |
-
+| children-column-name | 树节点字段                    | `string`   | `children`| --            |
+| indent-size          | 树表行级缩进                  | `number`   | `30`    | -- |
+| height               | 表格高度                      | `number`   | --   | -- |
+| maxHeight            | 表格最大高度                  | `number`   | --   | -- |
+| even                 | 斑马条纹                      | `boolean`  | `false`   | `true` `false` |
 :::
 
 ::: title Table 事件

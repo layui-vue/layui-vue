@@ -460,7 +460,7 @@ export default {
 | visible | 下拉面板是否可见 |`true` `false`|
 | trigger | 触发方式,类型 `string` 或 trigger 数组  | `click` `hover` `focus` `contextMenu` |
 | disabled | 是否禁用触发 | `true` `false` |
-| placement | 下拉面板位置 |`top` `top-left` `top-right` `bottom` `bottom-left` `bottom-right`|
+| placement | 下拉面板位置 |`top` `bottom` `right` `left` `*-left` `*-right` `*-top` `*-bottom`|
 | autoFitPosition| 是否自动调整下拉面板位置，默认 `true` |`true` `false` | 
 | autoFitWidth | 是否将下拉面板宽度设置为触发器宽度, 默认 `false` |`true` `false` |
 | autoFitMinWidth | 是否将下拉面板最小宽度设置为触发器宽度, 默认 `true` |`true` `false` |

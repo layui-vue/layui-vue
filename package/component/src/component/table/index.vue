@@ -366,7 +366,11 @@ props.dataSource.map((value: any) => {
           :style="{ height: height, maxHeight: maxHeight }"
           ref="tableBody"
         >
-          <table class="layui-table" :class="{'layui-table-even': props.even}" :lay-size="size">
+          <table
+            class="layui-table"
+            :class="{ 'layui-table-even': props.even }"
+            :lay-size="size"
+          >
             <colgroup>
               <col v-if="checkbox" class="layui-table-col-special" />
               <template v-for="column in columns" :key="column">

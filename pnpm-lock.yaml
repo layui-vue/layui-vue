@@ -101,6 +101,7 @@ importers:
       '@vueuse/core': ^8.7.3
       axios: ^0.27.2
       escape-html: ^1.0.3
+      fflate: ^0.7.3
       markdown-it-container: ^3.0.0
       pinia: ^2.0.14
       pinia-plugin-persist: ^1.0.0
@@ -124,6 +125,7 @@ importers:
       '@types/markdown-it-container': 2.0.5
       '@types/prettier': 2.6.0
       escape-html: 1.0.3
+      fflate: 0.7.3
       markdown-it-container: 3.0.0
       prismjs: 1.28.0
       rimraf: 3.0.2
@@ -3107,6 +3109,10 @@ packages:
     resolution: {integrity: sha512-YpkpUnK8od0o1hmeSc7UUs/eB/vIPWJYjKck2QKIzAf71Vm1AAQ3EbuZB3g2JIy+pg+ERD0vqI79KyZiB2e2Nw==}
     dependencies:
       reusify: 1.0.4
+    dev: true
+
+  /fflate/0.7.3:
+    resolution: {integrity: sha512-0Zz1jOzJWERhyhsimS54VTqOteCNwRtIlh8isdL0AXLo0g7xNTfTL7oWrkmCnPhZGocKIkWHBistBrrpoNH3aw==}
     dev: true
 
   /figures/2.0.0:
