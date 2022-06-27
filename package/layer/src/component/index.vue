@@ -159,25 +159,22 @@ const _l: Ref<string> = ref(offset.value[1]);
  * <p>
  */
 const firstOpenDelayCalculation = function () {
-  nextTick(async () => {
+  nextTick( async () => {
     area.value = getArea(layero.value);
     if (type == 4) {
       area.value = calculateDrawerArea(props.offset, props.area);
     }
     if (type == 5) {
       // @ts-ignore
-      area.value = await calculatePhotosArea(
-        props.imgList[props.startIndex].src,
-        props
-      );
+      area.value = await calculatePhotosArea(props.imgList[props.startIndex].src, props);
     }
     offset.value = calculateOffset(props.offset, area.value, props.type);
     w.value = area.value[0];
     h.value = area.value[1];
-    t.value = offset.value[0];
-    l.value = offset.value[1];
     _w.value = area.value[0];
     _l.value = area.value[1];
+    t.value = offset.value[0];
+    l.value = offset.value[1];
     _t.value = offset.value[0];
     _l.value = offset.value[1];
     supportMove();

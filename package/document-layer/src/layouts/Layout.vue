@@ -1,5 +1,6 @@
 <template>
-  <div class="markdown-body light-scheme">
+<lay-scroll height="100%">
+   <div class="markdown-body light-scheme">
     <div class="alone-header">
       <img class="alone-logo" src="../assets/logo.png" />
       <a
@@ -28,20 +29,34 @@
       <div class="layui-main">
         <img src="../assets/logo.jpg" />
         <h1>layer vue</h1>
-        <p>首 选 的 弹 出 层 解 决 方 案 ⭐</p>
+        <p>首 选 的 函 数 式 弹 出 层 解 决 方 案 ⭐</p>
       </div>
     </div>
-    <br />
     <div class="layui-container" style="width: 80%; margin-left: 10%">
+      <lay-tab type="brief" v-model="active">
+        <lay-tab-item title="入门" id="/zh-CN/index"></lay-tab-item>
+        <lay-tab-item title="示例" id="/zh-CN/demo"></lay-tab-item>
+        <lay-tab-item title="帮助" id="/zh-CN/help"></lay-tab-item>
+      </lay-tab>
       <router-view></router-view>
     </div>
   </div>
+</lay-scroll>
 </template>
 
 <script setup>
 import config from "../../../layer/package.json";
+import { useRouter } from "vue-router";
+import { ref, watch } from "vue";
 
 const version = config.version;
+
+const active = ref("/zh-CN/index");
+const router = useRouter();
+
+watch(active, (val) => {
+  router.push(val);
+})
 </script>
 
 <style>
@@ -115,5 +130,9 @@ body {
   margin-bottom: 10px;
   border-top: 1px solid #eee;
   border-style: solid;
+}
+
+.layui-tab-content {
+  padding: 0!important;
 }
 </style>
