@@ -1,11 +1,12 @@
 <template>
   <div>
     <lay-dropdown ref="dropdownRef" :disabled="props.disabled">
-      <lay-input 
-        readonly 
-        :name="name" 
-        :value="dateValue || modelValue" 
-        prefix-icon="layui-icon-date">
+      <lay-input
+        readonly
+        :name="name"
+        :value="dateValue || modelValue"
+        prefix-icon="layui-icon-date"
+      >
       </lay-input>
       <template #content>
         <!-- 日期选择 -->
