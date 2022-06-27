@@ -369,6 +369,12 @@ const menus = [
         subTitle: "noticeBar",
         path: "/zh-CN/components/noticeBar",
       },
+      {
+        id: 100,
+        title: "锚点",
+        subTitle: "Affix",
+        path: "/zh-CN/components/affix",
+      },
     ],
   },
   {

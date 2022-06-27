@@ -404,6 +404,11 @@ const zhCN = [
             component: () => import("../document/zh-CN/components/cascader.md"),
             meta: { title: "级联选择器" },
           },
+          {
+            path: "/zh-CN/components/Affix",
+            component: () => import("../document/zh-CN/components/affix.md"),
+            meta: { title: "锚点" },
+          },
         ],
       },
     ],
