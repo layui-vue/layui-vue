@@ -30,6 +30,10 @@ export interface LayTableProps {
   height?: number;
   maxHeight?: string;
   even?: boolean;
+  rowClassName?: string | Function;
+  cellClassName?: string | Function;
+  rowStyle?: string | Function;
+  cellStyle?: string | Function;
 }
 
 const props = withDefaults(defineProps<LayTableProps>(), {
@@ -41,6 +45,10 @@ const props = withDefaults(defineProps<LayTableProps>(), {
   selectedKeys: () => [],
   maxHeight: "auto",
   even: false,
+  rowClassName: "",
+  cellClassName: "",
+  rowStyle: "",
+  cellStyle: "",
 });
 
 const tableId = uuidv4();
@@ -384,9 +392,10 @@ props.dataSource.map((value: any) => {
             </colgroup>
             <tbody>
               <!-- 渲染 -->
-              <template v-for="data in tableDataSource" :key="data">
+              <template v-for="(data, index) in tableDataSource" :key="data">
                 <table-row
                   :id="id"
+                  :index="index" 
                   :data="data"
                   :columns="columns"
                   :checkbox="checkbox"
@@ -394,6 +403,10 @@ props.dataSource.map((value: any) => {
                   :currentIndentSize="currentIndentSize"
                   :tableColumnKeys="tableColumnKeys"
                   :expandSpace="childrenExpandSpace"
+                  :cellStyle="cellStyle"
+                  :cellClassName="cellClassName"
+                  :rowStyle="rowStyle"
+                  :rowClassName="rowClassName"
                   @row="rowClick"
                   @row-double="rowDoubleClick"
                   @contextmenu="contextmenu"

@@ -12,6 +12,7 @@ import LayDropdown from "../dropdown/index.vue";
 import LayTooltip from "../tooltip/index.vue";
 
 export interface LayTableRowProps {
+  index: number;
   indentSize: number;
   currentIndentSize: number;
   expandSpace: boolean;
@@ -20,6 +21,10 @@ export interface LayTableRowProps {
   childrenColumnName?: string;
   columns: Recordable[];
   checkbox?: boolean;
+  cellClassName: string | Function;
+  cellStyle: string | Function;
+  rowClassName: string | Function;
+  rowStyle: string | Function;
   id: string;
   data: any;
 }
@@ -35,6 +40,8 @@ const emit = defineEmits([
 const props = withDefaults(defineProps<LayTableRowProps>(), {
   checkbox: false,
   childrenColumnName: "children",
+  cellStyle: "",
+  cellClassName: ""
 });
 
 const tableSelectedKeys: WritableComputedRef<Recordable[]> = computed({
@@ -75,11 +82,41 @@ const handleExpand = () => {
   isExpand.value = !isExpand.value;
 };
 
+const renderCellStyle = (row: any, column: any, rowIndex: number, columnIndex: number) => {
+  if(typeof props.cellStyle === 'string') {
+    return props.cellStyle;
+  } 
+  return props.cellStyle(row, column, rowIndex, columnIndex);
+}
+
+const renderCellClassName = (row: any, column: any, rowIndex: number, columnIndex: number) => {
+  if(typeof props.cellClassName === 'string') {
+    return props.cellClassName;
+  } 
+  return props.cellClassName(row, column, rowIndex, columnIndex); 
+}
+
+const renderRowStyle = (data: any, index: number) => {
+  if(typeof props.rowStyle === 'string') {
+    return props.rowStyle;
+  } 
+  return props.rowStyle(data, index); 
+}
+
+const renderRowClassName = (data: any, index: number) => {
+  if(typeof props.rowClassName === 'string') {
+    return props.rowClassName;
+  } 
+  return props.rowClassName(data, index); 
+}
+
 const childrenIndentSize = props.currentIndentSize + props.indentSize;
 </script>
 
 <template>
   <tr
+    :style="[renderRowStyle(data, index)]"
+    :class="[renderRowClassName(data, index)]"
     @click.stop="rowClick(data, $event)"
     @dblclick.stop="rowDoubleClick(data, $event)"
     @contextmenu.stop="contextmenu(data, $event)"
@@ -96,21 +133,22 @@ const childrenIndentSize = props.currentIndentSize + props.indentSize;
     </td>
 
     <!-- 数据列 -->
-    <template v-for="(column, index) in columns" :key="column">
+    <template v-for="(column, columnIndex) in columns" :key="columnIndex">
       <!-- 展示否 -->
       <template v-if="tableColumnKeys.includes(column.key)">
         <!-- 插槽列 -->
         <template v-if="column.customSlot">
           <td
             class="layui-table-cell"
-            :style="{
+            :style="[{
               textAlign: column.align,
               whiteSpace: column.ellipsisTooltip ? 'nowrap' : 'normal',
-            }"
+            }, renderCellStyle(data, column, index, columnIndex)]"
+            :class="[renderCellClassName(data, column, index, columnIndex)]" 
           >
             <!-- 树表占位与缩进 -->
             <span
-              v-if="expandSpace && index === 0"
+              v-if="expandSpace && columnIndex === 0"
               :style="{ 'margin-right': currentIndentSize + 'px' }"
             ></span>
 
@@ -119,13 +157,13 @@ const childrenIndentSize = props.currentIndentSize + props.indentSize;
                 expandSpace &&
                 !data[childrenColumnName] &&
                 !slot.expand &&
-                index === 0
+                columnIndex === 0
               "
               class="layui-table-cell-expand-icon-spaced"
             ></span>
 
             <lay-icon
-              v-if="(slot.expand || data[childrenColumnName]) && index === 0"
+              v-if="(slot.expand || data[childrenColumnName]) && columnIndex === 0"
               class="layui-table-cell-expand-icon"
               :type="expandIconType"
               @click="handleExpand"
@@ -147,14 +185,15 @@ const childrenIndentSize = props.currentIndentSize + props.indentSize;
           <template v-if="column.key in data">
             <td
               class="layui-table-cell"
-              :style="{
+              :style="[{
                 textAlign: column.align,
                 whiteSpace: column.ellipsisTooltip ? 'nowrap' : 'normal',
-              }"
+              }, renderCellStyle(data, column, index, columnIndex)]"
+              :class="[renderCellClassName(data, column, index, columnIndex)]" 
             >
               <!-- 树表占位与缩进 -->
               <span
-                v-if="expandSpace && index === 0"
+                v-if="expandSpace && columnIndex === 0"
                 :style="{ 'margin-right': currentIndentSize + 'px' }"
               ></span>
 
@@ -163,13 +202,13 @@ const childrenIndentSize = props.currentIndentSize + props.indentSize;
                   expandSpace &&
                   !data[childrenColumnName] &&
                   !slot.expand &&
-                  index === 0
+                  columnIndex === 0
                 "
                 class="layui-table-cell-expand-icon-spaced"
               ></span>
 
               <lay-icon
-                v-if="(slot.expand || data[childrenColumnName]) && index === 0"
+                v-if="(slot.expand || data[childrenColumnName]) && columnIndex === 0"
                 class="layui-table-cell-expand-icon"
                 :type="expandIconType"
                 @click="handleExpand"
@@ -198,11 +237,12 @@ const childrenIndentSize = props.currentIndentSize + props.indentSize;
   <!-- 树形结构 -->
   <template v-if="data[childrenColumnName] && isExpand">
     <template
-      v-for="(children, index) in data[childrenColumnName]"
-      :key="index"
+      v-for="(children, childrenIndex) in data[childrenColumnName]"
+      :key="childrenIndex"
     >
       <table-row
         :id="id"
+        :index="childrenIndex"
         :data="children"
         :columns="columns"
         :indent-size="indentSize"
@@ -210,6 +250,10 @@ const childrenIndentSize = props.currentIndentSize + props.indentSize;
         :checkbox="checkbox"
         :tableColumnKeys="tableColumnKeys"
         :expandSpace="expandSpace"
+        :cellStyle="cellStyle"
+        :cellClassName="cellClassName"
+        :rowStyle="rowStyle"
+        :rowClassName="rowClassName"
         @row="rowClick"
         @row-double="rowDoubleClick"
         @contextmenu="contextmenu"
