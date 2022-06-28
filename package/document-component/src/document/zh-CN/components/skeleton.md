@@ -15,7 +15,7 @@
 <template>
 <div>
 <div style="margin-bottom: 10px">
-<lay-switch v-model="loading" active-text="加载" inactive-text="关闭"></lay-switch>
+<lay-switch v-model="loading" onswitch-text="加载" unswitch-text="关闭"></lay-switch>
 </div>
   <lay-skeleton :rows="4" :loading="loading" animated>
     <p style="margin-bottom: 18px">1 layui-vue , 基 于 vue 3.0 的 桌 面 端 组 件 库 , layui 的 另 一 种 呈 现 方 式</p>
@@ -50,7 +50,7 @@ export default {
 <template>
 <div>
 <div style="margin-bottom: 10px">
-<lay-switch v-model="loading" active-text="加载" inactive-text="关闭"></lay-switch>
+<lay-switch v-model="loading" onswitch-text="加载" unswitch-text="关闭"></lay-switch>
 </div>
   <lay-skeleton :loading="loading" animated>
         <template #skeleton>

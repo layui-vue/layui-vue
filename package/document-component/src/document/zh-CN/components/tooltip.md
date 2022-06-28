@@ -105,8 +105,8 @@ setup() {
   <lay-tooltip :content="content" :is-dark="isDark" :disabled="!disabled">
     <lay-button>tooltip</lay-button>
   </lay-tooltip>
-  <lay-switch v-model="disabled" active-text="启用tooltip"  inactive-text="禁用tooltip" style="margin-left: 5px;"></lay-switch>
-  <lay-switch v-model="isDark" active-text="深色"  inactive-text="浅色" style="margin-left: 5px;"></lay-switch>
+  <lay-switch v-model="disabled" onswitch-text="启用tooltip"  unswitch-text="禁用tooltip" style="margin-left: 5px;"></lay-switch>
+  <lay-switch v-model="isDark" onswitch-text="深色"  unswitch-text="浅色" style="margin-left: 5px;"></lay-switch>
 </template>
 
 <script>
