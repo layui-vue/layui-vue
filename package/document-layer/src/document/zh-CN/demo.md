@@ -125,6 +125,7 @@ const load4 = function() {
             <button @click="openResize">尺寸拉伸</button>
             <button @click="openIndex">设置层级</button>
             <button @click="openAreaAuto">内容适应</button>
+            <button @click="openAreaAuto2">内容适应2</button>
         </lay-col>
     </lay-row>
 </template>
@@ -216,6 +217,16 @@ const openAreaAuto = function(){
     layer.open({
         type:1,
         title:"area:auto",
+        isHtmlFragment:true,
+        content:"<img src='https://chixian.oss-cn-hangzhou.aliyuncs.com/20210819230007_346ce.jpeg'/>"
+    })
+}
+
+const openAreaAuto2 = function(){
+    layer.open({
+        type:1,
+        title:"area:auto",
+        offset:['10px','50%'],
         isHtmlFragment:true,
         content:"<img src='https://chixian.oss-cn-hangzhou.aliyuncs.com/20210819230007_346ce.jpeg'/>"
     })
