@@ -6,7 +6,7 @@ button + button {
 button {
   height: 38px;
   line-height: 36px;
-  padding: 0 18px;
+  padding: 0 18px !important;
   color: #fff;
   font-size: 14px;
   text-align: center;

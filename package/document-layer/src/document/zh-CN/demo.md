@@ -358,7 +358,7 @@ const closeAll = function() {
     <legend>通讯</legend>
 </fieldset>
 
-::: demo 👉 查看 [Children1.vue](https://gitee.com/layui-vue/layer-vue/blob/master/example/src/components/Children1.vue), 通过 h() 函数的第二个参数向 Children1.vue 传递响应式变量。
+::: demo 👉 查看 [Children1.vue](https://layui-vue.gitee.io/sandbox-vue/#eNqdUkGO00AQ/ErLFyeSY5OrSaJFK87LA3yZtTub2R3PjGba0UaWD5w4cUTiCDwA+AGfQZH4BT127HXEjZu7XNVTXd1t9Mba9NhglEcbwtoqQbgrNMDmviEyGm5KJcunbREZi/rW1NZo1LQuot3508/zx++bbCAOIqltQ0Ani6wgfKYiguOqNhUqBipBInVYC/fEeMaSTTY9CoXm2pdOWgIl9EPo4JnnkRrLXMlvO4IWHIqS5BETOCRceKOOODmDDvbO1BDzUPFMpMQJ3fTzhstGZj24umLeHqSqHOo7jRdumo3YOiTFVOi9lkZ7gjATbCdPizb8HmbMIf796+v5/Y84KXS3fNFcR8nqxRK2O+ilvaU0MIZWACRJIfc6f/nw59vn0Cug3IlYncNhMbOc8KS9o2554fmDqFi9F8pjDwUjXUh+iJqDjZJoGH5VC5s+eqP5GtriAvIK8rbrmHQVw78Hszeu7r/+4w5Ykl30s5N4uYfxBsYEsZbEuVW4lxrfcuEXcSmUwiqe5WydsX6ivQvVEGowkMPd/SOWNK5mFkh4l04KwZe8iIqR4G3YjxVVJfVDDutX9vn1GGVg76LuL+G7LGU=), 通过 h() 函数的第二个参数向 Children1.vue 传递响应式变量。
 
 <template>
   <button @click="openComponent1">数据</button>
@@ -384,7 +384,7 @@ const openComponent1 = () => {
 
 :::
 
-::: demo 👉 查看 [Children2.vue](https://gitee.com/layui-vue/layer-vue/blob/master/example/src/components/Children2.vue), 通过 h() 函数的第二个参数声明 onXxx() 形式的函数完成 Children2.vue 的事件监听。 
+::: demo 👉 查看 [Children2.vue](https://layui-vue.gitee.io/sandbox-vue/#eNqNksFum0AQhl9lxAWsYmPnSG2UKOoTtLfSA4Yh3hZ2VzC4sRDnSO2h1x6jPkQP7esklfoWnQXWAaWHcGJmv5n9d+ZvnSutV8cGndDZEpa6SAijWAJs9w2RknCZFiL9tIsdpVFeq1IriZIuYid6+PX14ffPbTCAQ5GQuiGgk0auILyl2IHjslQZFpyQTbnnRMDsNpjcxmGdVkITFIm8MZU1YzVSo/lU8J0VQQsVJimJI/pw8DnIoYO8UiW4rN+dcEVywup8eMlhI4I+uZyR1wdRZBXKd5/VyK4Cm7swQ2E0lqmSNYGulIbdWYLXdgt7ZF7VH+XeZr1ec96ezEfGjLeAXQStGVWvZ2UIr48BSFCBIbh/7u/+/vju+kOWOxFXh3DwJnr9oYn5jLKRBVDyKsu8CuvFEwC9wtUxKRpkDZPgFWws1E1avG32L26xfN6iW/Q/ZkCdWfSwWl6k4zvD5JdlolcfayXZdW08JnnlYdt1DM128NyYuarK/u/JpKPhhoitczZtkmXs1Mcv9zObvqCwbtip0ePdt7m/g/HymX2tea1h7fqxFMTTyjAXEt9wUHvvXVbk+i63dz9MnMLZuT2gr/Z6fBikRbn0/6jpadHJ1I0+OhUIdcpuyzhj3jCUam4v5E0Im7W+fW33ZejI6f4B7opkgw==), 通过 h() 函数的第二个参数声明 onXxx() 形式的函数完成 Children2.vue 的事件监听。 
 
 <template>
   <button @click="openComponent2">事件</button>

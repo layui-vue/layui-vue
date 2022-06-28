@@ -5,7 +5,7 @@
   </form>
 </template>
 <script setup>
-const emit = defineEmits("add", "sub");
+const emit = defineEmits(["add", "sub"]);
 
 const add = () => {
   emit("add");

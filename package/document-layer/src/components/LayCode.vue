@@ -12,6 +12,7 @@
       </div>
     </div>
     <div :class="{ 'is-fixed': isFixContorl }" class="control">
+      <i class="layui-icon layui-icon-play btn" @click="onPlayground" />
       <i class="layui-icon layui-icon-file btn" @click="copy"></i>
       <i class="layui-icon layui-icon-fonts-code btn" @click="toggle"></i>
     </div>
@@ -20,6 +21,7 @@
 
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref, watch } from "vue";
+import { usePlayGround } from "../composable/usePlayground";
 
 const meta = ref<HTMLElement>({} as HTMLElement);
 const isFixContorl = ref(false);
@@ -29,6 +31,13 @@ const show = ref(false);
 
 const toggle = function () {
   show.value = !show.value;
+};
+
+const onPlayground = async function () {
+  const foundCode = meta.value.querySelector(".language-html");
+  const sourceCode = foundCode?.textContent ?? "";
+  const { link } = await usePlayGround(sourceCode, true);
+  window.open(link);
 };
 
 const copy = function () {
@@ -64,7 +73,9 @@ const copy = function () {
   }
 
   if (successful) {
+    window.alert("复制成功");
   } else {
+    window.alert("复制失败");
   }
 };
 
