@@ -191,7 +191,10 @@ const openMaxmin = function() {
         type: 1,
         title: "标题",
         maxmin: true,
-        content: "内容"
+        content: "内容",
+        full:(e)=>{console.log('full',e)},
+        min:(e)=>{console.log('min',e)},
+        restore:(e)=>{console.log('restore',e)}
     })
 }
 

@@ -90,6 +90,9 @@ export interface LayModalProps {
   appContext?: any;
   startIndex?: number;
   imgList?: { src: string; alt: string }[];
+  min?: Function;
+  full?: Function;
+  restore?: Function;
 }
 
 const props = withDefaults(defineProps<LayModalProps>(), {
@@ -115,6 +118,9 @@ const props = withDefaults(defineProps<LayModalProps>(), {
   destroy: () => { },
   success: () => { },
   end: () => { },
+  full: () => { },
+  min: () => { },
+  restore: () => { },
   yesText: "确定",
   isFunction: false,
   isMessage: false,
@@ -224,6 +230,7 @@ const maxHandle = () => {
     h.value = _h.value;
     t.value = _t.value;
     l.value = _l.value;
+    props.restore(props.id)
   } else {
     _t.value = t.value;
     _l.value = l.value;
@@ -233,6 +240,7 @@ const maxHandle = () => {
     h.value = maxArea().h;
     t.value = maxOffset().t;
     l.value = maxOffset().l;
+    props.full(props.id)
   }
   max.value = !max.value;
 };
@@ -251,6 +259,7 @@ const minHandle = () => {
     h.value = _h.value;
     t.value = _t.value;
     l.value = _l.value;
+    props.restore(props.id)
   } else {
     _w.value = w.value;
     _h.value = h.value;
@@ -260,6 +269,7 @@ const minHandle = () => {
     w.value = minArea().w;
     t.value = minOffset(left).t;
     l.value = minOffset(left).l;
+    props.min(props.id)
   }
   min.value = !min.value;
 };
@@ -420,7 +430,7 @@ const styles = computed<any>(() => {
       }
       if (offset.value[0].indexOf('%') > -1 || offset.value[1].indexOf('%') > -1) {
         // @ts-ignore
-        style.transform = `translate(-${style.left.indexOf('%')>-1?style.left:0},-${style.top.indexOf('%')>-1?style.top:0})`;
+        style.transform = `translate(-${style.left.indexOf('%') > -1 ? style.left : 0},-${style.top.indexOf('%') > -1 ? style.top : 0})`;
       }
     }
 
