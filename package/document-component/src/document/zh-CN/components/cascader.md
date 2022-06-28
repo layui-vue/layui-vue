@@ -318,7 +318,7 @@ const valueLv=ref(null)
 
 ::: title 触发方式
 :::
-::: demo 本组弹出效果依托于DropDown组件，触发方式与其保持一致
+::: demo 本组件弹出效果依托于DropDown组件，触发方式与其保持一致
 <template>
   <lay-cascader :options="options"  placeholder="click触发(默认)" style="width:250px;margin-right:20px"></lay-cascader>
   <lay-cascader :options="options"  placeholder="hover触发" style="width:250px;margin-right:20px" trigger="hover"></lay-cascader>

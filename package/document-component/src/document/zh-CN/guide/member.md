@@ -143,7 +143,7 @@
 <lay-card>
     <lay-row>
         <lay-col md="2">
-            <lay-avatar src="https://portrait.gitee.com/uploads/avatars/user/495/1486240_SmallWai_1656341928.png!avatar200"></lay-avatar>
+            <lay-avatar src="https://portrait.gitee.com/uploads/avatars/user/495/1486240_SmallWai_1656341928.png"></lay-avatar>
         </lay-col>
         <lay-col md="3">
             0o张不歪o0
