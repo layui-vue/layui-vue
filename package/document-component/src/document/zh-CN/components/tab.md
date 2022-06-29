@@ -407,6 +407,17 @@ export default {
 
 :::
 
+::: title Tab Item 插槽
+:::
+
+::: table
+
+| 属性     | 描述     | 参数 |
+| -------- | -------- | ------ |
+| title    | 标题 | --     |
+
+:::
+
 ::: contributor tab
 ::: 
 

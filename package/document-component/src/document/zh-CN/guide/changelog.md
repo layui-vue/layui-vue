@@ -14,7 +14,7 @@
     <ul> 
       <a name="1-2-5"></a> 
       <li> 
-        <h3>1.2.5 <span class="layui-badge-rim">2022-06-28</span></h3> 
+        <h3>1.2.5 <span class="layui-badge-rim">2022-06-29</span></h3> 
         <ul>
           <li>[新增] table 组件 rowStyle 属性, 自定义行样式, 值为 function(row, rowIndex) 函数或 string 类型。</li>
           <li>[新增] table 组件 rowClassName 属性, 自定义行样式, 值为 function(row, rowIndex) 函数或 string 类型。</li>
@@ -22,6 +22,7 @@
           <li>[新增] table 组件 cellClassName 属性, 自定义单元格样式, 值为 function(row, column, rowIndex, columnIndex) 函数或 string 类型。</li>
           <li>[修复] icon-picker 组件在颜色面板中拉动选取颜色，触碰颜色面板边角时，导致色相变为 0。 </li>
           <li>[修复] provider 组件切换主题 Embedded Dark Reader cannot access a cross-origin resource。</li>
+          <li>[修复] switch 组件 onswitch-text 与 unswitch-text 使用文档。</li>
         </ul>
       </li>
     </ul>

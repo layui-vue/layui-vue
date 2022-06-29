@@ -322,6 +322,10 @@ const groupImg = function() {
 
 :::
 
+<fieldset class="layui-elem-field layui-field-title">
+    <legend>通知</legend>
+</fieldset>
+
 ::: demo 通过 layer.notifiy(options) 创建通知。
 
 <template>
