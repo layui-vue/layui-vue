@@ -41,7 +41,7 @@ const props = withDefaults(defineProps<LayTableRowProps>(), {
   checkbox: false,
   childrenColumnName: "children",
   cellStyle: "",
-  cellClassName: ""
+  cellClassName: "",
 });
 
 const tableSelectedKeys: WritableComputedRef<Recordable[]> = computed({
@@ -82,33 +82,43 @@ const handleExpand = () => {
   isExpand.value = !isExpand.value;
 };
 
-const renderCellStyle = (row: any, column: any, rowIndex: number, columnIndex: number) => {
-  if(typeof props.cellStyle === 'string') {
+const renderCellStyle = (
+  row: any,
+  column: any,
+  rowIndex: number,
+  columnIndex: number
+) => {
+  if (typeof props.cellStyle === "string") {
     return props.cellStyle;
-  } 
+  }
   return props.cellStyle(row, column, rowIndex, columnIndex);
-}
+};
 
-const renderCellClassName = (row: any, column: any, rowIndex: number, columnIndex: number) => {
-  if(typeof props.cellClassName === 'string') {
+const renderCellClassName = (
+  row: any,
+  column: any,
+  rowIndex: number,
+  columnIndex: number
+) => {
+  if (typeof props.cellClassName === "string") {
     return props.cellClassName;
-  } 
-  return props.cellClassName(row, column, rowIndex, columnIndex); 
-}
+  }
+  return props.cellClassName(row, column, rowIndex, columnIndex);
+};
 
 const renderRowStyle = (data: any, index: number) => {
-  if(typeof props.rowStyle === 'string') {
+  if (typeof props.rowStyle === "string") {
     return props.rowStyle;
-  } 
-  return props.rowStyle(data, index); 
-}
+  }
+  return props.rowStyle(data, index);
+};
 
 const renderRowClassName = (data: any, index: number) => {
-  if(typeof props.rowClassName === 'string') {
+  if (typeof props.rowClassName === "string") {
     return props.rowClassName;
-  } 
-  return props.rowClassName(data, index); 
-}
+  }
+  return props.rowClassName(data, index);
+};
 
 const childrenIndentSize = props.currentIndentSize + props.indentSize;
 </script>
@@ -140,11 +150,14 @@ const childrenIndentSize = props.currentIndentSize + props.indentSize;
         <template v-if="column.customSlot">
           <td
             class="layui-table-cell"
-            :style="[{
-              textAlign: column.align,
-              whiteSpace: column.ellipsisTooltip ? 'nowrap' : 'normal',
-            }, renderCellStyle(data, column, index, columnIndex)]"
-            :class="[renderCellClassName(data, column, index, columnIndex)]" 
+            :style="[
+              {
+                textAlign: column.align,
+                whiteSpace: column.ellipsisTooltip ? 'nowrap' : 'normal',
+              },
+              renderCellStyle(data, column, index, columnIndex),
+            ]"
+            :class="[renderCellClassName(data, column, index, columnIndex)]"
           >
             <!-- 树表占位与缩进 -->
             <span
@@ -163,7 +176,9 @@ const childrenIndentSize = props.currentIndentSize + props.indentSize;
             ></span>
 
             <lay-icon
-              v-if="(slot.expand || data[childrenColumnName]) && columnIndex === 0"
+              v-if="
+                (slot.expand || data[childrenColumnName]) && columnIndex === 0
+              "
               class="layui-table-cell-expand-icon"
               :type="expandIconType"
               @click="handleExpand"
@@ -185,11 +200,14 @@ const childrenIndentSize = props.currentIndentSize + props.indentSize;
           <template v-if="column.key in data">
             <td
               class="layui-table-cell"
-              :style="[{
-                textAlign: column.align,
-                whiteSpace: column.ellipsisTooltip ? 'nowrap' : 'normal',
-              }, renderCellStyle(data, column, index, columnIndex)]"
-              :class="[renderCellClassName(data, column, index, columnIndex)]" 
+              :style="[
+                {
+                  textAlign: column.align,
+                  whiteSpace: column.ellipsisTooltip ? 'nowrap' : 'normal',
+                },
+                renderCellStyle(data, column, index, columnIndex),
+              ]"
+              :class="[renderCellClassName(data, column, index, columnIndex)]"
             >
               <!-- 树表占位与缩进 -->
               <span
@@ -208,7 +226,9 @@ const childrenIndentSize = props.currentIndentSize + props.indentSize;
               ></span>
 
               <lay-icon
-                v-if="(slot.expand || data[childrenColumnName]) && columnIndex === 0"
+                v-if="
+                  (slot.expand || data[childrenColumnName]) && columnIndex === 0
+                "
                 class="layui-table-cell-expand-icon"
                 :type="expandIconType"
                 @click="handleExpand"

@@ -13,7 +13,7 @@ import {
   enable as enableDarkMode,
   disable as disableDarkMode,
   auto as followSystemColorScheme,
-  setFetchMethod
+  setFetchMethod,
 } from "@umijs/ssr-darkreader";
 
 export interface LayConfigProviderProps {
@@ -72,7 +72,7 @@ const changeTheme = (theme: string) => {
   };
   Object.assign(defaultPartial, props.darkPartial);
   if (theme === "dark") {
-    if(window){
+    if (window) {
       setFetchMethod(window.fetch);
     }
     enableDarkMode(defaultPartial, defaultFixes);

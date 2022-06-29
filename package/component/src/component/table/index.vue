@@ -395,7 +395,7 @@ props.dataSource.map((value: any) => {
               <template v-for="(data, index) in tableDataSource" :key="data">
                 <table-row
                   :id="id"
-                  :index="index" 
+                  :index="index"
                   :data="data"
                   :columns="columns"
                   :checkbox="checkbox"
