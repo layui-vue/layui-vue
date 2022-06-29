@@ -231,7 +231,7 @@ const openAreaAuto2 = function(){
         title:"area:auto",
         offset:['10px','50%'],
         isHtmlFragment:true,
-        content:"<img src='https://chixian.oss-cn-hangzhou.aliyuncs.com/20210819230007_346ce.jpeg'/>"
+        content:"<img src='https://chixian.oss-cn-hangzhou.aliyuncs.com/20210819230007_346ce.jpeg'/>",
     })
 }
 </script>
@@ -317,6 +317,105 @@ const groupImg = function() {
       { src:'http://www.pearadmin.com/assets/images/un32.svg', alt:'图片2'}
     ]
   })
+}
+</script>
+
+:::
+
+::: demo 通过 layer.notifiy(options) 创建通知。
+
+<template>
+  <lay-row :space="30" >
+    <lay-col :span="24">
+      <button @click="baseNotifiy">基本使用</button>
+      <button @click="baseNotifiyRB">右下</button>
+      <button @click="baseNotifiyLT">左上</button>
+      <button @click="baseNotifiyLB">左下</button>
+      <button @click="baseNotifiyTime0">不主动关闭</button>
+      <button @click="baseNotifiyHtml">HTML解析</button>
+    </lay-col>
+    <lay-col :span="24">
+      <button @click="NotifiySuccess">成功通知</button>
+      <button @click="NotifiyFailure">失败通知</button>
+      <button @click="NotifiyWarm">警告通知</button>
+      <button @click="NotifiyInfo">锁定通知</button>
+    </lay-col>
+  </lay-row>
+</template>
+
+<script>
+import { layer } from  "../../../../layer/src/index"
+
+const baseNotifiy = function() {
+    layer.notifiy({
+      title:"这是标题",
+      content:"默认就是右上，也是用得最多的"
+    })
+}
+const baseNotifiyRB = function() {
+    layer.notifiy({
+      title:"这是标题",
+      content:"我出现在右下",
+      offset:'rb',
+    })
+}
+const baseNotifiyLT = function() {
+    layer.notifiy({
+      title:"这是标题",
+      content:"我出现在左上",
+      offset:'lt',
+    })
+}
+const baseNotifiyLB = function() {
+    layer.notifiy({
+      title:"这是标题",
+      content:"我出现在左下",
+      offset:'lb',
+    })
+}
+const baseNotifiyTime0 = function() {
+    layer.notifiy({
+      title:"这是标题",
+      content:"不会主动关闭，请点击右上角关闭图标",
+      time:0
+    })
+}
+const baseNotifiyHtml = function() {
+    layer.notifiy({
+      title:"这是标题,有图片时请设置area参数",
+      isHtmlFragment:true,
+      content:"<img src='https://chixian.oss-cn-hangzhou.aliyuncs.com/20210819230007_346ce.jpeg'/>",
+      area:['330px','220px'],
+      time:3000
+    })
+}
+const NotifiySuccess=function(){
+    layer.notifiy({
+      title:"Success",
+      content:"默认就是右上，也是用得最多的",
+      icon:1
+    })
+}
+const NotifiyFailure=function(){
+    layer.notifiy({
+      title:"Error",
+      content:"默认就是右上，也是用得最多的",
+      icon:2
+    })
+}
+const NotifiyWarm=function(){
+    layer.notifiy({
+      title:"Warming",
+      content:"默认就是右上，也是用得最多的",
+      icon:3
+    })
+}
+const NotifiyInfo=function(){
+    layer.notifiy({
+      title:"Question",
+      content:"默认就是右上，也是用得最多的",
+      icon:4
+    })
 }
 </script>
 

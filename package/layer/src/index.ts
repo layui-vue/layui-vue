@@ -2,7 +2,7 @@ import { render, h, isVNode, getCurrentInstance, AppContext, App } from "vue";
 import LayLayer from "./component/index.vue";
 import { InstallOptions } from "./types";
 import { zIndexKey } from "./tokens";
-import { nextId } from "./utils";
+import { nextId, removeNotifiyFromQueen } from "./utils";
 
 // 实例队列
 const layerInstance: any = [];
@@ -129,13 +129,25 @@ const layer = {
       };
     }
     let defaultOption = {
-      type: "photos",
+      type: 5,
       anim: 2,
       startIndex: 0,
       isOutAnim: true,
       shadeClose: true,
       shadeOpacity: "0.7",
     };
+    return layer.create(option, defaultOption, callback);
+  },
+  //通知
+  notifiy: (option: any = {}, callback?: Function) => {
+    option.anim = 5
+    option.shade = false
+    option.type = 6
+    let defaultOption = {
+      offset: 'rt',
+      time:2000,
+      area:'auto'
+    }
     return layer.create(option, defaultOption, callback);
   },
   // 创建弹出层
@@ -174,7 +186,7 @@ const layer = {
     // 调用 open 函数
     modalInstance.component?.exposed?.open();
     // 延时 time 销毁
-    if (defaultOption && defaultOption.time != undefined) {
+    if (defaultOption && defaultOption.time != undefined && defaultOption.time != 0) {
       timer = setTimeout(() => {
         modalInstance.component?.exposed?.close();
         if (callback) callback(modalContainer.id);
@@ -186,6 +198,10 @@ const layer = {
         }, 2000);
         // 销毁实例
         delInstance(modalContainer.id);
+        //Notifiy特殊处理
+        if (options.type === 6) {
+          removeNotifiyFromQueen(options.id)
+        }
       }, defaultOption.time);
     }
     // 维护实例

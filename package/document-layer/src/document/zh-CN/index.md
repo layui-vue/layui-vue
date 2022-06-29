@@ -96,6 +96,7 @@ const changeVisible = () => {
 | shadeOpacity | 遮盖层透明度 | string | `0.1` | `0.1` - `1` |
 | isHtmlFragment | 解析 html 字符 | boolean | `false` | `true` `false` |
 | imgList | 图片数据数组 | array[{src:图片链接,alt:图片名字可选'}] | - | - |
+| startIndex | 图片初始浏览索引 | number | 0 | - |
 <fieldset class="layui-elem-field layui-field-title">
     <legend>动画</legend>
 </fieldset>
