@@ -20,6 +20,7 @@ import {
   shallowRef,
 } from "vue";
 import LayBadge from "../badge/index.vue";
+import LayInput from "../input/index.vue";
 import LayScroll from "../scroll/index.vue";
 import { onClickOutside } from "@vueuse/core";
 import { SelectItem } from "../../types";

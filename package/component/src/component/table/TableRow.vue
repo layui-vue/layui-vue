@@ -10,6 +10,7 @@ import { computed, ref, useSlots, WritableComputedRef } from "vue";
 import LayCheckbox from "../checkbox/index.vue";
 import LayDropdown from "../dropdown/index.vue";
 import LayTooltip from "../tooltip/index.vue";
+import { LayIcon } from "@layui/icons-vue";
 
 export interface LayTableRowProps {
   index: number;
