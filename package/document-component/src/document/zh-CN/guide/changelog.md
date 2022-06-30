@@ -18,6 +18,7 @@
         <ul>
           <li>[修复] tooltip 组件设置isAutoShow 属性时，宽度设置max-width 时拖动浏览器时出现...时，tooltip不显示问题。 by @dingyongya</li>
           <li>[修复] table 组件设置 ellipsisTooltip 属性时 出现...时，tooltip不显示问题。by @dingyongya</li>
+          <li>[优化] transfer 组件 selectedKeys 选中效果, 加入 checkbox 半选状态。by @Jmysy</li>
         </ul>
       </li>
     </ul>
