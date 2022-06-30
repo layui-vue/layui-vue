@@ -5,6 +5,10 @@
   --transfer-box-border-radius: var(--global-border-radius);
 }
 
+.layui-transfer {
+  display: flex;
+}
+
 .layui-transfer .layui-btn + .layui-btn {
   margin-left: 0;
 }
@@ -22,6 +26,8 @@
   border-width: 1px;
   width: 200px;
   height: 360px;
+  display: flex;
+  flex-direction: column;
   border-radius: var(--transfer-box-border-radius);
   background-color: #fff;
 }
@@ -36,12 +42,14 @@
   line-height: 38px;
   padding: 0 10px;
   border-bottom-width: 1px;
+  flex: 0;
 }
 
 .layui-transfer-search {
   position: relative;
   padding: 10px;
   border-bottom-width: 1px;
+  flex: 0;
 }
 
 .layui-transfer-search .layui-input {
@@ -86,6 +94,7 @@
 .layui-transfer-data {
   padding: 5px 0;
   overflow: auto;
+  flex: 1;
 }
 
 .layui-transfer-data li {
@@ -105,8 +114,14 @@
   color: #999;
 }
 
-.layui-transfer-active,
-.layui-transfer-box {
-  display: inline-block;
-  vertical-align: middle;
+.layui-transfer-active {
+  display: flex;
+  align-items: center;
+  justify-items: center;
+}
+
+.layui-transfer-footer {
+  flex: 0;
+  height: 48px;
+  line-height: 48px;
 }

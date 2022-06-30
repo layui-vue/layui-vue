@@ -186,12 +186,6 @@ const boxStyle = computed(() => {
     height: props.height,
   };
 });
-
-const dataStyle = computed(() => {
-  return {
-    height: props.showSearch ? "calc(100% - 97px)" : "calc(100% - 38px)",
-  };
-});
 </script>
 
 <template>
@@ -199,81 +193,55 @@ const dataStyle = computed(() => {
     <div class="layui-transfer layui-form layui-border-box">
       <div class="layui-transfer-box" :style="boxStyle">
         <div class="layui-transfer-header">
-          <LayCheckbox
-            v-model="hasLeftChecked"
-            :is-indeterminate="!allLeftChecked"
-            skin="primary"
-            label="all"
-            @change="allLeftChange"
-          >
+          <LayCheckbox v-model="hasLeftChecked" :is-indeterminate="!allLeftChecked" skin="primary" label="all"
+            @change="allLeftChange">
             <span>{{ title[0] }}</span>
           </LayCheckbox>
         </div>
         <div class="layui-transfer-search" v-if="showSearch">
-          <lay-input
-            prefix-icon="layui-icon-search"
-            @input="searchLeft"
-            placeholder="关键词搜索"
-          ></lay-input>
+          <lay-input prefix-icon="layui-icon-search" @input="searchLeft" placeholder="关键词搜索"></lay-input>
         </div>
-        <ul class="layui-transfer-data" :style="dataStyle">
+        <ul class="layui-transfer-data">
           <li v-for="dataSource in leftDataSource" :key="dataSource">
-            <LayCheckbox
-              v-model="leftSelectedKeys"
-              skin="primary"
-              :label="dataSource[id]"
-            >
+            <LayCheckbox v-model="leftSelectedKeys" skin="primary" :label="dataSource[id]">
               <slot v-if="slot.item" name="item" :data="dataSource"></slot>
               <span v-else>{{ dataSource.title }}</span>
             </LayCheckbox>
           </li>
         </ul>
+        <div class="layui-transfer-footer">
+          底部
+        </div>
       </div>
       <div class="layui-transfer-active">
-        <LayButton
-          type="primary"
-          :disabled="leftSelectedKeys.length == 0"
-          @click="add"
-          ><i class="layui-icon layui-icon-next"></i
-        ></LayButton>
-        <LayButton
-          type="primary"
-          :disabled="rightSelectedKeys.length == 0"
-          @click="remove"
-          ><i class="layui-icon layui-icon-prev"></i
-        ></LayButton>
+        <div class="layui-transfer-button-group">
+          <LayButton type="primary" :disabled="leftSelectedKeys.length == 0" @click="add"><i
+              class="layui-icon layui-icon-next"></i></LayButton>
+          <LayButton type="primary" :disabled="rightSelectedKeys.length == 0" @click="remove"><i
+              class="layui-icon layui-icon-prev"></i></LayButton>
+        </div>
       </div>
       <div class="layui-transfer-box" :style="boxStyle">
         <div class="layui-transfer-header">
-          <LayCheckbox
-            v-model="hasRightChecked"
-            :is-indeterminate="!allRightChecked"
-            skin="primary"
-            label="all"
-            @change="allRightChange"
-          >
+          <LayCheckbox v-model="hasRightChecked" :is-indeterminate="!allRightChecked" skin="primary" label="all"
+            @change="allRightChange">
             <span>{{ title[1] }}</span>
           </LayCheckbox>
         </div>
         <div class="layui-transfer-search" v-if="showSearch">
-          <lay-input
-            prefix-icon="layui-icon-search"
-            @input="searchRight"
-            placeholder="关键词搜索"
-          ></lay-input>
+          <lay-input prefix-icon="layui-icon-search" @input="searchRight" placeholder="关键词搜索"></lay-input>
         </div>
-        <ul class="layui-transfer-data" :style="dataStyle">
+        <ul class="layui-transfer-data">
           <li v-for="dataSource in rightDataSource" :key="dataSource">
-            <LayCheckbox
-              v-model="rightSelectedKeys"
-              skin="primary"
-              :label="dataSource[id]"
-            >
+            <LayCheckbox v-model="rightSelectedKeys" skin="primary" :label="dataSource[id]">
               <slot v-if="slot.item" name="item" :data="dataSource"></slot>
               <span v-else>{{ dataSource.title }}</span>
             </LayCheckbox>
           </li>
         </ul>
+        <div class="layui-transfer-footer">
+          底部
+        </div>
       </div>
     </div>
   </div>
