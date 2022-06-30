@@ -7,7 +7,12 @@
 ::: demo
 
 <template>
-<div style="width: 125px; ">
+<div style="max-width: 100%; ">
+ <lay-tooltip content="假装这里有文字提示假装这里有文字提示假装这里有文字提示假装这里有文字提示" ref="tooltip" :isAutoShow="true">
+      假装这里有文字提示假装这里有文字提示假装这里有文字提示假装这里有文字提示
+  </lay-tooltip>
+</div>
+<div style="max-width: 129px;  margin-top: 20px">
  <lay-tooltip content="假装这里有文字提示" ref="tooltip" :isAutoShow="true">
       假装这里有文字提示
   </lay-tooltip>
