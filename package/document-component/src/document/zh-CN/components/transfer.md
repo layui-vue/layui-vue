@@ -98,7 +98,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-transfer :dataSource="dataSource5" showSearch="true"></lay-transfer>
+  <lay-transfer :dataSource="dataSource5" :showSearch="true"></lay-transfer>
 </template>
 
 <script>
@@ -148,7 +148,24 @@ export default {
       {id:'4', title:'十字斩刀-斗'},
       {id:'5', title:'落炎魔杖'},
       {id:'6', title:'石中剑'},
-      {id:'7', title:'屠戮之刃'}
+      {id:'7', title:'屠戮之刃'},
+      {id:'8', title:'无影剑'},
+      {id:'9', title:'逸龙剑'},
+      {id:'10', title:'精灵之语'},
+      {id:'11', title:'十字斩刀-斗'},
+      {id:'12', title:'落炎魔杖'},
+      {id:'13', title:'石中剑'},
+      {id:'14', title:'屠戮之刃'},
+      {id:'15', title:'落炎魔杖'},
+      {id:'16', title:'石中剑'},
+      {id:'17', title:'屠戮之刃'},
+      {id:'18', title:'无影剑'},
+      {id:'19', title:'逸龙剑'},
+      {id:'20', title:'精灵之语'},
+      {id:'21', title:'十字斩刀-斗'},
+      {id:'22', title:'落炎魔杖'},
+      {id:'23', title:'石中剑'},
+      {id:'24', title:'屠戮之刃'}
     ]
     
     return {
@@ -159,6 +176,43 @@ export default {
 </script>
 
 :::
+
+::: title 底部插槽
+:::
+
+::: demo
+
+<template>
+  <lay-transfer :dataSource="dataSource5">
+    <template v-slot:leftFooter>左侧底部</template>
+    <template v-slot:rightFooter>右侧底部</template>
+  </lay-transfer>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const dataSource5 = [
+      {id:'1', title:'无影剑'},
+      {id:'2', title:'逸龙剑'},
+      {id:'3', title:'精灵之语'},
+      {id:'4', title:'十字斩刀-斗'},
+      {id:'5', title:'落炎魔杖'},
+      {id:'6', title:'石中剑'},
+      {id:'7', title:'屠戮之刃'}
+    ]
+    
+    return {
+      dataSource5
+    }
+  }
+}
+</script>
+
+::: 
 
 ::: title Transfer 属性
 :::
@@ -184,6 +238,8 @@ export default {
 | Name | Description | Accepted Values |
 | ---- | ----------- | --------------- |
 | item | 列表项      | { data }        |
+| leftFooter | 左侧盒子底部内容      | --      |
+| rightFooter | 右侧盒子底部内容      | --        |
 
 :::
 
