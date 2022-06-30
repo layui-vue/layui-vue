@@ -140,14 +140,14 @@ const layer = {
   },
   //通知
   notifiy: (option: any = {}, callback?: Function) => {
-    option.anim = 5
-    option.shade = false
-    option.type = 6
+    option.anim = 5;
+    option.shade = false;
+    option.type = 6;
     let defaultOption = {
-      offset: 'rt',
-      time:2000,
-      area:'auto'
-    }
+      offset: "rt",
+      time: 2000,
+      area: "auto",
+    };
     return layer.create(option, defaultOption, callback);
   },
   // 创建弹出层
@@ -186,7 +186,11 @@ const layer = {
     // 调用 open 函数
     modalInstance.component?.exposed?.open();
     // 延时 time 销毁
-    if (defaultOption && defaultOption.time != undefined && defaultOption.time != 0) {
+    if (
+      defaultOption &&
+      defaultOption.time != undefined &&
+      defaultOption.time != 0
+    ) {
       timer = setTimeout(() => {
         modalInstance.component?.exposed?.close();
         if (callback) callback(modalContainer.id);
@@ -200,7 +204,7 @@ const layer = {
         delInstance(modalContainer.id);
         //Notifiy特殊处理
         if (options.type === 6) {
-          removeNotifiyFromQueen(options.id)
+          removeNotifiyFromQueen(options.id);
         }
       }, defaultOption.time);
     }

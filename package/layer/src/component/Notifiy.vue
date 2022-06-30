@@ -17,43 +17,46 @@ export default {
 };
 </script>
 <script lang="ts" setup>
-import { nextTick, onMounted, ref } from 'vue';
-import CloseBtnVue from './CloseBtn.vue';
+import { nextTick, onMounted, ref } from "vue";
+import CloseBtnVue from "./CloseBtn.vue";
 
 export interface LayNotifyProps {
   title: any;
   content: any;
   isHtmlFragment?: boolean;
-  icon?: string | number | undefined,
-  iconClass: string[]
+  icon?: string | number | undefined;
+  iconClass: string[];
 }
 const props = withDefaults(defineProps<LayNotifyProps>(), {
   isHtmlFragment: false,
-
 });
 
-const emit = defineEmits(['close'])
+const emit = defineEmits(["close"]);
 const close = () => {
-  emit('close')
-}
-function addClass(obj: { className: any; }, cls: string) {
+  emit("close");
+};
+function addClass(obj: { className: any }, cls: string) {
   //获取 class 内容.
   let obj_class = obj.className,
     //判断获取到的 class 是否为空, 如果不为空在前面加个'空格'.
-    blank = (obj_class != '') ? ' ' : '';
-  let added = obj_class + blank + cls;//组合原来的 class 和需要添加的 class.
-  obj.className = added;//替换原来的 class.
+    blank = obj_class != "" ? " " : "";
+  let added = obj_class + blank + cls; //组合原来的 class 和需要添加的 class.
+  obj.className = added; //替换原来的 class.
 }
 
-const notifyRef = ref<HTMLElement | null>(null)
+const notifyRef = ref<HTMLElement | null>(null);
 onMounted(() => {
   nextTick(() => {
     if (notifyRef.value) {
-      setTimeout(() => {//此处延迟加载class，以免影响弹出效果
+      setTimeout(() => {
+        //此处延迟加载class，以免影响弹出效果
         // @ts-ignore
-        addClass(notifyRef.value.parentElement?.parentElement, 'layui-layer-notify')
+        addClass(
+          notifyRef.value.parentElement?.parentElement,
+          "layui-layer-notify"
+        );
       }, 300);
     }
-  })
-})
+  });
+});
 </script>

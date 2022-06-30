@@ -59,20 +59,20 @@ export interface LayModalProps {
   move?: boolean | string;
   resize?: boolean | string;
   type?:
-  | 0
-  | 1
-  | 2
-  | 3
-  | 4
-  | 5
-  | 6
-  | "dialog"
-  | "page"
-  | "iframe"
-  | "loading"
-  | "drawer"
-  | "photos"
-  | "notifiy";
+    | 0
+    | 1
+    | 2
+    | 3
+    | 4
+    | 5
+    | 6
+    | "dialog"
+    | "page"
+    | "iframe"
+    | "loading"
+    | "drawer"
+    | "photos"
+    | "notifiy";
   content?: string | Function | object | VNodeTypes;
   isHtmlFragment?: boolean;
   shade?: boolean | string;
@@ -119,12 +119,12 @@ const props = withDefaults(defineProps<LayModalProps>(), {
   resize: false,
   isHtmlFragment: false,
   isOutAnim: true,
-  destroy: () => { },
-  success: () => { },
-  end: () => { },
-  full: () => { },
-  min: () => { },
-  restore: () => { },
+  destroy: () => {},
+  success: () => {},
+  end: () => {},
+  full: () => {},
+  min: () => {},
+  restore: () => {},
   yesText: "确定",
   isFunction: false,
   isMessage: false,
@@ -187,7 +187,7 @@ const firstOpenDelayCalculation = function () {
     }
     offset.value = calculateOffset(props.offset, area.value, props.type);
     if (type == 6) {
-      offset.value = calculateNotifOffset(props.offset, area.value, id.value)
+      offset.value = calculateNotifOffset(props.offset, area.value, id.value);
     }
     w.value = area.value[0];
     h.value = area.value[1];
@@ -441,8 +441,9 @@ const styles = computed<any>(() => {
         offset.value[1].indexOf("%") > -1
       ) {
         // @ts-ignore
-        style.transform = `translate(-${style.left.indexOf("%") > -1 ? style.left : 0
-          },-${style.top.indexOf("%") > -1 ? style.top : 0})`;
+        style.transform = `translate(-${
+          style.left.indexOf("%") > -1 ? style.left : 0
+        },-${style.top.indexOf("%") > -1 ? style.top : 0})`;
       }
     }
   }
@@ -469,14 +470,13 @@ const contentClasses = computed(() => {
  * @param null
  */
 const closeHandle = () => {
-
   emit("close");
   emit("update:modelValue", false);
   props.destroy();
 
   //Notify 从队列中移除当前实例
-  if(type===6){
-    removeNotifiyFromQueen(props.id)
+  if (type === 6) {
+    removeNotifiyFromQueen(props.id);
   }
 };
 
@@ -619,15 +619,33 @@ defineExpose({ reset, open, close });
 <template>
   <div>
     <!-- 遮盖层 -->
-    <Shade :index="index" :visible="shadeVisible" :opacity="shadeOpacity" @shadeClick="shadeHandle"></Shade>
+    <Shade
+      :index="index"
+      :visible="shadeVisible"
+      :opacity="shadeOpacity"
+      @shadeClick="shadeHandle"
+    ></Shade>
     <!-- 动画容器 -->
-    <transition :enter-active-class="enterActiveClass" :leave-active-class="leaveActiveClass">
+    <transition
+      :enter-active-class="enterActiveClass"
+      :leave-active-class="leaveActiveClass"
+    >
       <!-- 弹出层 -->
-      <div ref="layero" class="layui-layer layui-layer-border" :class="boxClasses" :style="styles" v-if="visible">
+      <div
+        ref="layero"
+        class="layui-layer layui-layer-border"
+        :class="boxClasses"
+        :style="styles"
+        v-if="visible"
+      >
         <!-- 标题 -->
         <Title v-if="showTitle" :title="title"></Title>
         <!-- 内容 -->
-        <div class="layui-layer-content" :style="{ height: contentHeight }" :class="contentClasses">
+        <div
+          class="layui-layer-content"
+          :style="{ height: contentHeight }"
+          :class="contentClasses"
+        >
           <template v-if="type === 0 || type === 1 || type === 4">
             <i v-if="icon" :class="iconClass"></i>
             <slot v-if="slots.default"></slot>
@@ -639,26 +657,55 @@ defineExpose({ reset, open, close });
             </template>
           </template>
           <Iframe v-if="type === 2" :src="props.content"></Iframe>
-          <Photos v-if="type === 5" :imgList="props.imgList" :startIndex="props.startIndex" @resetCalculationPohtosArea="resetCalculationPohtosArea"></Photos>
-          <Notifiy v-if="type === 6" @close="closeHandle" :title="props.title" :content="props.content" :isHtmlFragment="props.isHtmlFragment" :icon="props.icon" :iconClass="iconClass"></Notifiy>
+          <Photos
+            v-if="type === 5"
+            :imgList="props.imgList"
+            :startIndex="props.startIndex"
+            @resetCalculationPohtosArea="resetCalculationPohtosArea"
+          ></Photos>
+          <Notifiy
+            v-if="type === 6"
+            @close="closeHandle"
+            :title="props.title"
+            :content="props.content"
+            :isHtmlFragment="props.isHtmlFragment"
+            :icon="props.icon"
+            :iconClass="iconClass"
+          ></Notifiy>
         </div>
         <!-- 工具栏 -->
-        <span class="layui-layer-setwin" v-if="type != 3 && type != 5 && type != 6">
-          <a v-if="maxmin && !max" class="layui-layer-min" :class="[min ? 'layui-layer-ico layui-layer-maxmin' : '']"
-            href="javascript:;" @click="minHandle">
+        <span
+          class="layui-layer-setwin"
+          v-if="type != 3 && type != 5 && type != 6"
+        >
+          <a
+            v-if="maxmin && !max"
+            class="layui-layer-min"
+            :class="[min ? 'layui-layer-ico layui-layer-maxmin' : '']"
+            href="javascript:;"
+            @click="minHandle"
+          >
             <cite v-if="!min"></cite>
           </a>
-          <a v-if="maxmin && !min" class="layui-layer-ico layui-layer-max" :class="[max ? 'layui-layer-maxmin' : '']"
-            href="javascript:;" @click="maxHandle"></a>
+          <a
+            v-if="maxmin && !min"
+            class="layui-layer-ico layui-layer-max"
+            :class="[max ? 'layui-layer-maxmin' : '']"
+            href="javascript:;"
+            @click="maxHandle"
+          ></a>
           <CloseBtn v-if="closeBtn" @closeHandle="closeHandle"></CloseBtn>
         </span>
         <!-- 操作栏 -->
-        <div v-if="((btn && btn.length > 0) || type === 0) && !isMessage" class="layui-layer-btn"
-          :class="[`layui-layer-btn-${btnAlign}`]">
+        <div
+          v-if="((btn && btn.length > 0) || type === 0) && !isMessage"
+          class="layui-layer-btn"
+          :class="[`layui-layer-btn-${btnAlign}`]"
+        >
           <template v-if="btn && btn.length > 0">
             <template v-for="(b, index) in btn" :key="index">
               <a :class="[`layui-layer-btn${index}`]" @click="b.callback(id)">{{
-                  b.text
+                b.text
               }}</a>
             </template>
           </template>

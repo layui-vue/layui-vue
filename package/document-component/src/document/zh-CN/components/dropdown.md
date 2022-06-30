@@ -362,6 +362,104 @@ export default {
 
 :::
 
+::: title 菜单插槽
+:::
+
+::: demo
+
+<template>
+  <lay-dropdown>
+    <lay-button type="primary">图标菜单</lay-button>
+    <template #content>
+        <lay-dropdown-menu>
+          <lay-dropdown-menu-item>
+            <template #prefix><lay-icon type="layui-icon-return"></lay-icon></template>
+            <template #default>返回</template>
+            <template #suffix><span style="margin-left: 50px; font-size:10px">Alt + 向左键</span></template>
+          </lay-dropdown-menu-item>
+          <lay-dropdown-menu-item>
+            <template #prefix><lay-icon type="layui-icon-refresh"></lay-icon></template>
+            <template #default>刷新</template>
+            <template #suffix><span style="font-size:10px">Ctrl + R</span></template>
+          </lay-dropdown-menu-item>
+          <lay-line></lay-line>
+          <lay-dropdown-menu-item>
+            <template #prefix><lay-icon type="layui-icon-about"></lay-icon></template>
+            <template #default>更多</template>
+            <template #suffix><lay-icon type="layui-icon-right"></lay-icon></template>
+          </lay-dropdown-menu-item>
+        </lay-dropdown-menu>
+    </template>
+  </lay-dropdown>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    return {
+    }
+  }
+}
+</script>
+
+:::
+
+::: title 多级菜单
+:::
+
+::: demo
+
+<template>
+  <lay-dropdown>
+    <lay-button type="primary">下拉菜单</lay-button>
+    <template #content>
+        <lay-dropdown-menu>
+          <lay-dropdown-menu-item>
+            <template #prefix><lay-icon type="layui-icon-list"></lay-icon></template>
+            <template #default>选项一</template>
+          </lay-dropdown-menu-item>
+          <lay-dropdown-sub-menu>
+            <template #prefix><lay-icon type="layui-icon-set-sm"></lay-icon></template>
+            <template #default>选项二</template>
+            <template #content>
+              <lay-dropdown-menu-item>子菜单一</lay-dropdown-menu-item>
+              <lay-dropdown-menu-item>子菜单二</lay-dropdown-menu-item>
+              <lay-dropdown-sub-menu>
+                <template #default>子菜单三</template>
+                <template #content>
+                   <lay-dropdown-menu-item>菜单1</lay-dropdown-menu-item>
+                   <lay-dropdown-menu-item>菜单2</lay-dropdown-menu-item>
+                   <lay-dropdown-menu-item>菜单3</lay-dropdown-menu-item>
+                </template>
+              </lay-dropdown-sub-menu>
+            </template>
+          </lay-dropdown-sub-menu>
+          <lay-dropdown-menu-item>
+            <template #prefix><lay-icon type="layui-icon-share"></lay-icon></template>
+            <template #default>选项三</template>
+          </lay-dropdown-menu-item>
+        </lay-dropdown-menu>
+    </template>
+  </lay-dropdown>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    return {
+    }
+  }
+}
+</script>
+
+:::
+
 ::: title 其它属性
 :::
 
@@ -495,6 +593,47 @@ export default {
 | ------- | -------- | ------ |
 | hide | 隐藏下拉内容后触发 | --     |
 | open | 显示下拉内容后触发 | --     |
+
+:::
+
+::: title Dropdown Menu Item 插槽
+:::
+
+::: table
+
+| 插槽    | 描述     | 参数 |
+| ------- | -------- | ------ |
+| prefix | 前缀 | --     |
+| default | 默认 | --     |
+| suffix | 后缀|--|
+
+:::
+
+::: title Dropdown Sub Menu 属性
+:::
+
+::: table
+
+| 插槽    | 描述     | 参数 |
+| ------- | -------- | ------ |
+| trigger | 触发方式,类型 `string` 或 trigger 数组,默认 hover  | `click` `hover` `focus` `contextMenu` |
+| disabled | 是否禁用触发 | `true` `false` |
+| placement | 下拉面板位置,默认 right-top |`top` `bottom` `right` `left` `*-left` `*-right` `*-top` `*-bottom`|
+| contentOffset | 下拉面板距离触发器的偏移距离，默认 2| -| 
+
+:::
+
+::: title Dropdown Sub Menu 插槽
+:::
+
+::: table
+
+| 插槽    | 描述     | 参数 |
+| ------- | -------- | ------ |
+| prefix | 前缀 | --     |
+| default | 默认 | --     |
+| suffix | 后缀|--|
+| content | 下拉面板内容|--|
 
 :::
 

@@ -34,6 +34,7 @@
 
 .layui-dropdown .layui-menu li {
   position: relative;
+  display: flex;
   line-height: 26px;
   color: rgba(0, 0, 0, 0.8);
   font-size: 14px;
@@ -46,7 +47,19 @@
 }
 
 .layui-dropdown .layui-menu-body-title {
-  position: relative;
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.layui-dropdown-menu-prefix{
+  margin-right: 8px;
+}
+.layui-dropdown-menu-suffix{
+  margin-left: 15px;
+}
+
+.layui-dropdown .layui-line-horizontal{
+  margin: 0px;
+  border-color: #EEEEEE;
 }

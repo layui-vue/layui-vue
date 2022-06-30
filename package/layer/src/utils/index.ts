@@ -286,7 +286,8 @@ export async function calculatePhotosArea(url: string, options: object) {
 // 计算Notify位置 队列 此处先暂时定义Notify的间距为15px
 export function calculateNotifOffset(offset: any, area: any, layerId: string) {
   let arr = ["lt", "lb", "rt", "rb"];
-  let t = '0', l = '0';
+  let t = "0",
+    l = "0";
   // 间隙
   let transOffsetLeft = 15;
   let transOffsetTop = 15;
@@ -294,23 +295,25 @@ export function calculateNotifOffset(offset: any, area: any, layerId: string) {
   window.NotifiyQueen = window.NotifiyQueen || [];
   // @ts-ignore
   let notifiyQueen = window.NotifiyQueen;
-  if (typeof offset != 'string' || arr.indexOf(offset) === -1) {
+  if (typeof offset != "string" || arr.indexOf(offset) === -1) {
     offset = "rt";
   }
   // 当前区域元素集合
-  let nodeList = notifiyQueen.filter((e: { offset: any; }) => {
+  let nodeList = notifiyQueen.filter((e: { offset: any }) => {
     if (e.offset === offset) {
-      return e
+      return e;
     }
-  })
+  });
   //前一个元素
   let prevNode = nodeList.length > 0 ? nodeList[nodeList.length - 1] : null;
   if (prevNode) {
-    prevNode = document.getElementById(prevNode['id'])?.firstElementChild?.firstElementChild;
+    prevNode = document.getElementById(prevNode["id"])?.firstElementChild
+      ?.firstElementChild;
     if (offset === "rt" || offset === "lt") {
-      transOffsetTop += prevNode.offsetHeight + parseFloat(prevNode.style['top'])
+      transOffsetTop +=
+        prevNode.offsetHeight + parseFloat(prevNode.style["top"]);
     } else {
-      let bottom = parseFloat(prevNode.style['top'].split(' - ')[1])
+      let bottom = parseFloat(prevNode.style["top"].split(" - ")[1]);
       transOffsetTop += prevNode.offsetHeight + bottom;
     }
   } else {
@@ -324,20 +327,20 @@ export function calculateNotifOffset(offset: any, area: any, layerId: string) {
     t = transOffsetTop + "px";
     l = "calc(100% - " + (parseFloat(area[0]) + transOffsetLeft) + "px)";
   } else if (offset === "rb") {
-    t = "calc(100vh - " + transOffsetTop + "px)"
+    t = "calc(100vh - " + transOffsetTop + "px)";
     l = "calc(100% - " + (parseFloat(area[0]) + transOffsetLeft) + "px)";
   } else if (offset === "lt") {
     t = transOffsetTop + "px";
     l = transOffsetLeft + "px";
   } else if (offset === "lb") {
-    t = "calc(100vh - " + transOffsetTop + "px)"
+    t = "calc(100vh - " + transOffsetTop + "px)";
     l = transOffsetLeft + "px";
   }
 
   notifiyQueen.push({
     id: layerId,
-    offset: offset
-  })
+    offset: offset,
+  });
   // 返回位置
   return [t, l];
 }
@@ -347,33 +350,40 @@ export function removeNotifiyFromQueen(layerId: string | undefined) {
   // 间隙
   let transOffsetTop = 15;
   // @ts-ignore 删除项的高度
-  let offsetHeight = document.getElementById(layerId)?.firstElementChild?.firstElementChild?.offsetHeight;
+  let offsetHeight =
+    document.getElementById(layerId)?.firstElementChild?.firstElementChild
+      ?.offsetHeight;
   // @ts-ignore
   window.NotifiyQueen = window.NotifiyQueen || [];
   // @ts-ignore
   let notifiyQueen = window.NotifiyQueen;
   //console.log(notifiyQueen)
-  let index = notifiyQueen.findIndex((e: { id: string; }) => e.id === layerId)
+  let index = notifiyQueen.findIndex((e: { id: string }) => e.id === layerId);
   let offsetType = notifiyQueen[index].offset;
-  let list = notifiyQueen.filter((e: { offset: any; }) => {
+  let list = notifiyQueen.filter((e: { offset: any }) => {
     if (e.offset === offsetType) {
       return e;
     }
-  })
-  let findIndex = list.findIndex((e: { id: string; }) => e.id === layerId)
+  });
+  let findIndex = list.findIndex((e: { id: string }) => e.id === layerId);
   // //得到需要修改的定位的Notifiy集合
-  let needCalculatelist = list.slice(findIndex + 1)
-  needCalculatelist.forEach((e: { id: string; }) => {
-    let dom = document.getElementById(e.id)?.firstElementChild?.firstElementChild
-    if (offsetType === 'rt' || offsetType === 'lt') {
+  let needCalculatelist = list.slice(findIndex + 1);
+  needCalculatelist.forEach((e: { id: string }) => {
+    let dom = document.getElementById(e.id)?.firstElementChild
+      ?.firstElementChild;
+    if (offsetType === "rt" || offsetType === "lt") {
       // @ts-ignore
-      dom.style['top'] = parseFloat(dom.style['top']) - transOffsetTop - offsetHeight + 'px'
+      dom.style["top"] =
+        parseFloat(dom.style["top"]) - transOffsetTop - offsetHeight + "px";
     } else {
       // @ts-ignore
-      let bottom = parseFloat(dom.style['top'].split(' - ')[1]) - transOffsetTop - offsetHeight
+      let bottom =
+        parseFloat(dom.style["top"].split(" - ")[1]) -
+        transOffsetTop -
+        offsetHeight;
       // @ts-ignore
-      dom.style['top'] = "calc(100vh - " + bottom + "px)"
+      dom.style["top"] = "calc(100vh - " + bottom + "px)";
     }
-  })
-  notifiyQueen.splice(index, 1);//删除
+  });
+  notifiyQueen.splice(index, 1); //删除
 }
