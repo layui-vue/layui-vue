@@ -6,7 +6,7 @@ export default {
 
 <script setup lang="ts">
 import { computed, ComputedRef, provide, Ref, ref, watch } from "vue";
-import { provideLevel} from "./useLevel"
+import { provideLevel } from "./useLevel";
 import "./index.less";
 
 export interface LayMenuProps {
@@ -39,7 +39,9 @@ const props = withDefaults(defineProps<LayMenuProps>(), {
 });
 
 const isTree: ComputedRef<boolean> = computed(() => props.tree);
-const isCollapse: ComputedRef<boolean | string> = computed(() => props.collapse);
+const isCollapse: ComputedRef<boolean | string> = computed(
+  () => props.collapse
+);
 const isCollapseTransition: ComputedRef = computed(
   () => props.collapseTransition
 );

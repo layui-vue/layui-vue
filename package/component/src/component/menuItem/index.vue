@@ -6,7 +6,7 @@ export default {
 
 <script setup lang="ts">
 import { computed, ComputedRef, inject, ref, Ref, useSlots } from "vue";
-import  useLevel  from '../menu/useLevel';
+import useLevel from "../menu/useLevel";
 
 export interface LayMenuItemProps {
   id: string;
@@ -23,11 +23,20 @@ const selectHandle = function () {
   selectedKey.value = props.id;
 };
 
-const needTooltip = computed(() => isTree.value && (isCollapse.value === true || isCollapse.value === "true") && level.value === 1);
+const needTooltip = computed(
+  () =>
+    isTree.value &&
+    (isCollapse.value === true || isCollapse.value === "true") &&
+    level.value === 1
+);
 </script>
 
 <template>
-  <li class="layui-nav-item" :class="[selectedKey === id ? 'layui-this' : '']" @click="selectHandle()">
+  <li
+    class="layui-nav-item"
+    :class="[selectedKey === id ? 'layui-this' : '']"
+    @click="selectHandle()"
+  >
     <template v-if="needTooltip">
       <lay-tooltip position="right">
         <a href="javascript:void(0)">

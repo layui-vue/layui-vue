@@ -19,7 +19,6 @@ import LayTransition from "../transition/index.vue";
 import SubMenuPopup from "./subMenuPopup.vue";
 import { provideLevel, default as useLevel } from "../menu/useLevel";
 
-
 export interface LaySubMenuProps {
   id: string;
   title?: string;
@@ -28,11 +27,13 @@ export interface LaySubMenuProps {
 const slots = useSlots();
 const props = defineProps<LaySubMenuProps>();
 
-const { level } = useLevel()
+const { level } = useLevel();
 const isTree: Ref<boolean> = inject("isTree") as Ref<boolean>;
 const selectedKey: Ref<string> = inject("selectedKey") as Ref<string>;
 const openKeys: Ref<string[]> = inject("openKeys") as Ref<string[]>;
-const isCollapse: Ref<boolean | string> = inject("isCollapse") as Ref<boolean | string>;
+const isCollapse: Ref<boolean | string> = inject("isCollapse") as Ref<
+  boolean | string
+>;
 const isCollapseTransition: Ref<boolean> = inject(
   "isCollapseTransition"
 ) as Ref<boolean>;
@@ -43,13 +44,14 @@ const isOpen = computed(() => {
 
 const subMenuRef = ref<HTMLElement>();
 const position = ref<String>();
-const nextLevel = computed(() =>
-  level.value + 1
-);
+const nextLevel = computed(() => level.value + 1);
 
 provideLevel(nextLevel);
 
-const computedPopup = computed(() => isTree.value && (isCollapse.value === true || isCollapse.value === "true"));
+const computedPopup = computed(
+  () =>
+    isTree.value && (isCollapse.value === true || isCollapse.value === "true")
+);
 
 watch(isOpen, () => {
   if (isOpen.value && position.value !== "left-nav") {
@@ -113,11 +115,14 @@ onBeforeUnmount(() => window.removeEventListener("resize", setPosition));
         <i v-if="slots.expandIcon" class="layui-nav-more">
           <slot name="expandIcon" :isExpand="isOpen"></slot>
         </i>
-        <i v-else :class="[
-          isOpen ? 'layui-nav-mored' : '',
-          'layui-icon layui-icon-down',
-          'layui-nav-more',
-        ]"></i>
+        <i
+          v-else
+          :class="[
+            isOpen ? 'layui-nav-mored' : '',
+            'layui-icon layui-icon-down',
+            'layui-nav-more',
+          ]"
+        ></i>
       </a>
       <template v-if="isTree">
         <lay-transition :enable="isCollapseTransition">
@@ -129,8 +134,11 @@ onBeforeUnmount(() => window.removeEventListener("resize", setPosition));
         </lay-transition>
       </template>
       <template v-else>
-        <dl ref="subMenuRef" class="layui-nav-child layui-anim layui-anim-upbit"
-          :class="[{ 'layui-show': isOpen }, position]">
+        <dl
+          ref="subMenuRef"
+          class="layui-nav-child layui-anim layui-anim-upbit"
+          :class="[{ 'layui-show': isOpen }, position]"
+        >
           <slot></slot>
         </dl>
       </template>

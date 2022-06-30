@@ -1,6 +1,15 @@
-import { computed, inject, provide, reactive, Ref, isRef, ComputedRef, UnwrapNestedRefs } from "vue";
+import {
+  computed,
+  inject,
+  provide,
+  reactive,
+  Ref,
+  isRef,
+  ComputedRef,
+  UnwrapNestedRefs,
+} from "vue";
 
-export const LevelInjectionKey = Symbol("menuLevelKey")
+export const LevelInjectionKey = Symbol("menuLevelKey");
 
 export function provideLevel(level: Ref<number> | number) {
   const computedLevel = computed(() => (isRef(level) ? level.value : level));

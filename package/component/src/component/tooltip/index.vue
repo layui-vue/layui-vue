@@ -4,7 +4,7 @@
   </div>
   <slot v-else></slot>
   <lay-popper v-if="isMounted" v-bind="innerProps">
-    <slot name="content"></slot>  
+    <slot name="content"></slot>
   </lay-popper>
 </template>
 

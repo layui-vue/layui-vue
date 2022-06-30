@@ -4,12 +4,7 @@ export default {
 };
 </script>
 <script setup lang="ts">
-import {
-  computed,
-  inject,
-  Ref,
-  useSlots,
-} from "vue";
+import { computed, inject, Ref, useSlots } from "vue";
 import LayDropdown from "../dropdown/index.vue";
 import useLevel from "../menu/useLevel";
 
@@ -27,19 +22,16 @@ const { level } = useLevel();
 const isOpen = computed(() => {
   return openKeys.value.includes(props.id);
 });
-
 </script>
 
 <template>
-  <li :class="[
-    'layui-nav-item sub-menu-popup', 
-    level > 2 ? 'original': '' ,
-    ]">
-    <lay-dropdown 
-      trigger="hover" 
+  <li :class="['layui-nav-item sub-menu-popup', level > 2 ? 'original' : '']">
+    <lay-dropdown
+      trigger="hover"
       placement="right-top"
       :autoFitMinWidth="false"
-      :contentOffset="3">
+      :contentOffset="3"
+    >
       <a href="javascript:void(0)">
         <!-- 图标 -->
         <i>
@@ -63,13 +55,11 @@ const isOpen = computed(() => {
   </li>
 </template>
 <style lang="less">
-
-
-.sub-menu-popup{
+.sub-menu-popup {
   line-height: inherit;
 }
 
-.sub-menu-popup>.layui-dropdown>div>a {
+.sub-menu-popup > .layui-dropdown > div > a {
   width: auto;
   display: block;
   text-overflow: clip;
@@ -82,17 +72,17 @@ const isOpen = computed(() => {
   padding: 5px 23px 5px 23px;
 }
 
-.sub-menu-popup>.layui-dropdown dl {
+.sub-menu-popup > .layui-dropdown dl {
   border-radius: 4px;
   background-color: #393d49;
 }
 
-.sub-menu-popup>.layui-dropdown dl>li>a {
+.sub-menu-popup > .layui-dropdown dl > li > a {
   span {
     display: inline;
   }
 
-  .layui-nav-item>a {
+  .layui-nav-item > a {
     text-overflow: clip;
   }
 
@@ -108,7 +98,7 @@ const isOpen = computed(() => {
     display: inline;
   }
 
-  .layui-nav-item>a {
+  .layui-nav-item > a {
     text-overflow: clip;
   }
 
@@ -119,4 +109,3 @@ const isOpen = computed(() => {
   }
 }
 </style>
-
