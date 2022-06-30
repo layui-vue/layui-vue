@@ -39,6 +39,7 @@ import {
   calculatePhotosArea,
   calculateNotifOffset,
   removeNotifiyFromQueen,
+  getNotifyAnimationClass,
 } from "../utils";
 import useMove from "../composable/useMove";
 import useResize from "../composable/useResize";
@@ -529,6 +530,9 @@ const iconClass = computed(() => {
 const enterActiveClass = computed(() => {
   if (type === 4) {
     return getDrawerAnimationClass(props.offset);
+  }
+  if (type === 6) {
+    return getNotifyAnimationClass(props.offset);
   }
   return `layer-anim layer-anim-0${props.anim}`;
 });

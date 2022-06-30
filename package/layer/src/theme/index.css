@@ -1282,4 +1282,5 @@ html #layuicss-layer {
   display: inline-block;
   transform: scale(0.7);
   margin-left: -7px;
+  margin-right: 3px;
 }
