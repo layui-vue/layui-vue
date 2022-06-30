@@ -11,17 +11,55 @@
 <template>
 <lay-timeline>
   <lay-timeline-item title="1.2.x">
-        <ul> 
-      <a name="1-2-3"></a> 
+    <ul> 
+      <a name="1-2-6"></a> 
       <li> 
-        <h3>1.2.3 <span class="layui-badge-rim">2022-06-26</span></h3> 
+        <h3>1.2.6 <span class="layui-badge-rim">2022-07-01</span></h3> 
+        <ul>
+          <li>[修复] tooltip 组件设置isAutoShow 属性时，宽度设置max-width 时拖动浏览器时出现...时，tooltip不显示问题。 by @dingyongya</li>
+          <li>[修复] table 组件设置 ellipsisTooltip 属性时 出现...时，tooltip不显示问题。by @dingyongya</li>
+        </ul>
+      </li>
+    </ul>
+    <ul> 
+      <a name="1-2-5"></a> 
+      <li> 
+        <h3>1.2.5 <span class="layui-badge-rim">2022-06-29</span></h3> 
+        <ul>
+          <li>[新增] dropdown-sub-menu 组件, 用于呈现二级下拉菜单。</li>
+          <li>[新增] dropdown-menu-item 组件 default 插槽, 自定义内容。</li>
+          <li>[新增] dropdown-menu-item 组件 prefix 插槽, 自定义内容前缀。</li>
+          <li>[新增] dropdown-menu-item 组件 suffix 插槽, 自定义内容后缀。</li>
+          <li>[新增] table 组件 rowStyle 属性, 自定义行样式, 值为 function(row, rowIndex) 函数或 string 类型。</li>
+          <li>[新增] table 组件 rowClassName 属性, 自定义行样式, 值为 function(row, rowIndex) 函数或 string 类型。</li>
+          <li>[新增] table 组件 cellStyle 属性, 自定义单元格样式, 值为 function(row, column, rowIndex, columnIndex) 函数或 string 类型。</li>
+          <li>[新增] table 组件 cellClassName 属性, 自定义单元格样式, 值为 function(row, column, rowIndex, columnIndex) 函数或 string 类型。</li>
+          <li>[修复] icon-picker 组件在颜色面板中拉动选取颜色，触碰颜色面板边角时，导致色相变为 0。 </li>
+          <li>[修复] provider 组件切换主题 Embedded Dark Reader cannot access a cross-origin resource。</li>
+          <li>[修复] switch 组件 onswitch-text 与 unswitch-text 使用文档。</li>
+        </ul>
+      </li>
+    </ul>
+    <ul> 
+      <a name="1-2-4"></a> 
+      <li> 
+        <h3>1.2.4 <span class="layui-badge-rim">2022-06-28</span></h3> 
         <ul>
           <li>[新增] select 组件 多选模式下 的搜索功能。 </li>
+          <li>[新增] table 组件 even 属性, 用于开启斑马条纹背景样式。</li>
+          <li>[新增] dropdown 组件 placement 属性 right left right-bottom right-top left-bottom left-top 值。</li>
+          <li>[新增] affix 组件, 使用锚点，可以将内容固定在容器内，并且不随容器的滚动而滚动，常用于侧边菜单导航等。 </li>
+          <li>[新增] affix 组件 position 属性, 用于设置固定的位置, 可选值为 top 与 bottom。</li>
+          <li>[新增] affix 组件 offset 属性, 定位偏移量, 默认为 0。</li>
+          <li>[新增] affix 组件 target 属性, 定位时的参考容器, 默认为 document.body。</li>
+          <li>[修复] date-picker 组件 prefix-icon 前置图标无边距的问题。</li>
+          <li>[修复] input 组件 foucs 状态时 border 颜色为 #d2d2d2。</li>
+          <li>[修复] cascader 组件 children 不能为空的问题。</li>
           <li>[修复] scroll 组件 按需加载时 index.css 不存在的问题。</li>
         </ul>
       </li>
     </ul>
-      <ul> 
+    <ul> 
       <a name="1-2-2"></a> 
       <li> 
         <h3>1.2.2 <span class="layui-badge-rim">2022-06-26</span></h3> 

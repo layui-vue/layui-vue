@@ -97,7 +97,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-switch v-model="active4" active-text="白天"  inactive-text="夜间"></lay-switch>
+  <lay-switch v-model="active4" onswitch-text="白天"  unswitch-text="夜间"></lay-switch>
 </template>
 
 <script>

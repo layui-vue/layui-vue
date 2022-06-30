@@ -36,6 +36,54 @@ export default {
 
 :::
 
+::: title 标题插槽
+:::
+
+::: demo
+
+<template>
+  <lay-tab v-model="current11" :allow-close="true">
+    <lay-tab-item title="选项一" id="1">
+      <template #title>
+        <lay-icon type="layui-icon-console"></lay-icon>
+        <span style="margin-left:10px">选项一</span>
+      </template>
+      <div style="padding:20px">选项一</div>
+    </lay-tab-item>
+    <lay-tab-item title="选项一" id="2">
+      <template #title>
+        <lay-icon type="layui-icon-user"></lay-icon>
+        <span style="margin-left:10px">选项一</span>
+      </template>
+      <div style="padding:20px">选项二</div>
+    </lay-tab-item>
+    <lay-tab-item title="选项一" id="3">
+      <template #title>
+        <lay-icon type="layui-icon-set"></lay-icon>
+        <span style="margin-left:10px">选项一</span>
+      </template>
+      <div style="padding:20px">选项三</div>
+    </lay-tab-item>
+  </lay-tab>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const current11 = ref("1")
+
+    return {
+      current11
+    }
+  }
+}
+</script>
+
+:::
+
 ::: title 简约模式
 :::
 
@@ -356,6 +404,17 @@ export default {
 | id       | 唯一标识 | --     |
 | title    | 头部标题 | --     |
 | closable | 允许关闭 | --     |
+
+:::
+
+::: title Tab Item 插槽
+:::
+
+::: table
+
+| 属性     | 描述     | 参数 |
+| -------- | -------- | ------ |
+| title    | 标题 | --     |
 
 :::
 

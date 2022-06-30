@@ -120,8 +120,10 @@ export function calculateType(modalType: number | string) {
     return 3;
   } else if (modalType === "drawer" || modalType == 4) {
     return 4;
-  } else if (modalType === "photos") {
+  } else if (modalType === "photos" || modalType == 5) {
     return 5;
+  } else if (modalType === "notifiy" || modalType == 6) {
+    return 6;
   }
   return 0;
 }
@@ -235,6 +237,7 @@ export function getDrawerAnimationClass(offset: any, isClose: boolean = false) {
   return isClose ? `${prefix}-${suffix}-close` : `${prefix}-${suffix}`;
 }
 
+//计算图片大小 并缩放
 export async function calculatePhotosArea(url: string, options: object) {
   let img = new Image();
   img.src = url;
@@ -272,4 +275,108 @@ export async function calculatePhotosArea(url: string, options: object) {
     }
     return [imgarea[0] + "px", imgarea[1] + "px"];
   }
+}
+
+// 计算Notify位置 队列 此处先暂时定义Notify的间距为15px
+export function calculateNotifOffset(offset: any, area: any, layerId: string) {
+  let arr = ["lt", "lb", "rt", "rb"];
+  let t = "0",
+    l = "0";
+  // 间隙
+  let transOffsetLeft = 15;
+  let transOffsetTop = 15;
+  // @ts-ignore
+  window.NotifiyQueen = window.NotifiyQueen || [];
+  // @ts-ignore
+  let notifiyQueen = window.NotifiyQueen;
+  if (typeof offset != "string" || arr.indexOf(offset) === -1) {
+    offset = "rt";
+  }
+  // 当前区域元素集合
+  let nodeList = notifiyQueen.filter((e: { offset: any }) => {
+    if (e.offset === offset) {
+      return e;
+    }
+  });
+  //前一个元素
+  let prevNode = nodeList.length > 0 ? nodeList[nodeList.length - 1] : null;
+  if (prevNode) {
+    prevNode = document.getElementById(prevNode["id"])?.firstElementChild
+      ?.firstElementChild;
+    if (offset === "rt" || offset === "lt") {
+      transOffsetTop +=
+        prevNode.offsetHeight + parseFloat(prevNode.style["top"]);
+    } else {
+      let bottom = parseFloat(prevNode.style["top"].split(" - ")[1]);
+      transOffsetTop += prevNode.offsetHeight + bottom;
+    }
+  } else {
+    if (offset === "rb" || offset === "lb") {
+      transOffsetTop += parseFloat(area[1]);
+    }
+  }
+
+  // 关键字处理
+  if (offset === "rt") {
+    t = transOffsetTop + "px";
+    l = "calc(100% - " + (parseFloat(area[0]) + transOffsetLeft) + "px)";
+  } else if (offset === "rb") {
+    t = "calc(100vh - " + transOffsetTop + "px)";
+    l = "calc(100% - " + (parseFloat(area[0]) + transOffsetLeft) + "px)";
+  } else if (offset === "lt") {
+    t = transOffsetTop + "px";
+    l = transOffsetLeft + "px";
+  } else if (offset === "lb") {
+    t = "calc(100vh - " + transOffsetTop + "px)";
+    l = transOffsetLeft + "px";
+  }
+
+  notifiyQueen.push({
+    id: layerId,
+    offset: offset,
+  });
+  // 返回位置
+  return [t, l];
+}
+
+//移除Notify队列中某项，并且重新计算其他Notify位置
+export function removeNotifiyFromQueen(layerId: string | undefined) {
+  // 间隙
+  let transOffsetTop = 15;
+  // @ts-ignore 删除项的高度
+  let offsetHeight =
+    document.getElementById(layerId)?.firstElementChild?.firstElementChild
+      ?.offsetHeight;
+  // @ts-ignore
+  window.NotifiyQueen = window.NotifiyQueen || [];
+  // @ts-ignore
+  let notifiyQueen = window.NotifiyQueen;
+  let index = notifiyQueen.findIndex((e: { id: string }) => e.id === layerId);
+  let offsetType = notifiyQueen[index].offset;
+  let list = notifiyQueen.filter((e: { offset: any }) => {
+    if (e.offset === offsetType) {
+      return e;
+    }
+  });
+  let findIndex = list.findIndex((e: { id: string }) => e.id === layerId);
+  // //得到需要修改的定位的Notifiy集合
+  let needCalculatelist = list.slice(findIndex + 1);
+  needCalculatelist.forEach((e: { id: string }) => {
+    let dom = document.getElementById(e.id)?.firstElementChild
+      ?.firstElementChild;
+    if (offsetType === "rt" || offsetType === "lt") {
+      // @ts-ignore
+      dom.style["top"] =
+        parseFloat(dom.style["top"]) - transOffsetTop - offsetHeight + "px";
+    } else {
+      // @ts-ignore
+      let bottom =
+        parseFloat(dom.style["top"].split(" - ")[1]) -
+        transOffsetTop -
+        offsetHeight;
+      // @ts-ignore
+      dom.style["top"] = "calc(100vh - " + bottom + "px)";
+    }
+  });
+  notifiyQueen.splice(index, 1); //删除
 }

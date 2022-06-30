@@ -8,6 +8,7 @@ export default {
 import "./index.less";
 import { LayIcon } from "@layui/icons-vue";
 import tabItem from "../tabItem/index.vue";
+import RenderTitle from "./renderTitle.vue";
 import {
   Component,
   computed,
@@ -21,8 +22,10 @@ import {
   onMounted,
   nextTick,
   CSSProperties,
+  reactive,
 } from "vue";
 import { useResizeObserver } from "@vueuse/core";
+import { TabData, TabInjectKey } from "./interface";
 
 export type tabPositionType = "top" | "bottom" | "left" | "right";
 
@@ -40,6 +43,7 @@ const slot = useSlots();
 const slots = slot.default && slot.default();
 const childrens: Ref<VNode[]> = ref([]);
 const slotsChange = ref(true);
+const tabMap = reactive(new Map<number, TabData>());
 
 const setItemInstanceBySlot = function (nodeList: VNode[]) {
   nodeList?.map((item) => {
@@ -66,6 +70,32 @@ const active = computed({
     emit("update:modelValue", val);
   },
 });
+
+const tabItems = computed(() => {
+  const tabData: TabData[] = [];
+  childrens.value.forEach((item) => {
+    const tab = tabMap.get(item.props?.id);
+    if (tab) tabData.push(tab);
+  });
+  return tabData;
+});
+
+const addItem = (id: number, data: any) => {
+  tabMap.set(id, data);
+};
+
+const removeItem = (id: number) => {
+  tabMap.delete(id);
+};
+
+provide(
+  TabInjectKey,
+  reactive({
+    active: active,
+    addItem,
+    removeItem,
+  })
+);
 
 const change = function (id: any) {
   if (props.beforeLeave && props.beforeLeave(id) === false) {
@@ -294,16 +324,16 @@ provide("slotsChange", slotsChange);
           :style="tabBarStyle"
         ></div>
         <li
-          v-for="(children, index) in childrens"
-          :key="children.props?.id"
-          :class="[children.props?.id === active ? 'layui-this' : '']"
-          @click.stop="change(children.props?.id)"
+          v-for="(children, index) in tabItems"
+          :key="children.id"
+          :class="[children.id === active ? 'layui-this' : '']"
+          @click.stop="change(children.id)"
         >
-          {{ children.props?.title }}
+          <RenderTitle :tabItemData="children"></RenderTitle>
           <i
-            v-if="allowClose && children.props?.closable != false"
+            v-if="allowClose && children.closable != false"
             class="layui-icon layui-icon-close layui-unselect layui-tab-close"
-            @click.stop="close(index, children.props?.id)"
+            @click.stop="close(index, children.id)"
           ></i>
         </li>
       </ul>

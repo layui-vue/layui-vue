@@ -7,7 +7,12 @@
 ::: demo
 
 <template>
-<div style="width: 125px; ">
+<div style="max-width: 100%; ">
+ <lay-tooltip content="缩小浏览器时...假装这里有文字提示假装这里有文字提示假装这里有文字提示假装这里有文字提示" ref="tooltip" :isAutoShow="true">
+      缩小浏览器时...假装这里有文字提示假装这里有文字提示假装这里有文字提示假装这里有文字提示
+  </lay-tooltip>
+</div>
+<div style="max-width: 124px;  margin-top: 20px">
  <lay-tooltip content="假装这里有文字提示" ref="tooltip" :isAutoShow="true">
       假装这里有文字提示
   </lay-tooltip>
@@ -105,8 +110,8 @@ setup() {
   <lay-tooltip :content="content" :is-dark="isDark" :disabled="!disabled">
     <lay-button>tooltip</lay-button>
   </lay-tooltip>
-  <lay-switch v-model="disabled" active-text="启用tooltip"  inactive-text="禁用tooltip" style="margin-left: 5px;"></lay-switch>
-  <lay-switch v-model="isDark" active-text="深色"  inactive-text="浅色" style="margin-left: 5px;"></lay-switch>
+  <lay-switch v-model="disabled" onswitch-text="启用tooltip"  unswitch-text="禁用tooltip" style="margin-left: 5px;"></lay-switch>
+  <lay-switch v-model="isDark" onswitch-text="深色"  unswitch-text="浅色" style="margin-left: 5px;"></lay-switch>
 </template>
 
 <script>

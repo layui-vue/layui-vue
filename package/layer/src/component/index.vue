@@ -11,6 +11,7 @@ import Title from "./Title.vue";
 import CloseBtn from "./CloseBtn.vue";
 import Resize from "./Resize.vue";
 import Photos from "./Photos.vue";
+import Notifiy from "./Notifiy.vue";
 import {
   Ref,
   ref,
@@ -36,6 +37,8 @@ import {
   getDrawerAnimationClass,
   calculateDrawerArea,
   calculatePhotosArea,
+  calculateNotifOffset,
+  removeNotifiyFromQueen,
 } from "../utils";
 import useMove from "../composable/useMove";
 import useResize from "../composable/useResize";
@@ -62,12 +65,14 @@ export interface LayModalProps {
     | 3
     | 4
     | 5
+    | 6
     | "dialog"
     | "page"
     | "iframe"
     | "loading"
     | "drawer"
-    | "photos";
+    | "photos"
+    | "notifiy";
   content?: string | Function | object | VNodeTypes;
   isHtmlFragment?: boolean;
   shade?: boolean | string;
@@ -89,6 +94,9 @@ export interface LayModalProps {
   appContext?: any;
   startIndex?: number;
   imgList?: { src: string; alt: string }[];
+  min?: Function;
+  full?: Function;
+  restore?: Function;
 }
 
 const props = withDefaults(defineProps<LayModalProps>(), {
@@ -114,6 +122,9 @@ const props = withDefaults(defineProps<LayModalProps>(), {
   destroy: () => {},
   success: () => {},
   end: () => {},
+  full: () => {},
+  min: () => {},
+  restore: () => {},
   yesText: "确定",
   isFunction: false,
   isMessage: false,
@@ -171,13 +182,19 @@ const firstOpenDelayCalculation = function () {
         props
       );
     }
+    if (props.isHtmlFragment && props.area === "auto") {
+      area.value = ["auto", "auto"];
+    }
     offset.value = calculateOffset(props.offset, area.value, props.type);
+    if (type == 6) {
+      offset.value = calculateNotifOffset(props.offset, area.value, id.value);
+    }
     w.value = area.value[0];
     h.value = area.value[1];
-    t.value = offset.value[0];
-    l.value = offset.value[1];
     _w.value = area.value[0];
     _l.value = area.value[1];
+    t.value = offset.value[0];
+    l.value = offset.value[1];
     _t.value = offset.value[0];
     _l.value = offset.value[1];
     supportMove();
@@ -220,6 +237,7 @@ const maxHandle = () => {
     h.value = _h.value;
     t.value = _t.value;
     l.value = _l.value;
+    props.restore(props.id);
   } else {
     _t.value = t.value;
     _l.value = l.value;
@@ -229,6 +247,7 @@ const maxHandle = () => {
     h.value = maxArea().h;
     t.value = maxOffset().t;
     l.value = maxOffset().l;
+    props.full(props.id);
   }
   max.value = !max.value;
 };
@@ -247,6 +266,7 @@ const minHandle = () => {
     h.value = _h.value;
     t.value = _t.value;
     l.value = _l.value;
+    props.restore(props.id);
   } else {
     _w.value = w.value;
     _h.value = h.value;
@@ -256,6 +276,7 @@ const minHandle = () => {
     w.value = minArea().w;
     t.value = minOffset(left).t;
     l.value = minOffset(left).l;
+    props.min(props.id);
   }
   min.value = !min.value;
 };
@@ -361,6 +382,7 @@ const boxClasses = computed(() => {
     type === 3 ? "layui-layer-loading" : "",
     type === 4 ? "layui-layer-drawer" : "",
     type === 5 ? "layui-layer-photos" : "",
+    type === 6 ? "layui-layer-notifiy-border" : "",
     props.isMessage ? "layui-layer-msg" : "",
     props.isMessage && !props.icon ? "layui-layer-hui" : "",
     props.skin,
@@ -393,13 +415,39 @@ const supportMove = function () {
  * <p>
  */
 const styles = computed<any>(() => {
-  return {
+  let style = {
     top: t.value,
     left: l.value,
     width: w.value,
     height: h.value,
     zIndex: index.value,
   };
+  if (props.isHtmlFragment && props.area === "auto") {
+    // @ts-ignore
+    style.maxWidth = "calc(100% - 2px)";
+    // @ts-ignore
+    style.maxHeight = "calc(100% - 51px)";
+    style.top = "50%";
+    style.left = "50%";
+    if (Array.isArray(offset.value)) {
+      if (offset.value[0].indexOf("px") > -1) {
+        style.top = offset.value[0];
+      }
+      if (offset.value[1].indexOf("px") > -1) {
+        style.left = offset.value[1];
+      }
+      if (
+        offset.value[0].indexOf("%") > -1 ||
+        offset.value[1].indexOf("%") > -1
+      ) {
+        // @ts-ignore
+        style.transform = `translate(-${
+          style.left.indexOf("%") > -1 ? style.left : 0
+        },-${style.top.indexOf("%") > -1 ? style.top : 0})`;
+      }
+    }
+  }
+  return style;
 });
 
 /**
@@ -425,6 +473,11 @@ const closeHandle = () => {
   emit("close");
   emit("update:modelValue", false);
   props.destroy();
+
+  //Notify 从队列中移除当前实例
+  if (type === 6) {
+    removeNotifiyFromQueen(props.id);
+  }
 };
 
 /**
@@ -538,7 +591,7 @@ const showResize = computed(() => {
  * @param type  类型
  */
 const showTitle = computed(() => {
-  return props.title && props.type != 3 && props.type != "photos";
+  return props.title && props.type != 3 && props.type != 5 && props.type != 6;
 });
 
 /*
@@ -610,9 +663,21 @@ defineExpose({ reset, open, close });
             :startIndex="props.startIndex"
             @resetCalculationPohtosArea="resetCalculationPohtosArea"
           ></Photos>
+          <Notifiy
+            v-if="type === 6"
+            @close="closeHandle"
+            :title="props.title"
+            :content="props.content"
+            :isHtmlFragment="props.isHtmlFragment"
+            :icon="props.icon"
+            :iconClass="iconClass"
+          ></Notifiy>
         </div>
         <!-- 工具栏 -->
-        <span class="layui-layer-setwin" v-if="type != 3 && type != 5">
+        <span
+          class="layui-layer-setwin"
+          v-if="type != 3 && type != 5 && type != 6"
+        >
           <a
             v-if="maxmin && !max"
             class="layui-layer-min"

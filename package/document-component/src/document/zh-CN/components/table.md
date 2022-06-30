@@ -530,6 +530,74 @@ export default {
 
 :::
 
+::: title 定义样式
+:::
+
+::: demo 通过 `cellStyle` `rowStyle` `cellClassName` `rowClassName` 属性, 自定义单元格样式。
+
+<template>
+  <lay-table :columns="columns1" :dataSource="dataSource1" :cellStyle="cellStyle" :rowStyle="rowStyle"></lay-table>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const columns1 = [
+      {
+        title:"账户",
+        width:"200px",
+        key:"username"
+      },{
+        title:"密码",
+        width: "180px",
+        key:"password"
+      },{
+        title:"年龄",
+        width: "180px",
+        key:"age"
+      },{
+        title:"备注",
+        width: "180px",
+        key:"remark",
+        ellipsisTooltip: true,
+      }
+    ]
+
+    const dataSource1 = [
+      {username:"root", password:"root", age:"18", remark: 'layui - vue（谐音：类 UI) '},
+      {username:"root", password:"root", age:"18", remark: 'layui - vue（谐音：类 UI) '},
+      {username:"woow", password:"woow", age:"20", remark: 'layui - vue（谐音：类 UI) '},
+      {username:"woow", password:"woow", age:"20", remark: 'layui - vue（谐音：类 UI) '},
+      {username:"woow", password:"woow", age:"20", remark: 'layui - vue（谐音：类 UI) '}
+    ]
+
+    const cellStyle = function(row, column, rowIndex, columnIndex) {
+      if(columnIndex % 2 == 0) {
+        return 'color:red';
+      }
+    }
+
+    const rowStyle = function(row, rowIndex) {
+      if(rowIndex % 2 == 0) {
+        return 'color:blue';
+      }
+    }
+
+    return {
+      columns1,
+      dataSource1,
+      cellStyle,
+      rowStyle
+    }
+  }
+}
+</script>
+
+:::
+
 ::: title Table 属性
 :::
 
@@ -549,6 +617,11 @@ export default {
 | height               | 表格高度                      | `number`   | --   | -- |
 | maxHeight            | 表格最大高度                  | `number`   | --   | -- |
 | even                 | 斑马条纹                      | `boolean`  | `false`   | `true` `false` |
+| cellStyle            | 列样式 function(row, column, rowIndex, columnIndex)                  | `string` `function`   | -- | -- |
+| rowStyle             | 行样式 function(row, rowIndex)                  | `string` `function`  | --   | -- |
+| cellClassName        | 列类名称 function(row, column, rowIndex, columnIndex)               | `string` `function`   | --    | -- |
+| rowClassName         | 行类名称 function(row, rowIndex)                | `string` `function`  | --   | -- |
+
 :::
 
 ::: title Table 事件

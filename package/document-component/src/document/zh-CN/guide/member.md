@@ -140,6 +140,25 @@
     </lay-row>
 </lay-card>
 
+<lay-card>
+    <lay-row>
+        <lay-col md="2">
+            <lay-avatar src="https://portrait.gitee.com/uploads/avatars/user/495/1486240_SmallWai_1656341928.png"></lay-avatar>
+        </lay-col>
+        <lay-col md="3">
+            0o张不歪o0
+        </lay-col>
+        <lay-col md="8">
+            焦点：layui-vue layer-vue
+        </lay-col>
+        <lay-col md="4">
+            地点：中国 成都
+        </lay-col>
+        <lay-col md="6">
+            其他：Gitee Github
+        </lay-col>
+    </lay-row>
+</lay-card>
 <br>
 
 ::: title 社区伙伴

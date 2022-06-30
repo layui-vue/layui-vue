@@ -387,11 +387,15 @@ const handleClick = () => {
   }
 };
 
-const handleContextMenuClick = () => {
+const handleContextMenuClick = (e: Event) => {
   if (props.disabled || (openState.value && !props.clickToClose)) {
     return;
   }
   if (triggerMethods.value.includes("contextMenu")) {
+    e.preventDefault();
+    if (props.alignPoint) {
+      hide();
+    }
     toggle();
   }
 };
@@ -511,7 +515,7 @@ defineExpose({ open, hide, toggle });
     @focusout="handleFocusout()"
     :class="{ 'layui-dropdown-up': openState }"
   >
-    <div @click="handleClick()" @contextmenu.prevent="handleContextMenuClick()">
+    <div @click="handleClick()" @contextmenu="handleContextMenuClick">
       <slot></slot>
     </div>
     <dl

@@ -1,55 +1,27 @@
 <template>
   <div class="lay-code">
     <div id="source" class="source">
-      <slot />
+      <slot></slot>
       <div v-if="$slots.description" class="description">
-        <slot name="description" />
+        <slot name="description"></slot>
       </div>
     </div>
     <div ref="meta" class="meta">
       <div class="language-html">
-        <slot name="code" />
+        <slot name="code"></slot>
       </div>
     </div>
     <div :class="{ 'is-fixed': isFixContorl }" class="control">
-      <i class="layui-icon layui-icon-file btn" @click="copy"
-        ><svg
-          t="1646244236057"
-          class="icon"
-          viewBox="0 0 1024 1024"
-          version="1.1"
-          xmlns="http://www.w3.org/2000/svg"
-          p-id="5505"
-          width="18"
-          height="18"
-        >
-          <path
-            d="M768 682.666667V170.666667a85.333333 85.333333 0 0 0-85.333333-85.333334H170.666667a85.333333 85.333333 0 0 0-85.333334 85.333334v512a85.333333 85.333333 0 0 0 85.333334 85.333333h512a85.333333 85.333333 0 0 0 85.333333-85.333333zM170.666667 170.666667h512v512H170.666667z m682.666666 85.333333v512a85.333333 85.333333 0 0 1-85.333333 85.333333H256a85.333333 85.333333 0 0 0 85.333333 85.333334h426.666667a170.666667 170.666667 0 0 0 170.666667-170.666667V341.333333a85.333333 85.333333 0 0 0-85.333334-85.333333z"
-            p-id="5506"
-          ></path></svg
-      ></i>
-      <i class="layui-icon layui-icon-fonts-code btn" @click="toggle"
-        ><svg
-          t="1646244296040"
-          class="icon"
-          viewBox="0 0 1024 1024"
-          version="1.1"
-          xmlns="http://www.w3.org/2000/svg"
-          p-id="7127"
-          width="18"
-          height="18"
-        >
-          <path
-            d="M217.301333 414.933333a21.333333 21.333333 0 0 1-1.066666-30.165333l29.098666-31.232a21.333333 21.333333 0 0 1 30.165334-1.024l236.117333 220.16 236.16-220.16a21.333333 21.333333 0 0 1 30.122667 1.024l29.098666 31.232a21.333333 21.333333 0 0 1-1.024 30.165333L541.738667 661.333333l-13.44 14.421334a21.290667 21.290667 0 0 1-16.725334 6.741333 21.290667 21.290667 0 0 1-16.64-6.741333l-13.44-14.506667z"
-            p-id="7128"
-          ></path></svg
-      ></i>
+      <i class="layui-icon layui-icon-play btn" @click="onPlayground" />
+      <i class="layui-icon layui-icon-file btn" @click="copy"></i>
+      <i class="layui-icon layui-icon-fonts-code btn" @click="toggle"></i>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref, watch } from "vue";
+import { usePlayGround } from "../composable/usePlayground";
 
 const meta = ref<HTMLElement>({} as HTMLElement);
 const isFixContorl = ref(false);
@@ -59,6 +31,13 @@ const show = ref(false);
 
 const toggle = function () {
   show.value = !show.value;
+};
+
+const onPlayground = async function () {
+  const foundCode = meta.value.querySelector(".language-html");
+  const sourceCode = foundCode?.textContent ?? "";
+  const { link } = await usePlayGround(sourceCode, true);
+  window.open(link);
 };
 
 const copy = function () {
@@ -94,7 +73,9 @@ const copy = function () {
   }
 
   if (successful) {
+    window.alert("复制成功");
   } else {
+    window.alert("复制失败");
   }
 };
 

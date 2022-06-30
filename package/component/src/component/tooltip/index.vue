@@ -12,6 +12,7 @@
 import "./index.less";
 import LayPopper from "../popper/index.vue";
 import { defineComponent, ref } from "vue";
+import { useEventListener } from "@vueuse/core";
 export default defineComponent({
   name: "LayTooltip",
   components: {
@@ -45,7 +46,7 @@ export default defineComponent({
   },
   setup() {
     const isMounted = ref(false);
-    const refTooltip = ref(null);
+    const refTooltip = ref<any>(null);
     return {
       isMounted,
       refTooltip,
@@ -57,11 +58,20 @@ export default defineComponent({
     },
   },
   mounted() {
+    if (this.isAutoShow) {
+      useEventListener("resize", () => {
+        this.setEllipsis();
+      });
+    }
     this.$nextTick(() => {
+      this.setEllipsis();
+    });
+  },
+  methods: {
+    setEllipsis() {
       if (this.refTooltip) {
-        if (
-          this.refTooltip.offsetWidth >= this.refTooltip.firstChild.offsetWidth
-        ) {
+        let tooltipHtml = this.refTooltip;
+        if (tooltipHtml.offsetWidth >= tooltipHtml.firstChild.offsetWidth) {
           this.isMounted = false;
         } else {
           this.isMounted = true;
@@ -69,7 +79,7 @@ export default defineComponent({
       } else {
         this.isMounted = true;
       }
-    });
+    },
   },
 });
 </script>

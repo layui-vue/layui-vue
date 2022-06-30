@@ -10,8 +10,17 @@ const zhCN = [
       {
         path: "/zh-CN/index",
         component: () => import("../document/zh-CN/index.md"),
-
-        meta: { title: "指南" },
+        meta: { title: "入门" },
+      },
+      {
+        path: "/zh-CN/demo",
+        component: () => import("../document/zh-CN/demo.md"),
+        meta: { title: "示例" },
+      },
+      {
+        path: "/zh-CN/help",
+        component: () => import("../document/zh-CN/help.md"),
+        meta: { title: "帮助" },
       },
     ],
   },
