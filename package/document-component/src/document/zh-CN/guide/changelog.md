@@ -16,6 +16,10 @@
       <li> 
         <h3>1.2.5 <span class="layui-badge-rim">2022-06-29</span></h3> 
         <ul>
+          <li>[新增] dropdown-sub-menu 组件, 用于呈现二级下拉菜单。</li>
+          <li>[新增] dropdown-menu-item 组件 default 插槽, 自定义内容。</li>
+          <li>[新增] dropdown-menu-item 组件 prefix 插槽, 自定义内容前缀。</li>
+          <li>[新增] dropdown-menu-item 组件 suffix 插槽, 自定义内容后缀。</li>
           <li>[新增] table 组件 rowStyle 属性, 自定义行样式, 值为 function(row, rowIndex) 函数或 string 类型。</li>
           <li>[新增] table 组件 rowClassName 属性, 自定义行样式, 值为 function(row, rowIndex) 函数或 string 类型。</li>
           <li>[新增] table 组件 cellStyle 属性, 自定义单元格样式, 值为 function(row, column, rowIndex, columnIndex) 函数或 string 类型。</li>
