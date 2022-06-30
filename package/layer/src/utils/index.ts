@@ -75,9 +75,6 @@ export function calculateOffset(offset: any, area: any, type: any) {
   if (offset instanceof Array && type === "drawer") {
     offset = "r";
   }
-  if (offset instanceof Array && type === 6) {
-    offset = "rt-15";
-  }
   // @ts-ignore
   if (arr.indexOf(offset) > -1) {
     t = "50%";
@@ -105,9 +102,6 @@ export function calculateOffset(offset: any, area: any, type: any) {
   } else if (offset === "rb") {
     t = "calc(100% - " + area[1] + ")";
     l = "calc(100% - " + area[0] + ")";
-  } else if (offset === "rt-15") {
-    t = "15px";
-    l = "calc(100% - " + (parseFloat(area[0]) + 15) + "px)";
   }
 
   // 返回位置
@@ -350,15 +344,12 @@ export function removeNotifiyFromQueen(layerId: string | undefined) {
   // 间隙
   let transOffsetTop = 15;
   // @ts-ignore 删除项的高度
-  let offsetHeight =
-    document.getElementById(layerId)?.firstElementChild?.firstElementChild
-      ?.offsetHeight;
+  let offsetHeight =document.getElementById(layerId)?.firstElementChild?.firstElementChild?.offsetHeight;
   // @ts-ignore
   window.NotifiyQueen = window.NotifiyQueen || [];
   // @ts-ignore
   let notifiyQueen = window.NotifiyQueen;
-  //console.log(notifiyQueen)
-  let index = notifiyQueen.findIndex((e: { id: string }) => e.id === layerId);
+  let index = notifiyQueen.findIndex((e: { id: string; }) => e.id === layerId)
   let offsetType = notifiyQueen[index].offset;
   let list = notifiyQueen.filter((e: { offset: any }) => {
     if (e.offset === offsetType) {
@@ -373,14 +364,10 @@ export function removeNotifiyFromQueen(layerId: string | undefined) {
       ?.firstElementChild;
     if (offsetType === "rt" || offsetType === "lt") {
       // @ts-ignore
-      dom.style["top"] =
-        parseFloat(dom.style["top"]) - transOffsetTop - offsetHeight + "px";
+      dom.style["top"] = parseFloat(dom.style["top"]) - transOffsetTop - offsetHeight + "px";
     } else {
       // @ts-ignore
-      let bottom =
-        parseFloat(dom.style["top"].split(" - ")[1]) -
-        transOffsetTop -
-        offsetHeight;
+      let bottom =parseFloat(dom.style["top"].split(" - ")[1]) - transOffsetTop - offsetHeight;
       // @ts-ignore
       dom.style["top"] = "calc(100vh - " + bottom + "px)";
     }
