@@ -12,6 +12,16 @@
 <lay-timeline>
   <lay-timeline-item title="1.2.x">
     <ul> 
+      <a name="1-2-6"></a> 
+      <li> 
+        <h3>1.2.6 <span class="layui-badge-rim">2022-07-01</span></h3> 
+        <ul>
+          <li>[修复] tooltip 组件设置isAutoShow 属性时，宽度设置max-width 时拖动浏览器时出现...时，tooltip不显示问题。 by @dingyongya</li>
+          <li>[修复] table 组件设置 ellipsisTooltip 属性时 出现...时，tooltip不显示问题。by @dingyongya</li>
+        </ul>
+      </li>
+    </ul>
+    <ul> 
       <a name="1-2-5"></a> 
       <li> 
         <h3>1.2.5 <span class="layui-badge-rim">2022-06-29</span></h3> 
