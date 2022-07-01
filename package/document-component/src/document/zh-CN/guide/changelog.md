@@ -16,8 +16,11 @@
       <li> 
         <h3>1.2.6 <span class="layui-badge-rim">2022-07-01</span></h3> 
         <ul>
+          <li>[新增] transfer 组件 leftFooter 与 rightFooter 插槽, 用于自定义穿梭框底部内容。by @Jmysy</li>
           <li>[修复] tooltip 组件设置isAutoShow 属性时，宽度设置max-width 时拖动浏览器时出现...时，tooltip不显示问题。 by @dingyongya</li>
           <li>[修复] table 组件设置 ellipsisTooltip 属性时 出现...时，tooltip不显示问题。by @dingyongya</li>
+          <li>[优化] transfer 组件 selectedKeys 选中效果, 加入 checkbox 半选状态。by @Jmysy</li>
+          <li>[优化] page 组件 hover状态下文字颜色跟当前设置的theme主题色保持一致。by @0o张不歪o0</li>
         </ul>
       </li>
     </ul>

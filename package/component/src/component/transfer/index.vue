@@ -12,7 +12,6 @@ import LayButton from "../button/index.vue";
 import LayCheckbox from "../checkbox/index.vue";
 import { computed, Ref, ref, useSlots, watch } from "vue";
 import { BooleanOrString, Recordable } from "../../types";
-import { computedAsync } from "@vueuse/core";
 
 export interface LayTransferProps {
   id?: string;
@@ -24,7 +23,7 @@ export interface LayTransferProps {
   selectedKeys?: Recordable[];
 }
 
-const slot = useSlots();
+const slots = useSlots();
 
 const props = withDefaults(defineProps<LayTransferProps>(), {
   id: "id",
@@ -38,17 +37,16 @@ const props = withDefaults(defineProps<LayTransferProps>(), {
 
 const leftDataSource: Ref<any[]> = ref([...props.dataSource]);
 const rightDataSource: Ref<any[]> = ref([]);
-
 const _leftDataSource: Ref<any[]> = ref([...props.dataSource]);
 const _rightDataSource: Ref<any[]> = ref([]);
-
 const leftSelectedKeys: Ref<string[]> = ref([]);
 const rightSelectedKeys: Ref<string[]> = ref([]);
-
 const allLeftChecked = ref(false);
 const allRightChecked = ref(false);
+const hasLeftChecked = ref(false);
+const hasRightChecked = ref(false);
 
-const allLeftChange = function (checked: any) {
+const allLeftChange = (checked: any) => {
   if (checked) {
     const ids = leftDataSource.value.map((item: any) => {
       return item[props.id];
@@ -70,11 +68,16 @@ watch(
     } else {
       allLeftChecked.value = false;
     }
+    if (leftSelectedKeys.value.length > 0 && leftDataSource.value.length != 0) {
+      hasLeftChecked.value = true;
+    } else {
+      hasLeftChecked.value = false;
+    }
   },
   { deep: true }
 );
 
-const allRightChange = function (checked: any) {
+const allRightChange = (checked: any) => {
   if (checked) {
     const ids = rightDataSource.value.map((item: any) => {
       return item[props.id];
@@ -90,17 +93,25 @@ watch(
   () => {
     if (
       rightDataSource.value.length === rightSelectedKeys.value.length &&
-      rightDataSource.value.length != 0
+      rightDataSource.value.length > 0
     ) {
       allRightChecked.value = true;
     } else {
       allRightChecked.value = false;
     }
+    if (
+      rightSelectedKeys.value.length > 0 &&
+      rightDataSource.value.length != 0
+    ) {
+      hasRightChecked.value = true;
+    } else {
+      hasRightChecked.value = false;
+    }
   },
   { deep: true }
 );
 
-const add = function () {
+const add = () => {
   if (leftSelectedKeys.value.length === 0) {
     return;
   }
@@ -123,7 +134,7 @@ const add = function () {
   leftSelectedKeys.value = [];
 };
 
-const remove = function () {
+const remove = () => {
   if (rightSelectedKeys.value.length === 0) {
     return;
   }
@@ -174,12 +185,6 @@ const boxStyle = computed(() => {
     height: props.height,
   };
 });
-
-const dataStyle = computed(() => {
-  return {
-    height: props.showSearch ? "calc(100% - 97px)" : "calc(100% - 38px)",
-  };
-});
 </script>
 
 <template>
@@ -188,7 +193,8 @@ const dataStyle = computed(() => {
       <div class="layui-transfer-box" :style="boxStyle">
         <div class="layui-transfer-header">
           <LayCheckbox
-            v-model="allLeftChecked"
+            v-model="hasLeftChecked"
+            :is-indeterminate="!allLeftChecked"
             skin="primary"
             label="all"
             @change="allLeftChange"
@@ -203,37 +209,43 @@ const dataStyle = computed(() => {
             placeholder="关键词搜索"
           ></lay-input>
         </div>
-        <ul class="layui-transfer-data" :style="dataStyle">
+        <ul class="layui-transfer-data">
           <li v-for="dataSource in leftDataSource" :key="dataSource">
             <LayCheckbox
               v-model="leftSelectedKeys"
               skin="primary"
               :label="dataSource[id]"
             >
-              <slot v-if="slot.item" name="item" :data="dataSource"></slot>
+              <slot v-if="slots.item" name="item" :data="dataSource"></slot>
               <span v-else>{{ dataSource.title }}</span>
             </LayCheckbox>
           </li>
         </ul>
+        <div class="layui-transfer-footer" v-if="slots.leftFooter">
+          <slot name="leftFooter"></slot>
+        </div>
       </div>
       <div class="layui-transfer-active">
-        <LayButton
-          type="primary"
-          :disabled="leftSelectedKeys.length == 0"
-          @click="add"
-          ><i class="layui-icon layui-icon-next"></i
-        ></LayButton>
-        <LayButton
-          type="primary"
-          :disabled="rightSelectedKeys.length == 0"
-          @click="remove"
-          ><i class="layui-icon layui-icon-prev"></i
-        ></LayButton>
+        <div class="layui-transfer-button-group">
+          <LayButton
+            type="primary"
+            :disabled="leftSelectedKeys.length == 0"
+            @click="add"
+            ><i class="layui-icon layui-icon-next"></i
+          ></LayButton>
+          <LayButton
+            type="primary"
+            :disabled="rightSelectedKeys.length == 0"
+            @click="remove"
+            ><i class="layui-icon layui-icon-prev"></i
+          ></LayButton>
+        </div>
       </div>
       <div class="layui-transfer-box" :style="boxStyle">
         <div class="layui-transfer-header">
           <LayCheckbox
-            v-model="allRightChecked"
+            v-model="hasRightChecked"
+            :is-indeterminate="!allRightChecked"
             skin="primary"
             label="all"
             @change="allRightChange"
@@ -248,18 +260,21 @@ const dataStyle = computed(() => {
             placeholder="关键词搜索"
           ></lay-input>
         </div>
-        <ul class="layui-transfer-data" :style="dataStyle">
+        <ul class="layui-transfer-data">
           <li v-for="dataSource in rightDataSource" :key="dataSource">
             <LayCheckbox
               v-model="rightSelectedKeys"
               skin="primary"
               :label="dataSource[id]"
             >
-              <slot v-if="slot.item" name="item" :data="dataSource"></slot>
+              <slot v-if="slots.item" name="item" :data="dataSource"></slot>
               <span v-else>{{ dataSource.title }}</span>
             </LayCheckbox>
           </li>
         </ul>
+        <div class="layui-transfer-footer" v-if="slots.rightFooter">
+          <slot name="rightFooter"></slot>
+        </div>
       </div>
     </div>
   </div>
