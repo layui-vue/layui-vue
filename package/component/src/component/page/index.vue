@@ -119,7 +119,10 @@ watch(currentPage, function () {
     <a
       href="javascript:;"
       class="layui-laypage-prev"
-      :class="[currentPage === 1 ? 'layui-disabled' : '',theme && currentPage !== 1 ? 'layui-laypage-a-' + theme : '']"
+      :class="[
+        currentPage === 1 ? 'layui-disabled' : '',
+        theme && currentPage !== 1 ? 'layui-laypage-a-' + theme : '',
+      ]"
       @click="prev()"
     >
       <slot v-if="slots.prev" name="prev"></slot>
@@ -134,14 +137,23 @@ watch(currentPage, function () {
           ></em>
           <em>{{ index }}</em>
         </span>
-        <a v-else href="javascript:;" @click="jump(index)" :class="[theme ? 'layui-laypage-a-' + theme : '']">{{ index }}</a>
+        <a
+          v-else
+          href="javascript:;"
+          @click="jump(index)"
+          :class="[theme ? 'layui-laypage-a-' + theme : '']"
+          >{{ index }}</a
+        >
       </template>
     </template>
 
     <a
       href="javascript:;"
       class="layui-laypage-next"
-      :class="[currentPage === maxPage ? 'layui-disabled' : '',theme && currentPage !== maxPage ? 'layui-laypage-a-' + theme : '']"
+      :class="[
+        currentPage === maxPage ? 'layui-disabled' : '',
+        theme && currentPage !== maxPage ? 'layui-laypage-a-' + theme : '',
+      ]"
       @click="next()"
     >
       <slot v-if="slots.next" name="next"></slot>
