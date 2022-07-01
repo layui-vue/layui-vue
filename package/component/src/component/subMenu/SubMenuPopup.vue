@@ -12,8 +12,6 @@ export interface LaySubMenuPopupProps {
   id: string;
   title?: string;
 }
-
-const slots = useSlots();
 const props = defineProps<LaySubMenuPopupProps>();
 
 const openKeys: Ref<string[]> = inject("openKeys") as Ref<string[]>;
@@ -25,87 +23,78 @@ const isOpen = computed(() => {
 </script>
 
 <template>
-  <li :class="['layui-nav-item sub-menu-popup', level > 2 ? 'original' : '']">
-    <lay-dropdown
-      trigger="hover"
-      placement="right-top"
-      :autoFitMinWidth="false"
-      :contentOffset="3"
-    >
-      <a href="javascript:void(0)">
-        <!-- 图标 -->
-        <i>
-          <slot v-if="slots.icon" name="icon"></slot>
-        </i>
-        <!-- 标题 -->
-        <span>
-          <slot v-if="slots.title" name="title"></slot>
-        </span>
+  <lay-dropdown
+    trigger="hover"
+    placement="right-top"
+    :autoFitMinWidth="false"
+    :contentOffset="3"
+    class="layui-sub-menu-popup"
+  >
+    <li :class="['layui-nav-item']">
+      <a href="javascript:void(0)" style="justify-content: space-between">
+        <div>
+          <!-- 图标 -->
+          <i v-if="$slots.icon" class="layui-sub-menu-icon">
+            <slot name="icon"></slot>
+          </i>
+
+          <!-- 标题 -->
+          <span v-if="$slots.title">
+            <slot name="title"></slot>
+          </span>
+        </div>
+
         <!-- 扩展 -->
-        <i v-if="slots.expandIcon" class="layui-nav-more">
+        <span v-if="$slots.expandIcon" class="layui-nav-more">
           <slot name="expandIcon">
             <lay-icon type="layui-icon-right"></lay-icon>
           </slot>
-        </i>
+        </span>
       </a>
-      <template #content>
-        <slot></slot>
-      </template>
-    </lay-dropdown>
-  </li>
+    </li>
+    <template #content class="layui-sub-menu-popup-content">
+      <slot></slot>
+    </template>
+  </lay-dropdown>
 </template>
 <style lang="less">
-.sub-menu-popup {
-  line-height: inherit;
-}
-
-.sub-menu-popup > .layui-dropdown > div > a {
-  width: auto;
-  display: block;
-  text-overflow: clip;
-  height: 40px;
-  line-height: 40px;
-  position: relative;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-  padding: 5px 23px 5px 23px;
-}
-
-.sub-menu-popup > .layui-dropdown dl {
-  border-radius: 4px;
+// popup-menu 面板样式
+.layui-sub-menu-popup.layui-dropdown > dl {
+  border: unset;
+  border-radius: 2px;
   background-color: #393d49;
 }
+// popup-menu item样式
+.layui-nav.layui-nav-collapse {
+  .layui-sub-menu-popup dl .layui-nav-item {
+    width: auto;
+    > a {
+      display: flex;
+      align-items: center;
+      text-overflow: ellipsis;
+      padding: 5px 20px 5px 20px;
+      // height: 35px;
+      // width: 95px;
 
-.sub-menu-popup > .layui-dropdown dl > li > a {
-  span {
-    display: inline;
-  }
+      .layui-sub-menu-icon {
+        margin-right: 8px;
+      }
+    }
 
-  .layui-nav-item > a {
-    text-overflow: clip;
-  }
+    span {
+      display: inline-block;
+      margin-left: 0;
+    }
 
-  .layui-nav-more {
-    display: inline-block;
-  }
-}
-
-.layui-nav.layui-nav-collapse .sub-menu-popup.original {
-  width: 100%;
-
-  span {
-    display: inline;
-  }
-
-  .layui-nav-item > a {
-    text-overflow: clip;
-  }
-
-  .layui-nav-more {
-    display: inline-block;
-    right: 2px;
-    top: 5.5px;
+    .layui-nav-more {
+      position: relative;
+      display: inline-block;
+      font-size: 12.5px !important;
+      margin-top: 0;
+      margin-left: 30px;
+      padding: 0;
+      right: -8px;
+    }
   }
 }
 </style>

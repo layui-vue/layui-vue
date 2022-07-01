@@ -54,7 +54,7 @@ const needTooltip = computed(
 
     <template v-else>
       <a href="javascript:void(0)">
-        <i v-if="slots.icon">
+        <i v-if="slots.icon" class="layui-sub-menu-icon">
           <slot name="icon"></slot>
         </i>
         <span v-if="slots.title">

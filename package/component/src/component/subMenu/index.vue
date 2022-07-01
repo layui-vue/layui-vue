@@ -104,8 +104,8 @@ onBeforeUnmount(() => window.removeEventListener("resize", setPosition));
     <li class="layui-nav-item">
       <a href="javascript:void(0)" @click="openHandle()">
         <!-- 图标 -->
-        <i>
-          <slot v-if="slots.icon" name="icon"></slot>
+        <i v-if="slots.icon" class="layui-sub-menu-icon">
+          <slot name="icon"></slot>
         </i>
         <!-- 标题 -->
         <span>
@@ -146,11 +146,11 @@ onBeforeUnmount(() => window.removeEventListener("resize", setPosition));
   </template>
   <template v-else>
     <SubMenuPopup :id="id">
-      <template #icon>
-        <slot v-if="slots.icon" name="icon"></slot>
+      <template v-if="slots.icon" #icon>
+        <slot name="icon"></slot>
       </template>
-      <template #title>
-        <slot v-if="slots.title" name="title"></slot>
+      <template v-if="slots.title" #title>
+        <slot name="title"></slot>
       </template>
       <template #expandIcon>
         <slot v-if="slots.expandIcon" name="expandIcon"></slot>
