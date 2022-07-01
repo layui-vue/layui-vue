@@ -449,9 +449,11 @@ export default {
           首页
         </template>
     </lay-menu-item>
-    <lay-sub-menu title="目录" id="3">
+    <lay-sub-menu id="3">
       <template #icon><lay-icon type="layui-icon-home"></lay-icon></template>
-      <template #title>首页</template>
+      <template #title>  
+        首页 
+      </template>
       <lay-menu-item id="4">
         <template #title>首页</template>
       </lay-menu-item> 
@@ -480,7 +482,7 @@ export default {
         </lay-sub-menu>
       </lay-sub-menu>
     </lay-sub-menu>  
-    <lay-sub-menu title="目录" id="13">
+    <lay-sub-menu id="13">
         <template #icon>
           <lay-icon type="layui-icon-home"></lay-icon> 
         </template>

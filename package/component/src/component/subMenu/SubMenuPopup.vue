@@ -31,7 +31,7 @@ const isOpen = computed(() => {
     class="layui-sub-menu-popup"
   >
     <li :class="['layui-nav-item']">
-      <a href="javascript:void(0)" style="justify-content: space-between">
+      <a href="javascript:void(0)">
         <div>
           <!-- 图标 -->
           <i v-if="$slots.icon" class="layui-sub-menu-icon">
@@ -52,7 +52,7 @@ const isOpen = computed(() => {
         </span>
       </a>
     </li>
-    <template #content class="layui-sub-menu-popup-content">
+    <template #content>
       <slot></slot>
     </template>
   </lay-dropdown>
@@ -67,7 +67,7 @@ const isOpen = computed(() => {
 // popup-menu item样式
 .layui-nav.layui-nav-collapse {
   .layui-sub-menu-popup dl .layui-nav-item {
-    width: auto;
+    width: 100%;
     > a {
       display: flex;
       align-items: center;

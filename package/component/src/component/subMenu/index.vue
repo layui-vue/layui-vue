@@ -13,6 +13,7 @@ import {
   Ref,
   useSlots,
   watch,
+  watchEffect,
 } from "vue";
 import { onClickOutside } from "@vueuse/core";
 import LayTransition from "../transition/index.vue";
@@ -48,10 +49,19 @@ const nextLevel = computed(() => level.value + 1);
 
 provideLevel(nextLevel);
 
-const computedPopup = computed(
-  () =>
-    isTree.value && (isCollapse.value === true || isCollapse.value === "true")
-);
+const needPopup = ref(false);
+watchEffect(() => {
+  const _isCollapse = isCollapse.value === true || isCollapse.value === "true";
+  if (_isCollapse) {
+    // 折叠时等待动画结束改变DOM
+    setTimeout(() => {
+      needPopup.value = isTree.value && _isCollapse;
+    }, 200);
+  } else {
+    // 展开时立即改变DOM
+    needPopup.value = isTree.value && _isCollapse;
+  }
+});
 
 watch(isOpen, () => {
   if (isOpen.value && position.value !== "left-nav") {
@@ -100,64 +110,60 @@ onBeforeUnmount(() => window.removeEventListener("resize", setPosition));
 </script>
 
 <template>
-  <template v-if="!computedPopup">
-    <li class="layui-nav-item">
-      <a href="javascript:void(0)" @click="openHandle()">
-        <!-- 图标 -->
-        <i v-if="slots.icon" class="layui-sub-menu-icon">
-          <slot name="icon"></slot>
-        </i>
-        <!-- 标题 -->
-        <span>
-          <slot v-if="slots.title" name="title"></slot>
-        </span>
-        <!-- 扩展 -->
-        <i v-if="slots.expandIcon" class="layui-nav-more">
-          <slot name="expandIcon" :isExpand="isOpen"></slot>
-        </i>
-        <i
-          v-else
-          :class="[
-            isOpen ? 'layui-nav-mored' : '',
-            'layui-icon layui-icon-down',
-            'layui-nav-more',
-          ]"
-        ></i>
-      </a>
-      <template v-if="isTree">
-        <lay-transition :enable="isCollapseTransition">
-          <div v-if="isOpen">
-            <dl class="layui-nav-child">
-              <slot></slot>
-            </dl>
-          </div>
-        </lay-transition>
-      </template>
-      <template v-else>
-        <dl
-          ref="subMenuRef"
-          class="layui-nav-child layui-anim layui-anim-upbit"
-          :class="[{ 'layui-show': isOpen }, position]"
-        >
-          <slot></slot>
-        </dl>
-      </template>
-    </li>
-  </template>
-  <template v-else>
-    <SubMenuPopup :id="id">
-      <template v-if="slots.icon" #icon>
+  <li v-if="!needPopup" class="layui-nav-item">
+    <a href="javascript:void(0)" @click="openHandle()">
+      <!-- 图标 -->
+      <i v-if="slots.icon" class="layui-sub-menu-icon">
         <slot name="icon"></slot>
-      </template>
-      <template v-if="slots.title" #title>
-        <slot name="title"></slot>
-      </template>
-      <template #expandIcon>
-        <slot v-if="slots.expandIcon" name="expandIcon"></slot>
-      </template>
-      <template #default>
-        <slot name="default"></slot>
-      </template>
-    </SubMenuPopup>
-  </template>
+      </i>
+      <!-- 标题 -->
+      <span>
+        <slot v-if="slots.title" name="title"></slot>
+      </span>
+      <!-- 扩展 -->
+      <i v-if="slots.expandIcon" class="layui-nav-more">
+        <slot name="expandIcon" :isExpand="isOpen"></slot>
+      </i>
+      <i
+        v-else
+        :class="[
+          isOpen ? 'layui-nav-mored' : '',
+          'layui-icon layui-icon-down',
+          'layui-nav-more',
+        ]"
+      ></i>
+    </a>
+    <template v-if="isTree">
+      <lay-transition :enable="isCollapseTransition">
+        <div v-if="isOpen">
+          <dl class="layui-nav-child">
+            <slot></slot>
+          </dl>
+        </div>
+      </lay-transition>
+    </template>
+    <template v-else>
+      <dl
+        ref="subMenuRef"
+        class="layui-nav-child layui-anim layui-anim-upbit"
+        :class="[{ 'layui-show': isOpen }, position]"
+      >
+        <slot></slot>
+      </dl>
+    </template>
+  </li>
+  <SubMenuPopup v-else :id="id">
+    <template v-if="slots.icon" #icon>
+      <slot name="icon"></slot>
+    </template>
+    <template v-if="slots.title" #title>
+      <slot name="title"></slot>
+    </template>
+    <template #expandIcon>
+      <slot name="expandIcon"></slot>
+    </template>
+    <template #default>
+      <slot name="default"></slot>
+    </template>
+  </SubMenuPopup>
 </template>
