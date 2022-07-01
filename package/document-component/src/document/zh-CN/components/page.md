@@ -285,6 +285,7 @@ export default {
 | showSkip    | 显示跳转     | `false` |
 | pages       | 显示切页按钮数量     | `10` |
 | limits       | 切换每页数量的选择项     | `[10,20,30,40,50]` |
+| theme       | 主题色        |`green`|
 
 :::
 
