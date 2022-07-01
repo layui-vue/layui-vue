@@ -140,7 +140,6 @@ const layer = {
   },
   //通知
   notifiy: (option: any = {}, callback?: Function) => {
-    option.anim = 5;
     option.shade = false;
     option.type = 6;
     let defaultOption = {
