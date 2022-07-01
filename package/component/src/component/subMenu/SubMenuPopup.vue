@@ -3,9 +3,11 @@ export default {
   name: "SubMenuPopup",
 };
 </script>
+
 <script setup lang="ts">
 import { computed, inject, Ref, useSlots } from "vue";
 import LayDropdown from "../dropdown/index.vue";
+import { LayIcon } from "@layui/icons-vue";
 import useLevel from "../menu/useLevel";
 
 export interface LaySubMenuPopupProps {
@@ -57,44 +59,3 @@ const isOpen = computed(() => {
     </template>
   </lay-dropdown>
 </template>
-<style lang="less">
-// popup-menu 面板样式
-.layui-sub-menu-popup.layui-dropdown > dl {
-  border: unset;
-  border-radius: 2px;
-  background-color: #393d49;
-}
-// popup-menu item样式
-.layui-nav.layui-nav-collapse {
-  .layui-sub-menu-popup dl .layui-nav-item {
-    width: 100%;
-    > a {
-      display: flex;
-      align-items: center;
-      text-overflow: ellipsis;
-      padding: 5px 20px 5px 20px;
-      // height: 35px;
-      // width: 95px;
-
-      .layui-sub-menu-icon {
-        margin-right: 8px;
-      }
-    }
-
-    span {
-      display: inline-block;
-      margin-left: 0;
-    }
-
-    .layui-nav-more {
-      position: relative;
-      display: inline-block;
-      font-size: 12.5px !important;
-      margin-top: 0;
-      margin-left: 30px;
-      padding: 0;
-      right: -8px;
-    }
-  }
-}
-</style>

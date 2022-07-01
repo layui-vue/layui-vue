@@ -17,7 +17,7 @@ import {
 } from "vue";
 import { onClickOutside } from "@vueuse/core";
 import LayTransition from "../transition/index.vue";
-import SubMenuPopup from "./subMenuPopup.vue";
+import SubMenuPopup from "./SubMenuPopup.vue";
 import { provideLevel, default as useLevel } from "../menu/useLevel";
 
 export interface LaySubMenuProps {

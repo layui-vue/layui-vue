@@ -7,6 +7,7 @@ export default {
 <script setup lang="ts">
 import { computed, ComputedRef, inject, ref, Ref, useSlots } from "vue";
 import useLevel from "../menu/useLevel";
+import LayTooltip from "../tooltip/index.vue";
 
 export interface LayMenuItemProps {
   id: string;
