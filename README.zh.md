@@ -1,4 +1,7 @@
-## 介绍
+<img style="width:100px" src="./package/document-component/src/assets/logo.jpg" />
+
+<br>
+<br>
 
 <p>  
   <a href="https://www.oscs1024.com/project/oscs/layui/layui-vue?ref=badge_small" alt="OSCS Status"><img src="https://www.oscs1024.com/platform/badge/layui/layui-vue.svg?size=small"/></a>
