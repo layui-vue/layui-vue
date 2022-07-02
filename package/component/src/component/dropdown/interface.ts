@@ -12,3 +12,25 @@ export type DropdownPlacement =
   | "left"
   | "left-top"
   | "left-bottom";
+
+export interface ElementScrollRect {
+  top: number;
+  bottom: number;
+  left: number;
+  right: number;
+  scrollTop: number;
+  scrollBottom: number;
+  scrollLeft: number;
+  scrollRight: number;
+  width: number;
+  height: number;
+}
+
+export interface DropdownContext {
+  onMouseenter: Function;
+  onMouseleave: Function;
+  addChildRef: Function;
+  removeChildRef: Function;
+}
+
+export const dropdownInjectionKey = Symbol("dropdownInjectKey");

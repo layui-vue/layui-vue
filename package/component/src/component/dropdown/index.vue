@@ -6,7 +6,7 @@ export default {
 
 <script setup lang="ts">
 import "./index.less";
-import type { CSSProperties } from "vue";
+import { CSSProperties, inject, reactive, Ref } from "vue";
 import {
   computed,
   nextTick,
@@ -24,7 +24,12 @@ import {
   useThrottleFn,
   useWindowSize,
 } from "@vueuse/core";
-import type { DropdownPlacement } from "./interface";
+import {
+  dropdownInjectionKey,
+  DropdownPlacement,
+  ElementScrollRect,
+  DropdownContext,
+} from "./interface";
 
 export type DropdownTrigger = "click" | "hover" | "focus" | "contextMenu";
 
@@ -47,6 +52,7 @@ export interface LayDropdownProps {
   mouseLeaveDelay?: number;
   focusDelay?: number;
   alignPoint?: boolean;
+  renderToBody?: boolean;
 }
 
 const props = withDefaults(defineProps<LayDropdownProps>(), {
@@ -67,8 +73,11 @@ const props = withDefaults(defineProps<LayDropdownProps>(), {
   mouseLeaveDelay: 150,
   focusDelay: 150,
   alignPoint: false,
+  renderToBody: false,
 });
 
+const childrenRefs = new Set<Ref<HTMLElement>>();
+const dropdownCtx = inject<DropdownContext>(dropdownInjectionKey, undefined);
 const dropdownRef = shallowRef<HTMLElement | undefined>();
 const contentRef = shallowRef<HTMLElement | undefined>();
 const contentStyle = ref<CSSProperties>({});
@@ -133,12 +142,34 @@ const changeVisible = (visible: boolean, delay?: number) => {
   }
 };
 
+const containerRef = computed(() =>
+  props.renderToBody ? document.body : dropdownRef.value
+);
+
+const getElementScrollRect = (element: HTMLElement, containerRect: DOMRect) => {
+  const rect = element.getBoundingClientRect();
+
+  return {
+    top: rect.top,
+    bottom: rect.bottom,
+    left: rect.left,
+    right: rect.right,
+    width: rect.width,
+    height: rect.height,
+    scrollTop: rect.top - containerRect.top,
+    scrollBottom: rect.bottom - containerRect.top,
+    scrollLeft: rect.left - containerRect.left,
+    scrollRight: rect.right - containerRect.left,
+  };
+};
+
 const updateContentStyle = () => {
-  if (!dropdownRef.value || !contentRef.value) {
+  if (!containerRef.value || !dropdownRef.value || !contentRef.value) {
     return;
   }
-  const triggerRect = dropdownRef.value!.getBoundingClientRect();
-  const contentRect = contentRef.value.getBoundingClientRect();
+  const containerRect = containerRef.value.getBoundingClientRect();
+  const triggerRect = getElementScrollRect(dropdownRef.value, containerRect);
+  const contentRect = getElementScrollRect(contentRef.value, containerRect);
   const { style } = getContentStyle(
     props.placement,
     triggerRect,
@@ -156,8 +187,14 @@ const updateContentStyle = () => {
 
   if (props.autoFitPosition) {
     nextTick(() => {
-      const triggerRect = dropdownRef.value!.getBoundingClientRect();
-      const contentRect = contentRef.value!.getBoundingClientRect();
+      const triggerRect = getElementScrollRect(
+        dropdownRef.value as HTMLElement,
+        containerRect
+      );
+      const contentRect = getElementScrollRect(
+        contentRef.value as HTMLElement,
+        containerRect
+      );
       let { top, left } = style;
       top = Number(top.toString().replace("px", ""));
       left = Number(left.toString().replace("px", ""));
@@ -179,8 +216,8 @@ const updateContentStyle = () => {
 
 const getContentStyle = (
   placement: DropdownPlacement,
-  triggerRect: DOMRect,
-  contentRect: DOMRect,
+  triggerRect: ElementScrollRect,
+  contentRect: ElementScrollRect,
   isAlignPoint?: boolean,
   {
     customStyle = {},
@@ -224,19 +261,19 @@ const getFitPlacement = (
   top: number,
   left: number,
   placement: DropdownPlacement,
-  triggerRect: DOMRect,
-  contentRect: DOMRect
+  triggerRect: ElementScrollRect,
+  contentRect: ElementScrollRect
 ) => {
   // FIXME 反转后仍溢出的场景
   const position = getPosition(placement);
   if (["top", "bottom"].includes(position)) {
     // 溢出屏幕底部
     if (contentRect.bottom > windowHeight.value) {
-      top = -contentRect.height - props.contentOffset;
+      top = triggerRect.scrollTop - contentRect.height - props.contentOffset;
     }
     // 溢出屏幕顶部
     if (contentRect.top < 0) {
-      top = triggerRect.height + props.contentOffset;
+      top = triggerRect.scrollBottom + props.contentOffset;
     }
     // 溢出屏幕左边
     if (contentRect.left < 0) {
@@ -258,11 +295,11 @@ const getFitPlacement = (
     }
     // 溢出屏幕左边
     if (contentRect.left < 0) {
-      left = triggerRect.width + props.contentOffset;
+      left = triggerRect.scrollRight + props.contentOffset;
     }
     // 溢出屏幕右边
     if (contentRect.right > windowWidth.value) {
-      left = -(contentRect.width + props.contentOffset);
+      left = triggerRect.scrollLeft - contentRect.width - props.contentOffset;
     }
   }
 
@@ -274,8 +311,8 @@ const getFitPlacement = (
 
 const getContentOffset = (
   placement: DropdownPlacement,
-  triggerRect: DOMRect,
-  contentRect: DOMRect,
+  triggerRect: ElementScrollRect,
+  contentRect: ElementScrollRect,
   isAlignPoint?: boolean
 ) => {
   if (isAlignPoint) {
@@ -287,63 +324,71 @@ const getContentOffset = (
   switch (placement) {
     case "top":
       return {
-        top: -contentRect.height - props.contentOffset,
-        left: -(contentRect.width - triggerRect.width) / 2,
+        top: triggerRect.scrollTop - contentRect.height - props.contentOffset,
+        left:
+          triggerRect.scrollLeft +
+          Math.round((triggerRect.width - contentRect.width) / 2),
       };
     case "top-left":
       return {
-        top: -contentRect.height - props.contentOffset,
-        left: 0,
+        top: triggerRect.scrollTop - contentRect.height - props.contentOffset,
+        left: triggerRect.scrollLeft,
       };
     case "top-right":
       return {
-        top: -contentRect.height - props.contentOffset,
-        left: -(contentRect.width - triggerRect.width),
+        top: triggerRect.scrollTop - contentRect.height - props.contentOffset,
+        left: triggerRect.scrollRight - contentRect.width,
       };
     case "bottom":
       return {
-        top: triggerRect.height + props.contentOffset,
-        left: -(contentRect.width - triggerRect.width) / 2,
+        top: triggerRect.scrollBottom + props.contentOffset,
+        left:
+          triggerRect.scrollLeft +
+          Math.round((triggerRect.width - contentRect.width) / 2),
       };
     case "bottom-left":
       return {
-        top: triggerRect.height + props.contentOffset,
-        left: 0,
+        top: triggerRect.scrollBottom + props.contentOffset,
+        left: triggerRect.scrollLeft,
       };
     case "bottom-right":
       return {
-        top: triggerRect.height + props.contentOffset,
-        left: -(contentRect.width - triggerRect.width),
+        top: triggerRect.scrollBottom + props.contentOffset,
+        left: triggerRect.scrollRight - contentRect.width,
       };
     case "right":
       return {
-        top: -(contentRect.height - triggerRect.height) / 2,
-        left: triggerRect.width + props.contentOffset,
+        top:
+          triggerRect.scrollTop +
+          Math.round((triggerRect.height - contentRect.height) / 2),
+        left: triggerRect.scrollRight + props.contentOffset,
       };
     case "right-top":
       return {
-        top: 0,
-        left: triggerRect.width + props.contentOffset,
+        top: triggerRect.scrollTop,
+        left: triggerRect.scrollRight + props.contentOffset,
       };
     case "right-bottom":
       return {
-        top: -(contentRect.height - triggerRect.height),
-        left: triggerRect.width + props.contentOffset,
+        top: triggerRect.scrollBottom - contentRect.height,
+        left: triggerRect.scrollRight + props.contentOffset,
       };
     case "left":
       return {
-        top: -(contentRect.height - triggerRect.height) / 2,
-        left: -(contentRect.width + props.contentOffset),
+        top:
+          triggerRect.scrollTop +
+          Math.round((triggerRect.height - contentRect.height) / 2),
+        left: triggerRect.scrollLeft - contentRect.width - props.contentOffset,
       };
     case "left-top":
       return {
-        top: 0,
-        left: -(contentRect.width + props.contentOffset),
+        top: triggerRect.scrollTop,
+        left: triggerRect.scrollLeft - contentRect.width - props.contentOffset,
       };
     case "left-bottom":
       return {
-        top: -(contentRect.height - triggerRect.height),
-        left: -(contentRect.width + props.contentOffset),
+        top: triggerRect.scrollBottom - contentRect.height,
+        left: triggerRect.scrollLeft - contentRect.width - props.contentOffset,
       };
     default:
       return {
@@ -376,7 +421,7 @@ const handleScroll = useThrottleFn(() => {
   if (openState.value) {
     updateContentStyle();
   }
-}, 250);
+}, 10);
 
 const handleClick = () => {
   if (props.disabled || (openState.value && !props.clickToClose)) {
@@ -387,7 +432,7 @@ const handleClick = () => {
   }
 };
 
-const handleContextMenuClick = (e: Event) => {
+const handleContextMenuClick = (e: MouseEvent) => {
   if (props.disabled || (openState.value && !props.clickToClose)) {
     return;
   }
@@ -400,18 +445,28 @@ const handleContextMenuClick = (e: Event) => {
   }
 };
 
-const handleMouseEnter = () => {
+const handleMouseEnter = (e: MouseEvent) => {
   if (props.disabled || !triggerMethods.value.includes("hover")) {
     return;
   }
   open(props.mouseEnterDelay);
 };
 
-const handleMouseLeave = () => {
+const handleMouseEnterWithContext = (e: MouseEvent) => {
+  dropdownCtx?.onMouseenter(e);
+  handleMouseEnter(e);
+};
+
+const handleMouseLeave = (e: MouseEvent) => {
   if (props.disabled || !triggerMethods.value.includes("hover")) {
     return;
   }
   hide(props.mouseLeaveDelay);
+};
+
+const handleMouseLeaveWithContext = (e: MouseEvent) => {
+  dropdownCtx?.onMouseleave(e);
+  handleMouseLeave(e);
 };
 
 const handleFocusin = () => {
@@ -431,6 +486,27 @@ const handleFocusout = () => {
   hide();
 };
 
+const addChildRef = (ref: any) => {
+  childrenRefs.add(ref);
+  dropdownCtx?.addChildRef(ref);
+};
+const removeChildRef = (ref: any) => {
+  childrenRefs.delete(ref);
+  dropdownCtx?.removeChildRef(ref);
+};
+
+provide(
+  dropdownInjectionKey,
+  reactive({
+    onMouseenter: handleMouseEnterWithContext,
+    onMouseleave: handleMouseLeaveWithContext,
+    addChildRef,
+    removeChildRef,
+  })
+);
+
+dropdownCtx?.addChildRef(contentRef);
+
 const { stop: removeContentResizeObserver } = useResizeObserver(
   contentRef,
   () => {
@@ -449,14 +525,22 @@ const { stop: removeTriggerResizeObserver } = useResizeObserver(
   }
 );
 
-onClickOutside(dropdownRef, () => {
-  if (props.clickOutsideToClose) {
-    hide();
+onClickOutside(dropdownRef, (e) => {
+  if (
+    !props.clickOutsideToClose ||
+    dropdownRef.value?.contains(e.target as HTMLElement) ||
+    contentRef.value?.contains(e.target as HTMLElement)
+  )
+    return;
+  for (const item of childrenRefs) {
+    if (item.value?.contains(e.target as HTMLElement)) {
+      return;
+    }
   }
+  hide();
 });
 
 let scrollElements: HTMLElement[] | undefined;
-
 onMounted(() => {
   if (props.updateAtScroll) {
     scrollElements = getScrollElements(dropdownRef.value);
@@ -467,6 +551,7 @@ onMounted(() => {
 });
 
 onBeforeUnmount(() => {
+  dropdownCtx?.removeChildRef(contentRef);
   if (scrollElements) {
     for (const item of scrollElements) {
       item.removeEventListener("scroll", handleScroll);
@@ -509,8 +594,8 @@ defineExpose({ open, hide, toggle });
   <div
     ref="dropdownRef"
     class="layui-dropdown"
-    @mouseenter="handleMouseEnter()"
-    @mouseleave="handleMouseLeave()"
+    @mouseenter="handleMouseEnter"
+    @mouseleave="handleMouseLeave"
     @focusin="handleFocusin()"
     @focusout="handleFocusout()"
     :class="{ 'layui-dropdown-up': openState }"
@@ -518,12 +603,17 @@ defineExpose({ open, hide, toggle });
     <div @click="handleClick()" @contextmenu="handleContextMenuClick">
       <slot></slot>
     </div>
-    <dl
-      ref="contentRef"
-      class="layui-anim layui-anim-upbit"
-      :style="contentStyle"
-    >
-      <slot name="content"></slot>
-    </dl>
+    <Teleport :to="containerRef" :disabled="!renderToBody">
+      <dl
+        v-show="openState"
+        ref="contentRef"
+        class="layui-dropdown-content layui-anim layui-anim-upbit"
+        :style="contentStyle"
+        @mouseenter="handleMouseEnterWithContext"
+        @mouseleave="handleMouseLeaveWithContext"
+      >
+        <slot name="content"></slot>
+      </dl>
+    </Teleport>
   </div>
 </template>

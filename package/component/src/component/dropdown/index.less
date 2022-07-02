@@ -3,8 +3,8 @@
   display: inline-block;
 }
 
+.layui-dropdown-content,
 .layui-dropdown dl {
-  display: none;
   position: absolute;
   z-index: 899;
   background-color: #fff;
@@ -14,6 +14,7 @@
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1);
 }
 
+.layui-dropdown-content > .layui-dropdown-menu,
 .layui-dropdown dl > .layui-dropdown-menu {
   border-radius: var(--global-border-radius);
 }
@@ -22,16 +23,20 @@
   display: block;
 }
 
+.layui-dropdown-content .layui-menu,
 .layui-dropdown .layui-menu {
   position: relative;
   background-color: #fff;
 }
 
+.layui-dropdown-content .layui-menu li,
+.layui-dropdown-content .layui-menu-body-title a,
 .layui-dropdown .layui-menu li,
 .layui-dropdown .layui-menu-body-title a {
   padding: 5px 15px;
 }
 
+.layui-dropdown-content .layui-menu li,
 .layui-dropdown .layui-menu li {
   position: relative;
   display: flex;
@@ -42,10 +47,12 @@
   cursor: pointer;
 }
 
+.layui-dropdown-content .layui-menu li:hover,
 .layui-dropdown .layui-menu li:hover {
   background-color: var(--global-neutral-color-2);
 }
 
+.layui-dropdown-content .layui-menu-body-title,
 .layui-dropdown .layui-menu-body-title {
   white-space: nowrap;
   overflow: hidden;
@@ -59,6 +66,7 @@
   margin-left: 15px;
 }
 
+.layui-dropdown-content .layui-line-horizontal,
 .layui-dropdown .layui-line-horizontal{
   margin: 0px;
   border-color: #EEEEEE;
