@@ -1,4 +1,4 @@
-<img style="width:100px" src="./package/document-component/src/assets/logo.jpg" />
+<img width="100px" src="./package/document-component/src/assets/logo.jpg" />
 
 <br>
 <br>
