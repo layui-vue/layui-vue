@@ -311,22 +311,35 @@
   }
 }
 
-.layui-sub-menu-popup.layui-dropdown > dl {
+/* popup menu 样式开始 */
+.layui-sub-menu-popup-content {
   border: unset;
   border-radius: 2px;
-  background-color: #393d49;
-}
+  background-color: #353535;
 
-.layui-nav.layui-nav-collapse {
-  .layui-sub-menu-popup dl .layui-nav-item {
+  .layui-nav-item {
     width: 100%;
-    > a {
+
+    * {
+      color: rgba(255, 255, 255, 0.7)
+    }
+
+    >a {
       display: flex;
       align-items: center;
       text-overflow: ellipsis;
-      padding: 5px 20px 5px 20px;
+      padding: 5px 15px 5px 15px;
+      font-size: 13.5px;
+      min-height: 30px;
+      min-width: 60px;
+
       .layui-sub-menu-icon {
+        margin-top: 2px;
         margin-right: 8px;
+
+        .layui-icon {
+          font-size: 14px;
+        }
       }
     }
 
@@ -340,9 +353,39 @@
       display: inline-block;
       font-size: 12.5px !important;
       margin-top: 0;
-      margin-left: 30px;
+      margin-left: 25px;
       padding: 0;
       right: -8px;
+
+      .layui-icon {
+        font-size: 14px;
+      }
     }
+
+  }
+
+  .layui-this {
+    background-color: var(--global-primary-color);
   }
 }
+
+.layui-sub-menu-popup-theme {
+  &-light {
+    background-color: #FFF;
+
+    .layui-this {
+      * {
+        color: whitesmoke !important;
+      }
+    }
+
+    .layui-nav-item {
+      * {
+        color: gray;
+      }
+    }
+
+
+  }
+}
+/* popup menu 样式结束 */

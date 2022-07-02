@@ -46,6 +46,7 @@ const isCollapseTransition: ComputedRef = computed(
   () => props.collapseTransition
 );
 const oldOpenKeys: Ref = ref<string[]>(props.openKeys);
+const menuTheme = computed(() => props.theme);
 
 const openKeys = computed({
   get() {
@@ -86,6 +87,7 @@ provide("selectedKey", selectedKey);
 provide("openKeys", openKeys);
 provide("isCollapse", isCollapse);
 provide("isCollapseTransition", isCollapseTransition);
+provide("menuTheme", menuTheme);
 </script>
 
 <template>

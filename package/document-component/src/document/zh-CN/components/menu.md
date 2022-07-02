@@ -429,10 +429,14 @@ export default {
 ::: demo
 
 <template>
-  <lay-switch v-model="collapse20"></lay-switch>
+  <lay-switch v-model="collapse20"></lay-switch>&nbsp;&nbsp;
+  <lay-switch v-model="active20">
+    <template #onswitch-icon>😄</template>
+    <template #unswitch-icon>🤔</template>
+  </lay-switch>
   <br/>
   <br/>
-  <lay-menu v-model:selectedKey="selectedKey20" v-model:tree="isTree20" v-model:openKeys="openKeys20" :collapse="collapse20">
+  <lay-menu v-model:selectedKey="selectedKey20" :theme="active20 ? 'dark' : 'light'" v-model:tree="isTree20" v-model:openKeys="openKeys20" :collapse="collapse20">
     <lay-menu-item id="1">
         <template #icon>
           <lay-icon type="layui-icon-home"></lay-icon> 
@@ -575,11 +579,13 @@ export default {
     const openKeys20 = ref(["7"])
     const collapse20 = ref(true)   
     const isTree20 = ref(true)
+    const active20 = ref(true)
     return {
       selectedKey,
       openKeys6,
       colapse,
-      isTree
+      isTree,
+      active20
     }
   }
 }

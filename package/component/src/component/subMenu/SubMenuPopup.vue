@@ -17,7 +17,10 @@ export interface LaySubMenuPopupProps {
 const props = defineProps<LaySubMenuPopupProps>();
 
 const openKeys: Ref<string[]> = inject("openKeys") as Ref<string[]>;
-const { level } = useLevel();
+const theme = inject("menuTheme") as Ref<string>;
+const computedTheme = computed(() => {
+  return theme.value === "light" ? "-light" : "";
+});
 
 const isOpen = computed(() => {
   return openKeys.value.includes(props.id);
@@ -30,10 +33,11 @@ const isOpen = computed(() => {
     placement="right-top"
     :autoFitMinWidth="false"
     :contentOffset="3"
+    :renderToBody="true"
     class="layui-sub-menu-popup"
   >
     <li :class="['layui-nav-item']">
-      <a href="javascript:void(0)">
+      <a href="javascript:void(0)" style="justify-content: space-between">
         <div>
           <!-- 图标 -->
           <i v-if="$slots.icon" class="layui-sub-menu-icon">
@@ -55,7 +59,14 @@ const isOpen = computed(() => {
       </a>
     </li>
     <template #content>
-      <slot></slot>
+      <div
+        :class="[
+          'layui-sub-menu-popup-content',
+          `layui-sub-menu-popup-theme${computedTheme}`,
+        ]"
+      >
+        <slot></slot>
+      </div>
     </template>
   </lay-dropdown>
 </template>
