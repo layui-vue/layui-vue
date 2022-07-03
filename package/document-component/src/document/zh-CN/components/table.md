@@ -423,7 +423,7 @@ export default {
 ::: demo 设置 `height` 或者 `max-height` 即可实现
 
 <template>
-  <lay-table :columns="columns8" :dataSource="dataSource8" max-height="300px"></lay-table>
+  <lay-table :columns="columns8" :dataSource="dataSource8" size="sm" max-height="300px"></lay-table>
 </template>
 
 <script>
