@@ -34,6 +34,7 @@ export interface LayTableProps {
   cellClassName?: string | Function;
   rowStyle?: string | Function;
   cellStyle?: string | Function;
+  skin?: string;
 }
 
 const props = withDefaults(defineProps<LayTableProps>(), {
@@ -296,7 +297,7 @@ props.dataSource.map((value: any) => {
       <div class="layui-table-box">
         <!-- 表头 -->
         <div class="layui-table-header" ref="tableHeader">
-          <table class="layui-table" :lay-size="size">
+          <table class="layui-table" :lay-size="size" :lay-skin="skin">
             <colgroup>
               <col v-if="checkbox" class="layui-table-col-special" />
               <template v-for="column in columns" :key="column">
@@ -378,6 +379,7 @@ props.dataSource.map((value: any) => {
             class="layui-table"
             :class="{ 'layui-table-even': props.even }"
             :lay-size="size"
+            :lay-skin="skin"
           >
             <colgroup>
               <col v-if="checkbox" class="layui-table-col-special" />

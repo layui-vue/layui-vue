@@ -598,6 +598,62 @@ export default {
 
 :::
 
+::: title 不同风格
+:::
+
+::: demo 通过 `skin` 属性, 切换 table 风格。
+
+<template>
+  <lay-table :columns="columns1" :dataSource="dataSource1" skin="line"></lay-table>
+  <lay-table :columns="columns1" :dataSource="dataSource1" skin="row"></lay-table>
+  <lay-table :columns="columns1" :dataSource="dataSource1" skin="nob" even></lay-table>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const columns1 = [
+      {
+        title:"账户",
+        width:"200px",
+        key:"username"
+      },{
+        title:"密码",
+        width: "180px",
+        key:"password"
+      },{
+        title:"年龄",
+        width: "180px",
+        key:"age"
+      },{
+        title:"备注",
+        width: "180px",
+        key:"remark",
+        ellipsisTooltip: true,
+      }
+    ]
+
+    const dataSource1 = [
+      {username:"root", password:"root", age:"18", remark: 'layui - vue（谐音：类 UI) '},
+      {username:"root", password:"root", age:"18", remark: 'layui - vue（谐音：类 UI) '},
+      {username:"woow", password:"woow", age:"20", remark: 'layui - vue（谐音：类 UI) '},
+      {username:"woow", password:"woow", age:"20", remark: 'layui - vue（谐音：类 UI) '},
+      {username:"woow", password:"woow", age:"20", remark: 'layui - vue（谐音：类 UI) '}
+    ]
+
+    return {
+      columns1,
+      dataSource1,
+    }
+  }
+}
+</script>
+
+:::
+
 ::: title Table 属性
 :::
 
@@ -621,6 +677,7 @@ export default {
 | rowStyle             | 行样式 function(row, rowIndex)                  | `string` `function`  | --   | -- |
 | cellClassName        | 列类名称 function(row, column, rowIndex, columnIndex)               | `string` `function`   | --    | -- |
 | rowClassName         | 行类名称 function(row, rowIndex)                | `string` `function`  | --   | -- |
+| skin                 | 风格                | `string` | --   | `line` `row` `nob` |
 
 :::
 
