@@ -300,6 +300,10 @@ const options = [
   <lay-cascader :options="options" v-model="value1" decollator="-" placeholder="我可以自定义分割符号" style="width:250px"></lay-cascader>
   <span style="margin-left:20px">输出的值：{{value1}}</span>
 </template>
+<script setup>
+import { ref } from "vue";
+const value1=ref(null)
+</script>
 :::
 
 ::: title 控制回显层级
