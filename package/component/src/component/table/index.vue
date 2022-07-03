@@ -6,7 +6,7 @@ export default {
 
 <script setup lang="ts">
 import "./index.less";
-import { ref, watch, useSlots, withDefaults, onMounted } from "vue";
+import { ref, watch, useSlots, withDefaults, onMounted, onUpdated } from "vue";
 import { v4 as uuidv4 } from "../../utils/guidUtil";
 import { Recordable } from "../../types";
 import { LayIcon } from "@layui/icons-vue";
@@ -34,7 +34,6 @@ export interface LayTableProps {
   cellClassName?: string | Function;
   rowStyle?: string | Function;
   cellStyle?: string | Function;
-  skin?: string;
 }
 
 const props = withDefaults(defineProps<LayTableProps>(), {

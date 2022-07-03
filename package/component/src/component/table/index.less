@@ -376,29 +376,6 @@
   position: relative;
   overflow: auto;
   margin-bottom: -1px;
-  &::-webkit-scrollbar {
-    width: 13px;
-    height: 13px;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.2);
-    background-clip: padding-box;
-    border: 3px solid transparent;
-    border-radius: 7px;
-  }
-
-  &::-webkit-scrollbar-thumb:hover {
-    background-color: rgba(0, 0, 0, 0.5);
-  }
-
-  &::-webkit-scrollbar-track {
-    background-color: transparent;
-  }
-
-  &::-webkit-scrollbar-track:hover {
-    background-color: #f8fafc;
-  }
 }
 
 .layui-table-body .layui-none {
@@ -437,8 +414,14 @@
   display: block;
   background: white;
   position: sticky!important;
+  border-left: 1px solid #eee!important;
+  border-right: none!important;
 }
 
+.layui-table-view .layui-table tr th:last-child,
+.layui-table-view .layui-table tr td:last-child {
+  border-right: none!important;
+}
 
 .layui-table-mend {
   position: absolute;
