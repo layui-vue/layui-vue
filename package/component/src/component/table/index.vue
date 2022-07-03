@@ -327,6 +327,7 @@ props.dataSource.map((value: any) => {
                   <th
                     v-if="tableColumnKeys.includes(column.key)"
                     class="layui-table-cell"
+                    :class="[column.fixed ? `layui-table-fixed-${column.fixed}` : '']"
                     :style="{
                       textAlign: column.align,
                     }"

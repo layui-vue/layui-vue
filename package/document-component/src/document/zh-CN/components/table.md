@@ -606,7 +606,6 @@ export default {
 <template>
   <lay-table :columns="columns1" :dataSource="dataSource1" skin="line"></lay-table>
   <lay-table :columns="columns1" :dataSource="dataSource1" skin="row"></lay-table>
-  <lay-table :columns="columns1" :dataSource="dataSource1" skin="nob" even></lay-table>
 </template>
 
 <script>
@@ -632,7 +631,7 @@ export default {
         title:"备注",
         width: "180px",
         key:"remark",
-        ellipsisTooltip: true,
+        ellipsisTooltip: true
       }
     ]
 
@@ -647,6 +646,66 @@ export default {
     return {
       columns1,
       dataSource1,
+    }
+  }
+}
+</script>
+
+:::
+
+::: title 固定行列
+:::
+
+::: demo 通过 `skin` 属性, 切换 table 风格。
+
+<template>
+  <lay-table :columns="columns20" :dataSource="dataSource20"></lay-table>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const columns20 = [
+      {
+        fixed:"left",
+        title:"账户",
+        width:"200px",
+        key:"username"
+      },{
+        title:"密码",
+        width: "300px",
+        key:"password"
+      },{
+        title:"性别",
+        width: "300px",
+        key:"sex"
+      },{
+        title:"年龄",
+        width: "300px",
+        key:"age"
+      },{
+        fixed:"right",
+        title:"备注",
+        width: "180px",
+        key:"remark",
+        ellipsisTooltip: true
+      }
+    ]
+
+    const dataSource20 = [
+      {username:"root", password:"root",sex:"男", age:"18", remark: 'layui - vue（谐音：类 UI) '},
+      {username:"root", password:"root",sex:"男", age:"18", remark: 'layui - vue（谐音：类 UI) '},
+      {username:"woow", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '},
+      {username:"woow", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '},
+      {username:"woow", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '}
+    ]
+
+    return {
+      columns20,
+      dataSource20,
     }
   }
 }

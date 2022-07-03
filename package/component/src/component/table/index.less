@@ -419,20 +419,28 @@
   overflow: hidden;
 }
 
-.layui-table-fixed-l {
+.layui-table-fixed-left {
+  left: 0;
+  z-index: 2;
+  display: block;
+  position: sticky!important;
   box-shadow: 1px 0 8px rgba(0, 0, 0, 0.08);
 }
 
-.layui-table-fixed-r {
-  left: auto;
-  right: -1px;
-  border-width: 0 0 0 1px;
+.layui-table-fixed-right {
+  right: 0;
+  z-index: 2;
+  display: block;
+  position: sticky!important;
   box-shadow: -1px 0 8px rgba(0, 0, 0, 0.08);
 }
 
-.layui-table-fixed-r .layui-table-header {
-  position: relative;
-  overflow: visible;
+.layui-table-header .layui-table-cell {
+  background: #FAFAFA;
+}
+
+.layui-table-body .layui-table-cell {
+  background: white;
 }
 
 .layui-table-mend {
