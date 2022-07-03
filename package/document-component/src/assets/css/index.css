@@ -23,7 +23,7 @@
 .layui-menu .layui-menu-item-checked,
 .layui-menu .layui-menu-item-checked2 {
   background-color: var(--global-neutral-color-2) !important;
-  border-radius: 2px;
+  border-radius: 4px;
 }
 
 .layui-menu .layui-menu-item-checked a,
