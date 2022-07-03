@@ -17,18 +17,18 @@
   font-weight: 400;
 }
 
-.layui-table tbody tr:hover,
-.layui-table thead tr,
-.layui-table-click,
-.layui-table-header,
-.layui-table-hover,
 .layui-table-mend,
-.layui-table-patch,
 .layui-table-tool,
 .layui-table-total,
+.layui-table-patch,
+.layui-table-click,
+.layui-table-hover,
+.layui-table-header,
 .layui-table-total tr,
-.layui-table.layui-table-even tr:nth-child(even) {
-  background-color: var(--global-neutral-color-1);
+.layui-table thead tr,
+.layui-table tbody tr:hover td,
+.layui-table.layui-table-even tr:nth-child(even) td {
+  background-color: var(--global-neutral-color-1)!important;
 }
 
 .layui-table td,
@@ -419,29 +419,26 @@
   overflow: hidden;
 }
 
+.layui-table-header .layui-table-cell {
+  background-color: #FAFAFA;
+}
+
 .layui-table-fixed-left {
   left: 0;
   z-index: 2;
   display: block;
+  background: white;
   position: sticky!important;
-  box-shadow: 1px 0 8px rgba(0, 0, 0, 0.08);
 }
 
 .layui-table-fixed-right {
   right: 0;
   z-index: 2;
   display: block;
-  position: sticky!important;
-  box-shadow: -1px 0 8px rgba(0, 0, 0, 0.08);
-}
-
-.layui-table-header .layui-table-cell {
-  background: #FAFAFA;
-}
-
-.layui-table-body .layui-table-cell {
   background: white;
+  position: sticky!important;
 }
+
 
 .layui-table-mend {
   position: absolute;

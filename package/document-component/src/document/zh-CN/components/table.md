@@ -605,6 +605,7 @@ export default {
 
 <template>
   <lay-table :columns="columns1" :dataSource="dataSource1" skin="line"></lay-table>
+  <lay-table :columns="columns1" :dataSource="dataSource1" skin="nob" :even="true"></lay-table>
   <lay-table :columns="columns1" :dataSource="dataSource1" skin="row"></lay-table>
 </template>
 

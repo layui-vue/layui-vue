@@ -158,7 +158,10 @@ const childrenIndentSize = props.currentIndentSize + props.indentSize;
               },
               renderCellStyle(data, column, index, columnIndex),
             ]"
-            :class="[renderCellClassName(data, column, index, columnIndex),column.fixed ? `layui-table-fixed-${column.fixed}` : '']"
+            :class="[
+              renderCellClassName(data, column, index, columnIndex),
+              column.fixed ? `layui-table-fixed-${column.fixed}` : '',
+            ]"
           >
             <!-- 树表占位与缩进 -->
             <span
@@ -208,7 +211,10 @@ const childrenIndentSize = props.currentIndentSize + props.indentSize;
                 },
                 renderCellStyle(data, column, index, columnIndex),
               ]"
-             :class="[renderCellClassName(data, column, index, columnIndex),column.fixed ? `layui-table-fixed-${column.fixed}` : '']"
+              :class="[
+                renderCellClassName(data, column, index, columnIndex),
+                column.fixed ? `layui-table-fixed-${column.fixed}` : '',
+              ]"
             >
               <!-- 树表占位与缩进 -->
               <span
