@@ -12,6 +12,15 @@
 <lay-timeline>
   <lay-timeline-item title="1.2.x">
     <ul> 
+      <a name="1-2-7"></a> 
+      <li> 
+        <h3>1.2.7 <span class="layui-badge-rim">2022-07-04</span></h3> 
+        <ul>
+          <li>[修复] table默认加载时有横向滚动条，header 的滚动条占位无法显示 by @dingyongya</li>
+        </ul>
+      </li>
+    </ul>
+    <ul> 
       <a name="1-2-6"></a> 
       <li> 
         <h3>1.2.6 <span class="layui-badge-rim">2022-07-02</span></h3> 
