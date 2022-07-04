@@ -35,6 +35,7 @@ const props = withDefaults(defineProps<LayDropdownProps>(), {
     :placement="placement"
     :auto-fit-min-width="false"
     :contentOffset="contentOffset"
+    :disabled="disabled"
   >
     <lay-dropdown-menu-item>
       <template v-if="$slots.prefix" #prefix>

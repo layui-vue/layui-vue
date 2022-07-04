@@ -455,6 +455,9 @@ const handleMouseEnter = (e: MouseEvent) => {
 };
 
 const handleMouseEnterWithContext = (e: MouseEvent) => {
+  if (!props.popupContainer){
+    return;
+  }
   dropdownCtx?.onMouseenter(e);
   handleMouseEnter(e);
 };
@@ -467,6 +470,9 @@ const handleMouseLeave = (e: MouseEvent) => {
 };
 
 const handleMouseLeaveWithContext = (e: MouseEvent) => {
+  if (!props.popupContainer) {
+    return;
+  }
   dropdownCtx?.onMouseleave(e);
   handleMouseLeave(e);
 };
