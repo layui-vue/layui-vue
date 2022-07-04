@@ -52,13 +52,12 @@ provideLevel(nextLevel);
 const needPopup = ref(false);
 watchEffect(() => {
   const _isCollapse = isCollapse.value === true || isCollapse.value === "true";
-  if (_isCollapse) {
-    // 折叠时等待动画结束改变DOM
+  if (_isCollapse && level.value === 1) {
+    // 动画结束后改变
     setTimeout(() => {
       needPopup.value = isTree.value && _isCollapse;
     }, 200);
   } else {
-    // 展开时立即改变DOM
     needPopup.value = isTree.value && _isCollapse;
   }
 });

@@ -6,7 +6,7 @@ export default {
 
 <script setup lang="ts">
 import "./index.less";
-import { CSSProperties, inject, reactive, Ref } from "vue";
+import { ComputedRef, CSSProperties, inject, reactive, Ref } from "vue";
 import {
   computed,
   nextTick,
@@ -52,7 +52,7 @@ export interface LayDropdownProps {
   mouseLeaveDelay?: number;
   focusDelay?: number;
   alignPoint?: boolean;
-  renderToBody?: boolean;
+  popupContainer?: string | HTMLElement | undefined;
 }
 
 const props = withDefaults(defineProps<LayDropdownProps>(), {
@@ -73,7 +73,6 @@ const props = withDefaults(defineProps<LayDropdownProps>(), {
   mouseLeaveDelay: 150,
   focusDelay: 150,
   alignPoint: false,
-  renderToBody: false,
 });
 
 const childrenRefs = new Set<Ref<HTMLElement>>();
@@ -84,6 +83,13 @@ const contentStyle = ref<CSSProperties>({});
 const { width: windowWidth, height: windowHeight } = useWindowSize();
 const { x: mouseLeft, y: mouseTop } = useMouse();
 const openState = ref(false);
+
+const containerRef = computed(() =>
+  props.popupContainer 
+    // @ts-ignore
+    ? document.querySelector<HTMLElement>(props.popupContainer) ?? document.body
+    : dropdownRef.value
+) as ComputedRef<HTMLElement>;
 
 const triggerMethods = computed(() =>
   ([] as Array<DropdownTrigger>).concat(props.trigger)
@@ -141,10 +147,6 @@ const changeVisible = (visible: boolean, delay?: number) => {
     update();
   }
 };
-
-const containerRef = computed(() =>
-  props.renderToBody ? document.body : dropdownRef.value
-);
 
 const getElementScrollRect = (element: HTMLElement, containerRect: DOMRect) => {
   const rect = element.getBoundingClientRect();
@@ -603,9 +605,9 @@ defineExpose({ open, hide, toggle });
     <div @click="handleClick()" @contextmenu="handleContextMenuClick">
       <slot></slot>
     </div>
-    <Teleport :to="containerRef" :disabled="!renderToBody">
+    <Teleport :to="popupContainer" :disabled="!popupContainer">
       <dl
-        v-show="openState"
+        v-if="openState"
         ref="contentRef"
         class="layui-dropdown-content layui-anim layui-anim-upbit"
         :style="contentStyle"

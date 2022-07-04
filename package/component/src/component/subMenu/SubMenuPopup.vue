@@ -33,7 +33,7 @@ const isOpen = computed(() => {
     placement="right-top"
     :autoFitMinWidth="false"
     :contentOffset="3"
-    :renderToBody="true"
+    popupContainer="body"
     class="layui-sub-menu-popup"
   >
     <li :class="['layui-nav-item']">

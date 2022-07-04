@@ -431,8 +431,8 @@ export default {
 <template>
   <lay-switch v-model="collapse20"></lay-switch>&nbsp;&nbsp;
   <lay-switch v-model="active20">
-    <template #onswitch-icon>😄</template>
-    <template #unswitch-icon>🤔</template>
+    <template #onswitch-icon>★</template>
+    <template #unswitch-icon>☀</template>
   </lay-switch>
   <br/>
   <br/>
