@@ -45,15 +45,15 @@ const getStyle = computed<any>(() => {
     if (activeIndex === currentIndex) {
       if (animation === "updown") {
         return {
-          transform: "translateY(0)",
+          transform: "translateY(0)", visibility: 'inherit'
         };
       } else if (animation.includes("fade")) {
         return {
-          opacity: 1,
+          opacity: 1,visibility: 'inherit'
         };
       } else {
         return {
-          transform: "translateX(0)",
+          transform: "translateX(0)",visibility: 'inherit'
         };
       }
     }
