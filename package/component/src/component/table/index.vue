@@ -217,13 +217,17 @@ let tableHeader = ref<HTMLElement | null>(null);
 let tableBody = ref<HTMLElement | null>(null);
 let scrollWidthCell = ref(0);
 
-onMounted(() => {
-  const scrollWidth: number = tableBody.value?.scrollWidth || 0;
+const getScrollWidth = () => {
+  const clientWidth: number = tableBody.value?.clientWidth || 0;
   const offsetWidth: number = tableBody.value?.offsetWidth || 0;
 
-  if (scrollWidth < offsetWidth) {
-    scrollWidthCell.value = offsetWidth - scrollWidth;
+  if (clientWidth < offsetWidth) {
+    scrollWidthCell.value = offsetWidth - clientWidth;
   }
+};
+
+onMounted(() => {
+  getScrollWidth();
   tableBody.value?.addEventListener("scroll", () => {
     tableHeader.value!.scrollLeft = tableBody.value?.scrollLeft || 0;
   });

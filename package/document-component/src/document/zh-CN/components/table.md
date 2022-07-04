@@ -435,19 +435,20 @@ export default {
     const columns8 = [
       {
         title:"账户",
-        width:"200px",
+        minWidth:"200px",
         key:"username"
       },{
         title:"密码",
-        width: "180px",
+        minWidth: "180px",
         key:"password"
       },{
         title:"年龄",
-        width: "180px",
+        minWidth: "180px",
         key:"age"
       },{
         title:"备注",
         key:"remark",
+				minWidth: "180px",
         ellipsisTooltip: true,
       }
     ]
