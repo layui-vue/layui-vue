@@ -383,7 +383,7 @@ export default {
             <template #suffix><span style="font-size:10px">Ctrl + R</span></template>
           </lay-dropdown-menu-item>
           <lay-line></lay-line>
-          <lay-dropdown-menu-item>
+          <lay-dropdown-menu-item disabled>
             <template #prefix><lay-icon type="layui-icon-about"></lay-icon></template>
             <template #default>更多</template>
             <template #suffix><lay-icon type="layui-icon-right"></lay-icon></template>
@@ -425,10 +425,18 @@ export default {
             <template #prefix><lay-icon type="layui-icon-set-sm"></lay-icon></template>
             <template #default>选项二</template>
             <template #content>
-              <lay-dropdown-menu-item>子菜单一</lay-dropdown-menu-item>
+              <lay-dropdown-menu-item disabled>子菜单一</lay-dropdown-menu-item>
               <lay-dropdown-menu-item>子菜单二</lay-dropdown-menu-item>
               <lay-dropdown-sub-menu>
                 <template #default>子菜单三</template>
+                <template #content>
+                   <lay-dropdown-menu-item>菜单1</lay-dropdown-menu-item>
+                   <lay-dropdown-menu-item>菜单2</lay-dropdown-menu-item>
+                   <lay-dropdown-menu-item>菜单3</lay-dropdown-menu-item>
+                </template>
+              </lay-dropdown-sub-menu>
+              <lay-dropdown-sub-menu disabled>
+                <template #default>子菜单四</template>
                 <template #content>
                    <lay-dropdown-menu-item>菜单1</lay-dropdown-menu-item>
                    <lay-dropdown-menu-item>菜单2</lay-dropdown-menu-item>

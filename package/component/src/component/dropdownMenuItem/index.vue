@@ -7,9 +7,20 @@ export default {
 <script setup lang="ts">
 import { inject, Ref } from "vue";
 
+export interface LayDropdownMenuItemProps {
+  disabled?: boolean;
+}
+
+const props = withDefaults(defineProps<LayDropdownMenuItemProps>(), {
+  disabled: false,
+});
+
 const openState: Ref<boolean> = inject("openState") as Ref<boolean>;
 
 const handleClick = () => {
+  if (props.disabled) {
+    return;
+  }
   openState.value = false;
 };
 </script>
@@ -17,6 +28,7 @@ const handleClick = () => {
 <template>
   <li
     @click="handleClick"
+    :class="{ 'layui-disabled': disabled }"
     :style="$slots.suffix ? `justify-content: space-between;` : ''"
   >
     <span class="layui-menu-body-title">

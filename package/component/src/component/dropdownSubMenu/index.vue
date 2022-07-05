@@ -14,14 +14,14 @@ import { DropdownPlacement } from "../dropdown/interface";
 
 export type DropdownTrigger = "click" | "hover" | "focus" | "contextMenu";
 
-export interface LayDropdownProps {
+export interface LayDropdownSubMenuProps {
   trigger?: DropdownTrigger | DropdownTrigger[];
   placement?: DropdownPlacement;
   disabled?: boolean;
   contentOffset?: number;
 }
 
-const props = withDefaults(defineProps<LayDropdownProps>(), {
+const props = withDefaults(defineProps<LayDropdownSubMenuProps>(), {
   trigger: "hover",
   disabled: false,
   placement: "right-top",
@@ -37,7 +37,7 @@ const props = withDefaults(defineProps<LayDropdownProps>(), {
     :contentOffset="contentOffset"
     :disabled="disabled"
   >
-    <lay-dropdown-menu-item>
+    <lay-dropdown-menu-item :disabled="disabled">
       <template v-if="$slots.prefix" #prefix>
         <slot name="prefix" />
       </template>

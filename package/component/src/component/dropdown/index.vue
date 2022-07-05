@@ -85,9 +85,9 @@ const { x: mouseLeft, y: mouseTop } = useMouse();
 const openState = ref(false);
 
 const containerRef = computed(() =>
-  props.popupContainer 
-    // @ts-ignore
-    ? document.querySelector<HTMLElement>(props.popupContainer) ?? document.body
+  props.popupContainer
+    ? // @ts-ignore
+      document.querySelector<HTMLElement>(props.popupContainer) ?? document.body
     : dropdownRef.value
 ) as ComputedRef<HTMLElement>;
 
@@ -455,7 +455,7 @@ const handleMouseEnter = (e: MouseEvent) => {
 };
 
 const handleMouseEnterWithContext = (e: MouseEvent) => {
-  if (!props.popupContainer){
+  if (!props.popupContainer) {
     return;
   }
   dropdownCtx?.onMouseenter(e);
