@@ -400,7 +400,7 @@ props.dataSource.map((value: any) => {
             </colgroup>
             <tbody>
               <!-- 渲染 -->
-              <template v-for="(data, index) in tableDataSource" :key="data">
+              <template v-for="(data, index) in tableDataSource" :key="index">
                 <table-row
                   :id="id"
                   :index="index"
@@ -420,10 +420,10 @@ props.dataSource.map((value: any) => {
                   @contextmenu="contextmenu"
                   v-model:selectedKeys="tableSelectedKeys"
                 >
-                  <template v-for="name in slotsData" #[name]>
+                  <template v-for="name in slotsData" #[name]="{ data }">
                     <slot :name="name" :data="data"></slot>
                   </template>
-                  <template v-if="slot.expand" #expand>
+                  <template v-if="slot.expand" #expand="{ data }">
                     <slot name="expand" :data="data"></slot>
                   </template>
                 </table-row>

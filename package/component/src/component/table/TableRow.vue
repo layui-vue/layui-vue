@@ -258,7 +258,7 @@ const childrenIndentSize = props.currentIndentSize + props.indentSize;
 
   <!-- 嵌套表单 -->
   <tr class="layui-table-cell-expand" v-if="slot.expand && isExpand">
-    <slot name="expand"></slot>
+    <slot name="expand" :data="data"></slot>
   </tr>
 
   <!-- 树形结构 -->
@@ -286,10 +286,10 @@ const childrenIndentSize = props.currentIndentSize + props.indentSize;
         @contextmenu="contextmenu"
         v-model:selectedKeys="tableSelectedKeys"
       >
-        <template v-for="name in slotsData" #[name]>
+        <template v-for="name in slotsData" #[name]="{ data }">
           <slot :name="name" :data="data"></slot>
         </template>
-        <template v-if="slot.expand" #expand>
+        <template v-if="slot.expand" #expand="{ data }">
           <slot name="expand" :data="data"></slot>
         </template>
       </table-row>

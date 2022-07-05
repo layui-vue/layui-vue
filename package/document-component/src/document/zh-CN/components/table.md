@@ -381,6 +381,7 @@ export default {
 
 <template>
   <lay-table :columns="columns7" :dataSource="dataSource7">
+    <template #score="{ data }">{{ data }}</template>
   </lay-table>
 </template>
 
@@ -403,8 +404,8 @@ export default {
     ]
 
     const dataSource7 = [
-      {name:"系统管理", score:100, children: [{name:"用户管理", score:100, children: [{name:"用户修改", score:100},{name:"用户删除", score:100}]},{name:"角色管理", score:100}]},
-      {name:"电商管理", score:100, children: [{name:"商品管理", score:100},{name:"分类管理", score:100}]},
+      {name:"系统管理", score:100, children: [{name:"用户管理", score:99, children: [{name:"用户修改", score:98},{name:"用户删除", score:97}]},{name:"角色管理", score:96}]},
+      {name:"电商管理", score:100, children: [{name:"商品管理", score:11},{name:"分类管理", score:22}]},
     ]
 
     return {
