@@ -1,3 +1,4 @@
+import { title } from "process";
 import { layer } from "../index";
 
 // 随机数
@@ -132,6 +133,7 @@ export function calculateType(modalType: number | string) {
 // @param height 高度
 // @param btn 操作集合
 export function calculateContent(
+  title: any,
   height: any,
   btn: any,
   type: any,
@@ -141,24 +143,48 @@ export function calculateContent(
     height = "100%";
   }
   if (btn && btn.length > 0) {
-    if (type === 0) {
-      return "calc(" + height + " - 137px)";
+    if (type == 0) {
+      if(title) {
+        return "calc(" + height + " - 137px)";
+      } else {
+        return "calc(" + height + " - 86px)";
+      }
     }
-    if (type === 1) {
-      return "calc(" + height + " - 102px)";
+    if (type == 1) {
+      if(title) {
+        return "calc(" + height + " - 102px)";
+      } else {
+        return "calc(" + height + " - 51px)";
+      }
     }
-    if (type === 2) {
-      return "calc(" + height + " - 102px)";
+    if (type == 2) {
+      if(title) {
+        return "calc(" + height + " - 102px)";
+      } else {
+        return "calc(" + height + " - 51px)";
+      }
     }
   } else {
-    if (type === 0) {
-      return isMessage ? height : "calc(" + height + " - 137px)";
+    if (type == 0) {
+      if(title) {
+        return isMessage ? height : "calc(" + height + " - 137px)";
+      } else {
+        return isMessage ? height : "calc(" + height + " - 86px)";
+      }
     }
-    if (type === 1) {
-      return "calc(" + height + " - 51px)";
+    if (type == 1) {
+      if(title) {
+        return "calc(" + height + " - 51px)";
+      } else {
+        return "calc(" + height + " - 0px)";
+      }
     }
-    if (type === 2) {
-      return "calc(" + height + " - 51px)";
+    if (type == 2) {
+      if(title) {
+        return "calc(" + height + " - 51px)";
+      } else {
+        return "calc(" + height + " - 0px)";
+      }
     }
   }
 }
@@ -344,9 +370,7 @@ export function removeNotifiyFromQueen(layerId: string | undefined) {
   // 间隙
   let transOffsetTop = 15;
   // @ts-ignore 删除项的高度
-  let offsetHeight =
-    document.getElementById(layerId)?.firstElementChild?.firstElementChild
-      ?.offsetHeight;
+  let offsetHeight = document.getElementById(layerId)?.firstElementChild?.firstElementChild ?.offsetHeight;
   // @ts-ignore
   window.NotifiyQueen = window.NotifiyQueen || [];
   // @ts-ignore
@@ -366,14 +390,10 @@ export function removeNotifiyFromQueen(layerId: string | undefined) {
       ?.firstElementChild;
     if (offsetType === "rt" || offsetType === "lt") {
       // @ts-ignore
-      dom.style["top"] =
-        parseFloat(dom.style["top"]) - transOffsetTop - offsetHeight + "px";
+      dom.style["top"] = parseFloat(dom.style["top"]) - transOffsetTop - offsetHeight + "px";
     } else {
       // @ts-ignore
-      let bottom =
-        parseFloat(dom.style["top"].split(" - ")[1]) -
-        transOffsetTop -
-        offsetHeight;
+      let bottom = parseFloat(dom.style["top"].split(" - ")[1]) - transOffsetTop - offsetHeight;
       // @ts-ignore
       dom.style["top"] = "calc(100vh - " + bottom + "px)";
     }

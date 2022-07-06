@@ -22,6 +22,11 @@ const zhCN = [
         component: () => import("../document/zh-CN/help.md"),
         meta: { title: "帮助" },
       },
+      {
+        path: "/zh-CN/question",
+        component: () => import("../document/zh-CN/question.md"),
+        meta: { title: "问题" },
+      },
     ],
   },
 ];

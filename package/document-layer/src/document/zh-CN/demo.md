@@ -124,8 +124,7 @@ const load4 = function() {
             <button @click="openMaxmin">缩小放大</button>
             <button @click="openResize">尺寸拉伸</button>
             <button @click="openIndex">设置层级</button>
-            <button @click="openAreaAuto">内容适应</button>
-            <button @click="openAreaAuto2">内容适应2</button>
+            <button @click="openClose2">关闭主题</button>
         </lay-col>
     </lay-row>
 </template>
@@ -165,7 +164,7 @@ const openIframe = function() {
         title: "标题",
         resize: true,
         area: ['500px','500px'],
-        content: "http://layui-vue.pearadmin.com"
+        content: "http://www.layui-vue.com"
     })
 }
 
@@ -210,29 +209,19 @@ const openResize = function() {
 const openIndex = function() {
     layer.open({
         type: 1,
-        title: "标题",
         zIndex: 999,
+        title: "标题",
         content: "设置层级"
     })
 }
 
-const openAreaAuto = function(){
+const openClose2 = function() {
     layer.open({
-        type:1,
-        title:"area:auto",
-        isHtmlFragment:true,
-        content:"<img src='https://chixian.oss-cn-hangzhou.aliyuncs.com/20210819230007_346ce.jpeg'/>"
-    })
-}
-
-const openAreaAuto2 = function(){
-    layer.open({
-        type:1,
-        title:"area:auto",
-        offset:['10px','50%'],
-        isHtmlFragment:true,
-        content:"<img src='https://chixian.oss-cn-hangzhou.aliyuncs.com/20210819230007_346ce.jpeg'/>",
-    })
+        type: 1,
+        closeBtn: 2,
+        title: "其他关闭",
+        content: "内容"
+    })    
 }
 </script>
 
@@ -294,9 +283,9 @@ const openRight = function() {
 ::: demo 通过 layer.photos(options) 创建图片预览弹层, 参数`options`主要传入预览的图片链接。
 
 <template>
-    <button @click="signleImg">图片查看</button>
-    <button @click="signleImg2">图片标题</button>
-    <button @click="groupImg">图片分组</button>
+   <button @click="signleImg">图片查看</button>
+   <button @click="signleImg2">图片标题</button>
+   <button @click="groupImg">图片分组</button>
 </template>
 
 <script>
@@ -319,7 +308,6 @@ const groupImg = function() {
   })
 }
 </script>
-
 :::
 
 <fieldset class="layui-elem-field layui-field-title">
@@ -331,12 +319,10 @@ const groupImg = function() {
 <template>
   <lay-row :space="30" >
     <lay-col :span="24">
-      <button @click="baseNotifiy">基本使用</button>
-      <button @click="baseNotifiyRB">右下</button>
-      <button @click="baseNotifiyLT">左上</button>
-      <button @click="baseNotifiyLB">左下</button>
-      <button @click="baseNotifiyTime0">不主动关闭</button>
-      <button @click="baseNotifiyHtml">HTML解析</button>
+      <button @click="baseNotifiy">右上位置</button>
+      <button @click="baseNotifiyRB">右下位置</button>
+      <button @click="baseNotifiyLT">左上位置</button>
+      <button @click="baseNotifiyLB">左下位置</button>
     </lay-col>
     <lay-col :span="24">
       <button @click="NotifiySuccess">成功通知</button>
@@ -375,22 +361,6 @@ const baseNotifiyLB = function() {
       title:"这是标题",
       content:"我出现在左下",
       offset:'lb',
-    })
-}
-const baseNotifiyTime0 = function() {
-    layer.notifiy({
-      title:"这是标题",
-      content:"不会主动关闭，请点击右上角关闭图标",
-      time:0
-    })
-}
-const baseNotifiyHtml = function() {
-    layer.notifiy({
-      title:"这是标题,有图片时请设置area参数",
-      isHtmlFragment:true,
-      content:"<img src='https://chixian.oss-cn-hangzhou.aliyuncs.com/20210819230007_346ce.jpeg'/>",
-      area:['330px','220px'],
-      time:3000
     })
 }
 const NotifiySuccess=function(){
