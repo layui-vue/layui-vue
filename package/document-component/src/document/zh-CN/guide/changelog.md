@@ -18,7 +18,7 @@
         <ul>
           <li>[新增] dropdown-menu-item 新增 disabled 属性。by @starsatdawn</li>
           <li>[修复] table默认加载时有横向滚动条，header 的滚动条占位无法显示 by @dingyongya</li>
-          <li>[优化] carousel首次加载时不应存在动画效果，而是应立即显示默认的item by @0o张不歪o0</li>
+          <li>[优化] carousel首次加载时不应存在动画效果，而是应立即显示默认的item by @SmallWai</li>
         </ul>
       </li>
     </ul>

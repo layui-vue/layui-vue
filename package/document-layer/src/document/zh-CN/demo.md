@@ -292,11 +292,11 @@ const openRight = function() {
 import { layer } from  "../../../../layer/src/index"
 
 const signleImg = function() {
-    layer.photos("/src/assets/logo.jpg")
+    layer.photos("http://www.pearadmin.com/assets/images/un1.svg")
 }
 const signleImg2 = function() {
     layer.photos({
-      imgList:[{src:'/src/assets/logo.jpg',alt:'layer for vue'}]
+      imgList:[{src:'http://www.pearadmin.com/assets/images/un2.svg',alt:'layer for vue'}]
     })
 }
 const groupImg = function() {

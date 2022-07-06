@@ -140,12 +140,12 @@ const layer = {
   },
   //通知
   notifiy: (option: any = {}, callback?: Function) => {
-    option.shade = false;
     option.type = 6;
     let defaultOption = {
       offset: "rt",
       time: 2000,
       area: "auto",
+      shade:false
     };
     return layer.create(option, defaultOption, callback);
   },
