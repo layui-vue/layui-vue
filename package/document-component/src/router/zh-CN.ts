@@ -400,14 +400,24 @@ const zhCN = [
             meta: { title: "页头" },
           },
           {
-            path: "/zh-CN/components/Cascader",
+            path: "/zh-CN/components/cascader",
             component: () => import("../document/zh-CN/components/cascader.md"),
             meta: { title: "级联选择器" },
           },
           {
-            path: "/zh-CN/components/Affix",
+            path: "/zh-CN/components/affix",
             component: () => import("../document/zh-CN/components/affix.md"),
             meta: { title: "锚点" },
+          },
+          {
+            path: "/zh-CN/components/notifiy",
+            component: () => import("../document/zh-CN/components/notifiy.md"),
+            meta: { title: "通知" },
+          },
+          {
+            path: "/zh-CN/components/photo",
+            component: () => import("../document/zh-CN/components/photo.md"),
+            meta: { title: "相册" },
           },
         ],
       },

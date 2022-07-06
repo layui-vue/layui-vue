@@ -144,21 +144,21 @@ export function calculateContent(
   }
   if (btn && btn.length > 0) {
     if (type == 0) {
-      if(title) {
+      if (title) {
         return "calc(" + height + " - 137px)";
       } else {
         return "calc(" + height + " - 86px)";
       }
     }
     if (type == 1) {
-      if(title) {
+      if (title) {
         return "calc(" + height + " - 102px)";
       } else {
         return "calc(" + height + " - 51px)";
       }
     }
     if (type == 2) {
-      if(title) {
+      if (title) {
         return "calc(" + height + " - 102px)";
       } else {
         return "calc(" + height + " - 51px)";
@@ -166,21 +166,21 @@ export function calculateContent(
     }
   } else {
     if (type == 0) {
-      if(title) {
+      if (title) {
         return isMessage ? height : "calc(" + height + " - 137px)";
       } else {
         return isMessage ? height : "calc(" + height + " - 86px)";
       }
     }
     if (type == 1) {
-      if(title) {
+      if (title) {
         return "calc(" + height + " - 51px)";
       } else {
         return "calc(" + height + " - 0px)";
       }
     }
     if (type == 2) {
-      if(title) {
+      if (title) {
         return "calc(" + height + " - 51px)";
       } else {
         return "calc(" + height + " - 0px)";

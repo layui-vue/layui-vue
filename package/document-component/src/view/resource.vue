@@ -14,7 +14,7 @@
           <li class="layui-col-sm12">
             <div class="alone">
               <a
-                href="https://gitee.com/layui/layui-vue/tree/next/package/layer"
+                href="http://layer.layui-vue.com/zh-CN/demo"
                 target="_blank"
                 >layer - vue<cite>通用型弹出层组件</cite></a
               >

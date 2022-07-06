@@ -51,10 +51,7 @@ onMounted(() => {
       setTimeout(() => {
         //此处延迟加载class，以免影响弹出效果
         // @ts-ignore
-        addClass(
-          notifyRef.value.parentElement?.parentElement,
-          "layui-layer-notify"
-        );
+        addClass(notifyRef.value.parentElement?.parentElement,"layui-layer-notify");
       }, 300);
     }
   });

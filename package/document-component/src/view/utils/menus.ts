@@ -372,7 +372,7 @@ const menus = [
       {
         id: 100,
         title: "锚点",
-        subTitle: "Affix",
+        subTitle: "affix",
         path: "/zh-CN/components/affix",
       },
     ],
@@ -383,7 +383,7 @@ const menus = [
     children: [
       {
         id: 90,
-        title: "弹层",
+        title: "模态",
         subTitle: "modal",
         path: "/zh-CN/components/modal",
       },
@@ -410,6 +410,18 @@ const menus = [
         title: "抽屉",
         subTitle: "drawer",
         path: "/zh-CN/components/drawer",
+      },
+      {
+        id: 94,
+        title: "通知",
+        subTitle: "notifiy",
+        path: "/zh-CN/components/notifiy",
+      },
+      {
+        id: 94,
+        title: "相册",
+        subTitle: "photo",
+        path: "/zh-CN/components/photo",
       },
     ],
   },
