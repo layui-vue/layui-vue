@@ -3,9 +3,7 @@
     <div class="markdown-body light-scheme">
       <div class="alone-header">
         <img class="alone-logo" src="../assets/logo.png" />
-        <a class="version"
-          >{{ version }}</a
-        >
+        <a class="version">{{ version }}</a>
         <a
           href="https://gitee.com/layui/layui-vue"
           style="position: absolute; right: 10%; line-height: 75px"
