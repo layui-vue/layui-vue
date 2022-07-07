@@ -16,6 +16,32 @@
   <lay-row :space="30" >
     <lay-col :span="24">
       <lay-button type="primary" @click="baseNotifiy">右上位置</lay-button>
+    </lay-col>
+  </lay-row>
+</template>
+
+<script>
+import { layer } from  "@layui/layer-vue"
+
+const baseNotifiy = function() {
+    layer.notifiy({
+      title:"这是标题",
+      content:"默认就是右上，也是用得最多的"
+    })
+}
+</script>
+
+:::
+
+::: title 不同位置
+:::
+
+::: demo
+
+<template>
+  <lay-row :space="30" >
+    <lay-col :span="24">
+      <lay-button type="primary" @click="baseNotifiyRT">右上位置</lay-button>
       <lay-button type="primary" @click="baseNotifiyRB">右下位置</lay-button>
       <lay-button type="primary" @click="baseNotifiyLT">左上位置</lay-button>
       <lay-button type="primary" @click="baseNotifiyLB">左下位置</lay-button>
@@ -26,7 +52,7 @@
 <script>
 import { layer } from  "@layui/layer-vue"
 
-const baseNotifiy = function() {
+const baseNotifiyRT = function() {
     layer.notifiy({
       title:"这是标题",
       content:"默认就是右上，也是用得最多的"

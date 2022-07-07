@@ -7,15 +7,13 @@
 ::: describe 预览图片。
 :::
 
-::: title 指定图标
+::: title 基本使用
 :::
 
 ::: demo
 
 <template>
    <lay-button @click="signleImg">图片查看</lay-button>
-   <lay-button @click="signleImg2">图片标题</lay-button>
-   <lay-button @click="groupImg">图片分组</lay-button>
 </template>
 
 <script>
@@ -24,11 +22,43 @@ import { layer } from  "@layui/layui-vue"
 const signleImg = function() {
     layer.photos("http://www.pearadmin.com/assets/images/un1.svg")
 }
+</script>
+
+:::
+
+::: title 设置标题
+:::
+
+::: demo
+
+<template>
+   <lay-button @click="signleImg2">图片标题</lay-button>
+</template>
+
+<script>
+import { layer } from  "@layui/layui-vue"
+
 const signleImg2 = function() {
     layer.photos({
       imgList:[{src:'http://www.pearadmin.com/assets/images/un2.svg',alt:'layer for vue'}]
     })
 }
+</script>
+
+:::
+
+::: title 图片分组
+:::
+
+::: demo
+
+<template>
+   <lay-button @click="groupImg">图片分组</lay-button>
+</template>
+
+<script>
+import { layer } from  "@layui/layui-vue"
+
 const groupImg = function() {
   layer.photos({
     imgList:[

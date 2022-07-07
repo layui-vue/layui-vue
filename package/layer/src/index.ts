@@ -145,7 +145,7 @@ const layer = {
       offset: "rt",
       time: 2000,
       area: "auto",
-      shade:false
+      shade: false,
     };
     return layer.create(option, defaultOption, callback);
   },

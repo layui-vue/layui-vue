@@ -53,11 +53,12 @@
 import config from "../../../layer/package.json";
 import { useRouter } from "vue-router";
 import { ref, watch } from "vue";
+import { useRoute } from "vue-router";
 
-const version = config.version;
-
-const active = ref("/zh-CN/index");
+const route = useRoute();
 const router = useRouter();
+const version = config.version;
+const active = ref(route.path);
 
 watch(active, (val) => {
   router.push(val);
