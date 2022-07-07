@@ -125,7 +125,7 @@
             </lay-dropdown>
           </li>
           <li class="layui-nav-item">
-            <a href="https://gitee.com/layui/layui-vue"> Gitee </a>
+            <a href="http://layer.layui-vue.com/zh-CN/demo" target="_blank">layer</a>
           </li>
           <li class="layui-nav-item">
             <a href="javascript:void(0)">
@@ -144,6 +144,9 @@
                 >英 文</lay-badge
               >
             </a>
+          </li>
+          <li class="layui-nav-item">
+            <a href="https://gitee.com/layui/layui-vue" target="_blank"> Gitee </a>
           </li>
           <li class="layui-nav-item">
             <a href="javascript:void(0)">

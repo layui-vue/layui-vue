@@ -72,7 +72,7 @@ importers:
   package/component:
     specifiers:
       '@layui/icons-vue': ^1.0.9
-      '@layui/layer-vue': ^1.4.0
+      '@layui/layer-vue': ^1.4.1
       '@umijs/ssr-darkreader': ^4.9.45
       '@vueuse/core': ^8.7.3
       async-validator: ^4.1.1

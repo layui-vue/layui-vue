@@ -13,7 +13,7 @@
 ::: demo
 
 <template>
-   <lay-button @click="signleImg">图片查看</lay-button>
+   <lay-button type="primary" @click="signleImg">图片查看</lay-button>
 </template>
 
 <script>
@@ -32,7 +32,7 @@ const signleImg = function() {
 ::: demo
 
 <template>
-   <lay-button @click="signleImg2">图片标题</lay-button>
+   <lay-button type="primary" @click="signleImg2">图片标题</lay-button>
 </template>
 
 <script>
@@ -53,7 +53,7 @@ const signleImg2 = function() {
 ::: demo
 
 <template>
-   <lay-button @click="groupImg">图片分组</lay-button>
+   <lay-button type="primary" @click="groupImg">图片分组</lay-button>
 </template>
 
 <script>

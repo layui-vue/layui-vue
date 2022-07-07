@@ -17,8 +17,6 @@
 </template>
 
 <script>
-import { layer } from "@layui/layer-vue"
-
 export default {
   setup() {
 
@@ -40,8 +38,6 @@ export default {
 </template>
 
 <script>
-import { ref } from "vue"
-
 export default {
   setup() {
 
@@ -89,7 +85,7 @@ export default {
 </template>
 
 <script>
-import { ref,reactive } from "vue"
+import { reactive } from "vue"
 
 export default {
   setup() {

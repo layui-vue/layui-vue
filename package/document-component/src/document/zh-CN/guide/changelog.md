@@ -14,11 +14,19 @@
     <ul> 
       <a name="1-2-7"></a> 
       <li> 
-        <h3>1.2.7 <span class="layui-badge-rim">2022-07-04</span></h3> 
+        <h3>1.2.7 <span class="layui-badge-rim">2022-07-07</span></h3> 
         <ul>
+          <li>[新增] layer 组件 photos 方法, 支持相册层。 by @SmallWai</li>
+          <li>[新增] layer 组件 notifiy 方法, 支持消息通知。by @SmallWai</li>
+          <li>[新增] table 组件 columns 配置 fixed 属性, 支持列固定。by @Jmysy</li>
           <li>[新增] dropdown-menu-item 新增 disabled 属性。by @starsatdawn</li>
-          <li>[修复] table默认加载时有横向滚动条，header 的滚动条占位无法显示 by @dingyongya</li>
-          <li>[优化] carousel首次加载时不应存在动画效果，而是应立即显示默认的item by @SmallWai</li>
+          <li>[新增] table 组件 skin 属性, 用于 table 风格切换, 可选参数为 row line nob。by @Jmysy</li>
+          <li>[修复] table 组件 treetable 默认, 自定义插槽 data 数据不正确。by @Jmysy</li>
+          <li>[修复] table 默认加载时有横向滚动条，header 的滚动条占位无法显示。 by @dingyongya</li>
+          <li>[修复] table 组件 max-height 下 sm 尺寸 th 不生效。by @Jmysy</li>
+          <li>[优化] carousel 首次加载时不应存在动画效果，而是应立即显示默认的item。 by @SmallWai</li>
+          <li>[优化] dropdown 组件无法在 overflow: scroll 使用的问题。by @starsatdawn</li>
+          <li>[升级] layer-vue 1.4.1 版本。</li>
         </ul>
       </li>
     </ul>

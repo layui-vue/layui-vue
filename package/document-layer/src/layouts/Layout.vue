@@ -3,18 +3,11 @@
     <div class="markdown-body light-scheme">
       <div class="alone-header">
         <img class="alone-logo" src="../assets/logo.png" />
-        <a
-          style="
-            position: absolute;
-            right: 16%;
-            line-height: 60px;
-            color: white;
-            font-size: 15px;
-          "
+        <a class="version"
           >{{ version }}</a
         >
         <a
-          href="https://gitee.com/layui-vue/layer-vue"
+          href="https://gitee.com/layui/layui-vue"
           style="position: absolute; right: 10%; line-height: 75px"
         >
           <svg width="1.7em" height="1.7em" viewBox="0 0 24 24">
@@ -93,6 +86,14 @@ body {
   font-weight: 300;
   color: #fff;
   background: #393d49;
+}
+
+.version {
+  position: absolute;
+  right: 16%;
+  line-height: 60px;
+  color: white;
+  font-size: 15px;
 }
 
 .alone-banner img {
