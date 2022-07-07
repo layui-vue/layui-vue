@@ -371,8 +371,10 @@ export function removeNotifiyFromQueen(layerId: string | undefined) {
   let transOffsetTop = 15;
   // @ts-ignore 删除项的高度
   let offsetHeight =
+    // @ts-ignore
     document.getElementById(layerId)?.firstElementChild?.firstElementChild
-      ?.offsetHeight;
+    // @ts-ignore  
+    ?.offsetHeight;
   // @ts-ignore
   window.NotifiyQueen = window.NotifiyQueen || [];
   // @ts-ignore
@@ -393,10 +395,12 @@ export function removeNotifiyFromQueen(layerId: string | undefined) {
     if (offsetType === "rt" || offsetType === "lt") {
       // @ts-ignore
       dom.style["top"] =
+        // @ts-ignore
         parseFloat(dom.style["top"]) - transOffsetTop - offsetHeight + "px";
     } else {
       // @ts-ignore
       let bottom =
+        // @ts-ignore
         parseFloat(dom.style["top"].split(" - ")[1]) -
         transOffsetTop -
         offsetHeight;
