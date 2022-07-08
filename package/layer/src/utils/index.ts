@@ -372,9 +372,9 @@ export function removeNotifiyFromQueen(layerId: string | undefined) {
   // @ts-ignore 删除项的高度
   let offsetHeight =
     // @ts-ignore
+    // @ts-ignore
     document.getElementById(layerId)?.firstElementChild?.firstElementChild
-    // @ts-ignore  
-    ?.offsetHeight;
+      ?.offsetHeight;
   // @ts-ignore
   window.NotifiyQueen = window.NotifiyQueen || [];
   // @ts-ignore

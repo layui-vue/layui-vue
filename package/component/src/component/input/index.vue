@@ -30,7 +30,7 @@ const props = withDefaults(defineProps<LayInputProps>(), {
   readonly: false,
   allowClear: false,
   autofocus: false,
-  modelValue: '',
+  modelValue: "",
 });
 
 interface InputEmits {
@@ -49,13 +49,19 @@ const slots = useSlots();
 const currentValue = ref<string>(String(props.modelValue));
 const hasContent = computed(() => (props.modelValue as string)?.length > 0);
 
-watch(() => props.modelValue, () => {
-  currentValue.value = String(props.modelValue);
-})
+watch(
+  () => props.modelValue,
+  () => {
+    currentValue.value = String(props.modelValue);
+  }
+);
 
-watch(() => currentValue, () => {
-  emit("update:modelValue", currentValue.value);
-})
+watch(
+  () => currentValue,
+  () => {
+    emit("update:modelValue", currentValue.value);
+  }
+);
 
 const onInput = function (event: Event) {
   const inputElement = event.target as HTMLInputElement;
