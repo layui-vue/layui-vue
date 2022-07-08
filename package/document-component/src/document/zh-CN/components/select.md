@@ -236,22 +236,7 @@ export default {
 
 <template>
   <lay-select v-model="selected2">
-    <lay-select-option value="1" label="学习"></lay-select-option>
-    <lay-select-option value="3" label="运动"></lay-select-option>
-    <lay-select-option value="1" label="学习"></lay-select-option>
-    <lay-select-option value="3" label="运动"></lay-select-option>
-    <lay-select-option value="1" label="学习"></lay-select-option>
-    <lay-select-option value="3" label="运动"></lay-select-option>
-    <lay-select-option value="1" label="学习"></lay-select-option>
-    <lay-select-option value="3" label="运动"></lay-select-option>
-    <lay-select-option value="1" label="学习"></lay-select-option>
-    <lay-select-option value="3" label="运动"></lay-select-option>
-    <lay-select-option value="1" label="学习"></lay-select-option>
-    <lay-select-option value="3" label="运动"></lay-select-option>
-    <lay-select-option value="1" label="学习"></lay-select-option>
-    <lay-select-option value="3" label="运动"></lay-select-option>
-    <lay-select-option value="1" label="学习"></lay-select-option>
-    <lay-select-option value="3" label="运动"></lay-select-option>
+    <lay-select-option v-for="index of 200" :value="index" :label="index"></lay-select-option>
   </lay-select>
 </template>
 

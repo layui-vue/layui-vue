@@ -22,7 +22,7 @@ import { ref } from 'vue'
 export default {
   setup() {
 
-    const data1 = ref("内容");
+    const data1 = ref(0);
 
     return {
       data1

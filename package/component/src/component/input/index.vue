@@ -7,22 +7,22 @@ export default {
 <script setup lang="ts">
 import "./index.less";
 import { LayIcon } from "@layui/icons-vue";
-import { computed, useSlots } from "vue";
+import { computed, ref, useSlots, watch } from "vue";
 import { useI18n } from "../../language";
 
 export interface LayInputProps {
   name?: string;
   type?: string;
   value?: string;
-  disabled?: boolean;
-  readonly?: boolean;
-  modelValue?: string | number;
-  placeholder?: string;
-  allowClear?: boolean;
-  autofocus?: boolean;
-  autocomplete?: string;
   prefixIcon?: string;
   suffixIcon?: string;
+  modelValue?: string;
+  allowClear?: boolean;
+  autocomplete?: string;
+  placeholder?: string;
+  autofocus?: boolean;
+  disabled?: boolean;
+  readonly?: boolean;
 }
 
 const props = withDefaults(defineProps<LayInputProps>(), {
@@ -30,21 +30,32 @@ const props = withDefaults(defineProps<LayInputProps>(), {
   readonly: false,
   allowClear: false,
   autofocus: false,
-  modelValue: "",
+  modelValue: '',
 });
 
-const emit = defineEmits([
-  "update:modelValue",
-  "change",
-  "input",
-  "focus",
-  "clear",
-  "blur",
-]);
+interface InputEmits {
+  (e: "blur", event: Event): void;
+  (e: "input", event: Event): void;
+  (e: "update:modelValue", value: string): void;
+  (e: "change", event: Event): void;
+  (e: "focus", event: Event): void;
+  (e: "clear"): void;
+}
+
+const emit = defineEmits<InputEmits>();
 
 const { t } = useI18n();
 const slots = useSlots();
+const currentValue = ref<string>(String(props.modelValue));
 const hasContent = computed(() => (props.modelValue as string)?.length > 0);
+
+watch(() => props.modelValue, () => {
+  currentValue.value = String(props.modelValue);
+})
+
+watch(() => currentValue, () => {
+  emit("update:modelValue", currentValue.value);
+})
 
 const onInput = function (event: Event) {
   const inputElement = event.target as HTMLInputElement;
@@ -54,7 +65,7 @@ const onInput = function (event: Event) {
 };
 
 const onClear = () => {
-  emit("update:modelValue");
+  emit("update:modelValue", "");
   emit("clear");
 };
 
@@ -88,8 +99,8 @@ const classes = computed(() => {
     <input
       :type="type"
       :name="name"
-      :value="modelValue || value"
       :disabled="disabled"
+      :value="currentValue"
       :placeholder="placeholder"
       :autofocus="autofocus"
       :autocomplete="autocomplete"
