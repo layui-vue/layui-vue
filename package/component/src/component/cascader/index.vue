@@ -1,48 +1,23 @@
 <template>
-  <lay-dropdown
-    class="layui-cascader"
-    ref="dropdownRef"
-    :autoFitMinWidth="false"
-    :updateAtScroll="true"
-  >
-    <lay-input
-      v-model="displayValue"
-      readonly
-      suffix-icon="layui-icon-down"
-      :placeholder="placeholder"
-      v-if="!slots.default"
-    ></lay-input>
+  <lay-dropdown class="layui-cascader" ref="dropdownRef" :autoFitMinWidth="false" :updateAtScroll="true">
+    <lay-input v-model="displayValue" readonly suffix-icon="layui-icon-down" :placeholder="placeholder"
+      v-if="!slots.default"></lay-input>
     <slot v-else></slot>
 
     <template #content>
       <div class="layui-cascader-panel">
         <template v-for="(itemCol, index) in treeData">
-          <lay-scroll
-            height="180px"
-            class="layui-cascader-menu"
-            :key="'cascader-menu' + index"
-            v-if="itemCol.data.length"
-          >
-            <div
-              class="layui-cascader-menu-item"
-              v-for="(item, i) in itemCol.data"
-              :key="index + i"
-              @click="selectBar(item, i, index)"
-              :class="[
+          <lay-scroll height="180px" class="layui-cascader-menu" :key="'cascader-menu' + index"
+            v-if="itemCol.data.length">
+            <div class="layui-cascader-menu-item" v-for="(item, i) in itemCol.data" :key="index + i"
+              @click="selectBar(item, i, index)" :class="[
                 {
                   'layui-cascader-selected': itemCol.selectIndex === i,
                 },
-              ]"
-            >
-              <slot
-                :name="item.slot"
-                v-if="item.slot && slots[item.slot]"
-              ></slot>
+              ]">
+              <slot :name="item.slot" v-if="item.slot && slots[item.slot]"></slot>
               <template v-else>{{ item.label }}</template>
-              <i
-                class="layui-icon layui-icon-right"
-                v-if="item.children && item.children.length"
-              ></i>
+              <i class="layui-icon layui-icon-right" v-if="item.children && item.children.length"></i>
             </div>
           </lay-scroll>
         </template>
@@ -69,6 +44,7 @@ export interface LayCascaderProps {
   decollator?: string;
   placeholder?: string;
   onlyLastLevel?: boolean;
+  replaceFields?: { label: string, value: string, children: string }
 }
 const props = withDefaults(defineProps<LayCascaderProps>(), {
   options: null,
@@ -76,6 +52,13 @@ const props = withDefaults(defineProps<LayCascaderProps>(), {
   decollator: "/",
   placeholder: "",
   onlyLastLevel: false,
+  replaceFields: () => {
+    return {
+      label: 'label',
+      value: 'value',
+      children: 'children'
+    }
+  }
 });
 const emit = defineEmits(["update:modelValue", "change", "clear"]);
 
@@ -135,16 +118,16 @@ const initTreeData = () => {
 };
 
 function getMaxFloor(treeData: any) {
-  let floor = 0;
+  //let floor = 0;
   let max = 0;
   function each(data: any, floor: any) {
     data.forEach((e: any) => {
-      e.floor = floor;
+      //e.layFloor = floor;
       if (floor > max) {
         max = floor;
       }
-      if (e.children && e.children.length > 0) {
-        each(e.children, floor + 1);
+      if (e[props.replaceFields.children] && e[props.replaceFields.children].length > 0) {
+        each(e[props.replaceFields.children], floor + 1);
       }
     });
   }
@@ -157,15 +140,16 @@ function findData(orginData: any, level: number) {
     const element = orginData[i];
     if (level === 1) {
       data.push({
-        value: element.value,
-        label: element.label,
+        value: element[props.replaceFields.value],
+        label: element[props.replaceFields.label],
         slot: element.slot || false,
-        children: element.children ?? false,
+        children: element[props.replaceFields.children] ?? false,
+        orginData: element
       });
     }
 
-    if (level !== 1 && element.children && element.children.length > 0) {
-      findData(element.children, level - 1);
+    if (level !== 1 && element[props.replaceFields.children] && element[props.replaceFields.children].length > 0) {
+      findData(element[props.replaceFields.children], level - 1);
     }
   }
   return data;
@@ -197,25 +181,24 @@ const selectBar = (item: any, selectIndex: number, parentIndex: number) => {
       }
     }
     extractData(treeData.value, data, 0);
+    let fullLable = data.map((e: any) => { return e.label; }).join(` ${props.decollator} `);
     if (!props.onlyLastLevel) {
-      displayValue.value = data
-        .map((e: any) => {
-          return e.label;
-        })
-        .join(` ${props.decollator} `);
+      displayValue.value = fullLable
     } else {
       let _data = data.map((e: any) => {
         return e.label;
       });
       displayValue.value = _data[_data.length - 1];
     }
-    let value = data
-      .map((e: any) => {
-        return e.value;
-      })
-      .join(props.decollator);
+    let value = data.map((e: any) => { return e.value; }).join(props.decollator);
     emit("update:modelValue", value);
-    emit("change", displayValue.value);
+    let evt = {
+      display: displayValue.value,
+      value: value,
+      label: fullLable,
+      currentClick: JSON.parse(JSON.stringify(item.orginData))
+    }
+    emit("change", evt);
     if (dropdownRef.value)
       // @ts-ignore
       dropdownRef.value.hide();

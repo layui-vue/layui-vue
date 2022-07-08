@@ -300,6 +300,7 @@ const options = [
   <lay-cascader :options="options" v-model="value1" decollator="-" placeholder="我可以自定义分割符号" style="width:250px"></lay-cascader>
   <span style="margin-left:20px">输出的值：{{value1}}</span>
 </template>
+
 <script setup>
 import { ref } from "vue";
 const value1=ref(null)
@@ -350,8 +351,8 @@ const valueLv=ref(null)
 import { ref } from "vue";
 const value2=ref(null)
 const displayValue=ref(null)
-const onChange=(val)=>{
-  displayValue.value=val
+const onChange=(evt)=>{
+  displayValue.value=evt.display
 }
 const options2 = [
 	{
@@ -628,6 +629,62 @@ const options2 = [
 
 :::
 
+::: title Cascader 自定义字段名
+:::
+::: demo 也许你当前数据键名并不是`label`、`value`、`children`,这时只需要使用replaceFields属性来自定义key
+<template>
+  <lay-cascader :options="options3" :replaceFields="replaceFields" placeholder="自义定key"></lay-cascader>
+</template>
+
+<script setup>
+import { ref } from "vue";
+const replaceFields={
+  label:'name',
+  value:'id',
+  children:'group'
+}
+const options3=[
+  {
+    name:"张三",
+    id:1,
+    group:[
+      {
+        name:"张三-1",
+        id:2
+      },
+      {
+        name:"张三-2",
+        id:3
+      },
+      {
+        name:"张三-3",
+        id:4
+      }
+    ]
+  },
+  {
+    name:"李四",
+    id:5,
+    group:[
+      {
+        name:"李四-1",
+        id:6
+      },
+      {
+        name:"李四-2",
+        id:7
+      },
+      {
+        name:"李四-3",
+        id:8
+      }
+    ]
+  }
+]
+</script>
+
+:::
+
 ::: title Cascader 属性
 :::
 
@@ -639,7 +696,8 @@ const options2 = [
 | v-model / modelValue     | 值                   | 
 | decollator               | 分割符号，默认为 /     |
 | options                  | 选项参数 格式请见上面的demo  |
-| onlyLastLevel            | 回显displayValue仅显示最后一级，默认为 `false`  |
+| onlyLastLevel            | 回显display仅显示最后一级，默认为 `false`  |
+| replaceFields            | 自定义数据key名,可配置项为`label`,`value`,`children`,用法详见上面案例  |
 :::
 
 ::: title Cascader 事件
@@ -647,9 +705,9 @@ const options2 = [
 
 ::: table
 
-| 方法名 | 描述         |
-| ---- | ------------ |
-| change | 选中后数据改变的回调 |
+| 方法名 | 描述         |用法|
+| ---- | ------------ |--------|
+| change | 选中后数据改变的回调 |onChange( evt ){ <br>	&nbsp;	&nbsp;/* evt.display<br>	&nbsp;	&nbsp;/* evt.value,<br>	&nbsp;	&nbsp;/* evt.label<br>	&nbsp;	&nbsp;/* evt.currentClick<br>}|
 
 :::
 
