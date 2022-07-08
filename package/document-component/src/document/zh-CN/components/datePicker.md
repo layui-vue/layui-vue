@@ -14,7 +14,6 @@
 ::: demo
 
 <template>
-  选择的时间：{{endTime}}
   <lay-date-picker v-model="endTime"></lay-date-picker>
 </template>
 
@@ -41,7 +40,6 @@ export default {
 ::: demo
 
 <template>
-  选择的时间：{{endTime2}}
   <lay-date-picker type="datetime" v-model="endTime2"></lay-date-picker>
 </template>
 
@@ -68,7 +66,6 @@ export default {
 ::: demo
 
 <template>
-  <!-- 选择的时间：{{endTime3}} -->
   <lay-date-picker disabled type="year" v-model="endTime3"></lay-date-picker>
 </template>
 
@@ -95,7 +92,6 @@ export default {
 ::: demo
 
 <template>
-  选择的时间：{{endTime3}}
   <lay-date-picker type="year" v-model="endTime3"></lay-date-picker>
 </template>
 
@@ -122,7 +118,6 @@ export default {
 ::: demo
 
 <template>
-  选择的时间：{{endTime4}}
   <lay-date-picker type="month" v-model="endTime4"></lay-date-picker>
 </template>
 
@@ -198,10 +193,7 @@ export default {
 ::: title 一次性选择
 :::
 
-::: describe 只需要点击一次后自动关闭，无需点击确认按钮
-:::
-
-::: demo
+::: demo 只需要点击一次后自动关闭，无需点击确认按钮
 
 <template>
   <lay-date-picker v-model="endTime7" simple></lay-date-picker>

@@ -91,6 +91,32 @@ export default {
 
 :::
 
+::: title 清空内容
+:::
+
+::: demo
+
+<template>
+  <lay-textarea placeholder="请输入内容" v-model="data3" allow-clear></lay-textarea>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const data3 = ref("");
+
+    return {
+      data3
+    }
+  }
+}
+</script>
+
+:::
+
 ::: title 显示字数
 :::
 

@@ -13,7 +13,6 @@ import { useI18n } from "../../language";
 export interface LayInputProps {
   name?: string;
   type?: string;
-  value?: string;
   prefixIcon?: string;
   suffixIcon?: string;
   modelValue?: string;
@@ -46,13 +45,13 @@ const emit = defineEmits<InputEmits>();
 
 const { t } = useI18n();
 const slots = useSlots();
-const currentValue = ref<string>(String(props.modelValue));
+const currentValue = ref<string>(String(props.modelValue == null ? '' : props.modelValue));
 const hasContent = computed(() => (props.modelValue as string)?.length > 0);
 
 watch(
   () => props.modelValue,
   () => {
-    currentValue.value = String(props.modelValue);
+    currentValue.value = String(props.modelValue == null ? '' : props.modelValue);
   }
 );
 

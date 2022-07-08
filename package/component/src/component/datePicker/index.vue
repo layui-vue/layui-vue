@@ -4,7 +4,7 @@
       <lay-input
         readonly
         :name="name"
-        :value="dateValue || modelValue"
+        :model-value="dateValue || modelValue"
         prefix-icon="layui-icon-date"
       >
       </lay-input>

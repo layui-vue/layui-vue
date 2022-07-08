@@ -17,6 +17,11 @@
   min-height: 100px;
   padding: 6px 10px;
   resize: vertical;
+  position: relative;
+}
+
+.layui-textarea-wrapper { 
+  position: relative;
 }
 
 .layui-textarea:hover {
@@ -25,6 +30,13 @@
 
 .layui-textarea:focus {
   border-color: #d2d2d2 !important;
+}
+
+.layui-textarea-clear {
+  position: absolute;
+  color: rgba(0, 0, 0, 0.45);
+  right: 10px;
+  top: 10px;
 }
 
 .layui-textarea::-webkit-input-placeholder {
