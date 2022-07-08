@@ -11,6 +11,16 @@
 <template>
 <lay-timeline>
   <lay-timeline-item title="1.2.x">
+      <ul> 
+      <a name="1-2-8"></a> 
+      <li> 
+        <h3>1.2.8 <span class="layui-badge-rim">2022-07-08</span></h3> 
+        <ul>
+          <li>[修复] layer 组件 Notify 关闭图标样式问题。 by @SmallWai</li>
+          <li>[优化] cascader 组件 优化change回调参数 by @SmallWai</li>
+        </ul>
+      </li>
+    </ul>
     <ul> 
       <a name="1-2-7"></a> 
       <li> 

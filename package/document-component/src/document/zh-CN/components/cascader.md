@@ -350,8 +350,8 @@ const valueLv=ref(null)
 import { ref } from "vue";
 const value2=ref(null)
 const displayValue=ref(null)
-const onChange=(val)=>{
-  displayValue.value=val
+const onChange=(evt)=>{
+  displayValue.value=evt.display
 }
 const options2 = [
 	{
@@ -647,9 +647,9 @@ const options2 = [
 
 ::: table
 
-| 方法名 | 描述         |
-| ---- | ------------ |
-| change | 选中后数据改变的回调 |
+| 方法名 | 描述         |用法|
+| ---- | ------------ |--------|
+| change | 选中后数据改变的回调 |onChange( evt ){ <br>	&nbsp;	&nbsp;/* evt.display<br>	&nbsp;	&nbsp;/* evt.value,<br>	&nbsp;	&nbsp;/* evt.label<br>	&nbsp;	&nbsp;/* evt.currentClick<br>}|
 
 :::
 
