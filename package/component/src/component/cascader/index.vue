@@ -44,6 +44,7 @@ export interface LayCascaderProps {
   decollator?: string;
   placeholder?: string;
   onlyLastLevel?: boolean;
+  replaceFields?: { label: string, value: string, children: string }
 }
 const props = withDefaults(defineProps<LayCascaderProps>(), {
   options: null,
@@ -51,6 +52,13 @@ const props = withDefaults(defineProps<LayCascaderProps>(), {
   decollator: "/",
   placeholder: "",
   onlyLastLevel: false,
+  replaceFields: () => {
+    return {
+      label: 'label',
+      value: 'value',
+      children: 'children'
+    }
+  }
 });
 const emit = defineEmits(["update:modelValue", "change", "clear"]);
 
@@ -110,7 +118,7 @@ const initTreeData = () => {
 };
 
 function getMaxFloor(treeData: any) {
-  let floor = 0;
+  //let floor = 0;
   let max = 0;
   function each(data: any, floor: any) {
     data.forEach((e: any) => {
@@ -118,8 +126,8 @@ function getMaxFloor(treeData: any) {
       if (floor > max) {
         max = floor;
       }
-      if (e.children && e.children.length > 0) {
-        each(e.children, floor + 1);
+      if (e[props.replaceFields.children] && e[props.replaceFields.children].length > 0) {
+        each(e[props.replaceFields.children], floor + 1);
       }
     });
   }
@@ -132,16 +140,16 @@ function findData(orginData: any, level: number) {
     const element = orginData[i];
     if (level === 1) {
       data.push({
-        value: element.value,
-        label: element.label,
+        value: element[props.replaceFields.value],
+        label: element[props.replaceFields.label],
         slot: element.slot || false,
-        children: element.children ?? false,
-        orginData:element
+        children: element[props.replaceFields.children] ?? false,
+        orginData: element
       });
     }
 
-    if (level !== 1 && element.children && element.children.length > 0) {
-      findData(element.children, level - 1);
+    if (level !== 1 && element[props.replaceFields.children] && element[props.replaceFields.children].length > 0) {
+      findData(element[props.replaceFields.children], level - 1);
     }
   }
   return data;

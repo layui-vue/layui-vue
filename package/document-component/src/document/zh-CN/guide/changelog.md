@@ -18,6 +18,7 @@
         <ul>
           <li>[修复] layer 组件 Notify 关闭图标样式问题。 by @SmallWai</li>
           <li>[优化] cascader 组件 优化change回调参数 by @SmallWai</li>
+          <li>[新增] cascader 组件 新增replaceFields属性 用于自义定key by @SmallWai</li>
         </ul>
       </li>
     </ul>
