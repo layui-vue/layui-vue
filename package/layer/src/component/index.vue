@@ -450,6 +450,7 @@ const closeHandle = () => {
 
   //Notify 从队列中移除当前实例
   if (type === 6) {
+    //@ts-ignore
     removeNotifiyFromQueen(props.id);
   }
 };
