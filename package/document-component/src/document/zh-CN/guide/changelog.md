@@ -16,8 +16,9 @@
       <li> 
         <h3>1.2.8 <span class="layui-badge-rim">2022-07-08</span></h3> 
         <ul>         
-          <li>[修复] layer 组件 Notifiy 缺失关闭图标。 by @SmallWai</li> 
+          <li>[修复] layer 组件 notifiy 缺失关闭图标。 by @SmallWai</li> 
           <li>[修复] input 组件 modelValue 设置为 zero 不显示的问题。by @Jmysy</li>
+          <li>[新增] date-picker 组件 placeholder 属性, 设置提示信息。by @Jmysy</li>
           <li>[新增] textarea 组件 allow-clear 属性, 允许清空。by @Jmysy</li>
           <li>[新增] textarea 组件 change 回调函数。by @Jmysy</li>
           <li>[新增] textarea 组件 clear 回调函数。by @Jmysy</li>

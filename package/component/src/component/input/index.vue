@@ -45,13 +45,17 @@ const emit = defineEmits<InputEmits>();
 
 const { t } = useI18n();
 const slots = useSlots();
-const currentValue = ref<string>(String(props.modelValue == null ? '' : props.modelValue));
+const currentValue = ref<string>(
+  String(props.modelValue == null ? "" : props.modelValue)
+);
 const hasContent = computed(() => (props.modelValue as string)?.length > 0);
 
 watch(
   () => props.modelValue,
   () => {
-    currentValue.value = String(props.modelValue == null ? '' : props.modelValue);
+    currentValue.value = String(
+      props.modelValue == null ? "" : props.modelValue
+    );
   }
 );
 
@@ -126,7 +130,7 @@ const classes = computed(() => {
       ></lay-icon>
     </span>
     <span class="layui-input-clear" v-if="allowClear && hasContent">
-      <lay-icon type="layui-icon-close-fill" @click="onClear"></lay-icon>
+      <lay-icon type="layui-icon-close-fill" @click.stop="onClear"></lay-icon>
     </span>
   </div>
 </template>

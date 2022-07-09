@@ -5,6 +5,8 @@
         readonly
         :name="name"
         :model-value="dateValue || modelValue"
+        :placeholder="placeholder"
+        :allow-clear="true"
         prefix-icon="layui-icon-date"
       >
       </lay-input>
@@ -279,13 +281,14 @@ import { getDayLength, getYears, getMonth, getYear } from "./day";
 import { ref, watch, computed, defineProps, defineEmits, onMounted } from "vue";
 
 export interface LayDatePickerProps {
-  modelValue?: string;
   type?: "date" | "datetime" | "year" | "time" | "month" | "yearmonth";
+  placeholder?: string;
+  modelValue?: string;
+  disabled?: boolean;
+  simple?: boolean;
   name?: string;
   max?: string;
   min?: string;
-  disabled?: boolean;
-  simple?: boolean;
 }
 
 const props = withDefaults(defineProps<LayDatePickerProps>(), {
@@ -299,20 +302,7 @@ const dropdownRef = ref(null);
 const $emits = defineEmits(["update:modelValue"]);
 
 const WEEK_NAME = ["日", "一", "二", "三", "四", "五", "六"];
-const MONTH_NAME = [
-  "1月",
-  "2月",
-  "3月",
-  "4月",
-  "5月",
-  "6月",
-  "7月",
-  "8月",
-  "9月",
-  "10月",
-  "11月",
-  "12月",
-];
+const MONTH_NAME = ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"];
 
 const hms = ref({
   hh: dayjs(props.modelValue).hour(),
