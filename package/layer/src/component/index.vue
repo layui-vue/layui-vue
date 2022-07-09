@@ -177,7 +177,6 @@ const firstOpenDelayCalculation = function () {
       area.value = calculateDrawerArea(props.offset, props.area);
     }
     if (type == 5) {
-      // @ts-ignore
       area.value = await calculatePhotosArea(
         props.imgList[props.startIndex].src,
         props
@@ -395,13 +394,14 @@ const boxClasses = computed(() => {
 const supportMove = function () {
   if (props.move && type != 4) {
     nextTick(() => {
-      // @ts-ignore 拖拽
-      useMove(layero.value, (left, top) => {
+      // 拖拽
+      if (!layero.value) return;
+      useMove(layero.value, (left: string, top: string) => {
         l.value = left;
         t.value = top;
       });
-      // @ts-ignore 拉伸
-      useResize(layero.value, (width, height) => {
+      // 拉伸
+      useResize(layero.value, (width: string, height: string) => {
         h.value = height;
         w.value = width;
       });
@@ -450,6 +450,7 @@ const closeHandle = () => {
 
   //Notify 从队列中移除当前实例
   if (type === 6) {
+    //@ts-ignore
     removeNotifiyFromQueen(props.id);
   }
 };
@@ -524,7 +525,7 @@ const leaveActiveClass = computed(() => {
 });
 
 /**
- * 打卡弹层
+ * 打开弹层
  * <p>
  */
 const open = () => {
@@ -576,7 +577,6 @@ const showTitle = computed(() => {
  */
 const resetCalculationPohtosArea = function (index: number) {
   nextTick(async () => {
-    // @ts-ignore
     area.value = await calculatePhotosArea(props.imgList[index].src, props);
     offset.value = calculateOffset(props.offset, area.value, props.type);
     w.value = area.value[0];

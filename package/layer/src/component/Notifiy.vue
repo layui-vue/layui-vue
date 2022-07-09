@@ -17,7 +17,7 @@ export default {
 };
 </script>
 <script lang="ts" setup>
-import { nextTick, onMounted, ref } from "vue";
+import { nextTick, onMounted, ref, shallowRef } from "vue";
 import CloseBtnVue from "./CloseBtn.vue";
 
 export interface LayNotifyProps {
@@ -35,7 +35,7 @@ const emit = defineEmits(["close"]);
 const close = () => {
   emit("close");
 };
-function addClass(obj: { className: any }, cls: string) {
+function addClass(obj: HTMLElement, cls: string) {
   //获取 class 内容.
   let obj_class = obj.className,
     //判断获取到的 class 是否为空, 如果不为空在前面加个'空格'.
@@ -44,19 +44,17 @@ function addClass(obj: { className: any }, cls: string) {
   obj.className = added; //替换原来的 class.
 }
 
-const notifyRef = ref<HTMLElement | null>(null);
+const notifyRef = shallowRef<HTMLElement | null>(null);
 onMounted(() => {
   nextTick(() => {
-    if (notifyRef.value) {
-      setTimeout(() => {
-        //此处延迟加载class，以免影响弹出效果
-        // @ts-ignore
-        addClass(
-          notifyRef.value.parentElement?.parentElement,
-          "layui-layer-notify"
-        );
-      }, 300);
-    }
+    setTimeout(() => {
+      //此处延迟加载class，以免影响弹出效果
+      if (!notifyRef.value?.parentElement?.parentElement) return;
+      addClass(
+        notifyRef.value?.parentElement?.parentElement,
+        "layui-layer-notify"
+      );
+    }, 300);
   });
 });
 </script>

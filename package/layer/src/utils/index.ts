@@ -264,7 +264,10 @@ export function getDrawerAnimationClass(offset: any, isClose: boolean = false) {
 }
 
 //计算图片大小 并缩放
-export async function calculatePhotosArea(url: string, options: object) {
+export async function calculatePhotosArea(
+  url: string,
+  options: object
+): Promise<Array<string>> {
   let img = new Image();
   img.src = url;
   return new Promise((resolve, reject) => {
@@ -311,10 +314,8 @@ export function calculateNotifOffset(offset: any, area: any, layerId: string) {
   // 间隙
   let transOffsetLeft = 15;
   let transOffsetTop = 15;
-  // @ts-ignore
-  window.NotifiyQueen = window.NotifiyQueen || [];
-  // @ts-ignore
-  let notifiyQueen = window.NotifiyQueen;
+  (window as any).NotifiyQueen = (window as any).NotifiyQueen || [];
+  let notifiyQueen = (window as any).NotifiyQueen;
   if (typeof offset != "string" || arr.indexOf(offset) === -1) {
     offset = "rt";
   }
@@ -366,19 +367,14 @@ export function calculateNotifOffset(offset: any, area: any, layerId: string) {
 }
 
 //移除Notify队列中某项，并且重新计算其他Notify位置
-export function removeNotifiyFromQueen(layerId: string | undefined) {
+export function removeNotifiyFromQueen(layerId: string) {
   // 间隙
   let transOffsetTop = 15;
-  // @ts-ignore 删除项的高度
-  let offsetHeight =
-    // @ts-ignore
-    // @ts-ignore
-    document.getElementById(layerId)?.firstElementChild?.firstElementChild
-      ?.offsetHeight;
-  // @ts-ignore
-  window.NotifiyQueen = window.NotifiyQueen || [];
-  // @ts-ignore
-  let notifiyQueen = window.NotifiyQueen;
+  // 删除项的高度
+  let notifiyDom = document.getElementById(layerId)?.firstElementChild?.firstElementChild as HTMLElement;
+  let offsetHeight = notifiyDom.offsetHeight;
+  (window as any).NotifiyQueen = (window as any).NotifiyQueen || [];
+  let notifiyQueen = (window as any).NotifiyQueen;
   let index = notifiyQueen.findIndex((e: { id: string }) => e.id === layerId);
   let offsetType = notifiyQueen[index].offset;
   let list = notifiyQueen.filter((e: { offset: any }) => {
@@ -390,22 +386,11 @@ export function removeNotifiyFromQueen(layerId: string | undefined) {
   // //得到需要修改的定位的Notifiy集合
   let needCalculatelist = list.slice(findIndex + 1);
   needCalculatelist.forEach((e: { id: string }) => {
-    let dom = document.getElementById(e.id)?.firstElementChild
-      ?.firstElementChild;
+    let dom = document.getElementById(e.id)?.firstElementChild?.firstElementChild as HTMLElement;
     if (offsetType === "rt" || offsetType === "lt") {
-      // @ts-ignore
-      dom.style["top"] =
-        // @ts-ignore
-        parseFloat(dom.style["top"]) - transOffsetTop - offsetHeight + "px";
+      dom.style["top"] = parseFloat(dom.style["top"]) - transOffsetTop - offsetHeight + "px";
     } else {
-      // @ts-ignore
-      let bottom =
-        // @ts-ignore
-        parseFloat(dom.style["top"].split(" - ")[1]) -
-        transOffsetTop -
-        offsetHeight;
-      // @ts-ignore
-      dom.style["top"] = "calc(100vh - " + bottom + "px)";
+      let bottom = parseFloat(dom.style["top"].split(" - ")[1]) - transOffsetTop - offsetHeight; dom.style["top"] = "calc(100vh - " + bottom + "px)";
     }
   });
   notifiyQueen.splice(index, 1); //删除
