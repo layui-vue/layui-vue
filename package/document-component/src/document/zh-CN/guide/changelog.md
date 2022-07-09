@@ -23,6 +23,7 @@
           <li>[新增] textarea 组件 change 回调函数。by @Jmysy</li>
           <li>[新增] textarea 组件 clear 回调函数。by @Jmysy</li>
           <li>[新增] cascader 组件 replaceFields属性 用于自义定字段。by @SmallWai</li>
+          <li>[新增] cascader 组件 allow-clear属性 用于清空默认slot中的值。by @SmallWai</li>
           <li>[优化] cascader 组件 change 回调函数。 by @SmallWai</li>
           <li>[删除] input 组件 value 属性, 与 v-model 属性冲突。by @Jmysy</li>
         </ul>

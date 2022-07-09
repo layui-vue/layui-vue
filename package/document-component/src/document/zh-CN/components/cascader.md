@@ -13,7 +13,7 @@
 ::: demo 使用 `lay-cascader` 标签创建级联选择器
 
 <template>
-  <lay-cascader :options="options" v-model="value" placeholder="点我试一试" style="width:250px">
+  <lay-cascader :options="options" v-model="value" placeholder="点我试一试" allow-clear style="width:250px">
   </lay-cascader>
   <span style="margin-left:20px">输出的值：{{value}}</span>
 </template>
@@ -297,7 +297,7 @@ const options = [
 :::
 ::: demo 使用 `decollator` 属性 自定义分割符号
 <template>
-  <lay-cascader :options="options" v-model="value1" decollator="-" placeholder="我可以自定义分割符号" style="width:250px"></lay-cascader>
+  <lay-cascader :options="options" v-model="value1" decollator="-" placeholder="我可以自定义分割符号" allow-clear style="width:250px"></lay-cascader>
   <span style="margin-left:20px">输出的值：{{value1}}</span>
 </template>
 
@@ -311,7 +311,7 @@ const value1=ref(null)
 :::
 ::: demo 使用 `onlyLastLevel` 属性 可以仅在回显的displayValue显示选中项最后一级的标签，而不是完整路径, 注意绑定的v-model仍然是完整的。
 <template>
-  <lay-cascader :options="options" v-model="valueLv" :onlyLastLevel="true" placeholder="仅显示最后一级" style="width:250px"></lay-cascader>
+  <lay-cascader :options="options" v-model="valueLv" :onlyLastLevel="true" allow-clear placeholder="仅显示最后一级" style="width:250px"></lay-cascader>
   <span style="margin-left:20px">输出的值：{{valueLv}}</span>
 </template>
 
@@ -698,6 +698,7 @@ const options3=[
 | options                  | 选项参数 格式请见上面的demo  |
 | onlyLastLevel            | 回显display仅显示最后一级，默认为 `false`  |
 | replaceFields            | 自定义数据key名,可配置项为`label`,`value`,`children`,用法详见上面案例  |
+| allow-clear              | 默认slot提供清空功能，与lay-input保持一致|
 :::
 
 ::: title Cascader 事件
