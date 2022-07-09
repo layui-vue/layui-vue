@@ -264,7 +264,10 @@ export function getDrawerAnimationClass(offset: any, isClose: boolean = false) {
 }
 
 //计算图片大小 并缩放
-export async function calculatePhotosArea(url: string, options: object) {
+export async function calculatePhotosArea(
+  url: string,
+  options: object
+): Promise<Array<string>> {
   let img = new Image();
   img.src = url;
   return new Promise((resolve, reject) => {
