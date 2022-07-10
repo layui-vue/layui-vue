@@ -6,7 +6,6 @@
         :name="name"
         :model-value="dateValue || modelValue"
         :placeholder="placeholder"
-        :allow-clear="true"
         prefix-icon="layui-icon-date"
       >
       </lay-input>
