@@ -371,7 +371,8 @@ export function removeNotifiyFromQueen(layerId: string) {
   // 间隙
   let transOffsetTop = 15;
   // 删除项的高度
-  let notifiyDom = document.getElementById(layerId)?.firstElementChild?.firstElementChild as HTMLElement;
+  let notifiyDom = document.getElementById(layerId)?.firstElementChild
+    ?.firstElementChild as HTMLElement;
   let offsetHeight = notifiyDom.offsetHeight;
   (window as any).NotifiyQueen = (window as any).NotifiyQueen || [];
   let notifiyQueen = (window as any).NotifiyQueen;
@@ -386,11 +387,17 @@ export function removeNotifiyFromQueen(layerId: string) {
   // //得到需要修改的定位的Notifiy集合
   let needCalculatelist = list.slice(findIndex + 1);
   needCalculatelist.forEach((e: { id: string }) => {
-    let dom = document.getElementById(e.id)?.firstElementChild?.firstElementChild as HTMLElement;
+    let dom = document.getElementById(e.id)?.firstElementChild
+      ?.firstElementChild as HTMLElement;
     if (offsetType === "rt" || offsetType === "lt") {
-      dom.style["top"] = parseFloat(dom.style["top"]) - transOffsetTop - offsetHeight + "px";
+      dom.style["top"] =
+        parseFloat(dom.style["top"]) - transOffsetTop - offsetHeight + "px";
     } else {
-      let bottom = parseFloat(dom.style["top"].split(" - ")[1]) - transOffsetTop - offsetHeight; dom.style["top"] = "calc(100vh - " + bottom + "px)";
+      let bottom =
+        parseFloat(dom.style["top"].split(" - ")[1]) -
+        transOffsetTop -
+        offsetHeight;
+      dom.style["top"] = "calc(100vh - " + bottom + "px)";
     }
   });
   notifiyQueen.splice(index, 1); //删除

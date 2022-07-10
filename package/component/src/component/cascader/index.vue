@@ -1,24 +1,51 @@
 <template>
-  <lay-dropdown class="layui-cascader" ref="dropdownRef" :autoFitMinWidth="false" :updateAtScroll="true"
-    :disabled="dropDownDisabled">
-    <lay-input v-model="displayValue" readonly suffix-icon="layui-icon-down" :placeholder="placeholder"
-      v-if="!slots.default" :allow-clear="allowClear" @clear="onClear"></lay-input>
+  <lay-dropdown
+    class="layui-cascader"
+    ref="dropdownRef"
+    :autoFitMinWidth="false"
+    :updateAtScroll="true"
+    :disabled="dropDownDisabled"
+  >
+    <lay-input
+      v-model="displayValue"
+      readonly
+      suffix-icon="layui-icon-down"
+      :placeholder="placeholder"
+      v-if="!slots.default"
+      :allow-clear="allowClear"
+      @clear="onClear"
+    ></lay-input>
     <slot v-else></slot>
 
     <template #content>
       <div class="layui-cascader-panel">
         <template v-for="(itemCol, index) in treeData">
-          <lay-scroll height="180px" class="layui-cascader-menu" :key="'cascader-menu' + index"
-            v-if="itemCol.data.length">
-            <div class="layui-cascader-menu-item" v-for="(item, i) in itemCol.data" :key="index + i"
-              @click="selectBar(item, i, index)" :class="[
+          <lay-scroll
+            height="180px"
+            class="layui-cascader-menu"
+            :key="'cascader-menu' + index"
+            v-if="itemCol.data.length"
+          >
+            <div
+              class="layui-cascader-menu-item"
+              v-for="(item, i) in itemCol.data"
+              :key="index + i"
+              @click="selectBar(item, i, index)"
+              :class="[
                 {
                   'layui-cascader-selected': itemCol.selectIndex === i,
                 },
-              ]">
-              <slot :name="item.slot" v-if="item.slot && slots[item.slot]"></slot>
+              ]"
+            >
+              <slot
+                :name="item.slot"
+                v-if="item.slot && slots[item.slot]"
+              ></slot>
               <template v-else>{{ item.label }}</template>
-              <i class="layui-icon layui-icon-right" v-if="item.children && item.children.length"></i>
+              <i
+                class="layui-icon layui-icon-right"
+                v-if="item.children && item.children.length"
+              ></i>
             </div>
           </lay-scroll>
         </template>
@@ -46,7 +73,7 @@ export interface LayCascaderProps {
   placeholder?: string;
   onlyLastLevel?: boolean;
   replaceFields?: { label: string; value: string; children: string };
-  allowClear?: boolean
+  allowClear?: boolean;
 }
 const props = withDefaults(defineProps<LayCascaderProps>(), {
   options: null,
@@ -230,7 +257,7 @@ const dropDownDisabled = ref(false);
 
 //清除事件
 const onClear = () => {
-  dropDownDisabled.value=true;
+  dropDownDisabled.value = true;
   let arr = JSON.parse(JSON.stringify(treeData.value));
   for (let index = 0; index < arr.length; index++) {
     arr[index].selectIndex = null;
@@ -242,7 +269,7 @@ const onClear = () => {
   treeData.value = arr;
   emit("update:modelValue", null);
   setTimeout(() => {
-    dropDownDisabled.value=false;
+    dropDownDisabled.value = false;
   }, 0);
-}
+};
 </script>
