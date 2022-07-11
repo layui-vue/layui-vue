@@ -353,6 +353,7 @@ onMounted(() => {
 
 // 计算结果日期
 const dateValue = computed<string>(() => {
+  currentDay.value = new Date(props.modelValue).getTime();
   if (currentDay.value === -1) {
     $emits("update:modelValue", "");
     return "";
