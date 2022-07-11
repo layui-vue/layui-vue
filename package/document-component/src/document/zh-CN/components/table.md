@@ -678,6 +678,7 @@ export default {
         width:"200px",
         key:"username"
       },{
+        fixed:"left",
         title:"密码",
         width: "300px",
         key:"password"

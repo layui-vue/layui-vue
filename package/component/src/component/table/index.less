@@ -403,7 +403,6 @@
 .layui-table-fixed-left {
   left: 0;
   z-index: 2;
-  display: block;
   background: white;
   position: sticky!important;
 }
@@ -411,12 +410,20 @@
 .layui-table-fixed-right {
   right: 0;
   z-index: 2;
-  display: block;
   background: white;
   position: sticky!important;
   border-left: 1px solid #eee!important;
   border-right: none!important;
 }
+
+.layui-table-fixed-left,
+.layui-table-fixed-right {
+  outline-width: 1px;
+  outline-style: solid;
+  outline-color: #eee;
+  border: none!important;
+}
+
 
 .layui-table-view .layui-table tr th:last-child,
 .layui-table-view .layui-table tr td:last-child {
