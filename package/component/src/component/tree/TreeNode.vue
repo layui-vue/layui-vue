@@ -7,7 +7,7 @@ export default {
 <script setup lang="ts">
 import { LayIcon } from "@layui/icons-vue";
 import LayCheckbox from "../checkbox/index.vue";
-import { Ref, useSlots } from "vue";
+import { computed, Ref, useSlots } from "vue";
 import { Tree } from "./tree";
 import { Nullable } from "../../types";
 import LayTransition from "../transition/index.vue";
@@ -19,9 +19,9 @@ export interface TreeData {
   children: TreeData[];
   parentKey: Nullable<StringOrNumber>;
   isRoot: boolean;
-  isChecked: Ref<boolean>;
-  isDisabled: Ref<boolean>;
-  isLeaf: Ref<boolean>;
+  isChecked: boolean;
+  isDisabled: boolean;
+  isLeaf: boolean;
   hasNextSibling: boolean;
   parentNode: Nullable<TreeData>;
 }
@@ -65,7 +65,7 @@ const nodeIconType = (node: TreeData): string => {
     return "";
   }
   if (node.children.length !== 0) {
-    return !node.isLeaf.value
+    return !node.isLeaf
       ? "layui-icon-addition"
       : "layui-icon-subtraction";
   }
@@ -81,7 +81,7 @@ function handleChange(checked: boolean, node: TreeData) {
 }
 
 function handleIconClick(node: TreeData) {
-  node.isLeaf.value = !node.isLeaf.value;
+  node.isLeaf = !node.isLeaf;
 }
 
 function handleTitleClick(node: TreeData) {
@@ -90,6 +90,39 @@ function handleTitleClick(node: TreeData) {
   }
   emit("node-click", node);
 }
+function handleRowClick(node:TreeData){
+  if(!props.showLine){
+    handleTitleClick(node);
+  }
+}
+
+//判断是否半选
+const isChildAllSelected=computed(()=>{
+  function _isChildAllSelected(node:TreeData):boolean{
+    if(!props.showCheckbox){
+      return false;
+    }
+    let childSelectNum=0;
+    let res=false;// true为半选 false为全选
+    for (const item of node.children) {
+      if(item.isChecked) childSelectNum++;
+    }
+    if(childSelectNum>0) node.isChecked=true;//此处的处理与 checkedKeys 有关联
+    if(childSelectNum==node.children.length){//继续递归向下判断
+      for (const item of node.children) {
+        res=_isChildAllSelected(item)
+        if(res) break;
+      }
+    }else{
+      res=true;
+    }
+    return res;
+  }
+  return function(node:TreeData):boolean{
+    let res=_isChildAllSelected(node)
+    return res;
+  }
+})
 </script>
 
 <template>
@@ -102,7 +135,7 @@ function handleTitleClick(node: TreeData) {
       'layui-tree-setHide': node.isRoot,
     }"
   >
-    <div class="layui-tree-entry">
+    <div class="layui-tree-entry" @click="handleRowClick(node)">
       <div class="layui-tree-main">
         <span
           :class="[
@@ -110,12 +143,12 @@ function handleTitleClick(node: TreeData) {
             { 'layui-tree-iconClick': true },
           ]"
         >
-          <lay-icon :type="nodeIconType(node)" @click="handleIconClick(node)" />
+          <lay-icon :type="nodeIconType(node)" @click.stop="handleIconClick(node)" />
         </span>
         <lay-checkbox
           v-if="showCheckbox"
-          :modelValue="node.isChecked.value"
-          :disabled="node.isDisabled.value"
+          :modelValue="node.isChecked"
+          :disabled="node.isDisabled"
           skin="primary"
           label=""
           @change="
@@ -123,13 +156,14 @@ function handleTitleClick(node: TreeData) {
               handleChange(checked, node);
             }
           "
+          :isIndeterminate='isChildAllSelected(node)'
         />
         <span
           :class="{
             'layui-tree-txt': true,
-            'layui-disabled': node.isDisabled.value,
+            'layui-disabled': node.isDisabled,
           }"
-          @click="handleTitleClick(node)"
+          @click.stop="handleTitleClick(node)"
         >
           <template v-if="slots.title">
             <slot name="title" :data="node"></slot>
@@ -142,7 +176,7 @@ function handleTitleClick(node: TreeData) {
     </div>
     <lay-transition :enable="collapseTransition">
       <div
-        v-if="node.isLeaf.value"
+        v-if="node.isLeaf"
         class="layui-tree-pack layui-tree-showLine"
         style="display: block"
       >

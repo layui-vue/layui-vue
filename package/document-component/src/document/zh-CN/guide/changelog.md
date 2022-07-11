@@ -11,7 +11,20 @@
 <template>
 <lay-timeline>
   <lay-timeline-item title="1.2.x">
-      <ul> 
+    <ul> 
+      <a name="1-2-9"></a> 
+      <li> 
+        <h3>1.2.9 <span class="layui-badge-rim">2022-07-12</span></h3> 
+        <ul>         
+          <li>[优化] tree 组件 支持更改data数据后刷新视图。 by @SmallWai</li> 
+          <li>[优化] tree 组件 checkedKeys支持下级节点 by @SmallWai</li> 
+          <li>[优化] tree 组件 关闭连线后启用行内点击 by @SmallWai</li> 
+          <li>[优化] tree 组件 默认启用过渡动画 by @SmallWai</li> 
+          <li>[新增] tree 组件 加入半选状态 by @SmallWai</li> 
+        </ul>
+      </li>
+    </ul>   
+    <ul> 
       <a name="1-2-8"></a> 
       <li> 
         <h3>1.2.8 <span class="layui-badge-rim">2022-07-08</span></h3> 

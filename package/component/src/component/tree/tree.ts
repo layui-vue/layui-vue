@@ -11,9 +11,9 @@ export interface TreeData {
   children: TreeData[];
   parentKey: Nullable<StringOrNumber>;
   isRoot: boolean;
-  isChecked: Ref<boolean>;
-  isDisabled: Ref<boolean>;
-  isLeaf: Ref<boolean>;
+  isChecked: boolean;
+  isDisabled: boolean;
+  isLeaf: boolean;
   hasNextSibling: boolean;
   parentNode: Nullable<TreeData>;
 }
@@ -106,21 +106,23 @@ class Tree {
       children: nodeChildren ? nodeChildren : [],
       parentKey: parentKey,
       isRoot: parentKey === "",
-      isDisabled: ref(false),
-      isChecked: ref(false),
-      isLeaf: ref(false),
+      isDisabled:false,
+      isChecked: false,
+      isLeaf: false,
       hasNextSibling: hasNextSibling,
       parentNode: parentNode || null,
     });
 
-    node.isDisabled.value = nodeDisabled;
-    node.isChecked.value = parentNode
-      ? parentNode.isChecked.value
-      : checkedKeys.includes(nodeKey);
-    node.isLeaf.value = parentNode
-      ? parentNode.isLeaf.value
+    node.isDisabled = nodeDisabled;
+    if(parentNode && parentNode.isChecked){
+      node.isChecked=true;
+    }else{
+      node.isChecked=checkedKeys.includes(nodeKey);
+    }
+    node.isLeaf = parentNode
+      ? parentNode.isLeaf
       : expandKeys.includes(nodeKey);
-    node.isLeaf.value = nodeIsLeaf;
+    node.isLeaf = nodeIsLeaf;
 
     if (!nodeMap.has(nodeKey)) {
       nodeMap.set(nodeKey, node);
@@ -134,7 +136,7 @@ class Tree {
   setChildrenChecked(checked: boolean, nodes: TreeData[]) {
     const len = nodes.length;
     for (let i = 0; i < len; i++) {
-      nodes[i].isChecked.value = checked;
+      nodes[i].isChecked = checked;
       nodes[i].children &&
         nodes[i].children.length > 0 &&
         this.setChildrenChecked(checked, nodes[i].children);
@@ -145,11 +147,11 @@ class Tree {
     if (!parent) {
       return;
     }
-    parent.isChecked.value = checked;
+    parent.isChecked = checked;
     const pChild = parent.children;
-    const pChildChecked = pChild.some((c) => c.isChecked.value);
+    const pChildChecked = pChild.some((c) => c.isChecked);
     if (pChildChecked) {
-      parent.isChecked.value = true;
+      parent.isChecked = true;
     }
     if (parent.parentNode) {
       this.setParentChecked(checked, parent.parentNode);
@@ -157,7 +159,7 @@ class Tree {
   }
 
   setCheckedKeys(checked: boolean, node: TreeData) {
-    node.isChecked.value = checked;
+    node.isChecked = checked;
     // 处理上级
     if (node.parentNode) {
       this.setParentChecked(checked, node.parentNode);
@@ -180,10 +182,10 @@ class Tree {
     while (!next.done) {
       const [, node] = next.value;
       const id = Reflect.get(node, this.config.replaceFields.id);
-      if (node.isChecked.value) {
+      if (node.isChecked) {
         checkedKeys.push(id);
       }
-      if (node.isLeaf.value) {
+      if (node.isLeaf) {
         expandKeys.push(id);
       }
       next = iterator.next();

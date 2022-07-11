@@ -185,7 +185,7 @@ export default {
 ::: title 半选状态
 :::
 
-::: demo 在实现全选效果时，你可能会用到 indeterminate 属性。
+::: demo 在实现全选效果时，你可能会用到 isIndeterminate 属性。
 
 <template>
     <lay-checkbox name="like" skin="primary" label="1" :isIndeterminate="true" v-model="checked8">半选</lay-checkbox>
