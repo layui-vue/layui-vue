@@ -124,22 +124,22 @@ const renderRowClassName = (data: any, index: number) => {
 const childrenIndentSize = props.currentIndentSize + props.indentSize;
 
 const renderFixedStyle = (column: any, columnIndex: number) => {
-  if(column.fixed) {
-    if(column.fixed == 'left') {
+  if (column.fixed) {
+    if (column.fixed == "left") {
       var left = 0;
-      for(var i = 0;i< columnIndex;i ++) {
-        left = left + props.columns[i]?.width.replace("px","");
+      for (var i = 0; i < columnIndex; i++) {
+        left = left + props.columns[i]?.width.replace("px", "");
       }
       return `left:${left}px`;
     } else {
       var right = 0;
-      for(var i = columnIndex + 1;i< props.columns.length;i ++) {
-        right = right +  props.columns[i]?.width.replace("px","");
+      for (var i = columnIndex + 1; i < props.columns.length; i++) {
+        right = right + props.columns[i]?.width.replace("px", "");
       }
       return `right:${right}px`;
     }
   }
-}
+};
 </script>
 
 <template>
@@ -174,7 +174,7 @@ const renderFixedStyle = (column: any, columnIndex: number) => {
                 textAlign: column.align,
                 whiteSpace: column.ellipsisTooltip ? 'nowrap' : 'normal',
               },
-              renderFixedStyle(column,columnIndex),
+              renderFixedStyle(column, columnIndex),
               renderCellStyle(data, column, index, columnIndex),
             ]"
             :class="[
@@ -228,7 +228,7 @@ const renderFixedStyle = (column: any, columnIndex: number) => {
                   textAlign: column.align,
                   whiteSpace: column.ellipsisTooltip ? 'nowrap' : 'normal',
                 },
-                renderFixedStyle(column,columnIndex),
+                renderFixedStyle(column, columnIndex),
                 renderCellStyle(data, column, index, columnIndex),
               ]"
               :class="[

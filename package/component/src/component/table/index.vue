@@ -251,22 +251,22 @@ props.dataSource.map((value: any) => {
 });
 
 const renderFixedStyle = (column: any, columnIndex: number) => {
-  if(column.fixed) {
-    if(column.fixed == 'left') {
+  if (column.fixed) {
+    if (column.fixed == "left") {
       var left = 0;
-      for(var i = 0;i< columnIndex;i ++) {
-        left = left +  props.columns[i]?.width.replace("px","");
+      for (var i = 0; i < columnIndex; i++) {
+        left = left + props.columns[i]?.width.replace("px", "");
       }
       return `left:${left}px`;
     } else {
       var right = 0;
-      for(var i = columnIndex + 1;i< props.columns.length;i ++) {
-        right = right +  props.columns[i]?.width.replace("px","");
+      for (var i = columnIndex + 1; i < props.columns.length; i++) {
+        right = right + props.columns[i]?.width.replace("px", "");
       }
       return `right:${right}px`;
     }
   }
-}
+};
 </script>
 
 <template>
@@ -344,16 +344,22 @@ const renderFixedStyle = (column: any, columnIndex: number) => {
                     />
                   </div>
                 </th>
-                <template v-for="(column, columnIndex) in columns" :key="column">
+                <template
+                  v-for="(column, columnIndex) in columns"
+                  :key="column"
+                >
                   <th
                     v-if="tableColumnKeys.includes(column.key)"
                     class="layui-table-cell"
                     :class="[
                       column.fixed ? `layui-table-fixed-${column.fixed}` : '',
                     ]"
-                    :style="[{
-                      textAlign: column.align,
-                    },renderFixedStyle(column,columnIndex)]"
+                    :style="[
+                      {
+                        textAlign: column.align,
+                      },
+                      renderFixedStyle(column, columnIndex),
+                    ]"
                   >
                     <span>
                       <template v-if="column.titleSlot">
