@@ -106,7 +106,7 @@ class Tree {
       children: nodeChildren ? nodeChildren : [],
       parentKey: parentKey,
       isRoot: parentKey === "",
-      isDisabled:false,
+      isDisabled: false,
       isChecked: false,
       isLeaf: false,
       hasNextSibling: hasNextSibling,
@@ -114,14 +114,12 @@ class Tree {
     });
 
     node.isDisabled = nodeDisabled;
-    if(parentNode && parentNode.isChecked){
-      node.isChecked=true;
-    }else{
-      node.isChecked=checkedKeys.includes(nodeKey);
+    if (parentNode && parentNode.isChecked) {
+      node.isChecked = true;
+    } else {
+      node.isChecked = checkedKeys.includes(nodeKey);
     }
-    node.isLeaf = parentNode
-      ? parentNode.isLeaf
-      : expandKeys.includes(nodeKey);
+    node.isLeaf = parentNode ? parentNode.isLeaf : expandKeys.includes(nodeKey);
     node.isLeaf = nodeIsLeaf;
 
     if (!nodeMap.has(nodeKey)) {

@@ -4,10 +4,10 @@
   </transition>
 </template>
 <script setup lang="ts">
-import { inject,ref } from 'vue';
+import { inject, ref } from "vue";
 
-const time=inject('time')
-const transition=ref(`opacity ${time}s ease`);
+const time = inject("time");
+const transition = ref(`opacity ${time}s ease`);
 </script>
 <style>
 .fade-enter-from,

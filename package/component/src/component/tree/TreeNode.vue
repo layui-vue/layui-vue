@@ -65,9 +65,7 @@ const nodeIconType = (node: TreeData): string => {
     return "";
   }
   if (node.children.length !== 0) {
-    return !node.isLeaf
-      ? "layui-icon-addition"
-      : "layui-icon-subtraction";
+    return !node.isLeaf ? "layui-icon-addition" : "layui-icon-subtraction";
   }
   return "layui-icon-file";
 };
@@ -90,39 +88,40 @@ function handleTitleClick(node: TreeData) {
   }
   emit("node-click", node);
 }
-function handleRowClick(node:TreeData){
-  if(!props.showLine){
+function handleRowClick(node: TreeData) {
+  if (!props.showLine) {
     handleTitleClick(node);
   }
 }
 
 //判断是否半选
-const isChildAllSelected=computed(()=>{
-  function _isChildAllSelected(node:TreeData):boolean{
-    if(!props.showCheckbox){
+const isChildAllSelected = computed(() => {
+  function _isChildAllSelected(node: TreeData): boolean {
+    if (!props.showCheckbox) {
       return false;
     }
-    let childSelectNum=0;
-    let res=false;// true为半选 false为全选
+    let childSelectNum = 0;
+    let res = false; // true为半选 false为全选
     for (const item of node.children) {
-      if(item.isChecked) childSelectNum++;
+      if (item.isChecked) childSelectNum++;
     }
-    if(childSelectNum>0) node.isChecked=true;//此处的处理与 checkedKeys 有关联
-    if(childSelectNum==node.children.length){//继续递归向下判断
+    if (childSelectNum > 0) node.isChecked = true; //此处的处理与 checkedKeys 有关联
+    if (childSelectNum == node.children.length) {
+      //继续递归向下判断
       for (const item of node.children) {
-        res=_isChildAllSelected(item)
-        if(res) break;
+        res = _isChildAllSelected(item);
+        if (res) break;
       }
-    }else{
-      res=true;
+    } else {
+      res = true;
     }
     return res;
   }
-  return function(node:TreeData):boolean{
-    let res=_isChildAllSelected(node)
+  return function (node: TreeData): boolean {
+    let res = _isChildAllSelected(node);
     return res;
-  }
-})
+  };
+});
 </script>
 
 <template>
@@ -143,7 +142,10 @@ const isChildAllSelected=computed(()=>{
             { 'layui-tree-iconClick': true },
           ]"
         >
-          <lay-icon :type="nodeIconType(node)" @click.stop="handleIconClick(node)" />
+          <lay-icon
+            :type="nodeIconType(node)"
+            @click.stop="handleIconClick(node)"
+          />
         </span>
         <lay-checkbox
           v-if="showCheckbox"
@@ -156,7 +158,7 @@ const isChildAllSelected=computed(()=>{
               handleChange(checked, node);
             }
           "
-          :isIndeterminate='isChildAllSelected(node)'
+          :isIndeterminate="isChildAllSelected(node)"
         />
         <span
           :class="{

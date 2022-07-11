@@ -18,9 +18,9 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { inject } from 'vue';
+import { inject } from "vue";
 
-const time=inject('time')
+const time = inject("time");
 const elTransition = `${time}s height ease-in-out, ${time}s padding-top ease-in-out, ${time}s padding-bottom ease-in-out`;
 
 const beforeEnter = (el: any) => {

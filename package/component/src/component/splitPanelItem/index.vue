@@ -14,12 +14,11 @@ import {
   onBeforeUnmount,
   reactive,
   withDefaults,
-  watch,
 } from "vue";
 
 import type { ComputedRef } from "vue";
 
-export interface LayStepItemProps {
+interface LayStepItemProps {
   space?: number;
 }
 
@@ -34,17 +33,40 @@ const setIndex = (val: number) => {
   index.value = val;
 };
 
-const mousedown = (event: any) => {
-  moveStatus.value = true;
-  parents.moveChange(event, true);
-};
-
 const mouseup = (event: any) => {
   moveStatus.value = false;
 };
 
 const stepsCount = computed(() => {
   return parents.steps.value.length;
+});
+
+const initSpace = (parentSpace: any, key: string) => {
+  const childList = Array.from(parentElement.value.children);
+  childList.forEach((item: any, index: number) => {
+    if (index === 0 || index % 2 === 0) {
+      item.style.flexBasis = (item[key] / parentSpace) * 100 + "%";
+      item.style.flexGrow = 0;
+    }
+  });
+};
+
+const mousedown = (event: any) => {
+  let parentSpace = 0;
+  if (!isVertical.value) {
+    parentSpace = parentElement.value.offsetWidth;
+    initSpace(parentSpace, "offsetWidth");
+  } else {
+    parentSpace = parentElement.value.offsetHeight;
+    initSpace(parentSpace, "offsetHeight");
+  }
+
+  moveStatus.value = true;
+  parents.moveChange(event, true, isVertical.value);
+};
+
+const parentElement = computed(() => {
+  return parents.target.value;
 });
 
 const isVertical = computed(() => {
@@ -63,9 +85,8 @@ const isStart: ComputedRef<boolean> = computed(() => {
 const stepItemState = reactive({
   itemId: computed(() => currentInstance?.uid),
   setIndex,
-  width: [],
+  space: props.space,
 });
-
 parents.steps.value = [...parents.steps.value, stepItemState];
 
 onMounted(() => {});
@@ -85,16 +106,17 @@ onBeforeUnmount(() => {
     v-on="{ mousedown: mousedown, mouseup: mouseup }"
   ></div>
   <div
+    ref="laySplitPanelItem"
     v-if="isVertical"
     :class="['lay-split-panel-item']"
-    :style="{ height: `${space ? space : (100 + space) / stepsCount}%` }"
+    :style="{ flexBasis: `${space}px`, flexGrow: space ? 0 : 1 }"
   >
     <slot></slot>
   </div>
   <div
     v-else
     :class="['lay-split-panel-item']"
-    :style="{ width: `${space ? space : (100 + space) / stepsCount}%` }"
+    :style="{ flexBasis: `${space}px`, flexGrow: space ? 0 : 1 }"
   >
     <slot></slot>
   </div>

@@ -1,14 +1,15 @@
 <script lang="ts">
 export default {
-  name: "laySplitPanel",
+  name: "LaySplitPanel",
 };
 </script>
 
 <script setup lang="ts">
 import { ref, watch, provide, withDefaults, onMounted } from "vue";
 import "./index.less";
+import { useMousePressed } from "@vueuse/core";
 
-export interface LayStepProps {
+interface LayStepProps {
   vertical?: boolean;
   minSize?: number;
 }
@@ -17,21 +18,20 @@ const props = withDefaults(defineProps<LayStepProps>(), {
   vertical: false,
   minSize: 50,
 });
+const target = ref();
+const { pressed } = useMousePressed({ target: target });
 
 let domEvent = ref();
-let domStatus = ref(false);
-const target = ref();
+let domStatus = ref(pressed);
+let parentVertical = ref();
 
 onMounted(() => {
   const boxWidth = target.value.offsetWidth;
   const boxHeight = target.value.offsetHeight;
-  window.addEventListener("scroll", (event) => {
-    console.log(event);
-  });
   target.value.addEventListener(
     "mousemove",
     (event: { layerX: any; layerY: any }) => {
-      if (domStatus.value) {
+      if (domStatus.value && domEvent.value) {
         const prevDom = domEvent.value.target.previousElementSibling;
         const nextDom = domEvent.value.target.nextElementSibling;
         if (!props.vertical) {
@@ -50,11 +50,11 @@ onMounted(() => {
           ) {
             return false;
           }
-          prevDom.style.width =
+          prevDom.style.flexBasis =
             ((event.layerX - prevDomLeft) / (prevDomWidth + nextDomWidth + 5)) *
               otherWidthPercentage +
             "%";
-          nextDom.style.width =
+          nextDom.style.flexBasis =
             ((boxWidth - (event.layerX - prevDomLeft) - otherWidth) /
               (prevDomWidth + nextDomWidth + 5)) *
               otherWidthPercentage +
@@ -76,12 +76,12 @@ onMounted(() => {
           ) {
             return false;
           }
-          prevDom.style.height =
+          prevDom.style.flexBasis =
             ((event.layerY - prevDomTop) /
               (prevDomHeight + nextDomHeight + 5)) *
               otherHeightPercentage +
             "%";
-          nextDom.style.height =
+          nextDom.style.flexBasis =
             ((boxHeight - (event.layerY - prevDomTop) - otherHeight) /
               (prevDomHeight + nextDomHeight + 5)) *
               otherHeightPercentage +
@@ -92,13 +92,16 @@ onMounted(() => {
   );
 });
 
-const moveChange = (event: any, status: boolean) => {
+const moveChange = (event: any, status: boolean, isVertical: boolean) => {
   domEvent.value = event;
   domStatus.value = status;
+  parentVertical.value = isVertical;
 };
 
 const mouseup = () => {
   domStatus.value = false;
+  domEvent.value = null;
+  parentVertical.value = false;
 };
 
 // 定义初始化个数数组
@@ -116,6 +119,7 @@ watch(steps, () => {
 provide("laySplitPanel", {
   props,
   steps,
+  target,
   moveChange,
 });
 </script>

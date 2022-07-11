@@ -6,7 +6,7 @@ export default {
 
 <script lang="ts" setup>
 import TreeNode from "./TreeNode.vue";
-import { computed, useSlots, watch,ref } from "vue";
+import { computed, useSlots, watch, ref } from "vue";
 import { useTree } from "./useTree";
 import { TreeData } from "./tree";
 import { StringFn, StringOrNumber, KeysType, EditType } from "./tree.type";
@@ -43,7 +43,9 @@ interface TreeEmits {
 }
 
 const props = withDefaults(defineProps<TreeProps>(), {
-  checkedKeys:()=>{ return [] },
+  checkedKeys: () => {
+    return [];
+  },
   showCheckbox: false,
   edit: false,
   collapseTransition: true,
@@ -71,26 +73,26 @@ const className = computed(() => {
   };
 });
 
-let tree=ref();
-let nodeList=ref();
-const loadNodeList=()=>{
-  let { tree:_tree, nodeList:_nodeList }=useTree(props, emit);
-  tree.value=_tree
-  nodeList.value=_nodeList.value
-}
+let tree = ref();
+let nodeList = ref();
+const loadNodeList = () => {
+  let { tree: _tree, nodeList: _nodeList } = useTree(props, emit);
+  tree.value = _tree;
+  nodeList.value = _nodeList.value;
+};
 watch(
   () => props.data,
   () => {
     loadNodeList();
   },
-  { deep: true,immediate:true}
-)
+  { deep: true, immediate: true }
+);
 watch(
   () => props.checkedKeys,
   () => {
-    loadNodeList()
-  },
-)
+    loadNodeList();
+  }
+);
 
 function handleClick(node: TreeData) {
   const originNode = tree.value.getOriginData(node.id);
