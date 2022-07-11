@@ -3,7 +3,12 @@
     <slot></slot>
   </transition>
 </template>
+<script setup lang="ts">
+import { inject,ref } from 'vue';
 
+const time=inject('time')
+const transition=ref(`opacity ${time}s ease`);
+</script>
 <style>
 .fade-enter-from,
 .fade-leave-to {
@@ -15,6 +20,6 @@
 }
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 1s ease;
+  transition: v-bind(transition);
 }
 </style>

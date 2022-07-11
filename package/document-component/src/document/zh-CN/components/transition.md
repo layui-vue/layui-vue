@@ -86,6 +86,7 @@ export default {
 | ------------ | ---------------- | ------------- | ---- | ----   |
 | enable       | 启用               | `boolean`   | `true` | `true` `false`   |
 | type         | 类型               | `string`   |  `collapse` | --   |
+| time         | 过渡时间            | `string`|`boolean`|  `0.3` | --   |
 
 :::
 

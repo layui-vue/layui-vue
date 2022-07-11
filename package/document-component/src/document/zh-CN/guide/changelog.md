@@ -21,6 +21,8 @@
           <li>[优化] tree 组件 关闭连线后启用行内点击 by @SmallWai</li> 
           <li>[优化] tree 组件 默认启用过渡动画 by @SmallWai</li> 
           <li>[新增] tree 组件 加入半选状态 by @SmallWai</li> 
+          <li>[修复] datePicker 组件 更新modelValue视图未更新问题 by @SmallWai</li> 
+          <li>[新增] transition 组件 time属性自定义过渡时长 by @SmallWai</li> 
         </ul>
       </li>
     </ul>   

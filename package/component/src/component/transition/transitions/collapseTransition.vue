@@ -18,8 +18,10 @@ export default {
 </script>
 
 <script setup lang="ts">
-const elTransition =
-  "0.3s height ease-in-out, 0.3s padding-top ease-in-out, 0.3s padding-bottom ease-in-out";
+import { inject } from 'vue';
+
+const time=inject('time')
+const elTransition = `${time}s height ease-in-out, ${time}s padding-top ease-in-out, ${time}s padding-bottom ease-in-out`;
 
 const beforeEnter = (el: any) => {
   el.style.transition = elTransition;
