@@ -28,7 +28,7 @@
 .layui-table thead tr,
 .layui-table tbody tr:hover td,
 .layui-table.layui-table-even tr:nth-child(even) td {
-  background-color: var(--global-neutral-color-1)!important;
+  background-color: var(--global-neutral-color-1) !important;
 }
 
 .layui-table td,
@@ -106,7 +106,6 @@
 .layui-table-box {
   position: relative;
   overflow: hidden;
-
 }
 
 .layui-table-view .layui-table {
@@ -242,7 +241,7 @@
   text-overflow: ellipsis;
 }
 
-.layui-table-call-ellipsis{
+.layui-table-call-ellipsis {
   width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -397,23 +396,23 @@
 }
 
 .layui-table-header .layui-table-cell {
-  background-color: #FAFAFA;
+  background-color: #fafafa;
 }
 
 .layui-table-fixed-left {
   left: 0;
   z-index: 2;
   background: white;
-  position: sticky!important;
+  position: sticky !important;
 }
 
 .layui-table-fixed-right {
   right: 0;
   z-index: 2;
   background: white;
-  position: sticky!important;
-  border-left: 1px solid #eee!important;
-  border-right: none!important;
+  position: sticky !important;
+  border-left: 1px solid #eee !important;
+  border-right: none !important;
 }
 
 .layui-table-fixed-left,
@@ -421,13 +420,40 @@
   outline-width: 1px;
   outline-style: solid;
   outline-color: #eee;
-  border: none!important;
+  border: none !important;
 }
 
+.layui-table-fixed-left-last::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: -1px;
+  width: 30px;
+  transform: translate(100%);
+  transition: box-shadow 0.3s;
+}
+
+.layui-table-fixed-left-last::after {
+  box-shadow: inset 10px 0 8px -8px #00000026;
+}
+
+.layui-table-fixed-right-first::after {
+  position: absolute;
+  top: 0;
+  bottom: -1px;
+  left: 0;
+  width: 30px;
+  transform: translate(-100%);
+  transition: box-shadow 0.3s;
+}
+
+.layui-table-fixed-right-first::after {
+  box-shadow: inset -10px 0 8px -8px #00000026;
+}
 
 .layui-table-view .layui-table tr th:last-child,
 .layui-table-view .layui-table tr td:last-child {
-  border-right: none!important;
+  border-right: none !important;
 }
 
 .layui-table-mend {
@@ -643,6 +669,6 @@ body .layui-table-tips .layui-layer-content {
   margin: 10px 0;
 }
 
-.layui-table-cell-expand{
+.layui-table-cell-expand {
   border-bottom: 1px solid #eee;
 }

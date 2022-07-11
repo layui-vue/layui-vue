@@ -255,18 +255,44 @@ const renderFixedStyle = (column: any, columnIndex: number) => {
     if (column.fixed == "left") {
       var left = 0;
       for (var i = 0; i < columnIndex; i++) {
-        left = left + props.columns[i]?.width.replace("px", "");
+        if(props.columns[i].fixed && props.columns[i].fixed == "left") {
+          left = left + props.columns[i]?.width.replace("px", "");
+        }
       }
       return `left:${left}px`;
     } else {
       var right = 0;
       for (var i = columnIndex + 1; i < props.columns.length; i++) {
-        right = right + props.columns[i]?.width.replace("px", "");
+        if(props.columns[i].fixed && props.columns[i].fixed == "right") {
+          right = right + props.columns[i]?.width.replace("px", "");
+        }
       }
       return `right:${right}px`;
     }
   }
 };
+
+const renderFixedClassName = (column: any, columnIndex: number) => {
+  if (column.fixed) {
+    if (column.fixed == "left") {
+      var left = true;
+      for (var i = columnIndex + 1; i < props.columns.length; i++) {
+        if(props.columns[i].fixed && props.columns[i].fixed == "left") {
+          left = false;
+        }
+      }
+      return left ? `layui-table-fixed-left-last` : '';
+    } else {
+      var right = true;
+      for (var i = 0; i < columnIndex; i++) {
+        if(props.columns[i].fixed && props.columns[i].fixed == "right") {
+          right = false;
+        }
+      }
+      return right ? `layui-table-fixed-right-first` : '';
+    }
+  }
+}
 </script>
 
 <template>
@@ -353,6 +379,7 @@ const renderFixedStyle = (column: any, columnIndex: number) => {
                     class="layui-table-cell"
                     :class="[
                       column.fixed ? `layui-table-fixed-${column.fixed}` : '',
+                      renderFixedClassName(column, columnIndex)
                     ]"
                     :style="[
                       {
