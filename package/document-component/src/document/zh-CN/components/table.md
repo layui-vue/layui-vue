@@ -659,7 +659,7 @@ export default {
 ::: title 固定行列
 :::
 
-::: demo 通过 `skin` 属性, 切换 table 风格。
+::: demo 通过 `fixed` 属性实现列固定, 可选值为 `left` 与 `right`。
 
 <template>
   <lay-table :columns="columns20" :dataSource="dataSource20"></lay-table>
@@ -710,6 +710,70 @@ export default {
     return {
       columns20,
       dataSource20,
+    }
+  }
+}
+</script>
+
+:::
+
+::: title 刷新数据
+:::
+
+::: demo 通过 `data-source` 的赋值，实现数据的更新
+
+<template>
+  <lay-button @click="changeDataSource21">更新数据</lay-button>
+  <lay-table :columns="columns21" :dataSource="dataSource21"></lay-table>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const columns21 = [
+      {
+        title:"账户",
+        width:"200px",
+        key:"username"
+      },{
+        title:"密码",
+        width: "300px",
+        key:"password"
+      },{
+        title:"性别",
+        width: "300px",
+        key:"sex"
+      },{
+        title:"年龄",
+        width: "300px",
+        key:"age"
+      },{
+        title:"备注",
+        width: "180px",
+        key:"remark",
+        ellipsisTooltip: true
+      }
+    ]
+
+    const dataSource21 = ref([
+      {username:"root", password:"root",sex:"男", age:"18", remark: 'layui - vue（谐音：类 UI) '},
+      {username:"root", password:"root",sex:"男", age:"18", remark: 'layui - vue（谐音：类 UI) '},
+      {username:"woow", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '},
+      {username:"woow", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '},
+      {username:"woow", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '}
+    ])
+    
+    const changeDataSource21 = () => {
+      dataSource21.value = [{username:"update", password:"update",sex:"boy", age:"18", remark: '更新数据 '}]
+    }
+
+    return {
+      columns21,
+      dataSource21,
+      changeDataSource21
     }
   }
 }
