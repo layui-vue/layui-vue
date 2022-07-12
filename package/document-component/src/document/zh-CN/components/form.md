@@ -22,9 +22,9 @@
       </lay-select>
     </lay-form-item>
     <lay-form-item label="特长" prop="specialty">
-      <lay-radio v-model="model.specialty" name="specialty" label="1">写作</lay-radio>
-      <lay-radio v-model="model.specialty" name="specialty" label="2">画画</lay-radio>
-      <lay-radio v-model="model.specialty" name="specialty" label="3">编码</lay-radio>
+      <lay-radio v-model="model.specialty" name="specialty" value="1">写作</lay-radio>
+      <lay-radio v-model="model.specialty" name="specialty" value="2">画画</lay-radio>
+      <lay-radio v-model="model.specialty" name="specialty" value="3">编码</lay-radio>
     </lay-form-item>
     <lay-form-item label="描述" prop="desc">
       <lay-textarea placeholder="请输入描述" v-model="model.desc"></lay-textarea>
@@ -91,9 +91,9 @@ export default {
       </lay-select>
     </lay-form-item>
     <lay-form-item label="特长" :label-position="labelPosition" prop="specialty">
-      <lay-radio v-model="labelPosition" name="labelPosition" label="left">左</lay-radio>
-      <lay-radio v-model="labelPosition" name="labelPosition" label="top">上</lay-radio>
-      <lay-radio v-model="labelPosition" name="labelPosition" label="right">右</lay-radio>
+      <lay-radio v-model="labelPosition" name="labelPosition" value="left">左</lay-radio>
+      <lay-radio v-model="labelPosition" name="labelPosition" value="top">上</lay-radio>
+      <lay-radio v-model="labelPosition" name="labelPosition" value="right">右</lay-radio>
     </lay-form-item>
     <lay-form-item label="描述" :label-position="labelPosition" prop="desc">
       <lay-textarea placeholder="请输入描述" v-model="model.desc"></lay-textarea>
@@ -163,9 +163,9 @@ export default {
       </lay-select>
     </lay-form-item>
     <lay-form-item label="特长" prop="specialty">
-      <lay-radio v-model="validateModel.specialty" name="specialty" label="1">写作</lay-radio>
-      <lay-radio v-model="validateModel.specialty" name="specialty" label="2">画画</lay-radio>
-      <lay-radio v-model="validateModel.specialty" name="specialty" label="3">编码</lay-radio>
+      <lay-radio v-model="validateModel.specialty" name="specialty" value="1">写作</lay-radio>
+      <lay-radio v-model="validateModel.specialty" name="specialty" value="2">画画</lay-radio>
+      <lay-radio v-model="validateModel.specialty" name="specialty" value="3">编码</lay-radio>
     </lay-form-item>
     <lay-form-item label="描述" prop="desc">
       <lay-textarea placeholder="请输入描述" v-model="validateModel.desc"></lay-textarea>

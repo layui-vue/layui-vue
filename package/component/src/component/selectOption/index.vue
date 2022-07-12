@@ -80,7 +80,7 @@ onMounted(() => {
         skin="primary"
         v-model="selected"
         @change="selectHandle"
-        label
+        :value="props.value"
       />
     </template>
     <slot>{{ label }}</slot>

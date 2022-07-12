@@ -11,6 +11,7 @@ import "./index.less";
 export interface LayRadioProps {
   modelValue?: string | boolean;
   disabled?: boolean;
+  value?: string;
   label?: string;
   name?: string;
 }
@@ -36,18 +37,18 @@ const naiveName = computed(() => {
 const isChecked = computed({
   get() {
     if (isGroup.value) {
-      return radioGroup.modelValue.value === props.label;
+      return radioGroup.modelValue.value === props.value;
     } else {
-      return props.modelValue === props.label;
+      return props.modelValue === props.value;
     }
   },
   set(val) {
     if (isGroup.value) {
-      radioGroup.modelValue.value = props.label;
+      radioGroup.modelValue.value = props.value;
     } else {
       if (val) {
-        emit("change", props.label);
-        emit("update:modelValue", props.label);
+        emit("change", props.value);
+        emit("update:modelValue", props.value);
       }
     }
   },
@@ -62,7 +63,7 @@ const handleClick = function () {
 
 <template>
   <span class="layui-radio">
-    <input type="radio" :value="label" :name="naiveName" />
+    <input type="radio" :value="value" :name="naiveName" />
     <div
       class="layui-unselect layui-form-radio"
       :class="{
@@ -79,7 +80,7 @@ const handleClick = function () {
         class="layui-anim layui-icon layui-anim-scaleSpring layui-form-radioed"
         >&#xe63f;</i
       >
-      <span><slot></slot></span>
+      <span><slot>{{label}}</slot></span>
     </div>
   </span>
 </template>

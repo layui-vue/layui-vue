@@ -13,7 +13,10 @@
 ::: demo 使用 `lay-checkbox` 标签, 创建一个复选框
 
 <template>
-    <lay-checkbox name="like" skin="primary"  v-model="checked1" label="1" ></lay-checkbox>
+    <lay-checkbox name="like" skin="primary"  v-model="checked1" value="1" label="复选框案例"></lay-checkbox>
+    <lay-checkbox name="like" skin="primary"  v-model="checkedSlot" value="1">
+      自定义slot
+    </lay-checkbox>
 </template>
 
 <script>
@@ -23,7 +26,7 @@ export default {
   setup() {
 
     const checked1 = ref(false)
-
+    const checkedSlot = ref(false)
     return {
       checked1
     }
@@ -39,7 +42,7 @@ export default {
 ::: demo
 
 <template>
-    <lay-checkbox name="like" label="1" v-model="checked2" >普通</lay-checkbox>
+    <lay-checkbox name="like" value="1" v-model="checked2" >普通</lay-checkbox>
 </template>
 
 <script>
@@ -66,9 +69,9 @@ export default {
 
 <template>
     <lay-checkbox-group v-model="checkeds" @change="groupChange">
-      <lay-checkbox name="like" skin="primary" label="1">写作</lay-checkbox>
-      <lay-checkbox name="like" skin="primary" label="2">画画</lay-checkbox>
-      <lay-checkbox name="like" skin="primary" label="3">运动</lay-checkbox>
+      <lay-checkbox name="like" skin="primary" value="1">写作</lay-checkbox>
+      <lay-checkbox name="like" skin="primary" value="2">画画</lay-checkbox>
+      <lay-checkbox name="like" skin="primary" value="3">运动</lay-checkbox>
     </lay-checkbox-group>
 </template>
 
@@ -99,9 +102,9 @@ export default {
 ::: demo
 
 <template>
-    <lay-checkbox name="like" skin="primary" v-model="checked3" label="1">写作</lay-checkbox>
-    <lay-checkbox name="like" skin="primary" v-model="checked4" label="2">画画</lay-checkbox>
-    <lay-checkbox name="like" skin="primary" v-model="checked5" label="3">运动</lay-checkbox>
+    <lay-checkbox name="like" skin="primary" v-model="checked3" value="1">写作</lay-checkbox>
+    <lay-checkbox name="like" skin="primary" v-model="checked4" value="2">画画</lay-checkbox>
+    <lay-checkbox name="like" skin="primary" v-model="checked5" value="3">运动</lay-checkbox>
 </template>
 
 <script>
@@ -129,7 +132,7 @@ export default {
 ::: demo
 
 <template>
-    <lay-checkbox name="like" skin="primary" label="1" :disabled="disabled" v-model="checked6">禁用</lay-checkbox>
+    <lay-checkbox name="like" skin="primary" value="1" :disabled="disabled" v-model="checked6">禁用</lay-checkbox>
 </template>
 
 <script>
@@ -157,7 +160,7 @@ export default {
 ::: demo
 
 <template>
-    <lay-checkbox name="like" skin="primary" label="1" @change="change" v-model="checked7">回调</lay-checkbox>
+    <lay-checkbox name="like" skin="primary" value="1" @change="change" v-model="checked7">回调</lay-checkbox>
 </template>
 
 <script>
@@ -188,7 +191,7 @@ export default {
 ::: demo 在实现全选效果时，你可能会用到 isIndeterminate 属性。
 
 <template>
-    <lay-checkbox name="like" skin="primary" label="1" :isIndeterminate="true" v-model="checked8">半选</lay-checkbox>
+    <lay-checkbox name="like" skin="primary" value="1" :isIndeterminate="true" v-model="checked8">半选</lay-checkbox>
 </template>
 
 <script>
@@ -217,7 +220,8 @@ export default {
 | ------------------- | ------------- | -------------------- |
 | name                | 原始属性 name | --                   |
 | skin                | 主题          | --                   |
-| label               | 选中值        | --                   |
+| label               | 显示内容        | --                  |
+| value               | 选中值        | --                   |
 | v-model             | 是否选中      | `true` `false`       |
 | isIndeterminate     | 半选状态      | `true` `false`       |
 

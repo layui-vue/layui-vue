@@ -181,7 +181,7 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
       <div class="layui-table-cell laytable-cell-checkbox">
         <lay-checkbox
           v-model="tableSelectedKeys"
-          :label="data[id]"
+          :value="data[id]"
           skin="primary"
         />
       </div>

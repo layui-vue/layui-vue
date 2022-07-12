@@ -316,7 +316,7 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
                   v-model="tableColumnKeys"
                   skin="primary"
                   :key="column.key"
-                  :label="column.key"
+                  :value="column.key"
                   >{{ column.title }}</lay-checkbox
                 >
               </div>
@@ -365,7 +365,7 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
                       v-model="hasChecked"
                       :is-indeterminate="!allChecked"
                       skin="primary"
-                      label="all"
+                      value="all"
                       @change="changeAll"
                     />
                   </div>

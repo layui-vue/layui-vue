@@ -12,7 +12,8 @@ import "./index.less";
 export interface LayCheckboxProps {
   name?: string;
   skin?: string;
-  label: string | object;
+  value: string | object;
+  label?: string;
   isIndeterminate?: boolean;
   modelValue?: boolean | Array<string | object>;
   disabled?: boolean;
@@ -22,6 +23,7 @@ const props = withDefaults(defineProps<LayCheckboxProps>(), {
   isIndeterminate: false,
   modelValue: false,
   disabled: false,
+  label:''
 });
 
 const checkboxGroup: any = inject("checkboxGroup", {});
@@ -37,10 +39,10 @@ const emit = defineEmits(["update:modelValue", "change"]);
 const isChecked = computed({
   get() {
     if (isGroup.value) {
-      return checkboxGroup.modelValue.value.includes(props.label);
+      return checkboxGroup.modelValue.value.includes(props.value);
     } else {
       if (Array.isArray(props.modelValue)) {
-        return props.modelValue.includes(props.label);
+        return props.modelValue.includes(props.value);
       } else {
         return props.modelValue;
       }
@@ -71,9 +73,9 @@ const arrayModelValue = computed(() => {
 const setGroupModelValue = function (checked: any) {
   let groupModelValue = [...checkboxGroup.modelValue.value];
   if (!checked) {
-    groupModelValue.splice(groupModelValue.indexOf(props.label), 1);
+    groupModelValue.splice(groupModelValue.indexOf(props.value), 1);
   } else {
-    groupModelValue.push(props.label);
+    groupModelValue.push(props.value);
   }
   checkboxGroup.modelValue.value = groupModelValue;
 };
@@ -81,9 +83,9 @@ const setGroupModelValue = function (checked: any) {
 const setArrayModelValue = function (checked: any) {
   let arr = [...arrayModelValue.value];
   if (!checked) {
-    arr.splice(arr.indexOf(props.label), 1);
+    arr.splice(arr.indexOf(props.value), 1);
   } else {
-    arr.push(props.label);
+    arr.push(props.value);
   }
   emit("change", arr);
   emit("update:modelValue", arr);
@@ -98,7 +100,7 @@ const handleClick = function () {
 
 <template>
   <span @click.stop="handleClick" class="layui-checkbox">
-    <input type="checkbox" :name="name" :value="label" />
+    <input type="checkbox" :name="name" :value="value" />
     <div
       class="layui-unselect layui-form-checkbox"
       :class="{
@@ -107,7 +109,7 @@ const handleClick = function () {
       }"
       :lay-skin="skin"
     >
-      <span v-if="$slots?.default"><slot></slot></span>
+      <span><slot>{{label}}</slot></span>
       <lay-icon
         :type="
           props.isIndeterminate && isChecked

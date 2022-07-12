@@ -13,9 +13,10 @@
 ::: demo 使用 `lay-radio` 标签, 创建一个单选框
 
 <template>
-    <lay-radio v-model="selected1" name="action" label="1">写作</lay-radio>
-    <lay-radio v-model="selected1" name="action" label="2">画画</lay-radio>
-    <lay-radio v-model="selected1" name="action" label="3">运动</lay-radio>
+    <lay-radio v-model="selected1" name="action" value="1" label="写作"></lay-radio>
+    <lay-radio v-model="selected1" name="action" value="2" label="画画"></lay-radio>
+    <lay-radio v-model="selected1" name="action" value="3" label="运动"></lay-radio>
+    <lay-radio v-model="selected1" name="action" value="4">自定义slot</lay-radio>
 </template>
 
 <script>
@@ -41,10 +42,10 @@ export default {
 ::: demo
 
 <template>
-    <lay-radio v-model="selected2" name="action" label="1">写作</lay-radio>
-    <lay-radio v-model="selected2" name="action" label="2">画画</lay-radio>
-    <lay-radio v-model="selected2" name="action" label="3">运动</lay-radio>
-    <lay-radio v-model="selected2" name="action" label="4" :disabled="disabled">禁用</lay-radio>
+    <lay-radio v-model="selected2" name="action" value="1">写作</lay-radio>
+    <lay-radio v-model="selected2" name="action" value="2">画画</lay-radio>
+    <lay-radio v-model="selected2" name="action" value="3">运动</lay-radio>
+    <lay-radio v-model="selected2" name="action" value="4" :disabled="disabled">禁用</lay-radio>
 </template>
 
 <script>
@@ -72,9 +73,9 @@ export default {
 ::: demo
 
 <template>
-    <lay-radio v-model="selected3" name="action" label="1" @change="change">写作</lay-radio>
-    <lay-radio v-model="selected3" name="action" label="2" @change="change">画画</lay-radio>
-    <lay-radio v-model="selected3" name="action" label="3" @change="change">运动</lay-radio>
+    <lay-radio v-model="selected3" name="action" value="1" @change="change">写作</lay-radio>
+    <lay-radio v-model="selected3" name="action" value="2" @change="change">画画</lay-radio>
+    <lay-radio v-model="selected3" name="action" value="3" @change="change">运动</lay-radio>
 </template>
 
 <script>
@@ -104,9 +105,9 @@ export default {
 
 <template>
     <lay-radio-group name="action" v-model="selected4" @change="change4">
-      <lay-radio label="1">写作</lay-radio>
-      <lay-radio label="2">画画</lay-radio>
-      <lay-radio label="3">运动</lay-radio>
+      <lay-radio value="1">写作</lay-radio>
+      <lay-radio value="2">画画</lay-radio>
+      <lay-radio value="3">运动</lay-radio>
     </lay-radio-group>
 </template>
 
@@ -138,7 +139,8 @@ export default {
 | 属性    | 描述          | 默认值 |
 | ------- | ------------- | ------ |
 | name    | 原始属性 name | --     |
-| label   | 当前值        | --     |
+| label   | 显示值        | --     |
+| value   | 绑定值        | --     |
 | v-model | 选中值        | --     |
 
 :::

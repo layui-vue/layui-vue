@@ -10,6 +10,17 @@
 ::: demo
 <template>
 <lay-timeline>
+  <lay-timeline-item title="1.3.x">
+    <ul> 
+      <a name="1-3-0"></a> 
+      <li> 
+        <h3>1.3.0 <span class="layui-badge-rim">2022-07-12</span></h3> 
+        <ul>         
+          <li><span style="color:#FF5722">[破坏性更新]</span> 统一checkbox与radio属性语义 两个组件受到影响 label代表显示值，value代表绑定值。 by @SmallWai</li> 
+        </ul>
+      </li>
+    </ul>   
+  </lay-timeline-item>
   <lay-timeline-item title="1.2.x">
     <ul> 
       <a name="1-2-9"></a> 

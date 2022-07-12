@@ -152,7 +152,7 @@ const isChildAllSelected = computed(() => {
           :modelValue="node.isChecked"
           :disabled="node.isDisabled"
           skin="primary"
-          label=""
+          value=""
           @change="
             (checked) => {
               handleChange(checked, node);
