@@ -14,6 +14,7 @@ importers:
       '@layui/layui-vue': workspace:*
       '@rollup/plugin-babel': ^5.3.0
       '@types/node': ^16.11.9
+      '@types/uuid': ^8.3.4
       '@typescript-eslint/eslint-plugin': ^5.8.0
       '@typescript-eslint/parser': ^5.8.0
       '@vitejs/plugin-vue': ^2.3.3
@@ -48,6 +49,7 @@ importers:
       '@commitlint/config-conventional': 16.2.1
       '@rollup/plugin-babel': 5.3.1_@babel+core@7.17.9+rollup@2.75.5
       '@types/node': 16.11.26
+      '@types/uuid': 8.3.4
       '@typescript-eslint/eslint-plugin': 5.17.0_ec46de5930d083862c6e4af5d970d096
       '@typescript-eslint/parser': 5.17.0_eslint@8.12.0+typescript@4.7.3
       '@vitejs/plugin-vue': 2.3.3_vite@2.9.12+vue@3.2.37
@@ -1767,6 +1769,10 @@ packages:
 
   /@types/prettier/2.6.0:
     resolution: {integrity: sha512-G/AdOadiZhnJp0jXCaBQU449W2h716OW/EoXeYkCytxKL06X1WCXB4DZpp8TpZ8eyIJVS1cw4lrlkkSYU21cDw==}
+    dev: true
+
+  /@types/uuid/8.3.4:
+    resolution: {integrity: sha512-c/I8ZRb51j+pYGAu5CrFMRxqZ2ke4y2grEBO5AUjgSkSk+qT2Ea+OdWElz/OiMf5MNpn2b17kuVBwZLQJXzihw==}
     dev: true
 
   /@typescript-eslint/eslint-plugin/5.17.0_ec46de5930d083862c6e4af5d970d096:

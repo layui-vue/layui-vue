@@ -267,7 +267,7 @@ const renderFixedStyle = (column: any, columnIndex: number) => {
           right = right + props.columns[i]?.width.replace("px", "");
         }
       }
-      return `right:${right}px`;
+      return  `right:${right}px`;
     }
   }
 };
