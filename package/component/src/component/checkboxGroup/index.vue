@@ -10,10 +10,12 @@ import { Recordable } from "../../types";
 
 export interface LayCheckboxGroupProps {
   modelValue?: Recordable[];
+  disabled?:boolean
 }
 
 const props = withDefaults(defineProps<LayCheckboxGroupProps>(), {
   modelValue: () => [],
+  disabled:false
 });
 
 const emit = defineEmits(["update:modelValue", "change"]);
@@ -21,7 +23,7 @@ const emit = defineEmits(["update:modelValue", "change"]);
 const modelValue = ref(props.modelValue);
 
 provide("checkboxGroup", { name: "LayCheckboxGroup", modelValue: modelValue });
-
+provide("checkboxGroupDisabled",props.disabled)
 watch(
   () => modelValue,
   (val) => {
@@ -35,10 +37,11 @@ watch(
   () => props.modelValue,
   (val) => (modelValue.value = val)
 );
+
 </script>
 
 <template>
-  <div class="layui-checkbox-group">
+  <div class="layui-checkbox-group" :class="{'layui-checkbox-group-disabled':disabled}">
     <slot></slot>
   </div>
 </template>

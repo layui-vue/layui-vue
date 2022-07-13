@@ -25,6 +25,7 @@
           <li>[新增] formItem 组件 label-width属性，用于控制宽度 by @SmallWai</li> 
           <li>[优化] inputNumber 组件 禁用状态下的样式 by @SmallWai</li>
           <li>[优化] botton 组件 禁用状态下的icon hover样式 by @SmallWai</li>
+          <li>[新增] CheckboxGroup 组件 disabled属性  by @SmallWai</li>
         </ul>
       </li>
     </ul>   

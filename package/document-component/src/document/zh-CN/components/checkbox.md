@@ -133,6 +133,12 @@ export default {
 
 <template>
     <lay-checkbox name="like" skin="primary" value="1" :disabled="disabled" v-model="checked6">禁用</lay-checkbox>
+    <br/><br/>
+    <lay-checkbox-group v-model="checkeds" disabled>
+      <lay-checkbox name="like" skin="primary" value="1">写作</lay-checkbox>
+      <lay-checkbox name="like" skin="primary" value="2">画画</lay-checkbox>
+      <lay-checkbox name="like" skin="primary" value="3">运动</lay-checkbox>
+    </lay-checkbox-group>
 </template>
 
 <script>
@@ -224,6 +230,7 @@ export default {
 | value               | 选中值        | --                   |
 | v-model             | 是否选中      | `true` `false`       |
 | isIndeterminate     | 半选状态      | `true` `false`       |
+| disabled            | 是否禁用      | `true` `false`       |
 
 :::
 
@@ -235,6 +242,17 @@ export default {
 | 事件   | 描述     | 可选值               |
 | ------ | -------- | -------------------- |
 | change | 切换事件 | isChecked : 当前状态 |
+
+:::
+
+::: title CheckboxGroup 属性
+:::
+
+::: table
+
+| 属性                | 描述          | 可选值               |
+| ------------------- | ------------ | ------------------ |
+| disabled            | 是否整体禁用      | `true` `false`      |
 
 :::
 
