@@ -17,6 +17,7 @@
         <h3>1.3.0 <span class="layui-badge-rim">2022-07-12</span></h3> 
         <ul>         
           <li><span style="color:#FF5722">[破坏性更新]</span> 统一checkbox与radio属性语义 两个组件受到影响 label代表显示值，value代表绑定值。 by @SmallWai</li> 
+          <li>[修复] page 组件 外部更改v-model视图不刷新问题。 by @SmallWai</li> 
         </ul>
       </li>
     </ul>   
