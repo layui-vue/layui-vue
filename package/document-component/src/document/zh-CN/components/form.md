@@ -532,6 +532,7 @@ export default {
 | prop          | 在表单绑定值(`model`)中字段`key`                                 | `string`  |        -       |    -    |
 | label         | 子项前边描述值，**尽量填写**，中文校验错误需要用到                 | `string`  |        -       |    -    |
 | label-position| 子项前边描述值的位置                                              | `string`  | `left` `top` `right` |`right` |
+| label-width   | 子项前边描述值的宽度                                              | `string` `number` | - | `95` |
 | required      | 是否必填                                                        | `boolean` | `true` `false` | `false` |
 | rules         |  表单校验规则; <br>可查看[async-validator](https://github.com/yiminghe/async-validator)  | `object` | - | - |
 | error-message | 表单校验失败固定提示语                                           | `string`  |`block` `inline`| `block` |

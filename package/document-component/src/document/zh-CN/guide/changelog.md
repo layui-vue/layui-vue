@@ -22,6 +22,7 @@
           <li>[修复] datePicker 组件 启用simple属性后无法弹出问题。 by @SmallWai</li> 
           <li>[修复] datePicker 组件 上一次更新带来的Bug。 by @SmallWai</li> 
           <li>[优化] radio 组件 动画效果。 by @SmallWai</li> 
+          <li>[优化] formItem 组件 新增label-width属性，用于控制宽度 by @SmallWai</li> 
         </ul>
       </li>
     </ul>   
