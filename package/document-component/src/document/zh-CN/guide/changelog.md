@@ -18,6 +18,9 @@
         <ul>         
           <li><span style="color:#FF5722">[破坏性更新]</span> 统一checkbox与radio属性语义 两个组件受到影响 label代表显示值，value代表绑定值。 by @SmallWai</li> 
           <li>[修复] page 组件 外部更改v-model视图不刷新问题。 by @SmallWai</li> 
+          <li>[修复] datePicker 组件 启用simple属性后无法弹出问题。 by @SmallWai</li> 
+          <li>[修复] datePicker 组件 上一次更新带来的Bug。 by @SmallWai</li> 
+          <li>[优化] radio 组件 动画效果。 by @SmallWai</li> 
         </ul>
       </li>
     </ul>   

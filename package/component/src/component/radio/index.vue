@@ -77,7 +77,7 @@ const handleClick = function () {
       >
       <i
         v-else
-        class="layui-anim layui-icon layui-anim-scaleSpring layui-form-radioed"
+        class="layui-icon layui-form-radioed"
         >&#xe63f;</i
       >
       <span><slot>{{label}}</slot></span>
