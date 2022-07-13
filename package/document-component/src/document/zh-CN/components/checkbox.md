@@ -42,7 +42,7 @@ export default {
 ::: demo
 
 <template>
-    <lay-checkbox name="like" value="1" v-model="checked2" >普通</lay-checkbox>
+    <lay-checkbox name="like" value="1" v-model="checked2">普通</lay-checkbox>
 </template>
 
 <script>
@@ -134,7 +134,7 @@ export default {
 <template>
     <lay-checkbox name="like" skin="primary" value="1" :disabled="disabled" v-model="checked6">禁用</lay-checkbox>
     <br/><br/>
-    <lay-checkbox-group v-model="checkeds" disabled>
+    <lay-checkbox-group v-model="checkeds" :disabled="disabled">
       <lay-checkbox name="like" skin="primary" value="1">写作</lay-checkbox>
       <lay-checkbox name="like" skin="primary" value="2">画画</lay-checkbox>
       <lay-checkbox name="like" skin="primary" value="3">运动</lay-checkbox>
@@ -146,11 +146,8 @@ import { ref } from 'vue'
 
 export default {
   setup() {
-
     const disabled = ref(true)
-
     const checked6 = ref(false);
-
     return {
       disabled,checked6
     }

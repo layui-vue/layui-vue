@@ -102,7 +102,7 @@
 }
 
 .layui-form-checked[lay-skin="primary"] i {
-  border-color: var(--global-checked-color) !important;
+  border-color: var(--global-checked-color);
   background-color: var(--global-checked-color);
   color: #fff;
 }
@@ -135,4 +135,9 @@
 
 .layui-checkbox-disabled:hover i {
   color: #fff !important;
+}
+
+.layui-checkbox-disabled .layui-icon-ok,.layui-checkbox-disabled .layui-icon-subtraction{
+  background-color: var(--global-neutral-color-3) !important;
+  border-color: var(--global-neutral-color-3) !important;
 }

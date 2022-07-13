@@ -121,6 +121,7 @@ export default {
     const change4 = function( current ) {
         console.log("当前值:" + current)
     }
+    const disabled1=ref(false)
     return {
         selected4,
         change4
@@ -142,6 +143,7 @@ export default {
 | label   | 显示值        | --     |
 | value   | 绑定值        | --     |
 | v-model | 选中值        | --     |
+| disabled   | 是否禁用    | `false`     |
 
 :::
 
@@ -164,6 +166,7 @@ export default {
 | 属性    | 描述          | 默认值 |
 | ------- | ------------- | ------ |
 | v-model | 选中值        | --     |
+| disabled   | 是否整体禁用    | `false`     |
 
 :::
 

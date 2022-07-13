@@ -21,9 +21,9 @@ const props = withDefaults(defineProps<LayCheckboxGroupProps>(), {
 const emit = defineEmits(["update:modelValue", "change"]);
 
 const modelValue = ref(props.modelValue);
+const disabled=ref(props.disabled)
+provide("checkboxGroup", { name: "LayCheckboxGroup", modelValue: modelValue,disabled:disabled });
 
-provide("checkboxGroup", { name: "LayCheckboxGroup", modelValue: modelValue });
-provide("checkboxGroupDisabled",props.disabled)
 watch(
   () => modelValue,
   (val) => {
@@ -36,6 +36,11 @@ watch(
 watch(
   () => props.modelValue,
   (val) => (modelValue.value = val)
+);
+
+watch(
+  () => props.disabled,
+  (val) => (disabled.value = val)
 );
 
 </script>

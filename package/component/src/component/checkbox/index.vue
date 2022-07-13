@@ -27,7 +27,6 @@ const props = withDefaults(defineProps<LayCheckboxProps>(), {
 });
 
 const checkboxGroup: any = inject("checkboxGroup", {});
-const checkboxGroupDisabled: boolean = inject("checkboxGroupDisabled", false);
 
 const isGroup = computed(() => {
   return (
@@ -93,10 +92,19 @@ const setArrayModelValue = function (checked: any) {
 };
 
 const handleClick = function () {
-  if (!props.disabled&&!checkboxGroupDisabled) {
+  if (!ifDisabled.value) {
     isChecked.value = !isChecked.value;
   }
 };
+const ifDisabled = computed(() => {
+  if (props.disabled) {
+    return true;
+  }
+  if (checkboxGroup.hasOwnProperty('disabled')&&checkboxGroup.disabled.value) {
+    return true;
+  }
+  return false;
+})
 </script>
 
 <template>
@@ -105,8 +113,8 @@ const handleClick = function () {
     <div
       class="layui-unselect layui-form-checkbox"
       :class="{
-        'layui-checkbox-disabled layui-disabled': disabled||checkboxGroupDisabled,
         'layui-form-checked': isChecked,
+        'layui-checkbox-disabled layui-disabled': ifDisabled,
       }"
       :lay-skin="skin"
     >
