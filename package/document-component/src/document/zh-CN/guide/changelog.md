@@ -23,6 +23,8 @@
           <li>[修复] datePicker 组件 上一次更新带来的Bug。 by @SmallWai</li> 
           <li>[优化] radio 组件 动画效果。 by @SmallWai</li> 
           <li>[新增] formItem 组件 label-width属性，用于控制宽度 by @SmallWai</li> 
+          <li>[优化] inputNumber 组件 禁用状态下的样式 by @SmallWai</li>
+          <li>[优化] botton 组件 禁用状态下的icon hover样式 by @SmallWai</li>
         </ul>
       </li>
     </ul>   

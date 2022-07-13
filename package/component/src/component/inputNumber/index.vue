@@ -62,13 +62,23 @@ watch(
 const tempValue = ref(0);
 let timer: any = 0;
 
-const minControl = computed(
-  () => props.min !== -Infinity && Number(props.min) >= num.value
-);
+const minControl = computed(() => {
+  if(props.disabled){
+    return true;
+  }
+  if(props.min !== -Infinity){
+    return Number(props.min) >= num.value;
+  }
+});
 
-const maxControl = computed(
-  () => props.max !== Infinity && Number(props.max) <= num.value
-);
+const maxControl = computed(() => {
+  if(props.disabled){
+    return true;
+  }
+  if(props.max !== Infinity ){
+    return Number(props.max) <= num.value;
+  }
+});
 
 const addition = function () {
   num.value += Number(props.step);
@@ -127,6 +137,7 @@ const isNumber = function (num: any) {
         type="number"
         :name="name"
         @change="inputChange"
+        :disabled="disabledInput||disabled"
       />
     </div>
     <lay-button
