@@ -232,7 +232,13 @@ watch(
 );
 
 onMounted(() => {
-  currentDay.value = new Date(props.modelValue).getTime();
+  currentDay.value = props.modelValue ? new Date(props.modelValue).getTime() : -1;
+  if (currentDay.value == -1) {
+    setTimeout(() => {
+      now();
+      clear();
+    }, 0);
+  }
   hms.value.hh = dayjs(props.modelValue).hour();
   hms.value.mm = dayjs(props.modelValue).minute();
   hms.value.ss = dayjs(props.modelValue).second();

@@ -14,7 +14,7 @@
 ::: demo
 
 <template>
-  <lay-date-picker v-model="endTime"></lay-date-picker>
+  <lay-date-picker v-model="endTime" placeholder="click me"></lay-date-picker>
 </template>
 
 <script>
@@ -23,7 +23,7 @@ import { ref } from 'vue'
 export default {
   setup() {
 
-   const endTime = ref("2022-03-14 17:35:00");
+   const endTime = ref("");
 
     return {
       endTime
