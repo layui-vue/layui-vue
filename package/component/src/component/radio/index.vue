@@ -7,7 +7,7 @@ export default {
 
 <script setup lang="ts">
 import "./index.less";
-import { disable } from '@umijs/ssr-darkreader';
+import { disable } from "@umijs/ssr-darkreader";
 
 export interface LayRadioProps {
   modelValue?: string | boolean;
@@ -64,21 +64,27 @@ const ifDisabled = computed(() => {
   if (props.disabled) {
     return true;
   }
-  if (radioGroup.hasOwnProperty('disabled')&&radioGroup.disabled.value) {
+  if (radioGroup.hasOwnProperty("disabled") && radioGroup.disabled.value) {
     return true;
   }
   return false;
-})
+});
 </script>
 
 <template>
   <span class="layui-radio">
     <input type="radio" :value="value" :name="naiveName" />
-    <div class="layui-unselect layui-form-radio" :class="{
-      'layui-form-radioed': isChecked,
-      'layui-radio-disabled layui-disabled': ifDisabled,
-    }" @click.stop="handleClick">
-      <i v-if="isChecked" class="layui-anim layui-icon layui-anim-scaleSpring">&#xe643;</i>
+    <div
+      class="layui-unselect layui-form-radio"
+      :class="{
+        'layui-form-radioed': isChecked,
+        'layui-radio-disabled layui-disabled': ifDisabled,
+      }"
+      @click.stop="handleClick"
+    >
+      <i v-if="isChecked" class="layui-anim layui-icon layui-anim-scaleSpring"
+        >&#xe643;</i
+      >
       <i v-else class="layui-icon layui-form-radioed">&#xe63f;</i>
       <span>
         <slot>{{ label }}</slot>

@@ -63,8 +63,8 @@ const totalPage = computed(() => {
       maxPage.value <= props.pages
         ? 1
         : currentPage.value > pages
-          ? currentPage.value - pages
-          : 1;
+        ? currentPage.value - pages
+        : 1;
   for (let i = start; ; i++) {
     if (r.length >= props.pages || i > maxPage.value) {
       break;
@@ -77,7 +77,7 @@ const totalPage = computed(() => {
 const currentPage: Ref<number> = ref(props.modelValue);
 const currentPageShow: Ref<number> = ref(currentPage.value);
 
-const emit = defineEmits(["jump", "limit", 'update:modelValue']);
+const emit = defineEmits(["jump", "limit", "update:modelValue"]);
 
 const prev = function () {
   if (currentPage.value === 1) {
@@ -114,39 +114,62 @@ watch(currentPage, function () {
   }
   currentPageShow.value = currentPage.value;
   emit("jump", { current: currentPage.value });
-  emit('update:modelValue', currentPage.value)
+  emit("update:modelValue", currentPage.value);
 });
-watch(() => props.modelValue, function () {
-  currentPage.value = props.modelValue
-  currentPageShow.value = currentPage.value
-})
+watch(
+  () => props.modelValue,
+  function () {
+    currentPage.value = props.modelValue;
+    currentPageShow.value = currentPage.value;
+  }
+);
 </script>
 
 <template>
   <div class="layui-laypage layui-laypage-default">
-    <span v-if="showCount" class="layui-laypage-count">共 {{ total }} 条 {{ maxPage }} 页</span>
-    <a href="javascript:;" class="layui-laypage-prev" :class="[
-      currentPage === 1 ? 'layui-disabled' : '',
-      theme && currentPage !== 1 ? 'layui-laypage-a-' + theme : '',
-    ]" @click="prev()">
+    <span v-if="showCount" class="layui-laypage-count"
+      >共 {{ total }} 条 {{ maxPage }} 页</span
+    >
+    <a
+      href="javascript:;"
+      class="layui-laypage-prev"
+      :class="[
+        currentPage === 1 ? 'layui-disabled' : '',
+        theme && currentPage !== 1 ? 'layui-laypage-a-' + theme : '',
+      ]"
+      @click="prev()"
+    >
       <slot v-if="slots.prev" name="prev"></slot>
       <template v-else>{{ t("page.prev") }}</template>
     </a>
     <template v-if="showPage">
       <template v-for="index of totalPage" :key="index">
         <span v-if="index === currentPage" class="layui-laypage-curr">
-          <em class="layui-laypage-em" :class="[theme ? 'layui-bg-' + theme : '']"></em>
+          <em
+            class="layui-laypage-em"
+            :class="[theme ? 'layui-bg-' + theme : '']"
+          ></em>
           <em>{{ index }}</em>
         </span>
-        <a v-else href="javascript:;" @click="jump(index)" :class="[theme ? 'layui-laypage-a-' + theme : '']">{{ index
-        }}</a>
+        <a
+          v-else
+          href="javascript:;"
+          @click="jump(index)"
+          :class="[theme ? 'layui-laypage-a-' + theme : '']"
+          >{{ index }}</a
+        >
       </template>
     </template>
 
-    <a href="javascript:;" class="layui-laypage-next" :class="[
-      currentPage === maxPage ? 'layui-disabled' : '',
-      theme && currentPage !== maxPage ? 'layui-laypage-a-' + theme : '',
-    ]" @click="next()">
+    <a
+      href="javascript:;"
+      class="layui-laypage-next"
+      :class="[
+        currentPage === maxPage ? 'layui-disabled' : '',
+        theme && currentPage !== maxPage ? 'layui-laypage-a-' + theme : '',
+      ]"
+      @click="next()"
+    >
       <slot v-if="slots.next" name="next"></slot>
       <template v-else>{{ t("page.next") }}</template>
     </a>
@@ -162,9 +185,18 @@ watch(() => props.modelValue, function () {
     </a>
     <span v-if="props.showSkip" class="layui-laypage-skip">
       到第
-      <input v-model="currentPageShow" @keypress.enter="jumpPage()" type="number"
-        class="layui-input layui-input-number" />页
-      <button type="button" class="layui-laypage-btn" @click="jumpPage()" :disabled="currentPageShow > maxPage">
+      <input
+        v-model="currentPageShow"
+        @keypress.enter="jumpPage()"
+        type="number"
+        class="layui-input layui-input-number"
+      />页
+      <button
+        type="button"
+        class="layui-laypage-btn"
+        @click="jumpPage()"
+        :disabled="currentPageShow > maxPage"
+      >
         确定
       </button>
     </span>

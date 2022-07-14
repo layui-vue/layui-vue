@@ -23,7 +23,7 @@ const props = withDefaults(defineProps<LayCheckboxProps>(), {
   isIndeterminate: false,
   modelValue: false,
   disabled: false,
-  label:''
+  label: "",
 });
 
 const checkboxGroup: any = inject("checkboxGroup", {});
@@ -100,11 +100,14 @@ const ifDisabled = computed(() => {
   if (props.disabled) {
     return true;
   }
-  if (checkboxGroup.hasOwnProperty('disabled')&&checkboxGroup.disabled.value) {
+  if (
+    checkboxGroup.hasOwnProperty("disabled") &&
+    checkboxGroup.disabled.value
+  ) {
     return true;
   }
   return false;
-})
+});
 </script>
 
 <template>
@@ -118,7 +121,9 @@ const ifDisabled = computed(() => {
       }"
       :lay-skin="skin"
     >
-      <span><slot>{{label}}</slot></span>
+      <span
+        ><slot>{{ label }}</slot></span
+      >
       <lay-icon
         :type="
           props.isIndeterminate && isChecked

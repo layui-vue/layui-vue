@@ -42,7 +42,7 @@ export interface LayFormItemProps {
 const props = withDefaults(defineProps<LayFormItemProps>(), {
   mode: "block",
   labelPosition: "right",
-  labelWidth: 95
+  labelWidth: 95,
 });
 
 const layForm = inject("LayForm", {} as LayFormContext);
@@ -166,24 +166,34 @@ onMounted(() => {
 });
 
 const getMarginLeft = computed(() => {
-  if (props.mode === 'block') {
-    let labelWidth = typeof props.labelWidth === "string" ? parseFloat(props.labelWidth) : props.labelWidth;
-    labelWidth+=15;
-    return{
-      marginLeft:labelWidth+'px'
-    }
+  if (props.mode === "block") {
+    let labelWidth =
+      typeof props.labelWidth === "string"
+        ? parseFloat(props.labelWidth)
+        : props.labelWidth;
+    labelWidth += 15;
+    return {
+      marginLeft: labelWidth + "px",
+    };
   }
-})
+});
 </script>
 
 <template>
-  <div class="layui-form-item" :class="[`layui-form-item-${labelPosition}`]" ref="formItemRef">
+  <div
+    class="layui-form-item"
+    :class="[`layui-form-item-${labelPosition}`]"
+    ref="formItemRef"
+  >
     <label class="layui-form-label" :style="{ width: labelWidth + 'px' }">
-      <span v-if="props.prop && isRequired" :class="
-        ['layui-required', 'layui-icon'].concat(layForm.requiredIcons ?? '')
-      ">
+      <span
+        v-if="props.prop && isRequired"
+        :class="
+          ['layui-required', 'layui-icon'].concat(layForm.requiredIcons ?? '')
+        "
+      >
         <slot name="required" :props="{ ...props, model: layForm.model }">{{
-            layForm.requiredIcons ? "" : "*"
+          layForm.requiredIcons ? "" : "*"
         }}</slot>
       </span>
       <slot name="label" :props="{ ...props, model: layForm.model }">
@@ -194,10 +204,14 @@ const getMarginLeft = computed(() => {
       <div ref="slotParent">
         <slot :props="{ ...props, model: layForm.model }"></slot>
       </div>
-      <span v-if="errorStatus" :class="[
-        'layui-error-message',
-        { 'layui-error-message-anim': errorStatus },
-      ]">{{ errorMsg }}</span>
+      <span
+        v-if="errorStatus"
+        :class="[
+          'layui-error-message',
+          { 'layui-error-message-anim': errorStatus },
+        ]"
+        >{{ errorMsg }}</span
+      >
     </div>
   </div>
 </template>

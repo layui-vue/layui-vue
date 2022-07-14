@@ -63,19 +63,19 @@ const tempValue = ref(0);
 let timer: any = 0;
 
 const minControl = computed(() => {
-  if(props.disabled){
+  if (props.disabled) {
     return true;
   }
-  if(props.min !== -Infinity){
+  if (props.min !== -Infinity) {
     return Number(props.min) >= num.value;
   }
 });
 
 const maxControl = computed(() => {
-  if(props.disabled){
+  if (props.disabled) {
     return true;
   }
-  if(props.max !== Infinity ){
+  if (props.max !== Infinity) {
     return Number(props.max) <= num.value;
   }
 });
@@ -137,7 +137,7 @@ const isNumber = function (num: any) {
         type="number"
         :name="name"
         @change="inputChange"
-        :disabled="disabledInput||disabled"
+        :disabled="disabledInput || disabled"
       />
     </div>
     <lay-button
