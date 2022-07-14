@@ -193,10 +193,14 @@ export default {
 ::: title 一次性选择
 :::
 
-::: demo 只需要点击一次后自动关闭，无需点击确认按钮
+::: demo 只需要点击一次后自动关闭，无需点击确认按钮,仅在type等于`year`、`month`、`date`时有效
 
 <template>
-  <lay-date-picker v-model="endTime7" simple></lay-date-picker>
+<div style="display:flex">
+  <lay-date-picker v-model="endTime7" simple type="year"></lay-date-picker>
+  <lay-date-picker v-model="endTime7" simple type="month" style="margin:0 10px"></lay-date-picker>
+  <lay-date-picker v-model="endTime7" simple type="date"></lay-date-picker>
+</div>
 </template>
 
 <script>
