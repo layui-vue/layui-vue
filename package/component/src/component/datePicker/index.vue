@@ -1,12 +1,13 @@
 <template>
   <div>
-    <lay-dropdown ref="dropdownRef" :disabled="props.disabled">
+    <lay-dropdown ref="dropdownRef" :disabled="disabled" @open="openDropDown">
       <lay-input
         readonly
         :name="name"
         :model-value="dateValue || modelValue"
         :placeholder="placeholder"
         prefix-icon="layui-icon-date"
+        :disabled="disabled"
       >
       </lay-input>
       <template #content>
@@ -83,7 +84,7 @@
           <div class="layui-laydate-footer">
             <span
               v-if="type === 'datetime'"
-              @click="showPane = 'time'"
+              @click="showPane = 'time';scrollToCurrentTime()"
               class="laydate-btns-time"
               >选择时间</span
             >
@@ -114,6 +115,7 @@
             <div
               class="layui-laydate-content"
               style="height: 220px; overflow-y: auto"
+              ref="yearmonthScrollRef"
             >
               <ul class="layui-laydate-list laydate-year-list">
                 <li
@@ -216,8 +218,8 @@
               </div>
             </div>
             <div class="layui-laydate-content" style="height: 210px">
-              <ul class="layui-laydate-list laydate-time-list">
-                <li class="num-list" v-for="item in els" :key="item.type">
+              <ul class="layui-laydate-list laydate-time-list" ref="timePanelRef">
+                <li class="num-list" v-for="item in els" :key="item.type" :data-type="item.type">
                   <ol class="scroll" @click="choseTime">
                     <li
                       v-for="(it, index) in item.count"
@@ -276,8 +278,9 @@ import dayjs from "dayjs";
 import { LayIcon } from "@layui/icons-vue";
 import LayInput from "../input/index.vue";
 import LayDropdown from "../dropdown/index.vue";
-import { getDayLength, getYears, getMonth, getYear } from "./day";
-import { ref, watch, computed, defineProps, defineEmits, onMounted } from "vue";
+import { getDayLength, getYears, getMonth, getYear,getDay } from "./day";
+import { ref, watch, computed, defineProps, defineEmits, onMounted, nextTick } from "vue";
+import { anyTypeAnnotation } from "@babel/types";
 
 export interface LayDatePickerProps {
   type?: "date" | "datetime" | "year" | "time" | "month" | "yearmonth";
@@ -328,12 +331,15 @@ const els = [
   { count: 60, type: "ss" },
 ];
 
-const currentYear = ref(getYear());
-const currentMonth = ref(getMonth());
-const currentDay = ref<number>(props.modelValue? new Date(props.modelValue).getTime(): -1);
+const currentYear = ref(getYear(props.modelValue));
+const currentMonth = ref(getMonth(props.modelValue));
+const currentDay = ref<number>(getDay(props.modelValue));
+
 const yearList = ref<number[]>(getYears());
 const dateList = ref<any[]>([]);
 const showPane = ref("date");
+
+const yearmonthScrollRef=ref()
 
 watch(
   () => props.type,
@@ -555,4 +561,46 @@ const choseTime = (e: any) => {
     hms.value[type as keyof typeof hms.value] = value;
   }
 };
+
+const openDropDown=()=>{
+  nextTick(()=>{
+    if(showPane.value=='year'||showPane.value=='yearmonth'){
+      let scrollTop=0;
+      for (const child of yearmonthScrollRef.value.firstElementChild.childNodes) {
+        if(child.classList&&child.classList.contains('layui-this')){
+          scrollTop=child.offsetTop-(yearmonthScrollRef.value.offsetHeight-child.offsetHeight)/2;
+          break;
+        }
+      }
+      yearmonthScrollRef.value.scrollTo(0,scrollTop)
+    }else if(showPane.value=='time'){
+      scrollToCurrentTime()
+    }
+  })
+}
+
+//时间定位
+const timePanelRef=ref()
+const scrollToCurrentTime = () => {
+  nextTick(() => {
+    timePanelRef.value.childNodes.forEach((element: HTMLElement) => {
+      if (element.nodeName === 'LI') {
+        let scrollTop = 0;
+        let parentDom = element.firstElementChild as HTMLElement;
+        let childList = parentDom.childNodes;
+        for (let index = 0; index < childList.length; index++) {
+          const child = childList[index] as HTMLElement;
+          if (child.nodeName !== 'LI') {
+            continue;
+          }
+          if (child.classList && child.classList.contains('layui-this')) {
+            scrollTop = child.offsetTop - (parentDom.offsetHeight - child.offsetHeight) / 2;
+            parentDom.scrollTo(0, scrollTop)
+            break;
+          }
+        }
+      }
+    });
+  })
+}
 </script>

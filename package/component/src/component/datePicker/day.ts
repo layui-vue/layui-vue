@@ -12,23 +12,35 @@ const getYears = () => {
 /**
  * 获取当前日期
  */
-const getDate = () => {
-  return new Date();
+const getDate = (val='') => {
+  if(val){
+    return new Date(val);
+  }else{
+    return new Date();
+  }
 };
 
 /**
  * 获取当前年份
  */
-const getYear = () => {
-  return getDate().getFullYear();
+const getYear = (val='') => {
+  return getDate(val).getFullYear();
 };
 
 /**
  * 获取当前月份
  */
-const getMonth = () => {
-  return getDate().getMonth();
+const getMonth = (val='') => {
+  return getDate(val).getMonth();
 };
+
+const getDay=(val='')=>{
+  if(val){
+    return new Date(getDate(val).toDateString()).getTime();
+  }else{
+    return -1;
+  }
+}
 
 /**
  * 获取月份天数
@@ -40,4 +52,4 @@ const getDayLength = (year: number, month: number): number => {
   return new Date(year, month + 1, 0).getDate();
 };
 
-export { getDayLength, getYears, getDate, getMonth, getYear };
+export { getDayLength, getYears, getDate, getMonth, getYear,getDay };
