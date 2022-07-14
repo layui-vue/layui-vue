@@ -10,7 +10,20 @@
 ::: demo
 <template>
 <lay-timeline>
-  <lay-timeline-item title="1.3.x">
+  <lay-timeline-item title="1.2.x">
+      <ul> 
+      <a name="1-2-10"></a> 
+      <li> 
+        <h3>1.2.11 <span class="layui-badge-rim">2022-07-14</span></h3> 
+        <ul>         
+          <li>[修复] datePicker 组件 初始值为空时无法点击的 BUG。 by @SmallWai</li> 
+          <li>[修复] datePicker 组件 点击日期时无法无法选中的问题。 by @SmallWai</li> 
+          <li>[修复] datePicker 组件 modelValue 不更新的问题。 by @SmallWai</li> 
+          <li>[优化] datePicker 组件 打开时跳转到选中值位置。 by @SmallWai</li> 
+          <li>[升级] vite 与 less 版本。</li>
+        </ul>
+      </li>
+    </ul>  
     <ul> 
       <a name="1-2-10"></a> 
       <li> 
@@ -30,9 +43,7 @@
           <li>[新增] radioGroup 组件 disabled属性  by @SmallWai</li>
         </ul>
       </li>
-    </ul>   
-  </lay-timeline-item>
-  <lay-timeline-item title="1.2.x">
+    </ul>  
     <ul> 
       <a name="1-2-9"></a> 
       <li> 
