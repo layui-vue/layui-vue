@@ -330,8 +330,7 @@ const els = [
 
 const currentYear = ref(getYear());
 const currentMonth = ref(getMonth());
-const currentDay = ref<number>();
-
+const currentDay = ref<number>(props.modelValue? new Date(props.modelValue).getTime(): -1);
 const yearList = ref<number[]>(getYears());
 const dateList = ref<any[]>([]);
 const showPane = ref("date");
@@ -345,18 +344,19 @@ watch(
 );
 
 onMounted(() => {
-  currentDay.value = props.modelValue
-    ? new Date(props.modelValue).getTime()
-    : -1;
   if (currentDay.value == -1) {
     setTimeout(() => {
       now();
       clear();
     }, 0);
   }
-  hms.value.hh = dayjs(props.modelValue).hour();
-  hms.value.mm = dayjs(props.modelValue).minute();
-  hms.value.ss = dayjs(props.modelValue).second();
+  let modelValue=props.modelValue;
+  if(modelValue.length===8){ //dayjs 解析时间容错
+    modelValue='1970-01-01 '+modelValue;
+  }
+  hms.value.hh = dayjs(modelValue).hour();
+  hms.value.mm = dayjs(modelValue).minute();
+  hms.value.ss = dayjs(modelValue).second();
 });
 
 // 计算结果日期
