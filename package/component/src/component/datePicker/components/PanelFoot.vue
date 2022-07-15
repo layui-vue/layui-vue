@@ -12,11 +12,19 @@
       @click="datePicker.showPanel.value = 'year'" class="laydate-btns-time">选择年份</span>
 
     <span v-else-if="!datePicker.range" class="layui-laydate-preview" title="当前选中的结果">
-      <template v-if="datePicker.type === 'month'">{{ datePicker.currentMonth.value + 1 }}</template>
-      <template v-else-if="datePicker.type === 'year'">{{ datePicker.currentYear.value }}</template>
-      <template v-else-if="datePicker.type === 'time'">{{
-          datePicker.hms.value.hh + ':' + datePicker.hms.value.mm + ':' + (datePicker.hms.value.ss === 0 ? '0' : '') + datePicker.hms.value.ss
-      }}</template>
+      <template v-if="datePicker.type === 'month' && datePicker.currentMonth.value != -1">
+        {{ datePicker.currentMonth.value + 1 }}
+      </template>
+      <template v-else-if="datePicker.type === 'year' && datePicker.currentYear.value != -1">
+        {{ datePicker.currentYear.value }}
+      </template>
+      <template v-else-if="datePicker.type === 'time'">
+        {{
+            (datePicker.hms.value.hh < 10 ? '0' : '') + datePicker.hms.value.hh +':'+
+            (datePicker.hms.value.mm < 10 ? '0' : '') + datePicker.hms.value.mm +':'+
+            (datePicker.hms.value.ss < 10 ? '0' : '') + datePicker.hms.value.ss
+        }}
+      </template>
     </span>
 
     <div class="laydate-footer-btns">

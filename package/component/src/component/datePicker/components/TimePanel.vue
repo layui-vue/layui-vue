@@ -33,7 +33,7 @@ export default {
 };
 </script>
 <script lang="ts" setup>
-import { inject } from 'vue';
+import { inject, onMounted, ref, nextTick, watch } from 'vue';
 import { provideType } from '../interface';
 import PanelFoot from './PanelFoot.vue'
 const datePicker: provideType = inject('datePicker') as provideType;
@@ -45,9 +45,44 @@ const els = [
 
 // 点击时间 - hms
 const choseTime = (e: any) => {
+  unWatch.value = true;
   if (e.target.nodeName == "LI") {
     let { value, type } = e.target.dataset;
     datePicker.hms.value[type as keyof typeof datePicker.hms.value] = value;
   }
+  setTimeout(() => {
+    unWatch.value = false;
+  }, 0);
 };
+const unWatch = ref(false)
+const timePanelRef = ref()
+onMounted(() => {
+  scrollTo();
+})
+watch([datePicker.hms], () => {
+  if (!unWatch.value)
+    scrollTo();
+}, { deep: true })
+const scrollTo = () => {
+  nextTick(() => {
+    timePanelRef.value.childNodes.forEach((element: HTMLElement) => {
+      if (element.nodeName === "LI") {
+        let scrollTop = 0;
+        let parentDom = element.firstElementChild as HTMLElement;
+        let childList = parentDom.childNodes;
+        for (let index = 0; index < childList.length; index++) {
+          const child = childList[index] as HTMLElement;
+          if (child.nodeName !== "LI") {
+            continue;
+          }
+          if (child.classList && child.classList.contains("layui-this")) {
+            scrollTop = child.offsetTop - (parentDom.offsetHeight - child.offsetHeight) / 2;
+            parentDom.scrollTo(0, scrollTop);
+            break;
+          }
+        }
+      }
+    });
+  })
+}
 </script>

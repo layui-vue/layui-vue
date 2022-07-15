@@ -16,4 +16,5 @@ export type provideType={
   now:Function,
   ok:Function,
   range:boolean,
+  rangeValue:Ref
 }
