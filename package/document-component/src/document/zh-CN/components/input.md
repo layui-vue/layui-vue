@@ -89,9 +89,8 @@ export default {
 ::: demo
 
 <template>
-  <lay-input>
-    <template #prepend>0</template>
-    <template #append>0</template>
+  <lay-input v-model="inputValue">
+    <template #prepend>http://</template>
   </lay-input>
 </template>
 
@@ -101,7 +100,10 @@ import { ref } from 'vue'
 export default {
   setup() {
 
+    const inputValue = ref("");
+
     return {
+      inputValue
     }
   }
 }
@@ -259,6 +261,8 @@ export default {
 | -----  | ------------------- | ----------------|
 | prefix | 输入框前置内容     | --    |
 | suffix | 输入框后置内容     | --    |
+| prepend | 输入框前置内容 (更)     | --    |
+| append | 输入框后置内容 (更)    | --    |
 
 :::
 

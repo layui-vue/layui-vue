@@ -10,7 +10,7 @@
 ::: title 基础使用
 :::
 
-::: demo
+::: demo 使用 lay-icon-picker 标签, 创建图标选择器
 
 <template>
   <lay-icon-picker type="layui-icon-face-smile"></lay-icon-picker>
@@ -57,7 +57,7 @@ export default {
 
 :::
 
-::: title 开启分页
+::: title 开启分页 通过 page 属性开启图标列表的分页展示
 :::
 
 ::: demo
@@ -82,7 +82,7 @@ export default {
 
 :::
 
-::: title 开启搜索
+::: title 开启搜索 通过 showSearch 开启图标列表的搜索功能
 :::
 
 ::: demo

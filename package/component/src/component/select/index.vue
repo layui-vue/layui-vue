@@ -9,12 +9,9 @@ import "./index.less";
 import LaySelectOption from "../selectOption/index.vue";
 import {
   provide,
-  isProxy,
   ref,
   watch,
   computed,
-  reactive,
-  toRefs,
   Ref,
   nextTick,
   shallowRef,
