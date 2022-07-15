@@ -10,12 +10,13 @@ export default {
 </script>
 <script setup lang="ts">
 import "./index.less";
-import { ref, onMounted, onUnmounted, nextTick, computed } from "vue";
+import { ref, onMounted, onUnmounted, nextTick, computed, reactive } from "vue";
 export interface LayAiffxProps {
   offset?: number;
   target?: HTMLElement;
   position?: string;
 }
+
 const props = withDefaults(defineProps<LayAiffxProps>(), {
   offset: 0,
   position: "top",

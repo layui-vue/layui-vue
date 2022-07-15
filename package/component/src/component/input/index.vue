@@ -96,41 +96,50 @@ const classes = computed(() => {
 </script>
 
 <template>
-  <div class="layui-input-wrapper">
-    <span class="layui-input-prefix" v-if="slots.prefix || props.prefixIcon">
-      <slot name="prefix" v-if="slots.prefix"></slot>
-      <lay-icon
-        v-else
-        :type="props.prefixIcon"
-        class="layui-input-prefix-icon"
-      ></lay-icon>
-    </span>
-    <input
-      :type="type"
-      :name="name"
-      :disabled="disabled"
-      :value="currentValue"
-      :placeholder="placeholder"
-      :autofocus="autofocus"
-      :autocomplete="autocomplete"
-      :readonly="readonly"
-      :class="classes"
-      class="layui-input"
-      @input="onInput"
-      @focus="onFocus"
-      @blur="onBlur"
-      @change="onChange"
-    />
-    <span class="layui-input-suffix" v-if="slots.suffix || props.suffixIcon">
-      <slot name="suffix" v-if="slots.suffix"></slot>
-      <lay-icon
-        v-else
-        :type="props.suffixIcon"
-        class="layui-input-suffix-icon"
-      ></lay-icon>
-    </span>
-    <span class="layui-input-clear" v-if="allowClear && hasContent">
-      <lay-icon type="layui-icon-close-fill" @click.stop="onClear"></lay-icon>
-    </span>
+  <div
+    class="layui-input"
+  >
+    <div class="layui-input-prepend" v-if="slots.prepend">
+      <slot name="prepend"></slot>
+    </div>
+    <div class="layui-input-wrapper">
+      <span class="layui-input-prefix" v-if="slots.prefix || props.prefixIcon">
+        <slot name="prefix" v-if="slots.prefix"></slot>
+        <lay-icon
+          v-else
+          :type="props.prefixIcon"
+          class="layui-input-prefix-icon"
+        ></lay-icon>
+      </span>
+      <input
+        :type="type"
+        :name="name"
+        :disabled="disabled"
+        :value="currentValue"
+        :placeholder="placeholder"
+        :autofocus="autofocus"
+        :autocomplete="autocomplete"
+        :readonly="readonly"
+        :class="classes"
+        @input="onInput"
+        @focus="onFocus"
+        @blur="onBlur"
+        @change="onChange"
+      />
+      <span class="layui-input-suffix" v-if="slots.suffix || props.suffixIcon">
+        <slot name="suffix" v-if="slots.suffix"></slot>
+        <lay-icon
+          v-else
+          :type="props.suffixIcon"
+          class="layui-input-suffix-icon"
+        ></lay-icon>
+      </span>
+      <span class="layui-input-clear" v-if="allowClear && hasContent">
+        <lay-icon type="layui-icon-close-fill" @click.stop="onClear"></lay-icon>
+      </span>
+    </div>
+    <div class="layui-input-append" v-if="slots.append">
+      <slot name="append"></slot>
+    </div>
   </div>
 </template>

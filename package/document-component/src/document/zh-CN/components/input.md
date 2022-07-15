@@ -83,6 +83,32 @@ export default {
 
 :::
 
+::: title 拼接内容
+:::
+
+::: demo
+
+<template>
+  <lay-input>
+    <template #prepend>0</template>
+    <template #append>0</template>
+  </lay-input>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    return {
+    }
+  }
+}
+</script>
+
+:::
+
 ::: title 设置图标
 :::
 
