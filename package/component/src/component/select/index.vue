@@ -104,14 +104,12 @@ watch(props, () => {
     }
   } else {
     selectItem.value.value = value;
-    //
     selectItem.value.label = ItemsMap.value[value] || "";
   }
 });
 
-// 禁止操作子项
-const disabledItemMap: { [key: string | number]: boolean } = {};
 const txt = ref("");
+const disabledItemMap: { [key: string | number]: boolean } = {};
 const input = ref(false);
 const value = computed({
   set(v: any) {
@@ -254,7 +252,6 @@ provide("keyword", txt);
           :placeholder="placeholder"
           prefix-icon="layui-icon-search"
           allow-clear
-          autocomplete
         >
         </lay-input>
       </div>

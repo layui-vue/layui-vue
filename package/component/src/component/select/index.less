@@ -64,13 +64,11 @@ dl.layui-anim-upbit > dd .layui-form-checkbox,
 }
 
 .layui-form-select {
-  .layui-input {
-    border: 1px solid #eeeeee;
-  }
   position: relative;
 }
 
-.layui-form-select .layui-input {
+.layui-select-title .layui-input {
+  padding-left: 10px;
   padding-right: 30px;
   cursor: pointer;
 }
@@ -157,16 +155,6 @@ dl.layui-anim-upbit > dd .layui-form-checkbox,
   margin-bottom: 5px;
   padding: 0 10px;
   cursor: pointer;
-
-  .layui-input-wrapper {
-    border: unset;
-    border-bottom: 1px solid var(--input-border-color);
-
-    .layui-input {
-      border: unset;
-      padding-left: 0;
-    }
-  }
 
   .layui-input-wrapper:focus-within {
     border-color: var(--input-border-color);
