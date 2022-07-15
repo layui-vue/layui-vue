@@ -20,7 +20,7 @@ export interface LayInputNumberProps {
   position?: "right";
   min?: number;
   max?: number;
-  size?: "md" | "sm" | "xs";
+  size?: "lg" | "md" | "sm" | "xs";
 }
 
 const props = withDefaults(defineProps<LayInputNumberProps>(), {
@@ -30,6 +30,7 @@ const props = withDefaults(defineProps<LayInputNumberProps>(), {
   step: 1,
   min: -Infinity,
   max: Infinity,
+  size: "md",
 });
 
 const emit = defineEmits(["update:modelValue", "change"]);

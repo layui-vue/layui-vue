@@ -41,16 +41,10 @@
 <template>
   <div>
     <div>
-      <lay-input-number></lay-input-number>
+      <lay-input-number size="lg"></lay-input-number>
       <lay-input-number size="md"></lay-input-number>
       <lay-input-number size="sm"></lay-input-number>
       <lay-input-number size="xs"></lay-input-number>
-    </div>
-    <div>
-      <lay-input-number position="right"></lay-input-number>
-      <lay-input-number position="right" size="md"></lay-input-number>
-      <lay-input-number position="right" size="sm"></lay-input-number>
-      <lay-input-number position="right" size="xs"></lay-input-number>
     </div>
   </div>
 </template>

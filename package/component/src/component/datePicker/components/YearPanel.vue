@@ -7,10 +7,19 @@
         </div>
       </div>
     </div>
-    <div class="layui-laydate-content" style="height: 220px; overflow-y: auto" ref="ScrollRef">
+    <div
+      class="layui-laydate-content"
+      style="height: 220px; overflow-y: auto"
+      ref="ScrollRef"
+    >
       <ul class="layui-laydate-list laydate-year-list">
-        <li v-for="item of datePicker.yearList.value" :key="item"
-          :class="{ 'layui-this': datePicker.currentYear.value === item }" @click="handleYearClick(item)">{{ item }}
+        <li
+          v-for="item of datePicker.yearList.value"
+          :key="item"
+          :class="{ 'layui-this': datePicker.currentYear.value === item }"
+          @click="handleYearClick(item)"
+        >
+          {{ item }}
         </li>
       </ul>
     </div>
@@ -23,12 +32,12 @@ export default {
 };
 </script>
 <script lang="ts" setup>
-import dayjs from 'dayjs';
-import { inject, nextTick, onMounted, ref, watch } from 'vue';
-import { provideType } from '../interface';
-import PanelFoot from './PanelFoot.vue'
-const datePicker: provideType = inject('datePicker') as provideType;
-const unWatch = ref(false)
+import dayjs from "dayjs";
+import { inject, nextTick, onMounted, ref, watch } from "vue";
+import { provideType } from "../interface";
+import PanelFoot from "./PanelFoot.vue";
+const datePicker: provideType = inject("datePicker") as provideType;
+const unWatch = ref(false);
 // 点击年份
 const handleYearClick = (item: any) => {
   unWatch.value = true;
@@ -49,21 +58,22 @@ const handleYearClick = (item: any) => {
 const ScrollRef = ref();
 onMounted(() => {
   scrollTo();
-})
+});
 watch([datePicker.currentYear], () => {
-  if (!unWatch.value)
-    scrollTo();
-})
+  if (!unWatch.value) scrollTo();
+});
 const scrollTo = () => {
   nextTick(() => {
     let scrollTop = 0;
     for (const child of ScrollRef.value.firstElementChild.childNodes) {
-      if (child.classList && child.classList.contains('layui-this')) {
-        scrollTop = child.offsetTop - (ScrollRef.value.offsetHeight - child.offsetHeight) / 2;
+      if (child.classList && child.classList.contains("layui-this")) {
+        scrollTop =
+          child.offsetTop -
+          (ScrollRef.value.offsetHeight - child.offsetHeight) / 2;
         break;
       }
     }
-    ScrollRef.value.scrollTo(0, scrollTop)
-  })
-}
+    ScrollRef.value.scrollTo(0, scrollTop);
+  });
+};
 </script>

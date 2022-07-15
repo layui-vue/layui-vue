@@ -52,7 +52,6 @@ const getDayLength = (year: number, month: number): number => {
   return new Date(year, month + 1, 0).getDate();
 };
 
-
 // 设置日期列表
 const setDateList = (year: number, month: number) => {
   const curDays = getDayLength(year, month); // 当月天数
@@ -95,4 +94,12 @@ const setDateList = (year: number, month: number) => {
   return list;
 };
 
-export { getDayLength, getYears, getDate, getMonth, getYear,getDay,setDateList };
+export {
+  getDayLength,
+  getYears,
+  getDate,
+  getMonth,
+  getYear,
+  getDay,
+  setDateList,
+};

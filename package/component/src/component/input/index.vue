@@ -15,7 +15,7 @@ export interface LayInputProps {
   type?: string;
   prefixIcon?: string;
   suffixIcon?: string;
-  modelValue?: string;
+  modelValue?: string | number;
   allowClear?: boolean;
   autocomplete?: string;
   placeholder?: string;
@@ -96,9 +96,7 @@ const classes = computed(() => {
 </script>
 
 <template>
-  <div
-    class="layui-input"
-  >
+  <div class="layui-input">
     <div class="layui-input-prepend" v-if="slots.prepend">
       <slot name="prepend"></slot>
     </div>

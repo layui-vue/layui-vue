@@ -8,15 +8,27 @@
       </div>
       <div class="layui-laydate-content" style="height: 210px">
         <ul class="layui-laydate-list laydate-time-list" ref="timePanelRef">
-          <li class="num-list" v-for="item in els" :key="item.type" :data-type="item.type">
+          <li
+            class="num-list"
+            v-for="item in els"
+            :key="item.type"
+            :data-type="item.type"
+          >
             <ol class="scroll" @click="choseTime">
-              <li v-for="(it, index) in item.count" :id="item.type + index.toString()"
-                :data-value="index.toString().padStart(2, '0')" :data-type="item.type" :key="it" :class="[
+              <li
+                v-for="(it, index) in item.count"
+                :id="item.type + index.toString()"
+                :data-value="index.toString().padStart(2, '0')"
+                :data-type="item.type"
+                :key="it"
+                :class="[
                   'num',
-                  index.toString().padStart(2, '0') == datePicker.hms.value[item.type]
+                  index.toString().padStart(2, '0') ==
+                  datePicker.hms.value[item.type]
                     ? 'layui-this'
                     : '',
-                ]">
+                ]"
+              >
                 {{ index.toString().padStart(2, "0") }}
               </li>
             </ol>
@@ -33,10 +45,10 @@ export default {
 };
 </script>
 <script lang="ts" setup>
-import { inject, onMounted, ref, nextTick, watch } from 'vue';
-import { provideType } from '../interface';
-import PanelFoot from './PanelFoot.vue'
-const datePicker: provideType = inject('datePicker') as provideType;
+import { inject, onMounted, ref, nextTick, watch } from "vue";
+import { provideType } from "../interface";
+import PanelFoot from "./PanelFoot.vue";
+const datePicker: provideType = inject("datePicker") as provideType;
 const els = [
   { count: 24, type: "hh" },
   { count: 60, type: "mm" },
@@ -54,15 +66,18 @@ const choseTime = (e: any) => {
     unWatch.value = false;
   }, 0);
 };
-const unWatch = ref(false)
-const timePanelRef = ref()
+const unWatch = ref(false);
+const timePanelRef = ref();
 onMounted(() => {
   scrollTo();
-})
-watch([datePicker.hms], () => {
-  if (!unWatch.value)
-    scrollTo();
-}, { deep: true })
+});
+watch(
+  [datePicker.hms],
+  () => {
+    if (!unWatch.value) scrollTo();
+  },
+  { deep: true }
+);
 const scrollTo = () => {
   nextTick(() => {
     timePanelRef.value.childNodes.forEach((element: HTMLElement) => {
@@ -76,13 +91,15 @@ const scrollTo = () => {
             continue;
           }
           if (child.classList && child.classList.contains("layui-this")) {
-            scrollTop = child.offsetTop - (parentDom.offsetHeight - child.offsetHeight) / 2;
+            scrollTop =
+              child.offsetTop -
+              (parentDom.offsetHeight - child.offsetHeight) / 2;
             parentDom.scrollTo(0, scrollTop);
             break;
           }
         }
       }
     });
-  })
-}
+  });
+};
 </script>

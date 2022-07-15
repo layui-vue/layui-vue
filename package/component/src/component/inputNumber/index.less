@@ -3,46 +3,55 @@
 
 @border-color: #eee;
 @hover-border-color: var(--global-primary-color);
-@lg: 40px;
+@lg: 44px;
 @lg-wdith: 200px;
-@lg-right: 20px;
-@md: 32px;
+@lg-right: 22px;
+@md: 38px;
 @md-wdith: 160px;
-@md-right: 16px;
-@sm: 28px;
+@md-right: 19px;
+@sm: 32px;
 @sm-wdith: 140px;
-@sm-right: 14px;
-@xs: 24px;
+@sm-right: 16px;
+@xs: 26px;
 @xs-wdith: 120px;
-@xs-right: 12px;
+@xs-right: 13px;
 
 .set-size(@width, @size, @right-size) {
   & {
     height: @size;
     width: @width;
+
     .layui-input {
       height: @size;
       line-height: @size;
       padding: 0 @size;
     }
+
     .layui-control-btn {
       width: @size;
       height: @size;
       line-height: @size;
     }
+
     &[position="right"] {
       .layui-input {
         padding: 0 @size 0 0;
       }
+
       .layui-control-btn {
         height: @right-size;
         line-height: @right-size;
       }
+
       .layui-subtraction-btn {
         top: @right-size - 1;
       }
     }
   }
+}
+
+.layui-input-number + .layui-input-number {
+  margin-left: 10px;
 }
 
 .layui-input-number {
@@ -53,14 +62,15 @@
   border-color: @border-color;
   border-radius: var(--global-border-radius);
   overflow: hidden;
-  .set-size(@lg-wdith, @lg, @lg-right);
-  margin-left: 5px;
-  .layui-input-wrapper {
+
+  .layui-input {
     border: 0;
-    .layui-input { 
+
+    input {
       text-align: center;
     }
   }
+
   .layui-control-btn {
     position: absolute;
     box-sizing: border-box;
@@ -71,28 +81,31 @@
     padding: 0;
     text-align: center;
     top: 0;
+
     &:hover {
       color: @hover-border-color;
     }
+
     &.layui-subtraction-btn {
       border-right-width: 1px;
     }
+
     &.layui-addition-btn {
       border-left-width: 1px;
       right: 0;
     }
+
     .layui-icon {
       padding: 0px;
     }
   }
-  /* google */
-  input.layui-input::-webkit-outer-spin-button,
-  input.layui-input::-webkit-inner-spin-button {
+
+  .layui-input input::-webkit-outer-spin-button,
+  .layui-input input::-webkit-inner-spin-button {
     -webkit-appearance: none;
   }
 
-  /* firefox */
-  input.layui-input[type="number"] {
+  .layui-input input[type="number"] {
     -moz-appearance: textfield;
   }
 
@@ -102,19 +115,21 @@
       border-right-width: 0px;
       border-left-width: 1px;
     }
+
     .layui-addition-btn {
       border-bottom-width: 1px;
     }
   }
 
-  &[size="md"] {
-    .set-size(@md-wdith,@md, @md-right);
+  &[size="lg"] {
+    .set-size(@lg-wdith, @lg, @lg-right);
   }
-
+  &[size="md"] {
+    .set-size(@md-wdith, @md, @md-right);
+  }
   &[size="sm"] {
     .set-size(@sm-wdith, @sm, @sm-right);
   }
-
   &[size="xs"] {
     .set-size(@xs-wdith, @xs, @xs-right);
   }

@@ -2,16 +2,39 @@
   <div class="layui-laydate">
     <div class="layui-laydate-main laydate-main-list-0">
       <div class="layui-laydate-header">
-        <i class="layui-icon laydate-icon laydate-prev-y" @click="changeYearOrMonth('year', -1)"></i>
-        <i class="layui-icon laydate-icon laydate-prev-m" @click="changeYearOrMonth('month', -1)"></i>
+        <i
+          class="layui-icon laydate-icon laydate-prev-y"
+          @click="changeYearOrMonth('year', -1)"
+          ></i
+        >
+        <i
+          class="layui-icon laydate-icon laydate-prev-m"
+          @click="changeYearOrMonth('month', -1)"
+          ></i
+        >
         <div class="laydate-set-ym">
-          <span @click="datePicker.showPanel.value = 'year'">{{ datePicker.currentYear.value }} 年</span>
-          <span @click="datePicker.showPanel.value = 'month'">{{ datePicker.currentMonth.value + 1 }} 月</span>
+          <span @click="datePicker.showPanel.value = 'year'"
+            >{{ datePicker.currentYear.value }} 年</span
+          >
+          <span @click="datePicker.showPanel.value = 'month'"
+            >{{ datePicker.currentMonth.value + 1 }} 月</span
+          >
         </div>
-        <i class="layui-icon laydate-icon laydate-next-m" @click="changeYearOrMonth('month', 1)"></i>
-        <i class="layui-icon laydate-icon laydate-next-y" @click="changeYearOrMonth('year', 1)"></i>
+        <i
+          class="layui-icon laydate-icon laydate-next-m"
+          @click="changeYearOrMonth('month', 1)"
+          ></i
+        >
+        <i
+          class="layui-icon laydate-icon laydate-next-y"
+          @click="changeYearOrMonth('year', 1)"
+          ></i
+        >
       </div>
-      <DateContent :date-list="datePicker.dateList" v-model="datePicker.currentDay.value"></DateContent>
+      <DateContent
+        :date-list="datePicker.dateList"
+        v-model="datePicker.currentDay.value"
+      ></DateContent>
       <PanelFoot></PanelFoot>
     </div>
   </div>
@@ -22,19 +45,22 @@ export default {
 };
 </script>
 <script lang="ts" setup>
-import { computed, inject, ref, watch } from 'vue';
-import { provideType } from '../interface';
-import { setDateList } from '../day';
-import PanelFoot from './PanelFoot.vue'
-import DateContent from './components/DateContent.vue'
+import { computed, inject, ref, watch } from "vue";
+import { provideType } from "../interface";
+import { setDateList } from "../day";
+import PanelFoot from "./PanelFoot.vue";
+import DateContent from "./components/DateContent.vue";
 
-const datePicker: provideType = inject('datePicker') as provideType;
+const datePicker: provideType = inject("datePicker") as provideType;
 
 // 监听年月, 刷新日期
 watch(
   [datePicker.currentYear, datePicker.currentMonth],
   () => {
-    datePicker.dateList.value = setDateList(datePicker.currentYear.value, datePicker.currentMonth.value);
+    datePicker.dateList.value = setDateList(
+      datePicker.currentYear.value,
+      datePicker.currentMonth.value
+    );
   },
   { immediate: true }
 );
@@ -55,6 +81,4 @@ const changeYearOrMonth = (type: "year" | "month", num: number) => {
     datePicker.currentMonth.value = month;
   }
 };
-
-
 </script>
