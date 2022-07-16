@@ -13,14 +13,23 @@
       ref="ScrollRef"
     >
       <ul class="layui-laydate-list laydate-year-list">
-        <li v-for="item of yearList" :key="item" :class="{ 'layui-this': Year === item }"
-          @click="handleYearClick(item)">{{ item }}
+        <li
+          v-for="item of yearList"
+          :key="item"
+          :class="{ 'layui-this': Year === item }"
+          @click="handleYearClick(item)"
+        >
+          {{ item }}
         </li>
       </ul>
     </div>
     <PanelFoot @ok="footOnOk" @now="footOnNow" @clear="footOnClear">
-      <span v-if="datePicker.type === 'yearmonth'" @click="datePicker.showPanel.value = 'month'"
-        class="laydate-btns-time">选择月份</span>
+      <span
+        v-if="datePicker.type === 'yearmonth'"
+        @click="datePicker.showPanel.value = 'month'"
+        class="laydate-btns-time"
+        >选择月份</span
+      >
       <template v-else>{{ Year }}</template>
     </PanelFoot>
   </div>
@@ -31,25 +40,24 @@ export default {
 };
 </script>
 <script lang="ts" setup>
-import dayjs from 'dayjs';
-import { inject, nextTick, onMounted, ref, watch } from 'vue';
-import { getYears } from '../day';
-import { provideType } from '../interface';
-import PanelFoot from './PanelFoot.vue'
+import dayjs from "dayjs";
+import { inject, nextTick, onMounted, ref, watch } from "vue";
+import { getYears } from "../day";
+import { provideType } from "../interface";
+import PanelFoot from "./PanelFoot.vue";
 
 export interface TimePanelProps {
   modelValue: number | string;
   max?: number;
 }
 const props = withDefaults(defineProps<TimePanelProps>(), {
-  max: dayjs().year() + 100
+  max: dayjs().year() + 100,
 });
-const emits = defineEmits(['update:modelValue', 'ok']);
-const datePicker: provideType = inject('datePicker') as provideType;
+const emits = defineEmits(["update:modelValue", "ok"]);
+const datePicker: provideType = inject("datePicker") as provideType;
 const yearList = ref<number[]>(getYears());
 const unWatch = ref(false);
 const Year = ref(props.modelValue);
-
 
 // 点击年份
 const handleYearClick = (item: any) => {
@@ -61,7 +69,7 @@ const handleYearClick = (item: any) => {
     } else if (datePicker.type === "yearmonth") {
       datePicker.currentDay.value = dayjs().year(item).valueOf();
       datePicker.showPanel.value = "month";
-      emits('update:modelValue', Year.value);
+      emits("update:modelValue", Year.value);
     } else {
       datePicker.showPanel.value = "date";
     }
@@ -79,10 +87,13 @@ const handleYearClick = (item: any) => {
 const ScrollRef = ref();
 onMounted(() => {
   scrollTo();
-})
-watch(() => Year, () => {
-  Year.value = props.modelValue;
-})
+});
+watch(
+  () => Year,
+  () => {
+    Year.value = props.modelValue;
+  }
+);
 const scrollTo = () => {
   nextTick(() => {
     let scrollTop = 0;
@@ -94,33 +105,33 @@ const scrollTo = () => {
         break;
       }
     }
-    ScrollRef.value.scrollTo(0, scrollTop)
-  })
-}
+    ScrollRef.value.scrollTo(0, scrollTop);
+  });
+};
 
 //关闭回调
 const footOnOk = () => {
-  emits('update:modelValue', Year.value)
+  emits("update:modelValue", Year.value);
   if (datePicker.range) {
     //关闭菜单
-    emits('ok');
+    emits("ok");
     return;
   } else {
-    datePicker.ok()
+    datePicker.ok();
   }
-}
+};
 
 //现在回调
 const footOnNow = () => {
   Year.value = dayjs().year();
-  if (datePicker.type === 'yearmonth') {
+  if (datePicker.type === "yearmonth") {
     datePicker.currentMonth.value = dayjs().month();
   }
   scrollTo();
-}
+};
 
 //清空回调
 const footOnClear = () => {
-  Year.value = ''
-}
+  Year.value = "";
+};
 </script>

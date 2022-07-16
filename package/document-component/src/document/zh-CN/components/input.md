@@ -261,6 +261,7 @@ export default {
 | allow-clear              | 允许清空 allow-clear  | `true` `false` |
 | prefix-icon              | 前置图标              | --             |
 | suffix-icon              | 后置图标              | --             |
+| password                 | 开启密码显示隐藏       | `true` `false`|
 
 :::
 

@@ -48,13 +48,18 @@ const emit = defineEmits<InputEmits>();
 const { t } = useI18n();
 const slots = useSlots();
 const type = ref(props.type);
-const currentValue = ref<string>(String(props.modelValue == null ? "" : props.modelValue));
+const currentValue = ref<string>(
+  String(props.modelValue == null ? "" : props.modelValue)
+);
 const hasContent = computed(() => (props.modelValue as string)?.length > 0);
-const isPassword = computed(() => type.value == "password")
+const isPassword = computed(() => type.value == "password");
 
-watch(() => props.type, () => {
-  type.value = props.type;
-})
+watch(
+  () => props.type,
+  () => {
+    type.value = props.type;
+  }
+);
 
 watch(
   () => props.modelValue,
@@ -101,12 +106,12 @@ const classes = computed(() => {
 });
 
 const showPassword = () => {
-  if(isPassword.value) {
+  if (isPassword.value) {
     type.value = "text";
   } else {
     type.value = "password";
   }
-}
+};
 </script>
 
 <template>
@@ -147,7 +152,10 @@ const showPassword = () => {
         ></lay-icon>
       </span>
       <span class="layui-input-password" v-if="password">
-        <lay-icon :type="isPassword ? 'layui-icon-face-smile' : 'layui-icon-face-cry'" @click="showPassword"></lay-icon>
+        <lay-icon
+          :type="isPassword ? 'layui-icon-face-smile' : 'layui-icon-face-cry'"
+          @click="showPassword"
+        ></lay-icon>
       </span>
       <span class="layui-input-clear" v-if="allowClear && hasContent">
         <lay-icon type="layui-icon-close-fill" @click.stop="onClear"></lay-icon>

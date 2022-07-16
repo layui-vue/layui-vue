@@ -1,25 +1,36 @@
 <template>
   <div class="layui-laydate-content">
-    <table style="width:100%">
+    <table style="width: 100%">
       <thead>
         <tr>
           <th v-for="item of WEEK_NAME" :key="item">{{ item }}</th>
         </tr>
       </thead>
       <tbody>
-        <template v-for="(o, i) of dateList.length % 7 == 0
-        ? dateList.length / 7
-        : Math.floor(dateList.length / 7) + 1" :key="i">
+        <template
+          v-for="(o, i) of dateList.length % 7 == 0
+            ? dateList.length / 7
+            : Math.floor(dateList.length / 7) + 1"
+          :key="i"
+        >
           <tr>
-            <td v-for="(item, index) of dateList.slice(
-              i * 7,
-              i * 7 + 7
-            )" :key="index" :data-unix="item.value" :class="{
-  'laydate-day-prev': item.type !== 'current',
-  'layui-this': item.value === modelValue || (datePicker.range && item.type === 'current' && (item.value == startDate || item.value == endDate)),
-  'laydate-range-hover': ifHasRangeHoverClass(item),
-  'layui-disabled': item.type !== 'current' && datePicker.range
-}" @click="handleDayClick(item)" @mouseenter="dayItemMouseEnter($event, item)">
+            <td
+              v-for="(item, index) of dateList.slice(i * 7, i * 7 + 7)"
+              :key="index"
+              :data-unix="item.value"
+              :class="{
+                'laydate-day-prev': item.type !== 'current',
+                'layui-this':
+                  item.value === modelValue ||
+                  (datePicker.range &&
+                    item.type === 'current' &&
+                    (item.value == startDate || item.value == endDate)),
+                'laydate-range-hover': ifHasRangeHoverClass(item),
+                'layui-disabled': item.type !== 'current' && datePicker.range,
+              }"
+              @click="handleDayClick(item)"
+              @mouseenter="dayItemMouseEnter($event, item)"
+            >
               {{ item.day }}
             </td>
           </tr>
@@ -50,11 +61,17 @@ const props = withDefaults(defineProps<DateContentProps>(), {
   modelValue: -1,
   hoverDate: -1,
   startDate: -1,
-  endDate: -1
+  endDate: -1,
 });
 const WEEK_NAME = ["日", "一", "二", "三", "四", "五", "六"];
-const datePicker: provideType = inject('datePicker') as provideType;
-const emits = defineEmits(['update:modelValue', 'update:startDate', 'update:endDate', 'update:hoverDate','simple']);
+const datePicker: provideType = inject("datePicker") as provideType;
+const emits = defineEmits([
+  "update:modelValue",
+  "update:startDate",
+  "update:endDate",
+  "update:hoverDate",
+  "simple",
+]);
 
 // 点击日期
 const handleDayClick = (item: any) => {
@@ -64,28 +81,31 @@ const handleDayClick = (item: any) => {
     }
 
     if (props.startDate === -1 && props.endDate === -1) {
-      emits('update:startDate', item.value)
+      emits("update:startDate", item.value);
     } else if (props.startDate !== -1 && props.endDate !== -1) {
-      emits('update:hoverDate', item.value);
-      emits('update:startDate', item.value)
-      emits('update:endDate', -1)
+      emits("update:hoverDate", item.value);
+      emits("update:startDate", item.value);
+      emits("update:endDate", -1);
     } else if (props.startDate !== -1 && props.endDate === -1) {
-      emits('update:endDate', item.value)
+      emits("update:endDate", item.value);
       if (item.value < props.startDate) {
         //swap
         const first = props.startDate;
         const last = item.value;
-        emits('update:startDate', last);
-        emits('update:endDate', first);
+        emits("update:startDate", last);
+        emits("update:endDate", first);
       }
     }
   } else {
-    emits('update:modelValue', item.value);
+    emits("update:modelValue", item.value);
     if (item.type !== "current") {
-      datePicker.currentMonth.value = item.type === "prev" ? datePicker.currentMonth.value - 1 : datePicker.currentMonth.value + 1;
+      datePicker.currentMonth.value =
+        item.type === "prev"
+          ? datePicker.currentMonth.value - 1
+          : datePicker.currentMonth.value + 1;
     }
     if (datePicker.simple) {
-     emits('simple');
+      emits("simple");
     }
   }
 };
@@ -101,30 +121,33 @@ const dayItemMouseEnter = (event: MouseEvent, item: any) => {
     return;
   }
   if (props.startDate !== -1 && props.endDate !== -1) {
-    emits('update:hoverDate', -1);
+    emits("update:hoverDate", -1);
     return;
   }
-  emits('update:hoverDate', parseInt((event.target as HTMLElement).dataset.unix as string));
-}
+  emits(
+    "update:hoverDate",
+    parseInt((event.target as HTMLElement).dataset.unix as string)
+  );
+};
 const ifHasRangeHoverClass = computed(() => {
   return function (item: any) {
     if (!datePicker.range) {
       return false;
     }
     if (props.startDate === -1) {
-      return false
+      return false;
     }
     if (item.type !== "current") {
       return false;
     }
-    if(props.hoverDate===-1&&props.endDate===-1){
-      return false
+    if (props.hoverDate === -1 && props.endDate === -1) {
+      return false;
     }
     let hover = props.endDate !== -1 ? props.endDate : props.hoverDate;
     let max = props.startDate > hover ? props.startDate : hover;
-    let min = props.startDate < hover ? props.startDate : hover
+    let min = props.startDate < hover ? props.startDate : hover;
     if (item.value >= min && item.value <= max) {
-      return true
+      return true;
     }
     return false;
   };
