@@ -105,7 +105,6 @@ html #layuicss-laydate {
   padding: 10px 70px 5px;
 }
 .layui-laydate-header * {
-  display: inline-block;
   vertical-align: bottom;
 }
 .layui-laydate-header i {
@@ -161,7 +160,7 @@ html #layuicss-laydate {
   width: 36px;
   height: 30px;
   padding: 5px;
-  text-align: center;
+  text-align: center !important;
 }
 .layui-laydate-content th {
   font-weight: 400;
@@ -300,7 +299,7 @@ html #layuicss-laydate {
 
 /* 双日历 */
 .layui-laydate-range {
-  width: 546px;
+  min-width: 546px;
 }
 .layui-laydate-range .layui-laydate-main {
   display: inline-block;
@@ -465,4 +464,64 @@ html #layuicss-laydate {
 }
 .layui-laydate-content .layui-disabled:hover{
   background-color: transparent !important;
+}
+
+.laydate-range-inputs{
+  display: flex;
+  align-items: center;
+  border-width: 1px;
+  border-style: solid;
+  display: inline-flex;
+  border-color: var(--input-border-color);
+  border-radius: var(--input-border-radius);
+  .range-separator{
+    margin: 0 5px;
+    color: var(--global-neutral-color-8);
+    background-color: transparent;
+  }
+  .layui-input-wrapper{
+    border: none;
+    box-sizing: border-box;
+    input{
+      text-align: center;
+      padding: 0;
+    }
+  }
+  .layui-input {
+    border: none;
+  }
+}
+.layui-laydate-range{
+  .laydate-set-ym{
+    overflow: visible;
+    white-space: nowrap;
+  }
+  .laydate-set-ym .layui-dropdown{
+    width: auto !important;
+  }
+
+  .time-panel{
+    .layui-laydate-main{
+       width: 272px;
+       display: unset !important;
+     }
+     .layui-laydate-preview{
+       display: none;
+     }
+   }
+   .layui-laydate-content{
+     .laydate-year-list{
+       display: flex;
+       flex-wrap: wrap;
+     }
+   }
+   .layui-laydate-list{
+    display: flex;
+    flex-wrap: wrap;
+   }
+}
+.layui-laydate-range-datetime{
+  .layui-laydate-main{
+    width: 340px;
+  }
 }

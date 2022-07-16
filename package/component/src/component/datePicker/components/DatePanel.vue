@@ -31,11 +31,10 @@
           ></i
         >
       </div>
-      <DateContent
-        :date-list="datePicker.dateList"
-        v-model="datePicker.currentDay.value"
-      ></DateContent>
-      <PanelFoot></PanelFoot>
+      <DateContent :date-list="dateList" v-model="Day" @simple="footOnOk"></DateContent>
+      <PanelFoot @ok="footOnOk" @now="footOnNow" @clear="footOnClear">
+        <span v-if="datePicker.type === 'datetime'" @click="datePicker.showPanel.value='time'" class="laydate-btns-time">选择时间</span>
+      </PanelFoot>
     </div>
   </div>
 </template>
@@ -45,25 +44,34 @@ export default {
 };
 </script>
 <script lang="ts" setup>
-import { computed, inject, ref, watch } from "vue";
-import { provideType } from "../interface";
-import { setDateList } from "../day";
-import PanelFoot from "./PanelFoot.vue";
-import DateContent from "./components/DateContent.vue";
+import { inject, ref, watch } from 'vue';
+import { provideType } from '../interface';
+import { setDateList } from '../day';
+import PanelFoot from './PanelFoot.vue'
+import DateContent from './components/DateContent.vue'
+import dayjs from 'dayjs';
 
-const datePicker: provideType = inject("datePicker") as provideType;
+export interface TimePanelProps {
+  modelValue: number;
+}
+const props = withDefaults(defineProps<TimePanelProps>(), {});
+const emits = defineEmits(['update:modelValue', 'ok']);
+const Day = ref(props.modelValue)
+const datePicker: provideType = inject('datePicker') as provideType;
+const dateList = ref<any>([]);
 
 // 监听年月, 刷新日期
 watch(
   [datePicker.currentYear, datePicker.currentMonth],
   () => {
-    datePicker.dateList.value = setDateList(
-      datePicker.currentYear.value,
-      datePicker.currentMonth.value
-    );
+    dateList.value = setDateList(datePicker.currentYear.value, datePicker.currentMonth.value);
   },
   { immediate: true }
 );
+
+watch(() => props.modelValue, () => {
+  Day.value = props.modelValue;
+})
 
 // 切换年月
 const changeYearOrMonth = (type: "year" | "month", num: number) => {
@@ -81,4 +89,22 @@ const changeYearOrMonth = (type: "year" | "month", num: number) => {
     datePicker.currentMonth.value = month;
   }
 };
+
+//关闭回调
+const footOnOk = () => {
+  emits('update:modelValue', Day.value)
+  datePicker.ok()
+}
+
+//现在回调
+const footOnNow = () => {
+  datePicker.currentYear.value=dayjs().year();
+  datePicker.currentMonth.value=dayjs().month();
+  Day.value = new Date(new Date().toDateString()).getTime();
+}
+
+//清空回调
+const footOnClear = () => {
+  Day.value = -1
+}
 </script>

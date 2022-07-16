@@ -101,7 +101,7 @@ import { ref } from 'vue'
 export default {
   setup() {
 
-   const endTime3 = ref("2022-03-04 17:35:00");
+   const endTime3 = ref("2022");
 
     return {
       endTime3
@@ -118,7 +118,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-date-picker type="month" v-model="endTime4"></lay-date-picker>
+  <lay-date-picker type="month" v-model="mouth"></lay-date-picker>
 </template>
 
 <script>
@@ -127,7 +127,7 @@ import { ref } from 'vue'
 export default {
   setup() {
 
-   const endTime4 = ref("2022-03-04 17:35:00");
+   const mouth = ref("4");
 
     return {
       endTime4
@@ -153,7 +153,7 @@ import { ref } from 'vue'
 export default {
   setup() {
 
-   const endTime5 = ref("2022-03-04 17:35:00");
+   const endTime5 = ref("17:35:00");
 
     return {
       endTime5
@@ -179,7 +179,7 @@ import { ref } from 'vue'
 export default {
   setup() {
 
-   const endTime6 = ref("2022-03-04 17:35:00");
+   const endTime6 = ref("2022-03");
 
     return {
       endTime6
@@ -216,6 +216,31 @@ export default {
     }
   }
 }
+</script>
+
+:::
+
+::: title 范围选择
+:::
+
+::: demo
+
+<template>
+  <div style="display:flex;  align-items: center;margin-bottom: 5px;">
+    <lay-date-picker  v-model="rangeTime1" range placeholder="type : date"></lay-date-picker>
+    <span style="margin-left:10px">modelValue:{{rangeTime1}}</span>
+  </div>
+  <div style="display:flex;  align-items: center;margin-bottom: 5px;">
+    <lay-date-picker  v-model="rangeTime2" range type="datetime" placeholder="type : datetime"></lay-date-picker>
+    <span style="margin-left:10px">modelValue:{{rangeTime2}}</span>
+  </div>
+  <lay-button @click="rangeTime2=['2001-02-01','2001-03-1']">test</lay-button>
+</template>
+
+<script setup>
+import { ref } from 'vue'
+const rangeTime1 = ref([]);
+const rangeTime2 = ref(['2001-01-01','2001-02-1']);
 </script>
 
 :::
