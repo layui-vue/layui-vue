@@ -111,6 +111,33 @@ export default {
 
 :::
 
+::: title 输入密码
+:::
+
+::: demo
+
+<template>
+  <lay-input v-model="inputValue" type="password" password></lay-input>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const inputValue = ref("");
+
+    return {
+      inputValue
+    }
+  }
+}
+</script>
+
+:::
+
+
 ::: title 设置图标
 :::
 

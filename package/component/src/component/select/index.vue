@@ -7,15 +7,7 @@ export default {
 <script setup lang="ts">
 import "./index.less";
 import LaySelectOption from "../selectOption/index.vue";
-import {
-  provide,
-  ref,
-  watch,
-  computed,
-  Ref,
-  nextTick,
-  shallowRef,
-} from "vue";
+import { provide, ref, watch, computed, Ref, nextTick, shallowRef } from "vue";
 import LayBadge from "../badge/index.vue";
 import LayInput from "../input/index.vue";
 import LayScroll from "../scroll/index.vue";

@@ -22,6 +22,7 @@ export interface LayInputProps {
   autofocus?: boolean;
   disabled?: boolean;
   readonly?: boolean;
+  password?: boolean;
 }
 
 const props = withDefaults(defineProps<LayInputProps>(), {
@@ -29,6 +30,7 @@ const props = withDefaults(defineProps<LayInputProps>(), {
   readonly: false,
   allowClear: false,
   autofocus: false,
+  password: false,
   modelValue: "",
 });
 
@@ -45,10 +47,14 @@ const emit = defineEmits<InputEmits>();
 
 const { t } = useI18n();
 const slots = useSlots();
-const currentValue = ref<string>(
-  String(props.modelValue == null ? "" : props.modelValue)
-);
+const type = ref(props.type);
+const currentValue = ref<string>(String(props.modelValue == null ? "" : props.modelValue));
 const hasContent = computed(() => (props.modelValue as string)?.length > 0);
+const isPassword = computed(() => type.value == "password")
+
+watch(() => props.type, () => {
+  type.value = props.type;
+})
 
 watch(
   () => props.modelValue,
@@ -93,6 +99,14 @@ const onBlur = (event: Event) => {
 const classes = computed(() => {
   return { "layui-disabled": props.disabled };
 });
+
+const showPassword = () => {
+  if(isPassword.value) {
+    type.value = "text";
+  } else {
+    type.value = "password";
+  }
+}
 </script>
 
 <template>
@@ -131,6 +145,9 @@ const classes = computed(() => {
           :type="props.suffixIcon"
           class="layui-input-suffix-icon"
         ></lay-icon>
+      </span>
+      <span class="layui-input-password" v-if="password">
+        <lay-icon :type="isPassword ? 'layui-icon-face-smile' : 'layui-icon-face-cry'" @click="showPassword"></lay-icon>
       </span>
       <span class="layui-input-clear" v-if="allowClear && hasContent">
         <lay-icon type="layui-icon-close-fill" @click.stop="onClear"></lay-icon>
