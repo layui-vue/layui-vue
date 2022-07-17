@@ -1,68 +1,34 @@
 <template>
   <div>
-    <lay-dropdown
-      ref="dropdownRef"
-      :disabled="disabled"
-      :autoFitMinWidth="false"
-    >
-      <lay-input
-        readonly
-        :name="name"
-        :model-value="(dateValue as string)"
-        :placeholder="placeholder"
-        prefix-icon="layui-icon-date"
-        :disabled="disabled"
-        v-if="!range"
-      >
+    <lay-dropdown ref="dropdownRef" :disabled="disabled" :autoFitMinWidth="false">
+      <lay-input readonly :name="name" :model-value="(dateValue as string)" :placeholder="placeholder"
+        prefix-icon="layui-icon-date" :disabled="disabled" v-if="!range">
       </lay-input>
       <div class="laydate-range-inputs" v-else>
-        <lay-input
-          readonly
-          :name="name"
-          :model-value="dateValue[0]"
-          :disabled="disabled"
-          class="start-input"
-        >
+        <lay-input readonly :name="name" :model-value="dateValue[0]" :disabled="disabled" class="start-input">
         </lay-input>
         <span class="range-separator">{{ rangeSeparator }}</span>
-        <lay-input
-          readonly
-          :name="name"
-          :model-value="dateValue[1]"
-          :disabled="disabled"
-          class="end-input"
-        >
+        <lay-input readonly :name="name" :model-value="dateValue[1]" :disabled="disabled" class="end-input">
         </lay-input>
       </div>
 
       <template #content>
         <!-- 日期选择 -->
-        <DatePanel
-          v-if="!range && (showPanel === 'date' || showPanel === 'datetime')"
-          v-model="currentDay"
-        ></DatePanel>
+        <DatePanel v-if="!range && (showPanel === 'date' || showPanel === 'datetime')" v-model="currentDay"></DatePanel>
         <!-- 时间选择 -->
-        <TimePanel
-          v-if="!range && showPanel === 'time'"
-          v-model="hms"
-        ></TimePanel>
+        <TimePanel v-if="!range && showPanel === 'time'" v-model="hms"></TimePanel>
         <!-- 年份选择器 -->
-        <YearPanel
-          v-if="!range && (showPanel === 'year' || showPanel === 'yearmonth')"
-          v-model="currentYear"
-        >
+        <YearPanel v-if="!range && (showPanel === 'year' || showPanel === 'yearmonth')" v-model="currentYear">
         </YearPanel>
         <!-- 月份选择器 -->
-        <MonthPanel
-          v-if="!range && showPanel === 'month'"
-          v-model="currentMonth"
-        ></MonthPanel>
+        <MonthPanel v-if="!range && showPanel === 'month'" v-model="currentMonth"></MonthPanel>
         <!-- 范围选择 -->
-        <DateRange
-          v-if="range && (showPanel === 'date' || showPanel === 'datetime')"
-          v-model:startTime="rangeValue.first"
-          v-model:endTime="rangeValue.last"
-        ></DateRange>
+        <DateRange v-if="range && (showPanel === 'date' || showPanel === 'datetime')"
+          v-model:startTime="rangeValue.first" v-model:endTime="rangeValue.last"></DateRange>
+
+        <MonthRange v-if="range && showPanel === 'yearmonth'" v-model:startTime="rangeValue.first"
+          v-model:endTime="rangeValue.last">
+        </MonthRange>
       </template>
     </lay-dropdown>
   </div>
@@ -95,6 +61,7 @@ import TimePanel from "./components/TimePanel.vue";
 import YearPanel from "./components/YearPanel.vue";
 import MonthPanel from "./components/MonthPanel.vue";
 import DateRange from "./components/DateRange.vue";
+import MonthRange from "./components/MonthRange.vue";
 
 export interface LayDatePickerProps {
   type?: "date" | "datetime" | "year" | "time" | "month" | "yearmonth";
@@ -148,10 +115,10 @@ const getDateValue = () => {
       dayjsVal =
         currentDay.value !== -1
           ? dayjs(currentDay.value)
-              .hour(hms.value.hh)
-              .minute(hms.value.mm)
-              .second(hms.value.ss)
-              .format("YYYY-MM-DD HH:mm:ss")
+            .hour(hms.value.hh)
+            .minute(hms.value.mm)
+            .second(hms.value.ss)
+            .format("YYYY-MM-DD HH:mm:ss")
           : "";
       break;
     case "year":
@@ -181,10 +148,10 @@ const getDateValue = () => {
       dayjsVal =
         currentDay.value !== -1
           ? dayjs(currentDay.value)
-              .hour(hms.value.hh)
-              .minute(hms.value.mm)
-              .second(hms.value.ss)
-              .format()
+            .hour(hms.value.hh)
+            .minute(hms.value.mm)
+            .second(hms.value.ss)
+            .format()
           : "";
       break;
   }
@@ -198,9 +165,21 @@ const getDateValueByRange = () => {
   unWatch = true;
   if (rangeValue.first === "" || rangeValue.last === "") {
     dateValue.value = ["", ""];
+    $emits("update:modelValue", dateValue.value);
     return;
   }
-  let format = props.type === "datetime" ? "YYYY-MM-DD HH:mm:ss" : "YYYY-MM-DD";
+  let format ="YYYY-MM-DD";
+  switch (props.type) {
+    case "date":
+      format = 'YYYY-MM-DD';
+      break;
+    case "datetime":
+      format = 'YYYY-MM-DD HH:mm:ss';
+      break;
+    case "yearmonth":
+      format = 'YYYY-MM';
+      break;
+  }
   dateValue.value = [
     dayjs(rangeValue.first).format(format),
     dayjs(rangeValue.last).format(format),
@@ -233,7 +212,7 @@ watch(
   () => props.type,
   () => {
     showPanel.value = props.type;
-    if (props.type === "yearmonth") {
+    if (props.type === "yearmonth" && !props.range) {
       showPanel.value = "year";
     }
   },

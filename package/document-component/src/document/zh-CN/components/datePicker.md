@@ -234,13 +234,17 @@ export default {
     <lay-date-picker  v-model="rangeTime2" range type="datetime" placeholder="type : datetime"></lay-date-picker>
     <span style="margin-left:10px">modelValue:{{rangeTime2}}</span>
   </div>
-  <lay-button @click="rangeTime2=['2001-02-01','2001-03-1']">test</lay-button>
+  <div style="display:flex;  align-items: center;margin-bottom: 5px;">
+    <lay-date-picker  v-model="rangeTime3" range type="yearmonth" placeholder="type : datetime"></lay-date-picker>
+    <span style="margin-left:10px">modelValue:{{rangeTime3}}</span>
+  </div>
 </template>
 
 <script setup>
 import { ref } from 'vue'
 const rangeTime1 = ref([]);
 const rangeTime2 = ref(['2001-01-01','2001-02-1']);
+const rangeTime3 = ref(['2022-01-01','2023-02-1']);
 </script>
 
 :::
