@@ -699,6 +699,7 @@ const options3=[
 | onlyLastLevel            | 回显display仅显示最后一级，默认为 `false`  |
 | replaceFields            | 自定义数据key名,可配置项为`label`,`value`,`children`,用法详见上面案例  |
 | allow-clear              | 默认slot提供清空功能，与lay-input保持一致|
+| size                     | 尺寸参数，与lay-input保持一致|
 :::
 
 ::: title Cascader 事件

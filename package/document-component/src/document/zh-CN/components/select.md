@@ -310,6 +310,7 @@ export default {
 | showEmpty    | 是否增加空提示选项     | `boolean`                  | `true` `false` | `true` |
 | multiple     | 是否为多选            | `boolean`                  | `true` `false` | `false` |
 | create       | 是否允许创建            | `boolean`                  | `true` `false` | `false` |
+| size         | 尺寸            | `string`                  | `lg` `md` `sm` `xs`| `md` |
 
 
 :::

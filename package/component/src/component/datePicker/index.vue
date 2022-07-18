@@ -15,6 +15,7 @@
         v-if="!range"
         @change="onChange"
         :allow-clear="!disabled && allowClear"
+        :size="size"
         @clear="
           dateValue = '';
           onChange();
@@ -29,6 +30,7 @@
           :disabled="disabled"
           @change="onChange"
           class="start-input"
+          :size="size"
         >
         </lay-input>
         <span class="range-separator">{{ rangeSeparator }}</span>
@@ -40,6 +42,7 @@
           :disabled="disabled"
           @change="onChange"
           class="end-input"
+          :size="size"
           @clear="
             dateValue = [];
             onChange();
@@ -130,6 +133,7 @@ export interface LayDatePickerProps {
   rangeSeparator?: string;
   readonly?: boolean;
   allowClear?: boolean;
+  size?: "lg" | "md" | "sm" | "xs";
 }
 
 const props = withDefaults(defineProps<LayDatePickerProps>(), {
@@ -141,6 +145,7 @@ const props = withDefaults(defineProps<LayDatePickerProps>(), {
   rangeSeparator: "至",
   readonly: false,
   allowClear: true,
+  size:'md',
 });
 
 const dropdownRef = ref(null);

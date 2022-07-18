@@ -1,5 +1,30 @@
 @import "../badge/index.less";
 @import "../checkbox/index.less";
+@import "../input/index.less";
+
+@lg: 44px;
+@md: 38px;
+@sm: 32px;
+@xs: 26px;
+@lg-badge:32px;
+@md-badge:26px;
+@sm-badge:20px;
+@xs-badge:14px;
+
+.set-size(@size,@badge-size) {
+  & {
+    height: @size;
+    .layui-input {
+      height: @size;
+      line-height: @size;
+    }
+    .layui-badge{
+      height: @badge-size;
+      line-height: @badge-size;
+      box-sizing: border-box;
+    }
+  }
+}
 
 dl.layui-anim-upbit > dd input[type="checkbox"] {
   display: none;
@@ -62,7 +87,9 @@ dl.layui-anim-upbit > dd .layui-form-checkbox,
 .layui-form-select {
   position: relative;
 }
-
+.layui-select-title{
+  height: 100%;
+}
 .layui-select-title .layui-input {
   padding-left: 10px;
   padding-right: 30px;
@@ -154,5 +181,19 @@ dl.layui-anim-upbit > dd .layui-form-checkbox,
 
   .layui-input-wrapper:focus-within {
     border-color: var(--input-border-color);
+  }
+}
+.layui-form-select{
+  &[size="lg"] {
+    .set-size(@lg,@lg-badge);
+  }
+  &[size="md"] {
+    .set-size(@md,@md-badge);
+  }
+  &[size="sm"] {
+    .set-size(@sm,@sm-badge);
+  }
+  &[size="xs"] {
+    .set-size(@xs,@xs-badge);
   }
 }

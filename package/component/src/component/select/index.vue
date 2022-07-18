@@ -30,6 +30,7 @@ export interface LaySelectProps {
     disabled: boolean;
     keyword: string;
   }[];
+  size?: "lg" | "md" | "sm" | "xs";
 }
 
 const selectRef = shallowRef<undefined | HTMLElement>(undefined);
@@ -46,6 +47,7 @@ const props = withDefaults(defineProps<LaySelectProps>(), {
   showEmpty: true,
   multiple: false,
   create: false,
+  size:'md',
 });
 
 const openState = ref(false);
@@ -173,6 +175,7 @@ provide("keyword", txt);
     ref="selectRef"
     class="layui-unselect layui-form-select"
     :class="{ 'layui-form-selected': openState }"
+    :size='size'
   >
     <div class="layui-select-title" @click="open">
       <input

@@ -3,6 +3,21 @@
   --input-border-color: var(--global-neutral-color-3);
 }
 
+@lg: 44px;
+@md: 38px;
+@sm: 32px;
+@xs: 26px;
+
+.set-size(@size) {
+  & {
+    height: @size;
+    .layui-input {
+      height: @size;
+      line-height: @size;
+    }
+  }
+}
+
 
 .layui-input {
   width: 100%;
@@ -81,4 +96,19 @@
 
 .layui-input input::-webkit-input-placeholder {
   line-height: 1.3;
+}
+
+.layui-input{
+  &[size="lg"] {
+    .set-size(@lg);
+  }
+  &[size="md"] {
+    .set-size(@md);
+  }
+  &[size="sm"] {
+    .set-size(@sm);
+  }
+  &[size="xs"] {
+    .set-size(@xs);
+  }
 }

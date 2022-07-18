@@ -14,6 +14,7 @@
       v-if="!slots.default"
       :allow-clear="allowClear"
       @clear="onClear"
+      :size="size"
     ></lay-input>
     <slot v-else></slot>
 
@@ -74,6 +75,7 @@ export interface LayCascaderProps {
   onlyLastLevel?: boolean;
   replaceFields?: { label: string; value: string; children: string };
   allowClear?: boolean;
+  size?: "lg" | "md" | "sm" | "xs";
 }
 const props = withDefaults(defineProps<LayCascaderProps>(), {
   options: null,
@@ -82,6 +84,7 @@ const props = withDefaults(defineProps<LayCascaderProps>(), {
   placeholder: "",
   onlyLastLevel: false,
   allowClear: false,
+  size:'md',
   replaceFields: () => {
     return {
       label: "label",
@@ -250,7 +253,7 @@ const selectBar = (item: any, selectIndex: number, parentIndex: number) => {
   }
 };
 
-const displayValue = ref<string | number | null>(null);
+const displayValue = ref<string | number >('');
 const slots = useSlots();
 const dropdownRef = ref();
 const dropDownDisabled = ref(false);

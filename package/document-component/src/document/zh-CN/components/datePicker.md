@@ -262,7 +262,7 @@ const rangeTime3 = ref(['2022-01-01','2023-02-1']);
 | simple      | 一次性选择，无需点击确认按钮             | `boolean`         | false    | —             |
 | readonly      | 只读             | `boolean`         | false    | —             |
 | allowClear    | 允许清空             | `boolean`         | true    | —             |
-
+| size    | 尺寸            | `string`         | `lg` `md` `sm` `xs`    | `md`            |
 
 :::
 

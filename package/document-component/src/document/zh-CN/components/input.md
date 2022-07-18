@@ -243,6 +243,25 @@ export default {
 
 :::
 
+::: title 尺寸Size
+:::
+
+::: demo
+
+<template>
+  <div>
+      <lay-input size="lg" placeholder='lg'></lay-input>
+      <lay-input size="md" placeholder='md' style='margin-top:10px'></lay-input>
+      <lay-input size="sm" placeholder='sm' style='margin-top:10px'></lay-input>
+      <lay-input size="xs" placeholder='xs' style='margin-top:10px'></lay-input>
+    </div>
+</template>
+
+<script>
+</script>
+
+:::
+
 ::: title Input 属性
 :::
 
@@ -261,6 +280,7 @@ export default {
 | prefix-icon              | 前置图标              | --             |
 | suffix-icon              | 后置图标              | --             |
 | password                 | 开启密码显示隐藏       | `true` `false`|
+| size                     | 尺寸       | `lg` `md` `sm` `xs`，默认`md`|
 
 :::
 

@@ -23,6 +23,7 @@ export interface LayInputProps {
   disabled?: boolean;
   readonly?: boolean;
   password?: boolean;
+  size?: "lg" | "md" | "sm" | "xs";
 }
 
 const props = withDefaults(defineProps<LayInputProps>(), {
@@ -32,6 +33,7 @@ const props = withDefaults(defineProps<LayInputProps>(), {
   autofocus: false,
   password: false,
   modelValue: "",
+  size:'md',
 });
 
 interface InputEmits {
@@ -115,7 +117,7 @@ const showPassword = () => {
 </script>
 
 <template>
-  <div class="layui-input">
+  <div class="layui-input" :size="size">
     <div class="layui-input-prepend" v-if="slots.prepend">
       <slot name="prepend"></slot>
     </div>
