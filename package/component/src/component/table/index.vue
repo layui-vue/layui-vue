@@ -21,6 +21,7 @@ export interface LayTableProps {
   size?: string;
   page?: Recordable;
   checkbox?: boolean;
+  radio?: boolean;
   columns: Recordable[];
   dataSource: Recordable[];
   defaultToolbar?: boolean;

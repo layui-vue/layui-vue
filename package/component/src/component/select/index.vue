@@ -203,7 +203,7 @@ provide("keyword", txt);
       >
         <div class="layui-multiple-select-badge">
           <template v-for="(item, index) in selectItem.label" :key="index">
-            <lay-badge theme="green">
+            <lay-badge theme="gray">
               <span>{{ item }}</span>
               <i
                 :class="['layui-icon', { 'layui-icon-close': true }]"

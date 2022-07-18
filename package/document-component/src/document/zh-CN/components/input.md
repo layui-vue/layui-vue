@@ -117,7 +117,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-input v-model="inputValue" type="password" password></lay-input>
+  <lay-input v-model="inputValue1" type="password" password></lay-input>
 </template>
 
 <script>
@@ -126,17 +126,16 @@ import { ref } from 'vue'
 export default {
   setup() {
 
-    const inputValue = ref("");
+    const inputValue1 = ref("");
 
     return {
-      inputValue
+      inputValue1
     }
   }
 }
 </script>
 
 :::
-
 
 ::: title 设置图标
 :::
