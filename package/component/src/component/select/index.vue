@@ -49,7 +49,7 @@ const props = withDefaults(defineProps<LaySelectProps>(), {
   multiple: false,
   create: false,
   size: "md",
-  allowClear: true,
+  allowClear: false,
 });
 
 const openState = ref(false);

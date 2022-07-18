@@ -147,7 +147,7 @@ const props = withDefaults(defineProps<LayDatePickerProps>(), {
   range: false,
   rangeSeparator: "至",
   readonly: false,
-  allowClear: true,
+  allowClear: false,
   size: "md",
 });
 
