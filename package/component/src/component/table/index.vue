@@ -14,6 +14,8 @@ import {
   onMounted,
   onUpdated,
   StyleValue,
+  WritableComputedRef,
+computed,
 } from "vue";
 import { v4 as uuidv4 } from "../../utils/guidUtil";
 import { Recordable } from "../../types";
@@ -31,13 +33,14 @@ export interface LayTableProps {
   columns: Recordable[];
   dataSource: Recordable[];
   defaultToolbar?: boolean;
+  selectedKey?: any;
   selectedKeys?: Recordable[];
   indentSize?: number;
   childrenColumnName?: string;
   height?: number;
   maxHeight?: string;
   even?: boolean;
-  expandIndex: number;
+  expandIndex?: number;
   rowClassName?: string | Function;
   cellClassName?: string | Function;
   rowStyle?: string | Function;
@@ -67,6 +70,7 @@ const emit = defineEmits([
   "change",
   "row-double",
   "update:selectedKeys",
+  "update:selectedKey",
   "contextmenu",
 ]);
 
@@ -85,6 +89,15 @@ const tableColumnKeys = ref(
     }
   })
 );
+
+const tableSelectedKey: WritableComputedRef<Recordable[]> = computed({
+  get() {
+    return props.selectedKey;
+  },
+  set(val) {
+    emit("update:selectedKey", val);
+  },
+});
 
 watch(
   () => props.dataSource,
@@ -484,6 +497,7 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
                   @row-double="rowDoubleClick"
                   @contextmenu="contextmenu"
                   v-model:selectedKeys="tableSelectedKeys"
+                  v-model:selectedKey="tableSelectedKey" 
                 >
                   <template v-for="name in slotsData" #[name]="{ data }">
                     <slot :name="name" :data="data"></slot>

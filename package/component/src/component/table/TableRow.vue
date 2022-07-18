@@ -19,6 +19,7 @@ export interface LayTableRowProps {
   expandSpace: boolean;
   expandIndex: number;
   selectedKeys: Recordable[];
+  selectedKey: any;
   tableColumnKeys: Recordable[];
   childrenColumnName?: string;
   columns: Recordable[];
@@ -37,6 +38,7 @@ const emit = defineEmits([
   "row-double",
   "contextmenu",
   "update:selectedKeys",
+  "update:selectedKey",
 ]);
 
 const props = withDefaults(defineProps<LayTableRowProps>(), {
@@ -52,6 +54,15 @@ const tableSelectedKeys: WritableComputedRef<Recordable[]> = computed({
   },
   set(val) {
     emit("update:selectedKeys", val);
+  },
+});
+
+const tableSelectedKey: WritableComputedRef<Recordable[]> = computed({
+  get() {
+    return props.selectedKey;
+  },
+  set(val) {
+    emit("update:selectedKey", val);
   },
 });
 
@@ -182,6 +193,57 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
     <template v-for="(column, columnIndex) in columns" :key="columnIndex">
       <!-- 展示否 -->
       <template v-if="tableColumnKeys.includes(column.key)">
+
+        <template v-if="column.type == 'radio'">
+          <td
+            class="layui-table-cell"
+            :style="[
+              {
+                textAlign: column.align,
+                whiteSpace: column.ellipsisTooltip ? 'nowrap' : 'normal',
+              },
+              renderFixedStyle(column, columnIndex),
+              renderCellStyle(data, column, index, columnIndex),
+            ]"
+            :class="[
+              renderFixedClassName(column, columnIndex),
+              renderCellClassName(data, column, index, columnIndex),
+              column.fixed ? `layui-table-fixed-${column.fixed}` : '',
+            ]"
+          >
+            <!-- 树表占位与缩进 -->
+            <span
+              v-if="expandSpace && columnIndex === expandIndex"
+              :style="{ 'margin-right': currentIndentSize + 'px' }"
+            ></span>
+
+            <span
+              v-if="
+                expandSpace &&
+                !data[childrenColumnName] &&
+                !slot.expand &&
+                columnIndex === expandIndex
+              "
+              class="layui-table-cell-expand-icon-spaced"
+            ></span>
+
+            <lay-icon
+              v-if="
+                (slot.expand || data[childrenColumnName]) &&
+                columnIndex === expandIndex
+              "
+              class="layui-table-cell-expand-icon"
+              :type="expandIconType"
+              @click="handleExpand"
+            ></lay-icon>
+
+            <lay-radio
+              v-model="tableSelectedKey"
+              :value="data[id]"
+            />
+          </td>
+        </template>
+
         <template v-if="column.type == 'checkbox'">
           <td
             class="layui-table-cell"

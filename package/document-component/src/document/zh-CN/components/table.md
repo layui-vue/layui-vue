@@ -616,7 +616,7 @@ export default {
 ::: title 开启序号
 :::
 
-::: demo 通过 `fixed` 属性实现列固定, 可选值为 `left` 与 `right`。
+::: demo 通过 `columns` 配置 `type:'number'` 开启序号列。
 
 <template>
   <lay-table :columns="columns21" :dataSource="dataSource21"></lay-table>
@@ -680,7 +680,7 @@ export default {
 ::: title 开启多选
 :::
 
-::: demo 通过 `fixed` 属性实现列固定, 可选值为 `left` 与 `right`。
+::: demo 通过 `columns` 配置 `type:'checkbox'` 开启单选列。
 
 <template>
   <lay-table :columns="columns23" :dataSource="dataSource23"></lay-table>
@@ -746,6 +746,73 @@ export default {
 
 :::
 
+::: title 开启单选
+:::
+
+::: demo 通过 `columns` 配置 `type:'radio'` 开启单选列。
+
+<template>
+  <lay-table :columns="columns24" :dataSource="dataSource24" v-model:selectedKey="selectedKey24"></lay-table>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const columns24 = [
+      {
+        title: "ID",
+        width: "30px",
+        type: "radio",
+        align: "center"
+      },
+      {
+        title:"账户",
+        width:"200px",
+        key:"username"
+      },{
+        title:"密码",
+        width: "300px",
+        key:"password"
+      },{
+        title:"性别",
+        width: "300px",
+        key:"sex"
+      },{
+        title:"年龄",
+        width: "300px",
+        key:"age"
+      },{
+        title:"备注",
+        width: "180px",
+        key:"remark",
+        ellipsisTooltip: true
+      }
+    ]
+    
+    const selectedKey24 = ref("2");
+
+    const dataSource24 = [
+      {id:"1",username:"root", password:"root",sex:"男", age:"18", remark: 'layui - vue（谐音：类 UI) '},
+      {id:"2",username:"root", password:"root",sex:"男", age:"18", remark: 'layui - vue（谐音：类 UI) '},
+      {id:"3",username:"woow", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '},
+      {id:"4",username:"woow", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '},
+      {id:"5",username:"woow", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '}
+    ]
+
+    return {
+      columns24,
+      dataSource24,
+      selectedKey24,
+    }
+  }
+}
+</script>
+
+:::
+
 ::: title 刷新数据
 :::
 
@@ -796,7 +863,7 @@ export default {
     ])
     
     const changeDataSource22 = () => {
-      dataSource21.value = [{username:"update", password:"update",sex:"boy", age:"18", remark: '更新数据 '}]
+      dataSource22.value = [{username:"update", password:"update",sex:"boy", age:"18", remark: '更新数据 '}]
     }
 
     return {
