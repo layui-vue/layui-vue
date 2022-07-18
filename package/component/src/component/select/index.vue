@@ -31,6 +31,7 @@ export interface LaySelectProps {
     keyword: string;
   }[];
   size?: "lg" | "md" | "sm" | "xs";
+  allowClear:boolean;
 }
 
 const selectRef = shallowRef<undefined | HTMLElement>(undefined);
@@ -48,6 +49,7 @@ const props = withDefaults(defineProps<LaySelectProps>(), {
   multiple: false,
   create: false,
   size:'md',
+  allowClear:true
 });
 
 const openState = ref(false);
@@ -164,6 +166,10 @@ const selectItemPush = function (p: SelectItem) {
   }
 };
 
+const clear=()=>{
+  emit('update:modelValue',props.multiple?[]:'');
+}
+
 provide("selectItemHandle", selectItemHandle);
 provide("selectItemPush", selectItemPush);
 provide("selectItem", selectItem);
@@ -198,7 +204,10 @@ provide("keyword", txt);
           { 'layui-disabled': disabled },
         ]"
       />
-      <i :class="['layui-edge', { 'layui-disabled': disabled }]"></i>
+      <span class="layui-input-icon-area">
+        <i :class="['layui-icon layui-icon-down', { 'layui-disabled': disabled }]" :style="{transform:`rotate(${openState?180:0}deg)`}"></i>
+        <i class="layui-icon layui-icon-close-fill" v-if="(value||selectItem.label?.length)&&allowClear" @click.stop="clear"></i>
+      </span>
       <!-- 多选 -->
       <div
         v-if="selectItem.multiple && Array.isArray(selectItem.label)"

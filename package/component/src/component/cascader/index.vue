@@ -1,11 +1,14 @@
 <template>
   <lay-dropdown
     class="layui-cascader"
+    :class="{'layui-cascader-opend':openState}"
     ref="dropdownRef"
     :autoFitMinWidth="false"
     :updateAtScroll="true"
     :disabled="dropDownDisabled"
     :size="size"
+    @open="openState=true"
+    @hide="openState=false"
   >
     <lay-input
       v-model="displayValue"
@@ -276,4 +279,6 @@ const onClear = () => {
     dropDownDisabled.value = false;
   }, 0);
 };
+
+const openState=ref(false)
 </script>
