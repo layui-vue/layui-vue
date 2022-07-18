@@ -95,7 +95,7 @@ export default {
 ::: demo
 
 <template>
-    <lay-rate v-model="clearHalf" :half="true" :is-block="true" has-clear></lay-rate>
+    <lay-rate v-model="clearHalf" :half="true" :is-block="true" allow-clear></lay-rate>
 </template>
 
 <script>
@@ -313,7 +313,7 @@ export default {
 | half     | 设定组件是否可以选择半星 | `boolean` | false     |
 | text     | 是否显示评分对应的内容 | `boolean` | false     |
 | is-block | 评分是否显示为快元素 | `boolean` | false     |
-| has-clear | 评分是否需要清除功能 | `boolean` | false     |
+| allow-clear | 评分是否需要清除功能 | `boolean` | false     |
 | clear-icon | 评分清除功能使用的图标`class` | `string` | `layui-icon-close-fill`     |
 | icons    | 评分使用图标`class`；`["空心", "实心"]`/`["空心", "半心", "实心"]` | `string[]` | 星型     |
 

@@ -16,7 +16,7 @@ export interface LayRateProps {
   half?: boolean;
   text?: boolean;
   isBlock?: boolean;
-  hasClear?: boolean;
+  allowClear?: boolean;
   clearIcon?: string;
   icons?: string[];
 }
@@ -28,7 +28,7 @@ const props = withDefaults(defineProps<LayRateProps>(), {
   half: false,
   text: false,
   isBlock: false,
-  hasClear: false,
+  allowClear: false,
   clearIcon: "layui-icon-close-fill",
   icons: () => [
     "layui-icon-rate",
@@ -83,7 +83,7 @@ const action = function (index: number, event: any) {
 };
 
 // 清除评分图标
-const showClearIcon = computed(() => !props.readonly && props.hasClear);
+const showClearIcon = computed(() => !props.readonly && props.allowClear);
 const clearRate = function () {
   tempValue.value = 0;
   currentValue.value = 0;
