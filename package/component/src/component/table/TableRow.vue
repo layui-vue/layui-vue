@@ -144,7 +144,7 @@ const renderFixedStyle = (column: any, columnIndex: number) => {
       return { right: `${right}px` } as StyleValue;
     }
   }
-  return { } as StyleValue;
+  return {} as StyleValue;
 };
 
 const renderFixedClassName = (column: any, columnIndex: number) => {
@@ -178,22 +178,11 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
     @dblclick.stop="rowDoubleClick(data, $event)"
     @contextmenu.stop="contextmenu(data, $event)"
   >
-    <!-- 复选框 -->
-    <td v-if="checkbox" class="layui-table-col-special">
-      <div class="layui-table-cell laytable-cell-checkbox">
-        <lay-checkbox
-          v-model="tableSelectedKeys"
-          :value="data[id]"
-          skin="primary"
-        />
-      </div>
-    </td>
-
     <!-- 数据列 -->
     <template v-for="(column, columnIndex) in columns" :key="columnIndex">
       <!-- 展示否 -->
       <template v-if="tableColumnKeys.includes(column.key)">
-        <template v-if="column.type == 'number'">
+        <template v-if="column.type == 'checkbox'">
           <td
             class="layui-table-cell"
             :style="[
@@ -205,6 +194,7 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
               renderCellStyle(data, column, index, columnIndex),
             ]"
             :class="[
+              renderFixedClassName(column, columnIndex),
               renderCellClassName(data, column, index, columnIndex),
               column.fixed ? `layui-table-fixed-${column.fixed}` : '',
             ]"
@@ -235,13 +225,57 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
               @click="handleExpand"
             ></lay-icon>
 
-            <lay-tooltip
-              v-if="column.ellipsisTooltip"
-              :content="data[column.key]"
-              :isAutoShow="true"
-            >
-              {{ index + 1 }}
-            </lay-tooltip>
+            <lay-checkbox
+              v-model="tableSelectedKeys"
+              :value="data[id]"
+              skin="primary"
+            />
+          </td>
+        </template>
+
+        <template v-if="column.type == 'number'">
+          <td
+            class="layui-table-cell"
+            :style="[
+              {
+                textAlign: column.align,
+                whiteSpace: column.ellipsisTooltip ? 'nowrap' : 'normal',
+              },
+              renderFixedStyle(column, columnIndex),
+              renderCellStyle(data, column, index, columnIndex),
+            ]"
+            :class="[
+              renderFixedClassName(column, columnIndex),
+              renderCellClassName(data, column, index, columnIndex),
+              column.fixed ? `layui-table-fixed-${column.fixed}` : '',
+            ]"
+          >
+            <!-- 树表占位与缩进 -->
+            <span
+              v-if="expandSpace && columnIndex === expandIndex"
+              :style="{ 'margin-right': currentIndentSize + 'px' }"
+            ></span>
+
+            <span
+              v-if="
+                expandSpace &&
+                !data[childrenColumnName] &&
+                !slot.expand &&
+                columnIndex === expandIndex
+              "
+              class="layui-table-cell-expand-icon-spaced"
+            ></span>
+
+            <lay-icon
+              v-if="
+                (slot.expand || data[childrenColumnName]) &&
+                columnIndex === expandIndex
+              "
+              class="layui-table-cell-expand-icon"
+              :type="expandIconType"
+              @click="handleExpand"
+            ></lay-icon>
+
             {{ index + 1 }}
           </td>
         </template>
@@ -259,6 +293,7 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
               renderCellStyle(data, column, index, columnIndex),
             ]"
             :class="[
+              renderFixedClassName(column, columnIndex),
               renderCellClassName(data, column, index, columnIndex),
               column.fixed ? `layui-table-fixed-${column.fixed}` : '',
             ]"

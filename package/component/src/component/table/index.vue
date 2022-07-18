@@ -6,7 +6,15 @@ export default {
 
 <script setup lang="ts">
 import "./index.less";
-import { ref, watch, useSlots, withDefaults, onMounted, onUpdated, StyleValue } from "vue";
+import {
+  ref,
+  watch,
+  useSlots,
+  withDefaults,
+  onMounted,
+  onUpdated,
+  StyleValue,
+} from "vue";
 import { v4 as uuidv4 } from "../../utils/guidUtil";
 import { Recordable } from "../../types";
 import { LayIcon } from "@layui/icons-vue";
@@ -20,8 +28,6 @@ export interface LayTableProps {
   skin?: string;
   size?: string;
   page?: Recordable;
-  checkbox?: boolean;
-  radio?: boolean;
   columns: Recordable[];
   dataSource: Recordable[];
   defaultToolbar?: boolean;
@@ -69,7 +75,7 @@ const slots = slot.default && slot.default();
 
 const allChecked = ref(false);
 const hasChecked = ref(false);
-const tableDataSource = ref([...props.dataSource]);
+const tableDataSource = ref<any[]>([...props.dataSource]);
 const tableSelectedKeys = ref<Recordable[]>([...props.selectedKeys]);
 const tableColumns = ref([...props.columns]);
 const tableColumnKeys = ref(
@@ -275,7 +281,7 @@ const renderFixedStyle = (column: any, columnIndex: number) => {
       return { right: `${right}px` } as StyleValue;
     }
   }
-  return { } as StyleValue;
+  return {} as StyleValue;
 };
 
 const renderFixedClassName = (column: any, columnIndex: number) => {
@@ -352,7 +358,6 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
         <div class="layui-table-header" ref="tableHeader">
           <table class="layui-table" :lay-size="size" :lay-skin="skin">
             <colgroup>
-              <col v-if="checkbox" class="layui-table-col-special" />
               <template v-for="column in columns" :key="column">
                 <template v-if="tableColumnKeys.includes(column.key)">
                   <col
@@ -367,17 +372,6 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
             </colgroup>
             <thead>
               <tr>
-                <th v-if="checkbox" class="layui-table-col-special">
-                  <div class="layui-table-cell laytable-cell-checkbox">
-                    <lay-checkbox
-                      v-model="hasChecked"
-                      :is-indeterminate="!allChecked"
-                      skin="primary"
-                      value="all"
-                      @change="changeAll"
-                    />
-                  </div>
-                </th>
                 <template
                   v-for="(column, columnIndex) in columns"
                   :key="column"
@@ -396,31 +390,42 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
                       renderFixedStyle(column, columnIndex),
                     ]"
                   >
-                    <span>
-                      <template v-if="column.titleSlot">
-                        <slot :name="column.titleSlot"></slot>
-                      </template>
-                      <template v-else>
-                        {{ column.title }}
-                      </template>
-                    </span>
-                    <!-- 插槽 -->
-                    <span
-                      v-if="column.sort"
-                      class="layui-table-sort layui-inline"
-                      lay-sort
-                    >
-                      <i
-                        @click.stop="sortTable($event, column.key, 'asc')"
-                        class="layui-edge layui-table-sort-asc"
-                        title="升序"
-                      ></i>
-                      <i
-                        @click.stop="sortTable($event, column.key, 'desc')"
-                        class="layui-edge layui-table-sort-desc"
-                        title="降序"
-                      ></i>
-                    </span>
+                    <template v-if="column.type == 'checkbox'">
+                      <lay-checkbox
+                        v-model="hasChecked"
+                        :is-indeterminate="!allChecked"
+                        skin="primary"
+                        value="all"
+                        @change="changeAll"
+                      />
+                    </template>
+                    <template v-else>
+                      <span>
+                        <template v-if="column.titleSlot">
+                          <slot :name="column.titleSlot"></slot>
+                        </template>
+                        <template v-else>
+                          {{ column.title }}
+                        </template>
+                      </span>
+                      <!-- 插槽 -->
+                      <span
+                        v-if="column.sort"
+                        class="layui-table-sort layui-inline"
+                        lay-sort
+                      >
+                        <i
+                          @click.stop="sortTable($event, column.key, 'asc')"
+                          class="layui-edge layui-table-sort-asc"
+                          title="升序"
+                        ></i>
+                        <i
+                          @click.stop="sortTable($event, column.key, 'desc')"
+                          class="layui-edge layui-table-sort-desc"
+                          title="降序"
+                        ></i>
+                      </span>
+                    </template>
                   </th>
                 </template>
                 <th
@@ -447,7 +452,6 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
             :lay-skin="skin"
           >
             <colgroup>
-              <col v-if="checkbox" class="layui-table-col-special" />
               <template v-for="column in columns" :key="column">
                 <template v-if="tableColumnKeys.includes(column.key)">
                   <col
@@ -467,7 +471,6 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
                   :index="index"
                   :data="data"
                   :columns="columns"
-                  :checkbox="checkbox"
                   :indent-size="indentSize"
                   :currentIndentSize="currentIndentSize"
                   :tableColumnKeys="tableColumnKeys"
