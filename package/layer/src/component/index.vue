@@ -94,7 +94,7 @@ export interface LayModalProps {
   isMessage?: boolean;
   appContext?: any;
   startIndex?: number;
-  imgList?: { src: string; alt: string }[];
+  imgList?: { src: string; alt: string,thumb:string }[];
   min?: Function;
   full?: Function;
   restore?: Function;

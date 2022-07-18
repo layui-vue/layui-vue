@@ -1173,6 +1173,39 @@ html #layuicss-layer {
   padding-left: 10px;
   font-style: normal;
 }
+.layui-layer-imgbar{
+  display: flex;min-height: 40px;height: auto;flex-wrap: wrap;justify-content: center;
+}
+.layui-layer-imgbar .thumb-row{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+}
+.layui-layer-imgbar .thumb-box{
+  width:100px;
+  height:100px;
+  margin:0px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.layui-layer-imgbar .thumb-box-border{
+  position: absolute;
+  top: 0;
+  transition: all 0.2s ease-in-out;
+  width: 100px;
+  height: 100px;
+  border: 1px solid #5fb878;
+  box-sizing: border-box;
+
+}
+.layui-layer-imgbar img{
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
 
 @-webkit-keyframes layer-bounceOut {
   100% {

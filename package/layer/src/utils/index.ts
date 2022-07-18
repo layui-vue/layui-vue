@@ -289,7 +289,7 @@ export async function calculatePhotosArea(
 
   function area(img: { width: number; height: number }) {
     var imgarea = [img.width, img.height];
-    var winarea = [window.innerWidth - 100, window.innerHeight - 100];
+    var winarea = [window.innerWidth - 250, window.innerHeight - 250];
     //如果 实际图片的宽或者高比 屏幕大（那么进行缩放）
     if (imgarea[0] > winarea[0] || imgarea[1] > winarea[1]) {
       let wh = [imgarea[0] / winarea[0], imgarea[1] / winarea[1]]; //取宽度缩放比例、高度缩放比例
