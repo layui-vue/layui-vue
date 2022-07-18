@@ -12,7 +12,6 @@ import {
   useSlots,
   withDefaults,
   onMounted,
-  onUpdated,
   StyleValue,
   WritableComputedRef,
   computed,
@@ -319,6 +318,30 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
     }
   }
 };
+
+const hasTotalRow = computed(() => {
+  let b = false;
+  props.columns.forEach(item => {
+    if(item.totalRow) {
+      b = true;
+    }
+  })
+  return b;
+})
+
+const renderTotalRowCell = (column: any) => {
+  if(column.totalRow) {
+    if(column.totalRow != true) {
+      return column.totalRow;
+    } else {
+      let total = 0;
+      tableDataSource.value.forEach(item => {
+        total = total + item[column.key];
+      })
+      return total;
+    }
+  }
+}
 </script>
 
 <template>
@@ -472,7 +495,10 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
             :lay-skin="skin"
           >
             <colgroup>
-              <template v-for="column in columns" :key="column">
+              <template
+                v-for="(column, columnIndex) in columns"
+                :key="columnIndex"
+              >
                 <template v-if="tableColumnKeys.includes(column.key)">
                   <col
                     :width="column.width"
@@ -514,6 +540,17 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
                   </template>
                 </table-row>
               </template>
+              <!-- totalRow -->
+              <tr v-if="hasTotalRow" class="layui-table-total">
+                <template
+                  v-for="(column, columnIndex) in columns"
+                  :key="columnIndex"
+                >
+                  <template v-if="tableColumnKeys.includes(column.key)">
+                    <td>{{ renderTotalRowCell(column) }}</td>
+                  </template>
+                </template>
+              </tr>
             </tbody>
           </table>
           <lay-empty v-else></lay-empty>

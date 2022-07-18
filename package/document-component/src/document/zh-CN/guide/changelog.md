@@ -23,6 +23,7 @@
           <li>[新增] table 组件 columns 配置 type 属性 radio 值, 开启单选列。</li>
           <li>[新增] table 组件 columns 配置 type 属性 checkbox 值, 开启复选列。</li>
           <li>[新增] table 组件 columns 配置 type 属性 number 值, 开启序号列。</li>
+          <li>[新增] table 组件 columns 配置 totalRow 属性, 开启列值统计。</li>
           <li>[新增] table 组件 selected-key 属性, 配置单选列的选中值。</li>
           <li>[新增] table 组件 data-source 属性, 长度为 0 时的显示状态。</li>
           <li>[新增] date-picker 组件 年月日 范围选择, 重构代码。</li>
