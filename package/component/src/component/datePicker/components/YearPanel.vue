@@ -30,7 +30,7 @@
         class="laydate-btns-time"
         >选择月份</span
       >
-      <template v-else>{{ Year }}</template>
+      <template v-else-if="Year>0">{{ Year }}</template>
     </PanelFoot>
   </div>
 </template>
@@ -71,7 +71,8 @@ const handleYearClick = (item: any) => {
       datePicker.showPanel.value = "month";
       emits("update:modelValue", Year.value);
     } else {
-      datePicker.showPanel.value = "date";
+      emits("update:modelValue", Year.value);
+      datePicker.showPanel.value = datePicker.type;
     }
   }
 
@@ -117,7 +118,11 @@ const footOnOk = () => {
     emits("ok");
     return;
   } else {
-    datePicker.ok();
+    if(datePicker.type==='datetime'||datePicker.type==='date'){
+      datePicker.showPanel.value = datePicker.type;
+    }else{
+      datePicker.ok();
+    }
   }
 };
 

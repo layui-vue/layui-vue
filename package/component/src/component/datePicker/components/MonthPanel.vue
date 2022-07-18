@@ -79,6 +79,7 @@ const handleMonthClick = (item: any) => {
     }
     if (datePicker.type === "date" || datePicker.type === "datetime") {
       emits("update:modelValue", MONTH_NAME.indexOf(item));
+      datePicker.showPanel.value = datePicker.type;
     }
   }
   if (datePicker.simple) {
@@ -101,7 +102,11 @@ const footOnOk = () => {
     emits("ok");
     return;
   } else {
-    datePicker.ok();
+    if(datePicker.type==='datetime'||datePicker.type==='date'){
+      datePicker.showPanel.value = datePicker.type;
+    }else{
+      datePicker.ok();
+    }
   }
 };
 

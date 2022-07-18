@@ -1,37 +1,14 @@
 <template>
   <div>
-    <lay-dropdown
-      ref="dropdownRef"
-      :disabled="disabled"
-      :autoFitMinWidth="false"
-    >
-      <lay-input
-        readonly
-        :name="name"
-        :model-value="(dateValue as string)"
-        :placeholder="placeholder"
-        prefix-icon="layui-icon-date"
-        :disabled="disabled"
-        v-if="!range"
-      >
+    <lay-dropdown ref="dropdownRef" :disabled="disabled" :autoFitMinWidth="false">
+      <lay-input :name="name" :readonly="readonly" v-model="(dateValue as string)" :placeholder="placeholder"
+        prefix-icon="layui-icon-date" :disabled="disabled" v-if="!range" @change="onChange" :allow-clear="allowClear" @clear="dateValue='';onChange()">
       </lay-input>
       <div class="laydate-range-inputs" v-else>
-        <lay-input
-          readonly
-          :name="name"
-          :model-value="dateValue[0]"
-          :disabled="disabled"
-          class="start-input"
-        >
+        <lay-input :readonly="readonly" :name="name" v-model="dateValue[0]" :disabled="disabled" @change="onChange" class="start-input">
         </lay-input>
         <span class="range-separator">{{ rangeSeparator }}</span>
-        <lay-input
-          readonly
-          :name="name"
-          :model-value="dateValue[1]"
-          :disabled="disabled"
-          class="end-input"
-        >
+        <lay-input :readonly="readonly" :name="name" :allow-clear="allowClear" v-model="dateValue[1]" :disabled="disabled" @change="onChange" class="end-input" @clear="dateValue=[];onChange()">
         </lay-input>
       </div>
 
@@ -115,6 +92,8 @@ export interface LayDatePickerProps {
   min?: string;
   range?: boolean;
   rangeSeparator?: string;
+  readonly?:boolean;
+  allowClear?:boolean;
 }
 
 const props = withDefaults(defineProps<LayDatePickerProps>(), {
@@ -124,6 +103,8 @@ const props = withDefaults(defineProps<LayDatePickerProps>(), {
   simple: false,
   range: false,
   rangeSeparator: "至",
+  readonly:false,
+  allowClear:true,
 });
 
 const dropdownRef = ref(null);
@@ -180,10 +161,10 @@ const getDateValue = () => {
         .format("HH:mm:ss");
       break;
     case "yearmonth":
-      dayjsVal = dayjs()
+      dayjsVal = currentYear.value !== -1&&currentMonth.value !== -1?dayjs()
         .year(currentYear.value)
         .month(currentMonth.value)
-        .format("YYYY-MM");
+        .format("YYYY-MM"):'';
       break;
     default:
       dayjsVal =
@@ -196,7 +177,12 @@ const getDateValue = () => {
           : "";
       break;
   }
-  dateValue.value = dayjsVal;
+  dateValue.value = dayjsVal!=='Invalid Date'?dayjsVal:'';
+  if (dayjsVal === 'Invalid Date') {
+    unWatch = false;
+    $emits("update:modelValue", '');
+    return;
+  }
   $emits("update:modelValue", dayjsVal);
   setTimeout(() => {
     unWatch = false;
@@ -274,7 +260,6 @@ watch(
     hms.value.hh = dayjs(initModelValue).hour();
     hms.value.mm = dayjs(initModelValue).minute();
     hms.value.ss = dayjs(initModelValue).second();
-
     if (initModelValue.length === 8 && props.type === "time") {
       //dayjs 解析时间容错
       let modelValue = initModelValue;
@@ -283,10 +268,9 @@ watch(
       hms.value.mm = dayjs(modelValue).minute();
       hms.value.ss = dayjs(modelValue).second();
     }
-    currentYear.value = getYear(initModelValue);
-    currentMonth.value = getMonth(initModelValue);
-    currentDay.value = getDay(initModelValue);
-
+    currentYear.value = initModelValue?getYear(initModelValue):-1;
+    currentMonth.value = initModelValue?getMonth(initModelValue):-1;
+    currentDay.value = initModelValue?getDay(initModelValue):-1;
     rangeValue.first = initModelValue;
     rangeValue.last =
       props.range && props.modelValue
@@ -300,6 +284,13 @@ watch(
   },
   { immediate: true }
 );
+
+const onChange=()=>{
+  if (dropdownRef.value)
+    // @ts-ignore
+    dropdownRef.value.hide();
+  $emits('update:modelValue',dateValue.value)
+}
 
 provide("datePicker", {
   currentYear: currentYear,

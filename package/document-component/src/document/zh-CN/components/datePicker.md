@@ -259,7 +259,10 @@ const rangeTime3 = ref(['2022-01-01','2023-02-1']);
 | v-model      | 当前时间                                                     | `string`         | --    | —             |
 | type        | 选择类型                                                   | `string`         | `date`    | `date` `datetime` `year` `month` `time` `yearmonth`             |
 | disabled      | 是否禁止修改                                                     | `boolean`         | false    | —             |
-| simple      | 一次性选择，无需点击确认按钮                                         | `boolean`         | false    | —             |
+| simple      | 一次性选择，无需点击确认按钮             | `boolean`         | false    | —             |
+| readonly      | 只读             | `boolean`         | false    | —             |
+| allowClear    | 允许清空             | `boolean`         | true    | —             |
+
 
 :::
 
