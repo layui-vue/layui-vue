@@ -3,21 +3,43 @@
     <div style="display: flex">
       <div class="layui-laydate-main laydate-main-list-0">
         <div class="layui-laydate-header">
-          <i class="layui-icon laydate-icon laydate-prev-y" @click="changeYear(-1)"></i>
+          <i
+            class="layui-icon laydate-icon laydate-prev-y"
+            @click="changeYear(-1)"
+            ></i
+          >
           <div class="laydate-set-ym">
             <lay-dropdown ref="dropdownYearPanelRefLeft">
-              <span class="laydate-range-time">{{ startTime.year || "--" }}年</span>
+              <span class="laydate-range-time"
+                >{{ startTime.year || "--" }}年</span
+              >
               <template #content>
-                <YearPanel class="time-panel" v-model="startTime.year" @ok="closeLeftYearPanel"></YearPanel>
+                <YearPanel
+                  class="time-panel"
+                  v-model="startTime.year"
+                  @ok="closeLeftYearPanel"
+                ></YearPanel>
               </template>
             </lay-dropdown>
           </div>
         </div>
         <div class="layui-laydate-content" style="height: 220px">
           <ul class="layui-laydate-list laydate-month-list">
-            <li v-for="item of MONTH_NAME" :key="item" :data-unix="getUnix(item, 'left')"
-              :class="{ 'layui-this': getUnix(item, 'left') === startTime.unix || getUnix(item, 'left') === endTime.unix, 'laydate-range-hover': ifHasRangeHoverClass(getUnix(item, 'left')) }"
-              @click="handleMonthClick(getUnix(item, 'left'))" @mouseenter="monthItemMouseEnter($event, item)">
+            <li
+              v-for="item of MONTH_NAME"
+              :key="item"
+              :data-unix="getUnix(item, 'left')"
+              :class="{
+                'layui-this':
+                  getUnix(item, 'left') === startTime.unix ||
+                  getUnix(item, 'left') === endTime.unix,
+                'laydate-range-hover': ifHasRangeHoverClass(
+                  getUnix(item, 'left')
+                ),
+              }"
+              @click="handleMonthClick(getUnix(item, 'left'))"
+              @mouseenter="monthItemMouseEnter($event, item)"
+            >
               {{ item.slice(0, 3) }}
             </li>
           </ul>
@@ -29,17 +51,37 @@
             <lay-dropdown ref="dropdownYearPanelRefRight">
               <span class="laydate-range-time">{{ startTime.year + 1 }}年</span>
               <template #content>
-                <YearPanel class="time-panel" v-model="endTime.year" @ok="closeRightYearPanel"></YearPanel>
+                <YearPanel
+                  class="time-panel"
+                  v-model="endTime.year"
+                  @ok="closeRightYearPanel"
+                ></YearPanel>
               </template>
             </lay-dropdown>
           </div>
-          <i class="layui-icon laydate-icon laydate-next-y" @click="changeYear(1)"></i>
+          <i
+            class="layui-icon laydate-icon laydate-next-y"
+            @click="changeYear(1)"
+            ></i
+          >
         </div>
         <div class="layui-laydate-content" style="height: 220px">
           <ul class="layui-laydate-list laydate-month-list">
-            <li v-for="item of MONTH_NAME" :key="item" :data-unix="getUnix(item, 'right')"
-              :class="{ 'layui-this': getUnix(item, 'right') === startTime.unix || getUnix(item, 'right') === endTime.unix, 'laydate-range-hover': ifHasRangeHoverClass(getUnix(item, 'right')) }"
-              @click="handleMonthClick(getUnix(item, 'right'))" @mouseenter="monthItemMouseEnter($event, item)">
+            <li
+              v-for="item of MONTH_NAME"
+              :key="item"
+              :data-unix="getUnix(item, 'right')"
+              :class="{
+                'layui-this':
+                  getUnix(item, 'right') === startTime.unix ||
+                  getUnix(item, 'right') === endTime.unix,
+                'laydate-range-hover': ifHasRangeHoverClass(
+                  getUnix(item, 'right')
+                ),
+              }"
+              @click="handleMonthClick(getUnix(item, 'right'))"
+              @mouseenter="monthItemMouseEnter($event, item)"
+            >
               {{ item.slice(0, 3) }}
             </li>
           </ul>
@@ -83,11 +125,15 @@ const datePicker: provideType = inject("datePicker") as provideType;
 
 const startTime = reactive({
   year: props.startTime ? dayjs(props.startTime).year() : dayjs().year(),
-  unix: props.startTime ? dayjs(props.startTime).hour(0).minute(0).second(0).valueOf() : -1,
+  unix: props.startTime
+    ? dayjs(props.startTime).hour(0).minute(0).second(0).valueOf()
+    : -1,
 });
 const endTime = reactive({
   year: props.endTime ? dayjs(props.endTime).year() : dayjs().year() + 1,
-  unix: props.startTime ? dayjs(props.endTime).hour(0).minute(0).second(0).valueOf() : -1,
+  unix: props.startTime
+    ? dayjs(props.endTime).hour(0).minute(0).second(0).valueOf()
+    : -1,
 });
 let hoverMonth = ref(-1);
 const MONTH_NAME = [
@@ -134,11 +180,17 @@ const handleMonthClick = (item: number) => {
 watch(
   () => [props.startTime, props.endTime],
   () => {
-    startTime.year = props.startTime ? dayjs(props.startTime).year() : dayjs().year();
-    startTime.unix = props.startTime ? dayjs(props.startTime).hour(0).minute(0).second(0).valueOf() : -1;
+    startTime.year = props.startTime
+      ? dayjs(props.startTime).year()
+      : dayjs().year();
+    startTime.unix = props.startTime
+      ? dayjs(props.startTime).hour(0).minute(0).second(0).valueOf()
+      : -1;
     endTime.year = props.endTime ? dayjs(props.endTime).year() : dayjs().year();
-    endTime.unix = props.startTime ? dayjs(props.endTime).hour(0).minute(0).second(0).valueOf() : -1;
-  },
+    endTime.unix = props.startTime
+      ? dayjs(props.endTime).hour(0).minute(0).second(0).valueOf()
+      : -1;
+  }
 );
 
 //关闭选择时间的面板
@@ -155,8 +207,14 @@ const closeRightYearPanel = () => {
 //关闭回调
 const footOnOk = () => {
   let format = "YYYY-MM";
-  let startTimeVal = startTime.unix !== -1 && endTime.unix !== -1 ? dayjs(startTime.unix).format(format) : '';
-  let endTimeVal = endTime.unix !== -1 && endTime.unix !== -1 ? dayjs(endTime.unix).format(format) : '';
+  let startTimeVal =
+    startTime.unix !== -1 && endTime.unix !== -1
+      ? dayjs(startTime.unix).format(format)
+      : "";
+  let endTimeVal =
+    endTime.unix !== -1 && endTime.unix !== -1
+      ? dayjs(endTime.unix).format(format)
+      : "";
   emits("update:startTime", startTimeVal);
   emits("update:endTime", endTimeVal);
   datePicker.ok();
@@ -165,7 +223,9 @@ const footOnOk = () => {
 //现在回调
 const footOnNow = () => {
   startTime.year = dayjs().year();
-  startTime.unix = dayjs(startTime.year + '-' + (dayjs().month() + 1)).valueOf();
+  startTime.unix = dayjs(
+    startTime.year + "-" + (dayjs().month() + 1)
+  ).valueOf();
   endTime.unix = -1;
   hoverMonth.value = -1;
 };
@@ -188,7 +248,9 @@ const monthItemMouseEnter = (event: MouseEvent, item: any) => {
     hoverMonth.value = -1;
     return;
   }
-  hoverMonth.value = parseInt((event.target as HTMLElement).dataset.unix as string);
+  hoverMonth.value = parseInt(
+    (event.target as HTMLElement).dataset.unix as string
+  );
 };
 const ifHasRangeHoverClass = computed(() => {
   return function (item: any) {
@@ -212,10 +274,10 @@ const ifHasRangeHoverClass = computed(() => {
 });
 
 const getUnix = computed(() => {
-  return function (item: any, position: 'left' | 'right') {
+  return function (item: any, position: "left" | "right") {
     let month = MONTH_NAME.indexOf(item);
-    let year = position === 'left' ? startTime.year : startTime.year + 1;
-    return dayjs(year + '-' + (month + 1)).valueOf();
-  }
-})
+    let year = position === "left" ? startTime.year : startTime.year + 1;
+    return dayjs(year + "-" + (month + 1)).valueOf();
+  };
+});
 </script>

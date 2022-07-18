@@ -263,6 +263,9 @@ export default {
 ::: demo
 
 <template>
+  <lay-button @click="mvalue=[1,5,7]">点击切换(当前值:{{mvalue.join()}})</lay-button>
+  <br/>
+  <br/>
   <lay-select v-model="mvalue" @change="change" multiple>
     <lay-select-option value="1" label="学习"></lay-select-option>
     <lay-select-option value="2" label="编码" disabled></lay-select-option>
@@ -272,7 +275,6 @@ export default {
     <lay-select-option value="6" label="打篮球"></lay-select-option>
     <lay-select-option value="7" label="rap"></lay-select-option>
   </lay-select>
-  <lay-button @click="mvalue=[1,5,7]">点击切换(当前值:{{mvalue.join()}})</lay-button>
 </template>
 
 <script>

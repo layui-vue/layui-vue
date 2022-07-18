@@ -279,16 +279,22 @@ const closeRightMonthPanel = () => {
 const footOnOk = () => {
   let format =
     datePicker.type === "datetime" ? "YYYY-MM-DD HH:mm:ss" : "YYYY-MM-DD";
-  let startTimeVal =startTime.day!==-1&&endTime.day!==-1?dayjs(startTime.day)
-    .hour(startTime.hms.hh)
-    .minute(startTime.hms.mm)
-    .second(startTime.hms.ss)
-    .format(format):'';
-  let endTimeVal = startTime.day!==-1&&endTime.day!==-1?dayjs(endTime.day)
-    .hour(endTime.hms.hh)
-    .minute(endTime.hms.mm)
-    .second(endTime.hms.ss)
-    .format(format):'';
+  let startTimeVal =
+    startTime.day !== -1 && endTime.day !== -1
+      ? dayjs(startTime.day)
+          .hour(startTime.hms.hh)
+          .minute(startTime.hms.mm)
+          .second(startTime.hms.ss)
+          .format(format)
+      : "";
+  let endTimeVal =
+    startTime.day !== -1 && endTime.day !== -1
+      ? dayjs(endTime.day)
+          .hour(endTime.hms.hh)
+          .minute(endTime.hms.mm)
+          .second(endTime.hms.ss)
+          .format(format)
+      : "";
   emits("update:startTime", startTimeVal);
   emits("update:endTime", endTimeVal);
   datePicker.ok();
@@ -296,18 +302,18 @@ const footOnOk = () => {
 
 //现在回调
 const footOnNow = () => {
-  startTime.year=dayjs().year();
-  startTime.month=dayjs().month();
-  startTime.day=new Date(new Date().toDateString()).getTime();
-  startTime.hms.hh=dayjs().hour();
-  startTime.hms.mm=dayjs().minute();
-  startTime.hms.ss=dayjs().second();
-  endTime.day=-1;
+  startTime.year = dayjs().year();
+  startTime.month = dayjs().month();
+  startTime.day = new Date(new Date().toDateString()).getTime();
+  startTime.hms.hh = dayjs().hour();
+  startTime.hms.mm = dayjs().minute();
+  startTime.hms.ss = dayjs().second();
+  endTime.day = -1;
 };
 
 //清空回调
 const footOnClear = () => {
-  startTime.day=-1;
-  endTime.day=-1;
+  startTime.day = -1;
+  endTime.day = -1;
 };
 </script>
