@@ -191,6 +191,59 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
     <template v-for="(column, columnIndex) in columns" :key="columnIndex">
       <!-- 展示否 -->
       <template v-if="tableColumnKeys.includes(column.key)">
+
+        <template v-if="column.type == 'number'">
+                 <td
+            class="layui-table-cell"
+            :style="[
+              {
+                textAlign: column.align,
+                whiteSpace: column.ellipsisTooltip ? 'nowrap' : 'normal',
+              },
+              renderFixedStyle(column, columnIndex),
+              renderCellStyle(data, column, index, columnIndex),
+            ]"
+            :class="[
+              renderCellClassName(data, column, index, columnIndex),
+              column.fixed ? `layui-table-fixed-${column.fixed}` : '',
+            ]"
+          >
+            <!-- 树表占位与缩进 -->
+            <span
+              v-if="expandSpace && columnIndex === 0"
+              :style="{ 'margin-right': currentIndentSize + 'px' }"
+            ></span>
+
+            <span
+              v-if="
+                expandSpace &&
+                !data[childrenColumnName] &&
+                !slot.expand &&
+                columnIndex === 0
+              "
+              class="layui-table-cell-expand-icon-spaced"
+            ></span>
+
+            <lay-icon
+              v-if="
+                (slot.expand || data[childrenColumnName]) && columnIndex === 0
+              "
+              class="layui-table-cell-expand-icon"
+              :type="expandIconType"
+              @click="handleExpand"
+            ></lay-icon>
+
+            <lay-tooltip
+              v-if="column.ellipsisTooltip"
+              :content="data[column.key]"
+              :isAutoShow="true"
+            >
+              {{ index + 1 }}
+            </lay-tooltip>
+            {{ index + 1 }}
+          </td>
+        </template>
+
         <!-- 插槽列 -->
         <template v-if="column.customSlot">
           <td

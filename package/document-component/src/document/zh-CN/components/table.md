@@ -715,6 +715,12 @@ export default {
 
     const columns5 = [
       {
+        title: "序号",
+        fixed: "left",
+        type: "number",
+        width: "30px",
+      },
+      {
         title:"姓名",
         fixed:"left",
         width:"200px",

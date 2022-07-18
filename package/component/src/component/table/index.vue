@@ -72,7 +72,7 @@ const tableSelectedKeys = ref<Recordable[]>([...props.selectedKeys]);
 const tableColumns = ref([...props.columns]);
 const tableColumnKeys = ref(
   props.columns.map((item: any) => {
-    if(item.hide != true) {
+    if (item.hide != true) {
       return item.key;
     }
   })
@@ -358,7 +358,7 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
                       minWidth: column.minWidth ? column.minWidth : '100px',
                     }"
                   />
-                </template> 
+                </template>
               </template>
               <col v-if="scrollWidthCell > 0" :width="scrollWidthCell" />
             </colgroup>
@@ -492,12 +492,12 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
       </div>
       <div v-if="page" class="layui-table-page">
         <lay-page
+          show-page
+          show-skip
+          show-limit
           :total="page.total"
           :limit="page.limit"
           v-model="page.current"
-          show-page
-          show-limit
-          show-skip
           @jump="change"
         >
           <template #prev>
