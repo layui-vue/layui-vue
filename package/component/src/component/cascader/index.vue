@@ -1,14 +1,14 @@
 <template>
   <lay-dropdown
     class="layui-cascader"
-    :class="{'layui-cascader-opend':openState}"
+    :class="{ 'layui-cascader-opend': openState }"
     ref="dropdownRef"
     :autoFitMinWidth="false"
     :updateAtScroll="true"
     :disabled="dropDownDisabled"
     :size="size"
-    @open="openState=true"
-    @hide="openState=false"
+    @open="openState = true"
+    @hide="openState = false"
   >
     <lay-input
       v-model="displayValue"
@@ -88,7 +88,7 @@ const props = withDefaults(defineProps<LayCascaderProps>(), {
   placeholder: "",
   onlyLastLevel: false,
   allowClear: false,
-  size:'md',
+  size: "md",
   replaceFields: () => {
     return {
       label: "label",
@@ -257,7 +257,7 @@ const selectBar = (item: any, selectIndex: number, parentIndex: number) => {
   }
 };
 
-const displayValue = ref<string | number >('');
+const displayValue = ref<string | number>("");
 const slots = useSlots();
 const dropdownRef = ref();
 const dropDownDisabled = ref(false);
@@ -280,5 +280,5 @@ const onClear = () => {
   }, 0);
 };
 
-const openState=ref(false)
+const openState = ref(false);
 </script>

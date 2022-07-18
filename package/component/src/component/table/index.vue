@@ -15,7 +15,7 @@ import {
   onUpdated,
   StyleValue,
   WritableComputedRef,
-computed,
+  computed,
 } from "vue";
 import { v4 as uuidv4 } from "../../utils/guidUtil";
 import { Recordable } from "../../types";
@@ -23,6 +23,7 @@ import { LayIcon } from "@layui/icons-vue";
 import LayCheckbox from "../checkbox/index.vue";
 import LayDropdown from "../dropdown/index.vue";
 import LayPage from "../page/index.vue";
+import LayEmpty from "../empty/index.vue";
 import TableRow from "./TableRow.vue";
 
 export interface LayTableProps {
@@ -395,7 +396,9 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
                     :class="[
                       column.fixed ? `layui-table-fixed-${column.fixed}` : '',
                       renderFixedClassName(column, columnIndex),
-                      column.type == 'checkbox' ? 'layui-table-cell-checkbox' : '',
+                      column.type == 'checkbox'
+                        ? 'layui-table-cell-checkbox'
+                        : '',
                       column.type == 'radio' ? 'layui-table-cell-radio' : '',
                       column.type == 'number' ? 'layui-table-cell-number' : '',
                     ]"
@@ -462,6 +465,7 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
           ref="tableBody"
         >
           <table
+            v-if="tableDataSource.length > 0"
             class="layui-table"
             :class="{ 'layui-table-even': props.even }"
             :lay-size="size"
@@ -500,7 +504,7 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
                   @row-double="rowDoubleClick"
                   @contextmenu="contextmenu"
                   v-model:selectedKeys="tableSelectedKeys"
-                  v-model:selectedKey="tableSelectedKey" 
+                  v-model:selectedKey="tableSelectedKey"
                 >
                   <template v-for="name in slotsData" #[name]="{ data }">
                     <slot :name="name" :data="data"></slot>
@@ -512,6 +516,7 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
               </template>
             </tbody>
           </table>
+          <lay-empty v-else></lay-empty>
         </div>
       </div>
       <div v-if="page" class="layui-table-page">

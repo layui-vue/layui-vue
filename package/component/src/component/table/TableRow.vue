@@ -8,6 +8,7 @@ export default {
 import { Recordable } from "../../types";
 import { computed, ref, StyleValue, useSlots, WritableComputedRef } from "vue";
 import LayCheckbox from "../checkbox/index.vue";
+import LayRadio from "../radio/index.vue";
 import LayDropdown from "../dropdown/index.vue";
 import LayTooltip from "../tooltip/index.vue";
 import { LayIcon } from "@layui/icons-vue";
@@ -193,7 +194,6 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
     <template v-for="(column, columnIndex) in columns" :key="columnIndex">
       <!-- 展示否 -->
       <template v-if="tableColumnKeys.includes(column.key)">
-
         <template v-if="column.type == 'radio'">
           <td
             class="layui-table-cell layui-table-cell-radio"
@@ -237,10 +237,7 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
               @click="handleExpand"
             ></lay-icon>
 
-            <lay-radio
-              v-model="tableSelectedKey"
-              :value="data[id]"
-            />
+            <lay-radio v-model="tableSelectedKey" :value="data[id]" />
           </td>
         </template>
 

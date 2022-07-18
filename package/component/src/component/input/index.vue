@@ -33,7 +33,7 @@ const props = withDefaults(defineProps<LayInputProps>(), {
   autofocus: false,
   password: false,
   modelValue: "",
-  size:'md',
+  size: "md",
 });
 
 interface InputEmits {

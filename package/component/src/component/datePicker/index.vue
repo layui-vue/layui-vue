@@ -5,7 +5,7 @@
       :disabled="disabled"
       :autoFitMinWidth="false"
       class="layui-date-picker"
-      :class="{'layui-date-range-picker':range}"
+      :class="{ 'layui-date-range-picker': range }"
       :size="size"
     >
       <lay-input
@@ -148,7 +148,7 @@ const props = withDefaults(defineProps<LayDatePickerProps>(), {
   rangeSeparator: "至",
   readonly: false,
   allowClear: true,
-  size:'md',
+  size: "md",
 });
 
 const dropdownRef = ref(null);

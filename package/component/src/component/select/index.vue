@@ -31,7 +31,7 @@ export interface LaySelectProps {
     keyword: string;
   }[];
   size?: "lg" | "md" | "sm" | "xs";
-  allowClear:boolean;
+  allowClear: boolean;
 }
 
 const selectRef = shallowRef<undefined | HTMLElement>(undefined);
@@ -48,8 +48,8 @@ const props = withDefaults(defineProps<LaySelectProps>(), {
   showEmpty: true,
   multiple: false,
   create: false,
-  size:'md',
-  allowClear:true
+  size: "md",
+  allowClear: true,
 });
 
 const openState = ref(false);
@@ -166,9 +166,9 @@ const selectItemPush = function (p: SelectItem) {
   }
 };
 
-const clear=()=>{
-  emit('update:modelValue',props.multiple?[]:'');
-}
+const clear = () => {
+  emit("update:modelValue", props.multiple ? [] : "");
+};
 
 provide("selectItemHandle", selectItemHandle);
 provide("selectItemPush", selectItemPush);
@@ -180,8 +180,11 @@ provide("keyword", txt);
   <div
     ref="selectRef"
     class="layui-unselect layui-form-select"
-    :class="{ 'layui-form-selected': openState,'layui-form-select-multiple':multiple }"
-    :size='size'
+    :class="{
+      'layui-form-selected': openState,
+      'layui-form-select-multiple': multiple,
+    }"
+    :size="size"
   >
     <div class="layui-select-title" @click="open">
       <input
@@ -205,8 +208,18 @@ provide("keyword", txt);
         ]"
       />
       <span class="layui-input-icon-area">
-        <i :class="['layui-icon layui-icon-down', { 'layui-disabled': disabled }]" :style="{transform:`rotate(${openState?180:0}deg)`}"></i>
-        <i class="layui-icon layui-icon-close-fill" v-if="(value||selectItem.label?.length)&&allowClear" @click.stop="clear"></i>
+        <i
+          :class="[
+            'layui-icon layui-icon-down',
+            { 'layui-disabled': disabled },
+          ]"
+          :style="{ transform: `rotate(${openState ? 180 : 0}deg)` }"
+        ></i>
+        <i
+          class="layui-icon layui-icon-close-fill"
+          v-if="(value || selectItem.label?.length) && allowClear"
+          @click.stop="clear"
+        ></i>
       </span>
       <!-- 多选 -->
       <div

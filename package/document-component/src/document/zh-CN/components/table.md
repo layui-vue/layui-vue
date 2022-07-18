@@ -796,6 +796,58 @@ export default {
 
 :::
 
+::: title 暂无数据
+:::
+
+::: demo 通过 `columns` 配置 `type:'radio'` 开启单选列。
+
+<template>
+  <lay-table :columns="columns25" :dataSource="dataSource25"></lay-table>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const columns25 = [
+      {
+        title:"账户",
+        width:"200px",
+        key:"username"
+      },{
+        title:"密码",
+        width: "300px",
+        key:"password"
+      },{
+        title:"性别",
+        key:"sex"
+      },{
+        title:"年龄",
+        width: "300px",
+        key:"age"
+      },{
+        title:"备注",
+        width: "180px",
+        key:"remark",
+        ellipsisTooltip: true
+      }
+    ]
+
+    const dataSource25 = [
+    ]
+
+    return {
+      columns25,
+      dataSource25,
+    }
+  }
+}
+</script>
+
+:::
+
 ::: title 刷新数据
 :::
 
