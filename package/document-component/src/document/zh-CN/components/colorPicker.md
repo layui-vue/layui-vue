@@ -4,7 +4,7 @@
 ::: title 基础使用
 :::
 
-::: demo
+::: demo 使用 `lay-color-picker` 标签, 创建颜色选择器。
 
 <template>
   <lay-color-picker v-model="color"></lay-color-picker>
@@ -29,7 +29,7 @@ export default {
 ::: title 预设颜色
 :::
 
-::: demo
+::: demo 通过 `preset` 属性, 预设可选的颜色列表。
 
 <template>
   <lay-color-picker v-model="color" :preset="preset"></lay-color-picker>
