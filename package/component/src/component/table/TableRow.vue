@@ -6,7 +6,7 @@ export default {
 
 <script lang="ts" setup>
 import { Recordable } from "../../types";
-import { computed, ref, useSlots, WritableComputedRef } from "vue";
+import { computed, ref, StyleValue, useSlots, WritableComputedRef } from "vue";
 import LayCheckbox from "../checkbox/index.vue";
 import LayDropdown from "../dropdown/index.vue";
 import LayTooltip from "../tooltip/index.vue";
@@ -133,7 +133,7 @@ const renderFixedStyle = (column: any, columnIndex: number) => {
           left = left + props.columns[i]?.width.replace("px", "");
         }
       }
-      return `left:${left}px`;
+      return { left: `${left}px` } as StyleValue;
     } else {
       var right = 0;
       for (var i = columnIndex + 1; i < props.columns.length; i++) {
@@ -141,9 +141,10 @@ const renderFixedStyle = (column: any, columnIndex: number) => {
           right = right + props.columns[i]?.width.replace("px", "");
         }
       }
-      return `right:${right}px`;
+      return { right: `${right}px` } as StyleValue;
     }
   }
+  return { } as StyleValue;
 };
 
 const renderFixedClassName = (column: any, columnIndex: number) => {
@@ -155,7 +156,7 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
           left = false;
         }
       }
-      return `layui-table-fixed-left-last`;
+      return left ? `layui-table-fixed-left-last` : "";
     } else {
       var right = true;
       for (var i = 0; i < columnIndex; i++) {
@@ -163,7 +164,7 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
           right = false;
         }
       }
-      return `layui-table-fixed-right-first`;
+      return right ? `layui-table-fixed-right-first` : "";
     }
   }
 };
@@ -226,7 +227,8 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
 
             <lay-icon
               v-if="
-                (slot.expand || data[childrenColumnName]) && columnIndex === expandIndex
+                (slot.expand || data[childrenColumnName]) &&
+                columnIndex === expandIndex
               "
               class="layui-table-cell-expand-icon"
               :type="expandIconType"
@@ -279,7 +281,8 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
 
             <lay-icon
               v-if="
-                (slot.expand || data[childrenColumnName]) && columnIndex === expandIndex
+                (slot.expand || data[childrenColumnName]) &&
+                columnIndex === expandIndex
               "
               class="layui-table-cell-expand-icon"
               :type="expandIconType"
@@ -334,7 +337,8 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
 
               <lay-icon
                 v-if="
-                  (slot.expand || data[childrenColumnName]) && columnIndex === expandIndex
+                  (slot.expand || data[childrenColumnName]) &&
+                  columnIndex === expandIndex
                 "
                 class="layui-table-cell-expand-icon"
                 :type="expandIconType"

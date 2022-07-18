@@ -6,7 +6,7 @@ export default {
 
 <script setup lang="ts">
 import "./index.less";
-import { ref, watch, useSlots, withDefaults, onMounted, onUpdated } from "vue";
+import { ref, watch, useSlots, withDefaults, onMounted, onUpdated, StyleValue } from "vue";
 import { v4 as uuidv4 } from "../../utils/guidUtil";
 import { Recordable } from "../../types";
 import { LayIcon } from "@layui/icons-vue";
@@ -264,7 +264,7 @@ const renderFixedStyle = (column: any, columnIndex: number) => {
           left = left + props.columns[i]?.width.replace("px", "");
         }
       }
-      return `left:${left}px`;
+      return { left: `${left}px` } as StyleValue;
     } else {
       var right = 0;
       for (var i = columnIndex + 1; i < props.columns.length; i++) {
@@ -272,9 +272,10 @@ const renderFixedStyle = (column: any, columnIndex: number) => {
           right = right + props.columns[i]?.width.replace("px", "");
         }
       }
-      return `right:${right}px`;
+      return { right: `${right}px` } as StyleValue;
     }
   }
+  return { } as StyleValue;
 };
 
 const renderFixedClassName = (column: any, columnIndex: number) => {
@@ -471,7 +472,7 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
                   :currentIndentSize="currentIndentSize"
                   :tableColumnKeys="tableColumnKeys"
                   :expandSpace="childrenExpandSpace"
-                  :expandIndex="expandIndex" 
+                  :expandIndex="expandIndex"
                   :cellStyle="cellStyle"
                   :cellClassName="cellClassName"
                   :rowStyle="rowStyle"
