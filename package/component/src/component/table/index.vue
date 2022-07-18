@@ -321,27 +321,27 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
 
 const hasTotalRow = computed(() => {
   let b = false;
-  props.columns.forEach(item => {
-    if(item.totalRow) {
+  props.columns.forEach((item) => {
+    if (item.totalRow) {
       b = true;
     }
-  })
+  });
   return b;
-})
+});
 
 const renderTotalRowCell = (column: any) => {
-  if(column.totalRow) {
-    if(column.totalRow != true) {
+  if (column.totalRow) {
+    if (column.totalRow != true) {
       return column.totalRow;
     } else {
       let total = 0;
-      tableDataSource.value.forEach(item => {
+      tableDataSource.value.forEach((item) => {
         total = total + item[column.key];
-      })
+      });
       return total;
     }
   }
-}
+};
 </script>
 
 <template>

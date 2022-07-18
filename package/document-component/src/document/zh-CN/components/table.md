@@ -912,10 +912,10 @@ export default {
 
 :::
 
-::: title 合并列值
+::: title 开启统计
 :::
 
-::: demo 通过 `columns` 配置 `type:'number'` 开启序号列。
+::: demo 通过 `columns` 配置 `totalRow` 开启行统计。
 
 <template>
   <lay-table :columns="columns26" :dataSource="dataSource26"></lay-table>
