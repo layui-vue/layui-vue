@@ -10,9 +10,14 @@
 @md-badge:26px;
 @sm-badge:20px;
 @xs-badge:14px;
+@lg-width: 300px;
+@md-width: 260px;
+@sm-width: 220px;
+@xs-width: 180px;
 
-.set-size(@size,@badge-size) {
+.set-size(@size,@badge-size,@width) {
   & {
+    width: @width;
     height: @size;
     .layui-input {
       height: @size;
@@ -185,15 +190,18 @@ dl.layui-anim-upbit > dd .layui-form-checkbox,
 }
 .layui-form-select{
   &[size="lg"] {
-    .set-size(@lg,@lg-badge);
+    .set-size(@lg, @lg-badge, @lg-width);
   }
   &[size="md"] {
-    .set-size(@md,@md-badge);
+    .set-size(@md, @md-badge, @md-width);
   }
   &[size="sm"] {
-    .set-size(@sm,@sm-badge);
+    .set-size(@sm, @sm-badge, @sm-width);
   }
   &[size="xs"] {
-    .set-size(@xs,@xs-badge);
+    .set-size(@xs, @xs-badge, @xs-width);
   }
+}
+.layui-form-select-multiple{
+  width: 100% !important;
 }

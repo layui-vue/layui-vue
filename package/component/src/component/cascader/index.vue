@@ -5,6 +5,7 @@
     :autoFitMinWidth="false"
     :updateAtScroll="true"
     :disabled="dropDownDisabled"
+    :size="size"
   >
     <lay-input
       v-model="displayValue"

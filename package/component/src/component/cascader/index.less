@@ -1,5 +1,38 @@
+@import "../input/index.less";
+@lg: 44px;
+@md: 38px;
+@sm: 32px;
+@xs: 26px;
+
+@lg-width: 300px;
+@md-width: 260px;
+@sm-width: 220px;
+@xs-width: 180px;
+
+.set-size(@size, @width) {
+  & {
+    height: @size;
+    width: @width;
+    .layui-input {
+      height: @size;
+      line-height: @size;
+    }
+  }
+}
+
 .layui-cascader {
-  position: relative;
+  &[size="lg"] {
+    .set-size(@lg,@lg-width);
+  }
+  &[size="md"] {
+    .set-size(@md,@md-width);
+  }
+  &[size="sm"] {
+    .set-size(@sm,@sm-width);
+  }
+  &[size="xs"] {
+    .set-size(@xs,@xs-width);
+  }
 }
 .layui-cascader .layui-icon-down {
   transition: all 0.3s ease-in-out;

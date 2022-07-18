@@ -174,7 +174,7 @@ provide("keyword", txt);
   <div
     ref="selectRef"
     class="layui-unselect layui-form-select"
-    :class="{ 'layui-form-selected': openState }"
+    :class="{ 'layui-form-selected': openState,'layui-form-select-multiple':multiple }"
     :size='size'
   >
     <div class="layui-select-title" @click="open">

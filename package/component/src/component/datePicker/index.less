@@ -1,6 +1,59 @@
 @import "../dropdown/index.less";
 @import "../input/index.less";
 
+@lg: 44px;
+@md: 38px;
+@sm: 32px;
+@xs: 26px;
+@lg-width: 300px;
+@md-width: 260px;
+@sm-width: 220px;
+@xs-width: 180px;
+@lg-range-width: 600px;
+@md-range-width: 520px;
+@sm-range-width: 440px;
+@xs-range-width: 360px;
+
+.set-size(@size,@width) {
+  & {
+    width: @width;
+    height: @size;
+    .layui-input {
+      height: @size;
+      line-height: @size;
+    }
+  }
+}
+
+.layui-date-picker {
+  &[size="lg"] {
+    .set-size(@lg,@lg-width);
+  }
+  &[size="md"] {
+    .set-size(@md,@md-width);
+  }
+  &[size="sm"] {
+    .set-size(@sm,@sm-width);
+  }
+  &[size="xs"] {
+    .set-size(@xs,@xs-width);
+  }
+}
+.layui-date-range-picker {
+  &[size="lg"] {
+    .set-size(@lg,@lg-range-width);
+  }
+  &[size="md"] {
+    .set-size(@md,@md-range-width);
+  }
+  &[size="sm"] {
+    .set-size(@sm,@sm-range-width);
+  }
+  &[size="xs"] {
+    .set-size(@xs,@xs-range-width);
+  }
+}
+
 @font-face {
   font-family: "laydate-icon";
   src: url("./font/iconfont.eot");
