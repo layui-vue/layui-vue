@@ -2,13 +2,13 @@
   <div>
     <lay-dropdown ref="dropdownRef" :disabled="disabled" :autoFitMinWidth="false">
       <lay-input :name="name" :readonly="readonly" v-model="(dateValue as string)" :placeholder="placeholder"
-        prefix-icon="layui-icon-date" :disabled="disabled" v-if="!range" @change="onChange" :allow-clear="allowClear" @clear="dateValue='';onChange()">
+        prefix-icon="layui-icon-date" :disabled="disabled" v-if="!range" @change="onChange" :allow-clear="!disabled&&allowClear" @clear="dateValue='';onChange()">
       </lay-input>
       <div class="laydate-range-inputs" v-else>
         <lay-input :readonly="readonly" :name="name" v-model="dateValue[0]" :disabled="disabled" @change="onChange" class="start-input">
         </lay-input>
         <span class="range-separator">{{ rangeSeparator }}</span>
-        <lay-input :readonly="readonly" :name="name" :allow-clear="allowClear" v-model="dateValue[1]" :disabled="disabled" @change="onChange" class="end-input" @clear="dateValue=[];onChange()">
+        <lay-input :readonly="readonly" :name="name" :allow-clear="disabled&&allowClear" v-model="dateValue[1]" :disabled="disabled" @change="onChange" class="end-input" @clear="dateValue=[];onChange()">
         </lay-input>
       </div>
 
@@ -271,6 +271,12 @@ watch(
     currentYear.value = initModelValue?getYear(initModelValue):-1;
     currentMonth.value = initModelValue?getMonth(initModelValue):-1;
     currentDay.value = initModelValue?getDay(initModelValue):-1;
+    if (props.type === 'date' || props.type === 'datetime') { // date与datetime容错
+      if (currentYear.value === -1)
+        currentYear.value = dayjs().year();
+      if (currentMonth.value === -1)
+        currentMonth.value = dayjs().month();
+    }
     rangeValue.first = initModelValue;
     rangeValue.last =
       props.range && props.modelValue
