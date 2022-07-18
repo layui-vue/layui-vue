@@ -31,6 +31,7 @@ export interface LayTableProps {
   height?: number;
   maxHeight?: string;
   even?: boolean;
+  expandIndex: number;
   rowClassName?: string | Function;
   cellClassName?: string | Function;
   rowStyle?: string | Function;
@@ -48,6 +49,7 @@ const props = withDefaults(defineProps<LayTableProps>(), {
   even: false,
   rowClassName: "",
   cellClassName: "",
+  expandIndex: 0,
   rowStyle: "",
   cellStyle: "",
 });
@@ -355,7 +357,7 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
                   <col
                     :width="column.width"
                     :style="{
-                      minWidth: column.minWidth ? column.minWidth : '100px',
+                      minWidth: column.minWidth ? column.minWidth : '50px',
                     }"
                   />
                 </template>
@@ -450,7 +452,7 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
                   <col
                     :width="column.width"
                     :style="{
-                      minWidth: column.minWidth ? column.minWidth : '100px',
+                      minWidth: column.minWidth ? column.minWidth : '50px',
                     }"
                   />
                 </template>
@@ -469,6 +471,7 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
                   :currentIndentSize="currentIndentSize"
                   :tableColumnKeys="tableColumnKeys"
                   :expandSpace="childrenExpandSpace"
+                  :expandIndex="expandIndex" 
                   :cellStyle="cellStyle"
                   :cellClassName="cellClassName"
                   :rowStyle="rowStyle"

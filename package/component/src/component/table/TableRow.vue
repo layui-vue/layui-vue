@@ -17,6 +17,7 @@ export interface LayTableRowProps {
   indentSize: number;
   currentIndentSize: number;
   expandSpace: boolean;
+  expandIndex: number;
   selectedKeys: Recordable[];
   tableColumnKeys: Recordable[];
   childrenColumnName?: string;
@@ -191,9 +192,8 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
     <template v-for="(column, columnIndex) in columns" :key="columnIndex">
       <!-- 展示否 -->
       <template v-if="tableColumnKeys.includes(column.key)">
-
         <template v-if="column.type == 'number'">
-                 <td
+          <td
             class="layui-table-cell"
             :style="[
               {
@@ -210,7 +210,7 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
           >
             <!-- 树表占位与缩进 -->
             <span
-              v-if="expandSpace && columnIndex === 0"
+              v-if="expandSpace && columnIndex === expandIndex"
               :style="{ 'margin-right': currentIndentSize + 'px' }"
             ></span>
 
@@ -219,14 +219,14 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
                 expandSpace &&
                 !data[childrenColumnName] &&
                 !slot.expand &&
-                columnIndex === 0
+                columnIndex === expandIndex
               "
               class="layui-table-cell-expand-icon-spaced"
             ></span>
 
             <lay-icon
               v-if="
-                (slot.expand || data[childrenColumnName]) && columnIndex === 0
+                (slot.expand || data[childrenColumnName]) && columnIndex === expandIndex
               "
               class="layui-table-cell-expand-icon"
               :type="expandIconType"
@@ -263,7 +263,7 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
           >
             <!-- 树表占位与缩进 -->
             <span
-              v-if="expandSpace && columnIndex === 0"
+              v-if="expandSpace && columnIndex === expandIndex"
               :style="{ 'margin-right': currentIndentSize + 'px' }"
             ></span>
 
@@ -272,14 +272,14 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
                 expandSpace &&
                 !data[childrenColumnName] &&
                 !slot.expand &&
-                columnIndex === 0
+                columnIndex === expandIndex
               "
               class="layui-table-cell-expand-icon-spaced"
             ></span>
 
             <lay-icon
               v-if="
-                (slot.expand || data[childrenColumnName]) && columnIndex === 0
+                (slot.expand || data[childrenColumnName]) && columnIndex === expandIndex
               "
               class="layui-table-cell-expand-icon"
               :type="expandIconType"
@@ -318,7 +318,7 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
             >
               <!-- 树表占位与缩进 -->
               <span
-                v-if="expandSpace && columnIndex === 0"
+                v-if="expandSpace && columnIndex === expandIndex"
                 :style="{ 'margin-right': currentIndentSize + 'px' }"
               ></span>
 
@@ -327,14 +327,14 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
                   expandSpace &&
                   !data[childrenColumnName] &&
                   !slot.expand &&
-                  columnIndex === 0
+                  columnIndex === expandIndex
                 "
                 class="layui-table-cell-expand-icon-spaced"
               ></span>
 
               <lay-icon
                 v-if="
-                  (slot.expand || data[childrenColumnName]) && columnIndex === 0
+                  (slot.expand || data[childrenColumnName]) && columnIndex === expandIndex
                 "
                 class="layui-table-cell-expand-icon"
                 :type="expandIconType"
@@ -377,6 +377,7 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
         :checkbox="checkbox"
         :tableColumnKeys="tableColumnKeys"
         :expandSpace="expandSpace"
+        :expandIndex="expandIndex"
         :cellStyle="cellStyle"
         :cellClassName="cellClassName"
         :rowStyle="rowStyle"

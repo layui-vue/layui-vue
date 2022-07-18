@@ -683,7 +683,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-table :columns="columns5" id="id" :dataSource="dataSource5" v-model:selectedKeys="selectedKeys5" :checkbox="checkbox5" :default-toolbar="defaultToolbar5" @row="rowClick5">
+  <lay-table :columns="columns5" id="id" :expandIndex="1" :dataSource="dataSource5" v-model:selectedKeys="selectedKeys5" :checkbox="checkbox5" :default-toolbar="defaultToolbar5" @row="rowClick5">
     <template v-slot:toolbar>
       <lay-button size="sm">新增</lay-button>
       <lay-button size="sm">删除</lay-button>
@@ -718,7 +718,7 @@ export default {
         title: "序号",
         fixed: "left",
         type: "number",
-        width: "30px",
+        width: "50px",
       },
       {
         title:"姓名",
