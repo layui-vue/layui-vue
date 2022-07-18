@@ -10,6 +10,34 @@
 ::: demo
 <template>
 <lay-timeline>
+  <lay-timeline-item title="1.3.x">
+      <ul> 
+      <a name="1-3-0"></a> 
+      <li> 
+        <h3>1.3.0 <span class="layui-badge-rim">2022-07-14</span></h3> 
+        <ul>         
+          <li>[新增] input 组件 append 与 prepend 插槽。</li>
+          <li>[新增] input 组件 password 属性, 开启密码模式。</li>
+          <li>[新增] table 组件 columns 配置 hide 属性, 用于隐藏列。</li>
+          <li>[新增] table 组件 expand-index 属性, 控制展开操作的所在列。</li>
+          <li>[新增] table 组件 columns 配置 type 属性 radio 值, 开启单选列。</li>
+          <li>[新增] table 组件 columns 配置 type 属性 checkbox 值, 开启复选列。</li>
+          <li>[新增] table 组件 columns 配置 type 属性 number 值, 开启序号列。</li>
+          <li>[新增] table 组件 selected-key 属性, 配置单选列的选中值。</li>
+          <li>[新增] table 组件 data-source 属性, 长度为 0 时的显示状态。</li>
+          <li>[新增] date-picker 组件 年月日 范围选择, 重构代码。</li>
+          <li>[新增] date-picker 组件 allow-clear 属性, 开启内容清空操作。</li>
+          <li>[新增] date-picker 组件 readonly 属性, 开启只读模式。</li>
+          <li>[修复] date-picker 组件 modelValue 属性, 空值报错。</li>
+          <li>[修复] input-number 组件 size 属性, lg md sm xs 为可选值。</li>
+          <li>[修复] input-number 组件 size 属性, 默认值为 md。</li>
+          <li>[修复] rate 组件 has-clear 为 allow-clear 属性。</li>
+          <li>[优化] select 组件 multiple 属性开启时的 tag 标签样式。</li>
+          <li>[删除] table 组件 checkbox 属性, 由 type = checkbox 列代替。</li>
+        </ul>
+      </li>
+    </ul>  
+  </lay-timeline-item>
   <lay-timeline-item title="1.2.x">
       <ul> 
       <a name="1-2-10"></a> 
