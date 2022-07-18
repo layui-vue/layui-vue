@@ -102,9 +102,9 @@ const footOnOk = () => {
     emits("ok");
     return;
   } else {
-    if(datePicker.type==='datetime'||datePicker.type==='date'){
+    if (datePicker.type === "datetime" || datePicker.type === "date") {
       datePicker.showPanel.value = datePicker.type;
-    }else{
+    } else {
       datePicker.ok();
     }
   }

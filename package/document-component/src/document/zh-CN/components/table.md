@@ -220,110 +220,6 @@ export default {
 
 :::
 
-::: title 完整表格
-:::
-
-::: demo
-
-<template>
-  <lay-table :columns="columns5" id="id" :dataSource="dataSource5" v-model:selectedKeys="selectedKeys5"  :checkbox="checkbox5" :default-toolbar="defaultToolbar5" @row="rowClick5">
-    <template v-slot:toolbar>
-      <lay-button size="sm">新增</lay-button>
-      <lay-button size="sm">删除</lay-button>
-    </template>
-    <template v-slot:username="{ data }"> {{data.username}} </template>
-    <template v-slot:username-title>😊</template>
-    <template v-slot:password="{ data }"> {{data.password}} </template>
-    <template v-slot:operator="{ data }">
-      <lay-button size="xs">修改</lay-button>
-      <lay-button size="xs" type="primary">删除</lay-button>
-    </template>
-    <template v-slot:expand="{ data }"> 
-      <div style="height:100px;">
-        内容
-      </div>
-    </template>
-  </lay-table>
-</template>
-
-<script>
-import { ref, watch } from 'vue'
-
-export default {
-  setup() {
-
-    const selectedKeys5 = ref(['1'])
-    const checkbox5 = ref(true)
-    const defaultToolbar5 = ref(true)
-
-    const columns5 = [
-      {
-        title:"账户",
-        width:"200px",
-        titleSlot: "username-title",
-        customSlot:"username",
-        key:"username",
-        align: "left"
-      },{
-        title:"密码",
-        customSlot:"password",
-        width:"200px",
-        key:"password",
-        align: "center"
-      },
-      {
-        title:"年龄",
-        width: "200px",
-        key:"age",
-        sort: true,
-        align: "right"
-      },
-{
-        title:"备注",
-        width: "180px",
-        key:"remark",
-        ellipsisTooltip: true,
-      }
-      ,{
-        title:"操作",
-        width:"100px",
-        customSlot:"operator",
-        key:"operator"
-      }
-    ]
-
-    const dataSource5 = [
-      {id:"1", username:"root",password: '**',age:"18",remark: 'layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.'},
-      {id:"2", username:"woow",password: '**', age:"20",remark: 'layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.'}
-    ]
-
-    const rowClick5 = function(data) {
-      console.log(JSON.stringify(data))
-    }
-    
-    const rowDoubleClick5 = function(data) {
-      console.log(JSON.stringify(data))
-    }
-
-    watch(selectedKeys5, () => {
-      console.log("复选框监听:" + selectedKeys5.value);
-    })
-
-    return {
-      columns5,
-      dataSource5,
-      selectedKeys5,
-      checkbox5,
-      defaultToolbar5,
-      rowClick5,
-      rowDoubleClick5
-    }
-  }
-}
-</script>
-
-:::
-
 ::: title 开启子表
 :::
 
@@ -774,6 +670,121 @@ export default {
       columns21,
       dataSource21,
       changeDataSource21
+    }
+  }
+}
+</script>
+
+:::
+
+::: title 完整表格
+:::
+
+::: demo
+
+<template>
+  <lay-table :columns="columns5" id="id" :dataSource="dataSource5" v-model:selectedKeys="selectedKeys5" :checkbox="checkbox5" :default-toolbar="defaultToolbar5" @row="rowClick5">
+    <template v-slot:toolbar>
+      <lay-button size="sm">新增</lay-button>
+      <lay-button size="sm">删除</lay-button>
+    </template>
+    <template v-slot:name="{ data }"> {{data.name}} </template>
+    <template v-slot:name-title>😊</template>
+    <template v-slot:birthday="{ data }"> {{data.birthday}} </template>
+    <template v-slot:operator="{ data }">
+      <lay-button size="xs">修改</lay-button>
+      <lay-button size="xs" type="primary">删除</lay-button>
+    </template>
+    <template v-slot:expand="{ data }"> 
+      <div style="height:100px;">
+        内容
+      </div>
+    </template>
+  </lay-table>
+</template>
+
+<script>
+import { ref, watch } from 'vue'
+
+export default {
+  setup() {
+
+    const selectedKeys5 = ref(['1'])
+    const checkbox5 = ref(true)
+    const defaultToolbar5 = ref(true)
+
+    const columns5 = [
+      {
+        title:"姓名",
+        fixed:"left",
+        width:"200px",
+        titleSlot: "name-title",
+        customSlot:"name",
+        key:"name",
+        align: "left"
+      },{
+        title:"生日",
+        customSlot:"birthday",
+        width:"200px",
+        key:"birthday"
+      },
+      {
+        title:"年龄",
+        width: "200px",
+        key:"age",
+        sort: true,
+      },
+      {
+        title:"隐藏列",
+        width: "200px",
+        key:"hide",
+        sort: true,
+        hide: true,
+      },
+      {
+        title:"备注",
+        width: "300px",
+        key:"remark",
+        ellipsisTooltip: true,
+      }
+      ,{
+        title:"操作",
+        width:"150px",
+        fixed:"right",
+        customSlot:"operator",
+        key:"operator"
+      }
+    ]
+
+    const dataSource5 = [
+      {id:"1", name:"小明",birthday: '2022-02-09', hide: "你看不见我", age:"18",remark: 'layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.'},
+      {id:"2", name:"小红",birthday: '2022-02-09', hide: "你看不见我", age:"20",remark: 'layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.'},
+      {id:"3", name:"小刚",birthday: '2022-02-09', hide: "你看不见我", age:"20",remark: 'layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.'},
+      {id:"4", name:"小李",birthday: '2022-02-09', hide: "你看不见我", age:"20",remark: 'layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.'},
+      {id:"5", name:"小柏",birthday: '2022-02-09', hide: "你看不见我", age:"20",remark: 'layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.'},
+      {id:"6", name:"小吉",birthday: '2022-02-09', hide: "你看不见我", age:"20",remark: 'layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.'}
+    ]
+
+    const rowClick5 = function(data) {
+      console.log(JSON.stringify(data))
+    }
+    
+    const rowDoubleClick5 = function(data) {
+      console.log(JSON.stringify(data))
+    }
+
+    watch(selectedKeys5, () => {
+      console.log("复选框监听:" + selectedKeys5.value);
+    })
+
+    return {
+      columns5,
+      dataSource5,
+      selectedKeys5,
+      checkbox5,
+      defaultToolbar5,
+      rowClick5,
+      rowDoubleClick5
     }
   }
 }

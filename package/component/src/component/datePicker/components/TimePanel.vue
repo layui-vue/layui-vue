@@ -42,8 +42,10 @@
         class="laydate-btns-time"
         >选择日期</span
       >
-      <template v-else-if="!isNaN(hms.hh)&&!isNaN(hms.mm)&&!isNaN(hms.ss)">
-        {{dayjs().hour(hms.hh).minute(hms.mm).second(hms.ss).format('HH:mm:ss')}}
+      <template v-else-if="!isNaN(hms.hh) && !isNaN(hms.mm) && !isNaN(hms.ss)">
+        {{
+          dayjs().hour(hms.hh).minute(hms.mm).second(hms.ss).format("HH:mm:ss")
+        }}
       </template>
     </PanelFoot>
   </div>
@@ -130,8 +132,8 @@ const footOnOk = () => {
     return;
   } else {
     datePicker.ok();
-    if(datePicker.type==='datetime'){
-      datePicker.showPanel.value='date';
+    if (datePicker.type === "datetime") {
+      datePicker.showPanel.value = "date";
     }
   }
 };

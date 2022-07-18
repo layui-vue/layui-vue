@@ -72,7 +72,9 @@ const tableSelectedKeys = ref<Recordable[]>([...props.selectedKeys]);
 const tableColumns = ref([...props.columns]);
 const tableColumnKeys = ref(
   props.columns.map((item: any) => {
-    return item.key;
+    if(item.hide != true) {
+      return item.key;
+    }
   })
 );
 
@@ -349,12 +351,14 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
             <colgroup>
               <col v-if="checkbox" class="layui-table-col-special" />
               <template v-for="column in columns" :key="column">
-                <col
-                  :width="column.width"
-                  :style="{
-                    minWidth: column.minWidth ? column.minWidth : '100px',
-                  }"
-                />
+                <template v-if="tableColumnKeys.includes(column.key)">
+                  <col
+                    :width="column.width"
+                    :style="{
+                      minWidth: column.minWidth ? column.minWidth : '100px',
+                    }"
+                  />
+                </template> 
               </template>
               <col v-if="scrollWidthCell > 0" :width="scrollWidthCell" />
             </colgroup>
@@ -442,12 +446,14 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
             <colgroup>
               <col v-if="checkbox" class="layui-table-col-special" />
               <template v-for="column in columns" :key="column">
-                <col
-                  :width="column.width"
-                  :style="{
-                    minWidth: column.minWidth ? column.minWidth : '100px',
-                  }"
-                />
+                <template v-if="tableColumnKeys.includes(column.key)">
+                  <col
+                    :width="column.width"
+                    :style="{
+                      minWidth: column.minWidth ? column.minWidth : '100px',
+                    }"
+                  />
+                </template>
               </template>
             </colgroup>
             <tbody>
