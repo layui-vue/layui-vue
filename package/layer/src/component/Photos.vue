@@ -16,11 +16,16 @@
       </span>
       <div
         class="layui-layer-imgbar"
-        style="display: block"
         v-if="imgList.length > 1 || imgList[index].alt"
         :style="{ opacity: showLayerImgBar ? 1 : 0 }"
       >
-        <span class="layui-layer-imgtit">
+        <div class="thumb-row" v-if="ifSetThumb">
+          <div class="thumb-box" v-for="(item,i) in imgList" :key="'thumb-box'+i" @click="index=i">
+            <img :src="item.thumb" />
+          </div>
+          <div class="thumb-box-border" :style="{left:`calc(calc( calc(100% - ${100*imgList.length}px) / 2) + ${index*100}px)`}"></div>
+        </div>
+        <span class="layui-layer-imgtit" v-else>
           <span v-if="imgList[index].alt">{{ imgList[index].alt }}</span>
           <em v-if="imgList.length > 1"
             >{{ index + 1 }} / {{ imgList.length }}</em
@@ -36,10 +41,10 @@ export default {
 };
 </script>
 <script lang="ts" setup>
-import { watch, ref, onMounted, nextTick } from "vue";
+import { watch, ref, onMounted, nextTick, computed } from "vue";
 
 export interface LayPhotoProps {
-  imgList: { src: string; alt: string }[];
+  imgList: { src: string; alt: string,thumb:string }[];
   startIndex: number;
 }
 const emit = defineEmits(["resetCalculationPohtosArea"]);
@@ -70,4 +75,14 @@ onMounted(() => {
     showLayerImgBar.value = true;
   });
 });
+
+const ifSetThumb=computed(()=>{
+  let res=false;
+  props.imgList.forEach(e=>{
+    if(e.thumb){
+      res=true;
+    }
+  });
+  return res;
+})
 </script>

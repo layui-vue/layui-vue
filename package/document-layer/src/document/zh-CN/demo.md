@@ -286,6 +286,7 @@ const openRight = function() {
    <button @click="signleImg">图片查看</button>
    <button @click="signleImg2">图片标题</button>
    <button @click="groupImg">图片分组</button>
+   <button @click="groupImg2">带缩略图</button>
 </template>
 
 <script>
@@ -304,6 +305,22 @@ const groupImg = function() {
     imgList:[
       { src:'http://www.pearadmin.com/assets/images/un8.svg', alt:'图片1'},
       { src:'http://www.pearadmin.com/assets/images/un32.svg', alt:'图片2'}
+    ]
+  })
+}
+const groupImg2 = function() {
+  layer.photos({
+    imgList:[
+      { 
+        src:'http://www.pearadmin.com/assets/images/un8.svg', 
+        alt:'图片1',
+        thumb:'http://www.pearadmin.com/assets/images/un8.svg'
+      },
+      { 
+        src:'http://www.pearadmin.com/assets/images/un32.svg', 
+        alt:'图片2',
+        thumb:'http://www.pearadmin.com/assets/images/un32.svg'
+      }
     ]
   })
 }
