@@ -630,10 +630,7 @@ export default {
 
     const columns21 = [
       {
-        title: "ID",
-        width: "30px",
         type: "number",
-        align: "center"
       },
       {
         title:"账户",
@@ -645,7 +642,6 @@ export default {
         key:"password"
       },{
         title:"性别",
-        width: "300px",
         key:"sex"
       },{
         title:"年龄",
@@ -694,15 +690,7 @@ export default {
 
     const columns23 = [
       {
-        title: "ID",
-        width: "30px",
         type: "checkbox",
-        align: "center"
-      },
-      {
-        title:"标识",
-        width:"30px",
-        key:"id"
       },
       {
         title:"账户",
@@ -714,7 +702,6 @@ export default {
         key:"password"
       },{
         title:"性别",
-        width: "300px",
         key:"sex"
       },{
         title:"年龄",
@@ -763,10 +750,7 @@ export default {
 
     const columns24 = [
       {
-        title: "ID",
-        width: "30px",
-        type: "radio",
-        align: "center"
+        type: "radio"
       },
       {
         title:"账户",
@@ -778,7 +762,6 @@ export default {
         key:"password"
       },{
         title:"性别",
-        width: "300px",
         key:"sex"
       },{
         title:"年龄",

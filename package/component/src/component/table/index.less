@@ -456,14 +456,6 @@
   border-right: none !important;
 }
 
-.layui-table-mend {
-  position: absolute;
-  right: -49px;
-  top: 0;
-  height: 100%;
-  width: 50px;
-}
-
 .layui-table-tool {
   position: relative;
   z-index: 890;
@@ -492,6 +484,10 @@
   height: 41px;
   font-size: 12px;
   white-space: nowrap;
+}
+
+.layui-table-page .layui-laypage select{
+  margin-top: 0px;
 }
 
 .layui-table-page > div {
@@ -554,31 +550,6 @@
   display: inline-block;
 }
 
-.layui-table-patch .layui-table-cell {
-  padding: 0;
-  width: 30px;
-}
-
-.layui-table-edit {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  padding: 0 14px 1px;
-  border-radius: 0;
-  box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.15);
-}
-
-.layui-table-edit:focus {
-  border-color: #5fb878 !important;
-}
-
-select.layui-table-edit {
-  padding: 0 0 0 10px;
-  border-color: #d2d2d2;
-}
-
 .layui-table-view .layui-form-checkbox,
 .layui-table-view .layui-form-radio,
 .layui-table-view .layui-form-switch {
@@ -587,81 +558,11 @@ select.layui-table-edit {
   box-sizing: content-box;
 }
 
-.layui-table-view .layui-form-checkbox {
-  top: -1px;
-  height: 26px;
-  line-height: 26px;
-}
-
-.layui-table-view .layui-form-checkbox i {
-  height: 26px;
-}
-
-.layui-table-grid .layui-table-cell {
-  overflow: visible;
-}
-
-.layui-table-grid-down {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 26px;
-  height: 100%;
-  padding: 5px 0;
-  border-width: 0 0 0 1px;
+.layui-table-view .layui-table-cell-number,
+.layui-table-view .layui-table-cell-radio,
+.layui-table-view .layui-table-cell-checkbox {
+  width: 30px;
   text-align: center;
-  background-color: #fff;
-  color: #999;
-  cursor: pointer;
-}
-
-.layui-table-grid-down .layui-icon {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin: -8px 0 0 -8px;
-}
-
-.layui-table-grid-down:hover {
-  background-color: #fbfbfb;
-}
-
-body .layui-table-tips .layui-layer-content {
-  background: 0 0;
-  padding: 0;
-  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12);
-}
-
-.layui-table-tips-main {
-  margin: -44px 0 0 -1px;
-  max-height: 150px;
-  padding: 8px 15px;
-  font-size: 14px;
-  overflow-y: scroll;
-  background-color: #fff;
-  color: #666;
-}
-
-.layui-table-tips-c {
-  position: absolute;
-  right: -3px;
-  top: -13px;
-  width: 20px;
-  height: 20px;
-  padding: 3px;
-  cursor: pointer;
-  background-color: #666;
-  border-radius: 50%;
-  color: #fff;
-}
-
-.layui-table-tips-c:hover {
-  background-color: #777;
-}
-
-.layui-table-tips-c:before {
-  position: relative;
-  right: -2px;
 }
 
 .layui-table,

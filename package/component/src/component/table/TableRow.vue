@@ -196,7 +196,7 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
 
         <template v-if="column.type == 'radio'">
           <td
-            class="layui-table-cell"
+            class="layui-table-cell layui-table-cell-radio"
             :style="[
               {
                 textAlign: column.align,
@@ -246,7 +246,7 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
 
         <template v-if="column.type == 'checkbox'">
           <td
-            class="layui-table-cell"
+            class="layui-table-cell layui-table-cell-checkbox"
             :style="[
               {
                 textAlign: column.align,
@@ -297,7 +297,7 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
 
         <template v-if="column.type == 'number'">
           <td
-            class="layui-table-cell"
+            class="layui-table-cell layui-table-cell-number"
             :style="[
               {
                 textAlign: column.align,
@@ -487,6 +487,7 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
         @row-double="rowDoubleClick"
         @contextmenu="contextmenu"
         v-model:selectedKeys="tableSelectedKeys"
+        v-model:selectedKey="tableSelectedKey"
       >
         <template v-for="name in slotsData" #[name]="{ data }">
           <slot :name="name" :data="data"></slot>

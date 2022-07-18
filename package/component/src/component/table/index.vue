@@ -395,6 +395,9 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
                     :class="[
                       column.fixed ? `layui-table-fixed-${column.fixed}` : '',
                       renderFixedClassName(column, columnIndex),
+                      column.type == 'checkbox' ? 'layui-table-cell-checkbox' : '',
+                      column.type == 'radio' ? 'layui-table-cell-radio' : '',
+                      column.type == 'number' ? 'layui-table-cell-number' : '',
                     ]"
                     :style="[
                       {
