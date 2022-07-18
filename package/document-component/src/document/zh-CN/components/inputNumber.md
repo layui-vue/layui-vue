@@ -36,7 +36,7 @@
 ::: title 尺寸
 :::
 
-::: demo
+::: demo 通过 `size` 属性定义尺寸, 默认为 `md`, 可选值为 `lg` `md` `sm` `xs`。
 
 <template>
   <div>
@@ -57,7 +57,7 @@
 ::: title 限制数字大小
 :::
 
-::: demo
+::: demo 通过 `min` 与 `max` 属性, 限制输入数字的大小。
 
 <template>
   <lay-input-number :min="0" :max="10"></lay-input-number>
@@ -71,7 +71,7 @@
 ::: title 数字步数
 :::
 
-::: demo
+::: demo 通过 `step` 属性, 设置 加 与 减 的步长。
 
 <template>
   <lay-input-number :step="10"></lay-input-number>
@@ -85,7 +85,7 @@
 ::: title 禁用
 :::
 
-::: demo
+::: demo 通过 `disabled-input` 与 `disabled` 属性, 禁用输入或操作。
 
 <template>
   <p>禁用输入</p>
