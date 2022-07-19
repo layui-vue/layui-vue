@@ -11,7 +11,7 @@
       <lay-input
         :name="name"
         :readonly="readonly"
-        v-model="(dateValue as string)"
+        v-model="dateValue"
         :placeholder="placeholder"
         prefix-icon="layui-icon-date"
         :disabled="disabled"

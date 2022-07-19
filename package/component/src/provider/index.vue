@@ -130,5 +130,5 @@ watch(
 </script>
 
 <template>
-    <slot></slot>
+  <slot></slot>
 </template>
