@@ -15,7 +15,6 @@ import {
   auto as followSystemColorScheme,
   setFetchMethod,
 } from "@umijs/ssr-darkreader";
-import { v4 as uuidv4 } from "../utils/guidUtil";
 
 export interface LayConfigProviderProps {
   locale?: string;
@@ -29,8 +28,6 @@ const props = withDefaults(defineProps<LayConfigProviderProps>(), {
   locale: "zh_CN",
   theme: "light",
 });
-
-const id = uuidv4();
 
 const { locale, setLocaleMessage, mergeLocaleMessage } = useI18n();
 
@@ -133,7 +130,5 @@ watch(
 </script>
 
 <template>
-  <div :id="id">
     <slot></slot>
-  </div>
 </template>
