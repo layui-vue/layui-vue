@@ -17,12 +17,14 @@ export interface LaySwitchProps {
   unswitchColor?: string;
   onswitchValue?: string | number | boolean;
   unswitchValue?: string | number | boolean;
+  size?: "lg" | "md" | "sm" | "xs";
 }
 
 const props = withDefaults(defineProps<LaySwitchProps>(), {
   disabled: false,
   onswitchValue: true,
   unswitchValue: false,
+  size:'md'
 });
 
 const emit = defineEmits(["update:modelValue", "change"]);
@@ -58,7 +60,7 @@ const styles = computed(() => {
 </script>
 
 <template>
-  <span @click.stop="handleClick">
+  <span @click.stop="handleClick" class="layui-switch-container" :size="size">
     <div
       class="layui-unselect layui-form-switch"
       :style="styles"

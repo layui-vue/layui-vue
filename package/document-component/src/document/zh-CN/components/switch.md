@@ -172,6 +172,37 @@ export default {
 
 :::
 
+::: title 尺寸
+:::
+
+::: demo
+
+<template>
+  <div style='display:flex;align-items: flex-end;'>
+    <lay-switch v-model="active7" size='lg'></lay-switch>
+    <lay-switch v-model="active7" size='md' style='margin-left:10px'></lay-switch>
+    <lay-switch v-model="active7" size='sm' style='margin-left:10px'></lay-switch>
+    <lay-switch v-model="active7" size='xs' style='margin-left:10px'></lay-switch>
+  </div>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const active7 = ref(true)
+
+    return {
+        active7
+    }
+  }
+}
+</script>
+
+:::
+
 ::: title Switch 属性
 :::
 
@@ -186,6 +217,7 @@ export default {
 | unswitch-text | 禁用描述       | `禁用`         |
 | onswitch-value | 启用值       | `true`        |
 | unswitch-value | 禁用值       | `false`         |
+| size | 尺寸       | `lg` `md` `sm` `xs`         |
 
 :::
 

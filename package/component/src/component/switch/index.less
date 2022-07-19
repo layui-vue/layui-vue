@@ -1,3 +1,54 @@
+@lg: 28px;
+@md: 22px;
+@sm: 16px;
+@xs: 13px;
+
+@lg-min-width: 55px;
+@md-min-width: 35px;
+@sm-min-width: 26px;
+@xs-min-width: 20px;
+
+.set-size(@size, @min-width) {
+  & {
+    .layui-form-switch {
+      height: @size;
+      min-width: @min-width;
+      span{
+        width: calc(@size - 4px);
+        height: calc(@size - 4px);
+        transition:all 0.1s linear;
+      }
+      em{
+        margin-left: calc(@size - 3px);
+      }
+    }
+    .layui-form-onswitch{
+      span{
+        left: calc(100% - calc(@size - 1px));
+      }
+      em{
+        margin-right: calc(@size - 3px);
+        margin-left: 0px;
+      }
+    }
+  }
+}
+
+.layui-switch-container{
+  &[size="lg"] {
+    .set-size(@lg,@lg-min-width);
+  }
+  &[size="md"] {
+    .set-size(@md,@md-min-width);
+  }
+  &[size="sm"] {
+    .set-size(@sm,@sm-min-width);
+  }
+  &[size="xs"] {
+    .set-size(@xs,@xs-min-width);
+  }
+}
+
 .layui-form-switch {
   position: relative;
   height: 22px;
@@ -7,8 +58,8 @@
   border-radius: 20px;
   cursor: pointer;
   background-color: var(--global-neutral-color-6);
-  -webkit-transition: 0.1s linear;
-  transition: 0.1s linear;
+  -webkit-transition:all 0.1s linear;
+  transition:all 0.1s linear;
 }
 
 .layui-form-switch span {
@@ -24,15 +75,14 @@
   border-radius: 20px;
   background-color: #fff;
   box-shadow: 0 2px 4px #00230b33;
-  -webkit-transition: 0.1s linear;
-  transition: 0.1s linear;
+  -webkit-transition:all 0.1s linear;
+  transition:all 0.1s linear;
 }
 
 .layui-form-switch em {
   position: relative;
   top: 0;
   width: 25px;
-  margin-left: 21px;
   padding: 0 !important;
   text-align: center !important;
   color: #999 !important;
@@ -46,14 +96,10 @@
 }
 
 .layui-form-onswitch span {
-  left: 100%;
-  margin-left: -21px;
   background-color: #fff;
 }
 
 .layui-form-onswitch em {
-  margin-left: 5px;
-  margin-right: 21px;
   color: #fff !important;
 }
 
