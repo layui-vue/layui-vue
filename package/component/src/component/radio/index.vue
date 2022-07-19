@@ -7,9 +7,9 @@ export default {
 
 <script setup lang="ts">
 import "./index.less";
-import { disable } from "@umijs/ssr-darkreader";
 
 export interface LayRadioProps {
+  size?: 'lg' | 'md' | 'sm' | 'xs';
   modelValue?: string | boolean;
   disabled?: boolean;
   value?: string;
@@ -17,7 +17,9 @@ export interface LayRadioProps {
   name?: string;
 }
 
-const props = defineProps<LayRadioProps>();
+const props = withDefaults(defineProps<LayRadioProps>(), {
+  size: "md"
+});
 
 const emit = defineEmits(["update:modelValue", "change"]);
 
@@ -72,7 +74,7 @@ const ifDisabled = computed(() => {
 </script>
 
 <template>
-  <span class="layui-radio">
+  <span class="layui-radio" :size="size">
     <input type="radio" :value="value" :name="naiveName" />
     <div
       class="layui-unselect layui-form-radio"

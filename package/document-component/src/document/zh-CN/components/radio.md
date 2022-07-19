@@ -98,6 +98,36 @@ export default {
 
 :::
 
+::: title 事件回调
+:::
+
+::: demo
+
+<template>
+    <lay-radio v-model="selected5" name="action" size="lg" value="1">写作</lay-radio>
+    <lay-radio v-model="selected5" name="action" size="md" value="2">画画</lay-radio>
+    <lay-radio v-model="selected5" name="action" size="sm" value="3">运动</lay-radio>
+    <lay-radio v-model="selected5" name="action" size="xs" value="4">游泳</lay-radio>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const selected5 = ref("1");
+
+    return {
+        selected5,
+    }
+  }
+}
+</script>
+
+:::
+
+
 ::: title 单选分组
 :::
 

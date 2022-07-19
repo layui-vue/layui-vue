@@ -24,7 +24,7 @@ const props = withDefaults(defineProps<LaySwitchProps>(), {
   disabled: false,
   onswitchValue: true,
   unswitchValue: false,
-  size:'md'
+  size: "md",
 });
 
 const emit = defineEmits(["update:modelValue", "change"]);

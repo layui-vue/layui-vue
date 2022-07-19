@@ -29,6 +29,7 @@
           <li>[新增] date-picker 组件 年月日 范围选择, 重构代码。</li>
           <li>[新增] date-picker 组件 allow-clear 属性, 开启内容清空操作。</li>
           <li>[新增] date-picker 组件 readonly 属性, 开启只读模式。</li>
+          <li>[新增] radio 组件 size 属性, 用于设置 radio 尺寸。</li>
           <li>[新增] switch 组件 size 属性, 用于设置 switch 尺寸。</li>
           <li>[修复] date-picker 组件 modelValue 属性, 空值报错。</li>
           <li>[修复] input-number 组件 size 属性, lg md sm xs 为可选值。</li>

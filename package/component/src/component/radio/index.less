@@ -1,3 +1,31 @@
+@lg: 24px;
+@md: 22px;
+@sm: 20px;
+@xs: 18px;
+
+.set-size(@size) {
+  & {
+    .layui-form-radio > i {
+      font-size: @size;
+    }
+  }
+}
+
+.layui-radio{
+  &[size="lg"] {
+    .set-size(@lg);
+  }
+  &[size="md"] {
+    .set-size(@md);
+  }
+  &[size="sm"] {
+    .set-size(@sm);
+  }
+  &[size="xs"] {
+    .set-size(@xs);
+  }
+}
+
 .layui-radio input[type="radio"]{
   display: none;
 }
