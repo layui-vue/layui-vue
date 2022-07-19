@@ -33,6 +33,7 @@
           <li>[修复] input-number 组件 size 属性, lg md sm xs 为可选值。</li>
           <li>[修复] input-number 组件 size 属性, 默认值为 md。</li>
           <li>[修复] rate 组件 has-clear 为 allow-clear 属性。</li>
+          <li>[修复] transfer 组件因 checkbox 属性更新而导致的选择逻辑错误。</li>
           <li>[优化] select 组件 multiple 属性开启时的 tag 标签样式。</li>
           <li>[删除] table 组件 checkbox 属性, 由 type = checkbox 列代替。</li>
         </ul>

@@ -196,7 +196,7 @@ const boxStyle = computed(() => {
             v-model="hasLeftChecked"
             :is-indeterminate="!allLeftChecked"
             skin="primary"
-            label="all"
+            value="all"
             @change="allLeftChange"
           >
             <span>{{ title[0] }}</span>
@@ -214,7 +214,7 @@ const boxStyle = computed(() => {
             <LayCheckbox
               v-model="leftSelectedKeys"
               skin="primary"
-              :label="dataSource[id]"
+              :value="dataSource[id]"
             >
               <slot v-if="slots.item" name="item" :data="dataSource"></slot>
               <span v-else>{{ dataSource.title }}</span>
@@ -247,7 +247,7 @@ const boxStyle = computed(() => {
             v-model="hasRightChecked"
             :is-indeterminate="!allRightChecked"
             skin="primary"
-            label="all"
+            value="all"
             @change="allRightChange"
           >
             <span>{{ title[1] }}</span>
@@ -265,7 +265,7 @@ const boxStyle = computed(() => {
             <LayCheckbox
               v-model="rightSelectedKeys"
               skin="primary"
-              :label="dataSource[id]"
+              :value="dataSource[id]"
             >
               <slot v-if="slots.item" name="item" :data="dataSource"></slot>
               <span v-else>{{ dataSource.title }}</span>
