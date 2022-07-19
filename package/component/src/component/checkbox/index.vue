@@ -17,6 +17,7 @@ export interface LayCheckboxProps {
   isIndeterminate?: boolean;
   modelValue?: boolean | Array<string | object>;
   disabled?: boolean;
+  size?: 'lg' | 'md' | 'sm' | 'xs';
 }
 
 const props = withDefaults(defineProps<LayCheckboxProps>(), {
@@ -24,6 +25,7 @@ const props = withDefaults(defineProps<LayCheckboxProps>(), {
   modelValue: false,
   disabled: false,
   label: "",
+  size: "md"
 });
 
 const checkboxGroup: any = inject("checkboxGroup", {});
@@ -92,11 +94,11 @@ const setArrayModelValue = function (checked: any) {
 };
 
 const handleClick = function () {
-  if (!ifDisabled.value) {
+  if (!isDisabled.value) {
     isChecked.value = !isChecked.value;
   }
 };
-const ifDisabled = computed(() => {
+const isDisabled = computed(() => {
   if (props.disabled) {
     return true;
   }
@@ -111,19 +113,18 @@ const ifDisabled = computed(() => {
 </script>
 
 <template>
-  <span @click.stop="handleClick" class="layui-checkbox">
+  <span @click.stop="handleClick" class="layui-checkbox" :size="size">
     <input type="checkbox" :name="name" :value="value" />
     <div
       class="layui-unselect layui-form-checkbox"
       :class="{
         'layui-form-checked': isChecked,
-        'layui-checkbox-disabled layui-disabled': ifDisabled,
+        'layui-checkbox-disabled layui-disabled': isDisabled,
       }"
       :lay-skin="skin"
     >
-      <span
-        ><slot>{{ label }}</slot></span
-      >
+      <span class="layui-checkbox-label"
+        ><slot>{{ label }}</slot></span>
       <lay-icon
         :type="
           props.isIndeterminate && isChecked

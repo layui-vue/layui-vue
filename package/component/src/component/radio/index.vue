@@ -9,7 +9,7 @@ export default {
 import "./index.less";
 
 export interface LayRadioProps {
-  size?: 'lg' | 'md' | 'sm' | 'xs';
+  size?: "lg" | "md" | "sm" | "xs";
   modelValue?: string | boolean;
   disabled?: boolean;
   value?: string;
@@ -18,7 +18,7 @@ export interface LayRadioProps {
 }
 
 const props = withDefaults(defineProps<LayRadioProps>(), {
-  size: "md"
+  size: "md",
 });
 
 const emit = defineEmits(["update:modelValue", "change"]);

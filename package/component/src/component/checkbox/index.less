@@ -1,3 +1,48 @@
+@lg: 18px;
+@md: 16px;
+@sm: 14px;
+@xs: 12px;
+
+@lg-font-size: 16px;
+@md-font-size: 14px;
+@sm-font-size: 12px;
+@xs-font-size: 10px;
+
+.set-size(@size, @font-size) {
+  & {
+    height: @size;
+    line-height: @size;
+    .layui-form-checkbox[lay-skin="primary"]  {
+      .layui-icon {
+        width: @size;
+        height: @size;
+        font-size: @font-size;
+      }
+      .layui-checkbox-label {
+        height: @size;
+        line-height: @size;
+        font-size: @font-size;
+        margin-top: 1px;
+      }
+    }
+  }
+}
+
+.layui-checkbox{
+  &[size="lg"] {
+    .set-size(@lg, @lg-font-size);
+  }
+  &[size="md"] {
+    .set-size(@md, @md-font-size);
+  }
+  &[size="sm"] {
+    .set-size(@sm, @sm-font-size);
+  }
+  &[size="xs"] {
+    .set-size(@xs, @xs-font-size);
+  }
+}
+
 .layui-checkbox input[type="checkbox"] {
   display: none;
 }
