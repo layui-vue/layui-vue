@@ -150,7 +150,7 @@ export function calculateContent(
         return "calc(" + height + " - 86px)";
       }
     }
-    if (type == 1) {
+    if (type == 1 || type == 4) {
       if (title) {
         return "calc(" + height + " - 102px)";
       } else {
@@ -172,7 +172,7 @@ export function calculateContent(
         return isMessage ? height : "calc(" + height + " - 86px)";
       }
     }
-    if (type == 1) {
+    if (type == 1 || type == 4) {
       if (title) {
         return "calc(" + height + " - 51px)";
       } else {
