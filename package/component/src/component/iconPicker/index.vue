@@ -135,7 +135,7 @@ const searchList = (str: string, container: any) => {
 </script>
 
 <template>
-  <lay-dropdown ref="dropdownRef">
+  <lay-dropdown ref="dropdownRef" updateAtScroll>
     <div
       class="layui-inline layui-border-box layui-iconpicker layui-iconpicker-split"
     >

@@ -4,6 +4,7 @@
       ref="dropdownRef"
       :disabled="disabled"
       :autoFitMinWidth="false"
+      updateAtScroll
       class="layui-date-picker"
       :class="{ 'layui-date-range-picker': range }"
       :size="size"

@@ -407,7 +407,7 @@ function hex2rgba(s: any) {
 </script>
 
 <template>
-  <lay-dropdown>
+  <lay-dropdown updateAtScroll>
     <div class="layui-unselect layui-colorpicker">
       <span>
         <span
