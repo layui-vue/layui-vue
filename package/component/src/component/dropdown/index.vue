@@ -73,6 +73,7 @@ const props = withDefaults(defineProps<LayDropdownProps>(), {
   mouseLeaveDelay: 150,
   focusDelay: 150,
   alignPoint: false,
+  popupContainer: "body",
 });
 
 const childrenRefs = new Set<Ref<HTMLElement>>();

@@ -34,6 +34,7 @@ const isOpen = computed(() => {
     :autoFitMinWidth="false"
     :contentOffset="3"
     popupContainer="body"
+    updateAtScroll
     class="layui-sub-menu-popup"
   >
     <li :class="['layui-nav-item']">

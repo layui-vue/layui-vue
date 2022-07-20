@@ -36,6 +36,7 @@ const props = withDefaults(defineProps<LayDropdownSubMenuProps>(), {
     :auto-fit-min-width="false"
     :contentOffset="contentOffset"
     :disabled="disabled"
+    updateAtScroll
   >
     <lay-dropdown-menu-item :disabled="disabled">
       <template v-if="$slots.prefix" #prefix>

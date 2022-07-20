@@ -13,7 +13,7 @@
 ::: demo
 
 <template>
-  <lay-dropdown>
+  <lay-dropdown updateAtScroll>
     <lay-button type="primary">下拉菜单</lay-button>
     <template #content>
         <lay-dropdown-menu>
@@ -45,7 +45,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-dropdown trigger="hover">
+  <lay-dropdown trigger="hover" updateAtScroll>
     <lay-button>Hover 触发</lay-button>
     <template #content>
         <lay-dropdown-menu>
@@ -56,7 +56,7 @@ export default {
     </template>
   </lay-dropdown>
   &nbsp;&nbsp;
-    <lay-dropdown>
+    <lay-dropdown updateAtScroll>
     <lay-button>Click 触发</lay-button>
     <template #content>
         <lay-dropdown-menu>
@@ -67,7 +67,7 @@ export default {
     </template>
   </lay-dropdown>
     &nbsp;&nbsp;
-    <lay-dropdown trigger="contextMenu">
+    <lay-dropdown trigger="contextMenu" updateAtScroll>
     <lay-button>contextMenu 触发</lay-button>
     <template #content>
         <lay-dropdown-menu>
@@ -78,7 +78,7 @@ export default {
     </template>
   </lay-dropdown>
         &nbsp;&nbsp;
-    <lay-dropdown trigger="focus">
+    <lay-dropdown trigger="focus" updateAtScroll>
     <lay-input placeholder="Focus 触发"></lay-input>
     <template #content>
         <lay-dropdown-menu>
@@ -89,7 +89,7 @@ export default {
     </template>
   </lay-dropdown>
           &nbsp;&nbsp;
-    <lay-dropdown :trigger="['hover','focus','click']">
+    <lay-dropdown :trigger="['hover','focus','click']" updateAtScroll>
     <lay-input placeholder="hover focus click"></lay-input>
     <template #content>
         <lay-dropdown-menu>
@@ -123,7 +123,7 @@ export default {
   <lay-button @click="manualRef.open()">打开</lay-button>
   <lay-button @click="manualRef.hide()">关闭</lay-button>
   <br><br>
-  <lay-dropdown ref="manualRef" :clickOutsideToClose="false" :clickToClose="false">
+  <lay-dropdown ref="manualRef" :clickOutsideToClose="false" :clickToClose="false" updateAtScroll>
     <lay-button type="primary">下拉菜单</lay-button>
     <template #content>
         <lay-dropdown-menu>
@@ -222,7 +222,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-dropdown @open="stat='开启'" @hide="stat='关闭'">
+  <lay-dropdown @open="stat='开启'" @hide="stat='关闭'" updateAtScroll>
     <lay-button type="primary" >当前状态:{{stat}}</lay-button>
     <template #content>
         <lay-dropdown-menu>
@@ -255,42 +255,42 @@ export default {
 ::: demo
 
 <template>
-  <lay-dropdown placement="top-left">
+  <lay-dropdown placement="top-left" updateAtScroll>
     <lay-button type="primary">topLeft</lay-button>
     <template #content>
       <div style="width:300px;height:200px;"></div> 
     </template>
   </lay-dropdown>
   &nbsp;&nbsp;
-  <lay-dropdown placement="top">
+  <lay-dropdown placement="top" updateAtScroll>
     <lay-button type="primary">top</lay-button>
     <template #content>
       <div style="width:300px;height:200px;"></div> 
     </template>
   </lay-dropdown>
   &nbsp;&nbsp;
-  <lay-dropdown placement="top-right">
+  <lay-dropdown placement="top-right" updateAtScroll>
     <lay-button type="primary">topRight</lay-button>
     <template #content>
       <div style="width:300px;height:200px;"></div> 
     </template>
   </lay-dropdown>
   &nbsp;&nbsp;
-  <lay-dropdown placement="bottom-left">
+  <lay-dropdown placement="bottom-left" updateAtScroll>
     <lay-button type="primary">bottomLeft</lay-button>
     <template #content>
       <div style="width:300px;height:200px;"></div> 
     </template>
   </lay-dropdown>
     &nbsp;&nbsp;
-  <lay-dropdown placement="bottom">
+  <lay-dropdown placement="bottom" updateAtScroll>
     <lay-button type="primary">bottom</lay-button>
     <template #content>
       <div style="width:300px;height:200px;"></div> 
     </template>
   </lay-dropdown>
     &nbsp;&nbsp;
-  <lay-dropdown placement="bottom-right">
+  <lay-dropdown placement="bottom-right" updateAtScroll>
     <lay-button type="primary">bottomRight</lay-button>
     <template #content>
       <div style="width:300px;height:200px;"></div> 
@@ -298,42 +298,42 @@ export default {
   </lay-dropdown>
   <br><br>
     &nbsp;&nbsp;
-  <lay-dropdown placement="right-top">
+  <lay-dropdown placement="right-top" updateAtScroll>
     <lay-button type="primary">right-top</lay-button>
     <template #content>
       <div style="width:300px;height:200px;"></div> 
     </template>
   </lay-dropdown>
     &nbsp;&nbsp;
-  <lay-dropdown placement="right">
+  <lay-dropdown placement="right" updateAtScroll>
     <lay-button type="primary">right</lay-button>
     <template #content>
       <div style="width:300px;height:200px;"></div> 
     </template>
   </lay-dropdown>
     &nbsp;&nbsp;
-  <lay-dropdown placement="right-bottom">
+  <lay-dropdown placement="right-bottom" updateAtScroll>
     <lay-button type="primary">right-bottom</lay-button>
     <template #content>
       <div style="width:300px;height:200px;"></div> 
     </template>
   </lay-dropdown>
    &nbsp;&nbsp;
-    <lay-dropdown placement="left-top">
+    <lay-dropdown placement="left-top" updateAtScroll>
     <lay-button type="primary">left-top</lay-button>
     <template #content>
       <div style="width:300px;height:200px;"></div> 
     </template>
   </lay-dropdown>
   &nbsp;&nbsp;
-  <lay-dropdown placement="left">
+  <lay-dropdown placement="left" updateAtScroll>
     <lay-button type="primary">left</lay-button>
     <template #content>
       <div style="width:300px;height:200px;"></div> 
     </template>
   </lay-dropdown>
   &nbsp;&nbsp;
-  <lay-dropdown placement="left-bottom">
+  <lay-dropdown placement="left-bottom" updateAtScroll>
     <lay-button type="primary">left-bottom</lay-button>
     <template #content>
       <div style="width:300px;height:200px;"></div> 
@@ -368,7 +368,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-dropdown>
+  <lay-dropdown updateAtScroll>
     <lay-button type="primary">图标菜单</lay-button>
     <template #content>
         <lay-dropdown-menu>
@@ -413,7 +413,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-dropdown>
+  <lay-dropdown updateAtScroll>
     <lay-button type="primary">下拉菜单</lay-button>
     <template #content>
         <lay-dropdown-menu>
@@ -435,7 +435,7 @@ export default {
                    <lay-dropdown-menu-item>菜单3</lay-dropdown-menu-item>
                 </template>
               </lay-dropdown-sub-menu>
-              <lay-dropdown-sub-menu disabled>
+              <lay-dropdown-sub-menu>
                 <template #default>子菜单四</template>
                 <template #content>
                    <lay-dropdown-menu-item>菜单1</lay-dropdown-menu-item>
@@ -474,7 +474,7 @@ export default {
 ::: demo
 
 <template>
-   <lay-dropdown placement="bottom-left" autoFitWidth>
+   <lay-dropdown placement="bottom-left" autoFitWidth updateAtScroll>
     <lay-button type="primary">autoFitWidth</lay-button>
     <template #content>
       <lay-dropdown-menu>
@@ -485,7 +485,7 @@ export default {
     </template>
   </lay-dropdown>
   &nbsp;&nbsp;
-  <lay-dropdown placement="bottom-left" :autoFitMinWidth="false">
+  <lay-dropdown placement="bottom-left" :autoFitMinWidth="false" updateAtScroll>
     <lay-button type="primary">关闭 autoFitMinWidth</lay-button>
     <template #content>
       <lay-dropdown-menu>
@@ -522,7 +522,7 @@ export default {
   <lay-button  @click="triggerHeight += 100">改变触发器尺寸</lay-button>
   <lay-button  @click="contentHeight += 100">改变面板尺寸</lay-button>
   <br><br>
-  <lay-dropdown placement="bottom-left" trigger="focus" :autoFitPosition="true" :autoFixPosition="true" :blurToClose="false" :clickOutsideToClose="false">
+  <lay-dropdown placement="bottom-left" trigger="focus" :autoFitPosition="true" :autoFixPosition="true" :blurToClose="false" :clickOutsideToClose="false" updateAtScroll>
     <lay-input placeholder="autoFixPosition" :style="{height: triggerHeight + 'px'}"></lay-input>
     <template #content>
      <div :style="{width:'350px', height: contentHeight + 'px'}"></div>

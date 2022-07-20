@@ -72,13 +72,15 @@
   border-color: #EEEEEE;
 }
 
-.layui-dropdown-content .layui-dropdown{
+.layui-dropdown-content .layui-menu li.layui-disabled:hover {
+  background-color: inherit;
+}
+
+// fix style
+.layui-dropdown-menu .layui-dropdown{
+  display: block;
   width: -moz-available;
   width: -webkit-fill-available;
   width: fill-available;
   width: 100%;
-}
-
-.layui-dropdown-content .layui-menu li.layui-disabled:hover {
-  background-color: inherit;
 }

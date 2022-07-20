@@ -464,6 +464,12 @@ export default {
       <lay-menu-item id="5">
         <template #title>菜单一</template>
       </lay-menu-item>
+      <lay-sub-menu>
+        <template #title>首页</template>
+        <lay-menu-item id="7">
+          <template #title>首页</template>
+        </lay-menu-item> 
+      </lay-sub-menu>
       <lay-sub-menu id="6">
         <template #title>首页</template>
         <lay-menu-item id="7">
