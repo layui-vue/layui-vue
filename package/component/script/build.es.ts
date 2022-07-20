@@ -37,7 +37,7 @@ const matchModule: string[] = [
   "tooltip",
   "page",
   "scroll",
-  "radio"
+  "radio",
 ];
 
 export default (): UserConfigExport => {
