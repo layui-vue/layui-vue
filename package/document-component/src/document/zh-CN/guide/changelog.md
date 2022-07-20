@@ -12,7 +12,7 @@
 <lay-timeline>
   <lay-timeline-item title="1.3.x">
       <ul> 
-      <a name="1-3-0"></a> 
+      <a name="1-3-1"></a> 
       <li> 
         <h3>1.3.0 <span class="layui-badge-rim">2022-07-20</span></h3> 
         <ul>         
