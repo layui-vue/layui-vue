@@ -174,7 +174,7 @@ export default {
 | value   | 绑定值        | --     |
 | v-model | 选中值        | --     |
 | disabled   | 是否禁用    | `false`     |
-
+| size | 尺寸       | `lg` `md` `sm` `xs`         |
 :::
 
 ::: title Radio 事件

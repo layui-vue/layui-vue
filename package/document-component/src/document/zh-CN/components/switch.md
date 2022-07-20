@@ -36,7 +36,7 @@ export default {
 ::: title 事件回调
 :::
 
-::: demo
+::: demo 通过 `change` 事件, 在操作后完成一些后续处理。
 
 <template>
   <lay-switch v-model="active2" @change="change"></lay-switch>
@@ -67,7 +67,7 @@ export default {
 ::: title 禁用状态
 :::
 
-::: demo
+::: demo 通过 `disabled` 属性, 禁用开关操作。
 
 <template>
   <lay-switch v-model="active3" :disabled="disabled"></lay-switch>
@@ -94,7 +94,7 @@ export default {
 ::: title 修改描述
 :::
 
-::: demo
+::: demo 通过 `onswitch-text` 与 `unswitch-text` 属性, 设置不同状态的描述文字。 
 
 <template>
   <lay-switch v-model="active4" onswitch-text="白天"  unswitch-text="夜间"></lay-switch>
@@ -120,7 +120,7 @@ export default {
 ::: title 图标插槽
 :::
 
-::: demo
+::: demo 通过 `onswitch-icon` 与 `unswitch-icon` 属性, 设置不同状态的展示图标。 
 
 <template>
   <lay-switch v-model="active5">
@@ -175,7 +175,7 @@ export default {
 ::: title 尺寸
 :::
 
-::: demo
+::: demo 通过 `size` 属性, 设置尺寸。
 
 <template>
   <div style='display:flex;align-items: flex-end;'>

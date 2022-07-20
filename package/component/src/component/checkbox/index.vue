@@ -17,7 +17,7 @@ export interface LayCheckboxProps {
   isIndeterminate?: boolean;
   modelValue?: boolean | Array<string | object>;
   disabled?: boolean;
-  size?: 'lg' | 'md' | 'sm' | 'xs';
+  size?: "lg" | "md" | "sm" | "xs";
 }
 
 const props = withDefaults(defineProps<LayCheckboxProps>(), {
@@ -25,7 +25,7 @@ const props = withDefaults(defineProps<LayCheckboxProps>(), {
   modelValue: false,
   disabled: false,
   label: "",
-  size: "md"
+  size: "md",
 });
 
 const checkboxGroup: any = inject("checkboxGroup", {});
@@ -124,7 +124,8 @@ const isDisabled = computed(() => {
       :lay-skin="skin"
     >
       <span class="layui-checkbox-label"
-        ><slot>{{ label }}</slot></span>
+        ><slot>{{ label }}</slot></span
+      >
       <lay-icon
         :type="
           props.isIndeterminate && isChecked

@@ -14,7 +14,7 @@
       <ul> 
       <a name="1-3-0"></a> 
       <li> 
-        <h3>1.3.0 <span class="layui-badge-rim">2022-07-14</span></h3> 
+        <h3>1.3.0 <span class="layui-badge-rim">2022-07-20</span></h3> 
         <ul>         
           <li>[新增] input 组件 append 与 prepend 插槽。</li>
           <li>[新增] input 组件 password 属性, 开启密码模式。</li>
@@ -29,6 +29,7 @@
           <li>[新增] date-picker 组件 年月日 范围选择, 重构代码。</li>
           <li>[新增] date-picker 组件 allow-clear 属性, 开启内容清空操作。</li>
           <li>[新增] date-picker 组件 readonly 属性, 开启只读模式。</li>
+          <li>[新增] checkbox 组件 size 属性, 用于设置 checkbox 尺寸。</li>
           <li>[新增] radio 组件 size 属性, 用于设置 radio 尺寸。</li>
           <li>[新增] switch 组件 size 属性, 用于设置 switch 尺寸。</li>
           <li>[修复] date-picker 组件 modelValue 属性, 空值报错。</li>

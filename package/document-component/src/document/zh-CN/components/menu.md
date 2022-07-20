@@ -13,7 +13,7 @@
 ::: demo
 
 <template>
-  <lay-menu v-model:selectedKey="selectedKey" v-model:openKeys="openKeys1">
+  <lay-menu v-model:selected-key="selectedKey" v-model:open-keys="openKeys1">
     <lay-menu-item id="1">首页</lay-menu-item>
     <lay-menu-item id="2">首页</lay-menu-item>
     <lay-menu-item id="3">首页</lay-menu-item> 
@@ -59,7 +59,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-menu :selectedKey="selectedKey" @changeSelectedKey="changeSelectedKey" @changeOpenKeys="changeOpenKeys" v-model:openKeys="openKeys2" :tree="true">
+  <lay-menu :selected-key="selectedKey" @change-selected-Key="changeSelectedKey" @change-open-keys="changeOpenKeys" v-model:openKeys="openKeys2" :tree="true">
     <lay-menu-item id="1">首页</lay-menu-item>
     <lay-menu-item id="2">首页</lay-menu-item>
     <lay-menu-item id="3">首页</lay-menu-item> 
@@ -115,7 +115,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-menu :level="isLevel" v-model:selectedKey="selectedKey" inverted="true" v-model:openKeys="openKeys3" :tree="true">
+  <lay-menu :level="isLevel" v-model:selected-key="selectedKey" inverted="true" v-model:open-keys="openKeys3" :tree="true">
     <lay-menu-item id="1">首页</lay-menu-item>
     <lay-menu-item id="2">首页</lay-menu-item>
     <lay-menu-item id="3">首页</lay-menu-item> 
@@ -164,7 +164,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-menu v-model:selectedKey="selectedKey" theme="light" v-model:openKeys="openKeys4" :tree="true">
+  <lay-menu v-model:selected-key="selectedKey" theme="light" v-model:openKeys="openKeys4" :tree="true">
     <lay-menu-item id="1">
       <template #title>
         菜单
@@ -233,7 +233,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-menu v-model:selectedKey="selectedKey" v-model:openKeys="openKeys5" v-model:tree="isTree">
+  <lay-menu v-model:selected-key="selectedKey" v-model:open-keys="openKeys5" v-model:tree="isTree">
     <lay-menu-item id="1">
       <router-link to="">
         <lay-icon type="layui-icon-home"></lay-icon> 
@@ -293,7 +293,7 @@ export default {
   <lay-switch v-model="collapse"></lay-switch>
   <br/>
   <br/>
-  <lay-menu v-model:selectedKey="selectedKey" v-model:tree="isTree" v-model:openKeys="openKeys6" :collapse="collapse">
+  <lay-menu v-model:selected-key="selectedKey" v-model:tree="isTree" v-model:open-keys="openKeys6" :collapse="collapse">
     <lay-menu-item id="1">
         <template #icon>
           <lay-icon type="layui-icon-home"></lay-icon> 
@@ -431,12 +431,12 @@ export default {
 <template>
   <lay-switch v-model="collapse20"></lay-switch>&nbsp;&nbsp;
   <lay-switch v-model="active20">
-    <template #onswitch-icon>★</template>
-    <template #unswitch-icon>☀</template>
+    <template #onswitch-icon>亮</template>
+    <template #unswitch-icon>黑</template>
   </lay-switch>
   <br/>
   <br/>
-  <lay-menu v-model:selectedKey="selectedKey20" :theme="active20 ? 'dark' : 'light'" v-model:tree="isTree20" v-model:openKeys="openKeys20" :collapse="collapse20">
+  <lay-menu v-model:selected-key="selectedKey20" :theme="active20 ? 'dark' : 'light'" v-model:tree="isTree20" v-model:open-keys="openKeys20" :collapse="collapse20">
     <lay-menu-item id="1">
         <template #icon>
           <lay-icon type="layui-icon-home"></lay-icon> 
@@ -599,7 +599,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-menu v-model:selectedKey="selectedKey" :collapse-transition="collapseTransition" v-model:openKeys="openKeys7" v-model:tree="isTree">
+  <lay-menu v-model:selected-key="selectedKey" :collapse-transition="collapseTransition" v-model:open-keys="openKeys7" v-model:tree="isTree">
     <lay-menu-item id="1">
       <router-link to="">
         <lay-icon type="layui-icon-home"></lay-icon> 
@@ -658,7 +658,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-menu v-model:selectedKey="selectedKey" v-model:openKeys="openKeys7" v-model:tree="isTree">
+  <lay-menu v-model:selected-key="selectedKey" v-model:open-keys="openKeys7" v-model:tree="isTree">
     <lay-menu-item id="1">
       <router-link to="">
         <lay-icon type="layui-icon-home"></lay-icon> 

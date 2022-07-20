@@ -13,7 +13,7 @@
 ::: demo 使用 `lay-table` 标签, 创建表格
 
 <template>
-  <lay-table :columns="columns1" :dataSource="dataSource1"></lay-table>
+  <lay-table :columns="columns1" :data-source="dataSource1"></lay-table>
 </template>
 
 <script>
@@ -70,7 +70,7 @@ export default {
     <lay-radio v-model="size2" name="action" value="md">md</lay-radio>
     <lay-radio v-model="size2" name="action" value="lg">lg</lay-radio>
   </lay-form>
-  <lay-table :columns="columns2" :dataSource="dataSource2" :size="size2"></lay-table>
+  <lay-table :columns="columns2" :data-source="dataSource2" :size="size2"></lay-table>
 </template>
 
 <script>
@@ -119,7 +119,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-table :columns="columns3" :dataSource="dataSource3" :page="page3" @change="change3"></lay-table>
+  <lay-table :columns="columns3" :data-source="dataSource3" :page="page3" @change="change3"></lay-table>
 </template>
 
 <script>
@@ -179,7 +179,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-table :columns="columns4" :dataSource="dataSource4"></lay-table>
+  <lay-table :columns="columns4" :data-source="dataSource4"></lay-table>
 </template>
 
 <script>
@@ -226,7 +226,7 @@ export default {
 ::: demo 当表格内容较多不能一次性完全展示时。
 
 <template>
-  <lay-table :columns="columns6" :dataSource="dataSource6">
+  <lay-table :columns="columns6" :data-source="dataSource6">
       <template v-slot:expand="{ data }"> 
         {{ data }} 
       </template>
@@ -276,7 +276,7 @@ export default {
 ::: demo 树形数据的展示，当数据中有 children 字段时会自动展示为树形表格, 通过设置 indentSize 以控制每一层的缩进宽度, 使用 childrenColumnName 替换默认字段
 
 <template>
-  <lay-table :columns="columns7" :dataSource="dataSource7">
+  <lay-table :columns="columns7" :data-source="dataSource7">
     <template #score="{ data }">{{ data }}</template>
   </lay-table>
 </template>
@@ -320,7 +320,7 @@ export default {
 ::: demo 设置 `height` 或者 `max-height` 即可实现
 
 <template>
-  <lay-table :columns="columns8" :dataSource="dataSource8" size="sm" max-height="300px"></lay-table>
+  <lay-table :columns="columns8" :data-source="dataSource8" size="sm" max-height="300px"></lay-table>
 </template>
 
 <script>
@@ -380,7 +380,7 @@ export default {
 ::: demo 通过 `even` 属性, 开启斑马条纹, 默认为 false。
 
 <template>
-  <lay-table :columns="columns1" :dataSource="dataSource1" even></lay-table>
+  <lay-table :columns="columns1" :data-source="dataSource1" even></lay-table>
 </template>
 
 <script>
@@ -434,7 +434,7 @@ export default {
 ::: demo 通过 `cellStyle` `rowStyle` `cellClassName` `rowClassName` 属性, 自定义单元格样式。
 
 <template>
-  <lay-table :columns="columns1" :dataSource="dataSource1" :cellStyle="cellStyle" :rowStyle="rowStyle"></lay-table>
+  <lay-table :columns="columns1" :data-source="dataSource1" :cell-style="cellStyle" :row-style="rowStyle"></lay-table>
 </template>
 
 <script>
@@ -502,9 +502,9 @@ export default {
 ::: demo 通过 `skin` 属性, 切换 table 风格。
 
 <template>
-  <lay-table :columns="columns1" :dataSource="dataSource1" skin="line"></lay-table>
-  <lay-table :columns="columns1" :dataSource="dataSource1" skin="nob" :even="true"></lay-table>
-  <lay-table :columns="columns1" :dataSource="dataSource1" skin="row"></lay-table>
+  <lay-table :columns="columns1" :data-source="dataSource1" skin="line"></lay-table>
+  <lay-table :columns="columns1" :data-source="dataSource1" skin="nob" :even="true"></lay-table>
+  <lay-table :columns="columns1" :data-source="dataSource1" skin="row"></lay-table>
 </template>
 
 <script>
@@ -558,7 +558,7 @@ export default {
 ::: demo 通过 `fixed` 属性实现列固定, 可选值为 `left` 与 `right`。
 
 <template>
-  <lay-table :columns="columns20" :dataSource="dataSource20"></lay-table>
+  <lay-table :columns="columns20" :data-source="dataSource20"></lay-table>
 </template>
 
 <script>
@@ -619,7 +619,7 @@ export default {
 ::: demo 通过 `columns` 配置 `type:'number'` 开启序号列。
 
 <template>
-  <lay-table :columns="columns21" :dataSource="dataSource21"></lay-table>
+  <lay-table :columns="columns21" :data-source="dataSource21"></lay-table>
 </template>
 
 <script>
@@ -679,7 +679,7 @@ export default {
 ::: demo 通过 `columns` 配置 `type:'checkbox'` 开启单选列。
 
 <template>
-  <lay-table :columns="columns23" :dataSource="dataSource23"></lay-table>
+  <lay-table :columns="columns23" :data-source="dataSource23"></lay-table>
 </template>
 
 <script>
@@ -739,7 +739,7 @@ export default {
 ::: demo 通过 `columns` 配置 `type:'radio'` 开启单选列。
 
 <template>
-  <lay-table :columns="columns24" :dataSource="dataSource24" v-model:selectedKey="selectedKey24"></lay-table>
+  <lay-table :columns="columns24" :data-source="dataSource24" v-model:selected-key="selectedKey24"></lay-table>
 </template>
 
 <script>
@@ -802,7 +802,7 @@ export default {
 ::: demo 通过 `columns` 配置 `type:'radio'` 开启单选列。
 
 <template>
-  <lay-table :columns="columns25" :dataSource="dataSource25"></lay-table>
+  <lay-table :columns="columns25" :data-source="dataSource25"></lay-table>
 </template>
 
 <script>
@@ -855,7 +855,7 @@ export default {
 
 <template>
   <lay-button @click="changeDataSource22">更新数据</lay-button>
-  <lay-table :columns="columns22" :dataSource="dataSource22"></lay-table>
+  <lay-table :columns="columns22" :data-source="dataSource22"></lay-table>
 </template>
 
 <script>
@@ -918,7 +918,7 @@ export default {
 ::: demo 通过 `columns` 配置 `totalRow` 开启行统计。
 
 <template>
-  <lay-table :columns="columns26" :dataSource="dataSource26"></lay-table>
+  <lay-table :columns="columns26" :data-source="dataSource26"></lay-table>
 </template>
 
 <script>
@@ -977,7 +977,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-table :columns="columns5" id="id" :expandIndex="1" :dataSource="dataSource5" v-model:selectedKeys="selectedKeys5" :checkbox="checkbox5" :default-toolbar="defaultToolbar5" @row="rowClick5">
+  <lay-table :columns="columns5" id="id" :expand-index="1" :data-source="dataSource5" v-model:selected-keys="selectedKeys5" :checkbox="checkbox5" :default-toolbar="defaultToolbar5" @row="rowClick5">
     <template v-slot:toolbar>
       <lay-button size="sm">新增</lay-button>
       <lay-button size="sm">删除</lay-button>
@@ -1116,6 +1116,7 @@ export default {
 | cellClassName        | 列类名称 function(row, column, rowIndex, columnIndex)               | `string` `function`   | --    | -- |
 | rowClassName         | 行类名称 function(row, rowIndex)                | `string` `function`  | --   | -- |
 | skin                 | 风格                | `string` | --   | `line` `row` `nob` |
+| expand-index         | 展开所在列                | `number` | --   | -- |
 
 :::
 

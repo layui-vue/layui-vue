@@ -3,10 +3,7 @@
     <div class="site-banner">
       <div class="site-banner-main">
         <div class="site-zfj site-zfj-anim">
-          <img
-            src="../assets/logo-png.png"
-            style="width: 220px; border-radius: 10px"
-          />
+          <img src="../assets/logo-png.png" style="width: 220px; border-radius: 10px" />
         </div>
         <div class="layui-anim site-desc site-desc-anim">
           <p class="web-font-desc">layui - vue</p>
@@ -16,49 +13,24 @@
           <router-link class="layui-inline site-down" to="/zh-CN/guide">
             Get Started
           </router-link>
-          <a
-            class="layui-inline site-down"
-            href="javascript:void(0);"
-            @click="changeTheme"
-          >
+          <a class="layui-inline site-down" href="javascript:void(0);" @click="changeTheme">
             {{ appStore.theme === "dark" ? "Turn Off" : "Turn On" }}
           </a>
         </div>
         <div class="site-version">
-          <span
-            >{{ t("home.version") }}：<cite class="site-showv">
+          <span>{{ t("home.version") }}：<cite class="site-showv">
               {{ version }}
-            </cite></span
-          >
-          <span
-            >{{ t("home.download") }}：<em class="site-showdowns"
-              >14,684</em
-            ></span
-          >
+            </cite></span>
+          <span>{{ t("home.download") }}：<em class="site-showdowns">16,684</em></span>
         </div>
         <div class="site-banner-other">
-          <a
-            href="https://gitee.com/layui-vue"
-            target="_blank"
-            rel="nofollow"
-            class="site-star"
-          >
-            <i class="layui-icon"></i> Star <cite id="getStars">1296</cite>
+          <a href="https://gitee.com/layui-vue" target="_blank" rel="nofollow" class="site-star">
+            <i class="layui-icon"></i> Star <cite id="getStars">1324</cite>
           </a>
-          <a
-            href="https://gitee.com/layui-vue"
-            target="_blank"
-            rel="nofollow"
-            class="site-fork"
-          >
+          <a href="https://gitee.com/layui-vue" target="_blank" rel="nofollow" class="site-fork">
             Gitee
           </a>
-          <a
-            href="https://github.com/layui-vue"
-            target="_blank"
-            rel="nofollow"
-            class="site-fork"
-          >
+          <a href="https://github.com/layui-vue" target="_blank" rel="nofollow" class="site-fork">
             Github
           </a>
         </div>
@@ -75,7 +47,7 @@
         <lay-col :md="6" :sm="12" :xs="12">
           <div class="box">
             <h1 class="title">🐝 Small volume</h1>
-            <p class="details">only 8.5 MB.</p>
+            <p class="details">only 14.9 MB.</p>
           </div>
         </lay-col>
         <lay-col :md="6" :sm="12" :xs="12">
@@ -89,6 +61,59 @@
             <h1 class="title">😋 Quick build</h1>
             <p class="details">easy to use</p>
           </div>
+        </lay-col>
+      </lay-row>
+    </div>
+    <div class="link-list">
+      <lay-row :space="30">
+        <lay-col :md="3">
+          <lay-tooltip content="layui" position="top">
+            <a style="height:40px;display:inline-block;" href="https://layui.gitee.io/v2" target="_blank">
+              <lay-avatar src="https://unpkg.com/outeres@0.0.6/img/layui/icon-1.png" style="border-radius:4px;"></lay-avatar>
+            </a>
+          </lay-tooltip>
+        </lay-col>
+        <lay-col :md="3">
+          <lay-tooltip content="furion" position="top">
+            <a style="height:40px;display:inline-block;" href="https://dotnetchina.gitee.io/furion" target="_blank">
+              <lay-avatar src="https://dotnetchina.gitee.io//furion/img/furionlogo.png" style="background:transparent;"></lay-avatar>
+            </a>
+          </lay-tooltip>
+        </lay-col>
+        <lay-col :md="3">
+          <lay-tooltip content="mybatis plus" position="top">
+            <a style="height:40px;display:inline-block;" href="https://baomidou.com" target="_blank">
+              <lay-avatar src="https://baomidou.com/img/logo.svg" style="background:transparent;"></lay-avatar>
+            </a>
+          </lay-tooltip>
+        </lay-col>
+        <lay-col :md="3">
+          <lay-tooltip content="aizuda" position="top">
+            <a style="height:40px;display:inline-block;" href="http://doc.aizuda.com" target="_blank">
+              <lay-avatar src="http://doc.aizuda.com//img/azd.png" style="background:transparent;"></lay-avatar>
+            </a>
+          </lay-tooltip>
+        </lay-col>
+        <lay-col :md="3">
+          <lay-tooltip content="lite-flow" position="top">
+            <a style="height:40px;display:inline-block;" href="https://liteflow.yomahub.com" target="_blank">
+              <lay-avatar src="https://liteflow.yomahub.com//img/logo.svg" style="background:transparent;"></lay-avatar>
+            </a>
+          </lay-tooltip>
+        </lay-col>
+        <lay-col :md="3">
+          <lay-tooltip content="cc-flow" position="top">
+            <a style="height:40px;display:inline-block;" href="http://ccflow.org/" target="_blank">
+              <lay-avatar src="https://portrait.gitee.com/uploads/avatars/namespace/289/868254_opencc_1578989593.png" style="background:transparent;"></lay-avatar>
+            </a>
+          </lay-tooltip>
+        </lay-col>
+        <lay-col :md="3">
+          <lay-tooltip content="pear-admin" position="top">
+            <a style="height:40px;display:inline-block;" href="http://www.pearadmin.com" target="_blank">
+              <lay-avatar src="https://portrait.gitee.com/uploads/avatars/namespace/2319/6958819_pear-admin_1643085106.png" style="background:transparent;"></lay-avatar>
+            </a>
+          </lay-tooltip>
         </lay-col>
       </lay-row>
     </div>
@@ -195,7 +220,7 @@ body {
   color: white;
 }
 
-.site-download a + a {
+.site-download a+a {
   margin-left: 20px;
 }
 
@@ -295,25 +320,29 @@ body {
   padding: 50px 250px;
 }
 
+.link-list {
+  padding: 50px 250px;
+}
+
 .box {
+  background-color: #f9f9f9;
   border: 1px solid rgba(60, 60, 60, 0.12);
-  border-radius: 12px;
+  border-radius: 4px;
   padding: 24px;
   height: 100%;
-  background-color: #f9f9f9;
 }
 
 .box .title {
-  line-height: 24px;
   font-size: 16px;
   font-weight: 600;
+  line-height: 24px;
 }
 
 .box .details {
-  padding-top: 8px;
-  line-height: 24px;
   font-size: 14px;
+  padding-top: 8px;
   font-weight: 500;
+  line-height: 24px;
   color: rgba(60, 60, 60, 0.7);
 }
 

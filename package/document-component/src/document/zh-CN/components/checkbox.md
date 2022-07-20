@@ -254,11 +254,13 @@ export default {
 | ------------------- | ------------- | -------------------- |
 | name                | 原始属性 name | --                   |
 | skin                | 主题          | --                   |
-| label               | 显示内容        | --                  |
+| label               | 显示内容      | --                  |
 | value               | 选中值        | --                   |
 | v-model             | 是否选中      | `true` `false`       |
 | isIndeterminate     | 半选状态      | `true` `false`       |
 | disabled            | 是否禁用      | `true` `false`       |
+| size                | 尺寸          | `lg` `md` `sm` `xs`         |
+
 
 :::
 
