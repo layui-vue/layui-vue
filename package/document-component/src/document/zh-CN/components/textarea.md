@@ -36,7 +36,7 @@ export default {
 ::: title 事件回调
 :::
 
-::: demo
+::: demo 通过 `input` 事件, 触发 input 输入回调。
 
 <template>
   <lay-textarea placeholder="Input 事件" v-model="data2" @input="input"></lay-textarea>
@@ -67,7 +67,7 @@ export default {
 ::: title 禁止输入
 :::
 
-::: demo
+::: demo 通过 `disabled` 属性, 禁止输入
 
 <template>
   <lay-textarea placeholder="禁止输入" v-model="data3" :disabled="disabled"></lay-textarea>
@@ -94,7 +94,7 @@ export default {
 ::: title 清空内容
 :::
 
-::: demo
+::: demo 通过 `allow-clear` 属性, 开启清空操作, 默认不显示。
 
 <template>
   <lay-textarea placeholder="请输入内容" v-model="data3" allow-clear></lay-textarea>
@@ -120,12 +120,12 @@ export default {
 ::: title 显示字数
 :::
 
-::: demo
+::: demo 通过 `show-count` 与 `max-length` 属性, 展示限制长度与当前长度。
 
 <template>
   <lay-textarea placeholder="显示字数" v-model="data4" show-count></lay-textarea>
   <br>
-  <lay-textarea placeholder="最大输入长度" v-model="data5" show-count maxlength="10"></lay-textarea>
+  <lay-textarea placeholder="最大输入长度" v-model="data5" show-count :max-length="10"></lay-textarea>
 </template>
 
 <script>
