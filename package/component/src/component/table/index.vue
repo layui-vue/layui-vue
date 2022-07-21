@@ -392,87 +392,98 @@ const renderTotalRowCell = (column: any) => {
 
       <div class="layui-table-box">
         <!-- 表头 -->
-        <div class="layui-table-header" :style="[{ 'padding-right':`${scrollWidthCell}px`}]">
-          <div class="layui-table-header-wrapper" ref="tableHeader" :style="[scrollWidthCell > 0 ? 'border-right: 1px solid #eee;' : '']">
-          <table class="layui-table" :lay-size="size" :lay-skin="skin">
-            <colgroup>
-              <template v-for="column in columns" :key="column">
-                <template v-if="tableColumnKeys.includes(column.key)">
-                  <col
-                    :width="column.width"
-                    :style="{
-                      minWidth: column.minWidth ? column.minWidth : '50px',
-                    }"
-                  />
+        <div
+          class="layui-table-header"
+          :style="[{ 'padding-right': `${scrollWidthCell}px` }]"
+        >
+          <div
+            class="layui-table-header-wrapper"
+            ref="tableHeader"
+            :style="[
+              scrollWidthCell > 0 ? 'border-right: 1px solid #eee;' : '',
+            ]"
+          >
+            <table class="layui-table" :lay-size="size" :lay-skin="skin">
+              <colgroup>
+                <template v-for="column in columns" :key="column">
+                  <template v-if="tableColumnKeys.includes(column.key)">
+                    <col
+                      :width="column.width"
+                      :style="{
+                        minWidth: column.minWidth ? column.minWidth : '50px',
+                      }"
+                    />
+                  </template>
                 </template>
-              </template>
-            </colgroup>
-            <thead>
-              <tr>
-                <template
-                  v-for="(column, columnIndex) in columns"
-                  :key="column"
-                >
-                  <th
-                    v-if="tableColumnKeys.includes(column.key)"
-                    class="layui-table-cell"
-                    :class="[
-                      column.fixed ? `layui-table-fixed-${column.fixed}` : '',
-                      renderFixedClassName(column, columnIndex),
-                      column.type == 'checkbox'
-                        ? 'layui-table-cell-checkbox'
-                        : '',
-                      column.type == 'radio' ? 'layui-table-cell-radio' : '',
-                      column.type == 'number' ? 'layui-table-cell-number' : '',
-                    ]"
-                    :style="[
-                      {
-                        textAlign: column.align,
-                      },
-                      renderFixedStyle(column, columnIndex),
-                    ]"
+              </colgroup>
+              <thead>
+                <tr>
+                  <template
+                    v-for="(column, columnIndex) in columns"
+                    :key="column"
                   >
-                    <template v-if="column.type == 'checkbox'">
-                      <lay-checkbox
-                        v-model="hasChecked"
-                        :is-indeterminate="!allChecked"
-                        skin="primary"
-                        value="all"
-                        @change="changeAll"
-                      />
-                    </template>
-                    <template v-else>
-                      <span>
-                        <template v-if="column.titleSlot">
-                          <slot :name="column.titleSlot"></slot>
-                        </template>
-                        <template v-else>
-                          {{ column.title }}
-                        </template>
-                      </span>
-                      <!-- 插槽 -->
-                      <span
-                        v-if="column.sort"
-                        class="layui-table-sort layui-inline"
-                        lay-sort
-                      >
-                        <i
-                          @click.stop="sortTable($event, column.key, 'asc')"
-                          class="layui-edge layui-table-sort-asc"
-                          title="升序"
-                        ></i>
-                        <i
-                          @click.stop="sortTable($event, column.key, 'desc')"
-                          class="layui-edge layui-table-sort-desc"
-                          title="降序"
-                        ></i>
-                      </span>
-                    </template>
-                  </th>
-                </template>
-              </tr>
-            </thead>
-          </table>
+                    <th
+                      v-if="tableColumnKeys.includes(column.key)"
+                      class="layui-table-cell"
+                      :class="[
+                        column.fixed ? `layui-table-fixed-${column.fixed}` : '',
+                        renderFixedClassName(column, columnIndex),
+                        column.type == 'checkbox'
+                          ? 'layui-table-cell-checkbox'
+                          : '',
+                        column.type == 'radio' ? 'layui-table-cell-radio' : '',
+                        column.type == 'number'
+                          ? 'layui-table-cell-number'
+                          : '',
+                      ]"
+                      :style="[
+                        {
+                          textAlign: column.align,
+                        },
+                        renderFixedStyle(column, columnIndex),
+                      ]"
+                    >
+                      <template v-if="column.type == 'checkbox'">
+                        <lay-checkbox
+                          v-model="hasChecked"
+                          :is-indeterminate="!allChecked"
+                          skin="primary"
+                          value="all"
+                          @change="changeAll"
+                        />
+                      </template>
+                      <template v-else>
+                        <span>
+                          <template v-if="column.titleSlot">
+                            <slot :name="column.titleSlot"></slot>
+                          </template>
+                          <template v-else>
+                            {{ column.title }}
+                          </template>
+                        </span>
+                        <!-- 插槽 -->
+                        <span
+                          v-if="column.sort"
+                          class="layui-table-sort layui-inline"
+                          lay-sort
+                        >
+                          <i
+                            @click.stop="sortTable($event, column.key, 'asc')"
+                            class="layui-edge layui-table-sort-asc"
+                            title="升序"
+                          ></i>
+                          <i
+                            @click.stop="sortTable($event, column.key, 'desc')"
+                            class="layui-edge layui-table-sort-desc"
+                            title="降序"
+                          ></i>
+                        </span>
+                      </template>
+                    </th>
+                  </template>
+                </tr>
+              </thead>
+            </table>
           </div>
         </div>
         <!-- 表身 -->
