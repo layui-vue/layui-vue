@@ -762,10 +762,9 @@ export default {
 
 ::: table
 
-| 插槽  | 描述     | 备注 |
+| 属性  | 描述     | 备注 |
 | ----- | -------- | ---- |
 | title | 菜单标题 | --   |
-| expandIcon | 扩展图标 | --   |
 
 :::
 
@@ -777,7 +776,7 @@ export default {
 | 插槽  | 描述     | 备注 |
 | ----- | -------- | ---- |
 | title | 菜单标题 | --   |
-
+| expandIcon | 扩展图标 | isExpand:是否展开   |
 :::
 
 ::: contributor menu
