@@ -20,6 +20,7 @@ const { level } = useLevel();
 const selectedKey: Ref<string> = inject("selectedKey") as Ref<string>;
 const isTree = inject("isTree") as ComputedRef<boolean>;
 const isCollapse = inject("isCollapse") as ComputedRef<boolean | string>;
+const theme = inject("menuTheme") as Ref<string>;
 const selectHandle = function () {
   selectedKey.value = props.id;
 };
@@ -39,7 +40,7 @@ const needTooltip = computed(
     @click="selectHandle()"
   >
     <template v-if="needTooltip">
-      <lay-tooltip position="right">
+      <lay-tooltip position="right" :isDark="theme !== 'light'">
         <a href="javascript:void(0)">
           <i v-if="slots.icon">
             <slot name="icon"></slot>
