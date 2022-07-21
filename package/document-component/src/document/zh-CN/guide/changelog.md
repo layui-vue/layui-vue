@@ -11,8 +11,17 @@
 <template>
 <lay-timeline>
   <lay-timeline-item title="1.3.x">
+          <ul> 
+      <a name="1-3-3"></a> 
+      <li> 
+        <h3>1.3.3 <span class="layui-badge-rim">2022-07-21</span></h3> 
+        <ul>         
+          <li>[修复] cascader 组件 因 dropdwon 变动而导致的布局错误。</li>
+        </ul>
+      </li>
+    </ul>  
         <ul> 
-      <a name="1-3-1"></a> 
+      <a name="1-3-2"></a> 
       <li> 
         <h3>1.3.2 <span class="layui-badge-rim">2022-07-21</span></h3> 
         <ul>         
