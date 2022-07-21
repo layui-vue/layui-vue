@@ -977,7 +977,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-table :columns="columns5" id="id" :expand-index="1" :data-source="dataSource5" v-model:selected-keys="selectedKeys5" :checkbox="checkbox5" :default-toolbar="defaultToolbar5" @row="rowClick5">
+  <lay-table :columns="columns5" id="id" :expand-index="1" :data-source="dataSource5" v-model:selected-keys="selectedKeys5" :checkbox="checkbox5" :default-toolbar="defaultToolbar5" @row="rowClick5" max-height="200px">
     <template v-slot:toolbar>
       <lay-button size="sm">新增</lay-button>
       <lay-button size="sm">删除</lay-button>

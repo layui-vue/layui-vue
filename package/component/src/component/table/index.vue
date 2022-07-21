@@ -285,7 +285,7 @@ const renderFixedStyle = (column: any, columnIndex: number) => {
       }
       return { left: `${left}px` } as StyleValue;
     } else {
-      var right = 0;
+      var right = scrollWidthCell.value > 0 ? scrollWidthCell.value : 0;
       for (var i = columnIndex + 1; i < props.columns.length; i++) {
         if (props.columns[i].fixed && props.columns[i].fixed == "right") {
           right = right + props.columns[i]?.width.replace("px", "");
@@ -472,9 +472,12 @@ const renderTotalRowCell = (column: any) => {
                 </template>
                 <th
                   v-if="scrollWidthCell > 0"
+                  class="layui-table-fixed-right"
+                  
                   :style="{
                     padding: 0,
                     width: `${scrollWidthCell}px`,
+                    background: '#fafafa'
                   }"
                 ></th>
               </tr>

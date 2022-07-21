@@ -14,7 +14,7 @@
       <ul> 
       <a name="1-3-1"></a> 
       <li> 
-        <h3>1.3.0 <span class="layui-badge-rim">2022-07-20</span></h3> 
+        <h3>1.3.1 <span class="layui-badge-rim">2022-07-20</span></h3> 
         <ul>         
           <li>[新增] input 组件 append 与 prepend 插槽。</li>
           <li>[新增] input 组件 password 属性, 开启密码模式。</li>
