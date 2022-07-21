@@ -11,7 +11,20 @@
 <template>
 <lay-timeline>
   <lay-timeline-item title="1.3.x">
-          <ul> 
+    <ul> 
+      <a name="1-3-4"></a> 
+      <li> 
+        <h3>1.3.4 <span class="layui-badge-rim">2022-07-22</span></h3> 
+        <ul>         
+          <li>[优化] date-picker 组件 width 样式默认为 220px。</li>
+          <li>[优化] select 组件 multiple 属性为 true 时, 标签内容滚动。</li>
+          <li>[优化] select 组件 multiple 属性为 true 时, 默认 width 为 260px。</li>
+          <li>[优化] cascader 组件 item 高度, 新增 min-height 样式。</li>
+          <li>[修复] theme-panel 组件因 cascader 组件调整出现布局错误。</li>
+        </ul>
+      </li>
+    </ul>  
+    <ul> 
       <a name="1-3-3"></a> 
       <li> 
         <h3>1.3.3 <span class="layui-badge-rim">2022-07-21</span></h3> 
@@ -20,7 +33,7 @@
         </ul>
       </li>
     </ul>  
-        <ul> 
+    <ul> 
       <a name="1-3-2"></a> 
       <li> 
         <h3>1.3.2 <span class="layui-badge-rim">2022-07-21</span></h3> 

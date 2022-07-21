@@ -10,7 +10,7 @@
 ::: title 基础使用
 :::
 
-::: demo
+::: demo 使用 `lay-tab` 与 `lay-tab-item` 标签, 创建选项卡。
 
 <template>
   <lay-tab v-model="current1">
@@ -39,7 +39,7 @@ export default {
 ::: title 标题插槽
 :::
 
-::: demo
+::: demo 通过 `allow-close` 属性, 启用选项可关闭。
 
 <template>
   <lay-tab v-model="current11" :allow-close="true">
