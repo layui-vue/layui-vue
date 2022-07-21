@@ -285,7 +285,7 @@ const renderFixedStyle = (column: any, columnIndex: number) => {
       }
       return { left: `${left}px` } as StyleValue;
     } else {
-      var right = scrollWidthCell.value > 0 ? scrollWidthCell.value : 0;
+      var right = 0;
       for (var i = columnIndex + 1; i < props.columns.length; i++) {
         if (props.columns[i].fixed && props.columns[i].fixed == "right") {
           right = right + props.columns[i]?.width.replace("px", "");
@@ -392,7 +392,8 @@ const renderTotalRowCell = (column: any) => {
 
       <div class="layui-table-box">
         <!-- 表头 -->
-        <div class="layui-table-header" ref="tableHeader">
+        <div class="layui-table-header" :style="[{ 'padding-right':`${scrollWidthCell}px`}]">
+          <div class="layui-table-header-wrapper" ref="tableHeader" :style="[scrollWidthCell > 0 ? 'border-right: 1px solid #eee;' : '']">
           <table class="layui-table" :lay-size="size" :lay-skin="skin">
             <colgroup>
               <template v-for="column in columns" :key="column">
@@ -405,7 +406,6 @@ const renderTotalRowCell = (column: any) => {
                   />
                 </template>
               </template>
-              <col v-if="scrollWidthCell > 0" :width="scrollWidthCell" />
             </colgroup>
             <thead>
               <tr>
@@ -470,19 +470,10 @@ const renderTotalRowCell = (column: any) => {
                     </template>
                   </th>
                 </template>
-                <th
-                  v-if="scrollWidthCell > 0"
-                  class="layui-table-fixed-right"
-                  
-                  :style="{
-                    padding: 0,
-                    width: `${scrollWidthCell}px`,
-                    background: '#fafafa'
-                  }"
-                ></th>
               </tr>
             </thead>
           </table>
+          </div>
         </div>
         <!-- 表身 -->
         <div

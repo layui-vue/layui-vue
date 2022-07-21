@@ -11,6 +11,18 @@
 <template>
 <lay-timeline>
   <lay-timeline-item title="1.3.x">
+        <ul> 
+      <a name="1-3-1"></a> 
+      <li> 
+        <h3>1.3.2 <span class="layui-badge-rim">2022-07-21</span></h3> 
+        <ul>         
+          <li>[修复] table 组件 columns 全部设置 width 时, 计算宽度错误。</li>
+          <li>[修复] table 组件 max-height 状态, 设置字段 fixed 时 scroll 不固定。</li>
+          <li>[修复] color-picker 组件初始色板与默认色不对应问题。</li>
+          <li>[优化] dropdown 组件渲染到 body, 避免 css 污染。</li>
+        </ul>
+      </li>
+    </ul>  
       <ul> 
       <a name="1-3-1"></a> 
       <li> 

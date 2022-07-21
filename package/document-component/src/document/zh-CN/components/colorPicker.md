@@ -32,7 +32,7 @@ export default {
 ::: demo 通过 `preset` 属性, 预设可选的颜色列表。
 
 <template>
-  <lay-color-picker v-model="color" :preset="preset"></lay-color-picker>
+  <lay-color-picker v-model="color1" :preset="preset1"></lay-color-picker>
 </template>
 
 <script>
@@ -40,13 +40,13 @@ import { ref } from "vue";
 
 export default {
   setup() {
-    const color = ref("#009688");
+    const color1 = ref("#FFB800");
 
-    const preset = ref(["#009688", "#1e9fff", "#ffb800", "#ff5722", "#5fb878"])
+    const preset1 = ref(["#009688", "#1e9fff", "#ffb800", "#ff5722", "#5fb878"])
 
     return {
-      color,
-      preset
+      color1,
+      preset1
     }
   }
 }
