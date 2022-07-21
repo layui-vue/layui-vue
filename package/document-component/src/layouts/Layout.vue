@@ -393,6 +393,7 @@ export default {
 }
 
 .theme-panel > * {
+  margin-top: 9px;
   margin-right: 9px;
 }
 </style>
