@@ -7,20 +7,19 @@
 ::: describe 为组件添加水波纹动画。
 :::
 
-::: title 内部水波纹
+::: title 基础使用
 :::
 
-::: demo 使用 `lay-ripple` 标签, 添加水波纹。
+::: demo 使用 `lay-ripple` 标签, 为目标元素新增水波纹。
 
 <template>
   <lay-ripple>
     <lay-button>click</lay-button>
-  </lay-ripple><br>
-  <lay-ripple trigger="always">
-    <lay-button>always</lay-button>
-  </lay-ripple><br>
-  <lay-ripple trigger="mouseenter">
-    <lay-button>mouseenter</lay-button>
+  </lay-ripple>
+  <br/>
+  <br/>
+  <lay-ripple type="out" borderRadius="2px">
+    <lay-button>click</lay-button>
   </lay-ripple>
 </template>
 
@@ -38,23 +37,15 @@ export default {
 
 :::
 
-::: title 外部水波纹
+::: title 触发时机
 :::
 
-::: demo 使用 `lay-ripple` 标签, 添加水波纹。
+::: demo 通过 `trigger` 属性, 设置 `ripple` 触发时机。
 
 <template>
-  <lay-ripple type="out" borderRadius="1px">
-    <lay-button>click</lay-button>
-  </lay-ripple><br><br><br>
-  <p>always:</p>
-  <lay-ripple type="out" trigger="always" borderRadius="50%" color="#009688">
-    <div style="border-radius:50%;background-color:#009688;width:8px;height:8px"></div>
-  </lay-ripple><br><br><br>
-  <p>mouseenter:</p>
-  <lay-ripple type="out" trigger="mouseenter" borderRadius="50%" color="#009688" spread-width="50px">
-    <div style="border-radius:50%;background-color:#009688;width:20px;height:20px"></div>
-  </lay-ripple><br>
+  <lay-ripple type="out" trigger="always" borderRadius="2px" color="#009688">
+    <lay-button type="primary">闪烁</lay-button>
+  </lay-ripple>
 </template>
 
 <script>

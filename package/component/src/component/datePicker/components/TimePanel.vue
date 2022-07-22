@@ -21,12 +21,7 @@
                 :data-value="index.toString().padStart(2, '0')"
                 :data-type="item.type"
                 :key="it"
-                :class="[
-                  'num',
-                  index == hms[item.type]
-                    ? 'layui-this'
-                    : '',
-                ]"
+                :class="['num', index == hms[item.type] ? 'layui-this' : '']"
               >
                 {{ index.toString().padStart(2, "0") }}
               </li>
@@ -79,7 +74,7 @@ const els = [
   { count: 60, type: "ss" },
 ];
 const hms = ref<hmsType>({
-  hh:props.modelValue.hh,
+  hh: props.modelValue.hh,
   mm: props.modelValue.mm,
   ss: props.modelValue.ss,
 });
@@ -100,12 +95,12 @@ watch(
   () => props.modelValue,
   () => {
     hms.value = {
-      hh:props.modelValue.hh,
+      hh: props.modelValue.hh,
       mm: props.modelValue.mm,
-      ss: props.modelValue.ss
+      ss: props.modelValue.ss,
     };
   },
-  { deep: true}
+  { deep: true }
 );
 const scrollTo = () => {
   nextTick(() => {
