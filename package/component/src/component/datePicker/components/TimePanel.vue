@@ -23,7 +23,7 @@
                 :key="it"
                 :class="[
                   'num',
-                  index.toString().padStart(2, '0') == (hms as hmsType)[item.type]
+                  index == hms[item.type]
                     ? 'layui-this'
                     : '',
                 ]"
@@ -64,6 +64,7 @@ export interface hmsType {
   hh: number;
   mm: number;
   ss: number;
+  [key: string]: any;
 }
 export interface TimePanelProps {
   modelValue: hmsType;
@@ -77,7 +78,11 @@ const els = [
   { count: 60, type: "mm" },
   { count: 60, type: "ss" },
 ];
-const hms = ref<{ hh: number; mm: number; ss: number }>(props.modelValue);
+const hms = ref<hmsType>({
+  hh:props.modelValue.hh,
+  mm: props.modelValue.mm,
+  ss: props.modelValue.ss,
+});
 
 // 点击时间 - hms
 const chooseTime = (e: any) => {
@@ -94,9 +99,13 @@ onMounted(() => {
 watch(
   () => props.modelValue,
   () => {
-    hms.value = props.modelValue;
+    hms.value = {
+      hh:props.modelValue.hh,
+      mm: props.modelValue.mm,
+      ss: props.modelValue.ss
+    };
   },
-  { deep: true }
+  { deep: true}
 );
 const scrollTo = () => {
   nextTick(() => {
@@ -125,7 +134,7 @@ const scrollTo = () => {
 
 //确认关闭回调
 const footOnOk = () => {
-  emits("update:modelValue", hms);
+  emits("update:modelValue", hms.value);
   if (datePicker.range) {
     //关闭菜单
     emits("ok");

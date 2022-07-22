@@ -260,11 +260,7 @@ const getDateValueByRange = () => {
 // 确认事件
 const ok = () => {
   if (!props.range) {
-    if (props.type === "time") {
-      getDateValue();
-    } else {
-      getDateValue();
-    }
+    getDateValue();
   } else {
     getDateValueByRange();
   }
