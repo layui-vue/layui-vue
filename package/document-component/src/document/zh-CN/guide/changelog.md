@@ -11,6 +11,18 @@
 <template>
 <lay-timeline>
   <lay-timeline-item title="1.3.x">
+    <ul> 
+      <a name="1-3-6"></a> 
+      <li> 
+        <h3>1.3.6 <span class="layui-badge-rim">2022-07-24</span></h3> 
+        <ul>     
+          <li>[修复] table 组件 totalRow 属性, 计算 string 类型数字拼接的问题。</li>
+          <li>[修复] table 组件 columns 配置 fixed 属性开启时, 固定列无阴影的问题。</li>    
+          <li>[修复] table 组件 filterColumns 布局。</li>
+          <li>[优化] panel 组件 css 样式。</li>
+        </ul>
+      </li>
+    </ul>
      <ul> 
       <a name="1-3-5"></a> 
       <li> 

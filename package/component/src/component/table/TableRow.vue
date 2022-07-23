@@ -6,12 +6,12 @@ export default {
 
 <script lang="ts" setup>
 import { Recordable } from "../../types";
+import { LayIcon } from "@layui/icons-vue";
 import { computed, ref, StyleValue, useSlots, WritableComputedRef } from "vue";
 import LayCheckbox from "../checkbox/index.vue";
-import LayRadio from "../radio/index.vue";
 import LayDropdown from "../dropdown/index.vue";
 import LayTooltip from "../tooltip/index.vue";
-import { LayIcon } from "@layui/icons-vue";
+import LayRadio from "../radio/index.vue";
 
 export interface LayTableRowProps {
   index: number;
@@ -190,9 +190,7 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
     @dblclick.stop="rowDoubleClick(data, $event)"
     @contextmenu.stop="contextmenu(data, $event)"
   >
-    <!-- 数据列 -->
     <template v-for="(column, columnIndex) in columns" :key="columnIndex">
-      <!-- 展示否 -->
       <template v-if="tableColumnKeys.includes(column.key)">
         <template v-if="column.type == 'radio'">
           <td
@@ -211,7 +209,6 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
               column.fixed ? `layui-table-fixed-${column.fixed}` : '',
             ]"
           >
-            <!-- 树表占位与缩进 -->
             <span
               v-if="expandSpace && columnIndex === expandIndex"
               :style="{ 'margin-right': currentIndentSize + 'px' }"
@@ -258,7 +255,6 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
               column.fixed ? `layui-table-fixed-${column.fixed}` : '',
             ]"
           >
-            <!-- 树表占位与缩进 -->
             <span
               v-if="expandSpace && columnIndex === expandIndex"
               :style="{ 'margin-right': currentIndentSize + 'px' }"
@@ -309,7 +305,6 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
               column.fixed ? `layui-table-fixed-${column.fixed}` : '',
             ]"
           >
-            <!-- 树表占位与缩进 -->
             <span
               v-if="expandSpace && columnIndex === expandIndex"
               :style="{ 'margin-right': currentIndentSize + 'px' }"
@@ -339,7 +334,6 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
           </td>
         </template>
 
-        <!-- 插槽列 -->
         <template v-if="column.customSlot">
           <td
             class="layui-table-cell"
@@ -357,7 +351,6 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
               column.fixed ? `layui-table-fixed-${column.fixed}` : '',
             ]"
           >
-            <!-- 树表占位与缩进 -->
             <span
               v-if="expandSpace && columnIndex === expandIndex"
               :style="{ 'margin-right': currentIndentSize + 'px' }"
@@ -394,7 +387,6 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
           </td>
         </template>
 
-        <!-- 匹 配 Column -->
         <template v-else>
           <template v-if="column.key in data">
             <td
@@ -413,7 +405,6 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
                 column.fixed ? `layui-table-fixed-${column.fixed}` : '',
               ]"
             >
-              <!-- 树表占位与缩进 -->
               <span
                 v-if="expandSpace && columnIndex === expandIndex"
                 :style="{ 'margin-right': currentIndentSize + 'px' }"
@@ -454,12 +445,10 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
     </template>
   </tr>
 
-  <!-- 嵌套表单 -->
   <tr class="layui-table-cell-expand" v-if="slot.expand && isExpand">
     <slot name="expand" :data="data"></slot>
   </tr>
 
-  <!-- 树形结构 -->
   <template v-if="data[childrenColumnName] && isExpand">
     <template
       v-for="(children, childrenIndex) in data[childrenColumnName]"
