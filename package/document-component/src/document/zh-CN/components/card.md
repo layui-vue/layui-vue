@@ -166,10 +166,10 @@ export default {
   <lay-card>
       内容
   </lay-card>
-    <lay-card shadow="hover">
+  <lay-card shadow="hover">
       内容
   </lay-card>
-    <lay-card shadow="never">
+  <lay-card shadow="never">
       内容
   </lay-card>
 </div>

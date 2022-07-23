@@ -35,7 +35,7 @@
         <li class="layui-col-sm6">
             <div style="background-color: #393D49;padding:10px;color:whitesmoke;padding:30px;border-radius:2px;">
                 <p>#393D49</p><p>
-                </p><p tips="">常用于导航</p>
+                </p><p tips="">导航色</p>
             </div>
         </li>
     </ul>
@@ -63,9 +63,15 @@ export default {
 <template>
 <ul class="layui-row layui-col-space15">
       <li class="layui-col-sm6">
-        <div style="background-color: #FF5722;padding:10px;color:whitesmoke;padding:30px;border-radius:2px;">
-          <p>#FF5722</p><p>
-          </p><p tips="">错误 - DANGER</p>
+        <div style="background-color: #31BDEC;padding:10px;color:whitesmoke;padding:30px;border-radius:2px;">
+          <p>#31BDEC</p><p>
+          </p><p tips="">引导 - INFO</p>
+        </div>
+      </li>
+      <li class="layui-col-sm6">
+        <div style="background-color: #5FB878;padding:10px;color:whitesmoke;padding:30px;border-radius:2px;">
+          <p>#5FB878</p><p>
+          </p><p tips="">成功 - SUCCESS</p>
         </div>
       </li>
       <li class="layui-col-sm6">
@@ -75,15 +81,9 @@ export default {
         </div>
       </li>
       <li class="layui-col-sm6">
-        <div style="background-color: #5FB878;padding:10px;color:whitesmoke;padding:30px;border-radius:2px;">
-          <p>#01AAED</p><p>
-          </p><p tips="">成功 - SUCCESS</p>
-        </div>
-      </li>
-      <li class="layui-col-sm6">
-        <div style="background-color: #31BDEC;padding:10px;color:whitesmoke;padding:30px;border-radius:2px;">
-          <p>#2F4056</p><p>
-          </p><p tips="">引导 - INFO</p>
+        <div style="background-color: #FF5722;padding:10px;color:whitesmoke;padding:30px;border-radius:2px;">
+          <p>#FF5722</p><p>
+          </p><p tips="">错误 - DANGER</p>
         </div>
       </li>
     </ul>
@@ -150,23 +150,6 @@ export default {
   }
 }
 </script>
-
-:::
-
-::: title 颜色说明
-
-:::
-
-::: table
-
-| Class           | 描述 | 使用                    |
-| --------------- | ---- | ----------------------- |
-| layui-bg-red    | 赤色 | class="layui-bg-red"    |
-| layui-bg-orange | 橙色 | class="layui-bg-orange" |
-| layui-bg-green  | 墨绿 | class="layui-bg-green"  |
-| layui-bg-cyan   | 藏青 | class="layui-bg-cyan"   |
-| layui-bg-blue   | 蓝色 | class="layui-bg-blue"   |
-| layui-bg-black  | 雅黑 | class="layui-bg-black"  |
 
 :::
 

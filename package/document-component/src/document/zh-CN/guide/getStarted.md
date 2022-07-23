@@ -4,15 +4,15 @@
 <br>
   <p>
     <a href="http://layui-vue.pearadmin.com" style="margin-left:30px;">
-      <img src="../../../assets/layui-logo.png" alt="layui" width="105" style="border-radius:12px;">
+      <img src="https://unpkg.com/outeres@0.0.6/img/layui/icon-1.png" alt="layui" width="105" style="border-radius:4px;">
     </a>
     <span style="font-size:32px;color:#e2e2e2;margin:30px;">+</span>
     <a href="http://layui-vue.pearadmin.com">
-      <img src="https://qn.antdv.com/vue.png" alt="layui" width="105" style="border-radius:12px;">
+      <img src="https://qn.antdv.com/vue.png" alt="layui" width="105" style="border-radius:4px;">
     </a>
     <span style="font-size:32px;color:#e2e2e2;margin:30px;">=</span>
     <a href="http://layui-vue.pearadmin.com">
-      <img src="../../../assets/logo.jpg" alt="layui" width="105" style="border-radius:12px;">
+      <img src="../../../assets/logo.jpg" alt="layui" width="105" style="border-radius:4px;">
     </a>
   </p>
 <br>

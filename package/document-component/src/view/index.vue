@@ -192,6 +192,20 @@
             </a>
           </lay-tooltip>
         </lay-col>
+                <lay-col :md="3">
+          <lay-tooltip content="Pear Admin" position="top">
+            <a
+              style="height: 40px; display: inline-block"
+              href="http://www.pearadmin.com"
+              target="_blank"
+            >
+              <lay-avatar
+                src="https://portrait.gitee.com/uploads/avatars/namespace/2319/6958819_pear-admin_1643085106.png"
+                style="background: transparent"
+              ></lay-avatar>
+            </a>
+          </lay-tooltip>
+        </lay-col>
       </lay-row>
     </div>
     <div class="footer footer-index">

@@ -30,6 +30,47 @@ export default {
 
 :::
 
+::: title 边框阴影
+:::
+
+::: demo 通过 shadow 属性设置面板阴影出现的时机。 该属性的值可以是：always、hover或never。
+
+<template>
+<div class="panel-container">
+  <lay-panel>
+      内容
+  </lay-panel>
+  <lay-panel shadow="hover">
+      内容
+  </lay-panel>
+  <lay-panel shadow="never">
+      内容
+  </lay-panel>
+</div>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    return {
+    }
+  }
+}
+</script>
+
+<style>
+.panel-container > * {
+  background: whitesmoke;
+  margin-top: 20px;
+}
+</style>
+
+:::
+
+
 ::: title Panel 属性
 :::
 
