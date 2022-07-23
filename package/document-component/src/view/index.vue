@@ -192,7 +192,7 @@
             </a>
           </lay-tooltip>
         </lay-col>
-                <lay-col :md="3">
+        <lay-col :md="3">
           <lay-tooltip content="Pear Admin" position="top">
             <a
               style="height: 40px; display: inline-block"

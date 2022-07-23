@@ -1024,6 +1024,12 @@ export default {
         align: "left"
       },
       {
+        title:"年龄",
+        width: "300px",
+        key:"age",
+        ellipsisTooltip: true,
+      },
+      {
         title:"备注",
         width: "300px",
         key:"remark",

@@ -359,7 +359,7 @@ const renderTotalRowCell = (column: any) => {
               <i class="layui-icon layui-icon-cols"></i>
             </div>
             <template #content>
-              <div style="padding: 10px">
+              <div class="layui-table-tool-checkbox">
                 <lay-checkbox
                   v-for="column in columns"
                   v-model="tableColumnKeys"
