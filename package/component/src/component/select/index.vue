@@ -68,7 +68,11 @@ const open = function () {
 const emit = defineEmits(["update:modelValue", "change", "search", "create"]);
 
 const selectItem = ref<SelectItem>({
-  value: !props.multiple? props.modelValue : props.modelValue ? ([] as any[]).concat(props.modelValue) : [],
+  value: !props.multiple
+    ? props.modelValue
+    : props.modelValue
+    ? ([] as any[]).concat(props.modelValue)
+    : [],
   label: props.multiple ? [] : null,
   multiple: props.multiple,
 } as SelectItem);
