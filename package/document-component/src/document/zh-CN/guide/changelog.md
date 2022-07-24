@@ -12,6 +12,16 @@
 <lay-timeline>
   <lay-timeline-item title="1.3.x">
     <ul> 
+      <a name="1-3-7"></a> 
+      <li> 
+        <h3>1.3.7 <span class="layui-badge-rim">2022-07-24</span></h3> 
+        <ul>     
+          <li>[修复] form 组件 position 属性 top 值的布局。</li>
+          <li>[优化] select 组件 multiple 属性为 true 时的 Search 样式。</li>
+        </ul>
+      </li>
+    </ul>
+    <ul> 
       <a name="1-3-6"></a> 
       <li> 
         <h3>1.3.6 <span class="layui-badge-rim">2022-07-24</span></h3> 

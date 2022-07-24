@@ -166,16 +166,19 @@ onMounted(() => {
 });
 
 const getMarginLeft = computed(() => {
-  if (props.mode === "block") {
-    let labelWidth =
-      typeof props.labelWidth === "string"
-        ? parseFloat(props.labelWidth)
-        : props.labelWidth;
-    labelWidth += 15;
-    return {
-      marginLeft: labelWidth + "px",
-    };
-  }
+    if (props.mode == "block") {
+      if(props.labelPosition != "top") {
+        let labelWidth = typeof props.labelWidth === "string" ? parseFloat(props.labelWidth) : props.labelWidth;
+        labelWidth += 15;
+        return {
+          "margin-left": `${labelWidth}px`,
+        };
+      } else {
+        return {
+          "margin-left": "0px",
+        }
+      }
+    }
 });
 </script>
 

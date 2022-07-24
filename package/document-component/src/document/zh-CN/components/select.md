@@ -101,7 +101,7 @@ export default {
 
 :::
 
-::: title 关键词变化事件，可作为远程搜索处理算法
+::: title 检索回调
 :::
 
 ::: demo
@@ -132,7 +132,7 @@ export default {
 
 :::
 
-::: title 选择项自定义搜索内容，可以在keyword属性中传入拼音用于支持拼音搜索
+::: title 定义标识
 :::
 
 ::: demo
@@ -160,7 +160,7 @@ export default {
 
 :::
 
-::: title 传入items属性进行选项渲染
+::: title 传入选项
 :::
 
 ::: demo
@@ -182,7 +182,8 @@ export default {
       {label:'选项3',value:3,keyword:'选项xuanxiang3',disabled:true},
     ])
     return {
-      selected,items
+      items,
+      selected,
     }
   }
 }
@@ -191,15 +192,13 @@ export default {
 
 :::
 
-::: title 传入create属性和接收create事件用于开启创建子项功能
+::: title 创建回调
 :::
 
 ::: demo
 
 <template>
-  <lay-select v-model="selected" :items="items" :create="true"  @create="createEvent">
-  </lay-select>
-  当前元素: {{items.map(o=>o.label).join()}}
+  <lay-select v-model="selected" :items="items" :create="true"  @create="createEvent"></lay-select>
 </template>
 
 <script>
@@ -225,7 +224,6 @@ export default {
   }
 }
 </script>
-
 
 :::
 
