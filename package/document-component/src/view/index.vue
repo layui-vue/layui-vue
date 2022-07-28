@@ -201,7 +201,7 @@
             >
               <lay-avatar
                 src="https://jpom-docs.keepbx.cn/images/jpom_logo.png"
-                style="background: transparent;width:60px;"
+                style="background: transparent; width: 60px"
               ></lay-avatar>
             </a>
           </lay-tooltip>

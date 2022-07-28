@@ -9,6 +9,7 @@ import { computed } from "vue";
 import "./index.less";
 
 export interface LaySwitchProps {
+  name?: string;
   disabled?: boolean;
   modelValue?: string | number | boolean;
   onswitchText?: string;
@@ -61,6 +62,7 @@ const styles = computed(() => {
 
 <template>
   <span @click.stop="handleClick" class="layui-switch-container" :size="size">
+    <input class="layui-switch-input" :name="name" :value="modelValue" />
     <div
       class="layui-unselect layui-form-switch"
       :style="styles"
