@@ -24,6 +24,7 @@ export interface LayInputProps {
   readonly?: boolean;
   password?: boolean;
   size?: "lg" | "md" | "sm" | "xs";
+  maxlength?: number;
 }
 
 const props = withDefaults(defineProps<LayInputProps>(), {
@@ -138,12 +139,13 @@ const showPassword = () => {
         :placeholder="placeholder"
         :autofocus="autofocus"
         :autocomplete="autocomplete"
+        :maxlength="maxlength"
         :readonly="readonly"
         :class="classes"
         @input="onInput"
+        @change="onChange"
         @focus="onFocus"
         @blur="onBlur"
-        @change="onChange"
       />
       <span class="layui-input-suffix" v-if="slots.suffix || props.suffixIcon">
         <slot name="suffix" v-if="slots.suffix"></slot>
