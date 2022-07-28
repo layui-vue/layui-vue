@@ -84,7 +84,7 @@ const wordCount = computed(() => {
     <span class="layui-textarea-clear" v-if="allowClear && hasContent">
       <lay-icon type="layui-icon-close-fill" @click="onClear"></lay-icon>
     </span>
-    <div v-if="showCount" class="layui-texterea-show-count">
+    <div v-if="showCount" class="layui-texterea-count">
       {{ wordCount }}
     </div>
   </div>

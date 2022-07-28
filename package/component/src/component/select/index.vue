@@ -31,7 +31,7 @@ export interface LaySelectProps {
     keyword: string;
   }[];
   size?: "lg" | "md" | "sm" | "xs";
-  allowClear: boolean;
+  allowClear?: boolean;
 }
 
 const selectRef = shallowRef<undefined | HTMLElement>(undefined);
