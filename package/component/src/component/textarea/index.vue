@@ -5,7 +5,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
+import { computed } from "vue";
 import "./index.less";
 
 export interface LayTextareaProps {
@@ -22,7 +22,7 @@ const props = defineProps<LayTextareaProps>();
 
 interface TextareaEmits {
   (e: "blur", event: Event): void;
-  (e: "input", value: string ): void;
+  (e: "input", value: string): void;
   (e: "update:modelValue", value: string): void;
   (e: "change", value: string): void;
   (e: "focus", event: Event): void;
@@ -30,8 +30,6 @@ interface TextareaEmits {
 }
 
 const emit = defineEmits<TextareaEmits>();
-
-const attrs = useAttrs();
 
 const onInput = function (event: Event) {
   const inputElement = event.target as HTMLInputElement;

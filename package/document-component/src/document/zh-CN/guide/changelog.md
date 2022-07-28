@@ -12,6 +12,19 @@
 <lay-timeline>
   <lay-timeline-item title="1.3.x">
     <ul> 
+      <a name="1-3-8"></a> 
+      <li> 
+        <h3>1.3.8 <span class="layui-badge-rim">2022-07-28</span></h3> 
+        <ul>     
+          <li>[新增] input 组件 maxlength 属性, 原生属性限制输入长度。</li>
+          <li>[优化] input 组件 password 属性, 当 length 大于 0 时启用。</li>
+          <li>[优化] input 组件 input 事件, 参数由 event 调整为 value。</li>
+          <li>[优化] textarea 组件 input 事件, 参数由 event 调整为 value。</li>
+          <li>[修复] textarea 组件 maxlength 属性, 限制内容长度不可用。</li>
+        </ul>
+      </li>
+    </ul>
+    <ul> 
       <a name="1-3-7"></a> 
       <li> 
         <h3>1.3.7 <span class="layui-badge-rim">2022-07-24</span></h3> 
