@@ -43,7 +43,7 @@
             rel="nofollow"
             class="site-star"
           >
-            <i class="layui-icon"></i> Star <cite id="getStars">1324</cite>
+            <i class="layui-icon"></i> Star <cite id="getStars">1368</cite>
           </a>
           <a
             href="https://gitee.com/layui-vue"
@@ -188,6 +188,20 @@
               <lay-avatar
                 src="https://portrait.gitee.com/uploads/avatars/namespace/2319/6958819_pear-admin_1643085106.png!avatar100"
                 style="background: transparent"
+              ></lay-avatar>
+            </a>
+          </lay-tooltip>
+        </lay-col>
+        <lay-col :md="3">
+          <lay-tooltip content="Jpom" position="top">
+            <a
+              style="height: 40px; display: inline-block"
+              href="https://jpom-docs.keepbx.cn"
+              target="_blank"
+            >
+              <lay-avatar
+                src="https://jpom-docs.keepbx.cn/images/jpom_logo.png"
+                style="background: transparent;width:60px;"
               ></lay-avatar>
             </a>
           </lay-tooltip>
@@ -399,6 +413,10 @@ body {
 
 .link-list {
   padding: 50px 250px;
+}
+
+.link-list .layui-col {
+  text-align: center;
 }
 
 .box {

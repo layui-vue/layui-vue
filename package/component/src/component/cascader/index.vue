@@ -13,7 +13,7 @@
     <lay-input
       v-model="displayValue"
       readonly
-      suffix-icon="layui-icon-down"
+      suffix-icon="layui-icon-triangle-d"
       :placeholder="placeholder"
       v-if="!slots.default"
       :allow-clear="allowClear"

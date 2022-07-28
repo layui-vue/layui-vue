@@ -32,10 +32,10 @@
     "fflate": "^0.7.3"
   },
   "files": [
-    "lib",
-    "es",
+    "types",
     "umd",
-    "types"
+    "lib",
+    "es"
   ],
   "browserslist": [
     "current node",

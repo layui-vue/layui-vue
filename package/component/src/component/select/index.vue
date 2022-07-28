@@ -210,7 +210,7 @@ provide("keyword", txt);
       <span class="layui-input-icon-area">
         <i
           :class="[
-            'layui-icon layui-icon-down',
+            'layui-icon layui-icon-triangle-d',
             { 'layui-disabled': disabled },
           ]"
           :style="{ transform: `rotate(${openState ? 180 : 0}deg)` }"
@@ -270,7 +270,7 @@ provide("keyword", txt);
         </lay-input>
       </div>
       <template v-if="!multiple && showEmpty && !props.create">
-        <lay-select-option :value="null" :label="emptyMessage ?? placeholder" />
+        <lay-select-option value="-1" :label="emptyMessage ?? placeholder" />
       </template>
       <template v-if="props.create">
         <dd @click="emit('create', txt)">{{ txt }}</dd>
