@@ -39,9 +39,9 @@ const props = withDefaults(defineProps<LayInputProps>(), {
 
 interface InputEmits {
   (e: "blur", event: Event): void;
-  (e: "input", event: Event): void;
+  (e: "input", value: string): void;
   (e: "update:modelValue", value: string): void;
-  (e: "change", event: Event): void;
+  (e: "change", value: string): void;
   (e: "focus", event: Event): void;
   (e: "clear"): void;
 }
@@ -84,7 +84,7 @@ const onInput = function (event: Event) {
   const inputElement = event.target as HTMLInputElement;
   const value = inputElement.value;
   emit("update:modelValue", value);
-  emit("input", event);
+  emit("input", value);
 };
 
 const onClear = () => {
@@ -97,7 +97,9 @@ const onFocus = (event: Event) => {
 };
 
 const onChange = (event: Event) => {
-  emit("change", event);
+  const inputElement = event.target as HTMLInputElement;
+  const value = inputElement.value;
+  emit("change", value);
 };
 
 const onBlur = (event: Event) => {
