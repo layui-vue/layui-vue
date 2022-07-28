@@ -15,15 +15,16 @@ export interface LayTextareaProps {
   disabled?: boolean;
   showCount?: boolean;
   allowClear?: boolean;
+  maxlength?: number;
 }
 
 const props = defineProps<LayTextareaProps>();
 
 interface TextareaEmits {
   (e: "blur", event: Event): void;
-  (e: "input", event: Event): void;
+  (e: "input", value: string ): void;
   (e: "update:modelValue", value: string): void;
-  (e: "change", event: Event): void;
+  (e: "change", value: string): void;
   (e: "focus", event: Event): void;
   (e: "clear"): void;
 }
@@ -35,7 +36,7 @@ const attrs = useAttrs();
 const onInput = function (event: Event) {
   const inputElement = event.target as HTMLInputElement;
   emit("update:modelValue", inputElement.value);
-  emit("input", event);
+  emit("input", inputElement.value);
 };
 
 const onFocus = function (event: Event) {
@@ -47,7 +48,8 @@ const onBlur = function (event: Event) {
 };
 
 const onChange = (event: Event) => {
-  emit("change", event);
+  const inputElement = event.target as HTMLInputElement;
+  emit("change", inputElement.value);
 };
 
 const onClear = function () {
@@ -59,8 +61,8 @@ const hasContent = computed(() => (props.modelValue as string)?.length > 0);
 
 const wordCount = computed(() => {
   let count = String(props.modelValue?.length ?? 0);
-  if (attrs.maxlength) {
-    count += "/" + attrs.maxlength;
+  if (props.maxlength) {
+    count += "/" + props.maxlength;
   }
   return count;
 });
@@ -69,12 +71,12 @@ const wordCount = computed(() => {
 <template>
   <div class="layui-textarea-wrapper">
     <textarea
+      class="layui-textarea"
       :value="modelValue"
-      v-bind="$attrs"
       :placeholder="placeholder"
       :name="name"
       :disabled="disabled"
-      class="layui-textarea"
+      :maxlength="maxlength"
       :class="{ 'layui-disabled': disabled }"
       @input="onInput"
       @focus="onFocus"

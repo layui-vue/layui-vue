@@ -125,7 +125,7 @@ export default {
 <template>
   <lay-textarea placeholder="显示字数" v-model="data4" show-count></lay-textarea>
   <br>
-  <lay-textarea placeholder="最大输入长度" v-model="data5" show-count :max-length="10"></lay-textarea>
+  <lay-textarea placeholder="最大输入长度" v-model="data5" show-count :maxlength="10"></lay-textarea>
 </template>
 
 <script>
@@ -155,9 +155,10 @@ export default {
 | ----------- | ------------- | -------------- |
 | name        | 原始属性 name | --             |
 | placeholder | 提示信息      | --             |
-| show-count | 显示字数       | `true` `false`  |
+| show-count  | 显示字数       | `true` `false`  |
 | disabled    | 禁用          | `true` `false` |
 | v-model     | 值            | --             |
+| maxlength   | 限制输入长度   | --             |
 
 :::
 
