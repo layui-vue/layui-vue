@@ -155,7 +155,7 @@ const showPassword = () => {
           class="layui-input-suffix-icon"
         ></lay-icon>
       </span>
-      <span class="layui-input-password" v-if="password">
+      <span class="layui-input-password" v-if="password && hasContent">
         <lay-icon
           :type="isPassword ? 'layui-icon-face-smile' : 'layui-icon-face-cry'"
           @click="showPassword"
