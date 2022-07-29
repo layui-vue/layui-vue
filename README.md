@@ -46,7 +46,7 @@ import '@layui/layui-vue/lib/index.css'
 createApp(App).use(layui).mount('#app')
 ```
 
-我们在[网站](http://layui-vue.pearadmin.com)上有几个例子。这是第一个让您入门的方法：
+我们在[网站](http://www.layui-vue.com)上有几个例子。这是第一个让您入门的方法：
 
 ```
 <template>
@@ -58,7 +58,7 @@ createApp(App).use(layui).mount('#app')
 
 ## 反馈
 
-欢迎在[提交问题](https://github.com/layui-vue/layui-vue/issues/new)上向我们反馈。欢迎功能请求。如果您想贡献，请查看[快速指南](./CONTRIBUTING.md)！
+欢迎在[提交问题](https://github.com/layui/layui-vue/issues/new)上向我们反馈。欢迎功能请求。如果您想贡献，请查看[快速指南](./CONTRIBUTING.md)！
 
 如果您有什么想聊的，请随时加入我们的[Gitter chat](https://gitter.im/layui-vue/community)！
 
@@ -70,10 +70,10 @@ createApp(App).use(layui).mount('#app')
 
 ## 贡献者
 
-这个项目遵循[所有贡献者](https://github.com/layui-vue/layui-vue/graphs/contributors)规范，感谢这些[出色的贡献者](https://github.com/layui-vue/layui-vue/graphs/contributors)。
+这个项目遵循[所有贡献者](https://github.com/layui/layui-vue/graphs/contributors)规范，感谢这些[出色的贡献者](https://github.com/layui/layui-vue/graphs/contributors)。
 
-<a href="https://github.com/layui-vue/layui-vue/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=layui-vue/layui-vue" />
+<a href="https://github.com/layui/layui-vue/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=layui/layui-vue" />
 </a>
 
 ## 开源许可
