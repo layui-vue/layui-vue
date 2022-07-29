@@ -12,6 +12,19 @@
 <lay-timeline>
   <lay-timeline-item title="1.3.x">
     <ul> 
+      <a name="1-3-9"></a> 
+      <li> 
+        <h3>1.3.9 <span class="layui-badge-rim">2022-07-29</span></h3> 
+        <ul>     
+          <li>[新增] switch 组件 name 原生属性。</li>
+          <li>[优化] select 组件 下拉 icon 图标。</li>
+          <li>[优化] cascader 组件 下拉 icon 图标。</li>
+          <li>[优化] select 组件 allow-clear 属性非必填。</li>
+          <li>[优化] switch 组件 disabled 状态效果。</li>
+        </ul>
+      </li>
+    </ul>
+    <ul> 
       <a name="1-3-8"></a> 
       <li> 
         <h3>1.3.8 <span class="layui-badge-rim">2022-07-28</span></h3> 
