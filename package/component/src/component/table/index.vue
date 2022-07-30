@@ -6,16 +6,7 @@ export default {
 
 <script setup lang="ts">
 import "./index.less";
-import {
-  ref,
-  watch,
-  useSlots,
-  withDefaults,
-  onMounted,
-  StyleValue,
-  WritableComputedRef,
-  computed,
-} from "vue";
+import { ref, watch, useSlots, withDefaults, onMounted, StyleValue, WritableComputedRef, computed } from "vue";
 import { v4 as uuidv4 } from "../../utils/guidUtil";
 import { Recordable } from "../../types";
 import { LayIcon } from "@layui/icons-vue";
@@ -280,10 +271,7 @@ const getFixedColumn = () => {
       hasr.value = true;
     } else {
       // @ts-ignore
-      if (
-        tableBody.value?.scrollLeft + tableBody.value?.offsetWidth >
-        tableBody.value?.scrollWidth
-      ) {
+      if (tableBody.value?.scrollLeft + tableBody.value?.offsetWidth + 2 > tableBody.value?.scrollWidth) {
         hasl.value = true;
         hasr.value = false;
       } else {
@@ -333,6 +321,14 @@ const renderFixedStyle = (column: any, columnIndex: number) => {
       }
       return { right: `${right}px` } as StyleValue;
     }
+  } else {
+      var isLast = true;
+      for (var i = columnIndex + 1; i < props.columns.length; i++) {
+        if (props.columns[i].fixed == undefined) {
+          isLast = false;
+        }
+      }
+      return isLast ? { "border-right": "none" } as StyleValue : {};
   }
   return {} as StyleValue;
 };
@@ -460,15 +456,11 @@ const renderTotalRowCell = (column: any) => {
                       v-if="tableColumnKeys.includes(column.key)"
                       class="layui-table-cell"
                       :class="[
-                        column.fixed ? `layui-table-fixed-${column.fixed}` : '',
                         renderFixedClassName(column, columnIndex),
-                        column.type == 'checkbox'
-                          ? 'layui-table-cell-checkbox'
-                          : '',
+                        column.fixed ? `layui-table-fixed-${column.fixed}` : '',
+                        column.type == 'checkbox' ? 'layui-table-cell-checkbox' : '',
                         column.type == 'radio' ? 'layui-table-cell-radio' : '',
-                        column.type == 'number'
-                          ? 'layui-table-cell-number'
-                          : '',
+                        column.type == 'number' ? 'layui-table-cell-number' : '',
                       ]"
                       :style="[
                         {

@@ -155,6 +155,14 @@ const renderFixedStyle = (column: any, columnIndex: number) => {
       }
       return { right: `${right}px` } as StyleValue;
     }
+  } else {
+      var isLast = true;
+      for (var i = columnIndex + 1; i < props.columns.length; i++) {
+        if (props.columns[i].fixed == undefined) {
+          isLast = false;
+        }
+      }
+      return isLast ? { "border-right": "none" } as StyleValue : {};
   }
   return {} as StyleValue;
 };
