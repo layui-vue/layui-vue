@@ -156,13 +156,13 @@ const renderFixedStyle = (column: any, columnIndex: number) => {
       return { right: `${right}px` } as StyleValue;
     }
   } else {
-      var isLast = true;
-      for (var i = columnIndex + 1; i < props.columns.length; i++) {
-        if (props.columns[i].fixed == undefined) {
-          isLast = false;
-        }
+    var isLast = true;
+    for (var i = columnIndex + 1; i < props.columns.length; i++) {
+      if (props.columns[i].fixed == undefined) {
+        isLast = false;
       }
-      return isLast ? { "border-right": "none" } as StyleValue : {};
+    }
+    return isLast ? ({ "border-right": "none" } as StyleValue) : {};
   }
   return {} as StyleValue;
 };
@@ -454,7 +454,9 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
   </tr>
 
   <tr class="layui-table-cell-expand" v-if="slot.expand && isExpand">
-    <slot name="expand" :data="data"></slot>
+    <td class="layui-table-cell" :colspan="columns.length">
+      <slot name="expand" :data="data"></slot>
+    </td>
   </tr>
 
   <template v-if="data[childrenColumnName] && isExpand">

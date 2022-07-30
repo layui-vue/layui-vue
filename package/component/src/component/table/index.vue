@@ -6,7 +6,16 @@ export default {
 
 <script setup lang="ts">
 import "./index.less";
-import { ref, watch, useSlots, withDefaults, onMounted, StyleValue, WritableComputedRef, computed } from "vue";
+import {
+  ref,
+  watch,
+  useSlots,
+  withDefaults,
+  onMounted,
+  StyleValue,
+  WritableComputedRef,
+  computed,
+} from "vue";
 import { v4 as uuidv4 } from "../../utils/guidUtil";
 import { Recordable } from "../../types";
 import { LayIcon } from "@layui/icons-vue";
@@ -322,13 +331,13 @@ const renderFixedStyle = (column: any, columnIndex: number) => {
       return { right: `${right}px` } as StyleValue;
     }
   } else {
-      var isLast = true;
-      for (var i = columnIndex + 1; i < props.columns.length; i++) {
-        if (props.columns[i].fixed == undefined) {
-          isLast = false;
-        }
+    var isLast = true;
+    for (var i = columnIndex + 1; i < props.columns.length; i++) {
+      if (props.columns[i].fixed == undefined) {
+        isLast = false;
       }
-      return isLast ? { "border-right": "none" } as StyleValue : {};
+    }
+    return isLast ? ({ "border-right": "none" } as StyleValue) : {};
   }
   return {} as StyleValue;
 };
@@ -458,9 +467,13 @@ const renderTotalRowCell = (column: any) => {
                       :class="[
                         renderFixedClassName(column, columnIndex),
                         column.fixed ? `layui-table-fixed-${column.fixed}` : '',
-                        column.type == 'checkbox' ? 'layui-table-cell-checkbox' : '',
+                        column.type == 'checkbox'
+                          ? 'layui-table-cell-checkbox'
+                          : '',
                         column.type == 'radio' ? 'layui-table-cell-radio' : '',
-                        column.type == 'number' ? 'layui-table-cell-number' : '',
+                        column.type == 'number'
+                          ? 'layui-table-cell-number'
+                          : '',
                       ]"
                       :style="[
                         {
