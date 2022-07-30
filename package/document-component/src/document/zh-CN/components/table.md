@@ -227,9 +227,9 @@ export default {
 
 <template>
   <lay-table :columns="columns6" :data-source="dataSource6">
-      <template v-slot:expand="{ data }"> 
-        {{ data }} 
-      </template>
+    <template v-slot:expand="{ data }"> 
+      <lay-table :columns="columns6" :data-source="dataSource6"></lay-table>
+    </template>
   </lay-table>
 </template>
 
@@ -502,9 +502,12 @@ export default {
 ::: demo 通过 `skin` 属性, 切换 table 风格。
 
 <template>
-  <lay-table :columns="columns1" :data-source="dataSource1" skin="line"></lay-table>
-  <lay-table :columns="columns1" :data-source="dataSource1" skin="nob" :even="true"></lay-table>
-  <lay-table :columns="columns1" :data-source="dataSource1" skin="row"></lay-table>
+  <lay-form>
+    <lay-radio v-model="skin1" name="action" value="line">sm</lay-radio>
+    <lay-radio v-model="skin1" name="action" value="nob">md</lay-radio>
+    <lay-radio v-model="skin1" name="action" value="row">lg</lay-radio>
+  </lay-form>
+  <lay-table :columns="columns1" :data-source="dataSource1" :skin="skin1"></lay-table>
 </template>
 
 <script>
@@ -512,6 +515,8 @@ import { ref } from 'vue'
 
 export default {
   setup() {
+
+    const skin1 = ref("line");
 
     const columns1 = [
       {
@@ -543,6 +548,7 @@ export default {
     ]
 
     return {
+      skin1,
       columns1,
       dataSource1,
     }
