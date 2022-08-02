@@ -12,6 +12,27 @@
 <lay-timeline>
   <lay-timeline-item title="1.3.x">
     <ul> 
+      <a name="1-3-11"></a> 
+      <li> 
+        <h3>1.3.11 <span class="layui-badge-rim">2022-08-03</span></h3> 
+        <ul>     
+          <li>[新增] table 组件 row-contextmenu 事件, 处理行右击。</li>
+          <li>[修复] tree 组件 checkedKeys 属性, 响应特性失效。</li>
+        </ul>
+      </li>
+    </ul>
+    <ul> 
+      <a name="1-3-10"></a> 
+      <li> 
+        <h3>1.3.10 <span class="layui-badge-rim">2022-07-31</span></h3> 
+        <ul>     
+          <li>[优化] table 组件 columns 配置固定列开启时, 未固定的最后一列出现双边框。</li>
+          <li>[优化] table 组件 columns 配置固定列阴影计算逻辑存在细微偏差。</li>
+          <li>[优化] table 组件子表格嵌套下无下边框的问题。</li>
+        </ul>
+      </li>
+    </ul>
+    <ul> 
       <a name="1-3-9"></a> 
       <li> 
         <h3>1.3.9 <span class="layui-badge-rim">2022-07-29</span></h3> 

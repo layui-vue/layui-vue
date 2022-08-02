@@ -37,7 +37,7 @@ const slot = useSlots();
 const emit = defineEmits([
   "row",
   "row-double",
-  "contextmenu",
+  "row-contextmenu",
   "update:selectedKeys",
   "update:selectedKey",
 ]);
@@ -84,8 +84,8 @@ const rowDoubleClick = function (data: any, evt: MouseEvent) {
   emit("row-double", data, evt);
 };
 
-const contextmenu = function (data: any, evt: MouseEvent) {
-  emit("contextmenu", data, evt);
+const rowContextmenu = function (data: any, evt: MouseEvent) {
+  emit("row-contextmenu", data, evt);
 };
 
 const expandIconType = computed(() => {
@@ -196,7 +196,7 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
     :class="[renderRowClassName(data, index)]"
     @click.stop="rowClick(data, $event)"
     @dblclick.stop="rowDoubleClick(data, $event)"
-    @contextmenu.stop="contextmenu(data, $event)"
+    @contextmenu.stop="rowContextmenu(data, $event)"
   >
     <template v-for="(column, columnIndex) in columns" :key="columnIndex">
       <template v-if="tableColumnKeys.includes(column.key)">

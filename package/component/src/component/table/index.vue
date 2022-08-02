@@ -66,12 +66,12 @@ const props = withDefaults(defineProps<LayTableProps>(), {
 const tableId = uuidv4();
 
 const emit = defineEmits([
-  "row",
   "change",
-  "row-double",
   "update:selectedKeys",
   "update:selectedKey",
-  "contextmenu",
+  "row-contextmenu",
+  "row-double",
+  "row",
 ]);
 
 const slot = useSlots();
@@ -151,8 +151,8 @@ const rowDoubleClick = function (data: any, evt: MouseEvent) {
   emit("row-double", data, evt);
 };
 
-const contextmenu = function (data: any, evt: MouseEvent) {
-  emit("contextmenu", data, evt);
+const rowContextmenu = function (data: any, evt: MouseEvent) {
+  emit("row-contextmenu", data, evt);
 };
 
 const print = function () {
@@ -280,10 +280,7 @@ const getFixedColumn = () => {
       hasr.value = true;
     } else {
       // @ts-ignore
-      if (
-        tableBody.value?.scrollLeft + tableBody.value?.offsetWidth + 2 >
-        tableBody.value?.scrollWidth
-      ) {
+      if (tableBody.value?.scrollLeft + tableBody.value?.offsetWidth + 2 > tableBody.value?.scrollWidth) {
         hasl.value = true;
         hasr.value = false;
       } else {
@@ -575,7 +572,7 @@ const renderTotalRowCell = (column: any) => {
                   :rowClassName="rowClassName"
                   @row="rowClick"
                   @row-double="rowDoubleClick"
-                  @contextmenu="contextmenu"
+                  @row-contextmenu="rowContextmenu"
                   v-model:selectedKeys="tableSelectedKeys"
                   v-model:selectedKey="tableSelectedKey"
                 >
