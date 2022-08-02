@@ -6,7 +6,7 @@ export default {
 
 <script lang="ts" setup>
 import TreeNode from "./TreeNode.vue";
-import { computed, useSlots, watch, ref } from "vue";
+import { computed, useSlots, watch, ref, onMounted, nextTick } from "vue";
 import { useTree } from "./useTree";
 import { TreeData } from "./tree";
 import { StringFn, StringOrNumber, KeysType, EditType } from "./tree.type";
@@ -75,6 +75,8 @@ const className = computed(() => {
 
 let tree = ref();
 let nodeList = ref();
+const unWatch=ref(false);
+const initStatus=ref(false);
 const loadNodeList = () => {
   let { tree: _tree, nodeList: _nodeList } = useTree(props, emit);
   tree.value = _tree;
@@ -90,9 +92,29 @@ watch(
 watch(
   () => props.checkedKeys,
   () => {
-    loadNodeList();
+    if(!unWatch.value){
+      loadNodeList();
+    }
   }
 );
+watch(
+  tree, () => {
+    if (initStatus.value) {
+      const { checkedKeys } = tree.value.getKeys();
+      unWatch.value = true;
+      emit("update:checkedKeys", checkedKeys);
+      setTimeout(() => {
+        unWatch.value = false;
+      }, 0);
+    }
+  }, { deep: true }
+);
+
+onMounted(()=>{
+  nextTick(()=>{
+    initStatus.value=true;
+  })
+})
 
 function handleClick(node: TreeData) {
   const originNode = tree.value.getOriginData(node.id);
