@@ -75,8 +75,8 @@ const className = computed(() => {
 
 let tree = ref();
 let nodeList = ref();
-const unWatch=ref(false);
-const initStatus=ref(false);
+const unWatch = ref(false);
+const initStatus = ref(false);
 const loadNodeList = () => {
   let { tree: _tree, nodeList: _nodeList } = useTree(props, emit);
   tree.value = _tree;
@@ -92,13 +92,14 @@ watch(
 watch(
   () => props.checkedKeys,
   () => {
-    if(!unWatch.value){
+    if (!unWatch.value) {
       loadNodeList();
     }
   }
 );
 watch(
-  tree, () => {
+  tree,
+  () => {
     if (initStatus.value) {
       const { checkedKeys } = tree.value.getKeys();
       unWatch.value = true;
@@ -107,14 +108,15 @@ watch(
         unWatch.value = false;
       }, 0);
     }
-  }, { deep: true }
+  },
+  { deep: true }
 );
 
-onMounted(()=>{
-  nextTick(()=>{
-    initStatus.value=true;
-  })
-})
+onMounted(() => {
+  nextTick(() => {
+    initStatus.value = true;
+  });
+});
 
 function handleClick(node: TreeData) {
   const originNode = tree.value.getOriginData(node.id);

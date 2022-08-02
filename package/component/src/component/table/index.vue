@@ -280,7 +280,10 @@ const getFixedColumn = () => {
       hasr.value = true;
     } else {
       // @ts-ignore
-      if (tableBody.value?.scrollLeft + tableBody.value?.offsetWidth + 2 > tableBody.value?.scrollWidth) {
+      if (
+        tableBody.value?.scrollLeft + tableBody.value?.offsetWidth + 2 >
+        tableBody.value?.scrollWidth
+      ) {
         hasl.value = true;
         hasr.value = false;
       } else {
