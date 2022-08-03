@@ -4,7 +4,8 @@ const useMove = function (el: HTMLElement, callback: Function) {
   let offsetY: number;
   if (el != null) {
     el.addEventListener("mousedown", function (event: any) {
-      if (event.path[0].className === "layui-layer-title") {
+      const path = event.path || (event.composedPath && event.composedPath());
+      if (path[0].className === "layui-layer-title") {
         if (event.button == 0 && el != null) {
           const lexObj: any = getComputedStyle(el);
           offsetX =
