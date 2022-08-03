@@ -88,10 +88,10 @@ body {
 
 .version {
   position: absolute;
-  right: 16%;
+  color: rgba(255, 255, 255, 0.8) !important;
   line-height: 60px;
-  color: white;
   font-size: 15px;
+  right: 16%;
 }
 
 .alone-banner img {

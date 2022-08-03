@@ -685,7 +685,8 @@ export default {
 ::: demo 通过 `columns` 配置 `type:'checkbox'` 开启单选列。
 
 <template>
-  <lay-table :columns="columns23" :data-source="dataSource23"></lay-table>
+  <lay-button @click="changeSelectedKeys">修改选中值 {{ selectedKeys5 }}</lay-button>
+  <lay-table :columns="columns23" :data-source="dataSource23" v-model:selectedKeys="selectedKeys5"></lay-table>
 </template>
 
 <script>
@@ -693,6 +694,12 @@ import { ref } from 'vue'
 
 export default {
   setup() {
+
+    const selectedKeys5 = ref(["1"]);
+
+    const changeSelectedKeys = () => {
+      selectedKeys5.value = ["2"]
+    }
 
     const columns23 = [
       {
@@ -732,6 +739,8 @@ export default {
     return {
       columns23,
       dataSource23,
+      selectedKeys5,
+      changeSelectedKeys
     }
   }
 }
@@ -1132,9 +1141,9 @@ export default {
 
 ::: table
 
-| 插槽    | 描述         | 参数 |
+| 插槽    | 描述          | 参数 |
 | ------- | ------------ | ---- |
-| toolbar | 自定义工具栏 | --   |
+| toolbar | 自定义工具栏  | --   |
 
 :::
 

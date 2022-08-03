@@ -45,7 +45,7 @@ const isActive = computed({
   },
 });
 
-const handleClick = function () {
+const handleClick = () => {
   if (!props.disabled) {
     isActive.value = !isActive.value;
   }
@@ -53,9 +53,7 @@ const handleClick = function () {
 
 const styles = computed(() => {
   return {
-    "background-color": isActive.value
-      ? props.onswitchColor
-      : props.unswitchColor,
+    "background-color": isActive.value ? props.onswitchColor : props.unswitchColor,
   };
 });
 </script>

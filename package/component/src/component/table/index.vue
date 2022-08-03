@@ -80,7 +80,6 @@ const slots = slot.default && slot.default();
 const allChecked = ref(false);
 const hasChecked = ref(false);
 const tableDataSource = ref<any[]>([...props.dataSource]);
-const tableSelectedKeys = ref<Recordable[]>([...props.selectedKeys]);
 const tableColumns = ref([...props.columns]);
 const tableColumnKeys = ref(
   props.columns.map((item: any) => {
@@ -89,6 +88,12 @@ const tableColumnKeys = ref(
     }
   })
 );
+
+const tableSelectedKeys = ref<Recordable[]>([...props.selectedKeys]);
+
+watch(() => props.selectedKeys, () => {
+  tableSelectedKeys.value = props.selectedKeys;
+},{deep: true})
 
 const tableSelectedKey: WritableComputedRef<Recordable[]> = computed({
   get() {
