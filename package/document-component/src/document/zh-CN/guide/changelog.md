@@ -12,6 +12,23 @@
 <lay-timeline>
   <lay-timeline-item title="1.3.x">
     <ul> 
+      <a name="1-3-12"></a> 
+      <li> 
+        <h3>1.3.12 <span class="layui-badge-rim">2022-08-04</span></h3> 
+        <ul>     
+          <li>[新增] table 组件 单元格编辑。</li>
+          <li>[新增] table 组件 expandKeys 属性, 自定展开行。</li>
+          <li>[新增] table 组件 span-method 属性, 支持行列合并。</li>
+          <li>[新增] table 组件 defaultExpandAll 属性, 默认展开所有行。</li>
+          <li>[优化] input 组件 suffix 与 prefix 插槽无底色的问题。</li>
+          <li>[修复] layer 组件 firefox 浏览器下无法拖动的问题。</li>
+          <li>[修复] table 组件 selectkeys 无法动态设置选中项。</li>
+          <li>[修复] table 组件 checkedKeys 属性缺失 emit-update。</li>
+          <li>[修复] checkbox 组件按需场景下，样式污染。</li>
+        </ul>
+      </li>
+    </ul>
+    <ul> 
       <a name="1-3-11"></a> 
       <li> 
         <h3>1.3.11 <span class="layui-badge-rim">2022-08-03</span></h3> 
