@@ -1073,7 +1073,7 @@ export default {
 <template>
   <lay-table :columns="columns28" :data-source="dataSource28">
     <template #username="{ data }">
-      <lay-input v-if="edingKeys[data.id]" v-model="data.username" >
+      <lay-input v-if="edingKeys[data.id]" :model-value="data.username" @input="changeUsername($event, data)">
         <template #suffix>
           <lay-icon type="layui-icon-close" style="right:10px;" v-if="edingKeys[data.id]"  @click="deleteEdit(data.id)"></lay-icon>
         </template>
@@ -1093,14 +1093,6 @@ export default {
   setup() {
 
     const edingKeys = ref([])
-
-    const editHandle = (key) => {
-      edingKeys.value.push(key);
-    }
-
-    const deleteEdit = (key) => {
-      edingKeys.value.splice(edingKeys.value.indexOf(key),1);
-    }
 
     const columns28 = [
       {
@@ -1127,13 +1119,29 @@ export default {
       }
     ]
 
-    const dataSource28 = [
+    const dataSource28 = ref([
       {id:"1",username:"root", password:"root",sex:"男", age:"18", remark: 'layui - vue（谐音：类 UI) '},
       {id:"2",username:"root", password:"root",sex:"男", age:"18", remark: 'layui - vue（谐音：类 UI) '},
       {id:"3",username:"woow", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '},
       {id:"4",username:"woow", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '},
       {id:"5",username:"woow", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '}
-    ]
+    ])
+
+    const editHandle = (key) => {
+      edingKeys.value.push(key);
+    }
+
+    const deleteEdit = (key) => {
+      edingKeys.value.splice(edingKeys.value.indexOf(key),1);
+    }
+
+    const changeUsername = (val, data) => {
+      dataSource28.value.forEach(element => {
+        if(element.id == data.id) {
+          element.username = val;
+        }
+      });
+    }
 
     return {
       edingKeys,
@@ -1141,6 +1149,7 @@ export default {
       columns28,
       editHandle,
       dataSource28,
+      changeUsername,
     }
   }
 }
@@ -1151,7 +1160,7 @@ export default {
 ::: title 完整表格
 :::
 
-::: demo
+::: demo 使用了绝大部分属性的 table 案例
 
 <template>
   <lay-table :columns="columns5" id="id" :expand-index="1" :data-source="dataSource5" v-model:selected-keys="selectedKeys5" :checkbox="checkbox5" :default-toolbar="defaultToolbar5" @row="rowClick5" max-height="200px">
