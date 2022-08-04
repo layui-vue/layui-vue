@@ -811,6 +811,82 @@ export default {
 
 :::
 
+::: title 合并行列
+:::
+
+::: demo 通过 `columns` 配置 `type:'radio'` 开启单选列。
+
+<template>
+  <lay-table :columns="columns24" :data-source="dataSource24" v-model:selected-key="selectedKey24" :spanMethod="spanMethod24"></lay-table>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const columns24 = [
+      {
+        title:"账户",
+        width:"200px",
+        key:"username"
+      },{
+        title:"密码",
+        width: "300px",
+        key:"password"
+      },{
+        title:"性别",
+        key:"sex"
+      },{
+        title:"年龄",
+        width: "300px",
+        key:"age"
+      },{
+        title:"备注",
+        width: "180px",
+        key:"remark",
+        ellipsisTooltip: true
+      }
+    ]
+    
+    const selectedKey24 = ref("2");
+
+    const dataSource24 = [
+      {id:"1",username:"root", password:"root",sex:"男", age:"18", remark: 'layui - vue（谐音：类 UI) '},
+      {id:"2",username:"root", password:"root",sex:"男", age:"18", remark: 'layui - vue（谐音：类 UI) '},
+      {id:"3",username:"woow", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '},
+      {id:"4",username:"woow", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '},
+      {id:"5",username:"woow", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '}
+    ]
+
+    const spanMethod24 = (
+      row,
+      column,
+      rowIndex,
+      columnIndex,
+    ) => {
+      if (rowIndex % 2 === 0) {
+        if (columnIndex === 0) {
+          return [1, 2]
+        } else if (columnIndex === 1) {
+          return [0, 0]
+        }
+      }
+    }
+
+    return {
+      columns24,
+      dataSource24,
+      spanMethod24,
+      selectedKey24,
+    }
+  }
+}
+</script>
+
+:::
+
 ::: title 暂无数据
 :::
 

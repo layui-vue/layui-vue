@@ -45,6 +45,7 @@ export interface LayTableProps {
   cellClassName?: string | Function;
   rowStyle?: string | Function;
   cellStyle?: string | Function;
+  spanMethod?: Function;
 }
 
 const props = withDefaults(defineProps<LayTableProps>(), {
@@ -61,6 +62,7 @@ const props = withDefaults(defineProps<LayTableProps>(), {
   expandIndex: 0,
   rowStyle: "",
   cellStyle: "",
+  spanMethod: () => {}
 });
 
 const tableId = uuidv4();
@@ -285,10 +287,7 @@ const getFixedColumn = () => {
       hasr.value = true;
     } else {
       // @ts-ignore
-      if (
-        tableBody.value?.scrollLeft + tableBody.value?.offsetWidth + 2 >
-        tableBody.value?.scrollWidth
-      ) {
+      if (tableBody.value?.scrollLeft + tableBody.value?.offsetWidth + 2 >tableBody.value?.scrollWidth) {
         hasl.value = true;
         hasr.value = false;
       } else {
@@ -578,6 +577,7 @@ const renderTotalRowCell = (column: any) => {
                   :cellClassName="cellClassName"
                   :rowStyle="rowStyle"
                   :rowClassName="rowClassName"
+                  :spanMethod="spanMethod"
                   @row="rowClick"
                   @row-double="rowDoubleClick"
                   @row-contextmenu="rowContextmenu"

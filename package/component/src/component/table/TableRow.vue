@@ -31,6 +31,7 @@ export interface LayTableRowProps {
   rowStyle: string | Function;
   id: string;
   data: any;
+  spanMethod: Function;
 }
 
 const slot = useSlots();
@@ -188,6 +189,37 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
     }
   }
 };
+
+const spanMethodAttr = (  
+  row: any,
+  column: any,
+  rowIndex: number,
+  columnIndex: number) => {
+  
+const attrs = props.spanMethod(row, column, rowIndex, columnIndex);
+  if(attrs instanceof Array) {
+    return {rowspan: attrs[0], colspan: attrs[1]}
+  } else if(attrs instanceof Object) {
+    return attrs;
+  } else {
+    return {rowspan: 1, colspan: 1}
+  }
+}
+
+const isAutoShow = (  
+  row: any,
+  column: any,
+  rowIndex: number,
+  columnIndex: number) => {
+
+  const attrs = spanMethodAttr(row, column, rowIndex, columnIndex);
+  if(attrs.colspan == 0 && attrs.rowspan == 0) {
+    return false;
+  } else {
+    return true;
+  }
+
+}
 </script>
 
 <template>
@@ -203,6 +235,9 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
         <template v-if="column.type == 'radio'">
           <td
             class="layui-table-cell layui-table-cell-radio"
+            v-if="isAutoShow(data, column, index, columnIndex)"
+            :colspan="spanMethodAttr(data, column, index, columnIndex).colspan"
+            :rowspan="spanMethodAttr(data, column, index, columnIndex).rowspan"  
             :style="[
               {
                 textAlign: column.align,
@@ -249,6 +284,9 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
         <template v-if="column.type == 'checkbox'">
           <td
             class="layui-table-cell layui-table-cell-checkbox"
+            v-if="isAutoShow(data, column, index, columnIndex)"
+            :colspan="spanMethodAttr(data, column, index, columnIndex).colspan"
+            :rowspan="spanMethodAttr(data, column, index, columnIndex).rowspan"  
             :style="[
               {
                 textAlign: column.align,
@@ -299,6 +337,9 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
         <template v-if="column.type == 'number'">
           <td
             class="layui-table-cell layui-table-cell-number"
+            v-if="isAutoShow(data, column, index, columnIndex)"
+            :colspan="spanMethodAttr(data, column, index, columnIndex).colspan"
+            :rowspan="spanMethodAttr(data, column, index, columnIndex).rowspan"  
             :style="[
               {
                 textAlign: column.align,
@@ -345,6 +386,9 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
         <template v-if="column.customSlot">
           <td
             class="layui-table-cell"
+            v-if="isAutoShow(data, column, index, columnIndex)"
+            :colspan="spanMethodAttr(data, column, index, columnIndex).colspan"
+            :rowspan="spanMethodAttr(data, column, index, columnIndex).rowspan"  
             :style="[
               {
                 textAlign: column.align,
@@ -399,6 +443,9 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
           <template v-if="column.key in data">
             <td
               class="layui-table-cell"
+              v-if="isAutoShow(data, column, index, columnIndex)"
+              :colspan="spanMethodAttr(data, column, index, columnIndex).colspan"
+              :rowspan="spanMethodAttr(data, column, index, columnIndex).rowspan"  
               :style="[
                 {
                   textAlign: column.align,
@@ -479,9 +526,10 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
         :cellClassName="cellClassName"
         :rowStyle="rowStyle"
         :rowClassName="rowClassName"
+        :spanMethod="spanMethod"
         @row="rowClick"
         @row-double="rowDoubleClick"
-        @contextmenu="contextmenu"
+        @row-contextmenu="rowContextmenu"
         v-model:selectedKeys="tableSelectedKeys"
         v-model:selectedKey="tableSelectedKey"
       >
