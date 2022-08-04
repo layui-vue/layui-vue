@@ -1,12 +1,12 @@
-@lg: 24px;
-@md: 22px;
-@sm: 20px;
-@xs: 18px;
+@switch-lg: 24px;
+@switch-md: 22px;
+@switch-sm: 20px;
+@switch-xs: 18px;
 
-@lg-min-width: 42px;
-@md-min-width: 37px;
-@sm-min-width: 32px;
-@xs-min-width: 27px;
+@switch-lg-min-width: 42px;
+@switch-md-min-width: 37px;
+@switch-sm-min-width: 32px;
+@switch-xs-min-width: 27px;
 
 .set-size(@size, @min-width) {
   & {
@@ -36,16 +36,16 @@
 
 .layui-switch-container{
   &[size="lg"] {
-    .set-size(@lg,@lg-min-width);
+    .set-size(@switch-lg,@switch-lg-min-width);
   }
   &[size="md"] {
-    .set-size(@md,@md-min-width);
+    .set-size(@switch-md,@switch-md-min-width);
   }
   &[size="sm"] {
-    .set-size(@sm,@sm-min-width);
+    .set-size(@switch-sm,@switch-sm-min-width);
   }
   &[size="xs"] {
-    .set-size(@xs,@xs-min-width);
+    .set-size(@switch-xs,@switch-xs-min-width);
   }
 }
 

@@ -1,7 +1,7 @@
-@lg: 24px;
-@md: 22px;
-@sm: 20px;
-@xs: 18px;
+@radio-lg: 24px;
+@radio-md: 22px;
+@radio-sm: 20px;
+@radio-xs: 18px;
 
 .set-size(@size) {
   & {
@@ -13,16 +13,16 @@
 
 .layui-radio{
   &[size="lg"] {
-    .set-size(@lg);
+    .set-size(@radio-lg);
   }
   &[size="md"] {
-    .set-size(@md);
+    .set-size(@radio-md);
   }
   &[size="sm"] {
-    .set-size(@sm);
+    .set-size(@radio-sm);
   }
   &[size="xs"] {
-    .set-size(@xs);
+    .set-size(@radio-xs);
   }
 }
 

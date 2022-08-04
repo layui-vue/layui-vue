@@ -2,18 +2,18 @@
 @import "../checkbox/index.less";
 @import "../input/index.less";
 
-@lg: 44px;
-@md: 38px;
-@sm: 32px;
-@xs: 26px;
-@lg-badge:32px;
-@md-badge:26px;
-@sm-badge:20px;
-@xs-badge:14px;
-@lg-width: 260px;
-@md-width: 220px;
-@sm-width: 180px;
-@xs-width: 140px;
+@select-lg: 44px;
+@select-md: 38px;
+@select-sm: 32px;
+@select-xs: 26px;
+@select-lg-badge:32px;
+@select-md-badge:26px;
+@select-sm-badge:20px;
+@select-xs-badge:14px;
+@select-lg-width: 260px;
+@select-md-width: 220px;
+@select-sm-width: 180px;
+@select-xs-width: 140px;
 
 .set-size(@size,@badge-size,@width) {
   & {
@@ -229,15 +229,15 @@ dl.layui-anim-upbit > dd .layui-form-checkbox,
 }
 .layui-form-select{
   &[size="lg"] {
-    .set-size(@lg, @lg-badge, @lg-width);
+    .set-size(@select-lg, @select-lg-badge, @select-lg-width);
   }
   &[size="md"] {
-    .set-size(@md, @md-badge, @md-width);
+    .set-size(@select-md, @select-md-badge, @select-md-width);
   }
   &[size="sm"] {
-    .set-size(@sm, @sm-badge, @sm-width);
+    .set-size(@select-sm, @select-sm-badge, @select-sm-width);
   }
   &[size="xs"] {
-    .set-size(@xs, @xs-badge, @xs-width);
+    .set-size(@select-xs, @select-xs-badge, @select-xs-width);
   }
 }

@@ -3,10 +3,10 @@
   --input-border-color: var(--global-neutral-color-3);
 }
 
-@lg: 44px;
-@md: 38px;
-@sm: 32px;
-@xs: 26px;
+@input-lg: 44px;
+@input-md: 38px;
+@input-sm: 32px;
+@input-xs: 26px;
 
 .set-size(@size) {
   & {
@@ -105,15 +105,15 @@
 
 .layui-input{
   &[size="lg"] {
-    .set-size(@lg);
+    .set-size(@input-lg);
   }
   &[size="md"] {
-    .set-size(@md);
+    .set-size(@input-md);
   }
   &[size="sm"] {
-    .set-size(@sm);
+    .set-size(@input-sm);
   }
   &[size="xs"] {
-    .set-size(@xs);
+    .set-size(@input-xs);
   }
 }

@@ -1,12 +1,12 @@
-@lg: 18px;
-@md: 16px;
-@sm: 14px;
-@xs: 12px;
+@checkbox-lg: 18px;
+@checkbox-md: 16px;
+@checkbox-sm: 14px;
+@checkbox-xs: 12px;
 
-@lg-font-size: 16px;
-@md-font-size: 14px;
-@sm-font-size: 12px;
-@xs-font-size: 10px;
+@checkbox-lg-font-size: 16px;
+@checkbox-md-font-size: 14px;
+@checkbox-sm-font-size: 12px;
+@checkbox-xs-font-size: 10px;
 
 .set-size(@size, @font-size) {
   & {
@@ -30,16 +30,16 @@
 
 .layui-checkbox{
   &[size="lg"] {
-    .set-size(@lg, @lg-font-size);
+    .set-size(@checkbox-lg, @checkbox-lg-font-size);
   }
   &[size="md"] {
-    .set-size(@md, @md-font-size);
+    .set-size(@checkbox-md, @checkbox-md-font-size);
   }
   &[size="sm"] {
-    .set-size(@sm, @sm-font-size);
+    .set-size(@checkbox-sm, @checkbox-sm-font-size);
   }
   &[size="xs"] {
-    .set-size(@xs, @xs-font-size);
+    .set-size(@checkbox-xs, @checkbox-xs-font-size);
   }
 }
 
