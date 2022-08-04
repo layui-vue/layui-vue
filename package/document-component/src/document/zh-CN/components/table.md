@@ -226,7 +226,7 @@ export default {
 ::: demo 当表格内容较多不能一次性完全展示时。
 
 <template>
-  <lay-table :columns="columns6" :data-source="dataSource6">
+  <lay-table :columns="columns6" :data-source="dataSource6" :default-expand-all="true">
     <template v-slot:expand="{ data }"> 
       <lay-table :columns="columns6" :data-source="dataSource6"></lay-table>
     </template>
@@ -276,7 +276,7 @@ export default {
 ::: demo 树形数据的展示，当数据中有 children 字段时会自动展示为树形表格, 通过设置 indentSize 以控制每一层的缩进宽度, 使用 childrenColumnName 替换默认字段
 
 <template>
-  <lay-table :columns="columns7" :data-source="dataSource7">
+  <lay-table :columns="columns7" :data-source="dataSource7" :default-expand-all="true">
     <template #score="{ data }">{{ data }}</template>
   </lay-table>
 </template>
@@ -817,7 +817,7 @@ export default {
 ::: demo 通过 `columns` 配置 `type:'radio'` 开启单选列。
 
 <template>
-  <lay-table :columns="columns24" :data-source="dataSource24" v-model:selected-key="selectedKey24" :spanMethod="spanMethod24"></lay-table>
+  <lay-table :columns="columns24" :data-source="dataSource24" v-model:selected-key="selectedKey24"></lay-table>
 </template>
 
 <script>
@@ -849,8 +849,6 @@ export default {
         ellipsisTooltip: true
       }
     ]
-    
-    const selectedKey24 = ref("2");
 
     const dataSource24 = [
       {id:"1",username:"root", password:"root",sex:"男", age:"18", remark: 'layui - vue（谐音：类 UI) '},
@@ -879,7 +877,6 @@ export default {
       columns24,
       dataSource24,
       spanMethod24,
-      selectedKey24,
     }
   }
 }

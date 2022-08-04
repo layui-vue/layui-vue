@@ -32,6 +32,7 @@ export interface LayTableRowProps {
   id: string;
   data: any;
   spanMethod: Function;
+  defaultExpandAll: boolean;
 }
 
 const slot = useSlots();
@@ -68,7 +69,7 @@ const tableSelectedKey: WritableComputedRef<Recordable[]> = computed({
   },
 });
 
-const isExpand = ref(false);
+const isExpand = ref(props.defaultExpandAll);
 const slotsData = ref<string[]>([]);
 
 props.columns.map((value: any) => {
@@ -190,36 +191,35 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
   }
 };
 
-const spanMethodAttr = (  
+const spanMethodAttr = (
   row: any,
   column: any,
   rowIndex: number,
-  columnIndex: number) => {
-  
-const attrs = props.spanMethod(row, column, rowIndex, columnIndex);
-  if(attrs instanceof Array) {
-    return {rowspan: attrs[0], colspan: attrs[1]}
-  } else if(attrs instanceof Object) {
+  columnIndex: number
+) => {
+  const attrs = props.spanMethod(row, column, rowIndex, columnIndex);
+  if (attrs instanceof Array) {
+    return { rowspan: attrs[0], colspan: attrs[1] };
+  } else if (attrs instanceof Object) {
     return attrs;
   } else {
-    return {rowspan: 1, colspan: 1}
+    return { rowspan: 1, colspan: 1 };
   }
-}
+};
 
-const isAutoShow = (  
+const isAutoShow = (
   row: any,
   column: any,
   rowIndex: number,
-  columnIndex: number) => {
-
+  columnIndex: number
+) => {
   const attrs = spanMethodAttr(row, column, rowIndex, columnIndex);
-  if(attrs.colspan == 0 && attrs.rowspan == 0) {
+  if (attrs.colspan == 0 && attrs.rowspan == 0) {
     return false;
   } else {
     return true;
   }
-
-}
+};
 </script>
 
 <template>
@@ -237,7 +237,7 @@ const isAutoShow = (
             class="layui-table-cell layui-table-cell-radio"
             v-if="isAutoShow(data, column, index, columnIndex)"
             :colspan="spanMethodAttr(data, column, index, columnIndex).colspan"
-            :rowspan="spanMethodAttr(data, column, index, columnIndex).rowspan"  
+            :rowspan="spanMethodAttr(data, column, index, columnIndex).rowspan"
             :style="[
               {
                 textAlign: column.align,
@@ -286,7 +286,7 @@ const isAutoShow = (
             class="layui-table-cell layui-table-cell-checkbox"
             v-if="isAutoShow(data, column, index, columnIndex)"
             :colspan="spanMethodAttr(data, column, index, columnIndex).colspan"
-            :rowspan="spanMethodAttr(data, column, index, columnIndex).rowspan"  
+            :rowspan="spanMethodAttr(data, column, index, columnIndex).rowspan"
             :style="[
               {
                 textAlign: column.align,
@@ -339,7 +339,7 @@ const isAutoShow = (
             class="layui-table-cell layui-table-cell-number"
             v-if="isAutoShow(data, column, index, columnIndex)"
             :colspan="spanMethodAttr(data, column, index, columnIndex).colspan"
-            :rowspan="spanMethodAttr(data, column, index, columnIndex).rowspan"  
+            :rowspan="spanMethodAttr(data, column, index, columnIndex).rowspan"
             :style="[
               {
                 textAlign: column.align,
@@ -388,7 +388,7 @@ const isAutoShow = (
             class="layui-table-cell"
             v-if="isAutoShow(data, column, index, columnIndex)"
             :colspan="spanMethodAttr(data, column, index, columnIndex).colspan"
-            :rowspan="spanMethodAttr(data, column, index, columnIndex).rowspan"  
+            :rowspan="spanMethodAttr(data, column, index, columnIndex).rowspan"
             :style="[
               {
                 textAlign: column.align,
@@ -444,8 +444,12 @@ const isAutoShow = (
             <td
               class="layui-table-cell"
               v-if="isAutoShow(data, column, index, columnIndex)"
-              :colspan="spanMethodAttr(data, column, index, columnIndex).colspan"
-              :rowspan="spanMethodAttr(data, column, index, columnIndex).rowspan"  
+              :colspan="
+                spanMethodAttr(data, column, index, columnIndex).colspan
+              "
+              :rowspan="
+                spanMethodAttr(data, column, index, columnIndex).rowspan
+              "
               :style="[
                 {
                   textAlign: column.align,
@@ -527,6 +531,7 @@ const isAutoShow = (
         :rowStyle="rowStyle"
         :rowClassName="rowClassName"
         :spanMethod="spanMethod"
+        :defaultExpandAll="defaultExpandAll"
         @row="rowClick"
         @row-double="rowDoubleClick"
         @row-contextmenu="rowContextmenu"

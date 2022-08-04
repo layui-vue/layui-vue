@@ -53,7 +53,9 @@ const handleClick = () => {
 
 const styles = computed(() => {
   return {
-    "background-color": isActive.value ? props.onswitchColor : props.unswitchColor,
+    "background-color": isActive.value
+      ? props.onswitchColor
+      : props.unswitchColor,
   };
 });
 </script>

@@ -46,6 +46,7 @@ export interface LayTableProps {
   rowStyle?: string | Function;
   cellStyle?: string | Function;
   spanMethod?: Function;
+  defaultExpandAll?: boolean;
 }
 
 const props = withDefaults(defineProps<LayTableProps>(), {
@@ -62,7 +63,8 @@ const props = withDefaults(defineProps<LayTableProps>(), {
   expandIndex: 0,
   rowStyle: "",
   cellStyle: "",
-  spanMethod: () => {}
+  spanMethod: () => {},
+  defaultExpandAll: false,
 });
 
 const tableId = uuidv4();
@@ -93,9 +95,13 @@ const tableColumnKeys = ref(
 
 const tableSelectedKeys = ref<Recordable[]>([...props.selectedKeys]);
 
-watch(() => props.selectedKeys, () => {
-  tableSelectedKeys.value = props.selectedKeys;
-},{deep: true})
+watch(
+  () => props.selectedKeys,
+  () => {
+    tableSelectedKeys.value = props.selectedKeys;
+  },
+  { deep: true }
+);
 
 const tableSelectedKey: WritableComputedRef<Recordable[]> = computed({
   get() {
@@ -287,7 +293,7 @@ const getFixedColumn = () => {
       hasr.value = true;
     } else {
       // @ts-ignore
-      if (tableBody.value?.scrollLeft + tableBody.value?.offsetWidth + 2 >tableBody.value?.scrollWidth) {
+      if (tableBody.value?.scrollLeft + tableBody.value?.offsetWidth + 2 > tableBody.value?.scrollWidth) {
         hasl.value = true;
         hasr.value = false;
       } else {
@@ -578,6 +584,7 @@ const renderTotalRowCell = (column: any) => {
                   :rowStyle="rowStyle"
                   :rowClassName="rowClassName"
                   :spanMethod="spanMethod"
+                  :defaultExpandAll="defaultExpandAll" 
                   @row="rowClick"
                   @row-double="rowDoubleClick"
                   @row-contextmenu="rowContextmenu"
