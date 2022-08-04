@@ -33,6 +33,7 @@ export interface LayTableRowProps {
   data: any;
   spanMethod: Function;
   defaultExpandAll: boolean;
+  expandKeys: Recordable[];
 }
 
 const slot = useSlots();
@@ -40,6 +41,7 @@ const emit = defineEmits([
   "row",
   "row-double",
   "row-contextmenu",
+  "update:expandKeys",
   "update:selectedKeys",
   "update:selectedKey",
 ]);
@@ -49,6 +51,17 @@ const props = withDefaults(defineProps<LayTableRowProps>(), {
   childrenColumnName: "children",
   cellStyle: "",
   cellClassName: "",
+});
+
+const tableExpandAll = ref(props.defaultExpandAll);
+
+const tableExpandKeys: WritableComputedRef<Recordable[]> = computed({
+  get() {
+    return [...props.expandKeys];
+  },
+  set(val) {
+    emit("update:expandKeys", val);
+  },
 });
 
 const tableSelectedKeys: WritableComputedRef<Recordable[]> = computed({
@@ -69,7 +82,22 @@ const tableSelectedKey: WritableComputedRef<Recordable[]> = computed({
   },
 });
 
-const isExpand = ref(props.defaultExpandAll);
+const isExpand: WritableComputedRef<any> = computed({
+  get() {
+    return tableExpandAll.value ? true : tableExpandKeys.value.includes(props.data[props.id]);
+  },
+  set(val) {
+      let newTableExpandKeys = [...tableExpandKeys.value]
+      if (!val) {
+        newTableExpandKeys.splice(newTableExpandKeys.indexOf(props.data[props.id]), 1);
+      } else {
+        newTableExpandKeys.push(props.data[props.id]);
+      }
+      tableExpandAll.value = false;
+      tableExpandKeys.value = newTableExpandKeys;
+  },
+});
+
 const slotsData = ref<string[]>([]);
 
 props.columns.map((value: any) => {
@@ -535,6 +563,7 @@ const isAutoShow = (
         @row="rowClick"
         @row-double="rowDoubleClick"
         @row-contextmenu="rowContextmenu"
+        v-model:expandKeys="tableExpandKeys"
         v-model:selectedKeys="tableSelectedKeys"
         v-model:selectedKey="tableSelectedKey"
       >

@@ -226,7 +226,8 @@ export default {
 ::: demo 当表格内容较多不能一次性完全展示时。
 
 <template>
-  <lay-table :columns="columns6" :data-source="dataSource6" :default-expand-all="true">
+  展开行: {{ expandKeys6 }}
+  <lay-table :columns="columns6" :data-source="dataSource6" :default-expand-all="defaultExpandAll6" v-model:expand-keys="expandKeys6">
     <template v-slot:expand="{ data }"> 
       <lay-table :columns="columns6" :data-source="dataSource6"></lay-table>
     </template>
@@ -252,17 +253,22 @@ export default {
     ]
 
     const dataSource6 = [
-      {name:"张三", score:100},
-      {name:"李四", score:80},
-      {name:"王二", score:99},
-      {name:"麻子", score:92},
-      {name:"无名", score:60},
-      {name:"有名", score:70},
+      {id:"1", name:"张三", score:100},
+      {id:"2", name:"李四", score:80},
+      {id:"3", name:"王二", score:99},
+      {id:"4", name:"麻子", score:92},
+      {id:"5", name:"无名", score:60},
+      {id:"6", name:"有名", score:70},
     ]
+
+    const expandKeys6 = ref(["1"])
+    const defaultExpandAll6 = ref(false)
 
     return {
       columns6,
-      dataSource6
+      dataSource6,
+      expandKeys6,
+      defaultExpandAll6
     }
   }
 }

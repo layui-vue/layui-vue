@@ -47,6 +47,7 @@ export interface LayTableProps {
   cellStyle?: string | Function;
   spanMethod?: Function;
   defaultExpandAll?: boolean;
+  expandKeys?: Recordable[];
 }
 
 const props = withDefaults(defineProps<LayTableProps>(), {
@@ -65,12 +66,14 @@ const props = withDefaults(defineProps<LayTableProps>(), {
   cellStyle: "",
   spanMethod: () => {},
   defaultExpandAll: false,
+  expandKeys: () => []
 });
 
 const tableId = uuidv4();
 
 const emit = defineEmits([
   "change",
+  "update:expandKeys",
   "update:selectedKeys",
   "update:selectedKey",
   "row-contextmenu",
@@ -109,6 +112,15 @@ const tableSelectedKey: WritableComputedRef<Recordable[]> = computed({
   },
   set(val) {
     emit("update:selectedKey", val);
+  },
+});
+
+const tableExpandKeys: WritableComputedRef<Recordable[]> = computed({
+  get() {
+    return [...props.expandKeys];
+  },
+  set(val) {
+    emit("update:expandKeys", val);
   },
 });
 
@@ -584,10 +596,11 @@ const renderTotalRowCell = (column: any) => {
                   :rowStyle="rowStyle"
                   :rowClassName="rowClassName"
                   :spanMethod="spanMethod"
-                  :defaultExpandAll="defaultExpandAll" 
+                  :defaultExpandAll="defaultExpandAll"
                   @row="rowClick"
                   @row-double="rowDoubleClick"
                   @row-contextmenu="rowContextmenu"
+                  v-model:expandKeys="tableExpandKeys"
                   v-model:selectedKeys="tableSelectedKeys"
                   v-model:selectedKey="tableSelectedKey"
                 >
