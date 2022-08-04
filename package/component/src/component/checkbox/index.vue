@@ -127,7 +127,13 @@ const isDisabled = computed(() => {
         ><slot>{{ label }}</slot></span
       >
       <lay-icon
-        :type="props.isIndeterminate && isChecked ? 'layui-icon-subtraction' : isChecked ? 'layui-icon-ok' : ''"
+        :type="
+          props.isIndeterminate && isChecked
+            ? 'layui-icon-subtraction'
+            : isChecked
+            ? 'layui-icon-ok'
+            : ''
+        "
       ></lay-icon>
     </div>
   </span>

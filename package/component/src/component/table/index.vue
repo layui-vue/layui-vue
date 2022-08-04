@@ -66,7 +66,7 @@ const props = withDefaults(defineProps<LayTableProps>(), {
   cellStyle: "",
   spanMethod: () => {},
   defaultExpandAll: false,
-  expandKeys: () => []
+  expandKeys: () => [],
 });
 
 const tableId = uuidv4();
@@ -305,7 +305,10 @@ const getFixedColumn = () => {
       hasr.value = true;
     } else {
       // @ts-ignore
-      if (tableBody.value?.scrollLeft + tableBody.value?.offsetWidth + 2 > tableBody.value?.scrollWidth) {
+      if (
+        tableBody.value?.scrollLeft + tableBody.value?.offsetWidth + 2 >
+        tableBody.value?.scrollWidth
+      ) {
         hasl.value = true;
         hasr.value = false;
       } else {

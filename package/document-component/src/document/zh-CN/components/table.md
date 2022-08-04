@@ -817,79 +817,6 @@ export default {
 
 :::
 
-::: title 合并行列
-:::
-
-::: demo 通过 `columns` 配置 `type:'radio'` 开启单选列。
-
-<template>
-  <lay-table :columns="columns24" :data-source="dataSource24" v-model:selected-key="selectedKey24"></lay-table>
-</template>
-
-<script>
-import { ref } from 'vue'
-
-export default {
-  setup() {
-
-    const columns24 = [
-      {
-        title:"账户",
-        width:"200px",
-        key:"username"
-      },{
-        title:"密码",
-        width: "300px",
-        key:"password"
-      },{
-        title:"性别",
-        key:"sex"
-      },{
-        title:"年龄",
-        width: "300px",
-        key:"age"
-      },{
-        title:"备注",
-        width: "180px",
-        key:"remark",
-        ellipsisTooltip: true
-      }
-    ]
-
-    const dataSource24 = [
-      {id:"1",username:"root", password:"root",sex:"男", age:"18", remark: 'layui - vue（谐音：类 UI) '},
-      {id:"2",username:"root", password:"root",sex:"男", age:"18", remark: 'layui - vue（谐音：类 UI) '},
-      {id:"3",username:"woow", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '},
-      {id:"4",username:"woow", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '},
-      {id:"5",username:"woow", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '}
-    ]
-
-    const spanMethod24 = (
-      row,
-      column,
-      rowIndex,
-      columnIndex,
-    ) => {
-      if (rowIndex % 2 === 0) {
-        if (columnIndex === 0) {
-          return [1, 2]
-        } else if (columnIndex === 1) {
-          return [0, 0]
-        }
-      }
-    }
-
-    return {
-      columns24,
-      dataSource24,
-      spanMethod24,
-    }
-  }
-}
-</script>
-
-:::
-
 ::: title 暂无数据
 :::
 
@@ -1058,6 +985,162 @@ export default {
     return {
       columns26,
       dataSource26,
+    }
+  }
+}
+</script>
+
+:::
+
+::: title 合并行列
+:::
+
+::: demo 通过 `span-method` 属性, 自定义行列合并的逻辑。
+
+<template>
+  <lay-table :columns="columns27" :data-source="dataSource27" :span-method="spanMethod27"></lay-table>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const columns27 = [
+      {
+        title:"账户",
+        width:"200px",
+        key:"username"
+      },{
+        title:"密码",
+        width: "300px",
+        key:"password"
+      },{
+        title:"性别",
+        key:"sex"
+      },{
+        title:"年龄",
+        width: "300px",
+        key:"age"
+      },{
+        title:"备注",
+        width: "180px",
+        key:"remark",
+        ellipsisTooltip: true
+      }
+    ]
+
+    const dataSource27 = [
+      {id:"1",username:"root", password:"root",sex:"男", age:"18", remark: 'layui - vue（谐音：类 UI) '},
+      {id:"2",username:"root", password:"root",sex:"男", age:"18", remark: 'layui - vue（谐音：类 UI) '},
+      {id:"3",username:"woow", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '},
+      {id:"4",username:"woow", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '},
+      {id:"5",username:"woow", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '}
+    ]
+
+    const spanMethod27 = (
+      row,
+      column,
+      rowIndex,
+      columnIndex,
+    ) => {
+      if (rowIndex % 2 === 0) {
+        if (columnIndex === 0) {
+          return [1, 2]
+        } else if (columnIndex === 1) {
+          return [0, 0]
+        }
+      }
+    }
+
+    return {
+      columns27,
+      dataSource27,
+      spanMethod27,
+    }
+  }
+}
+</script>
+
+:::
+
+::: title 行内编辑
+:::
+
+::: demo 通过 `span-method` 属性, 自定义行列合并的逻辑。
+
+<template>
+  <lay-table :columns="columns28" :data-source="dataSource28">
+    <template #username="{ data }">
+      <lay-input v-if="edingKeys[data.id]" v-model="data.username" >
+        <template #suffix>
+          <lay-icon type="layui-icon-close" style="right:10px;" v-if="edingKeys[data.id]"  @click="deleteEdit(data.id)"></lay-icon>
+        </template>
+      </lay-input>
+      <span v-else>
+        {{ data.username }} 
+        <lay-icon type="layui-icon-edit" style="position: absolute;right: 10px;" v-if="!edingKeys[data.id]"  @click="editHandle(data.id)"></lay-icon>
+      </span>
+    </template>
+  </lay-table>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const edingKeys = ref([])
+
+    const editHandle = (key) => {
+      edingKeys.value.push(key);
+    }
+
+    const deleteEdit = (key) => {
+      edingKeys.value.splice(edingKeys.value.indexOf(key),1);
+    }
+
+    const columns28 = [
+      {
+        title:"账户",
+        width:"200px",
+        key:"username",
+        customSlot: "username"
+      },{
+        title:"密码",
+        width: "300px",
+        key:"password"
+      },{
+        title:"性别",
+        key:"sex"
+      },{
+        title:"年龄",
+        width: "300px",
+        key:"age"
+      },{
+        title:"备注",
+        width: "180px",
+        key:"remark",
+        ellipsisTooltip: true
+      }
+    ]
+
+    const dataSource28 = [
+      {id:"1",username:"root", password:"root",sex:"男", age:"18", remark: 'layui - vue（谐音：类 UI) '},
+      {id:"2",username:"root", password:"root",sex:"男", age:"18", remark: 'layui - vue（谐音：类 UI) '},
+      {id:"3",username:"woow", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '},
+      {id:"4",username:"woow", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '},
+      {id:"5",username:"woow", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '}
+    ]
+
+    return {
+      edingKeys,
+      deleteEdit,
+      columns28,
+      editHandle,
+      dataSource28,
     }
   }
 }
