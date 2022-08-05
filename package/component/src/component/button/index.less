@@ -33,13 +33,6 @@
   cursor: pointer;
 }
 
-.layui-btn:not(.layui-btn-disabled){
-  :hover,
-  :active {
-    color: #333;
-  }
-}
-
 .layui-btn-primary {
   color: var(--button-primary-text-color);
   background-color: var(--button-primary-background-color);
@@ -64,12 +57,17 @@
   border-color: var(--button-danger-border-color);
 }
 
-.layui-btn-primary:hover,
-.layui-btn-normal:hover,
+.layui-btn:hover {
+  color: #333;
+}
+
 .layui-btn-warm:hover,
+.layui-btn-normal:hover,
+.layui-btn-primary:hover,
 .layui-btn-danger:hover {
   opacity: 0.8;
   filter: alpha(opacity=80);
+  color: white;
 }
 
 .layui-btn-lg {
