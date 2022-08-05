@@ -226,8 +226,8 @@ export default {
 ::: demo 当表格内容较多不能一次性完全展示时。
 
 <template>
-  展开行: {{ expandKeys6 }}
-  <lay-table :columns="columns6" :data-source="dataSource6" :default-expand-all="defaultExpandAll6" v-model:expand-keys="expandKeys6">
+  {{ expandKeys6 }}
+  <lay-table :columns="columns6" :data-source="dataSource6" :default-expand-all="defaultExpandAll6" v-model:expandKeys="expandKeys6">
     <template v-slot:expand="{ data }"> 
       <lay-table :columns="columns6" :data-source="dataSource6"></lay-table>
     </template>
@@ -282,7 +282,8 @@ export default {
 ::: demo 树形数据的展示，当数据中有 children 字段时会自动展示为树形表格, 通过设置 indentSize 以控制每一层的缩进宽度, 使用 childrenColumnName 替换默认字段
 
 <template>
-  <lay-table :columns="columns7" :data-source="dataSource7" :default-expand-all="true">
+  {{ expandKeys7 }}
+  <lay-table :columns="columns7" :data-source="dataSource7" :default-expand-all="defaultExpandAll7" v-model:expandKeys="expandKeys7">
     <template #score="{ data }">{{ data }}</template>
   </lay-table>
 </template>
@@ -306,13 +307,18 @@ export default {
     ]
 
     const dataSource7 = [
-      {name:"系统管理", score:100, children: [{name:"用户管理", score:99, children: [{name:"用户修改", score:98},{name:"用户删除", score:97}]},{name:"角色管理", score:96}]},
-      {name:"电商管理", score:100, children: [{name:"商品管理", score:11},{name:"分类管理", score:22}]},
+      {id: "1", name:"系统管理", score:100, children: [{id: "3", name:"用户管理", score:99},{id: "5", name:"角色管理", score:96,children: [{id: "7", name:"用户管理", score:99},{id: "8", name:"角色管理", score:96}]}]},
+      {id: "2", name:"电商管理", score:100, children: [{id: "4", name:"商品管理", score:11},{id: "6", name:"分类管理", score:22}]},
     ]
+
+    const expandKeys7 = ref(["1"])
+    const defaultExpandAll7 = ref(false)
 
     return {
       columns7,
-      dataSource7
+      dataSource7,
+      expandKeys7,
+      defaultExpandAll7
     }
   }
 }
@@ -1277,7 +1283,8 @@ export default {
 | dataSource           | 数据源                        | --        | --      | --             |
 | checkbox             | 开启复选框                    | `boolean`  | `false` | `true` `false` |
 | id                   | 主键                          | `string`  | --      | --             |
-| v-model:selectedKeys | 选中项                        | --        | --      | --             |
+| v-model:selectedKeys | 选中项 (多选)                       | --        | --      | --             |
+| v-model:selectedKey  | 选中项 (单选)                       | --        | --      | --             |
 | default-toolbar      | 工具栏                        | `boolean` | `false` | `true` `false` |
 | size                 | 尺寸                          | `string`  | `md`    | `lg` `md` `sm` |
 | children-column-name | 树节点字段                    | `string`   | `children`| --            |
@@ -1291,6 +1298,9 @@ export default {
 | rowClassName         | 行类名称 function(row, rowIndex)                | `string` `function`  | --   | -- |
 | skin                 | 风格                | `string` | --   | `line` `row` `nob` |
 | expand-index         | 展开所在列                | `number` | --   | -- |
+| default-expand-all   | 默认展开所有列                | `boolean` | `false`   | `true` `false` |
+| expand-keys          | 展开的列                | `array` | `[]`   | -- |
+| span-method          | 合并算法                | `function` | --   | -- |
 
 :::
 

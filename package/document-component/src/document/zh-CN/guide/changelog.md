@@ -11,9 +11,18 @@
 <template>
 <lay-timeline>
   <lay-timeline-item title="1.3.x">
+      <ul> 
+      <a name="1-3-13"></a> 
+      <li> 
+        <h3>1.3.13 <span class="layui-badge-rim">2022-08-04</span></h3> 
+        <ul>     
+          <li>[修复] table 组件 expandKeys 不存在, 无法展开的问题。</li>
+        </ul>
+      </li>
+    </ul>
     <ul> 
       <a name="1-3-12"></a> 
-      <li> 
+      <li>
         <h3>1.3.12 <span class="layui-badge-rim">2022-08-04</span></h3> 
         <ul>     
           <li>[新增] table 组件 单元格编辑。</li>

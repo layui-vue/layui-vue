@@ -64,8 +64,8 @@ const props = withDefaults(defineProps<LayTableProps>(), {
   expandIndex: 0,
   rowStyle: "",
   cellStyle: "",
-  spanMethod: () => {},
   defaultExpandAll: false,
+  spanMethod: () => { },
   expandKeys: () => [],
 });
 
@@ -97,11 +97,20 @@ const tableColumnKeys = ref(
 );
 
 const tableSelectedKeys = ref<Recordable[]>([...props.selectedKeys]);
+const tableExpandKeys = ref<Recordable[]>([...props.expandKeys]);
 
 watch(
   () => props.selectedKeys,
   () => {
     tableSelectedKeys.value = props.selectedKeys;
+  },
+  { deep: true }
+);
+
+watch(
+  () => props.expandKeys,
+  () => {
+    tableExpandKeys.value = props.expandKeys;
   },
   { deep: true }
 );
@@ -115,15 +124,6 @@ const tableSelectedKey: WritableComputedRef<Recordable[]> = computed({
   },
 });
 
-const tableExpandKeys: WritableComputedRef<Recordable[]> = computed({
-  get() {
-    return [...props.expandKeys];
-  },
-  set(val) {
-    emit("update:expandKeys", val);
-  },
-});
-
 watch(
   () => props.dataSource,
   () => {
@@ -132,7 +132,7 @@ watch(
   { deep: true }
 );
 
-const changeAll = function (checked: any) {
+const changeAll = (checked: any) => {
   const ids = props.dataSource.map((item: any) => {
     return item[props.id];
   });
@@ -163,6 +163,12 @@ watch(
   },
   { deep: true, immediate: true }
 );
+
+watch(tableExpandKeys, () => {
+  emit("update:expandKeys", tableExpandKeys.value);
+},
+  { deep: true, immediate: true }
+)
 
 const change = function (page: any) {
   emit("change", page);
@@ -201,7 +207,7 @@ const exportData = () => {
           throw new Error("exception");
         }
       });
-    } catch (e) {}
+    } catch (e) { }
   });
   tableDataSource.value.forEach((item) => {
     let obj: any = [];
@@ -433,31 +439,15 @@ const renderTotalRowCell = (column: any) => {
             </div>
             <template #content>
               <div class="layui-table-tool-checkbox">
-                <lay-checkbox
-                  v-for="column in columns"
-                  v-model="tableColumnKeys"
-                  skin="primary"
-                  :key="column.key"
-                  :value="column.key"
-                  >{{ column.title }}</lay-checkbox
-                >
+                <lay-checkbox v-for="column in columns" v-model="tableColumnKeys" skin="primary" :key="column.key"
+                  :value="column.key">{{ column.title }}</lay-checkbox>
               </div>
             </template>
           </lay-dropdown>
-          <div
-            class="layui-inline"
-            title="导出"
-            lay-event="LAYTABLE_PRINT"
-            @click="exportData()"
-          >
+          <div class="layui-inline" title="导出" lay-event="LAYTABLE_PRINT" @click="exportData()">
             <i class="layui-icon layui-icon-export"></i>
           </div>
-          <div
-            class="layui-inline"
-            title="打印"
-            lay-event="LAYTABLE_PRINT"
-            @click="print()"
-          >
+          <div class="layui-inline" title="打印" lay-event="LAYTABLE_PRINT" @click="print()">
             <i class="layui-icon layui-icon-print"></i>
           </div>
         </div>
@@ -465,59 +455,40 @@ const renderTotalRowCell = (column: any) => {
 
       <div class="layui-table-box">
         <!-- 表头 -->
-        <div
-          class="layui-table-header"
-          :style="[{ 'padding-right': `${scrollWidthCell}px` }]"
-        >
+        <div class="layui-table-header" :style="[{ 'padding-right': `${scrollWidthCell}px` }]">
           <div class="layui-table-header-wrapper" ref="tableHeader">
             <table class="layui-table" :lay-size="size" :lay-skin="skin">
               <colgroup>
                 <template v-for="column in columns" :key="column">
                   <template v-if="tableColumnKeys.includes(column.key)">
-                    <col
-                      :width="column.width"
-                      :style="{
-                        minWidth: column.minWidth ? column.minWidth : '50px',
-                      }"
-                    />
+                    <col :width="column.width" :style="{
+                      minWidth: column.minWidth ? column.minWidth : '50px',
+                    }" />
                   </template>
                 </template>
               </colgroup>
               <thead>
                 <tr>
-                  <template
-                    v-for="(column, columnIndex) in columns"
-                    :key="column"
-                  >
-                    <th
-                      v-if="tableColumnKeys.includes(column.key)"
-                      class="layui-table-cell"
-                      :class="[
-                        renderFixedClassName(column, columnIndex),
-                        column.fixed ? `layui-table-fixed-${column.fixed}` : '',
-                        column.type == 'checkbox'
-                          ? 'layui-table-cell-checkbox'
-                          : '',
-                        column.type == 'radio' ? 'layui-table-cell-radio' : '',
-                        column.type == 'number'
-                          ? 'layui-table-cell-number'
-                          : '',
-                      ]"
-                      :style="[
-                        {
-                          textAlign: column.align,
-                        },
-                        renderFixedStyle(column, columnIndex),
-                      ]"
-                    >
+                  <template v-for="(column, columnIndex) in columns" :key="column">
+                    <th v-if="tableColumnKeys.includes(column.key)" class="layui-table-cell" :class="[
+                      renderFixedClassName(column, columnIndex),
+                      column.fixed ? `layui-table-fixed-${column.fixed}` : '',
+                      column.type == 'checkbox'
+                        ? 'layui-table-cell-checkbox'
+                        : '',
+                      column.type == 'radio' ? 'layui-table-cell-radio' : '',
+                      column.type == 'number'
+                        ? 'layui-table-cell-number'
+                        : '',
+                    ]" :style="[
+  {
+    textAlign: column.align,
+  },
+  renderFixedStyle(column, columnIndex),
+]">
                       <template v-if="column.type == 'checkbox'">
-                        <lay-checkbox
-                          v-model="hasChecked"
-                          :is-indeterminate="!allChecked"
-                          skin="primary"
-                          value="all"
-                          @change="changeAll"
-                        />
+                        <lay-checkbox v-model="hasChecked" :is-indeterminate="!allChecked" skin="primary" value="all"
+                          @change="changeAll" />
                       </template>
                       <template v-else>
                         <span>
@@ -529,21 +500,11 @@ const renderTotalRowCell = (column: any) => {
                           </template>
                         </span>
                         <!-- 插槽 -->
-                        <span
-                          v-if="column.sort"
-                          class="layui-table-sort layui-inline"
-                          lay-sort
-                        >
-                          <i
-                            @click.stop="sortTable($event, column.key, 'asc')"
-                            class="layui-edge layui-table-sort-asc"
-                            title="升序"
-                          ></i>
-                          <i
-                            @click.stop="sortTable($event, column.key, 'desc')"
-                            class="layui-edge layui-table-sort-desc"
-                            title="降序"
-                          ></i>
+                        <span v-if="column.sort" class="layui-table-sort layui-inline" lay-sort>
+                          <i @click.stop="sortTable($event, column.key, 'asc')" class="layui-edge layui-table-sort-asc"
+                            title="升序"></i>
+                          <i @click.stop="sortTable($event, column.key, 'desc')"
+                            class="layui-edge layui-table-sort-desc" title="降序"></i>
                         </span>
                       </template>
                     </th>
@@ -554,59 +515,29 @@ const renderTotalRowCell = (column: any) => {
           </div>
         </div>
         <!-- 表身 -->
-        <div
-          class="layui-table-body layui-table-main"
-          :style="{ height: height, maxHeight: maxHeight }"
-          ref="tableBody"
-        >
-          <table
-            v-if="tableDataSource.length > 0"
-            class="layui-table"
-            :class="{ 'layui-table-even': props.even }"
-            :lay-size="size"
-            :lay-skin="skin"
-          >
+        <div class="layui-table-body layui-table-main" :style="{ height: height, maxHeight: maxHeight }"
+          ref="tableBody">
+          <table v-if="tableDataSource.length > 0" class="layui-table" :class="{ 'layui-table-even': props.even }"
+            :lay-size="size" :lay-skin="skin">
             <colgroup>
-              <template
-                v-for="(column, columnIndex) in columns"
-                :key="columnIndex"
-              >
+              <template v-for="(column, columnIndex) in columns" :key="columnIndex">
                 <template v-if="tableColumnKeys.includes(column.key)">
-                  <col
-                    :width="column.width"
-                    :style="{
-                      minWidth: column.minWidth ? column.minWidth : '50px',
-                    }"
-                  />
+                  <col :width="column.width" :style="{
+                    minWidth: column.minWidth ? column.minWidth : '50px',
+                  }" />
                 </template>
               </template>
             </colgroup>
             <tbody>
               <!-- 渲染 -->
               <template v-for="(data, index) in tableDataSource" :key="index">
-                <table-row
-                  :id="id"
-                  :index="index"
-                  :data="data"
-                  :columns="columns"
-                  :indent-size="indentSize"
-                  :currentIndentSize="currentIndentSize"
-                  :tableColumnKeys="tableColumnKeys"
-                  :expandSpace="childrenExpandSpace"
-                  :expandIndex="expandIndex"
-                  :cellStyle="cellStyle"
-                  :cellClassName="cellClassName"
-                  :rowStyle="rowStyle"
-                  :rowClassName="rowClassName"
-                  :spanMethod="spanMethod"
-                  :defaultExpandAll="defaultExpandAll"
-                  @row="rowClick"
-                  @row-double="rowDoubleClick"
-                  @row-contextmenu="rowContextmenu"
-                  v-model:expandKeys="tableExpandKeys"
-                  v-model:selectedKeys="tableSelectedKeys"
-                  v-model:selectedKey="tableSelectedKey"
-                >
+                <table-row :id="id" :index="index" :data="data" :columns="columns" :indent-size="indentSize"
+                  :currentIndentSize="currentIndentSize" :tableColumnKeys="tableColumnKeys"
+                  :expandSpace="childrenExpandSpace" :expandIndex="expandIndex" :cellStyle="cellStyle"
+                  :cellClassName="cellClassName" :rowStyle="rowStyle" :rowClassName="rowClassName"
+                  :spanMethod="spanMethod" :defaultExpandAll="defaultExpandAll" @row="rowClick"
+                  @row-double="rowDoubleClick" @row-contextmenu="rowContextmenu" v-model:expandKeys="tableExpandKeys"
+                  v-model:selectedKeys="tableSelectedKeys" v-model:selectedKey="tableSelectedKey">
                   <template v-for="name in slotsData" #[name]="{ data }">
                     <slot :name="name" :data="data"></slot>
                   </template>
@@ -616,10 +547,7 @@ const renderTotalRowCell = (column: any) => {
                 </table-row>
               </template>
               <tr v-if="hasTotalRow" class="layui-table-total">
-                <template
-                  v-for="(column, columnIndex) in columns"
-                  :key="columnIndex"
-                >
+                <template v-for="(column, columnIndex) in columns" :key="columnIndex">
                   <template v-if="tableColumnKeys.includes(column.key)">
                     <td>{{ renderTotalRowCell(column) }}</td>
                   </template>
@@ -631,15 +559,8 @@ const renderTotalRowCell = (column: any) => {
         </div>
       </div>
       <div v-if="page" class="layui-table-page">
-        <lay-page
-          show-page
-          show-skip
-          show-limit
-          :total="page.total"
-          :limit="page.limit"
-          v-model="page.current"
-          @jump="change"
-        >
+        <lay-page show-page show-skip show-limit :total="page.total" :limit="page.limit" v-model="page.current"
+          @jump="change">
           <template #prev>
             <lay-icon type="layui-icon-left" />
           </template>

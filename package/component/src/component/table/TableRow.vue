@@ -84,9 +84,7 @@ const tableSelectedKey: WritableComputedRef<Recordable[]> = computed({
 
 const isExpand: WritableComputedRef<any> = computed({
   get() {
-    return tableExpandAll.value
-      ? true
-      : tableExpandKeys.value.includes(props.data[props.id]);
+    return tableExpandAll.value ? true : tableExpandKeys.value.includes(props.data[props.id]);
   },
   set(val) {
     let newTableExpandKeys = [...tableExpandKeys.value];
