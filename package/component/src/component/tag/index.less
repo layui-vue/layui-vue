@@ -1,125 +1,188 @@
-@tag-size-default: 24px;
-@tag-size-default-font-size: 12px;
-@tag-size-lg: @tag-size-default + 2px;
-@tag-size-md: @tag-size-default;
-@tag-size-sm: @tag-size-default - 2px;
-@tag-size-xs: @tag-size-default - 2px * 2;
-@tag-size-lg-font-size: @tag-size-default-font-size + 2px;
-@tag-size-md-font-size: @tag-size-default-font-size;
-@tag-size-sm-font-size: @tag-size-default-font-size - 2px;
-@tag-size-xs-font-size: @tag-size-default-font-size - 2px * 2;
-@tag-border-width: 1px;
+ @tagColors: {
+   default: #EEE;
+   red: #ff5722;
+   orange: #ffb800;
+   green: #009688;
+   cyan: #2f4056;
+   blue: #1e9fff;
+   black: #000000;
+   gray: #808080;
+ }
 
-.layui-tag {
-  display: inline-flex;
-  align-items: center;
-  vertical-align: middle;
-  box-sizing: border-box;
-  height: @tag-size-md;
-  line-height: @tag-size-md - @tag-border-width * 2;
-  padding: 0 6px;
-  font-size: @tag-size-md-font-size;
-  font-weight: 500;
-  color: currentColor;
-  border-width: @tag-border-width;
-  border-style: solid;
-  border-color: transparent;
-  border-radius: var(--global-border-radius);
+ @tag-size-default: 24px;
+ @tag-size-default-font-size: 12px;
+ @tag-size-lg: @tag-size-default + 2px;
+ @tag-size-md: @tag-size-default;
+ @tag-size-sm: @tag-size-default - 2px;
+ @tag-size-xs: @tag-size-default - 2px * 2;
+ @tag-size-lg-font-size: @tag-size-default-font-size + 2px;
+ @tag-size-md-font-size: @tag-size-default-font-size;
+ @tag-size-sm-font-size: @tag-size-default-font-size - 2px;
+ @tag-size-xs-font-size: @tag-size-default-font-size - 2px * 2;
+ @tag-border-width: 1px;
 
-  &-icon {
-    margin-right: 4px;
-  }
+ .layui-tag {
+   display: inline-flex;
+   align-items: center;
+   vertical-align: middle;
+   box-sizing: border-box;
+   height: @tag-size-md;
+   line-height: @tag-size-md - @tag-border-width * 2;
+   padding: 0 6px;
+   font-size: @tag-size-md-font-size;
+   font-weight: 500;
+   color: currentColor;
+   border-width: @tag-border-width;
+   border-style: solid;
+   border-color: transparent;
+   border-radius: var(--global-border-radius);
 
-  &-bordered {
-    border-color: var(--global-neutral-color-5);
-  }
+   &-checkable {
+     cursor: pointer;
+   }
 
-  &-disabled {
-    opacity: 0.4;
-    cursor: not-allowed;
+   &-checkable:hover {
+     opacity: 0.7;
+   }
 
-    & .layui-tag-close-icon {
-      .layui-icon {
+   &-checked {
+     background-color: darken(red, 10%) !important;
+   }
 
-        &:hover {
-          cursor: not-allowed !important;
-          opacity: 1;
-        }
-      }
-    }
-  }
+   &-icon {
+     margin-right: 4px;
+   }
 
-  &-shap {
-    &-square {
-      border-radius: var(--global-border-radius);
-    }
+   &-bordered {
+     border-color: var(--global-neutral-color-5);
+   }
 
-    &-round {
-      border-radius: 12px;
-    }
-  }
+   &-disabled {
+     opacity: 0.4;
+     cursor: not-allowed;
+   }
 
-  &-ellipsis {
-    .layui-tag-text {
-      display: inline-block;
-      white-space: nowrap;
-      word-wrap: normal;
-      overflow: hidden;
-      text-overflow: ellipsis
-    }
+   &-disabled &-close-icon {
+     .layui-icon {
 
-  }
+       &:hover {
+         cursor: not-allowed !important;
+         opacity: 1;
+       }
+     }
+   }
 
-  &-size-lg {
-    height: @tag-size-lg;
-    font-size: @tag-size-lg-font-size;
-    line-height: @tag-size-lg - @tag-border-width * 2;
+   &-shap {
+     &-square {
+       border-radius: var(--global-border-radius);
+     }
 
-    .layui-icon {
-      font-size: @tag-size-lg-font-size - 2px;
-    }
-  }
+     &-round {
+       border-radius: 12px;
+     }
+   }
 
-  &-size-md {
-    height: @tag-size-md;
-    font-size: @tag-size-md-font-size;
-    line-height: @tag-size-md - @tag-border-width * 2;
+   &-ellipsis &-text {
+     display: inline-block;
+     white-space: nowrap;
+     word-wrap: normal;
+     overflow: hidden;
+     text-overflow: ellipsis
+   }
 
-    .layui-icon {
-      font-size: @tag-size-md-font-size - 2px;
-    }
-  }
+   &-size-lg {
+     height: @tag-size-lg;
+     font-size: @tag-size-lg-font-size;
+     line-height: @tag-size-lg - @tag-border-width * 2;
 
-  &-size-sm {
-    height: @tag-size-sm;
-    font-size: @tag-size-sm-font-size;
-    line-height: @tag-size-sm - @tag-border-width * 2;
+     .layui-icon {
+       font-size: @tag-size-lg-font-size - 2px;
+     }
+   }
 
-    .layui-icon {
-      font-size: @tag-size-sm-font-size - 2px;
-    }
-  }
+   &-size-md {
+     height: @tag-size-md;
+     font-size: @tag-size-md-font-size;
+     line-height: @tag-size-md - @tag-border-width * 2;
 
-  &-size-xs {
-    height: @tag-size-xs;
-    font-size: @tag-size-xs-font-size;
-    line-height: @tag-size-xs - @tag-border-width * 2;
+     .layui-icon {
+       font-size: @tag-size-md-font-size - 2px;
+     }
+   }
 
-    .layui-icon {
-      font-size: @tag-size-xs-font-size - 2px;
-    }
-  }
+   &-size-sm {
+     height: @tag-size-sm;
+     font-size: @tag-size-sm-font-size;
+     line-height: @tag-size-sm - @tag-border-width * 2;
 
-  & &-close-icon {
-    margin-left: 4px;
-    font-size: @tag-size-default-font-size - 2px;
+     .layui-icon {
+       font-size: @tag-size-sm-font-size - 2px;
+     }
+   }
 
-    .layui-icon {
+   &-size-xs {
+     height: @tag-size-xs;
+     font-size: @tag-size-xs-font-size;
+     line-height: @tag-size-xs - @tag-border-width * 2;
 
-      &:hover {
-        cursor: pointer;
-        opacity: 0.5;
-      }
-    }
-  }
-}
+     .layui-icon {
+       font-size: @tag-size-xs-font-size - 2px;
+     }
+   }
+
+   & &-close-icon {
+     margin-left: 4px;
+     font-size: @tag-size-default-font-size - 2px;
+
+     .layui-icon {
+
+       &:hover {
+         cursor: pointer;
+         opacity: 0.5;
+       }
+     }
+   }
+
+   each(@tagColors, {
+     &-default {
+       &-color-@{key} {
+         color: #FFF;
+         background-color: @value;
+         border-color: transparent;
+       }
+
+       &-bordered-@{key} {
+         border-color: saturate(@value, 10%);
+       }
+
+       &-checked-color-@{key} {
+         background-color: darken(@value, 10%);
+       }
+
+     }
+
+     &-light {
+       &-color-@{key} {
+         color: @value;
+         background-color: fadeout(saturate(lighten(@value, 13%),5%),85%);
+         border-color: transparent;
+       }
+
+       &-bordered-@{key} {
+         border-color: fadeout(saturate(lighten(@value, 13%), 5%), 50%);
+       }
+     }
+
+     &-plain {
+       &-color-@{key} {
+         color: @value;
+         background-color: transparent;
+         border-color: @value;
+       }
+
+       &-bordered-@{key} {
+         border-color: @value;
+       }
+     }
+   })
+ }

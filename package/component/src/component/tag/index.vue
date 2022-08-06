@@ -16,16 +16,18 @@ export interface LayTagProps {
   bordered?: boolean;
   disabled?: boolean;
   shape?: "square" | "round";
-  maxWidth?: number | string;
+  maxWidth?: string;
+  variant?: "default" | "light" | "plain";
 }
 
 const props = withDefaults(defineProps<LayTagProps>(), {
   color: "#EEE",
   size: "md",
   shape: "square",
+  variant: "default",
 });
 
-const emit = defineEmits(["close"]);
+const emit = defineEmits(["close", "check", "update:checked"]);
 
 const isBuiltInColor = computed(
   () => props.color && TAG_COLORS.includes(props.color as any)
@@ -33,7 +35,6 @@ const isBuiltInColor = computed(
 const isCustomColor = computed(
   () => props.color && !TAG_COLORS.includes(props.color as any)
 );
-
 const visible = ref(true);
 
 const handleClose = (e: MouseEvent) => {
@@ -47,7 +48,9 @@ const classTag = computed(() => [
   `layui-tag-size-${props.size}`,
   `layui-tag-shap-${props.shape}`,
   {
-    [`layui-bg-${props.color}`]: isBuiltInColor,
+    [`layui-tag-${props.variant}-color-${props.color}`]: isBuiltInColor.value,
+    [`layui-tag-${props.variant}-bordered-${props.color}`]:
+      isBuiltInColor.value && props.bordered,
     "layui-tag-bordered": props.bordered,
     "layui-tag-disabled": props.disabled,
     "layui-tag-ellipsis": props.maxWidth,
@@ -57,12 +60,9 @@ const classTag = computed(() => [
 const styleTag = computed(() => [
   isCustomColor.value ? { backgroundColor: props.color } : {},
   {
-    "max-width": props.maxWidth ?? "unset"
+    "max-width": props.maxWidth ?? "unset",
   },
-]
-);
-
-
+]);
 </script>
 <template>
   <span v-if="visible" :class="classTag" :style="styleTag">
@@ -73,7 +73,11 @@ const styleTag = computed(() => [
       <slot />
     </span>
     <slot v-else />
-    <span v-if="closable" class="layui-tag-close-icon" @click.stop="handleClose">
+    <span
+      v-if="closable"
+      class="layui-tag-close-icon"
+      @click.stop="handleClose"
+    >
       <slot name="close-icon">
         <lay-icon type="layui-icon-close"></lay-icon>
       </slot>

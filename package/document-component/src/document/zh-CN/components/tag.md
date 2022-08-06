@@ -115,18 +115,53 @@
 ::: title 标签颜色
 :::
 
-::: demo 标签颜色,待优化。
+::: demo 标签颜色, 非内置颜色只支持默认样式, plain 默认有边框。
 
 <template>
+  <p>default:</p>
   <span v-for="color in TAG_COLORS">
   <lay-tag :color="color">Tag</lay-tag>
   &nbsp&nbsp
   </span>
-  <br><br>
+  &nbsp&nbsp&nbsp&nbsp
   <span v-for="color in TAG_COLORS">
-  <lay-tag :color="color" bordered>Tag</lay-tag>
+  <lay-tag :color="color" bordered closable>Tag</lay-tag>
   &nbsp&nbsp
   </span>
+  <br><br>
+  <p>light:</p>
+  <span v-for="color in TAG_COLORS">
+  <lay-tag :color="color" variant="light">Tag</lay-tag>
+  &nbsp&nbsp
+  </span>
+  &nbsp&nbsp&nbsp&nbsp
+  <span v-for="color in TAG_COLORS">
+  <lay-tag :color="color" variant="light" bordered closable>Tag</lay-tag>
+  &nbsp&nbsp
+  </span>
+  <br><br>
+  <p>plain:</p>
+  <span v-for="color in TAG_COLORS">
+  <lay-tag :color="color" variant="plain">Tag</lay-tag>
+  &nbsp&nbsp
+  </span>
+  &nbsp&nbsp&nbsp&nbsp
+  <span v-for="color in TAG_COLORS">
+  <lay-tag :color="color" variant="plain" bordered closable>Tag</lay-tag>
+  &nbsp&nbsp
+  </span>
+  <br><br>
+  <p>custom:</p>
+  <span v-for="color in COLORS">
+  <lay-tag :color="color" variant="plain">Tag</lay-tag>
+  &nbsp&nbsp
+  </span>
+  &nbsp&nbsp&nbsp&nbsp
+  <span v-for="color in COLORS">
+  <lay-tag :color="color" variant="plain" bordered closable>Tag</lay-tag>
+  &nbsp&nbsp
+  </span>
+  <br><br>
 </template>
 
 <script>
@@ -143,13 +178,18 @@ export default {
   "blue",
   "black",
   "gray",
+];
+
+const COLORS = [
   "#EEE",
-  "#5FB878",
-  "#FFB800",
+  "#67C23A",
+  "#0fc6c2",
+  "#165dff"
 ];
 
     return {
-      TAG_COLORS
+      TAG_COLORS,
+      COLORS
     }
   }
 }
@@ -286,7 +326,11 @@ export default {
 | size | 标签大小 | string | md | `lg` `md` `sm` `xs`|
 | color | 标签颜色 | string | `green`| `red` `orange` `green` `cyan` `blue` `black` `gray` `string` | 
 | bordered | 是否显示边框 | boolean | false | `true` `false`|
-| closable |  是否可关闭 | boolean | false | `true` `false`|
+| closable | 是否可关闭 | boolean | false | `true` `false`|
+| variant  | 标签风格  | string | `default` | `default` `light` `plain`|
+| disabled | 禁用标签  | boolean | false | `true` `false`|
+| shape    | 标签类型  | string | square | `square` `round`|
+| maxWidth | 标签最大宽度 | string| -- | --|
 
 :::
 
