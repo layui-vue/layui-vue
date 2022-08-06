@@ -424,6 +424,11 @@ const zhCN = [
             component: () => import("../document/zh-CN/components/tag.md"),
             meta: { title: "标签" },
           },
+          {
+            path: "/zh-CN/components/tagInput",
+            component: () => import("../document/zh-CN/components/tagInput.md"),
+            meta: { title: "标签" },
+          },
         ],
       },
     ],

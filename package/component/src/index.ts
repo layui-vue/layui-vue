@@ -89,6 +89,7 @@ import LayPageHeader from "./component/pageHeader/index";
 import LayCascader from "./component/cascader/index";
 import LayAffix from "./component/affix/index";
 import LayTag from "./component/tag/index";
+import LayTagInput from "./component/tagInput/index";
 import LayConfigProvider from "./provider";
 import { InstallOptions } from "./types";
 
@@ -176,6 +177,7 @@ const components: Record<string, Plugin> = {
   LayCascader,
   LayAffix,
   LayTag,
+  LayTagInput,
 };
 
 const install = (app: App, options?: InstallOptions): void => {
@@ -270,6 +272,7 @@ export {
   LayCascader,
   LayAffix,
   LayTag,
+  LayTagInput,
   install,
 };
 

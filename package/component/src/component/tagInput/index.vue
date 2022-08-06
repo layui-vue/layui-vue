@@ -1,6 +1,6 @@
 <script lang="ts">
 export default {
-  name: "LayInputTag",
+  name: "LayTagInput",
 };
 </script>
 <script lang="ts" setup>
