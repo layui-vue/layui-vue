@@ -425,6 +425,24 @@ const menus = [
       },
     ],
   },
+  {
+    id: 1,
+    title: "新特性",
+    children: [
+      {
+        id: 101,
+        title: "标签",
+        subTitle: "modal",
+        path: "/zh-CN/components/tag",
+      },
+      {
+        id: 102,
+        title: "标签输入",
+        subTitle: "load",
+        path: "/zh-CN/components/tagInput",
+      },
+    ],
+  },
 ];
 
 export default menus;

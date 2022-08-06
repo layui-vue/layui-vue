@@ -17,7 +17,7 @@
         <h3>1.3.14 <span class="layui-badge-rim">2022-08-06</span></h3> 
         <ul>     
           <li>[修复] button 组件 hover 状态无效果的问题。</li>
-          <li>[修复] table 组件 data-source 远程加载后 scroll 计算错误。 </li>
+          <li>[修复] table 组件 data-source 远程加载后 scroll 计算错误。</li>
         </ul>
       </li>
     </ul>
