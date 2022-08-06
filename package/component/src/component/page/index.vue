@@ -24,10 +24,6 @@ export interface LayPageProps {
   limits?: number[];
 }
 
-const slots = useSlots();
-
-const { t } = useI18n();
-
 const props = withDefaults(defineProps<LayPageProps>(), {
   limit: 10,
   theme: "green",
@@ -41,6 +37,9 @@ const props = withDefaults(defineProps<LayPageProps>(), {
   pages: 10,
   limits: () => [10, 20, 30, 40, 50],
 });
+
+const { t } = useI18n();
+const slots = useSlots();
 
 const limits = ref(props.limits);
 const pages = Math.floor(props.pages / 2);

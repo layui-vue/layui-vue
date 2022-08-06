@@ -58,7 +58,7 @@ const props = withDefaults(defineProps<LayTableProps>(), {
   childrenColumnName: "children",
   dataSource: () => [],
   selectedKeys: () => [],
-  selectedKey: '',
+  selectedKey: "",
   maxHeight: "auto",
   even: false,
   rowClassName: "",

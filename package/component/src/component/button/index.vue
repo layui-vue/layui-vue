@@ -22,6 +22,7 @@ export interface LayButtonProps {
   size?: ButtonSize;
   prefixIcon?: String;
   suffixIcon?: String;
+  loadingIcon?: String;
   border?: ButtonBorder;
   fluid?: BooleanOrString;
   radius?: BooleanOrString;
@@ -36,6 +37,7 @@ const props = withDefaults(defineProps<LayButtonProps>(), {
   radius: false,
   loading: false,
   disabled: false,
+  loadingIcon: "layui-icon-loading-one",
   nativeType: "button",
   borderStyle: "soild",
 });
@@ -79,7 +81,8 @@ const classes = computed(() => {
     <i v-if="prefixIcon" :class="`layui-icon ${prefixIcon}`"></i>
     <i
       v-if="loading"
-      class="layui-icon layui-icon-loading-one layui-anim layui-anim-rotate layui-anim-loop"
+      :class="loadingIcon"
+      class="layui-icon layui-anim layui-anim-rotate layui-anim-loop"
     ></i>
     <slot v-else></slot>
     <i v-if="suffixIcon" :class="`layui-icon ${suffixIcon}`"></i>

@@ -119,7 +119,7 @@ export default {
 ::: title 流式按钮
 :::
 
-::: demo 使用 `fluid` 属性, 创建最大化按钮
+::: demo 使用 `fluid` 属性, 使其适合父最大宽度
 
 <template>
   <lay-button type="primary" fluid="true">最大化按钮</lay-button>
@@ -266,6 +266,7 @@ export default {
 <template>
   <lay-button-container>
       <lay-button type="default" :loading="loadState">加载</lay-button>
+      <lay-button type="default" :loading="loadState" loadingIcon="layui-icon-loading">加载</lay-button>
       <lay-switch v-model="loadState"></lay-switch>
   </lay-button-container>
 </template>
@@ -320,19 +321,20 @@ export default {
 
 ::: table
 
-| 属性        | 描述     | 类型    | 默认值    | 可选值                             |
-| ----------- | -------- | ------- | --------- | ---------------------------------- |
-| type        | 主题     | string  | `primary` | `primary` `normal` `warm` `danger` |
-| size        | 尺寸     | string  | --        | `lg` `sm` `xs`                     |
-| fluid       | 最大化   | boolean | `false`   | `true` `false`                     |
-| radius      | 圆角     | boolean | `false`   | `true` `false`                     |
-| border      | 边框     | string  | `green`   | `green` `blue` `orange` `red`      |
-| border-style      | 边框样式    | string  | `soild`   | `soild` `dashed` `dotted`     |
-| disabled    | 禁用     | boolean | `false`   | `true` `false`                     |
-| loading     | 加载     | boolean | `false`   | `true` `false`                     |
-| native-type | 原生类型 | string  | `button`  | `button` `submit` `reset`          |
-| prefix-icon | 前置图标 | string  | --   | 内置 icon 集                     |
-| suffix-icon | 后置图标 | string  | --   | 内置 icon 集          |
+| 属性        | 描述     | 类型    | 默认值    | 可选值                             | 版本                             |
+| ----------- | -------- | ------- | --------- | ---------------------------------- | ---------------------------------- |
+| type        | 主题     | string  | `primary` | `primary` `normal` `warm` `danger` | -- |
+| size        | 尺寸     | string  | --        | `lg` `sm` `xs`                     | -- |
+| fluid       | 最大化   | boolean | `false`   | `true` `false`                     | -- |
+| radius      | 圆角     | boolean | `false`   | `true` `false`                     | -- |
+| border      | 边框     | string  | `green`   | `green` `blue` `orange` `red`      | -- |
+| border-style      | 边框样式    | string  | `soild`   | `soild` `dashed` `dotted` | -- |
+| disabled    | 禁用     | boolean | `false`   | `true` `false`                     | -- |
+| loading     | 加载     | boolean | `false`   | `true` `false`                     | -- |
+| native-type | 原生类型 | string  | `button`  | `button` `submit` `reset`          | -- |
+| prefix-icon | 前置图标 | string  | --   | 内置 icon 集                     | -- |
+| suffix-icon | 后置图标 | string  | --   | 内置 icon 集          | -- |
+| loading-icon | 后置图标 | string  | --   | 内置 icon 集          | `1.4.0` |
 
 :::
 
