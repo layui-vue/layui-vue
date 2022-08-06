@@ -149,10 +149,10 @@ export default {
 ::: title 自定义值
 :::
 
-::: demo
+::: demo 通过 onswitch-value 与 unswitch-value 属性, 设置不同状态的值。
 
 <template>
-  <lay-switch v-model="active6" onswitch-value="dark"  unswitch-value="light"></lay-switch>
+  <lay-switch v-model="active6" onswitch-value="dark" unswitch-value="light"></lay-switch>
 </template>
 
 <script>
@@ -203,6 +203,35 @@ export default {
 
 :::
 
+::: title 加载状态
+:::
+
+::: demo 通过 `loading` 与 `loading-icon` 属性, 开启加载状态与自定义加载图标。 
+
+<template>
+  <lay-switch v-model="active8" :loading="loading8"  :disabled="true"></lay-switch>
+  <lay-switch v-model="loading8" style='margin-left:10px'></lay-switch>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const active8 = ref(true)
+    const loading8 = ref(true)
+
+    return {
+        active8,
+        loading8
+    }
+  }
+}
+</script>
+
+:::
+
 ::: title Switch 属性
 :::
 
@@ -218,6 +247,8 @@ export default {
 | onswitch-value | 启用值       | `true`        |
 | unswitch-value | 禁用值       | `false`         |
 | size | 尺寸       | `lg` `md` `sm` `xs`         |
+| loading | 加载状态       | `true` `false`         |
+| loading-icon | 加载图标       | --         |
 
 :::
 
