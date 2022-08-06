@@ -34,7 +34,7 @@ export interface LayTableProps {
   columns: Recordable[];
   dataSource: Recordable[];
   defaultToolbar?: boolean;
-  selectedKey?: any;
+  selectedKey?: string;
   selectedKeys?: Recordable[];
   indentSize?: number;
   childrenColumnName?: string;
@@ -58,6 +58,7 @@ const props = withDefaults(defineProps<LayTableProps>(), {
   childrenColumnName: "children",
   dataSource: () => [],
   selectedKeys: () => [],
+  selectedKey: '',
   maxHeight: "auto",
   even: false,
   rowClassName: "",
@@ -117,7 +118,7 @@ watch(
   { deep: true }
 );
 
-const tableSelectedKey: WritableComputedRef<Recordable[]> = computed({
+const tableSelectedKey: WritableComputedRef<string> = computed({
   get() {
     return props.selectedKey;
   },
@@ -318,10 +319,10 @@ const getFixedColumn = () => {
       hasr.value = true;
     } else {
       // @ts-ignore
-      if (
-        tableBody.value?.scrollLeft + tableBody.value?.offsetWidth + 2 >
-        tableBody.value?.scrollWidth
-      ) {
+      const t = tableBody.value?.scrollLeft + tableBody.value?.offsetWidth + 2;
+      const s = tableBody.value?.scrollWidth;
+      // @ts-ignore
+      if (t > s) {
         hasl.value = true;
         hasr.value = false;
       } else {

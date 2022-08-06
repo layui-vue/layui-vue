@@ -20,7 +20,7 @@ export interface LayTableRowProps {
   expandSpace: boolean;
   expandIndex: number;
   selectedKeys: Recordable[];
-  selectedKey: any;
+  selectedKey: string;
   tableColumnKeys: Recordable[];
   childrenColumnName?: string;
   columns: Recordable[];
@@ -73,7 +73,7 @@ const tableSelectedKeys: WritableComputedRef<Recordable[]> = computed({
   },
 });
 
-const tableSelectedKey: WritableComputedRef<Recordable[]> = computed({
+const tableSelectedKey: WritableComputedRef<string> = computed({
   get() {
     return props.selectedKey;
   },
