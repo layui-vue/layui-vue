@@ -169,7 +169,6 @@ onMounted(() => {
 
 .layui-notice-bar {
   padding: 0 15px;
-  width: 100%;
   border-radius: 4px;
 }
 .layui-notice-bar .layui-notice-bar-warp {
@@ -186,6 +185,7 @@ onMounted(() => {
   overflow: hidden;
   position: relative;
 }
+
 .layui-notice-bar
   .layui-notice-bar-warp
   .layui-notice-bar-warp-text-box

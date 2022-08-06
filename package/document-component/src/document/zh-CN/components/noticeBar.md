@@ -13,7 +13,7 @@
 ::: demo
 
 <template>
-    <lay-notice-bar text="以写作为工具，为道途，先帮助自己一程，再以自己的领悟帮助他人一程, 这是一种服务 。" mode="link"></lay-notice-bar>
+    <lay-notice-bar text="以创造性的行为实践于人世。若能以写作为工具，为道途，先帮助自己一程，再以领悟帮助他人一程。这是一种服务。" mode="link"></lay-notice-bar>
 </template>
 
 <script>
@@ -34,7 +34,7 @@ export default {
 ::: demo
 
 <template>
-    <lay-notice-bar leftIcon="layui-icon-mute" text="最好的爱是两个人彼此做个伴，不要束缚，不要缠绕，不要占有，不渴望从对方那里得到，只是并肩站在一起，看看这个世界。"></lay-notice-bar>
+    <lay-notice-bar leftIcon="layui-icon-mute" text="以一颗冷静思辨的态度去看待这个物质浮躁的新时代，大环境，恰当处理自身与外界环境的矛盾，如何身心健康，自在的成为自己。"></lay-notice-bar>
 </template>
 
 <script>
@@ -55,7 +55,7 @@ export default {
 ::: demo
 
 <template>
-    <lay-notice-bar leftIcon="layui-icon-mute" rightIcon="layui-icon-close" text="所有发生过的都是既定的。是应该发生。只能发生。" mode="closeable" background="#ecf5ff"	></lay-notice-bar>
+    <lay-notice-bar leftIcon="layui-icon-mute" rightIcon="layui-icon-close" text="事情总是会自动变化。顺其自然就好。" mode="closeable" background="#ecf5ff"	></lay-notice-bar>
 </template>
 
 <script>

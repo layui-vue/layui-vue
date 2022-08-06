@@ -24,6 +24,7 @@ import LayDropdown from "../dropdown/index.vue";
 import LayPage from "../page/index.vue";
 import LayEmpty from "../empty/index.vue";
 import TableRow from "./TableRow.vue";
+import { nextTick } from "vue";
 
 export interface LayTableProps {
   id?: string;
@@ -88,6 +89,7 @@ const allChecked = ref(false);
 const hasChecked = ref(false);
 const tableDataSource = ref<any[]>([...props.dataSource]);
 const tableColumns = ref([...props.columns]);
+
 const tableColumnKeys = ref(
   props.columns.map((item: any) => {
     if (item.hide != true) {
@@ -128,6 +130,9 @@ watch(
   () => props.dataSource,
   () => {
     tableDataSource.value = [...props.dataSource];
+    nextTick(() => {
+      getScrollWidth();
+    });
   },
   { deep: true }
 );
@@ -270,8 +275,8 @@ const sortTable = (e: any, key: string, sort: string) => {
   }
 };
 
-let tableHeader = ref<HTMLElement | null>(null);
 let tableBody = ref<HTMLElement | null>(null);
+let tableHeader = ref<HTMLElement | null>(null);
 let scrollWidthCell = ref(0);
 
 const getScrollWidth = () => {
