@@ -20,6 +20,8 @@
   <lay-tag closable>tag</lay-tag>
   &nbsp&nbsp
   <lay-tag closable disabled>tag</lay-tag>
+    &nbsp&nbsp
+  <lay-tag closable max-width="120px" title="超过设置长度省略文本">超过设置长度省略文本</lay-tag>
 </template>
 
 <script>

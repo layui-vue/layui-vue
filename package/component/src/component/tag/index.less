@@ -12,7 +12,7 @@
 
 .layui-tag {
   display: inline-flex;
-  align-items: baseline;
+  align-items: center;
   vertical-align: middle;
   box-sizing: border-box;
   height: @tag-size-md;
@@ -58,11 +58,17 @@
       border-radius: 12px;
     }
   }
-&-ellipsis {
-  white-space: nowwrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-}
+
+  &-ellipsis {
+    .layui-tag-text {
+      display: inline-block;
+      white-space: nowrap;
+      word-wrap: normal;
+      overflow: hidden;
+      text-overflow: ellipsis
+    }
+
+  }
 
   &-size-lg {
     height: @tag-size-lg;
