@@ -1,0 +1,65 @@
+.layui-input-tag {
+  position: relative;
+  display: block;
+  padding: 0 5px;
+  height: auto;
+  overflow: hidden;
+
+  .layui-input-prefix {
+    display: inline;
+    text-align: left;
+    height: 100%;
+    flex: unset;
+  }
+
+  .layui-input-suffix{
+    position: absolute;
+    right: 3px;
+    bottom: 0;
+    height: 100%;
+  }
+
+  .layui-input {
+    display: inline-block;
+    padding-left: 0;
+    width: auto;
+    flex: 1;
+    max-width: 100%;
+    min-width: 12px;
+  }
+}
+
+.layui-input-tag-collapsed-panel,
+.layui-input-tag {
+  .layui-badge {
+    margin-right: 5px;
+    height: 28px;
+    line-height: 28px;
+    user-select: none;
+    white-space: pre-wrap;
+
+    .layui-icon {
+      font-size: 12px;
+      padding-left: 3px;
+
+      &:hover {
+        cursor: pointer;
+        color: #ff5722;
+      }
+    }
+  }
+}
+
+.layui-input-tag-collapsed-panel {
+  white-space: normal;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  width: fit-content;
+  max-width: 200px;
+  height: auto;
+  overflow: hidden;
+  .layui-badge{
+    margin-bottom: 4px;
+  }
+}

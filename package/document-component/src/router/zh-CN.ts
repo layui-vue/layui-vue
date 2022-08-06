@@ -419,6 +419,11 @@ const zhCN = [
             component: () => import("../document/zh-CN/components/photo.md"),
             meta: { title: "相册" },
           },
+          {
+            path: "/zh-CN/components/tag",
+            component: () => import("../document/zh-CN/components/tag.md"),
+            meta: { title: "标签" },
+          },
         ],
       },
     ],
