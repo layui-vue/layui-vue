@@ -2,6 +2,7 @@
 node_modules/
 package-lock.json
 package/document/dist/
+
 # Editor directories and files
 .idea
 .vscode
