@@ -24,7 +24,7 @@ import LayDropdown from "../dropdown/index.vue";
 import LayPage from "../page/index.vue";
 import LayEmpty from "../empty/index.vue";
 import TableRow from "./TableRow.vue";
-import { nextTick } from 'vue';
+import { nextTick } from "vue";
 
 export interface LayTableProps {
   id?: string;
@@ -132,7 +132,7 @@ watch(
     tableDataSource.value = [...props.dataSource];
     nextTick(() => {
       getScrollWidth();
-    })
+    });
   },
   { deep: true }
 );
