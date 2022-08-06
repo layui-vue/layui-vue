@@ -4,10 +4,10 @@
 ::: title 基础使用
 :::
 
-::: describe 默认为水平分割线
+::: describe 区分内容的分割线。
 :::
 
-::: demo 
+::: demo 默认为水平分割线
 
 <template>
   默认分割线
@@ -45,10 +45,7 @@ export default {
 ::: title 带内容的分割线
 :::
 
-::: describe 带内容的分割线，contentPosition 属性设置内容位置，offset 属性设置内容偏移量, 单位 <code>px</code> 或百分比值。也可以通过 <code>border-style</code>和<code>border-width</code>自定义样式
-:::
-
-::: demo 
+::: demo `contentPosition` 属性设置内容位置，`offset` 属性设置内容偏移量, 单位 `px` 或百分比值。也可以通过 `border-style` 和`border-width` 自定义样式
 
 <template>
   <lay-line>🌲 🌲 🌲 🌲</lay-line><br>
@@ -66,10 +63,7 @@ export default {
 ::: title 竖直分割线
 :::
 
-::: describe 设置 <code>direction = 'vertical'</code> 即可使用竖直分割线
-:::
-
-::: demo 
+::: demo 设置 `direction` = 'vertical' 即可使用竖直分割线
 
 <template>
   默认分割线
@@ -92,8 +86,6 @@ export default {
 </script>
 
 :::
-
-
 
 ::: title Line 属性
 :::
