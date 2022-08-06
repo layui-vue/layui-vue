@@ -34,6 +34,36 @@
     border-color: var(--global-neutral-color-5);
   }
 
+  &-disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+
+    & .layui-tag-close-icon {
+      .layui-icon {
+
+        &:hover {
+          cursor: not-allowed !important;
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  &-shap {
+    &-square {
+      border-radius: var(--global-border-radius);
+    }
+
+    &-round {
+      border-radius: 12px;
+    }
+  }
+&-ellipsis {
+  white-space: nowwrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
   &-size-lg {
     height: @tag-size-lg;
     font-size: @tag-size-lg-font-size;
@@ -82,6 +112,7 @@
 
       &:hover {
         cursor: pointer;
+        opacity: 0.5;
       }
     }
   }

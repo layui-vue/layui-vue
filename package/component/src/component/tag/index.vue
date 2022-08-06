@@ -14,13 +14,14 @@ export interface LayTagProps {
   closable?: boolean;
   size?: string;
   bordered?: boolean;
+  disabled?: boolean;
+  shape?: "square" | "round";
 }
 
 const props = withDefaults(defineProps<LayTagProps>(), {
-  color: "green",
+  color: "#EEE",
   size: "md",
-  closable: false,
-  bordered: false,
+  shape: "square"
 });
 
 const emit = defineEmits(["close"]);
@@ -35,6 +36,7 @@ const isCustomColor = computed(
 const visible = ref(true);
 
 const handleClose = (e: MouseEvent) => {
+  if(props.disabled) return;
   //visible.value = false;
   emit("close", e);
 };
@@ -42,9 +44,11 @@ const handleClose = (e: MouseEvent) => {
 const classTag = computed(() => [
   "layui-tag",
   `layui-tag-size-${props.size}`,
+  `layui-tag-shap-${props.shape}`,
   {
     [`layui-bg-${props.color}`]: isBuiltInColor,
     "layui-tag-bordered": props.bordered,
+    "layui-tag-disabled": props.disabled,
   },
 ]);
 

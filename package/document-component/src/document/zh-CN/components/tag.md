@@ -18,6 +18,8 @@
   <lay-tag bordered color="#FFF">tag</lay-tag>
   &nbsp&nbsp
   <lay-tag closable>tag</lay-tag>
+  &nbsp&nbsp
+  <lay-tag closable disabled>tag</lay-tag>
 </template>
 
 <script>
