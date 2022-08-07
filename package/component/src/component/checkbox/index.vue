@@ -125,8 +125,7 @@ const isDisabled = computed(() => {
     >
       <span class="layui-checkbox-label">
         <slot>{{ label }}</slot>
-      </span
-      >
+      </span>
       <lay-icon
         :type="
           props.isIndeterminate && isChecked
