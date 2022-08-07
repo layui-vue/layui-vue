@@ -515,9 +515,9 @@ export default {
 
 <template>
   <lay-form>
-    <lay-radio v-model="skin1" name="action" value="line">sm</lay-radio>
-    <lay-radio v-model="skin1" name="action" value="nob">md</lay-radio>
-    <lay-radio v-model="skin1" name="action" value="row">lg</lay-radio>
+    <lay-radio v-model="skin1" name="action" value="line">line</lay-radio>
+    <lay-radio v-model="skin1" name="action" value="nob">nob</lay-radio>
+    <lay-radio v-model="skin1" name="action" value="row">row</lay-radio>
   </lay-form>
   <lay-table :columns="columns1" :data-source="dataSource1" :skin="skin1"></lay-table>
 </template>
