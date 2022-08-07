@@ -116,15 +116,16 @@ const isDisabled = computed(() => {
   <span @click.stop="handleClick" class="layui-checkbox" :size="size">
     <input type="checkbox" :name="name" :value="value" />
     <div
-      class="layui-unselect layui-form-checkbox"
+      class="layui-form-checkbox"
       :class="{
         'layui-form-checked': isChecked,
         'layui-checkbox-disabled layui-disabled': isDisabled,
       }"
       :lay-skin="skin"
     >
-      <span class="layui-checkbox-label"
-        ><slot>{{ label }}</slot></span
+      <span class="layui-checkbox-label">
+        <slot>{{ label }}</slot>
+      </span
       >
       <lay-icon
         :type="

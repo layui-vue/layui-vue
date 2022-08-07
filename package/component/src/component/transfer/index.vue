@@ -199,7 +199,7 @@ const boxStyle = computed(() => {
             value="all"
             @change="allLeftChange"
           >
-            <span>{{ title[0] }}</span>
+            {{ title[0] }}
           </LayCheckbox>
         </div>
         <div class="layui-transfer-search" v-if="showSearch">
@@ -217,7 +217,7 @@ const boxStyle = computed(() => {
               :value="dataSource[id]"
             >
               <slot v-if="slots.item" name="item" :data="dataSource"></slot>
-              <span v-else>{{ dataSource.title }}</span>
+              <template v-else>{{ dataSource.title }}</template>
             </LayCheckbox>
           </li>
         </ul>
@@ -250,7 +250,7 @@ const boxStyle = computed(() => {
             value="all"
             @change="allRightChange"
           >
-            <span>{{ title[1] }}</span>
+            {{ title[1] }}
           </LayCheckbox>
         </div>
         <div class="layui-transfer-search" v-if="showSearch">
@@ -268,7 +268,7 @@ const boxStyle = computed(() => {
               :value="dataSource[id]"
             >
               <slot v-if="slots.item" name="item" :data="dataSource"></slot>
-              <span v-else>{{ dataSource.title }}</span>
+              <template v-else>{{ dataSource.title }}</template>
             </LayCheckbox>
           </li>
         </ul>

@@ -13,19 +13,21 @@ export interface LayPageProps {
   total: number;
   limit: number;
   theme?: string;
-  modelValue?: number;
-  showPage?: boolean | string;
-  showSkip?: boolean | string;
-  showCount?: boolean | string;
-  showLimit?: boolean | string;
-  showInput?: boolean | string;
-  showRefresh?: boolean | string;
+  showPage?: boolean;
+  showSkip?: boolean;
+  showCount?: boolean;
+  showLimit?: boolean;
+  showInput?: boolean;
+  showRefresh?: boolean;
   pages?: number;
   limits?: number[];
+  modelValue?: number;
 }
 
 const props = withDefaults(defineProps<LayPageProps>(), {
   limit: 10,
+  pages: 10,
+  modelValue: 1,
   theme: "green",
   showPage: false,
   showSkip: false,
@@ -33,8 +35,6 @@ const props = withDefaults(defineProps<LayPageProps>(), {
   showLimit: true,
   showInput: false,
   showRefresh: false,
-  modelValue: 1,
-  pages: 10,
   limits: () => [10, 20, 30, 40, 50],
 });
 

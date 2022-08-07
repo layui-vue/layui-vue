@@ -79,11 +79,14 @@ const styles = computed(() => {
       <span>
         <div>
           <template v-if="loading">
-            <i class="layui-icon layui-anim layui-anim-rotate layui-anim-loop" :class="loadingIcon"></i>
+            <i
+              class="layui-icon layui-anim layui-anim-rotate layui-anim-loop"
+              :class="loadingIcon"
+            ></i>
           </template>
           <template v-else>
-              <slot v-if="isActive" name="onswitch-icon"></slot>
-              <slot v-else name="unswitch-icon"></slot>
+            <slot v-if="isActive" name="onswitch-icon"></slot>
+            <slot v-else name="unswitch-icon"></slot>
           </template>
         </div>
       </span>
