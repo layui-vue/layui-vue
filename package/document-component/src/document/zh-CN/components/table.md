@@ -1169,7 +1169,7 @@ export default {
 ::: demo 通过 `span-method` 属性, 自定义行列合并的逻辑。
 
 <template>
-  <lay-table :columns="columns27" :data-source="dataSource27"></lay-table>
+  <lay-table :columns="columns29" :data-source="dataSource29"></lay-table>
 </template>
 
 <script>
@@ -1178,7 +1178,7 @@ import { ref } from 'vue'
 export default {
   setup() {
 
-    const columns27 = [
+    const columns29 = [
       {
         title:"名称",
         width:"200px",
@@ -1188,6 +1188,7 @@ export default {
         children: [
           { title: "省", key: "province", width: "300px", },
           { title: "市", key: "city", width: "300px", },
+          { title: "区", key: "area", width: "300px", },
         ]
       },{
         title:"性别",
@@ -1204,17 +1205,17 @@ export default {
       }
     ]
 
-    const dataSource27 = [
-      {id:"1",username:"root",province:"山东",city:"济南", password:"root",sex:"男", age:"18", remark: 'layui - vue（谐音：类 UI) '},
-      {id:"2",username:"root",province:"山东",city:"济南", password:"root",sex:"男", age:"18", remark: 'layui - vue（谐音：类 UI) '},
-      {id:"3",username:"woow",province:"山东",city:"济南", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '},
-      {id:"4",username:"woow",province:"山东",city:"济南", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '},
-      {id:"5",username:"woow",province:"山东",city:"济南", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '}
+    const dataSource29 = [
+      {id:"1",username:"就眠儀式",province:"山东",city:"济南",area: "高新区", password:"root",sex:"男", age:"18", remark: 'layui - vue（谐音：类 UI) '},
+      {id:"2",username:"就眠儀式",province:"山东",city:"济南",area: "高新区", password:"root",sex:"男", age:"18", remark: 'layui - vue（谐音：类 UI) '},
+      {id:"3",username:"就眠儀式",province:"山东",city:"济南",area: "高新区", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '},
+      {id:"4",username:"就眠儀式",province:"山东",city:"济南",area: "高新区", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '},
+      {id:"5",username:"就眠儀式",province:"山东",city:"济南",area: "高新区", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '}
     ]
 
     return {
-      columns27,
-      dataSource27,
+      columns29,
+      dataSource29,
     }
   }
 }

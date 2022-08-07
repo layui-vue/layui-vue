@@ -91,53 +91,101 @@ const hasChecked = ref(false);
 const tableDataSource = ref<any[]>([...props.dataSource]);
 const tableColumns = computed(() => {
   return [...props.columns];
-})
+});
 
-const tableHeadColumns = ref<any[]>([])
-const tableBodyColumns = ref<any[]>([])
+const tableHeadColumns = ref<any[]>([]);
+const tableBodyColumns = ref<any[]>([]);
+
+const getLevel = (arr: any[]) => {
+  let maxLevel = 0;
+  (function callBack(arr, level) {
+    ++level;
+    maxLevel = Math.max(level, maxLevel);
+    for (let i = 0; i < arr.length; i++) {
+      let item = arr[i];
+      if (item.children && item.children.length > 0) {
+        callBack(item.children, level);
+      } else {
+        delete item.children;
+      }
+    }
+  })(arr, 0);
+  return maxLevel;
+};
+
+function getLeafCountTree(json: any) {
+  if (!json.children || json.children.length == 0) {
+    json.colspan = 1;
+    return 1;
+  } else {
+    var leafCount = 0;
+    for (var i = 0; i < json.children.length; i++) {
+      leafCount = leafCount + getLeafCountTree(json.children[i]);
+    }
+    json.colspan = leafCount;
+    return leafCount;
+  }
+}
 
 const findFindNode = (columns: any[]) => {
   columns.forEach((column) => {
-    if(column.children) {
+    if (column.children) {
       findFindNode(column.children);
     } else {
       tableBodyColumns.value.push(column);
     }
-  })
-}
+  });
+};
 
-findFindNode(tableColumns.value)
+findFindNode(tableColumns.value);
 
 const tableColumnKeys = ref<any[]>([]);
 
 const findFindNodes = (columns: any[]) => {
   columns.forEach((column) => {
-    if(column.children) {
+    if (column.children) {
       findFindNodes(column.children);
     } else {
-      if(!column.hide) {
+      if (!column.hide) {
         tableColumnKeys.value.push(column.key);
       }
     }
-  })
-}
+  });
+};
 
-findFindNodes(tableColumns.value)
+findFindNodes(tableColumns.value);
 
 /**
  * 处理为复杂表头, 待完成
- * 
- * @param level 层级, 用于决定会被 push 到的目标数组 
+ *
+ * @param level 层级, 用于决定会被 push 到的目标数组
  */
 const findFinalNode = (level: number, columns: any[]) => {
-  columns.forEach(column => {
-    if(column.children) {
-     // 设置 rowspan 
+  columns.forEach((column) => {
+    if (column.children) {
+      // 设置 colspan
+      const colSpan = getLeafCountTree(column);
+      column.colspan = colSpan;
+      column.rowspan = 1;
+      if (!tableHeadColumns.value[level]) {
+        tableHeadColumns.value[level] = [];
+      }
+      tableHeadColumns.value[level].push(column);
+      findFinalNode(level + 1, column.children);
     } else {
-     // 设置 colspan
+      // 设置 rowspan
+      const rowSpan = getLevel(columns);
+      column.rowspan = rowSpan;
+      column.colspan = 1;
+      if (!tableHeadColumns.value[level]) {
+        tableHeadColumns.value[level] = [];
+      }
+      tableHeadColumns.value[level].push(column);
     }
-  })
-}
+  });
+};
+
+findFinalNode(0, tableColumns.value);
 
 const tableSelectedKeys = ref<Recordable[]>([...props.selectedKeys]);
 const tableExpandKeys = ref<Recordable[]>([...props.expandKeys]);
@@ -538,71 +586,80 @@ const renderTotalRowCell = (column: any) => {
                 </template>
               </colgroup>
               <thead>
-                <tr>
-                  <template
-                    v-for="(column, columnIndex) in columns"
-                    :key="column"
-                  >
-                    <th
-                      v-if="tableColumnKeys.includes(column.key)"
-                      class="layui-table-cell"
-                      :class="[
-                        renderFixedClassName(column, columnIndex),
-                        column.fixed ? `layui-table-fixed-${column.fixed}` : '',
-                        column.type == 'checkbox'
-                          ? 'layui-table-cell-checkbox'
-                          : '',
-                        column.type == 'radio' ? 'layui-table-cell-radio' : '',
-                        column.type == 'number'
-                          ? 'layui-table-cell-number'
-                          : '',
-                      ]"
-                      :style="[
-                        {
-                          textAlign: column.align,
-                        },
-                        renderFixedStyle(column, columnIndex),
-                      ]"
+                <template v-for="(tableHeadColumn, tableHeadColumnIndex) in tableHeadColumns" :key="tableHeadColumnIndex">
+                  <tr>
+                    <template
+                      v-for="(column, columnIndex) in tableHeadColumn"
+                      :key="column"
                     >
-                      <template v-if="column.type == 'checkbox'">
-                        <lay-checkbox
-                          v-model="hasChecked"
-                          :is-indeterminate="!allChecked"
-                          skin="primary"
-                          value="all"
-                          @change="changeAll"
-                        />
-                      </template>
-                      <template v-else>
-                        <span>
-                          <template v-if="column.titleSlot">
-                            <slot :name="column.titleSlot"></slot>
-                          </template>
-                          <template v-else>
-                            {{ column.title }}
-                          </template>
-                        </span>
-                        <!-- 插槽 -->
-                        <span
-                          v-if="column.sort"
-                          class="layui-table-sort layui-inline"
-                          lay-sort
-                        >
-                          <i
-                            @click.stop="sortTable($event, column.key, 'asc')"
-                            class="layui-edge layui-table-sort-asc"
-                            title="升序"
-                          ></i>
-                          <i
-                            @click.stop="sortTable($event, column.key, 'desc')"
-                            class="layui-edge layui-table-sort-desc"
-                            title="降序"
-                          ></i>
-                        </span>
-                      </template>
-                    </th>
-                  </template>
-                </tr>
+                      <th
+                        :colspan="column.colspan"
+                        :rowspan="column.rowspan"
+                        class="layui-table-cell"
+                        :class="[
+                          renderFixedClassName(column, columnIndex),
+                          column.fixed
+                            ? `layui-table-fixed-${column.fixed}`
+                            : '',
+                          column.type == 'checkbox'
+                            ? 'layui-table-cell-checkbox'
+                            : '',
+                          column.type == 'radio'
+                            ? 'layui-table-cell-radio'
+                            : '',
+                          column.type == 'number'
+                            ? 'layui-table-cell-number'
+                            : '',
+                        ]"
+                        :style="[
+                          {
+                            textAlign: column.align,
+                          },
+                          renderFixedStyle(column, columnIndex),
+                        ]"
+                      >
+                        <template v-if="column.type == 'checkbox'">
+                          <lay-checkbox
+                            v-model="hasChecked"
+                            :is-indeterminate="!allChecked"
+                            skin="primary"
+                            value="all"
+                            @change="changeAll"
+                          />
+                        </template>
+                        <template v-else>
+                          <span>
+                            <template v-if="column.titleSlot">
+                              <slot :name="column.titleSlot"></slot>
+                            </template>
+                            <template v-else>
+                              {{ column.title }}
+                            </template>
+                          </span>
+                          <!-- 插槽 -->
+                          <span
+                            v-if="column.sort"
+                            class="layui-table-sort layui-inline"
+                            lay-sort
+                          >
+                            <i
+                              @click.stop="sortTable($event, column.key, 'asc')"
+                              class="layui-edge layui-table-sort-asc"
+                              title="升序"
+                            ></i>
+                            <i
+                              @click.stop="
+                                sortTable($event, column.key, 'desc')
+                              "
+                              class="layui-edge layui-table-sort-desc"
+                              title="降序"
+                            ></i>
+                          </span>
+                        </template>
+                      </th>
+                    </template>
+                  </tr>
+                </template>
               </thead>
             </table>
           </div>
