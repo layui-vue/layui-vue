@@ -61,6 +61,7 @@ import LayDropdownSubMenu from "./component/dropdownSubMenu/index";
 import LayTab from "./component/tab/index";
 import LayTabItem from "./component/tabItem/index";
 import LayTree from "./component/tree/index";
+import LayTreeSelect from "./component/treeSelect/index";
 import LayTable from "./component/table/index";
 import LayPage from "./component/page/index";
 import LayTransfer from "./component/transfer/index";
@@ -148,6 +149,7 @@ const components: Record<string, Plugin> = {
   LayTabItem,
   LayIconPicker,
   LayTree,
+  LayTreeSelect,
   LayTable,
   LayPage,
   LayTransfer,
@@ -243,6 +245,7 @@ export {
   LayTabItem,
   LayIconPicker,
   LayTree,
+  LayTreeSelect,
   LayTable,
   LayPage,
   LayTransfer,

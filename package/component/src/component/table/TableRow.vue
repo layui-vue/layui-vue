@@ -265,215 +265,233 @@ const isAutoShow = (
   >
     <template v-for="(column, columnIndex) in columns" :key="columnIndex">
       <template v-if="tableColumnKeys.includes(column.key)">
-        <template v-if="column.type == 'radio'">
-          <td
-            class="layui-table-cell layui-table-cell-radio"
-            v-if="isAutoShow(data, column, index, columnIndex)"
-            :colspan="spanMethodAttr(data, column, index, columnIndex).colspan"
-            :rowspan="spanMethodAttr(data, column, index, columnIndex).rowspan"
-            :style="[
-              {
-                textAlign: column.align,
-                whiteSpace: column.ellipsisTooltip ? 'nowrap' : 'normal',
-              },
-              renderFixedStyle(column, columnIndex),
-              renderCellStyle(data, column, index, columnIndex),
-            ]"
-            :class="[
-              renderFixedClassName(column, columnIndex),
-              renderCellClassName(data, column, index, columnIndex),
-              column.fixed ? `layui-table-fixed-${column.fixed}` : '',
-            ]"
-          >
-            <span
-              v-if="expandSpace && columnIndex === expandIndex"
-              :style="{ 'margin-right': currentIndentSize + 'px' }"
-            ></span>
-
-            <span
-              v-if="
-                expandSpace &&
-                !data[childrenColumnName] &&
-                !slot.expand &&
-                columnIndex === expandIndex
+        <template v-if="column.type">
+          <template v-if="column.type == 'radio'">
+            <td
+              class="layui-table-cell layui-table-cell-radio"
+              v-if="isAutoShow(data, column, index, columnIndex)"
+              :colspan="
+                spanMethodAttr(data, column, index, columnIndex).colspan
               "
-              class="layui-table-cell-expand-icon-spaced"
-            ></span>
-
-            <lay-icon
-              v-if="
-                (slot.expand || data[childrenColumnName]) &&
-                columnIndex === expandIndex
+              :rowspan="
+                spanMethodAttr(data, column, index, columnIndex).rowspan
               "
-              class="layui-table-cell-expand-icon"
-              :type="expandIconType"
-              @click="handleExpand"
-            ></lay-icon>
-
-            <lay-radio v-model="tableSelectedKey" :value="data[id]" />
-          </td>
-        </template>
-
-        <template v-if="column.type == 'checkbox'">
-          <td
-            class="layui-table-cell layui-table-cell-checkbox"
-            v-if="isAutoShow(data, column, index, columnIndex)"
-            :colspan="spanMethodAttr(data, column, index, columnIndex).colspan"
-            :rowspan="spanMethodAttr(data, column, index, columnIndex).rowspan"
-            :style="[
-              {
-                textAlign: column.align,
-                whiteSpace: column.ellipsisTooltip ? 'nowrap' : 'normal',
-              },
-              renderFixedStyle(column, columnIndex),
-              renderCellStyle(data, column, index, columnIndex),
-            ]"
-            :class="[
-              renderFixedClassName(column, columnIndex),
-              renderCellClassName(data, column, index, columnIndex),
-              column.fixed ? `layui-table-fixed-${column.fixed}` : '',
-            ]"
-          >
-            <span
-              v-if="expandSpace && columnIndex === expandIndex"
-              :style="{ 'margin-right': currentIndentSize + 'px' }"
-            ></span>
-
-            <span
-              v-if="
-                expandSpace &&
-                !data[childrenColumnName] &&
-                !slot.expand &&
-                columnIndex === expandIndex
-              "
-              class="layui-table-cell-expand-icon-spaced"
-            ></span>
-
-            <lay-icon
-              v-if="
-                (slot.expand || data[childrenColumnName]) &&
-                columnIndex === expandIndex
-              "
-              class="layui-table-cell-expand-icon"
-              :type="expandIconType"
-              @click="handleExpand"
-            ></lay-icon>
-
-            <lay-checkbox
-              v-model="tableSelectedKeys"
-              :value="data[id]"
-              skin="primary"
-            />
-          </td>
-        </template>
-
-        <template v-if="column.type == 'number'">
-          <td
-            class="layui-table-cell layui-table-cell-number"
-            v-if="isAutoShow(data, column, index, columnIndex)"
-            :colspan="spanMethodAttr(data, column, index, columnIndex).colspan"
-            :rowspan="spanMethodAttr(data, column, index, columnIndex).rowspan"
-            :style="[
-              {
-                textAlign: column.align,
-                whiteSpace: column.ellipsisTooltip ? 'nowrap' : 'normal',
-              },
-              renderFixedStyle(column, columnIndex),
-              renderCellStyle(data, column, index, columnIndex),
-            ]"
-            :class="[
-              renderFixedClassName(column, columnIndex),
-              renderCellClassName(data, column, index, columnIndex),
-              column.fixed ? `layui-table-fixed-${column.fixed}` : '',
-            ]"
-          >
-            <span
-              v-if="expandSpace && columnIndex === expandIndex"
-              :style="{ 'margin-right': currentIndentSize + 'px' }"
-            ></span>
-
-            <span
-              v-if="
-                expandSpace &&
-                !data[childrenColumnName] &&
-                !slot.expand &&
-                columnIndex === expandIndex
-              "
-              class="layui-table-cell-expand-icon-spaced"
-            ></span>
-
-            <lay-icon
-              v-if="
-                (slot.expand || data[childrenColumnName]) &&
-                columnIndex === expandIndex
-              "
-              class="layui-table-cell-expand-icon"
-              :type="expandIconType"
-              @click="handleExpand"
-            ></lay-icon>
-
-            {{ index + 1 }}
-          </td>
-        </template>
-
-        <template v-if="column.customSlot">
-          <td
-            class="layui-table-cell"
-            v-if="isAutoShow(data, column, index, columnIndex)"
-            :colspan="spanMethodAttr(data, column, index, columnIndex).colspan"
-            :rowspan="spanMethodAttr(data, column, index, columnIndex).rowspan"
-            :style="[
-              {
-                textAlign: column.align,
-                whiteSpace: column.ellipsisTooltip ? 'nowrap' : 'normal',
-              },
-              renderFixedStyle(column, columnIndex),
-              renderCellStyle(data, column, index, columnIndex),
-            ]"
-            :class="[
-              renderFixedClassName(column, columnIndex),
-              renderCellClassName(data, column, index, columnIndex),
-              column.fixed ? `layui-table-fixed-${column.fixed}` : '',
-            ]"
-          >
-            <span
-              v-if="expandSpace && columnIndex === expandIndex"
-              :style="{ 'margin-right': currentIndentSize + 'px' }"
-            ></span>
-
-            <span
-              v-if="
-                expandSpace &&
-                !data[childrenColumnName] &&
-                !slot.expand &&
-                columnIndex === expandIndex
-              "
-              class="layui-table-cell-expand-icon-spaced"
-            ></span>
-
-            <lay-icon
-              v-if="
-                (slot.expand || data[childrenColumnName]) &&
-                columnIndex === expandIndex
-              "
-              class="layui-table-cell-expand-icon"
-              :type="expandIconType"
-              @click="handleExpand"
-            ></lay-icon>
-
-            <lay-tooltip
-              v-if="column.ellipsisTooltip"
-              :content="data[column.key]"
-              :isAutoShow="true"
+              :style="[
+                {
+                  textAlign: column.align,
+                  whiteSpace: column.ellipsisTooltip ? 'nowrap' : 'normal',
+                },
+                renderFixedStyle(column, columnIndex),
+                renderCellStyle(data, column, index, columnIndex),
+              ]"
+              :class="[
+                renderFixedClassName(column, columnIndex),
+                renderCellClassName(data, column, index, columnIndex),
+                column.fixed ? `layui-table-fixed-${column.fixed}` : '',
+              ]"
             >
-              <slot :name="column.customSlot" :data="data"></slot>
-            </lay-tooltip>
-            <slot v-else :name="column.customSlot" :data="data"></slot>
-          </td>
+              <span
+                v-if="expandSpace && columnIndex === expandIndex"
+                :style="{ 'margin-right': currentIndentSize + 'px' }"
+              ></span>
+
+              <span
+                v-if="
+                  expandSpace &&
+                  !data[childrenColumnName] &&
+                  !slot.expand &&
+                  columnIndex === expandIndex
+                "
+                class="layui-table-cell-expand-icon-spaced"
+              ></span>
+
+              <lay-icon
+                v-if="
+                  (slot.expand || data[childrenColumnName]) &&
+                  columnIndex === expandIndex
+                "
+                class="layui-table-cell-expand-icon"
+                :type="expandIconType"
+                @click="handleExpand"
+              ></lay-icon>
+
+              <lay-radio v-model="tableSelectedKey" :value="data[id]" />
+            </td>
+          </template>
+
+          <template v-if="column.type == 'checkbox'">
+            <td
+              class="layui-table-cell layui-table-cell-checkbox"
+              v-if="isAutoShow(data, column, index, columnIndex)"
+              :colspan="
+                spanMethodAttr(data, column, index, columnIndex).colspan
+              "
+              :rowspan="
+                spanMethodAttr(data, column, index, columnIndex).rowspan
+              "
+              :style="[
+                {
+                  textAlign: column.align,
+                  whiteSpace: column.ellipsisTooltip ? 'nowrap' : 'normal',
+                },
+                renderFixedStyle(column, columnIndex),
+                renderCellStyle(data, column, index, columnIndex),
+              ]"
+              :class="[
+                renderFixedClassName(column, columnIndex),
+                renderCellClassName(data, column, index, columnIndex),
+                column.fixed ? `layui-table-fixed-${column.fixed}` : '',
+              ]"
+            >
+              <span
+                v-if="expandSpace && columnIndex === expandIndex"
+                :style="{ 'margin-right': currentIndentSize + 'px' }"
+              ></span>
+
+              <span
+                v-if="
+                  expandSpace &&
+                  !data[childrenColumnName] &&
+                  !slot.expand &&
+                  columnIndex === expandIndex
+                "
+                class="layui-table-cell-expand-icon-spaced"
+              ></span>
+
+              <lay-icon
+                v-if="
+                  (slot.expand || data[childrenColumnName]) &&
+                  columnIndex === expandIndex
+                "
+                class="layui-table-cell-expand-icon"
+                :type="expandIconType"
+                @click="handleExpand"
+              ></lay-icon>
+
+              <lay-checkbox
+                v-model="tableSelectedKeys"
+                :value="data[id]"
+                skin="primary"
+              />
+            </td>
+          </template>
+
+          <template v-if="column.type == 'number'">
+            <td
+              class="layui-table-cell layui-table-cell-number"
+              v-if="isAutoShow(data, column, index, columnIndex)"
+              :colspan="
+                spanMethodAttr(data, column, index, columnIndex).colspan
+              "
+              :rowspan="
+                spanMethodAttr(data, column, index, columnIndex).rowspan
+              "
+              :style="[
+                {
+                  textAlign: column.align,
+                  whiteSpace: column.ellipsisTooltip ? 'nowrap' : 'normal',
+                },
+                renderFixedStyle(column, columnIndex),
+                renderCellStyle(data, column, index, columnIndex),
+              ]"
+              :class="[
+                renderFixedClassName(column, columnIndex),
+                renderCellClassName(data, column, index, columnIndex),
+                column.fixed ? `layui-table-fixed-${column.fixed}` : '',
+              ]"
+            >
+              <span
+                v-if="expandSpace && columnIndex === expandIndex"
+                :style="{ 'margin-right': currentIndentSize + 'px' }"
+              ></span>
+
+              <span
+                v-if="
+                  expandSpace &&
+                  !data[childrenColumnName] &&
+                  !slot.expand &&
+                  columnIndex === expandIndex
+                "
+                class="layui-table-cell-expand-icon-spaced"
+              ></span>
+
+              <lay-icon
+                v-if="
+                  (slot.expand || data[childrenColumnName]) &&
+                  columnIndex === expandIndex
+                "
+                class="layui-table-cell-expand-icon"
+                :type="expandIconType"
+                @click="handleExpand"
+              ></lay-icon>
+
+              {{ index + 1 }}
+            </td>
+          </template>
         </template>
 
         <template v-else>
-          <template v-if="column.key in data">
+          <template v-if="column.customSlot">
+            <td
+              class="layui-table-cell"
+              v-if="isAutoShow(data, column, index, columnIndex)"
+              :colspan="
+                spanMethodAttr(data, column, index, columnIndex).colspan
+              "
+              :rowspan="
+                spanMethodAttr(data, column, index, columnIndex).rowspan
+              "
+              :style="[
+                {
+                  textAlign: column.align,
+                  whiteSpace: column.ellipsisTooltip ? 'nowrap' : 'normal',
+                },
+                renderFixedStyle(column, columnIndex),
+                renderCellStyle(data, column, index, columnIndex),
+              ]"
+              :class="[
+                renderFixedClassName(column, columnIndex),
+                renderCellClassName(data, column, index, columnIndex),
+                column.fixed ? `layui-table-fixed-${column.fixed}` : '',
+              ]"
+            >
+              <span
+                v-if="expandSpace && columnIndex === expandIndex"
+                :style="{ 'margin-right': currentIndentSize + 'px' }"
+              ></span>
+
+              <span
+                v-if="
+                  expandSpace &&
+                  !data[childrenColumnName] &&
+                  !slot.expand &&
+                  columnIndex === expandIndex
+                "
+                class="layui-table-cell-expand-icon-spaced"
+              ></span>
+
+              <lay-icon
+                v-if="
+                  (slot.expand || data[childrenColumnName]) &&
+                  columnIndex === expandIndex
+                "
+                class="layui-table-cell-expand-icon"
+                :type="expandIconType"
+                @click="handleExpand"
+              ></lay-icon>
+
+              <lay-tooltip
+                v-if="column.ellipsisTooltip"
+                :content="data[column.key]"
+                :isAutoShow="true"
+              >
+                <slot :name="column.customSlot" :data="data"></slot>
+              </lay-tooltip>
+              <slot v-else :name="column.customSlot" :data="data"></slot>
+            </td>
+          </template>
+
+          <template v-else>
             <td
               class="layui-table-cell"
               v-if="isAutoShow(data, column, index, columnIndex)"

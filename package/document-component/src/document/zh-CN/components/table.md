@@ -1163,6 +1163,65 @@ export default {
 
 :::
 
+::: title 复杂表头
+:::
+
+::: demo 通过 `span-method` 属性, 自定义行列合并的逻辑。
+
+<template>
+  <lay-table :columns="columns27" :data-source="dataSource27"></lay-table>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const columns27 = [
+      {
+        title:"名称",
+        width:"200px",
+        key:"username"
+      },{
+        title:"地址",
+        children: [
+          { title: "省", key: "province", width: "300px", },
+          { title: "市", key: "city", width: "300px", },
+        ]
+      },{
+        title:"性别",
+        key:"sex"
+      },{
+        title:"年龄",
+        width: "300px",
+        key:"age"
+      },{
+        title:"备注",
+        width: "180px",
+        key:"remark",
+        ellipsisTooltip: true
+      }
+    ]
+
+    const dataSource27 = [
+      {id:"1",username:"root",province:"山东",city:"济南", password:"root",sex:"男", age:"18", remark: 'layui - vue（谐音：类 UI) '},
+      {id:"2",username:"root",province:"山东",city:"济南", password:"root",sex:"男", age:"18", remark: 'layui - vue（谐音：类 UI) '},
+      {id:"3",username:"woow",province:"山东",city:"济南", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '},
+      {id:"4",username:"woow",province:"山东",city:"济南", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '},
+      {id:"5",username:"woow",province:"山东",city:"济南", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '}
+    ]
+
+    return {
+      columns27,
+      dataSource27,
+    }
+  }
+}
+</script>
+
+:::
+
 ::: title 完整表格
 :::
 
@@ -1237,12 +1296,12 @@ export default {
     ]
 
     const dataSource5 = [
-      {id:"1", name:"小明",birthday: '2022-02-09', hide: "你看不见我", age:"18",remark: 'layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.'},
-      {id:"2", name:"小红",birthday: '2022-02-09', hide: "你看不见我", age:"20",remark: 'layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.'},
-      {id:"3", name:"小刚",birthday: '2022-02-09', hide: "你看不见我", age:"20",remark: 'layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.'},
-      {id:"4", name:"小李",birthday: '2022-02-09', hide: "你看不见我", age:"20",remark: 'layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.'},
-      {id:"5", name:"小柏",birthday: '2022-02-09', hide: "你看不见我", age:"20",remark: 'layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.'},
-      {id:"6", name:"小吉",birthday: '2022-02-09', hide: "你看不见我", age:"20",remark: 'layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.'}
+      {id:"1", name:"小明", age:"18",remark: 'layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.'},
+      {id:"2", name:"小红", age:"20",remark: 'layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.'},
+      {id:"3", name:"小刚", age:"20",remark: 'layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.'},
+      {id:"4", name:"小李", age:"20",remark: 'layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.'},
+      {id:"5", name:"小柏", age:"20",remark: 'layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.'},
+      {id:"6", name:"小吉", age:"20",remark: 'layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.'}
     ]
 
     const rowClick5 = function(data) {
