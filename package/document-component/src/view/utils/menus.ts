@@ -12,6 +12,7 @@ const menus = [
       {
         id: 6,
         title: "按钮",
+        flag: "update",
         subTitle: "button",
         path: "/zh-CN/components/button",
       },
@@ -138,6 +139,7 @@ const menus = [
       {
         id: 36,
         title: "开关",
+        flag: "update",
         subTitle: "switch",
         path: "/zh-CN/components/switch",
       },
@@ -432,12 +434,14 @@ const menus = [
       {
         id: 101,
         title: "标签",
+        flag: "new",
         subTitle: "modal",
         path: "/zh-CN/components/tag",
       },
       {
         id: 102,
-        title: "标签输入",
+        title: "标签输入框",
+        flag: "new",
         subTitle: "load",
         path: "/zh-CN/components/tagInput",
       },

@@ -316,6 +316,38 @@ export default {
 
 :::
 
+::: title 下拉按钮
+:::
+
+::: demo 配合 `lay-dropdown` 系列组件, 完成下拉按钮。
+
+<template>
+  <lay-dropdown>
+    <lay-button type="default">更多操作</lay-button>
+    <template #content>
+      <lay-dropdown-menu>
+        <lay-dropdown-menu-item>导入</lay-dropdown-menu-item>
+        <lay-dropdown-menu-item>导出</lay-dropdown-menu-item>
+      </lay-dropdown-menu>
+    </template>
+  </lay-dropdown>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+  
+    return {
+
+    }
+  }
+}
+</script>
+
+:::
+
 ::: title Button 属性
 :::
 
