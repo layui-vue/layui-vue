@@ -1,13 +1,9 @@
 <script lang="ts">
 export default {
-    name: "treeSelect"
-}
+  name: "treeSelect",
+};
 </script>
 
-<script lang="ts" setup>
+<script lang="ts" setup></script>
 
-</script>
-
-<template>
-    
-</template>
+<template></template>

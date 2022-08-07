@@ -89,15 +89,55 @@ const slots = slot.default && slot.default();
 const allChecked = ref(false);
 const hasChecked = ref(false);
 const tableDataSource = ref<any[]>([...props.dataSource]);
-const tableColumns = ref([...props.columns]);
+const tableColumns = computed(() => {
+  return [...props.columns];
+})
 
-const tableColumnKeys = ref(
-  props.columns.map((item: any) => {
-    if (item.hide != true) {
-      return item.key;
+const tableHeadColumns = ref<any[]>([])
+const tableBodyColumns = ref<any[]>([])
+
+const findFindNode = (columns: any[]) => {
+  columns.forEach((column) => {
+    if(column.children) {
+      findFindNode(column.children);
+    } else {
+      tableBodyColumns.value.push(column);
     }
   })
-);
+}
+
+findFindNode(tableColumns.value)
+
+const tableColumnKeys = ref<any[]>([]);
+
+const findFindNodes = (columns: any[]) => {
+  columns.forEach((column) => {
+    if(column.children) {
+      findFindNodes(column.children);
+    } else {
+      if(!column.hide) {
+        tableColumnKeys.value.push(column.key);
+      }
+    }
+  })
+}
+
+findFindNodes(tableColumns.value)
+
+/**
+ * 处理为复杂表头, 待完成
+ * 
+ * @param level 层级, 用于决定会被 push 到的目标数组 
+ */
+const findFinalNode = (level: number, columns: any[]) => {
+  columns.forEach(column => {
+    if(column.children) {
+     // 设置 rowspan 
+    } else {
+     // 设置 colspan
+    }
+  })
+}
 
 const tableSelectedKeys = ref<Recordable[]>([...props.selectedKeys]);
 const tableExpandKeys = ref<Recordable[]>([...props.expandKeys]);
@@ -602,7 +642,7 @@ const renderTotalRowCell = (column: any) => {
                   :id="id"
                   :index="index"
                   :data="data"
-                  :columns="columns"
+                  :columns="tableBodyColumns"
                   :indent-size="indentSize"
                   :currentIndentSize="currentIndentSize"
                   :tableColumnKeys="tableColumnKeys"
