@@ -97,7 +97,7 @@ const tableHeadColumns = ref<any[]>([]);
 const tableBodyColumns = ref<any[]>([]);
 
 /**
- * 获取数组深度 
+ * 获取数组深度
  *
  * @param arr 数组
  */
@@ -120,8 +120,8 @@ const getLevel = (arr: any[]) => {
 
 /**
  * 获取叶节点的数量
- * 
- * @param json 当前节点 
+ *
+ * @param json 当前节点
  */
 function getLeafCountTree(json: any) {
   if (!json.children || json.children.length == 0) {
@@ -139,8 +139,8 @@ function getLeafCountTree(json: any) {
 
 /**
  * 计算内容列
- * 
- * @param columns 原始列 
+ *
+ * @param columns 原始列
  */
 const findFindNode = (columns: any[]) => {
   columns.forEach((column) => {
@@ -156,8 +156,8 @@ findFindNode(tableColumns.value);
 
 /**
  * 计算显示列
- * 
- * @param columns 原始列 
+ *
+ * @param columns 原始列
  */
 const tableColumnKeys = ref<any[]>([]);
 
@@ -178,21 +178,21 @@ findFindNodes(tableColumns.value);
 
 /**
  * 计算数组差异
- * 
+ *
  * @param arr1 数组
- * @param arr2 数组 
+ * @param arr2 数组
  */
 function diff(arr1: any[], arr2: any[]) {
-    var newArr = [];
-    arr1 = Array.from(new Set(arr1)); // 去重
-    arr2 = Array.from(new Set(arr2)); // 去重
-    newArr =arr1.concat(arr2);
-    return newArr.filter(x=>!(arr1.includes(x) && arr2.includes(x)))
+  var newArr = [];
+  arr1 = Array.from(new Set(arr1)); // 去重
+  arr2 = Array.from(new Set(arr2)); // 去重
+  newArr = arr1.concat(arr2);
+  return newArr.filter((x) => !(arr1.includes(x) && arr2.includes(x)));
 }
 
 /**
  * 计算标题列
- * 
+ *
  * @param level 层级, 用于决定会被 push 到的目标数组
  */
 const findFinalNode = (level: number, columns: any[]) => {
@@ -560,7 +560,7 @@ const renderTotalRowCell = (column: any) => {
           <slot name="toolbar"></slot>
         </div>
         <div v-if="defaultToolbar" class="layui-table-tool-self">
-          <lay-dropdown>
+          <lay-dropdown updateAtScroll>
             <div class="layui-inline" title="筛选列" lay-event="LAYTABLE_PRINT">
               <i class="layui-icon layui-icon-cols"></i>
             </div>
@@ -618,7 +618,12 @@ const renderTotalRowCell = (column: any) => {
                 </template>
               </colgroup>
               <thead>
-                <template v-for="(tableHeadColumn, tableHeadColumnIndex) in tableHeadColumns" :key="tableHeadColumnIndex">
+                <template
+                  v-for="(
+                    tableHeadColumn, tableHeadColumnIndex
+                  ) in tableHeadColumns"
+                  :key="tableHeadColumnIndex"
+                >
                   <tr>
                     <template
                       v-for="(column, columnIndex) in tableHeadColumn"
