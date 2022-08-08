@@ -1169,7 +1169,7 @@ export default {
 ::: demo 通过 `span-method` 属性, 自定义行列合并的逻辑。
 
 <template>
-  <lay-table :columns="columns29" :data-source="dataSource29"></lay-table>
+  <lay-table :columns="columns29" :data-source="dataSource29" :default-toolbar="true"></lay-table>
 </template>
 
 <script>
@@ -1186,9 +1186,9 @@ export default {
       },{
         title:"地址",
         children: [
-          { title: "省", key: "province", width: "300px", },
-          { title: "市", key: "city", width: "300px", },
-          { title: "区", key: "area", width: "300px", },
+          { title: "省", key: "province", width: "300px" },
+          { title: "市", key: "city", width: "300px" },
+          { title: "区", key: "area", width: "300px" },
         ]
       },{
         title:"性别",

@@ -96,6 +96,11 @@ const tableColumns = computed(() => {
 const tableHeadColumns = ref<any[]>([]);
 const tableBodyColumns = ref<any[]>([]);
 
+/**
+ * 获取数组深度 
+ *
+ * @param arr 数组
+ */
 const getLevel = (arr: any[]) => {
   let maxLevel = 0;
   (function callBack(arr, level) {
@@ -113,6 +118,11 @@ const getLevel = (arr: any[]) => {
   return maxLevel;
 };
 
+/**
+ * 获取叶节点的数量
+ * 
+ * @param json 当前节点 
+ */
 function getLeafCountTree(json: any) {
   if (!json.children || json.children.length == 0) {
     json.colspan = 1;
@@ -127,6 +137,11 @@ function getLeafCountTree(json: any) {
   }
 }
 
+/**
+ * 计算内容列
+ * 
+ * @param columns 原始列 
+ */
 const findFindNode = (columns: any[]) => {
   columns.forEach((column) => {
     if (column.children) {
@@ -139,11 +154,17 @@ const findFindNode = (columns: any[]) => {
 
 findFindNode(tableColumns.value);
 
+/**
+ * 计算显示列
+ * 
+ * @param columns 原始列 
+ */
 const tableColumnKeys = ref<any[]>([]);
 
 const findFindNodes = (columns: any[]) => {
   columns.forEach((column) => {
     if (column.children) {
+      tableColumnKeys.value.push(column.key);
       findFindNodes(column.children);
     } else {
       if (!column.hide) {
@@ -156,27 +177,37 @@ const findFindNodes = (columns: any[]) => {
 findFindNodes(tableColumns.value);
 
 /**
- * 处理为复杂表头, 待完成
- *
+ * 计算数组差异
+ * 
+ * @param arr1 数组
+ * @param arr2 数组 
+ */
+function diff(arr1: any[], arr2: any[]) {
+    var newArr = [];
+    arr1 = Array.from(new Set(arr1)); // 去重
+    arr2 = Array.from(new Set(arr2)); // 去重
+    newArr =arr1.concat(arr2);
+    return newArr.filter(x=>!(arr1.includes(x) && arr2.includes(x)))
+}
+
+/**
+ * 计算标题列
+ * 
  * @param level 层级, 用于决定会被 push 到的目标数组
  */
 const findFinalNode = (level: number, columns: any[]) => {
   columns.forEach((column) => {
     if (column.children) {
-      // 设置 colspan
       const colSpan = getLeafCountTree(column);
       column.colspan = colSpan;
-      column.rowspan = 1;
       if (!tableHeadColumns.value[level]) {
         tableHeadColumns.value[level] = [];
       }
       tableHeadColumns.value[level].push(column);
       findFinalNode(level + 1, column.children);
     } else {
-      // 设置 rowspan
       const rowSpan = getLevel(columns);
       column.rowspan = rowSpan;
-      column.colspan = 1;
       if (!tableHeadColumns.value[level]) {
         tableHeadColumns.value[level] = [];
       }
@@ -536,9 +567,10 @@ const renderTotalRowCell = (column: any) => {
             <template #content>
               <div class="layui-table-tool-checkbox">
                 <lay-checkbox
-                  v-for="column in columns"
+                  v-for="column in tableHeadColumns[0]"
                   v-model="tableColumnKeys"
                   skin="primary"
+                  :disabled="column.children"
                   :key="column.key"
                   :value="column.key"
                   >{{ column.title }}</lay-checkbox
@@ -574,7 +606,7 @@ const renderTotalRowCell = (column: any) => {
           <div class="layui-table-header-wrapper" ref="tableHeader">
             <table class="layui-table" :lay-size="size" :lay-skin="skin">
               <colgroup>
-                <template v-for="column in columns" :key="column">
+                <template v-for="column in tableBodyColumns" :key="column">
                   <template v-if="tableColumnKeys.includes(column.key)">
                     <col
                       :width="column.width"
@@ -593,6 +625,7 @@ const renderTotalRowCell = (column: any) => {
                       :key="column"
                     >
                       <th
+                        v-if="tableColumnKeys.includes(column.key)"
                         :colspan="column.colspan"
                         :rowspan="column.rowspan"
                         class="layui-table-cell"
@@ -679,7 +712,7 @@ const renderTotalRowCell = (column: any) => {
           >
             <colgroup>
               <template
-                v-for="(column, columnIndex) in columns"
+                v-for="(column, columnIndex) in tableBodyColumns"
                 :key="columnIndex"
               >
                 <template v-if="tableColumnKeys.includes(column.key)">
