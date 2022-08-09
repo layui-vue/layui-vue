@@ -325,47 +325,55 @@ const print = function () {
   document.body.innerHTML = oldContent;
 };
 
+/**
+ * excel 导出 
+ */
 const exportData = () => {
-  const head: any = [];
-  const body: any = [];
-  tableColumns.value.forEach((item) => {
-    try {
-      tableDataSource.value.forEach((dataItem) => {
-        if (dataItem[item.key] != undefined) {
-          head.push(item.title);
-          throw new Error("exception");
-        }
-      });
-    } catch (e) {}
-  });
-  tableDataSource.value.forEach((item) => {
-    let obj: any = [];
-    tableColumns.value.forEach((tableColumn) => {
+  var tableStr = ``;
+  for(let tableHeadColumn of tableHeadColumns.value){
+    tableStr += '<tr>';
+    for(let column of tableHeadColumn){
+      tableStr += `<td colspan=${column.colspan} rowspan=${column.rowspan}>${column.title}</td>`
+    } 
+    tableStr += '</tr>';
+  }
+  tableDataSource.value.forEach((item, rowIndex) => {
+    tableStr += '<tr>'
+    tableBodyColumns.value.forEach((tableColumn, columnIndex) => {
       Object.keys(item).forEach((name) => {
         if (tableColumn.key === name) {
-          obj.push(item[name]);
+          const rowColSpan = props.spanMethod(item, tableColumn, rowIndex, columnIndex);
+          const rowspan = rowColSpan ? rowColSpan[0] : 1;
+          const colspan = rowColSpan ? rowColSpan[1] : 1;
+          if(rowspan != 0 && colspan != 0) {
+            tableStr += `<td colspan=${colspan} rowspan=${rowspan}>${item[name]}</td>`
+          }
         }
-      });
-    });
-    body.push(obj);
+      }); 
+    });  
+    tableStr += '</tr>'
   });
-  exportToExcel(head, body);
+  var worksheet = "Sheet1";
+  var uri = "data:application/vnd.ms-excel;base64,";
+  var exportTemplate = 
+    `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" 
+        xmlns="http://www.w3.org/TR/REC-html40">
+        <head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet>
+            <x:Name>${worksheet}</x:Name>
+                <x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet>
+            </x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]-->
+        </head>
+        <body>
+            <table syle="table-layout: fixed;word-wrap: break-word; word-break: break-all;">${tableStr}</table>
+        </body>
+    </html>`;
+  window.location.href = uri + base64(exportTemplate);
   return;
 };
 
-function exportToExcel(headerList: any, bodyList: any) {
-  let excelList = [];
-  excelList.push(headerList.join("\t,"));
-  excelList.push("\n");
-  bodyList.forEach((item: any) => {
-    excelList.push(item.join("\t,"));
-    excelList.push("\n");
-  });
-  var merged = excelList.join("");
-  let link = document.createElement("a");
-  link.href = "data:text/xls;charset=utf-8,\ufeff" + encodeURIComponent(merged);
-  link.download = `table.xls`;
-  link.click();
+//输出base64编码
+function base64(s: string) {
+  return window.btoa(unescape(encodeURIComponent(s)));
 }
 
 const sortTable = (e: any, key: string, sort: string) => {
@@ -481,7 +489,11 @@ const renderFixedStyle = (column: any, columnIndex: number) => {
     if (column.fixed == "left") {
       var left = 0;
       for (var i = 0; i < columnIndex; i++) {
-        if (props.columns[i].fixed && props.columns[i].fixed == "left" && tableColumnKeys.value.includes(props.columns[i].key)) {
+        if (
+          props.columns[i].fixed &&
+          props.columns[i].fixed == "left" &&
+          tableColumnKeys.value.includes(props.columns[i].key)
+        ) {
           left = left + props.columns[i]?.width.replace("px", "");
         }
       }
@@ -489,7 +501,11 @@ const renderFixedStyle = (column: any, columnIndex: number) => {
     } else {
       var right = 0;
       for (var i = columnIndex + 1; i < props.columns.length; i++) {
-        if (props.columns[i].fixed && props.columns[i].fixed == "right" && tableColumnKeys.value.includes(props.columns[i].key)) {
+        if (
+          props.columns[i].fixed &&
+          props.columns[i].fixed == "right" &&
+          tableColumnKeys.value.includes(props.columns[i].key)
+        ) {
           right = right + props.columns[i]?.width.replace("px", "");
         }
       }
@@ -498,7 +514,10 @@ const renderFixedStyle = (column: any, columnIndex: number) => {
   } else {
     var isLast = true;
     for (var i = columnIndex + 1; i < props.columns.length; i++) {
-      if (props.columns[i].fixed == undefined && tableColumnKeys.value.includes(props.columns[i].key)) {
+      if (
+        props.columns[i].fixed == undefined &&
+        tableColumnKeys.value.includes(props.columns[i].key)
+      ) {
         isLast = false;
       }
     }
@@ -515,7 +534,11 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
     if (column.fixed == "left") {
       var left = true;
       for (var i = columnIndex + 1; i < props.columns.length; i++) {
-        if (props.columns[i].fixed && props.columns[i].fixed == "left" && tableColumnKeys.value.includes(props.columns[i].key)) {
+        if (
+          props.columns[i].fixed &&
+          props.columns[i].fixed == "left" &&
+          tableColumnKeys.value.includes(props.columns[i].key)
+        ) {
           left = false;
         }
       }
@@ -523,7 +546,11 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
     } else {
       var right = true;
       for (var i = 0; i < columnIndex; i++) {
-        if (props.columns[i].fixed && props.columns[i].fixed == "right" && tableColumnKeys.value.includes(props.columns[i].key)) {
+        if (
+          props.columns[i].fixed &&
+          props.columns[i].fixed == "right" &&
+          tableColumnKeys.value.includes(props.columns[i].key)
+        ) {
           right = false;
         }
       }

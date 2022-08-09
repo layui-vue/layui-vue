@@ -1004,7 +1004,7 @@ export default {
 ::: demo 通过 `span-method` 属性, 自定义行列合并的逻辑。
 
 <template>
-  <lay-table :columns="columns27" :data-source="dataSource27" :span-method="spanMethod27"></lay-table>
+  <lay-table :columns="columns27" :data-source="dataSource27" :span-method="spanMethod27" :default-toolbar="true"></lay-table>
 </template>
 
 <script>
