@@ -1223,6 +1223,77 @@ export default {
 
 :::
 
+::: title 复杂表头
+:::
+
+::: demo 通过 `span-method` 属性, 自定义行列合并的逻辑。
+
+<template>
+  <lay-button @click="loadData">加载数据</lay-button>
+  <lay-table :columns="columns30" :data-source="dataSource30" :loading="loading"></lay-table>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const loading = ref(false);
+
+    const columns30 = [
+      {
+        title:"名称",
+        width:"200px",
+        key:"username"
+      },{
+        title:"地址",
+        children: [
+          { title: "省", key: "province", width: "300px" },
+          { title: "市", key: "city", width: "300px" },
+          { title: "区", key: "area", width: "300px" },
+        ]
+      },{
+        title:"性别",
+        key:"sex"
+      },{
+        title:"年龄",
+        width: "300px",
+        key:"age"
+      },{
+        title:"备注",
+        width: "180px",
+        key:"remark",
+        ellipsisTooltip: true
+      }
+    ]
+
+    const dataSource30 = ref([])
+
+    const loadData = () => {
+      loading.value = true;
+      setTimeout(() => {
+      dataSource30.value = [
+        {id:"1",username:"就眠儀式",province:"山东",city:"济南",area: "高新区", password:"root",sex:"男", age:"18", remark: 'layui - vue（谐音：类 UI) '},
+        {id:"2",username:"就眠儀式",province:"山东",city:"济南",area: "高新区", password:"root",sex:"男", age:"18", remark: 'layui - vue（谐音：类 UI) '},
+        {id:"3",username:"就眠儀式",province:"山东",city:"济南",area: "高新区", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '},
+        {id:"4",username:"就眠儀式",province:"山东",city:"济南",area: "高新区", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '},
+        {id:"5",username:"就眠儀式",province:"山东",city:"济南",area: "高新区", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '}
+      ];
+      loading.value = false;
+      },50000000)
+    }
+
+    return {
+      columns30,
+      dataSource30,
+    }
+  }
+}
+</script>
+
+:::
+
 ::: title 完整表格
 :::
 
