@@ -9,6 +9,8 @@ import "./index.less";
 import { LayIcon } from "@layui/icons-vue";
 import { computed, ref, useSlots, watch } from "vue";
 import { useI18n } from "../../language";
+import PasswordIcon from "./svg/Password.vue";
+import UnPasswordIcon from "./svg/unPassword.vue"
 
 export interface LayInputProps {
   name?: string;
@@ -157,11 +159,9 @@ const showPassword = () => {
           class="layui-input-suffix-icon"
         ></lay-icon>
       </span>
-      <span class="layui-input-password" v-if="password && hasContent">
-        <lay-icon
-          :type="isPassword ? 'layui-icon-face-smile' : 'layui-icon-face-cry'"
-          @click="showPassword"
-        ></lay-icon>
+      <span class="layui-input-password" @click="showPassword" v-if="password && hasContent">
+        <password-icon v-if="isPassword"></password-icon>
+        <un-password-icon v-else></un-password-icon>
       </span>
       <span class="layui-input-clear" v-if="allowClear && hasContent">
         <lay-icon type="layui-icon-close-fill" @click.stop="onClear"></lay-icon>
