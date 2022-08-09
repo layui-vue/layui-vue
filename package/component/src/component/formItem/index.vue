@@ -73,7 +73,6 @@ const ruleItems = computed(() => {
   return rulesArrs;
 });
 
-// 值 计算 和 监听
 const filedValue = computed(() =>
   props.prop ? layForm.model[props.prop] : undefined
 );

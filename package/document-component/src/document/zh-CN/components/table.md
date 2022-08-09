@@ -1223,7 +1223,7 @@ export default {
 
 :::
 
-::: title 复杂表头
+::: title 加载过渡
 :::
 
 ::: demo 通过 `span-method` 属性, 自定义行列合并的逻辑。

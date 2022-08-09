@@ -70,7 +70,7 @@ const props = withDefaults(defineProps<LayTableProps>(), {
   defaultExpandAll: false,
   spanMethod: () => {},
   expandKeys: () => [],
-  loading: false
+  loading: false,
 });
 
 const tableId = uuidv4();
@@ -777,11 +777,15 @@ const renderTotalRowCell = (column: any) => {
               </tr>
             </tbody>
           </table>
-          <lay-empty v-if="tableDataSource.length == 0 && loading == false"></lay-empty>
+          <lay-empty
+            v-if="tableDataSource.length == 0 && loading == false"
+          ></lay-empty>
           <template v-if="loading == true">
             <div class="layui-table-loading">
-              <i class="layui-icon-loading layui-icon layui-anim layui-anim-rotate layui-anim-loop"></i>
-            </div> 
+              <i
+                class="layui-icon-loading layui-icon layui-anim layui-anim-rotate layui-anim-loop"
+              ></i>
+            </div>
           </template>
         </div>
       </div>
