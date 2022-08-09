@@ -473,12 +473,15 @@ props.dataSource.map((value: any) => {
   }
 });
 
+/**
+ * @remark 排除 hide 列
+ */
 const renderFixedStyle = (column: any, columnIndex: number) => {
   if (column.fixed) {
     if (column.fixed == "left") {
       var left = 0;
       for (var i = 0; i < columnIndex; i++) {
-        if (props.columns[i].fixed && props.columns[i].fixed == "left") {
+        if (props.columns[i].fixed && props.columns[i].fixed == "left" && tableColumnKeys.value.includes(props.columns[i].key)) {
           left = left + props.columns[i]?.width.replace("px", "");
         }
       }
@@ -486,7 +489,7 @@ const renderFixedStyle = (column: any, columnIndex: number) => {
     } else {
       var right = 0;
       for (var i = columnIndex + 1; i < props.columns.length; i++) {
-        if (props.columns[i].fixed && props.columns[i].fixed == "right") {
+        if (props.columns[i].fixed && props.columns[i].fixed == "right" && tableColumnKeys.value.includes(props.columns[i].key)) {
           right = right + props.columns[i]?.width.replace("px", "");
         }
       }
@@ -495,7 +498,7 @@ const renderFixedStyle = (column: any, columnIndex: number) => {
   } else {
     var isLast = true;
     for (var i = columnIndex + 1; i < props.columns.length; i++) {
-      if (props.columns[i].fixed == undefined) {
+      if (props.columns[i].fixed == undefined && tableColumnKeys.value.includes(props.columns[i].key)) {
         isLast = false;
       }
     }
@@ -504,12 +507,15 @@ const renderFixedStyle = (column: any, columnIndex: number) => {
   return {} as StyleValue;
 };
 
+/**
+ * @remark 排除 hide 列
+ */
 const renderFixedClassName = (column: any, columnIndex: number) => {
   if (column.fixed) {
     if (column.fixed == "left") {
       var left = true;
       for (var i = columnIndex + 1; i < props.columns.length; i++) {
-        if (props.columns[i].fixed && props.columns[i].fixed == "left") {
+        if (props.columns[i].fixed && props.columns[i].fixed == "left" && tableColumnKeys.value.includes(props.columns[i].key)) {
           left = false;
         }
       }
@@ -517,7 +523,7 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
     } else {
       var right = true;
       for (var i = 0; i < columnIndex; i++) {
-        if (props.columns[i].fixed && props.columns[i].fixed == "right") {
+        if (props.columns[i].fixed && props.columns[i].fixed == "right" && tableColumnKeys.value.includes(props.columns[i].key)) {
           right = false;
         }
       }

@@ -176,7 +176,7 @@ const renderFixedStyle = (column: any, columnIndex: number) => {
     if (column.fixed == "left") {
       var left = 0;
       for (var i = 0; i < columnIndex; i++) {
-        if (props.columns[i].fixed && props.columns[i].fixed == "left") {
+        if (props.columns[i].fixed && props.columns[i].fixed == "left" && props.tableColumnKeys.includes(props.columns[i].key)) {
           left = left + props.columns[i]?.width.replace("px", "");
         }
       }
@@ -184,7 +184,7 @@ const renderFixedStyle = (column: any, columnIndex: number) => {
     } else {
       var right = 0;
       for (var i = columnIndex + 1; i < props.columns.length; i++) {
-        if (props.columns[i].fixed && props.columns[i].fixed == "right") {
+        if (props.columns[i].fixed && props.columns[i].fixed == "right" && props.tableColumnKeys.includes(props.columns[i].key)) {
           right = right + props.columns[i]?.width.replace("px", "");
         }
       }
@@ -193,7 +193,7 @@ const renderFixedStyle = (column: any, columnIndex: number) => {
   } else {
     var isLast = true;
     for (var i = columnIndex + 1; i < props.columns.length; i++) {
-      if (props.columns[i].fixed == undefined) {
+      if (props.columns[i].fixed == undefined && props.tableColumnKeys.includes(props.columns[i].key)) {
         isLast = false;
       }
     }
@@ -207,7 +207,7 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
     if (column.fixed == "left") {
       var left = true;
       for (var i = columnIndex + 1; i < props.columns.length; i++) {
-        if (props.columns[i].fixed && props.columns[i].fixed == "left") {
+        if (props.columns[i].fixed && props.columns[i].fixed == "left" && props.tableColumnKeys.includes(props.columns[i].key)) {
           left = false;
         }
       }
@@ -215,7 +215,7 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
     } else {
       var right = true;
       for (var i = 0; i < columnIndex; i++) {
-        if (props.columns[i].fixed && props.columns[i].fixed == "right") {
+        if (props.columns[i].fixed && props.columns[i].fixed == "right" && props.tableColumnKeys.includes(props.columns[i].key)) {
           right = false;
         }
       }
