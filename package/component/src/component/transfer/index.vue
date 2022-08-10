@@ -46,10 +46,12 @@ const allRightChecked = ref(false);
 const hasLeftChecked = ref(false);
 const hasRightChecked = ref(false);
 
-const allLeftChange = (checked: any) => {
-  if (checked) {
+const allLeftChange = (isChecked: boolean) => {
+  if (isChecked) {
     const ids = leftDataSource.value.map((item: any) => {
-      return item[props.id];
+      if(!item.disabled) {
+        return item[props.id];
+      }
     });
     leftSelectedKeys.value = ids;
   } else {
@@ -80,7 +82,9 @@ watch(
 const allRightChange = (checked: any) => {
   if (checked) {
     const ids = rightDataSource.value.map((item: any) => {
-      return item[props.id];
+      if(!item.disabled) {
+        return item[props.id];
+      }
     });
     rightSelectedKeys.value = ids;
   } else {
@@ -214,6 +218,7 @@ const boxStyle = computed(() => {
             <LayCheckbox
               v-model="leftSelectedKeys"
               skin="primary"
+              :disabled="dataSource.disabled"
               :value="dataSource[id]"
             >
               <slot v-if="slots.item" name="item" :data="dataSource"></slot>
@@ -263,8 +268,9 @@ const boxStyle = computed(() => {
         <ul class="layui-transfer-data">
           <li v-for="dataSource in rightDataSource" :key="dataSource">
             <LayCheckbox
-              v-model="rightSelectedKeys"
               skin="primary"
+              v-model="rightSelectedKeys"
+              :disabled="dataSource.disabled"
               :value="dataSource[id]"
             >
               <slot v-if="slots.item" name="item" :data="dataSource"></slot>

@@ -114,12 +114,12 @@ const onBlur = (event: Event) => {
 
 const onCompositionstart = () => {
   composing.value = true;
-}
+};
 
 const onCompositionend = (event: Event) => {
   composing.value = false;
-  onInput(event)
-}
+  onInput(event);
+};
 
 const classes = computed(() => {
   return { "layui-disabled": props.disabled };
