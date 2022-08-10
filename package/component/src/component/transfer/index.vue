@@ -48,12 +48,12 @@ const hasRightChecked = ref(false);
 
 const allLeftChange = (isChecked: boolean) => {
   if (isChecked) {
-    const ids = leftDataSource.value.map((item: any) => {
-      if(!item.disabled) {
-        return item[props.id];
-      }
+    const datasources = leftDataSource.value.filter((item: any) => {
+      return !item.disabled
     });
-    leftSelectedKeys.value = ids;
+    const ids = datasources.map((item) => {return item[props.id]});
+    console.log(JSON.stringify(ids))
+    leftSelectedKeys.value = [...ids];
   } else {
     leftSelectedKeys.value = [];
   }
@@ -81,12 +81,12 @@ watch(
 
 const allRightChange = (checked: any) => {
   if (checked) {
-    const ids = rightDataSource.value.map((item: any) => {
-      if(!item.disabled) {
-        return item[props.id];
-      }
+    const datasources = rightDataSource.value.filter((item: any) => {
+      return !item.disabled
     });
-    rightSelectedKeys.value = ids;
+    const ids = datasources.map((item) => { return item[props.id]})
+    console.log(JSON.stringify(ids))
+    rightSelectedKeys.value = [...ids];
   } else {
     rightSelectedKeys.value = [];
   }

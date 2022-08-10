@@ -263,18 +263,18 @@ watch(
   { deep: true }
 );
 
-const changeAll = (checked: any) => {
-  const ids = props.dataSource.map((item: any) => {
-    return item[props.id];
-  });
-  let arr = [...tableSelectedKeys.value];
-  arr.splice(0, ids.length);
-  if (checked) {
-    ids.forEach((id) => {
-      arr.push(id);
+const changeAll = (isChecked: boolean) => {
+  // Selected
+  if(isChecked) {
+    const datasources = props.dataSource.filter((item: any, index: number) => {
+      return !props.getCheckboxProps(item, index).disabled;
     });
-  }
-  tableSelectedKeys.value = arr;
+    const ids = datasources.map((item) => {return item[props.id]});
+    tableSelectedKeys.value = [...ids];
+  } else {
+    // unSelected
+    tableSelectedKeys.value = [];
+  }  
 };
 
 watch(
