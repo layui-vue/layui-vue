@@ -74,7 +74,7 @@ const props = withDefaults(defineProps<LayTableProps>(), {
   expandKeys: () => [],
   loading: false,
   getCheckboxProps: () => {},
-  getRadioProps: () => {}
+  getRadioProps: () => {},
 });
 
 const tableId = uuidv4();
@@ -477,7 +477,7 @@ const slotsData = ref<string[]>([]);
 props.columns.map((value: any) => {
   if (value.customSlot) {
     slotsData.value.push(value.customSlot);
-  }   
+  }
 });
 
 const currentIndentSize = ref(0);

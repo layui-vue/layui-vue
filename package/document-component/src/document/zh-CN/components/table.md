@@ -1440,6 +1440,8 @@ export default {
 | default-expand-all   | 默认展开所有列                                        | `boolean`           | `false`    | `true` `false`     |
 | expand-keys          | 展开的列                                              | `array`             | `[]`       | --                 |
 | span-method          | 合并算法                                              | `function`          | --         | --                 |
+| getCheckboxProps     | 多选行属性                                            | `function`          | --         | --                 |
+| getRadioProps        | 单选行属性                                            | `function`          | --         | --                 |
 
 :::
 

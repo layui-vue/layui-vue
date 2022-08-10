@@ -339,10 +339,10 @@ const radioProps = props.getRadioProps(props.data, props.index);
                 @click="handleExpand"
               ></lay-icon>
 
-              <lay-radio 
-                  v-model="tableSelectedKey" 
-                  v-bind="radioProps" 
-                  :value="data[id]"
+              <lay-radio
+                v-model="tableSelectedKey"
+                v-bind="radioProps"
+                :value="data[id]"
               />
             </td>
           </template>
