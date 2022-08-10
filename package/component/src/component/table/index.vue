@@ -50,6 +50,8 @@ export interface LayTableProps {
   defaultExpandAll?: boolean;
   expandKeys?: Recordable[];
   loading?: boolean;
+  getCheckboxProps?: Function;
+  getRadioProps?: Function;
 }
 
 const props = withDefaults(defineProps<LayTableProps>(), {
@@ -71,6 +73,8 @@ const props = withDefaults(defineProps<LayTableProps>(), {
   spanMethod: () => {},
   expandKeys: () => [],
   loading: false,
+  getCheckboxProps: () => {},
+  getRadioProps: () => {}
 });
 
 const tableId = uuidv4();
@@ -326,37 +330,41 @@ const print = function () {
 };
 
 /**
- * excel 导出 
+ * excel 导出
  */
 const exportData = () => {
   var tableStr = ``;
-  for(let tableHeadColumn of tableHeadColumns.value){
-    tableStr += '<tr>';
-    for(let column of tableHeadColumn){
-      tableStr += `<td colspan=${column.colspan} rowspan=${column.rowspan}>${column.title}</td>`
-    } 
-    tableStr += '</tr>';
+  for (let tableHeadColumn of tableHeadColumns.value) {
+    tableStr += "<tr>";
+    for (let column of tableHeadColumn) {
+      tableStr += `<td colspan=${column.colspan} rowspan=${column.rowspan}>${column.title}</td>`;
+    }
+    tableStr += "</tr>";
   }
   tableDataSource.value.forEach((item, rowIndex) => {
-    tableStr += '<tr>'
+    tableStr += "<tr>";
     tableBodyColumns.value.forEach((tableColumn, columnIndex) => {
       Object.keys(item).forEach((name) => {
         if (tableColumn.key === name) {
-          const rowColSpan = props.spanMethod(item, tableColumn, rowIndex, columnIndex);
+          const rowColSpan = props.spanMethod(
+            item,
+            tableColumn,
+            rowIndex,
+            columnIndex
+          );
           const rowspan = rowColSpan ? rowColSpan[0] : 1;
           const colspan = rowColSpan ? rowColSpan[1] : 1;
-          if(rowspan != 0 && colspan != 0) {
-            tableStr += `<td colspan=${colspan} rowspan=${rowspan}>${item[name]}</td>`
+          if (rowspan != 0 && colspan != 0) {
+            tableStr += `<td colspan=${colspan} rowspan=${rowspan}>${item[name]}</td>`;
           }
         }
-      }); 
-    });  
-    tableStr += '</tr>'
+      });
+    });
+    tableStr += "</tr>";
   });
   var worksheet = "Sheet1";
   var uri = "data:application/vnd.ms-excel;base64,";
-  var exportTemplate = 
-    `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" 
+  var exportTemplate = `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" 
         xmlns="http://www.w3.org/TR/REC-html40">
         <head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet>
             <x:Name>${worksheet}</x:Name>
@@ -469,7 +477,7 @@ const slotsData = ref<string[]>([]);
 props.columns.map((value: any) => {
   if (value.customSlot) {
     slotsData.value.push(value.customSlot);
-  }
+  }   
 });
 
 const currentIndentSize = ref(0);
@@ -783,6 +791,8 @@ const renderTotalRowCell = (column: any) => {
                   :rowClassName="rowClassName"
                   :spanMethod="spanMethod"
                   :defaultExpandAll="defaultExpandAll"
+                  :getCheckboxProps="getCheckboxProps"
+                  :getRadioProps="getRadioProps"
                   @row="rowClick"
                   @row-double="rowDoubleClick"
                   @row-contextmenu="rowContextmenu"

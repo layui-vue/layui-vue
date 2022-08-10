@@ -34,6 +34,8 @@ export interface LayTableRowProps {
   spanMethod: Function;
   defaultExpandAll: boolean;
   expandKeys: Recordable[];
+  getCheckboxProps: Function;
+  getRadioProps: Function;
 }
 
 const slot = useSlots();
@@ -272,6 +274,9 @@ const isAutoShow = (
     return true;
   }
 };
+
+const checkboxProps = props.getCheckboxProps(props.data, props.index);
+const radioProps = props.getRadioProps(props.data, props.index);
 </script>
 
 <template>
@@ -334,7 +339,11 @@ const isAutoShow = (
                 @click="handleExpand"
               ></lay-icon>
 
-              <lay-radio v-model="tableSelectedKey" :value="data[id]" />
+              <lay-radio 
+                  v-model="tableSelectedKey" 
+                  v-bind="radioProps" 
+                  :value="data[id]"
+              />
             </td>
           </template>
 
@@ -389,6 +398,7 @@ const isAutoShow = (
 
               <lay-checkbox
                 v-model="tableSelectedKeys"
+                v-bind="checkboxProps"
                 :value="data[id]"
                 skin="primary"
               />
@@ -602,6 +612,8 @@ const isAutoShow = (
         :rowClassName="rowClassName"
         :spanMethod="spanMethod"
         :defaultExpandAll="defaultExpandAll"
+        :getCheckboxProps="getCheckboxProps"
+        :getRadioProps="getRadioProps"
         @row="rowClick"
         @row-double="rowDoubleClick"
         @row-contextmenu="rowContextmenu"
