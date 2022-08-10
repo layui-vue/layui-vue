@@ -58,6 +58,7 @@ const currentValue = ref<string>(
 );
 const hasContent = computed(() => (props.modelValue as string)?.length > 0);
 const isPassword = computed(() => type.value == "password");
+const composing = ref(false);
 
 watch(
   () => props.type,
@@ -85,8 +86,11 @@ watch(
 const onInput = function (event: Event) {
   const inputElement = event.target as HTMLInputElement;
   const value = inputElement.value;
-  emit("update:modelValue", value);
   emit("input", value);
+  if (composing.value) {
+    return;
+  }
+  emit("update:modelValue", value);
 };
 
 const onClear = () => {
@@ -107,6 +111,15 @@ const onChange = (event: Event) => {
 const onBlur = (event: Event) => {
   emit("blur", event);
 };
+
+const onCompositionstart = () => {
+  composing.value = true;
+}
+
+const onCompositionend = (event: Event) => {
+  composing.value = false;
+  onInput(event)
+}
 
 const classes = computed(() => {
   return { "layui-disabled": props.disabled };
@@ -150,6 +163,8 @@ const showPassword = () => {
         @change="onChange"
         @focus="onFocus"
         @blur="onBlur"
+        @compositionstart="onCompositionstart"
+        @compositionend="onCompositionend"
       />
       <span class="layui-input-suffix" v-if="slots.suffix || props.suffixIcon">
         <slot name="suffix" v-if="slots.suffix"></slot>
