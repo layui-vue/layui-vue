@@ -437,6 +437,18 @@ const classes = computed(() => {
   ];
 });
 
+watch(() => props.height, () => {
+  nextTick(() => {
+    getScrollWidth();
+  })
+})
+
+watch(() => props.maxHeight, () => {
+  nextTick(() => {
+    getScrollWidth();
+  })
+})
+
 onMounted(() => {
   getScrollWidth();
   getFixedColumn();
