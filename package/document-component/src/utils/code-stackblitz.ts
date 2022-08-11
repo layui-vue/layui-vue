@@ -3,12 +3,12 @@ import stackblitzSdk from "@stackblitz/sdk";
 export const mainCode = `
 import { createApp } from 'vue';
 import App from './App.vue';
-import Layui from '@layui/layui-vue'
-import '@layui/layui-vue/lib/index.css';
 import './index.css';
+// import Layui from '@layui/layui-vue'
+// import '@layui/layui-vue/lib/index.css';
 
 const app = createApp(App);
-app.use(Layui);
+// app.use(Layui);
 app.mount('#app');`;
 
 export const styleCode = `#app { padding: 20px; }`;
@@ -36,11 +36,32 @@ export const stackblitzRc = `
 `;
 
 export const viteConfigCode = `
+  import path from 'path'
   import { defineConfig } from 'vite';
   import vue from '@vitejs/plugin-vue';
   import vueJsx from '@vitejs/plugin-vue-jsx';
+  import Components from 'unplugin-vue-components/vite';
+  import AutoImport from 'unplugin-auto-import/vite';
+  import { LayuiVueResolver } from 'unplugin-vue-components/resolvers';
+
+  const pathSrc = path.resolve(process.cwd(), 'src')
+
   export default defineConfig({
-    plugins: [vue(), vueJsx()],
+    plugins: [
+      vue(), 
+      vueJsx(),
+      AutoImport({
+        // 自动导入 vue 相关函数
+        imports: ['vue',],
+        // 自动导入 layer-vue 相关函数
+        resolvers: [LayuiVueResolver()],
+        dts: path.resolve(pathSrc, 'auto-imports.d.ts'),
+      }),
+      Components({
+        // 自动解析 layui-vue 组件
+        resolvers: [LayuiVueResolver({ resolveIcons: true })],
+      }),
+    ],
   });
 `;
 
@@ -64,6 +85,8 @@ export const packageJSONCode = JSON.stringify(
       "@vue/compiler-sfc": "^3.2.0",
       "@vitejs/plugin-vue": "^2.3.2",
       "@vitejs/plugin-vue-jsx": "^1.3.10",
+      "unplugin-auto-import": "0.11.1",
+      "unplugin-vue-components": "0.22.4",
     },
   },
   null,
