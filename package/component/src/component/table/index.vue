@@ -265,16 +265,18 @@ watch(
 
 const changeAll = (isChecked: boolean) => {
   // Selected
-  if(isChecked) {
+  if (isChecked) {
     const datasources = props.dataSource.filter((item: any, index: number) => {
       return !props.getCheckboxProps(item, index).disabled;
     });
-    const ids = datasources.map((item) => {return item[props.id]});
+    const ids = datasources.map((item) => {
+      return item[props.id];
+    });
     tableSelectedKeys.value = [...ids];
   } else {
     // unSelected
     tableSelectedKeys.value = [];
-  }  
+  }
 };
 
 watch(

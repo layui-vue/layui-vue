@@ -27,10 +27,11 @@
         @click="onPlayground"
         title="在 sandbox-vue 打开"
       />
-      <i 
-        class="layui-icon layui-icon-chart btn" 
-        title="在 stackblitz 打开"  
-        @click="onStackblitz">
+      <i
+        class="layui-icon layui-icon-chart btn"
+        title="在 stackblitz 打开"
+        @click="onStackblitz"
+      >
       </i>
     </div>
   </div>
@@ -40,7 +41,7 @@
 import { layer } from "@layui/layer-vue";
 import { onMounted, onUnmounted, ref, watch } from "vue";
 import { openPlayground } from "../utils/code-playground";
-import { openStackblitz } from "../utils/code-stackblitz"
+import { openStackblitz } from "../utils/code-stackblitz";
 
 const meta = ref<HTMLElement>({} as HTMLElement);
 const isFixContorl = ref(false);
@@ -61,12 +62,12 @@ const onPlayground = async function () {
   window.open(link);
 };
 
-const onStackblitz = function() {
+const onStackblitz = function () {
   const foundCodes = meta.value.getElementsByClassName("language-html");
   const foundCode = foundCodes[0];
   const SourceCode = foundCode.textContent || "";
   openStackblitz(SourceCode);
-}
+};
 
 const copy = function () {
   const foundCodes = meta.value.getElementsByClassName("language-html");
@@ -213,7 +214,7 @@ function handleScroll() {
 .btn:hover::before {
   color: #5fb878;
 }
-.btn:hover svg > path{
+.btn:hover svg > path {
   fill: #5fb878;
 }
 </style>
