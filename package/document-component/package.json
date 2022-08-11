@@ -21,6 +21,7 @@
     "@types/markdown-it": "^12.2.3",
     "@types/markdown-it-container": "^2.0.4",
     "@types/prettier": "^2.4.4",
+    "@stackblitz/sdk": "^1.8.0",
     "escape-html": "^1.0.3",
     "markdown-it-container": "^3.0.0",
     "prismjs": "^1.28.0",

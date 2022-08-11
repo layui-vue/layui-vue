@@ -17,7 +17,7 @@ const MAIN_FILE_NAME = "App.vue";
  * @returns 处理后的代码，URI hsah， playground 链接
   }
  */
-export const usePlayGround = async (
+export const openPlayground = async (
   source: string,
   convertSetupSugar: boolean
 ) => {
@@ -25,7 +25,6 @@ export const usePlayGround = async (
   const scriptResult = decodeCode.match(scriptRe);
 
   // 替换 script 标签
-  // $1 正则第一个括号匹配的内容
   let code: string | undefined = decodeCode;
   if (convertSetupSugar) {
     if (scriptResult) {
