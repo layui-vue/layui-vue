@@ -437,17 +437,23 @@ const classes = computed(() => {
   ];
 });
 
-watch(() => props.height, () => {
-  nextTick(() => {
-    getScrollWidth();
-  })
-})
+watch(
+  () => props.height,
+  () => {
+    nextTick(() => {
+      getScrollWidth();
+    });
+  }
+);
 
-watch(() => props.maxHeight, () => {
-  nextTick(() => {
-    getScrollWidth();
-  })
-})
+watch(
+  () => props.maxHeight,
+  () => {
+    nextTick(() => {
+      getScrollWidth();
+    });
+  }
+);
 
 onMounted(() => {
   getScrollWidth();
