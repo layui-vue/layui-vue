@@ -15,6 +15,7 @@ import {
   StyleValue,
   WritableComputedRef,
   computed,
+  onBeforeUnmount,
 } from "vue";
 import { v4 as uuidv4 } from "../../utils/guidUtil";
 import { Recordable } from "../../types";
@@ -610,6 +611,10 @@ const renderTotalRowCell = (column: any) => {
     }
   }
 };
+
+onBeforeUnmount(() => {
+  window.onresize = null;
+})
 </script>
 
 <template>
