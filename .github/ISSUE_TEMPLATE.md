@@ -1,15 +1,14 @@
-## background
+## 背景
 
-- 1.Describe the problem you want to solve
+- 1.版本: layui-vue:last
 
-- 2.State the status of the problem
+- 2.问题：你希望解决什么问题?
 
-- 3.Reasonable suggestion
+- 3.补充：复现案例，错误截图
+## 建议
 
-## train of thought
+描述大概的解决思路, 可以包含 API 设计和伪代码等
 
-Idea describes the general solution idea, including API design, pseudo code, etc
+## 跟进
 
-## follow-up
-
-For subsequent editing, attach the corresponding pull request address in the form of ` - [] some task '.
+后续编辑，附上对应的 Pull Request 地址，可以用 `- [ ] some task` 的方式。
