@@ -41,9 +41,11 @@ const props = withDefaults(defineProps<LayPageProps>(), {
 const { t } = useI18n();
 const slots = useSlots();
 
+const maxPage = ref(0);
 const limits = ref(props.limits);
 const pages = Math.floor(props.pages / 2);
-
+const currentPage: Ref<number> = ref(props.modelValue);
+const currentPageShow: Ref<number> = ref(currentPage.value);
 const inlimit = computed({
   get() {
     return props.limit;
@@ -52,8 +54,6 @@ const inlimit = computed({
     emit("limit", v);
   },
 });
-
-const maxPage = ref(0);
 
 const totalPage = computed(() => {
   maxPage.value = Math.ceil(props.total / props.limit);
@@ -72,9 +72,6 @@ const totalPage = computed(() => {
   }
   return r;
 });
-
-const currentPage: Ref<number> = ref(props.modelValue);
-const currentPageShow: Ref<number> = ref(currentPage.value);
 
 const emit = defineEmits(["jump", "limit", "update:modelValue"]);
 
@@ -115,9 +112,10 @@ watch(currentPage, function () {
   emit("jump", { current: currentPage.value });
   emit("update:modelValue", currentPage.value);
 });
+
 watch(
   () => props.modelValue,
-  function () {
+  () => {
     currentPage.value = props.modelValue;
     currentPageShow.value = currentPage.value;
   }
