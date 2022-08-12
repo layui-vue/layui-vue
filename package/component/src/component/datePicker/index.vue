@@ -14,7 +14,8 @@
         :readonly="readonly"
         v-model="dateValue"
         :placeholder="placeholder"
-        prefix-icon="layui-icon-date"
+        :prefix-icon="prefixIcon"
+        :suffix-icon="suffixIcon" 
         :disabled="disabled"
         v-if="!range"
         @change="onChange"
@@ -130,6 +131,8 @@ export interface LayDatePickerProps {
   readonly?: boolean;
   allowClear?: boolean;
   size?: "lg" | "md" | "sm" | "xs";
+  prefixIcon?: string;
+  suffixIcon?: string;
 }
 
 const props = withDefaults(defineProps<LayDatePickerProps>(), {
@@ -142,6 +145,8 @@ const props = withDefaults(defineProps<LayDatePickerProps>(), {
   readonly: false,
   allowClear: false,
   size: "md",
+  prefixIcon: "layui-icon-date",
+  suffixIcon: ""
 });
 
 const dropdownRef = ref(null);
