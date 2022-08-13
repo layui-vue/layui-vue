@@ -426,7 +426,7 @@ const menus = [
         path: "/zh-CN/components/photo",
       },
     ],
-  }
+  },
 ];
 
 export default menus;

@@ -173,7 +173,7 @@ const components: Record<string, Plugin> = {
   LayNoticeBar,
   LayPageHeader,
   LayCascader,
-  LayAffix
+  LayAffix,
 };
 
 const install = (app: App, options?: InstallOptions): void => {
