@@ -614,7 +614,7 @@ const renderTotalRowCell = (column: any) => {
 
 onBeforeUnmount(() => {
   window.onresize = null;
-})
+});
 </script>
 
 <template>

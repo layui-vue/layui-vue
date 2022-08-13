@@ -12,11 +12,11 @@
       <lay-input
         :name="name"
         :readonly="readonly"
-        v-model="dateValue"
         :placeholder="placeholder"
         :prefix-icon="prefixIcon"
-        :suffix-icon="suffixIcon" 
+        :suffix-icon="suffixIcon"
         :disabled="disabled"
+        v-model="dateValue"
         v-if="!range"
         @change="onChange"
         :allow-clear="!disabled && allowClear"
@@ -146,7 +146,7 @@ const props = withDefaults(defineProps<LayDatePickerProps>(), {
   allowClear: false,
   size: "md",
   prefixIcon: "layui-icon-date",
-  suffixIcon: ""
+  suffixIcon: "",
 });
 
 const dropdownRef = ref(null);
