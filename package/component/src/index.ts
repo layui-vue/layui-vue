@@ -61,7 +61,6 @@ import LayDropdownSubMenu from "./component/dropdownSubMenu/index";
 import LayTab from "./component/tab/index";
 import LayTabItem from "./component/tabItem/index";
 import LayTree from "./component/tree/index";
-import LayTreeSelect from "./component/treeSelect/index";
 import LayTable from "./component/table/index";
 import LayPage from "./component/page/index";
 import LayTransfer from "./component/transfer/index";
@@ -89,8 +88,6 @@ import LayNoticeBar from "./component/noticeBar/index";
 import LayPageHeader from "./component/pageHeader/index";
 import LayCascader from "./component/cascader/index";
 import LayAffix from "./component/affix/index";
-import LayTag from "./component/tag/index";
-import LayTagInput from "./component/tagInput/index";
 import LayConfigProvider from "./provider";
 import { InstallOptions } from "./types";
 
@@ -149,7 +146,6 @@ const components: Record<string, Plugin> = {
   LayTabItem,
   LayIconPicker,
   LayTree,
-  LayTreeSelect,
   LayTable,
   LayPage,
   LayTransfer,
@@ -177,9 +173,7 @@ const components: Record<string, Plugin> = {
   LayNoticeBar,
   LayPageHeader,
   LayCascader,
-  LayAffix,
-  LayTag,
-  LayTagInput,
+  LayAffix
 };
 
 const install = (app: App, options?: InstallOptions): void => {
@@ -245,7 +239,6 @@ export {
   LayTabItem,
   LayIconPicker,
   LayTree,
-  LayTreeSelect,
   LayTable,
   LayPage,
   LayTransfer,
@@ -274,8 +267,6 @@ export {
   LayPageHeader,
   LayCascader,
   LayAffix,
-  LayTag,
-  LayTagInput,
   install,
 };
 

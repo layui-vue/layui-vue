@@ -10,11 +10,11 @@
 ::: demo
 <template>
 <lay-timeline>
-  <lay-timeline-item title="1.3.x">
+  <lay-timeline-item title="1.4.x">
     <ul> 
-      <a name="1-3-14"></a> 
+      <a name="1-4-0"></a> 
       <li> 
-        <h3>1.4.0 <span class="layui-badge-rim">2022-08-12</span></h3> 
+        <h3>1.4.0 <span class="layui-badge-rim">2022-08-13</span></h3> 
         <ul>     
           <li>[新增] button 组件 dropdown 下拉 demo。</li>
           <li>[新增] button 组件 loading-icon 属性, 允许自定义加载图标。</li>
