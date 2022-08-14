@@ -10,8 +10,6 @@
 
 layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库. 
 
-QQ 群 ：[➀ 336720831](https://jq.qq.com/?_wv=1027&k=oQA1SC80)
-
 **Run with code Sandbox.**
 
 [![Edit layui-vue](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/11mvy)
