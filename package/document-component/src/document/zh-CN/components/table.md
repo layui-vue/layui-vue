@@ -698,7 +698,7 @@ export default {
 
 <template>
   <lay-button @click="changeSelectedKeys">修改选中值 {{ selectedKeys5 }}</lay-button>
-  <lay-table :columns="columns23" :data-source="dataSource23" v-model:selectedKeys="selectedKeys5" :getCheckboxProps="getCheckboxProps"></lay-table>
+  <lay-table :columns="columns23" :data-source="dataSource23" v-model:selectedKeys="selectedKeys5"></lay-table>
 </template>
 
 <script>
