@@ -93,6 +93,7 @@ const emit = defineEmits([
 const slot = useSlots();
 const slots = slot.default && slot.default();
 
+const s = "";
 const allChecked = ref(false);
 const hasChecked = ref(false);
 const tableDataSource = ref<any[]>([...props.dataSource]);
@@ -257,6 +258,8 @@ watch(
   () => props.dataSource,
   () => {
     tableDataSource.value = [...props.dataSource];
+    tableSelectedKeys.value = [];
+    tableSelectedKey.value = s;
     nextTick(() => {
       getScrollWidth();
     });
@@ -316,11 +319,11 @@ const rowDoubleClick = function (data: any, evt: MouseEvent) {
   emit("row-double", data, evt);
 };
 
-const rowContextmenu = function (data: any, evt: MouseEvent) {
+const rowContextmenu = (data: any, evt: MouseEvent) => {
   emit("row-contextmenu", data, evt);
 };
 
-const print = function () {
+const print = () => {
   let subOutputRankPrint = document.getElementById(tableId) as HTMLElement;
   let newContent = subOutputRankPrint.innerHTML;
   let oldContent = document.body.innerHTML;

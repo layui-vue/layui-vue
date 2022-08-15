@@ -11,7 +11,16 @@
 <template>
 <lay-timeline>
   <lay-timeline-item title="1.4.x">
-      <ul> 
+    <ul> 
+      <a name="1-3-14"></a> 
+      <li> 
+        <h3>1.4.1 <span class="layui-badge-rim">2022-08-14</span></h3> 
+        <ul>     
+          <li>[修复] 表格开启复选框之后，不使用getCheckboxProps属性，点击时全选会报错。</li>
+        </ul>
+      </li>
+    </ul>
+    <ul> 
       <a name="1-3-14"></a> 
       <li> 
         <h3>1.4.1 <span class="layui-badge-rim">2022-08-14</span></h3> 
