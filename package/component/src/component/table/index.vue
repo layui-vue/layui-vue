@@ -212,8 +212,8 @@ const findFinalNode = (level: number, columns: any[]) => {
         tableHeadColumns.value[level] = [];
       }
       // 如果列固定，并且 width 不存在, 设置默认值
-      if(column.fixed && !column.width) {
-        column.type ? column.width = "50px" : column.width = "100px";
+      if (column.fixed && !column.width) {
+        column.type ? (column.width = "50px") : (column.width = "100px");
       }
       tableHeadColumns.value[level].push(column);
       findFinalNode(level + 1, column.children);
@@ -224,8 +224,8 @@ const findFinalNode = (level: number, columns: any[]) => {
         tableHeadColumns.value[level] = [];
       }
       // 如果列固定，并且 width 不存在, 设置默认值
-      if(column.fixed && !column.width) {
-        column.type ? column.width = "50px" : column.width = "100px";
+      if (column.fixed && !column.width) {
+        column.type ? (column.width = "50px") : (column.width = "100px");
       }
       tableHeadColumns.value[level].push(column);
     }
