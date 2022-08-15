@@ -12,16 +12,19 @@
 <lay-timeline>
   <lay-timeline-item title="1.4.x">
     <ul> 
-      <a name="1-3-14"></a> 
+      <a name="1-4-2"></a> 
       <li> 
-        <h3>1.4.1 <span class="layui-badge-rim">2022-08-14</span></h3> 
+        <h3>1.4.2 <span class="layui-badge-rim">2022-08-15</span></h3> 
         <ul>     
-          <li>[修复] 表格开启复选框之后，不使用getCheckboxProps属性，点击时全选会报错。</li>
+          <li>[修复] table 组件 fixed 属性开启时, 不设置 width 产生的错误。</li>
+          <li>[修复] table 组件 dataSource 属性改变时, 清空 selectedKeys 内容。</li>
+          <li>[修复] table 组件 dataSource 属性改变时, 清空 selectedKey 内容。</li>
+          <li>[优化] table 组件 fixed 属性开启时, 根据 column 的 type 属性, 设置默认宽度。 </li>
         </ul>
       </li>
     </ul>
     <ul> 
-      <a name="1-3-14"></a> 
+      <a name="1-4-1"></a> 
       <li> 
         <h3>1.4.1 <span class="layui-badge-rim">2022-08-14</span></h3> 
         <ul>     

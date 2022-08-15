@@ -211,6 +211,10 @@ const findFinalNode = (level: number, columns: any[]) => {
       if (!tableHeadColumns.value[level]) {
         tableHeadColumns.value[level] = [];
       }
+      // 如果列固定，并且 width 不存在, 设置默认值
+      if(column.fixed && !column.width) {
+        column.type ? column.width = "50px" : column.width = "100px";
+      }
       tableHeadColumns.value[level].push(column);
       findFinalNode(level + 1, column.children);
     } else {
@@ -218,6 +222,10 @@ const findFinalNode = (level: number, columns: any[]) => {
       column.rowspan = rowSpan;
       if (!tableHeadColumns.value[level]) {
         tableHeadColumns.value[level] = [];
+      }
+      // 如果列固定，并且 width 不存在, 设置默认值
+      if(column.fixed && !column.width) {
+        column.type ? column.width = "50px" : column.width = "100px";
       }
       tableHeadColumns.value[level].push(column);
     }
@@ -323,6 +331,7 @@ const rowContextmenu = (data: any, evt: MouseEvent) => {
   emit("row-contextmenu", data, evt);
 };
 
+// 页面打印
 const print = () => {
   let subOutputRankPrint = document.getElementById(tableId) as HTMLElement;
   let newContent = subOutputRankPrint.innerHTML;
@@ -333,9 +342,7 @@ const print = () => {
   document.body.innerHTML = oldContent;
 };
 
-/**
- * excel 导出
- */
+// 报表导出
 const exportData = () => {
   var tableStr = ``;
   for (let tableHeadColumn of tableHeadColumns.value) {
@@ -383,11 +390,12 @@ const exportData = () => {
   return;
 };
 
-//输出base64编码
+// BASE64编码
 function base64(s: string) {
   return window.btoa(unescape(encodeURIComponent(s)));
 }
 
+// 列排序
 const sortTable = (e: any, key: string, sort: string) => {
   let currentSort = e.target.parentNode.getAttribute("lay-sort");
   if (sort === "desc") {
@@ -524,7 +532,7 @@ const renderFixedStyle = (column: any, columnIndex: number) => {
           props.columns[i].fixed == "left" &&
           tableColumnKeys.value.includes(props.columns[i].key)
         ) {
-          left = left + props.columns[i]?.width.replace("px", "");
+          left = left + props.columns[i]?.width?.replace("px", "");
         }
       }
       return { left: `${left}px` } as StyleValue;
@@ -536,7 +544,7 @@ const renderFixedStyle = (column: any, columnIndex: number) => {
           props.columns[i].fixed == "right" &&
           tableColumnKeys.value.includes(props.columns[i].key)
         ) {
-          right = right + props.columns[i]?.width.replace("px", "");
+          right = right + props.columns[i]?.width?.replace("px", "");
         }
       }
       return { right: `${right}px` } as StyleValue;

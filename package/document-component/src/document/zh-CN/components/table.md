@@ -697,7 +697,8 @@ export default {
 ::: demo 通过 `columns` 配置 `type:'checkbox'` 开启单选列。
 
 <template>
-  <lay-button @click="changeSelectedKeys">修改选中值 {{ selectedKeys5 }}</lay-button>
+  <lay-button @click="changeSelectedKeys">修改选中</lay-button>
+  <lay-button @click="changeDataSource23">修改数据</lay-button>
   <lay-table :columns="columns23" :data-source="dataSource23" v-model:selectedKeys="selectedKeys5"></lay-table>
 </template>
 
@@ -720,14 +721,23 @@ export default {
       selectedKeys5.value = ["2"]
     }
 
+    const changeDataSource23 = () => {
+      dataSource23.value = [      
+        {id:"1",username:"root", password:"root",sex:"男", age:"18", remark: 'layui - vue（谐音：类 UI) '},
+        {id:"2",username:"root", password:"root",sex:"男", age:"18", remark: 'layui - vue（谐音：类 UI) '}
+      ]
+    }
+
     const columns23 = [
       {
+        fixed: "left",
         type: "checkbox",
       },
       {
         title:"账户",
         width:"200px",
-        key:"username"
+        key:"username",
+        fixed: "left"
       },{
         title:"密码",
         width: "300px",
@@ -747,20 +757,21 @@ export default {
       }
     ]
 
-    const dataSource23 = [
+    const dataSource23 = ref([
       {id:"1",username:"root", password:"root",sex:"男", age:"18", remark: 'layui - vue（谐音：类 UI) '},
       {id:"2",username:"root", password:"root",sex:"男", age:"18", remark: 'layui - vue（谐音：类 UI) '},
       {id:"3",username:"woow", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '},
       {id:"4",username:"woow", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '},
       {id:"5",username:"woow", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '}
-    ]
+    ])
 
     return {
       columns23,
       dataSource23,
       selectedKeys5,
       changeSelectedKeys,
-      getCheckboxProps
+      getCheckboxProps,
+      changeDataSource23
     }
   }
 }
