@@ -1,30 +1,18 @@
 <template>
-  <div
-    class="layui-scroll"
-    :class="{ hide: data.winWidth < 500 }"
-    :style="{ height: height }"
-  >
+  <div class="layui-scroll" :class="{ hide: data.winWidth < 500 }" :style="{ height: height }">
     <div class="layui-scroll-y">
       <div ref="scrollRef" class="layui-scroll-wrap" @scroll="onMosewheel">
         <slot></slot>
       </div>
-      <div
-        ref="barRef"
-        class="layui-scroll-track"
-        :style="{
-          backgroundColor: data.heightPre == 1 ? 'rgba(0,0,0,0)' : trackColor,
-        }"
-      >
-        <div
-          :style="{
-            height: data.barHeight + 'px',
-            width: thumbWidth + 'px',
-            transform: 'translateY(' + data.translateY + 'px)',
-            backgroundColor: data.heightPre == 1 ? 'rgba(0,0,0,0)' : thumbColor,
-          }"
-          class="layui-scroll-thumb"
-          @mousedown.stop.prevent="moveStart"
-        ></div>
+      <div ref="barRef" class="layui-scroll-track" :style="{
+        backgroundColor: data.heightPre == 1 ? 'rgba(0,0,0,0)' : trackColor,
+      }">
+        <div :style="{
+          height: data.barHeight + 'px',
+          width: thumbWidth + 'px',
+          transform: 'translateY(' + data.translateY + 'px)',
+          backgroundColor: data.heightPre == 1 ? 'rgba(0,0,0,0)' : thumbColor,
+        }" class="layui-scroll-thumb" @mousedown.stop.prevent="moveStart"></div>
       </div>
     </div>
   </div>
@@ -74,10 +62,10 @@ let wrapHeight = 0; // 容器高度（可视高度）
 let wrapContentHeight = 0; // 内容高度（可滚动内容的高度）
 
 onMounted(() => {
-  monitorWindow()
-  monitorScrollBar(); 
+  monitorWindow();
+  monitorScrollBar();
   nextTick(() => {
-    calculationLength(); 
+    calculationLength();
   });
 });
 
@@ -88,13 +76,11 @@ onUnmounted(() => {
 
 // 监听页面尺寸改变计算滚动条
 const monitorWindow = function () {
-  let time: NodeJS.Timeout; //定时器，防抖，窗口持续变化，延迟更新滚动条
+  let time: NodeJS.Timeout;
   window.addEventListener("resize", () => {
-    data.winWidth = document.body.clientWidth; //页面改变监听宽度控制移动端隐藏滚动条
+    data.winWidth = document.body.clientWidth;
     clearTimeout(time);
     time = setTimeout(() => {
-      //页面宽度变化继续监听，如果小于500就关闭自定义滚动条
-      // console.log("浏览器窗口变化更新滚动条");
       initScrollListner();
     }, 500);
   });
@@ -103,16 +89,22 @@ const monitorWindow = function () {
 //监听内容元素尺寸变化
 const monitorScrollBar = function () {
   // @ts-ignore
-  var monitorUl = scrollRef.value.children[0];
-  // @ts-ignore
-  let MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
+  var monitorUl = scrollRef.value;
+  let MutationObserver =
+    window.MutationObserver ||
+    // @ts-ignore
+    window.WebKitMutationObserver ||
+    // @ts-ignore
+    window.MozMutationObserver;
   let observer = new MutationObserver((mutations) => {
     initScrollListner();
   });
-  observer.observe(monitorUl, {
-    attributes: true,
-    childList: true,
-  });
+  if (monitorUl) {
+    observer.observe(monitorUl, {
+      attributes: true,
+      childList: true,
+    });
+  }
 };
 
 // 初始化延迟监听滚动条
@@ -194,7 +186,7 @@ const moveTo = () => {
         data.translateY = e.clientY - moveClientY;
       }
       // 计算出内容盒子滚出顶部的距离
-      if(scrollRef.value) {
+      if (scrollRef.value) {
         scrollRef.value.scrollTop = data.translateY / data.heightPre;
       }
     }
