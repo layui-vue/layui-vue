@@ -48,14 +48,22 @@ const currentPage: Ref<number> = ref(props.modelValue);
 const currentPageShow: Ref<number> = ref(currentPage.value);
 const inlimit = ref(props.limit);
 
-watch(() => props.limit, () => {
-  inlimit.value = props.limit;
-})
+watch(
+  () => props.limit,
+  () => {
+    inlimit.value = props.limit;
+  }
+);
 
 const totalPage = computed(() => {
   maxPage.value = Math.ceil(props.total / inlimit.value);
   let r: number[] = [];
-  let start = maxPage.value <= props.pages ? 1 : currentPage.value > pages ? currentPage.value - pages : 1;
+  let start =
+    maxPage.value <= props.pages
+      ? 1
+      : currentPage.value > pages
+      ? currentPage.value - pages
+      : 1;
   for (let i = start; ; i++) {
     if (r.length >= props.pages || i > maxPage.value) {
       break;
@@ -96,15 +104,15 @@ const jumpPage = () => {
 const changelimit = () => {
   currentPage.value = 1;
   emit("change", { current: currentPage.value, limit: inlimit.value });
-}
+};
 
 const refresh = () => {
   emit("change", { current: currentPage.value, limit: inlimit.value });
-}
+};
 
 watch(inlimit, () => {
   emit("update:limit", inlimit.value);
-})
+});
 
 watch(currentPage, () => {
   const min = totalPage.value[0];
@@ -178,7 +186,12 @@ watch(
         </option>
       </select>
     </span>
-    <a v-if="showRefresh" href="javascript:;" @click="refresh" class="layui-laypage-refresh">
+    <a
+      v-if="showRefresh"
+      href="javascript:;"
+      @click="refresh"
+      class="layui-laypage-refresh"
+    >
       <i class="layui-icon layui-icon-refresh"></i>
     </a>
     <span v-if="props.showSkip" class="layui-laypage-skip">
