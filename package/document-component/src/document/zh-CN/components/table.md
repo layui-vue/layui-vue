@@ -119,23 +119,25 @@ export default {
 ::: demo
 
 <template>
+  page props: {{ page3 }}
   <lay-table :columns="columns3" :data-source="dataSource3" :page="page3" @change="change3"></lay-table>
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref } from 'vue';
+import { layer } from "@layui/layer-vue";
 
 export default {
   setup() {
     
-    const page3 = {
+    const page3 = ref({
       total: 100,
       limit: 10,
       current: 2
-    }
+    })
 
-    const change3 = function({ current }){
-      console.log("当前页:" + JSON.stringify(current))
+    const change3 = ({ current, limit }) => {
+      layer.msg("current:" + current + " limit:" + limit);
     }
 
     const columns3 = [
@@ -1466,7 +1468,7 @@ export default {
 | row             | 行单击 | data : 当前行 |
 | row-double      | 行双击 | data : 当前行 |
 | row-contextmenu | 行右击 | data : 当前行 |
-
+| change          | 分页事件 | { current: 当前页码, limit: 每页数量 } |
 :::
 
 ::: title Table 插槽

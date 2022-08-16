@@ -859,13 +859,13 @@ onBeforeUnmount(() => {
       </div>
       <div v-if="page" class="layui-table-page">
         <lay-page
-          show-page
-          show-skip
-          show-limit
+          :show-page="true"
+          :show-skip="true"
+          :show-limit="true"
           :total="page.total"
-          :limit="page.limit"
-          v-model="page.current"
-          @jump="change"
+          v-model:limit="page.limit"
+          v-model:modelValue="page.current"
+          @change="change"
         >
           <template #prev>
             <lay-icon type="layui-icon-left" />

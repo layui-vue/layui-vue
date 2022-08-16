@@ -46,24 +46,16 @@ const limits = ref(props.limits);
 const pages = Math.floor(props.pages / 2);
 const currentPage: Ref<number> = ref(props.modelValue);
 const currentPageShow: Ref<number> = ref(currentPage.value);
-const inlimit = computed({
-  get() {
-    return props.limit;
-  },
-  set(v: number) {
-    emit("limit", v);
-  },
-});
+const inlimit = ref(props.limit);
+
+watch(() => props.limit, () => {
+  inlimit.value = props.limit;
+})
 
 const totalPage = computed(() => {
-  maxPage.value = Math.ceil(props.total / props.limit);
-  let r: number[] = [],
-    start =
-      maxPage.value <= props.pages
-        ? 1
-        : currentPage.value > pages
-        ? currentPage.value - pages
-        : 1;
+  maxPage.value = Math.ceil(props.total / inlimit.value);
+  let r: number[] = [];
+  let start = maxPage.value <= props.pages ? 1 : currentPage.value > pages ? currentPage.value - pages : 1;
   for (let i = start; ; i++) {
     if (r.length >= props.pages || i > maxPage.value) {
       break;
@@ -73,43 +65,53 @@ const totalPage = computed(() => {
   return r;
 });
 
-const emit = defineEmits(["jump", "limit", "update:modelValue"]);
+const emit = defineEmits(["update:modelValue", "update:limit", "change"]);
 
-const prev = function () {
+const prev = () => {
   if (currentPage.value === 1) {
     return;
   }
   currentPage.value--;
+  emit("change", { current: currentPage.value, limit: inlimit.value });
 };
 
-const next = function () {
+const next = () => {
   if (currentPage.value === maxPage.value) {
     return;
   }
   currentPage.value++;
+  emit("change", { current: currentPage.value, limit: inlimit.value });
 };
 
-const jump = function (page: number) {
+const jump = (page: number) => {
   currentPage.value = page;
+  emit("change", { current: currentPage.value, limit: inlimit.value });
 };
 
-const jumpPage = function () {
+const jumpPage = () => {
   currentPage.value = currentPageShow.value;
+  emit("change", { current: currentPage.value, limit: inlimit.value });
 };
 
-watch(inlimit, function () {
+const changelimit = () => {
   currentPage.value = 1;
-});
+  emit("change", { current: currentPage.value, limit: inlimit.value });
+}
 
-watch(currentPage, function () {
-  if (currentPage.value > totalPage.value[totalPage.value.length - 1]) {
-    currentPage.value = totalPage.value[totalPage.value.length - 1];
-  }
-  if (currentPage.value < totalPage.value[0]) {
-    currentPage.value = totalPage.value[0];
-  }
+const refresh = () => {
+  emit("change", { current: currentPage.value, limit: inlimit.value });
+}
+
+watch(inlimit, () => {
+  emit("update:limit", inlimit.value);
+})
+
+watch(currentPage, () => {
+  const min = totalPage.value[0];
+  const max = totalPage.value[totalPage.value.length - 1];
+  if (currentPage.value > max) currentPage.value = max;
+  if (currentPage.value < min) currentPage.value = min;
   currentPageShow.value = currentPage.value;
-  emit("jump", { current: currentPage.value });
   emit("update:modelValue", currentPage.value);
 });
 
@@ -157,7 +159,6 @@ watch(
         >
       </template>
     </template>
-
     <a
       href="javascript:;"
       class="layui-laypage-next"
@@ -171,13 +172,13 @@ watch(
       <template v-else>{{ t("page.next") }}</template>
     </a>
     <span v-if="showLimit" class="layui-laypage-limits">
-      <select v-model="inlimit">
+      <select v-model="inlimit" @change="changelimit">
         <option v-for="val of limits" :key="val" :value="val">
           {{ val }} 条/页
         </option>
       </select>
     </span>
-    <a v-if="showRefresh" href="javascript:;" class="layui-laypage-refresh">
+    <a v-if="showRefresh" href="javascript:;" @click="refresh" class="layui-laypage-refresh">
       <i class="layui-icon layui-icon-refresh"></i>
     </a>
     <span v-if="props.showSkip" class="layui-laypage-skip">
@@ -192,7 +193,7 @@ watch(
         type="button"
         class="layui-laypage-btn"
         @click="jumpPage()"
-        :disabled="currentPageShow > maxPage"
+        :disabled="currentPageShow > maxPage || currentPageShow == currentPage"
       >
         确定
       </button>

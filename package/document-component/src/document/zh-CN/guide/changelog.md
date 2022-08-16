@@ -12,6 +12,22 @@
 <lay-timeline>
   <lay-timeline-item title="1.4.x">
     <ul> 
+      <a name="1-4-3"></a> 
+      <li> 
+        <h3>1.4.3 <span class="layui-badge-rim">2022-08-16</span></h3> 
+        <ul>     
+          <li>[新增] page 组件 change 事件。</li>
+          <li>[新增] card 组件 footer 插槽, 用于自定义底部。</li>
+          <li>[新增] table 组件 change 事件 limit 参数, 代表每页数量。</li>
+          <li>[修复] scroll 组件 default slots 改变时, 滑块不更新的问题。</li>
+          <li>[修复] table 组件 loading 属性造成的单元格错位。</li>
+          <li>[优化] page 组件 跳转 操作, 当输入页码为当前页启用禁用状态。</li>
+          <li>[过时] page 组件 limit 事件, 由 change 事件代替。</li>
+          <li>[过时] page 组件 jump 事件, 由 change 事件代替。</li>
+        </ul>
+      </li>
+    </ul>
+    <ul> 
       <a name="1-4-2"></a> 
       <li> 
         <h3>1.4.2 <span class="layui-badge-rim">2022-08-15</span></h3> 
