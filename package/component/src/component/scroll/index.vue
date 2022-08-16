@@ -56,8 +56,8 @@ const props = withDefaults(defineProps<LayScrollProps>(), {
 
 const emit = defineEmits(["arrive"]);
 
-const scrollRef = ref<HTMLElement | null>(null);
-const barRef = ref<HTMLElement | null>(null);
+const scrollRef = ref<HTMLElement | null | undefined>();
+const barRef = ref<HTMLElement | null | undefined>();
 
 const data = reactive({
   translateY: 0, // 滚动块平移的距离
@@ -66,32 +66,29 @@ const data = reactive({
   winWidth: document.body.clientWidth, //初始化浏览器页面宽度
 });
 
-let time = null; // 定时器
+let time: NodeJS.Timeout; // 定时器
 let isMove = false; // 判断鼠标是否点击滑块（为松开）
 let moveClientY = 0; // 鼠标点击滑块时，相对滑块的位置
 let trackHeight = 0; // 滚动条轨道高度
 let wrapHeight = 0; // 容器高度（可视高度）
 let wrapContentHeight = 0; // 内容高度（可滚动内容的高度）
 
-// 页面挂载后计算滚动条
 onMounted(() => {
-  monitorWindow(); //监听窗口尺寸
-  monitorScrollBar(); //监听内容元素尺寸
+  monitorWindow()
+  monitorScrollBar(); 
   nextTick(() => {
-    //dom渲染后
-    calculationLength(); //初始化延迟更新滚动条
+    calculationLength(); 
   });
 });
 
 // 页面卸载清除定时器
 onUnmounted(() => {
   window.clearInterval(time);
-  time = null;
 });
 
 // 监听页面尺寸改变计算滚动条
 const monitorWindow = function () {
-  let time; //定时器，防抖，窗口持续变化，延迟更新滚动条
+  let time: NodeJS.Timeout; //定时器，防抖，窗口持续变化，延迟更新滚动条
   window.addEventListener("resize", () => {
     data.winWidth = document.body.clientWidth; //页面改变监听宽度控制移动端隐藏滚动条
     clearTimeout(time);
@@ -105,20 +102,13 @@ const monitorWindow = function () {
 
 //监听内容元素尺寸变化
 const monitorScrollBar = function () {
+  // @ts-ignore
   var monitorUl = scrollRef.value.children[0];
-  // var monitorDiv= document;    // 监听document
-  let MutationObserver =
-    window.MutationObserver ||
-    // @ts-ignore
-    window.WebKitMutationObserver ||
-    // @ts-ignore
-    window.MozMutationObserver;
-  let observer = new MutationObserver(function (mutations) {
-    // console.log("内容元素变化更新滚动条");
+  // @ts-ignore
+  let MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
+  let observer = new MutationObserver((mutations) => {
     initScrollListner();
   });
-
-  // 监听子节点增加或者内容撑起的尺寸
   observer.observe(monitorUl, {
     attributes: true,
     childList: true,
@@ -137,7 +127,6 @@ const calculationLength = function () {
   // 间隔500毫秒清除定时器，滑块缩短会有动画效果，时间可延长没有影响
   setTimeout(() => {
     window.clearInterval(time);
-    time = null;
   }, 2000);
 };
 
@@ -146,11 +135,10 @@ const initScrollListner = function () {
   let scroll = scrollRef.value;
   let bar = barRef.value;
   // scroll有时候拿不到元素，要判断一下
-  if (scroll) {
+  if (scroll && bar) {
     wrapContentHeight = scroll.scrollHeight;
     wrapHeight = scroll.clientHeight;
     trackHeight = bar.clientHeight;
-    // console.log(wrapContentHeight ,wrapHeight);
     // 容器高度 / 内容高度   100 150
     data.heightPre = wrapHeight / wrapContentHeight;
     // 滑动块的高度 根据 容器和内容的比  乘以 滚动轨道 计算出 滑动块的高度
@@ -159,11 +147,7 @@ const initScrollListner = function () {
 };
 
 // 内容滚动时，计算滑块移动的距离
-const onMosewheel = function (e) {
-  // scrollTop页面顶部滚出的高度
-  // offsetHeight页面可视区域高度
-  // scrollHeight页面正文全文高度
-  // data.translateY滚动块平移的距离
+const onMosewheel = (e: any) => {
   data.translateY = e.target.scrollTop * data.heightPre;
   if (data.translateY == 0) {
     // 到达顶部
@@ -178,12 +162,12 @@ const onMosewheel = function (e) {
 };
 
 // 到达顶部或者底部通知父级元素
-const arrive = function name(tb) {
+const arrive = (tb: string) => {
   emit("arrive", tb);
 };
 
 // 鼠标点击滑块时
-const moveStart = function (e) {
+const moveStart = (e: any) => {
   isMove = true;
   // clientY：当鼠标事件发生时，鼠标相对于浏览器（这里说的是浏览器的有效区域）y轴的位置
   // data.translateY 滚动块平移的距离
@@ -194,7 +178,7 @@ const moveStart = function (e) {
 };
 
 // 鼠标移动，改变thumb的位置以及容器scrollTop的位置
-const moveTo = function () {
+const moveTo = () => {
   document.onmousemove = (e) => {
     // 移动时候判断是不是松开，松开就不在执行滑块移动操作
     if (isMove) {
@@ -203,14 +187,16 @@ const moveTo = function () {
         // 滑块到达  底部  就不在改变滑块translateY值
         data.translateY = trackHeight - data.barHeight;
       } else if (e.clientY - moveClientY < 0) {
-        // 滑块到达  顶部  就不在改变滑块translateY值
+        // 滑块到达  顶部  就不在改变滑块 translateY 值
         data.translateY = 0;
       } else {
         //改变滑块位置
         data.translateY = e.clientY - moveClientY;
       }
       // 计算出内容盒子滚出顶部的距离
-      scrollRef.value.scrollTop = data.translateY / data.heightPre;
+      if(scrollRef.value) {
+        scrollRef.value.scrollTop = data.translateY / data.heightPre;
+      }
     }
   };
 };

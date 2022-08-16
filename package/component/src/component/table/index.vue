@@ -452,9 +452,9 @@ watch(
   () => {
     nextTick(() => {
       getScrollWidth();
-    })
+    });
   }
-)
+);
 
 onMounted(() => {
   getScrollWidth();
