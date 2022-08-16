@@ -1,18 +1,30 @@
 <template>
-  <div class="layui-scroll" :class="{ hide: data.winWidth < 500 }" :style="{ height: height }">
+  <div
+    class="layui-scroll"
+    :class="{ hide: data.winWidth < 500 }"
+    :style="{ height: height }"
+  >
     <div class="layui-scroll-y">
       <div ref="scrollRef" class="layui-scroll-wrap" @scroll="onMosewheel">
         <slot></slot>
       </div>
-      <div ref="barRef" class="layui-scroll-track" :style="{
-        backgroundColor: data.heightPre == 1 ? 'rgba(0,0,0,0)' : trackColor,
-      }">
-        <div :style="{
-          height: data.barHeight + 'px',
-          width: thumbWidth + 'px',
-          transform: 'translateY(' + data.translateY + 'px)',
-          backgroundColor: data.heightPre == 1 ? 'rgba(0,0,0,0)' : thumbColor,
-        }" class="layui-scroll-thumb" @mousedown.stop.prevent="moveStart"></div>
+      <div
+        ref="barRef"
+        class="layui-scroll-track"
+        :style="{
+          backgroundColor: data.heightPre == 1 ? 'rgba(0,0,0,0)' : trackColor,
+        }"
+      >
+        <div
+          :style="{
+            height: data.barHeight + 'px',
+            width: thumbWidth + 'px',
+            transform: 'translateY(' + data.translateY + 'px)',
+            backgroundColor: data.heightPre == 1 ? 'rgba(0,0,0,0)' : thumbColor,
+          }"
+          class="layui-scroll-thumb"
+          @mousedown.stop.prevent="moveStart"
+        ></div>
       </div>
     </div>
   </div>

@@ -55,6 +55,9 @@ export default {
       <template v-slot:body>
       内容
       </template>
+      <template v-slot:footer>
+      底部
+      </template>
   </lay-card>
 </div>
 </template>

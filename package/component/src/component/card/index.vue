@@ -44,5 +44,8 @@ const classes = computed(() => {
       <slot name="body" v-if="slot.body"></slot>
       <slot v-else></slot>
     </div>
+    <div class="layui-card-footer" v-if="slot.footer">
+      <slot name="footer"></slot>
+    </div>
   </div>
 </template>
