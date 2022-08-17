@@ -15,10 +15,7 @@ const props = defineProps<LayQuoteProps>();
 </script>
 
 <template>
-  <div
-    class="layui-quote"
-    :class="[type ? `layui-quote-${props.type}` : '']"
-  >
+  <div class="layui-quote" :class="[type ? `layui-quote-${props.type}` : '']">
     <slot></slot>
   </div>
 </template>

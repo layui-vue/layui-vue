@@ -856,7 +856,11 @@ onBeforeUnmount(() => {
             </div>
           </template>
         </div>
+        <div class="layui-table-footer" v-if="slot.footer">
+          <slot name="footer"></slot>
+        </div> 
       </div>
+
       <div v-if="page" class="layui-table-page">
         <lay-page
           :show-page="true"
