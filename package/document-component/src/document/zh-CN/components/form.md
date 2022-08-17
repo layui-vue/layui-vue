@@ -142,7 +142,7 @@ export default {
 
 :::
 
-::: title 表单基本校验功能
+::: title 表单验证
 :::
 
 ::: demo
@@ -231,7 +231,7 @@ export default {
 
 :::
 
-::: title 校验规则 - 通过表单配置
+::: title 校验规则
 :::
 
 ::: demo
