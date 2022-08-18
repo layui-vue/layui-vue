@@ -222,7 +222,7 @@ export default {
 | header  | 头部插槽  | --     |--     |
 | body    | 内容插槽  | --     |--     |
 | extra   | 扩展插槽  | --     |--     |
-| footer   | 扩展插槽 | --     |`1.4.3`     |
+| footer   | 扩展插槽 | --     |`1.4.3`|
 :::
 
 ::: contributor card

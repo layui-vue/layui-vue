@@ -12,6 +12,17 @@
 <lay-timeline>
   <lay-timeline-item title="1.4.x">
     <ul> 
+      <a name="1-4-4"></a> 
+      <li> 
+        <h3>1.4.4 <span class="layui-badge-rim">2022-08-18</span></h3> 
+        <ul>     
+          <li>[新增] table 组件 footer 插槽, 用在 page 与 body 之间自定义内容。</li>
+          <li>[修复] date-picker 组件 v-model 为空时, 无法完成日期时间选择。</li>
+          <li>[修复] quote 组件 margin 属性错误 。</li>
+        </ul>
+      </li>
+    </ul>
+    <ul> 
       <a name="1-4-3"></a> 
       <li> 
         <h3>1.4.3 <span class="layui-badge-rim">2022-08-16</span></h3> 

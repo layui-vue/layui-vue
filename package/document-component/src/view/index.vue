@@ -179,14 +179,14 @@
           </lay-tooltip>
         </lay-col>
         <lay-col :md="3">
-          <lay-tooltip content="Pear Admin" position="top">
+          <lay-tooltip content="Sa-Token" position="top">
             <a
               style="height: 40px; display: inline-block"
-              href="http://www.pearadmin.com"
+              href="https://sa-token.dev33.cn/"
               target="_blank"
             >
               <lay-avatar
-                src="https://portrait.gitee.com/uploads/avatars/namespace/2319/6958819_pear-admin_1643085106.png!avatar100"
+                src="https://sa-token.dev33.cn/doc/logo.png"
                 style="background: transparent"
               ></lay-avatar>
             </a>
