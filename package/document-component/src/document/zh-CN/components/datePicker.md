@@ -49,7 +49,7 @@ import { ref } from 'vue'
 export default {
   setup() {
 
-   const endTime2 = ref("2022-06-04 17:35:00");
+   const endTime2 = ref("");
 
     return {
       endTime2

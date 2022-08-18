@@ -294,26 +294,24 @@ watch(
     if (unWatch) {
       return;
     }
-    let initModelValue =
-      props.range && props.modelValue
-        ? (props.modelValue as string[])[0] || ""
-        : (props.modelValue as string);
-    hms.value.hh = dayjs(initModelValue).hour();
-    hms.value.mm = dayjs(initModelValue).minute();
-    hms.value.ss = dayjs(initModelValue).second();
+    let initModelValue = props.range && props.modelValue ? (props.modelValue as string[])[0] || "" : (props.modelValue as string);
+    
+    hms.value.hh = isNaN(dayjs(initModelValue).hour()) ? 0 : dayjs(initModelValue).hour();
+    hms.value.mm = isNaN(dayjs(initModelValue).minute()) ? 0 : dayjs(initModelValue).minute();
+    hms.value.ss = isNaN(dayjs(initModelValue).second()) ? 0 : dayjs(initModelValue).second();
+
     if (initModelValue.length === 8 && props.type === "time") {
-      //dayjs 解析时间容错
       let modelValue = initModelValue;
       modelValue = "1970-01-01 " + modelValue;
       hms.value.hh = dayjs(modelValue).hour();
       hms.value.mm = dayjs(modelValue).minute();
       hms.value.ss = dayjs(modelValue).second();
     }
+
     currentYear.value = initModelValue ? getYear(initModelValue) : -1;
     currentMonth.value = initModelValue ? getMonth(initModelValue) : -1;
     currentDay.value = initModelValue ? getDay(initModelValue) : -1;
     if (props.type === "date" || props.type === "datetime") {
-      // date与datetime容错
       if (currentYear.value === -1) currentYear.value = dayjs().year();
       if (currentMonth.value === -1) currentMonth.value = dayjs().month();
     }
