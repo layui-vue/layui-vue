@@ -294,11 +294,20 @@ watch(
     if (unWatch) {
       return;
     }
-    let initModelValue = props.range && props.modelValue ? (props.modelValue as string[])[0] || "" : (props.modelValue as string);
-    
-    hms.value.hh = isNaN(dayjs(initModelValue).hour()) ? 0 : dayjs(initModelValue).hour();
-    hms.value.mm = isNaN(dayjs(initModelValue).minute()) ? 0 : dayjs(initModelValue).minute();
-    hms.value.ss = isNaN(dayjs(initModelValue).second()) ? 0 : dayjs(initModelValue).second();
+    let initModelValue =
+      props.range && props.modelValue
+        ? (props.modelValue as string[])[0] || ""
+        : (props.modelValue as string);
+
+    hms.value.hh = isNaN(dayjs(initModelValue).hour())
+      ? 0
+      : dayjs(initModelValue).hour();
+    hms.value.mm = isNaN(dayjs(initModelValue).minute())
+      ? 0
+      : dayjs(initModelValue).minute();
+    hms.value.ss = isNaN(dayjs(initModelValue).second())
+      ? 0
+      : dayjs(initModelValue).second();
 
     if (initModelValue.length === 8 && props.type === "time") {
       let modelValue = initModelValue;
