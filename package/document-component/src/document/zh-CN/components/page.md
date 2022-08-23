@@ -143,7 +143,7 @@ export default {
   setup() {
 
     const limit4 = ref(20)
-    const total4 = ref(100)
+    const total4 = ref(0)
     const change4 = ({ current, limit }) => {
       layer.msg("current:" + current + " limit:" + limit);
     }

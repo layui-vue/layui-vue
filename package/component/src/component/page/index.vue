@@ -84,7 +84,7 @@ const prev = () => {
 };
 
 const next = () => {
-  if (currentPage.value === maxPage.value) {
+  if (currentPage.value === maxPage.value || maxPage.value === 0) {
     return;
   }
   currentPage.value++;
@@ -133,6 +133,7 @@ watch(
 </script>
 
 <template>
+ {{ maxPage }}
   <div class="layui-laypage layui-laypage-default">
     <span v-if="showCount" class="layui-laypage-count"
       >共 {{ total }} 条 {{ maxPage }} 页</span
@@ -171,8 +172,8 @@ watch(
       href="javascript:;"
       class="layui-laypage-next"
       :class="[
-        currentPage === maxPage ? 'layui-disabled' : '',
-        theme && currentPage !== maxPage ? 'layui-laypage-a-' + theme : '',
+        currentPage === maxPage || maxPage === 0 ? 'layui-disabled' : '',
+        theme && (currentPage !== maxPage && maxPage !== 0) ? 'layui-laypage-a-' + theme : '',
       ]"
       @click="next()"
     >
