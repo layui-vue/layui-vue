@@ -39,6 +39,7 @@ export interface LayTableRowProps {
 }
 
 const slot = useSlots();
+
 const emit = defineEmits([
   "row",
   "row-double",

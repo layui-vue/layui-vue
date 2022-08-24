@@ -25,6 +25,7 @@ import LayDropdown from "../dropdown/index.vue";
 import LayPage from "../page/index.vue";
 import LayEmpty from "../empty/index.vue";
 import TableRow from "./TableRow.vue";
+import TablePage from "./TablePage.vue";
 import { nextTick } from "vue";
 
 export interface LayTableProps {
@@ -618,6 +619,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
+ {{ page }}
   <div :id="tableId">
     <table class="layui-hide" lay-filter="test"></table>
     <div class="layui-form layui-border-box layui-table-view" :class="classes">
@@ -860,24 +862,22 @@ onBeforeUnmount(() => {
           <slot name="footer"></slot>
         </div>
       </div>
-
       <div v-if="page" class="layui-table-page">
-        <lay-page
-          :show-page="true"
-          :show-skip="true"
-          :show-limit="true"
+        <table-page
+          :show-page="page.showPage"
+          :showSkip="page.showSkip"
+          :showLimit="page.showLimit"
+          :showCount="page.showCount"
+          :limits="page.limits"
+          :showRefresh="page.showRefresh"
           :total="page.total"
+          :pages="page.pages"
+          :theme="page.theme"
+          v-model="page.current"
           v-model:limit="page.limit"
-          v-model:modelValue="page.current"
           @change="change"
         >
-          <template #prev>
-            <lay-icon type="layui-icon-left" />
-          </template>
-          <template #next>
-            <lay-icon type="layui-icon-right" />
-          </template>
-        </lay-page>
+        </table-page>
       </div>
     </div>
   </div>

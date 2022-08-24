@@ -133,7 +133,8 @@ export default {
     const page3 = ref({
       total: 100,
       limit: 10,
-      current: 2
+      current: 2,
+      showRefresh: true,
     })
 
     const change3 = ({ current, limit }) => {
