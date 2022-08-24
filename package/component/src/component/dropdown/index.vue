@@ -30,6 +30,7 @@ import {
   ElementScrollRect,
   DropdownContext,
 } from "./interface";
+import TeleportWrapper  from './TeleportWrapper.vue';
 
 export type DropdownTrigger = "click" | "hover" | "focus" | "contextMenu";
 
@@ -52,7 +53,7 @@ export interface LayDropdownProps {
   mouseLeaveDelay?: number;
   focusDelay?: number;
   alignPoint?: boolean;
-  popupContainer?: string | HTMLElement | undefined;
+  popupContainer?: string | undefined;
 }
 
 const props = withDefaults(defineProps<LayDropdownProps>(), {
@@ -77,7 +78,7 @@ const props = withDefaults(defineProps<LayDropdownProps>(), {
 });
 
 const childrenRefs = new Set<Ref<HTMLElement>>();
-const dropdownCtx = inject<DropdownContext>(dropdownInjectionKey, undefined);
+const dropdownCtx = inject<DropdownContext | undefined>(dropdownInjectionKey, undefined);
 const dropdownRef = shallowRef<HTMLElement | undefined>();
 const contentRef = shallowRef<HTMLElement | undefined>();
 const contentStyle = ref<CSSProperties>({});
@@ -87,8 +88,7 @@ const openState = ref(false);
 
 const containerRef = computed(() =>
   props.popupContainer
-    ? // @ts-ignore
-      document.querySelector<HTMLElement>(props.popupContainer) ?? document.body
+    ? document.querySelector<HTMLElement>(props.popupContainer) ?? document.body
     : dropdownRef.value
 ) as ComputedRef<HTMLElement>;
 
@@ -612,7 +612,7 @@ defineExpose({ open, hide, toggle });
     <div @click="handleClick()" @contextmenu="handleContextMenuClick">
       <slot></slot>
     </div>
-    <Teleport :to="popupContainer" :disabled="!popupContainer">
+    <TeleportWrapper :to="popupContainer">
       <dl
         v-if="openState"
         ref="contentRef"
@@ -623,6 +623,6 @@ defineExpose({ open, hide, toggle });
       >
         <slot name="content"></slot>
       </dl>
-    </Teleport>
+    </TeleportWrapper>
   </div>
 </template>
