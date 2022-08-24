@@ -735,6 +735,18 @@ export default {
 
 :::
 
+::: title Menu 事件
+:::
+
+::: table
+
+| 属性                | 描述                | 参数             |
+| ------------------- | ------------------- | --------------  | 
+| changeSelectedKey   | 选中菜单回调         | value: string   |
+| changeOpenKeys      | 展开目录回调         | value: string[] |
+
+:::
+
 ::: title Menu Item 属性
 :::
 

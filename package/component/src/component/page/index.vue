@@ -172,7 +172,9 @@ watch(
       class="layui-laypage-next"
       :class="[
         currentPage === maxPage || maxPage === 0 ? 'layui-disabled' : '',
-        theme && (currentPage !== maxPage && maxPage !== 0) ? 'layui-laypage-a-' + theme : '',
+        theme && currentPage !== maxPage && maxPage !== 0
+          ? 'layui-laypage-a-' + theme
+          : '',
       ]"
       @click="next()"
     >
