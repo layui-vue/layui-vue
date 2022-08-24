@@ -4,7 +4,7 @@ export default {
 };
 </script>
 <script lang="ts" setup>
-import { onMounted, ref } from 'vue'
+import { onMounted, ref } from "vue";
 
 export interface TeleportWrapperProps {
   to?: string;
@@ -12,19 +12,19 @@ export interface TeleportWrapperProps {
 }
 
 const props = withDefaults(defineProps<TeleportWrapperProps>(), {
-  to: '',
+  to: "",
   disabled: false,
-})
+});
 
-const target = ref<Element | null>(null)
+const target = ref<Element | null>(null);
 
 onMounted(() => {
   if (!props.to) return;
-  const el = document.querySelector(props.to)
+  const el = document.querySelector(props.to);
   if (el) {
-    target.value = el
+    target.value = el;
   }
-})
+});
 </script>
 <template>
   <Teleport :to="target" :disabled="!target || disabled">

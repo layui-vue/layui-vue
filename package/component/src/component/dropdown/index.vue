@@ -30,7 +30,7 @@ import {
   ElementScrollRect,
   DropdownContext,
 } from "./interface";
-import TeleportWrapper  from './TeleportWrapper.vue';
+import TeleportWrapper from "./TeleportWrapper.vue";
 
 export type DropdownTrigger = "click" | "hover" | "focus" | "contextMenu";
 
@@ -78,7 +78,10 @@ const props = withDefaults(defineProps<LayDropdownProps>(), {
 });
 
 const childrenRefs = new Set<Ref<HTMLElement>>();
-const dropdownCtx = inject<DropdownContext | undefined>(dropdownInjectionKey, undefined);
+const dropdownCtx = inject<DropdownContext | undefined>(
+  dropdownInjectionKey,
+  undefined
+);
 const dropdownRef = shallowRef<HTMLElement | undefined>();
 const contentRef = shallowRef<HTMLElement | undefined>();
 const contentStyle = ref<CSSProperties>({});

@@ -22,7 +22,6 @@ import { Recordable } from "../../types";
 import { LayIcon } from "@layui/icons-vue";
 import LayCheckbox from "../checkbox/index.vue";
 import LayDropdown from "../dropdown/index.vue";
-import LayPage from "../page/index.vue";
 import LayEmpty from "../empty/index.vue";
 import TableRow from "./TableRow.vue";
 import TablePage from "./TablePage.vue";
@@ -619,7 +618,6 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
- {{ page }}
   <div :id="tableId">
     <table class="layui-hide" lay-filter="test"></table>
     <div class="layui-form layui-border-box layui-table-view" :class="classes">
