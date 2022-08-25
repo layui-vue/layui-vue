@@ -56,7 +56,7 @@ export interface LayUploadProps {
   url?: string;
   data?: any;
   headers?: Recordable;
-  acceptMime?: "images" | "file" | "video" | "audio";
+  acceptMime?: string;
   field?: string;
   size?: number;
   multiple?: boolean;
@@ -111,8 +111,9 @@ let defaultCutLayerOption: LayerModal = {
   shadeClose: true,
   type: "component",
 };
+
 const props = withDefaults(defineProps<LayUploadProps>(), {
-  acceptMime: "images",
+  acceptMime: "image/*",
   field: "file",
   size: 0,
   multiple: false,
