@@ -587,6 +587,9 @@ export default {
 | blurToClose | 是否在触发器失去焦点时关闭面板,默认 `true` |`true` `false`|
 | clickOutsideToClose| 是否点击外部关闭下拉面板,默认 `true`|`true` `false`|
 | contentOffset | 下拉面板距离触发器的偏移距离，默认 2| -| 
+| mouseEnterDelay | mouseEnter 事件延迟触发的时间, trigger hover 有效 | - |
+| mouseLeaveDelay | mouseLeave 事件延迟触发的时间, trigger hover 有效| - |
+| focusDelay| focus 事件延迟触发的时间, trigger focus 有效 | - |
 
 
 :::

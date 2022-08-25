@@ -6,7 +6,7 @@ export default {
 
 <script setup lang="ts">
 import "./index.less";
-import { ComputedRef, CSSProperties, inject, reactive, Ref } from "vue";
+import { ComputedRef, CSSProperties, inject, reactive, Ref, toRefs } from "vue";
 import {
   computed,
   nextTick,
@@ -19,7 +19,6 @@ import {
 } from "vue";
 import {
   onClickOutside,
-  useMouse,
   useResizeObserver,
   useThrottleFn,
   useWindowSize,
@@ -48,10 +47,10 @@ export interface LayDropdownProps {
   blurToClose?: boolean;
   clickOutsideToClose?: boolean;
   contentOffset?: number;
-  // 以下暂不开放
   mouseEnterDelay?: number;
   mouseLeaveDelay?: number;
   focusDelay?: number;
+  // 未完善,暂不开放
   alignPoint?: boolean;
   popupContainer?: string | undefined;
 }
@@ -86,7 +85,11 @@ const dropdownRef = shallowRef<HTMLElement | undefined>();
 const contentRef = shallowRef<HTMLElement | undefined>();
 const contentStyle = ref<CSSProperties>({});
 const { width: windowWidth, height: windowHeight } = useWindowSize();
-const { x: mouseLeft, y: mouseTop } = useMouse();
+const mousePosition = reactive({
+  x: 0,
+  y: 0,
+});
+const { x: mouseLeft, y: mouseTop } = toRefs(mousePosition);
 const openState = ref(false);
 
 const containerRef = computed(() =>
@@ -169,19 +172,32 @@ const getElementScrollRect = (element: HTMLElement, containerRect: DOMRect) => {
   };
 };
 
+const getTriggerRect = () => {
+  return {
+    top: mouseTop.value,
+    bottom: mouseTop.value,
+    left: mouseLeft.value,
+    right: mouseLeft.value,
+    scrollTop: mouseTop.value,
+    scrollBottom: mouseTop.value,
+    scrollLeft: mouseLeft.value,
+    scrollRight: mouseLeft.value,
+    width: 0,
+    height: 0,
+  };
+};
+
 const updateContentStyle = () => {
   if (!containerRef.value || !dropdownRef.value || !contentRef.value) {
     return;
   }
+
   const containerRect = containerRef.value.getBoundingClientRect();
-  const triggerRect = getElementScrollRect(dropdownRef.value, containerRect);
+  const triggerRect = props.alignPoint
+    ? getTriggerRect()
+    : getElementScrollRect(dropdownRef.value, containerRect);
   const contentRect = getElementScrollRect(contentRef.value, containerRect);
-  const { style } = getContentStyle(
-    props.placement,
-    triggerRect,
-    contentRect,
-    props.alignPoint
-  );
+  const { style } = getContentStyle(props.placement, triggerRect, contentRect);
 
   if (props.autoFitMinWidth) {
     style.minWidth = `${triggerRect.width}px`;
@@ -193,10 +209,9 @@ const updateContentStyle = () => {
 
   if (props.autoFitPosition) {
     nextTick(() => {
-      const triggerRect = getElementScrollRect(
-        dropdownRef.value as HTMLElement,
-        containerRect
-      );
+      const triggerRect = props.alignPoint
+        ? getTriggerRect()
+        : getElementScrollRect(dropdownRef.value as HTMLElement, containerRect);
       const contentRect = getElementScrollRect(
         contentRef.value as HTMLElement,
         containerRect
@@ -220,23 +235,25 @@ const updateContentStyle = () => {
   }
 };
 
+const updateMousePosition = (e: MouseEvent) => {
+  if (props.alignPoint) {
+    const { pageX, pageY } = e;
+    mousePosition.x = pageX;
+    mousePosition.y = pageY;
+  }
+};
+
 const getContentStyle = (
   placement: DropdownPlacement,
   triggerRect: ElementScrollRect,
   contentRect: ElementScrollRect,
-  isAlignPoint?: boolean,
   {
     customStyle = {},
   }: {
     customStyle?: CSSProperties;
   } = {}
 ) => {
-  let { top, left } = getContentOffset(
-    placement,
-    triggerRect,
-    contentRect,
-    isAlignPoint
-  );
+  let { top, left } = getContentOffset(placement, triggerRect, contentRect);
   const style = {
     top: `${top}px`,
     left: `${left}px`,
@@ -318,15 +335,8 @@ const getFitPlacement = (
 const getContentOffset = (
   placement: DropdownPlacement,
   triggerRect: ElementScrollRect,
-  contentRect: ElementScrollRect,
-  isAlignPoint?: boolean
+  contentRect: ElementScrollRect
 ) => {
-  if (isAlignPoint) {
-    return {
-      top: mouseTop.value - triggerRect.top,
-      left: mouseLeft.value - triggerRect.left,
-    };
-  }
   switch (placement) {
     case "top":
       return {
@@ -429,11 +439,12 @@ const handleScroll = useThrottleFn(() => {
   }
 }, 10);
 
-const handleClick = () => {
+const handleClick = (e: MouseEvent) => {
   if (props.disabled || (openState.value && !props.clickToClose)) {
     return;
   }
   if (triggerMethods.value.includes("click")) {
+    updateMousePosition(e);
     toggle();
   }
 };
@@ -447,6 +458,7 @@ const handleContextMenuClick = (e: MouseEvent) => {
     if (props.alignPoint) {
       hide();
     }
+    updateMousePosition(e);
     toggle();
   }
 };
@@ -582,21 +594,6 @@ watch(
   { immediate: true }
 );
 
-const getTriggerRect = (isAlignPoint: boolean) => {
-  return isAlignPoint
-    ? ({
-        top: mouseTop.value,
-        bottom: mouseTop.value,
-        left: mouseLeft.value,
-        right: mouseLeft.value,
-        width: 0,
-        height: 0,
-        x: mouseLeft.value,
-        y: mouseTop.value,
-      } as DOMRect)
-    : dropdownRef.value!.getBoundingClientRect();
-};
-
 provide("openState", openState);
 
 defineExpose({ open, hide, toggle });
@@ -612,7 +609,7 @@ defineExpose({ open, hide, toggle });
     @focusout="handleFocusout()"
     :class="{ 'layui-dropdown-up': openState }"
   >
-    <div @click="handleClick()" @contextmenu="handleContextMenuClick">
+    <div @click="handleClick" @contextmenu="handleContextMenuClick">
       <slot></slot>
     </div>
     <TeleportWrapper :to="popupContainer">
