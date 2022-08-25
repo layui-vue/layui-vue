@@ -46,6 +46,7 @@ export interface LayerModal {
   anim?: boolean;
   isOutAnim?: boolean;
 }
+
 export interface cutOptions {
   layerOption: LayerModal;
   copperOption?: typeof Cropper;
@@ -73,7 +74,6 @@ const getCutDownResult = () => {
     let imgData = canvas.toDataURL('"image/png"');
     let currentTimeStamp = new Date().valueOf();
     let orgInfo = activeUploadFiles.value[0];
-    console.log(orgInfo);
     emit(
       "cutdone",
       Object.assign({ currentTimeStamp, cutResult: imgData, orginal: orgInfo })
@@ -254,7 +254,6 @@ const localUpload = (option: localUploadOption, callback: Function) => {
     } else if (xhr.readyState === 4) {
       // 完成
       let successText = xhr.responseText ? xhr.responseText : uploadSuccess;
-      console.log(xhr);
       if (
         (xhr.status >= 200 && xhr.status <= 300) ||
         xhr.status === 304 ||
