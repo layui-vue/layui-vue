@@ -324,8 +324,8 @@ const getUploadChange = (e: any) => {
       activeUploadFilesImgs.value.push(res);
     });
   }
-  let arm1 = props.cut && props.acceptMime == "images" && !props.multiple;
-  let arm2 = props.cut && props.acceptMime == "images" && props.multiple;
+  let arm1 = props.cut && props.acceptMime.indexOf("images") != -1 && props.multiple == false;
+  let arm2 = props.cut && props.acceptMime.indexOf("images") != -1 && props.multiple == true;
   if (arm1) {
     innerCutVisible.value = true;
     setTimeout(() => {
