@@ -13,7 +13,7 @@
 ::: demo 使用 `lay-upload` 标签, 创建一个上传按钮
 
 <template>
-  <lay-upload @done="getUploadFile" @choose="beginChoose">
+  <lay-upload @done="getUploadFile" field="bigFile" @choose="beginChoose" url="http://www.baidu.com">
     <template #preview>
       <div v-for="(item,index) in picList" :key="`demo1-pic-'${index}`">
         <img :src="item"/>

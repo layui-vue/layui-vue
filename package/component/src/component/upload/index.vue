@@ -173,6 +173,7 @@ interface localUploadTransaction {
 }
 
 const innerCutVisible = ref<boolean>(false);
+
 const localUploadTransaction = (option: localUploadTransaction) => {
   const { url, files } = option;
   let formData = new FormData();
@@ -183,7 +184,7 @@ const localUploadTransaction = (option: localUploadTransaction) => {
   if (Array.isArray(files) && files.length > 0) {
     for (let i = 0; i < files.length; i++) {
       let _file = files[i];
-      formData.append("file[" + i + "]", _file);
+      formData.append(props.field + "[" + i + "]", _file);
     }
   }
   // 对应Upload属性的data字段,额外的上传参数
@@ -324,8 +325,14 @@ const getUploadChange = (e: any) => {
       activeUploadFilesImgs.value.push(res);
     });
   }
-  let arm1 = props.cut && props.acceptMime.indexOf("images") != -1 && props.multiple == false;
-  let arm2 = props.cut && props.acceptMime.indexOf("images") != -1 && props.multiple == true;
+  let arm1 =
+    props.cut &&
+    props.acceptMime.indexOf("images") != -1 &&
+    props.multiple == false;
+  let arm2 =
+    props.cut &&
+    props.acceptMime.indexOf("images") != -1 &&
+    props.multiple == true;
   if (arm1) {
     innerCutVisible.value = true;
     setTimeout(() => {
