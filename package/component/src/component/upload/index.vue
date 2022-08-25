@@ -181,13 +181,19 @@ const localUploadTransaction = (option: localUploadTransaction) => {
     errorF(urlErrorMsg);
     return;
   }
-  if (Array.isArray(files) && files.length > 0) {
-    for (let i = 0; i < files.length; i++) {
-      let _file = files[i];
-      formData.append(props.field + "[" + i + "]", _file);
+  if (files.length > 0) {
+    if (props.multiple) {
+      // 多文件
+      for (let i = 0; i < files.length; i++) {
+        let _file = files[i];
+        formData.append(props.field + "[" + i + "]", _file);
+      }
+    } else {
+      // 单文件
+      formData.append(props.field, files[0]);
     }
   }
-  // 对应Upload属性的data字段,额外的上传参数
+  // 额外参数 
   if (props.data && props.data instanceof Object) {
     let _requestDate = props.data;
     for (const key in _requestDate) {
