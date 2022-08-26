@@ -181,10 +181,10 @@ const localUploadTransaction = (option: localUploadTransaction) => {
     return;
   }
   if (Array.isArray(files) && files.length > 0) {
-      for (let i = 0; i < files.length; i++) {
-        let _file = files[i];
-        formData.append(props.field + "[" + i + "]", _file);
-      }
+    for (let i = 0; i < files.length; i++) {
+      let _file = files[i];
+      formData.append(props.field + "[" + i + "]", _file);
+    }
   }
   if (props.data && props.data instanceof Object) {
     let _requestDate = props.data;
@@ -245,7 +245,11 @@ const localUpload = (option: localUploadOption, callback: Function) => {
       }
     } else if (xhr.readyState === 4) {
       let successText = xhr.responseText ? xhr.responseText : uploadSuccess;
-      if ((xhr.status >= 200 && xhr.status <= 300) || xhr.status === 304 || xhr.status == 0) {
+      if (
+        (xhr.status >= 200 && xhr.status <= 300) ||
+        xhr.status === 304 ||
+        xhr.status == 0
+      ) {
         let data = xhr.responseText;
         emit("done", { currentTimeStamp, msg: successText, data: data });
       }
@@ -308,8 +312,14 @@ const getUploadChange = (e: any) => {
       activeUploadFilesImgs.value.push(res);
     });
   }
-  let arm1 = props.cut && props.acceptMime.indexOf("image") != -1 && props.multiple == false;
-  let arm2 = props.cut && props.acceptMime.indexOf("image") != -1 && props.multiple == true;
+  let arm1 =
+    props.cut &&
+    props.acceptMime.indexOf("image") != -1 &&
+    props.multiple == false;
+  let arm2 =
+    props.cut &&
+    props.acceptMime.indexOf("image") != -1 &&
+    props.multiple == true;
   if (arm1) {
     innerCutVisible.value = true;
     setTimeout(() => {
