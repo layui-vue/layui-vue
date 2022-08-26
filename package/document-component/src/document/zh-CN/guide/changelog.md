@@ -14,6 +14,22 @@
     <ul> 
       <a name="1-4-4"></a> 
       <li> 
+        <h3>1.4.5 <span class="layui-badge-rim">2022-08-26</span></h3> 
+        <ul>     
+          <li>[修复] upload 组件 field 属性无效。</li>
+          <li>[修复] upload 组件 acceptMime 属性 默认值 无效。</li>
+          <li>[修复] menu 组件 changeOpenKeys 事件, 初始化时回调的问题。</li>
+          <li>[修复] dropdown 组件 popupContainer 不适用于 vue 自身渲染的元素的问题。</li>
+          <li>[优化] table 组件 page 属性, 与 page 组件属性对应, 并全部启用。 </li>
+          <li>[优化] input 组件 password 属性, 在 edge 的兼容问题。 </li>
+          <li>[优化] page 组件 total 属性为 0 时, 下一页仍可用的问题。</li>
+          <li>[优化] upload 组件 acceptMime 属性默认值为 MIME_type。</li>
+        </ul>
+      </li>
+    </ul>
+    <ul> 
+      <a name="1-4-4"></a> 
+      <li> 
         <h3>1.4.4 <span class="layui-badge-rim">2022-08-18</span></h3> 
         <ul>     
           <li>[新增] table 组件 footer 插槽, 用在 page 与 body 之间自定义内容。</li>

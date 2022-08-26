@@ -13,7 +13,7 @@
 ::: demo 使用 `lay-upload` 标签, 创建一个上传按钮
 
 <template>
-  <lay-upload @done="getUploadFile" field="bigFile" @choose="beginChoose" url="http://www.baidu.com">
+  <lay-upload @done="getUploadFile" field="bigFile" @choose="beginChoose">
     <template #preview>
       <div v-for="(item,index) in picList" :key="`demo1-pic-'${index}`">
         <img :src="item"/>
@@ -249,7 +249,7 @@ export default {
 | url        | 服务端上传接口的地址     | string  | --        | -- |
 | data      | 请求上传接口的额外参数   | object | --   | --                  |
 | headers      | 接口的请求头     | object | -- | --                   |
-| acceptMime    | 文件选择框时的可选文件类型 | string | `images`   | `images` |
+| acceptMime    | 文件选择框时的可选文件类型 | string | `MIME_type`   | `MIME_type` |
 | field    | 设定文件域的字段名     | string | `file`   | -- |
 | size | 设置文件最大可允许上传的大小，单位 KB。不支持ie8/9 | number  | `0(不限制)`  | -- |
 | multiple | 是否允许多文件上传。设置 true即可开启。不支持ie8/9 | boolean  | false  | -- |
