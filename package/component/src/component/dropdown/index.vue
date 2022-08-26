@@ -102,7 +102,7 @@ const triggerMethods = computed(() =>
   ([] as Array<DropdownTrigger>).concat(props.trigger)
 );
 
-const emit = defineEmits(["open", "hide"]);
+const emit = defineEmits(["show", "hide"]);
 
 let delayTimer = 0;
 
@@ -113,10 +113,10 @@ const cleanDelayTimer = () => {
   }
 };
 
-const open = (delay?: number): void => {
+const show = (delay?: number): void => {
   if (props.disabled == false) {
     changeVisible(true, delay);
-    emit("open");
+    emit("show");
   }
 };
 
@@ -130,7 +130,7 @@ const toggle = (): void => {
     if (openState.value) {
       hide();
     } else {
-      open();
+      show();
     }
 };
 
@@ -440,6 +440,7 @@ const handleScroll = useThrottleFn(() => {
 }, 10);
 
 const handleClick = (e: MouseEvent) => {
+  e.stopPropagation();
   if (props.disabled || (openState.value && !props.clickToClose)) {
     return;
   }
@@ -467,7 +468,7 @@ const handleMouseEnter = (e: MouseEvent) => {
   if (props.disabled || !triggerMethods.value.includes("hover")) {
     return;
   }
-  open(props.mouseEnterDelay);
+  show(props.mouseEnterDelay);
 };
 
 const handleMouseEnterWithContext = (e: MouseEvent) => {
@@ -497,7 +498,7 @@ const handleFocusin = () => {
   if (props.disabled || !triggerMethods.value.includes("focus")) {
     return;
   }
-  open(props.focusDelay);
+  show(props.focusDelay);
 };
 
 const handleFocusout = () => {
@@ -519,16 +520,6 @@ const removeChildRef = (ref: any) => {
   dropdownCtx?.removeChildRef(ref);
 };
 
-provide(
-  dropdownInjectionKey,
-  reactive({
-    onMouseenter: handleMouseEnterWithContext,
-    onMouseleave: handleMouseLeaveWithContext,
-    addChildRef,
-    removeChildRef,
-  })
-);
-
 dropdownCtx?.addChildRef(contentRef);
 
 const { stop: removeContentResizeObserver } = useResizeObserver(
@@ -549,20 +540,29 @@ const { stop: removeTriggerResizeObserver } = useResizeObserver(
   }
 );
 
-onClickOutside(dropdownRef, (e) => {
-  if (
-    !props.clickOutsideToClose ||
-    dropdownRef.value?.contains(e.target as HTMLElement) ||
-    contentRef.value?.contains(e.target as HTMLElement)
-  )
-    return;
-  for (const item of childrenRefs) {
-    if (item.value?.contains(e.target as HTMLElement)) {
+onClickOutside(
+  dropdownRef,
+  (e) => {
+    if (
+      !props.clickOutsideToClose ||
+      !openState.value ||
+      dropdownRef.value?.contains(e.target as HTMLElement) ||
+      contentRef.value?.contains(e.target as HTMLElement)
+    ) {
       return;
     }
+    for (const item of childrenRefs) {
+      if (item.value?.contains(e.target as HTMLElement)) {
+        return;
+      }
+    }
+
+    hide();
+  },
+  {
+    capture: false,
   }
-  hide();
-});
+);
 
 let scrollElements: HTMLElement[] | undefined;
 onMounted(() => {
@@ -594,9 +594,20 @@ watch(
   { immediate: true }
 );
 
+provide(
+  dropdownInjectionKey,
+  reactive({
+    onMouseenter: handleMouseEnterWithContext,
+    onMouseleave: handleMouseLeaveWithContext,
+    addChildRef,
+    removeChildRef,
+    hide,
+  })
+);
+
 provide("openState", openState);
 
-defineExpose({ open, hide, toggle });
+defineExpose({ show, hide, toggle });
 </script>
 
 <template>

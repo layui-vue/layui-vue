@@ -31,6 +31,7 @@ export interface DropdownContext {
   onMouseleave: Function;
   addChildRef: Function;
   removeChildRef: Function;
+  hide: Function;
 }
 
 export const dropdownInjectionKey = Symbol("dropdownInjectKey");
