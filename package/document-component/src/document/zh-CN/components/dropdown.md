@@ -222,7 +222,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-dropdown @open="stat='开启'" @hide="stat='关闭'" updateAtScroll>
+  <lay-dropdown @show="stat='开启'" @hide="stat='关闭'" updateAtScroll>
     <lay-button type="primary" >当前状态:{{stat}}</lay-button>
     <template #content>
         <lay-dropdown-menu>

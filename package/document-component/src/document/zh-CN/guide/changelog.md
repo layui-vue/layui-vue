@@ -12,7 +12,17 @@
 <lay-timeline>
   <lay-timeline-item title="1.4.x">
     <ul> 
-      <a name="1-4-4"></a> 
+      <a name="1-4-6"></a> 
+      <li> 
+        <h3>1.4.6 <span class="layui-badge-rim">2022-0x-xx</span></h3> 
+        <ul>     
+          <li>[修复] dropdown 组件 hide 事件触发异常。</li>
+          <li>[优化] dropdown 组件 open 方法修改为 show 方法。</li>
+        </ul>
+      </li>
+    </ul>
+    <ul> 
+      <a name="1-4-5"></a> 
       <li> 
         <h3>1.4.5 <span class="layui-badge-rim">2022-08-26</span></h3> 
         <ul>     
