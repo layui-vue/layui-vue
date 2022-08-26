@@ -23,17 +23,6 @@
         </lay-dropdown-menu>
     </template>
   </lay-dropdown>
-   &nbsp;&nbsp;
-  <lay-dropdown popupContainer=".layui-body">
-    <lay-button type="primary">下拉菜单</lay-button>
-    <template #content>
-        <lay-dropdown-menu>
-          <lay-dropdown-menu-item>选项一</lay-dropdown-menu-item>
-          <lay-dropdown-menu-item>选项二</lay-dropdown-menu-item>
-          <lay-dropdown-menu-item>选项三</lay-dropdown-menu-item>
-        </lay-dropdown-menu>
-    </template>
-  </lay-dropdown>
 </template>
 
 <script>
@@ -131,7 +120,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-button @click="manualRef.open()">打开</lay-button>
+  <lay-button @click="manualRef.show()">打开</lay-button>
   <lay-button @click="manualRef.hide()">关闭</lay-button>
   <br><br>
   <lay-dropdown ref="manualRef" :clickOutsideToClose="false" :clickToClose="false" updateAtScroll>
@@ -528,41 +517,10 @@ export default {
       </lay-dropdown-menu> 
     </template>
   </lay-dropdown>
-      &nbsp;&nbsp;
-      <br><br>
-  <lay-button  @click="triggerHeight += 100">改变触发器尺寸</lay-button>
-  <lay-button  @click="contentHeight += 100">改变面板尺寸</lay-button>
-  <br><br>
-  <lay-dropdown placement="bottom-left" trigger="focus" :autoFitPosition="true" :autoFixPosition="true" :blurToClose="false" :clickOutsideToClose="false" updateAtScroll>
-    <lay-input placeholder="autoFixPosition" :style="{height: triggerHeight + 'px'}"></lay-input>
-    <template #content>
-     <div :style="{width:'350px', height: contentHeight + 'px'}"></div>
-    </template>
-  </lay-dropdown>
 </template>
 
-<script>
+<script setup>
 import { ref, computed } from 'vue'
-
-export default {
-  setup() {
-
-    const btnSize = ref('')
-    const toogleSize = () => {
-      btnSize.value =  btnSize.value ? '' : 'lg'
-    }
-
-    const triggerHeight = ref(100)
-    const contentHeight = ref(200)
-
-    return {
-      btnSize,
-      toogleSize,
-      triggerWidth,
-      triggerStyle,
-    }
-  }
-}
 </script>
 
 :::
@@ -613,8 +571,8 @@ export default {
 
 | 插槽    | 描述     | 参数 |
 | ------- | -------- | ------ |
-| hide | 隐藏下拉内容后触发 | --     |
-| open | 显示下拉内容后触发 | --     |
+| hide | 隐藏下拉面板后触发 | --     |
+| show | 显示下拉面板后触发 | --     |
 
 :::
 
