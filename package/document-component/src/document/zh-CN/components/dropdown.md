@@ -394,7 +394,7 @@ export default {
             <template #default>刷新</template>
             <template #suffix><span style="font-size:10px">Ctrl + R</span></template>
           </lay-dropdown-menu-item>
-          <lay-line></lay-line>
+          <lay-line margin="0" theme="#EEE"></lay-line>
           <lay-dropdown-menu-item disabled>
             <template #prefix><lay-icon type="layui-icon-about"></lay-icon></template>
             <template #default>更多</template>

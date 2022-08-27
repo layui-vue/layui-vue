@@ -14,6 +14,7 @@ export interface LayLineProps {
   borderStyle?: string;
   offset?: string;
   theme?: string;
+  margin?: string;
 }
 
 const props = withDefaults(defineProps<LayLineProps>(), {
@@ -22,6 +23,7 @@ const props = withDefaults(defineProps<LayLineProps>(), {
   borderWidth: "1px",
   borderStyle: "solid",
   offset: "25px",
+  margin: "8px",
 });
 
 const slots = useSlots();
@@ -34,20 +36,21 @@ const lineTheme: string[] = [
   "black",
   "gray",
 ];
-const isSupportedTheme: boolean = lineTheme.includes(props.theme ?? "");
+const isBuiltInColor: boolean = lineTheme.includes(props.theme ?? "");
 
 const lineClass = computed(() => [
   `layui-line-${props.direction}`,
   {
-    [`layui-border-${props.theme}`]: isSupportedTheme,
+    [`layui-border-${props.theme}`]: isBuiltInColor,
     [`layui-line-with-text`]: Boolean(slots.default),
   },
 ]);
 
 const lineStyle = computed(() => ({
-  "border-color": !isSupportedTheme ? props.theme : undefined,
+  "border-color": !isBuiltInColor ? props.theme : undefined,
   "--layui-line-border-width": props.borderWidth,
   "--layui-line-border-style": props.borderStyle,
+  "--layui-line-margin": props.margin,
 }));
 
 const lineTextStyle = computed(() => ({
