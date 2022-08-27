@@ -17,7 +17,7 @@ import {
   VNodeArrayChildren,
   StyleValue,
 } from "vue";
-import Renderer from "./Renderer";
+import RenderFunction from "../_components/renderFunction";
 
 export type SpaceSize = "lg" | "md" | "sm" | "xs" | number | string;
 
@@ -130,6 +130,6 @@ const renderSpaceItems = () =>
 </script>
 <template>
   <div :class="spaceClass" :style="spaceStyle">
-    <Renderer :renderFn="renderSpaceItems"></Renderer>
+    <RenderFunction :renderFunc="renderSpaceItems" />
   </div>
 </template>

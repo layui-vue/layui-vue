@@ -29,7 +29,7 @@ import {
   ElementScrollRect,
   DropdownContext,
 } from "./interface";
-import TeleportWrapper from "./TeleportWrapper.vue";
+import TeleportWrapper from "../_components/teleportWrapper.vue";
 
 export type DropdownTrigger = "click" | "hover" | "focus" | "contextMenu";
 

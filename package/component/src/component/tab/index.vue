@@ -9,6 +9,7 @@ import "./index.less";
 import { LayIcon } from "@layui/icons-vue";
 import tabItem from "../tabItem/index.vue";
 import RenderTitle from "./renderTitle.vue";
+import RenderFunction from "../_components/renderFunction";
 import {
   Component,
   computed,
@@ -23,6 +24,8 @@ import {
   nextTick,
   CSSProperties,
   reactive,
+  h,
+  createTextVNode,
 } from "vue";
 import { useResizeObserver } from "@vueuse/core";
 import { TabData, TabInjectKey } from "./interface";
@@ -264,6 +267,12 @@ const update = () => {
   }
 };
 
+const renderTabChild = (child: TabData) => {
+  return child.slots?.title
+    ? () => h("span", child.slots?.title && child.slots.title())
+    : () => createTextVNode(child.title);
+};
+
 useResizeObserver(navRef, update);
 
 watch(
@@ -329,7 +338,7 @@ provide("slotsChange", slotsChange);
           :class="[children.id === active ? 'layui-this' : '']"
           @click.stop="change(children.id)"
         >
-          <RenderTitle :tabItemData="children"></RenderTitle>
+          <RenderFunction :renderFunc="renderTabChild(children)" />
           <i
             v-if="allowClose && children.closable != false"
             class="layui-icon layui-icon-close layui-unselect layui-tab-close"
