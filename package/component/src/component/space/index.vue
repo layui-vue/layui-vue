@@ -42,7 +42,7 @@ const props = withDefaults(defineProps<LaySpaceProps>(), {
 const slots = useSlots();
 
 const computAlign = computed(
-  () => props.align ?? (props.direction === 'horizontal' ? 'center' : '')
+  () => props.align ?? (props.direction === "horizontal" ? "center" : "")
 );
 
 const extractChildren = () => {
