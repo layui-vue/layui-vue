@@ -5,6 +5,7 @@ export default {
 </script>
 
 <script setup lang="ts">
+import { LayIcon } from "@layui/icons-vue";
 import { computed } from "vue";
 import "./index.less";
 

@@ -88,6 +88,12 @@ const menus = [
         subTitle: "skeleton",
         path: "/zh-CN/components/skeleton",
       },
+      {
+        id: 12,
+        title: "间距",
+        subTitle: "space",
+        path: "/zh-CN/components/space",
+      },
     ],
   },
   {
@@ -424,26 +430,6 @@ const menus = [
         title: "相册",
         subTitle: "photo",
         path: "/zh-CN/components/photo",
-      },
-    ],
-  },
-  {
-    id: 1,
-    title: "新特性",
-    children: [
-      {
-        id: 101,
-        title: "标签",
-        flag: "new",
-        subTitle: "modal",
-        path: "/zh-CN/components/tag",
-      },
-      {
-        id: 102,
-        title: "标签输入框",
-        flag: "new",
-        subTitle: "load",
-        path: "/zh-CN/components/tagInput",
       },
     ],
   },

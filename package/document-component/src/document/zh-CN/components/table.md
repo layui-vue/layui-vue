@@ -119,23 +119,26 @@ export default {
 ::: demo
 
 <template>
+  page props: {{ page3 }}
   <lay-table :columns="columns3" :data-source="dataSource3" :page="page3" @change="change3"></lay-table>
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref } from 'vue';
+import { layer } from "@layui/layer-vue";
 
 export default {
   setup() {
     
-    const page3 = {
+    const page3 = ref({
       total: 100,
       limit: 10,
-      current: 2
-    }
+      current: 2,
+      showRefresh: true,
+    })
 
-    const change3 = function({ current }){
-      console.log("当前页:" + JSON.stringify(current))
+    const change3 = ({ current, limit }) => {
+      layer.msg("current:" + current + " limit:" + limit);
     }
 
     const columns3 = [
@@ -697,8 +700,9 @@ export default {
 ::: demo 通过 `columns` 配置 `type:'checkbox'` 开启单选列。
 
 <template>
-  <lay-button @click="changeSelectedKeys">修改选中值 {{ selectedKeys5 }}</lay-button>
-  <lay-table :columns="columns23" :data-source="dataSource23" v-model:selectedKeys="selectedKeys5" :getCheckboxProps="getCheckboxProps"></lay-table>
+  <lay-button @click="changeSelectedKeys">修改选中</lay-button>
+  <lay-button @click="changeDataSource23">修改数据</lay-button>
+  <lay-table :columns="columns23" :data-source="dataSource23" v-model:selectedKeys="selectedKeys5"></lay-table>
 </template>
 
 <script>
@@ -720,14 +724,23 @@ export default {
       selectedKeys5.value = ["2"]
     }
 
+    const changeDataSource23 = () => {
+      dataSource23.value = [      
+        {id:"1",username:"root", password:"root",sex:"男", age:"18", remark: 'layui - vue（谐音：类 UI) '},
+        {id:"2",username:"root", password:"root",sex:"男", age:"18", remark: 'layui - vue（谐音：类 UI) '}
+      ]
+    }
+
     const columns23 = [
       {
+        fixed: "left",
         type: "checkbox",
       },
       {
         title:"账户",
         width:"200px",
-        key:"username"
+        key:"username",
+        fixed: "left"
       },{
         title:"密码",
         width: "300px",
@@ -747,20 +760,21 @@ export default {
       }
     ]
 
-    const dataSource23 = [
+    const dataSource23 = ref([
       {id:"1",username:"root", password:"root",sex:"男", age:"18", remark: 'layui - vue（谐音：类 UI) '},
       {id:"2",username:"root", password:"root",sex:"男", age:"18", remark: 'layui - vue（谐音：类 UI) '},
       {id:"3",username:"woow", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '},
       {id:"4",username:"woow", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '},
       {id:"5",username:"woow", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '}
-    ]
+    ])
 
     return {
       columns23,
       dataSource23,
       selectedKeys5,
       changeSelectedKeys,
-      getCheckboxProps
+      getCheckboxProps,
+      changeDataSource23
     }
   }
 }
@@ -1455,7 +1469,7 @@ export default {
 | row             | 行单击 | data : 当前行 |
 | row-double      | 行双击 | data : 当前行 |
 | row-contextmenu | 行右击 | data : 当前行 |
-
+| change          | 分页事件 | { current: 当前页码, limit: 每页数量 } |
 :::
 
 ::: title Table 插槽
@@ -1463,9 +1477,10 @@ export default {
 
 ::: table
 
-| 插槽    | 描述         | 参数 |
-| ------- | ------------ | ---- |
-| toolbar | 自定义工具栏 | --   |
+| 插槽    | 描述          | 参数 | 版本 |
+| ------- | ------------ | ---- |----  |
+| toolbar | 自定义工具栏  | --   |--    |
+| footer  | 底部扩展      | --   | `1.4.4` |
 
 :::
 
@@ -1476,7 +1491,7 @@ export default {
 
 ::: table
 
-| 插槽            | 描述                           | 类型      | 默认值  | 可选值                      | 可选值                      |
+| 插槽            | 描述                           | 类型      | 默认值  | 可选值                      | 版本                      |
 | --------------- | ------------------------------ | --------- | ------- | --------------------------- | --------------------------- |
 | title           | 列标题                         | --        | --      | --                          | --                          |
 | key             | 数据字段                       | --        | --      | --                          | --                          |

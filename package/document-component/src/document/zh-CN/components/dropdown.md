@@ -120,7 +120,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-button @click="manualRef.open()">打开</lay-button>
+  <lay-button @click="manualRef.show()">打开</lay-button>
   <lay-button @click="manualRef.hide()">关闭</lay-button>
   <br><br>
   <lay-dropdown ref="manualRef" :clickOutsideToClose="false" :clickToClose="false" updateAtScroll>
@@ -222,7 +222,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-dropdown @open="stat='开启'" @hide="stat='关闭'" updateAtScroll>
+  <lay-dropdown @show="stat='开启'" @hide="stat='关闭'" updateAtScroll>
     <lay-button type="primary" >当前状态:{{stat}}</lay-button>
     <template #content>
         <lay-dropdown-menu>
@@ -517,41 +517,10 @@ export default {
       </lay-dropdown-menu> 
     </template>
   </lay-dropdown>
-      &nbsp;&nbsp;
-      <br><br>
-  <lay-button  @click="triggerHeight += 100">改变触发器尺寸</lay-button>
-  <lay-button  @click="contentHeight += 100">改变面板尺寸</lay-button>
-  <br><br>
-  <lay-dropdown placement="bottom-left" trigger="focus" :autoFitPosition="true" :autoFixPosition="true" :blurToClose="false" :clickOutsideToClose="false" updateAtScroll>
-    <lay-input placeholder="autoFixPosition" :style="{height: triggerHeight + 'px'}"></lay-input>
-    <template #content>
-     <div :style="{width:'350px', height: contentHeight + 'px'}"></div>
-    </template>
-  </lay-dropdown>
 </template>
 
-<script>
+<script setup>
 import { ref, computed } from 'vue'
-
-export default {
-  setup() {
-
-    const btnSize = ref('')
-    const toogleSize = () => {
-      btnSize.value =  btnSize.value ? '' : 'lg'
-    }
-
-    const triggerHeight = ref(100)
-    const contentHeight = ref(200)
-
-    return {
-      btnSize,
-      toogleSize,
-      triggerWidth,
-      triggerStyle,
-    }
-  }
-}
 </script>
 
 :::
@@ -576,6 +545,9 @@ export default {
 | blurToClose | 是否在触发器失去焦点时关闭面板,默认 `true` |`true` `false`|
 | clickOutsideToClose| 是否点击外部关闭下拉面板,默认 `true`|`true` `false`|
 | contentOffset | 下拉面板距离触发器的偏移距离，默认 2| -| 
+| mouseEnterDelay | mouseEnter 事件延迟触发的时间, trigger hover 有效 | - |
+| mouseLeaveDelay | mouseLeave 事件延迟触发的时间, trigger hover 有效| - |
+| focusDelay| focus 事件延迟触发的时间, trigger focus 有效 | - |
 
 
 :::
@@ -599,8 +571,8 @@ export default {
 
 | 插槽    | 描述     | 参数 |
 | ------- | -------- | ------ |
-| hide | 隐藏下拉内容后触发 | --     |
-| open | 显示下拉内容后触发 | --     |
+| hide | 隐藏下拉面板后触发 | --     |
+| show | 显示下拉面板后触发 | --     |
 
 :::
 

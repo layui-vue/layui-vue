@@ -1,15 +1,17 @@
-## background
+## 背景
 
-- 1.Describe the problem you want to solve
+- 1.描述你希望解决的问题
 
-- 2.State the status of the problem
+- 2.陈述问题的现状
 
-- 3.Reasonable suggestion
+- 3.合理的建议
 
-## train of thought
+- 4.当前版本
 
-Idea describes the general solution idea, including API design, pseudo code, etc
+## 思路
 
-## follow-up
+描述大概的解决思路，可以包含 API 设计和伪代码等
 
-For subsequent editing, attach the corresponding pull request address in the form of ` - [] some task '.
+## 跟进
+
+后续编辑，附上对应的 Pull Request 地址，可以用 `- [ ] some task` 的方式。

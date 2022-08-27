@@ -6,6 +6,7 @@ export default {
 
 <script setup lang="ts">
 import { inject, Ref } from "vue";
+import { DropdownContext, dropdownInjectionKey } from "../dropdown/interface";
 
 export interface LayDropdownMenuItemProps {
   disabled?: boolean;
@@ -16,12 +17,16 @@ const props = withDefaults(defineProps<LayDropdownMenuItemProps>(), {
 });
 
 const openState: Ref<boolean> = inject("openState") as Ref<boolean>;
+const dropdownCtx = inject<DropdownContext | undefined>(
+  dropdownInjectionKey,
+  undefined
+);
 
 const handleClick = () => {
   if (props.disabled) {
     return;
   }
-  openState.value = false;
+  dropdownCtx?.hide();
 };
 </script>
 

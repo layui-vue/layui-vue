@@ -49,7 +49,7 @@ import { ref } from 'vue'
 export default {
   setup() {
 
-   const endTime2 = ref("2022-06-04 17:35:00");
+   const endTime2 = ref("");
 
     return {
       endTime2
@@ -254,15 +254,17 @@ const rangeTime3 = ref(['2022-01-01','2023-02-1']);
 
 ::: table
 
-| 属性          | 描述                                                         | 类型           | 默认值 | 可选值         |
-| ------------- | ------------------------------------------------------------ | -------------- | ------ | -------------- |
-| v-model      | 当前时间                                                     | `string`         | --    | —             |
-| type        | 选择类型                                                   | `string`         | `date`    | `date` `datetime` `year` `month` `time` `yearmonth`             |
-| disabled      | 是否禁止修改                                                     | `boolean`         | false    | —             |
-| simple      | 一次性选择，无需点击确认按钮             | `boolean`         | false    | —             |
-| readonly      | 只读             | `boolean`         | false    | —             |
-| allowClear    | 允许清空             | `boolean`         | true    | —             |
-| size    | 尺寸            | `string`         | `lg` `md` `sm` `xs`    | `md`            |
+| 属性          | 描述                                                         | 类型           | 默认值 | 可选值         | 版本         |
+| ------------- | ------------------------------------------------------------ | -------------- | ------ | -------------- |-------------- |
+| v-model      | 当前时间                                                     | `string`         | --    | --             | --             |
+| type        | 选择类型                                                   | `string`         | `date`    | `date` `datetime` `year` `month` `time` `yearmonth`             | --             |
+| disabled      | 是否禁止修改                                                     | `boolean`         | false    | —             | —             |
+| simple      | 一次性选择，无需点击确认按钮             | `boolean`         | false    | --             | --             |
+| readonly      | 只读             | `boolean`         | false    | --             | --             |
+| allowClear    | 允许清空             | `boolean`         | true    | --             | --             |
+| size    | 尺寸            | `string`         | `lg` `md` `sm` `xs`    | `md`            | --             |
+| prefix-icon    | 前置图标            | `string`         | `layui-icon-date`    |  内置图标集            | `1.4.0`             |
+| suffix-icon    | 后置图标            | `string`         | --    | 内置图标集            | `1.4.0`             |
 
 :::
 

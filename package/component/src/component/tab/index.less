@@ -1,4 +1,5 @@
 .layui-tab {
+  display: flex;
   margin: 10px 0;
   text-align: left !important;
 }
@@ -7,14 +8,20 @@
   overflow: hidden;
 }
 
+.layui-tab.is-left {
+  flex-direction: row;
+}
+
 .layui-tab.is-right {
-  display: flex;
   flex-direction: row-reverse;
   justify-content: space-between
 }
 
+.layui-tab.is-top {
+  flex-direction: column;
+}
+
 .layui-tab.is-bottom {
-  display: flex;
   flex-direction: column-reverse
 }
 
@@ -316,6 +323,7 @@
 
 .layui-tab-content {
   padding: 15px 0;
+  flex: 1;
 }
 
 .layui-tab.is-right>.layui-tab-content,

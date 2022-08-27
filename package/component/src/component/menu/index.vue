@@ -50,7 +50,7 @@ const menuTheme = computed(() => props.theme);
 
 const openKeys = computed({
   get() {
-    return props.openKeys;
+    return props.collapse ? [] : props.openKeys;
   },
   set(val) {
     emit("update:openKeys", val);
@@ -77,8 +77,7 @@ watch(
     } else {
       openKeys.value = oldOpenKeys.value;
     }
-  },
-  { immediate: true }
+  }
 );
 
 provideLevel(1);

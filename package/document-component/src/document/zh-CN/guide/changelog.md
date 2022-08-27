@@ -10,6 +10,115 @@
 ::: demo
 <template>
 <lay-timeline>
+  <lay-timeline-item title="1.4.x">
+    <ul> 
+      <a name="1-4-6"></a> 
+      <li> 
+        <h3>1.4.6 <span class="layui-badge-rim">2022-0x-xx</span></h3> 
+        <ul>     
+          <li>[修复] dropdown 组件 hide 事件触发异常。</li>
+          <li>[优化] dropdown 组件 open 方法修改为 show 方法。</li>
+        </ul>
+      </li>
+    </ul>
+    <ul> 
+      <a name="1-4-5"></a> 
+      <li> 
+        <h3>1.4.5 <span class="layui-badge-rim">2022-08-26</span></h3> 
+        <ul>     
+          <li>[修复] upload 组件 field 属性无效。</li>
+          <li>[修复] upload 组件 acceptMime 属性 默认值 无效。</li>
+          <li>[修复] menu 组件 changeOpenKeys 事件, 初始化时回调的问题。</li>
+          <li>[修复] dropdown 组件 popupContainer 不适用于 vue 自身渲染的元素的问题。</li>
+          <li>[优化] table 组件 page 属性, 与 page 组件属性对应, 并全部启用。 </li>
+          <li>[优化] input 组件 password 属性, 在 edge 的兼容问题。 </li>
+          <li>[优化] page 组件 total 属性为 0 时, 下一页仍可用的问题。</li>
+          <li>[优化] upload 组件 acceptMime 属性默认值为 MIME_type。</li>
+        </ul>
+      </li>
+    </ul>
+    <ul> 
+      <a name="1-4-4"></a> 
+      <li> 
+        <h3>1.4.4 <span class="layui-badge-rim">2022-08-18</span></h3> 
+        <ul>     
+          <li>[新增] table 组件 footer 插槽, 用在 page 与 body 之间自定义内容。</li>
+          <li>[修复] date-picker 组件 v-model 为空时, 无法完成日期时间选择。</li>
+          <li>[修复] quote 组件 margin 属性错误 。</li>
+        </ul>
+      </li>
+    </ul>
+    <ul> 
+      <a name="1-4-3"></a> 
+      <li> 
+        <h3>1.4.3 <span class="layui-badge-rim">2022-08-16</span></h3> 
+        <ul>     
+          <li>[新增] page 组件 change 事件。</li>
+          <li>[新增] card 组件 footer 插槽, 用于自定义底部。</li>
+          <li>[新增] table 组件 change 事件 limit 参数, 代表每页数量。</li>
+          <li>[修复] scroll 组件 default slots 改变时, 滑块不更新的问题。</li>
+          <li>[修复] table 组件 loading 属性造成的单元格错位。</li>
+          <li>[优化] page 组件 跳转 操作, 当输入页码为当前页启用禁用状态。</li>
+          <li>[过时] page 组件 limit 事件, 由 change 事件代替。</li>
+          <li>[过时] page 组件 jump 事件, 由 change 事件代替。</li>
+        </ul>
+      </li>
+    </ul>
+    <ul> 
+      <a name="1-4-2"></a> 
+      <li> 
+        <h3>1.4.2 <span class="layui-badge-rim">2022-08-15</span></h3> 
+        <ul>     
+          <li>[修复] table 组件 fixed 属性开启时, 不设置 width 产生的错误。</li>
+          <li>[修复] table 组件 dataSource 属性改变时, 清空 selectedKeys 内容。</li>
+          <li>[修复] table 组件 dataSource 属性改变时, 清空 selectedKey 内容。</li>
+          <li>[优化] table 组件 fixed 属性开启时, 根据 column 的 type 属性, 设置默认宽度。 </li>
+        </ul>
+      </li>
+    </ul>
+    <ul> 
+      <a name="1-4-1"></a> 
+      <li> 
+        <h3>1.4.1 <span class="layui-badge-rim">2022-08-14</span></h3> 
+        <ul>     
+          <li>[修复] 表格开启复选框之后，不使用getCheckboxProps属性，点击时全选会报错。</li>
+        </ul>
+      </li>
+    </ul>
+    <ul> 
+      <a name="1-4-0"></a> 
+      <li> 
+        <h3>1.4.0 <span class="layui-badge-rim">2022-08-13</span></h3> 
+        <ul>     
+          <li>[新增] button 组件 dropdown 下拉 demo。</li>
+          <li>[新增] button 组件 loading-icon 属性, 允许自定义加载图标。</li>
+          <li>[新增] table 组件 loading 属性, 数据过渡。</li>
+          <li>[新增] table 组件 column 属性 children 配置, 支持表头分组。</li>
+          <li>[新增] table 组件 getRadioProps 属性, 启用单选列时, 定义 radio 配置选项。</li>
+          <li>[新增] table 组件 getCheckboxProps 属性, 启用复选列, 定义 checkbox 配置选项。</li>
+          <li>[新增] transfer 组件 datasource 属性 disabled 配置, 允许选项禁用。</li>
+          <li>[新增] switch 组件 loading 属性, 开启加载状态, 默认为 false。</li>
+          <li>[新增] switch 组件 loading-icon 属性, 允许自定义加载图标, 可选值为内置图标集。</li>
+          <li>[新增] date-picker 组件 prefix-icon 属性, 用于自定义输入框前置图标, layui-icon-date 为默认值。</li>
+          <li>[新增] date-picker 组件 suffix-icon 属性, 用于自定义输入框后置图标。</li>
+          <li>[修复] table 组件 column 属性为 fixed 时, 隐藏该列时不重新计算距离。</li>
+          <li>[修复] input 组件 v-model 属性输入拼字阶段触发更新的问题。</li>
+          <li>[修复] table 组件 height 属性修改时, 造成单元格错位。</li>
+          <li>[修复] table 组件 demand 模式缺失 radio.css 文件。</li>
+          <li>[修复] menu 组件 demand 模式缺失 dropdown.css 文件。</li>
+          <li>[修复] textarea 组件无法解析 lay-icon 的警告。</li>
+          <li>[优化] input 组件 password 属性开启时的默认图标。</li>
+          <li>[优化] table 组件 dropdown 筛选列面板随滚动条移动。</li>
+          <li>[优化] table 组件 column 无对应列时仍保持列占位。</li>
+          <li>[优化] table 组件 skin 属性为 row 时 header 高出 1 像素。</li>
+          <li>[优化] transfer 组件 title 在特殊分辨率下显示不全。</li>
+          <li>[优化] notice-bar 组件 width 越界。</li>
+          <li>[优化] input 组件 clear 操作背景透明的问题。</li>
+          <li>[优化] input 组件 password 操作背景透明的问题。</li>
+        </ul>
+      </li>
+    </ul>
+  </lay-timeline-item>
   <lay-timeline-item title="1.3.x">
     <ul> 
       <a name="1-3-14"></a> 

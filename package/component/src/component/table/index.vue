@@ -15,15 +15,16 @@ import {
   StyleValue,
   WritableComputedRef,
   computed,
+  onBeforeUnmount,
 } from "vue";
 import { v4 as uuidv4 } from "../../utils/guidUtil";
 import { Recordable } from "../../types";
 import { LayIcon } from "@layui/icons-vue";
 import LayCheckbox from "../checkbox/index.vue";
 import LayDropdown from "../dropdown/index.vue";
-import LayPage from "../page/index.vue";
 import LayEmpty from "../empty/index.vue";
 import TableRow from "./TableRow.vue";
+import TablePage from "./TablePage.vue";
 import { nextTick } from "vue";
 
 export interface LayTableProps {
@@ -92,6 +93,7 @@ const emit = defineEmits([
 const slot = useSlots();
 const slots = slot.default && slot.default();
 
+const s = "";
 const allChecked = ref(false);
 const hasChecked = ref(false);
 const tableDataSource = ref<any[]>([...props.dataSource]);
@@ -209,6 +211,10 @@ const findFinalNode = (level: number, columns: any[]) => {
       if (!tableHeadColumns.value[level]) {
         tableHeadColumns.value[level] = [];
       }
+      // 如果列固定，并且 width 不存在, 设置默认值
+      if (column.fixed && !column.width) {
+        column.type ? (column.width = "50px") : (column.width = "100px");
+      }
       tableHeadColumns.value[level].push(column);
       findFinalNode(level + 1, column.children);
     } else {
@@ -216,6 +222,10 @@ const findFinalNode = (level: number, columns: any[]) => {
       column.rowspan = rowSpan;
       if (!tableHeadColumns.value[level]) {
         tableHeadColumns.value[level] = [];
+      }
+      // 如果列固定，并且 width 不存在, 设置默认值
+      if (column.fixed && !column.width) {
+        column.type ? (column.width = "50px") : (column.width = "100px");
       }
       tableHeadColumns.value[level].push(column);
     }
@@ -256,6 +266,8 @@ watch(
   () => props.dataSource,
   () => {
     tableDataSource.value = [...props.dataSource];
+    tableSelectedKeys.value = [];
+    tableSelectedKey.value = s;
     nextTick(() => {
       getScrollWidth();
     });
@@ -264,17 +276,15 @@ watch(
 );
 
 const changeAll = (isChecked: boolean) => {
-  // Selected
   if (isChecked) {
     const datasources = props.dataSource.filter((item: any, index: number) => {
-      return !props.getCheckboxProps(item, index).disabled;
+      return !props.getCheckboxProps(item, index)?.disabled;
     });
     const ids = datasources.map((item) => {
       return item[props.id];
     });
     tableSelectedKeys.value = [...ids];
   } else {
-    // unSelected
     tableSelectedKeys.value = [];
   }
 };
@@ -317,11 +327,12 @@ const rowDoubleClick = function (data: any, evt: MouseEvent) {
   emit("row-double", data, evt);
 };
 
-const rowContextmenu = function (data: any, evt: MouseEvent) {
+const rowContextmenu = (data: any, evt: MouseEvent) => {
   emit("row-contextmenu", data, evt);
 };
 
-const print = function () {
+// 页面打印
+const print = () => {
   let subOutputRankPrint = document.getElementById(tableId) as HTMLElement;
   let newContent = subOutputRankPrint.innerHTML;
   let oldContent = document.body.innerHTML;
@@ -331,9 +342,7 @@ const print = function () {
   document.body.innerHTML = oldContent;
 };
 
-/**
- * excel 导出
- */
+// 报表导出
 const exportData = () => {
   var tableStr = ``;
   for (let tableHeadColumn of tableHeadColumns.value) {
@@ -381,11 +390,12 @@ const exportData = () => {
   return;
 };
 
-//输出base64编码
+// BASE64编码
 function base64(s: string) {
   return window.btoa(unescape(encodeURIComponent(s)));
 }
 
+// 列排序
 const sortTable = (e: any, key: string, sort: string) => {
   let currentSort = e.target.parentNode.getAttribute("lay-sort");
   if (sort === "desc") {
@@ -436,6 +446,15 @@ const classes = computed(() => {
     hasr.value ? "layui-table-has-fixed-right" : "",
   ];
 });
+
+watch(
+  () => [props.height, props.maxHeight, props.dataSource],
+  () => {
+    nextTick(() => {
+      getScrollWidth();
+    });
+  }
+);
 
 onMounted(() => {
   getScrollWidth();
@@ -504,7 +523,7 @@ const renderFixedStyle = (column: any, columnIndex: number) => {
           props.columns[i].fixed == "left" &&
           tableColumnKeys.value.includes(props.columns[i].key)
         ) {
-          left = left + props.columns[i]?.width.replace("px", "");
+          left = left + props.columns[i]?.width?.replace("px", "");
         }
       }
       return { left: `${left}px` } as StyleValue;
@@ -516,7 +535,7 @@ const renderFixedStyle = (column: any, columnIndex: number) => {
           props.columns[i].fixed == "right" &&
           tableColumnKeys.value.includes(props.columns[i].key)
         ) {
-          right = right + props.columns[i]?.width.replace("px", "");
+          right = right + props.columns[i]?.width?.replace("px", "");
         }
       }
       return { right: `${right}px` } as StyleValue;
@@ -592,6 +611,10 @@ const renderTotalRowCell = (column: any) => {
     }
   }
 };
+
+onBeforeUnmount(() => {
+  window.onresize = null;
+});
 </script>
 
 <template>
@@ -833,24 +856,26 @@ const renderTotalRowCell = (column: any) => {
             </div>
           </template>
         </div>
+        <div class="layui-table-footer" v-if="slot.footer">
+          <slot name="footer"></slot>
+        </div>
       </div>
       <div v-if="page" class="layui-table-page">
-        <lay-page
-          show-page
-          show-skip
-          show-limit
+        <table-page
+          :show-page="page.showPage"
+          :showSkip="page.showSkip"
+          :showLimit="page.showLimit"
+          :showCount="page.showCount"
+          :limits="page.limits"
+          :showRefresh="page.showRefresh"
           :total="page.total"
-          :limit="page.limit"
+          :pages="page.pages"
+          :theme="page.theme"
           v-model="page.current"
-          @jump="change"
+          v-model:limit="page.limit"
+          @change="change"
         >
-          <template #prev>
-            <lay-icon type="layui-icon-left" />
-          </template>
-          <template #next>
-            <lay-icon type="layui-icon-right" />
-          </template>
-        </lay-page>
+        </table-page>
       </div>
     </div>
   </div>

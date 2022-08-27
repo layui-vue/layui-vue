@@ -71,8 +71,10 @@
   border-color: #d2d2d2 !important;
 }
 
+.layui-input-clear,
 .layui-input-prefix,
-.layui-input-suffix {
+.layui-input-suffix, 
+.layui-input-password {
   background-color: white;
 }
 
@@ -90,8 +92,8 @@
   padding: 0 15px;
 }
 
-.layui-input-password,
-.layui-input-clear {
+.layui-input-clear,
+.layui-input-password {
   flex: none;
   display: flex;
   align-items: center;
@@ -101,6 +103,10 @@
 
 .layui-input input::-webkit-input-placeholder {
   line-height: 1.3;
+}
+
+.layui-input input::-ms-reveal {
+  display: none;
 }
 
 .layui-input{

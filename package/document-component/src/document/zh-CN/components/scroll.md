@@ -13,8 +13,10 @@
 ::: demo 使用 `lay-scroll` 标签, 创建一个虚拟滚动容器
 
 <template>
+  <lay-button @click="changeTotal">修改数据</lay-button>
+  <lay-button @click="changeMaxTotal">修改数据</lay-button>
   <lay-scroll height="200px" style="background-color:whitesmoke;">
-    <lay-panel v-for="(n,index) in 50" :key="n" style="margin:10px;padding:10px;">内容</lay-panel>
+    <lay-panel v-for="(n,index) in total" :key="n" style="margin:10px;padding:10px;">内容</lay-panel>
   </lay-scroll>
 </template>
 
@@ -23,8 +25,20 @@ import { ref } from 'vue'
 
 export default {
   setup() {
+    const total = ref(50);
+
+    const changeTotal = () => {
+      total.value = 2;
+    }
+
+    const changeMaxTotal = () => {
+      total.value = 50;
+    }
 
     return {
+      total, 
+      changeTotal,
+      changeMaxTotal
     }
   }
 }

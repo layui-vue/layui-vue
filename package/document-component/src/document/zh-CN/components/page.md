@@ -13,7 +13,7 @@
 ::: demo 使用 `lay-page` 标签, 创建分页
 
 <template>
-  <lay-page v-model="currentPage" :limit="limit" 	@limit="limit = $event" :total="total" :show-page="showPage"></lay-page>
+  <lay-page v-model="currentPage" :limit="limit" :total="total" :show-page="true"></lay-page>
 </template>
 
 <script>
@@ -24,13 +24,11 @@ export default {
 
     const limit = ref(20)
     const total = ref(100)
-    const showPage = ref(true)
     const currentPage = ref(2);
 
     return {
       limit,
       total,
-      showPage,
       currentPage
     }
   }
@@ -39,13 +37,13 @@ export default {
 
 :::
 
-::: title 简单模式
+::: title 简洁模式
 :::
 
 ::: demo
 
 <template>
-  <lay-page :limit="limit"	@limit="limit = $event" :total="total"></lay-page>
+  <lay-page :limit="limit1" v-model="current1" :total="total1"></lay-page>
 </template>
 
 <script>
@@ -54,12 +52,14 @@ import { ref } from 'vue'
 export default {
   setup() {
 
-    const limit = ref(20)
-    const total = ref(100)
+    const limit1 = ref(10);
+    const total1 = ref(100);
+    const current1 = ref(1);
 
     return {
-      limit,
-      total
+      limit1,
+      total1,
+      current1
     }
   }
 }
@@ -67,16 +67,13 @@ export default {
 
 :::
 
-::: title 插槽使用
+::: title 设置主题
 :::
 
 ::: demo
 
 <template>
-  <lay-page :limit="limit"	@limit="limit = $event" :total="total">
-    <template v-slot:prev>上</template>
-    <template v-slot:next>下</template>
-  </lay-page>
+  <lay-page :limit="limit2" :total="total2" :show-page="true" theme="blue"></lay-page>
 </template>
 
 <script>
@@ -85,12 +82,12 @@ import { ref } from 'vue'
 export default {
   setup() {
 
-    const limit = ref(20)
-    const total = ref(100)
+    const limit2 = ref(20)
+    const total2 = ref(100)
 
     return {
-      limit,
-      total
+      limit2,
+      total2,
     }
   }
 }
@@ -98,17 +95,13 @@ export default {
 
 :::
 
-::: title 不同主题
+::: title 分页容量
 :::
 
 ::: demo
 
 <template>
-  <lay-page :limit="limit"	@limit="limit = $event" :total="total" :show-page="showPage" theme="red"></lay-page>
-  <br>
-  <lay-page :limit="limit"	@limit="limit = $event" :total="total" :show-page="showPage" theme="blue"></lay-page>
-  <br>
-  <lay-page :limit="limit"	@limit="limit = $event" :total="total" :show-page="showPage" theme="orange"></lay-page>
+  <lay-page :limit="limit3" :total="total3" showCount showPage :limits="limits3"></lay-page>
 </template>
 
 <script>
@@ -117,14 +110,14 @@ import { ref } from 'vue'
 export default {
   setup() {
 
-    const limit = ref(20)
-    const total = ref(100)
-    const showPage = ref(true)
+    const limit3 = ref(5)
+    const total3 = ref(100)
+    const limits3 = ref([5, 10, 50, 100, 200])
 
     return {
-      limit,
-      total,
-      showPage
+      limit3,
+      total3,
+      limits3
     }
   }
 }
@@ -132,58 +125,33 @@ export default {
 
 :::
 
-::: title 指定分页容量
+
+::: title 回调事件
 :::
 
 ::: demo
 
 <template>
-  <lay-page :limit="limit" :total="total" showCount showPage :limits="[10,50,100,200]" @limit="limit=$event"></lay-page>
+  <lay-page :limit="limit4" :total="total4" @change="change4" :show-page="true"></lay-page>
 </template>
 
 <script>
 import { ref } from 'vue'
+import { layer } from "@layui/layui-vue";
 
 export default {
   setup() {
 
-    const limit = ref(20)
-    const total = ref(100)
-
-    return {
-      limit,
-      total
+    const limit4 = ref(20)
+    const total4 = ref(100)
+    const change4 = ({ current, limit }) => {
+      layer.msg("current:" + current + " limit:" + limit);
     }
-  }
-}
-</script>
-
-:::
-
-::: title 每页数量切换事件(limit)
-:::
-
-::: demo
-
-<template>
-  <lay-page :limit="limit" showPage showCount :total="total" @limit="limit=$event" :show-limit="showLimit" ></lay-page>
-  <div>每页数量:{{limit}}</div>
-</template>
-
-<script>
-import { ref } from 'vue'
-
-export default {
-  setup() {
-
-    const limit = ref(5)
-    const total = ref(9999)
-    const showLimit = ref(true)
 
     return {
-      limit,
-      total,
-      showLimit,
+      limit4,
+      total4,
+      change4
     }
   }
 }
@@ -197,8 +165,12 @@ export default {
 ::: demo
 
 <template>
-  <lay-page :limit="limit1" :pages="pages1" :total="total1" :show-count="showCount1" @limit="limit1=$event" :show-page="showPage1" :show-limit="showLimit1" :show-refresh="showRefresh1" :showSkip="showSkip1"></lay-page>
-  每页数量:{{limit1}}
+  <lay-button-container>
+    <lay-button type="primary" size="sm" @click="changeCurrent5">update model {{ current5 }}</lay-button>
+    <lay-button type="primary" size="sm" @click="changeLimit5">update limit {{ limit5 }}</lay-button>
+  </lay-button-container>
+  <br/>
+  <lay-page v-model="current5" v-model:limit="limit5" :pages="pages5" :total="total5" :show-count="true" :show-page="true" :show-limit="true" :show-refresh="true" :showSkip="true" @change="change5"></lay-page>
 </template>
 
 <script>
@@ -207,60 +179,27 @@ import { ref } from 'vue'
 export default {
   setup() {
 
-    const limit1 = ref(5)
-    const total1 = ref(99)
-    const showCount1 = ref(true)
-    const showPage1 = ref(true)
-    const showLimit1 = ref(true)
-    const showRefresh1 = ref(true)
-    const showSkip1 = ref(true)
-    const pages1 = ref(6);
-
-    return {
-      limit1,
-      total1,
-      pages1,
-      showCount1,
-      showPage1,
-      showLimit1,
-      showRefresh1,
-      showSkip1
+    const limit5 = ref(10)
+    const total5 = ref(99)
+    const pages5 = ref(6);
+    const current5 = ref(1);
+    const changeCurrent5 = () => {
+      current5.value = 2;
     }
-  }
-}
-</script>
-
-:::
-
-::: title 页码切换事件(jump)
-:::
-
-::: demo
-
-<template>
-  <lay-page :limit="limit" :total="total" @jump="jump" 	@limit="limit = $event" :show-page="showSkip"></lay-page>
-</template>
-
-<script>
-import { ref } from 'vue'
-
-export default {
-  setup() {
-
-    const limit = ref(20)
-    const total = ref(100)
-    const showPage = ref(true)
-    const showSkip = ref(true)
-    const jump = function({ current }) {
-      console.log("当前页:" + current)
+    const changeLimit5 = () => {
+      limit5.value = 20;
     }
-
+    const change5 = ({ current, limit }) => {
+      layer.msg("current:" + current + " limit:" + limit);
+    }
     return {
-      limit,
-      total,
-      jump,
-      showPage,
-      showSkip
+      limit5,
+      total5,
+      pages5,
+      current5,
+      changeCurrent5,
+      changeLimit5,
+      change5
     }
   }
 }
@@ -294,10 +233,11 @@ export default {
 
 ::: table
 
-| 事件 | 描述     | 参数                  |
-| ---- | -------- | --------------------- |
-| jump | 切换回调 | { current: 当前页面 } |
-| limit | 每页数量变化 | 变化后的值 |
+| 事件 | 描述     | 参数                  | 版本                  |
+| ---- | -------- | --------------------- |---------------------  |
+| jump | 切换回调 | { current: 当前页面 } | `移除`                  |
+| limit | 每页数量变化 | 变化后的值 | `移除`                  |
+| change          | 分页事件 | { current: 当前页码, limit: 每页数量 } | `1.4.3` |
 
 :::
 
