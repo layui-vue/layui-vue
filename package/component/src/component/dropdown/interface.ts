@@ -1,17 +1,17 @@
 export type DropdownTrigger = "click" | "hover" | "focus" | "contextMenu";
 export type DropdownPlacement =
   | "top"
-  | "top-left"
-  | "top-right"
+  | "top-start"
+  | "top-end"
   | "bottom"
-  | "bottom-left"
-  | "bottom-right"
+  | "bottom-start"
+  | "bottom-end"
   | "right"
-  | "right-top"
-  | "right-bottom"
+  | "right-start"
+  | "right-end"
   | "left"
-  | "left-top"
-  | "left-bottom";
+  | "left-start"
+  | "left-end";
 
 export interface ElementScrollRect {
   top: number;

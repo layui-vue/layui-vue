@@ -24,7 +24,7 @@ export interface LayDropdownSubMenuProps {
 const props = withDefaults(defineProps<LayDropdownSubMenuProps>(), {
   trigger: "hover",
   disabled: false,
-  placement: "right-top",
+  placement: "right-start",
   contentOffset: 2,
 });
 </script>

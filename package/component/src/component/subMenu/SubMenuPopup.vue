@@ -30,7 +30,7 @@ const isOpen = computed(() => {
 <template>
   <lay-dropdown
     trigger="hover"
-    placement="right-top"
+    placement="right-start"
     :autoFitMinWidth="false"
     :contentOffset="3"
     popupContainer="body"

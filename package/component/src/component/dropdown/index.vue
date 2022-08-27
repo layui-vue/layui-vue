@@ -59,7 +59,7 @@ const props = withDefaults(defineProps<LayDropdownProps>(), {
   visible: false,
   trigger: "click",
   disabled: false,
-  placement: "bottom-left",
+  placement: "bottom-start",
   autoFitPosition: true,
   autoFitMinWidth: true,
   autoFitWidth: false,
@@ -265,16 +265,16 @@ const getContentStyle = (
 };
 
 const getPosition = (placement: DropdownPlacement) => {
-  if (["top", "top-left", "top-right"].includes(placement)) {
+  if (["top", "top-start", "top-end"].includes(placement)) {
     return "top";
   }
-  if (["bottom", "bottom-left", "bottom-right"].includes(placement)) {
+  if (["bottom", "bottom-start", "bottom-end"].includes(placement)) {
     return "bottom";
   }
-  if (["left", "left-bottom", "left-top"].includes(placement)) {
+  if (["left", "left-start", "left-end"].includes(placement)) {
     return "left";
   }
-  if (["right", "right-bottom", "right-top"].includes(placement)) {
+  if (["right", "right-start", "right-end"].includes(placement)) {
     return "right";
   }
   return "bottom";
@@ -345,12 +345,12 @@ const getContentOffset = (
           triggerRect.scrollLeft +
           Math.round((triggerRect.width - contentRect.width) / 2),
       };
-    case "top-left":
+    case "top-start":
       return {
         top: triggerRect.scrollTop - contentRect.height - props.contentOffset,
         left: triggerRect.scrollLeft,
       };
-    case "top-right":
+    case "top-end":
       return {
         top: triggerRect.scrollTop - contentRect.height - props.contentOffset,
         left: triggerRect.scrollRight - contentRect.width,
@@ -362,12 +362,12 @@ const getContentOffset = (
           triggerRect.scrollLeft +
           Math.round((triggerRect.width - contentRect.width) / 2),
       };
-    case "bottom-left":
+    case "bottom-start":
       return {
         top: triggerRect.scrollBottom + props.contentOffset,
         left: triggerRect.scrollLeft,
       };
-    case "bottom-right":
+    case "bottom-end":
       return {
         top: triggerRect.scrollBottom + props.contentOffset,
         left: triggerRect.scrollRight - contentRect.width,
@@ -379,12 +379,12 @@ const getContentOffset = (
           Math.round((triggerRect.height - contentRect.height) / 2),
         left: triggerRect.scrollRight + props.contentOffset,
       };
-    case "right-top":
+    case "right-start":
       return {
         top: triggerRect.scrollTop,
         left: triggerRect.scrollRight + props.contentOffset,
       };
-    case "right-bottom":
+    case "right-end":
       return {
         top: triggerRect.scrollBottom - contentRect.height,
         left: triggerRect.scrollRight + props.contentOffset,
@@ -396,12 +396,12 @@ const getContentOffset = (
           Math.round((triggerRect.height - contentRect.height) / 2),
         left: triggerRect.scrollLeft - contentRect.width - props.contentOffset,
       };
-    case "left-top":
+    case "left-start":
       return {
         top: triggerRect.scrollTop,
         left: triggerRect.scrollLeft - contentRect.width - props.contentOffset,
       };
-    case "left-bottom":
+    case "left-end":
       return {
         top: triggerRect.scrollBottom - contentRect.height,
         left: triggerRect.scrollLeft - contentRect.width - props.contentOffset,

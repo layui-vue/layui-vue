@@ -25,7 +25,7 @@ import {
   reactive,
   h,
   createTextVNode,
-isVNode,
+  isVNode,
 } from "vue";
 import { useResizeObserver } from "@vueuse/core";
 import { TabData, TabInjectKey } from "./interface";
@@ -268,16 +268,14 @@ const update = () => {
 };
 
 const renderTabChild = (child: TabData) => {
-
-  if (child.slots?.title){
-    return () => h("span", child.slots?.title && child.slots.title())
+  if (child.slots?.title) {
+    return () => h("span", child.slots?.title && child.slots.title());
   }
 
-  if (typeof child.title === "function"){
+  if (typeof child.title === "function") {
     // @ts-ignore
     return () => child.title();
-    
-  } else if (typeof child.title === "string"){
+  } else if (typeof child.title === "string") {
     return () => createTextVNode(child.title as string);
   }
 };
