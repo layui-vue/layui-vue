@@ -13,15 +13,13 @@
 ::: demo 标签的基本用法。
 
 <template>
-  <lay-tag>tag</lay-tag>
-  &nbsp&nbsp
-  <lay-tag bordered color="#FFF">tag</lay-tag>
-  &nbsp&nbsp
-  <lay-tag closable>tag</lay-tag>
-  &nbsp&nbsp
-  <lay-tag closable disabled>tag</lay-tag>
-    &nbsp&nbsp
+<lay-space size="md">
+  <lay-tag>标签</lay-tag>
+  <lay-tag bordered color="#FFF">标签</lay-tag>
+  <lay-tag closable>标签</lay-tag>
+  <lay-tag closable disabled>标签</lay-tag>
   <lay-tag closable max-width="120px" title="超过设置长度省略文本">超过设置长度省略文本</lay-tag>
+</lay-space>
 </template>
 
 <script>
@@ -35,55 +33,58 @@
 ::: demo 通过 size 属性控制标签尺寸。
 
 <template>
-  <lay-tag>default</lay-tag>
-  &nbsp&nbsp
+<lay-space direction="vertical" size="md">
+<lay-space size="md">
+  lg: 
   <lay-tag size="lg">tag lg</lay-tag>
-  &nbsp&nbsp
-  <lay-tag size="md">tag md</lay-tag>
-  &nbsp&nbsp
-  <lay-tag size="sm">tag sm</lay-tag>
-  &nbsp&nbsp
-  <lay-tag size="xs">tag xs</lay-tag>
-  <br><br>
-  <lay-tag><template #icon><lay-icon type="layui-icon-addition" /></template>default</lay-tag>
-  &nbsp&nbsp
   <lay-tag size="lg"><template #icon><lay-icon type="layui-icon-addition" /></template>tag lg</lay-tag>
-  &nbsp&nbsp
-  <lay-tag size="md"><template #icon><lay-icon type="layui-icon-addition" /></template>tag md</lay-tag>
-  &nbsp&nbsp
-  <lay-tag size="sm"><template #icon><lay-icon type="layui-icon-addition" /></template>tag sm</lay-tag>
-  &nbsp&nbsp
-  <lay-tag size="xs"><template #icon><lay-icon type="layui-icon-addition" /></template>tag xs</lay-tag>
-  <br><br>
-  <lay-tag closable>
-    <template #icon><lay-icon type="layui-icon-addition" /></template>
-    default
-  </lay-tag>
-  &nbsp&nbsp
-    <lay-tag size="lg" closable>
+  <lay-tag size="lg" closable>
     <template #icon><lay-icon type="layui-icon-addition" /></template>
     tag lg
   </lay-tag>
-  &nbsp&nbsp
-    <lay-tag size="md" closable>
+</lay-space>
+<lay-space size="md">
+  md: 
+  <lay-tag size="md">tag md</lay-tag>
+  <lay-tag size="md"><template #icon><lay-icon type="layui-icon-addition" /></template>tag md</lay-tag>
+  <lay-tag size="md" closable>
     <template #icon><lay-icon type="layui-icon-addition" /></template>
     tag md
   </lay-tag>
-  &nbsp&nbsp
+</lay-space>
+<lay-space size="md">
+  sm: 
+  <lay-tag size="sm">tag sm</lay-tag>
+  <lay-tag size="sm"><template #icon><lay-icon type="layui-icon-addition" /></template>tag sm</lay-tag>
   <lay-tag size="sm" closable>
     <template #icon><lay-icon type="layui-icon-addition" /></template>
     tag sm
   </lay-tag>
-  &nbsp&nbsp
+</lay-space>
+<lay-space size="md">
+  xs: 
+  <lay-tag size="xs">tag xs</lay-tag>
+  <lay-tag size="xs"><template #icon><lay-icon type="layui-icon-addition" /></template>tag xs</lay-tag>
   <lay-tag size="xs" closable>
     <template #icon><lay-icon type="layui-icon-addition" /></template>
     tag xs
   </lay-tag>
-  &nbsp&nbsp
+</lay-space>
+</lay-space>
 </template>
 
 <script>
 </script>
+<style>
+.tag-demo {
+  width: 500px;
+  display: flex;
+  margin-bottom: 15px;
+}
+.tag-demo .layui-tag{
+  margin-right: 15px;
+}
+</style>
 
 :::
 
@@ -93,22 +94,32 @@
 ::: demo 通过 closable 属性控制标签是否可关闭
 
 <template>
+<lay-space size="md">
   <lay-tag closable>Tag</lay-tag>
-  &nbsp&nbsp
   <lay-tag closable>
     <template #icon><lay-icon type="layui-icon-addition" /></template>
     Tag 2
   </lay-tag>
-    &nbsp&nbsp
   <lay-tag closable>
     <template #icon><lay-icon type="layui-icon-addition" /></template>
     自定义关闭图标
     <template #close-icon><lay-icon type="layui-icon-close-fill" /></template>
   </lay-tag>
+</lay-space>
 </template>
 
 <script>
 </script>
+<style>
+.tag-demo {
+  width: 500px;
+  display: flex;
+  margin-bottom: 15px;
+}
+.tag-demo .layui-tag{
+  margin-right: 15px;
+}
+</style>
 
 :::
 
@@ -118,50 +129,36 @@
 ::: demo 标签颜色, 非内置颜色只支持默认样式, plain 默认有边框。
 
 <template>
-  <p>default:</p>
-  <span v-for="color in TAG_COLORS">
-  <lay-tag :color="color">Tag</lay-tag>
-  &nbsp&nbsp
-  </span>
-  &nbsp&nbsp&nbsp&nbsp
-  <span v-for="color in TAG_COLORS">
-  <lay-tag :color="color" bordered closable>Tag</lay-tag>
-  &nbsp&nbsp
-  </span>
-  <br><br>
-  <p>light:</p>
-  <span v-for="color in TAG_COLORS">
-  <lay-tag :color="color" variant="light">Tag</lay-tag>
-  &nbsp&nbsp
-  </span>
-  &nbsp&nbsp&nbsp&nbsp
-  <span v-for="color in TAG_COLORS">
-  <lay-tag :color="color" variant="light" bordered closable>Tag</lay-tag>
-  &nbsp&nbsp
-  </span>
-  <br><br>
-  <p>plain:</p>
-  <span v-for="color in TAG_COLORS">
-  <lay-tag :color="color" variant="plain">Tag</lay-tag>
-  &nbsp&nbsp
-  </span>
-  &nbsp&nbsp&nbsp&nbsp
-  <span v-for="color in TAG_COLORS">
-  <lay-tag :color="color" variant="plain" bordered closable>Tag</lay-tag>
-  &nbsp&nbsp
-  </span>
-  <br><br>
-  <p>custom:</p>
-  <span v-for="color in COLORS">
-  <lay-tag :color="color" variant="plain">Tag</lay-tag>
-  &nbsp&nbsp
-  </span>
-  &nbsp&nbsp&nbsp&nbsp
-  <span v-for="color in COLORS">
-  <lay-tag :color="color" variant="plain" bordered closable>Tag</lay-tag>
-  &nbsp&nbsp
-  </span>
-  <br><br>
+<lay-space direction="vertical" size="md">
+  default:
+  <lay-space size="md">
+    <lay-tag v-for="color in TAG_COLORS" :color="color">标签</lay-tag>
+  </lay-space>
+  <lay-space size="md">
+    <lay-tag v-for="color in TAG_COLORS" :color="color" bordered closable>标签</lay-tag>
+  </lay-space>
+  light:
+  <lay-space size="md">
+    <lay-tag v-for="color in TAG_COLORS" :color="color" variant="light">标签</lay-tag>
+  </lay-space>
+  <lay-space size="md">
+    <lay-tag v-for="color in TAG_COLORS" :color="color" variant="light" bordered closable>标签</lay-tag>
+  </lay-space>
+  plain:
+  <lay-space size="md">
+    <lay-tag v-for="color in TAG_COLORS" :color="color" variant="plain">标签</lay-tag>
+  </lay-space>
+  <lay-space size="md">
+    <lay-tag v-for="color in TAG_COLORS" :color="color" variant="plain" bordered closable>标签</lay-tag>
+  </lay-space>
+  custom:
+  <lay-space size="md">
+    <lay-tag v-for="color in COLORS" :color="color" variant="plain">标签</lay-tag>
+  </lay-space>
+  <lay-space size="md">
+    <lay-tag v-for="color in COLORS" :color="color" variant="plain" bordered closable>标签</lay-tag>
+  </lay-space>
+</lay-space>
 </template>
 
 <script>
@@ -194,40 +191,62 @@ const COLORS = [
   }
 }
 </script>
+<style>
+.tag-demo {
+  width: 500px;
+  display: flex;
+  margin-bottom: 15px;
+}
+.tag-demo .layui-tag{
+  margin-right: 15px;
+}
+.tag-demo-variant{
+  margin-bottom: 10px;
+}
+</style>
 
 :::
 
 ::: title 图标插槽
 :::
 
-::: demo 标签的基本用法。
+::: demo 通过插槽自定义图标。
 
 <template>
+<lay-space size="md">
   <lay-tag bordered size="lg" color="#FFF">
     <template #icon>
       <lay-icon type="layui-icon-vercode" />
     </template>
     tag
   </lay-tag>
-  &nbsp&nbsp
   <lay-tag bordered size="lg" color="#FFF">
     <template #icon>
       <lay-icon type="layui-icon-login-qq" />
     </template>
     tag
   </lay-tag>
-  &nbsp&nbsp
   <lay-tag bordered size="lg" color="#FFF">
     <template #icon>
       <lay-icon type="layui-icon-star-fill" />
     </template>
     tag
   </lay-tag>
-  &nbsp&nbsp
+</lay-space>
 </template>
 
 <script>
 </script>
+<style>
+.tag-demo {
+  width: 500px;
+  display: flex;
+  margin-bottom: 15px;
+}
+.tag-demo .layui-tag{
+  margin-right: 15px;
+}
+</style>
 
 :::
 
@@ -324,7 +343,7 @@ export default {
 | 属性        | 描述     | 类型    | 默认值    | 可选值                             |
 | ----------- | -------- | ------ | ------ | ------ |
 | size | 标签大小 | string | md | `lg` `md` `sm` `xs`|
-| color | 标签颜色 | string | `green`| `red` `orange` `green` `cyan` `blue` `black` `gray` `string` | 
+| color | 标签颜色 | string | `#EEE`| `red` `orange` `green` `cyan` `blue` `black` `gray` `string` | 
 | bordered | 是否显示边框 | boolean | false | `true` `false`|
 | closable | 是否可关闭 | boolean | false | `true` `false`|
 | variant  | 标签风格  | string | `default` | `default` `light` `plain`|

@@ -35,12 +35,15 @@ export interface LaySpaceProps {
 }
 
 const props = withDefaults(defineProps<LaySpaceProps>(), {
-  align: "center",
   direction: "horizontal",
   size: "sm",
 });
 
 const slots = useSlots();
+
+const computAlign = computed(
+  () => props.align ?? (props.direction === "horizontal" ? "center" : "")
+);
 
 const extractChildren = () => {
   const result: VNode[] = [];
@@ -73,7 +76,7 @@ const extractChildren = () => {
 const spaceClass = computed(() => [
   "layui-space",
   {
-    [`layui-space-align-${props.align}`]: props.align,
+    [`layui-space-align-${props.align}`]: computAlign.value,
     [`layui-space-${props.direction}`]: props.direction,
     [`layui-space-wrap`]: props.wrap,
     [`layui-space-fill`]: props.fill,
