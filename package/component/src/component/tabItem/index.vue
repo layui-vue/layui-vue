@@ -20,7 +20,7 @@ import { TabInjectKey, TabsContext } from "../tab/interface";
 
 export interface LayTabItemProps {
   id: string;
-  title: string;
+  title?: string | Function;
   closable?: boolean | string;
 }
 

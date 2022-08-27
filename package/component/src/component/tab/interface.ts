@@ -4,7 +4,7 @@ export const TabInjectKey = Symbol("layuiTab");
 
 export interface TabData {
   id: string;
-  title?: string;
+  title?: string | Function;
   closable?: string | boolean;
   slots: Slots;
 }

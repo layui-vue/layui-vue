@@ -43,40 +43,56 @@ export default {
 
 <template>
   <lay-tab v-model="current11" :allow-close="true">
-    <lay-tab-item title="选项一" id="1">
+    <lay-tab-item id="1">
       <template #title>
         <lay-icon type="layui-icon-console"></lay-icon>
         <span style="margin-left:10px">选项一</span>
       </template>
       <div style="padding:20px">选项一</div>
     </lay-tab-item>
-    <lay-tab-item title="选项一" id="2">
+    <lay-tab-item id="2">
       <template #title>
         <lay-icon type="layui-icon-user"></lay-icon>
-        <span style="margin-left:10px">选项一</span>
+        <span style="margin-left:10px">选项二</span>
       </template>
       <div style="padding:20px">选项二</div>
     </lay-tab-item>
-    <lay-tab-item title="选项一" id="3">
+    <lay-tab-item id="3">
       <template #title>
         <lay-icon type="layui-icon-set"></lay-icon>
-        <span style="margin-left:10px">选项一</span>
+        <span style="margin-left:10px">选项三</span>
       </template>
       <div style="padding:20px">选项三</div>
+    </lay-tab-item>
+    <lay-tab-item id="4" :title="renderTitleFunc">
+      <div style="padding:20px">选项四</div>
     </lay-tab-item>
   </lay-tab>
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref,h , resolveComponent} from 'vue'
 
 export default {
   setup() {
+    const LayIcon = resolveComponent("LayIcon");
 
     const current11 = ref("1")
+    const renderTitleFunc = () => [
+      h(LayIcon, 
+      {
+        type: "layui-icon-component",
+      }),
+      h("span", 
+      {
+        style: "margin-left: 10px; color: red",
+      },
+      "选项四")
+    ]
 
     return {
-      current11
+      current11,
+      renderTitleFunc
     }
   }
 }

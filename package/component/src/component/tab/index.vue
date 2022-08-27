@@ -8,7 +8,6 @@ export default {
 import "./index.less";
 import { LayIcon } from "@layui/icons-vue";
 import tabItem from "../tabItem/index.vue";
-import RenderTitle from "./renderTitle.vue";
 import RenderFunction from "../_components/renderFunction";
 import {
   Component,
@@ -26,6 +25,7 @@ import {
   reactive,
   h,
   createTextVNode,
+isVNode,
 } from "vue";
 import { useResizeObserver } from "@vueuse/core";
 import { TabData, TabInjectKey } from "./interface";
@@ -268,9 +268,18 @@ const update = () => {
 };
 
 const renderTabChild = (child: TabData) => {
-  return child.slots?.title
-    ? () => h("span", child.slots?.title && child.slots.title())
-    : () => createTextVNode(child.title);
+
+  if (child.slots?.title){
+    return () => h("span", child.slots?.title && child.slots.title())
+  }
+
+  if (typeof child.title === "function"){
+    // @ts-ignore
+    return () => child.title();
+    
+  } else if (typeof child.title === "string"){
+    return () => createTextVNode(child.title as string);
+  }
 };
 
 useResizeObserver(navRef, update);
