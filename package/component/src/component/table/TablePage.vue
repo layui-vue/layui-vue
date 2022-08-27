@@ -48,7 +48,7 @@ const change = (pageData: any) => {
     :limits="limits"
     :theme="theme"
     :pages="pages"
-    v-model:modelValue="modelValue"
+    v-model="modelValue"
     v-model:limit="limit"
     @change="change"
   >
