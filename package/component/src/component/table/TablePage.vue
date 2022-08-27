@@ -7,7 +7,7 @@ export default {
 <script lang="ts" setup>
 import { LayIcon } from "@layui/icons-vue";
 import LayPage from "../page/index.vue";
-import { computed, WritableComputedRef } from 'vue';
+import { computed, WritableComputedRef } from "vue";
 
 export interface LayTablePageProps {
   showPage?: boolean;
