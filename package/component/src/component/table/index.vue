@@ -871,7 +871,7 @@ onBeforeUnmount(() => {
           :total="page.total"
           :pages="page.pages"
           :theme="page.theme"
-          v-model="page.current"
+          v-model:current="page.current"
           v-model:limit="page.limit"
           @change="change"
         >

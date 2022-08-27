@@ -7,6 +7,7 @@ export default {
 <script lang="ts" setup>
 import { LayIcon } from "@layui/icons-vue";
 import LayPage from "../page/index.vue";
+import { computed, WritableComputedRef } from 'vue';
 
 export interface LayTablePageProps {
   showPage?: boolean;
@@ -14,11 +15,11 @@ export interface LayTablePageProps {
   showLimit?: boolean;
   showCount?: boolean;
   showRefresh?: boolean;
-  modelValue: number;
+  current: number;
   limits?: number[];
   pages?: number;
   total: number;
-  limit?: number;
+  limit: number;
   theme?: string;
 }
 
@@ -28,12 +29,28 @@ const props = withDefaults(defineProps<LayTablePageProps>(), {
   showSkip: true,
 });
 
-const emit = defineEmits(["update:modelValue", "update:limit", "change"]);
+const emit = defineEmits(["update:current", "update:limit", "change"]);
+
+const current: WritableComputedRef<number> = computed({
+  get() {
+    return props.current;
+  },
+  set(val) {
+    emit("update:current", val);
+  },
+});
+
+const limit: WritableComputedRef<number> = computed({
+  get() {
+    return props.limit;
+  },
+  set(val) {
+    emit("update:limit", val);
+  },
+});
 
 const change = (pageData: any) => {
   emit("change", pageData);
-  emit("update:modelValue", pageData.current);
-  emit("update:limit", pageData.limit);
 };
 </script>
 
@@ -48,7 +65,7 @@ const change = (pageData: any) => {
     :limits="limits"
     :theme="theme"
     :pages="pages"
-    v-model="modelValue"
+    v-model="current"
     v-model:limit="limit"
     @change="change"
   >

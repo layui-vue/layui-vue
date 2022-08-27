@@ -16,6 +16,7 @@
       <li> 
         <h3>1.4.6 <span class="layui-badge-rim">2022-0x-xx</span></h3> 
         <ul>     
+          <li>[修复] table 组件 change 事件异常。</li>
           <li>[修复] dropdown 组件 hide 事件触发异常。</li>
           <li>[优化] dropdown 组件 open 方法修改为 show 方法。</li>
         </ul>
