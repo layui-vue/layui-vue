@@ -88,6 +88,12 @@ const menus = [
         subTitle: "skeleton",
         path: "/zh-CN/components/skeleton",
       },
+      {
+        id: 12,
+        title: "间距",
+        subTitle: "space",
+        path: "/zh-CN/components/space",
+      },
     ],
   },
   {

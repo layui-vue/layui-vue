@@ -88,6 +88,7 @@ import LayNoticeBar from "./component/noticeBar/index";
 import LayPageHeader from "./component/pageHeader/index";
 import LayCascader from "./component/cascader/index";
 import LayAffix from "./component/affix/index";
+import LaySpace from "./component/space/index";
 import LayConfigProvider from "./provider";
 import { InstallOptions } from "./types";
 
@@ -174,6 +175,7 @@ const components: Record<string, Plugin> = {
   LayPageHeader,
   LayCascader,
   LayAffix,
+  LaySpace,
 };
 
 const install = (app: App, options?: InstallOptions): void => {
@@ -267,6 +269,7 @@ export {
   LayPageHeader,
   LayCascader,
   LayAffix,
+  LaySpace,
   install,
 };
 
