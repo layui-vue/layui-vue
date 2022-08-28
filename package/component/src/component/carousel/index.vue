@@ -32,6 +32,7 @@ const props = withDefaults(
     arrow?: string;
     interval?: number;
     indicator?: string;
+    pauseOnHover?: boolean;
   }>(),
   {
     width: "100%",
@@ -41,6 +42,7 @@ const props = withDefaults(
     arrow: "hover",
     interval: 3000,
     indicator: "inside",
+    pauseOnHover: true,
   }
 );
 
@@ -133,10 +135,33 @@ const autoplay = () => {
   }
 };
 
+let intervalTimer = 0;
+
+const cleanIntervalTimer = () => {
+  if (intervalTimer) {
+    window.clearInterval(intervalTimer);
+    intervalTimer = 0;
+  }
+};
+
+const handleMouseEnter = () => {
+  if (props.autoplay && props.pauseOnHover) {
+    cleanIntervalTimer();
+  }
+};
+
+const handleMouseLeave = () => {
+  if (props.autoplay && props.pauseOnHover) {
+    intervalTimer = window.setInterval(autoplay, props.interval);
+  }
+};
+
 watch(
   () => props.autoplay,
   () => {
-    if (props.autoplay) setInterval(autoplay, props.interval);
+    if (props.autoplay) {
+      intervalTimer = window.setInterval(autoplay, props.interval);
+    }
   },
   { immediate: true }
 );
@@ -149,6 +174,8 @@ watch(
     :lay-indicator="indicator"
     :lay-arrow="arrow"
     :style="{ width: width, height: height }"
+    @mouseenter="handleMouseEnter"
+    @mouseleave="handleMouseLeave"
   >
     <div carousel-item>
       <slot></slot>
