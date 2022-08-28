@@ -1,62 +1,64 @@
 <template>
-  <lay-dropdown
-    class="layui-cascader"
-    :class="{ 'layui-cascader-opend': openState }"
-    ref="dropdownRef"
-    :autoFitMinWidth="false"
-    :updateAtScroll="true"
-    :disabled="dropDownDisabled"
+  <div
     :size="size"
-    @open="openState = true"
-    @hide="openState = false"
+    :class="['layui-cascader', { 'layui-cascader-opend': openState }]"
   >
-    <lay-input
-      v-model="displayValue"
-      readonly
-      suffix-icon="layui-icon-triangle-d"
-      :placeholder="placeholder"
-      v-if="!slots.default"
-      :allow-clear="allowClear"
-      @clear="onClear"
-      :size="size"
-    ></lay-input>
-    <slot v-else></slot>
+    <lay-dropdown
+      ref="dropdownRef"
+      :autoFitMinWidth="false"
+      :updateAtScroll="true"
+      :disabled="dropDownDisabled"
+      @show="openState = true"
+      @hide="openState = false"
+    >
+      <lay-input
+        v-model="displayValue"
+        readonly
+        suffix-icon="layui-icon-triangle-d"
+        :placeholder="placeholder"
+        v-if="!slots.default"
+        :allow-clear="allowClear"
+        @clear="onClear"
+        :size="size"
+      ></lay-input>
+      <slot v-else></slot>
 
-    <template #content>
-      <div class="layui-cascader-panel">
-        <template v-for="(itemCol, index) in treeData">
-          <lay-scroll
-            height="180px"
-            class="layui-cascader-menu"
-            :key="'cascader-menu' + index"
-            v-if="itemCol.data.length"
-          >
-            <div
-              class="layui-cascader-menu-item"
-              v-for="(item, i) in itemCol.data"
-              :key="index + i"
-              @click="selectBar(item, i, index)"
-              :class="[
-                {
-                  'layui-cascader-selected': itemCol.selectIndex === i,
-                },
-              ]"
+      <template #content>
+        <div class="layui-cascader-panel">
+          <template v-for="(itemCol, index) in treeData">
+            <lay-scroll
+              height="180px"
+              class="layui-cascader-menu"
+              :key="'cascader-menu' + index"
+              v-if="itemCol.data.length"
             >
-              <slot
-                :name="item.slot"
-                v-if="item.slot && slots[item.slot]"
-              ></slot>
-              <template v-else>{{ item.label }}</template>
-              <i
-                class="layui-icon layui-icon-right"
-                v-if="item.children && item.children.length"
-              ></i>
-            </div>
-          </lay-scroll>
-        </template>
-      </div>
-    </template>
-  </lay-dropdown>
+              <div
+                class="layui-cascader-menu-item"
+                v-for="(item, i) in itemCol.data"
+                :key="index + i"
+                @click="selectBar(item, i, index)"
+                :class="[
+                  {
+                    'layui-cascader-selected': itemCol.selectIndex === i,
+                  },
+                ]"
+              >
+                <slot
+                  :name="item.slot"
+                  v-if="item.slot && slots[item.slot]"
+                ></slot>
+                <template v-else>{{ item.label }}</template>
+                <i
+                  class="layui-icon layui-icon-right"
+                  v-if="item.children && item.children.length"
+                ></i>
+              </div>
+            </lay-scroll>
+          </template>
+        </div>
+      </template>
+    </lay-dropdown>
+  </div>
 </template>
 
 <script lang="ts">

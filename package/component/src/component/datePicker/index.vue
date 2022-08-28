@@ -1,13 +1,13 @@
 <template>
-  <div>
+  <div
+    :class="['layui-date-picker', { 'layui-date-range-picker': range }]"
+    :size="size"
+  >
     <lay-dropdown
       ref="dropdownRef"
       :disabled="disabled"
       :autoFitMinWidth="false"
       updateAtScroll
-      class="layui-date-picker"
-      :class="{ 'layui-date-range-picker': range }"
-      :size="size"
     >
       <lay-input
         :name="name"

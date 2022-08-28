@@ -1,12 +1,25 @@
 <script lang="ts">
 export default {
   name: "LayDropdown",
+  inheritAttrs: false,
 };
 </script>
 
 <script setup lang="ts">
 import "./index.less";
-import { ComputedRef, CSSProperties, inject, reactive, Ref, toRefs } from "vue";
+import {
+  ComputedRef,
+  CSSProperties,
+  h,
+  inject,
+  reactive,
+  Ref,
+  toRefs,
+  useSlots,
+  Fragment,
+  cloneVNode,
+  useAttrs,
+} from "vue";
 import {
   computed,
   nextTick,
@@ -30,6 +43,8 @@ import {
   DropdownContext,
 } from "./interface";
 import TeleportWrapper from "../_components/teleportWrapper.vue";
+import { useFirstElement } from "./useFirstElement";
+import RenderFunction from "../_components/renderFunction";
 
 export type DropdownTrigger = "click" | "hover" | "focus" | "contextMenu";
 
@@ -75,13 +90,15 @@ const props = withDefaults(defineProps<LayDropdownProps>(), {
   alignPoint: false,
   popupContainer: "body",
 });
-
+const slots = useSlots();
+const attrs = useAttrs();
 const childrenRefs = new Set<Ref<HTMLElement>>();
 const dropdownCtx = inject<DropdownContext | undefined>(
   dropdownInjectionKey,
   undefined
 );
-const dropdownRef = shallowRef<HTMLElement | undefined>();
+const { children, firstElement: dropdownRef } = useFirstElement();
+//const dropdownRef = shallowRef<HTMLElement | undefined>();
 const contentRef = shallowRef<HTMLElement | undefined>();
 const contentStyle = ref<CSSProperties>({});
 const { width: windowWidth, height: windowHeight } = useWindowSize();
@@ -91,6 +108,7 @@ const mousePosition = reactive({
 });
 const { x: mouseLeft, y: mouseTop } = toRefs(mousePosition);
 const openState = ref(false);
+let scrollElements: HTMLElement[] | undefined;
 
 const containerRef = computed(() =>
   props.popupContainer
@@ -564,7 +582,28 @@ onClickOutside(
   }
 );
 
-let scrollElements: HTMLElement[] | undefined;
+const onlyChildRenderFunc = () => {
+  const slotContent = slots.default ? slots.default() : [];
+  const transformedSlotContent = slotContent.map((vnode) =>
+    cloneVNode(
+      vnode,
+      {
+        onClick: handleClick,
+        onContextmenu: handleContextMenuClick,
+        onMouseenter: handleMouseEnter,
+        onMouseleave: handleMouseLeave,
+        onFocusin: handleFocusin,
+        onFocusout: handleFocusout,
+        ...attrs,
+      },
+      true
+    )
+  );
+
+  children.value = transformedSlotContent;
+  return h(Fragment, children.value);
+};
+
 onMounted(() => {
   if (props.updateAtScroll) {
     scrollElements = getScrollElements(dropdownRef.value);
@@ -611,29 +650,20 @@ defineExpose({ show, hide, toggle });
 </script>
 
 <template>
-  <div
-    ref="dropdownRef"
-    class="layui-dropdown"
-    @mouseenter="handleMouseEnter"
-    @mouseleave="handleMouseLeave"
-    @focusin="handleFocusin()"
-    @focusout="handleFocusout()"
-    :class="{ 'layui-dropdown-up': openState }"
-  >
-    <div @click="handleClick" @contextmenu="handleContextMenuClick">
-      <slot></slot>
+  <RenderFunction
+    :renderFunc="onlyChildRenderFunc"
+    v-bind="$attrs"
+  ></RenderFunction>
+  <TeleportWrapper :to="popupContainer">
+    <div
+      v-if="openState"
+      ref="contentRef"
+      class="layui-dropdown-content layui-anim layui-anim-upbit"
+      :style="contentStyle"
+      @mouseenter="handleMouseEnterWithContext"
+      @mouseleave="handleMouseLeaveWithContext"
+    >
+      <slot name="content"></slot>
     </div>
-    <TeleportWrapper :to="popupContainer">
-      <dl
-        v-if="openState"
-        ref="contentRef"
-        class="layui-dropdown-content layui-anim layui-anim-upbit"
-        :style="contentStyle"
-        @mouseenter="handleMouseEnterWithContext"
-        @mouseleave="handleMouseLeaveWithContext"
-      >
-        <slot name="content"></slot>
-      </dl>
-    </TeleportWrapper>
-  </div>
+  </TeleportWrapper>
 </template>

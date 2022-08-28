@@ -478,7 +478,7 @@ export default {
 
 <template>
 <lay-space>
-   <lay-dropdown placement="bottom-left" autoFitWidth updateAtScroll>
+   <lay-dropdown placement="bottom-start" autoFitWidth updateAtScroll>
     <lay-button type="primary">autoFitWidth</lay-button>
     <template #content>
       <lay-dropdown-menu>
@@ -488,7 +488,7 @@ export default {
       </lay-dropdown-menu>
     </template>
   </lay-dropdown>
-  <lay-dropdown placement="bottom-left" :autoFitMinWidth="false" updateAtScroll>
+  <lay-dropdown placement="bottom-start" :autoFitMinWidth="false" updateAtScroll>
     <lay-button type="primary">关闭 autoFitMinWidth</lay-button>
     <template #content>
       <lay-dropdown-menu>
@@ -498,7 +498,7 @@ export default {
       </lay-dropdown-menu> 
     </template>
   </lay-dropdown>
-  <lay-dropdown placement="bottom-left" updateAtScroll>
+  <lay-dropdown placement="bottom-start" updateAtScroll>
     <lay-button type="primary">updateAtScroll</lay-button>
     <template #content>
       <lay-dropdown-menu>
@@ -508,7 +508,7 @@ export default {
       </lay-dropdown-menu> 
     </template>
   </lay-dropdown>
-  <lay-dropdown placement="bottom-left" updateAtScroll :contentOffset="8">
+  <lay-dropdown placement="bottom-start" updateAtScroll :contentOffset="8">
     <lay-button type="primary">contentOffset: 8px</lay-button>
     <template #content>
       <lay-dropdown-menu>
