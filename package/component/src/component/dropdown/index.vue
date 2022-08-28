@@ -45,6 +45,7 @@ import {
 import TeleportWrapper from "../_components/teleportWrapper.vue";
 import { useFirstElement } from "./useFirstElement";
 import RenderFunction from "../_components/renderFunction";
+import { transformPlacement } from "./util";
 
 export type DropdownTrigger = "click" | "hover" | "focus" | "contextMenu";
 
@@ -90,6 +91,9 @@ const props = withDefaults(defineProps<LayDropdownProps>(), {
   alignPoint: false,
   popupContainer: "body",
 });
+
+const emit = defineEmits(["show", "hide"]);
+
 const slots = useSlots();
 const attrs = useAttrs();
 const childrenRefs = new Set<Ref<HTMLElement>>();
@@ -120,7 +124,9 @@ const triggerMethods = computed(() =>
   ([] as Array<DropdownTrigger>).concat(props.trigger)
 );
 
-const emit = defineEmits(["show", "hide"]);
+const computedPlacement = computed(() => {
+  return transformPlacement(props.placement);
+});
 
 let delayTimer = 0;
 
@@ -215,7 +221,11 @@ const updateContentStyle = () => {
     ? getTriggerRect()
     : getElementScrollRect(dropdownRef.value, containerRect);
   const contentRect = getElementScrollRect(contentRef.value, containerRect);
-  const { style } = getContentStyle(props.placement, triggerRect, contentRect);
+  const { style } = getContentStyle(
+    computedPlacement.value,
+    triggerRect,
+    contentRect
+  );
 
   if (props.autoFitMinWidth) {
     style.minWidth = `${triggerRect.width}px`;
@@ -240,7 +250,7 @@ const updateContentStyle = () => {
       const { top: fitTop, left: fitLeft } = getFitPlacement(
         top,
         left,
-        props.placement,
+        computedPlacement.value,
         triggerRect,
         contentRect
       );
