@@ -335,56 +335,122 @@ export default {
 ::: demo 设置 `height` 或者 `max-height` 即可实现
 
 <template>
-  <lay-table :columns="columns8" :data-source="dataSource8" size="sm" max-height="300px"></lay-table>
+  <lay-table
+    :columns="columns8"
+    :data-source="dataSource8"
+    size="sm"
+    max-height="300px"
+  >
+              <template v-slot:operator="{ data }">
+              <lay-button size="xs" @click="deleteColumn(data)">删除</lay-button>
+            </template>
+  </lay-table>
 </template>
 
-<script>
+<script lang="ts" setup>
 import { ref } from 'vue'
-
-export default {
-  setup() {
-
-    const columns8 = [
-      {
-        title:"账户",
-        minWidth:"200px",
-        key:"username"
-      },{
-        title:"密码",
-        minWidth: "180px",
-        key:"password"
-      },{
-        title:"年龄",
-        minWidth: "180px",
-        key:"age"
-      },{
-        title:"备注",
-        key:"remark",
-				minWidth: "180px",
-        ellipsisTooltip: true,
-      }
-    ]
-
-    const dataSource8 = [
-      {username:"root", password:"root", age:"18", remark: 'layui - vue（谐音：类 UI) '},
-      {username:"root", password:"root", age:"18", remark: 'layui - vue（谐音：类 UI) '},
-      {username:"root", password:"root", age:"18", remark: 'layui - vue（谐音：类 UI) '},
-      {username:"root", password:"root", age:"18", remark: 'layui - vue（谐音：类 UI) '},
-      {username:"root", password:"root", age:"18", remark: 'layui - vue（谐音：类 UI) '},
-      {username:"root", password:"root", age:"18", remark: 'layui - vue（谐音：类 UI) '},
-      {username:"root", password:"root", age:"18", remark: 'layui - vue（谐音：类 UI) '},
-      {username:"woow", password:"woow", age:"20", remark: 'layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.'},
-      {username:"woow", password:"woow", age:"20", remark: 'layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.'},
-      {username:"woow", password:"woow", age:"20", remark: 'layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.'},
-      {username:"woow", password:"woow", age:"20", remark: 'layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.'},
-    ]
-
-    return {
-      columns8,
-      dataSource8
-    }
+const deleteColumn = ({ username }) => {
+  const findIndex = dataSource8.value.findIndex((item) => item.username === username);
+  dataSource8.value.splice(findIndex, 1);
+};
+  
+const columns8 = [
+  {
+    title: '账户',
+    minWidth: '200px',
+    key: 'username',
+  },
+  {
+    title: '密码',
+    minWidth: '180px',
+    key: 'password',
+  },
+  {
+    title: '年龄',
+    minWidth: '180px',
+    key: 'age',
+  },
+    {
+    title: "操作",
+    width: "200px",
+    customSlot: "operator",
+    key: "operator",
+    align: "center",
   }
-}
+]
+
+const dataSource8 = ref([
+  {
+    username: '1',
+    password: 'root',
+    age: '18',
+    remark: 'layui - vue（谐音：类 UI) ',
+  },
+  {
+    username: '2',
+    password: 'root',
+    age: '18',
+    remark: 'layui - vue（谐音：类 UI) ',
+  },
+  {
+    username: '3',
+    password: 'root',
+    age: '18',
+    remark: 'layui - vue（谐音：类 UI) ',
+  },
+  {
+    username: '4',
+    password: 'root',
+    age: '18',
+    remark: 'layui - vue（谐音：类 UI) ',
+  },
+  {
+    username: '5',
+    password: 'root',
+    age: '18',
+    remark: 'layui - vue（谐音：类 UI) ',
+  },
+  {
+    username: '6',
+    password: 'root',
+    age: '18',
+    remark: 'layui - vue（谐音：类 UI) ',
+  },
+  {
+    username: '7',
+    password: 'root',
+    age: '18',
+    remark: 'layui - vue（谐音：类 UI) ',
+  },
+  {
+    username: '8',
+    password: 'woow',
+    age: '20',
+    remark:
+      'layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.',
+  },
+  {
+    username: '9',
+    password: 'woow',
+    age: '20',
+    remark:
+      'layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.',
+  },
+  {
+    username: '10',
+    password: 'woow',
+    age: '20',
+    remark:
+      'layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.',
+  },
+  {
+    username: '11',
+    password: 'woow',
+    age: '20',
+    remark:
+      'layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.',
+  },
+])
 </script>
 
 :::

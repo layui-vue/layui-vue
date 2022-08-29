@@ -434,6 +434,8 @@ const getScrollWidth = () => {
   const offsetWidth: number = tableBody.value?.offsetWidth || 0;
   if (clientWidth < offsetWidth) {
     scrollWidthCell.value = offsetWidth - clientWidth;
+  } else {
+    scrollWidthCell.value = 0;
   }
 };
 
