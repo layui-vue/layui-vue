@@ -5,17 +5,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import {
-  computed,
-  inject,
-  onBeforeUnmount,
-  ref,
-  Ref,
-  useSlots,
-  watch,
-  watchEffect,
-} from "vue";
-import { onClickOutside } from "@vueuse/core";
+import { computed, inject, ref, Ref, useSlots, watchEffect } from "vue";
 import LayTransition from "../transition/index.vue";
 import SubMenuPopup from "./SubMenuPopup.vue";
 import { provideLevel, default as useLevel } from "../menu/useLevel";
@@ -43,28 +33,25 @@ const isOpen = computed(() => {
   return openKeys.value.includes(props.id);
 });
 
-const subMenuRef = ref<HTMLElement>();
-const position = ref<String>();
 const nextLevel = computed(() => level.value + 1);
 
 provideLevel(nextLevel);
 
 const needPopup = ref(false);
 watchEffect(() => {
-  const _isCollapse = isCollapse.value === true || isCollapse.value === "true";
-  if (_isCollapse && level.value === 1) {
-    // 动画结束后改变
-    setTimeout(() => {
+  if (isTree.value) {
+    const _isCollapse =
+      isCollapse.value === true || isCollapse.value === "true";
+    if (_isCollapse && level.value === 1) {
+      // 动画结束后改变
+      setTimeout(() => {
+        needPopup.value = isTree.value && _isCollapse;
+      }, 200);
+    } else {
       needPopup.value = isTree.value && _isCollapse;
-    }, 200);
-  } else {
-    needPopup.value = isTree.value && _isCollapse;
-  }
-});
-
-watch(isOpen, () => {
-  if (isOpen.value && position.value !== "left-nav") {
-    setTimeout(setPosition, 0);
+    }
+  } else if (slots.default && slots.default().length > 0) {
+    needPopup.value = true;
   }
 });
 
@@ -79,33 +66,6 @@ const openHandle = function () {
     openKeys.value = newOpenKeys;
   }
 };
-
-const setPosition = function () {
-  if (!isTree.value || !subMenuRef.value) {
-    return;
-  }
-  const offsetWidth = subMenuRef.value.offsetWidth;
-  if (
-    window.innerWidth <
-    subMenuRef.value.getBoundingClientRect().left + offsetWidth + 10
-  ) {
-    position.value = "left-nav";
-  } else {
-    position.value = "";
-  }
-};
-
-onClickOutside(subMenuRef, (event: PointerEvent) => {
-  if (!isTree.value) {
-    let index = openKeys.value.indexOf(props.id);
-    if (index != -1) {
-      openKeys.value.splice(index, 1);
-    }
-  }
-});
-
-window.addEventListener("resize", setPosition);
-onBeforeUnmount(() => window.removeEventListener("resize", setPosition));
 </script>
 
 <template>
@@ -140,15 +100,6 @@ onBeforeUnmount(() => window.removeEventListener("resize", setPosition));
           </dl>
         </div>
       </lay-transition>
-    </template>
-    <template v-else>
-      <dl
-        ref="subMenuRef"
-        class="layui-nav-child layui-anim layui-anim-upbit"
-        :class="[{ 'layui-show': isOpen }, position]"
-      >
-        <slot></slot>
-      </dl>
     </template>
   </li>
   <SubMenuPopup v-else :id="id">

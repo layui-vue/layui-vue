@@ -16,24 +16,42 @@ export interface LaySubMenuPopupProps {
 }
 const props = defineProps<LaySubMenuPopupProps>();
 
+const { level } = useLevel();
+const isTree: Ref<boolean> = inject("isTree") as Ref<boolean>;
 const openKeys: Ref<string[]> = inject("openKeys") as Ref<string[]>;
 const theme = inject("menuTheme") as Ref<string>;
-const computedTheme = computed(() => {
-  return theme.value === "light" ? "-light" : "";
-});
 
 const isOpen = computed(() => {
   return openKeys.value.includes(props.id);
+});
+
+const computedTheme = computed(() => {
+  if (isTree.value) {
+    return theme.value === "light" ? "-light" : "";
+  }
+  return theme.value === "light" ? "" : "-light";
+});
+
+const computedExpandIcon = computed(() => {
+  if (isTree.value) return "layui-icon-right";
+  return level.value === 2 ? "layui-icon-down" : "layui-icon-right";
+});
+
+const computedPlacement = computed(() => {
+  return !isTree.value && level.value === 2 ? "bottom-start" : "right-start";
+});
+
+const computedTrigger = computed(() => {
+  return !isTree.value && level.value === 2 ? "click" : "hover";
 });
 </script>
 
 <template>
   <lay-dropdown
-    trigger="hover"
-    placement="right-start"
+    :trigger="computedTrigger"
+    :placement="computedPlacement"
     :autoFitMinWidth="false"
     :contentOffset="3"
-    popupContainer="body"
     updateAtScroll
     class="layui-sub-menu-popup"
   >
@@ -54,7 +72,7 @@ const isOpen = computed(() => {
         <!-- 扩展 -->
         <span v-if="$slots.expandIcon" class="layui-nav-more">
           <slot name="expandIcon">
-            <lay-icon type="layui-icon-right"></lay-icon>
+            <lay-icon :type="computedExpandIcon" />
           </slot>
         </span>
       </a>

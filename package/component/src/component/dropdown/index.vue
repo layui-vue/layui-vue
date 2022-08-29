@@ -621,6 +621,7 @@ onMounted(() => {
       item.addEventListener("scroll", handleScroll);
     }
   }
+  window.addEventListener("resize", handleScroll);
 });
 
 onBeforeUnmount(() => {
@@ -633,6 +634,7 @@ onBeforeUnmount(() => {
   }
   removeContentResizeObserver();
   removeTriggerResizeObserver();
+  window.removeEventListener("resize", handleScroll);
 });
 
 watch(
@@ -664,7 +666,7 @@ defineExpose({ show, hide, toggle });
     :renderFunc="onlyChildRenderFunc"
     v-bind="$attrs"
   ></RenderFunction>
-  <TeleportWrapper :to="popupContainer">
+  <TeleportWrapper :to="popupContainer" :disabled="disabled">
     <div
       v-if="openState"
       ref="contentRef"

@@ -6,6 +6,7 @@ export default {
 
 <script setup lang="ts">
 import { computed, ComputedRef, inject, ref, Ref, useSlots } from "vue";
+import { DropdownContext, dropdownInjectionKey } from "../dropdown/interface";
 import useLevel from "../menu/useLevel";
 import LayTooltip from "../tooltip/index.vue";
 
@@ -21,8 +22,14 @@ const selectedKey: Ref<string> = inject("selectedKey") as Ref<string>;
 const isTree = inject("isTree") as ComputedRef<boolean>;
 const isCollapse = inject("isCollapse") as ComputedRef<boolean | string>;
 const theme = inject("menuTheme") as Ref<string>;
+const dropdownCtx = inject<DropdownContext | undefined>(
+  dropdownInjectionKey,
+  undefined
+);
+
 const selectHandle = function () {
   selectedKey.value = props.id;
+  dropdownCtx?.hide();
 };
 
 const needTooltip = computed(
