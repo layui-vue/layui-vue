@@ -1,4 +1,5 @@
 import vue from "@vitejs/plugin-vue";
+import vueJsx from "@vitejs/plugin-vue-jsx";
 import Markdown from "vite-plugin-md";
 import container from "markdown-it-container";
 import preWrapper from "./pre-wrapper";
@@ -17,6 +18,7 @@ const plugins = [
   vue({
     include: [/\.vue$/, /\.md$/],
   }),
+  vueJsx(),
   Markdown({
     markdownItOptions: {
       html: true,

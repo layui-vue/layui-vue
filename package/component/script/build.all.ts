@@ -1,5 +1,6 @@
 import { UserConfigExport } from "vite";
 import vue from "@vitejs/plugin-vue";
+import vueJsx from "@vitejs/plugin-vue-jsx";
 import { resolve } from "path";
 
 export default (): UserConfigExport => {
@@ -13,7 +14,7 @@ export default (): UserConfigExport => {
         },
       ],
     },
-    plugins: [vue()],
+    plugins: [vue(), vueJsx],
     build: {
       cssCodeSplit: false,
       outDir: "lib",

@@ -1,5 +1,6 @@
 import { UserConfigExport } from "vite";
 import vue from "@vitejs/plugin-vue";
+import vueJsx from "@vitejs/plugin-vue-jsx";
 import { resolve } from "path";
 import * as fs from "fs";
 
@@ -39,6 +40,8 @@ const matchModule: string[] = [
   "scroll",
   "radio",
   "empty",
+  "dropdownMenu",
+  "dropdownMenuItem",
 ];
 
 export default (): UserConfigExport => {
@@ -60,7 +63,7 @@ export default (): UserConfigExport => {
       },
       postcss: {},
     },
-    plugins: [vue()],
+    plugins: [vue(), vueJsx()],
     build: {
       cssCodeSplit: true,
       emptyOutDir: true,
