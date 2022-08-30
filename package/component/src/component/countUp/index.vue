@@ -55,7 +55,7 @@ const formatNumber = (num: number | string): string => {
   let x1 = x[0];
   const x2 = x.length > 1 ? props.decimal + x[1] : "";
   const rgx = /(\d+)(\d{3})/;
-  if (props.separator && !isNumber(props.separator)) {
+  if (props.useGrouping && props.separator && !isNumber(props.separator)) {
     while (rgx.test(x1)) {
       x1 = x1.replace(rgx, "$1" + props.separator + "$2");
     }

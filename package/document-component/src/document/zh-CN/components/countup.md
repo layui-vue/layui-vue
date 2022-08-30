@@ -7,7 +7,7 @@
 ::: demo
 
 <template>
-  <h1 style="padding:20px 15px; font-family: sans-serif">
+  <h1 style="padding:20px 15px; font-family: sans-serif" >
       <lay-count-up :startVal="0" :endVal="3600" :decimalPlaces="2"></lay-count-up>
   </h1>
 </template>
