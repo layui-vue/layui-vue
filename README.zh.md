@@ -6,7 +6,7 @@
   <a href="https://coveralls.io/r/sentsin/layui?branch=master"><img alt="Test Coverage" src="https://img.shields.io/coveralls/sentsin/layui/master.svg"></a>
 </p> 
 
-**[🔶 www.layui-vue.com »](http://www.layui-vue.com)**
+**[🔶 www.layui-vue.com »](http://www.layui-vue.com) [镜像站](http://mirror.layui-vue.com)**
 
 layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库. 
 
