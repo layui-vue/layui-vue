@@ -12,9 +12,24 @@
 <lay-timeline>
   <lay-timeline-item title="1.4.x">
     <ul> 
+      <a name="1-4-7"></a> 
+      <li> 
+        <h3>1.4.7 <span class="layui-badge-rim">2022-08-30</span></h3> 
+        <ul>     
+          <li>[新增] space 间隔组件, 用于控制组件间的边距。</li>
+          <li>[新增] carousel 组件 pauseOnHover 属性。</li>
+          <li>[新增] line 组件 margin 属性，控制分割线边距。</li>
+          <li>[新增] tab-item 组件 title 属性的函数渲染方式。</li>
+          <li>[新增] dropdown 组件 placement 属性 *-start 与 *-end 值。 </li>
+          <li>[修复] table 固定高度, 数据发生改变时 title 无法复位的问题。</li>
+          <li>[过时] dropdown 组件 placement 属性 *-left 与 *-right 值。 </li>
+        </ul>
+      </li>
+    </ul>
+    <ul> 
       <a name="1-4-6"></a> 
       <li> 
-        <h3>1.4.6 <span class="layui-badge-rim">2022-0x-xx</span></h3> 
+        <h3>1.4.6 <span class="layui-badge-rim">2022-08-27</span></h3> 
         <ul>     
           <li>[修复] table 组件 change 事件异常。</li>
           <li>[修复] dropdown 组件 hide 事件触发异常。</li>
