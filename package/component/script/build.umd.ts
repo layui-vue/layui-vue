@@ -14,7 +14,7 @@ export default (): UserConfigExport => {
         },
       ],
     },
-    plugins: [vue(), vueJsx],
+    plugins: [vue(), vueJsx()],
     build: {
       cssCodeSplit: false,
       outDir: "umd",
