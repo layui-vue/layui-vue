@@ -862,7 +862,7 @@ onBeforeUnmount(() => {
           <slot name="footer"></slot>
         </div>
       </div>
-      <div v-if="page" class="layui-table-page">
+      <div v-if="page && page.total > 0" class="layui-table-page">
         <table-page
           :show-page="page.showPage"
           :showSkip="page.showSkip"

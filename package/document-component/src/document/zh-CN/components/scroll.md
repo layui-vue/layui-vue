@@ -15,7 +15,7 @@
 <template>
   <lay-button @click="changeTotal">修改数据</lay-button>
   <lay-button @click="changeMaxTotal">修改数据</lay-button>
-  <lay-scroll height="200px" style="background-color:whitesmoke;">
+  <lay-scroll height="200px" style="background-color:whitesmoke;height: calc(100% - 62px);">
     <lay-panel v-for="(n,index) in total" :key="n" style="margin:10px;padding:10px;">内容</lay-panel>
   </lay-scroll>
 </template>
