@@ -12,7 +12,7 @@
         ref="barRef"
         class="layui-scroll-track"
         :style="{
-          backgroundColor: data.heightPre == 1 ? 'rgba(0,0,0,0)' : trackColor,
+          backgroundColor: data.heightPre == 1 ? 'transparent' : trackColor,
         }"
       >
         <div
@@ -20,7 +20,7 @@
             height: data.barHeight + 'px',
             width: thumbWidth + 'px',
             transform: 'translateY(' + data.translateY + 'px)',
-            backgroundColor: data.heightPre == 1 ? 'rgba(0,0,0,0)' : thumbColor,
+            backgroundColor: data.heightPre == 1 ? 'transparent' : thumbColor,
           }"
           class="layui-scroll-thumb"
           @mousedown.stop.prevent="moveStart"
@@ -101,22 +101,16 @@ const monitorWindow = function () {
 //监听内容元素尺寸变化
 const monitorScrollBar = function () {
   // @ts-ignore
-  var monitorUl = scrollRef.value;
-  let MutationObserver =
-    window.MutationObserver ||
-    // @ts-ignore
-    window.WebKitMutationObserver ||
-    // @ts-ignore
-    window.MozMutationObserver;
-  let observer = new MutationObserver((mutations) => {
-    initScrollListner();
-  });
-  if (monitorUl) {
-    observer.observe(monitorUl, {
+  let MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
+  const observer : any = new MutationObserver(mutations => {
+      initScrollListner();
+  })
+
+  observer.observe(scrollRef.value, {
       attributes: true,
       childList: true,
-    });
-  }
+      subtree: true
+  })
 };
 
 // 初始化延迟监听滚动条
@@ -143,9 +137,7 @@ const initScrollListner = function () {
     wrapContentHeight = scroll.scrollHeight;
     wrapHeight = scroll.clientHeight;
     trackHeight = bar.clientHeight;
-    // 容器高度 / 内容高度   100 150
     data.heightPre = wrapHeight / wrapContentHeight;
-    // 滑动块的高度 根据 容器和内容的比  乘以 滚动轨道 计算出 滑动块的高度
     data.barHeight = data.heightPre * trackHeight;
   }
 };
@@ -213,6 +205,4 @@ const moveEnd = function () {
     }
   };
 };
-
-let dataRef = toRefs(data);
 </script>

@@ -15,32 +15,33 @@
 <template>
   <lay-button @click="changeTotal">修改数据</lay-button>
   <lay-button @click="changeMaxTotal">修改数据</lay-button>
-  <lay-scroll height="200px" style="background-color:whitesmoke;height: calc(100% - 62px);">
-    <lay-panel v-for="(n,index) in total" :key="n" style="margin:10px;padding:10px;">内容</lay-panel>
+  <lay-scroll height="200px" style="background-color: whitesmoke" thumbColor="#000000">
+    <lay-container>
+      <lay-row>
+      <lay-col span="24">
+    <lay-panel
+      v-for="(n, index) in total"
+      :key="n"
+      style="margin: 10px; padding: 10px"
+      >内容</lay-panel
+    >
+        </lay-col>  
+      </lay-row>
+    </lay-container>
   </lay-scroll>
 </template>
 
-<script>
+<script lang="ts" setup>
 import { ref } from 'vue'
 
-export default {
-  setup() {
-    const total = ref(50);
+const total = ref(50)
 
-    const changeTotal = () => {
-      total.value = 2;
-    }
+const changeTotal = () => {
+  total.value = 2
+}
 
-    const changeMaxTotal = () => {
-      total.value = 50;
-    }
-
-    return {
-      total, 
-      changeTotal,
-      changeMaxTotal
-    }
-  }
+const changeMaxTotal = () => {
+  total.value = 50
 }
 </script>
 
