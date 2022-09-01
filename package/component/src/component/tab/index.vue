@@ -43,7 +43,6 @@ export interface LayTabProps {
 }
 
 const slot = useSlots();
-const slots = slot.default && slot.default();
 const childrens: Ref<VNode[]> = ref([]);
 const slotsChange = ref(true);
 const tabMap = reactive(new Map<number, TabData>());
@@ -283,7 +282,7 @@ const renderTabChild = (child: TabData) => {
 useResizeObserver(navRef, update);
 
 watch(
-  slotsChange,
+  tabMap,
   function () {
     childrens.value = [];
     setItemInstanceBySlot((slot.default && slot.default()) as VNode[]);
