@@ -18,7 +18,6 @@
         <ul>     
           <li>[修复] countUp 组件 useGrouping 属性异常。</li>
           <li>[修复] scroll 组件无法监听 subtree 的节点变化。</li>
-          <li>[修复] tab 组件 title 属性显示异常的问题。</li>
           <li>[优化] table 组件 page 参数 total 值为 0 时, 隐藏分页操作。</li>
           <li>[优化] select 组件多选模式下边框被遮挡的问题。</li>
         </ul>
