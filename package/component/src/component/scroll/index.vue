@@ -101,16 +101,19 @@ const monitorWindow = function () {
 //监听内容元素尺寸变化
 const monitorScrollBar = function () {
   // @ts-ignore
-  let MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
-  const observer : any = new MutationObserver(mutations => {
-      initScrollListner();
-  })
+  let MutationObserver =
+    window.MutationObserver ||
+    window.WebKitMutationObserver ||
+    window.MozMutationObserver;
+  const observer: any = new MutationObserver((mutations) => {
+    initScrollListner();
+  });
 
   observer.observe(scrollRef.value, {
-      attributes: true,
-      childList: true,
-      subtree: true
-  })
+    attributes: true,
+    childList: true,
+    subtree: true,
+  });
 };
 
 // 初始化延迟监听滚动条
