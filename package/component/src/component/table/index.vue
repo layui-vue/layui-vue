@@ -655,12 +655,7 @@ onBeforeUnmount(() => {
           >
             <i class="layui-icon layui-icon-export"></i>
           </div>
-          <div
-            class="layui-inline"
-            title="打印"
-            lay-event
-            @click="print()"
-          >
+          <div class="layui-inline" title="打印" lay-event @click="print()">
             <i class="layui-icon layui-icon-print"></i>
           </div>
         </div>

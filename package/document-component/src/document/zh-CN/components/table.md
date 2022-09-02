@@ -1388,7 +1388,16 @@ export default {
 ::: demo 使用了绝大部分属性的 table 案例
 
 <template>
-  <lay-table :columns="columns5" id="id" :expand-index="1" :data-source="dataSource5" v-model:selected-keys="selectedKeys5" :checkbox="checkbox5" :page="page5" :default-toolbar="defaultToolbar5" @row="rowClick5" max-height="200px">
+  <lay-table 
+      id="id" 
+      height="200px"
+      :columns="columns5" 
+      :expand-index="1" 
+      :data-source="dataSource5" 
+      :checkbox="checkbox5" :page="page5" 
+      :default-toolbar="defaultToolbar5"
+      v-model:selected-keys="selectedKeys5"  
+      @row="rowClick5">
     <template v-slot:toolbar>
       <lay-button size="sm" type="primary">新增</lay-button>
       <lay-button size="sm">删除</lay-button>
