@@ -206,15 +206,16 @@
   position: relative;
   width: 26px;
   height: 26px;
-  padding: 5px;
-  line-height: 16px;
+  line-height: 26px;
+  border-radius: 2px;
   margin-right: 10px;
   text-align: center;
   color: #333;
   border: 1px solid #ccc;
   cursor: pointer;
-  -webkit-transition: 0.5s all;
-  transition: 0.5s all;
+  .layui-icon {
+    font-size: 15px;
+  }
 }
 
 .layui-table-tool .layui-inline[lay-event]:hover {
@@ -436,6 +437,10 @@
 .layui-table-tool-checkbox > *{
   display: block;
   margin-bottom: 12px;
+}
+
+.layui-table-tool-checkbox > *:last-child{
+  margin-bottom: 0px;
 }
 
 .layui-table-has-fixed-left .layui-table-fixed-left-last {

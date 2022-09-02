@@ -630,8 +630,8 @@ onBeforeUnmount(() => {
         </div>
         <div v-if="defaultToolbar" class="layui-table-tool-self">
           <lay-dropdown updateAtScroll>
-            <div class="layui-inline" title="筛选列" lay-event="LAYTABLE_PRINT">
-              <i class="layui-icon layui-icon-cols"></i>
+            <div class="layui-inline" title="筛选" lay-event>
+              <i class="layui-icon layui-icon-slider"></i>
             </div>
             <template #content>
               <div class="layui-table-tool-checkbox">
@@ -650,7 +650,7 @@ onBeforeUnmount(() => {
           <div
             class="layui-inline"
             title="导出"
-            lay-event="LAYTABLE_PRINT"
+            lay-event
             @click="exportData()"
           >
             <i class="layui-icon layui-icon-export"></i>
@@ -658,7 +658,7 @@ onBeforeUnmount(() => {
           <div
             class="layui-inline"
             title="打印"
-            lay-event="LAYTABLE_PRINT"
+            lay-event
             @click="print()"
           >
             <i class="layui-icon layui-icon-print"></i>

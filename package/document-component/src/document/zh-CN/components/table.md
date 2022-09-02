@@ -1388,9 +1388,9 @@ export default {
 ::: demo 使用了绝大部分属性的 table 案例
 
 <template>
-  <lay-table :columns="columns5" id="id" :expand-index="1" :data-source="dataSource5" v-model:selected-keys="selectedKeys5" :checkbox="checkbox5" :default-toolbar="defaultToolbar5" @row="rowClick5" max-height="200px">
+  <lay-table :columns="columns5" id="id" :expand-index="1" :data-source="dataSource5" v-model:selected-keys="selectedKeys5" :checkbox="checkbox5" :page="page5" :default-toolbar="defaultToolbar5" @row="rowClick5" max-height="200px">
     <template v-slot:toolbar>
-      <lay-button size="sm">新增</lay-button>
+      <lay-button size="sm" type="primary">新增</lay-button>
       <lay-button size="sm">删除</lay-button>
     </template>
     <template v-slot:name="{ data }"> {{data.name}} </template>
@@ -1417,6 +1417,12 @@ export default {
     const selectedKeys5 = ref(['1'])
     const checkbox5 = ref(true)
     const defaultToolbar5 = ref(true)
+
+    const page5 = {
+      total: 100,
+      limit: 10,
+      current: 1
+    }
 
     const columns5 = [
       {
@@ -1483,7 +1489,8 @@ export default {
       checkbox5,
       defaultToolbar5,
       rowClick5,
-      rowDoubleClick5
+      rowDoubleClick5,
+      page5
     }
   }
 }
