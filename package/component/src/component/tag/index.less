@@ -9,16 +9,16 @@
    gray: #808080;
  }
 
- @tag-size-default: 24px;
- @tag-size-default-font-size: 12px;
- @tag-size-lg: @tag-size-default + 2px;
+ @tag-size-default: 28px;
+ @tag-size-default-font-size: 14px;
+ @tag-size-lg: @tag-size-default + 4px;
  @tag-size-md: @tag-size-default;
- @tag-size-sm: @tag-size-default - 2px;
- @tag-size-xs: @tag-size-default - 2px * 2;
- @tag-size-lg-font-size: @tag-size-default-font-size + 2px;
+ @tag-size-sm: @tag-size-default - 4px;
+ @tag-size-xs: @tag-size-default - 4px * 2;
+ @tag-size-lg-font-size: @tag-size-default-font-size;
  @tag-size-md-font-size: @tag-size-default-font-size;
  @tag-size-sm-font-size: @tag-size-default-font-size - 2px;
- @tag-size-xs-font-size: @tag-size-default-font-size - 2px * 2;
+ @tag-size-xs-font-size: @tag-size-default-font-size - 2px;
  @tag-border-width: 1px;
 
  .layui-tag {
@@ -27,8 +27,8 @@
    vertical-align: middle;
    box-sizing: border-box;
    height: @tag-size-md;
-   line-height: @tag-size-md - @tag-border-width * 2;
-   padding: 0 6px;
+   line-height: @tag-size-md;
+   padding: 0 8px;
    font-size: @tag-size-md-font-size;
    font-weight: 500;
    color: currentColor;
@@ -36,18 +36,6 @@
    border-style: solid;
    border-color: transparent;
    border-radius: var(--global-border-radius);
-
-   &-checkable {
-     cursor: pointer;
-   }
-
-   &-checkable:hover {
-     opacity: 0.7;
-   }
-
-   &-checked {
-     background-color: darken(red, 10%) !important;
-   }
 
    &-icon {
      margin-right: 4px;
@@ -93,46 +81,46 @@
    &-size-lg {
      height: @tag-size-lg;
      font-size: @tag-size-lg-font-size;
-     line-height: @tag-size-lg - @tag-border-width * 2;
+     line-height: @tag-size-lg;
 
      .layui-icon {
-       font-size: @tag-size-lg-font-size - 2px;
+       font-size: @tag-size-lg-font-size;
      }
    }
 
    &-size-md {
      height: @tag-size-md;
      font-size: @tag-size-md-font-size;
-     line-height: @tag-size-md - @tag-border-width * 2;
+     line-height: @tag-size-md;
 
      .layui-icon {
-       font-size: @tag-size-md-font-size - 2px;
+       font-size: @tag-size-md-font-size;
      }
    }
 
    &-size-sm {
      height: @tag-size-sm;
      font-size: @tag-size-sm-font-size;
-     line-height: @tag-size-sm - @tag-border-width * 2;
+     line-height: @tag-size-sm;
 
      .layui-icon {
-       font-size: @tag-size-sm-font-size - 2px;
+       font-size: @tag-size-sm-font-size;
      }
    }
 
    &-size-xs {
      height: @tag-size-xs;
      font-size: @tag-size-xs-font-size;
-     line-height: @tag-size-xs - @tag-border-width * 2;
+     line-height: @tag-size-xs;
 
      .layui-icon {
-       font-size: @tag-size-xs-font-size - 2px;
+       font-size: @tag-size-xs-font-size;
      }
    }
 
    & &-close-icon {
      margin-left: 4px;
-     font-size: @tag-size-default-font-size - 2px;
+     font-size: @tag-size-default-font-size;
 
      .layui-icon {
 
