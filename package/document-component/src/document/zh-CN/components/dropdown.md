@@ -535,7 +535,7 @@ import { ref, computed } from 'vue'
 | 属性                | 描述                                              | 类型      | 默认值   | 可选值                                          |
 | ------------------- | ------------------------------------------------- | --------- | -------- | ----------------------------------------------- |
 | visible             | 下拉面板是否可见                                  | `boolean` | `true`   | `true` `false`                                  |
-| trigger             | 触发方式,类型 `string` 或 trigger 数组            | `strine`  | `click`  | `click` `hover` `focus` `contextMenu`           |
+| trigger             | 触发方式,类型 `string` 或 trigger 数组            | `strine` `string[]`  | `click`  | `click` `hover` `focus` `contextMenu`           |
 | disabled            | 是否禁用触发                                      | `boolean` | `false`  | `true` `false`                                  |
 | placement           | 下拉面板位置                                      | `string`  | `bottom` | `top` `bottom` `right` `left` `*-start` `*-end` |
 | autoFitPosition     | 是否自动调整下拉面板位置                          | `boolean` | `true`   | `true` `false`                                  |
@@ -598,7 +598,7 @@ import { ref, computed } from 'vue'
 
 | 属性          | 描述                                   | 类型      | 默认值   | 可选值                                          |
 | ------------- | -------------------------------------- | --------- | -------- | ----------------------------------------------- |
-| trigger       | 触发方式,类型 `string` 或 trigger 数组 | `strine`  | `click`  | `click` `hover` `focus` `contextMenu`           |
+| trigger       | 触发方式,类型 `string` 或 trigger 数组 | `strine` `string[]`  | `click`  | `click` `hover` `focus` `contextMenu`           |
 | disabled      | 是否禁用触发                           | `boolean` | `false`  | `true` `false`                                  |
 | placement     | 下拉面板位置                           | `string`  | `bottom` | `top` `bottom` `right` `left` `*-start` `*-end` |
 | contentOffset | 下拉面板距离触发器的偏移距离，默认 2   | `string`    | 2px      | -                                              | 
