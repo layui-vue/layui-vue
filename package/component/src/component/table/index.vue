@@ -465,6 +465,7 @@ onMounted(() => {
     getFixedColumn();
   });
   window.onresize = () => {
+    getScrollWidth();
     getFixedColumn();
   };
 });
