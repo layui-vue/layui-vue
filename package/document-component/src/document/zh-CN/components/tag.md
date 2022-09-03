@@ -36,38 +36,38 @@
 <lay-space direction="vertical" size="md">
 <lay-space size="md">
   lg: 
-  <lay-tag size="lg">tag lg</lay-tag>
-  <lay-tag size="lg"><template #icon><lay-icon type="layui-icon-addition" /></template>tag lg</lay-tag>
+  <lay-tag size="lg">标签</lay-tag>
+  <lay-tag size="lg"><template #icon><lay-icon type="layui-icon-addition" /></template>标签</lay-tag>
   <lay-tag size="lg" closable>
     <template #icon><lay-icon type="layui-icon-addition" /></template>
-    tag lg
+    标签
   </lay-tag>
 </lay-space>
 <lay-space size="md">
   md: 
-  <lay-tag size="md">tag md</lay-tag>
-  <lay-tag size="md"><template #icon><lay-icon type="layui-icon-addition" /></template>tag md</lay-tag>
+  <lay-tag size="md">标签</lay-tag>
+  <lay-tag size="md"><template #icon><lay-icon type="layui-icon-addition" /></template>标签</lay-tag>
   <lay-tag size="md" closable>
     <template #icon><lay-icon type="layui-icon-addition" /></template>
-    tag md
+    标签
   </lay-tag>
 </lay-space>
 <lay-space size="md">
   sm: 
-  <lay-tag size="sm">tag sm</lay-tag>
-  <lay-tag size="sm"><template #icon><lay-icon type="layui-icon-addition" /></template>tag sm</lay-tag>
+  <lay-tag size="sm">标签</lay-tag>
+  <lay-tag size="sm"><template #icon><lay-icon type="layui-icon-addition" /></template>标签</lay-tag>
   <lay-tag size="sm" closable>
     <template #icon><lay-icon type="layui-icon-addition" /></template>
-    tag sm
+    标签
   </lay-tag>
 </lay-space>
 <lay-space size="md">
   xs: 
-  <lay-tag size="xs">tag xs</lay-tag>
-  <lay-tag size="xs"><template #icon><lay-icon type="layui-icon-addition" /></template>tag xs</lay-tag>
+  <lay-tag size="xs">标签</lay-tag>
+  <lay-tag size="xs"><template #icon><lay-icon type="layui-icon-addition" /></template>标签</lay-tag>
   <lay-tag size="xs" closable>
     <template #icon><lay-icon type="layui-icon-addition" /></template>
-    tag xs
+    标签
   </lay-tag>
 </lay-space>
 </lay-space>
