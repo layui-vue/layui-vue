@@ -44,6 +44,9 @@
     "uuid": "^8.3.2",
     "vue-i18n": "^9.1.10"
   },
+  "devDependencies": {
+    "@types/uuid": "^8.3.4"
+  },
   "files": [
     "lib",
     "es",
