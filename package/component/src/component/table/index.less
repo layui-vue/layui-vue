@@ -202,6 +202,10 @@
   margin-bottom: -1px;
 }
 
+.layui-table-tool .layui-table-tool-temp {
+  flex: auto;
+}
+
 .layui-table-tool .layui-inline[lay-event] {
   position: relative;
   width: 26px;
@@ -220,16 +224,6 @@
 
 .layui-table-tool .layui-inline[lay-event]:hover {
   border: 1px solid #999;
-}
-
-.layui-table-tool-temp {
-  padding-right: 120px;
-}
-
-.layui-table-tool-self {
-  position: absolute;
-  right: 17px;
-  top: 10px;
 }
 
 .layui-table-tool .layui-table-tool-self .layui-inline[lay-event] {
@@ -481,6 +475,7 @@
 
 .layui-table-tool {
   position: relative;
+  display: flex;
   z-index: 890;
   width: 100%;
   min-height: 50px;
