@@ -12,6 +12,18 @@
 <lay-timeline>
   <lay-timeline-item title="1.4.x">
     <ul> 
+      <a name="1-4-9"></a> 
+      <li> 
+        <h3>1.4.9 <span class="layui-badge-rim">2022-09-04</span></h3> 
+        <ul>     
+          <li>[修复] tab 组件数据刷新后不显示标题的问题。</li>
+          <li>[修复] uuid 在 typescript 中的兼容性问题。</li>
+          <li>[优化] table 组件 tool 布局, 使用 flex 撑满。</li>
+          <li>[优化] table 组件 window.resize 动态计算 table 滚动条占位宽度。</li>
+        </ul>
+      </li>
+    </ul>
+    <ul> 
       <a name="1-4-8"></a> 
       <li> 
         <h3>1.4.8 <span class="layui-badge-rim">2022-09-02</span></h3> 
