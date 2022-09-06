@@ -48,9 +48,35 @@ setup() {
     <lay-button>tooltip</lay-button>
   </lay-tooltip>
 </template>
+:::
 
+::: title 外部控制
+:::
+
+::: demo
+<template>
+  <lay-button @click="visible = !visible">{{visible ? '显示' : '隐藏'}}</lay-button>
+  <div style="padding: 100px">
+    <lay-tooltip position="right" content="时光都淡了，我还伴着你。" :visible="visible">
+      <lay-button>tooltip</lay-button>
+    </lay-tooltip>
+  </div>
+</template>
+
+<script>
+import { ref,watch } from 'vue';
+export default {
+  setup() {
+    const visible = ref(false)
+  return {
+    visible,
+  }
+}
+}
+</script>
 <style>
 </style>
+
 :::
 
 ::: title 显示位置

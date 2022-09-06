@@ -11,7 +11,7 @@
 <script lang="ts">
 import "./index.less";
 import LayPopper from "../popper/index.vue";
-import { defineComponent, ref } from "vue";
+import { defineComponent, PropType, ref } from "vue";
 import { useEventListener } from "@vueuse/core";
 export default defineComponent({
   name: "LayTooltip",
@@ -42,6 +42,14 @@ export default defineComponent({
     isAutoShow: {
       type: Boolean,
       default: false,
+    },
+    visible: {
+      type: Boolean,
+      default: false,
+    },
+    trigger: {
+      type: String as PropType<"click" | "hover">,
+      default: "hover",
     },
   },
   setup() {

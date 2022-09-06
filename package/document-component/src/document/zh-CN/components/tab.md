@@ -389,11 +389,11 @@ export default {
 | 属性                | 描述                                               | 类型                                      | 默认值   | 可选值                        |
 | ------------------- | -------------------------------------------------- | ----------------------------------------- | -------- | ----------------------------- |
 | v-model             | 当前激活                                           | `string`                                  | -        | -                             |
-| type                | 主题样式                                           | `string`                                  | -        | -                             |
+| type                | 主题样式                                           | `string`                                  | -        | `brief` `card`                            |
 | tabPosition         | 位置                                               | `string`                                  | `bottom` | `top` `bottom` `left` `right` |
 | allow-close         | 允许关闭                                           | `boolean`                                 | `false`  | `true` `false`                |
-| before-close        | `Function`关闭之前的回调钩子函数                   | 参数(`id`), `return false` 表示不进行关闭 | -        | -                             |
-| before-leave        | `Function`切换标签之前的回调钩子函数               | 参数(`id`), `return false` 表示不进行切换 | -        | -                             |
+| before-close        | 关闭之前的回调钩子函数,参数(`id`), `return false` 表示不进行关闭                  | `Function` | -        | -                             |
+| before-leave        | 切换标签之前的回调钩子函数,  参数(`id`), `return false` 表示不进行关闭              | `Function` | -        | -                             |
 | activeBarTransition | 是否开启 activeBar 动画,仅 brief 有效,默认 `false` | `boolean`                                 | `false`  | `true` `false`                |
 
 :::
