@@ -186,9 +186,10 @@ export default {
 | content     | 显示内容 | --             |
 | position    | 显示位置 | `top`(默认值)、`bottom`、`left`、`right` |
 | isDark      | 是否为黑色主题 | `true`(默认值)、`false`(浅色)   |
-| disabled    | 是否禁用 | `false`(默认值)、`true`(禁用)   ||
-| isCanHide   | 控制是否可以隐藏,可参考`lay-slider`组件 | `true`(默认值)、`false`   ||
-| isAutoShow   | 控制超出文本 `...` 时自动展示， 没有 `...` 时不展示 | `false`(默认值)、`true`   ||
+| disabled    | 是否禁用 | `false`(默认值)、`true`(禁用)   |
+| isCanHide   | 控制是否可以隐藏,可参考`lay-slider`组件 | `true`(默认值)、`false`   |
+| isAutoShow   | 控制超出文本 `...` 时自动展示， 没有 `...` 时不展示 | `false`(默认值)、`true`   |
+| visible     | 控制显示/隐藏| `true` `false`|
 
 :::
 
