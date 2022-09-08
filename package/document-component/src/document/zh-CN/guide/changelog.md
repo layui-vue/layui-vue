@@ -12,12 +12,20 @@
 <lay-timeline>
   <lay-timeline-item title="1.4.x">
     <ul> 
+      <a name="1-4-11"></a> 
+      <li> 
+        <h3>1.4.11 <span class="layui-badge-rim">2022-09-08</span></h3> 
+        <ul>     
+          <li>[新增] tooltip 组件 visible 参数。</li>
+          <li>[修复] tooltip 组件定位逻辑, content 变化时更新位置。</li>
+        </ul>
+      </li>
+    </ul>
+    <ul> 
       <a name="1-4-10"></a> 
       <li> 
         <h3>1.4.10 <span class="layui-badge-rim">2022-09-08</span></h3> 
         <ul>     
-          <li>[新增] tooltip 组件 visible 参数。</li>
-          <li>[修复] tooltip 组件定位逻辑, content 变化时更新位置。</li>
           <li>[修复] table 组件按需模式下 empty 样式异常。</li>
           <li>[修复] table 组件因上个版本调整而造成 defaultToolbar 位置错误。</li>
           <li>[排除] uuid 依赖, 同时解决因 typescript 而导致的打包异常。</li>
