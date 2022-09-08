@@ -14,7 +14,10 @@
 
 <template>
     <lay-timeline>
-        <lay-timeline-item title="8月18日">
+        <lay-timeline-item>
+            <template #title>
+              8月18日
+            </template>
             <p>
                 layui vue 的一切准备工作似乎都已到位。发布之弦，一触即发。
                 <br>不枉近百个日日夜夜与之为伴。因小而大，因弱而强。
@@ -121,7 +124,10 @@ export default {
 <template>
     <lay-timeline direction="horizontal">
         <lay-timeline-item title="2015年" >2015年，layui 孵化</lay-timeline-item>
-        <lay-timeline-item title="2016年" >2016年，layui 首个版本发布</lay-timeline-item>
+        <lay-timeline-item >
+              <template #title>2016年</template> 
+              2016年，layui 首个版本发布
+        </lay-timeline-item>
         <lay-timeline-item title="2017年" >layui里程碑版本1.0发布</lay-timeline-item>
         <lay-timeline-item title="2021年" >layui里程碑版本2.0发布</lay-timeline-item>
     </lay-timeline>
