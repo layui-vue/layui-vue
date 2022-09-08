@@ -41,11 +41,7 @@
     "@umijs/ssr-darkreader": "^4.9.45",
     "dayjs": "^1.11.0",
     "evtd": "^0.2.3",
-    "uuid": "^8.3.2",
     "vue-i18n": "^9.1.10"
-  },
-  "devDependencies": {
-    "@types/uuid": "^8.3.4"
   },
   "files": [
     "lib",

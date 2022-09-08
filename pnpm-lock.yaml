@@ -77,14 +77,12 @@ importers:
     specifiers:
       '@layui/icons-vue': ^1.0.9
       '@layui/layer-vue': ^1.4.2
-      '@types/uuid': ^8.3.4
       '@umijs/ssr-darkreader': ^4.9.45
       '@vueuse/core': ^8.7.3
       async-validator: ^4.1.1
       cropperjs: ^1.5.12
       dayjs: ^1.11.0
       evtd: ^0.2.3
-      uuid: ^8.3.2
       vue-i18n: ^9.1.10
     dependencies:
       '@layui/icons-vue': link:../icons
@@ -95,10 +93,7 @@ importers:
       cropperjs: 1.5.12
       dayjs: 1.11.0
       evtd: 0.2.3
-      uuid: 8.3.2
       vue-i18n: 9.1.10_vue@3.2.37
-    devDependencies:
-      '@types/uuid': 8.3.4
 
   package/document-component:
     specifiers:
@@ -5118,11 +5113,6 @@ packages:
   /util-deprecate/1.0.2:
     resolution: {integrity: sha1-RQ1Nyfpw3nMnYvvS1KKJgUGaDM8=}
     dev: true
-
-  /uuid/8.3.2:
-    resolution: {integrity: sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==}
-    hasBin: true
-    dev: false
 
   /v8-compile-cache-lib/3.0.0:
     resolution: {integrity: sha512-mpSYqfsFvASnSn5qMiwrr4VKfumbPyONLCOPmsR3A6pTY/r0+tSaVbgPWSAIuzbk3lCTa+FForeTiO+wBQGkjA==}

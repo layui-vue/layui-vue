@@ -17,7 +17,6 @@ import {
   computed,
   onBeforeUnmount,
 } from "vue";
-import { v4 as uuidv4 } from "../../utils/guidUtil";
 import { Recordable } from "../../types";
 import { LayIcon } from "@layui/icons-vue";
 import LayCheckbox from "../checkbox/index.vue";
@@ -78,8 +77,6 @@ const props = withDefaults(defineProps<LayTableProps>(), {
   getRadioProps: () => {},
 });
 
-const tableId = uuidv4();
-
 const emit = defineEmits([
   "change",
   "update:expandKeys",
@@ -92,6 +89,7 @@ const emit = defineEmits([
 
 const slot = useSlots();
 const slots = slot.default && slot.default();
+const tableRef = ref();
 
 const s = "";
 const allChecked = ref(false);
@@ -333,7 +331,7 @@ const rowContextmenu = (data: any, evt: MouseEvent) => {
 
 // 页面打印
 const print = () => {
-  let subOutputRankPrint = document.getElementById(tableId) as HTMLElement;
+  let subOutputRankPrint = tableRef.value as HTMLElement;
   let newContent = subOutputRankPrint.innerHTML;
   let oldContent = document.body.innerHTML;
   document.body.innerHTML = newContent;
@@ -621,12 +619,11 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div :id="tableId">
+  <div ref="tableRef">
     <table class="layui-hide" lay-filter="test"></table>
     <div class="layui-form layui-border-box layui-table-view" :class="classes">
-      <!-- 工具栏 -->
       <div v-if="defaultToolbar || slot.toolbar" class="layui-table-tool">
-        <div v-if="slot.toolbar" class="layui-table-tool-temp">
+        <div class="layui-table-tool-temp">
           <slot name="toolbar"></slot>
         </div>
         <div v-if="defaultToolbar" class="layui-table-tool-self">
