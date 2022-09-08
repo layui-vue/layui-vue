@@ -568,26 +568,23 @@ const { stop: removeTriggerResizeObserver } = useResizeObserver(
   }
 );
 
-onClickOutside(
-  dropdownRef,
-  (e) => {
-    if (
-      !props.clickOutsideToClose ||
-      !openState.value ||
-      dropdownRef.value?.contains(e.target as HTMLElement) ||
-      contentRef.value?.contains(e.target as HTMLElement)
-    ) {
+onClickOutside(dropdownRef, (e) => {
+  if (
+    !props.clickOutsideToClose ||
+    !openState.value ||
+    dropdownRef.value?.contains(e.target as HTMLElement) ||
+    contentRef.value?.contains(e.target as HTMLElement)
+  ) {
+    return;
+  }
+  for (const item of childrenRefs) {
+    if (item.value?.contains(e.target as HTMLElement)) {
       return;
     }
-    for (const item of childrenRefs) {
-      if (item.value?.contains(e.target as HTMLElement)) {
-        return;
-      }
-    }
-
-    hide();
   }
-);
+
+  hide();
+});
 
 const onlyChildRenderFunc = () => {
   const slotContent = slots.default ? slots.default() : [];
