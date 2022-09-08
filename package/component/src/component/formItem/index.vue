@@ -145,8 +145,8 @@ const clearValidate = () => {
   errorStatus.value = false;
   errorMsg.value = "";
   const slotParentDiv = slotParent.value as HTMLDivElement;
-  slotParentDiv.childElementCount > 0 &&
-    slotParentDiv.firstElementChild?.classList.remove("layui-form-danger");
+  slotParentDiv?.childElementCount > 0 &&
+    slotParentDiv?.firstElementChild?.classList.remove("layui-form-danger");
 };
 
 defineExpose({ validate, clearValidate });

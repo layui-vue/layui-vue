@@ -29,6 +29,9 @@
     <lay-form-item label="描述" prop="desc">
       <lay-textarea placeholder="请输入描述" v-model="model.desc"></lay-textarea>
     </lay-form-item>
+    <lay-form-item label="时间" prop="datetime" required>
+      <lay-date-picker v-model="model.datetime" range type="datetime"></lay-date-picker>
+    </lay-form-item>
     <lay-form-item>
       <lay-button @click="submitClick">提交</lay-button>
     </lay-form-item>
