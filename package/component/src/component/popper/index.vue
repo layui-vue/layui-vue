@@ -23,8 +23,18 @@ export default {
 <script setup lang="ts">
 import "./index.less";
 import postionFns from "./calcPosition";
-import { CSSProperties, ref, watch, onMounted } from "vue";
+import {
+  CSSProperties,
+  ref,
+  watch,
+  onMounted,
+  watchEffect,
+  nextTick,
+  onBeforeUnmount,
+  useSlots,
+} from "vue";
 import { on } from "../../utils/domUtil";
+import { useThrottleFn } from "@vueuse/core";
 
 export interface LayPopperProps {
   el: any;
@@ -36,6 +46,7 @@ export interface LayPopperProps {
   disabled?: boolean;
   isCanHide?: boolean;
   isAutoShow?: boolean;
+  visible?: boolean;
 }
 
 const props = withDefaults(defineProps<LayPopperProps>(), {
@@ -46,7 +57,10 @@ const props = withDefaults(defineProps<LayPopperProps>(), {
   isCanHide: true,
   isAutoShow: false,
   trigger: "hover",
+  visible: false,
 });
+
+const slots = useSlots();
 
 const EVENT_MAP: any = {
   hover: ["mouseenter", null, "mouseleave", false],
@@ -62,13 +76,17 @@ const style = ref<CSSProperties>({ top: -window.innerHeight + "px", left: 0 });
 const checkTarget = ref(false);
 const popper = ref<HTMLDivElement>({} as HTMLDivElement);
 const innnerPosition = ref(props.position);
-const innerVisible = ref(!props.isCanHide);
-const isExist = ref(!props.isCanHide);
+const innerVisible = ref(props.visible);
+const isExist = ref(props.visible);
 
 watch(
-  () => props.isCanHide,
+  () => props.visible,
   (val) => {
-    innerVisible.value = !val;
+    if (val) {
+      doShow();
+    } else {
+      doHidden();
+    }
   }
 );
 
@@ -83,26 +101,25 @@ watch(popper, (val) => {
   }
 });
 
-watch(
-  () => props.content,
-  (val) => {
-    innerVisible.value && invokeShowPosistion();
-  }
-);
+watch([() => props.content, () => slots.content && slots?.content()], (val) => {
+  innerVisible.value && invokeShowPosistion();
+});
 
 const doShow = function () {
   if (!props.disabled) {
     if (!isExist.value) {
       isExist.value = true;
-      setTimeout(() => (innerVisible.value = true), 0);
+      nextTick(() => {
+        innerVisible.value = true;
+      });
     } else {
       innerVisible.value = true;
     }
   }
 };
 
-const doHidden = function (e: MouseEvent) {
-  if (checkTarget.value && props.el.contains(e.target)) {
+const doHidden = function (e?: MouseEvent) {
+  if (checkTarget.value && props.el.contains(e?.target)) {
     return;
   }
 
@@ -127,12 +144,40 @@ const showPosistion = function () {
 const invokeShowPosistion = function () {
   if (innerVisible.value) {
     popper.value.offsetWidth === 0
-      ? setTimeout(showPosistion, 0)
+      ? nextTick(() => showPosistion())
       : showPosistion();
-    // 延时确保计算位置正确
-    setTimeout(() => innerVisible.value && showPosistion(), 2);
+    nextTick(() => {
+      showPosistion();
+    });
   }
 };
+
+let scrollElements: HTMLElement[] | undefined;
+
+const isScrollElement = (element: HTMLElement) => {
+  return (
+    element.scrollHeight > element.offsetHeight ||
+    element.scrollWidth > element.offsetWidth
+  );
+};
+
+const getScrollElements = (container: HTMLElement | undefined) => {
+  const scrollElements: HTMLElement[] = [];
+  let element: HTMLElement | undefined = container;
+  while (element && element !== document.documentElement) {
+    if (isScrollElement(element)) {
+      scrollElements.push(element);
+    }
+    element = element.parentElement ?? undefined;
+  }
+  return scrollElements;
+};
+
+const handleScroll = useThrottleFn(() => {
+  if (innerVisible.value) {
+    invokeShowPosistion();
+  }
+}, 15);
 
 // 事件绑定
 on(props.el, triggerArr[0], doShow);
@@ -141,5 +186,20 @@ checkTarget.value = triggerArr[3];
 
 onMounted(() => {
   invokeShowPosistion();
+  scrollElements = getScrollElements(props.el);
+  for (const item of scrollElements) {
+    item.addEventListener("scroll", handleScroll);
+  }
+  window.addEventListener("resize", handleScroll);
+});
+
+onBeforeUnmount(() => {
+  if (scrollElements) {
+    for (const item of scrollElements) {
+      item.removeEventListener("scroll", handleScroll);
+    }
+    scrollElements = undefined;
+  }
+  window.removeEventListener("resize", handleScroll);
 });
 </script>
