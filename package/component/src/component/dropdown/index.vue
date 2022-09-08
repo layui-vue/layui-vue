@@ -586,9 +586,6 @@ onClickOutside(
     }
 
     hide();
-  },
-  {
-    capture: false,
   }
 );
 
