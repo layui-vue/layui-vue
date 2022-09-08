@@ -37,6 +37,7 @@ export interface LayFormItemProps {
   errorMessage?: string;
   rules?: Rule;
   required?: boolean;
+  requiredErrorMessage?: string;
 }
 
 const props = withDefaults(defineProps<LayFormItemProps>(), {
@@ -84,26 +85,22 @@ watch(
 );
 
 // 错误状态和信息
-const errorStatus = ref(false);
 const errorMsg = ref();
+const errorStatus = ref(false);
 // 校验数据有效性
 const validate = (callback?: ValidateCallback) => {
   if (props.prop && (ruleItems.value as RuleItem[]).length > 0) {
     // 校验规则
     const descriptor: Rules = {};
-    descriptor[layForm.useCN ? props.label || props.prop : props.prop] =
-      ruleItems.value;
+    descriptor[layForm.useCN ? props.label || props.prop : props.prop] = ruleItems.value;
+
     const validator = new Schema(descriptor);
 
     let model: { [key: string]: any } = {};
     let validateMessage = null;
     // 使用中文错误提示
     if (layForm.useCN) {
-      validateMessage = Object.assign(
-        {},
-        cnValidateMessage,
-        layForm.validateMessage
-      );
+      validateMessage = Object.assign({}, cnValidateMessage, layForm.validateMessage);
       model[props.label || props.prop] = filedValue.value;
     } else {
       layForm.validateMessage && (validateMessage = layForm.validateMessage);
@@ -112,11 +109,14 @@ const validate = (callback?: ValidateCallback) => {
     // 自定义消息验证
     layForm.requiredErrorMessage &&
       // @ts-ignore
-      (validateMessage = Object.assign(validateMessage, {
-        required: layForm.requiredErrorMessage,
-      }));
-    validateMessage && validator.messages(validateMessage);
+      (validateMessage = Object.assign(validateMessage, { required: layForm.requiredErrorMessage }));
+    
+    props.requiredErrorMessage && 
+      // @ts-ignore
+      (validateMessage = Object.assign(validateMessage, { required: props.requiredErrorMessage }));
 
+    validateMessage && validator.messages(validateMessage);    
+    
     // 开始校验
     validator.validate(model, (errors, fields) => {
       errorStatus.value = errors !== null && errors.length > 0;
@@ -130,8 +130,8 @@ const validate = (callback?: ValidateCallback) => {
             error.field = props.prop;
           });
         errorMsg.value = props.errorMessage ?? _errors[0].message;
-        slotParentDiv.childElementCount > 0 &&
-          slotParentDiv.firstElementChild?.classList.add("layui-form-danger");
+        slotParentDiv?.childElementCount > 0 &&
+          slotParentDiv?.firstElementChild?.classList.add("layui-form-danger");
         callback && callback(_errors, fields);
       } else {
         clearValidate();
@@ -139,7 +139,7 @@ const validate = (callback?: ValidateCallback) => {
     });
   }
 };
-
+  
 // 清除校验
 const clearValidate = () => {
   errorStatus.value = false;

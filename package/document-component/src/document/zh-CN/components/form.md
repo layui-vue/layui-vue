@@ -241,7 +241,7 @@ export default {
 
 <template>
   <lay-form :model="ruleDemo1" ref="layFormRef1" :rules="rules" required initValidate>
-    <lay-form-item label="邮箱" prop="email">
+    <lay-form-item prop="email" requiredMessage="你得输入邮箱">
       <lay-input v-model="ruleDemo1.email"></lay-input>
     </lay-form-item>
     <lay-form-item label="url路径" prop="url">
@@ -279,7 +279,7 @@ export default {
 
     const rules = ref({
       email : {
-        type : 'email'
+        type : 'email',
       },
       url : {
         type : 'url'
