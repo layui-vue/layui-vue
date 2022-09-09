@@ -57,7 +57,7 @@ setup() {
 <template>
   <lay-button @click="visible = !visible">{{visible ? '显示' : '隐藏'}}</lay-button>
   <div style="padding: 100px">
-    <lay-tooltip position="right" content="时光都淡了，我还伴着你。" :visible="visible">
+    <lay-tooltip position="right" content="假装这里有文字提示" :visible="visible">
       <lay-button>tooltip</lay-button>
     </lay-tooltip>
   </div>
@@ -189,7 +189,9 @@ export default {
 | disabled    | 是否禁用 | `false`(默认值)、`true`(禁用)   |
 | isCanHide   | 控制是否可以隐藏,可参考`lay-slider`组件 | `true`(默认值)、`false`   |
 | isAutoShow   | 控制超出文本 `...` 时自动展示， 没有 `...` 时不展示 | `false`(默认值)、`true`   |
-| visible     | 控制显示/隐藏| `true` `false`|
+| visible     | 控制显示/隐藏| `true` `false`(默认值)|
+| enterable   | 鼠标是否能进入 tooltip 中 | `true`(默认值) `false`|
+| trigger     | 触发方式| `click` `hover`(默认值) `contextmenu` `focus` `trigger[]`| 
 
 :::
 

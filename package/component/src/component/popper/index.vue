@@ -2,10 +2,12 @@
   <teleport to="body" v-if="isExist">
     <transition v-show="innerVisible">
       <div
-        ref="popper"
-        :class="['layui-popper', { 'layui-dark': isDark }]"
-        :style="style"
+        ref="popperRefEl"
+        :class="['layui-popper', { 'layui-dark': isDark }, props.popperClass]"
+        :style="[style, props.popperStyle ?? '']"
         :position="position"
+        @mouseenter="handlerPopperMouseEnter"
+        @mouseleave="handlerPopperMouseLeave"
       >
         <slot>{{ content }}</slot>
         <div class="layui-popper-arrow"></div>
@@ -28,25 +30,30 @@ import {
   ref,
   watch,
   onMounted,
-  watchEffect,
   nextTick,
-  onBeforeUnmount,
   useSlots,
+  shallowRef,
+  computed,
+  toRef,
+  StyleValue,
 } from "vue";
-import { on } from "../../utils/domUtil";
-import { useThrottleFn } from "@vueuse/core";
+import { onClickOutside, useEventListener, useThrottleFn } from "@vueuse/core";
+
+export type PopperTrigger = "click" | "hover" | "focus" | "contextMenu";
 
 export interface LayPopperProps {
-  el: any;
+  el: HTMLElement;
   content?: string | Number;
   position?: string;
-  trigger?: string;
+  trigger?: PopperTrigger | PopperTrigger[];
   enterable?: boolean;
   isDark?: boolean;
   disabled?: boolean;
   isCanHide?: boolean;
   isAutoShow?: boolean;
   visible?: boolean;
+  popperClass?: string | Array<string | object> | object;
+  popperStyle?: StyleValue;
 }
 
 const props = withDefaults(defineProps<LayPopperProps>(), {
@@ -61,49 +68,17 @@ const props = withDefaults(defineProps<LayPopperProps>(), {
 });
 
 const slots = useSlots();
-
-const EVENT_MAP: any = {
-  hover: ["mouseenter", null, "mouseleave", false],
-  click: ["click", document, "click", true],
-};
-
-const triggerArr = EVENT_MAP[props.trigger];
-if (!triggerArr) {
-  console.error(`${NAME} render error!cause: 'Trigger' must be 'hover/click' `);
-}
-
 const style = ref<CSSProperties>({ top: -window.innerHeight + "px", left: 0 });
-const checkTarget = ref(false);
-const popper = ref<HTMLDivElement>({} as HTMLDivElement);
+const triggerRefEl = toRef(props, "el");
+const popperRefEl = shallowRef<HTMLDivElement>({} as HTMLDivElement);
 const innnerPosition = ref(props.position);
 const innerVisible = ref(props.visible);
 const isExist = ref(props.visible);
+let scrollElements: HTMLElement[] | undefined;
 
-watch(
-  () => props.visible,
-  (val) => {
-    if (val) {
-      doShow();
-    } else {
-      doHidden();
-    }
-  }
+const triggerMethods = computed(() =>
+  ([] as Array<PopperTrigger>).concat(props.trigger)
 );
-
-watch(innerVisible, (val) => {
-  invokeShowPosistion();
-});
-
-watch(popper, (val) => {
-  if (props.trigger === "hover" && props.enterable) {
-    on(popper.value, EVENT_MAP["hover"][0], doShow);
-    on(popper.value, EVENT_MAP["hover"][2], doHidden);
-  }
-});
-
-watch([() => props.content, () => slots.content && slots?.content()], (val) => {
-  innerVisible.value && invokeShowPosistion();
-});
 
 const doShow = function () {
   if (!props.disabled) {
@@ -119,10 +94,6 @@ const doShow = function () {
 };
 
 const doHidden = function (e?: MouseEvent) {
-  if (checkTarget.value && props.el.contains(e?.target)) {
-    return;
-  }
-
   // isCanHide参数由外控制
   if (props.isCanHide === false) {
     return;
@@ -132,36 +103,132 @@ const doHidden = function (e?: MouseEvent) {
   style.value = { top: -window.innerHeight + "px", left: 0 };
 };
 
-// 计算位置显示
-const showPosistion = function () {
+const calcPosistion = function () {
   postionFns[props.position] &&
     (style.value = postionFns[props.position](
-      props.el,
-      popper.value,
+      triggerRefEl.value,
+      popperRefEl.value,
       innnerPosition
     ));
 };
-const invokeShowPosistion = function () {
+
+const updatePosistion = function () {
   if (innerVisible.value) {
-    popper.value.offsetWidth === 0
-      ? nextTick(() => showPosistion())
-      : showPosistion();
+    popperRefEl.value.offsetWidth === 0
+      ? nextTick(() => calcPosistion())
+      : calcPosistion();
     nextTick(() => {
-      showPosistion();
+      calcPosistion();
     });
   }
 };
 
-let scrollElements: HTMLElement[] | undefined;
+const handlerPopperMouseEnter = function () {
+  if (triggerMethods.value.includes("hover") && props.enterable) {
+    doShow();
+  }
+};
 
-const isScrollElement = (element: HTMLElement) => {
+const handlerPopperMouseLeave = function () {
+  if (triggerMethods.value.includes("hover") && props.enterable) {
+    doHidden();
+  }
+};
+
+const handlerTriggerClick = function () {
+  if (!triggerMethods.value.includes("click")) return;
+  if (innerVisible.value) {
+    doHidden();
+  } else {
+    doShow();
+  }
+};
+
+const handleTriggerContextMenu = function () {
+  if (!triggerMethods.value.includes("contextMenu")) return;
+  if (innerVisible.value) {
+    doHidden();
+  } else {
+    doShow();
+  }
+};
+
+const handlerTriggerMouseEnter = function () {
+  if (!triggerMethods.value.includes("hover")) return;
+  doShow();
+};
+
+const handlerTriggerMouseLeave = function () {
+  if (!triggerMethods.value.includes("hover")) return;
+  doHidden();
+};
+
+const handleTriggerFocusin = function () {
+  if (triggerMethods.value.includes("focus") && props.enterable) {
+    doShow();
+  }
+};
+
+const handleTriggerFocusout = function () {
+  if (triggerMethods.value.includes("focus") && props.enterable) {
+    doHidden();
+  }
+};
+
+const handlerTriggerEventRegist = function () {
+  useEventListener(triggerRefEl.value, "click", handlerTriggerClick);
+  useEventListener(triggerRefEl.value, "contextmenu", handleTriggerContextMenu);
+  useEventListener(triggerRefEl.value, "mouseenter", handlerTriggerMouseEnter);
+  useEventListener(triggerRefEl.value, "mouseleave", handlerTriggerMouseLeave);
+  useEventListener(triggerRefEl.value, "focusin", handleTriggerFocusin);
+  useEventListener(triggerRefEl.value, "focusout", handleTriggerFocusout);
+};
+
+const handleScroll = useThrottleFn(() => {
+  if (innerVisible.value) {
+    updatePosistion();
+  }
+}, 15);
+
+onClickOutside(
+  triggerRefEl.value,
+  (e) => {
+    if (
+      !innerVisible.value ||
+      triggerRefEl.value.contains(e.target as HTMLElement) ||
+      popperRefEl.value.contains(e.target as HTMLElement)
+    ) {
+      return;
+    }
+
+    doHidden();
+  },
+  {
+    ignore: [popperRefEl.value],
+  }
+);
+
+watch(
+  () => props.visible,
+  (isShow) => (isShow ? doShow() : doHidden())
+);
+
+watch(innerVisible, (val) => {
+  updatePosistion();
+});
+
+watch([() => props.content, () => slots.content && slots?.content()], (val) => {
+  innerVisible.value && updatePosistion();
+});
+
+const isScrollElement = function (element: HTMLElement) {
   return (
     element.scrollHeight > element.offsetHeight ||
     element.scrollWidth > element.offsetWidth
   );
 };
 
-const getScrollElements = (container: HTMLElement | undefined) => {
+const getScrollElements = function (container: HTMLElement | undefined) {
   const scrollElements: HTMLElement[] = [];
   let element: HTMLElement | undefined = container;
   while (element && element !== document.documentElement) {
@@ -173,33 +240,13 @@ const getScrollElements = (container: HTMLElement | undefined) => {
   return scrollElements;
 };
 
-const handleScroll = useThrottleFn(() => {
-  if (innerVisible.value) {
-    invokeShowPosistion();
-  }
-}, 15);
-
-// 事件绑定
-on(props.el, triggerArr[0], doShow);
-on(triggerArr[1] ?? props.el, triggerArr[2], doHidden);
-checkTarget.value = triggerArr[3];
-
 onMounted(() => {
-  invokeShowPosistion();
-  scrollElements = getScrollElements(props.el);
+  updatePosistion();
+  scrollElements = getScrollElements(triggerRefEl.value);
   for (const item of scrollElements) {
-    item.addEventListener("scroll", handleScroll);
+    useEventListener(item, "scroll", handleScroll);
   }
-  window.addEventListener("resize", handleScroll);
-});
-
-onBeforeUnmount(() => {
-  if (scrollElements) {
-    for (const item of scrollElements) {
-      item.removeEventListener("scroll", handleScroll);
-    }
-    scrollElements = undefined;
-  }
-  window.removeEventListener("resize", handleScroll);
+  useEventListener("resize", handleScroll);
+  handlerTriggerEventRegist();
 });
 </script>

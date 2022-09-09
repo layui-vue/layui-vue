@@ -19,6 +19,7 @@ import {
   Fragment,
   cloneVNode,
   useAttrs,
+  StyleValue,
 } from "vue";
 import {
   computed,
@@ -69,6 +70,8 @@ export interface LayDropdownProps {
   // 未完善,暂不开放
   alignPoint?: boolean;
   popupContainer?: string | undefined;
+  contentClass?: string | Array<string | object> | object;
+  contentStyle?: StyleValue;
 }
 
 const props = withDefaults(defineProps<LayDropdownProps>(), {
@@ -664,8 +667,13 @@ defineExpose({ show, hide, toggle });
     <div
       v-if="openState"
       ref="contentRef"
-      class="layui-dropdown-content layui-anim layui-anim-upbit"
-      :style="contentStyle"
+      :class="[
+        'layui-dropdown-content',
+        'layui-anim',
+        'layui-anim-upbit',
+        props.contentClass,
+      ]"
+      :style="[contentStyle, props.contentStyle ?? '']"
       @mouseenter="handleMouseEnterWithContext"
       @mouseleave="handleMouseLeaveWithContext"
     >
