@@ -26,10 +26,7 @@ const isOpen = computed(() => {
 });
 
 const computedTheme = computed(() => {
-  if (isTree.value) {
-    return theme.value === "light" ? "-light" : "";
-  }
-  return theme.value === "light" ? "" : "-light";
+  return theme.value === "light" ? "-light" : "";
 });
 
 const computedExpandIcon = computed(() => {
