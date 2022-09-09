@@ -49,7 +49,9 @@
 .layui-nav .layui-nav-item > a {
   display: block;
   padding: 0 30px;
-  color: rgba(255, 255, 255, 0.7);
+  * {
+    color: rgba(255, 255, 255, 0.7);
+  }
 }
 
 .layui-nav .layui-this:after,
@@ -75,8 +77,8 @@
 }
 
 .layui-nav .layui-nav-item a:hover,
-.layui-nav .layui-this a {
-  color: #fff;
+.layui-nav .layui-this * {
+  color: #fff !important;
 }
 
 .layui-nav .layui-this:after {
