@@ -92,7 +92,8 @@ const validate = (callback?: ValidateCallback) => {
   if (props.prop && (ruleItems.value as RuleItem[]).length > 0) {
     // 校验规则
     const descriptor: Rules = {};
-    descriptor[layForm.useCN ? props.label || props.prop : props.prop] = ruleItems.value;
+    descriptor[layForm.useCN ? props.label || props.prop : props.prop] =
+      ruleItems.value;
 
     const validator = new Schema(descriptor);
 
@@ -100,7 +101,11 @@ const validate = (callback?: ValidateCallback) => {
     let validateMessage = null;
     // 使用中文错误提示
     if (layForm.useCN) {
-      validateMessage = Object.assign({}, cnValidateMessage, layForm.validateMessage);
+      validateMessage = Object.assign(
+        {},
+        cnValidateMessage,
+        layForm.validateMessage
+      );
       model[props.label || props.prop] = filedValue.value;
     } else {
       layForm.validateMessage && (validateMessage = layForm.validateMessage);
@@ -109,14 +114,18 @@ const validate = (callback?: ValidateCallback) => {
     // 自定义消息验证
     layForm.requiredErrorMessage &&
       // @ts-ignore
-      (validateMessage = Object.assign(validateMessage, { required: layForm.requiredErrorMessage }));
-    
-    props.requiredErrorMessage && 
-      // @ts-ignore
-      (validateMessage = Object.assign(validateMessage, { required: props.requiredErrorMessage }));
+      (validateMessage = Object.assign(validateMessage, {
+        required: layForm.requiredErrorMessage,
+      }));
 
-    validateMessage && validator.messages(validateMessage);    
-    
+    props.requiredErrorMessage &&
+      // @ts-ignore
+      (validateMessage = Object.assign(validateMessage, {
+        required: props.requiredErrorMessage,
+      }));
+
+    validateMessage && validator.messages(validateMessage);
+
     // 开始校验
     validator.validate(model, (errors, fields) => {
       errorStatus.value = errors !== null && errors.length > 0;
@@ -139,7 +148,7 @@ const validate = (callback?: ValidateCallback) => {
     });
   }
 };
-  
+
 // 清除校验
 const clearValidate = () => {
   errorStatus.value = false;

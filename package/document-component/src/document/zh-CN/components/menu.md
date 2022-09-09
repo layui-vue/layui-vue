@@ -33,6 +33,26 @@
         </lay-sub-menu>
     </lay-sub-menu> 
   </lay-menu>
+  <lay-menu v-model:selected-key="selectedKey" v-model:open-keys="openKeys1" theme="light">
+    <lay-menu-item id="1"><router-link to="/">hahah </router-link></lay-menu-item>
+    <lay-menu-item id="2">首页</lay-menu-item>
+    <lay-menu-item id="3">首页</lay-menu-item> 
+    <lay-sub-menu id="7">
+        <template #title>
+          首页
+        </template>
+        <lay-menu-item id="8">首页</lay-menu-item> 
+        <lay-menu-item id="9">首页</lay-menu-item>
+        <lay-sub-menu title="菜单" id="10">
+            <template #title>
+              首页
+            </template>
+            <lay-menu-item id="11">首页</lay-menu-item> 
+            <lay-menu-item id="12">首页</lay-menu-item>
+            <lay-menu-item id="13">首页</lay-menu-item>
+        </lay-sub-menu>
+    </lay-sub-menu> 
+  </lay-menu>
 </template>
 
 <script>
