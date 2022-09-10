@@ -34,7 +34,7 @@ onMounted(() => {
 });
 </script>
 <template>
-  <Teleport :to="target" v-if="target" :disabled="!target || disabled">
+  <Teleport :to="target" :disabled="!target || disabled">
     <slot></slot>
   </Teleport>
 </template>
