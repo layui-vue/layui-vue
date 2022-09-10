@@ -12,6 +12,20 @@
 <lay-timeline>
   <lay-timeline-item title="1.4.x">
     <ul> 
+      <a name="1-4-12"></a> 
+      <li> 
+        <h3>1.4.12 <span class="layui-badge-rim">2022-09-10</span></h3> 
+        <ul>     
+          <li>[新增] timeline 组件 title 插槽, 支持自定义标题。</li>
+          <li>[新增] form-item 组件 requiredErrorMessage 属性, 允许用户自定义必填提示。</li>
+          <li>[修复] form-item 组件 嵌套 date-picker 日期组件时出现的 slots 空指针异常。</li>
+          <li>[修复] menu 组件横向导航栏嵌套 router-link 组件前景色颜色不兼容问题。</li>
+          <li>[优化] tooltip 组件 trigger 属性为 contextMenu 时阻止默认行为。</li>
+          <li>[优化] dropdown 组件 clickOutside 修改为监听事件捕获阶段。</li>
+        </ul>
+      </li>
+    </ul>
+    <ul> 
       <a name="1-4-11"></a> 
       <li> 
         <h3>1.4.11 <span class="layui-badge-rim">2022-09-08</span></h3> 
