@@ -37,15 +37,11 @@ const computedExpandIcon = computed(() => {
 const computedPlacement = computed(() => {
   return !isTree.value && level.value === 2 ? "bottom-start" : "right-start";
 });
-
-const computedTrigger = computed(() => {
-  return !isTree.value && level.value === 2 ? "click" : "hover";
-});
 </script>
 
 <template>
   <lay-dropdown
-    :trigger="computedTrigger"
+    trigger="hover"
     :placement="computedPlacement"
     :autoFitMinWidth="false"
     :contentOffset="3"
