@@ -19,15 +19,22 @@ const props = withDefaults(defineProps<TeleportWrapperProps>(), {
 const target = ref<Element | null>(null);
 
 onMounted(() => {
-  if (!props.to) return;
-  const el = document.querySelector(props.to);
-  if (el) {
-    target.value = el;
-  }
+  const observer = new MutationObserver((mutationList, observer) => {
+    for (const mutation of mutationList) {
+      if (mutation.type !== "childList") continue;
+      const el = document.querySelector(props.to);
+      if (!el) continue;
+      target.value = el;
+      observer.disconnect();
+      break;
+    }
+  });
+  observer.observe(document, { childList: true, subtree: true });
+  return () => observer.disconnect();
 });
 </script>
 <template>
-  <Teleport :to="target" :disabled="!target || disabled">
+  <Teleport :to="target" v-if="target" :disabled="!target || disabled">
     <slot></slot>
   </Teleport>
 </template>
