@@ -144,8 +144,9 @@ const handlerTriggerClick = function () {
   }
 };
 
-const handleTriggerContextMenu = function () {
+const handleTriggerContextMenu = function (e: MouseEvent) {
   if (!triggerMethods.value.includes("contextMenu")) return;
+  e.preventDefault();
   if (innerVisible.value) {
     doHidden();
   } else {

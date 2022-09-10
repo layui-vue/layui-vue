@@ -471,7 +471,6 @@ const handleScroll = useThrottleFn(() => {
 }, 10);
 
 const handleClick = (e: MouseEvent) => {
-  e.stopPropagation();
   if (props.disabled || (openState.value && !props.clickToClose)) {
     return;
   }
