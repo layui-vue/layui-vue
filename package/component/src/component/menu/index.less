@@ -54,6 +54,12 @@
   }
 }
 
+.layui-nav .layui-nav-item.layui-this > a {
+  * {
+    color: #fff;
+  }
+}
+
 .layui-nav .layui-this:after,
 .layui-nav-bar {
   content: "";
@@ -316,15 +322,12 @@
   border: unset;
   border-radius: 2px;
   background-color: #393d49;
-
   .layui-nav-item {
     width: 100%;
-
     * {
       color: rgba(255, 255, 255, 0.7)
     }
-
-    >a {
+    > a {
       display: flex;
       align-items: center;
       text-overflow: ellipsis;
@@ -332,7 +335,6 @@
       font-size: 13.5px;
       min-height: 30px;
       min-width: 60px;
-
       .layui-sub-menu-icon {
         margin-top: 2px;
         margin-right: 8px;

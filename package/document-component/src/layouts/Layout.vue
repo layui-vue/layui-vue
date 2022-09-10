@@ -333,6 +333,7 @@ export default {
   background-color: #f1f1f1 !important;
 }
 
+.layui-layout-document .layui-header .layui-nav .layui-nav-item *,
 .layui-layout-document .layui-header .layui-nav .layui-nav-item a,
 .layui-layout-document .layui-header .layui-nav .layui-nav-item a:hover {
   color: rgba(0, 0, 0, 0.8);
