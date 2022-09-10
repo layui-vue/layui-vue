@@ -35,7 +35,7 @@ const computedExpandIcon = computed(() => {
 });
 
 const computedPlacement = computed(() => {
-  return !isTree.value && level.value === 2 ? "bottom-start" : "right-start";
+  return !isTree.value && level.value === 2 ? "bottom" : "right-start";
 });
 </script>
 
