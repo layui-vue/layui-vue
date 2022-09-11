@@ -541,6 +541,11 @@ const handleFocusout = () => {
   hide();
 };
 
+const handleContextHide = () => {
+  hide();
+  dropdownCtx?.hide();
+}
+
 const addChildRef = (ref: any) => {
   childrenRefs.add(ref);
   dropdownCtx?.addChildRef(ref);
@@ -648,7 +653,7 @@ provide(
     onMouseleave: handleMouseLeaveWithContext,
     addChildRef,
     removeChildRef,
-    hide,
+    hide: handleContextHide,
   })
 );
 
