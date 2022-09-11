@@ -536,9 +536,10 @@ export default {
 | label         | 子项前边描述值，**尽量填写**，中文校验错误需要用到                 | `string`  |        -       |    -    |
 | label-position| 子项前边描述值的位置                                              | `string`  | `left` `top` `right` |`right` |
 | label-width   | 子项前边描述值的宽度                                              | `string` `number` | - | `95` |
-| required      | 是否必填                                                        | `boolean` | `true` `false` | `false` |
-| rules         |  表单校验规则; <br>可查看[async-validator](https://github.com/yiminghe/async-validator)  | `object` | - | - |
-| error-message | 表单校验失败固定提示语                                           | `string`  |`block` `inline`| `block` |
+| required      | 表单必填                                                        | `boolean` | `true` `false` | `false` |
+| required-error-message | 表单必填校验失败固定提示语                                        | `string`  | -- | -- |
+| rules         | 表单校验规则; <br>可查看[async-validator](https://github.com/yiminghe/async-validator)  | `object` | - | - |
+| error-message | 表单校验失败固定提示语                                           | `string`  | -- | -- |
 | mode          | 表单项显示的模式，`块元素` / `行元素`                             | `string`  |`block` `inline`| `block` |
 
 :::
@@ -572,8 +573,11 @@ export default {
 ::: title 关于 async-validator 的使用
 :::
 
-查看： https://github.com/yiminghe/async-validator  
-中文翻译： https://www.cnblogs.com/wozho/p/10955525.html
+::: describe 查看： https://github.com/yiminghe/async-validator。
+:::
+
+::: describe 翻译： ttps://www.cnblogs.com/wozho/p/10955525.html。
+:::
 
 ::: title async-validator 基本校验类型
 :::

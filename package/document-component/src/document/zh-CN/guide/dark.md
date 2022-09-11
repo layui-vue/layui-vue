@@ -4,7 +4,7 @@
 ::: describe 默认情况下, 网站主题为日间模式。
 :::
 
-::: describe 若启用夜间模式, 使用 "全局配置" 组件配合 theme 属性, 设置为 `dark` 值。
+::: describe 若启用夜间模式, 使用 "全局配置" 组件配合 theme 属性, 设置为 dark 值。
 :::
 
 ```vue
@@ -19,7 +19,7 @@ const theme = ref('dark')
 </script>
 ```
 
-::: title 偏好设置
+::: title 选项配置
 :::
 
 ::: describe 若内置的夜间模式不满足要求时, 可通过 dark-partial 属性进行偏好设置。

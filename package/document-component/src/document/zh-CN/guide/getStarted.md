@@ -129,41 +129,12 @@ app.mount('#app')
 :::
 
 ```html
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Document</title>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- 引入 layui-vue 样式 -->
-    <link rel="stylesheet" type="text/css" href="https://unpkg.com/@layui/layui-vue/lib/index.css">
-    <!-- 引入 Vue 3, 使用全局变量 Vue -->
-    <script src="https://unpkg.com/vue@3"></script>
-    <!-- 引入 layui-vue 组件库, 使用全局变量 LayuiVue -->
-    <script src="https://unpkg.com/@layui/layui-vue"></script>
-  </head>
-  <body>
-    <div id="app">
-      <lay-button @click="openLayer">Hello</lay-button>
-    </div>
-  </body>
-  <script>
-    const { createApp, ref } = Vue;
-    const { layer } = LayuiVue;
-
-    const App = {
-      setup() {
-        const openLayer = function () {
-          layer.msg("hello");
-        }
-        return {
-          openLayer
-        }
-      }
-    };
-
-    createApp(App).use(LayuiVue).mount('#app'); 
-  </script>
-</html>
+<head>
+  <!-- Import style -->
+  <link rel="stylesheet" href="//unpkg.com/@layui/layui-vue/lib/index.css" />
+  <!-- Import Vue 3 -->
+  <script src="//unpkg.com/vue@3"></script>
+  <!-- Import component library -->
+  <script src="//unpkg.com/@layui/layui-vue"></script>
+</head>
 ```
