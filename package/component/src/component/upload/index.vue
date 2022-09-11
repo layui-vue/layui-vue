@@ -375,12 +375,12 @@ const cutTransaction = () => {};
   >
     <input
       type="file"
-      ref="orgFileInput"
       class="layui-upload-file"
-      :multiple="multiple"
-      :accept="acceptMime"
+      ref="orgFileInput"
       :name="field"
       :field="field"
+      :multiple="multiple"
+      :accept="acceptMime"
       :disabled="disabled"
       @click="clickOrgInput"
       @change="getUploadChange"

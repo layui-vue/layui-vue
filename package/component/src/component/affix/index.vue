@@ -1,5 +1,5 @@
 <template>
-  <div class="lay-affix-content" :style="getStyle" ref="dom">
+  <div class="layui-affix" :style="getStyle" ref="dom">
     <slot></slot>
   </div>
 </template>
@@ -11,7 +11,7 @@ export default {
 </script>
 <script setup lang="ts">
 import "./index.less";
-import { ref, onMounted, onUnmounted, nextTick, computed, reactive } from "vue";
+import { ref, onMounted, onUnmounted, nextTick, computed, reactive, StyleValue } from "vue";
 export interface LayAiffxProps {
   offset?: number;
   target?: HTMLElement;
@@ -50,7 +50,7 @@ const getStyle = computed(() => {
     } else {
       style.bottom = fixedOffset - marginBottom + "px";
     }
-    return style;
+    return style as StyleValue;
   }
 });
 //检查是否在窗口内
