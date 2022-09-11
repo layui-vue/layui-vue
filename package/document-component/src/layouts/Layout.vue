@@ -120,7 +120,9 @@
                   <lay-color-picker
                     v-model="appStore.themeVariable['--global-neutral-color-8']"
                   ></lay-color-picker>
-                  <lay-button :fluid="true" border="green" border-style="dashed">重置配置</lay-button>
+                  <lay-button :fluid="true" border="green" border-style="dashed"
+                    >重置配置</lay-button
+                  >
                 </div>
               </template>
             </lay-dropdown>

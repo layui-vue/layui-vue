@@ -4,15 +4,15 @@
 <br>
   <p>
     <a href="http://layui-vue.pearadmin.com" style="margin-left:30px;">
-      <img src="https://unpkg.com/outeres@0.0.6/img/layui/icon-1.png" alt="layui" width="105" style="border-radius:4px;">
+      <img src="https://unpkg.com/outeres@0.0.6/img/layui/icon-1.png" alt="layui" width="100" style="border-radius:4px;">
     </a>
     <span style="font-size:32px;color:#e2e2e2;margin:30px;">+</span>
-    <a href="http://layui-vue.pearadmin.com">
-      <img src="https://qn.antdv.com/vue.png" alt="layui" width="105" style="border-radius:4px;">
+    <a href="http://layui-vue.pearadmin.com" style="display:inline-block;">
+      <img src="https://qn.antdv.com/vue.png" alt="layui" width="100" style="border-radius:4px;">
     </a>
     <span style="font-size:32px;color:#e2e2e2;margin:30px;">=</span>
-    <a href="http://layui-vue.pearadmin.com">
-      <img src="../../../assets/logo.jpg" alt="layui" width="105" style="border-radius:4px;">
+    <a href="http://layui-vue.pearadmin.com" style="display:inline-block;">
+      <img src="../../../assets/logo.jpg" alt="layui" width="100" style="border-radius:4px;">
     </a>
   </p>
 <br>
@@ -51,7 +51,7 @@ createApp(App).use(Layui).mount('#app')
 npm install -D unplugin-vue-components unplugin-auto-import
 ```
 
-::: describe 然后修改你的 vite.config.js 或 vue.config.js 的配置。 
+::: describe 然后修改 vite.config.js 或 vue.config.js 的配置。 
 :::
 
 ```js

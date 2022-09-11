@@ -544,7 +544,7 @@ const handleFocusout = () => {
 const handleContextHide = () => {
   hide();
   dropdownCtx?.hide();
-}
+};
 
 const addChildRef = (ref: any) => {
   childrenRefs.add(ref);

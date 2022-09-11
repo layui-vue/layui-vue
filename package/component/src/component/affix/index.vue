@@ -11,7 +11,15 @@ export default {
 </script>
 <script setup lang="ts">
 import "./index.less";
-import { ref, onMounted, onUnmounted, nextTick, computed, reactive, StyleValue } from "vue";
+import {
+  ref,
+  onMounted,
+  onUnmounted,
+  nextTick,
+  computed,
+  reactive,
+  StyleValue,
+} from "vue";
 export interface LayAiffxProps {
   offset?: number;
   target?: HTMLElement;
