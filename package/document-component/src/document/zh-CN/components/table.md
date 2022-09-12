@@ -1394,7 +1394,8 @@ export default {
       :columns="columns5" 
       :expand-index="1" 
       :data-source="dataSource5" 
-      :checkbox="checkbox5" :page="page5" 
+      :checkbox="checkbox5" 
+      :page="page5" 
       :default-toolbar="defaultToolbar5"
       v-model:selected-keys="selectedKeys5"  
       @row="rowClick5">
@@ -1403,6 +1404,7 @@ export default {
       <lay-button size="sm">删除</lay-button>
     </template>
     <template v-slot:name="{ data }"> {{data.name}} </template>
+    <template v-slot:remark="{ data }"> {{data.remark}} </template>
     <template v-slot:name-title>😊</template>
     <template v-slot:birthday="{ data }"> {{data.birthday}} </template>
     <template v-slot:operator="{ data }">
@@ -1457,8 +1459,9 @@ export default {
       },
       {
         title:"备注",
-        width: "300px",
+        width: "100px",
         key:"remark",
+        customSlot:"remark",
         ellipsisTooltip: true,
       }
       ,{

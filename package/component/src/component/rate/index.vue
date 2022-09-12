@@ -5,7 +5,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed, ref, withDefaults } from "vue";
+import { computed, ref, watch, withDefaults } from "vue";
 import "./index.less";
 
 export interface LayRateProps {
@@ -47,6 +47,10 @@ const isHalf = computed(
   () => props.half && Math.round(currentValue.value) !== currentValue.value
 );
 
+watch(() => props.modelValue, () => {
+  currentValue.value = props.modelValue;
+  tempValue.value = props.modelValue;
+})
 // 计算评分星值
 const getValue = function (index: number, event: any): number {
   if (!props.half) {

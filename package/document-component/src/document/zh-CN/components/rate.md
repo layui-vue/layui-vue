@@ -17,12 +17,16 @@
 </template>
 
 <script>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 
 export default {
   setup() {
 
      const all1 = ref(0)
+
+    onMounted(() => {
+      all1.value = 4
+    })
 
     return {
       all1
