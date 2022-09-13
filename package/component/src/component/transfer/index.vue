@@ -166,22 +166,22 @@ const remove = () => {
 };
 
 const searchLeft = (e: any) => {
-  if (e.target.value === "") {
+  if (e === "") {
     leftDataSource.value = _leftDataSource.value;
   }
   leftDataSource.value = _leftDataSource.value.filter((item) => {
-    if (item.title.indexOf(e.target.value) != -1) {
+    if (item.title.indexOf(e) != -1) {
       return item;
     }
   });
 };
 
 const searchRight = (e: any) => {
-  if (e.target.value === "") {
+  if (e === "") {
     rightDataSource.value = _rightDataSource.value;
   }
   rightDataSource.value = _rightDataSource.value.filter((item) => {
-    if (item.title.indexOf(e.target.value) != -1) {
+    if (item.title.indexOf(e) != -1) {
       return item;
     }
   });

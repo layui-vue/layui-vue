@@ -47,10 +47,13 @@ const isHalf = computed(
   () => props.half && Math.round(currentValue.value) !== currentValue.value
 );
 
-watch(() => props.modelValue, () => {
-  currentValue.value = props.modelValue;
-  tempValue.value = props.modelValue;
-})
+watch(
+  () => props.modelValue,
+  () => {
+    currentValue.value = props.modelValue;
+    tempValue.value = props.modelValue;
+  }
+);
 // 计算评分星值
 const getValue = function (index: number, event: any): number {
   if (!props.half) {
