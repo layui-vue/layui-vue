@@ -3,15 +3,15 @@
 
 <br>
   <p>
-    <a href="http://layui-vue.pearadmin.com" style="margin-left:30px;">
+    <a href="http://www.layui-vue.com" style="margin-left:30px;">
       <img src="https://unpkg.com/outeres@0.0.6/img/layui/icon-1.png" alt="layui" width="100" style="border-radius:4px;">
     </a>
     <span style="font-size:32px;color:#e2e2e2;margin:30px;">+</span>
-    <a href="http://layui-vue.pearadmin.com" style="display:inline-block;">
+    <a href="http://www.layui-vue.com" style="display:inline-block;">
       <img src="https://qn.antdv.com/vue.png" alt="layui" width="100" style="border-radius:4px;">
     </a>
     <span style="font-size:32px;color:#e2e2e2;margin:30px;">=</span>
-    <a href="http://layui-vue.pearadmin.com" style="display:inline-block;">
+    <a href="http://www.layui-vue.com" style="display:inline-block;">
       <img src="../../../assets/logo.jpg" alt="layui" width="100" style="border-radius:4px;">
     </a>
   </p>
@@ -70,7 +70,7 @@ export default {
   ],
 }
 ```
-::: describe Resolver 选项配置。 
+::: describe Resolver 解析器选项配置。 
 :::
 
 ```ts
@@ -129,12 +129,30 @@ app.mount('#app')
 :::
 
 ```html
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <!-- Import style -->
-  <link rel="stylesheet" href="//unpkg.com/@layui/layui-vue/lib/index.css" />
-  <!-- Import Vue 3 -->
-  <script src="//unpkg.com/vue@3"></script>
-  <!-- Import component library -->
-  <script src="//unpkg.com/@layui/layui-vue"></script>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="//unpkg.com/@layui/layui-vue/lib/index.css" />
+    <script src="//unpkg.com/vue@3"></script>
+    <script src="//unpkg.com/@layui/layui-vue"></script>
 </head>
+<body>
+    <div id="app">
+        <lay-button type="primary">{{ message }}</lay-button>
+    </div>
+    <script>
+        const App = {
+            data() {
+                return {
+                    message: "Hello World"
+                };
+            },
+        };
+        const app = Vue.createApp(App);
+        app.use(LayuiVue);
+        app.mount("#app");
+    </script>
+</body>
+</html>
 ```

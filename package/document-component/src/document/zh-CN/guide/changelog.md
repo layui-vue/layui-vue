@@ -11,10 +11,20 @@
 <template>
 <lay-timeline>
   <lay-timeline-item title="1.4.x">
+      <ul> 
+      <a name="1-4-13"></a> 
+      <li> 
+        <h3>1.4.13 <span class="layui-badge-rim">2022-09-14</span></h3> 
+        <ul>     
+          <li>[修复] rate 组件 modelValue 值缺少响应式的问题。</li>
+          <li>[修复] transfer 组件 showSearch 为 true 时, 无法搜索的问题。</li>
+        </ul>
+      </li>
+    </ul>
     <ul> 
       <a name="1-4-12"></a> 
       <li> 
-        <h3>1.4.12 <span class="layui-badge-rim">2022-09-10</span></h3> 
+        <h3>1.4.12 <span class="layui-badge-rim">2022-09-11</span></h3> 
         <ul>     
           <li>[新增] timeline 组件 title 插槽, 支持自定义标题。</li>
           <li>[新增] form-item 组件 requiredErrorMessage 属性, 允许用户自定义必填提示。</li>
