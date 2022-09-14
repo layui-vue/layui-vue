@@ -20,7 +20,7 @@ export interface LayTransferProps {
   height?: string;
   showSearch?: BooleanOrString;
   dataSource: Recordable[];
-  selectedKeys?: Recordable[];
+  modelValue?: Recordable[];
 }
 
 const slots = useSlots();
@@ -30,7 +30,7 @@ const props = withDefaults(defineProps<LayTransferProps>(), {
   title: () => ["主列表", "副列表"],
   dataSource: () => [],
   showSearch: false,
-  selectedKeys: () => [],
+  modelValue: () => [],
   width: "200px",
   height: "360px",
 });
@@ -54,7 +54,6 @@ const allLeftChange = (isChecked: boolean) => {
     const ids = datasources.map((item) => {
       return item[props.id];
     });
-    console.log(JSON.stringify(ids));
     leftSelectedKeys.value = [...ids];
   } else {
     leftSelectedKeys.value = [];
@@ -89,7 +88,6 @@ const allRightChange = (checked: any) => {
     const ids = datasources.map((item) => {
       return item[props.id];
     });
-    console.log(JSON.stringify(ids));
     rightSelectedKeys.value = [...ids];
   } else {
     rightSelectedKeys.value = [];
