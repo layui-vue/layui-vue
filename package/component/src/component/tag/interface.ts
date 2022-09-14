@@ -1,11 +1,3 @@
-export const TAG_COLORS = [
-  "red",
-  "orange",
-  "green",
-  "cyan",
-  "blue",
-  "black",
-  "gray",
-] as const;
+export const TAG_COLORS = ["primary", "normal", "warm", "danger"] as const;
 
-export type TagColor = typeof TAG_COLORS[number];
+export type tagType = typeof TAG_COLORS[number];

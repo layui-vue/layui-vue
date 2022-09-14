@@ -15,7 +15,6 @@
 <template>
 <lay-space size="md">
   <lay-tag>标签</lay-tag>
-  <lay-tag bordered color="#FFF">标签</lay-tag>
   <lay-tag closable>标签</lay-tag>
   <lay-tag closable disabled>标签</lay-tag>
   <lay-tag closable max-width="120px" title="超过设置长度省略文本">超过设置长度省略文本</lay-tag>
@@ -126,37 +125,37 @@
 ::: title 标签颜色
 :::
 
-::: demo 标签颜色, 非内置颜色只支持默认样式, plain 默认有边框。
+::: demo 标签颜色
 
 <template>
 <lay-space direction="vertical" size="md">
-  default:
+  dark:
   <lay-space size="md">
-    <lay-tag v-for="color in TAG_COLORS" :color="color">标签</lay-tag>
-  </lay-space>
-  <lay-space size="md">
-    <lay-tag v-for="color in TAG_COLORS" :color="color" bordered closable>标签</lay-tag>
+    <lay-tag v-for="type in TAG_TYPES" :type="type">标签</lay-tag>
+    <lay-tag v-for="type in TAG_TYPES" :type="type" :bordered="false" closable>标签</lay-tag>
   </lay-space>
   light:
   <lay-space size="md">
-    <lay-tag v-for="color in TAG_COLORS" :color="color" variant="light">标签</lay-tag>
-  </lay-space>
-  <lay-space size="md">
-    <lay-tag v-for="color in TAG_COLORS" :color="color" variant="light" bordered closable>标签</lay-tag>
+    <lay-tag v-for="type in TAG_TYPES" :type="type" variant="light">标签</lay-tag>
+    <lay-tag v-for="type in TAG_TYPES" :type="type" variant="light" :bordered="false" closable>标签</lay-tag>
   </lay-space>
   plain:
   <lay-space size="md">
-    <lay-tag v-for="color in TAG_COLORS" :color="color" variant="plain">标签</lay-tag>
-  </lay-space>
-  <lay-space size="md">
-    <lay-tag v-for="color in TAG_COLORS" :color="color" variant="plain" bordered closable>标签</lay-tag>
+    <lay-tag v-for="type in TAG_TYPES" :type="type" variant="plain">标签</lay-tag>
+    <lay-tag v-for="type in TAG_TYPES" :type="type" variant="plain" :bordered="false" closable>标签</lay-tag>
   </lay-space>
   custom:
-  <lay-space size="md">
-    <lay-tag v-for="color in COLORS" :color="color" variant="plain">标签</lay-tag>
+    <lay-space size="md">
+    <lay-tag v-for="color in COLORS" :color="color" variant="dark">标签</lay-tag>
+    <lay-tag v-for="color in COLORS" :color="color" variant="dark" :bordered="false" closable>标签</lay-tag>
+  </lay-space>
+    <lay-space size="md">
+    <lay-tag v-for="color in COLORS" :color="color" variant="light">标签</lay-tag>
+    <lay-tag v-for="color in COLORS" :color="color" variant="light" :bordered="false" closable>标签</lay-tag>
   </lay-space>
   <lay-space size="md">
-    <lay-tag v-for="color in COLORS" :color="color" variant="plain" bordered closable>标签</lay-tag>
+    <lay-tag v-for="color in COLORS" :color="color" variant="plain">标签</lay-tag>
+    <lay-tag v-for="color in COLORS" :color="color" variant="plain" :bordered="false" closable>标签</lay-tag>
   </lay-space>
 </lay-space>
 </template>
@@ -167,21 +166,21 @@ import { ref } from 'vue'
 export default {
   setup() {
 
-  const TAG_COLORS = [
-  "red",
-  "orange",
-  "green",
-  "cyan",
-  "blue",
-  "black",
-  "gray",
+  const TAG_TYPES = [
+  "primary",
+  "normal",
+  "warm",
+  "danger",
 ];
 
 const COLORS = [
-  "#EEE",
-  "#67C23A",
-  "#0fc6c2",
-  "#165dff"
+  "#86909c",
+  "#9FDB1D",
+  "#14C9C9",
+  "#165DFF",
+  "#722ED1",
+  "#D91AD9",
+  "#F5319D",
 ];
 
     return {
@@ -214,19 +213,19 @@ const COLORS = [
 
 <template>
 <lay-space size="md">
-  <lay-tag bordered size="lg" color="#FFF">
+  <lay-tag size="lg">
     <template #icon>
       <lay-icon type="layui-icon-vercode" />
     </template>
     tag
   </lay-tag>
-  <lay-tag bordered size="lg" color="#FFF">
+  <lay-tag size="lg">
     <template #icon>
       <lay-icon type="layui-icon-login-qq" />
     </template>
     tag
   </lay-tag>
-  <lay-tag bordered size="lg" color="#FFF">
+  <lay-tag size="lg">
     <template #icon>
       <lay-icon type="layui-icon-star-fill" />
     </template>
@@ -342,11 +341,12 @@ export default {
 
 | 属性        | 描述     | 类型    | 默认值    | 可选值                             |
 | ----------- | -------- | ------ | ------ | ------ |
+| type        | 标签类型  | string | -| `primary` `normal` `warm` `danger`
 | size | 标签大小 | string | md | `lg` `md` `sm` `xs`|
-| color | 标签颜色 | string | `#EEE`| `red` `orange` `green` `cyan` `blue` `black` `gray` `string` | 
-| bordered | 是否显示边框 | boolean | false | `true` `false`|
+| color | 自定义标签颜色 | string | -| - | 
+| bordered | 是否显示边框 | boolean | `true` | `true` `false`|
 | closable | 是否可关闭 | boolean | false | `true` `false`|
-| variant  | 标签风格  | string | `default` | `default` `light` `plain`|
+| variant  | 标签风格  | string | `dark` | `dark` `light` `plain`|
 | disabled | 禁用标签  | boolean | false | `true` `false`|
 | shape    | 标签类型  | string | square | `square` `round`|
 | maxWidth | 标签最大宽度 | string| -- | --|
