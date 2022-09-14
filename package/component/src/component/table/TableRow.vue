@@ -510,10 +510,7 @@ const radioProps = props.getRadioProps(props.data, props.index);
                 @click="handleExpand"
               ></lay-icon>
 
-              <lay-tooltip
-                v-if="column.ellipsisTooltip"
-                :isAutoShow="true"
-              >
+              <lay-tooltip v-if="column.ellipsisTooltip" :isAutoShow="true">
                 <slot :name="column.customSlot" :data="data"></slot>
                 <template #content>
                   <slot :name="column.customSlot" :data="data"></slot>

@@ -35,7 +35,7 @@ import {
   shallowRef,
   computed,
   toRef,
-  StyleValue
+  StyleValue,
 } from "vue";
 import { onClickOutside, useEventListener, useThrottleFn } from "@vueuse/core";
 
