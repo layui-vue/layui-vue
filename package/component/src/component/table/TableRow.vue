@@ -512,10 +512,12 @@ const radioProps = props.getRadioProps(props.data, props.index);
 
               <lay-tooltip
                 v-if="column.ellipsisTooltip"
-                :content="data[column.key]"
                 :isAutoShow="true"
               >
                 <slot :name="column.customSlot" :data="data"></slot>
+                <template #content>
+                  <slot :name="column.customSlot" :data="data"></slot>
+                </template>
               </lay-tooltip>
               <slot v-else :name="column.customSlot" :data="data"></slot>
             </td>

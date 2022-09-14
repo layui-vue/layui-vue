@@ -1388,124 +1388,180 @@ export default {
 ::: demo 使用了绝大部分属性的 table 案例
 
 <template>
-  <lay-table 
-      id="id" 
-      height="200px"
-      :columns="columns5" 
-      :expand-index="1" 
-      :data-source="dataSource5" 
-      :checkbox="checkbox5" 
-      :page="page5" 
-      :default-toolbar="defaultToolbar5"
-      v-model:selected-keys="selectedKeys5"  
-      @row="rowClick5">
-    <template v-slot:toolbar>
-      <lay-button size="sm" type="primary">新增</lay-button>
-      <lay-button size="sm">删除</lay-button>
-    </template>
-    <template v-slot:name="{ data }"> {{data.name}} </template>
-    <template v-slot:remark="{ data }"> {{data.remark}} </template>
-    <template v-slot:name-title>😊</template>
-    <template v-slot:birthday="{ data }"> {{data.birthday}} </template>
-    <template v-slot:operator="{ data }">
-      <lay-button size="xs">修改</lay-button>
-      <lay-button size="xs" type="primary">删除</lay-button>
-    </template>
-    <template v-slot:expand="{ data }"> 
-      <div style="height:100px;">
-        内容
-      </div>
-    </template>
+  <lay-table :columns="columns4" :data-source="dataSource4">
+        <template v-slot:name="{ data }">
+          {{ data.person != null ? data.person.name : '--' }}
+        </template>
+        <template v-slot:idcard="{ data }">
+          {{ data.person != null ? data.person.idcard : '--' }}
+        </template>
+        <template v-slot:bank_name="{ data }">
+          {{ data.person != null ? data.person.bank_name : '--' }}
+        </template>
+        <template v-slot:bank_no="{ data }">
+          {{ data.person != null ? data.person.bank_no : '--' }}
+        </template>
+        <template v-slot:alipay_account="{ data }">
+          {{
+            data.person != null
+              ? data.person.alipay_account != null
+                ? data.person.alipay_account
+                : '未配置支付宝账号'
+              : '--'
+          }}
+        </template>
+        <template v-slot:phone="{ data }">
+          {{ data.person != null ? data.person.phone : '--' }}
+        </template>
+        <template v-slot:status="{ data }">
+          <lay-badge v-if="data.status == 0">未发放</lay-badge>
+          <lay-badge v-else-if="data.status == 1" theme="orange">处理中</lay-badge>
+          <lay-badge v-else-if="data.status == 2">发放中</lay-badge>
+          <lay-badge v-else-if="data.status == 3" theme="blue">发放完成</lay-badge>
+          <lay-badge v-else-if="data.status == -1">发放失败</lay-badge>
+          <lay-badge v-else theme="orange">状态异常</lay-badge>
+        </template>
+        <template v-slot:pay_time="{ data }">
+          {{ data.pay_time != null ? data.pay_time : '--' }}
+        </template>
   </lay-table>
 </template>
 
-<script>
-import { ref, watch } from 'vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default {
-  setup() {
+const columns4 = [
+    {
+      fixed: 'left',
+      type: 'checkbox'
+    },
+    {
+      title: 'ID',
+      key: 'id',
+      width: '50px',
+      align: 'center'
+    },
+    {
+      title: '订单编号',
+      key: 'order_no',
+      width: '120px',
+      align: 'center',
+      ellipsisTooltip: true
+    },
+    {
+      title: '姓名',
+      key: 'name',
+      width: '120px',
+      align: 'center',
+      customSlot: 'name',
+      ellipsisTooltip: true
+    },
+    {
+      title: '身份证号码',
+      key: 'idcard',
+      width: '120px',
+      align: 'center',
+      customSlot: 'idcard',
+      ellipsisTooltip: true
+    },
+    {
+      title: '手机号码',
+      key: 'phone',
+      width: '120px',
+      align: 'center',
+      customSlot: 'phone',
+      ellipsisTooltip: true
+    },
+    {
+      title: '银行名称',
+      key: 'bank_name',
+      width: '120px',
+      align: 'center',
+      customSlot: 'bank_name',
+      ellipsisTooltip: true
+    },
+    {
+      title: '银行卡号',
+      key: 'bank_no',
+      width: '120px',
+      align: 'center',
+      customSlot: 'bank_no',
+      ellipsisTooltip: true
+    },
+    {
+      title: '支付宝账号',
+      key: 'alipay_account',
+      width: '120px',
+      align: 'center',
+      customSlot: 'alipay_account',
+      ellipsisTooltip: true
+    },
+    {
+      title: '结算金额（元）',
+      width: '120px',
+      key: 'money',
+      align: 'center',
+      ellipsisTooltip: true
+    },
+    {
+      title: '服务费（元）',
+      width: '100px',
+      key: 'service_charge',
+      align: 'center'
+    },
+    {
+      title: '申请时间',
+      width: '140px',
+      key: 'created_at',
+      align: 'center',
+      ellipsisTooltip: true
+    },
 
-    const selectedKeys5 = ref(['1'])
-    const checkbox5 = ref(true)
-    const defaultToolbar5 = ref(true)
-
-    const page5 = {
-      total: 100,
-      limit: 10,
-      current: 1
+    {
+      title: '发放状态',
+      width: '120px',
+      key: 'status',
+      align: 'center',
+      customSlot: 'status'
+    },
+    {
+      title: '发放时间',
+      width: '120px',
+      key: 'pay_time',
+      align: 'center',
+      customSlot: 'pay_time',
+      ellipsisTooltip: true
     }
+]
 
-    const columns5 = [
-      {
-        title: "序号",
-        fixed: "left",
-        type: "number",
-        width: "50px",
-      },
-      {
-        title:"姓名",
-        fixed:"left",
-        width:"200px",
-        titleSlot: "name-title",
-        customSlot:"name",
-        key:"name",
-        align: "left"
-      },
-      {
-        title:"年龄",
-        width: "300px",
-        key:"age",
-        ellipsisTooltip: true,
-      },
-      {
-        title:"备注",
-        width: "100px",
-        key:"remark",
-        customSlot:"remark",
-        ellipsisTooltip: true,
-      }
-      ,{
-        title:"操作",
-        width:"150px",
-        fixed:"right",
-        customSlot:"operator",
-        key:"operator"
-      }
-    ]
-
-    const dataSource5 = [
-      {id:"1", name:"小明", age:"18",remark: 'layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.'},
-      {id:"2", name:"小红", age:"20",remark: 'layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.'},
-      {id:"3", name:"小刚", age:"20",remark: 'layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.'},
-      {id:"4", name:"小李", age:"20",remark: 'layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.'},
-      {id:"5", name:"小柏", age:"20",remark: 'layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.'},
-      {id:"6", name:"小吉", age:"20",remark: 'layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.'}
-    ]
-
-    const rowClick5 = function(data) {
-      console.log(JSON.stringify(data))
-    }
-    
-    const rowDoubleClick5 = function(data) {
-      console.log(JSON.stringify(data))
-    }
-
-    watch(selectedKeys5, () => {
-      console.log("复选框监听:" + selectedKeys5.value);
-    })
-
-    return {
-      columns5,
-      dataSource5,
-      selectedKeys5,
-      checkbox5,
-      defaultToolbar5,
-      rowClick5,
-      rowDoubleClick5,
-      page5
-    }
-  }
-}
+const dataSource4 = [
+{"id":1,
+"appid":"wpdmbzljhdfbkbpgqwiy",
+"garden_id":11,
+"batch_no":"22090910255151523560045140",
+"order_no":"22090910215803185650",
+"person_id":2,
+"task_id":11,
+"money":"10.00",
+"service_charge":"0.01",
+"status":0,
+"pay_time":null,
+"created_at":"2022-09-09 11:14:49",
+"task":{
+"id":11,
+"name":"业务推广咨询",
+"task_no":"123"
+},
+"person":{
+"id":2,
+"name":"朱xx",
+"idcard":"3304021xxxxxxxxx",
+"phone":"13686xxxxxxxx4",
+"bank_name":"招商银行xxxxx支行",
+"bank_no":"621485xxxx",
+"alipay_account":null
+}}
+]
 </script>
 
 :::
