@@ -11,7 +11,7 @@
   "types": "types/index.d.ts",
   "style": "lib/index.css",
   "type": "module",
-  "keywords": [  
+  "keywords": [
     "vue",
     "vue-component",
     "component-library",
@@ -26,9 +26,9 @@
     "./es/": "./es/"
   },
   "scripts": {
-    "build": "npm run build:all && npm run build:es && npm run build:umd && npm run build:types",
+    "build": "npm run build:all && npm run build:es && npm run build:umd",
     "build:es": "vite build --emptyOutDir --config ./script/build.es.ts",
-    "build:all": "vite build --emptyOutDir --config ./script/build.all.ts",
+    "build:all": "rimraf types && vite build --emptyOutDir --config ./script/build.all.ts",
     "build:umd": "vite build --emptyOutDir --config ./script/build.umd.ts",
     "build:types": "rimraf types && tsc -d"
   },
@@ -41,7 +41,8 @@
     "@umijs/ssr-darkreader": "^4.9.45",
     "dayjs": "^1.11.0",
     "evtd": "^0.2.3",
-    "vue-i18n": "^9.1.10"
+    "vue-i18n": "^9.1.10",
+    "@ctrl/tinycolor": "^3.4.1"
   },
   "files": [
     "lib",

@@ -7,34 +7,30 @@ export default {
 import "./index.less";
 import { LayIcon } from "@layui/icons-vue";
 import { computed, ref } from "vue";
-import { TAG_COLORS, TagColor } from "./interface";
+import { TinyColor } from "@ctrl/tinycolor";
+import { TAG_COLORS, tagType } from "./interface";
 
 export interface LayTagProps {
-  color?: TagColor | string;
+  type?: tagType;
+  color?: string;
   closable?: boolean;
   size?: string;
   bordered?: boolean;
   disabled?: boolean;
   shape?: "square" | "round";
   maxWidth?: string;
-  variant?: "default" | "light" | "plain";
+  variant?: "dark" | "light" | "plain";
 }
 
 const props = withDefaults(defineProps<LayTagProps>(), {
-  color: "#EEE",
   size: "md",
   shape: "square",
-  variant: "default",
+  variant: "dark",
+  bordered: true,
 });
 
 const emit = defineEmits(["close", "check", "update:checked"]);
 
-const isBuiltInColor = computed(
-  () => props.color && TAG_COLORS.includes(props.color as any)
-);
-const isCustomColor = computed(
-  () => props.color && !TAG_COLORS.includes(props.color as any)
-);
 const visible = ref(true);
 
 const handleClose = (e: MouseEvent) => {
@@ -48,9 +44,10 @@ const classTag = computed(() => [
   `layui-tag-size-${props.size}`,
   `layui-tag-shap-${props.shape}`,
   {
-    [`layui-tag-${props.variant}-color-${props.color}`]: isBuiltInColor.value,
-    [`layui-tag-${props.variant}-bordered-${props.color}`]:
-      isBuiltInColor.value && props.bordered,
+    [`layui-tag-variant-${props.variant}`]: props.variant,
+    [`layui-tag-variant-${props.variant}-bordered`]: props.bordered,
+    [`layui-tag-${props.type}-bordered`]: props.bordered,
+    [`layui-tag-${props.type}`]: props.type,
     "layui-tag-bordered": props.bordered,
     "layui-tag-disabled": props.disabled,
     "layui-tag-ellipsis": props.maxWidth,
@@ -58,11 +55,51 @@ const classTag = computed(() => [
 ]);
 
 const styleTag = computed(() => [
-  isCustomColor.value ? { backgroundColor: props.color } : {},
   {
     "max-width": props.maxWidth ?? "unset",
+    ...useTagCustomStyle(props).value,
   },
 ]);
+
+function useTagCustomStyle(props: LayTagProps) {
+  return computed(() => {
+    let styles: Record<string, string> = {};
+
+    const tagColor = props.color;
+
+    if (tagColor) {
+      const color = new TinyColor(tagColor);
+      if (props.variant === "dark") {
+        const isDark = color.getBrightness() < 190;
+        const textColor = isDark ? "#FFF" : "#000000";
+        styles = {
+          "--layui-tag-bg-color": tagColor,
+          "--layui-tag-border-color": props.bordered ? tagColor : "transparent",
+          "--layui-tag-hover-color": tagColor,
+          "--layui-tag-text-color": textColor,
+        };
+      } else if (props.variant === "light") {
+        styles = {
+          "--layui-tag-bg-color": color.tint(90).toString(),
+          "--layui-tag-border-color": props.bordered
+            ? color.tint(50).toString()
+            : "transparent",
+          "--layui-tag-hover-color": color.tint(90).toString(),
+          "--layui-tag-text-color": tagColor,
+        };
+      } else if (props.variant === "plain") {
+        styles = {
+          "--layui-tag-bg-color": "transparent",
+          "--layui-tag-border-color": props.bordered ? tagColor : "transparent",
+          "--layui-tag-hover-color": "transparent",
+          "--layui-tag-text-color": tagColor,
+        };
+      }
+    }
+
+    return styles;
+  });
+}
 </script>
 <template>
   <span v-if="visible" :class="classTag" :style="styleTag">

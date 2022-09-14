@@ -1,13 +1,11 @@
  @tagColors: {
-   default: #EEE;
-   red: #ff5722;
-   orange: #ffb800;
-   green: #009688;
-   cyan: #2f4056;
-   blue: #1e9fff;
-   black: #000000;
-   gray: #808080;
+   primary: #009688;
+   normal: #1e9fff;
+   warm: #ffb800;
+   danger: #ff5722;
  }
+
+ @tagSizes: lg, md, sm, xs;
 
  @tag-size-default: 28px;
  @tag-size-default-font-size: 14px;
@@ -22,6 +20,10 @@
  @tag-border-width: 1px;
 
  .layui-tag {
+   --layui-tag-bg-color: #FFF;
+   --layui-tag-border-color: var(--global-neutral-color-5);
+   --layui-tag-hover-color: #FFF;
+   --layui-tag-text-color: currentColor;
    display: inline-flex;
    align-items: baseline;
    vertical-align: middle;
@@ -31,7 +33,8 @@
    padding: 0 8px;
    font-size: @tag-size-md-font-size;
    font-weight: 500;
-   color: currentColor;
+   color: var(--layui-tag-text-color);
+   background-color: var(--layui-tag-bg-color);
    border-width: @tag-border-width;
    border-style: solid;
    border-color: transparent;
@@ -42,7 +45,7 @@
    }
 
    &-bordered {
-     border-color: var(--global-neutral-color-5);
+     border-color: var(--layui-tag-border-color);
    }
 
    &-disabled {
@@ -78,45 +81,6 @@
      text-overflow: ellipsis
    }
 
-   &-size-lg {
-     height: @tag-size-lg;
-     font-size: @tag-size-lg-font-size;
-     line-height: @tag-size-lg;
-
-     .layui-icon {
-       font-size: @tag-size-lg-font-size;
-     }
-   }
-
-   &-size-md {
-     height: @tag-size-md;
-     font-size: @tag-size-md-font-size;
-     line-height: @tag-size-md;
-
-     .layui-icon {
-       font-size: @tag-size-md-font-size;
-     }
-   }
-
-   &-size-sm {
-     height: @tag-size-sm;
-     font-size: @tag-size-sm-font-size;
-     line-height: @tag-size-sm;
-
-     .layui-icon {
-       font-size: @tag-size-sm-font-size;
-     }
-   }
-
-   &-size-xs {
-     height: @tag-size-xs;
-     font-size: @tag-size-xs-font-size;
-     line-height: @tag-size-xs;
-
-     .layui-icon {
-       font-size: @tag-size-xs-font-size;
-     }
-   }
 
    & &-close-icon {
      margin-left: 4px;
@@ -131,46 +95,52 @@
      }
    }
 
+   each(@tagSizes, {
+     &-size-@{value} {
+       height: ~'@{tag-size-@{value}}';
+       font-size: ~'@{tag-size-@{value}-font-size}';
+       line-height: ~'@{tag-size-@{value}}';
+     }
+
+     .layui-icon {
+       font-size: ~'@{tag-size-@{value}-font-size}';
+     }
+
+   }) 
+   
    each(@tagColors, {
-     &-default {
-       &-color-@{key} {
-         color: #FFF;
-         background-color: @value;
-         border-color: transparent;
-       }
+   &-@{key} {
+     --layui-tag-bg-color: @value;
+     --layui-tag-border-color: transparent;
+     --layui-tag-hover-color: @value;
+     --layui-tag-text-color: contrast(@value, #FFF,#000000,60%);
 
-       &-bordered-@{key} {
-         border-color: saturate(@value, 10%);
-       }
-
-       &-checked-color-@{key} {
-         background-color: darken(@value, 10%);
-       }
-
+     &-bordered {
+       --layui-tag-border-color: @value;
      }
+   }
 
-     &-light {
-       &-color-@{key} {
-         color: @value;
-         background-color: fadeout(saturate(lighten(@value, 13%),5%),85%);
-         border-color: transparent;
-       }
+   &-@{key}.layui-tag-variant-light {
+     --layui-tag-bg-color: tint(@value, 90%);
+     --layui-tag-border-color: transparent;
+     --layui-tag-hover-color: tint(@value, 90%);
+     --layui-tag-text-color: @value;
 
-       &-bordered-@{key} {
-         border-color: fadeout(saturate(lighten(@value, 13%), 5%), 50%);
-       }
+     &-bordered {
+       --layui-tag-border-color: tint(@value, 50%);
      }
+   }
 
-     &-plain {
-       &-color-@{key} {
-         color: @value;
-         background-color: transparent;
-         border-color: @value;
-       }
+   &-@{key}.layui-tag-variant-plain {
+     --layui-tag-bg-color: transparent;
+     --layui-tag-hover-color: transparent;
+     --layui-tag-text-color: @value;
+     --layui-tag-border-color: transparent;
 
-       &-bordered-@{key} {
-         border-color: @value;
-       }
+     &-bordered {
+       --layui-tag-border-color: @value;
      }
-   })
+   }
+
+ })
  }

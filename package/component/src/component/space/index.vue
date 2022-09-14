@@ -13,7 +13,7 @@ import {
   VNodeNormalizedChildren,
 } from "vue";
 
-export type SpaceSize = "lg" | "md" | "sm" | "xs" | number | string;
+type SpaceSize = "lg" | "md" | "sm" | "xs" | number | string;
 
 export default defineComponent({
   name: "LaySpace",
