@@ -35,6 +35,8 @@ const props = withDefaults(defineProps<LayTransferProps>(), {
   height: "360px",
 });
 
+const emits = defineEmits(['update:modelValue','change'])
+
 const leftDataSource: Ref<any[]> = ref([...props.dataSource]);
 const rightDataSource: Ref<any[]> = ref([]);
 const _leftDataSource: Ref<any[]> = ref([...props.dataSource]);
@@ -59,6 +61,29 @@ const allLeftChange = (isChecked: boolean) => {
     leftSelectedKeys.value = [];
   }
 };
+
+watch(() => props.modelValue, () => {
+
+  let targetDataSource: any[] = [];
+
+  props.dataSource.forEach(ds => {
+    if(props.modelValue.includes(ds[props.id])) {
+      targetDataSource.push(ds);
+    }
+  })
+
+  leftDataSource.value = props.dataSource.filter(
+    (item) => !props.modelValue.includes(item[props.id])
+  );
+
+  _leftDataSource.value = props.dataSource.filter(
+    (item) => !props.modelValue.includes(item[props.id])
+  );
+  
+  rightDataSource.value = [...targetDataSource];
+  _rightDataSource.value = [...targetDataSource];
+
+}, {immediate: true})
 
 watch(
   leftSelectedKeys,
@@ -118,25 +143,26 @@ watch(
 );
 
 const add = () => {
+
   if (leftSelectedKeys.value.length === 0) {
     return;
   }
+
+  let targetKeys: any[] = [];
+
   leftDataSource.value.forEach((item) => {
-    if (leftSelectedKeys.value.indexOf(item.id) != -1) {
-      rightDataSource.value.push(item);
+    if (leftSelectedKeys.value.indexOf(item[props.id]) != -1) {
+      targetKeys.push(item[props.id]);
     }
   });
-  leftDataSource.value = leftDataSource.value.filter(
-    (item) => leftSelectedKeys.value.indexOf(item.id) === -1
-  );
-  _leftDataSource.value.forEach((item) => {
-    if (leftSelectedKeys.value.indexOf(item.id) != -1) {
-      _rightDataSource.value.push(item);
-    }
-  });
-  _leftDataSource.value = _leftDataSource.value.filter(
-    (item) => leftSelectedKeys.value.indexOf(item.id) === -1
-  );
+
+  rightDataSource.value.forEach((item) => {
+    targetKeys.push(item[props.id]);
+  })
+
+  emits("change", targetKeys)
+  emits("update:modelValue", targetKeys)
+
   leftSelectedKeys.value = [];
 };
 
@@ -144,22 +170,18 @@ const remove = () => {
   if (rightSelectedKeys.value.length === 0) {
     return;
   }
+
+  let targetKeys: any[] = [];
+
   rightDataSource.value.forEach((item) => {
-    if (rightSelectedKeys.value.indexOf(item.id) != -1) {
-      leftDataSource.value.push(item);
+    if (rightSelectedKeys.value.indexOf(item[props.id]) == -1) {
+      targetKeys.push(item[props.id]);
     }
   });
-  rightDataSource.value = rightDataSource.value.filter(
-    (item) => rightSelectedKeys.value.indexOf(item.id) === -1
-  );
-  _rightDataSource.value.forEach((item) => {
-    if (rightSelectedKeys.value.indexOf(item.id) != -1) {
-      _leftDataSource.value.push(item);
-    }
-  });
-  _rightDataSource.value = _rightDataSource.value.filter(
-    (item) => rightSelectedKeys.value.indexOf(item.id) === -1
-  );
+
+  emits("change", targetKeys)
+  emits("update:modelValue", targetKeys)
+
   rightSelectedKeys.value = [];
 };
 

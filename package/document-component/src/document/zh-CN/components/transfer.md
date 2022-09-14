@@ -13,7 +13,7 @@
 ::: demo 使用 `lay-transfer` 标签, 创建穿梭框
 
 <template>
-  <lay-transfer :dataSource="dataSource1"></lay-transfer>
+  <lay-transfer v-model="value1" :dataSource="dataSource1"></lay-transfer>
 </template>
 
 <script>
@@ -22,9 +22,11 @@ import { ref } from 'vue'
 export default {
   setup() {
 
+    const value1 = ref(['1']);
     const dataSource1 = [{id:'1', title:'易大师', disabled: true},{id:'2', title:'战争之王'}]
 
     return {
+      value1,
       dataSource1
     }
   }
@@ -39,7 +41,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-transfer :dataSource="dataSource2" :title="title"></lay-transfer>
+  <lay-transfer v-model="value2" :dataSource="dataSource2" :title="title"></lay-transfer>
 </template>
 
 <script>
@@ -48,10 +50,12 @@ import { ref } from 'vue'
 export default {
   setup() {
 
+    const value2 = ref([]);
     const dataSource2 = [{id:'1', title:'易大师'},{id:'2', title:'战争之王'}]
     const title = ['我喜欢的','我不喜欢的']
 
     return {
+      value2,
       dataSource2,
       title
     }
@@ -67,7 +71,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-transfer :dataSource="dataSource3">
+  <lay-transfer v-model="value3" :dataSource="dataSource3">
     <template v-slot:item="{ data }">
       {{data.id}}
     </template>
@@ -80,9 +84,11 @@ import { ref } from 'vue'
 export default {
   setup() {
 
+    const value3 = ref([]);
     const dataSource3 = [{id:'1', title:'易大师'},{id:'2', title:'战争之王'}]
 
     return {
+      value3,
       dataSource3
     }
   }
@@ -98,7 +104,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-transfer :dataSource="dataSource5" :showSearch="true"></lay-transfer>
+  <lay-transfer v-model="value5" :dataSource="dataSource5" :showSearch="true"></lay-transfer>
 </template>
 
 <script>
@@ -107,6 +113,7 @@ import { ref } from 'vue'
 export default {
   setup() {
 
+    const value5 = ref([]);
     const dataSource5 = [
       {id:'1', title:'无影剑'},
       {id:'2', title:'逸龙剑'},
@@ -118,6 +125,7 @@ export default {
     ]
     
     return {
+      value5,
       dataSource5
     }
   }
@@ -132,7 +140,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-transfer :dataSource="dataSource4"></lay-transfer>
+  <lay-transfer v-model="value4" :dataSource="dataSource4"></lay-transfer>
 </template>
 
 <script>
@@ -140,6 +148,8 @@ import { ref } from 'vue'
 
 export default {
   setup() {
+
+    const value4 = ref([]);
 
     const dataSource4 = [
       {id:'1', title:'无影剑'},
@@ -169,6 +179,7 @@ export default {
     ]
     
     return {
+      value4,
       dataSource4
     }
   }
@@ -183,7 +194,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-transfer :dataSource="dataSource5">
+  <lay-transfer v-model="value5" :dataSource="dataSource5">
     <template v-slot:leftFooter>左侧底部</template>
     <template v-slot:rightFooter>右侧底部</template>
   </lay-transfer>
@@ -194,6 +205,8 @@ import { ref } from 'vue'
 
 export default {
   setup() {
+
+    const value5 = ref([])
 
     const dataSource5 = [
       {id:'1', title:'无影剑'},
@@ -206,6 +219,7 @@ export default {
     ]
     
     return {
+      value5,
       dataSource5
     }
   }
