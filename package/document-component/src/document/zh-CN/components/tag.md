@@ -4,13 +4,13 @@
 ::: title 基本介绍
 :::
 
-::: describe 标签组件。
+::: describe 标签组件
 :::
 
 ::: title 基础使用
 :::
 
-::: demo 标签的基本用法。
+::: demo 标签的基本用法
 
 <template>
 <lay-space size="md">
@@ -29,7 +29,7 @@
 ::: title 标签尺寸
 :::
 
-::: demo 通过 size 属性控制标签尺寸。
+::: demo 通过 size 属性控制标签尺寸
 
 <template>
 <lay-space direction="vertical" size="md">
@@ -125,7 +125,7 @@
 ::: title 标签颜色
 :::
 
-::: demo 标签颜色
+::: demo 标签颜色, 通过 color 属性自定义颜色
 
 <template>
 <lay-space direction="vertical" size="md">
@@ -209,7 +209,7 @@ const COLORS = [
 ::: title 图标插槽
 :::
 
-::: demo 通过插槽自定义图标。
+::: demo 通过插槽自定义图标
 
 <template>
 <lay-space size="md">
@@ -252,7 +252,7 @@ const COLORS = [
 ::: title 动态编辑
 :::
 
-::: demo 标签的基本用法。
+::: demo
 
 <template>
   {{ tagData }}
@@ -341,15 +341,15 @@ export default {
 
 | 属性        | 描述     | 类型    | 默认值    | 可选值                             |
 | ----------- | -------- | ------ | ------ | ------ |
-| type        | 标签类型  | string | -| `primary` `normal` `warm` `danger`
-| size | 标签大小 | string | md | `lg` `md` `sm` `xs`|
-| color | 自定义标签颜色 | string | -| - | 
-| bordered | 是否显示边框 | boolean | `true` | `true` `false`|
-| closable | 是否可关闭 | boolean | false | `true` `false`|
-| variant  | 标签风格  | string | `dark` | `dark` `light` `plain`|
-| disabled | 禁用标签  | boolean | false | `true` `false`|
-| shape    | 标签类型  | string | square | `square` `round`|
-| maxWidth | 标签最大宽度 | string| -- | --|
+| type        | 标签类型  | `string` | -| `primary` `normal` `warm` `danger`
+| size | 标签大小 |`string` | `md` | `lg` `md` `sm` `xs`|
+| color | 自定义标签颜色 | `string` | -| - | 
+| bordered | 是否显示边框 | `boolean` | `true` | `true` `false`|
+| closable | 是否可关闭 | `boolean` | `false` | `true` `false`|
+| variant  | 标签风格  | `string` | `dark` | `dark` `light` `plain`|
+| disabled | 禁用标签  | `boolean` | `false` | `true` `false`|
+| shape    | 标签形状  | `string` | `square` | `square` `round`|
+| maxWidth | 标签最大宽度 | `string`| -- | --|
 
 :::
 
@@ -370,7 +370,7 @@ export default {
 :::table
 | 事件 | 描述 | 参数 |
 |------ |----------|-----------|
-| close | 关闭时触发 | e: MouseEvent |
+| close | 点击关闭图标时触发 | (e: MouseEvent) |
 :::
 
 ::: contributor tag

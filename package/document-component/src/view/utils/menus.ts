@@ -383,6 +383,12 @@ const menus = [
         subTitle: "affix",
         path: "/zh-CN/components/affix",
       },
+      {
+        id: 110,
+        title: "标签",
+        subTitle: "tag",
+        path: "/zh-CN/components/tag",
+      },
     ],
   },
   {
