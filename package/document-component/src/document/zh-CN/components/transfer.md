@@ -235,6 +235,7 @@ export default {
 
 | Name       | Description | Accepted Values |
 | ---------- | ----------- | --------------- |
+| modalValue (v-model) | 目标值    | --              |
 | dataSource | 数据来源    | --              |
 | title      | 标题        | --              |
 | id         | 主键        | --              |
@@ -254,6 +255,17 @@ export default {
 | item | 列表项      | { data }        |
 | leftFooter | 左侧盒子底部内容      | --      |
 | rightFooter | 右侧盒子底部内容      | --        |
+
+:::
+
+::: title Transfer 事件
+:::
+
+::: table
+
+| Name | Description | Accepted Values |
+| ---- | ----------- | --------------- |
+| change | 数据穿梭回调      | targetKeys        |
 
 :::
 

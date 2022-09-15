@@ -14,12 +14,14 @@
       <ul> 
       <a name="1-4-13"></a> 
       <li> 
-        <h3>1.4.13 <span class="layui-badge-rim">2022-09-14</span></h3> 
+        <h3>1.4.13 <span class="layui-badge-rim">2022-09-15</span></h3> 
         <ul>     
           <li>[新增] transfer 组件 modelValue (v-model) 属性。</li>
           <li>[新增] transfer 组件 change 事件, 在左右转移数据时回调。</li>
           <li>[修复] rate 组件 modelValue 值缺少响应式的问题。</li>
           <li>[修复] transfer 组件 showSearch 为 true 时, 无法搜索的问题。</li>
+          <li>[修复] menu 组件 横向模式 点击菜单项只能关闭当前层级的问题。</li>
+          <li>[优化] menu 组件 横向模式 子菜单的触发方式为 hover。</li>
         </ul>
       </li>
     </ul>
