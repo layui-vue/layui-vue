@@ -471,61 +471,47 @@ export default {
 
 :::
 
-::: title 其它属性
+::: title 跟随鼠标
 :::
 
 ::: demo
 
 <template>
-<lay-space>
-   <lay-dropdown placement="bottom-start" autoFitWidth updateAtScroll>
-    <lay-button type="primary">autoFitWidth</lay-button>
+  <lay-dropdown ref="dropdownRefEl" :trigger="['click','contextMenu']" alignPoint>
+    <div style="width:500px;height:300px;background-color:#eee"></div>
     <template #content>
-      <lay-dropdown-menu>
-        <lay-dropdown-menu-item>选项一</lay-dropdown-menu-item>
-        <lay-dropdown-menu-item>选项二1111111111111111111111</lay-dropdown-menu-item>
-        <lay-dropdown-menu-item>选项三</lay-dropdown-menu-item>
-      </lay-dropdown-menu>
+        <lay-dropdown-menu>
+          <lay-dropdown-menu-item>选项一</lay-dropdown-menu-item>
+          <lay-dropdown-menu-item>选项二</lay-dropdown-menu-item>
+          <lay-dropdown-menu-item>选项三</lay-dropdown-menu-item>
+        </lay-dropdown-menu>
     </template>
   </lay-dropdown>
-  <lay-dropdown placement="bottom-start" :autoFitMinWidth="false" updateAtScroll>
-    <lay-button type="primary">关闭 autoFitMinWidth</lay-button>
-    <template #content>
-      <lay-dropdown-menu>
-        <lay-dropdown-menu-item>选项一</lay-dropdown-menu-item>
-        <lay-dropdown-menu-item>选项二111111111</lay-dropdown-menu-item>
-        <lay-dropdown-menu-item>选项三</lay-dropdown-menu-item>
-      </lay-dropdown-menu> 
-    </template>
-  </lay-dropdown>
-  <lay-dropdown placement="bottom-start" updateAtScroll>
-    <lay-button type="primary">updateAtScroll</lay-button>
-    <template #content>
-      <lay-dropdown-menu>
-        <lay-dropdown-menu-item>选项一</lay-dropdown-menu-item>
-        <lay-dropdown-menu-item>选项二111111111</lay-dropdown-menu-item>
-        <lay-dropdown-menu-item>选项三</lay-dropdown-menu-item>
-      </lay-dropdown-menu> 
-    </template>
-  </lay-dropdown>
-  <lay-dropdown placement="bottom-start" updateAtScroll :contentOffset="8">
-    <lay-button type="primary">contentOffset: 8px</lay-button>
-    <template #content>
-      <lay-dropdown-menu>
-        <lay-dropdown-menu-item>选项一</lay-dropdown-menu-item>
-        <lay-dropdown-menu-item>选项二</lay-dropdown-menu-item>
-        <lay-dropdown-menu-item>选项三</lay-dropdown-menu-item>
-      </lay-dropdown-menu> 
-    </template>
-  </lay-dropdown>
-</lay-space>
 </template>
 
-<script setup>
-import { ref, computed } from 'vue'
+<script>
+import { ref, onMounted } from 'vue'
+
+export default {
+  setup() {
+    const dropdownRefEl = ref(null);
+    const handleScroll = () => {
+      dropdownRefEl.value.hide();
+    }
+
+    onMounted(() => {
+      const scrollEl =  document.querySelector(".layui-body")
+      scrollEl.addEventListener("scroll", handleScroll)
+    })
+    return {
+      dropdownRefEl
+    }
+  }
+}
 </script>
 
 :::
+
 
 ::: title Dropdown 属性
 :::
@@ -550,7 +536,9 @@ import { ref, computed } from 'vue'
 | mouseEnterDelay     | mouseEnter 事件延迟触发的时间, trigger hover 有效 | `number`  | `150`    | -                                               |
 | mouseLeaveDelay     | mouseLeave 事件延迟触发的时间, trigger hover 有效 | `number`  | `150`    | -                                               |
 | focusDelay          | focus 事件延迟触发的时间, trigger focus 有效      | `number`  | `150`    | -                                               |
-
+| alignPoint |跟随鼠标|`boolean`|`false`|`true` `false`|
+| contentClass| 弹出内容的类名  | `string`| -| -|
+| contentStyle| 弹出内容的样式  | `string` | - | -|
 
 :::
 

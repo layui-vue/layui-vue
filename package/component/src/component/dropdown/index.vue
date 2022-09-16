@@ -44,7 +44,7 @@ import {
   DropdownContext,
 } from "./interface";
 import TeleportWrapper from "../_components/teleportWrapper.vue";
-import { useFirstElement } from "./useFirstElement";
+import { useFirstElement, isScrollElement, getScrollElements } from "./util";
 import RenderFunction from "../_components/renderFunction";
 import { transformPlacement } from "./util";
 
@@ -67,11 +67,11 @@ export interface LayDropdownProps {
   mouseEnterDelay?: number;
   mouseLeaveDelay?: number;
   focusDelay?: number;
-  // 未完善,暂不开放
   alignPoint?: boolean;
-  popupContainer?: string | undefined;
   contentClass?: string | Array<string | object> | object;
   contentStyle?: StyleValue;
+  // wip
+  popupContainer?: string | undefined;
 }
 
 const props = withDefaults(defineProps<LayDropdownProps>(), {
@@ -443,25 +443,6 @@ const getContentOffset = (
         top: 0,
       };
   }
-};
-
-const isScrollElement = (element: HTMLElement) => {
-  return (
-    element.scrollHeight > element.offsetHeight ||
-    element.scrollWidth > element.offsetWidth
-  );
-};
-
-const getScrollElements = (container: HTMLElement | undefined) => {
-  const scrollElements: HTMLElement[] = [];
-  let element: HTMLElement | undefined = container;
-  while (element && element !== document.documentElement) {
-    if (isScrollElement(element)) {
-      scrollElements.push(element);
-    }
-    element = element.parentElement ?? undefined;
-  }
-  return scrollElements;
 };
 
 const handleScroll = useThrottleFn(() => {
