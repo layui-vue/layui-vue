@@ -18,13 +18,14 @@ import {
 
 import type { ComputedRef } from "vue";
 
-interface LayStepItemProps {
+export interface LayStepItemProps {
   space?: number;
 }
 
 const props = withDefaults(defineProps<LayStepItemProps>(), {
   space: 0,
 });
+
 const index = ref(-1);
 const parents: any = inject("laySplitPanel");
 const currentInstance: any = getCurrentInstance();

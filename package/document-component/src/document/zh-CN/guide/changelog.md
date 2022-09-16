@@ -11,7 +11,19 @@
 <template>
 <lay-timeline>
   <lay-timeline-item title="1.4.x">
-      <ul> 
+    <ul> 
+      <a name="1-4-14"></a> 
+      <li> 
+        <h3>1.4.14 <span class="layui-badge-rim">2022-09-17</span></h3> 
+        <ul>     
+          <li>[新增] tag 标签组件, 提供标注的功能。</li>
+          <li>[新增] dropdown 组件 contentClass 属性。</li>
+          <li>[修复] types 警告, 导致依赖项目 build 产生异常。</li>
+          <li>[升级] vueuse/core 9.2.0 版本。</li>
+        </ul>
+      </li>
+    </ul>
+    <ul> 
       <a name="1-4-13"></a> 
       <li> 
         <h3>1.4.13 <span class="layui-badge-rim">2022-09-15</span></h3> 
