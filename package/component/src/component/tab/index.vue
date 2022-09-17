@@ -26,6 +26,7 @@ import {
   h,
   createTextVNode,
   isVNode,
+  Fragment,
 } from "vue";
 import { useResizeObserver } from "@vueuse/core";
 import { TabData, TabInjectKey } from "./interface";
@@ -44,7 +45,6 @@ export interface LayTabProps {
 
 const slot = useSlots();
 const childrens: Ref<VNode[]> = ref([]);
-const slotsChange = ref(true);
 const tabMap = reactive(new Map<number, TabData>());
 
 const setItemInstanceBySlot = function (nodeList: VNode[]) {
@@ -266,16 +266,27 @@ const update = () => {
   }
 };
 
-const renderTabChild = (child: TabData) => {
-  if (child.slots?.title) {
-    return () => h("span", child.slots?.title && child.slots.title());
+const renderTabIcon = (attrs: Record<string, unknown>) => {
+  const tab = attrs.tabData as TabData;
+  if (typeof tab.icon === "function") {
+    return tab.icon();
+  } else if (typeof tab.icon === "string") {
+    return h(LayIcon, {
+      type: tab.icon,
+      style: "margin-right: 8px;",
+    });
   }
+};
 
-  if (typeof child.title === "function") {
-    // @ts-ignore
-    return () => child.title();
-  } else if (typeof child.title === "string") {
-    return () => createTextVNode(child.title as string);
+const renderTabTitle = (attrs: Record<string, unknown>) => {
+  const tab = attrs.tabData as TabData;
+  if (tab.slots?.title) {
+    return h(Fragment, tab.slots?.title && tab.slots.title());
+  }
+  if (typeof tab.title === "function") {
+    return tab.title();
+  } else if (typeof tab.title === "string") {
+    return createTextVNode(tab.title as string);
   }
 };
 
@@ -309,7 +320,6 @@ onMounted(() => {
 });
 
 provide("active", active);
-provide("slotsChange", slotsChange);
 </script>
 
 <template>
@@ -339,16 +349,23 @@ provide("slotsChange", slotsChange);
           :style="tabBarStyle"
         ></div>
         <li
-          v-for="(children, index) in tabItems"
-          :key="children.id"
-          :class="[children.id === active ? 'layui-this' : '']"
-          @click.stop="change(children.id)"
+          v-for="(child, index) in tabItems"
+          :key="child.id"
+          :class="[child.id === active ? 'layui-this' : '']"
+          @click.stop="change(child.id)"
         >
-          <RenderFunction :renderFunc="renderTabChild(children)" />
+          <span>
+            <RenderFunction
+              v-if="child['icon']"
+              :renderFunc="renderTabIcon"
+              :tabData="child"
+            />
+            <RenderFunction :renderFunc="renderTabTitle" :tabData="child" />
+          </span>
           <i
-            v-if="allowClose && children.closable != false"
+            v-if="allowClose && child.closable != false"
             class="layui-icon layui-icon-close layui-unselect layui-tab-close"
-            @click.stop="close(index, children.id)"
+            @click.stop="close(index, child.id)"
           ></i>
         </li>
       </ul>

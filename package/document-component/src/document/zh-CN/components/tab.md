@@ -36,63 +36,65 @@ export default {
 
 :::
 
-::: title 标题插槽
+::: title 图标
 :::
 
-::: demo 通过 `allow-close` 属性, 启用选项可关闭。
+::: demo 通过 `icon` 属性, 快速设置前置图标, 也可通过 title 插槽实现。
 
 <template>
   <lay-tab v-model="current11" :allow-close="true">
-    <lay-tab-item id="1">
-      <template #title>
-        <lay-icon type="layui-icon-console"></lay-icon>
-        <span style="margin-left:10px">选项一</span>
-      </template>
+    <lay-tab-item id="1" title="选项一">
       <div style="padding:20px">选项一</div>
     </lay-tab-item>
-    <lay-tab-item id="2">
-      <template #title>
-        <lay-icon type="layui-icon-user"></lay-icon>
-        <span style="margin-left:10px">选项二</span>
-      </template>
+    <lay-tab-item id="2" title="选项二" icon="layui-icon-console">
       <div style="padding:20px">选项二</div>
     </lay-tab-item>
-    <lay-tab-item id="3">
-      <template #title>
-        <lay-icon type="layui-icon-set"></lay-icon>
-        <span style="margin-left:10px">选项三</span>
-      </template>
+    <lay-tab-item id="3" title="选项三" :icon="renderIconFunc">
       <div style="padding:20px">选项三</div>
     </lay-tab-item>
-    <lay-tab-item id="4" :title="renderTitleFunc">
+    <lay-tab-item id="4">
+      <template #title>
+        选项四
+        <lay-icon type="layui-icon-set" style="margin-left:8px"></lay-icon>
+      </template>
       <div style="padding:20px">选项四</div>
+    </lay-tab-item>
+    <lay-tab-item id="5" :title="renderTitleFunc">
+      <div style="padding:20px">选项五</div>
     </lay-tab-item>
   </lay-tab>
 </template>
 
 <script>
-import { ref,h , resolveComponent} from 'vue'
+import { ref,h , Fragment,resolveComponent} from 'vue'
 
 export default {
   setup() {
     const LayIcon = resolveComponent("LayIcon");
 
     const current11 = ref("1")
+
+    const renderIconFunc = () => h("span", {
+      style: "margin-right: 8px;"
+    },"🚧");
+
     const renderTitleFunc = () => [
       h(LayIcon, 
       {
         type: "layui-icon-component",
+        style: "margin-right: 8px;",
       }),
       h("span", 
       {
-        style: "margin-left: 10px; color: red",
+        style: "color: red",
       },
-      "选项四")
+      "选项五"),
     ]
 
     return {
       current11,
-      renderTitleFunc
+      renderTitleFunc,
+      renderIconFunc,
     }
   }
 }
@@ -418,7 +420,8 @@ export default {
 | 属性     | 描述                  | 类型             | 默认值  | 可选值         |
 | -------- | --------------------- | ---------------- | ------- | -------------- |
 | id       | 唯一标识              | `string`         | -       | -              |
-| title    | 头部标题,支持渲染函数 | `string` `vnode` | -       | -              |
+| title    | 头部标题 | `string` `VNode` | -       | -              |
+| icon     | 前置图标| `string` `VNode`
 | closable | 允许关闭              | `boolean`        | `false` | `true` `false` |
 
 :::

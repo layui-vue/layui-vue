@@ -21,6 +21,7 @@ import { TabInjectKey, TabsContext } from "../tab/interface";
 export interface LayTabItemProps {
   id: string;
   title?: string | Function;
+  icon?: string | Function;
   closable?: boolean | string;
 }
 
@@ -31,13 +32,12 @@ const props = withDefaults(defineProps<LayTabItemProps>(), {
 const instance = getCurrentInstance();
 const slots = useSlots();
 const active = inject("active");
-const slotsChange: Ref<boolean> = inject("slotsChange") as Ref<boolean>;
-slotsChange.value = !slotsChange.value;
 const tabsCtx = inject<Partial<TabsContext>>(TabInjectKey, {});
 
 const data = reactive({
   id: props.id,
   title: props.title,
+  icon: props.icon,
   closable: props.closable,
   slots: slots,
 });
