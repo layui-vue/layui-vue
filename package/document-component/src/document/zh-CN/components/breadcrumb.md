@@ -67,7 +67,7 @@ export default {
 ::: demo
 
 <template>
-    <lay-breadcrumb separator="--">
+    <lay-breadcrumb separator="-">
         <lay-breadcrumb-item>今天</lay-breadcrumb-item>
         <lay-breadcrumb-item>有些</lay-breadcrumb-item>
         <lay-breadcrumb-item>不开心</lay-breadcrumb-item>

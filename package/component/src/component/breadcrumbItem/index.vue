@@ -1,11 +1,6 @@
 <template>
-  <a href="javascript:void(0);">
-    <template v-if="slot.default">
-      <slot></slot>
-    </template>
-    <template v-else>
-      {{ title }}
-    </template>
+  <a href="javascript:void(0);" v-bind="$attrs">
+    <slot>{{ title }}</slot>
   </a>
   <span lay-separator>{{ separator }}</span>
 </template>
