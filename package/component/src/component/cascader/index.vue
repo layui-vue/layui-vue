@@ -111,6 +111,14 @@ watch(
     initTreeData();
   }
 );
+watch(
+  ()=>props.modelValue,
+  ()=>{
+    if(props.modelValue===null||props.modelValue===''){
+      onClear();
+    }
+  }
+);
 
 const treeData = ref<any>([]);
 const initTreeData = () => {
@@ -266,6 +274,7 @@ const dropDownDisabled = ref(false);
 
 //清除事件
 const onClear = () => {
+  displayValue.value='';
   dropDownDisabled.value = true;
   let arr = JSON.parse(JSON.stringify(treeData.value));
   for (let index = 0; index < arr.length; index++) {

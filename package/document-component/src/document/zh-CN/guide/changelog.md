@@ -14,6 +14,15 @@
     <ul> 
       <a name="1-4-14"></a> 
       <li> 
+        <h3>1.4.15 <span class="layui-badge-rim">2022-09-27</span></h3> 
+        <ul>     
+          <li>[修复] cascader 外部清空modelValue, 内部displayValue不清空问题。</li>
+        </ul>
+      </li>
+    </ul>
+    <ul> 
+      <a name="1-4-14"></a> 
+      <li> 
         <h3>1.4.14 <span class="layui-badge-rim">2022-09-17</span></h3> 
         <ul>     
           <li>[新增] tag 标签组件, 提供标注的功能。</li>
