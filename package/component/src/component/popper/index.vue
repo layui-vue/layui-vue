@@ -36,8 +36,14 @@ import {
   computed,
   toRef,
   StyleValue,
+  Ref,
 } from "vue";
-import { onClickOutside, useEventListener, useThrottleFn } from "@vueuse/core";
+import {
+  onClickOutside,
+  useEventListener,
+  useResizeObserver,
+  useThrottleFn,
+} from "@vueuse/core";
 
 export type PopperTrigger = "click" | "hover" | "focus" | "contextMenu";
 
@@ -209,18 +215,35 @@ onClickOutside(
   }
 );
 
+useResizeObserver(triggerRefEl, () => {
+  updatePosistion();
+});
+
+let popperObserver: { stop: any; isSupported?: Ref<boolean> } | undefined =
+  undefined;
+
+watch(innerVisible, (isShow) => {
+  updatePosistion();
+  if (isShow) {
+    popperObserver = useResizeObserver(popperRefEl, () => {
+      updatePosistion();
+    });
+  } else {
+    popperObserver && popperObserver.stop();
+  }
+});
+
 watch(
   () => props.visible,
   (isShow) => (isShow ? doShow() : doHidden())
 );
 
-watch(innerVisible, (val) => {
-  updatePosistion();
-});
-
-watch([() => props.content, () => slots.content && slots?.content()], (val) => {
-  innerVisible.value && updatePosistion();
-});
+watch(
+  () => props.content,
+  () => {
+    updatePosistion();
+  }
+);
 
 const isScrollElement = function (element: HTMLElement) {
   return (
