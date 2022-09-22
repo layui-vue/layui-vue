@@ -186,6 +186,12 @@ const menus = [
         path: "/zh-CN/components/select",
       },
       {
+        id: 39,
+        title: "标签输入框",
+        subTitle: "tagInput",
+        path: "/zh-CN/components/tagInput",
+      },
+      {
         id: 40,
         title: "颜色选择器",
         subTitle: "colorPicker",
