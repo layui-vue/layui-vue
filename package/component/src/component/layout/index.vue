@@ -7,6 +7,7 @@ export default {
 <script setup lang="ts">
 import { Component, computed, useSlots } from "vue";
 import Header from "../header/index.vue";
+import Footer from "../footer/index.vue";
 import "./index.less";
 
 export interface LayLayoutProps {
@@ -25,7 +26,7 @@ const isVertical = computed(() => {
   return vNodes.some((vNode) => {
     const componentName = (vNode.type as Component).name;
     if (!componentName) return false;
-    return [Header.name].includes(componentName);
+    return [Header.name].includes(componentName) || [Footer.name].includes(componentName);
   });
 });
 
