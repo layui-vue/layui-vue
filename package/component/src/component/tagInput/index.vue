@@ -62,7 +62,12 @@ const tagData = useVModel(props, "modelValue", emit, {
   deep: true,
   defaultValue: [] as TagData[],
 });
-const tagProps = reactiveOmit(props.tagProps ?? {}, 'closable','size', 'disabled')
+const tagProps = reactiveOmit(
+  props.tagProps ?? {},
+  "closable",
+  "size",
+  "disabled"
+);
 
 const computedTagData = computed(() => {
   if (!tagData.value) return;
@@ -199,7 +204,12 @@ defineExpose({
         v-for="(item, index) of computedTagData"
         :key="`${item}-${index}`"
       >
-        <LayTag v-bind="tagProps" :closable="!readonly && !disabled" :size="size" @close="handleClose(index)">
+        <LayTag
+          v-bind="tagProps"
+          :closable="!readonly && !disabled"
+          :size="size"
+          @close="handleClose(index)"
+        >
           {{ item }}
         </LayTag>
       </template>

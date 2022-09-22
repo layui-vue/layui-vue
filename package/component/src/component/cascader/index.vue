@@ -5,6 +5,7 @@
   >
     <lay-dropdown
       ref="dropdownRef"
+      :trigger="trigger"
       :autoFitMinWidth="false"
       :updateAtScroll="true"
       :disabled="dropDownDisabled"
@@ -73,6 +74,9 @@ import LayInput from "../input/index.vue";
 import LayScroll from "../scroll/index.vue";
 import LayDropdown from "../dropdown/index.vue";
 import { ref, onMounted, watch, useSlots } from "vue";
+
+export type DropdownTrigger = "click" | "hover" | "focus" | "contextMenu";
+
 export interface LayCascaderProps {
   options?: Array<any> | null;
   modelValue?: string;
@@ -82,6 +86,7 @@ export interface LayCascaderProps {
   replaceFields?: { label: string; value: string; children: string };
   allowClear?: boolean;
   size?: "lg" | "md" | "sm" | "xs";
+  trigger: DropdownTrigger | DropdownTrigger[]
 }
 const props = withDefaults(defineProps<LayCascaderProps>(), {
   options: null,
@@ -91,6 +96,7 @@ const props = withDefaults(defineProps<LayCascaderProps>(), {
   onlyLastLevel: false,
   allowClear: false,
   size: "md",
+  trigger: "click",
   replaceFields: () => {
     return {
       label: "label",
@@ -112,9 +118,9 @@ watch(
   }
 );
 watch(
-  ()=>props.modelValue,
-  ()=>{
-    if(props.modelValue===null||props.modelValue===''){
+  () => props.modelValue,
+  () => {
+    if (props.modelValue === null || props.modelValue === "") {
       onClear();
     }
   }
@@ -274,7 +280,7 @@ const dropDownDisabled = ref(false);
 
 //清除事件
 const onClear = () => {
-  displayValue.value='';
+  displayValue.value = "";
   dropDownDisabled.value = true;
   let arr = JSON.parse(JSON.stringify(treeData.value));
   for (let index = 0; index < arr.length; index++) {
