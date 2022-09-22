@@ -169,12 +169,16 @@ export default {
 
     const active4 = ref("1")
 
-    const arrays = ref([
+    const arrays = ref([])
+
+    setTimeout(() => {
+      arrays.value = [
       {id: "1", text: "1️⃣"},
       {id: "2", text: "2️⃣"},
       {id: "3", text: "3️⃣"},
       {id: "4", text: "4️⃣"}
-    ])
+    ]
+    },1000)
 
     return {
       active4,
@@ -199,6 +203,7 @@ export default {
 | arrow     | 切换按钮状态 | `string`      | `hover`        |`hover` `always` `none`   |
 | autoplay  | 自动播放     | `boolean`     | `true`         | `true` `false`           |
 | interval  | 轮播间隔     | `number`      | `3000`         |  --                  |
+| pauseOnHover| 鼠标悬停时暂停切换| `boolean`| `true`        | `true` `false`|
 
 :::
 
