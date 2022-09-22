@@ -21,7 +21,7 @@
           <li>[修复] cascader 外部清空modelValue, 内部displayValue不清空问题。</li>
           <li>[修复] tolltip 组件 content 自动定位。</li>
           <li>[修复] breadcrumb-item 组件无法正确传递 attrs 的问题。</li>
-          <li>[其他] ...</li>
+          <li>[优化] tag 组件 border background height 等默认样式。</li>
         </ul>
       </li>
     </ul>

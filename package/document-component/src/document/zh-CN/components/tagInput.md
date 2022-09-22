@@ -10,10 +10,10 @@
 ::: title 基础使用
 :::
 
-::: demo 使用 `lay-input` 标签, 创建输入框. FIXME 上游组件变动,已不适用,待重构
+::: demo 使用 `lay-tag-input` 标签, 创建标签输入框。  
 
 <template>
-  <lay-tag-input v-model="data1" v-model:inputValue="inputValue" style="width:60%"></lay-tag-input>
+  <lay-tag-input v-model="data1" v-model:inputValue="inputValue"></lay-tag-input>
 </template>
 
 <script>
