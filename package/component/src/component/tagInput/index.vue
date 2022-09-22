@@ -5,9 +5,18 @@ export default {
 </script>
 <script lang="ts" setup>
 import "./index.less";
-import Tag from "./Tag.vue";
+import LayTag, { LayTagProps } from "../tag/index.vue";
 import LayToopTip from "../tooltip/index.vue";
-import { onMounted, shallowRef, ref, watch, computed } from "vue";
+import {
+  onMounted,
+  shallowRef,
+  ref,
+  watch,
+  computed,
+  reactive,
+  nextTick,
+} from "vue";
+import { reactiveOmit, useResizeObserver, useVModel } from "@vueuse/core";
 
 export interface TagData {
   value?: string | number;
@@ -17,7 +26,7 @@ export interface TagData {
 }
 
 export interface LayInputTagProps {
-  modelValue?: TagData[];
+  modelValue?: (string | number | TagData)[];
   inputValue?: string;
   disabled?: boolean;
   placeholder?: string;
@@ -26,7 +35,8 @@ export interface LayInputTagProps {
   max?: number;
   minCollapsedNum?: number;
   collapseTagsTooltip?: boolean;
-  size?: "md" | "sm" | "xs";
+  size?: "lg" | "md" | "sm" | "xs";
+  tagProps?: LayTagProps;
 }
 
 const props = withDefaults(defineProps<LayInputTagProps>(), {
@@ -34,33 +44,60 @@ const props = withDefaults(defineProps<LayInputTagProps>(), {
   placeholder: "",
   readonly: false,
   allowClear: true,
-  minCollapsedNum: 10,
+  minCollapsedNum: 3,
+  size: "md",
   //max:3
 });
 
 const emit = defineEmits(["update:modelValue", "update:inputValue"]);
 
-const mirrorRef = shallowRef<HTMLElement | undefined>(undefined);
-const inputRef = shallowRef<HTMLElement | undefined>(undefined);
-
-const tagData = ref<TagData[]>(props.modelValue ?? []);
-const inputValue = ref<string>();
-const oldInputValue = ref<string>();
+const mirrorRefEl = shallowRef<HTMLElement | undefined>(undefined);
+const inputRefEl = shallowRef<HTMLInputElement | undefined>(undefined);
+const oldInputValue = ref<string>("");
+const compositionValue = ref<string>("");
+const isComposing = ref(false);
+const inputStyle = reactive({ width: "15px" });
+const inputValue = useVModel(props, "inputValue", emit, { defaultValue: "" });
+const tagData = useVModel(props, "modelValue", emit, {
+  deep: true,
+  defaultValue: [] as TagData[],
+});
+const tagProps = reactiveOmit(props.tagProps ?? {}, 'closable','size', 'disabled')
 
 const computedTagData = computed(() => {
+  if (!tagData.value) return;
   return props.minCollapsedNum
     ? tagData.value?.slice(0, props.minCollapsedNum)
     : tagData.value;
 });
 
 const collapsedTagData = computed(() => {
+  if (!tagData.value) return;
   return props.minCollapsedNum && tagData.value?.length > props.minCollapsedNum
     ? tagData.value?.slice(props.minCollapsedNum)
     : [];
 });
 
-const handleInputEnter = (e: KeyboardEvent) => {
-  e.preventDefault();
+const handleInput = function (event: Event) {
+  if (isComposing.value) {
+    return;
+  }
+  inputValue.value = (event.target as HTMLInputElement).value;
+};
+
+const handleComposition = (event: CompositionEvent) => {
+  if (event.type === "compositionend") {
+    isComposing.value = false;
+    compositionValue.value = "";
+    handleInput(event);
+  } else {
+    isComposing.value = true;
+    compositionValue.value = inputValue.value + (event.data ?? "");
+  }
+};
+
+const handleEnter = (event: KeyboardEvent) => {
+  event.preventDefault();
   const valueStr = inputValue.value ? String(inputValue.value).trim() : "";
   if (!valueStr || !tagData.value) return;
   const isLimit = props.max && tagData.value?.length >= props.max;
@@ -73,86 +110,137 @@ const handleInputEnter = (e: KeyboardEvent) => {
   }
 };
 
-const handlerInputBackspaceKeyUp = (e: KeyboardEvent) => {
+const handleBackspaceKeyUp = (event: KeyboardEvent) => {
   if (!tagData.value || !tagData.value.length) return;
-  if (!oldInputValue.value && ["Backspace", "Delete"].includes(e.code)) {
+  if (!oldInputValue.value && ["Backspace", "Delete"].includes(event.code)) {
     tagData.value = tagData.value.slice(0, -1);
   }
-  oldInputValue.value = inputValue.value;
+  oldInputValue.value = inputValue.value ?? "";
 };
 
-const handlerClearClick = (e: MouseEvent) => {
+const handleFocus = () => {
+  (inputRefEl.value as HTMLInputElement)?.focus();
+};
+
+const handleBlur = () => {
+  (inputRefEl.value as HTMLInputElement)?.blur();
+};
+
+const handleClearClick = (e: MouseEvent) => {
+  if (props.disabled || props.readonly || !props.allowClear) {
+    return;
+  }
   tagData.value = [];
 };
 
-const handlerClose = (index: number) => {
+const handleClose = (index: number) => {
   if (!tagData.value) return;
   const arr = [...tagData.value];
   arr.splice(index, 1);
   tagData.value = arr;
 };
 
-const handlerFocus = (e: MouseEvent) => {
-  (
-    (e.target as HTMLElement).querySelector(".layui-input") as HTMLInputElement
-  )?.focus();
+const setInputWidth = (width: number) => {
+  if (width > 15) {
+    inputStyle.width = `${width}px`;
+  } else {
+    inputStyle.width = "15px";
+  }
 };
 
-watch(tagData, (val) => {
-  emit("update:modelValue", val);
+const handleResize = () => {
+  if (mirrorRefEl.value) {
+    setInputWidth(mirrorRefEl.value.offsetWidth);
+  }
+};
+
+const cls = computed(() => [
+  `layui-tag-input`,
+  `layui-tag-input-${props.size}`,
+  {
+    "layui-tag-input-disabled": props.disabled,
+  },
+]);
+
+useResizeObserver(mirrorRefEl, () => {
+  handleResize();
 });
 
-watch(inputValue, (val) => {
-  emit("update:inputValue", val);
+watch(
+  () => inputValue.value,
+  (val) => {
+    if (inputRefEl.value && !isComposing.value) {
+      nextTick(() => {
+        inputRefEl.value!.value = val ?? "";
+      });
+    }
+  }
+);
+
+onMounted(() => {
+  handleResize();
 });
 
-onMounted(() => {});
+defineExpose({
+  focus: handleFocus,
+  blur: handleBlur,
+});
 </script>
 <template>
-  <lay-input
-    class="layui-input-tag"
-    v-model="inputValue"
-    :placeholder="placeholder"
-    :readonly="readonly"
-    @keydown.enter="handleInputEnter"
-    @keyup="handlerInputBackspaceKeyUp"
-    @click="handlerFocus"
-  >
-    <template #prefix>
+  <div :class="cls" @click="handleFocus">
+    <span ref="mirrorRefEl" class="layui-tag-input-mirror">
+      {{ compositionValue || inputValue || placeholder }}
+    </span>
+    <span v-if="$slots.prefix">
+      <slot name="prefix"></slot>
+    </span>
+    <span class="layui-tag-input-inner">
       <template
         v-for="(item, index) of computedTagData"
         :key="`${item}-${index}`"
       >
-        <Tag :closable="!readonly" @close="handlerClose(index)">
+        <LayTag v-bind="tagProps" :closable="!readonly && !disabled" :size="size" @close="handleClose(index)">
           {{ item }}
-        </Tag>
+        </LayTag>
       </template>
       <template v-if="computedTagData?.length != tagData?.length">
-        <LayToopTip :isDark="false">
-          <Tag key="more" :closable="false"
-            >+{{ tagData?.length - computedTagData?.length }}...</Tag
-          >
+        <LayToopTip :isDark="false" trigger="click" popperStyle="padding:6px">
+          <LayTag v-bind="tagProps" key="more" :closable="false" :size="size">
+            +{{tagData!.length - computedTagData!.length }}...
+          </LayTag>
           <template #content>
-            <div class="layui-input-tag-collapsed-panel">
-              <template
-                v-for="(item, index) of tagData"
+            <div class="layui-tag-input-collapsed-panel">
+              <LayTag
+                v-for="(item, index) of collapsedTagData"
                 :key="`${item}-${index}`"
+                v-bind="tagProps"
+                :closable="!readonly && !disabled"
+                :size="size"
+                @close="handleClose(index + (minCollapsedNum ?? 0))"
               >
-                <Tag
-                  v-if="index >= minCollapsedNum"
-                  :closable="!readonly"
-                  @close="handlerClose(index)"
-                >
-                  {{ item }}
-                </Tag>
-              </template>
+                {{ item }}
+              </LayTag>
             </div>
           </template>
         </LayToopTip>
       </template>
-    </template>
-    <template #suffix v-if="allowClear && tagData?.length">
-      <lay-icon type="layui-icon-close-fill" @click.stop="handlerClearClick" />
-    </template>
-  </lay-input>
+      <input
+        ref="inputRefEl"
+        class="layui-tag-input-inner-input"
+        :style="inputStyle"
+        :disabled="disabled"
+        :placeholder="placeholder"
+        :readonly="readonly"
+        @keydown.enter="handleEnter"
+        @keyup="handleBackspaceKeyUp"
+        @input="handleInput"
+        @compositionstart="handleComposition"
+        @compositionupdate="handleComposition"
+        @compositionend="handleComposition"
+      />
+    </span>
+    <span v-if="allowClear && tagData?.length" class="layui-tag-input-clear">
+      <lay-icon type="layui-icon-close-fill" @click.stop="handleClearClick" />
+    </span>
+  </div>
 </template>

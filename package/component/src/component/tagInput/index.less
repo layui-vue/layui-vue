@@ -1,65 +1,138 @@
-.layui-input-tag {
-  position: relative;
-  display: block;
+@import "../tag/index.less";
+@import "../popper/index.less";
+@import "../tooltip/index.less";
+
+@tag-input-lg: 44px;
+@tag-input-md: 38px;
+@tag-input-sm: 32px;
+@tag-input-xs: 26px;
+@tag-input-boeder: 1px;
+@tag-input-inner-padding-lg: 2px;
+@tag-input-inner-padding-md: 2px;
+@tag-input-inner-padding-sm: 1px;
+@tag-input-inner-padding-xs: 1px;
+@tag-margin-top-lg: 2px;
+@tag-margin-top-md: 2px;
+@tag-margin-top-sm: 1px;
+@tag-margin-top-xs: 1px;
+@tag-margin-bottom-lg: 2px;
+@tag-margin-bottom-md: 2px;
+@tag-margin-bottom-sm: 1px;
+@tag-margin-bottom-xs: 1px;
+
+.layui-tag-input {
+  display: inline-flex;
+  box-sizing: border-box;
+  width: auto;
+  border-width: @tag-input-boeder;
+  border-style: solid;
+  border-color: var(--input-border-color);
+  border-radius: var(--input-border-radius);
   padding: 0 5px;
-  height: auto;
-  overflow: hidden;
+  cursor: text;
 
-  .layui-input-prefix {
-    display: inline;
-    text-align: left;
-    height: 100%;
-    flex: unset;
-  }
-
-  .layui-input-suffix{
-    position: absolute;
-    right: 3px;
-    bottom: 0;
-    height: 100%;
-  }
-
-  .layui-input {
-    display: inline-block;
-    padding-left: 0;
-    width: auto;
+  &-inner {
     flex: 1;
-    max-width: 100%;
-    min-width: 12px;
+    overflow: hidden;
+    line-height: 0;
+    padding: @tag-input-inner-padding-md 0;
   }
-}
 
-.layui-input-tag-collapsed-panel,
-.layui-input-tag {
-  .layui-badge {
-    margin-right: 5px;
-    height: 28px;
-    line-height: 28px;
-    user-select: none;
-    white-space: pre-wrap;
+  &-mirror {
+    position: absolute;
+    top: 0;
+    left: 0;
+    white-space: pre;
+    visibility: hidden;
+    pointer-events: none;
+  }
 
-    .layui-icon {
-      font-size: 12px;
-      padding-left: 3px;
+  &-clear {
+    display: none;
+    align-items: center;
+    cursor: pointer;
+  }
 
-      &:hover {
-        cursor: pointer;
-        color: #ff5722;
-      }
+  &-clear:hover {
+    opacity: 0.5;
+  }
+
+  & &-inner-input {
+    box-sizing: border-box;
+    border: none;
+  }
+
+  &-disabled {
+    cursor: not-allowed;
+    opacity: 0.4;
+
+    .layui-tag-input-clear {
+      cursor: not-allowed;
+      opacity: 0.4;
     }
   }
+
+  .layui-tag {
+    margin-right: 5px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    white-space: pre-wrap;
+  }
+
+  &-collapsed-panel {
+    white-space: normal;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    width: fit-content;
+    max-width: 240px;
+    height: auto;
+    overflow: hidden;
+
+    .layui-tag {
+      margin-right: 5px;
+      margin-bottom: 4px;
+    }
+  }
+
+
+
+  .set-size(@size) {
+    @height: ~'tag-input-@{size}';
+    @tag-margin-top: ~'tag-margin-top-@{size}';
+    @tag-margin-bottom: ~'tag-margin-bottom-@{size}';
+    @inner-padding: ~'tag-input-inner-padding-@{size}';
+
+    &.layui-tag-input-@{size} {
+      min-height: @@height;
+
+      .layui-tag-input-inner-input {
+        height: @@height - (@@inner-padding + @tag-input-boeder)* 2;
+        vertical-align: middle;
+      }
+
+      .layui-tag-input-inner {
+        padding: @@inner-padding 0;
+      }
+
+      .layui-tag {
+        margin-top: @@tag-margin-top;
+        margin-bottom: @@tag-margin-bottom;
+      }
+
+    }
+  }
+
+  .set-size(lg);
+  .set-size(md);
+  .set-size(sm);
+  .set-size(xs);
 }
 
-.layui-input-tag-collapsed-panel {
-  white-space: normal;
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  width: fit-content;
-  max-width: 200px;
-  height: auto;
-  overflow: hidden;
-  .layui-badge{
-    margin-bottom: 4px;
+.layui-tag-input:hover,
+.layui-tag-input:focus-within {
+  border-color: #d2d2d2 !important;
+  .layui-tag-input-clear{
+    display: flex;
   }
 }
