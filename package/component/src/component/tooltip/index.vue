@@ -62,7 +62,7 @@ const props = defineProps({
     type: [String, Array, Object],
   },
   popperStyle: {
-    type: Object as PropType<StyleValue>,
+    type: [String, Object] as PropType<StyleValue>,
   },
 });
 const vm = getCurrentInstance()!;
