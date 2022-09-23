@@ -182,6 +182,12 @@ watch(
   }
 );
 
+const moreCount = computed(() => {
+  if(tagData.value && computedTagData.value) {
+    return tagData.value.length - computedTagData.value.length
+  }
+})
+
 onMounted(() => {
   handleResize();
 });
@@ -216,7 +222,7 @@ defineExpose({
       <template v-if="computedTagData?.length != tagData?.length">
         <LayToopTip :isDark="false" trigger="click" popperStyle="padding:6px">
           <LayTag v-bind="tagProps" key="more" :closable="false" :size="size">
-            +{{tagData!.length - computedTagData!.length }}...
+            +{{ moreCount }}...
           </LayTag>
           <template #content>
             <div class="layui-tag-input-collapsed-panel">

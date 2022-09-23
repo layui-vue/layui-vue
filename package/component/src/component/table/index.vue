@@ -660,7 +660,7 @@ onBeforeUnmount(() => {
       </div>
 
       <div class="layui-table-box-header" v-if="slot.header">
-        <slot name="header"></slot> 
+        <slot name="header"></slot>
       </div>
 
       <div class="layui-table-box">

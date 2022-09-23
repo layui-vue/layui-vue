@@ -6,11 +6,10 @@ export default {
 
 <script setup lang="ts">
 import LayCheckbox from "../checkbox/index.vue";
-import { SelectItem, SelectItemHandle, SelectItemPush } from "../../types";
-import { computed, inject, onMounted, Ref, ref } from "vue";
+import { computed, ComputedRef, inject, WritableComputedRef } from "vue";
 
 export interface LaySelectOptionProps {
-  value: string | null | undefined | number;
+  value: string | object;
   label: string;
   keyword?: string;
   disabled?: boolean;
@@ -22,67 +21,33 @@ const props = withDefaults(defineProps<LaySelectOptionProps>(), {
   label: "",
 });
 
-const selectItemHandle = inject("selectItemHandle") as SelectItemHandle;
-const selectItem = inject("selectItem") as Ref<SelectItem>;
-const selectItemPush = inject("selectItemPush") as Ref<SelectItemPush>;
-const keyword = inject("keyword") as Ref<string>;
+const selectedValue: WritableComputedRef<any> = inject("selectedValue") as WritableComputedRef<any>;
+const multiple: ComputedRef = inject("multiple") as ComputedRef;
 
-const selectHandle = function () {
-  !props.disabled && callSelectItemHandle(!selected.value);
-};
-const callSelectItemHandle = function (isChecked?: boolean) {
-  // console.log("callSelectItemHandle");
-  selectItemHandle(
-    {
-      value: props.value,
-      label: props.label,
-      disabled: props.disabled,
-    },
-    isChecked
-  );
-};
-const selected = computed({
-  get() {
-    const selectValues = selectItem.value.value;
-    if (Array.isArray(selectValues)) {
-      return (selectValues as any[]).indexOf(props.value) > -1;
-    }
-    return selectItem.value.value === props.value;
-  },
-  set(val) {},
-});
-const callSelectItemPush = function () {
-  let item = {
-    value: props.value,
-    label: props.label,
-    disabled: props.disabled,
-  };
-  // @ts-ignore
-  selectItemPush(item);
-};
-const search = ref("");
-onMounted(() => {
-  search.value = props.keyword || props.label;
-  callSelectItemPush();
-  selected.value && callSelectItemHandle();
+const handleSelect = () => {
+  if(!multiple.value) {
+    selectedValue.value = props.value;
+  }
+}
+
+const isSelected = computed(() => {
+  if (multiple.value) {
+    return selectedValue.value.indexOf(props.value) != -1;
+  } else {
+    return selectedValue.value === props.value;
+  }
 });
 </script>
 
 <template>
-  <dd
-    v-show="keyword ? search.includes(keyword) : true"
-    :value="value"
-    :class="[{ 'layui-this': selected }, { 'layui-disabled': disabled }]"
-    @click="selectHandle"
-  >
-    <template v-if="selectItem.multiple">
-      <lay-checkbox
-        skin="primary"
-        v-model="selected"
-        @change="selectHandle"
-        :value="props.value"
-      />
+  <dd class="layui-select-option" :class="{ 'layui-this': isSelected && !multiple }" @click="handleSelect">
+    <template v-if="multiple">
+      <lay-checkbox v-model="selectedValue" :value="value" skin="primary"
+        ><slot>{{ label }}</slot></lay-checkbox
+      >
     </template>
-    <slot>{{ label }}</slot>
+    <template v-else>
+      <slot>{{ label }}</slot>
+    </template>
   </dd>
 </template>

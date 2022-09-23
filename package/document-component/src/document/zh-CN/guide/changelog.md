@@ -19,6 +19,7 @@
           <li>[新增] tag-input 标签输入框组件。</li>
           <li>[新增] table 组件 header 插槽, 用于在工具栏与表格之间插入元素。</li>
           <li>[新增] tabitem 组件 icon 属性, 用于自定义 tab-item 图标。</li>
+          <li>[修复] layout 组件只引入了 footer 时, layui-layout-vertical样式不生效。</li>
           <li>[修复] cascader 外部清空modelValue, 内部displayValue不清空问题。</li>
           <li>[修复] tolltip 组件 content 自动定位。</li>
           <li>[修复] breadcrumb-item 组件无法正确传递 attrs 的问题。</li>

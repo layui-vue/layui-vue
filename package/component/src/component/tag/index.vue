@@ -8,7 +8,7 @@ import "./index.less";
 import { LayIcon } from "@layui/icons-vue";
 import { computed, ref } from "vue";
 import { TinyColor } from "@ctrl/tinycolor";
-import { TAG_COLORS, tagType } from "./interface";
+import { tagType } from "./interface";
 
 export interface LayTagProps {
   type?: tagType;
