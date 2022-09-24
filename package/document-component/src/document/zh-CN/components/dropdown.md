@@ -24,7 +24,7 @@
         </lay-dropdown-menu>
     </template>
   </lay-dropdown>
-  <lay-dropdown popupContainer=".layui-body>div">
+  <lay-dropdown>
     <lay-button type="primary">下拉菜单</lay-button>
     <template #content>
         <lay-dropdown-menu>

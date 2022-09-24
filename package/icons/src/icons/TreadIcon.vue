@@ -3,6 +3,7 @@ export default {
   name: "TreadIcon",
 };
 </script>
+
 <script setup lang="ts">
 import LayIcon from "../component/icon/index";
 
@@ -11,6 +12,7 @@ const props = defineProps<{
   size?: string;
 }>();
 </script>
+
 <template>
   <lay-icon :color="props.color" :size="props.size" type="layui-icon-tread" />
 </template>

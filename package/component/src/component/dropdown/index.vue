@@ -70,7 +70,6 @@ export interface LayDropdownProps {
   alignPoint?: boolean;
   contentClass?: string | Array<string | object> | object;
   contentStyle?: StyleValue;
-  // wip
   popupContainer?: string | undefined;
 }
 

@@ -26,7 +26,10 @@ const isVertical = computed(() => {
   return vNodes.some((vNode) => {
     const componentName = (vNode.type as Component).name;
     if (!componentName) return false;
-    return [Header.name].includes(componentName) || [Footer.name].includes(componentName);
+    return (
+      [Header.name].includes(componentName) ||
+      [Footer.name].includes(componentName)
+    );
   });
 });
 

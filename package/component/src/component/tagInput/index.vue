@@ -17,6 +17,7 @@ import {
   nextTick,
 } from "vue";
 import { reactiveOmit, useResizeObserver, useVModel } from "@vueuse/core";
+import { LayIcon } from "@layui/icons-vue";
 
 export interface TagData {
   value?: string | number;
@@ -29,6 +30,7 @@ export interface LayInputTagProps {
   modelValue?: (string | number | TagData)[];
   inputValue?: string;
   disabled?: boolean;
+  disabledInput?: boolean;
   placeholder?: string;
   readonly?: boolean;
   allowClear?: boolean;
@@ -41,12 +43,12 @@ export interface LayInputTagProps {
 
 const props = withDefaults(defineProps<LayInputTagProps>(), {
   disabled: false,
+  disabledInput: false,
   placeholder: "",
   readonly: false,
   allowClear: true,
   minCollapsedNum: 3,
   size: "md",
-  //max:3
 });
 
 const emit = defineEmits(["update:modelValue", "update:inputValue"]);
@@ -62,6 +64,7 @@ const tagData = useVModel(props, "modelValue", emit, {
   deep: true,
   defaultValue: [] as TagData[],
 });
+
 const tagProps = reactiveOmit(
   props.tagProps ?? {},
   "closable",
@@ -183,10 +186,10 @@ watch(
 );
 
 const moreCount = computed(() => {
-  if(tagData.value && computedTagData.value) {
-    return tagData.value.length - computedTagData.value.length
+  if (tagData.value && computedTagData.value) {
+    return tagData.value.length - computedTagData.value.length;
   }
-})
+});
 
 onMounted(() => {
   handleResize();
@@ -240,7 +243,8 @@ defineExpose({
           </template>
         </LayToopTip>
       </template>
-      <input
+      <template v-if="!disabledInput">
+        <input
         ref="inputRefEl"
         class="layui-tag-input-inner-input"
         :style="inputStyle"
@@ -254,6 +258,7 @@ defineExpose({
         @compositionupdate="handleComposition"
         @compositionend="handleComposition"
       />
+      </template>
     </span>
     <span v-if="allowClear && tagData?.length" class="layui-tag-input-clear">
       <lay-icon type="layui-icon-close-fill" @click.stop="handleClearClick" />

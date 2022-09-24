@@ -13,7 +13,7 @@
 ::: demo 使用 `lay-tag-input` 标签, 创建标签输入框。  
 
 <template>
-  <lay-tag-input v-model="data1" v-model:inputValue="inputValue"></lay-tag-input>
+  <lay-tag-input v-model="data1" v-model:inputValue="inputValue1"></lay-tag-input>
 </template>
 
 <script>
@@ -22,17 +22,65 @@ import { ref,watch } from 'vue'
 export default {
   setup() {
     const data1 = ref(['Vue', 'React']);
-    const inputValue = ref();
-    watch(data1, (val) => {
-      console.log("tagData",val)
-    })
-    watch(inputValue, (val) => {
-      console.log("inputValue",val)
-    })
+    const inputValue1 = ref("");
 
     return {
       data1,
-      inputValue
+      inputValue1
+    }
+  }
+}
+</script>
+
+:::
+
+::: title 只读状态
+:::
+
+::: demo 使用 `lay-tag-input` 标签, 创建标签输入框。  
+
+<template>
+  <lay-tag-input v-model="data3" v-model:inputValue="inputValue3" :readonly="true"></lay-tag-input>
+</template>
+
+<script>
+import { ref,watch } from 'vue'
+
+export default {
+  setup() {
+    const data3 = ref(['Vue', 'React']);
+    const inputValue3 = ref("");
+
+    return {
+      data3,
+      inputValue3
+    }
+  }
+}
+</script>
+
+:::
+
+::: title 禁用状态
+:::
+
+::: demo 使用 `lay-tag-input` 标签, 创建标签输入框。  
+
+<template>
+  <lay-tag-input v-model="data4" v-model:inputValue="inputValue4" :disabled="true"></lay-tag-input>
+</template>
+
+<script>
+import { ref,watch } from 'vue'
+
+export default {
+  setup() {
+    const data4 = ref(['Vue', 'React']);
+    const inputValue4 = ref("");
+
+    return {
+      data4,
+      inputValue4
     }
   }
 }
