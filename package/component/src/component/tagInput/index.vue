@@ -30,7 +30,6 @@ export interface LayInputTagProps {
   modelValue?: (string | number | TagData)[];
   inputValue?: string;
   disabled?: boolean;
-  disabledInput?: boolean;
   placeholder?: string;
   readonly?: boolean;
   allowClear?: boolean;
@@ -39,15 +38,12 @@ export interface LayInputTagProps {
   collapseTagsTooltip?: boolean;
   size?: "lg" | "md" | "sm" | "xs";
   tagProps?: LayTagProps;
+  disabledInput?: boolean;
 }
 
 const props = withDefaults(defineProps<LayInputTagProps>(), {
-  disabled: false,
-  disabledInput: false,
-  placeholder: "",
-  readonly: false,
-  allowClear: false,
-  minCollapsedNum: 3,
+  placeholder: undefined,
+  minCollapsedNum: 0,
   size: "md",
 });
 
@@ -223,7 +219,12 @@ defineExpose({
         </LayTag>
       </template>
       <template v-if="computedTagData?.length != tagData?.length">
-        <LayToopTip :isDark="false" trigger="click" popperStyle="padding:6px">
+        <LayToopTip
+          :isDark="false"
+          trigger="hover"
+          popperStyle="padding:6px"
+          :disabled="!collapseTagsTooltip"
+        >
           <LayTag v-bind="tagProps" key="more" :closable="false" :size="size">
             +{{ moreCount }}...
           </LayTag>
