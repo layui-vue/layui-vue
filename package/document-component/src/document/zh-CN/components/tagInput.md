@@ -87,3 +87,30 @@ export default {
 </script>
 
 :::
+
+::: title 禁用状态
+:::
+
+::: demo 使用 `lay-tag-input` 标签, 创建标签输入框。  
+
+<template>
+  <lay-tag-input v-model="data5" v-model:inputValue="inputValue5" :allow-clear="true"></lay-tag-input>
+</template>
+
+<script>
+import { ref,watch } from 'vue'
+
+export default {
+  setup() {
+    const data5 = ref(['Vue', 'React']);
+    const inputValue5 = ref("");
+
+    return {
+      data5,
+      inputValue5
+    }
+  }
+}
+</script>
+
+:::

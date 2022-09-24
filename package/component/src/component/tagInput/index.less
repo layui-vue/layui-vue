@@ -28,7 +28,6 @@
   border-style: solid;
   border-color: var(--input-border-color);
   border-radius: var(--input-border-radius);
-  padding: 0 5px;
   cursor: text;
 
   &-inner {
@@ -48,8 +47,11 @@
   }
 
   &-clear {
-    display: none;
+    flex: none;
+    display: flex;
     align-items: center;
+    padding-right: 10px;
+    color: rgba(0, 0, 0, 0.45);
     cursor: pointer;
   }
 
@@ -112,7 +114,7 @@
       }
 
       .layui-tag-input-inner {
-        padding: @@inner-padding 0;
+        padding: @@inner-padding 5px;
       }
 
       .layui-tag {
@@ -127,6 +129,13 @@
   .set-size(md);
   .set-size(sm);
   .set-size(xs);
+}
+
+.layui-tag-input-suffix {
+  display: flex;
+  flex: none;
+  align-items: center;
+  padding: 0 15px;
 }
 
 .layui-tag-input:hover,

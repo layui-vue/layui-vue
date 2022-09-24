@@ -10,9 +10,7 @@ import { provide, computed, WritableComputedRef, ref } from "vue";
 import LayInput from "../input/index.vue";
 import LayTagInput from "../tagInput/index.vue";
 import LayDropdown from "../dropdown/index.vue";
-import LaySelectOption, {
-  LaySelectOptionProps,
-} from "../selectOption/index.vue";
+import LaySelectOption, { LaySelectOptionProps } from "../selectOption/index.vue";
 
 export interface LaySelectProps {
   name?: string;
@@ -67,16 +65,35 @@ provide("multiple", multiple);
 <template>
   <div class="layui-select">
     <lay-dropdown update-at-scroll>
-      <lay-tag-input v-if="multiple" v-model="selectedValue" :disabledInput="true"></lay-tag-input>
+      <lay-tag-input
+        v-if="multiple"
+        v-model="selectedValue"
+        :disabledInput="true"
+        :allow-clear="true"
+      >
+        <template #suffix>
+          <lay-icon type="layui-icon-triangle-d"></lay-icon>
+        </template>
+      </lay-tag-input>
       <lay-input
         v-else
-        :placeholder="placeholder"
         v-model="selectedValue"
-      ></lay-input>
+        :placeholder="placeholder"
+        :allow-clear="true"
+      >
+        <template #suffix>
+          <lay-icon type="layui-icon-triangle-d"></lay-icon>
+        </template>
+      </lay-input>
       <template #content>
         <dl class="layui-select-options">
           <div class="layui-select-search">
-            <lay-input v-model="searchValue" size="sm" placeholder="请选择" prefix-icon="layui-icon-search"></lay-input>
+            <lay-input
+              v-model="searchValue"
+              size="sm"
+              placeholder="请选择"
+              prefix-icon="layui-icon-search"
+            ></lay-input>
           </div>
           <template v-if="items">
             <lay-select-option

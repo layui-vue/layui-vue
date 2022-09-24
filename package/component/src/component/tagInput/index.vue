@@ -46,7 +46,7 @@ const props = withDefaults(defineProps<LayInputTagProps>(), {
   disabledInput: false,
   placeholder: "",
   readonly: false,
-  allowClear: true,
+  allowClear: false,
   minCollapsedNum: 3,
   size: "md",
 });
@@ -245,23 +245,26 @@ defineExpose({
       </template>
       <template v-if="!disabledInput">
         <input
-        ref="inputRefEl"
-        class="layui-tag-input-inner-input"
-        :style="inputStyle"
-        :disabled="disabled"
-        :placeholder="placeholder"
-        :readonly="readonly"
-        @keydown.enter="handleEnter"
-        @keyup="handleBackspaceKeyUp"
-        @input="handleInput"
-        @compositionstart="handleComposition"
-        @compositionupdate="handleComposition"
-        @compositionend="handleComposition"
-      />
+          ref="inputRefEl"
+          class="layui-tag-input-inner-input"
+          :style="inputStyle"
+          :disabled="disabled"
+          :placeholder="placeholder"
+          :readonly="readonly"
+          @keydown.enter="handleEnter"
+          @keyup="handleBackspaceKeyUp"
+          @input="handleInput"
+          @compositionstart="handleComposition"
+          @compositionupdate="handleComposition"
+          @compositionend="handleComposition"
+        />
       </template>
     </span>
     <span v-if="allowClear && tagData?.length" class="layui-tag-input-clear">
       <lay-icon type="layui-icon-close-fill" @click.stop="handleClearClick" />
     </span>
+    <span class="layui-tag-input-suffix"  v-if="$slots.suffix">
+      <slot name="suffix"></slot> 
+    </span> 
   </div>
 </template>

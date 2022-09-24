@@ -10,23 +10,29 @@
 ::: demo
 <template>
 <lay-timeline>
-  <lay-timeline-item title="1.4.x">
+  <lay-timeline-item title="1.5.x">
     <ul> 
-      <a name="1-4-14"></a> 
+      <a name="1-5-0"></a> 
       <li> 
-        <h3>1.4.15 <span class="layui-badge-rim">2022-09-27</span></h3> 
-        <ul>     
-          <li>[新增] tag-input 标签输入框组件。</li>
+        <h3>1.5.0 <span class="layui-badge-rim">2022-05-27</span></h3> 
+        <ul>
+          <li>[新增] tag-input 标签输入框组件, 用于录入事物的属性与纬度。</li>
           <li>[新增] table 组件 header 插槽, 用于在工具栏与表格之间插入元素。</li>
-          <li>[新增] tabitem 组件 icon 属性, 用于自定义 tab-item 图标。</li>
-          <li>[修复] layout 组件只引入了 footer 时, layui-layout-vertical样式不生效。</li>
-          <li>[修复] cascader 外部清空modelValue, 内部displayValue不清空问题。</li>
-          <li>[修复] tolltip 组件 content 自动定位。</li>
-          <li>[修复] breadcrumb-item 组件无法正确传递 attrs 的问题。</li>
-          <li>[优化] tag 组件 border background height 等默认样式。</li>
-        </ul>
+          <li>[新增] tabitem 组件 icon 属性, 提供 title 属性前置 icon 设置。</li>
+          <li>[修复] tolltip 组件 content 变化时, 位置无法自动计算调整的问题。</li>
+          <li>[修复] breadcrumb-item 组件无法正确传递 attrs, 导致 @click 等自定义事件失效。</li>
+          <li>[修复] layout 组件仅引入了 footer 作为内容元素时, layui-layout-vertical 样式不生效, 导致布局错误。</li>
+          <li>[修复] select 组件 multiple 属性为 true 时, 删除选项时清空筛选条件的问题。</li>
+          <li>[修复] cascader 外部清空 modelValue, 选中项仍不清楚的问题。</li>
+          <li>[修复] select 组件位于 layer 底部时, 点击时出现滚动条。</li>
+          <li>[修复] select 组件与 table 组件组合使用时, 下拉内容被遮盖。</li>
+          <li>[优化] tag 组件 border background height 等, 使其更贴合 layui 的设计规范。</li>
+          <li>[优化] input 组件 suffix 插槽与 allow-clear 启用时的显示顺序, clear > suffix。</li>
+        </ul> 
       </li>
     </ul>
+  </lay-timeline-item>
+  <lay-timeline-item title="1.4.x">
     <ul> 
       <a name="1-4-14"></a> 
       <li> 

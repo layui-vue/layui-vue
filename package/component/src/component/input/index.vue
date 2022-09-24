@@ -166,14 +166,6 @@ const showPassword = () => {
         @compositionstart="onCompositionstart"
         @compositionend="onCompositionend"
       />
-      <span class="layui-input-suffix" v-if="slots.suffix || props.suffixIcon">
-        <slot name="suffix" v-if="slots.suffix"></slot>
-        <lay-icon
-          v-else
-          :type="props.suffixIcon"
-          class="layui-input-suffix-icon"
-        ></lay-icon>
-      </span>
       <span
         class="layui-input-password"
         @click="showPassword"
@@ -184,6 +176,14 @@ const showPassword = () => {
       </span>
       <span class="layui-input-clear" v-if="allowClear && hasContent">
         <lay-icon type="layui-icon-close-fill" @click.stop="onClear"></lay-icon>
+      </span>
+      <span class="layui-input-suffix" v-if="slots.suffix || props.suffixIcon">
+        <slot name="suffix" v-if="slots.suffix"></slot>
+        <lay-icon
+          v-else
+          :type="props.suffixIcon"
+          class="layui-input-suffix-icon"
+        ></lay-icon>
       </span>
     </div>
     <div class="layui-input-append" v-if="slots.append">

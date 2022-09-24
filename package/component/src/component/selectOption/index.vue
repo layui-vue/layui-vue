@@ -22,7 +22,7 @@ const props = withDefaults(defineProps<LaySelectOptionProps>(), {
 });
 
 const selectedValue: WritableComputedRef<any> = inject("selectedValue") as WritableComputedRef<any>;
-const searchValue: Ref<string> = inject('searchValue') as Ref<string>;
+const searchValue: Ref<string> = inject("searchValue") as Ref<string>;
 const multiple: ComputedRef = inject("multiple") as ComputedRef;
 
 const handleSelect = () => {
@@ -35,14 +35,16 @@ const selected = computed(() => {
   if (multiple.value) {
     return selectedValue.value.indexOf(props.value) != -1;
   } else {
-    // close dropdown
     return selectedValue.value === props.value;
   }
 });
 
 const display = computed(() => {
-  return props.keyword.indexOf(searchValue.value) > -1 || props.label.indexOf(searchValue.value) > -1;
-})
+  return (
+    props.keyword.indexOf(searchValue.value) > -1 ||
+    props.label.indexOf(searchValue.value) > -1
+  );
+});
 </script>
 
 <template>
@@ -52,7 +54,11 @@ const display = computed(() => {
     @click="handleSelect"
   >
     <template v-if="multiple">
-      <lay-checkbox v-model="selectedValue" :value="value" skin="primary"></lay-checkbox>
+      <lay-checkbox
+        v-model="selectedValue"
+        :value="value"
+        skin="primary"
+      ></lay-checkbox>
     </template>
     <slot>{{ label }}</slot>
   </dd>
