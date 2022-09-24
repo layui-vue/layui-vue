@@ -14,7 +14,7 @@
     <ul> 
       <a name="1-5-0"></a> 
       <li> 
-        <h3>1.5.0 <span class="layui-badge-rim">2022-05-27</span></h3> 
+        <h3>1.5.0 <span class="layui-badge-rim">2022-10-01</span></h3> 
         <ul>
           <li>[新增] tag-input 标签输入框组件, 用于录入事物的属性与纬度。</li>
           <li>[新增] table 组件 header 插槽, 用于在工具栏与表格之间插入元素。</li>

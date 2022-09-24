@@ -10,7 +10,9 @@ import { provide, computed, WritableComputedRef, ref } from "vue";
 import LayInput from "../input/index.vue";
 import LayTagInput from "../tagInput/index.vue";
 import LayDropdown from "../dropdown/index.vue";
-import LaySelectOption, { LaySelectOptionProps } from "../selectOption/index.vue";
+import LaySelectOption, {
+  LaySelectOptionProps,
+} from "../selectOption/index.vue";
 
 export interface LaySelectProps {
   name?: string;
