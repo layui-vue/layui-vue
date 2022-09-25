@@ -31,7 +31,9 @@ const props = withDefaults(defineProps<LaySelectOptionProps>(), {
 
 const selectedItem: Ref<any> = inject("selectedItem") as Ref<any>;
 const openState: Ref<boolean> = inject("openState") as Ref<boolean>;
-const selectedValue: WritableComputedRef<any> = inject("selectedValue") as WritableComputedRef<any>;
+const selectedValue: WritableComputedRef<any> = inject(
+  "selectedValue"
+) as WritableComputedRef<any>;
 const searchValue: Ref<string> = inject("searchValue") as Ref<string>;
 const multiple: ComputedRef = inject("multiple") as ComputedRef;
 
