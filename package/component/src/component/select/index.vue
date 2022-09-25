@@ -6,19 +6,30 @@ export default {
 
 <script setup lang="ts">
 import "./index.less";
-import { provide, computed, WritableComputedRef, ref, Ref, useSlots, onMounted, VNode, Component } from "vue";
+import {
+  provide,
+  computed,
+  ref,
+  Ref,
+  useSlots,
+  onMounted,
+  VNode,
+  Component,
+} from "vue";
 import LayInput from "../input/index.vue";
 import LayTagInput from "../tagInput/index.vue";
 import LayDropdown from "../dropdown/index.vue";
-import LaySelectOption, { LaySelectOptionProps } from "../selectOption/index.vue";
+import LaySelectOption, {
+  LaySelectOptionProps,
+} from "../selectOption/index.vue";
 
 export interface LaySelectProps {
   name?: string;
-  placeholder?: string;
+  create?: boolean;
   disabled?: boolean;
+  placeholder?: string;
   modelValue?: any;
   multiple?: boolean;
-  create?: boolean;
   items?: LaySelectOptionProps[];
   size?: "lg" | "md" | "sm" | "xs";
   allowClear?: boolean;
@@ -47,10 +58,11 @@ const selectedItem: Ref<any> = ref([]);
 const options = ref<any>([]);
 
 onMounted(() => {
-    if(slots.default) {
-      getOption(slots.default());
-    }
-})
+  if (slots.default) {
+    getOption(slots.default());
+  }
+  Object.assign(options.value, props.items);
+});
 
 const getOption = function (nodes: VNode[]) {
   nodes?.map((item: VNode) => {
@@ -77,22 +89,21 @@ const multiple = computed(() => {
   return props.multiple;
 });
 
-provide("selectedItem", selectedItem);
 provide("openState", openState);
+provide("selectedItem", selectedItem);
 provide("selectedValue", selectedValue);
 provide("searchValue", searchValue);
 provide("multiple", multiple);
 </script>
 
 <template>
-  可选项: {{ options }}
-  选中值: {{ selectedValue }}
   <div class="layui-select">
     <lay-dropdown
-      :disabled="disabled"     
-      :update-at-scroll = "true"  
+      :disabled="disabled"
+      :update-at-scroll="true"
       @show="openState = true"
-      @hide="openState = false">
+      @hide="openState = false"
+    >
       <lay-tag-input
         v-if="multiple"
         v-model="selectedValue"
@@ -100,27 +111,28 @@ provide("multiple", multiple);
         :disabledInput="true"
       >
         <template #suffix>
-          <lay-icon type="layui-icon-triangle-d"></lay-icon>
+          <lay-icon type="layui-icon-triangle-d" :class="{'triangle':openState}"></lay-icon>
         </template>
       </lay-tag-input>
       <lay-input
         v-else
-        v-model="selectedValue"
+        v-model="searchValue"
         :placeholder="placeholder"
         :allow-clear="allowClear"
+        :readonly="true"
       >
         <template #suffix>
-          <lay-icon type="layui-icon-triangle-d"></lay-icon>
+          <lay-icon type="layui-icon-triangle-d" :class="{'triangle':openState}"></lay-icon>
         </template>
       </lay-input>
       <template #content>
         <dl class="layui-select-options">
-          <div class="layui-select-search">
+          <div class="layui-select-search" v-if="multiple">
             <lay-input
               v-model="searchValue"
-              size="sm"
-              placeholder="请选择"
               prefix-icon="layui-icon-search"
+              placeholder="请搜索"
+              size="sm"
             ></lay-input>
           </div>
           <template v-if="items">

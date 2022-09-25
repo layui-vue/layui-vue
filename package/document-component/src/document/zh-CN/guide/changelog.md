@@ -26,6 +26,7 @@
           <li>[修复] cascader 外部清空 modelValue, 选中项仍不清楚的问题。</li>
           <li>[修复] select 组件位于 layer 底部时, 点击时出现滚动条。</li>
           <li>[修复] select 组件与 table 组件组合使用时, 下拉内容被遮盖。</li>
+          <li>[修复] select 组件多选模式下提示信息错误, 将 "请选择" 调整为 "请输入"。</li>
           <li>[优化] tag 组件 border background height 等, 使其更贴合 layui 的设计规范。</li>
           <li>[优化] input 组件 suffix 插槽与 allow-clear 启用时的显示顺序, clear > suffix。</li>
         </ul> 

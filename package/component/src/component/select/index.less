@@ -10,6 +10,16 @@
   padding: 5px 0;
 }
 
+.layui-select .layui-icon-triangle-d {
+  transition: all .3s;
+  -webkit-transition: all .3s;
+  color: var(--global-neutral-color-8);
+}
+
+.layui-select .layui-icon-triangle-d.triangle {
+  transform: rotate(180deg);
+}
+
 .layui-select-options .layui-select-option {
   padding: 0 10px;
   line-height: 36px;
@@ -30,4 +40,7 @@
 
 .layui-select-search {
   padding: 5px 10px;
+  .layui-input-prefix {
+    padding: 0 0 0 10px;
+  }
 }

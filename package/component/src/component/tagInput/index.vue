@@ -60,13 +60,8 @@ const tagData = useVModel(props, "modelValue", emit, {
   deep: true,
   defaultValue: [] as TagData[],
 });
-const _tagProps = reactive(props.tagProps ?? {})
-const  tagProps = reactiveOmit(
-  _tagProps,
-  "closable",
-  "size",
-  "disabled"
-);
+const _tagProps = reactive(props.tagProps ?? {});
+const tagProps = reactiveOmit(_tagProps, "closable", "size", "disabled");
 
 const computedTagData = computed(() => {
   if (!tagData.value) return;
