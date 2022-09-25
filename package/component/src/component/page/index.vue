@@ -58,12 +58,7 @@ watch(
 const totalPage = computed(() => {
   maxPage.value = Math.ceil(props.total / inlimit.value);
   let r: number[] = [];
-  let start =
-    maxPage.value <= props.pages
-      ? 1
-      : currentPage.value > pages
-      ? currentPage.value - pages
-      : 1;
+  let start = maxPage.value <= props.pages ? 1 : currentPage.value > pages ? currentPage.value - pages : 1;
   for (let i = start; ; i++) {
     if (r.length >= props.pages || i > maxPage.value) {
       break;
@@ -102,7 +97,10 @@ const jumpPage = () => {
 };
 
 const changelimit = () => {
-  currentPage.value = 1;
+  const maxPage = Math.ceil(props.total / inlimit.value);
+  if(currentPage.value > maxPage ) {
+    currentPage.value = maxPage;
+  }
   emit("change", { current: currentPage.value, limit: inlimit.value });
 };
 

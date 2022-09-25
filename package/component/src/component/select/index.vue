@@ -15,7 +15,7 @@ import {
   onMounted,
   VNode,
   Component,
-  watch
+  watch,
 } from "vue";
 import LayInput from "../input/index.vue";
 import LayTagInput from "../tagInput/index.vue";
@@ -65,16 +65,19 @@ onMounted(() => {
   }
   Object.assign(options.value, props.items);
 
-  watch(selectedValue, () => {
-    if (multiple.value) {
-      // tag-input 格式化
-
-    } else {
-      singleLabel.value = options.value.find((item: any) => {
-        return item.value === selectedValue.value;
-      })?.label;
-    }
-  }, { immediate: true })
+  watch(
+    selectedValue,
+    () => {
+      if (multiple.value) {
+        // tag-input 格式化
+      } else {
+        singleLabel.value = options.value.find((item: any) => {
+          return item.value === selectedValue.value;
+        })?.label;
+      }
+    },
+    { immediate: true }
+  );
 });
 
 const getOption = function (nodes: VNode[]) {
@@ -111,24 +114,55 @@ provide("multiple", multiple);
 
 <template>
   <div class="layui-select">
-    <lay-dropdown :disabled="disabled" :update-at-scroll="true" @show="openState = true" @hide="openState = false">
-      <lay-tag-input v-if="multiple" v-model="selectedValue" :allow-clear="allowClear" :disabledInput="true">
+    <lay-dropdown
+      :disabled="disabled"
+      :update-at-scroll="true"
+      @show="openState = true"
+      @hide="openState = false"
+    >
+      <lay-tag-input
+        v-if="multiple"
+        v-model="selectedValue"
+        :allow-clear="allowClear"
+        :disabledInput="true"
+      >
         <template #suffix>
-          <lay-icon type="layui-icon-triangle-d" :class="{ 'triangle': openState }"></lay-icon>
+          <lay-icon
+            type="layui-icon-triangle-d"
+            :class="{ triangle: openState }"
+          ></lay-icon>
         </template>
       </lay-tag-input>
-      <lay-input v-else v-model="singleLabel" :placeholder="placeholder" :allow-clear="allowClear" :readonly="true">
+      <lay-input
+        v-else
+        v-model="singleLabel"
+        :placeholder="placeholder"
+        :allow-clear="allowClear"
+        :readonly="true"
+      >
         <template #suffix>
-          <lay-icon type="layui-icon-triangle-d" :class="{ 'triangle': openState }"></lay-icon>
+          <lay-icon
+            type="layui-icon-triangle-d"
+            :class="{ triangle: openState }"
+          ></lay-icon>
         </template>
       </lay-input>
       <template #content>
         <dl class="layui-select-options">
           <div class="layui-select-search" v-if="multiple">
-            <lay-input v-model="searchValue" prefix-icon="layui-icon-search" placeholder="请搜索" size="sm"></lay-input>
+            <lay-input
+              v-model="searchValue"
+              prefix-icon="layui-icon-search"
+              placeholder="请搜索"
+              size="sm"
+            ></lay-input>
           </div>
           <template v-if="items">
-            <lay-select-option v-for="(item, index) in items" v-bind="item" :key="index"></lay-select-option>
+            <lay-select-option
+              v-for="(item, index) in items"
+              v-bind="item"
+              :key="index"
+            ></lay-select-option>
           </template>
           <slot></slot>
         </dl>
