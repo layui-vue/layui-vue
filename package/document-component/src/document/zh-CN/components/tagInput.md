@@ -13,7 +13,7 @@
 ::: demo 使用 `lay-tag-input` 标签, 创建标签输入框。  
 
 <template>
-  <lay-tag-input v-model="data1" v-model:inputValue="inputValue1" placeholder="请输入"></lay-tag-input>
+  <lay-tag-input v-model="data1" v-model:inputValue="inputValue1" placeholder="请输入" style="width:320px"></lay-tag-input>
 </template>
 
 <script>
@@ -40,7 +40,7 @@ export default {
 ::: demo 使用 `max` 控制最大标签数量。  
 
 <template>
-  <lay-tag-input v-model="data2" v-model:inputValue="inputValue2" :max="3" placeholder="最多输入3个"></lay-tag-input>
+  <lay-tag-input v-model="data2" v-model:inputValue="inputValue2" :max="3" placeholder="最多输入3个" style="width:320px"></lay-tag-input>
 </template>
 
 <script>
@@ -64,11 +64,11 @@ export default {
 ::: title 折叠标签
 :::
 
-::: demo 通过`minCollapsedNum` 设置最小折叠数，超过这个数的标签会被折叠， `collapseTagsTooltip`启用鼠标悬停显示具体折叠标签。  
+::: demo 通过`minCollapsedNum` 设置最小折叠数，超过这个数的标签会被折叠，0表示不折叠， `collapseTagsTooltip`启用鼠标悬停显示具体折叠标签。  
 
 <template>
-<lay-space direction="vertical">
- collapseTags<lay-tag-input v-model="data3" v-model:inputValue="inputValue3" :minCollapsedNum="3" style="width:auto"></lay-tag-input>
+<lay-space direction="vertical" size="md">
+ minCollapsedNum = 3<lay-tag-input v-model="data3" v-model:inputValue="inputValue3" :minCollapsedNum="3" style="width:auto"></lay-tag-input>
  collapseTagsTooltip <lay-tag-input v-model="data3" v-model:inputValue="inputValue3" :minCollapsedNum="3" collapseTagsTooltip style="width:auto"></lay-tag-input>
 </lay-space>
 </template>
@@ -97,7 +97,7 @@ export default {
 ::: demo  
 
 <template>
-  <lay-tag-input v-model="data4" v-model:inputValue="inputValue4" disabled></lay-tag-input>
+  <lay-tag-input v-model="data4" v-model:inputValue="inputValue4" disabled style="width:320px"></lay-tag-input>
 </template>
 
 <script>
@@ -124,7 +124,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-tag-input v-model="data5" v-model:inputValue="inputValue5" allow-clear></lay-tag-input>
+  <lay-tag-input v-model="data5" v-model:inputValue="inputValue5" allow-clear style="width:320px"></lay-tag-input>
 </template>
 
 <script>
@@ -151,12 +151,12 @@ export default {
 ::: demo  
 
 <template>
-<lay-space direction="vertical">
+<div style="width:320px;display:flex;flex-direction: column;gap: 16px;">
   <lay-tag-input v-model="data6" v-model:inputValue="inputValue6" size="xs"></lay-tag-input>
   <lay-tag-input v-model="data6" v-model:inputValue="inputValue6" size="sm"></lay-tag-input>
   <lay-tag-input v-model="data6" v-model:inputValue="inputValue6" size="md"></lay-tag-input>
   <lay-tag-input v-model="data6" v-model:inputValue="inputValue6" size="lg"></lay-tag-input>
-</lay-space>
+</div>
 </template>
 
 <script>
@@ -183,7 +183,7 @@ export default {
 ::: demo 使用 `tagProps` 控制标签属性。  
 
 <template>
-<lay-space direction="vertical">
+<lay-space direction="vertical" fill style="width:320px">
   <lay-tag-input v-model="data7" v-model:inputValue="inputValue7" :tagProps="{color:'#86909c',variant:'light', bordered:false}"></lay-tag-input>
   <lay-tag-input v-model="data7" v-model:inputValue="inputValue7" :tagProps="{color:'#ffb400',variant:'light'}"></lay-tag-input>
   <lay-tag-input v-model="data7" v-model:inputValue="inputValue7" :tagProps="{color:'#0fc6c2',variant:'light'}"></lay-tag-input>
