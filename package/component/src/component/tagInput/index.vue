@@ -60,9 +60,9 @@ const tagData = useVModel(props, "modelValue", emit, {
   deep: true,
   defaultValue: [] as TagData[],
 });
-
-const tagProps = reactiveOmit(
-  props.tagProps ?? {},
+const _tagProps = reactive(props.tagProps ?? {})
+const  tagProps = reactiveOmit(
+  _tagProps,
   "closable",
   "size",
   "disabled"
