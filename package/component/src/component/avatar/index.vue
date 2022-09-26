@@ -1,5 +1,5 @@
 <script lang="ts">
-import { computed } from "vue";
+import { computed, useSlots } from "vue";
 export default {
   name: "LayAvatar",
 };
@@ -7,7 +7,6 @@ export default {
 
 <script setup lang="ts">
 import "./index.less";
-
 export interface LayAvatarProps {
   src?: string;
   size?: "xs" | "sm" | "md" | "lg";
@@ -27,8 +26,14 @@ const classes = computed(() => {
     props.size ? `layui-avatar-${props.size}` : "",
   ];
 });
+const slot = useSlots();
 </script>
 
 <template>
-  <img :alt="alt" :src="src" :class="classes" />
+  <span v-if="!slot.default" :class="classes">
+    <img :alt="alt" :src="src"   />
+  </span>
+  <span :class="classes" v-else >
+    <slot></slot>
+  </span>
 </template>
