@@ -53,6 +53,7 @@
     padding-right: 10px;
     color: rgba(0, 0, 0, 0.45);
     cursor: pointer;
+    visibility: hidden;
   }
 
   &-clear:hover {
@@ -95,8 +96,6 @@
       margin-bottom: 4px;
     }
   }
-
-
 
   .set-size(@size) {
     @height: ~'tag-input-@{size}';
@@ -141,6 +140,6 @@
 .layui-tag-input:focus-within {
   border-color: #d2d2d2 !important;
   .layui-tag-input-clear{
-    display: flex;
+    visibility: visible;
   }
 }

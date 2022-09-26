@@ -16,7 +16,12 @@ import {
   reactive,
   nextTick,
 } from "vue";
-import { reactiveOmit, useResizeObserver, useVModel } from "@vueuse/core";
+import {
+  isObject,
+  reactiveOmit,
+  useResizeObserver,
+  useVModel,
+} from "@vueuse/core";
 import { LayIcon } from "@layui/icons-vue";
 
 export interface TagData {
@@ -63,17 +68,20 @@ const tagData = useVModel(props, "modelValue", emit, {
 const _tagProps = reactive(props.tagProps ?? {});
 const tagProps = reactiveOmit(_tagProps, "closable", "size", "disabled");
 
+const normalizedTags = computed(() => normalizedTagData(tagData.value ?? []));
+
 const computedTagData = computed(() => {
-  if (!tagData.value) return;
+  if (!normalizedTags.value) return;
   return props.minCollapsedNum
-    ? tagData.value?.slice(0, props.minCollapsedNum)
-    : tagData.value;
+    ? normalizedTags.value?.slice(0, props.minCollapsedNum)
+    : normalizedTags.value;
 });
 
 const collapsedTagData = computed(() => {
-  if (!tagData.value) return;
-  return props.minCollapsedNum && tagData.value?.length > props.minCollapsedNum
-    ? tagData.value?.slice(props.minCollapsedNum)
+  if (!normalizedTags.value) return;
+  return props.minCollapsedNum &&
+    normalizedTags.value?.length > props.minCollapsedNum
+    ? normalizedTags.value?.slice(props.minCollapsedNum)
     : [];
 });
 
@@ -161,6 +169,16 @@ const cls = computed(() => [
   },
 ]);
 
+const normalizedTagData = (value: Array<string | number | TagData>) =>
+  value.map((item) => {
+    if (isObject(item)) return item;
+    return {
+      value: item,
+      label: String(item),
+      closable: true,
+    };
+  });
+
 useResizeObserver(mirrorRefEl, () => {
   handleResize();
 });
@@ -206,11 +224,11 @@ defineExpose({
       >
         <LayTag
           v-bind="tagProps"
-          :closable="!readonly && !disabled"
+          :closable="!readonly && !disabled && item.closable"
           :size="size"
           @close="handleClose(index)"
         >
-          {{ item }}
+          {{ item.label }}
         </LayTag>
       </template>
       <template v-if="computedTagData?.length != tagData?.length">
@@ -229,11 +247,11 @@ defineExpose({
                 v-for="(item, index) of collapsedTagData"
                 :key="`${item}-${index}`"
                 v-bind="tagProps"
-                :closable="!readonly && !disabled"
+                :closable="!readonly && !disabled && item.closable"
                 :size="size"
                 @close="handleClose(index + (minCollapsedNum ?? 0))"
               >
-                {{ item }}
+                {{ item.label }}
               </LayTag>
             </div>
           </template>

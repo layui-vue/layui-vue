@@ -21,7 +21,7 @@ import { ref,watch } from 'vue'
 
 export default {
   setup() {
-    const data1 = ref(['Vue']);
+    const data1 = ref([{value:1,label:'Vue',closable: true}]);
     const inputValue1 = ref("");
 
     return {
@@ -216,7 +216,7 @@ export default {
 
 | 属性        | 描述     | 类型    | 默认值    | 可选值                             |
 | ----------- | -------- | ------ | ------ | ------ |
-| modelValue  | 绑定值  | `string` `number` | -| -|
+| modelValue  | 绑定值  | `string[]` `number[]` `TagData[]`| -| -|
 | size | 输入框大小 |`string` | `md` | `lg` `md` `sm` `xs`|
 | inputValue | 输入框的值 | `string` | -| - | 
 | placeholder | 占位符 | `string` | - | - |
@@ -229,6 +229,16 @@ export default {
 | tagProps| tag 属性| `LayTagProps`|-|-|
 | disabledInput|是否禁用内部输入框|`boolean` | `false` | `true` `false`|
 
+:::
+
+:::title TagInput 方法
+:::
+
+:::table
+| 名称 | 描述 | 参数 |
+|------ |----------|-----------|
+| focus | 获取焦点 | - |
+| blur |失去焦点  | - |
 :::
 
 :::title TagInput 插槽
