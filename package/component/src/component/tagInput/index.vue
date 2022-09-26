@@ -16,12 +16,7 @@ import {
   reactive,
   nextTick,
 } from "vue";
-import {
-  isObject,
-  reactiveOmit,
-  useResizeObserver,
-  useVModel,
-} from "@vueuse/core";
+import { isObject, reactiveOmit, useResizeObserver } from "@vueuse/core";
 import { LayIcon } from "@layui/icons-vue";
 
 export interface TagData {
@@ -31,7 +26,7 @@ export interface TagData {
   [other: string]: any;
 }
 
-export interface LayInputTagProps {
+export interface LayTagInputProps {
   modelValue?: (string | number | TagData)[];
   inputValue?: string;
   disabled?: boolean;
@@ -46,13 +41,23 @@ export interface LayInputTagProps {
   disabledInput?: boolean;
 }
 
-const props = withDefaults(defineProps<LayInputTagProps>(), {
+const props = withDefaults(defineProps<LayTagInputProps>(), {
   placeholder: undefined,
   minCollapsedNum: 0,
   size: "md",
 });
 
-const emit = defineEmits(["update:modelValue", "update:inputValue"]);
+const emit = defineEmits([
+  "update:modelValue",
+  "update:inputValue",
+  "change",
+  "inputValueChange",
+  "remove",
+  "clear",
+  "focus",
+  "blur",
+  "pressEnter",
+]);
 
 const mirrorRefEl = shallowRef<HTMLElement | undefined>(undefined);
 const inputRefEl = shallowRef<HTMLInputElement | undefined>(undefined);
@@ -60,13 +65,27 @@ const oldInputValue = ref<string>("");
 const compositionValue = ref<string>("");
 const isComposing = ref(false);
 const inputStyle = reactive({ width: "15px" });
-const inputValue = useVModel(props, "inputValue", emit, { defaultValue: "" });
-const tagData = useVModel(props, "modelValue", emit, {
-  deep: true,
-  defaultValue: [] as TagData[],
-});
 const _tagProps = reactive(props.tagProps ?? {});
 const tagProps = reactiveOmit(_tagProps, "closable", "size", "disabled");
+const inputValue = computed({
+  get() {
+    return props.inputValue;
+  },
+  set(val) {
+    emit("update:inputValue", val);
+    emit("inputValueChange", val);
+  },
+});
+
+const tagData = computed({
+  get() {
+    return props.modelValue;
+  },
+  set(val) {
+    emit("update:modelValue", val);
+    emit("change", val);
+  },
+});
 
 const normalizedTags = computed(() => normalizedTagData(tagData.value ?? []));
 
@@ -85,26 +104,26 @@ const collapsedTagData = computed(() => {
     : [];
 });
 
-const handleInput = function (event: Event) {
+const handleInput = function (e: Event) {
   if (isComposing.value) {
     return;
   }
-  inputValue.value = (event.target as HTMLInputElement).value;
+  inputValue.value = (e.target as HTMLInputElement).value;
 };
 
-const handleComposition = (event: CompositionEvent) => {
-  if (event.type === "compositionend") {
+const handleComposition = (e: CompositionEvent) => {
+  if (e.type === "compositionend") {
     isComposing.value = false;
     compositionValue.value = "";
-    handleInput(event);
+    handleInput(e);
   } else {
     isComposing.value = true;
-    compositionValue.value = inputValue.value + (event.data ?? "");
+    compositionValue.value = inputValue.value + (e.data ?? "");
   }
 };
 
-const handleEnter = (event: KeyboardEvent) => {
-  event.preventDefault();
+const handleEnter = (e: KeyboardEvent) => {
+  e.preventDefault();
   const valueStr = inputValue.value ? String(inputValue.value).trim() : "";
   if (!valueStr || !tagData.value) return;
   const isLimit = props.max && tagData.value?.length >= props.max;
@@ -115,21 +134,25 @@ const handleEnter = (event: KeyboardEvent) => {
         : [valueStr];
     inputValue.value = "";
   }
+  emit("pressEnter", inputValue.value, e);
 };
 
-const handleBackspaceKeyUp = (event: KeyboardEvent) => {
+const handleBackspaceKeyUp = (e: KeyboardEvent) => {
   if (!tagData.value || !tagData.value.length) return;
-  if (!oldInputValue.value && ["Backspace", "Delete"].includes(event.code)) {
-    tagData.value = tagData.value.slice(0, -1);
+  if (!oldInputValue.value && ["Backspace", "Delete"].includes(e.code)) {
+    const lastIndex = normalizedTags.value.length - 1;
+    handleClose(normalizedTags.value[lastIndex].value, lastIndex, e);
   }
   oldInputValue.value = inputValue.value ?? "";
 };
 
-const handleFocus = () => {
+const handleFocus = (e: FocusEvent) => {
+  emit("focus", e);
   (inputRefEl.value as HTMLInputElement)?.focus();
 };
 
-const handleBlur = () => {
+const handleBlur = (e: FocusEvent) => {
+  emit("blur", e);
   (inputRefEl.value as HTMLInputElement)?.blur();
 };
 
@@ -138,13 +161,26 @@ const handleClearClick = (e: MouseEvent) => {
     return;
   }
   tagData.value = [];
+  emit("clear", e);
 };
 
-const handleClose = (index: number) => {
+const handleClose = (
+  value: string | number | undefined,
+  index: number,
+  e: Event
+) => {
   if (!tagData.value) return;
   const arr = [...tagData.value];
   arr.splice(index, 1);
   tagData.value = arr;
+  emit("remove", value, e);
+};
+
+const handleMouseDown = (e: MouseEvent) => {
+  if (inputRefEl.value) {
+    e.preventDefault();
+    inputRefEl.value.focus();
+  }
 };
 
 const setInputWidth = (width: number) => {
@@ -210,7 +246,7 @@ defineExpose({
 });
 </script>
 <template>
-  <div :class="cls" @click="handleFocus">
+  <div :class="cls" @mousedown="handleMouseDown">
     <span ref="mirrorRefEl" class="layui-tag-input-mirror">
       {{ compositionValue || inputValue || placeholder }}
     </span>
@@ -226,7 +262,7 @@ defineExpose({
           v-bind="tagProps"
           :closable="!readonly && !disabled && item.closable"
           :size="size"
-          @close="handleClose(index)"
+          @close="handleClose(item.value, index, $event)"
         >
           {{ item.label }}
         </LayTag>
@@ -249,7 +285,13 @@ defineExpose({
                 v-bind="tagProps"
                 :closable="!readonly && !disabled && item.closable"
                 :size="size"
-                @close="handleClose(index + (minCollapsedNum ?? 0))"
+                @close="
+                  handleClose(
+                    item.value,
+                    index + (minCollapsedNum ?? 0),
+                    $event
+                  )
+                "
               >
                 {{ item.label }}
               </LayTag>
@@ -268,6 +310,8 @@ defineExpose({
           @keydown.enter="handleEnter"
           @keyup="handleBackspaceKeyUp"
           @input="handleInput"
+          @focus="handleFocus"
+          @blur="handleBlur"
           @compositionstart="handleComposition"
           @compositionupdate="handleComposition"
           @compositionend="handleComposition"
