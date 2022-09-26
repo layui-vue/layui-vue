@@ -31,9 +31,9 @@ const slot = useSlots();
 
 <template>
   <span v-if="!slot.default" :class="classes">
-    <img :alt="alt" :src="src"   />
+    <img :alt="alt" :src="src" />
   </span>
-  <span :class="classes" v-else >
+  <span :class="classes" v-else>
     <slot></slot>
   </span>
 </template>
