@@ -53,7 +53,6 @@ const selected = computed(() => {
 });
 
 const select = () => {
-
   const info = {
     label: props.label,
     value: props.value,
@@ -95,7 +94,10 @@ onMounted(() => {
 <template>
   <dd
     v-show="display"
-    :class="['layui-select-option', { 'layui-this': selected && !multiple, 'layui-disabled': disabled}]"
+    :class="[
+      'layui-select-option',
+      { 'layui-this': selected, 'layui-disabled': disabled },
+    ]"
     @click="handleSelect"
   >
     <template v-if="multiple">

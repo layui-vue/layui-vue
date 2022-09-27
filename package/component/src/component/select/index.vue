@@ -98,10 +98,6 @@ onMounted(() => {
   );
 });
 
-const handleSearch = (value: string) => {
-  searchValue.value = value;
-};
-
 const getOption = function (nodes: VNode[]) {
   nodes?.map((item: VNode) => {
     let component = item.type as Component;
@@ -127,6 +123,18 @@ const multiple = computed(() => {
   return props.multiple;
 });
 
+const handleSearch = (value: string) => {
+  searchValue.value = value;
+};
+
+const handleClear = () => {
+  if(multiple.value) {
+    selectedValue.value = [];
+  } else {
+    selectedValue.value = "";
+  }
+}
+
 provide("openState", openState);
 provide("selectedItem", selectedItem);
 provide("selectedValue", selectedValue);
@@ -150,6 +158,7 @@ provide("multiple", multiple);
         :collapseTagsTooltip="collapseTagsTooltip"
         :minCollapsedNum="minCollapsedNum"
         :disabledInput="true"
+        @clear="handleClear"
       >
         <template #suffix>
           <lay-icon
@@ -165,6 +174,7 @@ provide("multiple", multiple);
         :allow-clear="allowClear"
         :readonly="!showSearch"
         @Input="handleSearch"
+        @clear="handleClear"
       >
         <template #suffix>
           <lay-icon
