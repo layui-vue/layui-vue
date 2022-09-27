@@ -57,10 +57,10 @@ export default {
 
 :::
 
-::: title 开启分页 通过 page 属性开启图标列表的分页展示
+::: title 开启分页
 :::
 
-::: demo
+::: demo 通过 page 属性开启图标列表的分页展示
 
 <template>
   <lay-icon-picker v-model="icon" type="layui-icon-face-smile" page></lay-icon-picker>
@@ -82,10 +82,10 @@ export default {
 
 :::
 
-::: title 开启搜索 通过 showSearch 开启图标列表的搜索功能
+::: title 开启搜索
 :::
 
-::: demo
+::: demo 通过 showSearch 开启图标列表的搜索功能
 
 <template>
   <lay-icon-picker v-model="icon" type="layui-icon-face-smile" page showSearch></lay-icon-picker>

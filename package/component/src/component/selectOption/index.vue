@@ -53,22 +53,23 @@ const selected = computed(() => {
 });
 
 const select = () => {
-  const info = {
-    label: props.label,
-    value: props.value,
-    dispabled: props.disabled,
-    keyword: props.keyword,
-  };
 
-  if (multiple.value) {
-    if (Array.isArray(selectedItem.value)) {
-      if (notChecked.value) selectedItem.value.push(info);
+    const info = {
+      label: props.label,
+      value: props.value,
+      dispabled: props.disabled,
+      keyword: props.keyword,
+    };
+
+    if (multiple.value) {
+      if (Array.isArray(selectedItem.value)) {
+        if (notChecked.value) selectedItem.value.push(info);
+      } else {
+        selectedItem.value = [info];
+      }
     } else {
-      selectedItem.value = [info];
+      selectedItem.value = info;
     }
-  } else {
-    selectedItem.value = info;
-  }
 };
 
 const display = computed(() => {

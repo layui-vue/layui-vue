@@ -81,7 +81,7 @@ const search = (e: any) => {
   currentPage.value = 1;
   const start = (currentPage.value - 1) * 12;
   const end = start + 12;
-  const text = e.target.value;
+  const text = e;
   if (text) {
     if (props.page) {
       icones.value = searchList(text, icons).slice(start, end);

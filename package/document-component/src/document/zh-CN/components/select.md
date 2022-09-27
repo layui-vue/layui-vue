@@ -35,20 +35,20 @@ export default {
 
 :::
 
-::: title 数据联动
+::: title 进阶使用
 :::
 
-::: demo
+::: demo 根据 v-model 的特性, 通过修改值更改 select 的下拉选项。
 
 <template>
-  <lay-button @click="change1">切换-当前值 : {{value2}}</lay-button>
-  <br/>
-  <br/>
-  <lay-select v-model="value2">
-    <lay-select-option :value="1" label="学习"></lay-select-option>
-    <lay-select-option :value="2" label="编码"></lay-select-option>
-    <lay-select-option :value="3" label="运动"></lay-select-option>
-  </lay-select>
+  <lay-space>
+    <lay-select v-model="value2">
+      <lay-select-option :value="1" label="学习"></lay-select-option>
+      <lay-select-option :value="2" label="编码"></lay-select-option>
+      <lay-select-option :value="3" label="运动"></lay-select-option>
+    </lay-select>
+    <lay-button @click="change2"> change ：{{value2}}</lay-button>
+  </lay-space>
 </template>
 
 <script>
@@ -58,12 +58,12 @@ export default {
   setup() {
     const value2 = ref(null);
     var i = 1;
-    function change1(){
+    function change2(){
       value2.value=i++%3+1
     }
     return {
       value2,
-      change1
+      change2
     }
   }
 }
@@ -71,17 +71,24 @@ export default {
 
 :::
 
-::: title 选择禁用
+::: title 开启检索
 :::
 
-::: demo
+::: demo 通过 show-search 属性开启内容检索, input 变为可输入状态。在 multiple 模式下, 检索框位于 dropdown 顶部。
 
 <template>
-  <lay-select v-model="selected">
+  <lay-space>
+    <lay-select v-model="value3" :show-search="true">
     <lay-select-option value="1" label="学习"></lay-select-option>
-    <lay-select-option value="2" label="编码" disabled></lay-select-option>
+    <lay-select-option value="2" label="编码"></lay-select-option>
     <lay-select-option value="3" label="运动"></lay-select-option>
   </lay-select>
+    <lay-select v-model="value4" :show-search="true" :multiple="true">
+    <lay-select-option value="1" label="学习"></lay-select-option>
+    <lay-select-option value="2" label="编码"></lay-select-option>
+    <lay-select-option value="3" label="运动"></lay-select-option>
+  </lay-select>
+  </lay-space>
 </template>
 
 <script>
@@ -90,10 +97,11 @@ import { ref } from 'vue'
 export default {
   setup() {
 
-    const selected = ref('1')
-
+    const value3 = ref('1')
+    const value4 = ref(['1'])
     return {
-      selected
+      value3,
+      value4
     }
   }
 }
@@ -101,11 +109,40 @@ export default {
 
 :::
 
+
+::: title 传入选项
+:::
+
+::: demo 传入 options 数据，如果设置则不需要手动构造 selectOption 节点
+
+<template>
+  <lay-select v-model="value5" :items="items5"></lay-select>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+    const value5 = ref('1');
+    const items5=ref([
+      {label:'选项1', value:1},
+      {label:'选项2', value:2},
+      {label:'选项3', value:3, disabled:true},
+    ])
+    return {
+      items5,
+      value5,
+    }
+  }
+}
+</script>
+:::
+
 ::: title 检索回调
 :::
 
 ::: demo
-
 <template>
   <lay-select @search="search" v-model="selected">
     <lay-select-option value="1" label="学习"></lay-select-option>
@@ -129,14 +166,12 @@ export default {
   }
 }
 </script>
-
 :::
 
 ::: title 定义标识
 :::
 
 ::: demo
-
 <template>
   <lay-select v-model="selected">
     <lay-select-option value="1" label="学习" keyword="学习xuexi"></lay-select-option>
@@ -157,14 +192,12 @@ export default {
   }
 }
 </script>
-
 :::
 
 ::: title 传入选项
 :::
 
 ::: demo
-
 <template>
   <lay-select v-model="selected" :items="items">
   </lay-select>
@@ -188,15 +221,12 @@ export default {
   }
 }
 </script>
-
-
 :::
 
 ::: title 创建回调
 :::
 
 ::: demo
-
 <template>
   <lay-select v-model="selected" :items="items" :create="true"  @create="createEvent"></lay-select>
 </template>
@@ -224,14 +254,12 @@ export default {
   }
 }
 </script>
-
 :::
 
 ::: title 海量数据 
 :::
 
 ::: demo
-
 <template>
   <lay-select v-model="selected2">
     <lay-select-option v-for="index of 200" :value="index" :label="index"></lay-select-option>
@@ -252,14 +280,12 @@ export default {
   }
 }
 </script>
-
 :::
 
 ::: title 多选使用
 :::
 
 ::: demo
-
 <template>
   <lay-button @click="mvalue=[1,5,7]">点击切换(当前值:{{mvalue.join()}})</lay-button>
   <br/>
@@ -291,7 +317,6 @@ export default {
   }
 }
 </script>
-
 :::
 
 ::: title Select 属性
