@@ -19,6 +19,8 @@
           <li>[新增] tag-input 标签输入框组件, 用于录入事物的属性与纬度。</li>
           <li>[新增] table 组件 header 插槽, 用于在工具栏与表格之间插入元素。</li>
           <li>[新增] tabitem 组件 icon 属性, 提供 title 属性前置 icon 设置。</li>
+          <li>[新增] select 组件 collapseTagsTooltip 属性, 多选模式下是否悬浮显示折叠的选中项。</li>
+          <li>[新增] select 组件 minCollapsedNum 属性, 多选模式选中项超过多少时折叠。</li>
           <li>[修复] tolltip 组件 content 变化时, 位置无法自动计算调整的问题。</li>
           <li>[修复] breadcrumb-item 组件无法正确传递 attrs, 导致 @click 等自定义事件失效。</li>
           <li>[修复] layout 组件仅引入了 footer 作为内容元素时, layui-layout-vertical 样式不生效, 导致布局错误。</li>

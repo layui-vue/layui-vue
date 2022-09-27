@@ -14,7 +14,6 @@ import {
   Ref,
   onMounted,
 } from "vue";
-import { arrayExpression } from "@babel/types";
 
 export interface LaySelectOptionProps {
   label: string;
