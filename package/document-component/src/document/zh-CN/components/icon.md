@@ -99,7 +99,6 @@ npm install @layui/icons-vue
 
 ```vue
 <template>
-  <!-- 组件图标 -->
   <AlignCenterIcon></AlignCenterIcon>
   <DiamondIcon></DiamondIcon>
 </template>

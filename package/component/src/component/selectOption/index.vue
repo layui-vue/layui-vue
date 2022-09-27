@@ -37,7 +37,7 @@ const searchValue: Ref<string> = inject("searchValue") as Ref<string>;
 const multiple: ComputedRef = inject("multiple") as ComputedRef;
 
 const handleSelect = () => {
-  if (!multiple.value) {
+  if (!multiple.value && !props.disabled) {
     openState.value = false;
     selectedValue.value = props.value;
     select();
@@ -54,22 +54,22 @@ const selected = computed(() => {
 
 const select = () => {
 
-    const info = {
-      label: props.label,
-      value: props.value,
-      dispabled: props.disabled,
-      keyword: props.keyword,
-    };
+  const info = {
+    label: props.label,
+    value: props.value,
+    dispabled: props.disabled,
+    keyword: props.keyword,
+  };
 
-    if (multiple.value) {
-      if (Array.isArray(selectedItem.value)) {
-        if (notChecked.value) selectedItem.value.push(info);
-      } else {
-        selectedItem.value = [info];
-      }
+  if (multiple.value) {
+    if (Array.isArray(selectedItem.value)) {
+      if (notChecked.value) selectedItem.value.push(info);
     } else {
-      selectedItem.value = info;
+      selectedItem.value = [info];
     }
+  } else {
+    selectedItem.value = info;
+  }
 };
 
 const display = computed(() => {
@@ -95,12 +95,13 @@ onMounted(() => {
 <template>
   <dd
     v-show="display"
-    :class="['layui-select-option', { 'layui-this': selected && !multiple }]"
+    :class="['layui-select-option', { 'layui-this': selected && !multiple, 'layui-disabled': disabled}]"
     @click="handleSelect"
   >
     <template v-if="multiple">
       <lay-checkbox
         v-model="selectedValue"
+        :disabled="disabled"
         :value="value"
         skin="primary"
       ></lay-checkbox>

@@ -109,7 +109,6 @@ export default {
 
 :::
 
-
 ::: title 传入选项
 :::
 
@@ -133,123 +132,6 @@ export default {
     return {
       items5,
       value5,
-    }
-  }
-}
-</script>
-:::
-
-::: title 检索回调
-:::
-
-::: demo
-<template>
-  <lay-select @search="search" v-model="selected">
-    <lay-select-option value="1" label="学习"></lay-select-option>
-    <lay-select-option value="2" label="编码" disabled></lay-select-option>
-    <lay-select-option value="3" label="运动"></lay-select-option>
-  </lay-select>
-</template>
-
-<script>
-import { ref } from 'vue'
-
-export default {
-  setup() {
-    const selected = ref('1');
-    function search(txt){
-      console.log('关键词:',txt)
-    }
-    return {
-      selected,search
-    }
-  }
-}
-</script>
-:::
-
-::: title 定义标识
-:::
-
-::: demo
-<template>
-  <lay-select v-model="selected">
-    <lay-select-option value="1" label="学习" keyword="学习xuexi"></lay-select-option>
-    <lay-select-option value="2" label="编码" disabled></lay-select-option>
-    <lay-select-option value="3" label="运动"></lay-select-option>
-  </lay-select>
-</template>
-
-<script>
-import { ref } from 'vue'
-
-export default {
-  setup() {
-    const selected = ref('1');
-    return {
-      selected
-    }
-  }
-}
-</script>
-:::
-
-::: title 传入选项
-:::
-
-::: demo
-<template>
-  <lay-select v-model="selected" :items="items">
-  </lay-select>
-</template>
-
-<script>
-import { ref } from 'vue'
-
-export default {
-  setup() {
-    const selected = ref('1');
-    const items=ref([
-      {label:'选项1',value:1,keyword:'选项xuanxiang1'},
-      {label:'选项2',value:2,keyword:'选项xuanxiang2'},
-      {label:'选项3',value:3,keyword:'选项xuanxiang3',disabled:true},
-    ])
-    return {
-      items,
-      selected,
-    }
-  }
-}
-</script>
-:::
-
-::: title 创建回调
-:::
-
-::: demo
-<template>
-  <lay-select v-model="selected" :items="items" :create="true"  @create="createEvent"></lay-select>
-</template>
-
-<script>
-import { ref } from 'vue'
-
-export default {
-  setup() {
-    const selected = ref('1');
-    const items=ref([
-      {label:'选项1',value:'1',keyword:'选项xuanxiang1'},
-      {label:'选项2',value:2,keyword:'选项xuanxiang2'},
-      {label:'选项3',value:3,keyword:'选项xuanxiang3',disabled:true},
-    ]);
-    function createEvent(v){
-      items.value.push({
-        label:v,
-        value:items.value.length
-      })
-    }
-    return {
-      selected,items,createEvent
     }
   }
 }

@@ -56,7 +56,7 @@ const props = withDefaults(defineProps<LaySelectProps>(), {
   multiple: false,
   size: "md",
   allowClear: false,
-  showSearch: false
+  showSearch: false,
 });
 
 const slots = useSlots();
@@ -100,7 +100,7 @@ onMounted(() => {
 
 const handleSearch = (value: string) => {
   searchValue.value = value;
-}
+};
 
 const getOption = function (nodes: VNode[]) {
   nodes?.map((item: VNode) => {
@@ -174,7 +174,7 @@ provide("multiple", multiple);
         </template>
       </lay-input>
       <template #content>
-        <dl class="layui-select-options">
+        <dl class="layui-select-content">
           <div class="layui-select-search" v-if="multiple && showSearch">
             <lay-input
               v-model="searchValue"
