@@ -52,26 +52,30 @@ const props = withDefaults(defineProps<LaySelectProps>(), {
 });
 
 const slots = useSlots();
-const emits = defineEmits<SelectEmits>();
 const searchValue = ref("");
-const singleLabel = ref("");
+const singleValue = ref("");
+const multipleValue = ref([]);
 const openState: Ref<boolean> = ref(false);
 const selectedItem: Ref<any> = ref([]);
 const options = ref<any>([]);
+const emits = defineEmits<SelectEmits>();
 
 onMounted(() => {
   if (slots.default) {
     getOption(slots.default());
   }
+
   Object.assign(options.value, props.items);
 
   watch(
     selectedValue,
     () => {
       if (multiple.value) {
-        // tag-input 格式化
+        multipleValue.value = selectedValue.value.map((value: any) =>{
+　　      return options.value.find((item: any) => item.value === value)
+        })
       } else {
-        singleLabel.value = options.value.find((item: any) => {
+        singleValue.value = options.value.find((item: any) => {
           return item.value === selectedValue.value;
         })?.label;
       }
@@ -122,7 +126,7 @@ provide("multiple", multiple);
     >
       <lay-tag-input
         v-if="multiple"
-        v-model="selectedValue"
+        v-model="multipleValue"
         :allow-clear="allowClear"
         :disabledInput="true"
       >
@@ -135,7 +139,7 @@ provide("multiple", multiple);
       </lay-tag-input>
       <lay-input
         v-else
-        v-model="singleLabel"
+        v-model="singleValue"
         :placeholder="placeholder"
         :allow-clear="allowClear"
         :readonly="true"
