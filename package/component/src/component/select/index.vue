@@ -28,6 +28,7 @@ export interface LaySelectProps {
   name?: string;
   disabled?: boolean;
   placeholder?: string;
+  searchPlaceholder?: string;
   showEmpty?: boolean;
   emptyMessage?: string;
   modelValue?: any;
@@ -50,6 +51,7 @@ const props = withDefaults(defineProps<LaySelectProps>(), {
   placeholder: "请选择",
   showEmpty: true,
   emptyMessage: "请选择",
+  searchPlaceholder: "请输入",
   collapseTagsTooltip: true,
   minCollapsedNum: 3,
   disabled: false,
@@ -188,8 +190,8 @@ provide("multiple", multiple);
           <div class="layui-select-search" v-if="multiple && showSearch">
             <lay-input
               v-model="searchValue"
+              :placeholder="searchPlaceholder"
               prefix-icon="layui-icon-search"
-              placeholder="请搜索"
               size="sm"
             ></lay-input>
           </div>
