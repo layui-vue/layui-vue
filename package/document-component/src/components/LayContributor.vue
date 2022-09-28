@@ -95,7 +95,7 @@ fetchContributors();
   display: inline-block;
 }
 
-.contributor img {
+.contributor span {
   margin: 5px;
 }
 
