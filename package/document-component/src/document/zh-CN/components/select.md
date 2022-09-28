@@ -253,9 +253,10 @@ export default {
 | disabled     | 是否禁用              | `boolean`                  | `true` `false` | `false` |
 | showEmpty    | 是否增加空提示选项     | `boolean`                  | `true` `false` | `true` |
 | multiple     | 是否为多选            | `boolean`                  | `true` `false` | `false` |
-| create       | 是否允许创建            | `boolean`                  | `true` `false` | `false` |
-| size         | 尺寸            | `string`                  | `lg` `md` `sm` `xs`| `md` |
-
+| size         | 尺寸                  | `string`                  | `lg` `md` `sm` `xs`| `md` |
+| searchPlaceholder | 搜索提示          | `string`                  | -- | -- |
+| minCollapsedNum        | 多选模式最小折叠数量                  | `number`                  | -- | -- |
+| collapseTagsTooltip    | 多选折叠后时候悬浮展示                  | `boolean`                  | -- | -- |
 
 :::
 
@@ -268,7 +269,6 @@ export default {
 | ------ | ---------- | --------------- |
 | change | 切换事件    | value           |
 | search | 关键词变化事件    | 用户输入的关键词 string           |
-| create | 允许创建情况下的创建回调事件    | 用户输入的关键词 string           |
 
 :::
 
@@ -284,7 +284,7 @@ export default {
 | ------------ | --------------------- | ------------------------- | -------------- | -------- |
 | label        | 标签值(`必填`)         | `string`                  |        -       |    -    |
 | value        | 值                    | `string` / `number`       |        -       |    -    |
-| keyword        | 用于匹配关键词的数据，传入文本+拼音可以支持拼音搜索   | `string`        |        -       |    -    |
+| keyword      | 用于匹配关键词的数据，传入文本+拼音可以支持拼音搜索   | `string`        |        -       |    -    |
 | disabled     | 是否禁用              | `boolean`                  | `true` `false` | `false` |
 
 :::

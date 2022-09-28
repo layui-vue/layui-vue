@@ -44,6 +44,7 @@ export interface LaySelectProps {
 export interface SelectEmits {
   (e: "update:modelValue", value: string): void;
   (e: "change", value: string): void;
+  (e: "search", value: string): void;
 }
 
 const props = withDefaults(defineProps<LaySelectProps>(), {
@@ -115,9 +116,9 @@ const selectedValue = computed({
   get() {
     return props.modelValue;
   },
-  set(val) {
-    emits("update:modelValue", val);
-    emits("change", val);
+  set(value) {
+    emits("update:modelValue", value);
+    emits("change", value);
   },
 });
 
@@ -126,6 +127,7 @@ const multiple = computed(() => {
 });
 
 const handleSearch = (value: string) => {
+  emits("search", value);
   searchValue.value = value;
 };
 
