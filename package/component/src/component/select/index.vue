@@ -63,10 +63,10 @@ const slots = useSlots();
 const searchValue = ref("");
 const singleValue = ref("");
 const multipleValue = ref([]);
+const emits = defineEmits<SelectEmits>();
 const openState: Ref<boolean> = ref(false);
 const selectedItem: Ref<any> = ref([]);
 const options = ref<any>([]);
-const emits = defineEmits<SelectEmits>();
 
 onMounted(() => {
   if (slots.default) {
@@ -128,12 +128,12 @@ const handleSearch = (value: string) => {
 };
 
 const handleClear = () => {
-  if(multiple.value) {
+  if (multiple.value) {
     selectedValue.value = [];
   } else {
     selectedValue.value = "";
   }
-}
+};
 
 provide("openState", openState);
 provide("selectedItem", selectedItem);

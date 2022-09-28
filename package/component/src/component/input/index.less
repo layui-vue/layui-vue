@@ -78,26 +78,24 @@
   background-color: white;
 }
 
-.layui-input-prefix {
-  display: flex;
-  flex: none;
-  align-items: center;
-  padding: 0 15px;
-}
-
+.layui-input-clear,
+.layui-input-password,
+.layui-input-prefix,
 .layui-input-suffix {
   display: flex;
   flex: none;
   align-items: center;
-  padding: 0 15px;
+  padding: 0 10px;
+}
+
+.layui-input-has-prefix {
+  input {
+    padding: 0;
+  }
 }
 
 .layui-input-clear,
 .layui-input-password {
-  flex: none;
-  display: flex;
-  align-items: center;
-  padding-right: 10px;
   color: rgba(0, 0, 0, 0.45);
 }
 

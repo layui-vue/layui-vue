@@ -135,7 +135,7 @@ const showPassword = () => {
 </script>
 
 <template>
-  <div class="layui-input" :size="size">
+  <div class="layui-input" :class="{'layui-input-has-prefix': slots.prefix || props.prefixIcon}" :size="size">
     <div class="layui-input-prepend" v-if="slots.prepend">
       <slot name="prepend"></slot>
     </div>

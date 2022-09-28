@@ -34,6 +34,8 @@
           <li>[优化] page 组件 limit 逻辑, 切换 limit 后，如果页数大于当前页，保持当前页码不变，否则使用最大页码。</li>
           <li>[优化] input 组件 suffix 插槽与 allow-clear 启用时的显示顺序, clear > suffix。</li>
           <li>[优化] tag 组件 border background height 等, 使其更贴合 layui 的设计规范。</li>
+          <li>[优化] input 组件 suffix prefix password clear 左右布局, 由 15px 调整至 10px。</li>
+          <li>[优化] input 组件 prefix 与 prefix-icon 存在时, 取消左侧边距缩进。</li>
           <li>[删除] select 组件 create 属性。</li>
         </ul> 
       </li>
