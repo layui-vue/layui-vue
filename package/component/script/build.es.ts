@@ -44,7 +44,7 @@ const matchModule: string[] = [
   "dropdownMenuItem",
   "tag",
   "tagInput",
-  "footer"
+  "footer",
 ];
 
 export default (): UserConfigExport => {

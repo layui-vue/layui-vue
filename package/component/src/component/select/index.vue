@@ -17,6 +17,7 @@ import {
   Component,
   watch,
 } from "vue";
+import { LayIcon } from "@layui/icons-vue";
 import LayInput from "../input/index.vue";
 import LayTagInput from "../tagInput/index.vue";
 import LayDropdown from "../dropdown/index.vue";
@@ -57,9 +58,9 @@ const props = withDefaults(defineProps<LaySelectProps>(), {
   minCollapsedNum: 3,
   disabled: false,
   multiple: false,
-  size: "md",
   allowClear: false,
   showSearch: false,
+  size: "md"
 });
 
 const slots = useSlots();
@@ -162,6 +163,7 @@ provide("multiple", multiple);
         :collapseTagsTooltip="collapseTagsTooltip"
         :minCollapsedNum="minCollapsedNum"
         :disabledInput="true"
+        :size="size"
         @clear="handleClear"
       >
         <template #suffix>
@@ -177,6 +179,7 @@ provide("multiple", multiple);
         :placeholder="placeholder"
         :allow-clear="allowClear"
         :readonly="!showSearch"
+        :size="size"
         @Input="handleSearch"
         @clear="handleClear"
       >

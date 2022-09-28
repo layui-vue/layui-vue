@@ -19,19 +19,19 @@
           <li>[新增] tag-input 标签输入框组件, 用于录入事物的属性与纬度。</li>
           <li>[新增] table 组件 header 插槽, 用于在工具栏与表格之间插入元素。</li>
           <li>[新增] tabitem 组件 icon 属性, 提供 title 属性前置 icon 设置。</li>
-          <li>[新增] select 组件 collapseTagsTooltip 属性, 多选模式下是否悬浮显示折叠的选中项。</li>
-          <li>[新增] select 组件 minCollapsedNum 属性, 多选模式选中项超过多少时折叠。</li>
           <li>[新增] select 组件 searchPlaceholder 属性, 自定义搜索提示信息。</li>
+          <li>[新增] select 组件 minCollapsedNum 属性, 多选模式选中项超过多少时折叠。</li>
+          <li>[新增] select 组件 collapseTagsTooltip 属性, 多选模式下是否悬浮显示折叠的选中项。</li>
+          <li>[修复] cascader 外部清空 modelValue, 选中项仍不清楚的问题。</li>
           <li>[修复] tolltip 组件 content 变化时, 位置无法自动计算调整的问题。</li>
           <li>[修复] breadcrumb-item 组件无法正确传递 attrs, 导致 @click 等自定义事件失效。</li>
           <li>[修复] layout 组件仅引入了 footer 作为内容元素时, layui-layout-vertical 样式不生效, 导致布局错误。</li>
           <li>[修复] select 组件 multiple 属性为 true 时, 删除选项时清空筛选条件的问题。</li>
-          <li>[修复] cascader 外部清空 modelValue, 选中项仍不清楚的问题。</li>
-          <li>[修复] select 组件位于 layer 底部时, 点击时出现滚动条。</li>
-          <li>[修复] select 组件与 table 组件组合使用时, 下拉内容被遮盖。</li>
           <li>[修复] select 组件多选模式下提示信息错误, 将 "请选择" 调整为 "请输入"。</li>
-          <li>[修复] icon-picker 组件 show-search 属性开启时, 搜索不生效的问题。</li>
+          <li>[修复] select 组件与 table 组件组合使用时, 下拉内容被遮盖。</li>
+          <li>[修复] select 组件位于 layer 底部时, 点击时出现滚动条。</li>
           <li>[修复] select 组件外部修改 modelValue 值时, option 不选中的问题。</li>
+          <li>[修复] icon-picker 组件 show-search 属性开启时, 搜索不生效的问题。</li>
           <li>[修复] notice-bar 组件切换页面后, NodeJS.Timeout 定时器不清除的问题。</li>
           <li>[优化] page 组件 limit 逻辑, 切换 limit 后，如果页数大于当前页，保持当前页码不变，否则使用最大页码。</li>
           <li>[优化] input 组件 suffix 插槽与 allow-clear 启用时的显示顺序, clear > suffix。</li>

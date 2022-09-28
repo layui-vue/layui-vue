@@ -164,14 +164,18 @@ npm install @layui/icons-vue
 
   function getIconUnicode(iconClass){
     const iconEl = document.querySelector(`.site-doc-icon > li > .${iconClass}`);
-    const iconBeforeContent = window?.getComputedStyle(iconEl,":before").content;
+    const iconBeforeContent = window?.getComputedStyle(iconEl)?.content;
     return iconBeforeContent;
   } 
+
   onMounted(() => {
-    LayIconList?.forEach((icon) => {
-      const unicode = getIconUnicode(icon.class).charCodeAt(1).toString(16); // unicode 10进制转16进制
-      iconsUnicode.push(unicode)
-    });
+    nextTick(() => {
+      LayIconList?.forEach((icon) => {
+        // unicode 10进制转16进制
+        const unicode = getIconUnicode(icon.class).charCodeAt(1).toString(16); 
+        iconsUnicode.push(unicode)
+      });
+    })    
   })
 </script>
 
