@@ -110,7 +110,7 @@ const state = reactive({
   height: 40,
 });
 
-var timer:any;
+var timer: any;
 
 // 初始化 animation 各项参数
 const initAnimation = () => {
@@ -126,9 +126,9 @@ const initAnimation = () => {
 
 // 清除定时器
 onUnmounted(() => {
-    clearInterval(timer);
-    timer = null;
-})
+  clearInterval(timer);
+  timer = null;
+});
 
 // 计算 animation 滚动时长
 const computeAnimationTime = () => {
