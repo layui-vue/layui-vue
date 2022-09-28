@@ -51,7 +51,7 @@ const props = withDefaults(defineProps<LaySelectProps>(), {
   placeholder: "请选择",
   showEmpty: true,
   emptyMessage: "请选择",
-  searchPlaceholder: "请输入",
+  searchPlaceholder: "请搜索",
   collapseTagsTooltip: true,
   minCollapsedNum: 3,
   disabled: false,

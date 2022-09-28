@@ -62,7 +62,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { onMounted, reactive, nextTick, ref } from "vue";
+import { onMounted, reactive, nextTick, ref, onUnmounted } from "vue";
 import LayCarousel from "../carousel/index.vue";
 import LayCarouselItem from "../carouselItem/index.vue";
 import { LayIcon } from "@layui/icons-vue";
@@ -109,26 +109,36 @@ const state = reactive({
   isMode: false,
   height: 40,
 });
+
+var timer:any;
+
 // 初始化 animation 各项参数
 const initAnimation = () => {
   nextTick(() => {
     state.warpOWidth = noticeBarWarpRef.value.offsetWidth;
     state.textOWidth = noticeBarTextRef.value.offsetWidth;
     computeAnimationTime();
-    setTimeout(() => {
+    timer = setTimeout(() => {
       changeAnimation();
     }, props.delay * 1000);
   });
 };
+
+// 清除定时器
+onUnmounted(() => {
+    clearInterval(timer);
+    timer = null;
+})
+
 // 计算 animation 滚动时长
 const computeAnimationTime = () => {
   state.oneTime = state.textOWidth / props.speed;
   state.twoTime = (state.textOWidth + state.warpOWidth) / props.speed;
 };
+
 // 改变 animation 动画调用
 const changeAnimation = () => {
   if (state.order === 1) {
-    //noticeBarTextRef.value.style.cssText = `animation: oneAnimation ${state.oneTime}s linear; opactity: 1;}`;
     noticeBarTextRef.value.style.cssText = `animation: around1 ${state.oneTime}s  linear; opactity: 1;`;
     state.order = 2;
   } else {
@@ -136,6 +146,7 @@ const changeAnimation = () => {
     state.order = 1;
   }
 };
+
 // 监听 animation 动画的结束
 const listenerAnimationend = () => {
   noticeBarTextRef.value.addEventListener(
@@ -146,6 +157,7 @@ const listenerAnimationend = () => {
     false
   );
 };
+
 // 右侧 icon 图标点击
 const onRightIconClick = () => {
   if (!props.mode) return false;
@@ -156,6 +168,7 @@ const onRightIconClick = () => {
     emit("link");
   }
 };
+
 // 页面加载时
 onMounted(() => {
   if (props.scrollable) return false;

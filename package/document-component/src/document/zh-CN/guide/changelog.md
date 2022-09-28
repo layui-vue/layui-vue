@@ -31,6 +31,7 @@
           <li>[修复] select 组件多选模式下提示信息错误, 将 "请选择" 调整为 "请输入"。</li>
           <li>[修复] icon-picker 组件 show-search 属性开启时, 搜索不生效的问题。</li>
           <li>[修复] select 组件外部修改 modelValue 值时, option 不选中的问题。</li>
+          <li>[修复] notice-bar 组件切换页面后, NodeJS.Timeout 定时器不清除的问题。</li>
           <li>[优化] page 组件 limit 逻辑, 切换 limit 后，如果页数大于当前页，保持当前页码不变，否则使用最大页码。</li>
           <li>[优化] input 组件 suffix 插槽与 allow-clear 启用时的显示顺序, clear > suffix。</li>
           <li>[优化] tag 组件 border background height 等, 使其更贴合 layui 的设计规范。</li>
