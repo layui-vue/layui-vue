@@ -60,7 +60,7 @@ const props = withDefaults(defineProps<LaySelectProps>(), {
   multiple: false,
   allowClear: false,
   showSearch: false,
-  size: "md"
+  size: "md",
 });
 
 const slots = useSlots();
