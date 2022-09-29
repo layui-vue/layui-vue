@@ -310,8 +310,8 @@ export default {
   z-index: 99;
   width: 100%;
   position: fixed;
-  background: #ffffff;
   border-bottom: 1px solid #eeeeee;
+  background: #ffffff;
 }
 
 .layui-layout-document > .layui-layout > .layui-side {

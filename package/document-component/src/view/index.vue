@@ -455,9 +455,8 @@ body {
   border-radius: 4px;
   color: rgba(60, 60, 60, 0.7);
   border: 1px solid rgba(60, 60, 60, 0.7);
+  background: white;
   font-size: 14px;
-  transition: all 0.5s;
-  -webkit-transition: all 0.5s;
 }
 
 .footer {

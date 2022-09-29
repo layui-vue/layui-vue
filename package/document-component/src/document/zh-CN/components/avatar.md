@@ -13,7 +13,12 @@
 ::: demo 使用 `lay-avatar` 标签, 创建头像
 
 <template>
-  <lay-avatar :src="src"></lay-avatar>
+  <lay-space>
+    <lay-avatar :src="src"></lay-avatar>
+    <lay-avatar> Bai </lay-avatar>
+    <lay-avatar></lay-avatar>
+    <lay-avatar icon="layui-icon-face-smile"></lay-avatar>
+  </lay-space>
 </template>
 
 <script>

@@ -1,5 +1,6 @@
 <script lang="ts">
 import { computed, useSlots } from "vue";
+import { LayIcon } from "@layui/icons-vue";
 export default {
   name: "LayAvatar",
 };
@@ -7,16 +8,19 @@ export default {
 
 <script setup lang="ts">
 import "./index.less";
+
 export interface LayAvatarProps {
   src?: string;
   size?: "xs" | "sm" | "md" | "lg";
   radius?: boolean;
+  icon?: string;
   alt?: string;
 }
 
 const props = withDefaults(defineProps<LayAvatarProps>(), {
   size: "md",
   radius: false,
+  icon: "layui-icon-username"
 });
 
 const classes = computed(() => {
@@ -30,10 +34,13 @@ const slot = useSlots();
 </script>
 
 <template>
-  <span v-if="!slot.default" :class="classes">
+  <span :class="classes" v-if="slot.default">
+    <slot></slot>
+  </span>
+  <span v-else-if="src" :class="classes">
     <img :alt="alt" :src="src" />
   </span>
-  <span :class="classes" v-else>
-    <slot></slot>
+  <span v-else :class="classes">
+    <lay-icon :type="icon"></lay-icon>
   </span>
 </template>
