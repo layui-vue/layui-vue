@@ -20,7 +20,7 @@ export interface LayAvatarProps {
 const props = withDefaults(defineProps<LayAvatarProps>(), {
   size: "md",
   radius: false,
-  icon: "layui-icon-username"
+  icon: "layui-icon-username",
 });
 
 const classes = computed(() => {
