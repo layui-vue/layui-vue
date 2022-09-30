@@ -28,7 +28,6 @@ const props = withDefaults(defineProps<LaySelectOptionProps>(), {
   label: "",
 });
 
-const selectedItem: Ref<any> = inject("selectedItem") as Ref<any>;
 const openState: Ref<boolean> = inject("openState") as Ref<boolean>;
 const selectedValue: WritableComputedRef<any> = inject(
   "selectedValue"
@@ -53,21 +52,14 @@ const selected = computed(() => {
 });
 
 const select = () => {
-  const info = {
-    label: props.label,
-    value: props.value,
-    dispabled: props.disabled,
-    keyword: props.keyword,
-  };
-
   if (multiple.value) {
-    if (Array.isArray(selectedItem.value)) {
-      if (notChecked.value) selectedItem.value.push(info);
+    if (Array.isArray(selectedValue.value)) {
+      if (notChecked.value) selectedValue.value.push(props.value);
     } else {
-      selectedItem.value = [info];
+      selectedValue.value = [props.value];
     }
   } else {
-    selectedItem.value = info;
+    selectedValue.value = props.value;
   }
 };
 
@@ -80,8 +72,8 @@ const display = computed(() => {
 
 const notChecked = computed(() => {
   return (
-    selectedItem.value.find((item: any) => {
-      return item.value === props.value;
+    selectedValue.value.find((item: any) => {
+      return item === props.value;
     }) === undefined
   );
 });

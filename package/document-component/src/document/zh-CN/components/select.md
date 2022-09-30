@@ -183,7 +183,7 @@ export default {
 ::: demo
 <template>
   <lay-select v-model="selected2" :multiple="true">
-    <lay-select-option v-for="index of 200" :value="index" :label="index"></lay-select-option>
+    <lay-select-option v-for="index of count2" :value="index" :label="index"></lay-select-option>
   </lay-select>
 </template>
 
@@ -193,9 +193,15 @@ import { ref } from 'vue'
 export default {
   setup() {
 
+    const count2 = ref(0)
     const selected2 = ref([1])
 
+    setTimeout(() => {
+      count2.value = 100;
+    }, 2000);
+
     return {
+      count2,
       selected2
     }
   }
