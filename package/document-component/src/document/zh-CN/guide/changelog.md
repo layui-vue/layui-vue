@@ -14,17 +14,19 @@
       <ul> 
       <a name="1-5-1"></a> 
       <li> 
-        <h3>1.5.1 <span class="layui-badge-rim">2022-10-01</span></h3> 
+        <h3>1.5.1 <span class="layui-badge-rim">2022-09-30</span></h3> 
         <ul>
-          <li>[新增] avatar 组件 default 查询, 用于显示文本头像。</li>
+          <li>[新增] avatar 组件 default 插槽, 支持文本头像, 用于复杂场景。</li>
           <li>[新增] avatar 组件 icon 属性, 用于展示 iconfont 头像, 默认值为 `layui-icon-username`。</li>
+          <li>[修复] select 组件 multiple 为 true 且 showSearch 为 true 时光标为输入, 否则为小手指。</li>
+          <li>[修复] select 组件 slots 延时渲染, 选中项 label 不更新的问题。</li>
         </ul> 
       </li>
     </ul>
     <ul> 
       <a name="1-5-0"></a> 
       <li> 
-        <h3>1.5.0 <span class="layui-badge-rim">2022-10-01</span></h3> 
+        <h3>1.5.0 <span class="layui-badge-rim">2022-09-29</span></h3> 
         <ul>
           <li>[新增] tag-input 标签输入框组件, 用于录入事物的属性与纬度。</li>
           <li>[新增] table 组件 header 插槽, 用于在工具栏与表格之间插入元素。</li>
