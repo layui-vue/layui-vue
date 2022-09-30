@@ -311,7 +311,9 @@ export default {
   width: 100%;
   position: fixed;
   border-bottom: 1px solid #eeeeee;
-  background: #ffffff;
+  background-image: radial-gradient(transparent 1px, #ffffff 1px);
+  background-size: 4px 4px;
+  backdrop-filter: saturate(50%) blur(4px);
 }
 
 .layui-layout-document > .layui-layout > .layui-side {

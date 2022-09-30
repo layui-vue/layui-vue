@@ -182,7 +182,7 @@ export default {
 
 ::: demo
 <template>
-  <lay-select v-model="selected2">
+  <lay-select v-model="selected2" :multiple="true">
     <lay-select-option v-for="index of 200" :value="index" :label="index"></lay-select-option>
   </lay-select>
 </template>
@@ -193,7 +193,7 @@ import { ref } from 'vue'
 export default {
   setup() {
 
-    const selected2 = ref('1')
+    const selected2 = ref([1])
 
     return {
       selected2

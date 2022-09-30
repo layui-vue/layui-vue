@@ -23,6 +23,8 @@ const props = withDefaults(defineProps<LayAvatarProps>(), {
   icon: "layui-icon-username",
 });
 
+const slot = useSlots();
+
 const classes = computed(() => {
   return [
     "layui-avatar",
@@ -30,7 +32,6 @@ const classes = computed(() => {
     props.size ? `layui-avatar-${props.size}` : "",
   ];
 });
-const slot = useSlots();
 </script>
 
 <template>

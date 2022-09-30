@@ -148,7 +148,7 @@ provide("multiple", multiple);
 </script>
 
 <template>
-  <div class="layui-select">
+  <div class="layui-select layui-unselect">
     <lay-dropdown
       :disabled="disabled"
       :update-at-scroll="true"

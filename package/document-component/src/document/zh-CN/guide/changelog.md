@@ -11,6 +11,16 @@
 <template>
 <lay-timeline>
   <lay-timeline-item title="1.5.x">
+      <ul> 
+      <a name="1-5-1"></a> 
+      <li> 
+        <h3>1.5.1 <span class="layui-badge-rim">2022-10-01</span></h3> 
+        <ul>
+          <li>[新增] avatar 组件 default 查询, 用于显示文本头像。</li>
+          <li>[新增] avatar 组件 icon 属性, 用于展示 iconfont 头像, 默认值为 `layui-icon-username`。</li>
+        </ul> 
+      </li>
+    </ul>
     <ul> 
       <a name="1-5-0"></a> 
       <li> 

@@ -71,7 +71,9 @@
               <a
                 href="https://marketplace.visualstudio.com/items?itemName=morning-star.layui-vue-helper"
                 target="_blank"
-                >layui - vue - helper<cite> Visual Studio Code 辅助开发插件</cite></a
+                >layui - vue - helper<cite>
+                  Visual Studio Code 辅助开发插件</cite
+                ></a
               >
             </div>
           </li>
