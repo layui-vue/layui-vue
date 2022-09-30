@@ -39,7 +39,7 @@
               <a
                 href="https://gitee.com/layui-vue/layui-vue-admin"
                 target="_blank"
-                >layui - admin<cite>通用型 vue 3.0 后台模板</cite></a
+                >layui - vue - admin<cite>通用型 vue 3.0 后台模板</cite></a
               >
             </div>
           </li>
@@ -71,7 +71,7 @@
               <a
                 href="https://marketplace.visualstudio.com/items?itemName=morning-star.layui-vue-helper"
                 target="_blank"
-                >layui - helper<cite> Visual Studio Code 辅助开发插件</cite></a
+                >layui - vue - helper<cite> Visual Studio Code 辅助开发插件</cite></a
               >
             </div>
           </li>
@@ -89,6 +89,7 @@
 @import "@layui/layui-vue/es/container/index.css";
 @import "@layui/layui-vue/es/quote/index.css";
 @import "@layui/layui-vue/es/field/index.css";
+
 .alone {
   text-align: center;
   background-color: #009688;
