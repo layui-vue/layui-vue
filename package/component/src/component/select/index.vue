@@ -173,7 +173,7 @@ provide("multiple", multiple);
         :minCollapsedNum="minCollapsedNum"
         :disabledInput="true"
         :size="size"
-        :class="{'layui-unselect': true}"
+        :class="{ 'layui-unselect': true }"
         @clear="handleClear"
       >
         <template #suffix>
@@ -189,7 +189,7 @@ provide("multiple", multiple);
         :placeholder="placeholder"
         :allow-clear="allowClear"
         :readonly="!showSearch"
-        :class="{'layui-unselect': !showSearch}"
+        :class="{ 'layui-unselect': !showSearch }"
         :size="size"
         @Input="handleSearch"
         @clear="handleClear"
