@@ -237,6 +237,11 @@ const zhCN = [
             meta: { title: "树形组件" },
           },
           {
+            path: "/zh-CN/components/treeSelect",
+            component: () => import("../document/zh-CN/components/treeSelect.md"),
+            meta: { title: "下拉树组件" },
+          },
+          {
             path: "/zh-CN/components/page",
             component: () => import("../document/zh-CN/components/page.md"),
             meta: { title: "分页" },
