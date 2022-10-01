@@ -66,28 +66,46 @@
     </div>
     <div class="box-list">
       <lay-row :space="30">
-        <lay-col :md="6" :sm="12" :xs="12">
+        <lay-col :md="8" :sm="12" :xs="12">
           <div class="box">
-            <h1 class="title">🌈 Classic design</h1>
+            <div class="icon">🐼</div>
+            <h2 class="title">Classic design</h2>
             <p class="details">layui css.</p>
           </div>
         </lay-col>
-        <lay-col :md="6" :sm="12" :xs="12">
+        <lay-col :md="8" :sm="12" :xs="12">
           <div class="box">
-            <h1 class="title">🐝 Small volume</h1>
+            <div class="icon">🐝</div>
+            <h2 class="title">Small volume</h2>
             <p class="details">only 14.9 MB.</p>
           </div>
         </lay-col>
-        <lay-col :md="6" :sm="12" :xs="12">
+        <lay-col :md="8" :sm="12" :xs="12">
           <div class="box">
-            <h1 class="title">🍬 Setup script</h1>
+            <div class="icon">☀️</div>
+            <h2 class="title">Setup script</h2>
             <p class="details">use grammar sugar.</p>
           </div>
         </lay-col>
-        <lay-col :md="6" :sm="12" :xs="12">
+        <lay-col :md="8" :sm="12" :xs="12">
           <div class="box">
-            <h1 class="title">😋 Quick build</h1>
-            <p class="details">easy to use</p>
+            <div class="icon">🚀</div>
+            <h2 class="title">Classic design</h2>
+            <p class="details">layui css.</p>
+          </div>
+        </lay-col>
+        <lay-col :md="8" :sm="12" :xs="12">
+          <div class="box">
+            <div class="icon">☁️</div>
+            <h2 class="title">Small volume</h2>
+            <p class="details">only 14.9 MB.</p>
+          </div>
+        </lay-col>
+        <lay-col :md="8" :sm="12" :xs="12">
+          <div class="box">
+            <div class="icon">⚡</div>
+            <h2 class="title">Setup script</h2>
+            <p class="details">use grammar sugar.</p>
           </div>
         </lay-col>
       </lay-row>
@@ -103,7 +121,7 @@
             >
               <lay-avatar
                 src="https://unpkg.com/outeres@0.0.6/img/layui/icon-1.png"
-                style="border-radius: 4px"
+                style="border-radius: 2px"
               ></lay-avatar>
             </a>
           </lay-tooltip>
@@ -413,6 +431,7 @@ body {
 
 .link-list {
   padding: 50px 250px;
+  border-top: 1px solid #eeeeee;
 }
 
 .link-list .layui-col {
@@ -421,16 +440,28 @@ body {
 
 .box {
   background-color: #f9f9f9;
-  border: 1px solid rgba(60, 60, 60, 0.12);
+  border: 1px solid #f9f9f9;
   border-radius: 4px;
   padding: 24px;
   height: 100%;
 }
 
+.box .icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  border-radius: 6px;
+  background-color: #e5e5e5;
+  width: 48px;
+  height: 48px;
+  font-size: 24px;
+}
+
 .box .title {
+  line-height: 24px;
   font-size: 16px;
   font-weight: 600;
-  line-height: 24px;
 }
 
 .box .details {
@@ -438,7 +469,7 @@ body {
   padding-top: 8px;
   font-weight: 500;
   line-height: 24px;
-  color: rgba(60, 60, 60, 0.7);
+  color: rgba(56 56 56 / 70%);
 }
 
 .site-container .layui-field-title {
