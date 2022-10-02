@@ -25,6 +25,7 @@ interface ReplaceFields {
 }
 
 interface TreeConfig {
+  checkStrictly: boolean;
   showCheckbox: boolean;
   checkedKeys: StringOrNumber[];
   expandKeys: StringOrNumber[];
@@ -156,15 +157,15 @@ class Tree {
     }
   }
 
-  setCheckedKeys(checked: boolean, node: TreeData) {
+  setCheckedKeys(checked: boolean, checkStrictly: boolean, node: TreeData) {
     node.isChecked = checked;
-    // 处理上级
-    if (node.parentNode) {
-      this.setParentChecked(checked, node.parentNode);
-    }
-    // 处理下级
-    if (node.children) {
-      this.setChildrenChecked(checked, node.children);
+    if (!checkStrictly) {
+      if (node.parentNode) {
+        this.setParentChecked(checked, node.parentNode);
+      }
+      if (node.children) {
+        this.setChildrenChecked(checked, node.children);
+      }
     }
   }
 

@@ -238,7 +238,8 @@ const zhCN = [
           },
           {
             path: "/zh-CN/components/treeSelect",
-            component: () => import("../document/zh-CN/components/treeSelect.md"),
+            component: () =>
+              import("../document/zh-CN/components/treeSelect.md"),
             meta: { title: "下拉树组件" },
           },
           {

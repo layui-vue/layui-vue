@@ -31,6 +31,7 @@ export interface TreeNodeProps {
   nodeList: TreeData[];
   showCheckbox: boolean;
   showLine: boolean;
+  checkStrictly: boolean;
   collapseTransition: boolean;
   onlyIconControl: boolean;
 }
@@ -75,7 +76,7 @@ function recursiveNodeClick(node: TreeData) {
 }
 
 function handleChange(checked: boolean, node: TreeData) {
-  props.tree.setCheckedKeys(checked, node);
+  props.tree.setCheckedKeys(checked, props.checkStrictly, node);
 }
 
 function handleIconClick(node: TreeData) {
@@ -86,8 +87,11 @@ function handleTitleClick(node: TreeData) {
   if (!props.onlyIconControl) {
     handleIconClick(node);
   }
-  emit("node-click", node);
+  if (!node.isDisabled) {
+    emit("node-click", node);
+  }
 }
+
 function handleRowClick(node: TreeData) {
   if (!props.showLine) {
     handleTitleClick(node);
@@ -96,6 +100,7 @@ function handleRowClick(node: TreeData) {
 
 //判断是否半选
 const isChildAllSelected = computed(() => {
+
   function _isChildAllSelected(node: TreeData): boolean {
     if (!props.showCheckbox) {
       return false;
@@ -117,9 +122,14 @@ const isChildAllSelected = computed(() => {
     }
     return res;
   }
+
   return function (node: TreeData): boolean {
-    let res = _isChildAllSelected(node);
-    return res;
+    if(props.checkStrictly) {
+      return false;
+    } else {
+      let res = _isChildAllSelected(node);
+      return res;
+    }
   };
 });
 </script>
@@ -147,18 +157,14 @@ const isChildAllSelected = computed(() => {
             @click.stop="handleIconClick(node)"
           />
         </span>
-        <lay-checkbox
-          v-if="showCheckbox"
+        <lay-checkbox          
+          value="miss"
+          skin="primary"
           :modelValue="node.isChecked"
           :disabled="node.isDisabled"
-          skin="primary"
-          value=""
-          @change="
-            (checked) => {
-              handleChange(checked, node);
-            }
-          "
           :isIndeterminate="isChildAllSelected(node)"
+          @change="(checked) => handleChange(checked, node)"
+          v-if="showCheckbox"
         />
         <span
           :class="{
@@ -183,11 +189,12 @@ const isChildAllSelected = computed(() => {
         style="display: block"
       >
         <tree-node
+          :tree="tree"
           :node-list="node.children"
           :show-checkbox="showCheckbox"
           :show-line="showLine"
           :collapse-transition="collapseTransition"
-          :tree="tree"
+          :checkStrictly="checkStrictly"
           :only-icon-control="onlyIconControl"
           @node-click="recursiveNodeClick"
         >

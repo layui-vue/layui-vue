@@ -5,12 +5,20 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { computed, ref } from "vue";
+import "./index.less";
+import { computed, ref, watch } from "vue";
+import { getNode } from "../../utils/treeUtil";
 
 export interface LayTreeSelect {
-  data: any,
-  modelValue: string;
-  disabled: boolean;
+  data: any;
+  modelValue: any;
+  disabled?: boolean;
+  placeholder?: string;
+  multiple?: boolean;
+  allowClear?: boolean;
+  collapseTagsTooltip?: boolean;
+  minCollapsedNum?: number;
+  size?: string;
 }
 
 export interface TreeSelectEmits {
@@ -20,13 +28,21 @@ export interface TreeSelectEmits {
 }
 
 const props = withDefaults(defineProps<LayTreeSelect>(), {
-  disabled: false
+  disabled: false,
+  placeholder: "请选择",
+  multiple: false,
+  allowClear: false,
+  collapseTagsTooltip: true,
+  minCollapsedNum: 3,
+  size: "md",
 });
 
 const singleValue = ref();
+const multipleValue = ref(["1"]);
 const dropdownRef = ref();
 const openState = ref(false);
 const emits = defineEmits<TreeSelectEmits>();
+
 const selectedValue = computed({
   get() {
     return props.modelValue;
@@ -34,40 +50,85 @@ const selectedValue = computed({
   set(value) {
     emits("update:modelValue", value);
     emits("change", value);
-  }
-})
+  },
+});
+
+watch(
+  [selectedValue],
+  () => {
+    if (props.multiple) {
+      multipleValue.value = selectedValue.value.map((value: any) => {
+        const node: any = getNode(props.data, value);
+        node.label = node.title;
+        return node;
+      });
+    } else {
+      singleValue.value = props.data.find((item: any) => {
+        return item.value === selectedValue.value;
+      })?.label;
+    }
+  },
+  { immediate: true, deep: true }
+);
 
 const handleClick = (node: any) => {
   dropdownRef.value.hide();
   selectedValue.value = node.id;
-  singleValue.value = node.title; 
-}
+};
 </script>
 
 <template>
-  <div class="layui-tree-select">
-    <lay-dropdown       
+  <div class="layui-tree-select" :class="{ 'layui-disabled': disabled }">
+    <lay-dropdown
       ref="dropdownRef"
       :disabled="disabled"
       :update-at-scroll="true"
       @show="openState = true"
-      @hide="openState = false">
-      <lay-input v-model="singleValue"></lay-input>
+      @hide="openState = false"
+    >
+      <lay-tag-input
+        v-if="multiple"
+        v-model="multipleValue"
+        :size="size"
+        :allow-clear="allowClear"
+        :placeholder="placeholder"
+        :collapseTagsTooltip="collapseTagsTooltip"
+        :minCollapsedNum="minCollapsedNum"
+        :disabledInput="true"
+      >
+        <template #suffix>
+          <lay-icon
+            type="layui-icon-triangle-d"
+            :class="{ triangle: openState }"
+          ></lay-icon>
+        </template>
+      </lay-tag-input>
+      <lay-input
+        v-else
+        v-model="singleValue"
+        :size="size"
+        :placeholder="placeholder"
+        :disabled="disabled"
+        :readonly="true"
+      >
+        <template #suffix>
+          <lay-icon
+            type="layui-icon-triangle-d"
+            :class="{ triangle: openState }"
+          ></lay-icon>
+        </template>
+      </lay-input>
       <template #content>
         <div class="layui-tree-select-content">
-          <lay-tree :data="data" :onlyIconControl="true" @node-click="handleClick"></lay-tree>
+          <lay-tree
+            :data="data"
+            :onlyIconControl="true"
+            :show-checkbox="multiple"
+            v-model:checkedKeys="selectedValue"
+            @node-click="handleClick"
+          ></lay-tree>
         </div>
       </template>
-  </lay-dropdown>
+    </lay-dropdown>
   </div>
 </template>
-
-<style scoped>
-.layui-tree-select {
-  width: 220px;
-}
-
-.layui-tree-select-content {
-  padding: 10px;
-}
-</style>

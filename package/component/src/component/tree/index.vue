@@ -24,6 +24,7 @@ export interface TreeProps {
   checkedKeys?: KeysType;
   data: OriginalTreeData;
   showCheckbox?: boolean;
+  checkStrictly: boolean;
   edit?: EditType;
   collapseTransition?: boolean;
   onlyIconControl?: boolean;
@@ -49,6 +50,7 @@ const props = withDefaults(defineProps<TreeProps>(), {
   showCheckbox: false,
   edit: false,
   collapseTransition: true,
+  checkStrictly: false,
   onlyIconControl: false,
   disabled: false,
   showLine: true,
@@ -77,11 +79,13 @@ let tree = ref();
 let nodeList = ref();
 const unWatch = ref(false);
 const initStatus = ref(false);
+
 const loadNodeList = () => {
   let { tree: _tree, nodeList: _nodeList } = useTree(props, emit);
   tree.value = _tree;
   nodeList.value = _nodeList.value;
 };
+
 watch(
   () => props.data,
   () => {
@@ -89,6 +93,7 @@ watch(
   },
   { deep: true, immediate: true }
 );
+
 watch(
   () => props.checkedKeys,
   () => {
@@ -97,6 +102,7 @@ watch(
     }
   }
 );
+
 watch(
   tree,
   () => {
@@ -130,6 +136,7 @@ function handleClick(node: TreeData) {
       :node-list="nodeList"
       :show-checkbox="showCheckbox"
       :show-line="showLine"
+      :check-strictly="checkStrictly"
       :collapse-transition="collapseTransition"
       :only-icon-control="onlyIconControl"
       @node-click="handleClick"

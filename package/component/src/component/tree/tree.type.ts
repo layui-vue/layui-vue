@@ -15,6 +15,7 @@ export interface TreeProps {
   checkedKeys?: KeysType;
   expandKeys?: KeysType;
   data: OriginalTreeData;
+  checkStrictly?: boolean;
   showCheckbox?: boolean;
   edit?: EditType;
   collapseTransition?: boolean;
@@ -26,7 +27,6 @@ export interface TreeProps {
     title?: string;
   };
 }
-
 export interface TreeEmits {
   (e: "update:checkedKeys", keys: KeysType): void;
   (e: "update:expandKeys", keys: KeysType): void;

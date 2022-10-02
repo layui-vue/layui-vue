@@ -181,7 +181,7 @@ const components: Record<string, Plugin> = {
   LaySpace,
   LayTag,
   LayTagInput,
-  LayTreeSelect
+  LayTreeSelect,
 };
 
 const install = (app: App, options?: InstallOptions): void => {

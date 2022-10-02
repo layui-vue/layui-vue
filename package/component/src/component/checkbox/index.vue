@@ -6,7 +6,7 @@ export default {
 
 <script setup lang="ts">
 import { LayIcon } from "@layui/icons-vue";
-import { computed, inject } from "vue";
+import { computed, inject, useSlots } from "vue";
 import "./index.less";
 
 export interface LayCheckboxProps {
@@ -37,6 +37,8 @@ const isGroup = computed(() => {
 });
 
 const emit = defineEmits(["update:modelValue", "change"]);
+
+const slots = useSlots();
 
 const isChecked = computed({
   get() {
@@ -123,7 +125,7 @@ const isDisabled = computed(() => {
       }"
       :lay-skin="skin"
     >
-      <span class="layui-checkbox-label">
+      <span class="layui-checkbox-label" v-if="slots.default || label">
         <slot>{{ label }}</slot>
       </span>
       <lay-icon
