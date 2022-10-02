@@ -503,12 +503,12 @@ props.columns.map((value: any) => {
 });
 
 const currentIndentSize = ref(0);
-const childrenExpandSpace = ref(false);
-
-props.dataSource.map((value: any) => {
-  if (value[props.childrenColumnName]) {
-    childrenExpandSpace.value = true;
-  }
+const childrenExpandSpace = computed(() => {
+  return props.dataSource.find((value: any) => {
+    if (value[props.childrenColumnName]) {
+      return true; 
+    }
+  }) != undefined;
 });
 
 /**

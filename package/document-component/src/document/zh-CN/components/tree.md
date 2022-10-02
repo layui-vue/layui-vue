@@ -197,9 +197,9 @@ function handleClick(node) {
 
 <template>
   <lay-tree
-    :data="data2"
-	  v-model:checkedKeys="checkedKeys"
-	  :showCheckbox="showCheckbox"
+    :data="data3"
+	v-model:checkedKeys="checkedKeys3"
+	:showCheckbox="showCheckbox"
     collapse-transition
   >
   </lay-tree>
@@ -213,7 +213,7 @@ import { ref } from 'vue';
 const updateCheckedKeys=()=>{
   checkedKeys.value=[4]
 }
-const data2 = ref([{
+const data3 = ref([{
 	title: '一级1',
 	id: 1,
 	field: 'name1',
@@ -316,7 +316,8 @@ const data2 = ref([{
 		{
 			title: '三级2-1-2',
 			id: 12,
-			field: ''
+			field: '',
+			disabled: true
 		}]
 	},
 	{
@@ -375,7 +376,7 @@ const data2 = ref([{
 const updateView=()=>{
   data2.value[0].title='更新视图'
 }
-const checkedKeys = ref([2,3])
+const checkedKeys3 = ref([12, 14])
 const showCheckbox = ref(true)
 </script>
 

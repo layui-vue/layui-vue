@@ -1,6 +1,7 @@
 import { OriginalTreeData, StringOrNumber } from "./tree.type";
 import { Nullable } from "../../types";
 import { Ref, ref } from "vue";
+import { check } from "prettier";
 
 type CustomKey = string | number;
 type CustomString = (() => string) | string;
@@ -134,11 +135,20 @@ class Tree {
 
   setChildrenChecked(checked: boolean, nodes: TreeData[]) {
     const len = nodes.length;
+    /**
+     * 判断所有子项, 如果存在选中项, 并且全选, 取消所有选中
+     * 
+     * 如果存在选中项, 未全部选着, 选中全部
+     * 
+     * 如果不存在选中项, 选中全部可选 
+     */
     for (let i = 0; i < len; i++) {
-      nodes[i].isChecked = checked;
+      if(!nodes[i].isDisabled || (nodes[i].isDisabled && nodes[i].children.length > 0)) {
+        nodes[i].isChecked = checked;
+      }
       nodes[i].children &&
-        nodes[i].children.length > 0 &&
-        this.setChildrenChecked(checked, nodes[i].children);
+      nodes[i].children.length > 0 &&
+      this.setChildrenChecked(checked, nodes[i].children);
     }
   }
 

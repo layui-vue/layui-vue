@@ -24,7 +24,7 @@ export interface TreeProps {
   checkedKeys?: KeysType;
   data: OriginalTreeData;
   showCheckbox?: boolean;
-  checkStrictly: boolean;
+  checkStrictly?: boolean;
   edit?: EditType;
   collapseTransition?: boolean;
   onlyIconControl?: boolean;
