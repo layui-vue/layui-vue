@@ -21,6 +21,7 @@
           <li>[修复] tree 组件 node 配置 disabled 启用时, @node-click 事件仍触发的问题。</li>
           <li>[修复] checkbox 组件 label 属性与 default 插槽不设置, layui-checkbox-label 元素仍存在的问题。</li>
           <li>[修复] tree 组件 show-checkbox 为 true 时, 复选框与标题间距过宽的问题。</li>
+          <li>[调整] date-picker 组件 laydate-range-hover 前景色与背景色。</li>
         </ul> 
       </li>
     </ul>

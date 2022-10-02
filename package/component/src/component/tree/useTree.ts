@@ -23,7 +23,7 @@ export const useTree: UseTree = (props: TreeProps, emit: TreeEmits) => {
       showCheckbox: props.showCheckbox ?? false,
       checkedKeys: props.checkedKeys ?? [],
       expandKeys: props.expandKeys ?? [],
-      checkStrictly: props.checkStrictly ?? false
+      checkStrictly: props.checkStrictly ?? false,
     },
     props.data
   );

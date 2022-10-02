@@ -100,7 +100,6 @@ function handleRowClick(node: TreeData) {
 
 //判断是否半选
 const isChildAllSelected = computed(() => {
-
   function _isChildAllSelected(node: TreeData): boolean {
     if (!props.showCheckbox) {
       return false;
@@ -124,7 +123,7 @@ const isChildAllSelected = computed(() => {
   }
 
   return function (node: TreeData): boolean {
-    if(props.checkStrictly) {
+    if (props.checkStrictly) {
       return false;
     } else {
       let res = _isChildAllSelected(node);
@@ -157,7 +156,7 @@ const isChildAllSelected = computed(() => {
             @click.stop="handleIconClick(node)"
           />
         </span>
-        <lay-checkbox          
+        <lay-checkbox
           value="miss"
           skin="primary"
           :modelValue="node.isChecked"
