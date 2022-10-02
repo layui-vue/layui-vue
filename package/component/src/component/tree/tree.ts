@@ -133,15 +133,26 @@ class Tree {
     return node;
   }
 
+  treeForeach (tree: any, func: Function) {
+    tree.forEach((data: any) => {
+      data.children && this.treeForeach(data.children, func) // 遍历子树
+      func(data)
+    })
+  }
+
   setChildrenChecked(checked: boolean, nodes: TreeData[]) {
+    var ableCount = 0;
+    var checkCount = 0;
     const len = nodes.length;
-    /**
-     * 判断所有子项, 如果存在选中项, 并且全选, 取消所有选中
-     * 
-     * 如果存在选中项, 未全部选着, 选中全部
-     * 
-     * 如果不存在选中项, 选中全部可选 
-     */
+    this.treeForeach(nodes ,(node: any) => {
+      if(!node.isDisabled) {
+        ableCount = ableCount + 1;
+        if(node.isChecked) {
+          checkCount = checkCount + 1;
+        }
+      }
+    })
+    checkCount < ableCount ? checked = true : checked = false;
     for (let i = 0; i < len; i++) {
       if(!nodes[i].isDisabled || (nodes[i].isDisabled && nodes[i].children.length > 0)) {
         nodes[i].isChecked = checked;
