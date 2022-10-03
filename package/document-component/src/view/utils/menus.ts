@@ -187,12 +187,6 @@ const menus = [
       },
       {
         id: 39,
-        title: "下拉树",
-        subTitle: "select",
-        path: "/zh-CN/components/treeSelect",
-      },
-      {
-        id: 39,
         title: "标签输入框",
         subTitle: "tagInput",
         path: "/zh-CN/components/tagInput",

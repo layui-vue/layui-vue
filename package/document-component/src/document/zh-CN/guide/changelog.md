@@ -16,10 +16,14 @@
       <li> 
         <h3>1.6.0 <span class="layui-badge-rim">2022-10-08</span></h3> 
         <ul>
-          <li>[新增] tree 组件 selectedKey 属性, 支持单选节点高亮。</li>
           <li>[新增] tree 组件 checkStrictly 属性, 开启复选框时解除父子联动关系, 默认为 false。</li>
           <li>[修复] tree 组件 title 自定义标题插槽, 不生效的问题。</li>
           <li>[修复] tree 组件 node 配置 disabled 启用时, @node-click 事件仍触发的问题。</li>
+          <li>[修复] select 组件 multiple 开启时, 值不存在时导致控制台异常。</li>
+          <li>[修复] timeline 组件 title 属性必填警告。</li>
+          <li>[修复] cascader 组件 trigger 属性必填警告。</li>
+          <li>[修复] select-option 组件 value 属性 number 类型值警告。</li>
+          <li>[修复] checkbox 组件 value 属性 number 类型值警告。</li>
           <li>[修复] checkbox 组件 label 属性与 default 插槽不设置, layui-checkbox-label 元素仍存在的问题。</li>
           <li>[修复] tree 组件 show-checkbox 为 true 时, 复选框与标题间距过宽的问题。</li>
           <li>[修复] tree 组件 node 配置 disabled 启用时, 仍会因为父子关联选择。</li>

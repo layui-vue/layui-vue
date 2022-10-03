@@ -100,7 +100,7 @@ onMounted(() => {
     [selectedValue, options],
     () => {
       if (multiple.value) {
-        multipleValue.value = selectedValue.value.map((value: any) => {
+        multipleValue.value = selectedValue.value?.map((value: any) => {
           return options.value.find((item: any) => {
             item.disabled == "" || item.disabled == true
               ? (item.closable = false)

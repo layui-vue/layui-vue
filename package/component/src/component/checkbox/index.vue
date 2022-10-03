@@ -12,10 +12,10 @@ import "./index.less";
 export interface LayCheckboxProps {
   name?: string;
   skin?: string;
-  value: string | object;
+  value: string | number | object;
   label?: string;
   isIndeterminate?: boolean;
-  modelValue?: boolean | Array<string | object>;
+  modelValue?: boolean | Array<string | number | object>;
   disabled?: boolean;
   size?: "lg" | "md" | "sm" | "xs";
 }

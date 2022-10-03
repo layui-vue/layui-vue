@@ -8,7 +8,7 @@ export default {
 import { useSlots } from "vue";
 
 export interface LayTimelineItemProps {
-  title: string;
+  title?: string;
   simple?: boolean;
 }
 

@@ -86,8 +86,9 @@ export interface LayCascaderProps {
   replaceFields?: { label: string; value: string; children: string };
   allowClear?: boolean;
   size?: "lg" | "md" | "sm" | "xs";
-  trigger: DropdownTrigger | DropdownTrigger[];
+  trigger?: DropdownTrigger | DropdownTrigger[];
 }
+
 const props = withDefaults(defineProps<LayCascaderProps>(), {
   options: null,
   modelValue: "",

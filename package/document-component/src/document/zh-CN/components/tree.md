@@ -174,12 +174,11 @@ function handleClick(node) {
 	v-model:checkedKeys="checkedKeys2"
   >
   </lay-tree>
-  <br>
-  <a-space>
+  <lay-space>
     <lay-button @click="updateView2">更新数据</lay-button>
   	<lay-button @click="updateCheckedKeys2">更新选择</lay-button>
   	{{ checkedKeys2 }}
-  </a-space>
+  </lay-space>
 </template>
 
 <script setup>

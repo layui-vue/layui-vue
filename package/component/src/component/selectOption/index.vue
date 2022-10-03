@@ -17,7 +17,7 @@ import {
 
 export interface LaySelectOptionProps {
   label: string;
-  value: string | object;
+  value: string | number |object;
   disabled?: boolean;
   keyword?: string;
 }
