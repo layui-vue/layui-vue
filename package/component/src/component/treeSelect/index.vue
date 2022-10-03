@@ -19,6 +19,7 @@ export interface LayTreeSelect {
   collapseTagsTooltip?: boolean;
   minCollapsedNum?: number;
   size?: string;
+  checkStrictly?: boolean;
 }
 
 export interface TreeSelectEmits {
@@ -34,13 +35,14 @@ const props = withDefaults(defineProps<LayTreeSelect>(), {
   allowClear: false,
   collapseTagsTooltip: true,
   minCollapsedNum: 3,
+  checkStrictly: true,
   size: "md",
 });
 
 const singleValue = ref();
 const multipleValue = ref(["1"]);
-const dropdownRef = ref();
 const openState = ref(false);
+const dropdownRef = ref();
 const emits = defineEmits<TreeSelectEmits>();
 
 const selectedValue = computed({
@@ -53,6 +55,16 @@ const selectedValue = computed({
   },
 });
 
+const checkedKeys = computed({
+  get() {
+    return props.multiple ? props.modelValue : [];
+  },
+  set(value) {
+    emits("update:modelValue", value);
+    emits("change", value);
+  }
+})
+
 watch(
   [selectedValue],
   () => {
@@ -60,12 +72,14 @@ watch(
       multipleValue.value = selectedValue.value.map((value: any) => {
         const node: any = getNode(props.data, value);
         node.label = node.title;
+        node.closable = !node.disabled;
         return node;
       });
     } else {
-      singleValue.value = props.data.find((item: any) => {
-        return item.value === selectedValue.value;
-      })?.label;
+      const node: any = getNode(props.data, selectedValue.value);
+      if(node) {
+        singleValue.value = node.title;
+      }
     }
   },
   { immediate: true, deep: true }
@@ -87,14 +101,14 @@ const handleClick = (node: any) => {
       @hide="openState = false"
     >
       <lay-tag-input
-        v-if="multiple"
-        v-model="multipleValue"
         :size="size"
         :allow-clear="allowClear"
         :placeholder="placeholder"
         :collapseTagsTooltip="collapseTagsTooltip"
         :minCollapsedNum="minCollapsedNum"
         :disabledInput="true"
+        v-model="multipleValue"
+        v-if="multiple"
       >
         <template #suffix>
           <lay-icon
@@ -124,7 +138,9 @@ const handleClick = (node: any) => {
             :data="data"
             :onlyIconControl="true"
             :show-checkbox="multiple"
-            v-model:checkedKeys="selectedValue"
+            :check-strictly="checkStrictly"
+            v-model:selectedKey="selectedValue"
+            v-model:checkedKeys="checkedKeys"
             @node-click="handleClick"
           ></lay-tree>
         </div>

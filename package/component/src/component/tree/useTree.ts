@@ -33,15 +33,6 @@ export const useTree: UseTree = (props: TreeProps, emit: TreeEmits) => {
     return nodes;
   });
 
-  watch(
-    () => nodeList,
-    (list) => {
-      const { checkedKeys, expandKeys } = tree.getKeys();
-      emit("update:checkedKeys", checkedKeys);
-    },
-    { deep: true }
-  );
-
   return {
     tree,
     nodeList,

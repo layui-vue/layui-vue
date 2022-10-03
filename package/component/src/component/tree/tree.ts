@@ -133,33 +133,36 @@ class Tree {
     return node;
   }
 
-  treeForeach (tree: any, func: Function) {
+  treeForeach(tree: any, func: Function) {
     tree.forEach((data: any) => {
-      data.children && this.treeForeach(data.children, func) // 遍历子树
-      func(data)
-    })
+      data.children && this.treeForeach(data.children, func); // 遍历子树
+      func(data);
+    });
   }
 
   setChildrenChecked(checked: boolean, nodes: TreeData[]) {
     var ableCount = 0;
     var checkCount = 0;
     const len = nodes.length;
-    this.treeForeach(nodes ,(node: any) => {
-      if(!node.isDisabled) {
+    this.treeForeach(nodes, (node: any) => {
+      if (!node.isDisabled) {
         ableCount = ableCount + 1;
-        if(node.isChecked) {
+        if (node.isChecked) {
           checkCount = checkCount + 1;
         }
       }
-    })
-    checkCount < ableCount ? checked = true : checked = false;
+    });
+    checkCount < ableCount ? (checked = true) : (checked = false);
     for (let i = 0; i < len; i++) {
-      if(!nodes[i].isDisabled || (nodes[i].isDisabled && nodes[i].children.length > 0)) {
+      if (
+        !nodes[i].isDisabled ||
+        (nodes[i].isDisabled && nodes[i].children.length > 0)
+      ) {
         nodes[i].isChecked = checked;
       }
       nodes[i].children &&
-      nodes[i].children.length > 0 &&
-      this.setChildrenChecked(checked, nodes[i].children);
+        nodes[i].children.length > 0 &&
+        this.setChildrenChecked(checked, nodes[i].children);
     }
   }
 

@@ -83,22 +83,22 @@
         <lay-col :md="8" :sm="12" :xs="12">
           <div class="box">
             <div class="icon">☀️</div>
-            <h2 class="title">Setup script</h2>
-            <p class="details">use grammar sugar.</p>
+            <h2 class="title">Dark theme</h2>
+            <p class="details">provide theme variables.</p>
           </div>
         </lay-col>
         <lay-col :md="8" :sm="12" :xs="12">
           <div class="box">
             <div class="icon">🚀</div>
-            <h2 class="title">Classic design</h2>
-            <p class="details">layui css.</p>
+            <h2 class="title">Piu allegro</h2>
+            <p class="details">provide vscode plugin.</p>
           </div>
         </lay-col>
         <lay-col :md="8" :sm="12" :xs="12">
           <div class="box">
             <div class="icon">☁️</div>
-            <h2 class="title">Small volume</h2>
-            <p class="details">only 14.9 MB.</p>
+            <h2 class="title">Complete ecology</h2>
+            <p class="details">admin and form design.</p>
           </div>
         </lay-col>
         <lay-col :md="8" :sm="12" :xs="12">

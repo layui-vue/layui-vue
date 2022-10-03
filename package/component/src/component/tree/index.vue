@@ -22,6 +22,7 @@ export interface OriginalTreeData {
 
 export interface TreeProps {
   checkedKeys?: KeysType;
+  selectedKey?: any;
   data: OriginalTreeData;
   showCheckbox?: boolean;
   checkStrictly?: boolean;
@@ -54,6 +55,7 @@ const props = withDefaults(defineProps<TreeProps>(), {
   onlyIconControl: false,
   disabled: false,
   showLine: true,
+  selectedKey: "",
   replaceFields: () => {
     return {
       id: "id",
@@ -136,14 +138,15 @@ function handleClick(node: TreeData) {
       :node-list="nodeList"
       :show-checkbox="showCheckbox"
       :show-line="showLine"
+      :selectedKey="selectedKey"
       :check-strictly="checkStrictly"
       :collapse-transition="collapseTransition"
       :only-icon-control="onlyIconControl"
       @node-click="handleClick"
     >
-      <template v-if="slots.title">
-        <slot name="title" :data="data"></slot>
-      </template>
+        <template v-if="$slots.title" v-slot:title="{ data }">
+          <slot name="title" :data="data"></slot>
+        </template>
     </tree-node>
   </div>
 </template>

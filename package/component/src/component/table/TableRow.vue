@@ -172,7 +172,9 @@ const renderRowClassName = (data: any, index: number) => {
   return props.rowClassName(data, index);
 };
 
-const childrenIndentSize = computed(() => props.currentIndentSize + props.indentSize);
+const childrenIndentSize = computed(
+  () => props.currentIndentSize + props.indentSize
+);
 
 const renderFixedStyle = (column: any, columnIndex: number) => {
   if (column.fixed) {

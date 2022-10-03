@@ -31,6 +31,7 @@ export interface TreeNodeProps {
   nodeList: TreeData[];
   showCheckbox: boolean;
   showLine: boolean;
+  selectedKey: any;
   checkStrictly: boolean;
   collapseTransition: boolean;
   onlyIconControl: boolean;
@@ -122,7 +123,7 @@ const isChildAllSelected = computed(() => {
     return res;
   }
 
-  return function (node: TreeData): boolean {
+  return (node: TreeData): boolean => {
     if (props.checkStrictly) {
       return false;
     } else {
@@ -157,7 +158,7 @@ const isChildAllSelected = computed(() => {
           />
         </span>
         <lay-checkbox
-          value="miss"
+          value=""
           skin="primary"
           :modelValue="node.isChecked"
           :disabled="node.isDisabled"
@@ -169,15 +170,11 @@ const isChildAllSelected = computed(() => {
           :class="{
             'layui-tree-txt': true,
             'layui-disabled': node.isDisabled,
+            'layui-this': selectedKey === node.id
           }"
           @click.stop="handleTitleClick(node)"
         >
-          <template v-if="slots.title">
-            <slot name="title" :data="node"></slot>
-          </template>
-          <template v-else>
-            {{ node.title }}
-          </template>
+          <slot name="title" :data="node">{{ node.title }}</slot>
         </span>
       </div>
     </div>
@@ -192,13 +189,14 @@ const isChildAllSelected = computed(() => {
           :node-list="node.children"
           :show-checkbox="showCheckbox"
           :show-line="showLine"
+          :selected-key="selectedKey"
           :collapse-transition="collapseTransition"
           :checkStrictly="checkStrictly"
           :only-icon-control="onlyIconControl"
           @node-click="recursiveNodeClick"
         >
-          <template v-if="slots.title">
-            <slot name="title" :data="node"></slot>
+          <template v-if="$slots.title" v-slot:title="{ data }">
+            <slot name="title" :data="data"></slot>
           </template>
         </tree-node>
       </div>

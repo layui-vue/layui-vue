@@ -16,11 +16,13 @@
       <li> 
         <h3>1.6.0 <span class="layui-badge-rim">2022-10-08</span></h3> 
         <ul>
-          <li>[新增] tree-select 下拉选择树组件, 提供树结构数据选择。</li>
+          <li>[新增] tree 组件 selectedKey 属性, 支持单选节点高亮。</li>
           <li>[新增] tree 组件 checkStrictly 属性, 开启复选框时解除父子联动关系, 默认为 false。</li>
+          <li>[修复] tree 组件 title 自定义标题插槽, 不生效的问题。</li>
           <li>[修复] tree 组件 node 配置 disabled 启用时, @node-click 事件仍触发的问题。</li>
           <li>[修复] checkbox 组件 label 属性与 default 插槽不设置, layui-checkbox-label 元素仍存在的问题。</li>
           <li>[修复] tree 组件 show-checkbox 为 true 时, 复选框与标题间距过宽的问题。</li>
+          <li>[修复] tree 组件 node 配置 disabled 启用时, 仍会因为父子关联选择。</li>
           <li>[修复] table 组件 indentSize 属性, 在加载远程数据时不生效的问题。</li>
           <li>[调整] date-picker 组件 laydate-range-hover 前景色与背景色。</li>
         </ul> 
