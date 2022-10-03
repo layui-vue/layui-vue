@@ -179,7 +179,7 @@ const components: Record<string, Plugin> = {
   LayAffix,
   LaySpace,
   LayTag,
-  LayTagInput
+  LayTagInput,
 };
 
 const install = (app: App, options?: InstallOptions): void => {

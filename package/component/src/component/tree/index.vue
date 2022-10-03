@@ -144,9 +144,9 @@ function handleClick(node: TreeData) {
       :only-icon-control="onlyIconControl"
       @node-click="handleClick"
     >
-        <template v-if="$slots.title" v-slot:title="{ data }">
-          <slot name="title" :data="data"></slot>
-        </template>
+      <template v-if="$slots.title" v-slot:title="{ data }">
+        <slot name="title" :data="data"></slot>
+      </template>
     </tree-node>
   </div>
 </template>

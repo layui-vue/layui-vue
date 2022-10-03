@@ -62,8 +62,8 @@ const checkedKeys = computed({
   set(value) {
     emits("update:modelValue", value);
     emits("change", value);
-  }
-})
+  },
+});
 
 watch(
   [selectedValue],
@@ -77,7 +77,7 @@ watch(
       });
     } else {
       const node: any = getNode(props.data, selectedValue.value);
-      if(node) {
+      if (node) {
         singleValue.value = node.title;
       }
     }

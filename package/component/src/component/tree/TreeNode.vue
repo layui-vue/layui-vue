@@ -170,7 +170,7 @@ const isChildAllSelected = computed(() => {
           :class="{
             'layui-tree-txt': true,
             'layui-disabled': node.isDisabled,
-            'layui-this': selectedKey === node.id
+            'layui-this': selectedKey === node.id,
           }"
           @click.stop="handleTitleClick(node)"
         >
