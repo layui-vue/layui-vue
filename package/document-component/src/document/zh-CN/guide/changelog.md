@@ -14,7 +14,7 @@
     <ul> 
       <a name="1-6-0"></a> 
       <li> 
-        <h3>1.6.0 <span class="layui-badge-rim">2022-10-08</span></h3> 
+        <h3>1.6.0 <span class="layui-badge-rim">2022-10-04</span></h3> 
         <ul>
           <li>[新增] tree 组件 checkStrictly 属性, 开启复选框时解除父子联动关系, 默认为 false。</li>
           <li>[修复] tree 组件 title 自定义标题插槽, 不生效的问题。</li>
