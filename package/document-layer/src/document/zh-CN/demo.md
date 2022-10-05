@@ -16,11 +16,11 @@
 import { layer } from  "../../../../layer/src/index"
 
 const msg = function() {
-    layer.msg("普通消息", { time: 199999000 })
+    layer.msg("普通消息", { time: 1000 })
 }
 
 const success = function() {
-    layer.msg("成功消息", { time: 199999000, icon: 1})
+    layer.msg("成功消息", { time: 1000, icon: 1})
 }
 
 const failure = function() {

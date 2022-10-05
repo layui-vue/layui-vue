@@ -167,9 +167,9 @@ export function calculateContent(
   } else {
     if (type == 0) {
       if (title) {
-        return isMessage ? '' : "calc(" + height + " - 137px)";
+        return isMessage ? "" : "calc(" + height + " - 137px)";
       } else {
-        return isMessage ? '' : "calc(" + height + " - 86px)";
+        return isMessage ? "" : "calc(" + height + " - 86px)";
       }
     }
     if (type == 1 || type == 4) {
