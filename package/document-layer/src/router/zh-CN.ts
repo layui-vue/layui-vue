@@ -11,7 +11,7 @@ const zhCN = [
         path: "/zh-CN/demo",
         component: () => import("../document/zh-CN/demo.md"),
         meta: { title: "示例" },
-      }
+      },
     ],
   },
 ];

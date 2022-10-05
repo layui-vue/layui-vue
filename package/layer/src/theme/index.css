@@ -7,12 +7,6 @@
   user-select: none;
 }
 
-html #layuicss-layer {
-  display: none;
-  position: absolute;
-  width: 1989px;
-}
-
 .layui-layer,
 .layui-layer-shade {
   position: fixed;
@@ -708,10 +702,6 @@ html #layuicss-layer {
 .layui-layer-setwin .layui-layer-close1 {
   background-position: 1px -40px;
   cursor: pointer;
-}
-
-.layui-layer-setwin .layui-layer-close1:hover {
-  opacity: 0.7;
 }
 
 .layui-layer-setwin .layui-layer-close2 {
