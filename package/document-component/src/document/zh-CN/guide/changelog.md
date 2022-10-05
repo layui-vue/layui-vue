@@ -11,6 +11,19 @@
 <template>
 <lay-timeline>
   <lay-timeline-item title="1.6.x">
+      <ul> 
+      <a name="1-6-0"></a> 
+      <li> 
+        <h3>1.6.1 <span class="layui-badge-rim">2022-10-06</span></h3> 
+        <ul>
+          <li>[修复] layer 组件 v-model 默认为 true 时弹出层不显示的问题。</li>
+          <li>[修复] layer 组件 success 回调函数属性默认显示时不触发的问题。</li>
+          <li>[修复] layer 组件 msg 调用 content-height 内容高度计算不正确。</li>
+          <li>[修复] layer 组件 btn 与 close 操作抖动的问题。</li>
+          <li>[升级] layer-vue 1.4.3 版本。</li>
+        </ul> 
+      </li>
+    </ul>
     <ul> 
       <a name="1-6-0"></a> 
       <li> 
