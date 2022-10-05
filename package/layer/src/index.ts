@@ -75,12 +75,12 @@ const layer = {
   _context: <AppContext | null>null,
 
   // 页面
-  open: (option: any, callback: Function) => {
+  open: (option: any, callback?: Function) => {
     let defaultOption = {};
     return layer.create(option, defaultOption, callback);
   },
   // 抽屉
-  drawer: (option: any, callback: Function) => {
+  drawer: (option: any, callback?: Function) => {
     let defaultOption = {
       type: "drawer",
     };

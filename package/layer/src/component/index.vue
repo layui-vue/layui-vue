@@ -320,7 +320,7 @@ watch(
       beforeCloseSaveData();
     }
   },
-  { deep: true }
+  { deep: true, immediate: true }
 );
 
 /**
@@ -338,7 +338,7 @@ watch(
     } else {
       props.end();
     }
-  }
+  }, { immediate: true }
 );
 
 /**
@@ -447,8 +447,6 @@ const closeHandle = () => {
   emit("close");
   emit("update:modelValue", false);
   props.destroy();
-
-  //Notify 从队列中移除当前实例
   if (type === 6) {
     //@ts-ignore
     removeNotifiyFromQueen(props.id);
