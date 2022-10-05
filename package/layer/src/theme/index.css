@@ -28,15 +28,13 @@ html #layuicss-layer {
 }
 
 .layui-layer {
-  -webkit-overflow-scrolling: touch;
-  top: 150px;
+  top: 0;
   left: 0;
-  margin: 0;
-  padding: 0;
-  background-color: #fff;
-  -webkit-background-clip: content;
-  border-radius: 2px;
   box-shadow: 1px 1px 50px rgba(0, 0, 0, 0.3);
+  background-color: #fff;
+  border-radius: 2px;
+  padding: 0;
+  margin: 0;
 }
 
 .layui-layer-close {
@@ -734,8 +732,6 @@ html #layuicss-layer {
   text-align: right;
   padding: 0 15px 12px;
   pointer-events: auto;
-  user-select: none;
-  -webkit-user-select: none;
 }
 
 .layui-layer-btn a {
@@ -743,22 +739,12 @@ html #layuicss-layer {
   line-height: 28px;
   margin: 5px 5px 0;
   padding: 0 15px;
+  border-radius: 2px;
   border: 1px solid #dedede;
   background-color: #fff;
-  color: #333;
-  border-radius: 2px;
-  font-weight: 400;
   cursor: pointer;
-  text-decoration: none;
-}
-
-.layui-layer-btn a:hover {
-  opacity: 0.9;
-  text-decoration: none;
-}
-
-.layui-layer-btn a:active {
-  opacity: 0.8;
+  color: #333;
+  font-weight: 400;
 }
 
 .layui-layer-btn .layui-layer-btn0 {
@@ -911,182 +897,8 @@ html #layuicss-layer {
   background: url(loading-2.gif) no-repeat;
 }
 
-.layui-layer-tips {
-  background: 0 0;
-  box-shadow: none;
-  border: none;
-}
-
-.layui-layer-tips .layui-layer-content {
-  position: relative;
-  line-height: 22px;
-  min-width: 12px;
-  padding: 8px 15px;
-  font-size: 12px;
-  border-radius: 2px;
-  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
-  background-color: #000;
-  color: #fff;
-}
-
-.layui-layer-tips .layui-layer-close {
-  right: -2px;
-  top: -1px;
-}
-
-.layui-layer-tips i.layui-layer-TipsG {
-  position: absolute;
-  width: 0;
-  height: 0;
-  border-width: 8px;
-  border-color: transparent;
-  border-style: dashed;
-}
-
-.layui-layer-tips i.layui-layer-TipsB,
-.layui-layer-tips i.layui-layer-TipsT {
-  left: 5px;
-  border-right-style: solid;
-  border-right-color: #000;
-}
-
-.layui-layer-tips i.layui-layer-TipsT {
-  bottom: -8px;
-}
-
-.layui-layer-tips i.layui-layer-TipsB {
-  top: -8px;
-}
-
-.layui-layer-tips i.layui-layer-TipsL,
-.layui-layer-tips i.layui-layer-TipsR {
-  top: 5px;
-  border-bottom-style: solid;
-  border-bottom-color: #000;
-}
-
-.layui-layer-tips i.layui-layer-TipsR {
-  left: -8px;
-}
-
-.layui-layer-tips i.layui-layer-TipsL {
-  right: -8px;
-}
-
-.layui-layer-lan[type="dialog"] {
-  min-width: 280px;
-}
-
-.layui-layer-lan .layui-layer-title {
-  background: #4476a7;
-  color: #fff;
-  border: none;
-}
-
-.layui-layer-lan .layui-layer-btn {
-  padding: 5px 10px 10px;
-  text-align: right;
-  border-top: 1px solid #e9e7e7;
-}
-
-.layui-layer-lan .layui-layer-btn a {
-  background: #fff;
-  border-color: #e9e7e7;
-  color: #333;
-}
-
-.layui-layer-lan .layui-layer-btn .layui-layer-btn1 {
-  background: #c9c5c5;
-}
-
-.layui-layer-molv .layui-layer-title {
-  background: #009f95;
-  color: #fff;
-  border: none;
-}
-
-.layui-layer-molv .layui-layer-btn a {
-  background: #009f95;
-  border-color: #009f95;
-}
-
-.layui-layer-molv .layui-layer-btn .layui-layer-btn1 {
-  background: #92b8b1;
-}
-
 .layui-layer-iconext {
   background: url(icon-ext.png) no-repeat;
-}
-
-.layui-layer-prompt .layui-layer-input {
-  display: block;
-  width: 260px;
-  height: 36px;
-  margin: 0 auto;
-  line-height: 30px;
-  padding-left: 10px;
-  border: 1px solid #e6e6e6;
-  color: #333;
-}
-
-.layui-layer-prompt textarea.layui-layer-input {
-  width: 300px;
-  height: 100px;
-  line-height: 20px;
-  padding: 6px 10px;
-}
-
-.layui-layer-prompt .layui-layer-content {
-  padding: 20px;
-}
-
-.layui-layer-prompt .layui-layer-btn {
-  padding-top: 0;
-}
-
-.layui-layer-tab {
-  box-shadow: 1px 1px 50px rgba(0, 0, 0, 0.4);
-}
-
-.layui-layer-tab .layui-layer-title {
-  padding-left: 0;
-  overflow: visible;
-}
-
-.layui-layer-tab .layui-layer-title span {
-  position: relative;
-  float: left;
-  min-width: 80px;
-  max-width: 300px;
-  padding: 0 20px;
-  text-align: center;
-  overflow: hidden;
-  cursor: pointer;
-}
-
-.layui-layer-tab .layui-layer-title span.layui-this {
-  height: 51px;
-  border-left: 1px solid #eee;
-  border-right: 1px solid #eee;
-  background-color: #fff;
-  z-index: 10;
-}
-
-.layui-layer-tab .layui-layer-title span:first-child {
-  border-left: none;
-}
-
-.layui-layer-tabmain {
-  line-height: 24px;
-  clear: both;
-}
-
-.layui-layer-tabmain .layui-layer-tabli {
-  display: none;
-}
-
-.layui-layer-tabmain .layui-layer-tabli.layui-this {
-  display: block;
 }
 
 .layui-layer-photos {

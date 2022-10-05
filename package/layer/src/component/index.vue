@@ -338,7 +338,8 @@ watch(
     } else {
       props.end();
     }
-  }, { immediate: true }
+  },
+  { immediate: true }
 );
 
 /**
