@@ -32,7 +32,7 @@ export interface TreeNodeProps {
   showCheckbox: boolean;
   showLine: boolean;
   selectedKey: any;
-  checkStrictly: boolean;
+  checkStrictly: boolean | string;
   collapseTransition: boolean;
   onlyIconControl: boolean;
 }

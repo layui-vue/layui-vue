@@ -11,21 +11,23 @@ export interface OriginalTreeData {
   disabled?: boolean;
 }
 
+export interface ReplaceFieldsOptions {
+  id?: string;
+  children?: string;
+  title?: string;
+}
+
 export interface TreeProps {
   checkedKeys?: KeysType;
   expandKeys?: KeysType;
   data: OriginalTreeData;
-  checkStrictly?: boolean;
+  checkStrictly?: boolean | string;
   showCheckbox?: boolean;
   edit?: EditType;
   collapseTransition?: boolean;
   onlyIconControl?: boolean;
   showLine?: boolean;
-  replaceFields?: {
-    id?: string;
-    children?: string;
-    title?: string;
-  };
+  replaceFields?: ReplaceFieldsOptions;
 }
 export interface TreeEmits {
   (e: "update:checkedKeys", keys: KeysType): void;

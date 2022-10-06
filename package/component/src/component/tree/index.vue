@@ -20,22 +20,24 @@ export interface OriginalTreeData {
   disabled?: boolean;
 }
 
+export interface ReplaceFieldsOptions {
+  id?: string;
+  children?: string;
+  title?: string;
+}
+
 export interface TreeProps {
-  checkedKeys?: KeysType;
-  selectedKey?: any;
   data: OriginalTreeData;
-  showCheckbox?: boolean;
-  checkStrictly?: boolean;
+  disabled?: boolean;
   edit?: EditType;
+  checkedKeys?: KeysType;
+  checkStrictly?: boolean | string;
   collapseTransition?: boolean;
   onlyIconControl?: boolean;
+  selectedKey?: any;
   showLine?: boolean;
-  disabled?: boolean;
-  replaceFields?: {
-    id?: string;
-    children?: string;
-    title?: string;
-  };
+  showCheckbox?: boolean;
+  replaceFields?: ReplaceFieldsOptions;
 }
 
 interface TreeEmits {

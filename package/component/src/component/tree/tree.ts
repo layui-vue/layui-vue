@@ -26,7 +26,7 @@ interface ReplaceFields {
 }
 
 interface TreeConfig {
-  checkStrictly: boolean;
+  checkStrictly: boolean | string;
   showCheckbox: boolean;
   checkedKeys: StringOrNumber[];
   expandKeys: StringOrNumber[];
@@ -135,7 +135,7 @@ class Tree {
 
   treeForeach(tree: any, func: Function) {
     tree.forEach((data: any) => {
-      data.children && this.treeForeach(data.children, func); // 遍历子树
+      data.children && this.treeForeach(data.children, func);
       func(data);
     });
   }
@@ -181,7 +181,7 @@ class Tree {
     }
   }
 
-  setCheckedKeys(checked: boolean, checkStrictly: boolean, node: TreeData) {
+  setCheckedKeys(checked: boolean, checkStrictly: boolean | string, node: TreeData) {
     node.isChecked = checked;
     if (!checkStrictly) {
       if (node.parentNode) {
