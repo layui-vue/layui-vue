@@ -403,7 +403,7 @@ const menus = [
     children: [
       {
         id: 90,
-        title: "模态",
+        title: "模态框",
         subTitle: "modal",
         path: "/zh-CN/components/modal",
       },

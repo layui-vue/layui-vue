@@ -10,10 +10,10 @@
 ::: title 基本使用
 :::
 
-::: demo
+::: demo 通过 `lay-layer` 创建一个基础弹层, 使用 `v-model` 控制显示状态。
 
 <template>
-  <lay-button @click="changeVisible1" type="primary">基础使用</lay-button>
+  <lay-button @click="changeVisible1">打开</lay-button>
   <lay-layer title="基础使用" v-model="visible1">
       内容  
   </lay-layer>
@@ -30,7 +30,8 @@ export default {
         visible1.value = !visible1.value
     }
     return {
-        visible1
+        visible1,
+        changeVisible1
     };
   }
 };
@@ -38,14 +39,14 @@ export default {
 
 :::
 
-::: title 允许拖动
+::: title 禁止拖拽
 :::
 
-::: demo
+::: demo 通过 `move` 属性设置弹层是否可拖动, 默认为 `true`。
 
 <template>
-  <lay-button @click="changeVisible2" type="primary">允许拖动</lay-button>
-  <lay-layer title="允许拖动" v-model="visible2">
+  <lay-button @click="changeVisible2">打开</lay-button>
+  <lay-layer title="标题" :move="false" v-model="visible2">
       内容  
   </lay-layer>
 </template>
@@ -60,7 +61,8 @@ export default {
         visible2.value = !visible2.value
     }
     return {
-        visible2
+        visible2,
+        changeVisible2
     };
   }
 };
@@ -71,11 +73,11 @@ export default {
 ::: title 放大缩小
 :::
 
-::: demo
+::: demo 通过 `maxmin` 属性开启放大缩小操作, 默认为 `false`。
 
 <template>
-  <lay-button @click="changeVisible3" type="primary">放大缩小</lay-button>
-  <lay-layer title="放大缩小" v-model="visible3" move="true" maxmin="true">
+  <lay-button @click="changeVisible3">打开</lay-button>
+  <lay-layer title="标题" v-model="visible3" :maxmin="true">
       内容  
   </lay-layer>
 </template>
@@ -90,7 +92,8 @@ export default {
         visible3.value = !visible3.value
     }
     return {
-        visible3
+        visible3,
+        changeVisible3
     };
   }
 };
@@ -101,11 +104,11 @@ export default {
 ::: title 指定位置
 :::
 
-::: demo
+::: demo 通过 `offset` 属性设置初始显示位置, 支持 `string` 与 `array` 类型。
 
 <template>
-  <lay-button @click="changeVisible4" type="primary">指定位置</lay-button>
-  <lay-layer title="指定位置" v-model="visible4" move="true" :offset="['100px','100px']">
+  <lay-button @click="changeVisible4">打开</lay-button>
+  <lay-layer title="标题" v-model="visible4" move="true" :offset="['100px','100px']">
       内容  
   </lay-layer>
 </template>
@@ -120,7 +123,8 @@ export default {
         visible4.value = !visible4.value
     }
     return {
-        visible4
+        visible4,
+        changeVisible4
     };
   }
 };
@@ -131,11 +135,11 @@ export default {
 ::: title 尺寸拉伸
 :::
 
-::: demo
+::: demo 通过 `resize` 属性开启窗体拉伸, 默认为 `false`。
 
 <template>
   <lay-button @click="changeVisible8" type="primary">尺寸拉伸</lay-button>
-  <lay-layer title="拉伸尺寸" resize="true" v-model="visible8" move="true">
+  <lay-layer title="拉伸尺寸" :resize="true" v-model="visible8">
       内容  
   </lay-layer>
 </template>
@@ -150,7 +154,8 @@ export default {
         visible8.value = !visible8.value
     }
     return {
-        visible8
+        visible8,
+        changeVisible8
     };
   }
 };
@@ -161,11 +166,11 @@ export default {
 ::: title 远程窗体
 :::
 
-::: demo
+::: demo 你可以使用 layer 展示其他网站页面, 只需要设置 `type` 属性为 2, `content` 属性设置为指定页面的链接。
 
 <template>
-  <lay-button @click="changeVisible5" type="primary">远程窗体</lay-button>
-  <lay-layer title="加载 Iframe 内容" :area="['500px','400px']" maxmin="true" v-model="visible5" move="true" :type="type5" content="http://www.pearadmin.com"></lay-layer>
+  <lay-button @click="changeVisible5" type="primary">打开</lay-button>
+  <lay-layer title="加载 Iframe 内容" :area="['500px','400px']" v-model="visible5" move="true" :type="2" content="http://www.pearadmin.com"></lay-layer>
 </template>
 
 <script>
@@ -173,14 +178,13 @@ import { ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 export default {
   setup() {
-    const type5 = ref(2)
     const visible5 = ref(false)
     const changeVisible5 = function() {
         visible5.value = !visible5.value
     }
     return {
-        type5,
-        visible5
+        visible5,
+        changeVisible5
     };
   }
 };
@@ -191,11 +195,11 @@ export default {
 ::: title 定义操作
 :::
 
-::: demo
+::: demo 通过 `btn` 属性定义弹层底部操作。
 
 <template>
-  <lay-button @click="changeVisible6" type="primary">定义操作</lay-button>
-  <lay-layer title="定义操作" v-model="visible6" move="true" :btn="btn6">
+  <lay-button @click="changeVisible6">打开</lay-button>
+  <lay-layer title="标题" v-model="visible6" :btn="btn6">
       内容  
   </lay-layer>
 </template>
@@ -206,16 +210,17 @@ import { useRoute, useRouter } from "vue-router";
 export default {
   setup() {
     const visible6 = ref(false)
+    const changeVisible6 = function() {
+        visible6.value = !visible6.value
+    }
     const btn6 = [
         {text:'确认', callback: ()=>{ alert("确认事件") }},
         {text:'取消', callback: ()=>{ alert("取消事件") }}
     ]
-    const changeVisible6 = function() {
-        visible6.value = !visible6.value
-    }
     return {
         btn6,
-        visible6
+        visible6,
+        changeVisible6
     };
   }
 };
@@ -226,11 +231,11 @@ export default {
 ::: title 关闭遮盖
 :::
 
-::: demo
+::: demo 通过 `shade` 属性设置开启遮盖层, `shadeClose` 属性用于指定在点击遮盖层时是否关闭对应窗体。
 
 <template>
   <lay-button @click="changeVisible7" type="primary">开启遮盖</lay-button>
-  <lay-layer title="开启遮盖" move="true" shade="false" v-model="visible7">
+  <lay-layer title="开启遮盖" move="true" shade="true" shadeClose="true" v-model="visible7">
     内容  
   </lay-layer>
 </template>
@@ -245,7 +250,8 @@ export default {
         visible7.value = !visible7.value
     }
     return {
-        visible7
+        visible7,
+        changeVisible7
     };
   }
 };
@@ -275,7 +281,8 @@ export default {
         visible9.value = !visible9.value
     }
     return {
-        visible9
+        visible9,
+        changeVisible9
     };
   }
 };
@@ -286,7 +293,7 @@ export default {
 ::: title 函数调用
 :::
 
-::: demo
+::: demo 你可以通过 `lay-layer` 标签来创建弹, 亦可以通过 `layer.open` 方法来唤起一个弹出层。
 
 <template>
   <lay-button @click="open" type="primary">打开</lay-button>
