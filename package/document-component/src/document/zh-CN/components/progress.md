@@ -10,7 +10,7 @@
 ::: title 基础使用
 :::
 
-::: demo
+::: demo 通过 `lay-progress` 标签创建进度条, 使用 `percent` 属性设置进度。
 
 <template>
   <lay-progress percent="70"></lay-progress>
@@ -35,7 +35,7 @@ export default {
 ::: title 尺寸大小
 :::
 
-::: demo
+::: demo 使用 `size` 属性设置进度条尺寸。
 
 <template>
   <lay-progress percent="40" size="big"></lay-progress>
@@ -62,7 +62,7 @@ export default {
 ::: title 指定主题
 :::
 
-::: demo
+::: demo 使用 `theme` 属性, 设置进度条主题颜色。
 
 <template>
   <lay-progress percent="60" theme="red"></lay-progress>
@@ -93,7 +93,7 @@ export default {
 ::: title 显示文字
 :::
 
-::: demo
+::: demo 使用 `show-text` 属性开启内容展示, `text` 属性设置展示得内容。
 
 <template>
   <lay-progress percent="80" :show-text="showText"></lay-progress>
@@ -119,9 +119,10 @@ export default {
 
 :::
 
-::: title 环形进度条
+::: title 环形进度
 :::
-::: demo
+
+::: demo 使用 `circle` 属性创建环形进度条。
 
 <template>
   <lay-progress percent="10" circle :show-text="showText" style="margin-right:10px"></lay-progress>
