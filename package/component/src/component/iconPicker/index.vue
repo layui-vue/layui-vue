@@ -23,7 +23,6 @@ const props = withDefaults(defineProps<LayIconPickerProps>(), {
   page: false,
 });
 
-
 const emit = defineEmits(["update:modelValue", "change"]);
 const selectedIcon = computed(() => props.modelValue);
 const dropdownRef = ref<any>(null);
