@@ -100,7 +100,6 @@ class Tree {
     const nodeChildren = Reflect.get(origin, children);
     const nodeDisabled = !!Reflect.get(origin, "disabled");
     const nodeIsLeaf = !!Reflect.get(origin, "spread");
-
     const parentNode = nodeMap.get(parentKey);
 
     const node = Object.assign({}, origin, {
@@ -182,7 +181,11 @@ class Tree {
     }
   }
 
-  setCheckedKeys(checked: boolean, checkStrictly: boolean | string, node: TreeData) {
+  setCheckedKeys(
+    checked: boolean,
+    checkStrictly: boolean | string,
+    node: TreeData
+  ) {
     node.isChecked = checked;
     if (!checkStrictly) {
       if (node.parentNode) {

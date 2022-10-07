@@ -300,7 +300,7 @@ const getUploadChange = (e: any) => {
         let _sizeErrorFile = _cache[i];
         let errorMsg = `文件 ${
           _sizeErrorFile.name
-        } ${sizeErrorMsg},文件最大不可超过${props.size * 1000}kb`;
+        } ${sizeErrorMsg},文件最大不可超过${props.size}kb`;
         errorF(errorMsg);
         return;
       }
