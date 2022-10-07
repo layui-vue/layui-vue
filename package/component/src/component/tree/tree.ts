@@ -91,6 +91,7 @@ class Tree {
       originMap,
       checkedKeys,
       expandKeys,
+      checkStrictly,
       replaceFields: { children, id, title },
     } = this.config;
 
@@ -116,7 +117,7 @@ class Tree {
     });
 
     node.isDisabled = nodeDisabled;
-    if (parentNode && parentNode.isChecked) {
+    if (parentNode && parentNode.isChecked && checkStrictly == false) {
       node.isChecked = true;
     } else {
       node.isChecked = checkedKeys.includes(nodeKey);
