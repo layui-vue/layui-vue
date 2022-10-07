@@ -6,7 +6,7 @@ export default {
 
 <script setup lang="ts">
 import "./index.less";
-import { Ref, ref } from "vue";
+import { computed, Ref, ref, watch } from "vue";
 import { LayIconList as icons } from "@layui/icons-vue";
 import LayDropdown from "../dropdown/index.vue";
 import LayInput from "../input/index.vue";
@@ -23,14 +23,14 @@ const props = withDefaults(defineProps<LayIconPickerProps>(), {
   page: false,
 });
 
+
 const emit = defineEmits(["update:modelValue", "change"]);
-const selectedIcon: Ref<string> = ref(props.modelValue as string);
+const selectedIcon = computed(() => props.modelValue);
 const dropdownRef = ref<any>(null);
 
 const selectIcon = function (icon: string): void {
   emit("update:modelValue", icon);
   emit("change", icon);
-  selectedIcon.value = icon;
   dropdownRef.value?.hide();
 };
 

@@ -11,7 +11,20 @@
 <template>
 <lay-timeline>
   <lay-timeline-item title="1.6.x">
-      <ul> 
+    <ul> 
+      <a name="1-6-0"></a> 
+      <li> 
+        <h3>1.6.2 <span class="layui-badge-rim">2022-10-07</span></h3> 
+        <ul>
+          <li>[修复] upload 组件 size 属性提示信息单位换算错误。</li>
+          <li>[修复] tree 组件 checkStrictly 属性为 true 时, 初始数据仍关联选择。</li>
+          <li>[修复] icon-picker 组件 v-model 缺失响应式特性。</li>
+          <li>[修复] select-option 组件 hover 状态的选择样式。</li>
+          <li>[升级] 升级 vue 3.2.40 与 typescript 4.8.4。</li>
+        </ul> 
+      </li>
+    </ul>
+    <ul> 
       <a name="1-6-0"></a> 
       <li> 
         <h3>1.6.1 <span class="layui-badge-rim">2022-10-06</span></h3> 

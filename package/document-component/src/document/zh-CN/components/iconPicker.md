@@ -13,7 +13,7 @@
 ::: demo 使用 lay-icon-picker 标签, 创建图标选择器
 
 <template>
-  <lay-icon-picker type="layui-icon-face-smile"></lay-icon-picker>
+  <lay-icon-picker v-model="icon"></lay-icon-picker>
 </template>
 
 <script>
@@ -25,31 +25,7 @@ export default {
     const icon = ref("layui-icon-home")
 
     return {
-    }
-  }
-}
-</script>
-
-:::
-
-::: title 默认选择
-:::
-
-::: demo
-
-<template>
-  <lay-icon-picker v-model="icon" type="layui-icon-face-smile"></lay-icon-picker>
-</template>
-
-<script>
-import { ref } from 'vue'
-
-export default {
-  setup() {
-
-    const icon = ref("layui-icon-home")
-
-    return {
+      icon
     }
   }
 }
@@ -75,6 +51,7 @@ export default {
     const icon = ref("layui-icon-home")
 
     return {
+      icon
     }
   }
 }
@@ -100,31 +77,7 @@ export default {
     const icon = ref("layui-icon-home")
 
     return {
-    }
-  }
-}
-</script>
-
-:::
-
-::: title 静态面板
-:::
-
-::: demo
-
-<template>
-  <lay-icon-picker v-model="icon" type="layui-icon-face-smile" page showSearch position="static"></lay-icon-picker>
-</template>
-
-<script>
-import { ref } from 'vue'
-
-export default {
-  setup() {
-
-    const icon = ref("layui-icon-home")
-
-    return {
+      icon
     }
   }
 }
