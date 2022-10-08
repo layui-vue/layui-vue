@@ -95,10 +95,10 @@ const intOption = () => {
 };
 
 const handleRemove = (value: any) => {
-  if(Array.isArray(selectedValue.value)) {
-    selectedValue.value = selectedValue.value.filter(item => item != value);
+  if (Array.isArray(selectedValue.value)) {
+    selectedValue.value = selectedValue.value.filter((item) => item != value);
   }
-}
+};
 
 onMounted(() => {
   intOption();

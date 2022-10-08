@@ -327,7 +327,7 @@ watch(
  * 监听 visible 值
  * <p>
  */
-watch(
+ watch(
   () => visible.value,
   () => {
     if (visible.value) {
@@ -335,11 +335,18 @@ watch(
         firstOpenDelayCalculation();
       }
       props.success();
-    } else {
-      props.end();
     }
   },
   { immediate: true }
+);
+
+watch(
+  () => visible.value,
+  () => {
+    if (!visible.value) {
+      props.end();
+    }
+  }
 );
 
 /**
