@@ -33,11 +33,13 @@ const selectedValue: WritableComputedRef<any> = inject(
   "selectedValue"
 ) as WritableComputedRef<any>;
 const searchValue: Ref<string> = inject("searchValue") as Ref<string>;
+const selectRef: Ref<HTMLElement> = inject("selectRef") as Ref<HTMLElement>;
 const multiple: ComputedRef = inject("multiple") as ComputedRef;
 
 const handleSelect = () => {
   if (!multiple.value && !props.disabled) {
-    openState.value = false;
+    // @ts-ignore
+    selectRef.value.hide()
     selectedValue.value = props.value;
     select();
   }

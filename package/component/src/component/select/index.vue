@@ -66,6 +66,7 @@ const props = withDefaults(defineProps<LaySelectProps>(), {
 });
 
 const slots = useSlots();
+const selectRef = ref();
 const searchValue = ref("");
 const singleValue = ref("");
 const multipleValue = ref([]);
@@ -150,6 +151,7 @@ const handleClear = () => {
   }
 };
 
+provide("selectRef", selectRef);
 provide("openState", openState);
 provide("selectedValue", selectedValue);
 provide("searchValue", searchValue);
@@ -159,6 +161,7 @@ provide("multiple", multiple);
 <template>
   <div class="layui-select">
     <lay-dropdown
+      ref="selectRef"
       :disabled="disabled"
       :update-at-scroll="true"
       @show="openState = true"
