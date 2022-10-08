@@ -77,7 +77,7 @@ importers:
     specifiers:
       '@ctrl/tinycolor': ^3.4.1
       '@layui/icons-vue': ^1.0.9
-      '@layui/layer-vue': ^1.4.3
+      '@layui/layer-vue': ^1.4.4
       '@umijs/ssr-darkreader': ^4.9.45
       '@vueuse/core': ^9.2.0
       async-validator: ^4.1.1

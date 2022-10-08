@@ -14,6 +14,18 @@
     <ul> 
       <a name="1-6-0"></a> 
       <li> 
+        <h3>1.6.3 <span class="layui-badge-rim">2022-10-08</span></h3> 
+        <ul>
+          <li>[修复] select 组件 option 子组件 hover 样式缺失。</li>
+          <li>[修复] select 组件下拉图标在选择 option 后状态不重置的问题。</li>
+          <li>[修复] select 组件多选模式, 选项无法手动删除的问题。</li>
+          <li>[修复] layer 组件 end 回调函数多次触发的问题。</li>
+        </ul> 
+      </li>
+    </ul>
+    <ul> 
+      <a name="1-6-0"></a> 
+      <li> 
         <h3>1.6.2 <span class="layui-badge-rim">2022-10-07</span></h3> 
         <ul>
           <li>[修复] upload 组件 size 属性提示信息单位换算错误。</li>
