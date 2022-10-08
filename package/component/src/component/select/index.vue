@@ -26,6 +26,7 @@ import LayDropdown from "../dropdown/index.vue";
 import LaySelectOption, {
   LaySelectOptionProps,
 } from "../selectOption/index.vue";
+import { arrayExpression } from "@babel/types";
 
 export interface LaySelectProps {
   name?: string;
@@ -92,6 +93,12 @@ const intOption = () => {
   }
   Object.assign(options.value, props.items);
 };
+
+const handleRemove = (value: any) => {
+  if(Array.isArray(selectedValue.value)) {
+    selectedValue.value = selectedValue.value.filter(item => item != value);
+  }
+}
 
 onMounted(() => {
   intOption();
@@ -178,6 +185,7 @@ provide("multiple", multiple);
         :size="size"
         :class="{ 'layui-unselect': true }"
         @clear="handleClear"
+        @remove="handleRemove"
       >
         <template #suffix>
           <lay-icon
