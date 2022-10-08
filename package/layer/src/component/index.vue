@@ -327,7 +327,7 @@ watch(
  * 监听 visible 值
  * <p>
  */
- watch(
+watch(
   () => visible.value,
   () => {
     if (visible.value) {
