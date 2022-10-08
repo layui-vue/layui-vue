@@ -39,7 +39,7 @@ const multiple: ComputedRef = inject("multiple") as ComputedRef;
 const handleSelect = () => {
   if (!multiple.value && !props.disabled) {
     // @ts-ignore
-    selectRef.value.hide()
+    selectRef.value.hide();
     selectedValue.value = props.value;
     select();
   }
