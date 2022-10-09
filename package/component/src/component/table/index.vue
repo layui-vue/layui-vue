@@ -463,7 +463,7 @@ onMounted(() => {
 
   tableBody.value?.addEventListener("transitionend", () => {
     getScrollWidth();
-  })
+  });
 
   window.onresize = () => {
     getScrollWidth();

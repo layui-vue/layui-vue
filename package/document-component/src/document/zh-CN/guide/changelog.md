@@ -17,6 +17,7 @@
         <h3>1.6.4 <span class="layui-badge-rim">2022-10-09</span></h3> 
         <ul>
           <li>[修复] radio 组件 value 属性不兼容 number 类型而导致类型警告。</li>
+          <li>[修复] table 组件 .layui-table-body 增加过渡动画后, 修改 height 样式, 导致 header 错位。</li>
           <li>[修复] select-option 组件在伴随 v-if 指令时导致无法正常渲染。</li>
         </ul> 
       </li>
