@@ -457,14 +457,13 @@ watch(
 );
 
 onMounted(() => {
-  
   getScrollWidth();
   getFixedColumn();
 
   tableBody.value?.addEventListener("scroll", () => {
     getFixedColumn();
   });
-  
+
   window.onresize = () => {
     getScrollWidth();
     getFixedColumn();
