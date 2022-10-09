@@ -10,7 +10,7 @@
 ::: title 基础使用
 :::
 
-::: demo 使用 `lay-radio` 标签, 创建一个单选框
+::: demo 使用 `lay-radio` 标签, 创建一个单选框。
 
 <template>
     <lay-radio v-model="selected1" name="action" :value="1" label="写作"></lay-radio>
@@ -39,7 +39,7 @@ export default {
 ::: title 禁用状态
 :::
 
-::: demo
+::: demo 使用 `disabled` 属性, 禁用一个单选项。
 
 <template>
     <lay-radio v-model="selected2" name="action" value="1">写作</lay-radio>
@@ -70,7 +70,7 @@ export default {
 ::: title 事件回调
 :::
 
-::: demo
+::: demo 通过 `@change` 事件, 监听选项改变。
 
 <template>
     <lay-radio v-model="selected3" name="action" value="1" @change="change">写作</lay-radio>
@@ -98,10 +98,10 @@ export default {
 
 :::
 
-::: title 事件回调
+::: title 指定尺寸
 :::
 
-::: demo
+::: demo 使用 `size` 属性设置单选框尺寸, 可选值为 `lg` `md` `sm` `xs`, 默认为 `md`。
 
 <template>
     <lay-radio v-model="selected5" name="action" size="lg" value="1">写作</lay-radio>
@@ -127,11 +127,10 @@ export default {
 
 :::
 
-
 ::: title 单选分组
 :::
 
-::: demo
+::: demo 使用 `lay-radio-group` 标签, 存在大量单选框时极为有效。
 
 <template>
     <lay-radio-group name="action" v-model="selected4" @change="change4">
