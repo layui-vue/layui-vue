@@ -11,6 +11,15 @@
 <template>
 <lay-timeline>
   <lay-timeline-item title="1.6.x">
+      <ul> 
+      <a name="1-6-5"></a> 
+      <li> 
+        <h3>1.6.5 <span class="layui-badge-rim">2022-10-09</span></h3> 
+        <ul>
+          <li>[修复] datePicker 组件 类型为dateTime时 同时选择日期与时间不生效问题。</li>
+        </ul> 
+      </li>
+    </ul>
     <ul> 
       <a name="1-6-4"></a> 
       <li> 

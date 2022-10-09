@@ -35,6 +35,7 @@
         :date-list="dateList"
         v-model="Day"
         @simple="footOnOk"
+        @update:model-value="ChildUpdateModelValue"
       ></DateContent>
       <PanelFoot @ok="footOnOk" @now="footOnNow" @clear="footOnClear">
         <span
@@ -122,4 +123,8 @@ const footOnNow = () => {
 const footOnClear = () => {
   Day.value = -1;
 };
+
+const ChildUpdateModelValue=()=>{
+  emits("update:modelValue", Day.value);
+}
 </script>
