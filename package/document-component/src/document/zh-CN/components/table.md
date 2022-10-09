@@ -335,8 +335,7 @@ export default {
   <lay-table
     :columns="columns8"
     :data-source="dataSource8"
-    max-height="300px"
-    size="sm"
+    :max-height="maxHeight"
   >
     <template v-slot:operator="{ data }">
       <lay-button size="xs" @click="deleteColumn(data)">删除</lay-button>
@@ -346,6 +345,9 @@ export default {
 
 <script lang="ts" setup>
 import { ref } from 'vue'
+
+const maxHeight = ref('300px');
+
 const deleteColumn = ({ username }) => {
   const findIndex = dataSource8.value.findIndex((item) => item.username === username);
   dataSource8.value.splice(findIndex, 1);
@@ -684,7 +686,7 @@ export default {
       {username:"root", password:"root",sex:"男", age:"18", remark: 'layui - vue（谐音：类 UI) '},
       {username:"woow", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '},
       {username:"woow", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '},
-      {username:"woow", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '}
+      {username:"woow", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '},
     ]
 
     return {
@@ -1385,9 +1387,10 @@ export default {
 ::: demo 使用了绝大部分属性的 table 案例
 
 <template>
+  <lay-button @click="changeMaxHeight"></lay-button>
   <lay-table 
       id="id" 
-      max-height="200px"
+      :max-height="maxHeight5"
       :columns="columns5" 
       :expand-index="1" 
       :data-source="dataSource5" 
@@ -1423,6 +1426,11 @@ export default {
     const selectedKeys5 = ref(['1'])
     const checkbox5 = ref(true)
     const defaultToolbar5 = ref(true)
+    const maxHeight5 = ref('600px');
+
+    const changeMaxHeight = () => {
+      maxHeight5.value = '200px'
+    }
 
     const page5 = {
       total: 100,
@@ -1501,7 +1509,6 @@ export default {
   }
 }
 </script>
-
 :::
 
 

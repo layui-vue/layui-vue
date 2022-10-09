@@ -266,7 +266,8 @@ watch(
     tableDataSource.value = [...props.dataSource];
     tableSelectedKeys.value = [];
     tableSelectedKey.value = s;
-  }, { deep: true }
+  },
+  { deep: true }
 );
 
 const changeAll = (isChecked: boolean) => {
@@ -447,20 +448,22 @@ watch(
   () => [props.height, props.maxHeight, props.dataSource],
   () => {
     nextTick(() => {
-      console.log("触发");
       getScrollWidth();
     });
   }
 );
 
 onMounted(() => {
-
   getScrollWidth();
   getFixedColumn();
 
   tableBody.value?.addEventListener("scroll", () => {
     getFixedColumn();
   });
+
+  tableBody.value?.addEventListener("transitionend", () => {
+    getScrollWidth();
+  })
 
   window.onresize = () => {
     getScrollWidth();
