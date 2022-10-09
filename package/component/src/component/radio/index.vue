@@ -9,12 +9,12 @@ export default {
 import "./index.less";
 
 export interface LayRadioProps {
-  size?: "lg" | "md" | "sm" | "xs";
-  modelValue?: string | boolean;
-  disabled?: boolean;
-  value?: string;
-  label?: string;
   name?: string;
+  size?: "lg" | "md" | "sm" | "xs";
+  disabled?: boolean;
+  modelValue?: string | boolean | number;
+  value?: string | boolean | number;
+  label?: string;
 }
 
 const props = withDefaults(defineProps<LayRadioProps>(), {

@@ -8,7 +8,7 @@ export default {
 import { provide, ref, watch } from "vue";
 
 export interface LayRadioGroupProps {
-  modelValue?: string | boolean;
+  modelValue?: string | boolean | number;
   name?: string;
   disabled?: boolean;
 }

@@ -13,10 +13,10 @@
 ::: demo 使用 `lay-radio` 标签, 创建一个单选框
 
 <template>
-    <lay-radio v-model="selected1" name="action" value="1" label="写作"></lay-radio>
-    <lay-radio v-model="selected1" name="action" value="2" label="画画"></lay-radio>
-    <lay-radio v-model="selected1" name="action" value="3" label="运动"></lay-radio>
-    <lay-radio v-model="selected1" name="action" value="4">自定义slot</lay-radio>
+    <lay-radio v-model="selected1" name="action" :value="1" label="写作"></lay-radio>
+    <lay-radio v-model="selected1" name="action" :value="2" label="画画"></lay-radio>
+    <lay-radio v-model="selected1" name="action" :value="3" label="运动"></lay-radio>
+    <lay-radio v-model="selected1" name="action" :value="4">自定义slot</lay-radio>
 </template>
 
 <script>
@@ -25,7 +25,7 @@ import { ref } from 'vue'
 export default {
   setup() {
 
-    const selected1 = ref("1");
+    const selected1 = ref(1);
 
     return {
         selected1
