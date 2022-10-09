@@ -26,13 +26,13 @@
   padding: 0 10px;
   padding-left: 28px;
 }
+.lay-table-box table th code,
+.lay-table-box table td code {
+  line-height: 26px;
+}
 .lay-table-box table th {
   color: #666;
   font-weight: 500;
   background-color: #fafafa;
-}
-.lay-table-box table th,
-.lay-table-box table td {
-  white-space: nowrap;
 }
 </style>

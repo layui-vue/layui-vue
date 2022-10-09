@@ -77,7 +77,9 @@ const options = ref<any>([]);
 var timer: any;
 
 const getOption = (nodes: VNode[]) => {
-  nodes?.map((item: VNode) => {
+  nodes?.filter((item: VNode) => {
+    return item.children != "v-if";
+  })?.map((item: VNode) => {
     let component = item.type as Component;
     if (component.name === LaySelectOption.name) {
       options.value.push(item.props);
