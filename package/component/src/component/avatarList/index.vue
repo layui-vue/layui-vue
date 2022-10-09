@@ -4,9 +4,7 @@ export default {
 };
 </script>
 
-<script setup lang="ts">
-
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <div class="layui-avatar-list">
