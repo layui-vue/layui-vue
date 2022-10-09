@@ -38,10 +38,8 @@ const classes = computed(() => {
   <span :class="classes" v-if="slot.default">
     <slot></slot>
   </span>
-  <span v-else-if="src" :class="classes">
-    <img :alt="alt" :src="src" />
-  </span>
   <span v-else :class="classes">
-    <lay-icon :type="icon"></lay-icon>
+    <img v-if="src" :src="src" :alt="alt" />
+    <lay-icon v-else :type="icon" />
   </span>
 </template>
