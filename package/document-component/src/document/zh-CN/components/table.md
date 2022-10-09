@@ -119,7 +119,6 @@ export default {
 ::: demo
 
 <template>
-  page props: {{ page3 }}
   <lay-table :columns="columns3" :data-source="dataSource3" :page="page3" @change="change3"></lay-table>
 </template>
 
@@ -226,10 +225,9 @@ export default {
 ::: title 开启子表
 :::
 
-::: demo 当表格内容较多不能一次性完全展示时。
+::: demo 当表格内容较多不能一次性完全展示时, 你可以将多余内容展示到 `expand` 插槽。
 
 <template>
-  {{ expandKeys6 }}
   <lay-table :columns="columns6" :data-source="dataSource6" :default-expand-all="defaultExpandAll6" v-model:expandKeys="expandKeys6">
     <template v-slot:expand="{ data }"> 
       <lay-table :columns="columns6" :data-source="dataSource6"></lay-table>
@@ -285,7 +283,6 @@ export default {
 ::: demo 树形数据的展示，当数据中有 children 字段时会自动展示为树形表格, 通过设置 indentSize 以控制每一层的缩进宽度, 使用 childrenColumnName 替换默认字段
 
 <template>
-  {{ expandKeys7 }}
   <lay-table :columns="columns7" :data-source="dataSource7" :default-expand-all="defaultExpandAll7" v-model:expandKeys="expandKeys7">
     <template #score="{ data }">{{ data }}</template>
   </lay-table>
@@ -338,12 +335,12 @@ export default {
   <lay-table
     :columns="columns8"
     :data-source="dataSource8"
-    size="sm"
     max-height="300px"
+    size="sm"
   >
-              <template v-slot:operator="{ data }">
-              <lay-button size="xs" @click="deleteColumn(data)">删除</lay-button>
-            </template>
+    <template v-slot:operator="{ data }">
+      <lay-button size="xs" @click="deleteColumn(data)">删除</lay-button>
+    </template>
   </lay-table>
 </template>
 
@@ -1369,7 +1366,7 @@ export default {
         {id:"5",username:"就眠儀式",province:"山东",city:"济南",area: "高新区", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '}
       ];
       loading.value = false;
-      },50000000)
+      },5000)
     }
 
     return {

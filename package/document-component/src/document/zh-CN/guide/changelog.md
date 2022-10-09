@@ -12,7 +12,17 @@
 <lay-timeline>
   <lay-timeline-item title="1.6.x">
     <ul> 
-      <a name="1-6-0"></a> 
+      <a name="1-6-4"></a> 
+      <li> 
+        <h3>1.6.4 <span class="layui-badge-rim">2022-10-09</span></h3> 
+        <ul>
+          <li>[修复] radio 组件 value 属性不兼容 number 类型而导致类型警告。</li>
+          <li>[修复] select-option 组件在伴随 v-if 指令时导致无法正常渲染。</li>
+        </ul> 
+      </li>
+    </ul>
+    <ul> 
+      <a name="1-6-3"></a> 
       <li> 
         <h3>1.6.3 <span class="layui-badge-rim">2022-10-08</span></h3> 
         <ul>
@@ -24,7 +34,7 @@
       </li>
     </ul>
     <ul> 
-      <a name="1-6-0"></a> 
+      <a name="1-6-2"></a> 
       <li> 
         <h3>1.6.2 <span class="layui-badge-rim">2022-10-07</span></h3> 
         <ul>
@@ -37,7 +47,7 @@
       </li>
     </ul>
     <ul> 
-      <a name="1-6-0"></a> 
+      <a name="1-6-1"></a> 
       <li> 
         <h3>1.6.1 <span class="layui-badge-rim">2022-10-06</span></h3> 
         <ul>
