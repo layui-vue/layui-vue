@@ -204,7 +204,7 @@
               target="_blank"
             >
               <lay-avatar
-                src="https://sa-token.dev33.cn/doc/logo.png"
+                src="https://sa-token.dev33.cn/logo.png"
                 style="background: transparent"
               ></lay-avatar>
             </a>

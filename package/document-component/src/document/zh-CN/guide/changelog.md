@@ -16,7 +16,9 @@
       <li> 
         <h3>1.6.5 <span class="layui-badge-rim">2022-10-09</span></h3> 
         <ul>
-          <li>[修复] datePicker 组件 类型为dateTime时 同时选择日期与时间不生效问题。</li>
+          <li>[新增] datePicker 组件 type 属性为 date 与 datetime 时, 支持时间戳传入。</li>
+          <li>[修复] datePicker 组件 type 属性为 dateTime 时 同时选择日期与时间不生效问题。</li>
+          <li>[修复] datepicker 组件 type 属性为 mouth 时, v-model 为 number 类型时, 月份选择显示NaN。</li>
         </ul> 
       </li>
     </ul>
