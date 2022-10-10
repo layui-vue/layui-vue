@@ -16,7 +16,7 @@
         :prefix-icon="prefixIcon"
         :suffix-icon="suffixIcon"
         :disabled="disabled"
-        v-model="dateValue"
+        v-model="(dateValue as string)"
         v-if="!range"
         @change="onChange"
         :allow-clear="!disabled && allowClear"
@@ -120,7 +120,7 @@ import MonthRange from "./components/MonthRange.vue";
 export interface LayDatePickerProps {
   type?: "date" | "datetime" | "year" | "time" | "month" | "yearmonth";
   placeholder?: string;
-  modelValue?: string | string[];
+  modelValue?: string | number | string[];
   disabled?: boolean;
   simple?: boolean;
   name?: string;
@@ -133,6 +133,7 @@ export interface LayDatePickerProps {
   size?: "lg" | "md" | "sm" | "xs";
   prefixIcon?: string;
   suffixIcon?: string;
+  timestamp?:boolean
 }
 
 const props = withDefaults(defineProps<LayDatePickerProps>(), {
@@ -147,6 +148,7 @@ const props = withDefaults(defineProps<LayDatePickerProps>(), {
   size: "md",
   prefixIcon: "layui-icon-date",
   suffixIcon: "",
+  timestamp:false
 });
 
 const dropdownRef = ref(null);
@@ -228,7 +230,11 @@ const getDateValue = () => {
     $emits("update:modelValue", "");
     return;
   }
-  $emits("update:modelValue", dayjsVal);
+  if(props.timestamp){
+    $emits("update:modelValue", dayjs(dayjsVal).unix()*1000);
+  }else{
+    $emits("update:modelValue", dayjsVal);
+  }
   setTimeout(() => {
     unWatch = false;
   }, 0);
@@ -294,10 +300,13 @@ watch(
     if (unWatch) {
       return;
     }
-    let initModelValue =
+    let initModelValue:string =
       props.range && props.modelValue
         ? (props.modelValue as string[])[0] || ""
         : (props.modelValue as string);
+    if(props.type==='month'||props.type==='year'){
+      initModelValue+='';
+    }
 
     hms.value.hh = isNaN(dayjs(initModelValue).hour())
       ? 0
@@ -323,6 +332,9 @@ watch(
     if (props.type === "date" || props.type === "datetime") {
       if (currentYear.value === -1) currentYear.value = dayjs().year();
       if (currentMonth.value === -1) currentMonth.value = dayjs().month();
+      if(props.timestamp){
+        currentDay.value = initModelValue ? dayjs(parseInt(initModelValue)).startOf('date').unix()*1000 : -1;
+      }
     }
     rangeValue.first = initModelValue;
     rangeValue.last =
@@ -359,5 +371,6 @@ provide("datePicker", {
   rangeValue: rangeValue,
   rangeSeparator: props.rangeSeparator,
   simple: props.simple,
+  timestamp:props.timestamp
 });
 </script>

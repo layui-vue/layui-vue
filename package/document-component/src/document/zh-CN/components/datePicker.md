@@ -130,7 +130,7 @@ export default {
    const mouth = ref("4");
 
     return {
-      endTime4
+      mouth
     }
   }
 }
@@ -249,6 +249,39 @@ const rangeTime3 = ref(['2022-01-01','2023-02-1']);
 
 :::
 
+::: title 时间戳模式
+:::
+
+::: demo 仅在type等于`date`、`datetime`时有效 传入的一个 Unix 时间戳 (13 位数字，从1970年1月1日 UTC 午夜开始所经过的毫秒数) 
+
+<template>
+  <div style="display:flex;  align-items: center;margin-bottom: 5px;">
+    <lay-date-picker v-model="timestamp1" timestamp></lay-date-picker> 
+    <span style="margin-left:10px">modelValue:{{timestamp1}}</span>
+  </div>
+    <div style="display:flex;  align-items: center;margin-bottom: 5px;">
+    <lay-date-picker v-model="timestamp2" type='datetime' timestamp></lay-date-picker> 
+    <span style="margin-left:10px">modelValue:{{timestamp2}}</span>
+  </div>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+   const timestamp1 = ref(new Date().getTime());
+   const timestamp2 = ref(new Date().getTime());
+    return {
+      timestamp1,timestamp2
+    }
+  }
+
+</script>
+
+:::
+
 ::: title Date Picker 属性
 :::
 
@@ -258,14 +291,14 @@ const rangeTime3 = ref(['2022-01-01','2023-02-1']);
 | ------------- | ------------------------------------------------------------ | -------------- | ------ | -------------- |-------------- |
 | v-model      | 当前时间                                                     | `string`         | --    | --             | --             |
 | type        | 选择类型                                                   | `string`         | `date`    | `date` `datetime` `year` `month` `time` `yearmonth`             | --             |
-| disabled      | 是否禁止修改                                                     | `boolean`         | false    | —             | —             |
-| simple      | 一次性选择，无需点击确认按钮             | `boolean`         | false    | --             | --             |
-| readonly      | 只读             | `boolean`         | false    | --             | --             |
-| allowClear    | 允许清空             | `boolean`         | true    | --             | --             |
+| disabled      | 是否禁止修改                                                     | `boolean`         | `false`    | —             | —             |
+| simple      | 一次性选择，无需点击确认按钮             | `boolean`         | `false`    | --             | --             |
+| readonly      | 只读             | `boolean`         | `false`    | --             | --             |
+| allowClear    | 允许清空             | `boolean`         | `true`    | --             | --             |
 | size    | 尺寸            | `string`         | `lg` `md` `sm` `xs`    | `md`            | --             |
 | prefix-icon    | 前置图标            | `string`         | `layui-icon-date`    |  内置图标集            | `1.4.0`             |
 | suffix-icon    | 后置图标            | `string`         | --    | 内置图标集            | `1.4.0`             |
-
+| timestamp    | 时间戳模式(13位),仅对date和datetime有效| `boolean`        | `false`    | `true` `false`         | `1.6.5`             |
 :::
 
 ::: contributor datePicker
