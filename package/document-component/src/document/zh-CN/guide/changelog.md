@@ -19,6 +19,7 @@
           <li>[新增] datePicker 组件 type 属性为 date 与 datetime 时, 支持时间戳传入。</li>
           <li>[修复] datePicker 组件 type 属性为 dateTime 时 同时选择日期与时间不生效问题。</li>
           <li>[修复] datepicker 组件 type 属性为 mouth 时, v-model 为 number 类型时, 月份选择显示NaN。</li>
+          <li>[修复] tree 组件 checkedKeys 属性赋值默认子集全部选中的问题。</li>
         </ul> 
       </li>
     </ul>

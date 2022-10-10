@@ -116,11 +116,7 @@ class Tree {
     });
 
     node.isDisabled = nodeDisabled;
-    if (parentNode && parentNode.isChecked && checkStrictly == false) {
-      node.isChecked = true;
-    } else {
-      node.isChecked = checkedKeys.includes(nodeKey);
-    }
+    node.isChecked = checkedKeys.includes(nodeKey);
     node.isLeaf = parentNode ? parentNode.isLeaf : expandKeys.includes(nodeKey);
     node.isLeaf = nodeIsLeaf;
 
