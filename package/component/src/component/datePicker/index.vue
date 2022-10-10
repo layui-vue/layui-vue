@@ -16,7 +16,7 @@
         :prefix-icon="prefixIcon"
         :suffix-icon="suffixIcon"
         :disabled="disabled"
-        v-model="(dateValue as string)"
+        v-model="dateValue"
         v-if="!range"
         @change="onChange"
         :allow-clear="!disabled && allowClear"

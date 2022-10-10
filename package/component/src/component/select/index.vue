@@ -85,7 +85,7 @@ const getOption = (nodes: VNode[]) => {
     ?.map((item: VNode) => {
       let component = item.type as Component;
       if (component.name === LaySelectOption.name) {
-        if(item.children) {
+        if (item.children) {
           // @ts-ignore
           item.props.label = item.children.default()[0].children;
         }

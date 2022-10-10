@@ -13,7 +13,7 @@ import {
   WritableComputedRef,
   Ref,
   onMounted,
-  useSlots
+  useSlots,
 } from "vue";
 
 export interface LaySelectOptionProps {
@@ -30,7 +30,9 @@ const props = withDefaults(defineProps<LaySelectOptionProps>(), {
 });
 
 const openState: Ref<boolean> = inject("openState") as Ref<boolean>;
-const selectedValue: WritableComputedRef<any> = inject("selectedValue") as WritableComputedRef<any>;
+const selectedValue: WritableComputedRef<any> = inject(
+  "selectedValue"
+) as WritableComputedRef<any>;
 const searchValue: Ref<string> = inject("searchValue") as Ref<string>;
 const selectRef: Ref<HTMLElement> = inject("selectRef") as Ref<HTMLElement>;
 const multiple: ComputedRef = inject("multiple") as ComputedRef;
