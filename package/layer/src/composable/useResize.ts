@@ -1,7 +1,7 @@
 const useMove = function (el: HTMLElement, callback: Function) {
   if (el != null) {
     el.addEventListener("mousedown", function (event: any) {
-      const path = event.composedPath();
+      const path = (event.composedPath && event.composedPath()) || event.path;
       if (path[0].className === "layui-layer-resize") {
         if (event.button == 0 && el != null) {
           var x = el.offsetLeft;
