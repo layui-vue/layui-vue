@@ -4,13 +4,13 @@
 ::: title 基本介绍
 :::
 
-::: describe 需要一个简洁的确认框询问用户时。
+::: describe 需要一个简洁的对话框询问用户时。
 :::
 
 ::: title 基础使用
 :::
 
-::: demo
+::: demo 通过 `layer.confirm` 方法, 创建一个对话框。
 
 <template>
     <lay-button type="primary" @click="openConfirm1">信息框</lay-button>
@@ -38,7 +38,7 @@ export default {
 ::: title 指定操作
 :::
 
-::: demo
+::: demo 使用 `btn` 属性, 自定义对话框操作列表。
 
 <template>
     <lay-button type="primary" @click="openConfirm2">询问框</lay-button>
@@ -62,7 +62,6 @@ export default {
 </script>
 
 :::
-
 
 ::: title 组件方法
 :::
