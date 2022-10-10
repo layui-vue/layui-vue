@@ -10,7 +10,7 @@
 ::: title 基础使用
 :::
 
-::: demo
+::: demo 使用 layer.load(type, options) 方法创建一个加载层, `type` 属性用于设置弹出层类型。
 
 <template>
   <lay-button-container>
@@ -53,7 +53,7 @@ export default {
 ::: title 其他方式
 :::
 
-::: demo
+::: demo 使用 `layer.msg` 方法, 设置 `icon` 为 16, 弹出一个带有加载动画的提示信息。
 
 <template>
     <lay-button type="primary" @click="openLoading">加载消息</lay-button>
@@ -81,7 +81,7 @@ export default {
 ::: title 手动关闭
 :::
 
-::: demo 使用 layer.msg 创建弹出层, time 属性用于配置显示时长
+::: demo 通过 `layer.close()` 方法来关闭一个正在加载的实例。
 
 <template>
   <lay-button-container>

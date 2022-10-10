@@ -124,7 +124,7 @@ const footOnClear = () => {
   Day.value = -1;
 };
 
-const ChildUpdateModelValue=()=>{
+const ChildUpdateModelValue = () => {
   emits("update:modelValue", Day.value);
-}
+};
 </script>

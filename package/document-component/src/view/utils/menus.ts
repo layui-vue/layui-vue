@@ -415,7 +415,7 @@ const menus = [
       },
       {
         id: 92,
-        title: "询问",
+        title: "对话框",
         subTitle: "confirm",
         path: "/zh-CN/components/confirm",
       },
