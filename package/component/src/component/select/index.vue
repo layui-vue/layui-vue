@@ -79,6 +79,7 @@ var timer: any;
 const getOption = (nodes: VNode[]) => {
   nodes
     ?.filter((item: VNode) => {
+      console.log(JSON.stringify(item));
       return item.children != "v-if";
     })
     ?.map((item: VNode) => {
