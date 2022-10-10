@@ -133,7 +133,7 @@ export interface LayDatePickerProps {
   size?: "lg" | "md" | "sm" | "xs";
   prefixIcon?: string;
   suffixIcon?: string;
-  timestamp?:boolean
+  timestamp?: boolean;
 }
 
 const props = withDefaults(defineProps<LayDatePickerProps>(), {
@@ -148,7 +148,7 @@ const props = withDefaults(defineProps<LayDatePickerProps>(), {
   size: "md",
   prefixIcon: "layui-icon-date",
   suffixIcon: "",
-  timestamp:false
+  timestamp: false,
 });
 
 const dropdownRef = ref(null);
@@ -230,9 +230,9 @@ const getDateValue = () => {
     $emits("update:modelValue", "");
     return;
   }
-  if(props.timestamp){
-    $emits("update:modelValue", dayjs(dayjsVal).unix()*1000);
-  }else{
+  if (props.timestamp) {
+    $emits("update:modelValue", dayjs(dayjsVal).unix() * 1000);
+  } else {
     $emits("update:modelValue", dayjsVal);
   }
   setTimeout(() => {
@@ -300,12 +300,12 @@ watch(
     if (unWatch) {
       return;
     }
-    let initModelValue:string =
+    let initModelValue: string =
       props.range && props.modelValue
         ? (props.modelValue as string[])[0] || ""
         : (props.modelValue as string);
-    if(props.type==='month'||props.type==='year'){
-      initModelValue+='';
+    if (props.type === "month" || props.type === "year") {
+      initModelValue += "";
     }
 
     hms.value.hh = isNaN(dayjs(initModelValue).hour())
@@ -332,8 +332,10 @@ watch(
     if (props.type === "date" || props.type === "datetime") {
       if (currentYear.value === -1) currentYear.value = dayjs().year();
       if (currentMonth.value === -1) currentMonth.value = dayjs().month();
-      if(props.timestamp){
-        currentDay.value = initModelValue ? dayjs(parseInt(initModelValue)).startOf('date').unix()*1000 : -1;
+      if (props.timestamp) {
+        currentDay.value = initModelValue
+          ? dayjs(parseInt(initModelValue)).startOf("date").unix() * 1000
+          : -1;
       }
     }
     rangeValue.first = initModelValue;
@@ -371,6 +373,6 @@ provide("datePicker", {
   rangeValue: rangeValue,
   rangeSeparator: props.rangeSeparator,
   simple: props.simple,
-  timestamp:props.timestamp
+  timestamp: props.timestamp,
 });
 </script>

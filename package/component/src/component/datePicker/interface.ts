@@ -23,5 +23,5 @@ export type provideType = {
   };
   rangeSeparator: string;
   simple: boolean;
-  timestamp:boolean;
+  timestamp: boolean;
 };
