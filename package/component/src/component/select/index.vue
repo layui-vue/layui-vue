@@ -18,6 +18,7 @@ import {
   watch,
   nextTick,
   onUnmounted,
+  h,
 } from "vue";
 import { LayIcon } from "@layui/icons-vue";
 import LayInput from "../input/index.vue";
@@ -79,12 +80,15 @@ var timer: any;
 const getOption = (nodes: VNode[]) => {
   nodes
     ?.filter((item: VNode) => {
-      console.log(JSON.stringify(item));
       return item.children != "v-if";
     })
     ?.map((item: VNode) => {
       let component = item.type as Component;
       if (component.name === LaySelectOption.name) {
+        if(item.children) {
+          // @ts-ignore
+          item.props.label = item.children.default()[0].children;
+        }
         options.value.push(item.props);
       } else {
         getOption(item.children as VNode[]);
