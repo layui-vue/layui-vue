@@ -186,7 +186,7 @@ const renderFixedStyle = (column: any, columnIndex: number) => {
           props.columns[i].fixed == "left" &&
           props.tableColumnKeys.includes(props.columns[i].key)
         ) {
-          left = left + props.columns[i]?.width?.replace("px", "");
+          left = left + Number(props.columns[i]?.width?.replace("px", ""));
         }
       }
       return { left: `${left}px` } as StyleValue;
@@ -198,7 +198,7 @@ const renderFixedStyle = (column: any, columnIndex: number) => {
           props.columns[i].fixed == "right" &&
           props.tableColumnKeys.includes(props.columns[i].key)
         ) {
-          right = right + props.columns[i]?.width?.replace("px", "");
+          right = right + Number(props.columns[i]?.width?.replace("px", ""));
         }
       }
       return { right: `${right}px` } as StyleValue;

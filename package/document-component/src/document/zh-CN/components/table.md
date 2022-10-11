@@ -655,20 +655,20 @@ export default {
 
     const columns20 = [
       {
-        fixed:"left",
         title:"账户",
         width:"200px",
         key:"username"
       },{
-        fixed:"left",
         title:"密码",
         width: "300px",
         key:"password"
       },{
+        fixed:"right",
         title:"性别",
         width: "300px",
         key:"sex"
       },{
+        fixed:"right",
         title:"年龄",
         width: "300px",
         key:"age"
