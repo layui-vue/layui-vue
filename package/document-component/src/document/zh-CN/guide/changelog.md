@@ -16,6 +16,7 @@
       <li> 
         <h3>1.6.6 <span class="layui-badge-rim">2022-10-11</span></h3> 
         <ul>
+          <li>[新增] menu 组件 ident 属性, 用于开启目录缩进与缩进尺寸。</li>
           <li>[新增] table 组件 column 配置 total-row-method 属性, 用于自定义列统计逻辑。</li>
           <li>[修复] table 组件 column 配置 fixed 属性, 特殊情况下的列空白问题。</li>
           <li>[修复] talle 组件 table-row 行 algin 等属性, 不跟随 column 列配置的问题。</li>
