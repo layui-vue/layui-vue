@@ -609,13 +609,21 @@ const renderTotalRowCell = (column: any) => {
     if (column.totalRow != true) {
       return column.totalRow;
     } else {
-      let total = 0;
-      tableDataSource.value.forEach((item) => {
-        total = total + Number(item[column.key]);
-      });
-      return total;
+      if (column.totalRowMethod) {
+        return column.totalRowMethod(column, tableDataSource.value);
+      } else {
+        return totalRowMethod(column, tableDataSource.value);
+      }
     }
   }
+};
+
+const totalRowMethod = (column: any, dataSource: any[]) => {
+  let total = 0;
+  dataSource.forEach((item) => {
+    total = total + Number(item[column.key]);
+  });
+  return total;
 };
 
 onBeforeUnmount(() => {
@@ -707,18 +715,10 @@ onBeforeUnmount(() => {
                         class="layui-table-cell"
                         :class="[
                           renderFixedClassName(column, columnIndex),
-                          column.fixed
-                            ? `layui-table-fixed-${column.fixed}`
-                            : '',
-                          column.type == 'checkbox'
-                            ? 'layui-table-cell-checkbox'
-                            : '',
-                          column.type == 'radio'
-                            ? 'layui-table-cell-radio'
-                            : '',
-                          column.type == 'number'
-                            ? 'layui-table-cell-number'
-                            : '',
+                          column.fixed ? `layui-table-fixed-${column.fixed}` : '',
+                          column.type == 'checkbox' ? 'layui-table-cell-checkbox' : '',
+                          column.type == 'radio' ? 'layui-table-cell-radio' : '',
+                          column.type == 'number' ? 'layui-table-cell-number' : '',
                         ]"
                         :style="[
                           {
@@ -843,7 +843,23 @@ onBeforeUnmount(() => {
                   :key="columnIndex"
                 >
                   <template v-if="tableColumnKeys.includes(column.key)">
-                    <td>{{ renderTotalRowCell(column) }}</td>
+                    <td
+                      :style="[
+                        {
+                          textAlign: column.align,
+                          whiteSpace: column.ellipsisTooltip
+                            ? 'nowrap'
+                            : 'normal',
+                        },
+                        renderFixedStyle(column, columnIndex),
+                      ]"
+                      :class="[
+                        'layui-table-cell',
+                        renderFixedClassName(column, columnIndex),
+                        column.fixed ? `layui-table-fixed-${column.fixed}` : '',
+                      ]"
+                      v-html="renderTotalRowCell(column)"
+                    ></td>
                   </template>
                 </template>
               </tr>

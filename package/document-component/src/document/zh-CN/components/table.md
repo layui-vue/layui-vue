@@ -1057,8 +1057,7 @@ export default {
       },{
         title:"年龄",
         width: "300px",
-        key:"age",
-        totalRow: true
+        key:"age"
       },{
         title:"备注",
         width: "180px",
@@ -1459,6 +1458,10 @@ export default {
         width: "300px",
         key:"age",
         ellipsisTooltip: true,
+        totalRow: true,
+        totalRowMethod: (currentColumn, dataSource) => {
+          return "<span style='color:red'>自定义统计</span>";
+        }
       },
       {
         title:"备注",
