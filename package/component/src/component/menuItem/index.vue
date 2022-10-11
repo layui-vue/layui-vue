@@ -8,6 +8,7 @@ export default {
 import { computed, ComputedRef, inject, ref, Ref, useSlots } from "vue";
 import { DropdownContext, dropdownInjectionKey } from "../dropdown/interface";
 import useLevel from "../menu/useLevel";
+import { indentHandle } from "../menu/utils";
 import LayTooltip from "../tooltip/index.vue";
 
 export interface LayMenuItemProps {
@@ -22,6 +23,7 @@ const selectedKey: Ref<string> = inject("selectedKey") as Ref<string>;
 const isTree = inject("isTree") as ComputedRef<boolean>;
 const isCollapse = inject("isCollapse") as ComputedRef<boolean | string>;
 const theme = inject("menuTheme") as Ref<string>;
+const indent = inject("indent") as Ref<string | boolean>;
 const dropdownCtx = inject<DropdownContext | undefined>(
   dropdownInjectionKey,
   undefined
@@ -44,6 +46,7 @@ const needTooltip = computed(
   <li
     class="layui-nav-item"
     :class="[selectedKey === id ? 'layui-this' : '']"
+    :style="isTree && indentHandle({ indent, level })"
     @click="selectHandle()"
   >
     <template v-if="needTooltip">

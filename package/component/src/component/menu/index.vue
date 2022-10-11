@@ -18,6 +18,7 @@ export interface LayMenuProps {
   level?: boolean | string;
   collapse?: boolean | string;
   collapseTransition?: boolean | string;
+  indent?: boolean | string; // 菜单栏是否缩进
 }
 
 const emit = defineEmits([
@@ -36,6 +37,7 @@ const props = withDefaults(defineProps<LayMenuProps>(), {
   level: true,
   collapse: false,
   collapseTransition: true,
+  indent: false,
 });
 
 const isTree: ComputedRef<boolean> = computed(() => props.tree);
@@ -68,6 +70,15 @@ const selectedKey = computed({
   },
 });
 
+const indent = computed({
+  get() {
+    return props.indent;
+  },
+  set(val) {
+    // emit("update:indent", val);
+  },
+});
+
 watch(
   () => props.collapse,
   () => {
@@ -87,6 +98,7 @@ provide("openKeys", openKeys);
 provide("isCollapse", isCollapse);
 provide("isCollapseTransition", isCollapseTransition);
 provide("menuTheme", menuTheme);
+provide("indent", indent);
 </script>
 
 <template>

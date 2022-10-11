@@ -80,7 +80,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-menu :selected-key="selectedKey" @change-selected-Key="changeSelectedKey" @change-open-keys="changeOpenKeys" v-model:openKeys="openKeys2" :tree="true">
+  <lay-menu :selected-key="selectedKey" @change-selected-Key="changeSelectedKey" :indent="true" @change-open-keys="changeOpenKeys" v-model:openKeys="openKeys2" :tree="true">
     <lay-menu-item id="1">首页</lay-menu-item>
     <lay-menu-item id="2">首页</lay-menu-item>
     <lay-menu-item id="3">首页</lay-menu-item> 
@@ -96,7 +96,21 @@ export default {
             </template>
             <lay-menu-item id="11">首页</lay-menu-item> 
             <lay-menu-item id="12">首页</lay-menu-item>
-            <lay-menu-item id="13">首页</lay-menu-item>
+            <lay-sub-menu title="菜单" id="13">
+                <template #title>
+                  首页
+                </template>
+                <lay-menu-item id="14">首页</lay-menu-item> 
+                <lay-menu-item id="15">首页</lay-menu-item>
+                <lay-sub-menu title="菜单" id="16">
+                    <template #title>
+                      首页
+                    </template>
+                    <lay-menu-item id="17">首页</lay-menu-item> 
+                    <lay-menu-item id="18">首页</lay-menu-item>
+                    <lay-menu-item id="19">首页</lay-menu-item>
+                </lay-sub-menu>
+            </lay-sub-menu>
         </lay-sub-menu>
     </lay-sub-menu> 
   </lay-menu>
@@ -119,6 +133,7 @@ export default {
     }
 
     return {
+      indent,
       openKeys2,
       selectedKey,
       changeOpenKeys,
@@ -753,6 +768,7 @@ export default {
 | level               | 菜单层级       | `true` `false` |
 | collapse            | 折叠状态       | `true` `false` |
 | collapse-transition  | 折叠动画       | `true` `false` |
+| indent              | 菜单缩进        | `10px` `20px` `true`  |
 
 :::
 
