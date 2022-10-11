@@ -715,10 +715,18 @@ onBeforeUnmount(() => {
                         class="layui-table-cell"
                         :class="[
                           renderFixedClassName(column, columnIndex),
-                          column.fixed ? `layui-table-fixed-${column.fixed}` : '',
-                          column.type == 'checkbox' ? 'layui-table-cell-checkbox' : '',
-                          column.type == 'radio' ? 'layui-table-cell-radio' : '',
-                          column.type == 'number' ? 'layui-table-cell-number' : '',
+                          column.fixed
+                            ? `layui-table-fixed-${column.fixed}`
+                            : '',
+                          column.type == 'checkbox'
+                            ? 'layui-table-cell-checkbox'
+                            : '',
+                          column.type == 'radio'
+                            ? 'layui-table-cell-radio'
+                            : '',
+                          column.type == 'number'
+                            ? 'layui-table-cell-number'
+                            : '',
                         ]"
                         :style="[
                           {
