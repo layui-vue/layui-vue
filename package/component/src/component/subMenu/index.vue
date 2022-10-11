@@ -8,6 +8,7 @@ export default {
 import { computed, inject, ref, Ref, useSlots, watchEffect } from "vue";
 import LayTransition from "../transition/index.vue";
 import SubMenuPopup from "./SubMenuPopup.vue";
+import { indentHandle } from "../menu/utils";
 import { provideLevel, default as useLevel } from "../menu/useLevel";
 
 export interface LaySubMenuProps {
@@ -22,6 +23,7 @@ const { level } = useLevel();
 const isTree: Ref<boolean> = inject("isTree") as Ref<boolean>;
 const selectedKey: Ref<string> = inject("selectedKey") as Ref<string>;
 const openKeys: Ref<string[]> = inject("openKeys") as Ref<string[]>;
+const indent = inject("indent") as Ref<string | boolean>;
 const isCollapse: Ref<boolean | string> = inject("isCollapse") as Ref<
   boolean | string
 >;
@@ -70,7 +72,17 @@ const openHandle = function () {
 
 <template>
   <li v-if="!needPopup" class="layui-nav-item">
-    <a href="javascript:void(0)" @click="openHandle()">
+    <a
+      href="javascript:void(0)"
+      @click="openHandle()"
+      :style="
+        indentHandle({
+          indent,
+          level,
+          basePadding: 23,
+        })
+      "
+    >
       <!-- 图标 -->
       <i v-if="slots.icon" class="layui-sub-menu-icon">
         <slot name="icon"></slot>
