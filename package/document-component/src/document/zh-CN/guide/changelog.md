@@ -16,7 +16,7 @@
       <li> 
         <h3>1.6.7 <span class="layui-badge-rim">2022-10-12</span></h3> 
         <ul>
-          <li>优化菜单的问题</li>
+          <li>[修复] menu 组件 ident 属性带来的 typescript 警告。</li>
           <li>[修复] tansfer 组件 data-source 属性缺少响应式的特性。</li>
           <li>[修复] upload 组件 drag 属性开启后, 拖拽上传无效的问题。</li>
           <li>[优化] switch 组件 on-switch-text 和 un-switch-text 属性, 为描述提供适当边距。</li>
