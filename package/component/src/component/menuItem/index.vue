@@ -46,7 +46,7 @@ const needTooltip = computed(
   <li
     class="layui-nav-item"
     :class="[selectedKey === id ? 'layui-this' : '']"
-    :style="isTree && indentHandle({ indent, level })"
+    :style="indentHandle({ indent, level, isTree })"
     @click="selectHandle()"
   >
     <template v-if="needTooltip">

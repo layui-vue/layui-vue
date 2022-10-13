@@ -75,13 +75,7 @@ const openHandle = function () {
     <a
       href="javascript:void(0)"
       @click="openHandle()"
-      :style="
-        indentHandle({
-          indent,
-          level,
-          basePadding: 23,
-        })
-      "
+      :style="indentHandle({indent,level,basePadding: 23,isTree})"
     >
       <!-- 图标 -->
       <i v-if="slots.icon" class="layui-sub-menu-icon">

@@ -80,7 +80,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-menu :selected-key="selectedKey" @change-selected-Key="changeSelectedKey" :indent="true" @change-open-keys="changeOpenKeys" v-model:openKeys="openKeys2" :tree="true">
+  <lay-menu :selected-key="selectedKey" @change-selected-Key="changeSelectedKey" @change-open-keys="changeOpenKeys" v-model:openKeys="openKeys2" :tree="true">
     <lay-menu-item id="1">首页</lay-menu-item>
     <lay-menu-item id="2">首页</lay-menu-item>
     <lay-menu-item id="3">首页</lay-menu-item> 
