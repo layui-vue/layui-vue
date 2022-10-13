@@ -12,6 +12,7 @@ import {
   ComputedRef,
   getCurrentInstance,
   nextTick,
+  onMounted,
   ref,
   useSlots,
   withDefaults,
@@ -129,22 +130,17 @@ const props = withDefaults(defineProps<LayUploadProps>(), {
 const slot = useSlots();
 const slots = slot.default && slot.default();
 const context = getCurrentInstance();
-const emit = defineEmits([
-  "choose",
-  "before",
-  "done",
-  "error",
-  "cutdone",
-  "cutcancel",
-]);
+const emit = defineEmits(["choose","before","done","error","cutdone","cutcancel"]);
 
 const isDragEnter = ref(false);
 const activeUploadFiles = ref<any[]>([]);
 const activeUploadFilesImgs = ref<any[]>([]);
 const orgFileInput = templateRef<HTMLElement>("orgFileInput");
 let _cropper: any = null;
+
 let computedCutLayerOption: ComputedRef<LayerModal>;
-if (props.cutOptions && props.cutOptions.layerOption) {
+
+  if (props.cutOptions && props.cutOptions.layerOption) {
   computedCutLayerOption = computed(() =>
     Object.assign(defaultCutLayerOption, props.cutOptions.layerOption)
   );
@@ -231,24 +227,13 @@ const localUpload = (option: localUploadOption, callback: Function) => {
   xhr.onreadystatechange = function () {
     let currentTimeStamp = new Date().valueOf();
     if (xhr.readyState === 1) {
-      if (
-        (xhr.status >= 200 && xhr.status <= 300) ||
-        xhr.status === 304 ||
-        xhr.status == 0
-      ) {
+      if ((xhr.status >= 200 && xhr.status <= 300) || xhr.status === 304 || xhr.status == 0) {
         let successText = "上传开始";
-        emit(
-          "before",
-          Object.assign({ currentTimeStamp, msg: successText, ...option })
-        );
+        emit("before",Object.assign({ currentTimeStamp, msg: successText, ...option }));
       }
     } else if (xhr.readyState === 4) {
       let successText = xhr.responseText ? xhr.responseText : uploadSuccess;
-      if (
-        (xhr.status >= 200 && xhr.status <= 300) ||
-        xhr.status === 304 ||
-        xhr.status == 0
-      ) {
+      if ((xhr.status >= 200 && xhr.status <= 300) || xhr.status === 304 || xhr.status == 0) {
         let data = xhr.responseText;
         emit("done", { currentTimeStamp, msg: successText, data: data });
       }
@@ -362,7 +347,25 @@ const clickOrgInput = () => {
   emit("choose", currentTimeStamp);
 };
 
-const cutTransaction = () => {};
+const dragRef = ref();
+
+function dragEnter(e: any){
+	e.stopPropagation();
+	e.preventDefault();
+}
+
+function dragOver(e: any){
+	e.stopPropagation();
+	e.preventDefault();
+}
+
+onMounted(() => {
+  nextTick(() => {
+    dragRef.value.addEventListener("dragenter",dragEnter,false);
+    dragRef.value.addEventListener("dragover",dragOver,false);
+    dragRef.value.addEventListener("drop",getUploadChange,false);
+  })
+})
 </script>
 
 <template>
@@ -394,14 +397,9 @@ const cutTransaction = () => {};
     </div>
     <div
       v-else
+      ref="dragRef"
       class="layui-upload-drag"
-      :class="
-        disabled
-          ? 'layui-upload-drag-disable'
-          : isDragEnter
-          ? 'layui-upload-drag-draging'
-          : ''
-      "
+      :class="disabled ? 'layui-upload-drag-disable' : isDragEnter ? 'layui-upload-drag-draging' : ''"
       @click.stop="chooseFile"
     >
       <i class="layui-icon"></i>
