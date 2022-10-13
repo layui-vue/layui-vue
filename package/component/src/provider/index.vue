@@ -58,7 +58,7 @@ const changeTheme = (theme: string) => {
   const defaultPartial: Partial<Theme> = {
     mode: 1,
     brightness: 100,
-    contrast: 90,
+    contrast: 80,
     sepia: 0,
     grayscale: 0,
   };

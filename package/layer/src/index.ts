@@ -157,6 +157,7 @@ const layer = {
     const options = mergeOption(option, defaultOption);
     // 创建容器 Dom
     const modalContainer = createContainer();
+  
     options.id = modalContainer.id;
     // 创建虚拟 Dom
     const modalInstance = h(
