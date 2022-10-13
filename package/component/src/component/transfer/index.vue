@@ -37,9 +37,9 @@ const props = withDefaults(defineProps<LayTransferProps>(), {
 
 const emits = defineEmits(["update:modelValue", "change"]);
 
-const leftDataSource: Ref<any[]> = ref([...props.dataSource]);
+const leftDataSource: Ref<any[]> = ref([]);
 const rightDataSource: Ref<any[]> = ref([]);
-const _leftDataSource: Ref<any[]> = ref([...props.dataSource]);
+const _leftDataSource: Ref<any[]> = ref([]);
 const _rightDataSource: Ref<any[]> = ref([]);
 const leftSelectedKeys: Ref<string[]> = ref([]);
 const rightSelectedKeys: Ref<string[]> = ref([]);
@@ -63,7 +63,7 @@ const allLeftChange = (isChecked: boolean) => {
 };
 
 watch(
-  () => props.modelValue,
+  () => [props.modelValue, props.dataSource],
   () => {
     let targetDataSource: any[] = [];
 

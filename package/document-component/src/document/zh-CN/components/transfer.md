@@ -23,7 +23,7 @@ export default {
   setup() {
 
     const value1 = ref(['1']);
-    const dataSource1 = [{id:'1', title:'易大师', disabled: true},{id:'2', title:'战争之王'}]
+    const dataSource1 = ref([{id:'1', title:'易大师', disabled: true},{id:'2', title:'战争之王'}])
 
     return {
       value1,

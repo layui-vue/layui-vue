@@ -12,6 +12,18 @@
 <lay-timeline>
   <lay-timeline-item title="1.6.x">
     <ul> 
+      <a name="1-6-7"></a> 
+      <li> 
+        <h3>1.6.7 <span class="layui-badge-rim">2022-10-12</span></h3> 
+        <ul>
+          <li>[修复] tansfer 组件 data-source 属性缺少响应式的特性。</li>
+          <li>[修复] upload 组件 drag 属性开启后, 拖拽上传无效的问题。</li>
+          <li>[优化] switch 组件 on-switch-text 和 un-switch-text 属性, 为描述提供适当边距。</li>
+          <li>[优化] config-provider 组件 dark-partial 属性默认值, 降低整体饱和度。</li>
+        </ul> 
+      </li>
+    </ul>
+    <ul> 
       <a name="1-6-6"></a> 
       <li> 
         <h3>1.6.6 <span class="layui-badge-rim">2022-10-11</span></h3> 

@@ -263,7 +263,7 @@ const filetoDataURL = (file: File, fn: Function) => {
   reader.readAsDataURL(file);
 };
 
-const getUploadChange = (e: any) => {
+const uploadChange = (e: any) => {
   const files = e.target.files;
   const _files = [...files];
   if (props.multiple && props.number != 0 && props.number < _files.length) {
@@ -363,7 +363,7 @@ onMounted(() => {
   nextTick(() => {
     dragRef.value.addEventListener("dragenter",dragEnter,false);
     dragRef.value.addEventListener("dragover",dragOver,false);
-    dragRef.value.addEventListener("drop",getUploadChange,false);
+    dragRef.value.addEventListener("drop",uploadChange,false);
   })
 })
 </script>
@@ -383,7 +383,7 @@ onMounted(() => {
       :accept="acceptMime"
       :disabled="disabled"
       @click="clickOrgInput"
-      @change="getUploadChange"
+      @change="uploadChange"
     />
     <div v-if="!drag">
       <div class="layui-upload-btn-box" @click.stop="chooseFile">
