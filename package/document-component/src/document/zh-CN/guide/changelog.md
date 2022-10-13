@@ -14,7 +14,7 @@
     <ul> 
       <a name="1-6-7"></a> 
       <li> 
-        <h3>1.6.7 <span class="layui-badge-rim">2022-10-12</span></h3> 
+        <h3>1.6.7 <span class="layui-badge-rim">2022-10-13</span></h3> 
         <ul>
           <li>[修复] menu 组件 ident 属性带来的 typescript 警告。</li>
           <li>[修复] tansfer 组件 data-source 属性缺少响应式的特性。</li>
