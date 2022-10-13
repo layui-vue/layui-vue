@@ -75,7 +75,9 @@ const styles = computed(() => {
         'layui-switch-disabled': disabled,
       }"
     >
-      <em v-if="onswitchText || unswitchText">{{ isActive == true ? onswitchText : unswitchText }}</em>
+      <em v-if="onswitchText || unswitchText">{{
+        isActive == true ? onswitchText : unswitchText
+      }}</em>
       <span>
         <div>
           <template v-if="loading">
