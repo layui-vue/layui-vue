@@ -55,6 +55,7 @@ const changeLocales = (lang: string, locales: any, merge: boolean) => {
 };
 
 const changeTheme = (theme: string) => {
+
   const defaultPartial: Partial<Theme> = {
     mode: 1,
     brightness: 100,
@@ -70,6 +71,7 @@ const changeTheme = (theme: string) => {
     disableStyleSheetsProxy: false,
     ignoreInlineStyle: ignoreInlineStyle,
   };
+  
   Object.assign(defaultPartial, props.darkPartial);
   if (theme === "dark") {
     if (window) {

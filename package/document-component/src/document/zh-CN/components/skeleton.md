@@ -58,8 +58,8 @@ export default {
             <lay-skeleton-item type="p" style="width: 240px"/>
         </template>
     <div class="img-content">
-        <img src="https://portrait.gitee.com/uploads/avatars/user/2813/8441097_shaynas_1610801433.png" />
-        <p style="margin-top: 18px">layui-vue 发展史....</p>
+        <img src="https://portrait.gitee.com/uploads/avatars/user/1611/4835367_Jmysy_1578975358.png" />
+        <p style="margin-top: 18px">一套开源免费且受众广泛的 Web UI 组件库</p>
     </div>
   </lay-skeleton>
 </div>
