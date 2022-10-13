@@ -13,7 +13,6 @@ import {
   getCurrentInstance,
   nextTick,
   ref,
-  toRaw,
   useSlots,
   withDefaults,
 } from "vue";
@@ -21,7 +20,6 @@ import { templateRef } from "@vueuse/core";
 import { LayLayer } from "@layui/layer-vue";
 import LayButton from "../button/index.vue";
 import Cropper from "cropperjs";
-import { arrayExpression } from "@babel/types";
 
 export interface LayerButton {
   text: string;
@@ -86,11 +84,13 @@ const getCutDownResult = () => {
     errorF(cutInitErrorMsg);
   }
 };
+
 const closeCutDownModal = () => {
   let currentTimeStamp = new Date().valueOf();
   emit("cutcancel", Object.assign({ currentTimeStamp }));
   nextTick(() => clearAllCutEffect());
 };
+
 const clearAllCutEffect = () => {
   activeUploadFiles.value = [];
   activeUploadFilesImgs.value = [];
@@ -156,7 +156,6 @@ const defaultErrorMsg = "上传失败";
 const urlErrorMsg = "上传地址格式不合法";
 const numberErrorMsg = "文件上传超过规定的个数";
 const sizeErrorMsg = "文件大小超过限制";
-const uploadRemoteErrorMsg = "请求上传接口出现异常";
 const cutInitErrorMsg = "剪裁插件初始化失败";
 const uploadSuccess = "上传成功";
 
