@@ -13,6 +13,7 @@ import {
   getCurrentInstance,
   nextTick,
   onMounted,
+  onUnmounted,
   ref,
   useSlots,
   withDefaults,
@@ -21,6 +22,7 @@ import { templateRef } from "@vueuse/core";
 import { LayLayer } from "@layui/layer-vue";
 import LayButton from "../button/index.vue";
 import Cropper from "cropperjs";
+import { unescapeMd } from "markdown-it/lib/common/utils";
 
 export interface LayerButton {
   text: string;
@@ -379,11 +381,21 @@ function dragOver(e: any) {
 
 onMounted(() => {
   nextTick(() => {
-    dragRef.value.addEventListener("dragenter", dragEnter, false);
-    dragRef.value.addEventListener("dragover", dragOver, false);
-    dragRef.value.addEventListener("drop", uploadChange, false);
+    if(dragRef.value) {
+      dragRef.value.addEventListener("dragenter", dragEnter, false);
+      dragRef.value.addEventListener("dragover", dragOver, false);
+      dragRef.value.addEventListener("drop", uploadChange, false);
+    }
   });
 });
+
+onUnmounted(() => {
+  if(dragRef.value) {
+    dragRef.value.removeEventListener("dragenter");
+    dragRef.value.removeEventListener("dragover");
+    dragRef.value.removeEventListener("drop");
+  }
+})
 </script>
 
 <template>
