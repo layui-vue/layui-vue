@@ -55,7 +55,6 @@ const changeLocales = (lang: string, locales: any, merge: boolean) => {
 };
 
 const changeTheme = (theme: string) => {
-
   const defaultPartial: Partial<Theme> = {
     mode: 1,
     brightness: 100,

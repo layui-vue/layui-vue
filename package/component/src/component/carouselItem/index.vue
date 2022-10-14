@@ -22,7 +22,8 @@ const getStyle = computed<any>(() => {
     let allChild = item.value.parentNode.children;
     let allChildNum = allChild.length;
 
-    let activeIndex, currentIndex = 0;
+    let activeIndex,
+      currentIndex = 0;
     for (let index = 0; index < allChild.length; index++) {
       const element = allChild[index];
       // @ts-ignore

@@ -5,17 +5,17 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed, useSlots } from "vue";
 import "./index.less";
+import { computed, useSlots } from "vue";
 import { String } from "../../types";
 import { CardShadow } from "./interface";
 
-export interface LayCardProps {
+export interface CardProps {
   title?: String;
   shadow?: CardShadow;
 }
 
-const props = withDefaults(defineProps<LayCardProps>(), {
+const props = withDefaults(defineProps<CardProps>(), {
   shadow: "always",
 });
 
@@ -33,11 +33,10 @@ const classes = computed(() => {
   <div class="layui-card" :class="classes">
     <div class="layui-card-header" v-if="slot.title || title || slot.extra">
       <span class="layui-card-header-title">
-        <slot name="title" v-if="slot.title"></slot>
-        <template v-else>{{ title }}</template>
+        <slot name="title">{{ title }}</slot>
       </span>
-      <span class="layui-card-header-extra">
-        <slot name="extra" v-if="slot.extra"></slot>
+      <span class="layui-card-header-extra" v-if="slot.extra">
+        <slot name="extra"></slot>
       </span>
     </div>
     <div class="layui-card-body">

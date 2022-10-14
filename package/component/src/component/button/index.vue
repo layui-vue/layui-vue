@@ -8,45 +8,39 @@ export default {
 <script setup lang="ts">
 import "./index.less";
 import { computed } from "vue";
-import {
-  ButtonBorder,
-  ButtonEmits,
-  ButtonNativeType,
-  ButtonSize,
-  ButtonType,
-} from "./interface";
+import { ButtonBorder, ButtonEmits, ButtonNativeType, ButtonSize, ButtonType } from "./interface";
 import { BooleanOrString, String } from "../../types";
 
-export interface LayButtonProps {
+export interface ButtonProps {
   type?: ButtonType;
   size?: ButtonSize;
   prefixIcon?: String;
   suffixIcon?: String;
   loadingIcon?: String;
+  borderStyle?: String;
   border?: ButtonBorder;
   fluid?: BooleanOrString;
   radius?: BooleanOrString;
   loading?: BooleanOrString;
   disabled?: BooleanOrString;
   nativeType?: ButtonNativeType;
-  borderStyle?: String;
 }
 
-const props = withDefaults(defineProps<LayButtonProps>(), {
-  fluid: false,
-  radius: false,
-  loading: false,
-  disabled: false,
+const props = withDefaults(defineProps<ButtonProps>(), {
   loadingIcon: "layui-icon-loading-one",
-  nativeType: "button",
   borderStyle: "soild",
+  nativeType: "button",
+  disabled: false,
+  loading: false,
+  radius: false,
+  fluid: false,
 });
 
-const emit = defineEmits(ButtonEmits);
+const emits = defineEmits(ButtonEmits);
 
 const onClick = (event: MouseEvent) => {
   if (!props.disabled) {
-    emit("click", event);
+    emits("click", event);
   }
 };
 
