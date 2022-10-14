@@ -381,7 +381,7 @@ function dragOver(e: any) {
 
 onMounted(() => {
   nextTick(() => {
-    if(dragRef.value) {
+    if (dragRef.value) {
       dragRef.value.addEventListener("dragenter", dragEnter, false);
       dragRef.value.addEventListener("dragover", dragOver, false);
       dragRef.value.addEventListener("drop", uploadChange, false);
@@ -390,12 +390,12 @@ onMounted(() => {
 });
 
 onUnmounted(() => {
-  if(dragRef.value) {
+  if (dragRef.value) {
     dragRef.value.removeEventListener("dragenter");
     dragRef.value.removeEventListener("dragover");
     dragRef.value.removeEventListener("drop");
   }
-})
+});
 </script>
 
 <template>

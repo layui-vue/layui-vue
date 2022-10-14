@@ -12,6 +12,15 @@
 <lay-timeline>
   <lay-timeline-item title="1.6.x">
     <ul> 
+      <a name="1-6-8"></a> 
+      <li> 
+        <h3>1.6.8 <span class="layui-badge-rim">2022-10-13</span></h3> 
+        <ul>
+          <li>[修复] upload 组件 drag 为 false 时的 removeEventListener 警告。</li>
+        </ul> 
+      </li>
+    </ul>
+    <ul> 
       <a name="1-6-7"></a> 
       <li> 
         <h3>1.6.7 <span class="layui-badge-rim">2022-10-13</span></h3> 
