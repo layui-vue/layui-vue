@@ -14,9 +14,10 @@
     <ul> 
       <a name="1-6-8"></a> 
       <li> 
-        <h3>1.6.8 <span class="layui-badge-rim">2022-10-13</span></h3> 
+        <h3>1.6.8 <span class="layui-badge-rim">2022-10-14</span></h3> 
         <ul>
           <li>[修复] upload 组件 drag 为 false 时的 removeEventListener 警告。</li>
+          <li>[修复] upload 组件销毁 drap drapenter dragover 事件未注销。</li>
         </ul> 
       </li>
     </ul>
