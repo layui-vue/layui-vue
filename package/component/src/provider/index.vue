@@ -55,10 +55,11 @@ const changeLocales = (lang: string, locales: any, merge: boolean) => {
 };
 
 const changeTheme = (theme: string) => {
+
   const defaultPartial: Partial<Theme> = {
     mode: 1,
     brightness: 100,
-    contrast: 80,
+    contrast: 90,
     sepia: 0,
     grayscale: 0,
   };

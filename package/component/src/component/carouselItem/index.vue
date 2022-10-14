@@ -22,9 +22,7 @@ const getStyle = computed<any>(() => {
     let allChild = item.value.parentNode.children;
     let allChildNum = allChild.length;
 
-    //当前的activeIndex
-    let activeIndex,
-      currentIndex = 0;
+    let activeIndex, currentIndex = 0;
     for (let index = 0; index < allChild.length; index++) {
       const element = allChild[index];
       // @ts-ignore

@@ -10,7 +10,7 @@
 ::: title 基础使用
 :::
 
-::: demo
+::: demo 通过 layer.msg 方法, 创建一个提示框。
 
 <template>
     <lay-button type="primary" @click="openMsg">普通消息</lay-button>
@@ -36,7 +36,7 @@ export default {
 ::: title 指定图标
 :::
 
-::: demo
+::: demo 使用 `time` 与 `icon` 属性, 设置显示事件与图标。
 
 <template>
     <lay-button type="primary" @click="openSuccess">成功消息</lay-button>
