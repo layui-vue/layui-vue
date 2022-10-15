@@ -6,29 +6,19 @@ export default {
 
 <script setup lang="ts">
 import "./index.less";
-import {
-  withDefaults,
-  provide,
-  useSlots,
-  ref,
-  computed,
-  VNode,
-  Ref,
-  Component,
-  watch,
-} from "vue";
+import { withDefaults, provide, useSlots, ref, computed, VNode, Ref, Component, watch } from "vue";
 import CarouselItem from "../carouselItem/index.vue";
 
 export interface CarouselProps {
   width?: string;
   height?: string;
   modelValue: string;
-  anim?: string;
   autoplay?: boolean;
-  arrow?: string;
-  interval?: number;
-  indicator?: string;
+  arrow?: 'always' | 'hover' | 'none';
+  anim?: 'default' | 'updown' | 'fade';
+  indicator?: 'inside' | 'outside' | 'none';
   pauseOnHover?: boolean;
+  interval?: number;
 }
 
 const props = withDefaults(defineProps<CarouselProps>(), {
@@ -85,10 +75,6 @@ watch(
   },
   { immediate: true, deep: true }
 );
-
-provide("active", active);
-provide("slotsChange", slotsChange);
-provide("anim", anim);
 
 const sub = () => {
   for (var i = 0; i < childrens.value.length; i++) {
@@ -159,6 +145,10 @@ watch(
   },
   { immediate: true }
 );
+
+provide("active", active);
+provide("slotsChange", slotsChange);
+provide("anim", anim);
 </script>
 
 <template>
