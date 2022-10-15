@@ -6,7 +6,17 @@ export default {
 
 <script setup lang="ts">
 import "./index.less";
-import { withDefaults, provide, useSlots, ref, computed, VNode, Ref, Component, watch } from "vue";
+import {
+  withDefaults,
+  provide,
+  useSlots,
+  ref,
+  computed,
+  VNode,
+  Ref,
+  Component,
+  watch,
+} from "vue";
 import CarouselItem from "../carouselItem/index.vue";
 
 export interface CarouselProps {
