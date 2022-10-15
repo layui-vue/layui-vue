@@ -8,21 +8,26 @@ export default {
 <script setup lang="ts">
 import "./index.less";
 import { computed } from "vue";
-import { ButtonBorder, ButtonEmits, ButtonNativeType, ButtonSize, ButtonType } from "./interface";
-import { BooleanOrString, String } from "../../types";
+import {
+  ButtonBorder,
+  ButtonEmits,
+  ButtonNativeType,
+  ButtonSize,
+  ButtonType,
+} from "./interface";
 
 export interface ButtonProps {
   type?: ButtonType;
   size?: ButtonSize;
-  prefixIcon?: String;
-  suffixIcon?: String;
-  loadingIcon?: String;
-  borderStyle?: String;
+  prefixIcon?: string;
+  suffixIcon?: string;
+  loadingIcon?: string;
+  borderStyle?: string;
   border?: ButtonBorder;
-  fluid?: BooleanOrString;
-  radius?: BooleanOrString;
-  loading?: BooleanOrString;
-  disabled?: BooleanOrString;
+  fluid?: string | boolean;
+  radius?: string | boolean;
+  loading?: string | boolean;
+  disabled?: string | boolean;
   nativeType?: ButtonNativeType;
 }
 

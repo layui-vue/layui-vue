@@ -6,45 +6,34 @@ export default {
 
 <script setup lang="ts">
 import "./index.less";
-import {
-  withDefaults,
-  provide,
-  useSlots,
-  ref,
-  computed,
-  VNode,
-  Ref,
-  Component,
-  watch,
-} from "vue";
+import { withDefaults, provide, useSlots, ref, computed, VNode, Ref, Component, watch } from "vue";
 import CarouselItem from "../carouselItem/index.vue";
+
+export interface CarouselProps {
+  width?: string;
+  height?: string;
+  modelValue: string;
+  anim?: string;
+  autoplay?: boolean;
+  arrow?: string;
+  interval?: number;
+  indicator?: string;
+  pauseOnHover?: boolean;
+}
+
+const props = withDefaults(defineProps<CarouselProps>(), {
+  width: "100%",
+  height: "280px",
+  anim: "default",
+  autoplay: true,
+  arrow: "hover",
+  interval: 3000,
+  indicator: "inside",
+  pauseOnHover: true,
+});
 
 const slot = useSlots() as any;
 const slots = slot.default && (slot.default() as any[]);
-
-const props = withDefaults(
-  defineProps<{
-    width?: string;
-    height?: string;
-    modelValue: string;
-    anim?: string;
-    autoplay?: boolean;
-    arrow?: string;
-    interval?: number;
-    indicator?: string;
-    pauseOnHover?: boolean;
-  }>(),
-  {
-    width: "100%",
-    height: "280px",
-    anim: "default",
-    autoplay: true,
-    arrow: "hover",
-    interval: 3000,
-    indicator: "inside",
-    pauseOnHover: true,
-  }
-);
 
 const active = computed({
   get() {
@@ -55,12 +44,7 @@ const active = computed({
   },
 });
 
-const anim = computed({
-  get() {
-    return props.anim;
-  },
-  set() {},
-});
+const anim = computed(() => props.anim);
 
 const emit = defineEmits(["update:modelValue", "change"]);
 
