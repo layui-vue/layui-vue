@@ -6,7 +6,17 @@ export default {
 
 <script setup lang="ts">
 import "./index.less";
-import { withDefaults, provide, useSlots, ref, computed, VNode, Ref, Component, watch } from "vue";
+import {
+  withDefaults,
+  provide,
+  useSlots,
+  ref,
+  computed,
+  VNode,
+  Ref,
+  Component,
+  watch,
+} from "vue";
 import CarouselItem from "../carouselItem/index.vue";
 
 export interface CarouselProps {
@@ -14,9 +24,9 @@ export interface CarouselProps {
   height?: string;
   modelValue: string;
   autoplay?: boolean;
-  arrow?: 'always' | 'hover' | 'none';
-  anim?: 'default' | 'updown' | 'fade';
-  indicator?: 'inside' | 'outside' | 'none';
+  arrow?: "always" | "hover" | "none";
+  anim?: "default" | "updown" | "fade";
+  indicator?: "inside" | "outside" | "none";
   pauseOnHover?: boolean;
   interval?: number;
 }
