@@ -38,12 +38,6 @@ onMounted(() => {
   width: 150px;
   border-radius: 50px;
 }
-.DocSearch-Button-Container {
-  padding-left: 2px;
-}
-.DocSearch-Button-Placeholder {
-  padding-left: 8px;
-}
 .DocSearch-Button,
 .DocSearch-Button:hover,
 .DocSearch-Button:active,
@@ -51,16 +45,8 @@ onMounted(() => {
   border: 1px solid rgb(224, 224, 230);
   box-shadow: none;
 }
-.DocSearch-Button-Key {
-  border: 1px solid rgba(60, 60, 60, 0.29);
-  background: transparent;
-  box-shadow: none;
-}
 .DocSearch-Button .DocSearch-Search-Icon,
 .DocSearch-Button-Placeholder {
   color: rgba(0, 0, 0, 0.6);
-}
-.DocSearch-Button-Keys {
-  display: none;
 }
 </style>
