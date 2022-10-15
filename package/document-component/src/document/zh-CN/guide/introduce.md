@@ -30,6 +30,9 @@ layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库 ,
   <lay-timeline-item title="2015年，layui 孵化" simple></lay-timeline-item>
 </lay-timeline>
 
+::: title 环境说明
+:::
+
 ::: table
 
 | <img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" style="margin: 10px"/> | <img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" style="margin: 10px"/> | <img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" style="margin: 10px"/> | <img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" style="margin: 10px"/> | <img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/opera/opera_48x48.png" style="margin: 10px"/> |

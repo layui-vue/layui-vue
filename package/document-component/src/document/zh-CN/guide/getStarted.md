@@ -1,7 +1,10 @@
 ::: title 快速上手
 :::
 
-[![Edit layui-vue](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/11mvy)
+::: describe 最简单的使用方式参照以下 CodeSandbox 演示，也推荐 Fork 本例来进行 Bug Report。
+:::
+
+<a href="https://codesandbox.io/s/11mvy" style="margin-left: 30px; margin-bottom: 30px; margin-top: 10px; display:block;"><img src="https://codesandbox.io/static/img/play-codesandbox.svg" /></a>
 
 ::: title 安装组件
 :::
