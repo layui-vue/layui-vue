@@ -5,28 +5,27 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { inject, Ref, computed, ref } from "vue";
+import { inject, Ref, computed, ref, ComputedRef, WritableComputedRef } from "vue";
 
 const props = defineProps<{
   id: string;
 }>();
 
-const active = inject("active");
+const active = inject("active") as WritableComputedRef<string>;
 const slotsChange: Ref<boolean> = inject("slotsChange") as Ref<boolean>;
 slotsChange.value = !slotsChange.value;
 
-const anim = inject("anim");
+const anim = inject("anim") as ComputedRef<string>;
 const item = ref();
 const getStyle = computed<any>(() => {
   if (item.value) {
     let allChild = item.value.parentNode.children;
     let allChildNum = allChild.length;
 
-    let activeIndex,
-      currentIndex = 0;
+    let activeIndex = 0;
+    let currentIndex = 0;
     for (let index = 0; index < allChild.length; index++) {
       const element = allChild[index];
-      // @ts-ignore
       if (element.getAttribute("data-id") === active.value) {
         activeIndex = index;
       }
@@ -34,13 +33,10 @@ const getStyle = computed<any>(() => {
         currentIndex = index;
       }
     }
-    // @ts-ignore
     let prevIndex = activeIndex > 0 ? activeIndex - 1 : allChildNum - 1;
-    // @ts-ignore
     let nextIndex = activeIndex + 1 < allChildNum ? activeIndex + 1 : 0;
-    // @ts-ignore
     let animation = anim.value;
-    //状态 上一个 当前 下一个
+    
     if (activeIndex === currentIndex) {
       if (animation === "updown") {
         return {
