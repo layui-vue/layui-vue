@@ -23,13 +23,13 @@
     #app > .layui-layout > .layui-layout > .layui-body  .lay-aside {
         display: none;
     }
-    .site-banner {
+    #app > .layui-layout .site-banner {
         background-size: 100% 100%;
     }
-    .link-list {
+    #app > .layui-layout .link-list {
         padding: 20px 0px;
     }
-    .box-list {
+    #app > .layui-layout .box-list {
         padding: 30px 30px;
     }
 }

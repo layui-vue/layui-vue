@@ -295,7 +295,9 @@ const uploadChange = (e: any) => {
       let _file = _files[i];
       let _size = _file.size;
       if (_size > props.size * 1024) {
-        errorF(`文件 ${_file.name} ${sizeErrorMsg},文件最大不可超过${props.size}KB`);
+        errorF(
+          `文件 ${_file.name} ${sizeErrorMsg},文件最大不可超过${props.size}KB`
+        );
         return;
       }
     }
