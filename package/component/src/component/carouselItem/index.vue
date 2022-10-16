@@ -14,9 +14,11 @@ import {
   WritableComputedRef,
 } from "vue";
 
-const props = defineProps<{
+export interface CarouselItemProps {
   id: string;
-}>();
+}
+
+const props = defineProps<CarouselItemProps>();
 
 const active = inject("active") as WritableComputedRef<string>;
 const slotsChange: Ref<boolean> = inject("slotsChange") as Ref<boolean>;
