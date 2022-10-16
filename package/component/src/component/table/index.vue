@@ -810,7 +810,10 @@ onBeforeUnmount(() => {
             </colgroup>
             <tbody>
               <!-- 渲染 -->
-              <template v-for="(children, index) in tableDataSource" :key="index">
+              <template
+                v-for="(children, index) in tableDataSource"
+                :key="index"
+              >
                 <table-row
                   :id="id"
                   :index="index"

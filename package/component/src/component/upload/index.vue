@@ -291,19 +291,11 @@ const uploadChange = (e: any) => {
     return;
   }
   if (props.size && props.size != 0) {
-    let _cache = [];
     for (let i = 0; i < _files.length; i++) {
       let _file = _files[i];
       let _size = _file.size;
       if (_size > props.size * 1024) {
-        _cache.push(_file);
-      }
-    }
-    if (_cache && _cache.length > 0) {
-      for (let i = 0; i < _cache.length; i++) {
-        let _sizeErrorFile = _cache[i];
-        let errorMsg = `文件 ${_sizeErrorFile.name} ${sizeErrorMsg},文件最大不可超过${props.size}KB`;
-        errorF(errorMsg);
+        errorF(`文件 ${_file.name} ${sizeErrorMsg},文件最大不可超过${props.size}KB`);
         return;
       }
     }

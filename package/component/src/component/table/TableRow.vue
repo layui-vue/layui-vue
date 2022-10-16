@@ -1,7 +1,7 @@
 <script lang="ts">
 export default {
   name: "TableRow",
-}
+};
 </script>
 
 <script lang="ts" setup>
