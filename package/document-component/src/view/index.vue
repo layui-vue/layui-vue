@@ -112,7 +112,7 @@
     </div>
     <div class="link-list">
       <lay-row :space="30">
-        <lay-col :md="3">
+        <lay-col :md="3" :xs="6">
           <lay-tooltip content="layui" position="top">
             <a
               style="height: 40px; display: inline-block"
@@ -126,7 +126,7 @@
             </a>
           </lay-tooltip>
         </lay-col>
-        <lay-col :md="3">
+        <lay-col :md="3" :xs="6">
           <lay-tooltip content="furion" position="top">
             <a
               style="height: 40px; display: inline-block"
@@ -140,7 +140,7 @@
             </a>
           </lay-tooltip>
         </lay-col>
-        <lay-col :md="3">
+        <lay-col :md="3" :xs="6">
           <lay-tooltip content="mybatis plus" position="top">
             <a
               style="height: 40px; display: inline-block"
@@ -154,7 +154,7 @@
             </a>
           </lay-tooltip>
         </lay-col>
-        <lay-col :md="3">
+        <lay-col :md="3" :xs="6">
           <lay-tooltip content="aizuda" position="top">
             <a
               style="height: 40px; display: inline-block"
@@ -168,7 +168,7 @@
             </a>
           </lay-tooltip>
         </lay-col>
-        <lay-col :md="3">
+        <lay-col :md="3" :xs="6">
           <lay-tooltip content="LiteFlow" position="top">
             <a
               style="height: 40px; display: inline-block"
@@ -182,7 +182,7 @@
             </a>
           </lay-tooltip>
         </lay-col>
-        <lay-col :md="3">
+        <lay-col :md="3" :xs="6">
           <lay-tooltip content="CCFlow" position="top">
             <a
               style="height: 40px; display: inline-block"
@@ -196,7 +196,7 @@
             </a>
           </lay-tooltip>
         </lay-col>
-        <lay-col :md="3">
+        <lay-col :md="3" :xs="6">
           <lay-tooltip content="Sa-Token" position="top">
             <a
               style="height: 40px; display: inline-block"
@@ -210,7 +210,7 @@
             </a>
           </lay-tooltip>
         </lay-col>
-        <lay-col :md="3">
+        <lay-col :md="3" :xs="6">
           <lay-tooltip content="Jpom" position="top">
             <a
               style="height: 40px; display: inline-block"
