@@ -5,11 +5,31 @@
   <lay-timeline-item title="🐛 尾版本号：日常问题更新。" simple></lay-timeline-item>
   <lay-timeline-item title="🌟 次版本号：带有新特性的向下兼容的版本。" simple></lay-timeline-item>
   <lay-timeline-item title="♻️ 主版本号：含有破坏性更新和新特性，不在发布周期内。" simple></lay-timeline-item>
+  <lay-timeline-item title="♻️ 其他说明：含有破坏性更新和新特性，不在发布周期内。" simple></lay-timeline-item>
 </lay-timeline>
 
 ::: demo
 <template>
 <lay-timeline>
+<lay-timeline-item title="1.7.x">
+    <ul> 
+      <a name="1-7-0"></a> 
+      <li> 
+        <h3>1.7.0 <span class="layui-badge-rim">2022-10-15</span></h3> 
+        <ul>
+          <li>
+            <li>table 组件</li>
+            <ul>
+              <li>[新增] ** 属性。</li>
+              <li>[新增] ** 方法。</li>
+            </ul>
+          </li>
+          <li>[修复] upload 组件 drag 为 true 时, 获取不到拖拽文件 files 集合, 并直接预览上传资源。</li>
+          <li>[其他] global 整体组件源码逻辑优化, 更好的兼容 typescript 类型。</li>
+        </ul> 
+      </li>
+    </ul>
+  </lay-timeline-item>
   <lay-timeline-item title="1.6.x">
     <ul> 
       <a name="1-6-8"></a> 

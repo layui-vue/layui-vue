@@ -1,7 +1,7 @@
 <script lang="ts">
 export default {
   name: "TableRow",
-};
+}
 </script>
 
 <script lang="ts" setup>
@@ -9,7 +9,6 @@ import { Recordable } from "../../types";
 import { LayIcon } from "@layui/icons-vue";
 import { computed, ref, StyleValue, useSlots, WritableComputedRef } from "vue";
 import LayCheckbox from "../checkbox/index.vue";
-import LayDropdown from "../dropdown/index.vue";
 import LayTooltip from "../tooltip/index.vue";
 import LayRadio from "../radio/index.vue";
 
@@ -599,8 +598,8 @@ const radioProps = props.getRadioProps(props.data, props.index);
     >
       <table-row
         :id="id"
-        :index="childrenIndex"
         :data="children"
+        :index="childrenIndex"
         :columns="columns"
         :indent-size="indentSize"
         :current-indent-size="childrenIndentSize"

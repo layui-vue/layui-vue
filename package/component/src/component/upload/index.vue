@@ -285,8 +285,7 @@ const filetoDataURL = (file: File, fn: Function) => {
 
 const uploadChange = (e: any) => {
   e.preventDefault();
-  const files = e.target.files || e.dataTransfer.files;
-  const _files = [...files];
+  const _files = [...(e.target.files || e.dataTransfer.files)];
   if (props.multiple && props.number != 0 && props.number < _files.length) {
     errorF(numberErrorMsg);
     return;

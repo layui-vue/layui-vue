@@ -18,7 +18,6 @@ import {
   onBeforeUnmount,
 } from "vue";
 import { Recordable } from "../../types";
-import { LayIcon } from "@layui/icons-vue";
 import LayCheckbox from "../checkbox/index.vue";
 import LayDropdown from "../dropdown/index.vue";
 import LayEmpty from "../empty/index.vue";
@@ -811,11 +810,11 @@ onBeforeUnmount(() => {
             </colgroup>
             <tbody>
               <!-- 渲染 -->
-              <template v-for="(data, index) in tableDataSource" :key="index">
+              <template v-for="(children, index) in tableDataSource" :key="index">
                 <table-row
                   :id="id"
                   :index="index"
-                  :data="data"
+                  :data="children"
                   :columns="tableBodyColumns"
                   :indent-size="indentSize"
                   :currentIndentSize="currentIndentSize"

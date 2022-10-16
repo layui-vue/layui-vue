@@ -5,7 +5,14 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { inject, Ref, computed, ref, ComputedRef, WritableComputedRef } from "vue";
+import {
+  inject,
+  Ref,
+  computed,
+  ref,
+  ComputedRef,
+  WritableComputedRef,
+} from "vue";
 
 const props = defineProps<{
   id: string;
@@ -36,7 +43,7 @@ const getStyle = computed<any>(() => {
     let prevIndex = activeIndex > 0 ? activeIndex - 1 : allChildNum - 1;
     let nextIndex = activeIndex + 1 < allChildNum ? activeIndex + 1 : 0;
     let animation = anim.value;
-    
+
     if (activeIndex === currentIndex) {
       if (animation === "updown") {
         return {
