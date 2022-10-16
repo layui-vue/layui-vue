@@ -17,9 +17,9 @@ import {
   onUnmounted,
   nextTick,
   computed,
-  reactive,
   StyleValue,
 } from "vue";
+
 export interface LayAiffxProps {
   offset?: number;
   target?: HTMLElement;
@@ -33,6 +33,7 @@ const props = withDefaults(defineProps<LayAiffxProps>(), {
     return document.body;
   },
 });
+
 const emit = defineEmits(["scroll"]);
 const outWindow = ref(false);
 const dom = ref();

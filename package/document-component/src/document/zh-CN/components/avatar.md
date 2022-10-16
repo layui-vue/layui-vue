@@ -41,7 +41,7 @@ export default {
 ::: title 圆角头像
 :::
 
-::: demo
+::: demo 通过 `radius` 属性, 开启头像圆角。
 
 <template>
   <lay-avatar :src="src" radius></lay-avatar>
@@ -66,7 +66,7 @@ export default {
 ::: title 尺寸大小
 :::
 
-::: demo
+::: demo 通过 `size` 属性, 设置头像大小。
 
 <template>
   <lay-avatar :src="src" size="xs"></lay-avatar> 
@@ -98,7 +98,7 @@ export default {
 ::: title 头像列表
 :::
 
-::: demo
+::: demo 通过 `lay-avatar-list` 标签, 创建头像列表。
 
 <template>
   <lay-avatar-list>
