@@ -117,7 +117,7 @@ import MonthPanel from "./components/MonthPanel.vue";
 import DateRange from "./components/DateRange.vue";
 import MonthRange from "./components/MonthRange.vue";
 
-export interface LayDatePickerProps {
+export interface DatePickerProps {
   type?: "date" | "datetime" | "year" | "time" | "month" | "yearmonth";
   placeholder?: string;
   modelValue?: string | number | string[];
@@ -136,7 +136,7 @@ export interface LayDatePickerProps {
   timestamp?: boolean;
 }
 
-const props = withDefaults(defineProps<LayDatePickerProps>(), {
+const props = withDefaults(defineProps<DatePickerProps>(), {
   modelValue: "",
   type: "date",
   disabled: false,

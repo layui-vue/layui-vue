@@ -13,12 +13,12 @@ import PasswordIcon from "./svg/Password.vue";
 import UnPasswordIcon from "./svg/unPassword.vue";
 import { InputSize } from "./interface";
 
-export interface LayInputProps {
+export interface InputProps {
   name?: string;
   type?: string;
   prefixIcon?: string;
   suffixIcon?: string;
-  modelValue?: string | number;
+  modelValue?: string | number | string[] | undefined;
   allowClear?: boolean;
   autocomplete?: string;
   placeholder?: string;
@@ -30,7 +30,7 @@ export interface LayInputProps {
   maxlength?: number;
 }
 
-const props = withDefaults(defineProps<LayInputProps>(), {
+const props = withDefaults(defineProps<InputProps>(), {
   disabled: false,
   readonly: false,
   allowClear: false,

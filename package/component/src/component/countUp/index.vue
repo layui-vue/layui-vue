@@ -8,7 +8,7 @@ export default {
 import { computed, onMounted, Ref, ref, watch } from "vue";
 import { TransitionPresets, useTransition } from "@vueuse/core";
 
-export interface LayCountupProps {
+export interface CountUpProps {
   startVal?: number; // 起始值
   endVal?: number; //显示的值
   decimal?: string; // 小数点
@@ -23,7 +23,7 @@ export interface LayCountupProps {
   suffix?: string; // 后缀
 }
 
-const props = withDefaults(defineProps<LayCountupProps>(), {
+const props = withDefaults(defineProps<CountUpProps>(), {
   startVal: 0,
   endVal: 0,
   decimal: ".",

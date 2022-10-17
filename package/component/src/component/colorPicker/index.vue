@@ -11,7 +11,7 @@ import EyeDropper from "./EyeDropper.vue";
 import { ref, computed, watch, onMounted } from "vue";
 import { useEyeDropper } from "@vueuse/core";
 
-export interface LayColorPicker {
+export interface ColorPicker {
   modelValue?: any;
   preset?: any;
   eyeDropper?: boolean;
@@ -19,7 +19,7 @@ export interface LayColorPicker {
 
 const emit = defineEmits(["update:modelValue"]);
 
-const props = withDefaults(defineProps<LayColorPicker>(), {
+const props = withDefaults(defineProps<ColorPicker>(), {
   modelValue: { r: 255, g: 255, b: 255, a: 1 },
   preset: ["#009688", "#1e9fff", "#ffb800", "#ff5722", "#5fb878"],
 });
@@ -84,7 +84,6 @@ watch(alpha, () => {
     "update:modelValue",
     rgba2hex(red.value, green.value, blue.value, alpha.value)
   );
-  // 移动透明度滑块
   alphaSliderStyle.value = `left: ${
     alpha.value >= 1 ? "calc(100% - 6px)" : alpha.value * 100 + "%"
   };`;
@@ -108,7 +107,6 @@ let colorObj = computed(() => {
   };
 });
 
-// 输入框值变化,限制输入的值
 function hexChange(e: any) {
   let v = e.target.value;
   if (/^#?([0-9a-fA-F]{6}|[0-9a-fA-F]{8})$/.test(v)) {
@@ -158,7 +156,6 @@ function alphaChange(e: any) {
   }
 }
 
-// 点击预设方块事件
 function presetChange(item: any) {
   if (/^#?([0-9a-fA-F]{6}|[0-9a-fA-F]{8})$/.test(item)) {
     let { r, g, b, a } = hex2rgba(item);
@@ -169,7 +166,6 @@ function presetChange(item: any) {
   }
 }
 
-// 饱和度和亮度
 function handleChangeSV(e: any) {
   // @ts-ignore
   let w = saturationValue.value.clientWidth;
@@ -260,10 +256,6 @@ function mouseupAlpha(e: any) {
   window.removeEventListener("mouseup", mouseupAlpha);
 }
 
-/**
- * 解析输入的数据,只能解析hex颜色和rgb对象形式的数据
- * @param color
- */
 function parseColor(color: any) {
   if (color) {
     let r, g, b, a;

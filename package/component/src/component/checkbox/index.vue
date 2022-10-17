@@ -10,7 +10,7 @@ import { computed, inject, useSlots } from "vue";
 import "./index.less";
 import { CheckboxSize } from "./interface";
 
-export interface LayCheckboxProps {
+export interface CheckboxProps {
   name?: string;
   skin?: string;
   value: string | number | object;
@@ -21,7 +21,7 @@ export interface LayCheckboxProps {
   size?: CheckboxSize;
 }
 
-const props = withDefaults(defineProps<LayCheckboxProps>(), {
+const props = withDefaults(defineProps<CheckboxProps>(), {
   isIndeterminate: false,
   modelValue: false,
   disabled: false,

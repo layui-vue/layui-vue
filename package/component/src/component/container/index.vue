@@ -9,11 +9,11 @@ import "./index.less";
 import { computed } from "vue";
 import { BooleanOrString } from "../../types";
 
-export interface LayContainerProps {
+export interface ContainerProps {
   fluid?: BooleanOrString;
 }
 
-const props = withDefaults(defineProps<LayContainerProps>(), {
+const props = withDefaults(defineProps<ContainerProps>(), {
   fluid: false,
 });
 

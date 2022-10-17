@@ -50,7 +50,7 @@ import { transformPlacement } from "./util";
 
 export type DropdownTrigger = "click" | "hover" | "focus" | "contextMenu";
 
-export interface LayDropdownProps {
+export interface DropdownProps {
   visible?: boolean;
   trigger?: DropdownTrigger | DropdownTrigger[];
   placement?: DropdownPlacement;
@@ -73,7 +73,7 @@ export interface LayDropdownProps {
   popupContainer?: string | undefined;
 }
 
-const props = withDefaults(defineProps<LayDropdownProps>(), {
+const props = withDefaults(defineProps<DropdownProps>(), {
   visible: false,
   trigger: "click",
   disabled: false,

@@ -8,12 +8,12 @@ export default {
 import { provide, ref, watch } from "vue";
 import { Recordable } from "../../types";
 
-export interface LayCheckboxGroupProps {
+export interface CheckboxGroupProps {
   modelValue?: Recordable[];
   disabled?: boolean;
 }
 
-const props = withDefaults(defineProps<LayCheckboxGroupProps>(), {
+const props = withDefaults(defineProps<CheckboxGroupProps>(), {
   modelValue: () => [],
   disabled: false,
 });
@@ -22,6 +22,7 @@ const emit = defineEmits(["update:modelValue", "change"]);
 
 const modelValue = ref(props.modelValue);
 const disabled = ref(props.disabled);
+
 provide("checkboxGroup", {
   name: "LayCheckboxGroup",
   modelValue: modelValue,
