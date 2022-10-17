@@ -8,7 +8,7 @@ export default {
 import { ref, watch, provide, withDefaults } from "vue";
 import "./index.less";
 
-export interface LayStepProps {
+export interface StepProps {
   active?: number;
   center?: boolean;
   direction?: string;
@@ -18,7 +18,7 @@ export interface LayStepProps {
   simple?: boolean;
 }
 
-const props = withDefaults(defineProps<LayStepProps>(), {
+const props = withDefaults(defineProps<StepProps>(), {
   active: 0,
   center: false,
   direction: "horizontal",

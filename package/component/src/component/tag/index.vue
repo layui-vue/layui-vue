@@ -8,21 +8,21 @@ import "./index.less";
 import { LayIcon } from "@layui/icons-vue";
 import { computed, ref } from "vue";
 import { TinyColor } from "@ctrl/tinycolor";
-import { tagType } from "./interface";
+import { TagShape, TagType, TagVariant } from "./interface";
 
-export interface LayTagProps {
-  type?: tagType;
+export interface TagProps {
+  type?: TagType;
   color?: string;
   closable?: boolean;
   size?: string;
   bordered?: boolean;
   disabled?: boolean;
-  shape?: "square" | "round";
+  shape?: TagShape;
   maxWidth?: string;
-  variant?: "dark" | "light" | "plain";
+  variant?: TagVariant;
 }
 
-const props = withDefaults(defineProps<LayTagProps>(), {
+const props = withDefaults(defineProps<TagProps>(), {
   size: "md",
   shape: "square",
   variant: "dark",
@@ -35,7 +35,6 @@ const visible = ref(true);
 
 const handleClose = (e: MouseEvent) => {
   if (props.disabled) return;
-  //visible.value = false;
   emit("close", e);
 };
 
@@ -61,7 +60,7 @@ const styleTag = computed(() => [
   },
 ]);
 
-function useTagCustomStyle(props: LayTagProps) {
+function useTagCustomStyle(props: TagProps) {
   return computed(() => {
     let styles: Record<string, string> = {};
 

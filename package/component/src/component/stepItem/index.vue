@@ -18,14 +18,14 @@ import {
 import { LayIcon } from "@layui/icons-vue";
 import type { ComputedRef } from "vue";
 
-export interface LayStepItemProps {
+export interface StepItemProps {
   title?: string;
   content?: string;
   icon?: string;
   status?: string;
 }
 
-const props = withDefaults(defineProps<LayStepItemProps>(), {
+const props = withDefaults(defineProps<StepItemProps>(), {
   title: "",
   content: "",
   icon: "",
