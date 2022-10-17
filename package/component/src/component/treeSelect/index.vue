@@ -61,8 +61,10 @@ const checkedKeys = computed({
     return props.multiple ? props.modelValue : [];
   },
   set(value) {
-    emits("update:modelValue", value);
-    emits("change", value);
+    if(props.multiple) {
+      emits("update:modelValue", value);
+      emits("change", value);
+    }
   },
 });
 
@@ -121,10 +123,10 @@ const handleClick = (node: any) => {
       <lay-input
         v-else
         v-model="singleValue"
-        :size="size"
         :placeholder="placeholder"
         :disabled="disabled"
         :readonly="true"
+        :size="size"
       >
         <template #suffix>
           <lay-icon

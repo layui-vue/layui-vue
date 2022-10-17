@@ -24,6 +24,7 @@
               <li>[新增] ** 方法。</li>
             </ul>
           </li>
+          <li>[新增] tree-select 下拉树组件, 提供树结构数据选择能力。</li>
           <li>[修复] upload 组件 drag 为 true 时, 获取不到拖拽文件 files 集合, 并直接预览上传资源。</li>
           <li>[其他] global 整体组件源码逻辑优化, 更好的兼容 typescript 类型。</li>
           <li>[优化] layer 组件 id 属性, 当值相同时仅保留最新的弹层实例。</li>
