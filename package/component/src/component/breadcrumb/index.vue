@@ -8,11 +8,11 @@ export default {
 import "./index.less";
 import { provide, withDefaults } from "vue";
 
-export interface LayBreadcrumbProps {
+export interface BreadcrumbProps {
   separator?: string;
 }
 
-const props = withDefaults(defineProps<LayBreadcrumbProps>(), {
+const props = withDefaults(defineProps<BreadcrumbProps>(), {
   separator: "/",
 });
 

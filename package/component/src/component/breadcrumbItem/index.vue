@@ -12,15 +12,13 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { inject, useSlots } from "vue";
+import { inject } from "vue";
 
-export interface LayBreadcrumbItemProps {
+export interface BreadcrumbItemProps {
   title?: string;
 }
 
-const slot = useSlots();
-
-const props = defineProps<LayBreadcrumbItemProps>();
+const props = defineProps<BreadcrumbItemProps>();
 
 const separator = inject("separator");
 </script>

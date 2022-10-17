@@ -30,9 +30,8 @@ const classes = computed(() => {
 });
 
 const styles = computed<StyleValue>(() => {
-  return [props.color ? `background-color: ${props.color}` : ""]
-})
-
+  return [props.color ? `background-color: ${props.color}` : ""];
+});
 </script>
 
 <template>
