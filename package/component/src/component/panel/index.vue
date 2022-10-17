@@ -9,11 +9,11 @@ import "./index.less";
 import { computed } from "vue";
 import { PanelShadow } from "./interface";
 
-export interface LayPanelProps {
+export interface PanelProps {
   shadow?: PanelShadow;
 }
 
-const props = withDefaults(defineProps<LayPanelProps>(), {
+const props = withDefaults(defineProps<PanelProps>(), {
   shadow: "always",
 });
 

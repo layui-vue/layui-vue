@@ -7,14 +7,15 @@ export default {
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from "vue";
 import "./index.less";
+import { RippleTrigger, RippleType } from "./interface";
 
 export interface RippleProps {
-  type?: "out" | "inset";
+  type?: RippleType;
   color?: string;
   borderRadius?: string;
   spreadWidth?: string;
   spreadSize?: string;
-  trigger?: "always" | "mouseenter" | "click";
+  trigger?: RippleTrigger;
   center?: boolean;
 }
 

@@ -16,25 +16,22 @@ import {
   useSlots,
 } from "vue";
 
-export interface LaySelectOptionProps {
+export interface SelectOptionProps {
   label?: string;
   value: string | number | object;
   disabled?: boolean;
   keyword?: string;
 }
 
-const props = withDefaults(defineProps<LaySelectOptionProps>(), {
+const props = withDefaults(defineProps<SelectOptionProps>(), {
   disabled: false,
   keyword: "",
   label: "",
 });
 
-const openState: Ref<boolean> = inject("openState") as Ref<boolean>;
-const selectedValue: WritableComputedRef<any> = inject(
-  "selectedValue"
-) as WritableComputedRef<any>;
 const searchValue: Ref<string> = inject("searchValue") as Ref<string>;
 const selectRef: Ref<HTMLElement> = inject("selectRef") as Ref<HTMLElement>;
+const selectedValue: WritableComputedRef<any> = inject("selectedValue") as WritableComputedRef<any>;
 const multiple: ComputedRef = inject("multiple") as ComputedRef;
 
 const handleSelect = () => {

@@ -38,16 +38,16 @@ export default {
 
 <script lang="ts" setup>
 import "./index.less";
-import { toRefs, onMounted, nextTick, reactive, onUnmounted, ref } from "vue";
+import { onMounted, nextTick, reactive, onUnmounted, ref } from "vue";
 
-export interface LayScrollProps {
+export interface ScrollProps {
   height?: string;
   trackColor?: string;
   thumbColor?: string;
   thumbWidth?: number;
 }
 
-const props = withDefaults(defineProps<LayScrollProps>(), {
+const props = withDefaults(defineProps<ScrollProps>(), {
   height: "100%",
   trackColor: "rgba(0,0,0,0)",
   thumbColor: "#eeeeee",
@@ -103,7 +103,9 @@ const monitorScrollBar = function () {
   // @ts-ignore
   let MutationObserver =
     window.MutationObserver ||
+    // @ts-ignore
     window.WebKitMutationObserver ||
+    // @ts-ignore
     window.MozMutationObserver;
   const observer: any = new MutationObserver((mutations) => {
     initScrollListner();

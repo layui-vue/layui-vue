@@ -72,7 +72,7 @@ const selectedKey = computed({
 
 const indent = computed(() => {
   return props.indent;
-})
+});
 
 watch(
   () => props.collapse,

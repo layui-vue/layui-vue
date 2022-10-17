@@ -9,7 +9,7 @@ export default {
 <script setup lang="ts">
 import "./index.less";
 
-export interface LayRadioProps {
+export interface RadioProps {
   name?: string;
   size?: RadioSize;
   disabled?: boolean;
@@ -18,7 +18,7 @@ export interface LayRadioProps {
   label?: string;
 }
 
-const props = withDefaults(defineProps<LayRadioProps>(), {
+const props = withDefaults(defineProps<RadioProps>(), {
   size: "md",
 });
 

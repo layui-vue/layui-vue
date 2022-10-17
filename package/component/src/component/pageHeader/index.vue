@@ -20,11 +20,11 @@ export default {
 import { useSlots } from "vue";
 import "./index.less";
 
-export interface LayPageHeaderProps {
+export interface PageHeaderProps {
   content?: string;
   backText?: string;
 }
-const props = withDefaults(defineProps<LayPageHeaderProps>(), {
+const props = withDefaults(defineProps<PageHeaderProps>(), {
   content: "",
   backText: "返回",
 });

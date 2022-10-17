@@ -7,11 +7,11 @@ export default {
 <script setup lang="ts">
 import "./index.less";
 
-export interface LayQuoteProps {
+export interface QuoteProps {
   type?: string;
 }
 
-const props = defineProps<LayQuoteProps>();
+const props = defineProps<QuoteProps>();
 </script>
 
 <template>

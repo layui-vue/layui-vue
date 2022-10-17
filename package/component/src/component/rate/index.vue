@@ -8,7 +8,7 @@ export default {
 import { computed, ref, watch, withDefaults } from "vue";
 import "./index.less";
 
-export interface LayRateProps {
+export interface RateProps {
   theme?: string;
   length?: number;
   modelValue: number;
@@ -21,7 +21,7 @@ export interface LayRateProps {
   icons?: string[];
 }
 
-const props = withDefaults(defineProps<LayRateProps>(), {
+const props = withDefaults(defineProps<RateProps>(), {
   length: 5,
   modelValue: 0,
   readonly: false,

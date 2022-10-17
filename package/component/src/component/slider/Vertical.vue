@@ -1,7 +1,7 @@
 <script lang="ts">
 export default {
   name: "Vertical",
-};
+}
 </script>
 
 <script setup lang="ts">
@@ -10,7 +10,7 @@ import { on, off } from "evtd";
 import { throttle } from "./utils/index";
 import LayTooltip from "../tooltip/index.vue";
 
-interface Prop {
+export interface VerticalProps {
   val?: number | Array<number>;
   disabled?: boolean;
   step?: number;
@@ -19,7 +19,7 @@ interface Prop {
   showDots: boolean;
 }
 
-const props = withDefaults(defineProps<Prop>(), {
+const props = withDefaults(defineProps<VerticalProps>(), {
   disabled: true,
   val: 0,
   step: 0,
@@ -49,7 +49,7 @@ function handle_mousedown() {
 const tracker = ref<HTMLElement | null>(null);
 let vertical_style: Ref<number> = ref<number>(props.val as number);
 const emit = defineEmits(["link-val-hook"]);
-const tooptipHide = ref<Boolean>(true);
+const tooptipHide = ref<boolean>(true);
 
 function verticalMove(e: MouseEvent) {
   tooptipHide.value = false;

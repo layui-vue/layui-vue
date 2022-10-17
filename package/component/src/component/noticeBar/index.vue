@@ -67,7 +67,7 @@ import LayCarousel from "../carousel/index.vue";
 import LayCarouselItem from "../carouselItem/index.vue";
 import { LayIcon } from "@layui/icons-vue";
 
-export interface LayNoticeBarProps {
+export interface NoticeBarProps {
   mode?: string;
   text?: string;
   textlist?: any[];
@@ -82,7 +82,7 @@ export interface LayNoticeBarProps {
   rightIcon?: string;
 }
 
-const props = withDefaults(defineProps<LayNoticeBarProps>(), {
+const props = withDefaults(defineProps<NoticeBarProps>(), {
   color: () => "var(--color-warning)",
   background: () => "var(--color-warning-light-9)",
   text: "",

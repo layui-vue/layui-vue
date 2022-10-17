@@ -8,7 +8,7 @@ export default {
 import "./index.less";
 import { useSlots } from "vue";
 
-export interface LayResultProps {
+export interface ResultProps {
   title?: string;
   status?: "success" | "failure";
   describe?: string;
@@ -16,7 +16,7 @@ export interface LayResultProps {
 
 const slots = useSlots();
 
-const props = withDefaults(defineProps<LayResultProps>(), {
+const props = withDefaults(defineProps<ResultProps>(), {
   title: "提交信息",
   status: "success",
   describe: "请核对并修改以下信息后，再重新提交。",

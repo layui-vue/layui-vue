@@ -9,13 +9,13 @@ import "./index.less";
 import { withDefaults } from "vue";
 import LaySkeletonItem from "../skeletonItem/index.vue";
 
-export interface LaySkeletonProps {
+export interface SkeletonProps {
   rows?: number;
   loading?: boolean;
   animated?: boolean;
 }
 
-const props = withDefaults(defineProps<LaySkeletonProps>(), {
+const props = withDefaults(defineProps<SkeletonProps>(), {
   rows: 4,
   loading: false,
   animated: false,

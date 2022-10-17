@@ -44,10 +44,9 @@ import {
   useResizeObserver,
   useThrottleFn,
 } from "@vueuse/core";
+import { PopperTrigger } from '../tooltip/index.vue';
 
-export type PopperTrigger = "click" | "hover" | "focus" | "contextMenu";
-
-export interface LayPopperProps {
+export interface PopperProps {
   el: HTMLElement;
   content?: string | Number;
   position?: string;
@@ -62,7 +61,7 @@ export interface LayPopperProps {
   popperStyle?: StyleValue;
 }
 
-const props = withDefaults(defineProps<LayPopperProps>(), {
+const props = withDefaults(defineProps<PopperProps>(), {
   position: "top",
   isDark: true,
   disabled: false,

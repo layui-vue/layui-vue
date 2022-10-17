@@ -8,11 +8,11 @@ export default {
 import { withDefaults } from "vue";
 import { LayIcon } from "@layui/icons-vue";
 
-export interface LaySkeletonProps {
+export interface SkeletonProps {
   type?: string;
 }
 
-const props = withDefaults(defineProps<LaySkeletonProps>(), {
+const props = withDefaults(defineProps<SkeletonProps>(), {
   type: "p",
 });
 </script>

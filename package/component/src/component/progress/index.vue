@@ -8,7 +8,7 @@ export default {
 import "./index.less";
 import { computed } from "vue";
 
-export interface LayProgressProps {
+export interface ProgressProps {
   percent: number | string;
   theme?: string;
   color?: string;
@@ -20,7 +20,7 @@ export interface LayProgressProps {
   circleWidth?: number;
 }
 
-const props = withDefaults(defineProps<LayProgressProps>(), {
+const props = withDefaults(defineProps<ProgressProps>(), {
   circle: false,
   circleSize: 150,
   circleWidth: 6,

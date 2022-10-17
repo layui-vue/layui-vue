@@ -1,16 +1,16 @@
 <script lang="ts">
 export default {
   name: "VerticalRange",
-};
+}
 </script>
 
 <script setup lang="ts">
 import { ref, toRef, Ref } from "vue";
 import { on, off } from "evtd";
-// import { throttle } from "./utils/index";
 import LayTooltip from "../tooltip/index.vue";
 import { throttle, makeDots } from "./utils/index";
-interface Prop {
+
+export interface VerticalRangeProps {
   rangeValue: Array<number>;
   disabled?: boolean;
   step?: number;
@@ -19,7 +19,7 @@ interface Prop {
   showDots?: boolean;
 }
 
-const props = withDefaults(defineProps<Prop>(), {
+const props = withDefaults(defineProps<VerticalRangeProps>(), {
   step: 0,
   min: 0,
   max: 100,
@@ -52,7 +52,7 @@ function handle_select(e: Event): void {
 const tracker = ref<HTMLElement | null>(null);
 const emit = defineEmits(["link-val-hook"]);
 
-const tooptipHide = ref<Boolean>(true);
+const tooptipHide = ref<boolean>(true);
 
 function rangeMove(e: MouseEvent) {
   // tooptipHide.value = false;

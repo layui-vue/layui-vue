@@ -9,7 +9,7 @@ import "./index.less";
 import { Ref, ref, watch, useSlots, computed } from "vue";
 import { useI18n } from "../../language";
 
-export interface LayPageProps {
+export interface PageProps {
   total: number;
   limit: number;
   theme?: string;
@@ -24,7 +24,7 @@ export interface LayPageProps {
   modelValue?: number;
 }
 
-const props = withDefaults(defineProps<LayPageProps>(), {
+const props = withDefaults(defineProps<PageProps>(), {
   limit: 10,
   pages: 10,
   modelValue: 1,

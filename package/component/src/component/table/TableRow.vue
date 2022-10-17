@@ -12,7 +12,7 @@ import LayCheckbox from "../checkbox/index.vue";
 import LayTooltip from "../tooltip/index.vue";
 import LayRadio from "../radio/index.vue";
 
-export interface LayTableRowProps {
+export interface TableRowProps {
   index: number;
   indentSize: number;
   currentIndentSize: number;
@@ -48,7 +48,7 @@ const emit = defineEmits([
   "update:selectedKey",
 ]);
 
-const props = withDefaults(defineProps<LayTableRowProps>(), {
+const props = withDefaults(defineProps<TableRowProps>(), {
   checkbox: false,
   childrenColumnName: "children",
   cellStyle: "",

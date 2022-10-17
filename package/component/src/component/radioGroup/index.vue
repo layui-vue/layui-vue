@@ -7,13 +7,13 @@ export default {
 <script setup lang="ts">
 import { provide, ref, watch } from "vue";
 
-export interface LayRadioGroupProps {
+export interface RadioGroupProps {
   modelValue?: string | boolean | number;
   name?: string;
   disabled?: boolean;
 }
 
-const props = withDefaults(defineProps<LayRadioGroupProps>(), {
+const props = withDefaults(defineProps<RadioGroupProps>(), {
   disabled: false,
 });
 
@@ -21,6 +21,7 @@ const emit = defineEmits(["update:modelValue", "change"]);
 
 const modelValue = ref(props.modelValue);
 const disabled = ref(props.disabled);
+
 provide("radioGroup", {
   name: "LayRadioGroup",
   modelValue: modelValue,

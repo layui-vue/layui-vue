@@ -27,10 +27,9 @@ import LayDropdown from "../dropdown/index.vue";
 import LaySelectOption, {
   LaySelectOptionProps,
 } from "../selectOption/index.vue";
-import { arrayExpression } from "@babel/types";
 import { SelectSize } from "./interface";
 
-export interface LaySelectProps {
+export interface SelectProps {
   name?: string;
   disabled?: boolean;
   placeholder?: string;
@@ -53,7 +52,7 @@ export interface SelectEmits {
   (e: "search", value: string): void;
 }
 
-const props = withDefaults(defineProps<LaySelectProps>(), {
+const props = withDefaults(defineProps<SelectProps>(), {
   modelValue: null,
   placeholder: "请选择",
   showEmpty: true,

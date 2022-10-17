@@ -8,11 +8,11 @@ export default {
 import { computed, CSSProperties } from "vue";
 import "./index.less";
 
-export interface LaySideProps {
+export interface SideProps {
   width?: string | number;
 }
 
-const props = withDefaults(defineProps<LaySideProps>(), {
+const props = withDefaults(defineProps<SideProps>(), {
   width: "200px",
 });
 

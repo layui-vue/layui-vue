@@ -9,7 +9,7 @@ import { LayIcon } from "@layui/icons-vue";
 import LayPage from "../page/index.vue";
 import { computed, WritableComputedRef } from "vue";
 
-export interface LayTablePageProps {
+export interface TablePageProps {
   showPage?: boolean;
   showSkip?: boolean;
   showLimit?: boolean;
@@ -23,7 +23,7 @@ export interface LayTablePageProps {
   theme?: string;
 }
 
-const props = withDefaults(defineProps<LayTablePageProps>(), {
+const props = withDefaults(defineProps<TablePageProps>(), {
   showPage: true,
   showLimit: true,
   showSkip: true,

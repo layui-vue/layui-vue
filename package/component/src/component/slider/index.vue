@@ -12,7 +12,7 @@ import StandardRange from "./StandardRange.vue";
 import Vertical from "./Vertical.vue";
 import VerticalRange from "./VerticalRange.vue";
 
-export interface LaySliderProps {
+export interface SliderProps {
   vertical?: boolean;
   modelValue?: number | Array<number>;
   min?: number;
@@ -26,7 +26,7 @@ export interface LaySliderProps {
 
 const emit = defineEmits(["update:modelValue"]);
 
-const props = withDefaults(defineProps<LaySliderProps>(), {
+const props = withDefaults(defineProps<SliderProps>(), {
   vertical: false,
   modelValue: 0,
   disabled: false,

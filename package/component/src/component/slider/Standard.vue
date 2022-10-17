@@ -1,17 +1,16 @@
 <script lang="ts">
 export default {
   name: "StandardVue",
-};
+}
 </script>
 
 <script setup lang="ts">
 import { Ref, ref } from "vue";
 import { on, off } from "evtd";
-// import { throttle, handle_select } from "./utils/index";
 import LayTooltip from "../tooltip/index.vue";
 import { throttle, handle_select, makeDots } from "./utils/index";
 
-interface Prop {
+export interface StandardProps {
   val?: number | Array<number>;
   disabled?: boolean;
   step?: number;
@@ -20,7 +19,7 @@ interface Prop {
   showDots?: boolean;
 }
 
-const props = withDefaults(defineProps<Prop>(), {
+const props = withDefaults(defineProps<StandardProps>(), {
   disabled: false,
   val: 0,
   step: 0,
@@ -47,7 +46,7 @@ function handle_mousedown() {
 const tracker = ref<HTMLElement | null>(null);
 let standard_style: Ref<number> = ref<number>(props.val as number);
 const emit = defineEmits(["link-val-hook"]);
-const tooptipHide = ref<Boolean>(true);
+const tooptipHide = ref<boolean>(true);
 
 function standardMove(e: MouseEvent) {
   tooptipHide.value = false;
