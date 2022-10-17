@@ -57,7 +57,6 @@ const props = withDefaults(defineProps<TreeProps>(), {
   onlyIconControl: false,
   disabled: false,
   showLine: true,
-  selectedKey: "",
   replaceFields: () => {
     return {
       id: "id",

@@ -41,8 +41,8 @@ const props = withDefaults(defineProps<LayCountupProps>(), {
 let localStartVal: Ref<number> = ref(props.startVal);
 const isNumber = (val: string) => !isNaN(parseFloat(val));
 
-/** 
- * from: https://github.com/PanJiaChen/vue-countTo/blob/master/src/vue-countTo.vue 
+/**
+ * from: https://github.com/PanJiaChen/vue-countTo/blob/master/src/vue-countTo.vue
  * */
 const formatNumber = (num: number | string): string => {
   if (typeof num != "number") return "0";
@@ -66,8 +66,8 @@ const printVal = useTransition(localStartVal, {
   disabled: !props.useEasing,
   transition:
     typeof props.easingFn === "string"
-      // @ts-ignore
-      ? TransitionPresets[props.easingFn]
+      ? // @ts-ignore
+        TransitionPresets[props.easingFn]
       : props.easingFn,
 });
 

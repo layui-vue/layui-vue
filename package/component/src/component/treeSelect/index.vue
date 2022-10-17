@@ -8,6 +8,7 @@ export default {
 import "./index.less";
 import { computed, ref, watch } from "vue";
 import { getNode } from "../../utils/treeUtil";
+import { TreeSelectSize } from "./interface";
 
 export interface LayTreeSelect {
   data: any;
@@ -18,7 +19,7 @@ export interface LayTreeSelect {
   allowClear?: boolean;
   collapseTagsTooltip?: boolean;
   minCollapsedNum?: number;
-  size?: string;
+  size?: TreeSelectSize;
   checkStrictly?: boolean;
 }
 
@@ -66,7 +67,7 @@ const checkedKeys = computed({
 });
 
 watch(
-  [selectedValue],
+  selectedValue,
   () => {
     if (props.multiple) {
       multipleValue.value = selectedValue.value.map((value: any) => {

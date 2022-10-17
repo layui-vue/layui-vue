@@ -13,20 +13,18 @@
 ::: demo 使用 `lay-tree` 标签, 创建树形组件, @node-click 监听节点点击。
 
 <template>
-  <lay-tree-select v-model="value" :data="data"></lay-tree-select>
+  <lay-tree-select v-model="value1" :data="data1"></lay-tree-select>
 </template>
 
 <script setup>
 import { ref } from 'vue';
 
-const value = ref();
+const value1 = ref(1);
 
-const data = ref([{
+const data1 = ref([{
 	title: '一级1',
 	id: 1,
 	field: 'name1',
-	checked: true,
-	spread: true,
 	children: [{
 		title: '二级1-1 可允许跳转',
 		id: 3,
@@ -43,12 +41,10 @@ const data = ref([{
 				children: [{
 					title: '五级1-1-3-1-1',
 					id: 30,
-					field: ''
 				},
 				{
 					title: '五级1-1-3-1-2',
 					id: 31,
-					field: ''
 				}]
 			}]
 		},
@@ -59,7 +55,6 @@ const data = ref([{
 			children: [{
 				title: '四级1-1-1-1 可允许跳转',
 				id: 15,
-				field: '',
 				href: 'https://www.layui.com/doc/'
 			}]
 		},
@@ -70,7 +65,6 @@ const data = ref([{
 			children: [{
 				title: '四级1-1-2-1',
 				id: 32,
-				field: ''
 			}]
 		}]
 	},
@@ -81,13 +75,10 @@ const data = ref([{
 		children: [{
 			title: '三级1-2-1',
 			id: 9,
-			field: '',
-			disabled: true
 		},
 		{
 			title: '三级1-2-2',
 			id: 10,
-			field: ''
 		}]
 	},
 	{
@@ -109,38 +100,29 @@ const data = ref([{
 {
 	title: '一级2',
 	id: 2,
-	field: '',
-	spread: true,
 	children: [{
 		title: '二级2-1',
 		id: 5,
-		field: '',
 		spread: true,
 		children: [{
 			title: '三级2-1-1',
 			id: 11,
-			field: ''
 		},
 		{
 			title: '三级2-1-2',
 			id: 12,
-			field: ''
 		}]
 	},
 	{
 		title: '二级2-2',
 		id: 6,
-		field: '',
 		children: [{
 			title: '三级2-2-1',
 			id: 13,
-			field: ''
 		},
 		{
 			title: '三级2-2-2',
 			id: 14,
-			field: '',
-			disabled: true
 		}]
 	}]
 },
@@ -194,15 +176,15 @@ function handleClick(node) {
 ::: demo 使用 `lay-tree` 标签, 创建树形组件, @node-click 监听节点点击。
 
 <template>
-  <lay-tree-select v-model="value" :data="data" :disabled="true"></lay-tree-select>
+  <lay-tree-select v-model="value2" :data="data2" :disabled="true"></lay-tree-select>
 </template>
 
 <script setup>
 import { ref } from 'vue';
 
-const value = ref();
+const value2 = ref();
 
-const data = ref([{
+const data2 = ref([{
 	title: '一级1',
 	id: 1,
 	field: 'name1',
