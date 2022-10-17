@@ -18,11 +18,11 @@ import {
 
 import type { ComputedRef } from "vue";
 
-export interface LayStepItemProps {
+export interface StepItemProps {
   space?: number;
 }
 
-const props = withDefaults(defineProps<LayStepItemProps>(), {
+const props = withDefaults(defineProps<StepItemProps>(), {
   space: 0,
 });
 

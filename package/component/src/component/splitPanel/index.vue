@@ -9,12 +9,12 @@ import { ref, watch, provide, withDefaults, onMounted } from "vue";
 import "./index.less";
 import { useMousePressed } from "@vueuse/core";
 
-interface LayStepProps {
+export interface StepProps {
   vertical?: boolean;
   minSize?: number;
 }
 
-const props = withDefaults(defineProps<LayStepProps>(), {
+const props = withDefaults(defineProps<StepProps>(), {
   vertical: false,
   minSize: 50,
 });
