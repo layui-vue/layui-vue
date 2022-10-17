@@ -71,8 +71,7 @@ const modalChildrenVNode = (content: any) => {
 };
 
 const layer = {
-
-  _context: <AppContext | null> null,
+  _context: <AppContext | null>null,
 
   // 页面
   open: (option: any, callback?: Function) => {
@@ -156,7 +155,7 @@ const layer = {
     // 聚合配置 Opt
     const options = mergeOption(option, defaultOption);
     // 生成唯一标识
-    if(options.hasOwnProperty("id")) {
+    if (options.hasOwnProperty("id")) {
       // 判断 id 存在, 并销毁窗体
       layer.close(options.id);
     } else {
@@ -267,5 +266,5 @@ export { layer, LayLayer };
 
 export default { install };
 
-import "./theme/index.css";import { getSystemErrorMap } from "util";
-
+import "./theme/index.css";
+import { getSystemErrorMap } from "util";

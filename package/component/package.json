@@ -34,7 +34,7 @@
   },
   "dependencies": {
     "@layui/icons-vue": "^1.0.9",
-    "@layui/layer-vue": "^1.4.5",
+    "@layui/layer-vue": "^1.4.6",
     "@vueuse/core": "^9.2.0",
     "async-validator": "^4.1.1",
     "cropperjs": "^1.5.12",
