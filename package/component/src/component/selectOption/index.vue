@@ -31,7 +31,9 @@ const props = withDefaults(defineProps<SelectOptionProps>(), {
 
 const searchValue: Ref<string> = inject("searchValue") as Ref<string>;
 const selectRef: Ref<HTMLElement> = inject("selectRef") as Ref<HTMLElement>;
-const selectedValue: WritableComputedRef<any> = inject("selectedValue") as WritableComputedRef<any>;
+const selectedValue: WritableComputedRef<any> = inject(
+  "selectedValue"
+) as WritableComputedRef<any>;
 const multiple: ComputedRef = inject("multiple") as ComputedRef;
 
 const handleSelect = () => {

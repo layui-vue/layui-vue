@@ -44,7 +44,7 @@ import {
   useResizeObserver,
   useThrottleFn,
 } from "@vueuse/core";
-import { PopperTrigger } from '../tooltip/index.vue';
+import { PopperTrigger } from "../tooltip/index.vue";
 
 export interface PopperProps {
   el: HTMLElement;

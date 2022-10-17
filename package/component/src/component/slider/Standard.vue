@@ -1,7 +1,7 @@
 <script lang="ts">
 export default {
   name: "StandardVue",
-}
+};
 </script>
 
 <script setup lang="ts">
