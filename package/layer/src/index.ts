@@ -55,9 +55,9 @@ const mergeOption = (option: any, defaultOption: any) => {
 };
 
 // 创建 modal 容器
-const createContainer = () => {
+const createContainer = (options: any) => {
   const modalContainer = document.createElement("div");
-  modalContainer.id = nextId();
+  modalContainer.id = options.id;
   document.body.appendChild(modalContainer);
   return modalContainer;
 };
@@ -71,8 +71,8 @@ const modalChildrenVNode = (content: any) => {
 };
 
 const layer = {
-  // 上下文
-  _context: <AppContext | null>null,
+
+  _context: <AppContext | null> null,
 
   // 页面
   open: (option: any, callback?: Function) => {
@@ -155,10 +155,16 @@ const layer = {
     let timer: NodeJS.Timeout;
     // 聚合配置 Opt
     const options = mergeOption(option, defaultOption);
+    // 生成唯一标识
+    if(options.hasOwnProperty("id")) {
+      // 判断 id 存在, 并销毁窗体
+      layer.close(options.id);
+    } else {
+      // 生成新的唯一标识
+      options.id = nextId();
+    }
     // 创建容器 Dom
-    const modalContainer = createContainer();
-
-    options.id = modalContainer.id;
+    const modalContainer = createContainer(options);
     // 创建虚拟 Dom
     const modalInstance = h(
       LayLayer,
@@ -261,4 +267,5 @@ export { layer, LayLayer };
 
 export default { install };
 
-import "./theme/index.css";
+import "./theme/index.css";import { getSystemErrorMap } from "util";
+

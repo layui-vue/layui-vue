@@ -16,11 +16,11 @@
 import { layer } from  "../../../../layer/src/index"
 
 const msg = function() {
-    layer.msg("普通消息", { time: 1000 })
+    layer.msg("普通消息", { time: 3000, id: "1" })
 }
 
 const success = function() {
-    layer.msg("成功消息", { time: 1000, icon: 1})
+    layer.msg("成功消息", { time: 3000, id: "1" ,icon: 1})
 }
 
 const failure = function() {
@@ -86,7 +86,7 @@ const openConfirm2 = function() {
 import { layer } from  "../../../../layer/src/index"
 
 const load1 = function() {
-    layer.load(0, {time: 2000})
+    layer.load(0, {id:"1", time: 3000})
 }
 
 const load2 = function() {
