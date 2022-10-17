@@ -61,7 +61,7 @@ const checkedKeys = computed({
     return props.multiple ? props.modelValue : [];
   },
   set(value) {
-    if(props.multiple) {
+    if (props.multiple) {
       emits("update:modelValue", value);
       emits("change", value);
     }

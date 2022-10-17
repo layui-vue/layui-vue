@@ -20,13 +20,13 @@ import {
   StyleValue,
 } from "vue";
 
-export interface LayAiffxProps {
+export interface AiffxProps {
   offset?: number;
   target?: HTMLElement;
   position?: string;
 }
 
-const props = withDefaults(defineProps<LayAiffxProps>(), {
+const props = withDefaults(defineProps<AiffxProps>(), {
   offset: 0,
   position: "top",
   target: () => {

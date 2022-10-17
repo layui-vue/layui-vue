@@ -8,14 +8,14 @@ export default {
 import { computed, StyleValue } from "vue";
 import "./index.less";
 
-export interface LayBadgeProps {
+export interface BadgeProps {
   type?: "dot" | "rim";
   theme?: string;
   color?: string;
   ripple?: boolean;
 }
 
-const props = defineProps<LayBadgeProps>();
+const props = defineProps<BadgeProps>();
 
 const classes = computed(() => {
   return [
@@ -30,8 +30,9 @@ const classes = computed(() => {
 });
 
 const styles = computed<StyleValue>(() => {
-  props.color ? `background-color: ${props.color}` : "";
-});
+  return [props.color ? `background-color: ${props.color}` : ""]
+})
+
 </script>
 
 <template>

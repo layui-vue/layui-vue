@@ -9,7 +9,7 @@ export default {
 <script setup lang="ts">
 import "./index.less";
 
-export interface LayAvatarProps {
+export interface AvatarProps {
   src?: string;
   size?: "xs" | "sm" | "md" | "lg";
   radius?: boolean;
@@ -17,7 +17,7 @@ export interface LayAvatarProps {
   alt?: string;
 }
 
-const props = withDefaults(defineProps<LayAvatarProps>(), {
+const props = withDefaults(defineProps<AvatarProps>(), {
   size: "md",
   radius: false,
   icon: "layui-icon-username",

@@ -16,7 +16,7 @@ import {
 import { LayIcon } from "@layui/icons-vue";
 import "./index.less";
 
-export interface LayBacktopProps {
+export interface BackTopProps {
   target?: string;
   showHeight?: number;
   disabled?: boolean;
@@ -34,7 +34,7 @@ export interface LayBacktopProps {
   iconColor?: string;
 }
 
-const props = withDefaults(defineProps<LayBacktopProps>(), {
+const props = withDefaults(defineProps<BackTopProps>(), {
   target: "window",
   showHeight: 200,
   icon: "layui-icon-top",
