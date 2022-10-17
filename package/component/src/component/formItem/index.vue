@@ -28,7 +28,7 @@ import Schema, {
 } from "async-validator";
 import cnValidateMessage from "./cnValidateMessage";
 
-export interface LayFormItemProps {
+export interface FormItemProps {
   prop?: string;
   mode?: string;
   label?: string;
@@ -40,7 +40,7 @@ export interface LayFormItemProps {
   requiredErrorMessage?: string;
 }
 
-const props = withDefaults(defineProps<LayFormItemProps>(), {
+const props = withDefaults(defineProps<FormItemProps>(), {
   mode: "block",
   labelPosition: "right",
   labelWidth: 95,

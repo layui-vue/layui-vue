@@ -8,24 +8,21 @@ export default {
 import {
   withDefaults,
   inject,
-  Ref,
   useSlots,
   getCurrentInstance,
-  computed,
   reactive,
   onBeforeUnmount,
-  toRefs,
 } from "vue";
 import { TabInjectKey, TabsContext } from "../tab/interface";
 
-export interface LayTabItemProps {
+export interface TabItemProps {
   id: string;
   title?: string | Function;
   icon?: string | Function;
   closable?: boolean | string;
 }
 
-const props = withDefaults(defineProps<LayTabItemProps>(), {
+const props = withDefaults(defineProps<TabItemProps>(), {
   closable: true,
 });
 

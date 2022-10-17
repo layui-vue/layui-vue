@@ -10,13 +10,13 @@ import Header from "../header/index.vue";
 import Footer from "../footer/index.vue";
 import "./index.less";
 
-export interface LayLayoutProps {
+export interface LayoutProps {
   isVertical?: boolean;
 }
 
 const slots = useSlots();
 
-const props = withDefaults(defineProps<LayLayoutProps>(), {
+const props = withDefaults(defineProps<LayoutProps>(), {
   isVertical: false,
 });
 

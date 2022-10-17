@@ -14,14 +14,14 @@ import { DropdownPlacement } from "../dropdown/interface";
 
 export type DropdownTrigger = "click" | "hover" | "focus" | "contextMenu";
 
-export interface LayDropdownSubMenuProps {
+export interface DropdownSubMenuProps {
   trigger?: DropdownTrigger | DropdownTrigger[];
   placement?: DropdownPlacement;
   disabled?: boolean;
   contentOffset?: number;
 }
 
-const props = withDefaults(defineProps<LayDropdownSubMenuProps>(), {
+const props = withDefaults(defineProps<DropdownSubMenuProps>(), {
   trigger: "hover",
   disabled: false,
   placement: "right-start",

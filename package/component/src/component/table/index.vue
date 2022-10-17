@@ -25,7 +25,7 @@ import TableRow from "./TableRow.vue";
 import TablePage from "./TablePage.vue";
 import { nextTick } from "vue";
 
-export interface LayTableProps {
+export interface TableProps {
   id?: string;
   skin?: string;
   size?: string;
@@ -53,7 +53,7 @@ export interface LayTableProps {
   getRadioProps?: Function;
 }
 
-const props = withDefaults(defineProps<LayTableProps>(), {
+const props = withDefaults(defineProps<TableProps>(), {
   id: "id",
   size: "md",
   indentSize: 30,

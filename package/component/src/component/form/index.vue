@@ -10,7 +10,7 @@ import { toRefs, provide, reactive, onMounted } from "vue";
 import { Rule, ValidateError, ValidateMessages } from "async-validator";
 import { LayFormItemContext, FormCallback, modelType } from "../../types/form";
 
-export interface LayFormProps {
+export interface FormProps {
   model?: modelType;
   required?: boolean;
   rules?: Rule;
@@ -21,7 +21,7 @@ export interface LayFormProps {
   useCN?: boolean;
 }
 
-const props = withDefaults(defineProps<LayFormProps>(), {
+const props = withDefaults(defineProps<FormProps>(), {
   model: function () {
     return {};
   },

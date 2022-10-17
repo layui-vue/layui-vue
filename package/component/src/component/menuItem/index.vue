@@ -11,13 +11,13 @@ import useLevel from "../menu/useLevel";
 import { indentHandle } from "../menu/utils";
 import LayTooltip from "../tooltip/index.vue";
 
-export interface LayMenuItemProps {
+export interface MenuItemProps {
   id: string;
   title?: string;
 }
 
 const slots = useSlots();
-const props = defineProps<LayMenuItemProps>();
+const props = defineProps<MenuItemProps>();
 const { level } = useLevel();
 const selectedKey: Ref<string> = inject("selectedKey") as Ref<string>;
 const isTree = inject("isTree") as ComputedRef<boolean>;

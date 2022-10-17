@@ -29,15 +29,13 @@ import {
   Fragment,
 } from "vue";
 import { useResizeObserver } from "@vueuse/core";
-import { TabData, TabInjectKey } from "./interface";
+import { TabData, TabInjectKey, TabPosition } from "./interface";
 
-export type tabPositionType = "top" | "bottom" | "left" | "right";
-
-export interface LayTabProps {
+export interface TabProps {
   type?: string;
   modelValue: string;
   allowClose?: boolean;
-  tabPosition?: tabPositionType;
+  tabPosition?: TabPosition;
   beforeClose?: Function;
   beforeLeave?: Function;
   activeBarTransition?: boolean;
@@ -58,7 +56,7 @@ const setItemInstanceBySlot = function (nodeList: VNode[]) {
   });
 };
 
-const props = withDefaults(defineProps<LayTabProps>(), {
+const props = withDefaults(defineProps<TabProps>(), {
   tabPosition: "top",
 });
 

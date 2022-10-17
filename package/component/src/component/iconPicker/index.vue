@@ -12,13 +12,13 @@ import LayDropdown from "../dropdown/index.vue";
 import LayInput from "../input/index.vue";
 import LayScroll from "../scroll/index.vue";
 
-export interface LayIconPickerProps {
+export interface IconPickerProps {
   page?: boolean;
   modelValue?: string;
   showSearch?: boolean;
 }
 
-const props = withDefaults(defineProps<LayIconPickerProps>(), {
+const props = withDefaults(defineProps<IconPickerProps>(), {
   modelValue: "layui-icon-face-smile",
   page: false,
 });

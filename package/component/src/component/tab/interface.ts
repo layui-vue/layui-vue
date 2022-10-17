@@ -15,3 +15,5 @@ export interface TabsContext {
   addItem: (id: string, data: TabData) => void;
   removeItem: (id: string) => void;
 }
+
+export type TabPosition = "top" | "bottom" | "left" | "right";

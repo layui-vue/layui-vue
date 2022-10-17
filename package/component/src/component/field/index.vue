@@ -8,12 +8,12 @@ export default {
 import "./index.less";
 import { useSlots } from "vue";
 
-export interface LayFieldProps {
+export interface FieldProps {
   title?: string;
 }
 
 const slot = useSlots();
-const props = defineProps<LayFieldProps>();
+const props = defineProps<FieldProps>();
 </script>
 
 <template>

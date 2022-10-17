@@ -7,8 +7,9 @@ export default {
 <script setup lang="ts">
 import { computed } from "vue";
 import "./index.less";
+import { SwitchSize } from "./interface";
 
-export interface LaySwitchProps {
+export interface SwitchProps {
   name?: string;
   disabled?: boolean;
   modelValue?: string | number | boolean;
@@ -18,12 +19,12 @@ export interface LaySwitchProps {
   unswitchColor?: string;
   onswitchValue?: string | number | boolean;
   unswitchValue?: string | number | boolean;
-  size?: "lg" | "md" | "sm" | "xs";
+  size?: SwitchSize;
   loadingIcon?: string;
   loading?: boolean;
 }
 
-const props = withDefaults(defineProps<LaySwitchProps>(), {
+const props = withDefaults(defineProps<SwitchProps>(), {
   disabled: false,
   onswitchValue: true,
   unswitchValue: false,

@@ -11,13 +11,13 @@ import SubMenuPopup from "./SubMenuPopup.vue";
 import { indentHandle } from "../menu/utils";
 import { provideLevel, default as useLevel } from "../menu/useLevel";
 
-export interface LaySubMenuProps {
+export interface SubMenuProps {
   id: string;
   title?: string;
 }
 
 const slots = useSlots();
-const props = defineProps<LaySubMenuProps>();
+const props = defineProps<SubMenuProps>();
 
 const { level } = useLevel();
 const isTree: Ref<boolean> = inject("isTree") as Ref<boolean>;
@@ -45,7 +45,6 @@ watchEffect(() => {
     const _isCollapse =
       isCollapse.value === true || isCollapse.value === "true";
     if (_isCollapse && level.value === 1) {
-      // 动画结束后改变
       setTimeout(() => {
         needPopup.value = isTree.value && _isCollapse;
       }, 200);

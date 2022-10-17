@@ -12,7 +12,7 @@ import layButton from "../button/index.vue";
 import { ref, watch, withDefaults, computed, Ref } from "vue";
 import { InputNumberSize } from "./interface";
 
-export interface LayInputNumberProps {
+export interface InputNumberProps {
   modelValue?: number;
   name?: string;
   disabled?: boolean;
@@ -24,7 +24,7 @@ export interface LayInputNumberProps {
   size?: InputNumberSize;
 }
 
-const props = withDefaults(defineProps<LayInputNumberProps>(), {
+const props = withDefaults(defineProps<InputNumberProps>(), {
   disabled: false,
   disabledInput: false,
   modelValue: 0,

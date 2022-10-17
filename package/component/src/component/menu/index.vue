@@ -9,7 +9,7 @@ import { computed, ComputedRef, provide, Ref, ref, watch } from "vue";
 import { provideLevel } from "./useLevel";
 import "./index.less";
 
-export interface LayMenuProps {
+export interface MenuProps {
   selectedKey?: string;
   openKeys?: string[];
   tree?: boolean;
@@ -28,7 +28,7 @@ const emit = defineEmits([
   "changeOpenKeys",
 ]);
 
-const props = withDefaults(defineProps<LayMenuProps>(), {
+const props = withDefaults(defineProps<MenuProps>(), {
   selectedKey: "",
   openKeys: () => [],
   tree: false,
@@ -70,14 +70,9 @@ const selectedKey = computed({
   },
 });
 
-const indent = computed({
-  get() {
-    return props.indent;
-  },
-  set(val) {
-    // emit("update:indent", val);
-  },
-});
+const indent = computed(() => {
+  return props.indent;
+})
 
 watch(
   () => props.collapse,

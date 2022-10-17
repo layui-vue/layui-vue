@@ -8,11 +8,11 @@ export default {
 import { inject, Ref } from "vue";
 import { DropdownContext, dropdownInjectionKey } from "../dropdown/interface";
 
-export interface LayDropdownMenuItemProps {
+export interface DropdownMenuItemProps {
   disabled?: boolean;
 }
 
-const props = withDefaults(defineProps<LayDropdownMenuItemProps>(), {
+const props = withDefaults(defineProps<DropdownMenuItemProps>(), {
   disabled: false,
 });
 

@@ -7,7 +7,7 @@ export default {
 import { useSlots } from "vue";
 import "./index.less";
 
-export interface LayDropdownProps {
+export interface DropdownProps {
   title?: string;
   status?: "401" | "403" | "404" | "500";
   describe?: string;
@@ -15,8 +15,8 @@ export interface LayDropdownProps {
 
 const slots = useSlots();
 
-const props = withDefaults(defineProps<LayDropdownProps>(), {
-  title: "Exception",
+const props = withDefaults(defineProps<DropdownProps>(), {
+  title: "exception",
   describe: "describe",
 });
 </script>

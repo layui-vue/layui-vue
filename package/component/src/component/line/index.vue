@@ -7,7 +7,7 @@ export default {
 <script setup lang="ts">
 import { computed, useSlots } from "vue";
 import "./index.less";
-export interface LayLineProps {
+export interface LineProps {
   direction?: "horizontal" | "vertical";
   contentPosition?: "center" | "left" | "right";
   borderWidth?: string;
@@ -17,7 +17,7 @@ export interface LayLineProps {
   margin?: string;
 }
 
-const props = withDefaults(defineProps<LayLineProps>(), {
+const props = withDefaults(defineProps<LineProps>(), {
   direction: "horizontal",
   contentPosition: "center",
   borderWidth: "1px",

@@ -15,14 +15,14 @@ import {
 } from "vue";
 import "./index.less";
 
-export interface LayFullscreenProps {
+export interface FullscreenProps {
   target?: HTMLElement;
   immersive?: boolean;
   position?: string;
   zIndex?: string;
 }
 
-const props = withDefaults(defineProps<LayFullscreenProps>(), {
+const props = withDefaults(defineProps<FullscreenProps>(), {
   immersive: true,
 });
 
@@ -36,7 +36,7 @@ type MethodMap = [
   "fullscreenerror"
 ];
 
-const methodMap: MethodMap[] = [
+const methodMap: any[] = [
   [
     "requestFullscreen",
     "exitFullscreen",
@@ -45,7 +45,6 @@ const methodMap: MethodMap[] = [
     "fullscreenchange",
     "fullscreenerror",
   ],
-  // New WebKit
   [
     "webkitRequestFullscreen",
     "webkitExitFullscreen",
@@ -54,7 +53,6 @@ const methodMap: MethodMap[] = [
     "webkitfullscreenchange",
     "webkitfullscreenerror",
   ],
-  // Old WebKit
   [
     "webkitRequestFullScreen",
     "webkitCancelFullScreen",

@@ -8,12 +8,12 @@ export default {
 import "./index.less";
 import { useSlots, withDefaults } from "vue";
 
-export interface LayEmptyProps {
+export interface EmptyProps {
   description?: string;
   image?: string;
 }
 
-const props = withDefaults(defineProps<LayEmptyProps>(), {
+const props = withDefaults(defineProps<EmptyProps>(), {
   description: "暂无数据",
 });
 
