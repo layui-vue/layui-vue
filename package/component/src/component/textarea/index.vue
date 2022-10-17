@@ -9,7 +9,7 @@ import { LayIcon } from "@layui/icons-vue";
 import { computed } from "vue";
 import "./index.less";
 
-export interface LayTextareaProps {
+export interface TextareaProps {
   name?: string;
   modelValue?: string;
   placeholder?: string;
@@ -19,7 +19,7 @@ export interface LayTextareaProps {
   maxlength?: number;
 }
 
-const props = defineProps<LayTextareaProps>();
+const props = defineProps<TextareaProps>();
 
 interface TextareaEmits {
   (e: "blur", event: Event): void;

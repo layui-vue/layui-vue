@@ -54,7 +54,7 @@ export interface cutOptions {
   copperOption?: typeof Cropper;
 }
 
-export interface LayUploadProps {
+export interface UploadProps {
   url?: string;
   data?: any;
   headers?: Recordable;
@@ -116,7 +116,7 @@ let defaultCutLayerOption: LayerModal = {
   type: "component",
 };
 
-const props = withDefaults(defineProps<LayUploadProps>(), {
+const props = withDefaults(defineProps<UploadProps>(), {
   field: "file",
   acceptMime: "MIME_type",
   size: 0,

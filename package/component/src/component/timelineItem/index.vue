@@ -7,14 +7,14 @@ export default {
 <script setup lang="ts">
 import { useSlots } from "vue";
 
-export interface LayTimelineItemProps {
+export interface TimelineItemProps {
   title?: string;
   simple?: boolean;
 }
 
 const slot = useSlots();
 
-const props = defineProps<LayTimelineItemProps>();
+const props = defineProps<TimelineItemProps>();
 </script>
 
 <template>

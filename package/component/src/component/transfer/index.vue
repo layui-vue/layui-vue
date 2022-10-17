@@ -7,13 +7,12 @@ export default {
 <script setup lang="ts">
 import "./index.less";
 import LayInput from "../input/index.vue";
-import LayScroll from "../scroll/index.vue";
 import LayButton from "../button/index.vue";
 import LayCheckbox from "../checkbox/index.vue";
 import { computed, Ref, ref, useSlots, watch } from "vue";
 import { BooleanOrString, Recordable } from "../../types";
 
-export interface LayTransferProps {
+export interface TransferProps {
   id?: string;
   title?: string[];
   width?: string;
@@ -25,7 +24,7 @@ export interface LayTransferProps {
 
 const slots = useSlots();
 
-const props = withDefaults(defineProps<LayTransferProps>(), {
+const props = withDefaults(defineProps<TransferProps>(), {
   id: "id",
   title: () => ["主列表", "副列表"],
   dataSource: () => [],

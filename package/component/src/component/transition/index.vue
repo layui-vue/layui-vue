@@ -21,13 +21,13 @@ import { provide } from "vue";
 import LayCollapseTransition from "./transitions/collapseTransition.vue";
 import LayFadeTransition from "./transitions/fadeTransition.vue";
 
-export interface LayTransitionProps {
+export interface TransitionProps {
   type?: string;
   enable?: boolean;
   time?: string | number;
 }
 
-const props = withDefaults(defineProps<LayTransitionProps>(), {
+const props = withDefaults(defineProps<TransitionProps>(), {
   type: "collapse",
   enable: true,
   time: 0.3,

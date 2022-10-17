@@ -5,7 +5,7 @@ export default {
 </script>
 <script lang="ts" setup>
 import "./index.less";
-import LayTag, { LayTagProps } from "../tag/index.vue";
+import LayTag, { TagProps } from "../tag/index.vue";
 import LayToopTip from "../tooltip/index.vue";
 import {
   onMounted,
@@ -27,7 +27,7 @@ export interface TagData {
   [other: string]: any;
 }
 
-export interface LayTagInputProps {
+export interface TagInputProps {
   modelValue?: (string | number | TagData)[];
   inputValue?: string;
   disabled?: boolean;
@@ -38,11 +38,11 @@ export interface LayTagInputProps {
   minCollapsedNum?: number;
   collapseTagsTooltip?: boolean;
   size?: TagInputSize;
-  tagProps?: LayTagProps;
+  tagProps?: TagProps;
   disabledInput?: boolean;
 }
 
-const props = withDefaults(defineProps<LayTagInputProps>(), {
+const props = withDefaults(defineProps<TagInputProps>(), {
   placeholder: undefined,
   minCollapsedNum: 0,
   size: "md",

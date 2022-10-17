@@ -16,7 +16,7 @@ import {
   setFetchMethod,
 } from "@umijs/ssr-darkreader";
 
-export interface LayConfigProviderProps {
+export interface ConfigProviderProps {
   locale?: string;
   locales?: [];
   theme?: string;
@@ -24,7 +24,7 @@ export interface LayConfigProviderProps {
   darkPartial?: any;
 }
 
-const props = withDefaults(defineProps<LayConfigProviderProps>(), {
+const props = withDefaults(defineProps<ConfigProviderProps>(), {
   locale: "zh_CN",
   theme: "light",
 });

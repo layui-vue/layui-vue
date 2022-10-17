@@ -10,7 +10,7 @@ import { computed, ref, watch } from "vue";
 import { getNode } from "../../utils/treeUtil";
 import { TreeSelectSize } from "./interface";
 
-export interface LayTreeSelect {
+export interface TreeSelectProps {
   data: any;
   modelValue: any;
   disabled?: boolean;
@@ -29,7 +29,7 @@ export interface TreeSelectEmits {
   (e: "search", value: string): void;
 }
 
-const props = withDefaults(defineProps<LayTreeSelect>(), {
+const props = withDefaults(defineProps<TreeSelectProps>(), {
   disabled: false,
   placeholder: "请选择",
   multiple: false,
