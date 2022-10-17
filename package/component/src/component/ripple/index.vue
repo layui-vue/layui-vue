@@ -8,7 +8,7 @@ export default {
 import { computed, onMounted, ref, watch } from "vue";
 import "./index.less";
 
-export interface LayRippletProps {
+export interface RippleProps {
   type?: "out" | "inset";
   color?: string;
   borderRadius?: string;
@@ -18,7 +18,7 @@ export interface LayRippletProps {
   center?: boolean;
 }
 
-const props = withDefaults(defineProps<LayRippletProps>(), {
+const props = withDefaults(defineProps<RippleProps>(), {
   type: "inset",
   color: "currentColor",
   borderRadius: "0",

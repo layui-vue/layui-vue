@@ -18,6 +18,7 @@ import {
 } from "vue";
 import { isObject, reactiveOmit, useResizeObserver } from "@vueuse/core";
 import { LayIcon } from "@layui/icons-vue";
+import { TagInputSize } from "./inerface";
 
 export interface TagData {
   value?: string | number;
@@ -36,7 +37,7 @@ export interface LayTagInputProps {
   max?: number;
   minCollapsedNum?: number;
   collapseTagsTooltip?: boolean;
-  size?: "lg" | "md" | "sm" | "xs";
+  size?: TagInputSize;
   tagProps?: LayTagProps;
   disabledInput?: boolean;
 }

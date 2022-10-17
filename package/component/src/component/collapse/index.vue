@@ -8,25 +8,25 @@ export default {
 import "./index.less";
 import { withDefaults, provide, ref, watch } from "vue";
 
-export interface LayCollapseProps {
-  modelValue?: number | string | [];
+export interface CollapseProps {
   accordion?: boolean;
+  modelValue?: number | string | number[] | string[];
   collapseTransition?: boolean;
 }
 
-const props = withDefaults(defineProps<LayCollapseProps>(), {
+const props = withDefaults(defineProps<CollapseProps>(), {
   modelValue: () => [],
   accordion: false,
   collapseTransition: true,
 });
 
-// 监听传入的值
 watch(
   () => props.modelValue,
-  (val, oldVal) => {
+  (val) => {
     activeValues.value = ([] as any[]).concat(val);
   }
 );
+
 const emit = defineEmits(["update:modelValue", "change"]);
 
 const activeValues = ref<Array<any>>(([] as any[]).concat(props.modelValue));

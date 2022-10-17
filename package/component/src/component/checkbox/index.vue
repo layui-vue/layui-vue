@@ -8,6 +8,7 @@ export default {
 import { LayIcon } from "@layui/icons-vue";
 import { computed, inject, useSlots } from "vue";
 import "./index.less";
+import { CheckboxSize } from "./interface";
 
 export interface LayCheckboxProps {
   name?: string;
@@ -17,7 +18,7 @@ export interface LayCheckboxProps {
   isIndeterminate?: boolean;
   modelValue?: boolean | Array<string | number | object>;
   disabled?: boolean;
-  size?: "lg" | "md" | "sm" | "xs";
+  size?: CheckboxSize;
 }
 
 const props = withDefaults(defineProps<LayCheckboxProps>(), {

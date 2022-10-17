@@ -74,10 +74,11 @@ import LayInput from "../input/index.vue";
 import LayScroll from "../scroll/index.vue";
 import LayDropdown from "../dropdown/index.vue";
 import { ref, onMounted, watch, useSlots } from "vue";
+import { CascaderSize } from "./interface";
 
 export type DropdownTrigger = "click" | "hover" | "focus" | "contextMenu";
 
-export interface LayCascaderProps {
+export interface CascaderProps {
   options?: Array<any> | null;
   modelValue?: string;
   decollator?: string;
@@ -85,11 +86,11 @@ export interface LayCascaderProps {
   onlyLastLevel?: boolean;
   replaceFields?: { label: string; value: string; children: string };
   allowClear?: boolean;
-  size?: "lg" | "md" | "sm" | "xs";
+  size?: CascaderSize;
   trigger?: DropdownTrigger | DropdownTrigger[];
 }
 
-const props = withDefaults(defineProps<LayCascaderProps>(), {
+const props = withDefaults(defineProps<CascaderProps>(), {
   options: null,
   modelValue: "",
   decollator: "/",

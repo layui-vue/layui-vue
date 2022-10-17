@@ -11,6 +11,7 @@ import { computed, ref, useSlots, watch } from "vue";
 import { useI18n } from "../../language";
 import PasswordIcon from "./svg/Password.vue";
 import UnPasswordIcon from "./svg/unPassword.vue";
+import { InputSize } from "./interface";
 
 export interface LayInputProps {
   name?: string;
@@ -25,7 +26,7 @@ export interface LayInputProps {
   disabled?: boolean;
   readonly?: boolean;
   password?: boolean;
-  size?: "lg" | "md" | "sm" | "xs";
+  size?: InputSize;
   maxlength?: number;
 }
 

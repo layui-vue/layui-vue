@@ -29,7 +29,7 @@ provide("checkboxGroup", {
 });
 
 watch(
-  () => modelValue,
+  () => modelValue,   
   (val) => {
     emit("change", modelValue.value);
     emit("update:modelValue", modelValue.value);

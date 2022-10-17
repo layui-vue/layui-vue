@@ -10,6 +10,7 @@ import layInput from "../input/index.vue";
 import { LayIcon } from "@layui/icons-vue";
 import layButton from "../button/index.vue";
 import { ref, watch, withDefaults, computed, Ref } from "vue";
+import { InputNumberSize } from "./interface";
 
 export interface LayInputNumberProps {
   modelValue?: number;
@@ -20,7 +21,7 @@ export interface LayInputNumberProps {
   position?: "right";
   min?: number;
   max?: number;
-  size?: "lg" | "md" | "sm" | "xs";
+  size?: InputNumberSize;
 }
 
 const props = withDefaults(defineProps<LayInputNumberProps>(), {

@@ -28,6 +28,7 @@ import LaySelectOption, {
   LaySelectOptionProps,
 } from "../selectOption/index.vue";
 import { arrayExpression } from "@babel/types";
+import { SelectSize } from "./interface";
 
 export interface LaySelectProps {
   name?: string;
@@ -39,7 +40,7 @@ export interface LaySelectProps {
   modelValue?: any;
   multiple?: boolean;
   items?: LaySelectOptionProps[];
-  size?: "lg" | "md" | "sm" | "xs";
+  size?: SelectSize;
   collapseTagsTooltip?: boolean;
   minCollapsedNum?: number;
   allowClear?: boolean;

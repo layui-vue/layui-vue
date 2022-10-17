@@ -1,5 +1,6 @@
 <script lang="ts">
 import { computed, inject } from "vue";
+import { RadioSize } from "./interface";
 export default {
   name: "LayRadio",
 };
@@ -10,7 +11,7 @@ import "./index.less";
 
 export interface LayRadioProps {
   name?: string;
-  size?: "lg" | "md" | "sm" | "xs";
+  size?: RadioSize;
   disabled?: boolean;
   modelValue?: string | boolean | number;
   value?: string | boolean | number;

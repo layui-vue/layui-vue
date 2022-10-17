@@ -8,13 +8,13 @@ export default {
 import LayTransition from "../transition/index.vue";
 import { withDefaults, inject, computed, ref } from "vue";
 
-export interface LayCollapseItemProps {
+export interface CollapseItemProps {
   id: number | string;
   title: string;
   disabled?: boolean;
 }
 
-const props = withDefaults(defineProps<LayCollapseItemProps>(), {
+const props = withDefaults(defineProps<CollapseItemProps>(), {
   disabled: false,
 });
 
