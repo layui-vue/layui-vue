@@ -5,25 +5,21 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed, inject, Ref, useSlots } from "vue";
+import { computed, inject, Ref } from "vue";
 import LayDropdown from "../dropdown/index.vue";
 import { LayIcon } from "@layui/icons-vue";
 import useLevel from "../menu/useLevel";
 
-export interface LaySubMenuPopupProps {
+export interface SubMenuPopupProps {
   id: string;
   title?: string;
 }
-const props = defineProps<LaySubMenuPopupProps>();
+
+const props = defineProps<SubMenuPopupProps>();
 
 const { level } = useLevel();
 const isTree: Ref<boolean> = inject("isTree") as Ref<boolean>;
-const openKeys: Ref<string[]> = inject("openKeys") as Ref<string[]>;
 const theme = inject("menuTheme") as Ref<string>;
-
-const isOpen = computed(() => {
-  return openKeys.value.includes(props.id);
-});
 
 const computedTheme = computed(() => {
   return theme.value === "light" ? "-light" : "";
@@ -42,27 +38,22 @@ const computedPlacement = computed(() => {
 <template>
   <lay-dropdown
     trigger="hover"
+    class="layui-sub-menu-popup"
     :placement="computedPlacement"
     :autoFitMinWidth="false"
+    :updateAtScroll="true"
     :contentOffset="3"
-    updateAtScroll
-    class="layui-sub-menu-popup"
   >
-    <li :class="['layui-nav-item']">
+    <li class="layui-nav-item">
       <a href="javascript:void(0)" style="justify-content: space-between">
         <div>
-          <!-- 图标 -->
           <i v-if="$slots.icon" class="layui-sub-menu-icon">
             <slot name="icon"></slot>
           </i>
-
-          <!-- 标题 -->
           <span v-if="$slots.title">
             <slot name="title"></slot>
           </span>
         </div>
-
-        <!-- 扩展 -->
         <span v-if="$slots.expandIcon" class="layui-nav-more">
           <slot name="expandIcon">
             <lay-icon :type="computedExpandIcon" />
