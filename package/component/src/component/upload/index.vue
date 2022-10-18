@@ -22,7 +22,6 @@ import { templateRef } from "@vueuse/core";
 import { LayLayer } from "@layui/layer-vue";
 import LayButton from "../button/index.vue";
 import Cropper from "cropperjs";
-import { unescapeMd } from "markdown-it/lib/common/utils";
 
 export interface LayerButton {
   text: string;
@@ -49,7 +48,7 @@ export interface LayerModal {
   isOutAnim?: boolean;
 }
 
-export interface cutOptions {
+export interface CutOptions {
   layerOption: LayerModal;
   copperOption?: typeof Cropper;
 }
@@ -67,7 +66,7 @@ export interface UploadProps {
   disabled?: boolean;
   disabledPreview?: boolean;
   cut?: boolean;
-  cutOptions?: cutOptions;
+  cutOptions?: CutOptions;
 }
 
 const getCutDownResult = () => {
