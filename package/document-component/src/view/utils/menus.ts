@@ -192,12 +192,6 @@ const menus = [
         path: "/zh-CN/components/tagInput",
       },
       {
-        id: 39,
-        title: "树选择",
-        subTitle: "treeSelect",
-        path: "/zh-CN/components/treeSelect",
-      },
-      {
         id: 40,
         title: "颜色选择器",
         subTitle: "colorPicker",

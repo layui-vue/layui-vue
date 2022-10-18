@@ -16,17 +16,13 @@ import {
   VNode,
   Component,
   watch,
-  nextTick,
   onUnmounted,
-  h,
 } from "vue";
 import { LayIcon } from "@layui/icons-vue";
 import LayInput from "../input/index.vue";
 import LayTagInput from "../tagInput/index.vue";
 import LayDropdown from "../dropdown/index.vue";
-import LaySelectOption, {
-  LaySelectOptionProps,
-} from "../selectOption/index.vue";
+import LaySelectOption, { SelectOptionProps } from "../selectOption/index.vue";
 import { SelectSize } from "./interface";
 
 export interface SelectProps {
@@ -38,7 +34,7 @@ export interface SelectProps {
   emptyMessage?: string;
   modelValue?: any;
   multiple?: boolean;
-  items?: LaySelectOptionProps[];
+  items?: SelectOptionProps[];
   size?: SelectSize;
   collapseTagsTooltip?: boolean;
   minCollapsedNum?: number;
@@ -77,30 +73,34 @@ const openState: Ref<boolean> = ref(false);
 const options = ref<any>([]);
 var timer: any;
 
-const getOption = (nodes: VNode[]) => {
-  nodes
-    ?.filter((item: VNode) => {
-      return item.children != "v-if";
-    })
-    ?.map((item: VNode) => {
-      let component = item.type as Component;
-      if (component.name === LaySelectOption.name) {
-        if (item.children) {
-          // @ts-ignore
-          item.props.label = item.children.default()[0].children;
-        }
-        options.value.push(item.props);
-      } else {
-        getOption(item.children as VNode[]);
+const getOption = (nodes: VNode[], newOptions: any[]) => {
+  const showNodes = nodes?.filter((item: VNode) => {
+    return item.children != "v-if";
+  });
+
+  showNodes?.map((item: VNode) => {
+    let component = item.type as Component;
+    if (component.name === LaySelectOption.name) {
+      if (item.children) {
+        // @ts-ignore
+        item.props.label = item.children.default()[0].children;
       }
-    });
+      newOptions.push(item.props);
+    } else {
+      getOption(item.children as VNode[], newOptions);
+    }
+  });
 };
 
 const intOption = () => {
+  const newOptions: any[] = [];
   if (slots.default) {
-    getOption(slots.default());
+    getOption(slots.default(), newOptions);
   }
-  Object.assign(options.value, props.items);
+  Object.assign(newOptions, props.items);
+  if (JSON.stringify(newOptions) != JSON.stringify(options.value)) {
+    options.value = newOptions;
+  }
 };
 
 const handleRemove = (value: any) => {

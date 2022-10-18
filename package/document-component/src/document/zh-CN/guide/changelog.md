@@ -5,35 +5,25 @@
   <lay-timeline-item title="🐛 尾版本号：日常问题更新。" simple></lay-timeline-item>
   <lay-timeline-item title="🌟 次版本号：带有新特性的向下兼容的版本。" simple></lay-timeline-item>
   <lay-timeline-item title="♻️ 主版本号：含有破坏性更新和新特性，不在发布周期内。" simple></lay-timeline-item>
-  <lay-timeline-item title="♻️ 其他说明：含有破坏性更新和新特性，不在发布周期内。" simple></lay-timeline-item>
 </lay-timeline>
 
 ::: demo
 <template>
 <lay-timeline>
-<lay-timeline-item title="1.7.x">
+  <lay-timeline-item title="1.6.x">
     <ul> 
-      <a name="1-7-0"></a> 
+      <a name="1-6-9"></a> 
       <li> 
-        <h3>1.7.0 <span class="layui-badge-rim">2022-10-15</span></h3> 
+        <h3>1.6.9 <span class="layui-badge-rim">2022-10-18</span></h3> 
         <ul>
-          <li>
-            <li>table 组件</li>
-            <ul>
-              <li>[新增] ** 属性。</li>
-              <li>[新增] ** 方法。</li>
-            </ul>
-          </li>
-          <li>[新增] tree-select 下拉树组件, 提供树结构数据选择能力。</li>
-          <li>[修复] upload 组件 drag 为 true 时, 获取不到拖拽文件 files 集合, 并直接预览上传资源。</li>
-          <li>[其他] global 整体组件源码逻辑优化, 更好的兼容 typescript 类型。</li>
-          <li>[优化] layer 组件 id 属性, 当值相同时仅保留最新的弹层实例。</li>
+          <li>[修复] select 组件内部维护 options 时导致的内存溢出问题。</li>
+          <li>[修复] select 组件单选模式 showSearch 属性开启时, 输入框循环重置的问题。</li>
+          <li>[修复] upload 组件 drag 为 true 时, 获取拖拽文件 files 集合失败, 无法正常上传。</li>
+          <li>[优化] layer 组件 id 属性, 当值相同时仅保留最新的弹出层实例。</li>
           <li>[升级] layer-vue 1.4.6 版本。</li> 
         </ul> 
       </li>
     </ul>
-  </lay-timeline-item>
-  <lay-timeline-item title="1.6.x">
     <ul> 
       <a name="1-6-8"></a> 
       <li> 

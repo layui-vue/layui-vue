@@ -214,7 +214,7 @@ export default {
 
 ::: demo
 <template>
-  <lay-button @click="mvalue=[1,5,7]">点击切换(当前值:{{mvalue.join()}})</lay-button>
+  <lay-button @click="mvalue=['1','5','7']">点击切换(当前值:{{mvalue.join()}})</lay-button>
   <br/>
   <br/>
   <lay-select v-model="mvalue" @change="change" multiple>
