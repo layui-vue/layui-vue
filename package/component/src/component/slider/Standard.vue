@@ -95,10 +95,6 @@ const dots = makeDots(props);
 const focusDot = (val: number) => {
   emit("link-val-hook", val);
 };
-// const focusClick = (e: MouseEvent)=>{
-//   console.log(e);
-//   standardMove(e)
-// }
 </script>
 
 <template>

@@ -44,19 +44,20 @@ import {
   useResizeObserver,
   useThrottleFn,
 } from "@vueuse/core";
-import { PopperTrigger } from "../tooltip/index.vue";
+
+export type PopperTrigger = "click" | "hover" | "focus" | "contextMenu";
 
 export interface PopperProps {
   el: HTMLElement;
-  content?: string | Number;
   position?: string;
-  trigger?: PopperTrigger | PopperTrigger[];
   enterable?: boolean;
   isDark?: boolean;
   disabled?: boolean;
   isCanHide?: boolean;
   isAutoShow?: boolean;
   visible?: boolean;
+  content?: string | Number;
+  trigger?: PopperTrigger | PopperTrigger[];
   popperClass?: string | Array<string | object> | object;
   popperStyle?: StyleValue;
 }

@@ -132,7 +132,6 @@ function cross(val: any) {
 }
 // 断点
 const dots = makeDots(props);
-console.log(dots);
 
 const focusDot = (item: number) => {
   let currbtn = moveNeighbors(item, rv);
