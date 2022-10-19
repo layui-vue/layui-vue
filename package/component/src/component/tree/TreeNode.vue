@@ -195,8 +195,8 @@ const isChildAllSelected = computed(() => {
           :only-icon-control="onlyIconControl"
           @node-click="recursiveNodeClick"
         >
-          <template v-if="$slots.title" v-slot:title="{ data }">
-            <slot name="title" :data="data"></slot>
+          <template v-if="$slots.title" v-slot:title="slotProp: { data: any }">
+            <slot name="title" :data="slotProp.data"></slot>
           </template>
         </tree-node>
       </div>
