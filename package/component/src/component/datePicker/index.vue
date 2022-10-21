@@ -8,7 +8,7 @@
       :disabled="disabled"
       :autoFitMinWidth="false"
       :contentClass="contentClass"
-      :contentStyle="contentStyle" 
+      :contentStyle="contentStyle"
       updateAtScroll
     >
       <lay-input
@@ -111,7 +111,15 @@ import { LayIcon } from "@layui/icons-vue";
 import LayInput from "../input/index.vue";
 import LayDropdown from "../dropdown/index.vue";
 import { getMonth, getYear, getDay } from "./day";
-import { ref, watch, defineProps, defineEmits, reactive, provide, StyleValue } from "vue";
+import {
+  ref,
+  watch,
+  defineProps,
+  defineEmits,
+  reactive,
+  provide,
+  StyleValue,
+} from "vue";
 import DatePanel from "./components/DatePanel.vue";
 import TimePanel from "./components/TimePanel.vue";
 import YearPanel from "./components/YearPanel.vue";

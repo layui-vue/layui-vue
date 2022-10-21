@@ -25,7 +25,7 @@ const emit = defineEmits(["update:modelValue"]);
 const props = withDefaults(defineProps<ColorPicker>(), {
   modelValue: { r: 255, g: 255, b: 255, a: 1 },
   preset: ["#009688", "#1e9fff", "#ffb800", "#ff5722", "#5fb878"],
-  disabled: false
+  disabled: false,
 });
 
 const saturationValue = ref<null | HTMLElement>(null);
@@ -405,11 +405,12 @@ function hex2rgba(s: any) {
 </script>
 
 <template>
-  <lay-dropdown       
-      :disabled="disabled"
-      :contentClass="contentClass"
-      :contentStyle="contentStyle" 
-      updateAtScroll>
+  <lay-dropdown
+    :disabled="disabled"
+    :contentClass="contentClass"
+    :contentStyle="contentStyle"
+    updateAtScroll
+  >
     <div class="layui-unselect layui-colorpicker">
       <span>
         <span

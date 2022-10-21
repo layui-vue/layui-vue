@@ -17,7 +17,7 @@ import {
   Component,
   watch,
   onUnmounted,
-StyleValue,
+  StyleValue,
 } from "vue";
 import { LayIcon } from "@layui/icons-vue";
 import LayInput from "../input/index.vue";

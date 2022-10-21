@@ -9,7 +9,7 @@
       :autoFitMinWidth="false"
       :updateAtScroll="true"
       :contentClass="contentClass"
-      :contentStyle="contentStyle" 
+      :contentStyle="contentStyle"
       :disabled="dropDownDisabled"
       @show="openState = true"
       @hide="openState = false"
