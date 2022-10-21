@@ -928,22 +928,22 @@ export default {
     const columns25 = [
       {
         title:"账户",
-        width:"200px",
+        width:"500px",
         key:"username"
       },{
         title:"密码",
-        width: "300px",
+        width: "500px",
         key:"password"
       },{
         title:"性别",
         key:"sex"
       },{
         title:"年龄",
-        width: "300px",
+        width: "600px",
         key:"age"
       },{
         title:"备注",
-        width: "180px",
+        width: "380px",
         key:"remark",
         ellipsisTooltip: true
       }

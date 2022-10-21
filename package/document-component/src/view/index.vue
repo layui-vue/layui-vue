@@ -200,7 +200,7 @@
           <lay-tooltip content="Sa-Token" position="top">
             <a
               style="height: 40px; display: inline-block"
-              href="https://sa-token.dev33.cn/"
+              href="https://sa-token.cc"
               target="_blank"
             >
               <lay-avatar
