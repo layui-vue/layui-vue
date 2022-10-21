@@ -18,17 +18,19 @@
         <ul>
           <li>[新增] select 组件 contentClass 属性, 用于自定义内容区域 class 属性。</li>
           <li>[新增] select 组件 contentStyle 属性, 用于自定义内容区域 style 属性。</li>
-          <li>[新增] icon-picker 组件 disabled 属性, 禁用图标选择。</li>
+          <li>[新增] icon-picker 组件 disabled 属性, 禁用颜色选择。</li>
           <li>[新增] icon-picker 组件 contentClass 属性, 用于自定义内容区域 class 属性。</li>
           <li>[新增] icon-picker 组件 contentStyle 属性, 用于自定义内容区域 style 属性。</li>
           <li>[新增] color-picker 组件 disabled 属性, 禁用图标选择。</li>
           <li>[新增] color-picker 组件 contentClass 属性, 用于自定义内容区域 class 属性。</li>
           <li>[新增] color-picker 组件 contentStyle 属性, 用于自定义内容区域 style 属性。</li>
+          <li>[新增] cascader 组件 disabled 属性, 禁用数据选择。</li>
           <li>[新增] cascader 组件 contentClass 属性, 用于自定义内容区域 class 属性。</li>
           <li>[新增] cascader 组件 contentStyle 属性, 用于自定义内容区域 style 属性。</li>
           <li>[新增] date-picker 组件 contentClass 属性, 用于自定义内容区域 class 属性。</li>
           <li>[新增] date-picker 组件 contentStyle 属性, 用于自定义内容区域 style 属性。</li>
           <li>[修复] date-picker 组件 type 属性为 date 值, range 属性为 true 时, 结束月份出现 13 月的问题。</li>
+          <li>[修复] space 组件 size 属性使用内置 string ['md','sm'] 不生效的问题。</li>
         </ul> 
       </li>
     </ul>

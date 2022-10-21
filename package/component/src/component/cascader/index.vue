@@ -8,9 +8,9 @@
       :trigger="trigger"
       :autoFitMinWidth="false"
       :updateAtScroll="true"
+      :disabled="disabled"
       :contentClass="contentClass"
       :contentStyle="contentStyle"
-      :disabled="dropDownDisabled"
       @show="openState = true"
       @hide="openState = false"
     >
@@ -86,6 +86,7 @@ export interface CascaderProps {
   decollator?: string;
   placeholder?: string;
   onlyLastLevel?: boolean;
+  disabled?: boolean;
   replaceFields?: { label: string; value: string; children: string };
   allowClear?: boolean;
   size?: CascaderSize;
@@ -101,6 +102,7 @@ const props = withDefaults(defineProps<CascaderProps>(), {
   placeholder: "",
   onlyLastLevel: false,
   allowClear: false,
+  disabled: false,
   size: "md",
   trigger: "click",
   replaceFields: () => {
@@ -283,12 +285,10 @@ const selectBar = (item: any, selectIndex: number, parentIndex: number) => {
 const displayValue = ref<string | number>("");
 const slots = useSlots();
 const dropdownRef = ref();
-const dropDownDisabled = ref(false);
 
 //清除事件
 const onClear = () => {
   displayValue.value = "";
-  dropDownDisabled.value = true;
   let arr = JSON.parse(JSON.stringify(treeData.value));
   for (let index = 0; index < arr.length; index++) {
     arr[index].selectIndex = null;
@@ -299,9 +299,6 @@ const onClear = () => {
   }
   treeData.value = arr;
   emit("update:modelValue", null);
-  setTimeout(() => {
-    dropDownDisabled.value = false;
-  }, 0);
 };
 
 const openState = ref(false);

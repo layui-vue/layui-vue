@@ -1,6 +1,6 @@
 export default {
   input: {
-    hello: "hello world",
+    placeholder: "please input",
   },
   page: {
     prev: "prev",

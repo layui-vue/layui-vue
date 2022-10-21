@@ -8,7 +8,6 @@ export default {
 import "./index.less";
 import { LayIcon } from "@layui/icons-vue";
 import { computed, ref, useSlots, watch } from "vue";
-import { useI18n } from "../../language";
 import PasswordIcon from "./svg/Password.vue";
 import UnPasswordIcon from "./svg/unPassword.vue";
 import { InputSize } from "./interface";
@@ -51,7 +50,6 @@ interface InputEmits {
 
 const emit = defineEmits<InputEmits>();
 
-const { t } = useI18n();
 const slots = useSlots();
 const type = ref(props.type);
 const currentValue = ref<string>(
