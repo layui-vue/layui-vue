@@ -421,6 +421,8 @@ const sortTable = (e: any, key: string, sort: string) => {
 
 let tableBody = ref<HTMLElement | null>(null);
 let tableHeader = ref<HTMLElement | null>(null);
+let tableHeaderTable = ref<HTMLElement | null>(null);
+const tableBodyEmptyWidth = ref();
 let scrollWidthCell = ref(0);
 
 const getScrollWidth = () => {
@@ -431,6 +433,7 @@ const getScrollWidth = () => {
   } else {
     scrollWidthCell.value = 0;
   }
+  tableBodyEmptyWidth.value = tableHeaderTable.value?.offsetWidth + "px";
 };
 
 const hasl = ref(false);
@@ -682,7 +685,7 @@ onBeforeUnmount(() => {
           :style="[{ 'padding-right': `${scrollWidthCell}px` }]"
         >
           <div class="layui-table-header-wrapper" ref="tableHeader">
-            <table class="layui-table" :lay-size="size" :lay-skin="skin">
+            <table class="layui-table" :lay-size="size" :lay-skin="skin" ref="tableHeaderTable">
               <colgroup>
                 <template v-for="column in tableBodyColumns" :key="column">
                   <template v-if="tableColumnKeys.includes(column.key)">
@@ -875,9 +878,8 @@ onBeforeUnmount(() => {
               </tr>
             </tbody>
           </table>
-          <lay-empty
-            v-if="tableDataSource.length == 0 && loading == false"
-          ></lay-empty>
+          <lay-empty v-if="tableDataSource.length == 0 && loading == false"></lay-empty>
+          <div :style="{'width': tableBodyEmptyWidth }"></div>
           <template v-if="loading == true">
             <div class="layui-table-loading">
               <i
