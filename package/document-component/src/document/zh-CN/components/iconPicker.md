@@ -33,6 +33,32 @@ export default {
 
 :::
 
+::: title 禁用选择
+:::
+
+::: demo 使用 lay-icon-picker 标签, 创建图标选择器
+
+<template>
+  <lay-icon-picker v-model="icon" :disabled="true"></lay-icon-picker>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const icon = ref("layui-icon-home")
+
+    return {
+      icon
+    }
+  }
+}
+</script>
+
+:::
+
 ::: title 开启分页
 :::
 

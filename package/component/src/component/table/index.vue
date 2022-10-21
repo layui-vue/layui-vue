@@ -32,7 +32,7 @@ export interface TableProps {
   page?: Recordable;
   columns: Recordable[];
   dataSource: Recordable[];
-  defaultToolbar?: boolean;
+  defaultToolbar?: boolean | Recordable[];
   selectedKey?: string;
   selectedKeys?: Recordable[];
   indentSize?: number;

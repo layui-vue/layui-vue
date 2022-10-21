@@ -86,7 +86,7 @@
             </lay-dropdown>
             <lay-dropdown ref="dropdownMonthPanelRefRight">
               <span class="laydate-range-time"
-                >{{ startTime.month + 2 }}月</span
+                >{{ startTime.month + 2 > 12 ? startTime.month - 10 : startTime.month + 2 }}月</span
               >
               <template #content>
                 <MonthPanel

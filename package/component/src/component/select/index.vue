@@ -17,6 +17,7 @@ import {
   Component,
   watch,
   onUnmounted,
+StyleValue,
 } from "vue";
 import { LayIcon } from "@layui/icons-vue";
 import LayInput from "../input/index.vue";
@@ -40,6 +41,8 @@ export interface SelectProps {
   minCollapsedNum?: number;
   allowClear?: boolean;
   showSearch?: boolean;
+  contentClass?: string | Array<string | object> | object;
+  contentStyle?: StyleValue;
 }
 
 export interface SelectEmits {
@@ -179,6 +182,8 @@ provide("multiple", multiple);
     <lay-dropdown
       ref="selectRef"
       :disabled="disabled"
+      :contentClass="contentClass"
+      :contentStyle="contentStyle"
       :update-at-scroll="true"
       @show="openState = true"
       @hide="openState = false"

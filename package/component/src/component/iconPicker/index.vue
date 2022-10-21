@@ -6,7 +6,7 @@ export default {
 
 <script setup lang="ts">
 import "./index.less";
-import { computed, Ref, ref, watch } from "vue";
+import { computed, Ref, ref, StyleValue } from "vue";
 import { LayIconList as icons } from "@layui/icons-vue";
 import LayDropdown from "../dropdown/index.vue";
 import LayInput from "../input/index.vue";
@@ -15,11 +15,15 @@ import LayScroll from "../scroll/index.vue";
 export interface IconPickerProps {
   page?: boolean;
   modelValue?: string;
+  disabled?: boolean;
   showSearch?: boolean;
+  contentClass?: string | Array<string | object> | object;
+  contentStyle?: StyleValue;
 }
 
 const props = withDefaults(defineProps<IconPickerProps>(), {
   modelValue: "layui-icon-face-smile",
+  disabled: false,
   page: false,
 });
 
@@ -134,7 +138,12 @@ const searchList = (str: string, container: any) => {
 </script>
 
 <template>
-  <lay-dropdown ref="dropdownRef" updateAtScroll>
+  <lay-dropdown 
+      ref="dropdownRef"       
+      :disabled="disabled"
+      :contentClass="contentClass"
+      :contentStyle="contentStyle" 
+      updateAtScroll>
     <div
       class="layui-inline layui-border-box layui-iconpicker layui-iconpicker-split"
     >

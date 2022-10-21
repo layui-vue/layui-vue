@@ -8,19 +8,21 @@
       :trigger="trigger"
       :autoFitMinWidth="false"
       :updateAtScroll="true"
+      :contentClass="contentClass"
+      :contentStyle="contentStyle" 
       :disabled="dropDownDisabled"
       @show="openState = true"
       @hide="openState = false"
     >
       <lay-input
+        v-if="!slots.default"
         v-model="displayValue"
-        readonly
         suffix-icon="layui-icon-triangle-d"
         :placeholder="placeholder"
-        v-if="!slots.default"
         :allow-clear="allowClear"
-        @clear="onClear"
+        :readonly="true"
         :size="size"
+        @clear="onClear"
       ></lay-input>
       <slot v-else></slot>
 
@@ -73,7 +75,7 @@ import "./index.less";
 import LayInput from "../input/index.vue";
 import LayScroll from "../scroll/index.vue";
 import LayDropdown from "../dropdown/index.vue";
-import { ref, onMounted, watch, useSlots } from "vue";
+import { ref, onMounted, watch, useSlots, StyleValue } from "vue";
 import { CascaderSize } from "./interface";
 
 export type DropdownTrigger = "click" | "hover" | "focus" | "contextMenu";
@@ -88,6 +90,8 @@ export interface CascaderProps {
   allowClear?: boolean;
   size?: CascaderSize;
   trigger?: DropdownTrigger | DropdownTrigger[];
+  contentClass?: string | Array<string | object> | object;
+  contentStyle?: StyleValue;
 }
 
 const props = withDefaults(defineProps<CascaderProps>(), {
@@ -107,6 +111,7 @@ const props = withDefaults(defineProps<CascaderProps>(), {
     };
   },
 });
+
 const emit = defineEmits(["update:modelValue", "change", "clear"]);
 
 onMounted(() => {

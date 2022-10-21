@@ -26,6 +26,31 @@ export default {
 
 :::
 
+::: title 禁止选择
+:::
+
+::: demo 使用 `lay-color-picker` 标签, 创建颜色选择器。
+
+<template>
+  <lay-color-picker v-model="color" :disabled="true"></lay-color-picker>
+</template>
+
+<script>
+import { ref } from "vue";
+
+export default {
+  setup() {
+    const color = ref("#009688");
+
+    return {
+      color
+    }
+  }
+}
+</script>
+
+:::
+
 ::: title 预设颜色
 :::
 
