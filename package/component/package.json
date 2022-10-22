@@ -41,7 +41,7 @@
     "@umijs/ssr-darkreader": "^4.9.45",
     "dayjs": "^1.11.0",
     "evtd": "^0.2.3",
-    "vue-i18n": "^9.1.10",
+    "vue-i18n": "^9.2.2",
     "@ctrl/tinycolor": "^3.4.1"
   },
   "files": [

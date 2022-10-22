@@ -299,6 +299,8 @@ export default {
 | prefix-icon    | 前置图标            | `string`         | `layui-icon-date`    |  内置图标集            | `1.4.0`             |
 | suffix-icon    | 后置图标            | `string`         | --    | 内置图标集            | `1.4.0`             |
 | timestamp    | 时间戳模式(13位),仅对date和datetime有效| `boolean`        | `false`    | `true` `false`         | `1.6.5`             |
+| contentStyle             | 内容自定义样式     | `StyleValue` | -- | -- |-- |
+| contentClass             | 内容自定义Class    | `string` `Array<string \| object>` `object` | -- | -- |-- |
 :::
 
 ::: contributor datePicker

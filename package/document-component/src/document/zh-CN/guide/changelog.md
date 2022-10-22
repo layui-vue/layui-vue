@@ -32,6 +32,7 @@
           <li>[修复] date-picker 组件 type 属性为 date 值, range 属性为 true 时, 结束月份出现 13 月的问题。</li>
           <li>[修复] space 组件 size 属性使用内置 string ['md','sm'] 不生效的问题。</li>
           <li>[修复] table 组件 datasource 为空, 表头超出宽度无法滚动的问题。</li>
+          <li>[升级] vue-i18n-next 9.2.2 版本。</li>
         </ul> 
       </li>
     </ul>

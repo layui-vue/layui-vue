@@ -36,7 +36,6 @@ const fileDisplay = (file) => {
 
       const filePath = `dist/static${url.replace(/\/$/, '/index')}.html`
       writeFileRecursive(toAbsolute(filePath), html)
-      console.log('pre-rendered:', filePath)
     }
   })
 }

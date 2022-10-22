@@ -690,16 +690,19 @@ const options3=[
 
 ::: table
 
-| 属性                     | 描述                  |
-| -----------------------  | -------------------- |
-| placeholder              | 提示信息              | 
-| v-model / modelValue     | 值                   | 
-| decollator               | 分割符号，默认为 /     |
-| options                  | 选项参数 格式请见上面的demo  |
-| onlyLastLevel            | 回显display仅显示最后一级，默认为 `false`  |
-| replaceFields            | 自定义数据key名,可配置项为`label`,`value`,`children`,用法详见上面案例  |
-| allow-clear              | 默认slot提供清空功能，与lay-input保持一致|
-| size                     | 尺寸参数，与lay-input保持一致|
+| 属性                     | 描述                  | 类型                  | 可选值                  | 默认值                  |
+| -----------------------  | -------------------- |-------------------- |-------------------- |-------------------- |
+| placeholder              | 提示信息              |             |             |             | 
+| v-model / modelValue     | 值                   |             |             |             | 
+| decollator               | 分割符号，默认为 /     |            |             |             | 
+| options                  | 选项参数 格式请见上面的demo  |            |             |             | 
+| onlyLastLevel            | 回显display仅显示最后一级，默认为 `false`  |            |             |             | 
+| replaceFields            | 字段名称配置, 配置项为 `label`,`value`,`children`  |            |             |             | 
+| allow-clear              | 默认slot提供清空功能，与lay-input保持一致|            |             |             | 
+| size                     | 尺寸参数，与lay-input保持一致|            |             |             | 
+| contentStyle             | 内容自定义样式     | `StyleValue` | -- | -- |
+| contentClass             | 内容自定义Class    | `string` `Array<string \| object>` `object` | -- | -- |
+| disabled | 禁用 | `boolean`  |--  |--  |
 :::
 
 ::: title Cascader 事件

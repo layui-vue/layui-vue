@@ -116,11 +116,14 @@ export default {
 
 ::: table
 
-|            |          |     |
-| ---------- | -------- | --- |
-| v-model    | 默认值   | --  |
-| page       | 开启分页 | --  |
-| showSearch | 启用搜索 | --  |
+|            |          |     |   |   |
+| ---------- | -------- | --- |--- |--- |
+| v-model    | 默认值   | --  |--  |--  |
+| page       | 开启分页 | --  |--  |--  |
+| showSearch | 启用搜索 | --  |--  |--  |
+| disabled | 禁用 | `boolean`  |--  |--  |
+| contentStyle             | 内容自定义样式     | `StyleValue` | -- | -- |
+| contentClass             | 内容自定义Class    | `string` `Array<string \| object>` `object` | -- | -- |
 
 :::
 

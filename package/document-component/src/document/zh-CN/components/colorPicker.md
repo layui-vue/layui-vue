@@ -109,11 +109,14 @@ export default {
 
 ::: table
 
-|            |          |     |
-| ---------- | -------- | --- |
-| v-model    | 选中色   | --  |
-| preset | 预设颜色 | --  |
-| eyeDropper | 取色器 | Boolean  |
+|            |          |     |   |   | 
+| ---------- | -------- | --- |--- |--- |
+| v-model    | 选中色   | --  |--  |--  |
+| preset | 预设颜色 | --  |--  |--  |
+| eyeDropper | 取色器 | `boolean`  |--  |--  |
+| disabled | 禁用 | `boolean`  |--  |--  |
+| contentStyle             | 内容自定义样式     | `StyleValue` | -- | -- |
+| contentClass             | 内容自定义Class    | `string` `Array<string \| object>` `object` | -- | -- |
 
 :::
 

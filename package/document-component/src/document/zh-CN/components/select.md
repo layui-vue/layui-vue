@@ -263,6 +263,8 @@ export default {
 | searchPlaceholder | 搜索提示          | `string`                  | -- | -- |
 | minCollapsedNum        | 多选模式最小折叠数量                  | `number`                  | -- | -- |
 | collapseTagsTooltip    | 多选折叠后时候悬浮展示                  | `boolean`                  | -- | -- |
+| contentStyle        | 内容自定义样式     | `StyleValue` | -- | -- |
+| contentClass        | 内容自定义Class    | `string` `Array<string \| object>` `object` | -- | -- |
 
 :::
 
