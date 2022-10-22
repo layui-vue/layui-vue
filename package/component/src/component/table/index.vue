@@ -840,12 +840,12 @@ onBeforeUnmount(() => {
                   :defaultExpandAll="defaultExpandAll"
                   :getCheckboxProps="getCheckboxProps"
                   :getRadioProps="getRadioProps"
-                  @row="rowClick"
-                  @row-double="rowDoubleClick"
-                  @row-contextmenu="rowContextmenu"
                   v-model:expandKeys="tableExpandKeys"
                   v-model:selectedKeys="tableSelectedKeys"
                   v-model:selectedKey="tableSelectedKey"
+                  @row="rowClick"
+                  @row-double="rowDoubleClick"
+                  @row-contextmenu="rowContextmenu"
                 >
                   <template v-for="name in slotsData" #[name]="{ data }">
                     <slot :name="name" :data="data"></slot>
@@ -901,15 +901,15 @@ onBeforeUnmount(() => {
       </div>
       <div v-if="page && page.total > 0" class="layui-table-page">
         <table-page
-          :show-page="page.showPage"
-          :showSkip="page.showSkip"
-          :showLimit="page.showLimit"
-          :showCount="page.showCount"
-          :limits="page.limits"
-          :showRefresh="page.showRefresh"
           :total="page.total"
           :pages="page.pages"
           :theme="page.theme"
+          :limits="page.limits"
+          :showSkip="page.showSkip"
+          :show-page="page.showPage"
+          :showRefresh="page.showRefresh"
+          :showLimit="page.showLimit"
+          :showCount="page.showCount"
           v-model:current="page.current"
           v-model:limit="page.limit"
           @change="change"

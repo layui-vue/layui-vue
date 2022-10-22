@@ -512,12 +512,25 @@ const radioProps = props.getRadioProps(props.data, props.index);
               ></lay-icon>
 
               <lay-tooltip v-if="column.ellipsisTooltip" :isAutoShow="true">
-                <slot :name="column.customSlot" :data="data" :column="column"></slot>
+                <slot
+                  :name="column.customSlot"
+                  :data="data"
+                  :column="column"
+                ></slot>
                 <template #content>
-                  <slot :name="column.customSlot" :data="data" :column="column"></slot>
+                  <slot
+                    :name="column.customSlot"
+                    :data="data"
+                    :column="column"
+                  ></slot>
                 </template>
               </lay-tooltip>
-              <slot v-else :name="column.customSlot" :data="data" :column="column"></slot>
+              <slot
+                v-else
+                :name="column.customSlot"
+                :data="data"
+                :column="column"
+              ></slot>
             </td>
           </template>
 
@@ -622,11 +635,25 @@ const radioProps = props.getRadioProps(props.data, props.index);
         v-model:selectedKeys="tableSelectedKeys"
         v-model:selectedKey="tableSelectedKey"
       >
-        <template v-for="name in slotsData" #[name]="slotProp: { data: any, column: any }">
-          <slot :name="name" :data="slotProp.data" :column="slotProp.column"></slot>
+        <template
+          v-for="name in slotsData"
+          #[name]="slotProp: { data: any, column: any }"
+        >
+          <slot
+            :name="name"
+            :data="slotProp.data"
+            :column="slotProp.column"
+          ></slot>
         </template>
-        <template v-if="slot.expand" #expand="slotProp: { data: any, column: any }">
-          <slot name="expand" :data="slotProp.data" :column="slotProp.column"></slot>
+        <template
+          v-if="slot.expand"
+          #expand="slotProp: { data: any, column: any }"
+        >
+          <slot
+            name="expand"
+            :data="slotProp.data"
+            :column="slotProp.column"
+          ></slot>
         </template>
       </table-row>
     </template>
