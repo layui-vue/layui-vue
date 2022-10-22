@@ -13,7 +13,7 @@
 ::: demo 使用 `lay-select` 标签, 创建下拉选择框
 
 <template>
-  <lay-select v-model="value" placeholder="请选择">
+  <lay-select v-model="value">
     <lay-select-option :value="1" label="学习"></lay-select-option>
     <lay-select-option :value="2" label="编码"></lay-select-option>
     <lay-select-option :value="3" v-if="true">运动</lay-select-option>
@@ -257,7 +257,6 @@ export default {
 | name         | 原生 name 属性        | `string`                   |        -       |    -    |
 | placeholder  | 默认空提示语          | `string`                   |        -       | `请选择` |
 | disabled     | 是否禁用              | `boolean`                  | `true` `false` | `false` |
-| showEmpty    | 是否增加空提示选项     | `boolean`                  | `true` `false` | `true` |
 | multiple     | 是否为多选            | `boolean`                  | `true` `false` | `false` |
 | size         | 尺寸                  | `string`                  | `lg` `md` `sm` `xs`| `md` |
 | searchPlaceholder | 搜索提示          | `string`                  | -- | -- |

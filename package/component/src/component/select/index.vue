@@ -31,8 +31,6 @@ export interface SelectProps {
   disabled?: boolean;
   placeholder?: string;
   searchPlaceholder?: string;
-  showEmpty?: boolean;
-  emptyMessage?: string;
   modelValue?: any;
   multiple?: boolean;
   items?: SelectOptionProps[];
@@ -53,16 +51,12 @@ export interface SelectEmits {
 
 const props = withDefaults(defineProps<SelectProps>(), {
   modelValue: null,
-  placeholder: "请选择",
-  showEmpty: true,
-  emptyMessage: "请选择",
-  searchPlaceholder: "请搜索",
   collapseTagsTooltip: true,
   minCollapsedNum: 3,
-  disabled: false,
-  multiple: false,
   allowClear: false,
   showSearch: false,
+  disabled: false,
+  multiple: false,
   size: "md",
 });
 
@@ -236,11 +230,6 @@ provide("multiple", multiple);
               size="sm"
             ></lay-input>
           </div>
-          <lay-select-option
-            v-if="showEmpty && !multiple"
-            :label="emptyMessage"
-            value=""
-          ></lay-select-option>
           <template v-if="items">
             <lay-select-option
               v-for="(item, index) in items"
