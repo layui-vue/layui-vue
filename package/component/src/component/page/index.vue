@@ -138,7 +138,7 @@ watch(
 <template>
   <div class="layui-laypage layui-laypage-default">
     <span v-if="showCount" class="layui-laypage-count"
-      >共 {{ total }} 条 {{ maxPage }} 页</span
+      >{{ t("page.total") }} {{ total }} {{ t("page.item") }} {{ maxPage }} {{ t("page.page") }}</span
     >
     <a
       href="javascript:;"
@@ -150,7 +150,7 @@ watch(
       @click="prev()"
     >
       <slot v-if="slots.prev" name="prev"></slot>
-      <template v-else>{{ t("page.prev") }}</template>
+      <template v-else>{{ t("page.previous") }}</template>
     </a>
     <template v-if="showPage">
       <template v-for="index of totalPage" :key="index">
@@ -187,7 +187,7 @@ watch(
     <span v-if="showLimit" class="layui-laypage-limits">
       <select v-model="inlimit" @change="changelimit">
         <option v-for="val of limits" :key="val" :value="val">
-          {{ val }} 条/页
+          {{ val }} {{ t("page.item") }}/{{ t("page.page") }}
         </option>
       </select>
     </span>
@@ -200,20 +200,20 @@ watch(
       <i class="layui-icon layui-icon-refresh"></i>
     </a>
     <span v-if="props.showSkip" class="layui-laypage-skip">
-      到第
+      {{ t('page.goTo') }}
       <input
         v-model="currentPageShow"
         @keypress.enter="jumpPage()"
         type="number"
         class="layui-input layui-input-number"
-      />页
+      />{{ t("page.page") }}
       <button
         type="button"
         class="layui-laypage-btn"
         @click="jumpPage()"
         :disabled="currentPageShow > maxPage || currentPageShow == currentPage"
       >
-        确定
+        {{ t('page.confirm') }}
       </button>
     </span>
   </div>

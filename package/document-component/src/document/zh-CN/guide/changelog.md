@@ -35,6 +35,7 @@
           <li>[删除] select 组件 show-empty 属性, 由用户自定义 select-option 代替。</li>
           <li>[删除] select 组件 empty-message 属性, 由用户自定义 select-option 代替。</li>
           <li>[删除] select 组件 placeholder, searchPlaceholder 属性默认值, 由使用者提供。</li>
+          <li>[其他] date-picker, empty, page 组件支持 i18n 国际化。</li>
           <li>[升级] vue-i18n-next 9.2.2 版本。</li>
         </ul> 
       </li>

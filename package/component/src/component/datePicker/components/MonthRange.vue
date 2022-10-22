@@ -11,7 +11,7 @@
           <div class="laydate-set-ym">
             <lay-dropdown ref="dropdownYearPanelRefLeft">
               <span class="laydate-range-time"
-                >{{ startTime.year || "--" }}年</span
+                >{{ startTime.year || "--" }} {{ t('datePicker.year') }}</span
               >
               <template #content>
                 <YearPanel
@@ -49,7 +49,7 @@
         <div class="layui-laydate-header">
           <div class="laydate-set-ym">
             <lay-dropdown ref="dropdownYearPanelRefRight">
-              <span class="laydate-range-time">{{ startTime.year + 1 }}年</span>
+              <span class="laydate-range-time">{{ startTime.year + 1 }} {{ t('datePicker.year') }}</span>
               <template #content>
                 <YearPanel
                   class="time-panel"
@@ -111,16 +111,23 @@ import { provideType } from "../interface";
 import PanelFoot from "./PanelFoot.vue";
 import YearPanel from "./YearPanel.vue";
 import dayjs from "dayjs";
+import { useI18n } from "../../../language";
+
 export interface DateRangeProps {
   startTime: string;
   endTime: string;
 }
+
 const props = withDefaults(defineProps<DateRangeProps>(), {});
+
 const emits = defineEmits([
   "update:modelValue",
   "update:startTime",
   "update:endTime",
 ]);
+
+const { t } = useI18n();
+
 const datePicker: provideType = inject("datePicker") as provideType;
 
 const startTime = reactive({

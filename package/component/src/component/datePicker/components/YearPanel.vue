@@ -3,7 +3,7 @@
     <div class="layui-laydate-main laydate-main-list-0 laydate-ym-show">
       <div class="layui-laydate-header">
         <div class="laydate-set-ym">
-          <span class="laydate-time-text">选择年份</span>
+          <span class="laydate-time-text">{{t('datePicker.selectYear')}}</span>
         </div>
       </div>
     </div>
@@ -28,7 +28,7 @@
         v-if="datePicker.type === 'yearmonth'"
         @click="datePicker.showPanel.value = 'month'"
         class="laydate-btns-time"
-        >选择月份</span
+        >{{t('datePicker.selectMonth')}}</span
       >
       <template v-else-if="Year > 0">{{ Year }}</template>
     </PanelFoot>
@@ -41,6 +41,7 @@ export default {
 </script>
 <script lang="ts" setup>
 import dayjs from "dayjs";
+import { useI18n } from "../../../language";
 import { inject, nextTick, onMounted, ref, watch } from "vue";
 import { getYears } from "../day";
 import { provideType } from "../interface";
@@ -58,6 +59,7 @@ const datePicker: provideType = inject("datePicker") as provideType;
 const yearList = ref<number[]>(getYears());
 const unWatch = ref(false);
 const Year = ref(props.modelValue);
+const { t } = useI18n();
 
 // 点击年份
 const handleYearClick = (item: any) => {

@@ -4,7 +4,7 @@
       <div class="layui-laydate-header">
         <div class="laydate-set-ym">
           <span @click="datePicker.showPanel.value = 'month'">{{
-            typeof Month !== "string" ? Month + 1 + " 月" : "请选择月份"
+            typeof Month !== "string" ? Month + 1 + t('datePicker.month') : t('datePicker.selectMonth')
           }}</span>
         </div>
       </div>
@@ -26,7 +26,7 @@
         v-if="datePicker.type === 'yearmonth'"
         @click="datePicker.showPanel.value = 'year'"
         class="laydate-btns-time"
-        >选择年份</span
+        >{{ t('datePicker.selectYear') }}</span
       >
     </PanelFoot>
   </div>
@@ -38,6 +38,7 @@ export default {
 </script>
 <script lang="ts" setup>
 import dayjs from "dayjs";
+import { useI18n } from "../../../language";
 import { inject, ref, watch } from "vue";
 import { provideType } from "../interface";
 import PanelFoot from "./PanelFoot.vue";
@@ -52,6 +53,7 @@ const props = withDefaults(defineProps<TimePanelProps>(), {
 const emits = defineEmits(["update:modelValue", "ok"]);
 const datePicker: provideType = inject("datePicker") as provideType;
 const Month = ref(props.modelValue);
+const { t } = useI18n();
 
 const MONTH_NAME = [
   "1月",

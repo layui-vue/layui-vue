@@ -14,10 +14,10 @@
         >
         <div class="laydate-set-ym">
           <span @click="datePicker.showPanel.value = 'year'"
-            >{{ datePicker.currentYear.value }} 年</span
+            >{{ datePicker.currentYear.value }} {{ t('datePicker.year') }}</span
           >
           <span @click="datePicker.showPanel.value = 'month'"
-            >{{ datePicker.currentMonth.value + 1 }} 月</span
+            >{{ datePicker.currentMonth.value + 1 }} {{ t('datePicker.month') }}</span
           >
         </div>
         <i
@@ -42,7 +42,7 @@
           v-if="datePicker.type === 'datetime'"
           @click="datePicker.showPanel.value = 'time'"
           class="laydate-btns-time"
-          >选择时间</span
+          >{{ t('datePicker.selectTime')}}</span
         >
       </PanelFoot>
     </div>
@@ -60,10 +60,13 @@ import { setDateList } from "../day";
 import PanelFoot from "./PanelFoot.vue";
 import DateContent from "./components/DateContent.vue";
 import dayjs from "dayjs";
+import { useI18n } from "../../../language";
 
 export interface TimePanelProps {
   modelValue: number;
 }
+
+const { t } = useI18n();
 const props = withDefaults(defineProps<TimePanelProps>(), {});
 const emits = defineEmits(["update:modelValue", "ok"]);
 const Day = ref(props.modelValue);

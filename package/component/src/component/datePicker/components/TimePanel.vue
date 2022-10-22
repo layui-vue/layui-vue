@@ -3,7 +3,7 @@
     <div class="layui-laydate-main laydate-main-list-0 laydate-time-show">
       <div class="layui-laydate-header">
         <div class="laydate-set-ym">
-          <span class="laydate-time-text">选择时间</span>
+          <span class="laydate-time-text">{{t('datePicker.selectTime')}}</span>
         </div>
       </div>
       <div class="layui-laydate-content" style="height: 210px">
@@ -35,7 +35,7 @@
         v-if="datePicker.type === 'datetime' && !datePicker.range"
         @click="datePicker.showPanel.value = 'datetime'"
         class="laydate-btns-time"
-        >选择日期</span
+        >{{t('datePicker.selectDate')}}</span
       >
       <template v-else-if="!isNaN(hms.hh) && !isNaN(hms.mm) && !isNaN(hms.ss)">
         {{
@@ -52,7 +52,8 @@ export default {
 </script>
 <script lang="ts" setup>
 import dayjs from "dayjs";
-import { inject, onMounted, ref, Ref, nextTick, watch, h } from "vue";
+import { useI18n } from "../../../language";
+import { inject, onMounted, ref, nextTick, watch } from "vue";
 import { provideType } from "../interface";
 import PanelFoot from "./PanelFoot.vue";
 export interface hmsType {
@@ -68,6 +69,8 @@ export interface TimePanelProps {
 const props = withDefaults(defineProps<TimePanelProps>(), {});
 const emits = defineEmits(["update:modelValue", "ok"]);
 const datePicker: provideType = inject("datePicker") as provideType;
+const { t } = useI18n();
+
 const els = [
   { count: 24, type: "hh" },
   { count: 60, type: "mm" },

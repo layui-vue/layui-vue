@@ -7,6 +7,8 @@ export default {
 <script setup lang="ts">
 import "./index.less";
 import { useSlots, withDefaults } from "vue";
+import { useI18n } from "../../language";
+import { computed } from "@vue/reactivity";
 
 export interface EmptyProps {
   description?: string;
@@ -14,10 +16,12 @@ export interface EmptyProps {
 }
 
 const props = withDefaults(defineProps<EmptyProps>(), {
-  description: "暂无数据",
 });
 
+const { t } = useI18n();
 const slots = useSlots();
+
+const description = computed(() => props.description ? props.description : t('empty.description'))
 </script>
 
 <template>
