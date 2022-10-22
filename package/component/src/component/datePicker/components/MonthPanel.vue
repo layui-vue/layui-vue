@@ -4,7 +4,9 @@
       <div class="layui-laydate-header">
         <div class="laydate-set-ym">
           <span @click="datePicker.showPanel.value = 'month'">{{
-            typeof Month !== "string" ? Month + 1 + t('datePicker.month') : t('datePicker.selectMonth')
+            typeof Month !== "string"
+              ? Month + 1 + t("datePicker.month")
+              : t("datePicker.selectMonth")
           }}</span>
         </div>
       </div>
@@ -26,7 +28,7 @@
         v-if="datePicker.type === 'yearmonth'"
         @click="datePicker.showPanel.value = 'year'"
         class="laydate-btns-time"
-        >{{ t('datePicker.selectYear') }}</span
+        >{{ t("datePicker.selectYear") }}</span
       >
     </PanelFoot>
   </div>

@@ -11,7 +11,7 @@
           <div class="laydate-set-ym">
             <lay-dropdown ref="dropdownYearPanelRefLeft">
               <span class="laydate-range-time"
-                >{{ startTime.year || "--" }} {{ t('datePicker.year') }}</span
+                >{{ startTime.year || "--" }} {{ t("datePicker.year") }}</span
               >
               <template #content>
                 <YearPanel
@@ -49,7 +49,9 @@
         <div class="layui-laydate-header">
           <div class="laydate-set-ym">
             <lay-dropdown ref="dropdownYearPanelRefRight">
-              <span class="laydate-range-time">{{ startTime.year + 1 }} {{ t('datePicker.year') }}</span>
+              <span class="laydate-range-time"
+                >{{ startTime.year + 1 }} {{ t("datePicker.year") }}</span
+              >
               <template #content>
                 <YearPanel
                   class="time-panel"

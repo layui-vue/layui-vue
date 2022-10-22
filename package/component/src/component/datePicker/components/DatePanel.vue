@@ -14,10 +14,11 @@
         >
         <div class="laydate-set-ym">
           <span @click="datePicker.showPanel.value = 'year'"
-            >{{ datePicker.currentYear.value }} {{ t('datePicker.year') }}</span
+            >{{ datePicker.currentYear.value }} {{ t("datePicker.year") }}</span
           >
           <span @click="datePicker.showPanel.value = 'month'"
-            >{{ datePicker.currentMonth.value + 1 }} {{ t('datePicker.month') }}</span
+            >{{ datePicker.currentMonth.value + 1 }}
+            {{ t("datePicker.month") }}</span
           >
         </div>
         <i
@@ -42,7 +43,7 @@
           v-if="datePicker.type === 'datetime'"
           @click="datePicker.showPanel.value = 'time'"
           class="laydate-btns-time"
-          >{{ t('datePicker.selectTime')}}</span
+          >{{ t("datePicker.selectTime") }}</span
         >
       </PanelFoot>
     </div>

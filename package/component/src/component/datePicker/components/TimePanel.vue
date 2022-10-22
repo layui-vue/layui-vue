@@ -3,7 +3,9 @@
     <div class="layui-laydate-main laydate-main-list-0 laydate-time-show">
       <div class="layui-laydate-header">
         <div class="laydate-set-ym">
-          <span class="laydate-time-text">{{t('datePicker.selectTime')}}</span>
+          <span class="laydate-time-text">{{
+            t("datePicker.selectTime")
+          }}</span>
         </div>
       </div>
       <div class="layui-laydate-content" style="height: 210px">
@@ -35,7 +37,7 @@
         v-if="datePicker.type === 'datetime' && !datePicker.range"
         @click="datePicker.showPanel.value = 'datetime'"
         class="laydate-btns-time"
-        >{{t('datePicker.selectDate')}}</span
+        >{{ t("datePicker.selectDate") }}</span
       >
       <template v-else-if="!isNaN(hms.hh) && !isNaN(hms.mm) && !isNaN(hms.ss)">
         {{

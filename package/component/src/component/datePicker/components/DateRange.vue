@@ -19,7 +19,7 @@
           <div class="laydate-set-ym">
             <lay-dropdown ref="dropdownYearPanelRefLeft">
               <span class="laydate-range-time"
-                >{{ startTime.year || "--" }} {{ t('datePicker.year') }}</span
+                >{{ startTime.year || "--" }} {{ t("datePicker.year") }}</span
               >
               <template #content>
                 <YearPanel
@@ -31,7 +31,7 @@
             </lay-dropdown>
             <lay-dropdown ref="dropdownMonthPanelRefLeft">
               <span class="laydate-range-time"
-                >{{ startTime.month + 1 }} {{ t('datePicker.month') }}</span
+                >{{ startTime.month + 1 }} {{ t("datePicker.month") }}</span
               >
               <template #content>
                 <MonthPanel
@@ -75,7 +75,9 @@
         <div class="layui-laydate-header">
           <div class="laydate-set-ym">
             <lay-dropdown ref="dropdownYearPanelRefRight">
-              <span class="laydate-range-time">{{ startTime.year }} {{ t('datePicker.year') }}</span>
+              <span class="laydate-range-time"
+                >{{ startTime.year }} {{ t("datePicker.year") }}</span
+              >
               <template #content>
                 <YearPanel
                   class="time-panel"
@@ -90,7 +92,8 @@
                   startTime.month + 2 > 12
                     ? startTime.month - 10
                     : startTime.month + 2
-                }}  {{ t('datePicker.month') }}</span
+                }}
+                {{ t("datePicker.month") }}</span
               >
               <template #content>
                 <MonthPanel
@@ -199,7 +202,7 @@ const emits = defineEmits([
 ]);
 const datePicker: provideType = inject("datePicker") as provideType;
 
-const { t } = useI18n(); 
+const { t } = useI18n();
 
 const prevDateList = ref<any>([]);
 const nextDateList = ref<any>([]);

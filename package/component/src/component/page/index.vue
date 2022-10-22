@@ -138,7 +138,8 @@ watch(
 <template>
   <div class="layui-laypage layui-laypage-default">
     <span v-if="showCount" class="layui-laypage-count"
-      >{{ t("page.total") }} {{ total }} {{ t("page.item") }} {{ maxPage }} {{ t("page.page") }}</span
+      >{{ t("page.total") }} {{ total }} {{ t("page.item") }} {{ maxPage }}
+      {{ t("page.page") }}</span
     >
     <a
       href="javascript:;"
@@ -200,7 +201,7 @@ watch(
       <i class="layui-icon layui-icon-refresh"></i>
     </a>
     <span v-if="props.showSkip" class="layui-laypage-skip">
-      {{ t('page.goTo') }}
+      {{ t("page.goTo") }}
       <input
         v-model="currentPageShow"
         @keypress.enter="jumpPage()"
@@ -213,7 +214,7 @@ watch(
         @click="jumpPage()"
         :disabled="currentPageShow > maxPage || currentPageShow == currentPage"
       >
-        {{ t('page.confirm') }}
+        {{ t("page.confirm") }}
       </button>
     </span>
   </div>

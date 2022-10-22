@@ -3,7 +3,9 @@
     <div class="layui-laydate-main laydate-main-list-0 laydate-ym-show">
       <div class="layui-laydate-header">
         <div class="laydate-set-ym">
-          <span class="laydate-time-text">{{t('datePicker.selectYear')}}</span>
+          <span class="laydate-time-text">{{
+            t("datePicker.selectYear")
+          }}</span>
         </div>
       </div>
     </div>
@@ -28,7 +30,7 @@
         v-if="datePicker.type === 'yearmonth'"
         @click="datePicker.showPanel.value = 'month'"
         class="laydate-btns-time"
-        >{{t('datePicker.selectMonth')}}</span
+        >{{ t("datePicker.selectMonth") }}</span
       >
       <template v-else-if="Year > 0">{{ Year }}</template>
     </PanelFoot>

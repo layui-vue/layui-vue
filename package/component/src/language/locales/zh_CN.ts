@@ -9,7 +9,7 @@ export default {
     confirm: "确认",
     page: "页",
     item: "条",
-    total: "共"
+    total: "共",
   },
   datePicker: {
     year: "年",
@@ -28,9 +28,9 @@ export default {
     clear: "清空",
     confirm: "确认",
     cancel: "取消",
-    now: "现在"
+    now: "现在",
   },
   empty: {
-    description: "无数据"
-  }
+    description: "无数据",
+  },
 };

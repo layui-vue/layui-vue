@@ -15,13 +15,14 @@ export interface EmptyProps {
   image?: string;
 }
 
-const props = withDefaults(defineProps<EmptyProps>(), {
-});
+const props = withDefaults(defineProps<EmptyProps>(), {});
 
 const { t } = useI18n();
 const slots = useSlots();
 
-const description = computed(() => props.description ? props.description : t('empty.description'))
+const description = computed(() =>
+  props.description ? props.description : t("empty.description")
+);
 </script>
 
 <template>

@@ -9,7 +9,7 @@ export default {
     confirm: "confirm",
     page: "page",
     item: "item",
-    total: "Total"
+    total: "Total",
   },
   datePicker: {
     year: "year",
@@ -28,9 +28,9 @@ export default {
     clear: "clear",
     confirm: "confirm",
     cancel: "cancel",
-    now: "now"
+    now: "now",
   },
   empty: {
-    description: "No data"
-  }
+    description: "No data",
+  },
 };
