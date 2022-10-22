@@ -68,13 +68,13 @@ const props = withDefaults(defineProps<DateContentProps>(), {
 const { t } = useI18n();
 
 const WEEK_NAME = computed(() => [
-  t('datePicker.sunday'),
-  t('datePicker.monday'),
-  t('datePicker.tuesday'),
-  t('datePicker.wednesday'),
-  t('datePicker.thursday'),
-  t('datePicker.friday'),
-  t('datePicker.saturday') 
+  t("datePicker.sunday"),
+  t("datePicker.monday"),
+  t("datePicker.tuesday"),
+  t("datePicker.wednesday"),
+  t("datePicker.thursday"),
+  t("datePicker.friday"),
+  t("datePicker.saturday"),
 ]);
 
 const datePicker: provideType = inject("datePicker") as provideType;

@@ -58,20 +58,19 @@ const Month = ref(props.modelValue);
 const { t } = useI18n();
 
 const MONTH_NAME = computed(() => [
-  t('datePicker.january'),
-  t('datePicker.february'),
-  t('datePicker.march'),
-  t('datePicker.april'),
-  t('datePicker.may'),
-  t('datePicker.june'),
-  t('datePicker.july'),
-  t('datePicker.august'),
-  t('datePicker.september'),
-  t('datePicker.october'),
-  t('datePicker.november'),
-  t('datePicker.december'),
+  t("datePicker.january"),
+  t("datePicker.february"),
+  t("datePicker.march"),
+  t("datePicker.april"),
+  t("datePicker.may"),
+  t("datePicker.june"),
+  t("datePicker.july"),
+  t("datePicker.august"),
+  t("datePicker.september"),
+  t("datePicker.october"),
+  t("datePicker.november"),
+  t("datePicker.december"),
 ]);
-
 
 // 点击月份
 const handleMonthClick = (item: any) => {

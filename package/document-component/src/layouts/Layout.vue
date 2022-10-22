@@ -232,15 +232,16 @@
 <script>
 import { provide, ref, watch } from "vue";
 import { useRouter, useRoute } from "vue-router";
+import { useAppStore } from "../store/app";
+import { useI18n }  from "../../../component/src/index";
 import menu from "../view/utils/menus";
-import { useI18n } from "vue-i18n";
 import zh_CN from "../language/zh_CN.ts";
 import en_US from "../language/en_US.ts";
-import { useAppStore } from "../store/app";
 import config from "../../../component/package.json";
 
 export default {
   setup() {
+
     const { t } = useI18n();
     const route = useRoute();
     const router = useRouter();

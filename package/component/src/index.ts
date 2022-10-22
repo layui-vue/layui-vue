@@ -5,7 +5,7 @@ import "@layui/layer-vue/lib/index.css";
 import "@layui/icons-vue/lib/index.css";
 import { layer } from "@layui/layer-vue";
 import layerInstall from "@layui/layer-vue";
-import i18n from "./language";
+import i18n, { useI18n } from "./language";
 
 import LayBacktop from "./component/backTop/index";
 import LayAvatar from "./component/avatar/index";
@@ -279,6 +279,6 @@ export {
   install,
 };
 
-export { layer };
+export { layer, useI18n };
 
 export default { install };

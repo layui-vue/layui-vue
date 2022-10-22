@@ -11,28 +11,46 @@
     </lay-config-provider>
 </template>
 ```
-::: describe layui-vue 内部会维护一个 vue-i18n 实例, 你无需再去创建，直接使用 useI18n() 获取即可
+
+::: describe 在 layui-vue 内部维护了一个 i18n 实例, 你可以通过 useI18n() 方法来使用它。
 :::
 
-::: describe 你可以使用 locales 属性来扩展语言包, 用户自定义语言包优先级大于组件库内部维护的语言包, 即你可以扩展亦可以覆盖。
+::: describe 你可以使用 locales 属性来扩展语言包, 自定义语言优先级大于组件库内部维护的语言, 即可扩展亦可覆盖。
 :::
-
 
 ```vue
 <template>
     <lay-config-provider locale="zh_CN" :locales="locales">
-        <App />
+        {{ t('hello') }}
     </lay-config-provider>
 </template>
 
 <script setup>
+import { useI18n } from "@layui/layui-vue";
+
+const { t } = useI18n();
+
 const locales = [
     'zh_CN': {
-        message: '你好, layui-vue'
+        hello: '你好',
+        title: '标题'
     },
     'en_US': {
-        message: 'hello, layui-vue'
+        hello: 'hello',
+        title: 'title'
     }
 ];
 </script>
 ```
+
+::: describe 目前支持的语言列表。
+:::
+
+::: table
+
+| 语言        | 内容                |
+|-------------|-------------------------|
+| zh_CN  | https://gitee.com/layui/layui-vue/blob/master/package/component/src/language/locales/zh_CN.ts |
+| en_US  | https://gitee.com/layui/layui-vue/blob/master/package/component/src/language/locales/en_US.ts |
+
+:::

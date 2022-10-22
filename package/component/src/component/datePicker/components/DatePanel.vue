@@ -16,9 +16,9 @@
           <span @click="datePicker.showPanel.value = 'year'"
             >{{ datePicker.currentYear.value }} {{ t("datePicker.year") }}</span
           >
-          <span @click="datePicker.showPanel.value = 'month'"
-            > {{ MONTH_NAME[datePicker.currentMonth.value] }} </span
-          >
+          <span @click="datePicker.showPanel.value = 'month'">
+            {{ MONTH_NAME[datePicker.currentMonth.value] }}
+          </span>
         </div>
         <i
           class="layui-icon laydate-icon laydate-next-m"
@@ -74,18 +74,18 @@ const datePicker: provideType = inject("datePicker") as provideType;
 const dateList = ref<any>([]);
 
 const MONTH_NAME = computed(() => [
-  t('datePicker.january'),
-  t('datePicker.february'),
-  t('datePicker.march'),
-  t('datePicker.april'),
-  t('datePicker.may'),
-  t('datePicker.june'),
-  t('datePicker.july'),
-  t('datePicker.august'),
-  t('datePicker.september'),
-  t('datePicker.october'),
-  t('datePicker.november'),
-  t('datePicker.december'),
+  t("datePicker.january"),
+  t("datePicker.february"),
+  t("datePicker.march"),
+  t("datePicker.april"),
+  t("datePicker.may"),
+  t("datePicker.june"),
+  t("datePicker.july"),
+  t("datePicker.august"),
+  t("datePicker.september"),
+  t("datePicker.october"),
+  t("datePicker.november"),
+  t("datePicker.december"),
 ]);
 
 // 监听年月, 刷新日期
