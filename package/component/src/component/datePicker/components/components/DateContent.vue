@@ -45,7 +45,8 @@ export default {
 };
 </script>
 <script lang="ts" setup>
-import { computed, inject, ref, Ref } from "vue";
+import { useI18n } from "../../../../language";
+import { computed, inject } from "vue";
 import { provideType } from "../../interface";
 
 export interface DateContentProps {
@@ -63,8 +64,21 @@ const props = withDefaults(defineProps<DateContentProps>(), {
   startDate: -1,
   endDate: -1,
 });
-const WEEK_NAME = ["日", "一", "二", "三", "四", "五", "六"];
+
+const { t } = useI18n();
+
+const WEEK_NAME = computed(() => [
+  t('datePicker.sunday'),
+  t('datePicker.monday'),
+  t('datePicker.tuesday'),
+  t('datePicker.wednesday'),
+  t('datePicker.thursday'),
+  t('datePicker.friday'),
+  t('datePicker.saturday') 
+]);
+
 const datePicker: provideType = inject("datePicker") as provideType;
+
 const emits = defineEmits([
   "update:modelValue",
   "update:startDate",

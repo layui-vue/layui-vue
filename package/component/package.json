@@ -1,6 +1,6 @@
 {
   "name": "@layui/layui-vue",
-  "version": "1.7.0-dev.19",
+  "version": "1.7.0-dev.20",
   "author": "就眠儀式",
   "license": "MIT",
   "description": "a component library for Vue 3 base on layui-vue",
@@ -36,13 +36,13 @@
     "@layui/icons-vue": "^1.0.9",
     "@layui/layer-vue": "^1.4.6",
     "@vueuse/core": "^9.2.0",
+    "@umijs/ssr-darkreader": "^4.9.45",
+    "@ctrl/tinycolor": "^3.4.1",
     "async-validator": "^4.1.1",
     "cropperjs": "^1.5.12",
-    "@umijs/ssr-darkreader": "^4.9.45",
     "dayjs": "^1.11.0",
     "evtd": "^0.2.3",
-    "vue-i18n": "^9.1.10",
-    "@ctrl/tinycolor": "^3.4.1"
+    "vue-i18n": "^9.1.10"
   },
   "files": [
     "lib",

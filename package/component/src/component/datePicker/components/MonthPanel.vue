@@ -5,7 +5,7 @@
         <div class="laydate-set-ym">
           <span @click="datePicker.showPanel.value = 'month'">{{
             typeof Month !== "string"
-              ? Month + 1 + t("datePicker.month")
+              ? MONTH_NAME[Month]
               : t("datePicker.selectMonth")
           }}</span>
         </div>
@@ -41,7 +41,7 @@ export default {
 <script lang="ts" setup>
 import dayjs from "dayjs";
 import { useI18n } from "../../../language";
-import { inject, ref, watch } from "vue";
+import { computed, inject, ref, watch } from "vue";
 import { provideType } from "../interface";
 import PanelFoot from "./PanelFoot.vue";
 
@@ -57,32 +57,33 @@ const datePicker: provideType = inject("datePicker") as provideType;
 const Month = ref(props.modelValue);
 const { t } = useI18n();
 
-const MONTH_NAME = [
-  "1月",
-  "2月",
-  "3月",
-  "4月",
-  "5月",
-  "6月",
-  "7月",
-  "8月",
-  "9月",
-  "10月",
-  "11月",
-  "12月",
-];
+const MONTH_NAME = computed(() => [
+  t('datePicker.january'),
+  t('datePicker.february'),
+  t('datePicker.march'),
+  t('datePicker.april'),
+  t('datePicker.may'),
+  t('datePicker.june'),
+  t('datePicker.july'),
+  t('datePicker.august'),
+  t('datePicker.september'),
+  t('datePicker.october'),
+  t('datePicker.november'),
+  t('datePicker.december'),
+]);
+
 
 // 点击月份
 const handleMonthClick = (item: any) => {
-  Month.value = MONTH_NAME.indexOf(item);
+  Month.value = MONTH_NAME.value.indexOf(item);
   if (!datePicker.range) {
     if (datePicker.type === "yearmonth") {
       datePicker.currentDay.value = dayjs(datePicker.currentDay.value)
-        .month(MONTH_NAME.indexOf(item))
+        .month(MONTH_NAME.value.indexOf(item))
         .valueOf();
     }
     if (datePicker.type === "date" || datePicker.type === "datetime") {
-      emits("update:modelValue", MONTH_NAME.indexOf(item));
+      emits("update:modelValue", MONTH_NAME.value.indexOf(item));
       datePicker.showPanel.value = datePicker.type;
     }
   }
