@@ -685,7 +685,12 @@ onBeforeUnmount(() => {
           :style="[{ 'padding-right': `${scrollWidthCell}px` }]"
         >
           <div class="layui-table-header-wrapper" ref="tableHeader">
-            <table class="layui-table" :lay-size="size" :lay-skin="skin" ref="tableHeaderTable">
+            <table
+              class="layui-table"
+              :lay-size="size"
+              :lay-skin="skin"
+              ref="tableHeaderTable"
+            >
               <colgroup>
                 <template v-for="column in tableBodyColumns" :key="column">
                   <template v-if="tableColumnKeys.includes(column.key)">
@@ -878,8 +883,10 @@ onBeforeUnmount(() => {
               </tr>
             </tbody>
           </table>
-          <lay-empty v-if="tableDataSource.length == 0 && loading == false"></lay-empty>
-          <div :style="{'width': tableBodyEmptyWidth }"></div>
+          <lay-empty
+            v-if="tableDataSource.length == 0 && loading == false"
+          ></lay-empty>
+          <div :style="{ width: tableBodyEmptyWidth }"></div>
           <template v-if="loading == true">
             <div class="layui-table-loading">
               <i

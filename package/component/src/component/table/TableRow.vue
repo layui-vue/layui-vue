@@ -622,11 +622,11 @@ const radioProps = props.getRadioProps(props.data, props.index);
         v-model:selectedKeys="tableSelectedKeys"
         v-model:selectedKey="tableSelectedKey"
       >
-        <template v-for="name in slotsData" #[name]="slotProp: { data: any }">
-          <slot :name="name" :data="slotProp.data"></slot>
+        <template v-for="name in slotsData" #[name]="slotProp: { data: any, column: any }">
+          <slot :name="name" :data="slotProp.data" :column="slotProp.column"></slot>
         </template>
-        <template v-if="slot.expand" #expand="slotProp: { data: any }">
-          <slot name="expand" :data="slotProp.data"></slot>
+        <template v-if="slot.expand" #expand="slotProp: { data: any, column: any }">
+          <slot name="expand" :data="slotProp.data" :column="slotProp.column"></slot>
         </template>
       </table-row>
     </template>
