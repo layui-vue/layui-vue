@@ -111,7 +111,7 @@ export default {
   setup() {
 
     const limit3 = ref(5)
-    const total3 = ref(100)
+    const total3 = ref(125)
     const limits3 = ref([5, 10, 50, 100, 200])
 
     return {
@@ -181,7 +181,7 @@ export default {
 
     const limit5 = ref(10)
     const total5 = ref(99)
-    const pages5 = ref(6);
+    const pages5 = ref(7);
     const current5 = ref(1);
     const changeCurrent5 = () => {
       current5.value = 2;

@@ -58,12 +58,14 @@ watch(
 const totalPage = computed(() => {
   maxPage.value = Math.ceil(props.total / inlimit.value);
   let r: number[] = [];
+  // 计算 star 页
   let start =
     maxPage.value <= props.pages
       ? 1
       : currentPage.value > pages
-      ? currentPage.value - pages
+      ? maxPage.value - currentPage.value + 1 < pages ?  currentPage.value - (pages + (pages - (maxPage.value - currentPage.value + 1))) : currentPage.value - pages
       : 1;
+
   for (let i = start; ; i++) {
     if (r.length >= props.pages || i > maxPage.value) {
       break;
