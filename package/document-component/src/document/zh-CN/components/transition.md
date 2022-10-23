@@ -10,33 +10,24 @@
 ::: title 基础使用
 :::
 
-::: demo 使用 `lay-transition` 标签, 为元素提供过渡动画
+::: demo 使用 `lay-transition` 标签，为 `element` 提供过渡动画。
 
 <template>
   <lay-button @click="changeVisible">开始</lay-button>
   <br/>
   <br/>
   <lay-transition>
-      <lay-card title="标题" v-if="visible">内容</lay-card>
+    <lay-card title="标题" v-if="visible">内容</lay-card>
   </lay-transition>
 </template>
 
-<script>
-import { ref } from 'vue'
+<script setup>
+import { ref } from "vue";
 
-export default {
-  setup() {
+const visible = ref(true);
 
-    const visible = ref(true);
-
-    const changeVisible = () => {
-        visible.value = !visible.value;
-    }
-
-    return {
-        changeVisible
-    }
-  }
+const changeVisible = () => {
+    visible.value = !visible.value;
 }
 </script>
 
@@ -45,33 +36,24 @@ export default {
 ::: title 淡入淡出
 :::
 
-::: demo 使用 `lay-transition` 标签, 为元素提供过渡动画
+::: demo 使用 `type` 属性，设置过渡方式。
 
 <template>
   <lay-button @click="changeVisible1">开始</lay-button>
   <br/>
   <br/>
   <lay-transition type="fade">
-      <lay-card title="标题" v-if="visible1">内容</lay-card>
+    <lay-card title="标题" v-if="visible1">内容</lay-card>
   </lay-transition>
 </template>
 
-<script>
-import { ref } from 'vue'
+<script setup>
+import { ref } from "vue";
 
-export default {
-  setup() {
+const visible1 = ref(true);
 
-    const visible1 = ref(true);
-
-    const changeVisible1 = () => {
-        visible1.value = !visible1.value;
-    }
-
-    return {
-        changeVisible1
-    }
-  }
+const changeVisible1 = () => {
+    visible1.value = !visible1.value;
 }
 </script>
 
