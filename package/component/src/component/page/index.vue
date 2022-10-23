@@ -63,7 +63,10 @@ const totalPage = computed(() => {
     maxPage.value <= props.pages
       ? 1
       : currentPage.value > pages
-      ? maxPage.value - currentPage.value + 1 < pages ?  currentPage.value - (pages + (pages - (maxPage.value - currentPage.value + 1))) : currentPage.value - pages
+      ? maxPage.value - currentPage.value + 1 < pages
+        ? currentPage.value -
+          (pages + (pages - (maxPage.value - currentPage.value + 1)))
+        : currentPage.value - pages
       : 1;
 
   for (let i = start; ; i++) {
