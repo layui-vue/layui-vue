@@ -43,7 +43,7 @@ const slots = useSlots();
 
 const maxPage = ref(0);
 const limits = ref(props.limits);
-const pages = Math.floor(props.pages / 2);
+const pages = computed(() => Math.floor(props.pages / 2))
 const currentPage: Ref<number> = ref(props.modelValue);
 const currentPageShow: Ref<number> = ref(currentPage.value);
 const inlimit = ref(props.limit);
@@ -62,11 +62,11 @@ const totalPage = computed(() => {
   let start =
     maxPage.value <= props.pages
       ? 1
-      : currentPage.value > pages
-      ? maxPage.value - currentPage.value + 1 < pages
+      : currentPage.value > pages.value
+      ? maxPage.value - currentPage.value + 1 < pages.value
         ? currentPage.value -
-          (pages + (pages - (maxPage.value - currentPage.value + 1)))
-        : currentPage.value - pages
+          (pages.value + (pages.value - (maxPage.value - currentPage.value + 1)))
+        : currentPage.value - pages.value
       : 1;
 
   for (let i = start; ; i++) {

@@ -33,6 +33,7 @@
           <li>[修复] space 组件 size 属性使用内置 string ['md','sm'] 不生效的问题。</li>
           <li>[修复] table 组件 datasource 为空, 表头超出宽度无法滚动的问题。</li>
           <li>[修复] page 组件 pages 属性起始页计算逻辑, 在接近尾页时 pages 数量不对应。</li>
+          <li>[修复] page 组件 pages 属性, 缺少响应式特性。</li>
           <li>[删除] select 组件 show-empty 属性, 由用户自定义 select-option 代替。</li>
           <li>[删除] select 组件 empty-message 属性, 由用户自定义 select-option 代替。</li>
           <li>[删除] select 组件 placeholder, searchPlaceholder 属性默认值, 由使用者提供。</li>

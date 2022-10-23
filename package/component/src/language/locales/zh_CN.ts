@@ -44,5 +44,5 @@ export default {
   },
   empty: {
     description: "无数据",
-  },
+  }
 };

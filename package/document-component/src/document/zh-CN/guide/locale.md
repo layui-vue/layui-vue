@@ -42,10 +42,6 @@ const locales = [
 ];
 </script>
 ```
-
-::: describe 目前支持的语言列表。
-:::
-
 ::: table
 
 | 语言        | 内容                |

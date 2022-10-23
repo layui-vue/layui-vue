@@ -13,7 +13,7 @@
 ::: demo 使用 `lay-exception` 标签, 创建一个异常页面
 
 <template>
-  <lay-exception status="401" title="401" describe="暂无相关权限">
+  <lay-exception status="401" title="401" describe="身份认证失败">
       <template #extra>
         <lay-button>刷新</lay-button>
         <lay-button type="primary">返回</lay-button>
