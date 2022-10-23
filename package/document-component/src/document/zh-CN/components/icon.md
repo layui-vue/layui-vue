@@ -4,44 +4,22 @@
 ::: title 基本介绍
 :::
 
-::: describe 语义化的矢量图形。使用图标组件，你需要安装 `@layui/icons-vue` 图标组件包
+::: describe 语义化的矢量图形。
 :::
 
 ::: title 基础使用
 :::
 
-::: demo 使用 `lay-icon` 标签, 创建图标组件
-
-<template>
-  <lay-icon type="layui-icon-face-smile"></lay-icon>
-</template>
-
-<script>
-import { ref } from 'vue'
-
-export default {
-  setup() {
-
-    return {
-    }
-  }
-}
-</script>
-
-:::
-
-::: title 图标颜色
-:::
-
 ::: demo 使用 `color` 属性设置颜色
 
 <template>
-  <lay-icon type="layui-icon-face-smile" color="red"></lay-icon> &nbsp;
+  <lay-icon type="layui-icon-face-smile"></lay-icon> &nbsp;
   <lay-icon type="layui-icon-face-smile" color="orange"></lay-icon> &nbsp;
   <lay-icon type="layui-icon-face-smile" color="green"></lay-icon> &nbsp;
   <lay-icon type="layui-icon-face-smile" color="cyan"></lay-icon> &nbsp;
   <lay-icon type="layui-icon-face-smile" color="blue"></lay-icon> &nbsp;
   <lay-icon type="layui-icon-face-smile" color="black"></lay-icon> &nbsp;
+  <lay-icon type="layui-icon-face-smile" color="red" size="24px" ></lay-icon>
 </template>
 
 <script>
@@ -58,43 +36,19 @@ export default {
 
 :::
 
-::: title 图标尺寸
-:::
-
-::: demo 使用 `size` 属性设置尺寸
-
-<template>
-  <lay-icon type="layui-icon-star" size="26px" color="red"></lay-icon>
-</template>
-
-<script>
-import { ref } from 'vue'
-
-export default {
-  setup() {
-
-    return {
-    }
-  }
-}
-</script>
-
-:::
-
-
-::: title 图标组件
+::: title 组件图标
 :::
 
 <br>
 
-::: describe 在 0.2.4 版本后, 图标支持组件化的调用方式, 首先你需要安装 `@layui/icons-vue` 依赖。
+::: describe 使用图标组件，你需要安装 `@layui/icons-vue` 图标组件包。
 :::
 
 ```
 npm install @layui/icons-vue
 ```
 
-::: describe 接下来, 你可以像之前使用组件一样去创建图标。
+::: describe 然后, 你可以像之前使用组件一样去创建图标。
 :::
 
 ```vue
@@ -104,7 +58,7 @@ npm install @layui/icons-vue
 </template>
 
 <script setup>
-  import { AlignCenterIcon, DiamondIcon } from '@layui/icons-vue';
+import { AlignCenterIcon, DiamondIcon } from '@layui/icons-vue';
 </script>
 ```
 

@@ -10,17 +10,17 @@
 ::: title 基础使用
 :::
 
-::: demo 使用 `lay-ripple` 标签, 为目标元素新增水波纹。
+::: demo 使用 `lay-ripple` 标签, 为 `element` 添加水波纹效果。
 
 <template>
-  <lay-ripple>
-    <lay-button>click</lay-button>
-  </lay-ripple>
-  <br/>
-  <br/>
-  <lay-ripple type="out" borderRadius="2px">
-    <lay-button>click</lay-button>
-  </lay-ripple>
+  <lay-space>
+    <lay-ripple>
+      <lay-button>click</lay-button>
+    </lay-ripple>
+    <lay-ripple type="out" borderRadius="2px">
+      <lay-button>click</lay-button>
+    </lay-ripple>
+  </lay-space>
 </template>
 
 <script>
