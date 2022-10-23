@@ -10,7 +10,7 @@
 ::: title 基础使用
 :::
 
-::: demo 使用 `lay-panel` 标签, 创建面板组件
+::: demo 使用 `lay-panel` 标签, 创建面板。
 
 <template>
   <lay-panel>面板</lay-panel>
@@ -33,7 +33,7 @@ export default {
 ::: title 边框阴影
 :::
 
-::: demo 通过 shadow 属性设置面板阴影出现的时机。 该属性的值可以是：always、hover或never。
+::: demo 通过 `shadow` 属性设置阴影出现的时机，可选值为 `always` `hover` `never`， 默认为 `always`。
 
 <template>
 <div class="panel-container">

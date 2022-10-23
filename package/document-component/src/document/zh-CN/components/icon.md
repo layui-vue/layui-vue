@@ -38,16 +38,14 @@ export default {
 ::: title 组件图标
 :::
 
-<br>
-
-::: describe 使用图标组件，你需要安装 `@layui/icons-vue` 图标组件包。
+::: describe 使用图标组件，你需要安装 @layui/icons-vue 图标组件包。
 :::
 
 ```
 npm install @layui/icons-vue
 ```
 
-::: describe 然后, 你可以像之前使用组件一样去创建图标。
+::: describe 然后，你可以像之前使用组件一样去创建图标。
 :::
 
 ```vue
