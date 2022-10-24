@@ -1,7 +1,10 @@
 <template>
   <div
     :size="size"
-    :class="['layui-cascader', { 'layui-cascader-opend': openState, 'layui-disabled': disabled }]"
+    :class="[
+      'layui-cascader',
+      { 'layui-cascader-opend': openState, 'layui-disabled': disabled },
+    ]"
   >
     <lay-dropdown
       ref="dropdownRef"

@@ -121,7 +121,10 @@ const onCompositionend = (event: Event) => {
 };
 
 const classes = computed(() => {
-  return { "layui-input-disabled": props.disabled, 'layui-input-has-prefix': slots.prefix || props.prefixIcon };
+  return {
+    "layui-input-disabled": props.disabled,
+    "layui-input-has-prefix": slots.prefix || props.prefixIcon,
+  };
 });
 
 const showPassword = () => {
@@ -134,11 +137,7 @@ const showPassword = () => {
 </script>
 
 <template>
-  <div
-    class="layui-input"
-    :class="classes"
-    :size="size"
-  >
+  <div class="layui-input" :class="classes" :size="size">
     <div class="layui-input-prepend" v-if="slots.prepend">
       <slot name="prepend"></slot>
     </div>

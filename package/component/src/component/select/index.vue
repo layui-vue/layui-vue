@@ -190,6 +190,7 @@ provide("multiple", multiple);
         :collapseTagsTooltip="collapseTagsTooltip"
         :minCollapsedNum="minCollapsedNum"
         :disabledInput="true"
+        :disabled="disabled"
         :size="size"
         :class="{ 'layui-unselect': true }"
         @clear="handleClear"

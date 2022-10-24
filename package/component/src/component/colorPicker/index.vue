@@ -411,7 +411,10 @@ function hex2rgba(s: any) {
     :contentStyle="contentStyle"
     updateAtScroll
   >
-    <div class="layui-unselect layui-colorpicker" :class="[{'layui-disabled': disabled}]">
+    <div
+      class="layui-unselect layui-colorpicker"
+      :class="[{ 'layui-disabled': disabled }]"
+    >
       <span>
         <span
           class="layui-colorpicker-trigger-span"
