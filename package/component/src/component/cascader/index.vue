@@ -3,7 +3,7 @@
     :size="size"
     :class="[
       'layui-cascader',
-      { 'layui-cascader-opend': openState, 'layui-disabled': disabled },
+      { 'layui-cascader-opend': openState, 'layui-cascader-disabled': disabled },
     ]"
   >
     <lay-dropdown
@@ -23,6 +23,7 @@
         suffix-icon="layui-icon-triangle-d"
         :placeholder="placeholder"
         :allow-clear="allowClear"
+        :disabled="disabled"
         :readonly="true"
         :size="size"
         @clear="onClear"
@@ -129,6 +130,7 @@ watch(
     initTreeData();
   }
 );
+
 watch(
   () => props.modelValue,
   () => {
@@ -154,8 +156,6 @@ const initTreeData = () => {
       };
     }
   }
-
-  //数据回显
   if (props.modelValue) {
     try {
       let valueData = props.modelValue.split(props.decollator);

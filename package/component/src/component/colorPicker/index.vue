@@ -413,7 +413,7 @@ function hex2rgba(s: any) {
   >
     <div
       class="layui-unselect layui-colorpicker"
-      :class="[{ 'layui-disabled': disabled }]"
+      :class="[{ 'layui-colorpicker-disabled': disabled }]"
     >
       <span>
         <span

@@ -32,12 +32,16 @@
           <li>[修复] date-picker 组件 type 属性为 date 值, range 属性为 true 时, 结束月份出现 13 月的问题。</li>
           <li>[修复] space 组件 size 属性使用内置 string ['md','sm'] 不生效的问题。</li>
           <li>[修复] table 组件 datasource 为空, 表头超出宽度无法滚动的问题。</li>
-          <li>[修复] page 组件 pages 属性起始页计算逻辑, 在接近尾页时 pages 数量不对应。</li>
-          <li>[修复] page 组件 pages 属性, 缺少响应式特性。</li>
+          <li>[修复] page 组件 pages 属性起始页计算逻辑, 在接近尾页时 pages 页码不对应的问题。</li>
+          <li>[修复] select 组件 multiple 与 disabled 属性同时为 true 时, 禁用效果失效。</li>
           <li>[删除] select 组件 show-empty 属性, 由用户自定义 select-option 代替。</li>
           <li>[删除] select 组件 empty-message 属性, 由用户自定义 select-option 代替。</li>
           <li>[删除] select 组件 placeholder, searchPlaceholder 属性默认值, 由使用者提供。</li>
-          <li>[其他] date-picker, empty, page 组件支持 i18n 国际化。</li>
+          <li>[优化] select 组件 disabled 属性效果, hover 状态显示禁用光标, 并保持 border 颜色不变。</li>
+          <li>[优化] input 组件 disabled 属性效果, hover 状态保持 border 颜色不变。</li>
+          <li>[优化] switch 组件 disabled 属性效果, 光标移入圆形白色按钮不显示禁用光标。</li>
+          <li>[优化] tag-input 组件 disabled 属性效果, 与其他组件保持相同设计规范。</li>
+          <li>[优化] date-picker, empty, page 组件支持 i18n 国际化。</li>
         </ul> 
       </li>
     </ul>

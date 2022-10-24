@@ -633,7 +633,7 @@ const options2 = [
 :::
 ::: demo 也许你当前数据键名并不是`label`、`value`、`children`,这时只需要使用replaceFields属性来自定义key
 <template>
-  <lay-cascader :options="options3" :replaceFields="replaceFields" placeholder="自义定key"></lay-cascader>
+  <lay-cascader :options="options3" :replaceFields="replaceFields" placeholder="自义定key" :disabled="true"></lay-cascader>
 </template>
 
 <script setup>
