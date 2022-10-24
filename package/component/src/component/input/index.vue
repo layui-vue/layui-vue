@@ -121,7 +121,7 @@ const onCompositionend = (event: Event) => {
 };
 
 const classes = computed(() => {
-  return { "layui-disabled": props.disabled };
+  return { "layui-input-disabled": props.disabled, 'layui-input-has-prefix': slots.prefix || props.prefixIcon };
 });
 
 const showPassword = () => {
@@ -136,7 +136,7 @@ const showPassword = () => {
 <template>
   <div
     class="layui-input"
-    :class="{ 'layui-input-has-prefix': slots.prefix || props.prefixIcon }"
+    :class="classes"
     :size="size"
   >
     <div class="layui-input-prepend" v-if="slots.prepend">
@@ -161,7 +161,6 @@ const showPassword = () => {
         :autocomplete="autocomplete"
         :maxlength="maxlength"
         :readonly="readonly"
-        :class="classes"
         @input="onInput"
         @change="onChange"
         @focus="onFocus"

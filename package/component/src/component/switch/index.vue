@@ -71,7 +71,6 @@ const styles = computed(() => {
       class="layui-unselect layui-form-switch"
       :style="styles"
       :class="{
-        'layui-disabled': disabled,
         'layui-form-onswitch': isActive,
         'layui-switch-disabled': disabled,
       }"
