@@ -10,11 +10,11 @@
 ::: demo
 <template>
 <lay-timeline>
-  <lay-timeline-item title="1.6.x">
-    <ul> 
-      <a name="1-6-10"></a> 
+  <lay-timeline-item title="1.7.x">
+  <ul> 
+      <a name="1-7-0"></a> 
       <li> 
-        <h3>1.6.10 <span class="layui-badge-rim">2022-10-21</span></h3> 
+        <h3>1.7.0 <span class="layui-badge-rim">2022-10-24</span></h3> 
         <ul>
           <li>[新增] select 组件 contentClass 属性, 用于自定义内容区域 class 属性。</li>
           <li>[新增] select 组件 contentStyle 属性, 用于自定义内容区域 style 属性。</li>
@@ -45,6 +45,8 @@
         </ul> 
       </li>
     </ul>
+  </lay-timeline-item>
+  <lay-timeline-item title="1.6.x">
     <ul> 
       <a name="1-6-9"></a> 
       <li> 
