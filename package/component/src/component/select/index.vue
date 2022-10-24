@@ -209,6 +209,7 @@ provide("multiple", multiple);
         :placeholder="placeholder"
         :allow-clear="allowClear"
         :readonly="!showSearch"
+        :disabled="disabled"
         :class="{ 'layui-unselect': !showSearch }"
         :size="size"
         @Input="handleSearch"

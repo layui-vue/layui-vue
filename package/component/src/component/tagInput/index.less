@@ -67,12 +67,9 @@
 
   &-disabled {
     cursor: not-allowed;
-    opacity: 0.4;
-
-    .layui-tag-input-clear {
-      cursor: not-allowed;
-      opacity: 0.4;
-    }
+  }
+  &-disabled * {
+    cursor: not-allowed;
   }
 
   .layui-tag {
@@ -138,7 +135,6 @@
 
 .layui-tag-input:hover,
 .layui-tag-input:focus-within {
-  border-color: #d2d2d2 !important;
   .layui-tag-input-clear{
     visibility: visible;
   }
