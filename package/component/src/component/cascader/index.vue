@@ -3,7 +3,10 @@
     :size="size"
     :class="[
       'layui-cascader',
-      { 'layui-cascader-opend': openState, 'layui-cascader-disabled': disabled },
+      {
+        'layui-cascader-opend': openState,
+        'layui-cascader-disabled': disabled,
+      },
     ]"
   >
     <lay-dropdown
