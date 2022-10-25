@@ -31,15 +31,9 @@ import { useI18n } from "@layui/layui-vue";
 const { t } = useI18n();
 
 const locales = [
-    'zh_CN': {
-        hello: '你好',
-        title: '标题'
-    },
-    'en_US': {
-        hello: 'hello',
-        title: 'title'
-    }
-];
+    { name: "zh_CN", locale: {hello: "你好, layui-vue。"}, merge: true },
+    { name: "en_US", locale: {hello: "hello, layui-vue。"}, merge: true },
+]
 </script>
 ```
 ::: table
