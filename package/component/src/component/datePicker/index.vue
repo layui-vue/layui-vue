@@ -167,17 +167,17 @@ const props = withDefaults(defineProps<DatePickerProps>(), {
 });
 
 const startPlaceholder = computed(() => {
-  if(Array.isArray(props.placeholder)) {
+  if (Array.isArray(props.placeholder)) {
     return props.placeholder[0];
-   } 
-   return props.placeholder;
+  }
+  return props.placeholder;
 });
 
 const endPlaceholder = computed(() => {
-  if(Array.isArray(props.placeholder)) {
+  if (Array.isArray(props.placeholder)) {
     return props.placeholder[1];
-   } 
-   return props.placeholder;
+  }
+  return props.placeholder;
 });
 
 const dropdownRef = ref(null);

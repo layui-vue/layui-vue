@@ -11,7 +11,18 @@
 <template>
 <lay-timeline>
   <lay-timeline-item title="1.7.x">
-  <ul> 
+      <ul> 
+      <a name="1-7-1"></a> 
+      <li> 
+        <h3>1.7.1 <span class="layui-badge-rim">2022-10-25</span></h3> 
+        <ul>
+          <li>[新增] date-picker 组件 placeholder 属性 array 类型兼容。</li>
+          <li>[修复] date-picker 组件 range 属性为 true 时的 国际化 翻译失效。</li> 
+          <li>[修复] date-picker 组件 range 属性为 true 时的 lay-dropdown 无法解析警告。</li>
+        </ul> 
+      </li>
+    </ul>
+    <ul> 
       <a name="1-7-0"></a> 
       <li> 
         <h3>1.7.0 <span class="layui-badge-rim">2022-10-24</span></h3> 

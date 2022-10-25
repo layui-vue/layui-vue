@@ -30,8 +30,8 @@
               </template>
             </lay-dropdown>
             <lay-dropdown ref="dropdownMonthPanelRefLeft">
-              <span class="laydate-range-time"
-                > {{ MONTH_NAME[startTime.month] }}</span
+              <span class="laydate-range-time">
+                {{ MONTH_NAME[startTime.month] }}</span
               >
               <template #content>
                 <MonthPanel
@@ -87,11 +87,15 @@
               </template>
             </lay-dropdown>
             <lay-dropdown ref="dropdownMonthPanelRefRight">
-              <span class="laydate-range-time"
-                >   {{ MONTH_NAME[startTime.month + 1 > 11
-                    ? startTime.month + 1 - 12
-                    : startTime.month + 1] }} </span
-              >
+              <span class="laydate-range-time">
+                {{
+                  MONTH_NAME[
+                    startTime.month + 1 > 11
+                      ? startTime.month + 1 - 12
+                      : startTime.month + 1
+                  ]
+                }}
+              </span>
               <template #content>
                 <MonthPanel
                   class="time-panel"
