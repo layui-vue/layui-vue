@@ -27,12 +27,14 @@
 
 <script setup>
 import { useI18n } from "@layui/layui-vue";
+import zh_CN from "./custom/zh_CN";
+import en_US from "./custom/en_US";
 
 const { t } = useI18n();
 
 const locales = [
-    { name: "zh_CN", locale: {hello: "你好, layui-vue。"}, merge: true },
-    { name: "en_US", locale: {hello: "hello, layui-vue。"}, merge: true },
+    { name: "zh_CN", locale: zh_CN, merge: true },
+    { name: "en_US", locale: en_US, merge: true },
 ]
 </script>
 ```
