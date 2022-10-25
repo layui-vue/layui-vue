@@ -14,11 +14,13 @@
       <ul> 
       <a name="1-7-1"></a> 
       <li> 
-        <h3>1.7.1 <span class="layui-badge-rim">2022-10-25</span></h3> 
+        <h3>1.7.1 <span class="layui-badge-rim">2022-10-26</span></h3> 
         <ul>
           <li>[新增] date-picker 组件 placeholder 属性 array 类型兼容。</li>
           <li>[修复] date-picker 组件 range 属性为 true 时的 国际化 翻译失效。</li> 
           <li>[修复] date-picker 组件 range 属性为 true 时的 lay-dropdown 无法解析警告。</li>
+          <li>[修复] upload 组件 裁剪 案例不生效问题, 前提需要 acceptMime 为 images 值。</li>
+          <li>[优化] upload 组件 i18n 国际化支持。</li>
         </ul> 
       </li>
     </ul>

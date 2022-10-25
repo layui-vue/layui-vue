@@ -53,8 +53,10 @@ export default {
     numberErrorMsg: "The number of files uploaded exceeds the specified number",
     cutInitErrorMsg: "Clipping plug-in initialization failed",
     uploadSuccess: "Upload succeeded",
-    cannotSupportCutMsg: "The current version does not support single multiple file clipping. Try to set multiple to false, and get the returned file object through @ done",
-    occurFileSizeErrorMsg: "File size warning,The maximum file size cannot exceed target KB",
+    cannotSupportCutMsg:
+      "The current version does not support single multiple file clipping. Try to set multiple to false, and get the returned file object through @ done",
+    occurFileSizeErrorMsg:
+      "File size warning,The maximum file size cannot exceed target KB",
     startUploadMsg: "Upload Start",
     confirmBtn: "confirm",
     cancelBtn: "cancel",
