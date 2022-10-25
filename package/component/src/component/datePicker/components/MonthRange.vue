@@ -113,6 +113,7 @@ import { provideType } from "../interface";
 import PanelFoot from "./PanelFoot.vue";
 import YearPanel from "./YearPanel.vue";
 import dayjs from "dayjs";
+import LayDropdown from "../../dropdown/index.vue";
 import { useI18n } from "../../../language";
 
 export interface DateRangeProps {

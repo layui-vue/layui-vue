@@ -185,6 +185,7 @@ import DateContent from "./components/DateContent.vue";
 import TimePanel from "./TimePanel.vue";
 import YearPanel from "./YearPanel.vue";
 import MonthPanel from "./MonthPanel.vue";
+import LayDropdown from "../../dropdown/index.vue";
 import dayjs from "dayjs";
 import { useI18n } from "../../../language";
 export interface DateRangeProps {
