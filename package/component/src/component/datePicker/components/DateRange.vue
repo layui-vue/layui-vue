@@ -31,7 +31,7 @@
             </lay-dropdown>
             <lay-dropdown ref="dropdownMonthPanelRefLeft">
               <span class="laydate-range-time"
-                >{{ startTime.month + 1 }} {{ t("datePicker.month") }}</span
+                > {{ MONTH_NAME[startTime.month] }}</span
               >
               <template #content>
                 <MonthPanel
@@ -88,12 +88,9 @@
             </lay-dropdown>
             <lay-dropdown ref="dropdownMonthPanelRefRight">
               <span class="laydate-range-time"
-                >{{
-                  startTime.month + 2 > 12
-                    ? startTime.month - 10
-                    : startTime.month + 2
-                }}
-                {{ t("datePicker.month") }}</span
+                >   {{ MONTH_NAME[startTime.month + 1 > 11
+                    ? startTime.month + 1 - 12
+                    : startTime.month + 1] }} </span
               >
               <template #content>
                 <MonthPanel
@@ -180,7 +177,7 @@ export default {
 };
 </script>
 <script lang="ts" setup>
-import { inject, reactive, ref, watch } from "vue";
+import { computed, inject, reactive, ref, watch } from "vue";
 import { provideType } from "../interface";
 import { setDateList } from "../day";
 import PanelFoot from "./PanelFoot.vue";
@@ -200,9 +197,25 @@ const emits = defineEmits([
   "update:startTime",
   "update:endTime",
 ]);
+
 const datePicker: provideType = inject("datePicker") as provideType;
 
 const { t } = useI18n();
+
+const MONTH_NAME = computed(() => [
+  t("datePicker.january"),
+  t("datePicker.february"),
+  t("datePicker.march"),
+  t("datePicker.april"),
+  t("datePicker.may"),
+  t("datePicker.june"),
+  t("datePicker.july"),
+  t("datePicker.august"),
+  t("datePicker.september"),
+  t("datePicker.october"),
+  t("datePicker.november"),
+  t("datePicker.december"),
+]);
 
 const prevDateList = ref<any>([]);
 const nextDateList = ref<any>([]);

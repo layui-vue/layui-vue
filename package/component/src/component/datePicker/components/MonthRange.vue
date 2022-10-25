@@ -144,21 +144,23 @@ const endTime = reactive({
     ? dayjs(props.endTime).hour(0).minute(0).second(0).valueOf()
     : -1,
 });
+
 let hoverMonth = ref(-1);
-const MONTH_NAME = [
-  "1月",
-  "2月",
-  "3月",
-  "4月",
-  "5月",
-  "6月",
-  "7月",
-  "8月",
-  "9月",
-  "10月",
-  "11月",
-  "12月",
-];
+
+const MONTH_NAME = computed(() => [
+  t("datePicker.january"),
+  t("datePicker.february"),
+  t("datePicker.march"),
+  t("datePicker.april"),
+  t("datePicker.may"),
+  t("datePicker.june"),
+  t("datePicker.july"),
+  t("datePicker.august"),
+  t("datePicker.september"),
+  t("datePicker.october"),
+  t("datePicker.november"),
+  t("datePicker.december"),
+]);
 
 // 切换年月
 const changeYear = (num: number) => {
@@ -284,7 +286,7 @@ const ifHasRangeHoverClass = computed(() => {
 
 const getUnix = computed(() => {
   return function (item: any, position: "left" | "right") {
-    let month = MONTH_NAME.indexOf(item);
+    let month = MONTH_NAME.value.indexOf(item);
     let year = position === "left" ? startTime.year : startTime.year + 1;
     return dayjs(year + "-" + (month + 1)).valueOf();
   };
