@@ -227,15 +227,15 @@ export default {
 
 <template>
   <div style="display:flex;  align-items: center;margin-bottom: 5px;">
-    <lay-date-picker  v-model="rangeTime1" range placeholder="type : date"></lay-date-picker>
+    <lay-date-picker  v-model="rangeTime1" range :placeholder="['开始日期','结束日期']"></lay-date-picker>
     <span style="margin-left:10px">modelValue:{{rangeTime1}}</span>
   </div>
   <div style="display:flex;  align-items: center;margin-bottom: 5px;">
-    <lay-date-picker  v-model="rangeTime2" range type="datetime" placeholder="type : datetime"></lay-date-picker>
+    <lay-date-picker  v-model="rangeTime2" range type="datetime" :placeholder="['开始日期','结束日期']"></lay-date-picker>
     <span style="margin-left:10px">modelValue:{{rangeTime2}}</span>
   </div>
   <div style="display:flex;  align-items: center;margin-bottom: 5px;">
-    <lay-date-picker  v-model="rangeTime3" range type="yearmonth" placeholder="type : datetime"></lay-date-picker>
+    <lay-date-picker  v-model="rangeTime3" range type="yearmonth" :placeholder="['开始日期','结束日期']"></lay-date-picker>
     <span style="margin-left:10px">modelValue:{{rangeTime3}}</span>
   </div>
 </template>

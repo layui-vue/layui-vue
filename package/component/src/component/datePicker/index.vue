@@ -14,7 +14,7 @@
       <lay-input
         :name="name"
         :readonly="readonly"
-        :placeholder="placeholder"
+        :placeholder="startPlaceholder"
         :prefix-icon="prefixIcon"
         :suffix-icon="suffixIcon"
         :disabled="disabled"
@@ -34,6 +34,7 @@
           :readonly="readonly"
           :name="name"
           v-model="dateValue[0]"
+          :placeholder="startPlaceholder"
           :disabled="disabled"
           @change="onChange"
           class="start-input"
@@ -45,6 +46,7 @@
           :readonly="readonly"
           :name="name"
           :allow-clear="disabled && allowClear"
+          :placeholder="endPlaceholder"
           v-model="dateValue[1]"
           :disabled="disabled"
           @change="onChange"
@@ -126,10 +128,11 @@ import YearPanel from "./components/YearPanel.vue";
 import MonthPanel from "./components/MonthPanel.vue";
 import DateRange from "./components/DateRange.vue";
 import MonthRange from "./components/MonthRange.vue";
+import { computed } from "@vue/reactivity";
 
 export interface DatePickerProps {
   type?: "date" | "datetime" | "year" | "time" | "month" | "yearmonth";
-  placeholder?: string;
+  placeholder?: string | string[];
   modelValue?: string | number | string[];
   disabled?: boolean;
   simple?: boolean;
@@ -161,6 +164,20 @@ const props = withDefaults(defineProps<DatePickerProps>(), {
   prefixIcon: "layui-icon-date",
   suffixIcon: "",
   timestamp: false,
+});
+
+const startPlaceholder = computed(() => {
+  if(Array.isArray(props.placeholder)) {
+    return props.placeholder[0];
+   } 
+   return props.placeholder;
+});
+
+const endPlaceholder = computed(() => {
+  if(Array.isArray(props.placeholder)) {
+    return props.placeholder[1];
+   } 
+   return props.placeholder;
 });
 
 const dropdownRef = ref(null);
