@@ -45,4 +45,19 @@ export default {
   empty: {
     description: "无数据",
   },
+  upload: {
+    text: "上传文件",
+    dragText: "点击上传，或将文件拖拽到此处",
+    defaultErrorMsg: "上传失败",
+    urlErrorMsg: "上传地址格式不合法",
+    numberErrorMsg: "文件上传超过规定的个数",
+    cutInitErrorMsg: "剪裁插件初始化失败",
+    uploadSuccess: "上传成功",
+    cannotSupportCutMsg: "当前版本暂不支持单次多文件剪裁,尝试设置 multiple 为 false, 通过 @done 获取返回文件对象",
+    occurFileSizeErrorMsg: "文件大小超过限制,文件最大不可超过传入的指定size属性的KB数",
+    startUploadMsg: "开始上传",
+    confirmBtn: "确认",
+    cancelBtn: "取消",
+    title: "标题",
+  },
 };

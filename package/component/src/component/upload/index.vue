@@ -22,6 +22,7 @@ import { templateRef } from "@vueuse/core";
 import { LayLayer } from "@layui/layer-vue";
 import LayButton from "../button/index.vue";
 import Cropper from "cropperjs";
+import { useI18n } from "../../language";
 
 export interface LayerButton {
   text: string;
@@ -83,7 +84,7 @@ const getCutDownResult = () => {
     commonUploadTransaction([newFile]);
     nextTick(() => clearAllCutEffect());
   } else {
-    errorF(cutInitErrorMsg);
+    errorF(cutInitErrorMsg.value);
   }
 };
 
@@ -99,21 +100,34 @@ const clearAllCutEffect = () => {
   innerCutVisible.value = false;
 };
 
-let defaultCutLayerOption: LayerModal = {
-  title: "标题",
-  move: true,
-  maxmin: false,
-  offset: [],
-  btn: [
-    { text: "导出", callback: getCutDownResult },
-    { text: "取消", callback: closeCutDownModal },
-  ],
-  area: ["640px", "640px"],
-  content: "11",
-  shade: true,
-  shadeClose: true,
-  type: "component",
-};
+const { t } = useI18n();
+const text = computed(() => t('upload.text'));
+const dragText = computed(() => t('upload.dragText'));
+const defaultErrorMsg = computed(() => t('upload.defaultErrorMsg'));
+const urlErrorMsg = computed(() => t('upload.urlErrorMsg'));
+const numberErrorMsg = computed(() => t('upload.numberErrorMsg'));
+const occurFileSizeErrorMsg = computed(() => t('upload.occurFileSizeErrorMsg'));
+const cutInitErrorMsg = computed(() => t('upload.cutInitErrorMsg'));
+const uploadSuccess = computed(() => t('upload.uploadSuccess'));
+const startUploadMsg = computed(() => t('upload.startUploadMsg'));
+const cannotSupportCutMsg = computed(() => t('upload.cannotSupportCutMsg'))
+const title = computed(() => t('upload.title'))
+const confirmBtn = computed(() => t('upload.confirmBtn'))
+const cancelBtn = computed(() => t('upload.cancelBtn'))
+
+let defaultCutLayerOption = computed<LayerModal>(() => {
+  return {
+    type: "component",
+    title: title.value,
+    shade: true,
+    shadeClose: true,
+    area: ["640px", "640px"],
+    btn: [
+      { text: confirmBtn.value, callback: getCutDownResult },
+      { text: cancelBtn.value, callback: closeCutDownModal },
+    ],
+  }
+});
 
 const props = withDefaults(defineProps<UploadProps>(), {
   field: "file",
@@ -153,15 +167,8 @@ if (props.cutOptions && props.cutOptions.layerOption) {
     Object.assign(defaultCutLayerOption, props.cutOptions.layerOption)
   );
 } else {
-  computedCutLayerOption = computed(() => defaultCutLayerOption);
+  computedCutLayerOption = computed(() => defaultCutLayerOption.value);
 }
-
-const defaultErrorMsg = "上传失败";
-const urlErrorMsg = "上传地址格式不合法";
-const numberErrorMsg = "文件上传超过规定的个数";
-const sizeErrorMsg = "文件大小超过限制";
-const cutInitErrorMsg = "剪裁插件初始化失败";
-const uploadSuccess = "上传成功";
 
 interface localUploadTransaction {
   url: string;
@@ -180,7 +187,7 @@ const localUploadTransaction = (option: localUploadTransaction) => {
   const { url, files } = option;
   let formData = new FormData();
   if (url.length <= 5) {
-    errorF(urlErrorMsg);
+    errorF(urlErrorMsg.value);
     return;
   }
   if (Array.isArray(files) && files.length > 0) {
@@ -222,7 +229,7 @@ const errorF = (errorText: string) => {
   let errorMsg = errorText ? errorText : defaultErrorMsg;
   errorMsg = `layui-vue:${errorMsg}`;
   console.warn(errorMsg);
-  layer.msg(errorMsg, { icon: 2, time: 1000 }, function (res: unknown) {});
+  layer.msg(errorMsg, { icon: 2, time: 1000 }, function (res: unknown) { });
   emit("error", Object.assign({ currentTimeStamp, msg: errorMsg }));
 };
 
@@ -240,7 +247,7 @@ const localUpload = (option: localUploadOption, callback: Function) => {
         xhr.status === 304 ||
         xhr.status == 0
       ) {
-        let successText = "上传开始";
+        let successText = startUploadMsg.value;
         emit(
           "before",
           Object.assign({ currentTimeStamp, msg: successText, ...option })
@@ -286,7 +293,7 @@ const uploadChange = (e: any) => {
   e.preventDefault();
   const _files = [...(e.target.files || e.dataTransfer.files)];
   if (props.multiple && props.number != 0 && props.number < _files.length) {
-    errorF(numberErrorMsg);
+    errorF(numberErrorMsg.value);
     return;
   }
   if (props.size && props.size != 0) {
@@ -294,9 +301,7 @@ const uploadChange = (e: any) => {
       let _file = _files[i];
       let _size = _file.size;
       if (_size > props.size * 1024) {
-        errorF(
-          `文件 ${_file.name} ${sizeErrorMsg},文件最大不可超过${props.size}KB`
-        );
+        errorF(occurFileSizeErrorMsg.value);
         return;
       }
     }
@@ -327,9 +332,7 @@ const uploadChange = (e: any) => {
     }, 400);
   } else {
     if (arm2) {
-      console.warn(
-        "当前版本暂不支持单次多文件剪裁,尝试设置 multiple 为 false, 通过 @done 获取返回文件对象"
-      );
+      console.warn(cannotSupportCutMsg.value);
     }
     commonUploadTransaction(_files);
   }
@@ -392,84 +395,44 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div
-    class="layui-upload layui-upload-wrap"
-    :class="disabledPreview ? 'layui-upload-file-disabled' : ''"
-  >
-    <input
-      type="file"
-      class="layui-upload-file"
-      ref="orgFileInput"
-      :name="field"
-      :field="field"
-      :multiple="multiple"
-      :accept="acceptMime"
-      :disabled="disabled"
-      @click="clickOrgInput"
-      @change="uploadChange"
-    />
+  <div class="layui-upload layui-upload-wrap" :class="disabledPreview ? 'layui-upload-file-disabled' : ''">
+    <input type="file" class="layui-upload-file" ref="orgFileInput" :name="field" :field="field" :multiple="multiple"
+      :accept="acceptMime" :disabled="disabled" @click="clickOrgInput" @change="uploadChange" />
     <div v-if="!drag">
       <div class="layui-upload-btn-box" @click.stop="chooseFile">
         <template v-if="slot.default">
           <slot :disabled="disabled"></slot>
         </template>
         <template v-else>
-          <lay-button type="primary" :disabled="disabled">上传文件</lay-button>
+          <lay-button type="primary" :disabled="disabled">{{ text }}</lay-button>
         </template>
       </div>
     </div>
-    <div
-      v-else
-      ref="dragRef"
-      class="layui-upload-drag"
-      :class="
-        disabled
-          ? 'layui-upload-drag-disable'
-          : isDragEnter
+    <div v-else ref="dragRef" class="layui-upload-drag" :class="
+      disabled
+        ? 'layui-upload-drag-disable'
+        : isDragEnter
           ? 'layui-upload-drag-draging'
           : ''
-      "
-      @click.stop="chooseFile"
-    >
+    " @click.stop="chooseFile">
       <i class="layui-icon"></i>
-      <p>点击上传，或将文件拖拽到此处</p>
+      <p>{{ dragText }}</p>
       <div class="layui-hide" id="uploadDemoView">
         <hr />
         <img src="" alt="上传成功后渲染" style="max-width: 196px" />
       </div>
     </div>
-    <lay-layer
-      v-model="innerCutVisible"
-      :title="computedCutLayerOption.title"
-      :move="computedCutLayerOption.move"
-      :resize="computedCutLayerOption.resize"
-      :shade="computedCutLayerOption.shade"
-      :shadeClose="computedCutLayerOption.shadeClose"
-      :shadeOpacity="computedCutLayerOption.shadeOpacity"
-      :zIndex="computedCutLayerOption.zIndex"
-      :btnAlign="computedCutLayerOption.btnAlign"
-      :area="computedCutLayerOption.area"
-      :anim="computedCutLayerOption.anim"
-      :isOutAnim="computedCutLayerOption.isOutAnim"
-      :btn="computedCutLayerOption.btn"
-      @close="clearAllCutEffect"
-    >
-      <div
-        class="copper-container"
-        v-for="(base64str, index) in activeUploadFilesImgs"
-        :key="`file${index}`"
-      >
-        <img
-          :src="base64str"
-          :id="`_lay_upload_img${index}`"
-          class="_lay_upload_img"
-        />
+    <lay-layer v-model="innerCutVisible" :title="computedCutLayerOption.title" :move="computedCutLayerOption.move"
+      :resize="computedCutLayerOption.resize" :shade="computedCutLayerOption.shade"
+      :shadeClose="computedCutLayerOption.shadeClose" :shadeOpacity="computedCutLayerOption.shadeOpacity"
+      :zIndex="computedCutLayerOption.zIndex" :btnAlign="computedCutLayerOption.btnAlign"
+      :area="computedCutLayerOption.area" :anim="computedCutLayerOption.anim"
+      :isOutAnim="computedCutLayerOption.isOutAnim" :btn="computedCutLayerOption.btn" @close="clearAllCutEffect">
+      <div class="copper-container" v-for="(base64str, index) in activeUploadFilesImgs" :key="`file${index}`">
+        <img :src="base64str" :id="`_lay_upload_img${index}`" class="_lay_upload_img" />
       </div>
     </lay-layer>
-    <div
-      class="layui-upload-list"
-      :class="disabledPreview ? 'layui-upload-list-disabled' : ''"
-    >
+    <div class="layui-upload-list" :class="disabledPreview ? 'layui-upload-list-disabled' : ''">
       <slot name="preview"></slot>
     </div>
   </div>

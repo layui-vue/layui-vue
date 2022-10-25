@@ -203,7 +203,7 @@ export default {
 ::: demo 使用 `lay-upload` 标签, 添加 `cut` 开启 选择文件后剪裁功能
 
 <template>
-  <lay-upload @cutdone="getCutDone" @cutcancel="getCutCancel" :cut="true" :multiple="false" @done="getFileDone">
+  <lay-upload @cutdone="getCutDone" acceptMime="images" @cutcancel="getCutCancel" :cut="true" :multiple="false" @done="getFileDone">
     <template #preview>
       <div class="easy-wrap" v-if="cutUrl">
         <img :src="cutUrl"/>
