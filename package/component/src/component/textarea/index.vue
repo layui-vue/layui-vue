@@ -76,7 +76,7 @@ const wordCount = computed(() => {
       :name="name"
       :disabled="disabled"
       :maxlength="maxlength"
-      :class="{ 'layui-disabled': disabled }"
+      :class="{ 'layui-textarea-disabled': disabled }"
       @input="onInput"
       @focus="onFocus"
       @change="onChange"

@@ -214,11 +214,11 @@
           <lay-tooltip content="Jpom" position="top">
             <a
               style="height: 40px; display: inline-block"
-              href="https://jpom-docs.keepbx.cn"
+              href="https://jpom.top"
               target="_blank"
             >
               <lay-avatar
-                src="https://jpom-docs.keepbx.cn/images/jpom_logo.png"
+                src="https://jpom.top/images/jpom_logo.png"
                 style="background: transparent; width: 60px"
               ></lay-avatar>
             </a>
