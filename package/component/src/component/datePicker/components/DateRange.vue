@@ -76,7 +76,10 @@
           <div class="laydate-set-ym">
             <lay-dropdown ref="dropdownYearPanelRefRight">
               <span class="laydate-range-time"
-                >{{ startTime.month + 1 > 11 ? startTime.year + 1 : startTime.year }} {{ t("datePicker.year") }}</span
+                >{{
+                  startTime.month + 1 > 11 ? startTime.year + 1 : startTime.year
+                }}
+                {{ t("datePicker.year") }}</span
               >
               <template #content>
                 <YearPanel
