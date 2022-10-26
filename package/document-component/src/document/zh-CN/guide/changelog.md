@@ -11,7 +11,23 @@
 <template>
 <lay-timeline>
   <lay-timeline-item title="1.7.x">
-      <ul> 
+    <ul> 
+      <a name="1-7-2"></a> 
+      <li> 
+        <h3>1.7.2 <span class="layui-badge-rim">2022-10-26</span></h3> 
+        <ul>
+          <li>[优化] input 组件 disabled 属性禁用效果。</li>
+          <li>[优化] textarea 组件 disabled 属性禁用效果。</li>
+          <li>[优化] switch 组件 disabled 属性禁用效果。</li>
+          <li>[优化] select 组件 disabled 属性禁用效果。</li>
+          <li>[优化] tag-input 组件 disabled 属性禁用效果。</li>
+          <li>[优化] color-picker 组件 disabled 属性禁用效果。</li>
+          <li>[优化] cascader 组件 disabled 属性禁用效果。</li>
+          <li>[优化] icon-picker 组件 disabled 属性禁用效果。</li>
+        </ul> 
+      </li>
+    </ul>
+    <ul> 
       <a name="1-7-1"></a> 
       <li> 
         <h3>1.7.1 <span class="layui-badge-rim">2022-10-26</span></h3> 
