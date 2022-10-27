@@ -886,7 +886,7 @@ onBeforeUnmount(() => {
           <template v-if="tableDataSource.length == 0 && loading == false">
             <lay-empty></lay-empty>
             <div :style="{ width: tableBodyEmptyWidth }"></div>
-          </template> 
+          </template>
           <template v-if="loading == true">
             <div class="layui-table-loading">
               <i

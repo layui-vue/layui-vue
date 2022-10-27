@@ -381,17 +381,20 @@ watch(
  * @param icon 图标类型
  */
 const boxClasses = computed(() => {
-  return [{
-    "layui-layer-dialog": type === 0,
-    "layui-layer-page": type === 1,
-    "layui-layer-iframe": type === 2,
-    "layui-layer-loading": type === 3,
-    "layui-layer-drawer": type === 4,
-    "layui-layer-photos": type === 5,
-    "layui-layer-notifiy": type === 6,
-    "layui-layer-msg": props.isMessage,
-    "layui-layer-hui": props.isMessage && !props.icon,
-  },props.skin];
+  return [
+    {
+      "layui-layer-dialog": type === 0,
+      "layui-layer-page": type === 1,
+      "layui-layer-iframe": type === 2,
+      "layui-layer-loading": type === 3,
+      "layui-layer-drawer": type === 4,
+      "layui-layer-photos": type === 5,
+      "layui-layer-notifiy": type === 6,
+      "layui-layer-msg": props.isMessage,
+      "layui-layer-hui": props.isMessage && !props.icon,
+    },
+    props.skin,
+  ];
 });
 
 /**
