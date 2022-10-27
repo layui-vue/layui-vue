@@ -45,7 +45,7 @@ import useResize from "../composable/useResize";
 import useMove from "../composable/useMove";
 import { zIndexKey } from "../tokens";
 
-export interface LayModalProps {
+export interface LayerProps {
   id?: string;
   title?: string | boolean | Function;
   icon?: string | number;
@@ -100,7 +100,7 @@ export interface LayModalProps {
   restore?: Function;
 }
 
-const props = withDefaults(defineProps<LayModalProps>(), {
+const props = withDefaults(defineProps<LayerProps>(), {
   title: "标题",
   setTop: false,
   offset: () => ["50%", "50%"],
@@ -381,18 +381,17 @@ watch(
  * @param icon 图标类型
  */
 const boxClasses = computed(() => {
-  return [
-    type === 0 ? "layui-layer-dialog" : "",
-    type === 1 ? "layui-layer-page" : "",
-    type === 2 ? "layui-layer-iframe" : "",
-    type === 3 ? "layui-layer-loading" : "",
-    type === 4 ? "layui-layer-drawer" : "",
-    type === 5 ? "layui-layer-photos" : "",
-    type === 6 ? "layui-layer-notifiy-border" : "",
-    props.isMessage ? "layui-layer-msg" : "",
-    props.isMessage && !props.icon ? "layui-layer-hui" : "",
-    props.skin,
-  ];
+  return [{
+    "layui-layer-dialog": type === 0,
+    "layui-layer-page": type === 1,
+    "layui-layer-iframe": type === 2,
+    "layui-layer-loading": type === 3,
+    "layui-layer-drawer": type === 4,
+    "layui-layer-photos": type === 5,
+    "layui-layer-notifiy": type === 6,
+    "layui-layer-msg": props.isMessage,
+    "layui-layer-hui": props.isMessage && !props.icon,
+  },props.skin];
 });
 
 /**

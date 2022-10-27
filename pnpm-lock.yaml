@@ -77,7 +77,7 @@ importers:
     specifiers:
       '@ctrl/tinycolor': ^3.4.1
       '@layui/icons-vue': ^1.0.9
-      '@layui/layer-vue': ^1.4.5
+      '@layui/layer-vue': ^1.4.7
       '@umijs/ssr-darkreader': ^4.9.45
       '@vueuse/core': ^9.2.0
       async-validator: ^4.1.1
@@ -1512,6 +1512,7 @@ packages:
   /@commitlint/load/17.1.2:
     resolution: {integrity: sha512-sk2p/jFYAWLChIfOIp/MGSIn/WzZ0vkc3afw+l4X8hGEYkvDe4gQUUAVxjl/6xMRn0HgnSLMZ04xXh5pkTsmgg==}
     engines: {node: '>=v14'}
+    requiresBuild: true
     dependencies:
       '@commitlint/config-validator': 17.1.0
       '@commitlint/execute-rule': 17.0.0

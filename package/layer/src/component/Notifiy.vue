@@ -1,5 +1,5 @@
 <template>
-  <div class="layer-notifiy" ref="notifyRef">
+  <div class="layui-layer-notifiy-wrapper" ref="notifyRef">
     <h2 class="title">
       <i v-if="icon" :class="iconClass"></i>
       {{ title }}
@@ -27,14 +27,18 @@ export interface LayNotifyProps {
   icon?: string | number | undefined;
   iconClass: string[];
 }
+
 const props = withDefaults(defineProps<LayNotifyProps>(), {
   isHtmlFragment: false,
 });
 
 const emit = defineEmits(["close"]);
+const notifyRef = shallowRef<HTMLElement | null>(null);
+
 const close = () => {
   emit("close");
 };
+
 function addClass(obj: HTMLElement, cls: string) {
   //获取 class 内容.
   let obj_class = obj.className,
@@ -44,7 +48,6 @@ function addClass(obj: HTMLElement, cls: string) {
   obj.className = added; //替换原来的 class.
 }
 
-const notifyRef = shallowRef<HTMLElement | null>(null);
 onMounted(() => {
   nextTick(() => {
     setTimeout(() => {
@@ -52,7 +55,7 @@ onMounted(() => {
       if (!notifyRef.value?.parentElement?.parentElement) return;
       addClass(
         notifyRef.value?.parentElement?.parentElement,
-        "layui-layer-notify"
+        "layui-layer-notifiy-transition"
       );
     }, 300);
   });

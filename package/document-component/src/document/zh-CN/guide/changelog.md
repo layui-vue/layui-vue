@@ -12,6 +12,18 @@
 <lay-timeline>
   <lay-timeline-item title="1.7.x">
     <ul> 
+      <a name="1-7-3"></a> 
+      <li> 
+        <h3>1.7.3 <span class="layui-badge-rim">2022-10-27</span></h3> 
+        <ul>
+          <li>[修复] table 组件 滚动条 拖拽时 header 产生错位。</li>
+          <li>[修复] layer 组件 notifiy 类型 css 丢失的问题。</li>
+          <li>[优化] layer 组件 notifiy 类型 class 命名规范。</li>
+          <li>[升级] layer-vue 1.4.7 版本。</li>
+        </ul> 
+      </li>
+    </ul>
+    <ul> 
       <a name="1-7-2"></a> 
       <li> 
         <h3>1.7.2 <span class="layui-badge-rim">2022-10-26</span></h3> 

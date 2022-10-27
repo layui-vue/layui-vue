@@ -26,6 +26,7 @@ import { layer } from  "@layui/layer-vue"
 const baseNotifiy = function() {
     layer.notifiy({
       title:"这是标题",
+      time: 2000,
       content:"默认就是右上，也是用得最多的"
     })
 }

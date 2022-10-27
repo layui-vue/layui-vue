@@ -1064,7 +1064,12 @@
   }
 }
 
-.layer-notifiy {
+.layui-layer-notifiy {
+  border: none;
+  box-shadow: none;
+}
+
+.layui-layer-notifiy-wrapper {
   min-width: 330px;
   padding: 14px 26px 14px 13px;
   box-sizing: border-box;
@@ -1073,7 +1078,8 @@
   border: 1px solid #ebeef5;
   box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
 }
-.layer-notifiy .title {
+
+.layui-layer-notifiy-wrapper .title {
   font-weight: 700;
   font-size: 16px;
   color: #303133;
@@ -1081,17 +1087,20 @@
   display: flex;
   align-items: center;
 }
-.layer-notifiy .content {
+
+.layui-layer-notifiy-wrapper .content {
   font-size: 14px;
   line-height: 21px;
   margin: 6px 0 0 8px;
   color: #606266;
   text-align: justify;
 }
-.layer-notifiy .content img{
+
+.layui-layer-notifiy-wrapper .content img{
   max-width: 100%;
 }
-.layer-notifiy .layui-layer-close {
+
+.layui-layer-notifiy-wrapper .layui-layer-close {
   background-position: 1px -40px;
   cursor: pointer;
   width: 16px;
@@ -1101,17 +1110,15 @@
   right: 10px;
 }
 
-.layer-notifiy .layui-layer-close:hover {
+.layui-layer-notifiy-wrapper .layui-layer-close:hover {
   opacity: 0.7;
 }
-.layui-layer-notify{
+
+.layui-layer-notifiy-transition {
   transition: top 0.3s ease-in-out;
 }
-.layui-layer-notifiy-border{
-  border: none;
-  box-shadow: none;
-}
-.layer-notifiy  .title .layui-layer-ico{
+
+.layui-layer-notifiy-wrapper  .title .layui-layer-ico{
   height: 30px !important;
   width: 30px !important;
   display: inline-block;
