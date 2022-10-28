@@ -151,16 +151,19 @@ function handleScroll() {
   border-radius: 3px;
   transition: all 0.2s;
 }
+
 .lay-code .source {
   padding: 24px;
   padding-bottom: 15px;
 }
+
 .lay-code .meta {
   padding: 0 10px;
   height: 0;
   overflow: hidden;
   transition: height 0.2s;
 }
+
 .lay-code .source .description {
   padding: 20px;
   margin: 20px 0;
@@ -171,18 +174,21 @@ function handleScroll() {
   line-height: 22px;
   word-break: break-word;
 }
+
 .lay-code .source .description p {
   margin: 0 !important;
   line-height: 26px !important;
 }
+
 .lay-code .source .description code {
   margin: 0 1px;
   padding: 0.2em 0.4em;
-  font-size: .9em;
+  font-size: 0.9em;
   background: #f2f4f5;
-  border: 1px solid rgba(0,0,0,.06);
+  border: 1px solid rgba(0, 0, 0, 0.06);
   border-radius: 3px;
 }
+
 .lay-code .control {
   height: 44px;
   box-sizing: border-box;
@@ -196,11 +202,13 @@ function handleScroll() {
   width: 100%;
   user-select: none;
 }
+
 .lay-code .control.is-fixed {
   position: sticky;
   z-index: 11;
   bottom: 0;
 }
+
 .lay-code .control > i {
   display: inline-block;
   font-size: 16px;
@@ -209,9 +217,11 @@ function handleScroll() {
   padding-left: 10px;
   padding-right: 10px;
 }
+
 .btn:hover::before {
   color: #5fb878;
 }
+
 .btn:hover svg > path {
   fill: #5fb878;
 }
