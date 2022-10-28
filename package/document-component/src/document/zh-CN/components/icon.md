@@ -38,7 +38,7 @@ export default {
 ::: title 组件图标
 :::
 
-::: describe 使用图标组件，你需要安装 @layui/icons-vue 图标组件包。
+::: describe 使用图标组件，你需要安装 <code>@layui/icons-vue</code> 图标组件包。
 :::
 
 ```

@@ -1,9 +1,6 @@
-::: title 基本介绍
-:::
-
 <br>
   <p>
-    <a href="http://www.layui-vue.com" style="margin-left:30px;">
+    <a href="http://www.layui-vue.com">
       <img src="https://unpkg.com/outeres@0.0.6/img/layui/icon-1.png" alt="layui" width="100" style="border-radius:4px;">
     </a>
     <span style="font-size:32px;color:#e2e2e2;margin:30px;">+</span>

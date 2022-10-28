@@ -176,14 +176,12 @@ function handleScroll() {
   line-height: 26px !important;
 }
 .lay-code .source .description code {
-  display: inline-block;
-  padding: 1px 5px;
-  margin: 0 4px;
-  height: 18px;
-  border-radius: 2px;
-  background-color: rgba(27, 31, 35, 0.05);
-  font-size: 12px;
-  line-height: 18px;
+  margin: 0 1px;
+  padding: 0.2em 0.4em;
+  font-size: .9em;
+  background: #f2f4f5;
+  border: 1px solid rgba(0,0,0,.06);
+  border-radius: 3px;
 }
 .lay-code .control {
   height: 44px;
