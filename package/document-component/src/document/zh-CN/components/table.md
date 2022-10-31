@@ -298,7 +298,8 @@ export default {
       {
         title:"姓名",
         width:"200px",
-        key:"name"
+        key:"name",
+        ellipsisTooltip: true,
       },{
         title:"成绩",
         width: "180px",
