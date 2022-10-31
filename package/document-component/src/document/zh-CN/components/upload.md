@@ -13,7 +13,7 @@
 ::: demo 使用 `lay-upload` 标签, 创建一个上传按钮
 
 <template>
-  <lay-upload @done="getUploadFile" field="bigFile" @choose="beginChoose">
+  <lay-upload url="https://www.mocky.io/v2/5cc8019d300000980a055e76" @done="doneHandle" field="bigFile" @choose="beginChoose">
     <template #preview>
       <div v-for="(item,index) in picList" :key="`demo1-pic-'${index}`">
         <img :src="item"/>
@@ -35,7 +35,8 @@ export default {
       };
       reader.readAsDataURL(file);
     };
-    const getUploadFile=(files)=>{
+    const doneHandle=(files)=>{
+      console.log("触发")
       if(Array.isArray(files)&&files.length>0){
         files.forEach((file,index,array)=>{
           filetoDataURL(file,(res)=>{
@@ -50,7 +51,7 @@ export default {
       console.log("beginChoose",e);
     };
     return {
-      getUploadFile,
+      doneHandle,
       filetoDataURL,
       beginChoose,
       picList

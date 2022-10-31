@@ -234,7 +234,7 @@ const errorF = (errorText: string) => {
 };
 
 const localUpload = (option: localUploadOption, callback: Function) => {
-  let xhr: XMLHttpRequest, loadedevt, total, per: number, url, uploading;
+  let xhr: XMLHttpRequest, url;
   xhr = new XMLHttpRequest();
   url = option.url;
   let formData = option.formData;
@@ -279,6 +279,7 @@ const localUpload = (option: localUploadOption, callback: Function) => {
   if (cb && typeof cb == "function") {
     cb();
   }
+  (orgFileInput.value as HTMLInputElement).value = "";
 };
 
 const filetoDataURL = (file: File, fn: Function) => {
