@@ -14,7 +14,8 @@
 
 <template>
   <lay-tab v-model="current1">
-    <lay-tab-item title="选项一" id="1" v-if="false"><div style="padding:20px">选项一</div></lay-tab-item>
+    <lay-tab-item title="选项一" id="1"><div style="padding:20px">选项一</div></lay-tab-item>
+    <!-- 注释 -->
     <lay-tab-item title="选项二" id="2"><div style="padding:20px">选项二</div></lay-tab-item>
   </lay-tab>
 </template>
@@ -28,7 +29,7 @@ export default {
     const current1 = ref("1")
 
     return {
-      current1
+      current1,
     }
   }
 }

@@ -66,8 +66,11 @@ const change = function (id: any) {
 const childrens: Ref<VNode[]> = ref([]);
 const slotsChange = ref(true);
 
-const setItemInstanceBySlot = function (nodeList: VNode[]) {
-  nodeList?.map((item) => {
+const setItemInstanceBySlot = function (nodes: VNode[]) {
+  const showNodes = nodes?.filter((item: VNode) => {
+    return item.children != "v-if";
+  });
+  showNodes?.map((item) => {
     let component = item.type as Component;
     if (component.name != CarouselItem.name) {
       setItemInstanceBySlot(item.children as VNode[]);
