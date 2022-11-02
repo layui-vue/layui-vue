@@ -187,6 +187,11 @@ export default {
       <lay-button type="primary">默认按钮</lay-button>
       <lay-button type="primary">默认按钮</lay-button>
     </lay-button-group>
+    <lay-button-group>
+      <lay-button border="green" border-style="dashed">默认按钮</lay-button>
+      <lay-button border="green" border-style="dashed">默认按钮</lay-button>
+      <lay-button border="green" border-style="dashed">默认按钮</lay-button>
+    </lay-button-group>
   </div>
 </template>
 

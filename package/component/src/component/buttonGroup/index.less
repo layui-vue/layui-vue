@@ -14,8 +14,15 @@
   border-radius: 0;
 }
 
-.layui-btn-group .layui-btn:not(:first-child) {
-  border-left: none;
+.layui-btn-group .layui-btn:not(:last-child) {
+  border-right: none !important;
+}
+
+.layui-btn-group .layui-btn.layui-btn-primary:not(:first-child),
+.layui-btn-group .layui-btn.layui-btn-normal:not(:first-child),
+.layui-btn-group .layui-btn.layui-btn-warm:not(:first-child),
+.layui-btn-group .layui-btn.layui-btn-danger:not(:first-child) {
+  border-left: 1px solid rgba(255, 255, 255, .5)
 }
 
 .layui-btn-group .layui-btn:first-child {
