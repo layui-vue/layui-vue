@@ -319,7 +319,7 @@ defineExpose({
         />
       </template>
     </span>
-    <span v-if="allowClear && tagData?.length" class="layui-tag-input-clear">
+    <span v-if="allowClear && tagData?.length && !disabled" class="layui-tag-input-clear">
       <lay-icon type="layui-icon-close-fill" @click.stop="handleClearClick" />
     </span>
     <span class="layui-tag-input-suffix" v-if="$slots.suffix">

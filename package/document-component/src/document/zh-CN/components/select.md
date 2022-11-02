@@ -79,12 +79,12 @@ export default {
 
 <template>
   <lay-space>
-    <lay-select v-model="value3" :disabled="true">
+    <lay-select v-model="value3" :disabled="true" :allow-clear="true">
     <lay-select-option value="1" label="学习"></lay-select-option>
     <lay-select-option value="2" label="编码"></lay-select-option>
     <lay-select-option value="3" label="运动"></lay-select-option>
   </lay-select>
-    <lay-select v-model="value4" :disabled="true" :multiple="true">
+    <lay-select v-model="value4" :disabled="true" :multiple="true" :allow-clear="true">
     <lay-select-option value="1" label="学习"></lay-select-option>
     <lay-select-option value="2" label="编码"></lay-select-option>
     <lay-select-option value="3" label="运动"></lay-select-option>

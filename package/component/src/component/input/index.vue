@@ -175,7 +175,7 @@ const showPassword = () => {
         <password-icon v-if="isPassword"></password-icon>
         <un-password-icon v-else></un-password-icon>
       </span>
-      <span class="layui-input-clear" v-if="allowClear && hasContent">
+      <span class="layui-input-clear" v-if="allowClear && hasContent && !disabled">
         <lay-icon type="layui-icon-close-fill" @click.stop="onClear"></lay-icon>
       </span>
       <span class="layui-input-suffix" v-if="slots.suffix || props.suffixIcon">
