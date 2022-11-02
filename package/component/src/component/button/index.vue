@@ -24,10 +24,10 @@ export interface ButtonProps {
   loadingIcon?: string;
   borderStyle?: string;
   border?: ButtonBorder;
-  fluid?: string | boolean;
-  radius?: string | boolean;
-  loading?: string | boolean;
-  disabled?: string | boolean;
+  fluid?: boolean;
+  radius?: boolean;
+  loading?: boolean;
+  disabled?: boolean;
   nativeType?: ButtonNativeType;
 }
 
@@ -35,7 +35,6 @@ const props = withDefaults(defineProps<ButtonProps>(), {
   loadingIcon: "layui-icon-loading-one",
   borderStyle: "soild",
   nativeType: "button",
-  disabled: false,
   loading: false,
   radius: false,
   fluid: false,

@@ -99,7 +99,7 @@ export default {
   <lay-button type="normal" size="lg">百搭按钮</lay-button>
   <lay-button type="warm" size="lg">暖色按钮</lay-button>
   <lay-button type="danger" size="lg">警告按钮</lay-button>
-  <lay-button type="disabled" size="lg">禁用按钮</lay-button>
+  <lay-button disabled size="lg">禁用按钮</lay-button>
 </template>
 
 <script>
