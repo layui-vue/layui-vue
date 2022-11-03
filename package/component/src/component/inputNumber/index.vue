@@ -17,11 +17,11 @@ export interface InputNumberProps {
   name?: string;
   disabled?: boolean;
   disabledInput?: boolean;
+  size?: InputNumberSize;
   step?: number;
   position?: "right";
   min?: number;
   max?: number;
-  size?: InputNumberSize;
 }
 
 const props = withDefaults(defineProps<InputNumberProps>(), {
@@ -61,8 +61,9 @@ watch(
     }
   }
 );
-const tempValue = ref(0);
+
 let timer: any = 0;
+const tempValue: Ref<number> = ref(0);
 
 const minControl = computed(() => {
   if (props.disabled) {
@@ -120,8 +121,8 @@ const isNumber = function (num: any) {
   <div class="layui-input-number" :position="position" :size="size">
     <lay-button
       size="lg"
-      @mousedown="longDown(subtraction)"
       @mouseup="cancelLongDown"
+      @mousedown="longDown(subtraction)"
       @blur="cancelLongDown"
       :disabled="minControl"
       class="layui-control-btn layui-subtraction-btn"
@@ -134,20 +135,20 @@ const isNumber = function (num: any) {
     </lay-button>
     <div class="layui-input-number-input">
       <lay-input
-        v-model="num"
-        type="number"
-        :readonly="disabledInput || disabled"
-        :disabled="disabledInput || disabled"
         :max="max"
         :min="min"
         :name="name"
-        @change="inputChange"
+        v-model="num"
+        :readonly="disabledInput || disabled"
+        :disabled="disabledInput || disabled"
+        @input="inputChange"
+        type="number"
       />
     </div>
     <lay-button
       size="lg"
-      @mousedown="longDown(addition)"
       @mouseup="cancelLongDown"
+      @mousedown="longDown(addition)"
       @blur="cancelLongDown"
       :disabled="maxControl"
       class="layui-control-btn layui-addition-btn"

@@ -122,10 +122,10 @@ export default {
 ::: demo 使用 `fluid` 属性, 使其适合父最大宽度
 
 <template>
-  <lay-button type="primary" fluid="true">最大化按钮</lay-button>
+  <lay-button type="primary" fluid>最大化按钮</lay-button>
   <br/>
   <br/>
-  <lay-button type="default" fluid="true">最大化按钮</lay-button>
+  <lay-button type="default" fluid>最大化按钮</lay-button>
 </template>
 
 <script>
@@ -148,12 +148,12 @@ export default {
 ::: demo 使用 `radius` 属性，创建圆角按钮
 
 <template>
-  <lay-button type="primary" radius="true">原始按钮</lay-button>
-  <lay-button type="default" radius="true">默认按钮</lay-button>
-  <lay-button type="normal" radius="true">百搭按钮</lay-button>
-  <lay-button type="warm" radius="true">暖色按钮</lay-button>
-  <lay-button type="danger" radius="true">警告按钮</lay-button>
-  <lay-button disabled radius="true">禁用按钮</lay-button>
+  <lay-button type="primary" radius>原始按钮</lay-button>
+  <lay-button type="default" radius>默认按钮</lay-button>
+  <lay-button type="normal" radius>百搭按钮</lay-button>
+  <lay-button type="warm" radius>暖色按钮</lay-button>
+  <lay-button type="danger" radius>警告按钮</lay-button>
+  <lay-button disabled radius>禁用按钮</lay-button>
 </template>
 
 <script>
