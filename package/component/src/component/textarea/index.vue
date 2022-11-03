@@ -6,7 +6,7 @@ export default {
 
 <script setup lang="ts">
 import { LayIcon } from "@layui/icons-vue";
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import "./index.less";
 
 export interface TextareaProps {
@@ -31,11 +31,15 @@ interface TextareaEmits {
 }
 
 const emit = defineEmits<TextareaEmits>();
+const composing = ref(false);
 
 const onInput = function (event: Event) {
   const inputElement = event.target as HTMLInputElement;
-  emit("update:modelValue", inputElement.value);
   emit("input", inputElement.value);
+  if (composing.value) {
+    return;
+  }
+  emit("update:modelValue", inputElement.value);
 };
 
 const onFocus = function (event: Event) {
@@ -54,6 +58,15 @@ const onChange = (event: Event) => {
 const onClear = function () {
   emit("update:modelValue", "");
   emit("clear");
+};
+
+const onCompositionstart = () => {
+  composing.value = true;
+};
+
+const onCompositionend = (event: Event) => {
+  composing.value = false;
+  onInput(event);
 };
 
 const hasContent = computed(() => (props.modelValue as string)?.length > 0);
@@ -77,6 +90,8 @@ const wordCount = computed(() => {
       :disabled="disabled"
       :maxlength="maxlength"
       :class="{ 'layui-textarea-disabled': disabled }"
+      @compositionstart="onCompositionstart"
+      @compositionend="onCompositionend"
       @input="onInput"
       @focus="onFocus"
       @change="onChange"

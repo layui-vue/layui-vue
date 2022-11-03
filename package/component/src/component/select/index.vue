@@ -73,7 +73,7 @@ var timer: any;
 const getOption = (nodes: VNode[], newOptions: any[]) => {
   nodes?.map((item) => {
     let component = item.type as Component;
-    if(item.type.toString() == "Symbol(Fragment)") {
+    if (item.type.toString() == "Symbol(Fragment)") {
       getOption(item.children as VNode[], newOptions);
     } else {
       if (component.name == LaySelectOption.name) {

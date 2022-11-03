@@ -25,7 +25,7 @@ import {
   reactive,
   h,
   createTextVNode,
-  Fragment
+  Fragment,
 } from "vue";
 import { useResizeObserver } from "@vueuse/core";
 import { TabData, TabInjectKey, TabPosition } from "./interface";
@@ -47,7 +47,7 @@ const tabMap = reactive(new Map<number, TabData>());
 const setItemInstanceBySlot = function (nodes: VNode[]) {
   nodes?.map((item) => {
     let component = item.type as Component;
-    if(item.type.toString() == "Symbol(Fragment)") {
+    if (item.type.toString() == "Symbol(Fragment)") {
       setItemInstanceBySlot(item.children as VNode[]);
     } else {
       if (component.name == tabItem.name) {
