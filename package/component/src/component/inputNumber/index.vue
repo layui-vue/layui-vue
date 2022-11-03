@@ -135,11 +135,13 @@ const isNumber = function (num: any) {
     <div class="layui-input-number-input">
       <lay-input
         v-model="num"
-        :readonly="disabledInput || disabled"
         type="number"
+        :readonly="disabledInput || disabled"
+        :disabled="disabledInput || disabled"
+        :max="max"
+        :min="min"
         :name="name"
         @change="inputChange"
-        :disabled="disabledInput || disabled"
       />
     </div>
     <lay-button

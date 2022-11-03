@@ -27,6 +27,8 @@ export interface InputProps {
   password?: boolean;
   size?: InputSize;
   maxlength?: number;
+  max?: number;
+  min?: number;
 }
 
 const props = withDefaults(defineProps<InputProps>(), {
@@ -159,6 +161,8 @@ const showPassword = () => {
         :autofocus="autofocus"
         :autocomplete="autocomplete"
         :maxlength="maxlength"
+        :max="max"
+        :min="min"
         :readonly="readonly"
         @input="onInput"
         @change="onChange"
