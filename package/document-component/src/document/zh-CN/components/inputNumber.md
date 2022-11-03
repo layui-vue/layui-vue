@@ -13,18 +13,18 @@
 ::: demo 使用 `lay-input-number` 标签, 创建数字输入框
 
 <template>
-  <lay-input-number v-model="data"></lay-input-number>
+  <lay-input-number v-model="data1"></lay-input-number>
   <lay-input-number v-model="data2"  position="right"></lay-input-number>
 </template>
 
 <script>
   import { ref } from 'vue';
-  const data = ref(0);
+  const data1 = ref(0);
   const data2 = ref(0);
   export default {
     setup() {
       return {
-        data,
+        data1,
         data2,
       }
     }
@@ -41,15 +41,30 @@
 <template>
   <div>
     <div>
-      <lay-input-number size="lg"></lay-input-number>
-      <lay-input-number size="md"></lay-input-number>
-      <lay-input-number size="sm"></lay-input-number>
-      <lay-input-number size="xs"></lay-input-number>
+      <lay-input-number v-model="data3" size="lg"></lay-input-number>
+      <lay-input-number v-model="data4" size="md"></lay-input-number>
+      <lay-input-number v-model="data5" size="sm"></lay-input-number>
+      <lay-input-number v-model="data6" size="xs"></lay-input-number>
     </div>
   </div>
 </template>
 
 <script>
+  import { ref } from 'vue';
+  const data3 = ref(0);
+  const data4 = ref(0);
+  const data5 = ref(0);
+  const data6 = ref(0);
+  export default {
+    setup() {
+      return {
+        data3,
+        data4,
+        data5,
+        data6,
+      }
+    }
+  }
 </script>
 
 :::
@@ -60,10 +75,19 @@
 ::: demo 通过 `min` 与 `max` 属性, 限制输入数字的大小。
 
 <template>
-  <lay-input-number :min="0" :max="10"></lay-input-number>
+  <lay-input-number v-model="data7" :min="0" :max="10"></lay-input-number>
 </template>
 
 <script>
+  import { ref } from 'vue';
+  const data7 = ref(0);
+  export default {
+    setup() {
+      return {
+        data7,
+      }
+    }
+  }
 </script>
 
 :::
@@ -74,10 +98,19 @@
 ::: demo 通过 `step` 属性, 设置 加 与 减 的步长。
 
 <template>
-  <lay-input-number :step="10"></lay-input-number>
+  <lay-input-number v-model="data8" :step="10"></lay-input-number>
 </template>
 
 <script>
+  import { ref } from 'vue';
+  const data8 = ref(0);
+  export default {
+    setup() {
+      return {
+        data8,
+      }
+    }
+  }
 </script>
 
 :::
@@ -89,20 +122,20 @@
 
 <template>
   <p>禁用输入</p>
-  <lay-input-number v-model="data" disabled-input></lay-input-number>
+  <lay-input-number v-model="data9" disabled-input></lay-input-number>
   <p>全部禁用</p>
-  <lay-input-number v-model="data2" disabled></lay-input-number>
+  <lay-input-number v-model="data10" disabled></lay-input-number>
 </template>
 
 <script>
   import { ref } from 'vue';
-  const data = ref(10);
-  const data2 = ref(25);
+  const data9 = ref(10);
+  const data10 = ref(25);
   export default {
     setup() {
       return {
-        data,
-        data2
+        data9,
+        data10
       }
     }
   }
