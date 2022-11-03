@@ -25,7 +25,7 @@ import {
   reactive,
   h,
   createTextVNode,
-  Fragment,
+  Fragment
 } from "vue";
 import { useResizeObserver } from "@vueuse/core";
 import { TabData, TabInjectKey, TabPosition } from "./interface";
@@ -45,15 +45,14 @@ const childrens: Ref<VNode[]> = ref([]);
 const tabMap = reactive(new Map<number, TabData>());
 
 const setItemInstanceBySlot = function (nodes: VNode[]) {
-  const showNodes = nodes?.filter((item: VNode) => {
-    return item.children != "v-if";
-  });
-  showNodes?.map((item) => {
+  nodes?.map((item) => {
     let component = item.type as Component;
-    if (component.name != tabItem.name) {
+    if(item.type.toString() == "Symbol(Fragment)") {
       setItemInstanceBySlot(item.children as VNode[]);
     } else {
-      childrens.value.push(item);
+      if (component.name == tabItem.name) {
+        childrens.value.push(item);
+      }
     }
   });
 };

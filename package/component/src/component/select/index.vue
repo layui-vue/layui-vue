@@ -71,20 +71,18 @@ const options = ref<any>([]);
 var timer: any;
 
 const getOption = (nodes: VNode[], newOptions: any[]) => {
-  const showNodes = nodes?.filter((item: VNode) => {
-    return item.children != "v-if";
-  });
-
-  showNodes?.map((item: VNode) => {
+  nodes?.map((item) => {
     let component = item.type as Component;
-    if (component.name === LaySelectOption.name) {
-      if (item.children) {
-        // @ts-ignore
-        item.props.label = item.children.default()[0].children;
-      }
-      newOptions.push(item.props);
-    } else {
+    if(item.type.toString() == "Symbol(Fragment)") {
       getOption(item.children as VNode[], newOptions);
+    } else {
+      if (component.name == LaySelectOption.name) {
+        if (item.children) {
+          // @ts-ignore
+          item.props.label = item.children.default()[0].children;
+        }
+        newOptions.push(item.props);
+      }
     }
   });
 };
