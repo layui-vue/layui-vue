@@ -12,6 +12,28 @@
 <lay-timeline>
   <lay-timeline-item title="1.7.x">
     <ul> 
+      <a name="1-7-4"></a> 
+      <li> 
+        <h3>1.7.4 <span class="layui-badge-rim">2022-11-04</span></h3> 
+        <ul>
+          <li>[新增] button 按钮 active 效果。</li>
+          <li>[新增] input 组件 max 与 min 属性, 用于控制 number 类型下手动输入值的范围。</li>
+          <li>[修复] textarea 组件边框 hover 状态颜色和其它 form 系列组件不一样的问题。</li>
+          <li>[修复] tag-input 组件获取焦点与 hover 状态和其它 form 系列组件不一样的问题。</li>
+          <li>[修复] upload 组件多次上传同一文件时，除了第一次都无法正常触发到@before和@done 事件。</li>
+          <li>[修复] select 组件 slots 无法正常解决注释的问题。</li>
+          <li>[修复] tab 组件 slots 无法正常解决注释与 v-if 的问题。</li>
+          <li>[修复] select 单选模式和多选模式, 鼠标悬停时边框颜色不一样的问题。</li>
+          <li>[修复] textarea 双向绑定在拼字时触发更新的问题。</li>
+          <li>[修复] input-number 组件 disabled-input 属性开启时，点击减号无效。</li>
+          <li>[修复] input-number 的 min 和 max 属性在手动输入值的场景下无效。</li>
+          <li>[修复] button 组件 disabled 属性无效。</li>
+          <li>[修复] button-group 组件, 个别类型无法正常显示分割线。</li>
+          <li>[修复] select 组件禁用后 仍能清空的问题。</li>
+        </ul> 
+      </li>
+    </ul>
+    <ul> 
       <a name="1-7-3"></a> 
       <li> 
         <h3>1.7.3 <span class="layui-badge-rim">2022-10-27</span></h3> 

@@ -121,10 +121,12 @@
 ::: demo 通过 `disabled-input` 与 `disabled` 属性, 禁用输入或操作。
 
 <template>
-  <p>禁用输入</p>
-  <lay-input-number v-model="data9" disabled-input></lay-input-number>
-  <p>全部禁用</p>
-  <lay-input-number v-model="data10" disabled></lay-input-number>
+  <lay-space>
+      <p>禁用输入</p>
+      <lay-input-number v-model="data9" disabled-input></lay-input-number>
+      <p>全部禁用</p>
+      <lay-input-number v-model="data10" disabled></lay-input-number>
+  </lay-space>
 </template>
 
 <script>
