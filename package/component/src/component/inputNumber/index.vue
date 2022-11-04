@@ -113,7 +113,7 @@ const inputChange = function () {
 };
 
 const isNumber = function (num: any) {
-  return /^\d+(\.\d+)?$/.test(num);
+  return !isNaN(num)
 };
 </script>
 
