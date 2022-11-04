@@ -30,6 +30,10 @@
           <li>[修复] button 组件 disabled 属性无效。</li>
           <li>[修复] button-group 组件, 个别类型无法正常显示分割线。</li>
           <li>[修复] select 组件禁用后 仍能清空的问题。</li>
+          <li>[修复] input-number 组件无法手动输入负数的问题。</li>
+          <li>[修复] input-number 组件清空内容，输入框失去焦点后数字复显的问题。</li>
+          <li>[修复] input-number 组件设置步长点击增加，直接拼接字符串的问题。</li>
+          <li>[修复] textarea 和 select 验证失败后边框颜色没有变成红色。</li>
         </ul> 
       </li>
     </ul>
