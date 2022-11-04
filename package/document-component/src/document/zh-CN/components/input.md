@@ -289,22 +289,23 @@ export default {
 
 ::: table
 
-| 属性                     | 描述                  | 类型         | 默认值         | 可选值         |
-| -----------------------  | -------------------- |-------------- |-------------- | -------------- |
-| name                     | 原始属性 name         | `string`             | --             | --             |
-| placeholder              | 提示信息              | `string`             | --             | --             |
-| disabled                 | 禁用                  | `boolean`           | `false`             | `true` `false` |
-| readonly                 | 原生属性 readonly     |  `boolean`             | `false`             |`true` `false` |
-| v-model / modelValue     | 值                    | `string` `number`   | --             |--             |
-| autofocus                | 原生属性 autofocus    |  `boolean`             | `false`             |`true` `false` |
-| autocomplete             | 原生属性 autocomplete |  `boolean`             | `false`             |`true` `false` |
-| allow-clear              | 允许清空 allow-clear  | `boolean`             | `false`             | `true` `false` |
-| prefix-icon              | 前置图标              | --             | --             | 内置 icon 集             |
-| suffix-icon              | 后置图标              | --             | --             | 内置 icon 集             |
-| password                 | 开启密码显示隐藏      |  `boolean`      | `false`             |`true` `false`  |
-| size                     | 尺寸                  | `string`             | `md`             | `lg` `md` `sm` `xs`|
-| maxlength                | 限制输入长度          |  `number`             | --             |--               |
-
+| 属性                     | 描述                  | 类型         | 默认值         | 可选值         | 版本         |
+| -----------------------  | -------------------- |-------------- |-------------- | -------------- |-------------- |
+| name                     | 原始属性 name         | `string`             | --             | --             |--             |
+| placeholder              | 提示信息              | `string`             | --             | --             |--             |
+| disabled                 | 禁用                  | `boolean`           | `false`             | `true` `false` |--             |
+| readonly                 | 原生属性 readonly     |  `boolean`             | `false`             |`true` `false` |--             |
+| v-model / modelValue     | 值                    | `string` `number`   | --             |--             |--             |
+| autofocus                | 原生属性 autofocus    |  `boolean`             | `false`             |`true` `false` |--             |
+| autocomplete             | 原生属性 autocomplete |  `boolean`             | `false`             |`true` `false` |--             |
+| allow-clear              | 允许清空 allow-clear  | `boolean`             | `false`             | `true` `false` |--             |
+| prefix-icon              | 前置图标              | --             | --             | 内置 icon 集             |--             |
+| suffix-icon              | 后置图标              | --             | --             | 内置 icon 集             |--             |
+| password                 | 开启密码显示隐藏      |  `boolean`      | `false`             |`true` `false`  |--             |
+| size                     | 尺寸                  | `string`             | `md`             | `lg` `md` `sm` `xs`|--             |
+| maxlength                | 限制输入长度          |  `number`             | --             |--               |--             |
+| max                      | 最大值          |  `number`             | --             |--               | `1.7.4`             |
+| min                      | 最小值          |  `number`             | --             |--               | `1.7.4`           |
 :::
 
 ::: title Input 事件
