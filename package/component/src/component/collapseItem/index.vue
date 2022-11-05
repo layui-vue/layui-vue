@@ -55,10 +55,8 @@ const showHandle = function () {
       :class="['layui-colla-title', { 'layui-disabled': disabled }]"
       @click="showHandle"
     >
-      <slot name="title" :props="props">{{ title }}</slot>
-      <i class="layui-icon layui-colla-icon">
-        {{ isShow ? "" : "" }}
-      </i>
+      <slot name="title" :props="props">{{ title }}</slot> {{ collapseTransition }}
+      <i class="layui-icon layui-colla-icon layui-icon-right" :style="{ 'transform' : isShow ? 'rotate(90deg)':'none', 'transition': collapseTransition ? 'all 0.2s ease 0s':'' }"></i>
     </h2>
     <lay-transition :enable="collapseTransition">
       <div v-if="isShow">
