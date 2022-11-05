@@ -5,7 +5,7 @@
         ref="popperRefEl"
         :class="['layui-popper', { 'layui-dark': isDark }, props.popperClass]"
         :style="[style, props.popperStyle ?? '']"
-        :position="position"
+        :position="innnerPosition"
         @mouseenter="handlerPopperMouseEnter"
         @mouseleave="handlerPopperMouseLeave"
       >

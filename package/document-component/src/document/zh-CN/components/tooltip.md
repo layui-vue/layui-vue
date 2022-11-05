@@ -44,7 +44,7 @@ setup() {
 ::: demo
 
 <template>
-  <lay-tooltip content="假装这里有文字提示">
+  <lay-tooltip content="假装这里有文字提示" trigger="click">
     <lay-button>tooltip</lay-button>
   </lay-tooltip>
 </template>
