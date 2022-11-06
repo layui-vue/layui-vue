@@ -12,6 +12,19 @@
 <lay-timeline>
   <lay-timeline-item title="1.7.x">
     <ul> 
+      <a name="1-7-5"></a> 
+      <li> 
+        <h3>1.7.5 <span class="layui-badge-rim">2022-11-06</span></h3> 
+        <ul>
+          <li>[修复] select 组件单选模式验证失败后边框无变化的问题。</li>
+          <li>[修复] tooltip 组件临近屏幕边界, 三角位置显示错误。</li>
+          <li>[修复] upload 组件开启 cut 裁剪属性, 取消上传仍会弹出裁剪界面。</li>
+          <li>[修复] upload 组件开启 cut 裁剪属性, 多次上传同文件, 非首次都不会弹出裁剪框。</li>
+          <li>[优化] collapse 组件 collapseTransition 属性开启时, 为下拉图标增加转场动画。</li>
+        </ul> 
+      </li>
+    </ul>
+    <ul> 
       <a name="1-7-4"></a> 
       <li> 
         <h3>1.7.4 <span class="layui-badge-rim">2022-11-04</span></h3> 

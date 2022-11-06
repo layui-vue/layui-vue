@@ -69,7 +69,7 @@ export const openPlayground = async (
   };
 
   const encoded = utoa(JSON.stringify(originCode));
-  const link = `https://sandbox-vue.vercel.app/#${encoded}`;
+  const link = `https://layui-vue.gitee.io/sandbox-vue/#${encoded}`;
   return {
     code,
     encoded,
