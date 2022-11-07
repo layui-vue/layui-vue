@@ -122,7 +122,7 @@ export default {
     <lay-select-option value="2" label="编码"></lay-select-option>
     <lay-select-option value="3" :label="null"></lay-select-option>
   </lay-select>
-    <lay-select v-model="value4" :show-search="true" :multiple="true">
+    <lay-select v-model="value4" :show-search="true" :multiple="true" @search="search">
     <lay-select-option value="1" label="学习"></lay-select-option>
     <lay-select-option value="2" label="编码"></lay-select-option>
     <lay-select-option value="3" :label="null"></lay-select-option>
