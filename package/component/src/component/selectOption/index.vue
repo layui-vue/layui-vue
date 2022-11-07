@@ -12,7 +12,7 @@ import {
   inject,
   WritableComputedRef,
   Ref,
-  onMounted
+  onMounted,
 } from "vue";
 
 export interface SelectOptionProps {
