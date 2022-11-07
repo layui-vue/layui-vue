@@ -1,7 +1,7 @@
 <template>
   <div class="lay-page-header">
     <div class="lay-page-header__left" @click="emits('back')">
-      <i class="layui-icon layui-icon-return"></i>
+      <i class="layui-icon" :class="[ backIcon ]"></i>
       <div class="lay-page-header__title">{{ backText }}</div>
     </div>
     <div class="lay-page-header__content">
@@ -23,10 +23,12 @@ import "./index.less";
 export interface PageHeaderProps {
   content?: string;
   backText?: string;
+  backIcon?: string;
 }
 const props = withDefaults(defineProps<PageHeaderProps>(), {
   content: "",
   backText: "返回",
+  backIcon: "layui-icon-return"
 });
 
 const emits = defineEmits(["back"]);

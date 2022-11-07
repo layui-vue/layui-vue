@@ -12,8 +12,7 @@ import {
   inject,
   WritableComputedRef,
   Ref,
-  onMounted,
-  useSlots,
+  onMounted
 } from "vue";
 
 export interface SelectOptionProps {
@@ -67,8 +66,8 @@ const select = () => {
 
 const display = computed(() => {
   return (
-    props.keyword.toString().indexOf(searchValue.value) > -1 ||
-    props.label.toString().indexOf(searchValue.value) > -1
+    props.keyword?.toString().indexOf(searchValue.value) > -1 ||
+    props.label?.toString().indexOf(searchValue.value) > -1
   );
 });
 

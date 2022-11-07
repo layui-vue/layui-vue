@@ -117,7 +117,7 @@ export default {
 
 <template>
   <lay-space>
-    <lay-select v-model="value3" :show-search="true">
+    <lay-select v-model="value3" :show-search="true" @search="search">
     <lay-select-option value="1" label="学习"></lay-select-option>
     <lay-select-option value="2" label="编码"></lay-select-option>
     <lay-select-option value="3" label="运动"></lay-select-option>
@@ -138,9 +138,14 @@ export default {
 
     const value3 = ref('1')
     const value4 = ref(['1'])
+
+    const search = function() {
+      console.log("触发")
+    }
     return {
       value3,
-      value4
+      value4,
+      search
     }
   }
 }
