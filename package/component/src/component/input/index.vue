@@ -79,7 +79,7 @@ watch(
 
 const onInput = function (event: Event) {
   const inputElement = event.target as HTMLInputElement;
-  let value= inputElement.value;
+  const value = inputElement.value;
   emit("input", value);
   if (composing.value) return;
   emit("update:modelValue", value);
@@ -101,21 +101,21 @@ const onChange = (event: Event) => {
 };
 
 const onBlur = (event: Event) => {
-  let value = (event.target as HTMLInputElement).value;
-  if(props.type === "number") {
-    if(value === "" && !props.min) {
-        value = "0";
-    } else {
-      if(props.max && props.max < Number(value)) {
-        value = props.max.toString();
-      }
-      if(props.min && props.min > Number(value)) {
-        value = props.min.toString();
-      }
-    }
-    emit("update:modelValue", value);
+  if (props.type === "number") {
+    onNumberBlur(event);
   }
   emit("blur", event);
+};
+
+const onNumberBlur = (event: Event) => {
+  let value = (event.target as HTMLInputElement).value;
+  if(value === "") {
+    value = props.min ? String(props.min) : "0";
+  } else {
+    if (props.max && props.max < Number(value)) value = props.max.toString();
+    if (props.min && props.min > Number(value)) value = props.min.toString();
+  }
+  emit("update:modelValue", value);
 };
 
 const onCompositionstart = () => {
