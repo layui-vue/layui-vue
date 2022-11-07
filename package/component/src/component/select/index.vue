@@ -177,8 +177,9 @@ provide("multiple", multiple);
       :contentClass="contentClass"
       :contentStyle="contentStyle"
       :update-at-scroll="true"
-      @show="openState = true"
+      :autoFitWidth="true"
       @hide="openState = false"
+      @show="openState = true"
     >
       <lay-tag-input
         v-if="multiple"
@@ -191,8 +192,8 @@ provide("multiple", multiple);
         :disabled="disabled"
         :size="size"
         :class="{ 'layui-unselect': true }"
-        @clear="handleClear"
         @remove="handleRemove"
+        @clear="handleClear"
       >
         <template #suffix>
           <lay-icon
@@ -226,6 +227,7 @@ provide("multiple", multiple);
             <lay-input
               v-model="searchValue"
               :placeholder="searchPlaceholder"
+              @Input="handleSearch"
               prefix-icon="layui-icon-search"
               size="sm"
             ></lay-input>
