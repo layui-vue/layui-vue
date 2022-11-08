@@ -109,7 +109,7 @@ const onBlur = (event: Event) => {
 
 const onNumberBlur = (event: Event) => {
   let value = (event.target as HTMLInputElement).value;
-  if(value === "") {
+  if (value === "") {
     value = props.min ? String(props.min) : "0";
   } else {
     if (props.max && props.max < Number(value)) value = props.max.toString();

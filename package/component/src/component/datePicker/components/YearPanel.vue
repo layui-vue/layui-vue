@@ -116,7 +116,7 @@ const scrollTo = () => {
 
 //关闭回调
 const footOnOk = () => {
-  emits("update:modelValue", Year.value?Year.value:-1);
+  emits("update:modelValue", Year.value ? Year.value : -1);
   if (datePicker.range) {
     //关闭菜单
     emits("ok");

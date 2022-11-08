@@ -11,7 +11,7 @@ import { LayIcon } from "@layui/icons-vue";
 import layButton from "../button/index.vue";
 import { ref, watch, withDefaults, computed, Ref } from "vue";
 import { InputNumberSize } from "./interface";
-import { add, sub } from "./math"
+import { add, sub } from "./math";
 
 export interface InputNumberProps {
   modelValue?: number;
