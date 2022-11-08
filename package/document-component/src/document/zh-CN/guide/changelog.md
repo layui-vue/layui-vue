@@ -23,6 +23,8 @@
           <li>[优化] select 组件 label 属性不兼容 number 类型。</li>
           <li>[优化] select-option 组件 label 属性为 null 时, 单选不展示。</li>
           <li>[优化] select-option 组件 label 属性为 null 时, 搜索报错。</li>
+          <li>[修复] datePicker 组件 年选择器 清空后再点击确定回显错误。</li>
+          <li>[优化] datePicker 组件 新增change,blur,foucs事件。</li>
         </ul> 
       </li>
     </ul>
