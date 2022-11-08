@@ -14,7 +14,7 @@
 
 <template>
   {{data1}}
-  <lay-input-number v-model="data1"></lay-input-number>
+  <lay-input-number v-model="data1" :step="0.1"></lay-input-number>
   <lay-input-number v-model="data2"  position="right"></lay-input-number>
 </template>
 

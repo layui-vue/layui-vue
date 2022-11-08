@@ -17,13 +17,13 @@
         <h3>1.7.6 <span class="layui-badge-rim">2022-11-07</span></h3> 
         <ul>
           <li>[新增] page-header 组件 back-icon 属性, 自定义返回图标。</li>
+          <li>[修复] datePicker 组件 年选择器 清空后再点击确定回显错误。</li>
           <li>[修复] select 组件 单选模式 与 多选模式 清空操作样式不统一的问题。</li>
           <li>[修复] select 组件 单选模式 与 多选模式 下拉宽度不一致的问题。</li>
           <li>[修复] select 组件 多选模式 @search 事件不生效的问题。</li>
           <li>[优化] select 组件 label 属性不兼容 number 类型。</li>
           <li>[优化] select-option 组件 label 属性为 null 时, 单选不展示。</li>
           <li>[优化] select-option 组件 label 属性为 null 时, 搜索报错。</li>
-          <li>[修复] datePicker 组件 年选择器 清空后再点击确定回显错误。</li>
           <li>[优化] datePicker 组件 新增change,blur,foucs事件。</li>
         </ul> 
       </li>
