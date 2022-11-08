@@ -303,6 +303,18 @@ export default {
 | contentClass             | 内容自定义Class    | `string` `Array<string \| object>` `object` | -- | -- |-- |
 :::
 
+::: title Date Picker 事件
+:::
+
+::: table
+
+| 事件  | 描述                | 参数                        |
+| ----- | ------------------- | -------------------------- |
+| change| 原生 change 事件    | (value : 同v-model) |
+| focus | 原生 focus事件     | event : Event               |
+| blur  | 原生 blur 事件      | event : Event               |
+:::
+
 ::: contributor datePicker
 :::
 

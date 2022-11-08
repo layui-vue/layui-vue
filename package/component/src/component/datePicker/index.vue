@@ -21,6 +21,8 @@
         v-model="dateValue"
         v-if="!range"
         @change="onChange"
+        @blur="$emit('blur')"
+        @focus="$emit('focus')"
         :allow-clear="!disabled && allowClear"
         :size="size"
         @clear="
@@ -37,6 +39,8 @@
           :placeholder="startPlaceholder"
           :disabled="disabled"
           @change="onChange"
+          @blur="$emit('blur')"
+          @focus="$emit('focus')"
           class="start-input"
           :size="size"
         >
@@ -50,6 +54,8 @@
           v-model="dateValue[1]"
           :disabled="disabled"
           @change="onChange"
+          @blur="$emit('blur')"
+          @focus="$emit('focus')"
           class="end-input"
           :size="size"
           @clear="
@@ -181,7 +187,7 @@ const endPlaceholder = computed(() => {
 });
 
 const dropdownRef = ref(null);
-const $emits = defineEmits(["update:modelValue"]);
+const $emits = defineEmits(["update:modelValue",'change','blur','focus']);
 const hms = ref({
   hh: 0,
   mm: 0,
@@ -261,8 +267,10 @@ const getDateValue = () => {
   }
   if (props.timestamp) {
     $emits("update:modelValue", dayjs(dayjsVal).unix() * 1000);
+    $emits("change",dayjs(dayjsVal).unix() * 1000);
   } else {
     $emits("update:modelValue", dayjsVal);
+    $emits("change",dayjsVal);
   }
   setTimeout(() => {
     unWatch = false;
@@ -273,6 +281,7 @@ const getDateValueByRange = () => {
   if (rangeValue.first === "" || rangeValue.last === "") {
     dateValue.value = ["", ""];
     $emits("update:modelValue", dateValue.value);
+    $emits("change",dateValue.value);
     return;
   }
   let format = "YYYY-MM-DD";
@@ -292,6 +301,7 @@ const getDateValueByRange = () => {
     dayjs(rangeValue.last).format(format),
   ];
   $emits("update:modelValue", dateValue.value);
+  $emits("change",dateValue.value);
   setTimeout(() => {
     unWatch = false;
   }, 0);
