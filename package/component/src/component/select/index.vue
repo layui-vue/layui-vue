@@ -79,7 +79,12 @@ const getOption = (nodes: VNode[], newOptions: any[]) => {
       if (component.name == LaySelectOption.name) {
         if (item.children) {
           // @ts-ignore
-          item.props.label = item.children.default()[0].children;
+          const label = item.children.default()[0].children;
+
+          if(typeof label == "string") {
+            // @ts-ignore
+            item.props.label = label;
+          }
         }
         newOptions.push(item.props);
       }

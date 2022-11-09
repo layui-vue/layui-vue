@@ -260,6 +260,8 @@ export default {
 | disabledPreview | 设置文件预览插槽区域为禁用状态 | boolean  | false  | -- |
 | cut | 是否开启选择图片后检测,设置true可开启 | boolean  | false  | -- |
 | cutOptions | 开启剪裁的模态弹窗与剪裁框的配置 | object  | { layerOption,copperOption }  | -- |
+| text        | 普通上传描述     | string  | --        | -- |
+| dragText        | 拖拽上传描述     | string  | --        | -- |
 
 :::
 

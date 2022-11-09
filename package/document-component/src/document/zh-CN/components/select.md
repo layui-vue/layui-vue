@@ -16,7 +16,7 @@
   <lay-select v-model="value">
     <lay-select-option :value="1" label="学习"></lay-select-option>
     <lay-select-option :value="2" label="编码"></lay-select-option>
-    <lay-select-option :value="3" v-if="true">运动</lay-select-option>
+    <lay-select-option :value="3" label="运动"></lay-select-option>
   </lay-select>
 </template>
 
@@ -47,7 +47,7 @@ export default {
       <lay-select-option :value="2" label="编码"></lay-select-option>
       <lay-select-option :value="3" label="运动"></lay-select-option>
     </lay-select>
-    <lay-button @click="change2"> change ：{{value2}}</lay-button>
+    <lay-button @click="change2"> change ：{{value2}} </lay-button>
   </lay-space>
 </template>
 
@@ -117,15 +117,15 @@ export default {
 
 <template>
   <lay-space>
-    <lay-select v-model="value3" :show-search="true" @search="search">
+    <lay-select v-model="value3" :show-search="true">
     <lay-select-option value="1" label="学习"></lay-select-option>
     <lay-select-option value="2" label="编码"></lay-select-option>
-    <lay-select-option value="3" :label="null"></lay-select-option>
+    <lay-select-option value="3" label="运动"></lay-select-option>
   </lay-select>
-    <lay-select v-model="value4" :show-search="true" :multiple="true" @search="search">
+    <lay-select v-model="value4" :show-search="true" :multiple="true">
     <lay-select-option value="1" label="学习"></lay-select-option>
     <lay-select-option value="2" label="编码"></lay-select-option>
-    <lay-select-option value="3" :label="null"></lay-select-option>
+    <lay-select-option value="3" label="运动"></lay-select-option>
   </lay-select>
   </lay-space>
 </template>
@@ -289,6 +289,35 @@ export default {
 }
 </script>
 :::
+
+::: title 定制选项
+:::
+
+::: demo 使用 `lay-select` 标签, 创建下拉选择框
+
+<template>
+  <lay-select v-model="value">
+    <lay-select-option :value="1" label="学习"></lay-select-option>
+    <lay-select-option :value="2" label="编码"></lay-select-option>
+    <lay-select-option :value="3" label="运动">运动</lay-select-option>
+  </lay-select>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+    const value = ref(null);
+    return {
+      value
+    }
+  }
+}
+</script>
+
+:::
+
 
 ::: title Select 属性
 :::

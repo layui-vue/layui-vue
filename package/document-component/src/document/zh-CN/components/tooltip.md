@@ -84,21 +84,21 @@ export default {
 <template>
   <div style="padding: 100px;max-width:400px;">
     <div style="text-align: center;">
-      <lay-tooltip content="假装这里有文字提示">
+      <lay-tooltip  trigger="click" content="假装这里有文字提示">
         <lay-button>上边</lay-button>
       </lay-tooltip>
     </div>
     <div>
-      <lay-tooltip content="假装这里有文字提示假装这里有文字提示假装这里有文字提示假装这里有文字提示假装这里有文字提示" position="left">
+      <lay-tooltip  trigger="click" content="假装这里有文字提示假装这里有文字提示假装这里有文字提示假装这里有文字提示假装这里有文字提示" position="left">
         <lay-button style="float:left;">左边</lay-button>
       </lay-tooltip>
-      <lay-tooltip content="假装这里有文字提示假装这里有文字提示假装这里有文字提示假装这里有文字提示假装这里有文字提示" position="right">
+      <lay-tooltip  trigger="click" content="假装这里有文字提示假装这里有文字提示假装这里有文字提示假装这里有文字提示假装这里有文字提示" position="right">
         <lay-button style="float:right;">右边</lay-button>
       </lay-tooltip>
       <div style="clear: both;"></div>
     </div>
     <div style="text-align: center;">
-      <lay-tooltip content="假装这里有文字提示假装这里有文字提示假装这里有文字提示假装这里有文字提示" position="bottom">
+      <lay-tooltip  trigger="click" content="假装这里有文字提示假装这里有文字提示假装这里有文字提示假装这里有文字提示" position="bottom">
         <lay-button>下边</lay-button>
       </lay-tooltip>
     </div>

@@ -9,7 +9,7 @@
         @mouseenter="handlerPopperMouseEnter"
         @mouseleave="handlerPopperMouseLeave"
       >
-        <slot>{{ content }}</slot>
+        <slot> {{ content }}</slot>
         <div class="layui-popper-arrow"></div>
       </div>
     </transition>
@@ -110,6 +110,7 @@ const doHidden = function (e?: MouseEvent) {
 };
 
 const calcPosistion = function () {
+
   postionFns[props.position] &&
     (style.value = postionFns[props.position](
       triggerRefEl.value,
@@ -120,9 +121,7 @@ const calcPosistion = function () {
 
 const updatePosistion = function () {
   if (innerVisible.value) {
-    popperRefEl.value.offsetWidth === 0
-      ? nextTick(() => calcPosistion())
-      : calcPosistion();
+    popperRefEl.value.offsetWidth === 0 ? nextTick(() => calcPosistion()) : calcPosistion();
     nextTick(() => {
       calcPosistion();
     });

@@ -68,6 +68,8 @@ export interface UploadProps {
   disabledPreview?: boolean;
   cut?: boolean;
   cutOptions?: CutOptions;
+  text?: string;
+  dragText?: string;
 }
 
 const getCutDownResult = () => {
@@ -103,8 +105,8 @@ const clearAllCutEffect = () => {
 };
 
 const { t } = useI18n();
-const text = computed(() => t("upload.text"));
-const dragText = computed(() => t("upload.dragText"));
+const text = computed(() =>{ return props.text ? props.text : t("upload.text")});
+const dragText = computed(() => { return props.dragText ? props.dragText : t("upload.dragText")});
 const defaultErrorMsg = computed(() => t("upload.defaultErrorMsg"));
 const urlErrorMsg = computed(() => t("upload.urlErrorMsg"));
 const numberErrorMsg = computed(() => t("upload.numberErrorMsg"));
