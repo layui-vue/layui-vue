@@ -1,7 +1,9 @@
 <template>
   <div class="lay-page-header">
     <div class="lay-page-header__left" @click="emits('back')">
-      <slot name="backIcon"><i class="layui-icon" :class="[backIcon]"></i></slot>
+      <slot name="backIcon"
+        ><i class="layui-icon" :class="[backIcon]"></i
+      ></slot>
       <div class="lay-page-header__title">{{ backText }}</div>
     </div>
     <div class="lay-page-header__content">
