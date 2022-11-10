@@ -110,7 +110,6 @@ const doHidden = function (e?: MouseEvent) {
 };
 
 const calcPosistion = function () {
-
   postionFns[props.position] &&
     (style.value = postionFns[props.position](
       triggerRefEl.value,
@@ -121,7 +120,9 @@ const calcPosistion = function () {
 
 const updatePosistion = function () {
   if (innerVisible.value) {
-    popperRefEl.value.offsetWidth === 0 ? nextTick(() => calcPosistion()) : calcPosistion();
+    popperRefEl.value.offsetWidth === 0
+      ? nextTick(() => calcPosistion())
+      : calcPosistion();
     nextTick(() => {
       calcPosistion();
     });

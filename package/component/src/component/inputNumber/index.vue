@@ -89,7 +89,7 @@ const addition = function () {
 };
 
 const subtraction = function () {
-  num.value = Number(sub(num.value, props.step));
+  num.value = sub(num.value, props.step);
 };
 
 const longDown = function (fn: Function) {

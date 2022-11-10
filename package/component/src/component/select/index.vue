@@ -81,7 +81,7 @@ const getOption = (nodes: VNode[], newOptions: any[]) => {
           // @ts-ignore
           const label = item.children.default()[0].children;
 
-          if(typeof label == "string") {
+          if (typeof label == "string") {
             // @ts-ignore
             item.props.label = label;
           }
