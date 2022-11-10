@@ -27,7 +27,7 @@ function add(arg1: number, arg2: number) {
     arg2 = Number(arg2.toString().replace(".", ""));
   }
   return (arg1 + arg2) / m;
-};
+}
 //减法
 function sub(arg1: number, arg2: number) {
   var r1, r2, m, c;
@@ -57,5 +57,5 @@ function sub(arg1: number, arg2: number) {
     arg2 = Number(arg2.toString().replace(".", ""));
   }
   return (arg1 - arg2) / m;
-};
+}
 export { add, sub };

@@ -573,7 +573,7 @@ onClickOutside(dropdownRef, (e) => {
   hide();
 });
 
-const onlyChildRenderFunc = () => {
+const onlyChildRenderFunc = computed(() => {
   const slotContent = slots.default ? slots.default() : [];
   const transformedSlotContent = slotContent.map((vnode) =>
     cloneVNode(
@@ -592,8 +592,8 @@ const onlyChildRenderFunc = () => {
   );
 
   children.value = transformedSlotContent;
-  return h(Fragment, children.value);
-};
+  return () => h(Fragment, children.value);
+});
 
 onMounted(() => {
   if (props.updateAtScroll) {
