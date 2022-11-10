@@ -12,6 +12,20 @@
 <lay-timeline>
   <lay-timeline-item title="1.7.x">
     <ul> 
+      <a name="1-7-7"></a> 
+      <li> 
+        <h3>1.7.7 <span class="layui-badge-rim">2022-11-10</span></h3> 
+        <ul>
+          <li>[新增] upload 组件 text 属性, 设置上传描述。</li>
+          <li>[新增] upload 组件 dragText 属性, 设置拖拽面板提示信息。</li>
+          <li>[修复] input-number 组件 step 设置为小数时精度丢失的问题。</li>
+          <li>[修复] tooltip 组件临近屏幕边界, 三角位置显示错误。</li>
+          <li>[优化] select-option 组件 default 插槽。</li>
+          <li>
+        </ul> 
+      </li>
+    </ul>
+    <ul> 
       <a name="1-7-6"></a> 
       <li> 
         <h3>1.7.6 <span class="layui-badge-rim">2022-11-07</span></h3> 

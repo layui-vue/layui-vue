@@ -20,6 +20,7 @@ import {
   cloneVNode,
   useAttrs,
   StyleValue,
+PropType,
 } from "vue";
 import {
   computed,
@@ -45,7 +46,7 @@ import {
 } from "./interface";
 import TeleportWrapper from "../_components/teleportWrapper.vue";
 import { useFirstElement, isScrollElement, getScrollElements } from "./util";
-import RenderFunction from "../_components/renderFunction";
+import RenderFunction, { RenderFunc } from "../_components/renderFunction";
 import { transformPlacement } from "./util";
 
 export type DropdownTrigger = "click" | "hover" | "focus" | "contextMenu";
@@ -573,7 +574,7 @@ onClickOutside(dropdownRef, (e) => {
   hide();
 });
 
-const onlyChildRenderFunc = computed(() => {
+const onlyChildRenderFunc = () => {
   const slotContent = slots.default ? slots.default() : [];
   const transformedSlotContent = slotContent.map((vnode) =>
     cloneVNode(
@@ -592,8 +593,8 @@ const onlyChildRenderFunc = computed(() => {
   );
 
   children.value = transformedSlotContent;
-  return () => h(Fragment, children.value);
-});
+  return h(Fragment, children.value);
+};
 
 onMounted(() => {
   if (props.updateAtScroll) {
