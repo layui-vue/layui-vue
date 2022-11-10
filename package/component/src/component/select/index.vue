@@ -68,6 +68,7 @@ const multipleValue = ref([]);
 const emits = defineEmits<SelectEmits>();
 const openState: Ref<boolean> = ref(false);
 const options = ref<any>([]);
+const composing = ref(false);
 var timer: any;
 
 const getOption = (nodes: VNode[], newOptions: any[]) => {
@@ -107,6 +108,15 @@ const handleRemove = (value: any) => {
   if (Array.isArray(selectedValue.value)) {
     selectedValue.value = selectedValue.value.filter((item) => item != value);
   }
+};
+
+const onCompositionstart = () => {
+  composing.value = true;
+};
+
+const onCompositionend = (event: Event) => {
+  composing.value = false;
+  handleSearch((event.target as HTMLInputElement).value);
 };
 
 onMounted(() => {
@@ -155,6 +165,7 @@ const multiple = computed(() => {
 });
 
 const handleSearch = (value: string) => {
+  if (composing.value) return;
   emits("search", value);
   searchValue.value = value;
 };
@@ -209,13 +220,15 @@ provide("multiple", multiple);
       </lay-tag-input>
       <lay-input
         v-else
-        v-model="singleValue"
+        :modelValue="singleValue"
         :placeholder="placeholder"
         :allow-clear="allowClear"
         :readonly="!showSearch"
         :disabled="disabled"
         :class="{ 'layui-unselect': !showSearch }"
         :size="size"
+        @compositionstart="onCompositionstart"
+        @compositionend="onCompositionend"
         @Input="handleSearch"
         @clear="handleClear"
       >
@@ -230,9 +243,11 @@ provide("multiple", multiple);
         <dl class="layui-select-content">
           <div class="layui-select-search" v-if="multiple && showSearch">
             <lay-input
-              v-model="searchValue"
+              :modelValue="searchValue"
               :placeholder="searchPlaceholder"
               @Input="handleSearch"
+              @compositionstart="onCompositionstart"
+              @compositionend="onCompositionend"
               prefix-icon="layui-icon-search"
               size="sm"
             ></lay-input>
