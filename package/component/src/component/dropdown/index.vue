@@ -20,7 +20,7 @@ import {
   cloneVNode,
   useAttrs,
   StyleValue,
-PropType,
+  PropType,
 } from "vue";
 import {
   computed,

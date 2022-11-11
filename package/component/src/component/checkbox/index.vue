@@ -13,12 +13,12 @@ import { CheckboxSize } from "./interface";
 export interface CheckboxProps {
   name?: string;
   skin?: string;
-  value: string | number | object;
   label?: string;
-  isIndeterminate?: boolean;
+  value: string | number | object;
   modelValue?: boolean | Array<string | number | object>;
-  disabled?: boolean;
+  isIndeterminate?: boolean;
   size?: CheckboxSize;
+  disabled?: boolean;
 }
 
 const props = withDefaults(defineProps<CheckboxProps>(), {
@@ -113,6 +113,8 @@ const isDisabled = computed(() => {
   }
   return false;
 });
+
+defineExpose({ toggle: handleClick });
 </script>
 
 <template>

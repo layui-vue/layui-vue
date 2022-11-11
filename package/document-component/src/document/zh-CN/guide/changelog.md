@@ -18,9 +18,9 @@
         <ul>
           <li>[新增] upload 组件 text 属性, 设置上传描述。</li>
           <li>[新增] upload 组件 dragText 属性, 设置拖拽面板提示信息。</li>
+          <li>[修复] select-option 组件 default 插槽内容为多层元素时, 使用 label 属性值作为回显。</li>
           <li>[修复] input-number 组件 step 设置为小数时精度丢失的问题。</li>
           <li>[修复] tooltip 组件临近屏幕边界, 三角位置显示错误。</li>
-          <li>[优化] select-option 组件 default 插槽。</li>
           <li>
         </ul> 
       </li>
