@@ -12,7 +12,7 @@ import {
   inject,
   WritableComputedRef,
   Ref,
-  ref
+  ref,
 } from "vue";
 
 export interface SelectOptionProps {
@@ -30,18 +30,20 @@ const props = withDefaults(defineProps<SelectOptionProps>(), {
 
 const searchValue: Ref<string> = inject("searchValue") as Ref<string>;
 const selectRef: Ref<HTMLElement> = inject("selectRef") as Ref<HTMLElement>;
-const selectedValue: WritableComputedRef<any> = inject("selectedValue") as WritableComputedRef<any>;
+const selectedValue: WritableComputedRef<any> = inject(
+  "selectedValue"
+) as WritableComputedRef<any>;
 const multiple: ComputedRef = inject("multiple") as ComputedRef;
 const checkboxRef = ref<HTMLElement>();
 
 const handleSelect = () => {
-  if(multiple.value) {
-    if(!props.disabled) {
+  if (multiple.value) {
+    if (!props.disabled) {
       // @ts-ignore
       checkboxRef.value?.toggle();
     }
   } else {
-    if(!props.disabled) {
+    if (!props.disabled) {
       // @ts-ignore
       selectRef.value.hide();
       selectedValue.value = props.value;
@@ -66,25 +68,21 @@ const display = computed(() => {
 
 const classes = computed(() => {
   return [
-    'layui-select-option',
+    "layui-select-option",
     {
       "layui-this": selected.value,
       "layui-disabled": props.disabled,
-    }
-  ]
-})
+    },
+  ];
+});
 </script>
 
 <template>
-  <dd
-    v-show="display"
-    :class="classes"
-    @click="handleSelect"
-  >
+  <dd v-show="display" :class="classes" @click="handleSelect">
     <template v-if="multiple">
       <lay-checkbox
         skin="primary"
-        ref="checkboxRef" 
+        ref="checkboxRef"
         v-model="selectedValue"
         :disabled="disabled"
         :value="value"

@@ -14,21 +14,23 @@
     <ul> 
       <a name="1-7-7"></a> 
       <li> 
-        <h3>1.7.7 <span class="layui-badge-rim">2022-11-10</span></h3> 
+        <h3>1.7.7 <span class="layui-badge-rim">2022-11-11</span></h3> 
         <ul>
           <li>[新增] upload 组件 text 属性, 设置上传描述。</li>
           <li>[新增] upload 组件 dragText 属性, 设置拖拽面板提示信息。</li>
           <li>[修复] select-option 组件 default 插槽内容为多层元素时, 使用 label 属性值作为回显。</li>
           <li>[修复] input-number 组件 step 设置为小数时精度丢失的问题。</li>
           <li>[修复] tooltip 组件临近屏幕边界, 三角位置显示错误。</li>
-          <li>
+          <li>[优化] select-option 组件 多选 模式只能点击复选框的问题。</li>
+          <li>[优化] select 组件 search 事件在拼字时触发的问题。</li>
+          <li>[优化] select 组件 change 事件触发时机不恰当的问题。</li>
         </ul> 
       </li>
     </ul>
     <ul> 
       <a name="1-7-6"></a> 
       <li> 
-        <h3>1.7.6 <span class="layui-badge-rim">2022-11-07</span></h3> 
+        <h3>1.7.6 <span class="layui-badge-rim">2022-11-09</span></h3> 
         <ul>
           <li>[新增] page-header 组件 back-icon 插槽, 自定义返回图标。</li>
           <li>[新增] page-header 组件 back-icon 属性, 自定义返回图标。</li>
