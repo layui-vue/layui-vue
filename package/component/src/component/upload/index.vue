@@ -17,6 +17,7 @@ import {
   ref,
   useSlots,
   withDefaults,
+  watch,
 } from "vue";
 import { templateRef } from "@vueuse/core";
 import { LayLayer } from "@layui/layer-vue";
@@ -70,6 +71,7 @@ export interface UploadProps {
   cutOptions?: CutOptions;
   text?: string;
   dragText?: string;
+  modelValue?: any;
 }
 
 const getCutDownResult = () => {
@@ -83,6 +85,11 @@ const getCutDownResult = () => {
       Object.assign({ currentTimeStamp, cutResult: imgData, orginal: orgInfo })
     );
     let newFile = dataURLtoFile(imgData);
+    if (isInFormItem.value) {
+      emit("update:modelValue", [newFile]);
+      clearLightCutEffect();
+      return;
+    }
     commonUploadTransaction([newFile]);
     nextTick(() => clearAllCutEffect());
   } else {
@@ -101,6 +108,13 @@ const clearAllCutEffect = () => {
   activeUploadFilesImgs.value = [];
   innerCutVisible.value = false;
   (orgFileInput.value as HTMLInputElement).value = "";
+  _cropper = null;
+};
+
+const clearLightCutEffect = () => {
+  activeUploadFiles.value = [];
+  activeUploadFilesImgs.value = [];
+  innerCutVisible.value = false;
   _cropper = null;
 };
 
@@ -148,6 +162,7 @@ const props = withDefaults(defineProps<UploadProps>(), {
   disabledPreview: false,
   cut: false,
   cutOptions: void 0,
+  modelValue: null,
 });
 
 const slot = useSlots();
@@ -160,7 +175,20 @@ const emit = defineEmits([
   "error",
   "cutdone",
   "cutcancel",
+  "update:modelValue",
 ]);
+
+const isInFormItem = computed(() => context?.parent?.type.name === 'LayFormItem');
+
+watch(
+  () => props.modelValue,
+  () => {
+    if (!props.modelValue) {
+      clearAllCutEffect();
+    }
+  }
+);
+
 
 const isDragEnter = ref(false);
 const activeUploadFiles = ref<any[]>([]);
@@ -219,7 +247,7 @@ const localUploadTransaction = (option: localUploadTransaction) => {
 
 const dataURLtoFile = (dataurl: string) => {
   let arr: any[] = dataurl.split(",");
-  let mime: string = "";
+  let mime = "";
   if (arr.length > 0) {
     mime = arr[0].match(/:(.*?);/)[1];
   }
@@ -323,12 +351,13 @@ const uploadChange = (e: any) => {
   }
   let arm1 =
     props.cut &&
-    props.acceptMime.indexOf("image") != -1 &&
+    (props.acceptMime.indexOf("image") != -1 || isInFormItem.value) &&
     props.multiple == false;
   let arm2 =
     props.cut &&
-    props.acceptMime.indexOf("image") != -1 &&
+    (props.acceptMime.indexOf("image") != -1 || isInFormItem.value) &&
     props.multiple == true;
+  
   if (arm1) {
     innerCutVisible.value = true;
     setTimeout(() => {
@@ -346,6 +375,10 @@ const uploadChange = (e: any) => {
   } else {
     if (arm2) {
       console.warn(cannotSupportCutMsg.value);
+    }
+    if (isInFormItem.value) {
+      emit("update:modelValue", _files);
+      return;
     }
     commonUploadTransaction(_files);
   }
