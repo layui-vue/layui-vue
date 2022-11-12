@@ -173,6 +173,9 @@ export default {
     <lay-form-item label="描述" prop="desc">
       <lay-textarea placeholder="请输入描述" v-model="validateModel.desc"></lay-textarea>
     </lay-form-item>
+    <lay-form-item label="文件" prop="file">
+      <lay-upload v-model="validateModel.file" :cut="true"/>
+    </lay-form-item>
     <lay-form-item>
       <lay-button @click="validate">提交</lay-button>
       <lay-button @click="clearValidate">清除校验</lay-button>
@@ -192,7 +195,8 @@ export default {
         username: "",
         password: "",
         specialty: "1",
-        hobbys: ""
+        hobbys: "",
+        file: null,
     })
 
     const layFormRef = ref(null);
