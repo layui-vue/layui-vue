@@ -197,10 +197,7 @@ onMounted(() => {
 });
 
 onBeforeUnmount(() => {
-  scrollTarget.value?.removeEventListener(
-    "scroll",
-    callback
-  );
+  scrollTarget.value?.removeEventListener("scroll", callback);
 });
 </script>
 
