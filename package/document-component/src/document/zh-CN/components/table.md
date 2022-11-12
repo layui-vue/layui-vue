@@ -1387,7 +1387,6 @@ export default {
 ::: demo 使用了绝大部分属性的 table 案例
 
 <template>
-  <lay-button @click="changeMaxHeight"></lay-button>
   <lay-table 
       id="id" 
       :max-height="maxHeight5"
@@ -1427,10 +1426,6 @@ export default {
     const checkbox5 = ref(true)
     const defaultToolbar5 = ref(true)
     const maxHeight5 = ref('600px');
-
-    const changeMaxHeight = () => {
-      maxHeight5.value = '200px'
-    }
 
     const page5 = {
       total: 100,
