@@ -72,6 +72,7 @@ export interface UploadProps {
   text?: string;
   dragText?: string;
   modelValue?: any;
+  withForm?: boolean;
 }
 
 const getCutDownResult = () => {
@@ -85,7 +86,7 @@ const getCutDownResult = () => {
       Object.assign({ currentTimeStamp, cutResult: imgData, orginal: orgInfo })
     );
     let newFile = dataURLtoFile(imgData);
-    if (isInFormItem.value) {
+    if (isInFormItem.value && props.withForm) {
       emit("update:modelValue", [newFile]);
       clearLightCutEffect();
       return;
@@ -163,6 +164,7 @@ const props = withDefaults(defineProps<UploadProps>(), {
   cut: false,
   cutOptions: void 0,
   modelValue: null,
+  withForm: false,
 });
 
 const slot = useSlots();
@@ -178,7 +180,9 @@ const emit = defineEmits([
   "update:modelValue",
 ]);
 
-const isInFormItem = computed(() => context?.parent?.type.name === 'LayFormItem');
+const isInFormItem = computed(
+  () => context?.parent?.type.name === "LayFormItem"
+);
 
 watch(
   () => props.modelValue,
@@ -188,7 +192,6 @@ watch(
     }
   }
 );
-
 
 const isDragEnter = ref(false);
 const activeUploadFiles = ref<any[]>([]);
@@ -265,7 +268,7 @@ const errorF = (errorText: string) => {
   let errorMsg = errorText ? errorText : defaultErrorMsg;
   errorMsg = `layui-vue:${errorMsg}`;
   console.warn(errorMsg);
-  layer.msg(errorMsg, { icon: 2, time: 1000 }, function (res: unknown) {});
+  layer.msg(errorMsg, { icon: 2, time: 1000 }, function (res: unknown) { });
   emit("error", Object.assign({ currentTimeStamp, msg: errorMsg }));
 };
 
@@ -351,13 +354,13 @@ const uploadChange = (e: any) => {
   }
   let arm1 =
     props.cut &&
-    (props.acceptMime.indexOf("image") != -1 || isInFormItem.value) &&
+    props.acceptMime.indexOf("image") != -1 &&
     props.multiple == false;
   let arm2 =
     props.cut &&
-    (props.acceptMime.indexOf("image") != -1 || isInFormItem.value) &&
+    props.acceptMime.indexOf("image") != -1 &&
     props.multiple == true;
-  
+
   if (arm1) {
     innerCutVisible.value = true;
     setTimeout(() => {
@@ -376,7 +379,7 @@ const uploadChange = (e: any) => {
     if (arm2) {
       console.warn(cannotSupportCutMsg.value);
     }
-    if (isInFormItem.value) {
+    if (isInFormItem.value && props.withForm) {
       emit("update:modelValue", _files);
       return;
     }
@@ -442,22 +445,9 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div
-    class="layui-upload layui-upload-wrap"
-    :class="disabledPreview ? 'layui-upload-file-disabled' : ''"
-  >
-    <input
-      type="file"
-      class="layui-upload-file"
-      ref="orgFileInput"
-      :name="field"
-      :field="field"
-      :multiple="multiple"
-      :accept="acceptMime"
-      :disabled="disabled"
-      @click="clickOrgInput"
-      @change="uploadChange"
-    />
+  <div class="layui-upload layui-upload-wrap" :class="disabledPreview ? 'layui-upload-file-disabled' : ''">
+    <input type="file" class="layui-upload-file" ref="orgFileInput" :name="field" :field="field" :multiple="multiple"
+      :accept="acceptMime" :disabled="disabled" @click="clickOrgInput" @change="uploadChange" />
     <div v-if="!drag">
       <div class="layui-upload-btn-box" @click.stop="chooseFile">
         <template v-if="slot.default">
@@ -465,24 +455,18 @@ onUnmounted(() => {
         </template>
         <template v-else>
           <lay-button type="primary" :disabled="disabled">{{
-            text
+              text
           }}</lay-button>
         </template>
       </div>
     </div>
-    <div
-      v-else
-      ref="dragRef"
-      class="layui-upload-drag"
-      :class="
-        disabled
-          ? 'layui-upload-drag-disable'
-          : isDragEnter
+    <div v-else ref="dragRef" class="layui-upload-drag" :class="
+      disabled
+        ? 'layui-upload-drag-disable'
+        : isDragEnter
           ? 'layui-upload-drag-draging'
           : ''
-      "
-      @click.stop="chooseFile"
-    >
+    " @click.stop="chooseFile">
       <i class="layui-icon"></i>
       <p>{{ dragText }}</p>
       <div class="layui-hide" id="uploadDemoView">
@@ -490,38 +474,17 @@ onUnmounted(() => {
         <img src="" alt="上传成功后渲染" style="max-width: 196px" />
       </div>
     </div>
-    <lay-layer
-      v-model="innerCutVisible"
-      :title="computedCutLayerOption.title"
-      :move="computedCutLayerOption.move"
-      :resize="computedCutLayerOption.resize"
-      :shade="computedCutLayerOption.shade"
-      :shadeClose="computedCutLayerOption.shadeClose"
-      :shadeOpacity="computedCutLayerOption.shadeOpacity"
-      :zIndex="computedCutLayerOption.zIndex"
-      :btnAlign="computedCutLayerOption.btnAlign"
-      :area="computedCutLayerOption.area"
-      :anim="computedCutLayerOption.anim"
-      :isOutAnim="computedCutLayerOption.isOutAnim"
-      :btn="computedCutLayerOption.btn"
-      @close="clearAllCutEffect"
-    >
-      <div
-        class="copper-container"
-        v-for="(base64str, index) in activeUploadFilesImgs"
-        :key="`file${index}`"
-      >
-        <img
-          :src="base64str"
-          :id="`_lay_upload_img${index}`"
-          class="_lay_upload_img"
-        />
+    <lay-layer v-model="innerCutVisible" :title="computedCutLayerOption.title" :move="computedCutLayerOption.move"
+      :resize="computedCutLayerOption.resize" :shade="computedCutLayerOption.shade"
+      :shadeClose="computedCutLayerOption.shadeClose" :shadeOpacity="computedCutLayerOption.shadeOpacity"
+      :zIndex="computedCutLayerOption.zIndex" :btnAlign="computedCutLayerOption.btnAlign"
+      :area="computedCutLayerOption.area" :anim="computedCutLayerOption.anim"
+      :isOutAnim="computedCutLayerOption.isOutAnim" :btn="computedCutLayerOption.btn" @close="clearAllCutEffect">
+      <div class="copper-container" v-for="(base64str, index) in activeUploadFilesImgs" :key="`file${index}`">
+        <img :src="base64str" :id="`_lay_upload_img${index}`" class="_lay_upload_img" />
       </div>
     </lay-layer>
-    <div
-      class="layui-upload-list"
-      :class="disabledPreview ? 'layui-upload-list-disabled' : ''"
-    >
+    <div class="layui-upload-list" :class="disabledPreview ? 'layui-upload-list-disabled' : ''">
       <slot name="preview"></slot>
     </div>
   </div>

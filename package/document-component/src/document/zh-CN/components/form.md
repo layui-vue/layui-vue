@@ -174,7 +174,7 @@ export default {
       <lay-textarea placeholder="请输入描述" v-model="validateModel.desc"></lay-textarea>
     </lay-form-item>
     <lay-form-item label="文件" prop="file">
-      <lay-upload v-model="validateModel.file" :cut="true"/>
+      <lay-upload v-model="validateModel.file" :cut="true" acceptMime="images" :withForm="true"/>
     </lay-form-item>
     <lay-form-item>
       <lay-button @click="validate">提交</lay-button>
