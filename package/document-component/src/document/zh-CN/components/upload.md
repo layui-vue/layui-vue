@@ -262,7 +262,7 @@ export default {
 | cutOptions | 开启剪裁的模态弹窗与剪裁框的配置 | object  | { layerOption,copperOption }  | -- |
 | text        | 普通上传描述     | string  | --        | -- |
 | dragText        | 拖拽上传描述     | string  | --        | -- |
-| withForm        | 是否跟随表单提交     | boolean  |  false       | -- |
+| auto        | 是否自动提交     | boolean  |  false       | -- |
 
 :::
 

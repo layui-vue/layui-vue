@@ -72,7 +72,7 @@ export interface UploadProps {
   text?: string;
   dragText?: string;
   modelValue?: any;
-  withForm?: boolean;
+  auto?: boolean;
 }
 
 const getCutDownResult = () => {
@@ -86,7 +86,7 @@ const getCutDownResult = () => {
       Object.assign({ currentTimeStamp, cutResult: imgData, orginal: orgInfo })
     );
     let newFile = dataURLtoFile(imgData);
-    if (isInFormItem.value && props.withForm) {
+    if (!props.auto) {
       emit("update:modelValue", [newFile]);
       clearLightCutEffect();
       return;
@@ -164,7 +164,7 @@ const props = withDefaults(defineProps<UploadProps>(), {
   cut: false,
   cutOptions: void 0,
   modelValue: null,
-  withForm: false,
+  auto: true,
 });
 
 const slot = useSlots();
@@ -179,10 +179,6 @@ const emit = defineEmits([
   "cutcancel",
   "update:modelValue",
 ]);
-
-const isInFormItem = computed(
-  () => context?.parent?.type.name === "LayFormItem"
-);
 
 watch(
   () => props.modelValue,
@@ -379,7 +375,7 @@ const uploadChange = (e: any) => {
     if (arm2) {
       console.warn(cannotSupportCutMsg.value);
     }
-    if (isInFormItem.value && props.withForm) {
+    if (!props.auto) {
       emit("update:modelValue", _files);
       return;
     }
