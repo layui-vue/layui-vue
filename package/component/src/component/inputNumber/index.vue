@@ -11,6 +11,7 @@ import { LayIcon } from "@layui/icons-vue";
 import layButton from "../button/index.vue";
 import { ref, watch, withDefaults, computed, Ref } from "vue";
 import { InputNumberSize } from "./interface";
+import { add, sub } from "./math";
 
 export interface InputNumberProps {
   modelValue?: number;
@@ -84,11 +85,11 @@ const maxControl = computed(() => {
 });
 
 const addition = function () {
-  num.value += Number(props.step);
+  num.value = add(num.value, props.step);
 };
 
 const subtraction = function () {
-  num.value -= Number(props.step);
+  num.value = sub(num.value, props.step);
 };
 
 const longDown = function (fn: Function) {

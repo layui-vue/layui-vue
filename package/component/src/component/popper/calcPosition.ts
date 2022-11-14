@@ -14,6 +14,8 @@ const postionFns: any = {
     ) {
       innnerPosition.value = "bottom";
       top = bottom;
+    } else {
+      innnerPosition.value = "top";
     }
     return {
       top: `${top}px`,
@@ -30,6 +32,8 @@ const postionFns: any = {
     if (window.innerHeight - bottom < popper.offsetHeight + 6) {
       innnerPosition.value = "top";
       bottom = top - popper.offsetHeight - 6;
+    } else {
+      innnerPosition.value = "bottom";
     }
     return {
       top: `${bottom}px`,
@@ -47,6 +51,8 @@ const postionFns: any = {
     if (left < 0) {
       innnerPosition.value = "right";
       left = right;
+    } else {
+      innnerPosition.value = "left";
     }
     return {
       top: `${top - (popper.offsetHeight - el.offsetHeight) / 2}px`,
@@ -63,6 +69,8 @@ const postionFns: any = {
     if (window.innerWidth < right + popper.offsetWidth + 6) {
       innnerPosition.value = "left";
       right = left - popper.offsetWidth - 6;
+    } else {
+      innnerPosition.value = "right";
     }
     return {
       top: `${top - (popper.offsetHeight - el.offsetHeight) / 2}px`,

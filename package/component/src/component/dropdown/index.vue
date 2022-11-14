@@ -20,6 +20,7 @@ import {
   cloneVNode,
   useAttrs,
   StyleValue,
+  PropType,
 } from "vue";
 import {
   computed,
@@ -45,7 +46,7 @@ import {
 } from "./interface";
 import TeleportWrapper from "../_components/teleportWrapper.vue";
 import { useFirstElement, isScrollElement, getScrollElements } from "./util";
-import RenderFunction from "../_components/renderFunction";
+import RenderFunction, { RenderFunc } from "../_components/renderFunction";
 import { transformPlacement } from "./util";
 
 export type DropdownTrigger = "click" | "hover" | "focus" | "contextMenu";

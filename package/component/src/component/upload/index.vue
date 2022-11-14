@@ -17,6 +17,7 @@ import {
   ref,
   useSlots,
   withDefaults,
+  watch
 } from "vue";
 import { templateRef } from "@vueuse/core";
 import { LayLayer } from "@layui/layer-vue";
@@ -68,6 +69,10 @@ export interface UploadProps {
   disabledPreview?: boolean;
   cut?: boolean;
   cutOptions?: CutOptions;
+  text?: string;
+  dragText?: string;
+  modelValue?: any;
+  auto?: boolean;
 }
 
 const getCutDownResult = () => {
@@ -81,6 +86,11 @@ const getCutDownResult = () => {
       Object.assign({ currentTimeStamp, cutResult: imgData, orginal: orgInfo })
     );
     let newFile = dataURLtoFile(imgData);
+    if (!props.auto) {
+      emit("update:modelValue", [newFile]);
+      clearLightCutEffect();
+      return;
+    }
     commonUploadTransaction([newFile]);
     nextTick(() => clearAllCutEffect());
   } else {
@@ -102,9 +112,20 @@ const clearAllCutEffect = () => {
   _cropper = null;
 };
 
+const clearLightCutEffect = () => {
+  activeUploadFiles.value = [];
+  activeUploadFilesImgs.value = [];
+  innerCutVisible.value = false;
+  _cropper = null;
+};
+
 const { t } = useI18n();
-const text = computed(() => t("upload.text"));
-const dragText = computed(() => t("upload.dragText"));
+const text = computed(() => {
+  return props.text ? props.text : t("upload.text");
+});
+const dragText = computed(() => {
+  return props.dragText ? props.dragText : t("upload.dragText");
+});
 const defaultErrorMsg = computed(() => t("upload.defaultErrorMsg"));
 const urlErrorMsg = computed(() => t("upload.urlErrorMsg"));
 const numberErrorMsg = computed(() => t("upload.numberErrorMsg"));
@@ -142,6 +163,8 @@ const props = withDefaults(defineProps<UploadProps>(), {
   disabledPreview: false,
   cut: false,
   cutOptions: void 0,
+  modelValue: null,
+  auto: true,
 });
 
 const slot = useSlots();
@@ -149,19 +172,30 @@ const slots = slot.default && slot.default();
 const context = getCurrentInstance();
 const emit = defineEmits([
   "choose",
+  "chooseAfter",
   "before",
   "done",
   "error",
   "cutdone",
   "cutcancel",
+  "update:modelValue",
 ]);
+
+watch(
+  () => props.modelValue,
+  () => {
+    if (!props.modelValue) {
+      clearAllCutEffect();
+    }
+  }
+);
 
 const isDragEnter = ref(false);
 const activeUploadFiles = ref<any[]>([]);
 const activeUploadFilesImgs = ref<any[]>([]);
 const orgFileInput = templateRef<HTMLElement>("orgFileInput");
-let _cropper: any = null;
 
+let _cropper: any = null;
 let computedCutLayerOption: ComputedRef<LayerModal>;
 
 if (props.cutOptions && props.cutOptions.layerOption) {
@@ -213,7 +247,7 @@ const localUploadTransaction = (option: localUploadTransaction) => {
 
 const dataURLtoFile = (dataurl: string) => {
   let arr: any[] = dataurl.split(",");
-  let mime: string = "";
+  let mime = "";
   if (arr.length > 0) {
     mime = arr[0].match(/:(.*?);/)[1];
   }
@@ -231,14 +265,13 @@ const errorF = (errorText: string) => {
   let errorMsg = errorText ? errorText : defaultErrorMsg;
   errorMsg = `layui-vue:${errorMsg}`;
   console.warn(errorMsg);
-  layer.msg(errorMsg, { icon: 2, time: 1000 }, function (res: unknown) {});
+  layer.msg(errorMsg, { icon: 2, time: 1000 }, function (res: unknown) { });
   emit("error", Object.assign({ currentTimeStamp, msg: errorMsg }));
 };
 
 const localUpload = (option: localUploadOption, callback: Function) => {
-  let xhr: XMLHttpRequest, url;
-  xhr = new XMLHttpRequest();
-  url = option.url;
+  let xhr: XMLHttpRequest = new XMLHttpRequest();
+  let url = option.url;
   let formData = option.formData;
   const cb = callback;
   xhr.onreadystatechange = function () {
@@ -319,10 +352,12 @@ const uploadChange = (e: any) => {
     props.cut &&
     props.acceptMime.indexOf("image") != -1 &&
     props.multiple == false;
+
   let arm2 =
     props.cut &&
     props.acceptMime.indexOf("image") != -1 &&
     props.multiple == true;
+
   if (arm1) {
     innerCutVisible.value = true;
     setTimeout(() => {
@@ -340,6 +375,10 @@ const uploadChange = (e: any) => {
   } else {
     if (arm2) {
       console.warn(cannotSupportCutMsg.value);
+    }
+    if (!props.auto) {
+      emit("update:modelValue", _files);
+      return;
     }
     commonUploadTransaction(_files);
   }
@@ -403,22 +442,9 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div
-    class="layui-upload layui-upload-wrap"
-    :class="disabledPreview ? 'layui-upload-file-disabled' : ''"
-  >
-    <input
-      type="file"
-      class="layui-upload-file"
-      ref="orgFileInput"
-      :name="field"
-      :field="field"
-      :multiple="multiple"
-      :accept="acceptMime"
-      :disabled="disabled"
-      @click="clickOrgInput"
-      @change="uploadChange"
-    />
+  <div class="layui-upload layui-upload-wrap" :class="disabledPreview ? 'layui-upload-file-disabled' : ''">
+    <input type="file" class="layui-upload-file" ref="orgFileInput" :name="field" :field="field" :multiple="multiple"
+      :accept="acceptMime" :disabled="disabled" @click="clickOrgInput" @change="uploadChange" />
     <div v-if="!drag">
       <div class="layui-upload-btn-box" @click.stop="chooseFile">
         <template v-if="slot.default">
@@ -426,24 +452,18 @@ onUnmounted(() => {
         </template>
         <template v-else>
           <lay-button type="primary" :disabled="disabled">{{
-            text
+              text
           }}</lay-button>
         </template>
       </div>
     </div>
-    <div
-      v-else
-      ref="dragRef"
-      class="layui-upload-drag"
-      :class="
-        disabled
-          ? 'layui-upload-drag-disable'
-          : isDragEnter
+    <div v-else ref="dragRef" class="layui-upload-drag" :class="
+      disabled
+        ? 'layui-upload-drag-disable'
+        : isDragEnter
           ? 'layui-upload-drag-draging'
           : ''
-      "
-      @click.stop="chooseFile"
-    >
+    " @click.stop="chooseFile">
       <i class="layui-icon"></i>
       <p>{{ dragText }}</p>
       <div class="layui-hide" id="uploadDemoView">
@@ -451,38 +471,17 @@ onUnmounted(() => {
         <img src="" alt="上传成功后渲染" style="max-width: 196px" />
       </div>
     </div>
-    <lay-layer
-      v-model="innerCutVisible"
-      :title="computedCutLayerOption.title"
-      :move="computedCutLayerOption.move"
-      :resize="computedCutLayerOption.resize"
-      :shade="computedCutLayerOption.shade"
-      :shadeClose="computedCutLayerOption.shadeClose"
-      :shadeOpacity="computedCutLayerOption.shadeOpacity"
-      :zIndex="computedCutLayerOption.zIndex"
-      :btnAlign="computedCutLayerOption.btnAlign"
-      :area="computedCutLayerOption.area"
-      :anim="computedCutLayerOption.anim"
-      :isOutAnim="computedCutLayerOption.isOutAnim"
-      :btn="computedCutLayerOption.btn"
-      @close="clearAllCutEffect"
-    >
-      <div
-        class="copper-container"
-        v-for="(base64str, index) in activeUploadFilesImgs"
-        :key="`file${index}`"
-      >
-        <img
-          :src="base64str"
-          :id="`_lay_upload_img${index}`"
-          class="_lay_upload_img"
-        />
+    <lay-layer v-model="innerCutVisible" :title="computedCutLayerOption.title" :move="computedCutLayerOption.move"
+      :resize="computedCutLayerOption.resize" :shade="computedCutLayerOption.shade"
+      :shadeClose="computedCutLayerOption.shadeClose" :shadeOpacity="computedCutLayerOption.shadeOpacity"
+      :zIndex="computedCutLayerOption.zIndex" :btnAlign="computedCutLayerOption.btnAlign"
+      :area="computedCutLayerOption.area" :anim="computedCutLayerOption.anim"
+      :isOutAnim="computedCutLayerOption.isOutAnim" :btn="computedCutLayerOption.btn" @close="clearAllCutEffect">
+      <div class="copper-container" v-for="(base64str, index) in activeUploadFilesImgs" :key="`file${index}`">
+        <img :src="base64str" :id="`_lay_upload_img${index}`" class="_lay_upload_img" />
       </div>
     </lay-layer>
-    <div
-      class="layui-upload-list"
-      :class="disabledPreview ? 'layui-upload-list-disabled' : ''"
-    >
+    <div class="layui-upload-list" :class="disabledPreview ? 'layui-upload-list-disabled' : ''">
       <slot name="preview"></slot>
     </div>
   </div>

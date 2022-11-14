@@ -174,7 +174,7 @@ const getScrollParent = (
     }
   }
   // @ts-ignore
-  return document.documentElement || document.body || window;
+  return window;
 };
 
 // 节流
@@ -189,18 +189,15 @@ const throttle = (func: Function, wait: number) => {
     }
   };
 };
-
+const callback = throttle(handleScroll, 300);
 onMounted(() => {
   if (!props.target) return;
   scrollTarget.value = getScrollTarget();
-  scrollTarget.value.addEventListener("scroll", throttle(handleScroll, 300));
+  scrollTarget.value.addEventListener("scroll", callback);
 });
 
 onBeforeUnmount(() => {
-  scrollTarget.value?.removeEventListener(
-    "scroll",
-    throttle(handleScroll, 300)
-  );
+  scrollTarget.value?.removeEventListener("scroll", callback);
 });
 </script>
 

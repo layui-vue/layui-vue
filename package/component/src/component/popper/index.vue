@@ -9,7 +9,7 @@
         @mouseenter="handlerPopperMouseEnter"
         @mouseleave="handlerPopperMouseLeave"
       >
-        <slot>{{ content }}</slot>
+        <slot> {{ content }}</slot>
         <div class="layui-popper-arrow"></div>
       </div>
     </transition>

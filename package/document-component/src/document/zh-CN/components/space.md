@@ -40,7 +40,7 @@ export default {
 
 <template>
   <lay-space direction="vertical" fill wrap>
-    <lay-button v-for="idx of 5" type="normal" fluid="true">按钮 {{idx}}</lay-button>
+    <lay-button v-for="idx of 5" type="normal" :fluid="true">按钮 {{idx}}</lay-button>
   </lay-space>
 </template>
 

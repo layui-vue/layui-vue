@@ -151,6 +151,7 @@ export default {
 ::: demo
 
 <template>
+{{ validateModel }}
   <lay-form :model="validateModel" ref="layFormRef" required>
     <lay-form-item label="账户" prop="username">
       <lay-input v-model="validateModel.username"></lay-input>
@@ -173,8 +174,11 @@ export default {
     <lay-form-item label="描述" prop="desc">
       <lay-textarea placeholder="请输入描述" v-model="validateModel.desc"></lay-textarea>
     </lay-form-item>
+    <lay-form-item label="文件" prop="file">
+      <lay-upload v-model="validateModel.file" acceptMime="image/*" :auto="false"/>
+    </lay-form-item>
     <lay-form-item>
-      <lay-button @click="validate">提交</lay-button>
+      <lay-button @click="validate3">提交</lay-button>
       <lay-button @click="clearValidate">清除校验</lay-button>
       <lay-button @click="reset">重置表单</lay-button>
     </lay-form-item>
@@ -192,13 +196,15 @@ export default {
         username: "",
         password: "",
         specialty: "1",
-        hobbys: ""
+        hobbys: "",
+        file: null,
     })
 
     const layFormRef = ref(null);
     // 校验
-    const validate = function() {
+    const validate3= function() {
       layFormRef.value.validate((isValidate, model, errors) => {
+          console.log(JSON.stringify(model.file))
          layer.open({
           type: 1,
           title:"表单提交结果", 
@@ -225,7 +231,7 @@ export default {
     return {
       validateModel,
       layFormRef,
-      validate,
+      validate3,
       clearValidate,
       reset
     }

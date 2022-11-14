@@ -12,7 +12,7 @@ import {
   inject,
   WritableComputedRef,
   Ref,
-  onMounted,
+  ref,
 } from "vue";
 
 export interface SelectOptionProps {
@@ -34,13 +34,20 @@ const selectedValue: WritableComputedRef<any> = inject(
   "selectedValue"
 ) as WritableComputedRef<any>;
 const multiple: ComputedRef = inject("multiple") as ComputedRef;
+const checkboxRef = ref<HTMLElement>();
 
 const handleSelect = () => {
-  if (!multiple.value && !props.disabled) {
-    // @ts-ignore
-    selectRef.value.hide();
-    selectedValue.value = props.value;
-    select();
+  if (multiple.value) {
+    if (!props.disabled) {
+      // @ts-ignore
+      checkboxRef.value?.toggle();
+    }
+  } else {
+    if (!props.disabled) {
+      // @ts-ignore
+      selectRef.value.hide();
+      selectedValue.value = props.value;
+    }
   }
 };
 
@@ -52,18 +59,6 @@ const selected = computed(() => {
   }
 });
 
-const select = () => {
-  if (multiple.value) {
-    if (Array.isArray(selectedValue.value)) {
-      if (notChecked.value) selectedValue.value.push(props.value);
-    } else {
-      selectedValue.value = [props.value];
-    }
-  } else {
-    selectedValue.value = props.value;
-  }
-};
-
 const display = computed(() => {
   return (
     props.keyword?.toString().indexOf(searchValue.value) > -1 ||
@@ -71,34 +66,26 @@ const display = computed(() => {
   );
 });
 
-const notChecked = computed(() => {
-  return (
-    selectedValue.value.find((item: any) => {
-      return item === props.value;
-    }) === undefined
-  );
-});
-
-onMounted(() => {
-  selected.value && select();
+const classes = computed(() => {
+  return [
+    "layui-select-option",
+    {
+      "layui-this": selected.value,
+      "layui-disabled": props.disabled,
+    },
+  ];
 });
 </script>
 
 <template>
-  <dd
-    v-show="display"
-    :class="[
-      'layui-select-option',
-      { 'layui-this': selected, 'layui-disabled': disabled },
-    ]"
-    @click="handleSelect"
-  >
+  <dd v-show="display" :class="classes" @click="handleSelect">
     <template v-if="multiple">
       <lay-checkbox
+        skin="primary"
+        ref="checkboxRef"
         v-model="selectedValue"
         :disabled="disabled"
         :value="value"
-        skin="primary"
       ></lay-checkbox>
     </template>
     <slot>{{ label }}</slot>

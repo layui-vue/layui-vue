@@ -24,6 +24,9 @@ const handleBack=()=>{
 
 :::
 
+::: title 设置标题
+:::
+
 ::: demo 使用 `backText` 属性  自定义返回文本
 
 <template>
@@ -38,8 +41,9 @@ const handleBack=()=>{
 
 :::
 
-::: title PageHeader 插槽
+::: title 使用插槽
 :::
+
 ::: demo 使用 默认插槽可以自定义右侧内容  同时content属性将失效
 
 <template>
@@ -71,7 +75,7 @@ const handleBack=()=>{
 | ------ | ---- | -------------- |
 | content| 标题,当前默认插槽不为空时失效 | --             |
 | backText| 返回文本 | 默认 "返回"            |
-
+| backIcon| 返回图标 | 内置图标集            |
 :::
 
 ::: title PageHeader 事件
@@ -84,6 +88,19 @@ const handleBack=()=>{
 | back| 点击返回回调 |
 
 :::
+
+::: title PageHeader 插槽
+:::
+
+::: table
+
+| 属性   | 描述 |
+| ------ | ---- | 
+| default | 标题内容 |
+| backIcon| 返回图标 |
+
+:::
+
 
 ::: contributor pageHeader
 :::  
