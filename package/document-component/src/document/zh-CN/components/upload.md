@@ -13,11 +13,9 @@
 ::: demo 使用 `lay-upload` 标签, 创建一个上传按钮
 
 <template>
-  <lay-upload url="https://www.mocky.io/v2/5cc8019d300000980a055e76" @done="doneHandle" field="bigFile" @choose="beginChoose">
+  <lay-upload url="https://www.mocky.io/v2/5cc8019d300000980a055e76" field="file" @done="doneHandle">
     <template #preview>
-      <div v-for="(item,index) in picList" :key="`demo1-pic-'${index}`">
-        <img :src="item"/>
-      </div>
+      <img v-if="data" :src="data.url" style="width: 100px;"/>
     </template>
   </lay-upload>
 </template>
@@ -27,34 +25,47 @@ import { ref,reactive } from 'vue'
 
 export default {
   setup() {
-    const picList = ref([]);
-    const filetoDataURL=(file,fn)=>{
-      const reader = new FileReader();
-      reader.onloadend = function(e){
-        fn(e.target.result);
-      };
-      reader.readAsDataURL(file);
+
+    const data = ref();
+
+    const doneHandle = (result) => {
+      data.value = JSON.parse(result.data);
+      console.log(data.value.url)
     };
-    const doneHandle=(files)=>{
-      console.log("触发")
-      if(Array.isArray(files)&&files.length>0){
-        files.forEach((file,index,array)=>{
-          filetoDataURL(file,(res)=>{
-            console.log(res);
-            picList.value.push(res);
-            console.log(picList.value);
-          });
-        });
-      }
-    };
-    const beginChoose =(e)=>{
-      console.log("beginChoose",e);
-    };
+
     return {
       doneHandle,
-      filetoDataURL,
-      beginChoose,
-      picList
+      data
+    }
+  }
+}
+</script>
+
+:::
+
+::: title 手动上传
+:::
+
+::: demo 使用 `lay-upload` 标签, 创建一个上传按钮
+
+<template>
+  <lay-upload url="https://www.mocky.io/v2/5cc8019d300000980a055e76" v-model="file1" field="file" :auto="false">
+    <template #preview>
+      {{ file1 }}
+    </template>
+  </lay-upload>
+</template>
+
+<script>
+import { ref,reactive } from 'vue'
+
+export default {
+  setup() {
+
+    const file1 = ref();
+
+    return {
+      file1
     }
   }
 }

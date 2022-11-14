@@ -17,7 +17,7 @@ import {
   ref,
   useSlots,
   withDefaults,
-  watch,
+  watch
 } from "vue";
 import { templateRef } from "@vueuse/core";
 import { LayLayer } from "@layui/layer-vue";
@@ -172,6 +172,7 @@ const slots = slot.default && slot.default();
 const context = getCurrentInstance();
 const emit = defineEmits([
   "choose",
+  "chooseAfter",
   "before",
   "done",
   "error",
@@ -193,8 +194,8 @@ const isDragEnter = ref(false);
 const activeUploadFiles = ref<any[]>([]);
 const activeUploadFilesImgs = ref<any[]>([]);
 const orgFileInput = templateRef<HTMLElement>("orgFileInput");
-let _cropper: any = null;
 
+let _cropper: any = null;
 let computedCutLayerOption: ComputedRef<LayerModal>;
 
 if (props.cutOptions && props.cutOptions.layerOption) {
@@ -269,9 +270,8 @@ const errorF = (errorText: string) => {
 };
 
 const localUpload = (option: localUploadOption, callback: Function) => {
-  let xhr: XMLHttpRequest, url;
-  xhr = new XMLHttpRequest();
-  url = option.url;
+  let xhr: XMLHttpRequest = new XMLHttpRequest();
+  let url = option.url;
   let formData = option.formData;
   const cb = callback;
   xhr.onreadystatechange = function () {
@@ -352,6 +352,7 @@ const uploadChange = (e: any) => {
     props.cut &&
     props.acceptMime.indexOf("image") != -1 &&
     props.multiple == false;
+
   let arm2 =
     props.cut &&
     props.acceptMime.indexOf("image") != -1 &&
