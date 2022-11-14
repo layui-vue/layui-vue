@@ -36,6 +36,7 @@
                 'laydate-range-hover': ifHasRangeHoverClass(
                   getUnix(item, 'left')
                 ),
+                'layui-laydate-current':(startTime.unix === -1 || endTime.unix === -1)&&getUnix(item, 'left')===dayjs().startOf('month').valueOf()
               }"
               @click="handleMonthClick(getUnix(item, 'left'))"
               @mouseenter="monthItemMouseEnter($event, item)"
@@ -80,6 +81,7 @@
                 'laydate-range-hover': ifHasRangeHoverClass(
                   getUnix(item, 'right')
                 ),
+                'layui-laydate-current':(startTime.unix === -1 || endTime.unix === -1)&&getUnix(item, 'right')===dayjs().startOf('month').valueOf()
               }"
               @click="handleMonthClick(getUnix(item, 'right'))"
               @mouseenter="monthItemMouseEnter($event, item)"

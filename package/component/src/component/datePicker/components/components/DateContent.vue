@@ -27,6 +27,7 @@
                     (item.value == startDate || item.value == endDate)),
                 'laydate-range-hover': ifHasRangeHoverClass(item),
                 'layui-disabled': item.type !== 'current' && datePicker.range,
+                'layui-laydate-current':modelValue===-1&&item.value===dayjs().startOf('day').valueOf()
               }"
               @click="handleDayClick(item)"
               @mouseenter="dayItemMouseEnter($event, item)"
@@ -48,6 +49,7 @@ export default {
 import { useI18n } from "../../../../language";
 import { computed, inject } from "vue";
 import { provideType } from "../../interface";
+import dayjs from "dayjs";
 
 export interface DateContentProps {
   dateList: any;

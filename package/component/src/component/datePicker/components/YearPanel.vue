@@ -18,7 +18,10 @@
         <li
           v-for="item of yearList"
           :key="item"
-          :class="{ 'layui-this': Year === item }"
+          :class="{ 
+            'layui-this': Year === item, 
+            'layui-laydate-current':!Year&&item===dayjs().year()
+          }"
           @click="handleYearClick(item)"
         >
           {{ item }}
