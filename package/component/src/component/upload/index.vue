@@ -17,7 +17,7 @@ import {
   ref,
   useSlots,
   withDefaults,
-  watch
+  watch,
 } from "vue";
 import { templateRef } from "@vueuse/core";
 import { LayLayer } from "@layui/layer-vue";
@@ -265,7 +265,7 @@ const errorF = (errorText: string) => {
   let errorMsg = errorText ? errorText : defaultErrorMsg;
   errorMsg = `layui-vue:${errorMsg}`;
   console.warn(errorMsg);
-  layer.msg(errorMsg, { icon: 2, time: 1000 }, function (res: unknown) { });
+  layer.msg(errorMsg, { icon: 2, time: 1000 }, function (res: unknown) {});
   emit("error", Object.assign({ currentTimeStamp, msg: errorMsg }));
 };
 
@@ -442,9 +442,22 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="layui-upload layui-upload-wrap" :class="disabledPreview ? 'layui-upload-file-disabled' : ''">
-    <input type="file" class="layui-upload-file" ref="orgFileInput" :name="field" :field="field" :multiple="multiple"
-      :accept="acceptMime" :disabled="disabled" @click="clickOrgInput" @change="uploadChange" />
+  <div
+    class="layui-upload layui-upload-wrap"
+    :class="disabledPreview ? 'layui-upload-file-disabled' : ''"
+  >
+    <input
+      type="file"
+      class="layui-upload-file"
+      ref="orgFileInput"
+      :name="field"
+      :field="field"
+      :multiple="multiple"
+      :accept="acceptMime"
+      :disabled="disabled"
+      @click="clickOrgInput"
+      @change="uploadChange"
+    />
     <div v-if="!drag">
       <div class="layui-upload-btn-box" @click.stop="chooseFile">
         <template v-if="slot.default">
@@ -452,18 +465,24 @@ onUnmounted(() => {
         </template>
         <template v-else>
           <lay-button type="primary" :disabled="disabled">{{
-              text
+            text
           }}</lay-button>
         </template>
       </div>
     </div>
-    <div v-else ref="dragRef" class="layui-upload-drag" :class="
-      disabled
-        ? 'layui-upload-drag-disable'
-        : isDragEnter
+    <div
+      v-else
+      ref="dragRef"
+      class="layui-upload-drag"
+      :class="
+        disabled
+          ? 'layui-upload-drag-disable'
+          : isDragEnter
           ? 'layui-upload-drag-draging'
           : ''
-    " @click.stop="chooseFile">
+      "
+      @click.stop="chooseFile"
+    >
       <i class="layui-icon"></i>
       <p>{{ dragText }}</p>
       <div class="layui-hide" id="uploadDemoView">
@@ -471,17 +490,38 @@ onUnmounted(() => {
         <img src="" alt="上传成功后渲染" style="max-width: 196px" />
       </div>
     </div>
-    <lay-layer v-model="innerCutVisible" :title="computedCutLayerOption.title" :move="computedCutLayerOption.move"
-      :resize="computedCutLayerOption.resize" :shade="computedCutLayerOption.shade"
-      :shadeClose="computedCutLayerOption.shadeClose" :shadeOpacity="computedCutLayerOption.shadeOpacity"
-      :zIndex="computedCutLayerOption.zIndex" :btnAlign="computedCutLayerOption.btnAlign"
-      :area="computedCutLayerOption.area" :anim="computedCutLayerOption.anim"
-      :isOutAnim="computedCutLayerOption.isOutAnim" :btn="computedCutLayerOption.btn" @close="clearAllCutEffect">
-      <div class="copper-container" v-for="(base64str, index) in activeUploadFilesImgs" :key="`file${index}`">
-        <img :src="base64str" :id="`_lay_upload_img${index}`" class="_lay_upload_img" />
+    <lay-layer
+      v-model="innerCutVisible"
+      :title="computedCutLayerOption.title"
+      :move="computedCutLayerOption.move"
+      :resize="computedCutLayerOption.resize"
+      :shade="computedCutLayerOption.shade"
+      :shadeClose="computedCutLayerOption.shadeClose"
+      :shadeOpacity="computedCutLayerOption.shadeOpacity"
+      :zIndex="computedCutLayerOption.zIndex"
+      :btnAlign="computedCutLayerOption.btnAlign"
+      :area="computedCutLayerOption.area"
+      :anim="computedCutLayerOption.anim"
+      :isOutAnim="computedCutLayerOption.isOutAnim"
+      :btn="computedCutLayerOption.btn"
+      @close="clearAllCutEffect"
+    >
+      <div
+        class="copper-container"
+        v-for="(base64str, index) in activeUploadFilesImgs"
+        :key="`file${index}`"
+      >
+        <img
+          :src="base64str"
+          :id="`_lay_upload_img${index}`"
+          class="_lay_upload_img"
+        />
       </div>
     </lay-layer>
-    <div class="layui-upload-list" :class="disabledPreview ? 'layui-upload-list-disabled' : ''">
+    <div
+      class="layui-upload-list"
+      :class="disabledPreview ? 'layui-upload-list-disabled' : ''"
+    >
       <slot name="preview"></slot>
     </div>
   </div>

@@ -248,6 +248,7 @@ html #layuicss-laydate {
   line-height: 26px;
   padding: 10px;
 }
+
 .layui-laydate-footer span {
   display: inline-block;
   vertical-align: top;
@@ -272,26 +273,31 @@ html #layuicss-laydate {
   border-bottom-right-radius: 2px;
 }
 
+.layui-laydate-footer span:not(:last-child) {
+  border-right: none;
+}
+
 .layui-laydate-footer span:hover {
   color: #5fb878;
 }
+
 .layui-laydate-footer span.layui-laydate-preview {
   cursor: default;
   border-color: transparent !important;
 }
+
 .layui-laydate-footer span.layui-laydate-preview:hover {
   color: #666;
 }
+
 .layui-laydate-footer span:first-child.layui-laydate-preview {
   padding-left: 0;
 }
+
 .laydate-footer-btns {
   position: absolute;
   right: 10px;
   top: 10px;
-}
-.laydate-footer-btns span {
-  margin: 0 0 0 -1px;
 }
 
 /* 年月列表 */

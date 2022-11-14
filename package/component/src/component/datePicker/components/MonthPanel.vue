@@ -16,9 +16,10 @@
         <li
           v-for="item of MONTH_NAME"
           :key="item"
-          :class="{ 
+          :class="{
             'layui-this': MONTH_NAME.indexOf(item) === Month,
-            'layui-laydate-current':Month===''&&parseInt(item)-1===dayjs().month()
+            'layui-laydate-current':
+              Month === '' && parseInt(item) - 1 === dayjs().month(),
           }"
           @click="handleMonthClick(item)"
         >

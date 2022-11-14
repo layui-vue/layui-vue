@@ -27,7 +27,9 @@
                     (item.value == startDate || item.value == endDate)),
                 'laydate-range-hover': ifHasRangeHoverClass(item),
                 'layui-disabled': item.type !== 'current' && datePicker.range,
-                'layui-laydate-current':modelValue===-1&&item.value===dayjs().startOf('day').valueOf()
+                'layui-laydate-current':
+                  modelValue === -1 &&
+                  item.value === dayjs().startOf('day').valueOf(),
               }"
               @click="handleDayClick(item)"
               @mouseenter="dayItemMouseEnter($event, item)"
