@@ -255,13 +255,23 @@ html #layuicss-laydate {
   line-height: 24px;
   padding: 0 10px;
   border: 1px solid #c9c9c9;
-  border-radius: 2px;
   background-color: #fff;
   font-size: 12px;
   cursor: pointer;
   white-space: nowrap;
   transition: all 0.3s;
 }
+
+.layui-laydate-footer span:first-child {
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+}
+
+.layui-laydate-footer span:last-child {
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+}
+
 .layui-laydate-footer span:hover {
   color: #5fb878;
 }
