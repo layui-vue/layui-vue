@@ -55,7 +55,7 @@ const classTag = computed(() => [
 
 const styleTag = computed(() => [
   {
-    "max-width": props.maxWidth ?? "unset",
+    "max-width": props.maxWidth ?? "100%",
     ...useTagCustomStyle(props).value,
   },
 ]);
@@ -105,10 +105,12 @@ function useTagCustomStyle(props: TagProps) {
     <span v-if="$slots.icon" class="layui-tag-icon">
       <slot name="icon" />
     </span>
-    <span v-if="maxWidth" :style="styleTag" class="layui-tag-text">
-      <slot />
+    <span style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;">
+      <span v-if="maxWidth" :style="styleTag" class="layui-tag-text">
+        <slot />
+      </span>
+      <slot v-else />
     </span>
-    <slot v-else />
     <span
       v-if="closable"
       class="layui-tag-close-icon"
