@@ -1270,25 +1270,31 @@ export default {
         title:"名称",
         width:"200px",
         key:"username"
-      },{
+      },
+      {
         title:"地址",
         children: [
           { title: "省", key: "province", width: "300px" },
           { title: "市", key: "city", width: "300px" },
           { title: "区", key: "area", width: "300px" },
         ]
-      },{
-        title:"性别",
-        key:"sex"
-      },{
-        title:"年龄",
-        width: "300px",
-        key:"age"
-      },{
+      },
+      {
         title:"备注",
         width: "180px",
         key:"remark",
-        ellipsisTooltip: true
+        ellipsisTooltip: true,
+        children: [
+          {
+            title:"性别",
+            key:"sex"
+          },{
+            title:"年龄",
+            width: "300px",
+            totalRow:"统计",
+            key:"age"
+          }
+        ]
       }
     ]
 

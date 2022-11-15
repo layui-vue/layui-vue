@@ -518,9 +518,7 @@ const childrenExpandSpace = computed(() => {
   );
 });
 
-/**
- * @remark 排除 hide 列
- */
+
 const renderFixedStyle = (column: any, columnIndex: number) => {
   if (column.fixed) {
     if (column.fixed == "left") {
@@ -554,6 +552,51 @@ const renderFixedStyle = (column: any, columnIndex: number) => {
       if (
         props.columns[i].fixed == undefined &&
         tableColumnKeys.value.includes(props.columns[i].key)
+      ) {
+        isLast = false;
+      }
+    }
+    return isLast ? ({ "border-right": "none" } as StyleValue) : {};
+  }
+  return {} as StyleValue;
+};
+
+/**
+ * @remark 排除 hide 列
+ */
+const renderHeadFixedStyle = (column: any, columnIndex: number, tableHeadColumn: any[]) => {
+  if (column.fixed) {
+    if (column.fixed == "left") {
+      var left = 0;
+      for (var i = 0; i < columnIndex; i++) {
+        if (
+          props.columns[i].fixed &&
+          props.columns[i].fixed == "left" &&
+          tableColumnKeys.value.includes(props.columns[i].key)
+        ) {
+          left = left + Number(props.columns[i]?.width?.replace("px", ""));
+        }
+      }
+      return { left: `${left}px` } as StyleValue;
+    } else {
+      var right = 0;
+      for (var i = columnIndex + 1; i < props.columns.length; i++) {
+        if (
+          props.columns[i].fixed &&
+          props.columns[i].fixed == "right" &&
+          tableColumnKeys.value.includes(props.columns[i].key)
+        ) {
+          right = right + Number(props.columns[i]?.width?.replace("px", ""));
+        }
+      }
+      return { right: `${right}px` } as StyleValue;
+    }
+  } else {
+    var isLast = true;
+    for (var i = columnIndex + 1; i < tableHeadColumn.length; i++) {
+      if (
+        tableHeadColumn[i].fixed == undefined &&
+        tableColumnKeys.value.includes(tableHeadColumn[i].key)
       ) {
         isLast = false;
       }
@@ -739,7 +782,7 @@ onBeforeUnmount(() => {
                           {
                             textAlign: column.align,
                           },
-                          renderFixedStyle(column, columnIndex),
+                          renderHeadFixedStyle(column, columnIndex, tableHeadColumn),
                         ]"
                       >
                         <template v-if="column.type == 'checkbox'">
