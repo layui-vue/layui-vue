@@ -1430,7 +1430,7 @@ export default {
 
     const selectedKeys5 = ref(['1'])
     const checkbox5 = ref(true)
-    const defaultToolbar5 = ref(true)
+    const defaultToolbar5 = ref(['print'])
     const maxHeight5 = ref('600px');
 
     const page5 = {

@@ -32,7 +32,7 @@ export interface TableProps {
   page?: Recordable;
   columns: Recordable[];
   dataSource: Recordable[];
-  defaultToolbar?: boolean | Recordable[];
+  defaultToolbar?: boolean | any[];
   selectedKey?: string;
   selectedKeys?: Recordable[];
   indentSize?: number;
@@ -60,6 +60,7 @@ const props = withDefaults(defineProps<TableProps>(), {
   childrenColumnName: "children",
   dataSource: () => [],
   selectedKeys: () => [],
+  defaultToolbar: false,
   selectedKey: "",
   maxHeight: "auto",
   even: false,
@@ -518,7 +519,6 @@ const childrenExpandSpace = computed(() => {
   );
 });
 
-
 const renderFixedStyle = (column: any, columnIndex: number) => {
   if (column.fixed) {
     if (column.fixed == "left") {
@@ -564,7 +564,11 @@ const renderFixedStyle = (column: any, columnIndex: number) => {
 /**
  * @remark 排除 hide 列
  */
-const renderHeadFixedStyle = (column: any, columnIndex: number, tableHeadColumn: any[]) => {
+const renderHeadFixedStyle = (
+  column: any,
+  columnIndex: number,
+  tableHeadColumn: any[]
+) => {
   if (column.fixed) {
     if (column.fixed == "left") {
       var left = 0;
@@ -671,6 +675,13 @@ const totalRowMethod = (column: any, dataSource: any[]) => {
   return total;
 };
 
+const showToolbar = (toolbarName: string) => {
+  if(props.defaultToolbar instanceof Array) {
+    return props.defaultToolbar.includes(toolbarName)
+  }
+  return props.defaultToolbar;
+}
+
 onBeforeUnmount(() => {
   window.onresize = null;
 });
@@ -685,7 +696,8 @@ onBeforeUnmount(() => {
           <slot name="toolbar"></slot>
         </div>
         <div v-if="defaultToolbar" class="layui-table-tool-self">
-          <lay-dropdown updateAtScroll>
+
+          <lay-dropdown updateAtScroll v-if="showToolbar('filter')">
             <div class="layui-inline" title="筛选" lay-event>
               <i class="layui-icon layui-icon-slider"></i>
             </div>
@@ -703,7 +715,9 @@ onBeforeUnmount(() => {
               </div>
             </template>
           </lay-dropdown>
+
           <div
+            v-if="showToolbar('export')"
             class="layui-inline"
             title="导出"
             lay-event
@@ -711,7 +725,8 @@ onBeforeUnmount(() => {
           >
             <i class="layui-icon layui-icon-export"></i>
           </div>
-          <div class="layui-inline" title="打印" lay-event @click="print()">
+
+          <div class="layui-inline" v-if="showToolbar('print')" title="打印" lay-event @click="print()">
             <i class="layui-icon layui-icon-print"></i>
           </div>
         </div>
@@ -782,7 +797,11 @@ onBeforeUnmount(() => {
                           {
                             textAlign: column.align,
                           },
-                          renderHeadFixedStyle(column, columnIndex, tableHeadColumn),
+                          renderHeadFixedStyle(
+                            column,
+                            columnIndex,
+                            tableHeadColumn
+                          ),
                         ]"
                       >
                         <template v-if="column.type == 'checkbox'">

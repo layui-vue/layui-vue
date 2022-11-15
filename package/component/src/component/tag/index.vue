@@ -105,7 +105,9 @@ function useTagCustomStyle(props: TagProps) {
     <span v-if="$slots.icon" class="layui-tag-icon">
       <slot name="icon" />
     </span>
-    <span style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;">
+    <span
+      style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap"
+    >
       <span v-if="maxWidth" :style="styleTag" class="layui-tag-text">
         <slot />
       </span>
