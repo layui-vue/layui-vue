@@ -178,6 +178,11 @@ const handleClear = () => {
   }
 };
 
+const handleHide = () => {
+  searchValue.value = "";
+  openState.value = false;
+}
+
 provide("selectRef", selectRef);
 provide("openState", openState);
 provide("selectedValue", selectedValue);
@@ -194,7 +199,7 @@ provide("multiple", multiple);
       :contentStyle="contentStyle"
       :update-at-scroll="true"
       :autoFitWidth="true"
-      @hide="openState = false"
+      @hide="handleHide"
       @show="openState = true"
     >
       <lay-tag-input
@@ -220,13 +225,13 @@ provide("multiple", multiple);
       </lay-tag-input>
       <lay-input
         v-else
-        :modelValue="singleValue"
-        :placeholder="placeholder"
-        :allow-clear="allowClear"
-        :readonly="!showSearch"
-        :disabled="disabled"
-        :class="{ 'layui-unselect': !showSearch }"
         :size="size"
+        :disabled="disabled"
+        :readonly="!showSearch"
+        :modelValue="singleValue"
+        :allow-clear="allowClear"
+        :placeholder="placeholder"
+        :class="{ 'layui-unselect': !showSearch }"
         @compositionstart="onCompositionstart"
         @compositionend="onCompositionend"
         @Input="handleSearch"
@@ -243,13 +248,13 @@ provide("multiple", multiple);
         <dl class="layui-select-content">
           <div class="layui-select-search" v-if="multiple && showSearch">
             <lay-input
+              size="sm"
+              prefix-icon="layui-icon-search"
               :modelValue="searchValue"
               :placeholder="searchPlaceholder"
-              @Input="handleSearch"
               @compositionstart="onCompositionstart"
               @compositionend="onCompositionend"
-              prefix-icon="layui-icon-search"
-              size="sm"
+              @input="handleSearch"
             ></lay-input>
           </div>
           <template v-if="items">

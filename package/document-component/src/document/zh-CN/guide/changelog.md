@@ -21,6 +21,8 @@
           <li>[优化] tag-input 组件 maxWidth 属性默认为 100%。</li>
           <li>[优化] tag-input 组件 tagWidth 超出 input 宽度时自动省略文本。</li>
           <li>[优化] table 组件 default-toolbar 属性支持 Array 类型, 举例：['print']。</li>
+          <li>[优化] select 组件 dropdown 关闭时统一清空 search 内容。</li>
+          <li></li>
         </ul> 
       </li>
     </ul>
