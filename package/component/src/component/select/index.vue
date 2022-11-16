@@ -181,7 +181,7 @@ const handleClear = () => {
 const handleHide = () => {
   searchValue.value = "";
   openState.value = false;
-}
+};
 
 provide("selectRef", selectRef);
 provide("openState", openState);

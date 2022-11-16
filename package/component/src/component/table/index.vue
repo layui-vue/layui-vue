@@ -676,11 +676,11 @@ const totalRowMethod = (column: any, dataSource: any[]) => {
 };
 
 const showToolbar = (toolbarName: string) => {
-  if(props.defaultToolbar instanceof Array) {
-    return props.defaultToolbar.includes(toolbarName)
+  if (props.defaultToolbar instanceof Array) {
+    return props.defaultToolbar.includes(toolbarName);
   }
   return props.defaultToolbar;
-}
+};
 
 onBeforeUnmount(() => {
   window.onresize = null;
@@ -696,7 +696,6 @@ onBeforeUnmount(() => {
           <slot name="toolbar"></slot>
         </div>
         <div v-if="defaultToolbar" class="layui-table-tool-self">
-
           <lay-dropdown updateAtScroll v-if="showToolbar('filter')">
             <div class="layui-inline" title="筛选" lay-event>
               <i class="layui-icon layui-icon-slider"></i>
@@ -726,7 +725,13 @@ onBeforeUnmount(() => {
             <i class="layui-icon layui-icon-export"></i>
           </div>
 
-          <div class="layui-inline" v-if="showToolbar('print')" title="打印" lay-event @click="print()">
+          <div
+            class="layui-inline"
+            v-if="showToolbar('print')"
+            title="打印"
+            lay-event
+            @click="print()"
+          >
             <i class="layui-icon layui-icon-print"></i>
           </div>
         </div>
