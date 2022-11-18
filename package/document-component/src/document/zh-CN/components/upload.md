@@ -46,12 +46,12 @@ export default {
 ::: title 手动上传
 :::
 
-::: demo 使用 `lay-upload` 标签, 创建一个上传按钮
+::: demo 通过设置 `auto` 属性为 `false`, 使用 `v-model` 接收选择的文件对象。
 
 <template>
   <lay-upload url="https://www.mocky.io/v2/5cc8019d300000980a055e76" v-model="file1" field="file" :auto="false">
     <template #preview>
-      {{ file1 }}
+      {{ file1[0]?.name }}
     </template>
   </lay-upload>
 </template>
@@ -62,7 +62,7 @@ import { ref,reactive } from 'vue'
 export default {
   setup() {
 
-    const file1 = ref();
+    const file1 = ref([]);
 
     return {
       file1
