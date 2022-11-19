@@ -196,7 +196,7 @@ import { ref, nextTick } from 'vue';
 
 export default {
   setup() {
-    const tagData = ref(['Tag', 'Selected', 'Tags']);
+    const tagData = ref(['Tag', 'Selected1111111111111111111111111111111', 'Tags']);
     const inputRef = ref(null);
     const showInput = ref(false);
     const inputVal = ref('');
