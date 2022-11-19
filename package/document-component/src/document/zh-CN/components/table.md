@@ -308,7 +308,7 @@ export default {
     ]
 
     const dataSource7 = [
-      {id: "1", name:"系统管理11111111111111111111111111111111111111111111111", score:100, children: [{id: "3", name:"用户管理", score:99},{id: "5", name:"角色管理", score:96,children: [{id: "7", name:"用户管理", score:99},{id: "8", name:"角色管理", score:96}]}]},
+      {id: "1", name:"系统管理", score:100, children: [{id: "3", name:"用户管理", score:99},{id: "5", name:"角色管理", score:96,children: [{id: "7", name:"用户管理", score:99},{id: "8", name:"角色管理", score:96}]}]},
       {id: "2", name:"电商管理", score:100, children: [{id: "4", name:"商品管理", score:11},{id: "6", name:"分类管理", score:22}]},
     ]
 
