@@ -10,7 +10,7 @@
 ::: title 基础使用
 :::
 
-::: demo 使用 `color` 属性设置颜色
+::: demo 使用 `lay-icon` 标签创建一个图标。
 
 <template>
   <lay-icon type="layui-icon-face-smile"></lay-icon> &nbsp;

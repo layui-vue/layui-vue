@@ -36,7 +36,7 @@ const changeVisible = () => {
 ::: title 淡入淡出
 :::
 
-::: demo 使用 `type` 属性，设置过渡方式。
+::: demo 通过 `type` 属性，设置你要采用的过渡效果。
 
 <template>
   <lay-button @click="changeVisible1">开始</lay-button>

@@ -486,51 +486,53 @@ const radioProps = props.getRadioProps(props.data, props.index);
                 column.fixed ? `layui-table-fixed-${column.fixed}` : '',
               ]"
             >
-              <span
-                v-if="expandSpace && columnIndex === expandIndex"
-                :style="{ 'margin-right': currentIndentSize + 'px' }"
-              ></span>
+              <div style="display: flex">
+                <span
+                  v-if="expandSpace && columnIndex === expandIndex"
+                  :style="{ 'margin-right': currentIndentSize + 'px' }"
+                ></span>
 
-              <span
-                v-if="
-                  expandSpace &&
-                  !data[childrenColumnName] &&
-                  !slot.expand &&
-                  columnIndex === expandIndex
-                "
-                class="layui-table-cell-expand-icon-spaced"
-              ></span>
+                <span
+                  v-if="
+                    expandSpace &&
+                    !data[childrenColumnName] &&
+                    !slot.expand &&
+                    columnIndex === expandIndex
+                  "
+                  class="layui-table-cell-expand-icon-spaced"
+                ></span>
 
-              <lay-icon
-                v-if="
-                  (slot.expand || data[childrenColumnName]) &&
-                  columnIndex === expandIndex
-                "
-                class="layui-table-cell-expand-icon"
-                :type="expandIconType"
-                @click="handleExpand"
-              ></lay-icon>
+                <lay-icon
+                  v-if="
+                    (slot.expand || data[childrenColumnName]) &&
+                    columnIndex === expandIndex
+                  "
+                  class="layui-table-cell-expand-icon"
+                  :type="expandIconType"
+                  @click="handleExpand"
+                ></lay-icon>
 
-              <lay-tooltip v-if="column.ellipsisTooltip" :isAutoShow="true">
-                <slot
-                  :name="column.customSlot"
-                  :data="data"
-                  :column="column"
-                ></slot>
-                <template #content>
+                <lay-tooltip v-if="column.ellipsisTooltip" :isAutoShow="true">
                   <slot
                     :name="column.customSlot"
                     :data="data"
                     :column="column"
                   ></slot>
-                </template>
-              </lay-tooltip>
-              <slot
-                v-else
-                :name="column.customSlot"
-                :data="data"
-                :column="column"
-              ></slot>
+                  <template #content>
+                    <slot
+                      :name="column.customSlot"
+                      :data="data"
+                      :column="column"
+                    ></slot>
+                  </template>
+                </lay-tooltip>
+                <slot
+                  v-else
+                  :name="column.customSlot"
+                  :data="data"
+                  :column="column"
+                ></slot>
+              </div>
             </td>
           </template>
 
@@ -558,39 +560,42 @@ const radioProps = props.getRadioProps(props.data, props.index);
                 column.fixed ? `layui-table-fixed-${column.fixed}` : '',
               ]"
             >
-              <span
-                v-if="expandSpace && columnIndex === expandIndex"
-                :style="{ 'margin-right': currentIndentSize + 'px' }"
-              ></span>
+              <div style="display: flex">
+                <span
+                  v-if="expandSpace && columnIndex === expandIndex"
+                  :style="{ 'margin-right': currentIndentSize + 'px' }"
+                ></span>
 
-              <span
-                v-if="
-                  expandSpace &&
-                  !data[childrenColumnName] &&
-                  !slot.expand &&
-                  columnIndex === expandIndex
-                "
-                class="layui-table-cell-expand-icon-spaced"
-              ></span>
+                <span
+                  v-if="
+                    expandSpace &&
+                    !data[childrenColumnName] &&
+                    !slot.expand &&
+                    columnIndex === expandIndex
+                  "
+                  class="layui-table-cell-expand-icon-spaced"
+                ></span>
 
-              <lay-icon
-                v-if="
-                  (slot.expand || data[childrenColumnName]) &&
-                  columnIndex === expandIndex
-                "
-                class="layui-table-cell-expand-icon"
-                :type="expandIconType"
-                @click="handleExpand"
-              ></lay-icon>
+                <lay-icon
+                  v-if="
+                    (slot.expand || data[childrenColumnName]) &&
+                    columnIndex === expandIndex
+                  "
+                  class="layui-table-cell-expand-icon"
+                  :type="expandIconType"
+                  @click="handleExpand"
+                ></lay-icon>
 
-              <lay-tooltip
-                v-if="column.ellipsisTooltip"
-                :content="data[column.key]"
-                :isAutoShow="true"
-              >
-                {{ data[column.key] }}
-              </lay-tooltip>
-              <span v-else> {{ data[column.key] }} </span>
+                <lay-tooltip
+                  v-if="column.ellipsisTooltip"
+                  :content="data[column.key]"
+                  :isAutoShow="true"
+                >
+                  {{ data[column.key] }}
+                </lay-tooltip>
+
+                <span v-else> {{ data[column.key] }} </span>
+              </div>
             </td>
           </template>
         </template>

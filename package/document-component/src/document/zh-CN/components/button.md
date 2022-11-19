@@ -10,7 +10,7 @@
 ::: title 基础使用
 :::
 
-::: demo 使用 `lay-button` 标签, 创建一个按钮
+::: demo 使用 `lay-button` 标签, 创建一个按钮。
 
 <template>
   <lay-button type="primary">原始按钮</lay-button>
@@ -37,7 +37,7 @@ export default {
 ::: title 简约按钮
 :::
 
-::: demo 使用 `border` 属性设置边框颜色
+::: demo 通过 `border` 属性设置边框颜色
 
 <template>
   <lay-button>原始按钮</lay-button>
@@ -64,7 +64,7 @@ export default {
 ::: title 次要按钮
 :::
 
-::: demo 使用 `border-style` 属性设置边框样式
+::: demo 通过 `border-style` 属性设置边框样式。
 
 <template>
   <lay-button border-style="dashed">原始按钮</lay-button>
@@ -91,7 +91,7 @@ export default {
 ::: title 按钮尺寸
 :::
 
-::: demo 使用 `size` 属性, 创建指定尺寸的按钮, 可选值 `lg` `sm` `xs`
+::: demo 通过 `size` 属性, 创建指定尺寸的按钮, 可选值 `lg` `sm` `xs`。
 
 <template>
   <lay-button type="primary" size="lg">原始按钮</lay-button>
@@ -119,7 +119,7 @@ export default {
 ::: title 流式按钮
 :::
 
-::: demo 使用 `fluid` 属性, 使其适合父最大宽度
+::: demo 通过 `fluid` 属性, 使其适合父级最大宽度。
 
 <template>
   <lay-button type="primary" fluid>最大化按钮</lay-button>
@@ -145,7 +145,7 @@ export default {
 ::: title 圆角按钮
 :::
 
-::: demo 使用 `radius` 属性，创建圆角按钮
+::: demo 通过 `radius` 属性，创建圆角按钮。
 
 <template>
   <lay-button type="primary" radius>原始按钮</lay-button>
@@ -173,7 +173,7 @@ export default {
 ::: title 按钮分组
 :::
 
-::: demo 使用 `lay-button-group` 标签, 创建一个按钮组
+::: demo 使用 `lay-button-group` 标签, 创建一个按钮组。
 
 <template>
   <div>
@@ -212,7 +212,7 @@ export default {
 ::: title 图标按钮
 :::
 
-::: demo 结合 `lay-icon` 组件, 创建图标按钮
+::: demo 结合 `lay-icon` 组件, 创建图标按钮。
 
 <template>
   <lay-button-container>
@@ -239,7 +239,7 @@ export default {
 ::: title 按钮容器
 :::
 
-::: demo 尽管按钮在同节点并排时会自动拉开间距，但在按钮太多的情况，效果并不是很美好。因为你需要用到按钮容器
+::: demo 尽管按钮在同节点并排时会自动拉开间距，但在按钮太多的情况，效果并不是很美好。因为你需要用到按钮容器。
 
 <template>
   <lay-button-container>
@@ -266,7 +266,7 @@ export default {
 ::: title 加载按钮
 :::
 
-::: demo 使用 `loading` 属性, 控制按钮的加载状态
+::: demo 通过 `loading` 属性, 控制按钮的加载状态。
 
 <template>
   <lay-button-container>
@@ -296,7 +296,7 @@ export default {
 ::: title 事件处理
 :::
 
-::: demo 使用 `@click` 设置单击回调
+::: demo 使用 `@click` 设置单击回调。
 
 <template>
   <lay-button type="default" @click="clickHandle">单击事件</lay-button>

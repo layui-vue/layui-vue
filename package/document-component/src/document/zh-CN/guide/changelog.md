@@ -17,13 +17,13 @@
         <h3>1.7.8 <span class="layui-badge-rim">2022-11-15</span></h3> 
         <ul>
           <li>[新增] upload 组件 auto 属性, 是否自动上传配置。</li>
+          <li>[修复] table 组件 ellipsisTooltip 属性不生效。</li>
           <li>[优化] backtop 组件部分浏览器版本无法正常返回顶部。</li>
           <li>[优化] date-picker 组件 btn 操作 border-radius 样式细节。</li>
           <li>[优化] tag-input 组件 maxWidth 属性默认为 100%。</li>
           <li>[优化] tag-input 组件 tagWidth 超出 input 宽度时自动省略文本。</li>
           <li>[优化] table 组件 default-toolbar 属性支持 Array 类型, 举例：['print']。</li>
           <li>[优化] select 组件 dropdown 关闭时统一清空 search 内容。</li>
-          <li></li>
         </ul> 
       </li>
     </ul>

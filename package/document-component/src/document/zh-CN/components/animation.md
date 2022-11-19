@@ -10,7 +10,7 @@
 ::: title 基础使用
 :::
 
-::: demo
+::: demo 如上是不同的动画类名，点击上述绿色块，可直接预览动画。
 
 <template>
   <div class="anim">
