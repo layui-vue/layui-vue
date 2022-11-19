@@ -12,6 +12,15 @@
 <lay-timeline>
   <lay-timeline-item title="1.7.x">
     <ul> 
+      <a name="1-7-9"></a> 
+      <li> 
+        <h3>1.7.9 <span class="layui-badge-rim">2022-11-20</span></h3> 
+        <ul>
+          <li>[新增] upload 组件 auto 属性, 是否自动上传配置。</li>
+        </ul> 
+      </li>
+    </ul>
+    <ul> 
       <a name="1-7-8"></a> 
       <li> 
         <h3>1.7.8 <span class="layui-badge-rim">2022-11-19</span></h3> 

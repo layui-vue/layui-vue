@@ -14,7 +14,7 @@
 
 <template>
   <lay-space size="md">
-    <lay-tag>标签</lay-tag>
+    <lay-tag maxWidth="100px">标签</lay-tag>
     <lay-tag v-for="type in TAG_TYPES" :type="type">标签</lay-tag>
   </lay-space>
 </template>
@@ -164,10 +164,11 @@ export default {
   <template v-for="(tag, index) of tagData" :key="`tag-${index}`">
   <lay-tag 
     closable
+    maxWidth="100px"
     @close="handleClose(index)"
     style="margin-right: 5px;"
     >
-    {{tag}}
+    {{tag}} 
   </lay-tag>
   </template>
   <span id="tagDemo" @click="handlerFocus">
