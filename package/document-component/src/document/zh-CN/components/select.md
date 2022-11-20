@@ -113,16 +113,16 @@ export default {
 ::: title 开启检索
 :::
 
-::: demo 通过 show-search 属性开启内容检索, input 变为可输入状态。在 multiple 模式下, 检索框位于 dropdown 顶部。
+::: demo 通过 show-search 属性开启内容检索, input 变为可输入状态。在 multiple 模式下, 检索框位于 dropdown 顶部, 同时你可以使用 search-method 属性自定义搜索逻辑。
 
 <template>
   <lay-space>
-    <lay-select v-model="value3" :show-search="true" :searchMethod="searchMethod">
+    <lay-select v-model="value3" :show-search="true">
     <lay-select-option value="1" label="学习"></lay-select-option>
     <lay-select-option value="2" label="编码"></lay-select-option>
     <lay-select-option value="3" label="运动"></lay-select-option>
   </lay-select>
-    <lay-select v-model="value4" :show-search="true" :multiple="true" :searchMethod="searchMethod">
+    <lay-select v-model="value4" :show-search="true" :multiple="true">
     <lay-select-option value="1" label="学习"></lay-select-option>
     <lay-select-option value="2" label="编码"></lay-select-option>
     <lay-select-option value="3" label="运动"></lay-select-option>
@@ -138,17 +138,10 @@ export default {
 
     const value3 = ref('1')
     const value4 = ref(['1'])
-
-    const searchMethod = function(text, props) {
-      console.log(text);
-      console.log(props.label);
-      return text === props.label;
-    }
  
     return {
       value3,
-      value4,
-      searchMethod
+      value4
     }
   }
 }
@@ -335,6 +328,8 @@ export default {
 | disabled     | 是否禁用              | `boolean`                  | `true` `false` | `false` |
 | multiple     | 是否为多选            | `boolean`                  | `true` `false` | `false` |
 | size         | 尺寸                  | `string`                  | `lg` `md` `sm` `xs`| `md` |
+| showSearch        | 开启搜索     | `boolean` | -- | -- |
+| searchMethod        | 自定义搜索逻辑 (text, optionProps)    | `Function` | -- | -- |
 | searchPlaceholder | 搜索提示          | `string`                  | -- | -- |
 | minCollapsedNum        | 多选模式最小折叠数量                  | `number`                  | -- | -- |
 | collapseTagsTooltip    | 多选折叠后时候悬浮展示                  | `boolean`                  | -- | -- |
