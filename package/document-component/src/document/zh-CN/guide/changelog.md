@@ -16,7 +16,8 @@
       <li> 
         <h3>1.7.9 <span class="layui-badge-rim">2022-11-20</span></h3> 
         <ul>
-          <li>[新增] upload 组件 auto 属性, 是否自动上传配置。</li>
+          <li>[新增] select 组件 search-method 属性, 允许自定义搜索逻辑。</li>
+          <li>[修复] tag 组件 max-width 属性, 内容超出后 `...` 省略符缺失。</li>
         </ul> 
       </li>
     </ul>

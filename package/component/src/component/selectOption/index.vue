@@ -64,12 +64,13 @@ const selected = computed(() => {
 const isFirst = ref(true);
 
 const display = computed(() => {
-  if(searchMethod && !isFirst.value) {
-      isFirst.value = false;
-      return searchMethod(searchValue.value, props);
+  if (searchMethod && !isFirst.value) {
+    isFirst.value = false;
+    return searchMethod(searchValue.value, props);
   }
-  return ( 
-      props.keyword?.toString().indexOf(searchValue.value) > -1  || props.label?.toString().indexOf(searchValue.value) > -1 
+  return (
+    props.keyword?.toString().indexOf(searchValue.value) > -1 ||
+    props.label?.toString().indexOf(searchValue.value) > -1
   );
 });
 

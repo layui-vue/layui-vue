@@ -105,7 +105,6 @@ const dropdownCtx = inject<DropdownContext | undefined>(
   undefined
 );
 const { children, firstElement: dropdownRef } = useFirstElement();
-//const dropdownRef = shallowRef<HTMLElement | undefined>();
 const contentRef = shallowRef<HTMLElement | undefined>();
 const contentStyle = ref<CSSProperties>({});
 const { width: windowWidth, height: windowHeight } = useWindowSize();

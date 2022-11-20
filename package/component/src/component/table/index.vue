@@ -696,7 +696,11 @@ onBeforeUnmount(() => {
           <slot name="toolbar"></slot>
         </div>
         <div v-if="defaultToolbar" class="layui-table-tool-self">
-          <lay-dropdown updateAtScroll v-if="showToolbar('filter')">
+          
+          <!-- 筛选 -->
+          <lay-dropdown 
+            v-if="showToolbar('filter')" 
+            updateAtScroll>
             <div class="layui-inline" title="筛选" lay-event>
               <i class="layui-icon layui-icon-slider"></i>
             </div>
@@ -715,6 +719,7 @@ onBeforeUnmount(() => {
             </template>
           </lay-dropdown>
 
+          <!-- 导出 -->
           <div
             v-if="showToolbar('export')"
             class="layui-inline"
@@ -725,9 +730,10 @@ onBeforeUnmount(() => {
             <i class="layui-icon layui-icon-export"></i>
           </div>
 
+          <!-- 打印 -->
           <div
-            class="layui-inline"
             v-if="showToolbar('print')"
+            class="layui-inline"
             title="打印"
             lay-event
             @click="print()"
