@@ -31,6 +31,7 @@ export interface SelectProps {
   disabled?: boolean;
   placeholder?: string;
   searchPlaceholder?: string;
+  searchMethod?: Function;
   modelValue?: any;
   multiple?: boolean;
   items?: SelectOptionProps[];
@@ -81,7 +82,6 @@ const getOption = (nodes: VNode[], newOptions: any[]) => {
         if (item.children) {
           // @ts-ignore
           const label = item.children.default()[0].children;
-
           if (typeof label == "string") {
             // @ts-ignore
             item.props.label = label;
@@ -122,7 +122,6 @@ const onCompositionend = (event: Event) => {
 onMounted(() => {
   intOption();
   timer = setInterval(intOption, 500);
-
   watch(
     [selectedValue, options],
     () => {
@@ -188,6 +187,7 @@ provide("openState", openState);
 provide("selectedValue", selectedValue);
 provide("searchValue", searchValue);
 provide("multiple", multiple);
+provide("searchMethod", props.searchMethod);
 </script>
 
 <template>

@@ -30,6 +30,7 @@ const props = withDefaults(defineProps<SelectOptionProps>(), {
 
 const searchValue: Ref<string> = inject("searchValue") as Ref<string>;
 const selectRef: Ref<HTMLElement> = inject("selectRef") as Ref<HTMLElement>;
+const searchMethod: Function = inject("searchMethod") as Function;
 const selectedValue: WritableComputedRef<any> = inject(
   "selectedValue"
 ) as WritableComputedRef<any>;
@@ -59,10 +60,16 @@ const selected = computed(() => {
   }
 });
 
+// 首次加载, 不启用 search-method 方法。
+const isFirst = ref(true);
+
 const display = computed(() => {
-  return (
-    props.keyword?.toString().indexOf(searchValue.value) > -1 ||
-    props.label?.toString().indexOf(searchValue.value) > -1
+  if(searchMethod && !isFirst.value) {
+      isFirst.value = false;
+      return searchMethod(searchValue.value, props);
+  }
+  return ( 
+      props.keyword?.toString().indexOf(searchValue.value) > -1  || props.label?.toString().indexOf(searchValue.value) > -1 
   );
 });
 

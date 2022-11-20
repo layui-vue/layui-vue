@@ -117,12 +117,12 @@ export default {
 
 <template>
   <lay-space>
-    <lay-select v-model="value3" :show-search="true">
+    <lay-select v-model="value3" :show-search="true" :searchMethod="searchMethod">
     <lay-select-option value="1" label="学习"></lay-select-option>
     <lay-select-option value="2" label="编码"></lay-select-option>
     <lay-select-option value="3" label="运动"></lay-select-option>
   </lay-select>
-    <lay-select v-model="value4" :show-search="true" :multiple="true">
+    <lay-select v-model="value4" :show-search="true" :multiple="true" :searchMethod="searchMethod">
     <lay-select-option value="1" label="学习"></lay-select-option>
     <lay-select-option value="2" label="编码"></lay-select-option>
     <lay-select-option value="3" label="运动"></lay-select-option>
@@ -138,10 +138,17 @@ export default {
 
     const value3 = ref('1')
     const value4 = ref(['1'])
+
+    const searchMethod = function(text, props) {
+      console.log(text);
+      console.log(props.label);
+      return text === props.label;
+    }
  
     return {
       value3,
       value4,
+      searchMethod
     }
   }
 }
