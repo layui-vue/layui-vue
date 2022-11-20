@@ -696,11 +696,8 @@ onBeforeUnmount(() => {
           <slot name="toolbar"></slot>
         </div>
         <div v-if="defaultToolbar" class="layui-table-tool-self">
-          
           <!-- 筛选 -->
-          <lay-dropdown 
-            v-if="showToolbar('filter')" 
-            updateAtScroll>
+          <lay-dropdown v-if="showToolbar('filter')" updateAtScroll>
             <div class="layui-inline" title="筛选" lay-event>
               <i class="layui-icon layui-icon-slider"></i>
             </div>
