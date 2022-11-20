@@ -682,6 +682,12 @@ const showToolbar = (toolbarName: string) => {
   return props.defaultToolbar;
 };
 
+const toolbarStyle = (toolbarName: string) => {
+  if (props.defaultToolbar instanceof Array) {
+    return { order: props.defaultToolbar.indexOf(toolbarName) } as StyleValue;
+  }
+}
+
 onBeforeUnmount(() => {
   window.onresize = null;
 });
@@ -696,8 +702,9 @@ onBeforeUnmount(() => {
           <slot name="toolbar"></slot>
         </div>
         <div v-if="defaultToolbar" class="layui-table-tool-self">
+          
           <!-- 筛选 -->
-          <lay-dropdown v-if="showToolbar('filter')" updateAtScroll>
+          <lay-dropdown v-if="showToolbar('filter')" updateAtScroll :style="toolbarStyle('filter')">
             <div class="layui-inline" title="筛选" lay-event>
               <i class="layui-icon layui-icon-slider"></i>
             </div>
@@ -722,6 +729,7 @@ onBeforeUnmount(() => {
             class="layui-inline"
             title="导出"
             lay-event
+            :style="toolbarStyle('export')"
             @click="exportData()"
           >
             <i class="layui-icon layui-icon-export"></i>
@@ -730,6 +738,7 @@ onBeforeUnmount(() => {
           <!-- 打印 -->
           <div
             v-if="showToolbar('print')"
+            :style="toolbarStyle('print')"
             class="layui-inline"
             title="打印"
             lay-event
@@ -737,6 +746,7 @@ onBeforeUnmount(() => {
           >
             <i class="layui-icon layui-icon-print"></i>
           </div>
+
         </div>
       </div>
 
