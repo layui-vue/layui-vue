@@ -26,7 +26,7 @@ import LayTagInput from "../tagInput/index.vue";
 import LayDropdown from "../dropdown/index.vue";
 import LaySelectOption, { SelectOptionProps } from "../selectOption/index.vue";
 import { SelectSize } from "./interface";
-import { isArrayChildren } from "src/utils";
+import { isArrayChildren } from "../../utils";
 
 export interface SelectProps {
   name?: string;

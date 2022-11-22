@@ -29,7 +29,7 @@ import {
 } from "vue";
 import { useResizeObserver } from "@vueuse/core";
 import { TabData, TabInjectKey, TabPosition } from "./interface";
-import { isArrayChildren } from "src/utils";
+import { isArrayChildren } from "../../utils";
 
 export interface TabProps {
   type?: string;

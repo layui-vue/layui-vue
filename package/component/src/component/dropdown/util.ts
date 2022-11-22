@@ -1,7 +1,7 @@
 import { DropdownPlacement } from "./interface";
 
 import { Component, onMounted, onUpdated, ref, VNode, VNodeTypes } from "vue";
-import { isArrayChildren, isComponent, isElement } from "src/utils";
+import { isArrayChildren, isComponent, isElement } from "../../utils";
 
 export interface SlotChildren {
   value?: VNode[];
