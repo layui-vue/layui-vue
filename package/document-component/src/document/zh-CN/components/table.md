@@ -13,7 +13,7 @@
 ::: demo 使用 `lay-table` 标签, 创建表格
 
 <template>
-  <lay-table :columns="columns1" :data-source="dataSource1"></lay-table>
+  <lay-table :columns="columns66" :data-source="dataSource1"></lay-table>
 </template>
 
 <script>
@@ -22,18 +22,21 @@ import { ref } from 'vue'
 export default {
   setup() {
 
-    const columns1 = [
+    const columns66 = [
       {
         title:"账户",
         width:"200px",
+        align: "right",
         key:"username"
       },{
         title:"密码",
         width: "180px",
+        align: "center",
         key:"password"
       },{
         title:"年龄",
         width: "180px",
+        align: "center",
         key:"age"
       },{
         title:"备注",
@@ -50,7 +53,7 @@ export default {
     ]
 
     return {
-      columns1,
+      columns66,
       dataSource1
     }
   }
@@ -299,7 +302,7 @@ export default {
         title:"姓名",
         width:"200px",
         key:"name",
-        ellipsisTooltip: true,
+        ellipsisTooltip: true
       },{
         title:"成绩",
         width: "180px",

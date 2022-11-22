@@ -291,10 +291,14 @@ const renderTabTitle = (attrs: Record<string, unknown>) => {
 
 useResizeObserver(navRef, update);
 
-watch(tabMap, () => {
+watch(
+  tabMap,
+  () => {
     childrens.value = [];
     setItemInstanceBySlot((slot.default && slot.default()) as VNode[]);
-}, {immediate: true });
+  },
+  { immediate: true }
+);
 
 watch(
   () => [
