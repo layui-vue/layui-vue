@@ -18,6 +18,7 @@ import {
   watch,
   onUnmounted,
   StyleValue,
+Fragment,
 } from "vue";
 import { LayIcon } from "@layui/icons-vue";
 import LayInput from "../input/index.vue";
@@ -25,6 +26,7 @@ import LayTagInput from "../tagInput/index.vue";
 import LayDropdown from "../dropdown/index.vue";
 import LaySelectOption, { SelectOptionProps } from "../selectOption/index.vue";
 import { SelectSize } from "./interface";
+import { ShapeFlags } from "../dropdown/util";
 
 export interface SelectProps {
   name?: string;
@@ -74,11 +76,10 @@ var timer: any;
 
 const getOption = (nodes: VNode[], newOptions: any[]) => {
   nodes?.map((item) => {
-    let component = item.type as Component;
-    if (item.type.toString() == "Symbol(Fragment)") {
+    if (item && item.shapeFlag && item.shapeFlag == ShapeFlags.ARRAY_CHILDREN) {
       getOption(item.children as VNode[], newOptions);
     } else {
-      if (component.name == LaySelectOption.name) {
+      if ((item.type as Component).name == LaySelectOption.name) {
         if (item.children) {
           // @ts-ignore
           const label = item.children.default()[0].children;

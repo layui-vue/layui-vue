@@ -686,7 +686,7 @@ const toolbarStyle = (toolbarName: string) => {
   if (props.defaultToolbar instanceof Array) {
     return { order: props.defaultToolbar.indexOf(toolbarName) } as StyleValue;
   }
-}
+};
 
 onBeforeUnmount(() => {
   window.onresize = null;
@@ -702,9 +702,12 @@ onBeforeUnmount(() => {
           <slot name="toolbar"></slot>
         </div>
         <div v-if="defaultToolbar" class="layui-table-tool-self">
-          
           <!-- 筛选 -->
-          <lay-dropdown v-if="showToolbar('filter')" updateAtScroll :style="toolbarStyle('filter')">
+          <lay-dropdown
+            v-if="showToolbar('filter')"
+            updateAtScroll
+            :style="toolbarStyle('filter')"
+          >
             <div class="layui-inline" title="筛选" lay-event>
               <i class="layui-icon layui-icon-slider"></i>
             </div>
@@ -746,7 +749,6 @@ onBeforeUnmount(() => {
           >
             <i class="layui-icon layui-icon-print"></i>
           </div>
-
         </div>
       </div>
 

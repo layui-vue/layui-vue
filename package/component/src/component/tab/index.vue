@@ -29,6 +29,7 @@ import {
 } from "vue";
 import { useResizeObserver } from "@vueuse/core";
 import { TabData, TabInjectKey, TabPosition } from "./interface";
+import { ShapeFlags } from "../dropdown/util";
 
 export interface TabProps {
   type?: string;
@@ -41,16 +42,15 @@ export interface TabProps {
 }
 
 const slot = useSlots();
-const childrens: Ref<VNode[]> = ref([]);
 const tabMap = reactive(new Map<number, TabData>());
+const childrens: Ref<VNode[]> = ref([]);
 
 const setItemInstanceBySlot = function (nodes: VNode[]) {
   nodes?.map((item) => {
-    let component = item.type as Component;
-    if (item.type.toString() == "Symbol(Fragment)") {
+    if (item && item.shapeFlag && item.shapeFlag == ShapeFlags.ARRAY_CHILDREN) {
       setItemInstanceBySlot(item.children as VNode[]);
     } else {
-      if (component.name == tabItem.name) {
+      if ((item.type as Component).name == tabItem.name) {
         childrens.value.push(item);
       }
     }
@@ -291,14 +291,10 @@ const renderTabTitle = (attrs: Record<string, unknown>) => {
 
 useResizeObserver(navRef, update);
 
-watch(
-  tabMap,
-  function () {
+watch(tabMap, () => {
     childrens.value = [];
     setItemInstanceBySlot((slot.default && slot.default()) as VNode[]);
-  },
-  { immediate: true }
-);
+}, {immediate: true });
 
 watch(
   () => [
