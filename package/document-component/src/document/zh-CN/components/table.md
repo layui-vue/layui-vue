@@ -26,17 +26,14 @@ export default {
       {
         title:"账户",
         width:"200px",
-        align: "right",
         key:"username"
       },{
         title:"密码",
         width: "180px",
-        align: "center",
         key:"password"
       },{
         title:"年龄",
         width: "180px",
-        align: "center",
         key:"age"
       },{
         title:"备注",
