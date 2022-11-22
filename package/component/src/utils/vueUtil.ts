@@ -18,10 +18,16 @@ export const isElement = (vn: VNode) => {
   return Boolean(vn && vn.shapeFlag & ShapeFlags.ELEMENT);
 };
 
-export const isComponent = (vn: VNode, type?: VNodeTypes): type is Component => {
+export const isComponent = (
+  vn: VNode,
+  type?: VNodeTypes
+): type is Component => {
   return Boolean(vn && vn.shapeFlag & ShapeFlags.COMPONENT);
 };
 
-export const isArrayChildren = (vn: VNode, children: VNode["children"]): children is VNode[] => {
+export const isArrayChildren = (
+  vn: VNode,
+  children: VNode["children"]
+): children is VNode[] => {
   return Boolean(vn && vn.shapeFlag & ShapeFlags.ARRAY_CHILDREN);
 };

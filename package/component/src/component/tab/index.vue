@@ -29,7 +29,7 @@ import {
 } from "vue";
 import { useResizeObserver } from "@vueuse/core";
 import { TabData, TabInjectKey, TabPosition } from "./interface";
-import { ShapeFlags } from "../dropdown/util";
+import { isArrayChildren } from "src/utils";
 
 export interface TabProps {
   type?: string;
@@ -47,7 +47,7 @@ const childrens: Ref<VNode[]> = ref([]);
 
 const setItemInstanceBySlot = function (nodes: VNode[]) {
   nodes?.map((item) => {
-    if (item && item.shapeFlag && item.shapeFlag == ShapeFlags.ARRAY_CHILDREN) {
+    if (isArrayChildren(item, item.children)) {
       setItemInstanceBySlot(item.children as VNode[]);
     } else {
       if ((item.type as Component).name == tabItem.name) {

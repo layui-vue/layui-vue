@@ -26,7 +26,7 @@ import LayTagInput from "../tagInput/index.vue";
 import LayDropdown from "../dropdown/index.vue";
 import LaySelectOption, { SelectOptionProps } from "../selectOption/index.vue";
 import { SelectSize } from "./interface";
-import { ShapeFlags } from "../dropdown/util";
+import { isArrayChildren } from "src/utils";
 
 export interface SelectProps {
   name?: string;
@@ -76,7 +76,7 @@ var timer: any;
 
 const getOption = (nodes: VNode[], newOptions: any[]) => {
   nodes?.map((item) => {
-    if (item && item.shapeFlag && item.shapeFlag == ShapeFlags.ARRAY_CHILDREN) {
+    if (isArrayChildren(item, item.children)) {
       getOption(item.children as VNode[], newOptions);
     } else {
       if ((item.type as Component).name == LaySelectOption.name) {
