@@ -14,10 +14,14 @@
     <ul> 
       <a name="1-7-9"></a> 
       <li> 
-        <h3>1.7.9 <span class="layui-badge-rim">2022-11-20</span></h3> 
+        <h3>1.7.9 <span class="layui-badge-rim">2022-11-22</span></h3> 
         <ul>
           <li>[新增] select 组件 search-method 属性, 允许自定义搜索逻辑。</li>
           <li>[修复] tag 组件 max-width 属性, 内容超出后 `...` 省略符缺失。</li>
+          <li>[修复] table 组件 column 属性 align 配置失效, 该问题仅存在 1.7.8 版本。</li>
+          <li>[修复] select 组件 build 后, 选中内容无法正确回显。</li>
+          <li>[修复] tab 组件 build 后, tab-item 无法正确显示, 在嵌套 v-for 时。</li>
+          <li>[修复] table 组件 default-toolbar 在配置数组时, 未按顺序渲染。</li>
         </ul> 
       </li>
     </ul>

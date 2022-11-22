@@ -486,7 +486,12 @@ const radioProps = props.getRadioProps(props.data, props.index);
                 column.fixed ? `layui-table-fixed-${column.fixed}` : '',
               ]"
             >
-              <div style="display: flex" :style="[{textAlign: column.align, justifyContent: column.align}]">
+              <div
+                style="display: flex"
+                :style="[
+                  { textAlign: column.align, justifyContent: column.align },
+                ]"
+              >
                 <span
                   v-if="expandSpace && columnIndex === expandIndex"
                   :style="{ 'margin-right': currentIndentSize + 'px' }"
@@ -560,7 +565,12 @@ const radioProps = props.getRadioProps(props.data, props.index);
                 column.fixed ? `layui-table-fixed-${column.fixed}` : '',
               ]"
             >
-              <div style="display: flex" :style="[{textAlign: column.align, justifyContent: column.align}]">
+              <div
+                style="display: flex"
+                :style="[
+                  { textAlign: column.align, justifyContent: column.align },
+                ]"
+              >
                 <span
                   v-if="expandSpace && columnIndex === expandIndex"
                   :style="{ 'margin-right': currentIndentSize + 'px' }"
