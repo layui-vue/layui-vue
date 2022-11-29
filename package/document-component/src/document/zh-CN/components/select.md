@@ -4,13 +4,13 @@
 ::: title 基本介绍
 :::
 
-::: describe 用于代替原生的选择器，或者需要一个更优雅的多选器时。支持关键词查询
+::: describe 用于代替原生的选择器，或者需要一个更优雅的多选器时。
 :::
 
 ::: title 基础使用
 :::
 
-::: demo 使用 `lay-select` 标签, 创建下拉选择框
+::: demo 使用 `lay-select` 标签, 创建下拉选择框。
 
 <template>
   <lay-select v-model="value" placeholder="请选择">
@@ -35,61 +35,17 @@ export default {
 
 :::
 
-::: title 进阶使用
-:::
-
-::: demo 根据 v-model 的特性, 通过修改值更改 select 的下拉选项。
-
-<template>
-  <lay-space>
-    <lay-select v-model="value2" placeholder="请选择">
-      <lay-select-option :value="1" label="学习"></lay-select-option>
-      <lay-select-option :value="2" label="编码"></lay-select-option>
-      <lay-select-option :value="3" label="运动"></lay-select-option>
-    </lay-select>
-    <lay-button @click="change2"> change ：{{value2}} </lay-button>
-  </lay-space>
-</template>
-
-<script>
-import { ref } from 'vue'
-
-export default {
-  setup() {
-    const value2 = ref(null);
-    var i = 1;
-    function change2(){
-      value2.value=i++%3+1
-    }
-    return {
-      value2,
-      change2
-    }
-  }
-}
-</script>
-
-:::
-
-
 ::: title 禁止选择
 :::
 
-::: demo 通过 show-search 属性开启内容检索, input 变为可输入状态。在 multiple 模式下, 检索框位于 dropdown 顶部。
+::: demo 通过 `disabled` 属性, 禁用下拉选择。
 
 <template>
-  <lay-space>
-    <lay-select v-model="value3" :disabled="true" :allow-clear="true">
+  <lay-select v-model="value2" :disabled="true">
     <lay-select-option value="1" label="学习"></lay-select-option>
     <lay-select-option value="2" label="编码"></lay-select-option>
     <lay-select-option value="3" label="运动"></lay-select-option>
   </lay-select>
-    <lay-select v-model="value4" :disabled="true" :multiple="true" :allow-clear="true">
-    <lay-select-option value="1" label="学习"></lay-select-option>
-    <lay-select-option value="2" label="编码"></lay-select-option>
-    <lay-select-option value="3" label="运动"></lay-select-option>
-  </lay-select>
-  </lay-space>
 </template>
 
 <script>
@@ -98,11 +54,10 @@ import { ref } from 'vue'
 export default {
   setup() {
 
-    const value3 = ref('1')
-    const value4 = ref(['1'])
+    const value2 = ref('1')
+
     return {
-      value3,
-      value4
+      value2
     }
   }
 }
@@ -116,18 +71,11 @@ export default {
 ::: demo 通过 show-search 属性开启内容检索, input 变为可输入状态。在 multiple 模式下, 检索框位于 dropdown 顶部, 同时你可以使用 search-method 属性自定义搜索逻辑。
 
 <template>
-  <lay-space>
-    <lay-select v-model="value3" :show-search="true">
+  <lay-select v-model="value3" :show-search="true">
     <lay-select-option value="1" label="学习"></lay-select-option>
     <lay-select-option value="2" label="编码"></lay-select-option>
     <lay-select-option value="3" label="运动"></lay-select-option>
   </lay-select>
-    <lay-select v-model="value4" :show-search="true" :multiple="true"  :search-method="searchMethod">
-    <lay-select-option value="1" label="学习"></lay-select-option>
-    <lay-select-option value="2" label="编码"></lay-select-option>
-    <lay-select-option value="3" label="运动"></lay-select-option>
-  </lay-select>
-  </lay-space>
 </template>
 
 <script>
@@ -137,16 +85,9 @@ export default {
   setup() {
 
     const value3 = ref('1')
-    const value4 = ref(['1'])
-
-    const searchMethod = (text, props) => {
-      return props.label.indexOf(text) != -1;
-    }
  
     return {
       value3,
-      value4,
-      searchMethod
     }
   }
 }
@@ -157,10 +98,10 @@ export default {
 ::: title 传入选项
 :::
 
-::: demo 传入 options 数据，如果设置则不需要手动构造 selectOption 节点
+::: demo 传入 options 数据，如果设置则不需要手动构造 select-option 节点。
 
 <template>
-  <lay-select v-model="value5" :items="items5"></lay-select>
+  <lay-select v-model="value4" :items="items4"></lay-select>
 </template>
 
 <script>
@@ -168,15 +109,17 @@ import { ref } from 'vue'
 
 export default {
   setup() {
-    const value5 = ref('1');
-    const items5=ref([
+    const value4 = ref('1');
+
+    const items4=ref([
       {label:'选项1', value:1},
       {label:'选项2', value:2},
       {label:'选项3', value:3, disabled:true},
     ])
+
     return {
-      items5,
-      value5,
+      items4,
+      value4,
     }
   }
 }
@@ -190,46 +133,10 @@ export default {
 ::: demo 通过 show-search 属性开启内容检索, input 变为可输入状态。在 multiple 模式下, 检索框位于 dropdown 顶部。
 
 <template>
-  <lay-space>
-    <lay-select v-model="value3" :allow-clear="true">
+  <lay-select v-model="value5" :allow-clear="true">
     <lay-select-option value="1" label="学习"></lay-select-option>
     <lay-select-option value="2" label="编码"></lay-select-option>
     <lay-select-option value="3" label="运动"></lay-select-option>
-  </lay-select>
-    <lay-select v-model="value4" :allow-clear="true" :multiple="true">
-    <lay-select-option value="1" label="学习"></lay-select-option>
-    <lay-select-option value="2" label="编码"></lay-select-option>
-    <lay-select-option value="3" label="运动"></lay-select-option>
-  </lay-select>
-  </lay-space>
-</template>
-
-<script>
-import { ref } from 'vue'
-
-export default {
-  setup() {
-
-    const value3 = ref('1')
-    const value4 = ref(['1'])
-
-    return {
-      value3,
-      value4,
-    }
-  }
-}
-</script>
-
-:::
-
-::: title 海量数据 
-:::
-
-::: demo
-<template>
-  <lay-select v-model="selected2" :multiple="true">
-    <lay-select-option v-for="index of count2" :value="index" :label="index"></lay-select-option>
   </lay-select>
 </template>
 
@@ -239,31 +146,24 @@ import { ref } from 'vue'
 export default {
   setup() {
 
-    const count2 = ref(0)
-    const selected2 = ref([1])
-
-    setTimeout(() => {
-      count2.value = 100;
-    }, 2000);
+    const value5 = ref('1')
 
     return {
-      count2,
-      selected2
+      value5
     }
   }
 }
 </script>
+
 :::
 
-::: title 多选使用
+::: title 开启多选
 :::
 
-::: demo
+::: demo 通过 `multiple` 属性, 开启多选模式。
+
 <template>
-  <lay-button @click="mvalue=['1','5','7']">点击切换(当前值:{{mvalue.join()}})</lay-button>
-  <br/>
-  <br/>
-  <lay-select v-model="mvalue" @change="change" multiple>
+  <lay-select v-model="value6" multiple>
     <lay-select-option value="1" label="学习"></lay-select-option>
     <lay-select-option value="2" label="编码" disabled></lay-select-option>
     <lay-select-option value="3" label="运动"></lay-select-option>
@@ -279,23 +179,20 @@ import { ref,watch } from 'vue'
 
 export default {
   setup() {
-    const mvalue = ref(['1','2']);
-    const change = function(val){
-      console.log(val, mvalue.value)
-    }
+    const value6 = ref(['1','2']);
+
     return {
-      mvalue,
-      change
+      value6
     }
   }
 }
 </script>
 :::
 
-::: title 定制选项
+::: title 使用插槽
 :::
 
-::: demo 使用 `lay-select` 标签, 创建下拉选择框
+::: demo 通过 `default` 插槽, 实现选项的自定义渲染。
 
 <template>
   <lay-select v-model="value">
@@ -319,7 +216,6 @@ export default {
 </script>
 
 :::
-
 
 ::: title Select 属性
 :::
