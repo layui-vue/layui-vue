@@ -14,6 +14,16 @@
     <ul> 
       <a name="1-7-9"></a> 
       <li> 
+        <h3>1.7.10 <span class="layui-badge-rim">2022-11-30</span></h3> 
+        <ul>
+          <li>[修复] select 组件 search-method 属性, 自定义搜索逻辑不生效。</li>
+          <li>[优化] select 组件文档, 简化使用案例。</li>
+        </ul> 
+      </li>
+    </ul>
+    <ul> 
+      <a name="1-7-9"></a> 
+      <li> 
         <h3>1.7.9 <span class="layui-badge-rim">2022-11-22</span></h3> 
         <ul>
           <li>[新增] select 组件 search-method 属性, 允许自定义搜索逻辑。</li>
