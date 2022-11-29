@@ -60,14 +60,13 @@ const selected = computed(() => {
   }
 });
 
-// 首次加载, 不启用 search-method 方法。
-const isFirst = ref(true);
+const first = ref(true);
 
 const display = computed(() => {
-  if (searchMethod && !isFirst.value) {
-    isFirst.value = false;
+  if (searchMethod && !first.value) {
     return searchMethod(searchValue.value, props);
   }
+  first.value = false;
   return (
     props.keyword?.toString().indexOf(searchValue.value) > -1 ||
     props.label?.toString().indexOf(searchValue.value) > -1

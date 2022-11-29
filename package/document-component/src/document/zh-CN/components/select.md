@@ -122,7 +122,7 @@ export default {
     <lay-select-option value="2" label="编码"></lay-select-option>
     <lay-select-option value="3" label="运动"></lay-select-option>
   </lay-select>
-    <lay-select v-model="value4" :show-search="true" :multiple="true">
+    <lay-select v-model="value4" :show-search="true" :multiple="true"  :search-method="searchMethod">
     <lay-select-option value="1" label="学习"></lay-select-option>
     <lay-select-option value="2" label="编码"></lay-select-option>
     <lay-select-option value="3" label="运动"></lay-select-option>
@@ -138,10 +138,15 @@ export default {
 
     const value3 = ref('1')
     const value4 = ref(['1'])
+
+    const searchMethod = (text, props) => {
+      return props.label.indexOf(text) != -1;
+    }
  
     return {
       value3,
-      value4
+      value4,
+      searchMethod
     }
   }
 }
@@ -207,9 +212,10 @@ export default {
 
     const value3 = ref('1')
     const value4 = ref(['1'])
+
     return {
       value3,
-      value4
+      value4,
     }
   }
 }
