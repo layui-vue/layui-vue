@@ -30,6 +30,7 @@ const props = withDefaults(defineProps<IconPickerProps>(), {
 const emit = defineEmits(["update:modelValue", "change"]);
 const selectedIcon = computed(() => props.modelValue);
 const dropdownRef = ref<any>(null);
+const openState = ref<boolean>(false);
 
 const selectIcon = function (icon: string): void {
   emit("update:modelValue", icon);
@@ -143,6 +144,8 @@ const searchList = (str: string, container: any) => {
     :disabled="disabled"
     :contentClass="contentClass"
     :contentStyle="contentStyle"
+    @hide="openState = false"
+    @show="openState = true"
     updateAtScroll
   >
     <div
@@ -153,7 +156,7 @@ const searchList = (str: string, container: any) => {
         <i class="layui-inline layui-icon" :class="[selectedIcon]"></i>
       </div>
       <span class="layui-inline layui-iconpicker-suffix"
-        ><i class="layui-icon layui-icon-down layui-anim"></i
+        ><i class="layui-icon layui-icon-down" :class="[openState ? 'transform' : '']"></i
       ></span>
     </div>
     <template #content>
