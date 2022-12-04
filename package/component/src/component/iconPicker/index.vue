@@ -156,7 +156,10 @@ const searchList = (str: string, container: any) => {
         <i class="layui-inline layui-icon" :class="[selectedIcon]"></i>
       </div>
       <span class="layui-inline layui-iconpicker-suffix"
-        ><i class="layui-icon layui-icon-down" :class="[openState ? 'transform' : '']"></i
+        ><i
+          class="layui-icon layui-icon-down"
+          :class="[openState ? 'transform' : '']"
+        ></i
       ></span>
     </div>
     <template #content>
