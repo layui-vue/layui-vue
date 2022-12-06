@@ -265,6 +265,19 @@ const update = () => {
   }
 };
 
+const horizontalScroll = (e: WheelEvent) => {
+  e.preventDefault()
+  const navSize = getNavSize();
+  const containerSize = navRef.value![`offset${sizeName.value}`];
+  const currentOffset = navOffset.value;
+  const scrollNextSize = scrollNextRef.value?.[`offset${sizeName.value}`] ?? 0;
+  const direction = Math.abs(e.deltaX) >= Math.abs(e.deltaY) ? e.deltaX : e.deltaY
+  const distance = 50 * (direction > 0 ? 1 : -1)
+  const newOffset = Math.max(currentOffset + distance, 0)
+  if ((navSize - currentOffset <= containerSize - scrollNextSize && direction > 0)) return;
+  navOffset.value = newOffset
+}
+
 const renderTabIcon = (attrs: Record<string, unknown>) => {
   const tab = attrs.tabData as TabData;
   if (typeof tab.icon === "function") {
@@ -335,6 +348,7 @@ provide("active", active);
     >
       <ul
         ref="navRef"
+        @wheel="horizontalScroll"
         :class="[
           'layui-tab-title',
           props.tabPosition ? `is-${tabPosition}` : '',
