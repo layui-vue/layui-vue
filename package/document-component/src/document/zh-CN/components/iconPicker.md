@@ -59,6 +59,32 @@ export default {
 
 :::
 
+::: title 选择清空
+:::
+
+::: demo 使用 lay-icon-picker 标签, 创建图标选择器
+
+<template>
+  <lay-icon-picker v-model="icon" :allow-clear="true"></lay-icon-picker>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const icon = ref("layui-icon-home")
+
+    return {
+      icon
+    }
+  }
+}
+</script>
+
+:::
+
 ::: title 开启分页
 :::
 
@@ -116,12 +142,13 @@ export default {
 
 ::: table
 
-|            |          |     |   |   |
+| 属性           |  说明        |  类型   | 默认值  | 可选值  |
 | ---------- | -------- | --- |--- |--- |
 | v-model    | 默认值   | --  |--  |--  |
 | page       | 开启分页 | --  |--  |--  |
 | showSearch | 启用搜索 | --  |--  |--  |
 | disabled | 禁用 | `boolean`  |--  |--  |
+| allow-clear | 允许清空 | `boolean`  |--  |--  |
 | contentStyle             | 内容自定义样式     | `StyleValue` | -- | -- |
 | contentClass             | 内容自定义Class    | `string` `Array<string \| object>` `object` | -- | -- |
 

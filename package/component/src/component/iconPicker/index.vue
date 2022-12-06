@@ -17,6 +17,7 @@ export interface IconPickerProps {
   modelValue?: string;
   disabled?: boolean;
   showSearch?: boolean;
+  allowClear?: boolean;
   contentClass?: string | Array<string | object> | object;
   contentStyle?: StyleValue;
 }
@@ -37,6 +38,14 @@ const selectIcon = function (icon: string): void {
   emit("change", icon);
   dropdownRef.value?.hide();
 };
+
+const onClear = function(): void {
+  emit("update:modelValue", "");
+}
+
+const hasContent = computed(() => {
+  return props.modelValue != null && props.modelValue != "";
+})
 
 const icones: Ref = ref([]);
 const total: Ref<number> = ref(icons.length);
@@ -155,6 +164,12 @@ const searchList = (str: string, container: any) => {
       <div class="layui-inline layui-iconpicker-main">
         <i class="layui-inline layui-icon" :class="[selectedIcon]"></i>
       </div>
+      <span
+        class="layui-icon-picker-clear"
+        v-if="allowClear && hasContent && !disabled"
+      >
+        <lay-icon type="layui-icon-close-fill" @click.stop="onClear"></lay-icon>
+      </span>
       <span class="layui-inline layui-iconpicker-suffix"
         ><i
           class="layui-icon layui-icon-down"

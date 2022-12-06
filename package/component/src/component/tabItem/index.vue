@@ -11,7 +11,7 @@ import {
   useSlots,
   getCurrentInstance,
   reactive,
-  onBeforeUnmount,
+  onBeforeUnmount
 } from "vue";
 import { TabInjectKey, TabsContext } from "../tab/interface";
 
