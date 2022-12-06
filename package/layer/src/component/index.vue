@@ -337,7 +337,7 @@ watch(
       props.success();
     }
   },
-  { immediate: true }
+  { immediate: true, flush: "post" }
 );
 
 watch(
