@@ -39,13 +39,13 @@ const selectIcon = function (icon: string): void {
   dropdownRef.value?.hide();
 };
 
-const onClear = function(): void {
+const onClear = function (): void {
   emit("update:modelValue", "");
-}
+};
 
 const hasContent = computed(() => {
   return props.modelValue != null && props.modelValue != "";
-})
+});
 
 const icones: Ref = ref([]);
 const total: Ref<number> = ref(icons.length);

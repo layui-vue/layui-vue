@@ -20,6 +20,7 @@
           <li>[修复] button 组件 夜间模式 下, 普通按钮边框高亮与背景色不一致的问题。</li>
           <li>[优化] checkbox 组件 默认主题 下, 勾选框多余的左边框。</li>
           <li>[优化] icon-picker 组件 下拉 图标, 在打开关闭时赋予不同的状态。</li>
+          <li>[优化] table 组件 .layui-table-total 背景色 fixed 字段不生效的问题。</li>
         </ul> 
       </li>
     </ul>
