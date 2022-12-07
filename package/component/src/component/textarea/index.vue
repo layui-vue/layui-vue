@@ -6,7 +6,8 @@ export default {
 
 <script setup lang="ts">
 import { LayIcon } from "@layui/icons-vue";
-import { computed, ref } from "vue";
+import { computed, ref, watch } from "vue";
+import {isObject } from "@vueuse/shared"
 import "./index.less";
 
 export interface TextareaProps {
@@ -17,6 +18,7 @@ export interface TextareaProps {
   showCount?: boolean;
   allowClear?: boolean;
   maxlength?: number;
+  autosize?: boolean | { minHeight: number, maxHeight: number };
 }
 
 const props = defineProps<TextareaProps>();
@@ -31,6 +33,7 @@ interface TextareaEmits {
 }
 
 const emit = defineEmits<TextareaEmits>();
+const textareaRef = ref<HTMLTextAreaElement | null>(null);
 const composing = ref(false);
 
 const onInput = function (event: Event) {
@@ -78,11 +81,25 @@ const wordCount = computed(() => {
   }
   return count;
 });
+
+watch([() => props.modelValue, textareaRef], () => {
+  if (!textareaRef.value || !props.autosize) return;
+  const height: number = textareaRef.value?.scrollHeight + 2; // 边框 
+  if (isObject(props.autosize)) {
+    const { minHeight, maxHeight } = props.autosize;
+    if (height < minHeight || height > maxHeight) return;
+  }
+  textareaRef.value!.style.height = '1px'
+  textareaRef.value!.style.height = `${textareaRef.value?.scrollHeight + 2}px`
+}, {
+  immediate: true,
+})
 </script>
 
 <template>
   <div class="layui-textarea-wrapper">
     <textarea
+      ref="textareaRef"
       class="layui-textarea"
       :value="modelValue"
       :placeholder="placeholder"
