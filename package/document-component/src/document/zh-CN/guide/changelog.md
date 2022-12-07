@@ -16,11 +16,17 @@
       <li> 
         <h3>1.7.11 <span class="layui-badge-rim">2022-12-05</span></h3> 
         <ul>
+          <li>[新增] tab 组件鼠标滚动功能, 兼容移动端 touch 事件。</li>
+          <li>[新增] textarea 组件 autosize 属性, 根据内容自适应大小。</li>
           <li>[新增] icon-picker 组件 allow-clear 属性, 开启清空操作。</li>
           <li>[修复] button 组件 夜间模式 下, 普通按钮边框高亮与背景色不一致的问题。</li>
+          <li>[修复] cascader 组件 v-model 属性不为空时, 无法正常回显。</li>
+          <li>[修复] select 组件 muilpart 为 true 时候 placeholder 属性无效。</li>
+          <li>[修复] page-header 组件 backIcon 插槽 html 中使用无效。</li>
           <li>[优化] checkbox 组件 默认主题 下, 勾选框多余的左边框。</li>
           <li>[优化] icon-picker 组件 下拉 图标, 在打开关闭时赋予不同的状态。</li>
           <li>[优化] table 组件 .layui-table-total 背景色 fixed 字段不生效的问题。</li>
+          <li>[优化] layer 组件 success 回调执行时机。</li>
         </ul> 
       </li>
     </ul>
