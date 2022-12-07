@@ -31,7 +31,9 @@
         :size="size"
         @clear="onClear"
       ></lay-input>
-      <slot v-else></slot>
+      <div class="slot-area" v-else>
+        <slot></slot>
+      </div>
 
       <template #content>
         <div class="layui-cascader-panel">
@@ -137,12 +139,19 @@ watch(
 watch(
   () => props.modelValue,
   () => {
-    if (props.modelValue === null || props.modelValue === "") {
-      onClear();
+    if (watchModelValue.value) {
+      if (props.modelValue === null || props.modelValue === "") {
+        onClear();
+      } else {
+        updateDisplayByModelValue();
+      }
+      setTimeout(() => {
+        watchModelValue.value = true;
+      }, 0);
     }
   }
 );
-
+const watchModelValue = ref(true);
 const treeData = ref<any>([]);
 const initTreeData = () => {
   let treeLvNum = getMaxFloor(props.options);
@@ -159,31 +168,28 @@ const initTreeData = () => {
       };
     }
   }
+  updateDisplayByModelValue();
+};
+
+function updateDisplayByModelValue() {
   if (props.modelValue) {
     try {
       let valueData = props.modelValue.split(props.decollator);
-      let data: any[] = [];
-      for (let index = 0; index < treeData.value.length; index++) {
-        const element = treeData.value[index];
-        const nowValue = valueData[index];
-        for (let i = 0; i < element.length; i++) {
-          const ele = element[i];
-          if (nowValue === ele.value) {
-            data.push(ele);
-            element.selectIndex = i;
-          }
+      for (let index = 0; index < valueData.length; index++) {
+        const element = valueData[index];
+        let selectIndex = treeData.value[index].data.findIndex(
+          (e: { value: string }) => e.value === element
+        );
+        if (selectIndex == -1) {
+          break;
         }
+        selectBar(treeData.value[index].data[selectIndex], selectIndex, index);
       }
-      displayValue.value = data
-        .map((e) => {
-          return e.label;
-        })
-        .join(` ${props.decollator} `);
     } catch (error) {
       console.error(error);
     }
   }
-};
+}
 
 function getMaxFloor(treeData: any) {
   //let floor = 0;
@@ -274,6 +280,7 @@ const selectBar = (item: any, selectIndex: number, parentIndex: number) => {
         return e.value;
       })
       .join(props.decollator);
+    watchModelValue.value = false;
     emit("update:modelValue", value);
     let evt = {
       display: displayValue.value,

@@ -336,9 +336,11 @@ const valueLv=ref(null)
 :::
 ::: demo 使用 `默认插槽` 可以自定义回显区域的内容,并且你可以通过change回调轻松拿到回显的值，同时你也可以使用`动态插槽名`来自定义你想要展示的内容，只需要在传入的数据中加入 `slot`参数，然后愉快的使用插槽自定义内容
 <template>
-  <lay-cascader :options="options" v-model="value2" @change="onChange">
-     <lay-button type="normal">Click me ❤️</lay-button>
-     <lay-badge theme="orange" v-if="displayValue" style="margin-left:10px">{{displayValue}}</lay-badge>
+  <lay-cascader :options="options" v-model="value2" @change="onChange" style="width:350px;">
+    <div style='display:flex;align-items:center'>
+      <lay-button type="normal">Click me ❤️</lay-button>
+      <lay-badge theme="orange" v-if="displayValue" style="margin-left:10px">{{displayValue}}</lay-badge>
+    </div>
   </lay-cascader>
   <lay-cascader :options="options2" v-model="value" placeholder="动态插槽案例" style="width:250px;margin-left:20px">
     <template #Guide>🤨😐😑😶😏😒🙄😬🤥😌</template>
