@@ -1,7 +1,7 @@
 <template>
   <div class="lay-page-header">
     <div class="lay-page-header__left" @click="emits('back')">
-      <slot name="backIcon"
+      <slot :name="backIconSlotName"
         ><i class="layui-icon" :class="[backIcon]"></i
       ></slot>
       <div class="lay-page-header__title">{{ backText }}</div>
@@ -19,7 +19,8 @@ export default {
 };
 </script>
 <script lang="ts" setup>
-import { useSlots } from "vue";
+import { convertSlotName } from "../../utils";
+import { getCurrentInstance, useSlots } from "vue";
 import "./index.less";
 
 export interface PageHeaderProps {
@@ -34,6 +35,7 @@ const props = withDefaults(defineProps<PageHeaderProps>(), {
 });
 
 const emits = defineEmits(["back"]);
-
 const slots = useSlots();
+const instance = getCurrentInstance()!;
+const backIconSlotName = convertSlotName(instance, "backIcon");
 </script>

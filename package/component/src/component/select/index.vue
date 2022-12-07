@@ -206,16 +206,21 @@ provide("searchMethod", props.searchMethod);
       <lay-tag-input
         v-if="multiple"
         v-model="multipleValue"
+        v-model:input-value="searchValue"
         :allow-clear="allowClear"
         :placeholder="placeholder"
         :collapseTagsTooltip="collapseTagsTooltip"
         :minCollapsedNum="minCollapsedNum"
-        :disabledInput="true"
         :disabled="disabled"
+        :disabledInput="!showSearch"
         :size="size"
         :class="{ 'layui-unselect': true }"
         @remove="handleRemove"
         @clear="handleClear"
+        @input-value-change="handleSearch"
+        @keyup.delete.capture.prevent.stop
+        @keyup.backspace.capture.prevent.stop
+        @keydown.enter.capture.prevent.stop
       >
         <template #suffix>
           <lay-icon
@@ -247,17 +252,6 @@ provide("searchMethod", props.searchMethod);
       </lay-input>
       <template #content>
         <dl class="layui-select-content">
-          <div class="layui-select-search" v-if="multiple && showSearch">
-            <lay-input
-              size="sm"
-              prefix-icon="layui-icon-search"
-              :modelValue="searchValue"
-              :placeholder="searchPlaceholder"
-              @compositionstart="onCompositionstart"
-              @compositionend="onCompositionend"
-              @input="handleSearch"
-            ></lay-input>
-          </div>
           <template v-if="items">
             <lay-select-option
               v-for="(item, index) in items"

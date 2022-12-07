@@ -1,4 +1,4 @@
-import { Component, VNode, VNodeTypes } from "vue";
+import { Component, ComponentInternalInstance, VNode, VNodeTypes } from "vue";
 
 export enum ShapeFlags {
   ELEMENT = 1,
@@ -31,3 +31,27 @@ export const isArrayChildren = (
 ): children is VNode[] => {
   return Boolean(vn && vn.shapeFlag & ShapeFlags.ARRAY_CHILDREN);
 };
+
+/**
+ * 同时支持驼峰命名和破折号命名的插槽，示例：back-icon 和 backIcon
+ * @param vm 组件实例
+ * @param name 插槽名
+ */
+export function convertSlotName(vm: ComponentInternalInstance, name: string) {
+  const camelCaseName = camelCase(name);
+  const kebabCaseName = kebabCase(name);
+  return vm.slots[camelCaseName] 
+    ? camelCaseName 
+    : vm.slots[kebabCaseName] 
+    ? kebabCaseName
+    : name
+}
+
+export function camelCase(str: string) {
+  return str.replace(/-(\w)/g, (_, c) => (c ? c.toUpperCase() : ''))
+}
+
+export function kebabCase(key: string) {
+  const result = key.replace(/([A-Z])/g, ' $1').trim();
+  return result.split(' ').join('-').toLowerCase()
+}
