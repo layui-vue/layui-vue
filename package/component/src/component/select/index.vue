@@ -211,7 +211,6 @@ provide("searchMethod", props.searchMethod);
         :placeholder="placeholder"
         :collapseTagsTooltip="collapseTagsTooltip"
         :minCollapsedNum="minCollapsedNum"
-        :disabledInput="true"
         :disabled="disabled"
         :disabledInput="!showSearch"
         :size="size"
@@ -253,7 +252,6 @@ provide("searchMethod", props.searchMethod);
       </lay-input>
       <template #content>
         <dl class="layui-select-content">
-          </div>
           <template v-if="items">
             <lay-select-option
               v-for="(item, index) in items"
