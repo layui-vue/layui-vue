@@ -300,12 +300,11 @@ defineExpose({
           </template>
         </LayToopTip>
       </template>
-      <template v-if="!disabledInput">
         <input
           ref="inputRefEl"
           class="layui-tag-input-inner-input"
           :style="inputStyle"
-          :disabled="disabled"
+          :disabled="(disabled || disabledInput)"
           :placeholder="placeholder"
           :readonly="readonly"
           @keydown.enter="handleEnter"
@@ -317,7 +316,6 @@ defineExpose({
           @compositionupdate="handleComposition"
           @compositionend="handleComposition"
         />
-      </template>
     </span>
     <span
       v-if="allowClear && tagData?.length && !disabled"
