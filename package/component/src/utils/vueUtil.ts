@@ -40,18 +40,18 @@ export const isArrayChildren = (
 export function convertSlotName(vm: ComponentInternalInstance, name: string) {
   const camelCaseName = camelCase(name);
   const kebabCaseName = kebabCase(name);
-  return vm.slots[camelCaseName] 
-    ? camelCaseName 
-    : vm.slots[kebabCaseName] 
+  return vm.slots[camelCaseName]
+    ? camelCaseName
+    : vm.slots[kebabCaseName]
     ? kebabCaseName
-    : name
+    : name;
 }
 
 export function camelCase(str: string) {
-  return str.replace(/-(\w)/g, (_, c) => (c ? c.toUpperCase() : ''))
+  return str.replace(/-(\w)/g, (_, c) => (c ? c.toUpperCase() : ""));
 }
 
 export function kebabCase(key: string) {
-  const result = key.replace(/([A-Z])/g, ' $1').trim();
-  return result.split(' ').join('-').toLowerCase()
+  const result = key.replace(/([A-Z])/g, " $1").trim();
+  return result.split(" ").join("-").toLowerCase();
 }

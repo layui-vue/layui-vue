@@ -300,22 +300,22 @@ defineExpose({
           </template>
         </LayToopTip>
       </template>
-        <input
-          ref="inputRefEl"
-          class="layui-tag-input-inner-input"
-          :style="inputStyle"
-          :disabled="(disabled || disabledInput)"
-          :placeholder="placeholder"
-          :readonly="readonly"
-          @keydown.enter="handleEnter"
-          @keyup="handleBackspaceKeyUp"
-          @input="handleInput"
-          @focus="handleFocus"
-          @blur="handleBlur"
-          @compositionstart="handleComposition"
-          @compositionupdate="handleComposition"
-          @compositionend="handleComposition"
-        />
+      <input
+        ref="inputRefEl"
+        class="layui-tag-input-inner-input"
+        :style="inputStyle"
+        :disabled="disabled || disabledInput"
+        :placeholder="placeholder"
+        :readonly="readonly"
+        @keydown.enter="handleEnter"
+        @keyup="handleBackspaceKeyUp"
+        @input="handleInput"
+        @focus="handleFocus"
+        @blur="handleBlur"
+        @compositionstart="handleComposition"
+        @compositionupdate="handleComposition"
+        @compositionend="handleComposition"
+      />
     </span>
     <span
       v-if="allowClear && tagData?.length && !disabled"

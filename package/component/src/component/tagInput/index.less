@@ -108,6 +108,9 @@
       .layui-tag-input-inner-input {
         height: @@height - (@@inner-padding + @tag-input-boeder)* 2;
         vertical-align: middle;
+        &:disabled {
+          background: transparent;
+        }
       }
 
       .layui-tag-input-inner {
