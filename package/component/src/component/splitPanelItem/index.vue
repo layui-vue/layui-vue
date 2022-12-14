@@ -23,7 +23,7 @@ export interface StepItemProps {
 }
 
 const props = withDefaults(defineProps<StepItemProps>(), {
-  space: '',
+  space: "",
 });
 
 const index = ref(-1);

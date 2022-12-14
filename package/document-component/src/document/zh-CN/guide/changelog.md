@@ -16,8 +16,10 @@
       <li> 
         <h3>1.7.12 <span class="layui-badge-rim">2022-12-05</span></h3> 
         <ul>
+          <li>[新增] split-panel-item 组件 space 属性百分比数值支持。</li>
           <li>[修复] icon-picker 组件按需加载 lay-icon 无法解析的警告。</li>
-        </ul> 
+          <li>[修复] table 组件 columns 属性动态修改后表格不刷新的响应式问题。</li>
+        </ul>  
       </li>
     </ul>
     <ul> 

@@ -7,7 +7,14 @@ export default {
 <script lang="ts" setup>
 import { Recordable } from "../../types";
 import { LayIcon } from "@layui/icons-vue";
-import { computed, ref, StyleValue, useSlots, WritableComputedRef } from "vue";
+import {
+  computed,
+  ref,
+  StyleValue,
+  useSlots,
+  WritableComputedRef,
+  watch,
+} from "vue";
 import LayCheckbox from "../checkbox/index.vue";
 import LayTooltip from "../tooltip/index.vue";
 import LayRadio from "../radio/index.vue";
@@ -107,11 +114,16 @@ const isExpand: WritableComputedRef<any> = computed({
 
 const slotsData = ref<string[]>([]);
 
-props.columns.map((value: any) => {
-  if (value.customSlot) {
-    slotsData.value.push(value.customSlot);
-  }
-});
+watch(
+  () => props.columns,
+  () => {
+    props.columns.map((value: any) => {
+      if (value.customSlot) {
+        slotsData.value.push(value.customSlot);
+      }
+    });
+  }, {immediate: true}
+);
 
 const rowClick = function (data: any, evt: MouseEvent) {
   emit("row", data, evt);
@@ -531,12 +543,14 @@ const radioProps = props.getRadioProps(props.data, props.index);
                     ></slot>
                   </template>
                 </lay-tooltip>
+                
                 <slot
                   v-else
                   :name="column.customSlot"
                   :data="data"
                   :column="column"
                 ></slot>
+        
               </div>
             </td>
           </template>
