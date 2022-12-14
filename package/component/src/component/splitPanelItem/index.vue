@@ -19,11 +19,11 @@ import {
 import type { ComputedRef } from "vue";
 
 export interface StepItemProps {
-  space?: number;
+  space?: string;
 }
 
 const props = withDefaults(defineProps<StepItemProps>(), {
-  space: 0,
+  space: '0px',
 });
 
 const index = ref(-1);
@@ -83,10 +83,13 @@ const isLast: ComputedRef<boolean> = computed(() => {
 const isStart: ComputedRef<boolean> = computed(() => {
   return parents.steps.value[0]?.itemId === currentInstance.uid;
 });
+
 const stepItemState = reactive({
   itemId: computed(() => currentInstance?.uid),
   setIndex,
-  space: props.space,
+  space: computed(() => {
+    return /^\d+$/.test(props.space) ? props.space + 'px' : props.space;
+  }),
 });
 parents.steps.value = [...parents.steps.value, stepItemState];
 
@@ -110,14 +113,14 @@ onBeforeUnmount(() => {
     ref="laySplitPanelItem"
     v-if="isVertical"
     :class="['lay-split-panel-item']"
-    :style="{ flexBasis: `${space}px`, flexGrow: space ? 0 : 1 }"
+    :style="{ flexBasis: space, flexGrow: space === '0px' ? 0 : 1 }"
   >
     <slot></slot>
   </div>
   <div
     v-else
     :class="['lay-split-panel-item']"
-    :style="{ flexBasis: `${space}px`, flexGrow: space ? 0 : 1 }"
+    :style="{ flexBasis: space, flexGrow: space === '0px' ? 0 : 1 }"
   >
     <slot></slot>
   </div>
