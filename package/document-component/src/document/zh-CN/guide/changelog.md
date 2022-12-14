@@ -12,6 +12,15 @@
 <lay-timeline>
   <lay-timeline-item title="1.7.x">
       <ul> 
+      <a name="1-7-12"></a> 
+      <li> 
+        <h3>1.7.12 <span class="layui-badge-rim">2022-12-05</span></h3> 
+        <ul>
+          <li>[修复] icon-picker 组件按需加载 lay-icon 无法解析的警告。</li>
+        </ul> 
+      </li>
+    </ul>
+    <ul> 
       <a name="1-7-11"></a> 
       <li> 
         <h3>1.7.11 <span class="layui-badge-rim">2022-12-05</span></h3> 

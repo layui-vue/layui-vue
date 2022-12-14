@@ -7,10 +7,10 @@ export default {
 <script setup lang="ts">
 import "./index.less";
 import { computed, Ref, ref, StyleValue } from "vue";
-import { LayIconList as icons } from "@layui/icons-vue";
+import { LayIconList as icons, LayIcon } from "@layui/icons-vue";
 import LayDropdown from "../dropdown/index.vue";
-import LayInput from "../input/index.vue";
 import LayScroll from "../scroll/index.vue";
+import LayInput from "../input/index.vue";
 
 export interface IconPickerProps {
   page?: boolean;
