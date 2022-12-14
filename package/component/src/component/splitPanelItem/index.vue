@@ -19,11 +19,11 @@ import {
 import type { ComputedRef } from "vue";
 
 export interface StepItemProps {
-  space?: string;
+  space?: string | number;
 }
 
 const props = withDefaults(defineProps<StepItemProps>(), {
-  space: '0px',
+  space: '',
 });
 
 const index = ref(-1);
@@ -33,6 +33,9 @@ const moveStatus = ref(false);
 const setIndex = (val: number) => {
   index.value = val;
 };
+const space = computed(() => {
+  return /^\d+$/.test(props.space + "") ? props.space + "px" : props.space;
+});
 
 const mouseup = (event: any) => {
   moveStatus.value = false;
@@ -87,9 +90,7 @@ const isStart: ComputedRef<boolean> = computed(() => {
 const stepItemState = reactive({
   itemId: computed(() => currentInstance?.uid),
   setIndex,
-  space: computed(() => {
-    return /^\d+$/.test(props.space) ? props.space + 'px' : props.space;
-  }),
+  space: space,
 });
 parents.steps.value = [...parents.steps.value, stepItemState];
 
@@ -113,14 +114,14 @@ onBeforeUnmount(() => {
     ref="laySplitPanelItem"
     v-if="isVertical"
     :class="['lay-split-panel-item']"
-    :style="{ flexBasis: space, flexGrow: space === '0px' ? 0 : 1 }"
+    :style="{ flexBasis: space, flexGrow: space ? 0 : 1 }"
   >
     <slot></slot>
   </div>
   <div
     v-else
     :class="['lay-split-panel-item']"
-    :style="{ flexBasis: space, flexGrow: space === '0px' ? 0 : 1 }"
+    :style="{ flexBasis: space, flexGrow: space ? 0 : 1 }"
   >
     <slot></slot>
   </div>
