@@ -236,7 +236,7 @@ const boxStyle = computed(() => {
             value="all"
             @change="allLeftChange"
           >
-            {{ title[0] }}
+            <slot name="leftTitle">{{ title[0] }}</slot>
           </LayCheckbox>
         </div>
         <div class="layui-transfer-search" v-if="showSearch">
@@ -288,7 +288,7 @@ const boxStyle = computed(() => {
             value="all"
             @change="allRightChange"
           >
-            {{ title[1] }}
+            <slot name="rightTitle">{{ title[1] }}</slot>
           </LayCheckbox>
         </div>
         <div class="layui-transfer-search" v-if="showSearch">

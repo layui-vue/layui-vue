@@ -13,7 +13,10 @@
 ::: demo 使用 `lay-transfer` 标签, 创建穿梭框
 
 <template>
-  <lay-transfer v-model="value1" :dataSource="dataSource1"></lay-transfer>
+  <lay-transfer v-model="value1" :dataSource="dataSource1">
+    <template #leftTitle> 标题1 </template>
+    <template #rightTitle> 标题2 </template>
+  </lay-transfer>
 </template>
 
 <script>

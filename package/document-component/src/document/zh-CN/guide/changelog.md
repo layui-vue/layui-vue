@@ -16,6 +16,8 @@
       <li> 
         <h3>1.7.12 <span class="layui-badge-rim">2022-12-15</span></h3> 
         <ul>
+          <li>[新增] transfer 组件 leftTitle 插槽, 自定义左侧标题。</li>
+          <li>[新增] transfer 组件 rightTitle 插槽, 自定义右侧标题。</li>
           <li>[新增] transfer 组件 search-method 方法，自定义搜索逻辑。</li>
           <li>[新增] tag-input 组件 append 插槽, 用于前缀自定义内容。</li>
           <li>[新增] tag-input 组件 prepend 插槽, 用于后缀自定义内容。</li>
