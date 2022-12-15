@@ -229,7 +229,7 @@ const tableExpandKeys = ref<Recordable[]>([...props.expandKeys]);
 const tableSelectedKeys = ref<Recordable[]>([...props.selectedKeys]);
 
 /**
- * 监听 columns 变化 
+ * 监听 columns 变化
  */
 watch(
   tableColumns,

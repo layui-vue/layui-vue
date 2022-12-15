@@ -222,6 +222,12 @@ provide("searchMethod", props.searchMethod);
         @keyup.backspace.capture.prevent.stop
         @keydown.enter.capture.prevent.stop
       >
+        <template v-if="slots.prepend" #prepend>
+          <slot name="prepend"></slot>
+        </template>
+        <template v-if="slots.append" #append>
+          <slot name="append" ></slot>
+        </template>
         <template #suffix>
           <lay-icon
             type="layui-icon-triangle-d"
@@ -243,6 +249,12 @@ provide("searchMethod", props.searchMethod);
         @Input="handleSearch"
         @clear="handleClear"
       >
+        <template v-if="slots.prepend" #prepend>
+          <slot name="prepend"></slot>
+        </template>
+        <template v-if="slots.append" #append>
+          <slot name="append" ></slot>
+        </template>
         <template #suffix>
           <lay-icon
             type="layui-icon-triangle-d"

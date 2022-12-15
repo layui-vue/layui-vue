@@ -20,6 +20,8 @@
     placeholder="请输入" 
     style="width:320px"
     >
+      <template #prepend>前缀</template> 
+      <template #append>后缀</template>
   </lay-tag-input>
 </template>
 

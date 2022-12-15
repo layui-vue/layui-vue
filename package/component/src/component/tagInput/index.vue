@@ -15,6 +15,7 @@ import {
   computed,
   reactive,
   nextTick,
+  useSlots
 } from "vue";
 import { isObject, reactiveOmit, useResizeObserver } from "@vueuse/core";
 import { LayIcon } from "@layui/icons-vue";
@@ -49,17 +50,18 @@ const props = withDefaults(defineProps<TagInputProps>(), {
 });
 
 const emit = defineEmits([
+  "change",
   "update:modelValue",
   "update:inputValue",
-  "change",
   "inputValueChange",
+  "pressEnter",
   "remove",
   "clear",
   "focus",
   "blur",
-  "pressEnter",
 ]);
 
+const slots = useSlots();
 const mirrorRefEl = shallowRef<HTMLElement | undefined>(undefined);
 const inputRefEl = shallowRef<HTMLInputElement | undefined>(undefined);
 const oldInputValue = ref<string>("");
@@ -251,6 +253,9 @@ defineExpose({
     <span ref="mirrorRefEl" class="layui-tag-input-mirror">
       {{ compositionValue || inputValue || placeholder }}
     </span>
+    <div class="layui-tag-input-prepend" v-if="slots.prepend">
+      <slot name="prepend"></slot>
+    </div>
     <span v-if="$slots.prefix">
       <slot name="prefix"></slot>
     </span>
@@ -326,5 +331,8 @@ defineExpose({
     <span class="layui-tag-input-suffix" v-if="$slots.suffix">
       <slot name="suffix"></slot>
     </span>
+    <div class="layui-tag-input-append" v-if="slots.append">
+      <slot name="append"></slot>
+    </div>
   </div>
 </template>
