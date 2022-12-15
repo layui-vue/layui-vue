@@ -20,6 +20,7 @@ export interface TransferProps {
   showSearch?: BooleanOrString;
   dataSource: Recordable[];
   modelValue?: Recordable[];
+  searchMethod?: Function;
 }
 
 const slots = useSlots();
@@ -190,8 +191,12 @@ const searchLeft = (e: any) => {
     leftDataSource.value = _leftDataSource.value;
   }
   leftDataSource.value = _leftDataSource.value.filter((item) => {
-    if (item.title.indexOf(e) != -1) {
+    if (props.searchMethod && props.searchMethod(e, item)) {
       return item;
+    } else {
+      if (item.title?.indexOf(e) != -1) {
+        return item;
+      }
     }
   });
 };
@@ -201,8 +206,12 @@ const searchRight = (e: any) => {
     rightDataSource.value = _rightDataSource.value;
   }
   rightDataSource.value = _rightDataSource.value.filter((item) => {
-    if (item.title.indexOf(e) != -1) {
+    if (props.searchMethod && props.searchMethod(e, item)) {
       return item;
+    } else {
+      if (item.title?.indexOf(e) != -1) {
+        return item;
+      }
     }
   });
 };

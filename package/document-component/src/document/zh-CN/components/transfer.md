@@ -104,7 +104,11 @@ export default {
 ::: demo
 
 <template>
-  <lay-transfer v-model="value5" :dataSource="dataSource5" :showSearch="true"></lay-transfer>
+  <lay-transfer v-model="value6" :dataSource="dataSource6" :showSearch="true">
+    <template v-slot:item="{ data }">
+      {{data.label}}
+    </template>
+  </lay-transfer>
 </template>
 
 <script>
@@ -113,20 +117,20 @@ import { ref } from 'vue'
 export default {
   setup() {
 
-    const value5 = ref([]);
-    const dataSource5 = [
-      {id:'1', title:'无影剑'},
-      {id:'2', title:'逸龙剑'},
-      {id:'3', title:'精灵之语'},
-      {id:'4', title:'十字斩刀-斗'},
-      {id:'5', title:'落炎魔杖'},
-      {id:'6', title:'石中剑'},
-      {id:'7', title:'屠戮之刃'}
+    const value6 = ref([]);
+    const dataSource6 = [
+      {id:'1', label:'无影剑'},
+      {id:'2', label:'逸龙剑'},
+      {id:'3', label:'精灵之语'},
+      {id:'4', label:'十字斩刀-斗'},
+      {id:'5', label:'落炎魔杖'},
+      {id:'6', label:'石中剑'},
+      {id:'7', label:'屠戮之刃'}
     ]
     
     return {
-      value5,
-      dataSource5
+      value6,
+      dataSource6
     }
   }
 }
