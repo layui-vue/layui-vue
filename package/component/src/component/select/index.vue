@@ -226,7 +226,7 @@ provide("searchMethod", props.searchMethod);
           <slot name="prepend"></slot>
         </template>
         <template v-if="slots.append" #append>
-          <slot name="append" ></slot>
+          <slot name="append"></slot>
         </template>
         <template #suffix>
           <lay-icon
@@ -253,7 +253,7 @@ provide("searchMethod", props.searchMethod);
           <slot name="prepend"></slot>
         </template>
         <template v-if="slots.append" #append>
-          <slot name="append" ></slot>
+          <slot name="append"></slot>
         </template>
         <template #suffix>
           <lay-icon

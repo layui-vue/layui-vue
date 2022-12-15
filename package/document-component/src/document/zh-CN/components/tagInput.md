@@ -20,8 +20,6 @@
     placeholder="请输入" 
     style="width:320px"
     >
-      <template #prepend>前缀</template> 
-      <template #append>后缀</template>
   </lay-tag-input>
 </template>
 
@@ -244,6 +242,7 @@ export default {
 :::
 
 :::table
+
 | 名称 | 描述 | 参数 |
 |------ |----------|-----------|
 | change | 值改变时触发 | (value: (string &#124; number &#124; TagData)[]) |
@@ -253,24 +252,31 @@ export default {
 | focus | 获得焦点时触发| (e: Event) |
 | blur | 失去焦点时触发| (e: Event) |
 | pressEnter| 按下 Enter 键时触发|  (inputValue: string, e: Event) |
+
 :::
 
 :::title TagInput 方法
 :::
 
 :::table
+
 | 名称 | 描述 | 参数 |
 |------ |----------|-----------|
 | focus | 获取焦点 | - |
 | blur |失去焦点  | - |
+
 :::
 
 :::title TagInput 插槽
 :::
 
 :::table
+
 | 插槽 | 描述 | 参数 |
 |------ |----------|-----------|
 | prefix | 前置插槽 | - |
 | suffix | 后置插槽 | - |
+| prepend | 自定义前缀 | - |
+| append  |  自定义后缀 | - |
+
 :::

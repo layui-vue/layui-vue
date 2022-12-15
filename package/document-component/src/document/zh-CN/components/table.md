@@ -1534,7 +1534,7 @@ export default {
 | id                   | 主键                                                  | `string`            | --         | --                 | --      |
 | v-model:selectedKeys | 选中项 (多选)                                         | --                  | --         | --                 | --      |
 | v-model:selectedKey  | 选中项 (单选)                                         | --                  | --         | --                 | --      |
-| default-toolbar      | 工具栏                                                | `boolean`           | `false`    | `true` `false`     | --      |
+| default-toolbar      | 工具栏                                                | `boolean` `array`          | `false`    | `true` `false` `['filter','export','print']`     | --      |
 | size                 | 尺寸                                                  | `string`            | `md`       | `lg` `md` `sm`     | --      |
 | children-column-name | 树节点字段                                            | `string`            | `children` | --                 | --      |
 | indent-size          | 树表行级缩进                                          | `number`            | `30`       | --                 | --      |

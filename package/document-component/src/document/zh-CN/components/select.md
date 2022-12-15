@@ -72,27 +72,9 @@ export default {
 
 <template>
   <lay-select v-model="value3" :show-search="true">
-    <template #prepend>
-      前缀
-    </template>
     <lay-select-option value="1" label="学习"></lay-select-option>
     <lay-select-option value="2" label="编码"></lay-select-option>
     <lay-select-option value="3" label="运动"></lay-select-option>
-    <template #append>
-      后缀
-    </template>
-  </lay-select>
-  <br />
-  <lay-select v-model="value31" :show-search="true" :multiple="true">
-    <template #prepend>
-      前缀
-    </template>
-    <lay-select-option value="1" label="学习"></lay-select-option>
-    <lay-select-option value="2" label="编码"></lay-select-option>
-    <lay-select-option value="3" label="运动"></lay-select-option>
-    <template #append>
-      后缀
-    </template>
   </lay-select>
 </template>
 
@@ -103,10 +85,9 @@ export default {
   setup() {
 
     const value3 = ref('1')
-    const value31 = ref([])
+
     return {
-      value3,
-      value31
+      value3
     }
   }
 }
@@ -295,7 +276,9 @@ export default {
 
 | 属性    |         描述       |     接收值      |
 | ------- | ----------------- | --------------- |
-| default | 默认(`label`)      |        -       |
+| default | 默认(`label`)     |        -       |
+| prepend | 自定义前缀         |        -       |
+| append  | 自定义后缀         |        -       |
 
 :::
 

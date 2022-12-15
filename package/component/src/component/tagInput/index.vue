@@ -15,7 +15,7 @@ import {
   computed,
   reactive,
   nextTick,
-  useSlots
+  useSlots,
 } from "vue";
 import { isObject, reactiveOmit, useResizeObserver } from "@vueuse/core";
 import { LayIcon } from "@layui/icons-vue";
