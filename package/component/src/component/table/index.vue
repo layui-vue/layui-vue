@@ -99,7 +99,6 @@ const tableColumns = computed(() => {
   return [...props.columns];
 });
 
-
 const tableColumnKeys = ref<any[]>([]);
 const tableHeadColumns = ref<any[]>([]);
 const tableBodyColumns = ref<any[]>([]);
@@ -226,14 +225,21 @@ const findFinalNode = (level: number, columns: any[]) => {
   });
 };
 
-const tableSelectedKeys = ref<Recordable[]>([...props.selectedKeys]);
 const tableExpandKeys = ref<Recordable[]>([...props.expandKeys]);
+const tableSelectedKeys = ref<Recordable[]>([...props.selectedKeys]);
 
-watch(tableColumns, () => {
-  findFindNode(tableColumns.value);
-  findFindNodes(tableColumns.value);
-  findFinalNode(0, tableColumns.value);
-}, { immediate: true })
+/**
+ * 监听 columns 变化 
+ */
+watch(
+  tableColumns,
+  () => {
+    findFindNode(tableColumns.value);
+    findFindNodes(tableColumns.value);
+    findFinalNode(0, tableColumns.value);
+  },
+  { immediate: true }
+);
 
 watch(
   () => props.selectedKeys,
@@ -502,16 +508,21 @@ const getFixedColumn = () => {
 
 const slotsData = ref<string[]>([]);
 
-watch(() => props.columns, () => {
-  slotsData.value = [];
-  props.columns.map((value: any) => {
-    if (value.customSlot) {
-      slotsData.value.push(value.customSlot);
-    }
-  });
-}, { immediate: true })
+watch(
+  () => props.columns,
+  () => {
+    slotsData.value = [];
+    props.columns.map((value: any) => {
+      if (value.customSlot) {
+        slotsData.value.push(value.customSlot);
+      }
+    });
+  },
+  { immediate: true }
+);
 
 const currentIndentSize = ref(0);
+
 const childrenExpandSpace = computed(() => {
   return (
     props.dataSource.find((value: any) => {

@@ -122,7 +122,8 @@ watch(
         slotsData.value.push(value.customSlot);
       }
     });
-  }, {immediate: true}
+  },
+  { immediate: true }
 );
 
 const rowClick = function (data: any, evt: MouseEvent) {
@@ -289,8 +290,8 @@ const isAutoShow = (
   }
 };
 
-const checkboxProps = props.getCheckboxProps(props.data, props.index);
 const radioProps = props.getRadioProps(props.data, props.index);
+const checkboxProps = props.getCheckboxProps(props.data, props.index);
 </script>
 
 <template>
@@ -543,14 +544,13 @@ const radioProps = props.getRadioProps(props.data, props.index);
                     ></slot>
                   </template>
                 </lay-tooltip>
-                
+
                 <slot
                   v-else
                   :name="column.customSlot"
                   :data="data"
                   :column="column"
                 ></slot>
-        
               </div>
             </td>
           </template>
