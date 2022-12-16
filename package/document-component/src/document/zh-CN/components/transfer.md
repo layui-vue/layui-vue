@@ -249,6 +249,7 @@ export default {
 | showSearch | 开启搜索        | --              |
 | width      | 左右盒子宽度        | `200px`              |
 | height     | 左右盒子高度        |  `360px`              |
+| searchMethod  | 自定义搜索逻辑 (searchValue, data)    | `Function` | -- | -- |
 
 :::
 
@@ -262,6 +263,8 @@ export default {
 | item | 列表项      | { data }        |
 | leftFooter | 左侧盒子底部内容      | --      |
 | rightFooter | 右侧盒子底部内容      | --        |
+| leftTitle | 左侧盒子顶部内容      | --      |
+| rightTitle | 右侧盒子顶部内容      | --        |
 
 :::
 
