@@ -191,8 +191,10 @@ const searchLeft = (e: any) => {
     leftDataSource.value = _leftDataSource.value;
   }
   leftDataSource.value = _leftDataSource.value.filter((item) => {
-    if (props.searchMethod && props.searchMethod(e, item)) {
-      return item;
+    if (props.searchMethod) {
+      if(props.searchMethod(e, item)) {
+        return item;
+      }
     } else {
       if (item.title?.indexOf(e) != -1) {
         return item;
@@ -206,8 +208,10 @@ const searchRight = (e: any) => {
     rightDataSource.value = _rightDataSource.value;
   }
   rightDataSource.value = _rightDataSource.value.filter((item) => {
-    if (props.searchMethod && props.searchMethod(e, item)) {
-      return item;
+    if (props.searchMethod) {
+      if(props.searchMethod(e, item)) {
+        return item;
+      }
     } else {
       if (item.title?.indexOf(e) != -1) {
         return item;
