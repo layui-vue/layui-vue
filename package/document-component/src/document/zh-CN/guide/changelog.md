@@ -17,6 +17,7 @@
         <h3>1.7.13 <span class="layui-badge-rim">2022-12-17</span></h3> 
         <ul>
           <li>[修复] select 组件多选模式设置 style 属性 width 宽度失效问题。</li>
+          <li>[修复] transfer 组件 search-method 设置后默认检索逻辑仍生效的问题。</li>
         </ul>  
       </li>
     </ul>
