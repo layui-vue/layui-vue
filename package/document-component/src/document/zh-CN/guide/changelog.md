@@ -20,7 +20,8 @@
           <li>[修复] transfer 组件 search-method 设置后默认检索逻辑仍生效的问题。</li>
           <li>[修复] transfer 组件 width 属性受 flex 影响宽度不稳定的问题。</li>
           <li>[修复] tab 组件在夜间模式下默认样式与卡片样式出现额外的白色边框。</li>
-          <li>[文档] router 路由拦截添加 nprogress 加载过渡动画。</li>
+          <li>[优化] transfer 组件 search 属性开启时，拼字阶段仍触发搜索的问题。</li>
+          <li>[优化] router 路由拦截添加 nprogress 加载过渡动画。</li>
         </ul>  
       </li>
     </ul>

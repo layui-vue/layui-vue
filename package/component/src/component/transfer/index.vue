@@ -186,39 +186,42 @@ const remove = () => {
   rightSelectedKeys.value = [];
 };
 
-const searchLeft = (e: any) => {
-  if (e === "") {
+const searchLeftValue = ref("");
+const searchRightValue = ref("");
+
+watch(searchLeftValue, () => {
+  if (searchLeftValue.value === "") {
     leftDataSource.value = _leftDataSource.value;
   }
   leftDataSource.value = _leftDataSource.value.filter((item) => {
     if (props.searchMethod) {
-      if (props.searchMethod(e, item)) {
+      if (props.searchMethod(searchLeftValue.value, item)) {
         return item;
       }
     } else {
-      if (item.title?.indexOf(e) != -1) {
+      if (item.title?.indexOf(searchLeftValue.value) != -1) {
         return item;
       }
     }
   });
-};
+})
 
-const searchRight = (e: any) => {
-  if (e === "") {
+watch(searchRightValue, () => {
+  if (searchRightValue.value === "") {
     rightDataSource.value = _rightDataSource.value;
   }
   rightDataSource.value = _rightDataSource.value.filter((item) => {
     if (props.searchMethod) {
-      if (props.searchMethod(e, item)) {
+      if (props.searchMethod(searchRightValue.value, item)) {
         return item;
       }
     } else {
-      if (item.title?.indexOf(e) != -1) {
+      if (item.title?.indexOf(searchRightValue.value) != -1) {
         return item;
       }
     }
   });
-};
+})
 
 const boxStyle = computed(() => {
   return {
@@ -246,9 +249,9 @@ const boxStyle = computed(() => {
         </div>
         <div class="layui-transfer-search" v-if="showSearch">
           <lay-input
+            v-model="searchLeftValue"
             prefix-icon="layui-icon-search"
             placeholder="关键词搜索"
-            @input="searchLeft"
           ></lay-input>
         </div>
         <ul class="layui-transfer-data">
@@ -298,9 +301,9 @@ const boxStyle = computed(() => {
         </div>
         <div class="layui-transfer-search" v-if="showSearch">
           <lay-input
+            v-model="searchRightValue"
             prefix-icon="layui-icon-search"
             placeholder="关键词搜索"
-            @input="searchRight"
           ></lay-input>
         </div>
         <ul class="layui-transfer-data">
