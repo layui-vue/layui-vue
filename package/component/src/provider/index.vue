@@ -38,7 +38,36 @@ const ignoreInlineStyle = [
 
 const fixCss = `
 .lay-progress-circle svg {
-    filter: invert(98%) hue-rotate(180deg) contrast(80%) !important;
+  filter: invert(98%) hue-rotate(180deg) contrast(80%) !important;
+}
+.layui-tab-card > .layui-tab-head > .layui-tab-title.is-top .layui-this::after, 
+.layui-tab-title .layui-this::after {
+  border-bottom-color: rgb(34, 36, 37);
+}
+.layui-tab-card > .layui-tab-head > .layui-tab-title.is-bottom .layui-this::after,
+.layui-tab-card > .layui-tab-head > .layui-tab-title.is-top .layui-this::after{
+ border-left-color: #3c4042;
+ border-right-color: #3c4042;
+}
+.layui-tab-card > .layui-tab-head > .layui-tab-title.is-bottom .layui-this::after {
+  border-top-color: rgb(34, 36, 37);
+}
+.layui-tab-card > .layui-tab-head > .layui-tab-title.is-left .layui-this::after,
+.layui-tab-card > .layui-tab-head > .layui-tab-title.is-right .layui-this::after {
+  border-top-color: #3c4042;
+  border-bottom-color: #3c4042;
+}
+.layui-tab-title.is-left .layui-this::after {
+  border-right-color: rgb(34, 36, 37);
+  border-top-color: #3c4042;
+  border-bottom-color: #3c4042;
+  border-left-color: #3c4042;
+}
+.layui-tab-title.is-right .layui-this::after {
+  border-left-color: rgb(34, 36, 37);
+  border-top-color: #3c4042;
+  border-bottom-color: #3c4042;
+  border-right-color: #3c4042;
 }
 `;
 

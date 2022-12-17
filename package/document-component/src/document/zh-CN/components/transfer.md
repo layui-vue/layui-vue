@@ -107,7 +107,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-transfer v-model="value6" :dataSource="dataSource6" :showSearch="true">
+  <lay-transfer v-model="value6" :dataSource="dataSource6" :showSearch="true" :searchMethod="searchMethod">
     <template v-slot:item="{ data }">
       {{data.label}}
     </template>
@@ -121,6 +121,7 @@ export default {
   setup() {
 
     const value6 = ref([]);
+
     const dataSource6 = [
       {id:'1', label:'无影剑'},
       {id:'2', label:'逸龙剑'},
@@ -130,10 +131,16 @@ export default {
       {id:'6', label:'石中剑'},
       {id:'7', label:'屠戮之刃'}
     ]
+
+    const searchMethod = (text, item) => {
+      console.log("text:" + text)
+      return item.label.indexOf(text) != -1;
+    }
     
     return {
       value6,
-      dataSource6
+      dataSource6,
+      searchMethod
     }
   }
 }

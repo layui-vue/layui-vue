@@ -36,10 +36,10 @@ export default {
 
 :::
 
-::: title 图标
+::: title 设置图标
 :::
 
-::: demo 通过 `icon` 属性, 快速设置前置图标, 也可通过 title 插槽实现。
+::: demo 自定义标题内容。
 
 <template>
   <lay-tab v-model="current11" :allow-close="true">
