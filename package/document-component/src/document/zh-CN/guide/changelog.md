@@ -11,6 +11,15 @@
 <template>
 <lay-timeline>
   <lay-timeline-item title="1.7.x">
+        <ul> 
+      <a name="1-7-13"></a> 
+      <li> 
+        <h3>1.7.13 <span class="layui-badge-rim">2022-12-17</span></h3> 
+        <ul>
+          <li>[修复] select 组件多选模式设置 style 属性 width 宽度失效问题。</li>
+        </ul>  
+      </li>
+    </ul>
       <ul> 
       <a name="1-7-12"></a> 
       <li> 

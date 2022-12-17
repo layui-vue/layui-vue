@@ -214,6 +214,7 @@ provide("searchMethod", props.searchMethod);
         :disabledInput="!showSearch"
         :size="size"
         :class="{ 'layui-unselect': true }"
+        :style="{ 'width':'100%' }"
         @remove="handleRemove"
         @clear="handleClear"
         @input-value-change="handleSearch"
