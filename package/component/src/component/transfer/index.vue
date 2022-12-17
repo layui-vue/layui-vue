@@ -204,7 +204,7 @@ watch(searchLeftValue, () => {
       }
     }
   });
-})
+});
 
 watch(searchRightValue, () => {
   if (searchRightValue.value === "") {
@@ -221,7 +221,7 @@ watch(searchRightValue, () => {
       }
     }
   });
-})
+});
 
 const boxStyle = computed(() => {
   return {
