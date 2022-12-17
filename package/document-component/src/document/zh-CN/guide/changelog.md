@@ -19,6 +19,7 @@
           <li>[修复] select 组件多选模式设置 style 属性 width 宽度失效问题。</li>
           <li>[修复] transfer 组件 search-method 设置后默认检索逻辑仍生效的问题。</li>
           <li>[修复] transfer 组件 width 属性受 flex 影响宽度不稳定的问题。</li>
+          <li>[文档] router 路由拦截添加 nprogress 加载过渡动画。</li>
         </ul>  
       </li>
     </ul>

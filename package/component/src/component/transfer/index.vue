@@ -224,7 +224,7 @@ const boxStyle = computed(() => {
   return {
     width: props.width,
     height: props.height,
-    flex: `0 0 ${props.width}`
+    flex: `0 0 ${props.width}`,
   };
 });
 </script>
@@ -247,8 +247,8 @@ const boxStyle = computed(() => {
         <div class="layui-transfer-search" v-if="showSearch">
           <lay-input
             prefix-icon="layui-icon-search"
-            @input="searchLeft"
             placeholder="关键词搜索"
+            @input="searchLeft"
           ></lay-input>
         </div>
         <ul class="layui-transfer-data">
@@ -299,8 +299,8 @@ const boxStyle = computed(() => {
         <div class="layui-transfer-search" v-if="showSearch">
           <lay-input
             prefix-icon="layui-icon-search"
-            @input="searchRight"
             placeholder="关键词搜索"
+            @input="searchRight"
           ></lay-input>
         </div>
         <ul class="layui-transfer-data">

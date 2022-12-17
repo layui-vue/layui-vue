@@ -41,3 +41,16 @@
 .theme-panel .layui-dropdown{
   width: auto
 }
+
+#nprogress .spinner {
+  top: 20px;
+}
+
+#nprogress .bar {
+  z-index: 9999999;
+  background-color: var(--global-primary-color);
+}
+
+#nprogress .spinner-icon {
+  border-top-color: var(--global-primary-color);
+}
