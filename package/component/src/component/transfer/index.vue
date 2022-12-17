@@ -224,6 +224,7 @@ const boxStyle = computed(() => {
   return {
     width: props.width,
     height: props.height,
+    flex: `0 0 ${props.width}`
   };
 });
 </script>
