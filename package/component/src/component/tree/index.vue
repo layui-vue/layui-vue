@@ -11,6 +11,8 @@ import { useTree } from "./useTree";
 import { TreeData } from "./tree";
 import { StringFn, StringOrNumber, KeysType, EditType } from "./tree.type";
 import "./index.less";
+import { check } from "prettier";
+import { unwatchFile } from "fs";
 
 export interface OriginalTreeData {
   title: StringFn | string;
@@ -92,7 +94,9 @@ const loadNodeList = () => {
 watch(
   () => props.data,
   () => {
-    loadNodeList();
+    if (!unWatch.value) {
+     loadNodeList();
+    }
   },
   { deep: true, immediate: true }
 );
