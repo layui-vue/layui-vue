@@ -88,6 +88,14 @@ watch(
   { immediate: true, deep: true }
 );
 
+const onClear = function() {
+  if(props.multiple) {
+    selectedValue.value = [];
+  } else {
+    selectedValue.value = "";
+  }
+}
+
 const handleClick = (node: any) => {
   dropdownRef.value.hide();
   selectedValue.value = node.id;
@@ -100,8 +108,8 @@ const handleClick = (node: any) => {
       ref="dropdownRef"
       :disabled="disabled"
       :update-at-scroll="true"
-      @show="openState = true"
-      @hide="openState = false"
+      @show="openState=true"
+      @hide="openState=false"
     >
       <lay-tag-input
         :size="size"
@@ -110,6 +118,7 @@ const handleClick = (node: any) => {
         :collapseTagsTooltip="collapseTagsTooltip"
         :minCollapsedNum="minCollapsedNum"
         :disabledInput="true"
+        @clear="onClear"
         v-model="multipleValue"
         v-if="multiple"
       >
@@ -123,10 +132,12 @@ const handleClick = (node: any) => {
       <lay-input
         v-else
         v-model="singleValue"
+        :allow-clear="allowClear"
         :placeholder="placeholder"
         :disabled="disabled"
         :readonly="true"
         :size="size"
+        @clear="onClear"
       >
         <template #suffix>
           <lay-icon

@@ -10,8 +10,34 @@
 ::: demo
 <template>
 <lay-timeline>
+<lay-timeline-item title="1.8.x">
+    <ul> 
+      <a name="1-8-0"></a> 
+      <li> 
+        <h3>1.8.0 <span class="layui-badge-rim">2023-01-01</span></h3> 
+        <ul>
+          <li>
+            <h4 style="margin-bottom: 0px !important;font-weight: 500 !important;">Tree Select</h4>
+              <ul>
+                <li>[新增] tree-select 组件 v-model 属性，用于设置当前选择值。</li>
+                <li>[新增] tree-select 组件 data 属性，用于设置树数据。</li>
+                <li>[新增] tree-select 组件 multiple 属性，用于设置开启多选模式。</li>
+                <li>[新增] tree-select 组件 allow-clear 属性，用于开启清空操作。</li>
+                <li>[新增] tree-select 组件 disabled 属性，用于禁用选择。</li>
+                <li>[新增] tree-select 组件 placeholder 属性，用于设置提示信息。</li>
+                <li>[新增] tree-select 组件 checkStrictly 属性，用于禁用复选框的级联逻辑。</li>
+                <li>[新增] tree-select 组件 collapseTagsTooltip 属性，用于开启多选值折叠显示。</li>
+                <li>[新增] tree-select 组件 minCollapsedNum 属性，用于设置超过指定标签数量后开启折叠。</li>
+                <li>[新增] tree-select 组件 size 属性，用于设置组件尺寸。</li>
+              </ul>
+            </li>
+          <li>[修复] transfer 组件 search-method 设置后默认检索逻辑仍生效的问题。</li>
+        </ul>  
+      </li>
+    </ul>
+  </lay-timeline-item>
   <lay-timeline-item title="1.7.x">
-        <ul> 
+    <ul> 
       <a name="1-7-13"></a> 
       <li> 
         <h3>1.7.13 <span class="layui-badge-rim">2022-12-18</span></h3> 
