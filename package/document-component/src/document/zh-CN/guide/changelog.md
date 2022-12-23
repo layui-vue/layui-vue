@@ -31,7 +31,10 @@
                 <li>[新增] tree-select 组件 size 属性，用于设置组件尺寸。</li>
               </ul>
             </li>
-          <li>[修复] transfer 组件 search-method 设置后默认检索逻辑仍生效的问题。</li>
+          <li>[优化] input 组件 allow-clear 属性，默认不显示清空按钮，鼠标移入后展示。</li>
+          <li>[优化] textarea 组件 allow-clear 属性，默认不显示清空按钮，鼠标移入后展示。</li>
+          <li>[优化] select 组件 allow-clear 属性，默认不显示清空按钮，鼠标移入后展示。</li>
+          <li>[优化] icon-picker 组件 allow-clear 属性，默认不显示清空按钮，鼠标移入后展示。</li>
         </ul>  
       </li>
     </ul>

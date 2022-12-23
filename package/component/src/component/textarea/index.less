@@ -32,10 +32,15 @@
 }
 
 .layui-textarea-clear {
+  display: none;
   position: absolute;
   color: rgba(0, 0, 0, 0.45);
   right: 10px;
   top: 10px;
+}
+
+.layui-textarea-wrapper:hover .layui-textarea-clear {
+  display: inline-block;
 }
 
 .layui-textarea::-webkit-input-placeholder {

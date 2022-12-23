@@ -88,13 +88,13 @@ watch(
   { immediate: true, deep: true }
 );
 
-const onClear = function() {
-  if(props.multiple) {
+const onClear = function () {
+  if (props.multiple) {
     selectedValue.value = [];
   } else {
     selectedValue.value = "";
   }
-}
+};
 
 const handleClick = (node: any) => {
   dropdownRef.value.hide();
@@ -108,8 +108,8 @@ const handleClick = (node: any) => {
       ref="dropdownRef"
       :disabled="disabled"
       :update-at-scroll="true"
-      @show="openState=true"
-      @hide="openState=false"
+      @show="openState = true"
+      @hide="openState = false"
     >
       <lay-tag-input
         :size="size"

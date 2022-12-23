@@ -48,7 +48,7 @@
 
   &-clear {
     flex: none;
-    display: flex;
+    display: none;
     align-items: center;
     padding: 0 10px;
     color: rgba(0, 0, 0, 0.45);
@@ -142,7 +142,8 @@
 .layui-tag-input:not(.layui-tag-input-disabled):focus-within {
   border-color: #d2d2d2!important;
   .layui-tag-input-clear{
-    visibility: visible;
+    display: flex;
+    visibility: unset;
   }
 }
 

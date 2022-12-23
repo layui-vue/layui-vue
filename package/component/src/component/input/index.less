@@ -75,10 +75,14 @@
 .layui-input-prefix,
 .layui-input-suffix, 
 .layui-input-password {
-  background-color: white;
+  background-color: transparent;
 }
 
-.layui-input-clear,
+.layui-input-clear {
+  display: none;
+}
+
+.layui-input:hover .layui-input-clear,
 .layui-input-password,
 .layui-input-prefix,
 .layui-input-suffix {
