@@ -95,7 +95,7 @@ watch(
   () => props.data,
   () => {
     if (!unWatch.value) {
-     loadNodeList();
+      loadNodeList();
     }
   },
   { deep: true, immediate: true }
