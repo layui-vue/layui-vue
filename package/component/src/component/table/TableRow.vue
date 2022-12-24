@@ -29,6 +29,7 @@ export interface TableRowProps {
   selectedKey: string;
   tableColumnKeys: Recordable[];
   childrenColumnName?: string;
+  page?: any;
   columns: Recordable[];
   checkbox?: boolean;
   cellClassName: string | Function;
@@ -469,7 +470,7 @@ const checkboxProps = props.getCheckboxProps(props.data, props.index);
                 @click="handleExpand"
               ></lay-icon>
 
-              {{ index + 1 }}
+              {{ page?.current ? (page?.current - 1) * page?.limit + index + 1 : index + 1 }}
             </td>
           </template>
         </template>
@@ -642,6 +643,7 @@ const checkboxProps = props.getCheckboxProps(props.data, props.index);
         :id="id"
         :data="children"
         :index="childrenIndex"
+        :page="page"
         :columns="columns"
         :indent-size="indentSize"
         :current-indent-size="childrenIndentSize"

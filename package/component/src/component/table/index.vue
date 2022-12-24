@@ -922,6 +922,7 @@ onBeforeUnmount(() => {
                   :id="id"
                   :index="index"
                   :data="children"
+                  :page="page"
                   :columns="tableBodyColumns"
                   :indent-size="indentSize"
                   :currentIndentSize="currentIndentSize"

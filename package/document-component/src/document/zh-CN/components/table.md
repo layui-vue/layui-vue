@@ -142,6 +142,9 @@ export default {
 
     const columns3 = [
       {
+        type: "number",
+      },
+      {
         title:"账户",
         width:"200px",
         slot:"username",

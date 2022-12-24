@@ -47,6 +47,7 @@
                 <li>[优化] textarea 组件 allow-clear 属性，默认不显示清空按钮，鼠标移入后展示。</li>
                 <li>[优化] select 组件 allow-clear 属性，默认不显示清空按钮，鼠标移入后展示。</li>
                 <li>[优化] icon-picker 组件 allow-clear 属性，默认不显示清空按钮，鼠标移入后展示。</li>
+                <li>[优化] table 组件 column 配置 type 为 number 类型时，起始坐标结合分页数据。</li>
               </ul>
           </li>
         </ul>  
