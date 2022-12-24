@@ -30,7 +30,17 @@
                 <li>[新增] tree-select 组件 minCollapsedNum 属性，用于设置超过指定标签数量后开启折叠。</li>
                 <li>[新增] tree-select 组件 size 属性，用于设置组件尺寸。</li>
               </ul>
-            </li>
+          </li>
+          <li>
+            <h4 style="margin-bottom: 0px !important;font-weight: 500 !important;">Qrcode</h4>
+              <ul>
+                <li>[新增] qrcode 组件 text 属性，用于设置二维码实际值。</li>
+                <li>[新增] qrcode 组件 width 属性，用于设置二维码宽度。</li>
+                <li>[新增] qrcode 组件 color 属性，用于设置二维码前景色。</li>
+                <li>[新增] qrcode 组件 background-color 属性，用于设置二维码背景色。</li>
+                <li>[新增]</li>
+              </ul>
+          </li>
           <li>[优化] input 组件 allow-clear 属性，默认不显示清空按钮，鼠标移入后展示。</li>
           <li>[优化] textarea 组件 allow-clear 属性，默认不显示清空按钮，鼠标移入后展示。</li>
           <li>[优化] select 组件 allow-clear 属性，默认不显示清空按钮，鼠标移入后展示。</li>

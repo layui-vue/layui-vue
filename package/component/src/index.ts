@@ -92,6 +92,7 @@ import LayAffix from "./component/affix/index";
 import LaySpace from "./component/space/index";
 import LayTag from "./component/tag/index";
 import LayTagInput from "./component/tagInput/index";
+import LayQrcode from "./component/qrcode/index";
 import LayConfigProvider from "./provider";
 import { InstallOptions } from "./types";
 
@@ -182,6 +183,7 @@ const components: Record<string, Plugin> = {
   LayTag,
   LayTagInput,
   LayTreeSelect,
+  LayQrcode,
 };
 
 const install = (app: App, options?: InstallOptions): void => {
@@ -279,6 +281,7 @@ export {
   LayTag,
   LayTagInput,
   LayTreeSelect,
+  LayQrcode,
   install,
 };
 

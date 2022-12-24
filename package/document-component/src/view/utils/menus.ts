@@ -401,6 +401,12 @@ const menus = [
         subTitle: "tag",
         path: "/zh-CN/components/tag",
       },
+      {
+        id: 110,
+        title: "二维码",
+        subTitle: "qrcode",
+        path: "/zh-CN/components/qrcode",
+      },
     ],
   },
   {

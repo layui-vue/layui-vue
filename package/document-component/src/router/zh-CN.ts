@@ -416,6 +416,11 @@ const zhCN = [
             meta: { title: "锚点" },
           },
           {
+            path: "/zh-CN/components/qrcode",
+            component: () => import("../document/zh-CN/components/qrcode.md"),
+            meta: { title: "二维码" },
+          },
+          {
             path: "/zh-CN/components/notifiy",
             component: () => import("../document/zh-CN/components/notifiy.md"),
             meta: { title: "通知" },
