@@ -33,7 +33,7 @@ export default {
 ::: title 设置尺寸
 :::
 
-::: demo 使用 `lay-qrcode` 标签, 创建一个二维码。
+::: demo 通过 `width` 属性，设置二维码尺寸。
 
 <template>
   <lay-qrcode text="http://www.layui-vue.com" :width="100"></lay-qrcode>
@@ -56,7 +56,7 @@ export default {
 ::: title 设置颜色
 :::
 
-::: demo 使用 `lay-qrcode` 标签, 创建一个二维码。
+::: demo 通过 `color` 与 `background-color` 属性，设置二维码前景色与背景色。
 
 <template>
   <lay-qrcode text="http://www.layui-vue.com" color="#009688"></lay-qrcode>
@@ -83,10 +83,10 @@ export default {
 
 | 属性         | 描述     | 类型    | 默认值    | 可选值                             | 版本    |
 | ------------ | -------- | ------- | --------- | ---------------------------------- | ------- |
-| type         | 主题     | string  | `primary` | `primary` `normal` `warm` `danger` | --      |
-| size         | 尺寸     | string  | --        | `lg` `sm` `xs`                     | --      |
-| fluid        | 最大化   | boolean | `false`   | `true` `false`                     | --      |
-| radius       | 圆角     | boolean | `false`   | `true` `false`                     | --      |
+| text         | 内容     | string  | --  | --  | --      |
+| width        | 宽度     | number  | --        | --                    | --      |
+| color        | 颜色     | string | --    | --                    | --      |
+| background-color       | 背景色     | string | --    | --                      | --      |
 
 :::
 
