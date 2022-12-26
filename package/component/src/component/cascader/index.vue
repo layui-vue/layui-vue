@@ -127,6 +127,7 @@ const emit = defineEmits(["update:modelValue", "change", "clear"]);
 
 onMounted(() => {
   initTreeData();
+  firstInitComplete.value=true;//首次加载结束状态
 });
 
 watch(
@@ -151,6 +152,7 @@ watch(
     }
   }
 );
+const firstInitComplete=ref(false)
 const watchModelValue = ref(true);
 const treeData = ref<any>([]);
 const initTreeData = () => {
@@ -282,13 +284,15 @@ const selectBar = (item: any, selectIndex: number, parentIndex: number) => {
       .join(props.decollator);
     watchModelValue.value = false;
     emit("update:modelValue", value);
-    let evt = {
-      display: displayValue.value,
-      value: value,
-      label: fullLable,
-      currentClick: JSON.parse(JSON.stringify(item.orginData)),
-    };
-    emit("change", evt);
+    if(firstInitComplete.value){
+      let evt = {
+        display: displayValue.value,
+        value: value,
+        label: fullLable,
+        currentClick: JSON.parse(JSON.stringify(item.orginData)),
+      };
+      emit("change", evt);
+    }
     if (dropdownRef.value)
       // @ts-ignore
       dropdownRef.value.hide();
