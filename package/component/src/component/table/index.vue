@@ -237,7 +237,7 @@ watch(
     tableColumnKeys.value = [];
     tableBodyColumns.value = [];
     tableHeadColumns.value = [];
-    
+
     findFindNode(tableColumns.value);
     findFindNodes(tableColumns.value);
     findFinalNode(0, tableColumns.value);
