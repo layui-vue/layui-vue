@@ -421,6 +421,11 @@ const zhCN = [
             meta: { title: "二维码" },
           },
           {
+            path: "/zh-CN/components/barcode",
+            component: () => import("../document/zh-CN/components/barcode.md"),
+            meta: { title: "条形码" },
+          },
+          {
             path: "/zh-CN/components/notifiy",
             component: () => import("../document/zh-CN/components/notifiy.md"),
             meta: { title: "通知" },

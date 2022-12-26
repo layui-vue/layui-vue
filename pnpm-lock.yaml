@@ -85,6 +85,7 @@ importers:
       cropperjs: ^1.5.12
       dayjs: ^1.11.0
       evtd: ^0.2.3
+      jsbarcode: 3.11.5
       qrcode: 1.5.0
       vue-i18n: ^9.1.10
     dependencies:
@@ -98,6 +99,7 @@ importers:
       cropperjs: 1.5.12
       dayjs: 1.11.0
       evtd: 0.2.3
+      jsbarcode: 3.11.5
       qrcode: 1.5.0
       vue-i18n: 9.1.10_vue@3.2.45
 
@@ -4142,6 +4144,11 @@ packages:
     dependencies:
       argparse: 2.0.1
     dev: true
+
+  /jsbarcode/3.11.5:
+    resolution: {integrity: sha512-zv3KsH51zD00I/LrFzFSM6dst7rDn0vIMzaiZFL7qusTjPZiPtxg3zxetp0RR7obmjTw4f6NyGgbdkBCgZUIrA==}
+    hasBin: true
+    dev: false
 
   /jsesc/0.5.0:
     resolution: {integrity: sha1-597mbjXW/Bb3EP6R1c9p9w8IkR0=}

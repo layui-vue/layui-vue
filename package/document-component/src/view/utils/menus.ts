@@ -407,6 +407,12 @@ const menus = [
         subTitle: "qrcode",
         path: "/zh-CN/components/qrcode",
       },
+      {
+        id: 110,
+        title: "条形码",
+        subTitle: "barcode",
+        path: "/zh-CN/components/barcode",
+      },
     ],
   },
   {

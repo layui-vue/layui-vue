@@ -41,6 +41,15 @@
               </ul>
           </li>
           <li>
+            <h4 style="margin-bottom: 0px !important;font-weight: 500 !important;">Barcode</h4>
+              <ul>
+                <li>[新增] barcode 组件 value 属性，用于设置条形码实际值。</li>
+                <li>[新增] barcode 组件 line-color 属性，用于设置条形码颜色。</li>
+                <li>[新增] barcode 组件 width 属性，用于设置条形码宽度。</li>
+                <li>[新增] barcode 组件 height 属性，用于设置条形码高度。</li>
+              </ul>
+          </li>
+          <li>
             <h4 style="margin-bottom: 0px !important;font-weight: 500 !important;">其他</h4>
               <ul>
                 <li>[新增] menu-item 组件 to 属性，路由目标地址，设置该属性后，开启 router 模式。</li>
