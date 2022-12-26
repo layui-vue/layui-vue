@@ -13,6 +13,7 @@
 ::: demo 使用 `lay-table` 标签, 创建表格
 
 <template>
+  <lay-button type="primary" @click="changeColumn">更新列</lay-button>
   <lay-table :columns="columns66" :data-source="dataSource1"></lay-table>
 </template>
 
@@ -22,7 +23,20 @@ import { ref } from 'vue'
 export default {
   setup() {
 
-    const columns66 = [
+    const columns66 = ref([
+      {
+        title:"账户",
+        width:"200px",
+        key:"username"
+      },{
+        title:"密码",
+        width: "180px",
+        key:"password"
+      }
+    ])
+
+    const changeColumn = () => {
+      columns66.value = [
       {
         title:"账户",
         width:"200px",
@@ -42,6 +56,7 @@ export default {
         ellipsisTooltip: true,
       }
     ]
+    }
 
     const dataSource1 = [
       {username:"root", password:"root", age:"18", remark: 'layui - vue（谐音：类 UI) '},
@@ -51,7 +66,8 @@ export default {
 
     return {
       columns66,
-      dataSource1
+      dataSource1,
+      changeColumn
     }
   }
 }

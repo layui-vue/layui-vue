@@ -470,7 +470,11 @@ const checkboxProps = props.getCheckboxProps(props.data, props.index);
                 @click="handleExpand"
               ></lay-icon>
 
-              {{ page?.current ? (page?.current - 1) * page?.limit + index + 1 : index + 1 }}
+              {{
+                page?.current
+                  ? (page?.current - 1) * page?.limit + index + 1
+                  : index + 1
+              }}
             </td>
           </template>
         </template>

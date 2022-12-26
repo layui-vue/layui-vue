@@ -14,7 +14,7 @@
 
 <template>
   <lay-menu v-model:selected-key="selectedKey" v-model:open-keys="openKeys1">
-    <lay-menu-item id="1"><router-link to="/">hahah </router-link></lay-menu-item>
+    <lay-menu-item id="1" to="/">首页</lay-menu-item>
     <lay-menu-item id="2">首页</lay-menu-item>
     <lay-menu-item id="3">首页</lay-menu-item> 
     <lay-sub-menu id="7">

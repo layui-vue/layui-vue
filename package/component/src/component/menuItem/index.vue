@@ -14,6 +14,7 @@ import LayTooltip from "../tooltip/index.vue";
 export interface MenuItemProps {
   id: string;
   title?: string;
+  to?: string;
 }
 
 const slots = useSlots();
@@ -43,11 +44,8 @@ const needTooltip = computed(
 </script>
 
 <template>
-  <li
-    :class="['layui-nav-item', { 'layui-this': selectedKey === id }]"
-    :style="indentHandle({ indent, level, isTree })"
-    @click="selectHandle()"
-  >
+  <li :class="['layui-nav-item', { 'layui-this': selectedKey === id }]" :style="indentHandle({ indent, level, isTree })"
+    @click="selectHandle()">
     <template v-if="needTooltip">
       <lay-tooltip position="right" :isDark="theme !== 'light'">
         <a href="javascript:void(0)">
@@ -64,17 +62,34 @@ const needTooltip = computed(
     </template>
 
     <template v-else>
-      <a href="javascript:void(0)">
-        <i v-if="slots.icon" class="layui-sub-menu-icon">
-          <slot name="icon"></slot>
-        </i>
-        <span v-if="slots.title">
-          <slot name="title"></slot>
-        </span>
-        <span v-else>
-          <slot></slot>
-        </span>
-      </a>
+
+      <template v-if="to">
+        <router-link :to="to">
+          <i v-if="slots.icon" class="layui-sub-menu-icon">
+            <slot name="icon"></slot>
+          </i>
+          <span v-if="slots.title">
+            <slot name="title"></slot>
+          </span>
+          <span v-else>
+            <slot></slot>
+          </span>
+        </router-link>
+      </template>
+
+      <template v-else>
+        <a href="javascript:void(0)">
+          <i v-if="slots.icon" class="layui-sub-menu-icon">
+            <slot name="icon"></slot>
+          </i>
+          <span v-if="slots.title">
+            <slot name="title"></slot>
+          </span>
+          <span v-else>
+            <slot></slot>
+          </span>
+        </a>
+      </template>
     </template>
   </li>
 </template>

@@ -43,6 +43,8 @@
           <li>
             <h4 style="margin-bottom: 0px !important;font-weight: 500 !important;">其他</h4>
               <ul>
+                <li>[新增] menu-item 组件 to 属性，路由目标地址，设置该属性后，开启 router 模式。</li>
+                <li>[修复] table 组件 column 配置值变动时，旧的 column 配置未被清空的问题。</li>
                 <li>[优化] input 组件 allow-clear 属性，默认不显示清空按钮，鼠标移入后展示。</li>
                 <li>[优化] textarea 组件 allow-clear 属性，默认不显示清空按钮，鼠标移入后展示。</li>
                 <li>[优化] select 组件 allow-clear 属性，默认不显示清空按钮，鼠标移入后展示。</li>
