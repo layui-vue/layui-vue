@@ -16,11 +16,14 @@
   <lay-cascader :options="options" v-model="value" placeholder="点我试一试" allow-clear>
   </lay-cascader>
   <span style="margin-left:20px">输出的值：{{value}}</span>
+  <lay-button @click='value="Components/data/progress"' size='sm' style='margin-left:10px'>
+    修改v-model
+  </lay-button>
 </template>
 
 <script setup>
 import { ref } from "vue";
-const value=ref(null)
+const value=ref('Guide/shejiyuanze/yizhi')
 const options = [
 	{
 		value: "Guide",

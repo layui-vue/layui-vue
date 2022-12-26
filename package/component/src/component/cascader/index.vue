@@ -48,7 +48,7 @@
                 class="layui-cascader-menu-item"
                 v-for="(item, i) in itemCol.data"
                 :key="index + i"
-                @click="selectBar(item, i, index)"
+                @click="selectBar(item, i, index,'click')"
                 :class="[
                   {
                     'layui-cascader-selected': itemCol.selectIndex === i,
@@ -127,6 +127,7 @@ const emit = defineEmits(["update:modelValue", "change", "clear"]);
 
 onMounted(() => {
   initTreeData();
+  firstInitComplete.value=true;//首次加载结束状态
 });
 
 watch(
@@ -139,19 +140,14 @@ watch(
 watch(
   () => props.modelValue,
   () => {
-    if (watchModelValue.value) {
-      if (props.modelValue === null || props.modelValue === "") {
-        onClear();
-      } else {
-        updateDisplayByModelValue();
-      }
-      setTimeout(() => {
-        watchModelValue.value = true;
-      }, 0);
+    if (props.modelValue === null || props.modelValue === "") {
+      onClear();
+    } else {
+      updateDisplayByModelValue();
     }
   }
 );
-const watchModelValue = ref(true);
+const firstInitComplete=ref(false)
 const treeData = ref<any>([]);
 const initTreeData = () => {
   let treeLvNum = getMaxFloor(props.options);
@@ -237,7 +233,7 @@ function findData(orginData: any, level: number) {
 }
 
 const dataContainer = ref<any>([]);
-const selectBar = (item: any, selectIndex: number, parentIndex: number) => {
+const selectBar = (item: any, selectIndex: number, parentIndex: number,action:string|null=null) => {
   treeData.value[parentIndex].selectIndex = selectIndex;
   if (item.children && item.children.length > 0) {
     treeData.value[parentIndex + 1].selectIndex = null;
@@ -280,15 +276,18 @@ const selectBar = (item: any, selectIndex: number, parentIndex: number) => {
         return e.value;
       })
       .join(props.decollator);
-    watchModelValue.value = false;
-    emit("update:modelValue", value);
-    let evt = {
-      display: displayValue.value,
-      value: value,
-      label: fullLable,
-      currentClick: JSON.parse(JSON.stringify(item.orginData)),
-    };
-    emit("change", evt);
+    if(action==='click'){
+      emit("update:modelValue", value);
+    }
+    if(firstInitComplete.value){
+      let evt = {
+        display: displayValue.value,
+        value: value,
+        label: fullLable,
+        currentClick: JSON.parse(JSON.stringify(item.orginData)),
+      };
+      emit("change", evt);
+    }
     if (dropdownRef.value)
       // @ts-ignore
       dropdownRef.value.hide();
