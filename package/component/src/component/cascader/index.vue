@@ -48,7 +48,7 @@
                 class="layui-cascader-menu-item"
                 v-for="(item, i) in itemCol.data"
                 :key="index + i"
-                @click="selectBar(item, i, index,'click')"
+                @click="selectBar(item, i, index, 'click')"
                 :class="[
                   {
                     'layui-cascader-selected': itemCol.selectIndex === i,
@@ -127,7 +127,7 @@ const emit = defineEmits(["update:modelValue", "change", "clear"]);
 
 onMounted(() => {
   initTreeData();
-  firstInitComplete.value=true;//首次加载结束状态
+  firstInitComplete.value = true; //首次加载结束状态
 });
 
 watch(
@@ -147,7 +147,7 @@ watch(
     }
   }
 );
-const firstInitComplete=ref(false)
+const firstInitComplete = ref(false);
 const treeData = ref<any>([]);
 const initTreeData = () => {
   let treeLvNum = getMaxFloor(props.options);
@@ -233,7 +233,12 @@ function findData(orginData: any, level: number) {
 }
 
 const dataContainer = ref<any>([]);
-const selectBar = (item: any, selectIndex: number, parentIndex: number,action:string|null=null) => {
+const selectBar = (
+  item: any,
+  selectIndex: number,
+  parentIndex: number,
+  action: string | null = null
+) => {
   treeData.value[parentIndex].selectIndex = selectIndex;
   if (item.children && item.children.length > 0) {
     treeData.value[parentIndex + 1].selectIndex = null;
@@ -276,10 +281,10 @@ const selectBar = (item: any, selectIndex: number, parentIndex: number,action:st
         return e.value;
       })
       .join(props.decollator);
-    if(action==='click'){
+    if (action === "click") {
       emit("update:modelValue", value);
     }
-    if(firstInitComplete.value){
+    if (firstInitComplete.value) {
       let evt = {
         display: displayValue.value,
         value: value,

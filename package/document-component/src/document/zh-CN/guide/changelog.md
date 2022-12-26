@@ -45,13 +45,13 @@
               <ul>
                 <li>[新增] menu-item 组件 to 属性，路由目标地址，设置该属性后，开启 router 模式。</li>
                 <li>[修复] table 组件 column 配置值变动时，旧的 column 配置未被清空的问题。</li>
+                <li>[修复] cascader 组件 v-model 属性不为空时，初始化触发 change 回调的问题。</li>
+                <li>[修复] cascader 组件 v-model 属性值更新时，回显失效的问题。</li>
                 <li>[优化] input 组件 allow-clear 属性，默认不显示清空按钮，鼠标移入后展示。</li>
                 <li>[优化] textarea 组件 allow-clear 属性，默认不显示清空按钮，鼠标移入后展示。</li>
                 <li>[优化] select 组件 allow-clear 属性，默认不显示清空按钮，鼠标移入后展示。</li>
                 <li>[优化] icon-picker 组件 allow-clear 属性，默认不显示清空按钮，鼠标移入后展示。</li>
                 <li>[优化] table 组件 column 配置 type 为 number 类型时，起始坐标结合分页数据。</li>
-                <li>[修复] cascader 组件 当v-model不为空时，初始化会触发change回调的问题。</li>
-                <li>[修复] cascader 组件 外部更新v-model时，反显失效问题。</li>
               </ul>
           </li>
         </ul>  
