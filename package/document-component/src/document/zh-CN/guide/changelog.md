@@ -51,6 +51,7 @@
                 <li>[优化] icon-picker 组件 allow-clear 属性，默认不显示清空按钮，鼠标移入后展示。</li>
                 <li>[优化] table 组件 column 配置 type 为 number 类型时，起始坐标结合分页数据。</li>
                 <li>[修复] cascader 组件 当v-model不为空时，初始化会触发change回调的问题。</li>
+                <li>[修复] cascader 组件 外部更新v-model时，反显失效问题。</li>
               </ul>
           </li>
         </ul>  
