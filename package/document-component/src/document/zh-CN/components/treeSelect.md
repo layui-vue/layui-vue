@@ -688,19 +688,20 @@ const data4 = ref([{
 
 ::: table
 
-| 属性                             | 描述                                      | 默认值          |
-| -------------------------------- | ---------------------------------------- | --------------- |
-| v-model                          | 选中值                                    | null            |
-| data                             | 树数据                                    | null            |
-| multiple                         | 开启多选                                  | null            |
-| allow-clear                      | 允许清空                                  | null            |
-| disabled                         | 禁用选择                                  | null            |
-| placeholder                      | 输入提示                                  | null            |
-| checkStrictly                    | 禁用级联复选                              | null            |
-| collapseTagsTooltip              | 折叠提示                                  | null            |
-| checkStrictly                    | 禁用级联复选                              | null            |
-| minCollapsedNum                  | 超过指定标签后开启折叠                     | null            |
-| size                             | 尺寸大小                                  | null            |
+| 属性                             | 描述                                      | 类型          | 可选值          |默认值          |
+| -------------------------------- | ---------------------------------------- | --------------- | --------------- | --------------- |
+| v-model                          | 选中值                                    |  --            | --            | --            |
+| data                             | 树数据                                    |  --            | --            | --            |
+| multiple                         | 开启多选                                  |  --            | --            | --            |
+| allow-clear                      | 允许清空                                  |  --            | --            | --            |
+| disabled                         | 禁用选择                                  |  --            | --            | --            |
+| placeholder                      | 输入提示                                  |  --            | --            | --            |
+| checkStrictly                    | 禁用级联复选                              |  --            | --            | --            |
+| collapseTagsTooltip              | 折叠提示                                  |  --            | --            | --            |
+| checkStrictly                    | 禁用级联复选                              |  --            | --            | --            |
+| minCollapsedNum                  | 超过指定标签后开启折叠                     |  --            | --            | --            |
+| size                             | 尺寸大小                                  |  --            | --            | --            |
+
 :::
 
 ::: title Tree Select 事件

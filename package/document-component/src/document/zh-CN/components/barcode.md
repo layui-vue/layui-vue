@@ -36,7 +36,7 @@ export default {
 ::: demo 通过 `color` 与 `background-color` 属性，设置二维码前景色与背景色。
 
 <template>
-  <lay-barcode value="6666" lineColor="red" />
+  <lay-barcode value="6666" lineColor="#009688" />
 </template>
 
 <script>
@@ -104,12 +104,17 @@ export default {
 
 ::: table
 
-| 属性         | 描述     | 类型    | 默认值    | 可选值                             | 版本    |
-| ------------ | -------- | ------- | --------- | ---------------------------------- | ------- |
-| text         | 内容     | string  | --  | --  | --      |
-| width        | 宽度     | number  | --        | --                    | --      |
-| color        | 颜色     | string | --    | --                    | --      |
-| background-color       | 背景色     | string | --    | --                      | --      |
+| 属性         | 描述        | 类型    | 默认值    | 可选值                             | 版本    |
+| ------------ | ---------- | ------- | ---------| ---------------------------------- | ------- |
+| value        | 内容       | string  | --       | --                                 | --      |
+| lineColor    | 宽度       | string  | --       | --                                 | --      |
+| width        | 条形宽度   | string  | --       | --                                 | --      |
+| height       | 高度       | string  | --       | --                                  | --      |
+| margin       | 边距       | string  | --       | --                                 | --      |
+| displayValue | 显示值     | string  | --       | --                                  | --      |
+| text         | 自定义文本  | string  | --       | --                                  | --      |
+| background   | 背景色     | string  | --       | --                                  | --      |
+| format       | 格式       | string  | --       | --                                  | --      |
 
 :::
 
