@@ -60,6 +60,7 @@
                 <li>[修复] table 组件 column 配置值变动时，旧的 column 配置未被清空的问题。</li>
                 <li>[修复] cascader 组件 v-model 属性不为空时，初始化触发 change 回调的问题。</li>
                 <li>[修复] cascader 组件 v-model 属性值更新时，回显失效的问题。</li>
+                <li>[修复] badge 组件 theme 属性未设置时, 水波纹效果不生效。</li>
                 <li>[优化] input 组件 allow-clear 属性，默认不显示清空按钮，鼠标移入后展示。</li>
                 <li>[优化] textarea 组件 allow-clear 属性，默认不显示清空按钮，鼠标移入后展示。</li>
                 <li>[优化] select 组件 allow-clear 属性，默认不显示清空按钮，鼠标移入后展示。</li>

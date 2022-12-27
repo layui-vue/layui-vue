@@ -39,10 +39,9 @@ const styles = computed<StyleValue>(() => {
     <span
       v-if="type === 'dot'"
       :class="props.theme ? `layui-bg-${props.theme}` : ``"
-      :style="styles ?? `background-color: #ff5722;`"
+      :style="styles ? `background-color: #ff5722;` : ``"
     >
     </span>
-
     <slot v-if="type != 'dot'"></slot>
   </span>
 </template>
