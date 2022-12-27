@@ -45,8 +45,12 @@
               <ul>
                 <li>[新增] barcode 组件 value 属性，用于设置条形码实际值。</li>
                 <li>[新增] barcode 组件 line-color 属性，用于设置条形码颜色。</li>
-                <li>[新增] barcode 组件 width 属性，用于设置条形码宽度。</li>
+                <li>[新增] barcode 组件 width 属性，用于设置条形码每条之间的宽度。</li>
                 <li>[新增] barcode 组件 height 属性，用于设置条形码高度。</li>
+                <li>[新增] barcode 组件 margin 属性，用于设置条形码周边空白间距。</li>
+                <li>[新增] barcode 组件 displayValue 属性，用于设置显示条形码实际值。</li>
+                <li>[新增] barcode 组件 text 属性，用于覆盖默认的文本信息。</li>
+                <li>[新增] barcode 组件 background 属性，用于设置条形码背景色。</li>
               </ul>
           </li>
           <li>

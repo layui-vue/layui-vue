@@ -27,11 +27,11 @@ const props = defineProps({
   //设置条之间的宽度
   width: {
     type: [String, Number],
-    default: 3,
+    default: 2,
   },
   height: {
     type: [String, Number],
-    default: 100,
+    default: 80,
   },
   //覆盖显示的文本
   text: [String, Number],
@@ -65,11 +65,11 @@ const props = defineProps({
   // 是否在条形码下方显示文字
   displayValue: {
     type: [String, Boolean],
-    default: true,
+    default: false,
   },
 });
 
-const settings = {
+const settings: any = {
   format: props.format, //选择要使用的条形码类型
   width: props.width, //设置条之间的宽度
   height: props.height, //高度
@@ -86,7 +86,7 @@ const settings = {
   margin: props.margin, //设置条形码周围的空白边距
 };
 
-const removeUndefinedProps = (obj:any) => {
+const removeUndefinedProps = (obj: any) => {
   for (let prop in obj) {
     if (obj.hasOwnProperty(prop) && obj[prop] === undefined) {
       delete obj[prop];
