@@ -51,6 +51,7 @@
                 <li>[新增] barcode 组件 displayValue 属性，用于设置显示条形码实际值。</li>
                 <li>[新增] barcode 组件 text 属性，用于覆盖默认的文本信息。</li>
                 <li>[新增] barcode 组件 background 属性，用于设置条形码背景色。</li>
+                <li>[新增] barcode 组件 format 属性，用于设置条形码类型。</li>
               </ul>
           </li>
           <li>
