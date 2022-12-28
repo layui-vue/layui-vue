@@ -7,6 +7,42 @@
 ::: describe 按钮用于开始一个即时操作。
 :::
 
+::: title 沙盒测试
+:::
+
+::: demo 使用 `lay-button` 标签, 创建一个按钮。
+
+<template>
+  <lay-input v-model="value1"  allow-clear></lay-input>
+  <lay-select v-model="value1" allow-clear>
+    <lay-select-option :value="1">选项一</lay-select-option>
+    <lay-select-option :value="2">选项二</lay-select-option>
+  </lay-select>
+  <lay-select v-model="value2" multiple  allow-clear>
+    <lay-select-option :value="1">选项一</lay-select-option>
+    <lay-select-option :value="2">选项二</lay-select-option>
+  </lay-select>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const value1 = ref('');
+    const value2 = ref([]);
+
+    return {
+      value1,
+      value2
+    }
+  }
+}
+</script>
+
+:::
+
 ::: title 基础使用
 :::
 

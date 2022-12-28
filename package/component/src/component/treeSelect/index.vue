@@ -51,8 +51,10 @@ const selectedValue = computed({
     return props.modelValue;
   },
   set(value) {
-    emits("update:modelValue", value);
-    emits("change", value);
+    if(!props.multiple) {
+      emits("update:modelValue", value);
+      emits("change", value);
+    }
   },
 });
 
@@ -100,10 +102,19 @@ const handleClick = (node: any) => {
   dropdownRef.value.hide();
   selectedValue.value = node.id;
 };
+
+// 判断值的实时状态
+const hasContent = computed(() => {
+  if(Array.isArray(selectedValue)) {
+    return selectedValue.value.length > 0;
+  } else {
+    return selectedValue.value != "";
+  }
+})
 </script>
 
 <template>
-  <div class="layui-tree-select" :class="{ 'layui-disabled': disabled }">
+  <div class="layui-tree-select" :class="{ 'layui-disabled': disabled, 'has-content': hasContent, 'has-clear': allowClear }">
     <lay-dropdown
       ref="dropdownRef"
       :disabled="disabled"

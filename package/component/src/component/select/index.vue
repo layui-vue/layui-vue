@@ -52,11 +52,11 @@ export interface SelectEmits {
 }
 
 const props = withDefaults(defineProps<SelectProps>(), {
-  modelValue: null,
   collapseTagsTooltip: true,
   minCollapsedNum: 3,
   allowClear: false,
   showSearch: false,
+  modelValue: null,
   disabled: false,
   multiple: false,
   size: "md",
@@ -182,6 +182,14 @@ const handleHide = () => {
   openState.value = false;
 };
 
+const hasContent = computed(() => {
+  if(Array.isArray(selectedValue)) {
+    return selectedValue.value.length > 0;
+  } else {
+    return selectedValue.value != "";
+  }
+})
+
 provide("selectRef", selectRef);
 provide("openState", openState);
 provide("selectedValue", selectedValue);
@@ -191,7 +199,7 @@ provide("searchMethod", props.searchMethod);
 </script>
 
 <template>
-  <div class="layui-select">
+  <div class="layui-select" :class="{'has-content':hasContent, 'has-clear': allowClear}">
     <lay-dropdown
       ref="selectRef"
       :disabled="disabled"

@@ -14,7 +14,7 @@
 ::: demo
 
 <template>
-  <lay-date-picker v-model="endTime" placeholder="click me"></lay-date-picker>
+  <lay-date-picker v-model="endTime" placeholder="click me" allowClear></lay-date-picker>
 </template>
 
 <script>

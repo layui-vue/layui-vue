@@ -154,16 +154,22 @@
 
 .layui-icon-picker-clear {
   color: rgba(0, 0, 0, 0.45);
-  padding: 0px 0px 0px 10px;
   display: none;
-}
-
-.layui-iconpicker:hover .layui-icon-picker-clear{
-  display: inline-block;
+  position: relative;
+  width: 35px;
+  text-align: center;
 }
 
 .layui-icon-picker-clear:hover {
   opacity: 0.6;
+}
+
+.layui-iconpicker.has-content.has-clear:hover .layui-icon-picker-clear {
+  display: inline-block;
+}
+
+.layui-iconpicker.has-content.has-clear:hover .layui-iconpicker-suffix {
+  display: none
 }
 
 .layui-colorpicker-disabled {
