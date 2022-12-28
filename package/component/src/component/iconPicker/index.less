@@ -168,16 +168,16 @@
   display: inline-block;
 }
 
-.layui-iconpicker.has-content.has-clear:hover .layui-iconpicker-suffix {
+.layui-iconpicker.has-content.has-clear:not(.layui-iconpicker-disabled):hover .layui-iconpicker-suffix {
   display: none
 }
 
-.layui-colorpicker-disabled {
+.layui-iconpicker-disabled {
   opacity: 0.6;
 }
 
-.layui-colorpicker-disabled,
-.layui-colorpicker-disabled * {
+.layui-iconpicker-disabled,
+.layui-iconpicker-disabled * {
   cursor: not-allowed !important;
 }
 

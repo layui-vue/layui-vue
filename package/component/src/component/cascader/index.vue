@@ -7,7 +7,7 @@
         'layui-cascader-opend': openState,
         'layui-cascader-disabled': disabled,
         'has-content': hasContent,
-        'has-clear': allowClear
+        'has-clear': allowClear,
       },
     ]"
   >
@@ -33,7 +33,7 @@
         :size="size"
         @clear="onClear"
       ></lay-input>
-      
+
       <div class="slot-area" v-else>
         <slot></slot>
       </div>
@@ -306,7 +306,9 @@ const selectBar = (
 const displayValue = ref<string | number>("");
 const slots = useSlots();
 const dropdownRef = ref();
-const hasContent = computed(() => props.modelValue != "" && props.modelValue != null);
+const hasContent = computed(
+  () => props.modelValue != "" && props.modelValue != null
+);
 
 //清除事件
 const onClear = () => {

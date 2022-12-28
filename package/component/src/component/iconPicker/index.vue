@@ -161,7 +161,7 @@ const searchList = (str: string, container: any) => {
       class="layui-inline layui-border-box layui-iconpicker layui-iconpicker-split"
       :class="[
         {
-          'layui-colorpicker-disabled': disabled,
+          'layui-iconpicker-disabled': disabled,
           'has-content': hasContent,
           'has-clear': allowClear,
         },

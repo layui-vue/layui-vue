@@ -201,7 +201,11 @@ provide("searchMethod", props.searchMethod);
 <template>
   <div
     class="layui-select"
-    :class="{ 'has-content': hasContent, 'has-clear': allowClear, 'has-disabled': disabled }"
+    :class="{
+      'has-content': hasContent,
+      'has-clear': allowClear,
+      'has-disabled': disabled,
+    }"
   >
     <lay-dropdown
       ref="selectRef"
