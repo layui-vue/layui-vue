@@ -6,6 +6,8 @@
       {
         'layui-cascader-opend': openState,
         'layui-cascader-disabled': disabled,
+        'has-content': hasContent,
+        'has-clear': allowClear
       },
     ]"
   >
@@ -31,6 +33,7 @@
         :size="size"
         @clear="onClear"
       ></lay-input>
+      
       <div class="slot-area" v-else>
         <slot></slot>
       </div>
@@ -84,7 +87,7 @@ import "./index.less";
 import LayInput from "../input/index.vue";
 import LayScroll from "../scroll/index.vue";
 import LayDropdown from "../dropdown/index.vue";
-import { ref, onMounted, watch, useSlots, StyleValue } from "vue";
+import { ref, onMounted, watch, useSlots, StyleValue, computed } from "vue";
 import { CascaderSize } from "./interface";
 
 export type DropdownTrigger = "click" | "hover" | "focus" | "contextMenu";
@@ -233,6 +236,7 @@ function findData(orginData: any, level: number) {
 }
 
 const dataContainer = ref<any>([]);
+
 const selectBar = (
   item: any,
   selectIndex: number,
@@ -302,6 +306,7 @@ const selectBar = (
 const displayValue = ref<string | number>("");
 const slots = useSlots();
 const dropdownRef = ref();
+const hasContent = computed(() => props.modelValue != "" && props.modelValue != null);
 
 //清除事件
 const onClear = () => {

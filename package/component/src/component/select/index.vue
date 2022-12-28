@@ -183,12 +183,12 @@ const handleHide = () => {
 };
 
 const hasContent = computed(() => {
-  if(Array.isArray(selectedValue)) {
+  if (Array.isArray(selectedValue)) {
     return selectedValue.value.length > 0;
   } else {
     return selectedValue.value != "";
   }
-})
+});
 
 provide("selectRef", selectRef);
 provide("openState", openState);
@@ -199,7 +199,10 @@ provide("searchMethod", props.searchMethod);
 </script>
 
 <template>
-  <div class="layui-select" :class="{'has-content':hasContent, 'has-clear': allowClear}">
+  <div
+    class="layui-select"
+    :class="{ 'has-content': hasContent, 'has-clear': allowClear, 'has-disabled': disabled }"
+  >
     <lay-dropdown
       ref="selectRef"
       :disabled="disabled"

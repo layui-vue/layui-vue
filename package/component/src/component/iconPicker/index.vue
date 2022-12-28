@@ -159,7 +159,13 @@ const searchList = (str: string, container: any) => {
   >
     <div
       class="layui-inline layui-border-box layui-iconpicker layui-iconpicker-split"
-      :class="[{ 'layui-colorpicker-disabled': disabled, 'has-content': hasContent, 'has-clear': allowClear }]"
+      :class="[
+        {
+          'layui-colorpicker-disabled': disabled,
+          'has-content': hasContent,
+          'has-clear': allowClear,
+        },
+      ]"
     >
       <div class="layui-inline layui-iconpicker-main">
         <i class="layui-inline layui-icon" :class="[selectedIcon]"></i>
