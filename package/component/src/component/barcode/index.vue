@@ -67,12 +67,14 @@ const barcodeRef = ref(null);
 onMounted(() => {
   nextTick(() => {
     buildBarcode();
-  })
+  });
 });
 
 watch(
   () => props,
-  () => { buildBarcode() },
+  () => {
+    buildBarcode();
+  },
   { deep: true }
 );
 
@@ -95,5 +97,5 @@ const buildBarcode = () => {
   };
   removeUndefinedProps(settings);
   JsBarcode(barcodeRef.value, String(props.value), settings);
-}
+};
 </script>
