@@ -60,15 +60,14 @@ const selectedValue = computed({
   },
 });
 
-
 const checkedKeys = computed({
   get() {
     return props.multiple ? props.modelValue : [];
   },
   set(value) {
     if (props.multiple) {
-        emits("update:modelValue", value);
-        emits("change", value);
+      emits("update:modelValue", value);
+      emits("change", value);
     }
   },
 });
@@ -124,6 +123,10 @@ const hasContent = computed(() => {
     return selectedValue.value != "";
   }
 });
+
+const _placeholder = computed(() => {
+  return hasContent.value ? '' : props.placeholder;
+})
 </script>
 
 <template>
@@ -145,7 +148,7 @@ const hasContent = computed(() => {
       <lay-tag-input
         :size="size"
         :allow-clear="allowClear"
-        :placeholder="placeholder"
+        :placeholder="_placeholder"
         :collapseTagsTooltip="collapseTagsTooltip"
         :minCollapsedNum="minCollapsedNum"
         :disabledInput="true"
@@ -165,7 +168,7 @@ const hasContent = computed(() => {
         v-else
         v-model="singleValue"
         :allow-clear="allowClear"
-        :placeholder="placeholder"
+        :placeholder="_placeholder"
         :disabled="disabled"
         :readonly="true"
         :size="size"

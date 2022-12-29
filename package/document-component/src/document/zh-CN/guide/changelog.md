@@ -12,6 +12,17 @@
 <lay-timeline>
 <lay-timeline-item title="1.8.x">
     <ul> 
+      <a name="1-8-2"></a> 
+      <li> 
+        <h3>1.8.2 <span class="layui-badge-rim">2022-12-29</span></h3> 
+        <ul>
+          <li>[修复] select 组件多选模式 placeholder 在有选中值时仍显示的问题。</li>
+          <li>[修复] tree-select 组件多选模式 placeholder 在有选中值时仍显示的问题。</li>
+          <li>[修复] tree-select 组件多选模式点击 + - 号仍触发 change 事件的问题。</li>
+        </ul>  
+      </li>
+    </ul>
+    <ul> 
       <a name="1-8-1"></a> 
       <li> 
         <h3>1.8.1 <span class="layui-badge-rim">2022-12-29</span></h3> 

@@ -6,7 +6,7 @@ export default {
 <script lang="ts" setup>
 import "./index.less";
 import { LayIcon } from "@layui/icons-vue";
-import { computed, nextTick, ref } from "vue";
+import { computed, ref } from "vue";
 import { TinyColor } from "@ctrl/tinycolor";
 import { TagShape, TagType, TagVariant } from "./interface";
 

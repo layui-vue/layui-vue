@@ -176,7 +176,7 @@ function handleClick(node) {
 ::: demo 通过 `multiple` 标签, 开启下拉树多选。
 
 <template>
-  <lay-tree-select v-model="value2" :data="data2" multiple></lay-tree-select>
+  <lay-tree-select v-model="value2" placeholder="123" :data="data2" multiple></lay-tree-select>
 </template>
 
 <script setup>
@@ -530,7 +530,7 @@ const data3 = ref([{
 ::: demo 通过 `allow-clear` 属性开启清空操作。
 
 <template>
-  <lay-tree-select v-model="value4" :data="data4" :allow-clear="true" multiple></lay-tree-select>
+  <lay-tree-select v-model="value4" :data="data4" placeholder="请选择" :allow-clear="true" multiple></lay-tree-select>
 </template>
 
 <script setup>

@@ -117,7 +117,7 @@ watch(
       const { checkedKeys } = tree.value.getKeys();
       unWatch.value = true;
       // 触发时机不确定，通过比较与上次选中值来确定是否触发 update 通知
-      if(String(lastCheckedKey.value) != String(checkedKeys)) {
+      if (String(lastCheckedKey.value) != String(checkedKeys)) {
         lastCheckedKey.value = checkedKeys;
         emit("update:checkedKeys", checkedKeys);
       }

@@ -190,6 +190,10 @@ const hasContent = computed(() => {
   }
 });
 
+const _placeholder = computed(() => {
+  return hasContent.value ? '' : props.placeholder;
+})
+
 provide("selectRef", selectRef);
 provide("openState", openState);
 provide("selectedValue", selectedValue);
@@ -222,7 +226,7 @@ provide("searchMethod", props.searchMethod);
         v-model="multipleValue"
         v-model:input-value="searchValue"
         :allow-clear="allowClear"
-        :placeholder="placeholder"
+        :placeholder="_placeholder"
         :collapseTagsTooltip="collapseTagsTooltip"
         :minCollapsedNum="minCollapsedNum"
         :disabled="disabled"
@@ -257,7 +261,7 @@ provide("searchMethod", props.searchMethod);
         :readonly="!showSearch"
         :modelValue="singleValue"
         :allow-clear="allowClear"
-        :placeholder="placeholder"
+        :placeholder="_placeholder"
         :class="{ 'layui-unselect': !showSearch }"
         @compositionstart="onCompositionstart"
         @compositionend="onCompositionend"
