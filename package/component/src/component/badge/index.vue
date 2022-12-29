@@ -9,10 +9,10 @@ import { computed, StyleValue } from "vue";
 import "./index.less";
 
 export interface BadgeProps {
-  type?: "dot" | "rim";
   theme?: string;
   color?: string;
   ripple?: boolean;
+  type?: "dot" | "rim";
 }
 
 const props = defineProps<BadgeProps>();
@@ -21,8 +21,8 @@ const classes = computed(() => {
   return [
     {
       "layui-badge": !props.type,
-      "layui-badge-dot": props.type == "dot",
       "layui-badge-rim": props.type == "rim",
+      "layui-badge-dot": props.type == "dot",
       "layui-badge-dot-ripple": props.ripple,
     },
     `layui-bg-${props.theme}`,
@@ -30,7 +30,7 @@ const classes = computed(() => {
 });
 
 const styles = computed<StyleValue>(() => {
-  return [props.color ? `background-color: ${props.color}` : ""];
+  return [props.color ? `background-color: ${props.color}` : '']; 
 });
 </script>
 
@@ -39,7 +39,7 @@ const styles = computed<StyleValue>(() => {
     <span
       v-if="type === 'dot'"
       :class="props.theme ? `layui-bg-${props.theme}` : ``"
-      :style="styles ? `background-color: #ff5722;` : ``"
+      :style="props.color ? `background-color: ${props.color}` : 'background-color: #ff5722;'"
     >
     </span>
     <slot v-if="type != 'dot'"></slot>

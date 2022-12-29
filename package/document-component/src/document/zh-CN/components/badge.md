@@ -56,7 +56,7 @@ export default {
     <lay-badge type="dot" theme="cyan" ripple></lay-badge>&nbsp;
     <lay-badge type="dot" theme="blue" ripple></lay-badge>&nbsp;
     <lay-badge type="dot" theme="black" ripple></lay-badge>&nbsp;
-    <lay-badge type="dot" theme="gray" ripple></lay-badge>&nbsp;
+    <lay-badge type="dot" color="blue" ripple></lay-badge>&nbsp;
 </template>
 
 <script>
