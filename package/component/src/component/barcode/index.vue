@@ -1,6 +1,6 @@
 <template>
   <div class="layui-barcode">
-    <canvas ref="barcodeRef" ></canvas>
+    <canvas ref="barcodeRef"></canvas>
   </div>
 </template>
 

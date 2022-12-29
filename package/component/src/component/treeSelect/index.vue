@@ -80,7 +80,7 @@ watch(
     if (props.multiple) {
       multipleValue.value = selectedValue.value.map((value: any) => {
         const node: any = getNode(props.data, value);
-        if(node) {
+        if (node) {
           node.label = node.title;
           node.closable = !node.disabled;
           return node;
