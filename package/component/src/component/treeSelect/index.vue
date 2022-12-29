@@ -9,6 +9,11 @@ import "./index.less";
 import { computed, ref, watch } from "vue";
 import { getNode } from "../../utils/treeUtil";
 import { TreeSelectSize } from "./interface";
+import { LayIcon } from "@layui/icons-vue";
+import LayInput from "../input/index.vue";
+import LayTagInput from "../tagInput/index.vue";
+import LayDropdown from "../dropdown/index.vue";
+import LayTree from "../tree/index.vue";
 
 export interface TreeSelectProps {
   data: any;
@@ -24,9 +29,9 @@ export interface TreeSelectProps {
 }
 
 export interface TreeSelectEmits {
-  (e: "update:modelValue", value: string): void;
-  (e: "change", value: string): void;
-  (e: "search", value: string): void;
+  (e: "update:modelValue", value: string | string[]): void;
+  (e: "change", value: string | string[]): void;
+  (e: "search", value: string | string[]): void;
 }
 
 const props = withDefaults(defineProps<TreeSelectProps>(), {
@@ -41,7 +46,7 @@ const props = withDefaults(defineProps<TreeSelectProps>(), {
 });
 
 const singleValue = ref();
-const multipleValue = ref(["1"]);
+const multipleValue = ref([]);
 const openState = ref(false);
 const dropdownRef = ref();
 const emits = defineEmits<TreeSelectEmits>();
@@ -92,9 +97,9 @@ watch(
 
 const onClear = function () {
   if (props.multiple) {
-    selectedValue.value = [];
+    emits("update:modelValue", []);
   } else {
-    selectedValue.value = "";
+    emits("update:modelValue", "");
   }
 };
 
