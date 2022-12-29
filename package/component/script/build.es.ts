@@ -45,7 +45,7 @@ const matchModule: string[] = [
   "tag",
   "tagInput",
   "footer",
-  "tree"
+  "tree",
 ];
 
 export default (): UserConfigExport => {
