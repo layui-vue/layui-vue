@@ -30,7 +30,7 @@ const classes = computed(() => {
 });
 
 const styles = computed<StyleValue>(() => {
-  return [props.color ? `background-color: ${props.color}` : '']; 
+  return [props.color ? `background-color: ${props.color}` : ""];
 });
 </script>
 
@@ -39,7 +39,11 @@ const styles = computed<StyleValue>(() => {
     <span
       v-if="type === 'dot'"
       :class="props.theme ? `layui-bg-${props.theme}` : ``"
-      :style="props.color ? `background-color: ${props.color}` : 'background-color: #ff5722;'"
+      :style="
+        props.color
+          ? `background-color: ${props.color}`
+          : 'background-color: #ff5722;'
+      "
     >
     </span>
     <slot v-if="type != 'dot'"></slot>

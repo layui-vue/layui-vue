@@ -17,9 +17,9 @@ import "./index.less";
 
 export interface QrcodeProps {
   text: string;
-  backgroundColor: string;
-  width: number;
-  color: string;
+  backgroundColor?: string;
+  width?: number;
+  color?: string;
 }
 
 const props = defineProps<QrcodeProps>();

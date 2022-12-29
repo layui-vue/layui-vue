@@ -11,7 +11,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { ref, onMounted, defineProps } from "vue";
+import { ref, onMounted, defineProps, watch, nextTick } from "vue";
 import JsBarcode from "jsbarcode";
 import "./index.less";
 
@@ -54,23 +54,6 @@ const props = defineProps({
   },
 });
 
-const settings: any = {
-  format: props.format,
-  width: props.width,
-  height: props.height,
-  displayValue: props.displayValue,
-  text: props.text,
-  fontOptions: props.fontOptions,
-  font: props.font,
-  textAlign: props.textAlign,
-  textPosition: props.textPosition,
-  textMargin: props.textMargin,
-  fontSize: props.fontSize,
-  background: props.background,
-  lineColor: props.lineColor,
-  margin: props.margin,
-};
-
 const removeUndefinedProps = (obj: any) => {
   for (let prop in obj) {
     if (obj.hasOwnProperty(prop) && obj[prop] === undefined) {
@@ -82,11 +65,35 @@ const removeUndefinedProps = (obj: any) => {
 const barcodeRef = ref(null);
 
 onMounted(() => {
-  removeUndefinedProps(settings);
-  render();
+  nextTick(() => {
+    buildBarcode();
+  })
 });
 
-const render = () => {
+watch(
+  () => props,
+  () => { buildBarcode() },
+  { deep: true }
+);
+
+const buildBarcode = () => {
+  const settings: any = {
+    format: props.format,
+    width: props.width,
+    height: props.height,
+    displayValue: props.displayValue,
+    text: props.text,
+    fontOptions: props.fontOptions,
+    font: props.font,
+    textAlign: props.textAlign,
+    textPosition: props.textPosition,
+    textMargin: props.textMargin,
+    fontSize: props.fontSize,
+    background: props.background,
+    lineColor: props.lineColor,
+    margin: props.margin,
+  };
+  removeUndefinedProps(settings);
   JsBarcode(barcodeRef.value, String(props.value), settings);
-};
+}
 </script>

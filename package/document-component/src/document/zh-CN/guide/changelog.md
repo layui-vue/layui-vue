@@ -12,6 +12,22 @@
 <lay-timeline>
 <lay-timeline-item title="1.8.x">
     <ul> 
+      <a name="1-8-1"></a> 
+      <li> 
+        <h3>1.8.1 <span class="layui-badge-rim">2022-12-29</span></h3> 
+        <ul>
+          <li>[修复] badge 组件 color 属性失效的问题。</li>
+          <li>[修复] barcode 组件属性缺少响应式的能力。 </li>
+          <li>[修复] treeSelect 多选模式 值 无法删除的问题。</li>
+          <li>[修复] treeSelect 多选模式 change 事件多次触发的问题。</li>
+          <li>[修复] qrcode 组件 backgroundColor 属性必填警告。</li>
+          <li>[修复] qrcode 组件属性缺少响应式的能力。 </li>
+          <li>[修复] qrcode 组件 width 属性必填警告。</li>
+          <li>[修复] qrcode 组件 color 属性必填警告。</li>
+        </ul>  
+      </li>
+    </ul>
+    <ul> 
       <a name="1-8-0"></a> 
       <li> 
         <h3>1.8.0 <span class="layui-badge-rim">2022-12-29</span></h3> 
