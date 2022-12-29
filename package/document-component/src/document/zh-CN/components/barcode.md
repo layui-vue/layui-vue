@@ -4,13 +4,13 @@
 ::: title 基本介绍
 :::
 
-::: describe 当需要将链接转换成为二维码时使用。
+::: describe 当需要将链接转换成为条形码时使用。
 :::
 
 ::: title 基础使用
 :::
 
-::: demo 通过 `color` 与 `background-color` 属性，设置二维码前景色与背景色。
+::: demo 通过 `lay-barcode` 标签，创建条形码。
 
 <template>
   <lay-barcode value="6666" />
@@ -56,7 +56,7 @@ export default {
 ::: title 尺寸大小
 :::
 
-::: demo 通过 `color` 与 `background-color` 属性，设置二维码前景色与背景色。
+::: demo 通过 `width` 与 `height` 属性，设置条形码尺寸。
 
 <template>
   <lay-barcode value="6666" width="3" height="100" />
@@ -79,7 +79,7 @@ export default {
 ::: title 显示编码
 :::
 
-::: demo 通过 `color` 与 `background-color` 属性，设置二维码前景色与背景色。
+::: demo 通过 `displayValue` 属性，显示二维码文字，使用 `text` 属性覆盖默认显示的值。
 
 <template>
   <lay-barcode value="6666" text="覆盖默认的 6666 编码" :displayValue="true"/>
