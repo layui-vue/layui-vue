@@ -109,7 +109,10 @@ const handleClick = (node: any) => {
 };
 
 const handleRemove = (value: any) => {
-  emits("update:modelValue", checkedKeys.value.filter((item: any) => item != value));
+  emits(
+    "update:modelValue",
+    checkedKeys.value.filter((item: any) => item != value)
+  );
 };
 
 // 判断值的实时状态

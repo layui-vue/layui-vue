@@ -55,19 +55,19 @@ const props = defineProps({
 });
 
 const settings: any = {
-  format: props.format, 
-  width: props.width, 
-  height: props.height, 
-  displayValue: props.displayValue, 
-  text: props.text, 
-  fontOptions: props.fontOptions, 
-  font: props.font, 
-  textAlign: props.textAlign, 
+  format: props.format,
+  width: props.width,
+  height: props.height,
+  displayValue: props.displayValue,
+  text: props.text,
+  fontOptions: props.fontOptions,
+  font: props.font,
+  textAlign: props.textAlign,
   textPosition: props.textPosition,
   textMargin: props.textMargin,
   fontSize: props.fontSize,
   background: props.background,
-  lineColor: props.lineColor, 
+  lineColor: props.lineColor,
   margin: props.margin,
 };
 

@@ -34,7 +34,9 @@ onMounted(() => {
 
 watch(
   () => props,
-  () => { buildQrcode() },
+  () => {
+    buildQrcode();
+  },
   { deep: true }
 );
 
