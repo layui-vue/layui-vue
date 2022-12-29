@@ -60,7 +60,6 @@ const selectedValue = computed({
   },
 });
 
-const allowEmits = ref(true);
 
 const checkedKeys = computed({
   get() {
@@ -68,14 +67,8 @@ const checkedKeys = computed({
   },
   set(value) {
     if (props.multiple) {
-      if (allowEmits.value) {
-        allowEmits.value = false;
         emits("update:modelValue", value);
         emits("change", value);
-        setTimeout(() => {
-          allowEmits.value = true;
-        });
-      }
     }
   },
 });
