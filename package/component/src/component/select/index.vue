@@ -191,8 +191,8 @@ const hasContent = computed(() => {
 });
 
 const _placeholder = computed(() => {
-  return hasContent.value ? '' : props.placeholder;
-})
+  return hasContent.value ? "" : props.placeholder;
+});
 
 provide("selectRef", selectRef);
 provide("openState", openState);
