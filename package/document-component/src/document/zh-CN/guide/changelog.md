@@ -14,7 +14,7 @@
     <ul> 
       <a name="1-8-0"></a> 
       <li> 
-        <h3>1.8.0 <span class="layui-badge-rim">2023-01-01</span></h3> 
+        <h3>1.8.0 <span class="layui-badge-rim">2022-12-29</span></h3> 
         <ul>
           <li>
             <h4 style="margin-bottom: 0px !important;font-weight: 500 !important;">Tree Select</h4>

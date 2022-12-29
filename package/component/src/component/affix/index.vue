@@ -9,6 +9,7 @@ export default {
   name: "LayAffix",
 };
 </script>
+
 <script setup lang="ts">
 import "./index.less";
 import {

@@ -55,10 +55,8 @@ const selectedValue = computed({
     return props.modelValue;
   },
   set(value) {
-    if (!props.multiple) {
-      emits("update:modelValue", value);
-      emits("change", value);
-    }
+    emits("update:modelValue", value);
+    emits("change", value);
   },
 });
 
@@ -82,6 +80,7 @@ watch(
         const node: any = getNode(props.data, value);
         if (node) {
           node.label = node.title;
+          node.value = node.id;
           node.closable = !node.disabled;
           return node;
         }
@@ -107,6 +106,10 @@ const onClear = function () {
 const handleClick = (node: any) => {
   dropdownRef.value.hide();
   selectedValue.value = node.id;
+};
+
+const handleRemove = (value: any) => {
+  emits("update:modelValue", checkedKeys.value.filter((item: any) => item != value));
 };
 
 // 判断值的实时状态
@@ -142,6 +145,7 @@ const hasContent = computed(() => {
         :collapseTagsTooltip="collapseTagsTooltip"
         :minCollapsedNum="minCollapsedNum"
         :disabledInput="true"
+        @remove="handleRemove"
         @clear="onClear"
         v-model="multipleValue"
         v-if="multiple"

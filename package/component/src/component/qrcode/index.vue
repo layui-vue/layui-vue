@@ -11,7 +11,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { ref, onMounted, defineProps, nextTick } from "vue";
+import { ref, onMounted, defineProps, nextTick, watch } from "vue";
 import QRCode from "qrcode";
 import "./index.less";
 
@@ -28,13 +28,23 @@ const qrcode = ref<HTMLElement | undefined>();
 
 onMounted(() => {
   nextTick(() => {
-    QRCode.toCanvas(qrcode.value, props.text, {
-      width: props.width,
-      color: {
-        dark: props.color,
-        light: props.backgroundColor,
-      },
-    });
+    buildQrcode();
   });
 });
+
+watch(
+  () => props,
+  () => { buildQrcode() },
+  { deep: true }
+);
+
+const buildQrcode = () => {
+  QRCode.toCanvas(qrcode.value, props.text, {
+    width: props.width,
+    color: {
+      dark: props.color,
+      light: props.backgroundColor,
+    },
+  });
+};
 </script>
