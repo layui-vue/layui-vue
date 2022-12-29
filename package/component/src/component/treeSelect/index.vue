@@ -36,12 +36,11 @@ export interface TreeSelectEmits {
 
 const props = withDefaults(defineProps<TreeSelectProps>(), {
   disabled: false,
-  placeholder: "请选择",
   multiple: false,
   allowClear: false,
+  checkStrictly: true,
   collapseTagsTooltip: true,
   minCollapsedNum: 3,
-  checkStrictly: true,
   size: "md",
 });
 
@@ -81,9 +80,11 @@ watch(
     if (props.multiple) {
       multipleValue.value = selectedValue.value.map((value: any) => {
         const node: any = getNode(props.data, value);
-        node.label = node.title;
-        node.closable = !node.disabled;
-        return node;
+        if(node) {
+          node.label = node.title;
+          node.closable = !node.disabled;
+          return node;
+        }
       });
     } else {
       const node: any = getNode(props.data, selectedValue.value);

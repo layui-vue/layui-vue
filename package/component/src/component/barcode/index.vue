@@ -1,9 +1,6 @@
 <template>
-  <div>
-    <canvas ref="barcodeRef" v-show="valid"></canvas>
-    <div v-show="!valid">
-      <slot></slot>
-    </div>
+  <div class="layui-barcode">
+    <canvas ref="barcodeRef" ></canvas>
   </div>
 </template>
 
@@ -16,6 +13,7 @@ export default {
 <script lang="ts" setup>
 import { ref, onMounted, defineProps } from "vue";
 import JsBarcode from "jsbarcode";
+import "./index.less";
 
 const props = defineProps({
   value: [String, Number],
@@ -94,7 +92,6 @@ const removeUndefinedProps = (obj: any) => {
   }
 };
 
-const valid = ref(true);
 const barcodeRef = ref(null);
 
 onMounted(() => {
