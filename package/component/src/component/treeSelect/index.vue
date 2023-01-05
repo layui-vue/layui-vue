@@ -103,9 +103,18 @@ const onClear = function () {
   }
 };
 
+/**
+ * Tree 节点单击事件
+ * 
+ * 备注：单选模式需要执行的逻辑，多选模式禁用。
+ * 
+ * @param node 当前节点 
+ */
 const handleClick = (node: any) => {
-  dropdownRef.value.hide();
-  selectedValue.value = node.id;
+  if(!props.multiple) {
+    dropdownRef.value.hide();
+    selectedValue.value = node.id;
+  }
 };
 
 const handleRemove = (value: any) => {
@@ -115,7 +124,6 @@ const handleRemove = (value: any) => {
   );
 };
 
-// 判断值的实时状态
 const hasContent = computed(() => {
   if (Array.isArray(selectedValue)) {
     return selectedValue.value.length > 0;
