@@ -28,13 +28,12 @@
   border-color: var(--input-border-color);
   border-radius: var(--input-border-radius);
   display: inline-flex;
-  overflow: hidden;
 }
 
 .layui-input input{
   height: 38px;
   line-height: 38px;
-  background-color: #fff;
+  background-color: transparent;
   color: rgba(0, 0, 0, 0.85);
   padding-left: 10px;
   display: inline-block;
@@ -142,4 +141,9 @@
   &[size="xs"] {
     .set-size(@input-xs);
   }
+}
+
+.layui-input input::-webkit-outer-spin-button,
+.layui-input input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
 }
