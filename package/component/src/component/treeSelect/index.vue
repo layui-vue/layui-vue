@@ -119,8 +119,8 @@ const handleClick = (node: any) => {
 
 /**
  * Tag 标签的删除事件
- * 
- * 备注: 多选模式需要考虑 checkStrictly 为 false 的情况，删除当前节点，是否需要删除子节点 
+ *
+ * 备注: 多选模式需要考虑 checkStrictly 为 false 的情况，删除当前节点，是否需要删除子节点
  */
 const handleRemove = (value: any) => {
   emits(
