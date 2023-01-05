@@ -98,10 +98,10 @@
     </div>
     <PanelFoot @ok="footOnOk" @now="footOnNow" @clear="footOnClear">
       <span v-if="startTime.unix !== -1" class="layui-laydate-preview">
-        {{ dayjs(startTime.unix).format("YYYY-MM-DD") }}
+        {{ dayjs(startTime.unix).format("YYYY-MM") }}
         {{ datePicker.rangeSeparator }}
         <template v-if="endTime.unix !== -1">
-          {{ dayjs(endTime.unix).format("YYYY-MM-DD") }}
+          {{ dayjs(endTime.unix).format("YYYY-MM") }}
         </template>
         <template v-else> -- </template>
       </span>

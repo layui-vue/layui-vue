@@ -12,6 +12,16 @@
 <lay-timeline>
 <lay-timeline-item title="1.8.x">
     <ul> 
+      <a name="1-8-3"></a> 
+      <li> 
+        <h3>1.8.3 <span class="layui-badge-rim">2023-01-05</span></h3> 
+        <ul>
+          <li>[修复] tree-select 组件多选模式点击节点产生错误异常的问题。</li>
+          <li>[修复] date-picker 组件范围选择，type 属性为 yearmonth 时右下角仍展示具体日期的问题。</li>
+        </ul>  
+      </li>
+    </ul>
+    <ul> 
       <a name="1-8-2"></a> 
       <li> 
         <h3>1.8.2 <span class="layui-badge-rim">2022-12-29</span></h3> 
