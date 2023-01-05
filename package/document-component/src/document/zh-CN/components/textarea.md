@@ -13,7 +13,7 @@
 ::: demo 使用 `lay-textarea` 标签, 创建文本域
 
 <template>
-  <lay-textarea placeholder="请输入描述" v-model="data1"></lay-textarea>
+  <lay-textarea placeholder="请输入描述" :rows="2" :cols="10" v-model="data1"></lay-textarea>
 </template>
 
 <script>
