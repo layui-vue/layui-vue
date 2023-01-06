@@ -14,7 +14,7 @@
     <ul> 
       <a name="1-8-3"></a> 
       <li> 
-        <h3>1.8.3 <span class="layui-badge-rim">2023-01-05</span></h3> 
+        <h3>1.8.3 <span class="layui-badge-rim">2023-01-06</span></h3> 
         <ul>
           <li>[修复] tree-select 组件多选模式点击节点产生错误异常的问题。</li>
           <li>[修复] tree-select 组件 checkStrictly 属性为 false 时，删除父节点子节点不删除的问题。</li>
