@@ -1,8 +1,8 @@
 /**
  * 根据 id 查找节点
- * 
+ *
  * @param root 目标集合
- * @param id   节点编号 
+ * @param id   节点编号
  */
 export function getNode(root: any, id: string) {
   let resultNode = null;

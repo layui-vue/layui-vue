@@ -530,7 +530,7 @@ const data3 = ref([{
 ::: demo 通过 `allow-clear` 属性开启清空操作。
 
 <template>
-  <lay-tree-select v-model="value4" :data="data4" placeholder="请选择" :allow-clear="true" :checkStrictly="false" multiple></lay-tree-select>
+  <lay-tree-select v-model="value4" :data="data4" placeholder="请选择" :allow-clear="true" multiple></lay-tree-select>
 </template>
 
 <script setup>
