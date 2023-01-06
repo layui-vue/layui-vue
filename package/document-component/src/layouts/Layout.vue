@@ -8,16 +8,8 @@
     <lay-layout class="layui-layout-document" style="height: 100%">
       <lay-header>
         <lay-logo>
-          <img src="../assets/logo-png.png" /><span
-            style="
-              margin-left: 12px;
-              font-size: 20px;
-              color: rgba(0, 0, 0, 0.8);
-              letter-spacing: -0.2px;
-              opacity: 0.8;
-            "
-            >layui - vue</span
-          >
+          <img src="../assets/logo-png.png" />
+          <span class="title">layui - vue</span>
         </lay-logo>
         <ul
           class="layui-nav layui-layout-left"
@@ -120,7 +112,7 @@
                   <lay-color-picker
                     v-model="appStore.themeVariable['--global-neutral-color-8']"
                   ></lay-color-picker>
-                  <lay-button :fluid="true" border="green" border-style="dashed"
+                  <lay-button :fluid="true" border="green" border-style="dashed" @click="resetThemeVariable"
                     >重置配置</lay-button
                   >
                 </div>
@@ -285,6 +277,25 @@ export default {
     const changeLocale = function (lang) {
       locale.value = lang;
     };
+    
+    const resetThemeVariable = function() {
+      appStore.themeVariable = {
+        "--global-primary-color": "#009688",
+        "--global-normal-color": "#1e9fff",
+        "--global-warm-color": "#ffb800",
+        "--global-danger-color": "#ff5722",
+        "--global-checked-color": "#5fb878",
+        "--global-border-radius": "2px",
+        "--global-neutral-color-1": "#FAFAFA",
+        "--global-neutral-color-2": "#F6F6F6",
+        "--global-neutral-color-3": "#eeeeee",
+        "--global-neutral-color-4": "#e2e2e2",
+        "--global-neutral-color-5": "#dddddd",
+        "--global-neutral-color-6": "#d2d2d2",
+        "--global-neutral-color-7": "#cccccc",
+        "--global-neutral-color-8": "#c2c2c2",
+      }
+    }
 
     const version = config.version;
 
@@ -300,6 +311,7 @@ export default {
       currentPath,
       handleClick,
       changeLocale,
+      resetThemeVariable
     };
   },
 };
@@ -353,6 +365,15 @@ export default {
   margin-top: -5px;
   height: 45px;
   left: 15px;
+}
+
+.layui-logo .title {
+  margin-left: 12px;
+              font-size: 20px;
+              color: rgba(0, 0, 0, 0.8);
+              letter-spacing: -0.2px;
+              opacity: 0.8;
+            
 }
 
 .layui-header > .layui-nav {

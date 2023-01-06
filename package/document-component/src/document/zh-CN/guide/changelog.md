@@ -20,6 +20,7 @@
           <li>[修复] date-picker 组件范围选择，type 属性为 yearmonth 时右下角仍展示具体日期的问题。</li>
           <li>[修复] input 组件 style 属性 border-radius 设置过大导致的边角缺失。</li>
           <li>[修复] input 组件 type 属性为 number 时显示原生加减操作的问题。</li>
+          <li>[文档] 主题配置 "重置配置" 功能实现。</li>
         </ul>  
       </li>
     </ul>
