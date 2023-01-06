@@ -112,7 +112,11 @@
                   <lay-color-picker
                     v-model="appStore.themeVariable['--global-neutral-color-8']"
                   ></lay-color-picker>
-                  <lay-button :fluid="true" border="green" border-style="dashed" @click="resetThemeVariable"
+                  <lay-button
+                    :fluid="true"
+                    border="green"
+                    border-style="dashed"
+                    @click="resetThemeVariable"
                     >重置配置</lay-button
                   >
                 </div>
@@ -277,8 +281,8 @@ export default {
     const changeLocale = function (lang) {
       locale.value = lang;
     };
-    
-    const resetThemeVariable = function() {
+
+    const resetThemeVariable = function () {
       appStore.themeVariable = {
         "--global-primary-color": "#009688",
         "--global-normal-color": "#1e9fff",
@@ -294,8 +298,8 @@ export default {
         "--global-neutral-color-6": "#d2d2d2",
         "--global-neutral-color-7": "#cccccc",
         "--global-neutral-color-8": "#c2c2c2",
-      }
-    }
+      };
+    };
 
     const version = config.version;
 
@@ -311,7 +315,7 @@ export default {
       currentPath,
       handleClick,
       changeLocale,
-      resetThemeVariable
+      resetThemeVariable,
     };
   },
 };
@@ -369,11 +373,10 @@ export default {
 
 .layui-logo .title {
   margin-left: 12px;
-              font-size: 20px;
-              color: rgba(0, 0, 0, 0.8);
-              letter-spacing: -0.2px;
-              opacity: 0.8;
-            
+  font-size: 20px;
+  color: rgba(0, 0, 0, 0.8);
+  letter-spacing: -0.2px;
+  opacity: 0.8;
 }
 
 .layui-header > .layui-nav {

@@ -119,19 +119,43 @@ const handleClick = (node: any) => {
 
 /**
  * Tag 标签的删除事件
- * 
- * 备注: 多选模式需要考虑 checkStrictly 为 false 的情况，删除当前节点，是否需要删除子节点 
+ *
+ * 备注: 多选模式需要考虑 checkStrictly 为 false 的情况，删除当前节点，是否需要删除子节点, 如果为 true 时，仅删除当前节点
  */
 const handleRemove = (value: any) => {
-  emits(
-    "update:modelValue",
-    checkedKeys.value.filter((item: any) => item != value)
-  );
+  if (props.checkStrictly) {
+    emits(
+      "update:modelValue",
+      checkedKeys.value.filter((item: any) => item != value)
+    );
+  } else {
+    // 当 checkStrictly 配置为 false 时, 删除内容为 当前节点 与 关联子集
+    const node = getNode(props.data, value);
+    const nodeIds = filterNodeIds(node);
+    emits(
+      "update:modelValue",
+      checkedKeys.value.filter((item: any) => !nodeIds.includes(item))
+    );
+  }
+};
+
+const filterNodeIds = (node: any) => {
+  const nodeIds: any[] = [];
+  function _findNodeIds(node: any, arr: any[]) {
+    arr.push(node.id);
+    if (node.children) {
+      node.children.forEach((item: any) => {
+        _findNodeIds(item, arr);
+      });
+    }
+  }
+  _findNodeIds(node, nodeIds);
+  return nodeIds;
 };
 
 /**
- * 实时标识，是否存在数据 
- * 
+ * 实时标识，是否存在数据
+ *
  * 应用于多选模式 placeholder 属性的显示隐藏
  */
 const hasContent = computed(() => {
