@@ -123,7 +123,6 @@ const handleClick = (node: any) => {
  * 备注: 多选模式需要考虑 checkStrictly 为 false 的情况，删除当前节点，是否需要删除子节点, 如果为 true 时，仅删除当前节点
  */
 const handleRemove = (value: any) => {
-
   // 关闭 dropdown 前置操作
   dropdownRef.value.hide();
 
