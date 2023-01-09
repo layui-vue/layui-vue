@@ -166,7 +166,7 @@ const hasContent = computed(() => {
   if (Array.isArray(selectedValue)) {
     return selectedValue.value.length > 0;
   } else {
-    return selectedValue.value != "";
+    return selectedValue.value != "" && selectedValue.value != undefined && selectedValue.value != null;
   }
 });
 

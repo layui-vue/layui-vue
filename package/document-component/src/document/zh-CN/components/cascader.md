@@ -301,7 +301,6 @@ const options = [
 ::: demo 使用 `decollator` 属性 自定义分割符号
 <template>
   <lay-cascader :options="options" v-model="value1" decollator="-" placeholder="我可以自定义分割符号" allow-clear ></lay-cascader>
-  <span style="margin-left:20px">输出的值：{{value1}}</span>
 </template>
 
 <script setup>

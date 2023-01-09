@@ -12,6 +12,16 @@
 <lay-timeline>
 <lay-timeline-item title="1.8.x">
     <ul> 
+      <a name="1-8-4"></a> 
+      <li> 
+        <h3>1.8.4 <span class="layui-badge-rim">2023-01-09</span></h3> 
+        <ul>
+          <li>[修复] tree-select 组件 v-model 属性设置 null 与 undefined 时，placeholder 不生效。</li>
+          <li>[修复] select 组件 v-model 属性设置 null 与 undefined 时，placeholder 不生效。</li>
+        </ul>  
+      </li>
+    </ul>
+    <ul> 
       <a name="1-8-3"></a> 
       <li> 
         <h3>1.8.3 <span class="layui-badge-rim">2023-01-06</span></h3> 
