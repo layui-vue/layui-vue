@@ -13,7 +13,6 @@ import {
   StyleValue,
   useSlots,
   WritableComputedRef,
-  watch,
 } from "vue";
 import LayCheckbox from "../checkbox/index.vue";
 import LayTooltip from "../tooltip/index.vue";
@@ -29,6 +28,7 @@ export interface TableRowProps {
   selectedKey: string;
   tableColumnKeys: Recordable[];
   childrenColumnName?: string;
+  columnSlotNames: String[];
   page?: any;
   columns: Recordable[];
   checkbox?: boolean;
@@ -112,20 +112,6 @@ const isExpand: WritableComputedRef<any> = computed({
     tableExpandKeys.value = newTableExpandKeys;
   },
 });
-
-const slotsData = ref<string[]>([]);
-
-watch(
-  () => props.columns,
-  () => {
-    props.columns.map((value: any) => {
-      if (value.customSlot) {
-        slotsData.value.push(value.customSlot);
-      }
-    });
-  },
-  { immediate: true }
-);
 
 const rowClick = function (data: any, evt: MouseEvent) {
   emit("row", data, evt);
@@ -649,6 +635,7 @@ const checkboxProps = props.getCheckboxProps(props.data, props.index);
         :index="childrenIndex"
         :page="page"
         :columns="columns"
+        :columnSlotNames="columnSlotNames"
         :indent-size="indentSize"
         :current-indent-size="childrenIndentSize"
         :checkbox="checkbox"
@@ -670,20 +657,14 @@ const checkboxProps = props.getCheckboxProps(props.data, props.index);
         v-model:selectedKeys="tableSelectedKeys"
         v-model:selectedKey="tableSelectedKey"
       >
-        <template
-          v-for="name in slotsData"
-          #[name]="slotProp: { data: any, column: any }"
-        >
+        <template v-for="name in columnSlotNames" #[name]="slotProp: { data: any, column: any }">
           <slot
             :name="name"
             :data="slotProp.data"
             :column="slotProp.column"
           ></slot>
         </template>
-        <template
-          v-if="slot.expand"
-          #expand="slotProp: { data: any, column: any }"
-        >
+        <template v-if="slot.expand" #expand="slotProp: { data: any, column: any }">
           <slot
             name="expand"
             :data="slotProp.data"

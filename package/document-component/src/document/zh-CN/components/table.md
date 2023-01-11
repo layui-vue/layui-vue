@@ -13,8 +13,17 @@
 ::: demo 使用 `lay-table` 标签, 创建表格
 
 <template>
-  <lay-button type="primary" @click="changeColumn">更新列</lay-button>
-  <lay-table :columns="columns66" :data-source="dataSource1"></lay-table>
+  <lay-table :columns="columns66" :data-source="dataSource1">
+    <template #income>
+      66666
+    </template>
+    <template #outlays>
+      77777
+    </template>
+    <template #balance>
+      88888
+    </template>
+  </lay-table>
 </template>
 
 <script>
@@ -32,31 +41,16 @@ export default {
         title:"密码",
         width: "180px",
         key:"password"
+      },{
+        title:"资金往来",
+        align: "center",
+        children:  [
+          {title: "银行收入(￥)", key: "income", align: "center", customSlot: 'income'},
+          {title: "银行支出(￥)", key: "outlays", align: "center", customSlot: 'outlays'},
+          {title: "银行余额(￥)", key: "balance", align: "center", customSlot: 'balance'},
+        ] 
       }
     ])
-
-    const changeColumn = () => {
-      columns66.value = [
-      {
-        title:"账户",
-        width:"200px",
-        key:"username"
-      },{
-        title:"密码",
-        width: "180px",
-        key:"password"
-      },{
-        title:"年龄",
-        width: "180px",
-        key:"age"
-      },{
-        title:"备注",
-        width: "180px",
-        key:"remark",
-        ellipsisTooltip: true,
-      }
-    ]
-    }
 
     const dataSource1 = [
       {username:"root", password:"root", age:"18", remark: 'layui - vue（谐音：类 UI) '},
@@ -67,7 +61,6 @@ export default {
     return {
       columns66,
       dataSource1,
-      changeColumn
     }
   }
 }

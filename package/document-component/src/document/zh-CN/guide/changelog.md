@@ -16,8 +16,10 @@
       <li> 
         <h3>1.8.4 <span class="layui-badge-rim">2023-01-09</span></h3> 
         <ul>
+          <li>[新增] table 组件 customSlot 插槽 column 参数，用于获取当前渲染的列信息。</li>
           <li>[修复] tree-select 组件 v-model 属性设置 null 与 undefined 时，placeholder 不生效。</li>
           <li>[修复] select 组件 v-model 属性设置 null 与 undefined 时，placeholder 不生效。</li>
+          <li>[修复] table 组件 columns 属性配置 children 插槽不生效的问题。</li>
         </ul>  
       </li>
     </ul>

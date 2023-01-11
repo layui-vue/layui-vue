@@ -16,6 +16,7 @@ import {
   WritableComputedRef,
   computed,
   onBeforeUnmount,
+  nextTick,
 } from "vue";
 import { Recordable } from "../../types";
 import LayCheckbox from "../checkbox/index.vue";
@@ -23,7 +24,7 @@ import LayDropdown from "../dropdown/index.vue";
 import LayEmpty from "../empty/index.vue";
 import TableRow from "./TableRow.vue";
 import TablePage from "./TablePage.vue";
-import { nextTick } from "vue";
+import useTable from "./hooks/useTable";
 
 export interface TableProps {
   id?: string;
@@ -510,20 +511,7 @@ const getFixedColumn = () => {
   }
 };
 
-const slotsData = ref<string[]>([]);
-
-watch(
-  () => props.columns,
-  () => {
-    slotsData.value = [];
-    props.columns.map((value: any) => {
-      if (value.customSlot) {
-        slotsData.value.push(value.customSlot);
-      }
-    });
-  },
-  { immediate: true }
-);
+const { columnSlotNames } = useTable(props);
 
 const currentIndentSize = ref(0);
 
@@ -928,6 +916,7 @@ onBeforeUnmount(() => {
                   :data="children"
                   :page="page"
                   :columns="tableBodyColumns"
+                  :columnSlotNames="columnSlotNames"
                   :indent-size="indentSize"
                   :currentIndentSize="currentIndentSize"
                   :tableColumnKeys="tableColumnKeys"
@@ -948,11 +937,18 @@ onBeforeUnmount(() => {
                   @row-double="rowDoubleClick"
                   @row-contextmenu="rowContextmenu"
                 >
-                  <template v-for="name in slotsData" #[name]="{ data }">
-                    <slot :name="name" :data="data"></slot>
+                  <template v-for="name in columnSlotNames" #[name]="slotProp: { data: any, column: any }">
+                    <slot 
+                      :name="name"             
+                      :data="slotProp.data"
+                      :column="slotProp.column">
+                    </slot>
                   </template>
-                  <template v-if="slot.expand" #expand="{ data }">
-                    <slot name="expand" :data="data"></slot>
+                  <template v-if="slot.expand" #expand="slotProp: { data: any, column: any }">
+                    <slot 
+                      name="expand"            
+                      :data="slotProp.data"
+                      :column="slotProp.column"></slot>
                   </template>
                 </table-row>
               </template>
