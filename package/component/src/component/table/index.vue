@@ -937,18 +937,26 @@ onBeforeUnmount(() => {
                   @row-double="rowDoubleClick"
                   @row-contextmenu="rowContextmenu"
                 >
-                  <template v-for="name in columnSlotNames" #[name]="slotProp: { data: any, column: any }">
-                    <slot 
-                      :name="name"             
+                  <template
+                    v-for="name in columnSlotNames"
+                    #[name]="slotProp: { data: any, column: any }"
+                  >
+                    <slot
+                      :name="name"
                       :data="slotProp.data"
-                      :column="slotProp.column">
+                      :column="slotProp.column"
+                    >
                     </slot>
                   </template>
-                  <template v-if="slot.expand" #expand="slotProp: { data: any, column: any }">
-                    <slot 
-                      name="expand"            
+                  <template
+                    v-if="slot.expand"
+                    #expand="slotProp: { data: any, column: any }"
+                  >
+                    <slot
+                      name="expand"
                       :data="slotProp.data"
-                      :column="slotProp.column"></slot>
+                      :column="slotProp.column"
+                    ></slot>
                   </template>
                 </table-row>
               </template>

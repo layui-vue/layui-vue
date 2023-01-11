@@ -7,13 +7,7 @@ export default {
 <script lang="ts" setup>
 import { Recordable } from "../../types";
 import { LayIcon } from "@layui/icons-vue";
-import {
-  computed,
-  ref,
-  StyleValue,
-  useSlots,
-  WritableComputedRef,
-} from "vue";
+import { computed, ref, StyleValue, useSlots, WritableComputedRef } from "vue";
 import LayCheckbox from "../checkbox/index.vue";
 import LayTooltip from "../tooltip/index.vue";
 import LayRadio from "../radio/index.vue";
@@ -657,14 +651,20 @@ const checkboxProps = props.getCheckboxProps(props.data, props.index);
         v-model:selectedKeys="tableSelectedKeys"
         v-model:selectedKey="tableSelectedKey"
       >
-        <template v-for="name in columnSlotNames" #[name]="slotProp: { data: any, column: any }">
+        <template
+          v-for="name in columnSlotNames"
+          #[name]="slotProp: { data: any, column: any }"
+        >
           <slot
             :name="name"
             :data="slotProp.data"
             :column="slotProp.column"
           ></slot>
         </template>
-        <template v-if="slot.expand" #expand="slotProp: { data: any, column: any }">
+        <template
+          v-if="slot.expand"
+          #expand="slotProp: { data: any, column: any }"
+        >
           <slot
             name="expand"
             :data="slotProp.data"
