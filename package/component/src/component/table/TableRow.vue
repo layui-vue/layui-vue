@@ -11,6 +11,7 @@ import { computed, ref, StyleValue, useSlots, WritableComputedRef } from "vue";
 import LayCheckbox from "../checkbox/index.vue";
 import LayTooltip from "../tooltip/index.vue";
 import LayRadio from "../radio/index.vue";
+import { TableEmit } from "./typing";
 
 export interface TableRowProps {
   index: number;
@@ -41,14 +42,7 @@ export interface TableRowProps {
 
 const slot = useSlots();
 
-const emit = defineEmits([
-  "row",
-  "row-double",
-  "row-contextmenu",
-  "update:expandKeys",
-  "update:selectedKeys",
-  "update:selectedKey",
-]);
+const emit = defineEmits(TableEmit);
 
 const props = withDefaults(defineProps<TableRowProps>(), {
   checkbox: false,

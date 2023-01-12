@@ -24,7 +24,8 @@ import LayDropdown from "../dropdown/index.vue";
 import LayEmpty from "../empty/index.vue";
 import TableRow from "./TableRow.vue";
 import TablePage from "./TablePage.vue";
-import useTable from "./hooks/useTable";
+import useTable from "./composables/useTable";
+import { TableEmit } from "./typing";
 
 export interface TableProps {
   id?: string;
@@ -78,15 +79,7 @@ const props = withDefaults(defineProps<TableProps>(), {
   getRadioProps: () => {},
 });
 
-const emit = defineEmits([
-  "change",
-  "update:expandKeys",
-  "update:selectedKeys",
-  "update:selectedKey",
-  "row-contextmenu",
-  "row-double",
-  "row",
-]);
+const emit = defineEmits(TableEmit);
 
 const slot = useSlots();
 const slots = slot.default && slot.default();
