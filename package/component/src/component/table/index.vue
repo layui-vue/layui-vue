@@ -6,18 +6,7 @@ export default {
 
 <script setup lang="ts">
 import "./index.less";
-import {
-  ref,
-  watch,
-  useSlots,
-  withDefaults,
-  onMounted,
-  StyleValue,
-  WritableComputedRef,
-  computed,
-  onBeforeUnmount,
-  nextTick,
-} from "vue";
+import { ref, watch, useSlots, withDefaults, onMounted, StyleValue, WritableComputedRef, computed, onBeforeUnmount, nextTick } from "vue";
 import { Recordable } from "../../types";
 import LayCheckbox from "../checkbox/index.vue";
 import LayDropdown from "../dropdown/index.vue";
@@ -170,20 +159,6 @@ const findFindNodes = (columns: any[]) => {
     }
   });
 };
-
-/**
- * 计算数组差异
- *
- * @param arr1 数组
- * @param arr2 数组
- */
-function diff(arr1: any[], arr2: any[]) {
-  var newArr = [];
-  arr1 = Array.from(new Set(arr1)); // 去重
-  arr2 = Array.from(new Set(arr2)); // 去重
-  newArr = arr1.concat(arr2);
-  return newArr.filter((x) => !(arr1.includes(x) && arr2.includes(x)));
-}
 
 /**
  * 计算标题列
