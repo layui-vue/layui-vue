@@ -13,7 +13,7 @@
 ::: demo 使用 `lay-cascader` 标签创建级联选择器
 
 <template>
-  <lay-cascader :options="options" disabled v-model="value" placeholder="点我试一试" allow-clear>
+  <lay-cascader :options="options" v-model="value" placeholder="点我试一试" allow-clear>
   </lay-cascader>
   <span style="margin-left:20px">输出的值：{{value}}</span>
   <lay-button @click='value="Components/data/progress"' size='sm' style='margin-left:10px'>
