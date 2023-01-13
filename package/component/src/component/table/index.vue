@@ -552,23 +552,27 @@ const renderFixedStyle = (column: any, columnIndex: number) => {
  * @param data 查找的数据
  * @param target 目标节点
  */
-
-const findParent = (data: any[], target: any, result: any[]) => {
-  for (let i in data) {
-    let item = data[i];
-    if (item.key === target.key) {
-      result.unshift(item);
-      return true;
-    }
-    if (item.children && item.children.length > 0) {
-      let ok = findParent(item.children, target, result);
-      if (ok) {
+const findTopicParent = (data: any[], target: any) => {
+  const parents: any[] = [];
+  const findParent = (data: any[], target: any, result: any[]) => {
+    for (let i in data) {
+      let item = data[i];
+      if (item.key === target.key) {
         result.unshift(item);
         return true;
       }
+      if (item.children && item.children.length > 0) {
+        let ok = findParent(item.children, target, result);
+        if (ok) {
+          result.unshift(item);
+          return true;
+        }
+      }
     }
-  }
-  return false;
+    return false;
+  };
+  findParent(data, target, parents);
+  return parents[0];
 };
 
 /**
@@ -587,7 +591,9 @@ const renderHeadFixedStyle = (
 ) => {
   if (column.fixed) {
     if (column.fixed == "left") {
+      // 如果是左固定。
       var left = 0;
+      // 累加左侧列宽。
       for (var i = 0; i < columnIndex; i++) {
         if (
           props.columns[i].fixed &&
@@ -599,7 +605,9 @@ const renderHeadFixedStyle = (
       }
       return { left: `${left}px` } as StyleValue;
     } else {
+      // 如果是右固定。
       var right = 0;
+      // 累计右侧列宽。
       for (var i = columnIndex + 1; i < props.columns.length; i++) {
         if (
           props.columns[i].fixed &&
@@ -612,7 +620,7 @@ const renderHeadFixedStyle = (
       return { right: `${right}px` } as StyleValue;
     }
   } else {
-    // 判定是否为最后一个非固定列，如果是则删除右侧边框
+    // 如果是简单表头，则判定当前列是否为尾列。
     if (tableHeadColumnIndex == 0) {
       var isLast = true;
       for (var i = columnIndex + 1; i < tableHeadColumn.length; i++) {
@@ -625,17 +633,13 @@ const renderHeadFixedStyle = (
       }
       return isLast ? ({ "border-right": "none" } as StyleValue) : {};
     } else {
-      
-      // 表格结构为多层级时，查询当前节点的父节点。
+      // 如果是复杂表头，则判定根节点与子节点是否同时为尾节点。
       var topicColumns = tableHeadColumns[0];
-      const result: any[] = [];
-      findParent(topicColumns, column, result);
-      var topicColumn = result[0];
+      var topicColumn = findTopicParent(topicColumns, column);
       var index: number = topicColumns.indexOf(topicColumn);
       var isLast = true;
-
-      // 父节点是否为当前层级的尾节点
-      for(var i = index + 1; i < topicColumns.length; i++) {
+      // 父节点是否为当前层级的尾节点。
+      for (var i = index + 1; i < topicColumns.length; i++) {
         if (
           topicColumns[i].fixed == undefined &&
           tableColumnKeys.value.includes(topicColumns[i].key)
@@ -643,8 +647,7 @@ const renderHeadFixedStyle = (
           isLast = false;
         }
       }
-
-      // 子节点是否为当前层级的尾节点
+      // 子节点是否为当前层级的尾节点。
       for (var i = columnIndex + 1; i < tableHeadColumn.length; i++) {
         if (
           tableHeadColumn[i].fixed == undefined &&
@@ -653,8 +656,8 @@ const renderHeadFixedStyle = (
           isLast = false;
         }
       }
-
-      return isLast ? ({ "border-right": "none" } as StyleValue) : {};    
+      // 当前两者满足条件时，去掉右侧边框显示。
+      return isLast ? ({ "border-right": "none" } as StyleValue) : {};
     }
   }
   return {} as StyleValue;
