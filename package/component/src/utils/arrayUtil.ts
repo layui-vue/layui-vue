@@ -2,7 +2,6 @@ export const check = (arr: any[], value: any) => {
   return arr.indexOf(value) > -1;
 };
 
-
 /**
  * 计算数组差异
  *

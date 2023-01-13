@@ -22,7 +22,6 @@ const useTable = (props: any) => {
     forEach(columns, outcome);
     return outcome;
   };
-
   return { columnSlotNames };
 };
 

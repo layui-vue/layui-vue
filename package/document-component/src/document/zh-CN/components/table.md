@@ -1356,7 +1356,10 @@ export default {
         children: [
           { title: "省", key: "province", width: "300px" },
           { title: "市", key: "city", width: "300px" },
-          { title: "区", key: "area", width: "300px" },
+          { title: "区", children: [
+            { title: "县", key: "xian", width: "100px" },
+            { title: "村", key: "cun", width: "100px" },
+          ] },
         ]
       },{
         title:"性别",
@@ -1379,11 +1382,11 @@ export default {
       loading.value = true;
       setTimeout(() => {
       dataSource30.value = [
-        {id:"1",username:"就眠儀式",province:"山东",city:"济南",area: "高新区", password:"root",sex:"男", age:"18", remark: 'layui - vue（谐音：类 UI) '},
-        {id:"2",username:"就眠儀式",province:"山东",city:"济南",area: "高新区", password:"root",sex:"男", age:"18", remark: 'layui - vue（谐音：类 UI) '},
-        {id:"3",username:"就眠儀式",province:"山东",city:"济南",area: "高新区", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '},
-        {id:"4",username:"就眠儀式",province:"山东",city:"济南",area: "高新区", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '},
-        {id:"5",username:"就眠儀式",province:"山东",city:"济南",area: "高新区", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '}
+        {id:"1",username:"就眠儀式",province:"山东",city:"济南",area: "高新区", password:"root",sex:"男", age:"18", remark: 'layui - vue（谐音：类 UI) ', xian:"1", cun: "2"},
+        {id:"2",username:"就眠儀式",province:"山东",city:"济南",area: "高新区", password:"root",sex:"男", age:"18", remark: 'layui - vue（谐音：类 UI) ', xian:"1", cun: "2"},
+        {id:"3",username:"就眠儀式",province:"山东",city:"济南",area: "高新区", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) ', xian:"1", cun: "2"},
+        {id:"4",username:"就眠儀式",province:"山东",city:"济南",area: "高新区", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) ', xian:"1", cun: "2"},
+        {id:"5",username:"就眠儀式",province:"山东",city:"济南",area: "高新区", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) ', xian:"1", cun: "2"}
       ];
       loading.value = false;
       },5000)

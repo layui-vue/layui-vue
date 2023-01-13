@@ -6,7 +6,18 @@ export default {
 
 <script setup lang="ts">
 import "./index.less";
-import { ref, watch, useSlots, withDefaults, onMounted, StyleValue, WritableComputedRef, computed, onBeforeUnmount, nextTick } from "vue";
+import {
+  ref,
+  watch,
+  useSlots,
+  withDefaults,
+  onMounted,
+  StyleValue,
+  WritableComputedRef,
+  computed,
+  onBeforeUnmount,
+  nextTick,
+} from "vue";
 import { Recordable } from "../../types";
 import LayCheckbox from "../checkbox/index.vue";
 import LayDropdown from "../dropdown/index.vue";
@@ -536,12 +547,43 @@ const renderFixedStyle = (column: any, columnIndex: number) => {
 };
 
 /**
- * @remark 排除 hide 列
+ * 根据目标列查找它的父级
+ *
+ * @param data 查找的数据
+ * @param target 目标节点
+ */
+
+const findParent = (data: any[], target: any, result: any[]) => {
+  for (let i in data) {
+    let item = data[i];
+    if (item.key === target.key) {
+      result.unshift(item);
+      return true;
+    }
+    if (item.children && item.children.length > 0) {
+      let ok = findParent(item.children, target, result);
+      if (ok) {
+        result.unshift(item);
+        return true;
+      }
+    }
+  }
+  return false;
+};
+
+/**
+ * 计算 td 的 style 属性
+ *
+ * @param column 列信息
+ * @param columnIndex 列索引
+ * @param tableHeadColumn 列集合 (current)
  */
 const renderHeadFixedStyle = (
   column: any,
   columnIndex: number,
-  tableHeadColumn: any[]
+  tableHeadColumn: any[],
+  tableHeadColumnIndex: number,
+  tableHeadColumns: any[]
 ) => {
   if (column.fixed) {
     if (column.fixed == "left") {
@@ -570,16 +612,50 @@ const renderHeadFixedStyle = (
       return { right: `${right}px` } as StyleValue;
     }
   } else {
-    var isLast = true;
-    for (var i = columnIndex + 1; i < tableHeadColumn.length; i++) {
-      if (
-        tableHeadColumn[i].fixed == undefined &&
-        tableColumnKeys.value.includes(tableHeadColumn[i].key)
-      ) {
-        isLast = false;
+    // 判定是否为最后一个非固定列，如果是则删除右侧边框
+    if (tableHeadColumnIndex == 0) {
+      var isLast = true;
+      for (var i = columnIndex + 1; i < tableHeadColumn.length; i++) {
+        if (
+          tableHeadColumn[i].fixed == undefined &&
+          tableColumnKeys.value.includes(tableHeadColumn[i].key)
+        ) {
+          isLast = false;
+        }
       }
+      return isLast ? ({ "border-right": "none" } as StyleValue) : {};
+    } else {
+      
+      // 表格结构为多层级时，查询当前节点的父节点。
+      var topicColumns = tableHeadColumns[0];
+      const result: any[] = [];
+      findParent(topicColumns, column, result);
+      var topicColumn = result[0];
+      var index: number = topicColumns.indexOf(topicColumn);
+      var isLast = true;
+
+      // 父节点是否为当前层级的尾节点
+      for(var i = index + 1; i < topicColumns.length; i++) {
+        if (
+          topicColumns[i].fixed == undefined &&
+          tableColumnKeys.value.includes(topicColumns[i].key)
+        ) {
+          isLast = false;
+        }
+      }
+
+      // 子节点是否为当前层级的尾节点
+      for (var i = columnIndex + 1; i < tableHeadColumn.length; i++) {
+        if (
+          tableHeadColumn[i].fixed == undefined &&
+          tableColumnKeys.value.includes(tableHeadColumn[i].key)
+        ) {
+          isLast = false;
+        }
+      }
+
+      return isLast ? ({ "border-right": "none" } as StyleValue) : {};    
     }
-    return isLast ? ({ "border-right": "none" } as StyleValue) : {};
   }
   return {} as StyleValue;
 };
@@ -794,7 +870,9 @@ onBeforeUnmount(() => {
                           renderHeadFixedStyle(
                             column,
                             columnIndex,
-                            tableHeadColumn
+                            tableHeadColumn,
+                            tableHeadColumnIndex,
+                            tableHeadColumns
                           ),
                         ]"
                       >
