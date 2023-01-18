@@ -156,7 +156,7 @@ export default {
     <lay-form-item label="账户" prop="username">
       <lay-input v-model="validateModel.username"></lay-input>
     </lay-form-item>
-    <lay-form-item label="密码" prop="password">
+    <lay-form-item label="密码" v-if="validateModel.hobbys == '1'" prop="password">
       <lay-input v-model="validateModel.password" type="password">></lay-input>
     </lay-form-item>
     <lay-form-item label="爱好" prop="hobby">

@@ -51,8 +51,8 @@ export interface LayerModal {
 }
 
 export interface CutOptions {
-  layerOption: LayerModal;
-  copperOption?: typeof Cropper;
+  layerOption?: LayerModal;
+  copperOption?: Cropper.Options;
 }
 
 export interface UploadProps {
@@ -120,12 +120,8 @@ const clearLightCutEffect = () => {
 };
 
 const { t } = useI18n();
-const text = computed(() => {
-  return props.text ? props.text : t("upload.text");
-});
-const dragText = computed(() => {
-  return props.dragText ? props.dragText : t("upload.dragText");
-});
+const text = computed(() => props.text ? props.text : t("upload.text"));
+const dragText = computed(() => props.dragText ? props.dragText : t("upload.dragText"));
 const defaultErrorMsg = computed(() => t("upload.defaultErrorMsg"));
 const urlErrorMsg = computed(() => t("upload.urlErrorMsg"));
 const numberErrorMsg = computed(() => t("upload.numberErrorMsg"));
@@ -137,6 +133,11 @@ const cannotSupportCutMsg = computed(() => t("upload.cannotSupportCutMsg"));
 const title = computed(() => t("upload.title"));
 const confirmBtn = computed(() => t("upload.confirmBtn"));
 const cancelBtn = computed(() => t("upload.cancelBtn"));
+
+
+let defaultCutCropperOption = computed<Cropper.Options>(() => {
+  return { aspectRatio: 16 / 9 }
+})
 
 let defaultCutLayerOption = computed<LayerModal>(() => {
   return {
@@ -200,7 +201,7 @@ let computedCutLayerOption: ComputedRef<LayerModal>;
 
 if (props.cutOptions && props.cutOptions.layerOption) {
   computedCutLayerOption = computed(() =>
-    Object.assign(defaultCutLayerOption, props.cutOptions.layerOption)
+    Object.assign(defaultCutLayerOption, props.cutOptions?.layerOption)
   );
 } else {
   computedCutLayerOption = computed(() => defaultCutLayerOption.value);
@@ -365,9 +366,7 @@ const uploadChange = (e: any) => {
       if (_imgs && _imgs.length > 0) {
         let _img = _imgs[0];
         // @ts-ignore
-        _cropper = new Cropper(_img, {
-          aspectRatio: 16 / 9,
-        });
+        _cropper = new Cropper(_img, Object.assign(defaultCutCropperOption, props.cutOptions?.copperOption));
       } else {
         clearAllCutEffect();
       }

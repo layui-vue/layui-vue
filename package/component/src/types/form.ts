@@ -13,6 +13,7 @@ export interface LayFormContext {
   useCN: boolean;
   requiredIcons?: string;
   addField: (field: LayFormItemContext) => void;
+  removeField: (field: LayFormItemContext) => void;
 }
 
 export interface LayFormItemContext {

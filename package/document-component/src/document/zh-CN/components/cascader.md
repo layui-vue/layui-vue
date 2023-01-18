@@ -23,7 +23,7 @@
 
 <script setup>
 import { ref } from "vue";
-const value=ref('Guide/shejiyuanze/yizhi')
+const value=ref()
 const options = [
 	{
 		value: "Guide",

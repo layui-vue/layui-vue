@@ -136,6 +136,22 @@ const addField = function (item: LayFormItemContext) {
   formItemMap[item.prop as string] = item;
 };
 
+/**
+ * 删除 field 项 
+ * 
+ * @remark 在 1.8.5 新增内置方法，用于解决 form-item 在 unmounted 后验证仍生效的问题
+ */
+const removeField = function (item: LayFormItemContext) {
+  // 删除 formItems 与 formItemMap 中激活的字段
+  for(var i = 0; i < formItems.length; i++) {
+    if(formItems[i].prop == item.prop) {
+      formItems.splice(i, 1);
+    }
+  }
+  // 使用 Es6 特性 Reflect.deleteProperty 清除
+  item.prop != undefined && Reflect.deleteProperty(formItemMap, item.prop);
+}
+
 defineExpose({ validate, clearValidate, reset });
 
 provide(
@@ -143,6 +159,7 @@ provide(
   reactive({
     formItems,
     addField,
+    removeField,
     clearValidate,
     validate,
     ...toRefs(props),
