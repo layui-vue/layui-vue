@@ -14,6 +14,17 @@
     <ul> 
       <a name="1-8-4"></a> 
       <li> 
+        <h3>1.8.5 <span class="layui-badge-rim">2023-01-18</span></h3> 
+        <ul>
+          <li>[修复] upload 组件 cutOption 配置中 copperOption 属性不生效的问题。</li>
+          <li>[修复] form-item 组件在 unmounted 卸载时，不会在 form 中注销，导致不正确的验证逻辑。</li>
+          <li>[修复] table 组件 columns 多级表头 children 配置启用时，尾节点的右边框不显示。</li>
+        </ul>  
+      </li>
+    </ul>
+    <ul> 
+      <a name="1-8-4"></a> 
+      <li> 
         <h3>1.8.4 <span class="layui-badge-rim">2023-01-11</span></h3> 
         <ul>
           <li>[新增] table 组件 customSlot 插槽 column 参数，用于获取当前渲染的列信息。</li>
