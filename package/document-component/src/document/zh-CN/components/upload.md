@@ -232,6 +232,7 @@ export default {
 
     const cutOptions = {
       copperOption: {
+        center: false,
         aspectRatio: 1,
         crop: function(event) {
           console.log(event.detail.x);

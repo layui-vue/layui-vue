@@ -120,8 +120,10 @@ const clearLightCutEffect = () => {
 };
 
 const { t } = useI18n();
-const text = computed(() => props.text ? props.text : t("upload.text"));
-const dragText = computed(() => props.dragText ? props.dragText : t("upload.dragText"));
+const text = computed(() => (props.text ? props.text : t("upload.text")));
+const dragText = computed(() =>
+  props.dragText ? props.dragText : t("upload.dragText")
+);
 const defaultErrorMsg = computed(() => t("upload.defaultErrorMsg"));
 const urlErrorMsg = computed(() => t("upload.urlErrorMsg"));
 const numberErrorMsg = computed(() => t("upload.numberErrorMsg"));
@@ -134,10 +136,9 @@ const title = computed(() => t("upload.title"));
 const confirmBtn = computed(() => t("upload.confirmBtn"));
 const cancelBtn = computed(() => t("upload.cancelBtn"));
 
-
 let defaultCutCropperOption = computed<Cropper.Options>(() => {
-  return { aspectRatio: 16 / 9 }
-})
+  return { aspectRatio: 16 / 9 };
+});
 
 let defaultCutLayerOption = computed<LayerModal>(() => {
   return {
@@ -365,8 +366,9 @@ const uploadChange = (e: any) => {
       let _imgs = document.getElementsByClassName("_lay_upload_img");
       if (_imgs && _imgs.length > 0) {
         let _img = _imgs[0];
+        const cutOptions = Object.assign(defaultCutCropperOption.value, props.cutOptions?.copperOption)
         // @ts-ignore
-        _cropper = new Cropper(_img, Object.assign(defaultCutCropperOption, props.cutOptions?.copperOption));
+        _cropper = new Cropper(_img,cutOptions);
       } else {
         clearAllCutEffect();
       }

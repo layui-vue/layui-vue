@@ -14,7 +14,7 @@ import {
   onMounted,
   computed,
   watch,
-onUnmounted,
+  onUnmounted,
 } from "vue";
 import {
   LayFormContext,
@@ -162,7 +162,7 @@ const clearValidate = () => {
 defineExpose({ validate, clearValidate });
 
 /**
- * 注册信息到 form 组件 
+ * 注册信息到 form 组件
  */
 onMounted(() => {
   if (props.prop) {
@@ -179,10 +179,10 @@ onMounted(() => {
 });
 
 /**
- * 从 form 组件中卸载 
+ * 从 form 组件中卸载
  */
 onUnmounted(() => {
-  if(props.prop) {
+  if (props.prop) {
     layForm.removeField(
       // @ts-ignore
       reactive({
@@ -193,7 +193,7 @@ onUnmounted(() => {
       }) as LayFormItemContext
     );
   }
-})
+});
 
 const getMarginLeft = computed(() => {
   if (props.mode == "block") {
