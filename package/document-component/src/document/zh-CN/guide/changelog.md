@@ -12,9 +12,9 @@
 <lay-timeline>
 <lay-timeline-item title="1.8.x">
     <ul> 
-      <a name="1-8-4"></a> 
+      <a name="1-8-5"></a> 
       <li> 
-        <h3>1.8.5 <span class="layui-badge-rim">2023-01-18</span></h3> 
+        <h3>1.8.5 <span class="layui-badge-rim">2023-01-24</span></h3> 
         <ul>
           <li>[修复] upload 组件 cutOption 配置中 copperOption 属性不生效的问题。</li>
           <li>[修复] form-item 组件在 unmounted 卸载时，不会在 form 中注销，导致不正确的验证逻辑。</li>
