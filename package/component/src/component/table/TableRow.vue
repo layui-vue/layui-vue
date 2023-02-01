@@ -511,24 +511,33 @@ const checkboxProps = props.getCheckboxProps(props.data, props.index);
 
                 <lay-tooltip v-if="column.ellipsisTooltip" :isAutoShow="true">
                   <slot
-                    :name="column.customSlot"
+                    :row="data"
                     :data="data"
                     :column="column"
+                    :rowIndex="index"
+                    :columnIndex="columnIndex" 
+                    :name="column.customSlot"
                   ></slot>
                   <template #content>
                     <slot
-                      :name="column.customSlot"
+                      :row="data"
                       :data="data"
                       :column="column"
+                      :rowIndex="index"
+                      :columnIndex="columnIndex" 
+                      :name="column.customSlot"
                     ></slot>
                   </template>
                 </lay-tooltip>
 
                 <slot
                   v-else
-                  :name="column.customSlot"
+                  :row="data" 
                   :data="data"
                   :column="column"
+                  :rowIndex="index"
+                  :columnIndex="columnIndex" 
+                  :name="column.customSlot"
                 ></slot>
               </div>
             </td>
@@ -647,22 +656,24 @@ const checkboxProps = props.getCheckboxProps(props.data, props.index);
       >
         <template
           v-for="name in columnSlotNames"
-          #[name]="slotProp: { data: any, column: any }"
+          #[name]="slotProp: { data: any, column: any, row: any, rowIndex: number, columnIndex: number }"
         >
           <slot
             :name="name"
+            :row="slotProp.data"
             :data="slotProp.data"
             :column="slotProp.column"
+            :rowIndex="slotProp.rowIndex"
+            :columnIndex="slotProp.columnIndex"
           ></slot>
         </template>
         <template
           v-if="slot.expand"
-          #expand="slotProp: { data: any, column: any }"
+          #expand="slotProp: { data: any }"
         >
           <slot
             name="expand"
             :data="slotProp.data"
-            :column="slotProp.column"
           ></slot>
         </template>
       </table-row>

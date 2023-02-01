@@ -1422,7 +1422,7 @@ export default {
       <lay-button size="sm" type="primary">新增</lay-button>
       <lay-button size="sm">删除</lay-button>
     </template>
-    <template v-slot:name="{ data }"> {{ data.name }}  </template>
+    <template v-slot:name="{ row, column, rowIndex, columnIndex }"> {{ row }} {{ rowIndex }}  {{ columnIndex }} </template>
     <template v-slot:name-title>😊</template>
     <template v-slot:birthday="{ data }"> {{data.birthday}} </template>
     <template v-slot:operator="{ data }">
