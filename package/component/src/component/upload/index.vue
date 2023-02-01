@@ -202,7 +202,7 @@ let computedCutLayerOption: ComputedRef<LayerModal>;
 
 if (props.cutOptions && props.cutOptions.layerOption) {
   computedCutLayerOption = computed(() =>
-    Object.assign(defaultCutLayerOption, props.cutOptions?.layerOption)
+    Object.assign(defaultCutLayerOption.value, props.cutOptions?.layerOption)
   );
 } else {
   computedCutLayerOption = computed(() => defaultCutLayerOption.value);
