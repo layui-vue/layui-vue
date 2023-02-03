@@ -1010,7 +1010,11 @@ onBeforeUnmount(() => {
                     v-if="slot.expand"
                     #expand="slotProp: { data: any, row: any }"
                   >
-                    <slot name="expand" :data="slotProp.data" :row="slotProp.row"></slot>
+                    <slot
+                      name="expand"
+                      :data="slotProp.data"
+                      :row="slotProp.row"
+                    ></slot>
                   </template>
                 </table-row>
               </template>
