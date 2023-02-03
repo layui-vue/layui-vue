@@ -12,6 +12,18 @@
 <lay-timeline>
 <lay-timeline-item title="1.8.x">
     <ul> 
+      <a name="1-8-6"></a> 
+      <li> 
+        <h3>1.8.6 <span class="layui-badge-rim">2023-02-03</span></h3> 
+        <ul>
+          <li>[新增] table 组件列插槽 row column rowIndex columnIndex 参数。</li>
+          <li>[修复] upload 组件 before 事件重复回调的问题。</li>
+          <li>[修复] upload 组件 layerOption 设置后，默认配置失效的问题。</li>
+          <li>[过时] table 组件列插槽 data 参数。</li>
+        </ul>  
+      </li>
+    </ul>
+    <ul> 
       <a name="1-8-5"></a> 
       <li> 
         <h3>1.8.5 <span class="layui-badge-rim">2023-01-24</span></h3> 

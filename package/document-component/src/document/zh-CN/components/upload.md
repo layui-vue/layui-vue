@@ -13,7 +13,7 @@
 ::: demo 使用 `lay-upload` 标签, 创建一个上传按钮
 
 <template>
-  <lay-upload url="https://www.mocky.io/v2/5cc8019d300000980a055e76" field="file" @before="beforeHandle" @done="doneHandle">
+  <lay-upload url="https://www.mocky.io/v2/5cc8019d300000980a055e76" field="file" @done="doneHandle">
     <template #preview>
       <img v-if="data" :src="data.url" style="width: 100px;"/>
     </template>
@@ -28,10 +28,6 @@ export default {
 
     const data = ref();
 
-    const beforeHandle = () => {
-      console.log("前置通知");
-    }
-
     const doneHandle = (result) => {
       data.value = JSON.parse(result.data);
       console.log(data.value.url)
@@ -40,7 +36,6 @@ export default {
     return {
       doneHandle,
       data,
-      beforeHandle
     }
   }
 }

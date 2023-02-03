@@ -515,7 +515,7 @@ const checkboxProps = props.getCheckboxProps(props.data, props.index);
                     :data="data"
                     :column="column"
                     :rowIndex="index"
-                    :columnIndex="columnIndex" 
+                    :columnIndex="columnIndex"
                     :name="column.customSlot"
                   ></slot>
                   <template #content>
@@ -524,7 +524,7 @@ const checkboxProps = props.getCheckboxProps(props.data, props.index);
                       :data="data"
                       :column="column"
                       :rowIndex="index"
-                      :columnIndex="columnIndex" 
+                      :columnIndex="columnIndex"
                       :name="column.customSlot"
                     ></slot>
                   </template>
@@ -532,11 +532,11 @@ const checkboxProps = props.getCheckboxProps(props.data, props.index);
 
                 <slot
                   v-else
-                  :row="data" 
+                  :row="data"
                   :data="data"
                   :column="column"
                   :rowIndex="index"
-                  :columnIndex="columnIndex" 
+                  :columnIndex="columnIndex"
                   :name="column.customSlot"
                 ></slot>
               </div>
@@ -617,7 +617,7 @@ const checkboxProps = props.getCheckboxProps(props.data, props.index);
 
   <tr class="layui-table-cell-expand" v-if="slot.expand && isExpand">
     <td class="layui-table-cell" :colspan="columns.length">
-      <slot name="expand" :data="data"></slot>
+      <slot name="expand" :data="data" :row="data"></slot>
     </td>
   </tr>
 
@@ -656,7 +656,13 @@ const checkboxProps = props.getCheckboxProps(props.data, props.index);
       >
         <template
           v-for="name in columnSlotNames"
-          #[name]="slotProp: { data: any, column: any, row: any, rowIndex: number, columnIndex: number }"
+          #[name]="slotProp: {
+            data: any,
+            column: any,
+            row: any,
+            rowIndex: number,
+            columnIndex: number,
+          }"
         >
           <slot
             :name="name"
@@ -667,14 +673,8 @@ const checkboxProps = props.getCheckboxProps(props.data, props.index);
             :columnIndex="slotProp.columnIndex"
           ></slot>
         </template>
-        <template
-          v-if="slot.expand"
-          #expand="slotProp: { data: any }"
-        >
-          <slot
-            name="expand"
-            :data="slotProp.data"
-          ></slot>
+        <template v-if="slot.expand" #expand="slotProp: { data: any, row: any }">
+          <slot name="expand" :data="slotProp.data" :row="slotProp.row"></slot>
         </template>
       </table-row>
     </template>

@@ -988,7 +988,13 @@ onBeforeUnmount(() => {
                 >
                   <template
                     v-for="name in columnSlotNames"
-                    #[name]="slotProp: { data: any, column: any, row: any, rowIndex: number, columnIndex: number }"
+                    #[name]="slotProp: {
+                      data: any,
+                      column: any,
+                      row: any,
+                      rowIndex: number,
+                      columnIndex: number,
+                    }"
                   >
                     <slot
                       :name="name"
@@ -1002,12 +1008,9 @@ onBeforeUnmount(() => {
                   </template>
                   <template
                     v-if="slot.expand"
-                    #expand="slotProp: { data: any }"
+                    #expand="slotProp: { data: any, row: any }"
                   >
-                    <slot
-                      name="expand"
-                      :data="slotProp.data"
-                    ></slot>
+                    <slot name="expand" :data="slotProp.data" :row="slotProp.row"></slot>
                   </template>
                 </table-row>
               </template>

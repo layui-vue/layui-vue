@@ -1423,17 +1423,11 @@ export default {
       <lay-button size="sm" type="primary">新增</lay-button>
       <lay-button size="sm">删除</lay-button>
     </template>
-    <template v-slot:name="{ row, column, rowIndex, columnIndex }"> {{ row }} {{ rowIndex }}  {{ columnIndex }} </template>
+    <template v-slot:name="{ row, column, rowIndex, columnIndex }"> {{ row.name }} </template>
     <template v-slot:name-title>😊</template>
-    <template v-slot:birthday="{ data }"> {{data.birthday}} </template>
-    <template v-slot:operator="{ data }">
+    <template v-slot:operator="{ row }">
       <lay-button size="xs">修改</lay-button>
       <lay-button size="xs" type="primary">删除</lay-button>
-    </template>
-    <template v-slot:expand="{ data }"> 
-      <div style="height:100px;">
-        内容
-      </div>
     </template>
   </lay-table>
 </template>
@@ -1483,10 +1477,6 @@ export default {
         width: "300px",
         key:"age",
         ellipsisTooltip: true,
-        totalRow: true,
-        totalRowMethod: (currentColumn, dataSource) => {
-          return "<span style='color:red'>自定义统计</span>";
-        }
       },
       {
         title:"备注",
@@ -1581,11 +1571,11 @@ export default {
 
 ::: table
 
-| 属性            | 描述     | 参数                                   |
-| --------------- | -------- | -------------------------------------- |
-| row             | 行单击   | data : 当前行                          |
-| row-double      | 行双击   | data : 当前行                          |
-| row-contextmenu | 行右击   | data : 当前行                          |
+| 属性            | 描述     | 参数                                 |
+| --------------- | -------- | ------------------------------------|
+| row             | 行单击   | { row: 当前行数据 }                   |
+| row-double      | 行双击   | { row: 当前行数据 }                   |
+| row-contextmenu | 行右击   | { row: 当前行数据 }                   |
 | change          | 分页事件 | { current: 当前页码, limit: 每页数量 } |
 
 :::
@@ -1599,7 +1589,8 @@ export default {
 | ------- | ------------ | ---- | ------- |
 | toolbar | 自定义工具栏 | --   | --      |
 | footer  | 底部扩展     | --   | `1.4.4` |
-
+| expand  | 嵌套面板     | { row } 在 1.8.6 版本，data 参数由 row 替代，但 data 仍然可用  | `1.4.4` |
+| customSlot  | 自定义列插槽     | { row，rowIndex，column，columnIndex } 在 1.8.6 版本，data 参数由 row 替代，但 data 仍然可用，新增 rowIndex 行索引 columnIndex 列索引 column 列信息参数  | `1.4.4` |
 :::
 
 ### <div id="tableColumn"></div>
