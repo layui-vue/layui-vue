@@ -1417,7 +1417,8 @@ export default {
       :checkbox="checkbox5" :page="page5" 
       :default-toolbar="defaultToolbar5"
       v-model:selected-keys="selectedKeys5"  
-      @row="rowClick5">
+      @row="rowClick5"
+      @change="change555">
     <template v-slot:toolbar>
       <lay-button size="sm" type="primary">新增</lay-button>
       <lay-button size="sm">删除</lay-button>
@@ -1455,6 +1456,10 @@ export default {
     }
 
     const columns5 = ref([]);
+
+    const change555 = function(page) {
+      console.log(JSON.stringify(page));
+    }
 
     setTimeout(() => {
       columns5.value = [
@@ -1528,7 +1533,8 @@ export default {
       defaultToolbar5,
       rowClick5,
       rowDoubleClick5,
-      page5
+      page5,
+      change555
     }
   }
 }

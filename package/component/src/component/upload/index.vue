@@ -310,8 +310,6 @@ const localUpload = (option: localUploadOption, callback: Function) => {
   } else {
     xhr.setRequestHeader("Accept", "application/json, text/javascript");
   }
-  let currentTimeStamp = new Date().valueOf();
-  emit("before", Object.assign(option, currentTimeStamp));
   xhr.send(formData);
   if (cb && typeof cb == "function") {
     cb();
