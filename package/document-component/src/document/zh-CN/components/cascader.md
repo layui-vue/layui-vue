@@ -323,6 +323,20 @@ const valueLv=ref(null)
 </script>
 :::
 
+::: title 选择即改变
+:::
+::: demo 使用 `changeOnSelect` 属性开启，该功能不能与`onlyLastLevel`同时开启
+<template>
+  <lay-cascader :options="options" v-model="valueChangeOnSelect" :changeOnSelect="true" allow-clear placeholder="选择即改变" ></lay-cascader>
+  <span style="margin-left:20px">输出的值：{{valueChangeOnSelect}}</span>
+</template>
+
+<script setup>
+import { ref } from "vue";
+const valueChangeOnSelect=ref(null)
+</script>
+:::
+
 ::: title 触发方式
 :::
 ::: demo 本组件弹出效果依托于DropDown组件，触发方式与其保持一致

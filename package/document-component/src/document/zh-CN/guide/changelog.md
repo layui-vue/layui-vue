@@ -12,6 +12,15 @@
 <lay-timeline>
 <lay-timeline-item title="1.8.x">
     <ul> 
+      <a name="1-8-7"></a> 
+      <li> 
+        <h3>1.8.7 <span class="layui-badge-rim">2023-02-06</span></h3> 
+        <ul>
+          <li>[新增] cascader 组件 changeOnSelect参数，用于开启选择即改变功能。</li>
+        </ul>  
+      </li>
+    </ul>
+    <ul> 
       <a name="1-8-6"></a> 
       <li> 
         <h3>1.8.6 <span class="layui-badge-rim">2023-02-03</span></h3> 

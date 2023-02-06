@@ -105,6 +105,7 @@ export interface CascaderProps {
   trigger?: DropdownTrigger | DropdownTrigger[];
   contentClass?: string | Array<string | object> | object;
   contentStyle?: StyleValue;
+  changeOnSelect?:boolean
 }
 
 const props = withDefaults(defineProps<CascaderProps>(), {
@@ -117,6 +118,7 @@ const props = withDefaults(defineProps<CascaderProps>(), {
   disabled: false,
   size: "md",
   trigger: "click",
+  changeOnSelect:false,
   replaceFields: () => {
     return {
       label: "label",
@@ -254,15 +256,16 @@ const selectBar = (
     treeData.value[index].selectIndex = null;
     treeData.value[index].data = [];
   }
-  if (!item.children || item.children.length === 0) {
+  if ((!item.children || item.children.length === 0)||(props.changeOnSelect&&!props.onlyLastLevel)) {
+    //触发交互条件，（无子项或者子项长度为0）|| （开启了changeOnSelect选项并且没有设置onlyLastLevel）
     //输入框数据更新
     let data: any[] = [];
     function extractData(orginData: any, dataContainer: any, index: number) {
       const element = orginData[index].data;
       const selectIndex = orginData[index].selectIndex;
       const selectData = element[selectIndex];
-      dataContainer.push(selectData);
-      if (selectData.children && selectData.children.length > 0) {
+      selectData&&dataContainer.push(selectData);
+      if (selectData&&selectData.children && selectData.children.length > 0) {
         extractData(orginData, dataContainer, index + 1);
       }
     }
@@ -272,9 +275,9 @@ const selectBar = (
         return e.label;
       })
       .join(` ${props.decollator} `);
-    if (!props.onlyLastLevel) {
+    if (!props.onlyLastLevel) { //全部展示
       displayValue.value = fullLable;
-    } else {
+    } else { //仅仅显示最后一级
       let _data = data.map((e: any) => {
         return e.label;
       });
@@ -297,9 +300,13 @@ const selectBar = (
       };
       emit("change", evt);
     }
-    if (dropdownRef.value)
+    if (dropdownRef.value){
+      if(props.changeOnSelect&&(item.children&&item.children.length>0)){
+        return;
+      }
       // @ts-ignore
       dropdownRef.value.hide();
+    }
   }
 };
 
