@@ -17,8 +17,8 @@ export interface TextareaProps {
   disabled?: boolean;
   showCount?: boolean;
   allowClear?: boolean;
-  cols?: number,
-  rows?: number
+  cols?: number;
+  rows?: number;
   maxlength?: number;
   autosize?: boolean | { minHeight: number; maxHeight: number };
 }
@@ -38,17 +38,17 @@ const emit = defineEmits<TextareaEmits>();
 const textareaRef = ref<HTMLTextAreaElement | null>(null);
 const composing = ref(false);
 const attrs = useAttrs();
-const defaultStyle = computed(() => { 
+const defaultStyle = computed(() => {
   return {
-    width: props.cols ? '' : '100%',
-    height: props.rows ? '' : 'auto', 
-    minHeight: props.rows ? '' : '100px',
-  }
-})
+    width: props.cols ? "" : "100%",
+    height: props.rows ? "" : "auto",
+    minHeight: props.rows ? "" : "100px",
+  };
+});
 
 const styles = computed(() => {
-  return Object.assign(defaultStyle.value, attrs.style)
-})
+  return Object.assign(defaultStyle.value, attrs.style);
+});
 
 const onInput = function (event: Event) {
   const inputElement = event.target as HTMLInputElement;
@@ -100,13 +100,15 @@ watch(
   [() => props.modelValue, textareaRef],
   () => {
     if (!textareaRef.value || !props.autosize) return;
-    const height: number = textareaRef.value?.scrollHeight + 2; 
+    const height: number = textareaRef.value?.scrollHeight + 2;
     if (isObject(props.autosize)) {
       const { minHeight, maxHeight } = props.autosize;
       if (height < minHeight || height > maxHeight) return;
     }
     textareaRef.value!.style.height = "1px";
-    textareaRef.value!.style.height = `${textareaRef.value?.scrollHeight + 2}px`;
+    textareaRef.value!.style.height = `${
+      textareaRef.value?.scrollHeight + 2
+    }px`;
   },
   {
     immediate: true,
