@@ -6,17 +6,19 @@ export default {
 
 <script setup lang="ts">
 import { LayIcon } from "@layui/icons-vue";
-import { computed, ref, watch } from "vue";
+import { computed, ref, useAttrs, watch } from "vue";
 import { isObject } from "@vueuse/shared";
 import "./index.less";
 
 export interface TextareaProps {
-  name?: string;
   modelValue?: string;
+  name?: string;
   placeholder?: string;
   disabled?: boolean;
   showCount?: boolean;
   allowClear?: boolean;
+  cols?: number,
+  rows?: number
   maxlength?: number;
   autosize?: boolean | { minHeight: number; maxHeight: number };
 }
@@ -35,6 +37,18 @@ interface TextareaEmits {
 const emit = defineEmits<TextareaEmits>();
 const textareaRef = ref<HTMLTextAreaElement | null>(null);
 const composing = ref(false);
+const attrs = useAttrs();
+const defaultStyle = computed(() => { 
+  return {
+    width: props.cols ? '' : '100%',
+    height: props.rows ? '' : 'auto', 
+    minHeight: props.rows ? '' : '100px',
+  }
+})
+
+const styles = computed(() => {
+  return Object.assign(defaultStyle.value, attrs.style)
+})
 
 const onInput = function (event: Event) {
   const inputElement = event.target as HTMLInputElement;
@@ -86,15 +100,13 @@ watch(
   [() => props.modelValue, textareaRef],
   () => {
     if (!textareaRef.value || !props.autosize) return;
-    const height: number = textareaRef.value?.scrollHeight + 2; // 边框
+    const height: number = textareaRef.value?.scrollHeight + 2; 
     if (isObject(props.autosize)) {
       const { minHeight, maxHeight } = props.autosize;
       if (height < minHeight || height > maxHeight) return;
     }
     textareaRef.value!.style.height = "1px";
-    textareaRef.value!.style.height = `${
-      textareaRef.value?.scrollHeight + 2
-    }px`;
+    textareaRef.value!.style.height = `${textareaRef.value?.scrollHeight + 2}px`;
   },
   {
     immediate: true,
@@ -107,11 +119,14 @@ watch(
     <textarea
       ref="textareaRef"
       class="layui-textarea"
+      :rows="rows"
+      :cols="cols"
       :value="modelValue"
       :placeholder="placeholder"
       :name="name"
       :disabled="disabled"
       :maxlength="maxlength"
+      :style="styles"
       :class="{ 'layui-textarea-disabled': disabled }"
       @compositionstart="onCompositionstart"
       @compositionend="onCompositionend"
