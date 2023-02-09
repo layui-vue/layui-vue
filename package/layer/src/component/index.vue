@@ -21,7 +21,7 @@ import {
   VNodeTypes,
   nextTick,
   inject,
-ComputedRef,
+  ComputedRef,
 } from "vue";
 import {
   nextId,
@@ -142,10 +142,18 @@ const min: Ref<boolean> = ref(false);
 const id: Ref<string> = ref(props.id || nextId());
 const layero = ref<HTMLElement | null>(null);
 const type: number = calculateType(props.type);
-const area: Ref<string[]> = ref(calculateArea(props.type, props.area, props.offset));
-const offset: Ref<string[]> = ref(calculateOffset(props.offset, area.value, props.type));
-const contentHeight = ref(calculateContent(props.title, area.value[1], props.btn, type, props.isMessage));
-const index: ComputedRef<number | Function> = computed(() => { return props.zIndex ?? inject(zIndexKey, 99999)});
+const area: Ref<string[]> = ref(
+  calculateArea(props.type, props.area, props.offset)
+);
+const offset: Ref<string[]> = ref(
+  calculateOffset(props.offset, area.value, props.type)
+);
+const contentHeight = ref(
+  calculateContent(props.title, area.value[1], props.btn, type, props.isMessage)
+);
+const index: ComputedRef<number | Function> = computed(() => {
+  return props.zIndex ?? inject(zIndexKey, 99999);
+});
 const visible: Ref<boolean> = ref(false);
 const first: Ref<boolean> = ref(true);
 
