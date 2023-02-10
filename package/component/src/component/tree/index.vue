@@ -11,6 +11,7 @@ import { useTree } from "./useTree";
 import { TreeData } from "./tree";
 import { StringFn, StringOrNumber, KeysType, EditType } from "./tree.type";
 import "./index.less";
+import { tSStringKeyword } from "@babel/types";
 
 export interface OriginalTreeData {
   title: StringFn | string;
@@ -31,6 +32,7 @@ export interface TreeProps {
   disabled?: boolean;
   edit?: EditType;
   checkedKeys?: KeysType;
+  expandKeys?: KeysType;
   checkStrictly?: boolean | string;
   collapseTransition?: boolean;
   onlyIconControl?: boolean;
@@ -108,18 +110,33 @@ watch(
   }
 );
 
+watch(
+  () => props.expandKeys, 
+  () => {
+    if (!unWatch.value) {
+      loadNodeList();
+    }
+  }
+)
+
+const lastExpandKey = ref();
 const lastCheckedKey = ref();
 
 watch(
   tree,
   () => {
     if (initStatus.value) {
-      const { checkedKeys } = tree.value.getKeys();
+      const { checkedKeys, expandKeys } = tree.value.getKeys();
       unWatch.value = true;
-      // 触发时机不确定，通过比较与上次选中值来确定是否触发 update 通知
+      // checkedKeys 比较
       if (String(lastCheckedKey.value) != String(checkedKeys)) {
         lastCheckedKey.value = checkedKeys;
         emit("update:checkedKeys", checkedKeys);
+      }
+      // expandKeys 比较
+      if (String(lastExpandKey) != String(expandKeys)) {
+        lastExpandKey.value = expandKeys;
+        emit("update:expandKeys", expandKeys);
       }
       setTimeout(() => {
         unWatch.value = false;

@@ -91,7 +91,6 @@ class Tree {
       originMap,
       checkedKeys,
       expandKeys,
-      checkStrictly,
       replaceFields: { children, id, title },
     } = this.config;
 
@@ -99,7 +98,7 @@ class Tree {
     const nodeTitle = Reflect.get(origin, title);
     const nodeChildren = Reflect.get(origin, children);
     const nodeDisabled = !!Reflect.get(origin, "disabled");
-    const nodeIsLeaf = !!Reflect.get(origin, "spread");
+    const nodeIsLeaf = !!Reflect.get(origin, "spread") || expandKeys.includes(nodeKey);
     const parentNode = nodeMap.get(parentKey);
 
     const node = Object.assign({}, origin, {
@@ -198,8 +197,8 @@ class Tree {
   }
 
   getKeys() {
-    const checkedKeys = [];
     const expandKeys = [];
+    const checkedKeys = [];
     const iterator = this.config.nodeMap[Symbol.iterator]();
     let next = iterator.next();
     while (!next.done) {

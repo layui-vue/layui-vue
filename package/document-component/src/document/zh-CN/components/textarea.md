@@ -152,15 +152,16 @@ export default {
 
 ::: table
 
-| 属性        | 描述          | 可选值         |
-| ----------- | ------------- | -------------- |
-| name        | 原始属性 name | --             |
-| placeholder | 提示信息      | --             |
-| show-count  | 显示字数       | `true` `false`  |
-| disabled    | 禁用          | `true` `false` |
-| v-model     | 值            | --             |
-| maxlength   | 限制输入长度   | --             |
-
+| 属性        | 描述          | 可选值         |可选值         |
+| ----------- | ------------- | -------------- | -------------- |
+| name        | 原始属性 name | --             | |
+| placeholder | 提示信息      | --             | |
+| show-count  | 显示字数       | `true` `false`  | |
+| disabled    | 禁用          | `true` `false` | |
+| v-model     | 值            | --             | |
+| maxlength   | 限制输入长度   | --             | |
+| rows   | 原生 rows 属性       | --             | 1.8.7 |
+| cols   | 原生 cols 属性      | --             | 1.8.7 |
 :::
 
 ::: title Textarea 事件

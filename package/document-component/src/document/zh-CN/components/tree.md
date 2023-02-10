@@ -27,7 +27,6 @@ const data = ref([{
 	title: '一级1',
 	id: 1,
 	checked: true,
-	spread: true,
 	children: [{
 		title: '二级1-1 可允许跳转',
 		id: 3,
@@ -70,7 +69,6 @@ const data = ref([{
 	{
 		title: '二级1-2',
 		id: 4,
-		spread: true,
 		children: [{
 			title: '三级1-2-1',
 			id: 9,
@@ -97,7 +95,6 @@ const data = ref([{
 {
 	title: '一级2',
 	id: 2,
-	spread: true,
 	children: [{
 		title: '二级2-1',
 		id: 5,
@@ -530,14 +527,15 @@ import { ref } from 'vue';
 
 ::: table
 
-| Name                             | Description                              | Accepted Values |
-| -------------------------------- | ---------------------------------------- | --------------- |
-| data                             | 树型组件数据,类型 TreeData \| TreeData[] | null            |
-| showCheckbox                     | 是否显示复选框                           | false           |
-| onlyIconControl                  | 是否仅允许节点左侧图标控制展开收缩       | false           |
-| showLine                         | 是否开启连接线                           | true            |
-| checkedKeys(v-model:checkedKeys) | 开启 showCheckbox 后, 选中的节点         | []              |
-| collapse-transition              | 是否开启展示收起动画                     | false           |
+| Name                             | Description                              | Accepted Values | Version |
+| -------------------------------- | ---------------------------------------- | --------------- |--------------- |
+| data                             | 树型组件数据,类型 TreeData \| TreeData[] | null            | |
+| showCheckbox                     | 是否显示复选框                           | false           | |
+| onlyIconControl                  | 是否仅允许节点左侧图标控制展开收缩       | false           | |
+| showLine                         | 是否开启连接线                           | true            | |
+| checkedKeys(v-model:checkedKeys) | 开启 showCheckbox 后, 选中的节点         | []              | |
+| expandKeys(v-model:expandKeys)   | 展开的节点 key 数组                      | []              | 1.8.7 |
+| collapse-transition              | 是否开启展示收起动画                     | false           | |
 
 :::
 
@@ -546,13 +544,13 @@ import { ref } from 'vue';
 
 ::: table
 
-| Name                | Description | Accepted Values |
-|---------------------|-------------| --------------- |
-| id                  | 唯一值         | -               |
-| title               | 节点名称        | -               |
-| children            | 子节点         | []              |
-| disabled            | 该节点是否禁用     | false           |
-| spread              | 该节点是否展开     | false           |
+| Name                | Description | Accepted Values | Version |
+|---------------------|-------------| --------------- |--------------- |
+| id                  | 唯一值          | -               | -|
+| title               | 节点名称        | -               | -|
+| children            | 子节点          | []              | -|
+| disabled            | 该节点是否禁用   | false           | - |
+| spread              | 是否展开        | false           | -|
 
 :::
 
@@ -566,8 +564,6 @@ import { ref } from 'vue';
 | node-click | 节点 click 事件 | --              |
 
 :::
-
- 
 
 ::: contributor transition
 :::

@@ -16,7 +16,8 @@
       <li> 
         <h3>1.8.7 <span class="layui-badge-rim">2023-02-06</span></h3> 
         <ul>
-          <li>[新增] cascader 组件 changeOnSelect参数，用于开启选择即改变功能。</li>
+          <li>[新增] tree 组件 expandKeys 属性, 用于设置展开节点</li>
+          <li>[新增] cascader 组件 changeOnSelect 属性，用于开启选择即改变功能。</li>
           <li>[新增] textarea 组件 autosize 属性, 根据内容宽度自适应默认高度。</li>
           <li>[新增] textarea 组件 rols 属性, 原生属性。</li>
           <li>[新增] textarea 组件 cols 属性, 原生属性。</li>
