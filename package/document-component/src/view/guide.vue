@@ -113,7 +113,7 @@ export default {
           {
             id: 8,
             title: "插件",
-            subTitle: "member",
+            subTitle: "plugin",
             path: "/zh-CN/guide/plugin",
           },
           {

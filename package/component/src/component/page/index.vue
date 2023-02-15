@@ -144,7 +144,7 @@ watch(
 <template>
   <div class="layui-laypage layui-laypage-default">
     <!-- 辅助标签, 为 total computed 逻辑正常执行而创建的临时标签 -->
-    <div style="display: none"> {{ totalPage }}</div>
+    <div style="display: none">{{ totalPage }}</div>
     <span v-if="showCount" class="layui-laypage-count"
       >{{ t("page.total") }} {{ total }} {{ t("page.item") }} {{ maxPage }}
       {{ t("page.page") }}</span

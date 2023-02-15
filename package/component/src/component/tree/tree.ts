@@ -98,7 +98,8 @@ class Tree {
     const nodeTitle = Reflect.get(origin, title);
     const nodeChildren = Reflect.get(origin, children);
     const nodeDisabled = !!Reflect.get(origin, "disabled");
-    const nodeIsLeaf = !!Reflect.get(origin, "spread") || expandKeys.includes(nodeKey);
+    const nodeIsLeaf =
+      !!Reflect.get(origin, "spread") || expandKeys.includes(nodeKey);
     const parentNode = nodeMap.get(parentKey);
 
     const node = Object.assign({}, origin, {

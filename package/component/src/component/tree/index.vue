@@ -111,13 +111,13 @@ watch(
 );
 
 watch(
-  () => props.expandKeys, 
+  () => props.expandKeys,
   () => {
     if (!unWatch.value) {
       loadNodeList();
     }
   }
-)
+);
 
 const lastExpandKey = ref();
 const lastCheckedKey = ref();
