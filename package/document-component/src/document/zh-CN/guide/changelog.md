@@ -12,6 +12,17 @@
 <lay-timeline>
 <lay-timeline-item title="1.8.x">
     <ul> 
+      <a name="1-8-8"></a> 
+      <li> 
+        <h3>1.8.8 <span class="layui-badge-rim">2023-02-17</span></h3> 
+        <ul>
+          <li>[修复] layer 组件 z-index 缺少响应式特性的问题。 </li>
+          <li>[修复] page 组件 showPage 为 true 时, 上下页操作处于禁用状态的问题。</li>
+          <li>[升级] layer-vue 1.4.8 版本。</li>
+        </ul>  
+      </li>
+    </ul>
+    <ul> 
       <a name="1-8-7"></a> 
       <li> 
         <h3>1.8.7 <span class="layui-badge-rim">2023-02-06</span></h3> 
