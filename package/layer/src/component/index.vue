@@ -7,9 +7,8 @@ export default {
 <script lang="ts" setup>
 import Shade from "./Shade.vue";
 import Iframe from "./Iframe.vue";
-import Title from "./Title.vue";
+import Title from "./Header.vue";
 import CloseBtn from "./CloseBtn.vue";
-import Resize from "./Resize.vue";
 import Photos from "./Photos.vue";
 import Notifiy from "./Notifiy.vue";
 import {
@@ -42,8 +41,7 @@ import {
   removeNotifiyFromQueen,
   getNotifyAnimationClass,
 } from "../utils";
-import useResize from "../composable/useResize";
-import useMove from "../composable/useMove";
+import { useMove, useResize } from "src/composable/useDragable";
 import { zIndexKey } from "../tokens";
 
 export interface LayerProps {
@@ -706,7 +704,7 @@ defineExpose({ reset, open, close });
           </template>
         </div>
         <!-- 辅助栏 -->
-        <Resize v-if="showResize"></Resize>
+        <span v-if="showResize" class="layui-layer-resize"></span>
       </div>
     </transition>
   </div>
