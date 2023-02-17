@@ -41,7 +41,7 @@ import {
   removeNotifiyFromQueen,
   getNotifyAnimationClass,
 } from "../utils";
-import { useMove, useResize } from "src/composable/useDragable";
+import { useMove, useResize } from "../composable/useDragable";
 import { zIndexKey } from "../tokens";
 
 export interface LayerProps {
