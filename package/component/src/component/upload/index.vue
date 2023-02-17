@@ -75,6 +75,9 @@ export interface UploadProps {
   auto?: boolean;
 }
 
+/**
+ * 裁剪窗体的确认操作, 获取裁剪结果, 并根据 props.auto 决定是否上传。 
+ */
 const getCutDownResult = () => {
   if (_cropper) {
     const canvas = _cropper.getCroppedCanvas();
@@ -199,13 +202,23 @@ const orgFileInput = templateRef<HTMLElement>("orgFileInput");
 
 let _cropper: any = null;
 let computedCutLayerOption: ComputedRef<LayerModal>;
+let computedCutCropperOption: ComputedRef<Cropper.Options>;
 
+// TODO 改善代码, 有很多问题, 并且导致 option 不是响应式的
 if (props.cutOptions && props.cutOptions.layerOption) {
   computedCutLayerOption = computed(() =>
     Object.assign(defaultCutLayerOption.value, props.cutOptions?.layerOption)
   );
 } else {
   computedCutLayerOption = computed(() => defaultCutLayerOption.value);
+}
+
+if(props.cutOptions && props.cutOptions.copperOption) {
+  computedCutCropperOption = computed(() => 
+    Object.assign(defaultCutCropperOption.value,props.cutOptions?.copperOption)
+  )
+} else {
+  computedCutCropperOption = computed(() => defaultCutCropperOption.value);
 }
 
 interface localUploadTransaction {
@@ -348,6 +361,7 @@ const uploadChange = (e: any) => {
       activeUploadFilesImgs.value.push(res);
     });
   }
+
   let arm1 =
     props.cut &&
     props.acceptMime.indexOf("image") != -1 &&
@@ -361,15 +375,10 @@ const uploadChange = (e: any) => {
   if (arm1) {
     innerCutVisible.value = true;
     setTimeout(() => {
-      let _imgs = document.getElementsByClassName("_lay_upload_img");
+      const _imgs: HTMLCollection = document.getElementsByClassName("_lay_upload_img");
       if (_imgs && _imgs.length > 0) {
-        let _img = _imgs[0];
-        const cutOptions = Object.assign(
-          defaultCutCropperOption.value,
-          props.cutOptions?.copperOption
-        );
-        // @ts-ignore
-        _cropper = new Cropper(_img, cutOptions);
+        const _img: HTMLImageElement = _imgs[0] as HTMLImageElement;
+        _cropper = new Cropper(_img, computedCutCropperOption.value);
       } else {
         clearAllCutEffect();
       }
