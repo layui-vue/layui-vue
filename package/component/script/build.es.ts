@@ -21,6 +21,7 @@ const inputs = inputsArray.reduce((backObj, pkgName) => {
 }, {});
 
 inputs["index"] = resolve(process.cwd(), "./src/index.ts");
+
 const matchModule: string[] = [
   "input",
   "dropdown",
@@ -46,6 +47,7 @@ const matchModule: string[] = [
   "tagInput",
   "footer",
   "tree",
+  "utils",
 ];
 
 export default (): UserConfigExport => {

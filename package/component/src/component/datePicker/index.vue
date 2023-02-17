@@ -127,6 +127,7 @@ import {
   reactive,
   provide,
   StyleValue,
+  computed,
 } from "vue";
 import DatePanel from "./components/DatePanel.vue";
 import TimePanel from "./components/TimePanel.vue";
@@ -134,7 +135,6 @@ import YearPanel from "./components/YearPanel.vue";
 import MonthPanel from "./components/MonthPanel.vue";
 import DateRange from "./components/DateRange.vue";
 import MonthRange from "./components/MonthRange.vue";
-import { computed } from "@vue/reactivity";
 
 export interface DatePickerProps {
   type?: "date" | "datetime" | "year" | "time" | "month" | "yearmonth";

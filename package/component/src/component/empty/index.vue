@@ -6,9 +6,8 @@ export default {
 
 <script setup lang="ts">
 import "./index.less";
-import { useSlots, withDefaults } from "vue";
+import { useSlots, withDefaults, computed } from "vue";
 import { useI18n } from "../../language";
-import { computed } from "@vue/reactivity";
 
 export interface EmptyProps {
   description?: string;

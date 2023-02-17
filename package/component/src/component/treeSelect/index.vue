@@ -7,7 +7,7 @@ export default {
 <script lang="ts" setup>
 import "./index.less";
 import { computed, ref, watch } from "vue";
-import { getNode } from "../../utils/treeUtil";
+import { getNode } from "../../utils/index";
 import { TreeSelectSize } from "./interface";
 import { LayIcon } from "@layui/icons-vue";
 import LayInput from "../input/index.vue";
