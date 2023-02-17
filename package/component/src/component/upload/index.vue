@@ -76,7 +76,7 @@ export interface UploadProps {
 }
 
 /**
- * 裁剪窗体的确认操作, 获取裁剪结果, 并根据 props.auto 决定是否上传。 
+ * 裁剪窗体的确认操作, 获取裁剪结果, 并根据 props.auto 决定是否上传。
  */
 const getCutDownResult = () => {
   if (_cropper) {
@@ -213,10 +213,10 @@ if (props.cutOptions && props.cutOptions.layerOption) {
   computedCutLayerOption = computed(() => defaultCutLayerOption.value);
 }
 
-if(props.cutOptions && props.cutOptions.copperOption) {
-  computedCutCropperOption = computed(() => 
-    Object.assign(defaultCutCropperOption.value,props.cutOptions?.copperOption)
-  )
+if (props.cutOptions && props.cutOptions.copperOption) {
+  computedCutCropperOption = computed(() =>
+    Object.assign(defaultCutCropperOption.value, props.cutOptions?.copperOption)
+  );
 } else {
   computedCutCropperOption = computed(() => defaultCutCropperOption.value);
 }
@@ -375,7 +375,8 @@ const uploadChange = (e: any) => {
   if (arm1) {
     innerCutVisible.value = true;
     setTimeout(() => {
-      const _imgs: HTMLCollection = document.getElementsByClassName("_lay_upload_img");
+      const _imgs: HTMLCollection =
+        document.getElementsByClassName("_lay_upload_img");
       if (_imgs && _imgs.length > 0) {
         const _img: HTMLImageElement = _imgs[0] as HTMLImageElement;
         _cropper = new Cropper(_img, computedCutCropperOption.value);
