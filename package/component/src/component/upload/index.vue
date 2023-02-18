@@ -201,25 +201,19 @@ const activeUploadFilesImgs = ref<any[]>([]);
 const orgFileInput = templateRef<HTMLElement>("orgFileInput");
 
 let _cropper: any = null;
-let computedCutLayerOption: ComputedRef<LayerModal>;
-let computedCutCropperOption: ComputedRef<Cropper.Options>;
+let computedCutLayerOption: ComputedRef<LayerModal> = computed(() => {
+  if(props.cutOptions && props.cutOptions.layerOption) {
+    return Object.assign(defaultCutLayerOption.value, props.cutOptions?.layerOption);
+  }
+  return defaultCutLayerOption.value;
+});
 
-// TODO 改善代码, 有很多问题, 并且导致 option 不是响应式的
-if (props.cutOptions && props.cutOptions.layerOption) {
-  computedCutLayerOption = computed(() =>
-    Object.assign(defaultCutLayerOption.value, props.cutOptions?.layerOption)
-  );
-} else {
-  computedCutLayerOption = computed(() => defaultCutLayerOption.value);
-}
-
-if (props.cutOptions && props.cutOptions.copperOption) {
-  computedCutCropperOption = computed(() =>
-    Object.assign(defaultCutCropperOption.value, props.cutOptions?.copperOption)
-  );
-} else {
-  computedCutCropperOption = computed(() => defaultCutCropperOption.value);
-}
+let computedCutCropperOption: ComputedRef<Cropper.Options> = computed(() => {
+  if(props.cutOptions && props.cutOptions.copperOption) {
+    return Object.assign(defaultCutCropperOption.value, props.cutOptions?.copperOption);
+  }
+  return defaultCutCropperOption.value;
+});
 
 interface localUploadTransaction {
   url: string;
