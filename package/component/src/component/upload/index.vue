@@ -75,10 +75,13 @@ export interface UploadProps {
   auto?: boolean;
 }
 
+/**
+ * 裁剪窗体的确认操作, 获取裁剪结果, 并根据 props.auto 决定是否上传。
+ */
 const getCutDownResult = () => {
   if (_cropper) {
     const canvas = _cropper.getCroppedCanvas();
-    let imgData = canvas.toDataURL('"image/png"');
+    let imgData = canvas.toDataURL(cutImageType.value);
     let currentTimeStamp = new Date().valueOf();
     let orgInfo = activeUploadFiles.value[0];
     emit(
@@ -198,15 +201,25 @@ const activeUploadFilesImgs = ref<any[]>([]);
 const orgFileInput = templateRef<HTMLElement>("orgFileInput");
 
 let _cropper: any = null;
-let computedCutLayerOption: ComputedRef<LayerModal>;
+let computedCutLayerOption: ComputedRef<LayerModal> = computed(() => {
+  if (props.cutOptions && props.cutOptions.layerOption) {
+    return Object.assign(
+      defaultCutLayerOption.value,
+      props.cutOptions?.layerOption
+    );
+  }
+  return defaultCutLayerOption.value;
+});
 
-if (props.cutOptions && props.cutOptions.layerOption) {
-  computedCutLayerOption = computed(() =>
-    Object.assign(defaultCutLayerOption.value, props.cutOptions?.layerOption)
-  );
-} else {
-  computedCutLayerOption = computed(() => defaultCutLayerOption.value);
-}
+let computedCutCropperOption: ComputedRef<Cropper.Options> = computed(() => {
+  if (props.cutOptions && props.cutOptions.copperOption) {
+    return Object.assign(
+      defaultCutCropperOption.value,
+      props.cutOptions?.copperOption
+    );
+  }
+  return defaultCutCropperOption.value;
+});
 
 interface localUploadTransaction {
   url: string;
@@ -317,6 +330,8 @@ const localUpload = (option: localUploadOption, callback: Function) => {
   clearAllCutEffect();
 };
 
+const cutImageType = ref("image/png");
+
 const filetoDataURL = (file: File, fn: Function) => {
   const reader = new FileReader();
   reader.onloadend = function (e: any) {
@@ -328,6 +343,8 @@ const filetoDataURL = (file: File, fn: Function) => {
 const uploadChange = (e: any) => {
   e.preventDefault();
   const _files = [...(e.target.files || e.dataTransfer.files)];
+  // 记录裁剪的文件类型, 供 toDataURL 使用。
+  cutImageType.value = _files[0].type;
   if (props.multiple && props.number != 0 && props.number < _files.length) {
     errorF(numberErrorMsg.value);
     return;
@@ -348,6 +365,7 @@ const uploadChange = (e: any) => {
       activeUploadFilesImgs.value.push(res);
     });
   }
+
   let arm1 =
     props.cut &&
     props.acceptMime.indexOf("image") != -1 &&
@@ -361,15 +379,11 @@ const uploadChange = (e: any) => {
   if (arm1) {
     innerCutVisible.value = true;
     setTimeout(() => {
-      let _imgs = document.getElementsByClassName("_lay_upload_img");
+      const _imgs: HTMLCollection =
+        document.getElementsByClassName("_lay_upload_img");
       if (_imgs && _imgs.length > 0) {
-        let _img = _imgs[0];
-        const cutOptions = Object.assign(
-          defaultCutCropperOption.value,
-          props.cutOptions?.copperOption
-        );
-        // @ts-ignore
-        _cropper = new Cropper(_img, cutOptions);
+        const _img: HTMLImageElement = _imgs[0] as HTMLImageElement;
+        _cropper = new Cropper(_img, computedCutCropperOption.value);
       } else {
         clearAllCutEffect();
       }
