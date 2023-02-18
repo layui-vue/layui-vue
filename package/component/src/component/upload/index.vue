@@ -81,7 +81,7 @@ export interface UploadProps {
 const getCutDownResult = () => {
   if (_cropper) {
     const canvas = _cropper.getCroppedCanvas();
-    let imgData = canvas.toDataURL('"image/png"');
+    let imgData = canvas.toDataURL(cutImageType.value);
     let currentTimeStamp = new Date().valueOf();
     let orgInfo = activeUploadFiles.value[0];
     emit(
@@ -330,6 +330,8 @@ const localUpload = (option: localUploadOption, callback: Function) => {
   clearAllCutEffect();
 };
 
+const cutImageType = ref("image/png");
+
 const filetoDataURL = (file: File, fn: Function) => {
   const reader = new FileReader();
   reader.onloadend = function (e: any) {
@@ -341,6 +343,8 @@ const filetoDataURL = (file: File, fn: Function) => {
 const uploadChange = (e: any) => {
   e.preventDefault();
   const _files = [...(e.target.files || e.dataTransfer.files)];
+  // 记录裁剪的文件类型, 供 toDataURL 使用。
+  cutImageType.value = _files[0].type;
   if (props.multiple && props.number != 0 && props.number < _files.length) {
     errorF(numberErrorMsg.value);
     return;
