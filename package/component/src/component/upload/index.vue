@@ -202,15 +202,21 @@ const orgFileInput = templateRef<HTMLElement>("orgFileInput");
 
 let _cropper: any = null;
 let computedCutLayerOption: ComputedRef<LayerModal> = computed(() => {
-  if(props.cutOptions && props.cutOptions.layerOption) {
-    return Object.assign(defaultCutLayerOption.value, props.cutOptions?.layerOption);
+  if (props.cutOptions && props.cutOptions.layerOption) {
+    return Object.assign(
+      defaultCutLayerOption.value,
+      props.cutOptions?.layerOption
+    );
   }
   return defaultCutLayerOption.value;
 });
 
 let computedCutCropperOption: ComputedRef<Cropper.Options> = computed(() => {
-  if(props.cutOptions && props.cutOptions.copperOption) {
-    return Object.assign(defaultCutCropperOption.value, props.cutOptions?.copperOption);
+  if (props.cutOptions && props.cutOptions.copperOption) {
+    return Object.assign(
+      defaultCutCropperOption.value,
+      props.cutOptions?.copperOption
+    );
   }
   return defaultCutCropperOption.value;
 });
