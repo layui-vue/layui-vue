@@ -20,9 +20,7 @@
           <li>[优化] 公共工具打包到 badge 目录的问题, 在 es 模式时 badge 组件被其他组件导入的问题。</li>
           <li>[优化] upload 组件 cut-options 属性, 修复其响应式特性失效的问题。</li>
           <li>[优化] 移除 vue/reactivity 在源码中的使用, 从而改善打包。 </li>
-          <li>[升级] vue 到 3.2.47 版本。</li>
           <li>[升级] @vueuse/core 到 9.12.0 版本。</li>
-          <li>[升级] vue-i18n 到 9.2.2 版本。</li>
         </ul>  
       </li>
     </ul>
