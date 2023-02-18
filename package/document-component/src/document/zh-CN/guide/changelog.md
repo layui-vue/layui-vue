@@ -16,6 +16,7 @@
       <li> 
         <h3>1.8.9 <span class="layui-badge-rim">2023-02-19</span></h3> 
         <ul>
+          <li>[修复] upload 组件裁剪后的文件固定为 image/png 类型, 与裁剪前不一致的问题。</li>
           <li>[优化] 公共工具打包到 badge 目录的问题, 在 es 模式时 badge 组件被其他组件导入的问题。</li>
           <li>[优化] upload 组件 cut-options 属性, 修复其响应式特性失效的问题。</li>
           <li>[优化] 移除 vue/reactivity 在源码中的使用, 从而改善打包。 </li>
