@@ -39,7 +39,7 @@
               <a
                 href="https://gitee.com/layui-vue/layui-vue-admin"
                 target="_blank"
-                >layui - vue - admin<cite>通用型 vue 3.0 后台模板</cite></a
+                >layui - vue - admin<cite>通用型 vue 3.0 后台模板 (目前已迁移至 Pear Admin 社区维护, 更名为 Pear Admin Next) </cite></a
               >
             </div>
           </li>

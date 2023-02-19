@@ -60,11 +60,7 @@
           <li class="layui-nav-item">
             <lay-dropdown>
               <a href="javascript:void(0);">
-                <lay-icon
-                  size="15px"
-                  type="layui-icon-theme"
-                >
-                </lay-icon>
+                <lay-icon size="15px" type="layui-icon-theme"> </lay-icon>
               </a>
               <template #content>
                 <div class="theme-panel">
