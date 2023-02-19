@@ -8,7 +8,6 @@ export default {
 
 <script setup lang="ts">
 import "./index.less";
-import { RadioEmits } from "./typing";
 
 export interface RadioProps {
   name?: string;
@@ -17,6 +16,11 @@ export interface RadioProps {
   modelValue?: string | boolean | number;
   value?: string | boolean | number;
   label?: string;
+}
+
+export interface RadioEmits {
+  (e: "update:modelValue", value: string | boolean | number | undefined): void;
+  (e: "change", value: string | boolean | number | undefined): void;
 }
 
 const props = withDefaults(defineProps<RadioProps>(), {
