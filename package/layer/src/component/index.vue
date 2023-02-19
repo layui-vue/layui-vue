@@ -139,10 +139,16 @@ const min: Ref<boolean> = ref(false);
 const id: Ref<string> = ref(props.id || nextId());
 const layero = ref<HTMLElement | null>(null);
 const type: number = calculateType(props.type);
-const area: Ref<string[]> = ref(calculateArea(props.type, props.area, props.offset));
-const offset: Ref<string[]> = ref(calculateOffset(props.offset, area.value, props.type));
-const contentHeight = ref(calculateContent(props.title, area.value[1], props.btn, type, props.isMessage));
-const index: Ref<number | Function> = ref(99999)
+const area: Ref<string[]> = ref(
+  calculateArea(props.type, props.area, props.offset)
+);
+const offset: Ref<string[]> = ref(
+  calculateOffset(props.offset, area.value, props.type)
+);
+const contentHeight = ref(
+  calculateContent(props.title, area.value[1], props.btn, type, props.isMessage)
+);
+const index: Ref<number | Function> = ref(99999);
 const visible: Ref<boolean> = ref(false);
 const first: Ref<boolean> = ref(true);
 
@@ -157,11 +163,15 @@ const _t: Ref<string> = ref(offset.value[0]);
 const _l: Ref<string> = ref(offset.value[1]);
 
 /**
- * 监听 props 的 zIndex 改变, 更新弹出层元素层级 
+ * 监听 props 的 zIndex 改变, 更新弹出层元素层级
  */
-watch(() => props.zIndex, () => {
-  index.value = props.zIndex ?? nextIndex();
-}, { immediate: true})
+watch(
+  () => props.zIndex,
+  () => {
+    index.value = props.zIndex ?? nextIndex();
+  },
+  { immediate: true }
+);
 
 /**
  * 首次打开
@@ -597,14 +607,14 @@ const resetCalculationPohtosArea = function (index: number) {
 
 /**
  * 指定弹出层, 在点击标题时, 设置当前弹出层为最上层
- * 
- * 顾: 修改 index 为最新的 nextIndex 值 
- * 
+ *
+ * 顾: 修改 index 为最新的 nextIndex 值
+ *
  * 备注: 其实在 nextIndex 之前应判定当前弹出层是否时最上层, 如果为否不做任何改变, 该问题暂时不会造成任何影响不做处理。
  */
-const setTop = function() {
+const setTop = function () {
   index.value = nextIndex();
-}
+};
 
 defineExpose({ reset, open, close });
 </script>
