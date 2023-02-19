@@ -63,7 +63,6 @@
                 <lay-icon
                   size="15px"
                   type="layui-icon-theme"
-                  style="padding-left: 30px; padding-right: 30px"
                 >
                 </lay-icon>
               </a>
@@ -122,11 +121,6 @@
                 </div>
               </template>
             </lay-dropdown>
-          </li>
-          <li class="layui-nav-item">
-            <a href="http://layer.layui-vue.com/zh-CN/demo" target="_blank"
-              >layer</a
-            >
           </li>
           <li class="layui-nav-item">
             <a href="javascript:void(0)">
