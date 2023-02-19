@@ -20,7 +20,6 @@ import {
   VNodeTypes,
   nextTick,
   inject,
-  ComputedRef,
 } from "vue";
 import {
   nextId,
@@ -42,7 +41,7 @@ import {
   getNotifyAnimationClass,
 } from "../utils";
 import { useMove, useResize } from "../composable/useDragable";
-import { zIndexKey } from "../tokens";
+import { nextIndex } from "../tokens";
 
 export interface LayerProps {
   id?: string;
@@ -149,9 +148,7 @@ const offset: Ref<string[]> = ref(
 const contentHeight = ref(
   calculateContent(props.title, area.value[1], props.btn, type, props.isMessage)
 );
-const index: ComputedRef<number | Function> = computed(() => {
-  return props.zIndex ?? inject(zIndexKey, 99999);
-});
+const index: Ref<number | Function> = ref(99999);
 const visible: Ref<boolean> = ref(false);
 const first: Ref<boolean> = ref(true);
 
@@ -164,6 +161,17 @@ const _w: Ref<string> = ref(area.value[0]);
 const _h: Ref<string> = ref(area.value[0]);
 const _t: Ref<string> = ref(offset.value[0]);
 const _l: Ref<string> = ref(offset.value[1]);
+
+/**
+ * 监听 props 的 zIndex 改变, 更新弹出层元素层级
+ */
+watch(
+  () => props.zIndex,
+  () => {
+    index.value = props.zIndex ?? nextIndex();
+  },
+  { immediate: true }
+);
 
 /**
  * 首次打开
@@ -597,6 +605,17 @@ const resetCalculationPohtosArea = function (index: number) {
   });
 };
 
+/**
+ * 指定弹出层, 在点击标题时, 设置当前弹出层为最上层
+ *
+ * 顾: 修改 index 为最新的 nextIndex 值
+ *
+ * 备注: 其实在 nextIndex 之前应判定当前弹出层是否时最上层, 如果为否不做任何改变, 该问题暂时不会造成任何影响不做处理。
+ */
+const setTop = function () {
+  index.value = nextIndex();
+};
+
 defineExpose({ reset, open, close });
 </script>
 
@@ -623,7 +642,7 @@ defineExpose({ reset, open, close });
         v-if="visible"
       >
         <!-- 标题 -->
-        <Title v-if="showTitle" :title="title"></Title>
+        <Title v-if="showTitle" :title="title" @mousedown="setTop"></Title>
         <!-- 内容 -->
         <div
           class="layui-layer-content"
