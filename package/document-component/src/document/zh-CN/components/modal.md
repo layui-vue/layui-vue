@@ -15,11 +15,7 @@
 <template>
   <lay-button @click="changeVisible1">打开</lay-button>
   <lay-layer title="基础使用" v-model="visible1" :area="['500px','500px']">
-      <lay-select v-model="value" placeholder="请选择">
-        <lay-select-option :value="1" label="学习"></lay-select-option>
-        <lay-select-option :value="2" label="编码"></lay-select-option>
-        <lay-select-option :value="3" label="运动"></lay-select-option>
-      </lay-select>
+    内容
   </lay-layer>
 </template>
 
