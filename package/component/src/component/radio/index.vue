@@ -1,6 +1,6 @@
 <script lang="ts">
 import { computed, inject } from "vue";
-import { RadioSize } from "./interface";
+import { RadioSize } from "./typing";
 export default {
   name: "LayRadio",
 };
@@ -8,6 +8,7 @@ export default {
 
 <script setup lang="ts">
 import "./index.less";
+import { RadioEmits } from "./typing";
 
 export interface RadioProps {
   name?: string;
@@ -22,7 +23,7 @@ const props = withDefaults(defineProps<RadioProps>(), {
   size: "md",
 });
 
-const emit = defineEmits(["update:modelValue", "change"]);
+const emit = defineEmits<RadioEmits>();
 
 const radioGroup: any = inject("radioGroup", {});
 
