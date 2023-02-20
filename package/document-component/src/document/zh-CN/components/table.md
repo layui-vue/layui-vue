@@ -1178,14 +1178,14 @@ export default {
 <template>
   <lay-table :columns="columns28" :data-source="dataSource28">
     <template #username="{ data }">
-      <lay-input v-if="edingKeys[data.id]" :model-value="data.username" @input="changeUsername($event, data)">
+      <lay-input v-if="edingKeys.includes(data)" :model-value="data.username" @input="changeUsername($event, data)">
         <template #suffix>
-          <lay-icon type="layui-icon-close" style="right:10px;" v-if="edingKeys[data.id]"  @click="deleteEdit(data.id)"></lay-icon>
+          <lay-icon type="layui-icon-close" style="right:10px;" v-if="edingKeys.includes(data)"  @click="deleteEdit(data)"></lay-icon>
         </template>
       </lay-input>
       <span v-else>
         {{ data.username }} 
-        <lay-icon type="layui-icon-edit" style="position: absolute;right: 10px;" v-if="!edingKeys[data.id]"  @click="editHandle(data.id)"></lay-icon>
+        <lay-icon type="layui-icon-edit" style="position: absolute;right: 10px;" v-if="!edingKeys.includes(data)"  @click="editHandle(data)"></lay-icon>
       </span>
     </template>
   </lay-table>
@@ -1232,12 +1232,12 @@ export default {
       {id:"5",username:"woow", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '}
     ])
 
-    const editHandle = (key) => {
-      edingKeys.value.push(key);
+    const editHandle = (data) => {
+      edingKeys.value.push(data);
     }
 
-    const deleteEdit = (key) => {
-      edingKeys.value.splice(edingKeys.value.indexOf(key),1);
+    const deleteEdit = (data) => {
+      edingKeys.value.splice(edingKeys.value.indexOf(data),1);
     }
 
     const changeUsername = (val, data) => {
