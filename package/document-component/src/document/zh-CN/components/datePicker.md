@@ -281,7 +281,28 @@ export default {
 </script>
 
 :::
+::: title 格式化
+:::
 
+::: demo 目前在type等于`year`、`month`这类输出值为非组合值时无效，使用`format`属性任意组合吧
+
+<template>
+  <lay-date-picker v-model="endTime8" simple type="date" :format="'DD/MM/YYYY'" placeholder="click me"></lay-date-picker>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+   const endTime8 = ref();
+    return {
+      endTime8
+    }
+  }
+}
+</script>
+:::
 ::: title Date Picker 属性
 :::
 
@@ -299,6 +320,7 @@ export default {
 | prefix-icon    | 前置图标            | `string`         | `layui-icon-date`    |  内置图标集            | `1.4.0`             |
 | suffix-icon    | 后置图标            | `string`         | --    | 内置图标集            | `1.4.0`             |
 | timestamp    | 时间戳模式(13位),仅对date和datetime有效| `boolean`        | `false`    | `true` `false`         | `1.6.5`             |
+| format    | 输出格式化 | `string`        | --   | 例如`YYYY-MM-DD`         | -            |
 | contentStyle             | 内容自定义样式     | `StyleValue` | -- | -- |-- |
 | contentClass             | 内容自定义Class    | `string` `Array<string \| object>` `object` | -- | -- |-- |
 :::
