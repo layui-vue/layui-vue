@@ -21,8 +21,7 @@ async function genDts() {
     console.log(`building types...`);
     const { stdout } = await execa("vue-tsc", [
       "--declaration",
-      "--emitDeclarationOnly",
-      "--skipLibCheck",
+      "--emitDeclarationOnly"
     ]);
     console.log("generate types successfully.");
   } catch (error) {
