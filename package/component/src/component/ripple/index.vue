@@ -40,12 +40,12 @@ const isOut = computed(() => {
 const rippleX = ref<string | number | undefined>(undefined);
 const rippleY = ref<string | number | undefined>(undefined);
 
-const onActive = function (event: Event) {
+const onActive = function (eventParam: Event) {
   isActiveRef.value = true;
 
   // 计算点击位置和波纹大小
   if (props.type === "inset" && !props.spreadSize && !props.center) {
-    const el = event.currentTarget;
+    const el = eventParam.currentTarget;
     // @ts-ignore
     const rect = el.getBoundingClientRect();
     // @ts-ignore

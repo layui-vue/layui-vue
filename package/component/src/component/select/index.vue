@@ -114,9 +114,9 @@ const onCompositionstart = () => {
   composing.value = true;
 };
 
-const onCompositionend = (event: Event) => {
+const onCompositionend = (eventParam: Event) => {
   composing.value = false;
-  handleSearch((event.target as HTMLInputElement).value);
+  handleSearch((eventParam.target as HTMLInputElement).value);
 };
 
 onMounted(() => {
