@@ -14,8 +14,8 @@
 
 <template>
   <lay-button @click="changeVisible1">打开</lay-button>
-  <lay-layer title="基础使用" v-model="visible1">
-      内容  
+  <lay-layer title="基础使用" v-model="visible1" :area="['500px','500px']">
+    内容
   </lay-layer>
 </template>
 

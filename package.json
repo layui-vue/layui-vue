@@ -37,6 +37,7 @@
     "commitizen": "^4.2.4",
     "commitlint-config-cz": "^0.13.3",
     "cz-conventional-changelog": "^3.3.0",
+    "@vue/runtime-core": "3.2.45",
     "cz-customizable": "^6.3.0",
     "eslint": "^8.5.0",
     "eslint-config-prettier": "^8.3.0",

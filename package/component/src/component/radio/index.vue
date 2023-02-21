@@ -1,6 +1,6 @@
 <script lang="ts">
 import { computed, inject } from "vue";
-import { RadioSize } from "./interface";
+import { RadioSize } from "./typing";
 export default {
   name: "LayRadio",
 };
@@ -18,11 +18,16 @@ export interface RadioProps {
   label?: string;
 }
 
+export interface RadioEmits {
+  (e: "update:modelValue", value: string | boolean | number | undefined): void;
+  (e: "change", value: string | boolean | number | undefined): void;
+}
+
 const props = withDefaults(defineProps<RadioProps>(), {
   size: "md",
 });
 
-const emit = defineEmits(["update:modelValue", "change"]);
+const emit = defineEmits<RadioEmits>();
 
 const radioGroup: any = inject("radioGroup", {});
 

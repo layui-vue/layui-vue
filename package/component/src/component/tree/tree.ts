@@ -18,13 +18,11 @@ export interface TreeData {
   hasNextSibling: boolean;
   parentNode: Nullable<TreeData>;
 }
-
 interface ReplaceFields {
   id: string;
   title: string;
   children: string;
 }
-
 interface TreeConfig {
   checkStrictly: boolean | string;
   showCheckbox: boolean;

@@ -43,8 +43,8 @@ export interface TreeProps {
 }
 
 interface TreeEmits {
-  (e: "update:checkedKeys", keys: KeysType): void;
   (e: "update:expandKeys", keys: KeysType): void;
+  (e: "update:checkedKeys", keys: KeysType): void;
   (e: "node-click", node: OriginalTreeData): void;
 }
 
