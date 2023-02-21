@@ -155,6 +155,7 @@ export interface DatePickerProps {
   timestamp?: boolean;
   contentClass?: string | Array<string | object> | object;
   contentStyle?: StyleValue;
+  format?: string;
 }
 
 const props = withDefaults(defineProps<DatePickerProps>(), {
@@ -170,6 +171,7 @@ const props = withDefaults(defineProps<DatePickerProps>(), {
   prefixIcon: "layui-icon-date",
   suffixIcon: "",
   timestamp: false,
+  format: "",
 });
 
 const startPlaceholder = computed(() => {
@@ -209,7 +211,9 @@ const getDateValue = () => {
     case "date":
       dayjsVal =
         currentDay.value !== -1
-          ? dayjs(currentDay.value).format("YYYY-MM-DD")
+          ? dayjs(currentDay.value).format(
+              props.format ? props.format : "YYYY-MM-DD"
+            )
           : "";
       break;
     case "datetime":
@@ -219,7 +223,7 @@ const getDateValue = () => {
               .hour(hms.value.hh)
               .minute(hms.value.mm)
               .second(hms.value.ss)
-              .format("YYYY-MM-DD HH:mm:ss")
+              .format(props.format ? props.format : "YYYY-MM-DD HH:mm:ss")
           : "";
       break;
     case "year":
@@ -237,7 +241,7 @@ const getDateValue = () => {
         .hour(hms.value.hh)
         .minute(hms.value.mm)
         .second(hms.value.ss)
-        .format("HH:mm:ss");
+        .format(props.format ? props.format : "HH:mm:ss");
       break;
     case "yearmonth":
       dayjsVal =
@@ -245,7 +249,7 @@ const getDateValue = () => {
           ? dayjs()
               .year(currentYear.value)
               .month(currentMonth.value)
-              .format("YYYY-MM")
+              .format(props.format ? props.format : "YYYY-MM")
           : "";
       break;
     default:
@@ -287,13 +291,13 @@ const getDateValueByRange = () => {
   let format = "YYYY-MM-DD";
   switch (props.type) {
     case "date":
-      format = "YYYY-MM-DD";
+      format = props.format ? props.format : "YYYY-MM-DD";
       break;
     case "datetime":
-      format = "YYYY-MM-DD HH:mm:ss";
+      format = props.format ? props.format : "YYYY-MM-DD HH:mm:ss";
       break;
     case "yearmonth":
-      format = "YYYY-MM";
+      format = props.format ? props.format : "YYYY-MM";
       break;
   }
   dateValue.value = [

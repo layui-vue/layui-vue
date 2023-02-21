@@ -16,7 +16,7 @@
       <li> 
         <h3>1.8.10 <span class="layui-badge-rim">2023-02-19</span></h3> 
         <ul>
-          <li>[修复] layer 与 dropdown 的层级冲突，导致 dropdown 组件无法在 layer 中正常显示的问题。</li>
+          <li>[修复] layer 与 dropdown 的层级错误, 无法在 layer 中正常显示的问题。</li>
         </ul>  
       </li>
     </ul>
