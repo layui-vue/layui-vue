@@ -1,0 +1,10 @@
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+      "skipLibCheck": true,
+      "declaration": true,
+      "emitDeclarationOnly": true
+    },
+    "include": ["src/**/*","shims-vue.d.ts"],
+    "exclude": ["node_modules"]
+  }

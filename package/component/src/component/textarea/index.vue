@@ -26,11 +26,11 @@ export interface TextareaProps {
 const props = defineProps<TextareaProps>();
 
 interface TextareaEmits {
-  (e: "blur", event: Event): void;
+  (e: "blur", eventParam: Event): void;
   (e: "input", value: string): void;
   (e: "update:modelValue", value: string): void;
   (e: "change", value: string): void;
-  (e: "focus", event: Event): void;
+  (e: "focus", eventParam: Event): void;
   (e: "clear"): void;
 }
 
@@ -50,8 +50,8 @@ const styles = computed(() => {
   return Object.assign(defaultStyle.value, attrs.style);
 });
 
-const onInput = function (event: Event) {
-  const inputElement = event.target as HTMLInputElement;
+const onInput = function (eventParam: Event) {
+  const inputElement = eventParam.target as HTMLInputElement;
   emit("input", inputElement.value);
   if (composing.value) {
     return;
@@ -59,16 +59,16 @@ const onInput = function (event: Event) {
   emit("update:modelValue", inputElement.value);
 };
 
-const onFocus = function (event: Event) {
-  emit("focus", event);
+const onFocus = function (eventParam: Event) {
+  emit("focus", eventParam);
 };
 
-const onBlur = function (event: Event) {
-  emit("blur", event);
+const onBlur = function (eventParam: Event) {
+  emit("blur", eventParam);
 };
 
-const onChange = (event: Event) => {
-  const inputElement = event.target as HTMLInputElement;
+const onChange = (eventParam: Event) => {
+  const inputElement = eventParam.target as HTMLInputElement;
   emit("change", inputElement.value);
 };
 
@@ -81,9 +81,9 @@ const onCompositionstart = () => {
   composing.value = true;
 };
 
-const onCompositionend = (event: Event) => {
+const onCompositionend = (eventParam: Event) => {
   composing.value = false;
-  onInput(event);
+  onInput(eventParam);
 };
 
 const hasContent = computed(() => (props.modelValue as string)?.length > 0);

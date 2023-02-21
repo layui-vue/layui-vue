@@ -42,11 +42,11 @@ const props = withDefaults(defineProps<InputProps>(), {
 });
 
 interface InputEmits {
-  (e: "blur", event: Event): void;
+  (e: "blur", eventParam: Event): void;
   (e: "input", value: string): void;
   (e: "update:modelValue", value: string): void;
   (e: "change", value: string): void;
-  (e: "focus", event: Event): void;
+  (e: "focus", eventParam: Event): void;
   (e: "clear"): void;
 }
 
@@ -77,8 +77,8 @@ watch(
   }
 );
 
-const onInput = function (event: Event) {
-  const inputElement = event.target as HTMLInputElement;
+const onInput = function (eventParam: Event) {
+  const inputElement = eventParam.target as HTMLInputElement;
   const value = inputElement.value;
   emit("input", value);
   if (composing.value) return;
@@ -90,25 +90,25 @@ const onClear = () => {
   emit("clear");
 };
 
-const onFocus = (event: Event) => {
-  emit("focus", event);
+const onFocus = (eventParam: Event) => {
+  emit("focus", eventParam);
 };
 
-const onChange = (event: Event) => {
-  const inputElement = event.target as HTMLInputElement;
+const onChange = (eventParam: Event) => {
+  const inputElement = eventParam.target as HTMLInputElement;
   const value = inputElement.value;
   emit("change", value);
 };
 
-const onBlur = (event: Event) => {
+const onBlur = (eventParam: Event) => {
   if (props.type === "number") {
-    onNumberBlur(event);
+    onNumberBlur(eventParam);
   }
-  emit("blur", event);
+  emit("blur", eventParam);
 };
 
-const onNumberBlur = (event: Event) => {
-  let value = (event.target as HTMLInputElement).value;
+const onNumberBlur = (eventParam: Event) => {
+  let value = (eventParam.target as HTMLInputElement).value;
   if (value === "") {
     value = props.min ? String(props.min) : "0";
   } else {
@@ -122,9 +122,9 @@ const onCompositionstart = () => {
   composing.value = true;
 };
 
-const onCompositionend = (event: Event) => {
+const onCompositionend = (eventParam: Event) => {
   composing.value = false;
-  onInput(event);
+  onInput(eventParam);
 };
 
 const classes = computed(() => {

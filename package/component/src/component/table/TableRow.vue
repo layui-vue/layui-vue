@@ -655,14 +655,7 @@ const checkboxProps = props.getCheckboxProps(props.data, props.index);
         v-model:selectedKey="tableSelectedKey"
       >
         <template
-          v-for="name in columnSlotNames"
-          #[name]="slotProp: {
-            data: any,
-            column: any,
-            row: any,
-            rowIndex: number,
-            columnIndex: number,
-          }"
+          v-for="(name, index) in columnSlotNames" v-slot:[index]="slotProp: any"
         >
           <slot
             :name="name"

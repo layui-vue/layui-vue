@@ -32,7 +32,7 @@ export interface TreeProps {
 export interface TreeEmits {
   (e: "update:checkedKeys", keys: KeysType): void;
   (e: "update:expandKeys", keys: KeysType): void;
-  (e: "node-click", node: OriginalTreeData, event: Event): void;
+  (e: "node-click", node: OriginalTreeData, eventParam: Event): void;
 }
 
 export type CustomKey = string | number;

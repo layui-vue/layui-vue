@@ -16,6 +16,7 @@
   </teleport>
 </template>
 <script lang="ts">
+
 const NAME = "LayPopper";
 export default {
   name: NAME,
@@ -219,8 +220,7 @@ useResizeObserver(triggerRefEl, () => {
   updatePosistion();
 });
 
-let popperObserver: { stop: any; isSupported?: Ref<boolean> } | undefined =
-  undefined;
+let popperObserver: { stop: any; isSupported?: boolean } | undefined;
 
 watch(innerVisible, (isShow) => {
   updatePosistion();
