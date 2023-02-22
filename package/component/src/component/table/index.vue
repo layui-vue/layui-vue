@@ -22,7 +22,7 @@ import { Recordable } from "../../types";
 import LayCheckbox from "../checkbox/index.vue";
 import LayDropdown from "../dropdown/index.vue";
 import LayEmpty from "../empty/index.vue";
-import TableRow from "./TableRow.vue";
+import TableData from "./TableData.vue";
 import TablePage from "./TablePage.vue";
 import useTable from "./composables/useTable";
 import { TableEmit } from "./typing";
@@ -959,7 +959,7 @@ onBeforeUnmount(() => {
                 v-for="(children, index) in tableDataSource"
                 :key="index"
               >
-                <table-row
+                <table-data
                   :id="id"
                   :index="index"
                   :data="children"
@@ -1016,7 +1016,7 @@ onBeforeUnmount(() => {
                       :row="slotProp.row"
                     ></slot>
                   </template>
-                </table-row>
+                </table-data>
               </template>
               <tr v-if="hasTotalRow" class="layui-table-total">
                 <template

@@ -626,7 +626,7 @@ const checkboxProps = props.getCheckboxProps(props.data, props.index);
       v-for="(children, childrenIndex) in data[childrenColumnName]"
       :key="childrenIndex"
     >
-      <table-row
+      <table-data
         :id="id"
         :data="children"
         :index="childrenIndex"
@@ -672,7 +672,7 @@ const checkboxProps = props.getCheckboxProps(props.data, props.index);
         >
           <slot name="expand" :data="slotProp.data" :row="slotProp.row"></slot>
         </template>
-      </table-row>
+      </table-data>
     </template>
   </template>
 </template>
