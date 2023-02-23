@@ -18,7 +18,7 @@ async function rollupTypes() {
   try {
     const { stdout } = await execa("vue-tsc", [
       "--declaration",
-      "--emitDeclarationOnly"
+      "--emitDeclarationOnly",
     ]);
     console.log("generate types successfully.");
   } catch (error) {

@@ -16,7 +16,6 @@
   </teleport>
 </template>
 <script lang="ts">
-
 const NAME = "LayPopper";
 export default {
   name: NAME,
