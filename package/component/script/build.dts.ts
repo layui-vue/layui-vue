@@ -1,6 +1,3 @@
-// @ts-ignore
-import { Extractor, ExtractorConfig } from "@microsoft/api-extractor";
-import * as path from "path";
 import { execa } from "execa";
 
 buildTypes();

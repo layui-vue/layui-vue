@@ -1,6 +1,6 @@
 {
   "name": "@layui/layui-vue",
-  "version": "1.9.0-alpha.13",
+  "version": "1.9.0-alpha.15",
   "author": "就眠儀式",
   "license": "MIT",
   "description": "a component library for Vue 3 base on layui-vue",
@@ -9,6 +9,11 @@
   "unpkg": "umd/index.js",
   "jsdelivr": "umd/index.js",
   "types": "types/index.d.ts",
+  "web-types": "types/web-types.json",
+  "vetur": {
+    "tags": "types/tags.json",
+    "attributes": "types/attributes.json"
+  },
   "style": "lib/index.css",
   "type": "module",
   "keywords": [
@@ -26,11 +31,12 @@
     "./es/": "./es/"
   },
   "scripts": {
-    "build": "npm run build:all && npm run build:es && npm run build:umd && npm run build:types",
-    "build:es": "vite build --emptyOutDir --config ./script/build.es.ts",
+    "build": "npm run build:all && npm run build:es && npm run build:umd && npm run build:dts && npm run build:helper",
     "build:all": "vite build --emptyOutDir --config ./script/build.all.ts",
-    "build:types":"tsx --tsconfig ./tsconfig.build.json ./script/build.types.ts",
-    "build:umd": "vite build --emptyOutDir --config ./script/build.umd.ts"
+    "build:es": "vite build --emptyOutDir --config ./script/build.es.ts",
+    "build:umd": "vite build --emptyOutDir --config ./script/build.umd.ts",
+    "build:dts":"tsx --tsconfig ./tsconfig.build.json ./script/build.dts.ts",
+    "build:helper": "node ./script/build.helper.cjs"
   },
   "dependencies": {
     "@layui/icons-vue": "^1.0.9",

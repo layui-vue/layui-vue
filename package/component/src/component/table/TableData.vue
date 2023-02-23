@@ -23,7 +23,7 @@ export interface TableRowProps {
   selectedKey: string;
   tableColumnKeys: Recordable[];
   childrenColumnName?: string;
-  columnSlotNames: String[];
+  columnSlotNames: string[];
   page?: any;
   columns: Recordable[];
   checkbox?: boolean;

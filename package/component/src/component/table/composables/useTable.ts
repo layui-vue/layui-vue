@@ -2,9 +2,11 @@ import { Recordable } from "../../../types";
 import { computed } from "vue";
 
 const useTable = (props: any) => {
+  
   const columnSlotNames = computed(() => {
     return findColumnSlotProperties(props.columns);
   });
+
   const findColumnSlotProperties = function (columns: Recordable[]) {
     const outcome: string[] = [];
     const forEach = function (columns: Recordable[], outcome: string[]) {

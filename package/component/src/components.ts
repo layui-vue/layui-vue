@@ -1,12 +1,5 @@
-import type { App, Plugin } from "vue";
-
-import "./theme/index.less";
-import "@layui/layer-vue/lib/index.css";
-import "@layui/icons-vue/lib/index.css";
+// @ts-nocheck
 import { layer } from "@layui/layer-vue";
-import layerInstall from "@layui/layer-vue";
-import i18n, { useI18n } from "./language";
-
 import LayBacktop from "./component/backTop/index";
 import LayAvatar from "./component/avatar/index";
 import LayAvatarList from "./component/avatarList/index";
@@ -61,7 +54,6 @@ import LayDropdownSubMenu from "./component/dropdownSubMenu/index";
 import LayTab from "./component/tab/index";
 import LayTabItem from "./component/tabItem/index";
 import LayTree from "./component/tree/index";
-import LayTreeSelect from "./component/treeSelect/index";
 import LayTable from "./component/table/index";
 import LayPage from "./component/page/index";
 import LayTransfer from "./component/transfer/index";
@@ -92,204 +84,101 @@ import LayAffix from "./component/affix/index";
 import LaySpace from "./component/space/index";
 import LayTag from "./component/tag/index";
 import LayTagInput from "./component/tagInput/index";
-import LayQrcode from "./component/qrcode/index";
-import LayBarcode from "./component/barcode/index";
 import LayConfigProvider from "./provider";
-import { InstallOptions } from "./types";
 
-const components: Record<string, Plugin> = {
-  LaySplitPanel,
-  LaySplitPanelItem,
-  LayRadio,
-  LayRadioGroup,
-  LayButton,
-  LayIcon,
-  LayBacktop,
-  LayLayout,
-  LaySide,
-  LayHeader,
-  LayBody,
-  LayFooter,
-  LayLogo,
-  LayPanel,
-  LayCard,
-  LayProgress,
-  LayButtonGroup,
-  LayButtonContainer,
-  LayRow,
-  LayCol,
-  LayInput,
-  LayBadge,
-  LayQuote,
-  LayLine,
-  LayTimeline,
-  LayTimelineItem,
-  LayTextarea,
-  LaySwitch,
-  LayCollapse,
-  LayCollapseItem,
-  LayContainer,
-  LayMenu,
-  LayMenuItem,
-  LayCheckbox,
-  LayForm,
-  LayBreadcrumb,
-  LayBreadcrumbItem,
-  LayAvatar,
-  LayAvatarList,
-  LayField,
-  LaySelect,
-  LayScroll,
-  LaySelectOption,
-  LayEmpty,
-  LayFormItem,
-  LayRate,
-  LayDropdown,
-  LayDropdownMenu,
-  LayDropdownMenuItem,
-  LayDropdownSubMenu,
-  LayTab,
-  LayTabItem,
-  LayIconPicker,
-  LayTree,
-  LayTable,
-  LayPage,
-  LayTransfer,
-  LayCheckboxGroup,
-  LaySlider,
-  LayCarousel,
-  LayCarouselItem,
-  LayColorPicker,
-  LayTooltip,
-  LayInputNumber,
-  LaySkeleton,
-  LaySkeletonItem,
-  LayCountUp,
-  LayStep,
-  LayStepItem,
-  LaySubMenu,
-  LayException,
-  LayResult,
-  LayFullscreen,
-  LayConfigProvider,
-  LayDatePicker,
-  LayTransition,
-  LayUpload,
-  LayRipple,
-  LayNoticeBar,
-  LayPageHeader,
-  LayCascader,
-  LayAffix,
-  LaySpace,
-  LayTag,
-  LayTagInput,
-  LayTreeSelect,
-  LayQrcode,
-  LayBarcode,
-};
-
-const install = (app: App, options?: InstallOptions): void => {
-  for (const key of Object.keys(components)) {
-    app.use(components[key], options);
+declare module '@vue/runtime-core' {
+  // GlobalComponents for Volar
+  export interface GlobalComponents {
+    LayButton: typeof LayButton
+    LaySplitPanel: typeof LaySplitPanel
+    LaySplitPanelItem: typeof LaySplitPanelItem
+    LayRadio: typeof LayRadio
+    LayRadioGroup: typeof LayRadioGroup
+    LayIcon: typeof LayIcon
+    LayBacktop: typeof LayBacktop
+    LayLayout: typeof LayLayout
+    LaySide: typeof LaySide
+    LayHeader: typeof LayHeader
+    LayBody: typeof LayBody
+    LayFooter: typeof LayFooter
+    LayLogo: typeof LayLogo
+    LayPanel: typeof LayPanel
+    LayCard: typeof LayCard
+    LayProgress: typeof LayProgress
+    LayButtonGroup: typeof LayButtonGroup
+    LayButtonContainer: typeof LayButtonContainer
+    LayRow: typeof LayRow
+    LayCol: typeof LayCol
+    LayInput: typeof LayInput
+    LayBadge: typeof LayBadge
+    LayQuote: typeof LayQuote
+    LayLine: typeof LayLine
+    LayTimeline: typeof LayTimeline
+    LayTimelineItem: typeof LayTimelineItem
+    LayTextarea: typeof LayTextarea
+    LaySwitch: typeof LaySwitch
+    LayCollapse: typeof LayCollapse
+    LayCollapseItem: typeof LayCollapseItem
+    LayContainer: typeof LayContainer
+    LayMenu: typeof LayMenu
+    LayMenuItem: typeof LayMenuItem
+    LayCheckbox: typeof LayCheckbox
+    LayForm: typeof LayForm
+    LayBreadcrumb: typeof LayBreadcrumb
+    LayBreadcrumbItem: typeof LayBreadcrumbItem
+    LayAvatar: typeof LayAvatar
+    LayAvatarList: typeof LayAvatarList
+    LayField: typeof LayField
+    LaySelect: typeof LaySelect
+    LayScroll: typeof LayScroll
+    LaySelectOption: typeof LaySelectOption
+    LayEmpty: typeof LayEmpty
+    LayFormItem: typeof LayFormItem
+    LayRate: typeof LayRate
+    LayDropdown: typeof LayDropdown
+    LayDropdownMenu: typeof LayDropdownMenu
+    LayDropdownMenuItem: typeof LayDropdownMenuItem
+    LayDropdownSubMenu: typeof LayDropdownSubMenu
+    LayTab: typeof LayTab
+    LayTabItem: typeof LayTabItem
+    LayIconPicker: typeof LayIconPicker
+    LayTree: typeof LayTree
+    LayTable: typeof LayTable
+    LayPage: typeof LayPage
+    LayTransfer: typeof LayTransfer
+    LayCheckboxGroup: typeof LayCheckboxGroup
+    LaySlider: typeof LaySlider
+    LayCarousel: typeof LayCarousel
+    LayCarouselItem: typeof LayCarouselItem
+    LayColorPicker: typeof LayColorPicker
+    LayTooltip: typeof LayTooltip
+    LayInputNumber: typeof LayInputNumber
+    LaySkeleton: typeof LaySkeleton
+    LaySkeletonItem: typeof LaySkeletonItem
+    LayCountUp: typeof LayCountUp
+    LayStep: typeof LayStep
+    LayStepItem: typeof LayStepItem
+    LaySubMenu: typeof LaySubMenu
+    LayException: typeof LayException
+    LayResult: typeof LayResult
+    LayFullscreen: typeof LayFullscreen
+    LayConfigProvider: typeof LayConfigProvider
+    LayDatePicker: typeof LayDatePicker
+    LayTransition: typeof LayTransition
+    LayUpload: typeof LayUpload
+    LayRipple: typeof LayRipple
+    LayNoticeBar: typeof LayNoticeBar
+    LayPageHeader: typeof LayPageHeader
+    LayCascader: typeof LayCascader
+    LayAffix: typeof LayAffix
+    LaySpace: typeof LaySpace
+    LayTag: typeof LayTag
+    LayTagInput: typeof LayTagInput
   }
-  app.use(i18n);
-  app.use(layerInstall);
-};
 
-export {
-  LaySplitPanel,
-  LaySplitPanelItem,
-  LayRadio,
-  LayRadioGroup,
-  LayButton,
-  LayIcon,
-  LayBacktop,
-  LayLayout,
-  LaySide,
-  LayHeader,
-  LayBody,
-  LayFooter,
-  LayLogo,
-  LayPanel,
-  LayCard,
-  LayProgress,
-  LayButtonGroup,
-  LayButtonContainer,
-  LayRow,
-  LayCol,
-  LayInput,
-  LayBadge,
-  LayQuote,
-  LayLine,
-  LayTimeline,
-  LayTimelineItem,
-  LayTextarea,
-  LaySwitch,
-  LayCollapse,
-  LayCollapseItem,
-  LayContainer,
-  LayMenu,
-  LayMenuItem,
-  LayCheckbox,
-  LayForm,
-  LayBreadcrumb,
-  LayBreadcrumbItem,
-  LayAvatar,
-  LayAvatarList,
-  LayField,
-  LaySelect,
-  LayScroll,
-  LaySelectOption,
-  LayEmpty,
-  LayFormItem,
-  LayRate,
-  LayDropdown,
-  LayDropdownMenu,
-  LayDropdownMenuItem,
-  LayDropdownSubMenu,
-  LayTab,
-  LayTabItem,
-  LayIconPicker,
-  LayTree,
-  LayTable,
-  LayPage,
-  LayTransfer,
-  LayCheckboxGroup,
-  LaySlider,
-  LayCarousel,
-  LayCarouselItem,
-  LayColorPicker,
-  LayTooltip,
-  LayInputNumber,
-  LaySkeleton,
-  LaySkeletonItem,
-  LayCountUp,
-  LayStep,
-  LayStepItem,
-  LaySubMenu,
-  LayException,
-  LayResult,
-  LayFullscreen,
-  LayConfigProvider,
-  LayDatePicker,
-  LayTransition,
-  LayUpload,
-  LayRipple,
-  LayNoticeBar,
-  LayPageHeader,
-  LayCascader,
-  LayAffix,
-  LaySpace,
-  LayTag,
-  LayTagInput,
-  LayTreeSelect,
-  LayQrcode,
-  LayBarcode,
-  install,
-};
+  export interface ComponentCustomProperties {
+    $layer:typeof layer;
+  }
+}
 
-export { layer, useI18n };
-
-export default { install };
-
-export type {} from './components.ts';
+export {}

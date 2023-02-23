@@ -15,8 +15,11 @@
       <a name="1-8-10"></a> 
       <li> 
         <h3>1.8.10 <span class="layui-badge-rim">2023-02-19</span></h3> 
-        <ul>
+        <ul>        
+          <li>[新增] types 目录 web-types.json 文件。</li>
+          <li>[新增] types 目录 attributes.json 与 tags.json 文件。</li>
           <li>[修复] layer 与 dropdown 的层级错误, 无法在 layer 中正常显示的问题。</li>
+          <li>[修复] types 目录部分 d.ts 类型声明无效。 </li>
         </ul>  
       </li>
     </ul>
