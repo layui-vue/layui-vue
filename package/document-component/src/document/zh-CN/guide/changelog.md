@@ -19,6 +19,7 @@
           <li>[新增] layer 组件 btn 属性 disabled 配置, 开启 button 禁用。</li>  
           <li>[新增] types 目录 web-types.json, attributes.json 和 tags.json 配置。 </li>
           <li>[新增] types 目录 components.d.ts 声明。</li>
+          <li>[优化] select 组件 multiple 属性开启时, 传递非 array 类型时的异常描述。</li>
         </ul>  
       </li>
     </ul>

@@ -66,7 +66,7 @@ const slots = useSlots();
 const selectRef = ref();
 const searchValue = ref("");
 const singleValue = ref("");
-const multipleValue = ref([]);
+const multipleValue: Ref<any[]> = ref([]);
 const emits = defineEmits<SelectEmits>();
 const openState: Ref<boolean> = ref(false);
 const options = ref<any>([]);
@@ -126,14 +126,18 @@ onMounted(() => {
     [selectedValue, options],
     () => {
       if (multiple.value) {
+        try {
         multipleValue.value = selectedValue.value?.map((value: any) => {
-          return options.value.find((item: any) => {
-            item.disabled == "" || item.disabled == true
-              ? (item.closable = false)
-              : (item.closable = true);
-            return item.value === value;
-          });
+            return options.value.find((item: any) => {
+              item.disabled == "" || item.disabled == true
+                ? (item.closable = false)
+                : (item.closable = true);
+              return item.value === value;
+            });
         });
+        } catch(e) {
+          throw new Error("v-model / model-value is not an array type")
+        }
       } else {
         searchValue.value = "";
         singleValue.value = options.value.find((item: any) => {
