@@ -5,7 +5,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { computed, defineEmits, StyleValue } from "vue";
+import { computed, defineEmits } from "vue";
 
 export interface ShadeProps {
   opacity: string;

@@ -737,6 +737,13 @@
   font-weight: 400;
 }
 
+.layui-layer-btn-disabled {
+  border-color: #eee !important;
+  background-color: #fbfbfb !important;
+  color: #d2d2d2 !important;
+  cursor: not-allowed !important;
+}
+
 .layui-layer-btn .layui-layer-btn0 {
   border-color: #1e9fff;
   background-color: #1e9fff;

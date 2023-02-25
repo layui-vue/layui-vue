@@ -10,16 +10,26 @@
 ::: demo
 <template>
 <lay-timeline>
+<lay-timeline-item title="1.9.x">
+    <ul> 
+      <a name="1-9-0"></a> 
+      <li> 
+        <h3>1.9.0 <span class="layui-badge-rim">2023-03-10</span></h3> 
+        <ul>      
+          <li>[新增] layer 组件 btn 属性 disabled 配置, 开启 button 禁用。</li>  
+          <li>[新增] types 目录 web-types.json, attributes.json 和 tags.json 配置。 </li>
+          <li>[新增] types 目录 components.d.ts 声明。</li>
+        </ul>  
+      </li>
+    </ul>
+</lay-timeline-item>
 <lay-timeline-item title="1.8.x">
     <ul> 
       <a name="1-8-10"></a> 
       <li> 
         <h3>1.8.10 <span class="layui-badge-rim">2023-02-19</span></h3> 
         <ul>        
-          <li>[新增] types 目录 web-types.json 文件。</li>
-          <li>[新增] types 目录 attributes.json 与 tags.json 文件。</li>
           <li>[修复] layer 与 dropdown 的层级错误, 无法在 layer 中正常显示的问题。</li>
-          <li>[修复] types 目录部分 d.ts 类型声明无效。 </li>
         </ul>  
       </li>
     </ul>
