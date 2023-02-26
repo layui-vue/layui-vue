@@ -19,6 +19,9 @@
           <li>[新增] layer 组件 btn 属性 disabled 配置, 开启 button 禁用。</li>  
           <li>[新增] types 目录 web-types.json, attributes.json 和 tags.json 配置。 </li>
           <li>[新增] types 目录 components.d.ts 声明。</li>
+          <li>[新增] layer 组件 offset 属性 tl tr bl br 值类型, 在 drawer 模式时 tl 与 lt 首字母决定方向。</li>
+          <li>[修复] layer 组件 offset 属性 t l b r 值类型, 位置不居中适应的问题。</li>
+          <li>[修复] layer 组件 offset 属性为 % 值时,实际 offset 会根据 area 发生偏移的问题。</li>
           <li>[优化] select 组件 multiple 属性开启时, 传递非 array 类型时的异常描述。</li>
         </ul>  
       </li>

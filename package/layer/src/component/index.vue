@@ -101,7 +101,7 @@ export interface LayerProps {
 const props = withDefaults(defineProps<LayerProps>(), {
   title: "标题",
   setTop: false,
-  offset: () => ["50%", "50%"],
+  offset: "auto",
   area: "auto",
   modelValue: false,
   maxmin: false,

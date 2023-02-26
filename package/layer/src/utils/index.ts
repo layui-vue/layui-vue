@@ -1,4 +1,4 @@
-import { title } from "process";
+import { off, title } from "process";
 import { layer } from "../index";
 
 // 随机数
@@ -39,7 +39,6 @@ export function calculateBaseArea(area: any) {
   if (area === "auto") {
     return [];
   }
-  // @ts-ignore
   if (typeof area == "string") {
     return [area];
   }
@@ -57,59 +56,83 @@ export function calculateDrawerArea(
   if (drawerArea === "auto") {
     drawerArea = "30%";
   }
-  if (offset === "l" || offset === "r") {
+  if (offset === "l" || offset === "r" || offset === "lt" || offset === "lb" || offset === "rt" || offset === "rb") {
     return [drawerArea, "100%"];
-  } else if (offset === "t" || offset === "b") {
+  } else if (offset === "t" || offset === "b" || offset === "tr" || offset === "tl" || offset === "br" || offset === "bl") {
     return ["100%", drawerArea];
   }
   return [drawerArea, "100%"];
 }
 
-// 计算偏移
-// @param offset
-// @param domSize
-// @return 正确位置
+/**
+ * 计算 offset 属性
+ * 
+ * @param offset 位置
+ * @param area 尺寸
+ * @param type 类型
+ * 
+ * @return { Array } 正确位置 
+ */
 export function calculateOffset(offset: any, area: any, type: any) {
-  var arr = ["t", "r", "b", "l", "lt", "lb", "rt", "rb"];
-  var t = offset[0];
-  var l = offset[1];
-  if (offset instanceof Array && type === "drawer") {
-    offset = "r";
-  }
-  // @ts-ignore
-  if (arr.indexOf(offset) > -1) {
-    t = "50%";
-    l = "50%";
-  }
-  // 预备处理
-  if (arr.indexOf(offset) != -1 || t.indexOf("%") > -1)
-    t = "calc(" + t + " - (" + (area === "auto" ? "100px" : area[1]) + "/2 ))";
-  if (arr.indexOf(offset) != -1 || l.indexOf("%") > -1)
-    l = "calc(" + l + " - (" + (area === "auto" ? "100px" : area[0]) + "/2 ))";
-  // 关键字处理
-  if (offset === "t") t = "0px";
-  else if (offset === "r") l = "calc(100% - " + area[0] + ")";
-  else if (offset === "b") t = "calc(100% - " + area[1] + ")";
-  else if (offset === "l") l = "0px";
-  else if (offset === "lt") {
-    t = "0px";
-    l = "0px";
-  } else if (offset === "lb") {
-    t = "calc(100% - " + area[1] + ")";
-    l = "0px";
-  } else if (offset === "rt") {
-    t = "0px";
-    l = "calc(100% - " + area[0] + ")";
-  } else if (offset === "rb") {
-    t = "calc(100% - " + area[1] + ")";
-    l = "calc(100% - " + area[0] + ")";
-  }
 
-  // 返回位置
-  return [t, l];
+  var arr = ["t", "r", "b", "l", "lt", "tl", "lb", "bl", "rt", "tr", "rb", "br"];
+  var tls = [];
+
+  if(typeof offset == "string") {
+
+    // convert keyword
+    if(arr.indexOf(offset) > -1) {
+      if (offset === "t") {
+        tls[0] = "0px";
+        tls[1] = "calc(50% - " + area[0] + "/2)"
+      } 
+      if (offset === "l") {
+        tls[0] = "calc(50% - " + area[1] + "/2)";
+        tls[1] = "0px"
+      }
+      if (offset === "b") {
+        tls[0] = "calc(100% - " + area[1] + ")";
+        tls[1] = "calc(50% - " + area[0] + "/2)"
+      }
+      if (offset === "r") {
+        tls[0] = "calc(50% - " + area[1] + "/2)";
+        tls[1] = "calc(100% - " +  area[0] + ")"
+      }
+      if (offset === "lt" || offset === "tl") {
+        tls[0] = "0px";
+        tls[1] = "0px";
+      }
+      if (offset === "lb" || offset === "bl") {
+        tls[0] = "calc(100% - " + area[1] + ")";
+        tls[1] = "0px";
+      }
+      if (offset === "rt" || offset === "tr") {
+        tls[0] = "0px";
+        tls[1] = "calc(100% - " + area[0] + ")";
+      }
+      if (offset === "rb" || offset === "br") {
+        tls[0] = "calc(100% - " + area[1] + ")";
+        tls[1] = "calc(100% - " + area[0] + ")";
+      }
+    } else {
+      if(offset == "auto") {
+        tls[0] = "calc(50% - " + area[1] + "/2)";
+        tls[1] = "calc(50% - " + area[0] + "/2)";
+      } else {
+        tls[0] = offset;
+        tls[1] = "calc(50% - " + area[0] + "/2)";
+      } 
+    }
+  } else {
+    tls[0] = offset[0];
+    tls[1] = offset[1];
+  }
+  return tls;
 }
 
-// 窗体类型
+/**
+ * 转换 number 类型 
+ */
 export function calculateType(modalType: number | string) {
   if (modalType === "dialog" || modalType == 0) {
     return 0;
@@ -129,9 +152,9 @@ export function calculateType(modalType: number | string) {
   return 0;
 }
 
-// 计算高度
-// @param height 高度
-// @param btn 操作集合
+/**
+ * 计算 content 高度 
+ */
 export function calculateContent(
   title: any,
   height: any,
@@ -247,23 +270,27 @@ export function updateMinArrays(id: string, state: Boolean) {
   return i;
 }
 
-// 抽屉动画类
+/**
+ * 根据 offset 返回 anim 动画 
+ */
 export function getDrawerAnimationClass(offset: any, isClose: boolean = false) {
+  const suffix = ["rl"];
   const prefix = "layer-drawer-anim layer-anim";
-  let suffix = "rl";
-  if (offset === "l") {
-    suffix = "lr";
-  } else if (offset === "r") {
-    suffix = "rl";
-  } else if (offset === "t") {
-    suffix = "tb";
-  } else if (offset === "b") {
-    suffix = "bt";
+  if (offset === "l" || offset === "lt" || offset === "lb") {
+    suffix[0] = "lr";
+  } else if (offset === "r" || offset === "rt" || offset === "rb") {
+    suffix[0] = "rl";
+  } else if (offset === "t" || offset === "tr" || offset === "tl") {
+    suffix[0] = "tb";
+  } else if (offset === "b" || offset === "br" || offset === "bl") {
+    suffix[0] = "bt";
   }
-  return isClose ? `${prefix}-${suffix}-close` : `${prefix}-${suffix}`;
+  return isClose ? `${prefix}-${suffix[0]}-close` : `${prefix}-${suffix[0]}`;
 }
 
-//计算图片大小 并缩放
+/**
+ * 计算 image 尺寸, 缩放尺寸 
+ */
 export async function calculatePhotosArea(
   url: string,
   options: object

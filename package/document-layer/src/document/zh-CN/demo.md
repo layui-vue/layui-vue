@@ -126,6 +126,9 @@ const load4 = function() {
             <button @click="openIndex">设置层级</button>
             <button @click="openClose2">关闭主题</button>
         </lay-col>
+        <lay-col :span="24">
+            <button @click="openAuto">自适应性</button>
+        </lay-col>
     </lay-row>
 </template>
 
@@ -223,8 +226,150 @@ const openClose2 = function() {
         content: "内容"
     })    
 }
+
+const openAuto = function() {
+    layer.open({
+        type: 1,
+        title: "标题",
+        isHtmlFragment: true,
+        content: "<img src='https://img2.baidu.com/it/u=3080567934,982100974&fm=253&fmt=auto&app=120&f=JPEG?w=1047&h=461' />"
+    })    
+}
 </script>
 
+:::
+
+<fieldset class="layui-elem-field layui-field-title">
+    <legend>位置</legend>
+</fieldset>
+
+::: demo 通过 layer.drawer(options) 创建抽屉层, `options`选项配置, 抽屉本质上是一个特殊的模态窗, 你可以使用`offset`选项来设置方向。
+<template>
+    <button @click="openTop1">上</button>
+    <button @click="openBottom1">下</button>
+    <button @click="openLeft1">左</button>
+    <button @click="openRight1">右</button>
+    <button @click="openLeftTop1">左上</button>
+    <button @click="openLeftBottom1">左下</button>
+    <button @click="openRightTop1">右上</button>
+    <button @click="openRightBottom1">右下</button>
+    <button @click="openTopLeft1">上左</button>
+    <button @click="openTopRight1">上右</button>
+    <button @click="openBottomLeft1">下左</button>
+    <button @click="openBottomRight1">下右</button>
+</template>
+
+<script setup>
+import { layer } from  "../../../../layer/src/index"
+
+const openTop1 = function() {
+    layer.open({
+        title: "标题",
+        content: "内容",
+        area: ["100%","300px"],
+        offset: "t"
+    })
+}
+
+const openBottom1 = function() {
+    layer.open({
+        title: "标题",
+        content: "内容",
+        area: ["100%","300px"],
+        offset: "b"
+    })
+}
+
+const openLeft1 = function() {
+    layer.open({
+        title: "标题",
+        content: "内容",
+        area: ["300px","80%"],
+        offset: "l"
+    })
+}
+
+const openRight1 = function() {
+    layer.open({
+        title: "标题",
+        content: "内容",
+        area: ["300px","80%"],
+        offset: "r"
+    })
+}
+
+const openLeftTop1 = function() {
+    layer.open({
+        title: "标题",
+        content: "内容",
+        area: ["300px","80%"],
+        offset: "lt"
+    })
+}
+
+const openLeftBottom1 = function() {
+    layer.open({
+        title: "标题",
+        content: "内容",
+        area: ["300px","80%"],
+        offset: "lb"
+    })
+}
+
+const openRightTop1 = function() {
+    layer.open({
+        title: "标题",
+        content: "内容",
+        area: ["300px","80%"],
+        offset: "rt"
+    })
+}
+
+const openRightBottom1 = function() {
+    layer.open({
+        title: "标题",
+        content: "内容",
+        area: ["300px","80%"],
+        offset: "rb"
+    })
+}
+
+const openTopLeft1 = function() {
+    layer.open({
+        title: "标题",
+        content: "内容",
+        area: ["80%","300px"],
+        offset: "tl"
+    })
+}
+
+const openTopRight1 = function() {
+    layer.open({
+        title: "标题",
+        content: "内容",
+        area: ["80%","300px"],
+        offset: "tr"
+    })
+}
+
+const openBottomLeft1 = function() {
+    layer.open({
+        title: "标题",
+        content: "内容",
+        area: ["80%","300px"],
+        offset: "bl"
+    })
+}
+
+const openBottomRight1 = function() {
+    layer.open({
+        title: "标题",
+        content: "内容",
+        area: ["80%","300px"],
+        offset: "br"
+    })
+}
+</script>
 :::
 
 <fieldset class="layui-elem-field layui-field-title">
@@ -237,6 +382,14 @@ const openClose2 = function() {
     <button @click="openBottom">下</button>
     <button @click="openLeft">左</button>
     <button @click="openRight">右</button>
+    <button @click="openLeftTop">左上</button>
+    <button @click="openLeftBottom">左下</button>
+    <button @click="openRightTop">右上</button>
+    <button @click="openRightBottom">右下</button>
+    <button @click="openTopLeft">上左</button>
+    <button @click="openTopRight">上右</button>
+    <button @click="openBottomLeft">下左</button>
+    <button @click="openBottomRight">下右</button>
 </template>
 
 <script setup>
@@ -246,6 +399,7 @@ const openTop = function() {
     layer.drawer({
         title: "标题",
         content: "内容",
+        area: ["100%","300px"],
         offset: "t"
     })
 }
@@ -254,6 +408,7 @@ const openBottom = function() {
     layer.drawer({
         title: "标题",
         content: "内容",
+        area: ["100%","300px"],
         offset: "b"
     })
 }
@@ -262,6 +417,7 @@ const openLeft = function() {
     layer.drawer({
         title: "标题",
         content: "内容",
+        area: ["300px","80%"],
         offset: "l"
     })
 }
@@ -270,7 +426,80 @@ const openRight = function() {
     layer.drawer({
         title: "标题",
         content: "内容",
+        area: ["300px","80%"],
         offset: "r"
+    })
+}
+
+const openLeftTop = function() {
+    layer.drawer({
+        title: "标题",
+        content: "内容",
+        area: ["300px","80%"],
+        offset: "lt"
+    })
+}
+
+const openLeftBottom = function() {
+    layer.drawer({
+        title: "标题",
+        content: "内容",
+        area: ["300px","80%"],
+        offset: "lb"
+    })
+}
+
+const openRightTop = function() {
+    layer.drawer({
+        title: "标题",
+        content: "内容",
+        area: ["300px","80%"],
+        offset: "rt"
+    })
+}
+
+const openRightBottom = function() {
+    layer.drawer({
+        title: "标题",
+        content: "内容",
+        area: ["300px","80%"],
+        offset: "rb"
+    })
+}
+
+const openTopLeft = function() {
+    layer.drawer({
+        title: "标题",
+        content: "内容",
+        area: ["80%","300px"],
+        offset: "tl"
+    })
+}
+
+const openTopRight = function() {
+    layer.drawer({
+        title: "标题",
+        content: "内容",
+        area: ["80%","300px"],
+        offset: "tr"
+    })
+}
+
+const openBottomLeft = function() {
+    layer.drawer({
+        title: "标题",
+        content: "内容",
+        area: ["80%","300px"],
+        offset: "bl"
+    })
+}
+
+const openBottomRight = function() {
+    layer.drawer({
+        title: "标题",
+        content: "内容",
+        area: ["80%","300px"],
+        offset: "br"
     })
 }
 </script>
@@ -308,6 +537,7 @@ const groupImg = function() {
     ]
   })
 }
+
 const groupImg2 = function() {
   layer.photos({
     imgList:[
@@ -507,4 +737,64 @@ const openComponent2 = () => {
 }
 </script>
 
+:::
+
+<fieldset class="layui-elem-field layui-field-title">
+    <legend>测试</legend>
+</fieldset>
+
+::: demo 我们提供 layer.close(id) 与 layer.closeAll() 函数实现弹出层的主动销毁。
+
+<template>
+    <button @click="changeVisible1">打开</button>
+    <button @click="changeVisible2">打开</button>
+    <button @click="changeVisible3">打开</button>
+    <button @click="changeVisible4">打开</button>
+    <button @click="changeVisible5">打开</button>
+    <lay-layer v-model="visible1" title="标题" :area="['200px','200px']" offset="r">
+        内容
+    </lay-layer>
+    <lay-layer v-model="visible2" title="标题" type="drawer" :area="['200px','200px']" offset="l">
+        内容
+    </lay-layer>
+    <lay-layer v-model="visible3" title="标题" type="drawer" area="200px" offset="rt">
+        内容
+    </lay-layer>
+    <lay-layer v-model="visible4" title="标题" type="drawer" area="200px" offset="tr">
+        内容
+    </lay-layer>
+    <lay-layer v-model="visible5" title="标题" type="drawer" offset="b">
+        内容
+    </lay-layer>
+</template>
+
+<script setup>
+import { LayLayer } from  "../../../../layer/src/index";
+
+const visible1 = ref(false);
+const visible2 = ref(false);
+const visible3 = ref(false);
+const visible4 = ref(false);
+const visible5 = ref(false);
+
+const changeVisible1 = function() {
+    visible1.value = !visible1.value;
+}
+
+const changeVisible2 = function() {
+    visible2.value = !visible2.value;
+}
+
+const changeVisible3 = function() {
+    visible3.value = !visible3.value;
+}
+
+const changeVisible4 = function() {
+    visible4.value = !visible4.value;
+}
+
+const changeVisible5 = function() {
+    visible5.value = !visible5.value;
+}
+</script>
 :::
