@@ -241,11 +241,15 @@ const localUploadTransaction = (option: localUploadTransaction) => {
     errorF(urlErrorMsg.value);
     return;
   }
-  if (Array.isArray(files) && files.length > 0) {
+  // 根据 multiple 是否启用, 采用不同的 formData 格式
+  if (props.multiple) {
     for (let i = 0; i < files.length; i++) {
       let _file = files[i];
       formData.append(props.field + "[" + i + "]", _file);
     }
+  } else {
+    let _file = files[0];
+    formData.append(props.field, _file);
   }
   if (props.data && props.data instanceof Object) {
     let _requestDate = props.data;
