@@ -127,16 +127,16 @@ onMounted(() => {
     () => {
       if (multiple.value) {
         try {
-        multipleValue.value = selectedValue.value?.map((value: any) => {
+          multipleValue.value = selectedValue.value?.map((value: any) => {
             return options.value.find((item: any) => {
               item.disabled == "" || item.disabled == true
                 ? (item.closable = false)
                 : (item.closable = true);
               return item.value === value;
             });
-        });
-        } catch(e) {
-          throw new Error("v-model / model-value is not an array type")
+          });
+        } catch (e) {
+          throw new Error("v-model / model-value is not an array type");
         }
       } else {
         searchValue.value = "";

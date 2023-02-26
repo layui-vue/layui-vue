@@ -56,9 +56,23 @@ export function calculateDrawerArea(
   if (drawerArea === "auto") {
     drawerArea = "30%";
   }
-  if (offset === "l" || offset === "r" || offset === "lt" || offset === "lb" || offset === "rt" || offset === "rb") {
+  if (
+    offset === "l" ||
+    offset === "r" ||
+    offset === "lt" ||
+    offset === "lb" ||
+    offset === "rt" ||
+    offset === "rb"
+  ) {
     return [drawerArea, "100%"];
-  } else if (offset === "t" || offset === "b" || offset === "tr" || offset === "tl" || offset === "br" || offset === "bl") {
+  } else if (
+    offset === "t" ||
+    offset === "b" ||
+    offset === "tr" ||
+    offset === "tl" ||
+    offset === "br" ||
+    offset === "bl"
+  ) {
     return ["100%", drawerArea];
   }
   return [drawerArea, "100%"];
@@ -66,37 +80,48 @@ export function calculateDrawerArea(
 
 /**
  * 计算 offset 属性
- * 
+ *
  * @param offset 位置
  * @param area 尺寸
  * @param type 类型
- * 
- * @return { Array } 正确位置 
+ *
+ * @return { Array } 正确位置
  */
 export function calculateOffset(offset: any, area: any, type: any) {
-
-  var arr = ["t", "r", "b", "l", "lt", "tl", "lb", "bl", "rt", "tr", "rb", "br"];
+  var arr = [
+    "t",
+    "r",
+    "b",
+    "l",
+    "lt",
+    "tl",
+    "lb",
+    "bl",
+    "rt",
+    "tr",
+    "rb",
+    "br",
+  ];
   var tls = [];
 
-  if(typeof offset == "string") {
-
+  if (typeof offset == "string") {
     // convert keyword
-    if(arr.indexOf(offset) > -1) {
+    if (arr.indexOf(offset) > -1) {
       if (offset === "t") {
         tls[0] = "0px";
-        tls[1] = "calc(50% - " + area[0] + "/2)"
-      } 
+        tls[1] = "calc(50% - " + area[0] + "/2)";
+      }
       if (offset === "l") {
         tls[0] = "calc(50% - " + area[1] + "/2)";
-        tls[1] = "0px"
+        tls[1] = "0px";
       }
       if (offset === "b") {
         tls[0] = "calc(100% - " + area[1] + ")";
-        tls[1] = "calc(50% - " + area[0] + "/2)"
+        tls[1] = "calc(50% - " + area[0] + "/2)";
       }
       if (offset === "r") {
         tls[0] = "calc(50% - " + area[1] + "/2)";
-        tls[1] = "calc(100% - " +  area[0] + ")"
+        tls[1] = "calc(100% - " + area[0] + ")";
       }
       if (offset === "lt" || offset === "tl") {
         tls[0] = "0px";
@@ -115,13 +140,13 @@ export function calculateOffset(offset: any, area: any, type: any) {
         tls[1] = "calc(100% - " + area[0] + ")";
       }
     } else {
-      if(offset == "auto") {
+      if (offset == "auto") {
         tls[0] = "calc(50% - " + area[1] + "/2)";
         tls[1] = "calc(50% - " + area[0] + "/2)";
       } else {
         tls[0] = offset;
         tls[1] = "calc(50% - " + area[0] + "/2)";
-      } 
+      }
     }
   } else {
     tls[0] = offset[0];
@@ -131,7 +156,7 @@ export function calculateOffset(offset: any, area: any, type: any) {
 }
 
 /**
- * 转换 number 类型 
+ * 转换 number 类型
  */
 export function calculateType(modalType: number | string) {
   if (modalType === "dialog" || modalType == 0) {
@@ -153,7 +178,7 @@ export function calculateType(modalType: number | string) {
 }
 
 /**
- * 计算 content 高度 
+ * 计算 content 高度
  */
 export function calculateContent(
   title: any,
@@ -271,7 +296,7 @@ export function updateMinArrays(id: string, state: Boolean) {
 }
 
 /**
- * 根据 offset 返回 anim 动画 
+ * 根据 offset 返回 anim 动画
  */
 export function getDrawerAnimationClass(offset: any, isClose: boolean = false) {
   const suffix = ["rl"];
@@ -289,7 +314,7 @@ export function getDrawerAnimationClass(offset: any, isClose: boolean = false) {
 }
 
 /**
- * 计算 image 尺寸, 缩放尺寸 
+ * 计算 image 尺寸, 缩放尺寸
  */
 export async function calculatePhotosArea(
   url: string,

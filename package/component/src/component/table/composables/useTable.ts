@@ -2,7 +2,6 @@ import { Recordable } from "../../../types";
 import { computed } from "vue";
 
 const useTable = (props: any) => {
-  
   const columnSlotNames = computed(() => {
     return findColumnSlotProperties(props.columns);
   });
