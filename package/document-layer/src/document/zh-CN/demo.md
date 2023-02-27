@@ -751,6 +751,7 @@ const openComponent2 = () => {
     <button @click="changeVisible3">打开</button>
     <button @click="changeVisible4">打开</button>
     <button @click="changeVisible5">打开</button>
+    <button @click="changeVisible6">打开</button>
     <lay-layer v-model="visible1" title="标题" :area="['200px','200px']" offset="r">
         内容
     </lay-layer>
@@ -766,6 +767,9 @@ const openComponent2 = () => {
     <lay-layer v-model="visible5" title="标题" type="drawer" offset="b">
         内容
     </lay-layer>
+    <lay-layer v-model="visible6" :title="title6" :area="['500px','500px']">
+        内容
+    </lay-layer>
 </template>
 
 <script setup>
@@ -776,6 +780,8 @@ const visible2 = ref(false);
 const visible3 = ref(false);
 const visible4 = ref(false);
 const visible5 = ref(false);
+const visible6 = ref(false);
+const title6 = ref(false);
 
 const changeVisible1 = function() {
     visible1.value = !visible1.value;
@@ -795,6 +801,11 @@ const changeVisible4 = function() {
 
 const changeVisible5 = function() {
     visible5.value = !visible5.value;
+}
+
+const changeVisible6 = function() {
+    visible6.value = !visible6.value;
+    title6.value = "动态标题";
 }
 </script>
 :::
