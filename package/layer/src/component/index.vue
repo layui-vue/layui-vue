@@ -206,11 +206,20 @@ const firstOpenDelayCalculation = function () {
 };
 
 /**
- * 监听标题, 进行 contentHeight 重置 
+ * 监听标题, 进行 contentHeight 重置
  */
-watch(() => props.title, () => {
-  contentHeight.value =  calculateContent(props.title, area.value[1], props.btn, type, props.isMessage);
-})
+watch(
+  () => props.title,
+  () => {
+    contentHeight.value = calculateContent(
+      props.title,
+      area.value[1],
+      props.btn,
+      type,
+      props.isMessage
+    );
+  }
+);
 
 /**
  * 普通打开
