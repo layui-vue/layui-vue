@@ -677,7 +677,6 @@ const listenDocument = function () {
             getArea(layero.value),
             props.type
           );
-          console.log(offset.value);
           resetPosition();
         }
       });

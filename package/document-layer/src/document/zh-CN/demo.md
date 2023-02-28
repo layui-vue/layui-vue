@@ -13,10 +13,10 @@
 </template>
 
 <script>
-import { layer } from  "../../../../layer/src/index"
+import { layer } from  "../../../../layer/src/index";
 
 const msg = function() {
-    layer.msg("普通消息", { time: 3000, id: "1" })
+    layer.msg("普通消息", { time: 3000, id: "1"})
 }
 
 const success = function() {
@@ -24,15 +24,15 @@ const success = function() {
 }
 
 const failure = function() {
-    layer.msg("失败消息", { time: 1000, icon: 2})
+    layer.msg("失败消息", { time: 3000, icon: 2})
 }
 
 const warm = function() {
-    layer.msg("警告消息", { time: 1000, icon: 3})
+    layer.msg("警告消息", { time: 3000, icon: 3})
 }
 
 const info = function() {
-    layer.msg("疑问消息", { time: 1000, icon: 4})
+    layer.msg("疑问消息", { time: 3000, icon: 4})
 }
 </script>
 
@@ -86,7 +86,7 @@ const openConfirm2 = function() {
 import { layer } from  "../../../../layer/src/index"
 
 const load1 = function() {
-    layer.load(0, {id:"1", time: 3000})
+    layer.load(0, {id:"1", time: 2000})
 }
 
 const load2 = function() {
@@ -585,57 +585,59 @@ import { layer } from  "../../../../layer/src/index"
 
 const baseNotifiy = function() {
     layer.notifiy({
-      title:"这是标题",
-      content:"默认就是右上，也是用得最多的"
+      title:"Notification Title",
+      content:"I will never close automatically. I will be close automatically. I will never close automatically.",
+      area: "300px"
     })
 }
 const baseNotifiyRB = function() {
     layer.notifiy({
-      title:"这是标题",
-      content:"我出现在右下",
+      title:"Notification Title",
+      content:"I will never close automatically. I will be close automatically. I will never close automatically.",
       offset:'rb',
     })
 }
 const baseNotifiyLT = function() {
     layer.notifiy({
-      title:"这是标题",
-      content:"我出现在左上",
+      title:"Notification Title",
+      content:"I will never close automatically. I will be close automatically. I will never close automatically.",
       offset:'lt',
     })
 }
 const baseNotifiyLB = function() {
     layer.notifiy({
-      title:"这是标题",
-      content:"我出现在左下",
+      title:"Notification Title",
+      content:"I will never close automatically. I will be close automatically. I will never close automatically.",
       offset:'lb',
     })
 }
 const NotifiySuccess=function(){
     layer.notifiy({
-      title:"Success",
-      content:"默认就是右上，也是用得最多的",
+      title:"Notification Title",
+      content:"I will never close automatically. I will be close automatically. I will never close automatically.",
       icon:1
     })
 }
 const NotifiyFailure=function(){
     layer.notifiy({
-      title:"Error",
-      content:"默认就是右上，也是用得最多的",
+      title:"Notification Title",
+      content:"I will never close automatically. I will be close automatically. I will never close automatically.",
       icon:2
     })
 }
 const NotifiyWarm=function(){
     layer.notifiy({
-      title:"Warming",
-      content:"默认就是右上，也是用得最多的",
+      title:"Notification Title",
+      content:"I will never close automatically. I will be close automatically. I will never close automatically.",
       icon:3
     })
 }
 const NotifiyInfo=function(){
     layer.notifiy({
-      title:"Question",
-      content:"默认就是右上，也是用得最多的",
-      icon:4
+      title:"Notification Title",
+      content:"I will never close automatically. I will be close automatically. I will never close automatically.",
+      icon:4,
+      area: "300px"
     })
 }
 </script>
@@ -752,11 +754,14 @@ const openComponent2 = () => {
     <button @click="changeVisible4">打开</button>
     <button @click="changeVisible5">打开</button>
     <button @click="changeVisible6">打开</button>
+    <br/>
+    <br/>
     <button @click="changeVisible7">打开</button>
     <button @click="changeVisible8">打开</button>
     <button @click="changeVisible9">打开</button>
     <button @click="changeVisible10">打开</button>
     <button @click="changeVisible11">打开</button>
+    <button @click="changeVisible12">打开</button>
     <lay-layer v-model="visible1" title="标题" :area="['200px','200px']" offset="r">
         内容
     </lay-layer>
@@ -853,6 +858,14 @@ const changeVisible11 = function() {
     layer.open({
         title: "标题",
         area: "500px",
+        content: h(ChildrenFour),
+    })
+}
+
+const changeVisible12 = function() {
+    layer.open({
+        title: "标题",
+        offset: "100px",
         content: h(ChildrenFour),
     })
 }
