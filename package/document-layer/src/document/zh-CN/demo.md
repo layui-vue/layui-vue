@@ -266,7 +266,7 @@ const openTop1 = function() {
     layer.open({
         title: "标题",
         content: "内容",
-        area: ["100%","300px"],
+        area: ["300px","300px"],
         offset: "t"
     })
 }
@@ -275,7 +275,7 @@ const openBottom1 = function() {
     layer.open({
         title: "标题",
         content: "内容",
-        area: ["100%","300px"],
+        area: ["300px","300px"],
         offset: "b"
     })
 }
@@ -284,7 +284,7 @@ const openLeft1 = function() {
     layer.open({
         title: "标题",
         content: "内容",
-        area: ["300px","80%"],
+        area: ["300px","300px"],
         offset: "l"
     })
 }
@@ -293,7 +293,7 @@ const openRight1 = function() {
     layer.open({
         title: "标题",
         content: "内容",
-        area: ["300px","80%"],
+        area: ["300px","300px"],
         offset: "r"
     })
 }
@@ -302,7 +302,7 @@ const openLeftTop1 = function() {
     layer.open({
         title: "标题",
         content: "内容",
-        area: ["300px","80%"],
+        area: ["300px","300px"],
         offset: "lt"
     })
 }
@@ -311,7 +311,7 @@ const openLeftBottom1 = function() {
     layer.open({
         title: "标题",
         content: "内容",
-        area: ["300px","80%"],
+        area: ["300px","300px"],
         offset: "lb"
     })
 }
@@ -320,7 +320,7 @@ const openRightTop1 = function() {
     layer.open({
         title: "标题",
         content: "内容",
-        area: ["300px","80%"],
+        area: ["300px","300px"],
         offset: "rt"
     })
 }
@@ -329,7 +329,7 @@ const openRightBottom1 = function() {
     layer.open({
         title: "标题",
         content: "内容",
-        area: ["300px","80%"],
+        area: ["300px","300px"],
         offset: "rb"
     })
 }
@@ -338,7 +338,7 @@ const openTopLeft1 = function() {
     layer.open({
         title: "标题",
         content: "内容",
-        area: ["80%","300px"],
+        area: ["300px","300px"],
         offset: "tl"
     })
 }
@@ -347,7 +347,7 @@ const openTopRight1 = function() {
     layer.open({
         title: "标题",
         content: "内容",
-        area: ["80%","300px"],
+        area: ["300px","300px"],
         offset: "tr"
     })
 }
@@ -356,7 +356,7 @@ const openBottomLeft1 = function() {
     layer.open({
         title: "标题",
         content: "内容",
-        area: ["80%","300px"],
+        area: ["300px","300px"],
         offset: "bl"
     })
 }
@@ -365,7 +365,7 @@ const openBottomRight1 = function() {
     layer.open({
         title: "标题",
         content: "内容",
-        area: ["80%","300px"],
+        area: ["300px","300px"],
         offset: "br"
     })
 }
@@ -752,6 +752,11 @@ const openComponent2 = () => {
     <button @click="changeVisible4">打开</button>
     <button @click="changeVisible5">打开</button>
     <button @click="changeVisible6">打开</button>
+    <button @click="changeVisible7">打开</button>
+    <button @click="changeVisible8">打开</button>
+    <button @click="changeVisible9">打开</button>
+    <button @click="changeVisible10">打开</button>
+    <button @click="changeVisible11">打开</button>
     <lay-layer v-model="visible1" title="标题" :area="['200px','200px']" offset="r">
         内容
     </lay-layer>
@@ -770,6 +775,12 @@ const openComponent2 = () => {
     <lay-layer v-model="visible6" :title="title6" :area="['500px','500px']">
         内容
     </lay-layer>
+    <lay-layer v-model="visible7" title="自适应">
+        <img src='https://img2.baidu.com/it/u=3080567934,982100974&fm=253&fmt=auto&app=120&f=JPEG?w=1047&h=461' />
+    </lay-layer>
+    <lay-layer v-model="visible9" title="自适应">
+        <Children3></Children3>
+    </lay-layer>
 </template>
 
 <script setup>
@@ -782,6 +793,8 @@ const visible4 = ref(false);
 const visible5 = ref(false);
 const visible6 = ref(false);
 const title6 = ref(false);
+const visible7 = ref(false);
+const visible9 = ref(false);
 
 const changeVisible1 = function() {
     visible1.value = !visible1.value;
@@ -806,6 +819,42 @@ const changeVisible5 = function() {
 const changeVisible6 = function() {
     visible6.value = !visible6.value;
     title6.value = "动态标题";
+}
+
+const changeVisible7 = function() {
+    visible7.value = !visible7.value;
+}
+
+const changeVisible8 = function() {
+    layer.drawer({
+        title: "标题",
+        content: "内容",
+        offset: "t"
+    })
+}
+
+const changeVisible9 = function() {
+    visible9.value = !visible9.value;
+}
+
+const ChildrenThree = resolveComponent('Children3')
+
+const changeVisible10 = function() {
+    layer.open({
+        title: "标题",
+        area: "400px",
+        content: h(ChildrenThree),
+    })
+}
+
+const ChildrenFour = resolveComponent('Children4')
+
+const changeVisible11 = function() {
+    layer.open({
+        title: "标题",
+        area: "500px",
+        content: h(ChildrenFour),
+    })
 }
 </script>
 :::

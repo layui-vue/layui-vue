@@ -20,6 +20,9 @@ import {
   VNodeTypes,
   nextTick,
   inject,
+  onMounted,
+  onUpdated,
+  onUnmounted,
 } from "vue";
 import {
   nextId,
@@ -42,6 +45,9 @@ import {
 } from "../utils";
 import { useMove, useResize } from "../composable/useDragable";
 import { nextIndex } from "../tokens";
+import { layer } from "src";
+import { unescapeMd } from "markdown-it/lib/common/utils";
+import { off } from "process";
 
 export interface LayerProps {
   id?: string;
@@ -138,6 +144,7 @@ const max: Ref<boolean> = ref(false);
 const min: Ref<boolean> = ref(false);
 const id: Ref<string> = ref(props.id || nextId());
 const layero = ref<HTMLElement | null>(null);
+const contentRef = ref<HTMLElement | undefined>();
 const type: number = calculateType(props.type);
 const area: Ref<string[]> = ref(
   calculateArea(props.type, props.area, props.offset)
@@ -179,7 +186,6 @@ watch(
  */
 const firstOpenDelayCalculation = function () {
   nextTick(async () => {
-    area.value = getArea(layero.value);
     if (type == 4) {
       area.value = calculateDrawerArea(props.offset, props.area);
     }
@@ -189,18 +195,17 @@ const firstOpenDelayCalculation = function () {
         props
       );
     }
-    offset.value = calculateOffset(props.offset, area.value, props.type);
-    if (type == 6) {
-      offset.value = calculateNotifOffset(props.offset, area.value, id.value);
+    // TODO 如果 area 是空数组, 开启自适应
+    var _area = area.value;
+    if (_area[0] == undefined || _area[1] == undefined) {
+      _area = getArea(layero.value);
     }
-    w.value = area.value[0];
-    h.value = area.value[1];
-    _w.value = area.value[0];
-    _l.value = area.value[1];
-    t.value = offset.value[0];
-    l.value = offset.value[1];
-    _t.value = offset.value[0];
-    _l.value = offset.value[1];
+    offset.value = calculateOffset(props.offset, _area, props.type);
+    if (type == 6) {
+      offset.value = calculateNotifOffset(props.offset, _area, id.value);
+    }
+    resetPosition();
+    resetArea();
     supportMove();
   });
 };
@@ -309,14 +314,8 @@ const reset = function () {
   if (!first.value) {
     min.value = false;
     max.value = false;
-    w.value = area.value[0];
-    h.value = area.value[1];
-    t.value = offset.value[0];
-    l.value = offset.value[1];
-    _w.value = area.value[0];
-    _h.value = area.value[1];
-    _t.value = offset.value[0];
-    _l.value = offset.value[1];
+    resetPosition();
+    resetArea();
   }
   if (!props.modelValue) {
     emit("update:modelValue", true);
@@ -324,9 +323,7 @@ const reset = function () {
 };
 
 /**
- * 监听 modalValue 的值
- * <p>
- * 只有 Component 模式会触发
+ * 监听 modalValue 的值 (template 专属)
  */
 watch(
   () => props.modelValue,
@@ -427,17 +424,20 @@ const boxClasses = computed(() => {
 const supportMove = function () {
   if (props.move && type != 4) {
     nextTick(() => {
-      // 拖拽
-      if (!layero.value) return;
-      useMove(layero.value, (left: string, top: string) => {
-        l.value = left;
-        t.value = top;
-      });
-      // 拉伸
-      useResize(layero.value, (width: string, height: string) => {
-        h.value = height;
-        w.value = width;
-      });
+      if (layero.value) {
+        // 拖拽, 在首次拖拽前, 移除 resizeObserver 监听
+        useMove(layero.value, (left: string, top: string) => {
+          removeListener();
+          l.value = left;
+          t.value = top;
+        });
+        // 拉伸, 在首次拉伸前, 移除 resizeObserver 监听
+        useResize(layero.value, (width: string, height: string) => {
+          removeListener();
+          h.value = height;
+          w.value = width;
+        });
+      }
     });
   }
 };
@@ -632,6 +632,84 @@ const setTop = function () {
   index.value = nextIndex();
 };
 
+/**
+ * 当 content 高度发生变化时, 重新计算 offset 偏移量
+ *
+ * TODO 该监听只作用于指定的弹出层类型, 其他不可控制
+ *
+ * 只考虑 1 和 4 做自适应处理
+ *
+ * 备注: 该监听应在首次拖拽后清除
+ *
+ * 这里不采用 onMounted 的原因是因为 visible 为 true 时, 并不会触发该事件。
+ */
+onMounted(() => {
+  listenDocument();
+});
+
+onUnmounted(() => {
+  removeListener();
+})
+
+watch(() => props.modelValue, () => {
+  if(props.modelValue) {
+    listenDocument();
+  } else {
+    removeListener();
+  }
+})
+
+var resizeObserver: ResizeObserver | undefined;
+
+const listenDocument = function() {
+  nextTick(() => {
+    if(contentRef.value && resizeObserver === undefined && (props.area == "auto" || (typeof props.area == "string" && props.area != "auto")) && type != 6) {
+      resizeObserver = new ResizeObserver((e) => {
+        if(layero.value) {
+          offset.value = calculateOffset(
+            props.offset,
+            getArea(layero.value),
+            props.type
+          );
+          console.log(offset.value);
+          resetPosition();
+        }
+      })
+      resizeObserver.observe(contentRef.value);
+    }
+  })
+}
+
+/**
+ * Remove 删除 document 元素 
+ */
+const removeListener = function() {
+  if(resizeObserver != undefined && contentRef.value) {
+    resizeObserver.unobserve(contentRef.value); 
+    resizeObserver = undefined;
+  }
+}
+
+/**
+ * 根据 offset 重新定位 Dom 位置 
+ */
+const resetPosition = function() {
+  t.value = offset.value[0];
+  l.value = offset.value[1];
+  _t.value = offset.value[0];
+  _l.value = offset.value[1];
+}
+
+/**
+ * 根据 area 重新设置 Dom 尺寸 
+ */
+const resetArea = function() {
+  w.value = area.value[0];
+  h.value = area.value[1];
+  _w.value = area.value[0];
+  _l.value = area.value[1];
+}
+
 defineExpose({ reset, open, close });
 </script>
 
@@ -661,6 +739,7 @@ defineExpose({ reset, open, close });
         <Title v-if="showTitle" :title="title" @mousedown="setTop"></Title>
         <!-- 内容 -->
         <div
+          ref="contentRef"
           class="layui-layer-content"
           :style="{ height: contentHeight }"
           :class="contentClasses"
