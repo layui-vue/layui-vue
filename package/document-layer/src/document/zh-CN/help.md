@@ -10,9 +10,9 @@
 | title | 标题 | string boolean | `信息` | -- |
 | content | 内容 | string vnode | -- | -- |
 | v-model | 显示 | boolean | `false`  | `true` `false` |
-| offset | 位置 | string array | `['50%','50%']` | -- |
+| offset | 位置 | string array | `auto` | -- |
 | area | 尺寸 | string array | `auto`  | -- |
-| move | 拖拽 | boolean | `true` | `true` `false` |anim
+| move | 拖拽 | boolean | `true` | `true` `false` | 
 | maxmin | 缩放 | boolean | `false` | `true` `false` |
 | resize | 拉伸 | boolean | `false` | `true` `false` |
 | anim | 入场动画 | number | `0` | `0` - `6` |
