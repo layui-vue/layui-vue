@@ -45,9 +45,6 @@ import {
 } from "../utils";
 import { useMove, useResize } from "../composable/useDragable";
 import { nextIndex } from "../tokens";
-import { layer } from "src";
-import { unescapeMd } from "markdown-it/lib/common/utils";
-import { off } from "process";
 
 export interface LayerProps {
   id?: string;
