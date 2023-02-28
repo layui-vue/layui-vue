@@ -649,23 +649,32 @@ onMounted(() => {
 
 onUnmounted(() => {
   removeListener();
-})
+});
 
-watch(() => props.modelValue, () => {
-  if(props.modelValue) {
-    listenDocument();
-  } else {
-    removeListener();
+watch(
+  () => props.modelValue,
+  () => {
+    if (props.modelValue) {
+      listenDocument();
+    } else {
+      removeListener();
+    }
   }
-})
+);
 
 var resizeObserver: ResizeObserver | undefined;
 
-const listenDocument = function() {
+const listenDocument = function () {
   nextTick(() => {
-    if(contentRef.value && resizeObserver === undefined && (props.area == "auto" || (typeof props.area == "string" && props.area != "auto")) && type != 6) {
+    if (
+      contentRef.value &&
+      resizeObserver === undefined &&
+      (props.area == "auto" ||
+        (typeof props.area == "string" && props.area != "auto")) &&
+      type != 6
+    ) {
       resizeObserver = new ResizeObserver((e) => {
-        if(layero.value) {
+        if (layero.value) {
           offset.value = calculateOffset(
             props.offset,
             getArea(layero.value),
@@ -674,41 +683,41 @@ const listenDocument = function() {
           console.log(offset.value);
           resetPosition();
         }
-      })
+      });
       resizeObserver.observe(contentRef.value);
     }
-  })
-}
+  });
+};
 
 /**
- * Remove 删除 document 元素 
+ * Remove 删除 document 元素
  */
-const removeListener = function() {
-  if(resizeObserver != undefined && contentRef.value) {
-    resizeObserver.unobserve(contentRef.value); 
+const removeListener = function () {
+  if (resizeObserver != undefined && contentRef.value) {
+    resizeObserver.unobserve(contentRef.value);
     resizeObserver = undefined;
   }
-}
+};
 
 /**
- * 根据 offset 重新定位 Dom 位置 
+ * 根据 offset 重新定位 Dom 位置
  */
-const resetPosition = function() {
+const resetPosition = function () {
   t.value = offset.value[0];
   l.value = offset.value[1];
   _t.value = offset.value[0];
   _l.value = offset.value[1];
-}
+};
 
 /**
- * 根据 area 重新设置 Dom 尺寸 
+ * 根据 area 重新设置 Dom 尺寸
  */
-const resetArea = function() {
+const resetArea = function () {
   w.value = area.value[0];
   h.value = area.value[1];
   _w.value = area.value[0];
   _l.value = area.value[1];
-}
+};
 
 defineExpose({ reset, open, close });
 </script>

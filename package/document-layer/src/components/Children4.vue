@@ -10,7 +10,7 @@ import { ref } from "vue";
 
 const list = ref(10);
 
-const load = function() {
+const load = function () {
   list.value = 30;
-}
+};
 </script>

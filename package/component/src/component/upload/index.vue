@@ -43,7 +43,7 @@ export interface LayerModal {
   zIndex?: number;
   type?: "component" | "iframe";
   closeBtn?: boolean;
-  area: string[];
+  area?: string[];
   btn?: LayerButton[];
   btnAlign?: "l" | "r" | "c";
   anim?: boolean;
@@ -149,7 +149,6 @@ let defaultCutLayerOption = computed<LayerModal>(() => {
     title: title.value,
     shade: true,
     shadeClose: true,
-    area: ["640px", "640px"],
     btn: [
       { text: confirmBtn.value, callback: getCutDownResult },
       { text: cancelBtn.value, callback: closeCutDownModal },

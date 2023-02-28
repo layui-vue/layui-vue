@@ -25,6 +25,7 @@
           <li>[修复] layer 组件 offset 属性为 % 值时,实际 offset 会根据 area 发生偏移的问题。<a style="color:red">破坏性</a></li>
           <li>[优化] upload 组件 multiple 为 false 时, fromData 的 file 属性不再采用数组的方式。<a style="color:red">破坏性</a></li>
           <li>[优化] select 组件 multiple 属性开启时, 传递非 array 类型时的异常描述。</li>
+          <li>[优化] upload 组件 cut 启用时, 裁剪框由固定 640px 的尺寸, 调整为根据图片尺寸自适应。</li>
         </ul>  
       </li>
     </ul>
