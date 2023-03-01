@@ -886,6 +886,8 @@ const changeVisible14 = function() {
     layer.open({
         title: "标题",
         area: ["300px"],
+        zIndex: 1000,
+        shade: false,
         content: h(ChildrenFour),
     })
 }

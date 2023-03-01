@@ -22,6 +22,7 @@
           <li>[新增] layer 组件 offset 属性 tl tr bl br 值类型, 在 drawer 模式时 tl 与 lt 首字母决定方向。</li>
           <li>[修复] layer 组件 offset 属性 t l b r 值类型, 位置不居中适应的问题。</li>
           <li>[修复] layer 组件 title 属性作为响应值时, 内容高度不随之动态计算, 导致内容高度超出弹出层。</li>
+          <li>[优化] layer 组件 z-index 属性在不为空时, 点击窗体标题时置顶覆盖 z-index 的问题。 </li>
           <li>[修复] layer 组件 offset 属性为 % 值时,实际 offset 会根据 area 发生偏移的问题。<a style="color:red">破坏性</a></li>
           <li>[优化] upload 组件 multiple 为 false 时, fromData 的 file 属性不再采用数组的方式。<a style="color:red">破坏性</a></li>
           <li>[优化] select 组件 multiple 属性开启时, 传递非 array 类型时的异常描述。</li>
