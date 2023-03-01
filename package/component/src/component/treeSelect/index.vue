@@ -26,6 +26,7 @@ export interface TreeSelectProps {
   minCollapsedNum?: number;
   size?: TreeSelectSize;
   checkStrictly?: boolean;
+  search?: boolean;
 }
 
 export interface TreeSelectEmits {
@@ -42,12 +43,16 @@ const props = withDefaults(defineProps<TreeSelectProps>(), {
   collapseTagsTooltip: true,
   minCollapsedNum: 3,
   size: "md",
+  search: false
 });
 
+const treeData = ref();
+const searchValue = ref();
 const singleValue = ref();
 const multipleValue = ref([]);
 const openState = ref(false);
 const dropdownRef = ref();
+const composing = ref(false);
 const emits = defineEmits<TreeSelectEmits>();
 
 const selectedValue = computed({
@@ -177,6 +182,36 @@ const hasContent = computed(() => {
 const _placeholder = computed(() => {
   return hasContent.value ? "" : props.placeholder;
 });
+
+const handleSearch = (value: string) => {
+  if (composing.value) return;
+  emits("search", value);
+  searchValue.value = value;
+};
+
+const onCompositionstart = () => {
+  composing.value = true;
+};
+
+const onCompositionend = (eventParam: Event) => {
+  composing.value = false;
+  handleSearch((eventParam.target as HTMLInputElement).value);
+};
+
+// 监听 searchValue 刷新 tree 数据
+watch(searchValue, () => {
+  if(searchValue.value === "") {
+    treeData.value = props.data;
+  } else {
+    // TODO 过滤 tree 数据
+    treeData.value = [];
+  }
+})
+
+watch(() => props.data, () => {
+  treeData.value = props.data;
+}, {immediate: true, deep: true})
+ 
 </script>
 
 <template>
@@ -201,7 +236,8 @@ const _placeholder = computed(() => {
         :placeholder="_placeholder"
         :collapseTagsTooltip="collapseTagsTooltip"
         :minCollapsedNum="minCollapsedNum"
-        :disabledInput="true"
+        :disabledInput="!search"
+        @input-value-change="handleSearch"
         @remove="handleRemove"
         @clear="onClear"
         v-model="multipleValue"
@@ -220,9 +256,12 @@ const _placeholder = computed(() => {
         :allow-clear="allowClear"
         :placeholder="_placeholder"
         :disabled="disabled"
-        :readonly="true"
+        :readonly="!search"
         :size="size"
         @clear="onClear"
+        @Input="handleSearch"
+        @compositionstart="onCompositionstart"
+        @compositionend="onCompositionend"
       >
         <template #suffix>
           <lay-icon
@@ -234,7 +273,7 @@ const _placeholder = computed(() => {
       <template #content>
         <div class="layui-tree-select-content">
           <lay-tree
-            :data="data"
+            :data="treeData"
             :onlyIconControl="true"
             :show-checkbox="multiple"
             :check-strictly="checkStrictly"
