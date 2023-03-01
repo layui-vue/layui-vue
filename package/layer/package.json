@@ -1,6 +1,6 @@
 {
   "name": "@layui/layer-vue",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "description": "a component library for Vue 3 base on layui-vue",
   "homepage": "http://www.layui-vue.com",
   "module": "lib/layer-vue.es.js",
