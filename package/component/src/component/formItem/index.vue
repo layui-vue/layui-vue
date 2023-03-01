@@ -75,9 +75,30 @@ const ruleItems = computed(() => {
   return rulesArrs;
 });
 
-const filedValue = computed(() =>
-  props.prop ? layForm.model[props.prop] : undefined
+/**
+ * 根据 prop 配置获取 model 字段值
+ */
+const filedValue = computed(() =>{    
+    if(props.prop) {
+      if(props.prop.indexOf(".")) {
+        return deepGet(layForm.model, props.prop);
+      } else {
+        return layForm.model[props.prop];
+      }
+    } else {
+      return undefined;
+    }
+  }
 );
+
+const deepGet = function(obj: any, keys: string[] | string) {
+  return (
+    (!Array.isArray(keys)
+      ? keys.replace(/\[/g, '.').replace(/\]/g, '').split('.')
+       : keys
+    ).reduce((o: any, k: string) => (o || {})[k], obj) || undefined
+  );
+}
 
 watch(
   () => filedValue.value,
