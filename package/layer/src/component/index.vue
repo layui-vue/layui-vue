@@ -626,7 +626,7 @@ const resetCalculationPohtosArea = function (index: number) {
  * 备注: 其实在 nextIndex 之前应判定当前弹出层是否时最上层, 如果为否不做任何改变, 该问题暂时不会造成任何影响不做处理。
  */
 const setTop = function () {
-  if(!props.zIndex) {
+  if (!props.zIndex) {
     index.value = nextIndex();
   }
 };
