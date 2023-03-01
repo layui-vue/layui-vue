@@ -107,6 +107,10 @@ export function calculateOffset(offset: any, area: any, type: any) {
   ];
   var tls = [];
 
+  if (offset === "auto" && type == 4) {
+    offset = "r";
+  }
+
   if (typeof offset == "string") {
     // convert keyword
     if (arr.indexOf(offset) > -1) {

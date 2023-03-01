@@ -766,6 +766,7 @@ const openComponent2 = () => {
     <br/>
     <button @click="changeVisible13">打开</button>
     <button @click="changeVisible14">打开</button>
+    <button @click="changeVisible15">打开</button>
     <lay-layer v-model="visible1" title="标题" :area="['200px','200px']" offset="r">
         内容
     </lay-layer>
@@ -889,6 +890,13 @@ const changeVisible14 = function() {
         zIndex: 1000,
         shade: false,
         content: h(ChildrenFour),
+    })
+}
+
+const changeVisible15 = function() {
+    layer.drawer({
+        title: "标题",
+        content: "内容",
     })
 }
 </script>

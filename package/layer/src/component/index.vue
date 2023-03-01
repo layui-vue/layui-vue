@@ -147,7 +147,7 @@ const area: Ref<string[]> = ref(
   calculateArea(props.type, props.area, props.offset)
 );
 const offset: Ref<string[]> = ref(
-  calculateOffset(props.offset, area.value, props.type)
+  calculateOffset(props.offset, area.value, type)
 );
 const contentHeight = ref(
   calculateContent(props.title, area.value[1], props.btn, type, props.isMessage)
@@ -197,7 +197,7 @@ const firstOpenDelayCalculation = function () {
     if (_area[0] == undefined || _area[1] == undefined) {
       _area = getArea(layero.value);
     }
-    offset.value = calculateOffset(props.offset, _area, props.type);
+    offset.value = calculateOffset(props.offset, _area, type);
     if (type == 6) {
       offset.value = calculateNotifOffset(props.offset, _area, id.value);
     }
@@ -606,7 +606,7 @@ const showTitle = computed(() => {
 const resetCalculationPohtosArea = function (index: number) {
   nextTick(async () => {
     area.value = await calculatePhotosArea(props.imgList[index].src, props);
-    offset.value = calculateOffset(props.offset, area.value, props.type);
+    offset.value = calculateOffset(props.offset, area.value, type);
     w.value = area.value[0];
     h.value = area.value[1];
     t.value = offset.value[0];
@@ -681,7 +681,7 @@ const listenDocument = function () {
           offset.value = calculateOffset(
             props.offset,
             getArea(layero.value),
-            props.type
+            type
           );
           resetPosition();
         }
