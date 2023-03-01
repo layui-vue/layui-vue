@@ -19,9 +19,7 @@ import {
   useSlots,
   VNodeTypes,
   nextTick,
-  inject,
   onMounted,
-  onUpdated,
   onUnmounted,
 } from "vue";
 import {

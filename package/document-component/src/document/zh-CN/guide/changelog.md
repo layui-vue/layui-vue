@@ -16,19 +16,25 @@
       <li> 
         <h3>1.9.0 <span class="layui-badge-rim">2023-03-10</span></h3> 
         <ul>      
-          <li>[新增] layer 组件 btn 属性 disabled 配置, 开启 button 禁用。</li>  
-          <li>[新增] types 目录 web-types.json, attributes.json 和 tags.json 配置。 </li>
-          <li>[新增] types 目录 components.d.ts 声明。</li>
-          <li>[新增] layer 组件 offset 属性 tl tr bl br 值类型, 在 drawer 模式时 tl 与 lt 首字母决定方向。</li>
-          <li>[修复] layer 组件 offset 属性 t l b r 值类型, 位置不居中适应的问题。</li>
-          <li>[修复] layer 组件 title 属性作为响应值时, 内容高度不随之动态计算, 导致内容高度超出弹出层。</li>
-          <li>[优化] layer 组件 z-index 属性在不为空时, 点击窗体标题时置顶覆盖 z-index 的问题。 </li>
-          <li>[修复] layer 组件 offset 属性为 % 值时,实际 offset 会根据 area 发生偏移的问题。<a style="color:red">破坏性</a></li>
-          <li>[优化] upload 组件 multiple 为 false 时, fromData 的 file 属性不再采用数组的方式。<a style="color:red">破坏性</a></li>
-          <li>[优化] select 组件 multiple 属性开启时, 传递非 array 类型时的异常描述。</li>
-          <li>[优化] upload 组件 cut 启用时, 裁剪框由固定 640px 的尺寸, 调整为根据图片尺寸自适应。</li>
-          <li>[优化] layer 组件消息通知弹层样式, 关闭操作位置, 标题与内容间距, 以及边框阴影与颜色。</li>
-          <li>[优化] layer 组件 area 属性兼容自适应语法 "300px" || ["300px", "auto"] || ["300px"]。</li>
+          <li>[新增] types 目录 components.d.ts 声明文件, web-types.json, attributes.json 和 tags.json 配置文件。</li>
+          <li>[优化] upload 组件 cutOptions.layerOption.area 属性, 默认值由 ["640px","640px"] 修改为 "auto"。</li>
+          <li>[优化] upload 组件 multiple 为 false 时, 上传时 file[0] 字段修改为 file 字段。<a style="color:red">破坏性</a></li>
+          <li>[优化] select 组件 multiple 属性为 true 时, 传递非 array 类型数据时的异常信息。</li>
+          <li>[升级] layer-vue 到 1.5.3 版本。</li>
+          <li>
+              <h4 style="margin-bottom: 0px !important;font-weight: 500 !important;">layer</h4>
+              <ul>
+                  <li>[新增] layer 组件 btn 数组内对象的 disabled 属性, 用于设置 button 的禁用状态。 </li>
+                  <li>[新增] layer 组件 offset 属性 `tl` `tr` `bl` `br` 可选值, 在 drawer 模式时, 首个字母决定动画方向。</li>
+                  <li>[修复] layer 组件 offset 属性为 `t` `l` `b` `r`, 并且宽高不是 100% 时, 位置不居中的问题。</li>
+                  <li>[修复] layer 组件 title 属性作为 ref 响应值时, 内容高度不随之动态计算, 而导致内容超出窗体本身尺寸。</li>
+                  <li>[修复] layer 组件 type 属性为 4 或 `drawer` 并且 offset 属性缺省的情况下弹窗居中显示的问题。</li>
+                  <li>[修复] layer 组件 z-index 属性不为空时, 在操作弹窗时会被置顶逻辑覆盖的问题, 优化为 z-index 存在值时, 禁用置顶。</li>
+                  <li>[修复] layer 组件 offset 属性的单位为 % 时, 实际位置会减去弹窗宽高/2长度的问题。</li>
+                  <li>[优化] layer 组件 type 属性为 notifiy 或 4 类型的样式, 关闭按钮的位置, 标题与内容间距, 边框颜色与阴影等。</li>
+                  <li>[优化] layer 组件 area 属性高度自适应, 并兼容一下三种高度自适应写法 area: "300px" || ["300px", "auto"] || ["300px"]。</li>
+              </ul>
+          </li>
         </ul>  
       </li>
     </ul>
