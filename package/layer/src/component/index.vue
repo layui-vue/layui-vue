@@ -667,7 +667,11 @@ const listenDocument = function () {
       contentRef.value &&
       resizeObserver === undefined &&
       (props.area == "auto" ||
-        (typeof props.area == "string" && props.area != "auto") || (Array.isArray(props.area) && props.area[1] && props.area[1] == "auto")  || (Array.isArray(props.area) && props.area[1] == undefined)) &&
+        (typeof props.area == "string" && props.area != "auto") ||
+        (Array.isArray(props.area) &&
+          props.area[1] &&
+          props.area[1] == "auto") ||
+        (Array.isArray(props.area) && props.area[1] == undefined)) &&
       type != 6
     ) {
       resizeObserver = new ResizeObserver((e) => {
