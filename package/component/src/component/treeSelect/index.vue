@@ -43,7 +43,7 @@ const props = withDefaults(defineProps<TreeSelectProps>(), {
   collapseTagsTooltip: true,
   minCollapsedNum: 3,
   size: "md",
-  search: false
+  search: false,
 });
 
 const treeData = ref();
@@ -200,18 +200,21 @@ const onCompositionend = (eventParam: Event) => {
 
 // 监听 searchValue 刷新 tree 数据
 watch(searchValue, () => {
-  if(searchValue.value === "") {
+  if (searchValue.value === "") {
     treeData.value = props.data;
   } else {
     // TODO 过滤 tree 数据
     treeData.value = [];
   }
-})
+});
 
-watch(() => props.data, () => {
-  treeData.value = props.data;
-}, {immediate: true, deep: true})
- 
+watch(
+  () => props.data,
+  () => {
+    treeData.value = props.data;
+  },
+  { immediate: true, deep: true }
+);
 </script>
 
 <template>
