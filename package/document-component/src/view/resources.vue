@@ -4,7 +4,8 @@
       class="layui-quote layui-text"
       style="margin: 30px 0; letter-spacing: 1px"
     >
-      以创造性的行为实践于人世。若能以写作为工具，为道途，先帮助自己一程，再以领悟帮助他人一程。这是一种服务 - 庆山
+      以创造性的行为实践于人世。若能以写作为工具，为道途，先帮助自己一程，再以领悟帮助他人一程。这是一种服务
+      - 庆山
     </blockquote>
     <fieldset class="layui-field layui-field-title">
       <legend style="margin-bottom: 20px; text-align: center">独立组件</legend>
@@ -19,7 +20,9 @@
           </li>
           <li class="layui-col-sm12">
             <div class="alone">
-              <router-link to="/zh-CN/components/icon">icons - vue<cite>图标组件化解决方案</cite></router-link>
+              <router-link to="/zh-CN/components/icon"
+                >icons - vue<cite>图标组件化解决方案</cite></router-link
+              >
             </div>
           </li>
         </ul>

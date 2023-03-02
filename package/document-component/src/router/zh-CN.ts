@@ -1,9 +1,8 @@
+import BaseLayout from "../layouts/Layout.vue";
 import Guide from "../view/guide.vue";
 import Index from "../view/index.vue";
-import Resource from "../view/resource.vue";
-import Material from "../view/material.vue";
-import BaseLayout from "../layouts/Layout.vue";
-import Component from "../view/component.vue";
+import Resources from "../view/resources.vue";
+import Components from "../view/components.vue";
 
 const zhCN = [
   {
@@ -19,7 +18,7 @@ const zhCN = [
       },
       {
         path: "/zh-CN/resources",
-        component: Resource,
+        component: Resources,
         meta: { title: "生态" },
       },
       {
@@ -78,7 +77,7 @@ const zhCN = [
       {
         path: "/zh-CN/components",
         redirect: "/zh-CN/components/color",
-        component: Component,
+        component: Components,
         meta: { title: "组件" },
         children: [
           {
