@@ -11,7 +11,6 @@ import { useTree } from "./useTree";
 import { TreeData } from "./tree";
 import { StringFn, StringOrNumber, KeysType, EditType } from "./tree.type";
 import "./index.less";
-import { tSStringKeyword } from "@babel/types";
 
 export interface OriginalTreeData {
   title: StringFn | string;

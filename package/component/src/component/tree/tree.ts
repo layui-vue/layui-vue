@@ -1,7 +1,5 @@
 import { OriginalTreeData, StringOrNumber } from "./tree.type";
 import { Nullable } from "../../types";
-import { Ref, ref } from "vue";
-import { check } from "prettier";
 
 type CustomKey = string | number;
 type CustomString = (() => string) | string;
@@ -34,6 +32,7 @@ interface TreeConfig {
 }
 
 class Tree {
+  
   protected config: TreeConfig;
   protected treeData: TreeData[];
 
