@@ -1,16 +1,16 @@
 ::: anchor
 :::
 
-::: title 基本介绍
+::: title Icon 图标
 :::
 
-::: describe 语义化的矢量图形。
+::: describe 图标全部采用字体形式，取材于阿里巴巴矢量图标库（iconfont）。
 :::
 
 ::: title 基础使用
 :::
 
-::: demo 使用 `lay-icon` 标签创建一个图标。
+::: demo 使用 `lay-icon` 标签创建一个字体图标。
 
 <template>
   <lay-icon type="layui-icon-face-smile"></lay-icon> &nbsp;
@@ -38,14 +38,14 @@ export default {
 ::: title 组件图标
 :::
 
-::: describe 使用图标组件，你需要安装 <code>@layui/icons-vue</code> 图标组件包。
+::: describe 使用 <code>AlignCenterIcon</code> <code>DiamondIcon</code> 等图标组件，需要安装 <code>@layui/icons-vue</code> 组件包。
 :::
 
 ```
 npm install @layui/icons-vue
 ```
 
-::: describe 然后，你可以像之前使用组件一样去创建图标。
+::: describe 通过 <code>@layui/icons-vue</code> 引用 Icon 组件， 图标组件名为图标名加 Icon 作为后辍，例如：<code>layui-icon-heart</code> = <code>HeartIcon</code>。
 :::
 
 ```vue
@@ -59,7 +59,7 @@ import { AlignCenterIcon, DiamondIcon } from '@layui/icons-vue';
 </script>
 ```
 
-::: title 图标列表
+::: title 图标列表（174个）
 :::
 
 ::: demo
@@ -132,7 +132,7 @@ import { AlignCenterIcon, DiamondIcon } from '@layui/icons-vue';
 
 <style>
 .site-doc-icon {
-  margin-bottom: 50px;
+  margin-bottom: 10px;
   font-size: 0;
 }
 .site-doc-icon li .doc-icon-name,
@@ -212,17 +212,17 @@ import { AlignCenterIcon, DiamondIcon } from '@layui/icons-vue';
 </style>
 :::
 
-::: title 图标属性
+::: title Icon 属性
 :::
 
 ::: table
 
-| 属性   | 描述 | 默认值            |
-| ------ | ---- | ----------------- |
-| type   | 图标 | `layui-icon-home` |
-| prefix | 前缀 | `layui-icon`      |
-| color  | 颜色 | --                |
-| size   | 尺寸 | --                |
+| 名称   | 描述 | 类型      | 默认值       | 可选值   |
+| ------ | ---- | -------- | ------------ | ------  |
+| type   | 图标 | `string` | -            | -       |
+| prefix | 前缀 | `string` | `layui-icon` | -       |
+| size   | 尺寸 | `string` | -            | -       |
+| color  | 颜色 | `string` | -            | -       |
 
 :::
 

@@ -1,8 +1,8 @@
 import BaseLayout from "../layouts/Layout.vue";
+import Components from "../view/components.vue";
+import Resources from "../view/resources.vue";
 import Guide from "../view/guide.vue";
 import Index from "../view/index.vue";
-import Resources from "../view/resources.vue";
-import Components from "../view/components.vue";
 
 const zhCN = [
   {
