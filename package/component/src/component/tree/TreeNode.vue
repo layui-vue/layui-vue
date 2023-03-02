@@ -99,7 +99,9 @@ function handleRowClick(node: TreeData) {
   }
 }
 
-//判断是否半选
+/**
+ * is-all-selected
+ */
 const isChildAllSelected = computed(() => {
   function _isChildAllSelected(node: TreeData): boolean {
     if (!props.showCheckbox) {

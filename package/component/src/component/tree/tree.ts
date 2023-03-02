@@ -32,7 +32,6 @@ interface TreeConfig {
 }
 
 class Tree {
-  
   protected config: TreeConfig;
   protected treeData: TreeData[];
 
