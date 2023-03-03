@@ -1,7 +1,7 @@
 ::: anchor
 :::
 
-::: title 基本介绍
+::: title Transition 过渡
 :::
 
 ::: describe 过渡效果的使用将大幅提升用户的使用体验。
@@ -64,23 +64,12 @@ const changeVisible1 = () => {
 
 ::: table
 
-| 属性         | 描述               | 类型                     |默认值    | 可选值   |
-| ------------ | ---------------- | ------------- | ---- | ----   |
-| enable       | 启用               | `boolean`   | `true` | `true` `false`   |
-| type         | 类型               | `string`   |  `collapse` | --   |
-| time         | 过渡时间            | `string`|`boolean`|  `0.3` | --   |
+| 名称   | 描述           | 类型      | 默认值     | 可选值             |
+| ------ | --------------| --------- | ---------- | ------------------ |
+| enable | 启用          | `boolean` | `true`     | `true` `false`     |
+| type   | 类型          | `string`  | `collapse` | `collapse` `fade` |
+| time   | 时长          | -         | -          | -                  |
 
-:::
-
-::: title Transition 属性值
-:::
-
-::: table
-
-| 属性值         | 描述               | 
-| ------------ | ---------------- | 
-| collapse       | 折叠动画               |
-| fade           | 淡入淡出               |
 :::
 
 ::: contributor transition
