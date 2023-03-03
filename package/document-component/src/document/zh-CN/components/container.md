@@ -1,7 +1,7 @@
 ::: anchor
 :::
 
-::: title 基本介绍
+::: title Container 容器
 :::
 
 ::: describe 页面容器, 用于控制内容的边距。
@@ -74,14 +74,14 @@ export default {
 
 :::
 
-::: title 容器属性
+::: title Container 属性
 :::
 
 ::: table
 
-| 属性  | 描述   | 类型         | 默认值   | 可选值         |
-| ----- | ------ | -------------- |------ | -------------- |
-| fluid | 流模式 | `boolean` `string` | `flase` | `true` `false` |
+| 名称  | 描述    | 类型           | 默认值   | 可选值         |
+| ----- | ------ | -------------- |-------- | -------------- |
+| fluid | 流模式  | `boolean` `string` | `flase` | `true` `false` |
 
 :::
 

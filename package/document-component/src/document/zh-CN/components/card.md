@@ -1,7 +1,7 @@
 ::: anchor
 :::
 
-::: title 基本介绍
+::: title Card 卡片
 :::
 
 ::: describe 最基础的卡片容器，可承载文字、列表、图片、段落，常用于后台概览页面。
@@ -204,7 +204,7 @@ export default {
 
 ::: table
 
-| 属性  | 描述 | 类型 | 可选值 | 可选值 |
+| 名称  | 描述 | 类型 | 默认值 | 可选值 |
 | ----- | ---- | ------ | ----- | ----- |
 | title | 标题 | `string` | -- | -- |
 | shadow | 阴影 | `string` | `always` | `always` `hover` `never` |
@@ -216,13 +216,13 @@ export default {
 
 ::: table
 
-| 插槽    | 描述      | 可选值 | 版本 |
-| ------- | -------- | ------ |------ |
-| default | 默认插槽  | --     |--     |
-| header  | 头部插槽  | --     |--     |
-| body    | 内容插槽  | --     |--     |
-| extra   | 扩展插槽  | --     |--     |
-| footer   | 扩展插槽 | --     |`1.4.3`|
+| 名称    | 描述      |  
+| ------- | -------- | 
+| default | 默认插槽  | 
+| header  | 头部插槽  | 
+| body    | 内容插槽  | 
+| extra   | 扩展插槽  | 
+| footer  | 底部插槽  | 
 :::
 
 ::: contributor card

@@ -1,7 +1,7 @@
 ::: anchor
 :::
 
-::: title 基本介绍
+::: title Fullscreen 全屏
 :::
 
 ::: describe 将某一区域的内容全屏展示。
@@ -185,46 +185,46 @@ export default {
 
 :::
 
-:::title fullscreen 属性
+:::title Fullscreen 属性
 :::
 
 :::table
-| 属性 | 描述 | 类型 | 默认值 | 可选值 |
-| --------- | ----------------------------------------- | ------------- | ------ | ------------------- |
-| target | 可选，要全屏显示的元素 | `HTMLElement` | `html` | - |
-| immersive | 可选，全屏模式，`false`时浏览器窗口内全屏 | `boolean` | true | `true` `false` |
-| position | 可选，浏览器窗口内全屏定位模式 | `string` | - | `absolute` `fixed` |
-| zIndex | 可选，全屏层级 | `string` | - | - |
+| 名称      | 描述                                       | 类型          | 默认值 | 可选值             |
+| --------- | ----------------------------------------- | ------------- | ------ | ------------------ |
+| target    | 可选，要全屏显示的元素                      | `HTMLElement` | `html` | -                  |
+| immersive | 可选，全屏模式，`false`时浏览器窗口内全屏    | `boolean`     | `true` | `true` `false`     |
+| position  | 可选，浏览器窗口内全屏定位模式               | `string`      | -      | `absolute` `fixed` |
+| zIndex    | 可选，全屏层级                             | `string`      | -      | -                  |
 :::
 
-:::title fullscreen 事件
-:::
-
-:::table
-| 事件 | 描述 | 参数 |
-|------ |----------|-----------|
-| fullscreenchange | 全屏更改事件回调 | isFullscreen 是否全屏 |
-:::
-
-:::title fullscreen 插槽
+:::title Fullscreen 事件
 :::
 
 :::table
-| 插槽 | 描述 | 参数 |
-|------ |----------|-----------|
-| default | 默认插槽 | - |
+| 名称             | 描述             | 参数                   |
+| ---------------- | ---------------- | --------------------- |
+| fullscreenchange | 全屏更改事件回调 | isFullscreen 是否全屏   |
 :::
 
-:::title fullscreen 插槽属性
+:::title Fullscreen 插槽
 :::
 
 :::table
-| 属性 | 描述 | 类型 | 参数 |
-| --------- | --------------| ------------- | ------ |
-| enter | 进入全屏 | Function | 可选,`HTMLElement` |
-| exit | 退出全屏 | Function | 可选,`HTMLElement` `Document` |
-| toggle | 进入/退出全屏 | Function | - |
-| isFullscreen | 是否全屏 | boolean | - |
+| 名称    | 描述      | 参数 |
+| ------- | -------- | ---- |
+| default | 默认插槽  | -    |
+:::
+
+:::title Fullscreen 插槽属性
+:::
+
+:::table
+| 名称         | 描述          | 类型     | 参数                          |
+| ------------ | ------------- | -------- | ----------------------------- |
+| enter        | 进入全屏      | Function | 可选,`HTMLElement`            |
+| exit         | 退出全屏      | Function | 可选,`HTMLElement` `Document` |
+| toggle       | 进入/退出全屏 | Function | -                             |
+| isFullscreen | 是否全屏      | boolean  | -                             |
 :::
 
 ::: contributor fullscreen

@@ -1,7 +1,7 @@
 ::: anchor
 :::
 
-::: title 基本介绍
+::: title Skeleton 骨架
 :::
 
 ::: describe 在需要等待加载内容的位置提供一个占位图形组合。
@@ -41,9 +41,8 @@ export default {
 
 :::
 
-::: title 图片
+::: title 图片骨架
 :::
-
 
 ::: demo
 
@@ -92,12 +91,12 @@ export default {
 
 ::: table
 
-| 属性  | 描述 | 可选值 |
-| ----- | ---- | ------ |
-| loading | 是否显示 | `true` `false`     |
-| rows | 显示行数 | --     |
-| animated | 是否动画 | `true` `false`    |
-| type | 展示类型 | `p` `image`    |
+| 名称     | 描述     | 类型      | 默认值  | 可选值         |
+| -------- | -------- | --------- | ------- | -------------- |
+| loading  | 是否显示 | `boolean` | `false` | `true` `false` |
+| rows     | 显示行数 | `number`  | --      | --             |
+| animated | 是否动画 | `boolean` | `true`  | `true` `false` |
+| type     | 展示类型 | `string`  | `p`     | `p` `image`    |
 
 :::
 
@@ -106,10 +105,10 @@ export default {
 
 ::: table
 
-| 插槽   | 描述     | 可选值 |
-| ------ | -------- | ------ |
-| default| 默认插槽 | --     |
-| skeleton | 自定义插槽 | --     |
+| 名称     | 描述        |
+| -------- | ---------- |
+| default  | 默认插槽    |
+| skeleton | 自定义插槽  |
 
 :::
 

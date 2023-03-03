@@ -1,7 +1,7 @@
 ::: anchor
 :::
 
-::: title 基本介绍
+::: title Space 间距
 :::
 
 ::: describe 控制组件之间的间距。
@@ -103,8 +103,7 @@ export default {
 
 :::
 
-
-::: title 自定义间距大小
+::: title 间距大小
 :::
 
 ::: demo
@@ -214,27 +213,23 @@ export default {
 
 ::: table
 
-| 属性        | 描述     | 类型    | 默认值    | 可选值                             |
-| ----------- | -------- | ------ | ------ | ------ |
-| align | 对齐方式 | string| `center`| `start` `end` `center` `baseline`|
-| direction | 间距方向 | string | `horizontal` | `horizontal` `vertical`|
-| fill | 子元素是否填充父容器 | boolean| `false`| -|
-| size | 间距大小 | string | md | `lg` `md` `sm` `xs` `number` `string` `[spaceSize,spaceSize]`|
-| wrap | 是否自动折行 | boolean| `false`| -|
+| 名称      | 描述                | 类型                                      | 默认值       | 可选值                            |
+| --------- | -------------------| ----------------------------------------- | ------------ | --------------------------------- |
+| align     | 对齐方式            | `string`                                  | `center`     | `start` `end` `center` `baseline` |
+| direction | 间距方向            | `string`                                  | `horizontal` | `horizontal` `vertical`           |
+| fill      | 子元素是否填充父容器 | `boolean`                                 | `false`      | -                                 |
+| size      | 间距大小            | `string` `number` `[size,size]`           | `md`         | `lg` `md` `sm` `xs`               |
+| wrap      | 是否自动折行         | `boolean`                                | `false`      | `true` `false`                    |
 
 :::
-
->`type spaceSize =  "lg" | "md" | "sm" | "xs" | number | string`
-
-> `[row-gap, column-gap], eg: ['xs','md']  ['10px', '15px']  [10, 15]`
 
 :::title Space 插槽
 :::
 
 :::table
-| 插槽 | 描述 | 参数 |
-|------ |----------|-----------|
-| default | 默认插槽 | - |
+| 名称    | 描述     |
+| ------- | -------- |
+| default | 默认插槽 |
 :::
 
 
