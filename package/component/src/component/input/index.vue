@@ -7,7 +7,7 @@ export default {
 <script setup lang="ts">
 import "./index.less";
 import { LayIcon } from "@layui/icons-vue";
-import { computed, ref, useSlots, watch } from "vue";
+import { computed, ref, useSlots, watch, nextTick } from "vue";
 import PasswordIcon from "./svg/Password.vue";
 import UnPasswordIcon from "./svg/unPassword.vue";
 import { InputSize } from "./interface";
@@ -54,6 +54,7 @@ const emit = defineEmits<InputEmits>();
 
 const slots = useSlots();
 const type = ref(props.type);
+const inputRef = ref<HTMLElement | undefined>();
 const currentValue = ref<string>(
   String(props.modelValue == null ? "" : props.modelValue)
 );
@@ -141,6 +142,18 @@ const showPassword = () => {
     type.value = "password";
   }
 };
+
+const focus = () => {
+  nextTick(() => {
+    inputRef.value?.focus();
+  })
+}
+
+const blur = () => {
+  inputRef.value?.blur();
+}
+
+defineExpose({ focus, blur })
 </script>
 
 <template>
@@ -175,6 +188,7 @@ const showPassword = () => {
         @blur="onBlur"
         @compositionstart="onCompositionstart"
         @compositionend="onCompositionend"
+        ref="inputRef"
       />
       <span
         class="layui-input-password"

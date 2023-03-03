@@ -16,6 +16,8 @@
       <li> 
         <h3>1.9.0 <span class="layui-badge-rim">2023-03-10</span></h3> 
         <ul>      
+          <li>[新增] input 组件 blur 方法, 通过方法调用促使 input 失去焦点。</li>
+          <li>[新增] input 组件 focus 方法, 通过方法调用促使 input 获取焦点。</li>
           <li>[新增] types 目录 components.d.ts 声明文件, web-types.json, attributes.json 和 tags.json 配置文件。</li>
           <li>[优化] upload 组件 cutOptions.layerOption.area 属性, 默认值由 ["640px","640px"] 修改为 "auto"。</li>
           <li>[优化] upload 组件 multiple 为 false 时, 上传时 file[0] 字段修改为 file 字段。<a style="color:red">破坏性</a></li>

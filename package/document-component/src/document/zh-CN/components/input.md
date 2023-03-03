@@ -265,7 +265,7 @@ export default {
 
 :::
 
-::: title 尺寸Size
+::: title 尺寸大小
 :::
 
 ::: demo 通过 `size` 属性, 设置输入框尺寸。
@@ -280,6 +280,35 @@ export default {
 </template>
 
 <script>
+</script>
+
+:::
+
+::: title 尺寸Size
+:::
+
+::: demo 通过 `size` 属性, 设置输入框尺寸。
+
+<template>
+  <div>
+      <lay-input v-model="inputValue" ref="inputRef"></lay-input>
+      <button @click="focus">获取焦点</button>
+      <button @click="blur">失去焦点</button>
+    </div>
+</template>
+
+<script setup>
+import { nextTick, ref } from "vue";  
+const inputRef = ref();
+const inputValue = ref('');
+
+const focus = function() {
+  inputRef.value.focus();
+}
+
+const blur = function() {
+  inputRef.value.blur();
+}
 </script>
 
 :::
