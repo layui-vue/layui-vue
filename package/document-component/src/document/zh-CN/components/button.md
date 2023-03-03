@@ -1,7 +1,7 @@
 ::: anchor
 :::
 
-::: title 基本介绍
+::: title Button 按钮
 :::
 
 ::: describe 按钮用于开始一个即时操作。
@@ -20,16 +20,8 @@
   <lay-button type="danger">警告按钮</lay-button>
 </template>
 
-<script>
-import { ref } from 'vue'
-
-export default {
-  setup() {
-
-    return {
-    }
-  }
-}
+<script setup>
+import { ref } from 'vue';
 </script>
 
 :::
@@ -37,7 +29,7 @@ export default {
 ::: title 简约按钮
 :::
 
-::: demo 通过 `border` 属性设置边框颜色
+::: demo 通过 `border` 属性设置边框颜色。
 
 <template>
   <lay-button>原始按钮</lay-button>
@@ -47,16 +39,8 @@ export default {
   <lay-button border="red">警告按钮</lay-button>
 </template>
 
-<script>
-import { ref } from 'vue'
-
-export default {
-  setup() {
-
-    return {
-    }
-  }
-}
+<script setup>
+import { ref } from 'vue';
 </script>
 
 :::
@@ -74,16 +58,8 @@ export default {
   <lay-button border="red" border-style="dashed">警告按钮</lay-button>
 </template>
 
-<script>
-import { ref } from 'vue'
-
-export default {
-  setup() {
-
-    return {
-    }
-  }
-}
+<script setup>
+import { ref } from 'vue';
 </script>
 
 :::
@@ -102,16 +78,8 @@ export default {
   <lay-button disabled size="lg">禁用按钮</lay-button>
 </template>
 
-<script>
-import { ref } from 'vue'
-
-export default {
-  setup() {
-
-    return {
-    }
-  }
-}
+<script setup>
+import { ref } from 'vue';
 </script>
 
 :::
@@ -128,16 +96,8 @@ export default {
   <lay-button type="default" fluid>最大化按钮</lay-button>
 </template>
 
-<script>
-import { ref } from 'vue'
-
-export default {
-  setup() {
-
-    return {
-    }
-  }
-}
+<script setup>
+import { ref } from 'vue';
 </script>
 
 :::
@@ -156,16 +116,8 @@ export default {
   <lay-button disabled radius>禁用按钮</lay-button>
 </template>
 
-<script>
-import { ref } from 'vue'
-
-export default {
-  setup() {
-
-    return {
-    }
-  }
-}
+<script setup>
+import { ref } from 'vue';
 </script>
 
 :::
@@ -173,7 +125,7 @@ export default {
 ::: title 按钮分组
 :::
 
-::: demo 使用 `lay-button-group` 标签, 创建一个按钮组。
+::: demo 使用 `lay-button-group` 标签, 配合 `lay-button` 标签, 创建按钮组。
 
 <template>
   <div>
@@ -182,11 +134,15 @@ export default {
       <lay-button type="default">默认按钮</lay-button>
       <lay-button type="default">默认按钮</lay-button>
     </lay-button-group>
+    <br>
+    <br>
     <lay-button-group>
       <lay-button type="primary">默认按钮</lay-button>
       <lay-button type="primary">默认按钮</lay-button>
       <lay-button type="primary">默认按钮</lay-button>
     </lay-button-group>
+    <br>
+    <br>
     <lay-button-group>
       <lay-button border="green" border-style="dashed">默认按钮</lay-button>
       <lay-button border="green" border-style="dashed">默认按钮</lay-button>
@@ -195,16 +151,8 @@ export default {
   </div>
 </template>
 
-<script>
-import { ref } from 'vue'
-
-export default {
-  setup() {
-
-    return {
-    }
-  }
-}
+<script setup>
+import { ref } from 'vue';
 </script>
 
 :::
@@ -212,26 +160,18 @@ export default {
 ::: title 图标按钮
 :::
 
-::: demo 结合 `lay-icon` 组件, 创建图标按钮。
+::: demo 使用 `lay-icon` 标签, 配合 `lay-button` 标签, 创建图标按钮。
 
 <template>
   <lay-button-container>
       <lay-button type="primary"><lay-icon type="layui-icon-left"></lay-icon></lay-button>
       <lay-button type="primary"><lay-icon type="layui-icon-right"></lay-icon></lay-button>
-      <lay-button prefix-icon="layui-icon-left" suffix-icon="layui-icon-right"></lay-button>
+      <lay-button prefix-icon="layui-icon-left" suffix-icon="layui-icon-right">文字</lay-button>
   </lay-button-container>
 </template>
 
-<script>
-import { ref } from 'vue'
-
-export default {
-  setup() {
-
-    return {
-    }
-  }
-}
+<script setup>
+import { ref } from 'vue';
 </script>
 
 :::
@@ -239,7 +179,7 @@ export default {
 ::: title 按钮容器
 :::
 
-::: demo 尽管按钮在同节点并排时会自动拉开间距，但在按钮太多的情况，效果并不是很美好。因为你需要用到按钮容器。
+::: demo 尽管按钮在同节点并排时会自动拉开间距，但在按钮太多的情况，效果并不是很美好。因此你需要用到按钮容器。
 
 <template>
   <lay-button-container>
@@ -249,16 +189,8 @@ export default {
   </lay-button-container>
 </template>
 
-<script>
-import { ref } from 'vue'
-
-export default {
-  setup() {
-
-    return {
-    }
-  }
-}
+<script setup>
+import { ref } from 'vue';
 </script>
 
 :::
@@ -276,19 +208,10 @@ export default {
   </lay-button-container>
 </template>
 
-<script>
-import { ref } from 'vue'
+<script setup>
+import { ref } from 'vue';
 
-export default {
-  setup() {
-
-    const loadState = ref(true)
-
-    return {
-      loadState
-    }
-  }
-}
+const loadState = ref(true);
 </script>
 
 :::
@@ -302,20 +225,11 @@ export default {
   <lay-button type="default" @click="clickHandle">单击事件</lay-button>
 </template>
 
-<script>
-import { ref } from 'vue'
+<script setup>
+import { ref } from 'vue';
 
-export default {
-  setup() {
-    
-    const clickHandle = () => {
-      console.log('点击事件')
-    }
-
-    return {
-      clickHandle
-    }
-  }
+const clickHandle = () => {
+  console.log('点击事件')
 }
 </script>
 
@@ -324,31 +238,22 @@ export default {
 ::: title 下拉按钮
 :::
 
-::: demo 配合 `lay-dropdown` 系列组件, 完成下拉按钮。
+::: demo 使用 `lay-dropdown` 系列组件, 完成下拉按钮。
 
 <template>
   <lay-dropdown>
     <lay-button type="default">更多操作</lay-button>
     <template #content>
       <lay-dropdown-menu>
-        <lay-dropdown-menu-item>导入</lay-dropdown-menu-item>
-        <lay-dropdown-menu-item>导出</lay-dropdown-menu-item>
+        <lay-dropdown-menu-item>复制</lay-dropdown-menu-item>
+        <lay-dropdown-menu-item>删除</lay-dropdown-menu-item>
       </lay-dropdown-menu>
     </template>
   </lay-dropdown>
 </template>
 
-<script>
-import { ref } from 'vue'
-
-export default {
-  setup() {
-  
-    return {
-
-    }
-  }
-}
+<script setup>
+import { ref } from 'vue';
 </script>
 
 :::
@@ -358,20 +263,20 @@ export default {
 
 ::: table
 
-| 属性        | 描述     | 类型    | 默认值    | 可选值                             | 版本                             |
-| ----------- | -------- | ------- | --------- | ---------------------------------- | ---------------------------------- |
-| type        | 主题     | string  | `primary` | `primary` `normal` `warm` `danger` | -- |
-| size        | 尺寸     | string  | --        | `lg` `sm` `xs`                     | -- |
-| fluid       | 最大化   | boolean | `false`   | `true` `false`                     | -- |
-| radius      | 圆角     | boolean | `false`   | `true` `false`                     | -- |
-| border      | 边框     | string  | `green`   | `green` `blue` `orange` `red`      | -- |
-| border-style      | 边框样式    | string  | `soild`   | `soild` `dashed` `dotted` | -- |
-| disabled    | 禁用     | boolean | `false`   | `true` `false`                     | -- |
-| loading     | 加载     | boolean | `false`   | `true` `false`                     | -- |
-| native-type | 原生类型 | string  | `button`  | `button` `submit` `reset`          | -- |
-| prefix-icon | 前置图标 | string  | --   | 内置 icon 集                     | -- |
-| suffix-icon | 后置图标 | string  | --   | 内置 icon 集          | -- |
-| loading-icon | 后置图标 | string  | --   | 内置 icon 集          | `1.4.0` |
+| 名称         | 描述                      | 类型      | 默认值    | 可选值                             |
+| ------------ | ------------------------- | --------- | --------- | ---------------------------------- |
+| type         | 主题                      | `string`  | `primary` | `primary` `normal` `warm` `danger` |
+| size         | 尺寸                      | `string`  | --        | `lg` `sm` `xs`                     |
+| fluid        | 最大化                    | `boolean` | `false`   | `true` `false`                     |
+| radius       | 圆角                      | `boolean` | `false`   | `true` `false`                     |
+| border       | 边框                      | `string`  | `green`   | `green` `blue` `orange` `red`      |
+| border-style | 边框样式                  | `string`  | `soild`   | `soild` `dashed` `dotted`          |
+| disabled     | 禁用                      | `boolean` | `false`   | `true` `false`                     |
+| loading      | 加载                      | `boolean` | `false`   | `true` `false`                     |
+| native-type  | 原生类型                  | `string`  | `button`  | `button` `submit` `reset`          |
+| prefix-icon  | 前置图标,支持内置 icon 集  | `string`  | --        | -                                  |
+| suffix-icon  | 后置图标,支持内置 icon 集  | `string`  | --        | -                                  |
+| loading-icon | 后置图标,支持内置 icon 集  | `string`  | --        | -                                  |
 
 :::
 
@@ -391,7 +296,7 @@ export default {
 
 ::: table
 
-| 属性 | 描述 | 类型 | 默认值 | 可选值 |
+| 名称 | 描述 | 类型 | 默认值 | 可选值 |
 | ---- | ---- | ---- | ------ | ------ |
 | -    | -    | -    | -      |
 
@@ -402,7 +307,7 @@ export default {
 
 ::: table
 
-| 事件    | 描述     | 参数 |
+| 名称    | 描述     | 参数 |
 | ------- | -------- | ---- |
 | default | 默认内容 | --   |
 

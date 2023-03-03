@@ -146,14 +146,16 @@ const showPassword = () => {
 const focus = () => {
   nextTick(() => {
     inputRef.value?.focus();
-  })
-}
+  });
+};
 
 const blur = () => {
-  inputRef.value?.blur();
-}
+  nextTick(() => {
+    inputRef.value?.blur();
+  });
+};
 
-defineExpose({ focus, blur })
+defineExpose({ focus, blur });
 </script>
 
 <template>

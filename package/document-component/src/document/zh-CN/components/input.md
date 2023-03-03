@@ -342,27 +342,39 @@ const blur = function() {
 
 ::: table
 
-| 事件  | 描述                | 参数                        |
+| 名称  | 描述                | 参数                        |
 | ----- | ------------------- | -------------------------- |
 | input | 原生 input 事件     | (value : `string` `number`) |
 | change| 原生 change 事件    | (value : `string` `number`) |
-| focus | 原生 focus事件     | event : Event               |
+| focus | 原生 focus事件      | event : Event               |
 | blur  | 原生 blur 事件      | event : Event               |
 | clear | 清空 事件           | --                          |
 
 :::
 
-::: title Input 事件
+::: title Input 插槽
 :::
 
 ::: table
 
-| 事件   | 描述                | 参数             |
+| 名称   | 描述                 | 参数             |
 | -----  | ------------------- | ----------------|
-| prefix | 输入框前置内容     | --    |
-| suffix | 输入框后置内容     | --    |
-| prepend | 输入框前置内容 (更)     | --    |
-| append | 输入框后置内容 (更)    | --    |
+| prefix | 输入框前置内容        | --    |
+| suffix | 输入框后置内容        | --    |
+| prepend | 输入框前置内容 (边框)  | --    |
+| append | 输入框后置内容 (边框)   | --    |
+
+:::
+
+::: title Input 方法
+:::
+
+::: table
+
+| 名称  | 描述                | 参数                        |
+| ----- | -------------------| -------------------------- |
+| focus | 原生 focus事件      | --                         |
+| blur  | 原生 blur 事件      | --                         |
 
 :::
 
