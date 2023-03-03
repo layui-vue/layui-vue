@@ -118,16 +118,16 @@ watch(
 const focus = () => {
   nextTick(() => {
     textareaRef.value?.focus();
-  })  
-}
+  });
+};
 
 const blur = () => {
   nextTick(() => {
     textareaRef.value?.blur();
-  })
-}
+  });
+};
 
-defineExpose({ focus, blur })
+defineExpose({ focus, blur });
 </script>
 
 <template>
