@@ -1,13 +1,13 @@
 ::: anchor
 :::
 
-::: title 基本介绍
+::: title Animation 动画
 :::
 
 ::: describe 在实用价值的前提之下，我们并没有内置过多花俏的动画。
 :::
 
-::: title 基础使用
+::: title 效果预览 
 :::
 
 ::: demo 如上是不同的动画类名，点击上述绿色块，可直接预览动画。
@@ -93,7 +93,7 @@ export default {
 
 :::
 
-::: title 动画类名
+::: title Animation Class
 :::
 
 ::: table
