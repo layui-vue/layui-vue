@@ -147,6 +147,46 @@ export default {
 
 :::
 
+::: title 内置方法
+:::
+
+::: demo 使用 `lay-textarea` 标签, 创建文本域
+
+<template>
+  <button @click="focus">获取焦点</button>
+  <button @click="blur ">失去焦点</button>
+  <lay-textarea placeholder="请输入描述" style="width:100px;height:100px;min-height:50px;" ref="textareaRef"  v-model="data1">
+  </lay-textarea>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const data1 = ref('');
+    const textareaRef = ref('');
+
+    const focus = function() {
+      textareaRef.value.focus();
+    }
+
+    const blur = function() {
+      textareaRef.value.blur();
+    }
+
+    return {
+      data1,
+      focus,
+      blur
+    }
+  }
+}
+</script>
+
+:::
+
 ::: title Textarea 属性
 :::
 
@@ -176,6 +216,16 @@ export default {
 | blur  | 原生 blur 事件  | --               |
 
 :::
+
+::: title Input 方法
+:::
+
+::: table
+
+| 名称  | 描述                | 参数                        |
+| ----- | -------------------| -------------------------- |
+| focus | 原生 focus事件      | --                         |
+| blur  | 原生 blur 事件      | --                         |
 
 ::: contributor textarea
 :::

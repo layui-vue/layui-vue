@@ -6,7 +6,7 @@ export default {
 
 <script setup lang="ts">
 import { LayIcon } from "@layui/icons-vue";
-import { computed, ref, useAttrs, watch } from "vue";
+import { computed, ref, useAttrs, watch, nextTick } from "vue";
 import { isObject } from "@vueuse/shared";
 import "./index.less";
 
@@ -114,6 +114,20 @@ watch(
     immediate: true,
   }
 );
+
+const focus = () => {
+  nextTick(() => {
+    textareaRef.value?.focus();
+  })  
+}
+
+const blur = () => {
+  nextTick(() => {
+    textareaRef.value?.blur();
+  })
+}
+
+defineExpose({ focus, blur })
 </script>
 
 <template>
