@@ -1,7 +1,7 @@
 ::: anchor
 :::
 
-::: title Container 容器
+::: title 基本介绍
 :::
 
 ::: describe 页面容器, 用于控制内容的边距。

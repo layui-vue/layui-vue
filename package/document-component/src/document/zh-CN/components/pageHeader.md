@@ -1,7 +1,7 @@
 ::: anchor
 :::
 
-::: title PageHeader 页头
+::: title 基本介绍
 :::
 
 ::: describe 如果页面的路径比较简单，则使用页头组件要比面包屑更直观一点。

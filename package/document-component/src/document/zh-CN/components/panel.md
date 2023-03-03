@@ -1,7 +1,7 @@
 ::: anchor
 :::
 
-::: title Panel 面板
+::: title 基本介绍
 :::
 
 ::: describe 面板通常是指一个独立的容器

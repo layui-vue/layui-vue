@@ -1,7 +1,7 @@
 ::: anchor
 :::
 
-::: title Animation 动画
+::: title 基本介绍
 :::
 
 ::: describe 在实用价值的前提之下，我们并没有内置过多花俏的动画。

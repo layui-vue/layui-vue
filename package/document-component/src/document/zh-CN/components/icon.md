@@ -1,7 +1,7 @@
 ::: anchor
 :::
 
-::: title Icon 图标
+::: title 基本介绍
 :::
 
 ::: describe 图标全部采用字体形式，取材于阿里巴巴矢量图标库（iconfont）。

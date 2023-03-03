@@ -1,7 +1,7 @@
 ::: anchor
 :::
 
-::: title Space 间距
+::: title 基本介绍
 :::
 
 ::: describe 控制组件之间的间距。

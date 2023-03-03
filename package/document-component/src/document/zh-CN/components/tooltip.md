@@ -1,7 +1,7 @@
 ::: anchor
 :::
 
-::: title 字体使用
+::: title 基本介绍
 :::
 
 ::: demo

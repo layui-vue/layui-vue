@@ -1,7 +1,7 @@
 ::: anchor
 :::
 
-::: title Fullscreen 全屏
+::: title 基本介绍
 :::
 
 ::: describe 将某一区域的内容全屏展示。

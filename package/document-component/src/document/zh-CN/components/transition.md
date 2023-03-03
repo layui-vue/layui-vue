@@ -1,7 +1,7 @@
 ::: anchor
 :::
 
-::: title Transition 过渡
+::: title 基本介绍
 :::
 
 ::: describe 过渡效果的使用将大幅提升用户的使用体验。

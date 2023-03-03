@@ -1,7 +1,7 @@
 ::: anchor
 :::
 
-::: title Layout 布局
+::: title 基本介绍
 :::
 
 ::: describe 既可编织出绚丽的前台页面，又可满足繁杂的管理系统界面需求。

@@ -1,7 +1,7 @@
 ::: anchor
 :::
 
-::: title Ripple 波纹
+::: title 基本介绍
 :::
 
 ::: describe 为组件添加水波纹动画。
