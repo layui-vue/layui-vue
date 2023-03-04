@@ -24,7 +24,6 @@
           <li>[优化] upload 组件 cutOptions.layerOption.area 属性, 默认值由 ["640px","640px"] 修改为 "auto"。</li>
           <li>[优化] upload 组件 multiple 为 false 时, 上传时 file[0] 字段修改为 file 字段。<a style="color:red">破坏性</a></li>
           <li>[优化] select 组件 multiple 属性为 true 时, 传递非 array 类型数据时的异常信息。</li>
-          <li>[升级] layer-vue 到 1.5.3 版本。</li>
           <li>
               <h4 style="margin-bottom: 0px !important;font-weight: 500 !important;">layer</h4>
               <ul>
@@ -37,6 +36,8 @@
                   <li>[修复] layer 组件 offset 属性的单位为 % 时, 实际位置会减去弹窗宽高/2长度的问题。</li>
                   <li>[优化] layer 组件 type 属性为 notifiy 或 4 类型的样式, 关闭按钮的位置, 标题与内容间距, 边框颜色与阴影等。</li>
                   <li>[优化] layer 组件 area 属性高度自适应, 并兼容一下三种高度自适应写法 area: "300px" || ["300px", "auto"] || ["300px"]。</li>
+                  <li>[优化] layer 组件 type 属性为 photos 时, 标题闪烁的问题, 调整为淡入淡出。</li>
+                  <li>[升级] layer-vue 到 1.5.3 版本。</li>
               </ul>
           </li>
         </ul>  

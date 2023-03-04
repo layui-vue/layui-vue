@@ -84,7 +84,9 @@ const changeIndex = (step: number) => {
 const showLayerImgBar = ref(false);
 onMounted(() => {
   nextTick(() => {
-    showLayerImgBar.value = true;
+    setTimeout(() => {
+      showLayerImgBar.value = true;
+    }, 400);
   });
 });
 
