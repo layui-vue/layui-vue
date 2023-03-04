@@ -37,6 +37,7 @@
                   <li>[优化] layer 组件 type 属性为 notifiy 或 4 类型的样式, 关闭按钮的位置, 标题与内容间距, 边框颜色与阴影等。</li>
                   <li>[优化] layer 组件 area 属性高度自适应, 并兼容一下三种高度自适应写法 area: "300px" || ["300px", "auto"] || ["300px"]。</li>
                   <li>[优化] layer 组件 type 属性为 photos 时, 标题闪烁的问题, 调整为淡入淡出。</li>
+                  <li>[优化] layer 组件 content 高度自适应逻辑, 由 js 计算调整为 flex 响应式布局。</li>
                   <li>[升级] layer-vue 到 1.5.3 版本。</li>
               </ul>
           </li>

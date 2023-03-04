@@ -128,6 +128,7 @@ const load4 = function() {
         </lay-col>
         <lay-col :span="24">
             <button @click="openAuto">自适应性</button>
+            <button @click="openScroll">滚动测试</button>
         </lay-col>
     </lay-row>
 </template>
@@ -233,6 +234,16 @@ const openAuto = function() {
         title: "标题",
         isHtmlFragment: true,
         content: "<img src='https://img2.baidu.com/it/u=3080567934,982100974&fm=253&fmt=auto&app=120&f=JPEG?w=1047&h=461' />"
+    })    
+}
+
+const openScroll = function() {
+    layer.open({
+        type: 1,
+        title: "标题",
+        isHtmlFragment: true,
+        area: ['300px', '300px'],
+        content: "1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1"
     })    
 }
 </script>
@@ -770,6 +781,9 @@ const openComponent2 = () => {
     <button @click="changeVisible16">打开</button>
     <button @click="changeVisible17">打开</button>
     <button @click="changeVisible18">打开</button>
+    <br/>
+    <br/>
+    <button @click="changeVisible19">打开</button>
     <lay-layer v-model="visible1" title="标题" :area="['200px','200px']" offset="r">
         内容
     </lay-layer>
@@ -794,6 +808,9 @@ const openComponent2 = () => {
     <lay-layer v-model="visible9" title="自适应">
         <Children3></Children3>
     </lay-layer>
+    <lay-layer v-model="visible19" :area="['300px','300px']" title="自适应">
+        <br> 1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>
+    </lay-layer>
 </template>
 
 <script setup>
@@ -808,6 +825,7 @@ const visible6 = ref(false);
 const title6 = ref(false);
 const visible7 = ref(false);
 const visible9 = ref(false);
+const visible19 = ref(false);
 
 const changeVisible1 = function() {
     visible1.value = !visible1.value;
@@ -925,6 +943,10 @@ const changeVisible18 = function() {
         area: "50%",
         content: "内容",
     })
+}
+
+const changeVisible19 = function() {
+    visible19.value = !visible19.value;
 }
 </script>
 :::

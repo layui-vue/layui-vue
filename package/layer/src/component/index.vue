@@ -29,7 +29,6 @@ import {
   getArea,
   calculateArea,
   calculateOffset,
-  calculateContent,
   calculateType,
   minArea,
   minOffset,
@@ -147,9 +146,6 @@ const area: Ref<string[]> = ref(
 const offset: Ref<string[]> = ref(
   calculateOffset(props.offset, area.value, type)
 );
-const contentHeight = ref(
-  calculateContent(props.title, area.value[1], props.btn, type, props.isMessage)
-);
 const index: Ref<number | Function> = ref(99999);
 const visible: Ref<boolean> = ref(false);
 const first: Ref<boolean> = ref(true);
@@ -204,22 +200,6 @@ const firstOpenDelayCalculation = function () {
     supportMove();
   });
 };
-
-/**
- * 监听标题, 进行 contentHeight 重置
- */
-watch(
-  () => props.title,
-  () => {
-    contentHeight.value = calculateContent(
-      props.title,
-      area.value[1],
-      props.btn,
-      type,
-      props.isMessage
-    );
-  }
-);
 
 /**
  * 普通打开
@@ -361,30 +341,6 @@ watch(
     if (!visible.value) {
       props.end();
     }
-  }
-);
-
-/**
- * 高度监听
- * <p>
- *
- * 在发生拖拽时, 需根据弹出层的外层高度计算 content 高度, 需要
- * 考虑 btn 操作栏, 计算公式：contentHeight = h - btnHeight
- *
- * @param h 弹层高度
- * @param btn 操作栏
- * @param type 弹层类型
- */
-watch(
-  () => h.value,
-  () => {
-    contentHeight.value = calculateContent(
-      props.title,
-      h.value,
-      props.btn,
-      type,
-      props.isMessage
-    );
   }
 );
 
@@ -750,15 +706,18 @@ defineExpose({ reset, open, close });
         <div
           ref="contentRef"
           class="layui-layer-content"
-          :style="{ height: contentHeight }"
           :class="contentClasses"
         >
           <template v-if="type === 0 || type === 1 || type === 4">
             <i v-if="icon" :class="iconClass"></i>
-            <slot v-if="slots.default"></slot>
+            <template v-if="slots.default">
+              <div class="slot-fragment">
+                <slot></slot>
+              </div>
+            </template>
             <template v-else>
               <template v-if="isHtmlFragment">
-                <span v-html="renderContent(props.content)"></span>
+                <div class="html-fragment" v-html="renderContent(props.content)"></div>
               </template>
               <template v-else>{{ renderContent(props.content) }}</template>
             </template>
