@@ -717,7 +717,10 @@ defineExpose({ reset, open, close });
             </template>
             <template v-else>
               <template v-if="isHtmlFragment">
-                <div class="html-fragment" v-html="renderContent(props.content)"></div>
+                <div
+                  class="html-fragment"
+                  v-html="renderContent(props.content)"
+                ></div>
               </template>
               <template v-else>{{ renderContent(props.content) }}</template>
             </template>

@@ -22,7 +22,7 @@
           <li>[新增] textarea 组件 focus 方法, 通过方法调用促使 textarea 获取焦点。</li>
           <li>[新增] types 目录 components.d.ts 声明文件, web-types.json, attributes.json 和 tags.json 配置文件。</li>
           <li>[优化] upload 组件 cutOptions.layerOption.area 属性, 默认值由 ["640px","640px"] 修改为 "auto"。</li>
-          <li>[优化] upload 组件 multiple 为 false 时, 上传时 file[0] 字段修改为 file 字段。<a style="color:red">破坏性</a></li>
+          <li>[优化] upload 组件 multiple 为 false 时, 上传时 file[0] 字段修改为 file 字段。<a style="color:red">重要</a></li>
           <li>[优化] select 组件 multiple 属性为 true 时, 传递非 array 类型数据时的异常信息。</li>
           <li>
               <h4 style="margin-bottom: 0px !important;font-weight: 500 !important;">layer</h4>

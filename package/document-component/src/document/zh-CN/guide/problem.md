@@ -13,8 +13,11 @@
 ::: describe 查阅：<a style="color:#009688;" href="https://staging-cn.vuejs.org/guide/essentials/component-basics.html#dom-template-parsing-caveats">https://staging-cn.vuejs.org/guide/essentials/component-basics.html#dom-template-parsing-caveats</a >
 :::
 
-::: title 全局 Component 作为 layer.open 内容时, 出现 cannot be resolved 警告
+::: title 全局 Component 作为 layer.open 内容, 出现 cannot be resolved 警告
 :::
 
-::: describe 忽略了 CreateApp().use(layer) 过程, 使其创建了新的 appContext 实例, 导致与全局 Component 所在的 context 并不相同，因而无法获取到相关信息。
+::: describe 因为忽略了 CreateApp().use(layer) 过程, 使其创建了新的 appContext 实例, 导致与全局 Component 所在的 context 并不相同，因而无法获取到组件信息。
+:::
+
+::: describe 寄语：本篇将主要讲解使用过程中普遍遇到的“问题”，并非是 BUG，通常是需要我们自己去注意的一些点。（持续补充）
 :::

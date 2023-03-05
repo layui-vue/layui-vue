@@ -19,8 +19,11 @@
 
 ::: quote
 
-layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库 , Layui 的 另 一 种 呈 现 方 式
+layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库
 
+:::
+
+::: title 版本历程
 :::
 
 <lay-timeline>
@@ -30,7 +33,7 @@ layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库 ,
   <lay-timeline-item title="2015年，layui 孵化" simple></lay-timeline-item>
 </lay-timeline>
 
-::: title 如何贡献
+::: title 贡献指南
 :::
 
 <br>

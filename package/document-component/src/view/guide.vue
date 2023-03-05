@@ -109,19 +109,7 @@ export default {
             title: "问题",
             subTitle: "problem",
             path: "/zh-CN/guide/problem",
-          },
-          {
-            id: 8,
-            title: "插件",
-            subTitle: "plugin",
-            path: "/zh-CN/guide/plugin",
-          },
-          {
-            id: 9,
-            title: "团队",
-            subTitle: "member",
-            path: "/zh-CN/guide/member",
-          },
+          }
         ],
       },
     ];
