@@ -1,7 +1,13 @@
-::: title 国际化
+::: title 基本介绍
 :::
 
 ::: describe 目前的默认文案是简体中文，如果需要使用其他语言，可以参考下面的方案。
+:::
+
+::: title 基本使用
+:::
+
+::: describe 通过 <code>config-provider</code> 组件 <code>locale</code> 属性设置启用的语言。
 :::
 
 ```vue
@@ -12,10 +18,13 @@
 </template>
 ```
 
-::: describe 在 layui-vue 内部维护了一个 i18n 实例, 你可以通过 useI18n() 方法来使用它。
+::: title 高级使用
 :::
 
-::: describe 你可以使用 locales 属性来扩展语言包, 自定义语言优先级大于组件库内部维护的语言, 即可扩展亦可覆盖。
+::: describe 在 layui-vue 内部维护了一个 <code>vue-i18n</code> 实例, 你可以通过 <code>useI18n</code> 方法来获取。
+:::
+
+::: describe 通过 locales 属性扩展语言包, 自定义语言优先级大于组件库内部维护的语言。
 :::
 
 ```vue
@@ -38,6 +47,9 @@ const locales = [
 ]
 </script>
 ```
+::: title 语言列表
+:::
+
 ::: table
 
 | 语言        | 内容                |

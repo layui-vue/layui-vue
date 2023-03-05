@@ -24,7 +24,7 @@
 ::: title 高级使用
 :::
 
-::: describe 通过 <code>config-provider</code> 标签, 配合 <code>ref</code> 变量, 实现 dynamic 主题。
+::: describe 通过 <code>config-provider</code> 标签, 配合 <code>reactive</code> 变量, 实现动态主题。
 :::
 
 ```vue
