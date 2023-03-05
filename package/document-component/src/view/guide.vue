@@ -83,7 +83,7 @@ export default {
           {
             id: 3,
             title: "更新",
-            subTitle: "change",
+            subTitle: "changelog",
             path: "/zh-CN/guide/changelog",
           },
           {
@@ -95,7 +95,7 @@ export default {
           {
             id: 5,
             title: "夜间",
-            subTitle: "dark",
+            subTitle: "theme-dark",
             path: "/zh-CN/guide/dark",
           },
           {
@@ -107,7 +107,7 @@ export default {
           {
             id: 7,
             title: "问题",
-            subTitle: "problem",
+            subTitle: "question",
             path: "/zh-CN/guide/problem",
           },
         ],

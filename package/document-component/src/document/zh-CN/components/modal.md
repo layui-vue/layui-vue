@@ -361,8 +361,8 @@ export default {
 | btnAlign        | 按钮布局      | `l` `r` `c`                |
 | anim            | 入场动画      | `0` `-` `6`                |
 | isOutAnim       | 关闭动画      | `true` `false`             |
-| success            | 显示回调   | --                |
-| close       | 关闭回调      | --             |
+| success         | 显示回调   | --                |
+| close           | 关闭回调      | --             |
 
 :::
 

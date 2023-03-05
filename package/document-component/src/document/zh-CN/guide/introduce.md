@@ -23,23 +23,21 @@ layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库
 
 :::
 
-::: title 版本历程
-:::
-
 <lay-timeline>
-  <lay-timeline-item title="2021年，layui-vue 里程碑版本 1.0.0 发布" simple></lay-timeline-item>
+  <lay-timeline-item title="2023年，layui-vue 里程碑版本 1.9.0 发布" simple></lay-timeline-item>
+  <lay-timeline-item title="2022年，layui-vue 里程碑版本 1.0.0 发布" simple></lay-timeline-item>
   <lay-timeline-item title="2017年，layui 里程碑版本 2.0 发布" simple></lay-timeline-item>
   <lay-timeline-item title="2016年，layui 首个版本发布" simple></lay-timeline-item>
   <lay-timeline-item title="2015年，layui 孵化" simple></lay-timeline-item>
 </lay-timeline>
 
-::: title 贡献指南
+::: title 参与指南
 :::
 
 <br>
 <lay-timeline>
-  <lay-timeline-item simple>欢迎在 <a href="https://gitee.com/layui/layui-vue/issues">提交问题</a> 上向我们反馈。欢迎功能请求。如果您想贡献，请查看 <a href="https://gitee.com/layui/layui-vue/blob/next/CONTRIBUTING.md">快速指南</a>！</lay-timeline-item>
-  <lay-timeline-item simple>如果您有什么想聊的，请随时加入我们的<a href="https://gitter.im/layui-vue/community"> Gitter</a>！</lay-timeline-item>
+  <lay-timeline-item simple>欢迎在 <a target="_blank" style="color:#009688;" href="https://gitee.com/layui/layui-vue/issues">提交问题</a> 上向我们反馈。欢迎功能请求。如果您想贡献，请查看 <a target="_blank" style="color:#009688;" href="https://gitee.com/layui/layui-vue/blob/next/CONTRIBUTING.md">快速指南</a>！</lay-timeline-item>
+  <lay-timeline-item simple>如果您有什么想聊的，请随时加入我们的<a  target="_blank" style="color:#009688;" href="https://gitter.im/layui-vue/community"> Gitter</a>！</lay-timeline-item>
 </lay-timeline>
 
 ::: title 环境要求

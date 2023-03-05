@@ -809,7 +809,12 @@ const openComponent2 = () => {
         <Children3></Children3>
     </lay-layer>
     <lay-layer v-model="visible19" :area="['300px','300px']" title="自适应">
-        <br> 1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>
+        <br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1
+        <br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1
+        <br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1
+        <template #footer>
+            2<br>2<br>2<br>2<br>2<br>2<br>2
+        </template>
     </lay-layer>
 </template>
 

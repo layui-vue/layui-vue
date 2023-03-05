@@ -770,7 +770,13 @@ defineExpose({ reset, open, close });
           ></CloseBtn>
         </span>
         <!-- 操作栏 -->
-        <div
+        <template v-if="slots.footer">
+          <div class="layui-layer-footer">
+            <slot name="footer"></slot>
+          </div>
+        </template>
+        <template v-else>
+          <div
           v-if="((btn && btn.length > 0) || type === 0) && !isMessage"
           class="layui-layer-btn"
           :class="[`layui-layer-btn-${btnAlign}`]"
@@ -793,6 +799,7 @@ defineExpose({ reset, open, close });
             </template>
           </template>
         </div>
+        </template>
         <!-- 辅助栏 -->
         <span v-if="showResize" class="layui-layer-resize"></span>
       </div>
