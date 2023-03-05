@@ -109,7 +109,7 @@ export default {
             title: "问题",
             subTitle: "problem",
             path: "/zh-CN/guide/problem",
-          }
+          },
         ],
       },
     ];
