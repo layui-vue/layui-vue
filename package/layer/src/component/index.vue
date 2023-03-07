@@ -777,28 +777,30 @@ defineExpose({ reset, open, close });
         </template>
         <template v-else>
           <div
-          v-if="((btn && btn.length > 0) || type === 0) && !isMessage"
-          class="layui-layer-btn"
-          :class="[`layui-layer-btn-${btnAlign}`]"
-        >
-          <template v-if="btn && btn.length > 0">
-            <template v-for="(b, index) in btn" :key="index">
-              <a
-                :class="[
-                  `layui-layer-btn${index}`,
-                  { 'layui-layer-btn-disabled': b.disabled },
-                ]"
-                @click="!b.disabled && b.callback(id)"
-                >{{ b.text }}</a
-              >
+            v-if="((btn && btn.length > 0) || type === 0) && !isMessage"
+            class="layui-layer-btn"
+            :class="[`layui-layer-btn-${btnAlign}`]"
+          >
+            <template v-if="btn && btn.length > 0">
+              <template v-for="(b, index) in btn" :key="index">
+                <a
+                  :class="[
+                    `layui-layer-btn${index}`,
+                    { 'layui-layer-btn-disabled': b.disabled },
+                  ]"
+                  @click="!b.disabled && b.callback(id)"
+                  >{{ b.text }}</a
+                >
+              </template>
             </template>
-          </template>
-          <template v-else>
-            <template v-if="type === 0">
-              <a class="layui-layer-btn0" @click="yesHandle()">{{ yesText }}</a>
+            <template v-else>
+              <template v-if="type === 0">
+                <a class="layui-layer-btn0" @click="yesHandle()">{{
+                  yesText
+                }}</a>
+              </template>
             </template>
-          </template>
-        </div>
+          </div>
         </template>
         <!-- 辅助栏 -->
         <span v-if="showResize" class="layui-layer-resize"></span>
