@@ -94,6 +94,7 @@ import LayTag from "./component/tag/index";
 import LayTagInput from "./component/tagInput/index";
 import LayQrcode from "./component/qrcode/index";
 import LayBarcode from "./component/barcode/index";
+import LayAutoComplete from "./component/autoComplete/index";
 import LayConfigProvider from "./provider";
 import { InstallOptions } from "./types";
 
@@ -186,6 +187,7 @@ const components: Record<string, Plugin> = {
   LayTreeSelect,
   LayQrcode,
   LayBarcode,
+  LayAutoComplete
 };
 
 const install = (app: App, options?: InstallOptions): void => {
@@ -285,6 +287,7 @@ export {
   LayTreeSelect,
   LayQrcode,
   LayBarcode,
+  LayAutoComplete,
   install,
 };
 

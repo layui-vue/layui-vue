@@ -144,6 +144,13 @@ const menus = [
     children: [
       {
         id: 36,
+        title: "自动完成",
+        flag: "update",
+        subTitle: "auto-complete",
+        path: "/zh-CN/components/autoComplete",
+      },
+      {
+        id: 36,
         title: "开关",
         flag: "update",
         subTitle: "switch",

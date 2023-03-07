@@ -449,6 +449,11 @@ const zhCN = [
             component: () => import("../document/zh-CN/components/space.md"),
             meta: { title: "间距" },
           },
+          {
+            path: "/zh-CN/components/autoComplete",
+            component: () => import("../document/zh-CN/components/autoComplete.md"),
+            meta: { title: "间距" },
+          },
         ],
       },
     ],
