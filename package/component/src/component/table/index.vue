@@ -172,12 +172,16 @@ const findFindNodes = (columns: any[]) => {
 };
 
 /**
- * 计算标题列
+ * 将 columns 复杂表头，分割为多维度数组。
  *
  * @param level 层级, 用于决定会被 push 到的目标数组
+ * @remark 注意：当父层级为 fixed 属性时, 子集将自动继承
  */
-const findFinalNode = (level: number, columns: any[]) => {
+const findFinalNode = (level: number, columns: any[], parentFixed: string | undefined) => {
   columns.forEach((column) => {
+    if(parentFixed != undefined) {
+      column.fixed = parentFixed;
+    }
     if (column.children) {
       const colSpan = getLeafCountTree(column);
       column.colspan = colSpan;
@@ -189,7 +193,8 @@ const findFinalNode = (level: number, columns: any[]) => {
         column.type ? (column.width = "50px") : (column.width = "100px");
       }
       tableHeadColumns.value[level].push(column);
-      findFinalNode(level + 1, column.children);
+      // 如果 level = 0, 并且 column.fixed 不为 undefined 向下传递，否则 undefined.
+      findFinalNode(level + 1, column.children, level === 0 && column.fixed != undefined ? column.fixed : undefined);
     } else {
       const rowSpan = getLevel(columns);
       column.rowspan = rowSpan;
@@ -220,7 +225,7 @@ watch(
 
     findFindNode(tableColumns.value);
     findFindNodes(tableColumns.value);
-    findFinalNode(0, tableColumns.value);
+    findFinalNode(0, tableColumns.value, undefined);
   },
   { immediate: true }
 );
@@ -358,14 +363,21 @@ const exportData = () => {
             }
           });
           // 拼接列
-          const rowColSpan = props.spanMethod(item,tableColumn,rowIndex,columnIndex);
+          const rowColSpan = props.spanMethod(
+            item,
+            tableColumn,
+            rowIndex,
+            columnIndex
+          );
           const rowspan = rowColSpan ? rowColSpan[0] : 1;
           const colspan = rowColSpan ? rowColSpan[1] : 1;
-          
+
           // 如果 rowspan 和 colspan 是 0 说明该列作为合并列的辅助列。
           // 则不再进行结构拼接。
           if (rowspan != 0 && colspan != 0) {
-            tableStr += `<td colspan=${colspan} rowspan=${rowspan}>${columnData ? columnData[tableColumn.key]:''}</td>`;
+            tableStr += `<td colspan=${colspan} rowspan=${rowspan}>${
+              columnData ? columnData[tableColumn.key] : ""
+            }</td>`;
           }
         }
       }
@@ -605,33 +617,93 @@ const renderHeadFixedStyle = (
 ) => {
   if (column.fixed) {
     if (column.fixed == "left") {
-      // 如果是左固定。
-      var left = 0;
-      // 累加左侧列宽。
-      for (var i = 0; i < columnIndex; i++) {
-        if (
-          props.columns[i].fixed &&
-          props.columns[i].fixed == "left" &&
-          tableColumnKeys.value.includes(props.columns[i].key)
-        ) {
-          left = left + Number(props.columns[i]?.width?.replace("px", ""));
+      // 如果是简单固定列
+      if (tableHeadColumnIndex == 0) {
+        // 如果是左固定。
+        var left = 0;
+        // 累加左侧列宽。
+        for (var i = 0; i < columnIndex; i++) {
+          if (
+            props.columns[i].fixed &&
+            props.columns[i].fixed == "left" &&
+            tableColumnKeys.value.includes(props.columns[i].key)
+          ) {
+            left = left + Number(props.columns[i]?.width?.replace("px", ""));
+          }
         }
+        return { left: `${left}px` } as StyleValue;
+      } else {
+        // 复杂表头固定
+        var left = 0;
+        var topicColumns = tableHeadColumns[0];
+        var topicColumn = findTopicParent(topicColumns, column);
+        var index: number = topicColumns.indexOf(topicColumn);
+
+        // 累加父级位置
+        for (var i = 0; i < index; i++) {
+          if (
+            topicColumns[i].fixed &&
+            topicColumns[i].fixed == "left"
+          ) {
+            left = left + Number(topicColumns[i]?.width?.replace("px", ""));
+          }
+        }
+
+        // 累加当前位置
+        for (var i = 0; i < columnIndex; i++) {
+          if (
+            tableHeadColumn[i].fixed &&
+            tableHeadColumn[i].fixed == "left"
+          ) {
+            left = left + Number(tableHeadColumn[i]?.width?.replace("px", ""));
+          }
+        }
+        return { left: `${left}px` } as StyleValue;
       }
-      return { left: `${left}px` } as StyleValue;
     } else {
-      // 如果是右固定。
-      var right = 0;
-      // 累计右侧列宽。
-      for (var i = columnIndex + 1; i < props.columns.length; i++) {
-        if (
-          props.columns[i].fixed &&
-          props.columns[i].fixed == "right" &&
-          tableColumnKeys.value.includes(props.columns[i].key)
-        ) {
-          right = right + Number(props.columns[i]?.width?.replace("px", ""));
+      if (tableHeadColumnIndex == 0) {
+        // 如果是右固定。
+        var right = 0;
+        // 累计右侧列宽。
+        for (var i = columnIndex + 1; i < props.columns.length; i++) {
+          if (
+            props.columns[i].fixed &&
+            props.columns[i].fixed == "right" &&
+            tableColumnKeys.value.includes(props.columns[i].key)
+          ) {
+            right = right + Number(props.columns[i]?.width?.replace("px", ""));
+          }
         }
+        return { right: `${right}px` } as StyleValue;
+      } else {
+        // 复杂表头固定
+        var right = 0;
+        var topicColumns = tableHeadColumns[0];
+        var topicColumn = findTopicParent(topicColumns, column);
+        var index: number = topicColumns.indexOf(topicColumn);
+
+        // 累计右侧列宽。
+        for (var i = index + 1; i < topicColumns.length; i++) {
+          if (
+            topicColumns[i].fixed &&
+            topicColumns[i].fixed == "right"
+          ) {
+            right = right + Number(topicColumns[i]?.width?.replace("px", ""));
+          }
+        }
+
+        // 累加当前位置
+        for (var i = columnIndex + 1; i < tableHeadColumn.length; i++) {
+          if (
+            tableHeadColumn[i].fixed &&
+            tableHeadColumn[i].fixed == "right"
+          ) {
+            right = right + Number(tableHeadColumn[i]?.width?.replace("px", ""));
+          }
+        }
+
+        return { right: `${right}px` } as StyleValue;
       }
-      return { right: `${right}px` } as StyleValue;
     }
   } else {
     // 如果是简单表头，则判定当前列是否为尾列。
@@ -678,17 +750,20 @@ const renderHeadFixedStyle = (
 };
 
 /**
+ * 在 fixed 为 left 时，如果是尾列，增加阴影。
+ * 在 fixed 为 right 时，如果是首列，增加阴影。
+ * 
  * @remark 排除 hide 列
  */
-const renderFixedClassName = (column: any, columnIndex: number) => {
+const renderFixedClassName = (column: any, columnIndex: number, currentColumns: any[]) => {
   if (column.fixed) {
     if (column.fixed == "left") {
       var left = true;
-      for (var i = columnIndex + 1; i < props.columns.length; i++) {
+      for (var i = columnIndex + 1; i < currentColumns.length; i++) {
         if (
-          props.columns[i].fixed &&
-          props.columns[i].fixed == "left" &&
-          tableColumnKeys.value.includes(props.columns[i].key)
+          currentColumns[i].fixed &&
+          currentColumns[i].fixed == "left" &&
+          tableColumnKeys.value.includes(currentColumns[i].key)
         ) {
           left = false;
         }
@@ -698,9 +773,9 @@ const renderFixedClassName = (column: any, columnIndex: number) => {
       var right = true;
       for (var i = 0; i < columnIndex; i++) {
         if (
-          props.columns[i].fixed &&
-          props.columns[i].fixed == "right" &&
-          tableColumnKeys.value.includes(props.columns[i].key)
+          currentColumns[i].fixed &&
+          currentColumns[i].fixed == "right" &&
+          tableColumnKeys.value.includes(currentColumns[i].key)
         ) {
           right = false;
         }
@@ -866,7 +941,7 @@ onBeforeUnmount(() => {
                         :rowspan="column.rowspan"
                         class="layui-table-cell"
                         :class="[
-                          renderFixedClassName(column, columnIndex),
+                          renderFixedClassName(column, columnIndex, tableHeadColumn),
                           column.fixed
                             ? `layui-table-fixed-${column.fixed}`
                             : '',
@@ -1050,7 +1125,7 @@ onBeforeUnmount(() => {
                       ]"
                       :class="[
                         'layui-table-cell',
-                        renderFixedClassName(column, columnIndex),
+                        renderFixedClassName(column, columnIndex, columns),
                         column.fixed ? `layui-table-fixed-${column.fixed}` : '',
                       ]"
                       v-html="renderTotalRowCell(column)"

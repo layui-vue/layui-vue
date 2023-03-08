@@ -21,6 +21,7 @@
         <ul>      
           <li>[修复] table 组件 columns 中 type 属性为 number 的列，不会被导出的问题。</li>
           <li>[修复] table 组件导出功能，如果匹配不到字段不创建列结构，导致 excel 整体错位的问题。</li>
+          <li>[修复] table 组件 columns 中包含 children 属性的 column 设置 fixed 属性不生效的问题。</li>
           <li>[优化] table 组件 columns 中 type 属性为 checkbox 或 radio 的列，不再被导出。</li>
         </ul>  
       </li>

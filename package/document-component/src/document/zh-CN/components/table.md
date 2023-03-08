@@ -1296,6 +1296,7 @@ export default {
         width: "180px",
         key:"remark",
         ellipsisTooltip: true,
+        fixed: "right",
         children: [
           {
             title:"性别",
@@ -1348,18 +1349,16 @@ export default {
 
     const columns30 = [
       {
+        
+        fixed: "left",
         title:"名称",
-        width:"200px",
         key:"username"
       },{
         title:"地址",
+        fixed: "left",
         children: [
-          { title: "省", key: "province", width: "300px" },
-          { title: "市", key: "city", width: "300px" },
-          { title: "区", children: [
-            { title: "县", key: "xian", width: "100px" },
-            { title: "村", key: "cun", width: "100px" },
-          ] },
+          { title: "省",  key: "province"},
+          { title: "市", key: "city"},
         ]
       },{
         title:"性别",

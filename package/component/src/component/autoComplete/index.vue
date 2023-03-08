@@ -8,15 +8,17 @@
       <template #content>
         <template v-if="innerOptions.length > 0">
           <lay-dropdown-menu>
-            <lay-dropdown-menu-item class="lay-autocomplete-option" :class="{'selected': selectedOption == option}" v-for="option in innerOptions">
+            <lay-dropdown-menu-item
+              class="lay-autocomplete-option"
+              :class="{ selected: selectedOption == option }"
+              v-for="option in innerOptions"
+            >
               {{ option }}
             </lay-dropdown-menu-item>
           </lay-dropdown-menu>
         </template>
-        <template v-else> 
-          <div class="lay-autocomplete-empty">
-            暂无内容 
-          </div>
+        <template v-else>
+          <div class="lay-autocomplete-empty">暂无内容</div>
         </template>
       </template>
     </lay-dropdown>
@@ -61,12 +63,10 @@ watch([innerValue, props.options], () => {
       innerOptions.push(option);
     }
   });
-  if(innerOptions.length > 0) {
-    selectedOption.value = innerOptions[0]
+  if (innerOptions.length > 0) {
+    selectedOption.value = innerOptions[0];
   }
 });
-
-
 </script>
 
 <style lang="less">
