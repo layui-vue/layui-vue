@@ -1460,7 +1460,7 @@ export default {
       {
         title: "序号",
         fixed: "left",
-        type: "checkbox",
+        type: "number",
         width: "50px",
       },
       {
@@ -1475,7 +1475,7 @@ export default {
       {
         title:"年龄",
         width: "300px",
-        key:"age",
+        key:"ages",
         ellipsisTooltip: true,
       },
       {

@@ -15,9 +15,20 @@
 <lay-timeline>
 <lay-timeline-item title="1.9.x">
     <ul> 
+      <a name="1-9-1"></a> 
+      <li> 
+        <h3>1.9.1 <span class="layui-badge-rim">2023-03-08</span></h3> 
+        <ul>      
+          <li>[修复] table 组件 columns 中 type 属性为 number 的列，不会被导出的问题。</li>
+          <li>[修复] table 组件导出功能，如果匹配不到字段不创建列结构，导致 excel 整体错位的问题。</li>
+          <li>[优化] table 组件 columns 中 type 属性为 checkbox 或 radio 的列，不再被导出。</li>
+        </ul>  
+      </li>
+    </ul>
+    <ul> 
       <a name="1-9-0"></a> 
       <li> 
-        <h3>1.9.0 <span class="layui-badge-rim">2023-03-10</span></h3> 
+        <h3>1.9.0 <span class="layui-badge-rim">2023-03-05</span></h3> 
         <ul>      
           <li>[新增] input 组件 focus 与 blur 方法, 通过方法调用促使 input 获取焦点。</li>
           <li>[新增] textarea 组件 focus 与 blur 方法, 通过方法调用促使 textarea 获取焦点。</li>

@@ -187,7 +187,7 @@ const components: Record<string, Plugin> = {
   LayTreeSelect,
   LayQrcode,
   LayBarcode,
-  LayAutoComplete
+  LayAutoComplete,
 };
 
 const install = (app: App, options?: InstallOptions): void => {
