@@ -161,8 +161,10 @@ watch(
       <slot v-if="slots.prev" name="prev"></slot>
       <template v-else>{{ t("page.previous") }}</template>
     </a>
+    <!-- 页码列表 -->
     <template v-if="showPage">
       <template v-for="index of totalPage" :key="index">
+        <!-- 选中项 -->
         <span v-if="index === currentPage" class="layui-laypage-curr">
           <em
             class="layui-laypage-em"
@@ -170,6 +172,7 @@ watch(
           ></em>
           <em>{{ index }}</em>
         </span>
+        <!-- 普通项 -->
         <a
           v-else
           href="javascript:;"
@@ -177,6 +180,17 @@ watch(
           :class="[theme ? 'layui-laypage-a-' + theme : '']"
           >{{ index }}</a
         >
+      </template>
+      <!-- 尾部页 -->
+      <template v-if="totalPage[totalPage.length - 1] != maxPage">
+        <a class="layui-laypage-spr">...</a>
+        <a
+          href="javascript:;"
+          class="layui-laypage-last"
+          @click="jump(maxPage)"
+          >
+          {{ maxPage }}
+        </a>
       </template>
     </template>
     <a
