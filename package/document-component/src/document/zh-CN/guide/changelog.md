@@ -15,6 +15,15 @@
 <lay-timeline>
 <lay-timeline-item title="1.9.x">
     <ul> 
+      <a name="1-9-2"></a> 
+      <li> 
+        <h3>1.9.1 <span class="layui-badge-rim">2023-03-09</span></h3> 
+        <ul>      
+          <li>[新增] page 组件 showPage 属性开启时, 显示首页直达功能，从而改善易用性。<a href="https://gitee.com/layui/layui-vue/issues/I69ZW6">#I69ZW6</a></li>
+        </ul>  
+      </li>
+    </ul>
+    <ul> 
       <a name="1-9-1"></a> 
       <li> 
         <h3>1.9.1 <span class="layui-badge-rim">2023-03-09</span></h3> 

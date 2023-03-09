@@ -163,6 +163,17 @@ watch(
     </a>
     <!-- 页码列表 -->
     <template v-if="showPage">
+      <!-- 首页 -->
+      <template v-if="totalPage[0] != 1">
+        <a
+          href="javascript:;"
+          class="layui-laypage-first"
+          @click="jump(1)"
+        >
+          1
+        </a>
+        <a class="layui-laypage-spr">...</a>
+      </template>
       <template v-for="index of totalPage" :key="index">
         <!-- 选中项 -->
         <span v-if="index === currentPage" class="layui-laypage-curr">
@@ -188,7 +199,7 @@ watch(
           href="javascript:;"
           class="layui-laypage-last"
           @click="jump(maxPage)"
-          >
+        >
           {{ maxPage }}
         </a>
       </template>
