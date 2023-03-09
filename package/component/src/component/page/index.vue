@@ -58,7 +58,6 @@ watch(
 const totalPage = computed(() => {
   maxPage.value = Math.ceil(props.total / inlimit.value);
   let r: number[] = [];
-  // 计算 star 页
   let start =
     maxPage.value <= props.pages
       ? 1
@@ -143,7 +142,7 @@ watch(
 
 <template>
   <div class="layui-laypage layui-laypage-default">
-    <!-- 辅助标签, 为 total computed 逻辑正常执行而创建的临时标签 -->
+    <!-- 辅助标签，不能删 -->
     <div style="display: none">{{ totalPage }}</div>
     <span v-if="showCount" class="layui-laypage-count"
       >{{ t("page.total") }} {{ total }} {{ t("page.item") }} {{ maxPage }}
@@ -158,18 +157,13 @@ watch(
       ]"
       @click="prev()"
     >
-      <slot v-if="slots.prev" name="prev"></slot>
-      <template v-else>{{ t("page.previous") }}</template>
+      <slot name="prev">{{ t("page.previous") }}</slot>
     </a>
     <!-- 页码列表 -->
     <template v-if="showPage">
       <!-- 首页 -->
       <template v-if="totalPage[0] != 1">
-        <a
-          href="javascript:;"
-          class="layui-laypage-first"
-          @click="jump(1)"
-        >
+        <a href="javascript:;" class="layui-laypage-first" @click="jump(1)">
           1
         </a>
         <a class="layui-laypage-spr">...</a>
@@ -192,7 +186,7 @@ watch(
           >{{ index }}</a
         >
       </template>
-      <!-- 尾部页 -->
+      <!-- 尾页 -->
       <template v-if="totalPage[totalPage.length - 1] != maxPage">
         <a class="layui-laypage-spr">...</a>
         <a
@@ -215,8 +209,7 @@ watch(
       ]"
       @click="next()"
     >
-      <slot v-if="slots.next" name="next"></slot>
-      <template v-else>{{ t("page.next") }}</template>
+      <slot name="next">{{ t("page.next") }}</slot>
     </a>
     <span v-if="showLimit" class="layui-laypage-limits">
       <select v-model="inlimit" @change="changelimit">
