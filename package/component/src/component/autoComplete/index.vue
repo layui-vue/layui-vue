@@ -1,7 +1,13 @@
 <template>
   <div class="lay-autocomplete">
     <lay-dropdown ref="dropdownRef">
-      <lay-input :model-value="innerValue" :placeholder="placeholder" :allow-clear="allowClear" @input="inputHandler"></lay-input>
+      <lay-input
+        :name="name"
+        :model-value="innerValue"
+        :placeholder="placeholder"
+        :allow-clear="allowClear"
+        @input="inputHandler"
+      ></lay-input>
       <template #content>
         <template v-if="innerOptions.length > 0">
           <lay-dropdown-menu>
@@ -40,11 +46,11 @@ export interface AvatarProps {
   options?: string[];
   placeholder?: string;
   allowClear?: boolean;
+  name?: string;
 }
 
 const props = withDefaults(defineProps<AvatarProps>(), {});
 
-const visible = ref(false);
 const innerValue = ref(props.modalValue);
 const innerOptions = reactive<string[]>([]);
 const dropdownRef = ref();
@@ -94,10 +100,10 @@ onMounted(() => {
 });
 
 onUnmounted(() => {
-  document.removeEventListener("keyup", function(){
+  document.removeEventListener("keyup", function () {
     // 注销 keyup 监听
   });
-})
+});
 </script>
 
 <style lang="less">
