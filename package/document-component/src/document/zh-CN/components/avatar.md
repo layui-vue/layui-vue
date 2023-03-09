@@ -27,7 +27,7 @@ import { ref } from 'vue'
 export default {
   setup() {
 
-    const src = ref("https://portrait.gitee.com/uploads/avatars/user/1611/4835367_Jmysy_1578975358.png")
+    const src = ref("https://foruda.gitee.com/avatar/1677022544584087390/4835367_jmysy_1578975358.png")
 
     return {
         src
@@ -52,7 +52,7 @@ import { ref } from 'vue'
 export default {
     setup() {
 
-        const src = "https://portrait.gitee.com/uploads/avatars/user/1611/4835367_Jmysy_1578975358.png"
+        const src = "https://foruda.gitee.com/avatar/1677022544584087390/4835367_jmysy_1578975358.png"
         
         return {
             src
@@ -84,7 +84,7 @@ import { ref } from 'vue'
 export default {
     setup() {
 
-        const src = "https://portrait.gitee.com/uploads/avatars/user/1611/4835367_Jmysy_1578975358.png"
+        const src = "https://foruda.gitee.com/avatar/1677022544584087390/4835367_jmysy_1578975358.png"
 
         return {
           src
@@ -116,7 +116,7 @@ import { ref } from 'vue'
 export default {
     setup() {
 
-        const src = "https://portrait.gitee.com/uploads/avatars/user/1611/4835367_Jmysy_1578975358.png"
+        const src = "https://foruda.gitee.com/avatar/1677022544584087390/4835367_jmysy_1578975358.png"
 
         return {
           src

@@ -14,6 +14,8 @@
 
 <template>
   <lay-auto-complete v-model="value" :options="options"></lay-auto-complete>
+  <br/>
+  <lay-auto-complete v-model="value1" :options="options"></lay-auto-complete>
 </template>
 
 <script>
@@ -23,6 +25,7 @@ export default {
   setup() {
 
     const value = ref(0);
+    const value1 = ref(0);
     const options = reactive([
         "1111",
         "11112222",
@@ -31,6 +34,7 @@ export default {
 
     return {
       value,
+      value1,
       options
     }
   }

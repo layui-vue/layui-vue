@@ -18,8 +18,10 @@
       <a name="1-9-2"></a> 
       <li> 
         <h3>1.9.1 <span class="layui-badge-rim">2023-03-09</span></h3> 
-        <ul>      
+        <ul> 
+          <li>[新增] auto-complete 组件，带提示的文本输入框，用于辅助输入。</li>     
           <li>[新增] page 组件 showPage 属性开启时, 显示首页直达功能，从而改善易用性。<a href="https://gitee.com/layui/layui-vue/issues/I69ZW6">#I69ZW6</a></li>
+          <li>[优化] page 组件 limits 所依赖的原生 select 高度, 使其与其他元素保持一致。</li>
         </ul>  
       </li>
     </ul>

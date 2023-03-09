@@ -1,20 +1,21 @@
 <template>
   <div class="lay-autocomplete">
-    <lay-dropdown>
-      <lay-input
-        :model-value="props.modalValue"
-        @input="inputHandler"
-      ></lay-input>
+    <lay-dropdown ref="dropdownRef">
+      <lay-input :model-value="innerValue" :placeholder="placeholder" :allow-clear="allowClear" @input="inputHandler"></lay-input>
       <template #content>
         <template v-if="innerOptions.length > 0">
           <lay-dropdown-menu>
-            <lay-dropdown-menu-item
-              class="lay-autocomplete-option"
-              :class="{ selected: selectedOption == option }"
-              v-for="option in innerOptions"
-            >
-              {{ option }}
-            </lay-dropdown-menu-item>
+            <template v-for="(option, index) in innerOptions">
+              <lay-dropdown-menu-item
+                class="lay-autocomplete-option"
+                :class="{
+                  selected: selectedIndex == index,
+                  equals: innerValue == option,
+                }"
+              >
+                {{ option }}
+              </lay-dropdown-menu-item>
+            </template>
           </lay-dropdown-menu>
         </template>
         <template v-else>
@@ -32,18 +33,22 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { ref, watch, reactive } from "vue";
+import { ref, watch, reactive, onMounted, onUnmounted } from "vue";
 
 export interface AvatarProps {
   modalValue?: string;
   options?: string[];
+  placeholder?: string;
+  allowClear?: boolean;
 }
 
 const props = withDefaults(defineProps<AvatarProps>(), {});
 
+const visible = ref(false);
 const innerValue = ref(props.modalValue);
 const innerOptions = reactive<string[]>([]);
-const selectedOption = ref();
+const dropdownRef = ref();
+const selectedIndex = ref();
 
 watch(
   () => props.modalValue,
@@ -54,6 +59,7 @@ watch(
 
 const inputHandler = function (value: string) {
   innerValue.value = value;
+  dropdownRef.value.show();
 };
 
 watch([innerValue, props.options], () => {
@@ -64,9 +70,34 @@ watch([innerValue, props.options], () => {
     }
   });
   if (innerOptions.length > 0) {
-    selectedOption.value = innerOptions[0];
+    selectedIndex.value = 0;
   }
 });
+
+onMounted(() => {
+  document.addEventListener("keyup", function (e) {
+    if (e.key === "ArrowUp") {
+      if (selectedIndex.value > 0) {
+        selectedIndex.value = selectedIndex.value - 1;
+      }
+    }
+    if (e.key === "ArrowDown") {
+      if (selectedIndex.value <= innerOptions.length - 2) {
+        selectedIndex.value = selectedIndex.value + 1;
+      }
+    }
+    if (e.key === "Enter") {
+      innerValue.value = innerOptions[selectedIndex.value];
+      dropdownRef.value.hide();
+    }
+  });
+});
+
+onUnmounted(() => {
+  document.removeEventListener("keyup", function(){
+    // 注销 keyup 监听
+  });
+})
 </script>
 
 <style lang="less">
@@ -80,6 +111,12 @@ watch([innerValue, props.options], () => {
 }
 
 .lay-autocomplete-option.selected {
-  background-color: gray;
+  background-color: var(--global-neutral-color-2);
+}
+
+.lay-autocomplete-option.equals {
+  background-color: var(--global-neutral-color-2) !important;
+  color: var(--global-checked-color) !important;
+  font-weight: 700 !important;
 }
 </style>
