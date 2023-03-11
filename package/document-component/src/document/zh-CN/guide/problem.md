@@ -13,7 +13,16 @@
 ::: describe 查阅：<a style="color:#009688;" href="https://staging-cn.vuejs.org/guide/essentials/component-basics.html#dom-template-parsing-caveats">https://staging-cn.vuejs.org/guide/essentials/component-basics.html#dom-template-parsing-caveats</a >
 :::
 
-::: title 全局 Component 作为 layer.open 内容, 出现 cannot be resolved 警告
+::: title layui 与 layui-vue 的区别 （摘自 Gitee 介绍）
+:::
+
+::: describe Layui 是一套开源的 Web UI 组件库，采用自身轻量级模块化规范，遵循原生态的 HTML/CSS/JavaScript 开发模式，极易上手，拿来即用。
+:::
+
+::: describe Layui Vue 是一套 Vue 3.0 桌面端组件库，沿用 layui 设计规范，开箱即用。
+:::
+
+::: title 全局 Component 作为 layer.open 内容，出现 cannot be resolved 警告
 :::
 
 ::: describe 因为忽略了 CreateApp().use(layer) 过程, 使其创建了新的 appContext 实例, 导致与全局 Component 所在的 context 并不相同，因而无法获取到组件信息。

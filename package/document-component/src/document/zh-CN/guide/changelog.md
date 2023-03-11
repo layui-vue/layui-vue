@@ -7,7 +7,7 @@
 ::: describe 正常情况下使用 每周 发布策略， 但关键的 bug 修复将需要热修复，所以实际发布版本 可能 每周超过 1 次。
 :::
 
-::: describe 若你需要查看更多详情，可前往 <a style="color:#009688;" target="_blank" href="https://gitee.com/layui/layui-vue/releases">Gitee Releases</a>。
+::: describe 若你需要查看更多详情，可前往 <a style="color:#009688;" target="_blank" href="https://gitee.com/layui/layui-vue/releases">Gitee</a>。
 :::
 
 ::: demo 
@@ -17,9 +17,9 @@
     <ul> 
       <a name="1-9-2"></a> 
       <li> 
-        <h3>1.9.1 <span class="layui-badge-rim">2023-03-09</span></h3> 
+        <h3>1.9.2 <span class="layui-badge-rim">2023-03-11</span></h3> 
         <ul> 
-          <li>[新增] auto-complete 组件，带提示的文本输入框，用于辅助输入。</li>     
+          <li>[新增] auto-complete 组件，带提示的文本输入框，用于辅助输入。<a href="https://gitee.com/layui/layui-vue/issues/I6JSOA">#I6JSOA</a></li>     
           <li>[新增] page 组件 showPage 属性开启时, 显示首页直达功能，从而改善易用性。<a href="https://gitee.com/layui/layui-vue/issues/I69ZW6">#I69ZW6</a></li>
           <li>[优化] page 组件 limits 所依赖的原生 select 高度, 使其与其他元素保持一致。</li>
         </ul>  
@@ -48,7 +48,7 @@
           <li>[新增] types 目录 components.d.ts 声明文件, web-types.json, attributes.json 和 tags.json 配置文件。</li>
           <li>[优化] upload 组件 cutOptions.layerOption.area 属性, 默认值由 ["640px","640px"] 修改为 "auto"。</li>
           <li>[优化] select 组件 multiple 属性为 true 时, 传递非 array 类型数据时的异常信息。</li>
-          <li>[重要] upload 组件 multiple 为 false 时, 上传时 file[0] 字段修改为 file 字段。</li>
+          <li>[重要] upload 组件 multiple 为 false 时, 上传时 file[0] 字段修改为 file 字段。<span style="color:red;">破坏性</span></li>
           <li>
               <h4 style="margin-bottom: 0px !important;font-weight: 500 !important;">layer</h4>
               <ul>

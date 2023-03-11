@@ -4,28 +4,30 @@
       <lay-input
         :name="name"
         :model-value="innerValue"
-        :placeholder="placeholder"
         :allow-clear="allowClear"
+        :placeholder="placeholder"
+        @click="clickHandler"
         @input="inputHandler"
+        @blur="blurHandler"
+        @focus="focusHandler"
+        @compositionstart="onCompositionstart"
+        @compositionend="onCompositionend"
       ></lay-input>
       <template #content>
         <template v-if="innerOptions.length > 0">
           <lay-dropdown-menu>
             <template v-for="(option, index) in innerOptions">
               <lay-dropdown-menu-item
-                class="lay-autocomplete-option"
-                :class="{
+                @click="clickOptions(option)"
+                :class="['lay-autocomplete-option', {
                   selected: selectedIndex == index,
                   equals: innerValue == option,
-                }"
+                }]"
               >
                 {{ option }}
               </lay-dropdown-menu-item>
             </template>
           </lay-dropdown-menu>
-        </template>
-        <template v-else>
-          <div class="lay-autocomplete-empty">暂无内容</div>
         </template>
       </template>
     </lay-dropdown>
@@ -34,67 +36,119 @@
 
 <script lang="ts">
 export default {
-  name: "LayAutoComplete",
+  name: "LayAutocomplete",
 };
 </script>
 
 <script lang="ts" setup>
-import { ref, watch, reactive, onMounted, onUnmounted } from "vue";
+import { ref, watch, onMounted, onUnmounted, nextTick } from "vue";
 
-export interface AvatarProps {
-  modalValue?: string;
-  options?: string[];
+export interface AutocompleteProps {
+  modelValue: string;
+  fetchSuggestions: Function;
   placeholder?: string;
   allowClear?: boolean;
   name?: string;
 }
 
-const props = withDefaults(defineProps<AvatarProps>(), {});
+const props = withDefaults(defineProps<AutocompleteProps>(), {});
 
-const innerValue = ref(props.modalValue);
-const innerOptions = reactive<string[]>([]);
+interface AutocompleteEmits {
+  (e: "update:modelValue", value: string): void;
+}
+
+const emits = defineEmits<AutocompleteEmits>();
+
+const isFocus = ref(false);
+const innerValue = ref(props.modelValue);
+const innerOptions = ref<string[]>([]);
+const selectedIndex = ref(-1);
 const dropdownRef = ref();
-const selectedIndex = ref();
+const composing = ref(false);
+
+const onCompositionstart = () => {
+  composing.value = true;
+};
+
+const onCompositionend = (eventParam: Event) => {
+  composing.value = false;
+  inputHandler((eventParam.target as HTMLInputElement).value);
+};
 
 watch(
-  () => props.modalValue,
+  () => props.modelValue,
   () => {
-    innerValue.value = props.modalValue;
+    innerValue.value = props.modelValue;
   }
 );
 
 const inputHandler = function (value: string) {
-  innerValue.value = value;
-  dropdownRef.value.show();
+  if (!composing.value) {
+    emits("update:modelValue", value);
+    props.fetchSuggestions(value).then((suggestions: any[]) => {
+      innerOptions.value = suggestions || [];
+    })
+  }
 };
 
-watch([innerValue, props.options], () => {
-  innerOptions.splice(0);
-  props.options?.forEach((option) => {
-    if (innerValue.value && option.indexOf(innerValue.value) != -1) {
-      innerOptions.push(option);
-    }
+const clickHandler = function () {
+  nextTick(() => {
+    dropdownRef.value.hide();
   });
-  if (innerOptions.length > 0) {
-    selectedIndex.value = 0;
+};
+
+const clickOptions = function (value: string) {
+  innerValue.value = value;
+}
+
+const blurHandler = function () {
+  isFocus.value = false;
+};
+
+const focusHandler = function () {
+  isFocus.value = true;
+};
+
+watch([innerValue, innerOptions], () => {
+  let isEquals = false;
+  if (innerValue.value != undefined && innerValue.value != "") {
+    innerOptions.value.forEach((option, index) => {
+      if (innerValue.value === option) {
+        selectedIndex.value = index;
+        isEquals = true;
+      }
+    });
+  }
+  if (isEquals === false) {
+    selectedIndex.value = -1;
   }
 });
 
+watch(innerOptions, () => {
+  if(innerOptions.value.length > 0) {
+    dropdownRef.value.show();
+  } else {
+    dropdownRef.value.hide();
+  }
+})
+
 onMounted(() => {
   document.addEventListener("keyup", function (e) {
-    if (e.key === "ArrowUp") {
-      if (selectedIndex.value > 0) {
-        selectedIndex.value = selectedIndex.value - 1;
+    if (isFocus.value === true) {
+      if (e.key === "ArrowDown") {
+        if (selectedIndex.value <= innerOptions.value.length - 2) {
+          selectedIndex.value++;
+        }
       }
-    }
-    if (e.key === "ArrowDown") {
-      if (selectedIndex.value <= innerOptions.length - 2) {
-        selectedIndex.value = selectedIndex.value + 1;
+      if (e.key === "ArrowUp") {
+        if (selectedIndex.value > 0) {
+          selectedIndex.value--;
+        }
       }
-    }
-    if (e.key === "Enter") {
-      innerValue.value = innerOptions[selectedIndex.value];
-      dropdownRef.value.hide();
+      if (e.key === "Enter") {
+        innerValue.value = innerOptions.value[selectedIndex.value];
+        dropdownRef.value.hide();
+      }
     }
   });
 });
