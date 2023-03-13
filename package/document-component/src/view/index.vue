@@ -183,20 +183,6 @@
           </lay-tooltip>
         </lay-col>
         <lay-col :md="3" :xs="6">
-          <lay-tooltip content="CCFlow" position="top">
-            <a
-              style="height: 40px; display: inline-block"
-              href="http://ccflow.org/"
-              target="_blank"
-            >
-              <lay-avatar
-                src="https://portrait.gitee.com/uploads/avatars/namespace/289/868254_opencc_1578989593.png"
-                style="background: transparent"
-              ></lay-avatar>
-            </a>
-          </lay-tooltip>
-        </lay-col>
-        <lay-col :md="3" :xs="6">
           <lay-tooltip content="Sa-Token" position="top">
             <a
               style="height: 40px; display: inline-block"

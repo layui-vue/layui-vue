@@ -85,6 +85,7 @@ import LaySpace from "./component/space/index";
 import LayTag from "./component/tag/index";
 import LayTagInput from "./component/tagInput/index";
 import LayConfigProvider from "./provider";
+import LayAutocomplete from "./component/autocomplete/index";
 
 declare module "@vue/runtime-core" {
   // GlobalComponents for Volar
@@ -174,6 +175,7 @@ declare module "@vue/runtime-core" {
     LaySpace: typeof LaySpace;
     LayTag: typeof LayTag;
     LayTagInput: typeof LayTagInput;
+    LayAutocomplete: typeof LayAutocomplete;
   }
 
   export interface ComponentCustomProperties {

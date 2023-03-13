@@ -1,33 +1,61 @@
 <template>
   <div class="lay-autocomplete">
-    <lay-dropdown ref="dropdownRef">
+    <lay-dropdown 
+       ref="dropdownRef" 
+      :disabled="disabled"
+      :autoFitWidth="autoFitWidth"
+      :contentClass="contentClass"
+      :contentStyle="contentStyle"  
+      :update-at-scroll="true">
       <lay-input
         :name="name"
         :model-value="innerValue"
         :allow-clear="allowClear"
+        :disabled="disabled"
         :placeholder="placeholder"
         @click="clickHandler"
-        @input="inputHandler"
         @blur="blurHandler"
         @focus="focusHandler"
+        @input="inputHandler"
+        @clear="clearHandler"
         @compositionstart="onCompositionstart"
         @compositionend="onCompositionend"
-      ></lay-input>
+      >
+        <template v-if="$slots.prefix" #prefix>
+          <slot name="prefix"></slot>
+        </template>
+        <template v-if="$slots.suffix" #suffix>
+          <slot name="suffix"></slot>
+        </template>
+        <template v-if="$slots.prepend" #prepend>
+          <slot name="prepend"></slot>
+        </template>
+        <template v-if="$slots.append" #append>
+          <slot name="append"></slot>
+        </template>
+      </lay-input>
       <template #content>
-        <template v-if="innerOptions.length > 0">
+        <template v-if="loading">
+          <div class="lay-autocomplete-loading">
+            <lay-icon type="layui-icon-loading" class="layui-anim layui-anim-rotate layui-anim-loop"></lay-icon>
+          </div>
+        </template>
+        <template v-else>
+          <template v-if="innerOptions.length > 0">
           <lay-dropdown-menu>
             <template v-for="(option, index) in innerOptions">
               <lay-dropdown-menu-item
                 @click="clickOptions(option)"
                 :class="['lay-autocomplete-option', {
                   selected: selectedIndex == index,
-                  equals: innerValue == option,
+                  equals: innerValue == option[replaceFields.value],
                 }]"
               >
-                {{ option }}
+                <slot name="default" :option="option"> {{ option.value }} </slot>
               </lay-dropdown-menu-item>
             </template>
           </lay-dropdown-menu>
+        </template>
         </template>
       </template>
     </lay-dropdown>
@@ -41,30 +69,50 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { ref, watch, onMounted, onUnmounted, nextTick } from "vue";
+import { ref, watch, onMounted, onUnmounted, nextTick, StyleValue } from "vue";
+import LayDropdown from "../dropdown/index.vue";
+import LayDropdownMenu from "../dropdownMenu/index.vue";
+import LayDropdownMenuItem from "../dropdownMenuItem/index.vue";
+import LayInput from "../input/index.vue";
+import { LayIcon } from "@layui/icons-vue";
+import "./index.less";
 
 export interface AutocompleteProps {
   modelValue: string;
+  disabled?: boolean;
   fetchSuggestions: Function;
   placeholder?: string;
   allowClear?: boolean;
   name?: string;
+  autoFitWidth?: boolean;
+  contentClass?: string | Array<string | object> | object;
+  contentStyle?: StyleValue;
+  replaceFields?: { value: string; };
 }
 
-const props = withDefaults(defineProps<AutocompleteProps>(), {});
+const props = withDefaults(defineProps<AutocompleteProps>(), {
+  autoFitWidth: true,
+  replaceFields: () => {
+    return {
+      value: "value"
+    };
+  }
+});
 
 interface AutocompleteEmits {
   (e: "update:modelValue", value: string): void;
+  (e: "select", option: any): void;
 }
 
 const emits = defineEmits<AutocompleteEmits>();
 
 const isFocus = ref(false);
+const loading = ref(false);
 const innerValue = ref(props.modelValue);
-const innerOptions = ref<string[]>([]);
+const innerOptions = ref<any[]>([]);
 const selectedIndex = ref(-1);
-const dropdownRef = ref();
 const composing = ref(false);
+const dropdownRef = ref();
 
 const onCompositionstart = () => {
   composing.value = true;
@@ -82,38 +130,95 @@ watch(
   }
 );
 
+/**
+ * 搜索逻辑
+ * 
+ * 准备: 开启 dropdown, 开启加载
+ * 核心: 回调 fetchSuggestions 方法，更新 innerOptions 内容
+ * 完成：赋值 loading 为 false 值 
+ */
 const inputHandler = function (value: string) {
   if (!composing.value) {
+    loading.value = true;
+    dropdownRef.value.show();
     emits("update:modelValue", value);
-    props.fetchSuggestions(value).then((suggestions: any[]) => {
-      innerOptions.value = suggestions || [];
-    })
+    var promise = props.fetchSuggestions(value)
+    if (promise != undefined) {
+        promise.then((suggestions: any[]) => {
+        innerOptions.value = suggestions || [];
+        loading.value = false;
+      })
+    }
   }
 };
 
+/**
+ * 清空操作
+ * 
+ * 该事件由 input 组件 clear 操作触发。
+ * 
+ * 备注: 清空输入值的同时，需要考虑到 options 的重置
+ */
+const clearHandler = function () {
+  emits("update:modelValue", "");
+  if(innerOptions.value.length > 0) {
+     innerOptions.value = [];
+  }
+}
+
+/**
+ * 根据 fetchSuggestions 结果，判定 
+ * dropdownRef 是否需要隐藏 
+ */
+watch(innerOptions, () => {
+  if(innerOptions.value.length === 0) {
+    dropdownRef.value.hide();
+  }
+})
+
+/**
+ * 兼容点击 input 时不展示 dropdown.
+ * 仅在 @input 触发时展示 
+ */
 const clickHandler = function () {
   nextTick(() => {
     dropdownRef.value.hide();
   });
 };
 
-const clickOptions = function (value: string) {
-  innerValue.value = value;
+/**
+ * 手动点击 option 触发事件
+ * 
+ * @param option 选中项 
+ */
+const clickOptions = function (option: any) {
+  innerValue.value = option[props.replaceFields.value];
+  emits("select", option);
 }
 
-const blurHandler = function () {
-  isFocus.value = false;
-};
-
+/**
+ * 维护 isFocus 状态，确保键盘操作只有 isFocus 为 true 时触发 
+ */
 const focusHandler = function () {
   isFocus.value = true;
 };
 
+/**
+ * 维护 isFocus 状态，确保键盘操作只有 isFocus 为 true 时触发 
+ */
+const blurHandler = function () {
+  isFocus.value = false;
+};
+
+/**
+ * selectIndex 索引计算逻辑，保证在 innerValue 与 innerOptions 
+ * 改变时，缺省选项落在合适的 index 上。
+ */
 watch([innerValue, innerOptions], () => {
   let isEquals = false;
   if (innerValue.value != undefined && innerValue.value != "") {
     innerOptions.value.forEach((option, index) => {
-      if (innerValue.value === option) {
+      if (innerValue.value === option[props.replaceFields.value]) {
         selectedIndex.value = index;
         isEquals = true;
       }
@@ -124,14 +229,13 @@ watch([innerValue, innerOptions], () => {
   }
 });
 
-watch(innerOptions, () => {
-  if(innerOptions.value.length > 0) {
-    dropdownRef.value.show();
-  } else {
-    dropdownRef.value.hide();
-  }
-})
-
+/**
+ * 监听 keyup 事件
+ * 
+ * @remark ArrowDown 向下操作
+ * @remark ArrowUp 向上操作
+ * @remark Enter 回车操作 
+ */
 onMounted(() => {
   document.addEventListener("keyup", function (e) {
     if (isFocus.value === true) {
@@ -146,8 +250,12 @@ onMounted(() => {
         }
       }
       if (e.key === "Enter") {
-        innerValue.value = innerOptions.value[selectedIndex.value];
-        dropdownRef.value.hide();
+        if(selectedIndex.value != -1) {
+          const option = innerOptions.value[selectedIndex.value];
+          innerValue.value = option[props.replaceFields.value];
+          dropdownRef.value.hide();
+          emits("select", option);
+        }
       }
     }
   });
@@ -159,24 +267,3 @@ onUnmounted(() => {
   });
 });
 </script>
-
-<style lang="less">
-.lay-autocomplete {
-  width: 220px;
-}
-
-.lay-autocomplete-empty {
-  text-align: center;
-  padding: 15px;
-}
-
-.lay-autocomplete-option.selected {
-  background-color: var(--global-neutral-color-2);
-}
-
-.lay-autocomplete-option.equals {
-  background-color: var(--global-neutral-color-2) !important;
-  color: var(--global-checked-color) !important;
-  font-weight: 700 !important;
-}
-</style>

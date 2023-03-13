@@ -15,6 +15,15 @@
 <lay-timeline>
 <lay-timeline-item title="1.9.x">
     <ul> 
+      <a name="1-9-3"></a> 
+      <li> 
+        <h3>1.9.3 <span class="layui-badge-rim">2023-03-13</span></h3> 
+        <ul>      
+          <li>[优化] autocomplete 组件 selected 样式，输入内容与提示内容相匹配时，使用次色标注。 </li>
+        </ul>  
+      </li>
+    </ul>
+    <ul> 
       <a name="1-9-2"></a> 
       <li> 
         <h3>1.9.2 <span class="layui-badge-rim">2023-03-11</span></h3> 
@@ -22,6 +31,19 @@
           <li>[新增] auto-complete 组件，带提示的文本输入框，用于辅助输入。<a href="https://gitee.com/layui/layui-vue/issues/I6JSOA">#I6JSOA</a></li>     
           <li>[新增] page 组件 showPage 属性开启时, 显示首页直达功能，从而改善易用性。<a href="https://gitee.com/layui/layui-vue/issues/I69ZW6">#I69ZW6</a></li>
           <li>[优化] page 组件 limits 所依赖的原生 select 高度, 使其与其他元素保持一致。</li>
+          <li>
+              <h4 style="margin-bottom: 0px !important;font-weight: 500 !important;">autocomplete</h4>
+              <ul>
+                  <li>[新增] autocomplete 组件 name 属性, input 原生 name 属性。</li>
+                  <li>[新增] autocomplete 组件 allow-clear 属性, 用于开启清空操作。</li>
+                  <li>[新增] autocomplete 组件 disabled 属性, 用于设置输入框禁用状态。</li>
+                  <li>[新增] autocomplete 组件 placeholder 属性, 用于设置输入框提示信息。</li>
+                  <li>[新增] autocomplete 组件 fetchSuggestions 属性, 输入时的回调方法，用于查询建议列表。</li>
+                  <li>[新增] autocomplete 组件 contentStyle 属性, 继承至 dropdown 组件，用于设置下拉面板的 style 属性。</li>
+                  <li>[新增] autocomplete 组件 contentClass 属性, 继承至 dropdown 组件，用于设置下拉面板的 class 属性。</li>
+                  <li>[新增] autocomplete 组件 autoFitWidth 属性, 继承至 dropdown 组件，继承至 dropdown 组件，用于设置下拉面板是否与输入框宽度相同。</li>
+              </ul>
+          </li>
         </ul>  
       </li>
     </ul>

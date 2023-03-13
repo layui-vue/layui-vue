@@ -146,7 +146,7 @@ const menus = [
         id: 36,
         title: "自动完成",
         flag: "update",
-        subTitle: "auto-complete",
+        subTitle: "autocomplete",
         path: "/zh-CN/components/autoComplete",
       },
       {
