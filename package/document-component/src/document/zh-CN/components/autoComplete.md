@@ -234,6 +234,49 @@ export default {
 
 :::
 
+::: title 设置尺寸
+:::
+
+::: demo 通过 `size` 属性，设置 autocomplete 组件尺寸。
+
+<template>
+  <lay-autocomplete v-model="value5" :fetchSuggestions="fetchSuggestions5" placeholder="输入内容，触发提示" size="lg"></lay-autocomplete>
+</template>
+
+<script>
+import { ref, reactive } from 'vue'
+
+export default {
+  setup() {
+
+    const value5 = ref("");
+    const fetchSuggestions5 = function(value) {
+      if(value != "") {
+        return new Promise((resolve) => {
+          setTimeout(() => {
+            resolve([
+              {value: "稻香 - 周杰伦"},
+              {value: "蒲公英的约定 - 周杰伦"},
+              {value: "爱在西元前 - 周杰伦"},
+              {value: "不能说的秘密 - 周杰伦"},
+              {value: "七里香 - 周杰伦"},
+              {value: "龙卷风 - 周杰伦"},
+            ])
+          }, 500)
+        });
+      }
+    }
+
+    return {
+      value5,
+      fetchSuggestions5
+    }
+  }
+}
+</script>
+
+:::
+
 ::: title Autocomplete 属性
 :::
 

@@ -10,6 +10,7 @@
     >
       <lay-input
         :name="name"
+        :size="size"
         :model-value="innerValue"
         :allow-clear="allowClear"
         :disabled="disabled"
@@ -86,6 +87,8 @@ import LayInput from "../input/index.vue";
 import { LayIcon } from "@layui/icons-vue";
 import "./index.less";
 
+export type AutocompleteSize = "lg" | "md" | "sm" | "xs";
+
 export interface AutocompleteProps {
   modelValue: string;
   disabled?: boolean;
@@ -97,6 +100,7 @@ export interface AutocompleteProps {
   contentClass?: string | Array<string | object> | object;
   contentStyle?: StyleValue;
   replaceFields?: { value: string };
+  size: AutocompleteSize;
 }
 
 const props = withDefaults(defineProps<AutocompleteProps>(), {
