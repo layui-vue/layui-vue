@@ -73,6 +73,7 @@ export interface UploadProps {
   dragText?: string;
   modelValue?: any;
   auto?: boolean;
+  beforeUpload?: Function;
 }
 
 /**
@@ -107,6 +108,7 @@ const closeCutDownModal = () => {
   nextTick(() => clearAllCutEffect());
 };
 
+// 执行上传之后，清空变量
 const clearAllCutEffect = () => {
   activeUploadFiles.value = [];
   activeUploadFilesImgs.value = [];
@@ -115,6 +117,7 @@ const clearAllCutEffect = () => {
   _cropper = null;
 };
 
+// 执行上传之后，清空变量
 const clearLightCutEffect = () => {
   activeUploadFiles.value = [];
   activeUploadFilesImgs.value = [];
@@ -256,11 +259,28 @@ const localUploadTransaction = (option: localUploadTransaction) => {
       formData.append(key, _requestDate[key]);
     }
   }
-  let utimer = window.setTimeout(() => {
-    localUpload({ url, formData }, function () {
-      clearTimeout(utimer);
-    });
-  }, 200);
+  // 执行上传之前，执行 before 钩子，根据返回值，决定是否执行后续操作
+
+  // 备注：单文件 与 多文件 上传参数不同
+  var allowUpload;
+  if (props.beforeUpload != undefined) {
+    if (props.multiple) {
+      allowUpload = props.beforeUpload(files);
+    } else {
+      allowUpload = props.beforeUpload(files[0]);
+    }
+  }
+  if (allowUpload === undefined || allowUpload === true) {
+    // 继续上传
+    let utimer = window.setTimeout(() => {
+      localUpload({ url, formData }, function () {
+        clearTimeout(utimer);
+      });
+    }, 200);
+  } else {
+    // 中止上传，清空变量
+    clearAllCutEffect();
+  }
 };
 
 const dataURLtoFile = (dataurl: string) => {
@@ -300,6 +320,7 @@ const localUpload = (option: localUploadOption, callback: Function) => {
         xhr.status === 304 ||
         xhr.status == 0
       ) {
+        // 在 1.9.4 版本废弃，使用 beforeUpload 回调函数替代
         let successText = startUploadMsg.value;
         emit(
           "before",

@@ -210,12 +210,12 @@ export default {
 
 :::
 
-::: title 提供默认剪裁功能
+::: title 开启裁剪
 
 ::: demo 使用 `lay-upload` 标签, 添加 `cut` 开启 选择文件后剪裁功能
 
 <template>
-  <lay-upload @cutdone="getCutDone" acceptMime="images" @cutcancel="getCutCancel" :cut="true" :cutOptions="cutOptions" :multiple="false" @done="getFileDone">
+  <lay-upload  url="https://www.mocky.io/v2/5cc8019d300000980a055e76" @cutdone="getCutDone" :beforeUpload="beforeUpload10" acceptMime="images" @cutcancel="getCutCancel" :cut="true" :cutOptions="cutOptions" @done="getFileDone">
     <template #preview>
       <div class="easy-wrap" v-if="cutUrl">
         <img :src="cutUrl"/>
@@ -272,6 +272,51 @@ export default {
 
 :::
 
+::: title 钩子函数
+
+::: demo 通过 `beforeUpload` 属性设置上传前的回调函数，参数为 file 或 file[]，你可以通过返回 false 来阻止上传。
+
+<template>
+  <lay-upload :beforeUpload="beforeUpload10"  url="https://www.mocky.io/v2/5cc8019d300000980a055e76" >
+    <template #preview>
+      <img v-if="data10" :src="data10.url" style="width: 100px;"/>
+    </template>
+  </lay-upload>
+</template>
+
+<script>
+import { ref,reactive } from 'vue'
+import { layer } from "@layui/layer-vue";
+
+export default {
+  setup() {
+
+    const data10 = ref();
+
+    const doneHandle10 = (result) => {
+      data.value = JSON.parse(result.data);
+    };
+
+    const beforeUpload10 = (file) => {
+      var isOver = false;
+      if(file.size > 1000) {
+        isOver = true;
+        layer.msg(`file size over ${file.size} KB`, { icon: 2})
+      } 
+      return !isOver;
+    }
+
+    return {
+      beforeUpload10,
+      doneHandle10,
+      data10,
+    }
+  }
+}
+</script>
+
+:::
+
 ::: title Upload 属性
 :::
 
@@ -295,6 +340,7 @@ export default {
 | text            | 普通上传描述                                            | string  | --                           | --          |
 | dragText        | 拖拽上传描述                                            | string  | --                           | --          |
 | auto            | 是否自动提交                                            | boolean | false                        | --          |
+| beforeUpload    | 上传之前的钩子（1.9.4）                                 | Function | --                        | --          |
 
 :::
 

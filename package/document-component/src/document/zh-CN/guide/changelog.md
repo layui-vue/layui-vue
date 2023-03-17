@@ -20,6 +20,7 @@
         <h3>1.9.4 <span class="layui-badge-rim">2023-03-17</span></h3> 
         <ul> 
           <li>[新增] autocomplete 组件 size 属性，用于设置 input 输入框尺寸。</li>     
+          <li>[新增] upload 组件 before-upload 属性，用于设置上传前回调，参数为 file | file[]，通过返回 false 来阻止上传。</li>
         </ul>  
       </li>
     </ul>
