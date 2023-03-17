@@ -18,10 +18,13 @@
       <a name="1-9-3"></a> 
       <li> 
         <h3>1.9.3 <span class="layui-badge-rim">2023-03-13</span></h3> 
-        <ul>      
+        <ul> 
+          <li>[新增] table 组件 table-border-radius Css3 变量。</li>     
           <li>[新增] dropdown 组件 dropdown-content-border-radius Css3 变量。 </li>
           <li>[优化] autocomplete 组件 selected 样式，输入内容与提示内容相匹配时，使用次色标注。 </li>
           <li>[优化] global-border-radius 变量对 dropdown 组件下拉面板的样式影响。 </li>
+          <li>[优化] global-border-radius 变量对 table 组件样式影响。</li>
+          <li>[优化] table 组件 page 分页栏样式，修改 select 高度为 26px。</li>
         </ul>  
       </li>
     </ul>

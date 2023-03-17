@@ -4,6 +4,15 @@
 @import "../page/index.less";
 @import "../empty/index.less";
 
+:root {
+  --table-border-radius: var(--global-border-radius);
+}
+
+.layui-table-view {
+  border-radius: var(--table-border-radius);
+  overflow: hidden;
+}
+
 .layui-table {
   width: 100%;
   background-color: #fff;
@@ -527,6 +536,7 @@
 
 .layui-table-page .layui-laypage select{
   margin-top: 0px;
+  height: 26px;
 }
 
 .layui-table-page > div {
