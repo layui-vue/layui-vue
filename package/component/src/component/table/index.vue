@@ -26,6 +26,7 @@ import TableData from "./TableData.vue";
 import TablePage from "./TablePage.vue";
 import useTable from "./composables/useTable";
 import { TableEmit } from "./typing";
+import { startResize } from "./hooks/useResize";
 
 export interface TableProps {
   id?: string;
@@ -53,6 +54,7 @@ export interface TableProps {
   loading?: boolean;
   getCheckboxProps?: Function;
   getRadioProps?: Function;
+  resize?: boolean;
 }
 
 const props = withDefaults(defineProps<TableProps>(), {
@@ -77,6 +79,7 @@ const props = withDefaults(defineProps<TableProps>(), {
   loading: false,
   getCheckboxProps: () => {},
   getRadioProps: () => {},
+  resize: false,
 });
 
 const emit = defineEmits(TableEmit);
@@ -577,7 +580,6 @@ const renderFixedStyle = (column: any, columnIndex: number) => {
     }
     return isLast ? ({ "border-right": "none" } as StyleValue) : {};
   }
-  return {} as StyleValue;
 };
 
 /**
@@ -743,7 +745,6 @@ const renderHeadFixedStyle = (
       return isLast ? ({ "border-right": "none" } as StyleValue) : {};
     }
   }
-  return {} as StyleValue;
 };
 
 /**
@@ -1011,6 +1012,12 @@ onBeforeUnmount(() => {
                             ></i>
                           </span>
                         </template>
+                        <!-- 列宽拖动区 -->
+                        <div
+                          v-if="props.resize || column.resize"
+                          class="lay-table-cols-resize"
+                          @mousedown="startResize($event, column)"
+                        ></div>
                       </th>
                     </template>
                   </tr>

@@ -436,6 +436,7 @@
 
 .layui-table-header .layui-table-cell {
   background-color: #fafafa;
+  overflow: unset;
 }
 
 .layui-table-fixed-left {
@@ -626,4 +627,35 @@
 
 .layui-table-loading .layui-icon {
   font-size: 26px;
+}
+
+.lay-table-cols-resize {
+  position: absolute;
+  top: 0;
+  height: 100%!important;
+  bottom: 0;
+  left: auto!important;
+  right: 0px;
+  width: 2px;
+  cursor: col-resize;
+  touch-action: none;
+  user-select: none;
+  z-index: 2;
+  background-color: var(--global-primary-color);
+  opacity: 0;
+  transition: 200ms ease-in opacity;
+  &::before {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: block;
+    width: 16px;
+    background: var(--global-primary-color);
+    opacity: 0.1;
+    height: 100%;
+  }
+  &:hover {
+    opacity: 1;
+  }
 }
