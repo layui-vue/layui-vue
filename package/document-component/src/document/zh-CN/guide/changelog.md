@@ -17,10 +17,12 @@
     <ul> 
       <a name="1-9-4"></a> 
       <li> 
-        <h3>1.9.4 <span class="layui-badge-rim">2023-03-17</span></h3> 
+        <h3>1.9.4 <span class="layui-badge-rim">2023-03-20</span></h3> 
         <ul> 
+          <li>[新增] table 组件 resize 属性，用于开启列宽拉伸，columns 存在同名属性，可用于开启某一列宽拉伸。</li>
           <li>[新增] autocomplete 组件 size 属性，用于设置 input 输入框尺寸。</li>     
           <li>[新增] upload 组件 before-upload 属性，用于设置上传前回调，参数为 file | file[]，通过返回 false 来阻止上传。</li>
+          <li>[优化] table 组件 header 样式，移除定位属性，避免与 layer 不必要的层级冲突。</li>
         </ul>  
       </li>
     </ul>

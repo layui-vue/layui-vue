@@ -98,7 +98,7 @@ importers:
       '@vueuse/core': 8.7.3
       async-validator: ^4.1.1
       cropperjs: ^1.5.12
-      dayjs: ^1.11.0
+      dayjs: ^1.11.7
       evtd: ^0.2.3
       jsbarcode: 3.11.5
       qrcode: 1.5.0
@@ -113,7 +113,7 @@ importers:
       '@vueuse/core': 8.7.3
       async-validator: 4.1.1
       cropperjs: 1.5.12
-      dayjs: 1.11.0
+      dayjs: 1.11.7
       evtd: 0.2.3
       jsbarcode: 3.11.5
       qrcode: 1.5.0
@@ -3295,8 +3295,8 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /dayjs/1.11.0:
-    resolution: {integrity: sha512-JLC809s6Y948/FuCZPm5IX8rRhQwOiyMb2TfVVQEixG7P8Lm/gt5S7yoQZmC8x1UehI9Pb7sksEt4xx14m+7Ug==}
+  /dayjs/1.11.7:
+    resolution: {integrity: sha512-+Yw9U6YO5TQohxLcIkrXBeY73WP3ejHWVvx8XCk3gxvQDCTEmS48ZrSZCKciI7Bhl/uCMyxYtE9UqRILmFphkQ==}
     dev: false
 
   /de-indent/1.0.2:

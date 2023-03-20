@@ -18,6 +18,7 @@ let isResizing = false;
 let startX = 0;
 let startWidth = 0;
 let targetElem: HTMLElement | null = null;
+
 const resizing = throttle((e: MouseEvent) => {
   if (!isResizing) return;
   const offset = e.clientX - startX;

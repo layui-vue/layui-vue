@@ -1416,6 +1416,7 @@ export default {
       :data-source="dataSource5" 
       :checkbox="checkbox5" :page="page5" 
       :default-toolbar="defaultToolbar5"
+      :resize="true"
       v-model:selected-keys="selectedKeys5"  
       @row="rowClick5"
       @change="change555">
@@ -1475,7 +1476,7 @@ export default {
       {
         title:"年龄",
         width: "300px",
-        key:"ages",
+        key:"age",
         ellipsisTooltip: true,
       },
       {
