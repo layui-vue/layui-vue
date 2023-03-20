@@ -24,7 +24,7 @@ import LayDropdown from "../dropdown/index.vue";
 import LayEmpty from "../empty/index.vue";
 import TableData from "./TableData.vue";
 import TablePage from "./TablePage.vue";
-import useTable from "./composables/useTable";
+import useTable from "./hooks/useTable";
 import { TableEmit } from "./typing";
 import { startResize } from "./hooks/useResize";
 
