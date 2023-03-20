@@ -1,3 +1,4 @@
+import { TableColumn } from "../typing";
 // 节流
 const throttle = (func: Function, wait: number) => {
   let timer: any = null;
@@ -16,31 +17,40 @@ let stashColumn: any = null;
 let isResizing = false;
 let startX = 0;
 let startWidth = 0;
-let touchElem: HTMLElement | null = null;
+let targetElem: HTMLElement | null = null;
 const resizing = throttle((e: MouseEvent) => {
   if (!isResizing) return;
   const offset = e.clientX - startX;
   const newWidth = startWidth + offset;
+  if (newWidth < 0) return false;
   stashColumn.width = newWidth + "px";
+  if (targetElem) {
+    targetElem.style.width = newWidth + "px";
+  }
 }, 20);
 
 const stopResize = () => {
   startX = 0;
   startWidth = 0;
   stashColumn = null;
-  touchElem = null;
+  targetElem = null;
   isResizing = false;
 };
 
 document.addEventListener("mousemove", resizing);
 document.addEventListener("mouseup", stopResize);
 
-export const startResize = (e: MouseEvent, column: any) => {
+export const startResize = (e: MouseEvent, column: TableColumn) => {
   stashColumn = column;
   startX = e.clientX;
   isResizing = true;
   const target = e.target as HTMLElement;
-  console.log(target);
   const parentNode = target.parentNode as HTMLElement;
   startWidth = parentNode.offsetWidth;
+  if (column.width) {
+    const match = column.width.match(/^(\d+)px$/i);
+    if (match) {
+      startWidth = +match[1];
+    }
+  }
 };

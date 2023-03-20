@@ -40,14 +40,15 @@ export default {
       },{
         title:"密码",
         width: "180px",
-        key:"password"
+        key:"password",
+        resize: true,
       },{
         title:"资金往来",
         align: "center",
         children:  [
-          {title: "银行收入(￥)", key: "income", align: "center", customSlot: 'income'},
-          {title: "银行支出(￥)", key: "outlays", align: "center", customSlot: 'outlays'},
-          {title: "银行余额(￥)", key: "balance", align: "center", customSlot: 'balance'},
+          {title: "银行收入(￥)", key: "income", align: "center", customSlot: 'income', resize: true,},
+          {title: "银行支出(￥)", key: "outlays", align: "center", customSlot: 'outlays', resize: true,},
+          {title: "银行余额(￥)", key: "balance", align: "center", customSlot: 'balance', resize: true,},
         ] 
       }
     ])
@@ -79,7 +80,7 @@ export default {
     <lay-radio v-model="size2" name="action" value="md">md</lay-radio>
     <lay-radio v-model="size2" name="action" value="lg">lg</lay-radio>
   </lay-form>
-  <lay-table :columns="columns2" :data-source="dataSource2" :size="size2"></lay-table>
+  <lay-table :columns="columns2" :data-source="dataSource2" :size="size2" :resize="true"></lay-table>
 </template>
 
 <script>
@@ -1562,6 +1563,7 @@ export default {
 | span-method          | 合并算法                                              | `function`          | --         | --                 | `1.4.0` |
 | getCheckboxProps     | 多选行属性                                            | `function`          | --         | --                 | `1.4.0` |
 | getRadioProps        | 单选行属性                                            | `function`          | --         | --                 | `1.4.0` |
+| resize               | 开启所有单元格列宽拖动                                  | `boolean`           | `false`    | `true` `false`     | `1.9.3` |
 
 :::
 
@@ -1613,6 +1615,7 @@ export default {
 | fixed           | 列固定                         | `string`  | --      | `left` `right`              | --      |
 | type            | 列类型                         | `string`  | --      | `number` `checkbox` `radio` | --      |
 | children        | 表头分组                       | `string`  | --      | `number` `checkbox` `radio` | `1.4.0` |
+| resize          | 单元格列宽拖动           | `boolean` | `false`  | `true` `false`              | `1.9.3` |
 
 :::
 

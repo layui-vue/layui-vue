@@ -21,4 +21,5 @@ export interface TableColumn {
   fixed?: string;
   type?: string;
   children?: string;
+  resize?: boolean;
 }

@@ -54,6 +54,7 @@ export interface TableProps {
   loading?: boolean;
   getCheckboxProps?: Function;
   getRadioProps?: Function;
+  resize?: boolean;
 }
 
 const props = withDefaults(defineProps<TableProps>(), {
@@ -78,6 +79,7 @@ const props = withDefaults(defineProps<TableProps>(), {
   loading: false,
   getCheckboxProps: () => {},
   getRadioProps: () => {},
+  resize: false,
 });
 
 const emit = defineEmits(TableEmit);
@@ -1012,7 +1014,7 @@ onBeforeUnmount(() => {
                         </template>
                         <!-- 列宽拖动区 -->
                         <div
-                          v-if="!column.children"
+                          v-if="props.resize || column.resize"
                           class="lay-table-cols-resize"
                           @mousedown="startResize($event, column)"
                         ></div>
