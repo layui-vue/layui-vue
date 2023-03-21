@@ -27,6 +27,7 @@ import TablePage from "./TablePage.vue";
 import useTable from "./hooks/useTable";
 import { TableEmit } from "./typing";
 import { startResize } from "./hooks/useResize";
+import { setAutoColsWidth } from "./utils";
 
 export interface TableProps {
   id?: string;
@@ -55,6 +56,7 @@ export interface TableProps {
   getCheckboxProps?: Function;
   getRadioProps?: Function;
   resize?: boolean;
+  autoColsWidth?: boolean;
 }
 
 const props = withDefaults(defineProps<TableProps>(), {
@@ -80,6 +82,7 @@ const props = withDefaults(defineProps<TableProps>(), {
   getCheckboxProps: () => {},
   getRadioProps: () => {},
   resize: false,
+  autoColsWidth: false,
 });
 
 const emit = defineEmits(TableEmit);
@@ -320,6 +323,7 @@ watch(
     tableDataSource.value = [...props.dataSource];
     tableSelectedKeys.value = [];
     tableSelectedKey.value = s;
+    props.autoColsWidth && setAutoColsWidth(tableHeadColumns, tableDataSource);
   },
   { deep: true }
 );
