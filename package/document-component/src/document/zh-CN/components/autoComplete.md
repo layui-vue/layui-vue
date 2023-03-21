@@ -293,6 +293,7 @@ export default {
 | contentStyle         | 继承至 dropdown 组件，用于设置下拉面板的 style 属性                                 | `StyleValue`      | --      | --             |
 | contentClass         | 继承至 dropdown 组件，用于设置下拉面板的 class 属性                                 | `string` `Array<string \| object>` `object`          | -- | -- | 
 | autoFitWidth         | 继承至 dropdown 组件，用于设置下拉面板是否与输入框宽度相同                           | `boolean`         | `false` | `true` `false`  | 
+| size                 | 尺寸 (1.9.4 新增)                                                                 | `string`          | `md` | `lg` `md` `md` `xs`  | 
 :::
 
 ::: title Autocomplete 事件
