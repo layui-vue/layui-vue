@@ -13,11 +13,17 @@
 ::: demo 使用 `lay-tree-select` 标签, 创建下拉树组件。
 
 <template>
+  <!-- 清空 -->
+  <lay-button @click="clear">清空</lay-button>
   <lay-tree-select v-model="value1" :data="data1"></lay-tree-select>
 </template>
 
 <script setup>
 import { ref } from 'vue';
+
+const clear = () => {
+	value1.value = "";
+}
 
 const value1 = ref(1);
 
@@ -176,11 +182,16 @@ function handleClick(node) {
 ::: demo 通过 `multiple` 标签, 开启下拉树多选。
 
 <template>
-  <lay-tree-select v-model="value2" placeholder="123" :data="data2" multiple></lay-tree-select>
+  <lay-button @click="clear2">清空</lay-button>
+  <lay-tree-select v-model="value2" :data="data2" multiple></lay-tree-select>
 </template>
 
 <script setup>
 import { ref } from 'vue';
+
+const clear2 = () => {
+	value2.value = [];
+}
 
 const value2 = ref([23]);
 

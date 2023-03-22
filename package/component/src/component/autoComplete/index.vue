@@ -100,7 +100,7 @@ export interface AutocompleteProps {
   contentClass?: string | Array<string | object> | object;
   contentStyle?: StyleValue;
   replaceFields?: { value: string };
-  size: AutocompleteSize;
+  size?: AutocompleteSize;
 }
 
 const props = withDefaults(defineProps<AutocompleteProps>(), {

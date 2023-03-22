@@ -155,7 +155,7 @@ onUnmounted(() => {
 
 const selectedValue = computed({
   get() {
-    return props.modelValue;
+    return props.multiple && props.modelValue == null ? [] : props.modelValue;
   },
   set(value) {
     emits("update:modelValue", value);

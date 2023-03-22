@@ -15,6 +15,18 @@
 <lay-timeline>
 <lay-timeline-item title="1.9.x">
     <ul> 
+      <a name="1-9-5"></a> 
+      <li> 
+        <h3>1.9.5 <span class="layui-badge-rim">2023-03-22</span></h3> 
+        <ul> 
+          <li>[修复] tree-select 组件 modelValue / v-model 属性为空，input 组件回显不更新的问题。</li>
+          <li>[修复] autocomplete 组件 size 属性必填导致的控制台警告，调整该属性为非必填。</li>
+          <li>[修复] tree-select 组件 multiple 属性启用时，v-model / modelValue 不支持 null 值的问题。</li>
+          <li>[修复] select 组件 multiple 属性启用时, v-model / modelValue 不支持 null 值的问题。</li>
+        </ul>  
+      </li>
+    </ul>
+    <ul> 
       <a name="1-9-4"></a> 
       <li> 
         <h3>1.9.4 <span class="layui-badge-rim">2023-03-22</span></h3> 

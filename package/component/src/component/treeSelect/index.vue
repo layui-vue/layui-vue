@@ -57,7 +57,7 @@ const emits = defineEmits<TreeSelectEmits>();
 
 const selectedValue = computed({
   get() {
-    return props.modelValue;
+    return props.multiple && props.modelValue == null ? [] : props.modelValue;
   },
   set(value) {
     emits("update:modelValue", value);
@@ -91,9 +91,16 @@ watch(
         }
       });
     } else {
+      /**
+       * 根据 id 查找 node 节点
+       * 
+       * 备注：如果找不到这个节点, 说明存在 BUG 或 空值, 对 singleValue 清空  
+       */
       const node: any = getNode(props.data, selectedValue.value);
       if (node) {
         singleValue.value = node.title;
+      } else {
+        singleValue.value = "";
       }
     }
   },
