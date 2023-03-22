@@ -104,7 +104,7 @@ watch(
 
 //关闭回调
 const footOnOk = () => {
-  emits("update:modelValue", Month.value ? Month.value : -1);
+  emits("update:modelValue", Month.value || Month.value === 0 ? Month.value : -1);
   if (datePicker.range) {
     //关闭菜单
     emits("ok");
