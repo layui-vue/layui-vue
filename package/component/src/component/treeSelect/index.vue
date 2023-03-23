@@ -93,8 +93,8 @@ watch(
     } else {
       /**
        * 根据 id 查找 node 节点
-       * 
-       * 备注：如果找不到这个节点, 说明存在 BUG 或 空值, 对 singleValue 清空  
+       *
+       * 备注：如果找不到这个节点, 说明存在 BUG 或 空值, 对 singleValue 清空
        */
       const node: any = getNode(props.data, selectedValue.value);
       if (node) {

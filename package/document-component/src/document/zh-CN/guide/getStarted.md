@@ -111,6 +111,20 @@ app.component("LayTable", LayTable);
 app.mount('#app')
 ```
 
+::: title Volar 支持
+:::
+
+::: describe 在 <code>tsconfig.json</code> 中, 通过 <code>compilerOptions.type</code> 选项指定全局组件类型 (1.9.6)
+:::
+
+```json
+{
+  "compilerOptions": {
+    "types": ["@layui/layui-vue/types/components"]
+  }
+}
+```
+
 ::: title 在线安装
 :::
 
