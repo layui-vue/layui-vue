@@ -102,7 +102,7 @@ export default {
 
 :::
 
-::: title Qrcode 属性
+::: title Barcode 属性
 :::
 
 ::: table
