@@ -19,9 +19,9 @@ export interface TableRowProps {
   currentIndentSize: number;
   expandSpace: boolean;
   expandIndex: number;
-  selectedKeys: Recordable[];
+  selectedKeys: string[];
   selectedKey: string;
-  tableColumnKeys: Recordable[];
+  tableColumnKeys: string[];
   childrenColumnName?: string;
   columnSlotNames: string[];
   page?: any;
@@ -35,7 +35,7 @@ export interface TableRowProps {
   data: any;
   spanMethod: Function;
   defaultExpandAll: boolean;
-  expandKeys: Recordable[];
+  expandKeys: string[];
   getCheckboxProps: Function;
   getRadioProps: Function;
 }
@@ -53,7 +53,7 @@ const props = withDefaults(defineProps<TableRowProps>(), {
 
 const tableExpandAll = ref(props.defaultExpandAll);
 
-const tableExpandKeys: WritableComputedRef<Recordable[]> = computed({
+const tableExpandKeys: WritableComputedRef<string[]> = computed({
   get() {
     return [...props.expandKeys];
   },
@@ -62,7 +62,7 @@ const tableExpandKeys: WritableComputedRef<Recordable[]> = computed({
   },
 });
 
-const tableSelectedKeys: WritableComputedRef<Recordable[]> = computed({
+const tableSelectedKeys: WritableComputedRef<string[]> = computed({
   get() {
     return [...props.selectedKeys];
   },

@@ -90,9 +90,6 @@ export interface LayuiVueResolverOptions {
 ::: title 手动引入
 :::
 
-::: describe 原生支持 es-module 的 tree shaking 用法。
-:::
-
 ::: describe 如果你完全使用 layui-vue 构建项目, 我们更推荐全局注册与自动按需的方式。
 :::
 
@@ -111,10 +108,10 @@ app.component("LayTable", LayTable);
 app.mount('#app')
 ```
 
-::: title Volar 支持
+::: title Volar 配置
 :::
 
-::: describe 在 <code>tsconfig.json</code> 中, 通过 <code>compilerOptions.type</code> 选项指定全局组件类型 (1.9.6)
+::: describe 在 <code>tsconfig.json</code> 中, 通过 <code>compilerOptions.type</code> 选项指定全局组件类型 (v1.9.6)
 :::
 
 ```json

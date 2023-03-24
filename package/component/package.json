@@ -1,6 +1,6 @@
 {
   "name": "@layui/layui-vue",
-  "version": "1.9.5",
+  "version": "1.9.6-alpha.2",
   "author": "就眠儀式",
   "license": "MIT",
   "description": "a component library for Vue 3 base on layui-vue",

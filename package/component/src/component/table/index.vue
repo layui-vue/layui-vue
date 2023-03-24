@@ -37,7 +37,7 @@ export interface TableProps {
   dataSource: Recordable[];
   defaultToolbar?: boolean | any[];
   selectedKey?: string;
-  selectedKeys?: Recordable[];
+  selectedKeys?: string[];
   indentSize?: number;
   childrenColumnName?: string;
   height?: number;
@@ -50,7 +50,7 @@ export interface TableProps {
   cellStyle?: string | Function;
   spanMethod?: Function;
   defaultExpandAll?: boolean;
-  expandKeys?: Recordable[];
+  expandKeys?: string[];
   loading?: boolean;
   getCheckboxProps?: Function;
   getRadioProps?: Function;
@@ -221,8 +221,8 @@ const findFinalNode = (
   });
 };
 
-const tableExpandKeys = ref<Recordable[]>([...props.expandKeys]);
-const tableSelectedKeys = ref<Recordable[]>([...props.selectedKeys]);
+const tableExpandKeys = ref<string[]>([...props.expandKeys]);
+const tableSelectedKeys = ref<string[]>([...props.selectedKeys]);
 
 /**
  * 监听 columns 变化

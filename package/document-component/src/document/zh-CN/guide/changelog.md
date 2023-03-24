@@ -17,6 +17,16 @@
     <ul> 
       <a name="1-9-5"></a> 
       <li> 
+        <h3>1.9.6 <span class="layui-badge-rim">2023-03-24</span></h3> 
+        <ul> 
+          <li>[优化] menu-item 组件 id 属性为非必填，常用于静态展示，不需要 id 属性来完成联动的场景。</li>
+          <li>[优化] table 组件 selectedKeys 与 expandKeys 属性，由 Recordable[] 修改为 string[] 类型。</li>
+        </ul>  
+      </li>
+    </ul>
+    <ul> 
+      <a name="1-9-5"></a> 
+      <li> 
         <h3>1.9.5 <span class="layui-badge-rim">2023-03-22</span></h3> 
         <ul> 
           <li>[修复] tree-select 组件 modelValue / v-model 属性为空，input 组件回显不更新的问题。</li>

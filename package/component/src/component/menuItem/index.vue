@@ -5,22 +5,23 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed, ComputedRef, inject, ref, Ref, useSlots } from "vue";
+import { computed, ComputedRef, inject, Ref, useSlots } from "vue";
 import { DropdownContext, dropdownInjectionKey } from "../dropdown/interface";
 import useLevel from "../menu/useLevel";
-import { indentHandle } from "../menu/utils";
 import LayTooltip from "../tooltip/index.vue";
+import { indentHandle } from "../menu/utils";
 
 export interface MenuItemProps {
-  id: string;
+  id?: string;
   title?: string;
   to?: string;
 }
 
+const props = withDefaults(defineProps<MenuItemProps>(), {});
+
 const slots = useSlots();
-const props = defineProps<MenuItemProps>();
 const { level } = useLevel();
-const selectedKey: Ref<string> = inject("selectedKey") as Ref<string>;
+const selectedKey: Ref<string | undefined> = inject("selectedKey") as Ref<string>;
 const isTree = inject("isTree") as ComputedRef<boolean>;
 const isCollapse = inject("isCollapse") as ComputedRef<boolean | string>;
 const theme = inject("menuTheme") as Ref<string>;
