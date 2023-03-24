@@ -21,7 +21,9 @@ const props = withDefaults(defineProps<MenuItemProps>(), {});
 
 const slots = useSlots();
 const { level } = useLevel();
-const selectedKey: Ref<string | undefined> = inject("selectedKey") as Ref<string>;
+const selectedKey: Ref<string | undefined> = inject(
+  "selectedKey"
+) as Ref<string>;
 const isTree = inject("isTree") as ComputedRef<boolean>;
 const isCollapse = inject("isCollapse") as ComputedRef<boolean | string>;
 const theme = inject("menuTheme") as Ref<string>;

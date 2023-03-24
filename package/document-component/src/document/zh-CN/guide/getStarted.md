@@ -111,7 +111,7 @@ app.mount('#app')
 ::: title Volar 配置
 :::
 
-::: describe 在 <code>tsconfig.json</code> 中, 通过 <code>compilerOptions.type</code> 选项指定全局组件类型 (v1.9.6)
+::: describe 在 <code>tsconfig.json</code> 中, 通过 <code>compilerOptions.type</code> 选项指定全局组件类型 ( <span style="color:red;">v1.9.6</span> )
 :::
 
 ```json

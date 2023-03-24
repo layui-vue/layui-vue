@@ -11,7 +11,7 @@ import { LayIcon } from "@layui/icons-vue";
 import useLevel from "../menu/useLevel";
 
 export interface SubMenuPopupProps {
-  id: string;
+  id?: string;
   title?: string;
 }
 

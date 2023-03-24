@@ -12,7 +12,7 @@ import { indentHandle } from "../menu/utils";
 import { provideLevel, default as useLevel } from "../menu/useLevel";
 
 export interface SubMenuProps {
-  id: string;
+  id?: string;
   title?: string;
 }
 
@@ -32,7 +32,7 @@ const isCollapseTransition: Ref<boolean> = inject(
 ) as Ref<boolean>;
 
 const isOpen = computed(() => {
-  return openKeys.value.includes(props.id);
+  return openKeys.value.includes(props.id || "");
 });
 
 const nextLevel = computed(() => level.value + 1);
@@ -40,6 +40,7 @@ const nextLevel = computed(() => level.value + 1);
 provideLevel(nextLevel);
 
 const needPopup = ref(false);
+
 watchEffect(() => {
   if (isTree.value) {
     const _isCollapse =
@@ -59,10 +60,10 @@ watchEffect(() => {
 const openHandle = function () {
   if (!isCollapse.value) {
     let newOpenKeys = [...openKeys.value];
-    if (openKeys.value.includes(props.id)) {
-      newOpenKeys.splice(newOpenKeys.indexOf(props.id), 1);
+    if (openKeys.value.includes(props.id || "")) {
+      newOpenKeys.splice(newOpenKeys.indexOf(props.id || ""), 1);
     } else {
-      newOpenKeys.push(props.id);
+      newOpenKeys.push(props.id || "");
     }
     openKeys.value = newOpenKeys;
   }
