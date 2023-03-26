@@ -195,7 +195,7 @@ const install = (app: App, options?: InstallOptions): void => {
     app.use(components[key], options);
   }
   app.use(i18n);
-  app.use(layerInstall);
+  app.use(layerInstall, options);
 };
 
 export {

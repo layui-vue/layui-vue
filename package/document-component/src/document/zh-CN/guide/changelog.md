@@ -15,7 +15,16 @@
 <lay-timeline>
 <lay-timeline-item title="1.9.x">
     <ul> 
-      <a name="1-9-5"></a> 
+      <a name="1-9-7"></a> 
+      <li> 
+        <h3>1.9.7 <span class="layui-badge-rim">2023-03-26</span></h3> 
+        <ul> 
+          <li>[新增] layui-vue 安装的 options 选项 zIndex 配置，用于设置 layer 的 z-index 起始值。</li>
+        </ul>  
+      </li>
+    </ul>
+    <ul> 
+      <a name="1-9-6"></a> 
       <li> 
         <h3>1.9.6 <span class="layui-badge-rim">2023-03-24</span></h3> 
         <ul> 
