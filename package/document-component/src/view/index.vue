@@ -486,5 +486,7 @@ body {
   font-weight: 300;
   font-size: 13.6px;
   background: #f9f9f9;
+  bottom: 0px;
+  position: absolute;
 }
 </style>
