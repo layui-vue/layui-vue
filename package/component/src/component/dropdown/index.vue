@@ -54,6 +54,7 @@ export interface DropdownProps {
   trigger?: DropdownTrigger | DropdownTrigger[];
   placement?: DropdownPlacement;
   disabled?: boolean;
+  disabledTeleport?: boolean;
   autoFitPosition?: boolean;
   autoFitWidth?: boolean;
   autoFitMinWidth?: boolean;
@@ -76,6 +77,7 @@ const props = withDefaults(defineProps<DropdownProps>(), {
   visible: false,
   trigger: "click",
   disabled: false,
+  disabledTeleport: false,
   placement: "bottom-start",
   autoFitPosition: true,
   autoFitMinWidth: true,
@@ -645,7 +647,7 @@ defineExpose({ show, hide, toggle });
     :renderFunc="onlyChildRenderFunc"
     v-bind="$attrs"
   ></RenderFunction>
-  <TeleportWrapper :to="popupContainer" :disabled="disabled">
+  <TeleportWrapper :to="popupContainer" :disabled="disabledTeleport">
     <div
       v-if="openState"
       ref="contentRef"
