@@ -21,6 +21,7 @@
         <ul> 
           <li>[新增] layui-vue 安装的 options 选项 zIndex 配置，用于设置 layer 的 z-index 起始值。</li>
           <li>[修复] dropdown，select, date-picker 组件 disabled 属性，修改值报错。</li>
+          <li>[优化] table 组件 default-expand-all 属性，使其具备响应式的能力。</li>
         </ul>  
       </li>
     </ul>

@@ -249,6 +249,9 @@ watch(
   { deep: true }
 );
 
+/**
+ * 监听 props.expandKeys 变化，响应内容
+ */
 watch(
   () => props.expandKeys,
   () => {
@@ -256,6 +259,48 @@ watch(
   },
   { deep: true }
 );
+
+/**
+ * 监听 tableExpandKeys 变化，响应外部
+ */
+watch(
+  tableExpandKeys,
+  () => {
+    emit("update:expandKeys", tableExpandKeys.value);
+  },
+  { deep: true, immediate: true }
+);
+
+/**
+ * 监听 default-expand-all 变化，修改 expandKeys 内部属性
+ *
+ * @remark 向内向外，都是响应式
+ */
+watch(() => props.defaultExpandAll, () => {
+  if(props.defaultExpandAll) {
+    const ids: string[] = [];
+    lookForAllId(props.dataSource, ids);
+    tableExpandKeys.value = ids;
+  } else {
+    tableExpandKeys.value = [];
+  }
+})
+
+/**
+ * 获取可展开的节点编码
+ * 
+ * @param data 
+ * @param ids 
+ */
+const lookForAllId = (data: any[] = [], ids: string[] = []) => {
+  for (let item of data) {
+    if (item[props.childrenColumnName]) {
+      ids.push(item[props.id]);
+      lookForAllId(item[props.childrenColumnName], ids);
+    } 
+  }
+  return ids;
+}
 
 const tableSelectedKey: WritableComputedRef<string> = computed({
   get() {
@@ -304,14 +349,6 @@ watch(
       hasChecked.value = false;
     }
     emit("update:selectedKeys", tableSelectedKeys.value);
-  },
-  { deep: true, immediate: true }
-);
-
-watch(
-  tableExpandKeys,
-  () => {
-    emit("update:expandKeys", tableExpandKeys.value);
   },
   { deep: true, immediate: true }
 );
@@ -397,7 +434,7 @@ const exportData = () => {
   });
   var worksheet = "Sheet1";
   var uri = "data:application/vnd.ms-excel;base64,";
-  var exportTemplate = `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" 
+  var exportTemplate = `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel"
         xmlns="http://www.w3.org/TR/REC-html40">
         <head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet>
             <x:Name>${worksheet}</x:Name>

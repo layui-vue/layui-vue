@@ -241,7 +241,7 @@ export default {
 ::: demo 当表格内容较多不能一次性完全展示时, 你可以将多余内容展示到 `expand` 插槽。
 
 <template>
-  <lay-table :columns="columns6" :data-source="dataSource6" :default-expand-all="defaultExpandAll6" v-model:expandKeys="expandKeys6">
+  <lay-table :columns="columns6" :data-source="dataSource6" v-model:expandKeys="expandKeys6">
     <template v-slot:expand="{ data }"> 
       <lay-table :columns="columns6" :data-source="dataSource6"></lay-table>
     </template>
@@ -296,7 +296,8 @@ export default {
 ::: demo 树形数据的展示，当数据中有 children 字段时会自动展示为树形表格, 通过设置 indentSize 以控制每一层的缩进宽度, 使用 childrenColumnName 替换默认字段
 
 <template>
-  <lay-table :columns="columns7" :data-source="dataSource7" :default-expand-all="defaultExpandAll7" v-model:expandKeys="expandKeys7">
+  <lay-button @click="changeExpandAll7">切换 {{ expandKeys7 }}</lay-button>
+  <lay-table :columns="columns7" :data-source="dataSource7" :default-expand-all="expandAll7" v-model:expandKeys="expandKeys7">
     <template #score="{ data }">{{ data }}</template>
   </lay-table>
 </template>
@@ -326,13 +327,17 @@ export default {
     ]
 
     const expandKeys7 = ref(["1"])
-    const defaultExpandAll7 = ref(false)
+    const expandAll7 = ref(false)
+    const changeExpandAll7 = () => {
+      expandAll7.value = !expandAll7.value;
+    }
 
     return {
       columns7,
       dataSource7,
       expandKeys7,
-      defaultExpandAll7
+      expandAll7,
+      changeExpandAll7
     }
   }
 }
@@ -1559,7 +1564,7 @@ export default {
 | rowClassName         | 行类名称 function(row, rowIndex)                      | `string` `function` | --         | --                 | --      |
 | skin                 | 风格                                                  | `string`            | --         | `line` `row` `nob` | --      |
 | expand-index         | 展开所在列                                            | `number`            | --         | --                 | --      |
-| default-expand-all   | 默认展开所有列                                        | `boolean`           | `false`    | `true` `false`     | --      |
+| default-expand-all   | 默认展开所有列 (自 1.9.7 后，具备响应式能力)            | `boolean`           | `false`    | `true` `false`     | --      |
 | expand-keys          | 展开的列                                              | `array`             | `[]`       | --                 | --      |
 | span-method          | 合并算法                                              | `function`          | --         | --                 | `1.4.0` |
 | getCheckboxProps     | 多选行属性                                            | `function`          | --         | --                 | `1.4.0` |

@@ -7,7 +7,7 @@ export default {
 <script lang="ts" setup>
 import { Recordable } from "../../types";
 import { LayIcon } from "@layui/icons-vue";
-import { computed, ref, StyleValue, useSlots, WritableComputedRef } from "vue";
+import { computed, ref, StyleValue, useSlots, WritableComputedRef, watch } from "vue";
 import LayCheckbox from "../checkbox/index.vue";
 import LayTooltip from "../tooltip/index.vue";
 import LayRadio from "../radio/index.vue";
@@ -50,6 +50,11 @@ const props = withDefaults(defineProps<TableRowProps>(), {
   cellStyle: "",
   cellClassName: "",
 });
+
+// 监听 defaultExpandAll 传递, 保持响应式
+watch(() => props.defaultExpandAll, () => {
+  tableExpandAll.value = props.defaultExpandAll;
+})
 
 const tableExpandAll = ref(props.defaultExpandAll);
 
