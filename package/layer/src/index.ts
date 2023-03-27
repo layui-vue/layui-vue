@@ -267,4 +267,3 @@ export { layer, LayLayer };
 export default { install };
 
 import "./theme/index.css";
-import { getSystemErrorMap } from "util";
