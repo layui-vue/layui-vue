@@ -276,31 +276,34 @@ watch(
  *
  * @remark 向内向外，都是响应式
  */
-watch(() => props.defaultExpandAll, () => {
-  if(props.defaultExpandAll) {
-    const ids: string[] = [];
-    lookForAllId(props.dataSource, ids);
-    tableExpandKeys.value = ids;
-  } else {
-    tableExpandKeys.value = [];
+watch(
+  () => props.defaultExpandAll,
+  () => {
+    if (props.defaultExpandAll) {
+      const ids: string[] = [];
+      lookForAllId(props.dataSource, ids);
+      tableExpandKeys.value = ids;
+    } else {
+      tableExpandKeys.value = [];
+    }
   }
-})
+);
 
 /**
  * 获取可展开的节点编码
- * 
- * @param data 
- * @param ids 
+ *
+ * @param data
+ * @param ids
  */
 const lookForAllId = (data: any[] = [], ids: string[] = []) => {
   for (let item of data) {
     if (item[props.childrenColumnName]) {
       ids.push(item[props.id]);
       lookForAllId(item[props.childrenColumnName], ids);
-    } 
+    }
   }
   return ids;
-}
+};
 
 const tableSelectedKey: WritableComputedRef<string> = computed({
   get() {
