@@ -27,6 +27,7 @@ import TablePage from "./TablePage.vue";
 import useTable from "./hooks/useTable";
 import { TableEmit } from "./typing";
 import { startResize } from "./hooks/useResize";
+import useAutoColsWidth from "./hooks/useAutoColsWidth";
 
 export interface TableProps {
   id?: string;
@@ -55,6 +56,7 @@ export interface TableProps {
   getCheckboxProps?: Function;
   getRadioProps?: Function;
   resize?: boolean;
+  autoColsWidth?: boolean;
 }
 
 const props = withDefaults(defineProps<TableProps>(), {
@@ -80,6 +82,7 @@ const props = withDefaults(defineProps<TableProps>(), {
   getCheckboxProps: () => {},
   getRadioProps: () => {},
   resize: false,
+  autoColsWidth: false,
 });
 
 const emit = defineEmits(TableEmit);
@@ -223,6 +226,9 @@ const findFinalNode = (
 
 const tableExpandKeys = ref<string[]>([...props.expandKeys]);
 const tableSelectedKeys = ref<string[]>([...props.selectedKeys]);
+
+// 单元格宽度自动化
+props.autoColsWidth && useAutoColsWidth(tableColumns, tableDataSource);
 
 /**
  * 监听 columns 变化

@@ -11,7 +11,7 @@ export const TableEmit = [
 export interface TableColumn {
   title: string;
   key: string;
-  customS?: string;
+  customSlot?: string;
   width?: string;
   minWidt?: string;
   sort?: string;
@@ -20,6 +20,7 @@ export interface TableColumn {
   ellipsisTooltip?: boolean;
   fixed?: string;
   type?: string;
-  children?: string;
+  children?: TableColumn[];
+  rowspan: number;
   resize?: boolean;
 }
