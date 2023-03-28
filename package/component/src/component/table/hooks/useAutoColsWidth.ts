@@ -41,6 +41,8 @@ export default function useAutoColsWidth(
         colsItem && (colsItem.width = `${width}px`);
       } else if (width > 300) {
         colsItem && (colsItem.width = `300px`);
+      } else {
+        colsItem && (colsItem.width = `50px`);
       }
     });
     // 总时间复杂度 2n + 100n
