@@ -3,7 +3,7 @@
     <div class="layui-laydate-main laydate-main-list-0 laydate-time-show">
       <div class="layui-laydate-header">
         <div class="laydate-set-ym">
-          <span class="laydate-time-text">{{ t("datePicker.startTime") }}</span> {{ startTime }}
+          <span class="laydate-time-text">{{ t("datePicker.startTime") }}</span>
         </div>
       </div>
       <div class="layui-laydate-content" style="height: 210px">
@@ -36,7 +36,7 @@
     <div class="layui-laydate-main laydate-main-list-0 laydate-time-show">
       <div class="layui-laydate-header">
         <div class="laydate-set-ym">
-          <span class="laydate-time-text">{{ t("datePicker.endTime") }}</span> {{ endTime  }}
+          <span class="laydate-time-text">{{ t("datePicker.endTime") }}</span>
         </div>
       </div>
       <div class="layui-laydate-content" style="height: 210px">
