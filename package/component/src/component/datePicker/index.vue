@@ -105,10 +105,10 @@
         <TimeRange
           v-if="range && showPanel === 'time'"
           v-model:startTime="rangeValue.first"
-          v-model:endTime="rangeValue.last"  
+          v-model:endTime="rangeValue.last"
         ></TimeRange>
         <!-- 年份选择器 (范围) -->
-        
+
         <!-- 月份选择器 (范围) -->
       </template>
     </lay-dropdown>
@@ -292,7 +292,7 @@ const getDateValue = () => {
 };
 
 /**
- * 处理 range 启用时的值内容 
+ * 处理 range 启用时的值内容
  */
 const getDateValueByRange = () => {
   unWatch = true;

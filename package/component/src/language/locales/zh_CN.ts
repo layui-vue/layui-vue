@@ -41,6 +41,8 @@ export default {
     confirm: "确认",
     cancel: "取消",
     now: "现在",
+    startTime: "开始时间",
+    endTime: "结束时间"
   },
   empty: {
     description: "无数据",
