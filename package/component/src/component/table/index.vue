@@ -27,7 +27,7 @@ import TablePage from "./TablePage.vue";
 import useTable from "./hooks/useTable";
 import { TableEmit } from "./typing";
 import { startResize } from "./hooks/useResize";
-import { setAutoColsWidth } from "./utils";
+import useAutoColsWidth from "./hooks/useAutoColsWidth";
 
 export interface TableProps {
   id?: string;
@@ -227,6 +227,9 @@ const findFinalNode = (
 const tableExpandKeys = ref<string[]>([...props.expandKeys]);
 const tableSelectedKeys = ref<string[]>([...props.selectedKeys]);
 
+// 单元格宽度自动化
+props.autoColsWidth && useAutoColsWidth(tableColumns, tableDataSource);
+
 /**
  * 监听 columns 变化
  */
@@ -323,7 +326,6 @@ watch(
     tableDataSource.value = [...props.dataSource];
     tableSelectedKeys.value = [];
     tableSelectedKey.value = s;
-    props.autoColsWidth && setAutoColsWidth(tableHeadColumns, tableDataSource);
   },
   { deep: true }
 );
