@@ -238,6 +238,10 @@ export default {
     <lay-date-picker  v-model="rangeTime3" range type="yearmonth" :placeholder="['开始日期','结束日期']"></lay-date-picker>
     <span style="margin-left:10px">modelValue:{{rangeTime3}}</span>
   </div>
+  <div style="display:flex;  align-items: center;margin-bottom: 5px;">
+    <lay-date-picker  v-model="rangeTime4" range type="time" :placeholder="['开始日期','结束日期']"></lay-date-picker>
+    <span style="margin-left:10px">modelValue:{{rangeTime4}}</span>
+  </div>
 </template>
 
 <script setup>
@@ -245,6 +249,7 @@ import { ref } from 'vue'
 const rangeTime1 = ref([]);
 const rangeTime2 = ref(['2001-01-01','2001-02-1']);
 const rangeTime3 = ref(['2022-01-01','2023-02-1']);
+const rangeTime4 = ref(['2022-01-01','2023-02-1']);
 </script>
 
 :::

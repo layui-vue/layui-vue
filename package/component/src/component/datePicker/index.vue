@@ -67,12 +67,12 @@
       </div>
 
       <template #content>
-        <!-- 日期选择 -->
+        <!-- 日期选择器 -->
         <DatePanel
           v-if="!range && (showPanel === 'date' || showPanel === 'datetime')"
           v-model="currentDay"
         ></DatePanel>
-        <!-- 时间选择 -->
+        <!-- 时间选择器 -->
         <TimePanel
           v-if="!range && showPanel === 'time'"
           v-model="hms"
@@ -88,19 +88,28 @@
           v-if="!range && showPanel === 'month'"
           v-model="currentMonth"
         ></MonthPanel>
-        <!-- 范围选择 -->
+        <!-- 日期选择器（范围） -->
         <DateRange
           v-if="range && (showPanel === 'date' || showPanel === 'datetime')"
           v-model:startTime="rangeValue.first"
           v-model:endTime="rangeValue.last"
         ></DateRange>
-
+        <!-- 月份选择器（范围） -->
         <MonthRange
           v-if="range && showPanel === 'yearmonth'"
           v-model:startTime="rangeValue.first"
           v-model:endTime="rangeValue.last"
         >
         </MonthRange>
+        <!-- 时间选择器 (范围) -->
+        <TimeRange
+          v-if="range && showPanel === 'time'"
+          v-model:startTime="rangeValue.first"
+          v-model:endTime="rangeValue.last"  
+        ></TimeRange>
+        <!-- 年份选择器 (范围) -->
+        
+        <!-- 月份选择器 (范围) -->
       </template>
     </lay-dropdown>
   </div>
@@ -115,9 +124,9 @@ export default {
 <script lang="ts" setup>
 import "./index.less";
 import dayjs from "dayjs";
-import { LayIcon } from "@layui/icons-vue";
 import LayInput from "../input/index.vue";
 import LayDropdown from "../dropdown/index.vue";
+import { LayIcon } from "@layui/icons-vue";
 import { getMonth, getYear, getDay } from "./day";
 import {
   ref,
@@ -135,11 +144,12 @@ import YearPanel from "./components/YearPanel.vue";
 import MonthPanel from "./components/MonthPanel.vue";
 import DateRange from "./components/DateRange.vue";
 import MonthRange from "./components/MonthRange.vue";
+import TimeRange from "./components/TimeRange.vue";
 
 export interface DatePickerProps {
-  type?: "date" | "datetime" | "year" | "time" | "month" | "yearmonth";
   placeholder?: string | string[];
   modelValue?: string | number | string[];
+  type?: "date" | "datetime" | "year" | "time" | "month" | "yearmonth";
   disabled?: boolean;
   simple?: boolean;
   name?: string;
@@ -190,16 +200,16 @@ const endPlaceholder = computed(() => {
 
 const dropdownRef = ref(null);
 const $emits = defineEmits(["update:modelValue", "change", "blur", "focus"]);
-const hms = ref({
-  hh: 0,
-  mm: 0,
-  ss: 0,
-});
 const currentYear = ref<number>(0);
 const currentMonth = ref<number>(0);
 const currentDay = ref<number>(0);
 const showPanel = ref<string>("date");
 const rangeValue = reactive({ first: "", last: "" });
+const hms = ref({
+  hh: 0,
+  mm: 0,
+  ss: 0,
+});
 
 let unWatch = false;
 // 计算结果日期
@@ -280,14 +290,20 @@ const getDateValue = () => {
     unWatch = false;
   }, 0);
 };
+
+/**
+ * 处理 range 启用时的值内容 
+ */
 const getDateValueByRange = () => {
   unWatch = true;
+  // 如果内容是空的，直接返回
   if (rangeValue.first === "" || rangeValue.last === "") {
     dateValue.value = ["", ""];
     $emits("update:modelValue", dateValue.value);
     $emits("change", dateValue.value);
     return;
   }
+  // 根据类型不同，格式化日期
   let format = "YYYY-MM-DD";
   switch (props.type) {
     case "date":
@@ -298,6 +314,15 @@ const getDateValueByRange = () => {
       break;
     case "yearmonth":
       format = props.format ? props.format : "YYYY-MM";
+      break;
+    case "time":
+      format = props.format ? props.format : "HH:mm:ss";
+      break;
+    case "month":
+      format = props.format ? props.format : "MM";
+      break;
+    case "year":
+      format = props.format ? props.format : "YYYY";
       break;
   }
   dateValue.value = [
