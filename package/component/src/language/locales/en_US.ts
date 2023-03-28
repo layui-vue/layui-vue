@@ -42,7 +42,7 @@ export default {
     cancel: "cancel",
     now: "now",
     startTime: "start time",
-    endTime: "end time"
+    endTime: "end time",
   },
   empty: {
     description: "No data",

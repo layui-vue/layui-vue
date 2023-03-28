@@ -96,7 +96,7 @@
         ></DateRange>
         <!-- 月份选择器（范围） -->
         <MonthRange
-          v-if="range && showPanel === 'yearmonth'"
+          v-if="range && (showPanel === 'yearmonth' || showPanel === 'month')"
           v-model:startTime="rangeValue.first"
           v-model:endTime="rangeValue.last"
         >
@@ -106,10 +106,9 @@
           v-if="range && showPanel === 'time'"
           v-model:startTime="rangeValue.first"
           v-model:endTime="rangeValue.last"
+          :format="format"
         ></TimeRange>
         <!-- 年份选择器 (范围) -->
-
-        <!-- 月份选择器 (范围) -->
       </template>
     </lay-dropdown>
   </div>
@@ -349,7 +348,9 @@ const ok = () => {
   showPanel.value = props.type;
 };
 
-//面板类型判断
+/**
+ * 根据 type 变化，判定需要展示的面板 
+ */
 watch(
   () => props.type,
   () => {
@@ -361,31 +362,22 @@ watch(
   { immediate: true }
 );
 
-//监听modelValue改变
+/**
+ * 监听 modelValue 变化，更新内部变量 
+ */
 watch(
   () => props.modelValue,
   () => {
     if (unWatch) {
       return;
     }
-    let initModelValue: string =
-      props.range && props.modelValue
-        ? (props.modelValue as string[])[0] || ""
-        : (props.modelValue as string);
+    let initModelValue: string = props.range && props.modelValue ? (props.modelValue as string[])[0] || "" : (props.modelValue as string);
     if (props.type === "month" || props.type === "year") {
       initModelValue += "";
     }
-
-    hms.value.hh = isNaN(dayjs(initModelValue).hour())
-      ? 0
-      : dayjs(initModelValue).hour();
-    hms.value.mm = isNaN(dayjs(initModelValue).minute())
-      ? 0
-      : dayjs(initModelValue).minute();
-    hms.value.ss = isNaN(dayjs(initModelValue).second())
-      ? 0
-      : dayjs(initModelValue).second();
-
+    hms.value.hh = isNaN(dayjs(initModelValue).hour()) ? 0 : dayjs(initModelValue).hour();
+    hms.value.mm = isNaN(dayjs(initModelValue).minute()) ? 0 : dayjs(initModelValue).minute();
+    hms.value.ss = isNaN(dayjs(initModelValue).second()) ? 0 : dayjs(initModelValue).second();
     if (initModelValue.length === 8 && props.type === "time") {
       let modelValue = initModelValue;
       modelValue = "1970-01-01 " + modelValue;
@@ -393,7 +385,6 @@ watch(
       hms.value.mm = dayjs(modelValue).minute();
       hms.value.ss = dayjs(modelValue).second();
     }
-
     currentYear.value = initModelValue ? getYear(initModelValue) : -1;
     currentMonth.value = initModelValue ? getMonth(initModelValue) : -1;
     currentDay.value = initModelValue ? getDay(initModelValue) : -1;
@@ -401,16 +392,17 @@ watch(
       if (currentYear.value === -1) currentYear.value = dayjs().year();
       if (currentMonth.value === -1) currentMonth.value = dayjs().month();
       if (props.timestamp) {
-        currentDay.value = initModelValue
-          ? dayjs(parseInt(initModelValue)).startOf("date").unix() * 1000
-          : -1;
+        currentDay.value = initModelValue ? dayjs(parseInt(initModelValue)).startOf("date").unix() * 1000 : -1;
       }
     }
-    rangeValue.first = initModelValue;
-    rangeValue.last =
-      props.range && props.modelValue
-        ? (props.modelValue as string[])[1] || ""
-        : "";
+    if(initModelValue.length === 8 && props.type === "time") {
+      // 时间范围选择，对 HH-mm-ss 格式补全
+      rangeValue.first = "1970-01-01 " + initModelValue;
+      rangeValue.last = props.range && props.modelValue ? "1970-01-01 " + (props.modelValue as string[])[1] || "" : "";
+    } else {
+      rangeValue.first = initModelValue;
+      rangeValue.last = props.range && props.modelValue ? (props.modelValue as string[])[1] || "" : "";
+    }
     if (!props.range) {
       getDateValue();
     } else {

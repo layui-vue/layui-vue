@@ -247,9 +247,9 @@ export default {
 <script setup>
 import { ref } from 'vue'
 const rangeTime1 = ref([]);
-const rangeTime2 = ref(['2001-01-01','2001-02-1']);
+const rangeTime2 = ref(['2001-01-01 01:01:00','2001-02-1 01:01:00']);
 const rangeTime3 = ref(['2022-01-01','2023-02-1']);
-const rangeTime4 = ref(['2022-01-01','2023-02-1']);
+const rangeTime4 = ref(['01:01:00', '03:03:03']);
 </script>
 
 :::

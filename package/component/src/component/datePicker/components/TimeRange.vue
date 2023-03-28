@@ -3,9 +3,7 @@
     <div class="layui-laydate-main laydate-main-list-0 laydate-time-show">
       <div class="layui-laydate-header">
         <div class="laydate-set-ym">
-          <span class="laydate-time-text">{{
-            t("datePicker.startTime")
-          }}</span>
+          <span class="laydate-time-text">{{ t("datePicker.startTime") }}</span> {{ startTime }}
         </div>
       </div>
       <div class="layui-laydate-content" style="height: 210px">
@@ -38,9 +36,7 @@
     <div class="layui-laydate-main laydate-main-list-0 laydate-time-show">
       <div class="layui-laydate-header">
         <div class="laydate-set-ym">
-          <span class="laydate-time-text">{{
-            t("datePicker.endTime")
-          }}</span>
+          <span class="laydate-time-text">{{ t("datePicker.endTime") }}</span> {{ endTime  }}
         </div>
       </div>
       <div class="layui-laydate-content" style="height: 210px">
@@ -185,7 +181,8 @@ const chooseEndTime = (e: any) => {
 };
 
 onMounted(() => {
-  scrollTo();
+  startTimeScrollTo();
+  endTimeScrollTo();
 });
 
 const startTimePanelRef = ref();
@@ -268,7 +265,8 @@ const footOnNow = () => {
   endHms.value.hh = dayjs().hour();
   endHms.value.mm = dayjs().minute();
   endHms.value.ss = dayjs().second();
-  scrollTo();
+  startTimeScrollTo();
+  endTimeScrollTo();
 };
 
 //清空回调
@@ -279,6 +277,7 @@ const footOnClear = () => {
   endHms.value.hh = 0;
   endHms.value.mm = 0;
   endHms.value.ss = 0;
-  scrollTo();
+  startTimeScrollTo();
+  endTimeScrollTo();
 };
 </script>
