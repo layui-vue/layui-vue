@@ -173,7 +173,7 @@ const props = withDefaults(defineProps<UploadProps>(), {
   cutOptions: void 0,
   modelValue: null,
   auto: true,
-  onProgress: (event: ProgressEvent) => {}
+  onProgress: (event: ProgressEvent) => {},
 });
 
 const slot = useSlots();
@@ -341,9 +341,9 @@ const localUpload = (option: localUploadOption, callback: Function) => {
       }
     }
   };
-  xhr.upload.onprogress = function(event: ProgressEvent) {
+  xhr.upload.onprogress = function (event: ProgressEvent) {
     props.onProgress(event);
-  }
+  };
   xhr.open("post", url, true);
   if (props.headers) {
     for (let key in props.headers) {
