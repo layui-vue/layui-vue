@@ -13,15 +13,15 @@
 ::: demo 使用 `lay-table` 标签, 创建表格
 
 <template>
-  <lay-table :columns="columns66" :data-source="dataSource1">
-    <template #income>
-      66666
+  <lay-table :columns="columns66" :data-source="dataSource_1">
+    <template #income={row}>
+      {{ row.income }}
     </template>
-    <template #outlays>
-      77777
+    <template #outlays={row}>
+      {{ row.outlays }}
     </template>
     <template #balance>
-      88888
+      <lay-button size="xs">查看详情</lay-button>
     </template>
   </lay-table>
 </template>
@@ -48,20 +48,20 @@ export default {
         children:  [
           {title: "银行收入(￥)", key: "income", align: "center", customSlot: 'income', resize: true,},
           {title: "银行支出(￥)", key: "outlays", align: "center", customSlot: 'outlays', resize: true,},
-          {title: "银行余额(￥)", key: "balance", align: "center", customSlot: 'balance', resize: true,},
+          {title: "银行余额(￥)", key: "balance", align: "center", customSlot: 'balance', resize: true, width: '200px'},
         ] 
       }
     ])
 
-    const dataSource1 = [
-      {username:"root", password:"root", age:"18", remark: 'layui - vue（谐音：类 UI) '},
-      {username:"root", password:"root", age:"18", remark: 'layui - vue（谐音：类 UI) '},
-      {username:"woow", password:"woow", age:"20", remark: 'layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.'}
-    ]
+    const dataSource_1 = ref([
+      {username:"root", password:"root", income:"18", outlays: 'layui - vue（谐音：类 UI) '},
+      {username:"root", password:"root", income:"18", outlays: 'layui - vue（谐音：类 UI) '},
+      {username:"woow", password:"woow", income:"20", outlays: 'layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.'}
+    ])
 
     return {
       columns66,
-      dataSource1,
+      dataSource_1,
     }
   }
 }

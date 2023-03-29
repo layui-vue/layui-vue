@@ -20,19 +20,17 @@ export default function useAutoColsWidth(
     // 如果 columns 或 dataSource 为空，停止计算
     if (columns.value.length === 0 || dataSource.value.length === 0) return;
 
-    // 初始化 columns 到 map 键值队
+    // 标记列配置：不处理带有width、不处理没有key、对有children递归
     const colsMap: Map<string, TableColumn> = new Map();
-    columns.value.forEach((item) => {
-      colsMap.set(item.key, item as TableColumn);
-    });
+    handleCols(columns.value, colsMap); // 时间复杂度 n
 
-    // 得到 column 与最长 cellValue 的键值队
-    const longestMap: Map<string, string> = getLongest(dataSource.value, colsMap);
+    // 基于编辑列配置colsMap，记录数据最长的字段
+    const longestMap: Map<string, string> = new Map();
+    handleLongest(dataSource.value, longestMap, colsMap); // 最大时间复杂度 100n
 
-    // 辅助计算变量，单元格内边距
+    // 单元格内距
     const padding = 16;
     longestMap.forEach((value, key) => {
-      
       // 获取最长单元格宽度
       const width = getTextWidth(value) + padding;
 
@@ -52,16 +50,30 @@ export default function useAutoColsWidth(
   });
 }
 
-/**
- * 得到每个 column 对应字符最多的 dataSource 项
- *
- * 备注：如果当前列存在 width 配置，忽略。
- *
- * @param data 数据源
- * @param colsMap 列信息
- */
-function getLongest(data: any[], colsMap: Map<string, TableColumn>) {
-  const longestMap: Map<string, string> = new Map();
+function handleCols(data: Recordable[], colsMap: Map<string, TableColumn>) {
+  data.forEach((item) => {
+    // 有width配置不处理
+    if (item.width) return;
+
+    // 复杂表头带有children配置递归
+    if (item.children) {
+      handleCols(item.children, colsMap);
+      return;
+    }
+
+    // 未配置key字段不处理且没有children
+    if (!item.key) return;
+
+    colsMap.set(item.key, item as TableColumn);
+  });
+}
+
+function handleLongest(
+  data: any[],
+  longestMap: Map<string, string>,
+  colsMap: Map<string, TableColumn>
+) {
+  // 最大时间复杂度 100n
   for (let i = 0; i < data.length && i < 100; i++) {
     const sourceItem = data[i];
     colsMap.forEach((value, key) => {
@@ -77,7 +89,6 @@ function getLongest(data: any[], colsMap: Map<string, TableColumn>) {
       }
     });
   }
-  return longestMap;
 }
 
 /**
