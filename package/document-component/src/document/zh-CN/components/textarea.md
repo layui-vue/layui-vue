@@ -13,7 +13,7 @@
 ::: demo 使用 `lay-textarea` 标签, 创建文本域
 
 <template>
-  <lay-textarea placeholder="请输入描述" style="width:100px;height:100px;min-height:50px;"  v-model="data1">
+  <lay-textarea placeholder="请输入描述" v-model="data1">
   </lay-textarea>
 </template>
 
@@ -153,10 +153,11 @@ export default {
 ::: demo 使用 `lay-textarea` 标签, 创建文本域
 
 <template>
-  <button @click="focus">获取焦点</button>
-  <button @click="blur ">失去焦点</button>
-  <lay-textarea placeholder="请输入描述" style="width:100px;height:100px;min-height:50px;" ref="textareaRef"  v-model="data1">
-  </lay-textarea>
+  <lay-space>
+    <button @click="focus">获取焦点</button>
+    <button @click="blur ">失去焦点</button>
+  </lay-space>
+  <lay-textarea placeholder="请输入描述" ref="textareaRef"  v-model="data1"></lay-textarea>
 </template>
 
 <script>

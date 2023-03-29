@@ -226,22 +226,24 @@ export default {
 ::: demo
 
 <template>
-  <div style="display:flex;  align-items: center;margin-bottom: 5px;">
-    <lay-date-picker  v-model="rangeTime1" range :placeholder="['开始日期','结束日期']"></lay-date-picker>
-    <span style="margin-left:10px">modelValue:{{rangeTime1}}</span>
-  </div>
-  <div style="display:flex;  align-items: center;margin-bottom: 5px;">
-    <lay-date-picker  v-model="rangeTime2" range type="datetime" :placeholder="['开始日期','结束日期']"></lay-date-picker>
-    <span style="margin-left:10px">modelValue:{{rangeTime2}}</span>
-  </div>
-  <div style="display:flex;  align-items: center;margin-bottom: 5px;">
-    <lay-date-picker  v-model="rangeTime3" range type="yearmonth" :placeholder="['开始日期','结束日期']"></lay-date-picker>
-    <span style="margin-left:10px">modelValue:{{rangeTime3}}</span>
-  </div>
-  <div style="display:flex;  align-items: center;margin-bottom: 5px;">
-    <lay-date-picker  v-model="rangeTime4" range type="time" :placeholder="['开始日期','结束日期']"></lay-date-picker>
-    <span style="margin-left:10px">modelValue:{{rangeTime4}}</span>
-  </div>
+    <lay-space direction="vertical">
+    <lay-space>
+      <lay-date-picker  v-model="rangeTime1" range :placeholder="['开始日期','结束日期']"></lay-date-picker>
+      modelValue:{{rangeTime1}}
+    </lay-space>
+    <lay-space>
+      <lay-date-picker  v-model="rangeTime2" range type="datetime" :placeholder="['开始日期','结束日期']"></lay-date-picker>
+      modelValue:{{rangeTime2}}
+    </lay-space>
+    <lay-space>
+      <lay-date-picker  v-model="rangeTime3" range type="yearmonth" :placeholder="['开始日期','结束日期']"></lay-date-picker>
+      modelValue:{{rangeTime3}}
+    </lay-space>
+    <lay-space>
+      <lay-date-picker  v-model="rangeTime4" range type="time" :placeholder="['开始日期','结束日期']"></lay-date-picker>
+      modelValue:{{rangeTime4}}
+    </lay-space>
+  </lay-space>
 </template>
 
 <script setup>
@@ -260,14 +262,16 @@ const rangeTime4 = ref(['01:01:00', '03:03:03']);
 ::: demo 仅在type等于`date`、`datetime`时有效 传入的一个 Unix 时间戳 (13 位数字，从1970年1月1日 UTC 午夜开始所经过的毫秒数) 
 
 <template>
-  <div style="display:flex;  align-items: center;margin-bottom: 5px;">
-    <lay-date-picker v-model="timestamp1" timestamp></lay-date-picker> 
-    <span style="margin-left:10px">modelValue:{{timestamp1}}</span>
-  </div>
-    <div style="display:flex;  align-items: center;margin-bottom: 5px;">
-    <lay-date-picker v-model="timestamp2" type='datetime' timestamp></lay-date-picker> 
-    <span style="margin-left:10px">modelValue:{{timestamp2}}</span>
-  </div>
+  <lay-space direction="vertical">
+    <lay-space>
+      <lay-date-picker v-model="timestamp1" timestamp></lay-date-picker>
+      model-value: {{ timestamp1 }}
+    </lay-space>
+    <lay-space>
+      <lay-date-picker v-model="timestamp2" type='datetime' timestamp></lay-date-picker> 
+      model-value: {{ timestamp2 }}
+    </lay-space>
+  </lay-space>
 </template>
 
 <script>

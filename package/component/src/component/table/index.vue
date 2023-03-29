@@ -228,7 +228,7 @@ const tableExpandKeys = ref<string[]>([...props.expandKeys]);
 const tableSelectedKeys = ref<string[]>([...props.selectedKeys]);
 
 /**
- * 对 width 属性的预处理 
+ * 对 width 属性的预处理
  */
 props.autoColsWidth && useAutoColsWidth(tableColumns, tableDataSource);
 
@@ -249,7 +249,7 @@ watch(
 );
 
 /**
- * 监听 props.selectedKeys 变化，响应内部 
+ * 监听 props.selectedKeys 变化，响应内部
  */
 watch(
   () => props.selectedKeys,

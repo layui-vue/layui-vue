@@ -17,12 +17,13 @@
     <ul> 
       <a name="1-9-7"></a> 
       <li> 
-        <h3>1.9.7 <span class="layui-badge-rim">2023-03-26</span></h3> 
+        <h3>1.9.7 <span class="layui-badge-rim">2023-03-29</span></h3> 
         <ul> 
           <li>[新增] table 组件 autoColsWidth 属性，列宽自动计算，最大程度利用空间，默认为 false。</li>
           <li>[新增] date-picker 组件 range 属性为 true 且 type 属性为 time 的时间范围选择面板。</li>
           <li>[新增] layui-vue 安装的 options 选项 zIndex 配置，用于设置 layer 的 z-index 起始值。</li>
           <li>[修复] dropdown，select, date-picker 组件 disabled 属性，修改值报错。</li>
+          <li>[修复] datepicker 组件 range 启用时，内容没有沾满实际宽度，从而导致诡异的后边距。</li>
           <li>[优化] table 组件 default-expand-all 属性，使其具备响应式的能力。</li>
         </ul>  
       </li>

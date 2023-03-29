@@ -4,19 +4,19 @@ import { Ref, watchEffect, ComputedRef } from "vue";
 
 /**
  * 列自动设置宽度
- * 
+ *
  * ( 宽度 < minWidth ) ==> minWidth
  * ( minWidth < 宽度 < 300px )  ==> 宽度
  * ( 宽度 > 300px ) ==> 300px
- * 
+ *
  * @param columns 表格列
  * @param dataSource 表格数据
  */
-export default function useAutoColsWidth(columns: ComputedRef<Recordable[]>, dataSource: Ref<any[]>
+export default function useAutoColsWidth(
+  columns: ComputedRef<Recordable[]>,
+  dataSource: Ref<any[]>
 ): void {
-  
   watchEffect(() => {
-
     // 如果 columns 或 dataSource 为空，停止计算
     if (columns.value.length === 0 || dataSource.value.length === 0) return;
 
@@ -27,18 +27,15 @@ export default function useAutoColsWidth(columns: ComputedRef<Recordable[]>, dat
     });
 
     // 得到 column 与最长 cellValue 的键值队
-    const longestMap: Map<string, string> = getLongest(
-      dataSource.value,
-      colsMap
-    );
+    const longestMap: Map<string, string> = getLongest(dataSource.value, colsMap);
 
     // 辅助计算变量，单元格内边距
     const padding = 16;
     longestMap.forEach((value, key) => {
       
-      // 获取最长单元格宽度 
+      // 获取最长单元格宽度
       const width = getTextWidth(value) + padding;
-      
+
       // 获取当前单元格对象
       const colsItem = colsMap.get(key);
 
@@ -50,16 +47,16 @@ export default function useAutoColsWidth(columns: ComputedRef<Recordable[]>, dat
         colsItem && (colsItem.width = `50px`);
       } else {
         colsItem && (colsItem.width = `300px`);
-      } 
+      }
     });
   });
 }
 
 /**
  * 得到每个 column 对应字符最多的 dataSource 项
- * 
+ *
  * 备注：如果当前列存在 width 配置，忽略。
- * 
+ *
  * @param data 数据源
  * @param colsMap 列信息
  */
@@ -85,7 +82,7 @@ function getLongest(data: any[], colsMap: Map<string, TableColumn>) {
 
 /**
  * 获取 text 的宽度
- * 
+ *
  * @param text 文本
  * @returns number 宽度
  */
