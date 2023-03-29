@@ -341,7 +341,7 @@ export default {
 | dragText        | 拖拽上传描述                                            | string  | --                           | --          |
 | auto            | 是否自动提交                                            | boolean | false                        | --          |
 | beforeUpload    | 上传之前的钩子（1.9.4）                                 | Function | --                        | --          |
-
+| onProgress      | 上传过程的回调（1.9.8）                                 | Function（event: ProgressEvent） | -- | --          |
 :::
 
 ::: title Upload 插槽
