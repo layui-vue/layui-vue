@@ -1560,13 +1560,13 @@ export default {
 | rowClassName         | 行类名称 function(row, rowIndex)                      | `string` `function` | --         | --                                           | --      |
 | skin                 | 风格                                                  | `string`            | --         | `line` `row` `nob`                           | --      |
 | expand-index         | 展开所在列                                            | `number`            | --         | --                                           | --      |
-| default-expand-all   | 默认展开所有列 (自 1.9.7 后，具备响应式能力)          | `boolean`           | `false`    | `true` `false`                               | --      |
+| default-expand-all   | 默认展开所有列 (自 1.9.7 后，具备响应式能力)            | `boolean`           | `false`    | `true` `false`                               | --      |
 | expand-keys          | 展开的列                                              | `array`             | `[]`       | --                                           | --      |
 | span-method          | 合并算法                                              | `function`          | --         | --                                           | `1.4.0` |
 | getCheckboxProps     | 多选行属性                                            | `function`          | --         | --                                           | `1.4.0` |
 | getRadioProps        | 单选行属性                                            | `function`          | --         | --                                           | `1.4.0` |
 | resize               | 开启所有单元格列宽拖动                                 | `boolean`           | `false`    | `true` `false`                               | `1.9.4` |
-| autoColsWidth        | 列宽自动计算，最大程度利用空间（1.9.7 测试属性）         | `boolean`           | `false`    | `true` `false`                               | `1.9.7` |
+| autoColsWidth        | 列宽自动计算，最大程度利用空间（1.9.8）                 | `boolean`           | `false`    | `true` `false`                               | `1.9.8` |
 
 :::
 

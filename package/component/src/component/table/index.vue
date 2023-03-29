@@ -56,6 +56,7 @@ export interface TableProps {
   getCheckboxProps?: Function;
   getRadioProps?: Function;
   resize?: boolean;
+  autoColsWidth?: boolean;
 }
 
 const props = withDefaults(defineProps<TableProps>(), {
@@ -81,6 +82,7 @@ const props = withDefaults(defineProps<TableProps>(), {
   getCheckboxProps: () => {},
   getRadioProps: () => {},
   resize: false,
+  autoColsWidth: false
 });
 
 const emit = defineEmits(TableEmit);
@@ -228,7 +230,8 @@ const tableSelectedKeys = ref<string[]>([...props.selectedKeys]);
 /**
  * 对 width 属性的预处理
  */
-useAutoColsWidth(tableColumns, tableDataSource);
+ props.autoColsWidth && useAutoColsWidth(tableColumns, tableDataSource);
+
 
 /**
  * 监听 columns 变化
