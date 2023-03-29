@@ -1422,6 +1422,7 @@ export default {
       :checkbox="checkbox5" :page="page5" 
       :default-toolbar="defaultToolbar5"
       :resize="true"
+      :autoColsWidth="true"
       v-model:selected-keys="selectedKeys5"  
       @row="rowClick5"
       @change="change555">
@@ -1471,22 +1472,17 @@ export default {
       },
       {
         title:"姓名",
-        fixed:"left",
-        width:"200px",
         titleSlot: "name-title",
         customSlot:"name",
         key:"name",
-        align: "left"
       },
       {
         title:"年龄",
-        width: "300px",
         key:"age",
         ellipsisTooltip: true,
       },
       {
         title:"备注",
-        width: "300px",
         key:"remark",
         ellipsisTooltip: true,
       }
@@ -1543,33 +1539,34 @@ export default {
 
 ::: table
 
-| 属性                 | 描述                                                  | 类型                | 默认值     | 可选值             | 版本    |
-| -------------------- | ----------------------------------------------------- | ------------------- | ---------- | ------------------ | ------- |
-| columns              | 列配置 - [更多](#tableColumn)                         | --                  | --         | --                 | --      |
-| dataSource           | 数据源                                                | --                  | --         | --                 | --      |
-| checkbox             | 开启复选框                                            | `boolean`           | `false`    | `true` `false`     | --      |
-| id                   | 主键                                                  | `string`            | --         | --                 | --      |
-| v-model:selectedKeys | 选中项 (多选)                                         | --                  | --         | --                 | --      |
-| v-model:selectedKey  | 选中项 (单选)                                         | --                  | --         | --                 | --      |
-| default-toolbar      | 工具栏                                                | `boolean` `array`          | `false`    | `true` `false` `['filter','export','print']`     | --      |
-| size                 | 尺寸                                                  | `string`            | `md`       | `lg` `md` `sm`     | --      |
-| children-column-name | 树节点字段                                            | `string`            | `children` | --                 | --      |
-| indent-size          | 树表行级缩进                                          | `number`            | `30`       | --                 | --      |
-| height               | 表格高度                                              | `number`            | --         | --                 | --      |
-| maxHeight            | 表格最大高度                                          | `number`            | --         | --                 | --      |
-| even                 | 斑马条纹                                              | `boolean`           | `false`    | `true` `false`     | --      |
-| cellStyle            | 列样式 function(row, column, rowIndex, columnIndex)   | `string` `function` | --         | --                 | --      |
-| rowStyle             | 行样式 function(row, rowIndex)                        | `string` `function` | --         | --                 | --      |
-| cellClassName        | 列类名称 function(row, column, rowIndex, columnIndex) | `string` `function` | --         | --                 | --      |
-| rowClassName         | 行类名称 function(row, rowIndex)                      | `string` `function` | --         | --                 | --      |
-| skin                 | 风格                                                  | `string`            | --         | `line` `row` `nob` | --      |
-| expand-index         | 展开所在列                                            | `number`            | --         | --                 | --      |
-| default-expand-all   | 默认展开所有列 (自 1.9.7 后，具备响应式能力)            | `boolean`           | `false`    | `true` `false`     | --      |
-| expand-keys          | 展开的列                                              | `array`             | `[]`       | --                 | --      |
-| span-method          | 合并算法                                              | `function`          | --         | --                 | `1.4.0` |
-| getCheckboxProps     | 多选行属性                                            | `function`          | --         | --                 | `1.4.0` |
-| getRadioProps        | 单选行属性                                            | `function`          | --         | --                 | `1.4.0` |
-| resize               | 开启所有单元格列宽拖动                                 | `boolean`           | `false`    | `true` `false`    | `1.9.4` |
+| 属性                 | 描述                                                  | 类型                | 默认值     | 可选值                                       | 版本    |
+| -------------------- | ----------------------------------------------------- | ------------------- | ---------- | -------------------------------------------- | ------- |
+| columns              | 列配置 - [更多](#tableColumn)                         | --                  | --         | --                                           | --      |
+| dataSource           | 数据源                                                | --                  | --         | --                                           | --      |
+| checkbox             | 开启复选框                                            | `boolean`           | `false`    | `true` `false`                               | --      |
+| id                   | 主键                                                  | `string`            | --         | --                                           | --      |
+| v-model:selectedKeys | 选中项 (多选)                                         | --                  | --         | --                                           | --      |
+| v-model:selectedKey  | 选中项 (单选)                                         | --                  | --         | --                                           | --      |
+| default-toolbar      | 工具栏                                                | `boolean` `array`   | `false`    | `true` `false` `['filter','export','print']` | --      |
+| size                 | 尺寸                                                  | `string`            | `md`       | `lg` `md` `sm`                               | --      |
+| children-column-name | 树节点字段                                            | `string`            | `children` | --                                           | --      |
+| indent-size          | 树表行级缩进                                          | `number`            | `30`       | --                                           | --      |
+| height               | 表格高度                                              | `number`            | --         | --                                           | --      |
+| maxHeight            | 表格最大高度                                          | `number`            | --         | --                                           | --      |
+| even                 | 斑马条纹                                              | `boolean`           | `false`    | `true` `false`                               | --      |
+| cellStyle            | 列样式 function(row, column, rowIndex, columnIndex)   | `string` `function` | --         | --                                           | --      |
+| rowStyle             | 行样式 function(row, rowIndex)                        | `string` `function` | --         | --                                           | --      |
+| cellClassName        | 列类名称 function(row, column, rowIndex, columnIndex) | `string` `function` | --         | --                                           | --      |
+| rowClassName         | 行类名称 function(row, rowIndex)                      | `string` `function` | --         | --                                           | --      |
+| skin                 | 风格                                                  | `string`            | --         | `line` `row` `nob`                           | --      |
+| expand-index         | 展开所在列                                            | `number`            | --         | --                                           | --      |
+| default-expand-all   | 默认展开所有列 (自 1.9.7 后，具备响应式能力)          | `boolean`           | `false`    | `true` `false`                               | --      |
+| expand-keys          | 展开的列                                              | `array`             | `[]`       | --                                           | --      |
+| span-method          | 合并算法                                              | `function`          | --         | --                                           | `1.4.0` |
+| getCheckboxProps     | 多选行属性                                            | `function`          | --         | --                                           | `1.4.0` |
+| getRadioProps        | 单选行属性                                            | `function`          | --         | --                                           | `1.4.0` |
+| resize               | 开启所有单元格列宽拖动                                 | `boolean`           | `false`    | `true` `false`                               | `1.9.4` |
+| autoColsWidth        | 列宽自动计算，最大程度利用空间（1.9.7 测试属性）         | `boolean`           | `false`    | `true` `false`                               | `1.9.7` |
 
 :::
 
@@ -1578,11 +1575,11 @@ export default {
 
 ::: table
 
-| 属性            | 描述     | 参数                                 |
-| --------------- | -------- | ------------------------------------|
-| row             | 行单击   | { row: 当前行数据 }                   |
-| row-double      | 行双击   | { row: 当前行数据 }                   |
-| row-contextmenu | 行右击   | { row: 当前行数据 }                   |
+| 属性            | 描述     | 参数                                   |
+| --------------- | -------- | -------------------------------------- |
+| row             | 行单击   | { row: 当前行数据 }                    |
+| row-double      | 行双击   | { row: 当前行数据 }                    |
+| row-contextmenu | 行右击   | { row: 当前行数据 }                    |
 | change          | 分页事件 | { current: 当前页码, limit: 每页数量 } |
 
 :::
@@ -1592,12 +1589,12 @@ export default {
 
 ::: table
 
-| 插槽    | 描述         | 参数 | 版本    |
-| ------- | ------------ | ---- | ------- |
-| toolbar | 自定义工具栏 | --   | --      |
-| footer  | 底部扩展     | --   | `1.4.4` |
-| expand  | 嵌套面板     | { row } 在 1.8.6 版本，data 参数由 row 替代，但 data 仍然可用  | `1.4.4` |
-| customSlot  | 自定义列插槽     | { row，rowIndex，column，columnIndex } 在 1.8.6 版本，data 参数由 row 替代，但 data 仍然可用，新增 rowIndex 行索引 columnIndex 列索引 column 列信息参数  | `1.4.4` |
+| 插槽       | 描述         | 参数                                                                                                                                                    | 版本    |
+| ---------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
+| toolbar    | 自定义工具栏 | --                                                                                                                                                      | --      |
+| footer     | 底部扩展     | --                                                                                                                                                      | `1.4.4` |
+| expand     | 嵌套面板     | { row } 在 1.8.6 版本，data 参数由 row 替代，但 data 仍然可用                                                                                           | `1.4.4` |
+| customSlot | 自定义列插槽 | { row，rowIndex，column，columnIndex } 在 1.8.6 版本，data 参数由 row 替代，但 data 仍然可用，新增 rowIndex 行索引 columnIndex 列索引 column 列信息参数 | `1.4.4` |
 
 :::
 
@@ -1622,7 +1619,7 @@ export default {
 | fixed           | 列固定                         | `string`  | --      | `left` `right`              | --      |
 | type            | 列类型                         | `string`  | --      | `number` `checkbox` `radio` | --      |
 | children        | 表头分组                       | `string`  | --      | `number` `checkbox` `radio` | `1.4.0` |
-| resize          | 单元格列宽拖动                  | `boolean` | `false`  | `true` `false`             | `1.9.4` |
+| resize          | 单元格列宽拖动                 | `boolean` | `false` | `true` `false`              | `1.9.4` |
 
 :::
 

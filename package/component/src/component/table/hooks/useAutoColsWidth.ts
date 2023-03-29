@@ -1,63 +1,74 @@
-import { Recordable } from "../../..//types";
+import { Recordable } from "../../../types";
 import { TableColumn } from "../typing";
 import { Ref, watchEffect, ComputedRef } from "vue";
 
 /**
- * 表格列自动设置宽度
- * 据内容宽度大小:
+ * 列自动设置宽度
+ * 
  * ( 宽度 < minWidth ) ==> minWidth
  * ( minWidth < 宽度 < 300px )  ==> 宽度
  * ( 宽度 > 300px ) ==> 300px
+ * 
  * @param columns 表格列
- * @param sourceData 表格数据
+ * @param dataSource 表格数据
  */
-export default function useAutoColsWidth(
-  columns: ComputedRef<Recordable[]>,
-  sourceData: Ref<any[]>
+export default function useAutoColsWidth(columns: ComputedRef<Recordable[]>, dataSource: Ref<any[]>
 ): void {
+  
   watchEffect(() => {
-    if (columns.value.length === 0 || sourceData.value.length === 0) return;
 
+    // 如果 columns 或 dataSource 为空，停止计算
+    if (columns.value.length === 0 || dataSource.value.length === 0) return;
+
+    // 初始化 columns 到 map 键值队
     const colsMap: Map<string, TableColumn> = new Map();
-
-    // 时间复杂度 n
     columns.value.forEach((item) => {
       colsMap.set(item.key, item as TableColumn);
     });
 
-    // 记录数据中最长的字段
-    const longestMap: Map<string, string> = handleLongest(
-      sourceData.value,
+    // 得到 column 与最长 cellValue 的键值队
+    const longestMap: Map<string, string> = getLongest(
+      dataSource.value,
       colsMap
     );
-    // 单元格内距
+
+    // 辅助计算变量，单元格内边距
     const padding = 16;
-    // 时间复杂度 n
     longestMap.forEach((value, key) => {
+      
+      // 获取最长单元格宽度 
       const width = getTextWidth(value) + padding;
+      
+      // 获取当前单元格对象
       const colsItem = colsMap.get(key);
 
+      // 为 column 设置宽度，但最大值不
+      // 超过 300px, 最小值不超过 50px.
       if (width < 300 && width > 50) {
         colsItem && (colsItem.width = `${width}px`);
-      } else if (width > 300) {
-        colsItem && (colsItem.width = `300px`);
-      } else {
+      } else if (width < 50) {
         colsItem && (colsItem.width = `50px`);
-      }
+      } else {
+        colsItem && (colsItem.width = `300px`);
+      } 
     });
-    // 总时间复杂度 2n + 100n
   });
 }
 
-function handleLongest(data: any[], colsMap: Map<string, TableColumn>) {
+/**
+ * 得到每个 column 对应字符最多的 dataSource 项
+ * 
+ * 备注：如果当前列存在 width 配置，忽略。
+ * 
+ * @param data 数据源
+ * @param colsMap 列信息
+ */
+function getLongest(data: any[], colsMap: Map<string, TableColumn>) {
   const longestMap: Map<string, string> = new Map();
-  // 最大时间复杂度 100n
   for (let i = 0; i < data.length && i < 100; i++) {
     const sourceItem = data[i];
     colsMap.forEach((value, key) => {
-      // 有width配置不处理
       if (value.width) return;
-      // 非字符串不处理
       if (typeof sourceItem[key] !== "string") return;
       const longestKey = longestMap.get(key);
       if (longestKey) {
@@ -73,27 +84,20 @@ function handleLongest(data: any[], colsMap: Map<string, TableColumn>) {
 }
 
 /**
- * 获取文本宽度
+ * 获取 text 的宽度
+ * 
  * @param text 文本
- * @returns number
+ * @returns number 宽度
  */
 function getTextWidth(text: string): number {
   let result = 0;
-
-  // 源站字体大小
   const bodyStyles = window.getComputedStyle(document.body);
-
-  // 创建canvas元素
   const canvas = document.createElement("canvas");
   const context = canvas.getContext("2d");
-
-  // 设置字体和文本内容
   if (context) {
     context.font = bodyStyles.font;
     const metrics = context.measureText(text);
     result = metrics.width;
   }
-
-  // 返回文本的宽度
   return result;
 }

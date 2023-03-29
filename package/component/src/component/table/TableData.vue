@@ -48,7 +48,6 @@ export interface TableRowProps {
 }
 
 const slot = useSlots();
-
 const emit = defineEmits(TableEmit);
 
 const props = withDefaults(defineProps<TableRowProps>(), {

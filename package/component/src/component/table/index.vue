@@ -31,11 +31,11 @@ import useAutoColsWidth from "./hooks/useAutoColsWidth";
 
 export interface TableProps {
   id?: string;
+  dataSource: Recordable[];
+  columns: Recordable[];
   skin?: string;
   size?: string;
   page?: Recordable;
-  columns: Recordable[];
-  dataSource: Recordable[];
   defaultToolbar?: boolean | any[];
   selectedKey?: string;
   selectedKeys?: string[];
@@ -227,7 +227,9 @@ const findFinalNode = (
 const tableExpandKeys = ref<string[]>([...props.expandKeys]);
 const tableSelectedKeys = ref<string[]>([...props.selectedKeys]);
 
-// 单元格宽度自动化
+/**
+ * 对 width 属性的预处理 
+ */
 props.autoColsWidth && useAutoColsWidth(tableColumns, tableDataSource);
 
 /**
@@ -239,7 +241,6 @@ watch(
     tableColumnKeys.value = [];
     tableBodyColumns.value = [];
     tableHeadColumns.value = [];
-
     findFindNode(tableColumns.value);
     findFindNodes(tableColumns.value);
     findFinalNode(0, tableColumns.value, undefined);
@@ -247,6 +248,9 @@ watch(
   { immediate: true }
 );
 
+/**
+ * 监听 props.selectedKeys 变化，响应内部 
+ */
 watch(
   () => props.selectedKeys,
   () => {
