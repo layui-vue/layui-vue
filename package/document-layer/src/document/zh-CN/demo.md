@@ -943,10 +943,13 @@ const changeVisible17 = function() {
 }
 
 const changeVisible18 = function() {
-    layer.drawer({
+    layer.open({
         title: "标题",
-        area: "50%",
+        area: ['200px','200px'],
         content: "内容",
+        moveEnd: function() {
+            alert("拖拽结束")
+        }
     })
 }
 

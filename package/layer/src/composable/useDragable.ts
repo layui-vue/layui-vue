@@ -1,7 +1,8 @@
 const useMove = function (
   el: HTMLElement,
   moveOut: boolean,
-  callback: Function
+  callback: Function,
+  endCallback: Function
 ) {
   el.style.position = "fixed";
   let offsetX: number, offsetY: number;
@@ -18,16 +19,18 @@ const useMove = function (
               let x = event.pageX - offsetX;
               let y = event.pageY - offsetY;
               if (!moveOut) {
-                const documentX = document.documentElement.clientWidth - el.offsetWidth;
-                const documentY = document.documentElement.clientHeight - el.offsetHeight;
+                const documentX =
+                  document.documentElement.clientWidth - el.offsetWidth;
+                const documentY =
+                  document.documentElement.clientHeight - el.offsetHeight;
                 if (x < 0) {
                   x = 0;
-                } else if ( x > documentX) {
+                } else if (x > documentX) {
                   x = documentX;
                 }
                 if (y < 0) {
                   y = 0;
-                } else if ( y > documentY) {
+                } else if (y > documentY) {
                   y = documentY;
                 }
               }
@@ -38,6 +41,8 @@ const useMove = function (
             return false;
           };
           const stop = function () {
+            // 说明结束，传递 moveEnd 事件
+            endCallback();
             document.removeEventListener("mousemove", move);
             document.removeEventListener("mouseup", stop);
           };
