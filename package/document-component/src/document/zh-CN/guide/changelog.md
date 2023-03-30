@@ -17,7 +17,7 @@
     <ul> 
       <a name="1-9-8"></a> 
       <li> 
-        <h3>1.9.8 <span class="layui-badge-rim">2023-03-29</span></h3> 
+        <h3>1.9.8 <span class="layui-badge-rim">2023-03-30</span></h3> 
         <ul> 
           <li>[新增] upload 组件 onProgress 属性，上传过程回调，本质为 xhr.upload.onprogress 回调函数。</li>
           <li>[优化] table 组件 autoColsWidth 属性，支持树表的列宽计算。</li>
