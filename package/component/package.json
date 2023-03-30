@@ -1,10 +1,11 @@
 {
   "name": "@layui/layui-vue",
-  "version": "1.9.8",
+  "version": "1.10.0-alpha.1",
   "author": "就眠儀式",
   "license": "MIT",
   "description": "a component library for Vue 3 base on layui-vue",
   "homepage": "http://www.layui-vue.com",
+  "sideEffects": false,
   "main": "es/index.js",
   "unpkg": "umd/index.js",
   "jsdelivr": "umd/index.js",
@@ -54,7 +55,6 @@
     "qrcode":"1.5.0",
     "jsbarcode":"3.11.5"
   },
-  "sideEffects": false,
   "files": [
     "lib",
     "es",

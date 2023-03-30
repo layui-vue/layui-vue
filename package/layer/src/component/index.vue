@@ -96,6 +96,7 @@ export interface LayerProps {
   min?: Function;
   full?: Function;
   restore?: Function;
+  moveOut?: boolean;
 }
 
 const props = withDefaults(defineProps<LayerProps>(), {
@@ -129,6 +130,7 @@ const props = withDefaults(defineProps<LayerProps>(), {
   isMessage: false,
   startIndex: 0,
   imgList: () => [],
+  moveOut: false
 });
 
 const emit = defineEmits(["close", "update:modelValue"]);
@@ -377,7 +379,7 @@ const supportMove = function () {
     nextTick(() => {
       if (layero.value) {
         // 拖拽, 在首次拖拽前, 移除 resizeObserver 监听
-        useMove(layero.value, (left: string, top: string) => {
+        useMove(layero.value, props.moveOut , (left: string, top: string) => {
           removeListener();
           l.value = left;
           t.value = top;
