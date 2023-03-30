@@ -17,6 +17,18 @@
     <ul> 
       <a name="1-9-8"></a> 
       <li> 
+        <h3>1.9.9 <span class="layui-badge-rim">2023-03-30</span></h3> 
+        <ul> 
+          <li>[新增] layer 组件 moveOut 属性，默认只能在窗口内拖拽，如果你想让拖到窗外，那么设定 true 即可。</li>
+          <li>[新增] layer 组件 moveEnd 回调函数，默认不会触发，如果你需要，设定 moveEnd: function(){} 即可。</li>
+          <li>[新增] layer 组件 moveStart 回调函数，默认不会触发，如果你需要，设定 moveStart: function(){} 即可。</li>
+          <li>[优化] es 产物 decode 没有被 Tree shaking, 从而造成应用构建产物体积过大的问题。</li>
+        </ul>  
+      </li>
+    </ul>
+    <ul> 
+      <a name="1-9-8"></a> 
+      <li> 
         <h3>1.9.8 <span class="layui-badge-rim">2023-03-30</span></h3> 
         <ul> 
           <li>[新增] upload 组件 onProgress 属性，上传过程回调，本质为 xhr.upload.onprogress 回调函数。</li>

@@ -2,10 +2,13 @@ const useMove = function (
   el: HTMLElement,
   moveOut: boolean,
   callback: Function,
-  endCallback: Function
+  endCallback: Function,
+  startCallback: Function
 ) {
   el.style.position = "fixed";
   let offsetX: number, offsetY: number;
+  var clientX = 0, clientY = 0;
+  var flag = true;
   if (el != null) {
     el.addEventListener("mousedown", function (event: any) {
       const path = (event.composedPath && event.composedPath()) || event.path;
@@ -14,8 +17,19 @@ const useMove = function (
           const cs: any = getComputedStyle(el);
           offsetX = event.pageX - el.offsetLeft + parseInt(cs["margin-left"]);
           offsetY = event.pageY - el.offsetTop + parseInt(cs["margin-right"]);
+          clientX = event.clientX;
+          clientY = event.clientY;
           const move = function (event: any) {
             if (el != null) {
+
+              // 按下后的首次偏移，将触发 moveStart() 回调函数
+              if((event.clientX - clientX) != 0 || (event.clientY - clientY) != 0) {
+                if(flag) {
+                  flag = false;
+                  startCallback();
+                }
+              }
+
               let x = event.pageX - offsetX;
               let y = event.pageY - offsetY;
               if (!moveOut) {
@@ -41,6 +55,8 @@ const useMove = function (
             return false;
           };
           const stop = function () {
+            // 恢复标识，保证下次拖拽开始时，可触发 moveStart 回调
+            flag = true;
             // 说明结束，传递 moveEnd 事件
             endCallback();
             document.removeEventListener("mousemove", move);

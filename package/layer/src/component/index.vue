@@ -98,6 +98,7 @@ export interface LayerProps {
   restore?: Function;
   moveOut?: boolean;
   moveEnd?: Function;
+  moveStart?: Function;
 }
 
 const props = withDefaults(defineProps<LayerProps>(), {
@@ -132,7 +133,8 @@ const props = withDefaults(defineProps<LayerProps>(), {
   startIndex: 0,
   imgList: () => [],
   moveOut: false,
-  moveEnd: () => []
+  moveEnd: () => {},
+  moveStart: () => {}
 });
 
 const emit = defineEmits(["close", "update:modelValue"]);
@@ -381,14 +383,23 @@ const supportMove = function () {
     nextTick(() => {
       if (layero.value) {
         // 拖拽, 在首次拖拽前, 移除 resizeObserver 监听
-        useMove(layero.value, props.moveOut, (left: string, top: string) => {
-          removeListener();
-          l.value = left;
-          t.value = top;
-        }, () => {
-          // 拖拽结束
-          props.moveEnd();
-        });
+        useMove(
+          layero.value,
+          props.moveOut,
+          (left: string, top: string) => {
+            removeListener();
+            l.value = left;
+            t.value = top;
+          },
+          () => {
+            // 拖拽结束
+            props.moveEnd();
+          },
+          () => {
+            // 拖拽开始
+            props.moveStart();
+          }
+        );
         // 拉伸, 在首次拉伸前, 移除 resizeObserver 监听
         useResize(layero.value, (width: string, height: string) => {
           removeListener();

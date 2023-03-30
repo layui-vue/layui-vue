@@ -948,7 +948,10 @@ const changeVisible18 = function() {
         area: ['200px','200px'],
         content: "内容",
         moveEnd: function() {
-            alert("拖拽结束")
+            console.log("拖拽结束")
+        },
+        moveStart: function() {
+            console.log("拖拽开始")
         }
     })
 }
