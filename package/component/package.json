@@ -41,7 +41,7 @@
   },
   "dependencies": {
     "@layui/icons-vue": "1.0.9",
-    "@layui/layer-vue": "1.6.0",
+    "@layui/layer-vue": "1.7.0",
     "@vueuse/core": "8.7.3",
     "@umijs/ssr-darkreader": "^4.9.45",
     "@ctrl/tinycolor": "^3.4.1",

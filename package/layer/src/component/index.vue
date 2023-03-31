@@ -134,7 +134,7 @@ const props = withDefaults(defineProps<LayerProps>(), {
   imgList: () => [],
   moveOut: false,
   moveEnd: () => {},
-  moveStart: () => {}
+  moveStart: () => {},
 });
 
 const emit = defineEmits(["close", "update:modelValue"]);

@@ -7,7 +7,8 @@ const useMove = function (
 ) {
   el.style.position = "fixed";
   let offsetX: number, offsetY: number;
-  var clientX = 0, clientY = 0;
+  var clientX = 0,
+    clientY = 0;
   var flag = true;
   if (el != null) {
     el.addEventListener("mousedown", function (event: any) {
@@ -21,10 +22,12 @@ const useMove = function (
           clientY = event.clientY;
           const move = function (event: any) {
             if (el != null) {
-
               // 按下后的首次偏移，将触发 moveStart() 回调函数
-              if((event.clientX - clientX) != 0 || (event.clientY - clientY) != 0) {
-                if(flag) {
+              if (
+                event.clientX - clientX != 0 ||
+                event.clientY - clientY != 0
+              ) {
+                if (flag) {
                   flag = false;
                   startCallback();
                 }
