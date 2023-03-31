@@ -14,6 +14,7 @@ export interface LayFormContext {
   requiredIcons?: string;
   addField: (field: LayFormItemContext) => void;
   removeField: (field: LayFormItemContext) => void;
+  pane?: boolean;
 }
 
 export interface LayFormItemContext {

@@ -136,3 +136,49 @@
     transform: rotateX(0);
   }
 }
+
+.layui-form-pane .layui-form-label {
+  width: 110px;
+  padding: 8px 15px;
+  height: 38px;
+  line-height: 20px;
+  border-width: 1px;
+  overflow: hidden;
+  white-space: nowrap;
+  background-color: #fafafa;
+  text-overflow: ellipsis;
+  box-sizing: border-box;
+  border-style: solid;
+  border-radius: 2px 0 0 2px;
+  text-align: center;
+}
+
+.layui-form-pane .layui-input-inline {
+  margin-left: -1px
+}
+
+.layui-form-pane .layui-input-block {
+  margin-left: 110px;
+  left: -1px
+}
+
+.layui-form-pane .layui-input:first-child {
+  border-radius: 0 2px 2px 0
+}
+
+.layui-form-pane .layui-form-item:has(.layui-textarea) {
+  .layui-form-label {
+    width: 100% !important;
+    border-radius: 2px 2px 0 0;
+  }
+  .layui-input-block,
+  .layui-input-inline {
+    left: 0px;
+    top: -1px;
+    width: 100% !important;
+    margin-left: 0px !important;
+    .layui-textarea {
+      border-radius: 0 0 2px 2px;
+    }
+  }
+}

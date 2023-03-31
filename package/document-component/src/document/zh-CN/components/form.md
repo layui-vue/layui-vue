@@ -7,11 +7,11 @@
 ::: demo
 
 <template>
-  <lay-form :model="model">
+  <lay-form :model="model" :pane="true">
     <lay-form-item label="账户" prop="username">
       <lay-input v-model="model.username"></lay-input>
     </lay-form-item>
-    <lay-form-item label="密码" prop="password">
+    <lay-form-item label="密码" prop="password" mode="inline">
       <lay-input v-model="model.password" type="password"></lay-input>
     </lay-form-item>
     <lay-form-item label="爱好" prop="hobby">
@@ -21,20 +21,14 @@
         <lay-select-option value="3" label="运动"></lay-select-option>
       </lay-select>
     </lay-form-item>
-    <lay-form-item label="特长" prop="specialty">
-      <lay-radio v-model="model.specialty" name="specialty" value="1">写作</lay-radio>
-      <lay-radio v-model="model.specialty" name="specialty" value="2">画画</lay-radio>
-      <lay-radio v-model="model.specialty" name="specialty" value="3">编码</lay-radio>
-    </lay-form-item>
-    <lay-form-item label="描述" prop="desc">
+    <lay-form-item label="描述" prop="desc" mode="inline">
       <lay-textarea placeholder="请输入描述" v-model="model.desc"></lay-textarea>
     </lay-form-item>
     <lay-form-item label="时间" prop="datetime" required>
       <lay-date-picker v-model="model.datetime" range type="datetime"></lay-date-picker>
     </lay-form-item>
-    <lay-form-item>
-      <lay-button @click="submitClick">提交</lay-button>
-    </lay-form-item>
+    <lay-button type="primary" @click="submitClick">提交</lay-button>
+    <lay-button type="default" @click="">重置</lay-button>
   </lay-form>
 </template>
 
