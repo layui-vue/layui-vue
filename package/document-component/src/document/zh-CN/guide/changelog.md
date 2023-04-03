@@ -24,6 +24,7 @@
           <li>[新增] layer 组件 moveEnd 回调函数，默认不会触发，如果你需要，设定 moveEnd: function(){} 即可。</li>
           <li>[新增] layer 组件 moveStart 回调函数，默认不会触发，如果你需要，设定 moveStart: function(){} 即可。</li>
           <li>[修复] date-picker 组件 range 启用时，因 border 属性而造成的高度不严格问题。</li>
+          <li>[修复] transfer 组件处于 search 状态时，未被过滤选中的数据会被移回左侧的问题。</li>
           <li>[优化] es 产物 decode 没有被 Tree shaking, 从而造成应用构建产物体积过大的问题。</li>
         </ul>  
       </li>

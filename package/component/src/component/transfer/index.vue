@@ -9,8 +9,8 @@ import "./index.less";
 import LayInput from "../input/index.vue";
 import LayButton from "../button/index.vue";
 import LayCheckbox from "../checkbox/index.vue";
-import { computed, Ref, ref, useSlots, watch } from "vue";
 import { BooleanOrString, Recordable } from "../../types";
+import { computed, Ref, ref, useSlots, watch } from "vue";
 
 export interface TransferProps {
   id?: string;
@@ -47,6 +47,8 @@ const allLeftChecked = ref(false);
 const allRightChecked = ref(false);
 const hasLeftChecked = ref(false);
 const hasRightChecked = ref(false);
+const searchLeftValue = ref("");
+const searchRightValue = ref("");
 
 const allLeftChange = (isChecked: boolean) => {
   if (isChecked) {
@@ -66,6 +68,7 @@ watch(
   () => [props.modelValue, props.dataSource],
   () => {
     let targetDataSource: any[] = [];
+    let noTargetDataSource: any[] = [];
 
     props.dataSource.forEach((ds) => {
       if (props.modelValue.includes(ds[props.id])) {
@@ -73,15 +76,45 @@ watch(
       }
     });
 
-    leftDataSource.value = props.dataSource.filter(
-      (item) => !props.modelValue.includes(item[props.id])
-    );
+    props.dataSource.forEach((ds) => {
+      if (!props.modelValue.includes(ds[props.id])) {
+        noTargetDataSource.push(ds);
+      }
+    });
 
-    _leftDataSource.value = props.dataSource.filter(
-      (item) => !props.modelValue.includes(item[props.id])
-    );
+    if (searchLeftValue.value != "") {
+      leftDataSource.value = noTargetDataSource.filter((item) => {
+        if (props.searchMethod) {
+          if (props.searchMethod(searchLeftValue.value, item)) {
+            return item;
+          }
+        } else {
+          if (item.title?.indexOf(searchLeftValue.value) != -1) {
+            return item;
+          }
+        }
+      });
+    } else {
+      leftDataSource.value = [...noTargetDataSource];
+    }
 
-    rightDataSource.value = [...targetDataSource];
+    if (searchRightValue.value != "") { 
+      rightDataSource.value = targetDataSource.filter((item) => {
+        if (props.searchMethod) {
+          if (props.searchMethod(searchRightValue.value, item)) {
+            return item;
+          }
+        } else {
+          if (item.title?.indexOf(searchRightValue.value) != -1) {
+            return item;
+          }
+        }
+      });
+    } else {
+      rightDataSource.value = [...targetDataSource]
+    }
+
+    _leftDataSource.value = [...noTargetDataSource];
     _rightDataSource.value = [...targetDataSource];
   },
   { immediate: true }
@@ -157,7 +190,8 @@ const add = () => {
     }
   });
 
-  rightDataSource.value.forEach((item) => {
+  // 将 _rightDataSource 与 targetDataSource 合并，传入 rightDataSource.
+  _rightDataSource.value.forEach((item) => {
     targetKeys.push(item[props.id]);
   });
 
@@ -174,7 +208,7 @@ const remove = () => {
 
   let targetKeys: any[] = [];
 
-  rightDataSource.value.forEach((item) => {
+  _rightDataSource.value.forEach((item) => {
     if (rightSelectedKeys.value.indexOf(item[props.id]) == -1) {
       targetKeys.push(item[props.id]);
     }
@@ -185,9 +219,6 @@ const remove = () => {
 
   rightSelectedKeys.value = [];
 };
-
-const searchLeftValue = ref("");
-const searchRightValue = ref("");
 
 watch(searchLeftValue, () => {
   if (searchLeftValue.value === "") {

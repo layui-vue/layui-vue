@@ -29,7 +29,7 @@ const props = withDefaults(defineProps<FormProps>(), {
   useCN: true,
   requiredIcons: "",
   initValidate: false,
-  pane: false
+  pane: false,
 });
 
 const formItems: LayFormItemContext[] = [];
@@ -170,7 +170,7 @@ provide(
 </script>
 
 <template>
-  <form :class="['layui-form', {'layui-form-pane': pane} ]" :onsubmit="submit">
+  <form :class="['layui-form', { 'layui-form-pane': pane }]" :onsubmit="submit">
     <slot></slot>
   </form>
 </template>

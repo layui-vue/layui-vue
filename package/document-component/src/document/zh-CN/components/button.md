@@ -263,20 +263,20 @@ import { ref } from 'vue';
 
 ::: table
 
-| 名称         | 描述                      | 类型      | 默认值    | 可选值                             |
-| ------------ | ------------------------- | --------- | --------- | ---------------------------------- |
-| type         | 主题                      | `string`  | `primary` | `primary` `normal` `warm` `danger` |
-| size         | 尺寸                      | `string`  | --        | `lg` `sm` `xs`                     |
-| fluid        | 最大化                    | `boolean` | `false`   | `true` `false`                     |
-| radius       | 圆角                      | `boolean` | `false`   | `true` `false`                     |
-| border       | 边框                      | `string`  | `green`   | `green` `blue` `orange` `red`      |
-| border-style | 边框样式                  | `string`  | `soild`   | `soild` `dashed` `dotted`          |
-| disabled     | 禁用                      | `boolean` | `false`   | `true` `false`                     |
-| loading      | 加载                      | `boolean` | `false`   | `true` `false`                     |
-| native-type  | 原生类型                  | `string`  | `button`  | `button` `submit` `reset`          |
-| prefix-icon  | 前置图标,支持内置 icon 集  | `string`  | --        | -                                  |
-| suffix-icon  | 后置图标,支持内置 icon 集  | `string`  | --        | -                                  |
-| loading-icon | 后置图标,支持内置 icon 集  | `string`  | --        | -                                  |
+| 名称         | 描述                       | 类型       | 默认值    | 可选值                                  |
+| ------------ | ------------------------- | --------- | --------- | --------------------------------------- |
+| type         | 主题                      | `string`  | `primary` | `primary` `normal` `warm` `danger`       |
+| size         | 尺寸                      | `string`  | --        | `lg` `sm` `xs`                           |
+| fluid        | 最大化                    | `boolean` | `false`   | `true` `false`                           |
+| radius       | 圆角                      | `boolean` | `false`   | `true` `false`                           |
+| border       | 边框                      | `string`  | `green`   | `green` `blue` `orange` `red`            |
+| border-style | 边框样式                  | `string`  | `soild`   | `soild` `dashed` `dotted`                |
+| disabled     | 禁用                      | `boolean` | `false`   | `true` `false`                           |
+| loading      | 加载                      | `boolean` | `false`   | `true` `false`                           |
+| native-type  | 原生类型                  | `string`  | `button`  | `button` `submit` `reset`                 |
+| prefix-icon  | 前置图标                  | `string`  | --        | <a href="/zh-CN/components/icon">前往</a> |
+| suffix-icon  | 后置图标                  | `string`  | --        | <a href="/zh-CN/components/icon">前往</a> |
+| loading-icon | 后置图标                  | `string`  | --        | <a href="/zh-CN/components/icon">前往</a> |
 
 :::
 

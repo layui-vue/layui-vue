@@ -222,9 +222,9 @@ const getMarginLeft = computed(() => {
         typeof props.labelWidth === "string"
           ? parseFloat(props.labelWidth)
           : props.labelWidth;
-          if(!layForm.pane) {
-            labelWidth += 15;
-          }
+      if (!layForm.pane) {
+        labelWidth += 15;
+      }
       return {
         "margin-left": `${labelWidth}px`,
       };
