@@ -98,7 +98,7 @@ watch(
       leftDataSource.value = [...noTargetDataSource];
     }
 
-    if (searchRightValue.value != "") { 
+    if (searchRightValue.value != "") {
       rightDataSource.value = targetDataSource.filter((item) => {
         if (props.searchMethod) {
           if (props.searchMethod(searchRightValue.value, item)) {
@@ -111,7 +111,7 @@ watch(
         }
       });
     } else {
-      rightDataSource.value = [...targetDataSource]
+      rightDataSource.value = [...targetDataSource];
     }
 
     _leftDataSource.value = [...noTargetDataSource];
