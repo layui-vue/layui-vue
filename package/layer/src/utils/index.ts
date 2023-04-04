@@ -1,4 +1,3 @@
-import { off, title } from "process";
 import { layer } from "../index";
 
 // 随机数

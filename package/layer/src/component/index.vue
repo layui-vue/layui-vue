@@ -42,6 +42,7 @@ import {
 } from "../utils";
 import { useMove, useResize } from "../composable/useDragable";
 import { nextIndex } from "../tokens";
+import "../theme/index.css";
 
 export interface LayerProps {
   id?: string;
@@ -492,7 +493,7 @@ const renderContent = function (content: any) {
  * @param icon 图标
  */
 const iconClass = computed(() => {
-  return ["layui-layer-ico", `layui-layer-ico${props.icon}`];
+  return ["layer-icon", `layer-icon-ico${props.icon}`];
 });
 
 /**

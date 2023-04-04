@@ -10,6 +10,9 @@
     <button @click="failure">失败消息</button>
     <button @click="warm">警告消息</button>
     <button @click="info">锁定消息</button>
+    <button @click="w1">失败消息</button>
+    <button @click="w2">警告消息</button>
+    <button @click="w3">锁定消息</button>
 </template>
 
 <script>
@@ -20,7 +23,7 @@ const msg = function() {
 }
 
 const success = function() {
-    layer.msg("成功消息", { time: 3000, id: "1" ,icon: 1})
+    layer.msg("成功消息", { time: 3111111111000, id: "1" ,icon: 1})
 }
 
 const failure = function() {
@@ -33,6 +36,18 @@ const warm = function() {
 
 const info = function() {
     layer.msg("疑问消息", { time: 3000, icon: 4})
+}
+
+const w1 = function() {
+    layer.msg("警告消息", { time: 3000, icon: 5})
+}
+
+const w2 = function() {
+    layer.msg("疑问消息", { time: 3000, icon: 6})
+}
+
+const w3 = function() {
+    layer.msg("疑问消息", { time: 3000, icon: 7})
 }
 </script>
 
@@ -648,7 +663,8 @@ const NotifiyInfo=function(){
       title:"Notification Title",
       content:"I will never close automatically. I will be close automatically. I will never close automatically.",
       icon:4,
-      area: "300px"
+      area: "300px",
+      time: 100000000000000
     })
 }
 </script>
