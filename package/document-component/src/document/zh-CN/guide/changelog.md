@@ -24,6 +24,7 @@
           <li>[修复] transfer 组件处于 search 状态时，未被过滤选中的数据会被移回左侧的问题。</li>
           <li>[优化] es 产物 decode 没有被 Tree shaking, 从而造成应用构建产物体积过大的问题。</li>
           <li>[文档] button.md 页面更新 dropdown + button + button-group 实现的案例。</li>
+          <li>[文档] menu.md 页面更新 indent 属性描述错误。</li>
           <li>[升级] layer-vue 到 1.8.0 版本。</li>
           <li>
               <h4 style="margin-bottom: 0px !important;font-weight: 500 !important;">layer</h4>
