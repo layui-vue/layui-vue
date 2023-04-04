@@ -145,7 +145,6 @@ export default {
 ::: demo
 
 <template>
-{{ validateModel }}
   <lay-form :model="validateModel" ref="layFormRef" required>
     <lay-form-item label="账户" prop="username">
       <lay-input v-model="validateModel.username"></lay-input>
