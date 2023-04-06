@@ -44,6 +44,9 @@ export default {
     <lay-button type="primary" @click="openWarning">警告消息</lay-button>
     <lay-button type="primary" @click="openPrimary">详情消息</lay-button>
     <lay-button type="primary" @click="openLoading">加载消息</lay-button>
+    <lay-button type="primary" @click="openWarning5">详情消息</lay-button>
+    <lay-button type="primary" @click="openPrimary5">加载消息</lay-button>
+    <lay-button type="primary" @click="openFailure5">加载消息</lay-button>
 </template>
 
 <script>
@@ -58,10 +61,19 @@ export default {
         layer.msg("失败消息", { icon : 2, time: 1000})
     }
     const openWarning = function() {
-        layer.msg("警告消息", { icon : 3, time: 1000})
+        layer.msg("疑问消息", { icon : 3, time: 1000})
     }
     const openPrimary = function() {
         layer.msg("详情消息", { icon : 4, time: 1000})
+    }
+    const openWarning5 = function() {
+        layer.msg("哭脸图标", { icon : 5, time: 1000})
+    }
+    const openPrimary5 = function() {
+        layer.msg("笑脸图标", { icon : 6, time: 1000})
+    }
+    const openFailure5 = function() {
+        layer.msg("警告图标", { icon : 7, time: 1000})
     }
     const openLoading = function() {
         layer.msg("加载消息", { icon : 16, time: 1000})

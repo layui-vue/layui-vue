@@ -20,13 +20,21 @@
         <h3>1.9.9 <span class="layui-badge-rim">2023-03-30</span></h3> 
         <ul> 
           <li>[新增] from 组件 pane 属性，开启表单面板风格。</li>
-          <li>[新增] layer 组件 moveOut 属性，默认只能在窗口内拖拽，如果你想让拖到窗外，那么设定 true 即可。</li>
-          <li>[新增] layer 组件 moveEnd 回调函数，默认不会触发，如果你需要，设定 moveEnd: function(){} 即可。</li>
-          <li>[新增] layer 组件 moveStart 回调函数，默认不会触发，如果你需要，设定 moveStart: function(){} 即可。</li>
           <li>[修复] date-picker 组件 range 启用时，因 border 属性而造成的高度不严格问题。</li>
           <li>[修复] transfer 组件处于 search 状态时，未被过滤选中的数据会被移回左侧的问题。</li>
           <li>[优化] es 产物 decode 没有被 Tree shaking, 从而造成应用构建产物体积过大的问题。</li>
-          <li>[升级] layer-vue 到 1.7.0 版本。</li>
+          <li>[文档] button.md 页面更新 dropdown + button + button-group 实现的案例。</li>
+          <li>[文档] menu.md 页面更新 indent 属性描述错误。</li>
+          <li>[升级] layer-vue 到 1.8.0 版本。</li>
+          <li>
+              <h4 style="margin-bottom: 0px !important;font-weight: 500 !important;">layer</h4>
+              <ul>
+                  <li>[新增] layer 组件 moveOut 属性，默认只能在窗口内拖拽，如果你想让拖到窗外，那么设定 true 即可。</li>
+                  <li>[新增] layer 组件 moveEnd 回调函数，默认不会触发，如果你需要，设定 moveEnd: function(){} 即可。</li>
+                  <li>[新增] layer 组件 moveStart 回调函数，默认不会触发，如果你需要，设定 moveStart: function(){} 即可。</li>
+                  <li>[优化] layer 组件 icon 属性为 1 2 3 4 5 6 7 时的图标集合。</li>
+              </ul>
+          </li>
         </ul>  
       </li>
     </ul>

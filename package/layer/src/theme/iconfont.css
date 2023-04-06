@@ -1,0 +1,92 @@
+@font-face {
+  font-family: "layer-icon"; /* Project id 3660885 */
+  src: url('iconfont.woff2?t=1680579708654') format('woff2'),
+       url('iconfont.woff?t=1680579708654') format('woff'),
+       url('iconfont.ttf?t=1680579708654') format('truetype');
+}
+
+.layer-icon {
+  font-family: "layer-icon" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: absolute;
+  width: 30px;
+  left: 14px;
+  height: 32px;
+  font-size: 32px;
+  top: 20px;
+}
+
+.layer-icon-ico5 {
+  color: #FF5722;
+}
+
+.layer-icon-ico5:before {
+  content: "\e60f";
+}
+
+.layer-icon-ico6 {
+  color: #5FB878;
+}
+
+.layer-icon-ico6:before {
+  content: "\e614";
+}
+
+.layer-icon-ico4 {
+  color: #393D49;
+}
+
+.layer-icon-ico4:before {
+  content: "\e60c";
+}
+
+.layer-icon-ico16 {
+  width: 32px;
+  height: 32px;
+  top: 15px;
+  left: 14px;
+  background: url(loading-2.gif) no-repeat;
+}
+
+.layer-icon-ico7 {
+  color: #FFB800;
+}
+
+.layer-icon-ico7:before {
+  content: "\e632";
+}
+
+.layer-icon-ico1 {
+  color: #5FB878;
+}
+
+.layer-icon-ico1:before {
+  content: "\e72e";
+}
+
+.layer-icon-ico2 {
+  color: #FF5722;
+}
+
+.layer-icon-ico2:before {
+  content: "\e630";
+}
+
+.layer-icon-ico3 {
+  color: #FFB800;
+}
+
+.layer-icon-ico3:before {
+  content: "\ee42";
+}
+
+@keyframes rotate {
+  0%{-webkit-transform:rotate(0deg);}
+  25%{-webkit-transform:rotate(90deg);}
+  50%{-webkit-transform:rotate(180deg);}
+  75%{-webkit-transform:rotate(270deg);}
+  100%{-webkit-transform:rotate(360deg);}
+}

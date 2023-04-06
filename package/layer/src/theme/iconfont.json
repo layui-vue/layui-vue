@@ -1,0 +1,65 @@
+{
+  "id": "3660885",
+  "name": "layer-icon",
+  "font_family": "layer-icon",
+  "css_prefix_text": "layer-icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "1199328",
+      "name": "sad",
+      "font_class": "ico5",
+      "unicode": "e60f",
+      "unicode_decimal": 58895
+    },
+    {
+      "icon_id": "1199338",
+      "name": "smile",
+      "font_class": "ico6",
+      "unicode": "e614",
+      "unicode_decimal": 58900
+    },
+    {
+      "icon_id": "28726977",
+      "name": "锁定",
+      "font_class": "ico4",
+      "unicode": "e60c",
+      "unicode_decimal": 58892
+    },
+    {
+      "icon_id": "19689706",
+      "name": "加载中",
+      "font_class": "ico16",
+      "unicode": "eb74",
+      "unicode_decimal": 60276
+    },
+    {
+      "icon_id": "5262902",
+      "name": "彩色-警告",
+      "font_class": "ico7",
+      "unicode": "e632",
+      "unicode_decimal": 58930
+    },
+    {
+      "icon_id": "6907913",
+      "name": "提交成功",
+      "font_class": "ico1",
+      "unicode": "e72e",
+      "unicode_decimal": 59182
+    },
+    {
+      "icon_id": "6999239",
+      "name": "错误",
+      "font_class": "ico2",
+      "unicode": "e630",
+      "unicode_decimal": 58928
+    },
+    {
+      "icon_id": "27402549",
+      "name": "疑问",
+      "font_class": "ico3",
+      "unicode": "ee42",
+      "unicode_decimal": 60994
+    }
+  ]
+}

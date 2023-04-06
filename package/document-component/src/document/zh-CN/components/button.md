@@ -238,22 +238,27 @@ const clickHandle = () => {
 ::: title 下拉按钮
 :::
 
-::: demo 使用 `lay-dropdown` 系列组件, 完成下拉按钮。
+::: demo 使用 `lay-button` 组件，配合 `lay-dropdown` 系列组件，完成下拉菜单。
 
 <template>
-  <lay-dropdown>
-    <lay-button type="default">更多操作</lay-button>
-    <template #content>
-      <lay-dropdown-menu>
-        <lay-dropdown-menu-item>复制</lay-dropdown-menu-item>
-        <lay-dropdown-menu-item>删除</lay-dropdown-menu-item>
+	<lay-button-group>
+  	<lay-button type="primary">更多操作</lay-button>   
+  	<lay-dropdown placement="bottom-end">
+    	<lay-button type="primary" style="padding-left:8px;padding-right:8px;">
+      	<lay-icon type="layui-icon-down"></lay-icon>
+    	</lay-button>
+    	<template #content>
+      	<lay-dropdown-menu style="width: 130px">
+        	<lay-dropdown-menu-item>复制</lay-dropdown-menu-item>
+        	<lay-dropdown-menu-item>删除</lay-dropdown-menu-item>
       </lay-dropdown-menu>
     </template>
   </lay-dropdown>
+  </lay-button-group>
 </template>
 
-<script setup>
-import { ref } from 'vue';
+<script lang="ts" setup>
+import { ref } from 'vue'
 </script>
 
 :::

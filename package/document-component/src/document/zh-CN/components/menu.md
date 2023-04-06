@@ -747,7 +747,7 @@ export default {
 | level               | 是否开启菜单层级  | `boolean`          | `true`  | `true` `false` |
 | collapse            | 折叠状态         | `boolean`          | `true`  | `true` `false` |
 | collapse-transition | 折叠动画         | `boolean`          | `true`  | `true` `false` |
-| ident               | 层级缩进         | `boolean` `string` | `false` | `true` `false` |
+| indent               | 层级缩进        | `boolean` `string` | `false` | `true` `false` |
 
 :::
 
