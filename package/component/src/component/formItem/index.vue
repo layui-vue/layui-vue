@@ -80,8 +80,9 @@ const ruleItems = computed(() => {
  */
 const filedValue = computed(() => {
   if (props.prop) {
-    if (props.prop.indexOf(".")) {
-      return deepGet(layForm.model, props.prop);
+    if (props.prop.indexOf(".") != -1) {
+      // loadsh
+      return get(layForm.model, props.prop);
     } else {
       return layForm.model[props.prop];
     }
@@ -90,14 +91,18 @@ const filedValue = computed(() => {
   }
 });
 
-const deepGet = function (obj: any, keys: string[] | string) {
-  return (
-    (!Array.isArray(keys)
-      ? keys.replace(/\[/g, ".").replace(/\]/g, "").split(".")
-      : keys
-    ).reduce((o: any, k: string) => (o || {})[k], obj) || undefined
-  );
-};
+function get(source: any, path: string, defaultValue = undefined) {
+  // a[3].b -> a.3.b
+  const paths = path.replace(/\[(\d+)\]/g, ".\$1").split(".");
+  let result = source;
+  for (const p of paths) {
+    result = Object(result)[p];
+    if (result === undefined) {
+      return defaultValue;
+    }
+  }
+  return result;
+}
 
 watch(
   () => filedValue.value,
@@ -110,6 +115,8 @@ const errorMsg = ref();
 const errorStatus = ref(false);
 // 校验数据有效性
 const validate = (callback?: ValidateCallback) => {
+  console.log(props.prop + ":" + filedValue.value);
+
   if (props.prop && (ruleItems.value as RuleItem[]).length > 0) {
     // 校验规则
     const descriptor: Rules = {};

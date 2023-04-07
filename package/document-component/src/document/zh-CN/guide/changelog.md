@@ -13,13 +13,23 @@
 ::: demo 
 <template>
 <lay-timeline>
-<lay-timeline-item title="1.9.x">
+<lay-timeline-item title="1.10.0">
     <ul> 
-      <a name="1-9-8"></a> 
+      <a name="1-10-0"></a> 
       <li> 
-        <h3>1.9.9 <span class="layui-badge-rim">2023-03-30</span></h3> 
+        <h3>1.10.1 <span class="layui-badge-rim">2023-04-07</span></h3> 
         <ul> 
-          <li>[新增] from 组件 pane 属性，开启表单面板风格。</li>
+          <li>[修复] form 组件 model 属性中对象字段为 0 时，总是验证为空的问题。</li>
+          <li>[优化] form 组件 prop 属性，区分深层与浅层取值的逻辑。</li>
+        </ul>
+      </li>
+    </ul>
+    <ul> 
+      <a name="1-10-0"></a> 
+      <li> 
+        <h3>1.10.0 <span class="layui-badge-rim">2023-04-06</span></h3> 
+        <ul> 
+          <li>[新增] form 组件 pane 属性，开启表单面板风格。</li>
           <li>[修复] date-picker 组件 range 启用时，因 border 属性而造成的高度不严格问题。</li>
           <li>[修复] transfer 组件处于 search 状态时，未被过滤选中的数据会被移回左侧的问题。</li>
           <li>[优化] es 产物 decode 没有被 Tree shaking, 从而造成应用构建产物体积过大的问题。</li>
@@ -38,6 +48,8 @@
         </ul>  
       </li>
     </ul>
+</lay-timeline-item>
+<lay-timeline-item title="1.9.x">
     <ul> 
       <a name="1-9-8"></a> 
       <li> 
