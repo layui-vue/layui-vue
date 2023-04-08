@@ -20,7 +20,8 @@
         <h3>1.10.1 <span class="layui-badge-rim">2023-04-07</span></h3> 
         <ul> 
           <li>[修复] form 组件 model 属性中对象字段为 0 时，总是验证为空的问题。</li>
-          <li>[优化] form 组件 prop 属性，区分深层与浅层取值的逻辑。</li>
+          <li>[修复] form-item 组件 prop 属性无法深度取值的问题。</li>
+          <li>[优化] form-item 组件 prop 属性，区分深层与浅层取值的逻辑。</li>
         </ul>
       </li>
     </ul>

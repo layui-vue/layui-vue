@@ -139,7 +139,248 @@ export default {
 
 :::
 
+::: title 表单验证
+:::
 
+::: demo
+
+<template>
+  <lay-form :model="validateModel" ref="layFormRef" required>
+    <lay-form-item label="账户" prop="username">
+      <lay-input v-model="validateModel.username"></lay-input>
+    </lay-form-item>
+    <lay-form-item label="密码" v-if="validateModel.hobbys == '1'" prop="password">
+      <lay-input v-model="validateModel.password" type="password">></lay-input>
+    </lay-form-item>
+    <lay-form-item label="爱好" prop="hobby">
+      <lay-select v-model="validateModel.hobbys" multiple>
+        <lay-select-option value="1" label="学习"></lay-select-option>
+        <lay-select-option value="2" label="编码"></lay-select-option>
+        <lay-select-option value="3" label="运动"></lay-select-option>
+      </lay-select>
+    </lay-form-item>
+    <lay-form-item label="特长" prop="specialty">
+      <lay-radio v-model="validateModel.specialty" name="specialty" value="1">写作</lay-radio>
+      <lay-radio v-model="validateModel.specialty" name="specialty" value="2">画画</lay-radio>
+      <lay-radio v-model="validateModel.specialty" name="specialty" value="3">编码</lay-radio>
+    </lay-form-item>
+    <lay-form-item label="描述" prop="desc">
+      <lay-textarea placeholder="请输入描述" v-model="validateModel.desc"></lay-textarea>
+    </lay-form-item>
+    <lay-form-item label="文件" prop="file">
+      <lay-upload v-model="validateModel.file" acceptMime="image/*" :auto="false"/>
+    </lay-form-item>
+    <lay-form-item label="权限" prop="power">
+      <lay-tree-select v-model="validateModel.power" multiple :data="data1"></lay-tree-select>
+    </lay-form-item>
+    <lay-form-item>
+      <lay-button @click="validate3">提交</lay-button>
+      <lay-button @click="clearValidate">清除校验</lay-button>
+      <lay-button @click="reset">重置表单</lay-button>
+    </lay-form-item>
+  </lay-form>
+</template>
+
+<script>
+import { ref, reactive } from 'vue'
+import {layer} from '@layui/layer-vue'
+
+export default {
+  setup() {
+
+    const validateModel = reactive({
+        username: "",
+        password: "",
+        specialty: "1",
+        hobbys: [],
+        file: null,
+        power: [],
+    })
+
+    const layFormRef = ref(null);
+
+
+    const data1 = ref([{
+	title: '一级1',
+	id: 1,
+	field: 'name1',
+	children: [{
+		title: '二级1-1 可允许跳转',
+		id: 3,
+		field: 'name11',
+		href: 'https://www.layui.com/',
+		children: [{
+			title: '三级1-1-3',
+			id: 23,
+			field: '',
+			children: [{
+				title: '四级1-1-3-1',
+				id: 24,
+				field: '',
+				children: [{
+					title: '五级1-1-3-1-1',
+					id: 30,
+				},
+				{
+					title: '五级1-1-3-1-2',
+					id: 31,
+				}]
+			}]
+		},
+		{
+			title: '三级1-1-1',
+			id: 7,
+			field: '',
+			children: [{
+				title: '四级1-1-1-1 可允许跳转',
+				id: 15,
+				href: 'https://www.layui.com/doc/'
+			}]
+		},
+		{
+			title: '三级1-1-2',
+			id: 8,
+			field: '',
+			children: [{
+				title: '四级1-1-2-1',
+				id: 32,
+			}]
+		}]
+	},
+	{
+		title: '二级1-2',
+		id: 4,
+		spread: true,
+		children: [{
+			title: '三级1-2-1',
+			id: 9,
+		},
+		{
+			title: '三级1-2-2',
+			id: 10,
+		}]
+	},
+	{
+		title: '二级1-3',
+		id: 20,
+		field: '',
+		children: [{
+			title: '三级1-3-1',
+			id: 21,
+			field: ''
+		},
+		{
+			title: '三级1-3-2',
+			id: 22,
+			field: ''
+		}]
+	}]
+},
+{
+	title: '一级2',
+	id: 2,
+	children: [{
+		title: '二级2-1',
+		id: 5,
+		spread: true,
+		children: [{
+			title: '三级2-1-1',
+			id: 11,
+		},
+		{
+			title: '三级2-1-2',
+			id: 12,
+		}]
+	},
+	{
+		title: '二级2-2',
+		id: 6,
+		children: [{
+			title: '三级2-2-1',
+			id: 13,
+		},
+		{
+			title: '三级2-2-2',
+			id: 14,
+		}]
+	}]
+},
+{
+	title: '一级3',
+	id: 16,
+	field: '',
+	children: [{
+		title: '二级3-1',
+		id: 17,
+		field: '',
+		fixed: true,
+		children: [{
+			title: '三级3-1-1',
+			id: 18,
+			field: ''
+		},
+		{
+			title: '三级3-1-2',
+			id: 19,
+			field: ''
+		}]
+	},
+	{
+		title: '二级3-2',
+		id: 27,
+		field: '',
+		children: [{
+			title: '三级3-2-1',
+			id: 28,
+			field: ''
+		},
+		{
+			title: '三级3-2-2',
+			id: 29,
+			field: ''
+		}]
+	}]
+}]);
+
+    // 校验
+    const validate3= function() {
+      layFormRef.value.validate((isValidate, model, errors) => {
+          console.log(JSON.stringify(model.file))
+         layer.open({
+          type: 1,
+          title:"表单提交结果", 
+          content: `<div style="padding: 10px"><p>是否通过 : ${isValidate}</p> <p>表单数据 : ${JSON.stringify(model)} </p> <p>错误信息 : ${JSON.stringify(errors)}</p></div>`, 
+          shade: false,
+          isHtmlFragment: true,
+          btn : [{ text: '确认', callback(index) {  layer.close(index) }}],
+          area : '500px'
+        });
+      });
+    }
+
+    // 清除校验
+    const clearValidate = function() {
+      layFormRef.value.clearValidate();
+    }
+
+    // 重置表单
+    const reset = function() {
+      layFormRef.value.reset();
+      validateModel.specialty = "1"
+    }
+
+    return {
+      validateModel,
+      layFormRef,
+      validate3,
+      clearValidate,
+      reset
+    }
+  }
+}
+</script>
+
+:::
 
 ::: title 校验规则
 :::
@@ -177,8 +418,8 @@ export default {
   setup() {
 
     const ruleDemo1 = reactive({
-        email: "0",
-        url: 0,
+        email: "",
+        url: "",
         date: "",
         username: "",
         age: null,
@@ -393,16 +634,17 @@ export default {
 
 ::: table
 
-| 属性                    | 描述                                                                                                                                                                                                                                                                                                                                       | 类型      | 可选值         | 默认值       |
-| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------- | -------------- | ------------ |
-| v-model                 | 表单绑定值                                                                                                                                                                                                                                                                                                                                 | `object`  | -              | {}           |
-| required                | 是否必填                                                                                                                                                                                                                                                                                                                                   | `boolean` | `true` `false` | `false`      |
-| rules                   | 表单校验规则; <br>可查看[async-validator](https://github.com/yiminghe/async-validator)                                                                                                                                                                                                                                                     | `object`  | -              | -            |
-| initValidate            | 是否一开始就校验表单                                                                                                                                                                                                                                                                                                                       | `boolean` | `true` `false` | `false`      |
-| useCN                   | 是否使用中文错误提示                                                                                                                                                                                                                                                                                                                       | `boolean` | `true` `false` | `false`      |
-| requiredIcons           | 必填前缀图标`class`                                                                                                                                                                                                                                                                                                                        | `string`  | -              | `*`          |
-| required-erroer-message | 必填错误提示信息                                                                                                                                                                                                                                                                                                                           | `string`  | -              | `%s不能为空` |
+| 属性                    | 描述                         | 类型      | 可选值         | 默认值       |
+| ----------------------- | --------------------------- | --------- | -------------- | ------------ |
+| v-model                 | 表单绑定                     | `object`  | -              | {}           |
+| required                | 是否必填                     | `boolean` | `true` `false` | `false`      |
+| rules                   | 表单校验规则; <br>可查看[async-validator](https://github.com/yiminghe/async-validator) `object`  | -              | -            |
+| initValidate            | 是否一开始就校验表单          | `boolean` | `true` `false` | `false`      |
+| useCN                   | 是否使用中文错误提示          | `boolean` | `true` `false` | `false`      |
+| requiredIcons           | 必填前缀图标`class`          | `string`  | -              | `*`          |
+| required-erroer-message | 必填错误提示信息              | `string`  | -              | `%s不能为空` |
 | validate-message        | 自定义校验错误提示信息; <br>由于内置了中文错误提示，可按需求增量增加<br>可查看 [async-validator 内置错误提示](https://github.com/yiminghe/async-validator/blob/master/src/messages.ts)<br>也可参考 [layui-vue 内置中文错误提示](https://gitee.com/layui/layui-vue/blob/next/package/component/src/component/formItem/cnValidateMessage.ts) | `string`  | -              | `%s不能为空` |
+| pane                    | 启用方框风格                 | `boolean`  |  `true` `false`              | `false` |
 
 :::
 
@@ -411,8 +653,8 @@ export default {
 
 ::: table
 
-| 属性   | 描述                   | 回调参数                                                                                                                                                              |
-| ------ | ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 属性   | 描述                   | 回调参数 |
+| ------ | --------------------- | -------- |
 | submit | 提交事件`(不推荐使用)` | (`isValidate`, `model`, `errors`)<br><br> `isValidate`: (`boolean`)是否校验通过<br><br> `model`: (`object`)表单绑定的值<br><br> `errors`: (`Array`)校验结果的错误信息 |
 
 :::
@@ -454,10 +696,10 @@ export default {
 
 ::: table
 
-| 属性          | 描述         | 入参                                                                                                                                                                                                     |
-| ------------- | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 属性          | 描述         | 入参        |
+| ------------- | ------------ | -----------|
 | validate      | 表单校验;    | (`callback` `[可选]`)<br><br> `callback`: (`function`)校验之后的回调，<br>回调参数为(`errors`, `fields`)；<br><br> `errors`: (`Array`)校验结果的错误信息；<br><br> `fields`: (`Array`)当前校验的字段信息 |
-| clearValidate | 清除表单校验 | -                                                                                                                                                                                                        |
+| clearValidate | 清除表单校验  | -         |
 
 :::
 
@@ -467,9 +709,9 @@ export default {
 ::: table
 
 | 属性     | 描述                                                                 | 可使用参数                               |
-| -------- | -------------------------------------------------------------------- | ---------------------------------------- |
+| -------- | --------------------------------------------------------------------| ---------------------------------------- |
 | -        | 默认插槽                                                             | 传递进来的`props`和表单绑定的值(`model`) |
-| label    | 子项前边描述插槽<br>如果使用此插槽，`props`**尽量**也传递`label`参数 | 传递进来的`props`和表单绑定的值(`model`) |
+| label    | 子项前边描述插槽<br>如果使用此插槽，`props`**尽量**也传递`label`参数    | 传递进来的`props`和表单绑定的值(`model`) |
 | required | 必填前缀插槽                                                         | `*` / `表单props` 中的 `requiredIcons`   |
 
 :::
