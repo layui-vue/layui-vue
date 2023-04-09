@@ -41,11 +41,6 @@ export default (): UserConfigExport => {
             vue: "Vue",
           },
           assetFileNames: "index.css",
-          manualChunks: (id) => {
-            if (id.endsWith('.less') || id.endsWith(".css")) {
-              return "decode"
-            }
-          }
         },
         external: ["vue"],
       },
