@@ -1,7 +1,7 @@
 import { UserConfigExport } from "vite";
 import vue from "@vitejs/plugin-vue";
 import vueJsx from "@vitejs/plugin-vue-jsx";
-import path, { resolve } from "path";
+import { resolve } from "path";
 
 export default (): UserConfigExport => {
   return {
@@ -41,6 +41,11 @@ export default (): UserConfigExport => {
             vue: "Vue",
           },
           assetFileNames: "index.css",
+          manualChunks: (id) => {
+            if (id.endsWith('.less') || id.endsWith(".css")) {
+              return "decode"
+            }
+          }
         },
         external: ["vue"],
       },
