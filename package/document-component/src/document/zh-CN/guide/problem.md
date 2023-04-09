@@ -28,5 +28,14 @@
 ::: describe 因为忽略了 CreateApp().use(layer) 过程, 使其创建了新的 appContext 实例, 导致与全局 Component 所在的 context 并不相同，因而无法获取到组件信息。
 :::
 
+::: title 使用 vue-i18n 后，page, date-picker 等组件 i18n 失效
+:::
+
+::: describe 在 layui-vue 中内置了 vue-i18n 用于组件的国际化处理，如果用户二次安装，会导致内部的实例被覆盖，从而出现部分组件的文字无法正常显示。
+:::
+
+::: describe 如果你希望使用 vue-i18n 并且不影响组件的正常使用，只需要通过 import { useI18n } from "@layui/layui-vue" 使用即可。 <a style="color:#009688;" href="http://www.layui-vue.com/zh-CN/guide/locale">详见</a >。
+:::
+
 ::: describe 寄语：本篇将主要讲解使用过程中普遍遇到的“问题”，并非是 BUG，通常是需要我们自己去注意的一些点。（持续补充）
 :::

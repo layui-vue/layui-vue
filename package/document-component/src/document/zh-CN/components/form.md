@@ -634,16 +634,17 @@ export default {
 
 ::: table
 
-| 属性                    | 描述                                                                                                                                                                                                                                                                                                                                       | 类型      | 可选值         | 默认值       |
-| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------- | -------------- | ------------ |
-| v-model                 | 表单绑定值                                                                                                                                                                                                                                                                                                                                 | `object`  | -              | {}           |
-| required                | 是否必填                                                                                                                                                                                                                                                                                                                                   | `boolean` | `true` `false` | `false`      |
-| rules                   | 表单校验规则; <br>可查看[async-validator](https://github.com/yiminghe/async-validator)                                                                                                                                                                                                                                                     | `object`  | -              | -            |
-| initValidate            | 是否一开始就校验表单                                                                                                                                                                                                                                                                                                                       | `boolean` | `true` `false` | `false`      |
-| useCN                   | 是否使用中文错误提示                                                                                                                                                                                                                                                                                                                       | `boolean` | `true` `false` | `false`      |
-| requiredIcons           | 必填前缀图标`class`                                                                                                                                                                                                                                                                                                                        | `string`  | -              | `*`          |
-| required-erroer-message | 必填错误提示信息                                                                                                                                                                                                                                                                                                                           | `string`  | -              | `%s不能为空` |
+| 属性                    | 描述                         | 类型      | 可选值         | 默认值       |
+| ----------------------- | --------------------------- | --------- | -------------- | ------------ |
+| v-model                 | 表单绑定                     | `object`  | -              | {}           |
+| required                | 是否必填                     | `boolean` | `true` `false` | `false`      |
+| rules                   | 表单校验规则; <br>可查看[async-validator](https://github.com/yiminghe/async-validator) `object`  | -              | -            |
+| initValidate            | 是否一开始就校验表单          | `boolean` | `true` `false` | `false`      |
+| useCN                   | 是否使用中文错误提示          | `boolean` | `true` `false` | `false`      |
+| requiredIcons           | 必填前缀图标`class`          | `string`  | -              | `*`          |
+| required-erroer-message | 必填错误提示信息              | `string`  | -              | `%s不能为空` |
 | validate-message        | 自定义校验错误提示信息; <br>由于内置了中文错误提示，可按需求增量增加<br>可查看 [async-validator 内置错误提示](https://github.com/yiminghe/async-validator/blob/master/src/messages.ts)<br>也可参考 [layui-vue 内置中文错误提示](https://gitee.com/layui/layui-vue/blob/next/package/component/src/component/formItem/cnValidateMessage.ts) | `string`  | -              | `%s不能为空` |
+| pane                    | 启用方框风格                 | `boolean`  |  `true` `false`              | `false` |
 
 :::
 
@@ -652,8 +653,8 @@ export default {
 
 ::: table
 
-| 属性   | 描述                   | 回调参数                                                                                                                                                              |
-| ------ | ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 属性   | 描述                   | 回调参数 |
+| ------ | --------------------- | -------- |
 | submit | 提交事件`(不推荐使用)` | (`isValidate`, `model`, `errors`)<br><br> `isValidate`: (`boolean`)是否校验通过<br><br> `model`: (`object`)表单绑定的值<br><br> `errors`: (`Array`)校验结果的错误信息 |
 
 :::
@@ -695,10 +696,10 @@ export default {
 
 ::: table
 
-| 属性          | 描述         | 入参                                                                                                                                                                                                     |
-| ------------- | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 属性          | 描述         | 入参        |
+| ------------- | ------------ | -----------|
 | validate      | 表单校验;    | (`callback` `[可选]`)<br><br> `callback`: (`function`)校验之后的回调，<br>回调参数为(`errors`, `fields`)；<br><br> `errors`: (`Array`)校验结果的错误信息；<br><br> `fields`: (`Array`)当前校验的字段信息 |
-| clearValidate | 清除表单校验 | -                                                                                                                                                                                                        |
+| clearValidate | 清除表单校验  | -         |
 
 :::
 
@@ -708,9 +709,9 @@ export default {
 ::: table
 
 | 属性     | 描述                                                                 | 可使用参数                               |
-| -------- | -------------------------------------------------------------------- | ---------------------------------------- |
+| -------- | --------------------------------------------------------------------| ---------------------------------------- |
 | -        | 默认插槽                                                             | 传递进来的`props`和表单绑定的值(`model`) |
-| label    | 子项前边描述插槽<br>如果使用此插槽，`props`**尽量**也传递`label`参数 | 传递进来的`props`和表单绑定的值(`model`) |
+| label    | 子项前边描述插槽<br>如果使用此插槽，`props`**尽量**也传递`label`参数    | 传递进来的`props`和表单绑定的值(`model`) |
 | required | 必填前缀插槽                                                         | `*` / `表单props` 中的 `requiredIcons`   |
 
 :::
