@@ -1,0 +1,135 @@
+{
+  "id": "4007419",
+  "name": "layui-icon",
+  "font_family": "layui-icon",
+  "css_prefix_text": "layui-icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "1117915",
+      "name": "帮助",
+      "font_class": "help-circle",
+      "unicode": "e900",
+      "unicode_decimal": 59648
+    },
+    {
+      "icon_id": "19675082",
+      "name": "感叹号",
+      "font_class": "tips-fill",
+      "unicode": "e901",
+      "unicode_decimal": 59649
+    },
+    {
+      "icon_id": "6331948",
+      "name": "测试",
+      "font_class": "test",
+      "unicode": "e902",
+      "unicode_decimal": 59650
+    },
+    {
+      "icon_id": "1117939",
+      "name": "清空删除",
+      "font_class": "clear",
+      "unicode": "e903",
+      "unicode_decimal": 59651
+    },
+    {
+      "icon_id": "2150387",
+      "name": "键盘",
+      "font_class": "keyboard",
+      "unicode": "e904",
+      "unicode_decimal": 59652
+    },
+    {
+      "icon_id": "9512492",
+      "name": "退格",
+      "font_class": "backspace",
+      "unicode": "e905",
+      "unicode_decimal": 59653
+    },
+    {
+      "icon_id": "14660382",
+      "name": "显示密码",
+      "font_class": "show",
+      "unicode": "e906",
+      "unicode_decimal": 59654
+    },
+    {
+      "icon_id": "14660388",
+      "name": "隐藏密码",
+      "font_class": "hide",
+      "unicode": "e907",
+      "unicode_decimal": 59655
+    },
+    {
+      "icon_id": "6994848",
+      "name": "eye",
+      "font_class": "eye-invisible",
+      "unicode": "e908",
+      "unicode_decimal": 59656
+    },
+    {
+      "icon_id": "22064138",
+      "name": "eye",
+      "font_class": "eye",
+      "unicode": "e909",
+      "unicode_decimal": 59657
+    },
+    {
+      "icon_id": "732735",
+      "name": "错误",
+      "font_class": "error",
+      "unicode": "e910",
+      "unicode_decimal": 59664
+    },
+    {
+      "icon_id": "9713089",
+      "name": "成功",
+      "font_class": "success",
+      "unicode": "e911",
+      "unicode_decimal": 59665
+    },
+    {
+      "icon_id": "11891865",
+      "name": "question",
+      "font_class": "question",
+      "unicode": "e912",
+      "unicode_decimal": 59666
+    },
+    {
+      "icon_id": "23810449",
+      "name": "比例锁锁定",
+      "font_class": "lock",
+      "unicode": "e913",
+      "unicode_decimal": 59667
+    },
+    {
+      "icon_id": "30044911",
+      "name": "月亮",
+      "font_class": "moon",
+      "unicode": "e914",
+      "unicode_decimal": 59668
+    },
+    {
+      "icon_id": "1898786",
+      "name": "github",
+      "font_class": "github",
+      "unicode": "e915",
+      "unicode_decimal": 59669
+    },
+    {
+      "icon_id": "2750044",
+      "name": "禁用",
+      "font_class": "disabled",
+      "unicode": "e916",
+      "unicode_decimal": 59670
+    },
+    {
+      "icon_id": "26267572",
+      "name": "gitee",
+      "font_class": "gitee",
+      "unicode": "e917",
+      "unicode_decimal": 59671
+    }
+  ]
+}

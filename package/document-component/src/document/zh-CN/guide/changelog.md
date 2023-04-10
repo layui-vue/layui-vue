@@ -17,6 +17,40 @@
     <ul> 
       <a name="1-10-0"></a> 
       <li> 
+        <h3>1.10.0 <span class="layui-badge-rim">2023-04-06</span></h3> 
+        <ul> 
+          <li>[升级] icons-vue 到 1.1.0 版本。</li>
+          <li>
+              <h4 style="margin-bottom: 0px !important;font-weight: 500 !important;">icons</h4>
+              <ul>
+                  <li>[新增] icons 组件 type 属性 layui-icon-help-circle 值, HelpCircleIcon 图标组件。</li>
+                  <li>[新增] icons 组件 type 属性 layui-icon-tips-fill 值, TipsFillIcon 图标组件。</li>
+                  <li>[新增] icons 组件 type 属性 layui-icon-test 值, TestIcon 图标组件。</li>
+                  <li>[新增] icons 组件 type 属性 layui-icon-clear 值, ClearIcon 图标组件。</li>
+                  <li>[新增] icons 组件 type 属性 layui-icon-keyboard 值, KeyboardIcon 图标组件。</li>
+                  <li>[新增] icons 组件 type 属性 layui-icon-backspace 值, BackspaceIcon 图标组件。</li>
+                  <li>[新增] icons 组件 type 属性 layui-icon-show 值, ShowIcon 图标组件。</li>
+                  <li>[新增] icons 组件 type 属性 layui-icon-hide 值, HideIcon 图标组件。</li>
+                  <li>[新增] icons 组件 type 属性 layui-icon-error 值, ErrorIcon 图标组件。</li>
+                  <li>[新增] icons 组件 type 属性 layui-icon-success 值, SuccessIcon 图标组件。</li>
+                  <li>[新增] icons 组件 type 属性 layui-icon-question 值, QuestionIcon 图标组件。</li>
+                  <li>[新增] icons 组件 type 属性 layui-icon-lock 值, LockIcon 图标组件。</li>
+                  <li>[新增] icons 组件 type 属性 layui-icon-moon 值, MoonIcon 图标组件。</li>
+                  <li>[新增] icons 组件 type 属性 layui-icon-github 值, GithubIcon 图标组件。</li>
+                  <li>[新增] icons 组件 type 属性 layui-icon-disabled 值, DisabledIcon 图标组件。</li>
+                  <li>[新增] icons 组件 type 属性 layui-icon-gitee 值, GiteeIcon 图标组件。</li>
+                  <li>[新增] icons 组件 type 属性 layui-icon-eye-invisible 值, EyeInvisibleIcon 图标组件。</li>
+                  <li>[新增] icons 组件 type 属性 layui-icon-eye 值, EyeIcon 图标组件。</li>
+              </ul>
+          </li>
+        </ul>  
+      </li>
+    </ul>
+</lay-timeline-item>
+<lay-timeline-item title="1.10.0">
+    <ul> 
+      <a name="1-10-0"></a> 
+      <li> 
         <h3>1.10.1 <span class="layui-badge-rim">2023-04-08</span></h3> 
         <ul> 
           <li>[修复] form 组件 model 属性中对象字段为 0 时，总是验证为空的问题。</li>

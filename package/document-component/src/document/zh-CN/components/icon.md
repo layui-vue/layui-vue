@@ -59,7 +59,47 @@ import { AlignCenterIcon, DiamondIcon } from '@layui/icons-vue';
 </script>
 ```
 
-::: title 图标列表（174个）
+::: title 更新迭代
+:::
+
+::: demo 在 `@layui/layui-vue 1.11.0` 或 `@layui/icons-vue 1.1.0` 之后，我们新增了上述图标 。
+
+<template>
+  <lay-icon type="layui-icon-help-circle" color="#009688"></lay-icon> &nbsp;
+  <lay-icon type="layui-icon-tips-fill" color="#009688"></lay-icon> &nbsp;
+  <lay-icon type="layui-icon-test" color="#009688"></lay-icon> &nbsp;
+  <lay-icon type="layui-icon-clear" color="#009688"></lay-icon> &nbsp;
+  <lay-icon type="layui-icon-keyboard" color="#009688"></lay-icon> &nbsp;
+  <lay-icon type="layui-icon-backspace" color="#009688"></lay-icon> &nbsp;
+  <lay-icon type="layui-icon-show" color="#009688"></lay-icon> &nbsp;  
+  <lay-icon type="layui-icon-hide" color="#009688"></lay-icon> &nbsp;
+  <lay-icon type="layui-icon-error" color="#009688"></lay-icon> &nbsp;
+  <lay-icon type="layui-icon-success" color="#009688"></lay-icon> &nbsp;
+  <lay-icon type="layui-icon-question" color="#009688"></lay-icon> &nbsp;
+  <lay-icon type="layui-icon-lock" color="#009688"></lay-icon> &nbsp;  
+  <lay-icon type="layui-icon-moon" color="#009688"></lay-icon> &nbsp;
+  <lay-icon type="layui-icon-github" color="#009688"></lay-icon> &nbsp;
+  <lay-icon type="layui-icon-disabled" color="#009688"></lay-icon> &nbsp;
+  <lay-icon type="layui-icon-gitee" color="#009688"></lay-icon> &nbsp;
+  <lay-icon type="layui-icon-eye-invisible" color="#009688"></lay-icon> &nbsp;
+  <lay-icon type="layui-icon-eye" color="#009688"></lay-icon> &nbsp;
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    return {
+    }
+  }
+}
+</script>
+
+:::
+
+::: title 图标列表（192个）
 :::
 
 ::: demo
