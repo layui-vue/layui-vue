@@ -5,7 +5,11 @@
   "license": "MIT",
   "description": "a component library for Vue 3 base on layui-vue",
   "homepage": "http://www.layui-vue.com",
-  "sideEffects": false,
+  "sideEffects": [
+    "umd/*.css",
+    "lib/*.css",
+    "es/**/*.css"
+  ],
   "main": "es/index.js",
   "unpkg": "umd/index.js",
   "jsdelivr": "umd/index.js",
