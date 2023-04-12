@@ -495,7 +495,7 @@ const sortTable = (e: any, key: string, sort: string) => {
       });
     }
   }
-  emit('sort-change', key, sort);
+  emit("sort-change", key, sort);
 };
 
 let tableBody = ref<HTMLElement | null>(null);

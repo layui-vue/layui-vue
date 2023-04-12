@@ -264,6 +264,7 @@ const maxHandle = () => {
  * <p>
  */
 const minHandle = () => {
+  removeListener();
   let left = 180 * updateMinArrays(id.value, !min.value);
   if (left > document.documentElement.clientWidth - 180) {
     left = document.documentElement.clientWidth - 180;
