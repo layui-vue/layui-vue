@@ -13,12 +13,17 @@
 ::: demo 
 <template>
 <lay-timeline>
-<lay-timeline-item title="1.10.0">
+<lay-timeline-item title="1.11.0">
     <ul> 
-      <a name="1-10-0"></a> 
+      <a name="1-11-0"></a> 
       <li> 
-        <h3>1.10.0 <span class="layui-badge-rim">2023-04-06</span></h3> 
+        <h3>1.11.0 <span class="layui-badge-rim">2023-04-06</span></h3> 
         <ul> 
+          <li>[修复] config-provider 组件 themeVariable 属性在夜间模式下不生效的问题。</li>
+          <li>[修复] tab 组件 brief 风格中标题颜色由 primary-color 调整为 checked-color 变量。</li>
+          <li>[修复] page 组件 theme 属性缺省，主题色不跟随 config-provider 组件配置。</li>
+          <li>[修复] date-picker 组件主题色不跟随 config-provider 组件配置。</li>
+          <li>[修复] webpack 构建项目时，因为 tree-shaking 造成 index.css 丢失。</li>
           <li>[升级] icons-vue 到 1.1.0 版本。</li>
           <li>
               <h4 style="margin-bottom: 0px !important;font-weight: 500 !important;">icons</h4>
