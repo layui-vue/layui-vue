@@ -19,6 +19,7 @@
       <li> 
         <h3>1.11.0 <span class="layui-badge-rim">2023-04-06</span></h3> 
         <ul> 
+          <li>[新增] table 组件 sort-change 事件，在 column 排序时触发。</li>
           <li>[修复] config-provider 组件 themeVariable 属性在夜间模式下不生效的问题。</li>
           <li>[修复] tab 组件 brief 风格中标题颜色由 primary-color 调整为 checked-color 变量。</li>
           <li>[修复] page 组件 theme 属性缺省，主题色不跟随 config-provider 组件配置。</li>

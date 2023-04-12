@@ -194,7 +194,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-table :columns="columns4" :data-source="dataSource4"></lay-table>
+  <lay-table :columns="columns4" :data-source="dataSource4" @sort-change="sortChange4"></lay-table>
 </template>
 
 <script>
@@ -225,9 +225,14 @@ export default {
       {name:"有名", score:70},
     ]
 
+    const sortChange4 = (columnName, order) => {
+      console.log( columnName + "字段执行了" + order + "排序")
+    }
+
     return {
       columns4,
-      dataSource4
+      dataSource4,
+      sortChange4
     }
   }
 }

@@ -1,5 +1,6 @@
 export const TableEmit = [
   "change",
+  "sort-change",
   "update:expandKeys",
   "update:selectedKeys",
   "update:selectedKey",

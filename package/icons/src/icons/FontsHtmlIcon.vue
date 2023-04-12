@@ -5,7 +5,7 @@ export default {
 </script>
 <script setup lang="ts">
 import LayIcon from "../component/icon/index";
-      
+
 const props = defineProps<{
   color?: string;
   size?: string;

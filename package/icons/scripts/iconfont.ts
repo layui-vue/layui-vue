@@ -167,7 +167,6 @@ module.exports = [
   { name: "关闭-空心", class: "layui-icon-close" },
   { name: "正确", class: "layui-icon-ok-circle" },
   { name: "添加-圆圈-细体", class: "layui-icon-add-circle-fine" },
-  
   { name: "帮助", class: "layui-icon-help-circle" },
   { name: "感叹号", class: "layui-icon-tips-fill" },
   { name: "测试", class: "layui-icon-test" },

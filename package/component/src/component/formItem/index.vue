@@ -113,6 +113,7 @@ watch(
 // 错误状态和信息
 const errorMsg = ref();
 const errorStatus = ref(false);
+
 // 校验数据有效性
 const validate = (callback?: ValidateCallback) => {
   console.log(props.prop + ":" + filedValue.value);
