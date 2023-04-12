@@ -25,8 +25,8 @@
           <li>[修复] page 组件 theme 属性缺省，主题色不跟随 config-provider 组件配置。</li>
           <li>[修复] date-picker 组件主题色不跟随 config-provider 组件配置。</li>
           <li>[修复] webpack 构建项目时，因为 tree-shaking 造成 index.css 丢失。</li>
-          <li>[修复] layer 组件 maxmin 属性在首次拖拽前无法正常最小化的问题。</li>
           <li>[升级] icons-vue 到 1.1.0 版本。</li>
+          <li>[升级] layer-vue 到 1.8.1 版本。</li>
           <li>
               <h4 style="margin-bottom: 0px !important;font-weight: 500 !important;">icons</h4>
               <ul>
@@ -48,6 +48,12 @@
                   <li>[新增] icons 组件 type 属性 layui-icon-gitee 值, GiteeIcon 图标组件。</li>
                   <li>[新增] icons 组件 type 属性 layui-icon-eye-invisible 值, EyeInvisibleIcon 图标组件。</li>
                   <li>[新增] icons 组件 type 属性 layui-icon-eye 值, EyeIcon 图标组件。</li>
+              </ul>
+          </li>
+          <li>
+              <h4 style="margin-bottom: 0px !important;font-weight: 500 !important;">layer</h4>
+              <ul>
+                  <li>[修复] layer 组件 maxmin 属性在首次拖拽前无法正常最小化的问题。</li>
               </ul>
           </li>
         </ul>  
