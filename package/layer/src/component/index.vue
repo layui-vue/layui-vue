@@ -137,7 +137,7 @@ const props = withDefaults(defineProps<LayerProps>(), {
   moveOut: false,
   moveEnd: () => {},
   moveStart: () => {},
-  beforeClose: () => true
+  beforeClose: () => true,
 });
 
 const emit = defineEmits(["close", "update:modelValue"]);
@@ -450,10 +450,10 @@ const contentClasses = computed(() => {
  * @param null
  */
 const closeHandle = () => {
-  if(props.beforeClose) {
+  if (props.beforeClose) {
     const result = props.beforeClose();
     // @ts-ignore
-    if(result === undefined || (result != undefined && result === true)) {
+    if (result === undefined || (result != undefined && result === true)) {
       emit("close");
       emit("update:modelValue", false);
       props.destroy();

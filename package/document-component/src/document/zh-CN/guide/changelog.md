@@ -17,7 +17,7 @@
     <ul> 
       <a name="1-11-0"></a> 
       <li> 
-        <h3>1.11.0 <span class="layui-badge-rim">2023-04-12</span></h3> 
+        <h3>1.11.0 <span class="layui-badge-rim">2023-04-13</span></h3> 
         <ul> 
           <li>[新增] table 组件 sort-change 事件，在 column 排序时触发。</li>
           <li>[修复] config-provider 组件 themeVariable 属性在夜间模式下不生效的问题。</li>
@@ -26,7 +26,7 @@
           <li>[修复] date-picker 组件主题色不跟随 config-provider 组件配置。</li>
           <li>[修复] webpack 构建项目时，因为 tree-shaking 造成 index.css 丢失。</li>
           <li>[升级] icons-vue 到 1.1.0 版本。</li>
-          <li>[升级] layer-vue 到 1.8.1 版本。</li>
+          <li>[升级] layer-vue 到 1.8.2 版本。</li>
           <li>
               <h4 style="margin-bottom: 0px !important;font-weight: 500 !important;">icons</h4>
               <ul>
