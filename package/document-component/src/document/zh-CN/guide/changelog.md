@@ -17,7 +17,7 @@
     <ul> 
       <a name="1-11-0"></a> 
       <li> 
-        <h3>1.11.0 <span class="layui-badge-rim">2023-04-06</span></h3> 
+        <h3>1.11.0 <span class="layui-badge-rim">2023-04-12</span></h3> 
         <ul> 
           <li>[新增] table 组件 sort-change 事件，在 column 排序时触发。</li>
           <li>[修复] config-provider 组件 themeVariable 属性在夜间模式下不生效的问题。</li>
@@ -53,7 +53,8 @@
           <li>
               <h4 style="margin-bottom: 0px !important;font-weight: 500 !important;">layer</h4>
               <ul>
-                  <li>[修复] layer 组件 maxmin 属性在首次拖拽前无法正常最小化的问题。</li>
+                  <li>[新增] layer 组件 beforeClose 回调函数，他将在关闭前触发，你可以通过 return false 来阻止关闭。</li>
+                  <li>[修复] layer 组件 maxmin 属性在首次拖拽前，无法正常最小化的问题。</li>
               </ul>
           </li>
         </ul>  
