@@ -13,6 +13,54 @@
 ::: demo 
 <template>
 <lay-timeline>
+<lay-timeline-item title="1.11.0">
+    <ul> 
+      <a name="1-11-0"></a> 
+      <li> 
+        <h3>1.11.0 <span class="layui-badge-rim">2023-04-13</span></h3> 
+        <ul> 
+          <li>[新增] table 组件 sort-change 事件，在 column 排序时触发。</li>
+          <li>[修复] config-provider 组件 themeVariable 属性在夜间模式下不生效的问题。</li>
+          <li>[修复] tab 组件 brief 风格中标题颜色由 primary-color 调整为 checked-color 变量。</li>
+          <li>[修复] page 组件 theme 属性缺省，主题色不跟随 config-provider 组件配置。</li>
+          <li>[修复] date-picker 组件主题色不跟随 config-provider 组件配置。</li>
+          <li>[修复] webpack 构建项目时，因为 tree-shaking 造成 index.css 丢失。</li>
+          <li>[升级] icons-vue 到 1.1.0 版本。</li>
+          <li>[升级] layer-vue 到 1.8.2 版本。</li>
+          <li>
+              <h4 style="margin-bottom: 0px !important;font-weight: 500 !important;">icons</h4>
+              <ul>
+                  <li>[新增] icons 组件 type 属性 layui-icon-help-circle 值, HelpCircleIcon 图标组件。</li>
+                  <li>[新增] icons 组件 type 属性 layui-icon-tips-fill 值, TipsFillIcon 图标组件。</li>
+                  <li>[新增] icons 组件 type 属性 layui-icon-test 值, TestIcon 图标组件。</li>
+                  <li>[新增] icons 组件 type 属性 layui-icon-clear 值, ClearIcon 图标组件。</li>
+                  <li>[新增] icons 组件 type 属性 layui-icon-keyboard 值, KeyboardIcon 图标组件。</li>
+                  <li>[新增] icons 组件 type 属性 layui-icon-backspace 值, BackspaceIcon 图标组件。</li>
+                  <li>[新增] icons 组件 type 属性 layui-icon-show 值, ShowIcon 图标组件。</li>
+                  <li>[新增] icons 组件 type 属性 layui-icon-hide 值, HideIcon 图标组件。</li>
+                  <li>[新增] icons 组件 type 属性 layui-icon-error 值, ErrorIcon 图标组件。</li>
+                  <li>[新增] icons 组件 type 属性 layui-icon-success 值, SuccessIcon 图标组件。</li>
+                  <li>[新增] icons 组件 type 属性 layui-icon-question 值, QuestionIcon 图标组件。</li>
+                  <li>[新增] icons 组件 type 属性 layui-icon-lock 值, LockIcon 图标组件。</li>
+                  <li>[新增] icons 组件 type 属性 layui-icon-moon 值, MoonIcon 图标组件。</li>
+                  <li>[新增] icons 组件 type 属性 layui-icon-github 值, GithubIcon 图标组件。</li>
+                  <li>[新增] icons 组件 type 属性 layui-icon-disabled 值, DisabledIcon 图标组件。</li>
+                  <li>[新增] icons 组件 type 属性 layui-icon-gitee 值, GiteeIcon 图标组件。</li>
+                  <li>[新增] icons 组件 type 属性 layui-icon-eye-invisible 值, EyeInvisibleIcon 图标组件。</li>
+                  <li>[新增] icons 组件 type 属性 layui-icon-eye 值, EyeIcon 图标组件。</li>
+              </ul>
+          </li>
+          <li>
+              <h4 style="margin-bottom: 0px !important;font-weight: 500 !important;">layer</h4>
+              <ul>
+                  <li>[新增] layer 组件 beforeClose 回调函数，他将在关闭前触发，你可以通过 return false 来阻止关闭。</li>
+                  <li>[修复] layer 组件 maxmin 属性在首次拖拽前，无法正常最小化的问题。</li>
+              </ul>
+          </li>
+        </ul>  
+      </li>
+    </ul>
+</lay-timeline-item>
 <lay-timeline-item title="1.10.0">
     <ul> 
       <a name="1-10-0"></a> 

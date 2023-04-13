@@ -1,14 +1,14 @@
 {
   "name": "@layui/layui-vue",
-  "version": "1.10.1",
+  "version": "1.11.0",
   "author": "就眠儀式",
   "license": "MIT",
   "description": "a component library for Vue 3 base on layui-vue",
   "homepage": "http://www.layui-vue.com",
   "sideEffects": [
-    "umd/*.css",
     "lib/*.css",
-    "es/**/*.css"
+    "es/**/*.css",
+    "umd/*.css"
   ],
   "main": "es/index.js",
   "unpkg": "umd/index.js",
@@ -44,8 +44,8 @@
     "build:helper": "node ./script/build.helper.cjs"
   },
   "dependencies": {
-    "@layui/icons-vue": "1.0.9",
-    "@layui/layer-vue": "1.8.0",
+    "@layui/icons-vue": "1.1.0",
+    "@layui/layer-vue": "1.8.2",
     "@vueuse/core": "8.7.3",
     "@umijs/ssr-darkreader": "^4.9.45",
     "@ctrl/tinycolor": "^3.4.1",

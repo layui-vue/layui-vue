@@ -1,6 +1,6 @@
 <script lang="ts">
 export default {
-  name: "TreadIcon",
+  name: "LockIcon",
 };
 </script>
 <script setup lang="ts">
@@ -12,5 +12,5 @@ const props = defineProps<{
 }>();
 </script>
 <template>
-  <lay-icon :color="props.color" :size="props.size" type="layui-icon-tread" />
+  <lay-icon :color="props.color" :size="props.size" type="layui-icon-lock" />
 </template>

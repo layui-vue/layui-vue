@@ -128,7 +128,7 @@ const load4 = function() {
 <template>
     <lay-row :space="30" >
         <lay-col :span="24">
-            <button @click="open">小试牛刀</button>
+            <button @click="open111">小试牛刀</button>
             <button @click="openSize">指定尺寸</button>
             <button @click="openOffset">指定位置</button>
             <button @click="openIframe">远程窗体</button>
@@ -151,11 +151,14 @@ const load4 = function() {
 <script setup>
 import { layer } from  "../../../../layer/src/index"
 
-const open = function() {
+const open111 = function() {
     layer.open({
         type: 1,
         title: "标题",
-        content: "内容"
+        content: "内容",
+        beforeClose: () => {
+ 
+        }
     })    
 }
 

@@ -1,6 +1,6 @@
 {
   "name": "@layui/layer-vue",
-  "version": "1.8.0",
+  "version": "1.8.2",
   "description": "a component library for Vue 3 base on layui-vue",
   "homepage": "http://www.layui-vue.com",
   "module": "lib/layer-vue.es.js",
@@ -32,6 +32,9 @@
     "last 2 versions and > 2%",
     "ie > 10"
   ],
+  "dependencies": {
+    "@layui/icons-vue": "1.1.0"
+  },
   "devDependencies": {
     "@babel/plugin-transform-runtime": "^7.18.5"
   }
