@@ -49,7 +49,7 @@ const hasContent = computed(() => {
 
 const icones: Ref = ref([]);
 const total: Ref<number> = ref(icons.length);
-const totalPage: Ref<number> = ref(total.value / 12);
+const totalPage: Ref<number> = ref(Math.ceil(total.value / 12));
 const currentPage: Ref<number> = ref(1);
 
 if (props.page) {
