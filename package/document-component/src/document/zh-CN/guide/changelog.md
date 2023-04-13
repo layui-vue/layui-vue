@@ -15,6 +15,16 @@
 <lay-timeline>
 <lay-timeline-item title="1.11.0">
     <ul> 
+      <a name="1-11-1"></a> 
+      <li> 
+        <h3>1.11.1 <span class="layui-badge-rim">2023-04-13</span></h3> 
+        <ul> 
+          <li>[修复] icon-picker 组件 totalPage 出现小数的问题。</li>
+          <li>[修复] icon-picker 组件 下一页 操作，超出最大页码后仍不禁用的问题。</li>
+        </ul>
+      </li>
+    </ul>
+    <ul> 
       <a name="1-11-0"></a> 
       <li> 
         <h3>1.11.0 <span class="layui-badge-rim">2023-04-13</span></h3> 
