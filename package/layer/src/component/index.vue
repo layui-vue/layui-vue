@@ -101,6 +101,7 @@ export interface LayerProps {
   moveEnd?: Function;
   moveStart?: Function;
   beforeClose?: Function;
+  close?: Function;
 }
 
 const props = withDefaults(defineProps<LayerProps>(), {
@@ -138,6 +139,7 @@ const props = withDefaults(defineProps<LayerProps>(), {
   moveEnd: () => {},
   moveStart: () => {},
   beforeClose: () => true,
+  close: () => {}
 });
 
 const emit = defineEmits(["close", "update:modelValue"]);
@@ -454,6 +456,7 @@ const closeHandle = () => {
     const result = props.beforeClose();
     // @ts-ignore
     if (result === undefined || (result != undefined && result === true)) {
+      props.close();
       emit("close");
       emit("update:modelValue", false);
       props.destroy();

@@ -342,29 +342,40 @@ export default {
 
 ::: table
 
-| 备注            | 描述          | 默认值                     |
-| --------------- | ------------- | --------------------------|
-| title           | 标题          | --                         |
-| move            | 允许拖拽      | `false`                    |
-| maxmin          | 最小化 最大化 | `false`                    |
-| offset          | 位置          | --                         |
-| area            | 尺寸          | --                         |
-| v-model         | 展示 隐藏     | false                      |
-| content         | 内容          | --                         |
-| shade           | 开启遮盖      | --                         |
-| shadeClose      | 遮盖点击关闭  | --                         |
-| shadeOpacity    | 遮盖层透明度  | `0.1`                         |
-| zIndex          | 自定义层级    | --                         |
-| type            | 类型          | `1: component` `2: iframe` |
-| closeBtn        | 显示关闭      | true                       |
+| 名称            | 描述             | 参数                     |
+| --------------- | --------------- | --------------------------|
+| title           | 标题            | --                         |
+| move            | 允许拖拽         | `false`                    |
+| maxmin          | 最小化 最大化    | `false`                    |
+| offset          | 位置            | --                         |
+| area            | 尺寸            | --                         |
+| v-model         | 展示 隐藏       | false                      |
+| content         | 内容            | --                         |
+| shade           | 开启遮盖        | --                         |
+| shadeClose      | 遮盖点击关闭     | --                         |
+| shadeOpacity    | 遮盖层透明度     | `0.1`                         |
+| zIndex          | 自定义层级       | --                         |
+| type            | 类型            | `1: component` `2: iframe` |
+| closeBtn        | 显示关闭        | true                       |
 | btn             | 按钮 格式:{text:"",callback:function(){}} | --    |
-| btnAlign        | 按钮布局      | `l` `r` `c`                |
-| anim            | 入场动画      | `0` `-` `6`                |
-| isOutAnim       | 关闭动画      | `true` `false`             |
-| success         | 显示回调   | --                |
-| close           | 关闭回调      | --             |
+| btnAlign        | 按钮布局        | `l` `r` `c`                |
+| anim            | 入场动画        | `0` `-` `6`                |
+| isOutAnim       | 关闭动画        | `true` `false`             |
+| success         | 显示回调        | --                         |
+| end             | 销毁回调        | --                         |
+| close           | 关闭回调        | --                         |
+| moveOut         | 允许超出可视区域 | --                         |
+| moveStart       | 拖拽开始回调    | --                         |
+| moveEnd         | 拖拽结束回调    | --                         |
 
 :::
+
+::: title 弹层事件
+:::
+
+| 名称            | 描述           | 参数                     |
+| --------------- | ------------- | --------------------------|
+| close           | 关闭通知       | --                         |
 
 ::: contributor modal
 :::  

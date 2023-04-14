@@ -156,6 +156,12 @@ const open111 = function() {
         type: 1,
         title: "标题",
         content: "内容",
+        end: () => {
+            alert("销毁事件")
+        },
+        close: () => {
+            alert("关闭事件")
+        },
         beforeClose: () => {
  
         }
