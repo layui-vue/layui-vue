@@ -85,7 +85,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-color-picker v-model="color" eyeDropper></lay-color-picker>
+  <lay-color-picker v-model="color" :eyeDropper="true"></lay-color-picker>
 </template>
 
 <script>
