@@ -20,6 +20,7 @@
         <h3>1.11.2 <span class="layui-badge-rim">2023-04-15</span></h3> 
         <ul> 
           <li>[修改] color-picker 组件 eyeDropper 属性启用时的图标，由 svg 调整为内置 iconfont 图标项。</li>
+          <li>[修改] input 组件 password 属性启用时的图标，由 svg 调整为内置 iconfont 图标项。</li>
         </ul>
       </li>
     </ul>

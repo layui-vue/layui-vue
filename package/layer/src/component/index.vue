@@ -139,7 +139,7 @@ const props = withDefaults(defineProps<LayerProps>(), {
   moveEnd: () => {},
   moveStart: () => {},
   beforeClose: () => true,
-  close: () => {}
+  close: () => {},
 });
 
 const emit = defineEmits(["close", "update:modelValue"]);

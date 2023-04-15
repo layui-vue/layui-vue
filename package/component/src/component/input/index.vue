@@ -8,8 +8,6 @@ export default {
 import "./index.less";
 import { LayIcon } from "@layui/icons-vue";
 import { computed, ref, useSlots, watch, nextTick } from "vue";
-import PasswordIcon from "./svg/Password.vue";
-import UnPasswordIcon from "./svg/unPassword.vue";
 import { InputSize } from "./interface";
 
 export interface InputProps {
@@ -197,8 +195,8 @@ defineExpose({ focus, blur });
         @click="showPassword"
         v-if="password && hasContent"
       >
-        <password-icon v-if="isPassword"></password-icon>
-        <un-password-icon v-else></un-password-icon>
+        <lay-icon type="layui-icon-show" v-if="isPassword"></lay-icon>
+        <lay-icon type="layui-icon-hide" v-else></lay-icon>
       </span>
       <span
         class="layui-input-clear"
