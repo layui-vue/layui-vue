@@ -85,7 +85,9 @@ export default {
 ::: demo
 
 <template>
+  {{ color }} 
   <lay-color-picker v-model="color" :eyeDropper="true"></lay-color-picker>
+  <lay-button @click="changeColor">更换颜色</lay-button>
 </template>
 
 <script>
@@ -95,8 +97,13 @@ export default {
   setup() {
     const color = ref("#009688");
 
+    const changeColor = () => {
+      color.value = "#393D49"
+    }
+
     return {
-      color
+      color,
+      changeColor
     }
   }
 }

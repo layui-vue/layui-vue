@@ -62,6 +62,14 @@ onMounted(() => {
   alpha.value = a;
 });
 
+watch(() => props.modelValue, () => {
+  let { r, g, b, a } = parseColor(props.modelValue);
+  red.value = r;
+  green.value = g;
+  blue.value = b;
+  alpha.value = a;
+})
+
 watch(sRGBHex, (sRGBHex) => {
   let { r, g, b, a } = hex2rgba(sRGBHex);
   red.value = r;
