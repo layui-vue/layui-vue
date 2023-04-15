@@ -7,9 +7,9 @@ export default {
 <script lang="ts" setup>
 import "./index.less";
 import LayDropdown from "../dropdown/index.vue";
-import EyeDropper from "./EyeDropper.vue";
 import { ref, computed, watch, onMounted, StyleValue } from "vue";
 import { useEyeDropper } from "@vueuse/core";
+import { LayIcon } from "@layui/icons-vue";
 
 export interface ColorPicker {
   modelValue?: any;
@@ -61,6 +61,17 @@ onMounted(() => {
   blue.value = b;
   alpha.value = a;
 });
+
+watch(
+  () => props.modelValue,
+  () => {
+    let { r, g, b, a } = parseColor(props.modelValue);
+    red.value = r;
+    green.value = g;
+    blue.value = b;
+    alpha.value = a;
+  }
+);
 
 watch(sRGBHex, (sRGBHex) => {
   let { r, g, b, a } = hex2rgba(sRGBHex);
@@ -459,7 +470,7 @@ function hex2rgba(s: any) {
             @click="openEyeDropper"
             style="margin-left: 5px"
           >
-            <EyeDropper />
+            <lay-icon type="layui-icon-edit" size="22px"></lay-icon>
           </div>
           <div class="color-diamond">
             <div

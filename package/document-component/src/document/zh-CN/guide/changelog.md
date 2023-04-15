@@ -17,6 +17,18 @@
     <ul> 
       <a name="1-11-1"></a> 
       <li> 
+        <h3>1.11.2 <span class="layui-badge-rim">2023-04-15</span></h3> 
+        <ul> 
+          <li>[修复] codesandbox 演示地址链接失效的问题。</li>
+          <li>[修复] color-picker 组件 modelValue 属性缺少响应式的问题。</li>
+          <li>[优化] color-picker 组件 eyeDropper 属性启用时的图标，由 svg 调整为内置 iconfont 图标项。</li>
+          <li>[优化] input 组件 password 属性启用时的图标，由 svg 调整为内置 iconfont 图标项。</li>
+        </ul>
+      </li>
+    </ul>
+    <ul> 
+      <a name="1-11-1"></a> 
+      <li> 
         <h3>1.11.1 <span class="layui-badge-rim">2023-04-13</span></h3> 
         <ul> 
           <li>[修复] icon-picker 组件 totalPage 出现小数的问题。</li>
