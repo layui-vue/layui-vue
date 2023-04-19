@@ -1,27 +1,32 @@
-@checkbox-lg: 18px;
-@checkbox-md: 16px;
-@checkbox-sm: 14px;
-@checkbox-xs: 12px;
+@checkbox-lg: 20px;
+@checkbox-md: 18px;
+@checkbox-sm: 16px;
+@checkbox-xs: 14px;
+
+@checkbox-lg-icon-size: 14px;
+@checkbox-md-icon-size: 12px;
+@checkbox-sm-icon-size: 10px;
+@checkbox-xs-icon-size: 8px;
 
 @checkbox-lg-font-size: 16px;
 @checkbox-md-font-size: 14px;
 @checkbox-sm-font-size: 12px;
 @checkbox-xs-font-size: 10px;
 
-.set-size(@size, @font-size) {
+.set-size(@size, @font-size, @icon-size) {
   & {
-    height: @size;
-    line-height: @size;
     .layui-form-checkbox[lay-skin="primary"]  {
       .layui-icon {
-        width: @size;
         height: @size;
-        font-size: @font-size;
+        box-sizing: border-box;
+        font-size: @icon-size;
+        line-height: @size;
+        width: @size;
       }
       .layui-checkbox-label {
         height: @size;
-        line-height: @size;
         font-size: @font-size;
+        line-height: @size;
       }
     }
   }
@@ -29,16 +34,16 @@
 
 .layui-checkbox{
   &[size="lg"] {
-    .set-size(@checkbox-lg, @checkbox-lg-font-size);
+    .set-size(@checkbox-lg, @checkbox-lg-font-size, @checkbox-lg-icon-size);
   }
   &[size="md"] {
-    .set-size(@checkbox-md, @checkbox-md-font-size);
+    .set-size(@checkbox-md, @checkbox-md-font-size, @checkbox-md-icon-size);
   }
   &[size="sm"] {
-    .set-size(@checkbox-sm, @checkbox-sm-font-size);
+    .set-size(@checkbox-sm, @checkbox-sm-font-size, @checkbox-sm-icon-size);
   }
   &[size="xs"] {
-    .set-size(@checkbox-xs, @checkbox-xs-font-size);
+    .set-size(@checkbox-xs, @checkbox-xs-font-size, @checkbox-xs-icon-size);
   }
 }
 
@@ -96,8 +101,6 @@
 .layui-form-checkbox[lay-skin="primary"] {
   height: auto !important;
   line-height: normal !important;
-  min-width: 18px;
-  min-height: 18px;
   border: none !important;
   margin-right: 0;
   padding-left: 28px;

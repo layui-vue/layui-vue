@@ -96,36 +96,6 @@ export default {
 
 :::
 
-::: title 完整案例
-:::
-
-::: demo
-
-<template>
-    <lay-checkbox name="like" skin="primary" v-model="checked3" value="1">写作</lay-checkbox>
-    <lay-checkbox name="like" skin="primary" v-model="checked4" value="2">画画</lay-checkbox>
-    <lay-checkbox name="like" skin="primary" v-model="checked5" value="3">运动</lay-checkbox>
-</template>
-
-<script>
-import { ref } from 'vue'
-
-export default {
-  setup() {
-
-    const checked3 = ref(true);
-    const checked4 = ref(true);
-    const checked5 = ref(true);
-
-    return {
-        checked3, checked4, checked5
-    }
-  }
-}
-</script>
-
-:::
-
 ::: title 禁用状态
 :::
 
@@ -147,7 +117,7 @@ import { ref } from 'vue'
 export default {
   setup() {
     const disabled = ref(true)
-    const checked6 = ref(false);
+    const checked6 = ref(true);
     return {
       disabled,checked6
     }

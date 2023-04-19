@@ -15,7 +15,17 @@
 <lay-timeline>
 <lay-timeline-item title="1.11.0">
     <ul> 
-      <a name="1-11-1"></a> 
+      <a name="1-11-3"></a> 
+      <li> 
+        <h3>1.11.3 <span class="layui-badge-rim">2023-04-19</span></h3> 
+        <ul> 
+          <li>[优化] checkbox 组件 label 标签与 icon 图标不居中对齐的问题。</li>
+          <li>[优化] checkbox 组件 size 属性启用时，不同尺寸下的 icon 大小。</li>
+        </ul>
+      </li>
+    </ul>
+    <ul> 
+      <a name="1-11-2"></a> 
       <li> 
         <h3>1.11.2 <span class="layui-badge-rim">2023-04-15</span></h3> 
         <ul> 
