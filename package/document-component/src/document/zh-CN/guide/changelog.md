@@ -19,8 +19,10 @@
       <li> 
         <h3>1.11.3 <span class="layui-badge-rim">2023-04-19</span></h3> 
         <ul> 
+          <li>[修复] @postcss/autoprefixer 产生的 Replace fill-available to stretch 警告。</li>
           <li>[优化] checkbox 组件 label 标签与 icon 图标不居中对齐的问题。</li>
           <li>[优化] checkbox 组件 size 属性启用时，不同尺寸下的 icon 大小。</li>
+          <li>[文档] transition 组件 time 属性的类型与默认值说明。</li>
         </ul>
       </li>
     </ul>
