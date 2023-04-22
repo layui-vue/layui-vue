@@ -1,4 +1,5 @@
 import { TableColumn } from "../typing";
+
 // 节流
 const throttle = (func: Function, wait: number) => {
   let timer: any = null;
@@ -12,12 +13,11 @@ const throttle = (func: Function, wait: number) => {
   };
 };
 
-// TODO add type
-let stashColumn: any = null;
 let isResizing = false;
+let stashColumn: any = null;
+let targetElem: HTMLElement | null = null;
 let startX = 0;
 let startWidth = 0;
-let targetElem: HTMLElement | null = null;
 
 const resizing = throttle((e: MouseEvent) => {
   if (!isResizing) return;
