@@ -15,6 +15,16 @@
 <lay-timeline>
 <lay-timeline-item title="1.11.0">
     <ul> 
+      <a name="1-11-4"></a> 
+      <li> 
+        <h3>1.11.4 <span class="layui-badge-rim">2023-04-22</span></h3> 
+        <ul> 
+          <li>[修复] checkbox 组件 label 属性不启用时，icon 发生偏移的问题。</li>
+          <li>[修复] checkbox 组件在 table cell 中默认无法居中的问题。</li>
+        </ul>
+      </li>
+    </ul>
+    <ul> 
       <a name="1-11-3"></a> 
       <li> 
         <h3>1.11.3 <span class="layui-badge-rim">2023-04-19</span></h3> 

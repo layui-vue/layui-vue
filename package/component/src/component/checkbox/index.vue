@@ -128,8 +128,10 @@ defineExpose({ toggle: handleClick });
       }"
       :lay-skin="skin"
     >
-      <span class="layui-checkbox-label" v-if="slots.default || label">
-        <slot>{{ label }}</slot>
+      <span class="layui-checkbox-label">
+        <template v-if="slots.default || label">
+          <slot>{{ label }}</slot>
+        </template>
       </span>
       <lay-icon
         :type="

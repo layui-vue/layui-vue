@@ -41,7 +41,8 @@
     "build:es": "vite build --emptyOutDir --config ./script/build.es.ts",
     "build:umd": "vite build --emptyOutDir --config ./script/build.umd.ts",
     "build:dts":"tsx --tsconfig ./tsconfig.build.json ./script/build.dts.ts",
-    "build:helper": "node ./script/build.helper.cjs"
+    "build:helper": "node ./script/build.helper.cjs",
+    "test": "vitest"
   },
   "dependencies": {
     "@layui/icons-vue": "1.1.0",

@@ -13,7 +13,7 @@
 ::: demo 使用 `lay-checkbox` 标签, 创建一个复选框
 
 <template>
-    <lay-checkbox name="like" skin="primary"  v-model="checked1" value="1" label="复选框案例"></lay-checkbox>
+    <lay-checkbox name="like" skin="primary"  v-model="checked1" value="1"></lay-checkbox>
     <lay-checkbox name="like" skin="primary"  v-model="checkedSlot" value="1">
       自定义slot
     </lay-checkbox>
