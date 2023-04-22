@@ -18,7 +18,7 @@ layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库
 
 欢迎在 [Gitee Issues](https://github.com/layui/layui-vue/issues/new) 上向我们反馈。欢迎功能请求。如果您想参与贡献，请查看 [快速指南](./CONTRIBUTING.md)！
 
-如果您有什么想聊的，请随时加入我们的 [Gitter chat](https://gitter.im/layui-vue/community)！
+如果您有什么想聊的，请随时加入我们的 [微信群聊](./wechat.jpg) ！
 
 ## 贡献者
 
