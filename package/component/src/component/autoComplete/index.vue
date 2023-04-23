@@ -156,7 +156,11 @@ const inputHandler = function (value: string) {
     dropdownRef.value.show();
     emits("update:modelValue", value);
     var promise = props.fetchSuggestions(value);
-    if (promise != undefined) {
+    // 如果 promise = undefined 说明不需要等待结果，立即关闭
+    if(promise === undefined) {
+      innerOptions.value = [];
+      loading.value = false;
+    } else {
       promise.then((suggestions: any[]) => {
         innerOptions.value = suggestions || [];
         loading.value = false;

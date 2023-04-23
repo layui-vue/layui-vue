@@ -24,20 +24,9 @@ export default {
 
     const value = ref("");
     const fetchSuggestions = function(value) {
-      if(value != "") {
         return new Promise((resolve) => {
-          setTimeout(() => {
-            resolve([
-              {value: "稻香 - 周杰伦"},
-              {value: "蒲公英的约定 - 周杰伦"},
-              {value: "爱在西元前 - 周杰伦"},
-              {value: "不能说的秘密 - 周杰伦"},
-              {value: "七里香 - 周杰伦"},
-              {value: "龙卷风 - 周杰伦"},
-            ])
-          }, 500)
+            resolve([])
         });
-      }
     }
 
     return {

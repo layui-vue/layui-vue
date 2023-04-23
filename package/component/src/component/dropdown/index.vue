@@ -182,20 +182,22 @@ const changeVisible = (visible: boolean, delay?: number) => {
 };
 
 const getElementScrollRect = (element: HTMLElement, containerRect: DOMRect) => {
-  const rect = element.getBoundingClientRect();
-
-  return {
-    top: rect.top,
-    bottom: rect.bottom,
-    left: rect.left,
-    right: rect.right,
-    width: rect.width,
-    height: rect.height,
-    scrollTop: rect.top - containerRect.top,
-    scrollBottom: rect.bottom - containerRect.top,
-    scrollLeft: rect.left - containerRect.left,
-    scrollRight: rect.right - containerRect.left,
-  };
+  if (element) {
+    const boundingRect = element.getBoundingClientRect();
+    return {
+      scrollTop: boundingRect.top - containerRect.top,
+      scrollBottom: boundingRect.bottom - containerRect.top,
+      scrollLeft: boundingRect.left - containerRect.left,
+      scrollRight: boundingRect.right - containerRect.left,
+      bottom: boundingRect.bottom,
+      height: boundingRect.height,
+      right: boundingRect.right,
+      left: boundingRect.left,
+      width: boundingRect.width,
+      top: boundingRect.top,
+    };
+  }
+  return {} as ElementScrollRect;
 };
 
 const getTriggerRect = () => {
