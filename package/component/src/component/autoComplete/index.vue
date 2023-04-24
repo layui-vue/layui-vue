@@ -157,7 +157,7 @@ const inputHandler = function (value: string) {
     emits("update:modelValue", value);
     var promise = props.fetchSuggestions(value);
     // 如果 promise = undefined 说明不需要等待结果，立即关闭
-    if(promise === undefined) {
+    if (promise === undefined) {
       innerOptions.value = [];
       loading.value = false;
     } else {

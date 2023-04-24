@@ -50,7 +50,7 @@ watch(
 </script>
 
 <template>
-  <div class="layui-radio-group">
+  <div class="layui-radio-group layui-btn-group">
     <slot></slot>
   </div>
 </template>
