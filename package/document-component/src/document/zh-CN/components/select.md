@@ -133,7 +133,7 @@ export default {
 ::: demo 通过 show-search 属性开启内容检索, input 变为可输入状态。在 multiple 模式下, 检索框位于 dropdown 顶部。
 
 <template>
-  <lay-select v-model="value5" disabled :allow-clear="true">
+  <lay-select v-model="value5" :allow-clear="true">
     <lay-select-option value="1" label="学习"></lay-select-option>
     <lay-select-option value="2" label="编码"></lay-select-option>
     <lay-select-option value="3" label="运动"></lay-select-option>
