@@ -15,6 +15,7 @@ import {
   computed,
   watch,
   onUnmounted,
+useSlots,
 } from "vue";
 import {
   LayFormContext,
@@ -116,7 +117,6 @@ const errorStatus = ref(false);
 
 // 校验数据有效性
 const validate = (callback?: ValidateCallback) => {
-
   if (props.prop && (ruleItems.value as RuleItem[]).length > 0) {
     // 校验规则
     const descriptor: Rules = {};
@@ -222,6 +222,8 @@ onUnmounted(() => {
   }
 });
 
+const slots = useSlots();
+
 const getMarginLeft = computed(() => {
   if (props.mode == "block") {
     if (props.labelPosition != "top") {
@@ -229,12 +231,20 @@ const getMarginLeft = computed(() => {
         typeof props.labelWidth === "string"
           ? parseFloat(props.labelWidth)
           : props.labelWidth;
+      // 如果不是方框风格，增加 15 左边距    
       if (!layForm.pane) {
         labelWidth += 15;
       }
-      return {
-        "margin-left": `${labelWidth}px`,
-      };
+      // 判定 label 属性 与 插槽是否存在，如果都不存在，返回 0px 标签宽度
+      if(slots.label === undefined && props.label === undefined) {
+        return {
+          "margin-left": "0px",
+        };
+      } else {
+        return {
+          "margin-left": `${labelWidth}px`,
+        };
+      }
     } else {
       return {
         "margin-left": "0px",
