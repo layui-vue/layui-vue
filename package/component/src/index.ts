@@ -189,7 +189,7 @@ const components: Record<string, Plugin> = {
   LayQrcode,
   LayBarcode,
   LayAutocomplete,
-  LayRadioButton
+  LayRadioButton,
 };
 
 const install = (app: App, options?: InstallOptions): void => {

@@ -82,12 +82,11 @@ const isDisabled = computed(() => {
 });
 
 const buttonType = computed(() => {
-  if(isChecked.value) {
-    return 'primary' as ButtonType;
+  if (isChecked.value) {
+    return "primary" as ButtonType;
   }
-  return 'default' as ButtonType;
-})
-
+  return "default" as ButtonType;
+});
 </script>
 
 <template>
