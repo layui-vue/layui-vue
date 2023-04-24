@@ -116,7 +116,6 @@ const errorStatus = ref(false);
 
 // 校验数据有效性
 const validate = (callback?: ValidateCallback) => {
-  console.log(props.prop + ":" + filedValue.value);
 
   if (props.prop && (ruleItems.value as RuleItem[]).length > 0) {
     // 校验规则
