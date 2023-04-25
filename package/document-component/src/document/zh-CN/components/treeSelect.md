@@ -15,7 +15,7 @@
 <template>
   <!-- 清空 -->
   <lay-button @click="clear">清空</lay-button>
-  <lay-tree-select v-model="value1" :data="data1"></lay-tree-select>
+  <lay-tree-select v-model="value1" :data="data1" contentStyle="height:150px;overflow-y:auto;"></lay-tree-select>
 </template>
 
 <script setup>
