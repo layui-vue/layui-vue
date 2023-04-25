@@ -1,7 +1,7 @@
 <script lang="ts">
 import { computed, inject } from "vue";
 import { RadioButtonSize } from "./typing";
-import { ButtonType } from "../../../types/component/button/interface";
+import { ButtonType } from "../button/interface";
 export default {
   name: "LayRadioButton",
 };
