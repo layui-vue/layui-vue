@@ -74,16 +74,13 @@ export default {
 
 <template>
   <lay-form :model="model">
-    <lay-form-item :label-position="labelPosition" prop="username">
+    <lay-form-item label="账户" :label-position="labelPosition" prop="username">
       <lay-input v-model="model.username"></lay-input>
     </lay-form-item>
     <lay-form-item label="密码" :label-position="labelPosition" prop="password">
       <lay-input v-model="model.password" type="password"></lay-input>
     </lay-form-item>
-    <lay-form-item :label-position="labelPosition" prop="hobby">
-      <template #label>
-        哈哈
-      </template>
+    <lay-form-item label="爱好" :label-position="labelPosition" prop="hobby">
       <lay-select v-model="model.hobby">
         <lay-select-option value="1" label="学习"></lay-select-option>
         <lay-select-option value="2" label="编码"></lay-select-option>
