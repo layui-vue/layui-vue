@@ -95,6 +95,7 @@ import LayTagInput from "./component/tagInput/index";
 import LayQrcode from "./component/qrcode/index";
 import LayBarcode from "./component/barcode/index";
 import LayAutocomplete from "./component/autocomplete/index";
+import LayRadioButton from "./component/radioButton/index";
 import LayConfigProvider from "./provider";
 import { InstallOptions } from "./types";
 
@@ -188,6 +189,7 @@ const components: Record<string, Plugin> = {
   LayQrcode,
   LayBarcode,
   LayAutocomplete,
+  LayRadioButton,
 };
 
 const install = (app: App, options?: InstallOptions): void => {
@@ -288,6 +290,7 @@ export {
   LayQrcode,
   LayBarcode,
   LayAutocomplete,
+  LayRadioButton,
   install,
 };
 

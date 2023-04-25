@@ -161,6 +161,40 @@ export default {
 
 :::
 
+::: title 单选按钮
+:::
+
+::: demo 使用 `lay-radio-group` 标签, 存在大量单选框时极为有效。
+
+<template>
+    <lay-radio-group name="action" v-model="selected5" @change="change5">
+      <lay-radio-button value="1">写作</lay-radio-button>
+      <lay-radio-button value="2">画画</lay-radio-button>
+      <lay-radio-button value="3">运动</lay-radio-button>
+    </lay-radio-group>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const selected5 = ref("1");
+    const change5 = function( current ) {
+        console.log("当前值:" + current)
+    }
+    const disabled1=ref(false)
+    return {
+        selected5,
+        change5
+    }
+  }
+}
+</script>
+
+:::
+
 ::: title Radio 属性
 :::
 
