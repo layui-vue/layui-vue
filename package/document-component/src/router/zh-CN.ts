@@ -450,6 +450,11 @@ const zhCN = [
             meta: { title: "间距" },
           },
           {
+            path: "/zh-CN/components/checkcard",
+            component: () => import("../document/zh-CN/components/checkcard.md"),
+            meta: { title: "多选卡片" },
+          },
+          {
             path: "/zh-CN/components/autoComplete",
             component: () =>
               import("../document/zh-CN/components/autoComplete.md"),
