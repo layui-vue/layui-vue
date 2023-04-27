@@ -15,7 +15,13 @@
       <lay-input v-model="model.password" type="password"></lay-input>
     </lay-form-item>
     <lay-form-item label="密码" prop="password" mode="inline">
+      <lay-input v-model="model.password" type="password"></lay-input>
+    </lay-form-item>
+    <lay-form-item label="密码" prop="password" mode="inline">
       <lay-rate v-model="model.rate"></lay-rate>
+    </lay-form-item>
+    <lay-form-item label="密码" prop="password">
+      <lay-switch v-model="active1"></lay-switch>
     </lay-form-item>
     <lay-form-item label="爱好" prop="hobby">
       <lay-select v-model="model.hobby">
