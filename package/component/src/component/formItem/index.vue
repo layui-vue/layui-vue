@@ -257,7 +257,7 @@ const getMarginLeft = computed(() => {
 <template>
   <div
     class="layui-form-item"
-    :class="[`layui-form-item-${labelPosition}`]"
+    :class="[`layui-form-item-${labelPosition}`, mode]"
     ref="formItemRef"
   >
     <label class="layui-form-label" :style="{ width: labelWidth + 'px' }">

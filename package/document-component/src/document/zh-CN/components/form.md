@@ -14,6 +14,9 @@
     <lay-form-item label="密码" prop="password" mode="inline">
       <lay-input v-model="model.password" type="password"></lay-input>
     </lay-form-item>
+    <lay-form-item label="密码" prop="password" mode="inline">
+      <lay-input v-model="model.password" type="password"></lay-input>
+    </lay-form-item>
     <lay-form-item label="爱好" prop="hobby">
       <lay-select v-model="model.hobby">
         <lay-select-option value="1" label="学习"></lay-select-option>
@@ -21,7 +24,7 @@
         <lay-select-option value="3" label="运动"></lay-select-option>
       </lay-select>
     </lay-form-item>
-    <lay-form-item label="描述" prop="desc" mode="inline">
+    <lay-form-item label="描述" prop="desc">
       <lay-textarea placeholder="请输入描述" v-model="model.desc"></lay-textarea>
     </lay-form-item>
     <lay-form-item label="时间" prop="datetime" required>
