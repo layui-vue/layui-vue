@@ -175,6 +175,13 @@ const menus = [
         path: "/zh-CN/components/radio",
       },
       {
+        id: 332,
+        title: "单选按钮",
+        subTitle: "radioButton",
+        path: "/zh-CN/components/radioButton",
+        badge: true,
+      },
+      {
         id: 34,
         title: "输入框",
         subTitle: "input",

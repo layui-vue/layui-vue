@@ -267,6 +267,11 @@ const zhCN = [
             meta: { title: "单选框" },
           },
           {
+            path: "/zh-CN/components/radioButton",
+            component: () => import("../document/zh-CN/components/radioButton.md"),
+            meta: { title: "单选按钮" },
+          },
+          {
             path: "/zh-CN/components/input",
             component: () => import("../document/zh-CN/components/input.md"),
             meta: { title: "输入框" },
