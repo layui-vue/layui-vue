@@ -26,6 +26,7 @@
           <li>[新增] tree-select 组件 contentClass 属性，用于设置面板的 class 属性。</li>
           <li>[修复] layer 组件 maxmin 属性开启时，最小化内容溢出的问题。</li>
           <li>[修复] tree 组件 showCheckbox 属性启用时，title 与 checkbox 的异常间隔。</li>
+          <li>[修复] rate 组件在 form-item 中垂直居中的问题。<li>
           <li>[修复] form-item 组件 mode 属性为 inline 时，表单项仍以 block 的形式排布。</li>
           <li>[调整] form-item 组件 mode 属性为 inline 时，表单项宽度由 190px 调整为 220px。</li>
           <li>[主题] global-primary-color 变量默认值由 #009688 调整为 #16baaa。</li>
