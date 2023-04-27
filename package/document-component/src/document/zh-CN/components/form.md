@@ -1,43 +1,72 @@
 ::: anchor
 :::
 
+::: title 基本介绍
+:::
+
+::: describe 高性能表单控件，自带数据域管理。包含数据录入、校验以及对应样式。
+:::
+
 ::: title 基础使用
 :::
 
-::: demo
+::: demo 通过 `lay-form` 与 `lay-form-item` 标签，创建 `form` 组件。
 
 <template>
-  <lay-form :model="model" :pane="true">
+  <lay-form :model="model">
     <lay-form-item label="账户" prop="username">
       <lay-input v-model="model.username"></lay-input>
     </lay-form-item>
-    <lay-form-item label="密码" prop="password" mode="inline">
-      <lay-input v-model="model.password" type="password"></lay-input>
-    </lay-form-item>
-    <lay-form-item label="密码" prop="password" mode="inline">
-      <lay-input v-model="model.password" type="password"></lay-input>
-    </lay-form-item>
-    <lay-form-item label="密码" prop="password" mode="inline">
-      <lay-rate v-model="model.rate"></lay-rate>
-    </lay-form-item>
     <lay-form-item label="密码" prop="password">
-      <lay-switch v-model="active1"></lay-switch>
-    </lay-form-item>
-    <lay-form-item label="爱好" prop="hobby">
-      <lay-select v-model="model.hobby">
-        <lay-select-option value="1" label="学习"></lay-select-option>
-        <lay-select-option value="2" label="编码"></lay-select-option>
-        <lay-select-option value="3" label="运动"></lay-select-option>
-      </lay-select>
+      <lay-input v-model="model.password" type="password"></lay-input>
     </lay-form-item>
     <lay-form-item label="描述" prop="desc">
-      <lay-textarea placeholder="请输入描述" v-model="model.desc"></lay-textarea>
+      <lay-textarea placeholder="请输入描述" v-model="model.describe"></lay-textarea>
     </lay-form-item>
-    <lay-form-item label="时间" prop="datetime" required>
-      <lay-date-picker v-model="model.datetime" range type="datetime"></lay-date-picker>
+    <lay-form-item style="text-align: center;">
+      <lay-button type="primary" @click="submit">提交</lay-button>
+      <lay-button type="default" @click="">重置</lay-button>
     </lay-form-item>
-    <lay-button type="primary" @click="submitClick">提交</lay-button>
-    <lay-button type="default" @click="">重置</lay-button>
+  </lay-form>
+</template>
+
+<script setup>
+import { ref, reactive } from 'vue'
+import {layer} from '@layui/layer-vue'
+
+const model = reactive({
+  username: "",
+  password: "",
+  describe: "",
+})
+
+const submit = function(){
+  layer.msg(`${JSON.stringify(model)}`, { time: 2000 });
+};
+</script>
+
+:::
+
+::: title 方框风格
+:::
+
+::: demo 通过 `pane` 属性，启用方框风格，默认为 `false`。
+
+<template>
+  <lay-form :model="model1" :pane="true">
+    <lay-form-item label="账户" prop="username">
+      <lay-input v-model="model1.username"></lay-input>
+    </lay-form-item>
+    <lay-form-item label="密码" prop="password">
+      <lay-input v-model="model1.password" type="password"></lay-input>
+    </lay-form-item>
+    <lay-form-item label="描述" prop="desc">
+      <lay-textarea placeholder="请输入描述" v-model="model1.describe"></lay-textarea>
+    </lay-form-item>
+    <lay-form-item>
+      <lay-button type="primary" @click="submit1">提交</lay-button>
+      <lay-button type="default" @click="">重置</lay-button>
+    </lay-form-item>
   </lay-form>
 </template>
 
@@ -48,34 +77,72 @@ import {layer} from '@layui/layer-vue'
 export default {
   setup() {
 
-    const model = reactive({
-        username: "admin",
-        password: "123456",
-        specialty: "1",
-        rate:1
+    const model1 = reactive({
+        username: "",
+        password: "",
+        describe: "",
     })
 
-    const submitClick = function(){
-      layer.open({
-        type: 1,
-        title:"表单结果", 
-        content: `<div style="padding: 10px">${JSON.stringify(model)}</div>`, 
-        shade: false,
-        isHtmlFragment: true,
-        btn : [{ text: '确认', callback(index) {  layer.close(index) }}],
-        area : '500px'
-      });
+    const submit1 = function(){
+      layer.msg(`${JSON.stringify(model)}`, { time: 2000 });
     };
 
     return {
-      model,
-      submitClick
+      model1,
+      submit1
     }
   }
 }
 </script>
 
 :::
+
+::: title 行内表单
+:::
+
+::: demo 
+
+<template>
+  <lay-form :model="model2" :pane="true">
+    <lay-form-item label="账户" prop="username" mode="inline">
+      <lay-input v-model="model2.username"></lay-input>
+    </lay-form-item>
+    <lay-form-item label="密码" prop="password" mode="inline">
+      <lay-input v-model="model2.password" type="password"></lay-input>
+    </lay-form-item>
+    <lay-form-item mode="inline">
+      <lay-button type="primary" @click="submit2">提交</lay-button>
+      <lay-button type="default" @click="">重置</lay-button>
+    </lay-form-item>
+  </lay-form>
+</template>
+
+<script>
+import { ref, reactive } from 'vue'
+import {layer} from '@layui/layer-vue'
+
+export default {
+  setup() {
+
+    const model2 = reactive({
+        username: "admin",
+        password: "admin",
+    })
+
+    const submit2 = function(){
+      layer.open(`${JSON.stringify(model)}`);
+    };
+
+    return {
+      model2,
+      submit2
+    }
+  }
+}
+</script>
+
+:::
+
 
 ::: title 对齐方式
 :::

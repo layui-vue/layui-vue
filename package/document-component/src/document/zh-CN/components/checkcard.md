@@ -10,7 +10,7 @@
 ::: title 基础使用
 :::
 
-::: demo 使用 `lay-check-card` 标签, 创建卡片组件
+::: demo 使用 `lay-check-card` 标签, 创建多选卡片
 
 <template>
   <lay-check-card
@@ -39,15 +39,10 @@ export default {
 
 :::
 
-::: title 自定义尺寸
+::: title 控制尺寸
 :::
 
-::: describe 当然你也可以通过 `style` 或者 `class` 自定义卡片大小。
-:::
-
-::: demo
-
-
+::: demo 通过 `style` 或者 `class` 自定义卡片大小。
 
 <template>
  <lay-check-card
@@ -75,10 +70,7 @@ export default {
 ::: title 组合样式
 :::
 
-::: describe 头像，标题，描述区域可以自由组合或者单独呈现，组件会为你调整为最合适的对齐方式。
-:::
-
-::: demo
+::: demo 头像，标题，描述区域可以自由组合或者单独呈现，组件会为你调整为最合适的对齐方式。
 
 <template>
   <h4>只有图片时</h4>
@@ -116,10 +108,7 @@ export default {
 ::: title 自定义图像
 :::
 
-::: describe 你可以通过 `avatar` 插槽自定义头像区域。
-::: 
-
-::: demo
+::: demo 你可以通过 `avatar` 插槽自定义头像区域。
 
 <template>
  <lay-check-card
@@ -130,16 +119,12 @@ export default {
   </lay-check-card>  
 </template>
 
-
 :::
 
 ::: title 自定义标题
 :::
 
-::: describe 你可以通过 `avatar` 插槽自定义标题。
-:::
-
-::: demo 
+::: demo 通过 `title` 插槽自定义标题。
 
 <template>
 <lay-check-card
@@ -160,14 +145,10 @@ export default {
 
 :::
 
-
 ::: title 自定义描述
 :::
 
-::: describe  你可以通过 `description` 插槽自定义标题区域。
-:::
-
-::: demo 
+::: demo 通过 `description` 插槽自定义标题区域。
 
 <template>
 <lay-check-card
@@ -180,16 +161,12 @@ export default {
   </lay-check-card>
 </template>
 
-
 :::
 
 ::: title 默认选中
 :::
 
-::: describe  通过配置 `defaultChecked` 属性为 `true` 来配置选项默认被选中。
-:::
-
-::: demo 
+::: demo 通过配置 `defaultChecked` 属性为 `true` 来配置选项默认被选中。
 
 <template>
   <lay-check-card
@@ -205,10 +182,8 @@ export default {
 ::: title 操作栏
 :::
 
-::: describe  配置 `extra` 插槽为卡片添加操作栏。
-:::
+::: demo 配置 `extra` 插槽为卡片添加操作栏。
 
-::: demo 
 <template>
   <lay-check-card
     defaultChecked
@@ -231,14 +206,10 @@ export default {
 
 :::
 
-
 ::: title 纯图片选项
 :::
 
-::: describe  通过仅仅配置 `cover` 属性或者  `cover` 插槽 可以让你的选项成为一个纯图片选项。
-:::
-
-::: demo 
+::: demo 通过仅仅配置 `cover` 属性或者  `cover` 插槽 可以让你的选项成为一个纯图片选项。
 <template>
   <lay-check-card>
      <template #cover>
@@ -252,16 +223,10 @@ export default {
 
 :::
 
-
 ::: title 选项不可用
-
 :::
 
-::: describe  通过配置 `disabled` 属性配置选项不可用。
-
-:::
-
-::: demo 
+::: demo 通过配置 `disabled` 属性配置选项不可用。
 <template>
  <lay-check-card
     avatar="http://www.layui-vue.com/assets/logo-png.a3bc5caf.png"
@@ -323,14 +288,9 @@ export default {
 :::
 
 ::: title 分组
-
 :::
 
-::: describe  `lay-check-card-group`与`lay-check-card`搭配使用。
-
-:::
-
-::: demo 
+::: demo `lay-check-card-group` 与 `lay-check-card` 搭配使用。
 
 <template>
   <lay-check-card-group v-model="checked1" @change="groupChange">
@@ -374,16 +334,10 @@ export default {
 
 :::
 
-
 ::: title 布局
-
 :::
 
-::: describe  搭配栅格进行灵活布局。
-
-:::
-
-::: demo 
+::: demo 搭配栅格进行灵活布局。
 
 <template>
   <lay-check-card-group v-model="checked1" @change="groupChange">
