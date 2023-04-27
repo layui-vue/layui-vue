@@ -137,8 +137,16 @@
             </a>
           </li>
           <li class="layui-nav-item">
-            <a href="https://gitee.com/layui/layui-vue" target="_blank" style="display:inline-block">
-              <lay-icon type="layui-icon-gitee" size="18px" color="#C71D23"></lay-icon>
+            <a
+              href="https://gitee.com/layui/layui-vue"
+              target="_blank"
+              style="display: inline-block"
+            >
+              <lay-icon
+                type="layui-icon-gitee"
+                size="18px"
+                color="#C71D23"
+              ></lay-icon>
             </a>
           </li>
           <li class="layui-nav-item">

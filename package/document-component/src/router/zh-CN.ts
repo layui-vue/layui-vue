@@ -77,7 +77,7 @@ const zhCN = [
             component: () => import("../document/zh-CN/guide/upgrade.md"),
             meta: { title: "升级" },
           },
-        ], 
+        ],
       },
       {
         path: "/zh-CN/components",
@@ -268,7 +268,8 @@ const zhCN = [
           },
           {
             path: "/zh-CN/components/radioButton",
-            component: () => import("../document/zh-CN/components/radioButton.md"),
+            component: () =>
+              import("../document/zh-CN/components/radioButton.md"),
             meta: { title: "单选按钮" },
           },
           {
@@ -461,7 +462,8 @@ const zhCN = [
           },
           {
             path: "/zh-CN/components/checkcard",
-            component: () => import("../document/zh-CN/components/checkcard.md"),
+            component: () =>
+              import("../document/zh-CN/components/checkcard.md"),
             meta: { title: "多选卡片" },
           },
           {

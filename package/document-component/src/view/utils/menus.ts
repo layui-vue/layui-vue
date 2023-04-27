@@ -94,12 +94,6 @@ const menus = [
         subTitle: "space",
         path: "/zh-CN/components/space",
       },
-      {
-        id: 13,
-        title: "多选卡片",
-        subTitle: "checkcard",
-        path: "/zh-CN/components/checkcard",
-      },
     ],
   },
   {
@@ -179,6 +173,13 @@ const menus = [
         title: "单选按钮",
         subTitle: "radioButton",
         path: "/zh-CN/components/radioButton",
+        badge: true,
+      },
+      {
+        id: 13,
+        title: "多选卡片",
+        subTitle: "checkcard",
+        path: "/zh-CN/components/checkcard",
         badge: true,
       },
       {

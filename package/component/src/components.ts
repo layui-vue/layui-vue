@@ -110,7 +110,7 @@ declare module "@vue/runtime-core" {
     LayButtonGroup: typeof LayButtonGroup;
     LayButtonContainer: typeof LayButtonContainer;
     LayCard: typeof LayCard;
-    LayCheckCard:  typeof LayCheckCard;
+    LayCheckCard: typeof LayCheckCard;
     LayCheckCardGroup: typeof LayCheckCardGroup;
     LayCarousel: typeof LayCarousel;
     LayCarouselItem: typeof LayCarouselItem;
