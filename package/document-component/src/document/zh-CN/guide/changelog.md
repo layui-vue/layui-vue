@@ -30,6 +30,7 @@
           <li>[修复] rate 组件在 form-item 中不垂直居中的问题。</li>
           <li>[修复] switch 组件在 form-item 中不垂直居中的问题。</li>
           <li>[修复] form 组件 pane 属性启用时，并且 form-item 组件 label 属性缺省，表单项仍偏移的问题。</li>
+          <li>[修复] form 组件 pane 属性启用时，方框边角不根据主题变量的问题。</li>
           <li>[调整] form-item 组件 mode 属性为 inline 时，表单项宽度由 190px 调整为 220px。</li>
           <li>[主题] global-primary-color 变量默认值由 #009688 调整为 #16baaa。</li>
           <li>[主题] global-checked-color 变量默认值由 #5FB878 调整为 #16b777。</li>

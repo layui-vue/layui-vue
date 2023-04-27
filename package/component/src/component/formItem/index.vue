@@ -226,7 +226,7 @@ const slots = useSlots();
 
 const showLabel = computed(() => {
   return slots.label != undefined || props.label != undefined;
-})
+});
 
 const getMarginLeft = computed(() => {
   if (props.mode == "block") {
@@ -264,7 +264,11 @@ const getMarginLeft = computed(() => {
     :class="[`layui-form-item-${labelPosition}`, mode]"
     ref="formItemRef"
   >
-    <label class="layui-form-label" v-if="showLabel" :style="{ width: labelWidth + 'px' }">
+    <label
+      class="layui-form-label"
+      v-if="showLabel"
+      :style="{ width: labelWidth + 'px' }"
+    >
       <span
         v-if="props.prop && isRequired"
         :class="

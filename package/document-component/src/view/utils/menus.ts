@@ -265,7 +265,7 @@ const menus = [
         title: "表单",
         subTitle: "form",
         path: "/zh-CN/components/form",
-        badge: true
+        badge: true,
       },
     ],
   },

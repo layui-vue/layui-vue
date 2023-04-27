@@ -165,7 +165,7 @@
   text-overflow: ellipsis;
   box-sizing: border-box;
   border-style: solid;
-  border-radius: 2px 0 0 2px;
+  border-radius: var(--global-border-radius) 0 0 var(--global-border-radius);
   text-align: center;
 }
 
@@ -179,13 +179,13 @@
 }
 
 .layui-form-pane .layui-input:first-child {
-  border-radius: 0 2px 2px 0
+  border-radius: 0 var(--global-border-radius) var(--global-border-radius) 0
 }
 
 .layui-form-pane .layui-form-item:has(.layui-textarea) {
   .layui-form-label {
     width: 100% !important;
-    border-radius: 2px 2px 0 0;
+    border-radius: var(--global-border-radius) var(--global-border-radius) 0 0;
   }
   .layui-input-block,
   .layui-input-inline {
@@ -194,7 +194,7 @@
     width: 100% !important;
     margin-left: 0px !important;
     .layui-textarea {
-      border-radius: 0 0 2px 2px;
+      border-radius: 0 0 var(--global-border-radius) var(--global-border-radius);
     }
   }
 }
