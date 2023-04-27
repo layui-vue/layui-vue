@@ -213,7 +213,7 @@ watch(searchValue, () => {
     treeData.value = props.data;
   } else {
     // TODO 过滤 tree 数据
-    treeData.value = [];
+    treeData.value = props.data;
   }
 });
 

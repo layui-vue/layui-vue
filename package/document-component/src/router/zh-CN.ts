@@ -72,7 +72,12 @@ const zhCN = [
             component: () => import("../document/zh-CN/guide/plugin.md"),
             meta: { title: "插件" },
           },
-        ],
+          {
+            path: "/zh-CN/guide/upgrade",
+            component: () => import("../document/zh-CN/guide/upgrade.md"),
+            meta: { title: "升级" },
+          },
+        ], 
       },
       {
         path: "/zh-CN/components",

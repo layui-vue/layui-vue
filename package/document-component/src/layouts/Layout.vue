@@ -137,8 +137,8 @@
             </a>
           </li>
           <li class="layui-nav-item">
-            <a href="https://gitee.com/layui/layui-vue" target="_blank">
-              Gitee
+            <a href="https://gitee.com/layui/layui-vue" target="_blank" style="display:inline-block">
+              <lay-icon type="layui-icon-gitee" size="18px" color="#C71D23"></lay-icon>
             </a>
           </li>
           <li class="layui-nav-item">
@@ -274,11 +274,11 @@ export default {
 
     const resetThemeVariable = function () {
       appStore.themeVariable = {
-        "--global-primary-color": "#009688",
+        "--global-primary-color": "#16baaa",
         "--global-normal-color": "#1e9fff",
         "--global-warm-color": "#ffb800",
         "--global-danger-color": "#ff5722",
-        "--global-checked-color": "#5fb878",
+        "--global-checked-color": "#16b777",
         "--global-border-radius": "2px",
         "--global-neutral-color-1": "#FAFAFA",
         "--global-neutral-color-2": "#F6F6F6",

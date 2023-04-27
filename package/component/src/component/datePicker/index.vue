@@ -125,7 +125,6 @@ import "./index.less";
 import dayjs from "dayjs";
 import LayInput from "../input/index.vue";
 import LayDropdown from "../dropdown/index.vue";
-import { LayIcon } from "@layui/icons-vue";
 import { getMonth, getYear, getDay } from "./day";
 import {
   ref,

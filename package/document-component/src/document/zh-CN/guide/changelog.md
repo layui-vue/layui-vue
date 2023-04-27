@@ -13,6 +13,23 @@
 ::: demo 
 <template>
 <lay-timeline>
+<lay-timeline-item title="2.0.0">
+    <ul> 
+      <a name="2-0-0"></a> 
+      <li> 
+        <h3>2.0.0 <span class="layui-badge-rim">2023-04-26</span></h3> 
+        <ul> 
+          <li>[新增] tree-select 组件 contentStyle 属性，用于设置面板的 style 样式。</li>
+          <li>[新增] tree-select 组件 contentClass 属性，用于设置面板的 class 属性。</li>
+          <li>[修复] layer 组件 maxmin 属性开启时，最小化内容溢出的问题。</li>
+          <li>[修复] tree 组件 showCheckbox 属性启用时，title 与 checkbox 的异常间隔。</li>
+          <li>[主题] global-primary-color 变量默认值由 #009688 调整为 #16baaa。</li>
+          <li>[主题] global-checked-color 变量默认值由 #5FB878 调整为 #16b777。</li>
+          <li>[升级] layer-vue 到 1.8.4 版本。</li>
+        </ul>  
+      </li>
+    </ul>
+</lay-timeline-item>
 <lay-timeline-item title="1.12.0">
     <ul> 
       <a name="1-12-0"></a> 

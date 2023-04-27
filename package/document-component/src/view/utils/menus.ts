@@ -19,7 +19,7 @@ const menus = [
       {
         id: 7,
         title: "图标",
-        subTitle: "iconfont",
+        subTitle: "icon",
         path: "/zh-CN/components/icon",
       },
       {

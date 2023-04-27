@@ -1,11 +1,10 @@
 ::: anchor
 :::
 
-
 ::: title 基本介绍
 :::
 
-::: describe 高级 Web 日历组件，完全开源无偿且颜值与功能兼备，足以应对日期相关的各种业务场景。
+::: describe 高级 Web 日历组件，足以应对日期相关的各种业务场景。
 :::
 
 ::: title 基础使用
@@ -282,6 +281,7 @@ export default {
 
    const timestamp1 = ref(new Date().getTime());
    const timestamp2 = ref(new Date().getTime());
+
     return {
       timestamp1,timestamp2
     }

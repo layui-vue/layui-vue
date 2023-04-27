@@ -60,7 +60,7 @@
 
 .alone {
   text-align: center;
-  background-color: #009688;
+  background-color: var(--global-primary-color);
   color: #fff;
   font-weight: 300;
   transition: all 0.3s;
@@ -68,7 +68,7 @@
 }
 .alone:hover a {
   color: white !important;
-  background-color: #5fb878;
+  background-color: var(--global-checked-color);
 }
 .alone a {
   display: block;

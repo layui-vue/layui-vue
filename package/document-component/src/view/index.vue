@@ -32,7 +32,7 @@
           >
           <span
             >{{ t("home.download") }}：<em class="site-showdowns"
-              >61,634</em
+              >65,618</em
             ></span
           >
         </div>
@@ -43,7 +43,7 @@
             rel="nofollow"
             class="site-star"
           >
-            <i class="layui-icon"></i> Star <cite id="getStars">2087</cite>
+            <i class="layui-icon"></i> Star <cite id="getStars">2135</cite>
           </a>
           <a
             href="https://gitee.com/layui-vue"
@@ -311,7 +311,7 @@ body {
 }
 
 .site-download a:first-child {
-  background: #009688;
+  background: var(--global-primary-color);
   color: white;
 }
 
@@ -359,7 +359,7 @@ body {
   color: #fff;
   color: #213547;
   font-size: 52px;
-  opacity: 0.82;
+  opacity: 0.86;
 }
 
 .web-font-desc {
@@ -471,8 +471,8 @@ body {
   padding: 0 8px;
   border-radius: 4px;
   color: rgba(60, 60, 60, 0.7);
-  border: 1px solid rgba(60, 60, 60, 0.7);
-  background: white;
+  background: #f2f4f5;
+  border: 1px solid rgba(0, 0, 0, 0.06);
   font-size: 14px;
 }
 
