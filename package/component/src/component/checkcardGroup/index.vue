@@ -1,7 +1,7 @@
 <!--
  * @Author: baobaobao
  * @Date: 2023-04-26 13:28:17
- * @LastEditTime: 2023-04-26 22:58:11
+ * @LastEditTime: 2023-04-28 14:32:38
  * @LastEditors: baobaobao
 -->
 <template>
@@ -9,13 +9,13 @@
     <slot></slot>
   </div>
 </template>
-<script lang="ts">
+<script  lang="ts">
 export default {
   name: "LayCheckCardGroup",
 };
 </script>
 <script lang="ts" setup>
-import {
+  import {
   ref,
   onMounted,
   onUnmounted,
@@ -24,7 +24,7 @@ import {
   StyleValue,
   useAttrs,
   watch,
-  provide,
+  provide
 } from "vue";
 import { Recordable } from "../../types";
 
@@ -34,7 +34,7 @@ export interface CheckCardGroup {
 }
 const props = withDefaults(defineProps<CheckCardGroup>(), {
   modelValue: () => [],
-  disabled: false,
+  disabled: false
 });
 
 const emit = defineEmits(["update:modelValue", "change"]);
@@ -44,14 +44,14 @@ const modelVal = ref(props.modelValue);
 provide("checkcardGroup", {
   name: "LayCheckCardGroup",
   modelVal: modelVal,
-  disabled: props.disabled,
+  disabled: props.disabled
 });
 
 watch(
   () => modelVal,
   (val) => {
     emit("update:modelValue", val.value);
-    emit("change", val.value);
+    emit("change", val.value)
   },
   { deep: true }
 );

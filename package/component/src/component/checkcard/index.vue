@@ -1,7 +1,7 @@
 <!--
  * @Author: baobaobao
  * @Date: 2023-04-24 16:23:33
- * @LastEditTime: 2023-04-26 22:54:45
+ * @LastEditTime: 2023-04-28 14:32:22
  * @LastEditors: baobaobao
 -->
 <template>
@@ -56,7 +56,7 @@ import {
   StyleValue,
   useAttrs,
   inject,
-  useSlots,
+  useSlots
 } from "vue";
 import "./index.less";
 export interface CheckCard {
@@ -120,10 +120,7 @@ onMounted(() => {
 });
 const getValArr = computed(() => {
   if (getIsGroup.value) {
-    if (
-      checkcardGroup.modelVal.value &&
-      Array.isArray(checkcardGroup.modelVal.value)
-    ) {
+    if (checkcardGroup.modelVal.value && Array.isArray(checkcardGroup.modelVal.value)) {
       return checkcardGroup.modelVal.value;
     }
   }
@@ -133,12 +130,12 @@ watch(
   () => getCheckState,
   (val) => {
     let newsArr = [...getValArr.value];
-    const findIndex = newsArr.findIndex((key) => key === props.value);
+    const findIndex = newsArr.findIndex(key => key === props.value);
     if (val.value) {
       findIndex < 0 && newsArr.push(props.value);
     } else {
       if (findIndex >= 0) {
-        newsArr.splice(findIndex, 1);
+        newsArr.splice(findIndex, 1)
       }
     }
     if (getIsGroup.value) {

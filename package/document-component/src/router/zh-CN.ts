@@ -462,8 +462,7 @@ const zhCN = [
           },
           {
             path: "/zh-CN/components/checkcard",
-            component: () =>
-              import("../document/zh-CN/components/checkcard.md"),
+            component: () => import("../document/zh-CN/components/checkcard.md"),
             meta: { title: "多选卡片" },
           },
           {

@@ -94,6 +94,12 @@ const menus = [
         subTitle: "space",
         path: "/zh-CN/components/space",
       },
+      {
+        id: 13,
+        title: "多选卡片",
+        subTitle: "checkcard",
+        path: "/zh-CN/components/checkcard",
+      },
     ],
   },
   {
