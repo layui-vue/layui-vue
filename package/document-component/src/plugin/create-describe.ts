@@ -18,7 +18,9 @@ export default function createContainer(klass: string): ContainerArgs {
         const token = tokens[idx];
         const matchedInfo = token.info.trim().match(/^describe\s+(.*)$/);
         const description = matchedInfo && matchedInfo[1];
-        const descTemplate = markdown().render(description || "");
+        const descTemplate = markdown({
+          html: true
+        }).render(description || "");
         if (token.nesting === 1) {
           return `<p class="describe-plugin">
           ${descTemplate}`;
