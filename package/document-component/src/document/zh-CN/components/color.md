@@ -15,14 +15,14 @@
 <template>
     <ul class="layui-row layui-col-space15">
         <li class="layui-col-sm6">
-            <div style="background-color: #009688;padding:10px;color:whitesmoke;padding:30px;border-radius:2px;">
-                <p>#009688</p>
+            <div style="background-color: #16baaa;padding:10px;color:whitesmoke;padding:30px;border-radius:2px;">
+                <p>#16baaa</p>
                 <p tips="">主色调</p>
             </div>
         </li>
         <li class="layui-col-sm6">
-            <div style="background-color: #5FB878;padding:10px;color:whitesmoke;padding:30px;border-radius:2px;">
-                <p>#5FB878</p>
+            <div style="background-color: #16b777;padding:10px;color:whitesmoke;padding:30px;border-radius:2px;">
+                <p>#16b777</p>
                 <p tips="">次色调</p>
             </div>
         </li>
@@ -60,8 +60,8 @@ import { ref } from 'vue';
         </div>
       </li>
       <li class="layui-col-sm6">
-        <div style="background-color: #5FB878;padding:10px;color:whitesmoke;padding:30px;border-radius:2px;">
-          <p>#5FB878</p>
+        <div style="background-color: #16b777;padding:10px;color:whitesmoke;padding:30px;border-radius:2px;">
+          <p>#16b777</p>
           <p tips="">成功 - SUCCESS</p>
         </div>
       </li>

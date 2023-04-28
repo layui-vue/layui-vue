@@ -130,7 +130,6 @@ export default {
   </lay-check-card>  
 </template>
 
-
 :::
 
 ::: title 自定义标题
@@ -179,7 +178,6 @@ export default {
     </template>
   </lay-check-card>
 </template>
-
 
 :::
 

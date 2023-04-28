@@ -107,8 +107,14 @@ export default {
           {
             id: 7,
             title: "问题",
-            subTitle: "question",
+            subTitle: "problem",
             path: "/zh-CN/guide/problem",
+          },
+          {
+            id: 8,
+            title: "升级",
+            subTitle: "upgrade",
+            path: "/zh-CN/guide/upgrade",
           },
         ],
       },

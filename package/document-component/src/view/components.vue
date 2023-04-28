@@ -28,6 +28,11 @@
                     <span class="layui-font-12 layui-font-gray">
                       {{ children.subTitle }}
                     </span>
+                    <lay-badge
+                      type="dot"
+                      v-if="children.badge"
+                      style="float: right; margin-top: 11px"
+                    ></lay-badge>
                   </router-link>
                 </div>
               </li>

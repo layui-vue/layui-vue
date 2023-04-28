@@ -15,6 +15,7 @@ import {
   computed,
   watch,
   onUnmounted,
+  useSlots,
 } from "vue";
 import {
   LayFormContext,
@@ -116,8 +117,6 @@ const errorStatus = ref(false);
 
 // 校验数据有效性
 const validate = (callback?: ValidateCallback) => {
-  console.log(props.prop + ":" + filedValue.value);
-
   if (props.prop && (ruleItems.value as RuleItem[]).length > 0) {
     // 校验规则
     const descriptor: Rules = {};
@@ -223,6 +222,12 @@ onUnmounted(() => {
   }
 });
 
+const slots = useSlots();
+
+const showLabel = computed(() => {
+  return slots.label != undefined || props.label != undefined;
+});
+
 const getMarginLeft = computed(() => {
   if (props.mode == "block") {
     if (props.labelPosition != "top") {
@@ -230,12 +235,20 @@ const getMarginLeft = computed(() => {
         typeof props.labelWidth === "string"
           ? parseFloat(props.labelWidth)
           : props.labelWidth;
+      // 如果不是方框风格，增加 15 左边距
       if (!layForm.pane) {
         labelWidth += 15;
       }
-      return {
-        "margin-left": `${labelWidth}px`,
-      };
+      // 判定 label 属性 与 插槽是否存在，如果都不存在，返回 0px 标签宽度
+      if (slots.label === undefined && props.label === undefined) {
+        return {
+          "margin-left": "0px",
+        };
+      } else {
+        return {
+          "margin-left": `${labelWidth}px`,
+        };
+      }
     } else {
       return {
         "margin-left": "0px",
@@ -248,10 +261,14 @@ const getMarginLeft = computed(() => {
 <template>
   <div
     class="layui-form-item"
-    :class="[`layui-form-item-${labelPosition}`]"
+    :class="[`layui-form-item-${labelPosition}`, mode]"
     ref="formItemRef"
   >
-    <label class="layui-form-label" :style="{ width: labelWidth + 'px' }">
+    <label
+      class="layui-form-label"
+      v-if="showLabel"
+      :style="{ width: labelWidth + 'px' }"
+    >
       <span
         v-if="props.prop && isRequired"
         :class="

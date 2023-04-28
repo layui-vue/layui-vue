@@ -6,7 +6,7 @@ export default {
 
 <script lang="ts" setup>
 import "./index.less";
-import { computed, ref, watch } from "vue";
+import { StyleValue, computed, ref, watch } from "vue";
 import { getNode } from "../../utils/index";
 import { TreeSelectSize } from "./interface";
 import { LayIcon } from "@layui/icons-vue";
@@ -27,6 +27,8 @@ export interface TreeSelectProps {
   size?: TreeSelectSize;
   checkStrictly?: boolean;
   search?: boolean;
+  contentClass?: string | Array<string | object> | object;
+  contentStyle?: StyleValue;
 }
 
 export interface TreeSelectEmits {
@@ -211,7 +213,7 @@ watch(searchValue, () => {
     treeData.value = props.data;
   } else {
     // TODO 过滤 tree 数据
-    treeData.value = [];
+    treeData.value = props.data;
   }
 });
 
@@ -236,6 +238,8 @@ watch(
     <lay-dropdown
       ref="dropdownRef"
       :disabled="disabled"
+      :contentClass="contentClass"
+      :contentStyle="contentStyle"
       :update-at-scroll="true"
       @show="openState = true"
       @hide="openState = false"

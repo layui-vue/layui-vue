@@ -13,6 +13,60 @@
 ::: demo 
 <template>
 <lay-timeline>
+<lay-timeline-item title="2.0.0">
+    <ul> 
+      <a name="2-0-0"></a> 
+      <li> 
+        <h3>2.0.0 <span class="layui-badge-rim">2023-04-26</span></h3> 
+        <ul> 
+          <li>[新增] checkcard 组件，通过卡片的形式提供多选操作。</li>
+          <li>[新增] checkcard-group 组件，多选卡片组，用于配合 checkcard 使用。</li>
+          <li>[新增] radio-button 组件，通过按钮的形式提供单选操作。</li>
+          <li>[新增] tree-select 组件 contentStyle 属性，用于设置面板的 style 样式。</li>
+          <li>[新增] tree-select 组件 contentClass 属性，用于设置面板的 class 属性。</li>
+          <li>[修复] layer 组件 maxmin 属性开启时，最小化内容溢出的问题。</li>
+          <li>[修复] tree 组件 showCheckbox 属性启用时，title 与 checkbox 的异常间隔。</li>
+          <li>[修复] form-item 组件 mode 属性为 inline 时，表单项仍以 block 的形式排布。</li>
+          <li>[修复] rate 组件在 form-item 中不垂直居中的问题。</li>
+          <li>[修复] switch 组件在 form-item 中不垂直居中的问题。</li>
+          <li>[修复] form 组件 pane 属性启用时，并且 form-item 组件 label 属性缺省，表单项仍偏移的问题。</li>
+          <li>[修复] form 组件 pane 属性启用时，方框边角不跟随主题变量的问题。</li>
+          <li>[修复] icon-picker 组件，选项边角不跟随主题变量的问题。</li>
+          <li>[修复] tooltip 组件，面板边角不跟随主题变量的问题。</li>
+          <li>[修复] collapse 组件，面版边角不跟随主题变量的问题。</li>
+          <li>[修复] date-picker 组件，面板边角不跟随主题变量的问题。</li>
+          <li>[调整] form-item 组件 mode 属性为 inline 时，表单项宽度由 190px 调整为 220px。</li>
+          <li>[主题] global-primary-color 变量默认值由 #009688 调整为 #16baaa。</li>
+          <li>[主题] global-checked-color 变量默认值由 #5FB878 调整为 #16b777。</li>
+          <li>[文档] radio-button 说明从 radio 文档剥离，独立为单独的菜单项。</li>
+          <li>[升级] layer-vue 到 1.8.4 版本。</li>
+        </ul>  
+      </li>
+    </ul>
+</lay-timeline-item>
+<lay-timeline-item title="1.12.0">
+    <ul> 
+      <a name="1-12-0"></a> 
+      <li> 
+        <h3>1.12.0 <span class="layui-badge-rim">2023-04-25</span></h3> 
+        <ul> 
+          <li>[新增] radio-button 组件，通过按钮的形式展现单选操作, 可以与 radio-group 配合。</li>
+          <li>[新增] radio-button 组件 model-value 属性，用于设置当前选中值。</li>
+          <li>[新增] radio-button 组件 name 属性，input 原生 name 属性。</li>
+          <li>[新增] radio-button 组件 label 属性与 label 插槽，用于设置单选按钮文本值。</li>
+          <li>[新增] radio-button 组件 value 属性，用于设置单选按钮绑定值。</li>
+          <li>[新增] radio-button 组件 disabled 属性，用于设置单选按钮禁用状态。</li>
+          <li>[新增] radio-button 组件 size 属性，用于设置单选按钮尺寸。</li>
+          <li>[新增] radio-button 组件 change 属性，值改变时触发。</li>
+          <li>[修复] form-item 组件 console.log 代码。 </li>
+          <li>[修复] vue-tsc 检测错误，固化 vue-tsc 版本。</li>
+          <li>[优化] from-item 组件 label 属性与 label 插槽不存在时，labelWidth 不再生效。</li>
+          <li>[文档] radio.md 新增单选按钮的代码案例。</li>
+          <li>[文档] select.md 允许清空代码案例，移除禁用状态，恢复演示。</li>
+        </ul>  
+      </li>
+    </ul>
+</lay-timeline-item>
 <lay-timeline-item title="1.11.0">
     <ul> 
       <a name="1-11-4"></a> 

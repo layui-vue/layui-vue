@@ -19,7 +19,7 @@ const menus = [
       {
         id: 7,
         title: "图标",
-        subTitle: "iconfont",
+        subTitle: "icon",
         path: "/zh-CN/components/icon",
       },
       {
@@ -175,6 +175,20 @@ const menus = [
         path: "/zh-CN/components/radio",
       },
       {
+        id: 332,
+        title: "单选按钮",
+        subTitle: "radioButton",
+        path: "/zh-CN/components/radioButton",
+        badge: true,
+      },
+      {
+        id: 13,
+        title: "多选卡片",
+        subTitle: "checkcard",
+        path: "/zh-CN/components/checkcard",
+        badge: true,
+      },
+      {
         id: 34,
         title: "输入框",
         subTitle: "input",
@@ -257,6 +271,7 @@ const menus = [
         title: "表单",
         subTitle: "form",
         path: "/zh-CN/components/form",
+        badge: true,
       },
     ],
   },

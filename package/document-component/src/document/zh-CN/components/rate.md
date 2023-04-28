@@ -13,7 +13,7 @@
 ::: demo 使用 `lay-rate` 标签, 创建评分组件
 
 <template>
-  <lay-rate v-model="all1"></lay-rate>
+  <lay-rate v-model="all1" :is-block="true"></lay-rate>
 </template>
 
 <script>

@@ -4,19 +4,19 @@
 ::: title 基本介绍
 :::
 
-::: describe 用于在多个备选项中选中单个状态。
+::: describe 通过按钮的形式，展现单选操作。
 :::
 
 ::: title 基础使用
 :::
 
-::: demo 使用 `lay-radio` 标签, 创建一个单选框。
+::: demo 使用 `lay-radio-button` 标签, 创建一个单选框。
 
 <template>
-    <lay-radio v-model="selected1" name="action" :value="1" label="写作"></lay-radio>
-    <lay-radio v-model="selected1" name="action" :value="2" label="画画"></lay-radio>
-    <lay-radio v-model="selected1" name="action" :value="3" label="运动"></lay-radio>
-    <lay-radio v-model="selected1" name="action" :value="4">自定义slot</lay-radio>
+    <lay-radio-button v-model="selected1" name="action" :value="1" label="写作"></lay-radio-button>
+    <lay-radio-button v-model="selected1" name="action" :value="2" label="画画"></lay-radio-button>
+    <lay-radio-button v-model="selected1" name="action" :value="3" label="运动"></lay-radio-button>
+    <lay-radio-button v-model="selected1" name="action" :value="4">自定义slot</lay-radio-button>
 </template>
 
 <script>
@@ -42,10 +42,10 @@ export default {
 ::: demo 使用 `disabled` 属性, 禁用一个单选项。
 
 <template>
-    <lay-radio v-model="selected2" name="action" value="1">写作</lay-radio>
-    <lay-radio v-model="selected2" name="action" value="2">画画</lay-radio>
-    <lay-radio v-model="selected2" name="action" value="3">运动</lay-radio>
-    <lay-radio v-model="selected2" name="action" value="4" :disabled="disabled">禁用</lay-radio>
+    <lay-radio-button v-model="selected2" name="action" value="1">写作</lay-radio-button>
+    <lay-radio-button v-model="selected2" name="action" value="2">画画</lay-radio-button>
+    <lay-radio-button v-model="selected2" name="action" value="3">运动</lay-radio-button>
+    <lay-radio-button v-model="selected2" name="action" value="4" :disabled="disabled">禁用</lay-radio-button>
 </template>
 
 <script>
@@ -73,9 +73,9 @@ export default {
 ::: demo 通过 `@change` 事件, 监听选项改变。
 
 <template>
-    <lay-radio v-model="selected3" name="action" value="1" @change="change">写作</lay-radio>
-    <lay-radio v-model="selected3" name="action" value="2" @change="change">画画</lay-radio>
-    <lay-radio v-model="selected3" name="action" value="3" @change="change">运动</lay-radio>
+    <lay-radio-button v-model="selected3" name="action" value="1" @change="change">写作</lay-radio-button>
+    <lay-radio-button v-model="selected3" name="action" value="2" @change="change">画画</lay-radio-button>
+    <lay-radio-button v-model="selected3" name="action" value="3" @change="change">运动</lay-radio-button>
 </template>
 
 <script>
@@ -104,10 +104,10 @@ export default {
 ::: demo 使用 `size` 属性设置单选框尺寸, 可选值为 `lg` `md` `sm` `xs`, 默认为 `md`。
 
 <template>
-    <lay-radio v-model="selected5" name="action" size="lg" value="1">写作</lay-radio>
-    <lay-radio v-model="selected5" name="action" size="md" value="2">画画</lay-radio>
-    <lay-radio v-model="selected5" name="action" size="sm" value="3">运动</lay-radio>
-    <lay-radio v-model="selected5" name="action" size="xs" value="4">游泳</lay-radio>
+    <lay-radio-button v-model="selected5" name="action" size="lg" value="1">写作</lay-radio-button>
+    <lay-radio-button v-model="selected5" name="action" size="md" value="2">画画</lay-radio-button>
+    <lay-radio-button v-model="selected5" name="action" size="sm" value="3">运动</lay-radio-button>
+    <lay-radio-button v-model="selected5" name="action" size="xs" value="4">游泳</lay-radio-button>
 </template>
 
 <script>
@@ -134,9 +134,9 @@ export default {
 
 <template>
     <lay-radio-group name="action" v-model="selected4" @change="change4">
-      <lay-radio value="1">写作</lay-radio>
-      <lay-radio value="2">画画</lay-radio>
-      <lay-radio value="3">运动</lay-radio>
+      <lay-radio-button value="1">写作</lay-radio-button>
+      <lay-radio-button value="2">画画</lay-radio-button>
+      <lay-radio-button value="3">运动</lay-radio-button>
     </lay-radio-group>
 </template>
 
@@ -161,41 +161,7 @@ export default {
 
 :::
 
-::: title 单选按钮
-:::
-
-::: demo 使用 `lay-radio-group` 标签, 存在大量单选框时极为有效。
-
-<template>
-    <lay-radio-group name="action" v-model="selected5" @change="change5">
-      <lay-radio-button value="1">写作</lay-radio-button>
-      <lay-radio-button value="2">画画</lay-radio-button>
-      <lay-radio-button value="3">运动</lay-radio-button>
-    </lay-radio-group>
-</template>
-
-<script>
-import { ref } from 'vue'
-
-export default {
-  setup() {
-
-    const selected5 = ref("1");
-    const change5 = function( current ) {
-        console.log("当前值:" + current)
-    }
-    const disabled1=ref(false)
-    return {
-        selected5,
-        change5
-    }
-  }
-}
-</script>
-
-:::
-
-::: title Radio 属性
+::: title RadioButton 属性
 :::
 
 ::: table
@@ -210,7 +176,7 @@ export default {
 | size | 尺寸       | `lg` `md` `sm` `xs`         |
 :::
 
-::: title Radio 事件
+::: title RadioButton 事件
 :::
 
 ::: table

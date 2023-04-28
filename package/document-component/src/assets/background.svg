@@ -9,7 +9,7 @@
     <animateTransform attributeType="XML" attributeName="transform" begin="0s" dur="30s" type="rotate" values="0 210 530 ; -30 210 530 ; 0 210 530" keyTimes="0 ; 0.5 ; 1" repeatCount="indefinite"/>
   </path>
 
-  <circle cx="220" cy="140" r="40" stroke="#009688" fill="#009688">
+  <circle cx="220" cy="140" r="72" stroke="#16baaa" fill="#16baaa">
     <animateMotion path="M 0 0 L 40 20 Z" dur="5s" repeatCount="indefinite"/>
   </circle>
 
@@ -17,7 +17,8 @@
     <animateTransform attributeType="XML" attributeName="transform" begin="0s" dur="35s" type="rotate" from="0 210 530" to="360 210 530" repeatCount="indefinite"/>
   </path>
 
-  <rect x="400" y="600" rx="40" ry="40" width="100" height="100" stroke="#1E9FFF" fill="#1E9FFF">
+  <rect x="400" y="600" rx="40" ry="40" width="120" height="120" stroke="#1E9FFF" fill="#1E9FFF">
     <animateTransform attributeType="XML" attributeName="transform" begin="0s" dur="35s" type="rotate" from="-30 550 750" to="330 550 750" repeatCount="indefinite"/>
   </rect>
+  
 </svg>

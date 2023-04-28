@@ -29,7 +29,25 @@
       </div>
     </fieldset>
     <fieldset class="layui-field layui-field-title">
-      <legend style="margin-bottom: 20px; text-align: center">后台模板</legend>
+      <legend style="margin-bottom: 20px; text-align: center">高级组件</legend>
+      <div class="layui-field-box">
+        <ul class="layui-row layui-col-space6">
+          <li class="layui-col-sm24">
+            <div class="alone">
+              <a
+                href="https://gitee.com/layui-vue/layui-vue-admin"
+                target="_blank"
+                >json - schema - form<cite
+                  >通过 JSON Schema 构建 form 表单
+                </cite></a
+              >
+            </div>
+          </li>
+        </ul>
+      </div>
+    </fieldset>
+    <fieldset class="layui-field layui-field-title">
+      <legend style="margin-bottom: 20px; text-align: center">研发产品</legend>
       <div class="layui-field-box">
         <ul class="layui-row layui-col-space6">
           <li class="layui-col-sm24">
@@ -60,7 +78,7 @@
 
 .alone {
   text-align: center;
-  background-color: #009688;
+  background-color: var(--global-primary-color);
   color: #fff;
   font-weight: 300;
   transition: all 0.3s;
@@ -68,7 +86,7 @@
 }
 .alone:hover a {
   color: white !important;
-  background-color: #5fb878;
+  background-color: var(--global-checked-color);
 }
 .alone a {
   display: block;

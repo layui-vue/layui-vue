@@ -4,7 +4,7 @@
 <br>
   <p>
     <a href="http://www.layui-vue.com">
-      <img src="https://unpkg.com/outeres@0.0.6/img/layui/icon-1.png" alt="layui" width="100" style="border-radius:4px;">
+      <img src="https://foruda.gitee.com/avatar/1682309395599691124/8605626_layui_1682309395.png" alt="layui" width="100" style="border-radius:4px;">
     </a>
     <span style="font-size:32px;color:#e2e2e2;margin:30px;">+</span>
     <a href="http://www.layui-vue.com" style="display:inline-block;">
@@ -12,7 +12,7 @@
     </a>
     <span style="font-size:32px;color:#e2e2e2;margin:30px;">=</span>
     <a href="http://www.layui-vue.com" style="display:inline-block;">
-      <img src="../../../assets/logo.jpg" alt="layui" width="100" style="border-radius:4px;">
+      <img src="../../../assets/logo.jpg" alt="layui" width="100" style="border-radius:10px;">
     </a>
   </p>
 <br>
@@ -24,7 +24,7 @@ layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库
 :::
 
 <lay-timeline>
-  <lay-timeline-item title="2023年，layui-vue 里程碑版本 1.11.0 发布" simple></lay-timeline-item>
+  <lay-timeline-item title="2023年，layui-vue 里程碑版本 2.0.0 发布" simple></lay-timeline-item>
   <lay-timeline-item title="2022年，layui-vue 里程碑版本 1.0.0 发布" simple></lay-timeline-item>
   <lay-timeline-item title="2017年，layui 里程碑版本 2.0 发布" simple></lay-timeline-item>
   <lay-timeline-item title="2016年，layui 首个版本发布" simple></lay-timeline-item>

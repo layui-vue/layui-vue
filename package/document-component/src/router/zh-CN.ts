@@ -72,6 +72,11 @@ const zhCN = [
             component: () => import("../document/zh-CN/guide/plugin.md"),
             meta: { title: "插件" },
           },
+          {
+            path: "/zh-CN/guide/upgrade",
+            component: () => import("../document/zh-CN/guide/upgrade.md"),
+            meta: { title: "升级" },
+          },
         ],
       },
       {
@@ -260,6 +265,12 @@ const zhCN = [
             path: "/zh-CN/components/radio",
             component: () => import("../document/zh-CN/components/radio.md"),
             meta: { title: "单选框" },
+          },
+          {
+            path: "/zh-CN/components/radioButton",
+            component: () =>
+              import("../document/zh-CN/components/radioButton.md"),
+            meta: { title: "单选按钮" },
           },
           {
             path: "/zh-CN/components/input",
