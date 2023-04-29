@@ -210,7 +210,7 @@ export default {
       <lay-input v-model="validateModel.password" type="password">></lay-input>
     </lay-form-item>
     <lay-form-item label="爱好" prop="hobby">
-      <lay-select v-model="validateModel.hobbys" multiple>
+      <lay-select v-model="validateModel.hobby" multiple>
         <lay-select-option value="1" label="学习"></lay-select-option>
         <lay-select-option value="2" label="编码"></lay-select-option>
         <lay-select-option value="3" label="运动"></lay-select-option>
@@ -243,7 +243,7 @@ export default {
         username: "",
         password: "",
         specialty: "1",
-        hobbys: [],
+        hobby: [],
     })
 
     const layFormRef = ref(null);
