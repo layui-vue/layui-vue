@@ -100,7 +100,7 @@ export default {
 ::: title 行内表单
 :::
 
-::: demo 
+::: demo 通过 `mode` 属性 `inline` 值，采用行内布局，默认为 `block` 块状布局。
 
 <template>
   <lay-form :model="model2" :pane="true">
@@ -147,7 +147,7 @@ export default {
 ::: title 对齐方式
 :::
 
-::: demo 通过设置 label-position 属性可以改变表单域标签的位置，可选值为 top、left， 当设为 top 时标签会置于表单域的顶部
+::: demo 通过 `label-position` 属性改变标签位置，默认值为 `right`，可选值为 `top`，`left`。
 
 <template>
   <lay-form :model="model">
@@ -172,9 +172,6 @@ export default {
     <lay-form-item label="描述" :label-position="labelPosition" prop="desc">
       <lay-textarea placeholder="请输入描述" v-model="model.desc"></lay-textarea>
     </lay-form-item>
-    <lay-form-item>
-      <lay-button @click="submitClick">提交</lay-button>
-    </lay-form-item>
   </lay-form>
 </template>
 
@@ -185,25 +182,9 @@ import {layer} from '@layui/layer-vue'
 export default {
   setup() {
 
-    const model = reactive({
-        username: "admin",
-        password: "123456",
-        specialty: "1"
-    })
+    const model = reactive({})
     
     const labelPosition = ref('right');
-
-    const submitClick = function(){
-      layer.open({
-        type: 1,
-        title:"表单结果", 
-        content: `<div style="padding: 10px">${JSON.stringify(model)}</div>`, 
-        shade: false,
-        isHtmlFragment: true,
-        btn : [{ text: '确认', callback(index) {  layer.close(index) }}],
-        area : '500px'
-      });
-    };
 
     return {
       model,
@@ -244,14 +225,8 @@ export default {
     <lay-form-item label="描述" prop="desc">
       <lay-textarea placeholder="请输入描述" v-model="validateModel.desc"></lay-textarea>
     </lay-form-item>
-    <lay-form-item label="文件" prop="file">
-      <lay-upload v-model="validateModel.file" acceptMime="image/*" :auto="false"/>
-    </lay-form-item>
-    <lay-form-item label="权限" prop="power">
-      <lay-tree-select v-model="validateModel.power" multiple :data="data1"></lay-tree-select>
-    </lay-form-item>
-    <lay-form-item>
-      <lay-button @click="validate3">提交</lay-button>
+    <lay-form-item style="text-align: center;">
+      <lay-button type="primary" @click="validate3">提交</lay-button>
       <lay-button @click="clearValidate">清除校验</lay-button>
       <lay-button @click="reset">重置表单</lay-button>
     </lay-form-item>
@@ -270,154 +245,9 @@ export default {
         password: "",
         specialty: "1",
         hobbys: [],
-        file: null,
-        power: [],
     })
 
     const layFormRef = ref(null);
-
-
-    const data1 = ref([{
-	title: '一级1',
-	id: 1,
-	field: 'name1',
-	children: [{
-		title: '二级1-1 可允许跳转',
-		id: 3,
-		field: 'name11',
-		href: 'https://www.layui.com/',
-		children: [{
-			title: '三级1-1-3',
-			id: 23,
-			field: '',
-			children: [{
-				title: '四级1-1-3-1',
-				id: 24,
-				field: '',
-				children: [{
-					title: '五级1-1-3-1-1',
-					id: 30,
-				},
-				{
-					title: '五级1-1-3-1-2',
-					id: 31,
-				}]
-			}]
-		},
-		{
-			title: '三级1-1-1',
-			id: 7,
-			field: '',
-			children: [{
-				title: '四级1-1-1-1 可允许跳转',
-				id: 15,
-				href: 'https://www.layui.com/doc/'
-			}]
-		},
-		{
-			title: '三级1-1-2',
-			id: 8,
-			field: '',
-			children: [{
-				title: '四级1-1-2-1',
-				id: 32,
-			}]
-		}]
-	},
-	{
-		title: '二级1-2',
-		id: 4,
-		spread: true,
-		children: [{
-			title: '三级1-2-1',
-			id: 9,
-		},
-		{
-			title: '三级1-2-2',
-			id: 10,
-		}]
-	},
-	{
-		title: '二级1-3',
-		id: 20,
-		field: '',
-		children: [{
-			title: '三级1-3-1',
-			id: 21,
-			field: ''
-		},
-		{
-			title: '三级1-3-2',
-			id: 22,
-			field: ''
-		}]
-	}]
-},
-{
-	title: '一级2',
-	id: 2,
-	children: [{
-		title: '二级2-1',
-		id: 5,
-		spread: true,
-		children: [{
-			title: '三级2-1-1',
-			id: 11,
-		},
-		{
-			title: '三级2-1-2',
-			id: 12,
-		}]
-	},
-	{
-		title: '二级2-2',
-		id: 6,
-		children: [{
-			title: '三级2-2-1',
-			id: 13,
-		},
-		{
-			title: '三级2-2-2',
-			id: 14,
-		}]
-	}]
-},
-{
-	title: '一级3',
-	id: 16,
-	field: '',
-	children: [{
-		title: '二级3-1',
-		id: 17,
-		field: '',
-		fixed: true,
-		children: [{
-			title: '三级3-1-1',
-			id: 18,
-			field: ''
-		},
-		{
-			title: '三级3-1-2',
-			id: 19,
-			field: ''
-		}]
-	},
-	{
-		title: '二级3-2',
-		id: 27,
-		field: '',
-		children: [{
-			title: '三级3-2-1',
-			id: 28,
-			field: ''
-		},
-		{
-			title: '三级3-2-2',
-			id: 29,
-			field: ''
-		}]
-	}]
-}]);
 
     // 校验
     const validate3= function() {
@@ -465,24 +295,24 @@ export default {
 ::: demo
 
 <template>
-  <lay-form :model="ruleDemo1" ref="layFormRef1" :rules="rules" required initValidate>
-    <lay-form-item prop="email" requiredMessage="你得输入邮箱">
+  <lay-form :model="ruleDemo1" ref="layFormRef1" :rules="rules" required>
+    <lay-form-item label="邮箱" prop="email">
       <lay-input v-model="ruleDemo1.email"></lay-input>
     </lay-form-item>
-    <lay-form-item label="url路径" prop="url">
+    <lay-form-item label="路径" prop="url">
       <lay-input v-model="ruleDemo1.url"></lay-input>
     </lay-form-item>
     <lay-form-item label="日期" prop="date">
       <lay-input v-model="ruleDemo1.date"></lay-input>
     </lay-form-item>
-    <lay-form-item label="用户名" prop="username">
+    <lay-form-item label="账户" prop="username">
       <lay-input v-model="ruleDemo1.username"></lay-input>
     </lay-form-item>
     <lay-form-item label="年龄" prop="age">
       <lay-input v-model="ruleDemo1.age"></lay-input>
     </lay-form-item>
-    <lay-form-item>
-      <lay-button @click="validate1">提交</lay-button>
+    <lay-form-item style="text-align: center">
+      <lay-button @click="validate1" type="primary">提交</lay-button>
     </lay-form-item>
   </lay-form>
 </template>
@@ -556,101 +386,7 @@ export default {
 
 :::
 
-::: title 校验规则 - 通过表单子项配置
-:::
-
-::: demo
-
-<template>
-  <lay-form :model="ruleDemo2" ref="layFormRef2" required initValidate>
-    <lay-form-item label="邮箱" prop="email" :rules="{type : 'email'}">
-      <lay-input v-model="ruleDemo2.email"></lay-input>
-    </lay-form-item>
-    <lay-form-item label="url路径" prop="url" :rules="{type : 'url'}">
-      <lay-input v-model="ruleDemo2.url"></lay-input>
-    </lay-form-item>
-    <lay-form-item label="日期" prop="date" :rules="{type : 'date'}">
-      <lay-input v-model="ruleDemo2.date"></lay-input>
-    </lay-form-item>
-    <lay-form-item label="用户名" prop="username" 
-      :rules="{
-        type :  'string',
-        min : 8,
-        max : 16
-      }">
-      <lay-input v-model="ruleDemo2.username"></lay-input>
-    </lay-form-item>
-    <lay-form-item label="年龄" prop="age" :rules="ageRules">
-      <lay-input v-model="ruleDemo2.age"></lay-input>
-    </lay-form-item>
-    <lay-form-item label="自定义提示" prop="myEmail" 
-    :rules="{
-      type : 'email',
-      message : '必须为邮箱'
-    }">
-      <lay-input v-model="ruleDemo2.myEmail"></lay-input>
-    </lay-form-item>
-    <lay-form-item>
-      <lay-button @click="validate2">提交</lay-button>
-    </lay-form-item>
-  </lay-form>
-</template>
-
-<script>
-import { ref, reactive } from 'vue'
-import {layer} from '@layui/layer-vue'
-
-export default {
-  setup() {
-
-    const ruleDemo2 = reactive({
-        email: "",
-        url: "",
-        date: "",
-        username: "",
-        age: null,
-        myEmail: "",
-    });
-
-    const ageRules = {
-      validator(rule, value, callback, source, options){
-        if (value < 18) {
-          callback(new Error(`${rule.field}太过于年轻`));
-          return false;
-        }
-        return true;
-      }
-    };
-
-    const layFormRef2 = ref(null);
-    // 校验
-    const validate2 = function() {
-      layFormRef2.value.validate((isValidate, model, errors) => {
-         layer.open({
-          type: 1,
-          title:"表单提交结果", 
-          content: `<div style="padding: 10px"><p>是否通过 : ${isValidate}</p> <p>表单数据 : ${JSON.stringify(model)} </p> <p>错误信息 : ${JSON.stringify(errors)}</p></div>`, 
-          shade: false,
-          isHtmlFragment: true,
-          btn : [{ text: '确认', callback(index) {  layer.close(index) }}],
-          area : '500px'
-        });
-      });
-    }
-
-    return {
-      ruleDemo2,
-      layFormRef2,
-      validate2,
-      ageRules
-    }
-  }
-}
-</script>
-
-:::
-
-::: title 原生 submit 方式校验 -- 校验通过将提交表单 -- 不推荐使用
+::: title 原生提交
 :::
 
 ::: demo
@@ -667,8 +403,8 @@ export default {
     <lay-form-item label="密码" prop="password">
       <lay-input v-model="submitModel.password"></lay-input>
     </lay-form-item>
-    <lay-form-item>
-      <lay-button native-type="submit">提交</lay-button>
+    <lay-form-item style="text-align:center">
+      <lay-button type="primary" native-type="submit">提交</lay-button>
     </lay-form-item>
   </lay-form>
 </template>
@@ -686,19 +422,12 @@ export default {
     })
 
     const submit = function(isValidate, model, errors) {
-      layer.open({
-        type: 1,
-        title:"表单提交结果", 
-        content: `<div style="padding: 10px"><p>是否通过 : ${isValidate}</p> <p>表单数据 : ${JSON.stringify(model)} </p> <p>错误信息 : </br>${JSON.stringify(errors)}</p></div>`, 
-        shade: false,
-        isHtmlFragment: true,
-        btn : [{ text: '确认', callback(index) {  layer.close(index) }}],
-        area : '500px'
-      })
+      layer.msg(`${JSON.stringify(errors)}`)
     }
 
     return {
-      submitModel
+      submitModel,
+      submit
     }
   }
 }
