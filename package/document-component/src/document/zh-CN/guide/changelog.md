@@ -39,6 +39,7 @@
           <li>[主题] global-primary-color 变量默认值由 #009688 调整为 #16baaa。</li>
           <li>[主题] global-checked-color 变量默认值由 #5FB878 调整为 #16b777。</li>
           <li>[文档] radio-button 说明从 radio 文档剥离，独立为单独的菜单项。</li>
+          <li>[文档] collapse 折叠面板文档更新，补充案例说明。</li>
           <li>[升级] layer-vue 到 1.8.4 版本。</li>
         </ul>  
       </li>
