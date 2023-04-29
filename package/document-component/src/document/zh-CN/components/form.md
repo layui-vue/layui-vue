@@ -393,10 +393,6 @@ export default {
 <template>
   <lay-form @submit="submit" :model="submitModel10" requiredIcons="layui-icon-heart-fill" :use-CN="false" required>
     <lay-form-item label="账户" prop="username">
-    <template #label>
-      <i class="layui-icon layui-icon-username"></i>
-      账户
-    </template>
       <lay-input v-model="submitModel10.username"></lay-input>
     </lay-form-item>
     <lay-form-item label="密码" prop="password">
