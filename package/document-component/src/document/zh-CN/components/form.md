@@ -84,7 +84,7 @@ export default {
     })
 
     const submit1 = function(){
-      layer.msg(`${JSON.stringify(model)}`, { time: 2000 });
+      layer.msg(`${JSON.stringify(model1)}`, { time: 2000 });
     };
 
     return {
@@ -150,27 +150,27 @@ export default {
 ::: demo 通过 `label-position` 属性改变标签位置，默认值为 `right`，可选值为 `top`，`left`。
 
 <template>
-  <lay-form :model="model">
+  <lay-form :model="model3">
     <lay-form-item label="账户" :label-position="labelPosition" prop="username">
-      <lay-input v-model="model.username"></lay-input>
+      <lay-input v-model="model3.username"></lay-input>
     </lay-form-item>
     <lay-form-item label="密码" :label-position="labelPosition" prop="password">
-      <lay-input v-model="model.password" type="password"></lay-input>
+      <lay-input v-model="model3.password" type="password"></lay-input>
     </lay-form-item>
     <lay-form-item label="爱好" :label-position="labelPosition" prop="hobby">
-      <lay-select v-model="model.hobby">
+      <lay-select v-model="model3.hobby">
         <lay-select-option value="1" label="学习"></lay-select-option>
         <lay-select-option value="2" label="编码"></lay-select-option>
         <lay-select-option value="3" label="运动"></lay-select-option>
       </lay-select>
     </lay-form-item>
     <lay-form-item label="特长" :label-position="labelPosition" prop="specialty">
-      <lay-radio v-model="labelPosition" name="labelPosition" value="left">左</lay-radio>
-      <lay-radio v-model="labelPosition" name="labelPosition" value="top">上</lay-radio>
-      <lay-radio v-model="labelPosition" name="labelPosition" value="right">右</lay-radio>
+      <lay-radio v-model="labelPosition3" name="labelPosition" value="left">左</lay-radio>
+      <lay-radio v-model="labelPosition3" name="labelPosition" value="top">上</lay-radio>
+      <lay-radio v-model="labelPosition3" name="labelPosition" value="right">右</lay-radio>
     </lay-form-item>
     <lay-form-item label="描述" :label-position="labelPosition" prop="desc">
-      <lay-textarea placeholder="请输入描述" v-model="model.desc"></lay-textarea>
+      <lay-textarea placeholder="请输入描述" v-model="model3.desc"></lay-textarea>
     </lay-form-item>
   </lay-form>
 </template>
@@ -182,14 +182,13 @@ import {layer} from '@layui/layer-vue'
 export default {
   setup() {
 
-    const model = reactive({})
+    const model3 = reactive({})
     
-    const labelPosition = ref('right');
+    const labelPosition3 = ref('right');
 
     return {
-      model,
-      submitClick,
-      labelPosition
+      model3,
+      labelPosition3
     }
   }
 }
@@ -392,16 +391,16 @@ export default {
 ::: demo
 
 <template>
-  <lay-form @submit="submit" :model="submitModel" requiredIcons="layui-icon-heart-fill" :use-CN="false" required>
+  <lay-form @submit="submit" :model="submitModel10" requiredIcons="layui-icon-heart-fill" :use-CN="false" required>
     <lay-form-item label="账户" prop="username">
     <template #label>
       <i class="layui-icon layui-icon-username"></i>
       账户
     </template>
-      <lay-input v-model="submitModel.username"></lay-input>
+      <lay-input v-model="submitModel10.username"></lay-input>
     </lay-form-item>
     <lay-form-item label="密码" prop="password">
-      <lay-input v-model="submitModel.password"></lay-input>
+      <lay-input v-model="submitModel10.password"></lay-input>
     </lay-form-item>
     <lay-form-item style="text-align:center">
       <lay-button type="primary" native-type="submit">提交</lay-button>
@@ -416,18 +415,18 @@ import {layer} from '@layui/layer-vue'
 export default {
   setup() {
 
-    const submitModel = reactive({
+    const submitModel10 = reactive({
         username: "",
         password: ""
     })
 
-    const submit = function(isValidate, model, errors) {
+    const submit10 = function(isValidate, model, errors) {
       layer.msg(`${JSON.stringify(errors)}`)
     }
 
     return {
-      submitModel,
-      submit
+      submitModel10,
+      submit10
     }
   }
 }

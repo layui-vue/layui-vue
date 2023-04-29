@@ -10,8 +10,8 @@ import LayCheckCardGroup from "../src/component/checkcardGroup";
 import { describe, expect, test } from "vitest";
 
 describe("LayCheckCard.vue", () => {
-  test('render all test', () => {
-    const wrapper = mount(LayCheckCardGroup, {})
-    expect(wrapper.find('.layui-checkcard-group').exists()).toBe(true)
-  })
+  test("render all test", () => {
+    const wrapper = mount(LayCheckCardGroup, {});
+    expect(wrapper.find(".layui-checkcard-group").exists()).toBe(true);
+  });
 });
