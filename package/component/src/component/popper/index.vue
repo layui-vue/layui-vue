@@ -3,7 +3,7 @@
     <transition v-show="innerVisible">
       <div
         ref="popperRefEl"
-        :class="['layui-popper', { 'layui-dark': isDark }, props.popperClass]"
+        :class="['layui-popper layui-anim layui-anim-scale', { 'layui-dark': isDark }, props.popperClass]"
         :style="[style, props.popperStyle ?? '']"
         :position="innnerPosition"
         @mouseenter="handlerPopperMouseEnter"

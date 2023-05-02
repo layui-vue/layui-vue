@@ -44,7 +44,6 @@ export interface FormItemProps {
 
 const props = withDefaults(defineProps<FormItemProps>(), {
   mode: "block",
-  labelPosition: "right",
   labelWidth: 95,
 });
 
@@ -56,6 +55,10 @@ const slotParent = ref<HTMLDivElement>();
 const isRequired = computed(() => {
   return props.required || layForm.required;
 });
+
+const itemLabelPosition = computed(() => {
+  return props.labelPosition || layForm.labelPosition;
+})
 
 // 拼接校验规则
 const ruleItems = computed(() => {
@@ -230,7 +233,7 @@ const showLabel = computed(() => {
 
 const getMarginLeft = computed(() => {
   if (props.mode == "block") {
-    if (props.labelPosition != "top") {
+    if (itemLabelPosition.value != "top") {
       let labelWidth =
         typeof props.labelWidth === "string"
           ? parseFloat(props.labelWidth)
@@ -261,7 +264,7 @@ const getMarginLeft = computed(() => {
 <template>
   <div
     class="layui-form-item"
-    :class="[`layui-form-item-${labelPosition}`, mode]"
+    :class="[`layui-form-item-${itemLabelPosition}`, mode]"
     ref="formItemRef"
   >
     <label

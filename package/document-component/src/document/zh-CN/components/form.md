@@ -150,26 +150,26 @@ export default {
 ::: demo 通过 `label-position` 属性改变标签位置，默认值为 `right`，可选值为 `top`，`left`。
 
 <template>
-  <lay-form :model="model3">
-    <lay-form-item label="账户" :label-position="labelPosition" prop="username">
+  <lay-form :model="model3"  :label-position="labelPosition3">
+    <lay-form-item label="账户" prop="username">
       <lay-input v-model="model3.username"></lay-input>
     </lay-form-item>
-    <lay-form-item label="密码" :label-position="labelPosition" prop="password">
+    <lay-form-item label="密码" prop="password">
       <lay-input v-model="model3.password" type="password"></lay-input>
     </lay-form-item>
-    <lay-form-item label="爱好" :label-position="labelPosition" prop="hobby">
+    <lay-form-item label="爱好" prop="hobby">
       <lay-select v-model="model3.hobby">
         <lay-select-option value="1" label="学习"></lay-select-option>
         <lay-select-option value="2" label="编码"></lay-select-option>
         <lay-select-option value="3" label="运动"></lay-select-option>
       </lay-select>
     </lay-form-item>
-    <lay-form-item label="特长" :label-position="labelPosition" prop="specialty">
+    <lay-form-item label="特长" prop="specialty">
       <lay-radio v-model="labelPosition3" name="labelPosition" value="left">左</lay-radio>
       <lay-radio v-model="labelPosition3" name="labelPosition" value="top">上</lay-radio>
       <lay-radio v-model="labelPosition3" name="labelPosition" value="right">右</lay-radio>
     </lay-form-item>
-    <lay-form-item label="描述" :label-position="labelPosition" prop="desc">
+    <lay-form-item label="描述" prop="desc">
       <lay-textarea placeholder="请输入描述" v-model="model3.desc"></lay-textarea>
     </lay-form-item>
   </lay-form>
@@ -446,6 +446,7 @@ export default {
 | required-erroer-message | 必填错误提示信息              | `string`  | -              | `%s不能为空` |
 | validate-message        | 自定义校验错误提示信息; <br>由于内置了中文错误提示，可按需求增量增加<br>可查看 [async-validator 内置错误提示](https://github.com/yiminghe/async-validator/blob/master/src/messages.ts)<br>也可参考 [layui-vue 内置中文错误提示](https://gitee.com/layui/layui-vue/blob/next/package/component/src/component/formItem/cnValidateMessage.ts) | `string`  | -              | `%s不能为空` |
 | pane                    | 启用方框风格                 | `boolean`  |  `true` `false`              | `false` |
+| label-position          | 标签位置                     | `string`   |  `top` `right` `left`        | `right` |
 
 :::
 

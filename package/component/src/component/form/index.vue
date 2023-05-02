@@ -14,12 +14,13 @@ export interface FormProps {
   model?: modelType;
   required?: boolean;
   rules?: Rule;
+  pane?: boolean;
   initValidate?: boolean;
   requiredIcons?: string;
+  labelPosition?: string;
   requiredErrorMessage?: string;
   validateMessage?: ValidateMessages;
   useCN?: boolean;
-  pane?: boolean;
 }
 
 const props = withDefaults(defineProps<FormProps>(), {
@@ -28,6 +29,7 @@ const props = withDefaults(defineProps<FormProps>(), {
   },
   useCN: true,
   requiredIcons: "",
+  labelPosition: "right",
   initValidate: false,
   pane: false,
 });

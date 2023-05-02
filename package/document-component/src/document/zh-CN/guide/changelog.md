@@ -19,6 +19,7 @@
 <li>
 <h3>2.0.0 <span class="layui-badge-rim">2023-04-26</span></h3>
 <ul>
+<li>[新增] form 组件 label-position 属性，全局设置子组件 label 位置。</li>
 <li>[新增] checkcard 组件，通过卡片的形式提供多选操作。</li>
 <li>[新增] checkcard-group 组件，多选卡片组，用于配合 checkcard 使用。</li>
 <li>[新增] radio-button 组件，通过按钮的形式提供单选操作。</li>
