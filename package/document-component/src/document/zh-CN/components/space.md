@@ -14,7 +14,7 @@
 
 <template>
   <lay-space>
-    <lay-button v-for="idx of 5" type="normal">按钮 {{idx}}</lay-button>
+    <lay-button v-for="idx of 5" type="primary">按钮 {{idx}}</lay-button>
   </lay-space>
 </template>
 
@@ -40,7 +40,7 @@ export default {
 
 <template>
   <lay-space direction="vertical" fill wrap>
-    <lay-button v-for="idx of 5" type="normal" :fluid="true">按钮 {{idx}}</lay-button>
+    <lay-button v-for="idx of 5" type="primary" :fluid="true">按钮 {{idx}}</lay-button>
   </lay-space>
 </template>
 
@@ -75,7 +75,7 @@ export default {
     </lay-radio>
     <br><br>
   <lay-space :size="spaceSize">
-    <lay-button v-for="idx of 5" type="normal">按钮 {{idx}}</lay-button>
+    <lay-button v-for="idx of 5" type="primary">按钮 {{idx}}</lay-button>
   </lay-space>
 </template>
 
@@ -112,7 +112,7 @@ export default {
   <lay-slider v-model="customSize"></lay-slider>
   <br><br>
   <lay-space :size="customSize">
-    <lay-button v-for="idx of 5" type="normal">按钮 {{idx}}</lay-button>
+    <lay-button v-for="idx of 5" type="primary">按钮 {{idx}}</lay-button>
   </lay-space>
 </template>
 
