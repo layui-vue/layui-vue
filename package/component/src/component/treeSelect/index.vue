@@ -212,10 +212,17 @@ watch(searchValue, () => {
   if (searchValue.value === "") {
     treeData.value = props.data;
   } else {
-    // TODO 过滤 tree 数据
-    treeData.value = props.data;
+    treeData.value = treeFilter(props.data, (item: any) => { return item.title.indexOf(searchValue.value) > -1});
   }
 });
+
+
+function treeFilter (tree: any[], func: Function) {
+  return tree.map(node => ({ ...node })).filter(node => {
+    node.children = node.children && treeFilter(node.children, func)
+    return func(node) || (node.children && node.children.length)
+  })
+}
 
 watch(
   () => props.data,
