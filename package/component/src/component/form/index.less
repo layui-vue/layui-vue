@@ -107,8 +107,9 @@
 }
 
 .layui-required {
-  color: #ff5722;
-  font-size: 12px;
+  margin-right: 4px;
+  color: var(--global-danger-color);
+  font-size: 14px;
   line-height: 1;
 }
 
@@ -117,18 +118,18 @@
   .layui-input-inline {
     .layui-form-danger {
       &, .layui-textarea, .layui-tag-input, .layui-input {
-        border-color: #ff5722 !important;
+        border-color: var(--global-danger-color) !important;
       }
     }
   }
 }
 
 .layui-error-message {
-  color: #ff5722;
+  padding-top: 5px;
+  color: var(--global-danger-color);
+  position: absolute;
   font-size: 12px;
   line-height: 1;
-  padding-top: 5px;
-  position: absolute;
   top: 100%;
   left: 0;
 }
