@@ -47,7 +47,11 @@ export default {
 ::: demo
 
 <template>
-  <lay-field title="标题"></lay-field>
+  <lay-field>
+    <template #title>
+      插槽
+    </template>
+  </lay-field>
 </template>
 
 <script>

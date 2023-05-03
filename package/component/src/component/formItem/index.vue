@@ -58,7 +58,7 @@ const isRequired = computed(() => {
 
 const itemLabelPosition = computed(() => {
   return props.labelPosition || layForm.labelPosition;
-})
+});
 
 // 拼接校验规则
 const ruleItems = computed(() => {

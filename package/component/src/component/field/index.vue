@@ -18,14 +18,22 @@ const props = defineProps<FieldProps>();
 
 <template>
   <fieldset v-if="slot.default" class="layui-field">
-    <legend>{{ title }}</legend>
+    <legend>
+      <slot name="title">
+        {{ title }}
+      </slot>
+    </legend>
     <div class="layui-field-box">
       <slot></slot>
     </div>
   </fieldset>
   <fieldset v-else class="layui-field layui-field-title">
     <legend>
-      <a name="docend">{{ title }}</a>
+      <a name="docend">
+        <slot name="title">
+          {{ title }}
+        </slot>
+      </a>
     </legend>
   </fieldset>
 </template>

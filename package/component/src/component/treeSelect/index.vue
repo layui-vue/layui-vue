@@ -212,16 +212,19 @@ watch(searchValue, () => {
   if (searchValue.value === "") {
     treeData.value = props.data;
   } else {
-    treeData.value = treeFilter(props.data, (item: any) => { return item.title.indexOf(searchValue.value) > -1});
+    treeData.value = treeFilter(props.data, (item: any) => {
+      return item.title.indexOf(searchValue.value) > -1;
+    });
   }
 });
 
-
-function treeFilter (tree: any[], func: Function) {
-  return tree.map(node => ({ ...node })).filter(node => {
-    node.children = node.children && treeFilter(node.children, func)
-    return func(node) || (node.children && node.children.length)
-  })
+function treeFilter(tree: any[], func: Function) {
+  return tree
+    .map((node) => ({ ...node }))
+    .filter((node) => {
+      node.children = node.children && treeFilter(node.children, func);
+      return func(node) || (node.children && node.children.length);
+    });
 }
 
 watch(
