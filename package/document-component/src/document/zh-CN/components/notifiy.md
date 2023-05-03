@@ -151,9 +151,6 @@ layer.notifiy(options)
 | ------------------- | ------ | ----|
 | options | 选配属性 | { time: 加载时长, icon: 图标 }   |
 
-:::
-
-::: contributor msg
 :::  
 
 ::: previousNext msg

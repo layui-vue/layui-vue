@@ -117,10 +117,7 @@ export default {
 | ------ | ---------- |
 | default| 默认插槽，仅支持 direction 为 `horizontal`|
 
-:::
-
-::: contributor line
-:::   
+::: 
 
 ::: previousNext line
 :::

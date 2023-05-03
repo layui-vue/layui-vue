@@ -280,3 +280,6 @@ export default {
 | append  |  自定义后缀 | - |
 
 :::
+
+::: previousNext tagInput
+:::

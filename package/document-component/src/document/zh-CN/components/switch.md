@@ -274,8 +274,5 @@ export default {
 | unswitch-icon | 禁用图标 | -- |
 :::
 
-::: contributor switch
-::: 
-
 ::: previousNext switch
 :::

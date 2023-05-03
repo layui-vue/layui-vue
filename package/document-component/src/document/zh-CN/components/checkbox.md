@@ -225,8 +225,5 @@ export default {
 
 :::
 
-::: contributor checkbox
-:::
-
 ::: previousNext checkbox
 :::

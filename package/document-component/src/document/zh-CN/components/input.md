@@ -378,8 +378,5 @@ const blur = function() {
 
 :::
 
-::: contributor input
-:::  
-
 ::: previousNext input
 :::

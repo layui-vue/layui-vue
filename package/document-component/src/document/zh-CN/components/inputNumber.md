@@ -176,8 +176,5 @@
 
 :::
 
-::: contributor inputNumber
-:::  
-
 ::: previousNext inputNumber
 :::

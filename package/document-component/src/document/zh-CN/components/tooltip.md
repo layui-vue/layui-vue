@@ -192,8 +192,5 @@ export default {
 
 :::
 
-::: contributor tooltip
-:::
-
 ::: previousNext tooltip
 :::

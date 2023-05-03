@@ -310,8 +310,5 @@ export default {
 
 :::
 
-::: contributor autocomplete
-:::
-
 ::: previousNext autocomplete
 :::

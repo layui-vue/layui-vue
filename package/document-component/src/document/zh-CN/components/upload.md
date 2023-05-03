@@ -371,8 +371,5 @@ export default {
 
 :::
 
-::: contributor upload
-:::
-
 ::: previousNext upload
 :::

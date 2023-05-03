@@ -89,8 +89,5 @@ layer.photos(options)
 
 :::
 
-::: contributor msg
-:::  
-
 ::: previousNext msg
 :::

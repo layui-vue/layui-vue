@@ -225,8 +225,5 @@ export default {
 | footer  | 底部插槽  | 
 :::
 
-::: contributor card
-:::
-
 ::: previousNext card
 :::

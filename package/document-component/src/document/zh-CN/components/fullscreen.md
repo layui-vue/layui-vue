@@ -227,8 +227,5 @@ export default {
 | isFullscreen | 是否全屏      | boolean  | -                             |
 :::
 
-::: contributor fullscreen
-::: 
-
 ::: previousNext fullscreen
 :::

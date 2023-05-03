@@ -82,8 +82,5 @@ layer.confirm(content, options)
 
 :::
 
-::: contributor confirm
-:::
-
 ::: previousNext confirm
 :::

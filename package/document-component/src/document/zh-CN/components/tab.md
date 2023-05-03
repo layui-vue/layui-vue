@@ -437,8 +437,5 @@ export default {
 
 :::
 
-::: contributor tab
-::: 
-
 ::: previousNext tab
 :::

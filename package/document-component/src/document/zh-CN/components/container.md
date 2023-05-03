@@ -85,8 +85,5 @@ export default {
 
 :::
 
-::: contributor container
-:::
-
 ::: previousNext container
 :::

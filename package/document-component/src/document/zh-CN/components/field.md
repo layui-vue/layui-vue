@@ -79,9 +79,5 @@ export default {
 
 :::
 
-
-::: contributor field
-:::
-
 ::: previousNext field
 :::

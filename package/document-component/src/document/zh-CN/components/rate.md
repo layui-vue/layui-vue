@@ -346,8 +346,5 @@ export default {
 
 :::
 
-::: contributor rate
-:::  
-
 ::: previousNext rate
 :::

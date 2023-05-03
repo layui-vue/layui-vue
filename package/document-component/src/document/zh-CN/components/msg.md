@@ -106,8 +106,5 @@ layer.msg(content, options)
 
 :::
 
-::: contributor msg
-:::  
-
 ::: previousNext msg
 :::

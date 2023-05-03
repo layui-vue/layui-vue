@@ -344,9 +344,7 @@ export default {
 | change| 原生 change 事件    | (value : 同v-model) |
 | focus | 原生 focus事件     | event : Event               |
 | blur  | 原生 blur 事件      | event : Event               |
-:::
 
-::: contributor datePicker
 :::
 
 ::: previousNext datePicker

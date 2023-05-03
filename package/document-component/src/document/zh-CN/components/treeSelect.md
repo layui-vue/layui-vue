@@ -726,8 +726,5 @@ const data4 = ref([{
 
 :::
 
-::: contributor transition
-:::
-
 ::: previousNext transition
 :::

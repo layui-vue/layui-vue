@@ -129,8 +129,5 @@ export default {
 
 :::
 
-::: contributor empty
-:::
-
 ::: previousNext empty
 :::

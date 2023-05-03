@@ -126,8 +126,5 @@
 | space | 默认每个占 `px` , 其他的自动平分 | number | - | 按照个数平分 |
 :::
 
-::: contributor splitPanel
-::: 
-
 ::: previousNext splitPanel
 :::

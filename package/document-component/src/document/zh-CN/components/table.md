@@ -1628,8 +1628,5 @@ export default {
 
 :::
 
-::: contributor table
-:::
-
 ::: previousNext table
 :::

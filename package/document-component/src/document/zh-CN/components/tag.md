@@ -271,13 +271,12 @@ export default {
 :::
 
 :::table
+
 | 事件 | 描述 | 参数 |
 |------ |----------|-----------|
 | close | 点击关闭图标时触发 | (e: MouseEvent) |
-:::
 
-::: contributor tag
-:::  
+:::
 
 ::: previousNext tag
 :::

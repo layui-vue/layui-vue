@@ -144,8 +144,5 @@ export default {
 
 :::
 
-::: contributor exception
-:::
-
 ::: previousNext exception
 :::

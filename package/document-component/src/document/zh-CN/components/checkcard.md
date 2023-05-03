@@ -478,8 +478,5 @@ export default {
 
 :::
 
-::: contributor card
-:::
-
 ::: previousNext card
 :::

@@ -318,8 +318,5 @@ import { ref } from 'vue'
 
 :::
 
-::: contributor button
-:::
-
 ::: previousNext button
 :::

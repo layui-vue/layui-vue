@@ -59,10 +59,7 @@ const changeMaxTotal = () => {
 | thumbColor |   滑块颜色   | --     |
 | trackColor   |   滑槽颜色   | --     |
 
-:::
-
-::: contributor scroll
-:::  
+::: 
 
 ::: previousNext scroll
 :::

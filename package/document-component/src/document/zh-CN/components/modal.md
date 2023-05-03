@@ -375,10 +375,7 @@ export default {
 
 | 名称            | 描述           | 参数                     |
 | --------------- | ------------- | --------------------------|
-| close           | 关闭通知       | --                         |
-
-::: contributor modal
-:::  
+| close           | 关闭通知       | --                         | 
 
 ::: previousNext modal
 :::

@@ -131,10 +131,7 @@ layer.load(load, options)
 | load | 组件类型 | `1` `2` `3` |
 | options | 选配属性 | { time: 加载时长 }   |
 
-:::
-
-::: contributor load
-:::  
+::: 
 
 ::: previousNext load
 :::

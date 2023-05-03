@@ -102,9 +102,5 @@ const handleBack=()=>{
 
 :::
 
-
-::: contributor pageHeader
-:::  
-
 ::: previousNext pageHeader
 :::

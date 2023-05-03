@@ -282,8 +282,5 @@ export default {
 
 :::
 
-::: contributor select
-:::
-
 ::: previousNext select
 :::

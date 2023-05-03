@@ -126,8 +126,5 @@ import { ref } from 'vue';
 </script>
 :::
 
-::: contributor color
-:::
-
 ::: previousNext color
 :::

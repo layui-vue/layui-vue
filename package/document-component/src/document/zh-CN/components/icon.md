@@ -266,8 +266,5 @@ export default {
 
 :::
 
-::: contributor icon
-::: 
-
 ::: previousNext icon
 :::

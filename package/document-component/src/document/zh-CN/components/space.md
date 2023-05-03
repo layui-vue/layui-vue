@@ -230,10 +230,6 @@ export default {
 | 名称    | 描述     |
 | ------- | -------- |
 | default | 默认插槽 |
-:::
-
-
-::: contributor space
 ::: 
 
 ::: previousNext space

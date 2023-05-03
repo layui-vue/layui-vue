@@ -565,8 +565,5 @@ import { ref } from 'vue';
 
 :::
 
-::: contributor transition
-:::
-
 ::: previousNext transition
 :::

@@ -87,8 +87,5 @@ export default {
 
 :::
 
-::: contributor badge
-:::
-
 ::: previousNext badge
 :::

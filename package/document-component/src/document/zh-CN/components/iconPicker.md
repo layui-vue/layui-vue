@@ -154,8 +154,5 @@ export default {
 
 :::
 
-::: contributor iconPicker
-:::  
-
 ::: previousNext iconPicker
 :::
