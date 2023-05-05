@@ -38,7 +38,7 @@
         </div>
         <div class="site-banner-other">
           <a
-            href="https://gitee.com/layui-vue"
+            href="https://gitee.com/layui/layui-vue"
             target="_blank"
             rel="nofollow"
             class="site-star"
@@ -46,7 +46,7 @@
             <i class="layui-icon"></i> Star <cite id="getStars">2135</cite>
           </a>
           <a
-            href="https://gitee.com/layui-vue"
+            href="https://gitee.com/layui/layui-vue"
             target="_blank"
             rel="nofollow"
             class="site-fork"
@@ -54,7 +54,7 @@
             Gitee
           </a>
           <a
-            href="https://github.com/layui-vue"
+            href="https://github.com/layui/layui-vue"
             target="_blank"
             rel="nofollow"
             class="site-fork"

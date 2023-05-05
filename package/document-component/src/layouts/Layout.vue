@@ -140,12 +140,23 @@
             <a
               href="https://gitee.com/layui/layui-vue"
               target="_blank"
-              style="display: inline-block"
+              style="display: inline-block;padding-right: 10px;"
             >
               <lay-icon
                 type="layui-icon-gitee"
                 size="18px"
                 color="#C71D23"
+              ></lay-icon>
+            </a>
+            <a
+              href="https://github.com/layui/layui-vue"
+              target="_blank"
+              style="display: inline-block;padding-left: 10px;"
+            >
+              <lay-icon
+                type="layui-icon-github"
+                size="18px"
+                color="#213547"
               ></lay-icon>
             </a>
           </li>
