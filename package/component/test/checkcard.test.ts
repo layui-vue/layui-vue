@@ -1,7 +1,7 @@
 /*
  * @Author: baobaobao
  * @Date: 2023-04-27 11:57:58
- * @LastEditTime: 2023-04-28 17:20:16
+ * @LastEditTime: 2023-05-05 16:47:12
  * @LastEditors: baobaobao
  */
 import { mount } from "@vue/test-utils";
@@ -12,7 +12,7 @@ const IMAGE_URL = "https://img.com";
 const title = "test checkcard text";
 const description = "test checkcard description";
 const style = "color: red";
-const addClass = "cardClass";
+const addClass = "layui-checkcard-checkedcardClass";
 describe("LayCheckCard.vue", () => {
   test("renders title test", () => {
     const wrapper = mount(LayCheckCard, {
