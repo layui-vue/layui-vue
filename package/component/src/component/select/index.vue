@@ -80,7 +80,6 @@ const getOption = (nodes: VNode[], newOptions: any[]) => {
     if (isArrayChildren(item, item.children)) {
       getOption(item.children as VNode[], newOptions);
     } else {
-
       // 如果是 Select Option 遍历选项到结果
       if ((item.type as Component).name == LaySelectOption.name) {
         // 如果存在插槽，优先级将大于 label 属性
@@ -94,9 +93,9 @@ const getOption = (nodes: VNode[], newOptions: any[]) => {
         }
         newOptions.push(item.props);
       }
-      
+
       // 如果是 Select Option Group 深层遍历
-      if((item.type as Component).name == LaySelectOptionGroup.name) {
+      if ((item.type as Component).name == LaySelectOptionGroup.name) {
         if (item.children) {
           // @ts-ignore
           getOption(item.children.default() as VNode[], newOptions);

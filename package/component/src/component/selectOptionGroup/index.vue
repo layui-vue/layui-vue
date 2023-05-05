@@ -5,13 +5,12 @@ export default {
 </script>
 
 <script setup lang="ts">
-
 export interface SelectOptionGroupProps {
-   label?: string
+  label?: string;
 }
 
 const props = withDefaults(defineProps<SelectOptionGroupProps>(), {
-   label: "Group Name",
+  label: "Group Name",
 });
 </script>
 
