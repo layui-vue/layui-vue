@@ -205,7 +205,7 @@ const menus = [
         title: "下拉选择",
         subTitle: "select",
         path: "/zh-CN/components/select",
-        badge: true 
+        badge: true,
       },
       {
         id: 39,
