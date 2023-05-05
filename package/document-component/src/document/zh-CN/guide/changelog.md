@@ -20,6 +20,7 @@
 <h3>2.0.0 <span class="layui-badge-rim">2023-04-26</span></h3>
 <ul>
 <li>[新增] field 组件 title 插槽，支持标题自定义。</li>
+<li>[新增] select-option-group 组件，为 select-option 提供分组。</li>
 <li>[新增] tree-select 组件 search 属性，用于启用节点搜索功能。</li>
 <li>[新增] form 组件 label-position 属性，全局设置子组件 label 位置。</li>
 <li>[新增] checkcard 组件，通过卡片的形式提供多选操作。</li>

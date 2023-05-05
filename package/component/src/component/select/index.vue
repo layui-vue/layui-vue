@@ -26,6 +26,7 @@ import LayDropdown from "../dropdown/index.vue";
 import LaySelectOption, { SelectOptionProps } from "../selectOption/index.vue";
 import { SelectSize } from "./interface";
 import { isArrayChildren } from "../../utils";
+import LaySelectOptionGroup from "../selectOptionGroup/index.vue";
 
 export interface SelectProps {
   name?: string;
@@ -75,10 +76,14 @@ var timer: any;
 
 const getOption = (nodes: VNode[], newOptions: any[]) => {
   nodes?.map((item) => {
+    // 如果使用 v-for 嵌套，会有一些问题
     if (isArrayChildren(item, item.children)) {
       getOption(item.children as VNode[], newOptions);
     } else {
+
+      // 如果是 Select Option 遍历选项到结果
       if ((item.type as Component).name == LaySelectOption.name) {
+        // 如果存在插槽，优先级将大于 label 属性
         if (item.children) {
           // @ts-ignore
           const label = item.children.default()[0].children;
@@ -88,6 +93,14 @@ const getOption = (nodes: VNode[], newOptions: any[]) => {
           }
         }
         newOptions.push(item.props);
+      }
+      
+      // 如果是 Select Option Group 深层遍历
+      if((item.type as Component).name == LaySelectOptionGroup.name) {
+        if (item.children) {
+          // @ts-ignore
+          getOption(item.children.default() as VNode[], newOptions);
+        }
       }
     }
   });

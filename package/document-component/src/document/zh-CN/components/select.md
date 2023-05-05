@@ -217,6 +217,41 @@ export default {
 
 :::
 
+::: title 选项分组
+:::
+
+::: demo 通过 `default` 插槽, 实现选项的自定义渲染。
+
+<template>
+  <lay-select v-model="value">
+    <lay-select-option-group label="分组">
+        <lay-select-option :value="1" label="学习"></lay-select-option>
+        <lay-select-option :value="2" label="编码"></lay-select-option>
+        <lay-select-option :value="3" label="运动"></lay-select-option>
+    </lay-select-option-group>
+    <lay-select-option-group label="分组">
+        <lay-select-option :value="4" label="学习"></lay-select-option>
+        <lay-select-option :value="5" label="编码"></lay-select-option>
+        <lay-select-option :value="6" label="运动"></lay-select-option>
+    </lay-select-option-group>
+  </lay-select>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+    const value = ref(null);
+    return {
+      value
+    }
+  }
+}
+</script>
+
+:::
+
 ::: title Select 属性
 :::
 

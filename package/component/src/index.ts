@@ -20,7 +20,6 @@ import LayIconPicker from "./component/iconPicker/index";
 import LayCard from "./component/card/index";
 import LayCheckCard from "./component/checkcard/index";
 import LayCheckCardGroup from "./component/checkcardGroup/index";
-
 import LayLayout from "./component/layout/index";
 import LaySide from "./component/side/index";
 import LayBody from "./component/body/index";
@@ -53,6 +52,7 @@ import LayBreadcrumbItem from "./component/breadcrumbItem/index";
 import LayField from "./component/field/index";
 import LaySelect from "./component/select/index";
 import LaySelectOption from "./component/selectOption/index";
+import LaySelectOptionGroup from "./component/selectOptionGroup/index";
 import LayScroll from "./component/scroll/index";
 import LayEmpty from "./component/empty/index";
 import LayFormItem from "./component/formItem/index";
@@ -148,6 +148,7 @@ const components: Record<string, Plugin> = {
   LaySelect,
   LayScroll,
   LaySelectOption,
+  LaySelectOptionGroup,
   LayEmpty,
   LayFormItem,
   LayRate,
@@ -249,6 +250,7 @@ export {
   LaySelect,
   LayScroll,
   LaySelectOption,
+  LaySelectOptionGroup,
   LayEmpty,
   LayFormItem,
   LayRate,

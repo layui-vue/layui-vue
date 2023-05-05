@@ -23,7 +23,7 @@ const msg = function() {
 }
 
 const success = function() {
-    layer.msg("成功消息", { time: 3111111111000, id: "1" ,icon: 1})
+    layer.msg("成功消息", { time: 3000, id: "1" , icon: 1})
 }
 
 const failure = function() {
