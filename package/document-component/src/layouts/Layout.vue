@@ -375,6 +375,8 @@ export default {
   color: rgba(0, 0, 0, 0.8);
   letter-spacing: -0.2px;
   opacity: 0.8;
+  color: #213547;
+  font-weight: 700;
 }
 
 .layui-header > .layui-nav {
