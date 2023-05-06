@@ -140,7 +140,7 @@
             <a
               href="https://gitee.com/layui/layui-vue"
               target="_blank"
-              style="display: inline-block;padding-right: 10px;"
+              style="display: inline-block; padding-right: 10px"
             >
               <lay-icon
                 type="layui-icon-gitee"
@@ -151,7 +151,7 @@
             <a
               href="https://github.com/layui/layui-vue"
               target="_blank"
-              style="display: inline-block;padding-left: 10px;"
+              style="display: inline-block; padding-left: 10px"
             >
               <lay-icon
                 type="layui-icon-github"
