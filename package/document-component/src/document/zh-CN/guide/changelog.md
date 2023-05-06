@@ -23,7 +23,6 @@
                         <li>[新增] select-option-group 组件，为 select-option 提供分组。</li>
                         <li>[新增] checkcard 组件，通过卡片的形式提供多选操作。</li>
                         <li>[新增] checkcard-group 组件，多选卡片组，用于配合 checkcard 使用。</li>
-                        <li>[新增] radio-button 组件，通过按钮的形式提供单选操作。</li>
                         <li>[修复] layer 组件 maxmin 属性开启时，最小化内容溢出的问题。</li>
                         <li>[修复] tree 组件 showCheckbox 属性启用时，title 与 checkbox 的异常间隔。</li>
                         <li>[修复] icon-picker 组件，选项边角不跟随主题变量的问题。</li>
@@ -49,7 +48,22 @@
                                 <li>[新增] radio-button 组件 change 属性，值改变时触发。</li>
                             </ul>
                         </li>
-                         <li>
+                        <li>
+                            <h4 style="margin-bottom: 0px !important;font-weight: 500 !important;">Checkcard</h4>
+                            <ul>
+                                <li>[新增] checkcard 组件 title 属性与插槽，用于设置标题。</li>
+                                <li>[新增] checkcard 组件 description 属性与插槽，用于设置描述。</li>
+                                <li>[新增] checkcard 组件 avatar 属性与插槽，用于设置头像。</li>
+                                <li>[新增] checkcard 组件 defaultChecked 属性，用于设置默认选中。</li>
+                                <li>[新增] checkcard 组件 disabled 属性，用于设置禁用。</li>
+                                <li>[新增] checkcard 组件 extra 属性与插槽，用于设置扩展内容。</li>
+                                <li>[新增] checkcard 组件 cover 属性与插槽，用于启用图片选项。</li>
+                                <li>[新增] checkcard-group 组件 disabled 属性，开启整体禁用。</li>
+                                <li>[新增] checkcard-group 组件 modelValue 属性，用于设置默认选项。</li>
+                                <li>[新增] checkcard-group 组件 change 事件，用于监听选项变化。</li>
+                            </ul>
+                        </li>
+                        <li>
                             <h4 style="margin-bottom: 0px !important;font-weight: 500 !important;">Form</h4>
                             <ul>
                                 <li>[新增] form 组件 label-position 属性，设置包括的 form-item 组件 label 位置。</li>
