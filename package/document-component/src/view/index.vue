@@ -148,7 +148,7 @@
               target="_blank"
             >
               <lay-avatar
-                src="https://baomidou.com/img/logo.svg"
+                src="https://www.baomidou.com/img/logo.svg"
                 style="background: transparent"
               ></lay-avatar>
             </a>
