@@ -40,7 +40,8 @@
 <li>[修复] collapse 组件，面版边角不跟随主题变量的问题。</li>
 <li>[修复] date-picker 组件，面板边角不跟随主题变量的问题。</li>
 <li>[修复] form-item 组件，required 颜色不跟随主题色的问题。</li>
-<li>[优化] form-item 组件，required 边距，调整尺寸。 </li>
+<li>[修复] slider 组件，横向模式与竖向模式下，进度条背景颜色不一致的问题。</li>
+<li>[调整] form-item 组件 required 图标与 label 的间距。 </li>
 <li>[调整] form-item 组件 mode 属性为 inline 时，表单项宽度由 190px 调整为 220px。</li>
 <li>[主题] global-primary-color 变量默认值由 #009688 调整为 #16baaa。</li>
 <li>[主题] global-checked-color 变量默认值由 #5FB878 调整为 #16b777。</li>

@@ -14,11 +14,9 @@
 :::
 
 ```css
-
 --global-primary-color: #009688; // 主色
 
 --global-checked-color: #5fb878; // 次色
-
 ```
 
 ::: title 高级使用
