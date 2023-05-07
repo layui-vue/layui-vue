@@ -42,7 +42,7 @@
 </template>
 <script lang="ts">
 export default {
-  name: "LayCheckCard",
+  name: "LayCheckcard",
 };
 </script>
 <script lang="ts" setup>
@@ -50,8 +50,6 @@ import {
   ref,
   onMounted,
   watch,
-  onUnmounted,
-  nextTick,
   computed,
   StyleValue,
   useAttrs,

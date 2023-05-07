@@ -173,14 +173,12 @@ const menus = [
         title: "单选按钮",
         subTitle: "radioButton",
         path: "/zh-CN/components/radioButton",
-        badge: true,
       },
       {
         id: 13,
         title: "多选卡片",
         subTitle: "checkcard",
         path: "/zh-CN/components/checkcard",
-        badge: true,
       },
       {
         id: 34,
@@ -205,7 +203,6 @@ const menus = [
         title: "下拉选择",
         subTitle: "select",
         path: "/zh-CN/components/select",
-        badge: true,
       },
       {
         id: 39,
@@ -266,7 +263,6 @@ const menus = [
         title: "表单",
         subTitle: "form",
         path: "/zh-CN/components/form",
-        badge: true,
       },
     ],
   },

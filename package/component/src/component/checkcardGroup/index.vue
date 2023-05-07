@@ -11,18 +11,12 @@
 </template>
 <script lang="ts">
 export default {
-  name: "LayCheckCardGroup",
+  name: "LayCheckcardGroup",
 };
 </script>
 <script lang="ts" setup>
 import {
   ref,
-  onMounted,
-  onUnmounted,
-  nextTick,
-  computed,
-  StyleValue,
-  useAttrs,
   watch,
   provide,
 } from "vue";

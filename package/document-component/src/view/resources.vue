@@ -49,14 +49,32 @@
   </div>
   <div class="footer footer-index">
     <p>Released under the <a href="/index.html">MIT License</a>.</p>
-    <p>Copyright © 2021-2023 layui-vue.com</p>
+    <p>Copyright © 2021-2023 www.layui-vue.com</p>
+    <p>
+      鸣谢：
+      <a
+        href="https://www.oschina.net"
+        style="color: #16b777; font-weight: 800; margin: 0px 5px"
+        >Oschina</a
+      >
+      <a
+        href="https://gitee.com"
+        style="color: #c71d23; font-weight: 800; margin: 0px 5px"
+        >Gitee</a
+      >
+      <a
+        href="https://www.iconfont.cn/"
+        style="color: #9b16ff; font-weight: 800; margin: 0px 5px"
+        >iconfont</a
+      >
+    </p>
   </div>
 </template>
 
 <style>
-@import "@layui/layui-vue/es/container/index.css";
+/* @import "@layui/layui-vue/es/container/index.css";
 @import "@layui/layui-vue/es/quote/index.css";
-@import "@layui/layui-vue/es/field/index.css";
+@import "@layui/layui-vue/es/field/index.css"; */
 
 .alone {
   text-align: center;

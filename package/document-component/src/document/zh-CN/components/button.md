@@ -33,10 +33,10 @@ import { ref } from 'vue';
 
 <template>
   <lay-button>原始按钮</lay-button>
-  <lay-button type="primary" border>默认按钮</lay-button>
-  <lay-button type="normal" border>百搭按钮</lay-button>
-  <lay-button type="warm" border>暖色按钮</lay-button>
-  <lay-button type="danger" border>警告按钮</lay-button>
+  <lay-button border="green">默认按钮</lay-button>
+  <lay-button border="blue">百搭按钮</lay-button>
+  <lay-button border="orange">暖色按钮</lay-button>
+  <lay-button border="red">警告按钮</lay-button>
 </template>
 
 <script setup>

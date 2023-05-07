@@ -901,6 +901,7 @@ onBeforeUnmount(() => {
           <lay-dropdown
             v-if="showToolbar('filter')"
             updateAtScroll
+            placement="bottom-end"
             :style="toolbarStyle('filter')"
           >
             <div class="layui-inline" title="筛选" lay-event>

@@ -83,15 +83,19 @@ watch(
   selectedValue,
   () => {
     if (props.multiple) {
-      multipleValue.value = selectedValue.value.map((value: any) => {
-        const node: any = getNode(props.data, value);
-        if (node) {
-          node.label = node.title;
-          node.value = node.id;
-          node.closable = !node.disabled;
-          return node;
-        }
-      });
+      try {
+        multipleValue.value = selectedValue.value.map((value: any) => {
+          const node: any = getNode(props.data, value);
+          if (node) {
+            node.label = node.title;
+            node.value = node.id;
+            node.closable = !node.disabled;
+            return node;
+          }
+        });
+      } catch (e) {
+        throw new Error("v-model / model-value is not an array type");
+      }
     } else {
       /**
        * 根据 id 查找 node 节点
