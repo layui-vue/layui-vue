@@ -10,31 +10,31 @@
 ::: title 基础使用
 :::
 
-::: demo 使用 `lay-check-card` 标签, 创建卡片组件。头像，标题，描述区域可以自由组合或者单独呈现，组件会为你调整为最合适的对齐方式。
+::: demo 使用 `lay-checkcard` 标签, 创建卡片组件。头像，标题，描述区域可以自由组合或者单独呈现，组件会为你调整为最合适的对齐方式。
 
 <template>
-  <lay-check-card
+  <lay-checkcard
     title="标题"
     avatar="http://www.layui-vue.com/assets/logo.a3fad609.jpg"
     description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。"
     defaultChecked
     @click="handleClick"
   >
-  </lay-check-card>
-  <lay-check-card
+  </lay-checkcard>
+  <lay-checkcard
     title="标题"
     avatar="http://www.layui-vue.com/assets/logo.a3fad609.jpg"
     description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。"
     @click="handleClick"
   >
-  </lay-check-card>
-  <lay-check-card
+  </lay-checkcard>
+  <lay-checkcard
     title="标题"
     avatar="http://www.layui-vue.com/assets/logo.a3fad609.jpg"
     description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。"
     @click="handleClick"
   >
-  </lay-check-card>
+  </lay-checkcard>
 </template>
 
 <script setup>
@@ -52,14 +52,14 @@ const handleClick = (value) =>  {
 
 ::: demo 通过配置 `cover` 或  `cover` 插槽, 可以让你的卡片成为一个图片选项。
 <template>
-  <lay-check-card>
+  <lay-checkcard>
      <template #cover>
       <img src="https://gw.alipayobjects.com/mdn/rms_66ee3f/afts/img/A*FyH5TY53zSwAAAAAAAAAAABkARQnAQ"/>
     </template>
-  </lay-check-card>
-   <lay-check-card
+  </lay-checkcard>
+   <lay-checkcard
    cover="https://gw.alipayobjects.com/mdn/rms_66ee3f/afts/img/A*FyH5TY53zSwAAAAAAAAAAABkARQnAQ">
-  </lay-check-card>
+  </lay-checkcard>
 </template>
 
 :::
@@ -70,48 +70,48 @@ const handleClick = (value) =>  {
 
 ::: demo 通过 `disabled` 属性配置选项不可用。
 <template>
- <lay-check-card
+ <lay-checkcard
     avatar="http://www.layui-vue.com/assets/logo.a3fad609.jpg"
     title="标题"
     description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。"
   >
-  </lay-check-card>
-  <lay-check-card
+  </lay-checkcard>
+  <lay-checkcard
     disabled
     avatar="http://www.layui-vue.com/assets/logo.a3fad609.jpg"
     title="标题"
     description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。"
   >
-  </lay-check-card>
-  <lay-check-card
+  </lay-checkcard>
+  <lay-checkcard
     defaultChecked
     disabled
     avatar="http://www.layui-vue.com/assets/logo.a3fad609.jpg"
     title="标题"
     description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。"
   >
-  </lay-check-card>
+  </lay-checkcard>
   <br/>
-  <lay-check-card-group disabled v-model="checked1">
-    <lay-check-card
+  <lay-checkcard-group disabled v-model="checked1">
+    <lay-checkcard
       value="1"
       avatar="http://www.layui-vue.com/assets/logo.a3fad609.jpg"
       title="标题"
       description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。">
-    </lay-check-card>
-    <lay-check-card
+    </lay-checkcard>
+    <lay-checkcard
       value="4"
       avatar="http://www.layui-vue.com/assets/logo.a3fad609.jpg"
       title="标题"
       description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。">
-    </lay-check-card>
-    <lay-check-card
+    </lay-checkcard>
+    <lay-checkcard
       disabled
       avatar="http://www.layui-vue.com/assets/logo.a3fad609.jpg"
       title="标题"
       description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。">
-    </lay-check-card>
-  </lay-check-card-group>
+    </lay-checkcard>
+  </lay-checkcard-group>
 </template>
 
 <script>
@@ -132,29 +132,29 @@ export default {
 ::: title 卡片分组
 :::
 
-::: demo 使用 `lay-check-card-group` 与 `lay-check-card` 标签搭配。
+::: demo 使用 `lay-checkcard-group` 与 `lay-checkcard` 标签搭配。
 
 <template>
-  <lay-check-card-group v-model="checked1" @change="groupChange">
-    <lay-check-card
+  <lay-checkcard-group v-model="checked1" @change="groupChange">
+    <lay-checkcard
       value="1"
       avatar="http://www.layui-vue.com/assets/logo.a3fad609.jpg"
       title="标题"
       description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。">
-  </lay-check-card>
-   <lay-check-card
+  </lay-checkcard>
+   <lay-checkcard
       value="4"
       avatar="http://www.layui-vue.com/assets/logo.a3fad609.jpg"
       title="标题"
       description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。">
-  </lay-check-card>
-  <lay-check-card
+  </lay-checkcard>
+  <lay-checkcard
       disabled
       avatar="http://www.layui-vue.com/assets/logo.a3fad609.jpg"
       title="标题"
       description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。">
-  </lay-check-card>
-  </lay-check-card-group>
+  </lay-checkcard>
+  </lay-checkcard-group>
 </template>
 
 <script>
