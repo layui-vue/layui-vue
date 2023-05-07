@@ -1,7 +1,7 @@
 <!--
  * @Author: baobaobao
  * @Date: 2023-04-24 16:23:33
- * @LastEditTime: 2023-04-28 14:32:22
+ * @LastEditTime: 2023-05-07 00:47:53
  * @LastEditors: baobaobao
 -->
 <template>
@@ -55,41 +55,33 @@ import {
   useAttrs,
   inject,
   useSlots,
+onBeforeMount,
 } from "vue";
 import "./index.less";
 export interface CheckCard {
   title?: string;
   avatar?: string;
   description?: string;
-  defaultChecked?: boolean;
   cover?: string;
   extra?: string;
   disabled?: boolean;
-  modelValue?: string;
+  modelValue?: boolean;
   value?: string;
 }
 const attrs = useAttrs();
 const slot = useSlots();
-const emit = defineEmits(["click", "update:modelValue"]);
+const emit = defineEmits(["change", "update:modelValue"]);
 const props = withDefaults(defineProps<CheckCard>(), {
-  defaultChecked: false,
   disabled: false,
+  modelValue: false,
 });
 const checkcardGroup: any = inject("checkcardGroup", {});
 const getIsGroup = computed(
   () => checkcardGroup && checkcardGroup.name === "LayCheckCardGroup"
 );
 const containerStyle = computed(() => attrs.style as StyleValue);
-const getCheckState = ref<boolean | undefined>(props.defaultChecked);
+const getCheckState = ref<boolean>(props.modelValue);
 const getDisabled = ref<boolean | undefined>(props.disabled);
-const getStyle = computed(() => {
-  return {
-    "layui-checkcard-checked": getCheckState.value,
-    "layui-checkcard": true,
-    "layui-checkcard-bordered": true,
-    "layui-checkcard-disabled": getDisabled.value,
-  };
-});
 const getContentStyle = computed(() => {
   return {
     "layui-checkcard-is-description": !props.description && !slot.description,
@@ -105,17 +97,10 @@ const getExtraStyle = computed(() => {
 const handleCheck = (event: Event) => {
   if (!getDisabled.value) {
     getCheckState.value = !getCheckState.value;
-    emit("click", getCheckState.value);
+    emit('update:modelValue', getCheckState.value)
+    emit('change', getCheckState.value)
   }
 };
-onMounted(() => {
-  if (getIsGroup.value) {
-    getCheckState.value = checkcardGroup.modelVal.value.includes(props.value);
-    if (checkcardGroup.disabled) {
-      getDisabled.value = true;
-    }
-  }
-});
 const getValArr = computed(() => {
   if (getIsGroup.value) {
     if (
@@ -130,19 +115,30 @@ const getValArr = computed(() => {
 watch(
   () => getCheckState,
   (val) => {
-    let newsArr = [...getValArr.value];
-    const findIndex = newsArr.findIndex((key) => key === props.value);
-    if (val.value) {
-      findIndex < 0 && newsArr.push(props.value);
-    } else {
-      if (findIndex >= 0) {
-        newsArr.splice(findIndex, 1);
-      }
-    }
     if (getIsGroup.value) {
-      checkcardGroup.modelVal.value = newsArr;
+      let newsArr = [...getValArr.value];
+      const findIndex = newsArr.findIndex((key) => key === props.value);
+      if (val.value) {
+        findIndex < 0 && newsArr.push(props.value);
+      } else {
+        if (findIndex >= 0) {
+          newsArr.splice(findIndex, 1);
+        }
+      }
+      checkcardGroup.modelVal.value = newsArr
     }
   },
-  { deep: true }
-);
+  {
+    deep: true,
+    immediate: true
+  }
+)
+const getStyle = computed(() => {
+  return {
+    "layui-checkcard-checked": getCheckState.value,
+    "layui-checkcard": true,
+    "layui-checkcard-bordered": true,
+    "layui-checkcard-disabled": getDisabled.value,
+  };
+});
 </script>
