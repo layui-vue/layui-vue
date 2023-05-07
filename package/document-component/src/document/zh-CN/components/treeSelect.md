@@ -13,17 +13,11 @@
 ::: demo 使用 `lay-tree-select` 标签, 创建下拉树组件。
 
 <template>
-  <!-- 清空 -->
-  <lay-button @click="clear">清空</lay-button>
   <lay-tree-select v-model="value1" :data="data1" contentStyle="height:150px;overflow-y:auto;"></lay-tree-select>
 </template>
 
 <script setup>
 import { ref } from 'vue';
-
-const clear = () => {
-	value1.value = "";
-}
 
 const value1 = ref(1);
 
@@ -182,16 +176,11 @@ function handleClick(node) {
 ::: demo 通过 `multiple` 标签, 开启下拉树多选。
 
 <template>
-  <lay-button @click="clear2">清空</lay-button>
   <lay-tree-select v-model="value2" :data="data2" multiple></lay-tree-select>
 </template>
 
 <script setup>
 import { ref } from 'vue';
-
-const clear2 = () => {
-	value2.value = [];
-}
 
 const value2 = ref([23]);
 
@@ -541,7 +530,7 @@ const data3 = ref([{
 ::: demo 通过 `allow-clear` 属性开启清空操作。
 
 <template>
-  <lay-tree-select v-model="value4" :data="data4" placeholder="请选择" :allow-clear="true" :search="true"></lay-tree-select>
+  <lay-tree-select v-model="value4" :data="data4" placeholder="请选择" :allow-clear="true"></lay-tree-select>
 </template>
 
 <script setup>
@@ -550,6 +539,165 @@ import { ref } from 'vue';
 const value4 = ref([]);
 
 const data4 = ref([{
+	title: '一级1',
+	id: 1,
+	field: 'name1',
+	children: [{
+		title: '二级1-1 可允许跳转',
+		id: 3,
+		field: 'name11',
+		href: 'https://www.layui.com/',
+		children: [{
+			title: '三级1-1-3',
+			id: 23,
+			field: '',
+			children: [{
+				title: '四级1-1-3-1',
+				id: 24,
+				field: '',
+				children: [{
+					title: '五级1-1-3-1-1',
+					id: 30,
+				},
+				{
+					title: '五级1-1-3-1-2',
+					id: 31,
+				}]
+			}]
+		},
+		{
+			title: '三级1-1-1',
+			id: 7,
+			field: '',
+			children: [{
+				title: '四级1-1-1-1 可允许跳转',
+				id: 15,
+				href: 'https://www.layui.com/doc/'
+			}]
+		},
+		{
+			title: '三级1-1-2',
+			id: 8,
+			field: '',
+			children: [{
+				title: '四级1-1-2-1',
+				id: 32,
+			}]
+		}]
+	},
+	{
+		title: '二级1-2',
+		id: 4,
+		spread: true,
+		children: [{
+			title: '三级1-2-1',
+			id: 9,
+		},
+		{
+			title: '三级1-2-2',
+			id: 10,
+		}]
+	},
+	{
+		title: '二级1-3',
+		id: 20,
+		field: '',
+		children: [{
+			title: '三级1-3-1',
+			id: 21,
+			field: ''
+		},
+		{
+			title: '三级1-3-2',
+			id: 22,
+			field: ''
+		}]
+	}]
+},
+{
+	title: '一级2',
+	id: 2,
+	children: [{
+		title: '二级2-1',
+		id: 5,
+		spread: true,
+		children: [{
+			title: '三级2-1-1',
+			id: 11,
+		},
+		{
+			title: '三级2-1-2',
+			id: 12,
+		}]
+	},
+	{
+		title: '二级2-2',
+		id: 6,
+		children: [{
+			title: '三级2-2-1',
+			id: 13,
+		},
+		{
+			title: '三级2-2-2',
+			id: 14,
+		}]
+	}]
+},
+{
+	title: '一级3',
+	id: 16,
+	field: '',
+	children: [{
+		title: '二级3-1',
+		id: 17,
+		field: '',
+		fixed: true,
+		children: [{
+			title: '三级3-1-1',
+			id: 18,
+			field: ''
+		},
+		{
+			title: '三级3-1-2',
+			id: 19,
+			field: ''
+		}]
+	},
+	{
+		title: '二级3-2',
+		id: 27,
+		field: '',
+		children: [{
+			title: '三级3-2-1',
+			id: 28,
+			field: ''
+		},
+		{
+			title: '三级3-2-2',
+			id: 29,
+			field: ''
+		}]
+	}]
+}]);
+</script>
+
+:::
+
+::: title 启用搜索
+:::
+
+::: demo 通过 `allow-clear` 属性开启清空操作。
+
+<template>
+  <lay-tree-select v-model="value5" :data="data5" placeholder="请选择" :allow-clear="true" :search="true" :multiple="true"></lay-tree-select>
+</template>
+
+<script setup>
+import { ref } from 'vue';
+
+const value5 = ref([]);
+
+const data5 = ref([{
 	title: '一级1',
 	id: 1,
 	field: 'name1',

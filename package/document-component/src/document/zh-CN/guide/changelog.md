@@ -79,9 +79,10 @@
                         <li>
                             <h4 style="margin-bottom: 0px !important;font-weight: 500 !important;">Tree Select</h4>
                             <ul>
+                                <li>[新增] tree-select 组件 search 属性，启用下拉树节点搜索功能。</li>
                                 <li>[新增] tree-select 组件 contentStyle 属性，用于设置面板的 style 样式。</li>
                                 <li>[新增] tree-select 组件 contentClass 属性，用于设置面板的 class 属性。</li>
-                                <li>[新增] tree-select 组件 search 属性，启用下拉树节点搜索功能。</li>
+                                <li>[优化] tree-select 组件 multiple 属性为 true 时，值类型错误的异常提示信息。</li>
                             </ul>
                         </li>
                     </ul>  

@@ -189,24 +189,9 @@ export default {
 | defaultChecked | 默认选中 | `boolean` | false | -- |
 | disabled | 是否禁用	 | `boolean` | false | -- |
 | extra | 拓展区域	 | `操作区域` | -- | -- |
-| cover | 背景图片, 使用该属性时, `title`、`description`、`avater`失效	 | -- | -- | -- |
+| cover | 背景图片	 | -- | -- | -- |
 
 :::
-
-::: title CheckCardGroup 属性
-:::
-
-::: table
-
-| 名称   | 描述 | 类型     | 默认值   | 可选值                   |
-| ------ | ---- | -------- | -------- | ------------------------ |
-| disabled | 是否禁用	 | `boolean` | false | -- |
-| change | 拓展区域	 | `操作区域` | -- | -- |
-| v-model | 默认勾选	 | -- | -- | -- |
-
-:::
-
-
 
 ::: title CheckCard 插槽
 :::
@@ -221,6 +206,29 @@ export default {
 | extra   | 扩展插槽 |
 | cover  | 背景图片插槽 |
 
+:::
+
+::: title CheckCardGroup 属性
+:::
+
+::: table
+
+| 名称    | 描述 | 类型     | 默认值   | 可选值                   |
+| ------  | ---- | -------- | -------- | ------------------------ |
+| disabled | 是否禁用	 | `boolean` | false | -- |
+| change  | 拓展区域	 | `操作区域` | -- | -- |
+| v-model | 默认勾选	 | -- | -- | -- |
+
+:::
+
+::: title CheckCardGroup 事件
+:::
+
+::: table
+
+| 名称   | 描述      | 参数      |
+| ------ | -------- | --------  | 
+| change | 选择变更	 | val       | 
 
 :::
 
