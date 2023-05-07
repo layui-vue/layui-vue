@@ -1,7 +1,7 @@
 /*
  * @Author: baobaobao
  * @Date: 2023-04-27 11:57:58
- * @LastEditTime: 2023-05-05 16:47:12
+ * @LastEditTime: 2023-05-07 12:30:11
  * @LastEditors: baobaobao
  */
 import { mount } from "@vue/test-utils";
@@ -44,22 +44,23 @@ describe("LayCheckCard.vue", () => {
     wrapper.unmount();
   });
 
-  test("render defaultChecked test", () => {
+  test("render val test", () => {
     const wrapper = mount(LayCheckCard, {
       props: {
-        defaultChecked: true,
+        modelValue: true,
       },
     });
     expect(wrapper.find(".layui-checkcard-checked").exists()).toBe(true);
     wrapper.unmount();
   });
+
   test("render all test", async () => {
     const wrapper = mount(LayCheckCard, {
       props: {
         avatar: IMAGE_URL,
         description,
         title,
-        defaultChecked: true,
+        modelValue: true,
       },
     });
     expect(wrapper.find(".layui-checkcard-checked").exists()).toBe(true);
@@ -128,7 +129,7 @@ describe("LayCheckCard.vue", () => {
       "layui-checkcard-disabled"
     );
     await wrapper.find(".layui-checkcard").trigger("click");
-    expect(wrapper.emitted("click")).toBeUndefined();
+    expect(wrapper.emitted()).toHaveProperty("click");
     wrapper.unmount();
   });
 });

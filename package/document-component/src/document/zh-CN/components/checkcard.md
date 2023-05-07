@@ -14,28 +14,12 @@
 
 <template>
   <lay-check-card
-    @click="handleClick"
     avatar="http://www.layui-vue.com/assets/logo-png.a3bc5caf.png"
     title="标题"
     description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。"
   >
   </lay-check-card>
 </template>
-
-<script>
-import { ref } from 'vue'
-
-export default {
-  setup() {
-    const handleClick = (value) =>  {
-      // console.log(value);
-    }
-    return {
-      handleClick
-    }
-  }
-}
-</script>
 
 :::
 
@@ -47,8 +31,6 @@ export default {
 
 ::: demo
 
-
-
 <template>
  <lay-check-card
     style="width: 200px; height: 200px;"
@@ -57,18 +39,6 @@ export default {
   >
   </lay-check-card>
 </template>
-
-<script>
-import { ref } from 'vue'
-
-export default {
-  setup() {
-
-    return {
-    }
-  }
-}
-</script>
 
 :::
 
@@ -184,19 +154,39 @@ export default {
 ::: title 默认选中
 :::
 
-::: describe  通过配置 `defaultChecked` 属性为 `true` 来配置选项默认被选中。
+::: describe  通过配置 `v-model` 为 `true`或者 `v-model` 为数组 搭配 `value` 来配置选项默认被选中。
 :::
 
 ::: demo 
 
 <template>
   <lay-check-card
-    defaultChecked
+    @change="handleChange"
+    v-model="ischeked"
     avatar="http://www.layui-vue.com/assets/logo-png.a3bc5caf.png"
     title="标题">
   </lay-check-card>
 </template>
 
+
+
+
+<script>
+import { ref, watch } from 'vue'
+
+export default {
+  setup() {
+    const ischeked = ref(false)
+    const handleChange = (value) =>  {
+      // console.log(value)
+    }
+    return {
+      ischeked,
+      handleChange
+    }
+  }
+}
+</script>
 :::
 
 
@@ -209,7 +199,7 @@ export default {
 ::: demo 
 <template>
   <lay-check-card
-    defaultChecked
+    v-model="ischekeds"
     avatar="http://www.layui-vue.com/assets/logo-png.a3bc5caf.png"
     title="标题">
      <template #extra>
@@ -227,6 +217,18 @@ export default {
   </lay-check-card>
 </template>
 
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+    const ischekeds = ref(true)
+    return {
+      ischekeds
+    }
+  }
+}
+</script>
 :::
 
 
@@ -275,7 +277,7 @@ export default {
   >
   </lay-check-card>
   <lay-check-card
-    defaultChecked
+    v-model="ischeck"
     disabled
     avatar="http://www.layui-vue.com/assets/logo-png.a3bc5caf.png"
     title="标题"
@@ -283,7 +285,7 @@ export default {
   >
   </lay-check-card>
   <h4>整体不可用</h4>
-   <lay-check-card-group disabled v-model="checked1">
+   <lay-check-card-group disabled v-model="checked1"  @change="groupChange">
     <lay-check-card
       value="1"
       avatar="http://www.layui-vue.com/assets/logo-png.a3bc5caf.png"
@@ -307,12 +309,17 @@ export default {
 
 <script>
 import { ref } from 'vue'
-const checked1 = ref(['1', '2', '3'])
-
 export default {
   setup() {
+    const checked1 = ref(['1', '2', '3'])
+    const ischeck = ref(true)
+    const groupChange = (val) => {
+      console.log(val)
+    }
     return {
-      checked1
+      checked1,
+      ischeck,
+      groupChange
     }
   }
 }
@@ -355,12 +362,13 @@ export default {
 
 <script>
 import { ref } from 'vue'
-const checked1 = ref(['1', '2', '3'])
 
 export default {
   setup() {
+    const checked1 = ref(['1', '2', '3'])
     const groupChange = (val) => {
-      // console.log(val, 'val', 112)
+
+      console.log(val, 2232)
     }
     return {
       checked1,
@@ -384,8 +392,8 @@ export default {
 ::: demo 
 
 <template>
-  <lay-check-card-group v-model="checked1" @change="groupChange">
-  <lay-row>
+  <lay-check-card-group>
+  <lay-row space="30">
    <lay-col md="8">
     <lay-check-card
       avatar="http://www.layui-vue.com/assets/logo-png.a3bc5caf.png"
@@ -413,12 +421,12 @@ export default {
 
 <script>
 import { ref } from 'vue'
-const checked1 = ref(['1', '2', '3'])
 
 export default {
   setup() {
+    const checked1 = ref(['1', '2', '3'])
     const groupChange = (val) => {
-      // console.log(val, 'val', 112)
+      console.log(val, 222)
     }
     return {
       checked1,
@@ -440,10 +448,21 @@ export default {
 | title  | 标题 | `string` | --       | --                       |
 | description | 描述 | `string` | -- | -- |
 | avatar | 图片 | `string` | -- | -- |
-| defaultChecked | 默认选中 | `boolean` | false | -- |
+| v-model | 默认选中 | `boolean` `array` | false | -- |
 | disabled | 是否禁用	 | `boolean` | false | -- |
 | extra | 拓展区域	 | `操作区域` | -- | -- |
-| cover | 背景图片, 使用该属性时, `title`、`description`、`avater`失效	 | -- | -- | -- |
+| cover | 背景图片, 使用该属性时, `title` `description` `avater`失效	 | -- | -- | -- |
+
+:::
+
+::: title CheckCard 事件
+:::
+
+::: table
+
+| 事件   | 描述     | 回调参数               |
+| ------ | -------- | -------------------- |
+| change | 绑定值变化时触发的事件	 | 选中的值 |
 
 :::
 
@@ -455,7 +474,6 @@ export default {
 | 名称   | 描述 | 类型     | 默认值   | 可选值                   |
 | ------ | ---- | -------- | -------- | ------------------------ |
 | disabled | 是否禁用	 | `boolean` | false | -- |
-| change | 拓展区域	 | `操作区域` | -- | -- |
 | v-model | 默认勾选	 | -- | -- | -- |
 
 :::
@@ -478,5 +496,16 @@ export default {
 
 :::
 
+
+::: title CheckCardGroup 事件
+:::
+
+::: table
+
+| 事件   | 描述     | 回调参数               |
+| ------ | -------- | -------------------- |
+| change | 绑定值变化时触发的事件	 | 选中的值 |
+
+:::
 ::: previousNext card
 :::
