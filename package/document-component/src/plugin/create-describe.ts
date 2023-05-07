@@ -22,11 +22,11 @@ export default function createContainer(klass: string): ContainerArgs {
       render(tokens, idx) {
         const token = tokens[idx];
         const matchedInfo = token.info.trim().match(/^describe\s+(.*)$/);
-        const description = (matchedInfo && matchedInfo[1]);
+        const description = matchedInfo && matchedInfo[1];
         const descTemplate = markdown({
-          html: true
-        }).render(description || '');
-        if (token.nesting === 1  && description) {
+          html: true,
+        }).render(description || "");
+        if (token.nesting === 1 && description) {
           return `<div class="describe-plugin">${descTemplate}`;
         } else {
           return "</div>\n";

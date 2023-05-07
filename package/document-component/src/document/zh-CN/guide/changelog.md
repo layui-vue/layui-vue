@@ -82,6 +82,7 @@
                                 <li>[新增] tree-select 组件 contentStyle 属性，用于设置面板的 style 样式。</li>
                                 <li>[新增] tree-select 组件 contentClass 属性，用于设置面板的 class 属性。</li>
                                 <li>[优化] tree-select 组件 multiple 属性为 true 时，值类型错误的异常提示信息。</li>
+                                <li>[优化] tree-select 组件 content 样式，增加最大高度，超出后滚动展示。</li>
                             </ul>
                         </li>
                         <li>
@@ -97,7 +98,7 @@
                             <ul>
                                 <li>[新增] select-option-group 组件，为 select-option 提供分组。</li>
                                 <li>[新增] select-option-group 组件 label 属性，用于设置 option 分组名称。</li>
-                                <li>[优化] select 组件下拉面板滚动条样式。</li>
+                                <li>[优化] select 组件 dropdown 下拉面板 scroll 样式。</li>
                             </ul>
                         </li>
                     </ul>  

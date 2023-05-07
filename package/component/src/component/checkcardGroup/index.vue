@@ -15,11 +15,7 @@ export default {
 };
 </script>
 <script lang="ts" setup>
-import {
-  ref,
-  watch,
-  provide,
-} from "vue";
+import { ref, watch, provide } from "vue";
 import { Recordable } from "../../types";
 
 export interface CheckCardGroup {

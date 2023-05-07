@@ -55,7 +55,7 @@ import {
   useAttrs,
   inject,
   useSlots,
-onBeforeMount,
+  onBeforeMount,
 } from "vue";
 import "./index.less";
 export interface CheckCard {
@@ -97,8 +97,8 @@ const getExtraStyle = computed(() => {
 const handleCheck = (event: Event) => {
   if (!getDisabled.value) {
     getCheckState.value = !getCheckState.value;
-    emit('update:modelValue', getCheckState.value)
-    emit('change', getCheckState.value)
+    emit("update:modelValue", getCheckState.value);
+    emit("change", getCheckState.value);
   }
 };
 const getValArr = computed(() => {
@@ -125,14 +125,14 @@ watch(
           newsArr.splice(findIndex, 1);
         }
       }
-      checkcardGroup.modelVal.value = newsArr
+      checkcardGroup.modelVal.value = newsArr;
     }
   },
   {
     deep: true,
-    immediate: true
+    immediate: true,
   }
-)
+);
 const getStyle = computed(() => {
   return {
     "layui-checkcard-checked": getCheckState.value,
