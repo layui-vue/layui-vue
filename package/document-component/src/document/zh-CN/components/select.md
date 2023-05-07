@@ -190,6 +190,36 @@ export default {
 
 :::
 
+::: title 循环渲染
+:::
+
+::: demo 通过 show-search 属性开启内容检索, input 变为可输入状态。在 multiple 模式下, 检索框位于 dropdown 顶部。
+
+<template>
+  <lay-select v-model="value8">
+    <template v-for="number of 50">
+        <lay-select-option :value="number"> 选项 - {{number}}</lay-select-option>
+    </template>
+  </lay-select>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const value8 = ref(1)
+
+    return {
+      value8
+    }
+  }
+}
+</script>
+
+:::
+
 ::: title 使用插槽
 :::
 
