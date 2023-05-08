@@ -81,6 +81,8 @@
                                 <li>[新增] tree-select 组件 search 属性，启用下拉树节点搜索功能。</li>
                                 <li>[新增] tree-select 组件 contentStyle 属性，用于设置面板的 style 样式。</li>
                                 <li>[新增] tree-select 组件 contentClass 属性，用于设置面板的 class 属性。</li>
+                                <li>[修复] tree-select 组件 多选模式，value 在 option 中不存在时，回显 undefined 的问题。</li>
+                                <li>[修复] tree-select 组件 多选模式，value 在 option 中不存在时，tag 无法删除的问题。 </li>
                                 <li>[优化] tree-select 组件 multiple 属性为 true 时，值类型错误的异常提示信息。</li>
                                 <li>[优化] tree-select 组件 content 样式，增加最大高度，超出后滚动展示。</li>
                             </ul>

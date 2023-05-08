@@ -85,13 +85,20 @@ watch(
     if (props.multiple) {
       try {
         multipleValue.value = selectedValue.value.map((value: any) => {
-          const node: any = getNode(props.data, value);
+          var node: any = getNode(props.data, value);
           if (node) {
             node.label = node.title;
             node.value = node.id;
             node.closable = !node.disabled;
-            return node;
           }
+          if(node == undefined) {
+            node = {
+              label: value,
+              value: value,
+              closable: true
+            }
+          }
+          return node;
         });
       } catch (e) {
         throw new Error("v-model / model-value is not an array type");

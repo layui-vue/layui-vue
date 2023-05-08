@@ -182,7 +182,7 @@ function handleClick(node) {
 <script setup>
 import { ref } from 'vue';
 
-const value2 = ref([23]);
+const value2 = ref([23,5555]);
 
 const data2 = ref([{
 	title: '一级1',
