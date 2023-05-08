@@ -14,15 +14,16 @@
 
 <template>
   <lay-table 
-      id="id" 
       height="300px"
       :default-toolbar="true"
       :columns="columns" 
       :data-source="dataSource" 
       :page="page" 
       v-model:selected-keys="selectedKeys"  
-      @row="rowClick"
       @change="change">
+    <template #status="{ row }">
+      <lay-switch :model-value="row.status" @change="changeStatus($event , row)"></lay-switch>
+    </template>
     <template v-slot:toolbar>
       <lay-button size="sm" type="primary">新增</lay-button>
       <lay-button size="sm">删除</lay-button>
@@ -30,6 +31,9 @@
     <template v-slot:operator="{ row }">
       <lay-button size="xs" type="primary">编辑</lay-button>
       <lay-button size="xs">查看</lay-button>
+    </template>
+    <template #footer>
+      {{ selectedKeys }}
     </template>
   </lay-table>
 </template>
@@ -41,7 +45,10 @@ import { layer } from '@layui/layui-vue';
 export default {
   setup() {
 
-    const selectedKeys = ref(['10001','10002'])
+    const selectedKeys = ref([
+      '10001',
+      '10002'
+    ])
 
     const page = reactive({
       current: 1,
@@ -53,6 +60,7 @@ export default {
       { title:"选项", type: "checkbox", width: "55px", fixed: "left" },
       { title:"编号", key:"id", fixed: "left", sort: "desc" },
       { title:"姓名", width: "80px", key:"name" },
+      { title:"状态", width: "80px", key:"status", customSlot: "status"},
       { title:"邮箱", width: "120px", key:"email" },
       { title:"性别", width: "80px", key:"sex" },
       { title:"年龄", width: "80px", key:"age" },
@@ -62,43 +70,40 @@ export default {
       { title:"操作", width: "150px", customSlot:"operator", key:"operator", fixed: "right" }
     ]);
 
-    const change = function(page) {
-      layer.msg(JSON.stringify(page));
+    const change = (page) => {
+      layer.msg("分页事件:" + JSON.stringify(page));
     }
 
-    const dataSource = [
-      {id:"10001", name:"张三1", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"18",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09"},
-      {id:"10002", name:"张三2", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"20",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09"},
-      {id:"10003", name:"张三3", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"20",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09"},
-      {id:"10004", name:"张三4", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"20",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09"},
-      {id:"10005", name:"张三5", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"20",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09"},
-      {id:"10006", name:"张三6", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"20",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09"},
-      {id:"10007", name:"张三7", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"18",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09"},
-      {id:"10008", name:"张三8", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"20",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09"},
-      {id:"10009", name:"张三9", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"20",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09"},
-      {id:"10010", name:"张三10", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"20",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09"},
-      {id:"10011", name:"张三11", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"20",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09"},
-      {id:"10012", name:"张三12", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"20",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09"}
-    ]
+    const dataSource = ref([
+      {id:"10001", name:"张三1", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"18",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09", status: true},
+      {id:"10002", name:"张三2", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"20",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09", status: true},
+      {id:"10003", name:"张三3", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"20",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09", status: true},
+      {id:"10004", name:"张三4", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"20",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09", status: true},
+      {id:"10005", name:"张三5", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"20",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09", status: true},
+      {id:"10006", name:"张三6", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"20",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09", status: true},
+      {id:"10007", name:"张三7", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"18",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09", status: true},
+      {id:"10008", name:"张三8", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"20",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09", status: true},
+      {id:"10009", name:"张三9", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"20",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09", status: true},
+      {id:"10010", name:"张三10", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"20",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09", status: true},
+      {id:"10011", name:"张三11", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"20",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09", status: true},
+      {id:"10012", name:"张三12", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"20",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09", status: true}
+    ])
 
-    const rowClick = function(data) {
-      console.log(JSON.stringify(data))
-    }
-    
-    const rowDoubleClick = function(data) {
-      console.log(JSON.stringify(data))
+    const changeStatus = (isChecked, row) => {
+      dataSource.value.forEach((item) => {
+        if(item.id === row.id) {
+          item.status = isChecked;
+        }
+      })
     }
 
     return {
       columns,
       dataSource,
       selectedKeys,
-      checkbox,
-      defaultToolbar,
-      rowClick,
-      rowDoubleClick,
       page,
-      change
+      change,
+      changeStatus
     }
   }
 }
