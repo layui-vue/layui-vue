@@ -98,6 +98,8 @@
                             <ul>
                                 <li>[新增] select-option-group 组件，为 select-option 提供分组。</li>
                                 <li>[新增] select-option-group 组件 label 属性，用于设置 option 分组名称。</li>
+                                <li>[修复] select 组件 多选模式，value 在 option 中不存在时，回显 undefined 的问题。 </li>
+                                <li>[修复] select 组件 多选模式，value 在 option 中不存在时，tag 无法删除的问题。 </li>
                                 <li>[优化] select 组件 dropdown 下拉面板 scroll 样式。</li>
                             </ul>
                         </li>

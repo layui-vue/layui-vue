@@ -179,7 +179,7 @@ import { ref,watch } from 'vue'
 
 export default {
   setup() {
-    const value6 = ref(['1','2']);
+    const value6 = ref(['1','2', '8']);
 
     return {
       value6
