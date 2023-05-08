@@ -41,7 +41,7 @@ export interface TableProps {
   selectedKeys?: string[];
   indentSize?: number;
   childrenColumnName?: string;
-  height?: number;
+  height?: number | string;
   maxHeight?: string;
   even?: boolean;
   expandIndex?: number;
@@ -1081,6 +1081,7 @@ onBeforeUnmount(() => {
         <!-- 表身 -->
         <div
           class="layui-table-body layui-table-main"
+          :class="{ 'layui-table-body-loading' : props.loading }"
           :style="{ height: height, maxHeight: maxHeight }"
           ref="tableBody"
         >
@@ -1204,6 +1205,7 @@ onBeforeUnmount(() => {
             <div :style="{ width: tableBodyEmptyWidth }"></div>
           </template>
           <template v-if="loading == true">
+            <!-- 根据 table 实际高度，设置 loading 位置 -->
             <div class="layui-table-loading">
               <i
                 class="layui-icon-loading layui-icon layui-anim layui-anim-rotate layui-anim-loop"

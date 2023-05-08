@@ -17,6 +17,7 @@
       height="300px"
       :default-toolbar="true"
       :columns="columns" 
+      :loading="loading"
       :data-source="dataSource" 
       :page="page" 
       v-model:selected-keys="selectedKeys"  
@@ -26,14 +27,11 @@
     </template>
     <template v-slot:toolbar>
       <lay-button size="sm" type="primary">新增</lay-button>
-      <lay-button size="sm">删除</lay-button>
+      <lay-button size="sm" @click="remove">删除</lay-button>
     </template>
     <template v-slot:operator="{ row }">
       <lay-button size="xs" type="primary">编辑</lay-button>
       <lay-button size="xs">查看</lay-button>
-    </template>
-    <template #footer>
-      {{ selectedKeys }}
     </template>
   </lay-table>
 </template>
@@ -45,16 +43,13 @@ import { layer } from '@layui/layui-vue';
 export default {
   setup() {
 
-    const selectedKeys = ref([
-      '10001',
-      '10002'
-    ])
+    const loading = ref(false);
 
-    const page = reactive({
-      current: 1,
-      total: 100,
-      limit: 10,
-    })
+    const model = reactive({});
+
+    const selectedKeys = ref([]);
+
+    const page = reactive({ current: 1, limit: 10, total: 100 });
 
     const columns = ref([
       { title:"选项", type: "checkbox", width: "55px", fixed: "left" },
@@ -71,30 +66,61 @@ export default {
     ]);
 
     const change = (page) => {
-      layer.msg("分页事件:" + JSON.stringify(page));
+      loading.value = true;
+      setTimeout(() => {
+        dataSource.value = loadDataSource(page.current, page.limit);
+        loading.value = false;
+      }, 1000);
     }
 
     const dataSource = ref([
-      {id:"10001", name:"张三1", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"18",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09", status: true},
-      {id:"10002", name:"张三2", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"20",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09", status: true},
-      {id:"10003", name:"张三3", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"20",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09", status: true},
-      {id:"10004", name:"张三4", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"20",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09", status: true},
-      {id:"10005", name:"张三5", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"20",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09", status: true},
-      {id:"10006", name:"张三6", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"20",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09", status: true},
-      {id:"10007", name:"张三7", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"18",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09", status: true},
-      {id:"10008", name:"张三8", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"20",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09", status: true},
-      {id:"10009", name:"张三9", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"20",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09", status: true},
-      {id:"10010", name:"张三10", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"20",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09", status: true},
-      {id:"10011", name:"张三11", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"20",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09", status: true},
-      {id:"10012", name:"张三12", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"20",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09", status: true}
+      {id:"1", name:"张三1", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"18",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09", status: true},
+      {id:"2", name:"张三2", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"20",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09", status: true},
+      {id:"3", name:"张三3", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"20",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09", status: true},
+      {id:"4", name:"张三4", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"20",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09", status: true},
+      {id:"5", name:"张三5", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"20",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09", status: true},
+      {id:"6", name:"张三6", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"20",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09", status: true},
+      {id:"7", name:"张三7", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"18",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09", status: true},
+      {id:"8", name:"张三8", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"20",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09", status: true},
+      {id:"9", name:"张三9", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"20",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09", status: true},
+      {id:"10", name:"张三10", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"20",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09", status: true}
     ])
 
     const changeStatus = (isChecked, row) => {
       dataSource.value.forEach((item) => {
         if(item.id === row.id) {
-          item.status = isChecked;
+          layer.msg("Success", { icon: 1 }, () => {
+            item.status = isChecked;
+          })
         }
       })
+    }
+
+    const remove = () => {
+      layer.msg(selectedKeys.value)
+    }
+
+    /**
+     * 调用接口，获取数据 (模拟) 
+     */
+    const loadDataSource = (page, pageSize) => {
+      var response = [];
+      var startIndex = ((page - 1) * pageSize) + 1;
+      var endIndex = page * pageSize;
+      for (var i = startIndex; i <= endIndex; i++) {
+          response.push({
+            id:`${i}`, 
+            age:"18",
+            sex: "男", 
+            name:`张三${i}`, 
+            email: "test@qq.com",
+            remark: '花开堪折直须折,莫待无花空折枝.',  
+            joinTime: "2022-02-09", 
+            city: "浙江杭州", 
+            status: true
+          })
+      }
+      return response;
     }
 
     return {
@@ -103,7 +129,9 @@ export default {
       selectedKeys,
       page,
       change,
-      changeStatus
+      changeStatus,
+      model,
+      remove
     }
   }
 }

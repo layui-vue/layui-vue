@@ -90,9 +90,12 @@
                         <li>
                             <h4 style="margin-bottom: 0px !important;font-weight: 500 !important;">Table</h4>
                             <ul>
+                                <li>[修复] table 组件 height 属性的异常警告，兼容 string 类型。</li>
                                 <li>[修复] table 组件 筛选列 下拉面板横向布局的问题，修正为竖向布局。</li>
                                 <li>[优化] table 组件 body 滚动条样式，使其更贴合现今流行的审美。</li>
                                 <li>[优化] table 组件 筛选列 下拉面板最大高度，超出后滚动展示。</li>
+                                <li>[优化] table 组件 loading 图标不随 table 高度垂直居中的问题。</li>
+                                <li>[调整] table 组件 loading 图标尺寸与颜色。</li>
                             </ul>
                         </li>
                         <li>
