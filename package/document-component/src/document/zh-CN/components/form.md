@@ -32,15 +32,11 @@
 
 <script setup>
 import { ref, reactive } from 'vue'
-import {layer} from '@layui/layer-vue'
+import { layer } from '@layui/layer-vue'
 
-const model = reactive({
-  username: "",
-  password: "",
-  describe: "",
-})
+const model = reactive({})
 
-const submit = function(){
+const submit = () => {
   layer.msg(`${JSON.stringify(model)}`, { time: 2000 });
 };
 </script>
@@ -70,29 +66,15 @@ const submit = function(){
   </lay-form>
 </template>
 
-<script>
+<script setup>
 import { ref, reactive } from 'vue'
 import {layer} from '@layui/layer-vue'
 
-export default {
-  setup() {
+const model1 = reactive({})
 
-    const model1 = reactive({
-        username: "",
-        password: "",
-        describe: "",
-    })
-
-    const submit1 = function(){
-      layer.msg(`${JSON.stringify(model1)}`, { time: 2000 });
-    };
-
-    return {
-      model1,
-      submit1
-    }
-  }
-}
+const submit1 = function(){
+  layer.msg(`${JSON.stringify(model1)}`, { time: 2000 });
+};
 </script>
 
 :::
@@ -117,28 +99,18 @@ export default {
   </lay-form>
 </template>
 
-<script>
+<script setup>
 import { ref, reactive } from 'vue'
 import {layer} from '@layui/layer-vue'
 
-export default {
-  setup() {
+const model2 = reactive({
+  username: "admin",
+  password: "admin",
+})
 
-    const model2 = reactive({
-        username: "admin",
-        password: "admin",
-    })
-
-    const submit2 = function(){
-      layer.open(`${JSON.stringify(model)}`);
-    };
-
-    return {
-      model2,
-      submit2
-    }
-  }
-}
+const submit2 = function(){
+  layer.open(`${JSON.stringify(model)}`);
+};
 </script>
 
 :::
@@ -175,23 +147,13 @@ export default {
   </lay-form>
 </template>
 
-<script>
+<script setup>
 import { ref, reactive } from 'vue'
 import {layer} from '@layui/layer-vue'
 
-export default {
-  setup() {
+const model3 = reactive({})
+const labelPosition3 = ref('right');
 
-    const model3 = reactive({})
-    
-    const labelPosition3 = ref('right');
-
-    return {
-      model3,
-      labelPosition3
-    }
-  }
-}
 </script>
 
 :::
@@ -202,88 +164,66 @@ export default {
 ::: demo
 
 <template>
-  <lay-form :model="validateModel" ref="layFormRef" required>
+  <lay-form :model="model4" ref="layFormRef4" required>
     <lay-form-item label="账户" prop="username">
-      <lay-input v-model="validateModel.username"></lay-input>
+      <lay-input v-model="model4.username"></lay-input>
     </lay-form-item>
-    <lay-form-item label="密码" v-if="validateModel.hobbys == '1'" prop="password">
-      <lay-input v-model="validateModel.password" type="password">></lay-input>
+    <lay-form-item label="密码" prop="password">
+      <lay-input v-model="model4.password" type="password">></lay-input>
     </lay-form-item>
     <lay-form-item label="爱好" prop="hobby">
-      <lay-select v-model="validateModel.hobby" multiple>
+      <lay-select v-model="model4.hobby" multiple>
         <lay-select-option value="1" label="学习"></lay-select-option>
         <lay-select-option value="2" label="编码"></lay-select-option>
         <lay-select-option value="3" label="运动"></lay-select-option>
       </lay-select>
     </lay-form-item>
     <lay-form-item label="特长" prop="specialty">
-      <lay-radio v-model="validateModel.specialty" name="specialty" value="1">写作</lay-radio>
-      <lay-radio v-model="validateModel.specialty" name="specialty" value="2">画画</lay-radio>
-      <lay-radio v-model="validateModel.specialty" name="specialty" value="3">编码</lay-radio>
+      <lay-radio v-model="model4.specialty" name="specialty" value="1">写作</lay-radio>
+      <lay-radio v-model="model4.specialty" name="specialty" value="2">画画</lay-radio>
+      <lay-radio v-model="model4.specialty" name="specialty" value="3">编码</lay-radio>
     </lay-form-item>
     <lay-form-item label="描述" prop="desc">
-      <lay-textarea placeholder="请输入描述" v-model="validateModel.desc"></lay-textarea>
+      <lay-textarea placeholder="请输入描述" v-model="model4.desc"></lay-textarea>
     </lay-form-item>
     <lay-form-item style="text-align: center;">
-      <lay-button type="primary" @click="validate3">提交</lay-button>
-      <lay-button @click="clearValidate">清除校验</lay-button>
-      <lay-button @click="reset">重置表单</lay-button>
+      <lay-button type="primary" @click="submit4">提交</lay-button>
+      <lay-button @click="clearValidate4">清除校验</lay-button>
+      <lay-button @click="reset4">重置表单</lay-button>
     </lay-form-item>
   </lay-form>
 </template>
 
-<script>
+<script setup>
 import { ref, reactive } from 'vue'
-import {layer} from '@layui/layer-vue'
+import { layer } from '@layui/layer-vue'
 
-export default {
-  setup() {
+const model4 = reactive({})
 
-    const validateModel = reactive({
-        username: "",
-        password: "",
-        specialty: "1",
-        hobby: [],
-    })
+const layFormRef4 = ref();
 
-    const layFormRef = ref(null);
-
-    // 校验
-    const validate3= function() {
-      layFormRef.value.validate((isValidate, model, errors) => {
-          console.log(JSON.stringify(model.file))
-         layer.open({
-          type: 1,
-          title:"表单提交结果", 
-          content: `<div style="padding: 10px"><p>是否通过 : ${isValidate}</p> <p>表单数据 : ${JSON.stringify(model)} </p> <p>错误信息 : ${JSON.stringify(errors)}</p></div>`, 
-          shade: false,
-          isHtmlFragment: true,
-          btn : [{ text: '确认', callback(index) {  layer.close(index) }}],
-          area : '500px'
-        });
-      });
-    }
-
-    // 清除校验
-    const clearValidate = function() {
-      layFormRef.value.clearValidate();
-    }
-
-    // 重置表单
-    const reset = function() {
-      layFormRef.value.reset();
-      validateModel.specialty = "1"
-    }
-
-    return {
-      validateModel,
-      layFormRef,
-      validate3,
-      clearValidate,
-      reset
-    }
-  }
+const submit4= function() {
+  layFormRef4.value.validate((isValidate, model, errors) => {
+    layer.open({
+      type: 1,
+      title:"表单提交结果", 
+      content: `<div style="padding: 10px"><p>是否通过 : ${isValidate}</p> <p>表单数据 : ${JSON.stringify(model)} </p> <p>错误信息 : ${JSON.stringify(errors)}</p></div>`, 
+      shade: false,
+      isHtmlFragment: true,
+      btn : [{ text: '确认', callback(index) {  layer.close(index) }}],
+      area : '500px'
+    });
+  });
 }
+
+const clearValidate4 = () => {
+  layFormRef4.value.clearValidate();
+}
+
+const reset4 = () => {
+  layFormRef4.value.reset();
+}
+
 </script>
 
 :::
@@ -294,24 +234,24 @@ export default {
 ::: demo
 
 <template>
-  <lay-form :model="ruleDemo1" ref="layFormRef1" :rules="rules" required>
+  <lay-form :model="model5" ref="layFormRef5" :rules="rules" required>
     <lay-form-item label="邮箱" prop="email">
-      <lay-input v-model="ruleDemo1.email"></lay-input>
+      <lay-input v-model="model5.email"></lay-input>
     </lay-form-item>
     <lay-form-item label="路径" prop="url">
-      <lay-input v-model="ruleDemo1.url"></lay-input>
+      <lay-input v-model="model5.url"></lay-input>
     </lay-form-item>
     <lay-form-item label="日期" prop="date">
-      <lay-input v-model="ruleDemo1.date"></lay-input>
+      <lay-input v-model="model5.date"></lay-input>
     </lay-form-item>
     <lay-form-item label="账户" prop="username">
-      <lay-input v-model="ruleDemo1.username"></lay-input>
+      <lay-input v-model="model5.username"></lay-input>
     </lay-form-item>
     <lay-form-item label="年龄" prop="age">
-      <lay-input v-model="ruleDemo1.age"></lay-input>
+      <lay-input v-model="model5.age"></lay-input>
     </lay-form-item>
     <lay-form-item style="text-align: center">
-      <lay-button @click="validate1" type="primary">提交</lay-button>
+      <lay-button @click="submit5" type="primary">提交</lay-button>
     </lay-form-item>
   </lay-form>
 </template>
@@ -320,66 +260,54 @@ export default {
 import { ref, reactive } from 'vue'
 import {layer} from '@layui/layer-vue'
 
-export default {
-  setup() {
+const layFormRef5 = ref();
 
-    const ruleDemo1 = reactive({
-        email: "",
-        url: "",
-        date: "",
-        username: "",
-        age: null,
-    })
+const model5 = reactive({
+  email: "",
+  url: "",
+  date: "",
+  username: "",
+  age: null,
+})
 
-    const rules = ref({
-      email : {
-        type : 'email',
-      },
-      url : {
-        type : 'url'
-      },
-      date : {
-        type : 'date'
-      },
-      username : {
-        type :  'string',
-        min : 8,
-        max : 16
-      },
-      age : {
-        validator(rule, value, callback, source, options){
-          if (value < 18) {
-            callback(new Error(`${rule.field}太过于年轻`));
-          } else {
-            return true;
-          }
-        }
+const rules5 = ref({
+  email : {
+    type : 'email',
+  },
+  url : {
+    type : 'url'
+  },
+  date : {
+    type : 'date'
+  },
+  username : {
+    type :  'string',
+    min : 8,
+    max : 16
+  },
+  age : {
+    validator(rule, value, callback, source, options){
+      if (value < 18) {
+        callback(new Error(`${rule.field}太过于年轻`));
+      } else {
+        return true;
       }
-    })
-
-    const layFormRef1 = ref(null);
-    // 校验
-    const validate1 = function() {
-      layFormRef1.value.validate((isValidate, model, errors) => {
-         layer.open({
-          type: 1,
-          title:"表单提交结果", 
-          content: `<div style="padding: 10px"><p>是否通过 : ${isValidate}</p> <p>表单数据 : ${JSON.stringify(model)} </p> <p>错误信息 : ${JSON.stringify(errors)}</p></div>`, 
-          shade: false,
-          isHtmlFragment: true,
-          btn : [{ text: '确认', callback(index) {  layer.close(index) }}],
-          area : '500px'
-        });
-      });
-    }
-
-    return {
-      ruleDemo1,
-      layFormRef1,
-      validate1,
-      rules
     }
   }
+})
+
+const submit5 = function() {
+  layFormRef5.value.validate((isValidate, model, errors) => {
+      layer.open({
+      type: 1,
+      title:"表单提交结果", 
+      content: `<div style="padding: 10px"><p>是否通过 : ${isValidate}</p> <p>表单数据 : ${JSON.stringify(model)} </p> <p>错误信息 : ${JSON.stringify(errors)}</p></div>`, 
+      shade: false,
+      isHtmlFragment: true,
+      btn : [{ text: '确认', callback(index) {  layer.close(index) }}],
+      area : '500px'
+    });
+  });
 }
 </script>
 
@@ -391,7 +319,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-form @submit="submit" :model="submitModel10" requiredIcons="layui-icon-heart-fill" :use-CN="false" required>
+  <lay-form @submit="submit10" :model="submitModel10" requiredIcons="layui-icon-heart-fill" :use-CN="false" required>
     <lay-form-item label="账户" prop="username">
       <lay-input v-model="submitModel10.username"></lay-input>
     </lay-form-item>
@@ -405,26 +333,100 @@ export default {
 </template>
 
 <script>
+import { ref, reactive } from 'vue';
+import { layer } from '@layui/layer-vue';
+
+const submitModel10 = reactive({
+  username: "",
+  password: ""
+})
+
+const submit10 = function(isValidate, model, errors) {
+  layer.msg(`${JSON.stringify(errors)}`)
+}
+</script>
+
+:::
+
+::: title 配合弹层
+:::
+
+::: demo
+
+<template>
+  <lay-button @click="changeVisible11">弹出</lay-button>
+  <lay-layer v-model="visible11">
+    <div style="padding: 20px;">
+    <lay-form :model="model11" ref="layFormRef11" required>
+    <lay-form-item label="账户" prop="username">
+      <lay-input v-model="model11.username"></lay-input>
+    </lay-form-item>
+    <lay-form-item label="密码" prop="password">
+      <lay-input v-model="model11.password" type="password">></lay-input>
+    </lay-form-item>
+    <lay-form-item label="爱好" prop="hobby">
+      <lay-select v-model="model11.hobby" multiple>
+        <lay-select-option value="1" label="学习"></lay-select-option>
+        <lay-select-option value="2" label="编码"></lay-select-option>
+        <lay-select-option value="3" label="运动"></lay-select-option>
+      </lay-select>
+    </lay-form-item>
+    <lay-form-item label="特长" prop="specialty">
+      <lay-radio v-model="model11.specialty" name="specialty" value="1">写作</lay-radio>
+      <lay-radio v-model="model11.specialty" name="specialty" value="2">画画</lay-radio>
+      <lay-radio v-model="model11.specialty" name="specialty" value="3">编码</lay-radio>
+    </lay-form-item>
+    <lay-form-item label="描述" prop="desc">
+      <lay-textarea placeholder="请输入描述" v-model="model11.desc"></lay-textarea>
+    </lay-form-item>
+    <lay-form-item style="text-align: center;">
+      <lay-button type="primary" @click="submit11">提交</lay-button>
+      <lay-button @click="clearValidate11">清除校验</lay-button>
+      <lay-button @click="reset11">重置表单</lay-button>
+    </lay-form-item>
+  </lay-form>
+    </div>
+  </lay-layer>
+</template>
+
+<script>
 import { ref, reactive } from 'vue'
-import {layer} from '@layui/layer-vue'
+import { layer } from '@layui/layer-vue'
 
-export default {
-  setup() {
+const model11 = reactive({
+  username: "admin"
+})
 
-    const submitModel10 = reactive({
-        username: "",
-        password: ""
-    })
+const layFormRef11 = ref();
 
-    const submit10 = function(isValidate, model, errors) {
-      layer.msg(`${JSON.stringify(errors)}`)
-    }
+const visible11 = ref(false);
 
-    return {
-      submitModel10,
-      submit10
-    }
-  }
+const changeVisible11 = () => {
+  visible11.value = !visible11.value;
+}
+
+const submit11 = function() {
+  layFormRef11.value.validate((isValidate, model, errors) => {
+      layer.open({
+      type: 1,
+      title:"表单提交结果", 
+      content: `<div style="padding: 10px"><p>是否通过 : ${isValidate}</p> <p>表单数据 : ${JSON.stringify(model)} </p> <p>错误信息 : ${JSON.stringify(errors)}</p></div>`, 
+      shade: false,
+      isHtmlFragment: true,
+      btn : [{ text: '确认', callback(index) {  layer.close(index) }}],
+      area : '500px'
+    });
+  });
+}
+
+// 清除校验
+const clearValidate11 = function() {
+  layFormRef11.value.clearValidate();
+}
+
+// 重置表单
+const reset11 = function() {
+  layFormRef11.value.reset();
 }
 </script>
 
