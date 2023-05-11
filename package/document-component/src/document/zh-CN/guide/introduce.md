@@ -4,7 +4,7 @@
 <br>
   <p>
     <a href="http://www.layui-vue.com">
-      <img src="https://foruda.gitee.com/avatar/1682309395599691124/8605626_layui_1682309395.png" alt="layui" width="100" style="border-radius:4px;">
+      <img src="../../../assets/layui.png" alt="layui" width="100" style="border-radius:4px;">
     </a>
     <span style="font-size:32px;color:#e2e2e2;margin:30px;">+</span>
     <a href="http://www.layui-vue.com" style="display:inline-block;">

@@ -22,7 +22,7 @@ import { ref } from 'vue'
 export default {
   setup() {
 
-   const endTime = ref("");
+   const endTime = ref(null);
 
     return {
       endTime
