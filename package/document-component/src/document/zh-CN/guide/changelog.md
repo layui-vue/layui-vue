@@ -25,8 +25,6 @@
                         <li>[修复] icon-picker 组件，选项边角不跟随主题变量的问题。</li>
                         <li>[修复] tooltip 组件，面板边角不跟随主题变量的问题。</li>
                         <li>[修复] collapse 组件，面版边角不跟随主题变量的问题。</li>
-                        <li>[修复] date-picker 组件，面板边角不跟随主题变量的问题。</li>
-                        <li>[修复] date-picker 组件，model-value 不能为 null 的问题。</li>
                         <li>[修复] slider 组件，横向模式与竖向模式下，进度条背景颜色不一致的问题。</li>
                         <li>[主题] global-primary-color 变量默认值由 #009688 调整为 #16baaa。</li>
                         <li>[主题] global-checked-color 变量默认值由 #5FB878 调整为 #16b777。</li>
@@ -107,6 +105,14 @@
                                 <li>[修复] select 组件 多选模式，value 在 option 中不存在时，回显 undefined 的问题。 </li>
                                 <li>[修复] select 组件 多选模式，value 在 option 中不存在时，tag 无法删除的问题。 </li>
                                 <li>[优化] select 组件 dropdown 下拉面板 scroll 样式。</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <h4 style="margin-bottom: 0px !important;font-weight: 500 !important;">Date Picker</h4>
+                            <ul>
+                                <li>[修复] date-picker 组件，面板边角不跟随主题变量的问题。</li>
+                                <li>[修复] date-picker 组件，model-value 不能为 null 的问题。</li>
+                                <li>[优化] date-picker 组件 content 滚动条 Css 样式。</li>
                             </ul>
                         </li>
                     </ul>  
