@@ -115,6 +115,18 @@
                                 <li>[优化] date-picker 组件 content 滚动条 Css 样式。</li>
                             </ul>
                         </li>
+                        <li>
+                            <h4 style="margin-bottom: 0px !important;font-weight: 500 !important;">Popconfirm</h4>
+                            <ul>
+                                <li>[新增] popconfirm 组件 disabled 属性，用于设置禁用状态。</li>
+                                <li>[新增] popconfirm 组件 confirmText 属性，用于设置确认操作文本内容。</li>
+                                <li>[新增] popconfirm 组件 cancelText 属性，用于设置取消操作文本内容。</li>
+                                <li>[新增] popconfirm 组件 content 属性 / 插槽，用于定义提示内容。</li>
+                                <li>[新增] popconfirm 组件 btn-Align 属性，用于设置操作按钮对齐方式。</li>
+                                <li>[新增] popconfirm 组件 confirm 事件，用于实现确认回调逻辑。</li>
+                                <li>[新增] popconfirm 组件 cancel 事件，用于实现取消回调逻辑。</li>
+                            </ul>
+                        </li>
                     </ul>  
                 </li>
             </ul>

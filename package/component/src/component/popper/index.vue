@@ -4,7 +4,7 @@
       <div
         ref="popperRefEl"
         :class="[
-          'layui-popper layui-anim layui-anim-scale',
+          'layui-popper',
           { 'layui-dark': isDark },
           props.popperClass,
         ]"
@@ -13,7 +13,7 @@
         @mouseenter="handlerPopperMouseEnter"
         @mouseleave="handlerPopperMouseLeave"
       >
-        <slot> {{ content }}</slot>
+        <slot> {{ content }} </slot>
         <div class="layui-popper-arrow"></div>
       </div>
     </transition>
@@ -39,8 +39,7 @@ import {
   shallowRef,
   computed,
   toRef,
-  StyleValue,
-  Ref,
+  StyleValue
 } from "vue";
 import {
   onClickOutside,

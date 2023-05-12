@@ -133,7 +133,7 @@ export default {
   <lay-tooltip :content="content" :is-dark="isDark" :disabled="!disabled">
     <lay-button>tooltip</lay-button>
   </lay-tooltip>
-  <lay-switch v-model="disabled" onswitch-text="启用tooltip"  unswitch-text="禁用tooltip" style="margin-left: 5px;"></lay-switch>
+  <lay-switch v-model="disabled" onswitch-text="启用"  unswitch-text="禁用" style="margin-left: 5px;"></lay-switch>
   <lay-switch v-model="isDark" onswitch-text="深色"  unswitch-text="浅色" style="margin-left: 5px;"></lay-switch>
 </template>
 
@@ -171,6 +171,21 @@ export default {
 </script>
 <style>
 </style>
+:::
+
+::: title 确认提示
+:::
+
+::: demo
+
+<template>
+  <lay-popconfirm content="不知江月待何人,但见长江送流水。" :is-dark="false">
+    <lay-button >你想说?</lay-button>
+  </lay-popconfirm>
+</template>
+
+<script>
+</script>
 :::
 
 ::: title Tooltip 属性
