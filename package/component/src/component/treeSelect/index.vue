@@ -91,12 +91,12 @@ watch(
             node.value = node.id;
             node.closable = !node.disabled;
           }
-          if(node == undefined) {
+          if (node == undefined) {
             node = {
               label: value,
               value: value,
-              closable: true
-            }
+              closable: true,
+            };
           }
           return node;
         });

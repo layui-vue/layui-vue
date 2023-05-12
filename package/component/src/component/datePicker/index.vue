@@ -386,7 +386,11 @@ watch(
     hms.value.ss = isNaN(dayjs(initModelValue).second())
       ? 0
       : dayjs(initModelValue).second();
-    if (initModelValue != null && initModelValue.length === 8 && props.type === "time") {
+    if (
+      initModelValue != null &&
+      initModelValue.length === 8 &&
+      props.type === "time"
+    ) {
       let modelValue = initModelValue;
       modelValue = "1970-01-01 " + modelValue;
       hms.value.hh = dayjs(modelValue).hour();
@@ -405,7 +409,11 @@ watch(
           : -1;
       }
     }
-    if (initModelValue != null && initModelValue.length === 8 && props.type === "time") {
+    if (
+      initModelValue != null &&
+      initModelValue.length === 8 &&
+      props.type === "time"
+    ) {
       // 时间范围选择，对 HH-mm-ss 格式补全
       rangeValue.first = "1970-01-01 " + initModelValue;
       rangeValue.last =

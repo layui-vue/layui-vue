@@ -1081,7 +1081,7 @@ onBeforeUnmount(() => {
         <!-- 表身 -->
         <div
           class="layui-table-body layui-table-main"
-          :class="{ 'layui-table-body-loading' : props.loading }"
+          :class="{ 'layui-table-body-loading': props.loading }"
           :style="{ height: height, maxHeight: maxHeight }"
           ref="tableBody"
         >

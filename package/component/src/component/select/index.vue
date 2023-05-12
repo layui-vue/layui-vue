@@ -147,8 +147,8 @@ onMounted(() => {
               return item.value === value;
             });
 
-            if(option == undefined) {
-              option = { label: value, value: value, closable: true }
+            if (option == undefined) {
+              option = { label: value, value: value, closable: true };
             }
 
             return option;
