@@ -439,7 +439,7 @@ const menus = [
         path: "/zh-CN/components/barcode",
       },
     ],
-  }
+  },
 ];
 
 export default menus;

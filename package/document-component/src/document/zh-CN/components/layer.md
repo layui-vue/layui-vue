@@ -90,24 +90,22 @@ const openPhotos = function() {
 npm install @layui/layer-vue
 ```
 
-::: describe 若在 `layui-vue` 的集成环境使用，可忽略安装步骤。
+::: describe 若在 `layui-vue` 的集成环境使用，可忽略 `app.use()` 步骤。
 :::
 
-```js
+```
 import { createApp } from 'vue';
-import App from './App';
 import layer from '@layui/layer-vue';
 import '@layui/layer-vue/lib/index.css';
+import App from './App.vue';
 
-const app = createApp(App);
-app.use(layer);
-app.mount('#app');
+createApp(App).use(layer).mount('#app');
 ```
 
 ::: title 普通消息
 :::
 
-::: demo
+::: demo 通过 layer.msg(content, options) 创建消息窗, content 为消息内容, options 为可选配置。
 
 <template>
     <lay-button type="primary" @click="openMsg1">成功消息</lay-button>
@@ -485,4 +483,85 @@ const openRightDrawer = function() {
     })
 }
 </script>
+:::
+
+::: title 高级通讯
+:::
+
+::: demo
+
+<template>
+  <lay-input type="text" v-model="data.remark" >
+    <template #append>
+        <lay-icon type="layui-icon-set-fill" @click="openComponent1"></lay-icon>
+    </template>
+  </lay-input>
+</template>
+
+<script setup>
+import { reactive, h, resolveComponent } from 'vue'
+import { layer } from  "@layui/layui-vue"
+
+const data = reactive({
+    remark: "信息"
+})
+const ChildrenOne = resolveComponent('Children1')
+const openComponent1 = () => {
+  layer.open({
+    title: '标题',
+    content: h(ChildrenOne, { data }),
+    shade: false,
+  })
+}
+</script>
+
+:::
+
+::: demo
+
+<template>
+  <lay-input type="text" v-model="numb" >
+    <template #append>
+        <lay-icon type="layui-icon-set-fill" @click="openComponent2"></lay-icon>
+    </template>
+  </lay-input>
+</template>
+
+<script setup>
+import { reactive, h, resolveComponent, ref } from 'vue'
+import { layer } from  "@layui/layui-vue"
+
+const prop = reactive({})
+const numb = ref(1000)  
+const ChildrenTwo = resolveComponent('Children2')
+
+const openComponent2 = () => {
+  layer.open({
+    title: '标题',
+    content: h(ChildrenTwo, { 
+      prop, 
+      onAdd(res){
+        numb.value = numb.value + 1;
+      }, onSub(res) {
+        numb.value = numb.value - 1;
+      }
+      }),
+  })
+}
+</script>
+
+:::
+
+::: title 属性说明
+:::
+
+::: table
+
+| 属性 | 描述 | 类型 | 默认值 | 可选值 |
+| -- | -- | -- | -- | -- |
+| type | 内容类型 | `string` | `1` |  |
+
+:::
+
+::: title 内置方法
 :::
