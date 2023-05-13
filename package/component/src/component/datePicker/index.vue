@@ -209,11 +209,7 @@ const hms = ref({
   ss: 0,
 });
 
-let unWatch = false;
-// 计算结果日期
-const dateValue = props.range ? ref(["", ""]) : ref("");
-const getDateValue = () => {
-  unWatch = true;
+const calDateValue=()=>{
   let dayjsVal;
   switch (props.type) {
     case "date":
@@ -272,35 +268,10 @@ const getDateValue = () => {
       break;
   }
   dateValue.value = dayjsVal !== "Invalid Date" ? dayjsVal : "";
-  if (dayjsVal === "Invalid Date") {
-    unWatch = false;
-    $emits("update:modelValue", "");
-    return;
-  }
-  if (props.timestamp) {
-    $emits("update:modelValue", dayjs(dayjsVal).unix() * 1000);
-    $emits("change", dayjs(dayjsVal).unix() * 1000);
-  } else {
-    $emits("update:modelValue", dayjsVal);
-    $emits("change", dayjsVal);
-  }
-  setTimeout(() => {
-    unWatch = false;
-  }, 0);
-};
+  return dayjsVal;
+}
 
-/**
- * 处理 range 启用时的值内容
- */
-const getDateValueByRange = () => {
-  unWatch = true;
-  // 如果内容是空的，直接返回
-  if (rangeValue.first === "" || rangeValue.last === "") {
-    dateValue.value = ["", ""];
-    $emits("update:modelValue", dateValue.value);
-    $emits("change", dateValue.value);
-    return;
-  }
+const calDateValueByRange=()=>{
   // 根据类型不同，格式化日期
   let format = "YYYY-MM-DD";
   switch (props.type) {
@@ -324,14 +295,42 @@ const getDateValueByRange = () => {
       break;
   }
   dateValue.value = [
-    dayjs(rangeValue.first).format(format),
-    dayjs(rangeValue.last).format(format),
+  rangeValue.first?dayjs(rangeValue.first).format(format):"",
+  rangeValue.last?dayjs(rangeValue.last).format(format):rangeValue.last,
   ];
+}
+
+// 计算结果日期
+const dateValue = props.range ? ref(["", ""]) : ref("");
+const getDateValue = () => {
+  let dayjsVal=calDateValue()
+  if (dayjsVal === "Invalid Date") {
+    $emits("update:modelValue", "");
+    return;
+  }
+  if (props.timestamp) {
+    $emits("update:modelValue", dayjs(dayjsVal).unix() * 1000);
+    $emits("change", dayjs(dayjsVal).unix() * 1000);
+  } else {
+    $emits("update:modelValue", dayjsVal);
+    $emits("change", dayjsVal);
+  }
+};
+
+/**
+ * 处理 range 启用时的值内容
+ */
+const getDateValueByRange = () => {
+  // 如果内容是空的，直接返回
+  if (rangeValue.first === "" || rangeValue.last === "") {
+    dateValue.value = ["", ""];
+    $emits("update:modelValue", dateValue.value);
+    $emits("change", dateValue.value);
+    return;
+  }
+  calDateValueByRange()
   $emits("update:modelValue", dateValue.value);
   $emits("change", dateValue.value);
-  setTimeout(() => {
-    unWatch = false;
-  }, 0);
 };
 
 // 确认事件
@@ -367,9 +366,6 @@ watch(
 watch(
   () => props.modelValue,
   () => {
-    if (unWatch) {
-      return;
-    }
     let initModelValue: string =
       props.range && props.modelValue
         ? (props.modelValue as string[])[0] || ""
@@ -428,9 +424,9 @@ watch(
           : "";
     }
     if (!props.range) {
-      getDateValue();
+      calDateValue()
     } else {
-      getDateValueByRange();
+      calDateValueByRange()
     }
   },
   { immediate: true }
