@@ -65,7 +65,7 @@ import { ref } from 'vue';
             <lay-radio-button value="2">画画</lay-radio-button>
             <lay-radio-button value="3">运动</lay-radio-button>
         </lay-radio-group>
-        <lay-select v-model="value">
+        <lay-select v-model="value" placeholder="Please select">
             <template  v-for="option in options">
                 <lay-select-option-group :label="option.label">
                     <template v-for="children in option.children">
@@ -180,6 +180,28 @@ export default {
 :::
 
 ::: describe `form` `select` `tree-select` `table` `layer` 等已有组件，迎来大幅度改善，包括 `问题修复`，`属性新增` `样式优化`。
+:::
+
+::: demo
+
+<template>
+<lay-timeline>
+    <lay-timeline-item title="🍃">
+        <ul>
+            <li>[新增] field 组件 title 插槽, 标题自定义插槽。</li>
+            <li>[新增] form 组件 label-position 属性，设置包括的 form-item 组件 label 位置。</li>
+            <li>[新增] tree-select 组件 search 属性，启用下拉树节点搜索功能。</li>
+            <li>[新增] tree-select 组件 contentStyle 属性，用于设置面板的 style 样式。</li>
+            <li>[新增] tree-select 组件 contentClass 属性，用于设置面板的 class 属性。</li>
+            <li>[新增] select-option-group 组件，为 select-option 提供分组。</li>
+            <li>[新增] select-option-group 组件 label 属性，用于设置 option 分组名称。</li>
+        </ul>
+    </lay-timeline-item>
+</lay-timeline>
+</template>
+
+<script setup></script>
+
 :::
 
 ::: describe 如需了解更多，可前往 <a style="color:#009688;" href="http://www.layui-vue.com/zh-CN/guide/changelog">更新日志</a> 查看详情。
