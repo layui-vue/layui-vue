@@ -17,12 +17,12 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 
 export default {
   setup() {
 
-   const endTime = ref(null);
+    const endTime = ref(null);
 
     return {
       endTime

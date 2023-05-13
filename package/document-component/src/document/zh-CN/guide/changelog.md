@@ -111,7 +111,8 @@
                             <h4 style="margin-bottom: 0px !important;font-weight: 500 !important;">Date Picker</h4>
                             <ul>
                                 <li>[修复] date-picker 组件，面板边角不跟随主题变量的问题。</li>
-                                <li>[修复] date-picker 组件，model-value 不能为 null 的问题。</li>
+                                <li>[修复] date-picker 组件 model-value 属性不能为 null 的问题。</li>
+                                <li>[修复] date-picker 组件 model-value 属性不能在 onMounted 中赋值的问题。</li> 
                                 <li>[优化] date-picker 组件 content 滚动条 Css 样式。</li>
                             </ul>
                         </li>
