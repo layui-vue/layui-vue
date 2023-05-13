@@ -209,7 +209,7 @@ const hms = ref({
   ss: 0,
 });
 
-const calDateValue=()=>{
+const calDateValue = () => {
   let dayjsVal;
   switch (props.type) {
     case "date":
@@ -269,9 +269,9 @@ const calDateValue=()=>{
   }
   dateValue.value = dayjsVal !== "Invalid Date" ? dayjsVal : "";
   return dayjsVal;
-}
+};
 
-const calDateValueByRange=()=>{
+const calDateValueByRange = () => {
   // 根据类型不同，格式化日期
   let format = "YYYY-MM-DD";
   switch (props.type) {
@@ -295,15 +295,15 @@ const calDateValueByRange=()=>{
       break;
   }
   dateValue.value = [
-  rangeValue.first?dayjs(rangeValue.first).format(format):"",
-  rangeValue.last?dayjs(rangeValue.last).format(format):rangeValue.last,
+    rangeValue.first ? dayjs(rangeValue.first).format(format) : "",
+    rangeValue.last ? dayjs(rangeValue.last).format(format) : rangeValue.last,
   ];
-}
+};
 
 // 计算结果日期
 const dateValue = props.range ? ref(["", ""]) : ref("");
 const getDateValue = () => {
-  let dayjsVal=calDateValue()
+  let dayjsVal = calDateValue();
   if (dayjsVal === "Invalid Date") {
     $emits("update:modelValue", "");
     return;
@@ -328,7 +328,7 @@ const getDateValueByRange = () => {
     $emits("change", dateValue.value);
     return;
   }
-  calDateValueByRange()
+  calDateValueByRange();
   $emits("update:modelValue", dateValue.value);
   $emits("change", dateValue.value);
 };
@@ -424,9 +424,9 @@ watch(
           : "";
     }
     if (!props.range) {
-      calDateValue()
+      calDateValue();
     } else {
-      calDateValueByRange()
+      calDateValueByRange();
     }
   },
   { immediate: true }
