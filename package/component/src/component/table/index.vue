@@ -469,6 +469,14 @@ function base64(s: string) {
 
 // 列排序
 const sortTable = (e: any, key: string, sort: string) => {
+  // 清空排序
+  const sortElements = tableRef.value.querySelectorAll("[lay-sort]");
+  if(sortElements && sortElements.length > 0) {
+    sortElements.forEach((element: HTMLElement) => {
+      element.setAttribute("lay-sort", "");
+    })
+  }
+  // 排序逻辑
   let currentSort = e.target.parentNode.getAttribute("lay-sort");
   if (sort === "desc") {
     if (currentSort === sort) {

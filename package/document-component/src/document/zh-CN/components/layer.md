@@ -147,7 +147,7 @@ const openMsg8 = function() {
 
 :::
 
-::: title 确认框
+::: title 确认弹层
 :::
 
 ::: demo
@@ -262,7 +262,7 @@ const NotifiyInfo=function(){
 
 :::
 
-::: title 相册层
+::: title 相册弹层
 :::
 
 ::: demo
@@ -291,7 +291,7 @@ const groupImg = function() {
 </script>
 ::: 
 
-::: title 加载层
+::: title 加载弹层
 :::
 
 ::: demo
@@ -320,7 +320,7 @@ const loading2 = function() {
 </script>
 :::
 
-::: title 模态窗
+::: title 模态弹层
 :::
 
 ::: demo
@@ -440,7 +440,7 @@ const openAuto = function() {
 
 :::
 
-::: title 抽屉层
+::: title 抽屉弹层
 :::
 
 ::: demo

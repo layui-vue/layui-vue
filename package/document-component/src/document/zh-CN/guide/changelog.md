@@ -89,6 +89,7 @@
                         <li>
                             <h4 style="margin-bottom: 0px !important;font-weight: 500 !important;">Table</h4>
                             <ul>
+                                <li>[修复] table 组件 sort 字典点击排序时，其他已排序字段状态不重置的问题。</li>
                                 <li>[修复] table 组件 height 属性的异常警告，兼容 string 类型。</li>
                                 <li>[修复] table 组件 筛选列 下拉面板横向布局的问题，修正为竖向布局。</li>
                                 <li>[优化] table 组件 body 滚动条样式，使其更贴合现今流行的审美。</li>

@@ -54,7 +54,7 @@ export default {
     const columns = ref([
       { title:"选项", type: "checkbox", width: "55px", fixed: "left" },
       { title:"编号", key:"id", fixed: "left", sort: "desc" },
-      { title:"姓名", width: "80px", key:"name" },
+      { title:"姓名", width: "80px", key:"name", sort: "desc" },
       { title:"状态", width: "80px", key:"status", customSlot: "status"},
       { title:"邮箱", width: "120px", key:"email" },
       { title:"性别", width: "80px", key:"sex" },
