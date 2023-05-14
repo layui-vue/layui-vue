@@ -10,174 +10,150 @@
 ::: title 基础使用
 :::
 
-::: demo 使用 `lay-popconfirm` 标签，创建文字提示。
+::: demo 使用 `lay-popconfirm` 标签，创建确认提示，使用 `content` 属性设置文本信息，使用 `@confirm` 与 `@cancel` 接收回调事件。
 
 <template>
-  <lay-popconfirm content="请确认你的操作，流程将结束" trigger="click">
+  <lay-popconfirm content="请确认你的操作，流程将结束" @confirm="confirm" @cancel="cancel">
     <lay-button>删除</lay-button>
   </lay-popconfirm>
 </template>
-:::
 
-::: title 受控模式
-:::
+<script setup>
+import { layer } from "@layui/layui-vue";
 
-::: demo
-
-<template>
-    <lay-tooltip :visible="visible" trigger="click" content="假装这里有文字提示" >
-      <lay-button @mouseenter="visible=true" @mouseleave="visible=false">tooltip</lay-button>
-    </lay-tooltip>
-</template>
-
-<script>
-import { ref,watch } from 'vue';
-export default {
-  setup() {
-    const visible = ref(false)
-  return {
-    visible,
-  }
+const confirm = () => {
+  layer.msg("确认回调");
 }
+
+const cancel = () => {
+  layer.msg("取消回调");
 }
 </script>
-<style>
-</style>
-
 :::
 
 ::: title 显示位置
 :::
 
-::: demo
-
+::: demo 通过 `position` 属性设置 `popconfirm` 面板显示位置，默认为 `top` 值，`left` `bottom` `right` 为可选值。
 <template>
-  <div style="padding: 100px;max-width:400px;">
-    <div style="text-align: center;">
-      <lay-tooltip  trigger="click" content="假装这里有文字提示">
-        <lay-button>上边</lay-button>
-      </lay-tooltip>
-    </div>
-    <div>
-      <lay-tooltip  trigger="click" content="假装这里有文字提示假装这里有文字提示假装这里有文字提示假装这里有文字提示假装这里有文字提示" position="left">
-        <lay-button style="float:left;">左边</lay-button>
-      </lay-tooltip>
-      <lay-tooltip  trigger="click" content="假装这里有文字提示假装这里有文字提示假装这里有文字提示假装这里有文字提示假装这里有文字提示" position="right">
-        <lay-button style="float:right;">右边</lay-button>
-      </lay-tooltip>
-      <div style="clear: both;"></div>
-    </div>
-    <div style="text-align: center;">
-      <lay-tooltip  trigger="click" content="假装这里有文字提示假装这里有文字提示假装这里有文字提示假装这里有文字提示" position="bottom">
-        <lay-button>下边</lay-button>
-      </lay-tooltip>
-    </div>
-  </div>
+  <lay-space>
+    <lay-popconfirm content="请确认你的操作，流程将结束" position="top" @confirm="confirm" @cancel="cancel">
+      <lay-button>上</lay-button>
+    </lay-popconfirm>
+    <lay-popconfirm content="请确认你的操作，流程将结束" position="left" @confirm="confirm" @cancel="cancel">
+      <lay-button>左</lay-button>
+    </lay-popconfirm>
+    <lay-popconfirm content="请确认你的操作，流程将结束" position="bottom" @confirm="confirm" @cancel="cancel">
+      <lay-button>下</lay-button>
+    </lay-popconfirm>
+    <lay-popconfirm content="请确认你的操作，流程将结束" position="right" @confirm="confirm" @cancel="cancel">
+      <lay-button>右</lay-button>
+    </lay-popconfirm>
+  </lay-space>
 </template>
 
-<style>
-</style>
-:::
+<script setup>
+import { layer } from "@layui/layui-vue";
 
-::: title 浅色主题
-:::
+const confirm = () => {
+  layer.msg("确认回调");
+}
 
-::: demo
-
-<template>
-  <lay-tooltip content="不明白是是非非，只知我不会不在。" :is-dark="false">
-    <lay-button >tooltip</lay-button>
-  </lay-tooltip>
-</template>
-
-<script>
+const cancel = () => {
+  layer.msg("取消回调");
+}
 </script>
 :::
 
-::: title 是否禁用/动态属性
+::: title 触发方式
 :::
 
-::: demo
-
+::: demo 通过 `trigger` 属性设置 popconfirm 触发方式，默认为 `hover` 方式，`click` `contextMenu` `focus` 为可选值。
 <template>
-  <lay-tooltip :content="content" :is-dark="isDark" :disabled="!disabled">
-    <lay-button>tooltip</lay-button>
-  </lay-tooltip>
-  <lay-switch v-model="disabled" onswitch-text="启用"  unswitch-text="禁用" style="margin-left: 5px;"></lay-switch>
-  <lay-switch v-model="isDark" onswitch-text="深色"  unswitch-text="浅色" style="margin-left: 5px;"></lay-switch>
+  <lay-space>
+    <lay-popconfirm content="请确认你的操作，流程将结束" trigger="click" @confirm="confirm" @cancel="cancel">
+      <lay-button>点击</lay-button>
+    </lay-popconfirm>
+    <lay-popconfirm content="请确认你的操作，流程将结束" trigger="contextMenu" @confirm="confirm" @cancel="cancel">
+      <lay-button>右击</lay-button>
+    </lay-popconfirm>
+    <lay-popconfirm content="请确认你的操作，流程将结束" trigger="hover" @confirm="confirm" @cancel="cancel">
+      <lay-button>移入移出</lay-button>
+    </lay-popconfirm>
+    <lay-popconfirm content="请确认你的操作，流程将结束" trigger="focus" @confirm="confirm" @cancel="cancel">
+      <lay-input placeholder="获取焦点"></lay-input>
+    </lay-popconfirm>
+  </lay-space>
 </template>
 
-<script>
-  import { ref } from 'vue';
+<script setup>
+import { layer } from "@layui/layui-vue";
 
-  export default {
-    setup() {
+const confirm = () => {
+  layer.msg("确认回调");
+}
 
-      const contentArr = [
-        "不明白是是非非，只知我不会不在。",
-        "千山万水，去程是你，归程也是你。",
-        "一约既定，万山无阻。",
-        "时光都淡了，我还伴着你。",
-        "只问深情，不问西东。",
-        "感谢曾经在我身边的，一直在我身边。",
-        "经年再相逢，魂梦与子同。"
-      ];
-      
-      const rendonCotent = function(){
-        return contentArr[Math.floor(Math.random() * contentArr.length)];
-      };
-      
-      const isDark = ref(false)
-      
-      const content = ref(rendonCotent())
-
-      const disabled = ref(true)
-
-      setInterval(()=> content.value =  rendonCotent(), 1000)
-
-      return {
-        content,
-        isDark,
-        disabled
-      }
-    }
-  }
-</script>
-<style>
-</style>
-:::
-
-::: title 确认提示
-:::
-
-::: demo
-
-<template>
-  <lay-popconfirm content="不知江月待何人,但见长江送流水。" :is-dark="false">
-    <lay-button >你想说?</lay-button>
-  </lay-popconfirm>
-</template>
-
-<script>
+const cancel = () => {
+  layer.msg("取消回调");
+}
 </script>
 :::
 
-::: title Tooltip 属性
+::: title 禁用提示
+:::
+
+::: demo 通过 `disabled` 属性禁用 `popconfirm` 提示。
+<template>
+  <lay-space>
+    <lay-popconfirm content="请确认你的操作，流程将结束" :disabled="disabled" @confirm="confirm" @cancel="cancel">
+      <lay-button>点击</lay-button>
+    </lay-popconfirm>
+    <lay-switch v-model="disabled"></lay-switch>
+  </lay-space>
+</template>
+
+<script setup>
+import { layer } from "@layui/layui-vue";
+import { ref } from "vue";
+
+const disabled = ref(false);
+
+const confirm = () => {
+  layer.msg("确认回调");
+}
+
+const cancel = () => {
+  layer.msg("取消回调");
+}
+</script>
+:::
+
+::: title Popconfirm 属性
 :::
 
 ::: table
 
-| 属性        | 描述     | 可选值         |
+| 名称        | 描述     | 可选值         |
 | ----------- | -------- | -------------- |
 | content     | 显示内容 | --             |
+| confirmText    | 确认按钮文本 | --             |
+| cancelText    | 取消按钮文本 | --             |
+| btnAlign    | 按钮位置 | --             |
 | position    | 显示位置 | `top`(默认值)、`bottom`、`left`、`right` |
-| isDark      | 是否为黑色主题 | `true`(默认值)、`false`(浅色)   |
 | disabled    | 是否禁用 | `false`(默认值)、`true`(禁用)   |
-| isCanHide   | 控制是否可以隐藏,可参考`lay-slider`组件 | `true`(默认值)、`false`   |
-| isAutoShow   | 控制超出文本 `...` 时自动展示， 没有 `...` 时不展示 | `false`(默认值)、`true`   |
-| visible     | 控制显示/隐藏| `true` `false`(默认值)|
-| enterable   | 鼠标能否进入 tooltip 中 | `true`(默认值) `false`|
-| trigger     | 触发方式| `click` `hover`(默认值) `contextmenu` `focus` `trigger[]`| 
+| trigger     | 触发方式 | `click` `hover`(默认值) `contextmenu` `focus` `trigger[]`| 
+
+:::
+
+::: title Popconfirm 事件
+:::
+
+::: table
+
+| 属性        | 描述     | 参数         |
+| ----------- | -------- | -------------- |
+| confirm     | 确认回调  | --             |
+| cancel      | 取消回调  | --             |
 
 :::
 

@@ -94,7 +94,7 @@ export default {
 </script>
 :::
 
-::: title 是否禁用/动态属性
+::: title 是否禁用
 :::
 
 ::: demo
@@ -145,21 +145,6 @@ export default {
 </script>
 <style>
 </style>
-:::
-
-::: title 确认提示
-:::
-
-::: demo
-
-<template>
-  <lay-popconfirm content="不知江月待何人,但见长江送流水。" :is-dark="false">
-    <lay-button >你想说?</lay-button>
-  </lay-popconfirm>
-</template>
-
-<script>
-</script>
 :::
 
 ::: title Tooltip 属性

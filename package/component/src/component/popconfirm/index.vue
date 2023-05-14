@@ -16,6 +16,8 @@ export interface PopconfirmProps {
   btnAlign?: string;
   confirmText?: string;
   cancelText?: string;
+  position?: string;
+  trigger?: "click" | "hover" | "focus" | "contextMenu";
 }
 
 const props = withDefaults(defineProps<PopconfirmProps>(), {
@@ -46,7 +48,7 @@ const footerStyle = computed(() => {
 </script>
 
 <template>
-  <lay-tooltip ref="tooltipRef" :disabled="disabled">
+  <lay-tooltip ref="tooltipRef" :disabled="disabled" :position="position" :trigger="trigger">
     <slot></slot>
     <template #content>
       <div class="layui-propconfirm-content">
