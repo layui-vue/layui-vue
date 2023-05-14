@@ -30,13 +30,13 @@ const emits = defineEmits(["confirm", "cancel"]);
 
 const handleConfirm = () => {
   // @ts-ignore
-  tooltipRef.value?.hide()
+  tooltipRef.value?.hide();
   emits("confirm");
 };
 
 const handleCancel = () => {
   // @ts-ignore
-  tooltipRef.value?.hide()
+  tooltipRef.value?.hide();
   emits("cancel");
 };
 

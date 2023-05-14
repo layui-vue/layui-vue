@@ -103,14 +103,14 @@ onMounted(() => {
   });
 });
 
-const doHidden = function() {
+const doHidden = function () {
   nextTick(() => {
     // @ts-ignore
     popperRef.value.hide();
-  })
-}
+  });
+};
 
-defineExpose({ hide: doHidden})
+defineExpose({ hide: doHidden });
 </script>
 <template>
   <div ref="tooltipRefEl" v-if="isAutoShow" class="lay-tooltip-content">
