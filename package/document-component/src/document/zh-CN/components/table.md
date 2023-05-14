@@ -21,7 +21,8 @@
       :data-source="dataSource" 
       :page="page" 
       v-model:selected-keys="selectedKeys"  
-      @change="change">
+      @change="change"
+      @sortChange="sortChange">
     <template #status="{ row }">
       <lay-switch :model-value="row.status" @change="changeStatus($event , row)"></lay-switch>
     </template>
@@ -71,6 +72,10 @@ export default {
         dataSource.value = loadDataSource(page.current, page.limit);
         loading.value = false;
       }, 1000);
+    }
+
+    const sortChange = (key, sort) => {
+      layer.msg(`字段${key} - 排序${sort}`)
     }
 
     const dataSource = ref([

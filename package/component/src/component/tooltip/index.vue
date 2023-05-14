@@ -65,9 +65,11 @@ const props = defineProps({
     type: [String, Object] as PropType<StyleValue>,
   },
 });
+
 const vm = getCurrentInstance()!;
 const isMounted = ref(false);
 const tooltipRefEl = shallowRef<HTMLElement | undefined>(undefined);
+const popperRef = ref<HTMLElement | undefined>();
 
 const innerProps = computed(() => {
   return { el: vm.proxy!.$el.nextElementSibling, ...vm.proxy!.$props };
@@ -100,6 +102,15 @@ onMounted(() => {
     setEllipsis();
   });
 });
+
+const doHidden = function() {
+  nextTick(() => {
+    // @ts-ignore
+    popperRef.value.hide();
+  })
+}
+
+defineExpose({ hide: doHidden})
 </script>
 <template>
   <div ref="tooltipRefEl" v-if="isAutoShow" class="lay-tooltip-content">
@@ -108,7 +119,7 @@ onMounted(() => {
     </span>
   </div>
   <slot v-else></slot>
-  <lay-popper v-if="isMounted" v-bind="innerProps">
+  <lay-popper ref="popperRef" v-if="isMounted" v-bind="innerProps">
     <slot name="content"></slot>
   </lay-popper>
 </template>

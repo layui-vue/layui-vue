@@ -7,7 +7,8 @@ export default {
 <script setup lang="ts">
 import "./index.less";
 import LayTooltip from "../tooltip/index.vue";
-import { compile, computed, ref } from "vue";
+import LayButton from "../button/index.vue";
+import { computed, ref } from "vue";
 
 export interface PopconfirmProps {
   content: string;
@@ -23,13 +24,19 @@ const props = withDefaults(defineProps<PopconfirmProps>(), {
   cancelText: "取消",
 });
 
+const tooltipRef = ref<HTMLElement | undefined>();
+
 const emits = defineEmits(["confirm", "cancel"]);
 
 const handleConfirm = () => {
+  // @ts-ignore
+  tooltipRef.value?.hide()
   emits("confirm");
 };
 
 const handleCancel = () => {
+  // @ts-ignore
+  tooltipRef.value?.hide()
   emits("cancel");
 };
 
@@ -39,7 +46,7 @@ const footerStyle = computed(() => {
 </script>
 
 <template>
-  <lay-tooltip :disabled="disabled">
+  <lay-tooltip ref="tooltipRef" :disabled="disabled">
     <slot></slot>
     <template #content>
       <div class="layui-propconfirm-content">

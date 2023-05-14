@@ -471,16 +471,16 @@ function base64(s: string) {
 const sortTable = (e: any, key: string, sort: string) => {
   // 清空排序
   const sortElements = tableRef.value.querySelectorAll("[lay-sort]");
-  if(sortElements && sortElements.length > 0) {
+  if (sortElements && sortElements.length > 0) {
     sortElements.forEach((element: HTMLElement) => {
       element.setAttribute("lay-sort", "");
-    })
+    });
   }
   // 排序逻辑
   let currentSort = e.target.parentNode.getAttribute("lay-sort");
   if (sort === "desc") {
     if (currentSort === sort) {
-      e.target.parentNode.setAttribute("lay-sort", "");
+      e.target.parentNode.setAttribute("lay-sort", null);
       tableDataSource.value = [...props.dataSource];
     } else {
       e.target.parentNode.setAttribute("lay-sort", "desc");
@@ -492,7 +492,7 @@ const sortTable = (e: any, key: string, sort: string) => {
     }
   } else {
     if (currentSort === sort) {
-      e.target.parentNode.setAttribute("lay-sort", "");
+      e.target.parentNode.setAttribute("lay-sort", null);
       tableDataSource.value = [...props.dataSource];
     } else {
       e.target.parentNode.setAttribute("lay-sort", "asc");

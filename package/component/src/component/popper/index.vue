@@ -271,4 +271,6 @@ onMounted(() => {
   useEventListener("resize", handleScroll);
   handlerTriggerEventRegist();
 });
+
+defineExpose({ hide: doHidden })
 </script>
