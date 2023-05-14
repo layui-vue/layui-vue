@@ -379,6 +379,12 @@ const menus = [
         path: "/zh-CN/components/tooltip",
       },
       {
+        id: 25,
+        title: "确认提示",
+        subTitle: "popconfirm",
+        path: "/zh-CN/components/popconfirm",
+      },
+      {
         id: 99,
         title: "步骤条",
         subTitle: "step",

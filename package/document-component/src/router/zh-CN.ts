@@ -437,6 +437,12 @@ const zhCN = [
               import("../document/zh-CN/components/autoComplete.md"),
             meta: { title: "间距" },
           },
+          {
+            path: "/zh-CN/components/popconfirm",
+            component: () =>
+              import("../document/zh-CN/components/popconfirm.md"),
+            meta: { title: "确认提示" },
+          },
         ],
       },
     ],

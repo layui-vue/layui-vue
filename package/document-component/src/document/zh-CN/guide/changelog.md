@@ -26,6 +26,7 @@
                         <li>[修复] tooltip 组件，面板边角不跟随主题变量的问题。</li>
                         <li>[修复] collapse 组件，面版边角不跟随主题变量的问题。</li>
                         <li>[修复] slider 组件，横向模式与竖向模式下，进度条背景颜色不一致的问题。</li>
+                        <li>[调整] tooltip 组件 is-dark 属性默认值由 true 调整为 false。</li>
                         <li>[主题] global-primary-color 变量默认值由 #009688 调整为 #16baaa。</li>
                         <li>[主题] global-checked-color 变量默认值由 #5FB878 调整为 #16b777。</li>
                         <li>[文档] radio-button 说明从 radio 文档剥离，独立为单独的菜单项。</li>
