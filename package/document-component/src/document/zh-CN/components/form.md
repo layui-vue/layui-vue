@@ -348,43 +348,43 @@ const submit10 = function(isValidate, model, errors) {
 
 :::
 
-::: title 配合弹层
+::: title 搭配弹层
 :::
 
 ::: demo
 
 <template>
-  <lay-button @click="changeVisible11">弹出</lay-button>
+  <lay-button @click="changeVisible11">填报</lay-button>
   <lay-layer v-model="visible11">
     <div style="padding: 20px;">
-    <lay-form :model="model11" ref="layFormRef11" required>
-    <lay-form-item label="账户" prop="username">
-      <lay-input v-model="model11.username"></lay-input>
-    </lay-form-item>
-    <lay-form-item label="密码" prop="password">
-      <lay-input v-model="model11.password" type="password">></lay-input>
-    </lay-form-item>
-    <lay-form-item label="爱好" prop="hobby">
-      <lay-select v-model="model11.hobby" multiple>
-        <lay-select-option value="1" label="学习"></lay-select-option>
-        <lay-select-option value="2" label="编码"></lay-select-option>
-        <lay-select-option value="3" label="运动"></lay-select-option>
-      </lay-select>
-    </lay-form-item>
-    <lay-form-item label="特长" prop="specialty">
-      <lay-radio v-model="model11.specialty" name="specialty" value="1">写作</lay-radio>
-      <lay-radio v-model="model11.specialty" name="specialty" value="2">画画</lay-radio>
-      <lay-radio v-model="model11.specialty" name="specialty" value="3">编码</lay-radio>
-    </lay-form-item>
-    <lay-form-item label="描述" prop="desc">
-      <lay-textarea placeholder="请输入描述" v-model="model11.desc"></lay-textarea>
-    </lay-form-item>
-    <lay-form-item style="text-align: center;">
-      <lay-button type="primary" @click="submit11">提交</lay-button>
-      <lay-button @click="clearValidate11">清除校验</lay-button>
-      <lay-button @click="reset11">重置表单</lay-button>
-    </lay-form-item>
-  </lay-form>
+      <lay-form :model="model11" ref="layFormRef11" required>
+        <lay-form-item label="账户" prop="username">
+          <lay-input v-model="model11.username"></lay-input>
+        </lay-form-item>
+        <lay-form-item label="密码" prop="password">
+          <lay-input v-model="model11.password" type="password">></lay-input>
+        </lay-form-item>
+        <lay-form-item label="爱好" prop="hobby">
+          <lay-select v-model="model11.hobby" multiple>
+            <lay-select-option value="1" label="学习"></lay-select-option>
+            <lay-select-option value="2" label="编码"></lay-select-option>
+            <lay-select-option value="3" label="运动"></lay-select-option>
+          </lay-select>
+        </lay-form-item>
+        <lay-form-item label="特长" prop="specialty">
+          <lay-radio v-model="model11.specialty" name="specialty" value="1">写作</lay-radio>
+          <lay-radio v-model="model11.specialty" name="specialty" value="2">画画</lay-radio>
+          <lay-radio v-model="model11.specialty" name="specialty" value="3">编码</lay-radio>
+        </lay-form-item>
+        <lay-form-item label="描述" prop="desc">
+          <lay-textarea placeholder="请输入描述" v-model="model11.desc"></lay-textarea>
+        </lay-form-item>
+        <lay-form-item style="text-align: center;">
+          <lay-button type="primary" @click="submit11">提交</lay-button>
+          <lay-button @click="clearValidate11">清除校验</lay-button>
+          <lay-button @click="reset11">重置表单</lay-button>
+        </lay-form-item>
+      </lay-form>
     </div>
   </lay-layer>
 </template>

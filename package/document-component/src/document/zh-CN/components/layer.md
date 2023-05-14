@@ -150,7 +150,7 @@ const openMsg8 = function() {
 ::: title 确认弹层
 :::
 
-::: demo
+::: demo 通过 layer.confirm(content, options) 创建确认框, content 为消息内容, options 为可选配置。
 
 <template>
     <lay-button type="primary" @click="openConfirm1">确认框（1）</lay-button>
@@ -168,8 +168,14 @@ const openConfirm2 = function() {
     layer.confirm("你如何看待 layui-vue 的发布", 
         {
             btn: [
-                {text:'站着看', callback: (id) => { layer.msg("站着看"); layer.close(id); }},
-                {text:'坐着看', callback: (id) => { layer.msg("坐着看"); layer.close(id); }}
+                {text:'站着看', callback: (id) => { 
+                    layer.msg("站着看"); 
+                    layer.close(id); }
+                },
+                {text:'坐着看', callback: (id) => { 
+                    layer.msg("坐着看"); 
+                    layer.close(id); }
+                }
             ]
         }
     );
@@ -265,7 +271,7 @@ const NotifiyInfo=function(){
 ::: title 相册弹层
 :::
 
-::: demo
+::: demo 通过 layer.photos(options) 创建图片预览弹层, 参数 `options` 主要传入预览的图片链接。
 <template>
     <lay-button type="primary" @click="signleImg">查看图片</lay-button>
     <lay-button type="primary" @click="groupImg">查看相册</lay-button>
@@ -294,7 +300,8 @@ const groupImg = function() {
 ::: title 加载弹层
 :::
 
-::: demo
+::: demo 通过 layer.load(type, options) 创建加载层, 第一个参数 `type` 为加载动画样式, 第二个参数 `options` 为可选配置。
+
 <template>
   <lay-button-container>
     <lay-button @click="loading0" type="primary">加载 (1)</lay-button>
@@ -323,7 +330,7 @@ const loading2 = function() {
 ::: title 模态弹层
 :::
 
-::: demo
+::: demo 通过 layer.open(option) 创建模态窗, 目前支持 `iframe` `page` 等类型, 你可以使用options选项开启 `resize` `offset` 等更多特性。
 
 <template>
     <lay-row :space="30" >
@@ -443,7 +450,7 @@ const openAuto = function() {
 ::: title 抽屉弹层
 :::
 
-::: demo
+::: demo 通过 layer.drawer(options) 创建抽屉层, 参数 `options` 为可选配置。 抽屉本质上是一个特殊的模态窗, 你可以使用 `offset` 选项来打开方向。
 <template>
     <lay-button @click="openTopDrawer" type="primary">上</lay-button>
     <lay-button @click="openBottomDrawer" type="primary">下</lay-button>
@@ -488,7 +495,7 @@ const openRightDrawer = function() {
 ::: title 高级通讯
 :::
 
-::: demo
+::: demo 查看 [Children1.vue](https://layui-vue.gitee.io/sandbox-vue/#eNqdUkGO00AQ/ErLFyeSY5OrSaJFK87LA3yZtTub2R3PjGba0UaWD5w4cUTiCDwA+AGfQZH4BT127HXEjZu7XNVTXd1t9Mba9NhglEcbwtoqQbgrNMDmviEyGm5KJcunbREZi/rW1NZo1LQuot3508/zx++bbCAOIqltQ0Ani6wgfKYiguOqNhUqBipBInVYC/fEeMaSTTY9CoXm2pdOWgIl9EPo4JnnkRrLXMlvO4IWHIqS5BETOCRceKOOODmDDvbO1BDzUPFMpMQJ3fTzhstGZj24umLeHqSqHOo7jRdumo3YOiTFVOi9lkZ7gjATbCdPizb8HmbMIf796+v5/Y84KXS3fNFcR8nqxRK2O+ilvaU0MIZWACRJIfc6f/nw59vn0Cug3IlYncNhMbOc8KS9o2554fmDqFi9F8pjDwUjXUh+iJqDjZJoGH5VC5s+eqP5GtriAvIK8rbrmHQVw78Hszeu7r/+4w5Ykl30s5N4uYfxBsYEsZbEuVW4lxrfcuEXcSmUwiqe5WydsX6ivQvVEGowkMPd/SOWNK5mFkh4l04KwZe8iIqR4G3YjxVVJfVDDutX9vn1GGVg76LuL+G7LGU=), 通过 h() 函数的第二个参数向 Children1.vue 传递响应式变量。
 
 <template>
   <lay-input type="text" v-model="data.remark" >
@@ -517,7 +524,7 @@ const openComponent1 = () => {
 
 :::
 
-::: demo
+::: demo 查看 [Children2.vue](https://layui-vue.gitee.io/sandbox-vue/#eNqNksFum0AQhl9lxAWsYmPnSG2UKOoTtLfSA4Yh3hZ2VzC4sRDnSO2h1x6jPkQP7esklfoWnQXWAaWHcGJmv5n9d+ZvnSutV8cGndDZEpa6SAijWAJs9w2RknCZFiL9tIsdpVFeq1IriZIuYid6+PX14ffPbTCAQ5GQuiGgk0auILyl2IHjslQZFpyQTbnnRMDsNpjcxmGdVkITFIm8MZU1YzVSo/lU8J0VQQsVJimJI/pw8DnIoYO8UiW4rN+dcEVywup8eMlhI4I+uZyR1wdRZBXKd5/VyK4Cm7swQ2E0lqmSNYGulIbdWYLXdgt7ZF7VH+XeZr1ec96ezEfGjLeAXQStGVWvZ2UIr48BSFCBIbh/7u/+/vju+kOWOxFXh3DwJnr9oYn5jLKRBVDyKsu8CuvFEwC9wtUxKRpkDZPgFWws1E1avG32L26xfN6iW/Q/ZkCdWfSwWl6k4zvD5JdlolcfayXZdW08JnnlYdt1DM128NyYuarK/u/JpKPhhoitczZtkmXs1Mcv9zObvqCwbtip0ePdt7m/g/HymX2tea1h7fqxFMTTyjAXEt9wUHvvXVbk+i63dz9MnMLZuT2gr/Z6fBikRbn0/6jpadHJ1I0+OhUIdcpuyzhj3jCUam4v5E0Im7W+fW33ZejI6f4B7opkgw==), 通过 h() 函数的第二个参数声明 onXxx() 形式的函数完成 Children2.vue 的事件监听。 
 
 <template>
   <lay-input type="text" v-model="numb" >
