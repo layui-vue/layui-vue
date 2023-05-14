@@ -187,7 +187,7 @@ const openConfirm2 = function() {
 ::: title 通知消息 
 :::
 
-::: demo
+::: demo 通过 layer.notifiy(options) 创建通知消息。
 
 <template>
   <lay-row :space="30" >
@@ -272,6 +272,7 @@ const NotifiyInfo=function(){
 :::
 
 ::: demo 通过 layer.photos(options) 创建图片预览弹层, 参数 `options` 主要传入预览的图片链接。
+
 <template>
     <lay-button type="primary" @click="signleImg">查看图片</lay-button>
     <lay-button type="primary" @click="groupImg">查看相册</lay-button>
