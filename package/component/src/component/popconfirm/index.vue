@@ -48,7 +48,12 @@ const footerStyle = computed(() => {
 </script>
 
 <template>
-  <lay-tooltip ref="tooltipRef" :disabled="disabled" :position="position" :trigger="trigger">
+  <lay-tooltip
+    ref="tooltipRef"
+    :disabled="disabled"
+    :position="position"
+    :trigger="trigger"
+  >
     <slot></slot>
     <template #content>
       <div class="layui-propconfirm-content">
