@@ -892,6 +892,15 @@ const toolbarStyle = (toolbarName: string) => {
 onBeforeUnmount(() => {
   window.onresize = null;
 });
+
+const getCheckData = () => {
+  const ids = [tableSelectedKey.value, ...tableSelectedKeys.value];
+  return props.dataSource.filter((item) => {
+    return ids.includes(item[props.id])
+  })
+}
+
+defineExpose({ getCheckData })
 </script>
 
 <template>

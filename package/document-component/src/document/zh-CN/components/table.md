@@ -14,6 +14,7 @@
 
 <template>
   <lay-table 
+      ref="tableRef"
       height="300px"
       :default-toolbar="true"
       :columns="columns" 
@@ -29,6 +30,7 @@
     <template v-slot:toolbar>
       <lay-button size="sm" type="primary">新增</lay-button>
       <lay-button size="sm" @click="remove">删除</lay-button>
+      <lay-button size="sm" @click="getCheckData">获取选中数据</lay-button>
     </template>
     <template v-slot:operator="{ row }">
       <lay-button size="xs" type="primary">编辑</lay-button>
@@ -43,6 +45,8 @@ import { layer } from '@layui/layui-vue';
 
 export default {
   setup() {
+
+    const tableRef = ref();
 
     const loading = ref(false);
 
@@ -74,6 +78,10 @@ export default {
       }, 1000);
     }
 
+    const getCheckData = () => {
+      layer.msg(tableRef.value.getCheckData());
+    }
+
     const sortChange = (key, sort) => {
       layer.msg(`字段${key} - 排序${sort}`)
     }
@@ -102,7 +110,7 @@ export default {
     }
 
     const remove = () => {
-      layer.msg(selectedKeys.value)
+      layer.msg(selectedKeys.value, { area: '50%'})
     }
 
     /**
@@ -136,7 +144,8 @@ export default {
       change,
       changeStatus,
       model,
-      remove
+      remove,
+      getCheckData
     }
   }
 }

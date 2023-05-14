@@ -90,6 +90,7 @@
                         <li>
                             <h4 style="margin-bottom: 0px !important;font-weight: 500 !important;">Table</h4>
                             <ul>
+                                <li>[新增] table 组件 getCheckData 方法，用于获取选中数据，而不仅仅是选中主键。</li>
                                 <li>[修复] table 组件 sort 字段点击排序时，其他已排序字段状态不重置的问题。</li>
                                 <li>[修复] table 组件 sort 字段点击排序时，sort-change 事件始终为 asc 与 desc 的问题。</li>
                                 <li>[修复] table 组件 height 属性的异常警告，兼容 string 类型。</li>
