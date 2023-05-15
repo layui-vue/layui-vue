@@ -21,6 +21,7 @@
                     <ul>
                         <li>[新增] field 组件 title 插槽，支持标题自定义。</li>
                         <li>[修复] layer 组件 maxmin 属性开启时，最小化内容溢出的问题。</li>
+                        <li>[修复] layer 组件 closeBtn 属性为 1 时，关闭按钮无法正常显示的问题。</li>
                         <li>[修复] tree 组件 showCheckbox 属性启用时，title 与 checkbox 的异常间隔。</li>
                         <li>[修复] icon-picker 组件，选项边角不跟随主题变量的问题。</li>
                         <li>[修复] tooltip 组件，面板边角不跟随主题变量的问题。</li>
@@ -32,7 +33,7 @@
                         <li>[文档] radio-button 说明从 radio 文档剥离，独立为单独的菜单项。</li>
                         <li>[文档] collapse 折叠面板文档更新，补充案例说明。</li>
                         <li>[文档] form 表单文档更新，补充案例说明。</li>
-                        <li>[升级] layer-vue 到 1.8.4 版本。</li>
+                        <li>[升级] layer-vue 到 1.8.5 版本。</li>
                         <li>
                             <h4 style="margin-bottom: 0px !important;font-weight: 500 !important;">Radio Button</h4>
                             <ul>
@@ -130,6 +131,8 @@
                                 <li>[新增] popconfirm 组件 btn-Align 属性，用于设置操作按钮对齐方式。</li>
                                 <li>[新增] popconfirm 组件 confirm 事件，用于实现确认回调逻辑。</li>
                                 <li>[新增] popconfirm 组件 cancel 事件，用于实现取消回调逻辑。</li>
+                                <li>[新增] popconfirm 组件 trigger 属性， 用于设置触发方式。</li>
+                                <li>[新增] popconfirm 组件 position 事件，用于设置面板的显示位置。</li>
                             </ul>
                         </li>
                     </ul>  

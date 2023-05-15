@@ -27,7 +27,6 @@
   top: 0;
   left: 0;
   display: flex;
-  overflow: hidden;
   flex-direction: column;
   box-shadow: 1px 1px 50px rgba(0, 0, 0, 0.3);
   background-color: #fff;

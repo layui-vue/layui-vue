@@ -738,6 +738,7 @@ defineExpose({ reset, open, close });
           ref="contentRef"
           class="layui-layer-content"
           :class="contentClasses"
+          :style="min === true ? 'display:none':''"
         >
           <template v-if="type === 0 || type === 1 || type === 4">
             <i v-if="icon" :class="iconClass"></i>
@@ -801,7 +802,8 @@ defineExpose({ reset, open, close });
           ></CloseBtn>
         </span>
         <!-- 操作栏 -->
-        <template v-if="slots.footer">
+        <div :style="min === true ? 'display:none':''"> 
+          <template v-if="slots.footer">
           <div class="layui-layer-footer">
             <slot name="footer"></slot>
           </div>
@@ -833,6 +835,7 @@ defineExpose({ reset, open, close });
             </template>
           </div>
         </template>
+        </div>
         <!-- 辅助栏 -->
         <span v-if="showResize" class="layui-layer-resize"></span>
       </div>
