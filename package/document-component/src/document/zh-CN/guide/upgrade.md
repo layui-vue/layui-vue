@@ -4,7 +4,7 @@
 ::: describe 从 1.0.0 发布，layui-vue 迎来了重多的用户关注，同时也意味着大量 issues 涌入，以至于 1.x 版本从始至终处于小跑阶段。
 :::
 
-::: describe 随着 690 个 issues 的完成与 152 个 Release 版本的发布，逐渐走出了该阶段。于是 2.0.0 秉承着稳定的特性孕育而出，值得注意得这是一次<span style="color:red">"兼容性"</span>的版本升级。
+::: describe 随着 690 个 issues 的完成与 152 个 Release 版本的发布，逐渐走出了该阶段。于是 2.0.0 秉承着稳定的特性孕育而出，值得注意得这是一次  <span style="color:red">"兼容性"</span> 的版本升级。
 :::
 
 ::: describe 该文档将帮助你从 1.x 升级到 2.0.0 版本。
