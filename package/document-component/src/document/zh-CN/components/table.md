@@ -14,7 +14,6 @@
 
 <template>
   <lay-table 
-      ref="tableRef"
       height="300px"
       :default-toolbar="true"
       :columns="columns" 
@@ -30,7 +29,6 @@
     <template v-slot:toolbar>
       <lay-button size="sm" type="primary">新增</lay-button>
       <lay-button size="sm" @click="remove">删除</lay-button>
-      <lay-button size="sm" @click="getCheckData">获取选中数据</lay-button>
     </template>
     <template v-slot:operator="{ row }">
       <lay-button size="xs" type="primary">编辑</lay-button>
@@ -46,19 +44,15 @@ import { layer } from '@layui/layui-vue';
 export default {
   setup() {
 
-    const tableRef = ref();
-
     const loading = ref(false);
-
-    const model = reactive({});
 
     const selectedKeys = ref([]);
 
     const page = reactive({ current: 1, limit: 10, total: 100 });
 
     const columns = ref([
-      { title:"选项", type: "checkbox", width: "55px", fixed: "left" },
-      { title:"编号", key:"id", fixed: "left", sort: "desc" },
+      { title:"选项", width: "55px", type: "checkbox", fixed: "left" },
+      { title:"编号", width: "80px", key:"id", fixed: "left", sort: "desc" },
       { title:"姓名", width: "80px", key:"name", sort: "desc" },
       { title:"状态", width: "80px", key:"status", customSlot: "status"},
       { title:"邮箱", width: "120px", key:"email" },
@@ -76,10 +70,6 @@ export default {
         dataSource.value = loadDataSource(page.current, page.limit);
         loading.value = false;
       }, 1000);
-    }
-
-    const getCheckData = () => {
-      layer.msg(tableRef.value.getCheckData());
     }
 
     const sortChange = (key, sort) => {
@@ -113,9 +103,6 @@ export default {
       layer.msg(selectedKeys.value, { area: '50%'})
     }
 
-    /**
-     * 调用接口，获取数据 (模拟) 
-     */
     const loadDataSource = (page, pageSize) => {
       var response = [];
       var startIndex = ((page - 1) * pageSize) + 1;
@@ -143,9 +130,56 @@ export default {
       page,
       change,
       changeStatus,
-      model,
-      remove,
-      getCheckData
+      remove
+    }
+  }
+}
+</script>
+
+:::
+
+::: title 多级表头
+:::
+
+::: demo 通过 `columns[n]` 内嵌 `children` 属性，以渲染多级表头。
+
+<template>
+  <lay-table :columns="columns1" :data-source="dataSource1" :default-toolbar="true"></lay-table>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const columns1 = [
+      { title:"选项", type: "checkbox", width: "55px", fixed: "left" },
+      { title:"编号", key:"id", fixed: "left", sort: "desc" },
+      { title:"名称", width: "80px", key:"name" },
+      { title:"性别", width: "80px", key:"sex"},
+      { title:"年龄", width: "80px", key:"age" },
+      { title:"收货地址", align: "center",
+        children: [
+          { title: "省", key: "province", width: "120px" },
+          { title: "市", key: "city", width: "120px" },
+          { title: "区", key: "area", width: "120px" },
+        ]
+      },
+      { title:"发货时间", width: "120px", key:"deliveryTime" },
+    ]
+
+    const dataSource1 = ref([
+      {id:"1",name:"张三1",province:"山东",city:"济南",area: "高新区", sex:"男", age:"20", deliveryTime: "2022-02-09"},
+      {id:"2",name:"张三2",province:"浙江",city:"杭州",area: "西湖区", sex:"男", age:"20", deliveryTime: "2022-02-09"},
+      {id:"3",name:"张三3",province:"湖北",city:"武汉",area: "武昌区", sex:"男", age:"20", deliveryTime: "2022-02-09"},
+      {id:"4",name:"张三4",province:"江苏",city:"苏州",area: "姑苏区", sex:"男", age:"20", deliveryTime: "2022-02-09"},
+      {id:"5",name:"张三5",province:"安徽",city:"黄山",area: "黄山区", sex:"男", age:"20", deliveryTime: "2022-02-09"}
+    ]);
+
+    return {
+      columns1,
+      dataSource1,
     }
   }
 }
