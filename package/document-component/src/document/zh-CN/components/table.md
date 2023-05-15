@@ -195,23 +195,15 @@ export default {
 <template>
   <lay-table :columns="columns2" :data-source="dataSource2" v-model:expandKeys="expandKeys2">
     <template v-slot:expand="{ data }"> 
-      <lay-space direction="vertical" fill wrap>
-        <br/>
+      <div class="expand-content">
         <lay-progress :percent="data.chinese" theme="red" :show-text="true" text="语文"></lay-progress>
-        <br/>
         <lay-progress :percent="data.mathematics" theme="orange" :show-text="true" text="数学"></lay-progress>
-        <br/>
         <lay-progress :percent="data.english" theme="green" :show-text="true" text="英语"></lay-progress>
-        <br/>
         <lay-progress :percent="data.organism" theme="cyan" :show-text="true" text="生物"></lay-progress>
-        <br/>
         <lay-progress :percent="data.geography" theme="blue" :show-text="true" text="地理"></lay-progress>
-        <br/>
         <lay-progress :percent="data.history" theme="black" :show-text="true" text="历史"></lay-progress>
-        <br/>
         <lay-progress :percent="data.politics" color="#a233c6" :show-text="true" text="政治"></lay-progress>
-        <br/>
-      </lay-space>
+      </div>
     </template>
   </lay-table>
 </template>
@@ -258,7 +250,145 @@ export default {
 }
 </script>
 
+<style lang="less">
+.expand-content {
+  width: 100%;
+  padding: 0px 20px 20px 0px;
+  .layui-progress {
+    margin-top: 24px;
+  }
+}
+</style>
+
 :::
+
+::: title 选中数据
+:::
+
+::: demo
+
+<template>
+  <lay-table 
+      height="300px" 
+      ref="tableRef3" 
+      :columns="columns3" 
+      :data-source="dataSource3" 
+      :default-toolbar="true"
+      v-model:selectedKeys="selectedKeys3">
+    <template #toolbar>
+      <lay-button type="primary" size="sm" @click="getSelectedKeys3">获取选中主键</lay-button>
+      <lay-button size="sm" @click="getCheckData3">获取选中数据</lay-button>
+      <lay-button size="sm" @click="changeSelectedKeys3">修改选中数据</lay-button>
+      <lay-button size="sm" @click="clearSelectedKeys3">清空选中数据</lay-button>
+    </template>
+  </lay-table>
+</template>
+
+<script>
+import { ref } from 'vue';
+import { layer } from "@layui/layui-vue";
+
+export default {
+  setup() {
+
+    const tableRef3 = ref();
+
+    const selectedKeys3 = ref(["2", "3", "6", "7"]);
+
+    const changeSelectedKeys3 = () => {
+      selectedKeys3.value = ["1", "2", "3"]
+    }
+
+    const clearSelectedKeys3 = () => {
+      selectedKeys3.value = []
+    }
+
+    const getSelectedKeys3 = () => {
+      layer.msg(selectedKeys3.value);
+    }
+
+    const getCheckData3 = () => {
+      layer.msg(tableRef3.value.getCheckData());
+    }
+
+    const columns3 = [
+      {
+        fixed: "left",
+        type: "checkbox",
+      },
+      {
+        title:"用户",
+        width:"80px",
+        key:"name",
+        fixed: "left"
+      },{
+        title:"城市",
+        width: "80px",
+        key:"city"
+      },{
+        title:"性别",
+        key:"sex",
+        width: "80px"
+      },{
+        title:"年龄",
+        width: "80px",
+        key:"age"
+      },{
+        title:"积分",
+        width: "80px",
+        key:"score"
+      },{
+        title:"签到",
+        width: "80px",
+        key:"sign"
+      },{
+        title:"加入时间",
+        width: "120px",
+        key:"joinTime"
+      },{
+        title:"签名",
+        width: "300px",
+        key:"remark"
+      }
+    ]
+
+    const dataSource3 = ref([
+      {id:"1", name:"张三1", city: "城市-1", sex:"男", age:"18", remark: '屈指古今多少事，都只是、镜中春', score: 100, sign: "已签到", joinTime: "2022-02-09"},
+      {id:"2", name:"张三2", city: "城市-2", sex:"男", age:"18", remark: '屈指古今多少事，都只是、镜中春', score: 100, sign: "已签到", joinTime: "2022-02-09"},
+      {id:"3", name:"张三3", city: "城市-3", sex:"男", age:"20", remark: '屈指古今多少事，都只是、镜中春', score: 100, sign: "已签到", joinTime: "2022-02-09"},
+      {id:"4", name:"张三4", city: "城市-4", sex:"男", age:"20", remark: '屈指古今多少事，都只是、镜中春', score: 100, sign: "已签到", joinTime: "2022-02-09"},
+      {id:"5", name:"张三5", city: "城市-5", sex:"男", age:"20", remark: '屈指古今多少事，都只是、镜中春', score: 100, sign: "已签到", joinTime: "2022-02-09"},
+      {id:"6", name:"张三6", city: "城市-6", sex:"男", age:"18", remark: '屈指古今多少事，都只是、镜中春', score: 100, sign: "已签到", joinTime: "2022-02-09"},
+      {id:"7", name:"张三7", city: "城市-7", sex:"男", age:"18", remark: '屈指古今多少事，都只是、镜中春', score: 100, sign: "已签到", joinTime: "2022-02-09"},
+      {id:"8", name:"张三8", city: "城市-8", sex:"男", age:"20", remark: '屈指古今多少事，都只是、镜中春', score: 100, sign: "已签到", joinTime: "2022-02-09"},
+      {id:"9", name:"张三9", city: "城市-9", sex:"男", age:"20", remark: '屈指古今多少事，都只是、镜中春', score: 100, sign: "已签到", joinTime: "2022-02-09"},
+      {id:"10", name:"张三10", city: "城市-10", sex:"男", age:"18", remark: '屈指古今多少事，都只是、镜中春', score: 100, sign: "已签到", joinTime: "2022-02-09"},
+      {id:"11", name:"张三11", city: "城市-11", sex:"男", age:"18", remark: '屈指古今多少事，都只是、镜中春', score: 100, sign: "已签到", joinTime: "2022-02-09"},
+      {id:"12", name:"张三12", city: "城市-12", sex:"男", age:"20", remark: '屈指古今多少事，都只是、镜中春', score: 100, sign: "已签到", joinTime: "2022-02-09"},
+      {id:"13", name:"张三13", city: "城市-13", sex:"男", age:"20", remark: '屈指古今多少事，都只是、镜中春', score: 100, sign: "已签到", joinTime: "2022-02-09"},
+      {id:"14", name:"张三14", city: "城市-14", sex:"男", age:"20", remark: '屈指古今多少事，都只是、镜中春', score: 100, sign: "已签到", joinTime: "2022-02-09"},
+      {id:"15", name:"张三15", city: "城市-15", sex:"男", age:"18", remark: '屈指古今多少事，都只是、镜中春', score: 100, sign: "已签到", joinTime: "2022-02-09"},
+      {id:"16", name:"张三16", city: "城市-16", sex:"男", age:"18", remark: '屈指古今多少事，都只是、镜中春', score: 100, sign: "已签到", joinTime: "2022-02-09"},
+      {id:"17", name:"张三17", city: "城市-17", sex:"男", age:"20", remark: '屈指古今多少事，都只是、镜中春', score: 100, sign: "已签到", joinTime: "2022-02-09"},
+      {id:"18", name:"张三18", city: "城市-18", sex:"男", age:"20", remark: '屈指古今多少事，都只是、镜中春', score: 100, sign: "已签到", joinTime: "2022-02-09"},
+    ])
+
+    return {
+      columns3,
+      dataSource3,
+      selectedKeys3,
+      getSelectedKeys3,
+      getCheckData3,
+      tableRef3,
+      changeSelectedKeys3,
+      clearSelectedKeys3
+    }
+  }
+}
+</script>
+
+:::
+
 
 ::: title Table 属性
 :::
