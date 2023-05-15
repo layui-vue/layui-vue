@@ -20,6 +20,8 @@ import LayIconPicker from "./component/iconPicker/index";
 import LayCard from "./component/card/index";
 import LayCheckCard from "./component/checkcard/index";
 import LayCheckCardGroup from "./component/checkcardGroup/index";
+import LayCalendar from "./component/calendar/index";
+
 import LayLayout from "./component/layout/index";
 import LaySide from "./component/side/index";
 import LayBody from "./component/body/index";
@@ -121,6 +123,7 @@ const components: Record<string, Plugin> = {
   LayCard,
   LayCheckCard,
   LayCheckCardGroup,
+  LayCalendar,
   LayProgress,
   LayButtonGroup,
   LayButtonContainer,
