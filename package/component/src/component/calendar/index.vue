@@ -28,13 +28,13 @@
       </template>
     </div>
     <div class="layui-calendar-body">
-      <lay-calendar-date-table 
-      :disabledDate="disabledDate"
-      :fullscreen="fullscreen" :date="date" @click="handleClick">
-        <template
-          v-if="$slots.cell"
-          #cell="data"
-        >
+      <lay-calendar-date-table
+        :disabledDate="disabledDate"
+        :fullscreen="fullscreen"
+        :date="date"
+        @click="handleClick"
+      >
+        <template v-if="$slots.cell" #cell="data">
           <slot v-if="$slots['cell']" name="cell" v-bind="data" />
         </template>
       </lay-calendar-date-table>
@@ -55,7 +55,7 @@ import { computed, ref } from "vue";
 export interface CalendarProps {
   modelValue?: Date | string | number;
   fullscreen?: boolean;
-  disabledDate?: Function
+  disabledDate?: Function;
 }
 const props = withDefaults(defineProps<CalendarProps>(), {
   modelValue: Date.now(),
@@ -69,7 +69,7 @@ const getYearMonth = computed(() => {
   return dayjs(date.value).format("YYYY-MM");
 });
 const findDay = () => {
-  date.value = dayjs().format('YYYY-MM-DD')
+  date.value = dayjs().format("YYYY-MM-DD");
 };
 const prevMonthDayjs = computed(() =>
   dayjs(date.value).subtract(1, "month").date(1)
@@ -84,10 +84,8 @@ const nextMonth = () => {
   date.value = nextMonthDayjs.value.format("YYYY-MM-DD");
 };
 const handleClick = (val: string) => {
-  emit('click', val)
+  emit("click", val);
   emit("update:modelValue", val);
-}
+};
 </script>
-<style lang="less">
-
-</style>
+<style lang="less"></style>

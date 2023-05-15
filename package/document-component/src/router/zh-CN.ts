@@ -441,12 +441,11 @@ const zhCN = [
             path: "/zh-CN/components/popconfirm",
             component: () =>
               import("../document/zh-CN/components/popconfirm.md"),
-            meta: { title: "确认提示" }
+            meta: { title: "确认提示" },
           },
           {
             path: "/zh-CN/components/calendar",
-            component: () =>
-              import("../document/zh-CN/components/calendar.md"),
+            component: () => import("../document/zh-CN/components/calendar.md"),
             meta: { title: "日历" },
           },
         ],

@@ -20,15 +20,16 @@
             @click="handleClick(cell.text)"
             :class="[
               fullscreen ? 'layui-calendar-day' : 'layui-calendar-isfullscreen',
-              { 
+              {
                 'layui-calendar-is-selcted': getIsSelected === cell.text,
-                'layui-calendar-is-disabled': disabledDate && disabledDate(cell.text),
-               },
+                'layui-calendar-is-disabled':
+                  disabledDate && disabledDate(cell.text),
+              },
             ]"
           >
-          <slot name="cell" :data="getData(cell)">
-           <span> {{ cell.text }}</span>
-          </slot>
+            <slot name="cell" :data="getData(cell)">
+              <span> {{ cell.text }}</span>
+            </slot>
           </div>
         </td>
       </tr>
@@ -48,7 +49,7 @@ import { computed, ref, defineEmits, watch, useSlots } from "vue";
 export interface CalendarDateTableProps {
   date: Date | string | number;
   fullscreen: boolean;
-  disabledDate?: Function
+  disabledDate?: Function;
 }
 const props = withDefaults(defineProps<CalendarDateTableProps>(), {
   date: Date.now(),
@@ -76,10 +77,12 @@ const rows = computed(() => {
   return toMergeArr([...days, ...nextMonthDays]);
 });
 
-const toMergeArr = (date: {
-  text: string,
-  type: string
-}[]) => {
+const toMergeArr = (
+  date: {
+    text: string;
+    type: string;
+  }[]
+) => {
   return Array(date.length / 7)
     .fill(date.length / 7)
     .map((_, index) => {
@@ -88,29 +91,31 @@ const toMergeArr = (date: {
     });
 };
 const getIsSelected = ref(dayjs(props.date).format("YYYY-MM-DD"));
-const date = computed(() => props.date)
+const date = computed(() => props.date);
 const handleClick = (text: string) => {
   if (props.disabledDate && props.disabledDate(text)) {
     return;
   }
-  getIsSelected.value = text
-  emit('click', getIsSelected.value)
-}
+  getIsSelected.value = text;
+  emit("click", getIsSelected.value);
+};
 
 watch(
-  () => date, 
+  () => date,
   (val) => {
-    getIsSelected.value = dayjs(val.value).format("YYYY-MM-DD")
+    getIsSelected.value = dayjs(val.value).format("YYYY-MM-DD");
     emit("update:modelValue", getIsSelected.value);
-  }, {
-    deep: true
-  })
-  const  getData = (data: any) => {
-    return {
-      ...data,
-      isSelected: getIsSelected.value === data.text
-    }
+  },
+  {
+    deep: true,
   }
+);
+const getData = (data: any) => {
+  return {
+    ...data,
+    isSelected: getIsSelected.value === data.text,
+  };
+};
 </script>
 <style scoped lang="less">
 @import "./index.less";
