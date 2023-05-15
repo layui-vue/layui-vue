@@ -186,6 +186,13 @@ const menus = [
         subTitle: "checkcard",
         path: "/zh-CN/components/checkcard",
       },
+
+      {
+        id: 77,
+        title: "日历",
+        subTitle: "calendar",
+        path: "/zh-CN/components/calendar",
+      },
       {
         id: 34,
         title: "输入框",
