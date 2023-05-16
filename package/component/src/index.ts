@@ -20,8 +20,6 @@ import LayIconPicker from "./component/iconPicker/index";
 import LayCard from "./component/card/index";
 import LayCheckCard from "./component/checkcard/index";
 import LayCheckCardGroup from "./component/checkcardGroup/index";
-import LayCalendar from "./component/calendar/index";
-
 import LayLayout from "./component/layout/index";
 import LaySide from "./component/side/index";
 import LayBody from "./component/body/index";
@@ -102,7 +100,6 @@ import LayBarcode from "./component/barcode/index";
 import LayAutocomplete from "./component/autocomplete/index";
 import LayRadioButton from "./component/radioButton/index";
 import LayPopconfirm from "./component/popconfirm/index";
-import LayWatermark from "./component/watermark/index";
 import LayConfigProvider from "./provider";
 import { InstallOptions } from "./types";
 
@@ -124,7 +121,6 @@ const components: Record<string, Plugin> = {
   LayCard,
   LayCheckCard,
   LayCheckCardGroup,
-  LayCalendar,
   LayProgress,
   LayButtonGroup,
   LayButtonContainer,
@@ -201,7 +197,6 @@ const components: Record<string, Plugin> = {
   LayAutocomplete,
   LayRadioButton,
   LayPopconfirm,
-  LayWatermark,
 };
 
 const install = (app: App, options?: InstallOptions): void => {
@@ -305,7 +300,6 @@ export {
   LayAutocomplete,
   LayRadioButton,
   LayPopconfirm,
-  LayWatermark,
   install,
 };
 
