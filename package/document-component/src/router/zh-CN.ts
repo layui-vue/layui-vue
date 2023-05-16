@@ -342,31 +342,6 @@ const zhCN = [
             meta: { title: "文字提示" },
           },
           {
-            path: "/zh-CN/components/modal",
-            component: () => import("../document/zh-CN/components/modal.md"),
-            meta: { title: "弹层" },
-          },
-          {
-            path: "/zh-CN/components/load",
-            component: () => import("../document/zh-CN/components/load.md"),
-            meta: { title: "加载" },
-          },
-          {
-            path: "/zh-CN/components/confirm",
-            component: () => import("../document/zh-CN/components/confirm.md"),
-            meta: { title: "询问" },
-          },
-          {
-            path: "/zh-CN/components/msg",
-            component: () => import("../document/zh-CN/components/msg.md"),
-            meta: { title: "信息" },
-          },
-          {
-            path: "/zh-CN/components/drawer",
-            component: () => import("../document/zh-CN/components/drawer.md"),
-            meta: { title: "抽屉" },
-          },
-          {
             path: "/zh-CN/components/backtop",
             component: () => import("../document/zh-CN/components/backtop.md"),
             meta: { title: "返回顶部" },
@@ -442,16 +417,6 @@ const zhCN = [
             meta: { title: "条形码" },
           },
           {
-            path: "/zh-CN/components/notifiy",
-            component: () => import("../document/zh-CN/components/notifiy.md"),
-            meta: { title: "通知" },
-          },
-          {
-            path: "/zh-CN/components/photo",
-            component: () => import("../document/zh-CN/components/photo.md"),
-            meta: { title: "相册" },
-          },
-          {
             path: "/zh-CN/components/tag",
             component: () => import("../document/zh-CN/components/tag.md"),
             meta: { title: "标签" },
@@ -477,6 +442,17 @@ const zhCN = [
             component: () =>
               import("../document/zh-CN/components/autoComplete.md"),
             meta: { title: "间距" },
+          },
+          {
+            path: "/zh-CN/components/popconfirm",
+            component: () =>
+              import("../document/zh-CN/components/popconfirm.md"),
+            meta: { title: "确认提示" },
+          },
+          {
+            path: "/zh-CN/components/calendar",
+            component: () => import("../document/zh-CN/components/calendar.md"),
+            meta: { title: "日历" },
           },
         ],
       },

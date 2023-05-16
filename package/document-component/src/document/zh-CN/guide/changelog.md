@@ -21,17 +21,19 @@
                     <ul>
                         <li>[新增] field 组件 title 插槽，支持标题自定义。</li>
                         <li>[修复] layer 组件 maxmin 属性开启时，最小化内容溢出的问题。</li>
+                        <li>[修复] layer 组件 closeBtn 属性为 1 时，关闭按钮无法正常显示的问题。</li>
                         <li>[修复] tree 组件 showCheckbox 属性启用时，title 与 checkbox 的异常间隔。</li>
                         <li>[修复] icon-picker 组件，选项边角不跟随主题变量的问题。</li>
                         <li>[修复] tooltip 组件，面板边角不跟随主题变量的问题。</li>
                         <li>[修复] collapse 组件，面版边角不跟随主题变量的问题。</li>
                         <li>[修复] slider 组件，横向模式与竖向模式下，进度条背景颜色不一致的问题。</li>
+                        <li>[调整] tooltip 组件 is-dark 属性默认值由 true 调整为 false。</li>
                         <li>[主题] global-primary-color 变量默认值由 #009688 调整为 #16baaa。</li>
                         <li>[主题] global-checked-color 变量默认值由 #5FB878 调整为 #16b777。</li>
                         <li>[文档] radio-button 说明从 radio 文档剥离，独立为单独的菜单项。</li>
                         <li>[文档] collapse 折叠面板文档更新，补充案例说明。</li>
                         <li>[文档] form 表单文档更新，补充案例说明。</li>
-                        <li>[升级] layer-vue 到 1.8.4 版本。</li>
+                        <li>[升级] layer-vue 到 1.8.5 版本。</li>
                         <li>
                             <h4 style="margin-bottom: 0px !important;font-weight: 500 !important;">Radio Button</h4>
                             <ul>
@@ -89,6 +91,9 @@
                         <li>
                             <h4 style="margin-bottom: 0px !important;font-weight: 500 !important;">Table</h4>
                             <ul>
+                                <li>[新增] table 组件 getCheckData 方法，用于获取选中数据，而不仅仅是选中主键。</li>
+                                <li>[修复] table 组件 sort 字段点击排序时，其他已排序字段状态不重置的问题。</li>
+                                <li>[修复] table 组件 sort 字段点击排序时，sort-change 事件始终为 asc 与 desc 的问题。</li>
                                 <li>[修复] table 组件 height 属性的异常警告，兼容 string 类型。</li>
                                 <li>[修复] table 组件 筛选列 下拉面板横向布局的问题，修正为竖向布局。</li>
                                 <li>[优化] table 组件 body 滚动条样式，使其更贴合现今流行的审美。</li>
@@ -111,8 +116,23 @@
                             <h4 style="margin-bottom: 0px !important;font-weight: 500 !important;">Date Picker</h4>
                             <ul>
                                 <li>[修复] date-picker 组件，面板边角不跟随主题变量的问题。</li>
-                                <li>[修复] date-picker 组件，model-value 不能为 null 的问题。</li>
+                                <li>[修复] date-picker 组件 model-value 属性不能为 null 的问题。</li>
+                                <li>[修复] date-picker 组件 model-value 属性不能在 onMounted 中赋值的问题。</li> 
                                 <li>[优化] date-picker 组件 content 滚动条 Css 样式。</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <h4 style="margin-bottom: 0px !important;font-weight: 500 !important;">Popconfirm</h4>
+                            <ul>
+                                <li>[新增] popconfirm 组件 disabled 属性，用于设置禁用状态。</li>
+                                <li>[新增] popconfirm 组件 confirmText 属性，用于设置确认操作文本内容。</li>
+                                <li>[新增] popconfirm 组件 cancelText 属性，用于设置取消操作文本内容。</li>
+                                <li>[新增] popconfirm 组件 content 属性 / 插槽，用于定义提示内容。</li>
+                                <li>[新增] popconfirm 组件 btn-Align 属性，用于设置操作按钮对齐方式。</li>
+                                <li>[新增] popconfirm 组件 confirm 事件，用于实现确认回调逻辑。</li>
+                                <li>[新增] popconfirm 组件 cancel 事件，用于实现取消回调逻辑。</li>
+                                <li>[新增] popconfirm 组件 trigger 属性， 用于设置触发方式。</li>
+                                <li>[新增] popconfirm 组件 position 事件，用于设置面板的显示位置。</li>
                             </ul>
                         </li>
                     </ul>  

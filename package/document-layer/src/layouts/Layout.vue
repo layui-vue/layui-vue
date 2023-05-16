@@ -2,7 +2,6 @@
   <lay-scroll height="100%">
     <div class="markdown-body light-scheme">
       <div class="alone-header">
-        <img class="alone-logo" src="../assets/logo.png" />
         <a class="version">{{ version }}</a>
         <a
           href="https://gitee.com/layui/layui-vue"
@@ -25,10 +24,10 @@
       </div>
       <div class="layui-container" style="width: 80%; margin-left: 10%">
         <lay-tab type="brief" v-model="active">
-          <lay-tab-item title="入门" id="/zh-CN/index"></lay-tab-item>
-          <lay-tab-item title="示例" id="/zh-CN/demo"></lay-tab-item>
-          <lay-tab-item title="帮助" id="/zh-CN/help"></lay-tab-item>
-          <lay-tab-item title="问题" id="/zh-CN/question"></lay-tab-item>
+          <lay-tab-item title="指南" id="/zh-CN/index"></lay-tab-item>
+          <lay-tab-item title="案例" id="/zh-CN/demo"></lay-tab-item>
+          <lay-tab-item title="属性" id="/zh-CN/help"></lay-tab-item>
+          <lay-tab-item title="常见问题" id="/zh-CN/question"></lay-tab-item>
         </lay-tab>
         <router-view></router-view>
       </div>

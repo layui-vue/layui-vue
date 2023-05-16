@@ -17,12 +17,12 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 
 export default {
   setup() {
 
-   const endTime = ref(null);
+    const endTime = ref(null);
 
     return {
       endTime
@@ -39,7 +39,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-date-picker type="datetime" v-model="endTime2"></lay-date-picker>
+  <lay-date-picker type="datetime" v-model="endTime2" placeholder="click me"></lay-date-picker>
 </template>
 
 <script>
@@ -48,7 +48,7 @@ import { ref } from 'vue'
 export default {
   setup() {
 
-   const endTime2 = ref("");
+   const endTime2 = ref(null);
 
     return {
       endTime2

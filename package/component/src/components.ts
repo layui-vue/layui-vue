@@ -13,6 +13,7 @@ import LayIconPicker from "./component/iconPicker/index";
 import LayCard from "./component/card/index";
 import LayCheckCard from "./component/checkcard/index";
 import LayCheckCardGroup from "./component/checkcardGroup/index";
+import LayCalendar from "./component/calendar/index";
 
 import LayLayout from "./component/layout/index";
 import LaySide from "./component/side/index";
@@ -189,6 +190,7 @@ declare module "@vue/runtime-core" {
     LayWatermark: typeof LayWatermark;
     LayUpload: typeof LayUpload;
     LayConfigProvider: typeof LayConfigProvider;
+    LayCalendar: typeof LayCalendar;
   }
 
   export interface ComponentCustomProperties {

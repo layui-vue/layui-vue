@@ -470,8 +470,14 @@ function base64(s: string) {
 // 列排序
 const sortTable = (e: any, key: string, sort: string) => {
   let currentSort = e.target.parentNode.getAttribute("lay-sort");
+  const sortElements = tableRef.value.querySelectorAll("[lay-sort]");
+  if (sortElements && sortElements.length > 0) {
+    sortElements.forEach((element: HTMLElement) => {
+      element.setAttribute("lay-sort", "");
+    });
+  }
   if (sort === "desc") {
-    if (currentSort === sort) {
+    if (currentSort == sort) {
       e.target.parentNode.setAttribute("lay-sort", "");
       tableDataSource.value = [...props.dataSource];
     } else {
@@ -483,7 +489,7 @@ const sortTable = (e: any, key: string, sort: string) => {
       });
     }
   } else {
-    if (currentSort === sort) {
+    if (currentSort == sort) {
       e.target.parentNode.setAttribute("lay-sort", "");
       tableDataSource.value = [...props.dataSource];
     } else {
@@ -495,7 +501,7 @@ const sortTable = (e: any, key: string, sort: string) => {
       });
     }
   }
-  emit("sort-change", key, sort);
+  emit("sort-change", key, e.target.parentNode.getAttribute("lay-sort"));
 };
 
 let tableBody = ref<HTMLElement | null>(null);
@@ -886,6 +892,15 @@ const toolbarStyle = (toolbarName: string) => {
 onBeforeUnmount(() => {
   window.onresize = null;
 });
+
+const getCheckData = () => {
+  const ids = [tableSelectedKey.value, ...tableSelectedKeys.value];
+  return props.dataSource.filter((item) => {
+    return ids.includes(item[props.id]);
+  });
+};
+
+defineExpose({ getCheckData });
 </script>
 
 <template>
