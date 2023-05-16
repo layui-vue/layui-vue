@@ -1,9 +1,5 @@
-/**
-  * @name:watermark 
-  * @author:dingyongya 
-  * @date:2023/5/12 16:54 
-  * @update:2023/5/12 16:54 
-  */
+/** * @name:watermark * @author:dingyongya * @date:2023/5/12 16:54 *
+@update:2023/5/12 16:54 */
 <script lang="ts">
 export default {
   name: "LayWatermark",

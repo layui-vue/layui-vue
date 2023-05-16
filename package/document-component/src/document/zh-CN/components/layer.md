@@ -560,6 +560,38 @@ const openComponent2 = () => {
 
 :::
 
+::: title 内置方法
+:::
+
+::: demo 通过 `layer.open(options)` 创建模态窗, 通过 `layer.close(id)` 关闭指定模态窗，通过 `layer.closeAll()` 关闭所有模态窗。
+
+<template>
+  <lay-button @click="open" type="primary">打开</lay-button>
+  <lay-button @click="close" type="primary">关闭</lay-button>
+  <lay-button @click="closeAll" type="primary">关闭所有</lay-button>
+</template>
+
+<script setup>
+import { ref, watch } from "vue";
+import { layer } from "@layui/layui-vue"
+
+const id = ref();
+    
+const open = () => {
+    id.value = layer.open({title:"标题",content:"内容", shade: false})
+}
+
+const close = () => {
+    layer.close(id.value)
+}
+    
+const closeAll = () => {
+    layer.closeAll()
+}
+</script>
+
+:::
+
 ::: title 属性说明
 :::
 
@@ -591,7 +623,11 @@ const openComponent2 = () => {
 | min | 最小化回调 | function | -  | - |
 | restore | 重置回调 | function | -  | - |
 | success | 打开回调 | function | -  | - |
-| end | 关闭回调 | function | -  | - |
+| end | 销毁回调 | function | -  | - |
+| close | 销毁回调 | function | -  | - |
+| moveOut | 是否可以拖出浏览器可视区域 | boolean | false  | true false |
+| moveStart | 拖拽开始回调  | function | -  | - |
+| moveEnd | 拖拽结束回调 | function | -  | - |
 
 :::
 
