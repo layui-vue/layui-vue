@@ -1,17 +1,5 @@
 import { TableColumn } from "../typing";
-
-// 节流
-const throttle = (func: Function, wait: number) => {
-  let timer: any = null;
-  return (...args: any) => {
-    if (!timer) {
-      timer = setTimeout(() => {
-        timer = null;
-        func.apply(this, args);
-      }, wait);
-    }
-  };
-};
+import { useThrottleFn } from "@vueuse/core";
 
 let isResizing = false;
 let stashColumn: any = null;
@@ -19,7 +7,7 @@ let targetElem: HTMLElement | null = null;
 let startX = 0;
 let startWidth = 0;
 
-const resizing = throttle((e: MouseEvent) => {
+const resizing = useThrottleFn((e: MouseEvent) => {
   if (!isResizing) return;
   const offset = e.clientX - startX;
   const newWidth = startWidth + offset;
