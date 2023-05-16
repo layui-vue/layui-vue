@@ -86,6 +86,12 @@ const zhCN = [
         meta: { title: "组件" },
         children: [
           {
+            path: "/zh-CN/components/watermark",
+            component: () =>
+              import("../document/zh-CN/components/watermark.md"),
+            meta: { title: "水印" },
+          },
+          {
             path: "/zh-CN/components/splitPanel",
             component: () =>
               import("../document/zh-CN/components/splitPanel.md"),
