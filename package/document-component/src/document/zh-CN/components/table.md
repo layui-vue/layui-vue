@@ -395,35 +395,36 @@ export default {
 
 ::: table
 
-| 属性                 | 描述                                                  | 类型                | 默认值     | 可选值                                       | 版本    |
-| -------------------- | ----------------------------------------------------- | ------------------- | ---------- | -------------------------------------------- | ------- |
-| columns              | 列配置 - [更多](#tableColumn)                         | --                  | --         | --                                           | --      |
-| dataSource           | 数据源                                                | --                  | --         | --                                           | --      |
-| checkbox             | 开启复选框                                            | `boolean`           | `false`    | `true` `false`                               | --      |
-| id                   | 主键                                                  | `string`            | --         | --                                           | --      |
-| v-model:selectedKeys | 选中项 (多选)                                         | --                  | --         | --                                           | --      |
-| v-model:selectedKey  | 选中项 (单选)                                         | --                  | --         | --                                           | --      |
-| default-toolbar      | 工具栏                                                | `boolean` `array`   | `false`    | `true` `false` `['filter','export','print']` | --      |
-| size                 | 尺寸                                                  | `string`            | `md`       | `lg` `md` `sm`                               | --      |
-| children-column-name | 树节点字段                                            | `string`            | `children` | --                                           | --      |
-| indent-size          | 树表行级缩进                                          | `number`            | `30`       | --                                           | --      |
-| height               | 表格高度                                              | `number`            | --         | --                                           | --      |
-| maxHeight            | 表格最大高度                                          | `number`            | --         | --                                           | --      |
-| even                 | 斑马条纹                                              | `boolean`           | `false`    | `true` `false`                               | --      |
-| cellStyle            | 列样式 function(row, column, rowIndex, columnIndex)   | `string` `function` | --         | --                                           | --      |
-| rowStyle             | 行样式 function(row, rowIndex)                        | `string` `function` | --         | --                                           | --      |
-| cellClassName        | 列类名称 function(row, column, rowIndex, columnIndex) | `string` `function` | --         | --                                           | --      |
-| rowClassName         | 行类名称 function(row, rowIndex)                      | `string` `function` | --         | --                                           | --      |
-| skin                 | 风格                                                  | `string`            | --         | `line` `row` `nob`                           | --      |
-| expand-index         | 展开所在列                                            | `number`            | --         | --                                           | --      |
-| default-expand-all   | 默认展开所有列 (自 1.9.7 后，具备响应式能力)          | `boolean`           | `false`    | `true` `false`                               | --      |
-| expand-keys          | 展开的列                                              | `array`             | `[]`       | --                                           | --      |
-| span-method          | 合并算法                                              | `function`          | --         | --                                           | `1.4.0` |
-| getCheckboxProps     | 多选行属性                                            | `function`          | --         | --                                           | `1.4.0` |
-| getRadioProps        | 单选行属性                                            | `function`          | --         | --                                           | `1.4.0` |
-| resize               | 开启所有单元格列宽拖动                                | `boolean`           | `false`    | `true` `false`                               | `1.9.4` |
-| autoColsWidth        | 列宽自动计算，最大程度利用空间（1.9.8）               | `boolean`           | `false`    | `true` `false`                               | `1.9.8` |
-
+| 属性                 | 描述                                                       | 类型                | 默认值     | 可选值                                       | 
+| -------------------- | --------------------------------------------------------- | ------------------- | ---------- | -------------------------------------------- | 
+| columns              | 列配置，具体详见 [更多](#tableColumn)                       | --                  | --         | --                                           | 
+| dataSource           | 数组数组                                                   | --                  | --         | --                                           | 
+| id                   | 数据主键                                                   | `string`            | --         | --                                           | 
+| v-model:selectedKeys | 复选框选中项                                                | --                  | --         | --                                           | 
+| v-model:selectedKey  | 单选框选中项                                                | --                  | --         | --                                           | 
+| default-toolbar      | 工具栏                                                     | `boolean` `array`   | `false`    | `true` `false` `['filter','export','print']` | 
+| size                 | 表格大小                                                   | `string`            | `md`       | `lg` `md` `sm`                               | 
+| children-column-name | 指定树形结构的列名                                          | `string`            | `children` | --                                           | 
+| indent-size          | 指定树形结构的缩进距离                                       | `number`            | `30`       | --                                           | 
+| height               | 表格高度                                                   | `number`            | --         | --                                           | 
+| maxHeight            | 表格最大高度                                               | `number`            | --         | --                                           | 
+| even                 | 开启斑马条纹                                               | `boolean`           | `false`    | `true` `false`                               | 
+| cellStyle            | 单元格样式 function(row, column, rowIndex, columnIndex)    | `string` `function` | --         | --                                           | 
+| rowStyle             | 表格行样式 function(row, rowIndex)                         | `string` `function` | --         | --                                           | 
+| cellClassName        | 单元格类名 function(row, column, rowIndex, columnIndex)    | `string` `function` | --         | --                                           | 
+| rowClassName         | 表格行类名 function(row, rowIndex)                         | `string` `function` | --         | --                                           | 
+| skin                 | 指定风格                                                    | `string`           | --         | `line` `row` `nob`                           |
+| expand-index         | 指定展开操作所在列的索引，使用 children 字段或 expand 插槽时有效 | `number`          | --         | --                                           | 
+| default-expand-all   | 初始时，是否展开所有行                                      | `boolean`           | `false`    | `true` `false`                               | 
+| expand-keys          | 展开行，控制属性                                            | `array`             | `[]`       | --                                           | 
+| span-method          | 单元格合并算法                                              | `function`          | --         | --                                           | 
+| getCheckboxProps     | 复选框的默认属性配置                                         | `function`          | --         | --                                           | 
+| getRadioProps        | 单选框的默认属性配置                                         | `function`          | --         | --                                           | 
+| resize               | 开启列宽拉伸                                                | `boolean`           | `false`    | `true` `false`                               | 
+| autoColsWidth        | 启用后，根据内容自动计算列宽                                 | `boolean`           | `false`    | `true` `false`                               | 
+| defaultToolbar       | 是否启用默认工具栏                                          | `boolean`           | `false`    | `true` `false`                               | 
+| loading              | 是否开启加载动画                                            | `boolean`           | `false`    | `true` `false`                               | 
+ 
 :::
 
 ::: title Table 事件
