@@ -135,6 +135,17 @@
                                 <li>[新增] popconfirm 组件 position 事件，用于设置面板的显示位置。</li>
                             </ul>
                         </li>
+                        <li>
+                            <h4 style="margin-bottom: 0px !important;font-weight: 500 !important;">Watermark</h4>
+                            <ul>
+                                <li>[新增] Watermark 组件 font 属性，用于设置字体样式。</li>
+                                <li>[新增] Watermark 组件 color 属性，用于设置字体颜色。</li>
+                                <li>[新增] Watermark 组件 content 属性，用于设置水印内容。</li>
+                                <li>[新增] Watermark 组件 rotate 属性，用于设置水印旋转角度。</li>
+                                <li>[新增] Watermark 组件 width 属性，用于设置水印字体宽度。</li>
+                                <li>[新增] Watermark 组件 height 属性，用于设置水印字体高度。</li>
+                            </ul>
+                        </li>
                     </ul>  
                 </li>
             </ul>

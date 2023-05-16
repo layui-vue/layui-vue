@@ -121,8 +121,9 @@ const changeMaxTotal = () => {
 | font        | 字体样式 | string |`20px`|
 | color       | 字体颜色 | string |`rgba(184, 184, 184, 0.6)`   |
 | rotate      | 旋转角度（大于-90 小于90） | number |`-45`  |
-| height     | 水印字体高度设置 | number | `100`   |
-| width     | 水印字体宽度设置 | number | `100`   |
+| height      | 水印字体高度设置 | number | `100`   |
+| width       | 水印字体宽度设置 | number | `100`   |
+
 :::
 
 ::: previousNext tooltip

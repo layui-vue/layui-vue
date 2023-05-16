@@ -1,6 +1,3 @@
-/** *@name:index *@author:dingyongya *@date:2023/5/12 16:54 *@update:2023/5/12
-16:54 */
-
 <script lang="ts">
 export default {
   name: "LayWatermark",
@@ -8,11 +5,9 @@ export default {
 </script>
 <script lang="ts" setup>
 import "./index.less";
-import { onMounted } from "@vue/runtime-core";
-import { ref, withDefaults } from "vue";
-const watermark = ref<any>("watermark");
+import { ref, withDefaults, onMounted } from "vue";
 
-interface Props {
+export interface WatermarkProps {
   content: string;
   font: string;
   color: string;
@@ -21,18 +16,20 @@ interface Props {
   width: number;
 }
 
-const props = withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<WatermarkProps>(), {
   content: "",
   font: "20px",
   color: "rgba(184, 184, 184, 0.6)",
   rotate: -45,
-  height: 100,
   width: 100,
+  height: 100,
 });
 
 onMounted(() => {
   initWatermark();
 });
+
+const watermark = ref<any>("watermark");
 
 // 初始化
 const initWatermark = () => {
