@@ -17,7 +17,7 @@
             <ul>
                 <a name="2-0-0"></a>
                 <li>
-                    <h3>2.0.0 <span class="layui-badge-rim">2023-05-07</span></h3>
+                    <h3>2.0.0 <span class="layui-badge-rim">2023-05-18</span></h3>
                     <ul>
                         <li>[新增] field 组件 title 插槽，支持标题自定义。</li>
                         <li>[修复] tree 组件 showCheckbox 属性启用时，title 与 checkbox 的异常间隔。</li>
