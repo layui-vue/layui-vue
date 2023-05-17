@@ -592,6 +592,57 @@ const closeAll = () => {
 
 :::
 
+::: title 回调事件
+:::
+
+::: demo 通过 `layer.open(options)` 创建模态窗, 通过 `layer.close(id)` 关闭指定模态窗，通过 `layer.closeAll()` 关闭所有模态窗。
+
+<template>
+  <lay-button @click="openCallback" type="primary">打开</lay-button>
+</template>
+
+<script setup>
+import { ref, watch } from "vue";
+import { layer } from "@layui/layui-vue"
+ 
+const openCallback = () => {
+    layer.open({
+        title:"标题",
+        content:"内容", 
+        maxmin: true,
+        shade: false,
+        min: (id) => {
+            console.log(`最小化:${id}`)
+        },
+        full: (id) => {
+            console.log(`最大化:${id}`)
+        },
+        restore: (id) => {
+            console.log(`重置:${id}`)
+        },
+        success: (id) => {
+            console.log(`成功:${id}`)
+        },
+        end: (id) => {
+            console.log(`销毁:${id}`)
+        },
+        close: (id) => {
+            console.log(`关闭:${id}`)
+        },
+        beforeClose: (id) => {
+            console.log(`关闭前置:${id}`)
+        },
+        moveStart: (id) => {
+            console.log(`拖拽开始:${id}`)
+        },
+        moveEnd: (id) => {
+            console.log(`拖拽结束:${id}`)
+        }})
+}
+</script>
+
+:::
+
 ::: title 属性说明
 :::
 

@@ -20,8 +20,6 @@
                     <h3>2.0.0 <span class="layui-badge-rim">2023-05-07</span></h3>
                     <ul>
                         <li>[新增] field 组件 title 插槽，支持标题自定义。</li>
-                        <li>[修复] layer 组件 maxmin 属性开启时，最小化内容溢出的问题。</li>
-                        <li>[修复] layer 组件 closeBtn 属性为 1 时，关闭按钮无法正常显示的问题。</li>
                         <li>[修复] tree 组件 showCheckbox 属性启用时，title 与 checkbox 的异常间隔。</li>
                         <li>[修复] icon-picker 组件，选项边角不跟随主题变量的问题。</li>
                         <li>[修复] tooltip 组件，面板边角不跟随主题变量的问题。</li>
@@ -133,6 +131,18 @@
                                 <li>[新增] popconfirm 组件 cancel 事件，用于实现取消回调逻辑。</li>
                                 <li>[新增] popconfirm 组件 trigger 属性， 用于设置触发方式。</li>
                                 <li>[新增] popconfirm 组件 position 事件，用于设置面板的显示位置。</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <h4 style="margin-bottom: 0px !important;font-weight: 500 !important;">Layer</h4>
+                            <ul>
+                                <li>[新增] layer 组件 success 回调函数 id 参数。</li>
+                                <li>[新增] layer 组件 end 回调函数 id 属性。</li>
+                                <li>[新增] layer 组件 close 回调函数 id 属性。</li>
+                                <li>[新增] layer 组件 moveStart 回调函数 id 属性。</li>
+                                <li>[新增] layer 组件 moveEnd 回调函数 id 属性。</li>
+                                <li>[修复] layer 组件 closeBtn 属性为 1 时，关闭按钮无法正常显示的问题。</li>
+                                <li>[修复] layer 组件 maxmin 属性开启时，最小化内容溢出的问题。</li>
                             </ul>
                         </li>
                     </ul>  

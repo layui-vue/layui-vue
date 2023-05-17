@@ -341,7 +341,7 @@ watch(
       if (props.isFunction) {
         firstOpenDelayCalculation();
       }
-      props.success();
+      props.success(props.id);
     }
   },
   { immediate: true, flush: "post" }
@@ -351,7 +351,7 @@ watch(
   () => visible.value,
   () => {
     if (!visible.value) {
-      props.end();
+      props.end(props.id);
     }
   }
 );
@@ -399,11 +399,11 @@ const supportMove = function () {
           },
           () => {
             // 拖拽结束
-            props.moveEnd();
+            props.moveEnd(props.id);
           },
           () => {
             // 拖拽开始
-            props.moveStart();
+            props.moveStart(props.id);
           }
         );
         // 拉伸, 在首次拉伸前, 移除 resizeObserver 监听
@@ -453,10 +453,10 @@ const contentClasses = computed(() => {
  */
 const closeHandle = () => {
   if (props.beforeClose) {
-    const result = props.beforeClose();
+    const result = props.beforeClose(props.id);
     // @ts-ignore
     if (result === undefined || (result != undefined && result === true)) {
-      props.close();
+      props.close(props.id);
       emit("close");
       emit("update:modelValue", false);
       props.destroy();

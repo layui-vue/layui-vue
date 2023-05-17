@@ -1,6 +1,6 @@
 {
   "name": "@layui/layui-vue",
-  "version": "2.0.0-beta.4",
+  "version": "2.0.0-beta.5",
   "author": "就眠儀式",
   "license": "MIT",
   "description": "a component library for Vue 3 base on layui-vue",
@@ -36,7 +36,7 @@
     "./es/": "./es/"
   },
   "scripts": {
-    "build": "npm run build:all && npm run build:es && npm run build:umd && npm run build:dts && npm run build:helper",
+    "build": "npm run build:all && npm run build:es && npm run build:umd && npm run build:dts",
     "build:all": "vite build --emptyOutDir --config ./script/build.all.ts",
     "build:es": "vite build --emptyOutDir --config ./script/build.es.ts",
     "build:umd": "vite build --emptyOutDir --config ./script/build.umd.ts",
@@ -46,7 +46,7 @@
   },
   "dependencies": {
     "@layui/icons-vue": "1.1.0",
-    "@layui/layer-vue": "1.8.5",
+    "@layui/layer-vue": "1.8.7",
     "@vueuse/core": "8.7.3",
     "@umijs/ssr-darkreader": "^4.9.45",
     "@ctrl/tinycolor": "^3.4.1",
