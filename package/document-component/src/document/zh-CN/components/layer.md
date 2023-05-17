@@ -595,7 +595,7 @@ const closeAll = () => {
 ::: title 回调事件
 :::
 
-::: demo 通过 `layer.open(options)` 创建模态窗, 通过 `layer.close(id)` 关闭指定模态窗，通过 `layer.closeAll()` 关闭所有模态窗。
+::: demo 你可以通过 `success` `end` `close` `beforeClose` `full` `min` `restore` 等回调属性，监听 layer 的生命周期。
 
 <template>
   <lay-button @click="openCallback" type="primary">打开</lay-button>
