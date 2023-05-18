@@ -1,11 +1,10 @@
 ::: anchor
 :::
 
-
 ::: title 基本介绍
 :::
 
-::: describe 高级 Web 日历组件，完全开源无偿且颜值与功能兼备，足以应对日期相关的各种业务场景。
+::: describe 高级 Web 日历组件，足以应对日期相关的各种业务场景。
 :::
 
 ::: title 基础使用
@@ -18,12 +17,12 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 
 export default {
   setup() {
 
-   const endTime = ref("");
+    const endTime = ref(null);
 
     return {
       endTime
@@ -40,7 +39,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-date-picker type="datetime" v-model="endTime2"></lay-date-picker>
+  <lay-date-picker type="datetime" v-model="endTime2" placeholder="click me"></lay-date-picker>
 </template>
 
 <script>
@@ -49,7 +48,7 @@ import { ref } from 'vue'
 export default {
   setup() {
 
-   const endTime2 = ref("");
+   const endTime2 = ref(null);
 
     return {
       endTime2
@@ -282,6 +281,7 @@ export default {
 
    const timestamp1 = ref(new Date().getTime());
    const timestamp2 = ref(new Date().getTime());
+
     return {
       timestamp1,timestamp2
     }
@@ -344,9 +344,7 @@ export default {
 | change| 原生 change 事件    | (value : 同v-model) |
 | focus | 原生 focus事件     | event : Event               |
 | blur  | 原生 blur 事件      | event : Event               |
-:::
 
-::: contributor datePicker
 :::
 
 ::: previousNext datePicker

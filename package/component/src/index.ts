@@ -18,6 +18,8 @@ import LayButtonGroup from "./component/buttonGroup/index";
 import LayIcon from "./component/icon/index";
 import LayIconPicker from "./component/iconPicker/index";
 import LayCard from "./component/card/index";
+import LayCheckCard from "./component/checkcard/index";
+import LayCheckCardGroup from "./component/checkcardGroup/index";
 import LayLayout from "./component/layout/index";
 import LaySide from "./component/side/index";
 import LayBody from "./component/body/index";
@@ -50,6 +52,7 @@ import LayBreadcrumbItem from "./component/breadcrumbItem/index";
 import LayField from "./component/field/index";
 import LaySelect from "./component/select/index";
 import LaySelectOption from "./component/selectOption/index";
+import LaySelectOptionGroup from "./component/selectOptionGroup/index";
 import LayScroll from "./component/scroll/index";
 import LayEmpty from "./component/empty/index";
 import LayFormItem from "./component/formItem/index";
@@ -96,6 +99,7 @@ import LayQrcode from "./component/qrcode/index";
 import LayBarcode from "./component/barcode/index";
 import LayAutocomplete from "./component/autocomplete/index";
 import LayRadioButton from "./component/radioButton/index";
+import LayPopconfirm from "./component/popconfirm/index";
 import LayConfigProvider from "./provider";
 import { InstallOptions } from "./types";
 
@@ -115,6 +119,8 @@ const components: Record<string, Plugin> = {
   LayLogo,
   LayPanel,
   LayCard,
+  LayCheckCard,
+  LayCheckCardGroup,
   LayProgress,
   LayButtonGroup,
   LayButtonContainer,
@@ -143,6 +149,7 @@ const components: Record<string, Plugin> = {
   LaySelect,
   LayScroll,
   LaySelectOption,
+  LaySelectOptionGroup,
   LayEmpty,
   LayFormItem,
   LayRate,
@@ -180,7 +187,6 @@ const components: Record<string, Plugin> = {
   LayRipple,
   LayNoticeBar,
   LayPageHeader,
-  LayCascader,
   LayAffix,
   LaySpace,
   LayTag,
@@ -190,6 +196,7 @@ const components: Record<string, Plugin> = {
   LayBarcode,
   LayAutocomplete,
   LayRadioButton,
+  LayPopconfirm,
 };
 
 const install = (app: App, options?: InstallOptions): void => {
@@ -244,6 +251,7 @@ export {
   LaySelect,
   LayScroll,
   LaySelectOption,
+  LaySelectOptionGroup,
   LayEmpty,
   LayFormItem,
   LayRate,
@@ -291,6 +299,7 @@ export {
   LayBarcode,
   LayAutocomplete,
   LayRadioButton,
+  LayPopconfirm,
   install,
 };
 

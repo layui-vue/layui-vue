@@ -118,10 +118,7 @@ export default {
 | rightIcon | 右侧图标 | -- |
 | scrollable | 是否开启垂直滚动|true,false|
 |  textlist  | 垂直滚动内容| Array|
-:::
-
-::: contributor noticeBar
-:::  
+::: 
 
 ::: previousNext noticeBar
 :::

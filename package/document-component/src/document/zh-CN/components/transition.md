@@ -72,8 +72,5 @@ const changeVisible1 = () => {
 
 :::
 
-::: contributor transition
-:::
-
 ::: previousNext transition
 :::

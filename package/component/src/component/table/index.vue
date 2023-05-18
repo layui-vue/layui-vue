@@ -41,7 +41,7 @@ export interface TableProps {
   selectedKeys?: string[];
   indentSize?: number;
   childrenColumnName?: string;
-  height?: number;
+  height?: number | string;
   maxHeight?: string;
   even?: boolean;
   expandIndex?: number;
@@ -470,8 +470,14 @@ function base64(s: string) {
 // 列排序
 const sortTable = (e: any, key: string, sort: string) => {
   let currentSort = e.target.parentNode.getAttribute("lay-sort");
+  const sortElements = tableRef.value.querySelectorAll("[lay-sort]");
+  if (sortElements && sortElements.length > 0) {
+    sortElements.forEach((element: HTMLElement) => {
+      element.setAttribute("lay-sort", "");
+    });
+  }
   if (sort === "desc") {
-    if (currentSort === sort) {
+    if (currentSort == sort) {
       e.target.parentNode.setAttribute("lay-sort", "");
       tableDataSource.value = [...props.dataSource];
     } else {
@@ -483,7 +489,7 @@ const sortTable = (e: any, key: string, sort: string) => {
       });
     }
   } else {
-    if (currentSort === sort) {
+    if (currentSort == sort) {
       e.target.parentNode.setAttribute("lay-sort", "");
       tableDataSource.value = [...props.dataSource];
     } else {
@@ -495,7 +501,7 @@ const sortTable = (e: any, key: string, sort: string) => {
       });
     }
   }
-  emit("sort-change", key, sort);
+  emit("sort-change", key, e.target.parentNode.getAttribute("lay-sort"));
 };
 
 let tableBody = ref<HTMLElement | null>(null);
@@ -886,6 +892,15 @@ const toolbarStyle = (toolbarName: string) => {
 onBeforeUnmount(() => {
   window.onresize = null;
 });
+
+const getCheckData = () => {
+  const ids = [tableSelectedKey.value, ...tableSelectedKeys.value];
+  return props.dataSource.filter((item) => {
+    return ids.includes(item[props.id]);
+  });
+};
+
+defineExpose({ getCheckData });
 </script>
 
 <template>
@@ -901,6 +916,7 @@ onBeforeUnmount(() => {
           <lay-dropdown
             v-if="showToolbar('filter')"
             updateAtScroll
+            placement="bottom-end"
             :style="toolbarStyle('filter')"
           >
             <div class="layui-inline" title="筛选" lay-event>
@@ -1080,6 +1096,7 @@ onBeforeUnmount(() => {
         <!-- 表身 -->
         <div
           class="layui-table-body layui-table-main"
+          :class="{ 'layui-table-body-loading': props.loading }"
           :style="{ height: height, maxHeight: maxHeight }"
           ref="tableBody"
         >
@@ -1203,6 +1220,7 @@ onBeforeUnmount(() => {
             <div :style="{ width: tableBodyEmptyWidth }"></div>
           </template>
           <template v-if="loading == true">
+            <!-- 根据 table 实际高度，设置 loading 位置 -->
             <div class="layui-table-loading">
               <i
                 class="layui-icon-loading layui-icon layui-anim layui-anim-rotate layui-anim-loop"

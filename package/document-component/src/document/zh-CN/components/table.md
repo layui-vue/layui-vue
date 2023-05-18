@@ -4,24 +4,157 @@
 ::: title 基本介绍
 :::
 
-::: describe 展示行列数据。
+::: describe 以表格的承载方式对数据进行渲染、重载、排序、统计、分页等等一系列交互操作，并提供了丰富的 API 用于扩展，基本涵盖了日常业务所涉及的大部分需求。
 :::
 
-::: title 基础使用
+::: title 综合演示
 :::
 
-::: demo 使用 `lay-table` 标签, 创建表格
+::: demo 所有示例中演示的数据均为「静态模拟数据」，实际使用时换成您的真实接口即可。
 
 <template>
-  <lay-table :columns="columns66" :data-source="dataSource_1">
-    <template #income={row}>
-      {{ row.income }}
+  <lay-table 
+      height="300px"
+      :default-toolbar="true"
+      :columns="columns" 
+      :loading="loading"
+      :data-source="dataSource" 
+      :page="page" 
+      v-model:selected-keys="selectedKeys"  
+      @change="change"
+      @sortChange="sortChange">
+    <template #status="{ row }">
+      <lay-switch :model-value="row.status" @change="changeStatus($event , row)"></lay-switch>
     </template>
-    <template #outlays={row}>
-      {{ row.outlays }}
+    <template v-slot:toolbar>
+      <lay-button size="sm" type="primary">新增</lay-button>
+      <lay-button size="sm" @click="remove">删除</lay-button>
     </template>
-    <template #balance>
-      <lay-button size="xs">查看详情</lay-button>
+    <template v-slot:operator="{ row }">
+      <lay-button size="xs" type="primary">编辑</lay-button>
+      <lay-button size="xs">查看</lay-button>
+    </template>
+  </lay-table>
+</template>
+
+<script>
+import { ref, watch, reactive } from 'vue';
+import { layer } from '@layui/layui-vue';
+
+export default {
+  setup() {
+
+    const loading = ref(false);
+
+    const selectedKeys = ref([]);
+
+    const page = reactive({ current: 1, limit: 10, total: 100 });
+
+    const columns = ref([
+      { title:"选项", width: "55px", type: "checkbox", fixed: "left" },
+      { title:"编号", width: "80px", key:"id", fixed: "left", sort: "desc" },
+      { title:"姓名", width: "80px", key:"name", sort: "desc" },
+      { title:"状态", width: "80px", key:"status", customSlot: "status"},
+      { title:"邮箱", width: "120px", key:"email" },
+      { title:"性别", width: "80px", key:"sex" },
+      { title:"年龄", width: "80px", key:"age" },
+      { title:"城市", width: "120px", key:"city" },
+      { title:"签名", width: "260px", key:"remark" },
+      { title:"时间", width: "120px", key:"joinTime" },
+      { title:"操作", width: "150px", customSlot:"operator", key:"operator", fixed: "right" }
+    ]);
+
+    const change = (page) => {
+      loading.value = true;
+      setTimeout(() => {
+        dataSource.value = loadDataSource(page.current, page.limit);
+        loading.value = false;
+      }, 1000);
+    }
+
+    const sortChange = (key, sort) => {
+      layer.msg(`字段${key} - 排序${sort}`)
+    }
+
+    const dataSource = ref([
+      {id:"1", name:"张三1", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"18",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09", status: true},
+      {id:"2", name:"张三2", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"20",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09", status: true},
+      {id:"3", name:"张三3", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"20",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09", status: true},
+      {id:"4", name:"张三4", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"20",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09", status: true},
+      {id:"5", name:"张三5", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"20",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09", status: true},
+      {id:"6", name:"张三6", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"20",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09", status: true},
+      {id:"7", name:"张三7", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"18",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09", status: true},
+      {id:"8", name:"张三8", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"20",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09", status: true},
+      {id:"9", name:"张三9", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"20",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09", status: true},
+      {id:"10", name:"张三10", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"20",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09", status: true}
+    ])
+
+    const changeStatus = (isChecked, row) => {
+      dataSource.value.forEach((item) => {
+        if(item.id === row.id) {
+          layer.msg("Success", { icon: 1 }, () => {
+            item.status = isChecked;
+          })
+        }
+      })
+    }
+
+    const remove = () => {
+      layer.msg(selectedKeys.value, { area: '50%'})
+    }
+
+    const loadDataSource = (page, pageSize) => {
+      var response = [];
+      var startIndex = ((page - 1) * pageSize) + 1;
+      var endIndex = page * pageSize;
+      for (var i = startIndex; i <= endIndex; i++) {
+          response.push({
+            id:`${i}`, 
+            age:"18",
+            sex: "男", 
+            name:`张三${i}`, 
+            email: "test@qq.com",
+            remark: '花开堪折直须折,莫待无花空折枝.',  
+            joinTime: "2022-02-09", 
+            city: "浙江杭州", 
+            status: true
+          })
+      }
+      return response;
+    }
+
+    return {
+      columns,
+      dataSource,
+      selectedKeys,
+      page,
+      change,
+      changeStatus,
+      remove
+    }
+  }
+}
+</script>
+
+:::
+
+::: title 嵌套表单
+:::
+
+::: demo
+
+<template>
+  <lay-table :columns="columns2" :data-source="dataSource2" v-model:expandKeys="expandKeys2">
+    <template v-slot:expand="{ data }"> 
+      <div class="expand-content">
+        <lay-progress :percent="data.chinese" theme="red" :show-text="true" text="语文"></lay-progress>
+        <lay-progress :percent="data.mathematics" theme="orange" :show-text="true" text="数学"></lay-progress>
+        <lay-progress :percent="data.english" theme="green" :show-text="true" text="英语"></lay-progress>
+        <lay-progress :percent="data.organism" theme="cyan" :show-text="true" text="生物"></lay-progress>
+        <lay-progress :percent="data.geography" theme="blue" :show-text="true" text="地理"></lay-progress>
+        <lay-progress :percent="data.history" theme="black" :show-text="true" text="历史"></lay-progress>
+        <lay-progress :percent="data.politics" color="#a233c6" :show-text="true" text="政治"></lay-progress>
+      </div>
     </template>
   </lay-table>
 </template>
@@ -32,155 +165,174 @@ import { ref } from 'vue'
 export default {
   setup() {
 
-    const columns66 = ref([
-      {
-        title:"账户",
-        width:"200px",
-        key:"username"
-      },{
-        title:"密码",
-        width: "180px",
-        key:"password",
-        resize: true,
-      },{
-        title:"资金往来",
-        align: "center",
-        children:  [
-          {title: "银行收入(￥)", key: "income", align: "center", customSlot: 'income', resize: true,},
-          {title: "银行支出(￥)", key: "outlays", align: "center", customSlot: 'outlays', resize: true,},
-          {title: "银行余额(￥)", key: "balance", align: "center", customSlot: 'balance', resize: true, width: '200px'},
-        ] 
-      }
-    ])
-
-    const dataSource_1 = ref([
-      {username:"root", password:"root", income:"18", outlays: 'layui - vue（谐音：类 UI) '},
-      {username:"root", password:"root", income:"18", outlays: 'layui - vue（谐音：类 UI) '},
-      {username:"woow", password:"woow", income:"20", outlays: 'layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.'}
-    ])
-
-    return {
-      columns66,
-      dataSource_1,
-    }
-  }
-}
-</script>
-
-:::
-
-::: title 不同尺寸
-:::
-
-::: demo
-
-<template>
-  <lay-form>
-    <lay-radio v-model="size2" name="action" value="sm">sm</lay-radio>
-    <lay-radio v-model="size2" name="action" value="md">md</lay-radio>
-    <lay-radio v-model="size2" name="action" value="lg">lg</lay-radio>
-  </lay-form>
-  <lay-table :columns="columns2" :data-source="dataSource2" :size="size2" :resize="true"></lay-table>
-</template>
-
-<script>
-import { ref } from 'vue'
-
-export default {
-  setup() {
-
     const columns2 = [
-      {
-        title:"账户",
-        width:"200px",
-        key:"username"
-      },{
-        title:"密码",
-        width: "180px",
-        key:"password"
-      },{
-        title:"年龄",
-        width: "180px",
-        key:"age"
-      }
+      { title:"编号", width:"80px", key:"id", fixed: "left", sort: "desc" },
+      { title:"姓名", width:"80px", key:"name" },
+      { title:"班级", width:"120px", key:"classes" },
+      { title:"语文", width:"80px", key:"chinese" },
+      { title:"数学", width:"80px", key:"mathematics" },
+      { title:"英语", width:"80px", key:"english" },
+      { title:"生物", width:"80px", key:"organism" },
+      { title:"地理", width:"80px", key:"geography" },
+      { title:"历史", width:"80px", key:"history" },
+      { title:"政治", width:"80px", key:"politics" },
+      { title:"总分", width: "180px", key:"score" }
     ]
 
     const dataSource2 = [
-      {username:"root", password:"root", age:"18"},
-      {username:"woow", password:"woow", age:"20"}
+      {id:"1", name:"张三1", classes:"六年级一班", chinese: 80, mathematics: 50, english: 60, organism: 80, geography: 22, history:55, politics: 53, score:454},
+      {id:"2", name:"张三2", classes:"六年级二班", chinese: 80, mathematics: 50, english: 60, organism: 80, geography: 22, history:55, politics: 53, score:432},
+      {id:"3", name:"张三3", classes:"六年级三班", chinese: 80, mathematics: 50, english: 60, organism: 80, geography: 22, history:55, politics: 53, score:534},
+      {id:"4", name:"张三4", classes:"六年级四班", chinese: 80, mathematics: 50, english: 60, organism: 80, geography: 22, history:55, politics: 53, score:342},
+      {id:"5", name:"张三5", classes:"六年级五班", chinese: 80, mathematics: 50, english: 60, organism: 80, geography: 22, history:55, politics: 53, score:653},
+      {id:"6", name:"张三6", classes:"六年级六班", chinese: 80, mathematics: 50, english: 60, organism: 80, geography: 22, history:55, politics: 53, score:632},
     ]
-    
-    const size2 = ref('md');
+
+    const expandKeys2 = ref(["1"])
+    const defaultExpandAll2 = ref(false)
 
     return {
-      size2,
       columns2,
-      dataSource2
+      dataSource2,
+      expandKeys2,
+      defaultExpandAll2
     }
   }
 }
 </script>
 
+<style lang="less">
+.expand-content {
+  width: 100%;
+  padding: 0px 20px 20px 0px;
+  .layui-progress {
+    margin-top: 24px;
+  }
+}
+</style>
+
 :::
 
-::: title 开启分页
+::: title 选中数据
 :::
 
 ::: demo
 
 <template>
-  <lay-table :columns="columns3" :data-source="dataSource3" :page="page3" @change="change3"></lay-table>
+  <lay-table 
+      height="300px" 
+      ref="tableRef3" 
+      :columns="columns3" 
+      :data-source="dataSource3" 
+      :default-toolbar="true"
+      v-model:selectedKeys="selectedKeys3">
+    <template #toolbar>
+      <lay-button type="primary" size="sm" @click="getSelectedKeys3">获取选中主键</lay-button>
+      <lay-button size="sm" @click="getCheckData3">获取选中数据</lay-button>
+      <lay-button size="sm" @click="changeSelectedKeys3">修改选中数据</lay-button>
+      <lay-button size="sm" @click="clearSelectedKeys3">清空选中数据</lay-button>
+    </template>
+  </lay-table>
 </template>
 
 <script>
 import { ref } from 'vue';
-import { layer } from "@layui/layer-vue";
+import { layer } from "@layui/layui-vue";
 
 export default {
   setup() {
-    
-    const page3 = ref({
-      total: 100,
-      limit: 10,
-      current: 2,
-      showRefresh: true,
-    })
 
-    const change3 = ({ current, limit }) => {
-      layer.msg("current:" + current + " limit:" + limit);
+    const tableRef3 = ref();
+
+    const selectedKeys3 = ref(["2", "3", "6", "7"]);
+
+    const changeSelectedKeys3 = () => {
+      selectedKeys3.value = ["1", "2", "3"]
+    }
+
+    const clearSelectedKeys3 = () => {
+      selectedKeys3.value = []
+    }
+
+    const getSelectedKeys3 = () => {
+      layer.msg(selectedKeys3.value);
+    }
+
+    const getCheckData3 = () => {
+      layer.msg(tableRef3.value.getCheckData());
     }
 
     const columns3 = [
       {
-        type: "number",
+        fixed: "left",
+        type: "checkbox",
       },
       {
-        title:"账户",
-        width:"200px",
-        slot:"username",
-        key:"username"
+        title:"用户",
+        width:"80px",
+        key:"name",
+        fixed: "left"
       },{
-        title:"密码",
-        width: "180px",
-        slot:"password",
-        key:"password"
+        title:"城市",
+        width: "80px",
+        key:"city"
+      },{
+        title:"性别",
+        key:"sex",
+        width: "80px"
       },{
         title:"年龄",
-        width: "180px",
+        width: "80px",
         key:"age"
+      },{
+        title:"积分",
+        width: "80px",
+        key:"score"
+      },{
+        title:"签到",
+        width: "80px",
+        key:"sign"
+      },{
+        title:"加入时间",
+        width: "120px",
+        key:"joinTime"
+      },{
+        title:"签名",
+        width: "300px",
+        key:"remark"
       }
     ]
 
-    const dataSource3 = [
-      {username:"root", password:"root", age:"18"},
-      {username:"woow", password:"woow", age:"20"}
-    ]
+    const dataSource3 = ref([
+      {id:"1", name:"张三1", city: "城市-1", sex:"男", age:"18", remark: '屈指古今多少事，都只是、镜中春', score: 100, sign: "已签到", joinTime: "2022-02-09"},
+      {id:"2", name:"张三2", city: "城市-2", sex:"男", age:"18", remark: '屈指古今多少事，都只是、镜中春', score: 100, sign: "已签到", joinTime: "2022-02-09"},
+      {id:"3", name:"张三3", city: "城市-3", sex:"男", age:"20", remark: '屈指古今多少事，都只是、镜中春', score: 100, sign: "已签到", joinTime: "2022-02-09"},
+      {id:"4", name:"张三4", city: "城市-4", sex:"男", age:"20", remark: '屈指古今多少事，都只是、镜中春', score: 100, sign: "已签到", joinTime: "2022-02-09"},
+      {id:"5", name:"张三5", city: "城市-5", sex:"男", age:"20", remark: '屈指古今多少事，都只是、镜中春', score: 100, sign: "已签到", joinTime: "2022-02-09"},
+      {id:"6", name:"张三6", city: "城市-6", sex:"男", age:"18", remark: '屈指古今多少事，都只是、镜中春', score: 100, sign: "已签到", joinTime: "2022-02-09"},
+      {id:"7", name:"张三7", city: "城市-7", sex:"男", age:"18", remark: '屈指古今多少事，都只是、镜中春', score: 100, sign: "已签到", joinTime: "2022-02-09"},
+      {id:"8", name:"张三8", city: "城市-8", sex:"男", age:"20", remark: '屈指古今多少事，都只是、镜中春', score: 100, sign: "已签到", joinTime: "2022-02-09"},
+      {id:"9", name:"张三9", city: "城市-9", sex:"男", age:"20", remark: '屈指古今多少事，都只是、镜中春', score: 100, sign: "已签到", joinTime: "2022-02-09"},
+      {id:"10", name:"张三10", city: "城市-10", sex:"男", age:"18", remark: '屈指古今多少事，都只是、镜中春', score: 100, sign: "已签到", joinTime: "2022-02-09"},
+      {id:"11", name:"张三11", city: "城市-11", sex:"男", age:"18", remark: '屈指古今多少事，都只是、镜中春', score: 100, sign: "已签到", joinTime: "2022-02-09"},
+      {id:"12", name:"张三12", city: "城市-12", sex:"男", age:"20", remark: '屈指古今多少事，都只是、镜中春', score: 100, sign: "已签到", joinTime: "2022-02-09"},
+      {id:"13", name:"张三13", city: "城市-13", sex:"男", age:"20", remark: '屈指古今多少事，都只是、镜中春', score: 100, sign: "已签到", joinTime: "2022-02-09"},
+      {id:"14", name:"张三14", city: "城市-14", sex:"男", age:"20", remark: '屈指古今多少事，都只是、镜中春', score: 100, sign: "已签到", joinTime: "2022-02-09"},
+      {id:"15", name:"张三15", city: "城市-15", sex:"男", age:"18", remark: '屈指古今多少事，都只是、镜中春', score: 100, sign: "已签到", joinTime: "2022-02-09"},
+      {id:"16", name:"张三16", city: "城市-16", sex:"男", age:"18", remark: '屈指古今多少事，都只是、镜中春', score: 100, sign: "已签到", joinTime: "2022-02-09"},
+      {id:"17", name:"张三17", city: "城市-17", sex:"男", age:"20", remark: '屈指古今多少事，都只是、镜中春', score: 100, sign: "已签到", joinTime: "2022-02-09"},
+      {id:"18", name:"张三18", city: "城市-18", sex:"男", age:"20", remark: '屈指古今多少事，都只是、镜中春', score: 100, sign: "已签到", joinTime: "2022-02-09"},
+    ])
 
     return {
-      page3,
-      change3,
       columns3,
-      dataSource3
+      dataSource3,
+      selectedKeys3,
+      getSelectedKeys3,
+      getCheckData3,
+      tableRef3,
+      changeSelectedKeys3,
+      clearSelectedKeys3
     }
   }
 }
@@ -1539,40 +1691,42 @@ export default {
 
 :::
 
+
 ::: title Table 属性
 :::
 
 ::: table
 
-| 属性                 | 描述                                                  | 类型                | 默认值     | 可选值                                       | 版本    |
-| -------------------- | ----------------------------------------------------- | ------------------- | ---------- | -------------------------------------------- | ------- |
-| columns              | 列配置 - [更多](#tableColumn)                         | --                  | --         | --                                           | --      |
-| dataSource           | 数据源                                                | --                  | --         | --                                           | --      |
-| checkbox             | 开启复选框                                            | `boolean`           | `false`    | `true` `false`                               | --      |
-| id                   | 主键                                                  | `string`            | --         | --                                           | --      |
-| v-model:selectedKeys | 选中项 (多选)                                         | --                  | --         | --                                           | --      |
-| v-model:selectedKey  | 选中项 (单选)                                         | --                  | --         | --                                           | --      |
-| default-toolbar      | 工具栏                                                | `boolean` `array`   | `false`    | `true` `false` `['filter','export','print']` | --      |
-| size                 | 尺寸                                                  | `string`            | `md`       | `lg` `md` `sm`                               | --      |
-| children-column-name | 树节点字段                                            | `string`            | `children` | --                                           | --      |
-| indent-size          | 树表行级缩进                                          | `number`            | `30`       | --                                           | --      |
-| height               | 表格高度                                              | `number`            | --         | --                                           | --      |
-| maxHeight            | 表格最大高度                                          | `number`            | --         | --                                           | --      |
-| even                 | 斑马条纹                                              | `boolean`           | `false`    | `true` `false`                               | --      |
-| cellStyle            | 列样式 function(row, column, rowIndex, columnIndex)   | `string` `function` | --         | --                                           | --      |
-| rowStyle             | 行样式 function(row, rowIndex)                        | `string` `function` | --         | --                                           | --      |
-| cellClassName        | 列类名称 function(row, column, rowIndex, columnIndex) | `string` `function` | --         | --                                           | --      |
-| rowClassName         | 行类名称 function(row, rowIndex)                      | `string` `function` | --         | --                                           | --      |
-| skin                 | 风格                                                  | `string`            | --         | `line` `row` `nob`                           | --      |
-| expand-index         | 展开所在列                                            | `number`            | --         | --                                           | --      |
-| default-expand-all   | 默认展开所有列 (自 1.9.7 后，具备响应式能力)            | `boolean`           | `false`    | `true` `false`                               | --      |
-| expand-keys          | 展开的列                                              | `array`             | `[]`       | --                                           | --      |
-| span-method          | 合并算法                                              | `function`          | --         | --                                           | `1.4.0` |
-| getCheckboxProps     | 多选行属性                                            | `function`          | --         | --                                           | `1.4.0` |
-| getRadioProps        | 单选行属性                                            | `function`          | --         | --                                           | `1.4.0` |
-| resize               | 开启所有单元格列宽拖动                                 | `boolean`           | `false`    | `true` `false`                               | `1.9.4` |
-| autoColsWidth        | 列宽自动计算，最大程度利用空间（1.9.8）                 | `boolean`           | `false`    | `true` `false`                               | `1.9.8` |
-
+| 属性                 | 描述                                                       | 类型                | 默认值     | 可选值                                       | 
+| -------------------- | --------------------------------------------------------- | ------------------- | ---------- | -------------------------------------------- | 
+| columns              | 列配置，具体详见 [更多](#tableColumn)                       | --                  | --         | --                                           | 
+| dataSource           | 数组数组                                                   | --                  | --         | --                                           | 
+| id                   | 数据主键                                                   | `string`            | --         | --                                           | 
+| v-model:selectedKeys | 复选框选中项                                                | --                  | --         | --                                           | 
+| v-model:selectedKey  | 单选框选中项                                                | --                  | --         | --                                           | 
+| default-toolbar      | 工具栏                                                     | `boolean` `array`   | `false`    | `true` `false` `['filter','export','print']` | 
+| size                 | 表格大小                                                   | `string`            | `md`       | `lg` `md` `sm`                               | 
+| children-column-name | 指定树形结构的列名                                          | `string`            | `children` | --                                           | 
+| indent-size          | 指定树形结构的缩进距离                                       | `number`            | `30`       | --                                           | 
+| height               | 表格高度                                                   | `number`            | --         | --                                           | 
+| maxHeight            | 表格最大高度                                               | `number`            | --         | --                                           | 
+| even                 | 开启斑马条纹                                               | `boolean`           | `false`    | `true` `false`                               | 
+| cellStyle            | 单元格样式 function(row, column, rowIndex, columnIndex)    | `string` `function` | --         | --                                           | 
+| rowStyle             | 表格行样式 function(row, rowIndex)                         | `string` `function` | --         | --                                           | 
+| cellClassName        | 单元格类名 function(row, column, rowIndex, columnIndex)    | `string` `function` | --         | --                                           | 
+| rowClassName         | 表格行类名 function(row, rowIndex)                         | `string` `function` | --         | --                                           | 
+| skin                 | 指定风格                                                    | `string`           | --         | `line` `row` `nob`                           |
+| expand-index         | 指定展开操作所在列的索引，使用 children 字段或 expand 插槽时有效 | `number`          | --         | --                                           | 
+| default-expand-all   | 初始时，是否展开所有行                                      | `boolean`           | `false`    | `true` `false`                               | 
+| expand-keys          | 展开行，控制属性                                            | `array`             | `[]`       | --                                           | 
+| span-method          | 单元格合并算法                                              | `function`          | --         | --                                           | 
+| getCheckboxProps     | 复选框的默认属性配置                                         | `function`          | --         | --                                           | 
+| getRadioProps        | 单选框的默认属性配置                                         | `function`          | --         | --                                           | 
+| resize               | 开启列宽拉伸                                                | `boolean`           | `false`    | `true` `false`                               | 
+| autoColsWidth        | 启用后，根据内容自动计算列宽                                 | `boolean`           | `false`    | `true` `false`                               | 
+| defaultToolbar       | 是否启用默认工具栏                                          | `boolean`           | `false`    | `true` `false`                               | 
+| loading              | 是否开启加载动画                                            | `boolean`           | `false`    | `true` `false`                               | 
+ 
 :::
 
 ::: title Table 事件
@@ -1626,9 +1780,6 @@ export default {
 | children        | 表头分组                       | `string`  | --      | `number` `checkbox` `radio` | `1.4.0` |
 | resize          | 单元格列宽拖动                 | `boolean` | `false` | `true` `false`              | `1.9.4` |
 
-:::
-
-::: contributor table
 :::
 
 ::: previousNext table

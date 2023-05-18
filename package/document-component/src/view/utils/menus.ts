@@ -19,8 +19,14 @@ const menus = [
       {
         id: 7,
         title: "图标",
-        subTitle: "iconfont",
+        subTitle: "icon",
         path: "/zh-CN/components/icon",
+      },
+      {
+        id: 8,
+        title: "弹层",
+        subTitle: "layer",
+        path: "/zh-CN/components/layer",
       },
       {
         id: 10,
@@ -169,6 +175,24 @@ const menus = [
         path: "/zh-CN/components/radio",
       },
       {
+        id: 332,
+        title: "单选按钮",
+        subTitle: "radioButton",
+        path: "/zh-CN/components/radioButton",
+      },
+      {
+        id: 13,
+        title: "多选卡片",
+        subTitle: "checkcard",
+        path: "/zh-CN/components/checkcard",
+      },
+      // {
+      //   id: 77,
+      //   title: "日历",
+      //   subTitle: "calendar",
+      //   path: "/zh-CN/components/calendar",
+      // },
+      {
         id: 34,
         title: "输入框",
         subTitle: "input",
@@ -302,7 +326,7 @@ const menus = [
       },
       {
         id: 30,
-        title: "树形组件",
+        title: "树",
         subTitle: "tree",
         path: "/zh-CN/components/tree",
       },
@@ -361,8 +385,14 @@ const menus = [
         path: "/zh-CN/components/tooltip",
       },
       {
+        id: 25,
+        title: "确认提示",
+        subTitle: "popconfirm",
+        path: "/zh-CN/components/popconfirm",
+      },
+      {
         id: 99,
-        title: "分步",
+        title: "步骤条",
         subTitle: "step",
         path: "/zh-CN/components/step",
       },
@@ -420,54 +450,12 @@ const menus = [
         subTitle: "barcode",
         path: "/zh-CN/components/barcode",
       },
-    ],
-  },
-  {
-    id: 1,
-    title: "反馈",
-    children: [
-      {
-        id: 90,
-        title: "模态框",
-        subTitle: "modal",
-        path: "/zh-CN/components/modal",
-      },
-      {
-        id: 91,
-        title: "加载",
-        subTitle: "load",
-        path: "/zh-CN/components/load",
-      },
-      {
-        id: 92,
-        title: "对话框",
-        subTitle: "confirm",
-        path: "/zh-CN/components/confirm",
-      },
-      {
-        id: 93,
-        title: "消息",
-        subTitle: "msg",
-        path: "/zh-CN/components/msg",
-      },
-      {
-        id: 94,
-        title: "抽屉",
-        subTitle: "drawer",
-        path: "/zh-CN/components/drawer",
-      },
-      {
-        id: 94,
-        title: "通知",
-        subTitle: "notifiy",
-        path: "/zh-CN/components/notifiy",
-      },
-      {
-        id: 94,
-        title: "相册",
-        subTitle: "photo",
-        path: "/zh-CN/components/photo",
-      },
+      // {
+      //   id: 120,
+      //   title: "水印",
+      //   subTitle: "watermark",
+      //   path: "/zh-CN/components/watermark",
+      // },
     ],
   },
 ];

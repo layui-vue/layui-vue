@@ -44,7 +44,6 @@ export interface FormItemProps {
 
 const props = withDefaults(defineProps<FormItemProps>(), {
   mode: "block",
-  labelPosition: "right",
   labelWidth: 95,
 });
 
@@ -55,6 +54,10 @@ const slotParent = ref<HTMLDivElement>();
 // 是否必填
 const isRequired = computed(() => {
   return props.required || layForm.required;
+});
+
+const itemLabelPosition = computed(() => {
+  return props.labelPosition || layForm.labelPosition;
 });
 
 // 拼接校验规则
@@ -224,9 +227,13 @@ onUnmounted(() => {
 
 const slots = useSlots();
 
+const showLabel = computed(() => {
+  return slots.label != undefined || props.label != undefined;
+});
+
 const getMarginLeft = computed(() => {
   if (props.mode == "block") {
-    if (props.labelPosition != "top") {
+    if (itemLabelPosition.value != "top") {
       let labelWidth =
         typeof props.labelWidth === "string"
           ? parseFloat(props.labelWidth)
@@ -257,10 +264,14 @@ const getMarginLeft = computed(() => {
 <template>
   <div
     class="layui-form-item"
-    :class="[`layui-form-item-${labelPosition}`]"
+    :class="[`layui-form-item-${itemLabelPosition}`, mode]"
     ref="formItemRef"
   >
-    <label class="layui-form-label" :style="{ width: labelWidth + 'px' }">
+    <label
+      class="layui-form-label"
+      v-if="showLabel"
+      :style="{ width: labelWidth + 'px' }"
+    >
       <span
         v-if="props.prop && isRequired"
         :class="

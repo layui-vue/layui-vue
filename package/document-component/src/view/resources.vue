@@ -13,8 +13,8 @@
         <ul class="layui-row layui-col-space6">
           <li class="layui-col-sm12">
             <div class="alone">
-              <a href="http://layer.layui-vue.com/zh-CN/demo" target="_blank"
-                >layer - vue<cite>通用型弹出层组件</cite></a
+              <router-link to="/zh-CN/components/layer"
+                >layer - vue<cite>通用型弹出层组件</cite></router-link
               >
             </div>
           </li>
@@ -29,7 +29,7 @@
       </div>
     </fieldset>
     <fieldset class="layui-field layui-field-title">
-      <legend style="margin-bottom: 20px; text-align: center">后台模板</legend>
+      <legend style="margin-bottom: 20px; text-align: center">研发产品</legend>
       <div class="layui-field-box">
         <ul class="layui-row layui-col-space6">
           <li class="layui-col-sm24">
@@ -49,7 +49,25 @@
   </div>
   <div class="footer footer-index">
     <p>Released under the <a href="/index.html">MIT License</a>.</p>
-    <p>Copyright © 2021-2023 layui-vue.com</p>
+    <p>Copyright © 2021-2023 www.layui-vue.com</p>
+    <p>
+      鸣谢：
+      <a
+        href="https://www.oschina.net"
+        style="color: #16b777; font-weight: 800; margin: 0px 5px"
+        >Oschina</a
+      >
+      <a
+        href="https://gitee.com"
+        style="color: #c71d23; font-weight: 800; margin: 0px 5px"
+        >Gitee</a
+      >
+      <a
+        href="https://www.iconfont.cn/"
+        style="color: #9b16ff; font-weight: 800; margin: 0px 5px"
+        >iconfont</a
+      >
+    </p>
   </div>
 </template>
 
@@ -60,7 +78,7 @@
 
 .alone {
   text-align: center;
-  background-color: #009688;
+  background-color: var(--global-primary-color);
   color: #fff;
   font-weight: 300;
   transition: all 0.3s;
@@ -68,7 +86,7 @@
 }
 .alone:hover a {
   color: white !important;
-  background-color: #5fb878;
+  background-color: var(--global-checked-color);
 }
 .alone a {
   display: block;

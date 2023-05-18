@@ -341,7 +341,7 @@ watch(
       if (props.isFunction) {
         firstOpenDelayCalculation();
       }
-      props.success();
+      props.success(props.id);
     }
   },
   { immediate: true, flush: "post" }
@@ -351,7 +351,7 @@ watch(
   () => visible.value,
   () => {
     if (!visible.value) {
-      props.end();
+      props.end(props.id);
     }
   }
 );
@@ -399,11 +399,11 @@ const supportMove = function () {
           },
           () => {
             // 拖拽结束
-            props.moveEnd();
+            props.moveEnd(props.id);
           },
           () => {
             // 拖拽开始
-            props.moveStart();
+            props.moveStart(props.id);
           }
         );
         // 拉伸, 在首次拉伸前, 移除 resizeObserver 监听
@@ -453,10 +453,10 @@ const contentClasses = computed(() => {
  */
 const closeHandle = () => {
   if (props.beforeClose) {
-    const result = props.beforeClose();
+    const result = props.beforeClose(props.id);
     // @ts-ignore
     if (result === undefined || (result != undefined && result === true)) {
-      props.close();
+      props.close(props.id);
       emit("close");
       emit("update:modelValue", false);
       props.destroy();
@@ -738,6 +738,7 @@ defineExpose({ reset, open, close });
           ref="contentRef"
           class="layui-layer-content"
           :class="contentClasses"
+          :style="min === true ? 'display:none' : ''"
         >
           <template v-if="type === 0 || type === 1 || type === 4">
             <i v-if="icon" :class="iconClass"></i>
@@ -801,38 +802,40 @@ defineExpose({ reset, open, close });
           ></CloseBtn>
         </span>
         <!-- 操作栏 -->
-        <template v-if="slots.footer">
-          <div class="layui-layer-footer">
-            <slot name="footer"></slot>
-          </div>
-        </template>
-        <template v-else>
-          <div
-            v-if="((btn && btn.length > 0) || type === 0) && !isMessage"
-            class="layui-layer-btn"
-            :class="[`layui-layer-btn-${btnAlign}`]"
-          >
-            <template v-if="btn && btn.length > 0">
-              <template v-for="(b, index) in btn" :key="index">
-                <a
-                  :class="[
-                    `layui-layer-btn${index}`,
-                    { 'layui-layer-btn-disabled': b.disabled },
-                  ]"
-                  @click="!b.disabled && b.callback(id)"
-                  >{{ b.text }}</a
-                >
+        <div :style="min === true ? 'display:none' : ''">
+          <template v-if="slots.footer">
+            <div class="layui-layer-footer">
+              <slot name="footer"></slot>
+            </div>
+          </template>
+          <template v-else>
+            <div
+              v-if="((btn && btn.length > 0) || type === 0) && !isMessage"
+              class="layui-layer-btn"
+              :class="[`layui-layer-btn-${btnAlign}`]"
+            >
+              <template v-if="btn && btn.length > 0">
+                <template v-for="(b, index) in btn" :key="index">
+                  <a
+                    :class="[
+                      `layui-layer-btn${index}`,
+                      { 'layui-layer-btn-disabled': b.disabled },
+                    ]"
+                    @click="!b.disabled && b.callback(id)"
+                    >{{ b.text }}</a
+                  >
+                </template>
               </template>
-            </template>
-            <template v-else>
-              <template v-if="type === 0">
-                <a class="layui-layer-btn0" @click="yesHandle()">{{
-                  yesText
-                }}</a>
+              <template v-else>
+                <template v-if="type === 0">
+                  <a class="layui-layer-btn0" @click="yesHandle()">{{
+                    yesText
+                  }}</a>
+                </template>
               </template>
-            </template>
-          </div>
-        </template>
+            </div>
+          </template>
+        </div>
         <!-- 辅助栏 -->
         <span v-if="showResize" class="layui-layer-resize"></span>
       </div>

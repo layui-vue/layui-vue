@@ -3,6 +3,10 @@
   clear: both;
 }
 
+.layui-form-item.inline {
+  display: inline-block;
+}
+
 .layui-form-item-right .layui-form-label {
   text-align: right;
 }
@@ -44,6 +48,18 @@
   text-align: left;
 }
 
+.layui-form-item .layui-switch-container {
+  display: inline-block;
+  margin-top: 6px;
+  margin-left: 10px;
+}
+
+.layui-form-item .layui-rate {
+  padding-top: 6px;
+  padding-left: 10px;
+  padding-bottom: 0px;
+}
+
 .layui-form-item .layui-inline {
   margin-bottom: 5px;
   margin-right: 10px;
@@ -61,7 +77,7 @@
 
 .layui-form-item .layui-input-inline {
   float: left;
-  width: 190px;
+  width: 220px;
   margin-right: 10px;
 }
 
@@ -91,8 +107,9 @@
 }
 
 .layui-required {
-  color: #ff5722;
-  font-size: 12px;
+  margin-right: 4px;
+  color: var(--global-danger-color);
+  font-size: 14px;
   line-height: 1;
 }
 
@@ -101,18 +118,18 @@
   .layui-input-inline {
     .layui-form-danger {
       &, .layui-textarea, .layui-tag-input, .layui-input {
-        border-color: #ff5722 !important;
+        border-color: var(--global-danger-color) !important;
       }
     }
   }
 }
 
 .layui-error-message {
-  color: #ff5722;
+  padding-top: 5px;
+  color: var(--global-danger-color);
+  position: absolute;
   font-size: 12px;
   line-height: 1;
-  padding-top: 5px;
-  position: absolute;
   top: 100%;
   left: 0;
 }
@@ -149,7 +166,7 @@
   text-overflow: ellipsis;
   box-sizing: border-box;
   border-style: solid;
-  border-radius: 2px 0 0 2px;
+  border-radius: var(--global-border-radius) 0 0 var(--global-border-radius);
   text-align: center;
 }
 
@@ -163,13 +180,13 @@
 }
 
 .layui-form-pane .layui-input:first-child {
-  border-radius: 0 2px 2px 0
+  border-radius: 0 var(--global-border-radius) var(--global-border-radius) 0
 }
 
 .layui-form-pane .layui-form-item:has(.layui-textarea) {
   .layui-form-label {
     width: 100% !important;
-    border-radius: 2px 2px 0 0;
+    border-radius: var(--global-border-radius) var(--global-border-radius) 0 0;
   }
   .layui-input-block,
   .layui-input-inline {
@@ -178,7 +195,7 @@
     width: 100% !important;
     margin-left: 0px !important;
     .layui-textarea {
-      border-radius: 0 0 2px 2px;
+      border-radius: 0 0 var(--global-border-radius) var(--global-border-radius);
     }
   }
 }

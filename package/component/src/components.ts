@@ -11,6 +11,10 @@ import LayButtonGroup from "./component/buttonGroup/index";
 import LayIcon from "./component/icon/index";
 import LayIconPicker from "./component/iconPicker/index";
 import LayCard from "./component/card/index";
+import LayCheckCard from "./component/checkcard/index";
+import LayCheckCardGroup from "./component/checkcardGroup/index";
+import LayCalendar from "./component/calendar/index";
+
 import LayLayout from "./component/layout/index";
 import LaySide from "./component/side/index";
 import LayBody from "./component/body/index";
@@ -89,6 +93,7 @@ import LayAutocomplete from "./component/autocomplete/index";
 import LayBarcode from "./component/barcode/index";
 import LayQrcode from "./component/qrcode/index";
 import LayTreeSelect from "./component/treeSelect/index";
+import LayWatermark from "./component/watermark/index";
 
 declare module "@vue/runtime-core" {
   // GlobalComponents for Volar
@@ -107,6 +112,8 @@ declare module "@vue/runtime-core" {
     LayButtonGroup: typeof LayButtonGroup;
     LayButtonContainer: typeof LayButtonContainer;
     LayCard: typeof LayCard;
+    LayCheckCard: typeof LayCheckCard;
+    LayCheckCardGroup: typeof LayCheckCardGroup;
     LayCarousel: typeof LayCarousel;
     LayCarouselItem: typeof LayCarouselItem;
     LayCascader: typeof LayCascader;
@@ -180,8 +187,10 @@ declare module "@vue/runtime-core" {
     LayTransition: typeof LayTransition;
     LayTree: typeof LayTree;
     LayTreeSelect: typeof LayTreeSelect;
+    LayWatermark: typeof LayWatermark;
     LayUpload: typeof LayUpload;
     LayConfigProvider: typeof LayConfigProvider;
+    LayCalendar: typeof LayCalendar;
   }
 
   export interface ComponentCustomProperties {

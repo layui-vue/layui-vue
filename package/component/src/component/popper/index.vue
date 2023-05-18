@@ -9,7 +9,7 @@
         @mouseenter="handlerPopperMouseEnter"
         @mouseleave="handlerPopperMouseLeave"
       >
-        <slot> {{ content }}</slot>
+        <slot> {{ content }} </slot>
         <div class="layui-popper-arrow"></div>
       </div>
     </transition>
@@ -36,7 +36,6 @@ import {
   computed,
   toRef,
   StyleValue,
-  Ref,
 } from "vue";
 import {
   onClickOutside,
@@ -272,4 +271,6 @@ onMounted(() => {
   useEventListener("resize", handleScroll);
   handlerTriggerEventRegist();
 });
+
+defineExpose({ hide: doHidden });
 </script>

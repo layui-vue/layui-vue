@@ -59,10 +59,7 @@ export default {
 | ---- | ----------- | --------------- |
 | nm   | 灰色样式    | --              |
 
-:::
-
-::: contributor quote
-:::  
+::: 
 
 ::: previousNext quote
 :::

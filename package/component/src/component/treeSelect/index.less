@@ -8,7 +8,9 @@
 }
 
 .layui-tree-select-content {
-  padding: 10px;
+  padding: 5px;
+  max-height: 300px;
+  overflow: auto;
 }
 
 .layui-tree-select .layui-icon-triangle-d {
@@ -25,3 +27,7 @@
 .layui-tree-select.has-content.has-clear:not(.layui-disabled):hover .layui-tag-input-suffix {
   display: none;
 }
+
+.layui-tree-select-content::-webkit-scrollbar { width: 8px; height: 8px; }
+.layui-tree-select-content::-webkit-scrollbar-thumb { border-radius: 10px; background-color: #eeeeee; }
+.layui-tree-select-content::-webkit-scrollbar-thumb:hover { background-color: #dddddd; }

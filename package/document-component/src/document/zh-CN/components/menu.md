@@ -809,8 +809,5 @@ export default {
 
 :::
 
-::: contributor menu
-:::  
-
 ::: previousNext menu
 :::

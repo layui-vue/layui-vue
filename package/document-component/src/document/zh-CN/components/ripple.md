@@ -83,13 +83,12 @@ export default {
 :::
 
 :::table
+
 | 名称    | 描述     |
 | ------- | -------- |
 | default | 默认插槽 |
-:::
 
-::: contributor ripple
-:::  
+:::
 
 ::: previousNext ripple
 :::

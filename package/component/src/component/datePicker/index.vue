@@ -125,7 +125,6 @@ import "./index.less";
 import dayjs from "dayjs";
 import LayInput from "../input/index.vue";
 import LayDropdown from "../dropdown/index.vue";
-import { LayIcon } from "@layui/icons-vue";
 import { getMonth, getYear, getDay } from "./day";
 import {
   ref,
@@ -210,11 +209,7 @@ const hms = ref({
   ss: 0,
 });
 
-let unWatch = false;
-// 计算结果日期
-const dateValue = props.range ? ref(["", ""]) : ref("");
-const getDateValue = () => {
-  unWatch = true;
+const calDateValue = () => {
   let dayjsVal;
   switch (props.type) {
     case "date":
@@ -273,35 +268,10 @@ const getDateValue = () => {
       break;
   }
   dateValue.value = dayjsVal !== "Invalid Date" ? dayjsVal : "";
-  if (dayjsVal === "Invalid Date") {
-    unWatch = false;
-    $emits("update:modelValue", "");
-    return;
-  }
-  if (props.timestamp) {
-    $emits("update:modelValue", dayjs(dayjsVal).unix() * 1000);
-    $emits("change", dayjs(dayjsVal).unix() * 1000);
-  } else {
-    $emits("update:modelValue", dayjsVal);
-    $emits("change", dayjsVal);
-  }
-  setTimeout(() => {
-    unWatch = false;
-  }, 0);
+  return dayjsVal;
 };
 
-/**
- * 处理 range 启用时的值内容
- */
-const getDateValueByRange = () => {
-  unWatch = true;
-  // 如果内容是空的，直接返回
-  if (rangeValue.first === "" || rangeValue.last === "") {
-    dateValue.value = ["", ""];
-    $emits("update:modelValue", dateValue.value);
-    $emits("change", dateValue.value);
-    return;
-  }
+const calDateValueByRange = () => {
   // 根据类型不同，格式化日期
   let format = "YYYY-MM-DD";
   switch (props.type) {
@@ -325,14 +295,42 @@ const getDateValueByRange = () => {
       break;
   }
   dateValue.value = [
-    dayjs(rangeValue.first).format(format),
-    dayjs(rangeValue.last).format(format),
+    rangeValue.first ? dayjs(rangeValue.first).format(format) : "",
+    rangeValue.last ? dayjs(rangeValue.last).format(format) : rangeValue.last,
   ];
+};
+
+// 计算结果日期
+const dateValue = props.range ? ref(["", ""]) : ref("");
+const getDateValue = () => {
+  let dayjsVal = calDateValue();
+  if (dayjsVal === "Invalid Date") {
+    $emits("update:modelValue", "");
+    return;
+  }
+  if (props.timestamp) {
+    $emits("update:modelValue", dayjs(dayjsVal).unix() * 1000);
+    $emits("change", dayjs(dayjsVal).unix() * 1000);
+  } else {
+    $emits("update:modelValue", dayjsVal);
+    $emits("change", dayjsVal);
+  }
+};
+
+/**
+ * 处理 range 启用时的值内容
+ */
+const getDateValueByRange = () => {
+  // 如果内容是空的，直接返回
+  if (rangeValue.first === "" || rangeValue.last === "") {
+    dateValue.value = ["", ""];
+    $emits("update:modelValue", dateValue.value);
+    $emits("change", dateValue.value);
+    return;
+  }
+  calDateValueByRange();
   $emits("update:modelValue", dateValue.value);
   $emits("change", dateValue.value);
-  setTimeout(() => {
-    unWatch = false;
-  }, 0);
 };
 
 // 确认事件
@@ -368,9 +366,6 @@ watch(
 watch(
   () => props.modelValue,
   () => {
-    if (unWatch) {
-      return;
-    }
     let initModelValue: string =
       props.range && props.modelValue
         ? (props.modelValue as string[])[0] || ""
@@ -387,7 +382,11 @@ watch(
     hms.value.ss = isNaN(dayjs(initModelValue).second())
       ? 0
       : dayjs(initModelValue).second();
-    if (initModelValue.length === 8 && props.type === "time") {
+    if (
+      initModelValue != null &&
+      initModelValue.length === 8 &&
+      props.type === "time"
+    ) {
       let modelValue = initModelValue;
       modelValue = "1970-01-01 " + modelValue;
       hms.value.hh = dayjs(modelValue).hour();
@@ -406,7 +405,11 @@ watch(
           : -1;
       }
     }
-    if (initModelValue.length === 8 && props.type === "time") {
+    if (
+      initModelValue != null &&
+      initModelValue.length === 8 &&
+      props.type === "time"
+    ) {
       // 时间范围选择，对 HH-mm-ss 格式补全
       rangeValue.first = "1970-01-01 " + initModelValue;
       rangeValue.last =
@@ -421,9 +424,9 @@ watch(
           : "";
     }
     if (!props.range) {
-      getDateValue();
+      calDateValue();
     } else {
-      getDateValueByRange();
+      calDateValueByRange();
     }
   },
   { immediate: true }

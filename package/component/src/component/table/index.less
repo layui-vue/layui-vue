@@ -398,9 +398,13 @@
 }
 
 .layui-table-cell-expand-icon {
+  font-size: 12px;
+  border-radius: var(--global-border-radius);
   border: 1px solid #eee;
+  text-align: center;
+  background-color: #fafafa;
+  width: 22px;
   margin-right: 8px;
-  border-radius: 2px;
 }
 
 .layui-table-cell-expand-icon-spaced {
@@ -456,15 +460,17 @@
 
 .layui-table-tool-checkbox{
   padding: 10px;
+  max-height: 200px;
+  overflow-y: auto;
 }
 
 .layui-table-tool-checkbox > *{
-  display: block;
-  margin-bottom: 12px;
+  display: block !important;
+  margin-bottom: 12px !important;
 }
 
 .layui-table-tool-checkbox > *:last-child{
-  margin-bottom: 0px;
+  margin-bottom: 0px !important;
 }
 
 .layui-table-has-fixed-left .layui-table-fixed-left-last {
@@ -618,13 +624,12 @@
 }
 
 .layui-table-loading {
-  height: 80px;
   text-align: center;
-  line-height: 70px;
 }
 
 .layui-table-loading .layui-icon {
-  font-size: 26px;
+  font-size: 36px;
+  color: #c2c2c2;
 }
 
 .lay-table-cols-resize {
@@ -657,3 +662,17 @@
     opacity: 1;
   }
 }
+
+.layui-table-body-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.layui-table-main::-webkit-scrollbar { width: 8px; height: 8px; }
+.layui-table-main::-webkit-scrollbar-thumb { border-radius: 10px; background-color: #eeeeee; }
+.layui-table-main::-webkit-scrollbar-thumb:hover { background-color: #dddddd; }
+
+.layui-table-tool-checkbox::-webkit-scrollbar { width: 8px; height: 8px; }
+.layui-table-tool-checkbox::-webkit-scrollbar-thumb { border-radius: 10px; background-color: #eeeeee; }
+.layui-table-tool-checkbox::-webkit-scrollbar-thumb:hover { background-color: #dddddd; }

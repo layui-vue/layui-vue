@@ -4,44 +4,13 @@
 ::: title 基本介绍
 :::
 
-::: demo
-
-<template>
-<div style="max-width: 100%; ">
- <lay-tooltip content="缩小浏览器时...假装这里有文字提示假装这里有文字提示假装这里有文字提示假装这里有文字提示" ref="tooltip" :isAutoShow="true">
-      缩小浏览器时...假装这里有文字提示假装这里有文字提示假装这里有文字提示假装这里有文字提示
-  </lay-tooltip>
-</div>
-<div style="max-width: 124px;  margin-top: 20px">
- <lay-tooltip content="假装这里有文字提示" ref="tooltip" :isAutoShow="true">
-      假装这里有文字提示
-  </lay-tooltip>
-</div>
-<div style="width: 126px; margin-top: 20px">
- <lay-tooltip content="假装这里有文字提示" ref="tooltip" :isAutoShow="true">
-      假装这里有文字提示
-  </lay-tooltip>
-</div>
-</template>
-
-<script>
-  import { ref } from 'vue';
-
-export default {
-setup() {
-
-    }
-}
-</script>
-
-<style>
-</style>
+::: describe 警告提示，展现需要关注的信息。
 :::
 
 ::: title 基础使用
 :::
 
-::: demo
+::: demo 使用 `lay-tooltip` 标签，创建文字提示。
 
 <template>
   <lay-tooltip content="假装这里有文字提示" trigger="click">
@@ -54,6 +23,7 @@ setup() {
 :::
 
 ::: demo
+
 <template>
     <lay-tooltip :visible="visible" trigger="click" content="假装这里有文字提示" >
       <lay-button @mouseenter="visible=true" @mouseleave="visible=false">tooltip</lay-button>
@@ -124,7 +94,7 @@ export default {
 </script>
 :::
 
-::: title 是否禁用/动态属性
+::: title 是否禁用
 :::
 
 ::: demo
@@ -133,7 +103,7 @@ export default {
   <lay-tooltip :content="content" :is-dark="isDark" :disabled="!disabled">
     <lay-button>tooltip</lay-button>
   </lay-tooltip>
-  <lay-switch v-model="disabled" onswitch-text="启用tooltip"  unswitch-text="禁用tooltip" style="margin-left: 5px;"></lay-switch>
+  <lay-switch v-model="disabled" onswitch-text="启用"  unswitch-text="禁用" style="margin-left: 5px;"></lay-switch>
   <lay-switch v-model="isDark" onswitch-text="深色"  unswitch-text="浅色" style="margin-left: 5px;"></lay-switch>
 </template>
 
@@ -152,15 +122,19 @@ export default {
         "感谢曾经在我身边的，一直在我身边。",
         "经年再相逢，魂梦与子同。"
       ];
+      
       const rendonCotent = function(){
         return contentArr[Math.floor(Math.random() * contentArr.length)];
       };
-
-      const content = ref(rendonCotent())
+      
       const isDark = ref(false)
+      
+      const content = ref(rendonCotent())
+
       const disabled = ref(true)
 
       setInterval(()=> content.value =  rendonCotent(), 1000)
+
       return {
         content,
         isDark,
@@ -190,9 +164,6 @@ export default {
 | enterable   | 鼠标能否进入 tooltip 中 | `true`(默认值) `false`|
 | trigger     | 触发方式| `click` `hover`(默认值) `contextmenu` `focus` `trigger[]`| 
 
-:::
-
-::: contributor tooltip
 :::
 
 ::: previousNext tooltip

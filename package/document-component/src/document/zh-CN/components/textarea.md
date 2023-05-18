@@ -228,8 +228,5 @@ export default {
 | focus | 原生 focus事件      | --                         |
 | blur  | 原生 blur 事件      | --                         |
 
-::: contributor textarea
-:::
-
 ::: previousNext textarea
 :::

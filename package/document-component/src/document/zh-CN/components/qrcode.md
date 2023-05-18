@@ -90,8 +90,5 @@ export default {
 
 :::
 
-::: contributor button
-:::
-
 ::: previousNext button
 :::

@@ -131,8 +131,5 @@ export default {
 
 :::
 
-::: contributor backtop
-:::
-
 ::: previousNext backtop
 :::

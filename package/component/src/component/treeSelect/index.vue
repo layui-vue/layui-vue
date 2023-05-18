@@ -6,7 +6,7 @@ export default {
 
 <script lang="ts" setup>
 import "./index.less";
-import { computed, ref, watch } from "vue";
+import { StyleValue, computed, ref, watch } from "vue";
 import { getNode } from "../../utils/index";
 import { TreeSelectSize } from "./interface";
 import { LayIcon } from "@layui/icons-vue";
@@ -27,6 +27,8 @@ export interface TreeSelectProps {
   size?: TreeSelectSize;
   checkStrictly?: boolean;
   search?: boolean;
+  contentClass?: string | Array<string | object> | object;
+  contentStyle?: StyleValue;
 }
 
 export interface TreeSelectEmits {
@@ -81,15 +83,26 @@ watch(
   selectedValue,
   () => {
     if (props.multiple) {
-      multipleValue.value = selectedValue.value.map((value: any) => {
-        const node: any = getNode(props.data, value);
-        if (node) {
-          node.label = node.title;
-          node.value = node.id;
-          node.closable = !node.disabled;
+      try {
+        multipleValue.value = selectedValue.value.map((value: any) => {
+          var node: any = getNode(props.data, value);
+          if (node) {
+            node.label = node.title;
+            node.value = node.id;
+            node.closable = !node.disabled;
+          }
+          if (node == undefined) {
+            node = {
+              label: value,
+              value: value,
+              closable: true,
+            };
+          }
           return node;
-        }
-      });
+        });
+      } catch (e) {
+        throw new Error("v-model / model-value is not an array type");
+      }
     } else {
       /**
        * 根据 id 查找 node 节点
@@ -210,10 +223,20 @@ watch(searchValue, () => {
   if (searchValue.value === "") {
     treeData.value = props.data;
   } else {
-    // TODO 过滤 tree 数据
-    treeData.value = [];
+    treeData.value = treeFilter(props.data, (item: any) => {
+      return item.title.indexOf(searchValue.value) > -1;
+    });
   }
 });
+
+function treeFilter(tree: any[], func: Function) {
+  return tree
+    .map((node) => ({ ...node }))
+    .filter((node) => {
+      node.children = node.children && treeFilter(node.children, func);
+      return func(node) || (node.children && node.children.length);
+    });
+}
 
 watch(
   () => props.data,
@@ -236,6 +259,8 @@ watch(
     <lay-dropdown
       ref="dropdownRef"
       :disabled="disabled"
+      :contentClass="contentClass"
+      :contentStyle="contentStyle"
       :update-at-scroll="true"
       @show="openState = true"
       @hide="openState = false"

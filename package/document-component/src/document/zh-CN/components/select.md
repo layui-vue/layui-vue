@@ -124,8 +124,8 @@ export default {
   }
 }
 </script>
-:::
 
+:::
 
 ::: title 允许清空
 :::
@@ -179,7 +179,7 @@ import { ref,watch } from 'vue'
 
 export default {
   setup() {
-    const value6 = ref(['1','2']);
+    const value6 = ref(['1','2', '8']);
 
     return {
       value6
@@ -187,6 +187,37 @@ export default {
   }
 }
 </script>
+
+:::
+
+::: title 循环渲染
+:::
+
+::: demo 通过 show-search 属性开启内容检索, input 变为可输入状态。在 multiple 模式下, 检索框位于 dropdown 顶部。
+
+<template>
+  <lay-select v-model="value8">
+    <template v-for="number of 50">
+        <lay-select-option :value="number"> 选项 - {{number}}</lay-select-option>
+    </template>
+  </lay-select>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const value8 = ref(1)
+
+    return {
+      value8
+    }
+  }
+}
+</script>
+
 :::
 
 ::: title 使用插槽
@@ -217,26 +248,94 @@ export default {
 
 :::
 
+::: title 选项分组
+:::
+
+::: demo 通过 `default` 插槽, 实现选项的自定义渲染。
+
+<template>
+  <lay-select v-model="value">
+    <template  v-for="option in options">
+        <lay-select-option-group :label="option.label">
+          <template v-for="children in option.children">
+            <lay-select-option :value="children.value" :label="children.label"></lay-select-option>
+          </template>
+        </lay-select-option-group>
+    </template>
+  </lay-select>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+    const value = ref(null);
+    const options = ref([{
+      label: "分组",
+      children: [
+        {
+          label: "运动",
+          value: 0
+        },
+        {
+          label: "编码",
+          value: 1
+        },
+        {
+          label: "运动",
+          value: 2
+        }
+      ]
+    },
+    {
+      label: "分组",
+      children: [
+        {
+          label: "运动",
+          value: 3
+        },
+        {
+          label: "编码",
+          value: 4
+        },
+        {
+          label: "运动",
+          value: 5
+        }
+      ]
+    }]);
+
+    return {
+      value,
+      options
+    }
+  }
+}
+</script>
+
+:::
+
 ::: title Select 属性
 :::
 
 ::: table
 
-| 属性          |         描述          |             类型          |     可选值      |   默认值 |
-| ------------ | --------------------- | ------------------------- | -------------- | -------- |
-| v-model      | 选中值                | `string`/`number`/`Array`  |        -       |    -    |
-| name         | 原生 name 属性        | `string`                   |        -       |    -    |
-| placeholder  | 默认空提示语          | `string`                   |        -       | `请选择` |
-| disabled     | 是否禁用              | `boolean`                  | `true` `false` | `false` |
-| multiple     | 是否为多选            | `boolean`                  | `true` `false` | `false` |
-| size         | 尺寸                  | `string`                  | `lg` `md` `sm` `xs`| `md` |
-| showSearch        | 开启搜索     | `boolean` | -- | -- |
-| searchMethod        | 自定义搜索逻辑 (text, optionProps)    | `Function` | -- | -- |
-| searchPlaceholder | 搜索提示          | `string`                  | -- | -- |
-| minCollapsedNum        | 多选模式最小折叠数量                  | `number`                  | -- | -- |
-| collapseTagsTooltip    | 多选折叠后时候悬浮展示                  | `boolean`                  | -- | -- |
-| contentStyle        | 内容自定义样式     | `StyleValue` | -- | -- |
-| contentClass        | 内容自定义Class    | `string` `Array<string \| object>` `object` | -- | -- |
+| 属性                | 描述                               | 类型                                        | 可选值              | 默认值   |
+| ------------------- | ---------------------------------- | ------------------------------------------- | ------------------- | -------- |
+| v-model             | 选中值                             | `string`/`number`/`Array`                   | -                   | -        |
+| name                | 原生 name 属性                     | `string`                                    | -                   | -        |
+| placeholder         | 默认空提示语                       | `string`                                    | -                   | `请选择` |
+| disabled            | 是否禁用                           | `boolean`                                   | `true` `false`      | `false`  |
+| multiple            | 是否为多选                         | `boolean`                                   | `true` `false`      | `false`  |
+| size                | 尺寸                               | `string`                                    | `lg` `md` `sm` `xs` | `md`     |
+| showSearch          | 开启搜索                           | `boolean`                                   | --                  | --       |
+| searchMethod        | 自定义搜索逻辑 (text, optionProps) | `Function`                                  | --                  | --       |
+| searchPlaceholder   | 搜索提示                           | `string`                                    | --                  | --       |
+| minCollapsedNum     | 多选模式最小折叠数量               | `number`                                    | --                  | --       |
+| collapseTagsTooltip | 多选折叠后时候悬浮展示             | `boolean`                                   | --                  | --       |
+| contentStyle        | 内容自定义样式                     | `StyleValue`                                | --                  | --       |
+| contentClass        | 内容自定义 Class                   | `string` `Array<string \| object>` `object` | --                  | --       |
 
 :::
 
@@ -245,10 +344,10 @@ export default {
 
 ::: table
 
-| 属性    | 描述       |     接收值      |
-| ------ | ---------- | --------------- |
-| change | 切换事件    | value           |
-| search | 关键词变化事件    | 用户输入的关键词 string           |
+| 属性   | 描述           | 接收值                  |
+| ------ | -------------- | ----------------------- |
+| change | 切换事件       | value                   |
+| search | 关键词变化事件 | 用户输入的关键词 string |
 
 :::
 
@@ -257,15 +356,14 @@ export default {
 
 ::: table
 
-
 ::: table
 
-| 属性          |         描述          |             类型          |     可选值      |   默认值 |
-| ------------ | --------------------- | ------------------------- | -------------- | -------- |
-| label        | 标签值(`必填`)         | `string`                  |        -       |    -    |
-| value        | 值                    | `string` / `number`       |        -       |    -    |
-| keyword      | 用于匹配关键词的数据，传入文本+拼音可以支持拼音搜索   | `string`        |        -       |    -    |
-| disabled     | 是否禁用              | `boolean`                  | `true` `false` | `false` |
+| 属性     | 描述                                                | 类型                | 可选值         | 默认值  |
+| -------- | --------------------------------------------------- | ------------------- | -------------- | ------- |
+| label    | 标签值(`必填`)                                      | `string`            | -              | -       |
+| value    | 值                                                  | `string` / `number` | -              | -       |
+| keyword  | 用于匹配关键词的数据，传入文本+拼音可以支持拼音搜索 | `string`            | -              | -       |
+| disabled | 是否禁用                                            | `boolean`           | `true` `false` | `false` |
 
 :::
 
@@ -274,15 +372,12 @@ export default {
 
 ::: table
 
-| 属性    |         描述       |     接收值      |
-| ------- | ----------------- | --------------- |
-| default | 默认(`label`)     |        -       |
-| prepend | 自定义前缀         |        -       |
-| append  | 自定义后缀         |        -       |
+| 属性    | 描述          | 接收值 |
+| ------- | ------------- | ------ |
+| default | 默认(`label`) | -      |
+| prepend | 自定义前缀    | -      |
+| append  | 自定义后缀    | -      |
 
-:::
-
-::: contributor select
 :::
 
 ::: previousNext select

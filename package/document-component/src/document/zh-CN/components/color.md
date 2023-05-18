@@ -10,19 +10,19 @@
 ::: title 主色调
 :::
 
-::: demo layui 主要是以象征包容的墨绿作为主色调，由于它给人以深沉感，所以通常会以浅黑色的作为其陪衬，又会以蓝色这种比较鲜艳的色调来弥补它的色觉疲劳，整体让人清新自然，愈发耐看。【取色意义】：我们执着于务实，不盲目攀比，又始终不忘绽放活力。这正是 layui 所追求的价值。
+::: demo layui-vue 选取以象征清新与包容的「蓝绿色」作为主色调，它介于蓝与绿之间，亦可称之为「青色」，所谓青者，取之于蓝而深于绿，此间包罗万象，跨越时空。这也是我们对技术创作与人生哲学之间的一点思考。
 
 <template>
     <ul class="layui-row layui-col-space15">
         <li class="layui-col-sm6">
-            <div style="background-color: #009688;padding:10px;color:whitesmoke;padding:30px;border-radius:2px;">
-                <p>#009688</p>
+            <div style="background-color: #16baaa;padding:10px;color:whitesmoke;padding:30px;border-radius:2px;">
+                <p>#16baaa</p>
                 <p tips="">主色调</p>
             </div>
         </li>
         <li class="layui-col-sm6">
-            <div style="background-color: #5FB878;padding:10px;color:whitesmoke;padding:30px;border-radius:2px;">
-                <p>#5FB878</p>
+            <div style="background-color: #16b777;padding:10px;color:whitesmoke;padding:30px;border-radius:2px;">
+                <p>#16b777</p>
                 <p tips="">次色调</p>
             </div>
         </li>
@@ -60,8 +60,8 @@ import { ref } from 'vue';
         </div>
       </li>
       <li class="layui-col-sm6">
-        <div style="background-color: #5FB878;padding:10px;color:whitesmoke;padding:30px;border-radius:2px;">
-          <p>#5FB878</p>
+        <div style="background-color: #16b777;padding:10px;color:whitesmoke;padding:30px;border-radius:2px;">
+          <p>#16b777</p>
           <p tips="">成功 - SUCCESS</p>
         </div>
       </li>
@@ -85,7 +85,7 @@ import { ref } from 'vue';
 </script>
 :::
 
-::: title 中性色
+::: title 辅助色
 :::
 
 ::: demo layui 认为灰色系代表极简，因为这是一种神奇的颜色，几乎可以与任何元素搭配，不易形成视觉疲劳，且永远不会过时。低调而优雅！
@@ -124,9 +124,6 @@ import { ref } from 'vue';
 <script setup>
 import { ref } from 'vue';
 </script>
-:::
-
-::: contributor color
 :::
 
 ::: previousNext color

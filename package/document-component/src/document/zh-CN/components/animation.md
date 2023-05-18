@@ -115,8 +115,5 @@ export default {
 
 :::
 
-::: contributor animation
-:::
-
 ::: previousNext animation
 :::

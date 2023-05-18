@@ -89,8 +89,5 @@
 
 :::
 
-::: contributor affix
-:::
-
 ::: previousNext affix
 :::

@@ -104,7 +104,6 @@ const clearRate = function () {
       <li
         v-for="index of length"
         :key="index"
-        class="layui-inline"
         @mousemove="mousemove(index, $event)"
         @click="action(index, $event)"
       >
@@ -129,7 +128,7 @@ const clearRate = function () {
       </li>
     </ul>
     <template v-if="text">
-      <span class="layui-inline">
+      <span>
         <slot :value="currentValue">
           {{ currentValue + "星" }}
         </slot>

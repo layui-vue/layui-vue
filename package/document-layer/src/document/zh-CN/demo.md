@@ -23,7 +23,7 @@ const msg = function() {
 }
 
 const success = function() {
-    layer.msg("成功消息", { time: 3111111111000, id: "1" ,icon: 1})
+    layer.msg("成功消息", { time: 3000, id: "1" , icon: 1})
 }
 
 const failure = function() {
@@ -156,14 +156,20 @@ const open111 = function() {
         type: 1,
         title: "标题",
         content: "内容",
-        end: () => {
-            alert("销毁事件")
+        end: (id) => {
+            console.log(`销毁:${id}`)
         },
-        close: () => {
-            alert("关闭事件")
+        close: (id) => {
+            console.log(`关闭:${id}`)
         },
-        beforeClose: () => {
- 
+        beforeClose: (id) => {
+            console.log(`关闭前置:${id}`)
+        },
+        moveStart: (id) => {
+            console.log(`开始拖拽:${id}`)
+        },
+        moveEnd: (id) => {
+            console.log(`结束拖拽:${id}`)
         }
     })    
 }

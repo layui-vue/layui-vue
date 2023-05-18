@@ -38,6 +38,12 @@
   cursor: pointer;
 }
 
+.layui-select-content .layui-select-option-group-label {
+  padding: 10px 10px;
+  font-size: 14px;
+  color: gray;
+}
+
 .layui-select-content .layui-select-option.layui-disabled {
   color: var(--global-neutral-color-6)!important;
   cursor: not-allowed!important;  
@@ -69,3 +75,7 @@
 .layui-select.has-content.has-clear:not(.has-disabled):hover .layui-tag-input-suffix {
   display: none;
 }
+
+.layui-select-content::-webkit-scrollbar { width: 8px; height: 8px; }
+.layui-select-content::-webkit-scrollbar-thumb { border-radius: 10px; background-color: #eeeeee; }
+.layui-select-content::-webkit-scrollbar-thumb:hover { background-color: #dddddd; }

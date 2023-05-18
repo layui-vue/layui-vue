@@ -734,8 +734,5 @@ const options3=[
 
 :::
 
-::: contributor cascader
-:::
-
 ::: previousNext cascader
 :::

@@ -14,9 +14,9 @@
 
 <template>
   <lay-fullscreen v-slot="{ enter, exit, toggle, isFullscreen }" @fullscreenchange=fullscreen>
-    <lay-button type="normal" @click="enter()">进入全屏</lay-button>  
-    <lay-button type="normal" @click="exit()">退出</lay-button> 
-    <lay-button type="warm" @click="toggle()">切换: {{isFullscreen ? "退出" : "进入全屏"}}</lay-button>
+    <lay-button type="primary" @click="enter()">进入全屏</lay-button>  
+    <lay-button type="primary" @click="exit()">退出</lay-button> 
+    <lay-button type="default" @click="toggle()">切换: {{isFullscreen ? "退出" : "进入全屏"}}</lay-button>
   </lay-fullscreen>
 </template>
 
@@ -45,9 +45,9 @@ export default {
 <template>
   <lay-fullscreen :target="elRef" v-slot="{ enter, exit, toggle, isFullscreen }" @fullscreenchange=fullscreen2>
     <div ref="elRef" class="wrapper-fullscreen">
-      <lay-button type="normal" @click="enter()">进入全屏</lay-button>  
-      <lay-button type="normal" @click="exit()">退出</lay-button> 
-      <lay-button type="warm" @click="toggle()"> 切换: {{isFullscreen ? "退出" : "进入全屏"}} </lay-button>
+      <lay-button type="primary" @click="enter()">进入全屏</lay-button>  
+      <lay-button type="primary" @click="exit()">退出</lay-button> 
+      <lay-button type="default" @click="toggle()"> 切换: {{isFullscreen ? "退出" : "进入全屏"}} </lay-button>
     </div>
   </lay-fullscreen>
 </template>
@@ -92,9 +92,9 @@ export default {
     v-slot="{ enter, exit, toggle, isFullscreen }" 
     @fullscreenchange=fullscreen3>
     <div ref="fullscreenTargetRef" class="wrapper-fullscreen">
-      <lay-button type="normal" @click="enter()">进入全屏</lay-button>  
-      <lay-button type="normal" @click="exit()">退出</lay-button> 
-      <lay-button type="warm" @click="toggle()"> 切换: {{isFullscreen ? "退出" : "进入全屏"}} </lay-button>
+      <lay-button type="primary" @click="enter()">进入全屏</lay-button>  
+      <lay-button type="primary" @click="exit()">退出</lay-button> 
+      <lay-button type="default" @click="toggle()"> 切换: {{isFullscreen ? "退出" : "进入全屏"}} </lay-button>
     </div>
   </lay-fullscreen>
 </template>
@@ -142,9 +142,9 @@ export default {
     v-slot="{ enter, exit, toggle, isFullscreen }" 
     @fullscreenchange=fullscreen4>
     <div ref="fullscreenTargetRef2" class="wrapper-fullscreen">
-      <lay-button type="normal" @click="enter()">进入全屏</lay-button>  
-      <lay-button type="normal" @click="exit()">退出</lay-button> 
-      <lay-button type="warm" @click="toggle()"> 切换: {{isFullscreen ? "退出" : "进入全屏"}} </lay-button>
+      <lay-button type="primary" @click="enter()">进入全屏</lay-button>  
+      <lay-button type="primary" @click="exit()">退出</lay-button> 
+      <lay-button type="default" @click="toggle()"> 切换: {{isFullscreen ? "退出" : "进入全屏"}} </lay-button>
     </div>
   </lay-fullscreen>
 </div>
@@ -226,9 +226,6 @@ export default {
 | toggle       | 进入/退出全屏 | Function | -                             |
 | isFullscreen | 是否全屏      | boolean  | -                             |
 :::
-
-::: contributor fullscreen
-::: 
 
 ::: previousNext fullscreen
 :::

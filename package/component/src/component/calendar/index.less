@@ -1,0 +1,68 @@
+
+.layui-calendar {
+  background: #fff;
+  padding: 20px;
+}
+.layui-calendar-body {
+  // padding: 20px;
+}
+.layui-calendar-title {
+  // align-self: center;
+  font-size: 18px;
+}
+.layui-calendar-table {
+  width: 100%;
+  table-layout: fixed;
+  th {
+    padding: 20px 0;
+    color: #000000d9;
+    font-size: 14px;
+    text-align: center;
+  }
+  tr:first-child td {
+    border-top: 1px solid var(--global-primary-color);
+  }
+  td {
+    border-bottom: 1px solid var(--global-primary-color);
+    border-right: 1px solid var(--global-primary-color);
+  }
+  td:first-child {
+    border-left: 1px solid var(--global-primary-color);
+  }
+}
+.layui-calendar-day {
+  padding: 10px;
+  height: 100px;
+  box-sizing: border-box;
+}
+.layui-calendar-isfullscreen {
+  padding: 10px;
+  box-sizing: border-box;
+  text-align: center;
+}
+.layui-calendar-next, .layui-calendar-prev {
+  color: var(--global-neutral-color-8);
+}
+.layui-calendar-current {
+  color: #000000d9;
+}
+.layui-calendar-is-selcted {
+  color: var(--global-checked-color);
+  background: #16b77733;
+}
+.layui-calendar-header {
+  display: flex;
+  padding: 20px 0px;
+  border-bottom: 1px solid #ccc;
+  align-items: center;
+  justify-content: space-between;
+}
+.layui-calendar-day:hover {
+  cursor: pointer;
+  background-color: var(--global-neutral-color-3);
+}
+.layui-calendar-day.layui-calendar-is-disabled {
+  cursor: not-allowed;
+  background: #ddd;
+  color: #ccc;
+}

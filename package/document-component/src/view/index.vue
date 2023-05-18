@@ -32,21 +32,21 @@
           >
           <span
             >{{ t("home.download") }}：<em class="site-showdowns"
-              >61,634</em
+              >65,618</em
             ></span
           >
         </div>
         <div class="site-banner-other">
           <a
-            href="https://gitee.com/layui-vue"
+            href="https://gitee.com/layui/layui-vue"
             target="_blank"
             rel="nofollow"
             class="site-star"
           >
-            <i class="layui-icon"></i> Star <cite id="getStars">2087</cite>
+            <i class="layui-icon"></i> Star <cite id="getStars">2194</cite>
           </a>
           <a
-            href="https://gitee.com/layui-vue"
+            href="https://gitee.com/layui/layui-vue"
             target="_blank"
             rel="nofollow"
             class="site-fork"
@@ -54,7 +54,7 @@
             Gitee
           </a>
           <a
-            href="https://github.com/layui-vue"
+            href="https://github.com/layui/layui-vue"
             target="_blank"
             rel="nofollow"
             class="site-fork"
@@ -148,7 +148,7 @@
               target="_blank"
             >
               <lay-avatar
-                src="https://baomidou.com/img/logo.svg"
+                src="https://www.baomidou.com/img/logo.svg"
                 style="background: transparent"
               ></lay-avatar>
             </a>
@@ -214,7 +214,25 @@
     </div>
     <div class="footer footer-index">
       <p>Released under the <a href="/index.html">MIT License</a>.</p>
-      <p>Copyright © 2021-2022 layui-vue.com</p>
+      <p>Copyright © 2021-2023 www.layui-vue.com</p>
+      <p>
+        鸣谢：
+        <a
+          href="https://www.oschina.net"
+          style="color: #16b777; font-weight: 800; margin: 0px 5px"
+          >Oschina</a
+        >
+        <a
+          href="https://gitee.com"
+          style="color: #c71d23; font-weight: 800; margin: 0px 5px"
+          >Gitee</a
+        >
+        <a
+          href="https://www.iconfont.cn/"
+          style="color: #9b16ff; font-weight: 800; margin: 0px 5px"
+          >iconfont</a
+        >
+      </p>
     </div>
   </div>
 </template>
@@ -311,7 +329,7 @@ body {
 }
 
 .site-download a:first-child {
-  background: #009688;
+  background: var(--global-primary-color);
   color: white;
 }
 
@@ -359,7 +377,7 @@ body {
   color: #fff;
   color: #213547;
   font-size: 52px;
-  opacity: 0.82;
+  opacity: 0.86;
 }
 
 .web-font-desc {
@@ -471,8 +489,8 @@ body {
   padding: 0 8px;
   border-radius: 4px;
   color: rgba(60, 60, 60, 0.7);
-  border: 1px solid rgba(60, 60, 60, 0.7);
-  background: white;
+  background: #f2f4f5;
+  border: 1px solid rgba(0, 0, 0, 0.06);
   font-size: 14px;
 }
 

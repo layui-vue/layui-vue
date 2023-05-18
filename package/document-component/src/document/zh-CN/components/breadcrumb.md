@@ -110,8 +110,5 @@ export default {
 
 :::
 
-::: contributor breadcrumb
-:::
-
 ::: previousNext breadcrumb
 :::

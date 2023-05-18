@@ -106,8 +106,5 @@ export default {
 
 :::
 
-::: contributor result
-:::  
-
 ::: previousNext result
 :::

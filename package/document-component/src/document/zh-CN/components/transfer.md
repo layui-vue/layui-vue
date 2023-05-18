@@ -286,8 +286,5 @@ export default {
 
 :::
 
-::: contributor transfer
-:::
-
 ::: previousNext transfer
 :::

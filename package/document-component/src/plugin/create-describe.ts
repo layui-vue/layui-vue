@@ -1,5 +1,12 @@
+/*
+ * @Author: baobaobao
+ * @Date: 2023-05-05 16:42:45
+ * @LastEditTime: 2023-05-06 21:34:09
+ * @LastEditors: baobaobao
+ */
 import container from "markdown-it-container";
 import type Token from "markdown-it/lib/token";
+import markdown from "markdown-it";
 
 type ContainerArgs = [
   typeof container,
@@ -14,11 +21,15 @@ export default function createContainer(klass: string): ContainerArgs {
     {
       render(tokens, idx) {
         const token = tokens[idx];
-        const info = token.info.trim().slice(klass.length).trim();
-        if (token.nesting === 1) {
-          return `<p class="describe-plugin">${info}`;
+        const matchedInfo = token.info.trim().match(/^describe\s+(.*)$/);
+        const description = matchedInfo && matchedInfo[1];
+        const descTemplate = markdown({
+          html: true,
+        }).render(description || "");
+        if (token.nesting === 1 && description) {
+          return `<div class="describe-plugin">${descTemplate}`;
         } else {
-          return "</p>\n";
+          return "</div>\n";
         }
       },
     },

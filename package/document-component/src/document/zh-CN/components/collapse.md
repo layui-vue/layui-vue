@@ -10,7 +10,7 @@
 ::: title 基础使用
 :::
 
-::: demo
+::: demo 使用 `lay-collapse` 与 `lay-collapse-item` 标签，创建折叠卡片
 
 <template>
   <lay-collapse v-model="openKeys">
@@ -40,7 +40,7 @@ export default {
 ::: title 手风琴效果
 :::
 
-::: demo
+::: demo 通过 `accordion` 属性，启用手风琴效果，默认为 `false`。
 
 <template>
   <lay-collapse v-model="openKeys2" accordion>
@@ -70,7 +70,7 @@ export default {
 ::: title 禁用属性
 :::
 
-::: demo
+::: demo 通过 `lay-collapse-item` 标签 `disabled` 属性，控制某项不可展开。
 
 <template>
   <lay-collapse v-model="openKeys3">
@@ -100,7 +100,7 @@ export default {
 ::: title 标题插槽
 :::
 
-::: demo
+::: demo 通过 `lay-collapse-item` 标签 `title` 属性，自定义标题。
 
 <template>
   <lay-collapse v-model="openKeys4">
@@ -137,7 +137,7 @@ export default {
 ::: title 关闭动画
 :::
 
-::: demo
+::: demo 通过 `lay-collapse` 标签 `collapseTransition` 属性，控制折叠动画，默认为 `true`。
 
 <template>
   <lay-collapse v-model="openKeys5" :collapseTransition="collapseTransition">
@@ -169,7 +169,7 @@ export default {
 ::: title 事件使用
 :::
 
-::: demo
+::: demo 通过 `lay-collapse` 标签 `change` 事件，监听 `item` 折叠。
 
 <template>
   <lay-collapse v-model="emit1" @change="change">
@@ -177,7 +177,6 @@ export default {
     <lay-collapse-item title="标题2" :id="2"> 内容2 </lay-collapse-item>
     <lay-collapse-item title="标题3" id="haha"> 内容3 </lay-collapse-item>
   </lay-collapse>
-  <div style="color:#ff5722;">F12 打开调试工具 -> console 控制面板进行查看事件输出</div>
 </template>
 
 <script>
@@ -247,9 +246,6 @@ export default {
 | --        | 默认插槽 --> 内容        | `{props}`        |
 | title     | 标题插槽                 | `{props}`        |
 
-:::
-
-::: contributor collapse
 :::
 
 ::: previousNext collapse

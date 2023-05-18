@@ -244,9 +244,6 @@ export default {
 
 :::
 
-<br>
-<br>
-
 ::: title 布局组件
 :::
 
@@ -261,10 +258,7 @@ export default {
 | lay-body   | 内容 | --  |
 | lay-footer | 底部 | --  |
 
-:::
-
-::: contributor layout
-:::  
+::: 
 
 ::: previousNext layout
 :::

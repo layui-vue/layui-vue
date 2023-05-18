@@ -165,8 +165,5 @@ export default {
 
 :::
 
-::: contributor drawer
-:::
-
 ::: previousNext drawer
 :::
