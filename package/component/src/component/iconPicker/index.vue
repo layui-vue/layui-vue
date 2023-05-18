@@ -158,7 +158,7 @@ const searchList = (str: string, container: any) => {
     updateAtScroll
   >
     <div
-      class="layui-inline layui-border-box layui-iconpicker layui-iconpicker-split"
+      class="layui-border-box layui-iconpicker layui-iconpicker-split"
       :class="[
         {
           'layui-iconpicker-disabled': disabled,

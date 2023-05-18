@@ -187,6 +187,7 @@ const components: Record<string, Plugin> = {
   LayRipple,
   LayNoticeBar,
   LayPageHeader,
+  LayCascader,
   LayAffix,
   LaySpace,
   LayTag,
