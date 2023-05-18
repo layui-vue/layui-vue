@@ -22,7 +22,7 @@
                         <li>[修复] cascader 组件无法正常渲染的问题。</li>
                         <li>[优化] icon-picker 组件在 form-item 的 inline 模式中，高度与其他组件不统一的问题。</li>
                         <li>[优化] input-number 组件在 form-item 的 inline 模式中，高度与其他组件不统一的问题。</li>
-                        <li>[优化] icon-picker 组件在 form-item 中，宽度与独立使用时不一致的问题。。</li>
+                        <li>[优化] icon-picker 组件在 form-item 中，宽度与独立使用时不一致的问题。</li>
                     </ul>  
                 </li>
             </ul>
