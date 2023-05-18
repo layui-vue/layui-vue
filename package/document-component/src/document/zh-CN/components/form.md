@@ -50,11 +50,17 @@ const submit = () => {
 
 <template>
   <lay-form :model="model1" :pane="true">
-    <lay-form-item label="账户" prop="username">
+    <lay-form-item label="账户" prop="username" mode="inline">
       <lay-input v-model="model1.username"></lay-input>
     </lay-form-item>
-    <lay-form-item label="密码" prop="password">
+    <lay-form-item label="密码" prop="password" mode="inline">
       <lay-input v-model="model1.password" type="password"></lay-input>
+    </lay-form-item>
+    <lay-form-item label="头像" prop="username" mode="inline">
+      <lay-icon-picker v-model="model1.avatar"></lay-icon-picker>
+    </lay-form-item>
+    <lay-form-item label="年龄" prop="password" mode="inline">
+      <lay-input-number v-model="model1.age"></lay-input-number>
     </lay-form-item>
     <lay-form-item label="描述" prop="desc">
       <lay-textarea placeholder="请输入描述" v-model="model1.describe"></lay-textarea>

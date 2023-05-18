@@ -17,6 +17,18 @@
             <ul>
                 <a name="2-0-0"></a>
                 <li>
+                    <h3>2.0.1 <span class="layui-badge-rim">2023-05-18</span></h3>
+                    <ul>
+                        <li>[修复] cascader 组件无法正常渲染的问题。</li>
+                        <li>[优化] icon-picker 组件在 form-item 的 inline 模式中，高度与其他组件不统一的问题。</li>
+                        <li>[优化] input-number 组件在 form-item 的 inline 模式中，高度与其他组件不统一的问题。</li>
+                        <li>[优化] icon-picker 组件在 form-item 中，宽度与独立使用时不一致的问题。。</li>
+                    </ul>  
+                </li>
+            </ul>
+            <ul>
+                <a name="2-0-0"></a>
+                <li>
                     <h3>2.0.0 <span class="layui-badge-rim">2023-05-18</span></h3>
                     <ul>
                         <li>[新增] field 组件 title 插槽，支持标题自定义。</li>
