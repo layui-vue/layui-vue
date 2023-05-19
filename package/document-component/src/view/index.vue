@@ -238,9 +238,10 @@
 </template>
 
 <script>
-import { inject } from "vue";
+import { inject, onMounted } from "vue";
 import { useI18n } from "vue-i18n";
 import { useAppStore } from "../store/app";
+import { layer } from "@layui/layui-vue";
 
 export default {
   name: "index",
@@ -257,6 +258,20 @@ export default {
     };
 
     const version = inject("version");
+
+    onMounted(() => {
+      if (appStore.documentVersion != version) {
+        appStore.documentVersion = version;
+        layer.notifiy({
+          title: "更新公告",
+          content: `layui - vue ${version} 已发布，请前往 <a style="color:#16baaa;" href="http://www.layui-vue.com/zh-CN/guide/changelog">[ 查看 ]</a>`,
+          isHtmlFragment: true,
+          offset: "rb",
+          time: 10000,
+          icon: 1,
+        });
+      }
+    });
 
     return {
       t,

@@ -895,8 +895,29 @@ onBeforeUnmount(() => {
 
 const getCheckData = () => {
   const ids = [tableSelectedKey.value, ...tableSelectedKeys.value];
-  return props.dataSource.filter((item) => {
-    return ids.includes(item[props.id]);
+  const checkDataSources: any[] = [];
+  getCheckDataInner(ids, props.dataSource, checkDataSources);
+  return checkDataSources;
+};
+
+const getCheckDataInner = (
+  ids: string[],
+  dataSources: any[],
+  checkDataSources: any[]
+) => {
+  dataSources.forEach((dataSource) => {
+    if (dataSource[props.childrenColumnName]) {
+      getCheckDataInner(
+        ids,
+        dataSource[props.childrenColumnName],
+        checkDataSources
+      );
+    }
+    if (ids.includes(dataSource[props.id])) {
+      const checkDataSource = { ...dataSource };
+      delete checkDataSource[props.childrenColumnName];
+      checkDataSources.push(checkDataSource);
+    }
   });
 };
 

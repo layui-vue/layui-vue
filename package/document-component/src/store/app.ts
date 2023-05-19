@@ -4,6 +4,7 @@ export const useAppStore = defineStore({
   id: "app",
   state: () => {
     return {
+      documentVersion: "2.0.0",
       theme: "light",
       themeVariable: {
         "--global-primary-color": "#16baaa",
@@ -34,6 +35,10 @@ export const useAppStore = defineStore({
       },
       {
         key: "themeVariable",
+        storage: localStorage,
+      },
+      {
+        key: "documentVersion",
         storage: localStorage,
       },
     ],
