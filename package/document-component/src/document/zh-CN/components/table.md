@@ -225,6 +225,7 @@ export default {
       :columns="columns3" 
       :data-source="dataSource3" 
       :default-toolbar="true"
+      v-model:selectedKey="selectedKey3"
       v-model:selectedKeys="selectedKeys3">
     <template #toolbar>
       <lay-button type="primary" size="sm" @click="getSelectedKeys3">获取选中主键</lay-button>
@@ -243,6 +244,8 @@ export default {
   setup() {
 
     const tableRef3 = ref();
+
+    const selectedKey3 = ref("1");
 
     const selectedKeys3 = ref(["2", "3", "6", "7"]);
 
@@ -266,6 +269,10 @@ export default {
       {
         fixed: "left",
         type: "checkbox",
+      },
+      {
+        fixed: "left",
+        type: "radio",
       },
       {
         title:"用户",
@@ -332,7 +339,8 @@ export default {
       getCheckData3,
       tableRef3,
       changeSelectedKeys3,
-      clearSelectedKeys3
+      clearSelectedKeys3,
+      selectedKey3
     }
   }
 }
