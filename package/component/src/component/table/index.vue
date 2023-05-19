@@ -900,18 +900,26 @@ const getCheckData = () => {
   return checkDataSources;
 };
 
-const getCheckDataInner = (ids: string[], dataSources: any[], checkDataSources: any[]) => {
+const getCheckDataInner = (
+  ids: string[],
+  dataSources: any[],
+  checkDataSources: any[]
+) => {
   dataSources.forEach((dataSource) => {
-      if(dataSource[props.childrenColumnName]) {
-        getCheckDataInner(ids, dataSource[props.childrenColumnName], checkDataSources);
-      }
-      if(ids.includes(dataSource[props.id])) {
-        const checkDataSource = { ...dataSource }
-        delete checkDataSource[props.childrenColumnName];
-        checkDataSources.push(checkDataSource);
-      }
-  })
-}
+    if (dataSource[props.childrenColumnName]) {
+      getCheckDataInner(
+        ids,
+        dataSource[props.childrenColumnName],
+        checkDataSources
+      );
+    }
+    if (ids.includes(dataSource[props.id])) {
+      const checkDataSource = { ...dataSource };
+      delete checkDataSource[props.childrenColumnName];
+      checkDataSources.push(checkDataSource);
+    }
+  });
+};
 
 defineExpose({ getCheckData });
 </script>

@@ -462,28 +462,25 @@ export default {
 
 <template>
   <lay-button @click="changeExpandAll7">切换 {{ expandKeys7 }}</lay-button>
-  <lay-table :columns="columns7" :data-source="dataSource7" :default-expand-all="expandAll7" v-model:expandKeys="expandKeys7">
+  <lay-button @click="getCheckData7">获取选中数据</lay-button>
+  <lay-table ref="tableRef7" :columns="columns7" :data-source="dataSource7" :default-expand-all="expandAll7" v-model:expandKeys="expandKeys7">
     <template #score="{ data }">{{ data }}</template>
   </lay-table>
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref } from 'vue';
+import { layer } from "@layui/layui-vue";
 
 export default {
   setup() {
 
+    const tableRef7 = ref();
+
     const columns7 = [
-      {
-        title:"姓名",
-        width:"200px",
-        key:"name",
-        ellipsisTooltip: true
-      },{
-        title:"成绩",
-        width: "180px",
-        key:"score"
-      },
+      { fixed: "left", type: "checkbox" },
+      { title:"姓名", width:"200px", key:"name" },
+      { title:"成绩", width: "180px", key:"score" }
     ]
 
     const dataSource7 = [
@@ -491,10 +488,16 @@ export default {
       {id: "2", name:"电商管理", score:100, children: [{id: "4", name:"商品管理", score:11},{id: "6", name:"分类管理", score:22}]},
     ]
 
-    const expandKeys7 = ref(["1"])
     const expandAll7 = ref(false)
+
+    const expandKeys7 = ref(["1"])
+    
     const changeExpandAll7 = () => {
       expandAll7.value = !expandAll7.value;
+    }
+
+    const getCheckData7 = () => {
+      layer.msg(tableRef7.value.getCheckData());
     }
 
     return {
@@ -502,7 +505,8 @@ export default {
       dataSource7,
       expandKeys7,
       expandAll7,
-      changeExpandAll7
+      changeExpandAll7,
+      getCheckData7
     }
   }
 }
