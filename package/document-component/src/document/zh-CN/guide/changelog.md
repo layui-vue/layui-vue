@@ -17,6 +17,16 @@
             <ul>
                 <a name="2-0-0"></a>
                 <li>
+                    <h3>2.0.2 <span class="layui-badge-rim">2023-05-19</span></h3>
+                    <ul>
+                        <li>[修复] table 组件 checkbox 与 radio 列同时存在，getCheckData获取数据重复的问题。</li>
+                        <li>[修复] table 组件 getCheckData 方法无法获取树表格二级以上的数据。</li>
+                    </ul>  
+                </li>
+            </ul>
+            <ul>
+                <a name="2-0-0"></a>
+                <li>
                     <h3>2.0.1 <span class="layui-badge-rim">2023-05-18</span></h3>
                     <ul>
                         <li>[修复] cascader 组件无法正常渲染的问题。</li>
