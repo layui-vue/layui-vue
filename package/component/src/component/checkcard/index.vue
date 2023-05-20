@@ -81,8 +81,15 @@ const getIsGroup = computed(
   () => checkcardGroup && checkcardGroup.name === "LayCheckCardGroup"
 );
 const containerStyle = computed(() => attrs.style as StyleValue);
-const getCheckState = ref<boolean>(props.modelValue || (checkcardGroup.modelVal && checkcardGroup.modelVal.value.includes(props.value)));
-const getDisabled = computed(() => (props.disabled || (checkcardGroup.disabled && checkcardGroup.disabled.value)));
+const getCheckState = ref<boolean>(
+  props.modelValue ||
+    (checkcardGroup.modelVal &&
+      checkcardGroup.modelVal.value.includes(props.value))
+);
+const getDisabled = computed(
+  () =>
+    props.disabled || (checkcardGroup.disabled && checkcardGroup.disabled.value)
+);
 const getContentStyle = computed(() => {
   return {
     "layui-checkcard-is-description": !props.description && !slot.description,
@@ -113,11 +120,15 @@ const getValArr = computed(() => {
   }
   return [];
 });
-watch(() => checkcardGroup.modelVal, () => {
-  if(checkcardGroup.modelVal) {
-    getCheckState.value = checkcardGroup.modelVal.value.includes(props.value);
-  }
-}, { deep: true })
+watch(
+  () => checkcardGroup.modelVal,
+  () => {
+    if (checkcardGroup.modelVal) {
+      getCheckState.value = checkcardGroup.modelVal.value.includes(props.value);
+    }
+  },
+  { deep: true }
+);
 watch(
   () => getCheckState,
   (val) => {

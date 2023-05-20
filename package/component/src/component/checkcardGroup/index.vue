@@ -48,11 +48,18 @@ watch(
   { deep: true }
 );
 
-watch(() => props.disabled, (value) => {
-  disabled.value = value;
-})
+watch(
+  () => props.disabled,
+  (value) => {
+    disabled.value = value;
+  }
+);
 
-watch(() => props.modelValue, (value) => {
-  modelVal.value = value;
-}, { deep: true })
+watch(
+  () => props.modelValue,
+  (value) => {
+    modelVal.value = value;
+  },
+  { deep: true }
+);
 </script>
