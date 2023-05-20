@@ -285,7 +285,10 @@ export default {
   >
   </lay-checkcard>
   <h4>整体不可用</h4>
-   <lay-checkcard-group disabled v-model="checked1"  @change="groupChange">
+   <lay-switch v-model="disabled1"></lay-switch>
+   <lay-button @click="checkedChange">修改</lay-button>
+   {{ checked1 }}
+   <lay-checkcard-group :disabled="disabled1" v-model="checked1"  @change="groupChange">
     <lay-checkcard
       value="1"
       avatar="https://portrait.gitee.com/uploads/avatars/namespace/2849/8547475_layui-vue_1645856954.png"
@@ -311,14 +314,21 @@ export default {
 import { ref } from 'vue'
 export default {
   setup() {
+    const disabled1 = ref(false);
     const checked1 = ref(['1', '2', '3'])
     const ischeck = ref(true)
     const groupChange = (val) => {
       console.log(val)
     }
+    const checkedChange = (val) => {
+      checked1.value = ['4','5']
+    }
+
     return {
-      checked1,
       ischeck,
+      checked1,
+      disabled1,
+      checkedChange,
       groupChange
     }
   }

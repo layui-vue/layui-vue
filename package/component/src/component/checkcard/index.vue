@@ -58,6 +58,7 @@ import {
   onBeforeMount,
 } from "vue";
 import "./index.less";
+import { check } from "prettier";
 export interface CheckCard {
   title?: string;
   avatar?: string;
@@ -80,8 +81,8 @@ const getIsGroup = computed(
   () => checkcardGroup && checkcardGroup.name === "LayCheckCardGroup"
 );
 const containerStyle = computed(() => attrs.style as StyleValue);
-const getCheckState = ref<boolean>(props.modelValue);
-const getDisabled = ref<boolean | undefined>(props.disabled);
+const getCheckState = ref<boolean>(props.modelValue || (checkcardGroup.modelVal && checkcardGroup.modelVal.value.includes(props.value)));
+const getDisabled = computed(() => (props.disabled || (checkcardGroup.disabled && checkcardGroup.disabled.value)));
 const getContentStyle = computed(() => {
   return {
     "layui-checkcard-is-description": !props.description && !slot.description,
@@ -112,6 +113,11 @@ const getValArr = computed(() => {
   }
   return [];
 });
+watch(() => checkcardGroup.modelVal, () => {
+  if(checkcardGroup.modelVal) {
+    getCheckState.value = checkcardGroup.modelVal.value.includes(props.value);
+  }
+}, { deep: true })
 watch(
   () => getCheckState,
   (val) => {
