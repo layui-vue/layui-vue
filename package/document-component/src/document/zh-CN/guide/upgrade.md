@@ -137,19 +137,19 @@ const options = ref([
   <lay-checkcard-group v-model="checked" @change="groupChange">
     <lay-checkcard
       value="1"
-      avatar="http://www.layui-vue.com/assets/logo-png.a3bc5caf.png"
+      avatar="https://portrait.gitee.com/uploads/avatars/namespace/2849/8547475_layui-vue_1645856954.png"
       title="标题"
       description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。">
   </lay-checkcard>
    <lay-checkcard
       value="4"
-      avatar="http://www.layui-vue.com/assets/logo-png.a3bc5caf.png"
+      avatar="https://portrait.gitee.com/uploads/avatars/namespace/2849/8547475_layui-vue_1645856954.png"
       title="标题"
       description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。">
   </lay-checkcard>
   <lay-checkcard
       disabled
-      avatar="http://www.layui-vue.com/assets/logo-png.a3bc5caf.png"
+      avatar="https://portrait.gitee.com/uploads/avatars/namespace/2849/8547475_layui-vue_1645856954.png"
       title="标题"
       description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。">
   </lay-checkcard>

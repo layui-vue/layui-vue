@@ -31,10 +31,12 @@ const emit = defineEmits(["update:modelValue", "change"]);
 
 const modelVal = ref(props.modelValue);
 
+const disabled = ref(props.disabled);
+
 provide("checkcardGroup", {
   name: "LayCheckCardGroup",
   modelVal: modelVal,
-  disabled: props.disabled,
+  disabled: disabled,
 });
 
 watch(
@@ -42,6 +44,21 @@ watch(
   (val) => {
     emit("update:modelValue", val.value);
     emit("change", val.value);
+  },
+  { deep: true }
+);
+
+watch(
+  () => props.disabled,
+  (value) => {
+    disabled.value = value;
+  }
+);
+
+watch(
+  () => props.modelValue,
+  (value) => {
+    modelVal.value = value;
   },
   { deep: true }
 );

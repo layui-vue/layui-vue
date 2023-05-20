@@ -17,6 +17,17 @@
             <ul>
                 <a name="2-0-0"></a>
                 <li>
+                    <h3>2.0.3 <span class="layui-badge-rim">2023-05-20</span></h3>
+                    <ul>
+                        <li>[修复] checkcard-group 组件 modelValue 属性不是响应式的问题。</li>
+                        <li>[修复] checkcard-group 组件 disabled 属性不生效的问题。</li>
+                        <li>[修复] checkcard.md 案例图片资源失效的问题。</li>
+                    </ul>  
+                </li>
+            </ul>
+            <ul>
+                <a name="2-0-0"></a>
+                <li>
                     <h3>2.0.2 <span class="layui-badge-rim">2023-05-19</span></h3>
                     <ul>
                         <li>[修复] table 组件 checkbox 与 radio 列同时存在，getCheckData获取数据重复的问题。</li>

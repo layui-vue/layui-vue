@@ -14,7 +14,7 @@
 
 <template>
   <lay-checkcard
-    avatar="http://www.layui-vue.com/assets/logo-png.a3bc5caf.png"
+    avatar="https://portrait.gitee.com/uploads/avatars/namespace/2849/8547475_layui-vue_1645856954.png"
     title="标题"
     description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。"
   >
@@ -53,12 +53,12 @@
 <template>
   <h4>只有图片时</h4>
   <lay-checkcard
-    avatar="http://www.layui-vue.com/assets/logo-png.a3bc5caf.png">
+    avatar="https://portrait.gitee.com/uploads/avatars/namespace/2849/8547475_layui-vue_1645856954.png">
   </lay-checkcard>
   <h4>只有图片和描述时</h4>
   <lay-checkcard
     description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。"
-    avatar="http://www.layui-vue.com/assets/logo-png.a3bc5caf.png">
+    avatar="https://portrait.gitee.com/uploads/avatars/namespace/2849/8547475_layui-vue_1645856954.png">
   </lay-checkcard>
   <h4>只有描述和标题时</h4>
   <lay-checkcard
@@ -67,7 +67,7 @@
   </lay-checkcard>
   <h4>只有标题和图片</h4>
   <lay-checkcard
-    avatar="http://www.layui-vue.com/assets/logo-png.a3bc5caf.png"
+    avatar="https://portrait.gitee.com/uploads/avatars/namespace/2849/8547475_layui-vue_1645856954.png"
     title="示例">
   </lay-checkcard>
   <h4>只有标题时</h4>
@@ -140,7 +140,7 @@
 
 <template>
 <lay-checkcard
-    avatar="http://www.layui-vue.com/assets/logo-png.a3bc5caf.png"
+    avatar="https://portrait.gitee.com/uploads/avatars/namespace/2849/8547475_layui-vue_1645856954.png"
     title="标题">
     <template #description>
       选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。
@@ -163,7 +163,7 @@
   <lay-checkcard
     @change="handleChange"
     v-model="ischeked"
-    avatar="http://www.layui-vue.com/assets/logo-png.a3bc5caf.png"
+    avatar="https://portrait.gitee.com/uploads/avatars/namespace/2849/8547475_layui-vue_1645856954.png"
     title="标题">
   </lay-checkcard>
 </template>
@@ -200,7 +200,7 @@ export default {
 <template>
   <lay-checkcard
     v-model="ischekeds"
-    avatar="http://www.layui-vue.com/assets/logo-png.a3bc5caf.png"
+    avatar="https://portrait.gitee.com/uploads/avatars/namespace/2849/8547475_layui-vue_1645856954.png"
     title="标题">
      <template #extra>
      <lay-dropdown placement="top"  updateAtScroll>
@@ -264,14 +264,14 @@ export default {
 ::: demo 
 <template>
  <lay-checkcard
-    avatar="http://www.layui-vue.com/assets/logo-png.a3bc5caf.png"
+    avatar="https://portrait.gitee.com/uploads/avatars/namespace/2849/8547475_layui-vue_1645856954.png"
     title="标题"
     description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。"
   >
   </lay-checkcard>
    <lay-checkcard
     disabled
-    avatar="http://www.layui-vue.com/assets/logo-png.a3bc5caf.png"
+    avatar="https://portrait.gitee.com/uploads/avatars/namespace/2849/8547475_layui-vue_1645856954.png"
     title="标题"
     description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。"
   >
@@ -279,28 +279,31 @@ export default {
   <lay-checkcard
     v-model="ischeck"
     disabled
-    avatar="http://www.layui-vue.com/assets/logo-png.a3bc5caf.png"
+    avatar="https://portrait.gitee.com/uploads/avatars/namespace/2849/8547475_layui-vue_1645856954.png"
     title="标题"
     description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。"
   >
   </lay-checkcard>
   <h4>整体不可用</h4>
-   <lay-checkcard-group disabled v-model="checked1"  @change="groupChange">
+   <lay-switch v-model="disabled1"></lay-switch>
+   <lay-button @click="checkedChange">修改</lay-button>
+   {{ checked1 }}
+   <lay-checkcard-group :disabled="disabled1" v-model="checked1"  @change="groupChange">
     <lay-checkcard
       value="1"
-      avatar="http://www.layui-vue.com/assets/logo-png.a3bc5caf.png"
+      avatar="https://portrait.gitee.com/uploads/avatars/namespace/2849/8547475_layui-vue_1645856954.png"
       title="标题"
       description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。">
   </lay-checkcard>
    <lay-checkcard
       value="4"
-      avatar="http://www.layui-vue.com/assets/logo-png.a3bc5caf.png"
+      avatar="https://portrait.gitee.com/uploads/avatars/namespace/2849/8547475_layui-vue_1645856954.png"
       title="标题"
       description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。">
   </lay-checkcard>
   <lay-checkcard
       disabled
-      avatar="http://www.layui-vue.com/assets/logo-png.a3bc5caf.png"
+      avatar="https://portrait.gitee.com/uploads/avatars/namespace/2849/8547475_layui-vue_1645856954.png"
       title="标题"
       description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。">
   </lay-checkcard>
@@ -311,14 +314,21 @@ export default {
 import { ref } from 'vue'
 export default {
   setup() {
+    const disabled1 = ref(false);
     const checked1 = ref(['1', '2', '3'])
     const ischeck = ref(true)
     const groupChange = (val) => {
       console.log(val)
     }
+    const checkedChange = (val) => {
+      checked1.value = ['4','5']
+    }
+
     return {
-      checked1,
       ischeck,
+      checked1,
+      disabled1,
+      checkedChange,
       groupChange
     }
   }
@@ -341,19 +351,19 @@ export default {
   <lay-checkcard-group v-model="checked1" @change="groupChange">
     <lay-checkcard
       value="1"
-      avatar="http://www.layui-vue.com/assets/logo-png.a3bc5caf.png"
+      avatar="https://portrait.gitee.com/uploads/avatars/namespace/2849/8547475_layui-vue_1645856954.png"
       title="标题"
       description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。">
   </lay-checkcard>
    <lay-checkcard
       value="4"
-      avatar="http://www.layui-vue.com/assets/logo-png.a3bc5caf.png"
+      avatar="https://portrait.gitee.com/uploads/avatars/namespace/2849/8547475_layui-vue_1645856954.png"
       title="标题"
       description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。">
   </lay-checkcard>
   <lay-checkcard
       disabled
-      avatar="http://www.layui-vue.com/assets/logo-png.a3bc5caf.png"
+      avatar="https://portrait.gitee.com/uploads/avatars/namespace/2849/8547475_layui-vue_1645856954.png"
       title="标题"
       description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。">
   </lay-checkcard>
@@ -396,21 +406,21 @@ export default {
   <lay-row space="30">
    <lay-col md="8">
     <lay-checkcard
-      avatar="http://www.layui-vue.com/assets/logo-png.a3bc5caf.png"
+      avatar="https://portrait.gitee.com/uploads/avatars/namespace/2849/8547475_layui-vue_1645856954.png"
       title="标题"
       description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。">
   </lay-checkcard>
   </lay-col>
    <lay-col md="8">
    <lay-checkcard
-      avatar="http://www.layui-vue.com/assets/logo-png.a3bc5caf.png"
+      avatar="https://portrait.gitee.com/uploads/avatars/namespace/2849/8547475_layui-vue_1645856954.png"
       title="标题"
       description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。">
   </lay-checkcard>
   </lay-col>
    <lay-col md="8">
   <lay-checkcard
-      avatar="http://www.layui-vue.com/assets/logo-png.a3bc5caf.png"
+      avatar="https://portrait.gitee.com/uploads/avatars/namespace/2849/8547475_layui-vue_1645856954.png"
       title="标题"
       description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。">
   </lay-checkcard>
