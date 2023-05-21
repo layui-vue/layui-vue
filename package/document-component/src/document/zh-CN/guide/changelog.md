@@ -17,6 +17,18 @@
             <ul>
                 <a name="2-0-0"></a>
                 <li>
+                    <h3>2.0.4 <span class="layui-badge-rim">2023-05-21</span></h3>
+                    <ul>
+                        <li>[优化] checkcard 组件在 form-item 组件中贴边的问题。</li>
+                        <li>[优化] switch 组件在 form-item 组件中贴边的问题。</li>
+                        <li>[优化] radio 组件标签右侧内边距为 2px。</li>
+                        <li>[优化] radio 组件标签颜色为 #666。</li>
+                    </ul>  
+                </li>
+            </ul>
+            <ul>
+                <a name="2-0-0"></a>
+                <li>
                     <h3>2.0.3 <span class="layui-badge-rim">2023-05-20</span></h3>
                     <ul>
                         <li>[修复] checkcard-group 组件 modelValue 属性不是响应式的问题。</li>

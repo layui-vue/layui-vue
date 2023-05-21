@@ -59,6 +59,37 @@ const submit = () => {
     <lay-form-item label="头像" prop="username" mode="inline">
       <lay-icon-picker v-model="model1.avatar"></lay-icon-picker>
     </lay-form-item>
+    <lay-form-item label="喜好" prop="like" mode="inline">
+      <lay-input v-model="model1.like"></lay-input>
+    </lay-form-item>
+    <lay-form-item label="爱好" prop="hobby" mode="inline">
+      <lay-select v-model="model4.hobby" multiple>
+        <lay-select-option value="1" label="学习"></lay-select-option>
+        <lay-select-option value="2" label="编码"></lay-select-option>
+        <lay-select-option value="3" label="运动"></lay-select-option>
+      </lay-select>
+    </lay-form-item>
+    <lay-form-item label="开关" prop="switch" mode="inline">
+      <lay-switch v-model="model1.switch"></lay-switch>
+    </lay-form-item>
+	<lay-form-item label="复选">
+      <lay-checkbox-group v-model="model1.checkbox">
+        <lay-checkbox name="like" skin="primary" value="1">写作</lay-checkbox>
+        <lay-checkbox name="like" skin="primary" value="2">画画</lay-checkbox>
+		<lay-checkbox name="like" skin="primary" value="3">运动</lay-checkbox>
+      </lay-checkbox-group>
+    </lay-form-item>
+	<lay-form-item label="单选">
+      <lay-radio v-model="model1.radio" name="action" :value="1" label="写作"></lay-radio>
+      <lay-radio v-model="model1.radio" name="action" :value="2" label="画画"></lay-radio>
+	  <lay-radio v-model="model1.radio" name="action" :value="3" label="运动"></lay-radio>
+    </lay-form-item>
+    <lay-form-item label="权限" prop="treeSelect" mode="inline">
+      <lay-tree-select v-model="model1.treeSelect" :data="data1"></lay-tree-select>
+    </lay-form-item>
+    <lay-form-item label="级联" prop="cascader" mode="inline">
+      <lay-cascader  v-model="model1.cascader" :options="options"></lay-cascader>
+    </lay-form-item>
     <lay-form-item label="年龄" prop="password" mode="inline">
       <lay-input-number v-model="model1.age"></lay-input-number>
     </lay-form-item>
@@ -77,6 +108,417 @@ import { ref, reactive } from 'vue'
 import {layer} from '@layui/layer-vue'
 
 const model1 = reactive({})
+
+const options = [
+	{
+		value: "Guide",
+		label: "指南",
+		children: [
+			{
+				value: "shejiyuanze",
+				label: "设计原则",
+				children: [
+					{
+						value: "yizhi",
+						label: "一致",
+					},
+					{
+						value: "fankui",
+						label: "反馈",
+					},
+					{
+						value: "xiaolv",
+						label: "效率",
+					},
+					{
+						value: "kekong",
+						label: "可控",
+					},
+				],
+			},
+			{
+				value: "daohang",
+				label: "导航",
+				children: [
+					{
+						value: "cexiangdaohang",
+						label: "侧向导航",
+					},
+					{
+						value: "dingbudaohang",
+						label: "顶部导航",
+					},
+				],
+			},
+		],
+	},
+	{
+		value: "Components",
+		label: "组件",
+		children: [
+			{
+				value: "basic",
+				label: "Basic",
+				children: [
+					{
+						value: "layout",
+						label: "Layout 布局",
+					},
+					{
+						value: "color",
+						label: "Color 色彩",
+					},
+					{
+						value: "typography",
+						label: "Typography 字体",
+					},
+					{
+						value: "icon",
+						label: "Icon 图标",
+					},
+					{
+						value: "button",
+						label: "Button 按钮",
+					},
+				],
+			},
+			{
+				value: "form",
+				label: "Form",
+				children: [
+					{
+						value: "radio",
+						label: "Radio 单选框",
+					},
+					{
+						value: "checkbox",
+						label: "Checkbox 多选框",
+					},
+					{
+						value: "input",
+						label: "Input 输入框",
+					},
+					{
+						value: "input-number",
+						label: "InputNumber 计数器",
+					},
+					{
+						value: "select",
+						label: "Select 选择器",
+					},
+					{
+						value: "cascader",
+						label: "Cascader 级联选择器",
+					},
+					{
+						value: "switch",
+						label: "Switch 开关",
+					},
+					{
+						value: "slider",
+						label: "Slider 滑块",
+					},
+					{
+						value: "time-picker",
+						label: "TimePicker 时间选择器",
+					},
+					{
+						value: "date-picker",
+						label: "DatePicker 日期选择器",
+					},
+					{
+						value: "datetime-picker",
+						label: "DateTimePicker 日期时间选择器",
+					},
+					{
+						value: "upload",
+						label: "Upload 上传",
+					},
+					{
+						value: "rate",
+						label: "Rate 评分",
+					},
+					{
+						value: "form",
+						label: "Form 表单",
+					},
+				],
+			},
+			{
+				value: "data",
+				label: "Data",
+				children: [
+					{
+						value: "table",
+						label: "Table 表格",
+					},
+					{
+						value: "tag",
+						label: "Tag 标签",
+					},
+					{
+						value: "progress",
+						label: "Progress 进度条",
+					},
+					{
+						value: "tree",
+						label: "Tree 树形控件",
+					},
+					{
+						value: "pagination",
+						label: "Pagination 分页",
+					},
+					{
+						value: "badge",
+						label: "Badge 标记",
+					},
+				],
+			},
+			{
+				value: "notice",
+				label: "Notice",
+				children: [
+					{
+						value: "alert",
+						label: "Alert 警告",
+					},
+					{
+						value: "loading",
+						label: "Loading 加载",
+					},
+					{
+						value: "message",
+						label: "Message 消息提示",
+					},
+					{
+						value: "message-box",
+						label: "MessageBox 弹框",
+					},
+					{
+						value: "notification",
+						label: "Notification 通知",
+					},
+				],
+			},
+			{
+				value: "navigation",
+				label: "Navigation",
+				children: [
+					{
+						value: "menu",
+						label: "NavMenu 导航菜单",
+					},
+					{
+						value: "tabs",
+						label: "Tabs 标签页",
+					},
+					{
+						value: "breadcrumb",
+						label: "Breadcrumb 面包屑",
+					},
+					{
+						value: "dropdown",
+						label: "Dropdown 下拉菜单",
+					},
+					{
+						value: "steps",
+						label: "Steps 步骤条",
+					},
+				],
+			},
+			{
+				value: "others",
+				label: "Others",
+				children: [
+					{
+						value: "dialog",
+						label: "Dialog 对话框",
+					},
+					{
+						value: "tooltip",
+						label: "Tooltip 文字提示",
+					},
+					{
+						value: "popover",
+						label: "Popover 弹出框",
+					},
+					{
+						value: "card",
+						label: "Card 卡片",
+					},
+					{
+						value: "carousel",
+						label: "Carousel 走马灯",
+					},
+					{
+						value: "collapse",
+						label: "Collapse 折叠面板",
+					},
+				],
+			},
+		],
+	},
+	{
+		value: "Resource",
+		label: "资源",
+		children: [
+			{
+				value: "axure",
+				label: "Axure Components",
+			},
+			{
+				value: "sketch",
+				label: "Sketch Templates",
+			},
+			{
+				value: "jiaohu",
+				label: "组件交互文档",
+			},
+		],
+	},
+];
+
+const data1 = ref([{
+	title: '一级1',
+	id: 1,
+	field: 'name1',
+	children: [{
+		title: '二级1-1 可允许跳转',
+		id: 3,
+		field: 'name11',
+		href: 'https://www.layui.com/',
+		children: [{
+			title: '三级1-1-3',
+			id: 23,
+			field: '',
+			children: [{
+				title: '四级1-1-3-1',
+				id: 24,
+				field: '',
+				children: [{
+					title: '五级1-1-3-1-1',
+					id: 30,
+				},
+				{
+					title: '五级1-1-3-1-2',
+					id: 31,
+				}]
+			}]
+		},
+		{
+			title: '三级1-1-1',
+			id: 7,
+			field: '',
+			children: [{
+				title: '四级1-1-1-1 可允许跳转',
+				id: 15,
+				href: 'https://www.layui.com/doc/'
+			}]
+		},
+		{
+			title: '三级1-1-2',
+			id: 8,
+			field: '',
+			children: [{
+				title: '四级1-1-2-1',
+				id: 32,
+			}]
+		}]
+	},
+	{
+		title: '二级1-2',
+		id: 4,
+		spread: true,
+		children: [{
+			title: '三级1-2-1',
+			id: 9,
+		},
+		{
+			title: '三级1-2-2',
+			id: 10,
+		}]
+	},
+	{
+		title: '二级1-3',
+		id: 20,
+		field: '',
+		children: [{
+			title: '三级1-3-1',
+			id: 21,
+			field: ''
+		},
+		{
+			title: '三级1-3-2',
+			id: 22,
+			field: ''
+		}]
+	}]
+},
+{
+	title: '一级2',
+	id: 2,
+	children: [{
+		title: '二级2-1',
+		id: 5,
+		spread: true,
+		children: [{
+			title: '三级2-1-1',
+			id: 11,
+		},
+		{
+			title: '三级2-1-2',
+			id: 12,
+		}]
+	},
+	{
+		title: '二级2-2',
+		id: 6,
+		children: [{
+			title: '三级2-2-1',
+			id: 13,
+		},
+		{
+			title: '三级2-2-2',
+			id: 14,
+		}]
+	}]
+},
+{
+	title: '一级3',
+	id: 16,
+	field: '',
+	children: [{
+		title: '二级3-1',
+		id: 17,
+		field: '',
+		fixed: true,
+		children: [{
+			title: '三级3-1-1',
+			id: 18,
+			field: ''
+		},
+		{
+			title: '三级3-1-2',
+			id: 19,
+			field: ''
+		}]
+	},
+	{
+		title: '二级3-2',
+		id: 27,
+		field: '',
+		children: [{
+			title: '三级3-2-1',
+			id: 28,
+			field: ''
+		},
+		{
+			title: '三级3-2-2',
+			id: 29,
+			field: ''
+		}]
+	}]
+}]);
 
 const submit1 = function(){
   layer.msg(`${JSON.stringify(model1)}`, { time: 2000 });
