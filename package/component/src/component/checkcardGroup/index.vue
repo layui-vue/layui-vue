@@ -1,7 +1,7 @@
 <!--
  * @Author: baobaobao
  * @Date: 2023-04-26 13:28:17
- * @LastEditTime: 2023-04-28 14:32:38
+ * @LastEditTime: 2023-05-21 23:16:17
  * @LastEditors: baobaobao
 -->
 <template>
@@ -15,30 +15,38 @@ export default {
 };
 </script>
 <script lang="ts" setup>
-import { ref, watch, provide } from "vue";
-import { Recordable } from "../../types";
+import { ref, watch, provide, computed } from "vue";
 
 export interface CheckCardGroup {
-  modelValue?: Recordable[];
+  modelValue?: [] | string | number | boolean | undefined;
   disabled?: boolean;
+  multiple?: boolean;
 }
 const props = withDefaults(defineProps<CheckCardGroup>(), {
-  modelValue: () => [],
+  modelValue: undefined,
   disabled: false,
+  multiple: false
 });
-
 const emit = defineEmits(["update:modelValue", "change"]);
-
-const modelVal = ref(props.modelValue);
-
 const disabled = ref(props.disabled);
-
+const modelVal = ref(props.modelValue)
+watch(() => props.multiple, (multiple) => {
+  if (!multiple && Array.isArray(modelVal.value)) {
+    modelVal.value = ''
+  }
+  if (multiple && !Array.isArray(modelVal.value)) {
+    modelVal.value = []
+  }
+}, {
+  deep: true,
+  immediate: true
+})
 provide("checkcardGroup", {
   name: "LayCheckCardGroup",
   modelVal: modelVal,
   disabled: disabled,
+  multiple: props.multiple
 });
-
 watch(
   () => modelVal,
   (val) => {
@@ -47,19 +55,15 @@ watch(
   },
   { deep: true }
 );
+watch(() => props.disabled, (value) => {
+  disabled.value = value;
+}, {
+  deep: true
+})
 
-watch(
-  () => props.disabled,
-  (value) => {
-    disabled.value = value;
-  }
-);
-
-watch(
-  () => props.modelValue,
-  (value) => {
-    modelVal.value = value;
-  },
-  { deep: true }
-);
+watch(() => props.modelValue, (value) => {
+  modelVal.value = value;
+}, {
+  deep: true
+})
 </script>
