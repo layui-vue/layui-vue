@@ -14,7 +14,7 @@
 
 <template>
   <lay-checkcard
-    avatar="https://portrait.gitee.com/uploads/avatars/namespace/2849/8547475_layui-vue_1645856954.png"
+    avatar="/src/assets/logo-png.png"
     title="标题"
     description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。"
   >
@@ -22,6 +22,106 @@
 </template>
 
 :::
+
+
+
+::: title 单元模式
+:::
+
+::: describe 使用分组`lay-checkcard-group`时, 默认为单选模式
+:::
+
+::: demo
+
+ <lay-checkcard-group  v-model="Single">
+    <lay-checkcard
+      value="2"
+      avatar="/src/assets/logo-png.png"
+      title="标题"
+      description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。">
+  </lay-checkcard>
+   <lay-checkcard
+      value="3"
+      avatar="/src/assets/logo-png.png"
+      title="标题"
+      description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。">
+  </lay-checkcard>
+  <lay-checkcard
+      value="4"
+      avatar="/src/assets/logo-png.png"
+      title="标题"
+      description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。">
+  </lay-checkcard>
+  </lay-checkcard-group>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+    const Single = ref('2')
+    const groupChange = (val) => {
+    }
+    return {
+      Single,
+      groupChange
+    }
+  }
+}
+</script>
+
+:::
+
+
+
+::: title 多选模式
+:::
+
+::: describe 使用`multiple`可多选。
+:::
+
+::: demo
+
+ <lay-checkcard-group multiple v-model="multiple">
+    <lay-checkcard
+      value="2"
+      avatar="/src/assets/logo-png.png"
+      title="标题"
+      description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。">
+  </lay-checkcard>
+   <lay-checkcard
+      value="3"
+      avatar="/src/assets/logo-png.png"
+      title="标题"
+      description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。">
+  </lay-checkcard>
+  <lay-checkcard
+      value="4"
+      avatar="/src/assets/logo-png.png"
+      title="标题"
+      description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。">
+  </lay-checkcard>
+  </lay-checkcard-group>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+    const multiple = ref(['2', '3', '4'])
+    const groupChange = (val) => {
+    }
+    return {
+      multiple,
+      groupChange
+    }
+  }
+}
+</script>
+
+:::
+
+
 
 ::: title 自定义尺寸
 :::
@@ -53,12 +153,12 @@
 <template>
   <h4>只有图片时</h4>
   <lay-checkcard
-    avatar="https://portrait.gitee.com/uploads/avatars/namespace/2849/8547475_layui-vue_1645856954.png">
+    avatar="/src/assets/logo-png.png">
   </lay-checkcard>
   <h4>只有图片和描述时</h4>
   <lay-checkcard
     description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。"
-    avatar="https://portrait.gitee.com/uploads/avatars/namespace/2849/8547475_layui-vue_1645856954.png">
+    avatar="/src/assets/logo-png.png">
   </lay-checkcard>
   <h4>只有描述和标题时</h4>
   <lay-checkcard
@@ -67,7 +167,7 @@
   </lay-checkcard>
   <h4>只有标题和图片</h4>
   <lay-checkcard
-    avatar="https://portrait.gitee.com/uploads/avatars/namespace/2849/8547475_layui-vue_1645856954.png"
+    avatar="/src/assets/logo-png.png"
     title="示例">
   </lay-checkcard>
   <h4>只有标题时</h4>
@@ -140,7 +240,7 @@
 
 <template>
 <lay-checkcard
-    avatar="https://portrait.gitee.com/uploads/avatars/namespace/2849/8547475_layui-vue_1645856954.png"
+    avatar="/src/assets/logo-png.png"
     title="标题">
     <template #description>
       选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。
@@ -154,7 +254,7 @@
 ::: title 默认选中
 :::
 
-::: describe  通过配置 `v-model` 为 `true`或者 `v-model` 为数组 搭配 `value` 来配置选项默认被选中。
+::: describe  通过配置 `v-model` 为 `true` 来配置选项默认被选中。
 :::
 
 ::: demo 
@@ -163,7 +263,7 @@
   <lay-checkcard
     @change="handleChange"
     v-model="ischeked"
-    avatar="https://portrait.gitee.com/uploads/avatars/namespace/2849/8547475_layui-vue_1645856954.png"
+    avatar="/src/assets/logo-png.png"
     title="标题">
   </lay-checkcard>
 </template>
@@ -200,7 +300,7 @@ export default {
 <template>
   <lay-checkcard
     v-model="ischekeds"
-    avatar="https://portrait.gitee.com/uploads/avatars/namespace/2849/8547475_layui-vue_1645856954.png"
+    avatar="/src/assets/logo-png.png"
     title="标题">
      <template #extra>
      <lay-dropdown placement="top"  updateAtScroll>
@@ -242,11 +342,11 @@ export default {
 <template>
   <lay-checkcard>
      <template #cover>
-      <img src="https://gw.alipayobjects.com/mdn/rms_66ee3f/afts/img/A*FyH5TY53zSwAAAAAAAAAAABkARQnAQ"/>
+      <img src="http://abc.pearadmin.com/0e13411277ca6e7c6959b98501c067b4"/>
     </template>
   </lay-checkcard>
    <lay-checkcard
-   cover="https://gw.alipayobjects.com/mdn/rms_66ee3f/afts/img/A*FyH5TY53zSwAAAAAAAAAAABkARQnAQ">
+   cover="http://abc.pearadmin.com/0e13411277ca6e7c6959b98501c067b4">
   </lay-checkcard>
 </template>
 
@@ -264,76 +364,46 @@ export default {
 ::: demo 
 <template>
  <lay-checkcard
-    avatar="https://portrait.gitee.com/uploads/avatars/namespace/2849/8547475_layui-vue_1645856954.png"
+    avatar="/src/assets/logo-png.png"
     title="标题"
     description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。"
   >
   </lay-checkcard>
    <lay-checkcard
     disabled
-    avatar="https://portrait.gitee.com/uploads/avatars/namespace/2849/8547475_layui-vue_1645856954.png"
+    avatar="/src/assets/logo-png.png"
     title="标题"
     description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。"
   >
   </lay-checkcard>
   <lay-checkcard
-    v-model="ischeck"
     disabled
-    avatar="https://portrait.gitee.com/uploads/avatars/namespace/2849/8547475_layui-vue_1645856954.png"
+    avatar="/src/assets/logo-png.png"
     title="标题"
     description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。"
   >
   </lay-checkcard>
   <h4>整体不可用</h4>
-   <lay-switch v-model="disabled1"></lay-switch>
-   <lay-button @click="checkedChange">修改</lay-button>
-   {{ checked1 }}
-   <lay-checkcard-group :disabled="disabled1" v-model="checked1"  @change="groupChange">
+   <lay-checkcard-group disabled>
     <lay-checkcard
       value="1"
-      avatar="https://portrait.gitee.com/uploads/avatars/namespace/2849/8547475_layui-vue_1645856954.png"
+      avatar="/src/assets/logo-png.png"
       title="标题"
       description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。">
   </lay-checkcard>
    <lay-checkcard
       value="4"
-      avatar="https://portrait.gitee.com/uploads/avatars/namespace/2849/8547475_layui-vue_1645856954.png"
+      avatar="/src/assets/logo-png.png"
       title="标题"
       description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。">
   </lay-checkcard>
   <lay-checkcard
-      disabled
-      avatar="https://portrait.gitee.com/uploads/avatars/namespace/2849/8547475_layui-vue_1645856954.png"
+      avatar="/src/assets/logo-png.png"
       title="标题"
       description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。">
   </lay-checkcard>
   </lay-checkcard-group>
 </template>
-
-<script>
-import { ref } from 'vue'
-export default {
-  setup() {
-    const disabled1 = ref(false);
-    const checked1 = ref(['1', '2', '3'])
-    const ischeck = ref(true)
-    const groupChange = (val) => {
-      console.log(val)
-    }
-    const checkedChange = (val) => {
-      checked1.value = ['4','5']
-    }
-
-    return {
-      ischeck,
-      checked1,
-      disabled1,
-      checkedChange,
-      groupChange
-    }
-  }
-}
-</script>
 
 :::
 
@@ -348,22 +418,21 @@ export default {
 ::: demo 
 
 <template>
-  <lay-checkcard-group v-model="checked1" @change="groupChange">
+  <lay-checkcard-group multiple>
     <lay-checkcard
       value="1"
-      avatar="https://portrait.gitee.com/uploads/avatars/namespace/2849/8547475_layui-vue_1645856954.png"
+      avatar="/src/assets/logo-png.png"
       title="标题"
       description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。">
   </lay-checkcard>
    <lay-checkcard
       value="4"
-      avatar="https://portrait.gitee.com/uploads/avatars/namespace/2849/8547475_layui-vue_1645856954.png"
+      avatar="/src/assets/logo-png.png"
       title="标题"
       description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。">
   </lay-checkcard>
   <lay-checkcard
-      disabled
-      avatar="https://portrait.gitee.com/uploads/avatars/namespace/2849/8547475_layui-vue_1645856954.png"
+      avatar="/src/assets/logo-png.png"
       title="标题"
       description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。">
   </lay-checkcard>
@@ -375,13 +444,17 @@ import { ref } from 'vue'
 
 export default {
   setup() {
-    const checked1 = ref(['1', '2', '3'])
+     const disabled1 = ref(true);
+    const checkeds = ref(['1', '2', '3'])
     const groupChange = (val) => {
-
-      console.log(val, 2232)
+    }
+    const checkedChange = (val) => {
+      checkeds.value = ['4','5']
     }
     return {
-      checked1,
+      disabled1,
+      checkedChange,
+      checkeds,
       groupChange
     }
   }
@@ -406,21 +479,24 @@ export default {
   <lay-row space="30">
    <lay-col md="8">
     <lay-checkcard
-      avatar="https://portrait.gitee.com/uploads/avatars/namespace/2849/8547475_layui-vue_1645856954.png"
+      value="2"
+      avatar="/src/assets/logo-png.png"
       title="标题"
       description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。">
   </lay-checkcard>
   </lay-col>
    <lay-col md="8">
    <lay-checkcard
-      avatar="https://portrait.gitee.com/uploads/avatars/namespace/2849/8547475_layui-vue_1645856954.png"
+      value="3"
+      avatar="/src/assets/logo-png.png"
       title="标题"
       description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。">
   </lay-checkcard>
   </lay-col>
    <lay-col md="8">
   <lay-checkcard
-      avatar="https://portrait.gitee.com/uploads/avatars/namespace/2849/8547475_layui-vue_1645856954.png"
+      value="4"
+      avatar="/src/assets/logo-png.png"
       title="标题"
       description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。">
   </lay-checkcard>
@@ -430,20 +506,7 @@ export default {
 </template>
 
 <script>
-import { ref } from 'vue'
 
-export default {
-  setup() {
-    const checked1 = ref(['1', '2', '3'])
-    const groupChange = (val) => {
-      console.log(val, 222)
-    }
-    return {
-      checked1,
-      groupChange
-    }
-  }
-}
 </script>
 
 :::
@@ -458,7 +521,8 @@ export default {
 | title  | 标题 | `string` | --       | --                       |
 | description | 描述 | `string` | -- | -- |
 | avatar | 图片 | `string` | -- | -- |
-| v-model | 默认选中 | `boolean` `array` | false | -- |
+| v-model | 默认选中 | `boolean` | false | -- |
+| value | 选项值 | `string` | -- | -- |
 | disabled | 是否禁用	 | `boolean` | false | -- |
 | extra | 拓展区域	 | `操作区域` | -- | -- |
 | cover | 背景图片, 使用该属性时, `title` `description` `avater`失效	 | -- | -- | -- |
@@ -485,6 +549,7 @@ export default {
 | ------ | ---- | -------- | -------- | ------------------------ |
 | disabled | 是否禁用	 | `boolean` | false | -- |
 | v-model | 默认勾选	 | -- | -- | -- |
+| multiple | 多选	 | `boolean` | false | -- |
 
 :::
 

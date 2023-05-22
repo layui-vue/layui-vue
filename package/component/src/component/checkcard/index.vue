@@ -1,7 +1,7 @@
 <!--
  * @Author: baobaobao
  * @Date: 2023-04-24 16:23:33
- * @LastEditTime: 2023-05-07 00:47:53
+ * @LastEditTime: 2023-05-21 23:17:11
  * @LastEditors: baobaobao
 -->
 <template>
@@ -58,7 +58,6 @@ import {
   onBeforeMount,
 } from "vue";
 import "./index.less";
-import { check } from "prettier";
 export interface CheckCard {
   title?: string;
   avatar?: string;
@@ -66,8 +65,8 @@ export interface CheckCard {
   cover?: string;
   extra?: string;
   disabled?: boolean;
+  value?: string | number;
   modelValue?: boolean;
-  value?: string;
 }
 const attrs = useAttrs();
 const slot = useSlots();
@@ -76,20 +75,14 @@ const props = withDefaults(defineProps<CheckCard>(), {
   disabled: false,
   modelValue: false,
 });
+const initValue = ref(props.modelValue)
 const checkcardGroup: any = inject("checkcardGroup", {});
 const getIsGroup = computed(
   () => checkcardGroup && checkcardGroup.name === "LayCheckCardGroup"
 );
+
 const containerStyle = computed(() => attrs.style as StyleValue);
-const getCheckState = ref<boolean>(
-  props.modelValue ||
-    (checkcardGroup.modelVal &&
-      checkcardGroup.modelVal.value.includes(props.value))
-);
-const getDisabled = computed(
-  () =>
-    props.disabled || (checkcardGroup.disabled && checkcardGroup.disabled.value)
-);
+const getDisabled = ref<boolean | undefined>(props.disabled || (checkcardGroup.disabled));
 const getContentStyle = computed(() => {
   return {
     "layui-checkcard-is-description": !props.description && !slot.description,
@@ -102,54 +95,58 @@ const getExtraStyle = computed(() => {
     "layui-checkcard-is-extra": slot.extra,
   };
 });
+const getCheckState = computed({
+  get() {
+    if (getIsGroup.value) {
+      if (!Array.isArray(checkcardGroup.modelVal.value)) {
+        return checkcardGroup.modelVal.value === props.value;
+      } else  {
+        return checkcardGroup.modelVal.value.includes(props.value)
+      }
+    } else {
+      return initValue.value
+    }
+  },
+  set(val) {
+    if (getIsGroup.value) {
+      if (!Array.isArray(checkcardGroup.modelVal.value)) {
+        checkcardGroup.modelVal.value = props.value
+      } else {
+        checkcardGroup.modelVal.value = getNewArr()
+      }
+    } else {
+      initValue.value = val
+      emit("change",  val);
+      emit("update:modelValue", val);
+    }
+  },
+});
+const getValArr = computed(() => {
+  if (getIsGroup.value) {
+    return checkcardGroup.modelVal.value;
+  }
+});
+const getNewArr = () => {
+  let newsArr = [...getValArr.value];
+  const findIndex = newsArr.findIndex((key) => key === props.value);
+  if (findIndex < 0)  {
+    newsArr.push(props.value)
+  } else {
+    newsArr.splice(findIndex, 1);
+  }
+  return newsArr
+}
+
 const handleCheck = (event: Event) => {
   if (!getDisabled.value) {
     getCheckState.value = !getCheckState.value;
-    emit("update:modelValue", getCheckState.value);
-    emit("change", getCheckState.value);
   }
 };
-const getValArr = computed(() => {
-  if (getIsGroup.value) {
-    if (
-      checkcardGroup.modelVal.value &&
-      Array.isArray(checkcardGroup.modelVal.value)
-    ) {
-      return checkcardGroup.modelVal.value;
-    }
+watch(() => props.disabled, (val) => {
+  if (!getIsGroup.value) {
+    getDisabled.value = val
   }
-  return [];
-});
-watch(
-  () => checkcardGroup.modelVal,
-  () => {
-    if (checkcardGroup.modelVal) {
-      getCheckState.value = checkcardGroup.modelVal.value.includes(props.value);
-    }
-  },
-  { deep: true }
-);
-watch(
-  () => getCheckState,
-  (val) => {
-    if (getIsGroup.value) {
-      let newsArr = [...getValArr.value];
-      const findIndex = newsArr.findIndex((key) => key === props.value);
-      if (val.value) {
-        findIndex < 0 && newsArr.push(props.value);
-      } else {
-        if (findIndex >= 0) {
-          newsArr.splice(findIndex, 1);
-        }
-      }
-      checkcardGroup.modelVal.value = newsArr;
-    }
-  },
-  {
-    deep: true,
-    immediate: true,
-  }
-);
+})
 const getStyle = computed(() => {
   return {
     "layui-checkcard-checked": getCheckState.value,
