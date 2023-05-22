@@ -17,6 +17,18 @@
             <ul>
                 <a name="2-0-0"></a>
                 <li>
+                    <h3>2.0.5 <span class="layui-badge-rim">2023-05-22</span></h3>
+                    <ul>
+                        <li>[修复] switch 组件在 form-item 中非 pane 模式中，仍存在左边距的问题。</li>
+                        <li>[修复] checkbox 组件在 form-item 中非 pane 模式中，仍存在左边距的问题。</li>
+                        <li>[修复] rate 组件在 form-item 中非 pane 模式中，仍存在左边距的问题。</li>
+                        <li>[修复] radio 组件在 form-item 中非 pane 模式中，仍存在左边距的问题。</li>
+                    </ul>  
+                </li>
+            </ul>
+            <ul>
+                <a name="2-0-0"></a>
+                <li>
                     <h3>2.0.4 <span class="layui-badge-rim">2023-05-21</span></h3>
                     <ul>
                         <li>[优化] checkcard 组件在 form-item 组件中贴边的问题。</li>

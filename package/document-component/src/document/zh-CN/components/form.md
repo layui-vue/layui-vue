@@ -84,6 +84,9 @@ const submit = () => {
       <lay-radio v-model="model1.radio" name="action" :value="2" label="画画"></lay-radio>
 	  <lay-radio v-model="model1.radio" name="action" :value="3" label="运动"></lay-radio>
     </lay-form-item>
+	<lay-form-item label="评分" prop="rate">
+      <lay-rate v-model="model1.rate" ></lay-rate>
+    </lay-form-item>
     <lay-form-item label="权限" prop="treeSelect" mode="inline">
       <lay-tree-select v-model="model1.treeSelect" :data="data1"></lay-tree-select>
     </lay-form-item>
