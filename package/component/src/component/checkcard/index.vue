@@ -1,7 +1,7 @@
 <!--
  * @Author: baobaobao
  * @Date: 2023-04-24 16:23:33
- * @LastEditTime: 2023-05-21 23:17:11
+ * @LastEditTime: 2023-05-23 13:41:46
  * @LastEditors: baobaobao
 -->
 <template>
@@ -80,7 +80,6 @@ const checkcardGroup: any = inject("checkcardGroup", {});
 const getIsGroup = computed(
   () => checkcardGroup && checkcardGroup.name === "LayCheckCardGroup"
 );
-
 const containerStyle = computed(() => attrs.style as StyleValue);
 const getDisabled = ref<boolean | undefined>(
   props.disabled || checkcardGroup.disabled
@@ -151,7 +150,10 @@ watch(
       getDisabled.value = val;
     }
   }
-);
+)
+watch(() => props.modelValue, (val) => {
+  initValue.value = val
+})
 const getStyle = computed(() => {
   return {
     "layui-checkcard-checked": getCheckState.value,
