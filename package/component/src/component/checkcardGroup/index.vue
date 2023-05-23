@@ -22,31 +22,41 @@ export interface CheckCardGroup {
   disabled?: boolean;
   multiple?: boolean;
 }
+
 const props = withDefaults(defineProps<CheckCardGroup>(), {
   modelValue: undefined,
   disabled: false,
-  multiple: false
+  multiple: true,
 });
+
 const emit = defineEmits(["update:modelValue", "change"]);
+
 const disabled = ref(props.disabled);
-const modelVal = ref(props.modelValue)
-watch(() => props.multiple, (multiple) => {
-  if (!multiple && Array.isArray(modelVal.value)) {
-    modelVal.value = ''
+const modelVal = ref(props.modelValue);
+
+watch(
+  () => props.multiple,
+  (multiple) => {
+    if (!multiple && Array.isArray(modelVal.value)) {
+      modelVal.value = "";
+    }
+    if (multiple && !Array.isArray(modelVal.value)) {
+      modelVal.value = [];
+    }
+  },
+  {
+    deep: true,
+    immediate: true,
   }
-  if (multiple && !Array.isArray(modelVal.value)) {
-    modelVal.value = []
-  }
-}, {
-  deep: true,
-  immediate: true
-})
+);
+
 provide("checkcardGroup", {
   name: "LayCheckCardGroup",
   modelVal: modelVal,
   disabled: disabled,
-  multiple: props.multiple
+  multiple: props.multiple,
 });
+
 watch(
   () => modelVal,
   (val) => {
@@ -55,15 +65,24 @@ watch(
   },
   { deep: true }
 );
-watch(() => props.disabled, (value) => {
-  disabled.value = value;
-}, {
-  deep: true
-})
 
-watch(() => props.modelValue, (value) => {
-  modelVal.value = value;
-}, {
-  deep: true
-})
+watch(
+  () => props.disabled,
+  (value) => {
+    disabled.value = value;
+  },
+  {
+    deep: true,
+  }
+);
+
+watch(
+  () => props.modelValue,
+  (value) => {
+    modelVal.value = value;
+  },
+  {
+    deep: true,
+  }
+);
 </script>

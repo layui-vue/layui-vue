@@ -80,7 +80,7 @@ const checkedKeys = computed({
 });
 
 watch(
-  selectedValue,
+  [selectedValue, treeData],
   () => {
     if (props.multiple) {
       try {
