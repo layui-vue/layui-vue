@@ -14,7 +14,7 @@
 
 <template>
   <lay-checkcard
-    avatar="/src/assets/logo-png.png"
+    avatar="http://abc.pearadmin.com/logo-png.png"
     title="标题"
     description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。"
   >
@@ -25,30 +25,30 @@
 
 
 
-::: title 多选模式
+::: title 单元模式
 :::
 
-::: describe 使用分组`lay-checkcard-group`时, 默认多选模式。
+::: describe 使用分组`lay-checkcard-group`时, 默认为单选模式
 :::
 
 ::: demo
 
- <lay-checkcard-group v-model="multiple">
+ <lay-checkcard-group  v-model="Single">
     <lay-checkcard
       value="2"
-      avatar="/src/assets/logo-png.png"
+      avatar="http://abc.pearadmin.com/logo-png.png"
       title="标题"
       description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。">
   </lay-checkcard>
    <lay-checkcard
       value="3"
-      avatar="/src/assets/logo-png.png"
+      avatar="http://abc.pearadmin.com/logo-png.png"
       title="标题"
       description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。">
   </lay-checkcard>
   <lay-checkcard
       value="4"
-      avatar="/src/assets/logo-png.png"
+      avatar="http://abc.pearadmin.com/logo-png.png"
       title="标题"
       description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。">
   </lay-checkcard>
@@ -59,11 +59,11 @@ import { ref } from 'vue'
 
 export default {
   setup() {
-    const multiple = ref(['1', '2', '3'])
+    const Single = ref('2')
     const groupChange = (val) => {
     }
     return {
-      multiple,
+      Single,
       groupChange
     }
   }
@@ -74,30 +74,30 @@ export default {
 
 
 
-::: title 单选模式
+::: title 多选模式
 :::
 
-::: describe 使用`single`可单选。
+::: describe 使用`multiple`可多选。
 :::
 
 ::: demo
 
- <lay-checkcard-group single v-model="single">
+ <lay-checkcard-group multiple v-model="multiple">
     <lay-checkcard
       value="2"
-      avatar="/src/assets/logo-png.png"
+      avatar="http://abc.pearadmin.com/logo-png.png"
       title="标题"
       description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。">
   </lay-checkcard>
    <lay-checkcard
       value="3"
-      avatar="/src/assets/logo-png.png"
+      avatar="http://abc.pearadmin.com/logo-png.png"
       title="标题"
       description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。">
   </lay-checkcard>
   <lay-checkcard
       value="4"
-      avatar="/src/assets/logo-png.png"
+      avatar="http://abc.pearadmin.com/logo-png.png"
       title="标题"
       description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。">
   </lay-checkcard>
@@ -108,11 +108,11 @@ import { ref } from 'vue'
 
 export default {
   setup() {
-    const single = ref(['2', '3', '4'])
+    const multiple = ref(['2', '3', '4'])
     const groupChange = (val) => {
     }
     return {
-      single,
+      multiple,
       groupChange
     }
   }
@@ -153,12 +153,12 @@ export default {
 <template>
   <h4>只有图片时</h4>
   <lay-checkcard
-    avatar="/src/assets/logo-png.png">
+    avatar="http://abc.pearadmin.com/logo-png.png">
   </lay-checkcard>
   <h4>只有图片和描述时</h4>
   <lay-checkcard
     description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。"
-    avatar="/src/assets/logo-png.png">
+    avatar="http://abc.pearadmin.com/logo-png.png">
   </lay-checkcard>
   <h4>只有描述和标题时</h4>
   <lay-checkcard
@@ -167,7 +167,7 @@ export default {
   </lay-checkcard>
   <h4>只有标题和图片</h4>
   <lay-checkcard
-    avatar="/src/assets/logo-png.png"
+    avatar="http://abc.pearadmin.com/logo-png.png"
     title="示例">
   </lay-checkcard>
   <h4>只有标题时</h4>
@@ -240,7 +240,7 @@ export default {
 
 <template>
 <lay-checkcard
-    avatar="/src/assets/logo-png.png"
+    avatar="http://abc.pearadmin.com/logo-png.png"
     title="标题">
     <template #description>
       选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。
@@ -261,8 +261,9 @@ export default {
 
 <template>
   <lay-checkcard
-    v-model="ischekedbbb"
-    avatar="/src/assets/logo-png.png"
+    @change="handleChange"
+    v-model="ischeked"
+    avatar="http://abc.pearadmin.com/logo-png.png"
     title="标题">
   </lay-checkcard>
 </template>
@@ -275,11 +276,12 @@ import { ref, watch } from 'vue'
 
 export default {
   setup() {
-    const ischekedbbb = ref(false)
+    const ischeked = ref(false)
     const handleChange = (value) =>  {
+      // console.log(value)
     }
     return {
-      ischekedbbb,
+      ischeked,
       handleChange
     }
   }
@@ -298,7 +300,7 @@ export default {
 <template>
   <lay-checkcard
     v-model="ischekeds"
-    avatar="/src/assets/logo-png.png"
+    avatar="http://abc.pearadmin.com/logo-png.png"
     title="标题">
      <template #extra>
      <lay-dropdown placement="top"  updateAtScroll>
@@ -362,21 +364,21 @@ export default {
 ::: demo 
 <template>
  <lay-checkcard
-    avatar="/src/assets/logo-png.png"
+    avatar="http://abc.pearadmin.com/logo-png.png"
     title="标题"
     description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。"
   >
   </lay-checkcard>
    <lay-checkcard
     disabled
-    avatar="/src/assets/logo-png.png"
+    avatar="http://abc.pearadmin.com/logo-png.png"
     title="标题"
     description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。"
   >
   </lay-checkcard>
   <lay-checkcard
     disabled
-    avatar="/src/assets/logo-png.png"
+    avatar="http://abc.pearadmin.com/logo-png.png"
     title="标题"
     description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。"
   >
@@ -385,18 +387,18 @@ export default {
    <lay-checkcard-group disabled>
     <lay-checkcard
       value="1"
-      avatar="/src/assets/logo-png.png"
+      avatar="http://abc.pearadmin.com/logo-png.png"
       title="标题"
       description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。">
   </lay-checkcard>
    <lay-checkcard
       value="4"
-      avatar="/src/assets/logo-png.png"
+      avatar="http://abc.pearadmin.com/logo-png.png"
       title="标题"
       description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。">
   </lay-checkcard>
   <lay-checkcard
-      avatar="/src/assets/logo-png.png"
+      avatar="http://abc.pearadmin.com/logo-png.png"
       title="标题"
       description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。">
   </lay-checkcard>
@@ -416,21 +418,21 @@ export default {
 ::: demo 
 
 <template>
-  <lay-checkcard-group>
+  <lay-checkcard-group multiple>
     <lay-checkcard
       value="1"
-      avatar="/src/assets/logo-png.png"
+      avatar="http://abc.pearadmin.com/logo-png.png"
       title="标题"
       description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。">
   </lay-checkcard>
    <lay-checkcard
       value="4"
-      avatar="/src/assets/logo-png.png"
+      avatar="http://abc.pearadmin.com/logo-png.png"
       title="标题"
       description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。">
   </lay-checkcard>
   <lay-checkcard
-      avatar="/src/assets/logo-png.png"
+      avatar="http://abc.pearadmin.com/logo-png.png"
       title="标题"
       description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。">
   </lay-checkcard>
@@ -478,7 +480,7 @@ export default {
    <lay-col md="8">
     <lay-checkcard
       value="2"
-      avatar="/src/assets/logo-png.png"
+      avatar="http://abc.pearadmin.com/logo-png.png"
       title="标题"
       description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。">
   </lay-checkcard>
@@ -486,7 +488,7 @@ export default {
    <lay-col md="8">
    <lay-checkcard
       value="3"
-      avatar="/src/assets/logo-png.png"
+      avatar="http://abc.pearadmin.com/logo-png.png"
       title="标题"
       description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。">
   </lay-checkcard>
@@ -494,7 +496,7 @@ export default {
    <lay-col md="8">
   <lay-checkcard
       value="4"
-      avatar="/src/assets/logo-png.png"
+      avatar="http://abc.pearadmin.com/logo-png.png"
       title="标题"
       description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。">
   </lay-checkcard>
@@ -547,7 +549,7 @@ export default {
 | ------ | ---- | -------- | -------- | ------------------------ |
 | disabled | 是否禁用	 | `boolean` | false | -- |
 | v-model | 默认勾选	 | -- | -- | -- |
-| single | 是否单选	 | `boolean` | false | -- |
+| multiple | 多选	 | `boolean` | false | -- |
 
 :::
 
