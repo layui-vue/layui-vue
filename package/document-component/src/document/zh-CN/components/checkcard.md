@@ -14,7 +14,7 @@
 
 <template>
   <lay-checkcard
-    avatar="/src/assets/logo-png.png"
+    avatar="http://abc.pearadmin.com/logo-png.png"
     title="标题"
     description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。"
   >
@@ -36,19 +36,19 @@
  <lay-checkcard-group  v-model="Single">
     <lay-checkcard
       value="2"
-      avatar="/src/assets/logo-png.png"
+      avatar="http://abc.pearadmin.com/logo-png.png"
       title="标题"
       description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。">
   </lay-checkcard>
    <lay-checkcard
       value="3"
-      avatar="/src/assets/logo-png.png"
+      avatar="http://abc.pearadmin.com/logo-png.png"
       title="标题"
       description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。">
   </lay-checkcard>
   <lay-checkcard
       value="4"
-      avatar="/src/assets/logo-png.png"
+      avatar="http://abc.pearadmin.com/logo-png.png"
       title="标题"
       description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。">
   </lay-checkcard>
@@ -85,19 +85,19 @@ export default {
  <lay-checkcard-group multiple v-model="multiple">
     <lay-checkcard
       value="2"
-      avatar="/src/assets/logo-png.png"
+      avatar="http://abc.pearadmin.com/logo-png.png"
       title="标题"
       description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。">
   </lay-checkcard>
    <lay-checkcard
       value="3"
-      avatar="/src/assets/logo-png.png"
+      avatar="http://abc.pearadmin.com/logo-png.png"
       title="标题"
       description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。">
   </lay-checkcard>
   <lay-checkcard
       value="4"
-      avatar="/src/assets/logo-png.png"
+      avatar="http://abc.pearadmin.com/logo-png.png"
       title="标题"
       description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。">
   </lay-checkcard>
@@ -153,12 +153,12 @@ export default {
 <template>
   <h4>只有图片时</h4>
   <lay-checkcard
-    avatar="/src/assets/logo-png.png">
+    avatar="http://abc.pearadmin.com/logo-png.png">
   </lay-checkcard>
   <h4>只有图片和描述时</h4>
   <lay-checkcard
     description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。"
-    avatar="/src/assets/logo-png.png">
+    avatar="http://abc.pearadmin.com/logo-png.png">
   </lay-checkcard>
   <h4>只有描述和标题时</h4>
   <lay-checkcard
@@ -167,7 +167,7 @@ export default {
   </lay-checkcard>
   <h4>只有标题和图片</h4>
   <lay-checkcard
-    avatar="/src/assets/logo-png.png"
+    avatar="http://abc.pearadmin.com/logo-png.png"
     title="示例">
   </lay-checkcard>
   <h4>只有标题时</h4>
@@ -240,7 +240,7 @@ export default {
 
 <template>
 <lay-checkcard
-    avatar="/src/assets/logo-png.png"
+    avatar="http://abc.pearadmin.com/logo-png.png"
     title="标题">
     <template #description>
       选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。
@@ -263,7 +263,7 @@ export default {
   <lay-checkcard
     @change="handleChange"
     v-model="ischeked"
-    avatar="/src/assets/logo-png.png"
+    avatar="http://abc.pearadmin.com/logo-png.png"
     title="标题">
   </lay-checkcard>
 </template>
@@ -300,7 +300,7 @@ export default {
 <template>
   <lay-checkcard
     v-model="ischekeds"
-    avatar="/src/assets/logo-png.png"
+    avatar="http://abc.pearadmin.com/logo-png.png"
     title="标题">
      <template #extra>
      <lay-dropdown placement="top"  updateAtScroll>
@@ -364,21 +364,21 @@ export default {
 ::: demo 
 <template>
  <lay-checkcard
-    avatar="/src/assets/logo-png.png"
+    avatar="http://abc.pearadmin.com/logo-png.png"
     title="标题"
     description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。"
   >
   </lay-checkcard>
    <lay-checkcard
     disabled
-    avatar="/src/assets/logo-png.png"
+    avatar="http://abc.pearadmin.com/logo-png.png"
     title="标题"
     description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。"
   >
   </lay-checkcard>
   <lay-checkcard
     disabled
-    avatar="/src/assets/logo-png.png"
+    avatar="http://abc.pearadmin.com/logo-png.png"
     title="标题"
     description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。"
   >
@@ -387,18 +387,18 @@ export default {
    <lay-checkcard-group disabled>
     <lay-checkcard
       value="1"
-      avatar="/src/assets/logo-png.png"
+      avatar="http://abc.pearadmin.com/logo-png.png"
       title="标题"
       description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。">
   </lay-checkcard>
    <lay-checkcard
       value="4"
-      avatar="/src/assets/logo-png.png"
+      avatar="http://abc.pearadmin.com/logo-png.png"
       title="标题"
       description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。">
   </lay-checkcard>
   <lay-checkcard
-      avatar="/src/assets/logo-png.png"
+      avatar="http://abc.pearadmin.com/logo-png.png"
       title="标题"
       description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。">
   </lay-checkcard>
@@ -421,18 +421,18 @@ export default {
   <lay-checkcard-group multiple>
     <lay-checkcard
       value="1"
-      avatar="/src/assets/logo-png.png"
+      avatar="http://abc.pearadmin.com/logo-png.png"
       title="标题"
       description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。">
   </lay-checkcard>
    <lay-checkcard
       value="4"
-      avatar="/src/assets/logo-png.png"
+      avatar="http://abc.pearadmin.com/logo-png.png"
       title="标题"
       description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。">
   </lay-checkcard>
   <lay-checkcard
-      avatar="/src/assets/logo-png.png"
+      avatar="http://abc.pearadmin.com/logo-png.png"
       title="标题"
       description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。">
   </lay-checkcard>
@@ -480,7 +480,7 @@ export default {
    <lay-col md="8">
     <lay-checkcard
       value="2"
-      avatar="/src/assets/logo-png.png"
+      avatar="http://abc.pearadmin.com/logo-png.png"
       title="标题"
       description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。">
   </lay-checkcard>
@@ -488,7 +488,7 @@ export default {
    <lay-col md="8">
    <lay-checkcard
       value="3"
-      avatar="/src/assets/logo-png.png"
+      avatar="http://abc.pearadmin.com/logo-png.png"
       title="标题"
       description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。">
   </lay-checkcard>
@@ -496,7 +496,7 @@ export default {
    <lay-col md="8">
   <lay-checkcard
       value="4"
-      avatar="/src/assets/logo-png.png"
+      avatar="http://abc.pearadmin.com/logo-png.png"
       title="标题"
       description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。">
   </lay-checkcard>

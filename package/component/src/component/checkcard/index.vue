@@ -1,7 +1,7 @@
 <!--
  * @Author: baobaobao
  * @Date: 2023-04-24 16:23:33
- * @LastEditTime: 2023-05-21 23:17:11
+ * @LastEditTime: 2023-05-23 13:41:46
  * @LastEditors: baobaobao
 -->
 <template>
@@ -75,14 +75,15 @@ const props = withDefaults(defineProps<CheckCard>(), {
   disabled: false,
   modelValue: false,
 });
-const initValue = ref(props.modelValue)
+const initValue = ref(props.modelValue);
 const checkcardGroup: any = inject("checkcardGroup", {});
 const getIsGroup = computed(
   () => checkcardGroup && checkcardGroup.name === "LayCheckCardGroup"
 );
-
 const containerStyle = computed(() => attrs.style as StyleValue);
-const getDisabled = ref<boolean | undefined>(props.disabled || (checkcardGroup.disabled));
+const getDisabled = ref<boolean | undefined>(
+  props.disabled || checkcardGroup.disabled
+);
 const getContentStyle = computed(() => {
   return {
     "layui-checkcard-is-description": !props.description && !slot.description,
@@ -100,23 +101,23 @@ const getCheckState = computed({
     if (getIsGroup.value) {
       if (!Array.isArray(checkcardGroup.modelVal.value)) {
         return checkcardGroup.modelVal.value === props.value;
-      } else  {
-        return checkcardGroup.modelVal.value.includes(props.value)
+      } else {
+        return checkcardGroup.modelVal.value.includes(props.value);
       }
     } else {
-      return initValue.value
+      return initValue.value;
     }
   },
   set(val) {
     if (getIsGroup.value) {
       if (!Array.isArray(checkcardGroup.modelVal.value)) {
-        checkcardGroup.modelVal.value = props.value
+        checkcardGroup.modelVal.value = props.value;
       } else {
-        checkcardGroup.modelVal.value = getNewArr()
+        checkcardGroup.modelVal.value = getNewArr();
       }
     } else {
-      initValue.value = val
-      emit("change",  val);
+      initValue.value = val;
+      emit("change", val);
       emit("update:modelValue", val);
     }
   },
@@ -129,23 +130,29 @@ const getValArr = computed(() => {
 const getNewArr = () => {
   let newsArr = [...getValArr.value];
   const findIndex = newsArr.findIndex((key) => key === props.value);
-  if (findIndex < 0)  {
-    newsArr.push(props.value)
+  if (findIndex < 0) {
+    newsArr.push(props.value);
   } else {
     newsArr.splice(findIndex, 1);
   }
-  return newsArr
-}
+  return newsArr;
+};
 
 const handleCheck = (event: Event) => {
   if (!getDisabled.value) {
     getCheckState.value = !getCheckState.value;
   }
 };
-watch(() => props.disabled, (val) => {
-  if (!getIsGroup.value) {
-    getDisabled.value = val
+watch(
+  () => props.disabled,
+  (val) => {
+    if (!getIsGroup.value) {
+      getDisabled.value = val;
+    }
   }
+)
+watch(() => props.modelValue, (val) => {
+  initValue.value = val
 })
 const getStyle = computed(() => {
   return {

@@ -1,12 +1,11 @@
 /*
  * @Author: baobaobao
  * @Date: 2023-04-27 11:57:58
- * @LastEditTime: 2023-05-07 12:30:11
+ * @LastEditTime: 2023-05-23 13:34:10
  * @LastEditors: baobaobao
  */
-import { mount } from "@vue/test-utils";
+import { mount, shallowMount } from "@vue/test-utils";
 import LayCheckCard from "../src/component/checkcard";
-
 import { describe, expect, test } from "vitest";
 const IMAGE_URL = "https://img.com";
 const title = "test checkcard text";
@@ -44,13 +43,15 @@ describe("LayCheckCard.vue", () => {
     wrapper.unmount();
   });
 
-  test("render val test", () => {
+  test("render modelValue test", async() => {
     const wrapper = mount(LayCheckCard, {
       props: {
         modelValue: true,
       },
     });
-    expect(wrapper.find(".layui-checkcard-checked").exists()).toBe(true);
+    await wrapper.setProps({ modelValue: false })
+    expect(Object.is(wrapper.vm.modelValue, false)).toBe(true)
+    expect(wrapper.find(".layui-checkcard-checked").exists()).toBe(false);
     wrapper.unmount();
   });
 
@@ -128,8 +129,11 @@ describe("LayCheckCard.vue", () => {
     expect(wrapper.find(".layui-checkcard").classes()).toContain(
       "layui-checkcard-disabled"
     );
+    await wrapper.setProps({ disabled: false })
+    expect(wrapper.vm.disabled).toBe(false)
     await wrapper.find(".layui-checkcard").trigger("click");
     expect(wrapper.emitted()).toHaveProperty("click");
+    
     wrapper.unmount();
   });
 });

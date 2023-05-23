@@ -21,7 +21,10 @@ import { ref } from 'vue';
 
 const value1 = ref(1);
 
-const data1 = ref([{
+const data1 = ref([]);
+
+setTimeout(() => {
+	data1.value = [{
 	title: '一级1',
 	id: 1,
 	field: 'name1',
@@ -161,7 +164,8 @@ const data1 = ref([{
 			field: ''
 		}]
 	}]
-}]);
+}]
+}, 2000)
 
 function handleClick(node) {
   console.log(node)

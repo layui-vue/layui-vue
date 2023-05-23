@@ -1,7 +1,7 @@
 <!--
  * @Author: baobaobao
  * @Date: 2023-04-26 13:28:17
- * @LastEditTime: 2023-05-21 23:16:17
+ * @LastEditTime: 2023-05-23 13:38:22
  * @LastEditors: baobaobao
 -->
 <template>
@@ -20,21 +20,24 @@ import { ref, watch, provide, computed } from "vue";
 export interface CheckCardGroup {
   modelValue?: [] | string | number | boolean | undefined;
   disabled?: boolean;
-  multiple?: boolean;
+  single?: boolean;
 }
+
 const props = withDefaults(defineProps<CheckCardGroup>(), {
   modelValue: undefined,
   disabled: false,
-  multiple: false
+  single: false
 });
+
 const emit = defineEmits(["update:modelValue", "change"]);
+
 const disabled = ref(props.disabled);
 const modelVal = ref(props.modelValue)
-watch(() => props.multiple, (multiple) => {
-  if (!multiple && Array.isArray(modelVal.value)) {
+watch(() => props.single, (single) => {
+  if (single && Array.isArray(modelVal.value)) {
     modelVal.value = ''
   }
-  if (multiple && !Array.isArray(modelVal.value)) {
+  if (!single && !Array.isArray(modelVal.value)) {
     modelVal.value = []
   }
 }, {
@@ -44,9 +47,9 @@ watch(() => props.multiple, (multiple) => {
 provide("checkcardGroup", {
   name: "LayCheckCardGroup",
   modelVal: modelVal,
-  disabled: disabled,
-  multiple: props.multiple
+  disabled: disabled
 });
+
 watch(
   () => modelVal,
   (val) => {
@@ -55,15 +58,24 @@ watch(
   },
   { deep: true }
 );
-watch(() => props.disabled, (value) => {
-  disabled.value = value;
-}, {
-  deep: true
-})
 
-watch(() => props.modelValue, (value) => {
-  modelVal.value = value;
-}, {
-  deep: true
-})
+watch(
+  () => props.disabled,
+  (value) => {
+    disabled.value = value;
+  },
+  {
+    deep: true,
+  }
+);
+
+watch(
+  () => props.modelValue,
+  (value) => {
+    modelVal.value = value;
+  },
+  {
+    deep: true,
+  }
+);
 </script>
