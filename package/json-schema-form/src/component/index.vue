@@ -5,12 +5,10 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { LayForm } from "@layui/layui-vue";
-import "@layui/layui-vue/es/form/index.css";
-
 export interface JsonSchemaFormProps {
   jsonSchema: any;
   model: any;
+  space: number;
 }
 
 const props = withDefaults(defineProps<JsonSchemaFormProps>(), {});
@@ -20,7 +18,7 @@ defineExpose({});
 
 <template>
   <lay-form :model="model">
-    <lay-row>
+    <lay-row :space="space">
       <template v-for="(val, key, index) in jsonSchema" :key="index">
         <lay-col v-bind="val.grid">
           <lay-form-item :label="val.label">
