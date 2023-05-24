@@ -507,6 +507,7 @@ const sortTable = (e: any, key: string, sort: string) => {
 let tableBody = ref<HTMLElement | null>(null);
 let tableHeader = ref<HTMLElement | null>(null);
 let tableHeaderTable = ref<HTMLElement | null>(null);
+let tableBodyTable = ref<HTMLElement | null>(null);
 const tableBodyEmptyWidth = ref();
 let scrollWidthCell = ref(0);
 
@@ -1104,7 +1105,14 @@ defineExpose({ getCheckData });
                         <div
                           v-if="props.resize || column.resize"
                           class="lay-table-cols-resize"
-                          @mousedown="startResize($event, column)"
+                          @mousedown="
+                            startResize(
+                              $event,
+                              column,
+                              tableHeaderTable,
+                              tableBodyTable
+                            )
+                          "
                         ></div>
                       </th>
                     </template>
@@ -1127,6 +1135,7 @@ defineExpose({ getCheckData });
             :class="{ 'layui-table-even': props.even }"
             :lay-size="size"
             :lay-skin="skin"
+            ref="tableBodyTable"
           >
             <colgroup>
               <template
