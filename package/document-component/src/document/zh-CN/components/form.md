@@ -7,6 +7,129 @@
 ::: describe 高性能表单控件，自带数据域管理。包含数据录入、校验以及对应样式。
 :::
 
+::: title 测试沙盒
+:::
+
+::: demo 通过 `lay-form` 与 `lay-form-item` 标签，创建 `form` 组件。
+
+<template>
+  	<lay-json-schema-form :model="jsonModel" :jsonSchema="jsonSchema">
+		<template #age="{ schema, model }">
+			(插槽) 配置: {{ schema.props }} 值: {{ model }}
+		</template>
+	</lay-json-schema-form>
+</template>
+
+<script setup>
+import { ref, reactive } from 'vue'
+import { layer } from '@layui/layer-vue'
+
+const jsonModel = reactive({
+	name1: "admin",
+	name2: "admin",
+	name5: "66666666666"
+})
+
+const jsonSchema = ref({
+	"name1": {
+		label: "标签",
+		type: "lay-input",
+		grid: {
+			md: 12	
+		},
+		props: {
+			placeholder: "请输入"
+		}
+	},
+	"name2": {
+		label: "标签",
+		type: "lay-input",
+		grid: {
+			md: 12	
+		},
+		props: {
+			placeholder: "请输入"
+		}
+	},
+	"name3": {
+		label: "头像",
+		type: "lay-icon-picker",
+		grid: {
+			md: 12	
+		},
+		props: {
+			placeholder: "请输入"
+		}
+	},
+	"name4": {
+		label: "年龄",
+		type: "lay-input-number",
+		grid: {
+			md: 12	
+		},
+		props: {
+			placeholder: "请输入"
+		}
+	},
+	"name5": {
+		label: "年龄",
+		slots: {
+			customRender: "age"
+		},
+		type: "lay-input-number",
+		grid: {
+			md: 24
+		},
+		props: {
+			placeholder: "请输入"
+		}
+	},
+	"name6": {
+		label: "日期",
+		type: "lay-date-picker",
+		grid: {
+			md: 12
+		},
+		props: {
+			placeholder: "请选择",
+			style: "width:100%;"
+		}
+	},
+	"name7": {
+		label: "开关",
+		type: "lay-switch",
+		grid: {
+			md: 12
+		},
+		props: {
+			placeholder: "请选择",
+		}
+	},
+	"name8": {
+		label: "下拉",
+		type: "lay-select",
+		grid: {
+			md: 24
+		},
+		props: {
+			placeholder: "请选择",
+			style: "width:100%",
+			items: [
+      			{label:'选项1', value:1},
+      			{label:'选项2', value:2},
+      			{label:'选项3', value:3},
+    		]
+		}
+	},
+})
+
+const submit = () => {
+  layer.msg(`${JSON.stringify(model)}`, { time: 2000 });
+};
+</script>
+
+:::
+
 ::: title 基础使用
 :::
 
