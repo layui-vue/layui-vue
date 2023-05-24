@@ -1,6 +1,6 @@
 {
   "name": "@layui/json-schema-form",
-  "version": "1.8.7",
+  "version": "0.0.1",
   "description": "a component library for Vue 3 base on layui-vue",
   "homepage": "http://www.layui-vue.com",
   "module": "lib/json-schema-form.es.js",

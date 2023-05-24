@@ -25,10 +25,18 @@ defineExpose({});
         <lay-col v-bind="val.grid">
           <lay-form-item :label="val.label">
             <template v-if="val.slots && val.slots.customRender">
-              <slot :name="val.slots.customRender" :schema="val" :model="model[key]"></slot>
+              <slot
+                :name="val.slots.customRender"
+                :schema="val"
+                :model="model[key]"
+              ></slot>
             </template>
             <template v-else>
-              <component :is="val.type" v-bind="val.props" v-model="model[key]"></component>
+              <component
+                :is="val.type"
+                v-bind="val.props"
+                v-model="model[key]"
+              ></component>
             </template>
           </lay-form-item>
         </lay-col>

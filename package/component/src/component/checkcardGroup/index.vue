@@ -26,28 +26,32 @@ export interface CheckCardGroup {
 const props = withDefaults(defineProps<CheckCardGroup>(), {
   modelValue: undefined,
   disabled: false,
-  single: false
+  single: false,
 });
 
 const emit = defineEmits(["update:modelValue", "change"]);
 
 const disabled = ref(props.disabled);
-const modelVal = ref(props.modelValue)
-watch(() => props.single, (single) => {
-  if (single && Array.isArray(modelVal.value)) {
-    modelVal.value = ''
+const modelVal = ref(props.modelValue);
+watch(
+  () => props.single,
+  (single) => {
+    if (single && Array.isArray(modelVal.value)) {
+      modelVal.value = "";
+    }
+    if (!single && !Array.isArray(modelVal.value)) {
+      modelVal.value = [];
+    }
+  },
+  {
+    deep: true,
+    immediate: true,
   }
-  if (!single && !Array.isArray(modelVal.value)) {
-    modelVal.value = []
-  }
-}, {
-  deep: true,
-  immediate: true
-})
+);
 provide("checkcardGroup", {
   name: "LayCheckCardGroup",
   modelVal: modelVal,
-  disabled: disabled
+  disabled: disabled,
 });
 
 watch(

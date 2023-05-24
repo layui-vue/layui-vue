@@ -15,35 +15,35 @@ describe("LayCheckCard.vue", () => {
     expect(wrapper.find(".layui-checkcard-group").exists()).toBe(true);
     wrapper.unmount();
   });
-  test("render disabled test", async() => {
+  test("render disabled test", async () => {
     const wrapper = mount(LayCheckCardGroup, {
       props: {
-        disabled: true
-      }
+        disabled: true,
+      },
     });
-    
-    await wrapper.setProps({ disabled: false })
-    expect(wrapper.vm.disabled).toBe(false)
+
+    await wrapper.setProps({ disabled: false });
+    expect(wrapper.vm.disabled).toBe(false);
   });
-  test("render single test", async() => {
+  test("render single test", async () => {
     const wrapper = mount(LayCheckCardGroup, {
       props: {
         single: true,
-        modelValue: [1, 2, 3]
-      }
+        modelValue: [1, 2, 3],
+      },
     });
-    await wrapper.setProps({ single: false })
-    await wrapper.setProps({ modelValue: ['10'] })
-    expect(wrapper.vm.modelValue).toEqual(['10'])
-    expect(wrapper.vm.single).toBe(false)
+    await wrapper.setProps({ single: false });
+    await wrapper.setProps({ modelValue: ["10"] });
+    expect(wrapper.vm.modelValue).toEqual(["10"]);
+    expect(wrapper.vm.single).toBe(false);
   });
-  test("render modelValue test", async() => {
+  test("render modelValue test", async () => {
     const wrapper = mount(LayCheckCardGroup, {
       props: {
-        modelValue: ['1', '2', '3']
-      }
+        modelValue: ["1", "2", "3"],
+      },
     });
-    await wrapper.setProps({ modelValue: ['10'] })
-    expect(wrapper.vm.modelValue).toEqual(['10'])
+    await wrapper.setProps({ modelValue: ["10"] });
+    expect(wrapper.vm.modelValue).toEqual(["10"]);
   });
 });
