@@ -18,9 +18,7 @@ defineExpose({});
 </script>
 
 <template>
-  <lay-form 
-    :model="model" 
-    :pane="pane">
+  <lay-form :model="model" :pane="pane">
     <lay-row :space="space">
       <template v-for="(val, key, index) in jsonSchema" :key="index">
         <lay-col v-bind="val.grid">

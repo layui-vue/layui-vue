@@ -13,10 +13,12 @@
 ::: demo 通过 `lay-form` 与 `lay-form-item` 标签，创建 `form` 组件。
 
 <template>
-	{{ model }}
   	<lay-json-schema-form :model="jsonModel" :jsonSchema="jsonSchema" :pane="true" :space="10">
-		<template #age="{ schema, model }">
-			(插槽) 配置: {{ schema.props }} 值: {{ model }}
+		<template #submitButton>
+			<lay-button-container>
+				<lay-button type="primary">保存</lay-button>
+				<lay-button>取消</lay-button>
+			</lay-button-container>
 		</template>
 	</lay-json-schema-form>
 </template>
@@ -69,19 +71,7 @@ const jsonSchema = ref({
 			md: 12	
 		},
 		props: {
-			placeholder: "请输入"
-		}
-	},
-	"name5": {
-		label: "年龄",
-		slots: {
-			customRender: "age"
-		},
-		type: "lay-input-number",
-		grid: {
-			md: 24
-		},
-		props: {
+			style: "width:100%",
 			placeholder: "请输入"
 		}
 	},
@@ -131,6 +121,16 @@ const jsonSchema = ref({
 		props: {
 			placeholder: "请选择"
 		}
+	},
+	"name12": {
+		label: "评分",
+		type: "lay-rate",
+		grid: {
+			md: 24
+		},
+		props: {
+			style: "width: 100%",
+		},
 	},
 	"name10": {
 		label: "建议",
@@ -182,6 +182,14 @@ const jsonSchema = ref({
 					],
 				},
 			],
+		},
+	},
+	"name13": {
+		slots: {
+			customRender: "submitButton"
+		},
+		grid: {
+			md: 24
 		},
 	},
 })
