@@ -13,7 +13,8 @@
 ::: demo 通过 `lay-form` 与 `lay-form-item` 标签，创建 `form` 组件。
 
 <template>
-  	<lay-json-schema-form :model="jsonModel" :jsonSchema="jsonSchema">
+	{{ model }}
+  	<lay-json-schema-form :model="jsonModel" :jsonSchema="jsonSchema" :pane="true" :space="10">
 		<template #age="{ schema, model }">
 			(插槽) 配置: {{ schema.props }} 值: {{ model }}
 		</template>
@@ -27,7 +28,7 @@ import { layer } from '@layui/layer-vue'
 const jsonModel = reactive({
 	name1: "admin",
 	name2: "admin",
-	name5: "66666666666"
+	name5: "admin"
 })
 
 const jsonSchema = ref({
@@ -121,11 +122,69 @@ const jsonSchema = ref({
     		]
 		}
 	},
+	"name9": {
+		label: "文本",
+		type: "lay-textarea",
+		grid: {
+			md: 24
+		},
+		props: {
+			placeholder: "请选择"
+		}
+	},
+	"name10": {
+		label: "建议",
+		type: "lay-autocomplete",
+		grid: {
+			md: 12
+		},
+		props: {
+			style: "width: 100%",
+			fetchSuggestions: (value) => {
+				if(value != "") {
+        			return new Promise((resolve) => {
+          				setTimeout(() => {
+            				resolve([
+              					{value: "稻香 - 周杰伦"},
+              					{value: "蒲公英的约定 - 周杰伦"},
+              					{value: "爱在西元前 - 周杰伦"},
+              					{value: "不能说的秘密 - 周杰伦"},
+              					{value: "七里香 - 周杰伦"},
+              					{value: "龙卷风 - 周杰伦"},
+            				])
+          				}, 500)
+        			});
+      			}
+			}
+		}
+	},
+	"name11": {
+		label: "级联",
+		type: "lay-cascader",
+		grid: {
+			md: 12
+		},
+		props: {
+			style: "width: 100%",
+			options: [
+				{
+					value: "Guide",
+					label: "指南",
+					children: [
+						{
+							value: "shejiyuanze",
+							label: "设计原则",
+						},
+						{
+							value: "daohang",
+							label: "导航",
+						},
+					],
+				},
+			],
+		},
+	},
 })
-
-const submit = () => {
-  layer.msg(`${JSON.stringify(model)}`, { time: 2000 });
-};
 </script>
 
 :::

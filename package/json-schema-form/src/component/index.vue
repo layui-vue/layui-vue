@@ -8,6 +8,7 @@ export default {
 export interface JsonSchemaFormProps {
   jsonSchema: any;
   model: any;
+  pane: boolean;
   space: number;
 }
 
@@ -17,7 +18,9 @@ defineExpose({});
 </script>
 
 <template>
-  <lay-form :model="model">
+  <lay-form 
+    :model="model" 
+    :pane="pane">
     <lay-row :space="space">
       <template v-for="(val, key, index) in jsonSchema" :key="index">
         <lay-col v-bind="val.grid">
