@@ -266,8 +266,8 @@ export default {
     }
 
     const columns3 = [
-      { fixed: "left", type: "checkbox" },
-      { fixed: "left", type: "radio" },
+      { fixed: "left", type: "checkbox", title: "复选"},
+      { fixed: "left", type: "radio", title: "单选" },
       { fixed: "left", title:"用户", width:"80px", key:"name"},
       { title:"城市", width: "80px", key:"city" },
       { title:"性别", key:"sex", width: "80px" },
@@ -433,7 +433,7 @@ export default {
 ::: title 多级表头
 :::
 
-::: demo 通过 `column` 配置的 `children` 属性嵌套 `column`, 以实现多级表头。
+::: demo 通过 `column` 配置的 `children` 属性嵌套 `column` 配置, 以实现多级表头。
 
 <template>
   <lay-table :columns="columns5" :data-source="dataSource5"></lay-table>
