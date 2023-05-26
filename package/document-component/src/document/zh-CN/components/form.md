@@ -16,7 +16,7 @@
   	<lay-json-schema-form :model="jsonModel" :jsonSchema="jsonSchema" :pane="true" :space="10">
 		<template #submitButton>
 			<lay-button-container>
-				<lay-button type="primary">保存</lay-button>
+				<lay-button type="primary" @click="submitButton">保存</lay-button>
 				<lay-button>取消</lay-button>
 			</lay-button-container>
 		</template>
@@ -184,7 +184,56 @@ const jsonSchema = ref({
 			],
 		},
 	},
+	"name15": {
+		label: "单选",
+		type: "lay-radio",
+		grid: {
+			md: 12
+		},
+		props: {
+			options: [
+				{
+					value: "1",
+					label: "指南",
+				},
+				{
+					value: "2",
+					label: "指南",
+				},
+				{
+					value: "3",
+					label: "指南",
+					disabled: true
+				},
+			],
+		},
+	},
+	
 	"name13": {
+		label: "复选",
+		type: "lay-checkbox",
+		grid: {
+			md: 12
+		},
+		props: {
+			options: [
+				{
+					value: "1",
+					label: "指南",
+				},
+				{
+					value: "2",
+					label: "指南",
+				},
+				{
+					value: "3",
+					label: "指南",
+					disabled: true
+				},
+			],
+		},
+	},
+	"name14": {
 		slots: {
 			customRender: "submitButton"
 		},
@@ -193,6 +242,10 @@ const jsonSchema = ref({
 		},
 	},
 })
+
+const submitButton = () => {
+	layer.msg(JSON.stringify(jsonModel))
+}
 </script>
 
 :::

@@ -31,11 +31,36 @@ defineExpose({});
               ></slot>
             </template>
             <template v-else>
-              <component
-                :is="val.type"
-                v-bind="val.props"
-                v-model="model[key]"
-              ></component>
+              <template v-if="val.type === 'lay-checkbox'">
+                <lay-checkbox-group v-model="model[key]">
+                  <template v-for="option in val.props.options">
+                    <lay-checkbox
+                      :label="option.label"
+                      :value="option.value"
+                      :disabled="option.disabled"
+                      skin="primary"
+                    ></lay-checkbox>
+                  </template>
+                </lay-checkbox-group>
+              </template>
+              <template v-else-if="val.type === 'lay-radio'">
+                <lay-radio-group v-model="model[key]">
+                  <template v-for="option in val.props.options">
+                    <lay-radio
+                      :label="option.label"
+                      :value="option.value"
+                      :disabled="option.disabled"
+                    ></lay-radio>
+                  </template>
+                </lay-radio-group>
+              </template>
+              <template v-else>
+                <component
+                  :is="val.type"
+                  v-bind="val.props"
+                  v-model="model[key]"
+                ></component>
+              </template>
             </template>
           </lay-form-item>
         </lay-col>

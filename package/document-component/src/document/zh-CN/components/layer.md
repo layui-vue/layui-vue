@@ -26,6 +26,7 @@
 
 <script>
 import { layer } from "@layui/layui-vue"
+import { reactive, h, resolveComponent } from 'vue'
 
 const openMsg = function() {
     layer.msg("普通消息", { time: 1000 })
@@ -63,7 +64,7 @@ const openPhotos = function() {
     layer.photos({
       imgList:[
             {
-                src:'http://www.layui-vue.com/assets/logo.a3fad609.jpg',
+                src:'https://portrait.gitee.com/uploads/avatars/namespace/2849/8547475_layui-vue_1645856954.png',
                 alt:'layui.png'
             }
         ]
@@ -74,6 +75,20 @@ const openPhotos = function() {
     layer.drawer({
         title: "标题",
         content: "内容"
+    })
+}
+
+const Children = resolveComponent('Children')
+
+const openPageData = reactive({
+    remark: "饥食西山稻，渴饮本源泉。寒披无相服，热来松下眠。知身无究竟，任运了残年。"
+})
+
+const openPage = function() {
+    layer.open({
+        type: "page",
+        title: "组件页面",
+        content: h(Children, { data: openPageData })
     })
 }
 </script>
