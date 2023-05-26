@@ -13,9 +13,9 @@
 ::: demo 使用 `lay-checkbox` 标签, 创建一个复选框
 
 <template>
-    <lay-checkbox name="like" skin="primary"  v-model="checked1" value="1"></lay-checkbox>
+    <lay-checkbox name="like" skin="primary"  v-model="checked1" value="1" label="属性描述"></lay-checkbox>
     <lay-checkbox name="like" skin="primary"  v-model="checkedSlot" value="1">
-      自定义slot
+      插槽描述
     </lay-checkbox>
 </template>
 
@@ -27,6 +27,7 @@ export default {
 
     const checked1 = ref(false)
     const checkedSlot = ref(false)
+
     return {
       checked1
     }
@@ -161,22 +162,40 @@ export default {
 ::: title 半选状态
 :::
 
-::: demo 在实现全选效果时，你可能会用到 isIndeterminate 属性。
+::: demo 在实现全选效果时，你可能会用到 `isIndeterminate` 属性。
 
 <template>
-    <lay-checkbox name="like" skin="primary" value="1" :isIndeterminate="true" v-model="checked8">半选</lay-checkbox>
+    <lay-checkbox name="like" skin="primary" value="1" :isIndeterminate="isIndeterminate8" v-model="isChecked8" :disabled="true">全选</lay-checkbox>
+    <hr/>
+    <lay-checkbox-group v-model="checkeds8">
+      <lay-checkbox name="like" skin="primary" value="1">写作</lay-checkbox>
+      <lay-checkbox name="like" skin="primary" value="2">画画</lay-checkbox>
+      <lay-checkbox name="like" skin="primary" value="3">运动</lay-checkbox>
+    </lay-checkbox-group>
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, computed, watch } from 'vue'
 
 export default {
   setup() {
 
-    const checked8 = ref(true);
+    const checkeds8 = ref([]);
+
+    const isChecked8 = ref(false);
+
+    const isIndeterminate8 = computed(() => {
+      return checkeds8.value.length < 3;
+    })
+
+    watch(checkeds8, () => {
+      isChecked8.value = checkeds8.value.length > 0;
+    })
 
     return {
-        checked8
+        checkeds8,
+        isChecked8,
+        isIndeterminate8
     }
   }
 }

@@ -138,7 +138,7 @@ export default {
 
 :::
 
-::: title 嵌套表单
+::: title 展开内容
 :::
 
 ::: demo 当表格内容较多不能一次性完全展示时, 你可以将多余内容展示到 expand 区域。
@@ -266,48 +266,16 @@ export default {
     }
 
     const columns3 = [
-      {
-        fixed: "left",
-        type: "checkbox",
-      },
-      {
-        fixed: "left",
-        type: "radio",
-      },
-      {
-        title:"用户",
-        width:"80px",
-        key:"name",
-        fixed: "left"
-      },{
-        title:"城市",
-        width: "80px",
-        key:"city"
-      },{
-        title:"性别",
-        key:"sex",
-        width: "80px"
-      },{
-        title:"年龄",
-        width: "80px",
-        key:"age"
-      },{
-        title:"积分",
-        width: "80px",
-        key:"score"
-      },{
-        title:"签到",
-        width: "80px",
-        key:"sign"
-      },{
-        title:"加入时间",
-        width: "120px",
-        key:"joinTime"
-      },{
-        title:"签名",
-        width: "300px",
-        key:"remark"
-      }
+      { fixed: "left", type: "checkbox" },
+      { fixed: "left", type: "radio" },
+      { fixed: "left", title:"用户", width:"80px", key:"name"},
+      { title:"城市", width: "80px", key:"city" },
+      { title:"性别", key:"sex", width: "80px" },
+      { title:"年龄", width: "80px", key:"age" },
+      { title:"积分", width: "80px", key:"score" },
+      { title:"签到", width: "80px", key:"sign" },
+      { title:"加入时间", width: "120px", key:"joinTime" },
+      { title:"签名", width: "300px", key:"remark" }
     ]
 
     const dataSource3 = ref([
@@ -516,7 +484,7 @@ const dataSource5 = ref([
 ::: title 树型表格
 :::
 
-::: demo 树形数据的展示，当数据中有 children 字段时会自动展示为树形表格, 通过设置 indentSize 以控制每一层的缩进宽度, 使用 childrenColumnName 替换默认字段
+::: demo 当 `data-source` 中存在 `children` 字段时会自动展示为树形表格, 通过设置 `indentSize` 以控制每一层的缩进宽度, 使用 `childrenColumnName` 属性替换默认字段。
 
 <template>
   <lay-button @click="changeExpandAll7">切换 {{ expandKeys7 }}</lay-button>
