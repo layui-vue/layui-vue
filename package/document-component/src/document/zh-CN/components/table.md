@@ -141,7 +141,7 @@ export default {
 ::: title 嵌套表单
 :::
 
-::: demo
+::: demo 当表格内容较多不能一次性完全展示时, 你可以将多余内容展示到 expand 区域。
 
 <template>
   <lay-table :columns="columns2" :data-source="dataSource2" v-model:expandKeys="expandKeys2">
@@ -216,7 +216,7 @@ export default {
 ::: title 选中数据
 :::
 
-::: demo
+::: demo 通过 `selectedKey` 与 `selectedKeys` 可控属性设置与获取选中项的主键，亦或 `getCheckData` 方法获取选中行的所有内容。
 
 <template>
   <lay-table 
@@ -348,67 +348,39 @@ export default {
 
 :::
 
-::: title 开启排序
+::: title 多样编辑
 :::
 
-::: demo
+::: demo 通过 `column` 的 `customSlot` 配置，借助 `data-source` 响应式的特性，完成复杂的编辑表格。
 
 <template>
-  <lay-table :columns="columns4" :data-source="dataSource4" @sort-change="sortChange4"></lay-table>
-</template>
-
-<script>
-import { ref } from 'vue'
-
-export default {
-  setup() {
-
-    const columns4 = [
-      {
-        title:"姓名",
-        width:"200px",
-        key:"name"
-      },{
-        title:"成绩",
-        width: "180px",
-        key:"score",
-        sort: true
-      }
-    ]
-
-    const dataSource4 = [
-      {name:"张三", score:100},
-      {name:"李四", score:80},
-      {name:"王二", score:99},
-      {name:"麻子", score:92},
-      {name:"无名", score:60},
-      {name:"有名", score:70},
-    ]
-
-    const sortChange4 = (columnName, order) => {
-      console.log( columnName + "字段执行了" + order + "排序")
-    }
-
-    return {
-      columns4,
-      dataSource4,
-      sortChange4
-    }
-  }
-}
-</script>
-
-:::
-
-::: title 开启子表
-:::
-
-::: demo 当表格内容较多不能一次性完全展示时, 你可以将多余内容展示到 `expand` 插槽。
-
-<template>
-  <lay-table :columns="columns6" :data-source="dataSource6" v-model:expandKeys="expandKeys6">
-    <template v-slot:expand="{ data }"> 
-      <lay-table :columns="columns6" :data-source="dataSource6"></lay-table>
+  <lay-table :columns="columns4" :data-source="dataSource4">
+    <template #name="{ row }">
+      <lay-input v-model="row.name" />
+    </template>
+    <template #switch="{ row }">
+      <lay-switch v-model="row.switch"></lay-switch>
+    </template>
+    <template #date="{ row }">
+      <lay-date-picker v-model="row.date"></lay-date-picker>
+    </template>
+    <template #dynasty="{ row }">
+      <lay-select v-model="row.dynasty">
+        <lay-select-option :value="1" label="清代"></lay-select-option>
+        <lay-select-option :value="2" label="唐代"></lay-select-option>
+        <lay-select-option :value="3" label="宋代"></lay-select-option>
+      </lay-select>
+    </template>
+    <template #color="{ row }">
+      <lay-color-picker v-model="row.color"></lay-color-picker>
+    </template>
+    <template #motto="{ row }">
+      <template v-if="edingKeys4.includes(row)">
+        <lay-input v-model="row.motto" @blur="deleteEdit4(row)" />
+      </template>
+      <template v-else>
+        <span @click="editHandle4(row)"> {{ row.motto }} </span>     
+      </template>
     </template>
   </lay-table>
 </template>
@@ -419,35 +391,70 @@ import { ref } from 'vue'
 export default {
   setup() {
 
-    const columns6 = [
+    const edingKeys4 = ref([])
+
+    const editHandle4 = (data) => {
+      edingKeys4.value.push(data);
+    }
+
+    const deleteEdit4 = (data) => {
+      edingKeys4.value.splice(edingKeys4.value.indexOf(data),1);
+    }
+
+    const columns4 = [
       {
-        title:"姓名",
-        width:"200px",
-        key:"name"
+        title:"编号",
+        width:"80px",
+        key:"id",
+        fixed: "left"
       },{
-        title:"成绩",
-        width: "180px",
-        key:"score"
+        title:"用户",
+        width: "120px",
+        key:"name",
+        customSlot: "name"
+      },{
+        title:"开关",
+        width: "50px",
+        key:"switch",
+        customSlot: "switch"
+      },{
+        title:"日期",
+        width: "140px",
+        key:"date",
+        customSlot: "date"
+      },{
+        title:"朝代",
+        width: "140px",
+        key:"dynasty",
+        customSlot: "dynasty"
+      },{
+        title:"颜色",
+        width: "50px",
+        key:"color",
+        customSlot: "color"
+      },{
+        title:"输入框",
+        width: "220px",
+        key:"motto",
+        customSlot: "motto",
       }
     ]
 
-    const dataSource6 = [
-      {id:"1", name:"张三", score:100},
-      {id:"2", name:"李四", score:80},
-      {id:"3", name:"王二", score:99},
-      {id:"4", name:"麻子", score:92},
-      {id:"5", name:"无名", score:60},
-      {id:"6", name:"有名", score:70},
+    const dataSource4 = [
+      {id: 10000, name:"张三-1", switch: true, date: "2020-02-09", color: "#009688", dynasty: 1, motto: "知身无究竟，任运了残年。"},
+      {id: 10001, name:"张三-2", switch: true, date: "2020-02-09", color: "#009688", dynasty: 2, motto: "知身无究竟，任运了残年。"},
+      {id: 10002, name:"张三-3", switch: true, date: "2020-02-09", color: "#009688", dynasty: 3, motto: "知身无究竟，任运了残年。"},
+      {id: 10003, name:"张三-4", switch: true, date: "2020-02-09", color: "#009688", dynasty: 1, motto: "知身无究竟，任运了残年。"},
+      {id: 10004, name:"张三-5", switch: true, date: "2020-02-09", color: "#009688", dynasty: 2, motto: "知身无究竟，任运了残年。"},
+      {id: 10005, name:"张三-6", switch: true, date: "2020-02-09", color: "#009688", dynasty: 3, motto: "知身无究竟，任运了残年。"},
     ]
 
-    const expandKeys6 = ref(["1"])
-    const defaultExpandAll6 = ref(false)
-
     return {
-      columns6,
-      dataSource6,
-      expandKeys6,
-      defaultExpandAll6
+      columns4,
+      dataSource4,
+      edingKeys4,
+      editHandle4,
+      deleteEdit4,
     }
   }
 }
@@ -1338,98 +1345,6 @@ export default {
       columns27,
       dataSource27,
       spanMethod27,
-    }
-  }
-}
-</script>
-
-:::
-
-::: title 行内编辑
-:::
-
-::: demo 通过 `span-method` 属性, 自定义行列合并的逻辑。
-
-<template>
-  <lay-table :columns="columns28" :data-source="dataSource28">
-    <template #username="{ data }">
-      <lay-input v-if="edingKeys.includes(data)" :model-value="data.username" @input="changeUsername($event, data)">
-        <template #suffix>
-          <lay-icon type="layui-icon-close" style="right:10px;" v-if="edingKeys.includes(data)"  @click="deleteEdit(data)"></lay-icon>
-        </template>
-      </lay-input>
-      <span v-else>
-        {{ data.username }} 
-        <lay-icon type="layui-icon-edit" style="position: absolute;right: 10px;" v-if="!edingKeys.includes(data)"  @click="editHandle(data)"></lay-icon>
-      </span>
-    </template>
-  </lay-table>
-</template>
-
-<script>
-import { ref } from 'vue'
-
-export default {
-  setup() {
-
-    const edingKeys = ref([])
-
-    const columns28 = [
-      {
-        title:"账户",
-        width:"200px",
-        key:"username",
-        customSlot: "username"
-      },{
-        title:"密码",
-        width: "300px",
-        key:"password"
-      },{
-        title:"性别",
-        key:"sex"
-      },{
-        title:"年龄",
-        width: "300px",
-        key:"age"
-      },{
-        title:"备注",
-        width: "180px",
-        key:"remark",
-        ellipsisTooltip: true
-      }
-    ]
-
-    const dataSource28 = ref([
-      {id:"1",username:"root", password:"root",sex:"男", age:"18", remark: 'layui - vue（谐音：类 UI) '},
-      {id:"2",username:"root", password:"root",sex:"男", age:"18", remark: 'layui - vue（谐音：类 UI) '},
-      {id:"3",username:"woow", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '},
-      {id:"4",username:"woow", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '},
-      {id:"5",username:"woow", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '}
-    ])
-
-    const editHandle = (data) => {
-      edingKeys.value.push(data);
-    }
-
-    const deleteEdit = (data) => {
-      edingKeys.value.splice(edingKeys.value.indexOf(data),1);
-    }
-
-    const changeUsername = (val, data) => {
-      dataSource28.value.forEach(element => {
-        if(element.id == data.id) {
-          element.username = val;
-        }
-      });
-    }
-
-    return {
-      edingKeys,
-      deleteEdit,
-      columns28,
-      editHandle,
-      dataSource28,
-      changeUsername,
     }
   }
 }
