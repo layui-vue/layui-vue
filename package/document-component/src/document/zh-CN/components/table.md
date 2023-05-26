@@ -141,7 +141,7 @@ export default {
 ::: title 展开内容
 :::
 
-::: demo 当表格内容较多不能一次性完全展示时, 你可以将多余内容展示到 expand 区域。
+::: demo 当表格内容较多不能一次性完全展示时, 你可以将多余内容展示到 `expand` 区域。
 
 <template>
   <lay-table :columns="columns2" :data-source="dataSource2" v-model:expandKeys="expandKeys2">
@@ -316,7 +316,7 @@ export default {
 
 :::
 
-::: title 多样编辑
+::: title 编辑表格
 :::
 
 ::: demo 通过 `column` 的 `customSlot` 配置，借助 `data-source` 响应式的特性，完成复杂的编辑表格。
@@ -430,15 +430,82 @@ export default {
 
 :::
 
-::: title 复杂布局
+::: title 多级表头
+:::
+
+::: demo 通过 `column` 配置的 `children` 属性嵌套 `column`, 以实现多级表头。
+
+<template>
+  <lay-table :columns="columns5" :data-source="dataSource5"></lay-table>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const columns5 = [
+      {
+        title:"编号",
+        width:"120px",
+        key:"id"
+      },
+      {
+        title:"名称",
+        width:"100px",
+        key:"name"
+      },
+      {
+        title:"性别",
+        width:"100px",
+        key:"sex"
+      },
+      {
+        title:"地址",
+        children: [
+          { title: "省", key: "prov", width: "100px" },
+          { title: "市", key: "city", width: "100px" },
+          { title: "区", key: "area", width: "100px" },
+        ]
+      },
+      {
+        title:"签名",
+        width:"240px",
+        key:"remark"
+      },
+    ]
+
+    const dataSource5 = [
+      {id:"10001", name:"夏娜1", prov:"浙江", sex:"女", city:"杭州", area: "西湖区", remark: '不知江月待何人，但见长江送流水。'},
+      {id:"10002", name:"夏娜2", prov:"浙江", sex:"女", city:"杭州", area: "西湖区", remark: '不知江月待何人，但见长江送流水。'},
+      {id:"10003", name:"夏娜3", prov:"浙江", sex:"女", city:"杭州", area: "西湖区", remark: '不知江月待何人，但见长江送流水。'},
+      {id:"10004", name:"夏娜4", prov:"浙江", sex:"女", city:"杭州", area: "西湖区", remark: '不知江月待何人，但见长江送流水。'},
+      {id:"10005", name:"夏娜5", prov:"浙江", sex:"女", city:"杭州", area: "西湖区", remark: '不知江月待何人，但见长江送流水。'},      
+      {id:"10006", name:"夏娜6", prov:"浙江", sex:"女", city:"杭州", area: "西湖区", remark: '不知江月待何人，但见长江送流水。'},
+      {id:"10007", name:"夏娜7", prov:"浙江", sex:"女", city:"杭州", area: "西湖区", remark: '不知江月待何人，但见长江送流水。'},
+      {id:"10008", name:"夏娜8", prov:"浙江", sex:"女", city:"杭州", area: "西湖区", remark: '不知江月待何人，但见长江送流水。'}
+    ]
+
+    return {
+      columns5,
+      dataSource5,
+    }
+  }
+}
+</script>
+
+:::
+
+::: title 更多使用
 :::
 
 ::: demo
 
 <template>
   <lay-table
-    :columns="columns5"
-    :data-source="dataSource5"
+    :columns="columns6"
+    :data-source="dataSource6"
   >
     <template #operator>
       <lay-space direction="vertical" style="width:100%;">
@@ -453,7 +520,7 @@ export default {
 <script lang="ts" setup>
 import { ref } from 'vue'
   
-const columns5 = [
+const columns6 = [
   {
     title: '签名',
     key: 'remark',
@@ -466,7 +533,7 @@ const columns5 = [
   }
 ]
 
-const dataSource5 = ref([
+const dataSource6 = ref([
   {
     remark: '君不见，黄河之水天上来，奔流到海不复回。 君不见，高堂明镜悲白发，朝如青丝暮成雪。 人生得意须尽欢，莫使金樽空对月。 天生我材必有用，千金散尽还复来。 烹羊宰牛且为乐，会须一饮三百杯。 岑夫子，丹丘生，将进酒，杯莫停。 与君歌一曲，请君为我倾耳听。(倾耳听 一作：侧耳听) 钟鼓馔玉不足贵，但愿长醉不复醒。(不足贵 一作：何足贵；不复醒 一作：不愿醒/不用醒) 古来圣贤皆寂寞，惟有饮者留其名。(古来 一作：自古；惟 通：唯) 陈王昔时宴平乐，斗酒十千恣欢谑。 主人何为言少钱，径须沽取对君酌。 五花马，千金裘，呼儿将出换美酒，与尔同销万古愁。',
   },
@@ -477,447 +544,6 @@ const dataSource5 = ref([
     remark: '君不见，黄河之水天上来，奔流到海不复回。 君不见，高堂明镜悲白发，朝如青丝暮成雪。 人生得意须尽欢，莫使金樽空对月。 天生我材必有用，千金散尽还复来。 烹羊宰牛且为乐，会须一饮三百杯。 岑夫子，丹丘生，将进酒，杯莫停。 与君歌一曲，请君为我倾耳听。(倾耳听 一作：侧耳听) 钟鼓馔玉不足贵，但愿长醉不复醒。(不足贵 一作：何足贵；不复醒 一作：不愿醒/不用醒) 古来圣贤皆寂寞，惟有饮者留其名。(古来 一作：自古；惟 通：唯) 陈王昔时宴平乐，斗酒十千恣欢谑。 主人何为言少钱，径须沽取对君酌。 五花马，千金裘，呼儿将出换美酒，与尔同销万古愁。',
   }
 ])
-</script>
-
-:::
-
-::: title 树型表格
-:::
-
-::: demo 当 `data-source` 中存在 `children` 字段时会自动展示为树形表格, 通过设置 `indentSize` 以控制每一层的缩进宽度, 使用 `childrenColumnName` 属性替换默认字段。
-
-<template>
-  <lay-button @click="changeExpandAll7">切换 {{ expandKeys7 }}</lay-button>
-  <lay-button @click="getCheckData7">获取选中数据</lay-button>
-  <lay-table ref="tableRef7" :columns="columns7" :data-source="dataSource7" :default-expand-all="expandAll7" v-model:expandKeys="expandKeys7">
-    <template #score="{ data }">{{ data }}</template>
-  </lay-table>
-</template>
-
-<script>
-import { ref } from 'vue';
-import { layer } from "@layui/layui-vue";
-
-export default {
-  setup() {
-
-    const tableRef7 = ref();
-
-    const columns7 = [
-      { fixed: "left", type: "checkbox" },
-      { title:"姓名", width:"200px", key:"name" },
-      { title:"成绩", width: "180px", key:"score" }
-    ]
-
-    const dataSource7 = [
-      {id: "1", name:"系统管理", score:100, children: [{id: "3", name:"用户管理", score:99},{id: "5", name:"角色管理", score:96,children: [{id: "7", name:"用户管理", score:99},{id: "8", name:"角色管理", score:96}]}]},
-      {id: "2", name:"电商管理", score:100, children: [{id: "4", name:"商品管理", score:11},{id: "6", name:"分类管理", score:22}]},
-    ]
-
-    const expandAll7 = ref(false)
-
-    const expandKeys7 = ref(["1"])
-    
-    const changeExpandAll7 = () => {
-      expandAll7.value = !expandAll7.value;
-    }
-
-    const getCheckData7 = () => {
-      layer.msg(tableRef7.value.getCheckData());
-    }
-
-    return {
-      columns7,
-      dataSource7,
-      expandKeys7,
-      expandAll7,
-      changeExpandAll7,
-      getCheckData7
-    }
-  }
-}
-</script>
-
-:::
-
-::: title 斑马条纹
-:::
-
-::: demo 通过 `even` 属性, 开启斑马条纹, 默认为 false。
-
-<template>
-  <lay-table :columns="columns1" :data-source="dataSource1" even></lay-table>
-</template>
-
-<script>
-import { ref } from 'vue'
-
-export default {
-  setup() {
-
-    const columns1 = [
-      {
-        title:"账户",
-        width:"200px",
-        key:"username"
-      },{
-        title:"密码",
-        width: "180px",
-        key:"password"
-      },{
-        title:"年龄",
-        width: "180px",
-        key:"age"
-      },{
-        title:"备注",
-        width: "180px",
-        key:"remark",
-        ellipsisTooltip: true,
-      }
-    ]
-
-    const dataSource1 = [
-      {username:"root", password:"root", age:"18", remark: 'layui - vue（谐音：类 UI) '},
-      {username:"root", password:"root", age:"18", remark: 'layui - vue（谐音：类 UI) '},
-      {username:"woow", password:"woow", age:"20", remark: 'layui - vue（谐音：类 UI) '},
-      {username:"woow", password:"woow", age:"20", remark: 'layui - vue（谐音：类 UI) '},
-      {username:"woow", password:"woow", age:"20", remark: 'layui - vue（谐音：类 UI) '}
-    ]
-
-    return {
-      columns1,
-      dataSource1
-    }
-  }
-}
-</script>
-
-:::
-
-::: title 定义样式
-:::
-
-::: demo 通过 `cellStyle` `rowStyle` `cellClassName` `rowClassName` 属性, 自定义单元格样式。
-
-<template>
-  <lay-table :columns="columns1" :data-source="dataSource1" :cell-style="cellStyle" :row-style="rowStyle"></lay-table>
-</template>
-
-<script>
-import { ref } from 'vue'
-
-export default {
-  setup() {
-
-    const columns1 = [
-      {
-        title:"账户",
-        width:"200px",
-        key:"username"
-      },{
-        title:"密码",
-        width: "180px",
-        key:"password"
-      },{
-        title:"年龄",
-        width: "180px",
-        key:"age"
-      },{
-        title:"备注",
-        width: "180px",
-        key:"remark",
-        ellipsisTooltip: true,
-      }
-    ]
-
-    const dataSource1 = [
-      {username:"root", password:"root", age:"18", remark: 'layui - vue（谐音：类 UI) '},
-      {username:"root", password:"root", age:"18", remark: 'layui - vue（谐音：类 UI) '},
-      {username:"woow", password:"woow", age:"20", remark: 'layui - vue（谐音：类 UI) '},
-      {username:"woow", password:"woow", age:"20", remark: 'layui - vue（谐音：类 UI) '},
-      {username:"woow", password:"woow", age:"20", remark: 'layui - vue（谐音：类 UI) '}
-    ]
-
-    const cellStyle = function(row, column, rowIndex, columnIndex) {
-      if(columnIndex % 2 == 0) {
-        return 'color:red';
-      }
-    }
-
-    const rowStyle = function(row, rowIndex) {
-      if(rowIndex % 2 == 0) {
-        return 'color:blue';
-      }
-    }
-
-    return {
-      columns1,
-      dataSource1,
-      cellStyle,
-      rowStyle
-    }
-  }
-}
-</script>
-
-:::
-
-::: title 不同风格
-:::
-
-::: demo 通过 `skin` 属性, 切换 table 风格。
-
-<template>
-  <lay-form>
-    <lay-radio v-model="skin1" name="action" value="line">line</lay-radio>
-    <lay-radio v-model="skin1" name="action" value="nob">nob</lay-radio>
-    <lay-radio v-model="skin1" name="action" value="row">row</lay-radio>
-  </lay-form>
-  <lay-table :columns="columns1" :data-source="dataSource1" :skin="skin1"></lay-table>
-</template>
-
-<script>
-import { ref } from 'vue'
-
-export default {
-  setup() {
-
-    const skin1 = ref("line");
-
-    const columns1 = [
-      {
-        title:"账户",
-        width:"200px",
-        key:"username"
-      },{
-        title:"密码",
-        width: "180px",
-        key:"password"
-      },{
-        title:"年龄",
-        width: "180px",
-        key:"age"
-      },{
-        title:"备注",
-        width: "180px",
-        key:"remark",
-        ellipsisTooltip: true
-      }
-    ]
-
-    const dataSource1 = [
-      {username:"root", password:"root", age:"18", remark: 'layui - vue（谐音：类 UI) '},
-      {username:"root", password:"root", age:"18", remark: 'layui - vue（谐音：类 UI) '},
-      {username:"woow", password:"woow", age:"20", remark: 'layui - vue（谐音：类 UI) '},
-      {username:"woow", password:"woow", age:"20", remark: 'layui - vue（谐音：类 UI) '},
-      {username:"woow", password:"woow", age:"20", remark: 'layui - vue（谐音：类 UI) '}
-    ]
-
-    return {
-      skin1,
-      columns1,
-      dataSource1,
-    }
-  }
-}
-</script>
-
-:::
-
-::: title 开启统计
-:::
-
-::: demo 通过 `columns` 配置 `totalRow` 开启行统计。
-
-<template>
-  <lay-table :columns="columns26" :data-source="dataSource26"></lay-table>
-</template>
-
-<script>
-import { ref } from 'vue'
-
-export default {
-  setup() {
-
-    const columns26 = [
-      {
-        title:"账户",
-        width:"200px",
-        key:"username"
-      },{
-        title:"密码",
-        width: "300px",
-        key:"password"
-      },{
-        title:"性别",
-        key:"sex",
-        totalRow:"合并:"
-      },{
-        title:"年龄",
-        width: "300px",
-        key:"age"
-      },{
-        title:"备注",
-        width: "180px",
-        key:"remark",
-        ellipsisTooltip: true
-      }
-    ]
-
-    const dataSource26 = [
-      {username:"root", password:"root",sex:"男", age:"18", remark: 'layui - vue（谐音：类 UI) '},
-      {username:"root", password:"root",sex:"男", age:"18", remark: 'layui - vue（谐音：类 UI) '},
-      {username:"woow", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '},
-      {username:"woow", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '},
-      {username:"woow", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '}
-    ]
-
-    return {
-      columns26,
-      dataSource26,
-    }
-  }
-}
-</script>
-
-:::
-
-::: title 合并行列
-:::
-
-::: demo 通过 `span-method` 属性, 自定义行列合并的逻辑。
-
-<template>
-  <lay-table :columns="columns27" :data-source="dataSource27" :span-method="spanMethod27" :default-toolbar="true"></lay-table>
-</template>
-
-<script>
-import { ref } from 'vue'
-
-export default {
-  setup() {
-
-    const columns27 = [
-      {
-        title:"账户",
-        width:"200px",
-        key:"username"
-      },{
-        title:"密码",
-        width: "300px",
-        key:"password"
-      },{
-        title:"性别",
-        key:"sex"
-      },{
-        title:"年龄",
-        width: "300px",
-        key:"age"
-      },{
-        title:"备注",
-        width: "180px",
-        key:"remark",
-        ellipsisTooltip: true
-      }
-    ]
-
-    const dataSource27 = [
-      {id:"1",username:"root", password:"root",sex:"男", age:"18", remark: 'layui - vue（谐音：类 UI) '},
-      {id:"2",username:"root", password:"root",sex:"男", age:"18", remark: 'layui - vue（谐音：类 UI) '},
-      {id:"3",username:"woow", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '},
-      {id:"4",username:"woow", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '},
-      {id:"5",username:"woow", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '}
-    ]
-
-    const spanMethod27 = (
-      row,
-      column,
-      rowIndex,
-      columnIndex,
-    ) => {
-      if (rowIndex % 2 === 0) {
-        if (columnIndex === 0) {
-          return [1, 2]
-        } else if (columnIndex === 1) {
-          return [0, 0]
-        }
-      }
-    }
-
-    return {
-      columns27,
-      dataSource27,
-      spanMethod27,
-    }
-  }
-}
-</script>
-
-:::
-
-::: title 复杂表头
-:::
-
-::: demo 通过 `span-method` 属性, 自定义行列合并的逻辑。
-
-<template>
-  <lay-table :columns="columns29" :data-source="dataSource29" :default-toolbar="true"></lay-table>
-</template>
-
-<script>
-import { ref } from 'vue'
-
-export default {
-  setup() {
-
-    const columns29 = [
-      {
-        title:"名称",
-        width:"200px",
-        key:"username"
-      },
-      {
-        title:"地址",
-        children: [
-          { title: "省", key: "province", width: "300px" },
-          { title: "市", key: "city", width: "300px" },
-          { title: "区", key: "area", width: "300px" },
-        ]
-      },
-      {
-        title:"备注",
-        width: "180px",
-        key:"remark",
-        ellipsisTooltip: true,
-        fixed: "right",
-        children: [
-          {
-            title:"性别",
-            key:"sex"
-          },{
-            title:"年龄",
-            width: "300px",
-            totalRow:"统计",
-            key:"age"
-          }
-        ]
-      }
-    ]
-
-    const dataSource29 = [
-      {id:"1",username:"就眠儀式",province:"山东",city:"济南",area: "高新区", password:"root",sex:"男", age:"18", remark: 'layui - vue（谐音：类 UI) '},
-      {id:"2",username:"就眠儀式",province:"山东",city:"济南",area: "高新区", password:"root",sex:"男", age:"18", remark: 'layui - vue（谐音：类 UI) '},
-      {id:"3",username:"就眠儀式",province:"山东",city:"济南",area: "高新区", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '},
-      {id:"4",username:"就眠儀式",province:"山东",city:"济南",area: "高新区", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '},
-      {id:"5",username:"就眠儀式",province:"山东",city:"济南",area: "高新区", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '}
-    ]
-
-    return {
-      columns29,
-      dataSource29,
-    }
-  }
-}
 </script>
 
 :::

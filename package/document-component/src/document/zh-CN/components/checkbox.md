@@ -184,12 +184,12 @@ export default {
 
     const isChecked8 = ref(false);
 
-    const isIndeterminate8 = computed(() => {
-      return checkeds8.value.length < 3;
-    })
-
     watch(checkeds8, () => {
       isChecked8.value = checkeds8.value.length > 0;
+    })
+
+    const isIndeterminate8 = computed(() => {
+      return checkeds8.value.length < 3;
     })
 
     return {
