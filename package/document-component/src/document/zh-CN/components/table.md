@@ -188,7 +188,7 @@ export default {
       {id:"6", name:"张三6", classes:"六年级六班", chinese: 80, mathematics: 50, english: 60, organism: 80, geography: 22, history:55, politics: 53, score:632},
     ]
 
-    const expandKeys2 = ref(["1"])
+    const expandKeys2 = ref([])
     const defaultExpandAll2 = ref(false)
 
     return {
@@ -497,6 +497,140 @@ export default {
 
 :::
 
+::: title 树形表格
+:::
+
+::: demo 数据 `dataSource` 中存在 `children` 字段时会自动展示为树形表格, 通过设置 `indentSize` 以控制每一层的缩进宽度, 使用 `childrenColumnName` 替换默认字段。
+
+<template>
+  <lay-table :columns="columns6" :data-source="dataSource6" :default-toolbar="true" :expand-index="2"></lay-table>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const columns6 = [
+      { 
+        fixed: "left", 
+        type: "checkbox", 
+        title: "复选"
+      },
+      {
+        title:"编号",
+        width:"100px",
+        key:"id"
+      },
+      {
+        title:"名称",
+        width:"200px",
+        key:"name"
+      },
+      {
+        title:"性别",
+        width:"100px",
+        key:"sex"
+      },
+      {
+        title:"城市",
+        width:"120px",
+        key:"city"
+      },
+      {
+        title:"签到",
+        width:"100px",
+        key:"sign"
+      },
+      {
+        title:"签名",
+        width:"240px",
+        key:"remark"
+      },
+    ]
+
+    const dataSource6 = [
+      {
+        id:"10001", name:"张三 1", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。', children: [
+          {
+            id:"10009", name:"张三 1-1", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。', children: [
+              {
+                id:"10010", name:"张三 1-1-1", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。', children: [
+                  {id:"10029", name:"张三 1-1-1-1", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'},
+                  {id:"10030", name:"张三 1-1-1-2", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'}
+                ]
+              },
+              {
+                id:"10011", name:"张三 1-1-2", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。', children: [
+                  {id:"10031", name:"张三 1-1-2-1", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'},
+                  {id:"10032", name:"张三 1-1-2-2", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'}
+                ]
+              }
+            ]
+          },
+          {
+            id:"10012", name:"张三 1-2", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。', children: [
+              {id:"10013", name:"张三 1-2-1", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'},
+              {id:"10014", name:"张三 1-2-2", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'}
+            ]
+          }
+        ]
+      },
+      {
+        id:"10002", name:"张三 2", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。', children: [
+          {id:"10015", name:"张三 2-1", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'},
+          {id:"10016", name:"张三 2-2", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'}
+        ]
+      },
+      {
+        id:"10003", name:"张三 3", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。', children: [
+          {id:"10017", name:"张三 3-1", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'},
+          {id:"10018", name:"张三 3-2", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'}
+        ]
+      },
+      {
+        id:"10004", name:"张三 4", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。', children: [
+          {id:"10019", name:"张三 4-1", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'},
+          {id:"10020", name:"张三 4-2", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'}
+        ]
+      },
+      {
+        id:"10005", name:"张三 5", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。', children: [
+          {id:"10021", name:"张三 5-1", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'},
+          {id:"10022", name:"张三 5-2", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'}
+        ]
+      },      
+      {
+        id:"10006", name:"张三 6", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。', children: [
+          {id:"10023", name:"张三 6-1", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'},
+          {id:"10024", name:"张三 6-2", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'}
+        ]
+      },
+      {
+        id:"10007", name:"张三 7", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。', children: [
+          {id:"10025", name:"张三 7-1", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'},
+          {id:"10026", name:"张三 7-2", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'}
+        ]
+      },
+      {
+        id:"10008", name:"张三 8", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。', children: [
+          {id:"10027", name:"张三 8-1", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'},
+          {id:"10028", name:"张三 8-2", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'}
+        ]
+      }
+    ]
+
+    return {
+      columns6,
+      dataSource6,
+    }
+  }
+}
+</script>
+
+:::
+
 ::: title 更多使用
 :::
 
@@ -504,8 +638,8 @@ export default {
 
 <template>
   <lay-table
-    :columns="columns6"
-    :data-source="dataSource6"
+    :columns="columns7"
+    :data-source="dataSource7"
   >
     <template #operator>
       <lay-space direction="vertical" style="width:100%;">
@@ -520,7 +654,7 @@ export default {
 <script lang="ts" setup>
 import { ref } from 'vue'
   
-const columns6 = [
+const columns7 = [
   {
     title: '签名',
     key: 'remark',
@@ -533,7 +667,7 @@ const columns6 = [
   }
 ]
 
-const dataSource6 = ref([
+const dataSource7 = ref([
   {
     remark: '君不见，黄河之水天上来，奔流到海不复回。 君不见，高堂明镜悲白发，朝如青丝暮成雪。 人生得意须尽欢，莫使金樽空对月。 天生我材必有用，千金散尽还复来。 烹羊宰牛且为乐，会须一饮三百杯。 岑夫子，丹丘生，将进酒，杯莫停。 与君歌一曲，请君为我倾耳听。(倾耳听 一作：侧耳听) 钟鼓馔玉不足贵，但愿长醉不复醒。(不足贵 一作：何足贵；不复醒 一作：不愿醒/不用醒) 古来圣贤皆寂寞，惟有饮者留其名。(古来 一作：自古；惟 通：唯) 陈王昔时宴平乐，斗酒十千恣欢谑。 主人何为言少钱，径须沽取对君酌。 五花马，千金裘，呼儿将出换美酒，与尔同销万古愁。',
   },
