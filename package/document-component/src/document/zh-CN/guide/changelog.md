@@ -22,6 +22,7 @@
                         <li>[修复] table 组件树表数据全部勾选后，总控复选框仍处于半选状态的问题 。</li>
                         <li>[修复] table 组件树表总控复选框，无法全选二级及以上层级的数据。</li>
                         <li>[修复] checkbox 组件 skin 默认样式 label 与 icon 高度不一致。</li>
+                        <li>[调整] tag 组件 type 属性为 primary 时，颜色为 #16baaa。</li>
                     </ul>  
                 </li>
             </ul>
