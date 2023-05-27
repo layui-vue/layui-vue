@@ -45,8 +45,8 @@ const useTable = (props: any) => {
     const keys: string[] = [];
     const forEach = function (dataSource: Recordable[], keys: string[]) {
       dataSource.map((item, index) => {
-        if(!props.getCheckboxProps(item, index)?.disabled) {
-          keys.push(item[props.id])
+        if (!props.getCheckboxProps(item, index)?.disabled) {
+          keys.push(item[props.id]);
         }
         if (item.children) {
           forEach(item.children, keys);
@@ -59,7 +59,7 @@ const useTable = (props: any) => {
 
   const needSelectedKeys = computed(() => {
     return calculateNeedSelectedKeys(props.dataSource);
-  })
+  });
 
   return { columnSlotNames, dataSourceCount, needSelectedKeys };
 };

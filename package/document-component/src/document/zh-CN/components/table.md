@@ -503,7 +503,11 @@ export default {
 ::: demo 数据 `dataSource` 中存在 `children` 字段时会自动展示为树形表格, 使用 `childrenColumnName` 指定默认字段。
 
 <template>
-  <lay-table :columns="columns6" :data-source="dataSource6" :default-toolbar="true" :expand-index="2"></lay-table>
+  <lay-table ref="tableRef6" :columns="columns6" :data-source="dataSource6" :default-toolbar="true" :expand-index="2">
+    <template #toolbar>
+      <lay-button type="primary" size="sm" @click="getCheckData6">获取选中数据</lay-button>
+    </template>
+  </lay-table>
 </template>
 
 <script>
@@ -511,6 +515,8 @@ import { ref } from 'vue'
 
 export default {
   setup() {
+
+    const tableRef6 = ref();
 
     const columns6 = [
       { 
@@ -621,9 +627,15 @@ export default {
       }
     ]
 
+    const getCheckData6 = function() {
+      layer.msg(tableRef6.value.getCheckData());
+    }
+
     return {
       columns6,
       dataSource6,
+      tableRef6, 
+      getCheckData6
     }
   }
 }
