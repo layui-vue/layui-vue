@@ -99,6 +99,8 @@ const tableColumns = computed(() => {
   return [...props.columns];
 });
 
+const { columnSlotNames, dataSourceCount } = useTable(props);
+
 const tableColumnKeys = ref<any[]>([]);
 const tableHeadColumns = ref<any[]>([]);
 const tableBodyColumns = ref<any[]>([]);
@@ -351,7 +353,7 @@ const changeAll = (isChecked: boolean) => {
 watch(
   tableSelectedKeys,
   () => {
-    if (tableSelectedKeys.value.length === props.dataSource.length) {
+    if (tableSelectedKeys.value.length === dataSourceCount.value) {
       allChecked.value = true;
     } else {
       allChecked.value = false;
@@ -584,8 +586,6 @@ const getFixedColumn = () => {
     hasr.value = false;
   }
 };
-
-const { columnSlotNames } = useTable(props);
 
 const currentIndentSize = ref(0);
 

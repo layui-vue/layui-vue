@@ -301,7 +301,7 @@ export default {
       var isOver = false;
       if(file.size > 1000) {
         isOver = true;
-        layer.msg(`file size over ${file.size} KB`, { icon: 2})
+        layer.msg(`file size over 1000 KB`, { icon: 2})
       } 
       return !isOver;
     }

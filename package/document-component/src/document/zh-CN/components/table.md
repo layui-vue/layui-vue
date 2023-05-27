@@ -500,7 +500,7 @@ export default {
 ::: title 树形表格
 :::
 
-::: demo 数据 `dataSource` 中存在 `children` 字段时会自动展示为树形表格, 通过设置 `indentSize` 以控制每一层的缩进宽度, 使用 `childrenColumnName` 替换默认字段。
+::: demo 数据 `dataSource` 中存在 `children` 字段时会自动展示为树形表格, 使用 `childrenColumnName` 指定默认字段。
 
 <template>
   <lay-table :columns="columns6" :data-source="dataSource6" :default-toolbar="true" :expand-index="2"></lay-table>
