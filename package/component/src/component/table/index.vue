@@ -99,7 +99,7 @@ const tableColumns = computed(() => {
   return [...props.columns];
 });
 
-const { columnSlotNames, dataSourceCount } = useTable(props);
+const { columnSlotNames, dataSourceCount, needSelectedKeys } = useTable(props);
 
 const tableColumnKeys = ref<any[]>([]);
 const tableHeadColumns = ref<any[]>([]);
@@ -338,13 +338,7 @@ watch(
 
 const changeAll = (isChecked: boolean) => {
   if (isChecked) {
-    const datasources = props.dataSource.filter((item: any, index: number) => {
-      return !props.getCheckboxProps(item, index)?.disabled;
-    });
-    const ids = datasources.map((item) => {
-      return item[props.id];
-    });
-    tableSelectedKeys.value = [...ids];
+    tableSelectedKeys.value = [...needSelectedKeys.value];
   } else {
     tableSelectedKeys.value = [];
   }
