@@ -73,7 +73,7 @@ export default {
     }
 
     const sortChange = (key, sort) => {
-      layer.msg(`字段${key} - 排序${sort}`)
+      layer.msg(`字段${key} - 排序${sort}, 你可以利用 sort-change 实现服务端排序`)
     }
 
     const dataSource = ref([
@@ -652,6 +652,161 @@ export default {
 
 :::
 
+::: title 行列合并
+:::
+
+::: demo 通过 `span-method` 属性, 自定义行列合并的逻辑。
+
+<template>
+  <lay-table :columns="columns7" :data-source="dataSource7" :span-method="spanMethod7" :default-toolbar="true"></lay-table>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const columns7 = [
+      { 
+        fixed: "left", 
+        type: "checkbox", 
+        title: "复选"
+      },
+      {
+        title:"编号",
+        width:"50px",
+        key:"id"
+      },
+      {
+        title:"名称",
+        width: "100px",
+        key:"name"
+      },{
+        title:"性别",
+        width: "100px",
+        key:"sex"
+      },{
+        title:"年龄",
+        width: "100px",
+        key:"age"
+      },{
+        title:"城市",
+        width: "100px",
+        key:"city"
+      },{
+        title:"签名",
+        width: "240px",
+        key:"remark"
+      }
+    ]
+
+    const dataSource7 = [
+      {id:"10001",name:"夏娜-1", email:"test@email.com", city:"北京朝阳", sex:"男", age:"20", remark: '欲买桂花同载酒, 终不似, 少年游。'},
+      {id:"10002",name:"夏娜-1", email:"test@email.com", city:"北京朝阳", sex:"男", age:"20", remark: '欲买桂花同载酒, 终不似, 少年游。'},
+      {id:"10003",name:"夏娜-2", email:"test@email.com", city:"北京朝阳", sex:"男", age:"21", remark: '欲买桂花同载酒, 终不似, 少年游。'},
+      {id:"10004",name:"夏娜-2", email:"test@email.com", city:"北京朝阳", sex:"男", age:"21", remark: '欲买桂花同载酒, 终不似, 少年游。'},
+      {id:"10005",name:"夏娜-3", email:"test@email.com", city:"北京朝阳", sex:"男", age:"22", remark: '欲买桂花同载酒, 终不似, 少年游。'},
+      {id:"10006",name:"夏娜-3", email:"test@email.com", city:"北京朝阳", sex:"男", age:"22", remark: '欲买桂花同载酒, 终不似, 少年游。'}
+    ]
+
+    const spanMethod7 = (
+      row,
+      column,
+      rowIndex,
+      columnIndex,
+    ) => {
+      if (rowIndex % 2 === 0) {
+        if (columnIndex === 2) {
+          return [2, 1]
+        } 
+      } else {
+        if (columnIndex === 2) {
+          return [0, 0]
+        } 
+      }
+    }
+
+    return {
+      columns7,
+      dataSource7,
+      spanMethod7,
+    }
+  }
+}
+</script>
+
+::: 
+
+::: title 斑马条纹
+:::
+
+::: demo 通过 `even` 属性, 开启表格行斑马条纹, 默认为 `false`。
+
+<template>
+  <lay-table :columns="columns8" :data-source="dataSource8" even></lay-table>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const columns8 = [
+      {
+        title:"编号",
+        width:"50px",
+        key:"id"
+      },
+      {
+        title:"用户",
+        width:"200px",
+        key:"name"
+      },{
+        title:"邮箱",
+        width: "180px",
+        key:"email"
+      },
+      {
+        title:"年龄",
+        width: "100px",
+        key:"age"
+      },
+      {
+        title:"城市",
+        width: "180px",
+        key:"city"
+      },{
+        title:"备注",
+        width: "400px",
+        key:"remark",
+        ellipsisTooltip: true,
+      }
+    ]
+
+    const dataSource8 = [
+      {id: "10001", name:"张三1", city: "浙江杭州", email:"test@email.com", age:"18", remark: '以创造性的行为实践于人世。若能以写作为工具，为道途，先帮助自己一程，再以领悟帮助他人一程。这是一种服务'},
+      {id: "10002", name:"张三2", city: "浙江杭州", email:"test@email.com", age:"18", remark: '以创造性的行为实践于人世。若能以写作为工具，为道途，先帮助自己一程，再以领悟帮助他人一程。这是一种服务'},
+      {id: "10003", name:"张三3", city: "浙江杭州", email:"test@email.com", age:"20", remark: '以创造性的行为实践于人世。若能以写作为工具，为道途，先帮助自己一程，再以领悟帮助他人一程。这是一种服务'},
+      {id: "10004", name:"张三4", city: "浙江杭州", email:"test@email.com", age:"20", remark: '以创造性的行为实践于人世。若能以写作为工具，为道途，先帮助自己一程，再以领悟帮助他人一程。这是一种服务'},
+      {id: "10005", name:"张三5", city: "浙江杭州", email:"test@email.com", age:"20", remark: '以创造性的行为实践于人世。若能以写作为工具，为道途，先帮助自己一程，再以领悟帮助他人一程。这是一种服务'},
+      {id: "10006", name:"张三6", city: "浙江杭州", email:"test@email.com", age:"20", remark: '以创造性的行为实践于人世。若能以写作为工具，为道途，先帮助自己一程，再以领悟帮助他人一程。这是一种服务'},
+      {id: "10007", name:"张三7", city: "浙江杭州", email:"test@email.com", age:"20", remark: '以创造性的行为实践于人世。若能以写作为工具，为道途，先帮助自己一程，再以领悟帮助他人一程。这是一种服务'},
+      {id: "10008", name:"张三8", city: "浙江杭州", email:"test@email.com", age:"20", remark: '以创造性的行为实践于人世。若能以写作为工具，为道途，先帮助自己一程，再以领悟帮助他人一程。这是一种服务'}
+    ]
+
+    return {
+      columns8,
+      dataSource8
+    }
+  }
+}
+</script>
+
+:::
+
+
 ::: title 更多使用
 :::
 
@@ -659,8 +814,8 @@ export default {
 
 <template>
   <lay-table
-    :columns="columns7"
-    :data-source="dataSource7"
+    :columns="columns9"
+    :data-source="dataSource9"
   >
     <template #operator>
       <lay-space direction="vertical" style="width:100%;">
@@ -675,7 +830,7 @@ export default {
 <script lang="ts" setup>
 import { ref } from 'vue'
   
-const columns7 = [
+const columns9 = [
   {
     title: '签名',
     key: 'remark',
@@ -688,7 +843,7 @@ const columns7 = [
   }
 ]
 
-const dataSource7 = ref([
+const dataSource9 = ref([
   {
     remark: '君不见，黄河之水天上来，奔流到海不复回。 君不见，高堂明镜悲白发，朝如青丝暮成雪。 人生得意须尽欢，莫使金樽空对月。 天生我材必有用，千金散尽还复来。 烹羊宰牛且为乐，会须一饮三百杯。 岑夫子，丹丘生，将进酒，杯莫停。 与君歌一曲，请君为我倾耳听。(倾耳听 一作：侧耳听) 钟鼓馔玉不足贵，但愿长醉不复醒。(不足贵 一作：何足贵；不复醒 一作：不愿醒/不用醒) 古来圣贤皆寂寞，惟有饮者留其名。(古来 一作：自古；惟 通：唯) 陈王昔时宴平乐，斗酒十千恣欢谑。 主人何为言少钱，径须沽取对君酌。 五花马，千金裘，呼儿将出换美酒，与尔同销万古愁。',
   },

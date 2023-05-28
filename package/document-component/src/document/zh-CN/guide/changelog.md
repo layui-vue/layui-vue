@@ -17,7 +17,7 @@
             <ul>
                 <a name="2-1-1"></a>
                 <li>
-                    <h3>2.1.1 <span class="layui-badge-rim">2023-05-27</span></h3>
+                    <h3>2.1.1 <span class="layui-badge-rim">2023-05-28</span></h3>
                     <ul>
                         <li>[修复] table 组件树表数据全部勾选后，总控复选框仍处于半选状态的问题 。</li>
                         <li>[修复] table 组件树表总控复选框，无法全选二级及以上层级的数据。</li>

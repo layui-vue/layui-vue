@@ -460,6 +460,84 @@ const openAuto = function() {
     })    
 }
 </script>
+:::
+
+::: title 模板调用
+:::
+
+::: demo 模态窗除 `layer.open` 的函数调用方式外，我们同时提供 `template` 的使用方式。
+
+<template>
+  <lay-button type="primary" @click="changeVisible11">填报信息</lay-button>
+  <lay-layer v-model="visible11" :area="['500px', '450px']">
+    <div style="padding: 20px;">
+      <lay-form :model="model11" ref="layFormRef11" required>
+        <lay-form-item label="账户" prop="username">
+          <lay-input v-model="model11.username"></lay-input>
+        </lay-form-item>
+        <lay-form-item label="密码" prop="password">
+          <lay-input v-model="model11.password" type="password">></lay-input>
+        </lay-form-item>
+        <lay-form-item label="爱好" prop="hobby">
+          <lay-select v-model="model11.hobby" multiple style="width:100%;">
+            <lay-select-option value="1" label="学习"></lay-select-option>
+            <lay-select-option value="2" label="编码"></lay-select-option>
+            <lay-select-option value="3" label="运动"></lay-select-option>
+          </lay-select>
+        </lay-form-item>
+        <lay-form-item label="特长" prop="specialty">
+          <lay-radio v-model="model11.specialty" name="specialty" value="1">写作</lay-radio>
+          <lay-radio v-model="model11.specialty" name="specialty" value="2">画画</lay-radio>
+          <lay-radio v-model="model11.specialty" name="specialty" value="3">编码</lay-radio>
+        </lay-form-item>
+        <lay-form-item label="描述" prop="desc">
+          <lay-textarea placeholder="请输入描述" v-model="model11.desc"></lay-textarea>
+        </lay-form-item>
+      </lay-form>
+    </div>
+  </lay-layer>
+</template>
+
+<script>
+import { ref, reactive } from 'vue'
+import { layer } from '@layui/layui-vue'
+
+const model11 = reactive({
+  username: "admin"
+})
+
+const layFormRef11 = ref();
+
+const visible11 = ref(false);
+
+const changeVisible11 = () => {
+  visible11.value = !visible11.value;
+}
+
+const submit11 = function() {
+  layFormRef11.value.validate((isValidate, model, errors) => {
+      layer.open({
+      type: 1,
+      title:"表单提交结果", 
+      content: `<div style="padding: 10px"><p>是否通过 : ${isValidate}</p> <p>表单数据 : ${JSON.stringify(model)} </p> <p>错误信息 : ${JSON.stringify(errors)}</p></div>`, 
+      shade: false,
+      isHtmlFragment: true,
+      btn : [{ text: '确认', callback(index) {  layer.close(index) }}],
+      area : '500px'
+    });
+  });
+}
+
+// 清除校验
+const clearValidate11 = function() {
+  layFormRef11.value.clearValidate();
+}
+
+// 重置表单
+const reset11 = function() {
+  layFormRef11.value.reset();
+}
+</script>
 
 :::
 
