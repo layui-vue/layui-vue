@@ -503,9 +503,10 @@ export default {
 ::: demo 数据 `dataSource` 中存在 `children` 字段时会自动展示为树形表格, 使用 `childrenColumnName` 指定默认字段。
 
 <template>
-  <lay-table ref="tableRef6" :columns="columns6" :data-source="dataSource6" :default-toolbar="true" :expand-index="2">
+  <lay-table ref="tableRef6" :columns="columns6" :data-source="dataSource6" :default-toolbar="true" :default-expand-all="defaultExpandAll6" :expand-index="2">
     <template #toolbar>
       <lay-button type="primary" size="sm" @click="getCheckData6">获取选中数据</lay-button>
+      <lay-button size="sm" @click="expandAll6">{{ defaultExpandAll6 ? '收起全部':'全部展开'}}</lay-button>
     </template>
   </lay-table>
 </template>
@@ -631,11 +632,19 @@ export default {
       layer.msg(tableRef6.value.getCheckData());
     }
 
+    const defaultExpandAll6 = ref(false);
+
+    const expandAll6 = function() {
+      defaultExpandAll6.value = !defaultExpandAll6.value;
+    }
+
     return {
       columns6,
       dataSource6,
+      defaultExpandAll6,
       tableRef6, 
-      getCheckData6
+      getCheckData6,
+      expandAll6
     }
   }
 }
