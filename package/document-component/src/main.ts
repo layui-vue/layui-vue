@@ -9,7 +9,9 @@ import LaySearch from "./components/LaySearch.vue";
 import LayTableBox from "./components/LayTableBox.vue";
 import LayAnchor from "./components/LayAnchor.vue";
 import LayContributor from "./components/LayContributor.vue";
+import JsonSchemaForm from "../../json-schema-form/src/index";
 
+import Children from "./document/zh-CN/components/components/Children.vue";
 import Children1 from "./document/zh-CN/components/components/Children1.vue";
 import Children2 from "./document/zh-CN/components/components/Children2.vue";
 
@@ -26,6 +28,8 @@ export function createApp(): {
     .use(layui)
     .use(Store)
     .use(router)
+    .use(JsonSchemaForm)
+    .component("Children", Children)
     .component("Children1", Children1)
     .component("Children2", Children2)
     .component("LayCode", LayCode)

@@ -7,6 +7,249 @@
 ::: describe 高性能表单控件，自带数据域管理。包含数据录入、校验以及对应样式。
 :::
 
+::: title 测试沙盒
+:::
+
+::: demo 通过 `lay-form` 与 `lay-form-item` 标签，创建 `form` 组件。
+
+<template>
+  	<lay-json-schema-form :model="jsonModel" :jsonSchema="jsonSchema" :pane="true" :space="10">
+		<template #submitButton>
+			<lay-button-container>
+				<lay-button type="primary" @click="submitButton">保存</lay-button>
+				<lay-button>取消</lay-button>
+			</lay-button-container>
+		</template>
+	</lay-json-schema-form>
+</template>
+
+<script setup>
+import { ref, reactive } from 'vue'
+import { layer } from '@layui/layer-vue'
+
+const jsonModel = reactive({
+	name1: "admin",
+	name2: "admin",
+	name5: "admin"
+})
+
+const jsonSchema = ref({
+	"name1": {
+		label: "标签",
+		type: "lay-input",
+		grid: {
+			md: 12	
+		},
+		props: {
+			placeholder: "请输入"
+		}
+	},
+	"name2": {
+		label: "标签",
+		type: "lay-input",
+		grid: {
+			md: 12	
+		},
+		props: {
+			placeholder: "请输入"
+		}
+	},
+	"name3": {
+		label: "头像",
+		type: "lay-icon-picker",
+		grid: {
+			md: 12	
+		},
+		props: {
+			placeholder: "请输入"
+		}
+	},
+	"name4": {
+		label: "年龄",
+		type: "lay-input-number",
+		grid: {
+			md: 12	
+		},
+		props: {
+			style: "width:100%",
+			placeholder: "请输入"
+		}
+	},
+	"name6": {
+		label: "日期",
+		type: "lay-date-picker",
+		grid: {
+			md: 12
+		},
+		props: {
+			placeholder: "请选择",
+			style: "width:100%;"
+		}
+	},
+	"name7": {
+		label: "开关",
+		type: "lay-switch",
+		grid: {
+			md: 12
+		},
+		props: {
+			placeholder: "请选择",
+		}
+	},
+	"name8": {
+		label: "下拉",
+		type: "lay-select",
+		grid: {
+			md: 24
+		},
+		props: {
+			placeholder: "请选择",
+			style: "width:100%",
+			items: [
+      			{label:'选项1', value:1},
+      			{label:'选项2', value:2},
+      			{label:'选项3', value:3},
+    		]
+		}
+	},
+	"name9": {
+		label: "文本",
+		type: "lay-textarea",
+		grid: {
+			md: 24
+		},
+		props: {
+			placeholder: "请选择"
+		}
+	},
+	"name12": {
+		label: "评分",
+		type: "lay-rate",
+		grid: {
+			md: 24
+		},
+		props: {
+			style: "width: 100%",
+		},
+	},
+	"name10": {
+		label: "建议",
+		type: "lay-autocomplete",
+		grid: {
+			md: 12
+		},
+		props: {
+			style: "width: 100%",
+			fetchSuggestions: (value) => {
+				if(value != "") {
+        			return new Promise((resolve) => {
+          				setTimeout(() => {
+            				resolve([
+              					{value: "稻香 - 周杰伦"},
+              					{value: "蒲公英的约定 - 周杰伦"},
+              					{value: "爱在西元前 - 周杰伦"},
+              					{value: "不能说的秘密 - 周杰伦"},
+              					{value: "七里香 - 周杰伦"},
+              					{value: "龙卷风 - 周杰伦"},
+            				])
+          				}, 500)
+        			});
+      			}
+			}
+		}
+	},
+	"name11": {
+		label: "级联",
+		type: "lay-cascader",
+		grid: {
+			md: 12
+		},
+		props: {
+			style: "width: 100%",
+			options: [
+				{
+					value: "Guide",
+					label: "指南",
+					children: [
+						{
+							value: "shejiyuanze",
+							label: "设计原则",
+						},
+						{
+							value: "daohang",
+							label: "导航",
+						},
+					],
+				},
+			],
+		},
+	},
+	"name15": {
+		label: "单选",
+		type: "lay-radio",
+		grid: {
+			md: 12
+		},
+		props: {
+			options: [
+				{
+					value: "1",
+					label: "指南",
+				},
+				{
+					value: "2",
+					label: "指南",
+				},
+				{
+					value: "3",
+					label: "指南",
+					disabled: true
+				},
+			],
+		},
+	},
+	
+	"name13": {
+		label: "复选",
+		type: "lay-checkbox",
+		grid: {
+			md: 12
+		},
+		props: {
+			options: [
+				{
+					value: "1",
+					label: "指南",
+				},
+				{
+					value: "2",
+					label: "指南",
+				},
+				{
+					value: "3",
+					label: "指南",
+					disabled: true
+				},
+			],
+		},
+	},
+	"name14": {
+		slots: {
+			customRender: "submitButton"
+		},
+		grid: {
+			md: 24
+		},
+	},
+})
+
+const submitButton = () => {
+	layer.msg(JSON.stringify(jsonModel))
+}
+</script>
+
+:::
+
 ::: title 基础使用
 :::
 
@@ -794,90 +1037,6 @@ const submitModel10 = reactive({
 
 const submit10 = function(isValidate, model, errors) {
   layer.msg(`${JSON.stringify(errors)}`)
-}
-</script>
-
-:::
-
-::: title 搭配弹层
-:::
-
-::: demo
-
-<template>
-  <lay-button @click="changeVisible11">填报</lay-button>
-  <lay-layer v-model="visible11">
-    <div style="padding: 20px;">
-      <lay-form :model="model11" ref="layFormRef11" required>
-        <lay-form-item label="账户" prop="username">
-          <lay-input v-model="model11.username"></lay-input>
-        </lay-form-item>
-        <lay-form-item label="密码" prop="password">
-          <lay-input v-model="model11.password" type="password">></lay-input>
-        </lay-form-item>
-        <lay-form-item label="爱好" prop="hobby">
-          <lay-select v-model="model11.hobby" multiple>
-            <lay-select-option value="1" label="学习"></lay-select-option>
-            <lay-select-option value="2" label="编码"></lay-select-option>
-            <lay-select-option value="3" label="运动"></lay-select-option>
-          </lay-select>
-        </lay-form-item>
-        <lay-form-item label="特长" prop="specialty">
-          <lay-radio v-model="model11.specialty" name="specialty" value="1">写作</lay-radio>
-          <lay-radio v-model="model11.specialty" name="specialty" value="2">画画</lay-radio>
-          <lay-radio v-model="model11.specialty" name="specialty" value="3">编码</lay-radio>
-        </lay-form-item>
-        <lay-form-item label="描述" prop="desc">
-          <lay-textarea placeholder="请输入描述" v-model="model11.desc"></lay-textarea>
-        </lay-form-item>
-        <lay-form-item style="text-align: center;">
-          <lay-button type="primary" @click="submit11">提交</lay-button>
-          <lay-button @click="clearValidate11">清除校验</lay-button>
-          <lay-button @click="reset11">重置表单</lay-button>
-        </lay-form-item>
-      </lay-form>
-    </div>
-  </lay-layer>
-</template>
-
-<script>
-import { ref, reactive } from 'vue'
-import { layer } from '@layui/layer-vue'
-
-const model11 = reactive({
-  username: "admin"
-})
-
-const layFormRef11 = ref();
-
-const visible11 = ref(false);
-
-const changeVisible11 = () => {
-  visible11.value = !visible11.value;
-}
-
-const submit11 = function() {
-  layFormRef11.value.validate((isValidate, model, errors) => {
-      layer.open({
-      type: 1,
-      title:"表单提交结果", 
-      content: `<div style="padding: 10px"><p>是否通过 : ${isValidate}</p> <p>表单数据 : ${JSON.stringify(model)} </p> <p>错误信息 : ${JSON.stringify(errors)}</p></div>`, 
-      shade: false,
-      isHtmlFragment: true,
-      btn : [{ text: '确认', callback(index) {  layer.close(index) }}],
-      area : '500px'
-    });
-  });
-}
-
-// 清除校验
-const clearValidate11 = function() {
-  layFormRef11.value.clearValidate();
-}
-
-// 重置表单
-const reset11 = function() {
-  layFormRef11.value.reset();
 }
 </script>
 

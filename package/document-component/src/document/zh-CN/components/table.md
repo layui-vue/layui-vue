@@ -73,7 +73,7 @@ export default {
     }
 
     const sortChange = (key, sort) => {
-      layer.msg(`字段${key} - 排序${sort}`)
+      layer.msg(`字段${key} - 排序${sort}, 你可以利用 sort-change 实现服务端排序`)
     }
 
     const dataSource = ref([
@@ -138,10 +138,10 @@ export default {
 
 :::
 
-::: title 嵌套表单
+::: title 展开内容
 :::
 
-::: demo
+::: demo 当表格内容较多不能一次性完全展示时, 你可以将多余内容展示到 `expand` 区域。
 
 <template>
   <lay-table :columns="columns2" :data-source="dataSource2" v-model:expandKeys="expandKeys2">
@@ -188,7 +188,7 @@ export default {
       {id:"6", name:"张三6", classes:"六年级六班", chinese: 80, mathematics: 50, english: 60, organism: 80, geography: 22, history:55, politics: 53, score:632},
     ]
 
-    const expandKeys2 = ref(["1"])
+    const expandKeys2 = ref([])
     const defaultExpandAll2 = ref(false)
 
     return {
@@ -216,7 +216,7 @@ export default {
 ::: title 选中数据
 :::
 
-::: demo
+::: demo 通过 `selectedKey` 与 `selectedKeys` 可控属性设置与获取选中项的主键，亦或 `getCheckData` 方法获取选中行的所有内容。
 
 <template>
   <lay-table 
@@ -266,48 +266,16 @@ export default {
     }
 
     const columns3 = [
-      {
-        fixed: "left",
-        type: "checkbox",
-      },
-      {
-        fixed: "left",
-        type: "radio",
-      },
-      {
-        title:"用户",
-        width:"80px",
-        key:"name",
-        fixed: "left"
-      },{
-        title:"城市",
-        width: "80px",
-        key:"city"
-      },{
-        title:"性别",
-        key:"sex",
-        width: "80px"
-      },{
-        title:"年龄",
-        width: "80px",
-        key:"age"
-      },{
-        title:"积分",
-        width: "80px",
-        key:"score"
-      },{
-        title:"签到",
-        width: "80px",
-        key:"sign"
-      },{
-        title:"加入时间",
-        width: "120px",
-        key:"joinTime"
-      },{
-        title:"签名",
-        width: "300px",
-        key:"remark"
-      }
+      { fixed: "left", type: "checkbox", title: "复选"},
+      { fixed: "left", type: "radio", title: "单选" },
+      { fixed: "left", title:"用户", width:"80px", key:"name"},
+      { title:"城市", width: "80px", key:"city" },
+      { title:"性别", key:"sex", width: "80px" },
+      { title:"年龄", width: "80px", key:"age" },
+      { title:"积分", width: "80px", key:"score" },
+      { title:"签到", width: "80px", key:"sign" },
+      { title:"加入时间", width: "120px", key:"joinTime" },
+      { title:"签名", width: "300px", key:"remark" }
     ]
 
     const dataSource3 = ref([
@@ -348,67 +316,39 @@ export default {
 
 :::
 
-::: title 开启排序
+::: title 编辑表格
 :::
 
-::: demo
+::: demo 通过 `column` 的 `customSlot` 配置，借助 `data-source` 响应式的特性，完成复杂的编辑表格。
 
 <template>
-  <lay-table :columns="columns4" :data-source="dataSource4" @sort-change="sortChange4"></lay-table>
-</template>
-
-<script>
-import { ref } from 'vue'
-
-export default {
-  setup() {
-
-    const columns4 = [
-      {
-        title:"姓名",
-        width:"200px",
-        key:"name"
-      },{
-        title:"成绩",
-        width: "180px",
-        key:"score",
-        sort: true
-      }
-    ]
-
-    const dataSource4 = [
-      {name:"张三", score:100},
-      {name:"李四", score:80},
-      {name:"王二", score:99},
-      {name:"麻子", score:92},
-      {name:"无名", score:60},
-      {name:"有名", score:70},
-    ]
-
-    const sortChange4 = (columnName, order) => {
-      console.log( columnName + "字段执行了" + order + "排序")
-    }
-
-    return {
-      columns4,
-      dataSource4,
-      sortChange4
-    }
-  }
-}
-</script>
-
-:::
-
-::: title 开启子表
-:::
-
-::: demo 当表格内容较多不能一次性完全展示时, 你可以将多余内容展示到 `expand` 插槽。
-
-<template>
-  <lay-table :columns="columns6" :data-source="dataSource6" v-model:expandKeys="expandKeys6">
-    <template v-slot:expand="{ data }"> 
-      <lay-table :columns="columns6" :data-source="dataSource6"></lay-table>
+  <lay-table :columns="columns4" :data-source="dataSource4">
+    <template #name="{ row }">
+      <lay-input v-model="row.name" />
+    </template>
+    <template #switch="{ row }">
+      <lay-switch v-model="row.switch"></lay-switch>
+    </template>
+    <template #date="{ row }">
+      <lay-date-picker v-model="row.date"></lay-date-picker>
+    </template>
+    <template #dynasty="{ row }">
+      <lay-select v-model="row.dynasty">
+        <lay-select-option :value="1" label="清代"></lay-select-option>
+        <lay-select-option :value="2" label="唐代"></lay-select-option>
+        <lay-select-option :value="3" label="宋代"></lay-select-option>
+      </lay-select>
+    </template>
+    <template #color="{ row }">
+      <lay-color-picker v-model="row.color"></lay-color-picker>
+    </template>
+    <template #motto="{ row }">
+      <template v-if="edingKeys4.includes(row)">
+        <lay-input v-model="row.motto" @blur="deleteEdit4(row)" />
+      </template>
+      <template v-else>
+        <span @click="editHandle4(row)"> {{ row.motto }} </span>     
+      </template>
     </template>
   </lay-table>
 </template>
@@ -419,35 +359,137 @@ import { ref } from 'vue'
 export default {
   setup() {
 
-    const columns6 = [
+    const edingKeys4 = ref([])
+
+    const editHandle4 = (data) => {
+      edingKeys4.value.push(data);
+    }
+
+    const deleteEdit4 = (data) => {
+      edingKeys4.value.splice(edingKeys4.value.indexOf(data),1);
+    }
+
+    const columns4 = [
       {
-        title:"姓名",
-        width:"200px",
-        key:"name"
+        title:"编号",
+        width:"80px",
+        key:"id",
+        fixed: "left"
       },{
-        title:"成绩",
-        width: "180px",
-        key:"score"
+        title:"用户",
+        width: "120px",
+        key:"name",
+        customSlot: "name"
+      },{
+        title:"开关",
+        width: "50px",
+        key:"switch",
+        customSlot: "switch"
+      },{
+        title:"日期",
+        width: "140px",
+        key:"date",
+        customSlot: "date"
+      },{
+        title:"朝代",
+        width: "140px",
+        key:"dynasty",
+        customSlot: "dynasty"
+      },{
+        title:"颜色",
+        width: "50px",
+        key:"color",
+        customSlot: "color"
+      },{
+        title:"输入框",
+        width: "220px",
+        key:"motto",
+        customSlot: "motto",
       }
     ]
 
-    const dataSource6 = [
-      {id:"1", name:"张三", score:100},
-      {id:"2", name:"李四", score:80},
-      {id:"3", name:"王二", score:99},
-      {id:"4", name:"麻子", score:92},
-      {id:"5", name:"无名", score:60},
-      {id:"6", name:"有名", score:70},
+    const dataSource4 = [
+      {id: 10000, name:"张三-1", switch: true, date: "2020-02-09", color: "#009688", dynasty: 1, motto: "知身无究竟，任运了残年。"},
+      {id: 10001, name:"张三-2", switch: true, date: "2020-02-09", color: "#009688", dynasty: 2, motto: "知身无究竟，任运了残年。"},
+      {id: 10002, name:"张三-3", switch: true, date: "2020-02-09", color: "#009688", dynasty: 3, motto: "知身无究竟，任运了残年。"},
+      {id: 10003, name:"张三-4", switch: true, date: "2020-02-09", color: "#009688", dynasty: 1, motto: "知身无究竟，任运了残年。"},
+      {id: 10004, name:"张三-5", switch: true, date: "2020-02-09", color: "#009688", dynasty: 2, motto: "知身无究竟，任运了残年。"},
+      {id: 10005, name:"张三-6", switch: true, date: "2020-02-09", color: "#009688", dynasty: 3, motto: "知身无究竟，任运了残年。"},
     ]
 
-    const expandKeys6 = ref(["1"])
-    const defaultExpandAll6 = ref(false)
+    return {
+      columns4,
+      dataSource4,
+      edingKeys4,
+      editHandle4,
+      deleteEdit4,
+    }
+  }
+}
+</script>
+
+:::
+
+::: title 多级表头
+:::
+
+::: demo 通过 `column` 配置的 `children` 属性嵌套 `column` 配置, 以实现多级表头。
+
+<template>
+  <lay-table :columns="columns5" :data-source="dataSource5"></lay-table>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const columns5 = [
+      {
+        title:"编号",
+        width:"120px",
+        key:"id"
+      },
+      {
+        title:"名称",
+        width:"100px",
+        key:"name"
+      },
+      {
+        title:"性别",
+        width:"100px",
+        key:"sex"
+      },
+      {
+        title:"地址",
+        children: [
+          { title: "省", key: "prov", width: "100px" },
+          { title: "市", key: "city", width: "100px" },
+          { title: "区", key: "area", width: "100px" },
+        ]
+      },
+      {
+        title:"签名",
+        width:"240px",
+        key:"remark"
+      },
+    ]
+
+    const dataSource5 = [
+      {id:"10001", name:"夏娜1", prov:"浙江", sex:"女", city:"杭州", area: "西湖区", remark: '不知江月待何人，但见长江送流水。'},
+      {id:"10002", name:"夏娜2", prov:"浙江", sex:"女", city:"杭州", area: "西湖区", remark: '不知江月待何人，但见长江送流水。'},
+      {id:"10003", name:"夏娜3", prov:"浙江", sex:"女", city:"杭州", area: "西湖区", remark: '不知江月待何人，但见长江送流水。'},
+      {id:"10004", name:"夏娜4", prov:"浙江", sex:"女", city:"杭州", area: "西湖区", remark: '不知江月待何人，但见长江送流水。'},
+      {id:"10005", name:"夏娜5", prov:"浙江", sex:"女", city:"杭州", area: "西湖区", remark: '不知江月待何人，但见长江送流水。'},      
+      {id:"10006", name:"夏娜6", prov:"浙江", sex:"女", city:"杭州", area: "西湖区", remark: '不知江月待何人，但见长江送流水。'},
+      {id:"10007", name:"夏娜7", prov:"浙江", sex:"女", city:"杭州", area: "西湖区", remark: '不知江月待何人，但见长江送流水。'},
+      {id:"10008", name:"夏娜8", prov:"浙江", sex:"女", city:"杭州", area: "西湖区", remark: '不知江月待何人，但见长江送流水。'}
+    ]
 
     return {
-      columns6,
-      dataSource6,
-      expandKeys6,
-      defaultExpandAll6
+      columns5,
+      dataSource5,
     }
   }
 }
@@ -458,813 +500,151 @@ export default {
 ::: title 树形表格
 :::
 
-::: demo 树形数据的展示，当数据中有 children 字段时会自动展示为树形表格, 通过设置 indentSize 以控制每一层的缩进宽度, 使用 childrenColumnName 替换默认字段
+::: demo 数据 `dataSource` 中存在 `children` 字段时会自动展示为树形表格, 使用 `childrenColumnName` 指定默认字段。
 
 <template>
-  <lay-button @click="changeExpandAll7">切换 {{ expandKeys7 }}</lay-button>
-  <lay-button @click="getCheckData7">获取选中数据</lay-button>
-  <lay-table ref="tableRef7" :columns="columns7" :data-source="dataSource7" :default-expand-all="expandAll7" v-model:expandKeys="expandKeys7">
-    <template #score="{ data }">{{ data }}</template>
-  </lay-table>
-</template>
-
-<script>
-import { ref } from 'vue';
-import { layer } from "@layui/layui-vue";
-
-export default {
-  setup() {
-
-    const tableRef7 = ref();
-
-    const columns7 = [
-      { fixed: "left", type: "checkbox" },
-      { title:"姓名", width:"200px", key:"name" },
-      { title:"成绩", width: "180px", key:"score" }
-    ]
-
-    const dataSource7 = [
-      {id: "1", name:"系统管理", score:100, children: [{id: "3", name:"用户管理", score:99},{id: "5", name:"角色管理", score:96,children: [{id: "7", name:"用户管理", score:99},{id: "8", name:"角色管理", score:96}]}]},
-      {id: "2", name:"电商管理", score:100, children: [{id: "4", name:"商品管理", score:11},{id: "6", name:"分类管理", score:22}]},
-    ]
-
-    const expandAll7 = ref(false)
-
-    const expandKeys7 = ref(["1"])
-    
-    const changeExpandAll7 = () => {
-      expandAll7.value = !expandAll7.value;
-    }
-
-    const getCheckData7 = () => {
-      layer.msg(tableRef7.value.getCheckData());
-    }
-
-    return {
-      columns7,
-      dataSource7,
-      expandKeys7,
-      expandAll7,
-      changeExpandAll7,
-      getCheckData7
-    }
-  }
-}
-</script>
-
-:::
-
-::: title 固定表头
-:::
-
-::: demo 设置 `height` 或者 `max-height` 即可实现
-
-<template>
-  <lay-table
-    :columns="columns8"
-    :data-source="dataSource8"
-    :max-height="maxHeight"
-  >
-    <template v-slot:operator="{ data }">
-      <lay-button size="xs" @click="deleteColumn(data)">删除</lay-button>
+  <lay-table ref="tableRef6" :columns="columns6" :data-source="dataSource6" :default-toolbar="true" :default-expand-all="defaultExpandAll6" :expand-index="2">
+    <template #toolbar>
+      <lay-button type="primary" size="sm" @click="getCheckData6">获取选中数据</lay-button>
+      <lay-button size="sm" @click="expandAll6">{{ defaultExpandAll6 ? '收起全部':'全部展开'}}</lay-button>
     </template>
   </lay-table>
 </template>
 
-<script lang="ts" setup>
-import { ref } from 'vue'
-
-const maxHeight = ref('300px');
-
-const deleteColumn = ({ username }) => {
-  const findIndex = dataSource8.value.findIndex((item) => item.username === username);
-  dataSource8.value.splice(findIndex, 1);
-};
-  
-const columns8 = [
-  {
-    title: '账户',
-    minWidth: '200px',
-    key: 'username',
-  },
-  {
-    title: '密码',
-    minWidth: '180px',
-    key: 'password',
-  },
-  {
-    title: '年龄',
-    minWidth: '180px',
-    key: 'age',
-  },
-    {
-    title: "操作",
-    width: "200px",
-    customSlot: "operator",
-    key: "operator",
-    align: "center",
-  }
-]
-
-const dataSource8 = ref([
-  {
-    username: '1',
-    password: 'root',
-    age: '18',
-    remark: 'layui - vue（谐音：类 UI) ',
-  },
-  {
-    username: '2',
-    password: 'root',
-    age: '18',
-    remark: 'layui - vue（谐音：类 UI) ',
-  },
-  {
-    username: '3',
-    password: 'root',
-    age: '18',
-    remark: 'layui - vue（谐音：类 UI) ',
-  },
-  {
-    username: '4',
-    password: 'root',
-    age: '18',
-    remark: 'layui - vue（谐音：类 UI) ',
-  },
-  {
-    username: '5',
-    password: 'root',
-    age: '18',
-    remark: 'layui - vue（谐音：类 UI) ',
-  },
-  {
-    username: '6',
-    password: 'root',
-    age: '18',
-    remark: 'layui - vue（谐音：类 UI) ',
-  },
-  {
-    username: '7',
-    password: 'root',
-    age: '18',
-    remark: 'layui - vue（谐音：类 UI) ',
-  },
-  {
-    username: '8',
-    password: 'woow',
-    age: '20',
-    remark:
-      'layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.',
-  },
-  {
-    username: '9',
-    password: 'woow',
-    age: '20',
-    remark:
-      'layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.',
-  },
-  {
-    username: '10',
-    password: 'woow',
-    age: '20',
-    remark:
-      'layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.',
-  },
-  {
-    username: '11',
-    password: 'woow',
-    age: '20',
-    remark:
-      'layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.',
-  },
-])
-</script>
-
-:::
-
-::: title 斑马条纹
-:::
-
-::: demo 通过 `even` 属性, 开启斑马条纹, 默认为 false。
-
-<template>
-  <lay-table :columns="columns1" :data-source="dataSource1" even></lay-table>
-</template>
-
 <script>
 import { ref } from 'vue'
 
 export default {
   setup() {
 
-    const columns1 = [
-      {
-        title:"账户",
-        width:"200px",
-        key:"username"
-      },{
-        title:"密码",
-        width: "180px",
-        key:"password"
-      },{
-        title:"年龄",
-        width: "180px",
-        key:"age"
-      },{
-        title:"备注",
-        width: "180px",
-        key:"remark",
-        ellipsisTooltip: true,
-      }
-    ]
+    const tableRef6 = ref();
 
-    const dataSource1 = [
-      {username:"root", password:"root", age:"18", remark: 'layui - vue（谐音：类 UI) '},
-      {username:"root", password:"root", age:"18", remark: 'layui - vue（谐音：类 UI) '},
-      {username:"woow", password:"woow", age:"20", remark: 'layui - vue（谐音：类 UI) '},
-      {username:"woow", password:"woow", age:"20", remark: 'layui - vue（谐音：类 UI) '},
-      {username:"woow", password:"woow", age:"20", remark: 'layui - vue（谐音：类 UI) '}
-    ]
-
-    return {
-      columns1,
-      dataSource1
-    }
-  }
-}
-</script>
-
-:::
-
-::: title 定义样式
-:::
-
-::: demo 通过 `cellStyle` `rowStyle` `cellClassName` `rowClassName` 属性, 自定义单元格样式。
-
-<template>
-  <lay-table :columns="columns1" :data-source="dataSource1" :cell-style="cellStyle" :row-style="rowStyle"></lay-table>
-</template>
-
-<script>
-import { ref } from 'vue'
-
-export default {
-  setup() {
-
-    const columns1 = [
-      {
-        title:"账户",
-        width:"200px",
-        key:"username"
-      },{
-        title:"密码",
-        width: "180px",
-        key:"password"
-      },{
-        title:"年龄",
-        width: "180px",
-        key:"age"
-      },{
-        title:"备注",
-        width: "180px",
-        key:"remark",
-        ellipsisTooltip: true,
-      }
-    ]
-
-    const dataSource1 = [
-      {username:"root", password:"root", age:"18", remark: 'layui - vue（谐音：类 UI) '},
-      {username:"root", password:"root", age:"18", remark: 'layui - vue（谐音：类 UI) '},
-      {username:"woow", password:"woow", age:"20", remark: 'layui - vue（谐音：类 UI) '},
-      {username:"woow", password:"woow", age:"20", remark: 'layui - vue（谐音：类 UI) '},
-      {username:"woow", password:"woow", age:"20", remark: 'layui - vue（谐音：类 UI) '}
-    ]
-
-    const cellStyle = function(row, column, rowIndex, columnIndex) {
-      if(columnIndex % 2 == 0) {
-        return 'color:red';
-      }
-    }
-
-    const rowStyle = function(row, rowIndex) {
-      if(rowIndex % 2 == 0) {
-        return 'color:blue';
-      }
-    }
-
-    return {
-      columns1,
-      dataSource1,
-      cellStyle,
-      rowStyle
-    }
-  }
-}
-</script>
-
-:::
-
-::: title 不同风格
-:::
-
-::: demo 通过 `skin` 属性, 切换 table 风格。
-
-<template>
-  <lay-form>
-    <lay-radio v-model="skin1" name="action" value="line">line</lay-radio>
-    <lay-radio v-model="skin1" name="action" value="nob">nob</lay-radio>
-    <lay-radio v-model="skin1" name="action" value="row">row</lay-radio>
-  </lay-form>
-  <lay-table :columns="columns1" :data-source="dataSource1" :skin="skin1"></lay-table>
-</template>
-
-<script>
-import { ref } from 'vue'
-
-export default {
-  setup() {
-
-    const skin1 = ref("line");
-
-    const columns1 = [
-      {
-        title:"账户",
-        width:"200px",
-        key:"username"
-      },{
-        title:"密码",
-        width: "180px",
-        key:"password"
-      },{
-        title:"年龄",
-        width: "180px",
-        key:"age"
-      },{
-        title:"备注",
-        width: "180px",
-        key:"remark",
-        ellipsisTooltip: true
-      }
-    ]
-
-    const dataSource1 = [
-      {username:"root", password:"root", age:"18", remark: 'layui - vue（谐音：类 UI) '},
-      {username:"root", password:"root", age:"18", remark: 'layui - vue（谐音：类 UI) '},
-      {username:"woow", password:"woow", age:"20", remark: 'layui - vue（谐音：类 UI) '},
-      {username:"woow", password:"woow", age:"20", remark: 'layui - vue（谐音：类 UI) '},
-      {username:"woow", password:"woow", age:"20", remark: 'layui - vue（谐音：类 UI) '}
-    ]
-
-    return {
-      skin1,
-      columns1,
-      dataSource1,
-    }
-  }
-}
-</script>
-
-:::
-
-::: title 固定行列
-:::
-
-::: demo 通过 `fixed` 属性实现列固定, 可选值为 `left` 与 `right`。
-
-<template>
-  <lay-table :columns="columns20" :data-source="dataSource20"></lay-table>
-</template>
-
-<script>
-import { ref } from 'vue'
-
-export default {
-  setup() {
-
-    const columns20 = [
-      {
-        title:"账户",
-        width:"200px",
-        key:"username"
-      },{
-        title:"密码",
-        width: "300px",
-        key:"password"
-      },{
-        fixed:"right",
-        title:"性别",
-        width: "300px",
-        key:"sex"
-      },{
-        fixed:"right",
-        title:"年龄",
-        width: "300px",
-        key:"age"
-      },{
-        fixed:"right",
-        title:"备注",
-        width: "180px",
-        key:"remark",
-        ellipsisTooltip: true
-      }
-    ]
-
-    const dataSource20 = [
-      {username:"root", password:"root",sex:"男", age:"18", remark: 'layui - vue（谐音：类 UI) '},
-      {username:"root", password:"root",sex:"男", age:"18", remark: 'layui - vue（谐音：类 UI) '},
-      {username:"woow", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '},
-      {username:"woow", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '},
-      {username:"woow", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '},
-    ]
-
-    return {
-      columns20,
-      dataSource20,
-    }
-  }
-}
-</script>
-
-:::
-
-::: title 开启序号
-:::
-
-::: demo 通过 `columns` 配置 `type:'number'` 开启序号列。
-
-<template>
-  <lay-table :columns="columns21" :data-source="dataSource21"></lay-table>
-</template>
-
-<script>
-import { ref } from 'vue'
-
-export default {
-  setup() {
-
-    const columns21 = [
-      {
-        type: "number",
+    const columns6 = [
+      { 
+        fixed: "left", 
+        type: "checkbox", 
+        title: "复选"
       },
       {
-        title:"账户",
-        width:"200px",
-        key:"username"
-      },{
-        title:"密码",
-        width: "300px",
-        key:"password"
-      },{
-        title:"性别",
-        key:"sex"
-      },{
-        title:"年龄",
-        width: "300px",
-        key:"age"
-      },{
-        title:"备注",
-        width: "180px",
-        key:"remark",
-        ellipsisTooltip: true
-      }
-    ]
-
-    const dataSource21 = [
-      {username:"root", password:"root",sex:"男", age:"18", remark: 'layui - vue（谐音：类 UI) '},
-      {username:"root", password:"root",sex:"男", age:"18", remark: 'layui - vue（谐音：类 UI) '},
-      {username:"woow", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '},
-      {username:"woow", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '},
-      {username:"woow", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '}
-    ]
-
-    return {
-      columns21,
-      dataSource21,
-    }
-  }
-}
-</script>
-
-:::
-
-::: title 开启多选
-:::
-
-::: demo 通过 `columns` 配置 `type:'checkbox'` 开启单选列。
-
-<template>
-  <lay-button @click="changeSelectedKeys">修改选中</lay-button>
-  <lay-button @click="changeDataSource23">修改数据</lay-button>
-  <lay-table :columns="columns23" :data-source="dataSource23" v-model:selectedKeys="selectedKeys5"></lay-table>
-</template>
-
-<script>
-import { ref } from 'vue'
-
-export default {
-  setup() {
-
-    const selectedKeys5 = ref(["1"]);
-
-    const getCheckboxProps = (data,index) => {
-      if(index == 2) {
-        return {disabled: true}
-      }
-      return {};
-    }
-
-    const changeSelectedKeys = () => {
-      selectedKeys5.value = ["2"]
-    }
-
-    const changeDataSource23 = () => {
-      dataSource23.value = [      
-        {id:"1",username:"root", password:"root",sex:"男", age:"18", remark: 'layui - vue（谐音：类 UI) '},
-        {id:"2",username:"root", password:"root",sex:"男", age:"18", remark: 'layui - vue（谐音：类 UI) '}
-      ]
-    }
-
-    const columns23 = [
-      {
-        fixed: "left",
-        type: "checkbox",
+        title:"编号",
+        width:"100px",
+        key:"id"
       },
       {
-        title:"账户",
+        title:"名称",
         width:"200px",
-        key:"username",
-        fixed: "left"
-      },{
-        title:"密码",
-        width: "300px",
-        key:"password"
-      },{
-        title:"性别",
-        key:"sex"
-      },{
-        title:"年龄",
-        width: "300px",
-        key:"age"
-      },{
-        title:"备注",
-        width: "180px",
-        key:"remark",
-        ellipsisTooltip: true
-      }
-    ]
-
-    const dataSource23 = ref([
-      {id:"1",username:"root", password:"root",sex:"男", age:"18", remark: 'layui - vue（谐音：类 UI) '},
-      {id:"2",username:"root", password:"root",sex:"男", age:"18", remark: 'layui - vue（谐音：类 UI) '},
-      {id:"3",username:"woow", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '},
-      {id:"4",username:"woow", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '},
-      {id:"5",username:"woow", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '}
-    ])
-
-    return {
-      columns23,
-      dataSource23,
-      selectedKeys5,
-      changeSelectedKeys,
-      getCheckboxProps,
-      changeDataSource23
-    }
-  }
-}
-</script>
-
-:::
-
-::: title 开启单选
-:::
-
-::: demo 通过 `columns` 配置 `type:'radio'` 开启单选列。
-
-<template>
-  <lay-table :columns="columns24" :data-source="dataSource24" v-model:selected-key="selectedKey24"></lay-table>
-</template>
-
-<script>
-import { ref } from 'vue'
-
-export default {
-  setup() {
-
-    const columns24 = [
-      {
-        type: "radio"
+        key:"name"
       },
       {
-        title:"账户",
-        width:"200px",
-        key:"username"
-      },{
-        title:"密码",
-        width: "300px",
-        key:"password"
-      },{
         title:"性别",
+        width:"100px",
         key:"sex"
-      },{
-        title:"年龄",
-        width: "300px",
-        key:"age"
-      },{
-        title:"备注",
-        width: "180px",
-        key:"remark",
-        ellipsisTooltip: true
-      }
-    ]
-    
-    const selectedKey24 = ref("2");
-
-    const dataSource24 = [
-      {id:"1",username:"root", password:"root",sex:"男", age:"18", remark: 'layui - vue（谐音：类 UI) '},
-      {id:"2",username:"root", password:"root",sex:"男", age:"18", remark: 'layui - vue（谐音：类 UI) '},
-      {id:"3",username:"woow", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '},
-      {id:"4",username:"woow", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '},
-      {id:"5",username:"woow", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '}
-    ]
-
-    return {
-      columns24,
-      dataSource24,
-      selectedKey24,
-    }
-  }
-}
-</script>
-
-:::
-
-::: title 暂无数据
-:::
-
-::: demo 通过 `columns` 配置 `type:'radio'` 开启单选列。
-
-<template>
-  <lay-table :columns="columns25" :data-source="dataSource25"></lay-table>
-</template>
-
-<script>
-import { ref } from 'vue'
-
-export default {
-  setup() {
-
-    const columns25 = [
+      },
       {
-        title:"账户",
-        width:"500px",
-        key:"username"
-      },{
-        title:"密码",
-        width: "500px",
-        key:"password"
-      },{
-        title:"性别",
-        key:"sex"
-      },{
-        title:"年龄",
-        width: "600px",
-        key:"age"
-      },{
-        title:"备注",
-        width: "380px",
-        key:"remark",
-        ellipsisTooltip: true
-      }
-    ]
-
-    const dataSource25 = [
-    ]
-
-    return {
-      columns25,
-      dataSource25,
-    }
-  }
-}
-</script>
-
-:::
-
-::: title 刷新数据
-:::
-
-::: demo 通过 `data-source` 的赋值，实现数据的更新
-
-<template>
-  <lay-button @click="changeDataSource22">更新数据</lay-button>
-  <lay-table :columns="columns22" :data-source="dataSource22"></lay-table>
-</template>
-
-<script>
-import { ref } from 'vue'
-
-export default {
-  setup() {
-
-    const columns22 = [
+        title:"城市",
+        width:"120px",
+        key:"city"
+      },
       {
-        title:"账户",
-        width:"200px",
-        key:"username"
-      },{
-        title:"密码",
-        width: "300px",
-        key:"password"
-      },{
-        title:"性别",
-        width: "300px",
-        key:"sex"
-      },{
-        title:"年龄",
-        width: "300px",
-        key:"age"
-      },{
-        title:"备注",
-        width: "180px",
-        key:"remark",
-        ellipsisTooltip: true
-      }
-    ]
-
-    const dataSource22 = ref([
-      {username:"root", password:"root",sex:"男", age:"18", remark: 'layui - vue（谐音：类 UI) '},
-      {username:"root", password:"root",sex:"男", age:"18", remark: 'layui - vue（谐音：类 UI) '},
-      {username:"woow", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '},
-      {username:"woow", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '},
-      {username:"woow", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '}
-    ])
-    
-    const changeDataSource22 = () => {
-      dataSource22.value = [{username:"update", password:"update",sex:"boy", age:"18", remark: '更新数据 '}]
-    }
-
-    return {
-      columns22,
-      dataSource22,
-      changeDataSource22
-    }
-  }
-}
-</script>
-
-:::
-
-::: title 开启统计
-:::
-
-::: demo 通过 `columns` 配置 `totalRow` 开启行统计。
-
-<template>
-  <lay-table :columns="columns26" :data-source="dataSource26"></lay-table>
-</template>
-
-<script>
-import { ref } from 'vue'
-
-export default {
-  setup() {
-
-    const columns26 = [
+        title:"签到",
+        width:"100px",
+        key:"sign"
+      },
       {
-        title:"账户",
-        width:"200px",
-        key:"username"
-      },{
-        title:"密码",
-        width: "300px",
-        key:"password"
-      },{
-        title:"性别",
-        key:"sex",
-        totalRow:"合并:"
-      },{
-        title:"年龄",
-        width: "300px",
-        key:"age"
-      },{
-        title:"备注",
-        width: "180px",
-        key:"remark",
-        ellipsisTooltip: true
+        title:"签名",
+        width:"240px",
+        key:"remark"
+      },
+    ]
+
+    const dataSource6 = [
+      {
+        id:"10001", name:"张三 1", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。', children: [
+          {
+            id:"10009", name:"张三 1-1", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。', children: [
+              {
+                id:"10010", name:"张三 1-1-1", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。', children: [
+                  {id:"10029", name:"张三 1-1-1-1", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'},
+                  {id:"10030", name:"张三 1-1-1-2", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'}
+                ]
+              },
+              {
+                id:"10011", name:"张三 1-1-2", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。', children: [
+                  {id:"10031", name:"张三 1-1-2-1", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'},
+                  {id:"10032", name:"张三 1-1-2-2", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'}
+                ]
+              }
+            ]
+          },
+          {
+            id:"10012", name:"张三 1-2", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。', children: [
+              {id:"10013", name:"张三 1-2-1", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'},
+              {id:"10014", name:"张三 1-2-2", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'}
+            ]
+          }
+        ]
+      },
+      {
+        id:"10002", name:"张三 2", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。', children: [
+          {id:"10015", name:"张三 2-1", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'},
+          {id:"10016", name:"张三 2-2", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'}
+        ]
+      },
+      {
+        id:"10003", name:"张三 3", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。', children: [
+          {id:"10017", name:"张三 3-1", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'},
+          {id:"10018", name:"张三 3-2", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'}
+        ]
+      },
+      {
+        id:"10004", name:"张三 4", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。', children: [
+          {id:"10019", name:"张三 4-1", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'},
+          {id:"10020", name:"张三 4-2", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'}
+        ]
+      },
+      {
+        id:"10005", name:"张三 5", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。', children: [
+          {id:"10021", name:"张三 5-1", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'},
+          {id:"10022", name:"张三 5-2", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'}
+        ]
+      },      
+      {
+        id:"10006", name:"张三 6", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。', children: [
+          {id:"10023", name:"张三 6-1", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'},
+          {id:"10024", name:"张三 6-2", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'}
+        ]
+      },
+      {
+        id:"10007", name:"张三 7", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。', children: [
+          {id:"10025", name:"张三 7-1", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'},
+          {id:"10026", name:"张三 7-2", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'}
+        ]
+      },
+      {
+        id:"10008", name:"张三 8", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。', children: [
+          {id:"10027", name:"张三 8-1", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'},
+          {id:"10028", name:"张三 8-2", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'}
+        ]
       }
     ]
 
-    const dataSource26 = [
-      {username:"root", password:"root",sex:"男", age:"18", remark: 'layui - vue（谐音：类 UI) '},
-      {username:"root", password:"root",sex:"男", age:"18", remark: 'layui - vue（谐音：类 UI) '},
-      {username:"woow", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '},
-      {username:"woow", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '},
-      {username:"woow", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '}
-    ]
+    const getCheckData6 = function() {
+      layer.msg(tableRef6.value.getCheckData());
+    }
+
+    const defaultExpandAll6 = ref(false);
+
+    const expandAll6 = function() {
+      defaultExpandAll6.value = !defaultExpandAll6.value;
+    }
 
     return {
-      columns26,
-      dataSource26,
+      columns6,
+      dataSource6,
+      defaultExpandAll6,
+      tableRef6, 
+      getCheckData6,
+      expandAll6
     }
   }
 }
@@ -1272,13 +652,13 @@ export default {
 
 :::
 
-::: title 合并行列
+::: title 行列合并
 :::
 
 ::: demo 通过 `span-method` 属性, 自定义行列合并的逻辑。
 
 <template>
-  <lay-table :columns="columns27" :data-source="dataSource27" :span-method="spanMethod27" :default-toolbar="true"></lay-table>
+  <lay-table :columns="columns7" :data-source="dataSource7" :span-method="spanMethod7" :default-toolbar="true"></lay-table>
 </template>
 
 <script>
@@ -1287,57 +667,138 @@ import { ref } from 'vue'
 export default {
   setup() {
 
-    const columns27 = [
+    const columns7 = [
+      { 
+        fixed: "left", 
+        type: "checkbox", 
+        title: "复选"
+      },
       {
-        title:"账户",
-        width:"200px",
-        key:"username"
-      },{
-        title:"密码",
-        width: "300px",
-        key:"password"
+        title:"编号",
+        width:"50px",
+        key:"id"
+      },
+      {
+        title:"名称",
+        width: "100px",
+        key:"name"
       },{
         title:"性别",
+        width: "100px",
         key:"sex"
       },{
         title:"年龄",
-        width: "300px",
+        width: "100px",
         key:"age"
       },{
-        title:"备注",
-        width: "180px",
-        key:"remark",
-        ellipsisTooltip: true
+        title:"城市",
+        width: "100px",
+        key:"city"
+      },{
+        title:"签名",
+        width: "240px",
+        key:"remark"
       }
     ]
 
-    const dataSource27 = [
-      {id:"1",username:"root", password:"root",sex:"男", age:"18", remark: 'layui - vue（谐音：类 UI) '},
-      {id:"2",username:"root", password:"root",sex:"男", age:"18", remark: 'layui - vue（谐音：类 UI) '},
-      {id:"3",username:"woow", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '},
-      {id:"4",username:"woow", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '},
-      {id:"5",username:"woow", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '}
+    const dataSource7 = [
+      {id:"10001",name:"夏娜-1", email:"test@email.com", city:"北京朝阳", sex:"男", age:"20", remark: '欲买桂花同载酒, 终不似, 少年游。'},
+      {id:"10002",name:"夏娜-1", email:"test@email.com", city:"北京朝阳", sex:"男", age:"20", remark: '欲买桂花同载酒, 终不似, 少年游。'},
+      {id:"10003",name:"夏娜-2", email:"test@email.com", city:"北京朝阳", sex:"男", age:"21", remark: '欲买桂花同载酒, 终不似, 少年游。'},
+      {id:"10004",name:"夏娜-2", email:"test@email.com", city:"北京朝阳", sex:"男", age:"21", remark: '欲买桂花同载酒, 终不似, 少年游。'},
+      {id:"10005",name:"夏娜-3", email:"test@email.com", city:"北京朝阳", sex:"男", age:"22", remark: '欲买桂花同载酒, 终不似, 少年游。'},
+      {id:"10006",name:"夏娜-3", email:"test@email.com", city:"北京朝阳", sex:"男", age:"22", remark: '欲买桂花同载酒, 终不似, 少年游。'}
     ]
 
-    const spanMethod27 = (
+    const spanMethod7 = (
       row,
       column,
       rowIndex,
       columnIndex,
     ) => {
       if (rowIndex % 2 === 0) {
-        if (columnIndex === 0) {
-          return [1, 2]
-        } else if (columnIndex === 1) {
+        if (columnIndex === 2) {
+          return [2, 1]
+        } 
+      } else {
+        if (columnIndex === 2) {
           return [0, 0]
-        }
+        } 
       }
     }
 
     return {
-      columns27,
-      dataSource27,
-      spanMethod27,
+      columns7,
+      dataSource7,
+      spanMethod7,
+    }
+  }
+}
+</script>
+
+::: 
+
+::: title 斑马条纹
+:::
+
+::: demo 通过 `even` 属性, 开启表格行斑马条纹, 默认为 `false`。
+
+<template>
+  <lay-table :columns="columns8" :data-source="dataSource8" even></lay-table>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const columns8 = [
+      {
+        title:"编号",
+        width:"50px",
+        key:"id"
+      },
+      {
+        title:"用户",
+        width:"200px",
+        key:"name"
+      },{
+        title:"邮箱",
+        width: "180px",
+        key:"email"
+      },
+      {
+        title:"年龄",
+        width: "100px",
+        key:"age"
+      },
+      {
+        title:"城市",
+        width: "180px",
+        key:"city"
+      },{
+        title:"备注",
+        width: "400px",
+        key:"remark",
+        ellipsisTooltip: true,
+      }
+    ]
+
+    const dataSource8 = [
+      {id: "10001", name:"张三1", city: "浙江杭州", email:"test@email.com", age:"18", remark: '以创造性的行为实践于人世。若能以写作为工具，为道途，先帮助自己一程，再以领悟帮助他人一程。这是一种服务'},
+      {id: "10002", name:"张三2", city: "浙江杭州", email:"test@email.com", age:"18", remark: '以创造性的行为实践于人世。若能以写作为工具，为道途，先帮助自己一程，再以领悟帮助他人一程。这是一种服务'},
+      {id: "10003", name:"张三3", city: "浙江杭州", email:"test@email.com", age:"20", remark: '以创造性的行为实践于人世。若能以写作为工具，为道途，先帮助自己一程，再以领悟帮助他人一程。这是一种服务'},
+      {id: "10004", name:"张三4", city: "浙江杭州", email:"test@email.com", age:"20", remark: '以创造性的行为实践于人世。若能以写作为工具，为道途，先帮助自己一程，再以领悟帮助他人一程。这是一种服务'},
+      {id: "10005", name:"张三5", city: "浙江杭州", email:"test@email.com", age:"20", remark: '以创造性的行为实践于人世。若能以写作为工具，为道途，先帮助自己一程，再以领悟帮助他人一程。这是一种服务'},
+      {id: "10006", name:"张三6", city: "浙江杭州", email:"test@email.com", age:"20", remark: '以创造性的行为实践于人世。若能以写作为工具，为道途，先帮助自己一程，再以领悟帮助他人一程。这是一种服务'},
+      {id: "10007", name:"张三7", city: "浙江杭州", email:"test@email.com", age:"20", remark: '以创造性的行为实践于人世。若能以写作为工具，为道途，先帮助自己一程，再以领悟帮助他人一程。这是一种服务'},
+      {id: "10008", name:"张三8", city: "浙江杭州", email:"test@email.com", age:"20", remark: '以创造性的行为实践于人世。若能以写作为工具，为道途，先帮助自己一程，再以领悟帮助他人一程。这是一种服务'}
+    ]
+
+    return {
+      columns8,
+      dataSource8
     }
   }
 }
@@ -1345,364 +806,57 @@ export default {
 
 :::
 
-::: title 行内编辑
+
+::: title 更多使用
 :::
 
-::: demo 通过 `span-method` 属性, 自定义行列合并的逻辑。
+::: demo
 
 <template>
-  <lay-table :columns="columns28" :data-source="dataSource28">
-    <template #username="{ data }">
-      <lay-input v-if="edingKeys.includes(data)" :model-value="data.username" @input="changeUsername($event, data)">
-        <template #suffix>
-          <lay-icon type="layui-icon-close" style="right:10px;" v-if="edingKeys.includes(data)"  @click="deleteEdit(data)"></lay-icon>
-        </template>
-      </lay-input>
-      <span v-else>
-        {{ data.username }} 
-        <lay-icon type="layui-icon-edit" style="position: absolute;right: 10px;" v-if="!edingKeys.includes(data)"  @click="editHandle(data)"></lay-icon>
-      </span>
+  <lay-table
+    :columns="columns9"
+    :data-source="dataSource9"
+  >
+    <template #operator>
+      <lay-space direction="vertical" style="width:100%;">
+        <lay-input placeholder="表单 1" style="width:100%;" />
+        <lay-input placeholder="表单 2" style="width:100%;" />
+        <lay-button type="primary" fluid>提交</lay-button>
+      </lay-space>
     </template>
   </lay-table>
 </template>
 
-<script>
+<script lang="ts" setup>
 import { ref } from 'vue'
-
-export default {
-  setup() {
-
-    const edingKeys = ref([])
-
-    const columns28 = [
-      {
-        title:"账户",
-        width:"200px",
-        key:"username",
-        customSlot: "username"
-      },{
-        title:"密码",
-        width: "300px",
-        key:"password"
-      },{
-        title:"性别",
-        key:"sex"
-      },{
-        title:"年龄",
-        width: "300px",
-        key:"age"
-      },{
-        title:"备注",
-        width: "180px",
-        key:"remark",
-        ellipsisTooltip: true
-      }
-    ]
-
-    const dataSource28 = ref([
-      {id:"1",username:"root", password:"root",sex:"男", age:"18", remark: 'layui - vue（谐音：类 UI) '},
-      {id:"2",username:"root", password:"root",sex:"男", age:"18", remark: 'layui - vue（谐音：类 UI) '},
-      {id:"3",username:"woow", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '},
-      {id:"4",username:"woow", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '},
-      {id:"5",username:"woow", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '}
-    ])
-
-    const editHandle = (data) => {
-      edingKeys.value.push(data);
-    }
-
-    const deleteEdit = (data) => {
-      edingKeys.value.splice(edingKeys.value.indexOf(data),1);
-    }
-
-    const changeUsername = (val, data) => {
-      dataSource28.value.forEach(element => {
-        if(element.id == data.id) {
-          element.username = val;
-        }
-      });
-    }
-
-    return {
-      edingKeys,
-      deleteEdit,
-      columns28,
-      editHandle,
-      dataSource28,
-      changeUsername,
-    }
+  
+const columns9 = [
+  {
+    title: '签名',
+    key: 'remark',
+  },
+  {
+    title: "操作",
+    width: "260px",
+    customSlot: "operator",
+    key: "operator",
   }
-}
+]
+
+const dataSource9 = ref([
+  {
+    remark: '君不见，黄河之水天上来，奔流到海不复回。 君不见，高堂明镜悲白发，朝如青丝暮成雪。 人生得意须尽欢，莫使金樽空对月。 天生我材必有用，千金散尽还复来。 烹羊宰牛且为乐，会须一饮三百杯。 岑夫子，丹丘生，将进酒，杯莫停。 与君歌一曲，请君为我倾耳听。(倾耳听 一作：侧耳听) 钟鼓馔玉不足贵，但愿长醉不复醒。(不足贵 一作：何足贵；不复醒 一作：不愿醒/不用醒) 古来圣贤皆寂寞，惟有饮者留其名。(古来 一作：自古；惟 通：唯) 陈王昔时宴平乐，斗酒十千恣欢谑。 主人何为言少钱，径须沽取对君酌。 五花马，千金裘，呼儿将出换美酒，与尔同销万古愁。',
+  },
+  {
+    remark: '君不见，黄河之水天上来，奔流到海不复回。 君不见，高堂明镜悲白发，朝如青丝暮成雪。 人生得意须尽欢，莫使金樽空对月。 天生我材必有用，千金散尽还复来。 烹羊宰牛且为乐，会须一饮三百杯。 岑夫子，丹丘生，将进酒，杯莫停。 与君歌一曲，请君为我倾耳听。(倾耳听 一作：侧耳听) 钟鼓馔玉不足贵，但愿长醉不复醒。(不足贵 一作：何足贵；不复醒 一作：不愿醒/不用醒) 古来圣贤皆寂寞，惟有饮者留其名。(古来 一作：自古；惟 通：唯) 陈王昔时宴平乐，斗酒十千恣欢谑。 主人何为言少钱，径须沽取对君酌。 五花马，千金裘，呼儿将出换美酒，与尔同销万古愁。',
+  },
+  {
+    remark: '君不见，黄河之水天上来，奔流到海不复回。 君不见，高堂明镜悲白发，朝如青丝暮成雪。 人生得意须尽欢，莫使金樽空对月。 天生我材必有用，千金散尽还复来。 烹羊宰牛且为乐，会须一饮三百杯。 岑夫子，丹丘生，将进酒，杯莫停。 与君歌一曲，请君为我倾耳听。(倾耳听 一作：侧耳听) 钟鼓馔玉不足贵，但愿长醉不复醒。(不足贵 一作：何足贵；不复醒 一作：不愿醒/不用醒) 古来圣贤皆寂寞，惟有饮者留其名。(古来 一作：自古；惟 通：唯) 陈王昔时宴平乐，斗酒十千恣欢谑。 主人何为言少钱，径须沽取对君酌。 五花马，千金裘，呼儿将出换美酒，与尔同销万古愁。',
+  }
+])
 </script>
 
 :::
-
-::: title 复杂表头
-:::
-
-::: demo 通过 `span-method` 属性, 自定义行列合并的逻辑。
-
-<template>
-  <lay-table :columns="columns29" :data-source="dataSource29" :default-toolbar="true"></lay-table>
-</template>
-
-<script>
-import { ref } from 'vue'
-
-export default {
-  setup() {
-
-    const columns29 = [
-      {
-        title:"名称",
-        width:"200px",
-        key:"username"
-      },
-      {
-        title:"地址",
-        children: [
-          { title: "省", key: "province", width: "300px" },
-          { title: "市", key: "city", width: "300px" },
-          { title: "区", key: "area", width: "300px" },
-        ]
-      },
-      {
-        title:"备注",
-        width: "180px",
-        key:"remark",
-        ellipsisTooltip: true,
-        fixed: "right",
-        children: [
-          {
-            title:"性别",
-            key:"sex"
-          },{
-            title:"年龄",
-            width: "300px",
-            totalRow:"统计",
-            key:"age"
-          }
-        ]
-      }
-    ]
-
-    const dataSource29 = [
-      {id:"1",username:"就眠儀式",province:"山东",city:"济南",area: "高新区", password:"root",sex:"男", age:"18", remark: 'layui - vue（谐音：类 UI) '},
-      {id:"2",username:"就眠儀式",province:"山东",city:"济南",area: "高新区", password:"root",sex:"男", age:"18", remark: 'layui - vue（谐音：类 UI) '},
-      {id:"3",username:"就眠儀式",province:"山东",city:"济南",area: "高新区", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '},
-      {id:"4",username:"就眠儀式",province:"山东",city:"济南",area: "高新区", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '},
-      {id:"5",username:"就眠儀式",province:"山东",city:"济南",area: "高新区", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) '}
-    ]
-
-    return {
-      columns29,
-      dataSource29,
-    }
-  }
-}
-</script>
-
-:::
-
-::: title 加载过渡
-:::
-
-::: demo 通过 `span-method` 属性, 自定义行列合并的逻辑。
-
-<template>
-  <lay-button @click="loadData">加载数据</lay-button>
-  <lay-table :columns="columns30" :data-source="dataSource30" :loading="loading"></lay-table>
-</template>
-
-<script>
-import { ref } from 'vue'
-
-export default {
-  setup() {
-
-    const loading = ref(false);
-
-    const columns30 = [
-      {
-        
-        fixed: "left",
-        title:"名称",
-        key:"username"
-      },{
-        title:"地址",
-        fixed: "left",
-        children: [
-          { title: "省",  key: "province"},
-          { title: "市", key: "city"},
-        ]
-      },{
-        title:"性别",
-        key:"sex"
-      },{
-        title:"年龄",
-        width: "300px",
-        key:"age"
-      },{
-        title:"备注",
-        width: "180px",
-        key:"remark",
-        ellipsisTooltip: true
-      }
-    ]
-
-    const dataSource30 = ref([])
-
-    const loadData = () => {
-      loading.value = true;
-      setTimeout(() => {
-      dataSource30.value = [
-        {id:"1",username:"就眠儀式",province:"山东",city:"济南",area: "高新区", password:"root",sex:"男", age:"18", remark: 'layui - vue（谐音：类 UI) ', xian:"1", cun: "2"},
-        {id:"2",username:"就眠儀式",province:"山东",city:"济南",area: "高新区", password:"root",sex:"男", age:"18", remark: 'layui - vue（谐音：类 UI) ', xian:"1", cun: "2"},
-        {id:"3",username:"就眠儀式",province:"山东",city:"济南",area: "高新区", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) ', xian:"1", cun: "2"},
-        {id:"4",username:"就眠儀式",province:"山东",city:"济南",area: "高新区", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) ', xian:"1", cun: "2"},
-        {id:"5",username:"就眠儀式",province:"山东",city:"济南",area: "高新区", password:"woow",sex:"男", age:"20", remark: 'layui - vue（谐音：类 UI) ', xian:"1", cun: "2"}
-      ];
-      loading.value = false;
-      },5000)
-    }
-
-    return {
-      columns30,
-      dataSource30,
-    }
-  }
-}
-</script>
-
-:::
-
-::: title 完整表格
-:::
-
-::: demo 使用了绝大部分属性的 table 案例
-
-<template>
-  <lay-table 
-      id="id" 
-      :max-height="maxHeight5"
-      :columns="columns5" 
-      :expand-index="1" 
-      :data-source="dataSource5" 
-      :checkbox="checkbox5" :page="page5" 
-      :default-toolbar="defaultToolbar5"
-      :resize="true"
-      :autoColsWidth="true"
-      v-model:selected-keys="selectedKeys5"  
-      @row="rowClick5"
-      @change="change555">
-    <template v-slot:toolbar>
-      <lay-button size="sm" type="primary">新增</lay-button>
-      <lay-button size="sm">删除</lay-button>
-    </template>
-    <template v-slot:name="{ row, column, rowIndex, columnIndex }"> {{ row.name }} </template>
-    <template v-slot:name-title>😊</template>
-    <template v-slot:operator="{ row }">
-      <lay-button size="xs">修改</lay-button>
-      <lay-button size="xs" type="primary">删除</lay-button>
-    </template>
-  </lay-table>
-</template>
-
-<script>
-import { ref, watch } from 'vue'
-
-export default {
-  setup() {
-
-    const selectedKeys5 = ref(['1'])
-    const checkbox5 = ref(true)
-    const defaultToolbar5 = ref(['export','print','filter'])
-    const maxHeight5 = ref('600px');
-
-    const page5 = {
-      total: 100,
-      limit: 10,
-      current: 1
-    }
-
-    const columns5 = ref([]);
-
-    const change555 = function(page) {
-      console.log(JSON.stringify(page));
-    }
-
-    setTimeout(() => {
-      columns5.value = [
-      {
-        title: "序号",
-        fixed: "left",
-        type: "number",
-        width: "50px",
-      },
-      {
-        title:"姓名",
-        titleSlot: "name-title",
-        customSlot:"name",
-        key:"name",
-      },
-      {
-        title:"年龄",
-        key:"age",
-        ellipsisTooltip: true,
-      },
-      {
-        title:"备注",
-        key:"remark",
-        ellipsisTooltip: true,
-      }
-      ,{
-        title:"操作",
-        width:"150px",
-        fixed:"right",
-        customSlot:"operator",
-        key:"operator"
-      }
-    ]
-    }, 2000)
-
-    const dataSource5 = [
-      {id:"1", name:"小明", age:"18",remark: 'layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.'},
-      {id:"2", name:"小红", age:"20",remark: 'layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.'},
-      {id:"3", name:"小刚", age:"20",remark: 'layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.'},
-      {id:"4", name:"小李", age:"20",remark: 'layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.'},
-      {id:"5", name:"小柏", age:"20",remark: 'layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.'},
-      {id:"6", name:"小吉", age:"20",remark: 'layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.'}
-    ]
-
-    const rowClick5 = function(data) {
-      console.log(JSON.stringify(data))
-    }
-    
-    const rowDoubleClick5 = function(data) {
-      console.log(JSON.stringify(data))
-    }
-
-    watch(selectedKeys5, () => {
-      console.log("复选框监听:" + selectedKeys5.value);
-    })
-
-    return {
-      columns5,
-      dataSource5,
-      selectedKeys5,
-      checkbox5,
-      defaultToolbar5,
-      rowClick5,
-      rowDoubleClick5,
-      page5,
-      change555
-    }
-  }
-}
-</script>
-
-:::
-
 
 ::: title Table 属性
 :::

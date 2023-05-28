@@ -15,6 +15,30 @@
     <lay-timeline>
         <lay-timeline-item title="2.0.0">
             <ul>
+                <a name="2-1-1"></a>
+                <li>
+                    <h3>2.1.1 <span class="layui-badge-rim">2023-05-28</span></h3>
+                    <ul>
+                        <li>[修复] table 组件树表数据全部勾选后，总控复选框仍处于半选状态的问题 。</li>
+                        <li>[修复] table 组件树表总控复选框，无法全选二级及以上层级的数据。</li>
+                        <li>[修复] checkbox 组件 skin 默认样式 label 与 icon 高度不一致。</li>
+                        <li>[修复] tag 组件 type 属性为 primary 时，颜色为 #16baaa。</li>
+                    </ul>  
+                </li>
+            </ul>
+            <ul>
+                <a name="2-1-0"></a>
+                <li>
+                    <h3>2.1.0 <span class="layui-badge-rim">2023-05-18</span></h3>
+                    <ul>
+                        <li>[新增] checkcard-group 组件 single 属性，用于开启单选模式，默认为 false。</li>
+                        <li>[修复] tree-select 组件 data 属性响应式填充造成 input 无法回显的问题。</li>
+                    </ul>  
+                </li>
+            </ul>
+        </lay-timeline-item>
+        <lay-timeline-item title="2.0.0">
+            <ul>
                 <a name="2-0-0"></a>
                 <li>
                     <h3>2.0.5 <span class="layui-badge-rim">2023-05-22</span></h3>

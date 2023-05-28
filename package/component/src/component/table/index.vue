@@ -99,6 +99,8 @@ const tableColumns = computed(() => {
   return [...props.columns];
 });
 
+const { columnSlotNames, dataSourceCount, needSelectedKeys } = useTable(props);
+
 const tableColumnKeys = ref<any[]>([]);
 const tableHeadColumns = ref<any[]>([]);
 const tableBodyColumns = ref<any[]>([]);
@@ -336,13 +338,7 @@ watch(
 
 const changeAll = (isChecked: boolean) => {
   if (isChecked) {
-    const datasources = props.dataSource.filter((item: any, index: number) => {
-      return !props.getCheckboxProps(item, index)?.disabled;
-    });
-    const ids = datasources.map((item) => {
-      return item[props.id];
-    });
-    tableSelectedKeys.value = [...ids];
+    tableSelectedKeys.value = [...needSelectedKeys.value];
   } else {
     tableSelectedKeys.value = [];
   }
@@ -351,7 +347,7 @@ const changeAll = (isChecked: boolean) => {
 watch(
   tableSelectedKeys,
   () => {
-    if (tableSelectedKeys.value.length === props.dataSource.length) {
+    if (tableSelectedKeys.value.length === dataSourceCount.value) {
       allChecked.value = true;
     } else {
       allChecked.value = false;
@@ -507,6 +503,7 @@ const sortTable = (e: any, key: string, sort: string) => {
 let tableBody = ref<HTMLElement | null>(null);
 let tableHeader = ref<HTMLElement | null>(null);
 let tableHeaderTable = ref<HTMLElement | null>(null);
+let tableBodyTable = ref<HTMLElement | null>(null);
 const tableBodyEmptyWidth = ref();
 let scrollWidthCell = ref(0);
 
@@ -583,8 +580,6 @@ const getFixedColumn = () => {
     hasr.value = false;
   }
 };
-
-const { columnSlotNames } = useTable(props);
 
 const currentIndentSize = ref(0);
 
@@ -1104,7 +1099,14 @@ defineExpose({ getCheckData });
                         <div
                           v-if="props.resize || column.resize"
                           class="lay-table-cols-resize"
-                          @mousedown="startResize($event, column)"
+                          @mousedown="
+                            startResize(
+                              $event,
+                              column,
+                              tableHeaderTable,
+                              tableBodyTable
+                            )
+                          "
                         ></div>
                       </th>
                     </template>
@@ -1127,6 +1129,7 @@ defineExpose({ getCheckData });
             :class="{ 'layui-table-even': props.even }"
             :lay-size="size"
             :lay-skin="skin"
+            ref="tableBodyTable"
           >
             <colgroup>
               <template

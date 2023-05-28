@@ -150,10 +150,13 @@ watch(
       getDisabled.value = val;
     }
   }
-)
-watch(() => props.modelValue, (val) => {
-  initValue.value = val
-})
+);
+watch(
+  () => props.modelValue,
+  (val) => {
+    initValue.value = val;
+  }
+);
 const getStyle = computed(() => {
   return {
     "layui-checkcard-checked": getCheckState.value,

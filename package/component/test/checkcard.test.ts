@@ -43,14 +43,14 @@ describe("LayCheckCard.vue", () => {
     wrapper.unmount();
   });
 
-  test("render modelValue test", async() => {
+  test("render modelValue test", async () => {
     const wrapper = mount(LayCheckCard, {
       props: {
         modelValue: true,
       },
     });
-    await wrapper.setProps({ modelValue: false })
-    expect(Object.is(wrapper.vm.modelValue, false)).toBe(true)
+    await wrapper.setProps({ modelValue: false });
+    expect(Object.is(wrapper.vm.modelValue, false)).toBe(true);
     expect(wrapper.find(".layui-checkcard-checked").exists()).toBe(false);
     wrapper.unmount();
   });
@@ -129,11 +129,11 @@ describe("LayCheckCard.vue", () => {
     expect(wrapper.find(".layui-checkcard").classes()).toContain(
       "layui-checkcard-disabled"
     );
-    await wrapper.setProps({ disabled: false })
-    expect(wrapper.vm.disabled).toBe(false)
+    await wrapper.setProps({ disabled: false });
+    expect(wrapper.vm.disabled).toBe(false);
     await wrapper.find(".layui-checkcard").trigger("click");
     expect(wrapper.emitted()).toHaveProperty("click");
-    
+
     wrapper.unmount();
   });
 });
