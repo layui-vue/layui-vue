@@ -5,20 +5,67 @@ export default {
 </script>
 
 <script lang="ts" setup>
+import { ref } from "vue";
+import { Rule, ValidateMessages, ValidateError } from "async-validator";
+import { FormCallback, modelType } from "@layui/layui-vue/types";
+
 export interface JsonSchemaFormProps {
-  jsonSchema: any;
   model: any;
-  pane: boolean;
-  space: number;
+  rules?: Rule;
+  pane?: boolean;
+  space?: number;
+  required?: boolean;
+  initValidate?: boolean;
+  labelPosition?: string;
+  requiredIcons?: string;
+  validateMessage?: ValidateMessages;
+  requiredErroerMessage?: string;
+  useCN?: boolean;
+  jsonSchema: any;
 }
 
 const props = withDefaults(defineProps<JsonSchemaFormProps>(), {});
 
-defineExpose({});
+const formRef = ref();
+
+const validate = (
+  fields?: string | string[] | FormCallback | null,
+  callback?: FormCallback | null
+) => { 
+  return formRef.value.validate(fields, callback);
+}
+
+const clearValidate = (fields?: string | string[]) => {
+  formRef.value.clearValidate(fields);
+}
+
+const reset = () => {
+  formRef.value.reset();
+}
+
+const emits = defineEmits(["submit"]);
+
+const handleSubmit = (isValidate: boolean, model: modelType, errorsArrs: ValidateError[]) => {
+  emits('submit', isValidate, model, errorsArrs);
+}
+
+defineExpose({ validate, clearValidate, reset });
 </script>
 
 <template>
-  <lay-form :model="model" :pane="pane">
+  <lay-form 
+    :pane="pane" 
+    :model="model"
+    :rules="rules"
+    :required="required" 
+    :initValidate="initValidate" 
+    :labelPosition="labelPosition"
+    :validateMessage="validateMessage"
+    :requiredErroerMessage="requiredErroerMessage"
+    :requiredIcons="requiredIcons"
+    :useCN="useCN"
+    @submit="handleSubmit"
+    >
     <lay-row :space="space">
       <template v-for="(val, key, index) in jsonSchema" :key="index">
         <lay-col v-bind="val.grid">
