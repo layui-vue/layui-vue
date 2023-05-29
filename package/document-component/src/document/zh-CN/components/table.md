@@ -268,7 +268,7 @@ export default {
     const columns3 = [
       { fixed: "left", type: "checkbox", title: "复选"},
       { fixed: "left", type: "radio", title: "单选" },
-      { fixed: "left", title:"用户", width:"80px", key:"name"},
+      { title:"用户", width:"80px", key:"name"},
       { title:"城市", width: "80px", key:"city" },
       { title:"性别", key:"sex", width: "80px" },
       { title:"年龄", width: "80px", key:"age" },
@@ -675,7 +675,7 @@ export default {
       },
       {
         title:"编号",
-        width:"50px",
+        width:"80px",
         key:"id"
       },
       {
@@ -756,7 +756,7 @@ export default {
     const columns8 = [
       {
         title:"编号",
-        width:"50px",
+        width:"80px",
         key:"id"
       },
       {
