@@ -17,6 +17,15 @@
             <ul>
                 <a name="2-1-1"></a>
                 <li>
+                    <h3>2.1.2 <span class="layui-badge-rim">2023-05-28</span></h3>
+                    <ul>
+                        <li>[优化] autocomplete 组件下拉面板，增加最大高度 300px 限制，内容超出滚动显示。</li>
+                    </ul>  
+                </li>
+            </ul>
+            <ul>
+                <a name="2-1-1"></a>
+                <li>
                     <h3>2.1.1 <span class="layui-badge-rim">2023-05-28</span></h3>
                     <ul>
                         <li>[修复] table 组件树表数据全部勾选后，总控复选框仍处于半选状态的问题 。</li>
