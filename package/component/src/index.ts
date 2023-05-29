@@ -197,7 +197,7 @@ const components: Record<string, Plugin> = {
   LayBarcode,
   LayAutocomplete,
   LayRadioButton,
-  LayPopconfirm,
+  LayPopconfirm
 };
 
 const install = (app: App, options?: InstallOptions): void => {
