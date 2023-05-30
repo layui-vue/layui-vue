@@ -47,7 +47,7 @@
         </template>
         <template v-else>
           <template v-if="innerOptions.length > 0">
-            <lay-dropdown-menu>
+            <lay-dropdown-menu class="lay-autocomplete-content">
               <template v-for="(option, index) in innerOptions">
                 <lay-dropdown-menu-item
                   @click="clickOptions(option)"
