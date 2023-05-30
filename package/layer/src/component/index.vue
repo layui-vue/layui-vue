@@ -732,7 +732,9 @@ defineExpose({ reset, open, close });
         v-if="visible"
       >
         <!-- 标题 -->
-        <Title v-if="showTitle" :title="title" @mousedown="setTop"></Title>
+        <Title v-if="showTitle" :title="title" @mousedown="setTop">
+          <slot name="title"></slot>
+        </Title>
         <!-- 内容 -->
         <div
           ref="contentRef"

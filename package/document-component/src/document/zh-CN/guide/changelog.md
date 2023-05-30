@@ -19,7 +19,10 @@
                 <li>
                     <h3>2.1.2 <span class="layui-badge-rim">2023-05-28</span></h3>
                     <ul>
+                        <li>[新增] layer 组件 title 插槽，提供标题自定义的能力。</li>
                         <li>[优化] autocomplete 组件下拉面板，增加最大高度 300px 限制，内容超出滚动显示。</li>
+                        <li>[优化] autocomplete 组件下拉面板滚动条样式。</li>
+                        <li>[升级] layer-vue 1.8.8 版本。</li>
                     </ul>  
                 </li>
             </ul>

@@ -36,6 +36,35 @@ export default {
 
 :::
 
+::: title 按钮风格
+:::
+
+::: demo 使用 `lay-tab` 与 `lay-tab-item` 标签, 创建选项卡。
+
+<template>
+  <lay-tab v-model="current1" type="button">
+    <lay-tab-item title="选项一" v-if="true" id="1"><div style="padding:20px">选项一</div></lay-tab-item>
+    <lay-tab-item title="选项二" id="2"><div style="padding:20px">选项二</div></lay-tab-item>
+  </lay-tab>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const current1 = ref("1")
+
+    return {
+      current1,
+    }
+  }
+}
+</script>
+
+:::
+
 ::: title 设置图标
 :::
 
@@ -353,6 +382,7 @@ export default {
       <lay-button type="default" size="sm" @click = "tabType = ''">默认</lay-button>
       <lay-button type="default" size="sm" @click = "tabType = 'brief'">简约</lay-button>
       <lay-button type="default" size="sm" @click = "tabType = 'card'">卡片</lay-button>
+      <lay-button type="default" size="sm" @click = "tabType = 'button'">按钮</lay-button>
   </lay-button-group>
   <lay-tab :type="tabType" v-model="current7" :tabPosition = "tabPosition">
     <lay-tab-item title="选项一" id="1"><div style="padding:20px">选项一</div></lay-tab-item>

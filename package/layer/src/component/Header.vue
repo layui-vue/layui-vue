@@ -21,6 +21,6 @@ const props = defineProps<HeaderProps>();
 
 <template>
   <div class="layui-layer-title" style="cursor: move">
-    {{ renderContent(title) }}
+    <slot>{{ renderContent(title) }}</slot>
   </div>
 </template>
