@@ -6,7 +6,7 @@ export default {
 
 <script setup lang="ts">
 import {
-  withDefaults,
+  watch,
   inject,
   useSlots,
   getCurrentInstance,
@@ -42,6 +42,22 @@ const data = reactive({
 if (instance?.uid) {
   tabsCtx.addItem?.(props.id, data);
 }
+
+watch(
+  () => props,
+  () => {
+    tabsCtx.addItem?.(
+      props.id,
+      reactive({
+        id: props.id,
+        title: props.title,
+        icon: props.icon,
+        closable: props.closable,
+        slots: slots,
+      })
+    );
+  }, { deep: true }
+);
 
 onBeforeUnmount(() => {
   if (instance?.uid) {

@@ -20,6 +20,7 @@
                     <h3>2.1.3 <span class="layui-badge-rim">2023-05-31</span></h3>
                     <ul>
                         <li>[修复] table 组件 loading 无边距的问题，加入 padding-top 与 padding-bottom 30px。</li>
+                        <li>[修复] tab 组件 title icon closable 属性缺失响应式的问题。</li>
                     </ul>  
                 </li>
             </ul>
