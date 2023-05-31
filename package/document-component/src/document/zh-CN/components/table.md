@@ -14,6 +14,7 @@
 
 <template>
   <lay-table 
+      height="300px"
       :default-toolbar="true"
       :columns="columns" 
       :loading="loading"
