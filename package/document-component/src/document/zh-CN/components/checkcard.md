@@ -24,16 +24,65 @@
 :::
 
 
-
-::: title 单元模式
+::: title 多选模式
 :::
 
-::: describe 使用分组`lay-checkcard-group`时, 默认为单选模式
+::: describe 使用分组`lay-checkcard-group`时, 默认为多选模式。
 :::
 
 ::: demo
 
- <lay-checkcard-group  v-model="Single">
+ <lay-checkcard-group v-model="multiple">
+    <lay-checkcard
+      value="2"
+      avatar="http://abc.pearadmin.com/logo-png.png"
+      title="标题"
+      description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。">
+  </lay-checkcard>
+   <lay-checkcard
+      value="3"
+      avatar="http://abc.pearadmin.com/logo-png.png"
+      title="标题"
+      description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。">
+  </lay-checkcard>
+  <lay-checkcard
+      value="4"
+      avatar="http://abc.pearadmin.com/logo-png.png"
+      title="标题"
+      description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。">
+  </lay-checkcard>
+  </lay-checkcard-group>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+    const multiple = ref(['2', '3', '4'])
+    const groupChange = (val) => {
+    }
+    return {
+      multiple,
+      groupChange
+    }
+  }
+}
+</script>
+
+:::
+
+
+
+
+::: title 单选模式
+:::
+
+::: describe 使用`single`可单选
+:::
+
+::: demo
+
+ <lay-checkcard-group single  v-model="Single">
     <lay-checkcard
       value="2"
       avatar="http://abc.pearadmin.com/logo-png.png"
@@ -72,54 +121,6 @@ export default {
 
 :::
 
-
-
-::: title 多选模式
-:::
-
-::: describe 使用`multiple`可多选。
-:::
-
-::: demo
-
- <lay-checkcard-group multiple v-model="multiple">
-    <lay-checkcard
-      value="2"
-      avatar="http://abc.pearadmin.com/logo-png.png"
-      title="标题"
-      description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。">
-  </lay-checkcard>
-   <lay-checkcard
-      value="3"
-      avatar="http://abc.pearadmin.com/logo-png.png"
-      title="标题"
-      description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。">
-  </lay-checkcard>
-  <lay-checkcard
-      value="4"
-      avatar="http://abc.pearadmin.com/logo-png.png"
-      title="标题"
-      description="选择一个由流程编排提供的典型用户案例，可以从中学习到流程编排很多设计理念。">
-  </lay-checkcard>
-  </lay-checkcard-group>
-
-<script>
-import { ref } from 'vue'
-
-export default {
-  setup() {
-    const multiple = ref(['2', '3', '4'])
-    const groupChange = (val) => {
-    }
-    return {
-      multiple,
-      groupChange
-    }
-  }
-}
-</script>
-
-:::
 
 
 
@@ -276,7 +277,7 @@ import { ref, watch } from 'vue'
 
 export default {
   setup() {
-    const ischeked = ref(false)
+    const ischeked = ref(true)
     const handleChange = (value) =>  {
       // console.log(value)
     }
@@ -418,7 +419,7 @@ export default {
 ::: demo 
 
 <template>
-  <lay-checkcard-group multiple>
+  <lay-checkcard-group>
     <lay-checkcard
       value="1"
       avatar="http://abc.pearadmin.com/logo-png.png"
@@ -549,7 +550,7 @@ export default {
 | ------ | ---- | -------- | -------- | ------------------------ |
 | disabled | 是否禁用	 | `boolean` | false | -- |
 | v-model | 默认勾选	 | -- | -- | -- |
-| multiple | 多选	 | `boolean` | false | -- |
+| single | 是否单选	 | `boolean` | false | -- |
 
 :::
 
