@@ -14,12 +14,12 @@
 
 <template>
   <lay-table 
-      height="300px"
-      :default-toolbar="true"
+      :page="page" 
+      :height="'300px'"
       :columns="columns" 
       :loading="loading"
+      :default-toolbar="true"
       :data-source="dataSource" 
-      :page="page" 
       v-model:selected-keys="selectedKeys"  
       @change="change"
       @sortChange="sortChange">
