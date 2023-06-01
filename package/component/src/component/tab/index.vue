@@ -315,7 +315,7 @@ watch(
     childrens.value = [];
     setItemInstanceBySlot((slot.default && slot.default()) as VNode[]);
   },
-  { immediate: true }
+  { immediate: true, deep: true }
 );
 
 watch(

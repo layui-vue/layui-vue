@@ -15,7 +15,21 @@
     <lay-timeline>
         <lay-timeline-item title="2.0.0">
             <ul>
-                <a name="2-1-1"></a>
+                <a name="2-1-3"></a>
+                <li>
+                    <h3>2.1.3 <span class="layui-badge-rim">2023-05-31</span></h3>
+                    <ul>
+                        <li>[修复] tab 组件 title 属性缺失响应式的问题。</li>
+                        <li>[修复] tab 组件 icon 属性缺失响应式的问题。</li>
+                        <li>[修复] tab 组件 closable 属性缺失响应式的问题。</li>
+                        <li>[修复] table 组件 loading 无边距的问题，加入 padding-top 与 padding-bottom 30px。</li>
+                        <li>[修复] build 构建时 vue-tsc 的类型检测问题。</li>
+                        <li>[文档] checkcard 组件 single 属性说明完善，并修正案例。</li>
+                    </ul>  
+                </li>
+            </ul>
+            <ul>
+                <a name="2-1-2"></a>
                 <li>
                     <h3>2.1.2 <span class="layui-badge-rim">2023-05-31</span></h3>
                     <ul>
