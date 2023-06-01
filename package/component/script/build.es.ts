@@ -48,6 +48,7 @@ const matchModule: string[] = [
   "footer",
   "tree",
   "utils",
+  "selectOptionGroup"
 ];
 
 export default (): UserConfigExport => {
