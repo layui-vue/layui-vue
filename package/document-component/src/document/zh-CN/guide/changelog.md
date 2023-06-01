@@ -15,6 +15,15 @@
     <lay-timeline>
         <lay-timeline-item title="2.1.x">
             <ul>
+                <a name="2-1-4"></a>
+                <li>
+                    <h3>2.1.4 <span class="layui-badge-rim">2023-06-01</span></h3>
+                    <ul>
+                        <li>[修复] select-option-group 组件按需场景无法找到 index.less 的问题。</li>
+                    </ul>  
+                </li>
+            </ul>
+            <ul>
                 <a name="2-1-3"></a>
                 <li>
                     <h3>2.1.3 <span class="layui-badge-rim">2023-06-01</span></h3>
