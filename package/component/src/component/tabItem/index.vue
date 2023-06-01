@@ -56,7 +56,8 @@ watch(
         slots: slots,
       })
     );
-  }, { deep: true }
+  },
+  { deep: true }
 );
 
 onBeforeUnmount(() => {
