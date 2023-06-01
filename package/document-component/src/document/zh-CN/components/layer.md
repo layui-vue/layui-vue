@@ -105,16 +105,18 @@ const openPage = function() {
 npm install @layui/layer-vue
 ```
 
-::: describe 若在 `layui-vue` 的集成环境使用，可忽略 `app.use()` 步骤。
+::: describe 若在 `layui-vue` 环境使用，可忽略 `app.use(layer)` 步骤。
 :::
 
-```
+```js
 import { createApp } from 'vue';
 import layer from '@layui/layer-vue';
 import '@layui/layer-vue/lib/index.css';
 import App from './App.vue';
 
-createApp(App).use(layer).mount('#app');
+const app = createApp(App);
+app.use(layer);
+app.mount('#app');
 ```
 
 ::: title 普通消息
@@ -134,6 +136,8 @@ createApp(App).use(layer).mount('#app');
 </template>
 
 <script setup>
+import { layer } from "@layui/layui-vue";
+
 const openMsg1 = function() {
     layer.msg("成功消息", { icon : 1, time: 1000})
 }
@@ -173,7 +177,7 @@ const openMsg8 = function() {
 </template>
 
 <script>
-import { layer } from "@layui/layui-vue"
+import { layer } from "@layui/layui-vue";
 
 const openConfirm1 = function() {
     layer.confirm("layui-vue 1.0.0 已经发布")

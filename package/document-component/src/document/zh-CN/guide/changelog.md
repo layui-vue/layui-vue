@@ -13,7 +13,7 @@
 ::: demo
 <template>
     <lay-timeline>
-        <lay-timeline-item title="2.0.0">
+        <lay-timeline-item title="2.1.x">
             <ul>
                 <a name="2-1-3"></a>
                 <li>
@@ -63,9 +63,9 @@
                 </li>
             </ul>
         </lay-timeline-item>
-        <lay-timeline-item title="2.0.0">
+        <lay-timeline-item title="2.0.x">
             <ul>
-                <a name="2-0-0"></a>
+                <a name="2-0-5"></a>
                 <li>
                     <h3>2.0.5 <span class="layui-badge-rim">2023-05-22</span></h3>
                     <ul>
@@ -77,7 +77,7 @@
                 </li>
             </ul>
             <ul>
-                <a name="2-0-0"></a>
+                <a name="2-0-4"></a>
                 <li>
                     <h3>2.0.4 <span class="layui-badge-rim">2023-05-21</span></h3>
                     <ul>
@@ -89,7 +89,7 @@
                 </li>
             </ul>
             <ul>
-                <a name="2-0-0"></a>
+                <a name="2-0-3"></a>
                 <li>
                     <h3>2.0.3 <span class="layui-badge-rim">2023-05-20</span></h3>
                     <ul>
@@ -100,7 +100,7 @@
                 </li>
             </ul>
             <ul>
-                <a name="2-0-0"></a>
+                <a name="2-0-2"></a>
                 <li>
                     <h3>2.0.2 <span class="layui-badge-rim">2023-05-19</span></h3>
                     <ul>
@@ -110,7 +110,7 @@
                 </li>
             </ul>
             <ul>
-                <a name="2-0-0"></a>
+                <a name="2-0-1"></a>
                 <li>
                     <h3>2.0.1 <span class="layui-badge-rim">2023-05-18</span></h3>
                     <ul>
