@@ -17,7 +17,7 @@
             <ul>
                 <a name="2-1-3"></a>
                 <li>
-                    <h3>2.1.3 <span class="layui-badge-rim">2023-05-31</span></h3>
+                    <h3>2.1.3 <span class="layui-badge-rim">2023-06-01</span></h3>
                     <ul>
                         <li>[修复] tab 组件 title 属性缺失响应式的问题。</li>
                         <li>[修复] tab 组件 icon 属性缺失响应式的问题。</li>
