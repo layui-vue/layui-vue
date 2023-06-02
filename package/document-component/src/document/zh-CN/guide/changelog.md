@@ -15,6 +15,17 @@
     <lay-timeline>
         <lay-timeline-item title="2.1.x">
             <ul>
+                <a name="2-2-0"></a>
+                <li>
+                    <h3>2.2.0 <span class="layui-badge-rim">2023-05-18</span></h3>
+                    <ul>
+                        <li>[新增] form 组件 label-wdith 属性，用于统一设置 form-item 标签宽度。</li>
+                    </ul>  
+                </li>
+            </ul>
+        </lay-timeline-item>
+        <lay-timeline-item title="2.1.x">
+            <ul>
                 <a name="2-1-4"></a>
                 <li>
                     <h3>2.1.4 <span class="layui-badge-rim">2023-06-01</span></h3>

@@ -18,6 +18,7 @@ export interface FormProps {
   initValidate?: boolean;
   requiredIcons?: string;
   labelPosition?: string;
+  labelWidth?: string;
   requiredErrorMessage?: string;
   validateMessage?: ValidateMessages;
   useCN?: boolean;

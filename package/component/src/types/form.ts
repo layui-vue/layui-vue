@@ -16,6 +16,7 @@ export interface LayFormContext {
   removeField: (field: LayFormItemContext) => void;
   pane?: boolean;
   labelPosition?: boolean;
+  labelWidth?: string;
 }
 
 export interface LayFormItemContext {

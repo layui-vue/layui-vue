@@ -43,8 +43,7 @@ export interface FormItemProps {
 }
 
 const props = withDefaults(defineProps<FormItemProps>(), {
-  mode: "block",
-  labelWidth: 95,
+  mode: "block"
 });
 
 const layForm = inject("LayForm", {} as LayFormContext);
@@ -231,14 +230,21 @@ const showLabel = computed(() => {
   return slots.label != undefined || props.label != undefined;
 });
 
+const labelWidthComputedRef = computed(() => {
+  return props.labelWidth || layForm.labelWidth || 95;
+})
+
 const getMarginLeft = computed(() => {
   if (props.mode == "block") {
     if (itemLabelPosition.value != "top") {
+
+      // 将 label-Width 转化为 number 类型
       let labelWidth =
-        typeof props.labelWidth === "string"
-          ? parseFloat(props.labelWidth)
-          : props.labelWidth;
-      // 如果不是方框风格，增加 15 左边距
+        typeof labelWidthComputedRef.value === "string"
+          ? parseFloat(labelWidthComputedRef.value)
+          : labelWidthComputedRef.value;
+      
+      // No Pane，增加 15 左边距
       if (!layForm.pane) {
         labelWidth += 15;
       }
@@ -270,7 +276,7 @@ const getMarginLeft = computed(() => {
     <label
       class="layui-form-label"
       v-if="showLabel"
-      :style="{ width: labelWidth + 'px' }"
+      :style="{ width: labelWidthComputedRef + 'px' }"
     >
       <span
         v-if="props.prop && isRequired"
