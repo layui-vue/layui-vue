@@ -43,7 +43,7 @@ export interface FormItemProps {
 }
 
 const props = withDefaults(defineProps<FormItemProps>(), {
-  mode: "block"
+  mode: "block",
 });
 
 const layForm = inject("LayForm", {} as LayFormContext);
@@ -232,18 +232,17 @@ const showLabel = computed(() => {
 
 const labelWidthComputedRef = computed(() => {
   return props.labelWidth || layForm.labelWidth || 95;
-})
+});
 
 const getMarginLeft = computed(() => {
   if (props.mode == "block") {
     if (itemLabelPosition.value != "top") {
-
       // 将 label-Width 转化为 number 类型
       let labelWidth =
         typeof labelWidthComputedRef.value === "string"
           ? parseFloat(labelWidthComputedRef.value)
           : labelWidthComputedRef.value;
-      
+
       // No Pane，增加 15 左边距
       if (!layForm.pane) {
         labelWidth += 15;

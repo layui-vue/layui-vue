@@ -49,8 +49,7 @@ const submit = () => {
 ::: demo 通过 `pane` 属性，启用方框风格，默认为 `false`。
 
 <template>
- <lay-slider :showDots="true" :step="10" :max="100" v-model="labelWidth" :disabled="false"></lay-slider>
-  <lay-form :model="model1" :pane="true" :labelWidth="labelWidth">
+  <lay-form :model="model1" :pane="true">
     <lay-form-item label="账户" prop="username">
       <lay-input v-model="model1.username"></lay-input>
     </lay-form-item>
@@ -112,8 +111,6 @@ import { ref, reactive } from 'vue'
 import {layer} from '@layui/layer-vue'
 
 const model1 = reactive({})
-
-const labelWidth = ref(100)
 
 const options = [
 	{
