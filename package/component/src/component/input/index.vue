@@ -9,6 +9,7 @@ import "./index.less";
 import { LayIcon } from "@layui/icons-vue";
 import { computed, ref, useSlots, watch, nextTick } from "vue";
 import { InputSize } from "./interface";
+import useProps from "./index.hooks";
 
 export interface InputProps {
   name?: string;
@@ -36,7 +37,6 @@ const props = withDefaults(defineProps<InputProps>(), {
   autofocus: false,
   password: false,
   modelValue: "",
-  size: "md",
 });
 
 interface InputEmits {
@@ -47,6 +47,8 @@ interface InputEmits {
   (e: "focus", eventParam: Event): void;
   (e: "clear"): void;
 }
+
+const { size } = useProps(props);
 
 const emit = defineEmits<InputEmits>();
 
