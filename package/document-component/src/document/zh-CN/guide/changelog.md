@@ -17,13 +17,17 @@
             <ul>
                 <a name="2-2-0"></a>
                 <li>
-                    <h3>2.2.0 <span class="layui-badge-rim">2023-05-18</span></h3>
+                    <h3>2.2.0 <span class="layui-badge-rim">2023-06-03</span></h3>
                     <ul>
                         <li>[新增] form 组件 label-wdith 属性，用于统一设置 form-item 标签宽度。</li>
                         <li>[新增] color-picker 组件 size 属性，默认值为 md, lg sm xs 为可选值。</li>
                         <li>[新增] icon-picker 组件 size 属性，默认值为 md, lg sm xs 为可选值。</li>
                         <li>[新增] form 组件 size 属性，加入 input 等组件兼容，全局设置表单尺寸。</li>
+                        <li>[新增] form-item 组件 size 属性，默认值为 md, lg sm xs 为可选值。</li>
                         <li>[优化] cascader 组件，统一 sm xs lg md 尺寸宽度皆为 220px。</li>
+                        <li>[优化] radio-button 组件，移除 margin-bottom: 5px 外边距。</li>
+                        <li>[优化] button 组件 sm 与 xs 样式规范，高度调整为 32px 与 26px。</li>
+                        <li>[优化] color-picker 组件样式，自定义宽度后排版不合理的问题。</li>
                     </ul>  
                 </li>
             </ul>

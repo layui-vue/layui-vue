@@ -51,10 +51,10 @@ const submit = () => {
 <template>
   <lay-form :model="model1" :pane="true" :size="size1">
   	<lay-form-item label="单选">
-      <lay-radio-button v-model="size1" name="action" value="lg" label="lg"></lay-radio-button>
-      <lay-radio-button v-model="size1" name="action" value="md" label="md"></lay-radio-button>
-	  <lay-radio-button v-model="size1" name="action" value="sm" label="sm"></lay-radio-button>
-	  <lay-radio-button v-model="size1" name="action" value="xs" label="xs"></lay-radio-button>
+      <lay-radio-button v-model="size1" name="action" value="lg" label="极大"></lay-radio-button>
+      <lay-radio-button v-model="size1" name="action" value="md" label="默认"></lay-radio-button>
+	  <lay-radio-button v-model="size1" name="action" value="sm" label="微小"></lay-radio-button>
+	  <lay-radio-button v-model="size1" name="action" value="xs" label="极小"></lay-radio-button>
     </lay-form-item>
     <lay-form-item label="账户" prop="username">
       <lay-input v-model="model1.username"></lay-input>

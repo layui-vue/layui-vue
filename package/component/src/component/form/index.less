@@ -1,3 +1,44 @@
+.layui-form-item[size="lg"] {
+  .layui-form-label {
+    height: 44px;
+    font-size: 16px;
+  }
+  .layui-input-block {
+    min-height: 44px;
+  }
+}
+
+.layui-form-item[size="md"] {
+  .layui-form-label {
+    height: 38px;
+    font-size: 14px;
+  }
+  .layui-input-block {
+    min-height: 38px;
+  }
+}
+
+.layui-form-item[size="sm"] {
+  .layui-form-label {
+    height: 32px;
+    font-size: 12px;
+  }
+  .layui-input-block {
+    min-height: 32px;
+  }
+}
+
+.layui-form-item[size="xs"] {
+  .layui-form-label {
+    height: 26px;
+    font-size: 12px;
+  }
+  .layui-input-block {
+    min-height: 26px;
+  }
+}
+
+
 .layui-form-item {
   margin-bottom: 20px;
   clear: both;
@@ -160,14 +201,14 @@
 }
 
 .layui-form-pane .layui-form-label {
-  width: 110px;
-  padding: 8px 15px;
-  height: 38px;
-  line-height: 20px;
+  padding: 0px 15px;
   border-width: 1px;
   overflow: hidden;
   white-space: nowrap;
   background-color: #fafafa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-overflow: ellipsis;
   box-sizing: border-box;
   border-style: solid;
@@ -186,6 +227,11 @@
 
 .layui-form-pane .layui-input:first-child {
   border-radius: 0 var(--global-border-radius) var(--global-border-radius) 0
+}
+
+.layui-form-pane .layui-radio-button:first-child .layui-btn {
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
 }
 
 .layui-form-pane .layui-form-item:has(.layui-textarea) {

@@ -29,6 +29,7 @@ import Schema, {
   ValidateCallback,
 } from "async-validator";
 import cnValidateMessage from "./cnValidateMessage";
+import useProps from "./index.hooks";
 
 export interface FormItemProps {
   prop?: string;
@@ -40,11 +41,14 @@ export interface FormItemProps {
   rules?: Rule;
   required?: boolean;
   requiredErrorMessage?: string;
+  size?: string;
 }
 
 const props = withDefaults(defineProps<FormItemProps>(), {
   mode: "block",
 });
+
+const { size } = useProps(props);
 
 const layForm = inject("LayForm", {} as LayFormContext);
 const formItemRef = ref<HTMLDivElement>();
@@ -270,6 +274,7 @@ const getMarginLeft = computed(() => {
   <div
     class="layui-form-item"
     :class="[`layui-form-item-${itemLabelPosition}`, mode]"
+    :size="size"
     ref="formItemRef"
   >
     <label

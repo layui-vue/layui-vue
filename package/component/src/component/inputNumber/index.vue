@@ -32,7 +32,7 @@ const props = withDefaults(defineProps<InputNumberProps>(), {
   modelValue: 0,
   step: 1,
   min: -Infinity,
-  max: Infinity
+  max: Infinity,
 });
 
 const { size } = useProps(props);

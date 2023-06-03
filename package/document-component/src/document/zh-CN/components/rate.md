@@ -190,11 +190,10 @@ export default {
 ::: title 触发事件
 :::
 
-::: demo
+::: demo F12 打开调试工具 -> console 控制面板进行查看
 
 <template>
   <lay-rate v-model="val" @select="selectRate"></lay-rate>
-  <div>F12 打开调试工具 -> console 控制面板进行查看</div>
 </template>
 
 <script>
