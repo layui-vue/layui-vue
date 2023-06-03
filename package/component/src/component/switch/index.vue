@@ -8,6 +8,7 @@ export default {
 import { computed } from "vue";
 import "./index.less";
 import { SwitchSize } from "./interface";
+import useProps from "./index.hooks";
 
 export interface SwitchProps {
   name?: string;
@@ -29,8 +30,9 @@ const props = withDefaults(defineProps<SwitchProps>(), {
   onswitchValue: true,
   unswitchValue: false,
   loadingIcon: "layui-icon-loading-one",
-  size: "md",
 });
+
+const { size } = useProps(props);
 
 const emit = defineEmits(["update:modelValue", "change"]);
 

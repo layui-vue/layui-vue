@@ -27,6 +27,7 @@ import LaySelectOption, { SelectOptionProps } from "../selectOption/index.vue";
 import { SelectSize } from "./interface";
 import { isArrayChildren } from "../../utils";
 import LaySelectOptionGroup from "../selectOptionGroup/index.vue";
+import useProps from "./index.hooks";
 
 export interface SelectProps {
   name?: string;
@@ -59,9 +60,10 @@ const props = withDefaults(defineProps<SelectProps>(), {
   showSearch: false,
   modelValue: null,
   disabled: false,
-  multiple: false,
-  size: "md",
+  multiple: false
 });
+
+const { size } = useProps(props);
 
 const slots = useSlots();
 const selectRef = ref();
