@@ -20,6 +20,7 @@
                     <h3>2.2.0 <span class="layui-badge-rim">2023-05-18</span></h3>
                     <ul>
                         <li>[新增] form 组件 label-wdith 属性，用于统一设置 form-item 标签宽度。</li>
+                        <li>[新增] color-picker 组件 size 属性，默认值为 md, lg sm xs 为可选值。</li>
                         <li>[新增] icon-picker 组件 size 属性，默认值为 md, lg sm xs 为可选值。</li>
                     </ul>  
                 </li>

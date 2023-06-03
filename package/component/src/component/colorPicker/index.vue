@@ -10,6 +10,7 @@ import LayDropdown from "../dropdown/index.vue";
 import { ref, computed, watch, onMounted, StyleValue } from "vue";
 import { useEyeDropper } from "@vueuse/core";
 import { LayIcon } from "@layui/icons-vue";
+import useProps from "./index.hooks";
 
 export interface ColorPicker {
   modelValue?: any;
@@ -18,6 +19,7 @@ export interface ColorPicker {
   eyeDropper?: boolean;
   contentClass?: string | Array<string | object> | object;
   contentStyle?: StyleValue;
+  size?: string;
 }
 
 const emit = defineEmits(["update:modelValue"]);
@@ -27,6 +29,8 @@ const props = withDefaults(defineProps<ColorPicker>(), {
   preset: ["#009688", "#1e9fff", "#ffb800", "#ff5722", "#5fb878"],
   disabled: false,
 });
+
+const { size } = useProps(props);
 
 const saturationValue = ref<null | HTMLElement>(null);
 const hueSlider = ref<null | HTMLElement>(null);
@@ -425,6 +429,7 @@ function hex2rgba(s: any) {
     <div
       class="layui-unselect layui-colorpicker"
       :class="[{ 'layui-colorpicker-disabled': disabled }]"
+      :size="size"
     >
       <span>
         <span

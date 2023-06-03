@@ -17,6 +17,7 @@ export interface LayFormContext {
   pane?: boolean;
   labelPosition?: boolean;
   labelWidth?: string;
+  size?: string;
 }
 
 export interface LayFormItemContext {

@@ -65,6 +65,9 @@ const submit = () => {
     <lay-form-item label="头像" prop="username" mode="inline">
       <lay-icon-picker v-model="model1.avatar" allow-clear></lay-icon-picker>
     </lay-form-item>
+	<lay-form-item label="头像" prop="username" mode="inline">
+      <lay-color-picker v-model="model1.avatar"></lay-color-picker>
+    </lay-form-item>
     <lay-form-item label="喜好" prop="like" mode="inline">
       <lay-input v-model="model1.like"></lay-input>
     </lay-form-item>
