@@ -49,7 +49,10 @@ const submit = () => {
 ::: demo 通过 `pane` 属性，启用方框风格，默认为 `false`。
 
 <template>
-  <lay-form :model="model1" :pane="true" :size="size1">
+  <lay-form :model="model1" :pane="pane1" :size="size1">
+    <lay-form-item label="开关" prop="switch" mode="inline">
+      <lay-switch v-model="pane1"></lay-switch>
+    </lay-form-item>
   	<lay-form-item label="单选">
       <lay-radio-button v-model="size1" name="action" value="lg" label="极大"></lay-radio-button>
       <lay-radio-button v-model="size1" name="action" value="md" label="默认"></lay-radio-button>
@@ -122,6 +125,8 @@ import {layer} from '@layui/layer-vue'
 const model1 = reactive({})
 
 const size1 = ref("md");
+
+const pane1 = ref(false);
 
 const options = [
 	{
