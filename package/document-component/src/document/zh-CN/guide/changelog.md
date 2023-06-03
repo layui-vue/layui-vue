@@ -22,7 +22,8 @@
                         <li>[新增] form 组件 label-wdith 属性，用于统一设置 form-item 标签宽度。</li>
                         <li>[新增] color-picker 组件 size 属性，默认值为 md, lg sm xs 为可选值。</li>
                         <li>[新增] icon-picker 组件 size 属性，默认值为 md, lg sm xs 为可选值。</li>
-                        <li>[新增] form 组件 size 属性，增加 input，select 等组件兼容，全局设置表单尺寸。</li>
+                        <li>[新增] form 组件 size 属性，加入 input 等组件兼容，全局设置表单尺寸。</li>
+                        <li>[优化] cascader 组件，统一 sm xs lg md 尺寸宽度皆为 220px。</li>
                     </ul>  
                 </li>
             </ul>

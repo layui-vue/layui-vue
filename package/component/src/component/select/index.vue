@@ -60,7 +60,7 @@ const props = withDefaults(defineProps<SelectProps>(), {
   showSearch: false,
   modelValue: null,
   disabled: false,
-  multiple: false
+  multiple: false,
 });
 
 const { size } = useProps(props);
