@@ -49,7 +49,13 @@ const submit = () => {
 ::: demo 通过 `pane` 属性，启用方框风格，默认为 `false`。
 
 <template>
-  <lay-form :model="model1" :pane="true">
+  <lay-form :model="model1" :pane="true" :size="size1">
+  	<lay-form-item label="单选">
+      <lay-radio v-model="size1" name="action" value="lg" label="lg"></lay-radio>
+      <lay-radio v-model="size1" name="action" value="md" label="md"></lay-radio>
+	  <lay-radio v-model="size1" name="action" value="sm" label="sm"></lay-radio>
+	  <lay-radio v-model="size1" name="action" value="xs" label="xs"></lay-radio>
+    </lay-form-item>
     <lay-form-item label="账户" prop="username">
       <lay-input v-model="model1.username"></lay-input>
     </lay-form-item>
@@ -57,7 +63,7 @@ const submit = () => {
       <lay-input v-model="model1.password" type="password"></lay-input>
     </lay-form-item>
     <lay-form-item label="头像" prop="username" mode="inline">
-      <lay-icon-picker v-model="model1.avatar"></lay-icon-picker>
+      <lay-icon-picker v-model="model1.avatar" allow-clear></lay-icon-picker>
     </lay-form-item>
     <lay-form-item label="喜好" prop="like" mode="inline">
       <lay-input v-model="model1.like"></lay-input>
@@ -111,6 +117,8 @@ import { ref, reactive } from 'vue'
 import {layer} from '@layui/layer-vue'
 
 const model1 = reactive({})
+
+const size1 = ref("md");
 
 const options = [
 	{

@@ -22,6 +22,7 @@ export interface FormProps {
   requiredErrorMessage?: string;
   validateMessage?: ValidateMessages;
   useCN?: boolean;
+  size?: string;
 }
 
 const props = withDefaults(defineProps<FormProps>(), {

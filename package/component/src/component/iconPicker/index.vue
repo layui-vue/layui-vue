@@ -11,6 +11,7 @@ import { LayIconList as icons, LayIcon } from "@layui/icons-vue";
 import LayDropdown from "../dropdown/index.vue";
 import LayScroll from "../scroll/index.vue";
 import LayInput from "../input/index.vue";
+import useProps from "./index.hooks";
 
 export interface IconPickerProps {
   page?: boolean;
@@ -20,6 +21,7 @@ export interface IconPickerProps {
   allowClear?: boolean;
   contentClass?: string | Array<string | object> | object;
   contentStyle?: StyleValue;
+  size?: string;
 }
 
 const props = withDefaults(defineProps<IconPickerProps>(), {
@@ -27,6 +29,8 @@ const props = withDefaults(defineProps<IconPickerProps>(), {
   disabled: false,
   page: false,
 });
+
+const { size } = useProps(props);
 
 const emit = defineEmits(["update:modelValue", "change"]);
 const selectedIcon = computed(() => props.modelValue);
@@ -166,14 +170,15 @@ const searchList = (str: string, container: any) => {
           'has-clear': allowClear,
         },
       ]"
+      :size="size"
     >
-      <div class="layui-inline layui-iconpicker-main">
-        <i class="layui-inline layui-icon" :class="[selectedIcon]"></i>
+      <div class="layui-iconpicker-main">
+        <i class="layui-icon" :class="[selectedIcon]"></i>
       </div>
       <span class="layui-icon-picker-clear">
         <lay-icon type="layui-icon-close-fill" @click.stop="onClear"></lay-icon>
       </span>
-      <span class="layui-inline layui-iconpicker-suffix"
+      <span class="layui-iconpicker-suffix"
         ><i
           class="layui-icon layui-icon-down"
           :class="[openState ? 'transform' : '']"
