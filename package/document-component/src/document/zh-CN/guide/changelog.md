@@ -28,6 +28,7 @@
                         <li>[优化] radio-button 组件，移除 margin-bottom: 5px 外边距。</li>
                         <li>[优化] button 组件 sm 与 xs 样式规范，高度调整为 32px 与 26px。</li>
                         <li>[优化] color-picker 组件样式，自定义宽度后排版不合理的问题。</li>
+                        <li>[优化] radio 组件 size 属性，不同值下给定不同的尺寸。</li>
                     </ul>  
                 </li>
             </ul>

@@ -3,26 +3,34 @@
 @radio-sm: 20px;
 @radio-xs: 18px;
 
-.set-size(@size) {
+@radio-label-lg: 16px;
+@radio-label-md: 14px;
+@radio-label-sm: 12px;
+@radio-label-xs: 12px;
+
+.set-size(@size, @fontSize) {
   & {
     .layui-form-radio > i {
       font-size: @size;
+    }
+    .layui-form-radio > span {
+      font-size: @fontSize;
     }
   }
 }
 
 .layui-radio{
   &[size="lg"] {
-    .set-size(@radio-lg);
+    .set-size(@radio-lg, @radio-label-lg);
   }
   &[size="md"] {
-    .set-size(@radio-md);
+    .set-size(@radio-md, @radio-label-md);
   }
   &[size="sm"] {
-    .set-size(@radio-sm);
+    .set-size(@radio-sm, @radio-label-sm);
   }
   &[size="xs"] {
-    .set-size(@radio-xs);
+    .set-size(@radio-xs, @radio-label-xs);
   }
 }
 
