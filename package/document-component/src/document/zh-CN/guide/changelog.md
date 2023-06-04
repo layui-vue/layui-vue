@@ -29,6 +29,9 @@
                         <li>[优化] button 组件 sm 与 xs 样式规范，高度调整为 32px 与 26px。</li>
                         <li>[优化] color-picker 组件样式，自定义宽度后排版不合理的问题。</li>
                         <li>[优化] radio 组件 size 属性，不同值下给定不同的尺寸。</li>
+                        <li>[优化] select 组件 多选模式 在 form 组件方框风格下的样式问题。</li>
+                        <li>[优化] tree-select 组件 多选模式 在 form 组件方框风格下的样式问题。</li>
+                        <li>[优化] tag-input 组件在 form 组件方框风格下的样式问题。</li>
                     </ul>  
                 </li>
             </ul>
