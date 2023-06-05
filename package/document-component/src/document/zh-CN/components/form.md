@@ -65,11 +65,11 @@ const submit = () => {
     <lay-form-item label="密码" prop="password">
       <lay-input v-model="model1.password" type="password"></lay-input>
     </lay-form-item>
-    <lay-form-item label="头像" prop="username" mode="inline">
+    <lay-form-item label="头像" prop="avatar" mode="inline">
       <lay-icon-picker v-model="model1.avatar" allow-clear></lay-icon-picker>
     </lay-form-item>
-	<lay-form-item label="头像" prop="username" mode="inline">
-      <lay-color-picker v-model="model1.avatar"></lay-color-picker>
+	<lay-form-item label="颜色" prop="color" mode="inline">
+      <lay-color-picker v-model="model1.color"></lay-color-picker>
     </lay-form-item>
     <lay-form-item label="喜好" prop="like" mode="inline">
       <lay-input v-model="model1.like"></lay-input>
@@ -83,6 +83,9 @@ const submit = () => {
     </lay-form-item>
     <lay-form-item label="开关" prop="switch" mode="inline">
       <lay-switch v-model="model1.switch"></lay-switch>
+    </lay-form-item>
+	<lay-form-item label="开关" prop="switch" mode="inline">
+      <lay-upload v-model="model1.switch"></lay-upload>
     </lay-form-item>
 	<lay-form-item label="复选">
       <lay-checkbox-group v-model="model1.checkbox">
@@ -126,7 +129,7 @@ const model1 = reactive({})
 
 const size1 = ref("md");
 
-const pane1 = ref(false);
+const pane1 = ref(true);
 
 const options = [
 	{
