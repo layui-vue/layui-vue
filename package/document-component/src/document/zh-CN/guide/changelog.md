@@ -33,6 +33,7 @@
                         <li>[优化] tree-select 组件 多选模式 在 form 组件方框风格下的样式问题。</li>
                         <li>[优化] tag-input 组件在 form 组件方框风格下的样式问题。</li>
                         <li>[优化] checkbox 组件在不同尺寸下 icon 与 label 的间隔问题。</li>
+                        <li>[优化] select 组件多选模式下复选框与文本之间的间隔过大的问题。</li>
                     </ul>  
                 </li>
             </ul>
