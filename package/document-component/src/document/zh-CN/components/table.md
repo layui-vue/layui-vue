@@ -60,6 +60,7 @@ export default {
       { title:"年龄", width: "80px", key:"age" },
       { title:"城市", width: "120px", key:"city" },
       { title:"签名", width: "260px", key:"remark" },
+      { title:"隐藏列", width: "260px", key:"hide", hide: true },
       { title:"时间", width: "120px", key:"joinTime" },
       { title:"操作", width: "150px", customSlot:"operator", key:"operator", fixed: "right" }
     ]);
@@ -945,7 +946,7 @@ const dataSource9 = ref([
 | type            | 列类型                         | `string`  | --      | `number` `checkbox` `radio` | --      |
 | children        | 表头分组                       | `string`  | --      | `number` `checkbox` `radio` | `1.4.0` |
 | resize          | 单元格列宽拖动                 | `boolean` | `false` | `true` `false`              | `1.9.4` |
-
+| hide            | 默认是否隐藏                   | `boolean` | `false` | `true` `false`              | `1.9.4` |
 :::
 
 ::: previousNext table
