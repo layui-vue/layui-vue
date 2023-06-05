@@ -120,6 +120,7 @@ export default {
 | ---------- | -------- | --- |--- |--- |
 | v-model    | 选中色   | --  |--  |--  |
 | preset | 预设颜色 | --  |--  |--  |
+| size | 尺寸 | --  |--  |--  |
 | eyeDropper | 取色器 | `boolean`  |--  |--  |
 | disabled | 禁用 | `boolean`  |--  |--  |
 | contentStyle             | 内容自定义样式     | `StyleValue` | -- | -- |
