@@ -94,11 +94,8 @@ const classes = computed(() => {
         :disabled="disabled"
         :value="value"
       >
-        <slot>{{ label }}</slot>
       </lay-checkbox>
     </template>
-    <template v-else>
-      <slot>{{ label }}</slot>
-    </template>
+    <slot>{{ label }}</slot>
   </dd>
 </template>
