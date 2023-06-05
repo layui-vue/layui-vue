@@ -84,9 +84,6 @@ const submit = () => {
     <lay-form-item label="开关" prop="switch" mode="inline">
       <lay-switch v-model="model1.switch"></lay-switch>
     </lay-form-item>
-	<lay-form-item label="开关" prop="switch" mode="inline">
-      <lay-upload v-model="model1.switch"></lay-upload>
-    </lay-form-item>
 	<lay-form-item label="复选">
       <lay-checkbox-group v-model="model1.checkbox">
         <lay-checkbox name="like" skin="primary" value="1">写作</lay-checkbox>
