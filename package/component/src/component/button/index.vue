@@ -15,6 +15,7 @@ import {
   ButtonSize,
   ButtonType,
 } from "./interface";
+import useProps from "./index.hooks";
 
 export interface ButtonProps {
   type?: ButtonType;
@@ -40,6 +41,8 @@ const props = withDefaults(defineProps<ButtonProps>(), {
   fluid: false,
 });
 
+const { size } = useProps(props);
+
 const emits = defineEmits(ButtonEmits);
 
 const onClick = (event: MouseEvent) => {
@@ -62,7 +65,7 @@ const classes = computed(() => {
       "layui-btn-disabled": props.disabled,
     },
     props.type ? `layui-btn-${props.type}` : "",
-    props.size ? `layui-btn-${props.size}` : "",
+    size.value ? `layui-btn-${size.value}` : "",
     props.border ? `layui-border-${props.border}` : "",
   ];
 });

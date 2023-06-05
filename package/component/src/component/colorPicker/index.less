@@ -1,5 +1,29 @@
 @import "../dropdown/index.less";
 
+.layui-colorpicker[size="lg"] {
+  width: 44px;
+  padding: 6px;
+  height: 44px;
+}
+
+.layui-colorpicker[size="md"] {
+  width: 38px;
+  padding: 5px;
+  height: 38px;
+}
+
+.layui-colorpicker[size="sm"] {
+  width: 32px;
+  padding: 4px;
+  height: 32px;
+}
+
+.layui-colorpicker[size="xs"] {
+  width: 26px;
+  padding: 3px;
+  height: 26px;
+}
+
 .layui-color-picker {
   position: relative;
   user-select: none;
@@ -98,12 +122,12 @@
 }
 
 .layui-colorpicker > span {
-  width: 26px;
-  height: 26px;
+  width: 100%;
   display: block;
   border-radius: var(--global-border-radius);
   background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAWElEQVRIiWM8fubkfwYygKWJOSM5+mCAhRLNoxaPWjxq8ajFoxbTyeL/DAfJ0Xjs3Cl7Siwmu4Yht1aDgZEYx6MWj1o8avGoxaMWD3qLya5X//4nqx6HAQC7RBGFzolqTAAAAABJRU5ErkJggg==");
   background-size: 10px 10px;
+  height: 100%;
 }
 
 .color-value {
@@ -170,14 +194,14 @@
 }
 
 .layui-colorpicker {
-  border: 1px solid var(--global-neutral-color-3);
   padding: 5px;
   border-radius: var(--global-border-radius);
-  line-height: 24px;
-  display: inline-block;
-  cursor: pointer;
+  border: 1px solid var(--global-neutral-color-3);
   transition: all 0.3s;
   -webkit-transition: all 0.3s;
+  box-sizing: border-box;
+  display: inline-block;
+  cursor: pointer;
 }
 
 .layui-colorpicker:hover {
@@ -209,11 +233,13 @@
 }
 
 .layui-colorpicker-trigger-span {
-  display: block;
   height: 100%;
-  box-sizing: border-box;
+  justify-content: center;
+  align-items: center;
+  display: flex;
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: var(--global-border-radius);
+  box-sizing: border-box;
   text-align: center;
 }
 

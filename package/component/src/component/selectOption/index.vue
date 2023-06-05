@@ -93,7 +93,8 @@ const classes = computed(() => {
         v-model="selectedValue"
         :disabled="disabled"
         :value="value"
-      ></lay-checkbox>
+      >
+      </lay-checkbox>
     </template>
     <slot>{{ label }}</slot>
   </dd>

@@ -89,6 +89,7 @@ import LayScroll from "../scroll/index.vue";
 import LayDropdown from "../dropdown/index.vue";
 import { ref, onMounted, watch, useSlots, StyleValue, computed } from "vue";
 import { CascaderSize } from "./interface";
+import useProps from "./index.hooks";
 
 export type DropdownTrigger = "click" | "hover" | "focus" | "contextMenu";
 
@@ -116,7 +117,6 @@ const props = withDefaults(defineProps<CascaderProps>(), {
   onlyLastLevel: false,
   allowClear: false,
   disabled: false,
-  size: "md",
   trigger: "click",
   changeOnSelect: false,
   replaceFields: () => {
@@ -127,6 +127,8 @@ const props = withDefaults(defineProps<CascaderProps>(), {
     };
   },
 });
+
+const { size } = useProps(props);
 
 const emit = defineEmits(["update:modelValue", "change", "clear"]);
 

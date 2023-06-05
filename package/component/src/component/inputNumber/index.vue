@@ -12,6 +12,7 @@ import layButton from "../button/index.vue";
 import { ref, watch, withDefaults, computed, Ref } from "vue";
 import { InputNumberSize } from "./interface";
 import { add, sub } from "./math";
+import useProps from "./index.hooks";
 
 export interface InputNumberProps {
   modelValue?: number;
@@ -32,8 +33,9 @@ const props = withDefaults(defineProps<InputNumberProps>(), {
   step: 1,
   min: -Infinity,
   max: Infinity,
-  size: "md",
 });
+
+const { size } = useProps(props);
 
 const emit = defineEmits(["update:modelValue", "change"]);
 let num: Ref<number> = ref(props.modelValue);

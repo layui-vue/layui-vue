@@ -14,6 +14,7 @@ import LayInput from "../input/index.vue";
 import LayTagInput from "../tagInput/index.vue";
 import LayDropdown from "../dropdown/index.vue";
 import LayTree from "../tree/index.vue";
+import useProps from "./index.hooks";
 
 export interface TreeSelectProps {
   data: any;
@@ -44,9 +45,10 @@ const props = withDefaults(defineProps<TreeSelectProps>(), {
   checkStrictly: true,
   collapseTagsTooltip: true,
   minCollapsedNum: 3,
-  size: "md",
   search: false,
 });
+
+const { size } = useProps(props);
 
 const treeData = ref();
 const searchValue = ref();

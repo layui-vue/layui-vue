@@ -5,6 +5,8 @@ export default {
 </script>
 
 <script setup lang="ts">
+import "./index.less";
+
 export interface SelectOptionGroupProps {
   label?: string;
 }

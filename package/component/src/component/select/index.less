@@ -50,10 +50,12 @@
 }
 
 .layui-select-content .layui-select-option .layui-form-checkbox[lay-skin="primary"] {
-  padding-left: 12px;
+  padding-left: 0px !important;
 }
 
-.layui-select-content .layui-select-option.layui-this {
+.layui-select-content .layui-select-option.layui-this ,
+.layui-select-content .layui-select-option.layui-this .layui-checkbox-label
+{
   background-color: var(--global-neutral-color-2);
   color: var(--global-checked-color);
   font-weight: 700;

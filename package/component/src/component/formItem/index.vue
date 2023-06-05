@@ -29,6 +29,7 @@ import Schema, {
   ValidateCallback,
 } from "async-validator";
 import cnValidateMessage from "./cnValidateMessage";
+import useProps from "./index.hooks";
 
 export interface FormItemProps {
   prop?: string;
@@ -40,12 +41,14 @@ export interface FormItemProps {
   rules?: Rule;
   required?: boolean;
   requiredErrorMessage?: string;
+  size?: string;
 }
 
 const props = withDefaults(defineProps<FormItemProps>(), {
   mode: "block",
-  labelWidth: 95,
 });
+
+const { size } = useProps(props);
 
 const layForm = inject("LayForm", {} as LayFormContext);
 const formItemRef = ref<HTMLDivElement>();
@@ -231,14 +234,20 @@ const showLabel = computed(() => {
   return slots.label != undefined || props.label != undefined;
 });
 
+const labelWidthComputedRef = computed(() => {
+  return props.labelWidth || layForm.labelWidth || 95;
+});
+
 const getMarginLeft = computed(() => {
   if (props.mode == "block") {
     if (itemLabelPosition.value != "top") {
+      // 将 label-Width 转化为 number 类型
       let labelWidth =
-        typeof props.labelWidth === "string"
-          ? parseFloat(props.labelWidth)
-          : props.labelWidth;
-      // 如果不是方框风格，增加 15 左边距
+        typeof labelWidthComputedRef.value === "string"
+          ? parseFloat(labelWidthComputedRef.value)
+          : labelWidthComputedRef.value;
+
+      // No Pane，增加 15 左边距
       if (!layForm.pane) {
         labelWidth += 15;
       }
@@ -265,12 +274,13 @@ const getMarginLeft = computed(() => {
   <div
     class="layui-form-item"
     :class="[`layui-form-item-${itemLabelPosition}`, mode]"
+    :size="size"
     ref="formItemRef"
   >
     <label
       class="layui-form-label"
       v-if="showLabel"
-      :style="{ width: labelWidth + 'px' }"
+      :style="{ width: labelWidthComputedRef + 'px' }"
     >
       <span
         v-if="props.prop && isRequired"

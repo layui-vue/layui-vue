@@ -49,15 +49,27 @@ const submit = () => {
 ::: demo 通过 `pane` 属性，启用方框风格，默认为 `false`。
 
 <template>
-  <lay-form :model="model1" :pane="true">
-    <lay-form-item label="账户" prop="username" mode="inline">
+  <lay-form :model="model1" :pane="pane1" :size="size1">
+    <lay-form-item label="开关" prop="switch" mode="inline">
+      <lay-switch v-model="pane1"></lay-switch>
+    </lay-form-item>
+  	<lay-form-item label="单选">
+      <lay-radio-button v-model="size1" name="action" value="lg" label="极大"></lay-radio-button>
+      <lay-radio-button v-model="size1" name="action" value="md" label="默认"></lay-radio-button>
+	  <lay-radio-button v-model="size1" name="action" value="sm" label="微小"></lay-radio-button>
+	  <lay-radio-button v-model="size1" name="action" value="xs" label="极小"></lay-radio-button>
+    </lay-form-item>
+    <lay-form-item label="账户" prop="username">
       <lay-input v-model="model1.username"></lay-input>
     </lay-form-item>
-    <lay-form-item label="密码" prop="password" mode="inline">
+    <lay-form-item label="密码" prop="password">
       <lay-input v-model="model1.password" type="password"></lay-input>
     </lay-form-item>
-    <lay-form-item label="头像" prop="username" mode="inline">
-      <lay-icon-picker v-model="model1.avatar"></lay-icon-picker>
+    <lay-form-item label="头像" prop="avatar" mode="inline">
+      <lay-icon-picker v-model="model1.avatar" allow-clear></lay-icon-picker>
+    </lay-form-item>
+	<lay-form-item label="颜色" prop="color" mode="inline">
+      <lay-color-picker v-model="model1.color"></lay-color-picker>
     </lay-form-item>
     <lay-form-item label="喜好" prop="like" mode="inline">
       <lay-input v-model="model1.like"></lay-input>
@@ -111,6 +123,10 @@ import { ref, reactive } from 'vue'
 import {layer} from '@layui/layer-vue'
 
 const model1 = reactive({})
+
+const size1 = ref("md");
+
+const pane1 = ref(true);
 
 const options = [
 	{
@@ -816,7 +832,7 @@ const submit10 = function(isValidate, model, errors) {
 | validate-message        | 自定义校验错误提示信息; <br>由于内置了中文错误提示，可按需求增量增加<br>可查看 [async-validator 内置错误提示](https://github.com/yiminghe/async-validator/blob/master/src/messages.ts)<br>也可参考 [layui-vue 内置中文错误提示](https://gitee.com/layui/layui-vue/blob/next/package/component/src/component/formItem/cnValidateMessage.ts) | `string`  | -              | `%s不能为空` |
 | pane                    | 启用方框风格                 | `boolean`  |  `true` `false`              | `false` |
 | label-position          | 标签位置                     | `string`   |  `top` `right` `left`        | `right` |
-
+| size                    | 尺寸                        | --          |  --                          | --      |
 :::
 
 ::: title 表单(form)事件
@@ -859,7 +875,7 @@ const submit10 = function(isValidate, model, errors) {
 | rules                  | 表单校验规则; <br>可查看[async-validator](https://github.com/yiminghe/async-validator) | `object`          | -                    | -       |
 | error-message          | 表单校验失败固定提示语                                                                 | `string`          | --                   | --      |
 | mode                   | 表单项显示的模式，`块元素` / `行元素`                                                  | `string`          | `block` `inline`     | `block` |
-
+| size                   | 尺寸                                    | --          | --    | -- |
 :::
 
 ::: title 表单项(form-item)方法

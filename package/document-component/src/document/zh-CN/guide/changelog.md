@@ -13,11 +13,46 @@
 ::: demo
 <template>
     <lay-timeline>
-        <lay-timeline-item title="2.0.0">
+        <lay-timeline-item title="2.2.x">
+            <ul>
+                <a name="2-2-0"></a>
+                <li>
+                    <h3>2.2.0 <span class="layui-badge-rim">2023-06-03</span></h3>
+                    <ul>
+                        <li>[新增] table 组件 columns 配置 hide 属性，设置隐藏列，默认为 false。</li>
+                        <li>[新增] form 组件 label-wdith 属性，用于统一设置 form-item 标签宽度。</li>
+                        <li>[新增] color-picker 组件 size 属性，默认值为 md, lg sm xs 为可选值。</li>
+                        <li>[新增] icon-picker 组件 size 属性，默认值为 md, lg sm xs 为可选值。</li>
+                        <li>[新增] form 组件 size 属性，加入 input 等组件兼容，全局设置表单尺寸。</li>
+                        <li>[新增] form-item 组件 size 属性，默认值为 md, lg sm xs 为可选值。</li>
+                        <li>[优化] cascader 组件，统一 sm xs lg md 尺寸宽度皆为 220px。</li>
+                        <li>[优化] radio-button 组件，移除 margin-bottom: 5px 外边距。</li>
+                        <li>[优化] button 组件 sm 与 xs 样式规范，高度调整为 32px 与 26px。</li>
+                        <li>[优化] color-picker 组件样式，自定义宽度后排版不合理的问题。</li>
+                        <li>[优化] radio 组件 size 属性，不同值下给定不同的尺寸。</li>
+                        <li>[优化] select 组件 多选模式 在 form 组件方框风格下的样式问题。</li>
+                        <li>[优化] tree-select 组件 多选模式 在 form 组件方框风格下的样式问题。</li>
+                        <li>[优化] tag-input 组件在 form 组件方框风格下的样式问题。</li>
+                        <li>[优化] checkbox 组件在不同尺寸下 icon 与 label 的间隔问题。</li>
+                        <li>[优化] select 组件多选模式下复选框与文本之间的间隔过大的问题。</li>
+                    </ul>  
+                </li>
+            </ul>
+        </lay-timeline-item>
+        <lay-timeline-item title="2.1.x">
+            <ul>
+                <a name="2-1-4"></a>
+                <li>
+                    <h3>2.1.4 <span class="layui-badge-rim">2023-06-01</span></h3>
+                    <ul>
+                        <li>[修复] select-option-group 组件按需场景无法找到 index.less 的问题。</li>
+                    </ul>  
+                </li>
+            </ul>
             <ul>
                 <a name="2-1-3"></a>
                 <li>
-                    <h3>2.1.3 <span class="layui-badge-rim">2023-05-31</span></h3>
+                    <h3>2.1.3 <span class="layui-badge-rim">2023-06-01</span></h3>
                     <ul>
                         <li>[修复] tab 组件 title 属性缺失响应式的问题。</li>
                         <li>[修复] tab 组件 icon 属性缺失响应式的问题。</li>
@@ -63,9 +98,9 @@
                 </li>
             </ul>
         </lay-timeline-item>
-        <lay-timeline-item title="2.0.0">
+        <lay-timeline-item title="2.0.x">
             <ul>
-                <a name="2-0-0"></a>
+                <a name="2-0-5"></a>
                 <li>
                     <h3>2.0.5 <span class="layui-badge-rim">2023-05-22</span></h3>
                     <ul>
@@ -77,7 +112,7 @@
                 </li>
             </ul>
             <ul>
-                <a name="2-0-0"></a>
+                <a name="2-0-4"></a>
                 <li>
                     <h3>2.0.4 <span class="layui-badge-rim">2023-05-21</span></h3>
                     <ul>
@@ -89,7 +124,7 @@
                 </li>
             </ul>
             <ul>
-                <a name="2-0-0"></a>
+                <a name="2-0-3"></a>
                 <li>
                     <h3>2.0.3 <span class="layui-badge-rim">2023-05-20</span></h3>
                     <ul>
@@ -100,7 +135,7 @@
                 </li>
             </ul>
             <ul>
-                <a name="2-0-0"></a>
+                <a name="2-0-2"></a>
                 <li>
                     <h3>2.0.2 <span class="layui-badge-rim">2023-05-19</span></h3>
                     <ul>
@@ -110,7 +145,7 @@
                 </li>
             </ul>
             <ul>
-                <a name="2-0-0"></a>
+                <a name="2-0-1"></a>
                 <li>
                     <h3>2.0.1 <span class="layui-badge-rim">2023-05-18</span></h3>
                     <ul>

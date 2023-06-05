@@ -146,6 +146,7 @@ export default {
 | ---------- | -------- | --- |--- |--- |
 | v-model    | 默认值   | --  |--  |--  |
 | page       | 开启分页 | --  |--  |--  |
+| size       | 尺寸 | --  |--  |--  |
 | showSearch | 启用搜索 | --  |--  |--  |
 | disabled | 禁用 | `boolean`  |--  |--  |
 | allow-clear | 允许清空 | `boolean`  |--  |--  |

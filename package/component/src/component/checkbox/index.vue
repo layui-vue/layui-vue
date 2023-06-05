@@ -9,6 +9,7 @@ import { LayIcon } from "@layui/icons-vue";
 import { computed, inject, useSlots } from "vue";
 import "./index.less";
 import { CheckboxSize } from "./interface";
+import useProps from "./index.hooks";
 
 export interface CheckboxProps {
   name?: string;
@@ -26,8 +27,9 @@ const props = withDefaults(defineProps<CheckboxProps>(), {
   modelValue: false,
   disabled: false,
   label: "",
-  size: "md",
 });
+
+const { size } = useProps(props);
 
 const checkboxGroup: any = inject("checkboxGroup", {});
 

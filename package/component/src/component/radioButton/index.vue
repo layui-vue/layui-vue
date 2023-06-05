@@ -2,6 +2,7 @@
 import { computed, inject } from "vue";
 import { RadioButtonSize } from "./typing";
 import { ButtonType } from "../button/interface";
+import useProps from "./index.hooks";
 export default {
   name: "LayRadioButton",
 };
@@ -25,9 +26,9 @@ export interface RadioButtonEmits {
   (e: "change", value: string | boolean | number | undefined): void;
 }
 
-const props = withDefaults(defineProps<RadioProps>(), {
-  size: "md",
-});
+const props = withDefaults(defineProps<RadioProps>(), {});
+
+const { size } = useProps(props);
 
 const emit = defineEmits<RadioButtonEmits>();
 
