@@ -171,11 +171,6 @@ function handleClick(node) {
 	v-model:checkedKeys="checkedKeys2"
   >
   </lay-tree>
-  <lay-space>
-    <lay-button @click="updateView2">更新数据</lay-button>
-  	<lay-button @click="updateCheckedKeys2">更新选择</lay-button>
-  	{{ checkedKeys2 }}
-  </lay-space>
 </template>
 
 <script setup>
@@ -183,14 +178,6 @@ import { ref } from 'vue';
 
 const checkedKeys2 = ref([]);
 const showCheckbox2 = ref(true);
-
-const updateCheckedKeys2=()=>{
-  checkedKeys2.value=[4]
-}
-
-const updateView2=()=>{
-  data3.value[0].title='更新视图'
-}
 
 const data2 = ref([{
 	title: '一级1',
