@@ -45,6 +45,7 @@ interface TreeEmits {
   (e: "update:expandKeys", keys: KeysType): void;
   (e: "update:checkedKeys", keys: KeysType): void;
   (e: "node-click", node: OriginalTreeData): void;
+  (e: "update:selectedKey", id: string | number): void;
 }
 
 const props = withDefaults(defineProps<TreeProps>(), {
@@ -153,8 +154,16 @@ onMounted(() => {
 
 function handleClick(node: TreeData) {
   const originNode = tree.value.getOriginData(node.id);
+  emit("update:selectedKey", node.id);
   emit("node-click", originNode);
 }
+
+const selectedKey = ref(props.selectedKey);
+
+watch(() => props.selectedKey, () => {
+  selectedKey.value = props.selectedKey;
+})
+
 </script>
 <template>
   <div :class="className">

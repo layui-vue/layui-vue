@@ -15,6 +15,8 @@
 <template>
   <lay-tree
     :data="data"
+	:onlyIconControl="true"
+	v-model:selectedKey="selectedKey"
     @node-click="handleClick"
   >
   </lay-tree>
@@ -22,6 +24,8 @@
 
 <script setup>
 import { ref } from 'vue';
+
+const selectedKey = ref(1);
 
 const data = ref([{
 	title: '一级1',
@@ -159,7 +163,7 @@ function handleClick(node) {
 
 :::
 
-::: title 选择节点
+::: title 启用多选
 :::
 
 ::: demo 使用 `showCheckbox` 属性开启复选框, `checkedKeys` 属性设置选中项。
@@ -477,6 +481,7 @@ const checkedKeys3 = ref([2,3])
 <template>
   <lay-tree
     :data="data"
+		v-model:selectedKey="selectedKey"
 	:showLine="showLine"
   >
   </lay-tree>
@@ -523,7 +528,7 @@ import { ref } from 'vue';
 | checkedKeys(v-model:checkedKeys) | 开启 showCheckbox 后, 选中的节点         | []              | |
 | expandKeys(v-model:expandKeys)   | 展开的节点 key 数组                      | []              | 1.8.7 |
 | collapse-transition              | 是否开启展示收起动画                     | false           | |
-
+| selectedKey                      | 选中节点                                  | --              | |
 :::
 
 ::: title Tree 数据

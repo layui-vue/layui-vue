@@ -146,7 +146,7 @@ const isChildAllSelected = computed(() => {
       'layui-tree-setHide': node.isRoot,
     }"
   >
-    <div class="layui-tree-entry" @click="handleRowClick(node)">
+    <div class="layui-tree-entry" :class="{'layui-this': selectedKey === node.id}" @click="handleRowClick(node)">
       <div class="layui-tree-main">
         <span
           :class="[
@@ -172,7 +172,6 @@ const isChildAllSelected = computed(() => {
           :class="{
             'layui-tree-txt': true,
             'layui-disabled': node.isDisabled,
-            'layui-this': selectedKey === node.id,
           }"
           @click.stop="handleTitleClick(node)"
         >
