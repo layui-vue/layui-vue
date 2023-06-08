@@ -224,6 +224,8 @@ export {
   LayLogo,
   LayPanel,
   LayCard,
+  LayCheckCard,
+  LayCheckCardGroup,
   LayProgress,
   LayButtonGroup,
   LayButtonContainer,
