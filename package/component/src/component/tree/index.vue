@@ -160,10 +160,12 @@ function handleClick(node: TreeData) {
 
 const selectedKey = ref(props.selectedKey);
 
-watch(() => props.selectedKey, () => {
-  selectedKey.value = props.selectedKey;
-})
-
+watch(
+  () => props.selectedKey,
+  () => {
+    selectedKey.value = props.selectedKey;
+  }
+);
 </script>
 <template>
   <div :class="className">
