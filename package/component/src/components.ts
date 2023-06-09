@@ -11,8 +11,8 @@ import LayButtonGroup from "./component/buttonGroup/index";
 import LayIcon from "./component/icon/index";
 import LayIconPicker from "./component/iconPicker/index";
 import LayCard from "./component/card/index";
-import LayCheckCard from "./component/checkcard/index";
-import LayCheckCardGroup from "./component/checkcardGroup/index";
+import LayCheckcard from "./component/checkcard/index";
+import LayCheckcardGroup from "./component/checkcardGroup/index";
 import LayCalendar from "./component/calendar/index";
 
 import LayLayout from "./component/layout/index";
@@ -112,8 +112,8 @@ declare module "@vue/runtime-core" {
     LayButtonGroup: typeof LayButtonGroup;
     LayButtonContainer: typeof LayButtonContainer;
     LayCard: typeof LayCard;
-    LayCheckCard: typeof LayCheckCard;
-    LayCheckCardGroup: typeof LayCheckCardGroup;
+    LayCheckcard: typeof LayCheckcard;
+    LayCheckcardGroup: typeof LayCheckcardGroup;
     LayCarousel: typeof LayCarousel;
     LayCarouselItem: typeof LayCarouselItem;
     LayCascader: typeof LayCascader;
