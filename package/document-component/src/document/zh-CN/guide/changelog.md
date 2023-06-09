@@ -15,6 +15,15 @@
     <lay-timeline>
         <lay-timeline-item title="2.2.x">
             <ul>
+                <a name="2-2-2"></a>
+                <li>
+                    <h3>2.2.2 <span class="layui-badge-rim">2023-06-09</span></h3>
+                    <ul>
+                        <li>[修复] checkcard-group 在 demand 环境 index.css 找不到的问题。</li>
+                    </ul>  
+                </li>
+            </ul>
+            <ul>
                 <a name="2-2-1"></a>
                 <li>
                     <h3>2.2.1 <span class="layui-badge-rim">2023-06-08</span></h3>

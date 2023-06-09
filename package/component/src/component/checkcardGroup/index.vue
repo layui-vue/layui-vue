@@ -15,7 +15,8 @@ export default {
 };
 </script>
 <script lang="ts" setup>
-import { ref, watch, provide, computed } from "vue";
+import { ref, watch, provide } from "vue";
+import "./index.less";
 
 export interface CheckCardGroup {
   modelValue?: [] | string | number | boolean | undefined;
