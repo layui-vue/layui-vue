@@ -48,14 +48,12 @@ export default {
 <script lang="ts" setup>
 import {
   ref,
-  onMounted,
   watch,
   computed,
   StyleValue,
   useAttrs,
   inject,
   useSlots,
-  onBeforeMount,
 } from "vue";
 import "./index.less";
 export interface CheckCard {
