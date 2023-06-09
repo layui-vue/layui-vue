@@ -15,6 +15,8 @@
 <template>
   <lay-tree
     :data="data"
+	:onlyIconControl="true"
+	v-model:selectedKey="selectedKey"
     @node-click="handleClick"
   >
   </lay-tree>
@@ -22,6 +24,8 @@
 
 <script setup>
 import { ref } from 'vue';
+
+const selectedKey = ref(1);
 
 const data = ref([{
 	title: '一级1',
@@ -159,7 +163,7 @@ function handleClick(node) {
 
 :::
 
-::: title 选择节点
+::: title 启用多选
 :::
 
 ::: demo 使用 `showCheckbox` 属性开启复选框, `checkedKeys` 属性设置选中项。
@@ -171,11 +175,6 @@ function handleClick(node) {
 	v-model:checkedKeys="checkedKeys2"
   >
   </lay-tree>
-  <lay-space>
-    <lay-button @click="updateView2">更新数据</lay-button>
-  	<lay-button @click="updateCheckedKeys2">更新选择</lay-button>
-  	{{ checkedKeys2 }}
-  </lay-space>
 </template>
 
 <script setup>
@@ -183,14 +182,6 @@ import { ref } from 'vue';
 
 const checkedKeys2 = ref([]);
 const showCheckbox2 = ref(true);
-
-const updateCheckedKeys2=()=>{
-  checkedKeys2.value=[4]
-}
-
-const updateView2=()=>{
-  data3.value[0].title='更新视图'
-}
 
 const data2 = ref([{
 	title: '一级1',
@@ -490,6 +481,7 @@ const checkedKeys3 = ref([2,3])
 <template>
   <lay-tree
     :data="data"
+		v-model:selectedKey="selectedKey"
 	:showLine="showLine"
   >
   </lay-tree>
@@ -536,7 +528,7 @@ import { ref } from 'vue';
 | checkedKeys(v-model:checkedKeys) | 开启 showCheckbox 后, 选中的节点         | []              | |
 | expandKeys(v-model:expandKeys)   | 展开的节点 key 数组                      | []              | 1.8.7 |
 | collapse-transition              | 是否开启展示收起动画                     | false           | |
-
+| selectedKey                      | 选中节点                                  | --              | |
 :::
 
 ::: title Tree 数据

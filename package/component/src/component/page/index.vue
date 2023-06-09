@@ -144,8 +144,7 @@ watch(
     <!-- 辅助标签，不能删 -->
     <div style="display: none">{{ totalPage }}</div>
     <span v-if="showCount" class="layui-laypage-count"
-      >{{ t("page.total") }} {{ total }} {{ t("page.item") }} {{ maxPage }}
-      {{ t("page.page") }}</span
+      >{{ t("page.total") }} {{ total }} {{ t("page.item") }}</span
     >
     <a
       href="javascript:;"

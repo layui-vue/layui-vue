@@ -15,6 +15,18 @@
     <lay-timeline>
         <lay-timeline-item title="2.2.x">
             <ul>
+                <a name="2-2-1"></a>
+                <li>
+                    <h3>2.2.1 <span class="layui-badge-rim">2023-06-08</span></h3>
+                    <ul>
+                        <li>[新增] tree 组件 selectedKey 受控属性，用于设置选中节点。</li>
+                        <li>[修复] checkcard 在 demand 环境无法正式使用的问题。</li>
+                        <li>[修复] checkcard-group 在 demand 环境无法正式使用的问题。</li>
+                        <li>[优化] page 组件 showCount 属性启用时，不再显示总页码，仅显示总条数。</li>
+                    </ul>  
+                </li>
+            </ul>
+            <ul>
                 <a name="2-2-0"></a>
                 <li>
                     <h3>2.2.0 <span class="layui-badge-rim">2023-06-03</span></h3>

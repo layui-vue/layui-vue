@@ -13,7 +13,7 @@
 ::: demo 使用 `lay-tree-select` 标签, 创建下拉树组件。
 
 <template>
-  <lay-tree-select v-model="value1" :data="data1" contentStyle="height:150px;overflow-y:auto;"></lay-tree-select>
+  <lay-tree-select v-model="value1" :data="data1"></lay-tree-select>
 </template>
 
 <script setup>
