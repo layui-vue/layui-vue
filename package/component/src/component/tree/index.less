@@ -107,8 +107,9 @@
   border: 1px solid #c0c4cc;
 }
 
-.layui-tree-iconClick .layui-icon {
-  font-size: 18px;
+.layui-tree-iconClick .layui-icon-triangle-d,
+.layui-tree-iconClick .layui-icon-triangle-r{
+  font-size: 12px;
 }
 
 .layui-tree-icon .layui-icon {
@@ -116,36 +117,11 @@
   color: #666;
 }
 
-.layui-tree-iconArrow {
-  padding: 0 5px;
-}
-
-.layui-tree-iconArrow:after {
-  content: "";
-  position: absolute;
-  left: 4px;
-  top: 3px;
-  z-index: 100;
-  width: 0;
-  height: 0;
-  border-width: 5px;
-  border-style: solid;
-  border-color: transparent transparent transparent #c0c4cc;
-  transition: 0.5s;
-}
-
 .layui-tree-btnGroup,
 .layui-tree-editInput {
   position: relative;
   vertical-align: middle;
   display: inline-block;
-}
-
-.layui-tree-spread
-  > .layui-tree-entry
-  > .layui-tree-iconClick
-  > .layui-tree-iconArrow:after {
-  transform: rotate(90deg) translate(3px, 4px);
 }
 
 .layui-tree-txt {

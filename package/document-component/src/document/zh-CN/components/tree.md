@@ -32,7 +32,7 @@ const data = ref([{
 	id: 1,
 	checked: true,
 	children: [{
-		title: '二级1-1 可允许跳转',
+		title: '二级1-1',
 		id: 3,
 		href: 'https://www.layui.com/',
 		children: [{
@@ -56,7 +56,7 @@ const data = ref([{
 			title: '三级1-1-1',
 			id: 7,
 			children: [{
-				title: '四级1-1-1-1 可允许跳转',
+				title: '四级1-1-1-1',
 				id: 15,
 				href: 'https://www.layui.com/doc/'
 			}]
@@ -189,7 +189,7 @@ const data2 = ref([{
 	checked: true,
 	spread: true,
 	children: [{
-		title: '二级1-1 可允许跳转',
+		title: '二级1-1',
 		id: 3,
 		href: 'https://www.layui.com/',
 		children: [{
@@ -213,7 +213,7 @@ const data2 = ref([{
 			title: '三级1-1-1',
 			id: 7,
 			children: [{
-				title: '四级1-1-1-1 可允许跳转',
+				title: '四级1-1-1-1',
 				id: 15,
 				href: 'https://www.layui.com/doc/'
 			}]
@@ -342,7 +342,7 @@ const data3 = ref([{
 	checked: true,
 	spread: true,
 	children: [{
-		title: '二级1-1 可允许跳转',
+		title: '二级1-1',
 		id: 3,
 		href: 'https://www.layui.com/',
 		children: [{
@@ -366,7 +366,7 @@ const data3 = ref([{
 			title: '三级1-1-1',
 			id: 7,
 			children: [{
-				title: '四级1-1-1-1 可允许跳转',
+				title: '四级1-1-1-1',
 				id: 15,
 				href: 'https://www.layui.com/doc/'
 			}]
