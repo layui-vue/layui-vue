@@ -19,6 +19,7 @@
                 <li>
                     <h3>2.2.3 <span class="layui-badge-rim">2023-06-11</span></h3>
                     <ul>
+                        <li>[优化] tree 组件，showLine 为 false 时 hover 状态 border-radius 跟随 css 变量。</li>
                         <li>[优化] tree 组件，移除  text-decoration: underline 标题样式。</li>
                     </ul>  
                 </li>
