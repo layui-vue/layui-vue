@@ -64,6 +64,7 @@ const nodeIconType = (node: TreeData): string => {
     if (node.children.length > 0) {
       return !node.isLeaf ? "layui-icon-triangle-r" : "layui-icon-triangle-d";
     }
+    return "";
   }
   if (node.children.length !== 0) {
     return !node.isLeaf ? "layui-icon-addition" : "layui-icon-subtraction";
