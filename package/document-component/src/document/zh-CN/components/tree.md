@@ -495,10 +495,10 @@ const showLine=ref(false)
 
 :::
 
-::: title 定义标题
+::: title 使用插槽
 :::
 
-::: demo 使用 `title` 插槽自定义节点标题
+::: demo 使用插槽自定义节点标题
 
 <template>
   <lay-tree :data="data">	
