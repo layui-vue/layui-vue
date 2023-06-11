@@ -19,6 +19,8 @@
                 <li>
                     <h3>2.2.3 <span class="layui-badge-rim">2023-06-11</span></h3>
                     <ul>
+                        <li>[修复] notice-bar 组件 textlist 为空时，控制台警告的问题。</li>
+                        <li>[修复] notice-bar 组件 textlist 远程加载时仅展示首个文本，滚动失效的问题。</li>
                         <li>[优化] tree 组件，showLine 为 false 时，尾节点的缩进宽度与其他节点不一致的问题。</li>
                         <li>[优化] tree 组件，showLine 为 false 时，节点在展开与收起时，图标无区别的问题。</li>
                         <li>[优化] tree 组件，showLine 为 false 时 hover 状态 border-radius 跟随 css 变量。</li>
