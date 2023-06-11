@@ -17,6 +17,15 @@
             <ul>
                 <a name="2-2-2"></a>
                 <li>
+                    <h3>2.2.3 <span class="layui-badge-rim">2023-06-11</span></h3>
+                    <ul>
+                        <li>[优化] tree 组件，移除  text-decoration: underline 标题样式。</li>
+                    </ul>  
+                </li>
+            </ul>
+            <ul>
+                <a name="2-2-2"></a>
+                <li>
                     <h3>2.2.2 <span class="layui-badge-rim">2023-06-09</span></h3>
                     <ul>
                         <li>[修复] checkcard-group 在 demand 环境 index.css 找不到的问题。</li>
