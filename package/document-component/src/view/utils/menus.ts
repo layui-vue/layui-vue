@@ -450,18 +450,6 @@ const menus = [
         subTitle: "barcode",
         path: "/zh-CN/components/barcode",
       },
-      {
-        id: 14,
-        title: "加载",
-        subTitle: "loading",
-        path: "/zh-CN/components/loading",
-      },
-      // {
-      //   id: 120,
-      //   title: "水印",
-      //   subTitle: "watermark",
-      //   path: "/zh-CN/components/watermark",
-      // },
     ],
   },
 ];

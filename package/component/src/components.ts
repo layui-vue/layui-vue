@@ -95,7 +95,6 @@ import LayBarcode from "./component/barcode/index";
 import LayQrcode from "./component/qrcode/index";
 import LayTreeSelect from "./component/treeSelect/index";
 import LayWatermark from "./component/watermark/index";
-import LayLoading from "./component/loading/index";
 import LayPopconfirm from "./component/popconfirm/index";
 
 declare module "@vue/runtime-core" {
@@ -195,7 +194,6 @@ declare module "@vue/runtime-core" {
     LayUpload: typeof LayUpload;
     LayConfigProvider: typeof LayConfigProvider;
     LayCalendar: typeof LayCalendar;
-    LayLoading: typeof LayLoading;
     LayPopconfirm: typeof LayPopconfirm;
   }
 
