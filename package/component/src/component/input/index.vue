@@ -137,8 +137,8 @@ const classes = computed(() => {
 const wrapperClasses = computed(() => {
   return {
     "layui-input-disabled": props.disabled,
-  }
-})
+  };
+});
 
 const showPassword = () => {
   if (isPassword.value) {

@@ -101,9 +101,13 @@ const noticeBarTextRef = ref();
 
 const active = ref(props.textlist[0]?.id);
 
-watch(() => props.textlist, () => {
-  active.value = props.textlist[0].id;
-}, { deep: true })
+watch(
+  () => props.textlist,
+  () => {
+    active.value = props.textlist[0].id;
+  },
+  { deep: true }
+);
 
 const state = reactive({
   order: 1,

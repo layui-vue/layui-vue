@@ -77,7 +77,7 @@ const className = computed(() => {
     "layui-tree": true,
     "layui-form": props.showCheckbox,
     "layui-tree-line": props.showLine,
-    "layui-tree-unline": !props.showLine
+    "layui-tree-unline": !props.showLine,
   };
 });
 
