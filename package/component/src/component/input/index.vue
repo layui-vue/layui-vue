@@ -130,8 +130,13 @@ const onCompositionend = (eventParam: Event) => {
 
 const classes = computed(() => {
   return {
-    "layui-input-disabled": props.disabled,
     "layui-input-has-prefix": slots.prefix || props.prefixIcon,
+  };
+});
+
+const wrapperClasses = computed(() => {
+  return {
+    "layui-input-disabled": props.disabled,
   };
 });
 
@@ -161,9 +166,9 @@ defineExpose({ focus, blur });
 <template>
   <div class="layui-input" :class="classes" :size="size">
     <div class="layui-input-prepend" v-if="slots.prepend">
-      <slot name="prepend"></slot>
+      <slot name="prepend" :disabled="disabled"></slot>
     </div>
-    <div class="layui-input-wrapper">
+    <div class="layui-input-wrapper" :class="wrapperClasses">
       <span class="layui-input-prefix" v-if="slots.prefix || props.prefixIcon">
         <slot name="prefix" v-if="slots.prefix"></slot>
         <lay-icon
@@ -184,10 +189,10 @@ defineExpose({ focus, blur });
         :min="min"
         :readonly="readonly"
         :value="currentValue"
-        @input="onInput"
-        @change="onChange"
-        @focus="onFocus"
         @blur="onBlur"
+        @input="onInput"
+        @focus="onFocus"
+        @change="onChange"
         @compositionstart="onCompositionstart"
         @compositionend="onCompositionend"
         ref="inputRef"
@@ -216,7 +221,7 @@ defineExpose({ focus, blur });
       </span>
     </div>
     <div class="layui-input-append" v-if="slots.append">
-      <slot name="append"></slot>
+      <slot name="append" :disabled="disabled"></slot>
     </div>
   </div>
 </template>

@@ -90,12 +90,13 @@ import { reactive } from "vue"
 export default {
   setup() {
 
-    const list = reactive([
+    const list = ref([
       { id: '1', text: '条目一' },
       { id: '2', text: '条目二' },
       { id: '3', text: '条目三' },
       { id: '4', text: '条目四' },
     ])
+
     return {
         list,
     }

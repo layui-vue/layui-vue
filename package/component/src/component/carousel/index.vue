@@ -22,7 +22,7 @@ import CarouselItem from "../carouselItem/index.vue";
 export interface CarouselProps {
   width?: string;
   height?: string;
-  modelValue: string;
+  modelValue?: string;
   autoplay?: boolean;
   arrow?: "always" | "hover" | "none";
   anim?: "default" | "updown" | "fade";

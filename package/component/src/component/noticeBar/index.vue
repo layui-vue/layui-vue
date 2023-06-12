@@ -62,7 +62,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { onMounted, reactive, nextTick, ref, onUnmounted } from "vue";
+import { onMounted, reactive, nextTick, ref, onUnmounted, watch } from "vue";
 import LayCarousel from "../carousel/index.vue";
 import LayCarouselItem from "../carouselItem/index.vue";
 import { LayIcon } from "@layui/icons-vue";
@@ -100,6 +100,15 @@ const noticeBarWarpRef = ref();
 const noticeBarTextRef = ref();
 
 const active = ref(props.textlist[0]?.id);
+
+watch(
+  () => props.textlist,
+  () => {
+    active.value = props.textlist[0].id;
+  },
+  { deep: true }
+);
+
 const state = reactive({
   order: 1,
   oneTime: 0,

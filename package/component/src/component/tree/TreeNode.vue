@@ -62,7 +62,7 @@ function renderLineShort(node: TreeData) {
 const nodeIconType = (node: TreeData): string => {
   if (!props.showLine) {
     if (node.children.length > 0) {
-      return "layui-tree-iconArrow ";
+      return !node.isLeaf ? "layui-icon-triangle-r" : "layui-icon-triangle-d";
     }
     return "";
   }

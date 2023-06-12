@@ -114,17 +114,14 @@
   display: none;
 }
 
-.layui-input-disabled {
+.layui-input:has(.layui-input-disabled)  {
   border-color: var(--input-border-color)!important;
-}
-
-.layui-input-disabled {
-  opacity: 0.6;
 }
 
 .layui-input-disabled,
 .layui-input-disabled * {
   cursor: not-allowed !important;
+  opacity: 0.6;
 }
 
 .layui-input{
