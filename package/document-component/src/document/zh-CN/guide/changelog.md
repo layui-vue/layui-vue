@@ -19,8 +19,11 @@
                 <li>
                     <h3>2.2.3 <span class="layui-badge-rim">2023-06-11</span></h3>
                     <ul>
+                        <li>[新增] input 组件 append 插槽 disabled 参数，表示当前输入框的禁用状态。</li>
+                        <li>[新增] input 组件 prepend 插槽 disabled 参数，表示当前输入框的禁用状态。</li>
                         <li>[修复] notice-bar 组件 textlist 为空时，控制台警告的问题。</li>
                         <li>[修复] notice-bar 组件 textlist 远程加载时仅展示首个文本，滚动失效的问题。</li>
+                        <li>[优化] input 组件 disabled 属性启用时，禁用效果不再覆盖整个 input 输入框。</li> 
                         <li>[优化] tree 组件，showLine 为 false 时，尾节点的缩进宽度与其他节点不一致的问题。</li>
                         <li>[优化] tree 组件，showLine 为 false 时，节点在展开与收起时，图标无区别的问题。</li>
                         <li>[优化] tree 组件，showLine 为 false 时 hover 状态 border-radius 跟随 css 变量。</li>

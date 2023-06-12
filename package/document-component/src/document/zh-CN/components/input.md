@@ -89,8 +89,9 @@ export default {
 ::: demo 通过 `prepend` 与 `append` 插槽, 设置框外前置后置内容。
 
 <template>
-  <lay-input v-model="inputValue">
-    <template #prepend>http://</template>
+  <lay-input v-model="inputValue" :disabled="true">
+    <template #prepend="{ disabled }">https://</template>
+    <template #append="{ disabled }">.com</template>
   </lay-input>
 </template>
 
