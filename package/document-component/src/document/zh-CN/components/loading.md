@@ -4,13 +4,13 @@
 ::: title 基础使用
 :::
 
-::: describe
+::: describe 用于页面和区块的加载中状态。
 :::
 
-::: demo 
+::: demo
 
 <template>
-    <lay-loading></lay-loading>
+  <lay-loading></lay-loading>
 </template>
 
 <script>
@@ -27,7 +27,7 @@ export default {
 
 :::
 
-::: title Line 属性
+::: title Loading 属性
 :::
 
 ::: table
@@ -35,10 +35,11 @@ export default {
 | 属性  | 说明 | 可选值                               |
 | ----- | ----------- | --------------------------------------------- |
 | direction  | 分割线的方向 | `horizontal` `vertical`|
+| contentPosition  | 分割线内容位置 | `center` `left` `right` |
 
 :::
 
-::: title Line 插槽
+::: title Loading 插槽
 :::
 
 ::: table
