@@ -453,7 +453,7 @@ const zhCN = [
             path: "/zh-CN/components/calendar",
             component: () => import("../document/zh-CN/components/calendar.md"),
             meta: { title: "日历" },
-          }
+          },
         ],
       },
     ],
