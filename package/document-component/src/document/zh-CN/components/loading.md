@@ -4,7 +4,7 @@
 ::: title 基础使用
 :::
 
-::: describe 区分内容的分割线。
+::: describe
 :::
 
 ::: demo 

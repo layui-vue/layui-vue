@@ -1,7 +1,5 @@
 <template>
-  <div class="layui-loading">
-    加载动画
-  </div>
+  <div class="layui-loading">加载动画</div>
 </template>
 
 <script lang="ts">

@@ -5,6 +5,7 @@ import LayAvatar from "./component/avatar/index";
 import LayAvatarList from "./component/avatarList/index";
 import LayRadio from "./component/radio/index";
 import LayRadioGroup from "./component/radioGroup/index";
+import LayRadioButton from "./component/radioButton/index";
 import LayButton from "./component/button/index";
 import LayButtonContainer from "./component/buttonContainer/index";
 import LayButtonGroup from "./component/buttonGroup/index";
@@ -95,6 +96,7 @@ import LayQrcode from "./component/qrcode/index";
 import LayTreeSelect from "./component/treeSelect/index";
 import LayWatermark from "./component/watermark/index";
 import LayLoading from "./component/loading/index";
+import LayPopconfirm from "./component/popconfirm/index";
 
 declare module "@vue/runtime-core" {
   // GlobalComponents for Volar
@@ -157,6 +159,7 @@ declare module "@vue/runtime-core" {
     LayQuote: typeof LayQuote;
     LayRadio: typeof LayRadio;
     LayRadioGroup: typeof LayRadioGroup;
+    LayRadioButton: typeof LayRadioButton;
     LayRate: typeof LayRate;
     LayResult: typeof LayResult;
     LayRipple: typeof LayRipple;
@@ -193,6 +196,7 @@ declare module "@vue/runtime-core" {
     LayConfigProvider: typeof LayConfigProvider;
     LayCalendar: typeof LayCalendar;
     LayLoading: typeof LayLoading;
+    LayPopconfirm: typeof LayPopconfirm;
   }
 
   export interface ComponentCustomProperties {

@@ -19,6 +19,7 @@
                 <li>
                     <h3>2.2.3 <span class="layui-badge-rim">2023-06-11</span></h3>
                     <ul>
+                        <li>[新增] volar 对 radio-button 与 popconfirm 组件的支持，提供编码提示。</li>
                         <li>[新增] input 组件 append 插槽 disabled 参数，表示当前输入框的禁用状态。</li>
                         <li>[新增] input 组件 prepend 插槽 disabled 参数，表示当前输入框的禁用状态。</li>
                         <li>[修复] notice-bar 组件 textlist 为空时，控制台警告的问题。</li>
