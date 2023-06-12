@@ -13,11 +13,11 @@
 ::: demo
 <template>
     <lay-timeline>
-        <lay-timeline-item title="2.2.x">
+            <lay-timeline-item title="2.3.x">
             <ul>
-                <a name="2-2-2"></a>
+                <a name="2-3-0"></a>
                 <li>
-                    <h3>2.2.3 <span class="layui-badge-rim">2023-06-11</span></h3>
+                    <h3>2.3.0 <span class="layui-badge-rim">2023-06-12</span></h3>
                     <ul>
                         <li>[新增] volar 对 radio-button 与 popconfirm 组件的支持，提供编码提示。</li>
                         <li>[新增] input 组件 append 插槽 disabled 参数，表示当前输入框的禁用状态。</li>
@@ -32,6 +32,8 @@
                     </ul>  
                 </li>
             </ul>
+        </lay-timeline-item>
+        <lay-timeline-item title="2.2.x">
             <ul>
                 <a name="2-2-2"></a>
                 <li>
