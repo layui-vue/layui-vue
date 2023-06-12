@@ -454,6 +454,11 @@ const zhCN = [
             component: () => import("../document/zh-CN/components/calendar.md"),
             meta: { title: "日历" },
           },
+          {
+            path: "/zh-CN/components/loading",
+            component: () => import("../document/zh-CN/components/loading.md"),
+            meta: { title: "局部加载" },
+          },
         ],
       },
     ],
