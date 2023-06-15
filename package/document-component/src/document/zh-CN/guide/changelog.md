@@ -13,7 +13,16 @@
 ::: demo
 <template>
     <lay-timeline>
-            <lay-timeline-item title="2.3.x">
+        <lay-timeline-item title="2.3.x">
+            <ul>
+                <a name="2-3-1"></a>
+                <li>
+                    <h3>2.3.1 <span class="layui-badge-rim">2023-06-15</span></h3>
+                    <ul>
+                        <li>[优化] table 组件 Dom 结构，移除无效元素。</li>
+                    </ul>  
+                </li>
+            </ul>
             <ul>
                 <a name="2-3-0"></a>
                 <li>
