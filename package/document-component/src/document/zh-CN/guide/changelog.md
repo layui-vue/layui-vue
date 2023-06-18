@@ -14,6 +14,15 @@
 <template>
     <lay-timeline>
         <lay-timeline-item title="2.3.x">
+              <ul>
+                <a name="2-3-2"></a>
+                <li>
+                    <h3>2.3.2 <span class="layui-badge-rim">2023-06-18</span></h3>
+                    <ul>
+                        <li>[修正] date-picker 组件 年月选择点击“现在”按钮无法正确更新年份问题。</li>
+                    </ul>  
+                </li>
+            </ul>
             <ul>
                 <a name="2-3-1"></a>
                 <li>
