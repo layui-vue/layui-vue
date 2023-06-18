@@ -13,7 +13,23 @@
 ::: demo
 <template>
     <lay-timeline>
-            <lay-timeline-item title="2.3.x">
+        <lay-timeline-item title="2.3.x">
+            <ul>
+                <a name="2-3-1"></a>
+                <li>
+                    <h3>2.3.1 <span class="layui-badge-rim">2023-06-18</span></h3>
+                    <ul>
+                        <li>[补充] form 组件 label-width 属性遗漏。 </li>
+                        <li>[修正] card 组件 header 属性说明，调整为 title 属性。</li>
+                        <li>[修复] checkbox 组件 size 属性 skin 为 default 时不生效的问题。</li>
+                        <li>[修复] date-picker 组件 年月选择点击 `现在` 按钮无法正确更新年份问题。</li>
+                        <li>[优化] checkbox 组件在 skin 为 default 时在 form-item 中的居中问题。</li>
+                        <li>[优化] checkbox 组件 skin 属性为默认值的样式，消除 label 与 icon 之间的间隙。</li>
+                        <li>[优化] carousel 组件 carousel-item 仅存在一个时，不再显示指示器。</li>
+                        <li>[优化] table 组件 Dom 结构，移除无效元素。</li>
+                    </ul>  
+                </li>
+            </ul>
             <ul>
                 <a name="2-3-0"></a>
                 <li>

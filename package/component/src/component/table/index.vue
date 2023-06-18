@@ -921,7 +921,6 @@ defineExpose({ getCheckData });
 
 <template>
   <div ref="tableRef">
-    <table class="layui-hide" lay-filter="test"></table>
     <div class="layui-form layui-border-box layui-table-view" :class="classes">
       <div v-if="defaultToolbar || slot.toolbar" class="layui-table-tool">
         <div class="layui-table-tool-temp">

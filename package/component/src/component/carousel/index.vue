@@ -165,33 +165,24 @@ provide("anim", anim);
 </script>
 
 <template>
-  <div
-    class="layui-carousel"
-    :lay-anim="anim"
-    :lay-indicator="indicator"
-    :lay-arrow="arrow"
-    :style="{ width: width, height: height }"
-    @mouseenter="handleMouseEnter"
-    @mouseleave="handleMouseLeave"
-  >
+  <div class="layui-carousel" :lay-anim="anim" :lay-indicator="indicator" :lay-arrow="arrow"
+    :style="{ width: width, height: height }" @mouseenter="handleMouseEnter" @mouseleave="handleMouseLeave">
     <div carousel-item>
       <slot></slot>
     </div>
-    <div class="layui-carousel-ind">
-      <ul>
-        <li
-          v-for="(ss, index) in childrens"
-          :key="index"
-          :class="[ss.props?.id === active ? 'layui-this' : '']"
-          @click.stop="change(ss.props?.id)"
-        ></li>
-      </ul>
-    </div>
-    <button class="layui-icon layui-carousel-arrow" lay-type="sub" @click="sub">
-      {{ anim === "updown" ? "" : "" }}
-    </button>
-    <button class="layui-icon layui-carousel-arrow" lay-type="add" @click="add">
-      {{ anim === "updown" ? "" : "" }}
-    </button>
+    <template v-if="childrens.length > 1">
+      <div class="layui-carousel-ind">
+        <ul>
+          <li v-for="(ss, index) in childrens" :key="index" :class="[ss.props?.id === active ? 'layui-this' : '']"
+            @click.stop="change(ss.props?.id)"></li>
+        </ul>
+      </div>
+      <button class="layui-icon layui-carousel-arrow" lay-type="sub" @click="sub">
+        {{ anim === "updown" ? "" : "" }}
+      </button>
+      <button class="layui-icon layui-carousel-arrow" lay-type="add" @click="add">
+        {{ anim === "updown" ? "" : "" }}
+      </button>
+    </template>
   </div>
 </template>
