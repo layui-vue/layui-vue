@@ -19,6 +19,8 @@
                 <li>
                     <h3>2.3.1 <span class="layui-badge-rim">2023-06-15</span></h3>
                     <ul>
+                        <li>[修正] card 组件 header 属性说明，调整为 title 属性。</li>
+                        <li>[优化] carousel 组件 carousel-item 仅存在一个时，不再显示指示器。</li>
                         <li>[优化] table 组件 Dom 结构，移除无效元素。</li>
                     </ul>  
                 </li>
