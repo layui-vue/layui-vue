@@ -90,7 +90,7 @@ import LaySpace from "./component/space/index";
 import LayTag from "./component/tag/index";
 import LayTagInput from "./component/tagInput/index";
 import LayConfigProvider from "./provider";
-import LayAutocomplete from "./component/autocomplete/index";
+import LayAutocomplete from "./component/autoComplete/index";
 import LayBarcode from "./component/barcode/index";
 import LayQrcode from "./component/qrcode/index";
 import LayTreeSelect from "./component/treeSelect/index";
