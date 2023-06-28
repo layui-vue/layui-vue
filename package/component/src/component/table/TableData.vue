@@ -660,6 +660,7 @@ const checkboxProps = props.getCheckboxProps(props.data, props.index);
         :spanMethod="spanMethod"
         :defaultExpandAll="defaultExpandAll"
         :getCheckboxProps="getCheckboxProps"
+        :childrenColumnName="childrenColumnName"
         :getRadioProps="getRadioProps"
         @row="rowClick"
         @row-double="rowDoubleClick"

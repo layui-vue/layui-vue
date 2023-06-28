@@ -19,6 +19,7 @@
                 <li>
                     <h3>2.3.1 <span class="layui-badge-rim">2023-06-28</span></h3>
                     <ul>
+                        <li>[修复] table 组件 childrenColumnName 属性无效的问题。</li>
                         <li>[补充] table 文档 sort-change 事件说明。 </li>
                     </ul>  
                 </li>
