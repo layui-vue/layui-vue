@@ -17,6 +17,15 @@
             <ul>
                 <a name="2-3-1"></a>
                 <li>
+                    <h3>2.3.1 <span class="layui-badge-rim">2023-06-28</span></h3>
+                    <ul>
+                        <li>[补充] table 文档 sort-change 事件说明。 </li>
+                    </ul>  
+                </li>
+            </ul>
+            <ul>
+                <a name="2-3-1"></a>
+                <li>
                     <h3>2.3.1 <span class="layui-badge-rim">2023-06-18</span></h3>
                     <ul>
                         <li>[补充] form 组件 label-width 属性遗漏。 </li>

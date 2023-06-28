@@ -907,6 +907,7 @@ const dataSource9 = ref([
 | row-double      | 行双击   | { row: 当前行数据 }                    |
 | row-contextmenu | 行右击   | { row: 当前行数据 }                    |
 | change          | 分页事件 | { current: 当前页码, limit: 每页数量 } |
+| sort-change     | 排序事件 | sort: string |
 
 :::
 
