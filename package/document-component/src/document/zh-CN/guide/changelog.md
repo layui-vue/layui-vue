@@ -19,8 +19,11 @@
                 <li>
                     <h3>2.3.1 <span class="layui-badge-rim">2023-06-28</span></h3>
                     <ul>
+                        <li>[新增] select 组件 options 属性代替 items 属性，统一命名。</li>
                         <li>[修复] table 组件 childrenColumnName 属性无效的问题。</li>
                         <li>[补充] table 文档 sort-change 事件说明。 </li>
+                        <li>[补充] select 组件 items 属性说明。</li>
+                        <li>[过时] select 组件 items 属性，但仍生效。</li>
                     </ul>  
                 </li>
             </ul>
