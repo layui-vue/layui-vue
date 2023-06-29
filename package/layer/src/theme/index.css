@@ -1,5 +1,10 @@
 @import url(./iconfont.css);
 
+
+:root {
+  --global-primary-color: #16baaa;
+}
+
 .layui-layer-imgbar,
 .layui-layer-imgtit a,
 .layui-layer-tab .layui-layer-title span,
@@ -686,7 +691,7 @@
 }
 
 .layui-layer-setwin .layui-layer-min:hover cite {
-  background-color: #2d93ca;
+  background-color: var(--global-primary-color);
 }
 
 .layui-layer-setwin .layui-layer-max {
@@ -751,8 +756,8 @@
 }
 
 .layui-layer-btn .layui-layer-btn0 {
-  border-color: #1e9fff;
-  background-color: #1e9fff;
+  border-color: var(--global-primary-color);
+  background-color: var(--global-primary-color);
   color: #fff;
 }
 
