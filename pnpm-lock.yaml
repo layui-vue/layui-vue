@@ -151,7 +151,7 @@ importers:
         specifier: 1.1.0
         version: link:../icons
       '@layui/layer-vue':
-        specifier: 1.8.8
+        specifier: 1.8.9
         version: link:../layer
       '@types/qrcode':
         specifier: 1.5.0
