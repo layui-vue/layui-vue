@@ -1171,6 +1171,7 @@ defineExpose({ getCheckData });
                   :defaultExpandAll="defaultExpandAll"
                   :getCheckboxProps="getCheckboxProps"
                   :getRadioProps="getRadioProps"
+                  :childrenColumnName="childrenColumnName"
                   v-model:expandKeys="tableExpandKeys"
                   v-model:selectedKeys="tableSelectedKeys"
                   v-model:selectedKey="tableSelectedKey"

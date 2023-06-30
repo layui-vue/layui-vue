@@ -15,10 +15,11 @@ import {
   auto as followSystemColorScheme,
   setFetchMethod,
 } from "@umijs/ssr-darkreader";
+import { Recordable } from "../types";
 
 export interface ConfigProviderProps {
   locale?: string;
-  locales?: [];
+  locales?: Recordable[];
   theme?: string;
   themeVariable?: any;
   darkPartial?: any;

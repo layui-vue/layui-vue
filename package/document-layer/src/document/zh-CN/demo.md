@@ -75,7 +75,7 @@ const openConfirm2 = function() {
     layer.confirm("你如何看待 layui-vue 的发布", 
     {btn:
         [
-            {text:'站着看', disabled: true, callback: function(id){layer.close(id);}},
+            {text:'站着看', callback: function(id){layer.close(id);}},
             {text:'坐着看', callback: function(id){layer.close(id);}}
         ]
     })

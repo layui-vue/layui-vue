@@ -55,7 +55,7 @@ export interface LayerProps {
   area?: string[] | "auto";
   modelValue?: boolean;
   maxmin?: boolean | string;
-  btn?: Record<string, Function>[] | false;
+  btn?: Record<string, any>[] | false;
   move?: boolean | string;
   resize?: boolean | string;
   type?:
@@ -819,7 +819,9 @@ defineExpose({ reset, open, close });
               <template v-if="btn && btn.length > 0">
                 <template v-for="(b, index) in btn" :key="index">
                   <a
+                    :style="b.style"
                     :class="[
+                      b.class,
                       `layui-layer-btn${index}`,
                       { 'layui-layer-btn-disabled': b.disabled },
                     ]"

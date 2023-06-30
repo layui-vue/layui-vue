@@ -101,7 +101,7 @@ export default {
 ::: demo 传入 options 数据，如果设置则不需要手动构造 select-option 节点。
 
 <template>
-  <lay-select v-model="value4" :items="items4"></lay-select>
+  <lay-select v-model="value4" :items="items4" :options="item4"></lay-select>
 </template>
 
 <script>
@@ -336,7 +336,7 @@ export default {
 | collapseTagsTooltip | 多选折叠后时候悬浮展示             | `boolean`                                   | --                  | --       |
 | contentStyle        | 内容自定义样式                     | `StyleValue`                                | --                  | --       |
 | contentClass        | 内容自定义 Class                   | `string` `Array<string \| object>` `object` | --                  | --       |
-
+| options (items)   |  传入选项                | `Array<Object>` | --                  | --       |
 :::
 
 ::: title Select 事件

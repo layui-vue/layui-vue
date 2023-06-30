@@ -15,6 +15,24 @@
     <lay-timeline>
         <lay-timeline-item title="2.3.x">
             <ul>
+                <a name="2-3-2"></a>
+                <li>
+                    <h3>2.3.2 <span class="layui-badge-rim">2023-06-28</span></h3>
+                    <ul>
+                        <li>[新增] layer 组件 btn 属性 style 配置，自定义按钮 Style。</li>
+                        <li>[新增] layer 组件 btn 属性 class 配置，自定义按钮 Class。</li>
+                        <li>[新增] select 组件 options 属性代替 items 属性。</li>
+                        <li>[新增] tree 组件 tail-node-icon 属性，用于设置尾节点图标，通过设置 false 关闭。</li>
+                        <li>[修复] table 组件 childrenColumnName 属性无效的问题。</li>
+                        <li>[修复] config-provider 组件 locales 属性 build 时的类型检测问题。</li>
+                        <li>[优化] layer 组件 layui-layer-btn0 元素跟随主题色。</li>
+                        <li>[补充] table 文档 sort-change 事件说明。 </li>
+                        <li>[补充] select 组件 items 属性说明。</li>
+                        <li>[过时] select 组件 items 属性，但仍生效。</li>
+                    </ul>  
+                </li>
+            </ul>
+            <ul>
                 <a name="2-3-1"></a>
                 <li>
                     <h3>2.3.1 <span class="layui-badge-rim">2023-06-18</span></h3>

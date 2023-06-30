@@ -35,6 +35,7 @@ export interface TreeNodeProps {
   checkStrictly: boolean | string;
   collapseTransition: boolean;
   onlyIconControl: boolean;
+  tailNodeIcon: string | boolean;
 }
 
 interface TreeNodeEmits {
@@ -69,7 +70,10 @@ const nodeIconType = (node: TreeData): string => {
   if (node.children.length !== 0) {
     return !node.isLeaf ? "layui-icon-addition" : "layui-icon-subtraction";
   }
-  return "layui-icon-file";
+  if (props.tailNodeIcon) {
+    return props.tailNodeIcon as string;
+  }
+  return "";
 };
 
 function recursiveNodeClick(node: TreeData) {
@@ -198,6 +202,7 @@ const isChildAllSelected = computed(() => {
           :collapse-transition="collapseTransition"
           :checkStrictly="checkStrictly"
           :only-icon-control="onlyIconControl"
+          :tail-node-icon="tailNodeIcon"
           @node-click="recursiveNodeClick"
         >
           <template v-if="$slots.title" v-slot:title="slotProp: { data: any }">

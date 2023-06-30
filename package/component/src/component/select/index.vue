@@ -38,6 +38,7 @@ export interface SelectProps {
   modelValue?: any;
   multiple?: boolean;
   items?: SelectOptionProps[];
+  options?: SelectOptionProps[];
   size?: SelectSize;
   collapseTagsTooltip?: boolean;
   minCollapsedNum?: number;
@@ -112,11 +113,15 @@ const intOption = () => {
   if (slots.default) {
     getOption(slots.default(), newOptions);
   }
-  Object.assign(newOptions, props.items);
+  Object.assign(newOptions, props.options || props.items);
   if (JSON.stringify(newOptions) != JSON.stringify(options.value)) {
     options.value = newOptions;
   }
 };
+
+const allOptions = computed(() => {
+  return props.options || props.items;
+});
 
 const handleRemove = (value: any) => {
   if (Array.isArray(selectedValue.value)) {
@@ -311,9 +316,9 @@ provide("searchMethod", props.searchMethod);
       </lay-input>
       <template #content>
         <dl class="layui-select-content">
-          <template v-if="items">
+          <template v-if="options || items">
             <lay-select-option
-              v-for="(item, index) in items"
+              v-for="(item, index) in allOptions"
               v-bind="item"
               :key="index"
             ></lay-select-option>
