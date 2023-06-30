@@ -39,6 +39,7 @@ export interface TreeProps {
   showLine?: boolean;
   showCheckbox?: boolean;
   replaceFields?: ReplaceFieldsOptions;
+  tailNodeIcon?: string | boolean;
 }
 
 interface TreeEmits {
@@ -59,6 +60,7 @@ const props = withDefaults(defineProps<TreeProps>(), {
   onlyIconControl: false,
   disabled: false,
   showLine: true,
+  tailNodeIcon: "layui-icon-file",
   replaceFields: () => {
     return {
       id: "id",
@@ -179,6 +181,7 @@ watch(
       :check-strictly="checkStrictly"
       :collapse-transition="collapseTransition"
       :only-icon-control="onlyIconControl"
+      :tail-node-icon="tailNodeIcon"
       @node-click="handleClick"
     >
       <template v-if="$slots.title" v-slot:title="{ data }">

@@ -15,6 +15,7 @@
 <template>
   <lay-tree
     :data="data"
+	:tail-node-icon="false"
 	:onlyIconControl="true"
 	v-model:selectedKey="selectedKey"
     @node-click="handleClick"
@@ -503,7 +504,7 @@ const showLine=ref(false)
 <template>
   <lay-tree :data="data">	
 	<template #title="{ data }">
-		{{ data.id }}
+		{{ data.title }}
 	</template>
   </lay-tree>
 </template>
@@ -523,12 +524,14 @@ import { ref } from 'vue';
 | -------------------------------- | ---------------------------------------- | --------------- |--------------- |
 | data                             | 树型组件数据,类型 TreeData \| TreeData[] | null            | |
 | showCheckbox                     | 是否显示复选框                           | false           | |
-| onlyIconControl                  | 是否仅允许节点左侧图标控制展开收缩       | false           | |
+| onlyIconControl                  | 是否仅允许节点左侧图标控制展开收缩         | false           | |
 | showLine                         | 是否开启连接线                           | true            | |
 | checkedKeys(v-model:checkedKeys) | 开启 showCheckbox 后, 选中的节点         | []              | |
 | expandKeys(v-model:expandKeys)   | 展开的节点 key 数组                      | []              | 1.8.7 |
 | collapse-transition              | 是否开启展示收起动画                     | false           | |
-| selectedKey                      | 选中节点                                  | --              | |
+| selectedKey                      | 选中节点                                | --              | |
+| tail-node-icon                   | 尾节点图标，通过设置 false 关闭尾节点图标  | 图标集          | |
+
 :::
 
 ::: title Tree 数据
