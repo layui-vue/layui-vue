@@ -35,7 +35,7 @@
         class="laydate-btns-time"
         >{{ t("datePicker.selectMonth") }}</span
       >
-      <template v-else-if="parseInt(Year.toString())>0">{{ Year }}</template>
+      <template v-else-if="parseInt(Year.toString()) > 0">{{ Year }}</template>
     </PanelFoot>
   </div>
 </template>
@@ -138,7 +138,7 @@ const footOnNow = () => {
   Year.value = dayjs().year();
   if (datePicker.type === "yearmonth") {
     datePicker.currentMonth.value = dayjs().month();
-    emits('update:modelValue',Year.value);
+    emits("update:modelValue", Year.value);
   }
   scrollTo();
 };

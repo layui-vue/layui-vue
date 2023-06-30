@@ -24,6 +24,7 @@
                         <li>[新增] select 组件 options 属性代替 items 属性。</li>
                         <li>[新增] tree 组件 tail-node-icon 属性，用于设置尾节点图标，通过设置 false 关闭。</li>
                         <li>[修复] table 组件 childrenColumnName 属性无效的问题。</li>
+                        <li>[修复] config-provider 组件 locales 属性 build 时的类型检测问题。</li>
                         <li>[优化] layer 组件 layui-layer-btn0 元素跟随主题色。</li>
                         <li>[补充] table 文档 sort-change 事件说明。 </li>
                         <li>[补充] select 组件 items 属性说明。</li>

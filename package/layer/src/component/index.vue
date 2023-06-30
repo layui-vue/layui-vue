@@ -823,7 +823,7 @@ defineExpose({ reset, open, close });
                     :class="[
                       b.class,
                       `layui-layer-btn${index}`,
-                      { 'layui-layer-btn-disabled': b.disabled }
+                      { 'layui-layer-btn-disabled': b.disabled },
                     ]"
                     @click="!b.disabled && b.callback(id)"
                     >{{ b.text }}</a

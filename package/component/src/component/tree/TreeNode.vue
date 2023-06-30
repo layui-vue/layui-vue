@@ -70,7 +70,7 @@ const nodeIconType = (node: TreeData): string => {
   if (node.children.length !== 0) {
     return !node.isLeaf ? "layui-icon-addition" : "layui-icon-subtraction";
   }
-  if(props.tailNodeIcon) {
+  if (props.tailNodeIcon) {
     return props.tailNodeIcon as string;
   }
   return "";

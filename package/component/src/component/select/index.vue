@@ -113,7 +113,7 @@ const intOption = () => {
   if (slots.default) {
     getOption(slots.default(), newOptions);
   }
-  Object.assign(newOptions,  props.options || props.items);
+  Object.assign(newOptions, props.options || props.items);
   if (JSON.stringify(newOptions) != JSON.stringify(options.value)) {
     options.value = newOptions;
   }
@@ -121,7 +121,7 @@ const intOption = () => {
 
 const allOptions = computed(() => {
   return props.options || props.items;
-})
+});
 
 const handleRemove = (value: any) => {
   if (Array.isArray(selectedValue.value)) {
