@@ -1,6 +1,6 @@
 {
   "name": "@layui/layui-vue",
-  "version": "2.3.2",
+  "version": "2.3.3-alpha.1",
   "author": "就眠儀式",
   "license": "MIT",
   "description": "a component library for Vue 3 base on layui-vue",
@@ -45,6 +45,7 @@
     "test": "vitest"
   },
   "dependencies": {
+    "@rollup/plugin-terser":"0.4.3",
     "@layui/icons-vue": "1.1.0",
     "@layui/layer-vue": "1.8.9",
     "@vueuse/core": "8.7.3",
