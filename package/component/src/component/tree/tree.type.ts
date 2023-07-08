@@ -6,7 +6,6 @@ export type EditType = boolean | ("add" | "update" | "delete");
 export interface OriginalTreeData {
   title: StringFn | string;
   id: StringOrNumber;
-  field: StringFn | string;
   children?: OriginalTreeData[];
   disabled?: boolean;
 }
