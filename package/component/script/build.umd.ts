@@ -2,7 +2,7 @@ import { UserConfigExport } from "vite";
 import vue from "@vitejs/plugin-vue";
 import vueJsx from "@vitejs/plugin-vue-jsx";
 import { resolve } from "path";
-import terser from '@rollup/plugin-terser';
+import terser from "@rollup/plugin-terser";
 
 export default (): UserConfigExport => {
   return {

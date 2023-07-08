@@ -22,6 +22,7 @@
                         <li>[修复] index.umd.js 与 index.es.js 中存在 index.css 的 decode 问题。</li>
                         <li>[优化] unpackedSize 大小，由 14.5 MB 改善到 8.5 MB。</li>
                         <li>[优化] index.umd.js 大小，由 2.6 MB 改善到 1.1 MB。</li>
+                        <li>[优化] tree 组件 OriginalTreeData 类型，移除 field 无效属性。</li>
                     </ul>  
                 </li>
             </ul>

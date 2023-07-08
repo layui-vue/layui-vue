@@ -3,7 +3,7 @@ import vue from "@vitejs/plugin-vue";
 import vueJsx from "@vitejs/plugin-vue-jsx";
 import { resolve } from "path";
 import * as fs from "fs";
-import terser from '@rollup/plugin-terser';
+import terser from "@rollup/plugin-terser";
 
 const inputDir = resolve(process.cwd(), "./src/component");
 
