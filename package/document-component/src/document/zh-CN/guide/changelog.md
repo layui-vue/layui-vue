@@ -19,6 +19,7 @@
                 <li>
                     <h3>2.3.3 <span class="layui-badge-rim">2023-07-08</span></h3>
                     <ul>
+                        <li>[新增] upload 组件 beforeUpload 属性 Promise 返回值类型兼容。</li>
                         <li>[修复] index.umd.js 与 index.es.js 中存在 index.css 的 decode 问题。</li>
                         <li>[优化] unpackedSize 大小，由 14.5 MB 改善到 8.5 MB。</li>
                         <li>[优化] index.umd.js 大小，由 2.6 MB 改善到 1.1 MB。</li>
