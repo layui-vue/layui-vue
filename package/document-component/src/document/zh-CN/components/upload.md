@@ -303,7 +303,7 @@ export default {
         isOver = true;
         layer.msg(`file size over 1000 KB`, { icon: 2})
       } 
-      return !isOver;
+      return new Promise((resolver) => resolver(true));
     }
 
     return {
@@ -340,7 +340,7 @@ export default {
 | text            | 普通上传描述                                            | string  | --                           | --          |
 | dragText        | 拖拽上传描述                                            | string  | --                           | --          |
 | auto            | 是否自动提交                                            | boolean | false                        | --          |
-| beforeUpload    | 上传之前的钩子（1.9.4）                                 | Function | --                        | --          |
+| beforeUpload    | 上传之前的钩子（1.9.4）                                 | Function : boolean Promise | --                        | --          |
 | onProgress      | 上传过程的回调（1.9.8）                                 | Function（event: ProgressEvent） | -- | --          |
 :::
 
