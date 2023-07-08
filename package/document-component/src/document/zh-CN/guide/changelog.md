@@ -17,6 +17,17 @@
             <ul>
                 <a name="2-3-2"></a>
                 <li>
+                    <h3>2.3.3 <span class="layui-badge-rim">2023-07-08</span></h3>
+                    <ul>
+                        <li>[修复] index.umd.js 与 index.es.js 中存在 index.css 的 decode 问题。</li>
+                        <li>[优化] unpackedSize 大小，由 14.5 MB 改善到 8.5 MB。</li>
+                        <li>[优化] index.umd.js 大小，由 2.6 MB 改善到 1.1 MB。</li>
+                    </ul>  
+                </li>
+            </ul>
+            <ul>
+                <a name="2-3-2"></a>
+                <li>
                     <h3>2.3.2 <span class="layui-badge-rim">2023-06-28</span></h3>
                     <ul>
                         <li>[新增] layer 组件 btn 属性 style 配置，自定义按钮 Style。</li>
