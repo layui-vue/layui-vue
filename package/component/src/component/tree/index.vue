@@ -26,7 +26,7 @@ export interface ReplaceFieldsOptions {
 }
 
 export interface TreeProps {
-  data: OriginalTreeData;
+  data: OriginalTreeData | OriginalTreeData[];
   disabled?: boolean;
   edit?: EditType;
   checkedKeys?: KeysType;

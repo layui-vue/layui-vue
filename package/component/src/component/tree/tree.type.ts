@@ -19,7 +19,7 @@ export interface ReplaceFieldsOptions {
 export interface TreeProps {
   checkedKeys?: KeysType;
   expandKeys?: KeysType;
-  data: OriginalTreeData;
+  data: OriginalTreeData | OriginalTreeData[];
   checkStrictly?: boolean | string;
   showCheckbox?: boolean;
   edit?: EditType;
