@@ -1,5 +1,5 @@
  @tagColors: {
-   primary: #16baaa;
+   primary: var(--global-primary-color);
    normal: #1e9fff;
    warm: #ffb800;
    danger: #ff5722;
@@ -110,7 +110,7 @@
      --layui-tag-bg-color: @value;
      --layui-tag-border-color: transparent;
      --layui-tag-hover-color: @value;
-     --layui-tag-text-color: contrast(@value, #FFF,#000000,60%);
+     --layui-tag-text-color: #ffffff;
 
      &-bordered {
        --layui-tag-border-color: @value;
@@ -118,13 +118,13 @@
    }
 
    &-@{key}.layui-tag-variant-light {
-     --layui-tag-bg-color: tint(@value, 90%);
+     --layui-tag-bg-color: adjust(@value, 90%);
      --layui-tag-border-color: transparent;
-     --layui-tag-hover-color: tint(@value, 90%);
+     --layui-tag-hover-color: adjust(@value, 90%);
      --layui-tag-text-color: @value;
 
      &-bordered {
-       --layui-tag-border-color: tint(@value, 50%);
+       --layui-tag-border-color: adjust(@value, 50%);
      }
    }
 
