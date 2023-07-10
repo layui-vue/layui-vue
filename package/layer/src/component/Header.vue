@@ -5,7 +5,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { StyleValue, compile, computed } from 'vue';
+import { StyleValue, compile, computed } from "vue";
 
 export interface HeaderProps {
   title: string | boolean | Function;
@@ -23,8 +23,8 @@ const renderContent = function (content: any) {
 const props = defineProps<HeaderProps>();
 
 const titleStyle = computed(() => {
-  return [ props.move ? 'cursor: move' : '', props.titleStyle]
-})
+  return [props.move ? "cursor: move" : "", props.titleStyle];
+});
 </script>
 
 <template>

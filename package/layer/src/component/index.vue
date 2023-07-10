@@ -21,7 +21,7 @@ import {
   nextTick,
   onMounted,
   onUnmounted,
-StyleValue,
+  StyleValue,
 } from "vue";
 import {
   nextId,
@@ -735,7 +735,13 @@ defineExpose({ reset, open, close });
         v-if="visible"
       >
         <!-- 标题 -->
-        <Title v-if="showTitle" :title="title" :titleStyle="titleStyle" :move="move" @mousedown="setTop">
+        <Title
+          v-if="showTitle"
+          :title="title"
+          :titleStyle="titleStyle"
+          :move="move"
+          @mousedown="setTop"
+        >
           <slot name="title"></slot>
         </Title>
         <!-- 内容 -->

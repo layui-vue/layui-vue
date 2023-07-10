@@ -19,6 +19,7 @@
                 <li>
                     <h3>2.3.3 <span class="layui-badge-rim">2023-07-08</span></h3>
                     <ul>
+                        <li>[新增] layer 组件 titleStyle 属性，用于自定义 title 样式。</li>
                         <li>[新增] upload 组件 beforeUpload 属性 Promise 返回值类型兼容。</li>
                         <li>[修复] index.umd.js 与 index.es.js 中存在 index.css 的 decode 问题。</li>
                         <li>[修复] tag 组件 type 属性为 primary 时不跟随主题色的问题。</li>
@@ -26,6 +27,7 @@
                         <li>[优化] index.umd.js 大小，由 2.6 MB 改善到 1.1 MB。</li>
                         <li>[优化] tree 组件 OriginalTreeData 类型，移除 field 无效属性。</li>
                         <li>[优化] tree 组件 data 属性 OriginalTreeData[] 类型兼容。</li>
+                        <li>[升级] layer-vue 到 1.8.10 版本。</li>
                     </ul>  
                 </li>
             </ul>
