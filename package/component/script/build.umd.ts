@@ -2,6 +2,7 @@ import { UserConfigExport } from "vite";
 import vue from "@vitejs/plugin-vue";
 import vueJsx from "@vitejs/plugin-vue-jsx";
 import { resolve } from "path";
+import terser from "@rollup/plugin-terser";
 
 export default (): UserConfigExport => {
   return {
@@ -25,16 +26,6 @@ export default (): UserConfigExport => {
         formats: ["umd"],
         fileName: (name) => `index.js`,
       },
-      terserOptions: {
-        compress: {
-          drop_console: true,
-          drop_debugger: true,
-          pure_funcs: ["console.log"],
-        },
-        output: {
-          comments: true,
-        },
-      },
       rollupOptions: {
         output: {
           globals: {
@@ -42,6 +33,7 @@ export default (): UserConfigExport => {
           },
           assetFileNames: "index.css",
         },
+        plugins: [terser()],
         external: ["vue"],
       },
     },

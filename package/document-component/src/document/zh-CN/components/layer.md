@@ -749,6 +749,7 @@ const openCallback = () => {
 | -- | -- | -- | -- | -- |
 | type | 类型 | string | `1` | `0` `1` `2` `3` `4` `5` |
 | title | 标题 | string boolean | `信息` | -- |
+| titleStyle | 标题样式 | string StyleValue | -- | -- |
 | content | 内容 | string vnode | -- | -- |
 | v-model | 显示 | boolean | `false`  | `true` `false` |
 | offset | 位置 | string array | `auto` | -- |

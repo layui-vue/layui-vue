@@ -3,6 +3,7 @@
 
 :root {
   --global-primary-color: #16baaa;
+  --global-border-radius: 2px;
 }
 
 .layui-layer-imgbar,
@@ -35,7 +36,7 @@
   flex-direction: column;
   box-shadow: 1px 1px 50px rgba(0, 0, 0, 0.3);
   background-color: #fff;
-  border-radius: 2px;
+  border-radius: var(--global-border-radius);
   padding: 0;
   margin: 0;
 }
@@ -740,7 +741,7 @@
   line-height: 28px;
   margin: 5px 5px 0;
   padding: 0 15px;
-  border-radius: 2px;
+  border-radius: var(--global-border-radius);
   border: 1px solid #dedede;
   background-color: #fff;
   cursor: pointer;
@@ -1055,7 +1056,7 @@
   box-sizing: border-box;
   background-color: #fff;
   overflow: hidden;
-  border-radius: 4px;
+  border-radius: var(--global-border-radius);
   border: 1px solid rgba(220, 220, 220, 0.5);
   box-shadow: 2px 0 8px 0 rgb(29 35 41 / 3%);
 }

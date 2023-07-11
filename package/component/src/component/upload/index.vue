@@ -265,6 +265,7 @@ const localUploadTransaction = (option: localUploadTransaction) => {
 
   // 备注：单文件 与 多文件 上传参数不同
   var allowUpload;
+
   if (props.beforeUpload != undefined) {
     if (props.multiple) {
       allowUpload = props.beforeUpload(files);
@@ -272,16 +273,33 @@ const localUploadTransaction = (option: localUploadTransaction) => {
       allowUpload = props.beforeUpload(files[0]);
     }
   }
+
   if (allowUpload === undefined || allowUpload === true) {
-    // 继续上传
     let utimer = window.setTimeout(() => {
       localUpload({ url, formData }, function () {
         clearTimeout(utimer);
       });
     }, 200);
   } else {
-    // 中止上传，清空变量
-    clearAllCutEffect();
+    // 判定是否为
+    if (allowUpload instanceof Promise) {
+      allowUpload.then((result) => {
+        if (result) {
+          // 继续上传
+          let utimer = window.setTimeout(() => {
+            localUpload({ url, formData }, function () {
+              clearTimeout(utimer);
+            });
+          }, 200);
+        } else {
+          // 终止上传
+          clearAllCutEffect();
+        }
+      });
+    } else {
+      // 终止上传，清空变量
+      clearAllCutEffect();
+    }
   }
 };
 

@@ -3,6 +3,7 @@ import vue from "@vitejs/plugin-vue";
 import vueJsx from "@vitejs/plugin-vue-jsx";
 import { resolve } from "path";
 import * as fs from "fs";
+import terser from "@rollup/plugin-terser";
 
 const inputDir = resolve(process.cwd(), "./src/component");
 
@@ -79,18 +80,9 @@ export default (): UserConfigExport => {
         entry: resolve(process.cwd(), "./src/index.ts"),
         formats: ["es"],
       },
-      terserOptions: {
-        compress: {
-          drop_console: true,
-          drop_debugger: true,
-          pure_funcs: ["console.log"],
-        },
-        output: {
-          comments: true,
-        },
-      },
       rollupOptions: {
         input: inputs,
+        plugins: [terser()],
         output: {
           globals: {
             vue: "Vue",
@@ -98,14 +90,12 @@ export default (): UserConfigExport => {
           manualChunks(id) {
             let arr = id.toString().split("/");
             if (id.includes("node_modules")) {
-              //id => layui-vue/node_modules/.pnpm/@vue+devtools-api@6.1.4/node_modules/@vue/devtools-api/lib/esm/api/app.js
               const chunksName = "_chunks/";
               return (
                 chunksName +
                 id.toString().split("node_modules/")[2].split("/")[0].toString()
               );
             } else if (arr.length >= 2) {
-              //if (arr.length >= 2 && arr[arr.length - 1].split('.')[1] != 'ts'){
               let entryPoint = arr[arr.length - 2].toString();
               if (matchModule.includes(entryPoint)) {
                 return entryPoint;

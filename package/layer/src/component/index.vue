@@ -21,6 +21,7 @@ import {
   nextTick,
   onMounted,
   onUnmounted,
+  StyleValue,
 } from "vue";
 import {
   nextId,
@@ -47,6 +48,7 @@ import "../theme/index.css";
 export interface LayerProps {
   id?: string;
   title?: string | boolean | Function;
+  titleStyle?: string | StyleValue;
   icon?: string | number;
   skin?: string;
   zIndex?: number | Function;
@@ -106,6 +108,7 @@ export interface LayerProps {
 
 const props = withDefaults(defineProps<LayerProps>(), {
   title: "标题",
+  titleStyle: "",
   setTop: false,
   offset: "auto",
   area: "auto",
@@ -732,7 +735,13 @@ defineExpose({ reset, open, close });
         v-if="visible"
       >
         <!-- 标题 -->
-        <Title v-if="showTitle" :title="title" @mousedown="setTop">
+        <Title
+          v-if="showTitle"
+          :title="title"
+          :titleStyle="titleStyle"
+          :move="move"
+          @mousedown="setTop"
+        >
           <slot name="title"></slot>
         </Title>
         <!-- 内容 -->

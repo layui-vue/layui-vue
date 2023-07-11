@@ -15,7 +15,6 @@ import "./index.less";
 export interface OriginalTreeData {
   title: StringFn | string;
   id: StringOrNumber;
-  field: StringFn | string;
   children?: OriginalTreeData[];
   disabled?: boolean;
 }
@@ -27,7 +26,7 @@ export interface ReplaceFieldsOptions {
 }
 
 export interface TreeProps {
-  data: OriginalTreeData;
+  data: OriginalTreeData | OriginalTreeData[];
   disabled?: boolean;
   edit?: EditType;
   checkedKeys?: KeysType;

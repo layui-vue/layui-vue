@@ -6,7 +6,6 @@ export type EditType = boolean | ("add" | "update" | "delete");
 export interface OriginalTreeData {
   title: StringFn | string;
   id: StringOrNumber;
-  field: StringFn | string;
   children?: OriginalTreeData[];
   disabled?: boolean;
 }
@@ -20,7 +19,7 @@ export interface ReplaceFieldsOptions {
 export interface TreeProps {
   checkedKeys?: KeysType;
   expandKeys?: KeysType;
-  data: OriginalTreeData;
+  data: OriginalTreeData | OriginalTreeData[];
   checkStrictly?: boolean | string;
   showCheckbox?: boolean;
   edit?: EditType;
