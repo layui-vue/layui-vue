@@ -151,7 +151,7 @@ importers:
         specifier: 1.1.0
         version: link:../icons
       '@layui/layer-vue':
-        specifier: 1.8.10
+        specifier: 1.8.11
         version: link:../layer
       '@rollup/plugin-terser':
         specifier: 0.4.3
