@@ -30,6 +30,7 @@
                         <li>[优化] tree 组件 OriginalTreeData 类型，移除 field 无效属性。</li>
                         <li>[优化] tree 组件 data 属性 OriginalTreeData[] 类型兼容。</li>
                         <li>[优化] layer 组件消息通知 border-radius 为 2px。</li>
+                        <li>[优化] layer 组件，鼠标移入标题栏，根据 move 属性采用不同的样式。</li>
                         <li>[升级] layer-vue 到 1.8.11 版本。</li>
                     </ul>  
                 </li>
