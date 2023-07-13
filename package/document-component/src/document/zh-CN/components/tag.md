@@ -15,7 +15,7 @@
 <template>
   <lay-space size="md">
     <lay-tag maxWidth="100px">标签</lay-tag>
-    <lay-tag v-for="type in TAG_TYPES" :type="type" variant="light">标签</lay-tag>
+    <lay-tag v-for="type in TAG_TYPES" :type="type">标签</lay-tag>
   </lay-space>
 </template>
 

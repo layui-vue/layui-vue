@@ -61,24 +61,24 @@ const styleTag = computed(() => [
 
 function useTagCustomStyle(props: TagProps) {
   return computed(() => {
-    
     let styles: Record<string, string> = {};
 
     // Change
     changeFlag.value;
 
     if (props.color || props.type) {
-      
       var tagColor = undefined;
 
-      if(props.color) {
+      if (props.color) {
         tagColor = props.color;
       } else {
         const styles = getComputedStyle(document.documentElement);
-        const cssVariableValue = styles.getPropertyValue(`--global-${props.type}-color`);
+        const cssVariableValue = styles.getPropertyValue(
+          `--global-${props.type}-color`
+        );
         tagColor = cssVariableValue;
       }
-      
+
       const color = new TinyColor(tagColor);
       if (props.variant === "dark") {
         const isDark = color.getBrightness() < 190;
@@ -106,7 +106,7 @@ function useTagCustomStyle(props: TagProps) {
           "--layui-tag-text-color": tagColor,
         };
       }
-    } 
+    }
     return styles;
   });
 }
@@ -118,12 +118,21 @@ onMounted(() => {
   const element = document.documentElement;
   const observer = new MutationObserver(function (mutationsList) {
     for (let mutation of mutationsList) {
-      if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
+      if (
+        mutation.type === "attributes" &&
+        mutation.attributeName === "style"
+      ) {
         const styles = getComputedStyle(element);
-        const newCssVariableValue = styles.getPropertyValue(`--global-${props.type}-color`);
-        if(cssVariableValue == undefined || (cssVariableValue != undefined && cssVariableValue != newCssVariableValue)) {
-            cssVariableValue = newCssVariableValue;
-            changeFlag.value = !changeFlag.value;
+        const newCssVariableValue = styles.getPropertyValue(
+          `--global-${props.type}-color`
+        );
+        if (
+          cssVariableValue == undefined ||
+          (cssVariableValue != undefined &&
+            cssVariableValue != newCssVariableValue)
+        ) {
+          cssVariableValue = newCssVariableValue;
+          changeFlag.value = !changeFlag.value;
         }
       }
     }
@@ -132,13 +141,11 @@ onMounted(() => {
   const config = {
     attributes: true,
     attributeOldValue: true,
-    attributeFilter: ['style']
+    attributeFilter: ["style"],
   };
 
   observer.observe(element, config);
-})
-
-
+});
 </script>
 <template>
   <span v-if="visible" :class="classTag" :style="styleTag">
@@ -148,7 +155,11 @@ onMounted(() => {
     <span class="layui-tag-text">
       <slot />
     </span>
-    <span v-if="closable" class="layui-tag-close-icon" @click.stop="handleClose">
+    <span
+      v-if="closable"
+      class="layui-tag-close-icon"
+      @click.stop="handleClose"
+    >
       <slot name="close-icon">
         <lay-icon type="layui-icon-close"></lay-icon>
       </slot>

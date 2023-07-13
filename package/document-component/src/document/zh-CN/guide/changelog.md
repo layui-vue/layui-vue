@@ -17,6 +17,16 @@
             <ul>
                 <a name="2-3-2"></a>
                 <li>
+                    <h3>2.3.4 <span class="layui-badge-rim">2023-07-14</span></h3>
+                    <ul>
+                        <li>[修复] tag 组件 type 属性启用时，variant 为 light 失效的问题。</li>
+                        <li>[优化] tag 组件 text 颜色随 Css 变量自适应。</li>
+                    </ul>  
+                </li>
+            </ul>
+            <ul>
+                <a name="2-3-2"></a>
+                <li>
                     <h3>2.3.3 <span class="layui-badge-rim">2023-07-11</span></h3>
                     <ul>
                         <li>[新增] layer 组件 titleStyle 属性，用于自定义 title 样式。</li>
