@@ -6,7 +6,7 @@ export default {
 <script lang="ts" setup>
 import "./index.less";
 import { LayIcon } from "@layui/icons-vue";
-import { computed, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 import { TinyColor } from "@ctrl/tinycolor";
 import { TagShape, TagType, TagVariant } from "./interface";
 
@@ -61,11 +61,24 @@ const styleTag = computed(() => [
 
 function useTagCustomStyle(props: TagProps) {
   return computed(() => {
+    
     let styles: Record<string, string> = {};
 
-    const tagColor = props.color;
+    // Change
+    changeFlag.value;
 
-    if (tagColor) {
+    if (props.color || props.type) {
+      
+      var tagColor = undefined;
+
+      if(props.color) {
+        tagColor = props.color;
+      } else {
+        const styles = getComputedStyle(document.documentElement);
+        const cssVariableValue = styles.getPropertyValue(`--global-${props.type}-color`);
+        tagColor = cssVariableValue;
+      }
+      
       const color = new TinyColor(tagColor);
       if (props.variant === "dark") {
         const isDark = color.getBrightness() < 190;
@@ -93,11 +106,39 @@ function useTagCustomStyle(props: TagProps) {
           "--layui-tag-text-color": tagColor,
         };
       }
-    }
-
+    } 
     return styles;
   });
 }
+
+const changeFlag = ref(true);
+
+onMounted(() => {
+  var cssVariableValue: string | undefined = undefined;
+  const element = document.documentElement;
+  const observer = new MutationObserver(function (mutationsList) {
+    for (let mutation of mutationsList) {
+      if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
+        const styles = getComputedStyle(element);
+        const newCssVariableValue = styles.getPropertyValue(`--global-${props.type}-color`);
+        if(cssVariableValue == undefined || (cssVariableValue != undefined && cssVariableValue != newCssVariableValue)) {
+            cssVariableValue = newCssVariableValue;
+            changeFlag.value = !changeFlag.value;
+        }
+      }
+    }
+  });
+
+  const config = {
+    attributes: true,
+    attributeOldValue: true,
+    attributeFilter: ['style']
+  };
+
+  observer.observe(element, config);
+})
+
+
 </script>
 <template>
   <span v-if="visible" :class="classTag" :style="styleTag">
@@ -107,11 +148,7 @@ function useTagCustomStyle(props: TagProps) {
     <span class="layui-tag-text">
       <slot />
     </span>
-    <span
-      v-if="closable"
-      class="layui-tag-close-icon"
-      @click.stop="handleClose"
-    >
+    <span v-if="closable" class="layui-tag-close-icon" @click.stop="handleClose">
       <slot name="close-icon">
         <lay-icon type="layui-icon-close"></lay-icon>
       </slot>
