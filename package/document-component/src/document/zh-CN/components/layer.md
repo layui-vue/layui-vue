@@ -773,7 +773,7 @@ const openCallback = () => {
 | restore | 重置回调 | function | -  | - |
 | success | 打开回调 | function | -  | - |
 | end | 销毁回调 | function | -  | - |
-| close | 销毁回调 | function | -  | - |
+| close | 点击右上角 close 按钮 / 遮盖层的关闭回调 | function | -  | - |
 | moveOut | 是否可以拖出浏览器可视区域 | boolean | false  | true false |
 | moveStart | 拖拽开始回调  | function | -  | - |
 | moveEnd | 拖拽结束回调 | function | -  | - |
