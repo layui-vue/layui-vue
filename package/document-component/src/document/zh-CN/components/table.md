@@ -925,6 +925,17 @@ const dataSource9 = ref([
 
 :::
 
+::: title Table 方法
+:::
+
+::: table
+
+| 方法            | 描述     | 参数                                   |
+| --------------- | -------- | -------------------------------------- |
+| getCheckData    | 当存在 radio 和 checkbox 列时，该方法用于获取选中数据, 如果 radio 与 checkbox 列同时存在，获取去重后的唯一数据。   | --                    |
+
+:::
+
 ### <div id="tableColumn"></div>
 
 ::: title Table 数据
