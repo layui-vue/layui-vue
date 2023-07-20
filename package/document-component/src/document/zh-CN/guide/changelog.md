@@ -15,6 +15,16 @@
     <lay-timeline>
         <lay-timeline-item title="2.3.x">
             <ul>
+                <a name="2-3-5"></a>
+                <li>
+                    <h3>2.3.5 <span class="layui-badge-rim">2023-07-20</span></h3>
+                    <ul>
+                        <li>[文档] 新增 table 组件 getCheckData 方法说明。</li>
+                        <li>[文档] 明确 layer 组件 end 与 close 回调属性说明。</li>
+                    </ul>  
+                </li>
+            </ul>
+            <ul>
                 <a name="2-3-2"></a>
                 <li>
                     <h3>2.3.4 <span class="layui-badge-rim">2023-07-14</span></h3>
