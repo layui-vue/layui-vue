@@ -17,7 +17,7 @@
             <ul>
                 <a name="2-3-5"></a>
                 <li>
-                    <h3>2.3.5 <span class="layui-badge-rim">2023-07-20</span></h3>
+                    <h3>2.3.5 <span class="layui-badge-rim">2023-07-21</span></h3>
                     <ul>
                         <li>[修复] layer 组件 global-index 层级无法共享的问题。</li>
                         <li>[修复] form 组件 model 属性为深层时，执行 reset 报错问题。</li>
