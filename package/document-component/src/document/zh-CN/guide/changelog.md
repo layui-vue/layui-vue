@@ -19,6 +19,7 @@
                 <li>
                     <h3>2.3.5 <span class="layui-badge-rim">2023-07-20</span></h3>
                     <ul>
+                        <li>[修复] layer 组件 global-index 层级无法共享的问题。</li>
                         <li>[修复] form 组件 model 属性为深层时，执行 reset 报错问题。</li>
                         <li>[优化] form 组件 reset 方法逻辑，重置后不再重新验证内容。</li>
                         <li>[优化] button 组件 loading 属性，为 true 时，禁止 click 事件触发。 </li>

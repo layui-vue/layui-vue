@@ -473,7 +473,7 @@ const openAuto = function() {
 
 <template>
   <lay-button type="primary" @click="changeVisible11">填报信息</lay-button>
-  <lay-layer v-model="visible11" :area="['500px', '450px']">
+  <lay-layer v-model="visible11" :shade="false" :area="['500px', '450px']" :btn="action11">
     <div style="padding: 20px;">
       <lay-form :model="model11" ref="layFormRef11" required>
         <lay-form-item label="账户" prop="username">
@@ -518,29 +518,20 @@ const changeVisible11 = () => {
   visible11.value = !visible11.value;
 }
 
-const submit11 = function() {
-  layFormRef11.value.validate((isValidate, model, errors) => {
-      layer.open({
-      type: 1,
-      title:"表单提交结果", 
-      content: `<div style="padding: 10px"><p>是否通过 : ${isValidate}</p> <p>表单数据 : ${JSON.stringify(model)} </p> <p>错误信息 : ${JSON.stringify(errors)}</p></div>`, 
-      shade: false,
-      isHtmlFragment: true,
-      btn : [{ text: '确认', callback(index) {  layer.close(index) }}],
-      area : '500px'
-    });
-  });
-}
-
-// 清除校验
-const clearValidate11 = function() {
-  layFormRef11.value.clearValidate();
-}
-
-// 重置表单
-const reset11 = function() {
-  layFormRef11.value.reset();
-}
+const action11 = ref([
+    {
+        text: "确认",
+        callback: () => {
+            layer.confirm("确认操作", { shade: false });
+        }
+    },
+    {
+        text: "取消",
+        callback: () => {
+            layer.confirm("取消操作", { shade: false });
+        }
+    }
+])
 </script>
 
 :::
