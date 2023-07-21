@@ -6,7 +6,7 @@ export default {
 
 <script setup lang="ts">
 import "./index.less";
-import { toRefs, provide, reactive, onMounted } from "vue";
+import { toRefs, provide, reactive, onMounted, nextTick } from "vue";
 import { Rule, ValidateError, ValidateMessages } from "async-validator";
 import { LayFormItemContext, FormCallback, modelType } from "../../types/form";
 
@@ -129,11 +129,18 @@ const clearValidate = function (fields?: string | string[]) {
  * 重置表单所有值
  **/
 const reset = function () {
-  for (const key in props.model) {
-    props.model[key] = null;
+  resetObject(props.model);
+  nextTick(() => clearValidate());
+};
+
+const resetObject = (obj: { [key: string]: unknown }): void => {
+  for (const key in obj) {
+    if (obj[key] instanceof Object && !(obj[key] instanceof Function)) {
+      resetObject(obj[key] as { [key: string]: unknown });
+    } else {
+      obj[key] = null;
+    }
   }
-  // 重新校验
-  setTimeout(() => validate()?.catch((err) => {}), 0);
 };
 
 // 添加子项
