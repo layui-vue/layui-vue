@@ -1,26 +1,26 @@
 {
   "name": "@layui/layui-vue",
-  "version": "2.3.4",
+  "version": "2.3.5",
   "author": "就眠儀式",
   "license": "MIT",
   "description": "a component library for Vue 3 base on layui-vue",
   "homepage": "http://www.layui-vue.com",
+  "type": "module",
+  "main": "es/index.js",
+  "unpkg": "umd/index.js",
+  "jsdelivr": "umd/index.js",
+  "web-types": "types/web-types.json",
+  "types": "types/index.d.ts",
+  "style": "lib/index.css",
+  "vetur": {
+    "tags": "types/tags.json",
+    "attributes": "types/attributes.json"
+  },
   "sideEffects": [
     "lib/*.css",
     "es/**/*.css",
     "umd/*.css"
   ],
-  "main": "es/index.js",
-  "unpkg": "umd/index.js",
-  "jsdelivr": "umd/index.js",
-  "types": "types/index.d.ts",
-  "web-types": "types/web-types.json",
-  "vetur": {
-    "tags": "types/tags.json",
-    "attributes": "types/attributes.json"
-  },
-  "style": "lib/index.css",
-  "type": "module",
   "keywords": [
     "vue",
     "vue-component",
@@ -46,7 +46,7 @@
   "dependencies": {
     "@rollup/plugin-terser":"0.4.3",
     "@layui/icons-vue": "1.1.0",
-    "@layui/layer-vue": "1.8.11",
+    "@layui/layer-vue": "1.8.12",
     "@vueuse/core": "8.7.3",
     "@umijs/ssr-darkreader": "^4.9.45",
     "@ctrl/tinycolor": "^3.4.1",

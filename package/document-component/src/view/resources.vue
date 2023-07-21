@@ -47,7 +47,7 @@
       </div>
     </fieldset>
   </div>
-  <div class="footer footer-index">
+  <div class="footer footer-index" style="position: fixed; bottom: 0px">
     <p>Released under the <a href="/index.html">MIT License</a>.</p>
     <p>Copyright © 2021-2023 www.layui-vue.com</p>
     <p>
@@ -84,16 +84,19 @@
   transition: all 0.3s;
   -webkit-transition: all 0.3s;
 }
+
 .alone:hover a {
   color: white !important;
   background-color: var(--global-checked-color);
 }
+
 .alone a {
   display: block;
   padding: 50px 20px;
   color: #fff;
   font-size: 30px;
 }
+
 .alone a cite {
   display: block;
   padding-top: 10px;

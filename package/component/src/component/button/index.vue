@@ -33,12 +33,12 @@ export interface ButtonProps {
 }
 
 const props = withDefaults(defineProps<ButtonProps>(), {
-  loadingIcon: "layui-icon-loading-one",
   borderStyle: "soild",
-  nativeType: "button",
-  loading: false,
   radius: false,
+  loadingIcon: "layui-icon-loading-one",
+  nativeType: "button",
   fluid: false,
+  loading: false,
 });
 
 const { size } = useProps(props);
@@ -46,7 +46,7 @@ const { size } = useProps(props);
 const emits = defineEmits(ButtonEmits);
 
 const onClick = (event: MouseEvent) => {
-  if (!props.disabled) {
+  if (!props.disabled && !props.loading) {
     emits("click", event);
   }
 };
@@ -85,7 +85,9 @@ const classes = computed(() => {
       :class="loadingIcon"
       class="layui-icon layui-anim layui-anim-rotate layui-anim-loop"
     ></i>
-    <slot v-else></slot>
+    <span>
+      <slot></slot>
+    </span>
     <i v-if="suffixIcon" :class="`layui-icon ${suffixIcon}`"></i>
   </button>
 </template>

@@ -202,7 +202,7 @@ import { ref } from 'vue';
 
 <template>
   <lay-button-container>
-      <lay-button type="default" :loading="loadState">加载</lay-button>
+      <lay-button type="primary" :loading="loadState" @click="loadStateClick">加载</lay-button>
       <lay-button type="default" :loading="loadState" loadingIcon="layui-icon-loading">加载</lay-button>
       <lay-switch v-model="loadState"></lay-switch>
   </lay-button-container>
@@ -212,6 +212,10 @@ import { ref } from 'vue';
 import { ref } from 'vue';
 
 const loadState = ref(true);
+
+const loadStateClick = () => {
+  alert("触发")
+}
 </script>
 
 :::

@@ -645,10 +645,10 @@ const labelPosition3 = ref('right');
         <lay-select-option value="3" label="运动"></lay-select-option>
       </lay-select>
     </lay-form-item>
-    <lay-form-item label="特长" prop="specialty">
-      <lay-radio v-model="model4.specialty" name="specialty" value="1">写作</lay-radio>
-      <lay-radio v-model="model4.specialty" name="specialty" value="2">画画</lay-radio>
-      <lay-radio v-model="model4.specialty" name="specialty" value="3">编码</lay-radio>
+    <lay-form-item label="特长" prop="specialty.x">
+      <lay-radio v-model="model4.specialty.x" name="specialty" value="1">写作</lay-radio>
+      <lay-radio v-model="model4.specialty.x" name="specialty" value="2">画画</lay-radio>
+      <lay-radio v-model="model4.specialty.x" name="specialty" value="3">编码</lay-radio>
     </lay-form-item>
     <lay-form-item label="描述" prop="desc">
       <lay-textarea placeholder="请输入描述" v-model="model4.desc"></lay-textarea>
@@ -665,7 +665,11 @@ const labelPosition3 = ref('right');
 import { ref, reactive } from 'vue'
 import { layer } from '@layui/layer-vue'
 
-const model4 = reactive({})
+const model4 = reactive({
+	specialty: {
+		x: "1"
+	}
+})
 
 const layFormRef4 = ref();
 

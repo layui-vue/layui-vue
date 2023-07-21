@@ -15,6 +15,22 @@
     <lay-timeline>
         <lay-timeline-item title="2.3.x">
             <ul>
+                <a name="2-3-5"></a>
+                <li>
+                    <h3>2.3.5 <span class="layui-badge-rim">2023-07-21</span></h3>
+                    <ul>
+                        <li>[修复] layer 组件 global-index 层级无法共享的问题。</li>
+                        <li>[修复] form 组件 model 属性为深层时，执行 reset 报错问题。</li>
+                        <li>[优化] form 组件 reset 方法逻辑，重置后不再重新验证内容。</li>
+                        <li>[优化] button 组件 loading 属性，为 true 时，禁止 click 事件触发。 </li>
+                        <li>[优化] button 组件 loading 属性，为 true 时，保留原有文本。</li>
+                        <li>[优化] button 组件 suffix-icon 与 prefix-icon 属性，增加左右边距。</li>
+                        <li>[文档] 新增 table 组件 getCheckData 方法说明。</li>
+                        <li>[文档] 明确 layer 组件 end 与 close 回调属性说明。</li>
+                    </ul>  
+                </li>
+            </ul>
+            <ul>
                 <a name="2-3-2"></a>
                 <li>
                     <h3>2.3.4 <span class="layui-badge-rim">2023-07-14</span></h3>
