@@ -1,6 +1,9 @@
 <template>
   <div style="margin-top: 60px; width: 80%" class="layui-container">
-    <blockquote class="layui-quote layui-text" style="margin: 30px 0; letter-spacing: 1px">
+    <blockquote
+      class="layui-quote layui-text"
+      style="margin: 30px 0; letter-spacing: 1px"
+    >
       以创造性的行为实践于人世。若能以写作为工具，为道途，先帮助自己一程，再以领悟帮助他人一程。这是一种服务
       - 庆山
     </blockquote>
@@ -10,12 +13,16 @@
         <ul class="layui-row layui-col-space6">
           <li class="layui-col-sm12">
             <div class="alone">
-              <router-link to="/zh-CN/components/layer">layer - vue<cite>通用型弹出层组件</cite></router-link>
+              <router-link to="/zh-CN/components/layer"
+                >layer - vue<cite>通用型弹出层组件</cite></router-link
+              >
             </div>
           </li>
           <li class="layui-col-sm12">
             <div class="alone">
-              <router-link to="/zh-CN/components/icon">icons - vue<cite>图标组件化解决方案</cite></router-link>
+              <router-link to="/zh-CN/components/icon"
+                >icons - vue<cite>图标组件化解决方案</cite></router-link
+              >
             </div>
           </li>
         </ul>
@@ -27,23 +34,39 @@
         <ul class="layui-row layui-col-space6">
           <li class="layui-col-sm24">
             <div class="alone">
-              <a href="https://gitee.com/layui-vue/layui-vue-admin" target="_blank">layui - vue - admin<cite>开箱即用的 vue 3.0
-                  后台管理模板
-                </cite></a>
+              <a
+                href="https://gitee.com/layui-vue/layui-vue-admin"
+                target="_blank"
+                >layui - vue - admin<cite
+                  >开箱即用的 vue 3.0 后台管理模板
+                </cite></a
+              >
             </div>
           </li>
         </ul>
       </div>
     </fieldset>
   </div>
-  <div class="footer footer-index" style="position: fixed;bottom: 0px;">
+  <div class="footer footer-index" style="position: fixed; bottom: 0px">
     <p>Released under the <a href="/index.html">MIT License</a>.</p>
     <p>Copyright © 2021-2023 www.layui-vue.com</p>
     <p>
       鸣谢：
-      <a href="https://www.oschina.net" style="color: #16b777; font-weight: 800; margin: 0px 5px">Oschina</a>
-      <a href="https://gitee.com" style="color: #c71d23; font-weight: 800; margin: 0px 5px">Gitee</a>
-      <a href="https://www.iconfont.cn/" style="color: #9b16ff; font-weight: 800; margin: 0px 5px">iconfont</a>
+      <a
+        href="https://www.oschina.net"
+        style="color: #16b777; font-weight: 800; margin: 0px 5px"
+        >Oschina</a
+      >
+      <a
+        href="https://gitee.com"
+        style="color: #c71d23; font-weight: 800; margin: 0px 5px"
+        >Gitee</a
+      >
+      <a
+        href="https://www.iconfont.cn/"
+        style="color: #9b16ff; font-weight: 800; margin: 0px 5px"
+        >iconfont</a
+      >
     </p>
   </div>
 </template>
