@@ -55,10 +55,6 @@
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
 }
 
-.layui-layer-load {
-  background: url(loading-1.gif) center center no-repeat #eee;
-}
-
 .layui-layer-ico {
   background: url(icon.png) no-repeat;
 }
@@ -851,22 +847,25 @@
 }
 
 .layui-layer-loading .layui-layer-content {
-  width: 60px;
-  height: 24px;
-  background: url(loading-0.gif) no-repeat;
+  width: 240px;
+  height: 96px;
+  background: url(loading-0.svg) no-repeat;
+  background-position: center;
 }
 
 .layui-layer-loading .layui-layer-loading1 {
   width: 37px;
   height: 37px;
-  background: url(loading-1.gif) no-repeat;
+  background: url(loading-1.svg) no-repeat;
+  background-position: center;
 }
 
 .layui-layer-ico16,
 .layui-layer-loading .layui-layer-loading2 {
-  width: 32px;
-  height: 32px;
-  background: url(loading-2.gif) no-repeat;
+  width: 40px;
+  height: 40px;
+  background: url(loading-2.svg) no-repeat;
+  background-position: center;
 }
 
 .layui-layer-iconext {

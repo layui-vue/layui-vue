@@ -133,7 +133,7 @@ const layer = {
       startIndex: 0,
       isOutAnim: true,
       shadeClose: true,
-      shadeOpacity: "0.7",
+      shadeOpacity: "0.2",
     };
     return layer.create(option, defaultOption, callback);
   },
