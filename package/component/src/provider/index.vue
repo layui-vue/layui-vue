@@ -7,7 +7,7 @@ export default {
 <script setup lang="ts">
 import { watch } from "vue";
 import { useI18n } from "../language";
-import {
+import DarkReader, {
   Theme,
   DynamicThemeFix,
   enable as enableDarkMode,
@@ -85,6 +85,7 @@ const changeLocales = (lang: string, locales: any, merge: boolean) => {
 };
 
 const changeTheme = (theme: string) => {
+
   const defaultPartial: Partial<Theme> = {
     mode: 1,
     brightness: 100,
@@ -95,10 +96,17 @@ const changeTheme = (theme: string) => {
 
   const defaultFixes: DynamicThemeFix = {
     css: fixCss,
-    invert: [".lay-progress-circle svg"],
-    ignoreImageAnalysis: [],
-    disableStyleSheetsProxy: false,
+    invert: [
+        ".lay-progress-circle svg", 
+        ".layui-layer-loading .layui-layer-loading1", 
+        ".layui-layer-loading .layui-layer-loading2",
+        ".layui-layer-ico",
+        ".layui-layer-min",
+        ".layer-icon-ico16"
+    ],
     ignoreInlineStyle: ignoreInlineStyle,
+    disableStyleSheetsProxy: false,
+    ignoreImageAnalysis: ["*"],
   };
 
   Object.assign(defaultPartial, props.darkPartial);
