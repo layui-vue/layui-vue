@@ -340,7 +340,7 @@ export async function calculatePhotosArea(
       resolve(area(img));
       return;
     }
-    const layerId = layer.load(2);
+    const layerId = layer.load(2, { shadeOpacity: "0" });
     img.onload = () => {
       layer.close(layerId);
       resolve(area(img));

@@ -136,7 +136,11 @@ const reset = function () {
 const resetObject = (obj: { [key: string]: unknown }): void => {
   for (const key in obj) {
     if (obj[key] instanceof Object && !(obj[key] instanceof Function)) {
-      resetObject(obj[key] as { [key: string]: unknown });
+      if(obj[key] instanceof Array) {
+        obj[key] = [];
+      } else {
+        resetObject(obj[key] as { [key: string]: unknown });
+      }
     } else {
       obj[key] = null;
     }

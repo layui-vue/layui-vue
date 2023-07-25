@@ -15,6 +15,28 @@
     <lay-timeline>
         <lay-timeline-item title="2.3.x">
             <ul>
+                <a name="2-3-7"></a>
+                <li>
+                    <h3>2.3.7 <span class="layui-badge-rim">2023-07-25</span></h3>
+                    <ul>
+                        <li>[优化] layer 组件 max min 等操作夜间模式无法分辨的问题。</li>
+                        <li>[优化] layer.load(1) 资源，由 gif 升级为 svg，解决矢帧问题。</li>
+                        <li>[优化] layer.load(2) 资源，由 gif 升级为 svg，解决矢帧问题。</li>
+                        <li>[优化] layer.load(3) 资源，由 gif 升级为 svg，解决矢帧问题。</li>
+                        <li>[升级] layer-vue 到 1.9.0 版本。</li>
+                    </ul>  
+                </li>
+            </ul>
+            <ul>
+                <a name="2-3-6"></a>
+                <li>
+                    <h3>2.3.6 <span class="layui-badge-rim">2023-07-25</span></h3>
+                    <ul>
+                        <li>[修复] form 组件 reset 方法无法清空数组类型数据。</li>
+                    </ul>  
+                </li>
+            </ul>
+            <ul>
                 <a name="2-3-5"></a>
                 <li>
                     <h3>2.3.5 <span class="layui-badge-rim">2023-07-21</span></h3>
