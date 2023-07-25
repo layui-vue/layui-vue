@@ -32,7 +32,7 @@
                 <li>
                     <h3>2.3.6 <span class="layui-badge-rim">2023-07-25</span></h3>
                     <ul>
-                        <li>[修复] layer 组件 global-index 层级无法共享的问题。</li>
+                        <li>[修复] form 组件 reset 方法无法清空数组类型数据。</li>
                     </ul>  
                 </li>
             </ul>
