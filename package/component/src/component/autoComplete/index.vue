@@ -210,6 +210,7 @@ const clickHandler = function () {
  */
 const clickOptions = function (option: any) {
   innerValue.value = option[props.replaceFields.value];
+  emits("update:modelValue", option.value);
   emits("select", option);
 };
 
@@ -271,6 +272,7 @@ onMounted(() => {
           const option = innerOptions.value[selectedIndex.value];
           innerValue.value = option[props.replaceFields.value];
           dropdownRef.value.hide();
+          emits("update:modelValue", option.value);
           emits("select", option);
         }
       }
