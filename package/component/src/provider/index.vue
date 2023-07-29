@@ -85,7 +85,6 @@ const changeLocales = (lang: string, locales: any, merge: boolean) => {
 };
 
 const changeTheme = (theme: string) => {
-
   const defaultPartial: Partial<Theme> = {
     mode: 1,
     brightness: 100,
@@ -97,12 +96,12 @@ const changeTheme = (theme: string) => {
   const defaultFixes: DynamicThemeFix = {
     css: fixCss,
     invert: [
-        ".lay-progress-circle svg", 
-        ".layui-layer-loading .layui-layer-loading1", 
-        ".layui-layer-loading .layui-layer-loading2",
-        ".layui-layer-ico",
-        ".layui-layer-min",
-        ".layer-icon-ico16"
+      ".lay-progress-circle svg",
+      ".layui-layer-loading .layui-layer-loading1",
+      ".layui-layer-loading .layui-layer-loading2",
+      ".layui-layer-ico",
+      ".layui-layer-min",
+      ".layer-icon-ico16",
     ],
     ignoreInlineStyle: ignoreInlineStyle,
     disableStyleSheetsProxy: false,

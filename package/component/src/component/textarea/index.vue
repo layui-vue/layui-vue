@@ -111,8 +111,8 @@ watch(
     heightStyle.value = "1px";
     nextTick(() => {
       // @ts-ignore
-      heightStyle.value = `${textareaRef.value?.scrollHeight + 2}px`
-    })
+      heightStyle.value = `${textareaRef.value?.scrollHeight + 2}px`;
+    });
   },
   {
     immediate: true,

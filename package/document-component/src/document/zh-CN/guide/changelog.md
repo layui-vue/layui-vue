@@ -23,6 +23,7 @@
                         <li>[修复] autoComplete 组件 modelValue 属性选中时不更新的问题。</li>
                         <li>[文档] 补充 textarea.md 高度自适应，固定案列案例。</li>
                         <li>[文档] 修正 table.md 中 max-height 与 height 属性类型描述错误。</li>
+                        <li>[文档] 补充 table.md 中 total-row 行统计案例。</li>
                         <li>[优化] step 组件 type 属性为 primary 时的颜色为 #16baaa。</li>
                         <li>[优化] step 组件 type 属性为 primary 时的颜色不跟随主题色的问题。</li>
                     </ul>  
