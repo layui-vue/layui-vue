@@ -147,7 +147,7 @@ export default {
 
 :::
 
-::: title 内置方法
+::: title 获取焦点
 :::
 
 ::: demo 使用 `lay-textarea` 标签, 创建文本域
@@ -157,6 +157,8 @@ export default {
     <button @click="focus">获取焦点</button>
     <button @click="blur ">失去焦点</button>
   </lay-space>
+  <br />
+  <br />
   <lay-textarea placeholder="请输入描述" ref="textareaRef"  v-model="data1"></lay-textarea>
 </template>
 
@@ -188,6 +190,58 @@ export default {
 
 :::
 
+::: title 自动高度
+:::
+
+::: demo 使用 `lay-textarea` 标签, 创建文本域
+
+<template>
+  <lay-textarea placeholder="请输入描述" :autosize="{minHeight: 100, maxHeight: 200}"  v-model="data1"></lay-textarea>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const data1 = ref('');
+
+    return {
+      data1,
+    }
+  }
+}
+</script>
+
+:::
+
+::: title 固定行列
+:::
+
+::: demo 使用 `lay-textarea` 标签, 创建文本域
+
+<template>
+  <lay-textarea placeholder="请输入描述" :cols="10" :rows="10" v-model="data2"></lay-textarea>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const data2 = ref('');
+
+    return {
+      data2,
+    }
+  }
+}
+</script>
+
+:::
+
 ::: title Textarea 属性
 :::
 
@@ -203,6 +257,7 @@ export default {
 | maxlength   | 限制输入长度   | --             | |
 | rows   | 原生 rows 属性       | --             | 1.8.7 |
 | cols   | 原生 cols 属性      | --             | 1.8.7 |
+| autosize | 高度自适应 { maxHeight: 300, minHeight: 100 }      | --             | 2.3.8 |
 :::
 
 ::: title Textarea 事件

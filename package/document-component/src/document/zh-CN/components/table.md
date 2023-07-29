@@ -859,6 +859,71 @@ const dataSource9 = ref([
 
 :::
 
+::: title 开启统计
+:::
+
+::: demo 通过 `columns` 配置 `totalRow` 开启行统计。
+
+<template>
+  <lay-table :columns="columns2" :data-source="dataSource2" v-model:expandKeys="expandKeys2">
+  </lay-table>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const columns2 = [
+      { title:"编号", width:"80px", key:"id", fixed: "left", sort: "desc" , totalRow: "合计"},
+      { title:"姓名", width:"80px", key:"name" },
+      { title:"班级", width:"120px", key:"classes" },
+      { title:"语文", width:"80px", key:"chinese", totalRow: true },
+      { title:"数学", width:"80px", key:"mathematics", totalRow: true  },
+      { title:"英语", width:"80px", key:"english", totalRow: true  },
+      { title:"生物", width:"80px", key:"organism", totalRow: true  },
+      { title:"地理", width:"80px", key:"geography", totalRow: true  },
+      { title:"历史", width:"80px", key:"history", totalRow: true  },
+      { title:"政治", width:"80px", key:"politics", totalRow: true  },
+      { title:"总分", width: "180px", key:"score"  }
+    ]
+
+    const dataSource2 = [
+      {id:"1", name:"张三1", classes:"六年级一班", chinese: 80, mathematics: 50, english: 60, organism: 80, geography: 22, history:55, politics: 53, score:454},
+      {id:"2", name:"张三2", classes:"六年级二班", chinese: 80, mathematics: 50, english: 60, organism: 80, geography: 22, history:55, politics: 53, score:432},
+      {id:"3", name:"张三3", classes:"六年级三班", chinese: 80, mathematics: 50, english: 60, organism: 80, geography: 22, history:55, politics: 53, score:534},
+      {id:"4", name:"张三4", classes:"六年级四班", chinese: 80, mathematics: 50, english: 60, organism: 80, geography: 22, history:55, politics: 53, score:342},
+      {id:"5", name:"张三5", classes:"六年级五班", chinese: 80, mathematics: 50, english: 60, organism: 80, geography: 22, history:55, politics: 53, score:653},
+      {id:"6", name:"张三6", classes:"六年级六班", chinese: 80, mathematics: 50, english: 60, organism: 80, geography: 22, history:55, politics: 53, score:632},
+    ]
+
+    const expandKeys2 = ref([])
+    const defaultExpandAll2 = ref(false)
+
+    return {
+      columns2,
+      dataSource2,
+      expandKeys2,
+      defaultExpandAll2
+    }
+  }
+}
+</script>
+
+<style lang="less">
+.expand-content {
+  width: 100%;
+  padding: 0px 20px 20px 0px;
+  .layui-progress {
+    margin-top: 24px;
+  }
+}
+</style>
+
+:::
+
+
 ::: title Table 属性
 :::
 
@@ -875,8 +940,8 @@ const dataSource9 = ref([
 | size                 | 表格大小                                                   | `string`            | `md`       | `lg` `md` `sm`                               | 
 | children-column-name | 指定树形结构的列名                                          | `string`            | `children` | --                                           | 
 | indent-size          | 指定树形结构的缩进距离                                       | `number`            | `30`       | --                                           | 
-| height               | 表格高度                                                   | `number`            | --         | --                                           | 
-| maxHeight            | 表格最大高度                                               | `number`            | --         | --                                           | 
+| height               | 表格高度                                                   | `string`            | --         | --                                           | 
+| maxHeight            | 表格最大高度                                               | `string`            | --         | --                                           | 
 | even                 | 开启斑马条纹                                               | `boolean`           | `false`    | `true` `false`                               | 
 | cellStyle            | 单元格样式 function(row, column, rowIndex, columnIndex)    | `string` `function` | --         | --                                           | 
 | rowStyle             | 表格行样式 function(row, rowIndex)                         | `string` `function` | --         | --                                           | 
