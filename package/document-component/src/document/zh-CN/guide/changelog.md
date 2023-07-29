@@ -15,6 +15,20 @@
     <lay-timeline>
         <lay-timeline-item title="2.3.x">
             <ul>
+                <a name="2-3-8"></a>
+                <li>
+                    <h3>2.3.8 <span class="layui-badge-rim">2023-07-30</span></h3>
+                    <ul>
+                        <li>[新增] textarea 组件 autosize 属性，根据内容自适应高度。</li>
+                        <li>[修复] autoComplete 组件 modelValue 属性选中时不更新的问题。</li>
+                        <li>[文档] 补充 textarea.md 高度自适应，固定案列案例。</li>
+                        <li>[文档] 修正 table.md 中 max-height 与 height 属性类型描述错误。</li>
+                        <li>[优化] step 组件 type 属性为 primary 时的颜色为 #16baaa。</li>
+                        <li>[优化] step 组件 type 属性为 primary 时的颜色不跟随主题色的问题。</li>
+                    </ul>  
+                </li>
+            </ul>
+            <ul>
                 <a name="2-3-7"></a>
                 <li>
                     <h3>2.3.7 <span class="layui-badge-rim">2023-07-25</span></h3>

@@ -875,8 +875,8 @@ const dataSource9 = ref([
 | size                 | 表格大小                                                   | `string`            | `md`       | `lg` `md` `sm`                               | 
 | children-column-name | 指定树形结构的列名                                          | `string`            | `children` | --                                           | 
 | indent-size          | 指定树形结构的缩进距离                                       | `number`            | `30`       | --                                           | 
-| height               | 表格高度                                                   | `number`            | --         | --                                           | 
-| maxHeight            | 表格最大高度                                               | `number`            | --         | --                                           | 
+| height               | 表格高度                                                   | `string`            | --         | --                                           | 
+| maxHeight            | 表格最大高度                                               | `string`            | --         | --                                           | 
 | even                 | 开启斑马条纹                                               | `boolean`           | `false`    | `true` `false`                               | 
 | cellStyle            | 单元格样式 function(row, column, rowIndex, columnIndex)    | `string` `function` | --         | --                                           | 
 | rowStyle             | 表格行样式 function(row, rowIndex)                         | `string` `function` | --         | --                                           | 

@@ -38,10 +38,13 @@ const emit = defineEmits<TextareaEmits>();
 const textareaRef = ref<HTMLTextAreaElement | null>(null);
 const composing = ref(false);
 const attrs = useAttrs();
+
+const heightStyle = ref("auto");
+
 const defaultStyle = computed(() => {
   return {
     width: props.cols ? "" : "100%",
-    height: props.rows ? "" : "auto",
+    height: props.rows ? "" : heightStyle.value,
     minHeight: props.rows ? "" : "100px",
   };
 });
@@ -105,10 +108,11 @@ watch(
       const { minHeight, maxHeight } = props.autosize;
       if (height < minHeight || height > maxHeight) return;
     }
-    textareaRef.value!.style.height = "1px";
-    textareaRef.value!.style.height = `${
-      textareaRef.value?.scrollHeight + 2
-    }px`;
+    heightStyle.value = "1px";
+    nextTick(() => {
+      // @ts-ignore
+      heightStyle.value = `${textareaRef.value?.scrollHeight + 2}px`
+    })
   },
   {
     immediate: true,
