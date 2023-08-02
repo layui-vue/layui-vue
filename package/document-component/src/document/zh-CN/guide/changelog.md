@@ -19,6 +19,7 @@
                 <li>
                     <h3>2.3.9 <span class="layui-badge-rim">2023-08-02</span></h3>
                     <ul>
+                        <li>[修复] line 组件夜间模式下的兼容性问题，无法正常显示。</li>
                         <li>[修复] 夜间模式 global-primary-color 被强制覆盖的问题。</li>
                     </ul>  
                 </li>
