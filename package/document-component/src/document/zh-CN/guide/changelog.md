@@ -12,8 +12,17 @@
 
 ::: demo
 <template>
-    <lay-timeline>
+<lay-timeline>
         <lay-timeline-item title="2.3.x">
+            <ul>
+                <a name="2-3-9"></a>
+                <li>
+                    <h3>2.3.9 <span class="layui-badge-rim">2023-08-02</span></h3>
+                    <ul>
+                        <li>[修复] 夜间模式 global-primary-color 被强制覆盖的问题。</li>
+                    </ul>  
+                </li>
+            </ul>
             <ul>
                 <a name="2-3-8"></a>
                 <li>
