@@ -5,7 +5,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed, useSlots } from "vue";
+import { StyleValue, computed, useSlots } from "vue";
 import "./index.less";
 export interface LineProps {
   direction?: "horizontal" | "vertical";
@@ -46,12 +46,25 @@ const lineClass = computed(() => [
   },
 ]);
 
-const lineStyle = computed(() => ({
-  "border-color": !isBuiltInColor ? props.theme : undefined,
-  "--layui-line-border-width": props.borderWidth,
-  "--layui-line-border-style": props.borderStyle,
-  "--layui-line-margin": props.margin,
-}));
+const lineStyle = computed(() => {
+  return props.direction === 'horizontal' ? {
+    "border-bottom-color": !isBuiltInColor ? props.theme : undefined,
+    "border-bottom-width": props.borderWidth,
+    "border-bottom-style": props.borderStyle,
+    "margin": `${props.margin} 0`,
+    "border-right": "none",
+    "border-left": "none",
+    "border-top": 'none',
+  } as StyleValue : {
+    "border-left-color": !isBuiltInColor ? props.theme : undefined,
+    "border-left-width": props.borderWidth,
+    "border-left-style": props.borderStyle,
+    "margin": `0 ${props.margin}`,
+    "border-bottom": "none",
+    "border-right": "none",
+    "border-top": 'none',
+  } as StyleValue
+});
 
 const lineTextStyle = computed(() => ({
   "--layui-line-text-offset":
@@ -71,11 +84,8 @@ function calcTranslate() {
 
 <template>
   <div :class="lineClass" :style="lineStyle">
-    <span
-      v-if="$slots.default && direction === 'horizontal'"
-      :class="[`layui-line-text layui-line-text-${contentPosition}`]"
-      :style="lineTextStyle"
-    >
+    <span v-if="$slots.default && direction === 'horizontal'"
+      :class="[`layui-line-text layui-line-text-${contentPosition}`]" :style="lineTextStyle">
       <slot />
     </span>
   </div>
