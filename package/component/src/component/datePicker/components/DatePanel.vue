@@ -134,12 +134,14 @@ const footOnOk = () => {
 const footOnNow = () => {
   datePicker.currentYear.value = dayjs().year();
   datePicker.currentMonth.value = dayjs().month();
-  Day.value = new Date(new Date().toDateString()).getTime();
+  datePicker.currentDay.value = new Date(new Date().toDateString()).getTime();
+  Day.value = datePicker.currentDay.value
 };
 
 //清空回调
 const footOnClear = () => {
   Day.value = -1;
+  datePicker.currentDay.value = -1;
 };
 
 const ChildUpdateModelValue = () => {
