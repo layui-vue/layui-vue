@@ -86,7 +86,7 @@ function useTagCustomStyle(props: TagProps) {
         styles = {
           "background-color": tagColor,
           "border-color": props.bordered ? tagColor : "transparent",
-          "color": textColor,
+          color: textColor,
         };
       } else if (props.variant === "light") {
         styles = {
@@ -94,13 +94,13 @@ function useTagCustomStyle(props: TagProps) {
           "border-color": props.bordered
             ? color.tint(50).toString()
             : "transparent",
-          "color": tagColor,
+          color: tagColor,
         };
       } else if (props.variant === "plain") {
         styles = {
           "background-color": "transparent",
           "border-color": props.bordered ? tagColor : "transparent",
-          "color": tagColor,
+          color: tagColor,
         };
       }
     }

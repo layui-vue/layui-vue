@@ -135,7 +135,7 @@ const footOnNow = () => {
   datePicker.currentYear.value = dayjs().year();
   datePicker.currentMonth.value = dayjs().month();
   datePicker.currentDay.value = new Date(new Date().toDateString()).getTime();
-  Day.value = datePicker.currentDay.value
+  Day.value = datePicker.currentDay.value;
 };
 
 //清空回调

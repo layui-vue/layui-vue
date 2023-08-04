@@ -145,8 +145,8 @@ const footOnOk = () => {
   } else {
     if (datePicker.type === "datetime") {
       datePicker.showPanel.value = "date";
-      if( datePicker.currentDay.value < 1 ){
-        return
+      if (datePicker.currentDay.value < 1) {
+        return;
       }
     }
     datePicker.ok();
