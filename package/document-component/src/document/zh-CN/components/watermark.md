@@ -7,8 +7,8 @@
 ::: demo
 
 <template>
-	<div style="height: 300px; width: 100%">
-		<lay-watermark content="Layui" font="20px Microsoft Yahei">
+	<div style="height: 300px; width: 100%; position: relative" class="lay-watermark">
+		<lay-watermark content="Layui" font="20px Microsoft Yahei" element-box=".lay-watermark" rotate="90">
 		</lay-watermark>
 	</div>
 </template>
@@ -16,7 +16,7 @@
 <script>
  import { ref, reactive } from 'vue'
 import { layer } from '@layui/layer-vue'
-
+const value2 = ref(45)
 const model = reactive({})
 
 const submit = () => {
@@ -32,24 +32,23 @@ const submit = () => {
 ::: demo
 
 <template>
-	<div style="height: 300px; width: 100%">
-		<lay-watermark content="Layui" font="20px Microsoft Yahei">
-<lay-form :model="model">
-    <lay-form-item label="账户" prop="username">
-      <lay-input v-model="model.username"></lay-input>
-    </lay-form-item>
-    <lay-form-item label="密码" prop="password">
-      <lay-input v-model="model.password" type="text"></lay-input>
-    </lay-form-item>
-    <lay-form-item label="描述" prop="desc">
-      <lay-input placeholder="请输入描述" v-model="model.describe"></lay-input>
-    </lay-form-item>
-    <lay-form-item style="text-align: center;">
-      <lay-button type="primary" @click="submit">提交</lay-button>
-      <lay-button type="default" @click="">重置</lay-button>
-    </lay-form-item>
-  </lay-form>
-		</lay-watermark>
+	<div style="height: 300px; width: 100%; position: relative" class="lay-watermark-form">
+		<lay-watermark content="Layui-form" font="20px Microsoft Yahei" element-box=".lay-watermark-form"></lay-watermark>
+	<lay-form :model="model">
+			<lay-form-item label="账户" prop="username">
+				<lay-input v-model="model.username"></lay-input>
+			</lay-form-item>
+			<lay-form-item label="密码" prop="password">
+				<lay-input v-model="model.password" type="text"></lay-input>
+			</lay-form-item>
+			<lay-form-item label="描述" prop="desc">
+				<lay-input placeholder="请输入描述" v-model="model.describe"></lay-input>
+			</lay-form-item>
+			<lay-form-item style="text-align: center;">
+				<lay-button type="primary" @click="submit">提交</lay-button>
+				<lay-button type="default" @click="">重置</lay-button>
+			</lay-form-item>
+		</lay-form>
 	</div>
 </template>
 
@@ -74,22 +73,18 @@ const submit = () => {
 ::: demo
 
 <template>
-<lay-scroll height="400px" style="background-color: #ffffff" thumbColor="#000000">
-	<lay-container>
-<lay-watermark content="Layui" font="20px Microsoft Yahei">
-	<lay-row>
-		<lay-col span="24">
-		<lay-panel
-		v-for="(n, index) in total"
-		:key="n"
-		style="margin: 10px; padding: 10px; background-color: transparent"
-		>内容</lay-panel
-		>
-		</lay-col>  
-		</lay-row>
-</lay-watermark>
-	</lay-container>
-</lay-scroll>
+<div style="position: relative" class="layui-scroll-test">
+<lay-watermark content="Layui-scroll" font="20px Microsoft Yahei" element-box=".layui-scroll-test"></lay-watermark>
+	<lay-scroll height="400px" style="background-color: #ffffff; position: relative" thumbColor="#000000">
+		<lay-container>
+		<lay-row>
+			<lay-col span="24"><lay-panel
+			v-for="(n, index) in total" :key="n" style="margin: 10px; padding: 10px; background-color: transparent">内容</lay-panel>
+			</lay-col>  
+			</lay-row>
+		</lay-container>
+	</lay-scroll>
+</div>
 </template>
 
 <script lang="ts" setup>
@@ -121,8 +116,9 @@ const changeMaxTotal = () => {
 | font        | 字体样式 | string |`20px`|
 | color       | 字体颜色 | string |`rgba(184, 184, 184, 0.6)`   |
 | rotate      | 旋转角度（大于-90 小于90） | number |`-45`  |
-| height      | 水印字体高度设置 | number | `100`   |
-| width       | 水印字体宽度设置 | number | `100`   |
+| height      | 水印字体高度设置 | number | `200`   |
+| width       | 水印字体宽度设置 | number | `200`   |
+| elementBox  | 水印容器，需要传父元素class，例：'.lay-watermark-box'，父元素需要设置position: relative | string | 'body'   |
 
 :::
 

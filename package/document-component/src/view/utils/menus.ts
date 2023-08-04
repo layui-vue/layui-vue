@@ -355,6 +355,12 @@ const menus = [
     title: "辅助",
     children: [
       {
+        id: 130,
+        title: "水印",
+        subTitle: "watermark",
+        path: "/zh-CN/components/watermark",
+      },
+      {
         id: 13,
         title: "徽章",
         subTitle: "badge",
