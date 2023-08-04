@@ -8,7 +8,7 @@
 
 <template>
 	<div style="height: 300px; width: 100%; position: relative" class="lay-watermark">
-		<lay-watermark content="Layui" font="20px Microsoft Yahei" element-box=".lay-watermark" rotate="90">
+		<lay-watermark content="layui-vue" font="20px Microsoft Yahei" element-box=".lay-watermark" rotate="90">
 		</lay-watermark>
 	</div>
 </template>
@@ -33,8 +33,8 @@ const submit = () => {
 
 <template>
 	<div style="height: 300px; width: 100%; position: relative" class="lay-watermark-form">
-		<lay-watermark content="Layui-form" font="20px Microsoft Yahei" element-box=".lay-watermark-form"></lay-watermark>
-	<lay-form :model="model">
+			<lay-watermark content="layui-vue" font="20px Microsoft Yahei" element-box=".lay-watermark-form"></lay-watermark>
+			<lay-form :model="model">
 			<lay-form-item label="账户" prop="username">
 				<lay-input v-model="model.username"></lay-input>
 			</lay-form-item>
