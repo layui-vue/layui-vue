@@ -100,12 +100,10 @@ import LayBarcode from "./component/barcode/index";
 import LayAutocomplete from "./component/autoComplete/index";
 import LayRadioButton from "./component/radioButton/index";
 import LayPopconfirm from "./component/popconfirm/index";
-import LayWatermark from "./component/watermark/index";
 import LayConfigProvider from "./provider";
 import { InstallOptions } from "./types";
 
 const components: Record<string, Plugin> = {
-  LayWatermark,
   LaySplitPanel,
   LaySplitPanelItem,
   LayRadio,
@@ -211,7 +209,6 @@ const install = (app: App, options?: InstallOptions): void => {
 };
 
 export {
-  LayWatermark,
   LaySplitPanel,
   LaySplitPanelItem,
   LayRadio,

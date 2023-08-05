@@ -62,8 +62,8 @@ const isChecked = computed({
       if (Array.isArray(props.modelValue)) {
         setArrayModelValue(val);
       } else {
-        emit("change", val);
         emit("update:modelValue", val);
+        emit("change", val);
       }
     }
   },
@@ -94,8 +94,8 @@ const setArrayModelValue = function (checked: any) {
   } else {
     arr.push(props.value);
   }
-  emit("change", arr);
   emit("update:modelValue", arr);
+  emit("change", arr);
 };
 
 const handleClick = function () {

@@ -19,10 +19,11 @@
         <li>
           <h3>2.3.10 <span class="layui-badge-rim">2023-08-04</span></h3>
           <ul>
-            <li>[新增] watermark 组件，加入水印功能。</li>
             <li>[修复] date-picker 组件 datetime 模式下交互逻辑问题。</li>
             <li>[修复] tag 组件 color 属性，在夜间模式无法正常生效的问题。</li>
             <li>[修复] tab 组件滑动逻辑没有将 tab-item 外边距计算在内的问题。</li>
+            <li>[优化] checkbox-group 组件 update:modelValue 事件与 change 的执行顺序。</li>
+            <li>[优化] checkbox 组件 update:modelValue 事件与 change 的执行顺序。</li>
           </ul>
         </li>
       </ul>
