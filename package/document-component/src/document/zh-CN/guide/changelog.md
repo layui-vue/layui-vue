@@ -24,6 +24,10 @@
             <li>[修复] tab 组件滑动逻辑没有将 tab-item 外边距计算在内的问题。</li>
             <li>[优化] checkbox-group 组件 update:modelValue 事件与 change 的执行顺序。</li>
             <li>[优化] checkbox 组件 update:modelValue 事件与 change 的执行顺序。</li>
+            <li>[优化] input 组件 update:modelValue 与 input 事件的执行顺序。</li>
+            <li>[优化] input 组件 input 事件的触发逻辑，拼音阶段不再触发。</li>
+            <li>[优化] textarea 组件 update:modelValue 与 input 事件的执行顺序。</li>
+            <li>[优化] textarea 组件 input 事件的触发逻辑，拼音阶段不再触发。</li>
           </ul>
         </li>
       </ul>

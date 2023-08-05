@@ -55,11 +55,13 @@ const styles = computed(() => {
 
 const onInput = function (eventParam: Event) {
   const inputElement = eventParam.target as HTMLInputElement;
-  emit("input", inputElement.value);
   if (composing.value) {
     return;
   }
   emit("update:modelValue", inputElement.value);
+  nextTick(() => {
+    emit("input", inputElement.value);
+  })
 };
 
 const onFocus = function (eventParam: Event) {

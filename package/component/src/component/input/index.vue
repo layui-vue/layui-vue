@@ -81,9 +81,11 @@ watch(
 const onInput = function (eventParam: Event) {
   const inputElement = eventParam.target as HTMLInputElement;
   const value = inputElement.value;
-  emit("input", value);
   if (composing.value) return;
   emit("update:modelValue", value);
+  nextTick(() => {
+    emit("input", value);
+  })
 };
 
 const onClear = () => {
