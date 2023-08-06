@@ -17,7 +17,7 @@
       <ul>
         <a name="2-3-10"></a>
         <li>
-          <h3>2.3.10 <span class="layui-badge-rim">2023-08-04</span></h3>
+          <h3>2.3.10 <span class="layui-badge-rim">2023-08-06</span></h3>
           <ul>
             <li>[修复] date-picker 组件 datetime 模式下交互逻辑问题。</li>
             <li>[修复] tag 组件 color 属性，在夜间模式无法正常生效的问题。</li>
