@@ -122,6 +122,7 @@ const close = function (index: number, id: any) {
 const activeBarRef = shallowRef<HTMLElement | undefined>(undefined);
 const activeEl = shallowRef<HTMLElement | undefined>(undefined);
 const tabBarStyle = ref<CSSProperties>();
+
 const getBarStyle = () => {
   let offset = 0;
   let tabSize = 0;
@@ -152,7 +153,7 @@ const navStyle = computed<CSSProperties>(() => {
   const axis =
     props.tabPosition === "top" || props.tabPosition === "bottom" ? "X" : "Y";
   const position = axis === "X" ? "left" : "top";
-  const scrollPrevSize = scrollPrevRef.value?.[`offset${sizeName.value}`] ?? 0;
+  const scrollPrevSize = getWidthOrHeight(scrollPrevRef.value) ?? 0;
   return {
     transform: `translate${axis}(-${navOffset.value}px)`,
     [position]: scrollable.value ? `${scrollPrevSize}px` : 0,
@@ -168,14 +169,21 @@ const getNavSize = function () {
   let size = 0;
   const nodeList = navRef.value?.querySelectorAll("li");
   nodeList?.forEach((item) => {
-    size += item[`offset${sizeName.value}`];
+    size += getWidthOrHeight(item);
   });
   return size;
 };
 
+
+const scrollNextRef = shallowRef<HTMLElement | undefined>(undefined);
+const scrollPrevRef = shallowRef<HTMLElement | undefined>(undefined);
+
+/**
+ * 向前滑动 
+ */
 const scrollPrev = function () {
   if (!navRef.value) return;
-  const containerSize = navRef.value[`offset${sizeName.value}`];
+  const containerSize = getWidthOrHeight(navRef.value);
   const currentOffset = navOffset.value;
   if (!currentOffset) return;
   let newOffset =
@@ -183,15 +191,30 @@ const scrollPrev = function () {
   navOffset.value = newOffset;
 };
 
-const scrollNextRef = shallowRef<HTMLElement | undefined>(undefined);
-const scrollPrevRef = shallowRef<HTMLElement | undefined>(undefined);
+/**
+ * 获取元素宽度 + 左右边距
+ */
+const getWidthOrHeight = function (element: HTMLElement | undefined) {
+  if (element) {
+    if (sizeName.value === "Width") {
+      return element.offsetWidth + parseInt(window.getComputedStyle(element).marginLeft) + parseInt(window.getComputedStyle(element).marginRight);
+    } else {
+      return element.offsetHeight + parseInt(window.getComputedStyle(element).marginTop) + parseInt(window.getComputedStyle(element).marginBottom);
+    }
+  }
+  return 0;
+}
+
+/**
+ * 向后滑动
+ */
 const scrollNext = function () {
   if (!navRef.value) return;
   const navSize = getNavSize();
-  const containerSize = navRef.value[`offset${sizeName.value}`];
+  const containerSize = getWidthOrHeight(navRef.value);
   const currentOffset = navOffset.value;
-  const scrollNextSize = scrollNextRef.value?.[`offset${sizeName.value}`] ?? 0;
-  const scrollPrevSize = scrollPrevRef.value?.[`offset${sizeName.value}`] ?? 0;
+  const scrollNextSize = getWidthOrHeight(scrollNextRef.value) ?? 0;
+  const scrollPrevSize = getWidthOrHeight(scrollPrevRef.value) ?? 0;
   if (navSize - currentOffset <= containerSize) return;
   let newOffset =
     navSize - currentOffset > containerSize * 2
@@ -201,6 +224,10 @@ const scrollNext = function () {
 };
 
 const headRef = shallowRef<HTMLDivElement | undefined>(undefined);
+
+/**
+ * 滑动到活动的节点 
+ */
 const scrollToActiveTab = function () {
   if (!scrollable.value) return;
   const activeTab = activeEl.value;
@@ -212,8 +239,8 @@ const scrollToActiveTab = function () {
   const currentOffset = navOffset.value;
   let newOffset = currentOffset;
   const navSize = getNavSize();
-  const scrollNextSize = scrollNextRef.value?.[`offset${sizeName.value}`] ?? 0;
-  const scrollPrevSize = scrollPrevRef.value?.[`offset${sizeName.value}`] ?? 0;
+  const scrollNextSize = getWidthOrHeight(scrollNextRef.value) ?? 0;
+  const scrollPrevSize = getWidthOrHeight(scrollPrevRef.value) ?? 0;
   const maxOffset = isHorizontal
     ? navSize - containerRect.width + scrollNextSize + scrollPrevSize
     : navSize - containerRect.height + scrollNextSize + scrollPrevSize;
@@ -245,10 +272,10 @@ const update = () => {
 
   if (props.tabPosition !== "top" && props.tabPosition !== "bottom") return; // 暂时屏蔽垂直方向
   const navSize = getNavSize();
-  const containerSize = navRef.value[`offset${sizeName.value}`];
+  const containerSize = getWidthOrHeight(navRef.value);
   const currentOffset = navOffset.value;
-  const scrollNextSize = scrollNextRef.value?.[`offset${sizeName.value}`] ?? 0;
-  const scrollPrevSize = scrollPrevRef.value?.[`offset${sizeName.value}`] ?? 0;
+  const scrollNextSize = getWidthOrHeight(scrollNextRef.value) ?? 0;
+  const scrollPrevSize = getWidthOrHeight(scrollPrevRef.value) ?? 0;
   if (containerSize < navSize) {
     const currentOffset = navOffset.value;
     scrollable.value = true;
@@ -268,9 +295,9 @@ const update = () => {
 const horizontalScroll = (e: WheelEvent) => {
   e.preventDefault();
   const navSize = getNavSize();
-  const containerSize = navRef.value![`offset${sizeName.value}`];
+  const containerSize = getWidthOrHeight(navRef.value);
   const currentOffset = navOffset.value;
-  const scrollNextSize = scrollNextRef.value?.[`offset${sizeName.value}`] ?? 0;
+  const scrollNextSize = getWidthOrHeight(scrollNextRef.value) ?? 0;
   const direction =
     Math.abs(e.deltaX) >= Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
   const distance = 50 * (direction > 0 ? 1 : -1);
@@ -340,67 +367,30 @@ provide("active", active);
 </script>
 
 <template>
-  <div
-    class="layui-tab"
-    :class="[
-      type ? 'layui-tab-' + type : '',
-      props.tabPosition ? `is-${tabPosition}` : '',
-    ]"
-  >
-    <div
-      ref="headRef"
-      :class="['layui-tab-head', props.tabPosition ? `is-${tabPosition}` : '']"
-    >
-      <ul
-        ref="navRef"
-        @wheel="horizontalScroll"
-        :class="[
-          'layui-tab-title',
-          props.tabPosition ? `is-${tabPosition}` : '',
-        ]"
-        :style="navStyle"
-      >
-        <div
-          ref="activeBarRef"
-          v-if="type === 'brief'"
-          class="layui-tab-active-bar"
-          :style="tabBarStyle"
-        ></div>
-        <li
-          v-for="(child, index) in tabItems"
-          :key="child.id"
-          :class="[child.id === active ? 'layui-this' : '']"
-          @click.stop="change(child.id)"
-        >
+  <div class="layui-tab" :class="[
+    type ? 'layui-tab-' + type : '',
+    props.tabPosition ? `is-${tabPosition}` : '',
+  ]">
+    <div ref="headRef" :class="['layui-tab-head', props.tabPosition ? `is-${tabPosition}` : '']">
+      <ul ref="navRef" @wheel="horizontalScroll" :class="[
+        'layui-tab-title',
+        props.tabPosition ? `is-${tabPosition}` : '',
+      ]" :style="navStyle">
+        <div ref="activeBarRef" v-if="type === 'brief'" class="layui-tab-active-bar" :style="tabBarStyle"></div>
+        <li v-for="(child, index) in tabItems" :key="child.id" :class="[child.id === active ? 'layui-this' : '']"
+          @click.stop="change(child.id)">
           <span>
-            <RenderFunction
-              v-if="child['icon']"
-              :renderFunc="renderTabIcon"
-              :tabData="child"
-            />
+            <RenderFunction v-if="child['icon']" :renderFunc="renderTabIcon" :tabData="child" />
             <RenderFunction :renderFunc="renderTabTitle" :tabData="child" />
           </span>
-          <i
-            v-if="allowClose && child.closable != false"
-            class="layui-icon layui-icon-close layui-unselect layui-tab-close"
-            @click.stop="close(index, child.id)"
-          ></i>
+          <i v-if="allowClose && child.closable != false"
+            class="layui-icon layui-icon-close layui-unselect layui-tab-close" @click.stop="close(index, child.id)"></i>
         </li>
       </ul>
-      <span
-        ref="scrollPrevRef"
-        v-if="scrollable"
-        class="layui-unselect layui-tab-bar prev"
-        @click="scrollPrev"
-      >
+      <span ref="scrollPrevRef" v-if="scrollable" class="layui-unselect layui-tab-bar prev" @click="scrollPrev">
         <LayIcon type="layui-icon-left"></LayIcon>
       </span>
-      <span
-        ref="scrollNextRef"
-        v-if="scrollable"
-        class="layui-unselect layui-tab-bar"
-        @click="scrollNext"
-      >
+      <span ref="scrollNextRef" v-if="scrollable" class="layui-unselect layui-tab-bar" @click="scrollNext">
         <LayIcon type="layui-icon-right"></LayIcon>
       </span>
     </div>

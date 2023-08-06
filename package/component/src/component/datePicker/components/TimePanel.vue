@@ -89,6 +89,9 @@ const chooseTime = (e: any) => {
   if (e.target.nodeName == "LI") {
     let { value, type } = e.target.dataset;
     hms.value[type as keyof typeof hms.value] = parseInt(value);
+    if (datePicker.type === "datetime") {
+      emits("update:modelValue", hms.value);
+    }
   }
 };
 
@@ -140,10 +143,13 @@ const footOnOk = () => {
     emits("ok");
     return;
   } else {
-    datePicker.ok();
     if (datePicker.type === "datetime") {
       datePicker.showPanel.value = "date";
+      if (datePicker.currentDay.value < 1) {
+        return;
+      }
     }
+    datePicker.ok();
   }
 };
 //现在回调
@@ -152,6 +158,9 @@ const footOnNow = () => {
   hms.value.mm = dayjs().minute();
   hms.value.ss = dayjs().second();
   scrollTo();
+  if (datePicker.type === "datetime") {
+    emits("update:modelValue", hms.value);
+  }
 };
 
 //清空回调

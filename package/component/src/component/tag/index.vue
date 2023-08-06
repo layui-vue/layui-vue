@@ -84,26 +84,23 @@ function useTagCustomStyle(props: TagProps) {
         const isDark = color.getBrightness() < 190;
         const textColor = isDark ? "#FFF" : "#000000";
         styles = {
-          "--layui-tag-bg-color": tagColor,
-          "--layui-tag-border-color": props.bordered ? tagColor : "transparent",
-          "--layui-tag-hover-color": tagColor,
-          "--layui-tag-text-color": textColor,
+          "background-color": tagColor,
+          "border-color": props.bordered ? tagColor : "transparent",
+          color: textColor,
         };
       } else if (props.variant === "light") {
         styles = {
-          "--layui-tag-bg-color": color.tint(90).toString(),
-          "--layui-tag-border-color": props.bordered
+          "background-color": color.tint(90).toString(),
+          "border-color": props.bordered
             ? color.tint(50).toString()
             : "transparent",
-          "--layui-tag-hover-color": color.tint(90).toString(),
-          "--layui-tag-text-color": tagColor,
+          color: tagColor,
         };
       } else if (props.variant === "plain") {
         styles = {
-          "--layui-tag-bg-color": "transparent",
-          "--layui-tag-border-color": props.bordered ? tagColor : "transparent",
-          "--layui-tag-hover-color": "transparent",
-          "--layui-tag-text-color": tagColor,
+          "background-color": "transparent",
+          "border-color": props.bordered ? tagColor : "transparent",
+          color: tagColor,
         };
       }
     }
