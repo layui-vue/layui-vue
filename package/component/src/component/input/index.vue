@@ -85,7 +85,7 @@ const onInput = function (eventParam: Event) {
   emit("update:modelValue", value);
   nextTick(() => {
     emit("input", value);
-  })
+  });
 };
 
 const onClear = () => {

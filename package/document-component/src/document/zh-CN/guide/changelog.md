@@ -19,7 +19,9 @@
         <li>
           <h3>2.3.11 <span class="layui-badge-rim">2023-08-09</span></h3>
           <ul>
-            <li>[修复] rate 组件清空操作，在 form-item 中不居中的问题。</li>
+            <li>[修复] date-picker 组件 size 属性缺省情况下不随 form 全局配置的问题。</li>
+            <li>[优化] slider 组件在 form-item 不垂直居中的问题。</li>
+            <li>[优化] rate 组件清空操作，在 form-item 不垂直居中的问题。</li>
             <li>[优化] input 组件 modelValue 属性，增加 null 值兼容。</li>
           </ul>
         </li>

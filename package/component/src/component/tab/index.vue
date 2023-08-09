@@ -174,12 +174,11 @@ const getNavSize = function () {
   return size;
 };
 
-
 const scrollNextRef = shallowRef<HTMLElement | undefined>(undefined);
 const scrollPrevRef = shallowRef<HTMLElement | undefined>(undefined);
 
 /**
- * 向前滑动 
+ * 向前滑动
  */
 const scrollPrev = function () {
   if (!navRef.value) return;
@@ -197,13 +196,21 @@ const scrollPrev = function () {
 const getWidthOrHeight = function (element: HTMLElement | undefined) {
   if (element) {
     if (sizeName.value === "Width") {
-      return element.offsetWidth + parseInt(window.getComputedStyle(element).marginLeft) + parseInt(window.getComputedStyle(element).marginRight);
+      return (
+        element.offsetWidth +
+        parseInt(window.getComputedStyle(element).marginLeft) +
+        parseInt(window.getComputedStyle(element).marginRight)
+      );
     } else {
-      return element.offsetHeight + parseInt(window.getComputedStyle(element).marginTop) + parseInt(window.getComputedStyle(element).marginBottom);
+      return (
+        element.offsetHeight +
+        parseInt(window.getComputedStyle(element).marginTop) +
+        parseInt(window.getComputedStyle(element).marginBottom)
+      );
     }
   }
   return 0;
-}
+};
 
 /**
  * 向后滑动
@@ -226,7 +233,7 @@ const scrollNext = function () {
 const headRef = shallowRef<HTMLDivElement | undefined>(undefined);
 
 /**
- * 滑动到活动的节点 
+ * 滑动到活动的节点
  */
 const scrollToActiveTab = function () {
   if (!scrollable.value) return;
@@ -367,30 +374,67 @@ provide("active", active);
 </script>
 
 <template>
-  <div class="layui-tab" :class="[
-    type ? 'layui-tab-' + type : '',
-    props.tabPosition ? `is-${tabPosition}` : '',
-  ]">
-    <div ref="headRef" :class="['layui-tab-head', props.tabPosition ? `is-${tabPosition}` : '']">
-      <ul ref="navRef" @wheel="horizontalScroll" :class="[
-        'layui-tab-title',
-        props.tabPosition ? `is-${tabPosition}` : '',
-      ]" :style="navStyle">
-        <div ref="activeBarRef" v-if="type === 'brief'" class="layui-tab-active-bar" :style="tabBarStyle"></div>
-        <li v-for="(child, index) in tabItems" :key="child.id" :class="[child.id === active ? 'layui-this' : '']"
-          @click.stop="change(child.id)">
+  <div
+    class="layui-tab"
+    :class="[
+      type ? 'layui-tab-' + type : '',
+      props.tabPosition ? `is-${tabPosition}` : '',
+    ]"
+  >
+    <div
+      ref="headRef"
+      :class="['layui-tab-head', props.tabPosition ? `is-${tabPosition}` : '']"
+    >
+      <ul
+        ref="navRef"
+        @wheel="horizontalScroll"
+        :class="[
+          'layui-tab-title',
+          props.tabPosition ? `is-${tabPosition}` : '',
+        ]"
+        :style="navStyle"
+      >
+        <div
+          ref="activeBarRef"
+          v-if="type === 'brief'"
+          class="layui-tab-active-bar"
+          :style="tabBarStyle"
+        ></div>
+        <li
+          v-for="(child, index) in tabItems"
+          :key="child.id"
+          :class="[child.id === active ? 'layui-this' : '']"
+          @click.stop="change(child.id)"
+        >
           <span>
-            <RenderFunction v-if="child['icon']" :renderFunc="renderTabIcon" :tabData="child" />
+            <RenderFunction
+              v-if="child['icon']"
+              :renderFunc="renderTabIcon"
+              :tabData="child"
+            />
             <RenderFunction :renderFunc="renderTabTitle" :tabData="child" />
           </span>
-          <i v-if="allowClose && child.closable != false"
-            class="layui-icon layui-icon-close layui-unselect layui-tab-close" @click.stop="close(index, child.id)"></i>
+          <i
+            v-if="allowClose && child.closable != false"
+            class="layui-icon layui-icon-close layui-unselect layui-tab-close"
+            @click.stop="close(index, child.id)"
+          ></i>
         </li>
       </ul>
-      <span ref="scrollPrevRef" v-if="scrollable" class="layui-unselect layui-tab-bar prev" @click="scrollPrev">
+      <span
+        ref="scrollPrevRef"
+        v-if="scrollable"
+        class="layui-unselect layui-tab-bar prev"
+        @click="scrollPrev"
+      >
         <LayIcon type="layui-icon-left"></LayIcon>
       </span>
-      <span ref="scrollNextRef" v-if="scrollable" class="layui-unselect layui-tab-bar" @click="scrollNext">
+      <span
+        ref="scrollNextRef"
+        v-if="scrollable"
+        class="layui-unselect layui-tab-bar"
+        @click="scrollNext"
+      >
         <LayIcon type="layui-icon-right"></LayIcon>
       </span>
     </div>

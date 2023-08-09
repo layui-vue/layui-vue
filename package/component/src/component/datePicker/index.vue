@@ -143,6 +143,7 @@ import MonthPanel from "./components/MonthPanel.vue";
 import DateRange from "./components/DateRange.vue";
 import MonthRange from "./components/MonthRange.vue";
 import TimeRange from "./components/TimeRange.vue";
+import useProps from "./index.hooks";
 
 export interface DatePickerProps {
   placeholder?: string | string[];
@@ -175,12 +176,13 @@ const props = withDefaults(defineProps<DatePickerProps>(), {
   rangeSeparator: "至",
   readonly: false,
   allowClear: false,
-  size: "md",
   prefixIcon: "layui-icon-date",
   suffixIcon: "",
   timestamp: false,
   format: "",
 });
+
+const { size } = useProps(props)
 
 const startPlaceholder = computed(() => {
   if (Array.isArray(props.placeholder)) {
