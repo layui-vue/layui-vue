@@ -8,7 +8,7 @@ export default {
 <script lang="ts" setup name="dWatermark">
 import { onMounted, nextTick } from "vue";
 
-interface Props {
+export interface Props {
   content: string;
   font?: string;
   color?: string;

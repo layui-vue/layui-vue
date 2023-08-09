@@ -182,7 +182,7 @@ const props = withDefaults(defineProps<DatePickerProps>(), {
   format: "",
 });
 
-const { size } = useProps(props)
+const { size } = useProps(props);
 
 const startPlaceholder = computed(() => {
   if (Array.isArray(props.placeholder)) {
