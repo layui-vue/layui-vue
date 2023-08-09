@@ -14,6 +14,17 @@
 <template>
   <lay-timeline>
     <lay-timeline-item title="2.3.x">
+        <ul>
+        <a name="2-3-10"></a>
+        <li>
+          <h3>2.3.12 <span class="layui-badge-rim">2023-08-09</span></h3>
+          <ul>
+            <li>[修复] rate 组件清空操作不更新 modelValue 的问题。</li>
+            <li>[修复] slider 组件在 form-item 组件 block 模式下不垂直居中的问题。</li>
+            <li>[优化] rate 组件清空操作仅在 modelValue 大于 0 时显示。</li>
+          </ul>
+        </li>
+      </ul>
        <ul>
         <a name="2-3-10"></a>
         <li>
