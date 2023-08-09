@@ -14,6 +14,16 @@
 <template>
   <lay-timeline>
     <lay-timeline-item title="2.3.x">
+       <ul>
+        <a name="2-3-10"></a>
+        <li>
+          <h3>2.3.11 <span class="layui-badge-rim">2023-08-09</span></h3>
+          <ul>
+            <li>[修复] rate 组件清空操作，在 form-item 中不居中的问题。</li>
+            <li>[优化] input 组件 modelValue 属性，增加 null 值兼容。</li>
+          </ul>
+        </li>
+      </ul>
       <ul>
         <a name="2-3-10"></a>
         <li>
