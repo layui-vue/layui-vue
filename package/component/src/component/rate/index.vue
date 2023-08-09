@@ -94,6 +94,7 @@ const showClearIcon = computed(() => !props.readonly && props.allowClear);
 const clearRate = function () {
   tempValue.value = 0;
   currentValue.value = 0;
+  emit("update:modelValue", 0);
   emit("clear", currentValue.value);
 };
 </script>
@@ -134,7 +135,7 @@ const clearRate = function () {
         </slot>
       </span>
     </template>
-    <template v-if="showClearIcon">
+    <template v-if="showClearIcon && props.modelValue > 0">
       <i
         :class="['layui-icon', 'layui-rate-clear-icon', clearIcon]"
         @click="clearRate"

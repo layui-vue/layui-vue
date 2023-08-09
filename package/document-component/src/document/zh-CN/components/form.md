@@ -106,7 +106,7 @@ const submit = () => {
       <lay-cascader  v-model="model1.cascader" :options="options"></lay-cascader>
     </lay-form-item>
     <lay-form-item label="年龄" prop="password" mode="inline">
-  <lay-date-picker v-model="endTime" placeholder="click me" allowClear></lay-date-picker>
+ 		<lay-slider :showDots="true" :step="10" :max="100" v-model="value1" :disabled="false"></lay-slider>
     </lay-form-item>
     <lay-form-item label="描述" prop="desc">
       <lay-textarea placeholder="请输入描述" v-model="model1.describe"></lay-textarea>
