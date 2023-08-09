@@ -97,7 +97,7 @@ const submit = () => {
 	  <lay-radio v-model="model1.radio" name="action" :value="3" label="运动"></lay-radio>
     </lay-form-item>
 	<lay-form-item label="评分" prop="rate">
-      <lay-rate v-model="model1.rate" ></lay-rate>
+      <lay-rate v-model="model1.rate"></lay-rate>
     </lay-form-item>
     <lay-form-item label="权限" prop="treeSelect" mode="inline">
       <lay-tree-select v-model="model1.treeSelect" :data="data1"></lay-tree-select>
@@ -106,7 +106,7 @@ const submit = () => {
       <lay-cascader  v-model="model1.cascader" :options="options"></lay-cascader>
     </lay-form-item>
     <lay-form-item label="年龄" prop="password" mode="inline">
-      <lay-input-number v-model="model1.age"></lay-input-number>
+  <lay-date-picker v-model="endTime" placeholder="click me" allowClear></lay-date-picker>
     </lay-form-item>
     <lay-form-item label="描述" prop="desc">
       <lay-textarea placeholder="请输入描述" v-model="model1.describe"></lay-textarea>

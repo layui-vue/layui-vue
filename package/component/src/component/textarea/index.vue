@@ -61,7 +61,7 @@ const onInput = function (eventParam: Event) {
   emit("update:modelValue", inputElement.value);
   nextTick(() => {
     emit("input", inputElement.value);
-  })
+  });
 };
 
 const onFocus = function (eventParam: Event) {

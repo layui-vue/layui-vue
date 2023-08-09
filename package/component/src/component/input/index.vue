@@ -16,7 +16,7 @@ export interface InputProps {
   type?: string;
   prefixIcon?: string;
   suffixIcon?: string;
-  modelValue?: string | number | string[] | undefined;
+  modelValue?: string | number | string[] | undefined | null;
   allowClear?: boolean;
   autocomplete?: string;
   placeholder?: string;
@@ -85,7 +85,7 @@ const onInput = function (eventParam: Event) {
   emit("update:modelValue", value);
   nextTick(() => {
     emit("input", value);
-  })
+  });
 };
 
 const onClear = () => {
