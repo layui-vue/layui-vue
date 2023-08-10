@@ -14,7 +14,17 @@
 <template>
   <lay-timeline>
     <lay-timeline-item title="2.3.x">
-        <ul>
+      <ul>
+        <a name="2-3-10"></a>
+        <li>
+          <h3>2.3.13 <span class="layui-badge-rim">2023-08-10</span></h3>
+          <ul>
+            <li>[优化] color-picker 组件在 form-item 组件 pane 模式下的样式。</li>
+            <li>[优化] icon-picker 组件在 form-item 组件 pane 模式下的样式。</li>
+          </ul>
+        </li>
+      </ul>
+      <ul>
         <a name="2-3-10"></a>
         <li>
           <h3>2.3.12 <span class="layui-badge-rim">2023-08-09</span></h3>
