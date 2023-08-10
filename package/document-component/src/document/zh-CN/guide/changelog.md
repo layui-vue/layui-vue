@@ -19,6 +19,7 @@
         <li>
           <h3>2.3.13 <span class="layui-badge-rim">2023-08-10</span></h3>
           <ul>
+            <li>[优化] cascader 组件选中项 border-radius 溢出 panel 的问题。</li>
             <li>[优化] color-picker 组件在 form-item 组件 pane 模式下的样式。</li>
             <li>[优化] icon-picker 组件在 form-item 组件 pane 模式下的样式。</li>
           </ul>
