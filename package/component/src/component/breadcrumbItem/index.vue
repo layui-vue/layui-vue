@@ -2,7 +2,14 @@
   <a href="javascript:void(0);" v-bind="$attrs">
     <slot>{{ title }}</slot>
   </a>
-  <span lay-separator>{{ separator }}</span>
+  <span lay-separator>
+    <template v-if="separatorIcon">
+      <i :class="['layui-icon', separatorIcon]"></i>
+    </template>
+    <template v-else>
+      {{ separator }}
+    </template>
+  </span>
 </template>
 
 <script lang="ts">
@@ -21,4 +28,5 @@ export interface BreadcrumbItemProps {
 const props = defineProps<BreadcrumbItemProps>();
 
 const separator = inject("separator");
+const separatorIcon = inject("separatorIcon");
 </script>

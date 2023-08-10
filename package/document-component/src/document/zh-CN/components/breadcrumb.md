@@ -88,6 +88,34 @@ export default {
 
 :::
 
+::: title 图标分割
+:::
+
+::: demo
+
+<template>
+    <lay-breadcrumb separator-icon="layui-icon-right">
+        <lay-breadcrumb-item>今天</lay-breadcrumb-item>
+        <lay-breadcrumb-item>有些</lay-breadcrumb-item>
+        <lay-breadcrumb-item>不开心</lay-breadcrumb-item>
+    </lay-breadcrumb>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    return {
+    }
+  }
+}
+</script>
+
+:::
+
+
 ::: title Breadcrumb 属性
 :::
 
