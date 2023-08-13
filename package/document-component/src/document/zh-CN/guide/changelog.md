@@ -20,6 +20,7 @@
           <h3>2.4.0 <span class="layui-badge-rim">2023-08-10</span></h3>
           <ul>
             <li>[新增] layer 组件 title 插槽, 自定义标题内容。<a href="https://gitee.com/layui/layui-vue/issues/I7S0DF">I7S0DF</a></li>
+            <li>[修复] slider 组件在 form-item 内时，增加左侧边距。</li>
           </ul>
         </li>
       </ul>
