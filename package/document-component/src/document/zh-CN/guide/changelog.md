@@ -19,6 +19,7 @@
         <li>
           <h3>2.4.0 <span class="layui-badge-rim">2023-08-10</span></h3>
           <ul>
+            <li>[新增] layer 组件 moving 回调函数，用于处理拖拽中的自定义逻辑。</li>
             <li>[新增] layer 组件 title 插槽, 自定义标题内容。<a href="https://gitee.com/layui/layui-vue/issues/I7S0DF">I7S0DF</a></li>
             <li>[修复] slider 组件在 form-item 内时，增加左侧 10px 边距。</li>
             <li>[修复] form 组件提交验证案例中 rules 配置错误从而导致 demo 无效的问题。<a href="https://gitee.com/layui/layui-vue/issues/I7SN5F">I7SN5F</a></li>

@@ -100,8 +100,9 @@ export interface LayerProps {
   full?: Function;
   restore?: Function;
   moveOut?: boolean;
-  moveEnd?: Function;
   moveStart?: Function;
+  moving?: Function;
+  moveEnd?: Function;
   beforeClose?: Function;
   close?: Function;
 }
@@ -139,8 +140,9 @@ const props = withDefaults(defineProps<LayerProps>(), {
   startIndex: 0,
   imgList: () => [],
   moveOut: false,
-  moveEnd: () => {},
   moveStart: () => {},
+  moving: () => {},
+  moveEnd: () => {},
   beforeClose: () => true,
   close: () => {},
 });
@@ -399,6 +401,7 @@ const supportMove = function () {
             removeListener();
             l.value = left;
             t.value = top;
+            props.moving(props.id, { top: top, left: left });
           },
           () => {
             // 拖拽结束
