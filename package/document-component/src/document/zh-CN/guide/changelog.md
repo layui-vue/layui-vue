@@ -24,6 +24,7 @@
             <li>[修复] slider 组件在 form-item 内时，增加左侧 10px 边距。</li>
             <li>[修复] form 组件提交验证案例中 rules 配置错误从而导致 demo 无效的问题。<a href="https://gitee.com/layui/layui-vue/issues/I7SN5F">I7SN5F</a></li>
             <li>[修复] table 组件 columns 属性 ellipsisTooltip 配置，按需模式不生效的问题。<a href="https://gitee.com/layui/layui-vue/issues/I7U9WE">I7U9WE</a></li>
+            <li>[升级] layer-vue 到 1.9.1 版本。</li>
           </ul>
         </li>
       </ul>
