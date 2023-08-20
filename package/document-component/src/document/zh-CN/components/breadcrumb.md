@@ -124,7 +124,7 @@ export default {
 | 名称      | 描述    | 类型     | 默认值 | 可选值 |
 | --------- | ------ | -------- | ------ | ------ |
 | separator | 分割符  | `string` | `/`    | -      |
-
+| separator-icon | 图标分割符  | - | -    | -      |
 :::
 
 ::: title Breadcrumb 插槽

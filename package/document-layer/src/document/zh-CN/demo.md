@@ -985,6 +985,10 @@ const changeVisible18 = function() {
         moveEnd: function() {
             console.log("拖拽结束")
         },
+        moveing: function(id, offset) {
+            console.log(offset.top);
+            console.log(offset.left);
+        },
         moveStart: function() {
             console.log("拖拽开始")
         }

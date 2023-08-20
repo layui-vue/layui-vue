@@ -705,7 +705,7 @@ const reset4 = () => {
 ::: demo
 
 <template>
-  <lay-form :model="model5" ref="layFormRef5" :rules="rules" required>
+  <lay-form :model="model5" ref="layFormRef5" :rules="rules5" required>
     <lay-form-item label="邮箱" prop="email">
       <lay-input v-model="model5.email"></lay-input>
     </lay-form-item>

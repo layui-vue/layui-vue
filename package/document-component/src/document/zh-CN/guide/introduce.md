@@ -8,11 +8,11 @@
     </a>
     <span style="font-size:32px;color:#e2e2e2;margin:30px;">+</span>
     <a href="http://www.layui-vue.com" style="display:inline-block;">
-      <img src="https://qn.antdv.com/vue.png" alt="layui" width="100" style="border-radius:4px;">
+      <img src="https://play.vuejs.org/logo.svg" alt="vue" width="100" style="border-radius:4px;">
     </a>
     <span style="font-size:32px;color:#e2e2e2;margin:30px;">=</span>
     <a href="http://www.layui-vue.com" style="display:inline-block;">
-      <img src="../../../assets/logo.jpg" alt="layui" width="100" style="border-radius:10px;">
+      <img src="../../../assets/logo.jpg" alt="layui-vue" width="100" style="border-radius:10px;">
     </a>
   </p>
 <br>

@@ -15,11 +15,25 @@
   <lay-timeline>
     <lay-timeline-item title="2.3.x">
       <ul>
+        <a name="2-3-14"></a>
+        <li>
+          <h3>2.3.14 <span class="layui-badge-rim">2023-08-20</span></h3>
+          <ul>
+            <li>[新增] layer 组件 moving 回调函数，用于处理拖拽中的自定义逻辑。</li>
+            <li>[新增] layer 组件 title 插槽, 自定义标题内容。<a href="https://gitee.com/layui/layui-vue/issues/I7S0DF">I7S0DF</a></li>
+            <li>[修复] slider 组件在 form-item 内时，增加左侧 10px 边距。</li>
+            <li>[修复] form 组件提交验证案例中 rules 配置错误从而导致 demo 无效的问题。<a href="https://gitee.com/layui/layui-vue/issues/I7SN5F">I7SN5F</a></li>
+            <li>[修复] table 组件 columns 属性 ellipsisTooltip 配置，按需模式不生效的问题。<a href="https://gitee.com/layui/layui-vue/issues/I7U9WE">I7U9WE</a></li>
+            <li>[升级] layer-vue 到 1.9.1 版本。</li>
+          </ul>
+        </li>
+      </ul>
+      <ul>
         <a name="2-3-13"></a>
         <li>
           <h3>2.3.13 <span class="layui-badge-rim">2023-08-10</span></h3>
           <ul>
-            <li>[新增] breadcrumb 组件 separator-icon 属性，用于设置图标分割。</li>
+            <li>[新增] breadcrumb 组件 separator-icon 属性，用于设置图标分割符。</li>
             <li>[优化] cascader 组件选中项 border-radius 溢出 panel 的问题。</li>
             <li>[优化] color-picker 组件在 form-item 组件 pane 模式下的样式。</li>
             <li>[优化] icon-picker 组件在 form-item 组件 pane 模式下的样式。</li>
