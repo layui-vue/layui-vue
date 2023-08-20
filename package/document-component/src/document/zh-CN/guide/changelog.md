@@ -13,11 +13,11 @@
 ::: demo
 <template>
   <lay-timeline>
-    <lay-timeline-item title="2.4.x">
+    <lay-timeline-item title="2.3.x">
       <ul>
-        <a name="2-4-0"></a>
+        <a name="2-3-14"></a>
         <li>
-          <h3>2.4.0 <span class="layui-badge-rim">2023-08-10</span></h3>
+          <h3>2.3.14 <span class="layui-badge-rim">2023-08-20</span></h3>
           <ul>
             <li>[新增] layer 组件 moving 回调函数，用于处理拖拽中的自定义逻辑。</li>
             <li>[新增] layer 组件 title 插槽, 自定义标题内容。<a href="https://gitee.com/layui/layui-vue/issues/I7S0DF">I7S0DF</a></li>
@@ -28,8 +28,6 @@
           </ul>
         </li>
       </ul>
-    </lay-timeline-item>
-    <lay-timeline-item title="2.3.x">
       <ul>
         <a name="2-3-13"></a>
         <li>
