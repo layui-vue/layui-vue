@@ -134,9 +134,9 @@ export default {
 
 <template>
   <lay-select v-model="value5" :allow-clear="true">
-    <lay-select-option value="1" label="学习"></lay-select-option>
-    <lay-select-option value="2" label="编码"></lay-select-option>
-    <lay-select-option value="3" label="运动"></lay-select-option>
+    <lay-select-option :value="0" label="学习"></lay-select-option>
+    <lay-select-option :value="1" label="编码"></lay-select-option>
+    <lay-select-option :value="2" label="运动"></lay-select-option>
   </lay-select>
 </template>
 
