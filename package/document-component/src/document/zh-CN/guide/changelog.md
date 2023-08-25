@@ -19,6 +19,16 @@
         <li>
           <h3>2.3.14 <span class="layui-badge-rim">2023-08-20</span></h3>
           <ul>
+            <li>[修复] select 组件 v-model 为 0 时，allow-clear 操作偏移的问题。</li>
+            <li>[修复] tree-select 组件 v-model 为 0 时，allow-clear 操作偏移的问题。</li>
+          </ul>
+        </li>
+      </ul>
+      <ul>
+        <a name="2-3-14"></a>
+        <li>
+          <h3>2.3.14 <span class="layui-badge-rim">2023-08-20</span></h3>
+          <ul>
             <li>[新增] layer 组件 moving 回调函数，用于处理拖拽中的自定义逻辑。</li>
             <li>[新增] layer 组件 title 插槽, 自定义标题内容。<a href="https://gitee.com/layui/layui-vue/issues/I7S0DF">I7S0DF</a></li>
             <li>[修复] slider 组件在 form-item 内时，增加左侧 10px 边距。</li>
