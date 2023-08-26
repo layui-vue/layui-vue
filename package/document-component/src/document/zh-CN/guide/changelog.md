@@ -17,7 +17,7 @@
       <ul>
         <a name="2-3-14"></a>
         <li>
-          <h3>2.3.14 <span class="layui-badge-rim">2023-08-20</span></h3>
+          <h3>2.3.15 <span class="layui-badge-rim">2023-08-25</span></h3>
           <ul>
             <li>[修复] select 组件 v-model 为 0 时，allow-clear 操作偏移的问题。</li>
             <li>[修复] tree-select 组件 v-model 为 0 时，allow-clear 操作偏移的问题。</li>
