@@ -7,8 +7,8 @@ export default {
 <script setup lang="ts">
 import { Ref, ref } from "vue";
 import { on, off } from "evtd";
-import { throttle } from "./utils/index";
 import LayTooltip from "../tooltip/index.vue";
+import { makeDots } from "./utils";
 
 export interface VerticalProps {
   val?: number | Array<number>;
@@ -28,12 +28,10 @@ const props = withDefaults(defineProps<VerticalProps>(), {
   showDots: false,
 });
 
-const moveAction = throttle(verticalMove);
-
 function handle_mouseup() {
   off("selectstart", document, handle_select);
   off("mouseup", window, handle_mouseup);
-  off("mousemove", window, moveAction);
+  off("mousemove", window, verticalMove);
   tooptipHide.value = true;
 }
 function handle_select(e: Event): void {
@@ -43,7 +41,7 @@ function handle_select(e: Event): void {
 function handle_mousedown() {
   on("selectstart", window, handle_select, { once: true });
   on("mouseup", window, handle_mouseup);
-  on("mousemove", window, moveAction);
+  on("mousemove", window, verticalMove);
 }
 
 const tracker = ref<HTMLElement | null>(null);
@@ -60,10 +58,11 @@ function verticalMove(e: MouseEvent) {
   let origin_bottom = tracker_rect.bottom;
   let point_bottom = e.clientY;
   let distance = (point_bottom - origin_bottom) * -1;
-  if (distance < props.min) {
+  if (distance < 0) {
     vertical_style.value = props.min;
   } else {
-    let rate = (distance / tracker_rect.height) * 100;
+    let rate =
+      props.min + (distance / tracker_rect.height) * (props.max - props.min);
     calcWithStep(rate, vertical_style);
     if (vertical_style.value > props.max) {
       vertical_style.value = props.max;
@@ -93,19 +92,9 @@ function calcWithStep(
     }
   }
 }
-// 断点
-const makeDots = () => {
-  if (props.step === 0) return [];
-  let val = 0;
-  let dots = [];
-  let count = Math.floor(100 / props.step) - 1;
-  for (let i = 0; i < count; i++) {
-    val += props.step;
-    dots.push(val);
-  }
-  return dots;
-};
-const dots = makeDots();
+
+const dots = makeDots(props);
+
 const focusDot = (val: number) => {
   emit("link-val-hook", val);
 };
@@ -121,14 +110,13 @@ const focusDot = (val: number) => {
     >
       <lay-tooltip :content="'' + val" :is-can-hide="tooptipHide">
         <div
-          :style="{ bottom: val + '%' }"
+          :style="{ bottom: ((val as number - props.min) / (props.max - props.min)) * 100 + '%' }"
           :class="[props.disabled ? 'layui-slider-disabled disable-btn' : '']"
           class="layui-slider-vertical-btn"
         ></div>
       </lay-tooltip>
-
       <div
-        :style="{ height: val + '%' }"
+        :style="{ height: ((val as number - props.min) / (props.max - props.min)) * 100 + '%' }"
         :class="[props.disabled ? 'layui-slider-disabled disable-line' : '']"
         class="layui-slider-vertical-rate"
       ></div>
@@ -139,7 +127,9 @@ const focusDot = (val: number) => {
         class="layui-slider-vertical-dots"
         v-for="(item, index) in dots"
         :key="index"
-        :style="{ bottom: item + '%' }"
+        :style="{
+          bottom: ((item - props.min) / (props.max - props.min)) * 100 + '%',
+        }"
       ></div>
     </div>
   </div>

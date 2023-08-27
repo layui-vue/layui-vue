@@ -17,6 +17,20 @@
       <ul>
         <a name="2-3-14"></a>
         <li>
+          <h3>2.3.15 <span class="layui-badge-rim">2023-08-27</span></h3>
+          <ul>
+            <li>[修复] form 组件 rules 属性类型警告，调整 Rule 为 Rules 类型。</li>
+            <li>[修复] select 组件 v-model 为 0 时，allow-clear 操作偏移的问题。</li>
+            <li>[修复] tree-select 组件 v-model 为 0 时，allow-clear 操作偏移的问题。</li>
+            <li>[修复] slider 组件 max min 属性导致拖拽逻辑错乱的问题。</li>
+            <li>[优化] slider 组件拖拽卡顿的问题，移除节流防抖函数。</li>
+            <li>[优化] date-picker 组件时间选择器，隐藏时分秒列表滚动条。</li>
+          </ul>
+        </li>
+      </ul>
+      <ul>
+        <a name="2-3-14"></a>
+        <li>
           <h3>2.3.14 <span class="layui-badge-rim">2023-08-20</span></h3>
           <ul>
             <li>[新增] layer 组件 moving 回调函数，用于处理拖拽中的自定义逻辑。</li>

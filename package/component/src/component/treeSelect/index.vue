@@ -194,9 +194,9 @@ const hasContent = computed(() => {
     return selectedValue.value.length > 0;
   } else {
     return (
-      selectedValue.value != "" &&
-      selectedValue.value != undefined &&
-      selectedValue.value != null
+      selectedValue.value !== "" &&
+      selectedValue.value !== undefined &&
+      selectedValue.value !== null
     );
   }
 });

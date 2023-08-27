@@ -8,7 +8,7 @@ export default {
 import { ref, toRef, Ref } from "vue";
 import { on, off } from "evtd";
 import LayTooltip from "../tooltip/index.vue";
-import { throttle, makeDots } from "./utils/index";
+import { makeDots } from "./utils/index";
 
 export interface VerticalRangeProps {
   rangeValue: Array<number>;
@@ -29,21 +29,20 @@ const props = withDefaults(defineProps<VerticalRangeProps>(), {
 
 let rv = toRef(props, "rangeValue");
 
-const moveAction = throttle(rangeMove);
 let currbtn = -1;
 function handle_mousedown() {
   currbtn = -1;
   tooptipHide.value = false;
   on("selectstart", window, handle_select, { once: true });
   on("mouseup", window, handle_mouseup);
-  on("mousemove", window, moveAction);
+  on("mousemove", window, rangeMove);
 }
 
 function handle_mouseup() {
   tooptipHide.value = true;
   off("selectstart", document, handle_select);
   off("mouseup", window, handle_mouseup);
-  off("mousemove", window, moveAction);
+  off("mousemove", window, rangeMove);
 }
 function handle_select(e: Event): void {
   e.preventDefault();
@@ -55,7 +54,6 @@ const emit = defineEmits(["link-val-hook"]);
 const tooptipHide = ref<boolean>(true);
 
 function rangeMove(e: MouseEvent) {
-  // tooptipHide.value = false;
   if (!tracker.value) {
     return;
   }
@@ -63,10 +61,11 @@ function rangeMove(e: MouseEvent) {
   let origin_bottom = tracker_rect.bottom;
   let point_bottom = e.clientY;
   let distance = (point_bottom - origin_bottom) * -1;
-  if (distance < props.min) {
+  if (distance < 0) {
     rv.value[0] = props.min;
   } else {
-    let rate = (distance / tracker_rect.height) * 100;
+    let rate =
+      props.min + (distance / tracker_rect.height) * (props.max - props.min);
     let idx = -1;
     if (currbtn === -1) {
       currbtn = moveNeighbors(Math.floor(rate), rv);
@@ -150,7 +149,9 @@ const focusDot = (item: number) => {
     >
       <lay-tooltip :content="'' + rv[1]" :is-can-hide="tooptipHide">
         <div
-          :style="{ bottom: rv[1] + '%' }"
+          :style="{
+            bottom: ((rv[1] - props.min) / (props.max - props.min)) * 100 + '%',
+          }"
           class="layui-slider-vertical-btn"
           :class="[props.disabled ? 'layui-slider-disabled disable-btn' : '']"
         ></div>
@@ -158,28 +159,34 @@ const focusDot = (item: number) => {
 
       <lay-tooltip :content="'' + rv[0]" :is-can-hide="tooptipHide">
         <div
-          :style="{ bottom: rv[0] + '%' }"
+          :style="{
+            bottom: ((rv[0] - props.min) / (props.max - props.min)) * 100 + '%',
+          }"
           class="layui-slider-vertical-btn"
           :class="[props.disabled ? 'layui-slider-disabled disable-btn' : '']"
         ></div>
       </lay-tooltip>
 
       <div class="layui-slider-vertical-line"></div>
+
       <div
         :style="{
-          height: rv[1] - rv[0] + '%',
-          bottom: rv[0] + '%',
+          height: ((rv[1] - rv[0]) / (props.max - props.min)) * 100 + '%',
+          bottom: ((rv[0] - props.min) / (props.max - props.min)) * 100 + '%',
         }"
         class="layui-slider-vertical-rate"
         :class="[props.disabled ? 'layui-slider-disabled disable-line' : '']"
       ></div>
+
       <div
         v-show="showDots"
         @click="focusDot(item)"
         class="layui-slider-vertical-dots"
         v-for="(item, index) in dots"
         :key="index"
-        :style="{ bottom: item + '%' }"
+        :style="{
+          bottom: ((item - props.min) / (props.max - props.min)) * 100 + '%',
+        }"
       ></div>
     </div>
   </div>

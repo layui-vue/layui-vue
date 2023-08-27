@@ -13,7 +13,8 @@
 ::: demo 使用 `lay-slider` 标签, 创建滑块
 
 <template>
-  <lay-slider :showDots="true" :step="10" :max="100" v-model="value1" :disabled="false"></lay-slider>
+  {{ value1 }}
+  <lay-slider v-model="value1"></lay-slider>
   <lay-input-number v-model="value1"></lay-input-number>
 </template>
 
@@ -37,7 +38,8 @@ export default {
 ::: demo
 
 <template>
-  <lay-slider :showDots="false" :step="10" v-model="value2" :vertical="true" :disabled="false"></lay-slider>
+  <lay-slider v-model="value2" :vertical="true"></lay-slider>
+  {{ value2 }}
 </template>
 
 <script>
@@ -46,7 +48,7 @@ import { ref } from 'vue'
 export default {
   setup() {
 
-    const value2 = ref(10)
+    const value2 = ref(50)
 
     return {
         value2
@@ -57,20 +59,21 @@ export default {
 
 :::
 
-::: title 区间
+::: title 横向区间
 :::
 
 ::: demo
 
 <template>
-  <lay-slider :disabled="false" :min="0" :max="100" v-model:rangeValue="value3" :range="true"></lay-slider>
+  {{ value3 }}
+  <lay-slider v-model:rangeValue="value3" :range="true"></lay-slider>
 </template>
 
 <script>
 import { ref } from 'vue'
 export default {
   setup() {
-    const value3 = ref([20,50])
+    const value3 = ref([30,50])
     return {
       value3
     }
@@ -85,14 +88,15 @@ export default {
 ::: demo
 
 <template>
-  <lay-slider v-model:rangeValue="value4" :range="true" :vertical="true" :disabled="false"></lay-slider>
+  <lay-slider v-model:rangeValue="value4" :range="true" :vertical="true"></lay-slider>
+  {{ value4 }}
 </template>
 
 <script>
 import { ref } from 'vue'
 export default {
   setup() {
-    const value4 = ref([23,56])
+    const value4 = ref([30,50])
     return {
       value4
     }
