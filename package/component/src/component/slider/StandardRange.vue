@@ -55,7 +55,7 @@ const emit = defineEmits(["link-val-hook"]);
 const tooptipHide = ref<boolean>(true);
 
 function rangeMove(e: MouseEvent) {
-  // tooptipHide.value = false;
+
   if (!tracker.value) {
     return;
   }
@@ -63,10 +63,12 @@ function rangeMove(e: MouseEvent) {
   let origin_left = tracker_rect.left;
   let point_left = e.clientX;
   let distance = point_left - origin_left;
-  if (distance < props.min) {
+  if (distance < 0) {
     rv.value[0] = props.min;
   } else {
-    let rate = (distance / tracker_rect.width) * 100;
+    
+    let rate = props.min + (distance / tracker_rect.width) * (props.max - props.min);
+
     let idx = -1;
     if (currbtn === -1) {
       currbtn = moveNeighbors(Math.floor(rate), rv);
@@ -149,7 +151,7 @@ const focusDot = (item: number) => {
   >
     <lay-tooltip :content="'' + rv[0]" :is-can-hide="tooptipHide">
       <div
-        :style="{ left: rv[0] + '%' }"
+        :style="{ left: ((rv[0] - props.min) / (props.max - props.min)) * 100 + '%'}"
         class="layui-slider-btn-v"
         :class="[props.disabled ? 'layui-slider-disabled disable-btn' : '']"
       ></div>
@@ -157,7 +159,7 @@ const focusDot = (item: number) => {
 
     <lay-tooltip :content="'' + rv[1]" :is-can-hide="tooptipHide">
       <div
-        :style="{ left: rv[1] + '%' }"
+        :style="{ left: ((rv[1] - props.min) / (props.max - props.min)) * 100 + '%' }"
         class="layui-slider-btn-v"
         :class="[props.disabled ? 'layui-slider-disabled disable-btn' : '']"
       ></div>
@@ -165,8 +167,8 @@ const focusDot = (item: number) => {
     <div class="layui-slider-line-v"></div>
     <div
       :style="{
-        width: rv[1] - rv[0] + '%',
-        left: rv[0] + '%',
+        width: ((rv[1] - rv[0]) / (props.max - props.min)) * 100 + '%',
+        left: ((rv[0] - props.min) / (props.max - props.min)) * 100 + '%',
       }"
       class="layui-slider-rate-v"
       :class="[props.disabled ? 'layui-slider-disabled disable-line' : '']"
@@ -177,7 +179,7 @@ const focusDot = (item: number) => {
       class="layui-slider-dots"
       v-for="(item, index) in dots"
       :key="index"
-      :style="{ left: item + '%' }"
+      :style="{ left: ((item - props.min) / (props.max - props.min)) * 100 + '%'}"
     ></div>
   </div>
 </template>

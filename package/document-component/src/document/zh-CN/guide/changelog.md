@@ -22,6 +22,7 @@
             <li>[优化] slider 组件拖拽卡顿的问题，移除节流防抖函数。</li>
             <li>[修复] select 组件 v-model 为 0 时，allow-clear 操作偏移的问题。</li>
             <li>[修复] tree-select 组件 v-model 为 0 时，allow-clear 操作偏移的问题。</li>
+            <li>[修复] slider 组件 max min 属性导致拖拽逻辑错乱的问题。</li>
             <li>[优化] date-picker 组件时间选择器，隐藏时分秒列表滚动条。</li>
           </ul>
         </li>

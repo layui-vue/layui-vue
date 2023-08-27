@@ -59,20 +59,21 @@ export default {
 
 :::
 
-::: title 区间
+::: title 横向区间
 :::
 
 ::: demo
 
 <template>
-  <lay-slider :disabled="false" :min="0" :max="100" v-model:rangeValue="value3" :range="true"></lay-slider>
+  {{ value3 }}
+  <lay-slider :showDots="true" :min="100" :step="5" :max="200" v-model:rangeValue="value3" :range="true"></lay-slider>
 </template>
 
 <script>
 import { ref } from 'vue'
 export default {
   setup() {
-    const value3 = ref([20,50])
+    const value3 = ref([100,150])
     return {
       value3
     }
@@ -87,7 +88,8 @@ export default {
 ::: demo
 
 <template>
-  <lay-slider v-model:rangeValue="value4" :range="true" :vertical="true" :disabled="false"></lay-slider>
+  <lay-slider :showDots="true" :min="100" :step="5" :max="200" v-model:rangeValue="value4" :range="true" :vertical="true"></lay-slider>
+  {{ value4 }}
 </template>
 
 <script>
