@@ -58,8 +58,8 @@ function standardMove(e: MouseEvent) {
   if (distance < 0) {
     standard_style.value = props.min;
   } else {
-
-    let rate = props.min + (distance / tracker_rect.width) * (props.max - props.min);
+    let rate =
+      props.min + (distance / tracker_rect.width) * (props.max - props.min);
     calcWithStep(rate, standard_style);
     if (standard_style.value > props.max) {
       standard_style.value = props.max;
@@ -72,11 +72,9 @@ function calcWithStep(
   rate: number | undefined,
   val: Ref<number> | Ref<number[]>
 ) {
-
   if (typeof rate === "undefined") return false;
 
   if (typeof val.value === "number") {
-
     let r = rate - val.value;
     if (Math.abs(r) < props.step) {
       return false;
@@ -99,19 +97,36 @@ const focusDot = (val: number) => {
 </script>
 
 <template>
-  <div ref="tracker" @mousedown.stop="handle_mousedown" class="layui-slider-track-v"
-    :class="[disabled ? 'layui-slider-disabled' : '']">
-
+  <div
+    ref="tracker"
+    @mousedown.stop="handle_mousedown"
+    class="layui-slider-track-v"
+    :class="[disabled ? 'layui-slider-disabled' : '']"
+  >
     <lay-tooltip :content="'' + val" :is-can-hide="tooptipHide">
-      <div :style="{ left: ((val as number - props.min) / (props.max - props.min)) * 100 + '%' }" class="layui-slider-btn-v"
-        :class="[disabled ? 'layui-slider-disabled disable-btn' : '']"></div>
+      <div
+        :style="{ left: ((val as number - props.min) / (props.max - props.min)) * 100 + '%' }"
+        class="layui-slider-btn-v"
+        :class="[disabled ? 'layui-slider-disabled disable-btn' : '']"
+      ></div>
     </lay-tooltip>
 
-    <div :style="{ width: ((val as number - props.min) / (props.max - props.min)) * 100 + '%' }" class="layui-slider-rate-v"
-      :class="[disabled ? 'layui-slider-disabled disable-line' : '']"></div>
+    <div
+      :style="{ width: ((val as number - props.min) / (props.max - props.min)) * 100 + '%' }"
+      class="layui-slider-rate-v"
+      :class="[disabled ? 'layui-slider-disabled disable-line' : '']"
+    ></div>
     <div class="layui-slider-line-v"></div>
 
-    <div v-show="showDots" @click="focusDot(item)" class="layui-slider-dots" v-for="(item, index) in dots" :key="index"
-      :style="{ left: ((item - props.min) / (props.max - props.min)) * 100 + '%' }"></div>
+    <div
+      v-show="showDots"
+      @click="focusDot(item)"
+      class="layui-slider-dots"
+      v-for="(item, index) in dots"
+      :key="index"
+      :style="{
+        left: ((item - props.min) / (props.max - props.min)) * 100 + '%',
+      }"
+    ></div>
   </div>
 </template>

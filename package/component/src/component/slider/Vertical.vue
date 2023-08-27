@@ -8,6 +8,7 @@ export default {
 import { Ref, ref } from "vue";
 import { on, off } from "evtd";
 import LayTooltip from "../tooltip/index.vue";
+import { makeDots } from "./utils";
 
 export interface VerticalProps {
   val?: number | Array<number>;
@@ -57,10 +58,10 @@ function verticalMove(e: MouseEvent) {
   let origin_bottom = tracker_rect.bottom;
   let point_bottom = e.clientY;
   let distance = (point_bottom - origin_bottom) * -1;
-  if (distance < props.min) {
+  if (distance < 0) {
     vertical_style.value = props.min;
   } else {
-    let rate = (distance / tracker_rect.height) * 100;
+    let rate = props.min + (distance / tracker_rect.height) * (props.max - props.min);
     calcWithStep(rate, vertical_style);
     if (vertical_style.value > props.max) {
       vertical_style.value = props.max;
@@ -90,19 +91,9 @@ function calcWithStep(
     }
   }
 }
-// 断点
-const makeDots = () => {
-  if (props.step === 0) return [];
-  let val = 0;
-  let dots = [];
-  let count = Math.floor(100 / props.step) - 1;
-  for (let i = 0; i < count; i++) {
-    val += props.step;
-    dots.push(val);
-  }
-  return dots;
-};
-const dots = makeDots();
+
+const dots = makeDots(props);
+
 const focusDot = (val: number) => {
   emit("link-val-hook", val);
 };
@@ -110,34 +101,17 @@ const focusDot = (val: number) => {
 
 <template>
   <div class="layui-slider-vertical">
-    <div
-      @mousedown.stop="handle_mousedown"
-      ref="tracker"
-      :class="[disabled ? 'layui-slider-disabled' : '']"
-      class="layui-slider-vertical-track"
-    >
+    <div @mousedown.stop="handle_mousedown" ref="tracker" :class="[disabled ? 'layui-slider-disabled' : '']"
+      class="layui-slider-vertical-track">
       <lay-tooltip :content="'' + val" :is-can-hide="tooptipHide">
-        <div
-          :style="{ bottom: val + '%' }"
-          :class="[props.disabled ? 'layui-slider-disabled disable-btn' : '']"
-          class="layui-slider-vertical-btn"
-        ></div>
+        <div :style="{ bottom: ((val as number - props.min) / (props.max - props.min)) * 100 + '%' }"
+          :class="[props.disabled ? 'layui-slider-disabled disable-btn' : '']" class="layui-slider-vertical-btn"></div>
       </lay-tooltip>
-
-      <div
-        :style="{ height: val + '%' }"
-        :class="[props.disabled ? 'layui-slider-disabled disable-line' : '']"
-        class="layui-slider-vertical-rate"
-      ></div>
+      <div :style="{ height: ((val as number - props.min) / (props.max - props.min)) * 100 + '%' }"
+        :class="[props.disabled ? 'layui-slider-disabled disable-line' : '']" class="layui-slider-vertical-rate"></div>
       <div class="layui-slider-vertical-line"></div>
-      <div
-        v-show="showDots"
-        @click="focusDot(item)"
-        class="layui-slider-vertical-dots"
-        v-for="(item, index) in dots"
-        :key="index"
-        :style="{ bottom: item + '%' }"
-      ></div>
+      <div v-show="showDots" @click="focusDot(item)" class="layui-slider-vertical-dots" v-for="(item, index) in dots"
+        :key="index" :style="{ bottom: ((item - props.min) / (props.max - props.min)) * 100 + '%' }"></div>
     </div>
   </div>
 </template>

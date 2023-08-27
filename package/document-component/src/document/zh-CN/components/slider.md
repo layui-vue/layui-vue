@@ -38,8 +38,8 @@ export default {
 ::: demo
 
 <template>
-    {{ value2 }}
-  <lay-slider :showDots="true" :step="5" :min="100" :max="300" v-model="value2" :vertical="true"></lay-slider>
+  <lay-slider v-model="value2" :vertical="true"></lay-slider>
+  {{ value2 }}
 </template>
 
 <script>
@@ -48,7 +48,7 @@ import { ref } from 'vue'
 export default {
   setup() {
 
-    const value2 = ref(10)
+    const value2 = ref(120)
 
     return {
         value2
