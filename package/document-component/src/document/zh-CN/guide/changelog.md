@@ -21,6 +21,7 @@
           <ul>
             <li>[修复] select 组件 v-model 为 0 时，allow-clear 操作偏移的问题。</li>
             <li>[修复] tree-select 组件 v-model 为 0 时，allow-clear 操作偏移的问题。</li>
+            <li>[优化] date-picker 组件时间选择器，隐藏时分秒列表滚动条。</li>
           </ul>
         </li>
       </ul>
