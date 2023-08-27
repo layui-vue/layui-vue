@@ -7,7 +7,6 @@ export default {
 <script setup lang="ts">
 import { Ref, ref } from "vue";
 import { on, off } from "evtd";
-import { throttle } from "./utils/index";
 import LayTooltip from "../tooltip/index.vue";
 
 export interface VerticalProps {
@@ -28,12 +27,10 @@ const props = withDefaults(defineProps<VerticalProps>(), {
   showDots: false,
 });
 
-const moveAction = throttle(verticalMove);
-
 function handle_mouseup() {
   off("selectstart", document, handle_select);
   off("mouseup", window, handle_mouseup);
-  off("mousemove", window, moveAction);
+  off("mousemove", window, verticalMove);
   tooptipHide.value = true;
 }
 function handle_select(e: Event): void {
@@ -43,7 +40,7 @@ function handle_select(e: Event): void {
 function handle_mousedown() {
   on("selectstart", window, handle_select, { once: true });
   on("mouseup", window, handle_mouseup);
-  on("mousemove", window, moveAction);
+  on("mousemove", window, verticalMove);
 }
 
 const tracker = ref<HTMLElement | null>(null);

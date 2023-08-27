@@ -13,7 +13,8 @@
 ::: demo 使用 `lay-slider` 标签, 创建滑块
 
 <template>
-  <lay-slider :showDots="true" :step="10" :max="100" v-model="value1" :disabled="false"></lay-slider>
+  {{ value1 }}
+  <lay-slider v-model="value1"></lay-slider>
   <lay-input-number v-model="value1"></lay-input-number>
 </template>
 
@@ -37,7 +38,8 @@ export default {
 ::: demo
 
 <template>
-  <lay-slider :showDots="false" :step="10" v-model="value2" :vertical="true" :disabled="false"></lay-slider>
+    {{ value2 }}
+  <lay-slider :showDots="true" :step="5" :min="100" :max="300" v-model="value2" :vertical="true"></lay-slider>
 </template>
 
 <script>

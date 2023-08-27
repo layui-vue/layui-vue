@@ -8,7 +8,7 @@ export default {
 import { ref, toRef, Ref } from "vue";
 import { on, off } from "evtd";
 import LayTooltip from "../tooltip/index.vue";
-import { throttle, makeDots } from "./utils/index";
+import { makeDots } from "./utils/index";
 
 export interface StandardRangeProps {
   rangeValue: Array<number>;
@@ -29,7 +29,6 @@ const props = withDefaults(defineProps<StandardRangeProps>(), {
 
 let rv = toRef(props, "rangeValue");
 
-const moveAction = throttle(rangeMove);
 let currbtn = -1;
 
 function handle_mousedown() {
@@ -37,14 +36,14 @@ function handle_mousedown() {
   tooptipHide.value = false;
   on("selectstart", window, handle_select, { once: true });
   on("mouseup", window, handle_mouseup);
-  on("mousemove", window, moveAction);
+  on("mousemove", window, rangeMove);
 }
 
 function handle_mouseup() {
   tooptipHide.value = true;
   off("selectstart", document, handle_select);
   off("mouseup", window, handle_mouseup);
-  off("mousemove", window, moveAction);
+  off("mousemove", window, rangeMove);
 }
 function handle_select(e: Event): void {
   e.preventDefault();
