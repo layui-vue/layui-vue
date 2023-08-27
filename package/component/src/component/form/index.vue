@@ -7,13 +7,13 @@ export default {
 <script setup lang="ts">
 import "./index.less";
 import { toRefs, provide, reactive, onMounted, nextTick } from "vue";
-import { Rule, ValidateError, ValidateMessages } from "async-validator";
+import { Rules, ValidateError, ValidateMessages } from "async-validator";
 import { LayFormItemContext, FormCallback, modelType } from "../../types/form";
 
 export interface FormProps {
   model?: modelType;
   required?: boolean;
-  rules?: Rule;
+  rules?: Rules;
   pane?: boolean;
   initValidate?: boolean;
   requiredIcons?: string;
