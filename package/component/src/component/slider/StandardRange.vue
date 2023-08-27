@@ -55,7 +55,6 @@ const emit = defineEmits(["link-val-hook"]);
 const tooptipHide = ref<boolean>(true);
 
 function rangeMove(e: MouseEvent) {
-
   if (!tracker.value) {
     return;
   }
@@ -66,8 +65,8 @@ function rangeMove(e: MouseEvent) {
   if (distance < 0) {
     rv.value[0] = props.min;
   } else {
-    
-    let rate = props.min + (distance / tracker_rect.width) * (props.max - props.min);
+    let rate =
+      props.min + (distance / tracker_rect.width) * (props.max - props.min);
 
     let idx = -1;
     if (currbtn === -1) {
@@ -151,7 +150,9 @@ const focusDot = (item: number) => {
   >
     <lay-tooltip :content="'' + rv[0]" :is-can-hide="tooptipHide">
       <div
-        :style="{ left: ((rv[0] - props.min) / (props.max - props.min)) * 100 + '%'}"
+        :style="{
+          left: ((rv[0] - props.min) / (props.max - props.min)) * 100 + '%',
+        }"
         class="layui-slider-btn-v"
         :class="[props.disabled ? 'layui-slider-disabled disable-btn' : '']"
       ></div>
@@ -159,7 +160,9 @@ const focusDot = (item: number) => {
 
     <lay-tooltip :content="'' + rv[1]" :is-can-hide="tooptipHide">
       <div
-        :style="{ left: ((rv[1] - props.min) / (props.max - props.min)) * 100 + '%' }"
+        :style="{
+          left: ((rv[1] - props.min) / (props.max - props.min)) * 100 + '%',
+        }"
         class="layui-slider-btn-v"
         :class="[props.disabled ? 'layui-slider-disabled disable-btn' : '']"
       ></div>
@@ -179,7 +182,9 @@ const focusDot = (item: number) => {
       class="layui-slider-dots"
       v-for="(item, index) in dots"
       :key="index"
-      :style="{ left: ((item - props.min) / (props.max - props.min)) * 100 + '%'}"
+      :style="{
+        left: ((item - props.min) / (props.max - props.min)) * 100 + '%',
+      }"
     ></div>
   </div>
 </template>

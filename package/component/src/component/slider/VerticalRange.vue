@@ -141,30 +141,53 @@ const focusDot = (item: number) => {
 
 <template>
   <div class="layui-slider-vertical">
-    <div ref="tracker" @mousedown.stop="handle_mousedown" class="layui-slider-vrange"
-      :class="[disabled ? 'layui-slider-disabled' : '']">
-      
+    <div
+      ref="tracker"
+      @mousedown.stop="handle_mousedown"
+      class="layui-slider-vrange"
+      :class="[disabled ? 'layui-slider-disabled' : '']"
+    >
       <lay-tooltip :content="'' + rv[1]" :is-can-hide="tooptipHide">
-        <div :style="{ bottom: ((rv[1] - props.min) / (props.max - props.min)) * 100 + '%' }"
-          class="layui-slider-vertical-btn" :class="[props.disabled ? 'layui-slider-disabled disable-btn' : '']"></div>
+        <div
+          :style="{
+            bottom: ((rv[1] - props.min) / (props.max - props.min)) * 100 + '%',
+          }"
+          class="layui-slider-vertical-btn"
+          :class="[props.disabled ? 'layui-slider-disabled disable-btn' : '']"
+        ></div>
       </lay-tooltip>
 
       <lay-tooltip :content="'' + rv[0]" :is-can-hide="tooptipHide">
-        <div :style="{ bottom: ((rv[0] - props.min) / (props.max - props.min)) * 100 + '%' }"
-          class="layui-slider-vertical-btn" :class="[props.disabled ? 'layui-slider-disabled disable-btn' : '']"></div>
+        <div
+          :style="{
+            bottom: ((rv[0] - props.min) / (props.max - props.min)) * 100 + '%',
+          }"
+          class="layui-slider-vertical-btn"
+          :class="[props.disabled ? 'layui-slider-disabled disable-btn' : '']"
+        ></div>
       </lay-tooltip>
 
       <div class="layui-slider-vertical-line"></div>
 
-      <div :style="{
-        height: ((rv[1] - rv[0]) / (props.max - props.min)) * 100 + '%',
-        bottom: ((rv[0] - props.min) / (props.max - props.min)) * 100 + '%',
-      }" class="layui-slider-vertical-rate" :class="[props.disabled ? 'layui-slider-disabled disable-line' : '']">
-      </div>
-      
-      <div v-show="showDots" @click="focusDot(item)" class="layui-slider-vertical-dots" v-for="(item, index) in dots"
-        :key="index" :style="{ bottom: ((item - props.min) / (props.max - props.min)) * 100 + '%' }"></div>
-    
+      <div
+        :style="{
+          height: ((rv[1] - rv[0]) / (props.max - props.min)) * 100 + '%',
+          bottom: ((rv[0] - props.min) / (props.max - props.min)) * 100 + '%',
+        }"
+        class="layui-slider-vertical-rate"
+        :class="[props.disabled ? 'layui-slider-disabled disable-line' : '']"
+      ></div>
+
+      <div
+        v-show="showDots"
+        @click="focusDot(item)"
+        class="layui-slider-vertical-dots"
+        v-for="(item, index) in dots"
+        :key="index"
+        :style="{
+          bottom: ((item - props.min) / (props.max - props.min)) * 100 + '%',
+        }"
+      ></div>
     </div>
   </div>
 </template>

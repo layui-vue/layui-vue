@@ -48,7 +48,7 @@ import { ref } from 'vue'
 export default {
   setup() {
 
-    const value2 = ref(120)
+    const value2 = ref(50)
 
     return {
         value2
@@ -66,14 +66,14 @@ export default {
 
 <template>
   {{ value3 }}
-  <lay-slider :showDots="true" :min="100" :step="5" :max="200" v-model:rangeValue="value3" :range="true"></lay-slider>
+  <lay-slider v-model:rangeValue="value3" :range="true"></lay-slider>
 </template>
 
 <script>
 import { ref } from 'vue'
 export default {
   setup() {
-    const value3 = ref([100,150])
+    const value3 = ref([30,50])
     return {
       value3
     }
@@ -88,7 +88,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-slider :showDots="true" :min="100" :step="5" :max="200" v-model:rangeValue="value4" :range="true" :vertical="true"></lay-slider>
+  <lay-slider v-model:rangeValue="value4" :range="true" :vertical="true"></lay-slider>
   {{ value4 }}
 </template>
 
@@ -96,7 +96,7 @@ export default {
 import { ref } from 'vue'
 export default {
   setup() {
-    const value4 = ref([23,56])
+    const value4 = ref([30,50])
     return {
       value4
     }
