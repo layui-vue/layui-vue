@@ -5,7 +5,7 @@
       <span lay-type="clear" class="laydate-btns-clear" @click="handelClear">{{
         t("datePicker.clear")
       }}</span>
-      <span lay-type="now" class="laydate-btns-now" @click="handelNow">{{
+      <span lay-type="now" v-if="props.showNow" class="laydate-btns-now" @click="handelNow">{{
         t("datePicker.now")
       }}</span>
       <span lay-type="confirm" class="laydate-btns-confirm" @click="handelOk">{{
@@ -21,6 +21,14 @@ export default {
 </script>
 <script lang="ts" setup>
 import { useI18n } from "../../../language";
+
+export interface PanelFoot {
+  showNow: boolean
+}
+
+const props = withDefaults(defineProps<PanelFoot>(), {
+  showNow: true
+});
 
 const { t } = useI18n();
 

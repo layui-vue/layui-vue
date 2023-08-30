@@ -63,7 +63,7 @@
         </ul>
       </div>
     </div>
-    <PanelFoot @ok="footOnOk" @now="footOnNow" @clear="footOnClear">
+    <PanelFoot @ok="footOnOk" :showNow="false" @now="footOnNow" @clear="footOnClear">
       <template
         v-if="!isNaN(startHms.hh) && !isNaN(startHms.mm) && !isNaN(startHms.ss)"
       >

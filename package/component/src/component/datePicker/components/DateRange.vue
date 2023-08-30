@@ -148,7 +148,7 @@
         ></DateContent>
       </div>
     </div>
-    <PanelFoot @ok="footOnOk" @now="footOnNow" @clear="footOnClear">
+    <PanelFoot @ok="footOnOk" :showNow="false" @now="footOnNow" @clear="footOnClear">
       <span v-if="startTime.day !== -1" class="layui-laydate-preview">
         {{ dayjs(startTime.day).format("YYYY-MM-DD") }}
         <template v-if="datePicker.type === 'datetime'">

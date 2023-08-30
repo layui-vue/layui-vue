@@ -86,7 +86,7 @@ const prev = () => {
   currentPage.value--;
   nextTick(() => {
     emit("change", { current: currentPage.value, limit: inlimit.value });
-  })
+  });
 };
 
 const next = () => {
@@ -96,14 +96,14 @@ const next = () => {
   currentPage.value++;
   nextTick(() => {
     emit("change", { current: currentPage.value, limit: inlimit.value });
-  })
+  });
 };
 
 const jump = (page: number) => {
   currentPage.value = page;
   nextTick(() => {
     emit("change", { current: currentPage.value, limit: inlimit.value });
-  })
+  });
 };
 
 const jumpPage = () => {
@@ -120,7 +120,7 @@ const changelimit = () => {
   }
   nextTick(() => {
     emit("change", { current: currentPage.value, limit: inlimit.value });
-  })
+  });
 };
 
 const refresh = () => {
