@@ -96,7 +96,12 @@
         </div>
       </div>
     </div>
-    <PanelFoot @ok="footOnOk" @now="footOnNow" @clear="footOnClear">
+    <PanelFoot
+      @ok="footOnOk"
+      :showNow="false"
+      @now="footOnNow"
+      @clear="footOnClear"
+    >
       <span v-if="startTime.unix !== -1" class="layui-laydate-preview">
         {{ dayjs(startTime.unix).format("YYYY-MM") }}
         {{ datePicker.rangeSeparator }}

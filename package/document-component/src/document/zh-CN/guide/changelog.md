@@ -15,7 +15,19 @@
   <lay-timeline>
     <lay-timeline-item title="2.3.x">
       <ul>
-        <a name="2-3-14"></a>
+        <a name="2-3-16"></a>
+        <li>
+          <h3>2.3.16 <span class="layui-badge-rim">2023-09-03</span></h3>
+          <ul>
+            <li>[优化] empty 组件采用 flex 布局，保证内容居中自适应。</li>
+            <li>[优化] input 组件 background-color 为 #ffffff 值。</li>
+            <li>[优化] date-picker 组件范围选择模式，移除现在操作。</li>
+            <li>[优化] page 组件 update:modelValue 与 change 事件的执行顺序。</li>
+          </ul>
+        </li>
+      </ul>
+      <ul>
+        <a name="2-3-15"></a>
         <li>
           <h3>2.3.15 <span class="layui-badge-rim">2023-08-27</span></h3>
           <ul>

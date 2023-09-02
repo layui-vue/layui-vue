@@ -6,7 +6,7 @@ export default {
 
 <script setup lang="ts">
 import "./index.less";
-import { Ref, ref, watch, useSlots, computed } from "vue";
+import { Ref, ref, watch, useSlots, computed, nextTick } from "vue";
 import { useI18n } from "../../language";
 
 export interface PageProps {
@@ -84,7 +84,9 @@ const prev = () => {
     return;
   }
   currentPage.value--;
-  emit("change", { current: currentPage.value, limit: inlimit.value });
+  nextTick(() => {
+    emit("change", { current: currentPage.value, limit: inlimit.value });
+  });
 };
 
 const next = () => {
@@ -92,17 +94,23 @@ const next = () => {
     return;
   }
   currentPage.value++;
-  emit("change", { current: currentPage.value, limit: inlimit.value });
+  nextTick(() => {
+    emit("change", { current: currentPage.value, limit: inlimit.value });
+  });
 };
 
 const jump = (page: number) => {
   currentPage.value = page;
-  emit("change", { current: currentPage.value, limit: inlimit.value });
+  nextTick(() => {
+    emit("change", { current: currentPage.value, limit: inlimit.value });
+  });
 };
 
 const jumpPage = () => {
   currentPage.value = currentPageShow.value;
-  emit("change", { current: currentPage.value, limit: inlimit.value });
+  nextTick(() => {
+    emit("change", { current: currentPage.value, limit: inlimit.value });
+  });
 };
 
 const changelimit = () => {
@@ -110,7 +118,9 @@ const changelimit = () => {
   if (currentPage.value > maxPage) {
     currentPage.value = maxPage;
   }
-  emit("change", { current: currentPage.value, limit: inlimit.value });
+  nextTick(() => {
+    emit("change", { current: currentPage.value, limit: inlimit.value });
+  });
 };
 
 const refresh = () => {
