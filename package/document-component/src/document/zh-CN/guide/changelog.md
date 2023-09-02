@@ -17,7 +17,7 @@
       <ul>
         <a name="2-3-16"></a>
         <li>
-          <h3>2.3.16 <span class="layui-badge-rim">2023-09-01</span></h3>
+          <h3>2.3.16 <span class="layui-badge-rim">2023-09-03</span></h3>
           <ul>
             <li>[优化] empty 组件采用 flex 布局，保证内容居中自适应。</li>
             <li>[优化] input 组件 background-color 为 #ffffff 值。</li>
