@@ -19,6 +19,7 @@
         <li>
           <h3>2.3.17 <span class="layui-badge-rim">2023-09-03</span></h3>
           <ul>
+            <li>[修复] treeSelect 组件 multiple 为 true 时 placeholder 属性无效的问题。</li>
             <li>[优化] popconfirm 组件 content 插槽存在时 content 为非必填。</li>
           </ul>
         </li>

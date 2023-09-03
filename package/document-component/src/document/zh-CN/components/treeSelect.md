@@ -693,13 +693,13 @@ const data4 = ref([{
 ::: demo 通过 `allow-clear` 属性开启清空操作。
 
 <template>
-  <lay-tree-select v-model="value5" :data="data5" placeholder="请选择" :allow-clear="true" :search="true" :multiple="true"></lay-tree-select>
+  <lay-tree-select v-model="value5" :data="data5" placeholder="请选择" :allow-clear="true" :search="true" :multiple="false"></lay-tree-select>
 </template>
 
 <script setup>
 import { ref } from 'vue';
 
-const value5 = ref([]);
+const value5 = ref();
 
 const data5 = ref([{
 	title: '一级1',
