@@ -11,7 +11,7 @@ import LayButton from "../button/index.vue";
 import { computed, ref } from "vue";
 
 export interface PopconfirmProps {
-  content: string;
+  content?: string;
   disabled?: boolean;
   btnAlign?: string;
   confirmText?: string;

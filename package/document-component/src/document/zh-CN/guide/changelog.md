@@ -15,6 +15,15 @@
   <lay-timeline>
     <lay-timeline-item title="2.3.x">
       <ul>
+        <a name="2-3-17"></a>
+        <li>
+          <h3>2.3.17 <span class="layui-badge-rim">2023-09-03</span></h3>
+          <ul>
+            <li>[优化] popconfirm 组件 content 插槽存在时 content 为非必填。</li>
+          </ul>
+        </li>
+      </ul>
+      <ul>
         <a name="2-3-16"></a>
         <li>
           <h3>2.3.16 <span class="layui-badge-rim">2023-09-03</span></h3>
