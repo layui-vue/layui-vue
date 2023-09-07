@@ -19,8 +19,7 @@
         <li>
           <h3>2.3.18 <span class="layui-badge-rim">2023-09-07</span></h3>
           <ul>
-            <li>[优化] table 组件 selectedKeys 属性在 dataSource 变化时不再清空，将清空时机交给用户。</li>
-            <li>[优化] table 组件 selectedKey 属性在 dataSource 变化时不再清空，将清空时机交给用户。</li>
+            <li>[优化] table 组件 selectedKeys, selectedKey 属性在 dataSource 变化时不再清空。</li>
             <li>[优化] select 组件 change 事件, value 参数增加 number 和 object 类型兼容。</li>
             <li>[优化] select 组件 update:modelValue 事件, value 参数增加 number 和 object 类型兼容。</li>
           </ul>
