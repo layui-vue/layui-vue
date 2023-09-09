@@ -212,7 +212,7 @@ const handleHide = () => {
 };
 
 const hasContent = computed(() => {
-  if (Array.isArray(selectedValue)) {
+  if (Array.isArray(selectedValue.value)) {
     return selectedValue.value.length > 0;
   } else {
     return (

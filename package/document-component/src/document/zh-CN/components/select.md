@@ -163,7 +163,7 @@ export default {
 ::: demo 通过 `multiple` 属性, 开启多选模式。
 
 <template>
-  <lay-select v-model="value6" multiple allow-clear>
+  <lay-select v-model="value6" multiple allow-clear placeholder="请选择">
     <lay-select-option value="1" label="学习"></lay-select-option>
     <lay-select-option value="2" label="编码" disabled></lay-select-option>
     <lay-select-option value="3" label="运动"></lay-select-option>
@@ -179,7 +179,7 @@ import { ref,watch } from 'vue'
 
 export default {
   setup() {
-    const value6 = ref(['1','2', '8']);
+    const value6 = ref([]);
 
     return {
       value6
