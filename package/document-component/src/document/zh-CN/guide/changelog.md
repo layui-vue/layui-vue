@@ -19,6 +19,7 @@
         <li>
           <h3>2.3.19 <span class="layui-badge-rim">2023-09-07</span></h3>
           <ul>
+            <li>[修复] date-picker 组件 showNow 必填的控制台警告。</li>
             <li>[修复] date-picker 组件 range 组件样式问题。</li>
             <li>[修复] menu 组件第一级菜单在折叠后 to 属性失效的问题。</li>
             <li>[修复] select 组件 multiple 为 true 时 placeholder 属性无效的问题。</li>

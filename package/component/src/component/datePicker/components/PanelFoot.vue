@@ -27,7 +27,7 @@ export default {
 import { useI18n } from "../../../language";
 
 export interface PanelFoot {
-  showNow: boolean;
+  showNow?: boolean;
 }
 
 const props = withDefaults(defineProps<PanelFoot>(), {
