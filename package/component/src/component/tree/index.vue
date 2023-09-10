@@ -158,7 +158,7 @@ onMounted(() => {
 
 function handleClick(node: TreeData) {
   const originNode = tree.value.getOriginData(node.id);
-  if(props.isSelect) {
+  if (props.isSelect) {
     emit("update:selectedKey", node.id);
   }
   emit("node-click", originNode);
