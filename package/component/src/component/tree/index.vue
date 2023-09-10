@@ -39,6 +39,7 @@ export interface TreeProps {
   showCheckbox?: boolean;
   replaceFields?: ReplaceFieldsOptions;
   tailNodeIcon?: string | boolean;
+  isSelect?: boolean;
 }
 
 interface TreeEmits {
@@ -49,17 +50,18 @@ interface TreeEmits {
 }
 
 const props = withDefaults(defineProps<TreeProps>(), {
-  checkedKeys: () => {
-    return [];
-  },
   showCheckbox: false,
   edit: false,
   collapseTransition: true,
   checkStrictly: false,
+  isSelect: true,
   onlyIconControl: false,
   disabled: false,
   showLine: true,
   tailNodeIcon: "layui-icon-file",
+  checkedKeys: () => {
+    return [];
+  },
   replaceFields: () => {
     return {
       id: "id",
@@ -156,7 +158,9 @@ onMounted(() => {
 
 function handleClick(node: TreeData) {
   const originNode = tree.value.getOriginData(node.id);
-  emit("update:selectedKey", node.id);
+  if (props.isSelect) {
+    emit("update:selectedKey", node.id);
+  }
   emit("node-click", originNode);
 }
 

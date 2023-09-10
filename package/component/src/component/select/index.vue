@@ -49,8 +49,8 @@ export interface SelectProps {
 }
 
 export interface SelectEmits {
-  (e: "update:modelValue", value: string): void;
-  (e: "change", value: string): void;
+  (e: "update:modelValue", value: string | number | object): void;
+  (e: "change", value: string | number | object): void;
   (e: "search", value: string): void;
 }
 
@@ -212,7 +212,7 @@ const handleHide = () => {
 };
 
 const hasContent = computed(() => {
-  if (Array.isArray(selectedValue)) {
+  if (Array.isArray(selectedValue.value)) {
     return selectedValue.value.length > 0;
   } else {
     return (

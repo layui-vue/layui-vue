@@ -190,8 +190,8 @@ const filterNodeIds = (node: any) => {
  * 应用于多选模式 placeholder 属性的显示隐藏
  */
 const hasContent = computed(() => {
-  if (Array.isArray(selectedValue)) {
-    return selectedValue.value.length > 0;
+  if (props.multiple) {
+    return checkedKeys.value.length > 0;
   } else {
     return (
       selectedValue.value !== "" &&
@@ -311,6 +311,7 @@ watch(
         <div class="layui-tree-select-content">
           <lay-tree
             :data="treeData"
+            :is-select="!multiple"
             :onlyIconControl="true"
             :show-checkbox="multiple"
             :check-strictly="checkStrictly"

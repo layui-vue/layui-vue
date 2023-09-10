@@ -54,11 +54,20 @@ const needTooltip = computed(
   >
     <template v-if="needTooltip">
       <lay-tooltip position="right" :isDark="theme !== 'light'">
-        <a href="javascript:void(0)">
-          <i v-if="slots.icon">
-            <slot name="icon"></slot>
-          </i>
-        </a>
+        <template v-if="to">
+          <router-link :to="to">
+            <i v-if="slots.icon">
+              <slot name="icon"></slot>
+            </i>
+          </router-link>
+        </template>
+        <template v-else>
+          <a href="javascript:void(0)">
+            <i v-if="slots.icon">
+              <slot name="icon"></slot>
+            </i>
+          </a>
+        </template>
         <template #content>
           <span v-if="slots.title">
             <slot name="title"></slot>

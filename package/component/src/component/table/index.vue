@@ -330,8 +330,8 @@ watch(
   () => props.dataSource,
   () => {
     tableDataSource.value = [...props.dataSource];
-    tableSelectedKeys.value = [];
-    tableSelectedKey.value = s;
+    // tableSelectedKeys.value = [];
+    // tableSelectedKey.value = s;
   },
   { deep: true }
 );
@@ -347,10 +347,18 @@ const changeAll = (isChecked: boolean) => {
 watch(
   tableSelectedKeys,
   () => {
-    if (tableSelectedKeys.value.length === dataSourceCount.value) {
-      allChecked.value = true;
+    if (props.page) {
+      if (tableSelectedKeys.value.length === props.page.total) {
+        allChecked.value = true;
+      } else {
+        allChecked.value = false;
+      }
     } else {
-      allChecked.value = false;
+      if (tableSelectedKeys.value.length === dataSourceCount.value) {
+        allChecked.value = true;
+      } else {
+        allChecked.value = false;
+      }
     }
     if (tableSelectedKeys.value.length > 0) {
       hasChecked.value = true;
