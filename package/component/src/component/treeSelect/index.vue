@@ -311,6 +311,7 @@ watch(
         <div class="layui-tree-select-content">
           <lay-tree
             :data="treeData"
+            :is-select="!multiple"
             :onlyIconControl="true"
             :show-checkbox="multiple"
             :check-strictly="checkStrictly"
