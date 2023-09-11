@@ -281,6 +281,81 @@ const openScroll = function() {
 
 :::
 
+
+<fieldset class="layui-elem-field layui-field-title">
+    <legend>模态</legend>
+</fieldset>
+
+::: demo 通过 layer.open(option) 创建模态窗, 目前支持`iframe` `page`等类型, 你可以使用`options`选项开启`Resize` `Offset`等更多特性。
+
+<template>
+    <lay-row :space="30" >
+        <lay-col :span="24">
+            <button @click="openSize1">整体适应</button>
+            <button @click="openSize3">固定尺寸</button>
+            <button @click="openSize2">高度适应1</button>
+            <button @click="openSize4">高度适应2</button>
+            <button @click="openSize5">宽度适应</button>
+        </lay-col>
+    </lay-row>
+</template>
+
+<script setup>
+import { layer } from  "../../../../layer/src/index"
+
+const openSize1 = function() {
+    layer.open({
+        type: 1,
+        title: "标题",
+        area: 'auto',
+        offset: ['100px', '100px'],
+        content: "内容",
+    })    
+}
+
+const openSize2 = function() {
+    layer.open({
+        type: 1,
+        title: "标题",
+                        offset: ['100px', '100px'],
+        area: '300px',
+        content: "内容",
+    })    
+}
+
+const openSize3 = function() {
+    layer.open({
+        type: 1,
+        title: "标题",
+                offset: ['100px', '100px'],
+        area: ['300px','300px'],
+        content: "内容",
+    })    
+}
+
+const openSize4 = function() {
+    layer.open({
+        type: 1,
+        title: "标题",
+                offset: ['100px', '100px'],
+        area: ['300px','auto'],
+        content: "内容",
+    })    
+}
+
+const openSize5 = function() {
+    layer.open({
+        type: 1,
+        title: "标题",
+        offset: ['100px', '100px'],
+        area: ['auto','300px'],
+        content: "内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内",
+    })    
+}
+</script>
+
+:::
+
 <fieldset class="layui-elem-field layui-field-title">
     <legend>位置</legend>
 </fieldset>
