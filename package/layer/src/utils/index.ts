@@ -41,19 +41,19 @@ export function calculateBaseArea(area: any) {
   if (typeof area == "string") {
     return [area];
   }
-  if(area[1] && area[1] === "auto") {
-    if(area[0] && area[0] === "auto") {
+  if (area[1] && area[1] === "auto") {
+    if (area[0] && area[0] === "auto") {
       return [];
     } else {
       return [area[0]];
     }
   }
   if (area[0] && area[0] === "auto") {
-    if(area[1] && area[1] != "auto") {
-      return [ undefined, area[1]]
+    if (area[1] && area[1] != "auto") {
+      return [undefined, area[1]];
     } else {
       return [];
-    } 
+    }
   }
   return [...area];
 }

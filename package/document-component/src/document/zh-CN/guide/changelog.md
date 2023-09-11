@@ -15,7 +15,17 @@
   <lay-timeline>
     <lay-timeline-item title="2.3.x">
       <ul>
-        <a name="2-3-18"></a>
+        <a name="2-3-20"></a>
+        <li>
+          <h3>2.3.20 <span class="layui-badge-rim">2023-09-11</span></h3>
+          <ul>
+            <li>[新增] layer 组件 area 属性 ['auto', '100px'] 格式，从而实现宽度自适应。</li>
+            <li>[升级] layer-vue 到 1.9.2 版本。</li>
+          </ul>
+        </li>
+      </ul>
+      <ul>
+        <a name="2-3-19"></a>
         <li>
           <h3>2.3.19 <span class="layui-badge-rim">2023-09-07</span></h3>
           <ul>
