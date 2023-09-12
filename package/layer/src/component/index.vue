@@ -105,6 +105,7 @@ export interface LayerProps {
   moveEnd?: Function;
   beforeClose?: Function;
   close?: Function;
+  animDuration?: string;
 }
 
 const props = withDefaults(defineProps<LayerProps>(), {
@@ -145,6 +146,7 @@ const props = withDefaults(defineProps<LayerProps>(), {
   moveEnd: () => {},
   beforeClose: () => true,
   close: () => {},
+  animDuration: "0.3s",
 });
 
 const emit = defineEmits(["close", "update:modelValue"]);
@@ -430,10 +432,11 @@ const supportMove = function () {
 const styles = computed<any>(() => {
   let style = {
     top: t.value,
-    left: l.value,
-    width: w.value,
-    height: h.value,
     zIndex: index.value,
+    animationDuration: props.animDuration,
+    height: h.value,
+    width: w.value,
+    left: l.value,
   };
   return style;
 });

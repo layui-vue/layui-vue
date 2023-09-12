@@ -180,6 +180,7 @@ const openSize = function() {
         type: 1,
         title: "标题",
         area: ['400px','400px'],
+        animDuration: "6s",
         content: "内容"
     })     
 }
