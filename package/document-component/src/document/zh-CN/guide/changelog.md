@@ -21,7 +21,7 @@
           <ul>
             <li>[新增] layer 组件 animDuration 属性，自定义入场动画速率，默认为 0.3s。 </li>
             <li>[新增] layer 组件 area 属性 ['auto', '100px'] 格式，从而实现宽度自适应。</li>
-            <li>[升级] layer-vue 到 1.9.2 版本。</li>
+            <li>[升级] layer-vue 到 1.9.3 版本。</li>
           </ul>
         </li>
       </ul>
