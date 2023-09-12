@@ -5,7 +5,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { computed, defineEmits } from "vue";
+import { defineEmits } from "vue";
 
 export interface CloseBtnProps {
   closeBtn?: number | string | boolean;
