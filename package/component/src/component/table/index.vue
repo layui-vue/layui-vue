@@ -519,10 +519,8 @@ const getScrollWidth = () => {
   const clientWidth: number = tableBody.value?.clientWidth || 0;
   const offsetWidth: number = tableBody.value?.offsetWidth || 0;
   if (clientWidth < offsetWidth) {
-    console.log("1")
     scrollWidthCell.value = offsetWidth - clientWidth;
   } else {
-    console.log("2")
     scrollWidthCell.value = 0;
   }
   tableBodyEmptyWidth.value = tableHeaderTable.value?.offsetWidth + "px";
