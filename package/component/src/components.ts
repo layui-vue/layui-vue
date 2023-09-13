@@ -95,6 +95,7 @@ import LayBarcode from "./component/barcode/index";
 import LayQrcode from "./component/qrcode/index";
 import LayTreeSelect from "./component/treeSelect/index";
 import LayPopconfirm from "./component/popconfirm/index";
+import LayLoading from "./component/loading/index";
 
 declare module "@vue/runtime-core" {
   // GlobalComponents for Volar
@@ -193,6 +194,7 @@ declare module "@vue/runtime-core" {
     LayConfigProvider: typeof LayConfigProvider;
     LayCalendar: typeof LayCalendar;
     LayPopconfirm: typeof LayPopconfirm;
+    LayLoading: typeof LayLoading;
   }
 
   export interface ComponentCustomProperties {

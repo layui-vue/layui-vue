@@ -29,6 +29,12 @@ const menus = [
         path: "/zh-CN/components/layer",
       },
       {
+        id: 9,
+        title: "加载",
+        subTitle: "loading",
+        path: "/zh-CN/components/loading",
+      },
+      {
         id: 10,
         title: "动画",
         subTitle: "animation",

@@ -140,6 +140,11 @@ const zhCN = [
             meta: { title: "面板" },
           },
           {
+            path: "/zh-CN/components/loading",
+            component: () => import("../document/zh-CN/components/loading.md"),
+            meta: { title: "加载" },
+          },
+          {
             path: "/zh-CN/components/animation",
             component: () =>
               import("../document/zh-CN/components/animation.md"),
