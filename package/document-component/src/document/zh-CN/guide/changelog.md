@@ -15,6 +15,15 @@
   <lay-timeline>
     <lay-timeline-item title="2.3.x">
       <ul>
+        <a name="2-3-21"></a>
+        <li>
+          <h3>2.3.21 <span class="layui-badge-rim">2023-09-13</span></h3>
+          <ul>
+            <li>[修复] table 组件某些情况下，表头与列错位的问题。 </li>
+          </ul>
+        </li>
+      </ul>
+      <ul>
         <a name="2-3-20"></a>
         <li>
           <h3>2.3.20 <span class="layui-badge-rim">2023-09-11</span></h3>
