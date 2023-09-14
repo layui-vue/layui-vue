@@ -201,11 +201,6 @@ export default {
 ::: title Loading 属性
 :::
 
-  loading?: boolean;
-  delay?: number;
-  type?: number;
-  tip?: string;
-
 ::: table
 
 ::: table
