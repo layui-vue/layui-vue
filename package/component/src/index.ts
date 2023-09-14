@@ -199,7 +199,7 @@ const components: Record<string, Plugin> = {
   LayAutocomplete,
   LayRadioButton,
   LayPopconfirm,
-  LayLoading
+  LayLoading,
 };
 
 const install = (app: App, options?: InstallOptions): void => {

@@ -201,12 +201,23 @@ export default {
 ::: title Loading 属性
 :::
 
+  loading?: boolean;
+  delay?: number;
+  type?: number;
+  tip?: string;
+
 ::: table
 
-| 属性  | 说明 | 可选值                               |
-| ----- | ----------- | --------------------------------------------- |
-| direction  | 分割线的方向 | `horizontal` `vertical`|
+::: table
 
+| 名称                | 描述             | 类型               | 默认值   | 可选值         |
+| ------------------- | ----------------| ------------------ | ------- | -------------- |
+| loading             | 加载状态         | `boolean`          | `true`  | `true` `false` |
+| delay               | 延迟时间（毫秒   |  `number`           |  `0`    |              |
+| type                | 动画类型         | `number`           | `0`      | `0` `1` `2`  |
+| tip                 | 提示信息         | `string`           |  --      | --            |
+
+:::
 :::
 
 ::: title Loading 插槽
@@ -214,9 +225,9 @@ export default {
 
 ::: table
 
-| 插槽 | 说明       |
+| 插槽 | 说明          |
 | ------ | ---------- |
-| default| 默认插槽，仅支持 direction 为 `horizontal`|
+| default| 默认插槽    |
 
 ::: 
 

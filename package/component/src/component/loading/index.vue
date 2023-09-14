@@ -37,10 +37,12 @@ const props = withDefaults(defineProps<LoadingProps>(), {
 
 const loading = ref(props.loading);
 
-watch(() => props.loading, () => {
-  setTimeout(() => {
-    loading.value = props.loading;
-  }, props.delay)
-})
-
+watch(
+  () => props.loading,
+  () => {
+    setTimeout(() => {
+      loading.value = props.loading;
+    }, props.delay);
+  }
+);
 </script>
