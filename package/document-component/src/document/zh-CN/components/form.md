@@ -719,7 +719,7 @@ const reset4 = () => {
       <lay-input v-model="model5.username"></lay-input>
     </lay-form-item>
     <lay-form-item label="年龄" prop="age">
-      <lay-input v-model="model5.age"></lay-input>
+      <lay-input v-model.number="model5.age" type="number" :allow-clear="true"></lay-input>
     </lay-form-item>
     <lay-form-item style="text-align: center">
       <lay-button @click="submit5" type="primary">提交</lay-button>
