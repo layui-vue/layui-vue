@@ -40,8 +40,8 @@ export default {
 ::: demo 通过 `lay-loading` 创建局部加载。
 
 <template>
-    <lay-switch v-model="loading"></lay-switch>
-    <lay-loading :type="2" :loading="loading" :delay="500" tip="loading..."></lay-loading>
+    <lay-switch v-model="loading1"></lay-switch>
+    <lay-loading :type="2" :loading="loading1"></lay-loading>
 </template>
 
 <script>
@@ -50,10 +50,64 @@ import { ref } from 'vue'
 export default {
   setup() {
 
-    const loading = ref(true)
+    const loading1 = ref(true)
 
     return {
-        loading
+        loading1
+    }
+  }
+}
+</script>
+
+:::
+
+::: title 延迟时间
+:::
+
+::: demo 通过 `lay-loading` 创建局部加载。
+
+<template>
+    <lay-switch v-model="loading2"></lay-switch>
+    <lay-loading :type="2" :loading="loading2" :delay="500"></lay-loading>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const loading2 = ref(true)
+
+    return {
+        loading2
+    }
+  }
+}
+</script>
+
+:::
+
+::: title 提示信息
+:::
+
+::: demo 通过 `lay-loading` 创建局部加载。
+
+<template>
+    <lay-switch v-model="loading3"></lay-switch>
+    <lay-loading :type="2" :loading="loading3" tip="loading..."></lay-loading>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const loading3 = ref(true)
+
+    return {
+        loading3
     }
   }
 }
@@ -67,10 +121,10 @@ export default {
 ::: demo 通过 `lay-loading` 创建局部加载。
 
 <template>
-    <lay-switch v-model="loading"></lay-switch>
+    <lay-switch v-model="loading4"></lay-switch>
     <br/>
     <br/>
-    <lay-loading :type="2" :loading="loading">
+    <lay-loading :type="2" :loading="loading4">
         <lay-table 
             :page="page" 
             :resize="true"
@@ -103,7 +157,7 @@ import { layer } from '@layui/layui-vue';
 export default {
   setup() {
 
-    const loading = ref(false);
+    const loading4 = ref(false);
 
     const selectedKeys = ref([]);
 
@@ -190,7 +244,8 @@ export default {
       page,
       change,
       changeStatus,
-      remove
+      remove,
+      loading4
     }
   }
 }
