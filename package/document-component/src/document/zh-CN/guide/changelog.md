@@ -25,6 +25,7 @@
             <li>[新增] loading 组件 tip 属性，设置提示信息。</li>
             <li>[新增] loading 组件 delay 属性，设置延迟时间，单位：毫秒。</li>
             <li>[修复] table 组件某些情况下，表头与列错位的问题。 </li>
+            <li>[修复] input 组件 type 属性为 number 时，allow-clear 无效的问题。</li>
           </ul>
         </li>
       </ul>
