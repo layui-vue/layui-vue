@@ -13,11 +13,11 @@
 ::: demo
 <template>
   <lay-timeline>
-    <lay-timeline-item title="2.3.x">
+    <lay-timeline-item title="2.4.x">
       <ul>
-        <a name="2-3-21"></a>
+        <a name="2-4-0"></a>
         <li>
-          <h3>2.3.21 <span class="layui-badge-rim">2023-09-13</span></h3>
+          <h3>2.4.0 <span class="layui-badge-rim">2023-09-15</span></h3>
           <ul>
             <li>[新增] loading 组件，局部加载。</li>
             <li>[新增] loading 组件 loading 属性，控制加载状态。</li>
@@ -29,6 +29,8 @@
           </ul>
         </li>
       </ul>
+    </lay-timeline-item>
+    <lay-timeline-item title="2.3.x">
       <ul>
         <a name="2-3-20"></a>
         <li>
