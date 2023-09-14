@@ -58,7 +58,11 @@ const inputRef = ref<HTMLElement | undefined>();
 const currentValue = ref<string>(
   String(props.modelValue == null ? "" : props.modelValue)
 );
-const hasContent = computed(() => (props.modelValue as string)?.length > 0);
+const hasContent = computed(() =>
+  type.value == "number"
+    ? (props.modelValue as number) > (props.min || 0)
+    : (props.modelValue as string)?.length > 0
+);
 const isPassword = computed(() => type.value == "password");
 const composing = ref(false);
 
@@ -89,7 +93,11 @@ const onInput = function (eventParam: Event) {
 };
 
 const onClear = () => {
-  emit("update:modelValue", "");
+  if (props.type === "number") {
+    emit("update:modelValue", props.min ? String(props.min) : "0");
+  } else {
+    emit("update:modelValue", "");
+  }
   emit("clear");
 };
 

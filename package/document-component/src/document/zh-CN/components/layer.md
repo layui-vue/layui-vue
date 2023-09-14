@@ -768,7 +768,8 @@ const openCallback = () => {
 | moveOut | 是否可以拖出浏览器可视区域 | boolean | false  | true false |
 | moveStart | 拖拽开始回调  | function | -  | - |
 | moveEnd | 拖拽结束回调 | function | -  | - |
-
+| animDuration | 动画速率 | string | `0.3s`  | - |
+ 
 :::
 
 ::: title 内置方法

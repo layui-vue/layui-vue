@@ -546,7 +546,9 @@ watch(
 );
 
 onMounted(() => {
-  getScrollWidth();
+  nextTick(() => {
+    getScrollWidth();
+  });
   getFixedColumn();
 
   tableBody.value?.addEventListener("scroll", () => {

@@ -15,6 +15,7 @@
 <template>
   <lay-table 
       :page="page" 
+      :resize="true"
       :height="'300px'"
       :columns="columns" 
       :loading="loading"
