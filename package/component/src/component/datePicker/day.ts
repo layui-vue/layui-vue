@@ -2,7 +2,7 @@
  * 获取年份列表
  */
 const getYears = () => {
-  let years = [];
+  const years = [];
   for (let i = 1970; i < getYear() + 100; i++) {
     years.push(i);
   }

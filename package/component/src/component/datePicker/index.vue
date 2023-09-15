@@ -375,6 +375,9 @@ watch(
     if (props.type === "month" || props.type === "year") {
       initModelValue += "";
     }
+    if (dateValue.value && dateValue.value === initModelValue) {
+      return;
+    }
     hms.value.hh = isNaN(dayjs(initModelValue).hour())
       ? 0
       : dayjs(initModelValue).hour();

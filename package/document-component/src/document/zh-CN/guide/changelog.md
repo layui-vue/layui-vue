@@ -15,6 +15,15 @@
   <lay-timeline>
     <lay-timeline-item title="2.4.x">
       <ul>
+        <a name="2-4-1"></a>
+        <li>
+          <h3>2.4.1 <span class="layui-badge-rim">2023-09-16</span></h3>
+          <ul>
+            <li>[新增] loading 组件，局部加载。</li>
+          </ul>
+        </li>
+      </ul>
+      <ul>
         <a name="2-4-0"></a>
         <li>
           <h3>2.4.0 <span class="layui-badge-rim">2023-09-15</span></h3>
