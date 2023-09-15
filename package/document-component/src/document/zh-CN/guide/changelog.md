@@ -19,7 +19,9 @@
         <li>
           <h3>2.4.1 <span class="layui-badge-rim">2023-09-16</span></h3>
           <ul>
-            <li>[新增] loading 组件，局部加载。</li>
+            <li>[修复] date-picker 组件 range 模式 allow-clear 属性不生效的问题。</li>
+            <li>[修复] date-picker 组件 format 属性启用时，计算逻辑错误的问题。</li>
+            <li>[调整] date-picker 组件 rangeSeparator 属性默认值为 "-"。</li>
           </ul>
         </li>
       </ul>

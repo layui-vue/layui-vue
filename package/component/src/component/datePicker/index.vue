@@ -49,7 +49,7 @@
         <lay-input
           :readonly="readonly"
           :name="name"
-          :allow-clear="disabled && allowClear"
+          :allow-clear="!disabled && allowClear"
           :placeholder="endPlaceholder"
           v-model="dateValue[1]"
           :disabled="disabled"

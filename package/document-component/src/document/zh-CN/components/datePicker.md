@@ -227,7 +227,7 @@ export default {
 <template>
     <lay-space direction="vertical">
     <lay-space>
-      <lay-date-picker  v-model="rangeTime1" range :placeholder="['开始日期','结束日期']"></lay-date-picker>
+      <lay-date-picker  v-model="rangeTime1" range :placeholder="['开始日期','结束日期']" :allow-clear="true"></lay-date-picker>
       modelValue:{{rangeTime1}}
     </lay-space>
     <lay-space>
