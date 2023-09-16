@@ -15,6 +15,15 @@
   <lay-timeline>
     <lay-timeline-item title="2.4.x">
       <ul>
+        <a name="2-4-2"></a>
+        <li>
+          <h3>2.4.2 <span class="layui-badge-rim">2023-09-16</span></h3>
+          <ul>
+            <li>[修复] loading 组件 type 属性为 1 2 时，夜间模式不适配的问题。</li>
+          </ul>
+        </li>
+      </ul>
+      <ul>
         <a name="2-4-1"></a>
         <li>
           <h3>2.4.1 <span class="layui-badge-rim">2023-09-16</span></h3>
