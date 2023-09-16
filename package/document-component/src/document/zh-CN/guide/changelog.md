@@ -19,6 +19,8 @@
         <li>
           <h3>2.4.2 <span class="layui-badge-rim">2023-09-16</span></h3>
           <ul>
+            <li>[新增] layer 组件 teleport 属性，用于指定弹出层挂载的 dom 节点，默认为 body。</li>
+            <li>[新增] layer 组件 teleportDisabled 属性，用于禁用 teleport 传送门属性。</li>
             <li>[修复] loading 组件 type 属性为 1 2 时，夜间模式不适配的问题。</li>
           </ul>
         </li>

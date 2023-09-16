@@ -106,6 +106,8 @@ export interface LayerProps {
   beforeClose?: Function;
   close?: Function;
   animDuration?: string;
+  teleport?: string;
+  teleportDisabled?: boolean;
 }
 
 const props = withDefaults(defineProps<LayerProps>(), {
@@ -147,6 +149,8 @@ const props = withDefaults(defineProps<LayerProps>(), {
   beforeClose: () => true,
   close: () => {},
   animDuration: "0.3s",
+  teleport: "body",
+  teleportDisabled: false
 });
 
 const emit = defineEmits(["close", "update:modelValue"]);
@@ -434,6 +438,7 @@ const styles = computed<any>(() => {
     top: t.value,
     zIndex: index.value,
     animationDuration: props.animDuration,
+    position: props.teleportDisabled || props.teleport != "body" ? 'absolute' : 'fixed',
     height: h.value,
     width: w.value,
     left: l.value,
@@ -719,20 +724,19 @@ defineExpose({ reset, open, close });
 </script>
 
 <template>
-  <div>
-    <!-- 遮盖层 -->
+  <Teleport :to="teleport" :disabled="teleportDisabled">
     <Shade
       :index="index"
       :visible="shadeVisible"
       :opacity="shadeOpacity"
+      :teleport="teleport"
+      :teleportDisabled="teleportDisabled"
       @shadeClick="shadeHandle"
     ></Shade>
-    <!-- 动画容器 -->
     <transition
       :enter-active-class="enterActiveClass"
       :leave-active-class="leaveActiveClass"
     >
-      <!-- 弹出层 -->
       <div
         ref="layero"
         class="layui-layer layui-layer-border"
@@ -859,5 +863,5 @@ defineExpose({ reset, open, close });
         <span v-if="showResize" class="layui-layer-resize"></span>
       </div>
     </transition>
-  </div>
+  </Teleport>
 </template>

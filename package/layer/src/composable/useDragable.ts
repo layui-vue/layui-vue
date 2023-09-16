@@ -5,7 +5,6 @@ const useMove = function (
   endCallback: Function,
   startCallback: Function
 ) {
-  el.style.position = "fixed";
   let offsetX: number, offsetY: number;
   var clientX = 0,
     clientY = 0;

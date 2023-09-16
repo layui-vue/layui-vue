@@ -1075,3 +1075,96 @@ const changeVisible19 = function() {
 }
 </script>
 :::
+
+<fieldset class="layui-elem-field layui-field-title">
+    <legend>高级</legend>
+</fieldset>
+
+::: demo 我们提供 layer.close(id) 与 layer.closeAll() 函数实现弹出层的主动销毁。
+
+<template>
+    <button @click="changeFeatureVisible1">template to body</button>
+    <button @click="changeFeatureVisible2">template</button>
+    <button @click="changeFeatureVisible3">template to parent</button>
+    <button @click="changeFeatureVisible4">template drawer to parent</button>
+    <button @click="changeFeatureVisible5">function loading</button>
+    <br />
+    <br />
+    <button @click="changeFeatureVisible6">function loading to body</button>
+    <button @click="changeFeatureVisible7">function to body</button>
+    <button @click="changeFeatureVisible8">function</button>
+    <button @click="changeFeatureVisible9">function msg</button>
+    <button @click="changeFeatureVisible10">function msg to body</button>
+    <br />
+    <br />
+    <lay-layer v-model="featureVisible1" title="标题" :area="['200px','200px']">
+        内容
+    </lay-layer>
+    <lay-layer v-model="featureVisible2" title="标题" :area="['200px','200px']" :teleportDisabled="true">
+        内容
+    </lay-layer>
+    <div style="width:100%;height:500px;position: relative;" id="container">
+        <lay-layer v-model="featureVisible3" title="标题" :area="['200px','200px']" :teleportDisabled="true">
+            内容
+        </lay-layer>
+        <lay-layer v-model="featureVisible4"  title="标题" type="drawer" :teleportDisabled="true">
+            内容
+        </lay-layer>
+    </div>
+</template>
+
+<script setup>
+import { LayLayer } from  "../../../../layer/src/index";
+import { layer } from  "../../../../layer/src/index"
+
+const featureVisible1 = ref(false);
+const featureVisible2 = ref(false);
+const featureVisible3 = ref(false);
+const featureVisible4 = ref(false);
+const changeFeatureVisible1 = function() {
+    featureVisible1.value = !featureVisible1.value;
+}
+const changeFeatureVisible2 = function() {
+    featureVisible2.value = !featureVisible2.value;
+}
+const changeFeatureVisible3 = function() {
+    featureVisible3.value = !featureVisible3.value;
+}
+const changeFeatureVisible4 = function() {
+    featureVisible4.value = !featureVisible4.value;
+}
+const changeFeatureVisible5 = function() {
+    layer.load(0, { time: 10000, teleport: "#container"});
+}
+const changeFeatureVisible6 = function() {
+    layer.load(0, { time: 3000 });
+}
+const changeFeatureVisible7 = function() {
+    layer.open({
+        title: "标题",
+        content: "内容",
+    });
+}
+const changeFeatureVisible8 = function() {
+    layer.open({
+        title: "标题",
+        content: "内容",
+        teleport: "#container",
+    });
+}
+
+const changeFeatureVisible9 = function() {
+    layer.msg("成功消息", {
+        icon: 1,
+        teleport: "#container"
+    });
+}
+
+const changeFeatureVisible10 = function() {
+    layer.msg("成功消息", {
+        icon: 1,
+    });
+}
+
+</script>
+:::
