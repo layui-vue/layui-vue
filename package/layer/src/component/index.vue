@@ -150,7 +150,7 @@ const props = withDefaults(defineProps<LayerProps>(), {
   close: () => {},
   animDuration: "0.3s",
   teleport: "body",
-  teleportDisabled: false
+  teleportDisabled: false,
 });
 
 const emit = defineEmits(["close", "update:modelValue"]);
@@ -438,7 +438,8 @@ const styles = computed<any>(() => {
     top: t.value,
     zIndex: index.value,
     animationDuration: props.animDuration,
-    position: props.teleportDisabled || props.teleport != "body" ? 'absolute' : 'fixed',
+    position:
+      props.teleportDisabled || props.teleport != "body" ? "absolute" : "fixed",
     height: h.value,
     width: w.value,
     left: l.value,

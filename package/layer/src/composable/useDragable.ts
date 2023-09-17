@@ -6,8 +6,8 @@ const useMove = function (
   startCallback: Function
 ) {
   let offsetX: number, offsetY: number;
-  var clientX = 0,
-    clientY = 0;
+  var clientX = 0;
+  var clientY = 0;
   var flag = true;
   if (el != null) {
     el.addEventListener("mousedown", function (event: any) {
@@ -34,11 +34,20 @@ const useMove = function (
 
               let x = event.pageX - offsetX;
               let y = event.pageY - offsetY;
+
               if (!moveOut) {
-                const documentX =
-                  document.documentElement.clientWidth - el.offsetWidth;
-                const documentY =
-                  document.documentElement.clientHeight - el.offsetHeight;
+
+                var documentX = document.documentElement.clientWidth - el.offsetWidth;
+                var documentY = document.documentElement.clientHeight - el.offsetHeight;
+
+                if(el.style.position === "absolute") {
+                  const parent = el.closest("[style*='position: relative']");
+                  if(parent != null) {
+                    documentX = parent.clientWidth - el.offsetWidth;
+                    documentY = parent.clientHeight - el.offsetHeight;
+                  }
+                } 
+
                 if (x < 0) {
                   x = 0;
                 } else if (x > documentX) {

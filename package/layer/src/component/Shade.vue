@@ -8,11 +8,11 @@ export default {
 import { computed, defineEmits } from "vue";
 
 export interface ShadeProps {
+  visible: boolean | string;
   opacity: string;
   index: number | Function;
-  visible: boolean | string;
-  teleportDisabled: boolean;
   teleport: string;
+  teleportDisabled: boolean;
 }
 
 const props = defineProps<ShadeProps>();
@@ -22,7 +22,8 @@ const emit = defineEmits(["shadeClick"]);
 const styles = computed<any>(() => {
   return {
     opacity: props.opacity,
-    position: props.teleportDisabled || props.teleport != "body"  ? 'absolute' : 'fixed',
+    position:
+      props.teleportDisabled || props.teleport != "body" ? "absolute" : "fixed",
     zIndex: props.index,
   };
 });

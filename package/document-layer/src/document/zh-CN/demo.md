@@ -1150,6 +1150,7 @@ const changeFeatureVisible8 = function() {
         title: "标题",
         content: "内容",
         teleport: "#container",
+        moveOut: true
     });
 }
 
