@@ -1,9 +1,14 @@
 <template>
   <div class="layui-loading">
     <div class="layui-loading-spinning" v-if="loading">
-      <img v-if="type === 0" src="./loading-0.svg" />
-      <img v-if="type === 1" src="./loading-1.svg" />
-      <img v-if="type === 2" src="./loading-2.svg" />
+      <template v-if="$slots.indicator">
+        <slot name="indicator"></slot>
+      </template>
+      <template v-else>
+        <img v-if="type === 0" src="./loading-0.svg" />
+        <img v-if="type === 1" src="./loading-1.svg" />
+        <img v-if="type === 2" src="./loading-2.svg" />
+      </template>
       <div class="layui-loading-spinning-text" v-if="tip">{{ tip }}</div>
     </div>
     <div class="layui-loading-container">

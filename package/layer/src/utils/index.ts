@@ -1,3 +1,4 @@
+import { doc } from "prettier";
 import { layer } from "../index";
 
 // 随机数
@@ -11,7 +12,7 @@ export function nextId() {
   s[19] = hexDigits.substr((s[19] & 0x3) | 0x8, 1);
   s[8] = s[13] = s[18] = s[23] = "-";
   var uuid = s.join("");
-  return uuid;
+  return uuid.replaceAll("-", "");
 }
 
 export function calculateMinArea(minArea: any) {
@@ -381,6 +382,19 @@ export async function calculatePhotosArea(
     return [imgarea[0] + "px", imgarea[1] + "px"];
   }
 }
+function compareElementId(className: string, id: string): HTMLElement | undefined {
+  const elements = document.getElementsByClassName(className);
+
+  for (let i = 0; i < elements.length; i++) {
+    const element = elements[i] as HTMLElement;
+
+    if (element.id === id) {
+      return element;
+    }
+  }
+
+  return undefined;
+}
 
 // 计算Notify位置 队列 此处先暂时定义Notify的间距为15px
 export function calculateNotifOffset(offset: any, area: any, layerId: string) {
@@ -404,8 +418,10 @@ export function calculateNotifOffset(offset: any, area: any, layerId: string) {
   //前一个元素
   let prevNode = nodeList.length > 0 ? nodeList[nodeList.length - 1] : null;
   if (prevNode) {
-    prevNode = document.getElementById(prevNode["id"])?.firstElementChild
-      ?.firstElementChild;
+
+    // TODO 使用 teleport 后, 获取不到子元素
+    prevNode = compareElementId('layui-layer', prevNode["id"]);
+
     if (offset === "rt" || offset === "lt") {
       transOffsetTop +=
         prevNode.offsetHeight + parseFloat(prevNode.style["top"]);
@@ -447,8 +463,7 @@ export function removeNotifiyFromQueen(layerId: string) {
   // 间隙
   let transOffsetTop = 15;
   // 删除项的高度
-  let notifiyDom = document.getElementById(layerId)?.firstElementChild
-    ?.firstElementChild as HTMLElement;
+  let notifiyDom = compareElementId('layui-layer', layerId) as HTMLElement;
   let offsetHeight = notifiyDom.offsetHeight;
   (window as any).NotifiyQueen = (window as any).NotifiyQueen || [];
   let notifiyQueen = (window as any).NotifiyQueen;
@@ -463,8 +478,7 @@ export function removeNotifiyFromQueen(layerId: string) {
   // //得到需要修改的定位的Notifiy集合
   let needCalculatelist = list.slice(findIndex + 1);
   needCalculatelist.forEach((e: { id: string }) => {
-    let dom = document.getElementById(e.id)?.firstElementChild
-      ?.firstElementChild as HTMLElement;
+    let dom = compareElementId('layui-layer', e.id) as HTMLElement;
     if (offsetType === "rt" || offsetType === "lt") {
       dom.style["top"] =
         parseFloat(dom.style["top"]) - transOffsetTop - offsetHeight + "px";

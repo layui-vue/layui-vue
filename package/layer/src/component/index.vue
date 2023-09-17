@@ -597,7 +597,7 @@ const showResize = computed(() => {
  * @param type  类型
  */
 const showTitle = computed(() => {
-  return props.title && props.type != 3 && props.type != 5 && props.type != 6;
+  return props.title && type != 3 && type != 5 && type != 6;
 });
 
 /*
@@ -741,6 +741,7 @@ defineExpose({ reset, open, close });
       <div
         ref="layero"
         class="layui-layer layui-layer-border"
+        :id="id"
         :class="boxClasses"
         :style="styles"
         v-if="visible"
