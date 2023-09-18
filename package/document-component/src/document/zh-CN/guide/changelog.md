@@ -13,6 +13,23 @@
 ::: demo
 <template>
   <lay-timeline>
+   <lay-timeline-item title="2.5.x">
+      <ul>
+        <a name="2-5-0"></a>
+        <li>
+          <h3>2.5.0 <span class="layui-badge-rim">2023-09-18</span></h3>
+          <ul>
+            <li>[新增] loading 组件 indicator 插槽，支持自定义加载动画。</li>
+            <li>[新增] layer 组件 teleport 属性，用于指定弹出层挂载的 dom 节点，默认为 body。</li>
+            <li>[新增] layer 组件 teleportDisabled 属性，用于禁用 teleport 传送门属性。</li>
+            <li>[修复] loading 组件 type 属性为 1 2 时，夜间模式不适配的问题。</li>
+            <li>[修复] layer 组件 type 为 3 时，仍展示标题的问题。</li>
+            <li>[文档] 新增 layer 组件 moving 回调属性说明，同于拖拽中监听。</li>
+            <li>[升级] layer-vue 2.0.0 版本。</li>
+          </ul>
+        </li>
+      </ul>
+    </lay-timeline-item>
     <lay-timeline-item title="2.4.x">
       <ul>
         <a name="2-4-2"></a>
@@ -23,6 +40,8 @@
             <li>[新增] layer 组件 teleport 属性，用于指定弹出层挂载的 dom 节点，默认为 body。</li>
             <li>[新增] layer 组件 teleportDisabled 属性，用于禁用 teleport 传送门属性。</li>
             <li>[修复] loading 组件 type 属性为 1 2 时，夜间模式不适配的问题。</li>
+            <li>[修复] layer 组件 type 为 3 时，仍展示标题的问题。</li>
+            <li>[文档] 新增 layer 组件 moving 回调属性说明，同于拖拽中监听。</li>
           </ul>
         </li>
       </ul>

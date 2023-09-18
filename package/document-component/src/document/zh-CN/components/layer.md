@@ -581,6 +581,42 @@ const openRightDrawer = function() {
 </script>
 :::
 
+::: title 局部使用
+:::
+
+::: demo 我们提供 `teleport` 指定弹层父级元素，通过 `teleportDisabled` 属性禁用模态模式，默认为 `false`。
+
+<template>
+    <lay-button @click="changeFeatureVisible1">template to container</lay-button>
+    <lay-button @click="changeFeatureVisible2">function to container</lay-button>
+    <br />
+    <br />
+    <div style="width:100%;height:500px;position: relative;" id="container">
+        <lay-layer v-model="featureVisible1" :teleportDisabled="true">
+            内容
+        </lay-layer>
+    </div>
+</template>
+
+<script setup>
+import { layer } from  "@layui/layui-vue"
+    
+const featureVisible1 = ref(false);
+
+const changeFeatureVisible1 = () => {
+    featureVisible1.value = !featureVisible1.value;
+}
+
+const changeFeatureVisible2 = () => {
+    layer.open({
+        title: '标题',
+        content: "内容",
+        teleport: "#container",
+    })
+}
+</script>
+:::
+
 ::: title 高级通讯
 :::
 
@@ -722,6 +758,9 @@ const openCallback = () => {
         },
         moveStart: (id) => {
             console.log(`拖拽开始:${id}`)
+        },
+        moving: (id) => {
+            console.log(`拖拽中：${id}`)
         },
         moveEnd: (id) => {
             console.log(`拖拽结束:${id}`)

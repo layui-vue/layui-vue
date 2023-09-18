@@ -1213,11 +1213,11 @@ const changeFeatureVisible13 = function() {
 }
 
 const changeFeatureVisible14 = function() {
-    layer.photos("http://www.pearadmin.com/assets/images/un1.svg")
+    layer.photos("http://www.layui-vue.com/assets/logo.685dda16.jpg")
 }
 
 const changeFeatureVisible15 = function() {
-    layer.photos({imgList: [{ src: "http://www.pearadmin.com/assets/images/un1.svg"}], teleport: "#container", area: ["100px", "100px"]})
+    layer.photos({imgList: [{ src: "http://www.layui-vue.com/assets/logo.685dda16.jpg"}], teleport: "#container", area: ["100px", "100px"]})
 }
 
 const changeFeatureVisible16 = function() {

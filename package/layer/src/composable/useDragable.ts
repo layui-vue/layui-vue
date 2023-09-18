@@ -1,12 +1,12 @@
 function getParentNode(el: any) {
   while (el && el.parentNode) {
     el = el.parentNode;
-  
+
     if (el && getComputedStyle(el).position === "relative") {
       return el;
-    } 
+    }
   }
-  
+
   return null;
 }
 
@@ -47,7 +47,7 @@ const useMove = function (
               let x = event.pageX - offsetX;
               let y = event.pageY - offsetY;
               let documentWidth = document.documentElement.clientWidth;
-              let documentHeight = document.documentElement.clientHeight
+              let documentHeight = document.documentElement.clientHeight;
 
               if (!moveOut) {
                 var documentX = documentWidth - el.offsetWidth;

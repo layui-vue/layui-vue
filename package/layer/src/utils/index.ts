@@ -382,7 +382,10 @@ export async function calculatePhotosArea(
     return [imgarea[0] + "px", imgarea[1] + "px"];
   }
 }
-function compareElementId(className: string, id: string): HTMLElement | undefined {
+function compareElementId(
+  className: string,
+  id: string
+): HTMLElement | undefined {
   const elements = document.getElementsByClassName(className);
 
   for (let i = 0; i < elements.length; i++) {
@@ -418,9 +421,8 @@ export function calculateNotifOffset(offset: any, area: any, layerId: string) {
   //前一个元素
   let prevNode = nodeList.length > 0 ? nodeList[nodeList.length - 1] : null;
   if (prevNode) {
-
     // TODO 使用 teleport 后, 获取不到子元素
-    prevNode = compareElementId('layui-layer', prevNode["id"]);
+    prevNode = compareElementId("layui-layer", prevNode["id"]);
 
     if (offset === "rt" || offset === "lt") {
       transOffsetTop +=
@@ -463,7 +465,7 @@ export function removeNotifiyFromQueen(layerId: string) {
   // 间隙
   let transOffsetTop = 15;
   // 删除项的高度
-  let notifiyDom = compareElementId('layui-layer', layerId) as HTMLElement;
+  let notifiyDom = compareElementId("layui-layer", layerId) as HTMLElement;
   let offsetHeight = notifiyDom.offsetHeight;
   (window as any).NotifiyQueen = (window as any).NotifiyQueen || [];
   let notifiyQueen = (window as any).NotifiyQueen;
@@ -478,7 +480,7 @@ export function removeNotifiyFromQueen(layerId: string) {
   // //得到需要修改的定位的Notifiy集合
   let needCalculatelist = list.slice(findIndex + 1);
   needCalculatelist.forEach((e: { id: string }) => {
-    let dom = compareElementId('layui-layer', e.id) as HTMLElement;
+    let dom = compareElementId("layui-layer", e.id) as HTMLElement;
     if (offsetType === "rt" || offsetType === "lt") {
       dom.style["top"] =
         parseFloat(dom.style["top"]) - transOffsetTop - offsetHeight + "px";
