@@ -7,7 +7,7 @@ export default {
 <script setup lang="ts">
 import { watch } from "vue";
 import { useI18n } from "../language";
-import DarkReader, {
+import {
   Theme,
   DynamicThemeFix,
   enable as enableDarkMode,
@@ -99,6 +99,7 @@ const changeTheme = (theme: string) => {
       ".lay-progress-circle svg",
       ".layui-layer-loading .layui-layer-loading1",
       ".layui-layer-loading .layui-layer-loading2",
+      ".layui-loading img",
       ".layui-layer-ico",
       ".layui-layer-min",
       ".layer-icon-ico16",

@@ -17,7 +17,7 @@
 
 .layui-layer,
 .layui-layer-shade {
-  position: fixed;
+  position: absolute;
   pointer-events: auto;
 }
 

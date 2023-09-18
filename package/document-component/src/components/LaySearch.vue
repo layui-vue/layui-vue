@@ -36,7 +36,7 @@ onMounted(() => {
 }
 .DocSearch-Button {
   width: 150px;
-  border-radius: 50px;
+  border-radius: 8px;
 }
 .DocSearch-Button,
 .DocSearch-Button:hover,

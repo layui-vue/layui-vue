@@ -1,3 +1,15 @@
+function getParentNode(el: any) {
+  while (el && el.parentNode) {
+    el = el.parentNode;
+
+    if (el && getComputedStyle(el).position === "relative") {
+      return el;
+    }
+  }
+
+  return null;
+}
+
 const useMove = function (
   el: HTMLElement,
   moveOut: boolean,
@@ -5,10 +17,9 @@ const useMove = function (
   endCallback: Function,
   startCallback: Function
 ) {
-  el.style.position = "fixed";
   let offsetX: number, offsetY: number;
-  var clientX = 0,
-    clientY = 0;
+  var clientX = 0;
+  var clientY = 0;
   var flag = true;
   if (el != null) {
     el.addEventListener("mousedown", function (event: any) {
@@ -35,11 +46,21 @@ const useMove = function (
 
               let x = event.pageX - offsetX;
               let y = event.pageY - offsetY;
+              let documentWidth = document.documentElement.clientWidth;
+              let documentHeight = document.documentElement.clientHeight;
+
               if (!moveOut) {
-                const documentX =
-                  document.documentElement.clientWidth - el.offsetWidth;
-                const documentY =
-                  document.documentElement.clientHeight - el.offsetHeight;
+                var documentX = documentWidth - el.offsetWidth;
+                var documentY = documentHeight - el.offsetHeight;
+
+                if (el.style.position === "absolute") {
+                  const parent = getParentNode(el);
+                  if (parent != null) {
+                    documentX = parent.clientWidth - el.offsetWidth;
+                    documentY = parent.clientHeight - el.offsetHeight;
+                  }
+                }
+
                 if (x < 0) {
                   x = 0;
                 } else if (x > documentX) {
