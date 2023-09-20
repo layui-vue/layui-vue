@@ -13,6 +13,17 @@
 ::: demo
 <template>
   <lay-timeline>
+    <lay-timeline-item title="3.0.x">
+      <ul>
+        <a name="3-0-0"></a>
+        <li>
+          <h3>3.0.0 <span class="layui-badge-rim">2023-09-18</span></h3>
+          <ul>
+            <li>[重构] page 组件。</li>
+          </ul>
+        </li>
+      </ul>
+    </lay-timeline-item>
    <lay-timeline-item title="2.5.x">
       <ul>
         <a name="2-5-0"></a>
