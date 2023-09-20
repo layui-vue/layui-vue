@@ -23,6 +23,7 @@
             <li>[优化] page 组件 limit 属性，可选属性, 默认值为 10。</li>
             <li>[优化] page 组件 pages 属性，调整 5 为默认值。</li>
             <li>[优化] page 组件 limits 选择框，使用 lay-select 代替原生 select, 改善样式。</li>
+            <li>[优化] page 组件 total 值超出 pages 后，省略页码的展现形式。</li>
             <li>[移除] page 组件 showPage, showSkip, showCount, showLimit, showInput, showRefresh 属性。</li>
           </ul>
         </li>
