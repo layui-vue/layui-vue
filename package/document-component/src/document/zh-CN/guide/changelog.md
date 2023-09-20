@@ -13,13 +13,17 @@
 ::: demo
 <template>
   <lay-timeline>
-    <lay-timeline-item title="3.0.x">
+    <lay-timeline-item title="2.6.x">
       <ul>
-        <a name="3-0-0"></a>
+        <a name="2-6-0"></a>
         <li>
-          <h3>3.0.0 <span class="layui-badge-rim">2023-09-18</span></h3>
+          <h3>2.6.0 <span class="layui-badge-rim">2023-09-21</span></h3>
           <ul>
-            <li>[重构] page 组件。</li>
+            <li>[新增] page 组件 layout 属性，字符数组, count, limits, next, page, prev, refresh, skip 为可选值。</li>
+            <li>[优化] page 组件 limit 属性，可选属性, 默认值为 10。</li>
+            <li>[优化] page 组件 pages 属性，调整 5 为默认值。</li>
+            <li>[优化] page 组件 limits 选择框，使用 lay-select 代替原生 select, 改善样式。</li>
+            <li>[移除] page 组件 showPage, showSkip, showCount, showLimit, showInput, showRefresh 属性。</li>
           </ul>
         </li>
       </ul>
