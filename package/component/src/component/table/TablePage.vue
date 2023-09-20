@@ -8,27 +8,19 @@ export default {
 import { LayIcon } from "@layui/icons-vue";
 import LayPage from "../page/index.vue";
 import { computed, WritableComputedRef } from "vue";
-
 export interface TablePageProps {
-  showPage?: boolean;
-  showSkip?: boolean;
-  showLimit?: boolean;
-  showCount?: boolean;
-  showRefresh?: boolean;
   current: number;
-  limits?: number[];
-  pages?: number;
+  layout?: string[];
   total: number;
   limit: number;
+  limits?: number[];
+  pages?: number;
   theme?: string;
 }
 
 const props = withDefaults(defineProps<TablePageProps>(), {
-  showPage: true,
-  showLimit: true,
-  showSkip: true,
+  layout: () => ["prev", "page", "next", "limits",  "skip"]
 });
-
 const emit = defineEmits(["update:current", "update:limit", "change"]);
 
 const current: WritableComputedRef<number> = computed({
@@ -57,11 +49,7 @@ const change = (pageData: any) => {
 <template>
   <lay-page
     :total="total"
-    :show-page="showPage"
-    :show-skip="showSkip"
-    :show-limit="showLimit"
-    :show-count="showCount"
-    :show-refresh="showRefresh"
+    :layout="layout"
     :limits="limits"
     :theme="theme"
     :pages="pages"
