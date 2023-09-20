@@ -43,7 +43,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-page :limit="limit1" v-model="current1" :total="total1"></lay-page>
+  <lay-page simple  v-model="current1" :total="total1"></lay-page>
 </template>
 
 <script>
@@ -215,14 +215,10 @@ export default {
 | 属性        | 描述         | 默认值  |
 | ----------- | ------------ | ------- |
 | v-model     | 当前页       | --      |
-| limit       | 每页数量     | --      |
+| limit       | 每页数量     | 10      |
 | total       | 总条数       | --      |
-| showCount   | 显示总数     | `false` |
-| showPage    | 显示每页     | `false` |
-| showLimit   | 显示每页数量 | `false` |
-| showRefresh | 显示刷新按钮 | `false` |
-| showSkip    | 显示跳转     | `false` |
-| pages       | 显示切页按钮数量     | `10` |
+| layout      | 不同部分的展示 | `["prev", "page", "next", "limits"]` |
+| pages       | 显示切页按钮数量     | `5` |
 | limits       | 切换每页数量的选择项     | `[10,20,30,40,50]` |
 | theme       | 主题色        |`green`|
 
