@@ -13,6 +13,27 @@
 ::: demo
 <template>
   <lay-timeline>
+    <lay-timeline-item title="2.6.x">
+      <ul>
+        <a name="2-6-0"></a>
+        <li>
+          <h3>2.6.0 <span class="layui-badge-rim">2023-09-21</span></h3>
+          <ul>
+            <li>[新增] datePicker 组件 max,min 属性，用于控制组件内的可选择的最大值与最小值。</li>
+            <li>[新增] page 组件 disabled 属性，默认值为 false, 用于分页组件禁用。</li>
+            <li>[新增] page 组件 hide-on-single-page 属性，total 值超出 pages 后使用下拉展示。</li>
+            <li>[新增] page 组件 layout 属性，字符数组, count, limits, next, page, prev, refresh, skip 为可选值。</li>
+            <li>[修复] table 组件 fixed 列内容超出列宽后溢出。</li>
+            <li>[优化] table 组件内容换行后，expand-icon 不垂直居中的问题。</li>
+            <li>[优化] page 组件 limit 属性，可选属性, 默认值为 10。</li>
+            <li>[优化] page 组件 pages 属性，调整 5 为默认值。</li>
+            <li>[优化] page 组件 limits 选择框，使用 lay-select 代替原生 select, 改善样式。</li>
+            <li>[优化] page 组件 total 值超出 pages 后，省略页码的展现形式。</li>
+            <li>[移除] page 组件 showPage, showSkip, showCount, showLimit, showInput, showRefresh 属性。</li>
+          </ul>
+        </li>
+      </ul>
+    </lay-timeline-item>
    <lay-timeline-item title="2.5.x">
       <ul>
         <a name="2-5-0"></a>
@@ -31,20 +52,6 @@
       </ul>
     </lay-timeline-item>
     <lay-timeline-item title="2.4.x">
-      <ul>
-        <a name="2-4-2"></a>
-        <li>
-          <h3>2.4.2 <span class="layui-badge-rim">2023-09-16</span></h3>
-          <ul>
-            <li>[新增] loading 组件 indicator 插槽，支持自定义加载动画。</li>
-            <li>[新增] layer 组件 teleport 属性，用于指定弹出层挂载的 dom 节点，默认为 body。</li>
-            <li>[新增] layer 组件 teleportDisabled 属性，用于禁用 teleport 传送门属性。</li>
-            <li>[修复] loading 组件 type 属性为 1 2 时，夜间模式不适配的问题。</li>
-            <li>[修复] layer 组件 type 为 3 时，仍展示标题的问题。</li>
-            <li>[文档] 新增 layer 组件 moving 回调属性说明，同于拖拽中监听。</li>
-          </ul>
-        </li>
-      </ul>
       <ul>
         <a name="2-4-1"></a>
         <li>

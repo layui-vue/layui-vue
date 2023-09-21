@@ -192,7 +192,7 @@ export default {
 ::: title 一次性选择
 :::
 
-::: demo 只需要点击一次后自动关闭，无需点击确认按钮,仅在type等于`year`、`month`、`date`时有效
+::: demo 只需要点击一次后自动关闭，无需点击确认按钮,仅在 type 等于`year`、`month`、`date`时有效
 
 <template>
 <div style="display:flex">
@@ -258,7 +258,7 @@ const rangeTime4 = ref(['01:01:00', '03:03:03']);
 ::: title 时间戳模式
 :::
 
-::: demo 仅在type等于`date`、`datetime`时有效 传入的一个 Unix 时间戳 (13 位数字，从1970年1月1日 UTC 午夜开始所经过的毫秒数) 
+::: demo 仅在 type 等于`date`、`datetime`时有效 传入的一个 Unix 时间戳 (13 位数字，从 1970 年 1 月 1 日 UTC 午夜开始所经过的毫秒数)
 
 <template>
   <lay-space direction="vertical">
@@ -290,10 +290,70 @@ export default {
 </script>
 
 :::
+
+::: title 最大值,最小值
+:::
+
+::: demo 通过预设`min`、`max`属性限制组件选择的最大值与最小值,目前仅支持`date`、`year`、`month`、`time(不包含range)`模式，且无法在初始化时强制变更modelValue,在未来的版本中将补齐这一特性并支持更多模式
+
+<template>
+  <lay-space direction="vertical">
+    <lay-space>
+      <span style='width:70px'> 日期：</span>
+      <lay-date-picker v-model='limitDate' :min='minDate' :max='maxDate' placeholder="限制日期"></lay-date-picker>
+    </lay-space>
+    <lay-space>
+      <span style='width:70px'> 年：</span>
+      <lay-date-picker type="year" v-model='limitYear'  min='2017' max='2026' placeholder="限制年"></lay-date-picker>
+    </lay-space>
+    <lay-space>
+      <span style='width:70px'> 月:</span>
+      <lay-date-picker type="month" v-model='limitMonth' min='2' max='11' placeholder="限制月"></lay-date-picker>
+    </lay-space>
+    <lay-space>
+      <span style='width:70px'> 时间:</span>
+      <lay-date-picker type="time" v-model='endTime5' min='14:30:00' max='21:40:00' placeholder="限制时间"></lay-date-picker>
+    </lay-space>
+    <lay-space>
+      <span style='width:70px'> 日期区间：</span>
+      <lay-date-picker range v-model='limitDateRange' :min='minDate' :max='maxLimitDate' placeholder="请选择"></lay-date-picker>
+    </lay-space>
+  </lay-space>
+</template>
+
+<script>
+import { ref } from 'vue'
+import dayjs from "dayjs";
+export default {
+  setup() {
+   const minDate = dayjs().startOf('month').add(10,'day').format('YYYY-MM-DD HH:mm');
+   const maxDate = dayjs().endOf('month').subtract(10,'day').format('YYYY-MM-DD HH:mm');
+   const limitDate=ref(dayjs().startOf('month').add(11,'day').format('YYYY-MM-DD HH:mm'));
+   const limitYear=ref(dayjs().year());
+   const limitMonth=ref(dayjs().month()+1);
+   const limitDateRange=ref([])
+   const maxLimitDate = dayjs().add(1,'month').endOf('month').subtract(10,'day').format('YYYY-MM-DD HH:mm');
+   const limitTimeRange = ref([]);
+    return {
+      minDate,
+      maxDate,
+      limitDate,
+      limitYear,
+      limitMonth,
+      limitDateRange,
+      maxLimitDate,
+      limitTimeRange
+    }
+  }
+}
+</script>
+
+:::
+
 ::: title 格式化
 :::
 
-::: demo 目前在type等于`year`、`month`这类输出值为非组合值时无效，使用`format`属性任意组合吧
+::: demo 目前在 type 等于`year`、`month`这类输出值为非组合值时无效，使用`format`属性任意组合吧
 
 <template>
   <lay-date-picker v-model="endTime8" simple type="date" :format="'DD/MM/YYYY'" placeholder="click me"></lay-date-picker>
@@ -311,27 +371,29 @@ export default {
   }
 }
 </script>
+
 :::
 ::: title Date Picker 属性
 :::
 
 ::: table
 
-| 属性          | 描述                                                         | 类型           | 默认值 | 可选值         | 版本         |
-| ------------- | ------------------------------------------------------------ | -------------- | ------ | -------------- |-------------- |
-| v-model      | 当前时间                                                     | `string`         | --    | --             | --             |
-| type        | 选择类型                                                   | `string`         | `date`    | `date` `datetime` `year` `month` `time` `yearmonth`             | --             |
-| disabled      | 是否禁止修改                                                     | `boolean`         | `false`    | —             | —             |
-| simple      | 一次性选择，无需点击确认按钮             | `boolean`         | `false`    | --             | --             |
-| readonly      | 只读             | `boolean`         | `false`    | --             | --             |
-| allowClear    | 允许清空             | `boolean`         | `true`    | --             | --             |
-| size    | 尺寸            | `string`         | `lg` `md` `sm` `xs`    | `md`            | --             |
-| prefix-icon    | 前置图标            | `string`         | `layui-icon-date`    |  内置图标集            | `1.4.0`             |
-| suffix-icon    | 后置图标            | `string`         | --    | 内置图标集            | `1.4.0`             |
-| timestamp    | 时间戳模式(13位),仅对date和datetime有效| `boolean`        | `false`    | `true` `false`         | `1.6.5`             |
-| format    | 输出格式化 | `string`        | --   | 例如`YYYY-MM-DD`         | -            |
-| contentStyle             | 内容自定义样式     | `StyleValue` | -- | -- |-- |
-| contentClass             | 内容自定义Class    | `string` `Array<string \| object>` `object` | -- | -- |-- |
+| 属性         | 描述                                         | 类型                                        | 默认值              | 可选值                                              | 版本    |
+| ------------ | -------------------------------------------- | ------------------------------------------- | ------------------- | --------------------------------------------------- | ------- |
+| v-model      | 当前时间                                     | `string`                                    | --                  | --                                                  | --      |
+| type         | 选择类型                                     | `string`                                    | `date`              | `date` `datetime` `year` `month` `time` `yearmonth` | --      |
+| disabled     | 是否禁止修改                                 | `boolean`                                   | `false`             | —                                                   | —       |
+| simple       | 一次性选择，无需点击确认按钮                 | `boolean`                                   | `false`             | --                                                  | --      |
+| readonly     | 只读                                         | `boolean`                                   | `false`             | --                                                  | --      |
+| allowClear   | 允许清空                                     | `boolean`                                   | `true`              | --                                                  | --      |
+| size         | 尺寸                                         | `string`                                    | `lg` `md` `sm` `xs` | `md`                                                | --      |
+| prefix-icon  | 前置图标                                     | `string`                                    | `layui-icon-date`   | 内置图标集                                          | `1.4.0` |
+| suffix-icon  | 后置图标                                     | `string`                                    | --                  | 内置图标集                                          | `1.4.0` |
+| timestamp    | 时间戳模式(13 位),仅对 date 和 datetime 有效 | `boolean`                                   | `false`             | `true` `false`                                      | `1.6.5` |
+| format       | 输出格式化                                   | `string`                                    | --                  | 例如`YYYY-MM-DD`                                    | -       |
+| contentStyle | 内容自定义样式                               | `StyleValue`                                | --                  | --                                                  | --      |
+| contentClass | 内容自定义 Class                             | `string` `Array<string \| object>` `object` | --                  | --                                                  | --      |
+
 :::
 
 ::: title Date Picker 事件
@@ -339,11 +401,11 @@ export default {
 
 ::: table
 
-| 事件  | 描述                | 参数                        |
-| ----- | ------------------- | -------------------------- |
-| change| 原生 change 事件    | (value : 同v-model) |
-| focus | 原生 focus事件     | event : Event               |
-| blur  | 原生 blur 事件      | event : Event               |
+| 事件   | 描述             | 参数                 |
+| ------ | ---------------- | -------------------- |
+| change | 原生 change 事件 | (value : 同 v-model) |
+| focus  | 原生 focus 事件  | event : Event        |
+| blur   | 原生 blur 事件   | event : Event        |
 
 :::
 

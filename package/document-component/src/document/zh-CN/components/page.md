@@ -13,7 +13,7 @@
 ::: demo 使用 `lay-page` 标签, 创建分页
 
 <template>
-  <lay-page v-model="currentPage" :limit="limit" :total="total" :show-page="true"></lay-page>
+  <lay-page  v-model="currentPage" :limit="limit" :total="total"></lay-page>
 </template>
 
 <script>
@@ -22,9 +22,9 @@ import { ref } from 'vue'
 export default {
   setup() {
 
-    const limit = ref(20)
-    const total = ref(100)
-    const currentPage = ref(2);
+    const limit = ref(10)
+    const total = ref(10)
+    const currentPage = ref(4);
 
     return {
       limit,
@@ -35,7 +35,80 @@ export default {
 }
 </script>
 
+
 :::
+
+
+::: title 禁用
+:::
+
+::: demo 使用 `disabled` 属性 , 开启禁用
+
+<template>
+  <lay-page v-model="currentPage" :layout="layout" disabled :limit="limit" :total="total"></lay-page>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const limit = ref(10)
+    const total = ref(100)
+    const currentPage = ref(1);
+    const layout = ref(['count', 'prev', 'page', 'next', 'limits',  'refrsh', 'skip'])
+
+    return {
+      limit,
+      total,
+      layout,
+      currentPage
+    }
+  }
+}
+</script>
+
+
+:::
+
+
+::: title 只有一页时隐藏
+:::
+
+::: demo 使用 `hide-on-single-page` 属性 , 开启只有一页时隐藏
+
+<template>
+  <lay-space direction="vertical" fill wrap size="lg">
+    <lay-switch v-model="active1"></lay-switch>
+    <lay-page :hide-on-single-page="active1" v-model="currentPage"  :limit="limit" :total="total"></lay-page>
+  </lay-space>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const limit = ref(10)
+    const total = ref(10)
+    const currentPage = ref(1);
+    const  active1 = ref(false)
+    return {
+      limit,
+      total,
+      layout,
+      currentPage,
+      active1
+    }
+  }
+}
+</script>
+
+
+:::
+
 
 ::: title 简洁模式
 :::
@@ -43,7 +116,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-page :limit="limit1" v-model="current1" :total="total1"></lay-page>
+  <lay-page simple   v-model="current1" :total="total1"></lay-page>
 </template>
 
 <script>
@@ -73,7 +146,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-page :limit="limit2" :total="total2" :show-page="true" theme="blue"></lay-page>
+  <lay-page :limit="limit2" :total="total2" theme="blue"></lay-page>
 </template>
 
 <script>
@@ -82,7 +155,7 @@ import { ref } from 'vue'
 export default {
   setup() {
 
-    const limit2 = ref(20)
+    const limit2 = ref(10)
     const total2 = ref(100)
 
     return {
@@ -101,7 +174,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-page :limit="limit3" :total="total3" showCount showPage :limits="limits3"></lay-page>
+  <lay-page :limit="limit3" :total="total3"  :limits="limits3"></lay-page>
 </template>
 
 <script>
@@ -132,7 +205,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-page :limit="limit4" :total="total4" @change="change4" :show-page="true"></lay-page>
+  <lay-page :limit="limit4" :total="total4" @change="change4" ></lay-page>
 </template>
 
 <script>
@@ -170,7 +243,7 @@ export default {
     <lay-button type="primary" size="sm" @click="changeLimit5">update limit {{ limit5 }}</lay-button>
   </lay-button-container>
   <br/>
-  <lay-page v-model="current5" v-model:limit="limit5" :pages="pages5" :total="total5" :show-count="true" :show-page="true" :show-limit="true" :show-refresh="true" :showSkip="true" @change="change5"></lay-page>
+  <lay-page v-model="current5"  :layout="layout" v-model:limit="limit5" :pages="pages5" :total="total5"  @change="change5"></lay-page>
 </template>
 
 <script>
@@ -183,6 +256,7 @@ export default {
     const total5 = ref(99)
     const pages5 = ref(7);
     const current5 = ref(1);
+    const layout = ref(['count', 'prev', 'page', 'next', 'limits',  'refrsh', 'skip'])
     const changeCurrent5 = () => {
       current5.value = 2;
     }
@@ -197,6 +271,7 @@ export default {
       total5,
       pages5,
       current5,
+      layout,
       changeCurrent5,
       changeLimit5,
       change5
@@ -215,15 +290,13 @@ export default {
 | 属性        | 描述         | 默认值  |
 | ----------- | ------------ | ------- |
 | v-model     | 当前页       | --      |
-| limit       | 每页数量     | --      |
+| limit       | 每页数量     | 10      |
 | total       | 总条数       | --      |
-| showCount   | 显示总数     | `false` |
-| showPage    | 显示每页     | `false` |
-| showLimit   | 显示每页数量 | `false` |
-| showRefresh | 显示刷新按钮 | `false` |
-| showSkip    | 显示跳转     | `false` |
-| pages       | 显示切页按钮数量     | `10` |
+| layout      | 不同部分的展示 | `["prev", "page", "next", "limits"]` |
+| pages       | 显示切页按钮数量     | `5` |
 | limits       | 切换每页数量的选择项     | `[10,20,30,40,50]` |
+| hide-on-single-page   | 只有一页时隐藏     | `false` |
+| disabled   | 分页禁用      | `false` |
 | theme       | 主题色        |`green`|
 
 :::

@@ -1,3 +1,9 @@
+<!--
+ * @Author: baobaobao
+ * @Date: 2023-07-07 15:34:38
+ * @LastEditTime: 2023-09-21 21:07:12
+ * @LastEditors: baobaobao
+-->
 <script lang="ts">
 export default {
   name: "LayPage",
@@ -6,250 +12,425 @@ export default {
 
 <script setup lang="ts">
 import "./index.less";
-import { Ref, ref, watch, useSlots, computed, nextTick } from "vue";
+import { Ref, ref, watch, useSlots, computed, ComputedRef } from "vue";
 import { useI18n } from "../../language";
+import LayButton from "../button/index";
+import LayInput from "../input/index";
+import LaySelect from "../select/index";
+import LaySelectOption from "../selectOption/index";
+import LayDropdown from "../dropdown/index";
+import LayDropdownMenu from "../dropdownMenu/index";
+import LayDropdownMenuItem from "../dropdownMenuItem/index";
+import { LayIcon } from "@layui/icons-vue";
 
+export type MODE = "border" | "background" | "none";
+export interface PageOtionInfo {
+  resetLeft?: number[];
+  resetRight?: number[];
+}
 export interface PageProps {
   total: number;
-  limit: number;
+  limit?: number;
   theme?: string;
-  showPage?: boolean;
-  showSkip?: boolean;
-  showCount?: boolean;
-  showLimit?: boolean;
-  showInput?: boolean;
-  showRefresh?: boolean;
   pages?: number;
   limits?: number[];
+  simple?: boolean;
   modelValue?: number;
+  hideOnSinglePage?: boolean;
+  // mode?: MODE;
+  disabled?: boolean;
+  layout?: string[];
 }
-
+export interface IsLayoutChild {
+  count?: boolean;
+  limits?: boolean;
+  next?: boolean;
+  page?: boolean;
+  prev?: boolean;
+  refresh?: boolean;
+  skip?: boolean;
+}
 const props = withDefaults(defineProps<PageProps>(), {
   limit: 10,
-  pages: 10,
+  pages: 5,
   modelValue: 1,
-  showPage: false,
-  showSkip: false,
-  showCount: false,
-  showLimit: true,
-  showInput: false,
-  showRefresh: false,
+  total: 0,
+  simple: false,
+  disabled: false,
+  hideOnSinglePage: false,
   limits: () => [10, 20, 30, 40, 50],
+  layout: () => ["prev", "page", "next", "limits"],
 });
 
 const { t } = useI18n();
 const slots = useSlots();
-
-const maxPage = ref(0);
 const limits = ref(props.limits);
-const pages = computed(() => Math.floor(props.pages / 2));
+const groups = ref(props.pages);
+const calcLayout = ref(props.layout);
 const currentPage: Ref<number> = ref(props.modelValue);
-const currentPageShow: Ref<number> = ref(currentPage.value);
 const inlimit = ref(props.limit);
-
+const emit = defineEmits(["update:modelValue", "change", "update:limit"]);
+const iconPrevHover = ref<boolean>(true);
+const iconNextHover = ref<boolean>(true);
+let pageOpionData = ref<PageOtionInfo>({
+  resetLeft: [],
+  resetRight: [],
+});
+const jumpNumber = ref(props.modelValue);
+const simple = computed(() => props.simple);
+const disabled: Ref<boolean> = ref(props.disabled);
+const getHideOnSinglePage: ComputedRef<boolean> = computed(() => {
+  return !(getPage.value < 2 && props.hideOnSinglePage);
+});
+const getLayout: ComputedRef<IsLayoutChild> = computed(() => {
+  return calcLayout.value.reduce((init, val) => {
+    init = {
+      [val]: true,
+      ...init,
+    };
+    return init;
+  }, {});
+});
+// 分页
+const getPage = computed(() => Math.ceil(props.total / inlimit.value));
+const setPage = computed(() => {
+  let joinPage = [];
+  // 解释如下, 向上取值(当前值 + 1)/要连续出现的页数 如果等于1, 则代表从最小值为1,
+  // 这里加1进行边界处理, 当前值等于要连续出现的页数时, 页数最小值不从1开始, 这种方式代表一种约定吧。
+  // 如当前值 4, 连续出现的页数 为5时, 一定要满足从1开始取5个。
+  if (groups.value <= 0) {
+    groups.value = 1;
+  }
+  const index =
+    getPage.value > groups.value
+      ? Math.ceil((currentPage.value + 1) / groups.value)
+      : 1;
+  // 根据当前值一分为2, 算出当前值最小值, 要连续出现的页数 一定包含当前值
+  const halve = Math.floor((groups.value - 1) / 2);
+  // 当前值 - 左边值
+  let start = index > 1 ? currentPage.value - halve : 1;
+  let end =
+    index > 1
+      ? (() => {
+          // 算出右边 值
+          const max = currentPage.value + (groups.value - halve - 1);
+          return max > getPage.value ? getPage.value : max;
+        })()
+      : groups.value;
+  // 当 (最大值 减去最小值 + 1) 小于连续出现的页数 则代表 不满足连续出现的页数
+  // 故而 进行开始值 = 结束值 - 续出现的页数
+  // 例子 总页数11 当前值  10 , 连续出现的页数为4   应该为 8 9 10 11, 当前 start 为9 , end - 连续出现的页数 =  11 - 4 = 7 + 1
+  if (end > getPage.value) {
+    end = getPage.value;
+  }
+  if (getPage.value > groups.value) {
+    if (end - start < groups.value - 1) {
+      start = end - groups.value + 1;
+    }
+  }
+  if (currentPage.value > getPage.value) {
+    currentPage.value = getPage.value;
+  }
+  // 不包括 1 和 start
+  pageOpionData.value.resetLeft = Array.from({ length: start - 2 }).map(
+    (_, index) => index + 2
+  );
+  pageOpionData.value.resetRight = Array.from({
+    length: getPage.value - end - 1,
+  }).map((_, index) => end + index + 1);
+  for (let index = start; index <= end; index++) {
+    joinPage.push(index);
+  }
+  return joinPage;
+});
 watch(
   () => props.limit,
   () => {
     inlimit.value = props.limit;
   }
 );
-
-const totalPage = computed(() => {
-  maxPage.value = Math.ceil(props.total / inlimit.value);
-  let r: number[] = [];
-  let start =
-    maxPage.value <= props.pages
-      ? 1
-      : currentPage.value > pages.value
-      ? maxPage.value - currentPage.value + 1 < pages.value
-        ? currentPage.value -
-          (pages.value +
-            (pages.value - (maxPage.value - currentPage.value + 1)))
-        : currentPage.value - pages.value
-      : 1;
-
-  for (let i = start; ; i++) {
-    if (r.length >= props.pages || i > maxPage.value) {
-      break;
-    }
-    r.push(i);
+watch(
+  () => props.disabled,
+  () => {
+    disabled.value = props.disabled;
   }
-  return r;
-});
+);
 
-const emit = defineEmits(["update:modelValue", "update:limit", "change"]);
-
-const prev = () => {
-  if (currentPage.value === 1) {
-    return;
+watch(
+  () => inlimit,
+  (limit) => {
+    emit("update:limit", +limit.value);
+    emit("change", { current: +currentPage.value, limit: +inlimit.value });
+  },
+  {
+    deep: true,
   }
-  currentPage.value--;
-  nextTick(() => {
-    emit("change", { current: currentPage.value, limit: inlimit.value });
-  });
-};
+);
 
-const next = () => {
-  if (currentPage.value === maxPage.value || maxPage.value === 0) {
-    return;
+watch(
+  () => props.layout,
+  () => {
+    calcLayout.value = props.layout;
   }
-  currentPage.value++;
-  nextTick(() => {
-    emit("change", { current: currentPage.value, limit: inlimit.value });
-  });
-};
-
-const jump = (page: number) => {
-  currentPage.value = page;
-  nextTick(() => {
-    emit("change", { current: currentPage.value, limit: inlimit.value });
-  });
-};
-
-const jumpPage = () => {
-  currentPage.value = currentPageShow.value;
-  nextTick(() => {
-    emit("change", { current: currentPage.value, limit: inlimit.value });
-  });
-};
-
-const changelimit = () => {
-  const maxPage = Math.ceil(props.total / inlimit.value);
-  if (currentPage.value > maxPage) {
-    currentPage.value = maxPage;
-  }
-  nextTick(() => {
-    emit("change", { current: currentPage.value, limit: inlimit.value });
-  });
-};
-
-const refresh = () => {
-  emit("change", { current: currentPage.value, limit: inlimit.value });
-};
-
-watch(inlimit, () => {
-  emit("update:limit", inlimit.value);
-});
-
-watch(currentPage, () => {
-  const min = totalPage.value[0];
-  const max = totalPage.value[totalPage.value.length - 1];
-  if (currentPage.value > max) currentPage.value = max;
-  if (currentPage.value < min) currentPage.value = min;
-  currentPageShow.value = currentPage.value;
-  emit("update:modelValue", currentPage.value);
-});
-
+);
 watch(
   () => props.modelValue,
   () => {
     currentPage.value = props.modelValue;
-    currentPageShow.value = currentPage.value;
   }
 );
+
+watch(currentPage, (val) => {
+  jumpNumber.value = val;
+  emit("update:modelValue", +currentPage.value);
+  emit("change", { current: +currentPage.value, limit: +inlimit.value });
+});
+// 分页事件
+const handlePage = (page: number) => {
+  if (disabled.value) return;
+  if (page <= 0) {
+    page = 1;
+  }
+  if (page >= getPage.value) {
+    page = getPage.value;
+  }
+  iconNextHover.value = true;
+  iconPrevHover.value = true;
+  currentPage.value = page;
+};
+// 下一页
+const handleNext = () => {
+  if (disabled.value) return;
+  if (currentPage.value === getPage.value) {
+    return;
+  }
+  currentPage.value++;
+};
+// 上一页
+const handlePrev = () => {
+  if (disabled.value) return;
+  if (currentPage.value <= 1) {
+    return;
+  }
+  currentPage.value--;
+};
+// 国际化分页文字
+const getLabel = (page: number) => {
+  const usePage = t("page.item") + "/" + t("page.page");
+  return `${page} ${usePage}`;
+};
+
+const handleBlur = () => {
+  if (simple.value) {
+    if (currentPage.value >= getPage.value) {
+      currentPage.value = getPage.value;
+    }
+    if (currentPage.value <= 1) {
+      currentPage.value = 1;
+    }
+  } else {
+    if (+jumpNumber.value >= getPage.value) {
+      jumpNumber.value = getPage.value;
+    }
+    if (+jumpNumber.value < 1) {
+      jumpNumber.value = 1;
+    }
+  }
+};
+const refresh = () => {
+  emit("change", { current: currentPage.value, limit: inlimit.value });
+};
+const handleJumpPage = () => {
+  handlePage(+jumpNumber.value);
+};
 </script>
 
 <template>
-  <div class="layui-laypage layui-laypage-default">
-    <!-- 辅助标签，不能删 -->
-    <div style="display: none">{{ totalPage }}</div>
-    <span v-if="showCount" class="layui-laypage-count"
-      >{{ t("page.total") }} {{ total }} {{ t("page.item") }}</span
-    >
-    <a
-      href="javascript:;"
-      class="layui-laypage-prev"
-      :class="[
-        currentPage === 1 ? 'layui-disabled' : '',
-        theme && currentPage !== 1 ? 'layui-laypage-a-' + theme : '',
-      ]"
-      @click="prev()"
-    >
-      <slot name="prev">{{ t("page.previous") }}</slot>
-    </a>
-    <!-- 页码列表 -->
-    <template v-if="showPage">
-      <!-- 首页 -->
-      <template v-if="totalPage[0] != 1">
-        <a href="javascript:;" class="layui-laypage-first" @click="jump(1)">
-          1
-        </a>
-        <a class="layui-laypage-spr">...</a>
-      </template>
-      <template v-for="index of totalPage" :key="index">
-        <!-- 选中项 -->
-        <span v-if="index === currentPage" class="layui-laypage-curr">
-          <em
-            class="layui-laypage-em"
-            :class="[theme ? 'layui-bg-' + theme : '']"
-          ></em>
-          <em>{{ index }}</em>
-        </span>
-        <!-- 普通项 -->
-        <a
-          v-else
-          href="javascript:;"
-          @click="jump(index)"
-          :class="[theme ? 'layui-laypage-a-' + theme : '']"
-          >{{ index }}</a
-        >
-      </template>
-      <!-- 尾页 -->
-      <template v-if="totalPage[totalPage.length - 1] != maxPage">
-        <a class="layui-laypage-spr">...</a>
-        <a
-          href="javascript:;"
-          class="layui-laypage-last"
-          @click="jump(maxPage)"
-        >
-          {{ maxPage }}
-        </a>
-      </template>
-    </template>
-    <a
-      href="javascript:;"
-      class="layui-laypage-next"
-      :class="[
-        currentPage === maxPage || maxPage === 0 ? 'layui-disabled' : '',
-        theme && currentPage !== maxPage && maxPage !== 0
-          ? 'layui-laypage-a-' + theme
-          : '',
-      ]"
-      @click="next()"
-    >
-      <slot name="next">{{ t("page.next") }}</slot>
-    </a>
-    <span v-if="showLimit" class="layui-laypage-limits">
-      <select v-model="inlimit" @change="changelimit">
-        <option v-for="val of limits" :key="val" :value="val">
-          {{ val }} {{ t("page.item") }}/{{ t("page.page") }}
-        </option>
-      </select>
-    </span>
-    <a
-      v-if="showRefresh"
-      href="javascript:;"
-      @click="refresh"
-      class="layui-laypage-refresh"
-    >
-      <i class="layui-icon layui-icon-refresh"></i>
-    </a>
-    <span v-if="props.showSkip" class="layui-laypage-skip">
-      {{ t("page.goTo") }}
-      <input
-        v-model="currentPageShow"
-        @keypress.enter="jumpPage()"
-        type="number"
-        class="layui-input layui-input-number"
-      />{{ t("page.page") }}
-      <button
-        type="button"
-        class="layui-laypage-btn"
-        @click="jumpPage()"
-        :disabled="currentPageShow > maxPage || currentPageShow == currentPage"
+  <div
+    v-if="getHideOnSinglePage"
+    :class="['layui-page', disabled ? 'is-disabled' : '']"
+  >
+    <!-- simple -->
+    <template v-if="!simple">
+      <span class="layui-page-total-text" v-if="getLayout.count">
+        {{ t("page.total") }} {{ getPage }} {{ t("page.item") }}
+      </span>
+      <div
+        v-if="getLayout.prev"
+        class="layui-page-prev"
+        @click="handlePrev"
+        :class="[
+          {
+            'is-disabled': currentPage <= 1,
+          },
+        ]"
       >
-        {{ t("page.confirm") }}
-      </button>
-    </span>
+        <slot name="prev">{{ t("page.previous") }}</slot>
+      </div>
+      <ul class="layui-pager" v-if="getLayout.page">
+        <li
+          v-if="setPage[0] !== 1"
+          @click="handlePage(1)"
+          :data-page="currentPage"
+          :class="[
+            'layui-page-number',
+            {
+              [theme ? 'layui-bg-' + theme : '']: 1 === currentPage,
+              'is-active': 1 === currentPage,
+            },
+          ]"
+        >
+          1
+        </li>
+        <template v-if="setPage[0] > 2">
+          <lay-dropdown ref="manualRef" trigger="hover" placement="bottom">
+            <li
+              class="layui-page-number layui-page-left-number"
+              @mouseleave="iconPrevHover = true"
+              @mouseenter="iconPrevHover = false"
+              @click="handlePage(currentPage - 3)"
+            >
+              <lay-icon
+                :type="iconPrevHover ? 'layui-icon-more' : 'layui-icon-left'"
+                size="12px"
+              ></lay-icon>
+            </li>
+            <template #content>
+              <lay-dropdown-menu style="max-height: 140px; overflow-y: auto">
+                <lay-dropdown-menu-item
+                  v-for="page of pageOpionData.resetLeft"
+                  :key="page"
+                  @click="handlePage(page)"
+                  >{{ page }}</lay-dropdown-menu-item
+                >
+              </lay-dropdown-menu>
+            </template>
+          </lay-dropdown>
+        </template>
+
+        <li
+          v-for="page of setPage"
+          :key="page"
+          @click="handlePage(page)"
+          :data-page="page"
+          :class="[
+            'layui-page-number',
+            {
+              [theme ? 'layui-bg-' + theme : '']: page === currentPage,
+              'is-active': page === currentPage,
+            },
+          ]"
+        >
+          {{ page }}
+        </li>
+
+        <template v-if="setPage[setPage.length - 1] < getPage - 1">
+          <lay-dropdown trigger="hover" placement="bottom">
+            <li
+              class="layui-page-number layui-page-right-number"
+              @mouseleave="iconNextHover = true"
+              @mouseenter="iconNextHover = false"
+              @click="handlePage(currentPage + 3)"
+            >
+              <lay-icon
+                :type="iconNextHover ? 'layui-icon-more' : 'layui-icon-right'"
+                size="12px"
+              ></lay-icon>
+            </li>
+            <template #content>
+              <lay-dropdown-menu style="max-height: 140px; overflow-y: auto">
+                <lay-dropdown-menu-item
+                  v-for="page of pageOpionData.resetRight"
+                  :key="page"
+                  @click="handlePage(page)"
+                  >{{ page }}</lay-dropdown-menu-item
+                >
+              </lay-dropdown-menu>
+            </template>
+          </lay-dropdown>
+        </template>
+        <li
+          v-if="setPage[setPage.length - 1] !== getPage"
+          :data-page="getPage"
+          :class="[
+            'layui-page-number',
+            {
+              [theme ? 'layui-bg-' + theme : '']: getPage === currentPage,
+              'is-active': getPage === currentPage,
+            },
+          ]"
+          @click="handlePage(getPage)"
+        >
+          {{ getPage }}
+        </li>
+      </ul>
+      <div
+        v-if="getLayout.next"
+        class="layui-page-next"
+        :class="[
+          {
+            'is-disabled': getPage <= currentPage,
+          },
+        ]"
+        @click="handleNext"
+      >
+        <slot name="next">{{ t("page.next") }}</slot>
+      </div>
+      <div class="layui-page-options">
+        <div class="layui-page-options-number" v-if="getLayout.limits">
+          <lay-select
+            v-model="inlimit"
+            placeholder="请选择"
+            :disabled="disabled"
+          >
+            <lay-select-option
+              :value="option"
+              :label="getLabel(option)"
+              v-for="option of limits"
+              :key="option"
+            ></lay-select-option>
+          </lay-select>
+        </div>
+        <div
+          @click="refresh"
+          class="layui-page-refresh"
+          v-if="getLayout.refresh"
+        >
+          <lay-icon type="layui-icon-refresh"></lay-icon>
+        </div>
+        <div class="layui-page-jumper" v-if="getLayout.skip">
+          {{ t("page.goTo") }}
+          <lay-input
+            :disabled="disabled"
+            @blur="handleBlur"
+            type="number"
+            v-model="jumpNumber"
+          ></lay-input>
+          {{ t("page.page") }}
+          <lay-button :disabled="disabled" @click="handleJumpPage" size="xs"
+            >确定</lay-button
+          >
+        </div>
+      </div>
+    </template>
+    <template v-else>
+      <div class="layui-page-prev" @click="handlePrev">
+        <lay-icon type="layui-icon-left" size="16px"></lay-icon>
+      </div>
+      <div class="layui-pager-jump">
+        <lay-input
+          :disabled="disabled"
+          @blur="handleBlur"
+          type="number"
+          v-model="currentPage"
+          style="height: 30px"
+        ></lay-input>
+        <span class="layui-simple-page-slash">／</span>
+        <span>{{ getPage }}</span>
+      </div>
+      <div class="layui-page-next" @click="handleNext">
+        <lay-icon type="layui-icon-right" size="16px"></lay-icon>
+      </div>
+    </template>
   </div>
 </template>

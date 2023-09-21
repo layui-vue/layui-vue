@@ -398,6 +398,10 @@
   -webkit-box-pack: center;
 }
 
+.layui-table-cell-content {
+  display: flex; word-break: break-word; align-items: center;
+}
+
 .layui-table-cell-expand-icon {
   font-size: 12px;
   border-radius: var(--global-border-radius);
@@ -406,6 +410,8 @@
   background-color: #fafafa;
   width: 22px;
   margin-right: 8px;
+  height: 22px;
+  flex-shrink: 0;
 }
 
 .layui-table-cell-expand-icon-spaced {
@@ -540,61 +546,51 @@
   white-space: nowrap;
 }
 
-.layui-table-page .layui-laypage select{
-  margin-top: 0px;
+.layui-table-page .layui-page .layui-pager .layui-page-number,
+.layui-table-page  .layui-page  .layui-page-prev,
+.layui-table-page  .layui-page  .layui-page-next
+{
+  padding: 0 12px;
   height: 26px;
-}
-
-.layui-table-page > div {
-  height: 26px;
-}
-
-.layui-table-page .layui-laypage {
-  margin: 0;
-}
-
-.layui-table-page .layui-laypage a,
-.layui-table-page .layui-laypage span {
-  height: 26px;
-  line-height: 26px;
-  margin-bottom: 10px;
+  // line-height: 26px;
+  // margin-bottom: 10px;
   border: none;
-  background: 0 0;
+  // background: 0 0;
 }
 
-.layui-table-page .layui-laypage a,
-.layui-table-page .layui-laypage span.layui-laypage-curr {
+.layui-table-page  .layui-page  .layui-page-prev,
+.layui-table-page  .layui-page  .layui-page-next{
   padding: 0 12px;
 }
 
-.layui-table-page .layui-laypage span {
-  margin-left: 0;
-  padding: 0;
-}
+// .layui-table-page .layui-laypage span {
+//   margin-left: 0;
+//   padding: 0;
+// }
 
-.layui-table-page .layui-laypage .layui-laypage-prev {
-  margin-left: -7px !important;
-}
+// .layui-table-page .layui-laypage .layui-laypage-prev {
+//   margin-left: -7px !important;
+// }
 
-.layui-table-page .layui-laypage .layui-laypage-curr .layui-laypage-em {
-  left: 0;
-  top: 0;
-  padding: 0;
-}
+// .layui-table-page .layui-laypage .layui-laypage-curr .layui-laypage-em {
+//   left: 0;
+//   top: 0;
+//   padding: 0;
+// }
 
-.layui-table-page .layui-laypage button,
-.layui-table-page .layui-laypage input {
+.layui-table-page .layui-page  .layui-page-options .layui-input,
+.layui-table-page .layui-page .layui-page-jumper .layui-input {
   height: 26px;
   line-height: 26px;
 }
 
-.layui-table-page .layui-laypage input {
-  width: 40px;
-}
+// .layui-table-page .layui-laypage input {
+//   width: 40px;
+// }
 
-.layui-table-page .layui-laypage button {
-  padding: 0 10px;
-}
+// .layui-table-page .layui-laypage button {
+//   padding: 0 10px;
+// }
 
 .layui-table-pagebar {
   float: right;

@@ -20,6 +20,7 @@
             'layui-this': MONTH_NAME.indexOf(item) === Month,
             'layui-laydate-current':
               Month === '' && parseInt(item) - 1 === dayjs().month(),
+            'layui-disabled': cellDisabled(item),
           }"
           @click="handleMonthClick(item)"
         >
@@ -76,8 +77,25 @@ const MONTH_NAME = computed(() => [
   t("datePicker.december"),
 ]);
 
+// 判断单元格是否可以点击(禁用)
+const cellDisabled = computed(() => {
+  return (item: string) => {
+    const month = parseInt(item);
+    if (datePicker.min && month < dayjs(datePicker.min).month() + 1) {
+      return true;
+    }
+    if (datePicker.max && month > dayjs(datePicker.max).month() + 1) {
+      return true;
+    }
+    return false;
+  };
+});
+
 // 点击月份
-const handleMonthClick = (item: any) => {
+const handleMonthClick = (item: string) => {
+  if (cellDisabled.value(item)) {
+    return;
+  }
   Month.value = MONTH_NAME.value.indexOf(item);
   if (!datePicker.range) {
     if (datePicker.type === "yearmonth") {
@@ -123,6 +141,13 @@ const footOnOk = () => {
 
 //现在回调
 const footOnNow = () => {
+  const month = dayjs().month() + 1;
+  if (datePicker.min && month < dayjs(datePicker.min).month() + 1) {
+    return;
+  }
+  if (datePicker.max && month > dayjs(datePicker.max).month() + 1) {
+    return;
+  }
   Month.value = dayjs().month();
 };
 

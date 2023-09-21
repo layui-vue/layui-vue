@@ -1,185 +1,199 @@
-.layui-laypage {
-  display: inline-block;
-  vertical-align: middle;
-  margin: 10px 0;
-  font-size: 0;
-}
+@import "../dropdown/index.less";
+@import "../select/index.less";
+@import "../button/index.less";
+@import "../input/index.less";
 
-.layui-laypage > a:first-child,
-.layui-laypage > a:first-child em {
-  border-radius: 2px 0 0 2px;
-}
-
-.layui-laypage > a:last-child,
-.layui-laypage > a:last-child em {
-  border-radius: 0 2px 2px 0;
-}
-
-.layui-laypage > :first-child {
-  margin-left: 0 !important;
-}
-
-.layui-laypage > :last-child {
-  margin-right: 0 !important;
-}
-
-.layui-laypage a,
-.layui-laypage button,
-.layui-laypage input,
-.layui-laypage select,
-.layui-laypage span {
-  border: 1px solid var(--global-neutral-color-3);
-}
-
-.layui-laypage a,
-.layui-laypage span {
-  display: inline-block;
-  vertical-align: middle;
-  padding: 0 15px;
-  height: 28px;
-  line-height: 28px;
-  margin: 0 -1px 5px 0;
+.disabled() {
+  cursor: not-allowed;
+  color: @dis-color;
   background-color: #fff;
-  color: #333;
+}
+@border-color: var(--global-neutral-color-3);
+@active-color: var(--global-primary-color);
+@dis-color: rgba(0, 0, 0, 0.25);
+@height: 30px;
+
+.layui-page {
+  display: flex;
+  align-items: center;
   font-size: 12px;
-}
+  flex-direction: row;
+  white-space: nowrap;
+  // flex-wrap: wrap;
+  .layui-page-prev {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: @height;
+    box-sizing: border-box;
+    padding: 0px 10px;
+    border: 1px solid @border-color;
+    border-radius: 2px 0px 0 2px;
+    cursor: pointer;
+    transition: all 0.2s;
+    &:hover {
+      color: @active-color;
+    }
+    &.is-disabled {
+      .disabled();
+    }
+  }
 
-.layui-laypage a:hover {
-  color: var(--global-primary-color);
+  .layui-pager {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .layui-page-number {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 16px;
+      border: 1px solid @border-color;
+      border-left: none;
+      cursor: pointer;
+      height: @height;
+      box-sizing: border-box;
+      &:hover {
+        color: @active-color;
+      }
+      &:last-child {
+        border-right: none;
+      }
+      // &:first-child {
+      //   // border-left: none;
+      // }
+      &.is-active {
+        background-color: @active-color;
+        // border: none;
+        color: #fff;
+        border-radius: 2px;
+        // padding: 7px 15px;
+      }
+    }
+  }
+  .layui-page-next {
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: @height;
+    border: 1px solid @border-color;
+    box-sizing: border-box;
+    border-radius: 0px 2px 2px 0px;
+    cursor: pointer;
+    transition: all 0.2s;
+    // border-left: none;
+    &:hover {
+      color: @active-color;
+    }
+    &.is-disabled {
+      .disabled();
+    }
+  }
+  .layui-pager-jump {
+    margin-left: 10px;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 14px;
+    .layui-input {
+      width: 60px;
+      padding: 0 4px;
+      input {
+        padding: 0;
+        text-align: center;
+      }
+    }
+  }
+  .layui-page-total-text {
+    padding: 0 10px;
+  }
 }
-.layui-laypage-a-red:hover{
-  color: #ff5722 !important;
-}
-
-.layui-laypage-a-orange:hover{
-  color: #ffb800 !important;
-}
-
-.layui-laypage-a-green:hover{
-  color: #009688 !important;
-}
-
-.layui-laypage-a-cyan:hover{
-  color: #2f4056 !important;
-}
-
-.layui-laypage-a-blue:hover{
-  color: #01aaed !important;
-}
-
-.layui-laypage-a-black:hover{
-  color: #000 !important;
-}
-
-.layui-laypage-a-gray:hover{
-  color: #c2c2c2 !important;
-}
-
-.layui-laypage em {
-  font-style: normal;
-}
-
-.layui-laypage .layui-laypage-spr {
-  color: #999;
-  font-weight: 700;
-}
-
-.layui-laypage a {
-  text-decoration: none;
-}
-
-.layui-laypage .layui-laypage-curr {
-  position: relative;
-}
-
-.layui-laypage .layui-laypage-curr em {
-  position: relative;
-  color: #fff;
-}
-
-.layui-laypage .layui-laypage-curr .layui-laypage-em {
-  position: absolute;
-  left: -1px;
-  top: -1px;
-  padding: 1px;
-  width: 100%;
-  height: 100%;
-  background-color: var(--global-primary-color);
-}
-
-.layui-laypage-em {
-  border-radius: 2px;
-}
-
-.layui-laypage-next em,
-.layui-laypage-prev em {
-  font-family: Sim sun;
-  font-size: 16px;
-}
-
-.layui-laypage .layui-laypage-count,
-.layui-laypage .layui-laypage-limits,
-.layui-laypage .layui-laypage-refresh,
-.layui-laypage .layui-laypage-skip {
+.layui-page-options {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
   margin-left: 10px;
-  margin-right: 10px;
-  padding: 0;
-  border: none;
-}
-
-.layui-laypage .layui-laypage-limits,
-.layui-laypage .layui-laypage-refresh {
-  vertical-align: top;
-}
-
-.layui-laypage .layui-laypage-refresh i {
-  font-size: 18px;
-  cursor: pointer;
-}
-
-.layui-laypage select {
-  height: 30px;
-  padding: 3px;
-  margin-top: 0px;
-  border-radius: 2px;
-  cursor: pointer;
-}
-
-.layui-laypage .layui-laypage-skip {
-  height: 30px;
-  line-height: 30px;
-  color: #999;
-}
-
-.layui-laypage button,
-.layui-laypage input {
-  height: 30px;
-  line-height: 30px;
-  border-radius: 2px;
-  vertical-align: top;
-  background-color: #fff;
-  box-sizing: border-box;
-}
-
-.layui-laypage input {
-  display: inline-block;
-  width: 40px;
-  margin: 0 10px;
-  padding: 0 3px;
-  text-align: center;
-  &::-webkit-outer-spin-button,
-  &::-webkit-inner-spin-button {
-    -webkit-appearance: none;
+  .layui-page-options-number {
+    width: 80px;
+    // margin: 0 10px;
+    .layui-select {
+      width: 100%;
+      .layui-input {
+        padding: 0 6px;
+        height: @height;
+        input {
+          padding: 0;
+          text-align: center;
+        }
+        .layui-input-suffix {
+          padding: 0;
+          // padding-right: 4px;
+        }
+        &:hover {
+          border-color: @active-color;
+        }
+      }
+    }
+  }
+  .layui-page-refresh {
+    &:hover {
+      cursor: pointer;
+      color: @active-color;
+    }
+  }
+  .layui-page-jumper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #999;
+    .layui-input {
+      width: 40px;
+      height: @height;
+      input {
+        padding: 0 4px;
+        text-align: center;
+      }
+      &:hover {
+        border-color: @active-color;
+      }
+    }
+    .layui-btn {
+      color: #000;
+      &:hover {
+        border-color: @active-color;
+        color: @active-color;
+      }
+    }
   }
 }
 
-.layui-laypage input:focus,
-.layui-laypage select:focus {
-  border-color: var(--global-primary-color) !important;
-}
-
-.layui-laypage button {
-  margin-left: 10px;
-  padding: 0 10px;
-  cursor: pointer;
+:where(.layui-page).is-disabled {
+  cursor: not-allowed;
+  & > .layui-page-total-text {
+    color: @dis-color;
+  }
+  & > .layui-pager .layui-page-number {
+    .disabled();
+    &:hover {
+      color: @dis-color;
+    }
+  }
+  & > .layui-pager .layui-page-number.is-active {
+    background-color: rgb(250, 250, 252);
+    color: rgba(194, 194, 194, 1);
+  }
+  & .layui-page-prev,
+  & .layui-page-next {
+    .disabled();
+    &:hover {
+      color: @dis-color;
+    }
+  }
+  & .layui-pager-jump {
+    color: @dis-color;
+  }
 }
