@@ -50,7 +50,7 @@ const matchModule: string[] = [
   "tree",
   "utils",
   "selectOptionGroup",
-  "select"
+  "select",
 ];
 
 export default (): UserConfigExport => {
