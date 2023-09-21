@@ -13,7 +13,7 @@
 ::: demo 使用 `lay-page` 标签, 创建分页
 
 <template>
-  <lay-page v-model="currentPage" :limit="limit" :total="total"></lay-page>
+  <lay-page  v-model="currentPage" :limit="limit" :total="total"></lay-page>
 </template>
 
 <script>
@@ -22,9 +22,9 @@ import { ref } from 'vue'
 export default {
   setup() {
 
-    const limit = ref(20)
-    const total = ref(100)
-    const currentPage = ref(2);
+    const limit = ref(10)
+    const total = ref(10)
+    const currentPage = ref(4);
 
     return {
       limit,
@@ -35,7 +35,80 @@ export default {
 }
 </script>
 
+
 :::
+
+
+::: title 禁用
+:::
+
+::: demo 使用 `disabled` 属性 , 开启禁用
+
+<template>
+  <lay-page v-model="currentPage" :layout="layout" disabled :limit="limit" :total="total"></lay-page>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const limit = ref(10)
+    const total = ref(100)
+    const currentPage = ref(1);
+    const layout = ref(['count', 'prev', 'page', 'next', 'limits',  'refrsh', 'skip'])
+
+    return {
+      limit,
+      total,
+      layout,
+      currentPage
+    }
+  }
+}
+</script>
+
+
+:::
+
+
+::: title 只有一页时隐藏
+:::
+
+::: demo 使用 `hide-on-single-page` 属性 , 开启只有一页时隐藏
+
+<template>
+  <lay-space direction="vertical" fill wrap size="lg">
+    <lay-switch v-model="active1"></lay-switch>
+    <lay-page :hide-on-single-page="active1" v-model="currentPage"  :limit="limit" :total="total"></lay-page>
+  </lay-space>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const limit = ref(10)
+    const total = ref(10)
+    const currentPage = ref(1);
+    const  active1 = ref(false)
+    return {
+      limit,
+      total,
+      layout,
+      currentPage,
+      active1
+    }
+  }
+}
+</script>
+
+
+:::
+
 
 ::: title 简洁模式
 :::
@@ -43,7 +116,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-page simple  v-model="current1" :total="total1"></lay-page>
+  <lay-page simple   v-model="current1" :total="total1"></lay-page>
 </template>
 
 <script>
@@ -82,7 +155,7 @@ import { ref } from 'vue'
 export default {
   setup() {
 
-    const limit2 = ref(20)
+    const limit2 = ref(10)
     const total2 = ref(100)
 
     return {
@@ -170,7 +243,7 @@ export default {
     <lay-button type="primary" size="sm" @click="changeLimit5">update limit {{ limit5 }}</lay-button>
   </lay-button-container>
   <br/>
-  <lay-page v-model="current5" v-model:limit="limit5" :pages="pages5" :total="total5"  @change="change5"></lay-page>
+  <lay-page v-model="current5"  :layout="layout" v-model:limit="limit5" :pages="pages5" :total="total5"  @change="change5"></lay-page>
 </template>
 
 <script>
@@ -183,6 +256,7 @@ export default {
     const total5 = ref(99)
     const pages5 = ref(7);
     const current5 = ref(1);
+    const layout = ref(['count', 'prev', 'page', 'next', 'limits',  'refrsh', 'skip'])
     const changeCurrent5 = () => {
       current5.value = 2;
     }
@@ -197,6 +271,7 @@ export default {
       total5,
       pages5,
       current5,
+      layout,
       changeCurrent5,
       changeLimit5,
       change5

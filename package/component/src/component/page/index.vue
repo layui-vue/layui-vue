@@ -1,7 +1,7 @@
 <!--
  * @Author: baobaobao
  * @Date: 2023-07-07 15:34:38
- * @LastEditTime: 2023-09-21 13:04:17
+ * @LastEditTime: 2023-09-21 21:07:12
  * @LastEditors: baobaobao
 -->
 <script lang="ts">
@@ -27,7 +27,9 @@ export interface PageProps {
   limits?: number[];
   simple?: boolean;
   modelValue?: number;
+  hideOnSinglePage?: boolean;
   // mode?: MODE;
+  disabled?: boolean;
   layout?: string[];
 }
 export interface IsLayoutChild {
@@ -45,6 +47,8 @@ const props = withDefaults(defineProps<PageProps>(), {
   modelValue: 1,
   total: 0,
   simple: false,
+  disabled: false,
+  hideOnSinglePage: false,
   limits: () => [10, 20, 30, 40, 50],
   layout: () => ["prev", "page", "next", "limits"],
 });
@@ -65,6 +69,10 @@ let pageOpionData = ref<PageOtionInfo>({
 });
 const jumpNumber = ref(props.modelValue);
 const simple = computed(() => props.simple);
+const disabled: Ref<boolean> = ref(props.disabled);
+const getHideOnSinglePage: ComputedRef<boolean> = computed(()  => {
+  return !(getPage.value < 2 && props.hideOnSinglePage)
+})
 const getLayout: ComputedRef<IsLayoutChild> = computed(() => {
   return calcLayout.value.reduce((init, val) => {
     init = {
@@ -132,17 +140,28 @@ watch(
     inlimit.value = props.limit;
   }
 );
-watch(() => inlimit, (limit) => {
-  emit("update:limit", +limit.value);
-  emit("change", { current: +currentPage.value, limit: +inlimit.value });
-}, {
-  deep: true
-})
+watch(
+  () => props.disabled,
+  () => {
+    disabled.value = props.disabled;
+  }
+);
+
+watch(
+  () => inlimit,
+  (limit) => {
+    emit("update:limit", +limit.value);
+    emit("change", { current: +currentPage.value, limit: +inlimit.value });
+  },
+  {
+    deep: true,
+  }
+);
 
 watch(
   () => props.layout,
   () => {
-   calcLayout.value = props.layout;
+    calcLayout.value = props.layout;
   }
 );
 watch(
@@ -159,18 +178,20 @@ watch(currentPage, (val) => {
 });
 // 分页事件
 const handlePage = (page: number) => {
+  if (disabled.value) return;
   if (page <= 0) {
-    page = 1  
+    page = 1;
   }
   if (page >= getPage.value) {
-    page = getPage.value
+    page = getPage.value;
   }
-  iconNextHover.value = true
-  iconPrevHover.value = true
+  iconNextHover.value = true;
+  iconPrevHover.value = true;
   currentPage.value = page;
 };
 // 下一页
 const handleNext = () => {
+  if (disabled.value) return;
   if (currentPage.value === getPage.value) {
     return;
   }
@@ -178,6 +199,7 @@ const handleNext = () => {
 };
 // 上一页
 const handlePrev = () => {
+  if (disabled.value) return;
   if (currentPage.value <= 1) {
     return;
   }
@@ -215,7 +237,7 @@ const handleJumpPage = () => {
 </script>
 
 <template>
-  <div class="layui-page">
+  <div v-if="getHideOnSinglePage" :class="['layui-page', disabled ? 'is-disabled' : '']">
     <!-- simple -->
     <template v-if="!simple">
       <span class="layui-page-total-text" v-if="getLayout.count">
@@ -242,7 +264,7 @@ const handleJumpPage = () => {
             'layui-page-number',
             {
               [theme ? 'layui-bg-' + theme : '']: 1 === currentPage,
-              'is-active': 1 === currentPage
+              'is-active': 1 === currentPage,
             },
           ]"
         >
@@ -283,7 +305,7 @@ const handleJumpPage = () => {
             'layui-page-number',
             {
               [theme ? 'layui-bg-' + theme : '']: page === currentPage,
-              'is-active': page === currentPage
+              'is-active': page === currentPage,
             },
           ]"
         >
@@ -322,7 +344,7 @@ const handleJumpPage = () => {
             'layui-page-number',
             {
               [theme ? 'layui-bg-' + theme : '']: getPage === currentPage,
-              'is-active': getPage === currentPage
+              'is-active': getPage === currentPage,
             },
           ]"
           @click="handlePage(getPage)"
@@ -344,7 +366,11 @@ const handleJumpPage = () => {
       </div>
       <div class="layui-page-options">
         <div class="layui-page-options-number" v-if="getLayout.limits">
-          <lay-select v-model="inlimit" placeholder="请选择">
+          <lay-select
+            v-model="inlimit"
+            placeholder="请选择"
+            :disabled="disabled"
+          >
             <lay-select-option
               :value="option"
               :label="getLabel(option)"
@@ -363,12 +389,15 @@ const handleJumpPage = () => {
         <div class="layui-page-jumper" v-if="getLayout.skip">
           {{ t("page.goTo") }}
           <lay-input
+            :disabled="disabled"
             @blur="handleBlur"
             type="number"
             v-model="jumpNumber"
           ></lay-input>
           {{ t("page.page") }}
-          <lay-button @click="handleJumpPage" size="xs">确定</lay-button>
+          <lay-button :disabled="disabled" @click="handleJumpPage" size="xs"
+            >确定</lay-button
+          >
         </div>
       </div>
     </template>
@@ -378,6 +407,7 @@ const handleJumpPage = () => {
       </div>
       <div class="layui-pager-jump">
         <lay-input
+        :disabled="disabled"
           @blur="handleBlur"
           type="number"
           v-model="currentPage"
