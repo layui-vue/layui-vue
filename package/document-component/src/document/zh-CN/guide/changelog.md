@@ -17,17 +17,11 @@
       <ul>
         <a name="2-6-0"></a>
         <li>
-          <h3>2.6.1 <span class="layui-badge-rim">2023-09-21</span></h3>
-          <ul>
-            <li>[新增] datePicker 组件 max,min 属性，用于控制组件内的可选择的最大值与最小值。</li>
-          </ul>
-        </li>
-      </ul>
-      <ul>
-        <a name="2-6-0"></a>
-        <li>
           <h3>2.6.0 <span class="layui-badge-rim">2023-09-21</span></h3>
           <ul>
+            <li>[新增] datePicker 组件 max,min 属性，用于控制组件内的可选择的最大值与最小值。</li>
+            <li>[新增] page 组件 disabled 属性，默认值为 false, 用于分页组件禁用。</li>
+            <li>[新增] page 组件 hide-on-single-page 属性，total 值超出 pages 后使用下拉展示。</li>
             <li>[新增] page 组件 layout 属性，字符数组, count, limits, next, page, prev, refresh, skip 为可选值。</li>
             <li>[优化] page 组件 limit 属性，可选属性, 默认值为 10。</li>
             <li>[优化] page 组件 pages 属性，调整 5 为默认值。</li>
