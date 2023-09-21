@@ -295,6 +295,8 @@ export default {
 | layout      | 不同部分的展示 | `["prev", "page", "next", "limits"]` |
 | pages       | 显示切页按钮数量     | `5` |
 | limits       | 切换每页数量的选择项     | `[10,20,30,40,50]` |
+| hide-on-single-page   | 只有一页时隐藏     | `false` |
+| disabled   | 分页禁用      | `false` |
 | theme       | 主题色        |`green`|
 
 :::
