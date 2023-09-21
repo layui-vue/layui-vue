@@ -70,9 +70,9 @@ let pageOpionData = ref<PageOtionInfo>({
 const jumpNumber = ref(props.modelValue);
 const simple = computed(() => props.simple);
 const disabled: Ref<boolean> = ref(props.disabled);
-const getHideOnSinglePage: ComputedRef<boolean> = computed(()  => {
-  return !(getPage.value < 2 && props.hideOnSinglePage)
-})
+const getHideOnSinglePage: ComputedRef<boolean> = computed(() => {
+  return !(getPage.value < 2 && props.hideOnSinglePage);
+});
 const getLayout: ComputedRef<IsLayoutChild> = computed(() => {
   return calcLayout.value.reduce((init, val) => {
     init = {
@@ -237,7 +237,10 @@ const handleJumpPage = () => {
 </script>
 
 <template>
-  <div v-if="getHideOnSinglePage" :class="['layui-page', disabled ? 'is-disabled' : '']">
+  <div
+    v-if="getHideOnSinglePage"
+    :class="['layui-page', disabled ? 'is-disabled' : '']"
+  >
     <!-- simple -->
     <template v-if="!simple">
       <span class="layui-page-total-text" v-if="getLayout.count">
@@ -407,7 +410,7 @@ const handleJumpPage = () => {
       </div>
       <div class="layui-pager-jump">
         <lay-input
-        :disabled="disabled"
+          :disabled="disabled"
           @blur="handleBlur"
           type="number"
           v-model="currentPage"
