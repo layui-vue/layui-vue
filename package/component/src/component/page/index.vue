@@ -1,7 +1,7 @@
 <!--
  * @Author: baobaobao
  * @Date: 2023-07-07 15:34:38
- * @LastEditTime: 2023-09-20 23:54:44
+ * @LastEditTime: 2023-09-21 13:04:17
  * @LastEditors: baobaobao
 -->
 <script lang="ts">
@@ -56,7 +56,7 @@ const groups = ref(props.pages);
 const calcLayout = ref(props.layout);
 const currentPage: Ref<number> = ref(props.modelValue);
 const inlimit = ref(props.limit);
-const emit = defineEmits(["update:modelValue", "change"]);
+const emit = defineEmits(["update:modelValue", "change", "update:limit"]);
 const iconPrevHover = ref<boolean>(true);
 const iconNextHover = ref<boolean>(true);
 let pageOpionData = ref<PageOtionInfo>({
@@ -132,6 +132,12 @@ watch(
     inlimit.value = props.limit;
   }
 );
+watch(() => inlimit, (limit) => {
+  emit("update:limit", +limit.value);
+  emit("change", { current: +currentPage.value, limit: +inlimit.value });
+}, {
+  deep: true
+})
 
 watch(
   () => props.layout,
@@ -159,6 +165,8 @@ const handlePage = (page: number) => {
   if (page >= getPage.value) {
     page = getPage.value
   }
+  iconNextHover.value = true
+  iconPrevHover.value = true
   currentPage.value = page;
 };
 // 下一页
