@@ -23,7 +23,11 @@
                 :data-value="index.toString().padStart(2, '0')"
                 :data-type="item.type"
                 :key="it"
-                :class="['num', index == hms[item.type] ? 'layui-this' : '']"
+                :class="{
+                  num: true,
+                  'layui-this': index == hms[item.type],
+                  'layui-disabled': cellDisabled(item.type, index),
+                }"
               >
                 {{ index.toString().padStart(2, "0") }}
               </li>
@@ -55,7 +59,7 @@ export default {
 <script lang="ts" setup>
 import dayjs from "dayjs";
 import { useI18n } from "../../../language";
-import { inject, onMounted, ref, nextTick, watch } from "vue";
+import { inject, onMounted, ref, nextTick, watch, computed } from "vue";
 import { provideType } from "../interface";
 import PanelFoot from "./PanelFoot.vue";
 export interface hmsType {
@@ -84,10 +88,44 @@ const hms = ref<hmsType>({
   ss: props.modelValue.ss,
 });
 
+const cellDisabled = computed(() => {
+  return (type?: string, value?: number) => {
+    const haveValue = typeof value !== "undefined";
+    const toDay = dayjs().format("YYY-MM-DD");
+    const _hms: Record<string, number> = {
+      hh: haveValue ? hms.value.hh : dayjs().hour(),
+      mm: haveValue ? hms.value.mm : dayjs().minute(),
+      ss: haveValue ? hms.value.ss : dayjs().second(),
+    };
+    haveValue && (_hms[type!] = value);
+    const time = `${_hms.hh}:${_hms.mm}:${_hms.ss}`;
+    if (
+      datePicker.min &&
+      dayjs(`${toDay} ${time}`).isBefore(dayjs(`${toDay} ${datePicker.min}`))
+    ) {
+      return true;
+    }
+
+    if (
+      datePicker.max &&
+      dayjs(`${toDay} ${time}`).isAfter(dayjs(`${toDay} ${datePicker.max}`))
+    ) {
+      return true;
+    }
+
+    return false;
+  };
+});
+
 // 点击时间 - hms
 const chooseTime = (e: any) => {
   if (e.target.nodeName == "LI") {
     let { value, type } = e.target.dataset;
+
+    if (cellDisabled.value(type, parseInt(value))) {
+      return;
+    }
+
     hms.value[type as keyof typeof hms.value] = parseInt(value);
     if (datePicker.type === "datetime") {
       emits("update:modelValue", hms.value);
@@ -154,6 +192,10 @@ const footOnOk = () => {
 };
 //现在回调
 const footOnNow = () => {
+  if (cellDisabled.value()) {
+    return;
+  }
+
   hms.value.hh = dayjs().hour();
   hms.value.mm = dayjs().minute();
   hms.value.ss = dayjs().second();

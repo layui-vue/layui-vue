@@ -26,7 +26,7 @@
                     item.type === 'current' &&
                     (item.value == startDate || item.value == endDate)),
                 'laydate-range-hover': ifHasRangeHoverClass(item),
-                'layui-disabled': item.type !== 'current' && datePicker.range,
+                'layui-disabled': cellDisabled(item),
                 'layui-laydate-current':
                   modelValue === -1 &&
                   item.value === dayjs().startOf('day').valueOf(),
@@ -91,8 +91,27 @@ const emits = defineEmits([
   "simple",
 ]);
 
+// 判断日期是否可以点击
+const cellDisabled = computed(() => {
+  return (item: { type: string; value: number }) => {
+    if (item.type !== "current" && datePicker.range) {
+      return true;
+    }
+    if (datePicker.min && dayjs(item.value).isBefore(dayjs(datePicker.min))) {
+      return true;
+    }
+    if (datePicker.max && dayjs(item.value).isAfter(dayjs(datePicker.max))) {
+      return true;
+    }
+    return false;
+  };
+});
+
 // 点击日期
 const handleDayClick = (item: any) => {
+  if (cellDisabled.value(item)) {
+    return;
+  }
   if (datePicker.range) {
     if (item.type !== "current") {
       return;

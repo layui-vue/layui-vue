@@ -24,4 +24,6 @@ export type provideType = {
   rangeSeparator: string;
   simple: boolean;
   timestamp: boolean;
+  max: string;
+  min: string;
 };

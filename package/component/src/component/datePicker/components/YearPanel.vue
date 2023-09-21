@@ -21,6 +21,7 @@
           :class="{
             'layui-this': Year === item,
             'layui-laydate-current': !Year && item === dayjs().year(),
+            'layui-disabled': cellDisabled(item),
           }"
           @click="handleYearClick(item)"
         >
@@ -47,7 +48,7 @@ export default {
 <script lang="ts" setup>
 import dayjs from "dayjs";
 import { useI18n } from "../../../language";
-import { inject, nextTick, onMounted, ref, watch } from "vue";
+import { computed, inject, nextTick, onMounted, ref, watch } from "vue";
 import { getYears } from "../day";
 import { provideType } from "../interface";
 import PanelFoot from "./PanelFoot.vue";
@@ -66,8 +67,24 @@ const unWatch = ref(false);
 const Year = ref(props.modelValue);
 const { t } = useI18n();
 
+// 判断单元格是否可以点击(禁用)
+const cellDisabled = computed(() => {
+  return (item: number) => {
+    if (datePicker.min && item < dayjs(datePicker.min).year()) {
+      return true;
+    }
+    if (datePicker.max && item > dayjs(datePicker.max).year()) {
+      return true;
+    }
+    return false;
+  };
+});
+
 // 点击年份
-const handleYearClick = (item: any) => {
+const handleYearClick = (item: number) => {
+  if (cellDisabled.value(item)) {
+    return true;
+  }
   unWatch.value = true;
   Year.value = item;
   if (!datePicker.range) {
@@ -135,6 +152,12 @@ const footOnOk = () => {
 
 //现在回调
 const footOnNow = () => {
+  if (datePicker.max && dayjs().year() > dayjs(datePicker.max).year()) {
+    return;
+  }
+  if (datePicker.min && dayjs().year() < dayjs(datePicker.min).year()) {
+    return;
+  }
   Year.value = dayjs().year();
   if (datePicker.type === "yearmonth") {
     datePicker.currentMonth.value = dayjs().month();
