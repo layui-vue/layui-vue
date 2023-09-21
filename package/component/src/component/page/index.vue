@@ -14,6 +14,15 @@ export default {
 import "./index.less";
 import { Ref, ref, watch, useSlots, computed, ComputedRef } from "vue";
 import { useI18n } from "../../language";
+import LayButton from "../button/index";
+import LayInput from "../input/index";
+import LaySelect from "../select/index";
+import LaySelectOption from "../selectOption/index";
+import LayDropdown from "../dropdown/index";
+import LayDropdownMenu from "../dropdownMenu/index";
+import LayDropdownMenuItem from "../dropdownMenuItem/index";
+import { LayIcon } from "@layui/icons-vue";
+
 export type MODE = "border" | "background" | "none";
 export interface PageOtionInfo {
   resetLeft?: number[];

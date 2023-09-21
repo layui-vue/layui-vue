@@ -493,7 +493,7 @@ const checkboxProps = props.getCheckboxProps(props.data, props.index);
               ]"
             >
               <div
-                style="display: flex"
+                class="layui-table-cell-content"
                 :style="[
                   { textAlign: column.align, justifyContent: column.align },
                 ]"
@@ -582,7 +582,7 @@ const checkboxProps = props.getCheckboxProps(props.data, props.index);
               ]"
             >
               <div
-                style="display: flex; word-break: break-word"
+                class="layui-table-cell-content"
                 :style="[
                   { textAlign: column.align, justifyContent: column.align },
                 ]"
