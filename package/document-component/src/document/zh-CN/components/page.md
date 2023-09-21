@@ -13,7 +13,7 @@
 ::: demo 使用 `lay-page` 标签, 创建分页
 
 <template>
-  <lay-page v-model="currentPage" :limit="limit" :total="total" :show-page="true"></lay-page>
+  <lay-page v-model="currentPage" :limit="limit" :total="total"></lay-page>
 </template>
 
 <script>
@@ -73,7 +73,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-page :limit="limit2" :total="total2" :show-page="true" theme="blue"></lay-page>
+  <lay-page :limit="limit2" :total="total2" theme="blue"></lay-page>
 </template>
 
 <script>
@@ -101,7 +101,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-page :limit="limit3" :total="total3" showCount showPage :limits="limits3"></lay-page>
+  <lay-page :limit="limit3" :total="total3"  :limits="limits3"></lay-page>
 </template>
 
 <script>
@@ -132,7 +132,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-page :limit="limit4" :total="total4" @change="change4" :show-page="true"></lay-page>
+  <lay-page :limit="limit4" :total="total4" @change="change4" ></lay-page>
 </template>
 
 <script>
@@ -170,7 +170,7 @@ export default {
     <lay-button type="primary" size="sm" @click="changeLimit5">update limit {{ limit5 }}</lay-button>
   </lay-button-container>
   <br/>
-  <lay-page v-model="current5" v-model:limit="limit5" :pages="pages5" :total="total5" :show-count="true" :show-page="true" :show-limit="true" :show-refresh="true" :showSkip="true" @change="change5"></lay-page>
+  <lay-page v-model="current5" v-model:limit="limit5" :pages="pages5" :total="total5"  @change="change5"></lay-page>
 </template>
 
 <script>
