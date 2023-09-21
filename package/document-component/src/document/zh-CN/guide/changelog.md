@@ -23,6 +23,7 @@
             <li>[新增] page 组件 disabled 属性，默认值为 false, 用于分页组件禁用。</li>
             <li>[新增] page 组件 hide-on-single-page 属性，total 值超出 pages 后使用下拉展示。</li>
             <li>[新增] page 组件 layout 属性，字符数组, count, limits, next, page, prev, refresh, skip 为可选值。</li>
+            <li>[修复] table 组件 fixed 列内容超出列宽后溢出。</li>
             <li>[优化] page 组件 limit 属性，可选属性, 默认值为 10。</li>
             <li>[优化] page 组件 pages 属性，调整 5 为默认值。</li>
             <li>[优化] page 组件 limits 选择框，使用 lay-select 代替原生 select, 改善样式。</li>
