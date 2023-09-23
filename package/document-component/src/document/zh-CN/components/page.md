@@ -13,7 +13,7 @@
 ::: demo 使用 `lay-page` 标签, 创建分页
 
 <template>
-  <lay-page  v-model="currentPage" :limit="limit" :total="total"></lay-page>
+  <lay-page  v-model="currentPage1" :limit="limit" :total="total1"></lay-page>
 </template>
 
 <script>
@@ -21,15 +21,14 @@ import { ref } from 'vue'
 
 export default {
   setup() {
-
     const limit = ref(10)
-    const total = ref(10)
-    const currentPage = ref(4);
+    const total1 = ref(100)
+    const currentPage1 = ref(1);
 
     return {
       limit,
-      total,
-      currentPage
+      total1,
+      currentPage1
     }
   }
 }
@@ -168,6 +167,36 @@ export default {
 
 :::
 
+
+::: title 变换顺序
+:::
+
+::: demo `layout`可变换顺序
+
+<template>
+  <lay-page :limit="limit4" :total="total4" :layout="layout4"></lay-page>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const limit4 = ref(10)
+    const total4 = ref(100)
+    const layout4 = ref(["page", "limits", "prev", "refresh", "count", "next",  "skip", ])
+    return {
+      limit4,
+      total4,
+      layout4
+    }
+  }
+}
+</script>
+
+:::
+
 ::: title 分页容量
 :::
 
@@ -292,7 +321,7 @@ export default {
 | v-model     | 当前页       | --      |
 | limit       | 每页数量     | 10      |
 | total       | 总条数       | --      |
-| layout      | 不同部分的展示 | `["prev", "page", "next", "limits"]` |
+| layout      | 不同部分的展示, 可改变顺序。   | `["prev", "page", "next", "limits"]` |
 | pages       | 显示切页按钮数量     | `5` |
 | limits       | 切换每页数量的选择项     | `[10,20,30,40,50]` |
 | hide-on-single-page   | 只有一页时隐藏     | `false` |
