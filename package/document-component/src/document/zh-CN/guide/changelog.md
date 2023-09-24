@@ -15,6 +15,18 @@
   <lay-timeline>
     <lay-timeline-item title="2.6.x">
       <ul>
+        <a name="2-6-3"></a>
+        <li>
+          <h3>2.6.3 <span class="layui-badge-rim">2023-09-25</span></h3>
+          <ul>
+            <li>[修复] global-primary-color 设置 color 时，在 dark 模式下失效的问题。</li>
+            <li>[修复] global-normal-color 设置 color 时，在 dark 模式下失效的问题。</li>
+            <li>[修复] global-warm-color 设置 color 时，在 dark 模式下失效的问题。</li>
+            <li>[修复] global-danger-color 设置 color 时，在 dark 模式下失效的问题。</li>
+          </ul>
+        </li>
+      </ul>
+      <ul>
         <a name="2-6-2"></a>
         <li>
           <h3>2.6.2 <span class="layui-badge-rim">2023-09-25</span></h3>
