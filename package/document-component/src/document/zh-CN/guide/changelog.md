@@ -15,6 +15,19 @@
   <lay-timeline>
     <lay-timeline-item title="2.6.x">
       <ul>
+        <a name="2-6-1"></a>
+        <li>
+          <h3>2.6.1 <span class="layui-badge-rim">2023-09-24</span></h3>
+          <ul>
+            <li>[新增] page 组件 ellipsisTooltip属性 开启翻页更多。</li>
+            <li>[优化] page 组件 layout 属性可更换位置。</li>
+            <li>[优化] page 组件 simple 属性启用下的分页样式。</li>
+            <li>[修复] page 组件 limit 属性切换不触发 change 事件。</li>
+            <li>[测试] 完善分页组件所有属性测试用例, 测试覆盖率100%。</li>
+          </ul>
+        </li>
+      </ul>
+      <ul>
         <a name="2-6-0"></a>
         <li>
           <h3>2.6.0 <span class="layui-badge-rim">2023-09-21</span></h3>
