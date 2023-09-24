@@ -16,7 +16,7 @@ export default {
 };
 </script>
 <script setup lang="ts">
+import { LayIcon } from "@layui/icons-vue";
 import { usePage } from "../usePage";
 const { currentPage, inlimit, disabled, limits, handleRefresh } = usePage();
-
 </script>

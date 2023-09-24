@@ -25,8 +25,10 @@ export default {
 <script setup lang="ts">
 import { useI18n } from "../../../language";
 import { usePage } from "../usePage";
+import LaySelect from "../../select/index";
+import LaySelectOption from "../../selectOption/index";
 const { t } = useI18n();
-const { inlimit, disabled,  limits  } = usePage();
+const { inlimit, disabled, limits } = usePage();
 // 国际化分页文字
 const getLabel = (page: number) => {
   const usePage = t("page.item") + "/" + t("page.page");
