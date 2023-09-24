@@ -15,6 +15,15 @@
   <lay-timeline>
     <lay-timeline-item title="2.6.x">
       <ul>
+        <a name="2-6-2"></a>
+        <li>
+          <h3>2.6.2 <span class="layui-badge-rim">2023-09-25</span></h3>
+          <ul>
+            <li>[修复] page 组件在按需模式下无法正常使用的问题 (由 2.6.1 产生)。</li>
+          </ul>
+        </li>
+      </ul>
+      <ul>
         <a name="2-6-1"></a>
         <li>
           <h3>2.6.1 <span class="layui-badge-rim">2023-09-24</span></h3>
