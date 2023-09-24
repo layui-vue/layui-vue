@@ -21,7 +21,12 @@
       1
     </li>
     <template v-if="setPage[0] > 2">
-      <lay-dropdown  :disabled="!ellipsisTooltip" ref="manualRef" trigger="hover" placement="bottom">
+      <lay-dropdown
+        :disabled="!ellipsisTooltip"
+        ref="manualRef"
+        trigger="hover"
+        placement="bottom"
+      >
         <li
           data-page="向前 3 页"
           class="layui-pager-number layui-page-left-number"
@@ -65,7 +70,11 @@
     </li>
 
     <template v-if="setPage[setPage.length - 1] < pageCount - 1">
-      <lay-dropdown :disabled="!ellipsisTooltip" trigger="hover" placement="bottom">
+      <lay-dropdown
+        :disabled="!ellipsisTooltip"
+        trigger="hover"
+        placement="bottom"
+      >
         <li
           data-page="向后 3 页"
           class="layui-pager-number layui-page-right-number"
@@ -114,6 +123,10 @@ export default {
 };
 </script>
 <script setup lang="ts">
+import LayDropdown from "../../dropdown/index";
+import LayDropdownMenu from "../../dropdownMenu/index";
+import LayDropdownMenuItem from "../../dropdownMenuItem/index";
+import { LayIcon } from "@layui/icons-vue";
 import { usePage } from "../usePage";
 const {
   pageCount,
@@ -125,8 +138,6 @@ const {
   currentPage,
   handleNext,
   theme,
-  ellipsisTooltip
+  ellipsisTooltip,
 } = usePage();
-
-
 </script>

@@ -26,13 +26,10 @@ export default {
 };
 </script>
 <script setup lang="ts">
+import LayButton from "../../button/index";
+import LayInput from "../../input/index";
 import { useI18n } from "../../../language";
 import { usePage } from "../usePage";
 const { t } = useI18n();
-const {
-  disabled,
-  jumpNumber,
-  handleBlur,
-  handleJumpPage,
-} = usePage();
+const { disabled, jumpNumber, handleBlur, handleJumpPage } = usePage();
 </script>

@@ -31,14 +31,6 @@ import LayPageLimits from "./components/limits.vue";
 import LayPageRefresh from "./components/refresh.vue";
 import LayPageSkip from "./components/skip.vue";
 import LayPageSimple from "./components/simple.vue";
-import LayButton from "../button/index";
-import LayInput from "../input/index";
-import LaySelect from "../select/index";
-import LaySelectOption from "../selectOption/index";
-import LayDropdown from "../dropdown/index";
-import LayDropdownMenu from "../dropdownMenu/index";
-import LayDropdownMenuItem from "../dropdownMenuItem/index";
-import { LayIcon } from "@layui/icons-vue";
 import { LAYUI_PAGE_KEY } from "./usePage";
 // export type MODE = "border" | "background" | "none";
 export interface PageOtionInfo {
@@ -90,19 +82,19 @@ const props = withDefaults(defineProps<PageProps>(), {
 const slots = useSlots();
 const limits: Ref<number[]> = ref(props.limits);
 const groups: Ref<number> = ref(props.pages);
-const getLayout:Ref<LayoutKey[]> = ref(props.layout);
+const getLayout: Ref<LayoutKey[]> = ref(props.layout);
 const currentPage: Ref<number> = ref(props.modelValue);
-const inlimit:Ref<number> = ref(props.limit);
-const theme:Ref<string| undefined> = ref(props.theme);
-const ellipsisTooltip:Ref<boolean> = ref(props.ellipsisTooltip);
+const inlimit: Ref<number> = ref(props.limit);
+const theme: Ref<string | undefined> = ref(props.theme);
+const ellipsisTooltip: Ref<boolean> = ref(props.ellipsisTooltip);
 const emit = defineEmits(["update:modelValue", "change", "update:limit"]);
-const iconPrevHover:Ref<boolean> = ref<boolean>(true);
-const iconNextHover:Ref<boolean> = ref<boolean>(true);
+const iconPrevHover: Ref<boolean> = ref<boolean>(true);
+const iconNextHover: Ref<boolean> = ref<boolean>(true);
 let pageOpionData = ref<PageOtionInfo>({
   resetLeft: [],
   resetRight: [],
 });
-const jumpNumber:Ref<number> = ref(props.modelValue);
+const jumpNumber: Ref<number> = ref(props.modelValue);
 const simple: ComputedRef<boolean> = computed(() => props.simple);
 const disabled: Ref<boolean> = ref(props.disabled);
 const getHideOnSinglePage: ComputedRef<boolean> = computed(() => {
@@ -307,7 +299,7 @@ provide(LAYUI_PAGE_KEY, {
   handleBlur,
   ellipsisTooltip,
   theme,
-  setPage
+  setPage,
 });
 </script>
 
@@ -315,8 +307,9 @@ provide(LAYUI_PAGE_KEY, {
   <div
     v-if="getHideOnSinglePage"
     :class="[
-      'layui-page', disabled ? 'is-disabled' : '',
-      simple ? 'layui-page-simple' : ''
+      'layui-page',
+      disabled ? 'is-disabled' : '',
+      simple ? 'layui-page-simple' : '',
     ]"
   >
     <template v-if="!simple">
