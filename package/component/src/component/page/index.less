@@ -43,22 +43,26 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    .layui-page-number {
+    margin: 0 -1px;
+    .layui-pager-number {
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 0 16px;
       border: 1px solid @border-color;
-      border-left: none;
+      // border-left: none;
       cursor: pointer;
       height: @height;
       box-sizing: border-box;
       &:hover {
         color: @active-color;
       }
-      &:last-child {
-        border-right: none;
+      &:not(:first-child) {
+        border-left: none;
       }
+      // &:last-child {
+      //   border-right: none;
+      // }
       // &:first-child {
       //   // border-left: none;
       // }
@@ -90,82 +94,83 @@
       .disabled();
     }
   }
-  .layui-pager-jump {
-    margin-left: 10px;
-    margin-right: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    font-size: 14px;
+
+  .layui-page-total-text {
+    padding: 0 10px;
+  }
+}
+.layui-page-limits {
+  width: 80px;
+  margin: 0 10px;
+  .layui-select {
+    width: 100%;
     .layui-input {
+      padding: 0 6px;
+      height: @height;
+      input {
+        padding: 0;
+        text-align: center;
+      }
+      .layui-input-suffix {
+        padding: 0;
+        // padding-right: 4px;
+      }
+      &:hover {
+        border-color: @active-color;
+      }
+    }
+  }
+}
+.layui-page-refresh {
+  margin: 0 0 0 10px;
+  &:hover {
+    cursor: pointer;
+    color: @active-color;
+  }
+}
+.layui-pager-jumper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #999;
+  margin: 0 10px;
+  .layui-input.layui-input[size="md"] {
+    width: 40px;
+    height: @height;
+    input {
+      padding: 0 4px;
+      text-align: center;
+    }
+    &:hover {
+      border-color: @active-color;
+    }
+  }
+  .layui-btn {
+    color: #000;
+    &:hover {
+      border-color: @active-color;
+      color: @active-color;
+    }
+  }
+}
+// }
+
+.layui-page-simple {
+  .layui-pager-jumper {
+    // margin-left: 10px;
+    // margin-right: 10px;
+    // display: flex;
+    // align-items: center;
+    // justify-content: center;
+    // gap: 10px;
+    font-size: 14px;
+    color: #333;
+    .layui-input[size="md"] {
       width: 60px;
       padding: 0 4px;
       input {
         padding: 0;
         text-align: center;
-      }
-    }
-  }
-  .layui-page-total-text {
-    padding: 0 10px;
-  }
-}
-.layui-page-options {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  margin-left: 10px;
-  .layui-page-options-number {
-    width: 80px;
-    // margin: 0 10px;
-    .layui-select {
-      width: 100%;
-      .layui-input {
-        padding: 0 6px;
-        height: @height;
-        input {
-          padding: 0;
-          text-align: center;
-        }
-        .layui-input-suffix {
-          padding: 0;
-          // padding-right: 4px;
-        }
-        &:hover {
-          border-color: @active-color;
-        }
-      }
-    }
-  }
-  .layui-page-refresh {
-    &:hover {
-      cursor: pointer;
-      color: @active-color;
-    }
-  }
-  .layui-page-jumper {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    color: #999;
-    .layui-input {
-      width: 40px;
-      height: @height;
-      input {
-        padding: 0 4px;
-        text-align: center;
-      }
-      &:hover {
-        border-color: @active-color;
-      }
-    }
-    .layui-btn {
-      color: #000;
-      &:hover {
-        border-color: @active-color;
-        color: @active-color;
       }
     }
   }
@@ -176,13 +181,13 @@
   & > .layui-page-total-text {
     color: @dis-color;
   }
-  & > .layui-pager .layui-page-number {
+  & > .layui-pager .layui-pager-number {
     .disabled();
     &:hover {
       color: @dis-color;
     }
   }
-  & > .layui-pager .layui-page-number.is-active {
+  & > .layui-pager .layui-pager-number.is-active {
     background-color: rgb(250, 250, 252);
     color: rgba(194, 194, 194, 1);
   }
@@ -193,7 +198,17 @@
       color: @dis-color;
     }
   }
-  & .layui-pager-jump {
+  .layui-page-refresh {
     color: @dis-color;
+    cursor: not-allowed;
+  }
+  & .layui-pager-jumper {
+    color: @dis-color;
+  }
+}
+
+.layui-dropdown-menu {
+  li {
+    justify-content: center;
   }
 }
