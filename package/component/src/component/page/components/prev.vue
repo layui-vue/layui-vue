@@ -1,13 +1,14 @@
 <!--
  * @Author: baobaobao
  * @Date: 2023-09-22 00:33:50
- * @LastEditTime: 2023-09-22 18:08:58
+ * @LastEditTime: 2023-09-24 12:02:18
  * @LastEditors: baobaobao
 -->
 <template>
   <div
     class="layui-page-prev"
     @click="handlePrev"
+    :data-page="t('page.previous')"
     :class="[
       {
         'is-disabled': currentPage <= 1,

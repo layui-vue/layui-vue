@@ -1,12 +1,13 @@
 <!--
  * @Author: baobaobao
  * @Date: 2023-09-22 00:33:50
- * @LastEditTime: 2023-09-22 18:09:04
+ * @LastEditTime: 2023-09-24 12:01:56
  * @LastEditors: baobaobao
 -->
 <template>
   <div
     class="layui-page-next"
+    :data-page="t('page.next')"
     :class="[
       {
         'is-disabled': pageCount <= currentPage,

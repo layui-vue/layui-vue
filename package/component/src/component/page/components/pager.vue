@@ -1,7 +1,7 @@
 <!--
  * @Author: baobaobao
  * @Date: 2023-09-22 00:33:50
- * @LastEditTime: 2023-09-23 00:08:14
+ * @LastEditTime: 2023-09-24 13:13:05
  * @LastEditors: baobaobao
 -->
 <template>
@@ -11,7 +11,7 @@
       :data-page="currentPage"
       @click="handlePage(1)"
       :class="[
-        'layui-page-number',
+        'layui-pager-number',
         {
           [theme ? 'layui-bg-' + theme : '']: 1 === currentPage,
           'is-active': 1 === currentPage,
@@ -21,9 +21,10 @@
       1
     </li>
     <template v-if="setPage[0] > 2">
-      <lay-dropdown ref="manualRef" trigger="hover" placement="bottom">
+      <lay-dropdown  :disabled="!ellipsisTooltip" ref="manualRef" trigger="hover" placement="bottom">
         <li
-          class="layui-page-number layui-page-left-number"
+          data-page="向前 3 页"
+          class="layui-pager-number layui-page-left-number"
           @mouseleave="iconPrevHover = true"
           @mouseenter="iconPrevHover = false"
           @click="handlePage(currentPage - 3)"
@@ -53,7 +54,7 @@
       :key="page"
       :data-page="page"
       :class="[
-        'layui-page-number',
+        'layui-pager-number',
         {
           [theme ? 'layui-bg-' + theme : '']: page === currentPage,
           'is-active': page === currentPage,
@@ -64,9 +65,10 @@
     </li>
 
     <template v-if="setPage[setPage.length - 1] < pageCount - 1">
-      <lay-dropdown trigger="hover" placement="bottom">
+      <lay-dropdown :disabled="!ellipsisTooltip" trigger="hover" placement="bottom">
         <li
-          class="layui-page-number layui-page-right-number"
+          data-page="向后 3 页"
+          class="layui-pager-number layui-page-right-number"
           @mouseleave="iconNextHover = true"
           @mouseenter="iconNextHover = false"
           @click="handlePage(currentPage + 3)"
@@ -94,7 +96,7 @@
       :data-page="pageCount"
       @click="handlePage(pageCount)"
       :class="[
-        'layui-page-number',
+        'layui-pager-number',
         {
           [theme ? 'layui-bg-' + theme : '']: pageCount === currentPage,
           'is-active': pageCount === currentPage,
@@ -123,6 +125,7 @@ const {
   currentPage,
   handleNext,
   theme,
+  ellipsisTooltip
 } = usePage();
 
 

@@ -1,13 +1,5 @@
 import { mount, shallowMount, config } from "@vue/test-utils";
 import LayPage from "../src/component/page";
-// import LayPageCount from "../src/component/page/components/count.vue";
-// import LayPageLimits from "../src/component/page/components/limits.vue";
-// import LayPageNext from "../src/component/page/components/next.vue";
-// import LayPager from "../src/component/page/components/page.vue";
-// import LayPagePrev from "../src/component/page/components/prev.vue";
-// import LayPageRefresh from "../src/component/page/components/refresh.vue";
-// import LayPageSimple from "../src/component/page/components/simple.vue";
-// import LayPageSkip from "../src/component/page/components/skip.vue";
 import { nextTick } from 'vue';
 import LayIcon from "../src/component/icon";
 import { describe, expect, test } from "vitest";
@@ -21,21 +13,20 @@ import LayInput from '../src/component/input';
 config.global.components = {
   'lay-select': LaySelect,
   'lay-icon': LayIcon,
-  'lay-dropdown-menu': LayDropdown,
+  'lay-dropdown-menu': LayDropdownMenu,
   'lay-dropdown-menu-item': LayDropdownMenuItem,
   'lay-dropdown': LayDropdown,
   'lay-select-option': LaySelectOption,
   'lay-button': LayButton,
   'lay-input': LayInput
 }
-// import { nextTick } from "vue";
 const initMaxVal = 10
 const initMinVal = 1
 const total = 100
 const limit = 5;
 const changeTotal = 102
 const changeLimit = 10
-describe("LayCheckCard.vue", () => {
+describe("LayPage.vue", () => {
   test("render modelValue test", async () => {
     const wrapper = mount(LayPage, {
       props: {
@@ -85,13 +76,11 @@ describe("LayCheckCard.vue", () => {
     expect(initiaPrevlValue - 1).toBe(+wrapper.vm.currentPage)
     wrapper.vm.handlePage(-1);
     await wrapper.vm.$nextTick();
-    // let updatedValue = wrapper.vm.currentPage;
     expect(wrapper.vm.currentPage).toBe(1)
 
     wrapper.vm.handlePage(1000);
-    
+
     await wrapper.vm.$nextTick();
-    // console.log(wrapper.vm.currentPage, 111, total)
     expect(wrapper.vm.currentPage).toBe(Math.ceil(total / 10))
 
 
@@ -120,7 +109,7 @@ describe("LayCheckCard.vue", () => {
 
     await wrapper.setProps({ modelValue: initMaxVal })
 
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    await  nextTick()
 
     await wrapper.find(".layui-page-left-number").trigger('click')
 
@@ -138,7 +127,7 @@ describe("LayCheckCard.vue", () => {
       }
     });
     expect(+wrapper.find('.layui-pager').find('li:last-child').text()).toEqual(Math.ceil(total / limit))
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    await  nextTick()
     await wrapper.setProps({ total: changeTotal, limit: changeLimit })
     expect(+wrapper.find('.layui-pager').find('li:last-child').text()).toEqual(Math.ceil(changeTotal / changeLimit))
     wrapper.unmount();
@@ -162,29 +151,23 @@ describe("LayCheckCard.vue", () => {
     await wrapper.setProps({ layout: ["count", "prev", "page", "next", "limits", "refresh", "skip"] })
     await nextTick()
     expect(wrapper.find('span:first-child').classes('layui-page-total-text')).toBe(true)
-    await wrapper.find('.layui-page-jumper .layui-input input').setValue(2)
-    await wrapper.find('.layui-page-jumper .layui-btn').trigger('click')
+    await wrapper.find('.layui-pager-jumper .layui-input input').setValue(2)
+    await wrapper.find('.layui-pager-jumper .layui-btn').trigger('click')
     await nextTick()
     expect(+wrapper.find('.layui-pager .is-active').text()).toEqual(2)
 
-    const GETINPUT_DOM = wrapper.find('.layui-page-jumper input[type="number"]')
-    const GETPAGELASTDOM = wrapper.find('.layui-pager  .layui-page-number:last-child')
-    const GETPAGEFIRSTDOM = wrapper.find('.layui-pager  .layui-page-number:first-child')
-    // const inputValue = (GETINPUT_DOM.element as HTMLInputElement).value;
-    // let inputValue = (GETINPUT_DOM.element as HTMLInputElement).value;
+    const GETINPUT_DOM = wrapper.find('.layui-pager-jumper input[type="number"]')
+    const GETPAGELASTDOM = wrapper.find('.layui-pager  .layui-pager-number:last-child')
+    const GETPAGEFIRSTDOM = wrapper.find('.layui-pager  .layui-pager-number:first-child')
 
     await GETINPUT_DOM.setValue(1000)
-    // const inputValue = (GETINPUT_DOM.element as HTMLInputElement).value;
 
     await GETINPUT_DOM.trigger('blur')
 
     await nextTick()
     let inputValue = (GETINPUT_DOM.element as HTMLInputElement).value;
 
-    // const inputValue = (GETINPUT_DOM.element as HTMLInputElement).value;
     expect(+inputValue).toBe(+GETPAGELASTDOM.text())
-
-
 
     await GETINPUT_DOM.setValue(0)
 
@@ -193,7 +176,6 @@ describe("LayCheckCard.vue", () => {
     inputValue = (GETINPUT_DOM.element as HTMLInputElement).value;
     expect(+inputValue).toBe(+GETPAGEFIRSTDOM.text())
     wrapper.find('.layui-page-refresh').trigger('click')
-    // console.log(wrapper.html())
     wrapper.unmount();
   });
 
@@ -205,13 +187,11 @@ describe("LayCheckCard.vue", () => {
         disabled: true
       }
     });
-    console.log(wrapper.html())
     expect(wrapper.classes('is-disabled')).toBe(true)
-    await  wrapper.setProps({ disabled: false })
+    await wrapper.setProps({ disabled: false })
     expect(wrapper.classes('is-disabled')).toBe(false)
+    wrapper.unmount();
 
-    // expect(wrapper.find('.is-active').classes('layui-bg-blue')).toBe(true)
-    // wrapper.unmount();
   });
 
   test("render theme test", async () => {
@@ -224,8 +204,29 @@ describe("LayCheckCard.vue", () => {
       }
     });
     expect(wrapper.find('.is-active').classes('layui-bg-blue')).toBe(true)
-    await  wrapper.setProps({ theme: 'yellow' })
+    await wrapper.setProps({ theme: 'yellow' })
     expect(wrapper.find('.is-active').classes('layui-bg-yellow')).toBe(true)
+    wrapper.unmount();
+  });
+
+  test("render ellipsisTooltip test", async () => {
+    const wrapper = mount(LayPage, {
+      props: {
+        modelValue: initMinVal,
+        total,
+        limit,
+        ellipsisTooltip: true
+      }
+    });
+    const findDropDown = wrapper.findComponent(LayDropdown).vm as InstanceType<
+      typeof LayDropdown
+    >
+    expect(findDropDown.disabled).toBe(false)
+
+    await wrapper.setProps({ ellipsisTooltip: false })
+    await nextTick()
+    expect(findDropDown.disabled).toBe(true)
+
     wrapper.unmount();
   });
 
@@ -255,18 +256,34 @@ describe("LayCheckCard.vue", () => {
         simple: true
       }
     });
-    await wrapper.find('.layui-pager-jump input').setValue(1000)
-    await wrapper.find('.layui-pager-jump input').trigger('blur')
-    let currentPage =  wrapper.vm.currentPage
+    await wrapper.find('.layui-pager-jumper input').setValue(1000)
+    await wrapper.find('.layui-pager-jumper input').trigger('blur')
+    let currentPage = wrapper.vm.currentPage
 
     expect(currentPage).toBe(Math.ceil(total / 10))
 
-    await wrapper.find('.layui-pager-jump input').setValue(-1)
-    await wrapper.find('.layui-pager-jump input').trigger('blur')
-    let newVal =  wrapper.vm.currentPage
-    
+    await wrapper.find('.layui-pager-jumper input').setValue(-1)
+    await wrapper.find('.layui-pager-jumper input').trigger('blur')
+    let newVal = wrapper.vm.currentPage
+
     expect(newVal).toBe(1)
+    wrapper.unmount();
 
   });
+
+  test("render hide-on-single-page test", async () => {
+    const wrapper = mount(LayPage, {
+      props: {
+        modelValue: initMinVal,
+        total: 1,
+        hideOnSinglePage: true
+      }
+    });
+    expect(wrapper.text()).toBe('')
+    wrapper.unmount();
+
+  });
+
+
 
 })

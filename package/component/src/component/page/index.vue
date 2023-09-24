@@ -1,7 +1,7 @@
 <!--
  * @Author: baobaobao
  * @Date: 2023-07-07 15:34:38
- * @LastEditTime: 2023-09-23 12:09:46
+ * @LastEditTime: 2023-09-24 12:23:16
  * @LastEditors: baobaobao
 -->
 <script lang="ts">
@@ -61,6 +61,7 @@ export interface PageProps {
   modelValue?: number;
   hideOnSinglePage?: boolean;
   // mode?: MODE;
+  ellipsisTooltip?: boolean;
   disabled?: boolean;
   layout?: LayoutKey[];
 }
@@ -73,6 +74,7 @@ const props = withDefaults(defineProps<PageProps>(), {
   simple: false,
   disabled: false,
   hideOnSinglePage: false,
+  ellipsisTooltip: false,
   limits: () => [10, 20, 30, 40, 50],
   layout: () => ["prev", "page", "next", "limits"],
 });
@@ -84,7 +86,7 @@ const getLayout:Ref<LayoutKey[]> = ref(props.layout);
 const currentPage: Ref<number> = ref(props.modelValue);
 const inlimit:Ref<number> = ref(props.limit);
 const theme:Ref<string| undefined> = ref(props.theme);
-
+const ellipsisTooltip:Ref<boolean> = ref(props.ellipsisTooltip);
 const emit = defineEmits(["update:modelValue", "change", "update:limit"]);
 const iconPrevHover:Ref<boolean> = ref<boolean>(true);
 const iconNextHover:Ref<boolean> = ref<boolean>(true);
@@ -116,7 +118,12 @@ watch(
     theme.value = props.theme;
   }
 );
-
+watch(
+  () => props.ellipsisTooltip,
+  () => {
+    ellipsisTooltip.value = props.ellipsisTooltip;
+  }
+);
 watch(
   () => inlimit,
   (limit) => {
@@ -282,6 +289,7 @@ provide(LAYUI_PAGE_KEY, {
   iconPrevHover,
   inlimit,
   limits,
+  disabled,
   handleRefresh,
   handleNext,
   handlePrev,
@@ -289,6 +297,7 @@ provide(LAYUI_PAGE_KEY, {
   jumpNumber,
   handleJumpPage,
   handleBlur,
+  ellipsisTooltip,
   theme,
   setPage
 });

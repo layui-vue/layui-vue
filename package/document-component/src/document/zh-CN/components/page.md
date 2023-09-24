@@ -34,17 +34,18 @@ export default {
 }
 </script>
 
-
 :::
 
-
-::: title 禁用
+::: title 开启更多翻页
 :::
 
-::: demo 使用 `disabled` 属性 , 开启禁用
+::: demo 使用 `ellipsisTooltip` 属性
 
 <template>
-  <lay-page v-model="currentPage" :layout="layout" disabled :limit="limit" :total="total"></lay-page>
+<lay-space direction="vertical" fill wrap size="lg">
+    <lay-switch v-model="ellipsisTooltip"></lay-switch>
+    <lay-page v-model="currentPage2"  :ellipsisTooltip="ellipsisTooltip" :limit="limit" :total="total_new"></lay-page>
+</lay-space>
 </template>
 
 <script>
@@ -54,23 +55,92 @@ export default {
   setup() {
 
     const limit = ref(10)
-    const total = ref(100)
-    const currentPage = ref(1);
-    const layout = ref(['count', 'prev', 'page', 'next', 'limits',  'refrsh', 'skip'])
-
+    const total_new = ref(100)
+    const currentPage2 = ref(1);
+    const ellipsisTooltip = ref(true)
     return {
       limit,
-      total,
-      layout,
-      currentPage
+      total_new,
+      layout2,
+      currentPage2,
+      ellipsisTooltip
     }
   }
 }
 </script>
 
+:::
+
+::: title 禁用
+:::
+
+::: demo 使用 `disabled` 属性 , 开启禁用
+
+<template>
+<lay-space direction="vertical" fill wrap size="lg">
+    <lay-switch v-model="disabled2"></lay-switch>
+    <lay-page v-model="currentPage2"  :disabled="disabled2" :limit="limit" :total="total2"></lay-page>
+</lay-space>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const limit = ref(10)
+    const total2 = ref(100)
+    const currentPage2 = ref(1);
+    const disabled2 = ref(true)
+    return {
+      limit,
+      total2,
+      layout2,
+      currentPage2,
+      disabled2
+    }
+  }
+}
+</script>
 
 :::
 
+::: title 插槽
+:::
+
+::: demo 使用 `prev`、`next` 属性 , 使用插槽
+
+<template>
+    <lay-page v-model="currentPage3"  :limit="limit" :total="total3">
+    <template  #prev>
+    prev
+    </template>
+    <template  #next>
+    next
+    </template>
+    </lay-page>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const limit = ref(10)
+    const total3 = ref(100)
+    const currentPage3 = ref(1);
+    return {
+      limit,
+      total3,
+      currentPage3
+    }
+  }
+}
+</script>
+
+:::
 
 ::: title 只有一页时隐藏
 :::
@@ -105,9 +175,7 @@ export default {
 }
 </script>
 
-
 :::
-
 
 ::: title 简洁模式
 :::
@@ -166,7 +234,6 @@ export default {
 </script>
 
 :::
-
 
 ::: title 变换顺序
 :::
@@ -227,7 +294,6 @@ export default {
 
 :::
 
-
 ::: title 回调事件
 :::
 
@@ -272,7 +338,7 @@ export default {
     <lay-button type="primary" size="sm" @click="changeLimit5">update limit {{ limit5 }}</lay-button>
   </lay-button-container>
   <br/>
-  <lay-page v-model="current5"  :layout="layout" v-model:limit="limit5" :pages="pages5" :total="total5"  @change="change5"></lay-page>
+  <lay-page v-model="current5"  :layout="layout5" v-model:limit="limit5" :pages="pages5" :total="total5"  @change="change5"></lay-page>
 </template>
 
 <script>
@@ -285,7 +351,7 @@ export default {
     const total5 = ref(99)
     const pages5 = ref(7);
     const current5 = ref(1);
-    const layout = ref(['count', 'prev', 'page', 'next', 'limits',  'refrsh', 'skip'])
+    const layout5 = ref(['count', 'prev', 'page', 'next', 'limits',  'refresh', 'skip'])
     const changeCurrent5 = () => {
       current5.value = 2;
     }
@@ -300,7 +366,7 @@ export default {
       total5,
       pages5,
       current5,
-      layout,
+      layout5,
       changeCurrent5,
       changeLimit5,
       change5
@@ -316,17 +382,18 @@ export default {
 
 ::: table
 
-| 属性        | 描述         | 默认值  |
-| ----------- | ------------ | ------- |
-| v-model     | 当前页       | --      |
-| limit       | 每页数量     | 10      |
-| total       | 总条数       | --      |
-| layout      | 不同部分的展示, 可改变顺序。   | `["prev", "page", "next", "limits"]` |
-| pages       | 显示切页按钮数量     | `5` |
-| limits       | 切换每页数量的选择项     | `[10,20,30,40,50]` |
-| hide-on-single-page   | 只有一页时隐藏     | `false` |
-| disabled   | 分页禁用      | `false` |
-| theme       | 主题色        |`green`|
+| 属性                | 描述                         | 默认值                               |
+| ------------------- | ---------------------------- | ------------------------------------ |
+| v-model             | 当前页                       | --                                   |
+| limit               | 每页数量                     | 10                                   |
+| total               | 总条数                       | --                                   |
+| layout              | 不同部分的展示, 可改变顺序。 | `["prev", "page", "next", "limits"]` |
+| pages               | 显示切页按钮数量             | `5`                                  |
+| limits              | 切换每页数量的选择项         | `[10,20,30,40,50]`                   |
+| hide-on-single-page | 只有一页时隐藏               | `false`                              |
+| ellipsisTooltip     | 显示更多翻页内容             | `false`                              |
+| disabled            | 分页禁用                     | `false`                              |
+| theme               | 主题色                       | `green`                              |
 
 :::
 
@@ -335,11 +402,11 @@ export default {
 
 ::: table
 
-| 事件 | 描述     | 参数                  | 版本                  |
-| ---- | -------- | --------------------- |---------------------  |
-| jump | 切换回调 | { current: 当前页面 } | `移除`                  |
-| limit | 每页数量变化 | 变化后的值 | `移除`                  |
-| change          | 分页事件 | { current: 当前页码, limit: 每页数量 } | `1.4.3` |
+| 事件   | 描述         | 参数                                   | 版本    |
+| ------ | ------------ | -------------------------------------- | ------- |
+| jump   | 切换回调     | { current: 当前页面 }                  | `移除`  |
+| limit  | 每页数量变化 | 变化后的值                             | `移除`  |
+| change | 分页事件     | { current: 当前页码, limit: 每页数量 } | `1.4.3` |
 
 :::
 

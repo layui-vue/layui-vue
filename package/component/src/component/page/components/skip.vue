@@ -1,11 +1,11 @@
 <!--
  * @Author: baobaobao
  * @Date: 2023-09-22 00:33:50
- * @LastEditTime: 2023-09-22 17:46:45
+ * @LastEditTime: 2023-09-23 21:57:59
  * @LastEditors: baobaobao
 -->
 <template>
-  <div class="layui-page-jumper">
+  <div class="layui-pager-jumper">
     {{ t("page.goTo") }}
     <lay-input
       :disabled="disabled"

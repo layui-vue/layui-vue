@@ -39,7 +39,7 @@
     align-items: center;
     justify-content: center;
     margin: 0 -1px;
-    .layui-page-number {
+    .layui-pager-number {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -89,23 +89,7 @@
       .disabled();
     }
   }
-  .layui-pager-jump {
-    margin-left: 10px;
-    margin-right: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    font-size: 14px;
-    .layui-input {
-      width: 60px;
-      padding: 0 4px;
-      input {
-        padding: 0;
-        text-align: center;
-      }
-    }
-  }
+
   .layui-page-total-text {
     padding: 0 10px;
   }
@@ -139,7 +123,7 @@
     color: @active-color;
   }
 }
-.layui-page-jumper {
+.layui-pager-jumper {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -166,18 +150,39 @@
 }
 // }
 
+.layui-page-simple {
+  .layui-pager-jumper {
+    // margin-left: 10px;
+    // margin-right: 10px;
+    // display: flex;
+    // align-items: center;
+    // justify-content: center;
+    // gap: 10px;
+    font-size: 14px;
+    color: #333;
+    .layui-input[size="md"] {
+      width: 60px;
+      padding: 0 4px;
+      input {
+        padding: 0;
+        text-align: center;
+      }
+    }
+  }
+}
+
 :where(.layui-page).is-disabled {
   cursor: not-allowed;
   & > .layui-page-total-text {
     color: @dis-color;
   }
-  & > .layui-pager .layui-page-number {
+  & > .layui-pager .layui-pager-number {
     .disabled();
     &:hover {
       color: @dis-color;
     }
   }
-  & > .layui-pager .layui-page-number.is-active {
+  & > .layui-pager .layui-pager-number.is-active {
     background-color: rgb(250, 250, 252);
     color: rgba(194, 194, 194, 1);
   }
@@ -192,7 +197,13 @@
     color: @dis-color;
     cursor: not-allowed;
   }
-  & .layui-pager-jump {
+  & .layui-pager-jumper {
     color: @dis-color;
+  }
+}
+
+.layui-dropdown-menu {
+  li {
+    justify-content: center;
   }
 }
