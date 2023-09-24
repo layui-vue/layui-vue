@@ -1,7 +1,7 @@
 <!--
  * @Author: baobaobao
  * @Date: 2023-07-07 15:34:38
- * @LastEditTime: 2023-09-24 12:23:16
+ * @LastEditTime: 2023-09-24 19:21:34
  * @LastEditors: baobaobao
 -->
 <script lang="ts">
@@ -31,6 +31,14 @@ import LayPageLimits from "./components/limits.vue";
 import LayPageRefresh from "./components/refresh.vue";
 import LayPageSkip from "./components/skip.vue";
 import LayPageSimple from "./components/simple.vue";
+import LayButton from "../button/index";
+import LayInput from "../input/index";
+import LaySelect from "../select/index";
+import LaySelectOption from "../selectOption/index";
+import LayDropdown from "../dropdown/index";
+import LayDropdownMenu from "../dropdownMenu/index";
+import LayDropdownMenuItem from "../dropdownMenuItem/index";
+import { LayIcon } from "@layui/icons-vue";
 import { LAYUI_PAGE_KEY } from "./usePage";
 // export type MODE = "border" | "background" | "none";
 export interface PageOtionInfo {

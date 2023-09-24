@@ -19,7 +19,7 @@ export interface TablePageProps {
 }
 
 const props = withDefaults(defineProps<TablePageProps>(), {
-  layout: () => ["prev", "page", "next", "limits",  "skip"]
+  layout: () => ["prev", "page", "next", "limits", "skip"],
 });
 const emit = defineEmits(["update:current", "update:limit", "change"]);
 

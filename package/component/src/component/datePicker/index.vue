@@ -459,5 +459,7 @@ provide("datePicker", {
   rangeSeparator: props.rangeSeparator,
   simple: props.simple,
   timestamp: props.timestamp,
+  min: props.min,
+  max: props.max,
 });
 </script>

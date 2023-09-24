@@ -31,11 +31,13 @@ describe("LayPage.vue", () => {
     const wrapper = mount(LayPage, {
       props: {
         modelValue: initMaxVal,
-        total
+        total,
       },
     });
-    expect(+wrapper.find(".layui-pager").find('.is-active').text()).toEqual(initMaxVal)
-    expect(wrapper.find(".layui-pager").find('.is-active').exists()).toBe(true);
+    expect(+wrapper.find(".layui-pager").find(".is-active").text()).toEqual(
+      initMaxVal
+    );
+    expect(wrapper.find(".layui-pager").find(".is-active").exists()).toBe(true);
     wrapper.unmount();
   });
 
@@ -52,9 +54,9 @@ describe("LayPage.vue", () => {
     expect(+wrapper.find(".layui-pager").find('.is-active').text()).toEqual(initMaxVal)
     expect(wrapper.find('.layui-page-next').classes('is-disabled')).toBe(true)
 
-    await wrapper.setProps({ modelValue: initMinVal })
+    await wrapper.setProps({ modelValue: initMinVal });
 
-    await wrapper.find(".layui-page-prev").trigger('click')
+    await wrapper.find(".layui-page-prev").trigger("click");
 
     expect(+wrapper.find(".layui-pager").find('.is-active').text()).toEqual(initMinVal)
     expect(wrapper.find('.layui-page-prev').classes('is-disabled')).toBe(true)
@@ -99,24 +101,27 @@ describe("LayPage.vue", () => {
     const wrapper = mount(LayPage, {
       props: {
         modelValue: initMinVal,
-        total
+        total,
       },
     });
 
-    await wrapper.find(".layui-page-right-number").trigger('click')
+    await wrapper.find(".layui-page-right-number").trigger("click");
 
-    expect(+wrapper.find(".layui-pager").find('.is-active').text()).toEqual(initMinVal + 3)
+    expect(+wrapper.find(".layui-pager").find(".is-active").text()).toEqual(
+      initMinVal + 3
+    );
 
-    await wrapper.setProps({ modelValue: initMaxVal })
+    await wrapper.setProps({ modelValue: initMaxVal });
 
     await  nextTick()
 
-    await wrapper.find(".layui-page-left-number").trigger('click')
+    await wrapper.find(".layui-page-left-number").trigger("click");
 
-    expect(+wrapper.find(".layui-pager").find('.is-active').text()).toEqual(initMaxVal - 3)
+    expect(+wrapper.find(".layui-pager").find(".is-active").text()).toEqual(
+      initMaxVal - 3
+    );
     wrapper.unmount();
   });
-
 
   test("render total limit  test", async () => {
     const wrapper = mount(LayPage, {
@@ -139,7 +144,7 @@ describe("LayPage.vue", () => {
         modelValue: initMinVal,
         total,
         limit,
-        layout: ["count", "prev", "page", "next", "limits", "refresh", "skip"]
+        layout: ["count", "prev", "page", "next", "limits", "refresh", "skip"],
       },
     });
     await wrapper.find(".layui-page-limits  .layui-select .layui-input .layui-input-wrapper").trigger('click')
@@ -243,8 +248,8 @@ describe("LayPage.vue", () => {
         prev: () => `prev`,
       }
     });
-    expect(wrapper.find('.layui-page-next').text()).toEqual('next')
-    expect(wrapper.find('.layui-page-prev').text()).toEqual('prev')
+    expect(wrapper.find(".layui-page-next").text()).toEqual("next");
+    expect(wrapper.find(".layui-page-prev").text()).toEqual("prev");
     wrapper.unmount();
   });
 
