@@ -15,6 +15,15 @@
   <lay-timeline>
     <lay-timeline-item title="2.6.x">
       <ul>
+        <a name="2-6-4"></a>
+        <li>
+          <h3>2.6.4 <span class="layui-badge-rim">2023-09-25</span></h3>
+          <ul>
+            <li>[新增] table 组件 ellipsisTooltipTheme 属性，自定义 ellipsisTooltip 主题，默认为 'light'。</li>
+          </ul>
+        </li>
+      </ul>
+      <ul>
         <a name="2-6-3"></a>
         <li>
           <h3>2.6.3 <span class="layui-badge-rim">2023-09-25</span></h3>
