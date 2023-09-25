@@ -1,4 +1,4 @@
-import { inject, ref } from "vue";
+import { inject } from "vue";
 
 (window as any).layer = {
   globalIndex: -1,

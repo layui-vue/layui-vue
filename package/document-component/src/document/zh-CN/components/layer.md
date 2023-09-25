@@ -592,7 +592,7 @@ const openRightDrawer = function() {
     <br />
     <br />
     <div style="width:100%;height:500px;position: relative;" id="container">
-        <lay-layer v-model="featureVisible1" :teleportDisabled="true">
+        <lay-layer v-model="featureVisible1" :teleportDisabled="true" :maxmin="true">
             内容
         </lay-layer>
     </div>
@@ -611,6 +611,7 @@ const changeFeatureVisible2 = () => {
     layer.open({
         title: '标题',
         content: "内容",
+        maxmin: true,
         teleport: "#container",
     })
 }

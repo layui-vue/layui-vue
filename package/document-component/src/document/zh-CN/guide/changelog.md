@@ -20,6 +20,8 @@
           <h3>2.6.4 <span class="layui-badge-rim">2023-09-25</span></h3>
           <ul>
             <li>[新增] table 组件 ellipsisTooltipTheme 属性，自定义 ellipsisTooltip 主题，默认为 'light'。</li>
+            <li>[修复] layer 组件 关闭 时，未移除 minArrays 中的弹层实例。</li>
+            <li>[升级] layer-vue 到 2.0.1 版本。</li>
           </ul>
         </li>
       </ul>

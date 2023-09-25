@@ -1166,6 +1166,7 @@ const changeFeatureVisible8 = function() {
     layer.open({
         title: "标题",
         content: "内容",
+        maxmin: true,
         teleport: "#container",
     });
 }
