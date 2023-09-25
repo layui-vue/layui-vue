@@ -479,8 +479,8 @@ const closeHandle = () => {
         // @ts-ignore
         removeNotifiyFromQueen(props.id);
       }
-      if(min.value) {
-        updateMinArrays(id.value, !min.value)
+      if (min.value) {
+        updateMinArrays(id.value, !min.value);
       }
     }
   }
