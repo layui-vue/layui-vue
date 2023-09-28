@@ -61,20 +61,20 @@ export interface LayerProps {
   move?: boolean | string;
   resize?: boolean | string;
   type?:
-    | 0
-    | 1
-    | 2
-    | 3
-    | 4
-    | 5
-    | 6
-    | "dialog"
-    | "page"
-    | "iframe"
-    | "loading"
-    | "drawer"
-    | "photos"
-    | "notifiy";
+  | 0
+  | 1
+  | 2
+  | 3
+  | 4
+  | 5
+  | 6
+  | "dialog"
+  | "page"
+  | "iframe"
+  | "loading"
+  | "drawer"
+  | "photos"
+  | "notifiy";
   content?: string | Function | object | VNodeTypes;
   isHtmlFragment?: boolean;
   shade?: boolean | string;
@@ -131,23 +131,23 @@ const props = withDefaults(defineProps<LayerProps>(), {
   resize: false,
   isHtmlFragment: false,
   isOutAnim: true,
-  destroy: () => {},
-  success: () => {},
-  end: () => {},
-  full: () => {},
-  min: () => {},
-  restore: () => {},
+  destroy: () => { },
+  success: () => { },
+  end: () => { },
+  full: () => { },
+  min: () => { },
+  restore: () => { },
   yesText: "确定",
   isFunction: false,
   isMessage: false,
   startIndex: 0,
   imgList: () => [],
   moveOut: false,
-  moveStart: () => {},
-  moving: () => {},
-  moveEnd: () => {},
+  moveStart: () => { },
+  moving: () => { },
+  moveEnd: () => { },
   beforeClose: () => true,
-  close: () => {},
+  close: () => { },
   animDuration: "0.3s",
   teleport: "body",
   teleportDisabled: false,
@@ -309,12 +309,10 @@ const minHandle = () => {
  * <p>
  */
 const reset = function () {
-  if (!first.value) {
-    min.value = false;
-    max.value = false;
-    resetPosition();
-    resetArea();
-  }
+  min.value = false;
+  max.value = false;
+  resetPosition();
+  resetArea();
   if (!props.modelValue) {
     emit("update:modelValue", true);
   }
@@ -729,43 +727,18 @@ defineExpose({ reset, open, close });
 
 <template>
   <Teleport :to="teleport" :disabled="teleportDisabled">
-    <Shade
-      :index="index"
-      :visible="shadeVisible"
-      :opacity="shadeOpacity"
-      :teleport="teleport"
-      :teleportDisabled="teleportDisabled"
-      @shadeClick="shadeHandle"
-    ></Shade>
-    <transition
-      :enter-active-class="enterActiveClass"
-      :leave-active-class="leaveActiveClass"
-    >
-      <div
-        ref="layero"
-        class="layui-layer layui-layer-border"
-        :id="id"
-        :class="boxClasses"
-        :style="styles"
-        v-if="visible"
-      >
+    <Shade :index="index" :visible="shadeVisible" :opacity="shadeOpacity" :teleport="teleport"
+      :teleportDisabled="teleportDisabled" @shadeClick="shadeHandle"></Shade>
+    <transition :enter-active-class="enterActiveClass" :leave-active-class="leaveActiveClass">
+      <div ref="layero" class="layui-layer layui-layer-border" :id="id" :class="boxClasses" :style="styles"
+        v-if="visible">
         <!-- 标题 -->
-        <Title
-          v-if="showTitle"
-          :title="title"
-          :titleStyle="titleStyle"
-          :move="move"
-          @mousedown="setTop"
-        >
+        <Title v-if="showTitle" :title="title" :titleStyle="titleStyle" :move="move" @mousedown="setTop">
           <slot name="title"></slot>
         </Title>
         <!-- 内容 -->
-        <div
-          ref="contentRef"
-          class="layui-layer-content"
-          :class="contentClasses"
-          :style="min === true ? 'display:none' : ''"
-        >
+        <div ref="contentRef" class="layui-layer-content" :class="contentClasses"
+          :style="min === true ? 'display:none' : ''">
           <template v-if="type === 0 || type === 1 || type === 4">
             <i v-if="icon" :class="iconClass"></i>
             <template v-if="slots.default">
@@ -775,57 +748,26 @@ defineExpose({ reset, open, close });
             </template>
             <template v-else>
               <template v-if="isHtmlFragment">
-                <div
-                  class="html-fragment"
-                  v-html="renderContent(props.content)"
-                ></div>
+                <div class="html-fragment" v-html="renderContent(props.content)"></div>
               </template>
               <template v-else>{{ renderContent(props.content) }}</template>
             </template>
           </template>
           <Iframe v-if="type === 2" :src="props.content"></Iframe>
-          <Photos
-            v-if="type === 5"
-            :imgList="props.imgList"
-            :startIndex="props.startIndex"
-            @resetCalculationPohtosArea="resetCalculationPohtosArea"
-          ></Photos>
-          <Notifiy
-            v-if="type === 6"
-            @close="closeHandle"
-            :title="props.title"
-            :content="props.content"
-            :isHtmlFragment="props.isHtmlFragment"
-            :icon="props.icon"
-            :iconClass="iconClass"
-          ></Notifiy>
+          <Photos v-if="type === 5" :imgList="props.imgList" :startIndex="props.startIndex"
+            @resetCalculationPohtosArea="resetCalculationPohtosArea"></Photos>
+          <Notifiy v-if="type === 6" @close="closeHandle" :title="props.title" :content="props.content"
+            :isHtmlFragment="props.isHtmlFragment" :icon="props.icon" :iconClass="iconClass"></Notifiy>
         </div>
         <!-- 工具栏 -->
-        <span
-          class="layui-layer-setwin"
-          v-if="type != 3 && type != 5 && type != 6"
-        >
-          <a
-            v-if="maxmin && !max"
-            class="layui-layer-min"
-            :class="[min ? 'layui-layer-ico layui-layer-maxmin' : '']"
-            href="javascript:;"
-            @click="minHandle"
-          >
+        <span class="layui-layer-setwin" v-if="type != 3 && type != 5 && type != 6">
+          <a v-if="maxmin && !max" class="layui-layer-min" :class="[min ? 'layui-layer-ico layui-layer-maxmin' : '']"
+            href="javascript:;" @click="minHandle">
             <cite v-if="!min"></cite>
           </a>
-          <a
-            v-if="maxmin && !min"
-            class="layui-layer-ico layui-layer-max"
-            :class="[max ? 'layui-layer-maxmin' : '']"
-            href="javascript:;"
-            @click="maxHandle"
-          ></a>
-          <CloseBtn
-            v-if="closeBtn != false"
-            :close-btn="closeBtn"
-            @closeHandle="closeHandle"
-          ></CloseBtn>
+          <a v-if="maxmin && !min" class="layui-layer-ico layui-layer-max" :class="[max ? 'layui-layer-maxmin' : '']"
+            href="javascript:;" @click="maxHandle"></a>
+          <CloseBtn v-if="closeBtn != false" :close-btn="closeBtn" @closeHandle="closeHandle"></CloseBtn>
         </span>
         <!-- 操作栏 -->
         <div :style="min === true ? 'display:none' : ''">
@@ -835,23 +777,15 @@ defineExpose({ reset, open, close });
             </div>
           </template>
           <template v-else>
-            <div
-              v-if="((btn && btn.length > 0) || type === 0) && !isMessage"
-              class="layui-layer-btn"
-              :class="[`layui-layer-btn-${btnAlign}`]"
-            >
+            <div v-if="((btn && btn.length > 0) || type === 0) && !isMessage" class="layui-layer-btn"
+              :class="[`layui-layer-btn-${btnAlign}`]">
               <template v-if="btn && btn.length > 0">
                 <template v-for="(b, index) in btn" :key="index">
-                  <a
-                    :style="b.style"
-                    :class="[
-                      b.class,
-                      `layui-layer-btn${index}`,
-                      { 'layui-layer-btn-disabled': b.disabled },
-                    ]"
-                    @click="!b.disabled && b.callback(id)"
-                    >{{ b.text }}</a
-                  >
+                  <a :style="b.style" :class="[
+                    b.class,
+                    `layui-layer-btn${index}`,
+                    { 'layui-layer-btn-disabled': b.disabled },
+                  ]" @click="!b.disabled && b.callback(id)">{{ b.text }}</a>
                 </template>
               </template>
               <template v-else>
