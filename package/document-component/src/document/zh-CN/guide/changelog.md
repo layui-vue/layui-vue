@@ -19,9 +19,11 @@
         <li>
           <h3>2.7.0 <span class="layui-badge-rim">2023-09-18</span></h3>
           <ul>
+            <li>[新增] select 组件 autoFitWidth 继承属性，来至 dropdown 组件。</li>
             <li>[新增] table 组件 height 属性 % 值的兼容，从而实现高度自适应。</li>
             <li>[修复] table 组件 height 与 maxHeight 只作用到 body 而非整个 table 的问题。</li>
             <li>[优化] table 组件 空 状态水平垂直居中位置显示。</li>
+            <li>[优化] table 组件 page 属性 limits 配置内容省略显示的问题。</li>
           </ul>
         </li>
       </ul>

@@ -6,7 +6,7 @@
 -->
 <template>
   <div class="layui-page-limits">
-    <lay-select v-model="inlimit" placeholder="请选择" :disabled="disabled">
+    <lay-select v-model="inlimit" placeholder="请选择" :disabled="disabled" :autoFitWidth="false">
       <lay-select-option
         :value="option"
         :label="getLabel(option)"
