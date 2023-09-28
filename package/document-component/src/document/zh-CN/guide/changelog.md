@@ -22,8 +22,10 @@
             <li>[新增] select 组件 auto-fit-width 属性, 将下拉面板宽度设置为输入框宽度。</li>
             <li>[新增] table 组件 height 属性 % 值的兼容，从而实现高度自适应。</li>
             <li>[修复] table 组件 height 与 maxHeight 只作用到 body 而非整个 table 的问题。</li>
+            <li>[修复] layer 组件 reset 方法调用报错的问题。</li>
             <li>[优化] table 组件 空 状态水平垂直居中位置显示。</li>
             <li>[优化] table 组件 page 属性 limits 配置内容省略显示的问题。</li>
+            <li>[升级] layer-vue 到 2.0.2 版本。</li>
           </ul>
         </li>
       </ul>
