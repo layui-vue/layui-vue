@@ -25,6 +25,7 @@
             <li>[修复] layer 组件 reset 方法调用报错的问题。</li>
             <li>[优化] table 组件 空 状态水平垂直居中位置显示。</li>
             <li>[优化] table 组件 page 属性 limits 配置内容省略显示的问题。</li>
+            <li>[优化] table 组件 background 背景色为 #ffffff。</li>
             <li>[升级] layer-vue 到 2.0.2 版本。</li>
           </ul>
         </li>
