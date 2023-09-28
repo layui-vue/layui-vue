@@ -930,219 +930,87 @@ defineExpose({ getCheckData });
 </script>
 
 <template>
-    <div ref="tableRef" class="layui-form layui-border-box layui-table-view" :class="classes" :style="{ height: height, maxHeight: maxHeight }">
-      <div v-if="defaultToolbar || slot.toolbar" class="layui-table-tool">
-        <div class="layui-table-tool-temp">
-          <slot name="toolbar"></slot>
-        </div>
-        <div v-if="defaultToolbar" class="layui-table-tool-self">
-          <!-- 筛选 -->
-          <lay-dropdown
-            v-if="showToolbar('filter')"
-            updateAtScroll
-            placement="bottom-end"
-            :style="toolbarStyle('filter')"
-          >
-            <div class="layui-inline" title="筛选" lay-event>
-              <i class="layui-icon layui-icon-slider"></i>
+  <div
+    ref="tableRef"
+    class="layui-form layui-border-box layui-table-view"
+    :class="classes"
+    :style="{ height: height, maxHeight: maxHeight }"
+  >
+    <div v-if="defaultToolbar || slot.toolbar" class="layui-table-tool">
+      <div class="layui-table-tool-temp">
+        <slot name="toolbar"></slot>
+      </div>
+      <div v-if="defaultToolbar" class="layui-table-tool-self">
+        <!-- 筛选 -->
+        <lay-dropdown
+          v-if="showToolbar('filter')"
+          updateAtScroll
+          placement="bottom-end"
+          :style="toolbarStyle('filter')"
+        >
+          <div class="layui-inline" title="筛选" lay-event>
+            <i class="layui-icon layui-icon-slider"></i>
+          </div>
+          <template #content>
+            <div class="layui-table-tool-checkbox">
+              <lay-checkbox
+                v-for="column in tableHeadColumns[0]"
+                v-model="tableColumnKeys"
+                skin="primary"
+                :disabled="column.children"
+                :key="column.key"
+                :value="column.key"
+                >{{ column.title }}</lay-checkbox
+              >
             </div>
-            <template #content>
-              <div class="layui-table-tool-checkbox">
-                <lay-checkbox
-                  v-for="column in tableHeadColumns[0]"
-                  v-model="tableColumnKeys"
-                  skin="primary"
-                  :disabled="column.children"
-                  :key="column.key"
-                  :value="column.key"
-                  >{{ column.title }}</lay-checkbox
-                >
-              </div>
-            </template>
-          </lay-dropdown>
+          </template>
+        </lay-dropdown>
 
-          <!-- 导出 -->
-          <div
-            v-if="showToolbar('export')"
-            class="layui-inline"
-            title="导出"
-            lay-event
-            :style="toolbarStyle('export')"
-            @click="exportData()"
-          >
-            <i class="layui-icon layui-icon-export"></i>
-          </div>
+        <!-- 导出 -->
+        <div
+          v-if="showToolbar('export')"
+          class="layui-inline"
+          title="导出"
+          lay-event
+          :style="toolbarStyle('export')"
+          @click="exportData()"
+        >
+          <i class="layui-icon layui-icon-export"></i>
+        </div>
 
-          <!-- 打印 -->
-          <div
-            v-if="showToolbar('print')"
-            :style="toolbarStyle('print')"
-            class="layui-inline"
-            title="打印"
-            lay-event
-            @click="print()"
-          >
-            <i class="layui-icon layui-icon-print"></i>
-          </div>
+        <!-- 打印 -->
+        <div
+          v-if="showToolbar('print')"
+          :style="toolbarStyle('print')"
+          class="layui-inline"
+          title="打印"
+          lay-event
+          @click="print()"
+        >
+          <i class="layui-icon layui-icon-print"></i>
         </div>
       </div>
+    </div>
 
-      <div class="layui-table-box-header" v-if="slot.header">
-        <slot name="header"></slot>
-      </div>
+    <div class="layui-table-box-header" v-if="slot.header">
+      <slot name="header"></slot>
+    </div>
 
-      <div class="layui-table-box">
-        <!-- 表头 -->
-        <div
-          class="layui-table-header"
-          :style="[{ 'padding-right': `${scrollWidthCell}px` }]"
-        >
-          <div class="layui-table-header-wrapper" ref="tableHeader">
-            <table
-              class="layui-table"
-              :lay-size="size"
-              :lay-skin="skin"
-              ref="tableHeaderTable"
-            >
-              <colgroup>
-                <template v-for="column in tableBodyColumns" :key="column">
-                  <template v-if="tableColumnKeys.includes(column.key)">
-                    <col
-                      :width="column.width"
-                      :style="{
-                        minWidth: column.minWidth ? column.minWidth : '50px',
-                      }"
-                    />
-                  </template>
-                </template>
-              </colgroup>
-              <thead>
-                <template
-                  v-for="(
-                    tableHeadColumn, tableHeadColumnIndex
-                  ) in tableHeadColumns"
-                  :key="tableHeadColumnIndex"
-                >
-                  <tr>
-                    <template
-                      v-for="(column, columnIndex) in tableHeadColumn"
-                      :key="column"
-                    >
-                      <th
-                        v-if="tableColumnKeys.includes(column.key)"
-                        :colspan="column.colspan"
-                        :rowspan="column.rowspan"
-                        class="layui-table-cell"
-                        :class="[
-                          renderFixedClassName(
-                            column,
-                            columnIndex,
-                            tableHeadColumn
-                          ),
-                          column.fixed
-                            ? `layui-table-fixed-${column.fixed}`
-                            : '',
-                          column.type == 'checkbox'
-                            ? 'layui-table-cell-checkbox'
-                            : '',
-                          column.type == 'radio'
-                            ? 'layui-table-cell-radio'
-                            : '',
-                          column.type == 'number'
-                            ? 'layui-table-cell-number'
-                            : '',
-                        ]"
-                        :style="[
-                          {
-                            textAlign: column.align,
-                          },
-                          renderHeadFixedStyle(
-                            column,
-                            columnIndex,
-                            tableHeadColumn,
-                            tableHeadColumnIndex,
-                            tableHeadColumns
-                          ),
-                        ]"
-                      >
-                        <template v-if="column.type == 'checkbox'">
-                          <lay-checkbox
-                            v-model="hasChecked"
-                            :is-indeterminate="!allChecked"
-                            skin="primary"
-                            value="all"
-                            @change="changeAll"
-                          />
-                        </template>
-                        <template v-else>
-                          <span>
-                            <template v-if="column.titleSlot">
-                              <slot :name="column.titleSlot"></slot>
-                            </template>
-                            <template v-else>
-                              {{ column.title }}
-                            </template>
-                          </span>
-                          <!-- 插槽 -->
-                          <span
-                            v-if="column.sort"
-                            class="layui-table-sort layui-inline"
-                            lay-sort
-                          >
-                            <i
-                              @click.stop="sortTable($event, column.key, 'asc')"
-                              class="layui-edge layui-table-sort-asc"
-                              title="升序"
-                            ></i>
-                            <i
-                              @click.stop="
-                                sortTable($event, column.key, 'desc')
-                              "
-                              class="layui-edge layui-table-sort-desc"
-                              title="降序"
-                            ></i>
-                          </span>
-                        </template>
-                        <!-- 列宽拖动区 -->
-                        <div
-                          v-if="props.resize || column.resize"
-                          class="lay-table-cols-resize"
-                          @mousedown="
-                            startResize(
-                              $event,
-                              column,
-                              tableHeaderTable,
-                              tableBodyTable
-                            )
-                          "
-                        ></div>
-                      </th>
-                    </template>
-                  </tr>
-                </template>
-              </thead>
-            </table>
-          </div>
-        </div>
-        <!-- 表身 -->
-        <div
-          class="layui-table-body layui-table-main"
-          :class="{ 'layui-table-body-loading': props.loading }"
-          ref="tableBody"
-        >
+    <div class="layui-table-box">
+      <!-- 表头 -->
+      <div
+        class="layui-table-header"
+        :style="[{ 'padding-right': `${scrollWidthCell}px` }]"
+      >
+        <div class="layui-table-header-wrapper" ref="tableHeader">
           <table
             class="layui-table"
-            v-if="tableDataSource.length > 0 && loading == false"
-            :class="{ 'layui-table-even': props.even }"
             :lay-size="size"
             :lay-skin="skin"
-            ref="tableBodyTable"
+            ref="tableHeaderTable"
           >
             <colgroup>
-              <template
-                v-for="(column, columnIndex) in tableBodyColumns"
-                :key="columnIndex"
-              >
+              <template v-for="column in tableBodyColumns" :key="column">
                 <template v-if="tableColumnKeys.includes(column.key)">
                   <col
                     :width="column.width"
@@ -1153,133 +1021,261 @@ defineExpose({ getCheckData });
                 </template>
               </template>
             </colgroup>
-            <tbody>
-              <!-- 渲染 -->
+            <thead>
               <template
-                v-for="(children, index) in tableDataSource"
-                :key="index"
+                v-for="(
+                  tableHeadColumn, tableHeadColumnIndex
+                ) in tableHeadColumns"
+                :key="tableHeadColumnIndex"
               >
-                <table-data
-                  :id="id"
-                  :index="index"
-                  :data="children"
-                  :page="page"
-                  :columns="tableBodyColumns"
-                  :columnSlotNames="columnSlotNames"
-                  :indent-size="indentSize"
-                  :currentIndentSize="currentIndentSize"
-                  :tableColumnKeys="tableColumnKeys"
-                  :expandSpace="childrenExpandSpace"
-                  :expandIndex="expandIndex"
-                  :cellStyle="cellStyle"
-                  :cellClassName="cellClassName"
-                  :rowStyle="rowStyle"
-                  :rowClassName="rowClassName"
-                  :spanMethod="spanMethod"
-                  :defaultExpandAll="defaultExpandAll"
-                  :getCheckboxProps="getCheckboxProps"
-                  :getRadioProps="getRadioProps"
-                  :childrenColumnName="childrenColumnName"
-                  v-model:expandKeys="tableExpandKeys"
-                  v-model:selectedKeys="tableSelectedKeys"
-                  v-model:selectedKey="tableSelectedKey"
-                  @row="rowClick"
-                  @row-double="rowDoubleClick"
-                  @row-contextmenu="rowContextmenu"
-                >
+                <tr>
                   <template
-                    v-for="name in columnSlotNames"
-                    #[name]="slotProp: {
-                      data: any,
-                      column: any,
-                      row: any,
-                      rowIndex: number,
-                      columnIndex: number,
-                    }"
+                    v-for="(column, columnIndex) in tableHeadColumn"
+                    :key="column"
                   >
-                    <slot
-                      :name="name"
-                      :row="slotProp.data"
-                      :data="slotProp.data"
-                      :column="slotProp.column"
-                      :rowIndex="slotProp.rowIndex"
-                      :columnIndex="slotProp.columnIndex"
-                    >
-                    </slot>
-                  </template>
-                  <template
-                    v-if="slot.expand"
-                    #expand="slotProp: { data: any, row: any }"
-                  >
-                    <slot
-                      name="expand"
-                      :data="slotProp.data"
-                      :row="slotProp.row"
-                    ></slot>
-                  </template>
-                </table-data>
-              </template>
-              <tr v-if="hasTotalRow" class="layui-table-total">
-                <template
-                  v-for="(column, columnIndex) in columns"
-                  :key="columnIndex"
-                >
-                  <template v-if="tableColumnKeys.includes(column.key)">
-                    <td
+                    <th
+                      v-if="tableColumnKeys.includes(column.key)"
+                      :colspan="column.colspan"
+                      :rowspan="column.rowspan"
+                      class="layui-table-cell"
+                      :class="[
+                        renderFixedClassName(
+                          column,
+                          columnIndex,
+                          tableHeadColumn
+                        ),
+                        column.fixed ? `layui-table-fixed-${column.fixed}` : '',
+                        column.type == 'checkbox'
+                          ? 'layui-table-cell-checkbox'
+                          : '',
+                        column.type == 'radio' ? 'layui-table-cell-radio' : '',
+                        column.type == 'number'
+                          ? 'layui-table-cell-number'
+                          : '',
+                      ]"
                       :style="[
                         {
                           textAlign: column.align,
-                          whiteSpace: column.ellipsisTooltip
-                            ? 'nowrap'
-                            : 'normal',
                         },
-                        renderFixedStyle(column, columnIndex),
+                        renderHeadFixedStyle(
+                          column,
+                          columnIndex,
+                          tableHeadColumn,
+                          tableHeadColumnIndex,
+                          tableHeadColumns
+                        ),
                       ]"
-                      :class="[
-                        'layui-table-cell',
-                        renderFixedClassName(column, columnIndex, columns),
-                        column.fixed ? `layui-table-fixed-${column.fixed}` : '',
-                      ]"
-                      v-html="renderTotalRowCell(column)"
-                    ></td>
+                    >
+                      <template v-if="column.type == 'checkbox'">
+                        <lay-checkbox
+                          v-model="hasChecked"
+                          :is-indeterminate="!allChecked"
+                          skin="primary"
+                          value="all"
+                          @change="changeAll"
+                        />
+                      </template>
+                      <template v-else>
+                        <span>
+                          <template v-if="column.titleSlot">
+                            <slot :name="column.titleSlot"></slot>
+                          </template>
+                          <template v-else>
+                            {{ column.title }}
+                          </template>
+                        </span>
+                        <!-- 插槽 -->
+                        <span
+                          v-if="column.sort"
+                          class="layui-table-sort layui-inline"
+                          lay-sort
+                        >
+                          <i
+                            @click.stop="sortTable($event, column.key, 'asc')"
+                            class="layui-edge layui-table-sort-asc"
+                            title="升序"
+                          ></i>
+                          <i
+                            @click.stop="sortTable($event, column.key, 'desc')"
+                            class="layui-edge layui-table-sort-desc"
+                            title="降序"
+                          ></i>
+                        </span>
+                      </template>
+                      <!-- 列宽拖动区 -->
+                      <div
+                        v-if="props.resize || column.resize"
+                        class="lay-table-cols-resize"
+                        @mousedown="
+                          startResize(
+                            $event,
+                            column,
+                            tableHeaderTable,
+                            tableBodyTable
+                          )
+                        "
+                      ></div>
+                    </th>
                   </template>
-                </template>
-              </tr>
-            </tbody>
+                </tr>
+              </template>
+            </thead>
           </table>
-          <template v-if="tableDataSource.length == 0 && loading == false">
-            <lay-empty></lay-empty>
-            <div :style="{ width: tableBodyEmptyWidth }"></div>
-          </template>
-          <template v-if="loading == true">
-            <!-- 根据 table 实际高度，设置 loading 位置 -->
-            <div class="layui-table-loading">
-              <i
-                class="layui-icon-loading layui-icon layui-anim layui-anim-rotate layui-anim-loop"
-              ></i>
-            </div>
-          </template>
-        </div>
-        <div class="layui-table-footer" v-if="slot.footer">
-          <slot name="footer"></slot>
         </div>
       </div>
-      <div v-if="page && page.total > 0" class="layui-table-page">
-        <table-page
-          :total="page.total"
-          :pages="page.pages"
-          :theme="page.theme"
-          :limits="page.limits"
-          :showSkip="page.showSkip"
-          :show-page="page.showPage"
-          :showRefresh="page.showRefresh"
-          :showLimit="page.showLimit"
-          :showCount="page.showCount"
-          v-model:current="page.current"
-          v-model:limit="page.limit"
-          @change="change"
+      <!-- 表身 -->
+      <div
+        class="layui-table-body layui-table-main"
+        :class="{ 'layui-table-body-loading': props.loading }"
+        ref="tableBody"
+      >
+        <table
+          class="layui-table"
+          v-if="tableDataSource.length > 0 && loading == false"
+          :class="{ 'layui-table-even': props.even }"
+          :lay-size="size"
+          :lay-skin="skin"
+          ref="tableBodyTable"
         >
-        </table-page>
+          <colgroup>
+            <template
+              v-for="(column, columnIndex) in tableBodyColumns"
+              :key="columnIndex"
+            >
+              <template v-if="tableColumnKeys.includes(column.key)">
+                <col
+                  :width="column.width"
+                  :style="{
+                    minWidth: column.minWidth ? column.minWidth : '50px',
+                  }"
+                />
+              </template>
+            </template>
+          </colgroup>
+          <tbody>
+            <!-- 渲染 -->
+            <template v-for="(children, index) in tableDataSource" :key="index">
+              <table-data
+                :id="id"
+                :index="index"
+                :data="children"
+                :page="page"
+                :columns="tableBodyColumns"
+                :columnSlotNames="columnSlotNames"
+                :indent-size="indentSize"
+                :currentIndentSize="currentIndentSize"
+                :tableColumnKeys="tableColumnKeys"
+                :expandSpace="childrenExpandSpace"
+                :expandIndex="expandIndex"
+                :cellStyle="cellStyle"
+                :cellClassName="cellClassName"
+                :rowStyle="rowStyle"
+                :rowClassName="rowClassName"
+                :spanMethod="spanMethod"
+                :defaultExpandAll="defaultExpandAll"
+                :getCheckboxProps="getCheckboxProps"
+                :getRadioProps="getRadioProps"
+                :childrenColumnName="childrenColumnName"
+                v-model:expandKeys="tableExpandKeys"
+                v-model:selectedKeys="tableSelectedKeys"
+                v-model:selectedKey="tableSelectedKey"
+                @row="rowClick"
+                @row-double="rowDoubleClick"
+                @row-contextmenu="rowContextmenu"
+              >
+                <template
+                  v-for="name in columnSlotNames"
+                  #[name]="slotProp: {
+                    data: any,
+                    column: any,
+                    row: any,
+                    rowIndex: number,
+                    columnIndex: number,
+                  }"
+                >
+                  <slot
+                    :name="name"
+                    :row="slotProp.data"
+                    :data="slotProp.data"
+                    :column="slotProp.column"
+                    :rowIndex="slotProp.rowIndex"
+                    :columnIndex="slotProp.columnIndex"
+                  >
+                  </slot>
+                </template>
+                <template
+                  v-if="slot.expand"
+                  #expand="slotProp: { data: any, row: any }"
+                >
+                  <slot
+                    name="expand"
+                    :data="slotProp.data"
+                    :row="slotProp.row"
+                  ></slot>
+                </template>
+              </table-data>
+            </template>
+            <tr v-if="hasTotalRow" class="layui-table-total">
+              <template
+                v-for="(column, columnIndex) in columns"
+                :key="columnIndex"
+              >
+                <template v-if="tableColumnKeys.includes(column.key)">
+                  <td
+                    :style="[
+                      {
+                        textAlign: column.align,
+                        whiteSpace: column.ellipsisTooltip
+                          ? 'nowrap'
+                          : 'normal',
+                      },
+                      renderFixedStyle(column, columnIndex),
+                    ]"
+                    :class="[
+                      'layui-table-cell',
+                      renderFixedClassName(column, columnIndex, columns),
+                      column.fixed ? `layui-table-fixed-${column.fixed}` : '',
+                    ]"
+                    v-html="renderTotalRowCell(column)"
+                  ></td>
+                </template>
+              </template>
+            </tr>
+          </tbody>
+        </table>
+        <template v-if="tableDataSource.length == 0 && loading == false">
+          <lay-empty></lay-empty>
+          <div :style="{ width: tableBodyEmptyWidth }"></div>
+        </template>
+        <template v-if="loading == true">
+          <!-- 根据 table 实际高度，设置 loading 位置 -->
+          <div class="layui-table-loading">
+            <i
+              class="layui-icon-loading layui-icon layui-anim layui-anim-rotate layui-anim-loop"
+            ></i>
+          </div>
+        </template>
+      </div>
+      <div class="layui-table-footer" v-if="slot.footer">
+        <slot name="footer"></slot>
       </div>
     </div>
+    <div v-if="page && page.total > 0" class="layui-table-page">
+      <table-page
+        :total="page.total"
+        :pages="page.pages"
+        :theme="page.theme"
+        :limits="page.limits"
+        :showSkip="page.showSkip"
+        :show-page="page.showPage"
+        :showRefresh="page.showRefresh"
+        :showLimit="page.showLimit"
+        :showCount="page.showCount"
+        v-model:current="page.current"
+        v-model:limit="page.limit"
+        @change="change"
+      >
+      </table-page>
+    </div>
+  </div>
 </template>
