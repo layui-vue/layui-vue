@@ -5,11 +5,9 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { Ref, ref } from "vue";
-import { on, off } from "evtd";
+import {useSlots} from 'vue'
 import LayTooltip from "../tooltip/index.vue";
-import { handle_select, makeDots } from "./utils/index";
-
+import { useSlider } from "./useSlider";
 export interface StandardProps {
   val?: number | Array<number>;
   disabled?: boolean;
@@ -17,6 +15,8 @@ export interface StandardProps {
   min?: number;
   max?: number;
   showDots?: boolean;
+  isDark?: boolean;
+  formatTooltip?: Function | null;
 }
 
 const props = withDefaults(defineProps<StandardProps>(), {
@@ -26,89 +26,41 @@ const props = withDefaults(defineProps<StandardProps>(), {
   min: 0,
   max: 100,
   showDots: false,
+  isDark: false,
 });
-
-function handle_mouseup() {
-  off("selectstart", document, handle_select);
-  off("mouseup", window, handle_mouseup);
-  off("mousemove", window, standardMove);
-  tooptipHide.value = true;
-}
-
-function handle_mousedown() {
-  on("selectstart", window, handle_select, { once: true });
-  on("mouseup", window, handle_mouseup);
-  on("mousemove", window, standardMove);
-}
-
-const tracker = ref<HTMLElement | null>(null);
-let standard_style: Ref<number> = ref<number>(props.val as number);
+const slot = useSlots()
 const emit = defineEmits(["link-val-hook"]);
-const tooptipHide = ref<boolean>(true);
-
-function standardMove(e: MouseEvent) {
-  tooptipHide.value = false;
-  if (!tracker.value) {
-    return;
-  }
-  let tracker_rect = tracker.value.getBoundingClientRect();
-  let origin_left = tracker_rect.left;
-  let point_left = e.clientX;
-  let distance = point_left - origin_left;
-  if (distance < 0) {
-    standard_style.value = props.min;
-  } else {
-    let rate =
-      props.min + (distance / tracker_rect.width) * (props.max - props.min);
-    calcWithStep(rate, standard_style);
-    if (standard_style.value > props.max) {
-      standard_style.value = props.max;
-    }
-  }
-  emit("link-val-hook", standard_style.value);
-}
-
-function calcWithStep(
-  rate: number | undefined,
-  val: Ref<number> | Ref<number[]>
-) {
-  if (typeof rate === "undefined") return false;
-
-  if (typeof val.value === "number") {
-    let r = rate - val.value;
-    if (Math.abs(r) < props.step) {
-      return false;
-    }
-
-    if (props.step === 0) val.value = Math.floor(rate);
-
-    if (r < 0 && props.step !== 0) {
-      val.value -= props.step;
-    } else {
-      val.value += props.step;
-    }
-  }
-}
-// 断点
-const dots = makeDots(props);
-const focusDot = (val: number) => {
-  emit("link-val-hook", val);
-};
+const {
+  sliderClick,
+  focusDot,
+  isDark,
+  handle_mousedown,
+  dots,
+  tooltipRefEl,
+  tooptipHide,
+  tracker,
+  formatValue,
+} = useSlider(props, emit);
 </script>
 
 <template>
   <div
     ref="tracker"
-    @mousedown.stop="handle_mousedown"
+    @mousedown="sliderClick"
+    @touchstart="sliderClick"
     class="layui-slider-track-v"
     :class="[disabled ? 'layui-slider-disabled' : '']"
   >
-    <lay-tooltip :content="'' + val" :is-can-hide="tooptipHide">
+    <lay-tooltip :isDark="isDark" ref="tooltipRefEl" :is-can-hide="tooptipHide">
       <div
         :style="{ left: ((val as number - props.min) / (props.max - props.min)) * 100 + '%' }"
         class="layui-slider-btn-v"
+        @mousedown="handle_mousedown"
         :class="[disabled ? 'layui-slider-disabled disable-btn' : '']"
       ></div>
+      <template #content>
+        {{ formatValue }}
+      </template>
     </lay-tooltip>
 
     <div
@@ -117,7 +69,6 @@ const focusDot = (val: number) => {
       :class="[disabled ? 'layui-slider-disabled disable-line' : '']"
     ></div>
     <div class="layui-slider-line-v"></div>
-
     <div
       v-show="showDots"
       @click="focusDot(item)"

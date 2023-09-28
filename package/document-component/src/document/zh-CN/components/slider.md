@@ -59,6 +59,61 @@ export default {
 
 :::
 
+::: title toolTip 主题
+:::
+::: demo
+
+<template>
+  <lay-slider :is-dark="true" v-model="value2"></lay-slider>
+  {{ value2 }}
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+
+    const value2 = ref(50)
+
+    return {
+        value2
+    }
+  }
+}
+</script>
+
+:::
+
+::: title 格式化弹出提示
+:::
+::: demo
+
+<template>
+  <lay-slider  v-model="value2" :format-tooltip="formatTooltip">
+  </lay-slider>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+    const value2 = ref(50)
+    const formatTooltip = (val) => {
+      console.log(val, 22212)
+      return val / 100
+    }
+    return {
+      value2,
+      formatTooltip
+    }
+  }
+}
+</script>
+
+:::
+
 ::: title 横向区间
 :::
 
@@ -80,6 +135,7 @@ export default {
   }
 }
 </script>
+
 :::
 
 ::: title 纵向区间
@@ -103,6 +159,7 @@ export default {
   }
 }
 </script>
+
 :::
 
 ::: title Slider 属性
@@ -110,16 +167,22 @@ export default {
 
 ::: table
 
-| 属性          |         描述          |             类型          |     可选值      |   默认值 |
-| ------------ | --------------------- | ------------------------- | -------------- | -------- |
-| v-model      | 选中值                | `Number`  |        -       |    -    |
-| vertical  |  是否垂直     | `Boolean`                   |        -       |    -    |
-| range  |  是否区间     | `Boolean`                   |        -       |    -    |
-| rangeValue  |  区间值     | `Array`                   |        -       |    -    |
-| step  |  步长     | `Number`                   |        -       |    -    |
-| min  |  最小值     | `Number`                   |        -       |    -    |
-| max  |  最大值     | `Number`                   |        -       |    -    |
-| showDots  |  是否显示断点     | `Boolean`                   |        -       |    false    |
+| 属性       | 描述         | 类型      | 可选值 | 默认值 |
+| ---------- | ------------ | --------- | ------ | ------ |
+| v-model    | 选中值       | `Number`  | -      | -      |
+| vertical   | 是否垂直     | `Boolean` | -      | -      |
+| range      | 是否区间     | `Boolean` | -      | -      |
+| rangeValue | 区间值       | `Array`   | -      | -      |
+| step       | 步长         | `Number`  | -      | -      |
+| min        | 最小值       | `Number`  | -      | -      |
+| max        | 最大值       | `Number`  | -      | -      |
+| showDots   | 是否显示断点 | `Boolean` | -      | false  |
+| is-dark   | 和 tootip组件主题一致    | `Boolean` | -      | false  |
+| format-tooltip	  | 格式化提示信息	    | `function(value)` | -      | -  |
+
+
+
+
 :::
 
 ::: previousNext slider
