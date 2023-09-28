@@ -13,10 +13,11 @@
 ::: demo 所有示例中演示的数据均为「静态模拟数据」，实际使用时换成您的真实接口即可。
 
 <template>
-  <lay-table 
+<div style="height: 800px;">
+ <lay-table 
       :page="page" 
       :resize="true"
-      :height="'300px'"
+      :height="'100%'"
       :columns="columns" 
       :loading="loading"
       :default-toolbar="true"
@@ -36,6 +37,7 @@
       <lay-button size="xs">查看</lay-button>
     </template>
   </lay-table>
+</div>
 </template>
 
 <script>

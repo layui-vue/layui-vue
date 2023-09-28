@@ -930,8 +930,7 @@ defineExpose({ getCheckData });
 </script>
 
 <template>
-  <div ref="tableRef">
-    <div class="layui-form layui-border-box layui-table-view" :class="classes">
+    <div ref="tableRef" class="layui-form layui-border-box layui-table-view" :class="classes" :style="{ height: height, maxHeight: maxHeight }">
       <div v-if="defaultToolbar || slot.toolbar" class="layui-table-tool">
         <div class="layui-table-tool-temp">
           <slot name="toolbar"></slot>
@@ -1129,7 +1128,6 @@ defineExpose({ getCheckData });
         <div
           class="layui-table-body layui-table-main"
           :class="{ 'layui-table-body-loading': props.loading }"
-          :style="{ height: height, maxHeight: maxHeight }"
           ref="tableBody"
         >
           <table
@@ -1284,5 +1282,4 @@ defineExpose({ getCheckData });
         </table-page>
       </div>
     </div>
-  </div>
 </template>
