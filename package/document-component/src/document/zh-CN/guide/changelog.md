@@ -21,6 +21,7 @@
           <ul>
             <li>[新增] table 组件 height 属性 % 值的兼容，从而实现高度自适应。</li>
             <li>[修复] table 组件 height 与 maxHeight 只作用到 body 而非整个 table 的问题。</li>
+            <li>[优化] table 组件 空 状态水平垂直居中位置显示。</li>
           </ul>
         </li>
       </ul>

@@ -330,8 +330,6 @@ watch(
   () => props.dataSource,
   () => {
     tableDataSource.value = [...props.dataSource];
-    // tableSelectedKeys.value = [];
-    // tableSelectedKey.value = s;
   },
   { deep: true }
 );
