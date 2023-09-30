@@ -173,7 +173,6 @@ export const useSlider = (props: any, emit: any) => {
 
     }
     await nextTick()
-    console
     tooltipRefEl2?.value?.update()
     tooltipRefEl.value!.update()
   }
