@@ -1,7 +1,7 @@
 /*
  * @Author: baobaobao
  * @Date: 2023-09-28 12:54:28
- * @LastEditTime: 2023-09-30 16:04:04
+ * @LastEditTime: 2023-09-30 16:15:34
  * @LastEditors: baobaobao
  */
 import { Ref, computed, ref, useSlots, watch, shallowRef, nextTick, getCurrentInstance, toRef } from "vue";
@@ -173,7 +173,8 @@ export const useSlider = (props: any, emit: any) => {
 
     }
     await nextTick()
-    tooltipRefEl2.value!.update()
+    console
+    tooltipRefEl2?.value?.update()
     tooltipRefEl.value!.update()
   }
   const focusDot = (val: number) => {
