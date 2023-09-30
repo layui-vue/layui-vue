@@ -16,6 +16,7 @@ export interface VerticalRangeProps {
   max?: number;
   showDots?: boolean;
   isDark?: boolean;
+  vertical?: boolean;
   formatTooltip?: Function | null;
 }
 
@@ -26,6 +27,7 @@ const props = withDefaults(defineProps<VerticalRangeProps>(), {
   disabled: false,
   showDots: false,
   isDark: false,
+  vertical: true
 });
 
 const emit = defineEmits(["link-val-hook"]);
@@ -38,10 +40,12 @@ const {
   handle_mousedown,
   dots,
   tooltipRefEl,
+  tooltipRefEl2,
   tooptipHide,
   tracker,
   formatRangeValue,
 } = useSlider(props, emit);
+console.log(rv)
 </script>
 
 <template>
@@ -73,7 +77,7 @@ const {
 
       <lay-tooltip
         :isDark="!isDark"
-        ref="tooltipRefEl"
+        ref="tooltipRefEl2"
         :is-can-hide="tooptipHide"
       >
         <div

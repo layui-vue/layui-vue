@@ -1,7 +1,7 @@
 /*
  * @Author: baobaobao
  * @Date: 2023-09-28 12:54:28
- * @LastEditTime: 2023-09-28 17:49:06
+ * @LastEditTime: 2023-09-30 16:04:04
  * @LastEditors: baobaobao
  */
 import { Ref, computed, ref, useSlots, watch, shallowRef, nextTick, getCurrentInstance, toRef } from "vue";
@@ -13,6 +13,7 @@ export const useSlider = (props: any, emit: any) => {
   const tooptipHide = ref<boolean>(true);
   const tracker = ref<HTMLElement | null>(null);
   const tooltipRefEl = shallowRef<any>(undefined);
+  const tooltipRefEl2 = shallowRef<any>(undefined);
   let rv = toRef(props, "rangeValue");
   const isDark = ref(props.isDark)
   const IS_FORMATFN = computed(() => props.formatTooltip instanceof Function)
@@ -115,19 +116,16 @@ export const useSlider = (props: any, emit: any) => {
     let point_position = e.clientX;
 
     let distance = point_position - origin_position;
-    if (props.vertical) {
-      origin_position = tracker_rect.bottom
-      point_position = e.clientY;
-      distance = (point_position - origin_position) * -1
-    }
-
-    if (props.range) {
+    if (props.rangeValue) {
       if (distance < 0) {
         rv.value[0] = props.min;
       } else {
         let rate =
           props.min + (distance / tracker_rect.width) * (props.max - props.min);
         if (props.vertical) {
+          origin_position = tracker_rect.bottom
+          point_position = e.clientY;
+          distance = (point_position - origin_position) * -1;
           rate =
             props.min + (distance / tracker_rect.height) * (props.max - props.min);
         }
@@ -146,28 +144,40 @@ export const useSlider = (props: any, emit: any) => {
           rv.value[0] = props.min;
         }
       }
-      return
-    }
-
-    if (distance < 0) {
-      standard_style.value = props.min;
     } else {
-      let rate =
-        props.min + (distance / tracker_rect.width) * (props.max - props.min);
       if (props.vertical) {
-        rate = props.min + (distance / tracker_rect.height) * (props.max - props.min);
+        origin_position = tracker_rect.bottom
+        point_position = e.clientY;
+        distance = (point_position - origin_position) * -1
       }
-      calcWithStep(rate, standard_style);
-      if (standard_style.value > props.max) {
-        standard_style.value = props.max;
-      }
+
+
+      if (distance < 0) {
+        standard_style.value = props.min;
+      } else {
+        let rate =
+          props.min + (distance / tracker_rect.width) * (props.max - props.min);
+        if (props.vertical) {
+          rate = props.min + (distance / tracker_rect.height) * (props.max - props.min);
+        }
+        calcWithStep(rate, standard_style);
+        if (standard_style.value > props.max) {
+          standard_style.value = props.max;
+        }
+      } 
     }
-    emit("link-val-hook", standard_style.value, tracker);
+    if (props.rangeValue) {
+      emit("link-val-hook", rv.value);
+    }  else {
+      emit("link-val-hook", standard_style.value, tracker);
+
+    }
     await nextTick()
+    tooltipRefEl2.value!.update()
     tooltipRefEl.value!.update()
   }
   const focusDot = (val: number) => {
-    if (props.range) {
+    if (props.rangeValue) {
       let currbtn = moveNeighbors(val, rv);
       rv.value[currbtn] = val;
       emit("link-val-hook", rv.value);
@@ -206,6 +216,7 @@ export const useSlider = (props: any, emit: any) => {
     focusDot,
     rv,
     formatRangeValue,
-    isDark
+    isDark,
+    tooltipRefEl2
   }
 }

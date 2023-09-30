@@ -39,8 +39,6 @@ const props = withDefaults(defineProps<SliderProps>(), {
   isDark: false,
 });
 let rangeValues: Ref<number[]> | any = toRef(props, "rangeValue");
-const slot = useSlots()
-console.log(slot)
 function valHook(val: any) {
   emit("update:modelValue", val);
 }

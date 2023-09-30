@@ -16,6 +16,7 @@ export interface StandardRangeProps {
   max?: number;
   showDots?: boolean;
   isDark?: boolean;
+  vertical?: boolean;
   formatTooltip?: Function | null;
 }
 
@@ -26,6 +27,7 @@ const props = withDefaults(defineProps<StandardRangeProps>(), {
   disabled: false,
   showDots: true,
   isDark: false,
+  vertical: false
 });
 
 const emit = defineEmits(["link-val-hook"]);
@@ -37,6 +39,7 @@ const {
   handle_mousedown,
   dots,
   tooltipRefEl,
+  tooltipRefEl2,
   tooptipHide,
   tracker,
   formatRangeValue,
@@ -71,7 +74,7 @@ const {
 
     <lay-tooltip
       :isDark="!isDark"
-      ref="tooltipRefEl"
+      ref="tooltipRefEl2"
       :is-can-hide="tooptipHide"
     >
       <div
