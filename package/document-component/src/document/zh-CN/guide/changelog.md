@@ -17,7 +17,7 @@
       <ul>
         <a name="2-7-0"></a>
         <li>
-          <h3>2.7.0 <span class="layui-badge-rim">2023-09-18</span></h3>
+          <h3>2.7.0 <span class="layui-badge-rim">2023-09-30</span></h3>
           <ul>
             <li>[新增] select 组件 auto-fit-width 属性, 将下拉面板宽度设置为输入框宽度。</li>
             <li>[新增] table 组件 height 属性 % 值的兼容，从而实现高度自适应。</li>
