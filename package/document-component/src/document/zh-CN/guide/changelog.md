@@ -15,6 +15,18 @@
   <lay-timeline>
      <lay-timeline-item title="2.7.x">
       <ul>
+        <a name="2-7-1"></a>
+        <li>
+          <h3>2.7.1 <span class="layui-badge-rim">2023-10-07</span></h3>
+          <ul>
+            <li>[新增] table 组件 page 属性 layout 配置。</li>
+            <li>[新增] table 组件 page 属性 hide-on-single-page 配置。</li>
+            <li>[新增] table 组件 page 属性 ellipsisTooltip 配置。</li>
+            <li>[新增] table 组件 page 属性 disabled 配置。</li>
+          </ul>
+        </li>
+      </ul>
+      <ul>
         <a name="2-7-0"></a>
         <li>
           <h3>2.7.0 <span class="layui-badge-rim">2023-09-30</span></h3>
