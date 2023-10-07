@@ -13,7 +13,48 @@
 ::: demo
 <template>
   <lay-timeline>
+     <lay-timeline-item title="2.7.x">
+      <ul>
+        <a name="2-7-1"></a>
+        <li>
+          <h3>2.7.1 <span class="layui-badge-rim">2023-10-07</span></h3>
+          <ul>
+            <li>[新增] table 组件 page 属性 layout 配置。</li>
+            <li>[新增] table 组件 page 属性 hide-on-single-page 配置。</li>
+            <li>[新增] table 组件 page 属性 ellipsisTooltip 配置。</li>
+            <li>[新增] table 组件 page 属性 disabled 配置。</li>
+          </ul>
+        </li>
+      </ul>
+      <ul>
+        <a name="2-7-0"></a>
+        <li>
+          <h3>2.7.0 <span class="layui-badge-rim">2023-09-30</span></h3>
+          <ul>
+            <li>[新增] select 组件 auto-fit-width 属性, 将下拉面板宽度设置为输入框宽度。</li>
+            <li>[新增] table 组件 height 属性 % 值的兼容，从而实现高度自适应。</li>
+            <li>[修复] table 组件 height 与 maxHeight 只作用到 body 而非整个 table 的问题。</li>
+            <li>[修复] layer 组件 reset 方法调用报错的问题。</li>
+            <li>[优化] table 组件 空 状态水平垂直居中位置显示。</li>
+            <li>[优化] table 组件 page 属性 limits 配置内容省略显示的问题。</li>
+            <li>[优化] table 组件 background 背景色为 #ffffff。</li>
+            <li>[升级] layer-vue 到 2.0.2 版本。</li>
+          </ul>
+        </li>
+      </ul>
+    </lay-timeline-item>
     <lay-timeline-item title="2.6.x">
+      <ul>
+        <a name="2-6-4"></a>
+        <li>
+          <h3>2.6.4 <span class="layui-badge-rim">2023-09-26</span></h3>
+          <ul>
+            <li>[新增] table 组件 ellipsisTooltipTheme 属性，自定义 ellipsisTooltip 主题，默认为 'light'。</li>
+            <li>[修复] layer 组件 关闭 时，未移除 minArrays 中的弹层实例。</li>
+            <li>[升级] layer-vue 到 2.0.1 版本。</li>
+          </ul>
+        </li>
+      </ul>
       <ul>
         <a name="2-6-3"></a>
         <li>

@@ -11,6 +11,9 @@
 
 .layui-table-view {
   border-radius: var(--table-border-radius);
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
   overflow: hidden;
 }
 
@@ -23,6 +26,7 @@
 
 .layui-table-body .layui-empty {
   left: 0px;
+  height: 100%;
   position: sticky;
   margin: 0px;
   padding: 20px;
@@ -140,6 +144,9 @@
 .layui-table-box {
   position: relative;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }
 
 .layui-table-view .layui-table {
@@ -216,6 +223,7 @@
 .layui-table-header {
   border-width: 0 0 1px;
   overflow: hidden;
+  flex-shrink: 0;
 }
 
 .layui-table-header-wrapper {
@@ -423,6 +431,7 @@
 .layui-table-body {
   position: relative;
   overflow: auto;
+  flex-grow: 1;
   margin-bottom: -1px;
   transition:all 0.1s ease-in-out;
 }
@@ -540,6 +549,7 @@
 .layui-table-page {
   position: relative;
   width: 100%;
+  flex-shrink: 0;
   padding: 7px 7px 0;
   height: 41px;
   font-size: 12px;

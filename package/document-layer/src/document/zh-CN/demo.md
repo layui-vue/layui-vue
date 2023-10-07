@@ -772,6 +772,7 @@ const NotifiyInfo=function(){
     <button @click="open">打开</button>
     <button @click="close">销毁</button>
     <button @click="closeAll">销毁全部</button>
+    <button @click="reset">重置</button>
 </template>
 
 <script setup>
@@ -783,6 +784,7 @@ const open = function() {
     id = layer.open({
         title: "标题",
         content: "内容",
+        resize: true,
         shade: false
     })
 }
@@ -793,6 +795,10 @@ const close = function() {
 
 const closeAll = function() {
     layer.closeAll();
+}
+
+const reset = function() {
+    layer.reset(id);
 }
 </script>
 :::
@@ -1166,6 +1172,7 @@ const changeFeatureVisible8 = function() {
     layer.open({
         title: "标题",
         content: "内容",
+        maxmin: true,
         teleport: "#container",
     });
 }

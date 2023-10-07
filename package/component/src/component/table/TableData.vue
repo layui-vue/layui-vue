@@ -523,7 +523,13 @@ const checkboxProps = props.getCheckboxProps(props.data, props.index);
                   @click="handleExpand"
                 ></lay-icon>
 
-                <lay-tooltip v-if="column.ellipsisTooltip" :isAutoShow="true">
+                <lay-tooltip
+                  v-if="column.ellipsisTooltip"
+                  :isAutoShow="true"
+                  :isDark="
+                    column.ellipsisTooltipTheme === 'dark' ? true : false
+                  "
+                >
                   <slot
                     :row="data"
                     :data="data"
@@ -615,6 +621,9 @@ const checkboxProps = props.getCheckboxProps(props.data, props.index);
                 <lay-tooltip
                   v-if="column.ellipsisTooltip"
                   :content="data[column.key]"
+                  :isDark="
+                    column.ellipsisTooltipTheme === 'dark' ? true : false
+                  "
                   :isAutoShow="true"
                 >
                   {{ data[column.key] }}

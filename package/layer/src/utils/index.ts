@@ -1,4 +1,3 @@
-import { doc } from "prettier";
 import { layer } from "../index";
 
 // 随机数

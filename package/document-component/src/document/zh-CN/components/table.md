@@ -13,10 +13,11 @@
 ::: demo 所有示例中演示的数据均为「静态模拟数据」，实际使用时换成您的真实接口即可。
 
 <template>
-  <lay-table 
+<div style="height: 800px;">
+ <lay-table 
       :page="page" 
       :resize="true"
-      :height="'300px'"
+      :height="'100%'"
       :columns="columns" 
       :loading="loading"
       :default-toolbar="true"
@@ -36,6 +37,7 @@
       <lay-button size="xs">查看</lay-button>
     </template>
   </lay-table>
+</div>
 </template>
 
 <script>
@@ -1019,7 +1021,8 @@ export default {
 | sort            | 排序                           | --        | --      | --                          | --      |
 | titleSlot       | 标题插槽                       | --        | --      | --                          | --      |
 | align           | 对齐方式                       | `string`  | `left`  | `left` `right` `center`     | --      |
-| ellipsisTooltip | 当内容过长被隐藏时显示 tooltip | `boolean` | `false` | `true` `false`              | --      |
+| ellipsisTooltip | 当内容过长被隐藏时显示 tooltip  | `boolean` | `false` | `true` `false`              | --      |
+| ellipsisTooltipTheme | tooltip 主题              | `string`  | `light` | `dark` `light`              | --      |
 | fixed           | 列固定                         | `string`  | --      | `left` `right`              | --      |
 | type            | 列类型                         | `string`  | --      | `number` `checkbox` `radio` | --      |
 | children        | 表头分组                       | `string`  | --      | `number` `checkbox` `radio` | `1.4.0` |

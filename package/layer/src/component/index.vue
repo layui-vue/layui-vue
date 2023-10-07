@@ -309,12 +309,10 @@ const minHandle = () => {
  * <p>
  */
 const reset = function () {
-  if (!first.value) {
-    min.value = false;
-    max.value = false;
-    resetPosition();
-    resetArea();
-  }
+  min.value = false;
+  max.value = false;
+  resetPosition();
+  resetArea();
   if (!props.modelValue) {
     emit("update:modelValue", true);
   }
@@ -478,6 +476,9 @@ const closeHandle = () => {
       if (type === 6) {
         // @ts-ignore
         removeNotifiyFromQueen(props.id);
+      }
+      if (min.value) {
+        updateMinArrays(id.value, !min.value);
       }
     }
   }

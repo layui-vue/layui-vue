@@ -221,7 +221,6 @@ const layer = {
   // 关闭弹出层
   close: (id: any) => {
     if (id != null && isExist(id)) {
-      // 找到这个实例
       const instance: any = findById(id);
       instance.modalInstance.component?.exposed?.close();
       setTimeout(() => {
@@ -247,8 +246,11 @@ const layer = {
     cleanInstance();
   },
   // 重置位置
-  reset: (instance: any) => {
-    instance.modalInstance.component?.exposed?.reset();
+  reset: (id: any) => {
+    if (id != null && isExist(id)) {
+      const instance: any = findById(id);
+      instance.modalInstance.component?.exposed?.reset();
+    }
   },
 };
 
