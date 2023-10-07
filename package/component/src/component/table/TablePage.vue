@@ -8,19 +8,34 @@ export default {
 import { LayIcon } from "@layui/icons-vue";
 import LayPage from "../page/index.vue";
 import { computed, WritableComputedRef } from "vue";
+
+export type LayoutKey =
+  | "count"
+  | "prev"
+  | "page"
+  | "limits"
+  | "next"
+  | "limits"
+  | "refresh"
+  | "skip";
+
 export interface TablePageProps {
   current: number;
-  layout?: string[];
+  layout?: LayoutKey[];
   total: number;
   limit: number;
   limits?: number[];
   pages?: number;
   theme?: string;
+  disabled?: boolean;
+  hideOnSinglePage?: boolean;
+  ellipsisTooltip?: boolean;
 }
 
 const props = withDefaults(defineProps<TablePageProps>(), {
   layout: () => ["prev", "page", "next", "limits", "skip"],
 });
+
 const emit = defineEmits(["update:current", "update:limit", "change"]);
 
 const current: WritableComputedRef<number> = computed({
@@ -49,10 +64,13 @@ const change = (pageData: any) => {
 <template>
   <lay-page
     :total="total"
-    :layout="layout"
-    :limits="limits"
     :theme="theme"
     :pages="pages"
+    :layout="layout"
+    :limits="limits"
+    :disabled="disabled"
+    :hide-on-single-page="hideOnSinglePage"
+    :ellipsis-tooltip="ellipsisTooltip"
     v-model="current"
     v-model:limit="limit"
     @change="change"
