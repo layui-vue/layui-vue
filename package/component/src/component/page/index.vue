@@ -154,6 +154,7 @@ watch(currentPage, (val) => {
   emit("change", { current: +currentPage.value, limit: +inlimit.value });
 });
 // 分页
+const pageTotal = computed(() => props.total);
 const pageCount = computed(() => Math.ceil(props.total / inlimit.value));
 const setPage = computed(() => {
   let joinPage = [];
@@ -283,6 +284,7 @@ const getPageComponent: ComputedRef<ComponentVnode[]> = computed(() => {
 
 provide(LAYUI_PAGE_KEY, {
   pageCount,
+  pageTotal,
   currentPage,
   pageOpionData,
   iconNextHover,

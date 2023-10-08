@@ -6,7 +6,7 @@
 -->
 <template>
   <span class="layui-page-total-text">
-    {{ t("page.total") }} {{ pageCount }} {{ t("page.item") }}
+    {{ t("page.total") }} {{ pageTotal }} {{ t("page.item") }}
   </span>
 </template>
 
@@ -19,5 +19,5 @@ export default {
 import { useI18n } from "../../../language";
 import { usePage } from "../usePage";
 const { t } = useI18n();
-const { pageCount } = usePage();
+const { pageTotal } = usePage();
 </script>
