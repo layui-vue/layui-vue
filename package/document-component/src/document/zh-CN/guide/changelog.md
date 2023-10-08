@@ -20,6 +20,7 @@
           <h3>2.7.2 <span class="layui-badge-rim">2023-10-08</span></h3>
           <ul>
             <li>[修复] icon-picker 组件按需模式部分样式丢失的问题。</li>
+            <li>[优化] icon-picker 组件 page 启用后底栏样式，下边距由 5px 调整为 10px。</li>
           </ul>
         </li>
       </ul>
