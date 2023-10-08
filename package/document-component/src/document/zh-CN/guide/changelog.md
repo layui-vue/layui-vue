@@ -14,6 +14,15 @@
 <template>
   <lay-timeline>
      <lay-timeline-item title="2.7.x">
+       <ul>
+        <a name="2-7-4"></a>
+        <li>
+          <h3>2.7.4 <span class="layui-badge-rim">2023-10-08</span></h3>
+          <ul>
+            <li>[修复] page 组件 total 属性回显数量不正确的问题。</li>
+          </ul>
+        </li>
+      </ul>
       <ul>
         <a name="2-7-2"></a>
         <li>
