@@ -15,6 +15,15 @@
   <lay-timeline>
      <lay-timeline-item title="2.7.x">
       <ul>
+        <a name="2-7-2"></a>
+        <li>
+          <h3>2.7.2 <span class="layui-badge-rim">2023-10-08</span></h3>
+          <ul>
+            <li>[修复] icon-picker 组件按需模式部分样式丢失的问题。</li>
+          </ul>
+        </li>
+      </ul>
+      <ul>
         <a name="2-7-1"></a>
         <li>
           <h3>2.7.1 <span class="layui-badge-rim">2023-10-07</span></h3>
