@@ -13,6 +13,19 @@
 ::: demo
 <template>
   <lay-timeline>
+      <lay-timeline-item title="2.8.x">
+      <ul>
+        <a name="2-8-0"></a>
+        <li>
+          <h3>2.8.0 <span class="layui-badge-rim">2023-10-09</span></h3>
+          <ul>
+            <li>[新增] layer 组件 full 方法，必填参数为 id，用于弹出层最大化。</li>
+            <li>[优化] layer 组件 success 方法，加入 nextTick 优化，保证在弹层渲染后执行。</li>
+            <li>[升级] layer-vue 2.0.3 版本。</li>
+          </ul>
+        </li>
+      </ul>
+    </lay-timeline-item>
      <lay-timeline-item title="2.7.x">
        <ul>
         <a name="2-7-4"></a>
