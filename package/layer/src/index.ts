@@ -252,6 +252,13 @@ const layer = {
       instance.modalInstance.component?.exposed?.reset();
     }
   },
+  // 重置位置
+  full: (id: any) => {
+    if (id != null && isExist(id)) {
+      const instance: any = findById(id);
+      instance.modalInstance.component?.exposed?.full();
+    }
+  },
 };
 
 // 全局安装
