@@ -98,7 +98,9 @@ const useMove = function (
 const useResize = function (el: HTMLElement, callback: Function) {
   if (el != null) {
     el.addEventListener("mousedown", function (event: any) {
-      document.onselectstart = function() { return false; } // 解决拖拽选中文字的问题
+      document.onselectstart = function () {
+        return false;
+      }; // 解决拖拽选中文字的问题
       const path = (event.composedPath && event.composedPath()) || event.path;
       if (path[0].className === "layui-layer-resize") {
         if (event.button == 0 && el != null) {
