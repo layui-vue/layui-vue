@@ -352,7 +352,7 @@ watch(
       }
       nextTick(() => {
         props.success(props.id);
-      })
+      });
     }
   },
   { immediate: true, flush: "post" }
@@ -725,16 +725,16 @@ const resetArea = function () {
 };
 
 const full = function () {
-    _t.value = t.value;
-    _l.value = l.value;
-    _w.value = w.value;
-    _h.value = h.value;
-    w.value = maxArea().w;
-    h.value = maxArea().h;
-    t.value = maxOffset().t;
-    l.value = maxOffset().l;
-    max.value = true;
-}
+  _t.value = t.value;
+  _l.value = l.value;
+  _w.value = w.value;
+  _h.value = h.value;
+  w.value = maxArea().w;
+  h.value = maxArea().h;
+  t.value = maxOffset().t;
+  l.value = maxOffset().l;
+  max.value = true;
+};
 
 defineExpose({ reset, open, close, full });
 </script>
