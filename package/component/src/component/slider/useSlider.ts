@@ -1,222 +1,190 @@
 /*
  * @Author: baobaobao
- * @Date: 2023-09-28 12:54:28
- * @LastEditTime: 2023-09-30 16:15:34
+ * @Date: 2023-10-06 13:58:41
+ * @LastEditTime: 2023-10-10 15:09:44
  * @LastEditors: baobaobao
  */
-import { Ref, computed, ref, useSlots, watch, shallowRef, nextTick, getCurrentInstance, toRef } from "vue";
-import { on, off } from "evtd";
-import { handle_select, makeDots } from "./utils/index";
 
-export const useSlider = (props: any, emit: any) => {
-  let standard_style: Ref<number> = ref<number>(props.val as number);
-  const tooptipHide = ref<boolean>(true);
-  const tracker = ref<HTMLElement | null>(null);
-  const tooltipRefEl = shallowRef<any>(undefined);
-  const tooltipRefEl2 = shallowRef<any>(undefined);
-  let rv = toRef(props, "rangeValue");
-  const isDark = ref(props.isDark)
-  const IS_FORMATFN = computed(() => props.formatTooltip instanceof Function)
-  const formatValue = computed(() => {
-    return (IS_FORMATFN.value && props.val ?
-      props.formatTooltip(props.val) :
-      props.val)
+import { InjectionKey, nextTick, computed, inject, provide, reactive, ref, shallowRef, toRefs, watch, onMounted } from "vue";
+import { SliderProps } from "./types/sliderType";
+
+export const LAYUI_SLIDER_KEY: InjectionKey<any> = Symbol("layui-slider");
+export const useSliderProvide = () => inject(LAYUI_SLIDER_KEY, {});
+
+export const useSlider = (props: SliderProps, emit) => {
+  const initVal = reactive({
+    firstVal: props.min,
+    secondVal: props.max,
+  });
+  const laySliderBar1 = ref<any>(null)
+  const laySliderBar2 = ref<any>(null)
+  const dragging = ref(false)
+  const slider = ref<HTMLElement | null>(null);
+  onMounted(() => {
+    initValidate()
   })
-  const formatRangeValue = (val: number) => {
-    if (IS_FORMATFN.value && props.val) {
-      return props.formatTooltip(val)
-    }
-    return val
-  }
-  const dots = makeDots(props);
-  let currbtn = -1;
-  watch(() => props.isDark, () => {
-    isDark.value = props.isDark
-  })
-  function calcWithStep(
-    rate: number | undefined,
-    val: Ref<number> | Ref<number[]>
-  ) {
-    if (typeof rate === "undefined") return false;
-
-    if (typeof val.value === "number") {
-      let r = rate - val.value;
-      if (Math.abs(r) < props.step) {
-        return false;
+  const barStyle = computed(() => {
+    const maxCalc = `${Math.abs(maxValue.value - minValue.value) / (props.max - props.min) *   100}`;
+    const minCalc = `${Math.abs(minValue.value - props.min) / (props.max - props.min) * 100}`;
+    if (props.range) {
+      if (props.vertical) {
+        return {
+          bottom: `${minCalc}%`,
+          height: `${maxCalc}%`,
+        };
       }
-
-      if (props.step === 0) val.value = Math.floor(rate);
-
-      if (r < 0 && props.step !== 0) {
-        val.value -= props.step;
-      } else {
-        val.value += props.step;
-      }
-    }
-  }
-
-  function calcWithStepRange(
-    rate: number | undefined,
-    val: Ref<number> | Ref<number[]>,
-    idx: number = -1
-  ) {
-    if (typeof rate === "undefined") return false;
-
-    if (typeof val.value === "object") {
-      let r = rate - val.value[idx];
-      if (Math.abs(r) < props.step) {
-        return false;
-      }
-
-      if (props.step === 0) val.value[idx] = Math.floor(rate);
-
-      if (Array.isArray(val.value)) {
-        if (r < 0 && props.step !== 0) {
-          val.value[idx] -= props.step;
-        } else {
-          val.value[idx] += props.step;
-        }
-        cross(val);
-      }
-    }
-  }
-  function handle_mouseup() {
-    currbtn = -1;
-    off("selectstart", document, handle_select);
-    off("mouseup", window, handle_mouseup);
-    off("mousemove", window, handleMove);
-    off("mousedown", window, handleMove);
-    tooptipHide.value = true;
-  }
-
-  function handle_mousedown() {
-    on("selectstart", window, handle_select, { once: true });
-    // on("click", window, handleMove);
-    on("mouseup", window, handle_mouseup);
-    on("mousemove", window, handleMove);
-    // on("click", window, handleMove);
-
-  }
-
-  function sliderClick(e) {
-    on("selectstart", window, handle_select, { once: true });
-    on("mouseup", window, handle_mouseup);
-
-    on("mousedown", window, handleMove);
-
-  }
-
-  async function handleMove(e: MouseEvent) {
-    tooptipHide.value = false;
-    if (!tracker.value) {
-      return;
-    }
-    let tracker_rect = tracker.value.getBoundingClientRect();
-    let origin_position = tracker_rect.left
-    let point_position = e.clientX;
-
-    let distance = point_position - origin_position;
-    if (props.rangeValue) {
-      if (distance < 0) {
-        rv.value[0] = props.min;
-      } else {
-        let rate =
-          props.min + (distance / tracker_rect.width) * (props.max - props.min);
-        if (props.vertical) {
-          origin_position = tracker_rect.bottom
-          point_position = e.clientY;
-          distance = (point_position - origin_position) * -1;
-          rate =
-            props.min + (distance / tracker_rect.height) * (props.max - props.min);
-        }
-        let idx = -1;
-        if (currbtn === -1) {
-          currbtn = moveNeighbors(Math.floor(rate), rv);
-          idx = currbtn;
-        } else {
-          idx = currbtn;
-        }
-        calcWithStepRange(rate, rv, idx);
-        if (rv.value[1] > props.max) {
-          rv.value[1] = props.max;
-        }
-        if (rv.value[0] < props.min) {
-          rv.value[0] = props.min;
-        }
-      }
+      return {
+        width: `${maxCalc}%`,
+        left: `${minCalc}%`,
+      };
     } else {
       if (props.vertical) {
-        origin_position = tracker_rect.bottom
-        point_position = e.clientY;
-        distance = (point_position - origin_position) * -1
+        return {
+          bottom: "0%",
+          height: `${minCalc}%`,
+        };
       }
-
-
-      if (distance < 0) {
-        standard_style.value = props.min;
-      } else {
-        let rate =
-          props.min + (distance / tracker_rect.width) * (props.max - props.min);
-        if (props.vertical) {
-          rate = props.min + (distance / tracker_rect.height) * (props.max - props.min);
-        }
-        calcWithStep(rate, standard_style);
-        if (standard_style.value > props.max) {
-          standard_style.value = props.max;
-        }
-      } 
+      return {
+        width: `${minCalc}%`,
+        left: "0%",
+      };
     }
-    if (props.rangeValue) {
-      emit("link-val-hook", rv.value);
-    }  else {
-      emit("link-val-hook", standard_style.value, tracker);
-
+  });
+  const minValue = computed(() => { return Math.min(initVal.firstVal, initVal.secondVal) })
+  const maxValue = computed(() => { return Math.max(initVal.firstVal, initVal.secondVal) })
+  const getStop = computed(() => {
+    const stop = (props.max - props.min) / props.step
+    const getAllStop = Array.from({ length: stop - 1 }).map((_, index) => (index + 1) * props.step)
+    if (props.range) {
+      return getAllStop.filter(e => e >= props.min && e <= props.max)
+        // || e >= (100 * (maxValue.value - props.min) / (props.max - props.min)))
     }
-    await nextTick()
-    tooltipRefEl2?.value?.update()
-    tooltipRefEl.value!.update()
-  }
-  const focusDot = (val: number) => {
-    if (props.rangeValue) {
-      let currbtn = moveNeighbors(val, rv);
-      rv.value[currbtn] = val;
-      emit("link-val-hook", rv.value);
-      return;
-    }
-    emit("link-val-hook", val);
-  };
-  function cross(val: any) {
-    if (val.value[0] > val.value[1]) {
-      let tmp = val.value[0];
-      val.value[0] = val.value[1];
-      val.value[1] = tmp;
-      currbtn = currbtn === 0 ? 1 : 0;
-    }
-  }
-  function moveNeighbors(rate: number, rangeValues: any) {
-    let d1 = Math.abs(rate - rangeValues.value[0]);
-    let d2 = Math.abs(rate - rangeValues.value[1]);
-    if (d1 > d2) {
-      return 1;
+    return getAllStop.filter(e => e >= props.min && e <= props.max)
+  })
+  watch(() => initVal, (val) => {
+    if (props.range) {
+      emit('update:modelValue', [minValue.value, maxValue.value])
     } else {
-      return 0;
+      emit('update:modelValue', minValue.value)
+    }
+  }, {
+    deep: true
+  })
+  watch(() => dragging, val => {
+    if (!val.value) {
+      if (props.range && Array.isArray(props.modelValue)) {
+        initVal.firstVal = props.modelValue[0]
+        initVal.secondVal = props.modelValue[1]
+      } else {
+        initVal.firstVal = (props.modelValue) as number
+      }
+    }
+  }, {
+    deep: true
+  })
+  watch(() => props.modelValue, (vals, oldVal) => {
+    if (
+      dragging.value ||
+      Array.isArray(vals)
+      && Array.isArray(oldVal)
+      && vals.every((item, index) => item === oldVal[index])) {
+      return
+    }
+    initValidate()
+  })
+  const setPos = (pos: number) => {
+    if (props.range) {
+      if (Math.abs(initVal.firstVal - pos) > Math.abs(initVal.secondVal - pos)) {
+        initVal.secondVal > initVal.firstVal ? laySliderBar2.value.setUpDatePos(pos) : laySliderBar1.value.setUpDatePos(pos)
+      } else {
+        initVal.secondVal < initVal.firstVal ? laySliderBar2.value.setUpDatePos(pos) : laySliderBar1.value.setUpDatePos(pos)
+      }
+    } else {
+      laySliderBar1.value.setUpDatePos(pos)
+    }
+
+  }
+  const getCalcPos = (e: MouseEvent) => {
+    let domPos = slider.value!.getBoundingClientRect();
+    let diff = e.clientX - domPos.left;
+    if (props.vertical) {
+      diff = (e.clientY - domPos.bottom) * -1;
+    }
+    let pos = (diff / (props.vertical ? domPos.height : domPos.width)) * 100
+    if (pos > 100) {
+      pos = 100;
+    }
+    if (pos < 0) {
+      pos = 0;
+    }
+    const lengthPerStep = 100 / ((props.max - props.min) / props.step)
+    const steps = Math.round(pos / lengthPerStep)
+    // console.log(lengthPerStep, 'lengthPerStep')
+    // let value = steps * lengthPerStep * (props.max - props.min) * 0.01 + props.min
+    // console.log(value)
+    // let value = (Math.round(pos * (props.max - props.min) + props.min))  + props.step
+    // console.log('value', value)
+    // console.log(value  + lengthPerStep)
+    return (steps *  props.step +  props.min)
+  }
+  const handClick = async (e: MouseEvent) => {
+    if (dragging.value || props.disabled) return
+    const getNewPos = getCalcPos(e)
+    setPos(getNewPos)
+  };
+  const dotStyle = (dot: number) => {
+    return props.vertical ? {
+      bottom: `${dot}%`
+    } : { left: `${dot}%` }
+  }
+  const updateDragging = (val: boolean) => {
+    dragging.value = val
+  }
+
+  const initValidate = () => {
+    if (props.range) {
+      if (Array.isArray(props.modelValue)) {
+        let firstVal = Math.min(
+          Math.max(
+            props.min,
+            props.modelValue[0] ? props.modelValue[0] : props.min
+          ),
+          props.max
+        );
+        let secondVal = Math.min(
+          Math.max(
+            props.min,
+            props.modelValue[1] ? props.modelValue[1] : props.min
+          ),
+          props.max
+        );
+        initVal.firstVal = firstVal;
+        initVal.secondVal = secondVal;
+      } else {
+        initVal.firstVal = props.min;
+        initVal.secondVal = props.max;
+      }
+    } else {
+      if (typeof props.modelValue !== 'number') {
+        initVal.firstVal = props.min
+      } else {
+        initVal.firstVal = Math.min(
+          props.max,
+          Math.max(props.min, props.modelValue)
+        );
+      }
     }
   }
   return {
-    calcWithStep,
-    handle_mouseup,
-    handle_mousedown,
-    sliderClick,
-    handleMove,
-    tooltipRefEl,
-    tracker,
-    formatValue,
-    tooptipHide,
-    dots,
-    focusDot,
-    rv,
-    formatRangeValue,
-    isDark,
-    tooltipRefEl2
+    handClick,
+    barStyle,
+    getStop,
+    dotStyle,
+    laySliderBar1,
+    laySliderBar2,
+    slider,
+    getCalcPos,
+    updateDragging,
+    ...toRefs(initVal)
   }
 }
