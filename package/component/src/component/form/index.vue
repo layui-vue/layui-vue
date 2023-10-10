@@ -43,7 +43,7 @@ const emit = defineEmits(["submit"]);
 
 // 初始化表单就进行校验
 onMounted(() => {
-  props.initValidate && validate()?.catch((err) => { });
+  props.initValidate && validate()?.catch((err) => {});
 });
 
 // 原生提交表单事件
@@ -147,7 +147,7 @@ function resetObjectForProp(path: string, object: any): any {
 
   // 如果路径只有一个属性，将该属性值设为空，并返回对象
   if (paths.length === 0) {
-    if(object[prop] instanceof Array) {
+    if (object[prop] instanceof Array) {
       object[prop] = [];
     } else {
       object[prop] = null;
