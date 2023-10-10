@@ -13,22 +13,46 @@
 ::: demo
 <template>
   <lay-timeline>
-      <lay-timeline-item title="2.8.x">
+    <lay-timeline-item title="2.9.x">
       <ul>
-        <a name="2-8-0"></a>
+        <a name="2-9-0"></a>
         <li>
-          <h3>2.8.0 <span class="layui-badge-rim">2023-10-09</span></h3>
+          <h3>2.9.0 <span class="layui-badge-rim">2023-10-10</span></h3>
           <ul>
-            <li>[新增] layer 组件 full 方法，必填参数为 id，用于弹出层最大化。</li>
-            <li>[优化] layer 组件 resize 启用时，拉伸选中文字的问题。</li>
-            <li>[优化] layer 组件 success 方法，加入 nextTick 优化，保证在弹层渲染后执行。</li>
-            <li>[升级] layer-vue 2.0.4 版本。</li>
+            <li>[修复] form-item 组件 prop 配置 x[0].y 格式时，form 组件 reset 方法不兼容。</li>
+            <li>[优化] form 组件 reset 方法清空未配置 prop 属性的问题。</li>
+            <li>[优化] collapse-item 组件 title 属性为非必填。</li>
+            <li>[文档] 改善 button.md 中下拉按钮案例，页面滚动下拉面板不跟随按钮的问题。</li>
           </ul>
         </li>
       </ul>
     </lay-timeline-item>
-     <lay-timeline-item title="2.7.x">
-       <ul>
+      <lay-timeline-item title="2.8.x">
+        <ul>
+          <a name="2-8-1"></a>
+          <li>
+            <h3>2.8.1 <span class="layui-badge-rim">2023-10-09</span></h3>
+            <ul>
+              <li>[修复] layer 组件拖拽后，全文文本无法选中的问题。</li>
+              <li>[升级] layer-vue 到 2.0.5 版本。</li>
+            </ul>
+          </li>
+        </ul>
+        <ul>
+          <a name="2-8-0"></a>
+          <li>
+            <h3>2.8.0 <span class="layui-badge-rim">2023-10-09</span></h3>
+            <ul>
+              <li>[新增] layer 组件 full 方法，必填参数为 id，用于弹出层最大化。</li>
+              <li>[优化] layer 组件 resize 启用时，拉伸选中文字的问题。</li>
+              <li>[优化] layer 组件 success 方法，加入 nextTick 优化，保证在弹层渲染后执行。</li>
+              <li>[升级] layer-vue 2.0.4 版本。</li>
+            </ul>
+          </li>
+        </ul>
+      </lay-timeline-item>
+      <lay-timeline-item title="2.7.x">
+        <ul>
         <a name="2-7-4"></a>
         <li>
           <h3>2.7.4 <span class="layui-badge-rim">2023-10-08</span></h3>

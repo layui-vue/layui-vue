@@ -1,6 +1,6 @@
 {
   "name": "@layui/layui-vue",
-  "version": "2.8.0",
+  "version": "2.9.0",
   "author": "就眠儀式",
   "license": "MIT",
   "description": "a component library for Vue 3 base on layui-vue",
@@ -46,7 +46,7 @@
   "dependencies": {
     "@rollup/plugin-terser":"0.4.3",
     "@layui/icons-vue": "1.1.0",
-    "@layui/layer-vue": "2.0.4",
+    "@layui/layer-vue": "2.0.5",
     "@vueuse/core": "8.7.3",
     "@umijs/ssr-darkreader": "^4.9.45",
     "@ctrl/tinycolor": "^3.4.1",

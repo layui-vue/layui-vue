@@ -91,12 +91,12 @@ const layer = {
       type: 0,
       title: false,
       content: message,
-      closeBtn: false,
       shadeClose: false,
+      closeBtn: false,
       isMessage: true,
       shade: false,
-      time: 1000,
       btn: false,
+      time: 1000,
     };
     return layer.create(option, defaultOption, callback);
   },

@@ -247,7 +247,7 @@ const clickHandle = () => {
 <template>
 	<lay-button-group>
   	<lay-button type="primary">更多操作</lay-button>   
-  	<lay-dropdown placement="bottom-end">
+  	<lay-dropdown placement="bottom-end" updateAtScroll>
     	<lay-button type="primary" style="padding-left:8px;padding-right:8px;">
       	<lay-icon type="layui-icon-down"></lay-icon>
     	</lay-button>
