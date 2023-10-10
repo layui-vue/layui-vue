@@ -13,6 +13,17 @@
 ::: demo
 <template>
   <lay-timeline>
+        <lay-timeline-item title="2.9.x">
+      <ul>
+        <a name="2-9-0"></a>
+        <li>
+          <h3>2.9.0 <span class="layui-badge-rim">2023-10-10</span></h3>
+          <ul>
+            <li>[优化] collapse-item 组件 title 属性为非必填。</li>
+          </ul>
+        </li>
+      </ul>
+    </lay-timeline-item>
       <lay-timeline-item title="2.8.x">
       <ul>
         <a name="2-8-0"></a>

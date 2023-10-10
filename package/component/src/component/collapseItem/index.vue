@@ -6,7 +6,7 @@ export default {
 
 <script setup lang="ts">
 import LayTransition from "../transition/index.vue";
-import { withDefaults, inject, computed, ref } from "vue";
+import { withDefaults, inject, computed } from "vue";
 
 export interface CollapseItemProps {
   id: number | string;
