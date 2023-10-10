@@ -272,5 +272,5 @@ onMounted(() => {
   handlerTriggerEventRegist();
 });
 
-defineExpose({ hide: doHidden });
+defineExpose({ hide: doHidden, updatePosistion });
 </script>
