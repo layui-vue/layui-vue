@@ -10,7 +10,7 @@ import { withDefaults, inject, computed, ref } from "vue";
 
 export interface CollapseItemProps {
   id: number | string;
-  title: string;
+  title?: string;
   disabled?: boolean;
 }
 
