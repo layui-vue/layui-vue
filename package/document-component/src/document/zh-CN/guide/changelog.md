@@ -19,6 +19,8 @@
         <li>
           <h3>2.9.0 <span class="layui-badge-rim">2023-10-10</span></h3>
           <ul>
+            <li>[修复] form-item 组件 prop 配置 x[0].y 格式时，form 组件 reset 方法不兼容。</li>
+            <li>[优化] form 组件 reset 方法清空未配置 prop 属性的问题。</li>
             <li>[优化] collapse-item 组件 title 属性为非必填。</li>
           </ul>
         </li>

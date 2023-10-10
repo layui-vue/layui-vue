@@ -43,7 +43,7 @@ const emit = defineEmits(["submit"]);
 
 // 初始化表单就进行校验
 onMounted(() => {
-  props.initValidate && validate()?.catch((err) => {});
+  props.initValidate && validate()?.catch((err) => { });
 });
 
 // 原生提交表单事件
@@ -133,16 +133,38 @@ const reset = function () {
   nextTick(() => clearValidate());
 };
 
-const resetObject = (obj: { [key: string]: unknown }): void => {
-  for (const key in obj) {
-    if (obj[key] instanceof Object && !(obj[key] instanceof Function)) {
-      if (obj[key] instanceof Array) {
-        obj[key] = [];
-      } else {
-        resetObject(obj[key] as { [key: string]: unknown });
-      }
+function resetObjectForProp(path: string, object: any): any {
+  const paths = path.replace(/\[(\d+)\]/g, ".\$1").split(".");
+  const prop = paths.shift();
+
+  if (prop === undefined) {
+    return undefined; // 如果路径为空，直接返回 undefined
+  }
+
+  if (object === undefined || object === null || typeof object !== "object") {
+    return null; // 如果对象为空或不是对象，则返回 null
+  }
+
+  // 如果路径只有一个属性，将该属性值设为空，并返回对象
+  if (paths.length === 0) {
+    if(object[prop] instanceof Array) {
+      object[prop] = [];
     } else {
-      obj[key] = null;
+      object[prop] = null;
+    }
+    return object;
+  }
+
+  // 递归地调用 reset 方法，继续清空路径中的下一个属性
+  object[prop] = resetObjectForProp(paths.join("."), object[prop]);
+  return object;
+}
+
+// 根据 prop 重置 model 对象
+const resetObject = (obj: { [key: string]: unknown }): void => {
+  for (var i = 0; i < formItems.length; i++) {
+    if (formItems[i].prop != undefined) {
+      resetObjectForProp(formItems[i].prop as string, obj);
     }
   }
 };
