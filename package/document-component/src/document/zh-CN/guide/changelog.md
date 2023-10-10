@@ -22,6 +22,7 @@
             <li>[修复] form-item 组件 prop 配置 x[0].y 格式时，form 组件 reset 方法不兼容。</li>
             <li>[优化] form 组件 reset 方法清空未配置 prop 属性的问题。</li>
             <li>[优化] collapse-item 组件 title 属性为非必填。</li>
+            <li>[文档] 改善 button.md 中下拉按钮案例，页面滚动下拉面板不跟随按钮的问题。</li>
           </ul>
         </li>
       </ul>
