@@ -8,7 +8,7 @@
     </a>
     <span style="font-size:32px;color:#e2e2e2;margin:30px;">+</span>
     <a href="http://www.layui-vue.com" style="display:inline-block;">
-      <img src="https://play.vuejs.org/logo.svg" alt="vue" width="100" style="border-radius:4px;">
+      <img src="../../../assets/vue.svg" alt="vue" width="100" style="border-radius:4px;">
     </a>
     <span style="font-size:32px;color:#e2e2e2;margin:30px;">=</span>
     <a href="http://www.layui-vue.com" style="display:inline-block;">

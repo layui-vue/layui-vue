@@ -91,12 +91,12 @@ const layer = {
       type: 0,
       title: false,
       content: message,
-      closeBtn: false,
       shadeClose: false,
+      closeBtn: false,
       isMessage: true,
       shade: false,
-      time: 1000,
       btn: false,
+      time: 1000,
     };
     return layer.create(option, defaultOption, callback);
   },
@@ -250,6 +250,13 @@ const layer = {
     if (id != null && isExist(id)) {
       const instance: any = findById(id);
       instance.modalInstance.component?.exposed?.reset();
+    }
+  },
+  // 重置位置
+  full: (id: any) => {
+    if (id != null && isExist(id)) {
+      const instance: any = findById(id);
+      instance.modalInstance.component?.exposed?.full();
     }
   },
 };

@@ -13,11 +13,80 @@
 ::: demo
 <template>
   <lay-timeline>
-     <lay-timeline-item title="2.7.x">
+    <lay-timeline-item title="2.9.x">
+      <ul>
+        <a name="2-9-0"></a>
+        <li>
+          <h3>2.9.0 <span class="layui-badge-rim">2023-10-10</span></h3>
+          <ul>
+            <li>[修复] form-item 组件 prop 配置 x[0].y 格式时，form 组件 reset 方法不兼容。</li>
+            <li>[优化] form 组件 reset 方法清空未配置 prop 属性的问题。</li>
+            <li>[优化] collapse-item 组件 title 属性为非必填。</li>
+            <li>[文档] 改善 button.md 中下拉按钮案例，页面滚动下拉面板不跟随按钮的问题。</li>
+          </ul>
+        </li>
+      </ul>
+    </lay-timeline-item>
+      <lay-timeline-item title="2.8.x">
+        <ul>
+          <a name="2-8-1"></a>
+          <li>
+            <h3>2.8.1 <span class="layui-badge-rim">2023-10-09</span></h3>
+            <ul>
+              <li>[修复] layer 组件拖拽后，全文文本无法选中的问题。</li>
+              <li>[升级] layer-vue 到 2.0.5 版本。</li>
+            </ul>
+          </li>
+        </ul>
+        <ul>
+          <a name="2-8-0"></a>
+          <li>
+            <h3>2.8.0 <span class="layui-badge-rim">2023-10-09</span></h3>
+            <ul>
+              <li>[新增] layer 组件 full 方法，必填参数为 id，用于弹出层最大化。</li>
+              <li>[优化] layer 组件 resize 启用时，拉伸选中文字的问题。</li>
+              <li>[优化] layer 组件 success 方法，加入 nextTick 优化，保证在弹层渲染后执行。</li>
+              <li>[升级] layer-vue 2.0.4 版本。</li>
+            </ul>
+          </li>
+        </ul>
+      </lay-timeline-item>
+      <lay-timeline-item title="2.7.x">
+        <ul>
+        <a name="2-7-4"></a>
+        <li>
+          <h3>2.7.4 <span class="layui-badge-rim">2023-10-08</span></h3>
+          <ul>
+            <li>[修复] page 组件 total 属性回显数量不正确的问题。</li>
+          </ul>
+        </li>
+      </ul>
+      <ul>
+        <a name="2-7-2"></a>
+        <li>
+          <h3>2.7.2 <span class="layui-badge-rim">2023-10-08</span></h3>
+          <ul>
+            <li>[修复] icon-picker 组件按需模式部分样式丢失的问题。</li>
+            <li>[优化] icon-picker 组件 page 启用后底栏样式，下边距由 5px 调整为 10px。</li>
+          </ul>
+        </li>
+      </ul>
+      <ul>
+        <a name="2-7-1"></a>
+        <li>
+          <h3>2.7.1 <span class="layui-badge-rim">2023-10-07</span></h3>
+          <ul>
+            <li>[新增] table 组件 page 属性 layout 配置。</li>
+            <li>[新增] table 组件 page 属性 hide-on-single-page 配置。</li>
+            <li>[新增] table 组件 page 属性 ellipsisTooltip 配置。</li>
+            <li>[新增] table 组件 page 属性 disabled 配置。</li>
+          </ul>
+        </li>
+      </ul>
       <ul>
         <a name="2-7-0"></a>
         <li>
-          <h3>2.7.0 <span class="layui-badge-rim">2023-09-18</span></h3>
+          <h3>2.7.0 <span class="layui-badge-rim">2023-09-30</span></h3>
           <ul>
             <li>[新增] select 组件 auto-fit-width 属性, 将下拉面板宽度设置为输入框宽度。</li>
             <li>[新增] table 组件 height 属性 % 值的兼容，从而实现高度自适应。</li>

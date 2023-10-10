@@ -773,6 +773,7 @@ const NotifiyInfo=function(){
     <button @click="close">销毁</button>
     <button @click="closeAll">销毁全部</button>
     <button @click="reset">重置</button>
+    <button @click="full">最大</button>
 </template>
 
 <script setup>
@@ -783,9 +784,13 @@ let id = null;
 const open = function() {
     id = layer.open({
         title: "标题",
+        maxmin: true,
         content: "内容",
         resize: true,
-        shade: false
+        shade: false,
+        success: function(aid) {
+            layer.full(aid);
+        }
     })
 }
 
@@ -799,6 +804,10 @@ const closeAll = function() {
 
 const reset = function() {
     layer.reset(id);
+}
+
+const full = function() {
+    layer.full(id);
 }
 </script>
 :::
