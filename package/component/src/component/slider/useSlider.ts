@@ -5,7 +5,19 @@
  * @LastEditors: baobaobao
  */
 
-import { InjectionKey, nextTick, computed, inject, provide, reactive, ref, shallowRef, toRefs, watch, onMounted } from "vue";
+import {
+  InjectionKey,
+  nextTick,
+  computed,
+  inject,
+  provide,
+  reactive,
+  ref,
+  shallowRef,
+  toRefs,
+  watch,
+  onMounted,
+} from "vue";
 import { SliderProps } from "./types/sliderType";
 
 export const LAYUI_SLIDER_KEY: InjectionKey<any> = Symbol("layui-slider");
@@ -16,16 +28,21 @@ export const useSlider = (props: SliderProps, emit) => {
     firstVal: props.min,
     secondVal: props.max,
   });
-  const laySliderBar1 = ref<any>(null)
-  const laySliderBar2 = ref<any>(null)
-  const dragging = ref(false)
+  const laySliderBar1 = ref<any>(null);
+  const laySliderBar2 = ref<any>(null);
+  const dragging = ref(false);
   const slider = ref<HTMLElement | null>(null);
   onMounted(() => {
-    initValidate()
-  })
+    initValidate();
+  });
   const barStyle = computed(() => {
-    const maxCalc = `${Math.abs(maxValue.value - minValue.value) / (props.max - props.min) *   100}`;
-    const minCalc = `${Math.abs(minValue.value - props.min) / (props.max - props.min) * 100}`;
+    const maxCalc = `${
+      (Math.abs(maxValue.value - minValue.value) / (props.max - props.min)) *
+      100
+    }`;
+    const minCalc = `${
+      (Math.abs(minValue.value - props.min) / (props.max - props.min)) * 100
+    }`;
     if (props.range) {
       if (props.vertical) {
         return {
@@ -50,96 +67,121 @@ export const useSlider = (props: SliderProps, emit) => {
       };
     }
   });
-  const minValue = computed(() => { return Math.min(initVal.firstVal, initVal.secondVal) })
-  const maxValue = computed(() => { return Math.max(initVal.firstVal, initVal.secondVal) })
+  const minValue = computed(() => {
+    return Math.min(initVal.firstVal, initVal.secondVal);
+  });
+  const maxValue = computed(() => {
+    return Math.max(initVal.firstVal, initVal.secondVal);
+  });
   const getStop = computed(() => {
-    const stop = (props.max - props.min) / props.step
-    const getAllStop = Array.from({ length: stop - 1 }).map((_, index) => (index + 1) * props.step)
+    const stop = (props.max - props.min) / props.step;
+    const getAllStop = Array.from({ length: stop - 1 }).map(
+      (_, index) => (index + 1) * props.step
+    );
     if (props.range) {
-      return getAllStop.filter(e => e >= props.min && e <= props.max)
-        // || e >= (100 * (maxValue.value - props.min) / (props.max - props.min)))
+      return getAllStop.filter((e) => e >= props.min && e <= props.max);
+      // || e >= (100 * (maxValue.value - props.min) / (props.max - props.min)))
     }
-    return getAllStop.filter(e => e >= props.min && e <= props.max)
-  })
-  watch(() => initVal, (val) => {
-    if (props.range) {
-      emit('update:modelValue', [minValue.value, maxValue.value])
-    } else {
-      emit('update:modelValue', minValue.value)
-    }
-  }, {
-    deep: true
-  })
-  watch(() => dragging, val => {
-    if (!val.value) {
-      if (props.range && Array.isArray(props.modelValue)) {
-        initVal.firstVal = props.modelValue[0]
-        initVal.secondVal = props.modelValue[1]
+    return getAllStop.filter((e) => e >= props.min && e <= props.max);
+  });
+  watch(
+    () => initVal,
+    (val) => {
+      if (props.range) {
+        emit("update:modelValue", [minValue.value, maxValue.value]);
       } else {
-        initVal.firstVal = (props.modelValue) as number
+        emit("update:modelValue", minValue.value);
       }
+    },
+    {
+      deep: true,
     }
-  }, {
-    deep: true
-  })
-  watch(() => props.modelValue, (vals, oldVal) => {
-    if (
-      dragging.value ||
-      Array.isArray(vals)
-      && Array.isArray(oldVal)
-      && vals.every((item, index) => item === oldVal[index])) {
-      return
+  );
+  watch(
+    () => dragging,
+    (val) => {
+      if (!val.value) {
+        if (props.range && Array.isArray(props.modelValue)) {
+          initVal.firstVal = props.modelValue[0];
+          initVal.secondVal = props.modelValue[1];
+        } else {
+          initVal.firstVal = props.modelValue as number;
+        }
+      }
+    },
+    {
+      deep: true,
     }
-    initValidate()
-  })
+  );
+  watch(
+    () => props.modelValue,
+    (vals, oldVal) => {
+      if (
+        dragging.value ||
+        (Array.isArray(vals) &&
+          Array.isArray(oldVal) &&
+          vals.every((item, index) => item === oldVal[index]))
+      ) {
+        return;
+      }
+      initValidate();
+    }
+  );
   const setPos = (pos: number) => {
     if (props.range) {
-      if (Math.abs(initVal.firstVal - pos) > Math.abs(initVal.secondVal - pos)) {
-        initVal.secondVal > initVal.firstVal ? laySliderBar2.value.setUpDatePos(pos) : laySliderBar1.value.setUpDatePos(pos)
+      if (
+        Math.abs(initVal.firstVal - pos) > Math.abs(initVal.secondVal - pos)
+      ) {
+        initVal.secondVal > initVal.firstVal
+          ? laySliderBar2.value.setUpDatePos(pos)
+          : laySliderBar1.value.setUpDatePos(pos);
       } else {
-        initVal.secondVal < initVal.firstVal ? laySliderBar2.value.setUpDatePos(pos) : laySliderBar1.value.setUpDatePos(pos)
+        initVal.secondVal < initVal.firstVal
+          ? laySliderBar2.value.setUpDatePos(pos)
+          : laySliderBar1.value.setUpDatePos(pos);
       }
     } else {
-      laySliderBar1.value.setUpDatePos(pos)
+      laySliderBar1.value.setUpDatePos(pos);
     }
-
-  }
+  };
   const getCalcPos = (e: MouseEvent) => {
     let domPos = slider.value!.getBoundingClientRect();
     let diff = e.clientX - domPos.left;
     if (props.vertical) {
       diff = (e.clientY - domPos.bottom) * -1;
     }
-    let pos = (diff / (props.vertical ? domPos.height : domPos.width)) * 100
+    let pos = (diff / (props.vertical ? domPos.height : domPos.width)) * 100;
     if (pos > 100) {
       pos = 100;
     }
     if (pos < 0) {
       pos = 0;
     }
-    const lengthPerStep = 100 / ((props.max - props.min) / props.step)
-    const steps = Math.round(pos / lengthPerStep)
+    const lengthPerStep = 100 / ((props.max - props.min) / props.step);
+    const steps = Math.round(pos / lengthPerStep);
     // console.log(lengthPerStep, 'lengthPerStep')
     // let value = steps * lengthPerStep * (props.max - props.min) * 0.01 + props.min
     // console.log(value)
     // let value = (Math.round(pos * (props.max - props.min) + props.min))  + props.step
     // console.log('value', value)
     // console.log(value  + lengthPerStep)
-    return (steps *  props.step +  props.min)
-  }
+    return steps * props.step + props.min;
+  };
   const handClick = async (e: MouseEvent) => {
-    if (dragging.value || props.disabled) return
-    const getNewPos = getCalcPos(e)
-    setPos(getNewPos)
+    if (dragging.value || props.disabled) return;
+    const getNewPos = getCalcPos(e);
+    setPos(getNewPos);
   };
   const dotStyle = (dot: number) => {
-    return props.vertical ? {
-      bottom: `${dot}%`
-    } : { left: `${dot}%` }
-  }
+    return props.vertical
+      ? {
+          bottom: `${dot}%`,
+        }
+      : { left: `${dot}%` };
+  };
   const updateDragging = (val: boolean) => {
-    dragging.value = val
-  }
+    dragging.value = val;
+  };
 
   const initValidate = () => {
     if (props.range) {
@@ -165,8 +207,8 @@ export const useSlider = (props: SliderProps, emit) => {
         initVal.secondVal = props.max;
       }
     } else {
-      if (typeof props.modelValue !== 'number') {
-        initVal.firstVal = props.min
+      if (typeof props.modelValue !== "number") {
+        initVal.firstVal = props.min;
       } else {
         initVal.firstVal = Math.min(
           props.max,
@@ -174,7 +216,7 @@ export const useSlider = (props: SliderProps, emit) => {
         );
       }
     }
-  }
+  };
   return {
     handClick,
     barStyle,
@@ -185,6 +227,6 @@ export const useSlider = (props: SliderProps, emit) => {
     slider,
     getCalcPos,
     updateDragging,
-    ...toRefs(initVal)
-  }
-}
+    ...toRefs(initVal),
+  };
+};

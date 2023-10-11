@@ -1,14 +1,14 @@
 <template>
   <div class="layui-slider-mark-text" :style="mark?.style">
-   <slot v-if="slot.mark" name="mark" :mark="mark"></slot>
-   <template v-else>
-    <template v-if="isVNode(mark.label)">
-      <component :is="mark.label"></component>
-    </template>
+    <slot v-if="slot.mark" name="mark" :mark="mark"></slot>
     <template v-else>
-      {{ mark.label }}
+      <template v-if="isVNode(mark.label)">
+        <component :is="mark.label"></component>
+      </template>
+      <template v-else>
+        {{ mark.label }}
+      </template>
     </template>
-  </template>
   </div>
 </template>
 <script lang="ts">
@@ -18,8 +18,7 @@ export default {
 </script>
 <script lang="ts" setup>
 import { computed, isVNode, StyleValue, useSlots } from "vue";
-import { StyledMark } from '../types/sliderType';
-
+import { StyledMark } from "../types/sliderType";
 
 export interface Mark {
   mark: StyledMark;

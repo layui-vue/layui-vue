@@ -5,9 +5,9 @@
  * @LastEditors: baobaobao
  */
 
-import { computed, ref, shallowRef, watch, nextTick } from "vue"
-import { useSliderProvide } from "../useSlider"
-import { SliderBarProps } from "../types/sliderType"
+import { computed, ref, shallowRef, watch, nextTick } from "vue";
+import { useSliderProvide } from "../useSlider";
+import { SliderBarProps } from "../types/sliderType";
 
 export const useSliderBar = (props: SliderBarProps, emit: any) => {
   const {
@@ -17,30 +17,41 @@ export const useSliderBar = (props: SliderBarProps, emit: any) => {
     getCalcPos,
     updateDragging,
     min,
-    max
-  } = useSliderProvide()
-  const tooltip = shallowRef<any>(null)
-  const dragging = ref(false)
+    max,
+  } = useSliderProvide();
+  const tooltip = shallowRef<any>(null);
+  const dragging = ref(false);
   const enableFormat = computed(() => {
-    return formatTooltip.value instanceof Function
-  })
+    return formatTooltip.value instanceof Function;
+  });
   const formatValue = computed(() => {
-    return enableFormat.value && formatTooltip.value(props.modelValue) || props.modelValue
-  })
+    return (
+      (enableFormat.value && formatTooltip.value(props.modelValue)) ||
+      props.modelValue
+    );
+  });
   const currentPosition = computed(() => {
-    return `${(props.modelValue - min.value) / (max.value - min.value) * 100}%`
-  })
+    return `${
+      ((props.modelValue - min.value) / (max.value - min.value)) * 100
+    }%`;
+  });
 
   const wrapperStyle = computed(() => {
-    return (vertical.value ? { bottom: currentPosition.value } : { left: currentPosition.value })
-  })
-  watch(() => dragging, (val) => {
-    updateDragging(val.value)
-  }, {
-    deep: true
-  })
+    return vertical.value
+      ? { bottom: currentPosition.value }
+      : { left: currentPosition.value };
+  });
+  watch(
+    () => dragging,
+    (val) => {
+      updateDragging(val.value);
+    },
+    {
+      deep: true,
+    }
+  );
   const handleDown = (event: MouseEvent) => {
-    if (disabled.value) return
+    if (disabled.value) return;
     event.preventDefault();
     dragging.value = true;
     window.addEventListener("mousemove", onDragging);
@@ -49,24 +60,23 @@ export const useSliderBar = (props: SliderBarProps, emit: any) => {
   const onDragging = async (e: MouseEvent) => {
     if (dragging.value) {
       // isCanHide.value = false;
-      const newPos = getCalcPos(e)
-      setUpDatePos(newPos)
+      const newPos = getCalcPos(e);
+      setUpDatePos(newPos);
     }
   };
-  const setUpDatePos = async(newPos: number) => {
-    emit('update:modelValue', newPos)
-    await nextTick()
+  const setUpDatePos = async (newPos: number) => {
+    emit("update:modelValue", newPos);
+    await nextTick();
     tooltip.value?.update();
-  }
+  };
   const onDragEnd = () => {
     if (dragging.value) {
       setTimeout(() => {
         dragging.value = false;
-      }, 0)
-      window.removeEventListener('mousemove', onDragging)
-      window.removeEventListener('mouseup', onDragEnd)
+      }, 0);
+      window.removeEventListener("mousemove", onDragging);
+      window.removeEventListener("mouseup", onDragEnd);
     }
-
   };
   return {
     formatValue,
@@ -74,6 +84,6 @@ export const useSliderBar = (props: SliderBarProps, emit: any) => {
     setUpDatePos,
     wrapperStyle,
     tooltip,
-    handleDown
-  }
-}
+    handleDown,
+  };
+};

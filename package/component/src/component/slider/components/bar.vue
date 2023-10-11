@@ -36,9 +36,7 @@ export default {
 };
 </script>
 <script lang="ts" setup>
-import {
-  useSlots,
-} from "vue";
+import { useSlots } from "vue";
 import LayTooltip from "../../tooltip/index.vue";
 import { useSliderProvide } from "../useSlider";
 import { useSliderBar } from "./use-slider-bar";
@@ -51,13 +49,8 @@ const props = withDefaults(defineProps<SliderBarProps>(), {
   modelValue: 0,
 });
 const { isDark, placement, isTips, isCanHide } = useSliderProvide();
-const {
-  wrapperStyle,
-  formatValue,
-  tooltip,
-  setUpDatePos,
-  handleDown
-} = useSliderBar(props, emit);
+const { wrapperStyle, formatValue, tooltip, setUpDatePos, handleDown } =
+  useSliderBar(props, emit);
 defineExpose({
   setUpDatePos,
 });

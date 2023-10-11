@@ -19,7 +19,7 @@
       <template #thumb v-if="slot.thumb">
         <slot name="thumb"></slot>
       </template>
-      <template #custom="value"  v-if="slot.custom">
+      <template #custom="value" v-if="slot.custom">
         <slot name="custom" v-bind="value"></slot>
       </template>
     </lay-slider-bar>
@@ -27,7 +27,7 @@
       <template #thumb v-if="slot.thumb">
         <slot name="thumb"></slot>
       </template>
-      <template #custom="value"  v-if="slot.custom">
+      <template #custom="value" v-if="slot.custom">
         <slot name="custom" v-bind="value"></slot>
       </template>
     </lay-slider-bar>
@@ -39,18 +39,18 @@
         :style="dotStyle(dot)"
       ></div>
     </div>
-      <div class="layui-slider-mark" v-if="marksList && marksList.length > 0">
-        <lay-slider-mark
-          :mark="marks.mark"
-          :style="dotStyle(marks.pos)"
-          v-for="marks of marksList"
-          :key="marks.pos"
-        >
-        <template  #mark="{mark}" v-if="slot.mark" >
+    <div class="layui-slider-mark" v-if="marksList && marksList.length > 0">
+      <lay-slider-mark
+        :mark="marks.mark"
+        :style="dotStyle(marks.pos)"
+        v-for="marks of marksList"
+        :key="marks.pos"
+      >
+        <template #mark="{ mark }" v-if="slot.mark">
           <slot name="mark" v-bind="mark"></slot>
         </template>
-        </lay-slider-mark>
-      </div>
+      </lay-slider-mark>
+    </div>
   </div>
 </template>
 <script lang="ts">
@@ -66,7 +66,7 @@ import LaySliderMark from "./components/mark.vue";
 import { computed, provide, toRefs, useSlots } from "vue";
 import { LAYUI_SLIDER_KEY, useSlider } from "./useSlider";
 import { useSliderMark } from "./components/use-slider-mark";
-import { Mark } from './types/sliderType'
+import { Mark } from "./types/sliderType";
 export interface SliderProps {
   vertical?: boolean;
   modelValue: number | Array<number>;
@@ -94,7 +94,7 @@ const props = withDefaults(defineProps<SliderProps>(), {
   isDark: true,
   range: false,
   isTips: false,
-  placement: 'top',
+  placement: "top",
   isCanHide: true,
 });
 const emit = defineEmits(["update:modelValue"]);
@@ -119,14 +119,14 @@ provide(LAYUI_SLIDER_KEY, {
   firstVal,
   secondVal,
   updateDragging,
-  getCalcPos
+  getCalcPos,
 });
 const getDotOrMark = computed(() => {
   if (props.marks) {
     return marksList.value.reduce((init: number[], el: Mark) => {
-      init.push(el.pos)
-      return init
-    }, [])
+      init.push(el.pos);
+      return init;
+    }, []);
   }
   if (props.showDots) {
     return getStop.value;

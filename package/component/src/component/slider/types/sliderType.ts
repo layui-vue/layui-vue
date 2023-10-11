@@ -27,17 +27,16 @@ export interface SliderProps {
   formatTooltip?: (val: number) => number | string;
 }
 
-
 export type Mark = {
   pos: number;
-  mark: string | { [k:string]: any }
-}
+  mark: string | { [k: string]: any };
+};
 
-export type Marks = Mark[]
+export type Marks = Mark[];
 
 export type SliderBarProps = {
   modelValue: number;
-}
+};
 
 export interface StyledMark {
   style: StyleValue;
