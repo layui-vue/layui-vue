@@ -15,6 +15,16 @@
   <lay-timeline>
     <lay-timeline-item title="2.9.x">
       <ul>
+        <a name="2-9-1"></a>
+        <li>
+          <h3>2.9.1 <span class="layui-badge-rim">2023-10-11</span></h3>
+          <ul>
+              <li>[优化] layer 组件 resize 启用时，拉伸选中文字的问题。</li>
+              <li>[升级] layer-vue 到 2.1.0 版本。</li>
+          </ul>
+        </li>
+      </ul>
+      <ul>
         <a name="2-9-0"></a>
         <li>
           <h3>2.9.0 <span class="layui-badge-rim">2023-10-10</span></h3>
