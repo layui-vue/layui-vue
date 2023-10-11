@@ -1,7 +1,7 @@
 /*
  * @Author: baobaobao
  * @Date: 2023-10-09 17:15:52
- * @LastEditTime: 2023-10-10 20:19:20
+ * @LastEditTime: 2023-10-11 19:52:24
  * @LastEditors: baobaobao
  */
 
@@ -10,20 +10,24 @@ import { StyleValue } from "vue";
 export interface MarkList {
   [key: number]: string;
 }
+export interface TooltipProps {
+  isCanHide: boolean;
+  disabled: boolean;
+  placement: string;
+  isDark: boolean;
+}
 export interface SliderProps {
   vertical: boolean;
   modelValue: number | Array<number>;
+  rangeValue?: Array<number>;
   min: number;
   max: number;
   step: number;
   disabled: boolean;
   range: boolean;
   showDots: boolean;
-  isDark: boolean;
-  isCanHide: boolean;
-  isTips: boolean;
   marks?: Record<number, any>;
-  placement: string;
+  tooltipProps?: Record<string, boolean | string>;
   formatTooltip?: (val: number) => number | string;
 }
 
@@ -45,4 +49,10 @@ export interface StyledMark {
 }
 export interface MarkPoints {
   mark: StyledMark;
+}
+export interface tooltipProps  {
+  position?: string;
+  isDark?:  string;
+  disabled?: boolean;
+  isCanHide?: boolean;
 }

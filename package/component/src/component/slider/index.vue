@@ -1,7 +1,7 @@
 <!--
  * @Author: baobaobao
  * @Date: 2023-09-30 16:51:14
- * @LastEditTime: 2023-10-10 21:10:35
+ * @LastEditTime: 2023-10-11 20:02:19
  * @LastEditors: baobaobao
 -->
 <template>
@@ -63,26 +63,26 @@ import "./index.less";
 import laySliderBar from "./components/bar.vue";
 import LaySliderMark from "./components/mark.vue";
 
-import { computed, provide, toRefs, useSlots } from "vue";
+import { computed, provide, Ref, ref, toRefs, useSlots, watch } from "vue";
 import { LAYUI_SLIDER_KEY, useSlider } from "./useSlider";
 import { useSliderMark } from "./components/use-slider-mark";
-import { Mark } from "./types/sliderType";
+import { Mark } from './types/sliderType'
+
 export interface SliderProps {
   vertical?: boolean;
-  modelValue: number | Array<number>;
+  modelValue?: number | Array<number>;
   min?: number;
   max?: number;
   step?: number;
   disabled?: boolean;
   range?: boolean;
   showDots?: boolean;
-  isDark?: boolean;
-  isCanHide?: boolean;
-  isTips?: boolean;
+  rangeValue?: number[];
+  tooltipProps?: Record<string, boolean | string>;
   marks?: Record<number, any>;
-  placement?: string;
   formatTooltip?: (val: number) => number | string;
 }
+
 const props = withDefaults(defineProps<SliderProps>(), {
   vertical: false,
   modelValue: 0,
@@ -91,13 +91,16 @@ const props = withDefaults(defineProps<SliderProps>(), {
   min: 0,
   max: 100,
   showDots: false,
-  isDark: true,
   range: false,
-  isTips: false,
-  placement: "top",
-  isCanHide: true,
+  rangeValue: () => [],
+  tooltipProps: () => ({
+    isCanHide: true,
+    disabled: false,
+    placement: 'top',
+    isDark: false
+  })
 });
-const emit = defineEmits(["update:modelValue"]);
+const emit = defineEmits(["update:modelValue", "update:rangeValue",  "change"]);
 
 const slot = useSlots();
 const {
@@ -112,10 +115,12 @@ const {
   getStop,
   getCalcPos,
   updateDragging,
+  tooltipProp,
 } = useSlider(props, emit);
 const { marksList } = useSliderMark(props);
 provide(LAYUI_SLIDER_KEY, {
   ...toRefs(props),
+  tooltipProp,
   firstVal,
   secondVal,
   updateDragging,
