@@ -1,7 +1,7 @@
 <!--
  * @Author: baobaobao
  * @Date: 2023-10-06 13:36:55
- * @LastEditTime: 2023-10-10 21:11:44
+ * @LastEditTime: 2023-10-11 20:03:22
  * @LastEditors: baobaobao
 -->
 <template>
@@ -12,7 +12,7 @@
   >
     <lay-tooltip
       :isDark="isDark"
-      :disabled="isTips"
+      :disabled="disabled"
       :position="placement"
       ref="tooltip"
       :is-can-hide="isCanHide"
@@ -36,7 +36,7 @@ export default {
 };
 </script>
 <script lang="ts" setup>
-import { useSlots } from "vue";
+import { useSlots, toRefs } from "vue";
 import LayTooltip from "../../tooltip/index.vue";
 import { useSliderProvide } from "../useSlider";
 import { useSliderBar } from "./use-slider-bar";
@@ -48,9 +48,15 @@ const slot = useSlots();
 const props = withDefaults(defineProps<SliderBarProps>(), {
   modelValue: 0,
 });
-const { isDark, placement, isTips, isCanHide } = useSliderProvide();
-const { wrapperStyle, formatValue, tooltip, setUpDatePos, handleDown } =
-  useSliderBar(props, emit);
+const { tooltipProp } = useSliderProvide();
+const { isDark, placement, disabled, isCanHide } = toRefs(tooltipProp)
+const {
+  wrapperStyle,
+  formatValue,
+  tooltip,
+  setUpDatePos,
+  handleDown
+} = useSliderBar(props, emit);
 defineExpose({
   setUpDatePos,
 });
