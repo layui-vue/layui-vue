@@ -13,6 +13,17 @@
 ::: demo
 <template>
   <lay-timeline>
+     <lay-timeline-item title="2.10.x">
+      <ul>
+        <a name="2-10-0"></a>
+        <li>
+          <h3>2.10.0 <span class="layui-badge-rim">2023-10-12</span></h3>
+          <ul>
+            <li>[新增] table 组件 columns 属性 ignoreExport 配置，用于配置列导出忽略。</li>
+          </ul>
+        </li>
+      </ul>
+    </lay-timeline-item>
     <lay-timeline-item title="2.9.x">
       <ul>
         <a name="2-9-1"></a>
