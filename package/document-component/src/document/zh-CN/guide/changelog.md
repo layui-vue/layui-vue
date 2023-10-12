@@ -21,7 +21,7 @@
           <ul>
             <li>[新增] table 组件 columns 属性 ignoreExport 配置，用于配置列导出忽略。</li>
             <li>[新增] badge.md 组件 color, ripple 属性说明。</li>
-            <li>[文档] 重构 tooltip 文档，优化案例理解门槛。</li>
+            <li>[优化] tooltip.md 文档，改善 demo 阅读门槛。</li>
           </ul>
         </li>
       </ul>
