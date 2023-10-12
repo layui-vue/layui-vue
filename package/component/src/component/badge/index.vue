@@ -34,19 +34,16 @@ const styles = computed<StyleValue>(() => {
 });
 
 const rippleClasses = computed(() => {
-  return [
-    props.theme ? `layui-bg-${props.theme}` : ``
-  ]
-})
+  return [props.theme ? `layui-bg-${props.theme}` : ``];
+});
 
 const rippleStyles = computed(() => {
   return [
     props.color
       ? `background-color: ${props.color}`
-      : 'background-color: #ff5722;'
-  ]
-})
-
+      : "background-color: #ff5722;",
+  ];
+});
 </script>
 
 <template>

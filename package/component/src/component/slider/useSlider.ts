@@ -5,7 +5,20 @@
  * @LastEditors: baobaobao
  */
 
-import { InjectionKey, nextTick, computed, inject, provide, reactive, ref, shallowRef, toRefs, watch, onMounted, Ref } from "vue";
+import {
+  InjectionKey,
+  nextTick,
+  computed,
+  inject,
+  provide,
+  reactive,
+  ref,
+  shallowRef,
+  toRefs,
+  watch,
+  onMounted,
+  Ref,
+} from "vue";
 import { SliderProps, TooltipProps } from "./types/sliderType";
 
 export const LAYUI_SLIDER_KEY: InjectionKey<any> = Symbol("layui-slider");
@@ -19,12 +32,12 @@ export const useSlider = (props: SliderProps, emit) => {
   const tooltipProp = reactive<Record<string, boolean | string>>({
     isCanHide: true,
     disabled: false,
-    placement: 'top',
-    isDark: false
-})
-  const laySliderBar1 = ref<any>(null)
-  const laySliderBar2 = ref<any>(null)
-  const dragging = ref(false)
+    placement: "top",
+    isDark: false,
+  });
+  const laySliderBar1 = ref<any>(null);
+  const laySliderBar2 = ref<any>(null);
+  const dragging = ref(false);
   const slider = ref<HTMLElement | null>(null);
   onMounted(() => {
     initValidate();
@@ -76,60 +89,78 @@ export const useSlider = (props: SliderProps, emit) => {
       return getAllStop.filter((e) => e >= props.min && e <= props.max);
       // || e >= (100 * (maxValue.value - props.min) / (props.max - props.min)))
     }
-    return getAllStop.filter(e => e >= props.min && e <= props.max)
-  })
-  watch(() => props.tooltipProps, () => {
-    if (props.tooltipProps) {
-      for (const key in props.tooltipProps) {
-        if (key in tooltipProp) {
-          tooltipProp[key] = props.tooltipProps[key];
+    return getAllStop.filter((e) => e >= props.min && e <= props.max);
+  });
+  watch(
+    () => props.tooltipProps,
+    () => {
+      if (props.tooltipProps) {
+        for (const key in props.tooltipProps) {
+          if (key in tooltipProp) {
+            tooltipProp[key] = props.tooltipProps[key];
+          }
         }
       }
+    },
+    {
+      immediate: true,
+      deep: true,
     }
-  }, {
-    immediate: true,
-    deep: true
-  })
-  watch(() => initVal, (val) => {
-    if (props.range) {
-      emit('update:modelValue', [minValue.value, maxValue.value])
-      emit('update:rangeValue', [minValue.value, maxValue.value])
-      emit('change', [minValue.value, maxValue.value])
-    } else {
-      emit('update:modelValue', minValue.value)
-      emit('change', minValue.value)
-    }
-  }, {
-    deep: true
-  })
-  watch(() => dragging, val => {
-    if (!val.value) {
+  );
+  watch(
+    () => initVal,
+    (val) => {
       if (props.range) {
-        const modelValue = props.modelValue ? props.modelValue : props.rangeValue
-        if (Array.isArray(modelValue) && modelValue.length > 0) {
-          initVal.firstVal = modelValue[0]
-          initVal.secondVal = modelValue[1]
-        }
+        emit("update:modelValue", [minValue.value, maxValue.value]);
+        emit("update:rangeValue", [minValue.value, maxValue.value]);
+        emit("change", [minValue.value, maxValue.value]);
       } else {
         emit("update:modelValue", minValue.value);
+        emit("change", minValue.value);
       }
+    },
+    {
+      deep: true,
     }
-  }, {
-    deep: true
-  })
-  watch(() => [props.modelValue, props.rangeValue], (vals, oldVal) => {
-    const modelValue = props.modelValue ? vals[0] : vals[1]
-    const oldValue =   props.modelValue ? oldVal[0] : oldVal[1]
-    if (
-      dragging.value ||
-      Array.isArray(modelValue)
-      && Array.isArray(oldValue)
-      && modelValue.every((item, index) => item === oldValue[index])) {
-      return
+  );
+  watch(
+    () => dragging,
+    (val) => {
+      if (!val.value) {
+        if (props.range) {
+          const modelValue = props.modelValue
+            ? props.modelValue
+            : props.rangeValue;
+          if (Array.isArray(modelValue) && modelValue.length > 0) {
+            initVal.firstVal = modelValue[0];
+            initVal.secondVal = modelValue[1];
+          }
+        } else {
+          emit("update:modelValue", minValue.value);
+        }
+      }
+    },
+    {
+      deep: true,
     }
-    initValidate()
-  })
-  
+  );
+  watch(
+    () => [props.modelValue, props.rangeValue],
+    (vals, oldVal) => {
+      const modelValue = props.modelValue ? vals[0] : vals[1];
+      const oldValue = props.modelValue ? oldVal[0] : oldVal[1];
+      if (
+        dragging.value ||
+        (Array.isArray(modelValue) &&
+          Array.isArray(oldValue) &&
+          modelValue.every((item, index) => item === oldValue[index]))
+      ) {
+        return;
+      }
+      initValidate();
+    }
+  );
+
   const setPos = (pos: number) => {
     if (props.range) {
       if (
@@ -188,20 +219,14 @@ export const useSlider = (props: SliderProps, emit) => {
 
   const initValidate = () => {
     if (props.range) {
-      const modelValue = props.modelValue ? props.modelValue : props.rangeValue
+      const modelValue = props.modelValue ? props.modelValue : props.rangeValue;
       if (Array.isArray(modelValue)) {
         let firstVal = Math.min(
-          Math.max(
-            props.min,
-            modelValue[0] ? modelValue[0] : props.min
-          ),
+          Math.max(props.min, modelValue[0] ? modelValue[0] : props.min),
           props.max
         );
         let secondVal = Math.min(
-          Math.max(
-            props.min,
-            modelValue[1] ? modelValue[1] : props.min
-          ),
+          Math.max(props.min, modelValue[1] ? modelValue[1] : props.min),
           props.max
         );
         initVal.firstVal = firstVal;
@@ -232,6 +257,6 @@ export const useSlider = (props: SliderProps, emit) => {
     getCalcPos,
     updateDragging,
     tooltipProp,
-    ...toRefs(initVal)
-  }
-}
+    ...toRefs(initVal),
+  };
+};

@@ -66,7 +66,7 @@ import LaySliderMark from "./components/mark.vue";
 import { computed, provide, Ref, ref, toRefs, useSlots, watch } from "vue";
 import { LAYUI_SLIDER_KEY, useSlider } from "./useSlider";
 import { useSliderMark } from "./components/use-slider-mark";
-import { Mark } from './types/sliderType'
+import { Mark } from "./types/sliderType";
 
 export interface SliderProps {
   vertical?: boolean;
@@ -96,11 +96,11 @@ const props = withDefaults(defineProps<SliderProps>(), {
   tooltipProps: () => ({
     isCanHide: true,
     disabled: false,
-    placement: 'top',
-    isDark: false
-  })
+    placement: "top",
+    isDark: false,
+  }),
 });
-const emit = defineEmits(["update:modelValue", "update:rangeValue",  "change"]);
+const emit = defineEmits(["update:modelValue", "update:rangeValue", "change"]);
 
 const slot = useSlots();
 const {

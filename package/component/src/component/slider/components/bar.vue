@@ -49,14 +49,9 @@ const props = withDefaults(defineProps<SliderBarProps>(), {
   modelValue: 0,
 });
 const { tooltipProp } = useSliderProvide();
-const { isDark, placement, disabled, isCanHide } = toRefs(tooltipProp)
-const {
-  wrapperStyle,
-  formatValue,
-  tooltip,
-  setUpDatePos,
-  handleDown
-} = useSliderBar(props, emit);
+const { isDark, placement, disabled, isCanHide } = toRefs(tooltipProp);
+const { wrapperStyle, formatValue, tooltip, setUpDatePos, handleDown } =
+  useSliderBar(props, emit);
 defineExpose({
   setUpDatePos,
 });

@@ -50,9 +50,9 @@ export interface StyledMark {
 export interface MarkPoints {
   mark: StyledMark;
 }
-export interface tooltipProps  {
+export interface tooltipProps {
   position?: string;
-  isDark?:  string;
+  isDark?: string;
   disabled?: boolean;
   isCanHide?: boolean;
 }
