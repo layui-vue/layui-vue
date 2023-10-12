@@ -21,6 +21,8 @@
           <ul>
             <li>[新增] table 组件 columns 属性 ignoreExport 配置，用于配置列导出忽略。</li>
             <li>[新增] badge.md 组件 color, ripple 属性说明。</li>
+            <li>[修复] tooltip 组件 isAutoShow 属性为 true 时，包裹文本刷新时 isAutoShow 失效。</li>
+            <li>[修复] table 组件 columns 属性 ellipsisTooltip 配置刷新数据后失效。</li>
             <li>[优化] tooltip.md 文档，改善 demo 阅读门槛。</li>
           </ul>
         </li>

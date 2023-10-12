@@ -4,6 +4,7 @@ export default {
   inheritAttrs: false,
 };
 </script>
+
 <script lang="ts" setup>
 import "./index.less";
 import LayPopper from "../popper/index.vue";
@@ -12,12 +13,13 @@ import {
   getCurrentInstance,
   nextTick,
   onMounted,
+  onUnmounted,
   PropType,
   ref,
   shallowRef,
   StyleValue,
 } from "vue";
-import { useEventListener } from "@vueuse/core";
+import { unrefElement, useEventListener } from "@vueuse/core";
 
 export type PopperTrigger = "click" | "hover" | "focus" | "contextMenu";
 
@@ -68,7 +70,7 @@ const props = defineProps({
 
 const vm = getCurrentInstance()!;
 const isMounted = ref(false);
-const tooltipRefEl = shallowRef<HTMLElement | undefined>(undefined);
+const tooltipRef = shallowRef<HTMLElement | undefined>(undefined);
 const popperRef = ref<HTMLElement | undefined>();
 
 const innerProps = computed(() => {
@@ -76,13 +78,9 @@ const innerProps = computed(() => {
 });
 
 const setEllipsis = function () {
-  if (tooltipRefEl.value) {
-    let tooltipHtml = tooltipRefEl.value;
-
-    if (
-      tooltipHtml.offsetWidth >=
-      (tooltipHtml.firstChild as HTMLElement)?.offsetWidth
-    ) {
+  if (tooltipRef.value) {
+    let tooltipHtml = tooltipRef.value;
+    if (tooltipHtml.offsetWidth >= (tooltipHtml.firstChild as HTMLElement)?.offsetWidth) {
       isMounted.value = false;
     } else {
       isMounted.value = true;
@@ -92,11 +90,24 @@ const setEllipsis = function () {
   }
 };
 
+const observer = new MutationObserver(() => {
+  nextTick(() => {
+    setEllipsis();
+  })
+})
+
 onMounted(() => {
   if (props.isAutoShow) {
     useEventListener("resize", () => {
       setEllipsis();
     });
+    if (tooltipRef.value) {
+      observer.observe(tooltipRef.value, {
+        childList: true,
+        characterData: true,
+        subtree: true,
+      });
+    }
   }
   nextTick(() => {
     setEllipsis();
@@ -109,7 +120,7 @@ const doHidden = function () {
     popperRef.value.hide();
   });
 };
-// console.log(popperRef.value)
+
 const update = function () {
   nextTick(() => {
     // @ts-ignore
@@ -120,7 +131,7 @@ const update = function () {
 defineExpose({ hide: doHidden, update });
 </script>
 <template>
-  <div ref="tooltipRefEl" v-if="isAutoShow" class="lay-tooltip-content">
+  <div ref="tooltipRef" v-if="isAutoShow" class="lay-tooltip-content">
     <span>
       <slot></slot>
     </span>

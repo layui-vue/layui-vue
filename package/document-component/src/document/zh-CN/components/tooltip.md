@@ -26,7 +26,7 @@
 
 <template>
     <lay-space>
-      <lay-tooltip :visible="visible" :disabled="true" trigger="click" content="假装这里有文字提示" >
+      <lay-tooltip :visible="visible" trigger="click" content="假装这里有文字提示" >
         <lay-button>提示信息</lay-button>
       </lay-tooltip>
       <lay-switch v-model="visible"></lay-switch>
@@ -134,6 +134,33 @@ const isDark = ref(false);
       }
     }
   }
+</script>
+:::
+
+::: title 自动提示
+:::
+
+::: demo 通过 `is-dark` 属性，开启暗色主题。
+
+<template>
+    <lay-space>
+        <div @click="changeText"><lay-button>Edit</lay-button></div>
+        <div style="width: 100px;">
+          <lay-tooltip content="不明白是是非非，只知我不会不在。" :isAutoShow="true">
+            {{ text }}
+          </lay-tooltip>
+        </div>
+    </lay-space>
+</template>
+
+<script>
+import { ref } from "vue";
+
+const text = ref("自动提示");
+
+const changeText = () => {
+  text.value = "以创造性的行为实践于人世。若能以写作为工具，为道途，先帮助自己一程，再以领悟帮助他人一程。这是一种服务";
+}
 </script>
 :::
 
