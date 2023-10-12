@@ -37,7 +37,7 @@ export default {
 ::: title 控制状态
 :::
 
-::: demo 通过 `lay-loading` 创建局部加载。
+::: demo 通过 `loading` 属性，控制加载状态。
 
 <template>
     <lay-switch v-model="loading1"></lay-switch>
@@ -64,7 +64,7 @@ export default {
 ::: title 延迟时间
 :::
 
-::: demo 通过 `lay-loading` 创建局部加载。
+::: demo 通过 `delay` 属性, 设置延迟时间。
 
 <template>
     <lay-switch v-model="loading2"></lay-switch>
@@ -91,7 +91,7 @@ export default {
 ::: title 提示信息
 :::
 
-::: demo 通过 `lay-loading` 创建局部加载。
+::: demo 通过 `tip` 属性，设置提示内容。
 
 <template>
     <lay-switch v-model="loading3"></lay-switch>
@@ -118,7 +118,7 @@ export default {
 ::: title 应用场景
 :::
 
-::: demo 通过 `lay-loading` 创建局部加载。
+::: demo 通过 `lay-loading` 与 `lay-table` 搭配使用。
 
 <template>
     <lay-switch v-model="loading4"></lay-switch>
@@ -258,8 +258,6 @@ export default {
 
 ::: table
 
-::: table
-
 | 名称                | 描述             | 类型               | 默认值   | 可选值         |
 | ------------------- | ----------------| ------------------ | ------- | -------------- |
 | loading             | 加载状态         | `boolean`          | `true`  | `true` `false` |
@@ -267,7 +265,6 @@ export default {
 | type                | 动画类型         | `number`           | `0`      | `0` `1` `2`  |
 | tip                 | 提示信息         | `string`           |  --      | --            |
 
-:::
 :::
 
 ::: title Loading 插槽

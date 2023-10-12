@@ -95,7 +95,7 @@ export default {
           {
             id: 5,
             title: "夜间",
-            subTitle: "theme-dark",
+            subTitle: "themeDark",
             path: "/zh-CN/guide/dark",
           },
           {
