@@ -1,30 +1,17 @@
 /*
  * @Author: baobaobao
  * @Date: 2023-10-06 13:58:41
- * @LastEditTime: 2023-10-11 19:52:15
+ * @LastEditTime: 2023-10-13 10:13:51
  * @LastEditors: baobaobao
  */
 
-import {
-  InjectionKey,
-  nextTick,
-  computed,
-  inject,
-  provide,
-  reactive,
-  ref,
-  shallowRef,
-  toRefs,
-  watch,
-  onMounted,
-  Ref,
-} from "vue";
+import { InjectionKey, nextTick, computed, inject, provide, reactive, ref, shallowRef, toRefs, watch, onMounted, Ref, ComputedRef } from "vue";
 import { SliderProps, TooltipProps } from "./types/sliderType";
 
 export const LAYUI_SLIDER_KEY: InjectionKey<any> = Symbol("layui-slider");
 export const useSliderProvide = () => inject(LAYUI_SLIDER_KEY, {});
 
-export const useSlider = (props: SliderProps, emit) => {
+export const useSlider = (props: SliderProps, emit, getSortMarks: ComputedRef<number[]>) => {
   const initVal = reactive({
     firstVal: props.min,
     secondVal: props.max,
@@ -178,6 +165,18 @@ export const useSlider = (props: SliderProps, emit) => {
       laySliderBar1.value.setUpDatePos(pos);
     }
   };
+  const calcInterval  = (value: number) => {
+    let rangeData: number[] = []
+    for (let i = 0; i < getSortMarks.value.length - 1; i++) {
+    if (value >=  getSortMarks.value[i] && value <= getSortMarks.value[i + 1]) {
+        rangeData = [getSortMarks.value[i], getSortMarks.value[i + 1]];
+      }
+    }
+    if (rangeData && rangeData.length > 1) {
+      return value < (rangeData[0] + rangeData[1]) / 2 ? rangeData[0] :rangeData[1]
+    }
+    return value
+  }
   const getCalcPos = (e: MouseEvent) => {
     let domPos = slider.value!.getBoundingClientRect();
     let diff = e.clientX - domPos.left;
@@ -191,8 +190,13 @@ export const useSlider = (props: SliderProps, emit) => {
     if (pos < 0) {
       pos = 0;
     }
-    const lengthPerStep = 100 / ((props.max - props.min) / props.step);
+
+    const isSatisfy = props.isFollowMark && getSortMarks.value.length > 0
+    const lengthPerStep = 100 / ((props.max - props.min) / (isSatisfy ? 1 : props.step));
     const steps = Math.round(pos / lengthPerStep);
+    if (isSatisfy){
+      return calcInterval(steps * props.step + props.min)
+    }
     // console.log(lengthPerStep, 'lengthPerStep')
     // let value = steps * lengthPerStep * (props.max - props.min) * 0.01 + props.min
     // console.log(value)

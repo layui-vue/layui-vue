@@ -1,7 +1,7 @@
 <!--
  * @Author: baobaobao
  * @Date: 2023-09-30 16:51:14
- * @LastEditTime: 2023-10-11 20:02:19
+ * @LastEditTime: 2023-10-13 09:52:23
  * @LastEditors: baobaobao
 -->
 <template>
@@ -77,6 +77,7 @@ export interface SliderProps {
   disabled?: boolean;
   range?: boolean;
   showDots?: boolean;
+  isFollowMark?: boolean;
   rangeValue?: number[];
   tooltipProps?: Record<string, boolean | string>;
   marks?: Record<number, any>;
@@ -92,6 +93,7 @@ const props = withDefaults(defineProps<SliderProps>(), {
   max: 100,
   showDots: false,
   range: false,
+  isFollowMark: true,
   rangeValue: () => [],
   tooltipProps: () => ({
     isCanHide: true,
@@ -103,6 +105,7 @@ const props = withDefaults(defineProps<SliderProps>(), {
 const emit = defineEmits(["update:modelValue", "update:rangeValue", "change"]);
 
 const slot = useSlots();
+const { marksList, getSortMarks } = useSliderMark(props);
 const {
   handClick,
   barStyle,
@@ -116,15 +119,14 @@ const {
   getCalcPos,
   updateDragging,
   tooltipProp,
-} = useSlider(props, emit);
-const { marksList } = useSliderMark(props);
+} = useSlider(props, emit, getSortMarks);
 provide(LAYUI_SLIDER_KEY, {
   ...toRefs(props),
   tooltipProp,
   firstVal,
   secondVal,
   updateDragging,
-  getCalcPos,
+  getCalcPos
 });
 const getDotOrMark = computed(() => {
   if (props.marks) {

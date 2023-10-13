@@ -241,14 +241,25 @@ export default {
 ::: demo
 
 <template>
-  <lay-slider v-model="value16" :marks="marks">
-    <template #mark="{ label, point }">
-      <div v-if="isVNode(label)">
-      <component :is="label"></component>
-      </div>
-      <div v-else>{{label}}</div>
-    </template>
-  </lay-slider>
+  <lay-space direction="vertical" fill wrap :size="50">
+    <lay-slider v-model="value16" :marks="marks">
+      <template #mark="{ label, point }">
+        <div v-if="isVNode(label)">
+        <component :is="label"></component>
+        </div>
+        <div v-else>{{label}}</div>
+      </template>
+    </lay-slider>
+    <lay-line>is-follow-mark用法</lay-line>
+    <lay-slider :is-follow-mark="false" v-model="value22" :marks="marks">
+      <template #mark="{ label, point }">
+        <div v-if="isVNode(label)">
+        <component :is="label"></component>
+        </div>
+        <div v-else>{{label}}</div>
+      </template>
+    </lay-slider>
+  </lay-space>
 </template>
 
 <script>
@@ -257,6 +268,7 @@ import { FaceSmileIcon } from '@layui/icons-vue';
 export default {
   setup() {
     const value16 = ref(0)
+    const value22 = ref(0)
     const marks = ref({
           0: '0°C',
           8: '8°C',
@@ -271,13 +283,16 @@ export default {
         })
     return {
       value16,
-      marks
+      marks,
+      value22
     }
   }
 }
 </script>
 
 :::
+
+
 
 ::: title 自定义按钮
 :::
@@ -408,7 +423,8 @@ export default {
 | min            | 最小值                                | `Number`          | -      | `1 `                                           |        |
 | max            | 最大值                                | `Number`          | -      | `100`                                          |        |
 | disabled       | 是否禁用                              | `Boolean`         | -      | `false`                                        |        |
-| showDots       | 是否显示断点                          | `Boolean`         | -      | `false`                                        |        |
+| showDots       | 是否显示断点                          | `Boolean`         | -      | `false`   
+| is-follow-mark       | 默认只能拖拽到刻度上, 配合mark使用。     | `Boolean`         | -      | `true`                                        |        |
 | tooltip-props   | tooltip 相关配置属性 | `Object` | -      | `{isCanHide:true,disabled:false,placement:'top',isDark:false}`  | 
 | mark           | 刻度                                  | `object`          | -      | `{ label: string、 VNode ,  style: object   }` |
 | format-tooltip | 格式化提示信息                        | `function(value)` | -      | `undefined`                                    |        |
