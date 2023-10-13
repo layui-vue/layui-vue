@@ -1,15 +1,17 @@
 <!--
  * @Author: baobaobao
  * @Date: 2023-09-30 16:51:14
- * @LastEditTime: 2023-10-13 09:52:23
+ * @LastEditTime: 2023-10-13 15:37:10
  * @LastEditors: baobaobao
 -->
 <template>
   <div
     :class="[
-      'layui-slider',
-      vertical ? 'layui-slider-vertical' : '',
-      disabled ? 'is-disabled' : '',
+      'layui-slider', {
+        'layui-slider-vertical': vertical,
+        'is-disabled':disabled,
+        'is-reverse': reverse
+      }
     ]"
     ref="slider"
     @click="handClick"
@@ -63,7 +65,7 @@ import "./index.less";
 import laySliderBar from "./components/bar.vue";
 import LaySliderMark from "./components/mark.vue";
 
-import { computed, provide, Ref, ref, toRefs, useSlots, watch } from "vue";
+import { computed, provide, reactive, Ref, ref, toRefs, useSlots, watch } from "vue";
 import { LAYUI_SLIDER_KEY, useSlider } from "./useSlider";
 import { useSliderMark } from "./components/use-slider-mark";
 import { Mark } from "./types/sliderType";
@@ -78,6 +80,7 @@ export interface SliderProps {
   range?: boolean;
   showDots?: boolean;
   isFollowMark?: boolean;
+  reverse?: boolean;
   rangeValue?: number[];
   tooltipProps?: Record<string, boolean | string>;
   marks?: Record<number, any>;
@@ -93,6 +96,7 @@ const props = withDefaults(defineProps<SliderProps>(), {
   max: 100,
   showDots: false,
   range: false,
+  reverse: false,
   isFollowMark: true,
   rangeValue: () => [],
   tooltipProps: () => ({
@@ -119,9 +123,11 @@ const {
   getCalcPos,
   updateDragging,
   tooltipProp,
+  // calcRange
 } = useSlider(props, emit, getSortMarks);
 provide(LAYUI_SLIDER_KEY, {
   ...toRefs(props),
+  // ...toRefs(calcRange),
   tooltipProp,
   firstVal,
   secondVal,

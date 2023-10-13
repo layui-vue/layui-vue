@@ -1,7 +1,7 @@
 /*
  * @Author: baobaobao
  * @Date: 2023-10-09 17:15:52
- * @LastEditTime: 2023-10-12 16:34:27
+ * @LastEditTime: 2023-10-13 13:57:15
  * @LastEditors: baobaobao
  */
 
@@ -27,6 +27,7 @@ export interface SliderProps {
   range: boolean;
   showDots: boolean;
   marks?: Record<number, any>;
+  reverse?:boolean;
   isFollowMark?: boolean;
   tooltipProps?: Record<string, boolean | string>;
   formatTooltip?: (val: number) => number | string;

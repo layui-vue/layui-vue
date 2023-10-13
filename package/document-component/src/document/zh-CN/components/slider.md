@@ -14,8 +14,11 @@
 
 <template>
   <lay-space direction="vertical" fill wrap size="md">
-  <lay-slider v-model="value1"></lay-slider>
-  <lay-input-number v-model="value1"></lay-input-number>
+    <lay-slider v-model="value1"></lay-slider>
+    <lay-input-number v-model="value1"></lay-input-number>
+    <lay-line>反转</lay-line>
+     <lay-switch v-model="reverse"></lay-switch>
+    <lay-slider :reverse="reverse"  v-model="value110"></lay-slider>
   </lay-space>
 </template>
 
@@ -25,8 +28,12 @@ import { ref } from 'vue'
 export default {
   setup() {
     const value1 = ref(50)
+    const value110 = ref([0,100])
+    const reverse = ref(true)
     return {
-      value1
+      value1,
+      value110,
+      reverse
     }
   }
 }
@@ -41,7 +48,8 @@ export default {
 <template>
   <lay-space  :size="50">
     <lay-slider v-model="value2" vertical ></lay-slider>
-    <lay-slider v-model="value2" vertical disabled></lay-slider>
+    <lay-slider v-model="value298" vertical reverse></lay-slider>
+    <lay-slider v-model="value276" vertical disabled></lay-slider>
      <lay-slider v-model="value90" vertical range></lay-slider>
      <lay-slider v-model="value91" vertical range :marks="mark91"></lay-slider>
   </lay-space>
@@ -54,6 +62,8 @@ export default {
   setup() {
 
     const value2 = ref(50)
+    const value298 = ref(0)
+    const  value276 = ref(0)
     const value90 = ref([0,  100])
     const value91 = ref([0,  100])
     const mark91 = ref({
@@ -72,7 +82,9 @@ export default {
         value2,
         value90,
         value91,
-        mark91
+        value276,
+        mark91,
+        value298
     }
   }
 }
@@ -424,7 +436,8 @@ export default {
 | max            | 最大值                                | `Number`          | -      | `100`                                          |        |
 | disabled       | 是否禁用                              | `Boolean`         | -      | `false`                                        |        |
 | showDots       | 是否显示断点                          | `Boolean`         | -      | `false`   
-| is-follow-mark       | 默认只能拖拽到刻度上, 配合mark使用。     | `Boolean`         | -      | `true`                                        |        |
+| is-follow-mark       | 默认只能拖拽到刻度上, 配合mark使用。     | `Boolean`         | -      | `true`
+| reverse       |  反向     | `Boolean`         | -      | `false`                                        |        |
 | tooltip-props   | tooltip 相关配置属性 | `Object` | -      | `{isCanHide:true,disabled:false,placement:'top',isDark:false}`  | 
 | mark           | 刻度                                  | `object`          | -      | `{ label: string、 VNode ,  style: object   }` |
 | format-tooltip | 格式化提示信息                        | `function(value)` | -      | `undefined`                                    |        |

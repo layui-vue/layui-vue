@@ -1,7 +1,7 @@
 /*
  * @Author: baobaobao
  * @Date: 2023-10-06 13:58:41
- * @LastEditTime: 2023-10-13 10:13:51
+ * @LastEditTime: 2023-10-13 22:27:29
  * @LastEditors: baobaobao
  */
 
@@ -40,24 +40,24 @@ export const useSlider = (props: SliderProps, emit, getSortMarks: ComputedRef<nu
     if (props.range) {
       if (props.vertical) {
         return {
-          bottom: `${minCalc}%`,
+          [props.reverse ? 'top' : 'bottom']: `${minCalc}%`,
           height: `${maxCalc}%`,
         };
       }
       return {
         width: `${maxCalc}%`,
-        left: `${minCalc}%`,
+        [props.reverse ? 'right' : 'left']: `${minCalc}%`,
       };
     } else {
       if (props.vertical) {
         return {
-          bottom: "0%",
+          [props.reverse ? 'top' : 'bottom']: "0%",
           height: `${minCalc}%`,
         };
       }
       return {
         width: `${minCalc}%`,
-        left: "0%",
+        [props.reverse ? 'right' : 'left']: "0%",
       };
     }
   });
@@ -147,7 +147,18 @@ export const useSlider = (props: SliderProps, emit, getSortMarks: ComputedRef<nu
       initValidate();
     }
   );
-
+  watch(() => [props.min, props.max], () =>  {
+    if (typeof props.min !== 'number' 
+    || typeof props.max !== 'number' 
+    || isNaN(props.min) || isNaN(props.max)) {
+      throw new Error('max与min应为数值!')
+      return
+    }
+    if (props.max < props.min) {
+      throw new Error('max请大于min!')
+      return
+    }
+  })
   const setPos = (pos: number) => {
     if (props.range) {
       if (
@@ -179,9 +190,11 @@ export const useSlider = (props: SliderProps, emit, getSortMarks: ComputedRef<nu
   }
   const getCalcPos = (e: MouseEvent) => {
     let domPos = slider.value!.getBoundingClientRect();
-    let diff = e.clientX - domPos.left;
+    const GETDOM_VALUE_H =  props.reverse ? domPos.right : domPos.left
+    const GETDOM_VALUE_V =  props.reverse ? domPos.top : domPos.bottom
+    let diff = (e.clientX - GETDOM_VALUE_H) * (props.reverse ? -1 : 1);
     if (props.vertical) {
-      diff = (e.clientY - domPos.bottom) * -1;
+      diff = (e.clientY - GETDOM_VALUE_V) * (props.reverse ? 1 : -1);
     }
     let pos = (diff / (props.vertical ? domPos.height : domPos.width)) * 100;
     if (pos > 100) {
@@ -190,7 +203,6 @@ export const useSlider = (props: SliderProps, emit, getSortMarks: ComputedRef<nu
     if (pos < 0) {
       pos = 0;
     }
-
     const isSatisfy = props.isFollowMark && getSortMarks.value.length > 0
     const lengthPerStep = 100 / ((props.max - props.min) / (isSatisfy ? 1 : props.step));
     const steps = Math.round(pos / lengthPerStep);

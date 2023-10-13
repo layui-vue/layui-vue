@@ -104,7 +104,21 @@
     }
   }
 }
-
+.is-reverse:not(.layui-slider-vertical) {
+  .layui-slider-bar {
+    left: auto;
+  }
+  .layui-slider-handle {
+    right: 0;
+    transform: translate(50%);
+    left: auto;
+  }
+}
+.layui-slider-vertical.is-reverse {
+  .layui-slider-handle {
+    transform: translate(0%, -50%);
+  }
+}
 :where(.layui-slider).is-disabled {
   cursor: not-allowed;
   .layui-slider-bar {
