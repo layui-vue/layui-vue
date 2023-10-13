@@ -1,3 +1,9 @@
+/*
+ * @Author: baobaobao
+ * @Date: 2023-10-11 19:50:26
+ * @LastEditTime: 2023-10-13 09:34:24
+ * @LastEditors: baobaobao
+ */
 import { computed, isVNode } from "vue";
 import { Mark, SliderProps } from "../types/sliderType";
 
@@ -35,7 +41,17 @@ export const useSliderMark = (props: SliderProps) => {
       });
     return getMarkList;
   });
+  const getSortMarks = computed(() => {
+    if (!props.marks) {
+      return [];
+      
+    }
+    const getAllkeys = Object.keys(props.marks).map(parseFloat)
+    getAllkeys.push(props.min, props.max)
+    return getAllkeys.sort((a, b) => a - b)
+  })
   return {
     marksList,
+    getSortMarks
   };
 };

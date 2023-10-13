@@ -1,7 +1,7 @@
 /*
  * @Author: baobaobao
  * @Date: 2023-10-06 13:43:22
- * @LastEditTime: 2023-10-10 21:12:12
+ * @LastEditTime: 2023-10-12 20:40:58
  * @LastEditors: baobaobao
  */
 
@@ -17,7 +17,7 @@ export const useSliderBar = (props: SliderBarProps, emit: any) => {
     getCalcPos,
     updateDragging,
     min,
-    max,
+    max
   } = useSliderProvide();
   const tooltip = shallowRef<any>(null);
   const dragging = ref(false);
@@ -59,7 +59,6 @@ export const useSliderBar = (props: SliderBarProps, emit: any) => {
   };
   const onDragging = async (e: MouseEvent) => {
     if (dragging.value) {
-      // isCanHide.value = false;
       const newPos = getCalcPos(e);
       setUpDatePos(newPos);
     }
@@ -80,7 +79,6 @@ export const useSliderBar = (props: SliderBarProps, emit: any) => {
   };
   return {
     formatValue,
-    // isCanHide,
     setUpDatePos,
     wrapperStyle,
     tooltip,
