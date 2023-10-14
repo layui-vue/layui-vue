@@ -7,11 +7,12 @@
 <template>
   <div
     :class="[
-      'layui-slider', {
+      'layui-slider',
+      {
         'layui-slider-vertical': vertical,
-        'is-disabled':disabled,
-        'is-reverse': reverse
-      }
+        'is-disabled': disabled,
+        'is-reverse': reverse,
+      },
     ]"
     ref="slider"
     @click="handClick"
@@ -65,7 +66,16 @@ import "./index.less";
 import laySliderBar from "./components/bar.vue";
 import LaySliderMark from "./components/mark.vue";
 
-import { computed, provide, reactive, Ref, ref, toRefs, useSlots, watch } from "vue";
+import {
+  computed,
+  provide,
+  reactive,
+  Ref,
+  ref,
+  toRefs,
+  useSlots,
+  watch,
+} from "vue";
 import { LAYUI_SLIDER_KEY, useSlider } from "./useSlider";
 import { useSliderMark } from "./components/use-slider-mark";
 import { Mark } from "./types/sliderType";
@@ -132,7 +142,7 @@ provide(LAYUI_SLIDER_KEY, {
   firstVal,
   secondVal,
   updateDragging,
-  getCalcPos
+  getCalcPos,
 });
 const getDotOrMark = computed(() => {
   if (props.marks) {

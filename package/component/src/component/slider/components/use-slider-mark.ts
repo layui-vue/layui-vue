@@ -44,14 +44,13 @@ export const useSliderMark = (props: SliderProps) => {
   const getSortMarks = computed(() => {
     if (!props.marks) {
       return [];
-      
     }
-    const getAllkeys = Object.keys(props.marks).map(parseFloat)
-    getAllkeys.push(props.min, props.max)
-    return getAllkeys.sort((a, b) => a - b)
-  })
+    const getAllkeys = Object.keys(props.marks).map(parseFloat);
+    getAllkeys.push(props.min, props.max);
+    return getAllkeys.sort((a, b) => a - b);
+  });
   return {
     marksList,
-    getSortMarks
+    getSortMarks,
   };
 };

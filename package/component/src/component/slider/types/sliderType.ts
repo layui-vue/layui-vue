@@ -27,7 +27,7 @@ export interface SliderProps {
   range: boolean;
   showDots: boolean;
   marks?: Record<number, any>;
-  reverse?:boolean;
+  reverse?: boolean;
   isFollowMark?: boolean;
   tooltipProps?: Record<string, boolean | string>;
   formatTooltip?: (val: number) => number | string;

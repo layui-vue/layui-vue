@@ -5,13 +5,31 @@
  * @LastEditors: baobaobao
  */
 
-import { InjectionKey, nextTick, computed, inject, provide, reactive, ref, shallowRef, toRefs, watch, onMounted, Ref, ComputedRef } from "vue";
+import {
+  InjectionKey,
+  nextTick,
+  computed,
+  inject,
+  provide,
+  reactive,
+  ref,
+  shallowRef,
+  toRefs,
+  watch,
+  onMounted,
+  Ref,
+  ComputedRef,
+} from "vue";
 import { SliderProps, TooltipProps } from "./types/sliderType";
 
 export const LAYUI_SLIDER_KEY: InjectionKey<any> = Symbol("layui-slider");
 export const useSliderProvide = () => inject(LAYUI_SLIDER_KEY, {});
 
-export const useSlider = (props: SliderProps, emit, getSortMarks: ComputedRef<number[]>) => {
+export const useSlider = (
+  props: SliderProps,
+  emit,
+  getSortMarks: ComputedRef<number[]>
+) => {
   const initVal = reactive({
     firstVal: props.min,
     secondVal: props.max,
@@ -40,24 +58,24 @@ export const useSlider = (props: SliderProps, emit, getSortMarks: ComputedRef<nu
     if (props.range) {
       if (props.vertical) {
         return {
-          [props.reverse ? 'top' : 'bottom']: `${minCalc}%`,
+          [props.reverse ? "top" : "bottom"]: `${minCalc}%`,
           height: `${maxCalc}%`,
         };
       }
       return {
         width: `${maxCalc}%`,
-        [props.reverse ? 'right' : 'left']: `${minCalc}%`,
+        [props.reverse ? "right" : "left"]: `${minCalc}%`,
       };
     } else {
       if (props.vertical) {
         return {
-          [props.reverse ? 'top' : 'bottom']: "0%",
+          [props.reverse ? "top" : "bottom"]: "0%",
           height: `${minCalc}%`,
         };
       }
       return {
         width: `${minCalc}%`,
-        [props.reverse ? 'right' : 'left']: "0%",
+        [props.reverse ? "right" : "left"]: "0%",
       };
     }
   });
@@ -147,18 +165,24 @@ export const useSlider = (props: SliderProps, emit, getSortMarks: ComputedRef<nu
       initValidate();
     }
   );
-  watch(() => [props.min, props.max], () =>  {
-    if (typeof props.min !== 'number' 
-    || typeof props.max !== 'number' 
-    || isNaN(props.min) || isNaN(props.max)) {
-      throw new Error('max与min应为数值!')
-      return
+  watch(
+    () => [props.min, props.max],
+    () => {
+      if (
+        typeof props.min !== "number" ||
+        typeof props.max !== "number" ||
+        isNaN(props.min) ||
+        isNaN(props.max)
+      ) {
+        throw new Error("max与min应为数值!");
+        return;
+      }
+      if (props.max < props.min) {
+        throw new Error("max请大于min!");
+        return;
+      }
     }
-    if (props.max < props.min) {
-      throw new Error('max请大于min!')
-      return
-    }
-  })
+  );
   const setPos = (pos: number) => {
     if (props.range) {
       if (
@@ -176,22 +200,27 @@ export const useSlider = (props: SliderProps, emit, getSortMarks: ComputedRef<nu
       laySliderBar1.value.setUpDatePos(pos);
     }
   };
-  const calcInterval  = (value: number) => {
-    let rangeData: number[] = []
+  const calcInterval = (value: number) => {
+    let rangeData: number[] = [];
     for (let i = 0; i < getSortMarks.value.length - 1; i++) {
-    if (value >=  getSortMarks.value[i] && value <= getSortMarks.value[i + 1]) {
+      if (
+        value >= getSortMarks.value[i] &&
+        value <= getSortMarks.value[i + 1]
+      ) {
         rangeData = [getSortMarks.value[i], getSortMarks.value[i + 1]];
       }
     }
     if (rangeData && rangeData.length > 1) {
-      return value < (rangeData[0] + rangeData[1]) / 2 ? rangeData[0] :rangeData[1]
+      return value < (rangeData[0] + rangeData[1]) / 2
+        ? rangeData[0]
+        : rangeData[1];
     }
-    return value
-  }
+    return value;
+  };
   const getCalcPos = (e: MouseEvent) => {
     let domPos = slider.value!.getBoundingClientRect();
-    const GETDOM_VALUE_H =  props.reverse ? domPos.right : domPos.left
-    const GETDOM_VALUE_V =  props.reverse ? domPos.top : domPos.bottom
+    const GETDOM_VALUE_H = props.reverse ? domPos.right : domPos.left;
+    const GETDOM_VALUE_V = props.reverse ? domPos.top : domPos.bottom;
     let diff = (e.clientX - GETDOM_VALUE_H) * (props.reverse ? -1 : 1);
     if (props.vertical) {
       diff = (e.clientY - GETDOM_VALUE_V) * (props.reverse ? 1 : -1);
@@ -203,11 +232,12 @@ export const useSlider = (props: SliderProps, emit, getSortMarks: ComputedRef<nu
     if (pos < 0) {
       pos = 0;
     }
-    const isSatisfy = props.isFollowMark && getSortMarks.value.length > 0
-    const lengthPerStep = 100 / ((props.max - props.min) / (isSatisfy ? 1 : props.step));
+    const isSatisfy = props.isFollowMark && getSortMarks.value.length > 0;
+    const lengthPerStep =
+      100 / ((props.max - props.min) / (isSatisfy ? 1 : props.step));
     const steps = Math.round(pos / lengthPerStep);
-    if (isSatisfy){
-      return calcInterval(steps * props.step + props.min)
+    if (isSatisfy) {
+      return calcInterval(steps * props.step + props.min);
     }
     // console.log(lengthPerStep, 'lengthPerStep')
     // let value = steps * lengthPerStep * (props.max - props.min) * 0.01 + props.min

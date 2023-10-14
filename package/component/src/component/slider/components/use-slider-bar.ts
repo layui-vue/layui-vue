@@ -19,9 +19,9 @@ export const useSliderBar = (props: SliderBarProps, emit: any) => {
     updateDragging,
     min,
     max,
-    tooltipProp
+    tooltipProp,
   } = useSliderProvide();
-  const isCanHide = ref(tooltipProp.isCanHide)
+  const isCanHide = ref(tooltipProp.isCanHide);
   const tooltip = shallowRef<any>(null);
   const dragging = ref(false);
   const enableFormat = computed(() => {
@@ -41,8 +41,8 @@ export const useSliderBar = (props: SliderBarProps, emit: any) => {
 
   const wrapperStyle = computed(() => {
     return vertical.value
-      ? { [ reverse.value ? 'top'  : 'bottom']: currentPosition.value }
-      : { [ reverse.value ? 'right' : 'left' ]: currentPosition.value };
+      ? { [reverse.value ? "top" : "bottom"]: currentPosition.value }
+      : { [reverse.value ? "right" : "left"]: currentPosition.value };
   });
   watch(
     () => dragging,
@@ -77,9 +77,9 @@ export const useSliderBar = (props: SliderBarProps, emit: any) => {
   const onDragEnd = () => {
     if (dragging.value) {
       if (!isCanHide.value) {
-        tooltipProp.isCanHide = false
+        tooltipProp.isCanHide = false;
       } else {
-        tooltipProp.isCanHide = true
+        tooltipProp.isCanHide = true;
       }
       setTimeout(() => {
         dragging.value = false;

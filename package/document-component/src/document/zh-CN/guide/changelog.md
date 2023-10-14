@@ -19,6 +19,7 @@
         <li>
           <h3>2.10.0 <span class="layui-badge-rim">2023-10-12</span></h3>
           <ul>
+            <li>[新增] slider 组件 model-value 属性 array 类型兼容。</li>
             <li>[新增] slider 组件 reverse 属性, 实现初始值与结束值的转换。</li>
             <li>[新增] silder 组件 tooltip-props 属性, 传入 tooltip 继承属性，自定义效果。</li>
             <li>[新增] silder 组件 mark 属性, 设置自定义刻度。</li>
