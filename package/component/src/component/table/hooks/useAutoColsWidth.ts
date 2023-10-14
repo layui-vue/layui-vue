@@ -78,7 +78,11 @@ function handleLongest(
     const sourceItem = data[i];
     colsMap.forEach((value, key) => {
       if (value.width) return;
-      if (typeof sourceItem[key] !== "string") return;
+      if (
+        typeof sourceItem[key] !== "string" &&
+        typeof sourceItem[key] !== "number"
+      )
+        return;
       const longestKey = longestMap.get(key);
       if (longestKey) {
         if (longestKey.length < sourceItem[key].length) {
