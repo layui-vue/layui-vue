@@ -80,7 +80,10 @@ const innerProps = computed(() => {
 const setEllipsis = function () {
   if (tooltipRef.value) {
     let tooltipHtml = tooltipRef.value;
-    if (tooltipHtml.offsetWidth >= (tooltipHtml.firstChild as HTMLElement)?.offsetWidth) {
+    if (
+      tooltipHtml.offsetWidth >=
+      (tooltipHtml.firstChild as HTMLElement)?.offsetWidth
+    ) {
       isMounted.value = false;
     } else {
       isMounted.value = true;
@@ -93,8 +96,8 @@ const setEllipsis = function () {
 const observer = new MutationObserver(() => {
   nextTick(() => {
     setEllipsis();
-  })
-})
+  });
+});
 
 onMounted(() => {
   if (props.isAutoShow) {

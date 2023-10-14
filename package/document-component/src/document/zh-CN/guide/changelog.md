@@ -19,10 +19,20 @@
         <li>
           <h3>2.10.0 <span class="layui-badge-rim">2023-10-12</span></h3>
           <ul>
+            <li>[新增] slider 组件 reverse 属性, 实现初始值与结束值的转换。</li>
+            <li>[新增] silder 组件 tooltip-props 属性, 传入 tooltip 继承属性，自定义效果。</li>
+            <li>[新增] silder 组件 mark 属性, 设置自定义刻度。</li>
+            <li>[新增] slider 组件 format-tooltip 函数，格式化 tooltip 内容。</li>
+            <li>[新增] slider 组件 is-follow-mark 属性, 设置拖拽按钮是否在自定义刻度停顿。</li>
+            <li>[新增] slider 组件 thumb 插槽，定制化拖拽按钮。</li>
+            <li>[新增] slider 组件 mark 插槽，定制化刻度渲染内容。</li>
+            <li>[新增] slider 组件 custom 插槽，定制化 tooltip 显示内容。</li>
+            <li>[新增] slider 组件 change 时间，按钮拖拽回调。</li>
             <li>[新增] table 组件 columns 属性 ignoreExport 配置，用于配置列导出忽略。</li>
             <li>[新增] badge.md 组件 color, ripple 属性说明。</li>
             <li>[修复] tooltip 组件 isAutoShow 属性为 true 时，包裹文本刷新时 isAutoShow 失效。</li>
             <li>[修复] table 组件 columns 属性 ellipsisTooltip 配置刷新数据后失效。</li>
+            <li>[修复] table 组件 autoColsWidth 不兼容 number 类型字段的问题。</li>
             <li>[优化] tooltip.md 文档，改善 demo 阅读门槛。</li>
           </ul>
         </li>
