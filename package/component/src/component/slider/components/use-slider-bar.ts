@@ -1,7 +1,7 @@
 /*
  * @Author: baobaobao
  * @Date: 2023-10-06 13:43:22
- * @LastEditTime: 2023-10-12 20:40:58
+ * @LastEditTime: 2023-10-13 17:36:13
  * @LastEditors: baobaobao
  */
 
@@ -15,10 +15,13 @@ export const useSliderBar = (props: SliderBarProps, emit: any) => {
     vertical,
     disabled,
     getCalcPos,
+    reverse,
     updateDragging,
     min,
-    max
+    max,
+    tooltipProp
   } = useSliderProvide();
+  const isCanHide = ref(tooltipProp.isCanHide)
   const tooltip = shallowRef<any>(null);
   const dragging = ref(false);
   const enableFormat = computed(() => {
@@ -38,8 +41,8 @@ export const useSliderBar = (props: SliderBarProps, emit: any) => {
 
   const wrapperStyle = computed(() => {
     return vertical.value
-      ? { bottom: currentPosition.value }
-      : { left: currentPosition.value };
+      ? { [ reverse.value ? 'top'  : 'bottom']: currentPosition.value }
+      : { [ reverse.value ? 'right' : 'left' ]: currentPosition.value };
   });
   watch(
     () => dragging,
@@ -54,6 +57,9 @@ export const useSliderBar = (props: SliderBarProps, emit: any) => {
     if (disabled.value) return;
     event.preventDefault();
     dragging.value = true;
+    if (isCanHide.value) {
+      tooltipProp.isCanHide = false;
+    }
     window.addEventListener("mousemove", onDragging);
     window.addEventListener("mouseup", onDragEnd);
   };
@@ -70,6 +76,11 @@ export const useSliderBar = (props: SliderBarProps, emit: any) => {
   };
   const onDragEnd = () => {
     if (dragging.value) {
+      if (!isCanHide.value) {
+        tooltipProp.isCanHide = false
+      } else {
+        tooltipProp.isCanHide = true
+      }
       setTimeout(() => {
         dragging.value = false;
       }, 0);
