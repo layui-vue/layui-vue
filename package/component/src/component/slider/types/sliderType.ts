@@ -1,7 +1,7 @@
 /*
  * @Author: baobaobao
  * @Date: 2023-10-09 17:15:52
- * @LastEditTime: 2023-10-13 13:57:15
+ * @LastEditTime: 2023-10-15 17:06:07
  * @LastEditors: baobaobao
  */
 
@@ -45,7 +45,7 @@ export type SliderBarProps = {
 };
 
 export interface StyledMark {
-  style: StyleValue;
+  style?: StyleValue;
   label: string;
   point: number;
 }
