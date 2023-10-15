@@ -1,11 +1,11 @@
 /*
  * @Author: baobaobao
  * @Date: 2023-10-11 19:50:26
- * @LastEditTime: 2023-10-13 09:34:24
+ * @LastEditTime: 2023-10-15 17:09:40
  * @LastEditors: baobaobao
  */
 import { computed, isVNode } from "vue";
-import { Mark, SliderProps } from "../types/sliderType";
+import { Mark, SliderProps, StyledMark } from "../types/sliderType";
 
 export const useSliderMark = (props: SliderProps) => {
   const marksList = computed(() => {
@@ -16,8 +16,8 @@ export const useSliderMark = (props: SliderProps) => {
     const getMarkList = getAllkeys
       .sort((a, b) => a - b)
       .filter((item) => item >= props.min && item <= props.max)
-      .map((pos): Mark => {
-        let mark: any = {};
+      .map((pos) => {
+        let mark = {}
         if (
           typeof props.marks![pos] === "object" &&
           !isVNode(props.marks![pos])
@@ -39,7 +39,10 @@ export const useSliderMark = (props: SliderProps) => {
           mark,
         };
       });
-    return getMarkList;
+    return getMarkList as {
+      pos: number;
+      mark: StyledMark
+    }[];
   });
   const getSortMarks = computed(() => {
     if (!props.marks) {
