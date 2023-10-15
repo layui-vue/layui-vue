@@ -117,7 +117,7 @@ const props = withDefaults(defineProps<CascaderProps>(), {
   onlyLastLevel: false,
   allowClear: false,
   disabled: false,
-  trigger: "click",
+  trigger: () => ["click"],
   changeOnSelect: false,
   replaceFields: () => {
     return {
@@ -298,16 +298,17 @@ const selectBar = (
       .join(props.decollator);
     if (action === "click") {
       emit("update:modelValue", value);
+      if (firstInitComplete.value) {
+        let evt = {
+          display: displayValue.value,
+          value: value,
+          label: fullLable,
+          currentClick: JSON.parse(JSON.stringify(item.orginData)),
+        };
+        emit("change", evt);
+      }
     }
-    if (firstInitComplete.value) {
-      let evt = {
-        display: displayValue.value,
-        value: value,
-        label: fullLable,
-        currentClick: JSON.parse(JSON.stringify(item.orginData)),
-      };
-      emit("change", evt);
-    }
+
     if (dropdownRef.value) {
       if (props.changeOnSelect && item.children && item.children.length > 0) {
         return;
