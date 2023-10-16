@@ -17,7 +17,7 @@
       <ul>
         <a name="2-10-0"></a>
         <li>
-          <h3>2.10.0 <span class="layui-badge-rim">2023-10-12</span></h3>
+          <h3>2.10.0 <span class="layui-badge-rim">2023-10-16</span></h3>
           <ul>
             <li>[新增] slider 组件 model-value 属性 array 类型兼容。</li>
             <li>[新增] slider 组件 reverse 属性, 实现初始值与结束值的转换。</li>
@@ -34,6 +34,7 @@
             <li>[修复] tooltip 组件 isAutoShow 属性为 true 时，包裹文本刷新时 isAutoShow 失效。</li>
             <li>[修复] table 组件 columns 属性 ellipsisTooltip 配置刷新数据后失效。</li>
             <li>[修复] table 组件 autoColsWidth 不兼容 number 类型字段的问题。</li>
+            <li>[修复] cascader 组件 多次触发 change 事件的问题。</li>
             <li>[优化] tooltip.md 文档，改善 demo 阅读门槛。</li>
           </ul>
         </li>
