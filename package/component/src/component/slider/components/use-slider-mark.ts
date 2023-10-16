@@ -17,7 +17,7 @@ export const useSliderMark = (props: SliderProps) => {
       .sort((a, b) => a - b)
       .filter((item) => item >= props.min && item <= props.max)
       .map((pos) => {
-        let mark = {}
+        let mark = {};
         if (
           typeof props.marks![pos] === "object" &&
           !isVNode(props.marks![pos])
@@ -41,7 +41,7 @@ export const useSliderMark = (props: SliderProps) => {
       });
     return getMarkList as {
       pos: number;
-      mark: StyledMark
+      mark: StyledMark;
     }[];
   });
   const getSortMarks = computed(() => {

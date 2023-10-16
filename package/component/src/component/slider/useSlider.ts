@@ -7,27 +7,23 @@
 
 import {
   InjectionKey,
-  nextTick,
   computed,
   inject,
-  provide,
   reactive,
   ref,
-  shallowRef,
   toRefs,
   watch,
   onMounted,
-  Ref,
   ComputedRef,
 } from "vue";
-import { SliderProps, TooltipProps } from "./types/sliderType";
+import { SliderProps } from "./types/sliderType";
 
 export const LAYUI_SLIDER_KEY: InjectionKey<any> = Symbol("layui-slider");
 export const useSliderProvide = () => inject(LAYUI_SLIDER_KEY, {});
 
 export const useSlider = (
   props: SliderProps,
-  emit,
+  emit: any,
   getSortMarks: ComputedRef<number[]>
 ) => {
   const initVal = reactive({
