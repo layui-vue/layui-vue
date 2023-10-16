@@ -35,6 +35,7 @@
             <li>[修复] table 组件 columns 属性 ellipsisTooltip 配置刷新数据后失效。</li>
             <li>[修复] table 组件 autoColsWidth 不兼容 number 类型字段的问题。</li>
             <li>[修复] cascader 组件 多次触发 change 事件的问题。</li>
+            <li>[优化] date-picker 组件，调整 dropdown 顶部操作 font-size 为 12px。</li>
             <li>[优化] tooltip.md 文档，改善 demo 阅读门槛。</li>
           </ul>
         </li>
