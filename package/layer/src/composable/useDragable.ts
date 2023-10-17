@@ -1,12 +1,10 @@
 function getParentNode(el: any) {
   while (el && el.parentNode) {
     el = el.parentNode;
-
     if (el && getComputedStyle(el).position === "relative") {
       return el;
     }
   }
-
   return null;
 }
 
