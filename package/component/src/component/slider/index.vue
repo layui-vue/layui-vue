@@ -9,6 +9,7 @@
     :class="[
       'layui-slider',
       {
+        'layui-slider-horizontal': !vertical,
         'layui-slider-vertical': vertical,
         'is-disabled': disabled,
         'is-reverse': reverse,
@@ -116,6 +117,7 @@ const props = withDefaults(defineProps<SliderProps>(), {
     isDark: false,
   }),
 });
+
 const emit = defineEmits(["update:modelValue", "update:rangeValue", "change"]);
 
 const slot = useSlots();
@@ -133,11 +135,9 @@ const {
   getCalcPos,
   updateDragging,
   tooltipProp,
-  // calcRange
 } = useSlider(props, emit, getSortMarks);
 provide(LAYUI_SLIDER_KEY, {
   ...toRefs(props),
-  // ...toRefs(calcRange),
   tooltipProp,
   firstVal,
   secondVal,
