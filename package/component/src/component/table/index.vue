@@ -401,11 +401,13 @@ const exportData = () => {
   for (let tableHeadColumn of tableHeadColumns.value) {
     tableStr += "<tr>";
     for (let column of tableHeadColumn) {
-      // 如果 column.type 等于 checkbox 或 radio 时，该列不导出
-      if ((column.type && column.type === "number") || !column.type) {
-        tableStr += `<td colspan=${column.colspan} rowspan=${column.rowspan}>${
-          column.title || ""
-        }</td>`;
+      if (!column.ignoreExport) {
+        // 如果 column.type 等于 checkbox 或 radio 时，该列不导出
+        if ((column.type && column.type === "number") || !column.type) {
+          tableStr += `<td colspan=${column.colspan} rowspan=${
+            column.rowspan
+          }>${column.title || ""}</td>`;
+        }
       }
     }
     tableStr += "</tr>";
@@ -413,34 +415,36 @@ const exportData = () => {
   tableDataSource.value.forEach((item, rowIndex) => {
     tableStr += "<tr>";
     tableBodyColumns.value.forEach((tableColumn, columnIndex) => {
-      // 如果该列是特殊列，并且类型为 number 时，特殊处理
-      if (tableColumn.type && tableColumn.type == "number") {
-        tableStr += `<td>${rowIndex + 1}</td>`;
-      } else {
-        // 如果不是特殊列，进行字段匹配处理
-        if (tableColumn.type == undefined) {
-          var columnData = undefined;
-          Object.keys(item).forEach((name) => {
-            if (tableColumn.key === name) {
-              columnData = item;
-            }
-          });
-          // 拼接列
-          const rowColSpan = props.spanMethod(
-            item,
-            tableColumn,
-            rowIndex,
-            columnIndex
-          );
-          const rowspan = rowColSpan ? rowColSpan[0] : 1;
-          const colspan = rowColSpan ? rowColSpan[1] : 1;
+      if (!tableColumn.ignoreExport) {
+        // 如果该列是特殊列，并且类型为 number 时，特殊处理
+        if (tableColumn.type && tableColumn.type == "number") {
+          tableStr += `<td>${rowIndex + 1}</td>`;
+        } else {
+          // 如果不是特殊列，进行字段匹配处理
+          if (tableColumn.type == undefined) {
+            var columnData = undefined;
+            Object.keys(item).forEach((name) => {
+              if (tableColumn.key === name) {
+                columnData = item;
+              }
+            });
+            // 拼接列
+            const rowColSpan = props.spanMethod(
+              item,
+              tableColumn,
+              rowIndex,
+              columnIndex
+            );
+            const rowspan = rowColSpan ? rowColSpan[0] : 1;
+            const colspan = rowColSpan ? rowColSpan[1] : 1;
 
-          // 如果 rowspan 和 colspan 是 0 说明该列作为合并列的辅助列。
-          // 则不再进行结构拼接。
-          if (rowspan != 0 && colspan != 0) {
-            tableStr += `<td colspan=${colspan} rowspan=${rowspan}>${
-              columnData ? columnData[tableColumn.key] : ""
-            }</td>`;
+            // 如果 rowspan 和 colspan 是 0 说明该列作为合并列的辅助列。
+            // 则不再进行结构拼接。
+            if (rowspan != 0 && colspan != 0) {
+              tableStr += `<td colspan=${colspan} rowspan=${rowspan}>${
+                columnData ? columnData[tableColumn.key] : ""
+              }</td>`;
+            }
           }
         }
       }

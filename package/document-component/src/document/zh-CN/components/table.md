@@ -65,7 +65,7 @@ export default {
       { title:"签名", width: "260px", key:"remark" },
       { title:"隐藏", width: "260px", key:"hide", hide: true },
       { title:"时间", width: "120px", key:"joinTime" },
-      { title:"操作", width: "150px", customSlot:"operator", key:"operator", fixed: "right" }
+      { title:"操作", width: "150px", customSlot:"operator", key:"operator", fixed: "right", ignoreExport: true }
     ]);
 
     const change = (page) => {
@@ -1028,6 +1028,7 @@ export default {
 | children        | 表头分组                       | `string`  | --      | `number` `checkbox` `radio` | `1.4.0` |
 | resize          | 单元格列宽拖动                 | `boolean` | `false` | `true` `false`              | `1.9.4` |
 | hide            | 默认是否隐藏                   | `boolean` | `false` | `true` `false`              | `1.9.4` |
+| ignoreExport    | 忽略导出                       | `boolean` | `false` | `true` `false`             | `2.10.0`|
 :::
 
 ::: previousNext table

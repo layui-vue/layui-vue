@@ -1,12 +1,10 @@
 function getParentNode(el: any) {
   while (el && el.parentNode) {
     el = el.parentNode;
-
     if (el && getComputedStyle(el).position === "relative") {
       return el;
     }
   }
-
   return null;
 }
 
@@ -104,6 +102,9 @@ const useResize = function (el: HTMLElement, callback: Function) {
           var x = el.offsetLeft;
           var y = el.offsetTop;
           const move = function (moveEvent: any) {
+            if (window.getSelection != undefined) {
+              window.getSelection()?.removeAllRanges();
+            }
             if (el != null) {
               var offsetX = moveEvent.clientX;
               var offsetY = moveEvent.clientY;

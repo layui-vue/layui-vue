@@ -32,19 +32,23 @@ const classes = computed(() => {
 const styles = computed<StyleValue>(() => {
   return [props.color ? `background-color: ${props.color}` : ""];
 });
+
+const rippleClasses = computed(() => {
+  return [props.theme ? `layui-bg-${props.theme}` : ``];
+});
+
+const rippleStyles = computed(() => {
+  return [
+    props.color
+      ? `background-color: ${props.color}`
+      : "background-color: #ff5722;",
+  ];
+});
 </script>
 
 <template>
   <span :class="classes" :style="styles">
-    <span
-      v-if="type === 'dot'"
-      :class="props.theme ? `layui-bg-${props.theme}` : ``"
-      :style="
-        props.color
-          ? `background-color: ${props.color}`
-          : 'background-color: #ff5722;'
-      "
-    >
+    <span v-if="type === 'dot'" :class="rippleClasses" :style="rippleStyles">
     </span>
     <slot v-if="type != 'dot'"></slot>
   </span>
