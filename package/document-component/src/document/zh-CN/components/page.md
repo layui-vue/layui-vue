@@ -13,7 +13,7 @@
 ::: demo 使用 `lay-page` 标签, 创建分页
 
 <template>
-  <lay-page  v-model="currentPage1" :limit="limit" :total="total1"></lay-page>
+  <lay-page  v-model="currentPage1" :limit="limit" :total="total11"></lay-page>
 </template>
 
 <script>
@@ -22,7 +22,7 @@ import { ref } from 'vue'
 export default {
   setup() {
     const limit = ref(10)
-    const total1 = ref(100)
+    const total11 = ref(500)
     const currentPage1 = ref(1);
 
     return {

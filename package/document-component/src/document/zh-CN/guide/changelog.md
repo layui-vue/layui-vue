@@ -13,6 +13,18 @@
 ::: demo
 <template>
   <lay-timeline>
+       <lay-timeline-item title="2.10.x">
+      <ul>
+        <a name="2-10-1"></a>
+        <li>
+          <h3>2.10.1 <span class="layui-badge-rim">2023-10-21</span></h3>
+          <ul>
+            <li>[修复] page 组件 total 属性为 0 时，页面显示 1 | 0 的问题。</li>
+            <li>[修复] update 组件取消文件选择后，內部仍出发后续解析上传的流程问题 。</li>
+          </ul>
+        </li>
+      </ul>
+    </lay-timeline-item>
      <lay-timeline-item title="2.10.x">
       <ul>
         <a name="2-10-0"></a>
