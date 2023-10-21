@@ -392,7 +392,7 @@ const uploadChange = (e: any) => {
   const _files = [...(e.target.files || e.dataTransfer.files)];
   if (_files.length === 0) {
     return;
-  };
+  }
   cutImageType.value = _files[0].type;
   if (props.multiple && props.number != 0 && props.number < _files.length) {
     errorF(numberErrorMsg.value);
