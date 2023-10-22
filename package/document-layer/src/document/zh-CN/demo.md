@@ -155,6 +155,7 @@ const open111 = function() {
     layer.open({
         type: 1,
         title: "标题",
+        shadeStyle: "background: red",
         move: false,
         content: "内容",
         end: (id) => {
