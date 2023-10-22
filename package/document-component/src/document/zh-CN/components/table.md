@@ -60,11 +60,11 @@ export default {
       { title:"状态", width: "80px", key:"status", customSlot: "status"},
       { title:"邮箱", width: "120px", key:"email" },
       { title:"性别", width: "80px", key:"sex" },
-      { title:"年龄", width: "80px", key:"age" },
+      { title:"年龄", width: "80px", key:"age", totalRow: true},
       { title:"城市", width: "120px", key:"city" },
       { title:"签名", width: "260px", key:"remark" },
-      { title:"隐藏", width: "260px", key:"hide", hide: true },
-      { title:"时间", width: "120px", key:"joinTime" },
+      { title:"隐藏", width: "260px", key:"hide", hide: true, totalRow: "自定义" },
+      { title:"时间", width: "120px", key:"joinTime"},
       { title:"操作", width: "150px", customSlot:"operator", key:"operator", fixed: "right", ignoreExport: true }
     ]);
 
@@ -440,7 +440,7 @@ export default {
 ::: demo 通过 `column` 配置的 `children` 属性嵌套 `column` 配置, 以实现多级表头。
 
 <template>
-  <lay-table :columns="columns5" :data-source="dataSource5"></lay-table>
+  <lay-table :default-toolbar="true" :columns="columns5" :data-source="dataSource5"></lay-table>
 </template>
 
 <script>
@@ -879,17 +879,23 @@ export default {
   setup() {
 
     const columns2 = [
-      { title:"编号", width:"80px", key:"id", fixed: "left", sort: "desc" , totalRow: "合计"},
+      { title:"编号", width:"80px", key:"id", fixed: "left", sort: "desc"},
       { title:"姓名", width:"80px", key:"name" },
       { title:"班级", width:"120px", key:"classes" },
-      { title:"语文", width:"80px", key:"chinese", totalRow: true },
-      { title:"数学", width:"80px", key:"mathematics", totalRow: true  },
-      { title:"英语", width:"80px", key:"english", totalRow: true  },
-      { title:"生物", width:"80px", key:"organism", totalRow: true  },
-      { title:"地理", width:"80px", key:"geography", totalRow: true  },
-      { title:"历史", width:"80px", key:"history", totalRow: true  },
-      { title:"政治", width:"80px", key:"politics", totalRow: true  },
-      { title:"总分", width: "180px", key:"score"  }
+      {
+        title: "分数",
+        key: "total",
+        children: [
+          { title:"语文", width:"80px", key:"chinese", totalRow: true },
+          { title:"数学", width:"80px", key:"mathematics", totalRow: true  },
+          { title:"英语", width:"80px", key:"english", totalRow: true  },
+          { title:"生物", width:"80px", key:"organism", totalRow: true  },
+          { title:"地理", width:"80px", key:"geography", totalRow: true  },
+          { title:"历史", width:"80px", key:"history", totalRow: true  },
+          { title:"政治", width:"80px", key:"politics", totalRow: true  },
+          { title:"总分", width: "180px", key:"score", totalRow: true  }
+        ]
+      }
     ]
 
     const dataSource2 = [

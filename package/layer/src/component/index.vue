@@ -80,6 +80,7 @@ export interface LayerProps {
   shade?: boolean | string;
   shadeClose?: boolean | string;
   shadeOpacity?: string;
+  shadeStyle?: StyleValue;
   closeBtn?: boolean | string;
   btnAlign?: "l" | "c" | "r";
   time?: number;
@@ -743,6 +744,7 @@ defineExpose({ reset, open, close, full });
   <Teleport :to="teleport" :disabled="teleportDisabled">
     <Shade
       :index="index"
+      :shade-style="shadeStyle"
       :visible="shadeVisible"
       :opacity="shadeOpacity"
       :teleport="teleport"

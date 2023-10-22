@@ -13,6 +13,23 @@
 ::: demo
 <template>
   <lay-timeline>
+       <lay-timeline-item title="2.10.x">
+      <ul>
+        <a name="2-10-1"></a>
+        <li>
+          <h3>2.10.1 <span class="layui-badge-rim">2023-10-21</span></h3>
+          <ul>
+            <li>[新增] layer 组件 shadeStyle 属性，设置遮盖层样式。</li>
+            <li>[修复] tree-select 组件 multiple 属性为 false 时，change 事件触发两次的问题。</li>
+            <li>[修复] page 组件 total 属性为 0 时，页面显示 1 | 0 的问题。</li>
+            <li>[修复] upload 组件取消文件选择后，內部仍出发后续解析上传的流程问题。</li>
+            <li>[修复] table 组件 children 属性内的子节点 totalRow 属性不起作用的问题。</li>
+            <li>[优化] table 组件 totalRow 合并行始终固定在表格最底部，不再随数据流位置而变化。</li>
+            <li>[升级] layer-vue 2.1.1 版本。</li>
+          </ul>
+        </li>
+      </ul>
+    </lay-timeline-item>
      <lay-timeline-item title="2.10.x">
       <ul>
         <a name="2-10-0"></a>

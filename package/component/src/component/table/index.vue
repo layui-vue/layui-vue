@@ -104,6 +104,26 @@ const { columnSlotNames, dataSourceCount, needSelectedKeys } = useTable(props);
 const tableColumnKeys = ref<any[]>([]);
 const tableHeadColumns = ref<any[]>([]);
 const tableBodyColumns = ref<any[]>([]);
+const tableFlattenColumns = ref<any[]>([]);
+
+/**
+ * 获取叶节点集合
+ *
+ * @param columns 原始 columns 配置结构
+ */
+const flattenColumns = (columns: any[]) => {
+  let result: any[] = [];
+  for (const item of columns) {
+    if (item.children && item.children.length > 0) {
+      // 如果存在子项，则使用 concat 方法将子项的遍历结果合并到当前结果中
+      result = result.concat(flattenColumns(item.children));
+    } else {
+      // 否则，将当前项添加到结果集合中
+      result.push(item);
+    }
+  }
+  return result;
+};
 
 /**
  * 获取数组深度
@@ -243,9 +263,11 @@ watch(
     tableColumnKeys.value = [];
     tableBodyColumns.value = [];
     tableHeadColumns.value = [];
+    tableFlattenColumns.value = [];
     findFindNode(tableColumns.value);
     findFindNodes(tableColumns.value);
     findFinalNode(0, tableColumns.value, undefined);
+    tableFlattenColumns.value = flattenColumns(tableColumns.value);
   },
   { immediate: true }
 );
@@ -512,6 +534,7 @@ const sortTable = (e: any, key: string, sort: string) => {
 
 let tableBody = ref<HTMLElement | null>(null);
 let tableHeader = ref<HTMLElement | null>(null);
+let tableTotal = ref<HTMLElement | null>(null);
 let tableHeaderTable = ref<HTMLElement | null>(null);
 let tableBodyTable = ref<HTMLElement | null>(null);
 const tableBodyEmptyWidth = ref();
@@ -569,6 +592,7 @@ onMounted(() => {
 
 const getFixedColumn = () => {
   tableHeader.value!.scrollLeft = tableBody.value?.scrollLeft || 0;
+  tableTotal.value!.scrollLeft = tableBody.value?.scrollLeft || 0;
   // @ts-ignore
   if (tableBody.value?.scrollWidth > tableBody.value?.clientWidth) {
     if (tableBody.value?.scrollLeft == 0) {
@@ -852,13 +876,20 @@ const renderFixedClassName = (
 };
 
 const hasTotalRow = computed(() => {
-  let b = false;
-  props.columns.forEach((item) => {
-    if (item.totalRow) {
-      b = true;
+  const checkTotalRow = (columns: any[]) => {
+    for (const item of columns) {
+      if (item.totalRow) {
+        return true;
+      }
+      if (item.children && item.children.length > 0) {
+        if (checkTotalRow(item.children)) {
+          return true;
+        }
+      }
     }
-  });
-  return b;
+    return false;
+  };
+  return checkTotalRow(props.columns);
 });
 
 const renderTotalRowCell = (column: any) => {
@@ -1217,9 +1248,43 @@ defineExpose({ getCheckData });
                 </template>
               </table-data>
             </template>
+          </tbody>
+        </table>
+
+        <template v-if="tableDataSource.length == 0 && loading == false">
+          <lay-empty></lay-empty>
+          <div :style="{ width: tableBodyEmptyWidth }"></div>
+        </template>
+        <template v-if="loading == true">
+          <!-- 根据 table 实际高度，设置 loading 位置 -->
+          <div class="layui-table-loading">
+            <i
+              class="layui-icon-loading layui-icon layui-anim layui-anim-rotate layui-anim-loop"
+            ></i>
+          </div>
+        </template>
+      </div>
+      <div ref="tableTotal" class="table-total-wrapper">
+        <table class="layui-table">
+          <colgroup>
+            <template
+              v-for="(column, columnIndex) in tableBodyColumns"
+              :key="columnIndex"
+            >
+              <template v-if="tableColumnKeys.includes(column.key)">
+                <col
+                  :width="column.width"
+                  :style="{
+                    minWidth: column.minWidth ? column.minWidth : '50px',
+                  }"
+                />
+              </template>
+            </template>
+          </colgroup>
+          <tbody>
             <tr v-if="hasTotalRow" class="layui-table-total">
               <template
-                v-for="(column, columnIndex) in columns"
+                v-for="(column, columnIndex) in tableFlattenColumns"
                 :key="columnIndex"
               >
                 <template v-if="tableColumnKeys.includes(column.key)">
@@ -1245,18 +1310,6 @@ defineExpose({ getCheckData });
             </tr>
           </tbody>
         </table>
-        <template v-if="tableDataSource.length == 0 && loading == false">
-          <lay-empty></lay-empty>
-          <div :style="{ width: tableBodyEmptyWidth }"></div>
-        </template>
-        <template v-if="loading == true">
-          <!-- 根据 table 实际高度，设置 loading 位置 -->
-          <div class="layui-table-loading">
-            <i
-              class="layui-icon-loading layui-icon layui-anim layui-anim-rotate layui-anim-loop"
-            ></i>
-          </div>
-        </template>
       </div>
       <div class="layui-table-footer" v-if="slot.footer">
         <slot name="footer"></slot>
