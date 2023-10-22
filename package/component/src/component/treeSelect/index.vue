@@ -58,14 +58,18 @@ const openState = ref(false);
 const dropdownRef = ref();
 const composing = ref(false);
 const emits = defineEmits<TreeSelectEmits>();
+const lastSelectedValue = ref();
 
 const selectedValue = computed({
   get() {
     return props.multiple && props.modelValue == null ? [] : props.modelValue;
   },
   set(value) {
-    emits("update:modelValue", value);
-    emits("change", value);
+    if(lastSelectedValue.value != value) {
+      lastSelectedValue.value = value;
+      emits("update:modelValue", value);
+      emits("change", value);
+    }
   },
 });
 
