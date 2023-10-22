@@ -65,7 +65,7 @@ const selectedValue = computed({
     return props.multiple && props.modelValue == null ? [] : props.modelValue;
   },
   set(value) {
-    if(lastSelectedValue.value != value) {
+    if (lastSelectedValue.value != value) {
       lastSelectedValue.value = value;
       emits("update:modelValue", value);
       emits("change", value);
