@@ -21,7 +21,8 @@
           <ul>
             <li>[修复] tree-select 组件 multiple 属性为 false 时，change 事件触发两次的问题。</li>
             <li>[修复] page 组件 total 属性为 0 时，页面显示 1 | 0 的问题。</li>
-            <li>[修复] update 组件取消文件选择后，內部仍出发后续解析上传的流程问题 。</li>
+            <li>[修复] upload 组件取消文件选择后，內部仍出发后续解析上传的流程问题。</li>
+            <li>[修复] table 组件 children 属性内的子节点 totalRow 属性不起作用的问题。</li>
             <li>[优化] table 组件 totalRow 合并行始终固定在表格最底部，不再随数据流位置而变化。</li>
           </ul>
         </li>

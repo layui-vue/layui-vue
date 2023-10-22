@@ -104,6 +104,26 @@ const { columnSlotNames, dataSourceCount, needSelectedKeys } = useTable(props);
 const tableColumnKeys = ref<any[]>([]);
 const tableHeadColumns = ref<any[]>([]);
 const tableBodyColumns = ref<any[]>([]);
+const tableFlattenColumns = ref<any[]>([]);
+
+/**
+ * 获取叶节点集合
+ * 
+ * @param columns 原始 columns 配置结构
+ */
+const flattenColumns = (columns: any[]) => {
+  let result: any[] = [];
+  for (const item of columns) {
+    if (item.children && item.children.length > 0) {
+      // 如果存在子项，则使用 concat 方法将子项的遍历结果合并到当前结果中
+      result = result.concat(flattenColumns(item.children));
+    } else {
+      // 否则，将当前项添加到结果集合中
+      result.push(item);
+    }
+  }
+  return result;
+};
 
 /**
  * 获取数组深度
@@ -243,9 +263,11 @@ watch(
     tableColumnKeys.value = [];
     tableBodyColumns.value = [];
     tableHeadColumns.value = [];
+    tableFlattenColumns.value = [];
     findFindNode(tableColumns.value);
     findFindNodes(tableColumns.value);
     findFinalNode(0, tableColumns.value, undefined);
+    tableFlattenColumns.value = flattenColumns(tableColumns.value);
   },
   { immediate: true }
 );
@@ -854,13 +876,20 @@ const renderFixedClassName = (
 };
 
 const hasTotalRow = computed(() => {
-  let b = false;
-  props.columns.forEach((item) => {
-    if (item.totalRow) {
-      b = true;
+  const checkTotalRow = (columns: any[]) => {
+    for (const item of columns) {
+      if (item.totalRow) {
+        return true;
+      }
+      if (item.children && item.children.length > 0) {
+        if (checkTotalRow(item.children)) {
+          return true;
+        }
+      }
     }
-  });
-  return b;
+    return false;
+  }
+  return checkTotalRow(props.columns);
 });
 
 const renderTotalRowCell = (column: any) => {
@@ -1255,7 +1284,7 @@ defineExpose({ getCheckData });
           <tbody>
             <tr v-if="hasTotalRow" class="layui-table-total">
               <template
-                v-for="(column, columnIndex) in columns"
+                v-for="(column, columnIndex) in tableFlattenColumns"
                 :key="columnIndex"
               >
                 <template v-if="tableColumnKeys.includes(column.key)">

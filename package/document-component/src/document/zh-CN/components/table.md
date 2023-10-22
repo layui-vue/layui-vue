@@ -63,7 +63,7 @@ export default {
       { title:"年龄", width: "80px", key:"age", totalRow: true},
       { title:"城市", width: "120px", key:"city" },
       { title:"签名", width: "260px", key:"remark" },
-      { title:"隐藏", width: "260px", key:"hide", hide: true },
+      { title:"隐藏", width: "260px", key:"hide", hide: true, totalRow: "自定义" },
       { title:"时间", width: "120px", key:"joinTime"},
       { title:"操作", width: "150px", customSlot:"operator", key:"operator", fixed: "right", ignoreExport: true }
     ]);
