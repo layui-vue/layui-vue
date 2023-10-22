@@ -1236,7 +1236,7 @@ defineExpose({ getCheckData });
         </template>
       </div>
       <div ref="tableTotal" class="table-total-wrapper">
-        <table  class="layui-table">
+        <table class="layui-table">
           <colgroup>
             <template
               v-for="(column, columnIndex) in tableBodyColumns"
