@@ -108,7 +108,7 @@ const tableFlattenColumns = ref<any[]>([]);
 
 /**
  * 获取叶节点集合
- * 
+ *
  * @param columns 原始 columns 配置结构
  */
 const flattenColumns = (columns: any[]) => {
@@ -888,7 +888,7 @@ const hasTotalRow = computed(() => {
       }
     }
     return false;
-  }
+  };
   return checkTotalRow(props.columns);
 });
 
