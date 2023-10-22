@@ -21,11 +21,17 @@ const props = defineProps<ShadeProps>();
 const emit = defineEmits(["shadeClick"]);
 
 const styles = computed<any>(() => {
-  return [{
-    opacity: props.opacity,
-    position: props.teleportDisabled || props.teleport != "body" ? "absolute" : "fixed",
-    zIndex: props.index,
-  }, props.shadeStyle];
+  return [
+    {
+      opacity: props.opacity,
+      position:
+        props.teleportDisabled || props.teleport != "body"
+          ? "absolute"
+          : "fixed",
+      zIndex: props.index,
+    },
+    props.shadeStyle,
+  ];
 });
 
 const shadeClick = () => {
