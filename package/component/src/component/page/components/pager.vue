@@ -1,11 +1,11 @@
 <!--
  * @Author: baobaobao
  * @Date: 2023-09-22 00:33:50
- * @LastEditTime: 2023-09-24 13:13:05
+ * @LastEditTime: 2023-10-23 09:49:34
  * @LastEditors: baobaobao
 -->
 <template>
-  <ul class="layui-pager">
+  <ul class="layui-pager" v-if="pageTotal !== 0">
     <li
       v-if="setPage[0] !== 1"
       :data-page="currentPage"
@@ -138,6 +138,7 @@ const {
   currentPage,
   handleNext,
   theme,
+  pageTotal,
   ellipsisTooltip,
 } = usePage();
 </script>
