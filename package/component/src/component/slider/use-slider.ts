@@ -15,10 +15,9 @@ import {
   watch,
   onMounted,
   ComputedRef,
-  nextTick
+  nextTick,
 } from "vue";
 import { SliderProps } from "./types/sliderType";
-
 
 export const LAYUI_SLIDER_KEY: InjectionKey<any> = Symbol("layui-slider");
 export const useSliderProvide = () => inject(LAYUI_SLIDER_KEY, {});
@@ -126,7 +125,7 @@ export const useSlider = (
       deep: true,
     }
   );
-  
+
   watch(
     () => dragging,
     (val) => {
@@ -180,7 +179,7 @@ export const useSlider = (
         throw new Error("max请大于min!");
         return;
       }
-      initValidate()
+      initValidate();
     }
   );
   const setPos = (pos: number) => {
@@ -225,7 +224,7 @@ export const useSlider = (
     if (props.vertical) {
       diff = (e.clientY - GETDOM_VALUE_V) * (props.reverse ? 1 : -1);
     }
-    let pos = (diff / (props.vertical ? domPos.height : domPos.width)) * 100;    
+    let pos = (diff / (props.vertical ? domPos.height : domPos.width)) * 100;
     if (pos > 100) {
       pos = 100;
     }
@@ -264,7 +263,7 @@ export const useSlider = (
     dragging.value = val;
   };
 
-  const initValidate = async() => {
+  const initValidate = async () => {
     if (props.range) {
       const modelValue = props.modelValue ? props.modelValue : props.rangeValue;
       if (Array.isArray(modelValue)) {
@@ -281,7 +280,7 @@ export const useSlider = (
       } else {
         initVal.firstVal = props.min;
         initVal.secondVal = props.max;
-        await nextTick()
+        await nextTick();
         emit("update:modelValue", [props.min, props.max]);
       }
     } else {
@@ -293,7 +292,7 @@ export const useSlider = (
           Math.max(props.min, props.modelValue)
         );
       }
-      await nextTick()
+      await nextTick();
       emit("update:modelValue", minValue.value);
     }
   };

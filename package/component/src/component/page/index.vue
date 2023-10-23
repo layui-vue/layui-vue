@@ -155,9 +155,7 @@ watch(currentPage, (val) => {
 });
 // 分页
 const pageTotal = computed(() => props.total);
-const pageCount = computed(() =>
-  Math.ceil(props.total / inlimit.value) || 1
-);
+const pageCount = computed(() => Math.ceil(props.total / inlimit.value) || 1);
 const setPage = computed(() => {
   let joinPage = [];
   // 解释如下, 向上取值(当前值 + 1)/要连续出现的页数 如果等于1, 则代表从最小值为1,

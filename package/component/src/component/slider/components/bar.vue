@@ -22,8 +22,7 @@
       </div>
       <div class="layui-slider-handle-button" v-else></div>
       <template #content>
-        <slot v-if="slot.custom" :value="formatValue" name="custom">
-        </slot>
+        <slot v-if="slot.custom" :value="formatValue" name="custom"> </slot>
         <slot v-else>
           {{ formatValue }}
         </slot>
