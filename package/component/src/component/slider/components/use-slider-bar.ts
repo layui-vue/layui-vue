@@ -1,12 +1,12 @@
 /*
  * @Author: baobaobao
  * @Date: 2023-10-06 13:43:22
- * @LastEditTime: 2023-10-13 17:36:13
+ * @LastEditTime: 2023-10-20 17:41:56
  * @LastEditors: baobaobao
  */
 
 import { computed, ref, shallowRef, watch, nextTick } from "vue";
-import { useSliderProvide } from "../useSlider";
+import { useSliderProvide } from "../use-slider";
 import { SliderBarProps } from "../types/sliderType";
 
 export const useSliderBar = (props: SliderBarProps, emit: any) => {
