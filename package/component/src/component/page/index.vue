@@ -1,7 +1,7 @@
 <!--
  * @Author: baobaobao
  * @Date: 2023-07-07 15:34:38
- * @LastEditTime: 2023-09-24 19:21:34
+ * @LastEditTime: 2023-10-23 18:00:53
  * @LastEditors: baobaobao
 -->
 <script lang="ts">
@@ -156,7 +156,7 @@ watch(currentPage, (val) => {
 // 分页
 const pageTotal = computed(() => props.total);
 const pageCount = computed(() =>
-  props.total === 0 ? 1 : Math.ceil(props.total / inlimit.value)
+  Math.ceil(props.total / inlimit.value) || 1
 );
 const setPage = computed(() => {
   let joinPage = [];

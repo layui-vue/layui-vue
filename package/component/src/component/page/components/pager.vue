@@ -5,7 +5,7 @@
  * @LastEditors: baobaobao
 -->
 <template>
-  <ul class="layui-pager" v-if="pageTotal !== 0">
+  <ul class="layui-pager">
     <li
       v-if="setPage[0] !== 1"
       :data-page="currentPage"
