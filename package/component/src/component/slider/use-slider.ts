@@ -1,7 +1,7 @@
 /*
  * @Author: baobaobao
  * @Date: 2023-10-06 13:58:41
- * @LastEditTime: 2023-10-13 22:27:29
+ * @LastEditTime: 2023-10-23 09:24:00
  * @LastEditors: baobaobao
  */
 
@@ -15,8 +15,10 @@ import {
   watch,
   onMounted,
   ComputedRef,
+  nextTick
 } from "vue";
 import { SliderProps } from "./types/sliderType";
+
 
 export const LAYUI_SLIDER_KEY: InjectionKey<any> = Symbol("layui-slider");
 export const useSliderProvide = () => inject(LAYUI_SLIDER_KEY, {});
@@ -124,6 +126,7 @@ export const useSlider = (
       deep: true,
     }
   );
+  
   watch(
     () => dragging,
     (val) => {
@@ -177,6 +180,7 @@ export const useSlider = (
         throw new Error("max请大于min!");
         return;
       }
+      initValidate()
     }
   );
   const setPos = (pos: number) => {
@@ -221,13 +225,14 @@ export const useSlider = (
     if (props.vertical) {
       diff = (e.clientY - GETDOM_VALUE_V) * (props.reverse ? 1 : -1);
     }
-    let pos = (diff / (props.vertical ? domPos.height : domPos.width)) * 100;
+    let pos = (diff / (props.vertical ? domPos.height : domPos.width)) * 100;    
     if (pos > 100) {
       pos = 100;
     }
     if (pos < 0) {
       pos = 0;
     }
+
     const isSatisfy = props.isFollowMark && getSortMarks.value.length > 0;
     const lengthPerStep =
       100 / ((props.max - props.min) / (isSatisfy ? 1 : props.step));
@@ -259,7 +264,7 @@ export const useSlider = (
     dragging.value = val;
   };
 
-  const initValidate = () => {
+  const initValidate = async() => {
     if (props.range) {
       const modelValue = props.modelValue ? props.modelValue : props.rangeValue;
       if (Array.isArray(modelValue)) {
@@ -276,6 +281,8 @@ export const useSlider = (
       } else {
         initVal.firstVal = props.min;
         initVal.secondVal = props.max;
+        await nextTick()
+        emit("update:modelValue", [props.min, props.max]);
       }
     } else {
       if (typeof props.modelValue !== "number") {
@@ -286,6 +293,8 @@ export const useSlider = (
           Math.max(props.min, props.modelValue)
         );
       }
+      await nextTick()
+      emit("update:modelValue", minValue.value);
     }
   };
   return {
