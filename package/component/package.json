@@ -30,7 +30,8 @@
   ],
   "exports": {
     ".": {
-      "import": "./es/index.js"
+      "import": "./es/index.js",
+      "types":"./types/index.d.ts"
     },
     "./lib/": "./lib/",
     "./es/": "./es/"

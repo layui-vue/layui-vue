@@ -8,6 +8,7 @@
   "exports": {
     ".": {
       "import": "./lib/layer-vue.es.js",
+      "types": "./types/index.d.ts",
       "require": "./lib/layer-vue.umd.js"
     },
     "./lib/": "./lib/"
