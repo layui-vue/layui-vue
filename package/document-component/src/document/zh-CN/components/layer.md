@@ -796,6 +796,7 @@ const openCallback = () => {
 | shade | 遮盖层 | boolean | `true` | `true` `false` |
 | shadeClose | 遮盖层关闭 | boolean | `true` | `true` `false` |
 | shadeOpacity | 遮盖层透明度 | string | `0.1` | `0.1` - `1` |
+| shadeStyle   | 遮盖层样式   | string StyleValue |  |  |
 | isHtmlFragment | 解析 html 字符 | boolean | `false` | `true` `false` |
 | imgList | 图片数据数组 | array[{src:图片链接,alt:图片名字可选',thumb:'缩略图可选'}] | - | - |
 | startIndex | 图片初始浏览索引 | number | 0 | - |
