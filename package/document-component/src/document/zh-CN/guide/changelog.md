@@ -17,7 +17,7 @@
       <ul>
         <a name="2-10-2"></a>
         <li>
-          <h3>2.10.2 <span class="layui-badge-rim">2023-10-23</span></h3>
+          <h3>2.10.2 <span class="layui-badge-rim">2023-10-25</span></h3>
           <ul>
             <li>[修复] table 组件 resize 属性启用后，拖拽列刷新数据后宽度错位的问题。</li>
             <li>[修复] checkbox 组件 border-radius 不跟随 global-border-radius 变量的问题。</li>
