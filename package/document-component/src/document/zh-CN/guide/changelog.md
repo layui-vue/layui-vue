@@ -13,7 +13,19 @@
 ::: demo
 <template>
   <lay-timeline>
-       <lay-timeline-item title="2.10.x">
+    <lay-timeline-item title="2.10.x">
+      <ul>
+        <a name="2-10-2"></a>
+        <li>
+          <h3>2.10.2 <span class="layui-badge-rim">2023-10-25</span></h3>
+          <ul>
+            <li>[修复] table 组件 resize 属性启用后，拖拽列刷新数据后宽度错位的问题。</li>
+            <li>[修复] checkbox 组件 border-radius 不跟随 global-border-radius 变量的问题。</li>
+            <li>[修复] splitPanel 组件在拖拽时选中页面文字元素的问题。</li>
+            <li>[文档] layer.md 增加 shadeStyle 属性的说明。</li>
+          </ul>
+        </li>
+      </ul>
       <ul>
         <a name="2-10-1"></a>
         <li>
@@ -29,8 +41,6 @@
           </ul>
         </li>
       </ul>
-    </lay-timeline-item>
-     <lay-timeline-item title="2.10.x">
       <ul>
         <a name="2-10-0"></a>
         <li>

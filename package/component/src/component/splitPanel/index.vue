@@ -31,6 +31,9 @@ onMounted(() => {
   target.value.addEventListener(
     "mousemove",
     (event: { layerX: any; layerY: any }) => {
+      if (window.getSelection != undefined) {
+        window.getSelection()?.removeAllRanges();
+      }
       if (domStatus.value && domEvent.value) {
         const prevDom = domEvent.value.target.previousElementSibling;
         const nextDom = domEvent.value.target.nextElementSibling;

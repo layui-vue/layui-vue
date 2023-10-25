@@ -1,7 +1,7 @@
 <!--
  * @Author: baobaobao
  * @Date: 2023-09-30 16:51:14
- * @LastEditTime: 2023-10-13 15:37:10
+ * @LastEditTime: 2023-10-23 09:23:25
  * @LastEditors: baobaobao
 -->
 <template>
@@ -77,7 +77,7 @@ import {
   useSlots,
   watch,
 } from "vue";
-import { LAYUI_SLIDER_KEY, useSlider } from "./useSlider";
+import { LAYUI_SLIDER_KEY, useSlider } from "./use-slider";
 import { useSliderMark } from "./components/use-slider-mark";
 import { Mark } from "./types/sliderType";
 

@@ -1,7 +1,7 @@
 <!--
  * @Author: baobaobao
  * @Date: 2023-10-06 13:36:55
- * @LastEditTime: 2023-10-11 20:03:22
+ * @LastEditTime: 2023-10-20 21:20:29
  * @LastEditors: baobaobao
 -->
 <template>
@@ -22,7 +22,7 @@
       </div>
       <div class="layui-slider-handle-button" v-else></div>
       <template #content>
-        <slot v-if="slot.custom" :value="formatValue" name="custom"></slot>
+        <slot v-if="slot.custom" :value="formatValue" name="custom"> </slot>
         <slot v-else>
           {{ formatValue }}
         </slot>
@@ -38,7 +38,7 @@ export default {
 <script lang="ts" setup>
 import { useSlots, toRefs } from "vue";
 import LayTooltip from "../../tooltip/index.vue";
-import { useSliderProvide } from "../useSlider";
+import { useSliderProvide } from "../use-slider";
 import { useSliderBar } from "./use-slider-bar";
 export interface SliderBarProps {
   modelValue: number;
