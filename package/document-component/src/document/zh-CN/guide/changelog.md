@@ -19,6 +19,7 @@
         <li>
           <h3>2.10.3 <span class="layui-badge-rim">2023-10-26</span></h3>
           <ul>
+            <li>[修复] table 组件 totalRow 启用后，数据超过表格既定高度，统计栏被压缩的问题。</li>
             <li>[修复] collapse 组件 css 样式，border-radius 超过一定数值标题元素溢出组件的问题。</li>
           </ul>
         </li>
