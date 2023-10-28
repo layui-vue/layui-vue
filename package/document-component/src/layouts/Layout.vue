@@ -120,19 +120,18 @@
           </li>
           <li class="layui-nav-item">
             <a href="javascript:void(0)">
-              <lay-badge
-                type="rim"
-                class="layui-local-badge"
+              <lay-tag
+              size="xs"
+              class="layui-local-badge"
                 v-if="locale === 'en_US'"
                 @click="changeLocale('zh_CN')"
-                >中 文</lay-badge
-              >
-              <lay-badge
-                type="rim"
+                >中 文</lay-tag>
+                <lay-tag
+                size="xs"
                 class="layui-local-badge"
                 v-else
                 @click="changeLocale('en_US')"
-                >英 文</lay-badge
+                >英 文</lay-tag
               >
             </a>
           </li>
