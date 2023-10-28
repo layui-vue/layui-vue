@@ -1,82 +1,69 @@
-.layui-badge,
-.layui-badge-dot,
-.layui-badge-rim {
-  position: relative;
-  display: inline-block;
-  padding: 0 6px;
-  font-size: 12px;
-  text-align: center;
-  background-color: #ff5722;
-  color: #fff;
-  border-radius: var(--global-border-radius);
-}
 
-.layui-badge {
-  height: 18px;
-  line-height: 18px;
-}
 
-.layui-badge-dot {
-  width: 8px;
-  height: 8px;
-  padding: 0;
-  border-radius: 50%;
-}
-
-.layui-badge-rim {
-  height: 18px;
-  line-height: 18px;
-  border-width: 1px;
-  border-style: solid;
-  background-color: #fff;
-  border-color: var(--global-neutral-color-3);
-  color: #666;
-}
-
-.layui-badge-dot-ripple > span {
+.layui-badge-dot-ripple {
   position: absolute;
-  top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  display: block;
-  border-radius: 50%;
-  box-sizing: border-box;
-  animation: layui-badge-dot-anim-ripple 1.2s ease-in-out infinite;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  border-radius: inherit;
+  animation: layui-badge-dot-anim-ripple 2s ease-in-out infinite;
 }
 
 @keyframes layui-badge-dot-anim-ripple {
   from {
-    transform: scale(0.8);
-    opacity: 0.6;
+    box-shadow: 0 0 0.5px 0px #ff5722;
+    opacity: 0.8;
   }
 
   to {
-    transform: scale(2.4);
+    box-shadow: 0 0 0.5px 4.5px #ff5722;
     opacity: 0;
   }
 }
 
-/** Badge 在与其他组件配合使用时的辅助样式 */
 
-.layui-btn .layui-badge,
-.layui-btn .layui-badge-dot {
-  margin-left: 5px;
-}
-
-.layui-nav .layui-badge,
-.layui-nav .layui-badge-dot {
-  position: absolute;
-  top: 50%;
-  margin: -5px 6px 0;
-}
-
-.layui-nav .layui-badge {
-  margin-top: -10px;
-}
-
-.layui-tab-title .layui-badge,
-.layui-tab-title .layui-badge-dot {
-  left: 5px;
-  top: -2px;
+.layui-badge {
+  position: relative;
+  display: inline-block;
+  .layui-badge-number,
+  .layui-badge-dot {
+    position: absolute;
+    right: 0;
+    top: 0;
+    // width: 18px;
+    height: 18px;
+    background: red;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    color: #fff;
+    box-shadow: 0 0 0 2px #fff;
+    transform: translate(50%, -50%);
+    padding: 0 6px;
+    &.is-bottom-right {
+      transform: translate(50%, 50%);
+      bottom: 0;
+      top: auto;
+    }
+    &.is-bottom-left {
+      transform: translate(-50%, 50%);
+      bottom: 0;
+      top: auto;
+      left: 0;
+      right: auto;
+    }
+    &.is-top-left {
+      left: 0;
+      right: auto;
+      transform: translate(-50%, -50%);
+    }
+  }
+  .layui-badge-dot {
+    width: 8px;
+    height: 8px;
+    padding: 0;
+  }
 }
