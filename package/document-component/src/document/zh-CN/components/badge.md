@@ -1,7 +1,7 @@
 <!--
  * @Author: baobaobao
  * @Date: 2023-value-18 12:54:04
- * @LastEditTime: 2023-10-28 23:41:26
+ * @LastEditTime: 2023-10-29 14:23:00
  * @LastEditors: baobaobao
 -->
 ::: anchor
@@ -271,7 +271,6 @@ export default {
     <lay-badge type="dot" theme="cyan" ripple></lay-badge>
     <lay-badge type="dot" theme="blue" ripple></lay-badge>
     <lay-badge type="dot" theme="black" ripple></lay-badge>
-    <lay-badge type="dot" color="blue" ripple></lay-badge>
     </lay-space>
     <br>
     <lay-space  :size="20" style="margin-top: 50px">
@@ -297,7 +296,7 @@ export default {
 | type  | 类型      | `dot` `rim`                                   |  `rim`  |
 | theme | 主题      | `orange` `green` `cyan` `blue` `black` `gray` |   -  |
 | position | 位置      | `top-righ` `top-left` `bottom-right` `ottom-left`  |   `top-right`  |
-| color | 颜色      |                      -                     |    - |
+| ~~color~~ | 颜色      |                      -                     | 下个版本移除,有`badgeStyle`进行替换 |
 | showZero | value为0是否显示      |       `true`   `false`     |     `false`  |
 | badgeStyle | badge样式       |       -     |    -  |
 | max | 最大显示数量      |       -     |     `99`  |
