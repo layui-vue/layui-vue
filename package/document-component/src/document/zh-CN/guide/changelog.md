@@ -13,6 +13,25 @@
 ::: demo
 <template>
   <lay-timeline>
+    <lay-timeline-item title="2.11.x">
+      <ul>
+        <a name="2-11-0"></a>
+        <li>
+          <h3>2.11.0 <lay-badge>2023-10-29</lay-badge> </h3>
+          <ul>
+            <li>[新增] avatar 组件 fullback 属性，图片加载失败时的回调。</li>
+            <li>[新增] avatar-list 组件 size 属性。</li>
+            <li>[新增] avatar-list 组件 radius 属性。</li>
+            <li>[新增] badge 组件 position 属性，top-righ top-left bottom-right bottom-left 为可选值。</li>
+            <li>[新增] badge 组件 showZero 属性，当 value 为 0 时是否显示。</li>
+            <li>[新增] badge 组件 badgeStyle 属性。</li>
+            <li>[新增] badge 组件 max 属性，设置 value 最大阈值。</li>
+            <li>[新增] badge 组件 custom 插槽。</li>
+            <li>[新增] badge 组件 jest 测试用例。</li>
+          </ul>
+        </li>
+      </ul>
+    </lay-timeline-item>
     <lay-timeline-item title="2.10.x">
       <ul>
         <a name="2-10-3"></a>
