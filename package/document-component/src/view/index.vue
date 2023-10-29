@@ -5,7 +5,7 @@
         <div class="site-zfj site-zfj-anim">
           <img
             src="../assets/logo.jpg"
-            style="width: 172px; border-radius: 20px; border: 5px solid #16baaa;"
+            style="width: 172px; border-radius: 20px; border: 5px solid #16baaa"
           />
         </div>
         <div class="layui-anim site-desc site-desc-anim">
