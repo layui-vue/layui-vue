@@ -1,7 +1,7 @@
 <!--
  * @Author: baobaobao
  * @Date: 2023-10-18 12:54:03
- * @LastEditTime: 2023-10-29 14:11:11
+ * @LastEditTime: 2023-10-29 22:43:22
  * @LastEditors: baobaobao
 -->
 <script lang="ts">
@@ -58,17 +58,18 @@ const badgeClass = computed(() => {
     },
   ];
 });
-const theme = computed(() => props.theme ? props.theme : 'red')
-
+const rippleColor = computed(() => {
+  return props.color ? props.color : (props.theme ?? 'red')
+});
 
 const isCondition = computed(() => {
   if(props.type === 'dot') return true
+  if (slot.custom) return true
   if (isNaN(+props.value)) return true
   if(+props.value <= 0 && props.showZero) return true
   if(+props.value <= 0 && !props.showZero) return false
   return true
 });
-
 </script>
 
 <template>
@@ -90,12 +91,12 @@ const isCondition = computed(() => {
 @import './index.less';
 @keyframes layui-badge-dot-anim-ripple {
   from {
-    box-shadow: 0 0 0.5px 0px  v-bind(theme);
+    box-shadow: 0 0 0.5px 0px  v-bind(rippleColor);
     opacity: 0.8;
   }
 
   to {
-    box-shadow: 0 0 0.5px 4.5px  v-bind(theme);
+    box-shadow: 0 0 0.5px 4.5px  v-bind(rippleColor);
     opacity: 0;
   }
 }
