@@ -125,8 +125,9 @@
                 class="layui-local-badge"
                 v-if="locale === 'en_US'"
                 @click="changeLocale('zh_CN')"
-                >中 文</lay-tag>
-                <lay-tag
+                >中 文</lay-tag
+              >
+              <lay-tag
                 size="xs"
                 class="layui-local-badge"
                 v-else
@@ -413,7 +414,6 @@ export default {
 .layui-header .layui-local-badge .layui-tag-text {
   font-size: 12px;
 }
-
 
 .layui-menu-docs {
   padding-top: 10px;

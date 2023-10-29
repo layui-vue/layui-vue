@@ -77,6 +77,7 @@
 @import "@layui/layui-vue/es/field/index.css";
 
 .alone {
+  border-radius: var(--global-border-radius);
   text-align: center;
   background-color: var(--global-primary-color);
   color: #fff;
