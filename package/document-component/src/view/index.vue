@@ -3,10 +3,7 @@
     <div class="site-banner">
       <div class="site-banner-main">
         <div class="site-zfj site-zfj-anim">
-          <img
-            src="../assets/logo-png.png"
-            style="width: 220px; border-radius: 10px"
-          />
+            <img src="../assets/logo.jpg" style="width: 172px; border-radius: 20px;border: 5px solid #16baaa;" />
         </div>
         <div class="layui-anim site-desc site-desc-anim">
           <p class="web-font-desc">layui - vue</p>
@@ -16,49 +13,24 @@
           <router-link class="layui-inline site-down" to="/zh-CN/guide">
             Get Started
           </router-link>
-          <a
-            class="layui-inline site-down"
-            href="javascript:void(0);"
-            @click="changeTheme"
-          >
+          <a class="layui-inline site-down" href="javascript:void(0);" @click="changeTheme">
             {{ appStore.theme === "dark" ? "Turn Off" : "Turn On" }}
           </a>
         </div>
         <div class="site-version">
-          <span
-            >{{ t("home.version") }}：<cite class="site-showv">
+          <span>{{ t("home.version") }}：<cite class="site-showv">
               {{ version }}
-            </cite></span
-          >
-          <span
-            >{{ t("home.download") }}：<em class="site-showdowns"
-              >105,129</em
-            ></span
-          >
+            </cite></span>
+          <span>{{ t("home.download") }}：<em class="site-showdowns">105,129</em></span>
         </div>
         <div class="site-banner-other">
-          <a
-            href="https://gitee.com/layui/layui-vue"
-            target="_blank"
-            rel="nofollow"
-            class="site-star"
-          >
+          <a href="https://gitee.com/layui/layui-vue" target="_blank" rel="nofollow" class="site-star">
             <i class="layui-icon"></i> Star <cite id="getStars">2600</cite>
           </a>
-          <a
-            href="https://gitee.com/layui/layui-vue"
-            target="_blank"
-            rel="nofollow"
-            class="site-fork"
-          >
+          <a href="https://gitee.com/layui/layui-vue" target="_blank" rel="nofollow" class="site-fork">
             Gitee
           </a>
-          <a
-            href="https://github.com/layui/layui-vue"
-            target="_blank"
-            rel="nofollow"
-            class="site-fork"
-          >
+          <a href="https://github.com/layui/layui-vue" target="_blank" rel="nofollow" class="site-fork">
             Github
           </a>
         </div>
@@ -114,99 +86,53 @@
       <lay-row :space="30">
         <lay-col :md="3" :xs="6">
           <lay-tooltip content="layui" position="top">
-            <a
-              style="height: 40px; display: inline-block"
-              href="https://layui.gitee.io/v2"
-              target="_blank"
-            >
-              <lay-avatar
-                src="https://unpkg.com/outeres@0.0.6/img/layui/icon-1.png"
-                style="border-radius: 2px"
-              ></lay-avatar>
+            <a style="height: 40px; display: inline-block" href="https://layui.gitee.io/v2" target="_blank">
+              <lay-avatar src="https://unpkg.com/outeres@0.0.6/img/layui/icon-1.png"
+                style="border-radius: 2px"></lay-avatar>
             </a>
           </lay-tooltip>
         </lay-col>
         <lay-col :md="3" :xs="6">
           <lay-tooltip content="furion" position="top">
-            <a
-              style="height: 40px; display: inline-block"
-              href="https://dotnetchina.gitee.io/furion"
-              target="_blank"
-            >
-              <lay-avatar
-                src="https://dotnetchina.gitee.io//furion/img/furionlogo.png"
-                style="background: transparent"
-              ></lay-avatar>
+            <a style="height: 40px; display: inline-block" href="https://dotnetchina.gitee.io/furion" target="_blank">
+              <lay-avatar src="https://dotnetchina.gitee.io//furion/img/furionlogo.png"
+                style="background: transparent"></lay-avatar>
             </a>
           </lay-tooltip>
         </lay-col>
         <lay-col :md="3" :xs="6">
           <lay-tooltip content="mybatis plus" position="top">
-            <a
-              style="height: 40px; display: inline-block"
-              href="https://baomidou.com"
-              target="_blank"
-            >
-              <lay-avatar
-                src="https://www.baomidou.com/img/logo.svg"
-                style="background: transparent"
-              ></lay-avatar>
+            <a style="height: 40px; display: inline-block" href="https://baomidou.com" target="_blank">
+              <lay-avatar src="https://www.baomidou.com/img/logo.svg" style="background: transparent"></lay-avatar>
             </a>
           </lay-tooltip>
         </lay-col>
         <lay-col :md="3" :xs="6">
           <lay-tooltip content="aizuda" position="top">
-            <a
-              style="height: 40px; display: inline-block"
-              href="http://doc.aizuda.com"
-              target="_blank"
-            >
-              <lay-avatar
-                src="http://doc.aizuda.com//img/azd.png"
-                style="background: transparent"
-              ></lay-avatar>
+            <a style="height: 40px; display: inline-block" href="http://doc.aizuda.com" target="_blank">
+              <lay-avatar src="http://doc.aizuda.com//img/azd.png" style="background: transparent"></lay-avatar>
             </a>
           </lay-tooltip>
         </lay-col>
         <lay-col :md="3" :xs="6">
           <lay-tooltip content="LiteFlow" position="top">
-            <a
-              style="height: 40px; display: inline-block"
-              href="https://liteflow.yomahub.com"
-              target="_blank"
-            >
-              <lay-avatar
-                src="https://liteflow.yomahub.com//img/logo.svg"
-                style="background: transparent"
-              ></lay-avatar>
+            <a style="height: 40px; display: inline-block" href="https://liteflow.yomahub.com" target="_blank">
+              <lay-avatar src="https://liteflow.yomahub.com//img/logo.svg" style="background: transparent"></lay-avatar>
             </a>
           </lay-tooltip>
         </lay-col>
         <lay-col :md="3" :xs="6">
           <lay-tooltip content="Sa-Token" position="top">
-            <a
-              style="height: 40px; display: inline-block"
-              href="https://sa-token.cc"
-              target="_blank"
-            >
-              <lay-avatar
-                src="https://sa-token.cc/logo.png"
-                style="background: transparent"
-              ></lay-avatar>
+            <a style="height: 40px; display: inline-block" href="https://sa-token.cc" target="_blank">
+              <lay-avatar src="https://sa-token.cc/logo.png" style="background: transparent"></lay-avatar>
             </a>
           </lay-tooltip>
         </lay-col>
         <lay-col :md="3" :xs="6">
           <lay-tooltip content="Jpom" position="top">
-            <a
-              style="height: 40px; display: inline-block"
-              href="https://jpom.top"
-              target="_blank"
-            >
-              <lay-avatar
-                src="https://jpom.top/images/jpom_logo.png"
-                style="background: transparent; width: 60px"
-              ></lay-avatar>
+            <a style="height: 40px; display: inline-block" href="https://jpom.top" target="_blank">
+              <lay-avatar src="https://jpom.top/images/jpom_logo.png"
+                style="background: transparent; width: 60px"></lay-avatar>
             </a>
           </lay-tooltip>
         </lay-col>
@@ -217,21 +143,9 @@
       <p>Copyright © 2021-2023 www.layui-vue.com</p>
       <p>
         鸣谢：
-        <a
-          href="https://www.oschina.net"
-          style="color: #16b777; font-weight: 800; margin: 0px 5px"
-          >Oschina</a
-        >
-        <a
-          href="https://gitee.com"
-          style="color: #c71d23; font-weight: 800; margin: 0px 5px"
-          >Gitee</a
-        >
-        <a
-          href="https://www.iconfont.cn/"
-          style="color: #9b16ff; font-weight: 800; margin: 0px 5px"
-          >iconfont</a
-        >
+        <a href="https://www.oschina.net" style="color: #16b777; font-weight: 800; margin: 0px 5px">Oschina</a>
+        <a href="https://gitee.com" style="color: #c71d23; font-weight: 800; margin: 0px 5px">Gitee</a>
+        <a href="https://www.iconfont.cn/" style="color: #9b16ff; font-weight: 800; margin: 0px 5px">iconfont</a>
       </p>
     </div>
   </div>
@@ -348,7 +262,7 @@ body {
   color: white;
 }
 
-.site-download a + a {
+.site-download a+a {
   margin-left: 20px;
 }
 
