@@ -1,7 +1,7 @@
 <!--
  * @Author: baobaobao
  * @Date: 2023-10-18 12:54:03
- * @LastEditTime: 2023-10-29 15:49:08
+ * @LastEditTime: 2023-10-29 22:43:22
  * @LastEditors: baobaobao
 -->
 <script lang="ts">
@@ -58,19 +58,18 @@ const badgeClass = computed(() => {
     },
   ];
 });
-// const theme = computed(() => props.theme ? props.theme : 'red')
 const rippleColor = computed(() => {
   return props.color ? props.color : (props.theme ?? 'red')
 });
 
 const isCondition = computed(() => {
   if(props.type === 'dot') return true
+  if (slot.custom) return true
   if (isNaN(+props.value)) return true
   if(+props.value <= 0 && props.showZero) return true
   if(+props.value <= 0 && !props.showZero) return false
   return true
 });
-
 </script>
 
 <template>

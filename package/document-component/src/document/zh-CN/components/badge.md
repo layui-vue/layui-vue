@@ -1,7 +1,7 @@
 <!--
  * @Author: baobaobao
  * @Date: 2023-value-18 12:54:04
- * @LastEditTime: 2023-10-29 14:36:36
+ * @LastEditTime: 2023-10-29 22:30:09
  * @LastEditors: baobaobao
 -->
 ::: anchor
@@ -20,6 +20,8 @@
 
 <template>
     <lay-space :size="40" > 
+    <lay-badge :value="value">
+      </lay-badge>
       <lay-badge  type="rim" :value="value">
         <lay-avatar></lay-avatar>
       </lay-badge>
@@ -203,7 +205,7 @@ export default {
       <lay-badge value="hot"> 
         <lay-avatar></lay-avatar>
       </lay-badge>
-      <lay-badge  :value="value40"> 
+      <lay-badge> 
         <lay-avatar></lay-avatar>
         <template #custom>
           <lay-icon size="12px" type="layui-icon-face-smile"></lay-icon>
