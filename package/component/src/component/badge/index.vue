@@ -1,7 +1,7 @@
 <!--
  * @Author: baobaobao
  * @Date: 2023-10-18 12:54:03
- * @LastEditTime: 2023-10-29 22:43:22
+ * @LastEditTime: 2023-10-30 14:01:23
  * @LastEditors: baobaobao
 -->
 <script lang="ts">
@@ -11,7 +11,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { computed, StyleValue, useSlots } from "vue";
+import { computed, shallowRef, StyleValue, useSlots } from "vue";
 import "./index.less";
 export type Position =
   | "top-right"
@@ -30,6 +30,7 @@ export interface BadgeProps {
   max?: number;
 }
 const slot = useSlots();
+const layBadge = shallowRef<HTMLElement | null>(null)
 const props = withDefaults(defineProps<BadgeProps>(), {
   type: "rim",
   value: 0,
@@ -51,6 +52,7 @@ const badgeClass = computed(() => {
     {
       [`layui-bg-${props.theme}`]: props.theme,
       "layui-badge-number": props.type == "rim",
+      'layui-badge-base': !slot.default,
       "layui-badge-dot": props.type == "dot",
       "is-bottom-right": props.position === "bottom-right",
       "is-bottom-left": props.position === "bottom-left",
@@ -59,14 +61,15 @@ const badgeClass = computed(() => {
   ];
 });
 
-const rippleColor = computed(() => {
-  return props.color ? props.color : props.theme ?? "red";
-});
-
 const badgeStyle = computed(() => {
   return [{ "background-color": props.color }, props.badgeStyle];
 });
 
+const rippleColor = computed(() => {
+  if (layBadge.value) {
+    return getComputedStyle(layBadge.value).backgroundColor
+  }
+});
 const isCondition = computed(() => {
   if (props.type === "dot") return true;
   if (slot.custom) return true;
@@ -80,7 +83,7 @@ const isCondition = computed(() => {
 <template>
   <div class="layui-badge">
     <slot></slot>
-    <sup :class="badgeClass" :style="badgeStyle" v-if="isCondition">
+    <sup ref="layBadge" :class="badgeClass" :style="badgeStyle" v-if="isCondition">
       <template v-if="type !== 'dot' && !slot.custom">
         {{ calcValue }}
       </template>
