@@ -4,7 +4,6 @@ export default {
     guide: "指南",
     components: "组件",
     resources: "生态",
-    material: "物料",
   },
   home: {
     description:

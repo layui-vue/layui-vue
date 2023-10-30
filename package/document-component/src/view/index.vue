@@ -4,8 +4,8 @@
       <div class="site-banner-main">
         <div class="site-zfj site-zfj-anim">
           <img
-            src="../assets/logo-png.png"
-            style="width: 220px; border-radius: 10px"
+            src="../assets/logo.jpg"
+            style="width: 172px; border-radius: 20px; border: 5px solid #e2e2e2"
           />
         </div>
         <div class="layui-anim site-desc site-desc-anim">
@@ -43,7 +43,7 @@
             rel="nofollow"
             class="site-star"
           >
-            <i class="layui-icon"></i> Star <cite id="getStars">2600</cite>
+            <i class="layui-icon"></i> Star <cite id="getStars">2642</cite>
           </a>
           <a
             href="https://gitee.com/layui/layui-vue"
@@ -190,7 +190,7 @@
               target="_blank"
             >
               <lay-avatar
-                src="https://sa-token.dev33.cn/logo.png"
+                src="https://sa-token.cc/logo.png"
                 style="background: transparent"
               ></lay-avatar>
             </a>
