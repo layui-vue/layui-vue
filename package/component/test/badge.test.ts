@@ -1,7 +1,7 @@
 /*
  * @Author: baobaobao
  * @Date: 2023-10-29 18:28:59
- * @LastEditTime: 2023-10-29 22:45:18
+ * @LastEditTime: 2023-10-30 14:00:36
  * @LastEditors: baobaobao
  */
 import { mount, shallowMount, config } from "@vue/test-utils";
@@ -52,7 +52,7 @@ describe("Badge.vue", () => {
     const wrapper = mount(LayBadge, {
       props: {
         value: 10,
-        badgeStyle: "{ backgroundColor: '#52c41a' }",
+        badgeStyle: { backgroundColor: '#52c41a' },
       },
       slots: {},
     });
