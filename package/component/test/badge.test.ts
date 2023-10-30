@@ -52,7 +52,7 @@ describe("Badge.vue", () => {
     const wrapper = mount(LayBadge, {
       props: {
         value: 10,
-        badgeStyle: { backgroundColor: '#52c41a' },
+        badgeStyle: { backgroundColor: "#52c41a" },
       },
       slots: {},
     });

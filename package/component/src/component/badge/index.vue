@@ -30,7 +30,7 @@ export interface BadgeProps {
   max?: number;
 }
 const slot = useSlots();
-const layBadge = shallowRef<HTMLElement | null>(null)
+const layBadge = shallowRef<HTMLElement | null>(null);
 const props = withDefaults(defineProps<BadgeProps>(), {
   type: "rim",
   value: 0,
@@ -52,7 +52,7 @@ const badgeClass = computed(() => {
     {
       [`layui-bg-${props.theme}`]: props.theme,
       "layui-badge-number": props.type == "rim",
-      'layui-badge-base': !slot.default,
+      "layui-badge-base": !slot.default,
       "layui-badge-dot": props.type == "dot",
       "is-bottom-right": props.position === "bottom-right",
       "is-bottom-left": props.position === "bottom-left",
@@ -67,7 +67,7 @@ const badgeStyle = computed(() => {
 
 const rippleColor = computed(() => {
   if (layBadge.value) {
-    return getComputedStyle(layBadge.value).backgroundColor
+    return getComputedStyle(layBadge.value).backgroundColor;
   }
 });
 const isCondition = computed(() => {
@@ -83,7 +83,12 @@ const isCondition = computed(() => {
 <template>
   <div class="layui-badge">
     <slot></slot>
-    <sup ref="layBadge" :class="badgeClass" :style="badgeStyle" v-if="isCondition">
+    <sup
+      ref="layBadge"
+      :class="badgeClass"
+      :style="badgeStyle"
+      v-if="isCondition"
+    >
       <template v-if="type !== 'dot' && !slot.custom">
         {{ calcValue }}
       </template>
