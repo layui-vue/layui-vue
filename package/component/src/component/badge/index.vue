@@ -58,9 +58,17 @@ const badgeClass = computed(() => {
     },
   ];
 });
+
 const rippleColor = computed(() => {
   return props.color ? props.color : props.theme ?? "red";
 });
+
+const badgeStyle = computed(() => {
+  return [
+    {"background-color": props.color},
+    props.badgeStyle,
+  ]
+})
 
 const isCondition = computed(() => {
   if (props.type === "dot") return true;
@@ -84,6 +92,7 @@ const isCondition = computed(() => {
     </sup>
   </div>
 </template>
+
 <style scoped lang="less">
 @import "./index.less";
 @keyframes layui-badge-dot-anim-ripple {
