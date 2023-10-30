@@ -64,11 +64,8 @@ const rippleColor = computed(() => {
 });
 
 const badgeStyle = computed(() => {
-  return [
-    {"background-color": props.color},
-    props.badgeStyle,
-  ]
-})
+  return [{ "background-color": props.color }, props.badgeStyle];
+});
 
 const isCondition = computed(() => {
   if (props.type === "dot") return true;
