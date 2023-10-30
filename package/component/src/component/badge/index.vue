@@ -95,7 +95,12 @@ const isCondition = computed(() => {
 
 <style scoped lang="less">
 @import "./index.less";
-@keyframes layui-badge-dot-anim-ripple {
+
+.layui-badge-dot-ripple {
+  animation: ripple-animation 1.2s linear infinite;
+}
+
+@keyframes ripple-animation {
   from {
     box-shadow: 0 0 0.5px 0px v-bind(rippleColor);
     opacity: 0.8;
