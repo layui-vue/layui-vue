@@ -17,7 +17,7 @@
       <ul>
         <a name="2-11-0"></a>
         <li>
-          <h3>2.11.0 <span class="layui-badge-rim">2023-10-29</span></h3>
+          <h3>2.11.0 <span class="layui-badge-rim">2023-10-30</span></h3>
           <ul>
             <li>[新增] avatar 组件 fullback 属性，图片加载失败时的回调。</li>
             <li>[新增] avatar 组件 auto-fix-size 属性，自动调节 icon 与 font 尺寸。</li>

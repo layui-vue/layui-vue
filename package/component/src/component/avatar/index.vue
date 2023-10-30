@@ -5,7 +5,6 @@
  * @LastEditors: baobaobao
 -->
 <script lang="ts">
-import { LayIcon } from "@layui/icons-vue";
 export default {
   name: "LayAvatar",
 };
@@ -15,6 +14,7 @@ export default {
 import { computed, ref, useSlots, onMounted, onUnmounted, toRefs } from "vue";
 import "./index.less";
 import { useAvatarProvide } from "../avatarList/use-avatar-list";
+import { LayIcon } from "@layui/icons-vue";
 
 export interface AvatarProps {
   src?: string;
