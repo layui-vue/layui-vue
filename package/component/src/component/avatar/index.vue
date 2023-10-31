@@ -1,7 +1,7 @@
 <!--
  * @Author: baobaobao
  * @Date: 2023-10-28 23:47:09
- * @LastEditTime: 2023-10-28 23:48:00
+ * @LastEditTime: 2023-10-31 21:20:20
  * @LastEditors: baobaobao
 -->
 <script lang="ts">
@@ -75,6 +75,7 @@ onMounted(() => {
   }
 });
 const handleImgErr = (e: Event) => {
+  if (!props.fallback) return false;
   const targetElement = e.target as HTMLImageElement;
   targetElement.src = props.fallback!;
   return false;
