@@ -1,11 +1,10 @@
 <!--
  * @Author: baobaobao
  * @Date: 2023-10-28 23:47:09
- * @LastEditTime: 2023-10-31 21:20:20
+ * @LastEditTime: 2023-10-31 21:23:52
  * @LastEditors: baobaobao
 -->
 <script lang="ts">
-import { LayIcon } from "@layui/icons-vue";
 export default {
   name: "LayAvatar",
 };
