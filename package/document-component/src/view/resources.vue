@@ -16,19 +16,26 @@
               <router-link to="/zh-CN/components/layer"
                 >layer - vue
                 <cite>通用型弹出层组件</cite>
-                <img src="https://img.shields.io/npm/v/@layui/layer-vue.svg?sanitize=true" alt="Version" />
-                <img src="https://img.shields.io/npm/l/@layui/layer-vue.svg?sanitize=true" />
-                </router-link
-              >
+                <img
+                  src="https://img.shields.io/npm/v/@layui/layer-vue.svg?sanitize=true"
+                  alt="Version"
+                />
+                <img
+                  src="https://img.shields.io/npm/l/@layui/layer-vue.svg?sanitize=true"
+                />
+              </router-link>
             </div>
           </li>
           <li class="layui-col-sm12">
             <div class="alone">
               <router-link to="/zh-CN/components/icon"
                 >icons - vue<cite>图标组件化解决方案</cite>
-                <img src="https://img.shields.io/npm/v/@layui/icons-vue.svg?sanitize=true" alt="Version" />
-                <img src="https://img.shields.io/npm/l/@layui/icons-vue.svg?sanitize=true" /></router-link
-              >
+                <img
+                  src="https://img.shields.io/npm/v/@layui/icons-vue.svg?sanitize=true"
+                  alt="Version" />
+                <img
+                  src="https://img.shields.io/npm/l/@layui/icons-vue.svg?sanitize=true"
+              /></router-link>
             </div>
           </li>
         </ul>
