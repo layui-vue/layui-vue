@@ -20,6 +20,7 @@ onMounted(() => {
 <style>
 .DocSearch-Button {
   outline: none;
+  background-color: #f1f1f1 !important;
   box-shadow: none;
 }
 .DocSearch-Button .DocSearch-Search-Icon,
