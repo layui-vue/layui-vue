@@ -70,7 +70,7 @@ onMounted(() => {
   }
 });
 const handleImgErr = (e: Event) => {
-  if(props.fallback) {
+  if (props.fallback) {
     const targetElement = e.target as HTMLImageElement;
     targetElement.src = props.fallback!;
   }
