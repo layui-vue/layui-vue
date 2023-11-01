@@ -15,6 +15,24 @@
   <lay-timeline>
     <lay-timeline-item title="2.11.x">
       <ul>
+        <a name="2-11-2"></a>
+        <li>
+          <h3>2.11.2 <span class="layui-badge-rim">2023-11-02</span></h3>
+          <ul>
+            <li>[修复] avatar 升级 2.11.0 后，加载图片失败会导致 icon 闪动和连续的请求。</li>
+          </ul>
+        </li>
+      </ul>
+      <ul>
+        <a name="2-11-1"></a>
+        <li>
+          <h3>2.11.1 <span class="layui-badge-rim">2023-11-01</span></h3>
+          <ul>
+            <li>[修复] avatar 升级 2.11.0 后，加载图片失败会导致 icon 闪动和连续的请求。</li>
+          </ul>
+        </li>
+      </ul>
+      <ul>
         <a name="2-11-0"></a>
         <li>
           <h3>2.11.0 <span class="layui-badge-rim">2023-10-30</span></h3>
