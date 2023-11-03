@@ -1,7 +1,7 @@
 <!--
  * @Author: baobaobao
  * @Date: 2023-09-22 00:33:50
- * @LastEditTime: 2023-09-23 21:57:59
+ * @LastEditTime: 2023-11-03 17:49:08
  * @LastEditors: baobaobao
 -->
 <template>
@@ -13,9 +13,10 @@
       type="number"
       v-model="jumpNumber"
     ></lay-input>
-    {{ t("page.page") }}
     <lay-button :disabled="disabled" @click="handleJumpPage" size="xs"
-      >确定</lay-button
+      >
+     {{ t("page.confirm") }}
+      </lay-button
     >
   </div>
 </template>
