@@ -15,6 +15,17 @@
   <lay-timeline>
     <lay-timeline-item title="2.11.x">
       <ul>
+        <a name="2-11-3"></a>
+        <li>
+          <h3>2.11.3 <span class="layui-badge-rim">2023-11-04</span></h3>
+          <ul>
+            <li>[修复] page 组件 skin 启用时确认跳转操作未适配国际化的问题。</li>
+            <li>[修复] date-picker 组件确认操作 hover 状态不跟随主题色的问题。</li>
+            <li>[修正] form.md 组件 required-error-message 属性描述错误。</li>
+          </ul>
+        </li>
+      </ul>
+      <ul>
         <a name="2-11-2"></a>
         <li>
           <h3>2.11.2 <span class="layui-badge-rim">2023-11-02</span></h3>
