@@ -13,11 +13,9 @@
       type="number"
       v-model="jumpNumber"
     ></lay-input>
-    <lay-button :disabled="disabled" @click="handleJumpPage" size="xs"
-      >
-     {{ t("page.confirm") }}
-      </lay-button
-    >
+    <lay-button :disabled="disabled" @click="handleJumpPage" size="xs">
+      {{ t("page.confirm") }}
+    </lay-button>
   </div>
 </template>
 
