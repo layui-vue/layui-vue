@@ -28,6 +28,7 @@ import useTable from "./hooks/useTable";
 import { TableEmit } from "./typing";
 import { startResize } from "./hooks/useResize";
 import useAutoColsWidth from "./hooks/useAutoColsWidth";
+import { useI18n } from "../../language";
 
 export interface TableProps {
   id?: string;
@@ -86,7 +87,7 @@ const props = withDefaults(defineProps<TableProps>(), {
 });
 
 const emit = defineEmits(TableEmit);
-
+const { t } = useI18n();
 const slot = useSlots();
 const slots = slot.default && slot.default();
 const tableRef = ref();
@@ -981,7 +982,7 @@ defineExpose({ getCheckData });
           placement="bottom-end"
           :style="toolbarStyle('filter')"
         >
-          <div class="layui-inline" title="筛选" lay-event>
+          <div class="layui-inline" :title="t('table.filter')" lay-event>
             <i class="layui-icon layui-icon-slider"></i>
           </div>
           <template #content>
@@ -1003,7 +1004,7 @@ defineExpose({ getCheckData });
         <div
           v-if="showToolbar('export')"
           class="layui-inline"
-          title="导出"
+          :title="t('table.export')" 
           lay-event
           :style="toolbarStyle('export')"
           @click="exportData()"
@@ -1016,7 +1017,7 @@ defineExpose({ getCheckData });
           v-if="showToolbar('print')"
           :style="toolbarStyle('print')"
           class="layui-inline"
-          title="打印"
+          :title="t('table.print')" 
           lay-event
           @click="print()"
         >

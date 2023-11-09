@@ -20,6 +20,7 @@
           <h3>2.11.4 <span class="layui-badge-rim">2023-11-09</span></h3>
           <ul>
             <li>[新增] avatar 与 avatar-list 单元测试用例。</li>
+            <li>[修复] table 组件 defaultToolbar 在国际化场景下不兼容的问题。</li> 
           </ul>
         </li>
       </ul>
