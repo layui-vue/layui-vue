@@ -14,15 +14,28 @@
           <li class="layui-col-sm12">
             <div class="alone">
               <router-link to="/zh-CN/components/layer"
-                >layer - vue<cite>通用型弹出层组件</cite></router-link
-              >
+                >layer - vue
+                <cite>通用型弹出层组件</cite>
+                <img
+                  src="https://img.shields.io/npm/v/@layui/layer-vue.svg?sanitize=true"
+                  alt="Version"
+                />
+                <img
+                  src="https://img.shields.io/npm/l/@layui/layer-vue.svg?sanitize=true"
+                />
+              </router-link>
             </div>
           </li>
           <li class="layui-col-sm12">
             <div class="alone">
               <router-link to="/zh-CN/components/icon"
-                >icons - vue<cite>图标组件化解决方案</cite></router-link
-              >
+                >icons - vue<cite>图标组件化解决方案</cite>
+                <img
+                  src="https://img.shields.io/npm/v/@layui/icons-vue.svg?sanitize=true"
+                  alt="Version" />
+                <img
+                  src="https://img.shields.io/npm/l/@layui/icons-vue.svg?sanitize=true"
+              /></router-link>
             </div>
           </li>
         </ul>
@@ -77,6 +90,7 @@
 @import "@layui/layui-vue/es/field/index.css";
 
 .alone {
+  border-radius: var(--global-border-radius);
   text-align: center;
   background-color: var(--global-primary-color);
   color: #fff;
@@ -90,17 +104,23 @@
   background-color: var(--global-checked-color);
 }
 
-.alone a {
+.alone > a {
   display: block;
   padding: 50px 20px;
   color: #fff;
   font-size: 30px;
 }
 
-.alone a cite {
+.alone > a cite {
   display: block;
   padding-top: 10px;
   font-size: 14px;
   letter-spacing: 2px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.alone > a img {
+  margin: 0px 5px;
 }
 </style>

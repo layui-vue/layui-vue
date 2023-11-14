@@ -11,8 +11,8 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { provide } from 'vue';
-import { LAYUI_AVATAR_KEY } from './use-avatar-list';
+import { provide } from "vue";
+import { LAYUI_AVATAR_KEY } from "./use-avatar-list";
 
 export interface AvatarListProps {
   size?: "xs" | "sm" | "md" | "lg";
@@ -22,11 +22,11 @@ export interface AvatarListProps {
 const props = withDefaults(defineProps<AvatarListProps>(), {
   size: "md",
   radius: false,
-  autoFixSize: true
+  autoFixSize: true,
 });
 provide(LAYUI_AVATAR_KEY, {
-  ...props
-})
+  ...props,
+});
 </script>
 
 <template>
@@ -34,4 +34,3 @@ provide(LAYUI_AVATAR_KEY, {
     <slot></slot>
   </div>
 </template>
-

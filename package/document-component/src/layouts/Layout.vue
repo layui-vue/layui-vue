@@ -121,12 +121,13 @@
           <li class="layui-nav-item">
             <a href="javascript:void(0)">
               <lay-tag
-              size="xs"
-              class="layui-local-badge"
+                size="xs"
+                class="layui-local-badge"
                 v-if="locale === 'en_US'"
                 @click="changeLocale('zh_CN')"
-                >中 文</lay-tag>
-                <lay-tag
+                >中 文</lay-tag
+              >
+              <lay-tag
                 size="xs"
                 class="layui-local-badge"
                 v-else
@@ -398,8 +399,20 @@ export default {
 }
 
 .layui-header .layui-local-badge {
-  font-size: 12.4px;
   background: transparent;
+  line-height: 20px;
+  height: 20px;
+}
+
+.layui-badge-rim {
+  border-radius: 2px;
+  border: 1px solid whitesmoke;
+  font-size: 12px;
+  padding: 3px 10px;
+}
+
+.layui-header .layui-local-badge .layui-tag-text {
+  font-size: 12px;
 }
 
 .layui-menu-docs {

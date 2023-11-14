@@ -11,16 +11,10 @@ export default {
 </script>
 
 <script setup lang="ts">
-import {
-  computed,
-  ref,
-  useSlots,
-  onMounted,
-  onUnmounted,
-  toRefs,
-} from "vue";
+import { computed, ref, useSlots, onMounted, onUnmounted, toRefs } from "vue";
 import "./index.less";
-import { useAvatarProvide } from '../avatarList/use-avatar-list';
+import { useAvatarProvide } from "../avatarList/use-avatar-list";
+import { LayIcon } from "@layui/icons-vue";
 
 export interface AvatarProps {
   src?: string;
@@ -28,7 +22,7 @@ export interface AvatarProps {
   radius?: boolean;
   icon?: string;
   alt?: string;
-  autoFixSize?:boolean;
+  autoFixSize?: boolean;
   fallback?: string;
 }
 
@@ -36,7 +30,7 @@ const props = withDefaults(defineProps<AvatarProps>(), {
   size: "md",
   radius: false,
   icon: "layui-icon-username",
-  autoFixSize: true
+  autoFixSize: true,
 });
 
 const slot = useSlots();
@@ -52,10 +46,12 @@ const classes = computed(() => {
     getSize.value ? `layui-avatar-${getSize.value}` : "",
   ];
 });
-const getParentList = useAvatarProvide()
+const getParentList = useAvatarProvide();
 const getSize = computed(() => getParentList?.size ?? size.value);
 const getRadius = computed(() => getParentList?.radius ?? radius.value);
-const getAutoFixSize =  computed(() => getParentList?.autoFixSize ?? autoFixSize.value);
+const getAutoFixSize = computed(
+  () => getParentList?.autoFixSize ?? autoFixSize.value
+);
 onMounted(() => {
   if (getAutoFixSize.value && avatarText.value) {
     resizeObserver.value = new ResizeObserver((entries) => {
@@ -74,10 +70,10 @@ onMounted(() => {
   }
 });
 const handleImgErr = (e: Event) => {
-  if (!props.fallback) return false;
-  const targetElement = e.target as HTMLImageElement;
-  targetElement.src = props.fallback!;
-  return false;
+  if (props.fallback) {
+    const targetElement = e.target as HTMLImageElement;
+    targetElement.src = props.fallback!;
+  }
 };
 
 onUnmounted(() => {

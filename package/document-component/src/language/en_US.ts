@@ -4,7 +4,6 @@ export default {
     guide: "Guide",
     components: "Components",
     resources: "Resources",
-    material: "Material",
   },
   home: {
     description: "An enterprise-class UI components based on Layui and Vue.",
