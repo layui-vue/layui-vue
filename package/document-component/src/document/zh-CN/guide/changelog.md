@@ -15,6 +15,26 @@
   <lay-timeline>
     <lay-timeline-item title="2.11.x">
       <ul>
+        <a name="2-11-5"></a>
+        <li>
+          <h3>2.11.5 <span class="layui-badge-rim">2023-11-17</span></h3>
+          <ul>
+            <li>[修复] avatar 组件 class 错误，导致内容不垂直水平居中的问题。</li>
+            <li>[修复] slider 组件 max 属性响应式特性失效的问题。</li> 
+          </ul>
+        </li>
+      </ul>
+      <ul>
+        <a name="2-11-4"></a>
+        <li>
+          <h3>2.11.4 <span class="layui-badge-rim">2023-11-09</span></h3>
+          <ul>
+            <li>[新增] avatar 与 avatar-list 单元测试用例。</li>
+            <li>[修复] table 组件 defaultToolbar 在国际化场景下不兼容的问题。</li> 
+          </ul>
+        </li>
+      </ul>
+      <ul>
         <a name="2-11-3"></a>
         <li>
           <h3>2.11.3 <span class="layui-badge-rim">2023-11-04</span></h3>

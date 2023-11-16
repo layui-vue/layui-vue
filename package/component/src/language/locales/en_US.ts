@@ -11,6 +11,11 @@ export default {
     item: "item",
     total: "total",
   },
+  table: {
+    filter: "filter",
+    export: "export",
+    print: "print",
+  },
   datePicker: {
     year: "",
     month: "month",

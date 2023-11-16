@@ -1,7 +1,7 @@
 /*
  * @Author: baobaobao
  * @Date: 2023-10-06 13:58:41
- * @LastEditTime: 2023-10-23 09:24:00
+ * @LastEditTime: 2023-11-16 10:35:16
  * @LastEditors: baobaobao
  */
 
@@ -287,6 +287,7 @@ export const useSlider = (
       if (typeof props.modelValue !== "number") {
         initVal.firstVal = props.min;
       } else {
+        initVal.secondVal = props.max;
         initVal.firstVal = Math.min(
           props.max,
           Math.max(props.min, props.modelValue)

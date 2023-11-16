@@ -1,7 +1,7 @@
 <!--
  * @Author: baobaobao
  * @Date: 2023-10-28 23:47:09
- * @LastEditTime: 2023-10-31 21:23:52
+ * @LastEditTime: 2023-11-14 09:32:20
  * @LastEditors: baobaobao
 -->
 <script lang="ts">
@@ -84,7 +84,7 @@ onUnmounted(() => {
 <template>
   <span ref="avatar" :class="classes">
     <img v-if="src" :src="src" :alt="alt" @error="handleImgErr" />
-    <span ref="avatarText" class="lay-avatar-text" :style="styles" v-else>
+    <span ref="avatarText" class="layui-avatar-text" :style="styles" v-else>
       <lay-icon v-if="!slot.default" :type="icon" />
       <slot></slot>
     </span>
