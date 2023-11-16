@@ -12,9 +12,9 @@ export default {
     total: "共",
   },
   table: {
-    filter: "筛选", 
+    filter: "筛选",
     export: "导出",
-    print: "打印"
+    print: "打印",
   },
   datePicker: {
     year: "年",

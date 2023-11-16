@@ -12,9 +12,9 @@ export default {
     total: "total",
   },
   table: {
-    filter: "filter", 
+    filter: "filter",
     export: "export",
-    print: "print"
+    print: "print",
   },
   datePicker: {
     year: "",

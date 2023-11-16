@@ -1004,7 +1004,7 @@ defineExpose({ getCheckData });
         <div
           v-if="showToolbar('export')"
           class="layui-inline"
-          :title="t('table.export')" 
+          :title="t('table.export')"
           lay-event
           :style="toolbarStyle('export')"
           @click="exportData()"
@@ -1017,7 +1017,7 @@ defineExpose({ getCheckData });
           v-if="showToolbar('print')"
           :style="toolbarStyle('print')"
           class="layui-inline"
-          :title="t('table.print')" 
+          :title="t('table.print')"
           lay-event
           @click="print()"
         >

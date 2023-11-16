@@ -287,7 +287,7 @@ export const useSlider = (
       if (typeof props.modelValue !== "number") {
         initVal.firstVal = props.min;
       } else {
-        initVal.secondVal = props.max
+        initVal.secondVal = props.max;
         initVal.firstVal = Math.min(
           props.max,
           Math.max(props.min, props.modelValue)
