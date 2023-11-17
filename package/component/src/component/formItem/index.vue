@@ -45,7 +45,7 @@ export interface FormItemProps {
 }
 
 const props = withDefaults(defineProps<FormItemProps>(), {
-  mode: "block",
+  // mode: "block",
 });
 
 const { size } = useProps(props);
@@ -238,8 +238,12 @@ const labelWidthComputedRef = computed(() => {
   return props.labelWidth || layForm.labelWidth || 95;
 });
 
+const modeComputedRef = computed(() => {
+  return props.mode || layForm.mode || "block";
+});
+
 const getMarginLeft = computed(() => {
-  if (props.mode == "block") {
+  if (modeComputedRef.value == "block") {
     if (itemLabelPosition.value != "top") {
       // 将 label-Width 转化为 number 类型
       let labelWidth =
@@ -267,13 +271,14 @@ const getMarginLeft = computed(() => {
       };
     }
   }
+  return undefined;
 });
 </script>
 
 <template>
   <div
     class="layui-form-item"
-    :class="[`layui-form-item-${itemLabelPosition}`, mode]"
+    :class="[`layui-form-item-${itemLabelPosition}`, modeComputedRef]"
     :size="size"
     ref="formItemRef"
   >
@@ -296,7 +301,10 @@ const getMarginLeft = computed(() => {
         {{ label }}
       </slot>
     </label>
-    <div :class="[mode ? 'layui-input-' + mode : '']" :style="getMarginLeft">
+    <div
+      :class="[modeComputedRef ? 'layui-input-' + modeComputedRef : '']"
+      :style="getMarginLeft"
+    >
       <div ref="slotParent">
         <slot :props="{ ...props, model: layForm.model }"></slot>
       </div>
