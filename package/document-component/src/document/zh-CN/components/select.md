@@ -326,6 +326,7 @@ export default {
 | v-model             | 选中值                             | `string`/`number`/`Array`                   | -                   | -        |
 | name                | 原生 name 属性                     | `string`                                    | -                   | -        |
 | placeholder         | 默认空提示语                       | `string`                                    | -                   | `请选择` |
+| allowClear            | 允许清空                           | `boolean`                                   | `true` `false`      | `false`  |
 | disabled            | 是否禁用                           | `boolean`                                   | `true` `false`      | `false`  |
 | multiple            | 是否为多选                         | `boolean`                                   | `true` `false`      | `false`  |
 | size                | 尺寸                               | `string`                                    | `lg` `md` `sm` `xs` | `md`     |
