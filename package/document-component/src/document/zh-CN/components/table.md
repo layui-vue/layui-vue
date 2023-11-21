@@ -967,6 +967,7 @@ export default {
 | autoColsWidth        | 启用后，根据内容自动计算列宽                                 | `boolean`           | `false`    | `true` `false`                               | 
 | defaultToolbar       | 是否启用默认工具栏                                          | `boolean`           | `false`    | `true` `false`                               | 
 | loading              | 是否开启加载动画                                            | `boolean`           | `false`    | `true` `false`                               | 
+| emptyDescription     | 当没有数据时，显示的默认文本                                            | `string`           | --    | --                               | 
  
 :::
 
@@ -996,6 +997,7 @@ export default {
 | footer     | 底部扩展     | --                                                                                                                                                      | `1.4.4` |
 | expand     | 嵌套面板     | { row } 在 1.8.6 版本，data 参数由 row 替代，但 data 仍然可用                                                                                           | `1.4.4` |
 | customSlot | 自定义列插槽 | { row，rowIndex，column，columnIndex } 在 1.8.6 版本，data 参数由 row 替代，但 data 仍然可用，新增 rowIndex 行索引 columnIndex 列索引 column 列信息参数 | `1.4.4` |
+| empty     | 无数据时显示的UI     | 此插槽意在替换整个无数据时的显示UI，如果只是单纯替换文字，保留无数据时的图像，请使用`table`的`emptyDescription`属性                | `2.11.6` |
 
 :::
 

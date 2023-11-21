@@ -58,6 +58,7 @@ export interface TableProps {
   getRadioProps?: Function;
   resize?: boolean;
   autoColsWidth?: boolean;
+  emptyDescription?: string;
 }
 
 const props = withDefaults(defineProps<TableProps>(), {
@@ -1254,7 +1255,9 @@ defineExpose({ getCheckData });
         </table>
 
         <template v-if="tableDataSource.length == 0 && loading == false">
-          <lay-empty></lay-empty>
+          <slot name="empty">
+            <lay-empty :description="emptyDescription"></lay-empty>
+          </slot>
           <div :style="{ width: tableBodyEmptyWidth }"></div>
         </template>
         <template v-if="loading == true">
