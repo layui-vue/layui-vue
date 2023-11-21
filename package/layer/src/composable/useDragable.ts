@@ -93,7 +93,15 @@ const useMove = function (
   }
 };
 
-const useResize = function (el: HTMLElement, callback: Function) {
+const useResize = function (
+    el: HTMLElement,
+    callback: Function,
+    endCallback: Function,
+    startCallback: Function
+) {
+  var clientX = 0;
+  var clientY = 0;
+  var flag = true;
   if (el != null) {
     el.addEventListener("mousedown", function (event: any) {
       const path = (event.composedPath && event.composedPath()) || event.path;
@@ -101,6 +109,8 @@ const useResize = function (el: HTMLElement, callback: Function) {
         if (event.button == 0 && el != null) {
           var x = el.offsetLeft;
           var y = el.offsetTop;
+          clientX = event.clientX;
+          clientY = event.clientY;
           const move = function (moveEvent: any) {
             if (window.getSelection != undefined) {
               window.getSelection()?.removeAllRanges();
@@ -108,6 +118,16 @@ const useResize = function (el: HTMLElement, callback: Function) {
             if (el != null) {
               var offsetX = moveEvent.clientX;
               var offsetY = moveEvent.clientY;
+              // 按下后的首次偏移，将触发 moveStart() 回调函数
+              if (
+                  offsetX - clientX != 0 ||
+                  offsetY - clientY != 0
+              ) {
+                if (flag) {
+                  flag = false;
+                  startCallback();
+                }
+              }
               var w = offsetX - x;
               var h = offsetY - y;
               w < 260 && (w = 260);
@@ -120,6 +140,10 @@ const useResize = function (el: HTMLElement, callback: Function) {
           };
           document.addEventListener("mousemove", move);
           const stop = function () {
+            // 恢复标识，保证下次拖拽开始时，可触发 moveStart 回调
+            flag = true;
+            // 说明结束，传递 moveEnd 事件
+            endCallback();
             document.removeEventListener("mousemove", move);
             document.removeEventListener("mouseup", stop);
           };
