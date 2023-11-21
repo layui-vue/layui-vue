@@ -8,5 +8,11 @@ export default function useProps(props: any) {
     return props.size || formContext.size || "md";
   });
 
-  return { size };
+  const mode = computed(() => {
+    const formContext = inject("LayForm", {} as LayFormContext);
+
+    return props.mode || formContext.mode || "block";
+  });
+
+  return { size, mode };
 }
