@@ -4,7 +4,7 @@
  * @Author       : sdwdjzhy sdwdjzhy@qq.com
  * @Date         : 2023-11-21 14:12:07
  * @LastEditors  : sdwdjzhy sdwdjzhy@qq.com
- * @LastEditTime : 2023-11-21 14:29:25
+ * @LastEditTime : 2023-11-21 14:53:03
  * @FilePath     : table-empty.test.ts
  * Copyright 2023 Runy, All Rights Reserved.
  * 2023-11-21 14:12:07
@@ -50,7 +50,7 @@ describe("Table.vue", () => {
     await nextTick();
     const body = wrapper.find(".layui-table-body");
     expect(body.exists()).toBeTruthy();
-    //expect(body.findComponent("lay-empty").exists()).toBeTruthy();
+    expect(body.findComponent(LayEmpty).exists()).toBeFalsy();
     expect(body.html()).toContain("<span>无数据(empty)</span>");
     wrapper.unmount();
   });
