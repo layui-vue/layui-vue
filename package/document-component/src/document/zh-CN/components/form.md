@@ -841,6 +841,8 @@ const submit10 = function(isValidate, model, errors) {
 | label-position          | 全局标签位置                     | `string`    |  `top` `right` `left`        | `right` |
 | size                    | 全局控件尺寸                     | --          |  --                          | --      |
 | labelWidth              | 全局标签宽度                     | `string`    |  --                          | --      |
+| mode              | 全局表单项显示的模式，`块元素` / `行元素`                       | `string`    |  `block` `inline`     | `block`    |
+
 :::
 
 ::: title 表单(form)事件
