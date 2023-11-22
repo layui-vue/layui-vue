@@ -15,6 +15,22 @@
   <lay-timeline>
     <lay-timeline-item title="2.11.x">
       <ul>
+        <a name="2-11-6"></a>
+        <li>
+          <h3>2.11.6 <span class="layui-badge-rim">2023-11-22</span></h3>
+          <ul>
+            <li>[新增] layer 组件 resizeStart 属性，拉伸开始回调。</li>
+            <li>[新增] layer 组件 resizing 属性，拉伸中回调。</li>
+            <li>[新增] layer 组件 resizeEnd 属性，拉伸结束回调。</li>
+            <li>[新增] form 组件 mode 属性，全局设置表单项布局模式，block 与 inline 未可选值。</li>
+            <li>[新增] table 组件 empty 插槽，提供自定义空状态的能力。</li>
+            <li>[新增] table 组件 empty-description 属性，设置没有数据时的默认文本。</li>
+            <li>[修复] select 组件 allowClear 属性在文档缺失的问题。</li>
+            <li>[升级] layer 组件 2.2.0 版本。</li> 
+          </ul>
+        </li>
+      </ul>
+      <ul>
         <a name="2-11-5"></a>
         <li>
           <h3>2.11.5 <span class="layui-badge-rim">2023-11-17</span></h3>
