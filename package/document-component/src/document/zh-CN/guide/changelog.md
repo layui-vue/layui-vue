@@ -13,11 +13,11 @@
 ::: demo
 <template>
   <lay-timeline>
-    <lay-timeline-item title="2.11.x">
+    <lay-timeline-item title="2.12.x">
       <ul>
-        <a name="2-11-6"></a>
+        <a name="2-12-0"></a>
         <li>
-          <h3>2.11.6 <span class="layui-badge-rim">2023-11-22</span></h3>
+          <h3>2.12.0 <span class="layui-badge-rim">2023-11-23</span></h3>
           <ul>
             <li>[新增] layer 组件 resizeStart 属性，拉伸开始回调。</li>
             <li>[新增] layer 组件 resizing 属性，拉伸中回调。</li>
@@ -30,6 +30,8 @@
           </ul>
         </li>
       </ul>
+    </lay-timeline-item>
+    <lay-timeline-item title="2.11.x">
       <ul>
         <a name="2-11-5"></a>
         <li>
