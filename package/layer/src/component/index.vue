@@ -426,20 +426,22 @@ const supportMove = function () {
           }
         );
         // 拉伸, 在首次拉伸前, 移除 resizeObserver 监听
-        useResize(layero.value, (width: string, height: string) => {
-          removeListener();
-          h.value = height;
-          w.value = width;
-          props.resizing(props.id, { width: width, height: height });
-        },
-        () => {
-          // 拖拽结束
-          props.resizeEnd(props.id);
-        },
-        () => {
-          // 拖拽开始
-          props.resizeStart(props.id);
-        }
+        useResize(
+          layero.value,
+          (width: string, height: string) => {
+            removeListener();
+            h.value = height;
+            w.value = width;
+            props.resizing(props.id, { width: width, height: height });
+          },
+          () => {
+            // 拖拽结束
+            props.resizeEnd(props.id);
+          },
+          () => {
+            // 拖拽开始
+            props.resizeStart(props.id);
+          }
         );
       }
     });

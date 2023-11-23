@@ -94,10 +94,10 @@ const useMove = function (
 };
 
 const useResize = function (
-    el: HTMLElement,
-    callback: Function,
-    endCallback: Function,
-    startCallback: Function
+  el: HTMLElement,
+  callback: Function,
+  endCallback: Function,
+  startCallback: Function
 ) {
   var clientX = 0;
   var clientY = 0;
@@ -119,10 +119,7 @@ const useResize = function (
               var offsetX = moveEvent.clientX;
               var offsetY = moveEvent.clientY;
               // 按下后的首次偏移，将触发 moveStart() 回调函数
-              if (
-                  offsetX - clientX != 0 ||
-                  offsetY - clientY != 0
-              ) {
+              if (offsetX - clientX != 0 || offsetY - clientY != 0) {
                 if (flag) {
                   flag = false;
                   startCallback();
