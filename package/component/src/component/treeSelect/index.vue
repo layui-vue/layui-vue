@@ -6,8 +6,8 @@ export default {
 
 <script lang="ts" setup>
 import "./index.less";
-import { StyleValue, computed, ref, watch } from "vue";
-import { getNode } from "../../utils/index";
+import { StyleValue, computed, ref, watch, useSlots } from "vue";
+import { getNode } from "../../utils";
 import { TreeSelectSize } from "./interface";
 import { LayIcon } from "@layui/icons-vue";
 import LayInput from "../input/index.vue";
@@ -34,7 +34,9 @@ export interface TreeSelectProps {
 
 export interface TreeSelectEmits {
   (e: "update:modelValue", value: string | string[]): void;
+
   (e: "change", value: string | string[]): void;
+
   (e: "search", value: string | string[]): void;
 }
 
@@ -84,6 +86,9 @@ const checkedKeys = computed({
     }
   },
 });
+
+const slots = useSlots();
+const hasTitleSlot = computed(() => slots.title != null);
 
 watch(
   [selectedValue, treeData],
@@ -176,6 +181,7 @@ const handleRemove = (value: any) => {
 
 const filterNodeIds = (node: any) => {
   const nodeIds: any[] = [];
+
   function _findNodeIds(node: any, arr: any[]) {
     arr.push(node.id);
     if (node.children) {
@@ -184,6 +190,7 @@ const filterNodeIds = (node: any) => {
       });
     }
   }
+
   _findNodeIds(node, nodeIds);
   return nodeIds;
 };
@@ -321,8 +328,15 @@ watch(
             :check-strictly="checkStrictly"
             v-model:selectedKey="selectedValue"
             v-model:checkedKeys="checkedKeys"
+            :tail-node-icon="!hasTitleSlot"
             @node-click="handleClick"
-          ></lay-tree>
+          >
+            <template #title="{ data }">
+              <slot name="title" :data="data">
+                {{ data.title }}
+              </slot>
+            </template>
+          </lay-tree>
         </div>
       </template>
     </lay-dropdown>
