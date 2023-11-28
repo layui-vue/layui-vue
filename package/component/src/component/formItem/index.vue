@@ -45,23 +45,20 @@ export interface FormItemProps {
 }
 
 const props = withDefaults(defineProps<FormItemProps>(), {
-  mode: "block",
+  // mode: "block",
 });
 
-const { size } = useProps(props);
+const {
+  size,
+  mode,
+  labelWidth,
+  labelPosition,
+  isRequired, // 是否必填
+} = useProps(props);
 
 const layForm = inject("LayForm", {} as LayFormContext);
 const formItemRef = ref<HTMLDivElement>();
 const slotParent = ref<HTMLDivElement>();
-
-// 是否必填
-const isRequired = computed(() => {
-  return props.required || layForm.required;
-});
-
-const itemLabelPosition = computed(() => {
-  return props.labelPosition || layForm.labelPosition;
-});
 
 // 拼接校验规则
 const ruleItems = computed(() => {
@@ -234,22 +231,18 @@ const showLabel = computed(() => {
   return slots.label != undefined || props.label != undefined;
 });
 
-const labelWidthComputedRef = computed(() => {
-  return props.labelWidth || layForm.labelWidth || 95;
-});
-
 const getMarginLeft = computed(() => {
-  if (props.mode == "block") {
-    if (itemLabelPosition.value != "top") {
+  if (mode.value == "block") {
+    if (labelPosition.value != "top") {
       // 将 label-Width 转化为 number 类型
-      let labelWidth =
-        typeof labelWidthComputedRef.value === "string"
-          ? parseFloat(labelWidthComputedRef.value)
-          : labelWidthComputedRef.value;
+      let _labelWidth =
+        typeof labelWidth.value === "string"
+          ? parseFloat(labelWidth.value)
+          : labelWidth.value;
 
       // No Pane，增加 15 左边距
       if (!layForm.pane) {
-        labelWidth += 15;
+        _labelWidth += 15;
       }
       // 判定 label 属性 与 插槽是否存在，如果都不存在，返回 0px 标签宽度
       if (slots.label === undefined && props.label === undefined) {
@@ -258,7 +251,7 @@ const getMarginLeft = computed(() => {
         };
       } else {
         return {
-          "margin-left": `${labelWidth}px`,
+          "margin-left": `${_labelWidth}px`,
         };
       }
     } else {
@@ -267,20 +260,21 @@ const getMarginLeft = computed(() => {
       };
     }
   }
+  return undefined;
 });
 </script>
 
 <template>
   <div
     class="layui-form-item"
-    :class="[`layui-form-item-${itemLabelPosition}`, mode]"
+    :class="[`layui-form-item-${labelPosition}`, mode]"
     :size="size"
     ref="formItemRef"
   >
     <label
       class="layui-form-label"
       v-if="showLabel"
-      :style="{ width: labelWidthComputedRef + 'px' }"
+      :style="{ width: labelWidth + 'px' }"
     >
       <span
         v-if="props.prop && isRequired"

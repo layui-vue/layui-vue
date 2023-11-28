@@ -8,5 +8,26 @@ export default function useProps(props: any) {
     return props.size || formContext.size || "md";
   });
 
-  return { size };
+  const mode = computed(() => {
+    const formContext = inject("LayForm", {} as LayFormContext);
+
+    return props.mode || formContext.mode || "block";
+  });
+
+  const labelWidth = computed(() => {
+    const formContext = inject("LayForm", {} as LayFormContext);
+    return props.labelWidth || formContext.labelWidth || 95;
+  });
+
+  const labelPosition = computed(() => {
+    const formContext = inject("LayForm", {} as LayFormContext);
+    return props.labelPosition || formContext.labelPosition;
+  });
+
+  const isRequired = computed(() => {
+    const formContext = inject("LayForm", {} as LayFormContext);
+    return props.required || formContext.required;
+  });
+
+  return { size, mode, labelWidth, labelPosition, isRequired };
 }

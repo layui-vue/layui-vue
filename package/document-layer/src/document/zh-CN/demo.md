@@ -239,7 +239,16 @@ const openResize = function() {
         type: 1,
         title: "标题",
         resize: true,
-        content: "内容"
+        content: "内容",
+        resizeStart: () => {
+            console.log("开始拉伸")
+        },
+        resizing: () => {
+            console.log("拉伸中")
+        },
+        resizeEnd: () => {
+            console.log("拉伸结束")
+        }
     })    
 }
 
