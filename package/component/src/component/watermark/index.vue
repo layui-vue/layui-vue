@@ -6,7 +6,15 @@ export default {
 };
 </script>
 <script lang="ts" setup name="dWatermark">
-import { onMounted, nextTick } from "vue";
+import { 
+  onMounted, 
+  onBeforeUnmount,
+  watch,
+  shallowRef,
+} from "vue";
+import { useMutationObserver } from '@vueuse/core'
+import { reRendering } from './utils'
+
 
 export interface Props {
   content: string;
@@ -28,17 +36,46 @@ const props = withDefaults(defineProps<Props>(), {
   elementBox: "body",
 });
 
+const parentElement = shallowRef<HTMLElement>()
+const watermarkElement = shallowRef<HTMLDivElement>()
+
 onMounted(() => {
-  nextTick(() => {
-    initWatermark();
-  });
+  parentElement.value = document.querySelector(props.elementBox);
+
+  useMutationObserver(parentElement, onMutation, {
+    attributes: true,
+    subtree: true,
+    childList: true,
+  })
+
+  renderWatermark();
 });
 
-// 初始化
-const initWatermark = () => {
+watch(
+  () => props,
+  () => {
+    renderWatermark()
+  },
+  {
+    deep: true,
+    flush: 'post',
+  }
+)
+
+const destroyWatermark = () => {
+  if (watermarkElement.value) {
+    watermarkElement.value.remove()
+    watermarkElement.value = undefined
+  }
+}
+
+// 渲染Watermark
+const renderWatermark = () => {
+
   const watermarkCanvas = document.createElement("canvas");
-  const parentElement = document.querySelector(props.elementBox) as Element;
-  const content = document.createElement("div");
+  if (!watermarkElement.value) {
+    watermarkElement.value = document.createElement('div')
+  }
 
   watermarkCanvas.setAttribute("width", `${props.width}`);
   watermarkCanvas.setAttribute("height", `${props.height}`);
@@ -62,27 +99,25 @@ const initWatermark = () => {
                         background-repeat:repeat;
                         background-image:url('${base64Url}');
                         `;
-  content.classList.add("lay-watermark-box");
-  content.setAttribute("style", backgroundImg);
-  const observer = new MutationObserver(() => {
-    const wortmarkBox = parentElement.querySelector(".lay-watermark-box");
-    if (
-      (wortmarkBox && wortmarkBox.getAttribute("style") !== backgroundImg) ||
-      !wortmarkBox
-    ) {
-      if (wortmarkBox) {
-        wortmarkBox.setAttribute("style", backgroundImg);
-      } else {
-        parentElement.appendChild(content);
-      }
-    }
-  });
-  observer.observe(document.body, {
-    attributes: true,
-    subtree: true,
-    childList: true,
-  });
+  watermarkElement.value.classList.add("lay-watermark-box");
+  watermarkElement.value.setAttribute("style", backgroundImg);
+
+  parentElement.value.appendChild(watermarkElement.value);
 };
+
+onBeforeUnmount(() => {
+  destroyWatermark()
+})
+
+const onMutation = (mutations: MutationRecord[]) => {
+  mutations.forEach((mutation) => {
+    if (reRendering(mutation, watermarkElement.value)) {
+      destroyWatermark()
+      renderWatermark()
+    }
+  })
+}
+
 </script>
 
 <template></template>
