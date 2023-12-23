@@ -456,6 +456,12 @@ const menus = [
         subTitle: "barcode",
         path: "/zh-CN/components/barcode",
       },
+      {
+        id: 110,
+        title: "水印",
+        subTitle: "watermark",
+        path: "/zh-CN/components/watermark",
+      },
     ],
   },
 ];
