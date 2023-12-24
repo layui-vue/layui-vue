@@ -6,15 +6,9 @@ export default {
 };
 </script>
 <script lang="ts" setup name="dWatermark">
-import { 
-  onMounted, 
-  onBeforeUnmount,
-  watch,
-  shallowRef,
-} from "vue";
-import { useMutationObserver } from '@vueuse/core'
-import { reRendering } from './utils'
-
+import { onMounted, onBeforeUnmount, watch, shallowRef } from "vue";
+import { useMutationObserver } from "@vueuse/core";
+import { reRendering } from "./utils";
 
 export interface Props {
   content: string;
@@ -36,8 +30,8 @@ const props = withDefaults(defineProps<Props>(), {
   elementBox: "body",
 });
 
-const parentElement = shallowRef<HTMLElement>()
-const watermarkElement = shallowRef<HTMLDivElement>()
+const parentElement = shallowRef<HTMLElement>();
+const watermarkElement = shallowRef<HTMLDivElement>();
 
 onMounted(() => {
   parentElement.value = document.querySelector(props.elementBox);
@@ -46,7 +40,7 @@ onMounted(() => {
     attributes: true,
     subtree: true,
     childList: true,
-  })
+  });
 
   renderWatermark();
 });
@@ -54,27 +48,26 @@ onMounted(() => {
 watch(
   () => props,
   () => {
-    renderWatermark()
+    renderWatermark();
   },
   {
     deep: true,
-    flush: 'post',
+    flush: "post",
   }
-)
+);
 
 const destroyWatermark = () => {
   if (watermarkElement.value) {
-    watermarkElement.value.remove()
-    watermarkElement.value = undefined
+    watermarkElement.value.remove();
+    watermarkElement.value = undefined;
   }
-}
+};
 
 // 渲染Watermark
 const renderWatermark = () => {
-
   const watermarkCanvas = document.createElement("canvas");
   if (!watermarkElement.value) {
-    watermarkElement.value = document.createElement('div')
+    watermarkElement.value = document.createElement("div");
   }
 
   watermarkCanvas.setAttribute("width", `${props.width}`);
@@ -106,18 +99,17 @@ const renderWatermark = () => {
 };
 
 onBeforeUnmount(() => {
-  destroyWatermark()
-})
+  destroyWatermark();
+});
 
 const onMutation = (mutations: MutationRecord[]) => {
   mutations.forEach((mutation) => {
     if (reRendering(mutation, watermarkElement.value)) {
-      destroyWatermark()
-      renderWatermark()
+      destroyWatermark();
+      renderWatermark();
     }
-  })
-}
-
+  });
+};
 </script>
 
 <template></template>

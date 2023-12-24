@@ -98,7 +98,6 @@ import LayPopconfirm from "./component/popconfirm/index";
 import LayLoading from "./component/loading/index";
 import LayWatermark from "./component/watermark/index";
 
-
 declare module "@vue/runtime-core" {
   // GlobalComponents for Volar
   export interface GlobalComponents {
