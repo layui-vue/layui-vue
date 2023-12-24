@@ -12,7 +12,8 @@ import { reRendering } from "./utils";
 
 export interface Props {
   content: string;
-  font?: string;
+  fontSize?: string;
+  fontFamily?: string;
   color?: string;
   rotate?: number;
   height?: number;
@@ -22,7 +23,8 @@ export interface Props {
 
 const props = withDefaults(defineProps<Props>(), {
   content: "",
-  font: "20px serif",
+  fontSize: "20px",
+  fontFamily: "serif",
   color: "rgba(184, 184, 184, 0.8)",
   rotate: -45,
   height: 200,
@@ -34,7 +36,10 @@ const parentElement = shallowRef<HTMLElement>();
 const watermarkElement = shallowRef<HTMLDivElement>();
 
 onMounted(() => {
-  parentElement.value = document.querySelector(props.elementBox);
+
+
+
+  parentElement.value = document.querySelector(props.elementBox) as HTMLElement;
 
   useMutationObserver(parentElement, onMutation, {
     attributes: true,
@@ -73,7 +78,7 @@ const renderWatermark = () => {
   watermarkCanvas.setAttribute("width", `${props.width}`);
   watermarkCanvas.setAttribute("height", `${props.height}`);
   const ctx = <CanvasRenderingContext2D>watermarkCanvas.getContext("2d");
-  ctx.font = `${props.font}`;
+  ctx.font = `${props.fontSize} ${props.fontFamily}`;
   ctx.fillStyle = props.color;
   ctx.textAlign = "center";
   ctx.translate(props.width / 2, props.height / 2);
@@ -95,7 +100,9 @@ const renderWatermark = () => {
   watermarkElement.value.classList.add("lay-watermark-box");
   watermarkElement.value.setAttribute("style", backgroundImg);
 
-  parentElement.value.appendChild(watermarkElement.value);
+  if (parentElement.value) {
+    parentElement.value.appendChild(watermarkElement.value);
+  }
 };
 
 onBeforeUnmount(() => {

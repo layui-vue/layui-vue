@@ -74,7 +74,7 @@ const submit = () => {
 
 <template>
 <div style="position: relative" class="layui-scroll-test">
-<lay-watermark content="Layui-scroll" font="20px Microsoft Yahei" element-box=".layui-scroll-test"></lay-watermark>
+<lay-watermark content="layui-vue" font="20px Microsoft Yahei" element-box=".layui-scroll-test"></lay-watermark>
 	<lay-scroll height="400px" style="background-color: #ffffff; position: relative" thumbColor="#000000">
 		<lay-container>
 		<lay-row>
@@ -113,7 +113,8 @@ const changeMaxTotal = () => {
 | 属性        | 描述     | 类型 | 默认值         |
 | ----------- | -------- | ------- | -------------- |
 | content     | 显示内容 | string | --             |
-| font        | 字体样式 | string |`20px`|
+| fontSize    | 字体大小 | string |`20px`|
+| fontFamily  | 字体样式 | string |`serif`|
 | color       | 字体颜色 | string |`rgba(184, 184, 184, 0.6)`   |
 | rotate      | 旋转角度（大于-90 小于90） | number |`-45`  |
 | height      | 水印字体高度设置 | number | `200`   |

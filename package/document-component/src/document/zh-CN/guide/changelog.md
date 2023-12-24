@@ -21,9 +21,10 @@
           <ul>
             <li>[新增] watermark 水印组件。</li>
             <li>[新增] watermark 组件 content 属性，用于设置内容。</li>
-            <li>[新增] watermark 组件 elementBox 属性，用于指定父容器 Class 名称。</li>
+            <li>[新增] watermark 组件 elementBox 属性，用于指定父容器。</li>
             <li>[新增] watermark 组件 color 属性，用于设置水印字体颜色。</li>
-            <li>[新增] watermark 组件 font 属性，用于设置水印字体样式。</li>
+            <li>[新增] watermark 组件 fontSize 属性，用于设置水印字体大小。</li>
+            <li>[新增] watermark 组件 fontFamily 属性，用于设置水印字体样式。</li>
             <li>[新增] watermark 组件 rotate 属性，用于设置水印角度。</li>
             <li>[新增] watermark 组件 height 属性，用于设置水印高度。</li>
             <li>[新增] watermark 组件 width 属性，用于设置水印宽度。</li>
