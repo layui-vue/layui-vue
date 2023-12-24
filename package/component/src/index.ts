@@ -101,6 +101,7 @@ import LayAutocomplete from "./component/autoComplete/index";
 import LayRadioButton from "./component/radioButton/index";
 import LayPopconfirm from "./component/popconfirm/index";
 import LayLoading from "./component/loading/index";
+import LayWatermark from "./component/watermark/index";
 import LayConfigProvider from "./provider";
 import { InstallOptions } from "./types";
 
@@ -200,6 +201,7 @@ const components: Record<string, Plugin> = {
   LayRadioButton,
   LayPopconfirm,
   LayLoading,
+  LayWatermark,
 };
 
 const install = (app: App, options?: InstallOptions): void => {
@@ -306,6 +308,7 @@ export {
   LayRadioButton,
   LayPopconfirm,
   LayLoading,
+  LayWatermark,
   install,
 };
 
