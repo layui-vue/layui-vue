@@ -13,6 +13,25 @@
 ::: demo
 <template>
   <lay-timeline>
+    <lay-timeline-item title="2.13.x">
+      <ul>
+        <a name="2-13-0"></a>
+        <li>
+          <h3>2.13.0 <span class="layui-badge-rim">2023-12-25</span></h3>
+          <ul>
+            <li>[新增] watermark 水印组件。</li>
+            <li>[新增] watermark 组件 content 属性，用于设置内容。</li>
+            <li>[新增] watermark 组件 elementBox 属性，用于指定父容器 Class 名称。</li>
+            <li>[新增] watermark 组件 color 属性，用于设置水印字体颜色。</li>
+            <li>[新增] watermark 组件 font 属性，用于设置水印字体样式。</li>
+            <li>[新增] watermark 组件 rotate 属性，用于设置水印角度。</li>
+            <li>[新增] watermark 组件 height 属性，用于设置水印高度。</li>
+            <li>[新增] watermark 组件 width 属性，用于设置水印宽度。</li>
+            <li>[新增] tree-select 组件 title 插槽用于自定义标题内容。</li>
+          </ul>
+        </li>
+      </ul>
+    </lay-timeline-item>
     <lay-timeline-item title="2.12.x">
       <ul>
         <a name="2-12-0"></a>
