@@ -36,9 +36,6 @@ const parentElement = shallowRef<HTMLElement>();
 const watermarkElement = shallowRef<HTMLDivElement>();
 
 onMounted(() => {
-
-
-
   parentElement.value = document.querySelector(props.elementBox) as HTMLElement;
 
   useMutationObserver(parentElement, onMutation, {
