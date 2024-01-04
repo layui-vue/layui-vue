@@ -15,6 +15,17 @@
   <lay-timeline>
     <lay-timeline-item title="2.13.x">
       <ul>
+        <a name="2-13-1"></a>
+        <li>
+          <h3>2.13.1 <span class="layui-badge-rim">2024-01-04</span></h3>
+          <ul>
+            <li>[新增] input-number 组件 step-strictly 限制输入值只能是步长的倍数。</li>
+            <li>[修复] watermark 组件 index.css 按需模式丢失问题。</li>
+            <li>[优化] input 组件 blur 与 foucs 事件参数类型为 FocusEvent。</li>
+          </ul>
+        </li>
+      </ul>
+      <ul>
         <a name="2-13-0"></a>
         <li>
           <h3>2.13.0 <span class="layui-badge-rim">2023-12-25</span></h3>

@@ -40,11 +40,11 @@ const props = withDefaults(defineProps<InputProps>(), {
 });
 
 interface InputEmits {
-  (e: "blur", eventParam: Event): void;
+  (e: "blur", eventParam: FocusEvent): void;
   (e: "input", value: string): void;
   (e: "update:modelValue", value: string): void;
   (e: "change", value: string): void;
-  (e: "focus", eventParam: Event): void;
+  (e: "focus", eventParam: FocusEvent): void;
   (e: "clear"): void;
 }
 
@@ -101,7 +101,7 @@ const onClear = () => {
   emit("clear");
 };
 
-const onFocus = (eventParam: Event) => {
+const onFocus = (eventParam: FocusEvent) => {
   emit("focus", eventParam);
 };
 
@@ -111,14 +111,14 @@ const onChange = (eventParam: Event) => {
   emit("change", value);
 };
 
-const onBlur = (eventParam: Event) => {
+const onBlur = (eventParam: FocusEvent) => {
   if (props.type === "number") {
     onNumberBlur(eventParam);
   }
   emit("blur", eventParam);
 };
 
-const onNumberBlur = (eventParam: Event) => {
+const onNumberBlur = (eventParam: FocusEvent) => {
   let value = (eventParam.target as HTMLInputElement).value;
   if (value === "") {
     value = props.min ? String(props.min) : "0";

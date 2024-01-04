@@ -117,4 +117,6 @@ const onMutation = (mutations: MutationRecord[]) => {
 };
 </script>
 
-<template></template>
+<template>
+  <slot></slot>
+</template>

@@ -117,7 +117,8 @@ const inputChange = function () {
   num.value = tempValue.value;
 };
 
-const inputBlur = function (event: Event) {
+const inputBlur = function (event: FocusEvent) {
+  // @ts-ignore
   const value = event.target?.value === "-" ? 0 : event.target?.value;
   const { step, stepStrictly } = props;
   if (stepStrictly) {
