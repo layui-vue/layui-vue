@@ -5,7 +5,8 @@ export default {
   name: "LayWatermark",
 };
 </script>
-<script lang="ts" setup name="dWatermark">
+<script lang="ts" setup>
+import "./index.less";
 import { onMounted, onBeforeUnmount, watch, shallowRef } from "vue";
 import { useMutationObserver } from "@vueuse/core";
 import { reRendering } from "./utils";
