@@ -115,6 +115,29 @@
 
 :::
 
+::: title 严格进步
+:::
+
+::: demo `step-strictly` 属性接受一个Boolean。 如果这个属性被设置为 true，则只能输入步进的倍数。
+
+<template>
+  <lay-input-number v-model="data11" :step="10" step-strictly></lay-input-number>
+</template>
+
+<script>
+  import { ref } from 'vue';
+  const data11 = ref(0);
+  export default {
+    setup() {
+      return {
+        data11,
+      }
+    }
+  }
+</script>
+
+:::
+
 ::: title 禁用
 :::
 
