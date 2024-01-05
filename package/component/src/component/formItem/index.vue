@@ -48,13 +48,7 @@ const props = withDefaults(defineProps<FormItemProps>(), {
   // mode: "block",
 });
 
-const {
-  size,
-  mode,
-  labelWidth,
-  labelPosition,
-  isRequired, 
-} = useProps(props);
+const { size, mode, labelWidth, labelPosition, isRequired } = useProps(props);
 
 const layForm = inject("LayForm", {} as LayFormContext);
 const formItemRef = ref<HTMLDivElement>();
