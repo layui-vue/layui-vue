@@ -21,6 +21,7 @@ export interface InputNumberProps {
   disabledInput?: boolean;
   size?: InputNumberSize;
   step?: number;
+  stepStrictly?: boolean;
   position?: "right";
   min?: number;
   max?: number;
@@ -31,6 +32,7 @@ const props = withDefaults(defineProps<InputNumberProps>(), {
   disabledInput: false,
   modelValue: 0,
   step: 1,
+  stepStrictly: false,
   min: -Infinity,
   max: Infinity,
 });
@@ -115,6 +117,15 @@ const inputChange = function () {
   num.value = tempValue.value;
 };
 
+const inputBlur = function (event: FocusEvent) {
+  // @ts-ignore
+  const value = event.target?.value === "-" ? 0 : event.target?.value;
+  const { step, stepStrictly } = props;
+  if (stepStrictly) {
+    num.value = Math.round(value / step) * step;
+  }
+};
+
 const isNumber = function (num: any) {
   return !isNaN(num);
 };
@@ -145,6 +156,7 @@ const isNumber = function (num: any) {
         :readonly="disabledInput || disabled"
         :disabled="disabledInput || disabled"
         @input="inputChange"
+        @blur="inputBlur"
         type="number"
       />
     </div>
