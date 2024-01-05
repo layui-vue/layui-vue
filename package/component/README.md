@@ -53,6 +53,20 @@ We have several examples on the [website](http://layui-vue.pearadmin.com). Here 
 </template>
 ```
 
+### Volar
+
+If you use Volar, specify the global component type via compilerOptions.type in tsconfig.json.
+
+```
+// tsconfig.json
+{
+  "compilerOptions": {
+    // ...
+    "types": ["@layui/layui-vue/types"]
+  }
+}
+```
+
 ## Feedback
 
 Feel free to send us feedback on [file an issue](https://github.com/layui-vue/layui-vue/issues/new). Feature requests are always welcome. If you wish to contribute, please take a quick look at the [guidelines](./CONTRIBUTING.md)!
