@@ -38,6 +38,11 @@ body:
       placeholder: 请提供详细的问题描述和操作步骤等信息，以便我们也能够更轻松地将问题复现。
     validations:
       required: true
+   - type: input
+    attributes:
+      label: 演示地址
+      description: 我们强烈推荐使用Sandbox-Vue(https://layui-vue.gitee.io/sandbox-vue)提供一个演示地址用于复现您的问题。或者您也可以提供Stackblitz, CodePen地址。
+      placeholder: URL
   - type: textarea
     attributes:
       label: 业务代码
@@ -50,11 +55,6 @@ body:
     attributes:
       label: 截图补充
       placeholder: 如上述仍然无法准确地表述问题，可提供必要的截图（可直接粘贴上传）
-  - type: input
-    attributes:
-      label: 演示地址
-      description: 若能提供 Stackblitz, CodePen, Sandbox-Vue 或自主搭建的页面演示地址，将更有助于解决问题
-      placeholder: URL
   - type: checkboxes
     attributes:
       label: 友好承诺
