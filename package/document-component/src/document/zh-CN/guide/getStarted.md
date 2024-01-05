@@ -30,6 +30,22 @@ createApp(App).use(Layui).mount('#app')
 ::: describe 以上代码便完成了 layui-vue 的注册。需要注意的是，样式文件需要单独引入。
 :::
 
+::: title Volar 支持
+:::
+
+::: describe 如果您使用 Volar，请在 tsconfig.json 中通过 compilerOptions.type 指定全局组件类型。
+:::
+
+```js
+// tsconfig.json
+{
+  "compilerOptions": {
+    // ...
+    "types": ["@layui/layui-vue/types"]
+  }
+}
+```
+
 ::: title 自动按需
 :::
 
