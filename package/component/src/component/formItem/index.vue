@@ -53,7 +53,7 @@ const {
   mode,
   labelWidth,
   labelPosition,
-  isRequired, // 是否必填
+  isRequired, 
 } = useProps(props);
 
 const layForm = inject("LayForm", {} as LayFormContext);
@@ -67,7 +67,7 @@ const ruleItems = computed(() => {
     return {};
   }
   let rulesArrs: RuleItem[] = [];
-  if (isRequired.value) {
+  if (props.required || layForm.required) {
     rulesArrs.push({ required: true });
   }
   if (props.rules) {
