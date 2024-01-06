@@ -15,6 +15,15 @@
   <lay-timeline>
     <lay-timeline-item title="2.13.x">
       <ul>
+        <a name="2-13-2"></a>
+        <li>
+          <h3>2.13.2 <span class="layui-badge-rim">2024-01-06</span></h3>
+          <ul>
+            <li>[修复] form-item 组件 label 缺省的情况下，验证异常。</li>
+          </ul>
+        </li>
+      </ul>
+      <ul>
         <a name="2-13-1"></a>
         <li>
           <h3>2.13.1 <span class="layui-badge-rim">2024-01-04</span></h3>
