@@ -635,7 +635,7 @@ const labelPosition3 = ref('right');
     <lay-form-item label="账户" prop="username">
       <lay-input v-model="model4.username"></lay-input>
     </lay-form-item>
-    <lay-form-item label="密码" prop="password">
+    <lay-form-item prop="password">
       <lay-input v-model="model4.password" type="password">></lay-input>
     </lay-form-item>
     <lay-form-item label="爱好" prop="hobby">

@@ -48,13 +48,7 @@ const props = withDefaults(defineProps<FormItemProps>(), {
   // mode: "block",
 });
 
-const {
-  size,
-  mode,
-  labelWidth,
-  labelPosition,
-  isRequired, // 是否必填
-} = useProps(props);
+const { size, mode, labelWidth, labelPosition, isRequired } = useProps(props);
 
 const layForm = inject("LayForm", {} as LayFormContext);
 const formItemRef = ref<HTMLDivElement>();
@@ -67,7 +61,7 @@ const ruleItems = computed(() => {
     return {};
   }
   let rulesArrs: RuleItem[] = [];
-  if (isRequired.value) {
+  if (props.required || layForm.required) {
     rulesArrs.push({ required: true });
   }
   if (props.rules) {
