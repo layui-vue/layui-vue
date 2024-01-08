@@ -302,27 +302,11 @@ watch(
 watch(
   tableExpandKeys,
   () => {
-    emit("update:expandKeys", tableExpandKeys.value);
+    if (props.expandKeys !== tableExpandKeys.value) {
+      emit("update:expandKeys", tableExpandKeys.value);
+    }
   },
   { deep: true, immediate: true }
-);
-
-/**
- * 监听 default-expand-all 变化，修改 expandKeys 内部属性
- *
- * @remark 向内向外，都是响应式
- */
-watch(
-  () => props.defaultExpandAll,
-  () => {
-    if (props.defaultExpandAll) {
-      const ids: string[] = [];
-      lookForAllId(props.dataSource, ids);
-      tableExpandKeys.value = ids;
-    } else {
-      tableExpandKeys.value = [];
-    }
-  }
 );
 
 /**
@@ -340,6 +324,27 @@ const lookForAllId = (data: any[] = [], ids: string[] = []) => {
   }
   return ids;
 };
+
+/**
+ * 监听 default-expand-all 变化，修改 expandKeys 内部属性
+ *
+ * @remark 向内向外，都是响应式
+ */
+watch(
+  () => props.defaultExpandAll,
+  () => {
+    if (props.defaultExpandAll) {
+      const ids: string[] = [];
+      lookForAllId(props.dataSource, ids);
+      tableExpandKeys.value = ids;
+    } else {
+      tableExpandKeys.value = [];
+    }
+  },
+  {
+    immediate: true,
+  }
+);
 
 const tableSelectedKey: WritableComputedRef<string> = computed({
   get() {
