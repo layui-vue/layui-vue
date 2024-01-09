@@ -5,6 +5,7 @@ export default {
 </script>
 
 <script setup lang="ts">
+import "../tooltip/index.less";
 import {
   inject,
   withDefaults,
