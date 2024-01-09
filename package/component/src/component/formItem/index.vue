@@ -30,6 +30,7 @@ import Schema, {
 } from "async-validator";
 import cnValidateMessage from "./cnValidateMessage";
 import useProps from "./index.hooks";
+import layTooltip from "../tooltip/index.vue";
 
 export interface FormItemProps {
   prop?: string;
@@ -48,7 +49,8 @@ const props = withDefaults(defineProps<FormItemProps>(), {
   // mode: "block",
 });
 
-const { size, mode, labelWidth, labelPosition, isRequired } = useProps(props);
+const { size, mode, labelWidth, labelPosition, isRequired, tooltipProps } =
+  useProps(props);
 
 const layForm = inject("LayForm", {} as LayFormContext);
 const formItemRef = ref<HTMLDivElement>();
@@ -270,19 +272,21 @@ const getMarginLeft = computed(() => {
       v-if="showLabel"
       :style="{ width: labelWidth + 'px' }"
     >
-      <span
-        v-if="props.prop && isRequired"
-        :class="
-          ['layui-required', 'layui-icon'].concat(layForm.requiredIcons ?? '')
-        "
-      >
-        <slot name="required" :props="{ ...props, model: layForm.model }">{{
-          layForm.requiredIcons ? "" : "*"
-        }}</slot>
-      </span>
-      <slot name="label" :props="{ ...props, model: layForm.model }">
-        {{ label }}
-      </slot>
+      <lay-tooltip :content="label" :isAutoShow="true" v-bind="tooltipProps">
+        <span
+          v-if="props.prop && isRequired"
+          :class="
+            ['layui-required', 'layui-icon'].concat(layForm.requiredIcons ?? '')
+          "
+        >
+          <slot name="required" :props="{ ...props, model: layForm.model }">{{
+            layForm.requiredIcons ? "" : "*"
+          }}</slot>
+        </span>
+        <slot name="label" :props="{ ...props, model: layForm.model }">
+          {{ label }}
+        </slot>
+      </lay-tooltip>
     </label>
     <div :class="[mode ? 'layui-input-' + mode : '']" :style="getMarginLeft">
       <div ref="slotParent">
