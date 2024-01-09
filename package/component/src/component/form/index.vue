@@ -9,6 +9,7 @@ import "./index.less";
 import { toRefs, provide, reactive, onMounted, nextTick } from "vue";
 import { Rules, ValidateError, ValidateMessages } from "async-validator";
 import { LayFormItemContext, FormCallback, modelType } from "../../types/form";
+import { LayTooltipContext } from "../../types/tooltip";
 
 export interface FormProps {
   model?: modelType;
@@ -24,6 +25,7 @@ export interface FormProps {
   useCN?: boolean;
   size?: string;
   mode?: string;
+  tooltipProps?: LayTooltipContext;
 }
 
 const props = withDefaults(defineProps<FormProps>(), {

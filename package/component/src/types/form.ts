@@ -3,6 +3,7 @@ import type {
   ValidateError,
   ValidateMessages,
 } from "async-validator";
+import { LayTooltipContext } from "./tooltip";
 
 export interface LayFormContext {
   model: modelType;
@@ -19,6 +20,7 @@ export interface LayFormContext {
   labelWidth?: string;
   size?: string;
   mode?: string;
+  tooltipProps: LayTooltipContext;
 }
 
 export interface LayFormItemContext {
