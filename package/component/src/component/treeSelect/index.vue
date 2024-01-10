@@ -28,6 +28,7 @@ export interface TreeSelectProps {
   size?: TreeSelectSize;
   checkStrictly?: boolean;
   search?: boolean;
+  searchNodeMethod?: Function;
   contentClass?: string | Array<string | object> | object;
   contentStyle?: StyleValue;
 }
@@ -48,13 +49,16 @@ const props = withDefaults(defineProps<TreeSelectProps>(), {
   collapseTagsTooltip: true,
   minCollapsedNum: 3,
   search: false,
+  searchNodeMethod: (node: any, value: string) => {
+    return node.title.includes(value);
+  },
 });
 
 const { size } = useProps(props);
 
 const treeData = ref();
-const searchValue = ref();
-const singleValue = ref();
+const searchValue = ref("");
+const singleValue = ref("");
 const multipleValue = ref([]);
 const openState = ref(false);
 const dropdownRef = ref();
@@ -216,7 +220,7 @@ const _placeholder = computed(() => {
   return hasContent.value ? "" : props.placeholder;
 });
 
-const handleSearch = (value: string) => {
+const onSearch = (value: string) => {
   if (composing.value) return;
   emits("search", value);
   searchValue.value = value;
@@ -228,7 +232,7 @@ const onCompositionstart = () => {
 
 const onCompositionend = (eventParam: Event) => {
   composing.value = false;
-  handleSearch((eventParam.target as HTMLInputElement).value);
+  onSearch((eventParam.target as HTMLInputElement).value);
 };
 
 // 监听 searchValue 刷新 tree 数据
@@ -236,20 +240,27 @@ watch(searchValue, () => {
   if (searchValue.value === "") {
     treeData.value = props.data;
   } else {
-    treeData.value = treeFilter(props.data, (item: any) => {
-      return item.title.indexOf(searchValue.value) > -1;
-    });
+    treeData.value = treeFilter(props.data, props.searchNodeMethod);
   }
 });
 
-function treeFilter(tree: any[], func: Function) {
+const treeFilter = (tree: any[], fn: Function) => {
   return tree
     .map((node) => ({ ...node }))
     .filter((node) => {
-      node.children = node.children && treeFilter(node.children, func);
-      return func(node) || (node.children && node.children.length);
+      node.children = node.children && treeFilter(node.children, fn);
+      if (node.children && node.children.length) node.spread = true;
+      return (
+        fn(node, searchValue.value) || (node.children && node.children.length)
+      );
     });
-}
+};
+
+watch(openState, () => {
+  if (!openState.value) {
+    searchValue.value = "";
+  }
+});
 
 watch(
   () => props.data,
@@ -275,6 +286,7 @@ watch(
       :contentClass="contentClass"
       :contentStyle="contentStyle"
       :update-at-scroll="true"
+      :click-to-close="false"
       @show="openState = true"
       @hide="openState = false"
     >
@@ -285,7 +297,8 @@ watch(
         :collapseTagsTooltip="collapseTagsTooltip"
         :minCollapsedNum="minCollapsedNum"
         :disabledInput="!search"
-        @input-value-change="handleSearch"
+        :inputValue="searchValue"
+        @input-value-change="onSearch"
         @remove="handleRemove"
         @clear="onClear"
         v-model="multipleValue"
@@ -300,14 +313,14 @@ watch(
       </lay-tag-input>
       <lay-input
         v-else
-        v-model="singleValue"
+        :modelValue="singleValue"
         :allow-clear="allowClear"
         :placeholder="_placeholder"
         :disabled="disabled"
         :readonly="!search"
         :size="size"
         @clear="onClear"
-        @Input="handleSearch"
+        @input="onSearch"
         @compositionstart="onCompositionstart"
         @compositionend="onCompositionend"
       >
