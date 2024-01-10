@@ -7,6 +7,7 @@ export default {
 <script lang="ts" setup>
 import "./index.less";
 import { StyleValue, computed, ref, watch, useSlots } from "vue";
+import { useDebounceFn } from "@vueuse/core";
 import { getNode } from "../../utils";
 import { TreeSelectSize } from "./interface";
 import { LayIcon } from "@layui/icons-vue";
@@ -236,13 +237,16 @@ const onCompositionend = (eventParam: Event) => {
 };
 
 // 监听 searchValue 刷新 tree 数据
-watch(searchValue, () => {
-  if (searchValue.value === "") {
-    treeData.value = props.data;
-  } else {
-    treeData.value = treeFilter(props.data, props.searchNodeMethod);
-  }
-});
+watch(
+  searchValue,
+  useDebounceFn(() => {
+    if (searchValue.value === "") {
+      treeData.value = props.data;
+    } else {
+      treeData.value = treeFilter(props.data, props.searchNodeMethod);
+    }
+  }, 500)
+);
 
 const treeFilter = (tree: any[], fn: Function) => {
   return tree
