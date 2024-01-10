@@ -689,18 +689,25 @@ const data4 = ref([{
 ::: title 启用搜索
 :::
 
-::: demo 通过 `allow-clear` 属性开启清空操作。
+::: demo 通过 `search` 属性开启搜索，`searchNodeMethod` 设置对树过滤方法
 
 <template>
-  <lay-tree-select v-model="value5" :data="data5" placeholder="请选择" :allow-clear="true" :search="true" :multiple="false"></lay-tree-select>
+  <lay-tree-select v-model="value8" :data="data8" placeholder="请选择" :allow-clear="true" :search="true" :multiple="false"></lay-tree-select>
+	<lay-tree-select v-model="value8" :data="data8" placeholder="请选择 searchNodeMethod" :allow-clear="true" :search="true" :searchNodeMethod="searchNodeMethod"></lay-tree-select>
 </template>
 
 <script setup>
 import { ref } from "vue";
 
-const value5 = ref();
+const value8 = ref();
+const value9 = ref([]);
 
-const data5 = ref([{
+const searchNodeMethod = (node, value) => {
+	console.log(node, value, 'node, value')
+	return node.title.includes(value)
+}
+
+const data8 = ref([{
 	title: "一级1",
 	id: 1,
 	field: "name1",
@@ -1193,9 +1200,10 @@ const data6 = ref([{
 | placeholder         | 输入提示        | -- | --  | --  |
 | checkStrictly       | 禁用级联复选      | -- | --  | --  |
 | collapseTagsTooltip | 折叠提示        | -- | --  | --  |
-| checkStrictly       | 禁用级联复选      | -- | --  | --  |
 | minCollapsedNum     | 超过指定标签后开启折叠 | -- | --  | --  |
 | size                | 尺寸大小        | -- | --  | --  |
+| search              | 是否开启搜索    | `boolean` | false  | --  |
+| searchNodeMethod    |  对树节点进行筛选时执行的方法， 返回 false 则表示这个节点会被隐藏     | `Fcuntion(node, value)` | --  | --  |
 
 :::
 
