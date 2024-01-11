@@ -85,7 +85,7 @@ function handleLongest(
         return;
       const longestKey = longestMap.get(key);
       if (longestKey) {
-        if (longestKey.length < sourceItem[key].length) {
+        if (String(longestKey).length < String(sourceItem[key]).length) {
           longestMap.set(key, sourceItem[key]);
         }
       } else {
