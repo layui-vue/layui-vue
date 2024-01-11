@@ -32,7 +32,8 @@ export default function useAutoColsWidth(
     const padding = 16;
     longestMap.forEach((value, key) => {
       // 获取最长单元格宽度
-      const width = getTextWidth(value) + padding;
+      // 有1个像素的border边框
+      const width = Math.ceil(getTextWidth(value)) + padding + 1;
 
       // 获取当前单元格对象
       const colsItem = colsMap.get(key);
@@ -85,7 +86,7 @@ function handleLongest(
         return;
       const longestKey = longestMap.get(key);
       if (longestKey) {
-        if (longestKey.length < sourceItem[key].length) {
+        if (String(longestKey).length < String(sourceItem[key]).length) {
           longestMap.set(key, sourceItem[key]);
         }
       } else {
