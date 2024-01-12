@@ -1275,7 +1275,10 @@ defineExpose({ getCheckData });
         </template>
       </div>
       <div ref="tableTotal" class="table-total-wrapper">
-        <table class="layui-table">
+        <table
+          class="layui-table"
+          :style="[{ 'padding-right': `${scrollWidthCell}px` }]"
+        >
           <colgroup>
             <template
               v-for="(column, columnIndex) in tableBodyColumns"
