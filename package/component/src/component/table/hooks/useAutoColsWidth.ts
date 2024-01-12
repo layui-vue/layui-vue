@@ -53,9 +53,7 @@ export default function useAutoColsWidth(
 
 function handleCols(data: Recordable[], colsMap: Map<string, TableColumn>) {
   data.forEach((item) => {
-    // 有width配置不处理
-    if (item.width) return;
-
+    // 去掉宽度设置判断，表格换页时，应该也需要根据当前页的内容重新计算宽度
     // 复杂表头带有children配置递归
     if (item.children) {
       handleCols(item.children, colsMap);
@@ -78,7 +76,7 @@ function handleLongest(
   for (let i = 0; i < data.length && i < 100; i++) {
     const sourceItem = data[i];
     colsMap.forEach((value, key) => {
-      if (value.width) return;
+      // 去掉宽度设置判断，表格换页时，应该也需要根据当前页的内容重新计算宽度
       if (
         typeof sourceItem[key] !== "string" &&
         typeof sourceItem[key] !== "number"
