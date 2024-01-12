@@ -1,4 +1,5 @@
 import type { ObjectDirective } from "vue";
+import { isFunction } from "../../utils";
 
 export const REPEAT_INTERVAL = 100;
 export const REPEAT_DELAY = 600;
@@ -8,8 +9,6 @@ export interface RepeatClickOptions {
   delay?: number;
   handler: (...args: unknown[]) => unknown;
 }
-
-declare const isFunction: (val: unknown) => val is Function;
 
 export const vRepeatClick: ObjectDirective<
   HTMLElement,
