@@ -15,10 +15,14 @@
   flex-shrink: 0;
 }
 
-.table-total-wrapper .layui-table td{
+.table-total-wrapper .layui-table td {
   border-top: 1px solid #eee !important;
   border-right: 1px solid #eee !important;
   border-bottom: none;
+}
+
+.table-total-wrapper .layui-table td:last-child {
+  border-right: none !important;
 }
 
 .layui-table-view {
@@ -56,7 +60,7 @@
 .layui-table-box-header {
   min-height: 50px;
   line-height: 30px;
-  background-color: #FAFAFA;
+  background-color: #fafafa;
   padding: 10px 15px;
   border-bottom: 1px solid #eee;
 }
@@ -64,7 +68,7 @@
 .layui-table-footer {
   min-height: 50px;
   line-height: 30px;
-  background-color: #FAFAFA;
+  background-color: #fafafa;
   padding: 10px 15px;
 }
 
@@ -74,6 +78,7 @@
 .layui-table-click,
 .layui-table-hover,
 .layui-table-header,
+.table-total-wrapper .layui-table,
 .layui-table-total td,
 .layui-table thead tr,
 .layui-table tbody tr:hover td,
@@ -419,7 +424,9 @@
 }
 
 .layui-table-cell-content {
-  display: flex; word-break: break-word; align-items: center;
+  display: flex;
+  word-break: break-word;
+  align-items: center;
 }
 
 .layui-table-cell-expand-icon {
@@ -445,7 +452,7 @@
   overflow: auto;
   flex-grow: 1;
   margin-bottom: -1px;
-  transition:all 0.1s ease-in-out;
+  transition: all 0.1s ease-in-out;
 }
 
 .layui-table-body .layui-none {
@@ -486,28 +493,28 @@
   border-right: none !important;
 }
 
-.layui-table-tool-checkbox{
+.layui-table-tool-checkbox {
   padding: 10px;
   max-height: 200px;
   overflow-y: auto;
 }
 
-.layui-table-tool-checkbox > *{
+.layui-table-tool-checkbox > * {
   display: block !important;
   margin-bottom: 12px !important;
 }
 
-.layui-table-tool-checkbox > *:last-child{
+.layui-table-tool-checkbox > *:last-child {
   margin-bottom: 0px !important;
 }
 
 .layui-table-has-fixed-left .layui-table-fixed-left-last {
-  overflow: initial!important;
-  border-right: none!important;
+  overflow: initial !important;
+  border-right: none !important;
 }
 
 .layui-table-has-fixed-right .layui-table-fixed-right-first {
-  overflow: initial!important;
+  overflow: initial !important;
   border-left: 1px solid transparent !important;
 }
 
@@ -518,7 +525,7 @@
   bottom: -1px;
   width: 30px;
   transform: translate(100%);
-  transition: box-shadow .3s;
+  transition: box-shadow 0.3s;
   content: "";
   pointer-events: none;
   box-shadow: inset 10px 0 8px -8px #00000026;
@@ -531,7 +538,7 @@
   left: 0;
   width: 30px;
   transform: translate(-100%);
-  transition: box-shadow .3s;
+  transition: box-shadow 0.3s;
   content: "";
   pointer-events: none;
   box-shadow: inset -10px 0 8px -8px #00000026;
@@ -569,9 +576,8 @@
 }
 
 .layui-table-page .layui-page .layui-pager .layui-pager-number,
-.layui-table-page  .layui-page  .layui-page-prev,
-.layui-table-page  .layui-page  .layui-page-next
-{
+.layui-table-page .layui-page .layui-page-prev,
+.layui-table-page .layui-page .layui-page-next {
   padding: 0 12px;
   height: 26px;
   // line-height: 26px;
@@ -580,8 +586,8 @@
   // background: 0 0;
 }
 
-.layui-table-page  .layui-page  .layui-pager-prev,
-.layui-table-page  .layui-page  .layui-page-next{
+.layui-table-page .layui-page .layui-pager-prev,
+.layui-table-page .layui-page .layui-page-next {
   padding: 0 12px;
 }
 
@@ -600,7 +606,7 @@
 //   padding: 0;
 // }
 
-.layui-table-page .layui-page  .layui-input[size="md"],
+.layui-table-page .layui-page .layui-input[size="md"],
 .layui-table-page .layui-page .layui-pager-jumper .layui-input[size="md"] {
   height: 26px;
   line-height: 26px;
@@ -656,9 +662,9 @@
 .lay-table-cols-resize {
   position: absolute;
   top: 0;
-  height: 100%!important;
+  height: 100% !important;
   bottom: 0;
-  left: auto!important;
+  left: auto !important;
   right: 0px;
   width: 2px;
   cursor: col-resize;
@@ -669,7 +675,7 @@
   opacity: 0;
   transition: 200ms ease-in opacity;
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     right: 0;
     top: 0;
@@ -690,10 +696,26 @@
   align-items: center;
 }
 
-.layui-table-main::-webkit-scrollbar { width: 8px; height: 8px; }
-.layui-table-main::-webkit-scrollbar-thumb { border-radius: 10px; background-color: #eeeeee; }
-.layui-table-main::-webkit-scrollbar-thumb:hover { background-color: #dddddd; }
+.layui-table-main::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.layui-table-main::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #eeeeee;
+}
+.layui-table-main::-webkit-scrollbar-thumb:hover {
+  background-color: #dddddd;
+}
 
-.layui-table-tool-checkbox::-webkit-scrollbar { width: 8px; height: 8px; }
-.layui-table-tool-checkbox::-webkit-scrollbar-thumb { border-radius: 10px; background-color: #eeeeee; }
-.layui-table-tool-checkbox::-webkit-scrollbar-thumb:hover { background-color: #dddddd; }
+.layui-table-tool-checkbox::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.layui-table-tool-checkbox::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #eeeeee;
+}
+.layui-table-tool-checkbox::-webkit-scrollbar-thumb:hover {
+  background-color: #dddddd;
+}
