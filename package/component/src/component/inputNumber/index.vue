@@ -13,6 +13,7 @@ import { ref, watch, withDefaults, computed, Ref } from "vue";
 import { InputNumberSize } from "./interface";
 import { add, sub } from "./math";
 import useProps from "./index.hooks";
+import { vRepeatClick } from "../../directives";
 
 export interface InputNumberProps {
   modelValue?: number;
@@ -67,7 +68,6 @@ watch(
   }
 );
 
-let timer: any = 0;
 const tempValue: Ref<number> = ref(0);
 
 const minControl = computed(() => {
@@ -96,19 +96,6 @@ const subtraction = function () {
   num.value = sub(num.value, props.step);
 };
 
-const longDown = function (fn: Function) {
-  cancelLongDown();
-  if (props.disabled) {
-    return;
-  }
-  timer = setInterval(() => fn.call(timer), 150);
-  fn.call(timer);
-};
-
-const cancelLongDown = function () {
-  clearInterval(timer);
-};
-
 const inputChange = function () {
   if (isNumber(num.value)) {
     tempValue.value = Number(num.value);
@@ -135,9 +122,7 @@ const isNumber = function (num: any) {
   <div class="layui-input-number" :position="position" :size="size">
     <lay-button
       size="lg"
-      @mouseup="cancelLongDown"
-      @mousedown="longDown(subtraction)"
-      @blur="cancelLongDown"
+      v-repeat-click="subtraction"
       :disabled="minControl"
       class="layui-control-btn layui-subtraction-btn"
     >
@@ -162,9 +147,7 @@ const isNumber = function (num: any) {
     </div>
     <lay-button
       size="lg"
-      @mouseup="cancelLongDown"
-      @mousedown="longDown(addition)"
-      @blur="cancelLongDown"
+      v-repeat-click="addition"
       :disabled="maxControl"
       class="layui-control-btn layui-addition-btn"
     >
