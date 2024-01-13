@@ -582,6 +582,36 @@ const submit2 = function(){
 
 :::
 
+::: title label超出隐藏
+:::
+
+::: demo
+
+<template>
+  <lay-form :model="model3"  :label-position="labelPosition3" required :tooltipProps="tooltipProps">
+    <lay-form-item label="label label label label" prop="username">
+      <lay-input v-model="model3.username"></lay-input>
+    </lay-form-item>
+		<lay-form-item label="超出密码超出密码超出密码" prop="username">
+      <lay-input v-model="model3.password"></lay-input>
+    </lay-form-item>
+  </lay-form>
+</template>
+
+<script setup>
+import { ref, reactive } from 'vue'
+import {layer} from '@layui/layer-vue'
+
+const model3 = reactive({})
+const labelPosition3 = ref('right');
+const tooltipProps = reactive({
+	isDark: true
+})
+
+</script>
+
+:::
+
 
 ::: title 对齐方式
 :::
@@ -842,6 +872,7 @@ const submit10 = function(isValidate, model, errors) {
 | size                    | 全局控件尺寸                     | --          |  --                          | --      |
 | labelWidth              | 全局标签宽度                     | `string`    |  --                          | --      |
 | mode              | 全局表单项显示的模式，`块元素` / `行元素`                       | `string`    |  `block` `inline`     | `block`    |
+| tooltipProps              | 可查看[tooltip组件](http://www.layui-vue.com/zh-CN/components/tooltip)      | `object`    |      |    |
 
 :::
 

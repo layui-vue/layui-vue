@@ -41,8 +41,10 @@ body:
   - type: input
     attributes:
       label: 演示地址
-      description: 我们强烈推荐使用Sandbox-Vue(https://layui-vue.gitee.io/sandbox-vue)提供一个演示地址用于复现您的问题。或者您也可以提供Stackblitz, CodePen地址。
+      description: 为了我们能尽快定位到问题，我们强烈推荐使用Sandbox-Vue(https://layui-vue.gitee.io/sandbox-vue)提供一个演示地址用于复现您的问题。或者您也可以提供Stackblitz, CodePen地址。
       placeholder: URL
+    validations:
+      required: true
   - type: textarea
     attributes:
       label: 业务代码

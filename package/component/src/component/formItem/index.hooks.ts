@@ -29,5 +29,10 @@ export default function useProps(props: any) {
     return props.required || formContext.required;
   });
 
-  return { size, mode, labelWidth, labelPosition, isRequired };
+  const tooltipProps = computed(() => {
+    const formContext = inject("LayForm", {} as LayFormContext);
+    return props.tooltipProps || formContext.tooltipProps;
+  });
+
+  return { size, mode, labelWidth, labelPosition, isRequired, tooltipProps };
 }

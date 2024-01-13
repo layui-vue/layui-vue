@@ -15,6 +15,20 @@
   <lay-timeline>
     <lay-timeline-item title="2.13.x">
       <ul>
+        <a name="2-13-3"></a>
+        <li>
+          <h3>2.13.3 <span class="layui-badge-rim">2024-01-14</span></h3>
+          <ul>
+            <li>[修复] input-number 组件 触摸板点击加减触发两次事件。<a href="https://gitee.com/layui/layui-vue/issues/I8VJCB">I8VJCB</a></li>
+            <li>[修复] table 组件 table-body出现滚动条行统计偏移量问题。<a href="https://gitee.com/layui/layui-vue/issues/I8VGW2">I8VGW2</a></li>
+            <li>[修复] tree-select 组件 搜索问题。<a href="https://gitee.com/layui/layui-vue/issues/I8ULRO">I8ULRO</a></li>
+            <li>[新增] tree-select 组件 searchNodeMethod 搜索自定义过滤方法。<a href="http://www.layui-vue.com/zh-CN/components/treeSelect">treeSelect</a></li>
+            <li>[新增] form 组件 label文字长度溢出显示tooltip。<a href="https://gitee.com/layui/layui-vue/issues/I8UMQH">I8UMQH</a></li>
+            <li>[修复] table 组件切换分页时自动宽度不工作的问题。</li>
+          </ul>
+        </li>
+      </ul>
+      <ul>
         <a name="2-13-2"></a>
         <li>
           <h3>2.13.2 <span class="layui-badge-rim">2024-01-06</span></h3>
