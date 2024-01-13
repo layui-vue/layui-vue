@@ -24,6 +24,7 @@
             <li>[修复] tree-select 组件 搜索问题。<a href="https://gitee.com/layui/layui-vue/issues/I8ULRO">I8ULRO</a></li>
             <li>[新增] tree-select 组件 searchNodeMethod 搜索自定义过滤方法。<a href="http://www.layui-vue.com/zh-CN/components/treeSelect">treeSelect</a></li>
             <li>[新增] form 组件 label文字长度溢出显示tooltip。<a href="https://gitee.com/layui/layui-vue/issues/I8UMQH">I8UMQH</a></li>
+            <li>[修复] table 组件切换分页时自动宽度不工作的问题。</li>
           </ul>
         </li>
       </ul>
