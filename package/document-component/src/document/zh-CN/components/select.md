@@ -459,6 +459,8 @@ export default {
 | default | 默认(`label`) | -      |
 | prepend | 自定义前缀    | -      |
 | append  | 自定义后缀    | -      |
+| header  | 下拉列表顶部内容    | -      |
+| footer  | 下拉列表底部内容    | -      |
 
 :::
 
