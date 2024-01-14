@@ -15,9 +15,9 @@
   <lay-timeline>
     <lay-timeline-item title="2.13.x">
       <ul>
-        <a name="2-13-x"></a>
+        <a name="2-13-4"></a>
         <li>
-          <h3>2.13.x <span class="layui-badge-rim">xxxx-xx-xx</span></h3>
+          <h3>2.13.4 <span class="layui-badge-rim">2024-01-14</span></h3>
           <ul>
             <li>[新增] select 组件 新增头部，底部插槽。</li>
             <li>[修复] public.css 在按需模式下丢失的问题 。</li>
