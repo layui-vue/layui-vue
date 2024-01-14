@@ -1,7 +1,5 @@
 import type { App, Plugin } from "vue";
 
-export * from "./directives";
-
 import "./theme/index.less";
 import "@layui/layer-vue/lib/index.css";
 import "@layui/icons-vue/lib/index.css";
