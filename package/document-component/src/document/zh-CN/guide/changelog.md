@@ -20,6 +20,7 @@
           <h3>2.13.x <span class="layui-badge-rim">xxxx-xx-xx</span></h3>
           <ul>
             <li>[新增] select 组件 新增头部，底部插槽。</li>
+            <li>[修复] public.css 在按需模式下丢失的问题 。</li>
           </ul>
         </li>
       </ul>
