@@ -101,7 +101,7 @@ export default {
 ::: demo 传入 options 数据，如果设置则不需要手动构造 select-option 节点。
 
 <template>
-  <lay-select v-model="value4" :items="items4" :options="item4"></lay-select>
+  <lay-select v-model="value4" :items="items4" :options="items4"></lay-select>
 </template>
 
 <script>
@@ -248,10 +248,91 @@ export default {
 
 :::
 
+::: title 使用头部插槽
+:::
+
+::: demo 通过 `header` 插槽, 实现option头部渲染。
+
+<template>
+  <lay-select v-model="value9" multiple>
+    <template #header>
+      <div style="padding: 10px">
+        <lay-checkbox v-model="checkboxValue" skin="primary" :isIndeterminate="isIndeterminate" @change="hanldeChange" value="1">全选</lay-checkbox>
+      </div>
+    </template>
+    <lay-select-option :value="1" label="学习"></lay-select-option>
+    <lay-select-option :value="2" label="编码"></lay-select-option>
+    <lay-select-option :value="3" label="运动">运动</lay-select-option>
+  </lay-select>
+</template>
+
+<script setu[]>
+import { ref, watch} from 'vue'
+
+const checkboxValue = ref(false)
+const isIndeterminate = ref(false)
+const value9 = ref([]);
+
+watch(value9, (val) => {
+  if (val.length === 0) {
+    checkboxValue.value = false
+    isIndeterminate.value = false
+  } else if (val.length === 3) {
+    checkboxValue.value = true
+    isIndeterminate.value = false
+  } else {
+    checkboxValue.value = true
+    isIndeterminate.value = true
+  }
+})
+
+const hanldeChange = (v) => {
+  isIndeterminate.value = false
+  if (v) {
+    value9.value = [1,2,3]
+  }else {
+    value9.value = []
+  }
+}
+</script>
+
+:::
+
+::: title 使用底部插槽
+:::
+
+::: demo 通过 `底部` 插槽, 实现option底部渲染。
+
+<template>
+  <lay-select v-model="value">
+    <lay-select-option :value="1" label="学习"></lay-select-option>
+    <lay-select-option :value="2" label="编码"></lay-select-option>
+    <lay-select-option :value="3" label="运动">运动</lay-select-option>
+    <template #footer>
+      footer
+    </template>
+  </lay-select>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup() {
+    const value = ref(null);
+    return {
+      value
+    }
+  }
+}
+</script>
+
+:::
+
 ::: title 选项分组
 :::
 
-::: demo 通过 `default` 插槽, 实现选项的自定义渲染。
+::: demo 使用 `lay-select-option-group` 对备选项进行分组，它的 label 属性为分组名
 
 <template>
   <lay-select v-model="value">

@@ -318,6 +318,9 @@ provide("searchMethod", props.searchMethod);
       </lay-input>
       <template #content>
         <dl class="layui-select-content">
+          <div class="layui-select-content__header" v-if="slots.header">
+            <slot name="header"></slot>
+          </div>
           <template v-if="options || items">
             <lay-select-option
               v-for="(item, index) in allOptions"
@@ -326,6 +329,9 @@ provide("searchMethod", props.searchMethod);
             ></lay-select-option>
           </template>
           <slot></slot>
+          <div class="layui-select-content__footer" v-if="slots.footer">
+            <slot name="footer"></slot>
+          </div>
         </dl>
       </template>
     </lay-dropdown>
