@@ -13,6 +13,17 @@
 ::: demo
 <template>
   <lay-timeline>
+      <lay-timeline-item title="2.14.x">
+      <ul>
+        <a name="2-14-0"></a>
+        <li>
+          <h3>2.14.0 <span class="layui-badge-rim">2023-10-11</span></h3>
+          <ul>
+              <li>[优化] switch 组件 size 为 lg md sm xs 时的样式尺寸。</li>
+          </ul>
+        </li>
+      </ul>
+    </lay-timeline-item>
     <lay-timeline-item title="2.13.x">
       <ul>
         <a name="2-13-4"></a>
