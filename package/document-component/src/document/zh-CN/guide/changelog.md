@@ -17,7 +17,7 @@
       <ul>
         <a name="2-14-0"></a>
         <li>
-          <h3>2.14.0 <span class="layui-badge-rim">2023-10-11</span></h3>
+          <h3>2.14.0 <span class="layui-badge-rim">2024-01-15</span></h3>
           <ul>
               <li>[新增] select 组件 header 与 footer 插槽。</li>
               <li>[修复] checkcard 组件 hover 状态边框不跟随主题色。</li>
