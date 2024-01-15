@@ -57,7 +57,7 @@ export default {
       { title:"选项", width: "55px", type: "checkbox", fixed: "left" },
       { title:"编号", width: "80px", key:"id", fixed: "left", sort: "desc" },
       { title:"姓名", width: "80px", key:"name", sort: "desc" },
-      { title:"状态", width: "80px", key:"status", customSlot: "status"},
+      { title:"状态", width: "180px", key:"status", customSlot: "status"},
       { title:"邮箱", width: "120px", key:"email" },
       { title:"性别", width: "80px", key:"sex" },
       { title:"年龄", width: "80px", key:"age", totalRow: true},
