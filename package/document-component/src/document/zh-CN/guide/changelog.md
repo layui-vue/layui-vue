@@ -20,6 +20,7 @@
           <h3>2.14.0 <span class="layui-badge-rim">2023-10-11</span></h3>
           <ul>
               <li>[新增] select 组件 header 与 footer 插槽。</li>
+              <li>[修复] checkcard 组件 hover 状态边框不跟随主题色。</li>
               <li>[优化] switch 组件 size 为 lg md sm xs 时的样式尺寸。</li>
               <li>[优化] checkcard 组件边框颜色，角标位置。</li>
           </ul>
