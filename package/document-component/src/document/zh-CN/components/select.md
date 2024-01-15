@@ -301,7 +301,7 @@ const hanldeChange = (v) => {
 ::: title 使用底部插槽
 :::
 
-::: demo 通过 `底部` 插槽, 实现option底部渲染。
+::: demo 通过 `footer` 插槽, 实现option底部渲染。
 
 <template>
   <lay-select v-model="value">
