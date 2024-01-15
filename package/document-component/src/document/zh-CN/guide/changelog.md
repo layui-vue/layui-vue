@@ -19,6 +19,7 @@
         <li>
           <h3>2.14.0 <span class="layui-badge-rim">2023-10-11</span></h3>
           <ul>
+              <li>[新增] select 组件 header 与 footer 插槽。</li>
               <li>[优化] switch 组件 size 为 lg md sm xs 时的样式尺寸。</li>
           </ul>
         </li>
@@ -30,7 +31,6 @@
         <li>
           <h3>2.13.4 <span class="layui-badge-rim">2024-01-14</span></h3>
           <ul>
-            <li>[新增] select 组件 新增头部，底部插槽。</li>
             <li>[修复] public.css 在按需模式下丢失的问题 。</li>
           </ul>
         </li>
