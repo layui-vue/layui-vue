@@ -138,6 +138,29 @@
 
 :::
 
+::: title 精度
+:::
+
+::: demo `precision` 设置 precision 属性可以控制数值精度，接收一个 Number。
+
+<template>
+  <lay-input-number v-model="data12" :precision="2" :step="0.1" :max="10"></lay-input-number>
+</template>
+
+<script>
+  import { ref } from 'vue';
+  const data12 = ref(1);
+  export default {
+    setup() {
+      return {
+        data12,
+      }
+    }
+  }
+</script>
+
+:::
+
 ::: title 禁用
 :::
 
@@ -181,6 +204,8 @@
 | disabledInput | 禁用输入框输入 | `boolean` | false     |
 | disabled | 禁用操作 | `boolean` | false     |
 | step     | 数字增减的步数 | `number` | 1     |
+| step-strictly     | 是否只能输入 step 的倍数 | `boolean` | false     |
+| precision     | 数值精度 | `number` | -     |
 | position     | 控制按钮显示位置, 目前除了默认值，只有`right`可填 | `string` | --     |
 | min     | 最小可输入的数 | `number` | --     |
 | max     | 最大可输入的数 | `number` | --     |
@@ -195,7 +220,9 @@
 
 | 属性     | 描述      | 回调参数 |
 | -------- | -------- | ------ |
-| change  | 值更改触发事件   | (value: number) |
+| change  | 值更改触发事件   | (newValue: number, oldValue: number) |
+| blur  | Input 失去焦点时触发   | (event: FocusEvent) |
+| focus  | Input 获得焦点时触发   | (event: FocusEvent) |
 
 :::
 
