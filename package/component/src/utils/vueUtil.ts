@@ -58,3 +58,7 @@ export function kebabCase(key: string) {
 
 export const isFunction = (val: unknown): val is Function =>
   typeof val === "function";
+
+export const isUndefined = (val: any): val is undefined => val === undefined;
+
+export const isNumber = (val: any): val is number => typeof val === "number";
