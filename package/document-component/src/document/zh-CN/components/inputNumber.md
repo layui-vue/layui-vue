@@ -205,7 +205,7 @@
 | disabled | 禁用操作 | `boolean` | false     |
 | step     | 数字增减的步数 | `number` | 1     |
 | step-strictly     | 是否只能输入 step 的倍数 | `boolean` | false     |
-| precision     | 数值精度 | `number` | 0     |
+| precision     | 数值精度 | `number` | -     |
 | position     | 控制按钮显示位置, 目前除了默认值，只有`right`可填 | `string` | --     |
 | min     | 最小可输入的数 | `number` | --     |
 | max     | 最大可输入的数 | `number` | --     |
