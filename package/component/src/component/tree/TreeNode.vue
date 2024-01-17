@@ -173,7 +173,7 @@ const isChildAllSelected = computed(() => {
           :modelValue="node.isChecked"
           :disabled="node.isDisabled"
           :isIndeterminate="isChildAllSelected(node)"
-          @change="(checked) => handleChange(checked, node)"
+          @change="(checked: boolean) => handleChange(checked, node)"
           v-if="showCheckbox"
         />
         <span

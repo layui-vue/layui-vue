@@ -12,7 +12,9 @@ const i18n = createI18n({
   },
 });
 
-export function useI18n() {
+// "vue-i18n": "9.6.3"
+// https://github.com/microsoft/TypeScript/issues/47663#issuecomment-1519138189
+export function useI18n(): ReturnType<typeof __useI18n__> {
   let i18nInstance;
   const app = getCurrentInstance()?.appContext.app;
 

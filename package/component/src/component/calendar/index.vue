@@ -15,7 +15,7 @@
             <lay-button size="sm" @click="prevMonth">
               <lay-icon type="layui-icon-left"></lay-icon>
             </lay-button>
-            <lay-button size="sm" type="default" @click="findDay"
+            <lay-button size="sm" @click="findDay"
               >今天</lay-button
             >
             <lay-button size="sm" @click="nextMonth">
