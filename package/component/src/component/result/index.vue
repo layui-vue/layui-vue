@@ -1,9 +1,3 @@
-<script lang="ts">
-export default {
-  name: "LayResult",
-};
-</script>
-
 <script setup lang="ts">
 import "./index.less";
 import { useSlots } from "vue";
@@ -13,6 +7,10 @@ export interface ResultProps {
   status?: "success" | "failure";
   describe?: string;
 }
+
+defineOptions({
+  name: "LayResult",
+});
 
 const slots = useSlots();
 

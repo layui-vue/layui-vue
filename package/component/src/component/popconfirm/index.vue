@@ -1,9 +1,3 @@
-<script lang="ts">
-export default {
-  name: "LayPopconfirm",
-};
-</script>
-
 <script setup lang="ts">
 import "./index.less";
 import LayTooltip from "../tooltip/index.vue";
@@ -19,6 +13,10 @@ export interface PopconfirmProps {
   position?: string;
   trigger?: "click" | "hover" | "focus" | "contextMenu";
 }
+
+defineOptions({
+  name: "LayPopconfirm",
+});
 
 const props = withDefaults(defineProps<PopconfirmProps>(), {
   confirmText: "确认",

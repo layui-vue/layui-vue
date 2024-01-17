@@ -1,8 +1,3 @@
-<script lang="ts">
-export default {
-  name: "LayUpload",
-};
-</script>
 <script lang="ts" setup>
 import "./index.less";
 import { Recordable } from "../../types";
@@ -16,7 +11,6 @@ import {
   onUnmounted,
   ref,
   useSlots,
-  withDefaults,
   watch,
 } from "vue";
 import { templateRef } from "@vueuse/core";
@@ -76,6 +70,10 @@ export interface UploadProps {
   beforeUpload?: Function;
   onProgress?: Function;
 }
+
+defineOptions({
+  name: "LayUpload",
+});
 
 /**
  * 裁剪窗体的确认操作, 获取裁剪结果, 并根据 props.auto 决定是否上传。

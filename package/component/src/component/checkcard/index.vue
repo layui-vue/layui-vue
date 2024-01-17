@@ -40,11 +40,7 @@
     </div>
   </div>
 </template>
-<script lang="ts">
-export default {
-  name: "LayCheckcard",
-};
-</script>
+
 <script lang="ts" setup>
 import {
   ref,
@@ -66,6 +62,11 @@ export interface CheckCard {
   value?: string | number;
   modelValue?: boolean;
 }
+
+defineOptions({
+  name: "LayCheckcard",
+});
+
 const attrs = useAttrs();
 const slot = useSlots();
 const emit = defineEmits(["change", "update:modelValue"]);

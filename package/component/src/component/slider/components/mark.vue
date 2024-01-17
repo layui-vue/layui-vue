@@ -11,11 +11,7 @@
     </template>
   </div>
 </template>
-<script lang="ts">
-export default {
-  name: "LaySliderMark",
-};
-</script>
+
 <script lang="ts" setup>
 import { computed, isVNode, StyleValue, useSlots } from "vue";
 import { StyledMark } from "../types/sliderType";
@@ -24,6 +20,9 @@ export interface Mark {
   mark: StyledMark;
 }
 
+defineOptions({
+  name: "LaySliderMark",
+});
 const slot = useSlots();
 const props = withDefaults(defineProps<Mark>(), {});
 </script>

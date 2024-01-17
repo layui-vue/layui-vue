@@ -55,12 +55,6 @@
   </div>
 </template>
 
-<script lang="ts">
-export default {
-  name: "LayNoticeBar",
-};
-</script>
-
 <script lang="ts" setup>
 import { onMounted, reactive, nextTick, ref, onUnmounted, watch } from "vue";
 import LayCarousel from "../carousel/index.vue";
@@ -81,6 +75,10 @@ export interface NoticeBarProps {
   leftIcon?: string;
   rightIcon?: string;
 }
+
+defineOptions({
+  name: "LayNoticeBar",
+});
 
 const props = withDefaults(defineProps<NoticeBarProps>(), {
   color: () => "var(--color-warning)",

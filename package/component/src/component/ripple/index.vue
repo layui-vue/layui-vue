@@ -1,9 +1,3 @@
-<script lang="ts">
-export default {
-  name: "LayRipple",
-};
-</script>
-
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from "vue";
 import "./index.less";
@@ -18,6 +12,10 @@ export interface RippleProps {
   trigger?: RippleTrigger;
   center?: boolean;
 }
+
+defineOptions({
+  name: "LayRipple",
+});
 
 const props = withDefaults(defineProps<RippleProps>(), {
   type: "inset",

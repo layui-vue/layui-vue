@@ -1,18 +1,16 @@
-<script lang="ts">
-export default {
-  name: "LayCollapse",
-};
-</script>
-
 <script setup lang="ts">
 import "./index.less";
-import { withDefaults, provide, ref, watch } from "vue";
+import { provide, ref, watch } from "vue";
 
 export interface CollapseProps {
   accordion?: boolean;
   modelValue?: number | string | number[] | string[];
   collapseTransition?: boolean;
 }
+
+defineOptions({
+  name: "LayCollapse",
+});
 
 const props = withDefaults(defineProps<CollapseProps>(), {
   modelValue: () => [],

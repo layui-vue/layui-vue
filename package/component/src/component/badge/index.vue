@@ -4,11 +4,6 @@
  * @LastEditTime: 2023-10-30 14:01:23
  * @LastEditors: baobaobao
 -->
-<script lang="ts">
-export default {
-  name: "LayBadge",
-};
-</script>
 
 <script setup lang="ts">
 import { computed, shallowRef, StyleValue, useSlots } from "vue";
@@ -29,6 +24,11 @@ export interface BadgeProps {
   showZero?: boolean;
   max?: number;
 }
+
+defineOptions({
+  name: "LayBadge",
+});
+
 const slot = useSlots();
 const layBadge = shallowRef<HTMLElement | null>(null);
 const props = withDefaults(defineProps<BadgeProps>(), {

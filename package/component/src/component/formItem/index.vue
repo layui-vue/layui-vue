@@ -1,14 +1,7 @@
-<script lang="ts">
-export default {
-  name: "LayFormItem",
-};
-</script>
-
 <script setup lang="ts">
 import "../tooltip/index.less";
 import {
   inject,
-  withDefaults,
   ref,
   reactive,
   toRefs,
@@ -45,6 +38,10 @@ export interface FormItemProps {
   requiredErrorMessage?: string;
   size?: string;
 }
+
+defineOptions({
+  name: "LayFormItem",
+});
 
 const props = withDefaults(defineProps<FormItemProps>(), {
   // mode: "block",

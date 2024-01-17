@@ -183,11 +183,7 @@
     </PanelFoot>
   </div>
 </template>
-<script lang="ts">
-export default {
-  name: "DateRange",
-};
-</script>
+
 <script lang="ts" setup>
 import { computed, inject, reactive, ref, watch } from "vue";
 import { provideType } from "../interface";
@@ -204,6 +200,11 @@ export interface DateRangeProps {
   startTime: string;
   endTime: string;
 }
+
+defineOptions({
+  name: "DateRange",
+});
+
 const props = withDefaults(defineProps<DateRangeProps>(), {});
 const emits = defineEmits([
   "update:modelValue",

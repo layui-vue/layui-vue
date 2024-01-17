@@ -117,17 +117,16 @@
   </ul>
 </template>
 
-<script lang="ts">
-export default {
-  name: "LayPager",
-};
-</script>
 <script setup lang="ts">
 import LayDropdown from "../../dropdown/index";
 import LayDropdownMenu from "../../dropdownMenu/index";
 import LayDropdownMenuItem from "../../dropdownMenuItem/index";
 import { LayIcon } from "@layui/icons-vue";
 import { usePage } from "../usePage";
+
+defineOptions({
+  name: "LayPager",
+});
 const {
   pageCount,
   pageOpionData,

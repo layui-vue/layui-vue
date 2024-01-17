@@ -19,14 +19,13 @@
   </div>
 </template>
 
-<script lang="ts">
-export default {
-  name: "LayPageNext",
-};
-</script>
 <script setup lang="ts">
 import { useI18n } from "../../../language";
 import { usePage } from "../usePage";
+
+defineOptions({
+  name: "LayPageNext",
+});
 const { t } = useI18n();
 const { pageCount, currentPage, handleNext, slots } = usePage();
 </script>

@@ -1,12 +1,5 @@
-<script lang="ts">
-export default {
-  name: "LaySkeleton",
-};
-</script>
-
 <script setup lang="ts">
 import "./index.less";
-import { withDefaults } from "vue";
 import LaySkeletonItem from "../skeletonItem/index.vue";
 
 export interface SkeletonProps {
@@ -14,6 +7,10 @@ export interface SkeletonProps {
   loading?: boolean;
   animated?: boolean;
 }
+
+defineOptions({
+  name: "LaySkeleton",
+});
 
 const props = withDefaults(defineProps<SkeletonProps>(), {
   rows: 4,

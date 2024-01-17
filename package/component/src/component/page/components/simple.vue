@@ -27,17 +27,16 @@
   </div>
 </template>
 
-<script lang="ts">
-export default {
-  name: "LayPageSimple",
-};
-</script>
 <script setup lang="ts">
 import LayInput from "../../input/index";
 import { LayIcon } from "@layui/icons-vue";
 import { useI18n } from "../../../language";
 
 import { usePage } from "../usePage";
+
+defineOptions({
+  name: "LayPageSimple",
+});
 const { pageCount, disabled, currentPage, handlePrev, handleNext, handleBlur } =
   usePage();
 const { t } = useI18n();

@@ -1,9 +1,3 @@
-<script lang="ts">
-export default {
-  name: "LaySubMenu",
-};
-</script>
-
 <script setup lang="ts">
 import { computed, inject, ref, Ref, useSlots, watchEffect } from "vue";
 import LayTransition from "../transition/index.vue";
@@ -15,6 +9,10 @@ export interface SubMenuProps {
   id?: string;
   title?: string;
 }
+
+defineOptions({
+  name: "LaySubMenu",
+});
 
 const slots = useSlots();
 const props = defineProps<SubMenuProps>();

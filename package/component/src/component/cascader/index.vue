@@ -76,12 +76,6 @@
   </div>
 </template>
 
-<script lang="ts">
-export default {
-  name: "LayCascader",
-};
-</script>
-
 <script setup lang="ts">
 import "./index.less";
 import LayInput from "../input/index.vue";
@@ -108,6 +102,10 @@ export interface CascaderProps {
   contentStyle?: StyleValue;
   changeOnSelect?: boolean;
 }
+
+defineOptions({
+  name: "LayCascader",
+});
 
 const props = withDefaults(defineProps<CascaderProps>(), {
   options: null,

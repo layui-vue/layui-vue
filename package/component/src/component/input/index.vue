@@ -1,9 +1,3 @@
-<script lang="ts">
-export default {
-  name: "LayInput",
-};
-</script>
-
 <script setup lang="ts">
 import "./index.less";
 import { LayIcon } from "@layui/icons-vue";
@@ -29,6 +23,10 @@ export interface InputProps {
   max?: number;
   min?: number;
 }
+
+defineOptions({
+  name: "LayInput",
+});
 
 const props = withDefaults(defineProps<InputProps>(), {
   disabled: false,

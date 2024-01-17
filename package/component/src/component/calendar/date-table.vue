@@ -36,21 +36,22 @@
     </tbody>
   </table>
 </template>
-<script lang="ts">
-export default {
-  name: "LayCalendarDateTable",
-};
-</script>
+
 <script lang="ts" setup>
 import dayjs, { Dayjs } from "dayjs";
 import "./date-table.vue";
 import { weekDays, getMonthDay, getPrevMonthDay, nextMonthDay } from "./utils";
-import { computed, ref, defineEmits, watch, useSlots } from "vue";
+import { computed, ref, watch, useSlots } from "vue";
 export interface CalendarDateTableProps {
   date: Date | string | number;
   fullscreen: boolean;
   disabledDate?: Function;
 }
+
+defineOptions({
+  name: "LayCalendarDateTable",
+});
+
 const props = withDefaults(defineProps<CalendarDateTableProps>(), {
   date: Date.now(),
   fullscreen: true,

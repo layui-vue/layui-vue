@@ -72,12 +72,6 @@
   </div>
 </template>
 
-<script lang="ts">
-export default {
-  name: "LayAutocomplete",
-};
-</script>
-
 <script lang="ts" setup>
 import { ref, watch, onMounted, onUnmounted, nextTick, StyleValue } from "vue";
 import LayDropdown from "../dropdown/index.vue";
@@ -102,6 +96,10 @@ export interface AutocompleteProps {
   replaceFields?: { value: string };
   size?: AutocompleteSize;
 }
+
+defineOptions({
+  name: "LayAutocomplete",
+});
 
 const props = withDefaults(defineProps<AutocompleteProps>(), {
   autoFitWidth: true,

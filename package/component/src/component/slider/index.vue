@@ -57,11 +57,7 @@
     </div>
   </div>
 </template>
-<script lang="ts">
-export default {
-  name: "LaySlider",
-};
-</script>
+
 <script lang="ts" setup>
 import "./index.less";
 import laySliderBar from "./components/bar.vue";
@@ -97,6 +93,10 @@ export interface SliderProps {
   marks?: Record<number, any>;
   formatTooltip?: (val: number) => number | string;
 }
+
+defineOptions({
+  name: "LaySlider",
+});
 
 const props = withDefaults(defineProps<SliderProps>(), {
   vertical: false,

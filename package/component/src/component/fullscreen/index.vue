@@ -1,18 +1,5 @@
-<script lang="ts">
-export default {
-  name: "LayFullscreen",
-};
-</script>
-
 <script lang="ts" setup>
-import {
-  ref,
-  withDefaults,
-  computed,
-  onMounted,
-  onBeforeUnmount,
-  Ref,
-} from "vue";
+import { ref, computed, onMounted, onBeforeUnmount, Ref } from "vue";
 import "./index.less";
 
 export interface FullscreenProps {
@@ -21,6 +8,10 @@ export interface FullscreenProps {
   position?: string;
   zIndex?: string;
 }
+
+defineOptions({
+  name: "LayFullscreen",
+});
 
 const props = withDefaults(defineProps<FullscreenProps>(), {
   immersive: true,
@@ -87,7 +78,7 @@ let targetEl: Ref<HTMLElement | undefined> = ref<HTMLElement | undefined>(
 // 是否全屏
 const isFullscreen = ref(false);
 // 是否支持全屏
-let isSupported: boolean = false;
+let isSupported = false;
 
 // 包装全屏 API,屏蔽浏览器差异
 const unprefixedMethods: MethodMap = methodMap[0];
@@ -170,10 +161,7 @@ async function toggle() {
  * @param el HTML 元素
  * @param isRemove 是否移除样式
  */
-const styleLayFullscreen = function (
-  el: HTMLElement,
-  isRemove: boolean = false
-) {
+const styleLayFullscreen = function (el: HTMLElement, isRemove = false) {
   el.style.position = isRemove ? "" : props.position || "";
   el.style.zIndex = isRemove ? "" : props.zIndex || "";
 };

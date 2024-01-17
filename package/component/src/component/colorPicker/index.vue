@@ -1,9 +1,3 @@
-<script lang="ts">
-export default {
-  name: "LayColorPicker",
-};
-</script>
-
 <script lang="ts" setup>
 import "./index.less";
 import LayDropdown from "../dropdown/index.vue";
@@ -21,6 +15,10 @@ export interface ColorPicker {
   contentStyle?: StyleValue;
   size?: string;
 }
+
+defineOptions({
+  name: "LayColorPicker",
+});
 
 const emit = defineEmits(["update:modelValue"]);
 

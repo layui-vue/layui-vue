@@ -1,18 +1,16 @@
-<script lang="ts">
-export default {
-  name: "LayEmpty",
-};
-</script>
-
 <script setup lang="ts">
 import "./index.less";
-import { useSlots, withDefaults, computed } from "vue";
+import { useSlots, computed } from "vue";
 import { useI18n } from "../../language";
 
 export interface EmptyProps {
   description?: string;
   image?: string;
 }
+
+defineOptions({
+  name: "LayEmpty",
+});
 
 const props = withDefaults(defineProps<EmptyProps>(), {});
 

@@ -39,11 +39,7 @@
     </div>
   </div>
 </template>
-<script lang="ts">
-export default {
-  name: "LayCalendar",
-};
-</script>
+
 <script lang="ts" setup>
 import dayjs, { Dayjs } from "dayjs";
 import "./index.less";
@@ -55,6 +51,11 @@ export interface CalendarProps {
   fullscreen?: boolean;
   disabledDate?: Function;
 }
+
+defineOptions({
+  name: "LayCalendar",
+});
+
 const props = withDefaults(defineProps<CalendarProps>(), {
   modelValue: Date.now(),
   fullscreen: true,

@@ -1,9 +1,3 @@
-<script lang="ts">
-export default {
-  name: "LayRadioGroup",
-};
-</script>
-
 <script setup lang="ts">
 import { provide, ref, watch } from "vue";
 
@@ -12,6 +6,10 @@ export interface RadioGroupProps {
   name?: string;
   disabled?: boolean;
 }
+
+defineOptions({
+  name: "LayRadioGroup",
+});
 
 const props = withDefaults(defineProps<RadioGroupProps>(), {
   disabled: false,

@@ -1,9 +1,3 @@
-<script lang="ts">
-export default {
-  name: "LayLine",
-};
-</script>
-
 <script setup lang="ts">
 import { StyleValue, computed, useSlots } from "vue";
 import "./index.less";
@@ -16,6 +10,10 @@ export interface LineProps {
   theme?: string;
   margin?: string;
 }
+
+defineOptions({
+  name: "LayLine",
+});
 
 const props = withDefaults(defineProps<LineProps>(), {
   direction: "horizontal",

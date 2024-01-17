@@ -1,9 +1,3 @@
-<script lang="ts">
-export default {
-  name: "LayContainer",
-};
-</script>
-
 <script setup lang="ts">
 import "./index.less";
 import { computed } from "vue";
@@ -12,6 +6,10 @@ import { BooleanOrString } from "../../types";
 export interface ContainerProps {
   fluid?: BooleanOrString;
 }
+
+defineOptions({
+  name: "LayContainer",
+});
 
 const props = withDefaults(defineProps<ContainerProps>(), {
   fluid: false,

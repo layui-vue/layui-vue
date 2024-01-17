@@ -1,9 +1,3 @@
-<script lang="ts">
-export default {
-  name: "LayCard",
-};
-</script>
-
 <script setup lang="ts">
 import "./index.less";
 import { computed, useSlots } from "vue";
@@ -13,6 +7,10 @@ export interface CardProps {
   title?: string;
   shadow?: CardShadow;
 }
+
+defineOptions({
+  name: "LayCard",
+});
 
 const props = withDefaults(defineProps<CardProps>(), {
   shadow: "always",

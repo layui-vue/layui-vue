@@ -1,11 +1,9 @@
-<script lang="ts">
-export default {
-  name: "LayButtonContainer",
-};
-</script>
-
 <script setup lang="ts">
 import "./index.less";
+
+defineOptions({
+  name: "LayButtonContainer",
+});
 </script>
 
 <template>

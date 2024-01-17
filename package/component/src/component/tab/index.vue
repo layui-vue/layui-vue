@@ -1,9 +1,3 @@
-<script lang="ts">
-export default {
-  name: "LayTab",
-};
-</script>
-
 <script setup lang="ts">
 import "./index.less";
 import { LayIcon } from "@layui/icons-vue";
@@ -40,6 +34,10 @@ export interface TabProps {
   beforeLeave?: Function;
   activeBarTransition?: boolean;
 }
+
+defineOptions({
+  name: "LayTab",
+});
 
 const slot = useSlots();
 const tabMap = reactive(new Map<number, TabData>());

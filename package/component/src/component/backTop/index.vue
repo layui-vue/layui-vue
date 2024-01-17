@@ -1,18 +1,5 @@
-<script lang="ts">
-export default {
-  name: "LayBacktop",
-};
-</script>
-
 <script lang="ts" setup>
-import {
-  ref,
-  shallowRef,
-  withDefaults,
-  computed,
-  onMounted,
-  onBeforeUnmount,
-} from "vue";
+import { ref, shallowRef, computed, onMounted, onBeforeUnmount } from "vue";
 import { LayIcon } from "@layui/icons-vue";
 import "./index.less";
 
@@ -33,6 +20,10 @@ export interface BackTopProps {
   iconSize?: number;
   iconColor?: string;
 }
+
+defineOptions({
+  name: "LayBacktop",
+});
 
 const props = withDefaults(defineProps<BackTopProps>(), {
   target: "window",

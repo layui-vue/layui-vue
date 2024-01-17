@@ -1,10 +1,3 @@
-<script lang="ts">
-export default {
-  name: "LayDropdown",
-  inheritAttrs: false,
-};
-</script>
-
 <script setup lang="ts">
 import "./index.less";
 import {
@@ -72,6 +65,11 @@ export interface DropdownProps {
   contentStyle?: StyleValue;
   popupContainer?: string | undefined;
 }
+
+defineOptions({
+  name: "LayDropdown",
+  inheritAttrs: false,
+});
 
 const props = withDefaults(defineProps<DropdownProps>(), {
   visible: false,

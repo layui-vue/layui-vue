@@ -30,12 +30,6 @@
   </div>
 </template>
 
-<script lang="ts">
-export default {
-  name: "LayScroll",
-};
-</script>
-
 <script lang="ts" setup>
 import "./index.less";
 import { onMounted, nextTick, reactive, onUnmounted, ref } from "vue";
@@ -46,6 +40,10 @@ export interface ScrollProps {
   thumbColor?: string;
   thumbWidth?: number;
 }
+
+defineOptions({
+  name: "LayScroll",
+});
 
 const props = withDefaults(defineProps<ScrollProps>(), {
   height: "100%",

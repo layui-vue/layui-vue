@@ -1,11 +1,5 @@
-<script lang="ts">
-export default {
-  name: "LaySplitPanel",
-};
-</script>
-
 <script setup lang="ts">
-import { ref, watch, provide, withDefaults, onMounted } from "vue";
+import { ref, watch, provide, onMounted } from "vue";
 import "./index.less";
 import { useMousePressed } from "@vueuse/core";
 
@@ -13,6 +7,10 @@ export interface StepProps {
   vertical?: boolean;
   minSize?: number;
 }
+
+defineOptions({
+  name: "LaySplitPanel",
+});
 
 const props = withDefaults(defineProps<StepProps>(), {
   vertical: false,

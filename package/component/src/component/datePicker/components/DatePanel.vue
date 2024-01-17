@@ -48,11 +48,7 @@
     </div>
   </div>
 </template>
-<script lang="ts">
-export default {
-  name: "DatePanel",
-};
-</script>
+
 <script lang="ts" setup>
 import { computed, inject, ref, watch } from "vue";
 import { provideType } from "../interface";
@@ -65,6 +61,10 @@ import { useI18n } from "../../../language";
 export interface TimePanelProps {
   modelValue: number;
 }
+
+defineOptions({
+  name: "DatePanel",
+});
 
 const { t } = useI18n();
 const props = withDefaults(defineProps<TimePanelProps>(), {});

@@ -1,9 +1,3 @@
-<script lang="ts">
-export default {
-  name: "LaySide",
-};
-</script>
-
 <script setup lang="ts">
 import { computed, CSSProperties } from "vue";
 import "./index.less";
@@ -11,6 +5,10 @@ import "./index.less";
 export interface SideProps {
   width?: string | number;
 }
+
+defineOptions({
+  name: "LaySide",
+});
 
 const props = withDefaults(defineProps<SideProps>(), {
   width: "200px",

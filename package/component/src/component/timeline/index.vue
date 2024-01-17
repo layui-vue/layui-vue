@@ -1,16 +1,14 @@
-<script lang="ts">
-export default {
-  name: "LayTimeline",
-};
-</script>
-
 <script setup lang="ts">
 import "./index.less";
-import { computed, withDefaults } from "vue";
+import { computed } from "vue";
 
 export interface TimelineProps {
   direction?: "horizontal" | "vertical";
 }
+
+defineOptions({
+  name: "LayTimeline",
+});
 
 const props = withDefaults(defineProps<TimelineProps>(), {
   direction: "vertical",

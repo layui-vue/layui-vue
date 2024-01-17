@@ -1,9 +1,3 @@
-<script lang="ts">
-export default {
-  name: "LayForm",
-};
-</script>
-
 <script setup lang="ts">
 import "./index.less";
 import { toRefs, provide, reactive, onMounted, nextTick } from "vue";
@@ -27,6 +21,10 @@ export interface FormProps {
   mode?: string;
   tooltipProps?: LayTooltipContext;
 }
+
+defineOptions({
+  name: "LayForm",
+});
 
 const props = withDefaults(defineProps<FormProps>(), {
   model: function () {

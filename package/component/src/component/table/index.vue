@@ -1,16 +1,9 @@
-<script lang="ts">
-export default {
-  name: "LayTable",
-};
-</script>
-
 <script setup lang="ts">
 import "./index.less";
 import {
   ref,
   watch,
   useSlots,
-  withDefaults,
   onMounted,
   StyleValue,
   WritableComputedRef,
@@ -60,6 +53,10 @@ export interface TableProps {
   autoColsWidth?: boolean;
   emptyDescription?: string;
 }
+
+defineOptions({
+  name: "LayTable",
+});
 
 const props = withDefaults(defineProps<TableProps>(), {
   id: "id",

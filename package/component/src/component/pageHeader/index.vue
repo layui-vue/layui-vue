@@ -13,11 +13,6 @@
   </div>
 </template>
 
-<script lang="ts">
-export default {
-  name: "LayPageHeader",
-};
-</script>
 <script lang="ts" setup>
 import { convertSlotName } from "../../utils";
 import { getCurrentInstance, useSlots } from "vue";
@@ -28,6 +23,10 @@ export interface PageHeaderProps {
   backText?: string;
   backIcon?: string;
 }
+
+defineOptions({
+  name: "LayPageHeader",
+});
 const props = withDefaults(defineProps<PageHeaderProps>(), {
   content: "",
   backText: "返回",

@@ -42,11 +42,7 @@
     </table>
   </div>
 </template>
-<script lang="ts">
-export default {
-  name: "DateContent",
-};
-</script>
+
 <script lang="ts" setup>
 import { useI18n } from "../../../../language";
 import { computed, inject } from "vue";
@@ -60,6 +56,10 @@ export interface DateContentProps {
   endDate?: number;
   hoverDate?: number;
 }
+
+defineOptions({
+  name: "DateContent",
+});
 
 const props = withDefaults(defineProps<DateContentProps>(), {
   dateList: [],

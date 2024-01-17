@@ -1,10 +1,3 @@
-<!-- done -->
-<script lang="ts">
-export default {
-  name: "LayButton",
-};
-</script>
-
 <script setup lang="ts">
 import "./index.less";
 import { computed } from "vue";
@@ -31,6 +24,10 @@ export interface ButtonProps {
   disabled?: boolean;
   nativeType?: ButtonNativeType;
 }
+
+defineOptions({
+  name: "LayButton",
+});
 
 const props = withDefaults(defineProps<ButtonProps>(), {
   borderStyle: "soild",

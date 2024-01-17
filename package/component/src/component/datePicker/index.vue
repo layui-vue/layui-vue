@@ -114,28 +114,13 @@
   </div>
 </template>
 
-<script lang="ts">
-export default {
-  name: "LayDatePicker",
-};
-</script>
-
 <script lang="ts" setup>
 import "./index.less";
 import dayjs from "dayjs";
 import LayInput from "../input/index.vue";
 import LayDropdown from "../dropdown/index.vue";
 import { getMonth, getYear, getDay } from "./day";
-import {
-  ref,
-  watch,
-  defineProps,
-  defineEmits,
-  reactive,
-  provide,
-  StyleValue,
-  computed,
-} from "vue";
+import { ref, watch, reactive, provide, StyleValue, computed } from "vue";
 import DatePanel from "./components/DatePanel.vue";
 import TimePanel from "./components/TimePanel.vue";
 import YearPanel from "./components/YearPanel.vue";
@@ -166,6 +151,10 @@ export interface DatePickerProps {
   contentStyle?: StyleValue;
   format?: string;
 }
+
+defineOptions({
+  name: "LayDatePicker",
+});
 
 const props = withDefaults(defineProps<DatePickerProps>(), {
   modelValue: "",
