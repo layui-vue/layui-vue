@@ -7,10 +7,13 @@ export default {
 <script lang="ts" setup>
 import "./index.less";
 import LayDropdown from "../dropdown/index.vue";
-import { ref, computed, watch, onMounted, StyleValue } from "vue";
-import { useEyeDropper } from "@vueuse/core";
+import { ref, computed, watch, onMounted, StyleValue, nextTick } from "vue";
+import { useEyeDropper, useDebounceFn } from "@vueuse/core";
 import { LayIcon } from "@layui/icons-vue";
 import useProps from "./index.hooks";
+
+import LayButton from "../button/index.vue";
+import "../button/index.less";
 
 export interface ColorPicker {
   modelValue?: any;
@@ -50,6 +53,10 @@ let green = ref(0);
 let blue = ref(0);
 let alpha = ref(1);
 
+const dropdownRef = ref();
+let currentColor = ref("");
+let openState = ref(false);
+
 const openEyeDropper = function () {
   if (isSupported) {
     open();
@@ -58,22 +65,27 @@ const openEyeDropper = function () {
   }
 };
 
+const setColorValue = (value: any) => {
+  const color = parseColor(value);
+  if (color) {
+    const { r, g, b, a } = color;
+    red.value = r;
+    green.value = g;
+    blue.value = b;
+    alpha.value = a;
+  }
+};
+
 onMounted(() => {
-  let { r, g, b, a } = parseColor(props.modelValue);
-  red.value = r;
-  green.value = g;
-  blue.value = b;
-  alpha.value = a;
+  currentColor.value = props.modelValue;
+  setColorValue(currentColor.value);
 });
 
 watch(
   () => props.modelValue,
   () => {
-    let { r, g, b, a } = parseColor(props.modelValue);
-    red.value = r;
-    green.value = g;
-    blue.value = b;
-    alpha.value = a;
+    currentColor.value = props.modelValue;
+    setColorValue(currentColor.value);
   }
 );
 
@@ -86,10 +98,13 @@ watch(sRGBHex, (sRGBHex) => {
 });
 
 watch([red, green, blue], (newValue) => {
-  emit(
-    "update:modelValue",
-    rgba2hex(red.value, green.value, blue.value, alpha.value)
+  currentColor.value = rgba2hex(
+    red.value,
+    green.value,
+    blue.value,
+    alpha.value
   );
+
   let { h, s, v } = rgb2hsv(red.value, green.value, blue.value);
   hue.value = h;
   saturation.value = s;
@@ -99,13 +114,28 @@ watch([red, green, blue], (newValue) => {
 });
 
 watch(alpha, () => {
-  emit(
-    "update:modelValue",
-    rgba2hex(red.value, green.value, blue.value, alpha.value)
+  currentColor.value = rgba2hex(
+    red.value,
+    green.value,
+    blue.value,
+    alpha.value
   );
+
   alphaSliderStyle.value = `left: ${
     alpha.value >= 1 ? "calc(100% - 6px)" : alpha.value * 100 + "%"
   };`;
+});
+
+watch(openState, (state) => {
+  if (!state) {
+    setColorValue(props.modelValue);
+
+    nextTick(() => {
+      if (!props.modelValue) {
+        currentColor.value = "";
+      }
+    });
+  }
 });
 
 let colorObj = computed(() => {
@@ -126,8 +156,18 @@ let colorObj = computed(() => {
   };
 });
 
-function hexChange(e: any) {
-  let v = e.target.value;
+const defaultColor = computed(() =>
+  props.modelValue || currentColor.value ? colorObj.value.rgba : "transparent"
+);
+
+const iconType = computed(() => {
+  return `layui-icon-${props.modelValue ? "down" : "close"}`;
+});
+
+const handleInput = useDebounceFn((e: Event) => {
+  const inputElement = e.target as HTMLInputElement;
+  const v = inputElement.value;
+
   if (/^#?([0-9a-fA-F]{6}|[0-9a-fA-F]{8})$/.test(v)) {
     let { r, g, b, a } = hex2rgba(v);
     red.value = r;
@@ -135,7 +175,22 @@ function hexChange(e: any) {
     blue.value = b;
     alpha.value = a;
   }
-}
+}, 500);
+
+// 清除
+const handleClearColor = () => {
+  emit("update:modelValue", "");
+  dropdownRef.value.hide();
+};
+
+// 确认
+const handleConfirmColor = () => {
+  emit(
+    "update:modelValue",
+    rgba2hex(red.value, green.value, blue.value, alpha.value)
+  );
+  dropdownRef.value.hide();
+};
 
 function redChange(e: any) {
   let v = e.target.value;
@@ -276,8 +331,9 @@ function mouseupAlpha(e: any) {
 }
 
 function parseColor(color: any) {
+  let [r, g, b, a] = [255, 0, 0, 1];
+
   if (color) {
-    let r, g, b, a;
     if (typeof color === "string") {
       if (
         /^#?([0-9a-fA-F]{6}|[0-9a-fA-F]{8}|[0-9a-fA-F]{3}|[0-9a-fA-F]{4})$/.test(
@@ -291,11 +347,9 @@ function parseColor(color: any) {
       g = color.g > 255 ? 255 : color.g < 0 ? 0 : color.g;
       b = color.b > 255 ? 255 : color.b < 0 ? 0 : color.b;
       a = color.a > 1 ? 1 : color.a < 0 ? 0 : color.a;
-      return { r, g, b, a };
     }
-  } else {
-    return null;
   }
+  return { r, g, b, a };
 }
 
 function hsv2rgb(h: any, s: any, v: any) {
@@ -421,10 +475,13 @@ function hex2rgba(s: any) {
 
 <template>
   <lay-dropdown
+    ref="dropdownRef"
     :disabled="disabled"
     :contentClass="contentClass"
     :contentStyle="contentStyle"
     updateAtScroll
+    @hide="openState = false"
+    @show="openState = true"
   >
     <div
       class="layui-unselect layui-colorpicker"
@@ -435,9 +492,12 @@ function hex2rgba(s: any) {
         <span
           class="layui-colorpicker-trigger-span"
           lay-type=""
-          :style="`background-color: ${colorObj.rgba}`"
+          :style="`background-color: ${defaultColor}`"
         >
-          <i class="layui-icon layui-colorpicker-trigger-i layui-icon-down"></i>
+          <i
+            class="layui-icon layui-colorpicker-trigger-i"
+            :class="iconType"
+          ></i>
         </span>
       </span>
     </div>
@@ -479,7 +539,7 @@ function hex2rgba(s: any) {
           </div>
           <div class="color-diamond">
             <div
-              :style="`background-color: ${colorObj.rgba};width: 100%;height: 100%;box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .15), inset 0 0 4px rgba(0, 0, 0, .25);`"
+              :style="`background-color: ${defaultColor};width: 100%;height: 100%;box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .15), inset 0 0 4px rgba(0, 0, 0, .25);`"
             ></div>
           </div>
         </div>
@@ -488,7 +548,7 @@ function hex2rgba(s: any) {
             <label>
               <input
                 :value="colorObj.hex8"
-                @input="hexChange"
+                @input="handleInput"
                 spellcheck="false"
               />
             </label>
@@ -522,6 +582,12 @@ function hex2rgba(s: any) {
             @click="presetChange(item)"
           ></li>
         </ul>
+        <div class="layui-color-picker__footer">
+          <LayButton size="xs" @click="handleClearColor">清除</LayButton>
+          <LayButton type="primary" size="xs" @click="handleConfirmColor"
+            >确定</LayButton
+          >
+        </div>
       </div>
     </template>
   </lay-dropdown>
