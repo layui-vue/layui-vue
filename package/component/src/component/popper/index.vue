@@ -72,6 +72,8 @@ const props = withDefaults(defineProps<PopperProps>(), {
   visible: false,
 });
 
+const emits = defineEmits(["hide"]);
+
 const slots = useSlots();
 const style = ref<CSSProperties>({ top: -window.innerHeight + "px", left: 0 });
 const triggerRefEl = toRef(props, "el");
@@ -106,6 +108,7 @@ const doHidden = function (e?: MouseEvent) {
   innerVisible.value = false;
   innnerPosition.value = props.position;
   style.value = { top: -window.innerHeight + "px", left: 0 };
+  emits("hide", false);
 };
 
 const calcPosistion = function () {

@@ -13,13 +13,12 @@ import {
   getCurrentInstance,
   nextTick,
   onMounted,
-  onUnmounted,
   PropType,
   ref,
   shallowRef,
   StyleValue,
 } from "vue";
-import { unrefElement, useEventListener } from "@vueuse/core";
+import { useEventListener } from "@vueuse/core";
 
 export type PopperTrigger = "click" | "hover" | "focus" | "contextMenu";
 
@@ -74,7 +73,11 @@ const tooltipRef = shallowRef<HTMLElement | undefined>(undefined);
 const popperRef = ref<HTMLElement | undefined>();
 
 const innerProps = computed(() => {
-  return { el: vm.proxy!.$el.nextElementSibling, ...vm.proxy!.$props };
+  return {
+    el: vm.proxy!.$el.nextElementSibling,
+    ...vm.proxy!.$props,
+    ...vm.proxy!.$attrs,
+  };
 });
 
 const setEllipsis = function () {
