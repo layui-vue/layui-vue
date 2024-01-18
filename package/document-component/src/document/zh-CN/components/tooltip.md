@@ -183,5 +183,16 @@ const changeText = () => {
 
 :::
 
+::: title Tooltip 事件
+:::
+
+::: table
+
+| 插槽    | 描述     | 参数 |
+| ------- | -------- | ------ |
+| hide | tooltip弹出内容隐藏后触发 | false  |
+
+:::
+
 ::: previousNext tooltip
 :::
