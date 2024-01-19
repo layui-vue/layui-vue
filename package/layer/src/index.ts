@@ -75,19 +75,19 @@ const layer = {
 
   // 页面
   open: (option: any, callback?: Function) => {
-    let defaultOption = {};
+    const defaultOption = {};
     return layer.create(option, defaultOption, callback);
   },
   // 抽屉
   drawer: (option: any, callback?: Function) => {
-    let defaultOption = {
+    const defaultOption = {
       type: "drawer",
     };
     return layer.create(option, defaultOption, callback);
   },
   // 消息
   msg: (message: string, option?: any, callback?: Function) => {
-    let defaultOption = {
+    const defaultOption = {
       type: 0,
       title: false,
       content: message,
@@ -102,7 +102,7 @@ const layer = {
   },
   // 加载
   load: (load: number, option?: any, callback?: Function) => {
-    let defaultOption = {
+    const defaultOption = {
       type: 3,
       load: load,
       anim: 5,
@@ -113,7 +113,7 @@ const layer = {
   },
   // 确认
   confirm: (msg: string, option?: any, callback?: Function) => {
-    let defaultOption = {
+    const defaultOption = {
       type: 0,
       content: msg,
       shadeClose: false,
@@ -127,7 +127,7 @@ const layer = {
         imgList: [{ src: option }],
       };
     }
-    let defaultOption = {
+    const defaultOption = {
       type: 5,
       anim: 2,
       startIndex: 0,
@@ -140,7 +140,7 @@ const layer = {
   //通知
   notifiy: (option: any = {}, callback?: Function) => {
     option.type = 6;
-    let defaultOption = {
+    const defaultOption = {
       offset: "rt",
       time: 2000,
       area: "auto",

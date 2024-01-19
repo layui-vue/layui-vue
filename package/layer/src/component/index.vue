@@ -8,7 +8,7 @@ export default {
 import Shade from "./Shade.vue";
 import Iframe from "./Iframe.vue";
 import Title from "./Header.vue";
-import CloseBtn from "./CloseBtn.vue";
+import HeaderBtn from "./HeaderBtn.vue";
 import Photos from "./Photos.vue";
 import Notifiy from "./Notifiy.vue";
 import {
@@ -833,32 +833,16 @@ defineExpose({ reset, open, close, full });
           ></Notifiy>
         </div>
         <!-- 工具栏 -->
-        <span
-          class="layui-layer-setwin"
+        <HeaderBtn
           v-if="type != 3 && type != 5 && type != 6"
-        >
-          <a
-            v-if="maxmin && !max"
-            class="layui-layer-min"
-            :class="[min ? 'layui-layer-ico layui-layer-maxmin' : '']"
-            href="javascript:;"
-            @click="minHandle"
-          >
-            <cite v-if="!min"></cite>
-          </a>
-          <a
-            v-if="maxmin && !min"
-            class="layui-layer-ico layui-layer-max"
-            :class="[max ? 'layui-layer-maxmin' : '']"
-            href="javascript:;"
-            @click="maxHandle"
-          ></a>
-          <CloseBtn
-            v-if="closeBtn != false"
-            :close-btn="closeBtn"
-            @closeHandle="closeHandle"
-          ></CloseBtn>
-        </span>
+          :maxmin="maxmin"
+          :max="max"
+          :min="min"
+          :closeBtn="closeBtn"
+          @on-min="minHandle"
+          @on-max="maxHandle"
+          @on-close="closeHandle"
+        ></HeaderBtn>
         <!-- 操作栏 -->
         <div :style="min === true ? 'display:none' : ''">
           <template v-if="slots.footer">
