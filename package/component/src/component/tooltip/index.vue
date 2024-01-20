@@ -1,10 +1,3 @@
-<script lang="ts">
-export default {
-  name: "LayTooltip",
-  inheritAttrs: false,
-};
-</script>
-
 <script lang="ts" setup>
 import "./index.less";
 import LayPopper from "../popper/index.vue";
@@ -21,6 +14,11 @@ import {
 import { useEventListener } from "@vueuse/core";
 
 export type PopperTrigger = "click" | "hover" | "focus" | "contextMenu";
+
+defineOptions({
+  name: "LayTooltip",
+  inheritAttrs: false,
+});
 
 const props = defineProps({
   content: {

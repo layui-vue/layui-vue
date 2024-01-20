@@ -1,8 +1,3 @@
-<script lang="ts">
-export default {
-  name: "LayException",
-};
-</script>
 <script setup lang="ts">
 import { useSlots } from "vue";
 import "./index.less";
@@ -12,6 +7,10 @@ export interface DropdownProps {
   status?: "401" | "403" | "404" | "500";
   describe?: string;
 }
+
+defineOptions({
+  name: "LayException",
+});
 
 const slots = useSlots();
 

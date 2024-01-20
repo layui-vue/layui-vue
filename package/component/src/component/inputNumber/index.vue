@@ -1,9 +1,3 @@
-<script lang="ts">
-export default {
-  name: "LayInputNumber",
-};
-</script>
-
 <script setup lang="ts">
 import "./index.less";
 import layInput from "../input/index.vue";
@@ -28,6 +22,10 @@ export interface InputNumberProps {
   min?: number;
   max?: number;
 }
+
+defineOptions({
+  name: "LayInputNumber",
+});
 
 const props = withDefaults(defineProps<InputNumberProps>(), {
   disabled: false,
@@ -126,6 +124,23 @@ const defaultPrecision = computed(() => {
   } else {
     return Math.max(getPrecision(props.modelValue), stepPrecision);
   }
+});
+
+const inputValue = computed(() => {
+  // 处理用户输入值
+  // 后续触发input-change fn 二次format精度
+  if (userInput.value !== null) {
+    return userInput.value;
+  }
+  let currentValue: number | string | undefined | null = num.value;
+  if (currentValue == null) return "";
+  if (isNumber(currentValue)) {
+    if (Number.isNaN(currentValue)) return "";
+    if (!isUndefined(props.precision)) {
+      currentValue = currentValue.toFixed(props.precision);
+    }
+  }
+  return currentValue;
 });
 
 const inputValue = computed(() => {

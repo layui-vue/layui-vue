@@ -4,16 +4,14 @@
   </div>
 </template>
 
-<script lang="ts">
-export default {
-  name: "LayBarcode",
-};
-</script>
-
 <script lang="ts" setup>
-import { ref, onMounted, defineProps, watch, nextTick } from "vue";
+import { ref, onMounted, watch, nextTick } from "vue";
 import JsBarcode from "jsbarcode";
 import "./index.less";
+
+defineOptions({
+  name: "LayBarcode",
+});
 
 const props = defineProps({
   value: [String, Number],

@@ -30,11 +30,7 @@
     </lay-tooltip>
   </div>
 </template>
-<script lang="ts">
-export default {
-  name: "LaySliderBar",
-};
-</script>
+
 <script lang="ts" setup>
 import { useSlots, toRefs } from "vue";
 import LayTooltip from "../../tooltip/index.vue";
@@ -43,6 +39,10 @@ import { useSliderBar } from "./use-slider-bar";
 export interface SliderBarProps {
   modelValue: number;
 }
+
+defineOptions({
+  name: "LaySliderBar",
+});
 const emit = defineEmits(["update:modelValue"]);
 const slot = useSlots();
 const props = withDefaults(defineProps<SliderBarProps>(), {

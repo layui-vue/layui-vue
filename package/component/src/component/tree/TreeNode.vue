@@ -1,9 +1,3 @@
-<script lang="ts">
-export default {
-  name: "TreeNode",
-};
-</script>
-
 <script setup lang="ts">
 import { LayIcon } from "@layui/icons-vue";
 import LayCheckbox from "../checkbox/index.vue";
@@ -42,6 +36,9 @@ interface TreeNodeEmits {
   (e: "node-click", node: TreeData): void;
 }
 
+defineOptions({
+  name: "TreeNode",
+});
 const slots = useSlots();
 const props = defineProps<TreeNodeProps>();
 const emit = defineEmits<TreeNodeEmits>();
@@ -173,7 +170,7 @@ const isChildAllSelected = computed(() => {
           :modelValue="node.isChecked"
           :disabled="node.isDisabled"
           :isIndeterminate="isChildAllSelected(node)"
-          @change="(checked) => handleChange(checked, node)"
+          @change="(checked: boolean) => handleChange(checked, node)"
           v-if="showCheckbox"
         />
         <span
@@ -205,7 +202,7 @@ const isChildAllSelected = computed(() => {
           :tail-node-icon="tailNodeIcon"
           @node-click="recursiveNodeClick"
         >
-          <template v-if="$slots.title" v-slot:title="slotProp: { data: any }">
+          <template v-if="$slots.title" #title="slotProp: { data: any }">
             <slot name="title" :data="slotProp.data"></slot>
           </template>
         </tree-node>

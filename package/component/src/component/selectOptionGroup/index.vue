@@ -1,15 +1,13 @@
-<script lang="ts">
-export default {
-  name: "LaySelectOptionGroup",
-};
-</script>
-
 <script setup lang="ts">
 import "./index.less";
 
 export interface SelectOptionGroupProps {
   label?: string;
 }
+
+defineOptions({
+  name: "LaySelectOptionGroup",
+});
 
 const props = withDefaults(defineProps<SelectOptionGroupProps>(), {
   label: "Group Name",

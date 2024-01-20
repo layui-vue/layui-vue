@@ -10,14 +10,13 @@
   </span>
 </template>
 
-<script lang="ts">
-export default {
-  name: "LayPageCount",
-};
-</script>
 <script setup lang="ts">
 import { useI18n } from "../../../language";
 import { usePage } from "../usePage";
 const { t } = useI18n();
 const { pageTotal } = usePage();
+
+defineOptions({
+  name: "LayPageCount",
+});
 </script>

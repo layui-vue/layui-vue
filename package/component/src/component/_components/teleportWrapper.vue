@@ -1,8 +1,3 @@
-<script lang="ts">
-export default {
-  name: "TeleportWrapper",
-};
-</script>
 <script lang="ts" setup>
 import { onMounted, ref } from "vue";
 
@@ -10,6 +5,10 @@ export interface TeleportWrapperProps {
   to?: string;
   disabled?: boolean;
 }
+
+defineOptions({
+  name: "TeleportWrapper",
+});
 
 const props = withDefaults(defineProps<TeleportWrapperProps>(), {
   to: "",

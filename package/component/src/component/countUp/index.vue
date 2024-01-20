@@ -1,9 +1,3 @@
-<script lang="ts">
-export default {
-  name: "LayCountUp",
-};
-</script>
-
 <script setup lang="ts">
 import { computed, onMounted, Ref, ref, watch } from "vue";
 import { TransitionPresets, useTransition } from "@vueuse/core";
@@ -22,6 +16,10 @@ export interface CountUpProps {
   prefix?: string; // 前缀
   suffix?: string; // 后缀
 }
+
+defineOptions({
+  name: "LayCountUp",
+});
 
 const props = withDefaults(defineProps<CountUpProps>(), {
   startVal: 0,

@@ -1,11 +1,9 @@
-<script lang="ts">
-export default {
-  name: "LayHeader",
-};
-</script>
-
 <script setup lang="ts">
 import "./index.less";
+
+defineOptions({
+  name: "LayHeader",
+});
 </script>
 
 <template>

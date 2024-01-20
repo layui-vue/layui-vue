@@ -1,9 +1,3 @@
-<script lang="ts">
-export default {
-  name: "LayMenuItem",
-};
-</script>
-
 <script setup lang="ts">
 import { computed, ComputedRef, inject, Ref, useSlots } from "vue";
 import { DropdownContext, dropdownInjectionKey } from "../dropdown/interface";
@@ -16,6 +10,10 @@ export interface MenuItemProps {
   title?: string;
   to?: string;
 }
+
+defineOptions({
+  name: "LayMenuItem",
+});
 
 const props = withDefaults(defineProps<MenuItemProps>(), {});
 

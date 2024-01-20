@@ -1,11 +1,5 @@
-<script lang="ts">
-export default {
-  name: "LayRate",
-};
-</script>
-
 <script setup lang="ts">
-import { computed, ref, watch, withDefaults } from "vue";
+import { computed, ref, watch } from "vue";
 import "./index.less";
 
 export interface RateProps {
@@ -20,6 +14,10 @@ export interface RateProps {
   clearIcon?: string;
   icons?: string[];
 }
+
+defineOptions({
+  name: "LayRate",
+});
 
 const props = withDefaults(defineProps<RateProps>(), {
   length: 5,

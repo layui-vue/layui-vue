@@ -1,16 +1,13 @@
-<script lang="ts">
-export default {
-  name: "LaySkeletonItem",
-};
-</script>
-
 <script setup lang="ts">
-import { withDefaults } from "vue";
 import { LayIcon } from "@layui/icons-vue";
 
 export interface SkeletonProps {
   type?: string;
 }
+
+defineOptions({
+  name: "LaySkeletonItem",
+});
 
 const props = withDefaults(defineProps<SkeletonProps>(), {
   type: "p",

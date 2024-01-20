@@ -4,11 +4,6 @@
  * @LastEditTime: 2023-10-28 23:48:27
  * @LastEditors: baobaobao
 -->
-<script lang="ts">
-export default {
-  name: "LayAvatarList",
-};
-</script>
 
 <script setup lang="ts">
 import { provide } from "vue";
@@ -19,6 +14,11 @@ export interface AvatarListProps {
   radius?: boolean;
   autoFixSize?: boolean;
 }
+
+defineOptions({
+  name: "LayAvatarList",
+});
+
 const props = withDefaults(defineProps<AvatarListProps>(), {
   size: "md",
   radius: false,

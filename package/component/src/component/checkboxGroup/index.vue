@@ -1,9 +1,3 @@
-<script lang="ts">
-export default {
-  name: "LayCheckboxGroup",
-};
-</script>
-
 <script setup lang="ts">
 import { provide, ref, watch } from "vue";
 import { Recordable } from "../../types";
@@ -12,6 +6,10 @@ export interface CheckboxGroupProps {
   modelValue?: Recordable[];
   disabled?: boolean;
 }
+
+defineOptions({
+  name: "LayCheckboxGroup",
+});
 
 const props = withDefaults(defineProps<CheckboxGroupProps>(), {
   modelValue: () => [],

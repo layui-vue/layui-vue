@@ -1,17 +1,15 @@
-<script lang="ts">
-export default {
-  name: "LayBreadcrumb",
-};
-</script>
-
 <script setup lang="ts">
 import "./index.less";
-import { provide, withDefaults } from "vue";
+import { provide } from "vue";
 
 export interface BreadcrumbProps {
   separator?: string;
   separatorIcon?: string;
 }
+
+defineOptions({
+  name: "LayBreadcrumb",
+});
 
 const props = withDefaults(defineProps<BreadcrumbProps>(), {
   separator: "/",

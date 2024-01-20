@@ -1,7 +1,7 @@
-<script lang="ts">
-export default {
+<script lang="ts" setup>
+defineOptions({
   name: "LayDropdownMenu",
-};
+});
 </script>
 
 <template>

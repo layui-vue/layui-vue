@@ -1,8 +1,3 @@
-<script lang="ts">
-export default {
-  name: "LayTagInput",
-};
-</script>
 <script lang="ts" setup>
 import "./index.less";
 import LayTag, { TagProps } from "../tag/index.vue";
@@ -42,6 +37,10 @@ export interface TagInputProps {
   tagProps?: TagProps;
   disabledInput?: boolean;
 }
+
+defineOptions({
+  name: "LayTagInput",
+});
 
 const props = withDefaults(defineProps<TagInputProps>(), {
   placeholder: undefined,

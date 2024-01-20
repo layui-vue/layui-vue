@@ -4,12 +4,6 @@
   </div>
 </template>
 
-<script lang="ts">
-export default {
-  name: "LayAffix",
-};
-</script>
-
 <script setup lang="ts">
 import "./index.less";
 import {
@@ -26,6 +20,10 @@ export interface AiffxProps {
   target?: HTMLElement;
   position?: string;
 }
+
+defineOptions({
+  name: "LayAffix",
+});
 
 const props = withDefaults(defineProps<AiffxProps>(), {
   offset: 0,

@@ -1,9 +1,3 @@
-<script lang="ts">
-export default {
-  name: "LaySwitch",
-};
-</script>
-
 <script setup lang="ts">
 import { computed } from "vue";
 import "./index.less";
@@ -24,6 +18,10 @@ export interface SwitchProps {
   loadingIcon?: string;
   loading?: boolean;
 }
+
+defineOptions({
+  name: "LaySwitch",
+});
 
 const props = withDefaults(defineProps<SwitchProps>(), {
   disabled: false,

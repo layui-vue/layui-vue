@@ -1,18 +1,16 @@
-<script lang="ts">
-export default {
-  name: "LayCollapseItem",
-};
-</script>
-
 <script setup lang="ts">
 import LayTransition from "../transition/index.vue";
-import { withDefaults, inject, computed } from "vue";
+import { inject, computed } from "vue";
 
 export interface CollapseItemProps {
   id: number | string;
   title?: string;
   disabled?: boolean;
 }
+
+defineOptions({
+  name: "LayCollapseItem",
+});
 
 const props = withDefaults(defineProps<CollapseItemProps>(), {
   disabled: false,

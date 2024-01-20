@@ -1,9 +1,3 @@
-<script lang="ts">
-export default {
-  name: "LayProgress",
-};
-</script>
-
 <script setup lang="ts">
 import "./index.less";
 import { computed } from "vue";
@@ -19,6 +13,10 @@ export interface ProgressProps {
   circleSize?: number;
   circleWidth?: number;
 }
+
+defineOptions({
+  name: "LayProgress",
+});
 
 const props = withDefaults(defineProps<ProgressProps>(), {
   circle: false,

@@ -1,9 +1,3 @@
-<script lang="ts">
-export default {
-  name: "LayRow",
-};
-</script>
-
 <script setup lang="ts">
 import { computed } from "vue";
 import "./index.less";
@@ -11,6 +5,10 @@ import "./index.less";
 export interface RowProps {
   space?: string | number;
 }
+
+defineOptions({
+  name: "LayRow",
+});
 
 const props = defineProps<RowProps>();
 

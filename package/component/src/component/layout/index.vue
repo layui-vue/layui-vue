@@ -1,9 +1,3 @@
-<script lang="ts">
-export default {
-  name: "LayLayout",
-};
-</script>
-
 <script setup lang="ts">
 import { Component, computed, useSlots } from "vue";
 import Header from "../header/index.vue";
@@ -13,6 +7,10 @@ import "./index.less";
 export interface LayoutProps {
   isVertical?: boolean;
 }
+
+defineOptions({
+  name: "LayLayout",
+});
 
 const slots = useSlots();
 

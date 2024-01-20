@@ -1,11 +1,9 @@
-<script lang="ts">
-export default {
-  name: "LayFooter",
-};
-</script>
-
 <script setup lang="ts">
 import "./index.less";
+
+defineOptions({
+  name: "LayFooter",
+});
 </script>
 
 <template>

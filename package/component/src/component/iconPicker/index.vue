@@ -1,9 +1,3 @@
-<script lang="ts">
-export default {
-  name: "LayIconPicker",
-};
-</script>
-
 <script setup lang="ts">
 import "./index.less";
 import { computed, Ref, ref, StyleValue } from "vue";
@@ -23,6 +17,10 @@ export interface IconPickerProps {
   contentStyle?: StyleValue;
   size?: string;
 }
+
+defineOptions({
+  name: "LayIconPicker",
+});
 
 const props = withDefaults(defineProps<IconPickerProps>(), {
   modelValue: "layui-icon-face-smile",

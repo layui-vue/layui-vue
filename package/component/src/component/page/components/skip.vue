@@ -19,16 +19,15 @@
   </div>
 </template>
 
-<script lang="ts">
-export default {
-  name: "LayPageSkip",
-};
-</script>
 <script setup lang="ts">
 import LayButton from "../../button/index";
 import LayInput from "../../input/index";
 import { useI18n } from "../../../language";
 import { usePage } from "../usePage";
+
+defineOptions({
+  name: "LayPageSkip",
+});
 const { t } = useI18n();
 const { disabled, jumpNumber, handleBlur, handleJumpPage } = usePage();
 </script>

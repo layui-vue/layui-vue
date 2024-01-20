@@ -113,11 +113,7 @@
     </PanelFoot>
   </div>
 </template>
-<script lang="ts">
-export default {
-  name: "MonthRange",
-};
-</script>
+
 <script lang="ts" setup>
 import { inject, reactive, ref, watch, computed } from "vue";
 import { provideType } from "../interface";
@@ -131,6 +127,10 @@ export interface DateRangeProps {
   startTime: string;
   endTime: string;
 }
+
+defineOptions({
+  name: "MonthRange",
+});
 
 const props = withDefaults(defineProps<DateRangeProps>(), {});
 

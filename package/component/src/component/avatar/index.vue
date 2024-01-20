@@ -4,11 +4,6 @@
  * @LastEditTime: 2023-11-14 09:32:20
  * @LastEditors: baobaobao
 -->
-<script lang="ts">
-export default {
-  name: "LayAvatar",
-};
-</script>
 
 <script setup lang="ts">
 import { computed, ref, useSlots, onMounted, onUnmounted, toRefs } from "vue";
@@ -25,6 +20,10 @@ export interface AvatarProps {
   autoFixSize?: boolean;
   fallback?: string;
 }
+
+defineOptions({
+  name: "LayAvatar",
+});
 
 const props = withDefaults(defineProps<AvatarProps>(), {
   size: "md",

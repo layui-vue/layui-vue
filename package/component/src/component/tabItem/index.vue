@@ -1,9 +1,3 @@
-<script lang="ts">
-export default {
-  name: "LayTabItem",
-};
-</script>
-
 <script setup lang="ts">
 import {
   watch,
@@ -21,6 +15,10 @@ export interface TabItemProps {
   icon?: string | Function;
   closable?: boolean | string;
 }
+
+defineOptions({
+  name: "LayTabItem",
+});
 
 const props = withDefaults(defineProps<TabItemProps>(), {
   closable: true,

@@ -1,9 +1,3 @@
-<script lang="ts">
-export default {
-  name: "LaySplitPanelItem",
-};
-</script>
-
 <script setup lang="ts">
 import {
   ref,
@@ -13,7 +7,6 @@ import {
   getCurrentInstance,
   onBeforeUnmount,
   reactive,
-  withDefaults,
 } from "vue";
 
 import type { ComputedRef } from "vue";
@@ -21,6 +14,10 @@ import type { ComputedRef } from "vue";
 export interface StepItemProps {
   space?: string | number;
 }
+
+defineOptions({
+  name: "LaySplitPanelItem",
+});
 
 const props = withDefaults(defineProps<StepItemProps>(), {
   space: "",

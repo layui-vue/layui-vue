@@ -1,8 +1,3 @@
-<script lang="ts">
-export default {
-  name: "LayTag",
-};
-</script>
 <script lang="ts" setup>
 import "./index.less";
 import { LayIcon } from "@layui/icons-vue";
@@ -21,6 +16,10 @@ export interface TagProps {
   maxWidth?: string;
   variant?: TagVariant;
 }
+
+defineOptions({
+  name: "LayTag",
+});
 
 const props = withDefaults(defineProps<TagProps>(), {
   size: "md",

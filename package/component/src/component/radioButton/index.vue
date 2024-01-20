@@ -1,15 +1,9 @@
-<script lang="ts">
+<script setup lang="ts">
+import "./index.less";
 import { computed, inject } from "vue";
 import { RadioButtonSize } from "./typing";
 import { ButtonType } from "../button/interface";
 import useProps from "./index.hooks";
-export default {
-  name: "LayRadioButton",
-};
-</script>
-
-<script setup lang="ts">
-import "./index.less";
 import LayButton from "../button/index.vue";
 
 export interface RadioProps {
@@ -25,6 +19,10 @@ export interface RadioButtonEmits {
   (e: "update:modelValue", value: string | boolean | number | undefined): void;
   (e: "change", value: string | boolean | number | undefined): void;
 }
+
+defineOptions({
+  name: "LayRadioButton",
+});
 
 const props = withDefaults(defineProps<RadioProps>(), {});
 

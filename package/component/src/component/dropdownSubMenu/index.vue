@@ -1,9 +1,3 @@
-<script lang="ts">
-export default {
-  name: "LayDropdownSubMenu",
-};
-</script>
-
 <script setup lang="ts">
 import { inject, Ref } from "vue";
 import LayDropdown from "../dropdown/index.vue";
@@ -20,6 +14,10 @@ export interface DropdownSubMenuProps {
   disabled?: boolean;
   contentOffset?: number;
 }
+
+defineOptions({
+  name: "LayDropdownSubMenu",
+});
 
 const props = withDefaults(defineProps<DropdownSubMenuProps>(), {
   trigger: "hover",

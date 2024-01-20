@@ -1,11 +1,5 @@
-<script lang="ts">
-export default {
-  name: "LayStep",
-};
-</script>
-
 <script setup lang="ts">
-import { ref, watch, provide, withDefaults } from "vue";
+import { ref, watch, provide } from "vue";
 import "./index.less";
 
 export interface StepProps {
@@ -17,6 +11,10 @@ export interface StepProps {
   composition?: string;
   simple?: boolean;
 }
+
+defineOptions({
+  name: "LayStep",
+});
 
 const props = withDefaults(defineProps<StepProps>(), {
   active: 0,

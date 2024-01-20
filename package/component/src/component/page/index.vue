@@ -4,11 +4,6 @@
  * @LastEditTime: 2023-10-23 18:00:53
  * @LastEditors: baobaobao
 -->
-<script lang="ts">
-export default {
-  name: "LayPage",
-};
-</script>
 
 <script setup lang="ts">
 import "./index.less";
@@ -65,6 +60,10 @@ export interface PageProps {
   disabled?: boolean;
   layout?: LayoutKey[];
 }
+
+defineOptions({
+  name: "LayPage",
+});
 
 const props = withDefaults(defineProps<PageProps>(), {
   limit: 10,

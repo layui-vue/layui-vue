@@ -17,12 +17,6 @@
   </div>
 </template>
 
-<script lang="ts">
-export default {
-  name: "LayLoading",
-};
-</script>
-
 <script setup lang="ts">
 import "./index.less";
 import { ref, watch } from "vue";
@@ -33,6 +27,10 @@ export interface LoadingProps {
   type?: number;
   tip?: string;
 }
+
+defineOptions({
+  name: "LayLoading",
+});
 
 const props = withDefaults(defineProps<LoadingProps>(), {
   loading: true,

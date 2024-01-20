@@ -1,9 +1,3 @@
-<script lang="ts">
-export default {
-  name: "LayTimelineItem",
-};
-</script>
-
 <script setup lang="ts">
 import { useSlots } from "vue";
 
@@ -11,6 +5,10 @@ export interface TimelineItemProps {
   title?: string;
   simple?: boolean;
 }
+
+defineOptions({
+  name: "LayTimelineItem",
+});
 
 const slot = useSlots();
 

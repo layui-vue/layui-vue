@@ -1,9 +1,3 @@
-<script lang="ts">
-export default {
-  name: "LayField",
-};
-</script>
-
 <script setup lang="ts">
 import "./index.less";
 import { useSlots } from "vue";
@@ -11,6 +5,10 @@ import { useSlots } from "vue";
 export interface FieldProps {
   title?: string;
 }
+
+defineOptions({
+  name: "LayField",
+});
 
 const slot = useSlots();
 const props = defineProps<FieldProps>();
