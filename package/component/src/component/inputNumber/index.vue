@@ -143,23 +143,6 @@ const inputValue = computed(() => {
   return currentValue;
 });
 
-const inputValue = computed(() => {
-  // 处理用户输入值
-  // 后续触发input-change fn 二次format精度
-  if (userInput.value !== null) {
-    return userInput.value;
-  }
-  let currentValue: number | string | undefined | null = num.value;
-  if (currentValue == null) return "";
-  if (isNumber(currentValue)) {
-    if (Number.isNaN(currentValue)) return "";
-    if (!isUndefined(props.precision)) {
-      currentValue = currentValue.toFixed(props.precision);
-    }
-  }
-  return currentValue;
-});
-
 watch(
   () => props.modelValue,
   (val) => {
