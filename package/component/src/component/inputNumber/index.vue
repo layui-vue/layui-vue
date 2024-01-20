@@ -3,11 +3,11 @@ import "./index.less";
 import layInput from "../input/index.vue";
 import { LayIcon } from "@layui/icons-vue";
 import layButton from "../button/index.vue";
-import { ref, watch, computed, Ref } from "vue";
+import { watch, withDefaults, computed, Ref, ref } from "vue";
 import { InputNumberSize } from "./interface";
-import { add, sub } from "./math";
 import useProps from "./index.hooks";
 import { vRepeatClick } from "../../directives";
+import { isUndefined, isNumber } from "../../utils";
 
 export interface InputNumberProps {
   modelValue?: number;
@@ -17,6 +17,7 @@ export interface InputNumberProps {
   size?: InputNumberSize;
   step?: number;
   stepStrictly?: boolean;
+  precision?: number;
   position?: "right";
   min?: number;
   max?: number;
@@ -38,82 +39,207 @@ const props = withDefaults(defineProps<InputNumberProps>(), {
 
 const { size } = useProps(props);
 
-const emit = defineEmits(["update:modelValue", "change"]);
-let num: Ref<number> = ref(props.modelValue);
+const emit = defineEmits([
+  "update:modelValue",
+  "change",
+  "input",
+  "focus",
+  "blur",
+]);
+let num: Ref<number | null | undefined> = ref(props.modelValue);
+let userInput: Ref<string | null | undefined> = ref(null);
 
-watch(num, (val) => {
-  if (props.max !== Infinity && val > props.max) {
-    num.value = props.max;
-    return;
+const formatModelValue = (value: number | string | null | undefined) => {
+  const { max, min, step, stepStrictly, precision } = props;
+
+  if (min > max) {
+    throw new Error("input-number: props.max应大于props.min");
   }
-  if (props.min !== -Infinity && val < props.min) {
-    num.value = props.min;
-    return;
+
+  let newValue = Number(value);
+  if (stepStrictly) {
+    newValue = toPrecision(Math.round(newValue / step) * step, precision);
   }
-  if (isNumber(num.value)) {
-    tempValue.value = Number(num.value);
-    emit("update:modelValue", tempValue.value);
-    emit("change", tempValue.value);
+
+  if (!isUndefined(precision)) {
+    newValue = toPrecision(newValue, precision);
   }
+
+  if (newValue > max || newValue < min) {
+    newValue = newValue > max ? max : min;
+    emit("update:modelValue", newValue);
+  }
+  return newValue;
+};
+
+/**
+ * 对value进行精度处理
+ * @param value value
+ * @param pre 精度值
+ */
+const toPrecision = (value: number, pre?: number) => {
+  if (!pre) pre = defaultPrecision.value;
+  if (pre === 0) return Math.round(value);
+
+  let StringValue = String(value);
+  const pointPos = StringValue.indexOf(".");
+  if (pointPos === -1) return value;
+  const nums = StringValue.replace(".", "").split("");
+  const datum = nums[pointPos + pre];
+  if (!datum) return value;
+  const length = StringValue.length;
+  if (StringValue.charAt(length - 1) === "5") {
+    StringValue = `${StringValue.slice(0, Math.max(0, length - 1))}6`;
+  }
+  return Number.parseFloat(Number(StringValue).toFixed(pre));
+};
+
+// 获取精度
+const getPrecision = (value: number) => {
+  if (!value) return 0;
+  const valueString = value.toString();
+  const dotPosition = valueString.indexOf(".");
+  let precision = 0;
+  if (dotPosition !== -1) {
+    precision = valueString.length - dotPosition - 1;
+  }
+  return precision;
+};
+
+const ensurePrecision = (val: number, coefficient: 1 | -1 = 1) => {
+  if (!isNumber(val)) return num.value;
+  // Solve the accuracy problem of JS decimal calculation by converting the value to integer.
+  return toPrecision(val + props.step * coefficient);
+};
+
+const defaultPrecision = computed(() => {
+  // 获得step的precision
+  const stepPrecision = getPrecision(props.step);
+
+  if (!isUndefined(props.precision)) {
+    if (stepPrecision > props.precision) {
+      console.warn("input-number: props.precision不应小于props.step的小数位");
+    }
+    return props.precision;
+  } else {
+    return Math.max(getPrecision(props.modelValue), stepPrecision);
+  }
+});
+
+const inputValue = computed(() => {
+  // 处理用户输入值
+  // 后续触发input-change fn 二次format精度
+  if (userInput.value !== null) {
+    return userInput.value;
+  }
+  let currentValue: number | string | undefined | null = num.value;
+  if (currentValue == null) return "";
+  if (isNumber(currentValue)) {
+    if (Number.isNaN(currentValue)) return "";
+    if (!isUndefined(props.precision)) {
+      currentValue = currentValue.toFixed(props.precision);
+    }
+  }
+  return currentValue;
 });
 
 watch(
   () => props.modelValue,
   (val) => {
-    if (val !== num.value) {
-      num.value = props.modelValue;
+    const newUserInput = formatModelValue(userInput.value);
+    const newValue = formatModelValue(val);
+    if (
+      !isNumber(newUserInput) &&
+      (!newUserInput || newUserInput !== newValue)
+    ) {
+      num.value = newValue;
+      userInput.value = null;
     }
+  },
+  {
+    immediate: true,
   }
 );
 
-const tempValue: Ref<number> = ref(0);
+const setNum = (
+  value: number | string | null | undefined,
+  emitChange = true
+) => {
+  const oldVal = num.value;
+  const newVal = formatModelValue(value);
 
-const minControl = computed(() => {
-  if (props.disabled) {
-    return true;
-  }
-  if (props.min !== -Infinity) {
-    return Number(props.min) >= num.value;
-  }
-});
-
-const maxControl = computed(() => {
-  if (props.disabled) {
-    return true;
-  }
-  if (props.max !== Infinity) {
-    return Number(props.max) <= num.value;
-  }
-});
-
-const addition = function () {
-  num.value = add(num.value, props.step);
-};
-
-const subtraction = function () {
-  num.value = sub(num.value, props.step);
-};
-
-const inputChange = function () {
-  if (isNumber(num.value)) {
-    tempValue.value = Number(num.value);
+  if (!emitChange) {
+    emit("update:modelValue", newVal!);
     return;
   }
-  num.value = tempValue.value;
+
+  if (oldVal === newVal) return;
+  userInput.value = null;
+  emit("update:modelValue", newVal!);
+  emit("change", newVal!, oldVal!);
+
+  num.value = newVal;
 };
 
-const inputBlur = function (event: FocusEvent) {
-  // @ts-ignore
-  const value = event.target?.value === "-" ? 0 : event.target?.value;
-  const { step, stepStrictly } = props;
-  if (stepStrictly) {
-    num.value = Math.round(value / step) * step;
+const onInput = (value: string) => {
+  userInput.value = value;
+  const newVal = value === "" ? null : Number(value);
+  setNum(newVal, false);
+};
+
+const onChange = (value: string) => {
+  const newVal = value === "" ? null : Number(value);
+  if ((isNumber(newVal) && !Number.isNaN(newVal)) || value === "") {
+    setNum(newVal);
   }
+  userInput.value = null;
 };
 
-const isNumber = function (num: any) {
-  return !isNaN(num);
+const onBlur = (event: FocusEvent) => {
+  emit("blur", event);
 };
+
+const onFocus = (event: FocusEvent) => {
+  emit("focus", event);
+};
+
+const addition = () => {
+  // maxDisabled 防止用户通过控制台清除disabled 属性
+  if (props.disabledInput || maxDisabled.value) return;
+  const value = Number(inputValue.value) || 0;
+  const newVal = ensurePrecision(value);
+  setNum(newVal);
+};
+
+const subtraction = () => {
+  // minDisabled 防止用户通过控制台清除disabled 属性
+  if (props.disabledInput || minDisabled.value) return;
+  const value = Number(inputValue.value) || 0;
+  const newVal = ensurePrecision(value, -1);
+  setNum(newVal);
+};
+
+const minDisabled = computed(() => {
+  if (props.disabled) {
+    return true;
+  }
+  return (
+    props.min !== -Infinity &&
+    isNumber(props.modelValue) &&
+    Number(props.min) >= props.modelValue
+  );
+});
+
+const maxDisabled = computed(() => {
+  if (props.disabled) {
+    return true;
+  }
+  return (
+    props.max !== Infinity &&
+    isNumber(props.modelValue) &&
+    Number(props.max) <= props.modelValue
+  );
+});
 </script>
 
 <template>
@@ -121,7 +247,7 @@ const isNumber = function (num: any) {
     <lay-button
       size="lg"
       v-repeat-click="subtraction"
-      :disabled="minControl"
+      :disabled="minDisabled"
       class="layui-control-btn layui-subtraction-btn"
     >
       <lay-icon
@@ -135,18 +261,20 @@ const isNumber = function (num: any) {
         :max="max"
         :min="min"
         :name="name"
-        v-model="num"
+        :modelValue="inputValue"
         :readonly="disabledInput || disabled"
         :disabled="disabledInput || disabled"
-        @input="inputChange"
-        @blur="inputBlur"
+        @input="onInput"
+        @change="onChange"
+        @blur="onBlur"
+        @focus="onFocus"
         type="number"
       />
     </div>
     <lay-button
       size="lg"
       v-repeat-click="addition"
-      :disabled="maxControl"
+      :disabled="maxDisabled"
       class="layui-control-btn layui-addition-btn"
     >
       <lay-icon

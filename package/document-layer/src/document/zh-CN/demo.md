@@ -1,29 +1,4 @@
 <fieldset class="layui-elem-field layui-field-title">
-    <legend>水印</legend>
-</fieldset>
-
-::: demo
-<template>
-    <div style="height: 300px; width: 100%; position: relative" class="lay-watermark">
-        <lay-watermark :content="content" font="20px Microsoft Yahei" element-box=".lay-watermark">
-        </lay-watermark>
-        <button @click="updateContent">改变文本</button>
-    </div>
-</template>
-
-<script setup>
-import { ref } from "vue";
-
-const content = ref('layui-vue')
-const num = ref(0)
-const updateContent = () => {
-    ++num.value
-    content.value = 'debugger' + num.value
-}
-</script>
-:::
-
-<fieldset class="layui-elem-field layui-field-title">
     <legend>消息</legend>
 </fieldset>
 
