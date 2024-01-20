@@ -15,10 +15,11 @@
   <lay-timeline>
       <lay-timeline-item title="2.14.x">
       <ul>
-        <a name="2-14-0"></a>
+        <a name="2-14-1"></a>
         <li>
           <h3>2.14.1 <span class="layui-badge-rim">xxxx-xx-xx</span></h3>
           <ul>
+              <li>[新增] input-number 组件 添加precision属性，用于控制数值精度。</li>
               <li>[优化] tooltip 组件 添加hide事件，当弹窗内容隐藏后触发。</li>
           </ul>
         </li>
