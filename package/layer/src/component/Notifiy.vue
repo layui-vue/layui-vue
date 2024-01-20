@@ -8,7 +8,7 @@
       <p>{{ content }}</p>
     </div>
     <div class="content" v-html="content" v-else></div>
-    <CloseBtnVue @click="close"></CloseBtnVue>
+    <LayIcon type="layui-icon-close" size="16" @click="handleClose"></LayIcon>
   </div>
 </template>
 <script lang="ts">
@@ -18,7 +18,8 @@ export default {
 </script>
 <script lang="ts" setup>
 import { nextTick, onMounted, ref, shallowRef } from "vue";
-import CloseBtnVue from "./CloseBtn.vue";
+import { LayIcon } from "@layui/icons-vue";
+import "@layui/layer-vue/lib/index.css";
 
 export interface LayNotifyProps {
   title: any;
@@ -35,7 +36,7 @@ const props = withDefaults(defineProps<LayNotifyProps>(), {
 const emit = defineEmits(["close"]);
 const notifyRef = shallowRef<HTMLElement | null>(null);
 
-const close = () => {
+const handleClose = () => {
   emit("close");
 };
 

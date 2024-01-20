@@ -27,6 +27,15 @@
       <ul>
         <a name="2-14-0"></a>
         <li>
+          <h3>2.14.1 <span class="layui-badge-rim">xxxx-xx-xx</span></h3>
+          <ul>
+              <li>[优化] tooltip 组件 添加hide事件，当弹窗内容隐藏后触发。</li>
+          </ul>
+        </li>
+      </ul>
+      <ul>
+        <a name="2-14-0"></a>
+        <li>
           <h3>2.14.0 <span class="layui-badge-rim">2024-01-15</span></h3>
           <ul>
               <li>[新增] select 组件 header 与 footer 插槽。</li>

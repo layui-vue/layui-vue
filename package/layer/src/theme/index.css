@@ -676,54 +676,26 @@
   font-size: 12px;
 }
 
-.layui-layer-setwin .layui-layer-min cite {
-  position: absolute;
-  width: 14px;
-  height: 2px;
-  left: 0;
-  top: 50%;
-  margin-top: -1px;
-  background-color: #2e2d3c;
+.layui-layer-setwin i {
+  position: relative;
+  width: 16px;
+  height: 16px;
+  margin-left: 10px;
+  font-size: 16px;
+  color: #333;
   cursor: pointer;
 }
 
-.layui-layer-setwin .layui-layer-min:hover cite {
-  background-color: var(--global-primary-color);
-}
-
-.layui-layer-setwin .layui-layer-max {
-  background-position: -32px -40px;
-}
-
-.layui-layer-setwin .layui-layer-max:hover {
-  background-position: -16px -40px;
-}
-
-.layui-layer-setwin .layui-layer-maxmin {
-  background-position: -65px -40px;
-}
-
-.layui-layer-setwin .layui-layer-maxmin:hover {
-  background-position: -49px -40px;
-}
-
-.layui-layer-setwin .layui-layer-close1 {
-  background-position: 1px -40px;
-  cursor: pointer;
+.layui-layer-setwin i:hover{
+  color: #55aae4;
 }
 
 .layui-layer-setwin .layui-layer-close2 {
   position: absolute;
   right: -28px;
   top: -28px;
-  width: 30px;
-  height: 30px;
+  font-size: 30px;
   margin-left: 0;
-  background-position: -149px -31px;
-}
-
-.layui-layer-setwin .layui-layer-close2:hover {
-  background-position: -180px -31px;
 }
 
 .layui-layer-btn {
@@ -1081,8 +1053,7 @@
   max-width: 100%;
 }
 
-.layui-layer-notifiy-wrapper .layui-layer-close {
-  background-position: 1px -40px;
+.layui-layer-notifiy-wrapper .layui-icon-close {
   cursor: pointer;
   width: 16px;
   height: 16px;
@@ -1092,7 +1063,7 @@
   color: #00000073;
 }
 
-.layui-layer-notifiy-wrapper .layui-layer-close:hover {
+.layui-layer-notifiy-wrapper .layui-icon-close:hover {
   opacity: 0.7;
 }
 
