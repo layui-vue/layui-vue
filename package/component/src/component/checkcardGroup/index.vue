@@ -9,11 +9,7 @@
     <slot></slot>
   </div>
 </template>
-<script lang="ts">
-export default {
-  name: "LayCheckcardGroup",
-};
-</script>
+
 <script lang="ts" setup>
 import { ref, watch, provide } from "vue";
 import "./index.less";
@@ -23,6 +19,10 @@ export interface CheckCardGroup {
   disabled?: boolean;
   single?: boolean;
 }
+
+defineOptions({
+  name: "LayCheckcardGroup",
+});
 
 const props = withDefaults(defineProps<CheckCardGroup>(), {
   modelValue: undefined,

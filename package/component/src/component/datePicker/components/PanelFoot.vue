@@ -18,17 +18,17 @@
     </div>
   </div>
 </template>
-<script lang="ts">
-export default {
-  name: "PanelFoot",
-};
-</script>
+
 <script lang="ts" setup>
 import { useI18n } from "../../../language";
 
 export interface PanelFoot {
   showNow?: boolean;
 }
+
+defineOptions({
+  name: "PanelFoot",
+});
 
 const props = withDefaults(defineProps<PanelFoot>(), {
   showNow: true,

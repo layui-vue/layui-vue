@@ -1,9 +1,3 @@
-<script lang="ts">
-export default {
-  name: "TablePage",
-};
-</script>
-
 <script lang="ts" setup>
 import { LayIcon } from "@layui/icons-vue";
 import LayPage from "../page/index.vue";
@@ -31,6 +25,10 @@ export interface TablePageProps {
   hideOnSinglePage?: boolean;
   ellipsisTooltip?: boolean;
 }
+
+defineOptions({
+  name: "TablePage",
+});
 
 const props = withDefaults(defineProps<TablePageProps>(), {
   layout: () => ["prev", "page", "next", "limits", "skip"],

@@ -1,9 +1,3 @@
-<script lang="ts">
-export default {
-  name: "LayDropdownMenuItem",
-};
-</script>
-
 <script setup lang="ts">
 import { inject, Ref } from "vue";
 import { DropdownContext, dropdownInjectionKey } from "../dropdown/interface";
@@ -11,6 +5,10 @@ import { DropdownContext, dropdownInjectionKey } from "../dropdown/interface";
 export interface DropdownMenuItemProps {
   disabled?: boolean;
 }
+
+defineOptions({
+  name: "LayDropdownMenuItem",
+});
 
 const props = withDefaults(defineProps<DropdownMenuItemProps>(), {
   disabled: false,

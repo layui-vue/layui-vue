@@ -1,9 +1,3 @@
-<script lang="ts">
-export default {
-  name: "LayCarouselItem",
-};
-</script>
-
 <script setup lang="ts">
 import {
   inject,
@@ -18,6 +12,9 @@ export interface CarouselItemProps {
   id: string;
 }
 
+defineOptions({
+  name: "LayCarouselItem",
+});
 const props = defineProps<CarouselItemProps>();
 
 const active = inject("active") as WritableComputedRef<string>;

@@ -1,9 +1,3 @@
-<script lang="ts">
-export default {
-  name: "TableRow",
-};
-</script>
-
 <script lang="ts" setup>
 import { Recordable } from "../../types";
 import { LayIcon } from "@layui/icons-vue";
@@ -46,6 +40,10 @@ export interface TableRowProps {
   getCheckboxProps: Function;
   getRadioProps: Function;
 }
+
+defineOptions({
+  name: "TableRow",
+});
 
 const slot = useSlots();
 const emit = defineEmits(TableEmit);
@@ -678,7 +676,7 @@ const checkboxProps = props.getCheckboxProps(props.data, props.index);
         v-model:selectedKeys="tableSelectedKeys"
         v-model:selectedKey="tableSelectedKey"
       >
-        <template v-for="name in columnSlotNames" v-slot:[name]="slotProp: any">
+        <template v-for="name in columnSlotNames" #[name]="slotProp: any">
           <slot
             :name="name"
             :row="slotProp.data"

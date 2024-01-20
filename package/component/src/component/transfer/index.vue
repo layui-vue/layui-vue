@@ -1,9 +1,3 @@
-<script lang="ts">
-export default {
-  name: "LayTransfer",
-};
-</script>
-
 <script setup lang="ts">
 import "./index.less";
 import LayInput from "../input/index.vue";
@@ -22,6 +16,10 @@ export interface TransferProps {
   modelValue?: Recordable[];
   searchMethod?: Function;
 }
+
+defineOptions({
+  name: "LayTransfer",
+});
 
 const slots = useSlots();
 

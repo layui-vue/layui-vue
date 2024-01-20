@@ -38,11 +38,7 @@
     </PanelFoot>
   </div>
 </template>
-<script lang="ts">
-export default {
-  name: "TimePanel",
-};
-</script>
+
 <script lang="ts" setup>
 import dayjs from "dayjs";
 import { useI18n } from "../../../language";
@@ -54,6 +50,11 @@ export interface TimePanelProps {
   modelValue: number | string;
   max?: number;
 }
+
+defineOptions({
+  name: "TimePanel",
+});
+
 const props = withDefaults(defineProps<TimePanelProps>(), {
   max: dayjs().year() + 100,
 });

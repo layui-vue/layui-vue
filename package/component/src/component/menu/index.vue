@@ -1,9 +1,3 @@
-<script lang="ts">
-export default {
-  name: "LayMenu",
-};
-</script>
-
 <script setup lang="ts">
 import { computed, ComputedRef, provide, Ref, ref, watch } from "vue";
 import { provideLevel } from "./useLevel";
@@ -20,6 +14,10 @@ export interface MenuProps {
   collapseTransition?: boolean | string;
   indent?: boolean | string; // 菜单栏是否缩进
 }
+
+defineOptions({
+  name: "LayMenu",
+});
 
 const emit = defineEmits([
   "update:selectedKey",

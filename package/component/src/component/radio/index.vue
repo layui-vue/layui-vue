@@ -1,13 +1,7 @@
-<script lang="ts">
+<script setup lang="ts">
 import { computed, inject } from "vue";
 import { RadioSize } from "./typing";
 import useProps from "./index.hooks";
-export default {
-  name: "LayRadio",
-};
-</script>
-
-<script setup lang="ts">
 import "./index.less";
 
 export interface RadioProps {
@@ -24,6 +18,9 @@ export interface RadioEmits {
   (e: "change", value: string | boolean | number | undefined): void;
 }
 
+defineOptions({
+  name: "LayRadio",
+});
 const props = withDefaults(defineProps<RadioProps>(), {});
 
 const { size } = useProps(props);

@@ -1,9 +1,3 @@
-<script lang="ts">
-export default {
-  name: "LayTextarea",
-};
-</script>
-
 <script setup lang="ts">
 import { LayIcon } from "@layui/icons-vue";
 import { computed, ref, useAttrs, watch, nextTick } from "vue";
@@ -22,6 +16,10 @@ export interface TextareaProps {
   maxlength?: number;
   autosize?: boolean | { minHeight: number; maxHeight: number };
 }
+
+defineOptions({
+  name: "LayTextarea",
+});
 
 const props = defineProps<TextareaProps>();
 

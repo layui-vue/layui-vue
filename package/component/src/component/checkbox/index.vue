@@ -1,9 +1,3 @@
-<script lang="ts">
-export default {
-  name: "LayCheckbox",
-};
-</script>
-
 <script setup lang="ts">
 import { LayIcon } from "@layui/icons-vue";
 import { computed, inject, useSlots } from "vue";
@@ -21,6 +15,10 @@ export interface CheckboxProps {
   size?: CheckboxSize;
   disabled?: boolean;
 }
+
+defineOptions({
+  name: "LayCheckbox",
+});
 
 const props = withDefaults(defineProps<CheckboxProps>(), {
   isIndeterminate: false,

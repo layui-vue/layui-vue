@@ -1,9 +1,3 @@
-<script lang="ts">
-export default {
-  name: "LayTreeSelect",
-};
-</script>
-
 <script lang="ts" setup>
 import "./index.less";
 import { StyleValue, computed, ref, watch, useSlots } from "vue";
@@ -41,6 +35,10 @@ export interface TreeSelectEmits {
 
   (e: "search", value: string | string[]): void;
 }
+
+defineOptions({
+  name: "LayTreeSelect",
+});
 
 const props = withDefaults(defineProps<TreeSelectProps>(), {
   disabled: false,

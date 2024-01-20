@@ -15,12 +15,6 @@
     </transition>
   </teleport>
 </template>
-<script lang="ts">
-const NAME = "LayPopper";
-export default {
-  name: NAME,
-};
-</script>
 
 <script setup lang="ts">
 import "./index.less";
@@ -60,6 +54,10 @@ export interface PopperProps {
   popperClass?: string | Array<string | object> | object;
   popperStyle?: StyleValue;
 }
+
+defineOptions({
+  name: "LayPopper",
+});
 
 const props = withDefaults(defineProps<PopperProps>(), {
   position: "top",

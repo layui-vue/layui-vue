@@ -1,9 +1,3 @@
-<script lang="ts">
-export default {
-  name: "LayTree",
-};
-</script>
-
 <script lang="ts" setup>
 import TreeNode from "./TreeNode.vue";
 import { computed, useSlots, watch, ref, onMounted, nextTick } from "vue";
@@ -48,6 +42,10 @@ interface TreeEmits {
   (e: "node-click", node: OriginalTreeData): void;
   (e: "update:selectedKey", id: string | number): void;
 }
+
+defineOptions({
+  name: "LayTree",
+});
 
 const props = withDefaults(defineProps<TreeProps>(), {
   showCheckbox: false,
@@ -187,7 +185,7 @@ watch(
       :tail-node-icon="tailNodeIcon"
       @node-click="handleClick"
     >
-      <template v-if="$slots.title" v-slot:title="{ data }">
+      <template v-if="$slots.title" #title="{ data }">
         <slot name="title" :data="data"></slot>
       </template>
     </tree-node>

@@ -4,14 +4,8 @@
   </div>
 </template>
 
-<script lang="ts">
-export default {
-  name: "LayQrcode",
-};
-</script>
-
 <script lang="ts" setup>
-import { ref, onMounted, defineProps, nextTick, watch } from "vue";
+import { ref, onMounted, nextTick, watch } from "vue";
 import QRCode from "qrcode";
 import "./index.less";
 
@@ -22,6 +16,9 @@ export interface QrcodeProps {
   color?: string;
 }
 
+defineOptions({
+  name: "LayQrcode",
+});
 const props = defineProps<QrcodeProps>();
 
 const qrcode = ref<HTMLElement | undefined>();

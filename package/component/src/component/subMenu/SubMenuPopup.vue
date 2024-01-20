@@ -1,9 +1,3 @@
-<script lang="ts">
-export default {
-  name: "SubMenuPopup",
-};
-</script>
-
 <script setup lang="ts">
 import { computed, inject, Ref } from "vue";
 import LayDropdown from "../dropdown/index.vue";
@@ -14,6 +8,10 @@ export interface SubMenuPopupProps {
   id?: string;
   title?: string;
 }
+
+defineOptions({
+  name: "SubMenuPopup",
+});
 
 const props = defineProps<SubMenuPopupProps>();
 

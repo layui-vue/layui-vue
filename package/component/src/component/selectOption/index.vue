@@ -1,9 +1,3 @@
-<script lang="ts">
-export default {
-  name: "LaySelectOption",
-};
-</script>
-
 <script setup lang="ts">
 import LayCheckbox from "../checkbox/index.vue";
 import {
@@ -22,6 +16,9 @@ export interface SelectOptionProps {
   keyword?: string;
 }
 
+defineOptions({
+  name: "LaySelectOption",
+});
 const props = withDefaults(defineProps<SelectOptionProps>(), {
   disabled: false,
   keyword: "",

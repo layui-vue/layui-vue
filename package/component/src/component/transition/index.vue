@@ -10,12 +10,6 @@
   </template>
 </template>
 
-<script lang="ts">
-export default {
-  name: "LayTransition",
-};
-</script>
-
 <script setup lang="ts">
 import { provide } from "vue";
 import LayCollapseTransition from "./transitions/collapseTransition.vue";
@@ -26,6 +20,10 @@ export interface TransitionProps {
   enable?: boolean;
   time?: string | number;
 }
+
+defineOptions({
+  name: "LayTransition",
+});
 
 const props = withDefaults(defineProps<TransitionProps>(), {
   type: "collapse",

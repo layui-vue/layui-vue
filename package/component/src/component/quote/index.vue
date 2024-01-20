@@ -1,9 +1,3 @@
-<script lang="ts">
-export default {
-  name: "LayQuote",
-};
-</script>
-
 <script setup lang="ts">
 import "./index.less";
 
@@ -11,6 +5,9 @@ export interface QuoteProps {
   type?: string;
 }
 
+defineOptions({
+  name: "LayQuote",
+});
 const props = defineProps<QuoteProps>();
 </script>
 

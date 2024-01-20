@@ -1,9 +1,3 @@
-<script lang="ts">
-export default {
-  name: "LaySelect",
-};
-</script>
-
 <script setup lang="ts">
 import "./index.less";
 import {
@@ -54,6 +48,10 @@ export interface SelectEmits {
   (e: "change", value: string | number | object): void;
   (e: "search", value: string): void;
 }
+
+defineOptions({
+  name: "LaySelect",
+});
 
 const props = withDefaults(defineProps<SelectProps>(), {
   collapseTagsTooltip: true,

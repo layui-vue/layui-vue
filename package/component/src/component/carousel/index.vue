@@ -1,13 +1,6 @@
-<script lang="ts">
-export default {
-  name: "LayCarousel",
-};
-</script>
-
 <script setup lang="ts">
 import "./index.less";
 import {
-  withDefaults,
   provide,
   useSlots,
   ref,
@@ -30,6 +23,10 @@ export interface CarouselProps {
   pauseOnHover?: boolean;
   interval?: number;
 }
+
+defineOptions({
+  name: "LayCarousel",
+});
 
 const props = withDefaults(defineProps<CarouselProps>(), {
   width: "100%",

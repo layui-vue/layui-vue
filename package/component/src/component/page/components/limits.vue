@@ -22,16 +22,15 @@
   </div>
 </template>
 
-<script lang="ts">
-export default {
-  name: "LayPageLimits",
-};
-</script>
 <script setup lang="ts">
 import { useI18n } from "../../../language";
 import { usePage } from "../usePage";
 import LaySelect from "../../select/index";
 import LaySelectOption from "../../selectOption/index";
+
+defineOptions({
+  name: "LayPageLimits",
+});
 const { t } = useI18n();
 const { inlimit, disabled, limits } = usePage();
 // 国际化分页文字

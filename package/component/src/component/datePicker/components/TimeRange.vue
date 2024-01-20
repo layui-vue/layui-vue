@@ -95,11 +95,7 @@
     </PanelFoot>
   </div>
 </template>
-<script lang="ts">
-export default {
-  name: "TimePanel",
-};
-</script>
+
 <script lang="ts" setup>
 import dayjs from "dayjs";
 import { useI18n } from "../../../language";
@@ -118,6 +114,10 @@ export interface TimeRangeProps {
   startTime: string;
   endTime: string;
 }
+
+defineOptions({
+  name: "TimeRange",
+});
 
 const props = withDefaults(defineProps<TimeRangeProps>(), {});
 const emits = defineEmits([

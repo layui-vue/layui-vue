@@ -1,24 +1,22 @@
 <template>
   <transition
-    v-on:before-enter="beforeEnter"
-    v-on:enter="enter"
-    v-on:after-enter="afterEnter"
-    v-on:before-leave="beforeLeave"
-    v-on:leave="leave"
-    v-on:after-leave="afterLeave"
+    @before-enter="beforeEnter"
+    @enter="enter"
+    @after-enter="afterEnter"
+    @before-leave="beforeLeave"
+    @leave="leave"
+    @after-leave="afterLeave"
   >
     <slot></slot>
   </transition>
 </template>
 
-<script lang="ts">
-export default {
-  name: "LayCollapseTransition",
-};
-</script>
-
 <script setup lang="ts">
 import { inject } from "vue";
+
+defineOptions({
+  name: "LayCollapseTransition",
+});
 
 const time = inject("time");
 const elTransition = `${time}s height ease-in-out, ${time}s padding-top ease-in-out, ${time}s padding-bottom ease-in-out`;

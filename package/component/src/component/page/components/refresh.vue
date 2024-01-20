@@ -10,13 +10,12 @@
   </div>
 </template>
 
-<script lang="ts">
-export default {
-  name: "LayPageRefresh",
-};
-</script>
 <script setup lang="ts">
 import { LayIcon } from "@layui/icons-vue";
 import { usePage } from "../usePage";
+
+defineOptions({
+  name: "LayPageRefresh",
+});
 const { currentPage, inlimit, disabled, limits, handleRefresh } = usePage();
 </script>

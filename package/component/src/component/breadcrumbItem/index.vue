@@ -12,18 +12,16 @@
   </span>
 </template>
 
-<script lang="ts">
-export default {
-  name: "LayBreadcrumbItem",
-};
-</script>
-
 <script setup lang="ts">
 import { inject } from "vue";
 
 export interface BreadcrumbItemProps {
   title?: string;
 }
+
+defineOptions({
+  name: "LayBreadcrumbItem",
+});
 
 const props = defineProps<BreadcrumbItemProps>();
 

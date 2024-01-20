@@ -1,9 +1,3 @@
-<script lang="ts">
-export default {
-  name: "LayCol",
-};
-</script>
-
 <script setup lang="ts">
 import { computed } from "vue";
 
@@ -17,6 +11,10 @@ export interface ColProps {
   smOffset?: string | number;
   lgOffset?: string | number;
 }
+
+defineOptions({
+  name: "LayCol",
+});
 
 const props = defineProps<ColProps>();
 

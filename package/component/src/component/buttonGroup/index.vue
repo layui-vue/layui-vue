@@ -1,11 +1,9 @@
-<script lang="ts">
-export default {
-  name: "LayButtonGroup",
-};
-</script>
-
 <script setup lang="ts">
 import "./index.less";
+
+defineOptions({
+  name: "LayButtonGroup",
+});
 </script>
 
 <template>

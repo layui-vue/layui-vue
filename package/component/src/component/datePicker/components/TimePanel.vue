@@ -51,11 +51,7 @@
     </PanelFoot>
   </div>
 </template>
-<script lang="ts">
-export default {
-  name: "TimePanel",
-};
-</script>
+
 <script lang="ts" setup>
 import dayjs from "dayjs";
 import { useI18n } from "../../../language";
@@ -71,6 +67,10 @@ export interface hmsType {
 export interface TimePanelProps {
   modelValue: hmsType;
 }
+
+defineOptions({
+  name: "TimePanel",
+});
 
 const props = withDefaults(defineProps<TimePanelProps>(), {});
 const emits = defineEmits(["update:modelValue", "ok"]);

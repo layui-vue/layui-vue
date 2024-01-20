@@ -1,9 +1,3 @@
-<script lang="ts">
-export default {
-  name: "LayStepItem",
-};
-</script>
-
 <script setup lang="ts">
 import {
   ref,
@@ -13,7 +7,6 @@ import {
   getCurrentInstance,
   onBeforeUnmount,
   reactive,
-  withDefaults,
 } from "vue";
 import { LayIcon } from "@layui/icons-vue";
 import type { ComputedRef } from "vue";
@@ -24,6 +17,10 @@ export interface StepItemProps {
   icon?: string;
   status?: string;
 }
+
+defineOptions({
+  name: "LayStepItem",
+});
 
 const props = withDefaults(defineProps<StepItemProps>(), {
   title: "",
