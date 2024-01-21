@@ -449,7 +449,7 @@ const openIndex = function() {
 const openClose2 = function() {
     layer.open({
         type: 1,
-        closeBtn: 2,
+        closeBtn: "2",
         title: "其他关闭",
         content: "内容"
     })    
