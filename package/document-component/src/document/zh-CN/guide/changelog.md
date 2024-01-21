@@ -20,6 +20,7 @@
           <h3>2.14.1 <span class="layui-badge-rim">2024-01-21</span></h3>
           <ul>
               <li>[新增] input-number 组件 添加precision属性，用于控制数值精度。</li>
+              <li>[优化] table 组件 default-toolbar 的 border-radius 属性跟随主题。</li>
               <li>[优化] tooltip 组件 添加hide事件，当弹窗内容隐藏后触发。</li>
               <li>[优化] layer 组件操作栏 icon 资源，替换为 @layui/icons-vue。</li>
               <li>[优化] layer 组件操作栏 icon 主题跟随主题色。</li>
