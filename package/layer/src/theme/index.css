@@ -687,7 +687,7 @@
 }
 
 .layui-layer-setwin i:hover{
-  color: #55aae4;
+  color: var(--global-primary-color);
 }
 
 .layui-layer-setwin .layui-layer-close2 {
