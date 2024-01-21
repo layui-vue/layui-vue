@@ -3,7 +3,7 @@ import "./index.less";
 import layInput from "../input/index.vue";
 import { LayIcon } from "@layui/icons-vue";
 import layButton from "../button/index.vue";
-import { watch, withDefaults, computed, Ref, ref } from "vue";
+import { watch, computed, Ref, ref } from "vue";
 import { InputNumberSize } from "./interface";
 import useProps from "./index.hooks";
 import { vRepeatClick } from "../../directives";
