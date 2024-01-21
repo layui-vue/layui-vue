@@ -32,7 +32,7 @@
           >
           <span
             >{{ t("home.download") }}：<em class="site-showdowns"
-              >105,129</em
+              >155,129</em
             ></span
           >
         </div>
@@ -43,7 +43,7 @@
             rel="nofollow"
             class="site-star"
           >
-            <i class="layui-icon"></i> Star <cite id="getStars">2642</cite>
+            <i class="layui-icon"></i> Star <cite id="getStars">2807</cite>
           </a>
           <a
             href="https://gitee.com/layui/layui-vue"
