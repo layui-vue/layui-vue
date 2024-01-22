@@ -1,11 +1,16 @@
 <script setup lang="ts">
 import { LayIcon } from "@layui/icons-vue";
 import LayCheckbox from "../checkbox/index.vue";
-import { computed, Ref, useSlots } from "vue";
+import { computed, useSlots } from "vue";
 import { Tree } from "./tree";
 import { Nullable } from "../../types";
 import LayTransition from "../transition/index.vue";
-import { StringOrNumber, CustomKey, CustomString } from "./tree.type";
+import {
+  StringOrNumber,
+  CustomKey,
+  CustomString,
+  ReplaceFieldsOptions,
+} from "./tree.type";
 
 export interface TreeData {
   id: CustomKey;
@@ -18,6 +23,7 @@ export interface TreeData {
   isLeaf: boolean;
   hasNextSibling: boolean;
   parentNode: Nullable<TreeData>;
+  [key: string]: any;
 }
 
 export interface TreeNodeProps {
@@ -30,6 +36,7 @@ export interface TreeNodeProps {
   collapseTransition: boolean;
   onlyIconControl: boolean;
   tailNodeIcon: string | boolean;
+  replaceFields: ReplaceFieldsOptions;
 }
 
 interface TreeNodeEmits {
@@ -39,7 +46,7 @@ interface TreeNodeEmits {
 defineOptions({
   name: "TreeNode",
 });
-const slots = useSlots();
+
 const props = defineProps<TreeNodeProps>();
 const emit = defineEmits<TreeNodeEmits>();
 
@@ -149,7 +156,7 @@ const isChildAllSelected = computed(() => {
   >
     <div
       class="layui-tree-entry"
-      :class="{ 'layui-this': selectedKey === node.id }"
+      :class="{ 'layui-this': selectedKey === node[replaceFields.id] }"
       @click="handleRowClick(node)"
     >
       <div class="layui-tree-main">
@@ -180,7 +187,9 @@ const isChildAllSelected = computed(() => {
           }"
           @click.stop="handleTitleClick(node)"
         >
-          <slot name="title" :data="node">{{ node.title }}</slot>
+          <slot name="title" :data="node">{{
+            node[props.replaceFields.title]
+          }}</slot>
         </span>
       </div>
     </div>
@@ -200,6 +209,7 @@ const isChildAllSelected = computed(() => {
           :checkStrictly="checkStrictly"
           :only-icon-control="onlyIconControl"
           :tail-node-icon="tailNodeIcon"
+          :replace-fields="replaceFields"
           @node-click="recursiveNodeClick"
         >
           <template v-if="$slots.title" #title="slotProp: { data: any }">

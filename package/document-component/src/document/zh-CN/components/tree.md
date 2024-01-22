@@ -515,6 +515,96 @@ import { ref } from 'vue';
 
 :::
 
+::: title 自定义字段
+:::
+
+::: demo 使用 `replaceFields` 替换 `data` 中的字段名
+
+<template>
+  <lay-tree
+    :data="data9"
+		:showCheckbox="showCheckbox2"
+		v-model:checkedKeys="checkedKeys2"
+		:replaceFields="replaceFields"
+  >
+  </lay-tree>
+</template>
+
+<script setup>
+import { ref } from 'vue';
+
+const checkedKeys2 = ref([]);
+const showCheckbox2 = ref(true);
+
+const replaceFields = ref({
+	id: 'key',
+	title: 'name',
+	children: 'child'
+})
+
+const data9 = ref([{
+	name: '一级1',
+	key: 1,
+	spread: true,
+	child: [
+		{
+			name: '一级1-1',
+			key: 11,
+			child: [
+				{
+					name: '一级1-1-1',
+					key: 111,
+				},
+				{
+					name: '一级1-1-2',
+					key: 112,
+				}
+			]
+		},
+		{
+			name: '一级1-2',
+			key: 12,
+			child: [
+				{
+					name: '一级1-2-1',
+					key: 121,
+				},
+				{
+					name: '一级1-2-2',
+					key: 122,
+				}
+			]
+		}
+	]
+},
+{
+	name: '一级2',
+	key: 2,
+	spread: true,
+	child: [
+		{
+			name: '一级2-1',
+			key: 21,
+			spread: true,
+		},
+		{
+			name: '一级2-2',
+			key: 22,
+			spread: true,
+			child: [
+				{
+					name: '一级2-2-1',
+					key: 221,
+					spread: true,
+				}
+			]
+		}
+	]
+}]);
+</script>
+
+:::
+
 ::: title Tree 属性
 :::
 
@@ -531,6 +621,7 @@ import { ref } from 'vue';
 | collapse-transition              | 是否开启展示收起动画                     | false           | |
 | selectedKey                      | 选中节点                                | --              | |
 | tail-node-icon                   | 尾节点图标，通过设置 false 关闭尾节点图标  | 图标集          | |
+| replace-fields                   | 替换data中`id` `title` `children` 字段名  | {id: "id", title: "title", children: "children"}          | |
 
 :::
 

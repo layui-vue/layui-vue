@@ -1,4 +1,8 @@
-import { OriginalTreeData, StringOrNumber } from "./tree.type";
+import {
+  OriginalTreeData,
+  StringOrNumber,
+  ReplaceFieldsOptions,
+} from "./tree.type";
 import { Nullable } from "../../types";
 
 type CustomKey = string | number;
@@ -15,11 +19,7 @@ export interface TreeData {
   isLeaf: boolean;
   hasNextSibling: boolean;
   parentNode: Nullable<TreeData>;
-}
-interface ReplaceFields {
-  id: string;
-  title: string;
-  children: string;
+  [key: string]: any;
 }
 interface TreeConfig {
   checkStrictly: boolean | string;
@@ -28,7 +28,7 @@ interface TreeConfig {
   expandKeys: StringOrNumber[];
   nodeMap: Map<StringOrNumber, TreeData>;
   originMap: Map<StringOrNumber, OriginalTreeData>;
-  replaceFields: ReplaceFields;
+  replaceFields: ReplaceFieldsOptions;
 }
 
 class Tree {
@@ -60,7 +60,7 @@ class Tree {
       data = origin;
     }
     const nodeList: TreeData[] = [];
-    const { children } = this.config.replaceFields;
+    const { children, id } = this.config.replaceFields;
 
     const len = data.length;
     for (let i = 0; i < len; i++) {
@@ -69,7 +69,7 @@ class Tree {
       const nodeHasChildren = !!Reflect.get(node, children);
 
       if (nodeHasChildren) {
-        Reflect.set(node, children, this.createTree(nodeChildren, node.id));
+        Reflect.set(node, "children", this.createTree(nodeChildren, node[id]));
       }
 
       nodeList.push(node);
@@ -133,9 +133,10 @@ class Tree {
   }
 
   setChildrenChecked(checked: boolean, nodes: TreeData[]) {
-    var ableCount = 0;
-    var checkCount = 0;
+    let ableCount = 0;
+    let checkCount = 0;
     const len = nodes.length;
+
     this.treeForeach(nodes, (node: any) => {
       if (!node.isDisabled) {
         ableCount = ableCount + 1;
@@ -197,10 +198,11 @@ class Tree {
     const expandKeys = [];
     const checkedKeys = [];
     const iterator = this.config.nodeMap[Symbol.iterator]();
+    const { id: fId } = this.config.replaceFields;
     let next = iterator.next();
     while (!next.done) {
       const [, node] = next.value;
-      const id = Reflect.get(node, this.config.replaceFields.id);
+      const id = Reflect.get(node, fId);
       if (node.isChecked) {
         checkedKeys.push(id);
       }

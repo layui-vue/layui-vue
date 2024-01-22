@@ -10,6 +10,8 @@ import LayTagInput from "../tagInput/index.vue";
 import LayDropdown from "../dropdown/index.vue";
 import LayTree from "../tree/index.vue";
 import useProps from "./index.hooks";
+import { fillFieldNames } from "../tree/utils";
+import { ReplaceFieldsOptionsOptional } from "../tree/tree.type";
 
 export interface TreeSelectProps {
   data: any;
@@ -26,6 +28,7 @@ export interface TreeSelectProps {
   searchNodeMethod?: Function;
   contentClass?: string | Array<string | object> | object;
   contentStyle?: StyleValue;
+  replaceFields?: ReplaceFieldsOptionsOptional;
 }
 
 export interface TreeSelectEmits {
@@ -65,6 +68,8 @@ const composing = ref(false);
 const emits = defineEmits<TreeSelectEmits>();
 const lastSelectedValue = ref();
 
+const _replaceFields = computed(() => fillFieldNames(props.replaceFields));
+
 const selectedValue = computed({
   get() {
     return props.multiple && props.modelValue == null ? [] : props.modelValue;
@@ -96,13 +101,14 @@ const hasTitleSlot = computed(() => slots.title != null);
 watch(
   [selectedValue, treeData],
   () => {
+    const { id, title, children } = _replaceFields.value;
     if (props.multiple) {
       try {
         multipleValue.value = selectedValue.value.map((value: any) => {
-          var node: any = getNode(props.data, value);
+          var node: any = getNode(props.data, value, _replaceFields.value);
           if (node) {
-            node.label = node.title;
-            node.value = node.id;
+            node.label = node[title];
+            node.value = node[id];
             node.closable = !node.disabled;
           }
           if (node == undefined) {
@@ -123,9 +129,13 @@ watch(
        *
        * 备注：如果找不到这个节点, 说明存在 BUG 或 空值, 对 singleValue 清空
        */
-      const node: any = getNode(props.data, selectedValue.value);
+      const node: any = getNode(
+        props.data,
+        selectedValue.value,
+        _replaceFields.value
+      );
       if (node) {
-        singleValue.value = node.title;
+        singleValue.value = node[title];
       } else {
         singleValue.value = "";
       }
@@ -152,7 +162,7 @@ const onClear = function () {
 const handleClick = (node: any) => {
   if (!props.multiple) {
     dropdownRef.value.hide();
-    selectedValue.value = node.id;
+    selectedValue.value = node[_replaceFields.value.id];
   }
 };
 
@@ -173,7 +183,7 @@ const handleRemove = (value: any) => {
     );
   } else {
     // 当 checkStrictly 配置为 false 时, 删除内容为 当前节点 与 关联子集
-    const node = getNode(props.data, value);
+    const node = getNode(props.data, value, _replaceFields.value);
     const nodeIds = filterNodeIds(node);
     emits(
       "update:modelValue",
@@ -184,11 +194,12 @@ const handleRemove = (value: any) => {
 
 const filterNodeIds = (node: any) => {
   const nodeIds: any[] = [];
+  const { id, children } = _replaceFields.value;
 
   function _findNodeIds(node: any, arr: any[]) {
-    arr.push(node.id);
-    if (node.children) {
-      node.children.forEach((item: any) => {
+    arr.push(node[id]);
+    if (node[children]) {
+      node[children].forEach((item: any) => {
         _findNodeIds(item, arr);
       });
     }
@@ -247,13 +258,14 @@ watch(
 );
 
 const treeFilter = (tree: any[], fn: Function) => {
+  const { children } = _replaceFields.value;
   return tree
     .map((node) => ({ ...node }))
     .filter((node) => {
-      node.children = node.children && treeFilter(node.children, fn);
-      if (node.children && node.children.length) node.spread = true;
+      node[children] = node[children] && treeFilter(node[children], fn);
+      if (node[children] && node[children].length) node.spread = true;
       return (
-        fn(node, searchValue.value) || (node.children && node.children.length)
+        fn(node, searchValue.value) || (node[children] && node[children].length)
       );
     });
 };
@@ -344,6 +356,7 @@ watch(
             v-model:selectedKey="selectedValue"
             v-model:checkedKeys="checkedKeys"
             :tail-node-icon="!hasTitleSlot"
+            :replaceFields="_replaceFields"
             @node-click="handleClick"
           >
             <template #title="{ data }">
