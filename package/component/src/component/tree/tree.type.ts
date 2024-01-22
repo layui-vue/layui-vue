@@ -8,9 +8,16 @@ export interface OriginalTreeData {
   id: StringOrNumber;
   children?: OriginalTreeData[];
   disabled?: boolean;
+  [key: string]: any;
 }
 
 export interface ReplaceFieldsOptions {
+  id: string;
+  children: string;
+  title: string;
+}
+
+export interface ReplaceFieldsOptionsOptional {
   id?: string;
   children?: string;
   title?: string;
@@ -26,7 +33,7 @@ export interface TreeProps {
   collapseTransition?: boolean;
   onlyIconControl?: boolean;
   showLine?: boolean;
-  replaceFields?: ReplaceFieldsOptions;
+  replaceFields: ReplaceFieldsOptions;
 }
 export interface TreeEmits {
   (e: "update:checkedKeys", keys: KeysType): void;

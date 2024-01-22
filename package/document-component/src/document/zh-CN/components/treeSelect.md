@@ -1185,6 +1185,88 @@ const data6 = ref([{
 
 :::
 
+::: title tree自定义字段
+:::
+
+::: demo tree组件 使用 `replaceFields` 替换 `data` 中的字段名
+
+<template>
+  <lay-tree-select v-model="value1" :data="data7" :replaceFields="replaceFields"></lay-tree-select>
+</template>
+
+<script setup>
+import {ref} from "vue";
+
+const value1 = ref(1);
+const replaceFields = ref({
+	id: 'key',
+	title: 'name',
+	children: 'child'
+})
+
+const data7 = ref([{
+	name: '一级1',
+	key: 1,
+	spread: true,
+	child: [
+		{
+			name: '一级1-1',
+			key: 11,
+			child: [
+				{
+					name: '一级1-1-1',
+					key: 111,
+				},
+				{
+					name: '一级1-1-2',
+					key: 112,
+				}
+			]
+		},
+		{
+			name: '一级1-2',
+			key: 12,
+			child: [
+				{
+					name: '一级1-2-1',
+					key: 121,
+				},
+				{
+					name: '一级1-2-2',
+					key: 122,
+				}
+			]
+		}
+	]
+},
+{
+	name: '一级2',
+	key: 2,
+	spread: true,
+	child: [
+		{
+			name: '一级2-1',
+			key: 21,
+			spread: true,
+		},
+		{
+			name: '一级2-2',
+			key: 22,
+			spread: true,
+			child: [
+				{
+					name: '一级2-2-1',
+					key: 221,
+					spread: true,
+				}
+			]
+		}
+	]
+}]);
+</script>
+
+:::
+
 ::: title Tree Select 属性
 :::
 

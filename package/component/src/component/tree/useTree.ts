@@ -15,11 +15,7 @@ export const useTree: UseTree = (props: TreeProps, emit: TreeEmits) => {
     {
       nodeMap: new Map(),
       originMap: new Map(),
-      replaceFields: {
-        id: "id",
-        title: "title",
-        children: "children",
-      },
+      replaceFields: props.replaceFields,
       showCheckbox: props.showCheckbox ?? false,
       checkedKeys: props.checkedKeys ?? [],
       expandKeys: props.expandKeys ?? [],

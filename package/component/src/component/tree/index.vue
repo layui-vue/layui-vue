@@ -1,9 +1,16 @@
 <script lang="ts" setup>
 import TreeNode from "./TreeNode.vue";
-import { computed, useSlots, watch, ref, onMounted, nextTick } from "vue";
+import { computed, watch, ref, onMounted, nextTick } from "vue";
 import { useTree } from "./useTree";
 import { TreeData } from "./tree";
-import { StringFn, StringOrNumber, KeysType, EditType } from "./tree.type";
+import {
+  StringFn,
+  StringOrNumber,
+  KeysType,
+  EditType,
+  ReplaceFieldsOptionsOptional,
+} from "./tree.type";
+import { fillFieldNames } from "./utils";
 import "./index.less";
 
 export interface OriginalTreeData {
@@ -11,12 +18,7 @@ export interface OriginalTreeData {
   id: StringOrNumber;
   children?: OriginalTreeData[];
   disabled?: boolean;
-}
-
-export interface ReplaceFieldsOptions {
-  id?: string;
-  children?: string;
-  title?: string;
+  [key: string]: any;
 }
 
 export interface TreeProps {
@@ -31,7 +33,7 @@ export interface TreeProps {
   selectedKey?: any;
   showLine?: boolean;
   showCheckbox?: boolean;
-  replaceFields?: ReplaceFieldsOptions;
+  replaceFields?: ReplaceFieldsOptionsOptional;
   tailNodeIcon?: string | boolean;
   isSelect?: boolean;
 }
@@ -60,16 +62,7 @@ const props = withDefaults(defineProps<TreeProps>(), {
   checkedKeys: () => {
     return [];
   },
-  replaceFields: () => {
-    return {
-      id: "id",
-      children: "children",
-      title: "title",
-    };
-  },
 });
-
-const slots = useSlots();
 
 const emit = defineEmits<TreeEmits>();
 
@@ -82,13 +75,18 @@ const className = computed(() => {
   };
 });
 
+const _replaceFields = computed(() => fillFieldNames(props.replaceFields));
+
 let tree = ref();
 let nodeList = ref();
 const unWatch = ref(false);
 const initStatus = ref(false);
 
 const loadNodeList = () => {
-  let { tree: _tree, nodeList: _nodeList } = useTree(props, emit);
+  let { tree: _tree, nodeList: _nodeList } = useTree(
+    Object.assign({}, props, { replaceFields: _replaceFields.value }),
+    emit
+  );
   tree.value = _tree;
   nodeList.value = _nodeList.value;
 };
@@ -183,6 +181,7 @@ watch(
       :collapse-transition="collapseTransition"
       :only-icon-control="onlyIconControl"
       :tail-node-icon="tailNodeIcon"
+      :replace-fields="_replaceFields"
       @node-click="handleClick"
     >
       <template v-if="$slots.title" #title="{ data }">
