@@ -562,8 +562,25 @@ const classes = computed(() => {
   return [
     hasl.value ? "layui-table-has-fixed-left" : "",
     hasr.value ? "layui-table-has-fixed-right" : "",
-    hasTotalRow.value ? "" : "layui-table-has-bottom-width",
+    hasTotalRow.value || props.page ? "" : "layui-table-has-bottom-width",
   ];
+});
+
+const totalWrapperStyles = computed(() => {
+  return [
+    {
+      "padding-right": `${scrollWidthCell.value}px`,
+      "margin-top": `${!scrollWidthCell.value ? 0 : 1}px`,
+    },
+  ] as StyleValue;
+});
+
+const tablePageStyles = computed(() => {
+  return [
+    {
+      "border-width": `${hasTotalRow.value ? 1 : 0}px 0 0 `,
+    },
+  ] as StyleValue;
 });
 
 watch(
@@ -1277,10 +1294,7 @@ defineExpose({ getCheckData });
           </div>
         </template>
       </div>
-      <div
-        class="table-total-wrapper"
-        :style="[{ 'padding-right': `${scrollWidthCell}px` }]"
-      >
+      <div class="table-total-wrapper" :style="totalWrapperStyles">
         <div class="table-total-wrapper-main" ref="tableTotal">
           <table class="layui-table">
             <colgroup>
@@ -1333,7 +1347,11 @@ defineExpose({ getCheckData });
         <slot name="footer"></slot>
       </div>
     </div>
-    <div v-if="page && page.total > 0" class="layui-table-page">
+    <div
+      v-if="page && page.total > 0"
+      class="layui-table-page"
+      :style="tablePageStyles"
+    >
       <table-page
         :total="page.total"
         :pages="page.pages"
