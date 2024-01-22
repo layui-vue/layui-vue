@@ -134,7 +134,7 @@
               target="_blank"
             >
               <lay-avatar
-                src="https://dotnetchina.gitee.io//furion/img/furionlogo.png"
+                src="https://foruda.gitee.com/avatar/1676938478360257103/974299_monksoul_1578937227.png"
                 style="background: transparent"
               ></lay-avatar>
             </a>
@@ -204,7 +204,7 @@
               target="_blank"
             >
               <lay-avatar
-                src="https://jpom.top/images/jpom_logo.png"
+                src="https://jpom.top/images/logo/jpom_logo_small.svg"
                 style="background: transparent; width: 60px"
               ></lay-avatar>
             </a>
