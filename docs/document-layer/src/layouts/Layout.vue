@@ -40,7 +40,7 @@
 </template>
 
 <script setup>
-import config from "../../../layer/package.json";
+import config from "layui-layer/package.json";
 import { useRouter } from "vue-router";
 import { ref, watch } from "vue";
 import { useRoute } from "vue-router";

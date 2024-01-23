@@ -241,10 +241,10 @@
 import { inject, onMounted } from "vue";
 import { useI18n } from "vue-i18n";
 import { useAppStore } from "../store/app";
-import { layer } from "@layui/layui-vue";
+import { layer } from "layui-layer/src/index";
 
 export default {
-  name: "index",
+  name: "Index",
   setup() {
     const { t } = useI18n();
     const appStore = useAppStore();
