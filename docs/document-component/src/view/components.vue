@@ -41,7 +41,7 @@
         </ul>
       </lay-scroll>
     </lay-side>
-    <lay-body>
+    <lay-body id="backtopPosition">
       <div
         style="
           padding: 20px;
@@ -51,6 +51,7 @@
       >
         <router-view />
       </div>
+      <lay-backtop></lay-backtop>
     </lay-body>
   </lay-layout>
 </template>
