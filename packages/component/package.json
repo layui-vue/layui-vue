@@ -1,0 +1,74 @@
+{
+  "name": "@layui/layui-vue",
+  "version": "2.14.1-alpha.2",
+  "author": "就眠儀式",
+  "license": "MIT",
+  "description": "a component library for Vue 3 base on layui-vue",
+  "homepage": "http://www.layui-vue.com",
+  "type": "module",
+  "main": "es/index.js",
+  "unpkg": "umd/index.js",
+  "jsdelivr": "umd/index.js",
+  "web-types": "types/web-types.json",
+  "types": "types/index.d.ts",
+  "style": "lib/index.css",
+  "vetur": {
+    "tags": "types/tags.json",
+    "attributes": "types/attributes.json"
+  },
+  "sideEffects": [
+    "lib/*.css",
+    "es/**/*.css",
+    "umd/*.css"
+  ],
+  "keywords": [
+    "vue",
+    "vue-component",
+    "component-library",
+    "layui-vue",
+    "layui"
+  ],
+  "exports": {
+    ".": {
+      "import": "./es/index.js"
+    },
+    "./lib/": "./lib/",
+    "./es/": "./es/"
+  },
+  "scripts": {
+    "build": "npm run build:all && npm run build:es && npm run build:umd && npm run build:dts",
+    "build:all": "vite build --emptyOutDir --config ./script/build.all.ts",
+    "build:es": "vite build --emptyOutDir --config ./script/build.es.ts",
+    "build:umd": "vite build --emptyOutDir --config ./script/build.umd.ts",
+    "build:dts":"tsx --tsconfig ./tsconfig.build.json ./script/build.dts.ts",
+    "test": "vitest"
+  },
+  "dependencies": {
+    "@rollup/plugin-terser":"0.4.4",
+    "@layui/icons-vue": "1.1.0",
+    "@layui/layer-vue": "2.2.2",
+    "@vueuse/core": "8.7.3",
+    "@umijs/ssr-darkreader": "^4.9.45",
+    "@ctrl/tinycolor": "^3.4.1",
+    "@types/qrcode":"1.5.0",
+    "@babel/types": "7.21.0",
+    "async-validator": "^4.1.1",
+    "cropperjs": "^1.5.12",
+    "dayjs": "^1.11.7",
+    "evtd": "^0.2.3",
+    "vue-i18n": "9.6.3",
+    "qrcode":"1.5.0",
+    "jsbarcode":"3.11.5"
+  },
+  "files": [
+    "lib",
+    "es",
+    "umd",
+    "types"
+  ],
+  "browserslist": [
+    "current node",
+    "last 2 versions and > 2%",
+    "ie > 10"
+  ]
+}
