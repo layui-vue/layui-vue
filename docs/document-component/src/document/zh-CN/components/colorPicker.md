@@ -117,21 +117,13 @@ export default {
 ::: demo `allowClear` 开启清空 `simple`(默认为true) 即时改变 `modelValue`。
 
 <template>
-  <lay-color-picker v-model="color" allowClear :simple="false"></lay-color-picker>
+  <lay-color-picker v-model="color5" allowClear :simple="false"></lay-color-picker>
 </template>
 
-<script>
+<script setup lang="ts">
 import { ref } from "vue";
 
-export default {
-  setup() {
-    const color = ref("");
-
-    return {
-      color
-    }
-  }
-}
+const color5 = ref("");
 </script>
 
 :::
