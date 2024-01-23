@@ -17,11 +17,10 @@
  <lay-table 
       :page="page" 
       :resize="true"
-      :height="'100%'"
       :columns="columns" 
       :loading="loading"
       :default-toolbar="true"
-      :data-source="dataSource" 
+      :data-source="[]" 
       v-model:selected-keys="selectedKeys"  
       @change="change"
       @sortChange="sortChange">
@@ -51,20 +50,12 @@ export default {
 
     const selectedKeys = ref([]);
 
-    const page = reactive({ current: 1, limit: 10, total: 100 });
+    const page = reactive({ current: 1, limit: 10, total: 0 });
 
     const columns = ref([
       { title:"选项", width: "55px", type: "checkbox", fixed: "left" },
       { title:"编号", width: "80px", key:"id", fixed: "left", sort: "desc" },
       { title:"姓名", width: "80px", key:"name", sort: "desc" },
-      { title:"状态", width: "180px", key:"status", customSlot: "status"},
-      { title:"邮箱", width: "120px", key:"email" },
-      { title:"性别", width: "80px", key:"sex" },
-      { title:"年龄", width: "80px", key:"age", totalRow: true},
-      { title:"城市", width: "120px", key:"city" },
-      { title:"签名", width: "260px", key:"remark" },
-      { title:"隐藏", width: "260px", key:"hide", hide: true, totalRow: "自定义" },
-      { title:"时间", width: "120px", key:"joinTime"},
       { title:"操作", width: "150px", customSlot:"operator", key:"operator", fixed: "right", ignoreExport: true }
     ]);
 

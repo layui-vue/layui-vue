@@ -562,7 +562,9 @@ const classes = computed(() => {
   return [
     hasl.value ? "layui-table-has-fixed-left" : "",
     hasr.value ? "layui-table-has-fixed-right" : "",
-    hasTotalRow.value || props.page ? "" : "layui-table-has-bottom-width",
+    hasTotalRow.value || (props.page && props.page.total > 0)
+      ? ""
+      : "layui-table-has-bottom-width",
   ];
 });
 
