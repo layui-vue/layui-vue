@@ -24,9 +24,9 @@ export interface ReplaceFieldsOptionsOptional {
 }
 
 export interface TreeProps {
+  data: OriginalTreeData | OriginalTreeData[];
   checkedKeys?: KeysType;
   expandKeys?: KeysType;
-  data: OriginalTreeData | OriginalTreeData[];
   checkStrictly?: boolean | string;
   showCheckbox?: boolean;
   edit?: EditType;
@@ -34,6 +34,7 @@ export interface TreeProps {
   onlyIconControl?: boolean;
   showLine?: boolean;
   replaceFields: ReplaceFieldsOptions;
+  defaultExpandAll?: boolean;
 }
 export interface TreeEmits {
   (e: "update:checkedKeys", keys: KeysType): void;

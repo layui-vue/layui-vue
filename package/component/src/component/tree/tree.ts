@@ -29,6 +29,7 @@ interface TreeConfig {
   nodeMap: Map<StringOrNumber, TreeData>;
   originMap: Map<StringOrNumber, OriginalTreeData>;
   replaceFields: ReplaceFieldsOptions;
+  defaultExpandAll: boolean;
 }
 
 class Tree {
@@ -114,7 +115,7 @@ class Tree {
     node.isDisabled = nodeDisabled;
     node.isChecked = checkedKeys.includes(nodeKey);
     node.isLeaf = parentNode ? parentNode.isLeaf : expandKeys.includes(nodeKey);
-    node.isLeaf = nodeIsLeaf;
+    node.isLeaf = nodeIsLeaf || this.config.defaultExpandAll;
 
     if (!nodeMap.has(nodeKey)) {
       nodeMap.set(nodeKey, node);

@@ -36,6 +36,7 @@ export interface TreeProps {
   replaceFields?: ReplaceFieldsOptionsOptional;
   tailNodeIcon?: string | boolean;
   isSelect?: boolean;
+  defaultExpandAll?: boolean;
 }
 
 interface TreeEmits {
@@ -62,6 +63,7 @@ const props = withDefaults(defineProps<TreeProps>(), {
   checkedKeys: () => {
     return [];
   },
+  defaultExpandAll: false,
 });
 
 const emit = defineEmits<TreeEmits>();

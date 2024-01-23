@@ -20,6 +20,7 @@ export const useTree: UseTree = (props: TreeProps, emit: TreeEmits) => {
       checkedKeys: props.checkedKeys ?? [],
       expandKeys: props.expandKeys ?? [],
       checkStrictly: props.checkStrictly ?? false,
+      defaultExpandAll: props.defaultExpandAll ?? false,
     },
     props.data
   );

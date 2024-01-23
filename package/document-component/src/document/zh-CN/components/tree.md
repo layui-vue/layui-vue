@@ -15,9 +15,10 @@
 <template>
   <lay-tree
     :data="data"
-	:tail-node-icon="false"
-	:onlyIconControl="true"
-	v-model:selectedKey="selectedKey"
+		:tail-node-icon="false"
+		:onlyIconControl="true"
+		:default-expand-all="true"
+		v-model:selectedKey="selectedKey"
     @node-click="handleClick"
   >
   </lay-tree>
@@ -77,7 +78,12 @@ const data = ref([{
 		children: [{
 			title: '三级1-2-1',
 			id: 9,
-			disabled: true
+			disabled: true,
+			children: [{
+				title: '三级1-2-1-1',
+				id: 91,
+				disabled: true
+			}]
 		},
 		{
 			title: '三级1-2-2',
@@ -622,6 +628,8 @@ const data9 = ref([{
 | selectedKey                      | 选中节点                                | --              | |
 | tail-node-icon                   | 尾节点图标，通过设置 false 关闭尾节点图标  | 图标集          | |
 | replace-fields                   | 替换data中`id` `title` `children` 字段名  | {id: "id", title: "title", children: "children"}          | |
+| default-expand-all                   | 是否默认展开所有节点  | false          | |
+
 
 :::
 

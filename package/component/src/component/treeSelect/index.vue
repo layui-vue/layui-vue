@@ -29,6 +29,7 @@ export interface TreeSelectProps {
   contentClass?: string | Array<string | object> | object;
   contentStyle?: StyleValue;
   replaceFields?: ReplaceFieldsOptionsOptional;
+  defaultExpandAll?: boolean;
 }
 
 export interface TreeSelectEmits {
@@ -54,6 +55,7 @@ const props = withDefaults(defineProps<TreeSelectProps>(), {
   searchNodeMethod: (node: any, value: string) => {
     return node.title.includes(value);
   },
+  defaultExpandAll: false,
 });
 
 const { size } = useProps(props);
@@ -357,6 +359,7 @@ watch(
             v-model:checkedKeys="checkedKeys"
             :tail-node-icon="!hasTitleSlot"
             :replaceFields="_replaceFields"
+            :defaultExpandAll="defaultExpandAll"
             @node-click="handleClick"
           >
             <template #title="{ data }">
