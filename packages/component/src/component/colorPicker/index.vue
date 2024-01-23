@@ -17,6 +17,8 @@ export interface ColorPicker {
   contentClass?: string | Array<string | object> | object;
   contentStyle?: StyleValue;
   size?: string;
+  allowClear?: boolean;
+  simple?: boolean;
 }
 
 defineOptions({
@@ -29,6 +31,8 @@ const props = withDefaults(defineProps<ColorPicker>(), {
   modelValue: { r: 255, g: 255, b: 255, a: 1 },
   preset: ["#16BAAA", "#1e9fff", "#ffb800", "#ff5722", "#16B777"],
   disabled: false,
+  allowClear: false,
+  simple: true,
 });
 
 const { size } = useProps(props);
@@ -103,6 +107,10 @@ watch([red, green, blue], (newValue) => {
     alpha.value
   );
 
+  if (props.simple) {
+    emit("update:modelValue", currentColor.value);
+  }
+
   let { h, s, v } = rgb2hsv(red.value, green.value, blue.value);
   hue.value = h;
   saturation.value = s;
@@ -118,6 +126,10 @@ watch(alpha, () => {
     blue.value,
     alpha.value
   );
+
+  if (props.simple) {
+    emit("update:modelValue", currentColor.value);
+  }
 
   alphaSliderStyle.value = `left: ${
     alpha.value >= 1 ? "calc(100% - 6px)" : alpha.value * 100 + "%"
@@ -329,9 +341,8 @@ function mouseupAlpha(e: any) {
 }
 
 function parseColor(color: any) {
-  let [r, g, b, a] = [255, 0, 0, 1];
-
   if (color) {
+    let r, g, b, a;
     if (typeof color === "string") {
       if (
         /^#?([0-9a-fA-F]{6}|[0-9a-fA-F]{8}|[0-9a-fA-F]{3}|[0-9a-fA-F]{4})$/.test(
@@ -345,9 +356,10 @@ function parseColor(color: any) {
       g = color.g > 255 ? 255 : color.g < 0 ? 0 : color.g;
       b = color.b > 255 ? 255 : color.b < 0 ? 0 : color.b;
       a = color.a > 1 ? 1 : color.a < 0 ? 0 : color.a;
+      return { r, g, b, a };
     }
   }
-  return { r, g, b, a };
+  return null;
 }
 
 function hsv2rgb(h: any, s: any, v: any) {
@@ -580,9 +592,15 @@ function hex2rgba(s: any) {
             @click="presetChange(item)"
           ></li>
         </ul>
-        <div class="layui-color-picker__footer">
-          <LayButton size="xs" @click="handleClearColor">清除</LayButton>
-          <LayButton type="primary" size="xs" @click="handleConfirmColor"
+        <div class="layui-color-picker__footer" v-if="allowClear || !simple">
+          <LayButton v-if="allowClear" size="xs" @click="handleClearColor"
+            >清除</LayButton
+          >
+          <LayButton
+            v-if="!simple"
+            type="primary"
+            size="xs"
+            @click="handleConfirmColor"
             >确定</LayButton
           >
         </div>
