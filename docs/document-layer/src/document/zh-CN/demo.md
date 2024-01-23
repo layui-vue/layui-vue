@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { layer } from  "../../../../layer/src/index";
+import { layer } from  "layui-layer/src/index";
 
 const msg = function() {
     layer.msg("普通消息", { time: 3000, id: "1"})
@@ -65,7 +65,7 @@ const w3 = function() {
 </template>
 
 <script setup>
-import { layer } from  "../../../../layer/src/index"
+import { layer } from  "layui-layer/src/index"
 
 const openConfirm1 = function() {
     layer.confirm("layui-vue 1.0.0 已经发布")
@@ -98,7 +98,7 @@ const openConfirm2 = function() {
 </template>
 
 <script setup>
-import { layer } from  "../../../../layer/src/index"
+import { layer } from  "layui-layer/src/index"
 
 const load1 = function() {
     layer.load(0, {id:"1", time: 2000})
@@ -149,7 +149,7 @@ const load4 = function() {
 </template>
 
 <script setup>
-import { layer } from  "../../../../layer/src/index"
+import { layer } from  "layui-layer/src/index"
 
 const open111 = function() {
     layer.open({
@@ -312,7 +312,7 @@ const openScroll = function() {
 </template>
 
 <script setup>
-import { layer } from  "../../../../layer/src/index"
+import { layer } from  "layui-layer/src/index"
 
 const openSize1 = function() {
     layer.open({
@@ -387,7 +387,7 @@ const openSize5 = function() {
 </template>
 
 <script setup>
-import { layer } from  "../../../../layer/src/index"
+import { layer } from  "layui-layer/src/index"
 
 const openTop1 = function() {
     layer.open({
@@ -520,7 +520,7 @@ const openBottomRight1 = function() {
 </template>
 
 <script setup>
-import { layer } from  "../../../../layer/src/index"
+import { layer } from  "layui-layer/src/index"
 
 const openTop = function() {
     layer.drawer({
@@ -646,7 +646,7 @@ const openBottomRight = function() {
 </template>
 
 <script>
-import { layer } from  "../../../../layer/src/index"
+import { layer } from  "layui-layer/src/index"
 
 const signleImg = function() {
     layer.photos("http://www.pearadmin.com/assets/images/un1.svg")
@@ -708,7 +708,7 @@ const groupImg2 = function() {
 </template>
 
 <script>
-import { layer } from  "../../../../layer/src/index"
+import { layer } from  "layui-layer/src/index"
 
 const baseNotifiy = function() {
     layer.notifiy({
@@ -787,7 +787,7 @@ const NotifiyInfo=function(){
 </template>
 
 <script setup>
-import { layer } from  "../../../../layer/src/index";
+import { layer } from  "layui-layer/src/index";
 
 let id = null;
 
@@ -835,7 +835,7 @@ const full = function() {
 
 <script setup>
 import { reactive, h, resolveComponent } from 'vue'
-import { layer } from  "../../../../layer/src/index"
+import { layer } from  "layui-layer/src/index"
 
 const data = reactive({
     remark: "信息"
@@ -861,7 +861,7 @@ const openComponent1 = () => {
 
 <script setup>
 import { reactive, h, resolveComponent, ref } from 'vue'
-import { layer } from  "../../../../layer/src/index"
+import { layer } from  "layui-layer/src/index"
 
 const prop = reactive({})
 const numb = ref(1000)  
@@ -954,7 +954,7 @@ const openComponent2 = () => {
 </template>
 
 <script setup>
-import { LayLayer } from  "../../../../layer/src/index";
+import { LayLayer } from  "layui-layer/src/index";
 
 const visible1 = ref(false);
 const visible2 = ref(false);
@@ -1154,8 +1154,8 @@ const changeVisible19 = function() {
 </template>
 
 <script setup>
-import { LayLayer } from  "../../../../layer/src/index";
-import { layer } from  "../../../../layer/src/index"
+import { LayLayer } from  "layui-layer/src/index";
+import { layer } from  "layui-layer/src/index"
 
 const featureVisible1 = ref(false);
 const featureVisible2 = ref(false);

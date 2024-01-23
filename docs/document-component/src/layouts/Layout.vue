@@ -238,11 +238,11 @@
 import { provide, ref, watch } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { useAppStore } from "../store/app";
-import { useI18n } from "../../../component/src/index";
+import { useI18n } from "layui-vue/src/index";
 import menu from "../view/utils/menus";
 import zh_CN from "../language/zh_CN.ts";
 import en_US from "../language/en_US.ts";
-import config from "../../../component/package.json";
+import config from "layui-vue/package.json";
 
 export default {
   setup() {
