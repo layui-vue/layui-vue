@@ -41,7 +41,7 @@
         </ul>
       </lay-scroll>
     </lay-side>
-    <lay-body id="backtopPosition">
+    <lay-body>
       <div
         style="
           padding: 20px;
