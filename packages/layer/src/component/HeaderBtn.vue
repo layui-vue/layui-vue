@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { LayIcon } from "@layui/icons-vue";
-import "@layui/layer-vue/lib/index.css";
+import "@layui/icons-vue/lib/index.css";
 
 export interface HeaderBtnProps {
   maxmin?: boolean | string;

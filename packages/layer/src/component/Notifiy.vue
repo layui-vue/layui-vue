@@ -19,7 +19,7 @@ export default {
 <script lang="ts" setup>
 import { nextTick, onMounted, ref, shallowRef } from "vue";
 import { LayIcon } from "@layui/icons-vue";
-import "@layui/layer-vue/lib/index.css";
+import "@layui/icons-vue/lib/index.css";
 
 export interface LayNotifyProps {
   title: any;
