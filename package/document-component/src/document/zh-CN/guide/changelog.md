@@ -21,6 +21,7 @@
           <ul>
               <li>[新增] input-number 组件 添加precision属性，用于控制数值精度。</li>
               <li>[新增] tree 组件 replace-fields 属性，支持自定义字段。</li>
+              <li>[修复] table 组件 border异常。<a href="https://gitee.com/layui/layui-vue/issues/I8Y142">I8Y142</a></li>
               <li>[优化] table 组件 default-toolbar 的 border-radius 属性跟随主题。</li>
               <li>[优化] date-picker 组件底部按钮 border-radius 跟随主题。</li>
               <li>[优化] tooltip 组件 添加hide事件，当弹窗内容隐藏后触发。</li>
