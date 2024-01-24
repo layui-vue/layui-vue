@@ -268,7 +268,7 @@ watch(
     findFinalNode(0, tableColumns.value, undefined);
     tableFlattenColumns.value = flattenColumns(tableColumns.value);
   },
-  { immediate: true }
+  { immediate: true, deep: true }
 );
 
 /**
