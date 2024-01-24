@@ -111,6 +111,23 @@ export default {
 
 :::
 
+::: title 开启清空确认
+:::
+
+::: demo `allowClear` 开启清空 `simple`(默认为true) 即时改变 `modelValue`。
+
+<template>
+  <lay-color-picker v-model="color5" allowClear :simple="false"></lay-color-picker>
+</template>
+
+<script setup lang="ts">
+import { ref } from "vue";
+
+const color5 = ref("");
+</script>
+
+:::
+
 ::: title Icon Picker 属性
 :::
 
@@ -122,7 +139,9 @@ export default {
 | preset | 预设颜色 | --  |--  |--  |
 | size | 尺寸 | --  |--  |--  |
 | eyeDropper | 取色器 | `boolean`  |--  |--  |
-| disabled | 禁用 | `boolean`  |--  |--  |
+| disabled | 禁用 | `boolean`  |--  |lfase  |
+| allowClear | 是否允许清空 | `boolean`  |--  | false |
+| simple | 是否即时改变`modelValue` | `boolean`  |--  | true |
 | contentStyle             | 内容自定义样式     | `StyleValue` | -- | -- |
 | contentClass             | 内容自定义Class    | `string` `Array<string \| object>` `object` | -- | -- |
 
