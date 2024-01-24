@@ -22,6 +22,7 @@
               <li>[新增] color-picker 组件 添加allowClear、simple属性控制清空与确认按钮。</li>
               <li>[新增] input-number 组件 添加precision属性，用于控制数值精度。</li>
               <li>[新增] tree 组件 replace-fields 属性，支持自定义字段。</li>
+              <li>[新增] tree 与 treeSelect 组件 defaultExpandAll 属性，默认是否展开所有节点。</li>
               <li>[修复] table 组件 border异常。<a href="https://gitee.com/layui/layui-vue/issues/I8Y142">I8Y142</a></li>
               <li>[修复] table 组件 columns属性内部深度监听。</li>
               <li>[修复] color-picker 组 modelValue为空组件内部报错。</li>
