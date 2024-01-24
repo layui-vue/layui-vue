@@ -1,0 +1,420 @@
+@import "../dropdown/index.less";
+
+.layui-colorpicker[size="lg"] {
+  width: 44px;
+  padding: 6px;
+  height: 44px;
+}
+
+.layui-colorpicker[size="md"] {
+  width: 38px;
+  padding: 5px;
+  height: 38px;
+}
+
+.layui-colorpicker[size="sm"] {
+  width: 32px;
+  padding: 4px;
+  height: 32px;
+}
+
+.layui-colorpicker[size="xs"] {
+  width: 26px;
+  padding: 3px;
+  height: 26px;
+}
+
+.layui-color-picker {
+  position: relative;
+  user-select: none;
+  width: 320px;
+  background: #fff;
+  padding: 8px;
+}
+
+.saturation-value {
+  cursor: pointer;
+  width: 100%;
+  height: 200px;
+  position: relative;
+  margin-bottom: 10px;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.saturation-value > div {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.point {
+  box-sizing: border-box;
+  width: 6px;
+  height: 6px;
+  background-color: transparent;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  z-index: 9;
+}
+
+.saturation-value-2 {
+  background: linear-gradient(to right, white, #ffffff00);
+}
+
+.saturation-value-3 {
+  background: linear-gradient(to top, black, #ffffff00);
+}
+
+.layui-color-picker-middle {
+  width: 100%;
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.hue-slider {
+  position: relative;
+  margin-bottom: 6px;
+  height: 10px;
+  background: linear-gradient(
+    90deg,
+    red 0,
+    #ff0 17%,
+    #0f0 33%,
+    #0ff 50%,
+    #00f 67%,
+    #f0f 83%,
+    red
+  );
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.alpha-slider {
+  position: relative;
+  height: 10px;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+  background: #fff
+    url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAWElEQVRIiWM8fubkfwYygKWJOSM5+mCAhRLNoxaPWjxq8ajFoxbTyeL/DAfJ0Xjs3Cl7Siwmu4Yht1aDgZEYx6MWj1o8avGoxaMWD3qLya5X//4nqx6HAQC7RBGFzolqTAAAAABJRU5ErkJggg==");
+  background-size: 10px 10px;
+}
+
+.slider {
+  position: absolute;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.6);
+  box-sizing: border-box;
+  width: 6px;
+  height: 100%;
+  background-color: #fff;
+}
+
+.color-diamond {
+  position: relative;
+  margin-left: 5px;
+  width: 26px;
+  height: 26px;
+  border-radius: 2px;
+  overflow: hidden;
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAWElEQVRIiWM8fubkfwYygKWJOSM5+mCAhRLNoxaPWjxq8ajFoxbTyeL/DAfJ0Xjs3Cl7Siwmu4Yht1aDgZEYx6MWj1o8avGoxaMWD3qLya5X//4nqx6HAQC7RBGFzolqTAAAAABJRU5ErkJggg==");
+  background-size: 10px 10px;
+}
+
+.layui-colorpicker > span {
+  width: 100%;
+  display: block;
+  border-radius: var(--global-border-radius);
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAWElEQVRIiWM8fubkfwYygKWJOSM5+mCAhRLNoxaPWjxq8ajFoxbTyeL/DAfJ0Xjs3Cl7Siwmu4Yht1aDgZEYx6MWj1o8avGoxaMWD3qLya5X//4nqx6HAQC7RBGFzolqTAAAAABJRU5ErkJggg==");
+  background-size: 10px 10px;
+  height: 100%;
+}
+
+.color-value {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.color-value div {
+  padding: 0 3px;
+  text-align: center;
+}
+
+.color-value input {
+  font-size: 12px;
+  box-sizing: border-box;
+  width: 34px;
+  height: 24px;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  text-align: center;
+  border-radius: 2px;
+  border: 1px solid #eee;
+}
+
+.color-value p {
+  font-size: 12px;
+  margin: 3px 0 0;
+}
+
+.color-value .rgba-a {
+  padding-right: 0;
+}
+
+.color-value .hex {
+  flex: 1;
+  padding-left: 0;
+}
+
+.color-value .hex input {
+  width: 100%;
+  height: 24px;
+}
+
+.preset {
+  width: 100%;
+  padding: 0;
+  margin: 10px 0 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.preset li {
+  width: 20px;
+  height: 20px;
+  padding: 0px;
+  margin-right: 6px;
+  margin-bottom: 6px;
+  border: 1px solid #eee;
+  border-radius: 2px;
+}
+
+.layui-colorpicker {
+  padding: 5px;
+  border-radius: var(--global-border-radius);
+  border: 1px solid var(--global-neutral-color-3);
+  transition: all 0.3s;
+  -webkit-transition: all 0.3s;
+  box-sizing: border-box;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.layui-colorpicker:hover {
+  border-color: var(--global-neutral-color-6);
+}
+
+.layui-colorpicker.layui-colorpicker-lg {
+  width: 34px;
+  height: 34px;
+  line-height: 32px;
+}
+
+.layui-colorpicker.layui-colorpicker-sm {
+  width: 24px;
+  height: 24px;
+  line-height: 22px;
+}
+
+.layui-colorpicker.layui-colorpicker-xs {
+  width: 22px;
+  height: 22px;
+  line-height: 20px;
+}
+
+.layui-colorpicker-trigger-bgcolor {
+  display: block;
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAIAAADZF8uwAAAAGUlEQVQYV2M4gwH+YwCGIasIUwhT25BVBADtzYNYrHvv4gAAAABJRU5ErkJggg==);
+  border-radius: 2px;
+}
+
+.layui-colorpicker-trigger-span {
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: var(--global-border-radius);
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.layui-colorpicker-trigger-i {
+  display: inline-block;
+  color: #fff;
+  font-size: 12px;
+}
+
+.layui-colorpicker-trigger-i.layui-icon-close {
+  color: #999;
+}
+
+.layui-colorpicker-main {
+  position: absolute;
+  left: -999999px;
+  top: -999999px;
+  z-index: 66666666;
+  width: 280px;
+  margin: 5px 0;
+  padding: 7px;
+  background: #fff;
+  border: 1px solid var(--global-neutral-color-6);
+  border-radius: 2px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+}
+
+.layui-colorpicker-main-wrapper {
+  height: 180px;
+  position: relative;
+}
+
+.layui-colorpicker-basis {
+  width: 260px;
+  height: 100%;
+  position: relative;
+}
+
+.layui-colorpicker-basis-white {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: linear-gradient(90deg, #fff, hsla(0, 0%, 100%, 0));
+}
+
+.layui-colorpicker-basis-black {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: linear-gradient(0deg, #000, transparent);
+}
+
+.layui-colorpicker-basis-cursor {
+  width: 10px;
+  height: 10px;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  cursor: pointer;
+}
+
+.layui-colorpicker-side {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 12px;
+  height: 100%;
+  background: linear-gradient(red, #ff0, #0f0, #0ff, #00f, #f0f, red);
+}
+
+.layui-colorpicker-side-slider {
+  width: 100%;
+  height: 5px;
+  box-shadow: 0 0 1px #888;
+  background: #fff;
+  border-radius: 1px;
+  border: 1px solid #f0f0f0;
+  cursor: pointer;
+  position: absolute;
+  left: 0;
+}
+
+.layui-colorpicker-main-alpha {
+  display: none;
+  height: 12px;
+  margin-top: 7px;
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAIAAADZF8uwAAAAGUlEQVQYV2M4gwH+YwCGIasIUwhT25BVBADtzYNYrHvv4gAAAABJRU5ErkJggg==);
+}
+
+.layui-colorpicker-alpha-bgcolor {
+  height: 100%;
+  position: relative;
+}
+
+.layui-colorpicker-alpha-slider {
+  width: 5px;
+  height: 100%;
+  box-shadow: 0 0 1px #888;
+  background: #fff;
+  border-radius: 1px;
+  border: 1px solid #f0f0f0;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+}
+
+.layui-colorpicker-main-pre {
+  padding-top: 7px;
+  font-size: 0;
+}
+
+.layui-colorpicker-pre {
+  width: 20px;
+  height: 20px;
+  border-radius: 2px;
+  display: inline-block;
+  margin-left: 6px;
+  margin-bottom: 7px;
+  cursor: pointer;
+}
+
+.layui-colorpicker-pre:nth-child(11n + 1) {
+  margin-left: 0;
+}
+
+.layui-colorpicker-pre-isalpha {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAIAAADZF8uwAAAAGUlEQVQYV2M4gwH+YwCGIasIUwhT25BVBADtzYNYrHvv4gAAAABJRU5ErkJggg==);
+}
+
+.layui-colorpicker-pre.layui-this {
+  box-shadow: 0 0 3px 2px rgba(0, 0, 0, 0.15);
+}
+
+.layui-colorpicker-pre > div {
+  height: 100%;
+  border-radius: 2px;
+}
+
+.layui-colorpicker-main-input {
+  text-align: right;
+  padding-top: 7px;
+}
+
+.layui-colorpicker-main-input .layui-btn-container .layui-btn {
+  margin: 0 0 0 10px;
+}
+
+.layui-colorpicker-main-input div.layui-inline {
+  float: left;
+  margin-right: 10px;
+  font-size: 14px;
+}
+
+.layui-colorpicker-main-input input.layui-input {
+  width: 150px;
+  height: 30px;
+  color: #666;
+}
+
+.layui-colorpicker-disabled {
+  opacity: 0.6;
+}
+
+.layui-colorpicker-disabled,
+.layui-colorpicker-disabled * {
+  cursor: not-allowed !important;
+}
+
+.layui-color-picker__footer{
+  display: flex;
+  justify-content: flex-end;
+}
