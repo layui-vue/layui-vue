@@ -57,6 +57,10 @@ const formatModelValue = (value: number | string | null | undefined) => {
   }
 
   let newValue = Number(value);
+  if (value === null || value === undefined || Number.isNaN(newValue)) {
+    return null;
+  }
+
   if (stepStrictly) {
     newValue = toPrecision(Math.round(newValue / step) * step, precision);
   }
