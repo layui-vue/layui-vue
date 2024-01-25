@@ -15,9 +15,18 @@
   <lay-timeline>
       <lay-timeline-item title="2.14.x">
       <ul>
+        <a name="2-14-2"></a>
+        <li>
+          <h3>2.14.2 <span class="layui-badge-rim">2024-01-25</span></h3>
+          <ul>
+              <li>[修复] inputNumber 组件 model-value 属性缺失响应式。</li>
+          </ul>
+        </li>
+      </ul>
+      <ul>
         <a name="2-14-1"></a>
         <li>
-          <h3>2.14.1 <span class="layui-badge-rim">2024-01-21</span></h3>
+          <h3>2.14.1 <span class="layui-badge-rim">2024-01-24</span></h3>
           <ul>
               <li>[新增] color-picker 组件 添加allowClear、simple属性控制清空与确认按钮。</li>
               <li>[新增] input-number 组件 添加precision属性，用于控制数值精度。</li>

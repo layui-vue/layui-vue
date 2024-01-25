@@ -38,7 +38,7 @@
 </template>
 
 <script setup lang="ts">
-import { layer } from "layui-layer/src/index";
+import { layer } from "@layui/layer-vue";
 import { onMounted, onUnmounted, ref, watch } from "vue";
 import { openPlayground } from "../utils/code-playground";
 import { openStackblitz } from "../utils/code-stackblitz";
