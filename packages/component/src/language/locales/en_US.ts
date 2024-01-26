@@ -42,7 +42,6 @@ export default {
     selectTime: "select time",
     selectYear: "select year",
     selectMonth: "select month",
-    clear: "clear",
     confirm: "confirm",
     cancel: "cancel",
     now: "now",

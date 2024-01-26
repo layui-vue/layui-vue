@@ -42,7 +42,6 @@ export default {
     selectTime: "选择时间",
     selectYear: "选择年份",
     selectMonth: "选择月份",
-    clear: "清空",
     confirm: "确认",
     cancel: "取消",
     now: "现在",
