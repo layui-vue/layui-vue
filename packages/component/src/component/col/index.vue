@@ -35,7 +35,7 @@ const classes = computed(() => {
     props.mdOffset ? `layui-col-md-offset${props.mdOffset}` : "",
     props.xsOffset ? `layui-col-xs-offset${props.xsOffset}` : "",
     props.smOffset ? `layui-col-sm-offset${props.smOffset}` : "",
-    props.lgOffset ? `layui-col-lg-offset${props.lgOffset}` : "", 
+    props.lgOffset ? `layui-col-lg-offset${props.lgOffset}` : "",
     props.mdPull ? `layui-col-md-pull${props.mdPull}` : "",
     props.xsPull ? `layui-col-xs-pull${props.xsPull}` : "",
     props.smPull ? `layui-col-sm-pull${props.smPull}` : "",
