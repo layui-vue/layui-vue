@@ -6,11 +6,11 @@ import './vite.init'
 export default defineConfig(() => {
   return {
     plugins: [
-      vue({
-        include: [/\.vue$/, /\.md$/],
-      }),
+      vue(),
       vueJsx(),
-    ]
+    ],
+    server: {
+      open: true
+    }
   }
-
 })
