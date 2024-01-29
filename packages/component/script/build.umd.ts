@@ -4,7 +4,7 @@ import vueJsx from "@vitejs/plugin-vue-jsx";
 import { resolve } from "path";
 import terser from "@rollup/plugin-terser";
 
-export default ({mode}): UserConfigExport => {
+export default ({ mode }): UserConfigExport => {
   const env = loadEnv(mode, process.cwd(), "");
   return {
     define: {

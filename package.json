@@ -7,7 +7,8 @@
     "docs/*"
   ],
   "scripts": {
-    "dev": "pnpm -C docs/document-component dev",
+    "dev": "pnpm -C play dev",
+    "dev:docs": "pnpm -C docs/document-component dev",
     "dev:layer": "pnpm -C docs/document-layer dev",
     "build": "pnpm run build:icons && pnpm run build:layer && pnpm run build:component && pnpm run build:document",
     "build:document": " pnpm run build:document-component && pnpm run build:document-layer",

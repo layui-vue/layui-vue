@@ -318,6 +318,8 @@ importers:
         specifier: ^7.18.5
         version: 7.18.5(@babel/core@7.23.9)
 
+  play: {}
+
 packages:
 
   /@aashutoshrathi/word-wrap@1.2.6:
