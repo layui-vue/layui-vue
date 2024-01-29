@@ -15,6 +15,16 @@
   <lay-timeline>
       <lay-timeline-item title="2.14.x">
       <ul>
+        <a name="2-14-3"></a>
+        <li>
+          <h3>2.14.3 <span class="layui-badge-rim">2024-01-29</span></h3>
+          <ul>
+              <li>[调整] datePicker 组件 移除 popper 底部清空按钮，该操作交由 allowClear 属性。</li>
+              <li>[修复] splitPanel 组件 修复未进行拖动元素失焦问题。<a href="https://gitee.com/layui/layui-vue/issues/I8YP2U">I8YP2U</a></li>
+          </ul>
+        </li>
+      </ul>
+      <ul>
         <a name="2-14-2"></a>
         <li>
           <h3>2.14.2 <span class="layui-badge-rim">2024-01-25</span></h3>

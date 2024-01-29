@@ -2,9 +2,6 @@
   <div class="layui-laydate-footer">
     <slot></slot>
     <div class="laydate-footer-btns">
-      <span lay-type="clear" class="laydate-btns-clear" @click="handelClear">{{
-        t("datePicker.clear")
-      }}</span>
       <span
         lay-type="now"
         v-if="props.showNow"
@@ -44,9 +41,5 @@ const handelOk = () => {
 
 const handelNow = () => {
   emits("now");
-};
-
-const handelClear = () => {
-  emits("clear");
 };
 </script>

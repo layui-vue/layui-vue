@@ -950,7 +950,7 @@ const submit10 = function(isValidate, model, errors) {
 ::: describe 查看： https://github.com/yiminghe/async-validator。
 :::
 
-::: describe 翻译： ttps://www.cnblogs.com/wozho/p/10955525.html。
+::: describe 翻译： https://www.cnblogs.com/wozho/p/10955525.html。
 :::
 
 ::: title async-validator 基本校验类型
