@@ -55,7 +55,7 @@ export default {
 <template>
   <lay-row space="10">
      <lay-col md="12"><div class="grid-demo">1</div></lay-col>
-     <lay-col md="6" mdOffset="6"><div class="grid-demo">2</div></lay-col>
+     <lay-col md="6" mdOffset="6" mdPull="6"><div class="grid-demo">2</div></lay-col>
   </lay-row>
 </template>
 
@@ -185,6 +185,14 @@ export default {
 | sm-offset | 偏移 - 小屏幕 (平板 ≥768px)     | `number` `string` | --     | 0 - 24 |
 | md-offset | 偏移 - 中等屏幕 (桌面 ≥992px)   | `number` `string` | --     | 0 - 24 |
 | lg-offset | 偏移 - 大型屏幕 (桌面 ≥1200px)  | `number` `string` | --     | 0 - 24 |
+| xs-pull | 拉 - 超小屏幕 (手机< 768px)   | `number` `string` | --     | 0 - 24 |
+| sm-pull | 拉 - 小屏幕 (平板 ≥768px)     | `number` `string` | --     | 0 - 24 |
+| md-pull | 拉 - 中等屏幕 (桌面 ≥992px)   | `number` `string` | --     | 0 - 24 |
+| lg-pull | 拉 - 大型屏幕 (桌面 ≥1200px)  | `number` `string` | --     | 0 - 24 |
+| xs-push | 推 - 超小屏幕 (手机< 768px)   | `number` `string` | --     | 0 - 24 |
+| sm-push | 推 - 小屏幕 (平板 ≥768px)     | `number` `string` | --     | 0 - 24 |
+| md-push | 推 - 中等屏幕 (桌面 ≥992px)   | `number` `string` | --     | 0 - 24 |
+| lg-push | 推 - 大型屏幕 (桌面 ≥1200px)  | `number` `string` | --     | 0 - 24 |
 
 :::
 

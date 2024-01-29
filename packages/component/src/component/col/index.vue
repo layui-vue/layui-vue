@@ -10,6 +10,14 @@ export interface ColProps {
   xsOffset?: string | number;
   smOffset?: string | number;
   lgOffset?: string | number;
+  xsPull?: string | number;
+  smPull?: string | number;
+  mdPull?: string | number;
+  lgPull?: string | number;
+  xsPush?: string | number;
+  smPush?: string | number;
+  mdPush?: string | number;
+  lgPush?: string | number;
 }
 
 defineOptions({
@@ -27,7 +35,15 @@ const classes = computed(() => {
     props.mdOffset ? `layui-col-md-offset${props.mdOffset}` : "",
     props.xsOffset ? `layui-col-xs-offset${props.xsOffset}` : "",
     props.smOffset ? `layui-col-sm-offset${props.smOffset}` : "",
-    props.lgOffset ? `layui-col-lg-offset${props.lgOffset}` : "",
+    props.lgOffset ? `layui-col-lg-offset${props.lgOffset}` : "", 
+    props.mdPull ? `layui-col-md-pull${props.mdPull}` : "",
+    props.xsPull ? `layui-col-xs-pull${props.xsPull}` : "",
+    props.smPull ? `layui-col-sm-pull${props.smPull}` : "",
+    props.lgPull ? `layui-col-lg-pull${props.lgPull}` : "",
+    props.mdPush ? `layui-col-md-push${props.mdPush}` : "",
+    props.xsPush ? `layui-col-xs-push${props.xsPush}` : "",
+    props.smPush ? `layui-col-sm-push${props.smPush}` : "",
+    props.lgPush ? `layui-col-lg-push${props.lgPush}` : "",
   ];
 });
 </script>
