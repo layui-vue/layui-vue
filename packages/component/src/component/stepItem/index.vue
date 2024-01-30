@@ -71,7 +71,7 @@ const isVertical = computed(() => {
 });
 
 const isCenter = computed(() => {
-  return parents.props.center;
+  return composition.value === "default" && parents.props.center;
 });
 
 const isLineActive: ComputedRef<boolean> = computed(() => {
