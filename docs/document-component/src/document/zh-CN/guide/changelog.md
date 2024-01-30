@@ -21,7 +21,6 @@
           <ul>
               <li>[新增] col 组件 xsPull, smPull, mdPull, lgPull 属性。</li>
               <li>[新增] col 组件 xsPush, smPush, mdPush, lgPush 属性。</li>
-              <li>[新增] switch 组件 span 激活时动画。</li>
           </ul>
         </li>
       </ul>
