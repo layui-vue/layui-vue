@@ -13,17 +13,19 @@
 ::: demo
 <template>
   <lay-timeline>
-      <lay-timeline-item title="2.14.x">
+      <lay-timeline-item title="2.15.x">
       <ul>
-        <a name="2-14-4"></a>
+        <a name="2-15-0"></a>
         <li>
-          <h3>2.14.4 <span class="layui-badge-rim">2024-01-29</span></h3>
+          <h3>2.15.0 <span class="layui-badge-rim">2024-01-30</span></h3>
           <ul>
               <li>[新增] col 组件 xsPull, smPull, mdPull, lgPull 属性。</li>
               <li>[新增] col 组件 xsPush, smPush, mdPush, lgPush 属性。</li>
           </ul>
         </li>
       </ul>
+      </lay-timeline-item>
+      <lay-timeline-item title="2.14.x">
       <ul>
         <a name="2-14-3"></a>
         <li>
