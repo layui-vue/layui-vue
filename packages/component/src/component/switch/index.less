@@ -13,39 +13,59 @@
     .layui-form-switch {
       height: @size;
       min-width: @min-width;
-      span{
+
+      span {
         width: calc(@size - 4px);
         height: calc(@size - 4px);
-        transition:all 0.1s linear;
+        transition: all 0.1s linear;
       }
-      em{
+
+      em {
         margin-left: calc(@size - 3px);
       }
     }
-    .layui-form-onswitch{
-      span{
+
+    .layui-form-onswitch {
+      span {
         left: calc(100% - calc(@size - 1px));
       }
-      em{
+
+      em {
         margin-right: calc(@size - 3px);
         margin-left: 0px;
+      }
+    }
+
+    .layui-form-switch:active {
+      span {
+        width: @size;
+      }
+    }
+
+    .layui-form-onswitch:active {
+      span {
+        width: @size;
+        left: calc(100% - calc(@size + 3px));
       }
     }
   }
 }
 
-.layui-switch-container{
+.layui-switch-container {
   &[size="lg"] {
-    .set-size(@switch-lg,@switch-lg-min-width);
+    .set-size(@switch-lg, @switch-lg-min-width);
   }
+
   &[size="md"] {
-    .set-size(@switch-md,@switch-md-min-width);
+    .set-size(@switch-md, @switch-md-min-width);
   }
+
   &[size="sm"] {
-    .set-size(@switch-sm,@switch-sm-min-width);
+    .set-size(@switch-sm, @switch-sm-min-width);
   }
+
   &[size="xs"] {
-    .set-size(@switch-xs,@switch-xs-min-width);
+    .set-size(@switch-xs, @switch-xs-min-width);
   }
 }
 
@@ -67,8 +87,8 @@
   border-radius: 20px;
   cursor: pointer;
   background-color: var(--global-neutral-color-6);
-  -webkit-transition:all 0.1s linear;
-  transition:all 0.1s linear;
+  -webkit-transition: all 0.1s linear;
+  transition: all 0.1s linear;
 }
 
 .layui-form-switch span {
@@ -84,8 +104,8 @@
   border-radius: 20px;
   background-color: #fff;
   box-shadow: 0 2px 4px #00230b33;
-  -webkit-transition:all 0.1s linear;
-  transition:all 0.1s linear;
+  -webkit-transition: all 0.1s linear;
+  transition: all 0.1s linear;
 }
 
 .layui-form-switch em {
@@ -117,6 +137,6 @@
 }
 
 .layui-switch-disabled,
-.layui-switch-disabled *{
+.layui-switch-disabled * {
   cursor: not-allowed !important;
 }
