@@ -1,10 +1,11 @@
 import { defineConfig } from "vitest/config";
-import vuePlugin from "@vitejs/plugin-vue";
+import Vue from "@vitejs/plugin-vue";
+import VueJsx from "@vitejs/plugin-vue-jsx";
 
 export default defineConfig({
   test: {
     globals: true,
     environment: "happy-dom",
   },
-  plugins: [vuePlugin()] as any[],
+  plugins: [Vue(), VueJsx()] as any[],
 });
