@@ -10,6 +10,7 @@
     "dev": "pnpm -C play dev",
     "dev:docs": "pnpm -C docs/document-component dev",
     "dev:layer": "pnpm -C docs/document-layer dev",
+    "test": "pnpm -C packages/component test",
     "build": "pnpm run build:icons && pnpm run build:layer && pnpm run build:component && pnpm run build:document",
     "build:document": " pnpm run build:document-component && pnpm run build:document-layer",
     "build:document-component": "pnpm -C docs/document-component build",

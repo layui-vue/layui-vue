@@ -6,8 +6,8 @@
  */
 import { mount, config } from "@vue/test-utils";
 import { beforeAll, describe, expect, test, vi } from "vitest";
-import LayAvatar from "../src/component/avatar";
-import LayIcon from "../src/component/icon";
+import LayAvatar from "../index";
+import LayIcon from "../../icon";
 
 import { nextTick } from "vue";
 

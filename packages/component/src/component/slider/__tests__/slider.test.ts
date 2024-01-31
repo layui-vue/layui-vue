@@ -5,8 +5,8 @@
  * @LastEditors: baobaobao
  */
 import { mount, shallowMount, config } from "@vue/test-utils";
-import LaySlider from "../src/component/slider";
-import LayTooltip from "../src/component/tooltip";
+import LaySlider from "../index.vue";
+import LayTooltip from "../../tooltip";
 
 import { describe, expect, test, vi } from "vitest";
 import { nextTick, reactive, ref } from "vue";

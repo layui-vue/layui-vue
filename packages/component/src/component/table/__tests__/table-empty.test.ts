@@ -11,8 +11,8 @@
  */
 
 import { mount, shallowMount, config } from "@vue/test-utils";
-import LayTable from "../src/component/table";
-import LayEmpty from "../src/component/empty";
+import LayTable from "../index.vue";
+import LayEmpty from "../../empty";
 
 import { describe, expect, test, vi } from "vitest";
 import { nextTick, reactive, ref } from "vue";

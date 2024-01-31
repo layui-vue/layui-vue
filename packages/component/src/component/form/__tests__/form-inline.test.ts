@@ -13,8 +13,8 @@
 import { h } from "vue";
 import { mount, config } from "@vue/test-utils";
 import { beforeAll, describe, expect, test, vi } from "vitest";
-import LayForm from "../src/component/form";
-import LayFormItem from "../src/component/formItem";
+import LayForm from "../index.vue";
+import LayFormItem from "../../formItem";
 
 import { nextTick } from "vue";
 

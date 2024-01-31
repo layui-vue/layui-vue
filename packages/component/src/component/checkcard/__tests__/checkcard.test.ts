@@ -5,7 +5,7 @@
  * @LastEditors: baobaobao
  */
 import { mount, shallowMount } from "@vue/test-utils";
-import LayCheckCard from "../src/component/checkcard";
+import LayCheckCard from "../index.vue";
 import { describe, expect, test } from "vitest";
 const IMAGE_URL = "https://img.com";
 const title = "test checkcard text";
