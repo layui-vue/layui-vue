@@ -121,8 +121,8 @@ watch(
   }
 );
 
-const lastExpandKey = ref();
-const lastCheckedKey = ref();
+const lastExpandKey = ref([]);
+const lastCheckedKey = ref([]);
 
 watch(
   tree,

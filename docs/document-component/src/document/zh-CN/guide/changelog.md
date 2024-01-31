@@ -15,6 +15,16 @@
   <lay-timeline>
       <lay-timeline-item title="2.15.x">
       <ul>
+        <a name="2-15-1"></a>
+        <li>
+          <h3>2.15.1 <span class="layui-badge-rim">xxxx-xx-xx</span></h3>
+          <ul>
+              <li>[新增] affix 组件 test用例。</li>
+              <li>[修复] tree 组件 checkedKeys值丢失。<a href="https://gitee.com/layui/layui-vue/issues/I901ZR">I901ZR</a></li>
+          </ul>
+        </li>
+      </ul>
+      <ul>
         <a name="2-15-0"></a>
         <li>
           <h3>2.15.0 <span class="layui-badge-rim">2024-01-30</span></h3>
