@@ -245,10 +245,13 @@ export default {
 ::: title 设置尺寸
 :::
 
-::: demo 通过 `size` 属性，设置 autocomplete 组件尺寸。
+::: demo 通过 `size` 属性，设置 autocomplete 组件尺寸`lg` `md` `sm` `xs`。
 
 <template>
-  <lay-autocomplete v-model="value5" :fetchSuggestions="fetchSuggestions5" placeholder="输入内容，触发提示" size="lg"></lay-autocomplete>
+  <lay-autocomplete v-model="value5" :fetchSuggestions="fetchSuggestions5" placeholder="lg" size="lg"></lay-autocomplete>
+  <lay-autocomplete v-model="value5" :fetchSuggestions="fetchSuggestions5" placeholder="md" size="md"></lay-autocomplete>
+  <lay-autocomplete v-model="value5" :fetchSuggestions="fetchSuggestions5" placeholder="sm" size="sm"></lay-autocomplete>
+  <lay-autocomplete v-model="value5" :fetchSuggestions="fetchSuggestions5" placeholder="xs" size="xs"></lay-autocomplete>
 </template>
 
 <script>
@@ -290,18 +293,19 @@ export default {
 
 ::: table
 
-| 属性                 | 描述                                     | 类型              | 默认值   | 可选值          | 
-| -------------------- | --------------------------------------- | ----------------- | ------- | -------------- | 
-| name                 | 原始属性 name                            | `string`          | --      | --              | 
-| placeholder          | 提示信息                                 | `string`          | --      | --              | 
-| disabled             | 禁用状态                                 | `boolean`         | `false` | `true` `false`  | 
-| v-model / modelValue | 值                                      | `string` `number` | --      | --             |
-| allow-clear          | 清空操作                                 | `boolean`         | `false` | `true` `false`  | 
-| fetchSuggestions     | 查询建议回调方法，用于加载建议列表 (value: string)，参数 value 为 input 输入内容，其返回值规定为 Promise 对象 。| `Function`        | --      | --             | 
-| contentStyle         | 继承至 dropdown 组件，用于设置下拉面板的 style 属性                                 | `StyleValue`      | --      | --             |
-| contentClass         | 继承至 dropdown 组件，用于设置下拉面板的 class 属性                                 | `string` `Array<string \| object>` `object`          | -- | -- | 
-| autoFitWidth         | 继承至 dropdown 组件，用于设置下拉面板是否与输入框宽度相同                           | `boolean`         | `false` | `true` `false`  | 
-| size                 | 尺寸 (1.9.4 新增)                                                                 | `string`          | `md` | `lg` `md` `md` `xs`  | 
+| 属性                 | 描述                                                                                                             | 类型                                        | 默认值  | 可选值              |
+| -------------------- | ---------------------------------------------------------------------------------------------------------------- | ------------------------------------------- | ------- | ------------------- |
+| name                 | 原始属性 name                                                                                                    | `string`                                    | --      | --                  |
+| placeholder          | 提示信息                                                                                                         | `string`                                    | --      | --                  |
+| disabled             | 禁用状态                                                                                                         | `boolean`                                   | `false` | `true` `false`      |
+| v-model / modelValue | 值                                                                                                               | `string` `number`                           | --      | --                  |
+| allow-clear          | 清空操作                                                                                                         | `boolean`                                   | `false` | `true` `false`      |
+| fetchSuggestions     | 查询建议回调方法，用于加载建议列表 (value: string)，参数 value 为 input 输入内容，其返回值规定为 Promise 对象 。 | `Function`                                  | --      | --                  |
+| contentStyle         | 继承至 dropdown 组件，用于设置下拉面板的 style 属性                                                              | `StyleValue`                                | --      | --                  |
+| contentClass         | 继承至 dropdown 组件，用于设置下拉面板的 class 属性                                                              | `string` `Array<string \| object>` `object` | --      | --                  |
+| autoFitWidth         | 继承至 dropdown 组件，用于设置下拉面板是否与输入框宽度相同                                                       | `boolean`                                   | `false` | `true` `false`      |
+| size                 | 尺寸 (1.9.4 新增)                                                                                                | `string`                                    | `md`    | `lg` `md` `sm` `xs` |
+
 :::
 
 ::: title Autocomplete 事件
@@ -309,9 +313,9 @@ export default {
 
 ::: table
 
-| 名称    | 描述                               | 参数             |
-| ------- | ----                              | ----             |
-| select  | 回车选中或手动点击选项时触发         | option: 选中项    |
+| 名称   | 描述                         | 参数           |
+| ------ | ---------------------------- | -------------- |
+| select | 回车选中或手动点击选项时触发 | option: 选中项 |
 
 :::
 
@@ -320,12 +324,12 @@ export default {
 
 ::: table
 
-| 名称    | 描述 | 参数 |
-| ------- | ---- | ---- |
-| prefix  | 输入框前置内容         | --    |
-| suffix  | 输入框后置内容         | --    |
-| prepend | 输入框前置内容 (边框)  | --    |
-| append  | 输入框后置内容 (边框)   | --    |
+| 名称    | 描述                  | 参数 |
+| ------- | --------------------- | ---- |
+| prefix  | 输入框前置内容        | --   |
+| suffix  | 输入框后置内容        | --   |
+| prepend | 输入框前置内容 (边框) | --   |
+| append  | 输入框后置内容 (边框) | --   |
 
 :::
 

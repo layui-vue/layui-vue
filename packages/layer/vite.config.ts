@@ -15,7 +15,7 @@ export default defineConfig({
   },
   // https://gitee.com/layui-vue/layui-vue/issues/I90CI0
   esbuild: {
-    charset: 'ascii'
+    charset: "ascii",
   },
   plugins: [vue()],
   build: {
