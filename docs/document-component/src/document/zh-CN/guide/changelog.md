@@ -17,13 +17,13 @@
       <ul>
         <a name="2-15-1"></a>
         <li>
-          <h3>2.15.1 <span class="layui-badge-rim">xxxx-xx-xx</span></h3>
+          <h3>2.15.1 <span class="layui-badge-rim">2024-02-02</span></h3>
           <ul>
-              <li>[新增] affix 组件 test用例。</li>
-              <li>[调整] step 组件 提升composition属性优先级(为row时center属性将失效)。</li>
+              <li>[新增] affix 组件 test 用例。</li>
               <li>[修复] tree 组件 checkedKeys值丢失。<a href="https://gitee.com/layui/layui-vue/issues/I901ZR">I901ZR</a></li>
               <li>[修复] slider 组件 二次改变modelValue为0时，滚动条未改变。<a href="https://gitee.com/layui/layui-vue/issues/I90K5J">I90K5J</a></li>
-              <li>[修复] table 组件 totalRow合计精度问题。<a href="https://gitee.com/layui/layui-vue/issues/I90LJE">I90LJE</a></li>
+              <li>[修复] table 组件 totalRow 合计精度问题。<a href="https://gitee.com/layui/layui-vue/issues/I90LJE">I90LJE</a></li>
+              <li>[优化] step 组件 提升 composition 属性优先级,为 row 时 center 属性失效。</li>
           </ul>
         </li>
       </ul>
