@@ -22,6 +22,7 @@
               <li>[新增] affix 组件 test用例。</li>
               <li>[修复] tree 组件 checkedKeys值丢失。<a href="https://gitee.com/layui/layui-vue/issues/I901ZR">I901ZR</a></li>
               <li>[修复] slider 组件 二次改变modelValue为0时，响应丢失。<a href="https://gitee.com/layui/layui-vue/issues/I90K5J">I90K5J</a></li>
+              <li>[修复] table 组件 totalRow合计精度问题。<a href="https://gitee.com/layui/layui-vue/issues/I90LJE">I90LJE</a></li>
           </ul>
         </li>
       </ul>

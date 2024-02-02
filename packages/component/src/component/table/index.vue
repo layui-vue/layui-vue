@@ -936,11 +936,17 @@ const renderTotalRowCell = (column: any) => {
 };
 
 const totalRowMethod = (column: any, dataSource: any[]) => {
-  let total = 0;
-  dataSource.forEach((item) => {
-    total = total + Number(item[column.key]);
+  let precision = 0;
+  const values = dataSource.map((item) => Number(item[column.key]));
+
+  values.forEach((value) => {
+    const decimal = `${value}`.split(".")[1];
+    precision = Math.max(precision, decimal ? decimal.length : 0);
   });
-  return total;
+
+  return values.reduce((pre, next) => {
+    return Number.parseFloat((pre + next).toFixed(Math.min(precision, 20)));
+  }, 0);
 };
 
 const showToolbar = (toolbarName: string) => {
