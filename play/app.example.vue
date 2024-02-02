@@ -8,7 +8,7 @@
 // code here
 </script>
 
-<style lang="scss">
+<style lang="less">
 html,
 body {
   width: 100vw;

@@ -150,8 +150,17 @@ export const useSlider = (
   watch(
     () => [props.modelValue, props.rangeValue],
     (vals, oldVal) => {
-      const modelValue = props.modelValue ? vals[0] : vals[1];
-      const oldValue = props.modelValue ? oldVal[0] : oldVal[1];
+      // 向下兼容rangeValue
+      const modelValue = props.range
+        ? Array.isArray(vals[0])
+          ? vals[0]
+          : vals[1]
+        : vals[0];
+      const oldValue = props.range
+        ? Array.isArray(oldVal[0])
+          ? oldVal[0]
+          : oldVal[1]
+        : oldVal[0];
       if (
         dragging.value ||
         (Array.isArray(modelValue) &&

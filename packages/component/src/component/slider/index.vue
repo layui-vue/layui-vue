@@ -63,16 +63,7 @@ import "./index.less";
 import laySliderBar from "./components/bar.vue";
 import LaySliderMark from "./components/mark.vue";
 
-import {
-  computed,
-  provide,
-  reactive,
-  Ref,
-  ref,
-  toRefs,
-  useSlots,
-  watch,
-} from "vue";
+import { computed, provide, toRefs, useSlots } from "vue";
 import { LAYUI_SLIDER_KEY, useSlider } from "./use-slider";
 import { useSliderMark } from "./components/use-slider-mark";
 import { Mark } from "./types/sliderType";
@@ -136,6 +127,7 @@ const {
   updateDragging,
   tooltipProp,
 } = useSlider(props, emit, getSortMarks);
+
 provide(LAYUI_SLIDER_KEY, {
   ...toRefs(props),
   tooltipProp,
