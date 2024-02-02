@@ -620,6 +620,7 @@ const data9 = ref([{
 | -------------------------------- | ---------------------------------------- | --------------- |--------------- |
 | data                             | 树型组件数据,类型 TreeData \| TreeData[] | null            | |
 | showCheckbox                     | 是否显示复选框                           | false           | |
+| check-strictly                     | 在显示复选框的情况下，是否严格的遵循父子不互相关联的做法      | false           | |
 | onlyIconControl                  | 是否仅允许节点左侧图标控制展开收缩         | false           | |
 | showLine                         | 是否开启连接线                           | true            | |
 | checkedKeys(v-model:checkedKeys) | 开启 showCheckbox 后, 选中的节点         | []              | |

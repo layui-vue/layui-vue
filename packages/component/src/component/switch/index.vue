@@ -6,12 +6,12 @@ import useProps from "./index.hooks";
 
 export interface SwitchProps {
   name?: string;
-  disabled?: boolean;
   modelValue?: string | number | boolean;
-  onswitchText?: string;
-  unswitchText?: string;
+  disabled?: boolean;
   onswitchColor?: string;
   unswitchColor?: string;
+  onswitchText?: string;
+  unswitchText?: string;
   onswitchValue?: string | number | boolean;
   unswitchValue?: string | number | boolean;
   size?: SwitchSize;

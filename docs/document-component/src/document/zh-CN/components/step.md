@@ -434,7 +434,7 @@ export default {
 | direction | 垂直/平行布局 | string |`horizontal` `vertical` | `horizontal` |
 | space | 宽度 | string | -    | `auto` |
 | currentStatus | 当前状态显示 | string | `primary` `success` `fail` `warning` | `success` |
-| composition | 排版 | string | `default` `row` | `default` |
+| composition | 排版(为 `row` 时 `center` 将失效) | string | `default` `row` | `default` |
 | simple | 简洁版 | boolean | `true` `false` |`false`|
 | onChange | 点击切换时监听 | function | - |function(index){}|
 

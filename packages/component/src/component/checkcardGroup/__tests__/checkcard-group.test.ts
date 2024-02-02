@@ -5,7 +5,7 @@
  * @LastEditors: baobaobao
  */
 import { mount } from "@vue/test-utils";
-import LayCheckCardGroup from "../src/component/checkcardGroup";
+import LayCheckCardGroup from "../index.vue";
 
 import { describe, expect, test } from "vitest";
 

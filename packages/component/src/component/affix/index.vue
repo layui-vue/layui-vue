@@ -118,9 +118,9 @@ onMounted(() => {
   nextTick(() => {
     orginOffsetTop = dom.value.offsetTop - props.target.offsetTop;
     orginOffsetLeft = dom.value.getBoundingClientRect().left;
-    marginLeft = parseFloat(getDomStyle(dom.value, "marginLeft"));
-    marginTop = parseFloat(getDomStyle(dom.value, "marginTop"));
-    marginBottom = parseFloat(getDomStyle(dom.value, "marginBottom"));
+    marginLeft = parseFloat(getDomStyle(dom.value, "marginLeft") || 0);
+    marginTop = parseFloat(getDomStyle(dom.value, "marginTop") || 0);
+    marginBottom = parseFloat(getDomStyle(dom.value, "marginBottom") || 0);
     fixedOffset = props.offset + props.target.offsetTop;
     if (props.position === "bottom") {
       fixedOffset = props.offset;

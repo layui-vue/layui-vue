@@ -6,9 +6,9 @@
  */
 import { mount, config } from "@vue/test-utils";
 import { beforeAll, describe, expect, test, vi } from "vitest";
-import LayAvatarList from "../src/component/avatarList";
-import LayIcon from "../src/component/icon";
-import LayAvatar from "../src/component/avatar";
+import LayAvatarList from "../index";
+import LayIcon from "../../icon";
+import LayAvatar from "../../avatar";
 
 import { nextTick } from "vue";
 config.global.components = {

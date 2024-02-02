@@ -1,6 +1,6 @@
 import { mount } from "@vue/test-utils";
 import { expect, test } from "vitest";
-import LayButton from "../src/component/button";
+import LayButton from "../index.vue";
 
 test("测试 button 组件 default 插槽", async () => {
   const wrapper = await mount(LayButton, {

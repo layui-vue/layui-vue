@@ -1,15 +1,15 @@
 import { mount, shallowMount, config } from "@vue/test-utils";
-import LayPage from "../src/component/page";
+import LayPage from "../index.vue";
 import { nextTick } from "vue";
-import LayIcon from "../src/component/icon";
+import LayIcon from "../../icon";
 import { describe, expect, test } from "vitest";
-import LayDropdown from "../src/component/dropdown";
-import LayDropdownMenu from "../src/component/dropdownMenu";
-import LayDropdownMenuItem from "../src/component/dropdownMenuItem";
-import LaySelectOption from "../src/component/selectOption";
-import LaySelect from "../src/component/select";
-import LayButton from "../src/component/button";
-import LayInput from "../src/component/input";
+import LayDropdown from "../../dropdown";
+import LayDropdownMenu from "../../dropdownMenu";
+import LayDropdownMenuItem from "../../dropdownMenuItem";
+import LaySelectOption from "../../selectOption";
+import LaySelect from "../../select";
+import LayButton from "../../button";
+import LayInput from "../../input";
 config.global.components = {
   "lay-select": LaySelect,
   "lay-icon": LayIcon,

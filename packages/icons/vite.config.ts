@@ -13,6 +13,10 @@ export default defineConfig({
       "/@src": path.resolve(__dirname, "src"),
     },
   },
+  // https://gitee.com/layui-vue/layui-vue/issues/I90CI0
+  esbuild: {
+    charset: "ascii",
+  },
   build: {
     target: "es2015",
     outDir: path.resolve(__dirname, "lib"),

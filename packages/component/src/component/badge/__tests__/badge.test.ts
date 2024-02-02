@@ -6,8 +6,8 @@
  */
 import { mount, shallowMount, config } from "@vue/test-utils";
 import { describe, expect, test } from "vitest";
-import LayBadge from "../src/component/badge";
-import LayAvatar from "../src/component/avatar";
+import LayBadge from "../index.vue";
+import LayAvatar from "../../avatar";
 
 import { nextTick, ref } from "vue";
 
