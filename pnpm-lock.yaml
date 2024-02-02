@@ -267,10 +267,10 @@ importers:
         specifier: ^3.4.1
         version: 3.4.1
       '@layui/icons-vue':
-        specifier: 1.1.0
+        specifier: 1.1.1-alpha.1
         version: link:../icons
       '@layui/layer-vue':
-        specifier: 2.2.2
+        specifier: 2.2.3-alpha.1
         version: link:../layer
       '@rollup/plugin-terser':
         specifier: 0.4.4
@@ -311,7 +311,7 @@ importers:
   packages/layer:
     dependencies:
       '@layui/icons-vue':
-        specifier: 1.1.0
+        specifier: 1.1.1-alpha.1
         version: link:../icons
     devDependencies:
       '@babel/plugin-transform-runtime':
@@ -3995,6 +3995,7 @@ packages:
   /entities@4.5.0:
     resolution: {integrity: sha512-V0hjH4dGPh9Ao5p0MoRY6BVqtwCjhz6vI5LT8AJ55H+4g9/4vbHx1I54fS0XuclLhDHArPQCiMjDxjaL8fPxhw==}
     engines: {node: '>=0.12'}
+    requiresBuild: true
     dev: true
 
   /errno@0.1.8:
