@@ -1,14 +1,16 @@
 ### 项目结构
 
-package -> component 组件源码
+docs -> document-component 组件文档
 
-package -> document-component 组件文档
+docs -> document-layer 弹层文档
 
-package -> document-layer 弹层文档
+packages -> component 组件源码
 
 package -> icons 图标源码
 
 package -> layer 弹层源码
+
+play -> 组件调试
 
 ### 分支说明
 
@@ -32,7 +34,6 @@ git checkout next
 
 注意: 环境要求不低于 node 16, 并且依赖 pnpm 包管理工具
 
-
 下载 pnpm 包管理工具
 
 ```
@@ -45,10 +46,14 @@ npm install pnpm -g
 pnpm install
 ```
 
-然后运行项目
+运行 play 项目
 
 ```
-npm run dev
+pnpm run dev
 ```
 
-启动成功后，访问 http://127.0.0.1:3000
+运行组件文档项目
+
+```
+pnpm run dev:docs
+```
