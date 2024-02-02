@@ -45,8 +45,8 @@
   },
   "dependencies": {
     "@rollup/plugin-terser": "0.4.4",
-    "@layui/icons-vue": "1.1.1-alpha.1",
-    "@layui/layer-vue": "2.2.3-alpha.1",
+    "@layui/icons-vue": "1.1.1",
+    "@layui/layer-vue": "2.2.3",
     "@vueuse/core": "8.7.3",
     "@umijs/ssr-darkreader": "^4.9.45",
     "@ctrl/tinycolor": "^3.4.1",

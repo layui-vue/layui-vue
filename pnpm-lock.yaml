@@ -267,11 +267,11 @@ importers:
         specifier: ^3.4.1
         version: 3.4.1
       '@layui/icons-vue':
-        specifier: 1.1.1-alpha.1
-        version: 1.1.1-alpha.1
+        specifier: 1.1.1
+        version: link:../icons
       '@layui/layer-vue':
-        specifier: 2.2.3-alpha.1
-        version: 2.2.3-alpha.1
+        specifier: 2.2.3
+        version: link:../layer
       '@rollup/plugin-terser':
         specifier: 0.4.4
         version: 0.4.4(rollup@4.9.6)
@@ -2380,16 +2380,6 @@ packages:
       '@jridgewell/resolve-uri': 3.1.1
       '@jridgewell/sourcemap-codec': 1.4.15
     dev: true
-
-  /@layui/icons-vue@1.1.1-alpha.1:
-    resolution: {integrity: sha512-Trq3vjYbu865HUnuv2LOIB2L0uBJ7IfyooutDyRnk73zfulypTYL1a3OcfGQX7iIM0SFAVdArV3wTo9/vCIBUg==}
-    dev: false
-
-  /@layui/layer-vue@2.2.3-alpha.1:
-    resolution: {integrity: sha512-EP/4N0f8xtudXhRa7W851EWX4dAmhr/sxfGVKCZ1UIDZ5IWtU6SO4qApqtIpF4yxTV+UL/pjMA18kyDLfjK/zg==}
-    dependencies:
-      '@layui/icons-vue': 1.1.1-alpha.1
-    dev: false
 
   /@microsoft/api-extractor-model@7.26.4(@types/node@18.19.10):
     resolution: {integrity: sha512-PDCgCzXDo+SLY5bsfl4bS7hxaeEtnXj7XtuzEE+BtALp7B5mK/NrS2kHWU69pohgsRmEALycQdaQPXoyT2i5MQ==}
