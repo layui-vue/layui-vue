@@ -205,7 +205,21 @@
             >
               <lay-avatar
                 src="https://jpom.top/images/logo/jpom_logo_small.svg"
-                style="background: transparent; width: 60px"
+                style="background: transparent; width: 40px"
+              ></lay-avatar>
+            </a>
+          </lay-tooltip>
+        </lay-col>
+        <lay-col :md="3" :xs="6">
+          <lay-tooltip content="流之云" position="top">
+            <a
+              style="height: 40px;width: 40px; display: inline-block"
+              href="https://gitee.com/ntdgg/tpflow"
+              target="_blank"
+            >
+              <lay-avatar
+                src="https://portrait.gitee.com/uploads/avatars/namespace/118/356797_ntdgg_1635818279.png!avatar100"
+                style="background: transparent; width: 50px"
               ></lay-avatar>
             </a>
           </lay-tooltip>
