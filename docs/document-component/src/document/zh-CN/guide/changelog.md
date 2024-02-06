@@ -15,6 +15,16 @@
   <lay-timeline>
       <lay-timeline-item title="2.15.x">
       <ul>
+        <a name="2-15-2"></a>
+        <li>
+          <h3>2.15.2 <span class="layui-badge-rim">2024-02-06</span></h3>
+          <ul>
+              <li>[升级] layer-vue 到 2.2.3 版本。</li>
+              <li>[修复] icons-vue 到 1.1.1 版本。</li>
+          </ul>
+        </li>
+      </ul>
+      <ul>
         <a name="2-15-1"></a>
         <li>
           <h3>2.15.1 <span class="layui-badge-rim">2024-02-02</span></h3>
