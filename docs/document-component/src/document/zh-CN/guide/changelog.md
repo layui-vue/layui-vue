@@ -15,6 +15,16 @@
   <lay-timeline>
     <lay-timeline-item title="2.16.x">
       <ul>
+        <a name="2-16-1"></a>
+        <li>
+          <h3>2.16.1 <span class="layui-badge-rim">2024-02-19</span></h3>
+          <ul>
+              <li>[修复] layer.notify 组件 offset 为 rb 时，位置计算异常。</li>
+              <li>[升级] layer-vue 2.3.1 版本。</li>
+          </ul>
+        </li>
+      </ul>
+      <ul>
         <a name="2-16-0"></a>
         <li>
           <h3>2.16.0 <span class="layui-badge-rim">2024-02-19</span></h3>
