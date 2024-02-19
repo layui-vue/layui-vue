@@ -6,6 +6,7 @@
 }
 
 .generate-space(@a) {
+
   .layui-col-space@{a} {
     margin: -0.5px * @a;
   }
@@ -13,6 +14,7 @@
   .layui-col-space@{a} > * {
     padding: 0.5px * @a;
   }
+  
 }
 
 .loop-generate-space(@index) when (@index <=30) {
@@ -20,7 +22,7 @@
   .loop-generate-space(@index + 1);
 }
 
-.loop-generate-space(1);
+.loop-generate-space(0);
 
 .generate-col-xs(@a) {
   .layui-col-xs@{a} {
@@ -90,6 +92,7 @@
 }
 
 .generate-col-lg(@a) {
+
   .layui-col-lg@{a} {
     float: left;
     display: block;
@@ -132,17 +135,25 @@
 }
 
 @media screen and (max-width: 768px) {
-  .loop-generate-col-xs(1);
+  .loop-generate-col-xs(0);
 }
 
 @media screen and (min-width: 768px) {
-  .loop-generate-col-sm(1);
+  .loop-generate-col-sm(0);
 }
 
 @media screen and (min-width: 992px) {
-  .loop-generate-col-md(1);
+  .loop-generate-col-md(0);
 }
 
 @media screen and (min-width: 1200px) {
-  .loop-generate-col-lg(1);
+  .loop-generate-col-lg(0);
+}
+
+
+.layui-col-xs0,
+.layui-col-sm0,
+.layui-col-md0,
+.layui-col-lg0 {
+  padding: 0px;
 }

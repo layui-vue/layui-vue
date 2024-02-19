@@ -138,7 +138,7 @@ const layer = {
     return layer.create(option, defaultOption, callback);
   },
   //通知
-  notifiy: (option: any = {}, callback?: Function) => {
+  notify: (option: any = {}, callback?: Function) => {
     option.type = 6;
     const defaultOption = {
       offset: "rt",

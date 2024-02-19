@@ -10,7 +10,7 @@
 ::: title 综合演示
 :::
 
-::: demo 如 Message/Confirm/Loading/Page/Iframe/Drawer/Notifiy/Photos，应有尽有。
+::: demo 如 Message/Confirm/Loading/Page/Iframe/Drawer/Notify/Photos，应有尽有。
 
 <template>
     <lay-button type="primary" @click="openMsg">普通消息</lay-button>
@@ -20,7 +20,7 @@
     <lay-button type="primary" @click="openPage">模态框</lay-button>
     <lay-button type="primary" @click="openIframe">Iframe 层</lay-button>
     <lay-button type="primary" @click="openDrawer">抽屉</lay-button>
-    <lay-button type="primary" @click="openNotifiy">通知</lay-button>
+    <lay-button type="primary" @click="openNotify">通知</lay-button>
     <lay-button type="primary" @click="openPhotos">相册</lay-button>
 </template>
 
@@ -53,8 +53,8 @@ const openIframe = function() {
     })
 }
 
-const openNotifiy = function() {
-    layer.notifiy({
+const openNotify = function() {
+    layer.notify({
       title:"标题",
       content:"默认就是右上，也是用得最多的"
     })
@@ -206,21 +206,21 @@ const openConfirm2 = function() {
 ::: title 通知消息 
 :::
 
-::: demo 通过 layer.notifiy(options) 创建通知消息。
+::: demo 通过 layer.notify(options) 创建通知消息。
 
 <template>
   <lay-row :space="30" >
     <lay-col :span="24">
-      <lay-button type="primary" @click="baseNotifiyRT">右上位置</lay-button>
-      <lay-button type="primary" @click="baseNotifiyRB">右下位置</lay-button>
-      <lay-button type="primary" @click="baseNotifiyLT">左上位置</lay-button>
-      <lay-button type="primary" @click="baseNotifiyLB">左下位置</lay-button>
+      <lay-button type="primary" @click="baseNotifyRT">右上位置</lay-button>
+      <lay-button type="primary" @click="baseNotifyRB">右下位置</lay-button>
+      <lay-button type="primary" @click="baseNotifyLT">左上位置</lay-button>
+      <lay-button type="primary" @click="baseNotifyLB">左下位置</lay-button>
     </lay-col>
     <lay-col :span="24">
-      <lay-button type="primary" @click="NotifiySuccess">成功通知</lay-button>
-      <lay-button type="primary" @click="NotifiyFailure">失败通知</lay-button>
-      <lay-button type="primary" @click="NotifiyWarm">警告通知</lay-button>
-      <lay-button type="primary" @click="NotifiyInfo">锁定通知</lay-button>
+      <lay-button type="primary" @click="NotifySuccess">成功通知</lay-button>
+      <lay-button type="primary" @click="NotifyFailure">失败通知</lay-button>
+      <lay-button type="primary" @click="NotifyWarm">警告通知</lay-button>
+      <lay-button type="primary" @click="NotifyInfo">锁定通知</lay-button>
     </lay-col>
   </lay-row>
 </template>
@@ -228,56 +228,56 @@ const openConfirm2 = function() {
 <script>
 import { layer } from  "@layui/layui-vue"
 
-const baseNotifiyRT = function() {
-    layer.notifiy({
+const baseNotifyRT = function() {
+    layer.notify({
       title:"这是标题",
       content:"默认就是右上，也是用得最多的"
     })
 }
-const baseNotifiyRB = function() {
-    layer.notifiy({
+const baseNotifyRB = function() {
+    layer.notify({
       title:"这是标题",
       content:"默认就是右上，也是用得最多的",
       offset:'rb',
     })
 }
-const baseNotifiyLT = function() {
-    layer.notifiy({
+const baseNotifyLT = function() {
+    layer.notify({
       title:"这是标题",
       content:"默认就是右上，也是用得最多的",
       offset:'lt',
     })
 }
-const baseNotifiyLB = function() {
-    layer.notifiy({
+const baseNotifyLB = function() {
+    layer.notify({
       title:"这是标题",
       content:"默认就是右上，也是用得最多的",
       offset:'lb',
     })
 }
-const NotifiySuccess=function(){
-    layer.notifiy({
+const NotifySuccess=function(){
+    layer.notify({
       title:"Success",
       content:"默认就是右上，也是用得最多的",
       icon:1
     })
 }
-const NotifiyFailure=function(){
-    layer.notifiy({
+const NotifyFailure=function(){
+    layer.notify({
       title:"Error",
       content:"默认就是右上，也是用得最多的",
       icon:2
     })
 }
-const NotifiyWarm=function(){
-    layer.notifiy({
+const NotifyWarm=function(){
+    layer.notify({
       title:"Warming",
       content:"默认就是右上，也是用得最多的",
       icon:3
     })
 }
-const NotifiyInfo=function(){
-    layer.notifiy({
+const NotifyInfo=function(){
+    layer.notify({
       title:"Question",
       content:"默认就是右上，也是用得最多的",
       icon:4

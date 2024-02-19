@@ -74,7 +74,7 @@ export interface LayerProps {
     | "loading"
     | "drawer"
     | "photos"
-    | "notifiy";
+    | "notify";
   content?: string | Function | object | VNodeTypes;
   isHtmlFragment?: boolean;
   shade?: boolean | string;

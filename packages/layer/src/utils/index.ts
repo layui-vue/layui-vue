@@ -194,7 +194,7 @@ export function calculateType(modalType: number | string) {
   } else if (modalType === "photos" || modalType == 5) {
     // 相册展示
     return 5;
-  } else if (modalType === "notifiy" || modalType == 6) {
+  } else if (modalType === "notify" || modalType == 6) {
     // 消息通知
     return 6;
   }

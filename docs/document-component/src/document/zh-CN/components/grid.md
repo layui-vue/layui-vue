@@ -14,7 +14,7 @@
 
 <template>
   <lay-row space="10">
-     <lay-col md="12"><div class="grid-demo">1</div></lay-col>
+     <lay-col md="0"><div class="grid-demo">1</div></lay-col>
      <lay-col md="12"><div class="grid-demo">2</div></lay-col>
      <lay-col md="6"><div class="grid-demo">3</div></lay-col>
      <lay-col md="6"><div class="grid-demo">4</div></lay-col>
@@ -36,7 +36,6 @@ export default {
 
 <style>
 .grid-demo {
-    padding: 10px;
     line-height: 50px;
     border-radius: 2px;
     text-align: center;
@@ -72,7 +71,6 @@ export default {
 
 <style>
 .grid-demo {
-    padding: 10px;
     line-height: 50px;
     border-radius: 2px;
     text-align: center;
@@ -107,7 +105,6 @@ export default {
 </script>
 <style>
 .grid-demo {
-    padding: 10px;
     line-height: 50px;
     border-radius: 2px;
     text-align: center;
@@ -148,7 +145,6 @@ export default {
 </script>
 <style>
 .grid-demo {
-    padding: 10px;
     line-height: 50px;
     border-radius: 2px;
     text-align: center;

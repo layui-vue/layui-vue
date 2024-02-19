@@ -17,7 +17,7 @@
                 >layer - vue
                 <cite>通用型弹出层组件</cite>
                 <img
-                  src="https://img.shields.io/badge/npm-v2.2.1-blue"
+                  src="https://img.shields.io/badge/npm-v2.3.0-blue"
                   alt="Version"
                 />
                 <img src="https://img.shields.io/badge/license-MIT-green" />
