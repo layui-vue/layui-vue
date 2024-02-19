@@ -711,56 +711,56 @@ const groupImg2 = function() {
 import { layer } from  "layui-layer/src/index"
 
 const baseNotifiy = function() {
-    layer.notifiy({
+    layer.notify({
       title:"Notification Title",
       content:"I will never close automatically. I will be close automatically. I will never close automatically.",
       area: "300px"
     })
 }
 const baseNotifiyRB = function() {
-    layer.notifiy({
+    layer.notify({
       title:"Notification Title",
       content:"I will never close automatically. I will be close automatically. I will never close automatically.",
       offset:'rb',
     })
 }
 const baseNotifiyLT = function() {
-    layer.notifiy({
+    layer.notify({
       title:"Notification Title",
       content:"I will never close automatically. I will be close automatically. I will never close automatically.",
       offset:'lt',
     })
 }
 const baseNotifiyLB = function() {
-    layer.notifiy({
+    layer.notify({
       title:"Notification Title",
       content:"I will never close automatically. I will be close automatically. I will never close automatically.",
       offset:'lb',
     })
 }
 const NotifiySuccess=function(){
-    layer.notifiy({
+    layer.notify({
       title:"Notification Title",
       content:"I will never close automatically. I will be close automatically. I will never close automatically.",
       icon:1
     })
 }
 const NotifiyFailure=function(){
-    layer.notifiy({
+    layer.notify({
       title:"Notification Title",
       content:"I will never close automatically. I will be close automatically. I will never close automatically.",
       icon:2
     })
 }
 const NotifiyWarm=function(){
-    layer.notifiy({
+    layer.notify({
       title:"Notification Title",
       content:"I will never close automatically. I will be close automatically. I will never close automatically.",
       icon:3
     })
 }
 const NotifiyInfo=function(){
-    layer.notifiy({
+    layer.notify({
       title:"Notification Title",
       content:"I will never close automatically. I will be close automatically. I will never close automatically.",
       icon:4,
@@ -1220,7 +1220,7 @@ const changeFeatureVisible11 = function() {
 
 
 const changeFeatureVisible12 = function() {
-    layer.notifiy({
+    layer.notify({
       title:"Notification Title",
       time: 10000000,
       content:"I will never close automatically. I will be close automatically. I will never close automatically.",
@@ -1229,7 +1229,7 @@ const changeFeatureVisible12 = function() {
 }
 
 const changeFeatureVisible13 = function() {
-    layer.notifiy({
+    layer.notify({
       title:"Notification Title",
       content:"I will never close automatically. I will be close automatically. I will never close automatically.",
       area: "300px",

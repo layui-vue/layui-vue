@@ -276,7 +276,7 @@ export default {
     onMounted(() => {
       if (appStore.documentVersion != version) {
         appStore.documentVersion = version;
-        layer.notifiy({
+        layer.notify({
           title: "更新公告",
           content: `layui - vue ${version} 已发布，请前往 <a style="color:#16baaa;" href="http://www.layui-vue.com/zh-CN/guide/changelog">[ 查看 ]</a>`,
           isHtmlFragment: true,

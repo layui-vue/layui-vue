@@ -270,7 +270,7 @@ importers:
         specifier: 1.1.1
         version: link:../icons
       '@layui/layer-vue':
-        specifier: 2.2.3
+        specifier: 2.3.0
         version: link:../layer
       '@rollup/plugin-terser':
         specifier: 0.4.4

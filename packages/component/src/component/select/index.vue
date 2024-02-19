@@ -31,7 +31,6 @@ export interface SelectProps {
   searchMethod?: Function;
   modelValue?: any;
   multiple?: boolean;
-  items?: SelectOptionProps[];
   options?: SelectOptionProps[];
   autoFitWidth?: boolean;
   size?: SelectSize;
@@ -113,14 +112,14 @@ const intOption = () => {
   if (slots.default) {
     getOption(slots.default(), newOptions);
   }
-  Object.assign(newOptions, props.options || props.items);
+  Object.assign(newOptions, props.options);
   if (JSON.stringify(newOptions) != JSON.stringify(options.value)) {
     options.value = newOptions;
   }
 };
 
 const allOptions = computed(() => {
-  return props.options || props.items;
+  return props.options;
 });
 
 const handleRemove = (value: any) => {
@@ -319,7 +318,7 @@ provide("searchMethod", props.searchMethod);
           <div class="layui-select-content__header" v-if="slots.header">
             <slot name="header"></slot>
           </div>
-          <template v-if="options || items">
+          <template v-if="options">
             <lay-select-option
               v-for="(item, index) in allOptions"
               v-bind="item"

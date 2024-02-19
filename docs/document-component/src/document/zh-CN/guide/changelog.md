@@ -13,6 +13,21 @@
 ::: demo
 <template>
   <lay-timeline>
+    <lay-timeline-item title="2.16.x">
+      <ul>
+        <a name="2-16-0"></a>
+        <li>
+          <h3>2.16.0 <span class="layui-badge-rim">2024-02-19</span></h3>
+          <ul>
+              <li>[调整] layer.notifiy 方法为 notify。</li>
+              <li>[调整] layer 组件 options 属性 type 可选值 notifiy 为 notify。</li>
+              <li>[调整] col 组件所有属性可选值范围为 0 - 24。</li>
+              <li>[移除] select 组件 items 属性，完全由 options 代替。</li>
+              <li>[升级] layer-vue 2.3.0 版本。</li>
+          </ul>
+        </li>
+      </ul>
+      </lay-timeline-item>
       <lay-timeline-item title="2.15.x">
       <ul>
         <a name="2-15-2"></a>
