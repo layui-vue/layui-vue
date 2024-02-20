@@ -521,6 +521,69 @@ import { ref } from 'vue';
 
 :::
 
+::: title 懒加载子节点
+:::
+
+::: demo 异步加载子节点
+
+<template>
+  <lay-tree :data="data10" lazy :load="handleLoad" default-expand-all> </lay-tree>
+</template>
+
+<script setup>
+import { ref } from 'vue';
+
+const data10 = ref([
+  {
+    title: "一级1",
+    id: 1,
+  },
+	{
+    title: "一级2",
+    id: 2,
+		children: [
+			{
+				title: "一级2-1",
+				id: 21,
+			}
+		]
+  },
+]);
+
+const handleLoad = (node, resolve) => {
+  console.log(node);
+  if (node.id === 1) {
+    setTimeout(() => {
+      resolve([
+        {
+          title: "一级1-1",
+          id: 11,
+        },
+        {
+          title: "一级1-2",
+          id: 12,
+        },
+      ]);
+    }, 2000);
+  } else if (node.id === 11) {
+    resolve([
+      {
+        title: "一级1-1-1",
+        id: 111,
+      },
+      {
+        title: "一级1-2-1",
+        id: 121,
+      },
+    ]);
+  } else {
+    resolve([]);
+  }
+};
+</script>
+
+:::
+
 ::: title 自定义字段
 :::
 
@@ -616,21 +679,22 @@ const data9 = ref([{
 
 ::: table
 
-| Name                             | Description                              | Accepted Values | Version |
-| -------------------------------- | ---------------------------------------- | --------------- |--------------- |
-| data                             | 树型组件数据,类型 TreeData \| TreeData[] | null            | |
-| showCheckbox                     | 是否显示复选框                           | false           | |
-| check-strictly                     | 在显示复选框的情况下，是否严格的遵循父子不互相关联的做法      | false           | |
-| onlyIconControl                  | 是否仅允许节点左侧图标控制展开收缩         | false           | |
-| showLine                         | 是否开启连接线                           | true            | |
-| checkedKeys(v-model:checkedKeys) | 开启 showCheckbox 后, 选中的节点         | []              | |
-| expandKeys(v-model:expandKeys)   | 展开的节点 key 数组                      | []              | 1.8.7 |
-| collapse-transition              | 是否开启展示收起动画                     | false           | |
-| selectedKey                      | 选中节点                                | --              | |
-| tail-node-icon                   | 尾节点图标，通过设置 false 关闭尾节点图标  | 图标集          | |
-| replace-fields                   | 替换data中`id` `title` `children` 字段名  | {id: "id", title: "title", children: "children"}          | |
-| default-expand-all                   | 是否默认展开所有节点  | false          | |
-
+| Name                             | Description                                              | Accepted Values                                                                        | Version |
+| -------------------------------- | -------------------------------------------------------- | -------------------------------------------------------------------------------------- | ------- |
+| data                             | 树型组件数据,类型 TreeData \| TreeData[]                 | null                                                                                   |         |
+| showCheckbox                     | 是否显示复选框                                           | false                                                                                  |         |
+| check-strictly                   | 在显示复选框的情况下，是否严格的遵循父子不互相关联的做法 | false                                                                                  |         |
+| onlyIconControl                  | 是否仅允许节点左侧图标控制展开收缩                       | false                                                                                  |         |
+| showLine                         | 是否开启连接线                                           | true                                                                                   |         |
+| checkedKeys(v-model:checkedKeys) | 开启 showCheckbox 后, 选中的节点                         | []                                                                                     |         |
+| expandKeys(v-model:expandKeys)   | 展开的节点 key 数组                                      | []                                                                                     | 1.8.7   |
+| collapse-transition              | 是否开启展示收起动画                                     | false                                                                                  |         |
+| selectedKey                      | 选中节点                                                 | --                                                                                     |         |
+| tail-node-icon                   | 尾节点图标，通过设置 false 关闭尾节点图标                | 图标集                                                                                 |         |
+| replace-fields                   | 替换 data 中`id` `title` `children` 字段名               | {id: "id", title: "title", children: "children"}                                       |         |
+| default-expand-all               | 是否默认展开所有节点，开启 `lazy` 懒加载此参数将失效     | false                                                                                  |         |
+| lazy                             | 是否懒加载子节点，需与 `load` 方法结合使用               | false                                                                                  |         |
+| load                             | 加载子树数据的方法，仅当 `lazy` 属性为 true 时生效       | function(node, resolve)，node 为当前点击的节点，resolve 为数据加载完成的回调(必须调用) |         |
 
 :::
 
@@ -639,13 +703,13 @@ const data9 = ref([{
 
 ::: table
 
-| Name                | Description | Accepted Values | Version |
-|---------------------|-------------| --------------- |--------------- |
-| id                  | 唯一值          | -               | -|
-| title               | 节点名称        | -               | -|
-| children            | 子节点          | []              | -|
-| disabled            | 该节点是否禁用   | false           | - |
-| spread              | 是否展开        | false           | -|
+| Name     | Description    | Accepted Values | Version |
+| -------- | -------------- | --------------- | ------- |
+| id       | 唯一值         | -               | -       |
+| title    | 节点名称       | -               | -       |
+| children | 子节点         | []              | -       |
+| disabled | 该节点是否禁用 | false           | -       |
+| spread   | 是否展开       | false           | -       |
 
 :::
 

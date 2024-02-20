@@ -9,6 +9,7 @@ import {
   KeysType,
   EditType,
   ReplaceFieldsOptionsOptional,
+  LoadFunction,
 } from "./tree.type";
 import { fillFieldNames } from "./utils";
 import "./index.less";
@@ -23,6 +24,7 @@ export interface OriginalTreeData {
 
 export interface TreeProps {
   data: OriginalTreeData | OriginalTreeData[];
+  treeOriginData?: TreeData[];
   disabled?: boolean;
   edit?: EditType;
   checkedKeys?: KeysType;
@@ -37,6 +39,8 @@ export interface TreeProps {
   tailNodeIcon?: string | boolean;
   isSelect?: boolean;
   defaultExpandAll?: boolean;
+  lazy?: boolean;
+  load?: LoadFunction;
 }
 
 interface TreeEmits {
@@ -44,6 +48,7 @@ interface TreeEmits {
   (e: "update:checkedKeys", keys: KeysType): void;
   (e: "node-click", node: OriginalTreeData): void;
   (e: "update:selectedKey", id: string | number): void;
+  (e: "update:treeOriginData", treeOriginData: TreeData[]): void;
 }
 
 defineOptions({
@@ -64,6 +69,7 @@ const props = withDefaults(defineProps<TreeProps>(), {
     return [];
   },
   defaultExpandAll: false,
+  lazy: false,
 });
 
 const emit = defineEmits<TreeEmits>();
@@ -143,6 +149,11 @@ watch(
       setTimeout(() => {
         unWatch.value = false;
       }, 0);
+
+      // todo
+      // 新增懒加载不修改源数据
+      // 暂时用于TreeSelect生成multipleValue.value | singleValue
+      emit("update:treeOriginData", tree.value.treeData);
     }
   },
   { deep: true }
@@ -155,9 +166,9 @@ onMounted(() => {
 });
 
 function handleClick(node: TreeData) {
-  const originNode = tree.value.getOriginData(node.id);
+  const originNode = tree.value.getOriginData(node[_replaceFields.value.id]);
   if (props.isSelect) {
-    emit("update:selectedKey", node.id);
+    emit("update:selectedKey", node[_replaceFields.value.id]);
   }
   emit("node-click", originNode);
 }
@@ -184,6 +195,7 @@ watch(
       :only-icon-control="onlyIconControl"
       :tail-node-icon="tailNodeIcon"
       :replace-fields="_replaceFields"
+      :load="load"
       @node-click="handleClick"
     >
       <template v-if="$slots.title" #title="{ data }">
