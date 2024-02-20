@@ -35,6 +35,8 @@ export interface TreeProps {
   showLine?: boolean;
   replaceFields: ReplaceFieldsOptions;
   defaultExpandAll?: boolean;
+  lazy?: boolean;
+  // load?: LoadFunction;
 }
 export interface TreeEmits {
   (e: "update:checkedKeys", keys: KeysType): void;
@@ -44,3 +46,8 @@ export interface TreeEmits {
 
 export type CustomKey = string | number;
 export type CustomString = (() => string) | string;
+
+export type LoadFunction = (
+  rootNode: OriginalTreeData,
+  loadedCallback: (data: OriginalTreeData[]) => void
+) => void;

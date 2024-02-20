@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { LayIcon } from "@layui/icons-vue";
 import LayCheckbox from "../checkbox/index.vue";
-import { computed, useSlots } from "vue";
+import { computed, nextTick } from "vue";
 import { Tree } from "./tree";
 import { Nullable } from "../../types";
 import LayTransition from "../transition/index.vue";
@@ -10,6 +10,8 @@ import {
   CustomKey,
   CustomString,
   ReplaceFieldsOptions,
+  LoadFunction,
+  OriginalTreeData,
 } from "./tree.type";
 
 export interface TreeData {
@@ -21,6 +23,8 @@ export interface TreeData {
   isChecked: boolean;
   isDisabled: boolean;
   isLeaf: boolean;
+  isLazy: boolean;
+  isLoading: boolean;
   hasNextSibling: boolean;
   parentNode: Nullable<TreeData>;
   [key: string]: any;
@@ -37,6 +41,7 @@ export interface TreeNodeProps {
   onlyIconControl: boolean;
   tailNodeIcon: string | boolean;
   replaceFields: ReplaceFieldsOptions;
+  load?: LoadFunction;
 }
 
 interface TreeNodeEmits {
@@ -66,12 +71,12 @@ function renderLineShort(node: TreeData) {
  */
 const nodeIconType = (node: TreeData): string => {
   if (!props.showLine) {
-    if (node.children.length > 0) {
+    if (node.children.length > 0 || node.isLazy) {
       return !node.isLeaf ? "layui-icon-triangle-r" : "layui-icon-triangle-d";
     }
     return "";
   }
-  if (node.children.length !== 0) {
+  if (node.children.length > 0 || node.isLazy) {
     return !node.isLeaf ? "layui-icon-addition" : "layui-icon-subtraction";
   }
   if (props.tailNodeIcon) {
@@ -89,7 +94,29 @@ function handleChange(checked: boolean, node: TreeData) {
 }
 
 function handleIconClick(node: TreeData) {
-  node.isLeaf = !node.isLeaf;
+  const Id = node[props.replaceFields.id];
+  const originNode = props.tree.getOriginData(Id);
+  const hasChildren =
+    node[props.replaceFields.children] &&
+    node[props.replaceFields.children].length > 0;
+
+  if (props.load && node.isLazy && !hasChildren) {
+    node.isLoading = true;
+    props.load(originNode, (data: OriginalTreeData[]) => {
+      // todo
+      // 不修改tree组件中props.data源数据
+      const tree = props.tree.createTree(data, Id);
+      Reflect.set(node, props.replaceFields.children, tree);
+
+      node.isLoading = false;
+      node.isLazy = false;
+      nextTick(() => {
+        node.isLeaf = !node.isLeaf;
+      });
+    });
+  } else {
+    node.isLeaf = !node.isLeaf;
+  }
 }
 
 function handleTitleClick(node: TreeData) {
@@ -162,7 +189,9 @@ const isChildAllSelected = computed(() => {
       <div class="layui-tree-main">
         <span
           :class="[
-            showLine && node.children.length > 0 ? 'layui-tree-icon' : '',
+            showLine && (node.children.length > 0 || node.isLazy)
+              ? 'layui-tree-icon'
+              : '',
             { 'layui-tree-iconClick': true },
           ]"
         >
@@ -179,6 +208,11 @@ const isChildAllSelected = computed(() => {
           :isIndeterminate="isChildAllSelected(node)"
           @change="(checked: boolean) => handleChange(checked, node)"
           v-if="showCheckbox"
+        />
+        <lay-icon
+          v-if="node.isLoading"
+          class="layui-tree-loading layui-anim layui-anim-rotate layui-anim-loop"
+          type="layui-icon-loading"
         />
         <span
           :class="{
@@ -210,6 +244,7 @@ const isChildAllSelected = computed(() => {
           :only-icon-control="onlyIconControl"
           :tail-node-icon="tailNodeIcon"
           :replace-fields="replaceFields"
+          :load="load"
           @node-click="recursiveNodeClick"
         >
           <template v-if="$slots.title" #title="slotProp: { data: any }">
