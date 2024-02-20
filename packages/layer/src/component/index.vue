@@ -52,7 +52,7 @@ export interface LayerProps {
   icon?: string | number;
   skin?: string;
   zIndex?: number | Function;
-  setTop?: boolean;
+  // setTop?: boolean;
   offset?: string[] | string;
   area?: string[] | "auto";
   modelValue?: boolean;
@@ -117,7 +117,7 @@ export interface LayerProps {
 const props = withDefaults(defineProps<LayerProps>(), {
   title: "标题",
   titleStyle: "",
-  setTop: false,
+  // setTop: false,
   offset: "auto",
   area: "auto",
   modelValue: false,
@@ -189,13 +189,17 @@ const _h: Ref<string> = ref(area.value[0]);
 const _t: Ref<string> = ref(offset.value[0]);
 const _l: Ref<string> = ref(offset.value[1]);
 
+const setIndex = () => {
+  index.value = props.zIndex ?? nextIndex();
+};
+
 /**
  * 监听 props 的 zIndex 改变, 更新弹出层元素层级
  */
 watch(
   () => props.zIndex,
   () => {
-    index.value = props.zIndex ?? nextIndex();
+    setIndex();
   },
   { immediate: true }
 );
@@ -339,6 +343,7 @@ watch(
       } else {
         notFirstOpenLayerInit();
       }
+      setIndex();
     } else {
       beforeCloseSaveData();
     }
