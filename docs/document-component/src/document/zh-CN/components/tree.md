@@ -693,8 +693,8 @@ const data9 = ref([{
 | tail-node-icon                   | 尾节点图标，通过设置 false 关闭尾节点图标                | 图标集                                                                                 |         |
 | replace-fields                   | 替换 data 中`id` `title` `children` 字段名               | {id: "id", title: "title", children: "children"}                                       |         |
 | default-expand-all               | 是否默认展开所有节点，开启 `lazy` 懒加载此参数将失效     | false                                                                                  |         |
-| lazy                             | 是否懒加载子节点，需与 `load` 方法结合使用               | false                                                                                  |         |
-| load                             | 加载子树数据的方法，仅当 `lazy` 属性为 true 时生效       | function(node, resolve)，node 为当前点击的节点，resolve 为数据加载完成的回调(必须调用) |         |
+| lazy                             | 是否懒加载子节点，需与 `load` 方法结合使用               | false                                                                                  | 2.16.2  |
+| load                             | 加载子树数据的方法，仅当 `lazy` 属性为 true 时生效       | function(node, resolve)，node 为当前点击的节点，resolve 为数据加载完成的回调(必须调用) | 2.16.2  |
 
 :::
 
