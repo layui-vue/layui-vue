@@ -21,6 +21,7 @@ export interface JsonSchemaFormProps {
 }
 
 const props = withDefaults(defineProps<JsonSchemaFormProps>(), {
+  model: () => ({}),
   space: 10,
 });
 
@@ -73,7 +74,11 @@ defineExpose({ validate, resetFields, clearValidate });
             :rules="input.rules"
             v-bind="{ ...input.errorMessage }"
           >
-            <form-block :input="input"></form-block>
+            <template v-if="typeof input.customRender === 'string'">
+              <slot :name="input.customRender" :input="input"></slot>
+            </template>
+
+            <form-block v-else :input="input"></form-block>
           </lay-form-item>
         </lay-col>
       </template>

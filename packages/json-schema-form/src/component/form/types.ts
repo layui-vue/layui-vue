@@ -20,6 +20,9 @@ type ErrorMessage = {
   requiredErrorMessage: string;
 };
 
+type customRenderFnType = () => Component;
+type customRenderType = string | customRenderFnType;
+
 export interface JsonSchemaFormProps {
   model?: modelType;
   initValidate?: boolean;
@@ -43,7 +46,7 @@ export interface InputsProps {
   errorMessage: ErrorMessage;
   hidden?: boolean;
   colProps?: ColProps;
-  getComponent?: () => Component;
+  customRender?: customRenderType;
 }
 
 export declare interface FormCallback {

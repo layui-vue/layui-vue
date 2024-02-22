@@ -13,9 +13,8 @@ import LayRadio from "../radio";
 import LayCheckbox from "../checkbox";
 
 const getComponent = (input: InputsProps): Component => {
-  // 自定义Compoents
-  if (typeof input.getComponent === "function") {
-    return input.getComponent.call(undefined);
+  if (typeof input.customRender === "function") {
+    return input.customRender.call(undefined);
   }
 
   const type = input.type.toLowerCase() as InputsType;

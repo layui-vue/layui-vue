@@ -6,7 +6,12 @@
     :model="model"
     v-bind="props"
     :inputs="inputs"
-  ></lay-json-schema-form>
+  >
+    <template #customRender-string="{ input }">
+      {{ input }}
+      <div>customRender-string</div>
+    </template>
+  </lay-json-schema-form>
   <lay-button @click="handleClick1">提交</lay-button>
   <lay-button @click="handleClick2">重置</lay-button>
   <lay-button @click="handleClick3">清除验证</lay-button>
@@ -43,56 +48,56 @@ const props = {
 };
 
 const inputs = reactive([
+  // {
+  //   label: "json-form-text",
+  //   type: "text",
+  //   name: "text1",
+  //   required: true,
+  //   placeholder: "提示信息",
+  //   errorMessage: {
+  //     requiredErrorMessage: "123",
+  //   },
+  //   colProps: {
+  //     md: 12,
+  //   },
+  // },
+  // {
+  //   label: "json-form-select",
+  //   type: "select",
+  //   name: "select",
+  //   value: "2",
+  //   required: true,
+  //   rules: {
+  //     validator(rule, value, callback, source, options) {
+  //       if (value < 18) {
+  //         callback(new Error(`${rule.field}太过于年轻`));
+  //       } else {
+  //         return true;
+  //       }
+  //     },
+  //   },
+  //   options: [
+  //     {
+  //       label: "运动",
+  //       value: 0,
+  //     },
+  //     {
+  //       label: "编码",
+  //       value: 1,
+  //     },
+  //     {
+  //       label: "运动",
+  //       value: 2,
+  //     },
+  //   ],
+  //   colProps: {
+  //     md: 12,
+  //   },
+  // },
   {
-    label: "json-form-text",
-    type: "text",
-    name: "text1",
-    required: true,
-    placeholder: "提示信息",
-    errorMessage: {
-      requiredErrorMessage: "123",
-    },
-    colProps: {
-      md: 12,
-    },
-  },
-  {
-    label: "json-form-select",
-    type: "select",
-    name: "select",
-    value: "2",
-    required: true,
-    rules: {
-      validator(rule, value, callback, source, options) {
-        if (value < 18) {
-          callback(new Error(`${rule.field}太过于年轻`));
-        } else {
-          return true;
-        }
-      },
-    },
-    options: [
-      {
-        label: "运动",
-        value: 0,
-      },
-      {
-        label: "编码",
-        value: 1,
-      },
-      {
-        label: "运动",
-        value: 2,
-      },
-    ],
-    colProps: {
-      md: 12,
-    },
-  },
-  {
-    label: "getComponent",
-    name: "getComponent",
-    getComponent: () => demo,
+    label: "customRender-function",
+    name: "customRender1",
+    customRender: () => demo,
     onClick() {
       console.log("click");
       inputs[0].hidden = !inputs[0].hidden;
@@ -100,69 +105,79 @@ const inputs = reactive([
     },
   },
   {
-    label: "json-form-emit",
-    name: "text2",
-    type: "text",
-    onInput: (v) => {
-      console.log(v, "input>>>>>>");
-    },
+    label: "customRender-string",
+    name: "customRender2",
+    customRender: "customRender-string",
+    // onClick() {
+    //   console.log("click");
+    //   inputs[0].hidden = !inputs[0].hidden;
+    //   console.log(inputs, "inputs");
+    // },
   },
-  {
-    label: "json-form-textarea",
-    name: "textarea",
-    type: "textarea",
-  },
-  {
-    label: "json-form-switch",
-    name: "switch",
-    type: "switch",
-  },
-  {
-    label: "json-form-radio",
-    name: "radio",
-    type: "radio",
-    options: [
-      {
-        label: "写作",
-        value: "1",
-      },
-      {
-        label: "画画",
-        value: "2",
-      },
-      {
-        label: "运动",
-        value: "3",
-      },
-    ],
-  },
-  {
-    label: "json-form-rate",
-    name: "rate",
-    type: "rate",
-  },
-  {
-    label: "json-form-checkbox",
-    name: "checkbox",
-    type: "checkbox",
-    options: [
-      {
-        label: "写作",
-        value: "1",
-        skin: "primary",
-        disabled: true,
-      },
-      {
-        label: "画画",
-        value: "2",
-        skin: "primary",
-      },
-      {
-        label: "运动",
-        value: "3",
-        skin: "primary",
-      },
-    ],
-  },
+  // {
+  //   label: "json-form-emit",
+  //   name: "text2",
+  //   type: "text",
+  //   onInput: (v) => {
+  //     console.log(v, "input>>>>>>");
+  //   },
+  // },
+  // {
+  //   label: "json-form-textarea",
+  //   name: "textarea",
+  //   type: "textarea",
+  // },
+  // {
+  //   label: "json-form-switch",
+  //   name: "switch",
+  //   type: "switch",
+  // },
+  // {
+  //   label: "json-form-radio",
+  //   name: "radio",
+  //   type: "radio",
+  //   options: [
+  //     {
+  //       label: "写作",
+  //       value: "1",
+  //     },
+  //     {
+  //       label: "画画",
+  //       value: "2",
+  //     },
+  //     {
+  //       label: "运动",
+  //       value: "3",
+  //     },
+  //   ],
+  // },
+  // {
+  //   label: "json-form-rate",
+  //   name: "rate",
+  //   type: "rate",
+  // },
+  // {
+  //   label: "json-form-checkbox",
+  //   name: "checkbox",
+  //   type: "checkbox",
+  //   options: [
+  //     {
+  //       label: "写作",
+  //       value: "1",
+  //       skin: "primary",
+  //       disabled: true,
+  //     },
+  //     {
+  //       label: "画画",
+  //       value: "2",
+  //       skin: "primary",
+  //     },
+  //     {
+  //       label: "运动",
+  //       value: "3",
+  //       skin: "primary",
+  //     },
+  //   ],
+  // },
 ]);
 </script>
