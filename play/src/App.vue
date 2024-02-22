@@ -25,7 +25,7 @@ import demo from "./demo.vue";
 import { h, reactive, ref } from "vue";
 
 const model = reactive({
-  name: "1",
+  text1: "1",
   radio: "1",
 });
 
@@ -40,6 +40,7 @@ const handleClick3 = () => {
   jsonFormRef.value.clearValidate();
 };
 const handleClick4 = () => {
+  model.text1 = "1";
   model.text2 = "设置value";
   model.radio = "2";
   model.checkbox = ["1", "2", "3"];
@@ -50,52 +51,52 @@ const props = {
 };
 
 const inputs = reactive([
-  // {
-  //   label: "json-form-text",
-  //   type: "text",
-  //   name: "text1",
-  //   required: true,
-  //   placeholder: "提示信息",
-  //   errorMessage: {
-  //     requiredErrorMessage: "123",
-  //   },
-  //   colProps: {
-  //     md: 12,
-  //   },
-  // },
-  // {
-  //   label: "json-form-select",
-  //   type: "select",
-  //   name: "select",
-  //   value: "2",
-  //   required: true,
-  //   rules: {
-  //     validator(rule, value, callback, source, options) {
-  //       if (value < 18) {
-  //         callback(new Error(`${rule.field}太过于年轻`));
-  //       } else {
-  //         return true;
-  //       }
-  //     },
-  //   },
-  //   options: [
-  //     {
-  //       label: "运动",
-  //       value: 0,
-  //     },
-  //     {
-  //       label: "编码",
-  //       value: 1,
-  //     },
-  //     {
-  //       label: "运动",
-  //       value: 2,
-  //     },
-  //   ],
-  //   colProps: {
-  //     md: 12,
-  //   },
-  // },
+  {
+    label: "json-form-text",
+    type: "text",
+    name: "text1",
+    required: true,
+    placeholder: "提示信息",
+    errorMessage: {
+      requiredErrorMessage: "123",
+    },
+    colProps: {
+      md: 12,
+    },
+  },
+  {
+    label: "json-form-select",
+    type: "select",
+    name: "select",
+    value: "2",
+    required: true,
+    rules: {
+      validator(rule, value, callback, source, options) {
+        if (value < 18) {
+          callback(new Error(`${rule.field}太过于年轻`));
+        } else {
+          return true;
+        }
+      },
+    },
+    options: [
+      {
+        label: "运动",
+        value: 0,
+      },
+      {
+        label: "编码",
+        value: 1,
+      },
+      {
+        label: "运动",
+        value: 2,
+      },
+    ],
+    colProps: {
+      md: 12,
+    },
+  },
   {
     label: "customRender-function",
     name: "customRender1",
@@ -116,70 +117,70 @@ const inputs = reactive([
     //   console.log(inputs, "inputs");
     // },
   },
-  // {
-  //   label: "json-form-emit",
-  //   name: "text2",
-  //   type: "text",
-  //   onInput: (v) => {
-  //     console.log(v, "input>>>>>>");
-  //   },
-  // },
-  // {
-  //   label: "json-form-textarea",
-  //   name: "textarea",
-  //   type: "textarea",
-  // },
-  // {
-  //   label: "json-form-switch",
-  //   name: "switch",
-  //   type: "switch",
-  // },
-  // {
-  //   label: "json-form-radio",
-  //   name: "radio",
-  //   type: "radio",
-  //   options: [
-  //     {
-  //       label: "写作",
-  //       value: "1",
-  //     },
-  //     {
-  //       label: "画画",
-  //       value: "2",
-  //     },
-  //     {
-  //       label: "运动",
-  //       value: "3",
-  //     },
-  //   ],
-  // },
-  // {
-  //   label: "json-form-rate",
-  //   name: "rate",
-  //   type: "rate",
-  // },
-  // {
-  //   label: "json-form-checkbox",
-  //   name: "checkbox",
-  //   type: "checkbox",
-  //   options: [
-  //     {
-  //       label: "写作",
-  //       value: "1",
-  //       skin: "primary",
-  //       disabled: true,
-  //     },
-  //     {
-  //       label: "画画",
-  //       value: "2",
-  //       skin: "primary",
-  //     },
-  //     {
-  //       label: "运动",
-  //       value: "3",
-  //       skin: "primary",
-  //     },
-  //   ],
-  // },
+  {
+    label: "json-form-emit",
+    name: "text2",
+    type: "text",
+    onInput: (v) => {
+      console.log(v, "input>>>>>>");
+    },
+  },
+  {
+    label: "json-form-textarea",
+    name: "textarea",
+    type: "textarea",
+  },
+  {
+    label: "json-form-switch",
+    name: "switch",
+    type: "switch",
+  },
+  {
+    label: "json-form-radio",
+    name: "radio",
+    type: "radio",
+    options: [
+      {
+        label: "写作",
+        value: "1",
+      },
+      {
+        label: "画画",
+        value: "2",
+      },
+      {
+        label: "运动",
+        value: "3",
+      },
+    ],
+  },
+  {
+    label: "json-form-rate",
+    name: "rate",
+    type: "rate",
+  },
+  {
+    label: "json-form-checkbox",
+    name: "checkbox",
+    type: "checkbox",
+    options: [
+      {
+        label: "写作",
+        value: "1",
+        skin: "primary",
+        disabled: true,
+      },
+      {
+        label: "画画",
+        value: "2",
+        skin: "primary",
+      },
+      {
+        label: "运动",
+        value: "3",
+        skin: "primary",
+      },
+    ],
+  },
 ]);
 </script>

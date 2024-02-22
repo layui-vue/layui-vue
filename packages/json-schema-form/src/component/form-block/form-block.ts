@@ -1,6 +1,6 @@
 import type { InputsProps, modelType, InputsType } from "../form/types";
-import type { PropType, Component, VNodeTypes } from "vue";
-import { defineComponent, h, inject, isVNode } from "vue";
+import type { PropType, Component } from "vue";
+import { defineComponent, h, inject } from "vue";
 
 import {
   LayInput,
@@ -12,7 +12,7 @@ import {
 import LayRadio from "../radio";
 import LayCheckbox from "../checkbox";
 
-const getComponent = (input: InputsProps): Component | VNodeTypes => {
+const getComponent = (input: InputsProps): Component => {
   const type = input.type.toLowerCase() as InputsType;
 
   switch (type) {
@@ -57,11 +57,7 @@ export default defineComponent({
 
       const component = getComponent(props.input);
 
-      if (isVNode(component)) {
-        return component;
-      }
-
-      return h(component as Component, {
+      return h(component, {
         modelValue: LayJsonSchemaFormData.model[props.input.name],
         "onUpdate:modelValue": (v: any) =>
           (LayJsonSchemaFormData.model[props.input.name] = v),
