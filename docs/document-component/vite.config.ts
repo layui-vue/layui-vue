@@ -8,6 +8,10 @@ export default defineConfig({
       "/@src": path.resolve(__dirname, "./src"),
       "layui-vue": path.resolve(__dirname, "../../packages/component"),
       "layui-layer": path.resolve(__dirname, "../../packages/layer"),
+      "json-schema-form": path.resolve(
+        __dirname,
+        "../../packages/json-schema-form"
+      ),
     },
   },
   build: {
