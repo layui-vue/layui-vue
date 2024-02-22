@@ -75,7 +75,11 @@ defineExpose({ validate, resetFields, clearValidate });
             v-bind="{ ...input.errorMessage }"
           >
             <template v-if="typeof input.customRender === 'string'">
-              <slot :name="input.customRender" :input="input"></slot>
+              <slot
+                :name="input.customRender"
+                :input="input"
+                :model="model"
+              ></slot>
             </template>
 
             <form-block v-else :input="input"></form-block>

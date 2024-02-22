@@ -1,4 +1,4 @@
-import type { Component } from "vue";
+import type { VNodeTypes } from "vue";
 import type { ColProps } from "@layui/layui-vue/types/component/col/index.vue";
 import type { ValidateError, Rule } from "async-validator";
 
@@ -20,7 +20,7 @@ type ErrorMessage = {
   requiredErrorMessage: string;
 };
 
-type customRenderFnType = () => Component;
+type customRenderFnType = (input: InputsProps, model: modelType) => VNodeTypes;
 type customRenderType = string | customRenderFnType;
 
 export interface JsonSchemaFormProps {

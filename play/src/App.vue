@@ -7,9 +7,11 @@
     v-bind="props"
     :inputs="inputs"
   >
-    <template #customRender-string="{ input }">
-      {{ input }}
+    <template #customRender-string="{ input, model: model1 }">
+      <div style="color: red">input: {{ input }}</div>
+      <div style="color: red">model: {{ model1 }}</div>
       <div>customRender-string</div>
+      <lay-button @click="handleClick4">改变model</lay-button>
     </template>
   </lay-json-schema-form>
   <lay-button @click="handleClick1">提交</lay-button>
@@ -20,7 +22,7 @@
 
 <script setup lang="ts">
 import demo from "./demo.vue";
-import { reactive, ref } from "vue";
+import { h, reactive, ref } from "vue";
 
 const model = reactive({
   name: "1",
@@ -97,7 +99,7 @@ const inputs = reactive([
   {
     label: "customRender-function",
     name: "customRender1",
-    customRender: () => demo,
+    customRender: (input, model) => h(demo, { input, model }),
     onClick() {
       console.log("click");
       inputs[0].hidden = !inputs[0].hidden;
