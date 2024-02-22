@@ -1,4 +1,4 @@
-import type { InputsProps } from "./types";
+import type { InputsProps } from "../form/types";
 import { computed } from "vue";
 
 const checkInput = (input: InputsProps, cacheName: string[]) => {
@@ -22,7 +22,7 @@ export const useFormBlock = (inputs: InputsProps[]) => {
       cacheName.push(name);
 
       return {
-        ...input,
+        ...(input as InputsProps),
         colProps: {
           md: colProps?.md || 24,
         },

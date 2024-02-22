@@ -4,16 +4,18 @@ import type { modelType, InputsProps, FormCallback } from "./types";
 
 import { provide, ref } from "vue";
 import { LayForm, LayFormItem, LayRow, LayCol } from "@layui/layui-vue";
-import FormBlock from "./form-block";
+import FormBlock from "../form-block";
 import { useForm } from "./useForm";
 
 export interface JsonSchemaFormProps {
-  model: modelType;
+  model?: modelType;
   initValidate?: boolean;
+  useCN?: boolean;
+  requiredIcons?: string;
   pane?: boolean;
   labelPosition?: string;
   size?: string;
-  labelWidth: string;
+  labelWidth?: string;
   space?: number | string;
   inputs: InputsProps[];
 }
@@ -63,7 +65,7 @@ defineExpose({ validate, resetFields, clearValidate });
   <lay-form ref="formRef" :model="model" v-bind="formProps">
     <lay-row :space="space">
       <template v-for="(input, inputIndex) in nInputs" :key="inputIndex">
-        <lay-col v-bind="input.colProps">
+        <lay-col v-bind="input.colProps" v-if="!input.hidden">
           <lay-form-item
             :label="input.label"
             :prop="input.name"

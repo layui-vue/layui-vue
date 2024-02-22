@@ -1,8 +1,16 @@
-import type { InputsProps, modelType } from "./types";
+import type { InputsProps, modelType, InputsType } from "../form/types";
 import type { PropType, Component } from "vue";
 import { defineComponent, h, inject } from "vue";
 
-import { LayInput, LaySelect } from "@layui/layui-vue";
+import {
+  LayInput,
+  LayRate,
+  LaySelect,
+  LaySwitch,
+  LayTextarea,
+} from "@layui/layui-vue";
+import LayRadio from "../radio";
+import LayCheckbox from "../checkbox";
 
 const getComponent = (input: InputsProps): Component => {
   // 自定义Compoents
@@ -10,13 +18,23 @@ const getComponent = (input: InputsProps): Component => {
     return input.getComponent.call(undefined);
   }
 
-  const type = input.type.toLowerCase();
+  const type = input.type.toLowerCase() as InputsType;
 
   switch (type) {
     case "text":
       return LayInput;
+    case "textarea":
+      return LayTextarea;
     case "select":
       return LaySelect;
+    case "switch":
+      return LaySwitch;
+    case "rate":
+      return LayRate;
+    case "radio":
+      return LayRadio;
+    case "checkbox":
+      return LayCheckbox;
   }
 
   throw new Error(`(LayJsonSchemaForm): 未知的组件类型：${type}`);

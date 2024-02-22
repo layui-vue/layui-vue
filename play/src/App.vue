@@ -19,6 +19,7 @@ import { reactive, ref } from "vue";
 
 const model = reactive({
   name: "1",
+  radio: "1",
 });
 
 const jsonFormRef = ref();
@@ -32,18 +33,20 @@ const handleClick3 = () => {
   jsonFormRef.value.clearValidate();
 };
 const handleClick4 = () => {
-  model.name3 = "设置value";
+  model.text2 = "设置value";
+  model.radio = "2";
+  model.checkbox = ["1", "2", "3"];
 };
 
 const props = {
-  labelWidth: "100",
+  labelWidth: "150",
 };
 
-const inputs = [
+const inputs = reactive([
   {
-    label: "json-from-text",
+    label: "json-form-text",
     type: "text",
-    name: "name",
+    name: "text1",
     required: true,
     placeholder: "提示信息",
     errorMessage: {
@@ -54,9 +57,9 @@ const inputs = [
     },
   },
   {
-    label: "json-from-select",
+    label: "json-form-select",
     type: "select",
-    name: "name1",
+    name: "select",
     value: "2",
     required: true,
     rules: {
@@ -88,16 +91,78 @@ const inputs = [
   },
   {
     label: "getComponent",
-    name: "name2",
+    name: "getComponent",
     getComponent: () => demo,
+    onClick() {
+      console.log("click");
+      inputs[0].hidden = !inputs[0].hidden;
+      console.log(inputs, "inputs");
+    },
   },
   {
-    label: "json-from1",
-    name: "name3",
+    label: "json-form-emit",
+    name: "text2",
     type: "text",
     onInput: (v) => {
       console.log(v, "input>>>>>>");
     },
   },
-];
+  {
+    label: "json-form-textarea",
+    name: "textarea",
+    type: "textarea",
+  },
+  {
+    label: "json-form-switch",
+    name: "switch",
+    type: "switch",
+  },
+  {
+    label: "json-form-radio",
+    name: "radio",
+    type: "radio",
+    options: [
+      {
+        label: "写作",
+        value: "1",
+      },
+      {
+        label: "画画",
+        value: "2",
+      },
+      {
+        label: "运动",
+        value: "3",
+      },
+    ],
+  },
+  {
+    label: "json-form-rate",
+    name: "rate",
+    type: "rate",
+  },
+  {
+    label: "json-form-checkbox",
+    name: "checkbox",
+    type: "checkbox",
+    options: [
+      {
+        label: "写作",
+        value: "1",
+        skin: "primary",
+        disabled: true,
+      },
+      {
+        label: "画画",
+        value: "2",
+        skin: "primary",
+      },
+      {
+        label: "运动",
+        value: "3",
+        skin: "primary",
+      },
+    ],
+  },
+]);
 </script>
