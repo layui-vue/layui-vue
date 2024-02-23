@@ -8,6 +8,7 @@ import {
   LaySelect,
   LaySwitch,
   LayTextarea,
+  LayDatePicker,
 } from "@layui/layui-vue";
 import LayRadio from "../radio";
 import LayCheckbox from "../checkbox";
@@ -17,6 +18,7 @@ const getComponent = (input: InputsProps): Component => {
 
   switch (type) {
     case "text":
+    case "password":
       return LayInput;
     case "textarea":
       return LayTextarea;
@@ -26,6 +28,13 @@ const getComponent = (input: InputsProps): Component => {
       return LaySwitch;
     case "rate":
       return LayRate;
+    case "date":
+    case "datetime":
+    case "year":
+    case "month":
+    case "time":
+    case "yearmonth":
+      return LayDatePicker;
     case "radio":
       return LayRadio;
     case "checkbox":

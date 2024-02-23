@@ -11,6 +11,7 @@ export interface JsonSchemaFormProps {
   model?: modelType;
   initValidate?: boolean;
   useCN?: boolean;
+  required?: boolean;
   requiredIcons?: string;
   pane?: boolean;
   labelPosition?: string;

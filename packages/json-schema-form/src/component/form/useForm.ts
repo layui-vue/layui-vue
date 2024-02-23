@@ -9,6 +9,7 @@ export const useForm = (props: JsonSchemaFormProps) => {
     return {
       initValidate: props.initValidate || undefined,
       useCN: props.useCN || undefined,
+      required: props.required || undefined,
       requiredIcons: props.requiredIcons || undefined,
       pane: props.pane || undefined,
       labelPosition: props.labelPosition || undefined,

@@ -4,10 +4,17 @@ import type { ValidateError, Rule } from "async-validator";
 
 export type InputsType =
   | "text"
+  | "password"
   | "select"
   | "textarea"
   | "switch"
   | "radio"
+  | "date"
+  | "datetime"
+  | "year"
+  | "month"
+  | "time"
+  | "yearmonth"
   | "rate"
   | "checkbox";
 
@@ -27,6 +34,7 @@ export interface JsonSchemaFormProps {
   model?: modelType;
   initValidate?: boolean;
   useCN?: boolean;
+  required?: boolean;
   requiredIcons?: string;
   pane?: boolean;
   labelPosition?: string;
@@ -36,11 +44,10 @@ export interface JsonSchemaFormProps {
   inputs: InputsProps[];
 }
 
-export interface InputsProps {
+export interface InputsProps extends modelType {
   label: string;
   type: InputsType;
   name: string;
-  value?: any;
   required?: boolean;
   rules?: Rule;
   errorMessage: ErrorMessage;
