@@ -4,7 +4,7 @@
 ::: title 基本介绍
 :::
 
-::: describe json-schema-form 是基于 layui-vue form 封装的组件。
+::: describe Json-schema-form 是在 form 基础上封装的高级组件。
 :::
 
 ::: describe 通过简单的 JSON 配置来定义表单的结构和验证规则，从而实现动态生成表单的功能。
@@ -13,7 +13,7 @@
 ::: title 安装
 :::
 
-::: describe 不内置在 layui-vue 中，需要单独安装。
+::: describe 该组件不内置在 layui-vue 中，需要单独安装。
 :::
 
 ```
@@ -60,18 +60,14 @@ const form = reactive({
 
 const schema1 = reactive({
   name: {
-    formItemProps: {
-      label: '姓名',
-    },
+    label: '姓名',
     componentProps: {
       type: 'text',
       placeholder: '请输入姓名',
     }
   },
   password: {
-    formItemProps: {
-      label: '密码',
-    },
+    label: '密码',
     componentProps: {
       type: 'password',
       autocomplete: "off",
@@ -79,9 +75,7 @@ const schema1 = reactive({
     }
   },
   like: {
-    formItemProps: {
-      label: '爱好',
-    },
+    label: '爱好',
     componentProps: {
       type: 'select',
       options: [
@@ -94,42 +88,32 @@ const schema1 = reactive({
     }
   },
   remark: {
-    formItemProps: {
-      label: '备注',
-    },
+    label: '备注',
     componentProps: {
       type: 'textarea',
       placeholder: '请输入备注',
     }
   },
   switch: {
-    formItemProps: {
-      label: '备注',
-    },
+    label: '备注',
     componentProps: {
       type: 'switch',
     }
   },
   rate: {
-    formItemProps: {
-      label: '评分',
-    },
+    label: '评分',
     componentProps: {
       type: 'rate',
     }
   },
   date: {
-    formItemProps: {
-      label: '日期',
-    },
+    label: '日期',
     componentProps: {
       type: 'date',
     }
   },
   radio: {
-    formItemProps: {
-      label: '单选',
-    },
+    label: '单选',
     componentProps: {
       type: 'radio',
       options: [
@@ -149,9 +133,7 @@ const schema1 = reactive({
     }
   },
   radio1: {
-    formItemProps: {
-      label: '单选-button',
-    },
+    label: '单选-button',
     componentProps: {
       type: 'radio',
       button: true,
@@ -172,9 +154,7 @@ const schema1 = reactive({
     }
   },
   checkbox: {
-    formItemProps: {
-      label: '多选',
-    },
+    label: '多选',
     componentProps: {
       type: 'checkbox',
       options: [
@@ -220,9 +200,7 @@ const space = ref(20)
 
 const schema2 = reactive({
   text1: {
-    formItemProps: {
-      label: '栅格布局12',
-    },
+    label: '栅格布局12',
     componentProps: {
       type: 'text',
       placeholder: '请输入姓名',
@@ -232,9 +210,7 @@ const schema2 = reactive({
     }
   },
   text2: {
-    formItemProps: {
-      label: '栅格布局12',
-    },
+    label: '栅格布局12',
     componentProps: {
       type: 'text',
       placeholder: '请输入姓名',
@@ -244,9 +220,7 @@ const schema2 = reactive({
     }
   },
   text3: {
-    formItemProps: {
-      label: '栅格布局6',
-    },
+    label: '栅格布局6',
     componentProps: {
       type: 'text',
       placeholder: '请输入姓名',
@@ -256,9 +230,7 @@ const schema2 = reactive({
     }
   },
   text4: {
-    formItemProps: {
-      label: '栅格布局6',
-    },
+    label: '栅格布局6',
     componentProps: {
       type: 'text',
       placeholder: '请输入姓名',
@@ -268,9 +240,7 @@ const schema2 = reactive({
     }
   },
   text5: {
-    formItemProps: {
-      label: '栅格布局6',
-    },
+    label: '栅格布局6',
     componentProps: {
       type: 'text',
       placeholder: '请输入姓名',
@@ -280,9 +250,7 @@ const schema2 = reactive({
     }
   },
   text6: {
-    formItemProps: {
-      label: '栅格布局6',
-    },
+    label: '栅格布局6',
     componentProps: {
       type: 'text',
       placeholder: '请输入姓名',
@@ -322,18 +290,14 @@ const form3 = reactive({
 
 const schema3 = reactive({
   name: {
-    formItemProps: {
-      label: '姓名',
-    },
+    label: '姓名',
     componentProps: {
       type: 'text',
       placeholder: '请输入姓名',
     }
   },
   password: {
-    formItemProps: {
-      label: '密码',
-    },
+    label: '密码',
     componentProps: {
       type: 'password',
       autocomplete: "off",
@@ -383,17 +347,13 @@ const form4 = reactive({
 
 const schema4 = reactive({
   customRender1: {
-    formItemProps: {
-      label: '参数为string',
-    },
+    label: '参数为string',
     componentProps: {
       customRender: 'string'
     }
   },
   customRender2: {
-    formItemProps: {
-      label: '参数为function',
-    },
+    label: '参数为function',
     componentProps: {
       type: 'password',
       autocomplete: "off",
@@ -428,9 +388,7 @@ const form5 = reactive({
 
 const schema5 = reactive({
   input: {
-    formItemProps: {
-      label: '输入框-input事件',
-    },
+    label: '输入框-input事件',
     componentProps: {
       type: 'text',
     },
@@ -441,9 +399,7 @@ const schema5 = reactive({
     }
   },
   select: {
-    formItemProps: {
-      label: 'select-change事件',
-    },
+    label: 'select-change事件',
     componentProps: {
       type: 'select',
       options: [
@@ -496,11 +452,10 @@ const schema5 = reactive({
 | 属性 | 描述 | 类型 | 默认值 |
 | ----------------------- | --------------------------- | --------- | ------------ |
 |hidden | 是否隐藏当前 form-item | `boolean` | false |
-|formItemProps | form-item 组件 `props` 集合<br>可查看[FormItemProps](http://www.layui-vue.com/zh-CN/components/form) | `FormItemProps` | - |
 |componentProps | 组件 `props`集合，透传至渲染组件中 | `ComponentProps` | - |
 |colProps | 栅格布局 `props`集合<br>可查看[gridProps](http://www.layui-vue.com/zh-CN/components/grid) | `ColProps` | - |
 |listeners | listeners 事件集合 | `object` | - |
-
+| 支持所有 form-item 中的 props 属性<br>[formItemProps 快捷查看](http://www.layui-vue.com/zh-CN/components/formItem)|
 :::
 
 ::: title types
@@ -539,7 +494,6 @@ type SchemaValueType = {
   hidden?: boolean;
   componentsProps: ComponentsProps;
   colProps?: ColProps;
-  formItemProps?: FormItemProps;
   listeners?: listenersType;
 };
 ```
