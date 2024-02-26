@@ -1,32 +1,24 @@
 <script lang="ts" setup>
 import "./index.less";
-import type { modelType, InputsProps, FormCallback } from "./types";
+import type {
+  FormCallback,
+  JsonSchemaFormProps as _JsonSchemaFormProps,
+} from "./types";
 
 import { provide, ref } from "vue";
 import { LayForm, LayFormItem, LayRow, LayCol } from "@layui/layui-vue";
 import FormBlock from "../form-block";
 import { useForm } from "./useForm";
 
-export interface JsonSchemaFormProps {
-  model?: modelType;
-  initValidate?: boolean;
-  useCN?: boolean;
-  required?: boolean;
-  requiredIcons?: string;
-  pane?: boolean;
-  labelPosition?: string;
-  size?: string;
-  labelWidth?: string;
-  space?: number | string;
-  inputs: InputsProps[];
-}
+export type JsonSchemaFormProps = _JsonSchemaFormProps;
 
 const props = withDefaults(defineProps<JsonSchemaFormProps>(), {
   model: () => ({}),
   space: 10,
+  schema: () => ({}),
 });
 
-const { nInputs, formProps } = useForm(props);
+const { Schema, formProps } = useForm(props);
 
 defineOptions({
   name: "LayJsonSchemaForm",
@@ -66,24 +58,27 @@ defineExpose({ validate, resetFields, clearValidate });
 <template>
   <lay-form ref="formRef" :model="model" v-bind="formProps">
     <lay-row :space="space">
-      <template v-for="(input, inputIndex) in nInputs" :key="inputIndex">
-        <lay-col v-bind="input.colProps" v-if="!input.hidden">
-          <lay-form-item
-            :label="input.label"
-            :prop="input.name"
-            :required="input.required"
-            :rules="input.rules"
-            v-bind="{ ...input.errorMessage }"
-          >
-            <template v-if="typeof input.customRender === 'string'">
+      <template v-for="(schemaValue, schemaName) in Schema" :key="schemaName">
+        <lay-col v-bind="schemaValue.colProps" v-if="!schemaValue.hidden">
+          {{ schemaValue.formItemProps }}
+          <lay-form-item v-bind="schemaValue.formItemProps">
+            <template
+              v-if="
+                typeof schemaValue.componentsProps.customRender === 'string'
+              "
+            >
               <slot
-                :name="input.customRender"
-                :input="input"
+                :name="schemaValue.componentsProps.customRender"
+                :schemaValue="schema[schemaName]"
                 :model="model"
               ></slot>
             </template>
 
-            <form-block v-else :input="input"></form-block>
+            <form-block
+              v-else
+              :schemaValue="schema[schemaName]"
+              :fieldName="(schemaName as string)"
+            ></form-block>
           </lay-form-item>
         </lay-col>
       </template>

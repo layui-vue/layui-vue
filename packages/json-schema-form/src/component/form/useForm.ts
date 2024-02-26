@@ -3,23 +3,19 @@ import { computed } from "vue";
 import { useFormBlock } from "../form-block/useFormBlock";
 
 export const useForm = (props: JsonSchemaFormProps) => {
-  const { nInputs } = useFormBlock(props.inputs);
+  const { Schema } = useFormBlock(props.schema);
 
   const formProps = computed(() => {
-    return {
-      initValidate: props.initValidate || undefined,
-      useCN: props.useCN || undefined,
-      required: props.required || undefined,
-      requiredIcons: props.requiredIcons || undefined,
-      pane: props.pane || undefined,
-      labelPosition: props.labelPosition || undefined,
-      size: props.size || undefined,
-      labelWidth: props.labelWidth || undefined,
-    };
+    const formProps = Object.assign({}, props);
+
+    Reflect.deleteProperty(formProps, "space");
+    Reflect.deleteProperty(formProps, "schema");
+
+    return formProps;
   });
 
   return {
-    nInputs,
+    Schema,
     formProps,
   };
 };

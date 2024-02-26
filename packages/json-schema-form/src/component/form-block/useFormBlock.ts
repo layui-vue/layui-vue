@@ -1,34 +1,39 @@
-import type { InputsProps } from "../form/types";
+import type { SchemaProps } from "../form/types";
 import { computed } from "vue";
 
-const checkInput = (input: InputsProps, cacheName: string[]) => {
-  if (!input.name) {
-    throw new Error(`(LayJsonSchemaForm): inputs中name属性不能为空`);
-  }
+export const useFormBlock = (schema: SchemaProps) => {
+  const Schema = computed(() => {
+    return Object.keys(schema).reduce(
+      (_Schema: SchemaProps, schemaKey: string): SchemaProps => {
+        if (Reflect.has(_Schema, schemaKey)) {
+          throw new Error(
+            `(LayJsonSchemaForm): schema中key (${schemaKey}) 重复`
+          );
+        }
 
-  if (cacheName.includes(input.name)) {
-    throw new Error(`(LayJsonSchemaForm): inputs中name属性(${input.name})重复`);
-  }
-};
+        const schemaValue = schema[schemaKey];
 
-export const useFormBlock = (inputs: InputsProps[]) => {
-  const nInputs = computed<InputsProps[]>(() => {
-    const cacheName: string[] = [];
+        _Schema[schemaKey] = {
+          ...schemaValue,
 
-    return inputs.map((input: InputsProps) => {
-      checkInput(input, cacheName);
+          hidden: schemaValue.hidden ?? false,
 
-      const { colProps, name } = input;
-      cacheName.push(name);
+          colProps: {
+            ...schemaValue.colProps,
+            md: schemaValue.colProps?.md || 24,
+          },
 
-      return {
-        ...(input as InputsProps),
-        colProps: {
-          md: colProps?.md || 24,
-        },
-      };
-    });
+          formItemProps: {
+            prop: schemaKey,
+            ...schemaValue.formItemProps,
+          },
+        };
+
+        return _Schema;
+      },
+      {}
+    );
   });
 
-  return { nInputs };
+  return { Schema };
 };
