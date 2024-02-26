@@ -18,7 +18,10 @@ import {
 import LayRadio from "../radio";
 import LayCheckbox from "../checkbox";
 
-const getComponent = (componentProps: ComponentProps): Component => {
+const getComponent = (
+  componentProps: ComponentProps,
+  fieldName: string
+): Component => {
   if (componentProps.type) {
     const type = componentProps.type.toLowerCase() as InputsType;
 
@@ -49,7 +52,7 @@ const getComponent = (componentProps: ComponentProps): Component => {
   }
 
   throw new Error(
-    `(LayJsonSchemaForm): componentProps.type：${componentProps.type} 未知组件类型`
+    `(LayJsonSchemaForm): schema.${fieldName}的componentProps.type为未知类型  `
   );
 };
 
@@ -85,7 +88,10 @@ export default defineComponent({
         return vnode;
       }
 
-      const component = getComponent(props.schemaValue.componentProps);
+      const component = getComponent(
+        props.schemaValue.componentProps,
+        props.fieldName
+      );
 
       return h(component, {
         modelValue: LayJsonSchemaFormData.model[props.fieldName],
