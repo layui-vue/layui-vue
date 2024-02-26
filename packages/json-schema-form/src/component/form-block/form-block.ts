@@ -1,7 +1,7 @@
 import type {
   modelType,
   InputsType,
-  ComponentsProps,
+  ComponentProps,
   SchemaValueType,
 } from "../form/types";
 import type { PropType, Component } from "vue";
@@ -18,9 +18,9 @@ import {
 import LayRadio from "../radio";
 import LayCheckbox from "../checkbox";
 
-const getComponent = (componentsProps: ComponentsProps): Component => {
-  if (componentsProps.type) {
-    const type = componentsProps.type.toLowerCase() as InputsType;
+const getComponent = (componentProps: ComponentProps): Component => {
+  if (componentProps.type) {
+    const type = componentProps.type.toLowerCase() as InputsType;
 
     switch (type) {
       case "text":
@@ -49,7 +49,7 @@ const getComponent = (componentsProps: ComponentsProps): Component => {
   }
 
   throw new Error(
-    `(LayJsonSchemaForm): componentsProps.type：${componentsProps.type} 未知组件类型`
+    `(LayJsonSchemaForm): componentProps.type：${componentProps.type} 未知组件类型`
   );
 };
 
@@ -69,10 +69,8 @@ export default defineComponent({
     return () => {
       const LayJsonSchemaFormData = inject("LayJsonSchemaForm") as modelType;
 
-      if (
-        typeof props.schemaValue.componentsProps.customRender === "function"
-      ) {
-        const vnode = props.schemaValue.componentsProps.customRender.call(
+      if (typeof props.schemaValue.componentProps.customRender === "function") {
+        const vnode = props.schemaValue.componentProps.customRender.call(
           undefined,
           props.schemaValue,
           LayJsonSchemaFormData.model
@@ -87,13 +85,13 @@ export default defineComponent({
         return vnode;
       }
 
-      const component = getComponent(props.schemaValue.componentsProps);
+      const component = getComponent(props.schemaValue.componentProps);
 
       return h(component, {
         modelValue: LayJsonSchemaFormData.model[props.fieldName],
         "onUpdate:modelValue": (v: any) =>
           (LayJsonSchemaFormData.model[props.fieldName] = v),
-        ...props.schemaValue.componentsProps,
+        ...props.schemaValue.componentProps,
         ...props.schemaValue.listeners,
       });
     };

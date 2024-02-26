@@ -59,7 +59,7 @@ const schema = reactive({
       required: true,
       label: "json-form-text",
     },
-    componentsProps: {
+    componentProps: {
       type: "text",
     },
     colProps: {
@@ -80,7 +80,7 @@ const schema = reactive({
         },
       },
     },
-    componentsProps: {
+    componentProps: {
       type: "select",
       options: [
         {
@@ -109,7 +109,7 @@ const schema = reactive({
     formItemProps: {
       label: "customRender-function",
     },
-    componentsProps: {
+    componentProps: {
       customRender: (schemaValue, model) => h(demo, { schemaValue, model }),
     },
     listeners: {
@@ -124,7 +124,7 @@ const schema = reactive({
     formItemProps: {
       label: "customRender-string",
     },
-    componentsProps: {
+    componentProps: {
       customRender: "customRender-string",
     },
   },
@@ -132,7 +132,7 @@ const schema = reactive({
     formItemProps: {
       label: "json-form-emit",
     },
-    componentsProps: {
+    componentProps: {
       type: "text",
     },
     listeners: {
@@ -145,7 +145,7 @@ const schema = reactive({
     formItemProps: {
       label: "json-form-textarea",
     },
-    componentsProps: {
+    componentProps: {
       type: "textarea",
     },
   },
@@ -153,7 +153,7 @@ const schema = reactive({
     formItemProps: {
       label: "json-form-switch",
     },
-    componentsProps: {
+    componentProps: {
       type: "switch",
     },
   },

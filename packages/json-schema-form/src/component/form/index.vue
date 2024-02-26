@@ -63,12 +63,10 @@ defineExpose({ validate, resetFields, clearValidate });
           {{ schemaValue.formItemProps }}
           <lay-form-item v-bind="schemaValue.formItemProps">
             <template
-              v-if="
-                typeof schemaValue.componentsProps.customRender === 'string'
-              "
+              v-if="typeof schemaValue.componentProps.customRender === 'string'"
             >
               <slot
-                :name="schemaValue.componentsProps.customRender"
+                :name="schemaValue.componentProps.customRender"
                 :schemaValue="schema[schemaName]"
                 :model="model"
               ></slot>

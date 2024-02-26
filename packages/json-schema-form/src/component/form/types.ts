@@ -26,7 +26,7 @@ export type modelType = {
 };
 
 type customRenderFnType = (
-  componentsProps: ComponentsProps,
+  SchemaValueType: SchemaValueType,
   model: modelType
 ) => VNode;
 type customRenderType = string | customRenderFnType;
@@ -42,13 +42,13 @@ export interface SchemaProps {
 
 export type SchemaValueType = {
   hidden?: boolean;
-  componentsProps: ComponentsProps;
-  colProps?: ColProps;
   formItemProps?: FormItemProps;
+  componentProps: ComponentProps;
+  colProps?: ColProps;
   listeners?: listenersType;
 };
 
-export type ComponentsProps = {
+export type ComponentProps = {
   type?: string;
   customRender?: customRenderType;
 } & modelType;
