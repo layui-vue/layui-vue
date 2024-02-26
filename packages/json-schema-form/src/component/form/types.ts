@@ -40,12 +40,12 @@ export interface SchemaProps {
   [key: string]: SchemaValueType;
 }
 
-export interface SchemaValueType extends FormItemProps{
+export interface SchemaValueType extends FormItemProps {
   hidden?: boolean;
   componentProps: ComponentProps;
   colProps?: ColProps;
   listeners?: listenersType;
-};
+}
 
 export type ComponentProps = {
   type?: string;
