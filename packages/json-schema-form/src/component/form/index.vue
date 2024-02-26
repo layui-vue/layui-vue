@@ -60,7 +60,6 @@ defineExpose({ validate, resetFields, clearValidate });
     <lay-row :space="space">
       <template v-for="(schemaValue, schemaName) in Schema" :key="schemaName">
         <lay-col v-bind="schemaValue.colProps" v-if="!schemaValue.hidden">
-          {{ schemaValue.formItemProps }}
           <lay-form-item v-bind="schemaValue.formItemProps">
             <template
               v-if="typeof schemaValue.componentProps.customRender === 'string'"
