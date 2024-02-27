@@ -5,7 +5,6 @@ export const useFormBlock = (schema: SchemaProps) => {
   const Schema = computed(() => {
     return Object.keys(schema).reduce(
       (_Schema: SchemaProps, schemaKey: string): SchemaProps => {
-        
         if (Reflect.has(_Schema, schemaKey)) {
           throw new Error(
             `(LayJsonSchemaForm): schema中key (${schemaKey}) 重复`
@@ -15,7 +14,6 @@ export const useFormBlock = (schema: SchemaProps) => {
         const schemaValue = schema[schemaKey];
 
         _Schema[schemaKey] = {
-
           ...schemaValue,
 
           hidden: schemaValue.hidden ?? false,

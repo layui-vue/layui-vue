@@ -455,6 +455,7 @@ const schema5 = reactive({
 |componentProps | 组件 `props`集合，透传至渲染组件中 | `ComponentProps` | - |
 |colProps | 栅格布局 `props`集合<br>可查看[gridProps](http://www.layui-vue.com/zh-CN/components/grid) | `ColProps` | - |
 |listeners | listeners 事件集合 | `object` | - |
+|prop | form-item prop，组件内部赋值为 schema.fieldName，外部传入无效
 | 支持所有 form-item 中的 props 属性<br>[formItemProps 快捷查看](http://www.layui-vue.com/zh-CN/components/formItem)|
 :::
 
