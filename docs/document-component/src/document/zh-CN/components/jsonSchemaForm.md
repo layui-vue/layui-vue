@@ -61,23 +61,23 @@ const form = reactive({
 const schema1 = reactive({
   name: {
     label: '姓名',
+    type: 'text',
     componentProps: {
-      type: 'text',
       placeholder: '请输入姓名',
     }
   },
   password: {
     label: '密码',
+    type: 'password',
     componentProps: {
-      type: 'password',
       autocomplete: "off",
       placeholder: '请输入密码',
     }
   },
   like: {
     label: '爱好',
+    type: 'select',
     componentProps: {
-      type: 'select',
       options: [
         { label: '唱', value: '1' },
         { label: '跳', value: '2' },
@@ -89,33 +89,33 @@ const schema1 = reactive({
   },
   remark: {
     label: '备注',
+    type: 'textarea',
     componentProps: {
-      type: 'textarea',
       placeholder: '请输入备注',
     }
   },
   switch: {
     label: '备注',
+    type: 'switch',
     componentProps: {
-      type: 'switch',
     }
   },
   rate: {
     label: '评分',
+    type: 'rate',
     componentProps: {
-      type: 'rate',
     }
   },
   date: {
     label: '日期',
+    type: 'date',
     componentProps: {
-      type: 'date',
     }
   },
   radio: {
     label: '单选',
+    type: 'radio',
     componentProps: {
-      type: 'radio',
       options: [
         {
           label: "运动",
@@ -134,8 +134,8 @@ const schema1 = reactive({
   },
   radio1: {
     label: '单选-button',
+    type: 'radio',
     componentProps: {
-      type: 'radio',
       button: true,
       options: [
         {
@@ -155,8 +155,8 @@ const schema1 = reactive({
   },
   checkbox: {
     label: '多选',
+    type: 'checkbox',
     componentProps: {
-      type: 'checkbox',
       options: [
         {
           label: "运动",
@@ -201,8 +201,8 @@ const space = ref(20)
 const schema2 = reactive({
   text1: {
     label: '栅格布局12',
+    type: 'text',
     componentProps: {
-      type: 'text',
       placeholder: '请输入姓名',
     },
     colProps: {
@@ -211,8 +211,8 @@ const schema2 = reactive({
   },
   text2: {
     label: '栅格布局12',
+    type: 'text',
     componentProps: {
-      type: 'text',
       placeholder: '请输入姓名',
     },
     colProps: {
@@ -221,8 +221,8 @@ const schema2 = reactive({
   },
   text3: {
     label: '栅格布局6',
+    type: 'text',
     componentProps: {
-      type: 'text',
       placeholder: '请输入姓名',
     },
     colProps: {
@@ -231,8 +231,8 @@ const schema2 = reactive({
   },
   text4: {
     label: '栅格布局6',
+    type: 'text',
     componentProps: {
-      type: 'text',
       placeholder: '请输入姓名',
     },
     colProps: {
@@ -241,8 +241,8 @@ const schema2 = reactive({
   },
   text5: {
     label: '栅格布局6',
+    type: 'text',
     componentProps: {
-      type: 'text',
       placeholder: '请输入姓名',
     },
     colProps: {
@@ -251,8 +251,8 @@ const schema2 = reactive({
   },
   text6: {
     label: '栅格布局6',
+    type: 'text',
     componentProps: {
-      type: 'text',
       placeholder: '请输入姓名',
     },
     colProps: {
@@ -291,20 +291,19 @@ const form3 = reactive({
 const schema3 = reactive({
   name: {
     label: '姓名',
+    type: 'text',
     componentProps: {
-      type: 'text',
       placeholder: '请输入姓名',
     }
   },
   password: {
     label: '密码',
+    type: 'password',
     componentProps: {
-      type: 'password',
       autocomplete: "off",
       placeholder: '请输入密码',
     }
   },
-  
 })
 
 const submit3 = () => {
@@ -354,8 +353,8 @@ const schema4 = reactive({
   },
   customRender2: {
     label: '参数为function',
+    type: 'password',
     componentProps: {
-      type: 'password',
       autocomplete: "off",
       placeholder: '请输入密码',
       customRender: (schemaValue, model) => h('div', {style: 'height: 200px;background-color: var(--button-primary-background-color);'}, [h('p', {}, 'schemaValue: ' + JSON.stringify(schemaValue)), h('p', {}, 'model: ' + JSON.stringify(model))])
@@ -389,8 +388,8 @@ const form5 = reactive({
 const schema5 = reactive({
   input: {
     label: '输入框-input事件',
+    type: 'text',
     componentProps: {
-      type: 'text',
     },
     listeners: {
       onInput: (v) => {
@@ -400,8 +399,8 @@ const schema5 = reactive({
   },
   select: {
     label: 'select-change事件',
+    type: 'select',
     componentProps: {
-      type: 'select',
       options: [
         {
           label: '唱',

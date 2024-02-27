@@ -88,10 +88,7 @@ export default defineComponent({
         return vnode;
       }
 
-      const component = getComponent(
-        props.schemaValue,
-        props.fieldName
-      );
+      const component = getComponent(props.schemaValue, props.fieldName);
 
       return h(component, {
         modelValue: LayJsonSchemaFormData.model[props.fieldName],
