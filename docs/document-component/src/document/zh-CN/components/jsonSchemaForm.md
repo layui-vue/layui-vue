@@ -490,10 +490,10 @@ interface SchemaProps {
   [key: string]: SchemaValueType;
 }
 
-type SchemaValueType = {
+interface SchemaValueType extends FormItemProps {
   hidden?: boolean;
   componentsProps: ComponentsProps;
   colProps?: ColProps;
   listeners?: listenersType;
-};
+}
 ```
