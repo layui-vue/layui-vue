@@ -14,6 +14,8 @@ export const useFormBlock = (schema: SchemaProps) => {
         const schemaValue = schema[schemaKey];
 
         _Schema[schemaKey] = {
+          prop: schemaKey,
+
           ...schemaValue,
 
           hidden: schemaValue.hidden ?? false,
@@ -21,11 +23,6 @@ export const useFormBlock = (schema: SchemaProps) => {
           colProps: {
             ...schemaValue.colProps,
             md: schemaValue.colProps?.md || 24,
-          },
-
-          formItemProps: {
-            prop: schemaKey,
-            ...schemaValue.formItemProps,
           },
         };
 
