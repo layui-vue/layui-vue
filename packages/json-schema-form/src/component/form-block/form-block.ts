@@ -10,10 +10,10 @@ import { defineComponent, h, inject } from "vue";
 import {
   LayInput,
   LayRate,
-  LaySelect,
   LaySwitch,
   LayTextarea,
   LayDatePicker,
+  LaySelect,
 } from "@layui/layui-vue";
 import LayRadio from "../radio";
 import LayCheckbox from "../checkbox";
