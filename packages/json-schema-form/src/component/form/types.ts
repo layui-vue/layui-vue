@@ -45,10 +45,10 @@ export interface SchemaValueType extends FormItemProps {
   componentProps: ComponentProps;
   colProps?: ColProps;
   listeners?: listenersType;
+  type?: string;
 }
 
 export type ComponentProps = {
-  type?: string;
   customRender?: customRenderType;
 } & modelType;
 

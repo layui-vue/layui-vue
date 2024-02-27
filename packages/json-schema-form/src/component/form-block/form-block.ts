@@ -19,11 +19,11 @@ import LayRadio from "../radio";
 import LayCheckbox from "../checkbox";
 
 const getComponent = (
-  componentProps: ComponentProps,
+  schemaValue: SchemaValueType,
   fieldName: string
 ): Component => {
-  if (componentProps.type) {
-    const type = componentProps.type.toLowerCase() as InputsType;
+  if (schemaValue.type) {
+    const type = schemaValue.type.toLowerCase() as InputsType;
 
     switch (type) {
       case "text":
@@ -89,7 +89,7 @@ export default defineComponent({
       }
 
       const component = getComponent(
-        props.schemaValue.componentProps,
+        props.schemaValue,
         props.fieldName
       );
 
