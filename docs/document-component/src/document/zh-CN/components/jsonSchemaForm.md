@@ -35,7 +35,7 @@ createApp(App).use(LayJsonSchemaForm).mount("#app");
 ::: title 基本使用
 :::
 
-::: demo 使用 `lay-json-schema-form` 标签, 创建一个 JSON 表单。内置包含 `text` `password` `textarea` `select` `switch` `rate` `radio` `checkbox`（日期）`date` `datetime` `year` `month` `time` `yearmonth` 通用 type 类型
+::: demo 使用 `lay-json-schema-form` 标签, 创建一个 JSON 表单。内置包含 `input` `textarea` `select` `switch` `rate` `radio` `checkbox` `date` 通用 type 类型
 
 <template>
   <lay-json-schema-form :model="form" :schema="schema1" ></lay-json-schema-form>
@@ -61,23 +61,25 @@ const form = reactive({
 const schema1 = reactive({
   name: {
     label: '姓名',
-    type: 'text',
-    componentProps: {
+    type: 'input',
+    props: {
+      type: 'text',
       placeholder: '请输入姓名',
     }
   },
   password: {
     label: '密码',
-    type: 'password',
-    componentProps: {
+    type: 'input',
+    props: {
       autocomplete: "off",
+      type: 'password',
       placeholder: '请输入密码',
     }
   },
   like: {
     label: '爱好',
     type: 'select',
-    componentProps: {
+    props: {
       options: [
         { label: '唱', value: '1' },
         { label: '跳', value: '2' },
@@ -90,32 +92,40 @@ const schema1 = reactive({
   remark: {
     label: '备注',
     type: 'textarea',
-    componentProps: {
+    props: {
       placeholder: '请输入备注',
     }
   },
   switch: {
     label: '备注',
     type: 'switch',
-    componentProps: {
+    props: {
     }
   },
   rate: {
     label: '评分',
     type: 'rate',
-    componentProps: {
+    props: {
     }
   },
   date: {
-    label: '日期',
+    label: '日期-date',
     type: 'date',
-    componentProps: {
+    props: {
+      type: 'date'
+    }
+  },
+  date1: {
+    label: '日期-datetime',
+    type: 'date',
+    props: {
+      type: 'datetime'
     }
   },
   radio: {
     label: '单选',
     type: 'radio',
-    componentProps: {
+    props: {
       options: [
         {
           label: "运动",
@@ -135,7 +145,7 @@ const schema1 = reactive({
   radio1: {
     label: '单选-button',
     type: 'radio',
-    componentProps: {
+    props: {
       button: true,
       options: [
         {
@@ -156,7 +166,7 @@ const schema1 = reactive({
   checkbox: {
     label: '多选',
     type: 'checkbox',
-    componentProps: {
+    props: {
       options: [
         {
           label: "运动",
@@ -201,8 +211,9 @@ const space = ref(20)
 const schema2 = reactive({
   text1: {
     label: '栅格布局12',
-    type: 'text',
-    componentProps: {
+    type: 'input',
+    props: {
+      type: 'text',
       placeholder: '请输入姓名',
     },
     colProps: {
@@ -211,8 +222,9 @@ const schema2 = reactive({
   },
   text2: {
     label: '栅格布局12',
-    type: 'text',
-    componentProps: {
+    type: 'input',
+    props: {
+      type: 'text',
       placeholder: '请输入姓名',
     },
     colProps: {
@@ -221,8 +233,9 @@ const schema2 = reactive({
   },
   text3: {
     label: '栅格布局6',
-    type: 'text',
-    componentProps: {
+    type: 'input',
+    props: {
+      type: 'text',
       placeholder: '请输入姓名',
     },
     colProps: {
@@ -231,8 +244,9 @@ const schema2 = reactive({
   },
   text4: {
     label: '栅格布局6',
-    type: 'text',
-    componentProps: {
+    type: 'input',
+    props: {
+      type: 'text',
       placeholder: '请输入姓名',
     },
     colProps: {
@@ -241,8 +255,9 @@ const schema2 = reactive({
   },
   text5: {
     label: '栅格布局6',
-    type: 'text',
-    componentProps: {
+    type: 'input',
+    props: {
+      type: 'text',
       placeholder: '请输入姓名',
     },
     colProps: {
@@ -251,8 +266,9 @@ const schema2 = reactive({
   },
   text6: {
     label: '栅格布局6',
-    type: 'text',
-    componentProps: {
+    type: 'input',
+    props: {
+      type: 'text',
       placeholder: '请输入姓名',
     },
     colProps: {
@@ -291,15 +307,17 @@ const form3 = reactive({
 const schema3 = reactive({
   name: {
     label: '姓名',
-    type: 'text',
-    componentProps: {
+    type: 'input',
+    props: {
+      type: 'text',
       placeholder: '请输入姓名',
     }
   },
   password: {
     label: '密码',
-    type: 'password',
-    componentProps: {
+    type: 'input',
+    props: {
+      type: 'password',
       autocomplete: "off",
       placeholder: '请输入密码',
     }
@@ -321,7 +339,7 @@ const clear3 = () => {
 
 :::
 
-::: title 自定义渲染
+::: title customRender 渲染
 :::
 
 ::: demo
@@ -329,10 +347,11 @@ const clear3 = () => {
 <template>
   <lay-json-schema-form :model="form4" :schema="schema4">
     <template #string="{schemaValue, model}">
-      <div style="height: 200px;background-color: var(--button-primary-background-color);">
-        <p>schemaValue: {{schemaValue}}</p>
-        <p>model: {{model}}</p>
-      </div>
+      <lay-input>
+        <template #suffix>
+          input后置插槽
+        </template>
+      </lay-input>
     </template>
   </lay-json-schema-form>
 </template>
@@ -347,22 +366,119 @@ const form4 = reactive({
 const schema4 = reactive({
   customRender1: {
     label: '参数为string',
-    componentProps: {
+    slots: {
       customRender: 'string'
     }
   },
   customRender2: {
     label: '参数为function',
-    type: 'password',
-    componentProps: {
-      autocomplete: "off",
-      placeholder: '请输入密码',
+    slots: {
       customRender: (schemaValue, model) => h('div', {style: 'height: 200px;background-color: var(--button-primary-background-color);'}, [h('p', {}, 'schemaValue: ' + JSON.stringify(schemaValue)), h('p', {}, 'model: ' + JSON.stringify(model))])
     }
   },
   
 })
 
+</script>
+
+:::
+
+::: title 组件内部插槽
+:::
+
+::: demo
+
+<template>
+  <lay-json-schema-form :model="form7" :schema="schema7">
+    <template #inputPrepend="{ disabled }">
+      disabled: {{ disabled }} input前置插槽
+    </template>
+    <template #inputSuffix> input后置插槽 </template>
+    <template #selectHeader>
+      <div style="padding: 10px">
+        <lay-checkbox
+          v-model="checkboxValue"
+          skin="primary"
+          :isIndeterminate="isIndeterminate"
+          @change="hanldeChange"
+          value="1"
+          >全选</lay-checkbox
+        >
+      </div>
+    </template>
+  </lay-json-schema-form>
+</template>
+
+<script setup>
+import { ref, reactive, h, watch } from "vue";
+
+const checkboxValue = ref(false);
+const isIndeterminate = ref(false);
+
+const form7 = reactive({
+  test1: "string",
+  select: [],
+});
+
+const schema7 = reactive({
+  test1: {
+    label: "输入框插槽",
+    type: "input",
+    slots: {
+      prepend: "inputPrepend",
+      suffix: (schemaValue, model) => {
+        return h("div", { style: { color: "red" } }, "123");
+      },
+    },
+    props: {
+      disabled: true,
+      type: "text",
+    },
+  },
+  select: {
+    label: "下拉框插槽",
+    type: "select",
+    slots: {
+      header: "selectHeader",
+    },
+    props: {
+      multiple: true,
+      options: [
+        { label: "唱", value: "1" },
+        { label: "跳", value: "2" },
+        { label: "rap", value: "3" },
+        { label: "篮球", value: "4" },
+      ],
+    },
+  },
+});
+
+watch(
+  () => form7.select,
+  (val) => {
+    console.log(val, "val>>");
+
+    if (val.length === 0) {
+      checkboxValue.value = false;
+      isIndeterminate.value = false;
+    } else if (val.length === 4) {
+      checkboxValue.value = true;
+      isIndeterminate.value = false;
+    } else {
+      checkboxValue.value = true;
+      isIndeterminate.value = true;
+    }
+  }
+);
+
+const hanldeChange = (v) => {
+  isIndeterminate.value = false;
+  if (v) {
+    form7.select = ["1", "2", "3", "4"];
+  } else {
+    form7.select = [];
+  }
+};
 </script>
 
 :::
@@ -388,8 +504,9 @@ const form5 = reactive({
 const schema5 = reactive({
   input: {
     label: '输入框-input事件',
-    type: 'text',
-    componentProps: {
+    type: 'input',
+    props: {
+      type: 'text',
     },
     listeners: {
       onInput: (v) => {
@@ -400,7 +517,7 @@ const schema5 = reactive({
   select: {
     label: 'select-change事件',
     type: 'select',
-    componentProps: {
+    props: {
       options: [
         {
           label: '唱',
@@ -450,31 +567,37 @@ const schema5 = reactive({
 ::: table
 | 属性 | 描述 | 类型 | 默认值 |
 | ----------------------- | --------------------------- | --------- | ------------ |
+|type | 渲染组件类型 `input` `textarea` `select` `switch` `rate` `radio` `checkbox` `date` |`string` | - |
 |hidden | 是否隐藏当前 form-item | `boolean` | false |
-|componentProps | 组件 `props`集合，透传至渲染组件中 | `ComponentProps` | - |
-|colProps | 栅格布局 `props`集合<br>可查看[gridProps](http://www.layui-vue.com/zh-CN/components/grid) | `ColProps` | - |
-|listeners | listeners 事件集合 | `object` | - |
 |prop | form-item prop，组件内部赋值为 schema.fieldName，外部传入无效
+|props | 组件 `props`集合，透传至渲染组件中 | `object` | - |
+|slots | 插槽集合 `object` | -|
+|listeners | listeners 事件集合 | `object` | - |
+|colProps | 栅格布局 `props`集合<br>可查看[gridProps](http://www.layui-vue.com/zh-CN/components/grid) | `ColProps` | - |
 | 支持所有 form-item 中的 props 属性<br>[formItemProps 快捷查看](http://www.layui-vue.com/zh-CN/components/formItem)|
+:::
+
+::: title slots
+:::
+
+::: table
+| 属性 | 描述 | 类型 | 默认值 |
+| ----------------------- | --------------------------- | --------- | ------------ |
+| customRender | 自定义组件渲染 | `customRenderType` | - |
+| `[key: 'string']`| 当前自定义组件渲染内部插槽 | `customRenderType` | - |
 :::
 
 ::: title types
 :::
 
 ```ts
-type InputsType =
-  | "text"
-  | "password"
+type Type =
+  | "input"
   | "select"
   | "textarea"
   | "switch"
   | "radio"
   | "date"
-  | "datetime"
-  | "year"
-  | "month"
-  | "time"
-  | "yearmonth"
   | "rate"
   | "checkbox";
 
@@ -485,15 +608,27 @@ type modelType = {
 type customRenderFnType = (input: InputsProps, model: modelType) => VNode;
 type customRenderType = string | customRenderFnType;
 
+type SlotsType = {
+  customRender?: customRenderType;
+} & {
+  [key: string]: customRenderType;
+};
+
+type listenersType = {
+  [key: string]: () => void;
+};
+
 interface SchemaProps {
   // key 为FieldName
   [key: string]: SchemaValueType;
 }
 
 interface SchemaValueType extends FormItemProps {
+  type?: Type;
   hidden?: boolean;
-  componentsProps: ComponentsProps;
-  colProps?: ColProps;
+  props: modelType;
+  slots: SlotsType;
   listeners?: listenersType;
+  colProps?: ColProps;
 }
 ```

@@ -1,23 +1,17 @@
-import type { VNode } from "vue";
+import type { VNode, Slots } from "vue";
 import type { ColProps } from "@layui/layui-vue/types/component/col/index.vue";
 import type { FormItemProps } from "@layui/layui-vue/types/component/formItem/index.vue";
 import type { FormProps } from "@layui/layui-vue/types/component/form/index.vue";
 
 import type { ValidateError } from "async-validator";
 
-export type InputsType =
-  | "text"
-  | "password"
+export type Type =
+  | "input"
   | "select"
   | "textarea"
   | "switch"
   | "radio"
   | "date"
-  | "datetime"
-  | "year"
-  | "month"
-  | "time"
-  | "yearmonth"
   | "rate"
   | "checkbox";
 
@@ -25,11 +19,11 @@ export type modelType = {
   [key: string]: any;
 };
 
-type customRenderFnType = (
+export type customRenderFnType = (
   SchemaValueType: SchemaValueType,
   model: modelType
 ) => VNode;
-type customRenderType = string | customRenderFnType;
+export type customRenderType = string | customRenderFnType;
 
 export interface JsonSchemaFormProps extends FormProps {
   space?: number | string;
@@ -41,21 +35,26 @@ export interface SchemaProps {
 }
 
 export interface SchemaValueType extends FormItemProps {
+  type?: Type;
   hidden?: boolean;
-  componentProps: ComponentProps;
-  colProps?: ColProps;
+  props: modelType;
+  slots: SlotsType;
   listeners?: listenersType;
-  type?: string;
+  colProps?: ColProps;
 }
 
-export type ComponentProps = {
+export type SlotsType = {
   customRender?: customRenderType;
-} & modelType;
+} & customSlotType;
+
+export type customSlotType = {
+  [key: string]: customRenderType;
+};
 
 export type listenersType = {
   [key: string]: () => void;
 };
 
-export declare interface FormCallback {
+export interface FormCallback {
   (isValid?: boolean, model?: modelType, errors?: ValidateError[] | null): void;
 }

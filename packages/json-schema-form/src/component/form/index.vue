@@ -5,7 +5,7 @@ import type {
   JsonSchemaFormProps as _JsonSchemaFormProps,
 } from "./types";
 
-import { provide, ref } from "vue";
+import { provide, ref, useSlots } from "vue";
 import { LayForm, LayFormItem, LayRow, LayCol } from "@layui/layui-vue";
 import FormBlock from "../form-block";
 import { useForm } from "./useForm";
@@ -19,6 +19,7 @@ const props = withDefaults(defineProps<JsonSchemaFormProps>(), {
 });
 
 const { Schema, formProps } = useForm(props);
+const slots = useSlots();
 
 defineOptions({
   name: "LayJsonSchemaForm",
@@ -50,7 +51,7 @@ const clearValidate = (fields?: string | string[]) => {
   return formRef.value.clearValidate(fields);
 };
 
-provide("LayJsonSchemaForm", { model: props.model });
+provide("LayJsonSchemaForm", { model: props.model, slots });
 
 defineExpose({ validate, resetFields, clearValidate });
 </script>
@@ -62,10 +63,13 @@ defineExpose({ validate, resetFields, clearValidate });
         <lay-col v-bind="schemaValue.colProps" v-if="!schemaValue.hidden">
           <lay-form-item v-bind="schemaValue" :prop="(schemaName as string)">
             <template
-              v-if="typeof schemaValue.componentProps.customRender === 'string'"
+              v-if="
+                schemaValue.slots &&
+                typeof schemaValue.slots.customRender === 'string'
+              "
             >
               <slot
-                :name="schemaValue.componentProps.customRender"
+                :name="schemaValue.slots.customRender"
                 :schemaValue="schema[schemaName]"
                 :model="model"
               ></slot>
