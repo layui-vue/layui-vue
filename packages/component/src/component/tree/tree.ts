@@ -17,6 +17,8 @@ export interface TreeData {
   isChecked: boolean;
   isDisabled: boolean;
   isLeaf: boolean;
+  isLazy: boolean;
+  isLoading: boolean;
   hasNextSibling: boolean;
   parentNode: Nullable<TreeData>;
   [key: string]: any;
@@ -30,6 +32,7 @@ interface TreeConfig {
   originMap: Map<StringOrNumber, OriginalTreeData>;
   replaceFields: ReplaceFieldsOptions;
   defaultExpandAll: boolean;
+  lazy: boolean;
 }
 
 class Tree {
@@ -89,6 +92,7 @@ class Tree {
       checkedKeys,
       expandKeys,
       replaceFields: { children, id, title },
+      lazy,
     } = this.config;
 
     const nodeKey = Reflect.get(origin, id);
@@ -108,6 +112,8 @@ class Tree {
       isDisabled: false,
       isChecked: false,
       isLeaf: false,
+      isLazy: !Reflect.get(origin, "spread") && lazy,
+      isLoading: false,
       hasNextSibling: hasNextSibling,
       parentNode: parentNode || null,
     });
@@ -115,7 +121,7 @@ class Tree {
     node.isDisabled = nodeDisabled;
     node.isChecked = checkedKeys.includes(nodeKey);
     node.isLeaf = parentNode ? parentNode.isLeaf : expandKeys.includes(nodeKey);
-    node.isLeaf = nodeIsLeaf || this.config.defaultExpandAll;
+    node.isLeaf = nodeIsLeaf || (this.config.defaultExpandAll && !lazy);
 
     if (!nodeMap.has(nodeKey)) {
       nodeMap.set(nodeKey, node);

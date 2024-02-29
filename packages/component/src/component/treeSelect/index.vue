@@ -11,7 +11,7 @@ import LayDropdown from "../dropdown/index.vue";
 import LayTree from "../tree/index.vue";
 import useProps from "./index.hooks";
 import { fillFieldNames } from "../tree/utils";
-import { ReplaceFieldsOptionsOptional } from "../tree/tree.type";
+import { ReplaceFieldsOptionsOptional, LoadFunction } from "../tree/tree.type";
 
 export interface TreeSelectProps {
   data: any;
@@ -30,6 +30,8 @@ export interface TreeSelectProps {
   contentStyle?: StyleValue;
   replaceFields?: ReplaceFieldsOptionsOptional;
   defaultExpandAll?: boolean;
+  lazy?: boolean;
+  load?: LoadFunction;
 }
 
 export interface TreeSelectEmits {
@@ -69,6 +71,7 @@ const dropdownRef = ref();
 const composing = ref(false);
 const emits = defineEmits<TreeSelectEmits>();
 const lastSelectedValue = ref();
+const treeOriginData = ref();
 
 const _replaceFields = computed(() => fillFieldNames(props.replaceFields));
 
@@ -107,7 +110,11 @@ watch(
     if (props.multiple) {
       try {
         multipleValue.value = selectedValue.value.map((value: any) => {
-          var node: any = getNode(props.data, value, _replaceFields.value);
+          var node: any = getNode(
+            treeOriginData.value || props.data,
+            value,
+            _replaceFields.value
+          );
           if (node) {
             node.label = node[title];
             node.value = node[id];
@@ -132,7 +139,7 @@ watch(
        * 备注：如果找不到这个节点, 说明存在 BUG 或 空值, 对 singleValue 清空
        */
       const node: any = getNode(
-        props.data,
+        treeOriginData.value || props.data,
         selectedValue.value,
         _replaceFields.value
       );
@@ -281,7 +288,9 @@ watch(openState, () => {
 watch(
   () => props.data,
   () => {
-    treeData.value = props.data;
+    if (props.data !== treeData.value) {
+      treeData.value = props.data;
+    }
   },
   { immediate: true, deep: true }
 );
@@ -350,7 +359,9 @@ watch(
       <template #content>
         <div class="layui-tree-select-content">
           <lay-tree
+            ref="treeRef"
             :data="treeData"
+            v-model:treeOriginData="treeOriginData"
             :is-select="!multiple"
             :onlyIconControl="true"
             :show-checkbox="multiple"
@@ -360,6 +371,8 @@ watch(
             :tail-node-icon="!hasTitleSlot"
             :replaceFields="_replaceFields"
             :defaultExpandAll="defaultExpandAll"
+            :lazy="lazy"
+            :load="load"
             @node-click="handleClick"
           >
             <template #title="{ data }">

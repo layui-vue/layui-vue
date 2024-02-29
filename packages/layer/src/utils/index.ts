@@ -441,13 +441,13 @@ export function calculateNotifOffset(offset: any, area: any, layerId: string) {
     t = transOffsetTop + "px";
     l = "calc(100% - " + (parseFloat(area[0]) + transOffsetLeft) + "px)";
   } else if (offset === "rb") {
-    t = "calc(100vh - " + transOffsetTop + "px)";
+    t = "calc(100% - " + transOffsetTop + "px)";
     l = "calc(100% - " + (parseFloat(area[0]) + transOffsetLeft) + "px)";
   } else if (offset === "lt") {
     t = transOffsetTop + "px";
     l = transOffsetLeft + "px";
   } else if (offset === "lb") {
-    t = "calc(100vh - " + transOffsetTop + "px)";
+    t = "calc(100% - " + transOffsetTop + "px)";
     l = transOffsetLeft + "px";
   }
 
@@ -488,7 +488,7 @@ export function removeNotifiyFromQueen(layerId: string) {
         parseFloat(dom.style["top"].split(" - ")[1]) -
         transOffsetTop -
         offsetHeight;
-      dom.style["top"] = "calc(100vh - " + bottom + "px)";
+      dom.style["top"] = "calc(100% - " + bottom + "px)";
     }
   });
   notifiyQueen.splice(index, 1); //删除

@@ -722,6 +722,7 @@ const baseNotifiyRB = function() {
       title:"Notification Title",
       content:"I will never close automatically. I will be close automatically. I will never close automatically.",
       offset:'rb',
+      time: 1000
     })
 }
 const baseNotifiyLT = function() {

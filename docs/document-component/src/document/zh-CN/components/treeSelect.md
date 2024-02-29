@@ -1015,7 +1015,77 @@ const data5 = ref([{
 
 :::
 
-::: title Title插槽
+::: title 懒加载子节点
+:::
+
+::: demo 异步加载子节点
+
+<template>
+  <lay-tree-select
+    v-model="value1"
+    :data="data10"
+    lazy
+    :load="handleLoad"
+  ></lay-tree-select>
+</template>
+
+<script setup>
+import { ref } from 'vue';
+
+const data10 = ref([
+  {
+    title: "一级1",
+    id: 1,
+  },
+	{
+    title: "一级2",
+    id: 2,
+		children: [
+			{
+				title: "一级2-1",
+				id: 21,
+			}
+		]
+  },
+]);
+
+const value1 = ref(1)
+
+const handleLoad = (node, resolve) => {
+  console.log(node);
+  if (node.id === 1) {
+    setTimeout(() => {
+      resolve([
+        {
+          title: "一级1-1",
+          id: 11,
+        },
+        {
+          title: "一级1-2",
+          id: 12,
+        },
+      ]);
+    }, 2000);
+  } else if (node.id === 11) {
+    resolve([
+      {
+        title: "一级1-1-1",
+        id: 111,
+      },
+      {
+        title: "一级1-2-1",
+        id: 121,
+      },
+    ]);
+  } else {
+    resolve([]);
+  }
+};
+</script>
+
+:::
+
+::: title Title 插槽
 :::
 
 ::: demo 通过 `change` 属性开启清空操作。
@@ -1185,10 +1255,10 @@ const data6 = ref([{
 
 :::
 
-::: title tree自定义字段
+::: title tree 自定义字段
 :::
 
-::: demo tree组件 使用 `replaceFields` 替换 `data` 中的字段名
+::: demo tree 组件 使用 `replaceFields` 替换 `data` 中的字段名
 
 <template>
   <lay-tree-select v-model="value1" :data="data7" :replaceFields="replaceFields"></lay-tree-select>
@@ -1272,20 +1342,22 @@ const data7 = ref([{
 
 ::: table
 
-| 属性                  | 描述          | 类型 | 可选值 | 默认值 |
-|---------------------|-------------|----|-----|-----|
-| v-model             | 选中值         | -- | --  | --  |
-| data                | 树数据         | -- | --  | --  |
-| multiple            | 开启多选        | -- | --  | --  |
-| allow-clear         | 允许清空        | -- | --  | --  |
-| disabled            | 禁用选择        | -- | --  | --  |
-| placeholder         | 输入提示        | -- | --  | --  |
-| checkStrictly       | 禁用级联复选      | -- | --  | --  |
-| collapseTagsTooltip | 折叠提示        | -- | --  | --  |
-| minCollapsedNum     | 超过指定标签后开启折叠 | -- | --  | --  |
-| size                | 尺寸大小        | -- | --  | --  |
-| search              | 是否开启搜索    | `boolean` | false  | --  |
-| searchNodeMethod    |  对树节点进行筛选时执行的方法， 返回 false 则表示这个节点会被隐藏     | `Fcuntion(node, value)` | --  | --  |
+| 属性                | 描述                                                             | 类型                                                                                   | 可选值 | 默认值 |
+| ------------------- | ---------------------------------------------------------------- | -------------------------------------------------------------------------------------- | ------ | ------ |
+| v-model             | 选中值                                                           | --                                                                                     | --     | --     |
+| data                | 树数据                                                           | --                                                                                     | --     | --     |
+| multiple            | 开启多选                                                         | --                                                                                     | --     | --     |
+| allow-clear         | 允许清空                                                         | --                                                                                     | --     | --     |
+| disabled            | 禁用选择                                                         | --                                                                                     | --     | --     |
+| placeholder         | 输入提示                                                         | --                                                                                     | --     | --     |
+| checkStrictly       | 禁用级联复选                                                     | --                                                                                     | --     | --     |
+| collapseTagsTooltip | 折叠提示                                                         | --                                                                                     | --     | --     |
+| minCollapsedNum     | 超过指定标签后开启折叠                                           | --                                                                                     | --     | --     |
+| size                | 尺寸大小                                                         | --                                                                                     | --     | --     |
+| search              | 是否开启搜索                                                     | `boolean`                                                                              | false  | --     |
+| searchNodeMethod    | 对树节点进行筛选时执行的方法， 返回 false 则表示这个节点会被隐藏 | `Fcuntion(node, value)`                                                                | --     | --     |
+| lazy                | 是否懒加载子节点，需与 `load` 方法结合使用                       | false                                                                                  |        |
+| load                | 加载子树数据的方法，仅当 `lazy` 属性为 true 时生效               | function(node, resolve)，node 为当前点击的节点，resolve 为数据加载完成的回调(必须调用) |        |
 
 :::
 
@@ -1294,9 +1366,9 @@ const data7 = ref([{
 
 ::: table
 
-| 名称     | 描述      | 参数 |
-|--------|---------|----|
-| change | 选中值变化事件 | -- |
+| 名称   | 描述           | 参数 |
+| ------ | -------------- | ---- |
+| change | 选中值变化事件 | --   |
 
 :::
 

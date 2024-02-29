@@ -21,6 +21,7 @@ export const useTree: UseTree = (props: TreeProps, emit: TreeEmits) => {
       expandKeys: props.expandKeys ?? [],
       checkStrictly: props.checkStrictly ?? false,
       defaultExpandAll: props.defaultExpandAll ?? false,
+      lazy: props.lazy ?? false,
     },
     props.data
   );
