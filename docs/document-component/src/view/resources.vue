@@ -62,8 +62,27 @@
         </ul>
       </div>
     </fieldset>
+    <fieldset class="layui-field layui-field-title">
+      <legend style="margin-bottom: 20px; text-align: center">高阶组件</legend>
+      <div class="layui-field-box">
+        <ul class="layui-row layui-col-space6">
+          <li class="layui-col-sm24">
+            <div class="alone">
+              <router-link to="/zh-CN/components/icon"
+                >json - schema - form<cite>配 置 化 高 级 表 单 组 件</cite>
+                <img
+                  src="https://img.shields.io/npm/v/@layui/json-schema-form.svg?sanitize=true"
+                  alt="Version" />
+                <img
+                  src="https://img.shields.io/npm/l/@layui/json-schema-form.svg?sanitize=true"
+              /></router-link>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </fieldset>
   </div>
-  <div class="footer footer-index" style="position: fixed; bottom: 0px">
+  <div class="footer footer-index">
     <p>Released under the <a href="/index.html">MIT License</a>.</p>
     <p>Copyright © 2021-2023 www.layui-vue.com</p>
     <p>

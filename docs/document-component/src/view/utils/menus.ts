@@ -23,12 +23,6 @@ const menus = [
         path: "/zh-CN/components/icon",
       },
       {
-        id: 8,
-        title: "弹层",
-        subTitle: "layer",
-        path: "/zh-CN/components/layer",
-      },
-      {
         id: 9,
         title: "加载",
         subTitle: "loading",
@@ -57,6 +51,24 @@ const menus = [
         title: "波纹",
         subTitle: "ripple",
         path: "/zh-CN/components/ripple",
+      },
+    ],
+  },
+  {
+    id: 2,
+    title: "高阶",
+    children: [
+      {
+        id: 104,
+        title: "弹层",
+        subTitle: "layer",
+        path: "/zh-CN/components/layer",
+      },
+      {
+        id: 105,
+        title: "表单",
+        subTitle: "jsonSchemaForm",
+        path: "/zh-CN/components/jsonSchemaForm",
       },
     ],
   },
