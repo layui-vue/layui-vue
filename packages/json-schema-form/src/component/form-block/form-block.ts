@@ -3,6 +3,7 @@ import type {
   Type,
   SchemaValueType,
   customSlotType,
+  customRenderFnType,
 } from "../form/types";
 import type { PropType, Component } from "vue";
 import { defineComponent, h, inject } from "vue";
@@ -17,6 +18,25 @@ import {
 } from "@layui/layui-vue";
 import LayRadio from "../radio";
 import LayCheckbox from "../checkbox";
+
+const getCustomRenderVNode = (
+  LayJsonSchemaFormData: modelType,
+  schemaValue: SchemaValueType
+) => {
+  const vnode = (schemaValue.slots.customRender as customRenderFnType).call(
+    undefined,
+    schemaValue,
+    LayJsonSchemaFormData.model
+  );
+
+  // bind listeners
+  vnode.props = {
+    ...schemaValue.listeners,
+    ...vnode.props,
+  };
+
+  return vnode;
+};
 
 const getComponent = (
   schemaValue: SchemaValueType,
@@ -50,10 +70,10 @@ const getComponent = (
   );
 };
 
-function getComponentSlots(
+const getComponentSlots = (
   LayJsonSchemaFormData: modelType,
   schemaValue: SchemaValueType
-) {
+) => {
   const slotRenders: customSlotType = {};
   const { slots: LayJsonSchemaFormSlot } = LayJsonSchemaFormData;
   const { slots: schemaSlot } = schemaValue;
@@ -69,7 +89,7 @@ function getComponentSlots(
       slotRenders[slotKey] = LayJsonSchemaFormSlot[slotValue];
     } else {
       slotRenders[slotKey] = () =>
-        (slotValue as Function).call(
+        (slotValue as customRenderFnType).call(
           undefined,
           schemaValue,
           LayJsonSchemaFormData.model
@@ -78,7 +98,7 @@ function getComponentSlots(
   }
 
   return slotRenders;
-}
+};
 
 export default defineComponent({
   name: "LayJsonSchemaFormBlock",
@@ -97,28 +117,15 @@ export default defineComponent({
       const { schemaValue, fieldName } = props;
       const LayJsonSchemaFormData = inject("LayJsonSchemaForm") as modelType;
 
-      const slots = getComponentSlots(LayJsonSchemaFormData, schemaValue);
-
       if (
         schemaValue.slots &&
         typeof schemaValue.slots.customRender === "function"
       ) {
-        const vnode = schemaValue.slots.customRender.call(
-          undefined,
-          schemaValue,
-          LayJsonSchemaFormData.model
-        );
-
-        // bind listeners
-        vnode.props = {
-          ...schemaValue.listeners,
-          ...vnode.props,
-        };
-
-        return vnode;
+        return getCustomRenderVNode(LayJsonSchemaFormData, schemaValue);
       }
 
       const component = getComponent(schemaValue, fieldName);
+      const slots = getComponentSlots(LayJsonSchemaFormData, schemaValue);
 
       return h(
         component,
