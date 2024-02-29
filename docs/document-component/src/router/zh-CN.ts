@@ -459,6 +459,12 @@ const zhCN = [
             component: () => import("../document/zh-CN/components/calendar.md"),
             meta: { title: "日历" },
           },
+          {
+            path: "/zh-CN/components/jsonSchemaForm",
+            component: () =>
+              import("../document/zh-CN/components/jsonSchemaForm.md"),
+            meta: { title: "高阶表单" },
+          },
         ],
       },
     ],

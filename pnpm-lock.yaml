@@ -308,6 +308,12 @@ importers:
 
   packages/icons: {}
 
+  packages/json-schema-form:
+    dependencies:
+      '@layui/layui-vue':
+        specifier: workspace:*
+        version: link:../component
+
   packages/layer:
     dependencies:
       '@layui/icons-vue':

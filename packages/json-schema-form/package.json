@@ -1,0 +1,35 @@
+{
+  "name": "@layui/json-schema-form",
+  "version": "1.0.0",
+  "description": "a component library for Vue 3 base on layui-vue",
+  "homepage": "http://www.layui-vue.com",
+  "type": "module",
+  "module": "lib/json-schema-form.es.js",
+  "main": "lib/json-schema-form.umd.js",
+  "exports": {
+    ".": {
+      "import": "./lib/json-schema-form.es.js",
+      "require": "./lib/json-schema-form.umd.js"
+    },
+    "./lib/": "./lib/"
+  },
+  "types": "types/index.d.ts",
+  "style": "lib/index.css",
+  "keywords": [
+    "layui-vue",
+    "layui",
+    "layui/json-schema-form",
+    "vue"
+  ],
+  "files": [
+    "lib",
+    "types"
+  ],
+  "scripts": {
+    "build": "vite build --emptyOutDir && npm run build:types",
+    "build:types": "rimraf types && tsc -d"
+  },
+  "dependencies": {
+    "@layui/layui-vue": "workspace:*"
+  }
+}
