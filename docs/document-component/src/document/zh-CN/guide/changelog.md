@@ -17,11 +17,12 @@
       <ul>
         <a name="2-16-2"></a>
         <li>
-          <h3>2.16.2 <span class="layui-badge-rim">2024-xx-xx</span></h3>
+          <h3>2.16.2 <span class="layui-badge-rim">2024-02-29</span></h3>
           <ul>
+              <li>[发布] json-schema-form 1.0.0 版本。</li>
               <li>[新增] tree，treeSelect 组件 新增lazy，load参数，实现懒加载子节点。</li>
               <li>[修复] layer组件 在使用template场景下zIndex属性并未更新为最新值。<a href="https://gitee.com/layui/layui-vue/issues/I927ZN">I927ZN</a></li>
-              <li>[升级] layer-vue 2.3.x 版本。</li>
+              <li>[升级] layer-vue 2.3.2 版本。</li>
           </ul>
         </li>
       </ul>
