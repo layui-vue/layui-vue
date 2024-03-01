@@ -1,11 +1,12 @@
 {
   "name": "@layui/json-schema-form",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "a component library for Vue 3 base on layui-vue",
   "homepage": "http://www.layui-vue.com",
   "type": "module",
   "module": "lib/json-schema-form.es.js",
   "main": "lib/json-schema-form.umd.js",
+  "license": "MIT",
   "exports": {
     ".": {
       "import": "./lib/json-schema-form.es.js",
