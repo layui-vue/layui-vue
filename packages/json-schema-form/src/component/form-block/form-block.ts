@@ -87,7 +87,7 @@ const getComponentSlots = (
       LayJsonSchemaFormSlot.hasOwnProperty(slotValue)
     ) {
       slotRenders[slotKey] = LayJsonSchemaFormSlot[slotValue];
-    } else {
+    } else if (typeof slotValue === "function") {
       slotRenders[slotKey] = () =>
         (slotValue as customRenderFnType).call(
           undefined,

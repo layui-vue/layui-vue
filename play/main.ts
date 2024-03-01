@@ -19,6 +19,5 @@ import "../packages/component/lib/index.css";
 
   app.use(LayJsonSchemaForm);
 
-
   app.mount("#play");
 })();
