@@ -28,7 +28,8 @@
   ],
   "scripts": {
     "build": "vite build --emptyOutDir && npm run build:types",
-    "build:types": "rimraf types && tsc -d"
+    "build:types": "rimraf types && tsc -d",
+    "test": "vitest"
   },
   "dependencies": {
     "@layui/layui-vue": "workspace:*"
