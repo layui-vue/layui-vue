@@ -1,6 +1,6 @@
-import { nextTick, reactive, ref } from "vue";
+import { nextTick, reactive, h } from "vue";
 
-import { describe, expect, test, vi } from "vitest";
+import { describe, expect, test } from "vitest";
 import { mount } from "@vue/test-utils";
 
 import LayForm from "../form";
@@ -291,5 +291,74 @@ describe("LayJsonSchemaForm", () => {
     expect(model.select1).toBe(null);
     await nextTick();
     expect(wrapper.findAll(".layui-error-message")).toHaveLength(0);
+  });
+
+  test("slot customRender render", async () => {
+    const wrapper = mount({
+      setup() {
+        const schema = reactive({
+          slot1: {
+            label: "slot customRender string",
+            slots: {
+              customRender: "slot1",
+            },
+          },
+          slot2: {
+            label: "slot customRender function",
+            slots: {
+              customRender: () =>
+                h("div", {
+                  class: "slot-custom-render-function",
+                }),
+            },
+          },
+        });
+
+        return () => (
+          <LayForm
+            schema={schema}
+            v-slots={{
+              slot1: () => <div class="slot-custom-render-string">slot1</div>,
+            }}
+          ></LayForm>
+        );
+      },
+    });
+    await nextTick();
+
+    expect(wrapper.findAll(".slot-custom-render-string")).toHaveLength(1);
+    expect(wrapper.findAll(".slot-custom-render-function")).toHaveLength(1);
+  });
+
+  test("component slot render", async () => {
+    const wrapper = mount({
+      setup() {
+        const schema = reactive({
+          input1: {
+            label: "input prepend slot",
+            type: "input",
+            slots: {
+              type: "text",
+              prepend: "prependslot",
+              append: "appendslot",
+            },
+          },
+        });
+
+        return () => (
+          <LayForm
+            schema={schema}
+            v-slots={{
+              prependslot: () => <div class="prependslot"></div>,
+              appendslot: () => <div class="appendslot"></div>,
+            }}
+          ></LayForm>
+        );
+      },
+    });
+    await nextTick();
+
+    expect(wrapper.findAll(".prependslot")).toHaveLength(1);
+    expect(wrapper.findAll(".appendslot")).toHaveLength(1);
   });
 });
