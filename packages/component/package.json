@@ -1,6 +1,6 @@
 {
   "name": "@layui/layui-vue",
-  "version": "2.16.2",
+  "version": "2.16.3-alpha.1",
   "author": "就眠儀式",
   "license": "MIT",
   "description": "a component library for Vue 3 base on layui-vue",
@@ -30,7 +30,10 @@
   ],
   "exports": {
     ".": {
-      "import": "./es/index.js"
+      "import": {
+        "types": "./types/index.d.ts",
+        "default": "./es/index.js"
+      }
     },
     "./lib/": "./lib/",
     "./es/": "./es/"
