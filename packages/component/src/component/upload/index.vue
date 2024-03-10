@@ -406,17 +406,20 @@ const uploadChange = (e: any) => {
       }
     }
   }
-  for (let item of _files) {
-    activeUploadFiles.value.push(item);
-    filetoDataURL(item, function (res: any) {
-      activeUploadFilesImgs.value.push(res);
-    });
-  }
 
   let arm1 =
     props.cut &&
     props.acceptMime.indexOf("image") != -1 &&
     props.multiple == false;
+
+  if(arm1){
+    for (let item of _files) {
+      activeUploadFiles.value.push(item);
+      filetoDataURL(item, function (res: any) {
+        activeUploadFilesImgs.value.push(res);
+      });
+    }
+  }
 
   let arm2 =
     props.cut &&
