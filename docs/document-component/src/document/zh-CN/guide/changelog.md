@@ -14,6 +14,17 @@
 <template>
   <lay-timeline>
     <lay-timeline-item title="2.16.x">
+    <ul>
+        <a name="2-16-5"></a>
+        <li>
+          <h3>2.16.5 <span class="layui-badge-rim">2024-03-18</span></h3>
+          <ul>
+              <li>[新增] table组件 标题插槽新增column，columnIndex参数。</li>
+              <li>[修复] table组件 树形跨级展开隐藏错乱。<a href="https://gitee.com/layui/layui-vue/issues/I98Y95">I98Y95</a></li>
+              <li>[修复] upload组件 只有当开启裁剪且能够裁剪时才读取文件。<a href="https://gitee.com/layui/layui-vue/issues/I979LK">I979LK</a></li>
+          </ul>
+        </li>
+      </ul>
       <ul>
         <a name="2-16-2"></a>
         <li>
