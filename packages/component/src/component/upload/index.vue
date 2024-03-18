@@ -412,7 +412,7 @@ const uploadChange = (e: any) => {
     props.acceptMime.indexOf("image") != -1 &&
     props.multiple == false;
 
-  if(arm1){
+  if (arm1) {
     for (let item of _files) {
       activeUploadFiles.value.push(item);
       filetoDataURL(item, function (res: any) {

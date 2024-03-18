@@ -740,7 +740,7 @@ export default {
 }
 </script>
 
-::: 
+:::
 
 ::: title 斑马条纹
 :::
@@ -809,7 +809,6 @@ export default {
 </script>
 
 :::
-
 
 ::: title 更多使用
 :::
@@ -932,43 +931,42 @@ export default {
 
 :::
 
-
 ::: title Table 属性
 :::
 
 ::: table
 
-| 属性                 | 描述                                                       | 类型                | 默认值     | 可选值                                       | 
-| -------------------- | --------------------------------------------------------- | ------------------- | ---------- | -------------------------------------------- | 
-| columns              | 列配置，具体详见 [更多](#tableColumn)                       | --                  | --         | --                                           | 
-| dataSource           | 数组数组                                                   | --                  | --         | --                                           | 
-| id                   | 数据主键                                                   | `string`            | --         | --                                           | 
-| v-model:selectedKeys | 复选框选中项                                                | --                  | --         | --                                           | 
-| v-model:selectedKey  | 单选框选中项                                                | --                  | --         | --                                           | 
-| default-toolbar      | 工具栏                                                     | `boolean` `array`   | `false`    | `true` `false` `['filter','export','print']` | 
-| size                 | 表格大小                                                   | `string`            | `md`       | `lg` `md` `sm`                               | 
-| children-column-name | 指定树形结构的列名                                          | `string`            | `children` | --                                           | 
-| indent-size          | 指定树形结构的缩进距离                                       | `number`            | `30`       | --                                           | 
-| height               | 表格高度                                                   | `string`            | --         | --                                           | 
-| maxHeight            | 表格最大高度                                               | `string`            | --         | --                                           | 
-| even                 | 开启斑马条纹                                               | `boolean`           | `false`    | `true` `false`                               | 
-| cellStyle            | 单元格样式 function(row, column, rowIndex, columnIndex)    | `string` `function` | --         | --                                           | 
-| rowStyle             | 表格行样式 function(row, rowIndex)                         | `string` `function` | --         | --                                           | 
-| cellClassName        | 单元格类名 function(row, column, rowIndex, columnIndex)    | `string` `function` | --         | --                                           | 
-| rowClassName         | 表格行类名 function(row, rowIndex)                         | `string` `function` | --         | --                                           | 
-| skin                 | 指定风格                                                    | `string`           | --         | `line` `row` `nob`                           |
-| expand-index         | 指定展开操作所在列的索引，使用 children 字段或 expand 插槽时有效 | `number`          | --         | --                                           | 
-| default-expand-all   | 初始时，是否展开所有行                                      | `boolean`           | `false`    | `true` `false`                               | 
-| expand-keys          | 展开行，控制属性                                            | `array`             | `[]`       | --                                           | 
-| span-method          | 单元格合并算法                                              | `function`          | --         | --                                           | 
-| getCheckboxProps     | 复选框的默认属性配置                                         | `function`          | --         | --                                           | 
-| getRadioProps        | 单选框的默认属性配置                                         | `function`          | --         | --                                           | 
-| resize               | 开启列宽拉伸                                                | `boolean`           | `false`    | `true` `false`                               | 
-| autoColsWidth        | 启用后，根据内容自动计算列宽                                 | `boolean`           | `false`    | `true` `false`                               | 
-| defaultToolbar       | 是否启用默认工具栏                                          | `boolean`           | `false`    | `true` `false`                               | 
-| loading              | 是否开启加载动画                                            | `boolean`           | `false`    | `true` `false`                               | 
-| emptyDescription     | 当没有数据时，显示的默认文本                                            | `string`           | --    | --                               | 
- 
+| 属性                 | 描述                                                             | 类型                | 默认值     | 可选值                                       |
+| -------------------- | ---------------------------------------------------------------- | ------------------- | ---------- | -------------------------------------------- |
+| columns              | 列配置，具体详见 [更多](#tableColumn)                            | --                  | --         | --                                           |
+| dataSource           | 数组数组                                                         | --                  | --         | --                                           |
+| id                   | 数据主键                                                         | `string`            | --         | --                                           |
+| v-model:selectedKeys | 复选框选中项                                                     | --                  | --         | --                                           |
+| v-model:selectedKey  | 单选框选中项                                                     | --                  | --         | --                                           |
+| default-toolbar      | 工具栏                                                           | `boolean` `array`   | `false`    | `true` `false` `['filter','export','print']` |
+| size                 | 表格大小                                                         | `string`            | `md`       | `lg` `md` `sm`                               |
+| children-column-name | 指定树形结构的列名                                               | `string`            | `children` | --                                           |
+| indent-size          | 指定树形结构的缩进距离                                           | `number`            | `30`       | --                                           |
+| height               | 表格高度                                                         | `string`            | --         | --                                           |
+| maxHeight            | 表格最大高度                                                     | `string`            | --         | --                                           |
+| even                 | 开启斑马条纹                                                     | `boolean`           | `false`    | `true` `false`                               |
+| cellStyle            | 单元格样式 function(row, column, rowIndex, columnIndex)          | `string` `function` | --         | --                                           |
+| rowStyle             | 表格行样式 function(row, rowIndex)                               | `string` `function` | --         | --                                           |
+| cellClassName        | 单元格类名 function(row, column, rowIndex, columnIndex)          | `string` `function` | --         | --                                           |
+| rowClassName         | 表格行类名 function(row, rowIndex)                               | `string` `function` | --         | --                                           |
+| skin                 | 指定风格                                                         | `string`            | --         | `line` `row` `nob`                           |
+| expand-index         | 指定展开操作所在列的索引，使用 children 字段或 expand 插槽时有效 | `number`            | --         | --                                           |
+| default-expand-all   | 初始时，是否展开所有行                                           | `boolean`           | `false`    | `true` `false`                               |
+| expand-keys          | 展开行，控制属性                                                 | `array`             | `[]`       | --                                           |
+| span-method          | 单元格合并算法                                                   | `function`          | --         | --                                           |
+| getCheckboxProps     | 复选框的默认属性配置                                             | `function`          | --         | --                                           |
+| getRadioProps        | 单选框的默认属性配置                                             | `function`          | --         | --                                           |
+| resize               | 开启列宽拉伸                                                     | `boolean`           | `false`    | `true` `false`                               |
+| autoColsWidth        | 启用后，根据内容自动计算列宽                                     | `boolean`           | `false`    | `true` `false`                               |
+| defaultToolbar       | 是否启用默认工具栏                                               | `boolean`           | `false`    | `true` `false`                               |
+| loading              | 是否开启加载动画                                                 | `boolean`           | `false`    | `true` `false`                               |
+| emptyDescription     | 当没有数据时，显示的默认文本                                     | `string`            | --         | --                                           |
+
 :::
 
 ::: title Table 事件
@@ -982,7 +980,7 @@ export default {
 | row-double      | 行双击   | { row: 当前行数据 }                    |
 | row-contextmenu | 行右击   | { row: 当前行数据 }                    |
 | change          | 分页事件 | { current: 当前页码, limit: 每页数量 } |
-| sort-change     | 排序事件 | sort: string |
+| sort-change     | 排序事件 | sort: string                           |
 
 :::
 
@@ -991,13 +989,13 @@ export default {
 
 ::: table
 
-| 插槽       | 描述         | 参数                                                                                                                                                    | 版本    |
-| ---------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
-| toolbar    | 自定义工具栏 | --                                                                                                                                                      | --      |
-| footer     | 底部扩展     | --                                                                                                                                                      | `1.4.4` |
-| expand     | 嵌套面板     | { row } 在 1.8.6 版本，data 参数由 row 替代，但 data 仍然可用                                                                                           | `1.4.4` |
-| customSlot | 自定义列插槽 | { row，rowIndex，column，columnIndex } 在 1.8.6 版本，data 参数由 row 替代，但 data 仍然可用，新增 rowIndex 行索引 columnIndex 列索引 column 列信息参数 | `1.4.4` |
-| empty     | 无数据时显示的UI     | 此插槽意在替换整个无数据时的显示UI，如果只是单纯替换文字，保留无数据时的图像，请使用`table`的`emptyDescription`属性                | `2.11.6` |
+| 插槽       | 描述              | 参数                                                                                                                                                    | 版本     |
+| ---------- | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
+| toolbar    | 自定义工具栏      | --                                                                                                                                                      | --       |
+| footer     | 底部扩展          | --                                                                                                                                                      | `1.4.4`  |
+| expand     | 嵌套面板          | { row } 在 1.8.6 版本，data 参数由 row 替代，但 data 仍然可用                                                                                           | `1.4.4`  |
+| customSlot | 自定义列插槽      | { row，rowIndex，column，columnIndex } 在 1.8.6 版本，data 参数由 row 替代，但 data 仍然可用，新增 rowIndex 行索引 columnIndex 列索引 column 列信息参数 | `1.4.4`  |
+| empty      | 无数据时显示的 UI | 此插槽意在替换整个无数据时的显示 UI，如果只是单纯替换文字，保留无数据时的图像，请使用`table`的`emptyDescription`属性                                    | `2.11.6` |
 
 :::
 
@@ -1006,9 +1004,9 @@ export default {
 
 ::: table
 
-| 方法            | 描述     | 参数                                   |
-| --------------- | -------- | -------------------------------------- |
-| getCheckData    | 当存在 radio 和 checkbox 列时，该方法用于获取选中数据, 如果 radio 与 checkbox 列同时存在，获取去重后的唯一数据。   | --                    |
+| 方法         | 描述                                                                                                             | 参数 |
+| ------------ | ---------------------------------------------------------------------------------------------------------------- | ---- |
+| getCheckData | 当存在 radio 和 checkbox 列时，该方法用于获取选中数据, 如果 radio 与 checkbox 列同时存在，获取去重后的唯一数据。 | --   |
 
 :::
 
@@ -1019,24 +1017,25 @@ export default {
 
 ::: table
 
-| 插槽            | 描述                           | 类型      | 默认值  | 可选值                      | 版本    |
-| --------------- | ------------------------------ | --------- | ------- | --------------------------- | ------- |
-| title           | 列标题                         | --        | --      | --                          | --      |
-| key             | 数据字段                       | --        | --      | --                          | --      |
-| customSlot      | 自定义插槽                     | --        | --      | --                          | --      |
-| width           | 宽度                           | --        | --      | --                          | --      |
-| minWidth        | 最小宽度                       | --        | `100px` | --                          | --      |
-| sort            | 排序                           | --        | --      | --                          | --      |
-| titleSlot       | 标题插槽                       | --        | --      | --                          | --      |
-| align           | 对齐方式                       | `string`  | `left`  | `left` `right` `center`     | --      |
-| ellipsisTooltip | 当内容过长被隐藏时显示 tooltip  | `boolean` | `false` | `true` `false`              | --      |
-| ellipsisTooltipTheme | tooltip 主题              | `string`  | `light` | `dark` `light`              | --      |
-| fixed           | 列固定                         | `string`  | --      | `left` `right`              | --      |
-| type            | 列类型                         | `string`  | --      | `number` `checkbox` `radio` | --      |
-| children        | 表头分组                       | `string`  | --      | `number` `checkbox` `radio` | `1.4.0` |
-| resize          | 单元格列宽拖动                 | `boolean` | `false` | `true` `false`              | `1.9.4` |
-| hide            | 默认是否隐藏                   | `boolean` | `false` | `true` `false`              | `1.9.4` |
-| ignoreExport    | 忽略导出                       | `boolean` | `false` | `true` `false`             | `2.10.0`|
+| 插槽                 | 描述                           | 类型                           | 默认值  | 可选值                      | 版本     |
+| -------------------- | ------------------------------ | ------------------------------ | ------- | --------------------------- | -------- |
+| title                | 列标题                         | --                             | --      | --                          | --       |
+| key                  | 数据字段                       | --                             | --      | --                          | --       |
+| customSlot           | 自定义插槽                     | --                             | --      | --                          | --       |
+| width                | 宽度                           | --                             | --      | --                          | --       |
+| minWidth             | 最小宽度                       | --                             | `100px` | --                          | --       |
+| sort                 | 排序                           | --                             | --      | --                          | --       |
+| titleSlot            | 标题插槽                       | 插槽参数 {column, columnIndex} | --      | --                          | --       |
+| align                | 对齐方式                       | `string`                       | `left`  | `left` `right` `center`     | --       |
+| ellipsisTooltip      | 当内容过长被隐藏时显示 tooltip | `boolean`                      | `false` | `true` `false`              | --       |
+| ellipsisTooltipTheme | tooltip 主题                   | `string`                       | `light` | `dark` `light`              | --       |
+| fixed                | 列固定                         | `string`                       | --      | `left` `right`              | --       |
+| type                 | 列类型                         | `string`                       | --      | `number` `checkbox` `radio` | --       |
+| children             | 表头分组                       | `string`                       | --      | `number` `checkbox` `radio` | `1.4.0`  |
+| resize               | 单元格列宽拖动                 | `boolean`                      | `false` | `true` `false`              | `1.9.4`  |
+| hide                 | 默认是否隐藏                   | `boolean`                      | `false` | `true` `false`              | `1.9.4`  |
+| ignoreExport         | 忽略导出                       | `boolean`                      | `false` | `true` `false`              | `2.10.0` |
+
 :::
 
 ::: previousNext table

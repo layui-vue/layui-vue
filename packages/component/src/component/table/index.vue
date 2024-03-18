@@ -1146,7 +1146,11 @@ defineExpose({ getCheckData });
                       <template v-else>
                         <span>
                           <template v-if="column.titleSlot">
-                            <slot :name="column.titleSlot"></slot>
+                            <slot
+                              :name="column.titleSlot"
+                              :column="column"
+                              :columnIndex="columnIndex"
+                            ></slot>
                           </template>
                           <template v-else>
                             {{ column.title }}
