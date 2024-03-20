@@ -15,3 +15,7 @@ function diff(arr1: any[], arr2: any[]) {
   newArr = arr1.concat(arr2);
   return newArr.filter((x) => !(arr1.includes(x) && arr2.includes(x)));
 }
+
+export const isValueNull = (v: any) => {
+  return Array.isArray(v) ? !v.length : !v;
+};
