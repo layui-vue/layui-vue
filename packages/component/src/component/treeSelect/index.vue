@@ -70,7 +70,6 @@ const openState = ref(false);
 const dropdownRef = ref();
 const composing = ref(false);
 const emits = defineEmits<TreeSelectEmits>();
-const lastSelectedValue = ref();
 const treeOriginData = ref();
 
 const _replaceFields = computed(() => fillFieldNames(props.replaceFields));
@@ -80,8 +79,7 @@ const selectedValue = computed({
     return props.multiple && props.modelValue == null ? [] : props.modelValue;
   },
   set(value) {
-    if (lastSelectedValue.value != value) {
-      lastSelectedValue.value = value;
+    if (props.modelValue != value) {
       emits("update:modelValue", value);
       emits("change", value);
     }
@@ -227,11 +225,9 @@ const hasContent = computed(() => {
   if (props.multiple) {
     return checkedKeys.value.length > 0;
   } else {
-    return (
-      selectedValue.value !== "" &&
-      selectedValue.value !== undefined &&
-      selectedValue.value !== null
-    );
+    return Array.isArray(selectedValue.value)
+      ? selectedValue.value.length
+      : selectedValue.value;
   }
 });
 
