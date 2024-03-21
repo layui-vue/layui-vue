@@ -275,8 +275,13 @@ const isAutoShow = (
   }
 };
 
-const radioProps = props.getRadioProps(props.data, props.index);
-const checkboxProps = props.getCheckboxProps(props.data, props.index);
+const radioProps = computed(() => {
+  return props.getRadioProps(props.data, props.index);
+});
+
+const checkboxProps = computed(() => {
+  return props.getCheckboxProps(props.data, props.index);
+});
 </script>
 
 <template>
