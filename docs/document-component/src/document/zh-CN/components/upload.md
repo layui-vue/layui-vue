@@ -381,7 +381,7 @@ export default {
 
 :::
 
-::: title 外部方法
+::: title Upload Exposes
 :::
 
 ::: table
