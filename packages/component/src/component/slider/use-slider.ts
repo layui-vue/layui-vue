@@ -225,6 +225,13 @@ export const useSlider = (
     }
     return value;
   };
+  const precision = computed(() => {
+    const precisions = [props.min, props.max, props.step].map((item) => {
+      const decimal = `${item}`.split(".")[1];
+      return decimal ? decimal.length : 0;
+    });
+    return Math.max.apply(null, precisions);
+  });
   const getCalcPos = (e: MouseEvent) => {
     let domPos = slider.value!.getBoundingClientRect();
     const GETDOM_VALUE_H = props.reverse ? domPos.right : domPos.left;
@@ -245,8 +252,11 @@ export const useSlider = (
     const lengthPerStep =
       100 / ((props.max - props.min) / (isSatisfy ? 1 : props.step));
     const steps = Math.round(pos / lengthPerStep);
+    let value = steps * props.step + props.min;
+    value = Number.parseFloat(value.toFixed(precision.value));
+
     if (isSatisfy) {
-      return calcInterval(steps * props.step + props.min);
+      return calcInterval(value);
     }
     // console.log(lengthPerStep, 'lengthPerStep')
     // let value = steps * lengthPerStep * (props.max - props.min) * 0.01 + props.min
@@ -254,7 +264,7 @@ export const useSlider = (
     // let value = (Math.round(pos * (props.max - props.min) + props.min))  + props.step
     // console.log('value', value)
     // console.log(value  + lengthPerStep)
-    return steps * props.step + props.min;
+    return value;
   };
   const handClick = async (e: MouseEvent) => {
     if (dragging.value || props.disabled) return;

@@ -410,6 +410,10 @@ const rowContextmenu = (data: any, evt: MouseEvent) => {
   emit("row-contextmenu", data, evt);
 };
 
+const cellDoubleClick = function (data: any, evt: MouseEvent) {
+  emit("cell-double", data, evt);
+};
+
 // 页面打印
 const print = () => {
   let subOutputRankPrint = tableRef.value as HTMLElement;
@@ -1146,7 +1150,11 @@ defineExpose({ getCheckData });
                       <template v-else>
                         <span>
                           <template v-if="column.titleSlot">
-                            <slot :name="column.titleSlot"></slot>
+                            <slot
+                              :name="column.titleSlot"
+                              :column="column"
+                              :columnIndex="columnIndex"
+                            ></slot>
                           </template>
                           <template v-else>
                             {{ column.title }}
@@ -1251,6 +1259,7 @@ defineExpose({ getCheckData });
                 @row="rowClick"
                 @row-double="rowDoubleClick"
                 @row-contextmenu="rowContextmenu"
+                @cell-double="cellDoubleClick"
               >
                 <template
                   v-for="name in columnSlotNames"

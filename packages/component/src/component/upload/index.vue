@@ -18,6 +18,7 @@ import { LayLayer } from "@layui/layer-vue";
 import LayButton from "../button/index.vue";
 import Cropper from "cropperjs";
 import { useI18n } from "../../language";
+import { isValueNull } from "../../utils";
 
 export interface LayerButton {
   text: string;
@@ -406,17 +407,20 @@ const uploadChange = (e: any) => {
       }
     }
   }
-  for (let item of _files) {
-    activeUploadFiles.value.push(item);
-    filetoDataURL(item, function (res: any) {
-      activeUploadFilesImgs.value.push(res);
-    });
-  }
 
   let arm1 =
     props.cut &&
     props.acceptMime.indexOf("image") != -1 &&
     props.multiple == false;
+
+  if (arm1) {
+    for (let item of _files) {
+      activeUploadFiles.value.push(item);
+      filetoDataURL(item, function (res: any) {
+        activeUploadFilesImgs.value.push(res);
+      });
+    }
+  }
 
   let arm2 =
     props.cut &&
@@ -501,6 +505,23 @@ onUnmounted(() => {
     dragRef.value.removeEventListener("dragover");
     dragRef.value.removeEventListener("drop");
   }
+});
+
+const submitUpload = () => {
+  console.log(props.url, props.modelValue);
+
+  if (!props.url || isValueNull(props.modelValue)) {
+    return;
+  }
+
+  localUploadTransaction({
+    url: props.url,
+    files: props.modelValue,
+  });
+};
+
+defineExpose({
+  submit: submitUpload,
 });
 </script>
 

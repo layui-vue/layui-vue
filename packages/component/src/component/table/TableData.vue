@@ -94,9 +94,7 @@ const tableSelectedKey: WritableComputedRef<string> = computed({
 
 const isExpand: WritableComputedRef<any> = computed({
   get() {
-    return tableExpandAll.value
-      ? true
-      : tableExpandKeys.value.includes(props.data[props.id]);
+    return tableExpandKeys.value.includes(props.data[props.id]);
   },
   set(val) {
     let newTableExpandKeys = [...tableExpandKeys.value];
@@ -123,6 +121,10 @@ const rowDoubleClick = function (data: any, evt: MouseEvent) {
 
 const rowContextmenu = function (data: any, evt: MouseEvent) {
   emit("row-contextmenu", data, evt);
+};
+
+const cellDoubleClick = function (data: any, evt: MouseEvent) {
+  emit("cell-double", data, evt);
 };
 
 const expandIconType = computed(() => {
@@ -277,8 +279,13 @@ const isAutoShow = (
   }
 };
 
-const radioProps = props.getRadioProps(props.data, props.index);
-const checkboxProps = props.getCheckboxProps(props.data, props.index);
+const radioProps = computed(() => {
+  return props.getRadioProps(props.data, props.index);
+});
+
+const checkboxProps = computed(() => {
+  return props.getCheckboxProps(props.data, props.index);
+});
 </script>
 
 <template>
@@ -430,6 +437,7 @@ const checkboxProps = props.getCheckboxProps(props.data, props.index);
                 renderCellClassName(data, column, index, columnIndex),
                 column.fixed ? `layui-table-fixed-${column.fixed}` : '',
               ]"
+              @dblclick.stop="cellDoubleClick(data[column.key], $event)"
             >
               <span
                 v-if="expandSpace && columnIndex === expandIndex"
@@ -489,6 +497,7 @@ const checkboxProps = props.getCheckboxProps(props.data, props.index);
                 renderCellClassName(data, column, index, columnIndex),
                 column.fixed ? `layui-table-fixed-${column.fixed}` : '',
               ]"
+              @dblclick.stop="cellDoubleClick(data[column.key], $event)"
             >
               <div
                 class="layui-table-cell-content"
@@ -584,6 +593,7 @@ const checkboxProps = props.getCheckboxProps(props.data, props.index);
                 renderCellClassName(data, column, index, columnIndex),
                 column.fixed ? `layui-table-fixed-${column.fixed}` : '',
               ]"
+              @dblclick.stop="cellDoubleClick(data[column.key], $event)"
             >
               <div
                 class="layui-table-cell-content"
@@ -671,6 +681,7 @@ const checkboxProps = props.getCheckboxProps(props.data, props.index);
         :getRadioProps="getRadioProps"
         @row="rowClick"
         @row-double="rowDoubleClick"
+        @cell-double="cellDoubleClick"
         @row-contextmenu="rowContextmenu"
         v-model:expandKeys="tableExpandKeys"
         v-model:selectedKeys="tableSelectedKeys"

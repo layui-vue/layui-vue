@@ -17,7 +17,7 @@
                 >layer - vue
                 <cite>通用型弹出层组件</cite>
                 <img
-                  src="https://img.shields.io/badge/npm-v2.3.0-blue"
+                  src="https://img.shields.io/badge/npm-v2.3.2-blue"
                   alt="Version"
                 />
                 <img src="https://img.shields.io/badge/license-MIT-green" />
@@ -68,7 +68,7 @@
         <ul class="layui-row layui-col-space6">
           <li class="layui-col-sm24">
             <div class="alone">
-              <router-link to="/zh-CN/components/icon"
+              <router-link to="/zh-CN/components/jsonSchemaForm"
                 >json - schema - form<cite>配 置 化 高 级 表 单 组 件</cite>
                 <img
                   src="https://img.shields.io/npm/v/@layui/json-schema-form.svg?sanitize=true"

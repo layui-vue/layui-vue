@@ -15,6 +15,30 @@
   <lay-timeline>
     <lay-timeline-item title="2.16.x">
       <ul>
+        <a name="2-16-6"></a>
+        <li>
+          <h3>2.16.6 <span class="layui-badge-rim">2024-03-22</span></h3>
+          <ul>
+              <li>[新增] table组件 新增单元格双击事件（cell-double）。</li>
+              <li>[调整] upload组件 新增submit外部函数，用于用户手动上传。<a href="https://gitee.com/layui/layui-vue/issues/I99WUO">I99WUO</a></li>
+              <li>[修复] slider组件 精度丢失。<a href="https://gitee.com/layui/layui-vue/issues/I995I6">I995I6</a></li>
+              <li>[修复] table组件 数据改变getCheckboxProps未重新计算。<a href="https://gitee.com/layui/layui-vue/issues/I9A9Y1">I9A9Y1</a></li>
+              <li>[修复] treeSelect组件 单选清空二次选择相同值未触发改变。<a href="https://gitee.com/layui/layui-vue/issues/I9A9NT">I9A9NT</a></li>
+          </ul>
+        </li>
+      </ul>
+      <ul>
+        <a name="2-16-5"></a>
+        <li>
+          <h3>2.16.5 <span class="layui-badge-rim">2024-03-18</span></h3>
+          <ul>
+              <li>[新增] table组件 标题插槽新增column，columnIndex参数。</li>
+              <li>[修复] table组件 树形跨级展开隐藏错乱。<a href="https://gitee.com/layui/layui-vue/issues/I98Y95">I98Y95</a></li>
+              <li>[修复] upload组件 只有当开启裁剪且能够裁剪时才读取文件。<a href="https://gitee.com/layui/layui-vue/issues/I979LK">I979LK</a></li>
+          </ul>
+        </li>
+      </ul>
+      <ul>
         <a name="2-16-2"></a>
         <li>
           <h3>2.16.2 <span class="layui-badge-rim">2024-02-29</span></h3>
