@@ -7,6 +7,7 @@ export const TableEmit = [
   "row-contextmenu",
   "row-double",
   "row",
+  "cell-double",
 ];
 
 export interface TableColumn {

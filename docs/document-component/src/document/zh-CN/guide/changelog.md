@@ -19,6 +19,7 @@
         <li>
           <h3>2.16.x <span class="layui-badge-rim">2024-xx-xx</span></h3>
           <ul>
+              <li>[新增] table组件 新增单元格双击事件（cell-double）。</li>
               <li>[调整] upload组件 新增submit外部函数，用于用户手动上传。<a href="https://gitee.com/layui/layui-vue/issues/I99WUO">I99WUO</a></li>
               <li>[修复] slider组件 精度丢失。<a href="https://gitee.com/layui/layui-vue/issues/I995I6">I995I6</a></li>
               <li>[修复] table组件 数据改变getCheckboxProps未重新计算。<a href="https://gitee.com/layui/layui-vue/issues/I9A9Y1">I9A9Y1</a></li>

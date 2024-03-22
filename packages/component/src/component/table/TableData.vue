@@ -123,6 +123,10 @@ const rowContextmenu = function (data: any, evt: MouseEvent) {
   emit("row-contextmenu", data, evt);
 };
 
+const cellDoubleClick = function (data: any, evt: MouseEvent) {
+  emit("cell-double", data, evt);
+};
+
 const expandIconType = computed(() => {
   return isExpand.value ? "layui-icon-subtraction" : "layui-icon-addition";
 });
@@ -433,6 +437,7 @@ const checkboxProps = computed(() => {
                 renderCellClassName(data, column, index, columnIndex),
                 column.fixed ? `layui-table-fixed-${column.fixed}` : '',
               ]"
+              @dblclick.stop="cellDoubleClick(data[column.key], $event)"
             >
               <span
                 v-if="expandSpace && columnIndex === expandIndex"
@@ -492,6 +497,7 @@ const checkboxProps = computed(() => {
                 renderCellClassName(data, column, index, columnIndex),
                 column.fixed ? `layui-table-fixed-${column.fixed}` : '',
               ]"
+              @dblclick.stop="cellDoubleClick(data[column.key], $event)"
             >
               <div
                 class="layui-table-cell-content"
@@ -587,6 +593,7 @@ const checkboxProps = computed(() => {
                 renderCellClassName(data, column, index, columnIndex),
                 column.fixed ? `layui-table-fixed-${column.fixed}` : '',
               ]"
+              @dblclick.stop="cellDoubleClick(data[column.key], $event)"
             >
               <div
                 class="layui-table-cell-content"
@@ -674,6 +681,7 @@ const checkboxProps = computed(() => {
         :getRadioProps="getRadioProps"
         @row="rowClick"
         @row-double="rowDoubleClick"
+        @cell-double="cellDoubleClick"
         @row-contextmenu="rowContextmenu"
         v-model:expandKeys="tableExpandKeys"
         v-model:selectedKeys="tableSelectedKeys"

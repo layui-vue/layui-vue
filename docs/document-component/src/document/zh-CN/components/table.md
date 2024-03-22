@@ -974,13 +974,14 @@ export default {
 
 ::: table
 
-| 属性            | 描述     | 参数                                   |
-| --------------- | -------- | -------------------------------------- |
-| row             | 行单击   | { row: 当前行数据 }                    |
-| row-double      | 行双击   | { row: 当前行数据 }                    |
-| row-contextmenu | 行右击   | { row: 当前行数据 }                    |
-| change          | 分页事件 | { current: 当前页码, limit: 每页数量 } |
-| sort-change     | 排序事件 | sort: string                           |
+| 属性            | 描述       | 参数                                   |
+| --------------- | ---------- | -------------------------------------- |
+| row             | 行单击     | { row: 当前行数据 }                    |
+| row-double      | 行双击     | { row: 当前行数据 }                    |
+| row-contextmenu | 行右击     | { row: 当前行数据 }                    |
+| cell-double     | 单元格双击 | data:当前单元格信息, event             |
+| change          | 分页事件   | { current: 当前页码, limit: 每页数量 } |
+| sort-change     | 排序事件   | sort: string                           |
 
 :::
 
