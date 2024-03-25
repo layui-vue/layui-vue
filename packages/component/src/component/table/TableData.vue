@@ -293,7 +293,7 @@ const checkboxProps = computed(() => {
     :style="[renderRowStyle(data, index)]"
     :class="[renderRowClassName(data, index)]"
     @click.stop="rowClick(data, $event)"
-    @dblclick.stop="rowDoubleClick(data, $event)"
+    @dblclick="rowDoubleClick(data, $event)"
     @contextmenu.stop="rowContextmenu(data, $event)"
   >
     <template v-for="(column, columnIndex) in columns" :key="columnIndex">
@@ -437,7 +437,7 @@ const checkboxProps = computed(() => {
                 renderCellClassName(data, column, index, columnIndex),
                 column.fixed ? `layui-table-fixed-${column.fixed}` : '',
               ]"
-              @dblclick.stop="cellDoubleClick(data[column.key], $event)"
+              @dblclick="cellDoubleClick(data[column.key], $event)"
             >
               <span
                 v-if="expandSpace && columnIndex === expandIndex"
@@ -497,7 +497,7 @@ const checkboxProps = computed(() => {
                 renderCellClassName(data, column, index, columnIndex),
                 column.fixed ? `layui-table-fixed-${column.fixed}` : '',
               ]"
-              @dblclick.stop="cellDoubleClick(data[column.key], $event)"
+              @dblclick="cellDoubleClick(data[column.key], $event)"
             >
               <div
                 class="layui-table-cell-content"
@@ -593,7 +593,7 @@ const checkboxProps = computed(() => {
                 renderCellClassName(data, column, index, columnIndex),
                 column.fixed ? `layui-table-fixed-${column.fixed}` : '',
               ]"
-              @dblclick.stop="cellDoubleClick(data[column.key], $event)"
+              @dblclick="cellDoubleClick(data[column.key], $event)"
             >
               <div
                 class="layui-table-cell-content"

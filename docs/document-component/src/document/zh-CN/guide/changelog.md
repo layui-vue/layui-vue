@@ -15,6 +15,15 @@
   <lay-timeline>
     <lay-timeline-item title="2.16.x">
       <ul>
+        <a name="2-16-7"></a>
+        <li>
+          <h3>2.16.7 <span class="layui-badge-rim">2024-xx-xx</span></h3>
+          <ul>
+              <li>[修复] table组件 双击cell未冒泡到双击row事件。<a href="https://gitee.com/layui/layui-vue/issues/I9BGAP">I9BGAP</a></li>
+          </ul>
+        </li>
+      </ul>
+      <ul>
         <a name="2-16-6"></a>
         <li>
           <h3>2.16.6 <span class="layui-badge-rim">2024-03-22</span></h3>
