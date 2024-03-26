@@ -17,7 +17,7 @@
       <ul>
         <a name="2-16-7"></a>
         <li>
-          <h3>2.16.7 <span class="layui-badge-rim">2024-xx-xx</span></h3>
+          <h3>2.16.7 <span class="layui-badge-rim">2024-03-26</span></h3>
           <ul>
               <li>[修复] table组件 双击cell未冒泡到双击row事件。<a href="https://gitee.com/layui/layui-vue/issues/I9BGAP">I9BGAP</a></li>
           </ul>
