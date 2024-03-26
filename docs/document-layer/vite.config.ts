@@ -11,4 +11,7 @@ export default defineConfig({
     },
   },
   plugins,
+  server: {
+    host: true,
+  },
 });
