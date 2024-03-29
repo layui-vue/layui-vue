@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import "./index.less";
 import { LayIcon } from "@layui/icons-vue";
-import { computed, ref, useSlots, watch, nextTick } from "vue";
+import { computed, ref, useSlots, watch, nextTick, shallowRef } from "vue";
 import { InputSize } from "./interface";
-import useProps from "./index.hooks";
+import useProps, { useCursor } from "./index.hooks";
 
 export interface InputProps {
   name?: string;
@@ -52,10 +52,13 @@ const emit = defineEmits<InputEmits>();
 
 const slots = useSlots();
 const type = ref(props.type);
-const inputRef = ref<HTMLElement | undefined>();
+const inputRef = shallowRef<HTMLInputElement>();
 const currentValue = ref<string>(
   String(props.modelValue == null ? "" : props.modelValue)
 );
+
+const [recordCursor, setCursor] = useCursor(inputRef);
+
 const hasContent = computed(() =>
   type.value == "number"
     ? (props.modelValue as number) > (props.min || 0)
@@ -63,6 +66,13 @@ const hasContent = computed(() =>
 );
 const isPassword = computed(() => type.value == "password");
 const composing = ref(false);
+
+const setInputValue = () => {
+  const input = inputRef.value;
+  if (!input || input.value === nativeInputValue.value) return;
+
+  input.value = nativeInputValue.value as any;
+};
 
 watch(
   () => props.type,
@@ -80,14 +90,29 @@ watch(
   }
 );
 
-const onInput = function (eventParam: Event) {
+const nativeInputValue = computed(() => {
+  return props.modelValue === null || props.modelValue === undefined
+    ? ""
+    : props.modelValue;
+});
+
+watch(nativeInputValue, () => setInputValue());
+
+const onInput = async function (eventParam: Event) {
+  recordCursor();
+
   const inputElement = eventParam.target as HTMLInputElement;
   const value = inputElement.value;
   if (composing.value) return;
+
   emit("update:modelValue", value);
-  nextTick(() => {
-    emit("input", value);
-  });
+  emit("input", value);
+
+  await nextTick();
+
+  // modelValue为input中最终value
+  setInputValue();
+  setCursor();
 };
 
 const onClear = () => {

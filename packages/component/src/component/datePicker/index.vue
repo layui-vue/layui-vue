@@ -387,8 +387,9 @@ watch(
       hms.value.mm = dayjs(modelValue).minute();
       hms.value.ss = dayjs(modelValue).second();
     }
-    currentYear.value = initModelValue ? getYear(initModelValue) : -1;
-    currentMonth.value = initModelValue ? getMonth(initModelValue) : -1;
+
+    currentYear.value = initModelValue ? dayjs(initModelValue).year() : -1;
+    currentMonth.value = initModelValue ? dayjs(initModelValue).month() : -1;
     currentDay.value = initModelValue ? getDay(initModelValue) : -1;
     if (props.type === "date" || props.type === "datetime") {
       if (currentYear.value === -1) currentYear.value = dayjs().year();
