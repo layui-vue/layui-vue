@@ -81,13 +81,14 @@ const innerProps = computed(() => {
 const setEllipsis = function () {
   if (tooltipRef.value) {
     let tooltipHtml = tooltipRef.value;
+
     if (
-      tooltipHtml.offsetWidth >=
-      (tooltipHtml.firstChild as HTMLElement)?.offsetWidth
+      tooltipHtml.scrollWidth > tooltipHtml.clientWidth ||
+      tooltipHtml.scrollHeight > tooltipHtml.clientHeight
     ) {
-      isMounted.value = false;
-    } else {
       isMounted.value = true;
+    } else {
+      isMounted.value = false;
     }
   } else {
     isMounted.value = true;
