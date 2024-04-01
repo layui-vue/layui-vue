@@ -15,6 +15,15 @@
   <lay-timeline>
     <lay-timeline-item title="2.16.x">
       <ul>
+        <a name="2-16-8"></a>
+        <li>
+          <h3>2.16.8 <span class="layui-badge-rim">2024-xx-xx</span></h3>
+          <ul>
+              <li>[修复] treeSelect组件 选中节点触发两次change事件。<a href="https://gitee.com/layui/layui-vue/issues/I9CSNH">I9CSNH</a></li>
+          </ul>
+        </li>
+      </ul>
+      <ul>
         <a name="2-16-7"></a>
         <li>
           <h3>2.16.7 <span class="layui-badge-rim">2024-03-26</span></h3>
