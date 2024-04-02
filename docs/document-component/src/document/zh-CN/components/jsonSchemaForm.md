@@ -42,7 +42,7 @@ createApp(App).use(LayJsonSchemaForm).mount("#app");
   <lay-button type="primary" @click="submit1">提交</lay-button>
 </template>
 
-<script>
+<script setup>
 import { ref, reactive } from 'vue';
 import { layer } from '@layui/layer-vue'
 

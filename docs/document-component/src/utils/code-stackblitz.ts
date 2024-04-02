@@ -62,7 +62,12 @@ export const viteConfigCode = `
       }),
       Components({
         // 自动解析 layui-vue 组件
-        resolvers: [LayuiVueResolver({ resolveIcons: true })],
+        resolvers: [LayuiVueResolver(
+          { 
+            resolveIcons: true,
+            exclude: ['LayJsonSchemaForm'],
+          }
+        )],
       }),
     ],
   });
