@@ -373,7 +373,7 @@ const clear3 = () => {
 
 <template>
   <lay-json-schema-form :model="form4" :schema="schema4">
-    <template #string="{schemaValue, model}">
+    <template #string="{schemaKey, schemaValue, model}">
       <lay-input>
         <template #suffix>
           input后置插槽
@@ -400,7 +400,7 @@ const schema4 = reactive({
   customRender2: {
     label: '参数为function',
     slots: {
-      customRender: (schemaValue, model) => h('div', {style: 'height: 200px;background-color: var(--button-primary-background-color);'}, [h('p', {}, 'schemaValue: ' + JSON.stringify(schemaValue)), h('p', {}, 'model: ' + JSON.stringify(model))])
+      customRender: ({schemaKey, schemaValue, model}) => h('div', {style: 'height: 200px;background-color: var(--button-primary-background-color);'}, [h('p', {}, 'schemaKey: ' + JSON.stringify(schemaKey)),h('p', {}, 'schemaValue: ' + JSON.stringify(schemaValue)), h('p', {}, 'model: ' + JSON.stringify(model))])
     }
   },
   
@@ -453,7 +453,7 @@ const schema7 = reactive({
     type: "input",
     slots: {
       prepend: "inputPrepend",
-      suffix: (schemaValue, model) => {
+      suffix: ({schemaKey, schemaValue, model}) => {
         return h("div", { style: { color: "red" } }, "123");
       },
     },
@@ -632,7 +632,13 @@ type modelType = {
   [key: string]: any;
 };
 
-type customRenderFnType = (input: InputsProps, model: modelType) => VNode;
+type customRenderFnParamsOptions = {
+  schemaKey: string;
+  schemaValue: SchemaValueType;
+  model: modelType;
+};
+
+type customRenderFnType = (param: customRenderFnParamsOptions) => VNode;
 type customRenderType = string | customRenderFnType;
 
 type SlotsType = {
@@ -653,8 +659,8 @@ interface SchemaProps {
 interface SchemaValueType extends FormItemProps {
   type?: Type;
   hidden?: boolean;
-  props: modelType;
-  slots: SlotsType;
+  props?: modelType;
+  slots?: SlotsType;
   listeners?: listenersType;
   colProps?: ColProps;
 }

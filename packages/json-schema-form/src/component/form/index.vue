@@ -70,6 +70,7 @@ defineExpose({ validate, resetFields, clearValidate });
             >
               <slot
                 :name="schemaValue.slots.customRender"
+                :schemaKey="schemaName"
                 :schemaValue="schema[schemaName]"
                 :model="model"
               ></slot>
