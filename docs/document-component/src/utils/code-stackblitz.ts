@@ -6,9 +6,12 @@ import App from './App.vue';
 import './index.css';
 // import Layui from '@layui/layui-vue'
 // import '@layui/layui-vue/lib/index.css';
+import LayJsonSchemaForm from "@layui/json-schema-form";
+import "@layui/json-schema-form/lib/index.css";
 
 const app = createApp(App);
 // app.use(Layui);
+app.use(LayJsonSchemaForm);
 app.mount('#app');`;
 
 export const styleCode = `#app { padding: 20px; }`;
@@ -79,6 +82,7 @@ export const packageJSONCode = JSON.stringify(
     dependencies: {
       vue: "^3.2.0",
       "@layui/layui-vue": "latest",
+      "@layui/json-schema-form": "latest",
     },
     devDependencies: {
       vite: "^2.9.8",
