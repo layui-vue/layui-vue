@@ -508,8 +508,6 @@ onUnmounted(() => {
 });
 
 const submitUpload = () => {
-  console.log(props.url, props.modelValue);
-
   if (!props.url || isValueNull(props.modelValue)) {
     return;
   }
