@@ -337,6 +337,7 @@ export default {
 | data            | 请求上传接口的额外参数                                  | object                           | --                           | --          |
 | headers         | 接口的请求头                                            | object                           | --                           | --          |
 | acceptMime      | 文件选择框时的可选文件类型                              | string                           | `MIME_type`                  | `MIME_type` |
+| auto            | 是否自动提交                                            | boolean                          | true                        | --          |
 | field           | 设定文件域的字段名                                      | string                           | `file`                       | --          |
 | size            | 设置文件最大可允许上传的大小，单位 KB。不支持 ie8/9     | number                           | `0(不限制)`                  | --          |
 | multiple        | 是否允许多文件上传。设置 true 即可开启。不支持 ie8/9    | boolean                          | false                        | --          |
@@ -348,7 +349,6 @@ export default {
 | cutOptions      | 开启剪裁的模态弹窗与剪裁框的配置                        | object                           | { layerOption,copperOption } | --          |
 | text            | 普通上传描述                                            | string                           | --                           | --          |
 | dragText        | 拖拽上传描述                                            | string                           | --                           | --          |
-| auto            | 是否自动提交                                            | boolean                          | false                        | --          |
 | beforeUpload    | 上传之前的钩子（1.9.4）                                 | Function : boolean Promise       | --                           | --          |
 | onProgress      | 上传过程的回调（1.9.8）                                 | Function（event: ProgressEvent） | --                           | --          |
 
