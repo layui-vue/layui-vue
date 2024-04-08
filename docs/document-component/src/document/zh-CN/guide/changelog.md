@@ -7,7 +7,7 @@
 ::: describe 正常情况下使用 每周 发布策略， 但关键的 bug 修复将需要热修复，所以实际发布版本 可能 每周超过 1 次。
 :::
 
-::: describe 若你需要查看更多详情，可前往 <a style="color:#009688;" target="_blank" href="https://gitee.com/layui/layui-vue/releases">Gitee</a>。
+::: describe 若你需要查看更多详情，可前往 <a style="color:#009688;" target="_blank" href="https://gitee.com/layui-vue/layui-vue/releases">Gitee</a>。
 :::
 
 ::: demo
@@ -19,7 +19,8 @@
         <li>
           <h3>2.16.8 <span class="layui-badge-rim">2024-xx-xx</span></h3>
           <ul>
-              <li>[修复] treeSelect组件 选中节点触发两次change事件。<a href="https://gitee.com/layui/layui-vue/issues/I9CSNH">I9CSNH</a></li>
+              <li>[修复] treeSelect组件 选中节点触发两次change事件。<a href="https://gitee.com/layui-vue/layui-vue/issues/I9CSNH">I9CSNH</a></li>
+              <li>[修复] upload组件 额外请求参数移至beforeUpload钩子之后执行。<a href="https://gitee.com/layui-vue/layui-vue/issues/I9E4FA">I9E4FA</a></li>
               <li>[调整] JsonSchemaForm组件 <a href="https://gitee.com/layui-vue/layui-vue/issues/I9DFML#note_26279350_link">相关调整</a></li>
           </ul>
         </li>
