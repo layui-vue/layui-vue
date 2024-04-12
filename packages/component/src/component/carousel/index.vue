@@ -15,7 +15,7 @@ import CarouselItem from "../carouselItem/index.vue";
 export interface CarouselProps {
   width?: string;
   height?: string;
-  modelValue?: string;
+  modelValue?: string | number;
   autoplay?: boolean;
   arrow?: "always" | "hover" | "none";
   anim?: "default" | "updown" | "fade";
@@ -40,7 +40,7 @@ const props = withDefaults(defineProps<CarouselProps>(), {
 });
 
 const slot = useSlots() as any;
-const slots = slot.default && (slot.default() as any[]);
+const slots = slot.default && (slot.default() as VNode[]);
 
 const active = computed({
   get() {
@@ -55,7 +55,7 @@ const anim = computed(() => props.anim);
 
 const emit = defineEmits(["update:modelValue", "change"]);
 
-const change = function (id: any) {
+const setActive = function (id: string | number) {
   emit("change", id);
   active.value = id;
 };
@@ -86,7 +86,7 @@ watch(
   { immediate: true, deep: true }
 );
 
-const sub = () => {
+const prev = () => {
   for (var i = 0; i < childrens.value.length; i++) {
     if (childrens.value[i].props?.id === active.value) {
       if (i === 0) {
@@ -99,7 +99,7 @@ const sub = () => {
   }
 };
 
-const add = () => {
+const next = () => {
   for (var i = 0; i < childrens.value.length; i++) {
     if (childrens.value[i].props?.id === active.value) {
       if (i === childrens.value.length - 1) {
@@ -159,6 +159,12 @@ watch(
 provide("active", active);
 provide("slotsChange", slotsChange);
 provide("anim", anim);
+
+defineExpose({
+  setActive,
+  prev,
+  next,
+});
 </script>
 
 <template>
@@ -178,24 +184,24 @@ provide("anim", anim);
       <div class="layui-carousel-ind">
         <ul>
           <li
-            v-for="(ss, index) in childrens"
+            v-for="(child, index) in childrens"
             :key="index"
-            :class="[ss.props?.id === active ? 'layui-this' : '']"
-            @click.stop="change(ss.props?.id)"
+            :class="[child.props?.id === active ? 'layui-this' : '']"
+            @click.stop="setActive(child.props?.id)"
           ></li>
         </ul>
       </div>
       <button
         class="layui-icon layui-carousel-arrow"
         lay-type="sub"
-        @click="sub"
+        @click="prev"
       >
         {{ anim === "updown" ? "" : "" }}
       </button>
       <button
         class="layui-icon layui-carousel-arrow"
         lay-type="add"
-        @click="add"
+        @click="next"
       >
         {{ anim === "updown" ? "" : "" }}
       </button>
