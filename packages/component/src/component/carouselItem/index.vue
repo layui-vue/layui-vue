@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { StyleValue } from "vue";
 import {
   inject,
   Ref,
@@ -9,7 +10,7 @@ import {
 } from "vue";
 
 export interface CarouselItemProps {
-  id: string;
+  id: string | number;
 }
 
 defineOptions({
@@ -17,13 +18,13 @@ defineOptions({
 });
 const props = defineProps<CarouselItemProps>();
 
-const active = inject("active") as WritableComputedRef<string>;
+const active = inject("active") as WritableComputedRef<string | number>;
 const slotsChange: Ref<boolean> = inject("slotsChange") as Ref<boolean>;
 slotsChange.value = !slotsChange.value;
 
 const anim = inject("anim") as ComputedRef<string>;
 const item = ref();
-const getStyle = computed<any>(() => {
+const getStyle = computed<StyleValue>(() => {
   if (item.value) {
     let allChild = item.value.parentNode.children;
     let allChildNum = allChild.length;
@@ -32,10 +33,10 @@ const getStyle = computed<any>(() => {
     let currentIndex = 0;
     for (let index = 0; index < allChild.length; index++) {
       const element = allChild[index];
-      if (element.getAttribute("data-id") === active.value) {
+      if (element.getAttribute("data-id") === String(active.value)) {
         activeIndex = index;
       }
-      if (element.getAttribute("data-id") === props.id) {
+      if (element.getAttribute("data-id") === String(props.id)) {
         currentIndex = index;
       }
     }
@@ -97,6 +98,7 @@ const getStyle = computed<any>(() => {
       display: "none",
     };
   }
+  return {};
 });
 </script>
 

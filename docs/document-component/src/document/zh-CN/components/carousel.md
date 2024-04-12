@@ -195,9 +195,9 @@ export default {
 
 ::: table
 
-| 属性      | 描述         | 类型          |类型             |可选值                    |
+| 属性      | 描述         | 类型          | 默认值            |可选值                    |
 | --------- | ------------ |--------------| --------------- | -------------------------|
-| v-model   | 当前激活项   | `number`      | --             | --                      |
+| v-model   | 当前激活项(以carouselItem组件 `id` 参数类型为主)   | `number` `string`      | --             | --                      |
 | anim      | 切换方向     | `string`      | `default`      | `default` `updown` `fade`      |
 | indicator | 控制器位置   | `string`      | `inside`       |`inside` `outside` `none` |
 | arrow     | 切换按钮状态 | `string`      | `hover`        |`hover` `always` `none`   |
@@ -215,6 +215,30 @@ export default {
 | 事件   | 描述     | 可选值 |
 | ------ | -------- | ------ |
 | change | 切换回调 | id     |
+
+:::
+
+::: title Carousel Exposes
+:::
+
+::: table
+
+| 事件   | 描述     | 参数 |
+| ------ | -------- | ------ |
+| setActive | 切换至指定轮播图 |   需要切换的 `carouselItem` 的 `id` 属性值  |
+| prev | 切换至上一张轮播图 |    |
+| next | 切换至下一张轮播图 |    |
+
+:::
+
+::: title CarouselItem 属性
+:::
+
+::: table
+
+| 属性      | 描述         | 类型          | 默认值            |可选值                    |
+| --------- | ------------ |--------------| --------------- | -------------------------|
+| id   | 用于联动 `Carousel` 的 `v-model`属性   | `number` `string`      | --   | --    |
 
 :::
 

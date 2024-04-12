@@ -169,7 +169,6 @@ const onClear = function () {
 const handleClick = (node: any) => {
   if (!props.multiple) {
     dropdownRef.value.hide();
-    selectedValue.value = node[_replaceFields.value.id];
   }
 };
 
