@@ -254,12 +254,6 @@ const localUploadTransaction = (option: localUploadTransaction) => {
     let _file = files[0];
     formData.append(props.field, _file);
   }
-  if (props.data && props.data instanceof Object) {
-    let _requestDate = props.data;
-    for (const key in _requestDate) {
-      formData.append(key, _requestDate[key]);
-    }
-  }
   // 执行上传之前，执行 before 钩子，根据返回值，决定是否执行后续操作
 
   // 备注：单文件 与 多文件 上传参数不同
@@ -270,6 +264,14 @@ const localUploadTransaction = (option: localUploadTransaction) => {
       allowUpload = props.beforeUpload(files);
     } else {
       allowUpload = props.beforeUpload(files[0]);
+    }
+  }
+
+  // 移至 before 钩子触发后执行
+  if (props.data && props.data instanceof Object) {
+    let _requestDate = props.data;
+    for (const key in _requestDate) {
+      formData.append(key, _requestDate[key]);
     }
   }
 
@@ -508,8 +510,6 @@ onUnmounted(() => {
 });
 
 const submitUpload = () => {
-  console.log(props.url, props.modelValue);
-
   if (!props.url || isValueNull(props.modelValue)) {
     return;
   }

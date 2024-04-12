@@ -19,10 +19,13 @@ export type modelType = {
   [key: string]: any;
 };
 
-export type customRenderFnType = (
-  SchemaValueType: SchemaValueType,
-  model: modelType
-) => VNode;
+type customRenderFnParamsOptions = {
+  schemaKey: string;
+  schemaValue: SchemaValueType;
+  model: modelType;
+};
+
+export type customRenderFnType = (param: customRenderFnParamsOptions) => VNode;
 export type customRenderType = string | customRenderFnType;
 
 export interface JsonSchemaFormProps extends FormProps {
@@ -37,8 +40,8 @@ export interface SchemaProps {
 export interface SchemaValueType extends FormItemProps {
   type?: Type;
   hidden?: boolean;
-  props: modelType;
-  slots: SlotsType;
+  props?: modelType;
+  slots?: SlotsType;
   listeners?: listenersType;
   colProps?: ColProps;
 }

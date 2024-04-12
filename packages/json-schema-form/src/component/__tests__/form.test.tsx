@@ -314,11 +314,25 @@ describe("LayJsonSchemaForm", () => {
           },
         });
 
+        const model = reactive({
+          slot1: "123",
+        });
+
         return () => (
           <LayForm
+            model={model}
             schema={schema}
             v-slots={{
-              slot1: () => <div class="slot-custom-render-string">slot1</div>,
+              slot1: ({ schemaKey, schemaValue, model }) => (
+                <div class="slot-custom-render-string">
+                  <div class="slot-custom-render-string-schemaKey">
+                    {schemaKey}
+                  </div>
+                  <div class="slot-custom-render-string-model">
+                    {model[schemaKey]}
+                  </div>
+                </div>
+              ),
             }}
           ></LayForm>
         );
@@ -328,6 +342,11 @@ describe("LayJsonSchemaForm", () => {
 
     expect(wrapper.findAll(".slot-custom-render-string")).toHaveLength(1);
     expect(wrapper.findAll(".slot-custom-render-function")).toHaveLength(1);
+
+    expect(wrapper.find(".slot-custom-render-string-schemaKey").text()).toBe(
+      "slot1"
+    );
+    expect(wrapper.find(".slot-custom-render-string-model").text()).toBe("123");
   });
 
   test("component slot render", async () => {

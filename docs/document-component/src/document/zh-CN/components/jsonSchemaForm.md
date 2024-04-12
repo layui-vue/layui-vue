@@ -32,6 +32,33 @@ import "@layui/json-schema-form/lib/index.css";
 createApp(App).use(LayJsonSchemaForm).mount("#app");
 ```
 
+::: describe <font color="red">特别说明</font>
+:::
+
+::: describe 当您使用 `unplugin-vue-components/resolvers` 默认注册 `layui-vue` 所有组件时，需要排除 `LayJsonSchemaForm。`
+:::
+
+::: describe `vite.config.js`
+:::
+
+```js
+import Components from "unplugin-vue-components/vite";
+import { LayuiVueResolver } from "unplugin-vue-components/resolvers";
+
+export default defineConfig({
+  plugins: [
+    Components({
+      resolvers: [
+        LayuiVueResolver({
+          resolveIcons: true,
+          exclude: ["LayJsonSchemaForm"],
+        }),
+      ],
+    }),
+  ],
+});
+```
+
 ::: title 基本使用
 :::
 
@@ -42,7 +69,7 @@ createApp(App).use(LayJsonSchemaForm).mount("#app");
   <lay-button type="primary" @click="submit1">提交</lay-button>
 </template>
 
-<script>
+<script setup>
 import { ref, reactive } from 'vue';
 import { layer } from '@layui/layer-vue'
 
@@ -346,7 +373,7 @@ const clear3 = () => {
 
 <template>
   <lay-json-schema-form :model="form4" :schema="schema4">
-    <template #string="{schemaValue, model}">
+    <template #string="{schemaKey, schemaValue, model}">
       <lay-input>
         <template #suffix>
           input后置插槽
@@ -373,7 +400,7 @@ const schema4 = reactive({
   customRender2: {
     label: '参数为function',
     slots: {
-      customRender: (schemaValue, model) => h('div', {style: 'height: 200px;background-color: var(--button-primary-background-color);'}, [h('p', {}, 'schemaValue: ' + JSON.stringify(schemaValue)), h('p', {}, 'model: ' + JSON.stringify(model))])
+      customRender: ({schemaKey, schemaValue, model}) => h('div', {style: 'height: 200px;background-color: var(--button-primary-background-color);'}, [h('p', {}, 'schemaKey: ' + JSON.stringify(schemaKey)),h('p', {}, 'schemaValue: ' + JSON.stringify(schemaValue)), h('p', {}, 'model: ' + JSON.stringify(model))])
     }
   },
   
@@ -426,7 +453,7 @@ const schema7 = reactive({
     type: "input",
     slots: {
       prepend: "inputPrepend",
-      suffix: (schemaValue, model) => {
+      suffix: ({schemaKey, schemaValue, model}) => {
         return h("div", { style: { color: "red" } }, "123");
       },
     },
@@ -605,7 +632,13 @@ type modelType = {
   [key: string]: any;
 };
 
-type customRenderFnType = (input: InputsProps, model: modelType) => VNode;
+type customRenderFnParamsOptions = {
+  schemaKey: string;
+  schemaValue: SchemaValueType;
+  model: modelType;
+};
+
+type customRenderFnType = (param: customRenderFnParamsOptions) => VNode;
 type customRenderType = string | customRenderFnType;
 
 type SlotsType = {
@@ -626,8 +659,8 @@ interface SchemaProps {
 interface SchemaValueType extends FormItemProps {
   type?: Type;
   hidden?: boolean;
-  props: modelType;
-  slots: SlotsType;
+  props?: modelType;
+  slots?: SlotsType;
   listeners?: listenersType;
   colProps?: ColProps;
 }
