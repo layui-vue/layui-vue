@@ -17,8 +17,9 @@
       <ul>
         <a name="2-16-8"></a>
         <li>
-          <h3>2.16.8 <span class="layui-badge-rim">2024-xx-xx</span></h3>
+          <h3>2.16.8 <span class="layui-badge-rim">2024-04-12</span></h3>
           <ul>
+              <li>[修复] carousel组件 新增setActive，prev，next外部暴露属性。</li>
               <li>[修复] treeSelect组件 选中节点触发两次change事件。<a href="https://gitee.com/layui-vue/layui-vue/issues/I9CSNH">I9CSNH</a></li>
               <li>[修复] upload组件 额外请求参数移至beforeUpload钩子之后执行。<a href="https://gitee.com/layui-vue/layui-vue/issues/I9E4FA">I9E4FA</a></li>
               <li>[调整] JsonSchemaForm组件 <a href="https://gitee.com/layui-vue/layui-vue/issues/I9DFML#note_26279350_link">相关调整</a></li>
