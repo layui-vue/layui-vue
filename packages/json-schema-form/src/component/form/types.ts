@@ -31,6 +31,7 @@ export type customRenderType = string | customRenderFnType;
 export interface JsonSchemaFormProps extends FormProps {
   space?: number | string;
   schema: SchemaProps;
+  isGenCommentEl?: boolean;
 }
 
 export interface SchemaProps {

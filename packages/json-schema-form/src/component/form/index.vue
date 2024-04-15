@@ -16,6 +16,7 @@ const props = withDefaults(defineProps<JsonSchemaFormProps>(), {
   model: () => ({}),
   space: 10,
   schema: () => ({}),
+  isGenCommentEl: true,
 });
 
 const { Schema, formProps } = useForm(props);
@@ -60,28 +61,30 @@ defineExpose({ validate, resetFields, clearValidate });
   <lay-form ref="formRef" :model="model" v-bind="formProps">
     <lay-row :space="space">
       <template v-for="(schemaValue, schemaName) in Schema" :key="schemaName">
-        <lay-col v-bind="schemaValue.colProps" v-if="!schemaValue.hidden">
-          <lay-form-item v-bind="schemaValue" :prop="(schemaName as string)">
-            <template
-              v-if="
-                schemaValue.slots &&
-                typeof schemaValue.slots.customRender === 'string'
-              "
-            >
-              <slot
-                :name="schemaValue.slots.customRender"
-                :schemaKey="schemaName"
+        <template v-if="!isGenCommentEl || !schemaValue.hidden">
+          <lay-col v-bind="schemaValue.colProps" v-show="!schemaValue.hidden">
+            <lay-form-item v-bind="schemaValue" :prop="(schemaName as string)">
+              <template
+                v-if="
+                  schemaValue.slots &&
+                  typeof schemaValue.slots.customRender === 'string'
+                "
+              >
+                <slot
+                  :name="schemaValue.slots.customRender"
+                  :schemaKey="schemaName"
+                  :schemaValue="schema[schemaName]"
+                  :model="model"
+                ></slot>
+              </template>
+              <form-block
+                v-else
                 :schemaValue="schema[schemaName]"
-                :model="model"
-              ></slot>
-            </template>
-            <form-block
-              v-else
-              :schemaValue="schema[schemaName]"
-              :fieldName="(schemaName as string)"
-            ></form-block>
-          </lay-form-item>
-        </lay-col>
+                :fieldName="(schemaName as string)"
+              ></form-block>
+            </lay-form-item>
+          </lay-col>
+        </template>
       </template>
     </lay-row>
   </lay-form>
