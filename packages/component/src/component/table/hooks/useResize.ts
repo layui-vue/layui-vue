@@ -31,8 +31,11 @@ const stopResize = () => {
   isResizing = false;
 };
 
-document.addEventListener("mousemove", resizing);
-document.addEventListener("mouseup", stopResize);
+const removeMouseup = () => {
+  stopResize();
+  document.removeEventListener("mousemove", resizing);
+  document.removeEventListener("mouseup", removeMouseup);
+};
 
 export const startResize = (
   e: MouseEvent,
@@ -40,6 +43,9 @@ export const startResize = (
   tableHeaderTable: any,
   tableBodyTable: any
 ) => {
+  document.addEventListener("mousemove", resizing);
+  document.addEventListener("mouseup", removeMouseup);
+
   targetElem = tableHeaderTable;
   targetElemBody = tableBodyTable;
   stashColumn = column;
