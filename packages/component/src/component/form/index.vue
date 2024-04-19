@@ -19,6 +19,7 @@ export interface FormProps {
   useCN?: boolean;
   size?: string;
   mode?: string;
+  isLabelTooltip?: boolean;
   tooltipProps?: LayTooltipContext;
 }
 
@@ -35,6 +36,7 @@ const props = withDefaults(defineProps<FormProps>(), {
   labelPosition: "right",
   initValidate: false,
   pane: false,
+  isLabelTooltip: false,
 });
 
 const formItems: LayFormItemContext[] = [];

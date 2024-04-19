@@ -20,6 +20,7 @@ export interface LayFormContext {
   labelWidth?: string;
   size?: string;
   mode?: string;
+  isLabelTooltip?: boolean;
   tooltipProps: LayTooltipContext;
 }
 
