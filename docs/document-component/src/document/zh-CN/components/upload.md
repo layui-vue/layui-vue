@@ -336,7 +336,7 @@ export default {
 | url             | 服务端上传接口的地址                                    | string                           | --                           | --          |
 | data            | 请求上传接口的额外参数                                  | object                           | --                           | --          |
 | headers         | 接口的请求头                                            | object                           | --                           | --          |
-| acceptMime      | 文件选择框时的可选文件类型                              | string                           | `MIME_type`                  | `MIME_type` |
+| acceptMime      | 文件选择框时的可选文件类型       | string                           | `MIME_type`                  | [文件类型可查看](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file) |
 | auto            | 是否自动提交                                            | boolean                          | true                        | --          |
 | field           | 设定文件域的字段名                                      | string                           | `file`                       | --          |
 | size            | 设置文件最大可允许上传的大小，单位 KB。不支持 ie8/9     | number                           | `0(不限制)`                  | --          |
@@ -345,7 +345,7 @@ export default {
 | drag            | 是否接受拖拽的文件上传，设置 false 可禁用。不支持 ie8/9 | boolean                          | true                         | --          |
 | disabled        | 设置文件禁用                                            | boolean                          | false                        | --          |
 | disabledPreview | 设置文件预览插槽区域为禁用状态                          | boolean                          | false                        | --          |
-| cut             | 是否开启选择图片后检测,设置 true 可开启                 | boolean                          | false                        | --          |
+| cut             | 开启裁剪(`acceptMime`为image类型生效)                 | boolean                          | false                        | --          |
 | cutOptions      | 开启剪裁的模态弹窗与剪裁框的配置                        | object                           | { layerOption,copperOption } | --          |
 | text            | 普通上传描述                                            | string                           | --                           | --          |
 | dragText        | 拖拽上传描述                                            | string                           | --                           | --          |
@@ -371,13 +371,14 @@ export default {
 ::: table
 
 | 名称     | 描述                                                                                  | 参数 |
-| -------- | ------------------------------------------------------------------------------------- | ---- |
-| choose   | 打开系统选择文件窗体的回调                                                            | --   |
+| -------- | ---------------------------- | ---- |
+| choose   | 打开系统选择文件窗体的回调     |`currentTimeStamp`   |
+| on-change(2.17.0)   | 选择文件后回调  | `[File]`(文件数组)   |
 | before   | 上传事务开启前的回调 (在 1.9.4 版本新增 before-upload 属性，来代替该事件，仍向后兼容) | --   |
-| done     | 上传事务结束的回调                                                                    | --   |
-| error    | 上传事务中出现错误的回调                                                              | --   |
-| cutdown  | 剪裁完成                                                                              | --   |
-| cutclose | 剪裁取消                                                                              | --   |
+| done     | 上传事务结束的回调           | {`currentTimeStamp`, `msg`, `data`}  |
+| error    | 上传事务中出现错误的回调    | {`currentTimeStamp`, `msg`}   |
+| cutdone  | 剪裁完成                 | {`currentTimeStamp`, `cutResult`(剪裁后base64文件),`orgInfo`(原图片文件)}  |
+| cutcancel | 剪裁取消                  | {`currentTimeStamp`}   |
 
 :::
 

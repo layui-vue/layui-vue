@@ -5,7 +5,6 @@ import { layer } from "@layui/layer-vue";
 import {
   computed,
   ComputedRef,
-  getCurrentInstance,
   nextTick,
   onMounted,
   onUnmounted,
@@ -176,17 +175,15 @@ const props = withDefaults(defineProps<UploadProps>(), {
 });
 
 const slot = useSlots();
-const slots = slot.default && slot.default();
-const context = getCurrentInstance();
 const emit = defineEmits([
   "choose",
-  "chooseAfter",
   "before",
   "done",
   "error",
   "cutdone",
   "cutcancel",
   "update:modelValue",
+  "on-change",
 ]);
 
 watch(
@@ -388,6 +385,11 @@ const filetoDataURL = (file: File, fn: Function) => {
   reader.readAsDataURL(file);
 };
 
+// 是否允许裁剪
+const isCut = computed(() => {
+  return props.cut && /image/i.test(props.acceptMime);
+});
+
 const uploadChange = (e: any) => {
   e.preventDefault();
   const _files = [...(e.target.files || e.dataTransfer.files)];
@@ -410,26 +412,19 @@ const uploadChange = (e: any) => {
     }
   }
 
-  let arm1 =
-    props.cut &&
-    props.acceptMime.indexOf("image") != -1 &&
-    props.multiple == false;
+  emit("on-change", _files);
 
-  if (arm1) {
+  // 裁剪 & 多选
+  if (isCut.value && props.multiple) {
+    console.warn(cannotSupportCutMsg.value);
+  } else {
     for (let item of _files) {
       activeUploadFiles.value.push(item);
       filetoDataURL(item, function (res: any) {
         activeUploadFilesImgs.value.push(res);
       });
     }
-  }
 
-  let arm2 =
-    props.cut &&
-    props.acceptMime.indexOf("image") != -1 &&
-    props.multiple == true;
-
-  if (arm1) {
     innerCutVisible.value = true;
     setTimeout(() => {
       const _imgs: HTMLCollection =
@@ -441,16 +436,15 @@ const uploadChange = (e: any) => {
         clearAllCutEffect();
       }
     }, 200);
-  } else {
-    if (arm2) {
-      console.warn(cannotSupportCutMsg.value);
-    }
-    if (!props.auto) {
-      emit("update:modelValue", _files);
-      return;
-    }
-    commonUploadTransaction(_files);
+    return;
   }
+
+  // 关闭自动上传
+  if (!props.auto) {
+    emit("update:modelValue", _files);
+    return;
+  }
+  commonUploadTransaction(_files);
 };
 
 const commonUploadTransaction = (_files: any[]) => {
