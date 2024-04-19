@@ -236,6 +236,7 @@ const moreCount = computed(() => {
   if (tagData.value && computedTagData.value) {
     return tagData.value.length - computedTagData.value.length;
   }
+  return "";
 });
 
 onMounted(() => {
@@ -304,6 +305,7 @@ defineExpose({
           </template>
         </LayToopTip>
       </template>
+
       <input
         ref="inputRefEl"
         class="layui-tag-input-inner-input"
@@ -320,6 +322,10 @@ defineExpose({
         @compositionupdate="handleComposition"
         @compositionend="handleComposition"
       />
+      <div
+        v-if="disabledInput"
+        class="layui-tag-input-inner-disabled-input"
+      ></div>
     </span>
     <span
       v-if="allowClear && tagData?.length && !disabled"
