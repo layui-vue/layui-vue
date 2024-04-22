@@ -79,7 +79,7 @@ const selectedValue = computed({
     return props.multiple && props.modelValue == null ? [] : props.modelValue;
   },
   set(value) {
-    if (props.modelValue != value) {
+    if (props.modelValue !== value) {
       emits("update:modelValue", value);
       emits("change", value);
     }

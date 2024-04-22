@@ -109,12 +109,24 @@
         height: @@height - (@@inner-padding + @tag-input-boeder)* 2;
         vertical-align: middle;
         &:disabled {
+          position: relative;
           background: transparent;
+          z-index: -2;
         }
       }
-
+    
       .layui-tag-input-inner {
+        position: relative;
         padding: @@inner-padding 5px;
+      }
+
+      .layui-tag-input-inner-disabled-input{
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: -1;
       }
 
       .layui-tag {

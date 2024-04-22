@@ -75,7 +75,7 @@ const submit = () => {
       <lay-input v-model="model1.like"></lay-input>
     </lay-form-item>
     <lay-form-item label="爱好" prop="hobby" mode="inline">
-      <lay-select v-model="model4.hobby" multiple>
+      <lay-select v-model="model1.hobby" multiple>
         <lay-select-option value="1" label="学习"></lay-select-option>
         <lay-select-option value="2" label="编码"></lay-select-option>
         <lay-select-option value="3" label="运动"></lay-select-option>
@@ -120,7 +120,8 @@ const submit = () => {
 
 <script setup>
 import { ref, reactive } from 'vue'
-import {layer} from '@layui/layer-vue'
+import { layer } from '@layui/layer-vue'
+
 
 const model1 = reactive({})
 
@@ -585,10 +586,10 @@ const submit2 = function(){
 ::: title label超出隐藏
 :::
 
-::: demo
+::: demo 通过 `isLabelTooltip` 属性开启超出隐藏，默认值为 `false`
 
 <template>
-  <lay-form :model="model3"  :label-position="labelPosition3" required :tooltipProps="tooltipProps">
+  <lay-form :model="model3"  :label-position="labelPosition3" required isLabelTooltip :tooltipProps="tooltipProps">
     <lay-form-item label="label label label label" prop="username">
       <lay-input v-model="model3.username"></lay-input>
     </lay-form-item>
@@ -863,7 +864,7 @@ const submit10 = function(isValidate, model, errors) {
 | required                | 是否必填                     | `boolean` | `true` `false` | `false`      |
 | rules                   | 表单校验规则; <br>可查看[async-validator](https://github.com/yiminghe/async-validator) `object`  | -              | -            |
 | initValidate            | 是否一开始就校验表单          | `boolean` | `true` `false` | `false`      |
-| useCN                   | 是否使用中文错误提示          | `boolean` | `true` `false` | `false`      |
+| useCN                   | 是否使用中文错误提示          | `boolean` | `true` `false` | `true`      |
 | requiredIcons           | 必填前缀图标`class`          | `string`  | -              | `*`          |
 | required-error-message | 必填错误提示信息              | `string`  | -              | `%s不能为空` |
 | validate-message        | 自定义校验错误提示信息; <br>由于内置了中文错误提示，可按需求增量增加<br>可查看 [async-validator 内置错误提示](https://github.com/yiminghe/async-validator/blob/master/src/messages.ts)<br>也可参考 [layui-vue 内置中文错误提示](https://gitee.com/layui/layui-vue/blob/next/package/component/src/component/formItem/cnValidateMessage.ts) | `string`  | -              | `%s不能为空` |
@@ -872,6 +873,7 @@ const submit10 = function(isValidate, model, errors) {
 | size                    | 全局控件尺寸                     | --          |  --                          | --      |
 | labelWidth              | 全局标签宽度                     | `string`    |  --                          | --      |
 | mode              | 全局表单项显示的模式，`块元素` / `行元素`                       | `string`    |  `block` `inline`     | `block`    |
+| isLabelTooltip(2.17.0)              | Label是否超出隐藏省略号     | `boolean`    |       | `false`    |
 | tooltipProps              | 可查看[tooltip组件](http://www.layui-vue.com/zh-CN/components/tooltip)      | `object`    |      |    |
 
 :::

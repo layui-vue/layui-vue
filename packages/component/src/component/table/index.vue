@@ -1207,7 +1207,6 @@ defineExpose({ getCheckData });
       >
         <table
           class="layui-table"
-          v-if="tableDataSource.length > 0"
           v-show="loading == false"
           :class="{ 'layui-table-even': props.even }"
           :lay-size="size"

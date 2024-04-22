@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import "../tooltip/index.less";
+import type { FormItemProps as _FormItemProps } from "./types";
 import {
   inject,
   ref,
@@ -16,28 +17,11 @@ import {
   LayFormItemContext,
   FieldValidateError,
 } from "../../types/form";
-import Schema, {
-  Rule,
-  RuleItem,
-  Rules,
-  ValidateCallback,
-} from "async-validator";
+import Schema, { RuleItem, Rules, ValidateCallback } from "async-validator";
 import cnValidateMessage from "./cnValidateMessage";
 import useProps from "./index.hooks";
 import layTooltip from "../tooltip/index.vue";
-
-export interface FormItemProps {
-  prop?: string;
-  mode?: string;
-  label?: string;
-  labelPosition?: string;
-  labelWidth?: string | number;
-  errorMessage?: string;
-  rules?: Rule;
-  required?: boolean;
-  requiredErrorMessage?: string;
-  size?: string;
-}
+import LayFormItemLabel from "./FormItemLabel";
 
 defineOptions({
   name: "LayFormItem",
@@ -47,8 +31,17 @@ const props = withDefaults(defineProps<FormItemProps>(), {
   // mode: "block",
 });
 
-const { size, mode, labelWidth, labelPosition, isRequired, tooltipProps } =
-  useProps(props);
+export type FormItemProps = _FormItemProps;
+
+const {
+  size,
+  mode,
+  labelWidth,
+  labelPosition,
+  isRequired,
+  tooltipProps,
+  isLabelTooltip,
+} = useProps(props);
 
 const layForm = inject("LayForm", {} as LayFormContext);
 const formItemRef = ref<HTMLDivElement>();
@@ -270,21 +263,24 @@ const getMarginLeft = computed(() => {
       v-if="showLabel"
       :style="{ width: labelWidth + 'px' }"
     >
-      <lay-tooltip :content="label" :isAutoShow="true" v-bind="tooltipProps">
-        <span
-          v-if="props.prop && isRequired"
-          :class="
-            ['layui-required', 'layui-icon'].concat(layForm.requiredIcons ?? '')
-          "
-        >
-          <slot name="required" :props="{ ...props, model: layForm.model }">{{
-            layForm.requiredIcons ? "" : "*"
-          }}</slot>
-        </span>
-        <slot name="label" :props="{ ...props, model: layForm.model }">
-          {{ label }}
-        </slot>
+      <lay-tooltip
+        v-if="isLabelTooltip"
+        v-bind="tooltipProps"
+        :content="label"
+        :isAutoShow="true"
+      >
+        <LayFormItemLabel
+          :item-slots="slots"
+          :isRequired="isRequired"
+          :outProps="props"
+        ></LayFormItemLabel>
       </lay-tooltip>
+      <LayFormItemLabel
+        v-else
+        :item-slots="slots"
+        :isRequired="isRequired"
+        :outProps="props"
+      ></LayFormItemLabel>
     </label>
     <div :class="[mode ? 'layui-input-' + mode : '']" :style="getMarginLeft">
       <div ref="slotParent">
