@@ -13,6 +13,22 @@
 ::: demo
 <template>
   <lay-timeline>
+    <lay-timeline-item title="2.17.x">
+      <ul>
+        <a name="2.17-0"></a>
+        <li>
+          <h3>2.17-0 <span class="layui-badge-rim">2024-04-22</span></h3>
+          <ul>
+              <li>[新增] form组件 新增isLabelTooltip属性控制label是否超出隐藏。<a href="https://gitee.com/layui-vue/layui-vue/pulls/302">详情</a></li>
+              <li>[新增] upload组件 新增选择文件后"on-change"回调事件。<a href="https://gitee.com/layui-vue/layui-vue/pulls/300">详情</a></li>
+              <li>[修复] select组件 multiple场景下点击placeholder区域不触发弹窗。<a href="https://gitee.com/layui-vue/layui-vue/pulls/301">详情</a></li>
+              <li>[修复] table组件 列宽改变二次渲染单元格错位。<a href="https://gitee.com/layui-vue/layui-vue/pulls/299">详情</a></li>
+              <li>[修复] treeSelect组件 modelValue首次赋值为0不生效。<a href="https://gitee.com/layui-vue/layui-vue/pulls/298">详情</a></li>
+              <li>[样式] datePicker组件 新增滑入border效果与表单校验失败border边框效果。<a href="https://gitee.com/layui-vue/layui-vue/pulls/297">详情</a></li>
+          </ul>
+        </li>
+      </ul>
+    </lay-timeline-item>
     <lay-timeline-item title="2.16.x">
       <ul>
         <a name="2-16-8"></a>
