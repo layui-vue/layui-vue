@@ -732,6 +732,16 @@ const findTopicParent = (data: any[], target: any) => {
   return parents[0];
 };
 
+const getBeforeAllColumnsWidth = (column: any) => {
+  if (column.children && column.children.length) {
+    return column.children.reduce((pre: number, cur: any) => {
+      pre += Number(cur?.width?.replace("px", "")) || 0;
+      return pre;
+    }, 0);
+  }
+  return Number(column?.width?.replace("px", "")) || 0;
+};
+
 /**
  * 计算 td 的 style 属性
  *
@@ -759,7 +769,8 @@ const renderHeadFixedStyle = (
             props.columns[i].fixed == "left" &&
             tableColumnKeys.value.includes(props.columns[i].key)
           ) {
-            left = left + Number(props.columns[i]?.width?.replace("px", ""));
+            // left = left + Number(props.columns[i]?.width?.replace("px", ""));
+            left = left + getBeforeAllColumnsWidth(props.columns[i]);
           }
         }
         return { left: `${left}px` } as StyleValue;
@@ -868,6 +879,22 @@ const renderHeadFixedStyle = (
   }
 };
 
+const getHeadColumnsFixedState = (
+  column: any,
+  tableHeadColumnIndex: number
+) => {
+  if (!tableHeadColumnIndex) return true;
+
+  const nextFirstColumns = tableHeadColumns.value[0];
+  const index = nextFirstColumns.findIndex((d: any) => {
+    return d.children && d.children.some((c: any) => c.key === column.key);
+  });
+
+  const nextColumn = nextFirstColumns[index + 1];
+
+  return nextColumn && nextColumn.fixed !== "left";
+};
+
 /**
  * 在 fixed 为 left 时，如果是尾列，增加阴影。
  * 在 fixed 为 right 时，如果是首列，增加阴影。
@@ -877,7 +904,8 @@ const renderHeadFixedStyle = (
 const renderFixedClassName = (
   column: any,
   columnIndex: number,
-  currentColumns: any[]
+  currentColumns: any[],
+  tableHeadColumnIndex: number
 ) => {
   if (column.fixed) {
     if (column.fixed == "left") {
@@ -891,7 +919,9 @@ const renderFixedClassName = (
           left = false;
         }
       }
-      return left ? `layui-table-fixed-left-last` : "";
+      return left && getHeadColumnsFixedState(column, tableHeadColumnIndex)
+        ? `layui-table-fixed-left-last`
+        : "";
     } else {
       var right = true;
       for (var i = 0; i < columnIndex; i++) {
@@ -1114,7 +1144,8 @@ defineExpose({ getCheckData });
                         renderFixedClassName(
                           column,
                           columnIndex,
-                          tableHeadColumn
+                          tableHeadColumn,
+                          tableHeadColumnIndex
                         ),
                         column.fixed ? `layui-table-fixed-${column.fixed}` : '',
                         column.type == 'checkbox'
