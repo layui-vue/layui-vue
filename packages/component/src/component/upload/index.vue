@@ -415,28 +415,30 @@ const uploadChange = (e: any) => {
   emit("on-change", _files);
 
   // 裁剪 & 多选
-  if (isCut.value && props.multiple) {
-    console.warn(cannotSupportCutMsg.value);
-  } else {
-    for (let item of _files) {
-      activeUploadFiles.value.push(item);
-      filetoDataURL(item, function (res: any) {
-        activeUploadFilesImgs.value.push(res);
-      });
-    }
-
-    innerCutVisible.value = true;
-    setTimeout(() => {
-      const _imgs: HTMLCollection =
-        document.getElementsByClassName("_lay_upload_img");
-      if (_imgs && _imgs.length > 0) {
-        const _img: HTMLImageElement = _imgs[0] as HTMLImageElement;
-        _cropper = new Cropper(_img, computedCutCropperOption.value);
-      } else {
-        clearAllCutEffect();
+  if (isCut.value) {
+    if (props.multiple) {
+      console.warn(cannotSupportCutMsg.value);
+    } else {
+      for (let item of _files) {
+        activeUploadFiles.value.push(item);
+        filetoDataURL(item, function (res: any) {
+          activeUploadFilesImgs.value.push(res);
+        });
       }
-    }, 200);
-    return;
+
+      innerCutVisible.value = true;
+      setTimeout(() => {
+        const _imgs: HTMLCollection =
+          document.getElementsByClassName("_lay_upload_img");
+        if (_imgs && _imgs.length > 0) {
+          const _img: HTMLImageElement = _imgs[0] as HTMLImageElement;
+          _cropper = new Cropper(_img, computedCutCropperOption.value);
+        } else {
+          clearAllCutEffect();
+        }
+      }, 200);
+      return;
+    }
   }
 
   // 关闭自动上传
