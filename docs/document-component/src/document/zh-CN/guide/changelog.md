@@ -17,6 +17,15 @@
       <ul>
         <a name="2.17-0"></a>
         <li>
+          <h3>2.17-1 <span class="layui-badge-rim">2024-04-23</span></h3>
+          <ul>
+              <li>[修复] upload组件 cut属性失效<a href="https://gitee.com/layui-vue/layui-vue/pulls/306">详情</a></li>
+          </ul>
+        </li>
+      </ul>
+      <ul>
+        <a name="2.17-0"></a>
+        <li>
           <h3>2.17-0 <span class="layui-badge-rim">2024-04-22</span></h3>
           <ul>
               <li>[新增] form组件 新增isLabelTooltip属性控制label是否超出隐藏。<a href="https://gitee.com/layui-vue/layui-vue/pulls/302">详情</a></li>
