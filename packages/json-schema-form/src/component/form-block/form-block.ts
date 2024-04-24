@@ -88,7 +88,7 @@ const getComponentSlots = (
     // 当slot[slotkey]的值为string
     if (
       typeof slotValue === "string" &&
-      LayJsonSchemaFormSlot.hasOwnProperty(slotValue)
+      Object.hasOwn(LayJsonSchemaFormSlot, slotValue)
     ) {
       slotRenders[slotKey] = LayJsonSchemaFormSlot[slotValue];
     } else if (typeof slotValue === "function") {
