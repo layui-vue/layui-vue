@@ -637,7 +637,9 @@ const checkboxProps = computed(() => {
                   {{ data[column.key] }}
                 </lay-tooltip>
 
-                <span v-else> {{ data[column.key] }} </span>
+                <span :title="data[column.key]" v-else>
+                  {{ data[column.key] }}
+                </span>
               </div>
             </td>
           </template>
