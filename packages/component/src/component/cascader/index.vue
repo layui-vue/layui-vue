@@ -2,77 +2,109 @@
   <div
     :size="size"
     :class="[
-      'layui-cascader',
       {
         'layui-cascader-opend': openState,
         'layui-cascader-disabled': disabled,
+        'layui-cascader': !panel,
+        'layui-cascader-panel': panel,
         'has-content': hasContent,
         'has-clear': allowClear,
       },
     ]"
   >
-    <lay-dropdown
-      ref="dropdownRef"
-      :trigger="trigger"
-      :autoFitMinWidth="false"
-      :updateAtScroll="true"
-      :disabled="disabled"
-      :contentClass="contentClass"
-      :contentStyle="contentStyle"
-      @show="openState = true"
-      @hide="openState = false"
-    >
-      <lay-input
-        v-if="!slots.default"
-        v-model="displayValue"
-        suffix-icon="layui-icon-triangle-d"
-        :placeholder="placeholder"
-        :allow-clear="allowClear"
-        :disabled="disabled"
-        :readonly="true"
-        :size="size"
-        @clear="onClear"
-      ></lay-input>
-
-      <div class="slot-area" v-else>
-        <slot></slot>
-      </div>
-
-      <template #content>
-        <div class="layui-cascader-panel">
-          <template v-for="(itemCol, index) in treeData">
-            <lay-scroll
-              height="180px"
-              class="layui-cascader-menu"
-              :key="'cascader-menu' + index"
-              v-if="itemCol.data.length"
-            >
-              <div
-                class="layui-cascader-menu-item"
-                v-for="(item, i) in itemCol.data"
-                :key="index + i"
-                @click="selectBar(item, i, index, 'click')"
-                :class="[
-                  {
-                    'layui-cascader-selected': itemCol.selectIndex === i,
-                  },
-                ]"
-              >
-                <slot
-                  :name="item.slot"
-                  v-if="item.slot && slots[item.slot]"
-                ></slot>
-                <template v-else>{{ item.label }}</template>
-                <i
-                  class="layui-icon layui-icon-right"
-                  v-if="item.children && item.children.length"
-                ></i>
-              </div>
-            </lay-scroll>
-          </template>
-        </div>
+    <template v-if="panel">
+      <template v-for="(itemCol, index) in treeData">
+        <lay-scroll
+          height="180px"
+          class="layui-cascader-menu layui-cascader-panel-menu"
+          :key="'cascader-menu' + index"
+          v-if="itemCol.data.length"
+        >
+          <div
+            class="layui-cascader-menu-item layui-cascader-panel-menu-item"
+            v-for="(item, i) in itemCol.data"
+            :key="index + i"
+            @click="selectBar(item, i, index, 'click')"
+            :class="[
+              {
+                'layui-cascader-selected': itemCol.selectIndex === i,
+              },
+            ]"
+          >
+            <slot :name="item.slot" v-if="item.slot && slots[item.slot]"></slot>
+            <template v-else>{{ item.label }}</template>
+            <i
+              class="layui-icon layui-icon-right"
+              v-if="item.children && item.children.length"
+            ></i>
+          </div>
+        </lay-scroll>
       </template>
-    </lay-dropdown>
+    </template>
+    <template v-else>
+      <lay-dropdown
+        ref="dropdownRef"
+        :trigger="trigger"
+        :autoFitMinWidth="false"
+        :updateAtScroll="true"
+        :disabled="disabled"
+        :contentClass="contentClass"
+        :contentStyle="contentStyle"
+        @show="openState = true"
+        @hide="openState = false"
+      >
+        <lay-input
+          v-if="!slots.default"
+          v-model="displayValue"
+          suffix-icon="layui-icon-triangle-d"
+          :placeholder="placeholder"
+          :allow-clear="allowClear"
+          :disabled="disabled"
+          :readonly="true"
+          :size="size"
+          @clear="onClear"
+        ></lay-input>
+
+        <div class="slot-area" v-else>
+          <slot></slot>
+        </div>
+
+        <template #content>
+          <div class="layui-cascader-panel">
+            <template v-for="(itemCol, index) in treeData">
+              <lay-scroll
+                height="180px"
+                class="layui-cascader-menu"
+                :key="'cascader-menu' + index"
+                v-if="itemCol.data.length"
+              >
+                <div
+                  class="layui-cascader-menu-item"
+                  v-for="(item, i) in itemCol.data"
+                  :key="index + i"
+                  @click="selectBar(item, i, index, 'click')"
+                  :class="[
+                    {
+                      'layui-cascader-selected': itemCol.selectIndex === i,
+                    },
+                  ]"
+                >
+                  <slot
+                    :name="item.slot"
+                    v-if="item.slot && slots[item.slot]"
+                  ></slot>
+                  <template v-else>{{ item.label }}</template>
+                  <i
+                    class="layui-icon layui-icon-right"
+                    v-if="item.children && item.children.length"
+                  ></i>
+                </div>
+              </lay-scroll>
+            </template>
+          </div>
+        </template>
+      </lay-dropdown>
+    </template>
   </div>
 </template>
 
@@ -101,6 +133,20 @@ export interface CascaderProps {
   contentClass?: string | Array<string | object> | object;
   contentStyle?: StyleValue;
   changeOnSelect?: boolean;
+  panel?: boolean;
+}
+
+interface CascaderElement {
+  value?: string;
+  label?: string;
+  children?: CascaderElement[];
+  orginData?: any;
+  slot?: string;
+}
+
+interface TreeData {
+  selectIndex: number | null;
+  data: CascaderElement[];
 }
 
 defineOptions({
@@ -124,6 +170,7 @@ const props = withDefaults(defineProps<CascaderProps>(), {
       children: "children",
     };
   },
+  panel: false,
 });
 
 const { size } = useProps(props);
@@ -153,7 +200,7 @@ watch(
   }
 );
 const firstInitComplete = ref(false);
-const treeData = ref<any>([]);
+const treeData = ref<Array<TreeData>>([]);
 const initTreeData = () => {
   let treeLvNum = getMaxFloor(props.options);
   for (let index = 0; index < treeLvNum; index++) {
@@ -179,7 +226,7 @@ function updateDisplayByModelValue() {
       for (let index = 0; index < valueData.length; index++) {
         const element = valueData[index];
         let selectIndex = treeData.value[index].data.findIndex(
-          (e: { value: string }) => e.value === element
+          ({ value }) => value === element
         );
         if (selectIndex == -1) {
           break;
@@ -251,11 +298,14 @@ const selectBar = (
     treeData.value[parentIndex + 1].data = findData(item.children, 1);
   }
   //把数组里后面的数据清空
-  let nextIndex = parentIndex + 2;
-  for (let index = nextIndex; index < treeData.value.length; index++) {
-    treeData.value[index].selectIndex = null;
-    treeData.value[index].data = [];
-  }
+  treeData.value
+    .filter((_, i) => {
+      return i > parentIndex + 2;
+    })
+    .forEach((e) => {
+      e.selectIndex = null;
+      e.data = [];
+    });
   if (
     !item.children ||
     item.children.length === 0 ||
@@ -264,13 +314,27 @@ const selectBar = (
     //触发交互条件，（无子项或者子项长度为0）|| （开启了changeOnSelect选项并且没有设置onlyLastLevel）
     //输入框数据更新
     let data: any[] = [];
-    function extractData(orginData: any, dataContainer: any, index: number) {
+    function extractData(
+      orginData: TreeData[],
+      dataContainer: CascaderElement[],
+      index: number
+    ) {
       const element = orginData[index].data;
       const selectIndex = orginData[index].selectIndex;
-      const selectData = element[selectIndex];
+      const selectData = element[selectIndex || 0];
       selectData && dataContainer.push(selectData);
       if (selectData && selectData.children && selectData.children.length > 0) {
         extractData(orginData, dataContainer, index + 1);
+      } else {
+        // 当没有子项的时候，清空该项后面的数据
+        orginData
+          .filter((_, i) => {
+            return i > index;
+          })
+          .forEach((e) => {
+            e.selectIndex = null;
+            e.data = [];
+          });
       }
     }
     extractData(treeData.value, data, 0);

@@ -703,6 +703,71 @@ const options3=[
 
 :::
 
+::: title Cascader 面板
+:::
+::: demo 可以设置 `panel` 为 `true` 来创建一个级联选择器面板。请打开控制台查看输出。
+<template>
+  <lay-cascader :panel="true" :options="options4" @change="onLocaleSelect"></lay-cascader>
+</template>
+
+<script setup>
+  const options4 = [
+	{label: "北京", value: '010000'},
+	{label: "广西壮族自治区", value: '450000', children: [
+        {label: "南宁", value: '450100', children: [
+            {label: "市辖区", value: '450101'},
+            {label: "兴宁区", value: '450102'},
+            {label: "青秀区", value: '450103'},
+            {label: "江南区", value: '450105'},
+            {label: "西乡塘区", value: '450107'},
+            {label: "良庆区", value: '450108'},
+            {label: "邕宁区", value: '450109'},
+            {label: "武鸣区", value: '450122'},
+            {label: "隆安县", value: '450123'},
+            {label: "马山县", value: '450124'},
+            {label: "上林县", value: '450125'},
+            {label: "宾阳县", value: '450126'},
+            {label: "横县", value: '450127'},
+        ]},
+		{label: "柳州", value: '450200', children: [
+			{label: "市辖区", value: '450201'},
+			{label: "城中区", value: '450202'},
+			{label: "鱼峰区", value: '450203'},
+			{label: "柳南区", value: '450204'},
+			{label: "柳北区", value: '450205'},
+			{label: "柳江县", value: '450221'},
+			{label: "鹿寨县", value: '450222'},
+			{label: "融安县", value: '450223'},
+			{label: "融水苗族自治县", value: '450224'},
+			{label: "三江侗族自治县", value: '450225'},
+		]},
+		{label: "桂林", value: '450300', children: [
+			{label: "市辖区", value: '450301'},
+			{label: "秀峰区", value: '450302'},
+			{label: "叠彩区", value: '450303'},
+			{label: "象山区", value: '450304'},
+			{label: "七星区", value: '450305'},
+			{label: "雁山区", value: '450311'},
+			{label: "临桂区", value: '450312'},
+			{label: "阳朔县", value: '450321'},
+			{label: "灵川县", value: '450322'},
+			{label: "全州县", value: '450323'},
+			{label: "兴安县", value: '450324'},
+			{label: "永福县", value: '450325'},
+			{label: "灌阳县", value: '450326'},
+			{label: "龙胜各族自治县", value: '450327'},
+			{label: "资源县", value: '450328'},
+			{label: "平乐县", value: '450329'},
+			{label: "荔浦县", value: '450330'},
+			{label: "恭城瑶族自治县", value: '450331'},
+		]},
+	]}
+  ];
+
+  const onLocaleSelect = (ev) => console.log(ev);
+</script>
+:::
+
 ::: title Cascader 属性
 :::
 
@@ -721,6 +786,7 @@ const options3=[
 | contentStyle             | 内容自定义样式     | `StyleValue` | -- | -- |
 | contentClass             | 内容自定义Class    | `string` `Array<string \| object>` `object` | -- | -- |
 | disabled | 禁用 | `boolean`  |--  |--  |
+| panel | 显示为级联面板 | `boolean` | `false` `true` | `false` |
 :::
 
 ::: title Cascader 事件
