@@ -280,10 +280,7 @@ const maxDisabled = computed(() => {
         @focus="onFocus"
         type="number"
       />
-      <div
-        class="layui-input-number-indicator"
-        v-if="isBlur && !!indicator"
-      >
+      <div class="layui-input-number-indicator" v-if="isBlur && !!indicator">
         {{ `${inputValue}${indicator}` }}
       </div>
     </div>
