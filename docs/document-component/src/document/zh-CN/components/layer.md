@@ -789,7 +789,7 @@ const openCallback = () => {
 | maxmin | 缩放 | boolean | `false` | `true` `false` |
 | resize | 拉伸 | boolean | `false` | `true` `false` |
 | anim | 入场动画 | number | `0` | `0` - `6` |
-| isOutAnim | 出场动画 | boolean | `true` | `true` `false` |
+| isOutAnim | 离场动画 | boolean | `true` | `true` `false` |
 | btnAlign | 按钮位置 | string | `r` | `l` `c` `r` |
 | closeBtn | 关闭按钮 | boolean string | `1` | `false` `1` `2` |
 | time | 关闭时间 | number | `0` | -- |
