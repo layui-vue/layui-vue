@@ -21,6 +21,7 @@ export interface InputNumberProps {
   position?: "right";
   min?: number;
   max?: number;
+  indicator?: string;
 }
 
 defineOptions({
@@ -35,9 +36,11 @@ const props = withDefaults(defineProps<InputNumberProps>(), {
   stepStrictly: false,
   min: -Infinity,
   max: Infinity,
+  indicator: "",
 });
 
 const { size } = useProps(props);
+const isBlur = ref(true);
 
 const emit = defineEmits([
   "update:modelValue",
@@ -201,10 +204,12 @@ const onChange = (value: string) => {
 
 const onBlur = (event: FocusEvent) => {
   emit("blur", event);
+  isBlur.value = true;
 };
 
 const onFocus = (event: FocusEvent) => {
   emit("focus", event);
+  isBlur.value = false;
 };
 
 const addition = () => {
@@ -262,6 +267,7 @@ const maxDisabled = computed(() => {
     </lay-button>
     <div class="layui-input-number-input">
       <lay-input
+        :title="`${inputValue}${indicator}`"
         :max="max"
         :min="min"
         :name="name"
@@ -274,6 +280,12 @@ const maxDisabled = computed(() => {
         @focus="onFocus"
         type="number"
       />
+      <div
+        class="layui-input-number-indicator"
+        v-if="isBlur && !!indicator"
+      >
+        {{ `${inputValue}${indicator}` }}
+      </div>
     </div>
     <lay-button
       size="lg"
