@@ -38,7 +38,7 @@ import {
 } from "./interface";
 import TeleportWrapper from "../_components/teleportWrapper.vue";
 import { useFirstElement, getScrollElements, transformPlacement } from "./util";
-import RenderFunction from "../_components/renderFunction";
+import LayRender from "../_components/render";
 
 export type DropdownTrigger = "click" | "hover" | "focus" | "contextMenu";
 
@@ -643,10 +643,7 @@ defineExpose({ show, hide, toggle });
 </script>
 
 <template>
-  <RenderFunction
-    :renderFunc="onlyChildRenderFunc"
-    v-bind="$attrs"
-  ></RenderFunction>
+  <LayRender :render="onlyChildRenderFunc" v-bind="$attrs"></LayRender>
   <TeleportWrapper :to="popupContainer" :disabled="disabledTeleport">
     <div
       v-if="openState"

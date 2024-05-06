@@ -12,6 +12,7 @@ import {
 import LayCheckbox from "../checkbox/index.vue";
 import LayTooltip from "../tooltip/index.vue";
 import LayRadio from "../radio/index.vue";
+import LayRender from "../_components/render";
 import { TableEmit } from "./typing";
 
 export interface TableRowProps {
@@ -46,6 +47,7 @@ defineOptions({
 });
 
 const slot = useSlots();
+
 const emit = defineEmits(TableEmit);
 
 const props = withDefaults(defineProps<TableRowProps>(), {
@@ -537,35 +539,38 @@ const checkboxProps = computed(() => {
                     column.ellipsisTooltipTheme === 'dark' ? true : false
                   "
                 >
-                  <slot
+                  <lay-render
                     :row="data"
                     :data="data"
                     :column="column"
                     :rowIndex="index"
                     :columnIndex="columnIndex"
-                    :name="column.customSlot"
-                  ></slot>
+                    :render="column.customSlot"
+                    :slots="slot"
+                  ></lay-render>
                   <template #content>
-                    <slot
+                    <lay-render
                       :row="data"
                       :data="data"
                       :column="column"
                       :rowIndex="index"
                       :columnIndex="columnIndex"
-                      :name="column.customSlot"
-                    ></slot>
+                      :render="column.customSlot"
+                      :slots="slot"
+                    ></lay-render>
                   </template>
                 </lay-tooltip>
 
-                <slot
+                <lay-render
                   v-else
                   :row="data"
                   :data="data"
                   :column="column"
                   :rowIndex="index"
                   :columnIndex="columnIndex"
-                  :name="column.customSlot"
-                ></slot>
+                  :render="column.customSlot"
+                  :slots="slot"
+                ></lay-render>
               </div>
             </td>
           </template>
