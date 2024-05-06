@@ -311,7 +311,7 @@ importers:
   packages/json-schema-form:
     dependencies:
       '@layui/layui-vue':
-        specifier: workspace:*
+        specifier: 2.17.2
         version: link:../component
 
   packages/layer:
