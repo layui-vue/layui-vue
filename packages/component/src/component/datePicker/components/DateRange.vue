@@ -185,6 +185,7 @@
 </template>
 
 <script lang="ts" setup>
+import type { Dayjs } from "dayjs";
 import { computed, inject, reactive, ref, watch } from "vue";
 import { provideType } from "../interface";
 import { setDateList } from "../day";
@@ -196,6 +197,8 @@ import MonthPanel from "./MonthPanel.vue";
 import LayDropdown from "../../dropdown/index.vue";
 import dayjs from "dayjs";
 import { useI18n } from "../../../language";
+import { isString } from "../../../utils";
+
 export interface DateRangeProps {
   startTime: string;
   endTime: string;
@@ -231,6 +234,25 @@ const MONTH_NAME = computed(() => [
   t("datePicker.december"),
 ]);
 
+const formatDayHMS = (v: string) => dayjs(`2020-01-01 ${v}`);
+
+const setDefaultTime = (before = true): Dayjs | undefined => {
+  if (!datePicker.defaultTime) return;
+
+  if (Array.isArray(datePicker.defaultTime)) {
+    if (isString(datePicker.defaultTime[0]) && before) {
+      return formatDayHMS(datePicker.defaultTime[0]);
+    }
+    if (isString(datePicker.defaultTime[1]) && !before) {
+      return formatDayHMS(datePicker.defaultTime[1]);
+    }
+  }
+
+  if (isString(datePicker.defaultTime)) {
+    return formatDayHMS(datePicker.defaultTime);
+  }
+};
+
 const prevDateList = ref<any>([]);
 const nextDateList = ref<any>([]);
 const startTime = reactive({
@@ -238,9 +260,15 @@ const startTime = reactive({
   month: props.startTime ? dayjs(props.startTime).month() : dayjs().month(),
   day: props.startTime ? dayjs(props.startTime).startOf("day").valueOf() : -1,
   hms: {
-    hh: props.startTime ? dayjs(props.startTime).hour() : 0,
-    mm: props.startTime ? dayjs(props.startTime).minute() : 0,
-    ss: props.startTime ? dayjs(props.startTime).second() : 0,
+    hh: props.startTime
+      ? dayjs(props.startTime).hour()
+      : setDefaultTime()?.hour() || 0,
+    mm: props.startTime
+      ? dayjs(props.startTime).minute()
+      : setDefaultTime()?.minute() || 0,
+    ss: props.startTime
+      ? dayjs(props.startTime).second()
+      : setDefaultTime()?.second() || 0,
   },
 });
 const endTime = reactive({
@@ -248,9 +276,15 @@ const endTime = reactive({
   month: props.endTime ? dayjs(props.endTime).month() : dayjs().month(),
   day: props.endTime ? dayjs(props.endTime).startOf("day").valueOf() : -1,
   hms: {
-    hh: props.endTime ? dayjs(props.endTime).hour() : 0,
-    mm: props.endTime ? dayjs(props.endTime).minute() : 0,
-    ss: props.endTime ? dayjs(props.endTime).second() : 0,
+    hh: props.endTime
+      ? dayjs(props.endTime).hour()
+      : setDefaultTime(false)?.hour() || 0,
+    mm: props.endTime
+      ? dayjs(props.endTime).minute()
+      : setDefaultTime(false)?.minute() || 0,
+    ss: props.endTime
+      ? dayjs(props.endTime).second()
+      : setDefaultTime(false)?.second() || 0,
   },
 });
 const hoverDate = ref(-1);

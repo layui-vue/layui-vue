@@ -26,4 +26,5 @@ export type provideType = {
   timestamp: boolean;
   max: string;
   min: string;
+  defaultTime: string | string[];
 };

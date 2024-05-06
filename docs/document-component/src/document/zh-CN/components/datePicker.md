@@ -235,6 +235,10 @@ export default {
       modelValue:{{rangeTime2}}
     </lay-space>
     <lay-space>
+      <lay-date-picker v-model="rangeTime5" range :default-time="defaultTime1" type="datetime" :placeholder="['开始日期','结束日期']"></lay-date-picker>
+      default-time: 12:30:00
+    </lay-space>
+    <lay-space>
       <lay-date-picker  v-model="rangeTime3" range type="yearmonth" :placeholder="['开始日期','结束日期']"></lay-date-picker>
       modelValue:{{rangeTime3}}
     </lay-space>
@@ -251,6 +255,9 @@ const rangeTime1 = ref([]);
 const rangeTime2 = ref(['2001-01-01 01:01:00','2001-02-1 01:01:00']);
 const rangeTime3 = ref(['2022-01-01','2023-02-1']);
 const rangeTime4 = ref(['01:01:00', '03:03:03']);
+const rangeTime5 = ref([]);
+
+const defaultTime1 = '12:30:00'
 </script>
 
 :::
@@ -391,6 +398,7 @@ export default {
 | suffix-icon  | 后置图标                                     | `string`                                    | --                  | 内置图标集                                          | `1.4.0` |
 | timestamp    | 时间戳模式(13 位),仅对 date 和 datetime 有效 | `boolean`                                   | `false`             | `true` `false`                                      | `1.6.5` |
 | format       | 输出格式化                                   | `string`                                    | --                  | 例如`YYYY-MM-DD`                                    | -       |
+| default-time | 范围日期 `type=datetime` 时分秒默认时间        | `string` `Array<string>`                    | --                  | 例如`12:30:00`                               | `2.17.2`       |
 | contentStyle | 内容自定义样式                               | `StyleValue`                                | --                  | --                                                  | --      |
 | contentClass | 内容自定义 Class                             | `string` `Array<string \| object>` `object` | --                  | --                                                  | --      |
 

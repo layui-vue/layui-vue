@@ -57,7 +57,7 @@
     "@vueuse/core": "8.7.3",
     "async-validator": "^4.1.1",
     "cropperjs": "^1.5.12",
-    "dayjs": "^1.11.7",
+    "dayjs": "^1.11.10",
     "evtd": "^0.2.3",
     "jsbarcode": "3.11.5",
     "qrcode": "1.5.0",
