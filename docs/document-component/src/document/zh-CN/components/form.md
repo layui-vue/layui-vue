@@ -14,10 +14,10 @@
 
 <template>
   <lay-form :model="model">
-    <lay-form-item label="账户" prop="username">
+    <lay-form-item label="账户" prop="username" tips="账户是您的登录凭据，可以在注册电子邮件中找到">
       <lay-input v-model="model.username"></lay-input>
     </lay-form-item>
-    <lay-form-item label="密码" prop="password">
+    <lay-form-item label="密码" prop="password" tips="密码应当包含字母、数字和特殊符号中的任意两种">
       <lay-input v-model="model.password" type="password"></lay-input>
     </lay-form-item>
     <lay-form-item label="描述" prop="desc">
@@ -919,6 +919,7 @@ const submit10 = function(isValidate, model, errors) {
 | error-message          | 表单校验失败固定提示语                                                                 | `string`          | --                   | --      |
 | mode                   | 表单项显示的模式，`块元素` / `行元素`                                                  | `string`          | `block` `inline`     | `block` |
 | size                   | 尺寸                                    | --          | --    | -- |
+| tips | 表单项说明 | `string` | - | - |
 :::
 
 ::: title 表单项(form-item)方法
