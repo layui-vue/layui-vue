@@ -32,7 +32,7 @@
           >
           <span
             >{{ t("home.download") }}：<em class="site-showdowns"
-              >155,129</em
+              >181,892</em
             ></span
           >
         </div>
@@ -43,7 +43,7 @@
             rel="nofollow"
             class="site-star"
           >
-            <i class="layui-icon"></i> Star <cite id="getStars">2807</cite>
+            <i class="layui-icon"></i> Star <cite id="getStars">2920</cite>
           </a>
           <a
             href="https://gitee.com/layui/layui-vue"
@@ -213,7 +213,7 @@
         <lay-col :md="3" :xs="6">
           <lay-tooltip content="流之云" position="top">
             <a
-              style="height: 40px;width: 40px; display: inline-block"
+              style="height: 40px; width: 40px; display: inline-block"
               href="https://gitee.com/ntdgg/tpflow"
               target="_blank"
             >
