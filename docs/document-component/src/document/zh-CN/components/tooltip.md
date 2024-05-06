@@ -180,6 +180,8 @@ const changeText = () => {
 | visible     | 控制显示/隐藏| `true` `false`(默认值)| `boolean` | `false` | `true` `false` |
 | enterable   | 鼠标能否进入 tooltip 中 | `boolean` | `true` | `true` `false`|
 | trigger     | 触发方式 | `string` | `hover` | `click` `hover` `contextmenu` `focus` `trigger[]`| 
+| popperClass     | popper类名 | `string` `array` `object`  |  | | 
+| popperStyle     | popper样式 | `string` `object` |  | | 
 
 :::
 
