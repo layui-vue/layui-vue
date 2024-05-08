@@ -136,13 +136,15 @@
 
 :::
 
-::: title 精度
+::: title 精度与后缀
 :::
 
-::: demo `precision` 设置 precision 属性可以控制数值精度，接收一个 Number。
+::: demo `precision` 设置 precision 属性可以控制数值精度，接收一个 Number。可以同时使用 `indicator` 设置一个后缀。
 
 <template>
   <lay-input-number v-model="data12" :precision="2" :step="0.1" :max="10"></lay-input-number>
+  <lay-input-number v-model="data12" :precision="2" :step="0.1" :max="10" indicator="%"></lay-input-number>
+  <lay-input-number v-model="data12" :precision="2" :step="0.1" :max="10" indicator="时" position="right"></lay-input-number>
 </template>
 
 <script>
@@ -208,6 +210,7 @@
 | min     | 最小可输入的数 | `number` | --     |
 | max     | 最大可输入的数 | `number` | --     |
 | size     | 尺寸, 可选值`md` / `sm` / `xs`| `string` | 默认为最大尺寸   |
+| indicator | 后缀标识 | `string` | --     |
 
 :::
 

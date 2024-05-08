@@ -29,6 +29,7 @@ defineOptions({
 
 const props = withDefaults(defineProps<FormItemProps>(), {
   // mode: "block",
+  tips: "",
 });
 
 export type FormItemProps = _FormItemProps;
@@ -286,6 +287,9 @@ const getMarginLeft = computed(() => {
       <div ref="slotParent">
         <slot :props="{ ...props, model: layForm.model }"></slot>
       </div>
+      <span v-if="tips" class="layui-form-tips">
+        {{ tips }}
+      </span>
       <span
         v-if="errorStatus"
         :class="[

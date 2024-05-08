@@ -998,6 +998,10 @@ const getCheckDataInner = (
   });
 };
 
+const handleToolbarFilterCheck = (value: string[], column: any) => {
+  column.hide = !value.some((v) => v === column.key);
+};
+
 defineExpose({ getCheckData });
 </script>
 
@@ -1032,6 +1036,7 @@ defineExpose({ getCheckData });
                 :disabled="column.children"
                 :key="column.key"
                 :value="column.key"
+                @change="(value: string[]) => handleToolbarFilterCheck(value, column)"
                 >{{ column.title }}</lay-checkbox
               >
             </div>

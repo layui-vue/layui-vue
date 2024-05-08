@@ -11,4 +11,5 @@ export interface FormItemProps {
   required?: boolean;
   requiredErrorMessage?: string;
   size?: string;
+  tips?: string;
 }

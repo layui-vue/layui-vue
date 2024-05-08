@@ -2,7 +2,7 @@
 import "./index.less";
 import { LayIcon } from "@layui/icons-vue";
 import tabItem from "../tabItem/index.vue";
-import RenderFunction from "../_components/renderFunction";
+import LayRender from "../_components/render";
 import {
   Component,
   computed,
@@ -405,12 +405,12 @@ provide("active", active);
           @click.stop="change(child.id)"
         >
           <span>
-            <RenderFunction
+            <LayRender
               v-if="child['icon']"
-              :renderFunc="renderTabIcon"
+              :render="renderTabIcon"
               :tabData="child"
             />
-            <RenderFunction :renderFunc="renderTabTitle" :tabData="child" />
+            <LayRender :render="renderTabTitle" :tabData="child" />
           </span>
           <i
             v-if="allowClose && child.closable != false"

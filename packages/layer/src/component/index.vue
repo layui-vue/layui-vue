@@ -579,7 +579,7 @@ const enterActiveClass = computed(() => {
   if (type === 6) {
     return getNotifyAnimationClass(props.offset);
   }
-  return `layer-anim layer-anim-0${props.anim}`;
+  return `layer-anim-0${props.anim}`;
 });
 
 /**

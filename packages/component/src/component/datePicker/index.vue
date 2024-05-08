@@ -150,6 +150,7 @@ export interface DatePickerProps {
   contentClass?: string | Array<string | object> | object;
   contentStyle?: StyleValue;
   format?: string;
+  defaultTime?: string | string[];
 }
 
 defineOptions({
@@ -450,5 +451,6 @@ provide("datePicker", {
   timestamp: props.timestamp,
   min: props.min,
   max: props.max,
+  defaultTime: props.defaultTime,
 });
 </script>

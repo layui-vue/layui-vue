@@ -62,3 +62,7 @@ export const isFunction = (val: unknown): val is Function =>
 export const isUndefined = (val: any): val is undefined => val === undefined;
 
 export const isNumber = (val: any): val is number => typeof val === "number";
+
+export const isString = (val: any): val is string => typeof val === "string";
+export const isDate = (val: Date): boolean =>
+  val instanceof Date && !isNaN(val.valueOf());

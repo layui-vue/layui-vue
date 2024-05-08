@@ -1013,7 +1013,7 @@ export default {
 
 ### <div id="tableColumn"></div>
 
-::: title Table 数据
+::: title TableColumns
 :::
 
 ::: table
@@ -1022,7 +1022,7 @@ export default {
 | -------------------- | ------------------------------ | ------------------------------ | ------- | --------------------------- | -------- |
 | title                | 列标题                         | --                             | --      | --                          | --       |
 | key                  | 数据字段                       | --                             | --      | --                          | --       |
-| customSlot           | 自定义插槽                     | --                             | --      | --                          | --       |
+| customSlot           | 自定义插槽                     | `string` `function` 参数{row, data, column, rowIndex, columnIndex}    | --      | --                          | `2.17.2`新增`function`       |
 | width                | 宽度                           | --                             | --      | --                          | --       |
 | minWidth             | 最小宽度                       | --                             | `100px` | --                          | --       |
 | sort                 | 排序                           | --                             | --      | --                          | --       |
@@ -1036,6 +1036,8 @@ export default {
 | resize               | 单元格列宽拖动                 | `boolean`                      | `false` | `true` `false`              | `1.9.4`  |
 | hide                 | 默认是否隐藏                   | `boolean`                      | `false` | `true` `false`              | `1.9.4`  |
 | ignoreExport         | 忽略导出                       | `boolean`                      | `false` | `true` `false`              | `2.10.0` |
+| totalRow         | 开启统计(传`number` `string`则直接展示)                       | `boolean` `string` `number`   | `false` |               |  |
+| totalRowMethod   | 自定义统计                       | `function` 参数{column, dataSource }  |  |           |  |
 
 :::
 
