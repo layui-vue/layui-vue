@@ -148,6 +148,16 @@ const layer = {
     };
     return layer.create(option, defaultOption, callback);
   },
+  // 输入层
+  prompt: (option: any = {}, callback?: Function) => {
+    option.type = 7;
+    const defaultOption = {
+      type: "prompt",
+      shadeClose: false,
+      shadeOpacity: "0.2",
+    };
+    return layer.create(option, defaultOption, callback);
+  },
   // 创建弹出层
   create: (option: any, defaultOption: any, callback?: Function) => {
     // 销毁定时
@@ -275,4 +285,4 @@ export { layer, LayLayer };
 
 export default { install };
 
-import "./theme/index.css";
+import "./theme/index.less";

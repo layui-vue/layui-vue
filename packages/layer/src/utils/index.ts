@@ -2,15 +2,15 @@ import { layer } from "../index";
 
 // 随机数
 export function nextId() {
-  var s: any = [];
-  var hexDigits = "0123456789abcdef";
-  for (var i = 0; i < 36; i++) {
+  const s: any = [];
+  const hexDigits = "0123456789abcdef";
+  for (let i = 0; i < 36; i++) {
     s[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1);
   }
   s[14] = "4";
   s[19] = hexDigits.substr((s[19] & 0x3) | 0x8, 1);
   s[8] = s[13] = s[18] = s[23] = "-";
-  var uuid = s.join("");
+  const uuid = s.join("");
   return uuid.replaceAll("-", "");
 }
 
@@ -101,7 +101,7 @@ export function calculateDrawerArea(
  * @return { Array } 正确位置
  */
 export function calculateOffset(offset: any, area: any, type: any) {
-  var arr = [
+  const arr = [
     "t",
     "r",
     "b",
@@ -115,7 +115,7 @@ export function calculateOffset(offset: any, area: any, type: any) {
     "rb",
     "br",
   ];
-  var tls = [];
+  const tls = [];
 
   if (offset === "auto" && type == 4) {
     offset = "r";
@@ -197,6 +197,9 @@ export function calculateType(modalType: number | string) {
   } else if (modalType === "notify" || modalType == 6) {
     // 消息通知
     return 6;
+  } else if (modalType === "prompt" || modalType == 7) {
+    // 输入层
+    return 7;
   }
   return 0;
 }
@@ -291,18 +294,18 @@ export function getPosition(dom: any) {
 // 元素宽高
 export function getArea(dom: any) {
   // @ts-ignore
-  let width = getComputedStyle(dom, null).width;
+  const width = getComputedStyle(dom, null).width;
   // @ts-ignore
-  let height = getComputedStyle(dom, null).height;
+  const height = getComputedStyle(dom, null).height;
   return [width, height];
 }
 
 // 最小化的队列
-let minArrays: Array<String> = [];
+const minArrays: Array<String> = [];
 
 // 更新最小化队列
 export function updateMinArrays(id: string, state: Boolean) {
-  var i = 0;
+  let i = 0;
   if (state) {
     const index = minArrays.findIndex((v) => v === undefined);
     if (index === -1) {
@@ -322,7 +325,7 @@ export function updateMinArrays(id: string, state: Boolean) {
 /**
  * 根据 offset 返回 anim 动画
  */
-export function getDrawerAnimationClass(offset: any, isClose: boolean = false) {
+export function getDrawerAnimationClass(offset: any, isClose = false) {
   const suffix = ["rl"];
   const prefix = "layer-drawer-anim layer-anim";
   if (offset === "l" || offset === "lt" || offset === "lb") {
@@ -344,7 +347,7 @@ export async function calculatePhotosArea(
   url: string,
   options: object
 ): Promise<Array<string>> {
-  let img = new Image();
+  const img = new Image();
   img.src = url;
   return new Promise((resolve, reject) => {
     if (img.complete) {
@@ -364,11 +367,11 @@ export async function calculatePhotosArea(
   });
 
   function area(img: { width: number; height: number }) {
-    var imgarea = [img.width, img.height];
-    var winarea = [window.innerWidth - 250, window.innerHeight - 250];
+    const imgarea = [img.width, img.height];
+    const winarea = [window.innerWidth - 250, window.innerHeight - 250];
     //如果 实际图片的宽或者高比 屏幕大（那么进行缩放）
     if (imgarea[0] > winarea[0] || imgarea[1] > winarea[1]) {
-      let wh = [imgarea[0] / winarea[0], imgarea[1] / winarea[1]]; //取宽度缩放比例、高度缩放比例
+      const wh = [imgarea[0] / winarea[0], imgarea[1] / winarea[1]]; //取宽度缩放比例、高度缩放比例
       if (wh[0] > wh[1]) {
         //取缩放比例最大的进行缩放
         imgarea[0] = imgarea[0] / wh[0];
@@ -400,19 +403,19 @@ function compareElementId(
 
 // 计算Notify位置 队列 此处先暂时定义Notify的间距为15px
 export function calculateNotifOffset(offset: any, area: any, layerId: string) {
-  let arr = ["lt", "lb", "rt", "rb"];
+  const arr = ["lt", "lb", "rt", "rb"];
   let t = "0",
     l = "0";
   // 间隙
-  let transOffsetLeft = 15;
+  const transOffsetLeft = 15;
   let transOffsetTop = 15;
   (window as any).NotifiyQueen = (window as any).NotifiyQueen || [];
-  let notifiyQueen = (window as any).NotifiyQueen;
+  const notifiyQueen = (window as any).NotifiyQueen;
   if (typeof offset != "string" || arr.indexOf(offset) === -1) {
     offset = "rt";
   }
   // 当前区域元素集合
-  let nodeList = notifiyQueen.filter((e: { offset: any }) => {
+  const nodeList = notifiyQueen.filter((e: { offset: any }) => {
     if (e.offset === offset) {
       return e;
     }
@@ -427,7 +430,7 @@ export function calculateNotifOffset(offset: any, area: any, layerId: string) {
       transOffsetTop +=
         prevNode.offsetHeight + parseFloat(prevNode.style["top"]);
     } else {
-      let bottom = parseFloat(prevNode.style["top"].split(" - ")[1]);
+      const bottom = parseFloat(prevNode.style["top"].split(" - ")[1]);
       transOffsetTop += prevNode.offsetHeight + bottom;
     }
   } else {
@@ -462,29 +465,29 @@ export function calculateNotifOffset(offset: any, area: any, layerId: string) {
 //移除Notify队列中某项，并且重新计算其他Notify位置
 export function removeNotifiyFromQueen(layerId: string) {
   // 间隙
-  let transOffsetTop = 15;
+  const transOffsetTop = 15;
   // 删除项的高度
-  let notifiyDom = compareElementId("layui-layer", layerId) as HTMLElement;
-  let offsetHeight = notifiyDom.offsetHeight;
+  const notifiyDom = compareElementId("layui-layer", layerId) as HTMLElement;
+  const offsetHeight = notifiyDom.offsetHeight;
   (window as any).NotifiyQueen = (window as any).NotifiyQueen || [];
-  let notifiyQueen = (window as any).NotifiyQueen;
-  let index = notifiyQueen.findIndex((e: { id: string }) => e.id === layerId);
-  let offsetType = notifiyQueen[index].offset;
-  let list = notifiyQueen.filter((e: { offset: any }) => {
+  const notifiyQueen = (window as any).NotifiyQueen;
+  const index = notifiyQueen.findIndex((e: { id: string }) => e.id === layerId);
+  const offsetType = notifiyQueen[index].offset;
+  const list = notifiyQueen.filter((e: { offset: any }) => {
     if (e.offset === offsetType) {
       return e;
     }
   });
-  let findIndex = list.findIndex((e: { id: string }) => e.id === layerId);
+  const findIndex = list.findIndex((e: { id: string }) => e.id === layerId);
   // //得到需要修改的定位的Notifiy集合
-  let needCalculatelist = list.slice(findIndex + 1);
+  const needCalculatelist = list.slice(findIndex + 1);
   needCalculatelist.forEach((e: { id: string }) => {
-    let dom = compareElementId("layui-layer", e.id) as HTMLElement;
+    const dom = compareElementId("layui-layer", e.id) as HTMLElement;
     if (offsetType === "rt" || offsetType === "lt") {
       dom.style["top"] =
         parseFloat(dom.style["top"]) - transOffsetTop - offsetHeight + "px";
     } else {
-      let bottom =
+      const bottom =
         parseFloat(dom.style["top"].split(" - ")[1]) -
         transOffsetTop -
         offsetHeight;

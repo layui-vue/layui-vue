@@ -22,6 +22,7 @@
     <lay-button type="primary" @click="openDrawer">抽屉</lay-button>
     <lay-button type="primary" @click="openNotify">通知</lay-button>
     <lay-button type="primary" @click="openPhotos">相册</lay-button>
+    <lay-button type="primary" @click="openPrompt">输入层</lay-button>
 </template>
 
 <script>
@@ -90,6 +91,33 @@ const openPage = function() {
         title: "组件页面",
         content: h(Children, { data: openPageData })
     })
+}
+
+const openPrompt = function() {
+    layer.prompt({
+        title: "请输入密码",
+        formType: "password",
+        value: "123",
+        maxLength: 32,
+        yes (layero, data) {
+            layer.msg("你输入了：" + data);
+            layer.close(layero);
+        }
+    });
+
+    layer.prompt({
+        title: "输入内容",
+        formType: "textarea",
+        value: "SomeContent",
+        btn: [
+            {
+                text: "Click me!", callback(layero, data) {
+                    console.log(layero, data);
+                    layer.msg(data);
+                }
+            }
+        ]
+    });
 }
 </script>
 
@@ -184,15 +212,15 @@ const openConfirm1 = function() {
 }
 
 const openConfirm2 = function() {
-    layer.confirm("你如何看待 layui-vue 的发布", 
+    layer.confirm("你如何看待 layui-vue 的发布",
         {
             btn: [
-                {text:'站着看', callback: (id) => { 
-                    layer.msg("站着看"); 
+                {text:'站着看', callback: (id) => {
+                    layer.msg("站着看");
                     layer.close(id); }
                 },
-                {text:'坐着看', callback: (id) => { 
-                    layer.msg("坐着看"); 
+                {text:'坐着看', callback: (id) => {
+                    layer.msg("坐着看");
                     layer.close(id); }
                 }
             ]
@@ -203,7 +231,7 @@ const openConfirm2 = function() {
 
 :::
 
-::: title 通知消息 
+::: title 通知消息
 :::
 
 ::: demo 通过 layer.notify(options) 创建通知消息。
@@ -315,7 +343,7 @@ const groupImg = function() {
   })
 }
 </script>
-::: 
+:::
 
 ::: title 加载弹层
 :::
@@ -379,7 +407,7 @@ const openBase = function() {
         type: 1,
         title: "标题",
         content: "内容"
-    })    
+    })
 }
 
 const openSize = function() {
@@ -388,7 +416,7 @@ const openSize = function() {
         title: "标题",
         area: ['400px','400px'],
         content: "内容"
-    })     
+    })
 }
 
 const openOffset = function() {
@@ -434,7 +462,7 @@ const openResize = function() {
         title: "标题",
         resize: true,
         content: "内容"
-    })    
+    })
 }
 
 const openIndex = function() {
@@ -452,7 +480,7 @@ const openClose2 = function() {
         closeBtn: "2",
         title: "其他关闭",
         content: "内容"
-    })    
+    })
 }
 
 const openAuto = function() {
@@ -461,7 +489,7 @@ const openAuto = function() {
         title: "标题",
         isHtmlFragment: true,
         content: "<img src='https://img2.baidu.com/it/u=3080567934,982100974&fm=253&fmt=auto&app=120&f=JPEG?w=1047&h=461' />"
-    })    
+    })
 }
 </script>
 :::
@@ -600,7 +628,7 @@ const openRightDrawer = function() {
 
 <script setup>
 import { layer } from  "@layui/layui-vue"
-    
+
 const featureVisible1 = ref(false);
 
 const changeFeatureVisible1 = () => {
@@ -650,7 +678,7 @@ const openComponent1 = () => {
 
 :::
 
-::: demo 查看 [Children2.vue](https://layui-vue.gitee.io/sandbox-vue/#eNqNksFum0AQhl9lxAWsYmPnSG2UKOoTtLfSA4Yh3hZ2VzC4sRDnSO2h1x6jPkQP7esklfoWnQXWAaWHcGJmv5n9d+ZvnSutV8cGndDZEpa6SAijWAJs9w2RknCZFiL9tIsdpVFeq1IriZIuYid6+PX14ffPbTCAQ5GQuiGgk0auILyl2IHjslQZFpyQTbnnRMDsNpjcxmGdVkITFIm8MZU1YzVSo/lU8J0VQQsVJimJI/pw8DnIoYO8UiW4rN+dcEVywup8eMlhI4I+uZyR1wdRZBXKd5/VyK4Cm7swQ2E0lqmSNYGulIbdWYLXdgt7ZF7VH+XeZr1ec96ezEfGjLeAXQStGVWvZ2UIr48BSFCBIbh/7u/+/vju+kOWOxFXh3DwJnr9oYn5jLKRBVDyKsu8CuvFEwC9wtUxKRpkDZPgFWws1E1avG32L26xfN6iW/Q/ZkCdWfSwWl6k4zvD5JdlolcfayXZdW08JnnlYdt1DM128NyYuarK/u/JpKPhhoitczZtkmXs1Mcv9zObvqCwbtip0ePdt7m/g/HymX2tea1h7fqxFMTTyjAXEt9wUHvvXVbk+i63dz9MnMLZuT2gr/Z6fBikRbn0/6jpadHJ1I0+OhUIdcpuyzhj3jCUam4v5E0Im7W+fW33ZejI6f4B7opkgw==), 通过 h() 函数的第二个参数声明 onXxx() 形式的函数完成 Children2.vue 的事件监听。 
+::: demo 查看 [Children2.vue](https://layui-vue.gitee.io/sandbox-vue/#eNqNksFum0AQhl9lxAWsYmPnSG2UKOoTtLfSA4Yh3hZ2VzC4sRDnSO2h1x6jPkQP7esklfoWnQXWAaWHcGJmv5n9d+ZvnSutV8cGndDZEpa6SAijWAJs9w2RknCZFiL9tIsdpVFeq1IriZIuYid6+PX14ffPbTCAQ5GQuiGgk0auILyl2IHjslQZFpyQTbnnRMDsNpjcxmGdVkITFIm8MZU1YzVSo/lU8J0VQQsVJimJI/pw8DnIoYO8UiW4rN+dcEVywup8eMlhI4I+uZyR1wdRZBXKd5/VyK4Cm7swQ2E0lqmSNYGulIbdWYLXdgt7ZF7VH+XeZr1ec96ezEfGjLeAXQStGVWvZ2UIr48BSFCBIbh/7u/+/vju+kOWOxFXh3DwJnr9oYn5jLKRBVDyKsu8CuvFEwC9wtUxKRpkDZPgFWws1E1avG32L26xfN6iW/Q/ZkCdWfSwWl6k4zvD5JdlolcfayXZdW08JnnlYdt1DM128NyYuarK/u/JpKPhhoitczZtkmXs1Mcv9zObvqCwbtip0ePdt7m/g/HymX2tea1h7fqxFMTTyjAXEt9wUHvvXVbk+i63dz9MnMLZuT2gr/Z6fBikRbn0/6jpadHJ1I0+OhUIdcpuyzhj3jCUam4v5E0Im7W+fW33ZejI6f4B7opkgw==), 通过 h() 函数的第二个参数声明 onXxx() 形式的函数完成 Children2.vue 的事件监听。
 
 <template>
   <lay-input type="text" v-model="numb" >
@@ -671,8 +699,8 @@ const ChildrenTwo = resolveComponent('Children2')
 const openComponent2 = () => {
   layer.open({
     title: '标题',
-    content: h(ChildrenTwo, { 
-      prop, 
+    content: h(ChildrenTwo, {
+      prop,
       onAdd(res){
         numb.value = numb.value + 1;
       }, onSub(res) {
@@ -701,7 +729,7 @@ import { ref, watch } from "vue";
 import { layer } from "@layui/layui-vue"
 
 const id = ref();
-    
+
 const open = () => {
     id.value = layer.open({title:"标题",content:"内容", shade: false})
 }
@@ -709,7 +737,7 @@ const open = () => {
 const close = () => {
     layer.close(id.value)
 }
-    
+
 const closeAll = () => {
     layer.closeAll()
 }
@@ -729,11 +757,11 @@ const closeAll = () => {
 <script setup>
 import { ref, watch } from "vue";
 import { layer } from "@layui/layui-vue"
- 
+
 const openCallback = () => {
     layer.open({
         title:"标题",
-        content:"内容", 
+        content:"内容",
         maxmin: true,
         shade: false,
         min: (id) => {
@@ -771,47 +799,84 @@ const openCallback = () => {
 
 :::
 
-::: title 属性说明
+::: title API
+:::
+
+::: title 基础方法
+
+::: table
+
+| 方法 | 描述 | 参数 | 返回值 | 说明 |
+| -- | -- | -- | -- | -- |
+| `layer.open(options, callback)` | 打开模态窗 | `options` | id | 详见*基础属性* |
+| | | `callback` | | 等同于 `yes` 回调 |
+| `layer.close(id)` | 关闭指定模态窗 | `id` | -- | |
+| `layer.closeAll()` | 关闭所有模态窗 | -- | -- | |
+| `layer.reset(id)` | 重置某个模态窗的位置、大小 | `id` | -- | |
+| `layer.full(id)` | 最大化某个模态窗 | `id` | -- | |
+
+:::
+::: title 弹层方法
+
+::: table
+
+| 方法 | 描述 | 参数 | 返回值 | 说明 |
+| -- | -- | -- | -- | -- |
+| `layer.drawer(options, callback)` | 打开一个抽屉弹层 | `options` | 弹层的 `id` | 详见*基础属性* |
+| | | `callback` | | 弹层创建之后，回调中携带它的id |
+| `layer.msg(options, callback)` | 创建一个普通消息浮层 | `options` | 弹层的 `id` | 详见*基础属性* |
+| | | `callback` | | 弹层创建之后，回调中携带它的id |
+| `layer.load(options, callback)` | 创建一个加载浮层 | `options` | 弹层的 `id` | 详见*基础属性* |
+| | | `callback` | | 弹层创建之后，回调中携带它的id |
+| `layer.confirm(options, callback)` | 打开一个确认提示框 | `options` | 弹层的 `id` | 详见*基础属性* |
+| | | `callback` | | 弹层创建之后，回调中携带它的id |
+| `layer.photos(options, callback)` | 打开一个照片查看弹层 | `options` | 弹层的 `id` | 详见*基础属性* |
+| | | `callback` | | 弹层创建之后，回调中携带它的id |
+| `layer.notify(options, callback)` | 创建一个通知 | `options` | 弹层的 `id` | 详见*基础属性* |
+| | | `callback` | | 弹层创建之后，回调中携带它的id |
+| `layer.prompt(options, callback)` | 创建一个输入框 | `options` | 弹层的 `id` | 详见*基础属性* |
+| | | `callback` | | 弹层创建之后，回调中携带它的id |
+
+:::
+
+::: title 基础属性
 :::
 
 ::: table
 
-| 属性 | 描述 | 类型 | 默认值 | 可选值 |
-| -- | -- | -- | -- | -- |
-| type | 类型 | string | `1` | `0` `1` `2` `3` `4` `5` |
-| title | 标题 | string boolean | `信息` | -- |
-| titleStyle | 标题样式 | string StyleValue | -- | -- |
-| content | 内容 | string vnode | -- | -- |
-| v-model | 显示 | boolean | `false`  | `true` `false` |
-| offset | 位置 | string array | `auto` | -- |
-| area | 尺寸 | string array | `auto`  | -- |
-| move | 拖拽 | boolean | `true` | `true` `false` | 
-| maxmin | 缩放 | boolean | `false` | `true` `false` |
-| resize | 拉伸 | boolean | `false` | `true` `false` |
-| anim | 入场动画 | number | `0` | `0` - `6` |
-| isOutAnim | 出场动画 | boolean | `true` | `true` `false` |
-| btnAlign | 按钮位置 | string | `r` | `l` `c` `r` |
-| closeBtn | 关闭按钮 | boolean string | `1` | `false` `1` `2` |
-| time | 关闭时间 | number | `0` | -- |
-| shade | 遮盖层 | boolean | `true` | `true` `false` |
-| shadeClose | 遮盖层关闭 | boolean | `true` | `true` `false` |
-| shadeOpacity | 遮盖层透明度 | string | `0.1` | `0.1` - `1` |
-| shadeStyle   | 遮盖层样式   | string StyleValue |  |  |
-| isHtmlFragment | 解析 html 字符 | boolean | `false` | `true` `false` |
-| imgList | 图片数据数组 | array[{src:图片链接,alt:图片名字可选',thumb:'缩略图可选'}] | - | - |
-| startIndex | 图片初始浏览索引 | number | 0 | - |
-| full | 最大化回调 | function | - | - |
-| min | 最小化回调 | function | -  | - |
-| restore | 重置回调 | function | -  | - |
-| success | 打开回调 | function | -  | - |
-| end | 销毁回调 | function | -  | - |
-| close | 点击右上角 close 按钮 / 遮盖层的关闭回调 | function | -  | - |
-| moveOut | 是否可以拖出浏览器可视区域 | boolean | false  | true false |
-| moveStart | 拖拽开始回调  | function | -  | - |
-| moveEnd | 拖拽结束回调 | function | -  | - |
-| animDuration | 动画速率 | string | `0.3s`  | - |
- 
-:::
+| 属性 | 描述 | 类型 | 默认值 | 可选值 | 说明 |
+| -- | -- | -- | -- | -- | -- |
+| type | 类型 | string | `1` | `0` `1` `2` `3` `4` `5` `6` `7` | |
+| title | 标题 | string boolean | `信息` | -- | |
+| titleStyle | 标题样式 | string StyleValue | -- | -- | |
+| content | 内容 | string vnode | -- | -- | |
+| v-model | 显示 | boolean | `false`  | `true` `false` | |
+| offset | 位置 | string array | `auto` | -- | |
+| area | 尺寸 | string array | `auto`  | -- | |
+| move | 拖拽 | boolean | `true` | `true` `false` | |
+| maxmin | 缩放 | boolean | `false` | `true` `false` | |
+| resize | 拉伸 | boolean | `false` | `true` `false` | |
+| anim | 入场动画 | number | `0` | `0` - `6` | |
+| isOutAnim | 出场动画 | boolean | `true` | `true` `false` | |
+| btnAlign | 按钮位置 | string | `r` | `l` `c` `r` | |
+| closeBtn | 关闭按钮 | boolean string | `1` | `false` `1` `2` | |
+| time | 关闭时间 | number | `0` | -- | |
+| shade | 遮盖层 | boolean | `true` | `true` `false` | |
+| shadeClose | 遮盖层关闭 | boolean | `true` | `true` `false` | |
+| shadeOpacity | 遮盖层透明度 | string | `0.1` | `0.1` - `1` | |
+| shadeStyle   | 遮盖层样式   | string StyleValue |  |  | |
+| isHtmlFragment | 解析 html 字符 | boolean | `false` | `true` `false` | |
+| imgList | 图片数据数组 | array[{src:图片链接,alt:图片名字可选',thumb:'缩略图可选'}] | - | - | |
+| startIndex | 图片初始浏览索引 | number | `0` | - | |
+| full | 最大化回调 | function | - | - | |
+| min | 最小化回调 | function | -  | - | |
+| restore | 重置回调 | function | -  | - | |
+| success | 打开回调 | function | -  | - | |
+| end | 销毁回调 | function | -  | - | |
+| close | 点击右上角 close 按钮 / 遮盖层的关闭回调 | function | -  | - | |
+| moveOut | 是否可以拖出浏览器可视区域 | boolean | `false`  | `true` `false` | |
+| moveStart | 拖拽开始回调  | function | -  | - | |
+| moveEnd | 拖拽结束回调 | function | -  | - | |
+| animDuration | 动画速率 | string | `0.3s`  | - | |
 
-::: title 内置方法
 :::

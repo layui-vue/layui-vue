@@ -11,6 +11,7 @@ import Title from "./Header.vue";
 import HeaderBtn from "./HeaderBtn.vue";
 import Photos from "./Photos.vue";
 import Notifiy from "./Notifiy.vue";
+import Prompt from "./Prompt.vue";
 import {
   Ref,
   ref,
@@ -22,6 +23,7 @@ import {
   onMounted,
   onUnmounted,
   StyleValue,
+  reactive,
 } from "vue";
 import {
   nextId,
@@ -68,13 +70,15 @@ export interface LayerProps {
     | 4
     | 5
     | 6
+    | 7
     | "dialog"
     | "page"
     | "iframe"
     | "loading"
     | "drawer"
     | "photos"
-    | "notify";
+    | "notify"
+    | "prompt";
   content?: string | Function | object | VNodeTypes;
   isHtmlFragment?: boolean;
   shade?: boolean | string;
@@ -112,6 +116,10 @@ export interface LayerProps {
   animDuration?: string;
   teleport?: string;
   teleportDisabled?: boolean;
+  formType?: 0 | 1 | 2 | "text" | "password" | "textarea";
+  value?: string;
+  maxLength?: number;
+  placeholder?: string;
 }
 
 const props = withDefaults(defineProps<LayerProps>(), {
@@ -119,7 +127,9 @@ const props = withDefaults(defineProps<LayerProps>(), {
   titleStyle: "",
   // setTop: false,
   offset: "auto",
-  area: "auto",
+  area: () => {
+    return "auto";
+  },
   modelValue: false,
   maxmin: false,
   move: true,
@@ -158,9 +168,17 @@ const props = withDefaults(defineProps<LayerProps>(), {
   animDuration: "0.3s",
   teleport: "body",
   teleportDisabled: false,
+  formType: "text",
+  value: "",
+  placeholder: "请输入内容",
 });
 
 const emit = defineEmits(["close", "update:modelValue"]);
+
+const _content = ref("");
+// 此处刻意新增一个内部变量，因为传进来的有可能是Proxy，update的话有可能会把修改后的值更新到外面
+// eslint-disable-next-line vue/no-setup-props-destructure
+if (typeof props.value === "string") _content.value = props.value;
 
 const slots = useSlots();
 const max: Ref<boolean> = ref(false);
@@ -389,7 +407,7 @@ watch(
 const boxClasses = computed(() => {
   return [
     {
-      "layui-layer-dialog": type === 0,
+      "layui-layer-dialog": type === 0 || type === 7,
       "layui-layer-page": type === 1,
       "layui-layer-iframe": type === 2,
       "layui-layer-loading": type === 3,
@@ -512,11 +530,9 @@ const closeHandle = () => {
 
 /**
  * 确定操作
- * <p>
- * @param null
  */
-const yesHandle = () => {
-  if (props.yes != undefined) props.yes();
+const yesHandle = (...args: Array<any>) => {
+  if (props.yes != undefined) props.yes(...args);
   else closeHandle();
 };
 
@@ -820,6 +836,15 @@ defineExpose({ reset, open, close, full });
               <template v-else>{{ renderContent(props.content) }}</template>
             </template>
           </template>
+          <template v-if="type === 7">
+            <Prompt
+              v-model:_content="_content"
+              :value="_content"
+              :formType="$props.formType"
+              :maxLength="$props.maxLength"
+              :placeholder="$props.placeholder"
+            ></Prompt>
+          </template>
           <Iframe v-if="type === 2" :src="props.content"></Iframe>
           <Photos
             v-if="type === 5"
@@ -856,30 +881,39 @@ defineExpose({ reset, open, close, full });
             </div>
           </template>
           <template v-else>
+            <!-- 按钮 -->
             <div
-              v-if="((btn && btn.length > 0) || type === 0) && !isMessage"
+              v-if="
+                ((btn && btn.length > 0) || type === 0 || type === 7) &&
+                !isMessage
+              "
               class="layui-layer-btn"
               :class="[`layui-layer-btn-${btnAlign}`]"
             >
               <template v-if="btn && btn.length > 0">
-                <template v-for="(b, index) in btn" :key="index">
+                <template v-for="(b, i) in btn" :key="i">
                   <a
                     :style="b.style"
                     :class="[
                       b.class,
-                      `layui-layer-btn${index}`,
+                      `layui-layer-btn${i}`,
                       { 'layui-layer-btn-disabled': b.disabled },
                     ]"
-                    @click="!b.disabled && b.callback(id)"
+                    @click="
+                      !b.disabled &&
+                        (type === 7 ? b.callback(id, _content) : b.callback(id))
+                    "
                     >{{ b.text }}</a
                   >
                 </template>
               </template>
               <template v-else>
-                <template v-if="type === 0">
-                  <a class="layui-layer-btn0" @click="yesHandle()">{{
-                    yesText
-                  }}</a>
+                <template v-if="type === 0 || type === 7">
+                  <a
+                    class="layui-layer-btn0"
+                    @click="yesHandle(id, _content)"
+                    >{{ yesText }}</a
+                  >
                 </template>
               </template>
             </div>

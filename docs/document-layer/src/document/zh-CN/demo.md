@@ -774,6 +774,56 @@ const NotifiyInfo=function(){
 :::
 
 <fieldset class="layui-elem-field layui-field-title">
+    <legend>输入框</legend>
+</fieldset>
+
+::: demo 可以使用 `layer.prompt` 来轻松创建一个输入框。
+
+<template>
+    <button @click="clickPromptText">单行文本框</button>
+    <button @click="clickPromptPassword">单行密码框</button>
+    <button @click="clickPromptTextarea">多行文本框</button>
+</template>
+
+<script setup>
+    import { layer } from "layui-layer/src/index";
+    const clickPromptText = function () {
+        layer.prompt({
+            title: "输入点什么",
+            value: "预设文本",
+            yes(layero, data) {
+                layer.msg("你输入了：" + data);
+                layer.close(layero);
+            }
+        });
+    }
+
+    const clickPromptPassword = function () {
+        layer.prompt({
+            title: "输入点什么",
+            formType: "password",
+            yes(layero, data) {
+                layer.msg("密码是：" + data);
+                layer.close(layero);
+            }
+        });
+    }
+
+    const clickPromptTextarea = function () {
+        layer.prompt({
+            title: "输入点什么",
+            formType: "textarea",
+            yes(layero, data) {
+                layer.msg("你输入了：" + data);
+                layer.close(layero);
+            }
+        });
+    }
+</script>
+
+:::
+
+<fieldset class="layui-elem-field layui-field-title">
     <legend>销毁</legend>
 </fieldset>
 
