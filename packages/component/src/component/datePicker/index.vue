@@ -150,7 +150,7 @@ export interface DatePickerProps {
   contentClass?: string | Array<string | object> | object;
   contentStyle?: StyleValue;
   format?: string;
-  defaultTime: string | string[];
+  defaultTime?: string | string[];
 }
 
 defineOptions({

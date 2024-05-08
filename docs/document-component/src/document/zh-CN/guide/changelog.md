@@ -17,6 +17,31 @@
       <ul>
         <a name="2.17-0"></a>
         <li>
+          <h3>2.17-3 <span class="layui-badge-rim">2024-05-08</span></h3>
+          <ul>
+              <li>[修复] datePicker组件 default-time属性调整为非必填。</li>
+          </ul>
+        </li>
+      </ul>
+      <ul>
+        <a name="2.17-0"></a>
+        <li>
+          <h3>2.17-2 <span class="layui-badge-rim">2024-05-06</span></h3>
+          <ul>
+              <li>[升级] layer 升级至2.3.3。</li>
+              <li>[升级] json-schema-form 升级至1.0.7。</li>
+              <li>[新增] table组件 columns.customSlot属性新增function类型。<a href="https://gitee.com/layui-vue/layui-vue/pulls/317">详情</a></li>
+              <li>[新增] formItem组件 新增tips属性。<a href="https://gitee.com/layui-vue/layui-vue/pulls/313">详情</a></li>
+              <li>[新增] inputNumber组件 新增indicator属性。<a href="https://gitee.com/layui-vue/layui-vue/pulls/310">详情</a></li>
+              <li>[新增] datePicker组件 新增default-time属性。<a href="https://gitee.com/layui-vue/layui-vue/pulls/309">详情</a></li>
+              <li>[修复] layer 设置animDuration属性无效。<a href="https://gitee.com/layui-vue/layui-vue/pulls/303">详情</a></li>
+              <li>[修复] table组件 筛选column显示隐藏状态未与column数据绑定。<a href="https://gitee.com/layui-vue/layui-vue/pulls/308">详情</a></li>
+          </ul>
+        </li>
+      </ul>
+      <ul>
+        <a name="2.17-0"></a>
+        <li>
           <h3>2.17-1 <span class="layui-badge-rim">2024-04-23</span></h3>
           <ul>
               <li>[修复] upload组件 cut属性失效<a href="https://gitee.com/layui-vue/layui-vue/pulls/306">详情</a></li>
