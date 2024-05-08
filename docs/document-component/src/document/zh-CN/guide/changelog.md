@@ -17,6 +17,15 @@
       <ul>
         <a name="2.17-0"></a>
         <li>
+          <h3>2.17-3 <span class="layui-badge-rim">2024-05-08</span></h3>
+          <ul>
+              <li>[修复] datePicker组件 default-time属性调整为非必填。</li>
+          </ul>
+        </li>
+      </ul>
+      <ul>
+        <a name="2.17-0"></a>
+        <li>
           <h3>2.17-2 <span class="layui-badge-rim">2024-05-06</span></h3>
           <ul>
               <li>[升级] layer 升级至2.3.3。</li>
