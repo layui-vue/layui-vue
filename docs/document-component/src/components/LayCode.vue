@@ -25,7 +25,7 @@
       <i
         class="layui-icon layui-icon-component btn"
         @click="onPlayground"
-        title="在 sandbox-vue 打开"
+        title="在 Playground 打开"
       />
       <i
         class="layui-icon layui-icon-chart btn"
@@ -58,7 +58,7 @@ const onPlayground = async function () {
   const foundCode = foundCodes[0];
   const SourceCode = foundCode.textContent || "";
 
-  const { link } = await openPlayground(SourceCode, true);
+  const { link } = await openPlayground(SourceCode);
   window.open(link);
 };
 
