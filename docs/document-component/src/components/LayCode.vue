@@ -58,7 +58,7 @@ const onPlayground = async function () {
   const foundCode = foundCodes[0];
   const SourceCode = foundCode.textContent || "";
 
-  const { link } = await openPlayground(SourceCode);
+  const { link } = await openPlayground(encodeURIComponent(SourceCode));
   window.open(link);
 };
 
