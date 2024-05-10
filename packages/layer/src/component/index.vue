@@ -47,6 +47,20 @@ import { useMove, useResize } from "../composable/useDragable";
 import { nextIndex } from "../tokens";
 import "../theme/index.css";
 
+export interface LayerPhotosProps {
+  src: string;
+  alt?: string;
+  thumb?: string;
+}
+
+export interface LayerBtnProps {
+  text: string;
+  callback: Function;
+  style?: string | StyleValue | "";
+  class?: string | "";
+  disabled?: boolean;
+}
+
 export interface LayerProps {
   id?: string;
   title?: string | boolean | Function;
@@ -59,7 +73,7 @@ export interface LayerProps {
   area?: string[] | "auto";
   modelValue?: boolean;
   maxmin?: boolean | string;
-  btn?: Record<string, any>[] | false;
+  btn?: Array<LayerBtnProps> | false;
   move?: boolean | string;
   resize?: boolean | string;
   type?:
@@ -100,7 +114,7 @@ export interface LayerProps {
   isMessage?: boolean;
   appContext?: any;
   startIndex?: number;
-  imgList?: { src: string; alt: string; thumb: string }[];
+  imgList?: Array<LayerPhotosProps>;
   min?: Function;
   full?: Function;
   restore?: Function;

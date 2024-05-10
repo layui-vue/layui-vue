@@ -49,6 +49,7 @@
 </template>
 <script lang="ts">
 export default {
+  // eslint-disable-next-line vue/multi-word-component-names
   name: "Photos",
 };
 </script>
@@ -56,7 +57,7 @@ export default {
 import { watch, ref, onMounted, nextTick, computed } from "vue";
 
 export interface LayPhotoProps {
-  imgList: { src: string; alt: string; thumb: string }[];
+  imgList: { src: string; alt?: string; thumb?: string }[];
   startIndex: number;
 }
 const emit = defineEmits(["resetCalculationPohtosArea"]);
