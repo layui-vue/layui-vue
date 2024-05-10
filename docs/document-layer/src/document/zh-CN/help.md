@@ -288,6 +288,8 @@
 
 没有扩充属性。
 
+----
+
 #### `prompt`
 
 让用户输入少量内容。
@@ -311,7 +313,7 @@
 
 | 属性 | 描述 | 类型 | 默认值 | 可选值 |
 | -- | -- | -- | -- | -- |
-| *`formType`* | 表单类型 | `string` `number` | `text` | `0` `1` `2` `"text"` `"password"` `"textarea"` |
+| *`formType`* | 表单类型 | `string` `number` | `"text"` | `0` `1` `2` `"text"` `"password"` `"textarea"` |
 | *`value`* | 表单初始值 | `string` | `""` | |
 | *`maxLength`* | 最大输入长度 | `number` | | |
 | *`placeholder`* | 占位符 | `string` | `"请输入内容"` | |
