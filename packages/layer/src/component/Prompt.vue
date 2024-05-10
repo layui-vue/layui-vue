@@ -23,6 +23,7 @@ const props = withDefaults(defineProps<PromptProps>(), {
 });
 
 const data = ref(props.value);
+const isShowPassword = ref(false);
 const multiLine = computed(() => {
   switch (typeof props.formType) {
     case "string":
@@ -40,7 +41,9 @@ const onClear = () => {
   data.value = "";
   emits("update:_content", "");
 };
-const showPassword = ref(false);
+const showPassword = () => {
+  isShowPassword.value = !isShowPassword.value;
+};
 const hasContent = computed(() => data.value.length > 0);
 const emits = defineEmits(["update:_content"]);
 </script>
@@ -62,7 +65,7 @@ const emits = defineEmits(["update:_content"]);
         <input
           @input="$emit('update:_content', data)"
           :placeholder="$props.placeholder"
-          :type="isPassword ? 'password' : 'text'"
+          :type="isPassword && !isShowPassword ? 'password' : 'text'"
           v-model="data"
           :maxlength="$props.maxLength"
         />
@@ -71,7 +74,7 @@ const emits = defineEmits(["update:_content"]);
           @click="showPassword"
           v-if="isPassword && hasContent"
         >
-          <lay-icon type="layui-icon-show" v-if="isPassword"></lay-icon>
+          <lay-icon type="layui-icon-show" v-if="isShowPassword"></lay-icon>
           <lay-icon type="layui-icon-hide" v-else></lay-icon>
         </span>
         <span class="layui-input-clear" v-if="hasContent">
