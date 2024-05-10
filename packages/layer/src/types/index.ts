@@ -1,3 +1,3 @@
 export type StringObject = Record<string, unknown>;
 
-export interface InstallOptions extends StringObject {}
+export type InstallOptions = StringObject;
