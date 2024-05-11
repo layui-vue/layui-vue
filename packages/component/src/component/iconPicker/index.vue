@@ -165,7 +165,7 @@ const searchList = (str: string, container: any) => {
         {
           'layui-iconpicker-disabled': disabled,
           'has-content': hasContent,
-          'has-clear': allowClear,
+          'has-clear': !disabled && allowClear,
         },
       ]"
       :size="size"
