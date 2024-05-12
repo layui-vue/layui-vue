@@ -251,7 +251,11 @@
   .layui-input-block,
   .layui-input-inline {
     .layui-form-danger {
-      &, .layui-textarea, .layui-tag-input, .layui-input, .laydate-range-inputs {
+      &,
+      .layui-textarea,
+      .layui-tag-input,
+      .layui-input,
+      .laydate-range-inputs {
         border-color: var(--global-danger-color) !important;
       }
     }
@@ -302,16 +306,16 @@
 }
 
 .layui-form-pane .layui-input-inline {
-  margin-left: -1px
+  margin-left: -1px;
 }
 
 .layui-form-pane .layui-input-block {
   margin-left: 110px;
-  left: -1px
+  left: -1px;
 }
 
 .layui-form-pane .layui-colorpicker:first-child {
-  border-radius: 0 var(--global-border-radius) var(--global-border-radius) 0;  
+  border-radius: 0 var(--global-border-radius) var(--global-border-radius) 0;
 }
 
 .layui-form-pane .layui-iconpicker:first-child {
@@ -344,6 +348,14 @@
     margin-left: 0px !important;
     .layui-textarea {
       border-radius: 0 0 var(--global-border-radius) var(--global-border-radius);
+    }
+  }
+}
+
+.layui-form {
+  .layui-form-item {
+    .layui-date-picker {
+      width: 100%;
     }
   }
 }
