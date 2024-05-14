@@ -799,84 +799,424 @@ const openCallback = () => {
 
 :::
 
-::: title API
+::: title 基础 API
 :::
 
-::: title 基础方法
+::: describe 以下为 Layer 的基础 API
+:::
 
 ::: table
 
-| 方法 | 描述 | 参数 | 返回值 | 说明 |
-| -- | -- | -- | -- | -- |
-| `layer.open(options, callback)` | 打开模态窗 | `options` | id | 详见*基础属性* |
-| | | `callback` | | 等同于 `yes` 回调 |
-| `layer.close(id)` | 关闭指定模态窗 | `id` | -- | |
-| `layer.closeAll()` | 关闭所有模态窗 | -- | -- | |
-| `layer.reset(id)` | 重置某个模态窗的位置、大小 | `id` | -- | |
-| `layer.full(id)` | 最大化某个模态窗 | `id` | -- | |
+| 函数签名 | 描述 |
+| ------- | --- |
+| `create: (option: LayerProps, defaultOption: LayerProps, callback?: Function)` | 创建一个弹层 |
+| `open: (option: LayerProps, callback?: Function)` | 打开一个弹层 |
+| `close: (id: string)` | 关闭指定 ID 的弹层 |
+| `closeAll: ()` | 关闭当前上下文中全部的弹层 |
+| `reset: (id: string)` | 重置某个弹层的位置和大小 |
+| `full: (id: string)` | 最大化某个弹层 |
 
 :::
-::: title 弹层方法
+
+::: title 弹层 API
+:::
+
+::: describe 弹层 API 是对 `layer.open` 的封装。
+:::
+
+::: describe 全部的封装都带有扩充属性 `option`，**调用时与内部预置的 `defaultOption` 配置混合，`Option` 的配置将有更高的优先级**。
+:::
 
 ::: table
 
-| 方法 | 描述 | 参数 | 返回值 | 说明 |
-| -- | -- | -- | -- | -- |
-| `layer.drawer(options, callback)` | 打开一个抽屉弹层 | `options` | 弹层的 `id` | 详见*基础属性* |
-| | | `callback` | | 弹层创建之后，回调中携带它的id |
-| `layer.msg(options, callback)` | 创建一个普通消息浮层 | `options` | 弹层的 `id` | 详见*基础属性* |
-| | | `callback` | | 弹层创建之后，回调中携带它的id |
-| `layer.load(options, callback)` | 创建一个加载浮层 | `options` | 弹层的 `id` | 详见*基础属性* |
-| | | `callback` | | 弹层创建之后，回调中携带它的id |
-| `layer.confirm(options, callback)` | 打开一个确认提示框 | `options` | 弹层的 `id` | 详见*基础属性* |
-| | | `callback` | | 弹层创建之后，回调中携带它的id |
-| `layer.photos(options, callback)` | 打开一个照片查看弹层 | `options` | 弹层的 `id` | 详见*基础属性* |
-| | | `callback` | | 弹层创建之后，回调中携带它的id |
-| `layer.notify(options, callback)` | 创建一个通知 | `options` | 弹层的 `id` | 详见*基础属性* |
-| | | `callback` | | 弹层创建之后，回调中携带它的id |
-| `layer.prompt(options, callback)` | 创建一个输入框 | `options` | 弹层的 `id` | 详见*基础属性* |
-| | | `callback` | | 弹层创建之后，回调中携带它的id |
+| 函数签名 | 描述 |
+| ------- | --- |
+| `msg: (message: string, option: LayerProps = {}, callback?: Function)` | 消息 |
+| `drawer: (option: LayerProps, callback?: Function)` | 抽屉 |
+| `load: (load: number, option: LayerProps = {}, callback?: Function)` | 加载 |
+| `confirm: (msg: string, option: LayerProps = {}, callback?: Function)` | 确认 |
+| `photos: (option: string \| LayerProps, callback?: Function)` | 图片预览 |
+| `notify: (option: LayerProps, callback?: Function)` | 通知 |
+| `prompt: (option: LayerProps, callback?: Function)` | 输入框 |
 
 :::
 
 ::: title 基础属性
 :::
 
+::: describe 以下是 layer 支持的基础属性 `LayerProps`。根据 *`type`* 的不同，对基础属性的扩充也各不同，`(通用属性 + 回调) + 扩充属性 = LayerProps`。
+:::
+
 ::: table
 
-| 属性 | 描述 | 类型 | 默认值 | 可选值 | 说明 |
-| -- | -- | -- | -- | -- | -- |
-| type | 类型 | string | `1` | `0` `1` `2` `3` `4` `5` `6` `7` | |
-| title | 标题 | string boolean | `信息` | -- | |
-| titleStyle | 标题样式 | string StyleValue | -- | -- | |
-| content | 内容 | string vnode | -- | -- | |
-| v-model | 显示 | boolean | `false`  | `true` `false` | |
-| offset | 位置 | string array | `auto` | -- | |
-| area | 尺寸 | string array | `auto`  | -- | |
-| move | 拖拽 | boolean | `true` | `true` `false` | |
-| maxmin | 缩放 | boolean | `false` | `true` `false` | |
-| resize | 拉伸 | boolean | `false` | `true` `false` | |
-| anim | 入场动画 | number | `0` | `0` - `6` | |
-| isOutAnim | 出场动画 | boolean | `true` | `true` `false` | |
-| btnAlign | 按钮位置 | string | `r` | `l` `c` `r` | |
-| closeBtn | 关闭按钮 | boolean string | `1` | `false` `1` `2` | |
-| time | 关闭时间 | number | `0` | -- | |
-| shade | 遮盖层 | boolean | `true` | `true` `false` | |
-| shadeClose | 遮盖层关闭 | boolean | `true` | `true` `false` | |
-| shadeOpacity | 遮盖层透明度 | string | `0.1` | `0.1` - `1` | |
-| shadeStyle   | 遮盖层样式   | string StyleValue |  |  | |
-| isHtmlFragment | 解析 html 字符 | boolean | `false` | `true` `false` | |
-| imgList | 图片数据数组 | array[{src:图片链接,alt:图片名字可选',thumb:'缩略图可选'}] | - | - | |
-| startIndex | 图片初始浏览索引 | number | `0` | - | |
-| full | 最大化回调 | function | - | - | |
-| min | 最小化回调 | function | -  | - | |
-| restore | 重置回调 | function | -  | - | |
-| success | 打开回调 | function | -  | - | |
-| end | 销毁回调 | function | -  | - | |
-| close | 点击右上角 close 按钮 / 遮盖层的关闭回调 | function | -  | - | |
-| moveOut | 是否可以拖出浏览器可视区域 | boolean | `false`  | `true` `false` | |
-| moveStart | 拖拽开始回调  | function | -  | - | |
-| moveEnd | 拖拽结束回调 | function | -  | - | |
-| animDuration | 动画速率 | string | `0.3s`  | - | |
+| 属性 | 描述 | 类型 | 默认值 | 可选值 |
+| -- | -- | -- | -- | -- |
+| *`id`* | ID | `string` | | |
+| *`type`* | 类型 | `string` `number` | `1` | `0` `1` `2` `3` `4` `5` `6` `7` |
+| | | | | `"dialog"` `"page"` `"iframe"` `"loading"` |
+| | | | | `"drawer"` `"photos"` `"notify"` `"prompt"` |
+| *`icon`* | 图标 | `string` `number` | | |
+| *`title`* | 标题 | `string` `boolean` | `"信息"` | |
+| *`titleStyle`* | 标题样式 | `string` `StyleValue` | `""` |  |
+| *`skin`* | 颜色模式 | `string` | | |
+| *`zIndex`* | zIndex | `number` | | |
+| *`content`* | 内容 | `string` `VNode` | | |
+| *`v-model`* | 显示 | `boolean` | `false`  | `true` `false` |
+| *`offset`* | 位置 | `string` `array` | `"auto"` | `"auto"` `[top, left]` |
+| *`area`* | 尺寸 | `string` `array` | `"auto"`  | `"auto"` `[width, height]` |
+| *`move`* | 允许拖拽 | `boolean` | `true` | `true` `false` |
+| *`moveOut`* | 允许超出父容器 | `boolean` | `false` | `true` `false` |
+| *`maxmin`* | 允许最大化和最小化 | `boolean` | `false` | `true` `false` |
+| *`resize`* | 允许拉伸 | `boolean` | `false` | `true` `false` |
+| *`anim`* | 入场动画 | `number` | `0` | `0` - `6` |
+| *`isOutAnim`* | 出场动画 | `boolean` | `true` | `true` `false` |
+| *`animDuration`* | 动画持续时间 | `string` | `"0.3s"` | |
+| *`btn`* | 按钮 | `Array<LayerBtnProps>` `false` | | |
+| *`btnAlign`* | 按钮位置 | `string` | `"r"` | `"l"` `"c"` `"r"` |
+| *`closeBtn`* | 关闭按钮 | `boolean` `string` | `"1"` | `false` `"1"` `"2"` |
+| *`time`* | 关闭时间 | `number` | `0` | |
+| *`shade`* | 使用遮盖层 | `boolean` | `true` | `true` `false` |
+| *`shadeClose`* | 点击遮盖层关闭 | `boolean` | `true` | `true` `false` |
+| *`shadeOpacity`* | 遮盖层透明度 | `string` | `"0.1"` | `"0.1"` - `"1"` |
+| *`isHtmlFragment`* | 解析 html 字符 | `boolean` | `false` | `true` `false` |
+
+:::
+
+::: describe 以下是 `LayerBtnProps`，为 `LayerProps` 的 `btn` 属性所用。
+:::
+
+::: table
+
+| 参数 | 描述 | 类型 | 默认值 | 可选值 |
+| -- | -- | -- | -- | -- |
+| *`text`* | 按钮文本 | `string` | | |
+| *`callback`* | 回调 | `Function` | | |
+| *`style`* | 按钮样式 | `string` `StyleValue` | `""` | |
+| *`class`* | 按钮类 | `string` | `""` | |
+| *`disabled`* | 是否禁用 | `boolean` | `false` | |
+
+:::
+
+::: title 回调
+:::
+
+::: table
+
+| 属性 | 描述 | 类型 | 默认值 | 可选值 |
+| -- | -- | -- | -- | -- |
+| *`full`* | 窗口最大化回调 | `function` | `(id) => {}` | |
+| *`min`* | 窗口最小化回调 | `function` | `(id) => {}` | |
+| *`restore`* | 窗口尺寸还原回调 | `function` | `(id) => {}` | |
+| *`success`* | 窗口可视回调 | `function` | `(id) => {}` | |
+| *`end`* | 窗口隐藏回调 | `function` | `(id) => {}` | |
+| *`close`* | 关闭回调 | `function` | `(id) => {}` | |
+| *`beforeClose`* | 关闭前回调 | `function` | `(id) => {}` | |
+| *`destroy`* | 销毁回调 | `function` | `() => {}` | |
+
+:::
+
+::: title layer.msg
+:::
+
+::: describe 对用户进行简单提示。
+:::
+
+::: describe `option` 如下：
+:::
+
+::: table
+
+| 参数名 | 描述 | 类型 | 默认值 |
+| --- | --- | ---- | ----- |
+| *`message`* | 要显示的消息 | `string` | `""` |
+| *`option`* | 配置 | `LayerProps` | `{}` |
+| *`callback`* | 弹层创建后的回调 | `Function` | `(id) => {}` |
+
+:::
+
+::: describe `defaultOption` 如下：
+:::
+
+::: table
+
+| 参数名 | 描述 | 值 |
+| --- | --- | -- |
+| *`type`* | 类型 | `0` |
+| *`title`* | 标题 | `false` |
+| *`content`* | 内容 | *`message`* |
+| *`shadeClose`* | 遮盖层关闭 | `false` |
+| *`closeBtn`* | 关闭按钮 | `false` |
+| *`isMessage`* | 是否为消息类型 | `true` |
+| *`shade`* | 遮盖层 | `false` |
+| *`time`* | 关闭时间 | `1000` |
+
+:::
+
+::: describe 扩充属性如下：
+:::
+
+::: table
+
+| 属性 | 描述 | 类型 | 默认值 | 可选值 |
+| -- | -- | -- | -- | -- |
+| *`isMessage`* | 是否为消息类型 | `boolean` | `true` | `true` `false` |
+
+::: title layer.drawer
+:::
+
+::: describe 弹出抽屉浮层。
+:::
+
+::: describe `option` 如下：
+:::
+
+::: table
+
+| 参数名 | 描述 | 类型 | 默认值 |
+| --- | --- | ---- | ----- |
+| *`option`* | 配置 | `LayerProps` |  |
+| *`callback`* | 弹层创建后的回调 | `Function` | `(id) => {}` |
+
+:::
+
+::: describe `defaultOption` 如下：
+:::
+
+::: table
+
+| 属性 | 描述 | 值 |
+| --- | --- | -- |
+| *`type`* | 类型 | `"drawer"` |
+
+:::
+
+::: describe 扩充属性如下：
+:::
+
+::: describe 没有扩充属性。
+:::
+
+::: title layer.load
+:::
+
+::: describe 加载数据、异步操作。
+:::
+
+::: describe `option` 如下：
+:::
+
+:::table
+
+| 参数名 | 描述 | 类型 | 默认值 |
+| --- | --- | ---- | ----- |
+| *`load`* | 加载层样式 | `number` | |
+| *`option`* | 配置 | `LayerProps` | |
+| *`callback`* | 弹层创建后的回调 | `Function` | `(id) => {}` |
+
+:::
+
+::: describe `defaultOption` 如下：
+:::
+
+::: table
+
+| 属性 | 描述 | 值 |
+| --- | --- | -- |
+| *`type`* | 类型 | `3` |
+| *`load`* | 加载层样式 | *`load`* |
+| *`anim`* | 入场动画 | `5` |
+| *`isOutAnim`* | 出场动画 | `false` |
+| *`shadeClose`* | 遮盖层关闭 | `false` |
+
+:::
+
+::: describe 扩充属性如下：
+:::
+
+::: table
+
+| 属性 | 描述 | 类型 | 默认值 | 可选值 |
+| -- | -- | -- | -- | -- |
+| *`load`* | 加载层样式 | `number` | `0` | `0` - `6` |
+
+:::
+
+::: title layer.confirm
+:::
+
+::: describe 要求用户确认操作。
+:::
+
+::: describe `option` 如下：
+:::
+
+::: table
+
+| 参数名 | 描述 | 类型 | 默认值 |
+| --- | --- | ---- | ----- |
+| *`msg`* | 要显示的消息 | `string` | `""` |
+| *`option`* | 配置 | `LayerProps` | `{}` |
+| *`callback`* | 弹层创建后的回调 | `Function` | `(id) => {}` |
+
+:::
+
+::: describe `defaultOption` 如下：
+:::
+
+::: table
+
+| 属性 | 描述 | 值 |
+| --- | --- | -- |
+| *`type`* | 类型 | `0` |
+| *`content`* | 内容 | *`msg`* |
+| *`shadeClose`* | 遮罩层关闭 | `false` |
+
+:::
+
+::: describe 扩充属性如下：
+:::
+
+::: describe 没有扩充属性。
+:::
+
+::: title layer.photos
+:::
+
+::: describe 展示一系列的图片。
+:::
+
+::: describe `option` 如下：
+:::
+
+::: table
+
+| 参数名 | 描述 | 类型 | 默认值 |
+| --- | --- | ---- | ----- |
+| *`option`* | 配置 | `string` `LayerPhotosProps` | |
+| *`callback`* | 弹层创建后的回调 | `Function` | `(id) => {}` |
+
+:::
+
+::: describe `defaultOption` 如下：
+:::
+
+::: table
+
+| 属性 | 描述 | 值 |
+| --- | --- | -- |
+| *`type`* | 类型 | `5` |
+| *`anim`* | 入场动画 | `2` |
+| *`startIndex`* | 初始图片索引 | `0` |
+| *`isOutAnim`* | 出场动画 | `true` |
+| *`shadeClose`* | 遮罩层关闭 | `true` |
+| *`shadeOpacity`* | 遮罩层透明度 | `"0.2"`|
+
+:::
+
+::: describe 扩充属性如下：
+:::
+
+::: table
+
+| 属性 | 描述 | 类型 | 默认值 | 可选值 |
+| -- | -- | -- | -- | -- |
+| *`startIndex`* | 初始图片索引 | `number` | `0` |  |
+| *`imgList`* | 图片列表 | `Array<LayerPhotosProps>` | `[]` |  |
+
+:::
+
+::: describe `LayerPhotosProps` 如下：
+:::
+
+::: table
+
+| 属性 | 描述 | 类型 | 默认值 | 可选值 |
+| -- | -- | -- | -- | -- |
+| *`src`* | 图片地址 | `string` | | |
+| *`alt`* | 图片描述 | `string` | `""` | |
+| *`thumb`* | 缩略图 | `string` | `""` | |
+
+:::
+
+::: title layer.notify
+:::
+
+::: describe 显示通知。
+:::
+
+::: describe `option` 如下：
+:::
+
+::: table
+
+| 参数名 | 描述 | 类型 | 默认值 |
+| --- | --- | ---- | ----- |
+| *`option`* | 配置 | `LayerProps` | |
+| *`callback`* | 弹层创建后的回调 | `Function` | `(id) => {}` |
+
+:::
+
+::: describe `defaultOption` 如下：
+:::
+
+::: table
+
+| 属性 | 描述 | 值 |
+| --- | --- | -- |
+| *`offset`* | 位置 | `"rt"` |
+| *`time`* | 关闭时间 | `2000` |
+| *`area`* | 尺寸 | `"auto"` |
+| *`shade`* | 遮罩层 | `false` |
+
+:::
+
+::: describe 扩充属性如下：
+:::
+
+::: describe 没有扩充属性。
+:::
+
+::: title layer.prompt
+:::
+
+::: describe 让用户输入少量内容。
+:::
+
+::: describe `option` 如下：
+:::
+
+::: table
+
+| 参数名 | 描述 | 类型 | 默认值 |
+| --- | --- | ---- | ----- |
+| *`option`* | 配置 | `LayerProps` | |
+| *`callback`* | 弹层创建后的回调 | `Function` | `(id) => {}` |
+
+:::
+
+::: describe `defaultOption` 如下：
+:::
+
+::: table
+
+| 属性 | 描述 | 值 |
+| --- | --- | -- |
+| *`type`* | 类型 | `"prompt"` |
+| *`shadeClose`* | 遮罩层关闭 | `false` |
+| *`shadeOpacity`* | 遮罩层透明度 | `"0.2"` |
+
+:::
+
+::: describe 扩充属性如下：
+:::
+
+::: table
+
+| 属性 | 描述 | 类型 | 默认值 | 可选值 |
+| -- | -- | -- | -- | -- |
+| *`formType`* | 表单类型 | `string` `number` | `"text"` | `0` `1` `2` `"text"` `"password"` `"textarea"` |
+| *`value`* | 表单初始值 | `string` | `""` | |
+| *`maxLength`* | 最大输入长度 | `number` | | |
+| *`placeholder`* | 占位符 | `string` | `"请输入内容"` | |
 
 :::
