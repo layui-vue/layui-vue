@@ -148,7 +148,7 @@
               target="_blank"
             >
               <lay-avatar
-                src="https://www.baomidou.com/img/logo.svg"
+                src="https://baomidou.com/_astro/logo.cIbiVTt_.svg"
                 style="background: transparent"
               ></lay-avatar>
             </a>
