@@ -25,10 +25,7 @@
         @focus="$emit('focus')"
         :allow-clear="!disabled && allowClear"
         :size="size"
-        @clear="
-          dateValue = '';
-          onChange();
-        "
+        @clear="handleClear"
       >
       </lay-input>
       <div class="laydate-range-inputs" v-else>
@@ -58,10 +55,7 @@
           @focus="$emit('focus')"
           class="end-input"
           :size="size"
-          @clear="
-            dateValue = [];
-            onChange();
-          "
+          @clear="handleClear"
         >
         </lay-input>
       </div>
@@ -189,7 +183,13 @@ const endPlaceholder = computed(() => {
 });
 
 const dropdownRef = ref(null);
-const $emits = defineEmits(["update:modelValue", "change", "blur", "focus"]);
+const $emits = defineEmits([
+  "update:modelValue",
+  "change",
+  "blur",
+  "focus",
+  "clear",
+]);
 const currentYear = ref<number>(0);
 const currentMonth = ref<number>(0);
 const currentDay = ref<number>(0);
@@ -432,6 +432,12 @@ const onChange = () => {
     // @ts-ignore
     dropdownRef.value.hide();
   $emits("update:modelValue", dateValue.value);
+};
+
+const handleClear = () => {
+  dateValue.value = props.range ? ["", ""] : "";
+  onChange();
+  $emits("clear");
 };
 
 provide("datePicker", {
