@@ -8,14 +8,14 @@ import LayInput from "../input/index.vue";
 import useProps from "./index.hooks";
 
 export interface IconPickerProps {
-  page?: boolean;
   modelValue?: string;
-  disabled?: boolean;
+  page?: boolean;
+  size?: string;
   showSearch?: boolean;
+  disabled?: boolean;
   allowClear?: boolean;
   contentClass?: string | Array<string | object> | object;
   contentStyle?: StyleValue;
-  size?: string;
 }
 
 defineOptions({
