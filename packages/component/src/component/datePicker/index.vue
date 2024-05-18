@@ -125,26 +125,26 @@ import TimeRange from "./components/TimeRange.vue";
 import useProps from "./index.hooks";
 
 export interface DatePickerProps {
-  placeholder?: string | string[];
-  modelValue?: string | number | string[];
-  type?: "date" | "datetime" | "year" | "time" | "month" | "yearmonth";
-  disabled?: boolean;
-  simple?: boolean;
   name?: string;
+  modelValue?: string | number | string[];
+  type?: "date" | "datetime" | "year" | "month" | "time" | "yearmonth";
+  disabled?: boolean;
+  readonly?: boolean;
+  placeholder?: string | string[];
+  allowClear?: boolean;
+  simple?: boolean;
   max?: string;
   min?: string;
   range?: boolean;
   rangeSeparator?: string;
-  readonly?: boolean;
-  allowClear?: boolean;
   size?: "lg" | "md" | "sm" | "xs";
   prefixIcon?: string;
   suffixIcon?: string;
   timestamp?: boolean;
-  contentClass?: string | Array<string | object> | object;
-  contentStyle?: StyleValue;
   format?: string;
   defaultTime?: string | string[];
+  contentStyle?: StyleValue;
+  contentClass?: string | Array<string | object> | object;
 }
 
 defineOptions({
@@ -155,11 +155,11 @@ const props = withDefaults(defineProps<DatePickerProps>(), {
   modelValue: "",
   type: "date",
   disabled: false,
+  readonly: false,
+  allowClear: false,
   simple: false,
   range: false,
   rangeSeparator: "至",
-  readonly: false,
-  allowClear: false,
   prefixIcon: "layui-icon-date",
   suffixIcon: "",
   timestamp: false,
