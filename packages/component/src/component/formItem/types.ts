@@ -4,7 +4,7 @@ export interface FormItemProps {
   prop?: string;
   mode?: string;
   label?: string;
-  labelPosition?: string;
+  labelPosition?: "right" | "left" | "top";
   labelWidth?: string | number;
   errorMessage?: string;
   rules?: Rule;

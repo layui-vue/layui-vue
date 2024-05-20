@@ -12,8 +12,8 @@ export interface FormProps {
   pane?: boolean;
   initValidate?: boolean;
   requiredIcons?: string;
-  labelPosition?: string;
-  labelWidth?: string;
+  labelPosition?: "right" | "left" | "top";
+  labelWidth?: string | number;
   requiredErrorMessage?: string;
   validateMessage?: ValidateMessages;
   useCN?: boolean;
