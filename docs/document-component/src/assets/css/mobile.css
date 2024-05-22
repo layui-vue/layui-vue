@@ -32,4 +32,8 @@
     #app > .layui-layout .box-list {
         padding: 30px 30px;
     }
+    #app > .layui-layout .sponsors {
+        margin-top: -100px;
+        padding: 30px;
+    }
 }

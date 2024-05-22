@@ -64,6 +64,22 @@
         </div>
       </div>
     </div>
+    <section class="sponsors">
+      <h1>{{ t("home.sponsors") }}</h1>
+      <div class="sponsors-main">
+        <lay-row :space="30">
+          <lay-col :md="8" :sm="12" :xs="12">
+            <img src="https://picsum.photos/400/200" alt="" />
+          </lay-col>
+          <lay-col :md="8" :sm="12" :xs="12">
+            <img src="https://picsum.photos/400/200" alt="" />
+          </lay-col>
+          <lay-col :md="8" :sm="12" :xs="12">
+            <img src="https://picsum.photos/400/200" alt="" />
+          </lay-col>
+        </lay-row>
+      </div>
+    </section>
     <div class="box-list">
       <lay-row :space="30">
         <lay-col :md="8" :sm="12" :xs="12">
@@ -456,6 +472,22 @@ body {
   width: 100%;
   text-align: center;
   font-size: 0;
+}
+
+.sponsors {
+  margin-top: -130px;
+  padding: 50px 150px;
+}
+
+.sponsors h1 {
+  text-align: center;
+  margin-bottom: 12px !important;
+}
+
+.sponsors-main {
+  padding: 20px 20px 20px;
+  border: 1px solid #eeeeee;
+  border-radius: 10px;
 }
 
 .box-list {

@@ -10,5 +10,6 @@ export default {
     version: "version",
     changelog: "changelog",
     download: "download",
+    sponsors: "Sponsors",
   },
 };
