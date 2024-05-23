@@ -15,18 +15,33 @@
   <lay-timeline>
     <lay-timeline-item title="2.17.x">
       <ul>
-        <a name="2.17-0"></a>
+        <a name="2-17-4"></a>
         <li>
-          <h3>2.17-3 <span class="layui-badge-rim">2024-05-08</span></h3>
+          <h3>2.17.4 <span class="layui-badge-rim">2024-05-23</span></h3>
+          <ul>
+              <li>[升级] layer 升级至2.3.4。</li>
+              <li>[新增] datePicker组件 新增clear事件。<a href="https://gitee.com/layui-vue/layui-vue/pulls/325">详情</a></li>
+              <li>[修复] layer组件 type为time范围选择初始化滚动位置失效。<a href="https://gitee.com/layui-vue/layui-vue/pulls/324">详情</a></li>
+              <li>[修复] popper组件 zIndex应大于layer。<a href="https://gitee.com/layui-vue/layui-vue/pulls/323">详情</a></li>
+              <li>[修复] iconPicker组件 disabled状态下可进行清除操作。<a href="https://gitee.com/layui-vue/layui-vue/pulls/321">详情</a></li>
+              <li>[修复] tsconfig.json moduleResolution为bundler无法引用types。<a href="https://gitee.com/layui-vue/layui-vue/pulls/320">详情</a></li>
+              <li>[优化] form组件 整体样式优化。<a href="https://gitee.com/layui-vue/layui-vue/pulls/326">详情</a></li>
+          </ul>
+        </li>
+      </ul>
+      <ul>
+        <a name="2-17-3"></a>
+        <li>
+          <h3>2.17.3 <span class="layui-badge-rim">2024-05-08</span></h3>
           <ul>
               <li>[修复] datePicker组件 default-time属性调整为非必填。</li>
           </ul>
         </li>
       </ul>
       <ul>
-        <a name="2.17-0"></a>
+        <a name="2-17-2"></a>
         <li>
-          <h3>2.17-2 <span class="layui-badge-rim">2024-05-06</span></h3>
+          <h3>2.17.2 <span class="layui-badge-rim">2024-05-06</span></h3>
           <ul>
               <li>[升级] layer 升级至2.3.3。</li>
               <li>[升级] json-schema-form 升级至1.0.7。</li>
@@ -40,18 +55,18 @@
         </li>
       </ul>
       <ul>
-        <a name="2.17-0"></a>
+        <a name="2-17-1"></a>
         <li>
-          <h3>2.17-1 <span class="layui-badge-rim">2024-04-23</span></h3>
+          <h3>2.17.1 <span class="layui-badge-rim">2024-04-23</span></h3>
           <ul>
               <li>[修复] upload组件 cut属性失效<a href="https://gitee.com/layui-vue/layui-vue/pulls/306">详情</a></li>
           </ul>
         </li>
       </ul>
       <ul>
-        <a name="2.17-0"></a>
+        <a name="2-17-0"></a>
         <li>
-          <h3>2.17-0 <span class="layui-badge-rim">2024-04-22</span></h3>
+          <h3>2.17.0 <span class="layui-badge-rim">2024-04-22</span></h3>
           <ul>
               <li>[新增] form组件 新增isLabelTooltip属性控制label是否超出隐藏。<a href="https://gitee.com/layui-vue/layui-vue/pulls/302">详情</a></li>
               <li>[新增] upload组件 新增选择文件后"on-change"回调事件。<a href="https://gitee.com/layui-vue/layui-vue/pulls/300">详情</a></li>
