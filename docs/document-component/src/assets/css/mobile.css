@@ -23,7 +23,7 @@
     #app > .layui-layout > .layui-layout > .layui-body  .lay-aside {
         display: none;
     }
-    #app > .layui-layout .site-banner {
+    #app > .layui-layout .site-container {
         background-size: 100% 100%;
     }
     #app > .layui-layout .link-list {

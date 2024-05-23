@@ -1,7 +1,6 @@
 <template>
   <div class="site-container">
-    <!-- <div class="site-banner"> -->
-    <div class="site-banner-main">
+    <div class="site-layui-main">
       <div class="site-zfj site-zfj-anim">
         <img
           src="../assets/logo.jpg"
@@ -63,7 +62,6 @@
         </a>
       </div>
     </div>
-    <!-- </div> -->
     <section class="sponsors">
       <h1>{{ t("home.sponsors") }}</h1>
       <div class="sponsors-main">
@@ -332,19 +330,11 @@ body {
   background-size: 100%;
 }
 
-.site-banner {
-  /* overflow: hidden;
-  text-align: center;
-  position: relative;
-  height: calc(100% - 60px); */
-}
-
-.site-banner-main {
-  /* display: flex;
+.site-layui-main {
+  height: 90%;
+  display: flex;
   flex-direction: column;
-  height: calc(100vh - 180px);
   justify-content: center;
-  position: relative; */
   text-align: center;
 }
 
@@ -386,7 +376,6 @@ body {
 }
 
 .site-zfj {
-  padding-top: 156px;
   height: 220px;
 }
 
@@ -468,10 +457,6 @@ body {
 }
 
 .site-banner-other {
-  /* position: relative;
-  left: 0;
-  top: 40px;
-  bottom: 90px; */
   width: 100%;
   margin-top: 40px;
   text-align: center;
@@ -479,8 +464,7 @@ body {
 }
 
 .sponsors {
-  /* margin-top: -130px; */
-  padding: 60px 150px 50px;
+  padding: 0 150px 36px;
 }
 
 .sponsors h1 {
