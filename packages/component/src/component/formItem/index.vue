@@ -44,6 +44,7 @@ const {
   isRequired,
   tooltipProps,
   isLabelTooltip,
+  inlineWidth,
 } = useProps(props);
 
 const layForm = inject("LayForm", {} as LayFormContext);
@@ -222,11 +223,19 @@ const showLabel = computed(() => {
 });
 
 const labelStyles = computed<StyleValue>(() => {
-  if (labelWidth.value) {
+  return {
+    width: isNumber(labelWidth.value)
+      ? `${labelWidth.value}px`
+      : labelWidth.value,
+  };
+});
+
+const modeStyles = computed<StyleValue>(() => {
+  if (mode.value === "inline") {
     return {
-      width: isNumber(labelWidth.value)
-        ? `${labelWidth.value}px`
-        : labelWidth.value,
+      width: isNumber(inlineWidth.value)
+        ? `${inlineWidth.value}px`
+        : inlineWidth.value,
     };
   }
   return {};
@@ -260,7 +269,7 @@ const labelStyles = computed<StyleValue>(() => {
         :outProps="props"
       ></LayFormItemLabel>
     </label>
-    <div :class="[mode ? 'layui-input-' + mode : '']">
+    <div :class="[mode ? 'layui-input-' + mode : '']" :style="modeStyles">
       <div ref="slotParent">
         <slot :props="{ ...props, model: layForm.model }"></slot>
       </div>

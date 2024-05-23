@@ -2,7 +2,7 @@ import type { Rule } from "async-validator";
 
 export interface FormItemProps {
   prop?: string;
-  mode?: string;
+  mode?: "block" | "inline";
   label?: string;
   labelPosition?: "right" | "left" | "top";
   labelWidth?: string | number;
@@ -10,6 +10,7 @@ export interface FormItemProps {
   rules?: Rule;
   required?: boolean;
   requiredErrorMessage?: string;
-  size?: string;
+  size?: "xs" | "sm" | "md" | "lg";
   tips?: string;
+  inlineWidth?: string | number;
 }
