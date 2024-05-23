@@ -18,10 +18,11 @@ export interface LayFormContext {
   pane?: boolean;
   labelPosition?: boolean;
   labelWidth?: string;
-  size?: string;
-  mode?: string;
+  size?: "xs" | "sm" | "md" | "lg";
+  mode?: "block" | "inline";
   isLabelTooltip?: boolean;
   tooltipProps: LayTooltipContext;
+  inlineWidth?: string | number;
 }
 
 export interface LayFormItemContext {

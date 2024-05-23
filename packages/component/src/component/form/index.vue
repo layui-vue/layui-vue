@@ -9,16 +9,17 @@ export interface FormProps {
   model?: modelType;
   required?: boolean;
   rules?: Rules;
+  size?: "xs" | "sm" | "md" | "lg";
+  mode?: "block" | "inline";
   pane?: boolean;
   initValidate?: boolean;
+  useCN?: boolean;
+  labelPosition?: "right" | "left" | "top";
+  labelWidth?: string | number;
+  inlineWidth?: string | number;
   requiredIcons?: string;
-  labelPosition?: string;
-  labelWidth?: string;
   requiredErrorMessage?: string;
   validateMessage?: ValidateMessages;
-  useCN?: boolean;
-  size?: string;
-  mode?: string;
   isLabelTooltip?: boolean;
   tooltipProps?: LayTooltipContext;
 }
@@ -31,11 +32,11 @@ const props = withDefaults(defineProps<FormProps>(), {
   model: function () {
     return {};
   },
+  pane: false,
+  initValidate: false,
   useCN: true,
   requiredIcons: "",
   labelPosition: "right",
-  initValidate: false,
-  pane: false,
   isLabelTooltip: false,
 });
 

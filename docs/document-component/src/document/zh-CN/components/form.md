@@ -860,20 +860,21 @@ const submit10 = function(isValidate, model, errors) {
 
 | 属性                    | 描述                         | 类型      | 可选值         | 默认值       |
 | ----------------------- | --------------------------- | --------- | -------------- | ------------ |
-| v-model                 | 表单绑定                     | `object`  | -              | {}           |
+| model                 | 表单绑定                     | `object`  | -              | {}           |
 | required                | 是否必填                     | `boolean` | `true` `false` | `false`      |
 | rules                   | 表单校验规则; <br>可查看[async-validator](https://github.com/yiminghe/async-validator) `object`  | -              | -            |
+| size                    | 全局控件尺寸                     | `string`          | `xs`  `sm`  `md`  `lg`        | `md`      |
+| mode              | 全局表单项显示的模式，`块元素` / `行元素`                       | `string`    |  `block` `inline`     | `block`    |
+| pane                    | 启用方框风格                 | `boolean`  |  `true` `false`              | `false` |
 | initValidate            | 是否一开始就校验表单          | `boolean` | `true` `false` | `false`      |
 | useCN                   | 是否使用中文错误提示          | `boolean` | `true` `false` | `true`      |
+| label-position          | 全局标签位置                     | `string`    |  `top` `right` `left`        | `right` |
+| labelWidth              | 全局标签宽度                     | `string` `number`    |                 | `95`   |
+| inlineWidth `2.17.4`       |主体宽度       | `string` `number`    |                 | `auto`   |
 | requiredIcons           | 必填前缀图标`class`          | `string`  | -              | `*`          |
 | required-error-message | 必填错误提示信息              | `string`  | -              | `%s不能为空` |
 | validate-message        | 自定义校验错误提示信息; <br>由于内置了中文错误提示，可按需求增量增加<br>可查看 [async-validator 内置错误提示](https://github.com/yiminghe/async-validator/blob/master/src/messages.ts)<br>也可参考 [layui-vue 内置中文错误提示](https://gitee.com/layui/layui-vue/blob/next/package/component/src/component/formItem/cnValidateMessage.ts) | `string`  | -              | `%s不能为空` |
-| pane                    | 启用方框风格                 | `boolean`  |  `true` `false`              | `false` |
-| label-position          | 全局标签位置                     | `string`    |  `top` `right` `left`        | `right` |
-| size                    | 全局控件尺寸                     | --          |  --                          | --      |
-| labelWidth              | 全局标签宽度                     | `string`    |  --                          | --      |
-| mode              | 全局表单项显示的模式，`块元素` / `行元素`                       | `string`    |  `block` `inline`     | `block`    |
-| isLabelTooltip(2.17.0)              | Label是否超出隐藏省略号     | `boolean`    |       | `false`    |
+| isLabelTooltip `2.17.0`      | Label是否超出隐藏省略号     | `boolean`    |       | `false`    |
 | tooltipProps              | 可查看[tooltip组件](http://www.layui-vue.com/zh-CN/components/tooltip)      | `object`    |      |    |
 
 :::
@@ -910,15 +911,16 @@ const submit10 = function(isValidate, model, errors) {
 | 属性                   | 描述                                                                                   | 类型              | 可选值               | 默认值  |
 | ---------------------- | -------------------------------------------------------------------------------------- | ----------------- | -------------------- | ------- |
 | prop                   | 在表单绑定值(`model`)中字段`key`                                                       | `string`          | -                    | -       |
+| size                    | 全局控件尺寸                     | `string`          | `xs`  `sm`  `md`  `lg`        | `md`      |
+| mode              | 全局表单项显示的模式，`块元素` / `行元素`                       | `string`    |  `block` `inline`     | `block`    |
 | label                  | 子项前边描述值，**尽量填写**，中文校验错误需要用到                                     | `string`          | -                    | -       |
 | label-position         | 子项前边描述值的位置                                                                   | `string`          | `left` `top` `right` | `right` |
 | label-width            | 子项前边描述值的宽度                                                                   | `string` `number` | -                    | `95`    |
+| inlineWidth `2.17.4`            |主体宽度       | `string` `number`    |                 | `auto`   |
 | required               | 表单必填                                                                               | `boolean`         | `true` `false`       | `false` |
 | required-error-message | 表单必填校验失败固定提示语                                                             | `string`          | --                   | --      |
 | rules                  | 表单校验规则; <br>可查看[async-validator](https://github.com/yiminghe/async-validator) | `object`          | -                    | -       |
 | error-message          | 表单校验失败固定提示语                                                                 | `string`          | --                   | --      |
-| mode                   | 表单项显示的模式，`块元素` / `行元素`                                                  | `string`          | `block` `inline`     | `block` |
-| size                   | 尺寸                                    | --          | --    | -- |
 | tips | 表单项说明 | `string` | - | - |
 :::
 
