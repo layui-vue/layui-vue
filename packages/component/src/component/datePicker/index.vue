@@ -25,10 +25,7 @@
         @focus="$emit('focus')"
         :allow-clear="!disabled && allowClear"
         :size="size"
-        @clear="
-          dateValue = '';
-          onChange();
-        "
+        @clear="handleClear"
       >
       </lay-input>
       <div class="laydate-range-inputs" v-else>
@@ -58,10 +55,7 @@
           @focus="$emit('focus')"
           class="end-input"
           :size="size"
-          @clear="
-            dateValue = [];
-            onChange();
-          "
+          @clear="handleClear"
         >
         </lay-input>
       </div>
@@ -131,26 +125,26 @@ import TimeRange from "./components/TimeRange.vue";
 import useProps from "./index.hooks";
 
 export interface DatePickerProps {
-  placeholder?: string | string[];
-  modelValue?: string | number | string[];
-  type?: "date" | "datetime" | "year" | "time" | "month" | "yearmonth";
-  disabled?: boolean;
-  simple?: boolean;
   name?: string;
+  modelValue?: string | number | string[];
+  type?: "date" | "datetime" | "year" | "month" | "time" | "yearmonth";
+  disabled?: boolean;
+  readonly?: boolean;
+  placeholder?: string | string[];
+  allowClear?: boolean;
+  simple?: boolean;
   max?: string;
   min?: string;
   range?: boolean;
   rangeSeparator?: string;
-  readonly?: boolean;
-  allowClear?: boolean;
   size?: "lg" | "md" | "sm" | "xs";
   prefixIcon?: string;
   suffixIcon?: string;
   timestamp?: boolean;
-  contentClass?: string | Array<string | object> | object;
-  contentStyle?: StyleValue;
   format?: string;
   defaultTime?: string | string[];
+  contentStyle?: StyleValue;
+  contentClass?: string | Array<string | object> | object;
 }
 
 defineOptions({
@@ -161,11 +155,11 @@ const props = withDefaults(defineProps<DatePickerProps>(), {
   modelValue: "",
   type: "date",
   disabled: false,
+  readonly: false,
+  allowClear: false,
   simple: false,
   range: false,
   rangeSeparator: "至",
-  readonly: false,
-  allowClear: false,
   prefixIcon: "layui-icon-date",
   suffixIcon: "",
   timestamp: false,
@@ -189,7 +183,13 @@ const endPlaceholder = computed(() => {
 });
 
 const dropdownRef = ref(null);
-const $emits = defineEmits(["update:modelValue", "change", "blur", "focus"]);
+const $emits = defineEmits([
+  "update:modelValue",
+  "change",
+  "blur",
+  "focus",
+  "clear",
+]);
 const currentYear = ref<number>(0);
 const currentMonth = ref<number>(0);
 const currentDay = ref<number>(0);
@@ -432,6 +432,12 @@ const onChange = () => {
     // @ts-ignore
     dropdownRef.value.hide();
   $emits("update:modelValue", dateValue.value);
+};
+
+const handleClear = () => {
+  dateValue.value = props.range ? ["", ""] : "";
+  onChange();
+  $emits("clear");
 };
 
 provide("datePicker", {
