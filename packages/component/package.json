@@ -36,7 +36,10 @@
       }
     },
     "./lib/": "./lib/",
-    "./es/": "./es/"
+    "./es/": "./es/",
+    "./types/*": [
+      "./types/*.d.ts"
+    ]
   },
   "scripts": {
     "build": "npm run build:all && npm run build:es && npm run build:umd && npm run build:dts",
