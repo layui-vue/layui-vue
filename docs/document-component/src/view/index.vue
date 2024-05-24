@@ -65,18 +65,11 @@
     <section class="sponsors">
       <h1>{{ t("home.sponsors") }}</h1>
       <div class="sponsors-main">
-        <lay-row :space="30">
+        <lay-row :space="30" class="sponsors-row">
           <lay-col :md="6" :sm="12" :xs="12">
-            <img src="" alt="" />
-          </lay-col>
-          <lay-col :md="6" :sm="12" :xs="12">
-            <img src="" alt="" />
-          </lay-col>
-          <lay-col :md="6" :sm="12" :xs="12">
-            <img src="" alt="" />
-          </lay-col>
-          <lay-col :md="6" :sm="12" :xs="12">
-            <img src="" alt="" />
+            <a href="https://gitee.com/lubase/web-layui" target="_blank">
+              <img src="../assets/lubase-logo.png" />
+            </a>
           </lay-col>
         </lay-row>
       </div>
@@ -476,6 +469,11 @@ body {
   padding: 20px 20px 20px;
   border: 1px solid #eeeeee;
   border-radius: 10px;
+}
+
+.sponsors-row {
+  display: flex;
+  justify-content: center;
 }
 
 .box-list {
