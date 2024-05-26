@@ -67,8 +67,8 @@
       <div class="sponsors-main">
         <lay-row :space="30" class="sponsors-row">
           <lay-col :md="6" :sm="12" :xs="12">
-            <a href="https://gitee.com/lubase/web-layui" target="_blank">
-              <img src="../assets/lubase-logo.png" />
+            <a href="https://gitee.com/lubase/web-layui" target="_blank" style="display: flex;justify-content: center;">
+              <img style="width: 220px" src="../assets/lubase-logo.png" />
             </a>
           </lay-col>
         </lay-row>
@@ -468,6 +468,7 @@ body {
 .sponsors-main {
   padding: 20px 20px 20px;
   border: 1px solid #eeeeee;
+  background-color: #ffffff;
   border-radius: 10px;
 }
 
