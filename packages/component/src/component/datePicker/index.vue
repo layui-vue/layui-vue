@@ -435,7 +435,7 @@ const onChange = () => {
 };
 
 const handleClear = () => {
-  dateValue.value = props.range ? ["", ""] : "";
+  dateValue.value = props.range ? [] : "";
   onChange();
   $emits("clear");
 };
