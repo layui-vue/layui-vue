@@ -803,15 +803,17 @@ const openCallback = () => {
 | shade-style   | 遮盖层样式   | `StyleValue` | -- | -- |
 | shade-opacity | 遮盖层透明度 | `string` | `0.1` | `0.1` - `1` |
 | layer-classes (原`skin`)| layer box 类名 | `string` | -- | -- |
-| z-index (原`skin`)| layer box 类名 | `string` | -- | -- |
+| z-index | layer `z-index` 不设置内部将从 `99999` 开始递增 | `number` | -- | -- |
+| closeBtn | 关闭按钮 | `boolean` `string` | `1` | `false` `1` `2` |
+| btn | 底部按钮集合 | `BtnType[]` | -- | -- |
+| btnAlign | 底部按钮位置 | `string` | `r` | `l` `c` `r` |
+
 
 
 
 
 | anim | 入场动画 | number | `0` | `0` - `6` |
 | isOutAnim | 离场动画 | boolean | `true` | `true` `false` |
-| btnAlign | 按钮位置 | string | `r` | `l` `c` `r` |
-| closeBtn | 关闭按钮 | boolean string | `1` | `false` `1` `2` |
 | time | 关闭时间 | number | `0` | -- |
 | isHtmlFragment | 解析 html 字符 | boolean | `false` | `true` `false` |
 | imgList | 图片数据数组 | array[{src:图片链接,alt:图片名字可选',thumb:'缩略图可选'}] | - | - |
@@ -831,3 +833,18 @@ const openCallback = () => {
 
 ::: title 内置方法
 :::
+
+::: title types
+:::
+
+```ts
+
+type BtnType = {
+  text: string;
+  style?: string | StyleValue;
+  class?: string;
+  disabled?: boolean;
+  callback: (id: string) => void;
+}
+
+```

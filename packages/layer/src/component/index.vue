@@ -5,6 +5,8 @@ export default {
 </script>
 
 <script lang="ts" setup>
+import type { BtnType } from "../types/index";
+
 import Shade from "./Shade.vue";
 import Iframe from "./Iframe.vue";
 import Title from "./Header.vue";
@@ -72,18 +74,18 @@ export interface LayerProps {
   resize?: boolean;
   shade?: boolean;
   shadeClose?: boolean;
+  shadeStyle?: StyleValue;
   shadeOpacity?: string;
   layerClasses?: string;
+  zIndex?: number;
+  closeBtn?: boolean | string;
+  btn?: BtnType[];
+  btnAlign?: "l" | "c" | "r";
 
   id?: string;
   icon?: string | number;
-  zIndex?: number | Function;
   // setTop?: boolean;
-  btn?: Record<string, any>[] | false;
   isHtmlFragment?: boolean;
-  shadeStyle?: StyleValue;
-  closeBtn?: boolean | string;
-  btnAlign?: "l" | "c" | "r";
   time?: number;
   load?: number;
   anim?: 0 | 1 | 2 | 3 | 4 | 5 | 6;
@@ -129,10 +131,10 @@ const props = withDefaults(defineProps<LayerProps>(), {
   shade: true,
   shadeClose: true,
   shadeOpacity: "0.1",
-
-  time: 0,
   closeBtn: "1",
   btnAlign: "r",
+
+  time: 0,
   load: 0,
   anim: 0,
   isHtmlFragment: false,
