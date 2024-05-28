@@ -68,7 +68,7 @@
         <lay-row :space="30" class="sponsors-row">
           <lay-col :md="6" :sm="12" :xs="12">
             <a href="https://gitee.com/lubase/web-layui" target="_blank" style="display: flex;justify-content: center;">
-              <img style="width: 220px" src="../assets/lubase-logo.png" />
+              <img style="width: 200px" src="../assets/lubase-logo.png" />
             </a>
           </lay-col>
         </lay-row>
@@ -158,7 +158,7 @@
               target="_blank"
             >
               <lay-avatar
-                src="https://baomidou.com/_astro/logo.cIbiVTt_.svg"
+                src="https://baomidou.com/assets/asset.cIbiVTt_.svg"
                 style="background: transparent"
               ></lay-avatar>
             </a>
@@ -467,7 +467,6 @@ body {
 
 .sponsors-main {
   padding: 20px 20px 20px;
-  border: 1px solid #eeeeee;
   background-color: #ffffff;
   border-radius: 10px;
 }

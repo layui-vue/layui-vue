@@ -10,6 +10,6 @@ export default {
     changelog: "更新日志",
     version: "当前版本",
     download: "下载量",
-    sponsors: "赞助商",
+    sponsors: "Sponsors",
   },
 };
