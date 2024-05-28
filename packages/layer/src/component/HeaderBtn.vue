@@ -4,8 +4,8 @@ import { LayIcon } from "@layui/icons-vue";
 import "@layui/icons-vue/lib/index.css";
 
 export interface HeaderBtnProps {
-  maxmin?: boolean | string;
-  min?: Function;
+  maxmin?: boolean;
+  min?: boolean;
   max?: boolean;
   closeBtn?: string | boolean;
 }

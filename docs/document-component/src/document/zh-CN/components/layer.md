@@ -720,7 +720,7 @@ const closeAll = () => {
 ::: title 回调事件
 :::
 
-::: demo 你可以通过 `success` `end` `close` `beforeClose` `full` `min` `restore` 等回调属性，监听 layer 的生命周期。
+::: demo 你可以通过 `success` `end` `close` `beforeClose` `full` `min` `restore` `revert` 等回调属性，监听 layer 的生命周期。
 
 <template>
   <lay-button @click="openCallback" type="primary">打开</lay-button>
@@ -742,8 +742,8 @@ const openCallback = () => {
         full: (id) => {
             console.log(`最大化:${id}`)
         },
-        restore: (id) => {
-            console.log(`重置:${id}`)
+        revert: (id) => {
+            console.log(`最小/最大化还原:${id}`)
         },
         success: (id) => {
             console.log(`成功:${id}`)
@@ -760,12 +760,22 @@ const openCallback = () => {
         moveStart: (id) => {
             console.log(`拖拽开始:${id}`)
         },
-        moving: (id) => {
+        moving: (id, {top, left}) => {
             console.log(`拖拽中：${id}`)
         },
         moveEnd: (id) => {
             console.log(`拖拽结束:${id}`)
-        }})
+        },
+        resizeStart: (id) => {
+            console.log(`拉伸开始:${id}`)
+        },
+        resizing: (id, {width, height}) => {
+            console.log(`拉伸中：${id}`)
+        },
+        resizeEnd: (id) => {
+            console.log(`拉伸结束:${id}`)
+        }
+        })
 }
 </script>
 
@@ -778,25 +788,31 @@ const openCallback = () => {
 
 | 属性 | 描述 | 类型 | 默认值 | 可选值 |
 | -- | -- | -- | -- | -- |
-| type | 类型 | string | `1` | `0` `1` `2` `3` `4` `5` |
-| title | 标题 | string boolean | `信息` | -- |
-| titleStyle | 标题样式 | string StyleValue | -- | -- |
-| content | 内容 | string vnode | -- | -- |
-| v-model | 显示 | boolean | `false`  | `true` `false` |
-| offset | 位置 | string array | `auto` | -- |
-| area | 尺寸 | string array | `auto`  | -- |
-| move | 拖拽 | boolean | `true` | `true` `false` | 
-| maxmin | 缩放 | boolean | `false` | `true` `false` |
-| resize | 拉伸 | boolean | `false` | `true` `false` |
+| v-model | 显示 | boolean | `false`  |  |
+| type | 类型 | string | `1` | `0(dialog)` `1(page)` `2(iframe)` `3(loading)` `4(drawer)` `5(photos)` `6(notify)` |
+| title | 标题 | `string` `boolean` `Function` | `标题` | -- |
+| title-style | 标题样式 | `string` `StyleValue` | -- | -- |
+| content | 内容 | `string` `Function` `vnode` | -- | -- |
+| offset | 偏移量 | `string` `string[]` | `auto` | -- |
+| area | 弹窗宽高 (`auto` 将自适应) | `string` `string[]` | `auto`  | -- |
+| move | 开启拖拽 | boolean | `true` | -- | 
+| maxmin | 开启最小/最大化 | boolean | `false` | -- |
+| resize | 开启左下角拖拽放大缩小 | boolean | `false` | -- |
+| shade | 显示遮盖层 | boolean | `true` | -- |
+| shade-close | 遮盖层关闭 | boolean | `true` | -- |
+| shade-style   | 遮盖层样式   | `StyleValue` | -- | -- |
+| shade-opacity | 遮盖层透明度 | `string` | `0.1` | `0.1` - `1` |
+| layer-classes (原`skin`)| layer box 类名 | `string` | -- | -- |
+| z-index (原`skin`)| layer box 类名 | `string` | -- | -- |
+
+
+
+
 | anim | 入场动画 | number | `0` | `0` - `6` |
 | isOutAnim | 离场动画 | boolean | `true` | `true` `false` |
 | btnAlign | 按钮位置 | string | `r` | `l` `c` `r` |
 | closeBtn | 关闭按钮 | boolean string | `1` | `false` `1` `2` |
 | time | 关闭时间 | number | `0` | -- |
-| shade | 遮盖层 | boolean | `true` | `true` `false` |
-| shadeClose | 遮盖层关闭 | boolean | `true` | `true` `false` |
-| shadeOpacity | 遮盖层透明度 | string | `0.1` | `0.1` - `1` |
-| shadeStyle   | 遮盖层样式   | string StyleValue |  |  |
 | isHtmlFragment | 解析 html 字符 | boolean | `false` | `true` `false` |
 | imgList | 图片数据数组 | array[{src:图片链接,alt:图片名字可选',thumb:'缩略图可选'}] | - | - |
 | startIndex | 图片初始浏览索引 | number | 0 | - |
