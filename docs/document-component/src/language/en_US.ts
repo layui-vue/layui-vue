@@ -11,5 +11,6 @@ export default {
     changelog: "changelog",
     download: "download",
     sponsors: "Sponsors",
+    join_sponsors: "Become a Sponsor",
   },
 };
