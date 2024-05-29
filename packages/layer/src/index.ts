@@ -170,7 +170,7 @@ const layer = {
       {
         ...options,
         isFunction: true,
-        destroy() {
+        internalDestroy() {
           clearTimeout(timer);
           modalInstance.component?.exposed?.close();
           setTimeout(() => {

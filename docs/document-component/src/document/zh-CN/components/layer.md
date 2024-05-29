@@ -793,6 +793,7 @@ const openCallback = () => {
 | title | 标题 | `string` `boolean` `Function` | `标题` | -- |
 | title-style | 标题样式 | `string` `StyleValue` | -- | -- |
 | content | 内容 | `string` `Function` `vnode` | -- | -- |
+| isHtmlFragment | `content` 是否解析html | `boolean` | `false` | -- |
 | offset | 偏移量 | `string` `string[]` | `auto` | -- |
 | area | 弹窗宽高 (`auto` 将自适应) | `string` `string[]` | `auto`  | -- |
 | move | 开启拖拽 | boolean | `true` | -- | 
@@ -807,28 +808,42 @@ const openCallback = () => {
 | closeBtn | 关闭按钮 | `boolean` `string` | `1` | `false` `1` `2` |
 | btn | 底部按钮集合 | `BtnType[]` | -- | -- |
 | btnAlign | 底部按钮位置 | `string` | `r` | `l` `c` `r` |
+| anim | layer打开动画 | `number` | `0` | `0` - `6` |
+| isOutAnim | 是否需要离场动画 | `boolean` | `true` | -- |
+| icon | `msg` `notify` 展示Icon | `string` `number` | -  | `1` `2` `3` `4` `5` `6` `7` `16`  |
+| imgList | `type` 为5 渲染图片列表 | `ImgListType[]` | -- | -- |
+| startIndex | 图片初始浏览索引 | `number` | 0 | -- |
+| animDuration | layer打开关闭动画速率 | `string` | `0.3s`  | -- |
+| moveOut | 是否可以拖出浏览器可视区域 | `boolean` | `false`  | -- |
+| teleport | layer挂载到目标DOM | `string` | `body`  | -- |
+| teleportDisabled | 禁止挂载到目标DOM，保持原位置 | `boolean` | `false`  | -- |
+| lastPosition | 最小/最大化复原位置 `true`上次位置(拖动)、 `false` layer初始位置 | `boolean` | `true`  | -- |
+| time | `msg` `notify` 定时关闭   | `number` |  `msg`1000 `notify`2000 | -- |
+| load | `type` 为3时，loading Icon   | `number` |  0 | `0`, `1` |
+| yesText | 底部默认按钮文本   | `string` | `确定` | -- |
+:::
 
+::: title 属性事件说明
+:::
 
+::: table
 
-
-
-| anim | 入场动画 | number | `0` | `0` - `6` |
-| isOutAnim | 离场动画 | boolean | `true` | `true` `false` |
-| time | 关闭时间 | number | `0` | -- |
-| isHtmlFragment | 解析 html 字符 | boolean | `false` | `true` `false` |
-| imgList | 图片数据数组 | array[{src:图片链接,alt:图片名字可选',thumb:'缩略图可选'}] | - | - |
-| startIndex | 图片初始浏览索引 | number | 0 | - |
-| full | 最大化回调 | function | - | - |
-| min | 最小化回调 | function | -  | - |
-| restore | 重置回调 | function | -  | - |
-| success | 打开回调 | function | -  | - |
-| end | 销毁回调 | function | -  | - |
-| close | 点击右上角 close 按钮 / 遮盖层的关闭回调 | function | -  | - |
-| moveOut | 是否可以拖出浏览器可视区域 | boolean | false  | true false |
-| moveStart | 拖拽开始回调  | function | -  | - |
-| moveEnd | 拖拽结束回调 | function | -  | - |
-| animDuration | 动画速率 | string | `0.3s`  | - |
- 
+| 属性 | 描述 | 类型 | 参数 | 默认值 |
+| -- | -- | -- | -- | -- |
+| success | layer打开回调 | `function` | `id`  | -- |
+| end | layer关闭回调 | `function` | `id`  |--|
+| yes | 点击底部默认按钮 | `function` | `id`  |--|
+| beforeClose | 内部(右上角/点击遮罩/默认确认按钮)关闭前回调，返回值为 `true` 内部才会关闭 | `function` | `id`  |`() => true`|
+| close | 内部(右上角/点击遮罩/默认确认按钮)关闭回调 | `function` | `id`  |--|
+| min | 最小化回调 | `function` | `id`  | - |
+| full | 最大化回调 | `function` | `id`| - |
+| revert | 恢复最小/最大化回调 | `function` | `id`| - |
+| moveStart | 弹窗拖动位置开始回调 | `function` | `id`| - |
+| moving | 弹窗拖动位置回调 | `function` | `id`| - |
+| moveEnd | 弹窗拖动位置结束回调 | `function` | `id`| - |
+| resizeStart | 弹窗拉伸位置开始回调 | `function` | `id`| - |
+| resizing | 弹窗拉伸位置开始回调 | `function` | `id`| - |
+| resizeEnd | 弹窗拉伸位置开始回调 | `function` | `id`| - |
 :::
 
 ::: title 内置方法
@@ -846,5 +861,11 @@ type BtnType = {
   disabled?: boolean;
   callback: (id: string) => void;
 }
+
+type ImgListType = {
+  src: string;
+  alt?: string;
+  thumb?: string;
+};
 
 ```

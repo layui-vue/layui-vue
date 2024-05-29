@@ -5,7 +5,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import type { BtnType } from "../types/index";
+import type { BtnType, ImgListType } from "../types";
 
 import Shade from "./Shade.vue";
 import Iframe from "./Iframe.vue";
@@ -67,6 +67,7 @@ export interface LayerProps {
   title?: string | boolean | Function;
   titleStyle?: string | StyleValue;
   content?: string | Function | VNodeTypes;
+  isHtmlFragment?: boolean;
   offset?: string | string[];
   area?: string | string[];
   move?: boolean;
@@ -81,41 +82,40 @@ export interface LayerProps {
   closeBtn?: boolean | string;
   btn?: BtnType[];
   btnAlign?: "l" | "c" | "r";
-
-  id?: string;
-  icon?: string | number;
-  // setTop?: boolean;
-  isHtmlFragment?: boolean;
-  time?: number;
-  load?: number;
   anim?: 0 | 1 | 2 | 3 | 4 | 5 | 6;
   isOutAnim?: boolean;
+  icon?: string | number;
+  imgList?: ImgListType[];
+  startIndex?: number;
+  animDuration?: string;
+  moveOut?: boolean;
+  teleport?: string;
+  teleportDisabled?: boolean;
+  lastPosition?: boolean;
+  time?: number;
+  load?: 0 | 1;
+  yesText?: string;
+
+  isMessage?: boolean;
+  id?: string;
+  isFunction?: boolean;
+  appContext?: any;
+
   success?: Function;
   end?: Function;
   yes?: Function;
-  yesText?: string;
-  isFunction?: boolean;
-  isMessage?: boolean;
-  appContext?: any;
-  startIndex?: number;
-  imgList?: { src: string; alt: string; thumb: string }[];
+  beforeClose?: Function;
+  close?: Function;
   min?: Function;
   full?: Function;
-  // restore?: Function;
   revert?: Function;
-  moveOut?: boolean;
   moveStart?: Function;
   moving?: Function;
   moveEnd?: Function;
   resizeStart?: Function;
   resizing?: Function;
   resizeEnd?: Function;
-  beforeClose?: Function;
-  close?: Function;
-  animDuration?: string;
-  teleport?: string;
-  teleportDisabled?: boolean;
-  lastPosition?: boolean;
+  internalDestroy?: Function;
 }
 
 const props = withDefaults(defineProps<LayerProps>(), {
@@ -123,6 +123,7 @@ const props = withDefaults(defineProps<LayerProps>(), {
   type: 1,
   title: "标题",
   titleStyle: "",
+  isHtmlFragment: false,
   offset: "auto",
   area: "auto",
   move: true,
@@ -133,36 +134,35 @@ const props = withDefaults(defineProps<LayerProps>(), {
   shadeOpacity: "0.1",
   closeBtn: "1",
   btnAlign: "r",
-
+  anim: 0,
+  isOutAnim: true,
+  imgList: () => [],
+  startIndex: 0,
+  animDuration: "0.3s",
+  moveOut: false,
+  teleport: "body",
+  teleportDisabled: false,
+  lastPosition: true,
   time: 0,
   load: 0,
-  anim: 0,
-  isHtmlFragment: false,
-  isOutAnim: true,
+  yesText: "确定",
+
+  isMessage: false,
+  isFunction: false,
+
   success: () => {},
   end: () => {},
-  full: () => {},
+  beforeClose: () => true,
+  close: () => {},
   min: () => {},
-  // restore: () => {},
+  full: () => {},
   revert: () => {},
-  yesText: "确定",
-  isFunction: false,
-  isMessage: false,
-  startIndex: 0,
-  imgList: () => [],
-  moveOut: false,
   moveStart: () => {},
   moving: () => {},
   moveEnd: () => {},
   resizeStart: () => {},
   resizing: () => {},
   resizeEnd: () => {},
-  beforeClose: () => true,
-  close: () => {},
-  animDuration: "0.3s",
-  teleport: "body",
-  teleportDisabled: false,
-  lastPosition: true,
 });
 
 const emit = defineEmits(["close", "update:modelValue"]);
@@ -275,12 +275,12 @@ const maxHandle = () => {
     listenDocument();
     w.value = _w.value;
     h.value = _h.value;
-    props.revert(props.id);
+    props.revert(id.value);
   } else {
     // 防止ResizeObserver改动 t、l 偏移值
     removeListener();
     baseMaxHandle();
-    props.full(props.id);
+    props.full(id.value);
   }
   max.value = !max.value;
 };
@@ -315,12 +315,12 @@ const minHandle = async () => {
     // 取消最小化
     // 为保证定位位置可返回最后一次拖动位置|初始位置
     // 放置 ResizeObserver 统一设置
-    props.revert(props.id);
+    props.revert(id.value);
   } else {
     // 防止ResizeObserver改动 t、l 偏移值
     removeListener();
     baseMinHandle();
-    props.min(props.id);
+    props.min(id.value);
   }
   min.value = !min.value;
 };
@@ -355,7 +355,7 @@ watch(
         firstOpenDelayCalculation();
       }
       nextTick(() => {
-        props.success(props.id);
+        props.success(id.value);
       });
     }
   },
@@ -366,7 +366,7 @@ watch(
   () => visible.value,
   () => {
     if (!visible.value) {
-      props.end(props.id);
+      props.end(id.value);
     }
   }
 );
@@ -488,13 +488,17 @@ const contentClasses = computed(() => {
  * @param null
  */
 const closeHandle = () => {
-  if (props.beforeClose) {
-    const result = props.beforeClose(props.id);
+  if (typeof props.beforeClose === "function") {
+    const result = props.beforeClose(id.value);
     // @ts-ignore
     if (result === undefined || (result != undefined && result === true)) {
-      props.close(props.id);
+      props.close(id.value);
       emit("close");
       emit("update:modelValue", false);
+
+      // 函数式调用专用.
+      // 不对外使用
+      props.internalDestroy && props.internalDestroy();
       if (type === 6) {
         // @ts-ignore
         removeNotifiyFromQueen(props.id);
@@ -512,7 +516,7 @@ const closeHandle = () => {
  * @param null
  */
 const yesHandle = () => {
-  if (props.yes != undefined) props.yes();
+  if (typeof props.yes === "function") props.yes(id.value);
   else closeHandle();
 };
 

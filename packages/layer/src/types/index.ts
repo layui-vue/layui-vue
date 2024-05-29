@@ -11,3 +11,9 @@ export type BtnType = {
   disabled?: boolean;
   callback: (id: string) => void;
 };
+
+export type ImgListType = {
+  src: string;
+  alt?: string;
+  thumb?: string;
+};
