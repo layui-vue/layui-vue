@@ -688,12 +688,28 @@ const openComponent2 = () => {
 ::: title 内置方法
 :::
 
+::: table
+
+| 名称 | 描述 | 参数|
+| -- | -- | -- |
+| close | 关闭弹窗 | `id`|
+| closeAll | 关闭所有弹窗 | |
+| reset | 重置弹窗 | |
+| min | 最小化 | `id` |
+| full | 最大化 | `id` |
+| revert | 复原最小/最大化 | `id` |
+:::
+
 ::: demo 通过 `layer.open(options)` 创建模态窗, 通过 `layer.close(id)` 关闭指定模态窗，通过 `layer.closeAll()` 关闭所有模态窗。
 
 <template>
   <lay-button @click="open" type="primary">打开</lay-button>
   <lay-button @click="close" type="primary">关闭</lay-button>
   <lay-button @click="closeAll" type="primary">关闭所有</lay-button>
+  <lay-button @click="reset" type="primary">重置</lay-button>
+  <lay-button @click="min" type="primary">最小化</lay-button>
+  <lay-button @click="full" type="primary">最大化</lay-button>
+  <lay-button @click="revert" type="primary">复原</lay-button>
 </template>
 
 <script setup>
@@ -703,7 +719,7 @@ import { layer } from "@layui/layui-vue"
 const id = ref();
     
 const open = () => {
-    id.value = layer.open({title:"标题",content:"内容", shade: false})
+    id.value = layer.open({title:"标题",content:"内容", shade: false, maxmin: true})
 }
 
 const close = () => {
@@ -712,6 +728,22 @@ const close = () => {
     
 const closeAll = () => {
     layer.closeAll()
+}
+
+const reset = () => {
+    layer.reset(id.value)
+}
+
+const min = () => {
+    layer.min(id.value)
+}
+
+const full = () => {
+    layer.full(id.value)
+}
+
+const revert = () => {
+    layer.revert(id.value)
 }
 </script>
 
@@ -846,7 +878,19 @@ const openCallback = () => {
 | resizeEnd | 弹窗拉伸位置开始回调 | `function` | `id`| - |
 :::
 
-::: title 内置方法
+::: title Exposes事件
+:::
+
+::: table
+
+| 名称 | 描述 |
+| -- | -- |
+| reset | 重置弹窗 `modelValue` 为false 弹窗将打开 |
+| open | 打开弹窗 |
+| close | 关闭弹窗 |
+| full | 最大化 |
+| min | 最小化 |
+| reset | 复原最小/最大化 |
 :::
 
 ::: title types

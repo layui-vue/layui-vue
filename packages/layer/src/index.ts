@@ -252,11 +252,25 @@ const layer = {
       instance.modalInstance.component?.exposed?.reset();
     }
   },
-  // 重置位置
+  // 最大化
+  min: (id: any) => {
+    if (id != null && isExist(id)) {
+      const instance: any = findById(id);
+      instance.modalInstance.component?.exposed?.min();
+    }
+  },
+  // 最大化
   full: (id: any) => {
     if (id != null && isExist(id)) {
       const instance: any = findById(id);
       instance.modalInstance.component?.exposed?.full();
+    }
+  },
+  // 复原最小/最大化
+  revert: (id: any) => {
+    if (id != null && isExist(id)) {
+      const instance: any = findById(id);
+      instance.modalInstance.component?.exposed?.revert();
     }
   },
 };
