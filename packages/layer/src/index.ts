@@ -1,4 +1,4 @@
-import { render, h, isVNode, getCurrentInstance, AppContext, App } from "vue";
+import { render, h, isVNode, AppContext, App } from "vue";
 import LayLayer from "./component/index.vue";
 import { InstallOptions } from "./types";
 import { zIndexKey } from "./tokens";
@@ -288,5 +288,7 @@ const install = (app: App, options?: InstallOptions): void => {
 export { layer, LayLayer };
 
 export default { install };
+
+export * from "./types";
 
 import "./theme/index.css";
