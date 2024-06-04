@@ -1,4 +1,4 @@
-import { render, h, isVNode, getCurrentInstance, AppContext, App } from "vue";
+import { render, h, isVNode, AppContext, App } from "vue";
 import LayLayer from "./component/index.vue";
 import { InstallOptions } from "./types";
 import { zIndexKey } from "./tokens";
@@ -170,7 +170,7 @@ const layer = {
       {
         ...options,
         isFunction: true,
-        destroy() {
+        internalDestroy() {
           clearTimeout(timer);
           modalInstance.component?.exposed?.close();
           setTimeout(() => {
@@ -252,11 +252,25 @@ const layer = {
       instance.modalInstance.component?.exposed?.reset();
     }
   },
-  // 重置位置
+  // 最大化
+  min: (id: any) => {
+    if (id != null && isExist(id)) {
+      const instance: any = findById(id);
+      instance.modalInstance.component?.exposed?.min();
+    }
+  },
+  // 最大化
   full: (id: any) => {
     if (id != null && isExist(id)) {
       const instance: any = findById(id);
       instance.modalInstance.component?.exposed?.full();
+    }
+  },
+  // 复原最小/最大化
+  revert: (id: any) => {
+    if (id != null && isExist(id)) {
+      const instance: any = findById(id);
+      instance.modalInstance.component?.exposed?.revert();
     }
   },
 };
@@ -274,5 +288,7 @@ const install = (app: App, options?: InstallOptions): void => {
 export { layer, LayLayer };
 
 export default { install };
+
+export * from "./types";
 
 import "./theme/index.css";
