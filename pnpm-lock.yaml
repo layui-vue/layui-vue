@@ -270,7 +270,7 @@ importers:
         specifier: 1.1.1
         version: link:../icons
       '@layui/layer-vue':
-        specifier: 2.3.3
+        specifier: 2.4.0
         version: link:../layer
       '@rollup/plugin-terser':
         specifier: 0.4.4
@@ -311,8 +311,8 @@ importers:
   packages/json-schema-form:
     dependencies:
       '@layui/layui-vue':
-        specifier: 2.17.3
-        version: link:../component
+        specifier: 2.17.4
+        version: 2.17.4(rollup@4.9.6)(vue@3.3.4)
 
   packages/layer:
     dependencies:
@@ -2405,6 +2405,40 @@ packages:
       '@jridgewell/resolve-uri': 3.1.1
       '@jridgewell/sourcemap-codec': 1.4.15
     dev: true
+
+  /@layui/icons-vue@1.1.1:
+    resolution: {integrity: sha512-g072SHIiXVGh5JMVw5/xogdKZn287vH7xlPuRB1rtDJhZl/ZmN3FbI5/RB1nKSWSv25lSBzHatmJG7bzP+mAIQ==}
+    dev: false
+
+  /@layui/layer-vue@2.3.4:
+    resolution: {integrity: sha512-dOp+NsK780bJ8D5zgIUz5cbgbag5MrU3JRSRed4s1VqUNU28wr/5+Lc6S2l2yKf0V5RlEVIIDc89mgy/3z3Rlw==}
+    dependencies:
+      '@layui/icons-vue': 1.1.1
+    dev: false
+
+  /@layui/layui-vue@2.17.4(rollup@4.9.6)(vue@3.3.4):
+    resolution: {integrity: sha512-FpFMqKR6h4HVSvbGtxgEZRgL/6X2nipy79ORzuRfWrXM7p15BW2ata+Xq82lAPgpp4cGuipWI/No+9ajjFAHxw==}
+    dependencies:
+      '@babel/types': 7.21.0
+      '@ctrl/tinycolor': 3.4.1
+      '@layui/icons-vue': 1.1.1
+      '@layui/layer-vue': 2.3.4
+      '@rollup/plugin-terser': 0.4.4(rollup@4.9.6)
+      '@types/qrcode': 1.5.0
+      '@umijs/ssr-darkreader': 4.9.45
+      '@vueuse/core': 8.7.3(vue@3.3.4)
+      async-validator: 4.1.1
+      cropperjs: 1.5.12
+      dayjs: 1.11.10
+      evtd: 0.2.3
+      jsbarcode: 3.11.5
+      qrcode: 1.5.0
+      vue-i18n: 9.6.3(vue@3.3.4)
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+      - rollup
+      - vue
+    dev: false
 
   /@microsoft/api-extractor-model@7.26.4(@types/node@18.19.10):
     resolution: {integrity: sha512-PDCgCzXDo+SLY5bsfl4bS7hxaeEtnXj7XtuzEE+BtALp7B5mK/NrS2kHWU69pohgsRmEALycQdaQPXoyT2i5MQ==}

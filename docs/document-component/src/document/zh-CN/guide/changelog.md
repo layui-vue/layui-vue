@@ -15,6 +15,23 @@
   <lay-timeline>
     <lay-timeline-item title="2.17.x">
       <ul>
+        <a name="2-17-5"></a>
+        <li>
+          <h3>2.17.5 <span class="layui-badge-rim">2024-06-04</span></h3>
+          <ul>
+              <li>[升级] layer 升级至2.4.0。<a href="https://gitee.com/layui-vue/layui-vue/pulls/328">详情</a></li>
+              <li>[新增] layer组件 layer.min 最小化、layer.revert 复原最小/最大化。</li>
+              <li>[新增] layer组件 props.revert 内部最小/最大化生命周期。</li>
+              <li>[新增] layer组件 props.lastPosition 最小/最大化 复原位置 `true` 最后位置 `false` 初始位置。</li>
+              <li>[新增] layer组件 min Expose事件 外部最小化。</li>
+              <li>[新增] layer组件 revert Expose事件 外部还原最小/最大化。</li>
+              <li>[删除] layer组件 props.destroy。</li>
+              <li>[调整] layer组件 props.restore 由 props.revert 代替。</li>
+              <li>[修复] datePicker组件 clear事件rang场景初始值调整为空数组。</li>
+          </ul>
+        </li>
+      </ul>
+      <ul>
         <a name="2-17-4"></a>
         <li>
           <h3>2.17.4 <span class="layui-badge-rim">2024-05-23</span></h3>
