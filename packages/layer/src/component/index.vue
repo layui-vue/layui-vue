@@ -270,7 +270,7 @@ const maxHandle = () => {
     h.value = _h.value;
     t.value = _t.value;
     l.value = _l.value;
-    props.restore(props.id);
+    props.restore(id.value);
   } else {
     _t.value = t.value;
     _l.value = l.value;
@@ -280,7 +280,7 @@ const maxHandle = () => {
     h.value = maxArea().h;
     t.value = maxOffset().t;
     l.value = maxOffset().l;
-    props.full(props.id);
+    props.full(id.value);
   }
   max.value = !max.value;
 };
@@ -300,7 +300,7 @@ const minHandle = () => {
     h.value = _h.value;
     t.value = _t.value;
     l.value = _l.value;
-    props.restore(props.id);
+    props.restore(id.value);
   } else {
     _w.value = w.value;
     _h.value = h.value;
@@ -310,7 +310,7 @@ const minHandle = () => {
     w.value = minArea().w;
     t.value = minOffset(left).t;
     l.value = minOffset(left).l;
-    props.min(props.id);
+    props.min(id.value);
   }
   min.value = !min.value;
 };
@@ -363,7 +363,7 @@ watch(
         firstOpenDelayCalculation();
       }
       nextTick(() => {
-        props.success(props.id);
+        props.success(id.value);
       });
     }
   },
@@ -374,7 +374,7 @@ watch(
   () => visible.value,
   () => {
     if (!visible.value) {
-      props.end(props.id);
+      props.end(id.value);
     }
   }
 );
@@ -419,15 +419,15 @@ const supportMove = function () {
             removeListener();
             l.value = left;
             t.value = top;
-            props.moving(props.id, { top: top, left: left });
+            props.moving(id.value, { top: top, left: left });
           },
           () => {
             // 拖拽结束
-            props.moveEnd(props.id);
+            props.moveEnd(id.value);
           },
           () => {
             // 拖拽开始
-            props.moveStart(props.id);
+            props.moveStart(id.value);
           }
         );
         // 拉伸, 在首次拉伸前, 移除 resizeObserver 监听
@@ -437,15 +437,15 @@ const supportMove = function () {
             removeListener();
             h.value = height;
             w.value = width;
-            props.resizing(props.id, { width: width, height: height });
+            props.resizing(id.value, { width: width, height: height });
           },
           () => {
             // 拖拽结束
-            props.resizeEnd(props.id);
+            props.resizeEnd(id.value);
           },
           () => {
             // 拖拽开始
-            props.resizeStart(props.id);
+            props.resizeStart(id.value);
           }
         );
       }
@@ -492,16 +492,16 @@ const contentClasses = computed(() => {
  */
 const closeHandle = () => {
   if (props.beforeClose) {
-    const result = props.beforeClose(props.id);
+    const result = props.beforeClose(id.value);
     // @ts-ignore
     if (result === undefined || (result != undefined && result === true)) {
-      props.close(props.id);
+      props.close(id.value);
       emit("close");
       emit("update:modelValue", false);
       props.destroy();
       if (type === 6) {
         // @ts-ignore
-        removeNotifiyFromQueen(props.id);
+        removeNotifiyFromQueen(id.value);
       }
       if (min.value) {
         updateMinArrays(id.value, !min.value);
