@@ -301,7 +301,7 @@ export default {
 ::: title 最大值,最小值
 :::
 
-::: demo 通过预设`min`、`max`属性限制组件选择的最大值与最小值,目前仅支持`date`、`year`、`month`、`time(不包含range)`模式，且无法在初始化时强制变更modelValue,在未来的版本中将补齐这一特性并支持更多模式
+::: demo 通过预设`min`、`max`属性限制组件选择的最大值与最小值,目前仅支持`date`、`year`、`month`、`time(不包含range)`模式，且无法在初始化时强制变更 modelValue,在未来的版本中将补齐这一特性并支持更多模式
 
 <template>
   <lay-space direction="vertical">
@@ -385,22 +385,28 @@ export default {
 
 ::: table
 
-| 属性         | 描述                                         | 类型                                        | 默认值              | 可选值                                              | 版本    |
-| ------------ | -------------------------------------------- | ------------------------------------------- | ------------------- | --------------------------------------------------- | ------- |
-| v-model      | 当前时间                                     | `string`                                    | --                  | --                                                  | --      |
-| type         | 选择类型                                     | `string`                                    | `date`              | `date` `datetime` `year` `month` `time` `yearmonth` | --      |
-| disabled     | 是否禁止修改                                 | `boolean`                                   | `false`             | —                                                   | —       |
-| simple       | 一次性选择，无需点击确认按钮                 | `boolean`                                   | `false`             | --                                                  | --      |
-| readonly     | 只读                                         | `boolean`                                   | `false`             | --                                                  | --      |
-| allowClear   | 允许清空                                     | `boolean`                                   | `true`              | --                                                  | --      |
-| size         | 尺寸                                         | `string`                                    | `lg` `md` `sm` `xs` | `md`                                                | --      |
-| prefix-icon  | 前置图标                                     | `string`                                    | `layui-icon-date`   | 内置图标集                                          | `1.4.0` |
-| suffix-icon  | 后置图标                                     | `string`                                    | --                  | 内置图标集                                          | `1.4.0` |
-| timestamp    | 时间戳模式(13 位),仅对 date 和 datetime 有效 | `boolean`                                   | `false`             | `true` `false`                                      | `1.6.5` |
-| format       | 输出格式化                                   | `string`                                    | --                  | 例如`YYYY-MM-DD`                                    | -       |
-| default-time | 范围日期 `type=datetime` 时分秒默认时间        | `string` `Array<string>`                    | --                  | 例如`12:30:00`                               | `2.17.2`       |
-| contentStyle | 内容自定义样式                               | `StyleValue`                                | --                  | --                                                  | --      |
-| contentClass | 内容自定义 Class                             | `string` `Array<string \| object>` `object` | --                  | --                                                  | --      |
+| 属性           | 描述                                         | 类型                                        | 默认值              | 可选值                                              | 版本     |
+| -------------- | -------------------------------------------- | ------------------------------------------- | ------------------- | --------------------------------------------------- | -------- |
+| name           | 原始属性 name                                | `string`                                    | --                  | --                                                  | --       |
+| v-model        | 当前时间                                     | `string` `number` `string[]`                | --                  | --                                                  | --       |
+| type           | 选择类型                                     | `string`                                    | `date`              | `date` `datetime` `year` `month` `time` `yearmonth` | --       |
+| disabled       | 是否禁止修改                                 | `boolean`                                   | `false`             | —                                                   | —        |
+| readonly       | `input` 是否只读                             | `boolean`                                   | `false`             | —                                                   | —        |
+| placeholder    | `input` 占位符                               | `string`                                    | --                  | —                                                   | —        |
+| allowClear     | 允许清空                                     | `boolean`                                   | `false`             | --                                                  | --       |
+| simple         | 一次性选择，无需点击确认按钮                 | `boolean`                                   | `false`             | --                                                  | --       |
+| max            | 最大可选日期                                 | `string`                                    | --                  | --                                                  | --       |
+| min            | 最小可选日期                                 | `string`                                    | --                  | --                                                  | --       |
+| rang           | 是否范围选择                                 | `boolean`                                   | `false`             | --                                                  | --       |
+| rangeSeparator | 范围分隔符                                   | `string`                                    | `至`                | --                                                  | --       |
+| size           | 尺寸                                         | `string`                                    | `lg` `md` `sm` `xs` | `md`                                                | --       |
+| prefix-icon    | 前置图标                                     | `string`                                    | `layui-icon-date`   | 内置图标集                                          | `1.4.0`  |
+| suffix-icon    | 后置图标                                     | `string`                                    | --                  | 内置图标集                                          | `1.4.0`  |
+| timestamp      | 时间戳模式(13 位),仅对 date 和 datetime 有效 | `boolean`                                   | `false`             | `true` `false`                                      | `1.6.5`  |
+| format         | 输出格式化                                   | `string`                                    | --                  | 例如`YYYY-MM-DD`                                    | -        |
+| default-time   | 范围日期 `type=datetime` 时分秒默认时间      | `string` `Array<string>`                    | --                  | 例如`12:30:00`                                      | `2.17.2` |
+| contentStyle   | 内容自定义样式                               | `StyleValue`                                | --                  | --                                                  | --       |
+| contentClass   | 内容自定义 Class                             | `string` `Array<string \| object>` `object` | --                  | --                                                  | --       |
 
 :::
 
@@ -414,6 +420,7 @@ export default {
 | change | 原生 change 事件 | (value : 同 v-model) |
 | focus  | 原生 focus 事件  | event : Event        |
 | blur   | 原生 blur 事件   | event : Event        |
+| clear  | 原生 clear 事件  |                      |
 
 :::
 

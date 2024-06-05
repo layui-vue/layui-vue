@@ -1,69 +1,90 @@
 <template>
   <div class="site-container">
-    <div class="site-banner">
-      <div class="site-banner-main">
-        <div class="site-zfj site-zfj-anim">
-          <img
-            src="../assets/logo.jpg"
-            style="width: 172px; border-radius: 20px; border: 5px solid #e2e2e2"
-          />
-        </div>
-        <div class="layui-anim site-desc site-desc-anim">
-          <p class="web-font-desc">layui - vue</p>
-          <cite>{{ t("home.description") }}</cite>
-        </div>
-        <div class="site-download">
-          <router-link class="layui-inline site-down" to="/zh-CN/guide">
-            Get Started
-          </router-link>
-          <a
-            class="layui-inline site-down"
-            href="javascript:void(0);"
-            @click="changeTheme"
-          >
-            {{ appStore.theme === "dark" ? "Turn Off" : "Turn On" }}
-          </a>
-        </div>
-        <div class="site-version">
-          <span
-            >{{ t("home.version") }}：<cite class="site-showv">
-              {{ version }}
-            </cite></span
-          >
-          <span
-            >{{ t("home.download") }}：<em class="site-showdowns"
-              >181,892</em
-            ></span
-          >
-        </div>
-        <div class="site-banner-other">
-          <a
-            href="https://gitee.com/layui/layui-vue"
-            target="_blank"
-            rel="nofollow"
-            class="site-star"
-          >
-            <i class="layui-icon"></i> Star <cite id="getStars">2920</cite>
-          </a>
-          <a
-            href="https://gitee.com/layui/layui-vue"
-            target="_blank"
-            rel="nofollow"
-            class="site-fork"
-          >
-            Gitee
-          </a>
-          <a
-            href="https://github.com/layui/layui-vue"
-            target="_blank"
-            rel="nofollow"
-            class="site-fork"
-          >
-            Github
-          </a>
-        </div>
+    <div class="site-layui-main">
+      <div class="site-zfj site-zfj-anim">
+        <img
+          src="../assets/logo.jpg"
+          style="width: 172px; border-radius: 20px; border: 5px solid #e2e2e2"
+        />
+      </div>
+      <div class="layui-anim site-desc site-desc-anim">
+        <p class="web-font-desc">layui - vue</p>
+        <cite>{{ t("home.description") }}</cite>
+      </div>
+      <div class="site-download">
+        <router-link class="layui-inline site-down" to="/zh-CN/guide">
+          Get Started
+        </router-link>
+        <a
+          class="layui-inline site-down"
+          href="javascript:void(0);"
+          @click="changeTheme"
+        >
+          {{ appStore.theme === "dark" ? "Turn Off" : "Turn On" }}
+        </a>
+      </div>
+      <div class="site-version">
+        <span
+          >{{ t("home.version") }}：<cite class="site-showv">
+            {{ version }}
+          </cite></span
+        >
+        <span
+          >{{ t("home.download") }}：<em class="site-showdowns"
+            >181,892</em
+          ></span
+        >
+      </div>
+      <div class="site-banner-other">
+        <a
+          href="https://gitee.com/layui/layui-vue"
+          target="_blank"
+          rel="nofollow"
+          class="site-star"
+        >
+          <i class="layui-icon"></i> Star <cite id="getStars">2920</cite>
+        </a>
+        <a
+          href="https://gitee.com/layui/layui-vue"
+          target="_blank"
+          rel="nofollow"
+          class="site-fork"
+        >
+          Gitee
+        </a>
+        <a
+          href="https://github.com/layui/layui-vue"
+          target="_blank"
+          rel="nofollow"
+          class="site-fork"
+        >
+          Github
+        </a>
       </div>
     </div>
+    <section class="sponsors">
+      <h1>{{ t("home.sponsors") }}</h1>
+      <div class="sponsors-main">
+        <lay-row :space="30" class="sponsors-row">
+          <lay-col :md="6" :sm="12" :xs="12">
+            <a
+              href="https://gitee.com/lubase/web-layui"
+              target="_blank"
+              style="display: flex; justify-content: center"
+            >
+              <img style="width: 200px" src="../assets/lubase-logo.png" />
+            </a>
+          </lay-col>
+        </lay-row>
+      </div>
+      <div class="sponsors-btn">
+        <lay-button size="sm" radius>
+          <a class="join-sponsors" href="mailto:contact@layui-vue.com">
+            {{ t("home.join_sponsors") }}
+          </a>
+        </lay-button>
+      </div>
+    </section>
     <div class="box-list">
       <lay-row :space="30">
         <lay-col :md="8" :sm="12" :xs="12">
@@ -148,7 +169,7 @@
               target="_blank"
             >
               <lay-avatar
-                src="https://www.baomidou.com/img/logo.svg"
+                src="https://baomidou.com/assets/asset.cIbiVTt_.svg"
                 style="background: transparent"
               ></lay-avatar>
             </a>
@@ -306,26 +327,18 @@ body {
 .site-container {
   background: #fff;
   margin-top: 60px;
-  height: 100%;
-  width: 100%;
-}
-
-.site-banner {
-  overflow: hidden;
-  text-align: center;
-  position: relative;
-  height: calc(100% - 60px);
+  height: calc(100vh - 60px);
+  width: 100vw;
   background-image: url(../assets/background.svg);
   background-repeat: no-repeat;
   background-size: 100%;
 }
 
-.site-banner-main {
+.site-layui-main {
+  height: 90%;
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 180px);
   justify-content: center;
-  position: relative;
   text-align: center;
 }
 
@@ -367,7 +380,6 @@ body {
 }
 
 .site-zfj {
-  padding-top: 25px;
   height: 220px;
 }
 
@@ -449,13 +461,34 @@ body {
 }
 
 .site-banner-other {
-  position: relative;
-  left: 0;
-  top: 40px;
-  bottom: 90px;
   width: 100%;
+  margin-top: 40px;
   text-align: center;
   font-size: 0;
+}
+
+.sponsors {
+  padding: 0 150px 36px;
+}
+
+.sponsors h1 {
+  text-align: center;
+  margin-bottom: 12px !important;
+}
+
+.sponsors-main {
+  padding: 20px 20px 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+}
+
+.sponsors-row {
+  display: flex;
+  justify-content: center;
+}
+
+.sponsors-btn {
+  text-align: center;
 }
 
 .box-list {

@@ -100,7 +100,11 @@ export function calculateDrawerArea(
  *
  * @return { Array } 正确位置
  */
-export function calculateOffset(offset: any, area: any, type: any) {
+export function calculateOffset(
+  offset: string[] | string,
+  area: string[],
+  type: number
+) {
   const arr = [
     "t",
     "r",
@@ -292,11 +296,11 @@ export function getPosition(dom: any) {
 }
 
 // 元素宽高
-export function getArea(dom: any) {
+export function getArea(dom: HTMLDivElement | null) {
   // @ts-ignore
-  const width = getComputedStyle(dom, null).width;
+  const width = getComputedStyle(dom, null)?.width;
   // @ts-ignore
-  const height = getComputedStyle(dom, null).height;
+  const height = getComputedStyle(dom, null)?.height;
   return [width, height];
 }
 

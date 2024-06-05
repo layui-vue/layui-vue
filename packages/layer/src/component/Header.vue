@@ -11,7 +11,7 @@ import { StyleValue, compile, computed } from "vue";
 export interface HeaderProps {
   title: string | boolean | Function;
   titleStyle: string | StyleValue;
-  move: boolean | string;
+  move: boolean;
 }
 
 const renderContent = function (content: any) {

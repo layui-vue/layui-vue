@@ -7,7 +7,10 @@
         </div>
       </div>
       <div class="layui-laydate-content" style="height: 210px">
-        <ul class="layui-laydate-list laydate-time-list" ref="timePanelRef">
+        <ul
+          class="layui-laydate-list laydate-time-list"
+          ref="startTimePanelRef"
+        >
           <li
             class="num-list"
             v-for="item in els"
@@ -40,7 +43,7 @@
         </div>
       </div>
       <div class="layui-laydate-content" style="height: 210px">
-        <ul class="layui-laydate-list laydate-time-list" ref="timePanelRef">
+        <ul class="layui-laydate-list laydate-time-list" ref="endTimePanelRef">
           <li
             class="num-list"
             v-for="item in els"

@@ -8,8 +8,10 @@ export default {
   home: {
     description:
       "layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库.",
-    version: "当前版本",
     changelog: "更新日志",
+    version: "当前版本",
     download: "下载量",
+    sponsors: "赞助商",
+    join_sponsors: "成为赞助商",
   },
 };

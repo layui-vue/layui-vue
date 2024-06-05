@@ -716,12 +716,28 @@ const openComponent2 = () => {
 ::: title 内置方法
 :::
 
+::: table
+
+| 名称 | 描述 | 参数|
+| -- | -- | -- |
+| close | 关闭弹窗 | `id`|
+| closeAll | 关闭所有弹窗 | |
+| reset | 重置弹窗 | |
+| min | 最小化 | `id` |
+| full | 最大化 | `id` |
+| revert | 复原最小/最大化 | `id` |
+:::
+
 ::: demo 通过 `layer.open(options)` 创建模态窗, 通过 `layer.close(id)` 关闭指定模态窗，通过 `layer.closeAll()` 关闭所有模态窗。
 
 <template>
   <lay-button @click="open" type="primary">打开</lay-button>
   <lay-button @click="close" type="primary">关闭</lay-button>
   <lay-button @click="closeAll" type="primary">关闭所有</lay-button>
+  <lay-button @click="reset" type="primary">重置</lay-button>
+  <lay-button @click="min" type="primary">最小化</lay-button>
+  <lay-button @click="full" type="primary">最大化</lay-button>
+  <lay-button @click="revert" type="primary">复原</lay-button>
 </template>
 
 <script setup>
@@ -731,7 +747,7 @@ import { layer } from "@layui/layui-vue"
 const id = ref();
 
 const open = () => {
-    id.value = layer.open({title:"标题",content:"内容", shade: false})
+    id.value = layer.open({title:"标题",content:"内容", shade: false, maxmin: true})
 }
 
 const close = () => {
@@ -741,6 +757,22 @@ const close = () => {
 const closeAll = () => {
     layer.closeAll()
 }
+
+const reset = () => {
+    layer.reset(id.value)
+}
+
+const min = () => {
+    layer.min(id.value)
+}
+
+const full = () => {
+    layer.full(id.value)
+}
+
+const revert = () => {
+    layer.revert(id.value)
+}
 </script>
 
 :::
@@ -748,7 +780,7 @@ const closeAll = () => {
 ::: title 回调事件
 :::
 
-::: demo 你可以通过 `success` `end` `close` `beforeClose` `full` `min` `restore` 等回调属性，监听 layer 的生命周期。
+::: demo 你可以通过 `success` `end` `close` `beforeClose` `full` `min` `restore` `revert` 等回调属性，监听 layer 的生命周期。
 
 <template>
   <lay-button @click="openCallback" type="primary">打开</lay-button>
@@ -770,8 +802,8 @@ const openCallback = () => {
         full: (id) => {
             console.log(`最大化:${id}`)
         },
-        restore: (id) => {
-            console.log(`重置:${id}`)
+        revert: (id) => {
+            console.log(`最小/最大化还原:${id}`)
         },
         success: (id) => {
             console.log(`成功:${id}`)
@@ -788,12 +820,22 @@ const openCallback = () => {
         moveStart: (id) => {
             console.log(`拖拽开始:${id}`)
         },
-        moving: (id) => {
+        moving: (id, {top, left}) => {
             console.log(`拖拽中：${id}`)
         },
         moveEnd: (id) => {
             console.log(`拖拽结束:${id}`)
-        }})
+        },
+        resizeStart: (id) => {
+            console.log(`拉伸开始:${id}`)
+        },
+        resizing: (id, {width, height}) => {
+            console.log(`拉伸中：${id}`)
+        },
+        resizeEnd: (id) => {
+            console.log(`拉伸结束:${id}`)
+        }
+        })
 }
 </script>
 
@@ -857,28 +899,35 @@ const openCallback = () => {
 | | | | | `"drawer"` `"photos"` `"notify"` `"prompt"` |
 | *`icon`* | 图标 | `string` `number` | | |
 | *`title`* | 标题 | `string` `boolean` | `"信息"` | |
-| *`titleStyle`* | 标题样式 | `string` `StyleValue` | `""` |  |
+| *`title-style`* | 标题样式 | `string` `StyleValue` | `""` |  |
 | *`skin`* | 颜色模式 | `string` | | |
-| *`zIndex`* | zIndex | `number` | | |
+| *`layer-classes (原 skin 属性)`* | layer box 类名 | `string` | | |
+| *`z-index`* | zIndex，若不设置则内部将从 `99999` 开始递增 | `number` | | |
 | *`content`* | 内容 | `string` `VNode` | | |
 | *`v-model`* | 显示 | `boolean` | `false`  | `true` `false` |
-| *`offset`* | 位置 | `string` `array` | `"auto"` | `"auto"` `[top, left]` |
-| *`area`* | 尺寸 | `string` `array` | `"auto"`  | `"auto"` `[width, height]` |
-| *`move`* | 允许拖拽 | `boolean` | `true` | `true` `false` |
-| *`moveOut`* | 允许超出父容器 | `boolean` | `false` | `true` `false` |
-| *`maxmin`* | 允许最大化和最小化 | `boolean` | `false` | `true` `false` |
+| *`offset`* | 位置 | `string` `string[]` | `"auto"` | `"auto"` `[top, left]` |
+| *`area`* | 尺寸 | `string` `string[]` | `"auto"`  | `"auto"` `[width, height]` |
+| *`move`* | 允许移动 | `boolean` | `true` | `true` `false` |
+| *`moveOut`* | 是否可以拖出浏览器可视区域 | `boolean` | `false` | `true` `false` |
+| *`maxmin`* | 开启最小/最大化 | `boolean` | `false` | `true` `false` |
 | *`resize`* | 允许拉伸 | `boolean` | `false` | `true` `false` |
 | *`anim`* | 入场动画 | `number` | `0` | `0` - `6` |
-| *`isOutAnim`* | 出场动画 | `boolean` | `true` | `true` `false` |
+| *`isOutAnim`* | 离场动画 | `boolean` | `true` | `true` `false` |
 | *`animDuration`* | 动画持续时间 | `string` | `"0.3s"` | |
-| *`btn`* | 按钮 | `Array<LayerBtnProps>` `false` | | |
-| *`btnAlign`* | 按钮位置 | `string` | `"r"` | `"l"` `"c"` `"r"` |
+| *`btn`* | 底部按钮集合 | `Array<LayerBtnProps>` `false` | | |
+| *`btnAlign`* | 底部按钮位置 | `string` | `"r"` | `"l"` `"c"` `"r"` |
 | *`closeBtn`* | 关闭按钮 | `boolean` `string` | `"1"` | `false` `"1"` `"2"` |
-| *`time`* | 关闭时间 | `number` | `0` | |
-| *`shade`* | 使用遮盖层 | `boolean` | `true` | `true` `false` |
-| *`shadeClose`* | 点击遮盖层关闭 | `boolean` | `true` | `true` `false` |
-| *`shadeOpacity`* | 遮盖层透明度 | `string` | `"0.1"` | `"0.1"` - `"1"` |
+| *`time`* | `msg` `notify` 定时关闭 | `number` | `0` | |
+| *`shade`* | 显示遮盖层 | `boolean` | `true` | `true` `false` |
+| *`shade-close`* | 遮盖层关闭 | `boolean` | `true` | `true` `false` |
+| *`shade-style`*   | 遮盖层样式   | `StyleValue` |  |  |
+| *`shade-opacity`* | 遮盖层透明度 | `string` | `"0.1"` | `"0.1"` - `"1"` |
 | *`isHtmlFragment`* | 解析 html 字符 | `boolean` | `false` | `true` `false` |
+| *`teleport`* | layer挂载到目标DOM | `string` | `body`  |  |
+| *`teleportDisabled`* | 禁止挂载到目标DOM，保持原位置 | `boolean` | `false`  | |
+| *`lastPosition`* | 最小/最大化复原位置 `true`上次位置(拖动)、 `false` layer初始位置 | `boolean` | `true`  | |
+| *`load`* | `type` 为3时，loading Icon   | `number` | `0` | `0`, `1` |
+| *`yesText`* | 底部默认按钮文本   | `string` | `确定` |  |
 
 :::
 
@@ -904,14 +953,37 @@ const openCallback = () => {
 
 | 属性 | 描述 | 类型 | 默认值 | 可选值 |
 | -- | -- | -- | -- | -- |
-| *`full`* | 窗口最大化回调 | `function` | `(id) => {}` | |
-| *`min`* | 窗口最小化回调 | `function` | `(id) => {}` | |
-| *`restore`* | 窗口尺寸还原回调 | `function` | `(id) => {}` | |
-| *`success`* | 窗口可视回调 | `function` | `(id) => {}` | |
-| *`end`* | 窗口隐藏回调 | `function` | `(id) => {}` | |
-| *`close`* | 关闭回调 | `function` | `(id) => {}` | |
-| *`beforeClose`* | 关闭前回调 | `function` | `(id) => {}` | |
+| *`full`* | 最大化回调 | `function` | `(id) => {}` | |
+| *`min`* | 最小化回调 | `function` | `(id) => {}` | |
+| *`revert`* | 恢复最小/最大化回调 | `function` | `(id) => {}` | |
+| *`success`* | layer打开回调 | `function` | `(id) => {}` | |
+| *`end`* | layer关闭回调 | `function` | `(id) => {}` | |
+| *`close`* | 内部(右上角/点击遮罩/默认确认按钮)关闭回调 | `function` | `(id) => {}` | |
+| *`beforeClose`* | 内部(右上角/点击遮罩/默认确认按钮)关闭前回调，返回值为 `true` 内部才会关闭 | `function` | `(id) => boolean` | |
 | *`destroy`* | 销毁回调 | `function` | `() => {}` | |
+| *`yes`* | 点击底部默认按钮 | `function` | `id` | | |
+| *`moveStart`* | 弹窗拖动位置开始回调 | `function` | `id`| - |
+| *`moving`* | 弹窗拖动位置回调 | `function` | `id`| - |
+| *`moveEnd`* | 弹窗拖动位置结束回调 | `function` | `id`| - |
+| *`resizeStart`* | 弹窗拉伸位置开始回调 | `function` | `id`| - |
+| *`resizing`* | 弹窗拉伸位置开始回调 | `function` | `id`| - |
+| *`resizeEnd`* | 弹窗拉伸位置开始回调 | `function` | `id`| - |
+
+:::
+
+::: title Exposes事件
+:::
+
+::: table
+
+| 名称 | 描述 |
+| -- | -- |
+| *`reset`* | 重置弹窗 `modelValue` 为false 弹窗将打开 |
+| *`open`* | 打开弹窗 |
+| *`close`* | 关闭弹窗 |
+| *`full`* | 最大化 |
+| *`min`* | 最小化 |
+| *`reset`* | 复原最小/最大化 |
 
 :::
 
@@ -944,7 +1016,7 @@ const openCallback = () => {
 | *`type`* | 类型 | `0` |
 | *`title`* | 标题 | `false` |
 | *`content`* | 内容 | *`message`* |
-| *`shadeClose`* | 遮盖层关闭 | `false` |
+| *`shade-close`* | 遮盖层关闭 | `false` |
 | *`closeBtn`* | 关闭按钮 | `false` |
 | *`isMessage`* | 是否为消息类型 | `true` |
 | *`shade`* | 遮盖层 | `false` |
@@ -1026,7 +1098,7 @@ const openCallback = () => {
 | *`load`* | 加载层样式 | *`load`* |
 | *`anim`* | 入场动画 | `5` |
 | *`isOutAnim`* | 出场动画 | `false` |
-| *`shadeClose`* | 遮盖层关闭 | `false` |
+| *`shade-close`* | 遮盖层关闭 | `false` |
 
 :::
 
@@ -1069,7 +1141,7 @@ const openCallback = () => {
 | --- | --- | -- |
 | *`type`* | 类型 | `0` |
 | *`content`* | 内容 | *`msg`* |
-| *`shadeClose`* | 遮罩层关闭 | `false` |
+| *`shade-close`* | 遮罩层关闭 | `false` |
 
 :::
 
@@ -1108,8 +1180,8 @@ const openCallback = () => {
 | *`anim`* | 入场动画 | `2` |
 | *`startIndex`* | 初始图片索引 | `0` |
 | *`isOutAnim`* | 出场动画 | `true` |
-| *`shadeClose`* | 遮罩层关闭 | `true` |
-| *`shadeOpacity`* | 遮罩层透明度 | `"0.2"`|
+| *`shade-close`* | 遮罩层关闭 | `true` |
+| *`shade-opacity`* | 遮罩层透明度 | `"0.2"`|
 
 :::
 
@@ -1202,8 +1274,8 @@ const openCallback = () => {
 | 属性 | 描述 | 值 |
 | --- | --- | -- |
 | *`type`* | 类型 | `"prompt"` |
-| *`shadeClose`* | 遮罩层关闭 | `false` |
-| *`shadeOpacity`* | 遮罩层透明度 | `"0.2"` |
+| *`shade-close`* | 遮罩层关闭 | `false` |
+| *`shade-opacity`* | 遮罩层透明度 | `"0.2"` |
 
 :::
 
@@ -1220,3 +1292,24 @@ const openCallback = () => {
 | *`placeholder`* | 占位符 | `string` | `"请输入内容"` | |
 
 :::
+
+::: title types
+:::
+
+```ts
+
+type BtnType = {
+  text: string;
+  style?: string | StyleValue;
+  class?: string;
+  disabled?: boolean;
+  callback: (id: string) => void;
+}
+
+type ImgListType = {
+  src: string;
+  alt?: string;
+  thumb?: string;
+};
+
+```

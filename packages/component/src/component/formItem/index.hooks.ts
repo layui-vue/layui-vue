@@ -39,6 +39,11 @@ export default function useProps(props: any) {
     return formContext.isLabelTooltip;
   });
 
+  const inlineWidth = computed(() => {
+    const formContext = inject("LayForm", {} as LayFormContext);
+    return props.inlineWidth || formContext.inlineWidth || "auto";
+  });
+
   return {
     size,
     mode,
@@ -47,5 +52,6 @@ export default function useProps(props: any) {
     isRequired,
     tooltipProps,
     isLabelTooltip,
+    inlineWidth,
   };
 }
