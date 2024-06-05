@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import "../tooltip/index.less";
 import type { FormItemProps as _FormItemProps } from "./types";
+import type { StyleValue } from "vue";
 import {
   inject,
   ref,
@@ -22,6 +23,7 @@ import cnValidateMessage from "./cnValidateMessage";
 import useProps from "./index.hooks";
 import layTooltip from "../tooltip/index.vue";
 import LayFormItemLabel from "./FormItemLabel";
+import { isNumber } from "../../utils";
 
 defineOptions({
   name: "LayFormItem",
@@ -29,6 +31,7 @@ defineOptions({
 
 const props = withDefaults(defineProps<FormItemProps>(), {
   // mode: "block",
+  tips: "",
 });
 
 export type FormItemProps = _FormItemProps;
@@ -41,6 +44,7 @@ const {
   isRequired,
   tooltipProps,
   isLabelTooltip,
+  inlineWidth,
 } = useProps(props);
 
 const layForm = inject("LayForm", {} as LayFormContext);
@@ -218,36 +222,23 @@ const showLabel = computed(() => {
   return slots.label != undefined || props.label != undefined;
 });
 
-const getMarginLeft = computed(() => {
-  if (mode.value == "block") {
-    if (labelPosition.value != "top") {
-      // 将 label-Width 转化为 number 类型
-      let _labelWidth =
-        typeof labelWidth.value === "string"
-          ? parseFloat(labelWidth.value)
-          : labelWidth.value;
+const labelStyles = computed<StyleValue>(() => {
+  return {
+    width: isNumber(labelWidth.value)
+      ? `${labelWidth.value}px`
+      : labelWidth.value,
+  };
+});
 
-      // No Pane，增加 15 左边距
-      if (!layForm.pane) {
-        _labelWidth += 15;
-      }
-      // 判定 label 属性 与 插槽是否存在，如果都不存在，返回 0px 标签宽度
-      if (slots.label === undefined && props.label === undefined) {
-        return {
-          "margin-left": "0px",
-        };
-      } else {
-        return {
-          "margin-left": `${_labelWidth}px`,
-        };
-      }
-    } else {
-      return {
-        "margin-left": "0px",
-      };
-    }
+const modeStyles = computed<StyleValue>(() => {
+  if (mode.value === "inline") {
+    return {
+      width: isNumber(inlineWidth.value)
+        ? `${inlineWidth.value}px`
+        : inlineWidth.value,
+    };
   }
-  return undefined;
+  return {};
 });
 </script>
 
@@ -258,11 +249,7 @@ const getMarginLeft = computed(() => {
     :size="size"
     ref="formItemRef"
   >
-    <label
-      class="layui-form-label"
-      v-if="showLabel"
-      :style="{ width: labelWidth + 'px' }"
-    >
+    <label class="layui-form-label" v-if="showLabel" :style="labelStyles">
       <lay-tooltip
         v-if="isLabelTooltip"
         v-bind="tooltipProps"
@@ -282,10 +269,13 @@ const getMarginLeft = computed(() => {
         :outProps="props"
       ></LayFormItemLabel>
     </label>
-    <div :class="[mode ? 'layui-input-' + mode : '']" :style="getMarginLeft">
+    <div :class="[mode ? 'layui-input-' + mode : '']" :style="modeStyles">
       <div ref="slotParent">
         <slot :props="{ ...props, model: layForm.model }"></slot>
       </div>
+      <span v-if="tips" class="layui-form-tips">
+        {{ tips }}
+      </span>
       <span
         v-if="errorStatus"
         :class="[

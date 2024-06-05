@@ -22,6 +22,18 @@
     height: @size;
     width: @width;
 
+    .layui-input-number-indicator {
+      pointer-events: none;
+      position: absolute;
+      height: 100%;
+      top: 0;
+      line-height: @size;
+      text-align: center;
+      background-color: #fff;
+      width: @width;
+      overflow: hidden;
+    }
+
     .layui-input {
       height: @size;
       line-height: @size;
@@ -43,6 +55,11 @@
       .layui-control-btn {
         height: @right-size;
         line-height: @right-size;
+      }
+
+      .layui-input-number-indicator {
+        left: 0;
+        width: calc(@width - @right-size - calc(@size / 2));
       }
 
       .layui-subtraction-btn {

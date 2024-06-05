@@ -621,7 +621,7 @@ const changeFeatureVisible2 = () => {
 ::: title 高级通讯
 :::
 
-::: demo 查看 [Children1.vue](https://layui-vue.gitee.io/sandbox-vue/#eNqdUkGO00AQ/ErLFyeSY5OrSaJFK87LA3yZtTub2R3PjGba0UaWD5w4cUTiCDwA+AGfQZH4BT127HXEjZu7XNVTXd1t9Mba9NhglEcbwtoqQbgrNMDmviEyGm5KJcunbREZi/rW1NZo1LQuot3508/zx++bbCAOIqltQ0Ani6wgfKYiguOqNhUqBipBInVYC/fEeMaSTTY9CoXm2pdOWgIl9EPo4JnnkRrLXMlvO4IWHIqS5BETOCRceKOOODmDDvbO1BDzUPFMpMQJ3fTzhstGZj24umLeHqSqHOo7jRdumo3YOiTFVOi9lkZ7gjATbCdPizb8HmbMIf796+v5/Y84KXS3fNFcR8nqxRK2O+ilvaU0MIZWACRJIfc6f/nw59vn0Cug3IlYncNhMbOc8KS9o2554fmDqFi9F8pjDwUjXUh+iJqDjZJoGH5VC5s+eqP5GtriAvIK8rbrmHQVw78Hszeu7r/+4w5Ykl30s5N4uYfxBsYEsZbEuVW4lxrfcuEXcSmUwiqe5WydsX6ivQvVEGowkMPd/SOWNK5mFkh4l04KwZe8iIqR4G3YjxVVJfVDDutX9vn1GGVg76LuL+G7LGU=), 通过 h() 函数的第二个参数向 Children1.vue 传递响应式变量。
+::: demo 查看 [Children1.vue](https://layui-vue.github.io/layui-vue-playground/#eNqdUkGO00AQ/ErLFyeSY5OrSaJFK87LA3yZtTub2R3PjGba0UaWD5w4cUTiCDwA+AGfQZH4BT127HXEjZu7XNVTXd1t9Mba9NhglEcbwtoqQbgrNMDmviEyGm5KJcunbREZi/rW1NZo1LQuot3508/zx++bbCAOIqltQ0Ani6wgfKYiguOqNhUqBipBInVYC/fEeMaSTTY9CoXm2pdOWgIl9EPo4JnnkRrLXMlvO4IWHIqS5BETOCRceKOOODmDDvbO1BDzUPFMpMQJ3fTzhstGZj24umLeHqSqHOo7jRdumo3YOiTFVOi9lkZ7gjATbCdPizb8HmbMIf796+v5/Y84KXS3fNFcR8nqxRK2O+ilvaU0MIZWACRJIfc6f/nw59vn0Cug3IlYncNhMbOc8KS9o2554fmDqFi9F8pjDwUjXUh+iJqDjZJoGH5VC5s+eqP5GtriAvIK8rbrmHQVw78Hszeu7r/+4w5Ykl30s5N4uYfxBsYEsZbEuVW4lxrfcuEXcSmUwiqe5WydsX6ivQvVEGowkMPd/SOWNK5mFkh4l04KwZe8iIqR4G3YjxVVJfVDDutX9vn1GGVg76LuL+G7LGU=), 通过 h() 函数的第二个参数向 Children1.vue 传递响应式变量。
 
 <template>
   <lay-input type="text" v-model="data.remark" >
@@ -650,7 +650,7 @@ const openComponent1 = () => {
 
 :::
 
-::: demo 查看 [Children2.vue](https://layui-vue.gitee.io/sandbox-vue/#eNqNksFum0AQhl9lxAWsYmPnSG2UKOoTtLfSA4Yh3hZ2VzC4sRDnSO2h1x6jPkQP7esklfoWnQXWAaWHcGJmv5n9d+ZvnSutV8cGndDZEpa6SAijWAJs9w2RknCZFiL9tIsdpVFeq1IriZIuYid6+PX14ffPbTCAQ5GQuiGgk0auILyl2IHjslQZFpyQTbnnRMDsNpjcxmGdVkITFIm8MZU1YzVSo/lU8J0VQQsVJimJI/pw8DnIoYO8UiW4rN+dcEVywup8eMlhI4I+uZyR1wdRZBXKd5/VyK4Cm7swQ2E0lqmSNYGulIbdWYLXdgt7ZF7VH+XeZr1ec96ezEfGjLeAXQStGVWvZ2UIr48BSFCBIbh/7u/+/vju+kOWOxFXh3DwJnr9oYn5jLKRBVDyKsu8CuvFEwC9wtUxKRpkDZPgFWws1E1avG32L26xfN6iW/Q/ZkCdWfSwWl6k4zvD5JdlolcfayXZdW08JnnlYdt1DM128NyYuarK/u/JpKPhhoitczZtkmXs1Mcv9zObvqCwbtip0ePdt7m/g/HymX2tea1h7fqxFMTTyjAXEt9wUHvvXVbk+i63dz9MnMLZuT2gr/Z6fBikRbn0/6jpadHJ1I0+OhUIdcpuyzhj3jCUam4v5E0Im7W+fW33ZejI6f4B7opkgw==), 通过 h() 函数的第二个参数声明 onXxx() 形式的函数完成 Children2.vue 的事件监听。 
+::: demo 查看 [Children2.vue](https://layui-vue.github.io/layui-vue-playground/#eNqNksFum0AQhl9lxAWsYmPnSG2UKOoTtLfSA4Yh3hZ2VzC4sRDnSO2h1x6jPkQP7esklfoWnQXWAaWHcGJmv5n9d+ZvnSutV8cGndDZEpa6SAijWAJs9w2RknCZFiL9tIsdpVFeq1IriZIuYid6+PX14ffPbTCAQ5GQuiGgk0auILyl2IHjslQZFpyQTbnnRMDsNpjcxmGdVkITFIm8MZU1YzVSo/lU8J0VQQsVJimJI/pw8DnIoYO8UiW4rN+dcEVywup8eMlhI4I+uZyR1wdRZBXKd5/VyK4Cm7swQ2E0lqmSNYGulIbdWYLXdgt7ZF7VH+XeZr1ec96ezEfGjLeAXQStGVWvZ2UIr48BSFCBIbh/7u/+/vju+kOWOxFXh3DwJnr9oYn5jLKRBVDyKsu8CuvFEwC9wtUxKRpkDZPgFWws1E1avG32L26xfN6iW/Q/ZkCdWfSwWl6k4zvD5JdlolcfayXZdW08JnnlYdt1DM128NyYuarK/u/JpKPhhoitczZtkmXs1Mcv9zObvqCwbtip0ePdt7m/g/HymX2tea1h7fqxFMTTyjAXEt9wUHvvXVbk+i63dz9MnMLZuT2gr/Z6fBikRbn0/6jpadHJ1I0+OhUIdcpuyzhj3jCUam4v5E0Im7W+fW33ZejI6f4B7opkgw==), 通过 h() 函数的第二个参数声明 onXxx() 形式的函数完成 Children2.vue 的事件监听。 
 
 <template>
   <lay-input type="text" v-model="numb" >
@@ -688,12 +688,28 @@ const openComponent2 = () => {
 ::: title 内置方法
 :::
 
+::: table
+
+| 名称 | 描述 | 参数|
+| -- | -- | -- |
+| close | 关闭弹窗 | `id`|
+| closeAll | 关闭所有弹窗 | |
+| reset | 重置弹窗 | |
+| min | 最小化 | `id` |
+| full | 最大化 | `id` |
+| revert | 复原最小/最大化 | `id` |
+:::
+
 ::: demo 通过 `layer.open(options)` 创建模态窗, 通过 `layer.close(id)` 关闭指定模态窗，通过 `layer.closeAll()` 关闭所有模态窗。
 
 <template>
   <lay-button @click="open" type="primary">打开</lay-button>
   <lay-button @click="close" type="primary">关闭</lay-button>
   <lay-button @click="closeAll" type="primary">关闭所有</lay-button>
+  <lay-button @click="reset" type="primary">重置</lay-button>
+  <lay-button @click="min" type="primary">最小化</lay-button>
+  <lay-button @click="full" type="primary">最大化</lay-button>
+  <lay-button @click="revert" type="primary">复原</lay-button>
 </template>
 
 <script setup>
@@ -703,7 +719,7 @@ import { layer } from "@layui/layui-vue"
 const id = ref();
     
 const open = () => {
-    id.value = layer.open({title:"标题",content:"内容", shade: false})
+    id.value = layer.open({title:"标题",content:"内容", shade: false, maxmin: true})
 }
 
 const close = () => {
@@ -713,6 +729,22 @@ const close = () => {
 const closeAll = () => {
     layer.closeAll()
 }
+
+const reset = () => {
+    layer.reset(id.value)
+}
+
+const min = () => {
+    layer.min(id.value)
+}
+
+const full = () => {
+    layer.full(id.value)
+}
+
+const revert = () => {
+    layer.revert(id.value)
+}
 </script>
 
 :::
@@ -720,7 +752,7 @@ const closeAll = () => {
 ::: title 回调事件
 :::
 
-::: demo 你可以通过 `success` `end` `close` `beforeClose` `full` `min` `restore` 等回调属性，监听 layer 的生命周期。
+::: demo 你可以通过 `success` `end` `close` `beforeClose` `full` `min` `restore` `revert` 等回调属性，监听 layer 的生命周期。
 
 <template>
   <lay-button @click="openCallback" type="primary">打开</lay-button>
@@ -742,8 +774,8 @@ const openCallback = () => {
         full: (id) => {
             console.log(`最大化:${id}`)
         },
-        restore: (id) => {
-            console.log(`重置:${id}`)
+        revert: (id) => {
+            console.log(`最小/最大化还原:${id}`)
         },
         success: (id) => {
             console.log(`成功:${id}`)
@@ -760,12 +792,22 @@ const openCallback = () => {
         moveStart: (id) => {
             console.log(`拖拽开始:${id}`)
         },
-        moving: (id) => {
+        moving: (id, {top, left}) => {
             console.log(`拖拽中：${id}`)
         },
         moveEnd: (id) => {
             console.log(`拖拽结束:${id}`)
-        }})
+        },
+        resizeStart: (id) => {
+            console.log(`拉伸开始:${id}`)
+        },
+        resizing: (id, {width, height}) => {
+            console.log(`拉伸中：${id}`)
+        },
+        resizeEnd: (id) => {
+            console.log(`拉伸结束:${id}`)
+        }
+        })
 }
 </script>
 
@@ -778,40 +820,96 @@ const openCallback = () => {
 
 | 属性 | 描述 | 类型 | 默认值 | 可选值 |
 | -- | -- | -- | -- | -- |
-| type | 类型 | string | `1` | `0` `1` `2` `3` `4` `5` |
-| title | 标题 | string boolean | `信息` | -- |
-| titleStyle | 标题样式 | string StyleValue | -- | -- |
-| content | 内容 | string vnode | -- | -- |
-| v-model | 显示 | boolean | `false`  | `true` `false` |
-| offset | 位置 | string array | `auto` | -- |
-| area | 尺寸 | string array | `auto`  | -- |
-| move | 拖拽 | boolean | `true` | `true` `false` | 
-| maxmin | 缩放 | boolean | `false` | `true` `false` |
-| resize | 拉伸 | boolean | `false` | `true` `false` |
-| anim | 入场动画 | number | `0` | `0` - `6` |
-| isOutAnim | 出场动画 | boolean | `true` | `true` `false` |
-| btnAlign | 按钮位置 | string | `r` | `l` `c` `r` |
-| closeBtn | 关闭按钮 | boolean string | `1` | `false` `1` `2` |
-| time | 关闭时间 | number | `0` | -- |
-| shade | 遮盖层 | boolean | `true` | `true` `false` |
-| shadeClose | 遮盖层关闭 | boolean | `true` | `true` `false` |
-| shadeOpacity | 遮盖层透明度 | string | `0.1` | `0.1` - `1` |
-| shadeStyle   | 遮盖层样式   | string StyleValue |  |  |
-| isHtmlFragment | 解析 html 字符 | boolean | `false` | `true` `false` |
-| imgList | 图片数据数组 | array[{src:图片链接,alt:图片名字可选',thumb:'缩略图可选'}] | - | - |
-| startIndex | 图片初始浏览索引 | number | 0 | - |
-| full | 最大化回调 | function | - | - |
-| min | 最小化回调 | function | -  | - |
-| restore | 重置回调 | function | -  | - |
-| success | 打开回调 | function | -  | - |
-| end | 销毁回调 | function | -  | - |
-| close | 点击右上角 close 按钮 / 遮盖层的关闭回调 | function | -  | - |
-| moveOut | 是否可以拖出浏览器可视区域 | boolean | false  | true false |
-| moveStart | 拖拽开始回调  | function | -  | - |
-| moveEnd | 拖拽结束回调 | function | -  | - |
-| animDuration | 动画速率 | string | `0.3s`  | - |
- 
+| v-model | 显示 | boolean | `false`  |  |
+| type | 类型 | string | `1` | `0(dialog)` `1(page)` `2(iframe)` `3(loading)` `4(drawer)` `5(photos)` `6(notify)` |
+| title | 标题 | `string` `boolean` `Function` | `标题` | -- |
+| title-style | 标题样式 | `string` `StyleValue` | -- | -- |
+| content | 内容 | `string` `Function` `vnode` | -- | -- |
+| isHtmlFragment | `content` 是否解析html | `boolean` | `false` | -- |
+| offset | 偏移量 | `string` `string[]` | `auto` | -- |
+| area | 弹窗宽高 (`auto` 将自适应) | `string` `string[]` | `auto`  | -- |
+| move | 开启拖拽 | boolean | `true` | -- | 
+| maxmin | 开启最小/最大化 | boolean | `false` | -- |
+| resize | 开启左下角拖拽放大缩小 | boolean | `false` | -- |
+| shade | 显示遮盖层 | boolean | `true` | -- |
+| shade-close | 遮盖层关闭 | boolean | `true` | -- |
+| shade-style   | 遮盖层样式   | `StyleValue` | -- | -- |
+| shade-opacity | 遮盖层透明度 | `string` | `0.1` | `0.1` - `1` |
+| layer-classes (原`skin`)| layer box 类名 | `string` | -- | -- |
+| z-index | layer `z-index` 不设置内部将从 `99999` 开始递增 | `number` | -- | -- |
+| closeBtn | 关闭按钮 | `boolean` `string` | `1` | `false` `1` `2` |
+| btn | 底部按钮集合 | `BtnType[]` | -- | -- |
+| btnAlign | 底部按钮位置 | `string` | `r` | `l` `c` `r` |
+| anim | layer打开动画 | `number` | `0` | `0` - `6` |
+| isOutAnim | 是否需要离场动画 | `boolean` | `true` | -- |
+| icon | `msg` `notify` 展示Icon | `string` `number` | -  | `1` `2` `3` `4` `5` `6` `7` `16`  |
+| imgList | `type` 为5 渲染图片列表 | `ImgListType[]` | -- | -- |
+| startIndex | 图片初始浏览索引 | `number` | 0 | -- |
+| animDuration | layer打开关闭动画速率 | `string` | `0.3s`  | -- |
+| moveOut | 是否可以拖出浏览器可视区域 | `boolean` | `false`  | -- |
+| teleport | layer挂载到目标DOM | `string` | `body`  | -- |
+| teleportDisabled | 禁止挂载到目标DOM，保持原位置 | `boolean` | `false`  | -- |
+| lastPosition | 最小/最大化复原位置 `true`上次位置(拖动)、 `false` layer初始位置 | `boolean` | `true`  | -- |
+| time | `msg` `notify` 定时关闭   | `number` |  `msg`1000 `notify`2000 | -- |
+| load | `type` 为3时，loading Icon   | `number` |  0 | `0`, `1` |
+| yesText | 底部默认按钮文本   | `string` | `确定` | -- |
 :::
 
-::: title 内置方法
+::: title 属性事件说明
 :::
+
+::: table
+
+| 属性 | 描述 | 类型 | 参数 | 默认值 |
+| -- | -- | -- | -- | -- |
+| success | layer打开回调 | `function` | `id`  | -- |
+| end | layer关闭回调 | `function` | `id`  |--|
+| yes | 点击底部默认按钮 | `function` | `id`  |--|
+| beforeClose | 内部(右上角/点击遮罩/默认确认按钮)关闭前回调，返回值为 `true` 内部才会关闭 | `function` | `id`  |`() => true`|
+| close | 内部(右上角/点击遮罩/默认确认按钮)关闭回调 | `function` | `id`  |--|
+| min | 最小化回调 | `function` | `id`  | - |
+| full | 最大化回调 | `function` | `id`| - |
+| revert | 恢复最小/最大化回调 | `function` | `id`| - |
+| moveStart | 弹窗拖动位置开始回调 | `function` | `id`| - |
+| moving | 弹窗拖动位置回调 | `function` | `id`| - |
+| moveEnd | 弹窗拖动位置结束回调 | `function` | `id`| - |
+| resizeStart | 弹窗拉伸位置开始回调 | `function` | `id`| - |
+| resizing | 弹窗拉伸位置开始回调 | `function` | `id`| - |
+| resizeEnd | 弹窗拉伸位置开始回调 | `function` | `id`| - |
+:::
+
+::: title Exposes事件
+:::
+
+::: table
+
+| 名称 | 描述 |
+| -- | -- |
+| reset | 重置弹窗 `modelValue` 为false 弹窗将打开 |
+| open | 打开弹窗 |
+| close | 关闭弹窗 |
+| full | 最大化 |
+| min | 最小化 |
+| reset | 复原最小/最大化 |
+:::
+
+::: title types
+:::
+
+```ts
+
+type BtnType = {
+  text: string;
+  style?: string | StyleValue;
+  class?: string;
+  disabled?: boolean;
+  callback: (id: string) => void;
+}
+
+type ImgListType = {
+  src: string;
+  alt?: string;
+  thumb?: string;
+};
+
+```

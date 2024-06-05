@@ -15,18 +15,75 @@
   <lay-timeline>
     <lay-timeline-item title="2.17.x">
       <ul>
-        <a name="2.17-0"></a>
+        <a name="2-17-5"></a>
         <li>
-          <h3>2.17-1 <span class="layui-badge-rim">2024-04-23</span></h3>
+          <h3>2.17.5 <span class="layui-badge-rim">2024-06-04</span></h3>
+          <ul>
+              <li>[升级] layer 升级至2.4.0。<a href="https://gitee.com/layui-vue/layui-vue/pulls/328">详情</a></li>
+              <li>[新增] layer组件 layer.min 最小化、layer.revert 复原最小/最大化。</li>
+              <li>[新增] layer组件 props.revert 内部最小/最大化生命周期。</li>
+              <li>[新增] layer组件 props.lastPosition 最小/最大化 复原位置 `true` 最后位置 `false` 初始位置。</li>
+              <li>[新增] layer组件 min Expose事件 外部最小化。</li>
+              <li>[新增] layer组件 revert Expose事件 外部还原最小/最大化。</li>
+              <li>[删除] layer组件 props.destroy。</li>
+              <li>[调整] layer组件 props.restore 由 props.revert 代替。</li>
+              <li>[修复] datePicker组件 clear事件rang场景初始值调整为空数组。</li>
+          </ul>
+        </li>
+      </ul>
+      <ul>
+        <a name="2-17-4"></a>
+        <li>
+          <h3>2.17.4 <span class="layui-badge-rim">2024-05-23</span></h3>
+          <ul>
+              <li>[升级] layer 升级至2.3.4。</li>
+              <li>[新增] datePicker组件 新增clear事件。<a href="https://gitee.com/layui-vue/layui-vue/pulls/325">详情</a></li>
+              <li>[修复] layer组件 type为time范围选择初始化滚动位置失效。<a href="https://gitee.com/layui-vue/layui-vue/pulls/324">详情</a></li>
+              <li>[修复] popper组件 zIndex应大于layer。<a href="https://gitee.com/layui-vue/layui-vue/pulls/323">详情</a></li>
+              <li>[修复] iconPicker组件 disabled状态下可进行清除操作。<a href="https://gitee.com/layui-vue/layui-vue/pulls/321">详情</a></li>
+              <li>[修复] tsconfig.json moduleResolution为bundler无法引用types。<a href="https://gitee.com/layui-vue/layui-vue/pulls/320">详情</a></li>
+              <li>[优化] form组件 整体样式优化。<a href="https://gitee.com/layui-vue/layui-vue/pulls/326">详情</a></li>
+          </ul>
+        </li>
+      </ul>
+      <ul>
+        <a name="2-17-3"></a>
+        <li>
+          <h3>2.17.3 <span class="layui-badge-rim">2024-05-08</span></h3>
+          <ul>
+              <li>[修复] datePicker组件 default-time属性调整为非必填。</li>
+          </ul>
+        </li>
+      </ul>
+      <ul>
+        <a name="2-17-2"></a>
+        <li>
+          <h3>2.17.2 <span class="layui-badge-rim">2024-05-06</span></h3>
+          <ul>
+              <li>[升级] layer 升级至2.3.3。</li>
+              <li>[升级] json-schema-form 升级至1.0.7。</li>
+              <li>[新增] table组件 columns.customSlot属性新增function类型。<a href="https://gitee.com/layui-vue/layui-vue/pulls/317">详情</a></li>
+              <li>[新增] formItem组件 新增tips属性。<a href="https://gitee.com/layui-vue/layui-vue/pulls/313">详情</a></li>
+              <li>[新增] inputNumber组件 新增indicator属性。<a href="https://gitee.com/layui-vue/layui-vue/pulls/310">详情</a></li>
+              <li>[新增] datePicker组件 新增default-time属性。<a href="https://gitee.com/layui-vue/layui-vue/pulls/309">详情</a></li>
+              <li>[修复] layer 设置animDuration属性无效。<a href="https://gitee.com/layui-vue/layui-vue/pulls/303">详情</a></li>
+              <li>[修复] table组件 筛选column显示隐藏状态未与column数据绑定。<a href="https://gitee.com/layui-vue/layui-vue/pulls/308">详情</a></li>
+          </ul>
+        </li>
+      </ul>
+      <ul>
+        <a name="2-17-1"></a>
+        <li>
+          <h3>2.17.1 <span class="layui-badge-rim">2024-04-23</span></h3>
           <ul>
               <li>[修复] upload组件 cut属性失效<a href="https://gitee.com/layui-vue/layui-vue/pulls/306">详情</a></li>
           </ul>
         </li>
       </ul>
       <ul>
-        <a name="2.17-0"></a>
+        <a name="2-17-0"></a>
         <li>
-          <h3>2.17-0 <span class="layui-badge-rim">2024-04-22</span></h3>
+          <h3>2.17.0 <span class="layui-badge-rim">2024-04-22</span></h3>
           <ul>
               <li>[新增] form组件 新增isLabelTooltip属性控制label是否超出隐藏。<a href="https://gitee.com/layui-vue/layui-vue/pulls/302">详情</a></li>
               <li>[新增] upload组件 新增选择文件后"on-change"回调事件。<a href="https://gitee.com/layui-vue/layui-vue/pulls/300">详情</a></li>

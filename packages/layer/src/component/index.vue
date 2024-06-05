@@ -5,6 +5,8 @@ export default {
 </script>
 
 <script lang="ts" setup>
+import type { BtnType, ImgListType } from "../types";
+
 import Shade from "./Shade.vue";
 import Iframe from "./Iframe.vue";
 import Title from "./Header.vue";
@@ -46,20 +48,7 @@ import { nextIndex } from "../tokens";
 import "../theme/index.css";
 
 export interface LayerProps {
-  id?: string;
-  title?: string | boolean | Function;
-  titleStyle?: string | StyleValue;
-  icon?: string | number;
-  skin?: string;
-  zIndex?: number | Function;
-  // setTop?: boolean;
-  offset?: string[] | string;
-  area?: string[] | "auto";
   modelValue?: boolean;
-  maxmin?: boolean | string;
-  btn?: Record<string, any>[] | false;
-  move?: boolean | string;
-  resize?: boolean | string;
   type?:
     | 0
     | 1
@@ -75,89 +64,105 @@ export interface LayerProps {
     | "drawer"
     | "photos"
     | "notify";
-  content?: string | Function | object | VNodeTypes;
+  title?: string | boolean | Function;
+  titleStyle?: string | StyleValue;
+  content?: string | Function | VNodeTypes;
   isHtmlFragment?: boolean;
-  shade?: boolean | string;
-  shadeClose?: boolean | string;
-  shadeOpacity?: string;
+  offset?: string | string[];
+  area?: string | string[];
+  move?: boolean;
+  maxmin?: boolean;
+  resize?: boolean;
+  shade?: boolean;
+  shadeClose?: boolean;
   shadeStyle?: StyleValue;
+  shadeOpacity?: string;
+  layerClasses?: string;
+  zIndex?: number;
   closeBtn?: boolean | string;
+  btn?: BtnType[];
   btnAlign?: "l" | "c" | "r";
-  time?: number;
-  load?: number;
   anim?: 0 | 1 | 2 | 3 | 4 | 5 | 6;
   isOutAnim?: boolean;
-  destroy?: Function;
+  icon?: string | number;
+  imgList?: ImgListType[];
+  startIndex?: number;
+  animDuration?: string;
+  moveOut?: boolean;
+  teleport?: string;
+  teleportDisabled?: boolean;
+  lastPosition?: boolean;
+  time?: number;
+  load?: 0 | 1;
+  yesText?: string;
+
+  isMessage?: boolean;
+  id?: string;
+  isFunction?: boolean;
+  appContext?: any;
+
   success?: Function;
   end?: Function;
   yes?: Function;
-  yesText?: string;
-  isFunction?: boolean;
-  isMessage?: boolean;
-  appContext?: any;
-  startIndex?: number;
-  imgList?: { src: string; alt: string; thumb: string }[];
+  beforeClose?: Function;
+  close?: Function;
   min?: Function;
   full?: Function;
-  restore?: Function;
-  moveOut?: boolean;
+  revert?: Function;
   moveStart?: Function;
   moving?: Function;
   moveEnd?: Function;
   resizeStart?: Function;
   resizing?: Function;
   resizeEnd?: Function;
-  beforeClose?: Function;
-  close?: Function;
-  animDuration?: string;
-  teleport?: string;
-  teleportDisabled?: boolean;
+  internalDestroy?: Function;
 }
 
 const props = withDefaults(defineProps<LayerProps>(), {
+  modelValue: false,
+  type: 1,
   title: "标题",
   titleStyle: "",
-  // setTop: false,
+  isHtmlFragment: false,
   offset: "auto",
   area: "auto",
-  modelValue: false,
-  maxmin: false,
   move: true,
-  type: 1,
-  time: 0,
+  maxmin: false,
+  resize: false,
   shade: true,
   shadeClose: true,
   shadeOpacity: "0.1",
   closeBtn: "1",
   btnAlign: "r",
-  load: 0,
   anim: 0,
-  resize: false,
-  isHtmlFragment: false,
   isOutAnim: true,
-  destroy: () => {},
+  imgList: () => [],
+  startIndex: 0,
+  animDuration: "0.3s",
+  moveOut: false,
+  teleport: "body",
+  teleportDisabled: false,
+  lastPosition: true,
+  time: 0,
+  load: 0,
+  yesText: "确定",
+
+  isMessage: false,
+  isFunction: false,
+
   success: () => {},
   end: () => {},
-  full: () => {},
+  beforeClose: () => true,
+  close: () => {},
   min: () => {},
-  restore: () => {},
-  yesText: "确定",
-  isFunction: false,
-  isMessage: false,
-  startIndex: 0,
-  imgList: () => [],
-  moveOut: false,
+  full: () => {},
+  revert: () => {},
   moveStart: () => {},
   moving: () => {},
   moveEnd: () => {},
   resizeStart: () => {},
   resizing: () => {},
   resizeEnd: () => {},
-  beforeClose: () => true,
-  close: () => {},
-  animDuration: "0.3s",
-  teleport: "body",
-  teleportDisabled: false,
 });
 
 const emit = defineEmits(["close", "update:modelValue"]);
@@ -166,7 +171,7 @@ const slots = useSlots();
 const max: Ref<boolean> = ref(false);
 const min: Ref<boolean> = ref(false);
 const id: Ref<string> = ref(props.id || nextId());
-const layero = ref<HTMLElement | null>(null);
+const layerRef = ref<HTMLDivElement | null>(null);
 const contentRef = ref<HTMLElement | undefined>();
 const type: number = calculateType(props.type);
 const area: Ref<string[]> = ref(
@@ -177,17 +182,16 @@ const offset: Ref<string[]> = ref(
 );
 const index: Ref<number | Function> = ref(99999);
 const visible: Ref<boolean> = ref(false);
-const first: Ref<boolean> = ref(true);
 
 const w: Ref<string> = ref(area.value[0]);
 const h: Ref<string> = ref(area.value[1]);
 const t: Ref<string> = ref(offset.value[0]);
 const l: Ref<string> = ref(offset.value[1]);
 
-const _w: Ref<string> = ref(area.value[0]);
-const _h: Ref<string> = ref(area.value[0]);
-const _t: Ref<string> = ref(offset.value[0]);
-const _l: Ref<string> = ref(offset.value[1]);
+const _w: Ref<string> = ref("");
+const _h: Ref<string> = ref("");
+const _t: Ref<string> = ref("");
+const _l: Ref<string> = ref("");
 
 const setIndex = () => {
   index.value = props.zIndex ?? nextIndex();
@@ -220,30 +224,19 @@ const firstOpenDelayCalculation = function () {
       );
     }
     // TODO 如果 area 是空数组, 开启自适应
-    var _area = area.value;
+    let _area = area.value;
     if (_area[0] == undefined || _area[1] == undefined) {
-      _area = getArea(layero.value);
+      _area = getArea(layerRef.value);
     }
-    offset.value = calculateOffset(props.offset, _area, type);
+
     if (type == 6) {
       offset.value = calculateNotifOffset(props.offset, _area, id.value);
     }
+
     resetPosition();
     resetArea();
     supportMove();
   });
-};
-
-/**
- * 普通打开
- * <p>
- */
-const notFirstOpenLayerInit = function () {
-  w.value = _w.value;
-  h.value = _h.value;
-  t.value = _t.value;
-  l.value = _l.value;
-  supportMove();
 };
 
 /**
@@ -254,10 +247,21 @@ const notFirstOpenLayerInit = function () {
 const beforeCloseSaveData = function () {
   if (min.value) minHandle();
   if (max.value) maxHandle();
-  _w.value = w.value;
-  _h.value = h.value;
+  _w.value = "";
+  _h.value = "";
+  _t.value = "";
+  _l.value = "";
+};
+
+const baseMaxHandle = () => {
   _t.value = t.value;
   _l.value = l.value;
+  _w.value = w.value;
+  _h.value = h.value;
+  w.value = maxArea().w;
+  h.value = maxArea().h;
+  t.value = maxOffset().t;
+  l.value = maxOffset().l;
 };
 
 /**
@@ -266,67 +270,59 @@ const beforeCloseSaveData = function () {
  */
 const maxHandle = () => {
   if (max.value) {
+    // 恢复 ResizeObserver
+    // t、l 偏移值由 ResizeObserver设置 _t、_l缓存
+    listenDocument();
     w.value = _w.value;
     h.value = _h.value;
-    t.value = _t.value;
-    l.value = _l.value;
-    props.restore(props.id);
+    props.revert(id.value);
   } else {
-    _t.value = t.value;
-    _l.value = l.value;
-    _w.value = w.value;
-    _h.value = h.value;
-    w.value = maxArea().w;
-    h.value = maxArea().h;
-    t.value = maxOffset().t;
-    l.value = maxOffset().l;
-    props.full(props.id);
+    // 防止ResizeObserver改动 t、l 偏移值
+    removeListener();
+    baseMaxHandle();
+    props.full(id.value);
   }
   max.value = !max.value;
+};
+
+const baseMinHandle = () => {
+  let left = 180 * updateMinArrays(id.value, true);
+  if (left > document.documentElement.clientWidth - 180) {
+    left = document.documentElement.clientWidth - 180;
+  }
+  _w.value = w.value;
+  _h.value = h.value;
+  _t.value = t.value;
+  _l.value = l.value;
+  h.value = minArea().h;
+  w.value = minArea().w;
+  t.value = minOffset(left).t;
+  l.value = minOffset(left).l;
 };
 
 /**
  * 弹层最小化
  * <p>
  */
-const minHandle = () => {
-  removeListener();
-  let left = 180 * updateMinArrays(id.value, !min.value);
-  if (left > document.documentElement.clientWidth - 180) {
-    left = document.documentElement.clientWidth - 180;
-  }
+const minHandle = async () => {
   if (min.value) {
+    // 恢复 ResizeObserver
+    // t、l 偏移值由 ResizeObserver设置 _t、_l缓存
+    listenDocument();
+    updateMinArrays(id.value, false);
     w.value = _w.value;
     h.value = _h.value;
-    t.value = _t.value;
-    l.value = _l.value;
-    props.restore(props.id);
+    // 取消最小化
+    // 为保证定位位置可返回最后一次拖动位置|初始位置
+    // 放置 ResizeObserver 统一设置
+    props.revert(id.value);
   } else {
-    _w.value = w.value;
-    _h.value = h.value;
-    _t.value = t.value;
-    _l.value = l.value;
-    h.value = minArea().h;
-    w.value = minArea().w;
-    t.value = minOffset(left).t;
-    l.value = minOffset(left).l;
-    props.min(props.id);
+    // 防止ResizeObserver改动 t、l 偏移值
+    removeListener();
+    baseMinHandle();
+    props.min(id.value);
   }
   min.value = !min.value;
-};
-
-/**
- * 重置弹层
- * <p>
- */
-const reset = function () {
-  min.value = false;
-  max.value = false;
-  resetPosition();
-  resetArea();
-  if (!props.modelValue) {
-    emit("update:modelValue", true);
-  }
 };
 
 /**
@@ -336,13 +332,9 @@ watch(
   () => props.modelValue,
   () => {
     visible.value = props.modelValue;
+
     if (visible.value) {
-      if (first.value) {
-        first.value = false;
-        firstOpenDelayCalculation();
-      } else {
-        notFirstOpenLayerInit();
-      }
+      firstOpenDelayCalculation();
       setIndex();
     } else {
       beforeCloseSaveData();
@@ -363,7 +355,7 @@ watch(
         firstOpenDelayCalculation();
       }
       nextTick(() => {
-        props.success(props.id);
+        props.success(id.value);
       });
     }
   },
@@ -374,7 +366,7 @@ watch(
   () => visible.value,
   () => {
     if (!visible.value) {
-      props.end(props.id);
+      props.end(id.value);
     }
   }
 );
@@ -399,7 +391,7 @@ const boxClasses = computed(() => {
       "layui-layer-msg": props.isMessage,
       "layui-layer-hui": props.isMessage && !props.icon,
     },
-    props.skin,
+    props.layerClasses,
   ];
 });
 
@@ -410,42 +402,47 @@ const boxClasses = computed(() => {
 const supportMove = function () {
   if (props.move && type != 4) {
     nextTick(() => {
-      if (layero.value) {
+      if (layerRef.value) {
         // 拖拽, 在首次拖拽前, 移除 resizeObserver 监听
         useMove(
-          layero.value,
+          layerRef.value,
           props.moveOut,
           (left: string, top: string) => {
-            removeListener();
             l.value = left;
             t.value = top;
-            props.moving(props.id, { top: top, left: left });
+            // 最小化不cache
+            if (!min.value) {
+              _l.value = left;
+              _t.value = top;
+            }
+            props.moving(id.value, { top: top, left: left });
           },
           () => {
             // 拖拽结束
-            props.moveEnd(props.id);
+            props.moveEnd(id.value);
           },
           () => {
             // 拖拽开始
-            props.moveStart(props.id);
+            props.moveStart(id.value);
           }
         );
         // 拉伸, 在首次拉伸前, 移除 resizeObserver 监听
         useResize(
-          layero.value,
+          layerRef.value,
           (width: string, height: string) => {
-            removeListener();
             h.value = height;
             w.value = width;
-            props.resizing(props.id, { width: width, height: height });
+            _h.value = height;
+            _w.value = width;
+            props.resizing(id.value, { width: width, height: height });
           },
           () => {
-            // 拖拽结束
-            props.resizeEnd(props.id);
+            // 拉伸结束
+            props.resizeEnd(id.value);
           },
           () => {
-            // 拖拽开始
-            props.resizeStart(props.id);
+            // 拉伸开始
+            props.resizeStart(id.value);
           }
         );
       }
@@ -459,14 +456,14 @@ const supportMove = function () {
  */
 const styles = computed<any>(() => {
   let style = {
-    top: t.value,
-    zIndex: index.value,
-    animationDuration: props.animDuration,
     position:
       props.teleportDisabled || props.teleport != "body" ? "absolute" : "fixed",
+    top: t.value,
+    left: l.value,
     height: h.value,
     width: w.value,
-    left: l.value,
+    animationDuration: props.animDuration,
+    zIndex: index.value,
   };
   return style;
 });
@@ -491,17 +488,20 @@ const contentClasses = computed(() => {
  * @param null
  */
 const closeHandle = () => {
-  if (props.beforeClose) {
-    const result = props.beforeClose(props.id);
+  if (typeof props.beforeClose === "function") {
+    const result = props.beforeClose(id.value);
     // @ts-ignore
     if (result === undefined || (result != undefined && result === true)) {
-      props.close(props.id);
+      props.close(id.value);
       emit("close");
       emit("update:modelValue", false);
-      props.destroy();
+
+      // 函数式调用专用.
+      // 不对外使用
+      props.internalDestroy && props.internalDestroy();
       if (type === 6) {
         // @ts-ignore
-        removeNotifiyFromQueen(props.id);
+        removeNotifiyFromQueen(id.value);
       }
       if (min.value) {
         updateMinArrays(id.value, !min.value);
@@ -516,7 +516,7 @@ const closeHandle = () => {
  * @param null
  */
 const yesHandle = () => {
-  if (props.yes != undefined) props.yes();
+  if (typeof props.yes === "function") props.yes(id.value);
   else closeHandle();
 };
 
@@ -563,7 +563,7 @@ const enterActiveClass = computed(() => {
   if (type === 6) {
     return getNotifyAnimationClass(props.offset);
   }
-  return `layer-anim layer-anim-0${props.anim}`;
+  return `layer-anim-0${props.anim}`;
 });
 
 /**
@@ -634,14 +634,13 @@ const resetCalculationPohtosArea = function (index: number) {
   nextTick(async () => {
     area.value = await calculatePhotosArea(props.imgList[index].src, props);
     offset.value = calculateOffset(props.offset, area.value, type);
+
     w.value = area.value[0];
     h.value = area.value[1];
     t.value = offset.value[0];
     l.value = offset.value[1];
     _w.value = area.value[0];
-    _l.value = area.value[1];
-    _t.value = offset.value[0];
-    _l.value = offset.value[1];
+    _h.value = area.value[1];
   });
 };
 
@@ -688,7 +687,7 @@ watch(
   }
 );
 
-var resizeObserver: ResizeObserver | undefined;
+let resizeObserver: ResizeObserver | undefined;
 
 const listenDocument = function () {
   nextTick(() => {
@@ -704,13 +703,14 @@ const listenDocument = function () {
       type != 6
     ) {
       resizeObserver = new ResizeObserver((e) => {
-        if (layero.value) {
+        if (layerRef.value) {
           offset.value = calculateOffset(
             props.offset,
-            getArea(layero.value),
+            getArea(layerRef.value),
             type
           );
-          resetPosition();
+          t.value = (props.lastPosition && _t.value) || offset.value[0];
+          l.value = (props.lastPosition && _l.value) || offset.value[1];
         }
       });
       resizeObserver.observe(contentRef.value);
@@ -729,13 +729,11 @@ const removeListener = function () {
 };
 
 /**
- * 根据 offset 重新定位 Dom 位置
+ * 根据 offset 重新定位至初始 Dom 位置
  */
 const resetPosition = function () {
   t.value = offset.value[0];
   l.value = offset.value[1];
-  _t.value = offset.value[0];
-  _l.value = offset.value[1];
 };
 
 /**
@@ -745,22 +743,56 @@ const resetArea = function () {
   w.value = area.value[0];
   h.value = area.value[1];
   _w.value = area.value[0];
-  _l.value = area.value[1];
+  _h.value = area.value[1];
+};
+
+/**
+ * 重置弹层
+ * <p>
+ */
+const reset = function () {
+  listenDocument();
+  updateMinArrays(id.value, false);
+
+  min.value = false;
+  max.value = false;
+  // 删除缓存偏移量
+  _t.value = "";
+  _l.value = "";
+  resetPosition();
+  resetArea();
+  if (!props.modelValue) {
+    emit("update:modelValue", true);
+  }
 };
 
 const full = function () {
-  _t.value = t.value;
-  _l.value = l.value;
-  _w.value = w.value;
-  _h.value = h.value;
-  w.value = maxArea().w;
-  h.value = maxArea().h;
-  t.value = maxOffset().t;
-  l.value = maxOffset().l;
-  max.value = true;
+  if (!max.value) {
+    removeListener();
+    baseMaxHandle();
+    max.value = true;
+  }
 };
 
-defineExpose({ reset, open, close, full });
+const mini = function () {
+  if (!min.value) {
+    removeListener();
+    baseMinHandle();
+    min.value = true;
+  }
+};
+
+const revert = () => {
+  listenDocument();
+  updateMinArrays(id.value, false);
+
+  min.value = false;
+  max.value = false;
+  w.value = _w.value;
+  h.value = _h.value;
+};
+
+defineExpose({ reset, open, close, full, min: mini, revert });
 </script>
 
 <template>
@@ -779,7 +811,7 @@ defineExpose({ reset, open, close, full });
       :leave-active-class="leaveActiveClass"
     >
       <div
-        ref="layero"
+        ref="layerRef"
         class="layui-layer layui-layer-border"
         :id="id"
         :class="boxClasses"

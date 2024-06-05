@@ -270,7 +270,7 @@ importers:
         specifier: 1.1.1
         version: link:../icons
       '@layui/layer-vue':
-        specifier: 2.3.2
+        specifier: 2.4.0
         version: link:../layer
       '@rollup/plugin-terser':
         specifier: 0.4.4
@@ -291,8 +291,8 @@ importers:
         specifier: ^1.5.12
         version: 1.5.12
       dayjs:
-        specifier: ^1.11.7
-        version: 1.11.7
+        specifier: ^1.11.10
+        version: 1.11.10
       evtd:
         specifier: ^0.2.3
         version: 0.2.3
@@ -311,8 +311,8 @@ importers:
   packages/json-schema-form:
     dependencies:
       '@layui/layui-vue':
-        specifier: workspace:*
-        version: link:../component
+        specifier: 2.17.4
+        version: 2.17.4(rollup@4.9.6)(vue@3.3.4)
 
   packages/layer:
     dependencies:
@@ -2406,6 +2406,40 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.15
     dev: true
 
+  /@layui/icons-vue@1.1.1:
+    resolution: {integrity: sha512-g072SHIiXVGh5JMVw5/xogdKZn287vH7xlPuRB1rtDJhZl/ZmN3FbI5/RB1nKSWSv25lSBzHatmJG7bzP+mAIQ==}
+    dev: false
+
+  /@layui/layer-vue@2.3.4:
+    resolution: {integrity: sha512-dOp+NsK780bJ8D5zgIUz5cbgbag5MrU3JRSRed4s1VqUNU28wr/5+Lc6S2l2yKf0V5RlEVIIDc89mgy/3z3Rlw==}
+    dependencies:
+      '@layui/icons-vue': 1.1.1
+    dev: false
+
+  /@layui/layui-vue@2.17.4(rollup@4.9.6)(vue@3.3.4):
+    resolution: {integrity: sha512-FpFMqKR6h4HVSvbGtxgEZRgL/6X2nipy79ORzuRfWrXM7p15BW2ata+Xq82lAPgpp4cGuipWI/No+9ajjFAHxw==}
+    dependencies:
+      '@babel/types': 7.21.0
+      '@ctrl/tinycolor': 3.4.1
+      '@layui/icons-vue': 1.1.1
+      '@layui/layer-vue': 2.3.4
+      '@rollup/plugin-terser': 0.4.4(rollup@4.9.6)
+      '@types/qrcode': 1.5.0
+      '@umijs/ssr-darkreader': 4.9.45
+      '@vueuse/core': 8.7.3(vue@3.3.4)
+      async-validator: 4.1.1
+      cropperjs: 1.5.12
+      dayjs: 1.11.10
+      evtd: 0.2.3
+      jsbarcode: 3.11.5
+      qrcode: 1.5.0
+      vue-i18n: 9.6.3(vue@3.3.4)
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+      - rollup
+      - vue
+    dev: false
+
   /@microsoft/api-extractor-model@7.26.4(@types/node@18.19.10):
     resolution: {integrity: sha512-PDCgCzXDo+SLY5bsfl4bS7hxaeEtnXj7XtuzEE+BtALp7B5mK/NrS2kHWU69pohgsRmEALycQdaQPXoyT2i5MQ==}
     dependencies:
@@ -3493,6 +3527,7 @@ packages:
   /callsites@3.1.0:
     resolution: {integrity: sha512-P8BjAsXvZS+VIDUI11hHCQEv74YT67YUi5JJFNWIqL235sBmjX4+qx9Muvls5ivyNENctx46xQLQ3aTuE7ssaQ==}
     engines: {node: '>=6'}
+    requiresBuild: true
     dev: true
 
   /camelcase-keys@6.2.2:
@@ -3594,6 +3629,7 @@ packages:
   /color-convert@2.0.1:
     resolution: {integrity: sha512-RRECPsj7iu/xb5oKYcsFHSppFNnsj/52OVTRKb4zP5onXwVF3zVmmToNcOfGC+CRDpfK/U584fMg38ZHCaElKQ==}
     engines: {node: '>=7.0.0'}
+    requiresBuild: true
     dependencies:
       color-name: 1.1.4
 
@@ -3603,6 +3639,7 @@ packages:
 
   /color-name@1.1.4:
     resolution: {integrity: sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA==}
+    requiresBuild: true
 
   /colors@1.2.5:
     resolution: {integrity: sha512-erNRLao/Y3Fv54qUa0LBB+//Uf3YwMUmdJinN20yMXm9zdKKqH9wt7R9IIVZ+K7ShzfpLV/Zg8+VyrBJYB4lpg==}
@@ -3879,8 +3916,8 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /dayjs@1.11.7:
-    resolution: {integrity: sha512-+Yw9U6YO5TQohxLcIkrXBeY73WP3ejHWVvx8XCk3gxvQDCTEmS48ZrSZCKciI7Bhl/uCMyxYtE9UqRILmFphkQ==}
+  /dayjs@1.11.10:
+    resolution: {integrity: sha512-vjAczensTgRcqDERK0SR2XMwsF/tSvnvlv6VcF2GIhg6Sx4yOIt/irsr1RDJsKiIyBzJDpCoXiWWq28MqH2cnQ==}
     dev: false
 
   /de-indent@1.0.2:
@@ -4948,6 +4985,7 @@ packages:
   /has-flag@4.0.0:
     resolution: {integrity: sha512-EykJT/Q1KjTWctppgIAgfSO0tKVuZUjhgMr17kqTumMl6Afv3EISleU7qZUzoXDFTAHTDC4NOoG/ZxU3EvlMPQ==}
     engines: {node: '>=8'}
+    requiresBuild: true
     dev: true
 
   /hasown@2.0.0:
@@ -5819,6 +5857,7 @@ packages:
   /parent-module@1.0.1:
     resolution: {integrity: sha512-GQ2EWRpQV8/o+Aw8YqtfZZPfNRWZYkbidE9k5rpl/hC3vtHHBfGm2Ifi6qWV+coDGkrUKZAxE3Lot5kcsRlh+g==}
     engines: {node: '>=6'}
+    requiresBuild: true
     dependencies:
       callsites: 3.1.0
     dev: true
@@ -6151,6 +6190,7 @@ packages:
   /resolve-from@4.0.0:
     resolution: {integrity: sha512-pb/MYmXstAkysRFx8piNI1tGFNQIFA3vkE3Gq4EuA1dF6gHp/+vgZqsCGJapvy8N3Q+4o7FwvquPJcnZ7RYy4g==}
     engines: {node: '>=4'}
+    requiresBuild: true
     dev: true
 
   /resolve-from@5.0.0:
@@ -6529,6 +6569,7 @@ packages:
   /supports-color@7.2.0:
     resolution: {integrity: sha512-qpCAvRl9stuOHveKsn7HncJRvv501qIacKzQlO/+Lwxc9+0q2wLyv4Dfvt80/DPn2pqOBsJdDiogXGR9+OvwRw==}
     engines: {node: '>=8'}
+    requiresBuild: true
     dependencies:
       has-flag: 4.0.0
     dev: true

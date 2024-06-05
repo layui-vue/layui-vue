@@ -140,13 +140,29 @@
   }
 }
 
+  
+
 .layui-form-item {
+  display: flex;
   margin-bottom: 20px;
-  clear: both;
+
+  .layui-form-tips {
+    display: block;
+    color: #888;
+    font-size: 14px;
+  }
+}
+
+.layui-form-item:has(.layui-input-inline) {
+  margin-right: 10px;
 }
 
 .layui-form-item.inline {
-  display: inline-block;
+  display: inline-flex;
+}
+
+.layui-form-item.layui-form-item-top {
+  flex-direction: column;
 }
 
 .layui-form-item-right .layui-form-label {
@@ -157,13 +173,8 @@
   text-align: left;
 }
 
-.layui-form-item-top .layui-form-label {
-  text-align: left;
-  float: none;
-}
-
 .layui-form-item-top > div {
-  margin-left: 0;
+  flex: 1;
 }
 
 .layui-input-inline .layui-input-number {
@@ -178,9 +189,7 @@
 }
 
 .layui-form-label {
-  float: left;
   display: block;
-  width: 95px;
   padding-right: 15px;
   line-height: 38px;
   font-weight: 400;
@@ -203,19 +212,13 @@
 }
 
 .layui-input-block {
-  margin-left: 110px;
+  flex: 1;
   min-height: 36px;
 }
 
 .layui-input-inline {
   display: inline-block;
   vertical-align: middle;
-}
-
-.layui-form-item .layui-input-inline {
-  float: left;
-  width: 220px;
-  margin-right: 10px;
 }
 
 .layui-form-text .layui-input-inline {
@@ -284,6 +287,7 @@
 }
 
 .layui-form-pane .layui-form-label {
+  display: block;
   padding: 0px 15px;
   border-width: 1px;
   overflow: hidden;
@@ -301,7 +305,6 @@
 }
 
 .layui-form-pane .layui-input-block {
-  margin-left: 110px;
   left: -1px
 }
 
@@ -327,6 +330,7 @@
 }
 
 .layui-form-pane .layui-form-item:has(.layui-textarea) {
+  flex-direction: column;
   .layui-form-label {
     width: 100% !important;
     border-radius: var(--global-border-radius) var(--global-border-radius) 0 0;
