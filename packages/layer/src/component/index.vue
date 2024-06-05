@@ -935,8 +935,7 @@ defineExpose({ reset, open, close, full, min: mini, revert });
                   <a
                     :style="b.style"
                     :class="[
-                      b.class,
-                      `layui-layer-btn${i}`,
+                      b.class ?? `layui-layer-btn${i}`,
                       { 'layui-layer-btn-disabled': b.disabled },
                     ]"
                     @click="
