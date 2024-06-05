@@ -8,7 +8,6 @@ import { indentHandle } from "../menu/utils";
 export interface MenuItemProps {
   id?: string;
   title?: string;
-  to?: string;
 }
 
 defineOptions({
@@ -52,20 +51,11 @@ const needTooltip = computed(
   >
     <template v-if="needTooltip">
       <lay-tooltip position="right" :isDark="theme !== 'light'">
-        <template v-if="to">
-          <router-link :to="to">
-            <i v-if="slots.icon">
-              <slot name="icon"></slot>
-            </i>
-          </router-link>
-        </template>
-        <template v-else>
-          <a href="javascript:void(0)">
-            <i v-if="slots.icon">
-              <slot name="icon"></slot>
-            </i>
-          </a>
-        </template>
+        <a href="javascript:void(0)">
+          <i v-if="slots.icon">
+            <slot name="icon"></slot>
+          </i>
+        </a>
         <template #content>
           <span v-if="slots.title">
             <slot name="title"></slot>
@@ -75,33 +65,17 @@ const needTooltip = computed(
     </template>
 
     <template v-else>
-      <template v-if="to">
-        <router-link :to="to">
-          <i v-if="slots.icon" class="layui-sub-menu-icon">
-            <slot name="icon"></slot>
-          </i>
-          <span v-if="slots.title">
-            <slot name="title"></slot>
-          </span>
-          <span v-else>
-            <slot></slot>
-          </span>
-        </router-link>
-      </template>
-
-      <template v-else>
-        <a href="javascript:void(0)">
-          <i v-if="slots.icon" class="layui-sub-menu-icon">
-            <slot name="icon"></slot>
-          </i>
-          <span v-if="slots.title">
-            <slot name="title"></slot>
-          </span>
-          <span v-else>
-            <slot></slot>
-          </span>
-        </a>
-      </template>
+      <a href="javascript:void(0)">
+        <i v-if="slots.icon" class="layui-sub-menu-icon">
+          <slot name="icon"></slot>
+        </i>
+        <span v-if="slots.title">
+          <slot name="title"></slot>
+        </span>
+        <span v-else>
+          <slot></slot>
+        </span>
+      </a>
     </template>
   </li>
 </template>

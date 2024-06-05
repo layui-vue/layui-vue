@@ -89,7 +89,7 @@ export default (): UserConfigExport => {
             vue: "Vue",
           },
           manualChunks(id) {
-            let arr = id.toString().split("/");
+            const arr = id.toString().split("/");
             if (id.includes("node_modules")) {
               const chunksName = "_chunks/";
               return (
@@ -97,7 +97,7 @@ export default (): UserConfigExport => {
                 id.toString().split("node_modules/")[2].split("/")[0].toString()
               );
             } else if (arr.length >= 2) {
-              let entryPoint = arr[arr.length - 2].toString();
+              const entryPoint = arr[arr.length - 2].toString();
               if (matchModule.includes(entryPoint)) {
                 return entryPoint;
               }
@@ -111,7 +111,7 @@ export default (): UserConfigExport => {
           },
           assetFileNames: "[name]/index.css",
         },
-        external: ["vue", "vue-router"],
+        external: ["vue"],
       },
     },
   };
