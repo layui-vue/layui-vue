@@ -713,21 +713,6 @@ const openComponent2 = () => {
 
 :::
 
-::: title 内置方法
-:::
-
-::: table
-
-| 名称 | 描述 | 参数|
-| -- | -- | -- |
-| close | 关闭弹窗 | `id`|
-| closeAll | 关闭所有弹窗 | |
-| reset | 重置弹窗 | |
-| min | 最小化 | `id` |
-| full | 最大化 | `id` |
-| revert | 复原最小/最大化 | `id` |
-:::
-
 ::: demo 通过 `layer.open(options)` 创建模态窗, 通过 `layer.close(id)` 关闭指定模态窗，通过 `layer.closeAll()` 关闭所有模态窗。
 
 <template>
@@ -857,6 +842,8 @@ const openCallback = () => {
 | `closeAll: ()` | 关闭当前上下文中全部的弹层 |
 | `reset: (id: string)` | 重置某个弹层的位置和大小 |
 | `full: (id: string)` | 最大化某个弹层 |
+| `min: (id: string)` | 最小化某个弹层 |
+| `revert: (id: string)` | 最大/最小化时复原弹层 |
 
 :::
 
@@ -866,7 +853,7 @@ const openCallback = () => {
 ::: describe 弹层 API 是对 `layer.open` 的封装。
 :::
 
-::: describe 全部的封装都带有扩充属性 `option`，**调用时与内部预置的 `defaultOption` 配置混合，`Option` 的配置将有更高的优先级**。
+::: describe 全部的封装都带有可选属性 `option`，**调用时与内部预置的 `defaultOption` 配置混合，`Option` 的配置将有更高的优先级**。
 :::
 
 ::: table
@@ -883,10 +870,10 @@ const openCallback = () => {
 
 :::
 
-::: title 基础属性
+::: title Properity 属性
 :::
 
-::: describe 以下是 layer 支持的基础属性 `LayerProps`。根据 *`type`* 的不同，对基础属性的扩充也各不同，`(通用属性 + 回调) + 扩充属性 = LayerProps`。
+::: describe 以下是 layer 支持的基础属性 `LayerProps`。根据 *`type`* 的不同，对基础属性的扩充也各不同，`(通用属性 + 回调) + 可选属性 = LayerProps`。
 :::
 
 ::: table
@@ -894,14 +881,12 @@ const openCallback = () => {
 | 属性 | 描述 | 类型 | 默认值 | 可选值 |
 | -- | -- | -- | -- | -- |
 | *`id`* | ID | `string` | | |
-| *`type`* | 类型 | `string` `number` | `1` | `0` `1` `2` `3` `4` `5` `6` `7` |
-| | | | | `"dialog"` `"page"` `"iframe"` `"loading"` |
-| | | | | `"drawer"` `"photos"` `"notify"` `"prompt"` |
+| *`type`* | 类型 | `string` `number` | `1` | `0 "dialog"` `1 "page"` `2 "iframe"` `3 "loading"` `4 "drawer"` `5 "photos"` `6 "notify"` `7 "prompt"` |
 | *`icon`* | 图标 | `string` `number` | | |
 | *`title`* | 标题 | `string` `boolean` | `"信息"` | |
 | *`title-style`* | 标题样式 | `string` `StyleValue` | `""` |  |
 | *`skin`* | 颜色模式 | `string` | | |
-| *`layer-classes (原 skin 属性)`* | layer box 类名 | `string` | | |
+| *`layer-classes`* | layer box 类名(原 skin 属性) | `string` | | |
 | *`z-index`* | zIndex，若不设置则内部将从 `99999` 开始递增 | `number` | | |
 | *`content`* | 内容 | `string` `VNode` | | |
 | *`v-model`* | 显示 | `boolean` | `false`  | `true` `false` |
@@ -946,7 +931,7 @@ const openCallback = () => {
 
 :::
 
-::: title 回调
+::: title Callbacks 回调
 :::
 
 ::: table
@@ -971,7 +956,7 @@ const openCallback = () => {
 
 :::
 
-::: title Exposes事件
+::: title Exposes 事件
 :::
 
 ::: table
@@ -1024,7 +1009,7 @@ const openCallback = () => {
 
 :::
 
-::: describe 扩充属性如下：
+::: describe 可选属性如下：
 :::
 
 ::: table
@@ -1062,10 +1047,10 @@ const openCallback = () => {
 
 :::
 
-::: describe 扩充属性如下：
+::: describe 可选属性如下：
 :::
 
-::: describe 没有扩充属性。
+::: describe 没有可选属性。
 :::
 
 ::: title layer.load
@@ -1102,7 +1087,7 @@ const openCallback = () => {
 
 :::
 
-::: describe 扩充属性如下：
+::: describe 可选属性如下：
 :::
 
 ::: table
@@ -1145,10 +1130,10 @@ const openCallback = () => {
 
 :::
 
-::: describe 扩充属性如下：
+::: describe 可选属性如下：
 :::
 
-::: describe 没有扩充属性。
+::: describe 没有可选属性。
 :::
 
 ::: title layer.photos
@@ -1185,7 +1170,7 @@ const openCallback = () => {
 
 :::
 
-::: describe 扩充属性如下：
+::: describe 可选属性如下：
 :::
 
 ::: table
@@ -1242,10 +1227,10 @@ const openCallback = () => {
 
 :::
 
-::: describe 扩充属性如下：
+::: describe 可选属性如下：
 :::
 
-::: describe 没有扩充属性。
+::: describe 没有可选属性。
 :::
 
 ::: title layer.prompt
@@ -1279,7 +1264,7 @@ const openCallback = () => {
 
 :::
 
-::: describe 扩充属性如下：
+::: describe 可选属性如下：
 :::
 
 ::: table
@@ -1303,7 +1288,7 @@ type BtnType = {
   style?: string | StyleValue;
   class?: string;
   disabled?: boolean;
-  callback: (id: string) => void;
+  callback: (id: string, ...args: any) => void;
 }
 
 type ImgListType = {

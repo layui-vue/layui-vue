@@ -98,7 +98,7 @@ export interface LayerProps {
   layerClasses?: string;
   zIndex?: number;
   closeBtn?: boolean | string;
-  btn?: BtnType[];
+  btn?: BtnType[] | boolean;
   btnAlign?: "l" | "c" | "r";
   anim?: 0 | 1 | 2 | 3 | 4 | 5 | 6;
   isOutAnim?: boolean;
@@ -111,7 +111,7 @@ export interface LayerProps {
   teleportDisabled?: boolean;
   lastPosition?: boolean;
   time?: number;
-  load?: 0 | 1;
+  load?: number;
   yesText?: string;
   isMessage?: boolean;
   id?: string;
@@ -144,7 +144,8 @@ const props = withDefaults(defineProps<LayerProps>(), {
   title: "标题",
   titleStyle: "",
   isHtmlFragment: false,
-  offset: "auto",
+  offset: () => "auto",
+  area: () => "auto",
   move: true,
   maxmin: false,
   resize: false,
@@ -827,7 +828,7 @@ defineExpose({ reset, open, close, full, min: mini, revert });
       :opacity="shadeOpacity"
       :teleport="teleport"
       :teleportDisabled="teleportDisabled"
-      @shadeClick="shadeHandle"
+      @shade-click="shadeHandle"
     ></Shade>
     <transition
       :enter-active-class="enterActiveClass"
@@ -846,7 +847,7 @@ defineExpose({ reset, open, close, full, min: mini, revert });
           v-if="showTitle"
           :title="title"
           :titleStyle="titleStyle"
-          :move="move"
+          :move="typeof move == 'boolean' ? move : false"
           @mousedown="setTop"
         >
           <slot name="title"></slot>
@@ -889,7 +890,7 @@ defineExpose({ reset, open, close, full, min: mini, revert });
             v-if="type === 5"
             :imgList="props.imgList"
             :startIndex="props.startIndex"
-            @resetCalculationPohtosArea="resetCalculationPohtosArea"
+            @reset-calculation-pohtos-area="resetCalculationPohtosArea"
           ></Photos>
           <Notifiy
             v-if="type === 6"
@@ -904,7 +905,7 @@ defineExpose({ reset, open, close, full, min: mini, revert });
         <!-- 工具栏 -->
         <HeaderBtn
           v-if="type != 3 && type != 5 && type != 6"
-          :maxmin="maxmin"
+          :maxmin="typeof maxmin == 'boolean' ? maxmin : false"
           :max="max"
           :min="min"
           :closeBtn="closeBtn"
@@ -923,13 +924,13 @@ defineExpose({ reset, open, close, full, min: mini, revert });
             <!-- 按钮 -->
             <div
               v-if="
-                ((btn && btn.length > 0) || type === 0 || type === 7) &&
+                ((typeof btn !== 'boolean' && btn!.length > 0) || type === 0 || type === 7) &&
                 !isMessage
               "
               class="layui-layer-btn"
               :class="[`layui-layer-btn-${btnAlign}`]"
             >
-              <template v-if="btn && btn.length > 0">
+              <template v-if="typeof btn !== 'boolean' && btn!.length > 0">
                 <template v-for="(b, i) in btn" :key="i">
                   <a
                     :style="b.style"
