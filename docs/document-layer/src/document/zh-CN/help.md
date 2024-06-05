@@ -49,30 +49,37 @@
 | | | | | `"drawer"` `"photos"` `"notify"` `"prompt"` |
 | *`icon`* | 图标 | `string` `number` | | |
 | *`title`* | 标题 | `string` `boolean` | `"信息"` | |
-| *`titleStyle`* | 标题样式 | `string` `StyleValue` | `""` |  |
+| *`title-style`* | 标题样式 | `string` `StyleValue` | `""` |  |
 | *`skin`* | 颜色模式 | `string` | | |
-| *`zIndex`* | zIndex | `number` | | |
+| *`layer-classes (原 skin 属性)`* | layer box 类名 | `string` | | |
+| *`z-index`* | zIndex，若不设置则内部将从 `99999` 开始递增 | `number` | | |
 | *`content`* | 内容 | `string` `VNode` | | |
 | *`v-model`* | 显示 | `boolean` | `false`  | `true` `false` |
-| *`offset`* | 位置 | `string` `array` | `"auto"` | `"auto"` `[top, left]` |
-| *`area`* | 尺寸 | `string` `array` | `"auto"`  | `"auto"` `[width, height]` |
-| *`move`* | 允许拖拽 | `boolean` | `true` | `true` `false` |
-| *`moveOut`* | 允许超出父容器 | `boolean` | `false` | `true` `false` |
-| *`maxmin`* | 允许最大化和最小化 | `boolean` | `false` | `true` `false` |
+| *`offset`* | 位置 | `string` `string[]` | `"auto"` | `"auto"` `[top, left]` |
+| *`area`* | 尺寸 | `string` `string[]` | `"auto"`  | `"auto"` `[width, height]` |
+| *`move`* | 允许移动 | `boolean` | `true` | `true` `false` |
+| *`moveOut`* | 是否可以拖出浏览器可视区域 | `boolean` | `false` | `true` `false` |
+| *`maxmin`* | 开启最小/最大化 | `boolean` | `false` | `true` `false` |
 | *`resize`* | 允许拉伸 | `boolean` | `false` | `true` `false` |
 | *`anim`* | 入场动画 | `number` | `0` | `0` - `6` |
-| *`isOutAnim`* | 出场动画 | `boolean` | `true` | `true` `false` |
+| *`isOutAnim`* | 离场动画 | `boolean` | `true` | `true` `false` |
 | *`animDuration`* | 动画持续时间 | `string` | `"0.3s"` | |
-| *`btn`* | 按钮 | `Array<LayerBtnProps>` `false` | | |
-| *`btnAlign`* | 按钮位置 | `string` | `"r"` | `"l"` `"c"` `"r"` |
+| *`btn`* | 底部按钮集合 | `Array<BtnType>` `false` | | |
+| *`btnAlign`* | 底部按钮位置 | `string` | `"r"` | `"l"` `"c"` `"r"` |
 | *`closeBtn`* | 关闭按钮 | `boolean` `string` | `"1"` | `false` `"1"` `"2"` |
-| *`time`* | 关闭时间 | `number` | `0` | |
-| *`shade`* | 使用遮盖层 | `boolean` | `true` | `true` `false` |
-| *`shadeClose`* | 点击遮盖层关闭 | `boolean` | `true` | `true` `false` |
-| *`shadeOpacity`* | 遮盖层透明度 | `string` | `"0.1"` | `"0.1"` - `"1"` |
+| *`time`* | `msg` `notify` 定时关闭 | `number` | `0` | |
+| *`shade`* | 显示遮盖层 | `boolean` | `true` | `true` `false` |
+| *`shade-close`* | 遮盖层关闭 | `boolean` | `true` | `true` `false` |
+| *`shade-style`*   | 遮盖层样式   | `StyleValue` |  |  |
+| *`shade-opacity`* | 遮盖层透明度 | `string` | `"0.1"` | `"0.1"` - `"1"` |
 | *`isHtmlFragment`* | 解析 html 字符 | `boolean` | `false` | `true` `false` |
+| *`teleport`* | layer挂载到目标DOM | `string` | `body`  |  |
+| *`teleportDisabled`* | 禁止挂载到目标DOM，保持原位置 | `boolean` | `false`  | |
+| *`lastPosition`* | 最小/最大化复原位置 `true`上次位置(拖动)、 `false` layer初始位置 | `boolean` | `true`  | |
+| *`load`* | `type` 为3时，loading Icon   | `number` | `0` | `0`, `1` |
+| *`yesText`* | 底部默认按钮文本   | `string` | `确定` |  |
 
-##### `LayerBtnProps`
+##### `BtnType`
 
 | 参数 | 描述 | 类型 | 默认值 | 可选值 |
 | -- | -- | -- | -- | -- |
@@ -86,14 +93,32 @@
 
 | 属性 | 描述 | 类型 | 默认值 | 可选值 |
 | -- | -- | -- | -- | -- |
-| *`full`* | 窗口最大化回调 | `function` | `(id) => {}` | |
-| *`min`* | 窗口最小化回调 | `function` | `(id) => {}` | |
-| *`restore`* | 窗口尺寸还原回调 | `function` | `(id) => {}` | |
-| *`success`* | 窗口可视回调 | `function` | `(id) => {}` | |
-| *`end`* | 窗口隐藏回调 | `function` | `(id) => {}` | |
-| *`close`* | 关闭回调 | `function` | `(id) => {}` | |
-| *`beforeClose`* | 关闭前回调 | `function` | `(id) => {}` | |
+| *`full`* | 最大化回调 | `function` | `(id) => {}` | |
+| *`min`* | 最小化回调 | `function` | `(id) => {}` | |
+| *`revert`* | 恢复最小/最大化回调 | `function` | `(id) => {}` | |
+| *`success`* | layer打开回调 | `function` | `(id) => {}` | |
+| *`end`* | layer关闭回调 | `function` | `(id) => {}` | |
+| *`close`* | 内部(右上角/点击遮罩/默认确认按钮)关闭回调 | `function` | `(id) => {}` | |
+| *`beforeClose`* | 内部(右上角/点击遮罩/默认确认按钮)关闭前回调，返回值为 `true` 内部才会关闭 | `function` | `(id) => boolean` | |
 | *`destroy`* | 销毁回调 | `function` | `() => {}` | |
+| *`yes`* | 点击底部默认按钮 | `function` | `id` | | |
+| *`moveStart`* | 弹窗拖动位置开始回调 | `function` | `id`| - |
+| *`moving`* | 弹窗拖动位置回调 | `function` | `id`| - |
+| *`moveEnd`* | 弹窗拖动位置结束回调 | `function` | `id`| - |
+| *`resizeStart`* | 弹窗拉伸位置开始回调 | `function` | `id`| - |
+| *`resizing`* | 弹窗拉伸位置开始回调 | `function` | `id`| - |
+| *`resizeEnd`* | 弹窗拉伸位置开始回调 | `function` | `id`| - |
+
+### 事件
+
+| 名称 | 描述 |
+| -- | -- |
+| *`reset`* | 重置弹窗 `modelValue` 为false 弹窗将打开 |
+| *`open`* | 打开弹窗 |
+| *`close`* | 关闭弹窗 |
+| *`full`* | 最大化 |
+| *`min`* | 最小化 |
+| *`reset`* | 复原最小/最大化 |
 
 ## 弹层API
 
@@ -132,7 +157,7 @@
 | *`type`* | 类型 | `0` |
 | *`title`* | 标题 | `false` |
 | *`content`* | 内容 | *`message`* |
-| *`shadeClose`* | 遮盖层关闭 | `false` |
+| *`shade-close`* | 遮盖层关闭 | `false` |
 | *`closeBtn`* | 关闭按钮 | `false` |
 | *`isMessage`* | 是否为消息类型 | `true` |
 | *`shade`* | 遮盖层 | `false` |
@@ -189,7 +214,7 @@
 | *`load`* | 加载层样式 | *`load`* |
 | *`anim`* | 入场动画 | `5` |
 | *`isOutAnim`* | 出场动画 | `false` |
-| *`shadeClose`* | 遮盖层关闭 | `false` |
+| *`shade-close`* | 遮盖层关闭 | `false` |
 
 ##### 扩充属性
 
@@ -217,7 +242,7 @@
 | --- | --- | -- |
 | *`type`* | 类型 | `0` |
 | *`content`* | 内容 | *`msg`* |
-| *`shadeClose`* | 遮罩层关闭 | `false` |
+| *`shade-close`* | 遮罩层关闭 | `false` |
 
 ##### 扩充属性
 
@@ -233,7 +258,7 @@
 
 | 参数名 | 描述 | 类型 | 默认值 |
 | --- | --- | ---- | ----- |
-| *`option`* | 配置 | `string` `LayerPhotosProps` | |
+| *`option`* | 配置 | `string` `ImgListType` | |
 | *`callback`* | 弹层创建后的回调 | `Function` | `(id) => {}` |
 
 ##### `defaultOption`
@@ -244,17 +269,17 @@
 | *`anim`* | 入场动画 | `2` |
 | *`startIndex`* | 初始图片索引 | `0` |
 | *`isOutAnim`* | 出场动画 | `true` |
-| *`shadeClose`* | 遮罩层关闭 | `true` |
-| *`shadeOpacity`* | 遮罩层透明度 | `"0.2"`|
+| *`shade-close`* | 遮罩层关闭 | `true` |
+| *`shade-opacity`* | 遮罩层透明度 | `"0.2"`|
 
 ##### 扩充属性
 
 | 属性 | 描述 | 类型 | 默认值 | 可选值 |
 | -- | -- | -- | -- | -- |
 | *`startIndex`* | 初始图片索引 | `number` | `0` |  |
-| *`imgList`* | 图片列表 | `Array<LayerPhotosProps>` | `[]` |  |
+| *`imgList`* | 图片列表 | `Array<ImgListType>` | `[]` |  |
 
-##### `LayerPhotosProps`
+##### `ImgListType`
 
 | 属性 | 描述 | 类型 | 默认值 | 可选值 |
 | -- | -- | -- | -- | -- |
@@ -306,8 +331,8 @@
 | 属性 | 描述 | 值 |
 | --- | --- | -- |
 | *`type`* | 类型 | `"prompt"` |
-| *`shadeClose`* | 遮罩层关闭 | `false` |
-| *`shadeOpacity`* | 遮罩层透明度 | `"0.2"` |
+| *`shade-close`* | 遮罩层关闭 | `false` |
+| *`shade-opacity`* | 遮罩层透明度 | `"0.2"` |
 
 ##### 扩充属性
 

@@ -914,7 +914,7 @@ const openCallback = () => {
 | *`anim`* | 入场动画 | `number` | `0` | `0` - `6` |
 | *`isOutAnim`* | 离场动画 | `boolean` | `true` | `true` `false` |
 | *`animDuration`* | 动画持续时间 | `string` | `"0.3s"` | |
-| *`btn`* | 底部按钮集合 | `Array<LayerBtnProps>` `false` | | |
+| *`btn`* | 底部按钮集合 | `Array<BtnType>` `false` | | |
 | *`btnAlign`* | 底部按钮位置 | `string` | `"r"` | `"l"` `"c"` `"r"` |
 | *`closeBtn`* | 关闭按钮 | `boolean` `string` | `"1"` | `false` `"1"` `"2"` |
 | *`time`* | `msg` `notify` 定时关闭 | `number` | `0` | |
@@ -931,7 +931,7 @@ const openCallback = () => {
 
 :::
 
-::: describe 以下是 `LayerBtnProps`，为 `LayerProps` 的 `btn` 属性所用。
+::: describe 以下是 `BtnType`，为 `LayerProps` 的 `btn` 属性所用。
 :::
 
 ::: table
@@ -1164,7 +1164,7 @@ const openCallback = () => {
 
 | 参数名 | 描述 | 类型 | 默认值 |
 | --- | --- | ---- | ----- |
-| *`option`* | 配置 | `string` `LayerPhotosProps` | |
+| *`option`* | 配置 | `string` `ImgListType` | |
 | *`callback`* | 弹层创建后的回调 | `Function` | `(id) => {}` |
 
 :::
@@ -1193,11 +1193,11 @@ const openCallback = () => {
 | 属性 | 描述 | 类型 | 默认值 | 可选值 |
 | -- | -- | -- | -- | -- |
 | *`startIndex`* | 初始图片索引 | `number` | `0` |  |
-| *`imgList`* | 图片列表 | `Array<LayerPhotosProps>` | `[]` |  |
+| *`imgList`* | 图片列表 | `Array<ImgListType>` | `[]` |  |
 
 :::
 
-::: describe `LayerPhotosProps` 如下：
+::: describe `ImgListType` 如下：
 :::
 
 ::: table
