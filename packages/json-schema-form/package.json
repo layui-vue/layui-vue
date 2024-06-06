@@ -35,6 +35,6 @@
     "test": "vitest"
   },
   "dependencies": {
-    "@layui/layui-vue": "2.17.4"
+    "@layui/layui-vue": "workspace:*"
   }
 }

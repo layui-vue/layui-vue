@@ -22,6 +22,8 @@ const inputs = inputsArray.reduce((backObj, pkgName) => {
 }, {});
 
 inputs["index"] = resolve(process.cwd(), "./src/index.ts");
+// todo
+inputs["theme"] = resolve(process.cwd(), "./src/theme/index.less");
 
 const matchModule: string[] = [
   "input",
@@ -89,7 +91,7 @@ export default (): UserConfigExport => {
             vue: "Vue",
           },
           manualChunks(id) {
-            let arr = id.toString().split("/");
+            const arr = id.toString().split("/");
             if (id.includes("node_modules")) {
               const chunksName = "_chunks/";
               return (
@@ -97,7 +99,7 @@ export default (): UserConfigExport => {
                 id.toString().split("node_modules/")[2].split("/")[0].toString()
               );
             } else if (arr.length >= 2) {
-              let entryPoint = arr[arr.length - 2].toString();
+              const entryPoint = arr[arr.length - 2].toString();
               if (matchModule.includes(entryPoint)) {
                 return entryPoint;
               }
