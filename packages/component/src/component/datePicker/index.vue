@@ -114,6 +114,7 @@ import dayjs from "dayjs";
 import LayInput from "../input/index.vue";
 import LayDropdown from "../dropdown/index.vue";
 import { getMonth, getYear, getDay } from "./day";
+import type { Ref } from "vue";
 import { ref, watch, reactive, provide, StyleValue, computed } from "vue";
 import DatePanel from "./components/DatePanel.vue";
 import TimePanel from "./components/TimePanel.vue";
@@ -427,6 +428,28 @@ watch(
   { immediate: true }
 );
 
+const innerMin: Ref<string> = ref("");
+const innerMax: Ref<string> = ref("");
+
+/**
+ * 监听 min/max 变化，更新内部变量
+ */
+watch(
+  () => props.min,
+  () => {
+    innerMin.value = props.min as string;
+  },
+  { immediate: true }
+);
+
+watch(
+  () => props.max,
+  () => {
+    innerMax.value = props.max as string;
+  },
+  { immediate: true }
+);
+
 const onChange = () => {
   if (dropdownRef.value)
     // @ts-ignore
@@ -455,8 +478,8 @@ provide("datePicker", {
   rangeSeparator: props.rangeSeparator,
   simple: props.simple,
   timestamp: props.timestamp,
-  min: props.min,
-  max: props.max,
+  min: innerMin,
+  max: innerMax,
   defaultTime: props.defaultTime,
 });
 </script>
