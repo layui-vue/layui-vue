@@ -25,7 +25,7 @@ export function calculateMinArea(minArea: any) {
 }
 
 export function calculateArea(type: any, area: any, offset: any) {
-  return type != "drawer"
+  return type != "drawer" || type != 4
     ? calculateBaseArea(area)
     : calculateDrawerArea(offset, area);
 }
@@ -35,7 +35,7 @@ export function calculateArea(type: any, area: any, offset: any) {
 // @param type
 // @return 正确宽高
 export function calculateBaseArea(area: any) {
-  if (area === "auto") {
+  if (area === undefined || area === "auto") {
     return [];
   }
   if (typeof area == "string") {
@@ -201,6 +201,9 @@ export function calculateType(modalType: number | string) {
   } else if (modalType === "notify" || modalType == 6) {
     // 消息通知
     return 6;
+  } else if (modalType === "prompt" || modalType == 7) {
+    // 输入层
+    return 7;
   }
   return 0;
 }

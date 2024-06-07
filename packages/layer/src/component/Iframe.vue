@@ -1,6 +1,7 @@
 <script lang="ts">
 import { computed, VNodeTypes } from "vue";
 export default {
+  // eslint-disable-next-line vue/multi-word-component-names
   name: "Iframe",
 };
 </script>

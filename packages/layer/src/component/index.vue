@@ -6,6 +6,7 @@ export default {
 
 <script lang="ts" setup>
 import type { BtnType, ImgListType } from "../types";
+import LayButton from "@layui/layui-vue/es/button/index";
 
 import Shade from "./Shade.vue";
 import Iframe from "./Iframe.vue";
@@ -13,6 +14,7 @@ import Title from "./Header.vue";
 import HeaderBtn from "./HeaderBtn.vue";
 import Photos from "./Photos.vue";
 import Notifiy from "./Notifiy.vue";
+import Prompt from "./Prompt.vue";
 import {
   Ref,
   ref,
@@ -24,6 +26,7 @@ import {
   onMounted,
   onUnmounted,
   StyleValue,
+  reactive,
 } from "vue";
 import {
   nextId,
@@ -47,6 +50,20 @@ import { useMove, useResize } from "../composable/useDragable";
 import { nextIndex } from "../tokens";
 import "../theme/index.css";
 
+export interface LayerPhotosProps {
+  src: string;
+  alt?: string;
+  thumb?: string;
+}
+
+export interface LayerBtnProps {
+  text: string;
+  callback: Function;
+  style?: string | StyleValue | "";
+  class?: string | "";
+  disabled?: boolean;
+}
+
 export interface LayerProps {
   modelValue?: boolean;
   type?:
@@ -57,22 +74,24 @@ export interface LayerProps {
     | 4
     | 5
     | 6
+    | 7
     | "dialog"
     | "page"
     | "iframe"
     | "loading"
     | "drawer"
     | "photos"
-    | "notify";
+    | "notify"
+    | "prompt";
   title?: string | boolean | Function;
   titleStyle?: string | StyleValue;
   content?: string | Function | VNodeTypes;
   isHtmlFragment?: boolean;
   offset?: string | string[];
   area?: string | string[];
-  move?: boolean;
-  maxmin?: boolean;
-  resize?: boolean;
+  move?: boolean | string;
+  maxmin?: boolean | string;
+  resize?: boolean | string;
   shade?: boolean;
   shadeClose?: boolean;
   shadeStyle?: StyleValue;
@@ -80,7 +99,7 @@ export interface LayerProps {
   layerClasses?: string;
   zIndex?: number;
   closeBtn?: boolean | string;
-  btn?: BtnType[];
+  btn?: BtnType[] | boolean;
   btnAlign?: "l" | "c" | "r";
   anim?: 0 | 1 | 2 | 3 | 4 | 5 | 6;
   isOutAnim?: boolean;
@@ -93,14 +112,12 @@ export interface LayerProps {
   teleportDisabled?: boolean;
   lastPosition?: boolean;
   time?: number;
-  load?: 0 | 1;
+  load?: number;
   yesText?: string;
-
   isMessage?: boolean;
   id?: string;
   isFunction?: boolean;
   appContext?: any;
-
   success?: Function;
   end?: Function;
   yes?: Function;
@@ -116,6 +133,10 @@ export interface LayerProps {
   resizing?: Function;
   resizeEnd?: Function;
   internalDestroy?: Function;
+  formType?: 0 | 1 | 2 | "text" | "password" | "textarea";
+  value?: string;
+  maxLength?: number;
+  placeholder?: string;
 }
 
 const props = withDefaults(defineProps<LayerProps>(), {
@@ -124,8 +145,8 @@ const props = withDefaults(defineProps<LayerProps>(), {
   title: "标题",
   titleStyle: "",
   isHtmlFragment: false,
-  offset: "auto",
-  area: "auto",
+  offset: () => "auto",
+  area: () => "auto",
   move: true,
   maxmin: false,
   resize: false,
@@ -146,10 +167,8 @@ const props = withDefaults(defineProps<LayerProps>(), {
   time: 0,
   load: 0,
   yesText: "确定",
-
   isMessage: false,
   isFunction: false,
-
   success: () => {},
   end: () => {},
   beforeClose: () => true,
@@ -163,9 +182,17 @@ const props = withDefaults(defineProps<LayerProps>(), {
   resizeStart: () => {},
   resizing: () => {},
   resizeEnd: () => {},
+  formType: "text",
+  value: "",
+  placeholder: "请输入内容",
 });
 
 const emit = defineEmits(["close", "update:modelValue"]);
+
+const _content = ref("");
+// 此处刻意新增一个内部变量，因为传进来的有可能是Proxy，update的话有可能会把修改后的值更新到外面
+// eslint-disable-next-line vue/no-setup-props-destructure
+if (typeof props.value === "string") _content.value = props.value;
 
 const slots = useSlots();
 const max: Ref<boolean> = ref(false);
@@ -381,7 +408,7 @@ watch(
 const boxClasses = computed(() => {
   return [
     {
-      "layui-layer-dialog": type === 0,
+      "layui-layer-dialog": type === 0 || type === 7,
       "layui-layer-page": type === 1,
       "layui-layer-iframe": type === 2,
       "layui-layer-loading": type === 3,
@@ -512,11 +539,9 @@ const closeHandle = () => {
 
 /**
  * 确定操作
- * <p>
- * @param null
  */
-const yesHandle = () => {
-  if (typeof props.yes === "function") props.yes(id.value);
+const yesHandle = (...args: Array<any>) => {
+  if (typeof props.yes === "function") props.yes(...args);
   else closeHandle();
 };
 
@@ -804,7 +829,7 @@ defineExpose({ reset, open, close, full, min: mini, revert });
       :opacity="shadeOpacity"
       :teleport="teleport"
       :teleportDisabled="teleportDisabled"
-      @shadeClick="shadeHandle"
+      @shade-click="shadeHandle"
     ></Shade>
     <transition
       :enter-active-class="enterActiveClass"
@@ -823,7 +848,7 @@ defineExpose({ reset, open, close, full, min: mini, revert });
           v-if="showTitle"
           :title="title"
           :titleStyle="titleStyle"
-          :move="move"
+          :move="typeof move == 'boolean' ? move : false"
           @mousedown="setTop"
         >
           <slot name="title"></slot>
@@ -852,12 +877,21 @@ defineExpose({ reset, open, close, full, min: mini, revert });
               <template v-else>{{ renderContent(props.content) }}</template>
             </template>
           </template>
+          <template v-if="type === 7">
+            <Prompt
+              v-model:_content="_content"
+              :value="_content"
+              :formType="$props.formType"
+              :maxLength="$props.maxLength"
+              :placeholder="$props.placeholder"
+            ></Prompt>
+          </template>
           <Iframe v-if="type === 2" :src="props.content"></Iframe>
           <Photos
             v-if="type === 5"
             :imgList="props.imgList"
             :startIndex="props.startIndex"
-            @resetCalculationPohtosArea="resetCalculationPohtosArea"
+            @reset-calculation-pohtos-area="resetCalculationPohtosArea"
           ></Photos>
           <Notifiy
             v-if="type === 6"
@@ -872,7 +906,7 @@ defineExpose({ reset, open, close, full, min: mini, revert });
         <!-- 工具栏 -->
         <HeaderBtn
           v-if="type != 3 && type != 5 && type != 6"
-          :maxmin="maxmin"
+          :maxmin="typeof maxmin == 'boolean' ? maxmin : false"
           :max="max"
           :min="min"
           :closeBtn="closeBtn"
@@ -888,30 +922,37 @@ defineExpose({ reset, open, close, full, min: mini, revert });
             </div>
           </template>
           <template v-else>
+            <!-- 按钮 -->
             <div
-              v-if="((btn && btn.length > 0) || type === 0) && !isMessage"
+              v-if="
+                ((typeof btn !== 'boolean' && btn!.length > 0) || type === 0 || type === 7) &&
+                !isMessage
+              "
               class="layui-layer-btn"
               :class="[`layui-layer-btn-${btnAlign}`]"
             >
-              <template v-if="btn && btn.length > 0">
-                <template v-for="(b, index) in btn" :key="index">
-                  <a
-                    :style="b.style"
-                    :class="[
-                      b.class,
-                      `layui-layer-btn${index}`,
-                      { 'layui-layer-btn-disabled': b.disabled },
-                    ]"
-                    @click="!b.disabled && b.callback(id)"
-                    >{{ b.text }}</a
+              <template v-if="btn instanceof Array && btn.length > 0">
+                <template v-for="(b, i) in btn" :key="i">
+                  <lay-button
+                    :class="b.class"
+                    :type="b.type ?? i === 0 ? 'primary' : ''"
+                    :disabled="b.disabled"
+                    @click="
+                      !b.disabled &&
+                        (type === 7 ? b.callback(id, _content) : b.callback(id))
+                    "
                   >
+                    {{ b.text }}
+                  </lay-button>
                 </template>
               </template>
               <template v-else>
-                <template v-if="type === 0">
-                  <a class="layui-layer-btn0" @click="yesHandle()">{{
-                    yesText
-                  }}</a>
+                <template v-if="type === 0 || type === 7">
+                  <a
+                    class="layui-layer-btn0"
+                    @click="yesHandle(id, _content)"
+                    >{{ yesText }}</a
+                  >
                 </template>
               </template>
             </div>
