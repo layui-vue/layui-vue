@@ -1,4 +1,6 @@
 @import url(./iconfont.css);
+@import url(@layui/layui-vue/es/button/index.css);
+@import url(@layui/layui-vue/es/theme/index.css);
 
 
 :root {

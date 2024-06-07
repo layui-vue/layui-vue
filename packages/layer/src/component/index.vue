@@ -6,6 +6,7 @@ export default {
 
 <script lang="ts" setup>
 import type { BtnType, ImgListType } from "../types";
+import LayButton from "@layui/layui-vue/es/button/index";
 
 import Shade from "./Shade.vue";
 import Iframe from "./Iframe.vue";
@@ -930,9 +931,10 @@ defineExpose({ reset, open, close, full, min: mini, revert });
               class="layui-layer-btn"
               :class="[`layui-layer-btn-${btnAlign}`]"
             >
-              <template v-if="typeof btn !== 'boolean' && btn!.length > 0">
-                <template v-for="(b, i) in btn" :key="i">
-                  <a
+              <template v-if="btn && btn.length > 0">
+                <template v-for="(b, index) in btn" :key="index">
+                  <lay-button>{{ b.text }}</lay-button>
+                  <!-- <a
                     :style="b.style"
                     :class="[
                       b.class ?? `layui-layer-btn${i}`,
@@ -943,7 +945,7 @@ defineExpose({ reset, open, close, full, min: mini, revert });
                         (type === 7 ? b.callback(id, _content) : b.callback(id))
                     "
                     >{{ b.text }}</a
-                  >
+                  > -->
                 </template>
               </template>
               <template v-else>
