@@ -931,21 +931,19 @@ defineExpose({ reset, open, close, full, min: mini, revert });
               class="layui-layer-btn"
               :class="[`layui-layer-btn-${btnAlign}`]"
             >
-              <template v-if="btn && btn.length > 0">
-                <template v-for="(b, index) in btn" :key="index">
-                  <lay-button>{{ b.text }}</lay-button>
-                  <!-- <a
-                    :style="b.style"
-                    :class="[
-                      b.class ?? `layui-layer-btn${i}`,
-                      { 'layui-layer-btn-disabled': b.disabled },
-                    ]"
+              <template v-if="btn instanceof Array && btn.length > 0">
+                <template v-for="(b, i) in btn" :key="i">
+                  <lay-button
+                    :class="b.class"
+                    :type="b.type ?? i === 0 ? 'primary' : ''"
+                    :disabled="b.disabled"
                     @click="
                       !b.disabled &&
                         (type === 7 ? b.callback(id, _content) : b.callback(id))
                     "
-                    >{{ b.text }}</a
-                  > -->
+                  >
+                    {{ b.text }}
+                  </lay-button>
                 </template>
               </template>
               <template v-else>

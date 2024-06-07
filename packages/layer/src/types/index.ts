@@ -6,6 +6,7 @@ export type InstallOptions = StringObject;
 
 export type BtnType = {
   text: string;
+  type?: string;
   style?: string | StyleValue;
   class?: string;
   disabled?: boolean;

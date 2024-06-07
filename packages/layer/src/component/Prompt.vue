@@ -7,7 +7,8 @@ export default {
 
 <script lang="ts" setup>
 import { computed, ref } from "vue";
-import { LayIcon } from "@layui/icons-vue";
+import LayInput from "@layui/layui-vue/es/input/index";
+import LayTextarea from "@layui/layui-vue/es/textarea/index";
 
 export interface PromptProps {
   formType?: 0 | 1 | 2 | "text" | "password" | "textarea";
@@ -50,40 +51,21 @@ const emits = defineEmits(["update:_content"]);
 
 <template>
   <template v-if="multiLine">
-    <div class="layui-textarea-wrapper">
-      <textarea
-        @input="$emit('update:_content', data)"
-        class="layui-textarea"
-        v-model="data"
-        :maxlength="$props.maxLength"
-      ></textarea>
-    </div>
+    <lay-textarea
+      @input="$emit('update:_content', data)"
+      v-model="data"
+      :maxlength="$props.maxLength"
+    >
+    </lay-textarea>
   </template>
   <template v-else>
-    <div class="layui-input">
-      <div class="layui-input-wrapper">
-        <input
-          @input="$emit('update:_content', data)"
-          :placeholder="$props.placeholder"
-          :type="isPassword && !isShowPassword ? 'password' : 'text'"
-          v-model="data"
-          :maxlength="$props.maxLength"
-        />
-        <span
-          class="layui-input-password"
-          @click="showPassword"
-          v-if="isPassword && hasContent"
-        >
-          <lay-icon type="layui-icon-show" v-if="isShowPassword"></lay-icon>
-          <lay-icon type="layui-icon-hide" v-else></lay-icon>
-        </span>
-        <span class="layui-input-clear" v-if="hasContent">
-          <lay-icon
-            type="layui-icon-close-fill"
-            @click.stop="onClear"
-          ></lay-icon>
-        </span>
-      </div>
-    </div>
+    <lay-input
+      @input="$emit('update:_content', data)"
+      v-model="data"
+      :allowClear="true"
+      :type="isPassword ? 'password' : 'text'"
+      :password="isPassword"
+      :placeholder="$props.placeholder"
+    ></lay-input>
   </template>
 </template>
