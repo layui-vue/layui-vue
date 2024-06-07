@@ -1,18 +1,15 @@
-<script lang="ts">
-export default {
-  // eslint-disable-next-line vue/multi-word-component-names
-  name: "Title",
-};
-</script>
-
 <script lang="ts" setup>
-import { StyleValue, compile, computed } from "vue";
+import { StyleValue, computed } from "vue";
 
 export interface HeaderProps {
   title: string | boolean | Function;
   titleStyle: string | StyleValue;
   move: boolean;
 }
+
+defineOptions({
+  name: "Title",
+});
 
 const renderContent = function (content: any) {
   if (typeof content === "function") {

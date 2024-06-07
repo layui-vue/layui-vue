@@ -1,15 +1,14 @@
-<script lang="ts">
-import { computed, VNodeTypes } from "vue";
-export default {
-  // eslint-disable-next-line vue/multi-word-component-names
-  name: "Iframe",
-};
-</script>
-
 <script lang="ts" setup>
+import type { VNodeTypes } from "vue";
+import { computed } from "vue";
+
 export interface IframeProps {
   src?: string | Function | object | VNodeTypes;
 }
+
+defineOptions({
+  name: "Iframe",
+});
 
 const props = defineProps<IframeProps>();
 

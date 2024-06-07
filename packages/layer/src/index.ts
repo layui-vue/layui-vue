@@ -95,7 +95,7 @@ const layer = {
       closeBtn: false,
       isMessage: true,
       shade: false,
-      btn: false,
+      btn: undefined,
       time: 1000,
     };
     return layer.create(option, defaultOption, callback);
@@ -292,7 +292,7 @@ const layer = {
 // 全局安装
 const install = (app: App, options?: InstallOptions): void => {
   layer._context = app._context;
-  app.component(LayLayer.name ?? "LayLayer", LayLayer);
+  app.component(LayLayer.name as string, LayLayer);
   app.config.globalProperties.$layer = layer;
   if (options) {
     app.provide(zIndexKey, options.zIndex);
@@ -305,4 +305,4 @@ export default { install };
 
 export * from "./types";
 
-import "./theme/index.less";
+import "./theme/index.css";

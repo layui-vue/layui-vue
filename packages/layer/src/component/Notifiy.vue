@@ -11,12 +11,7 @@
     <LayIcon type="layui-icon-close" size="16" @click="handleClose"></LayIcon>
   </div>
 </template>
-<script lang="ts">
-export default {
-  // eslint-disable-next-line vue/multi-word-component-names
-  name: "Notifiy",
-};
-</script>
+
 <script lang="ts" setup>
 import { nextTick, onMounted, ref, shallowRef } from "vue";
 import { LayIcon } from "@layui/icons-vue";
@@ -29,6 +24,10 @@ export interface LayNotifyProps {
   icon?: string | number | undefined;
   iconClass: string[];
 }
+
+defineOptions({
+  name: "Notifiy",
+});
 
 const props = withDefaults(defineProps<LayNotifyProps>(), {
   isHtmlFragment: false,

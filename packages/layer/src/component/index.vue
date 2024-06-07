@@ -1,12 +1,5 @@
-<script lang="ts">
-export default {
-  name: "LayLayer",
-};
-</script>
-
 <script lang="ts" setup>
 import type { BtnType, ImgListType } from "../types";
-import LayButton from "@layui/layui-vue/es/button/index";
 
 import Shade from "./Shade.vue";
 import Iframe from "./Iframe.vue";
@@ -50,20 +43,6 @@ import { useMove, useResize } from "../composable/useDragable";
 import { nextIndex } from "../tokens";
 import "../theme/index.css";
 
-export interface LayerPhotosProps {
-  src: string;
-  alt?: string;
-  thumb?: string;
-}
-
-export interface LayerBtnProps {
-  text: string;
-  callback: Function;
-  style?: string | StyleValue | "";
-  class?: string | "";
-  disabled?: boolean;
-}
-
 export interface LayerProps {
   modelValue?: boolean;
   type?:
@@ -89,9 +68,9 @@ export interface LayerProps {
   isHtmlFragment?: boolean;
   offset?: string | string[];
   area?: string | string[];
-  move?: boolean | string;
-  maxmin?: boolean | string;
-  resize?: boolean | string;
+  move?: boolean;
+  maxmin?: boolean;
+  resize?: boolean;
   shade?: boolean;
   shadeClose?: boolean;
   shadeStyle?: StyleValue;
@@ -99,7 +78,7 @@ export interface LayerProps {
   layerClasses?: string;
   zIndex?: number;
   closeBtn?: boolean | string;
-  btn?: BtnType[] | boolean;
+  btn?: BtnType[];
   btnAlign?: "l" | "c" | "r";
   anim?: 0 | 1 | 2 | 3 | 4 | 5 | 6;
   isOutAnim?: boolean;
@@ -114,10 +93,16 @@ export interface LayerProps {
   time?: number;
   load?: number;
   yesText?: string;
+  formType?: 0 | 1 | 2 | "text" | "password" | "textarea";
+  value?: string;
+  maxLength?: number;
+  placeholder?: string;
+  // 内部函数式layer使用 start
   isMessage?: boolean;
   id?: string;
   isFunction?: boolean;
   appContext?: any;
+  // 内部函数式layer使用 end
   success?: Function;
   end?: Function;
   yes?: Function;
@@ -133,11 +118,11 @@ export interface LayerProps {
   resizing?: Function;
   resizeEnd?: Function;
   internalDestroy?: Function;
-  formType?: 0 | 1 | 2 | "text" | "password" | "textarea";
-  value?: string;
-  maxLength?: number;
-  placeholder?: string;
 }
+
+defineOptions({
+  name: "LayLayer",
+});
 
 const props = withDefaults(defineProps<LayerProps>(), {
   modelValue: false,
@@ -167,6 +152,9 @@ const props = withDefaults(defineProps<LayerProps>(), {
   time: 0,
   load: 0,
   yesText: "确定",
+  formType: "text",
+  value: "",
+  placeholder: "请输入内容",
   isMessage: false,
   isFunction: false,
   success: () => {},
@@ -182,17 +170,9 @@ const props = withDefaults(defineProps<LayerProps>(), {
   resizeStart: () => {},
   resizing: () => {},
   resizeEnd: () => {},
-  formType: "text",
-  value: "",
-  placeholder: "请输入内容",
 });
 
 const emit = defineEmits(["close", "update:modelValue"]);
-
-const _content = ref("");
-// 此处刻意新增一个内部变量，因为传进来的有可能是Proxy，update的话有可能会把修改后的值更新到外面
-// eslint-disable-next-line vue/no-setup-props-destructure
-if (typeof props.value === "string") _content.value = props.value;
 
 const slots = useSlots();
 const max: Ref<boolean> = ref(false);
@@ -219,6 +199,19 @@ const _w: Ref<string> = ref("");
 const _h: Ref<string> = ref("");
 const _t: Ref<string> = ref("");
 const _l: Ref<string> = ref("");
+
+/**
+ * prompt module
+ */
+
+const PromptValue = ref(props.value);
+
+watch(
+  () => props.value,
+  () => {
+    PromptValue.value = props.value;
+  }
+);
 
 const setIndex = () => {
   index.value = props.zIndex ?? nextIndex();
@@ -848,7 +841,7 @@ defineExpose({ reset, open, close, full, min: mini, revert });
           v-if="showTitle"
           :title="title"
           :titleStyle="titleStyle"
-          :move="typeof move == 'boolean' ? move : false"
+          :move="move"
           @mousedown="setTop"
         >
           <slot name="title"></slot>
@@ -879,11 +872,10 @@ defineExpose({ reset, open, close, full, min: mini, revert });
           </template>
           <template v-if="type === 7">
             <Prompt
-              v-model:_content="_content"
-              :value="_content"
-              :formType="$props.formType"
-              :maxLength="$props.maxLength"
-              :placeholder="$props.placeholder"
+              v-model:prompt-value="PromptValue"
+              :formType="props.formType"
+              :maxLength="props.maxLength"
+              :placeholder="props.placeholder"
             ></Prompt>
           </template>
           <Iframe v-if="type === 2" :src="props.content"></Iframe>
@@ -906,7 +898,7 @@ defineExpose({ reset, open, close, full, min: mini, revert });
         <!-- 工具栏 -->
         <HeaderBtn
           v-if="type != 3 && type != 5 && type != 6"
-          :maxmin="typeof maxmin == 'boolean' ? maxmin : false"
+          :maxmin="maxmin"
           :max="max"
           :min="min"
           :closeBtn="closeBtn"
@@ -925,32 +917,36 @@ defineExpose({ reset, open, close, full, min: mini, revert });
             <!-- 按钮 -->
             <div
               v-if="
-                ((typeof btn !== 'boolean' && btn!.length > 0) || type === 0 || type === 7) &&
+                ((btn && btn.length > 0) || type === 0 || type === 7) &&
                 !isMessage
               "
               class="layui-layer-btn"
               :class="[`layui-layer-btn-${btnAlign}`]"
             >
-              <template v-if="btn instanceof Array && btn.length > 0">
-                <template v-for="(b, i) in btn" :key="i">
-                  <lay-button
-                    :class="b.class"
-                    :type="b.type ?? i === 0 ? 'primary' : ''"
-                    :disabled="b.disabled"
+              <template v-if="btn && btn.length > 0">
+                <template v-for="(b, index) in btn" :key="index">
+                  <a
+                    :style="b.style"
+                    :class="[
+                      b.class,
+                      `layui-layer-btn${index}`,
+                      { 'layui-layer-btn-disabled': b.disabled },
+                    ]"
                     @click="
                       !b.disabled &&
-                        (type === 7 ? b.callback(id, _content) : b.callback(id))
+                        (type === 7
+                          ? b.callback(id, PromptValue)
+                          : b.callback(id))
                     "
+                    >{{ b.text }}</a
                   >
-                    {{ b.text }}
-                  </lay-button>
                 </template>
               </template>
               <template v-else>
                 <template v-if="type === 0 || type === 7">
                   <a
                     class="layui-layer-btn0"
-                    @click="yesHandle(id, _content)"
+                    @click="yesHandle(id, PromptValue)"
                     >{{ yesText }}</a
                   >
                 </template>
