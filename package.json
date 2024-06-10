@@ -1,5 +1,6 @@
 {
   "license": "MIT",
+  "packageManager": "pnpm@8.14.0",
   "description": "a component library for Vue 3 base on layui-vue",
   "homepage": "http://www.layui-vue.com",
   "workspaces": [
