@@ -1,5 +1,6 @@
 import { LayFormContext } from "../../types";
 import { computed, inject } from "vue";
+import { normalizeValue } from "../../utils";
 
 export default function useProps(props: any) {
   const size = computed(() => {
@@ -16,7 +17,7 @@ export default function useProps(props: any) {
 
   const labelWidth = computed(() => {
     const formContext = inject("LayForm", {} as LayFormContext);
-    return props.labelWidth || formContext.labelWidth || 95;
+    return normalizeValue([props.labelWidth, formContext.labelWidth, 95])[0];
   });
 
   const labelPosition = computed(() => {
@@ -41,7 +42,11 @@ export default function useProps(props: any) {
 
   const inlineWidth = computed(() => {
     const formContext = inject("LayForm", {} as LayFormContext);
-    return props.inlineWidth || formContext.inlineWidth || "auto";
+    return normalizeValue([
+      props.inlineWidth,
+      formContext.inlineWidth,
+      "auto",
+    ])[0];
   });
 
   return {

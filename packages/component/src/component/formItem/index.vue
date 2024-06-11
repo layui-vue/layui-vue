@@ -218,8 +218,10 @@ onUnmounted(() => {
 
 const slots = useSlots();
 
+const labelRef = ref<HTMLLabelElement | null>();
+
 const showLabel = computed(() => {
-  return slots.label != undefined || props.label != undefined;
+  return (slots.label || props.label) && labelRef.value?.style.width !== "0px";
 });
 
 const labelStyles = computed<StyleValue>(() => {
@@ -249,7 +251,12 @@ const modeStyles = computed<StyleValue>(() => {
     :size="size"
     ref="formItemRef"
   >
-    <label class="layui-form-label" v-if="showLabel" :style="labelStyles">
+    <label
+      class="layui-form-label"
+      v-if="showLabel"
+      :style="labelStyles"
+      ref="labelRef"
+    >
       <lay-tooltip
         v-if="isLabelTooltip"
         v-bind="tooltipProps"
