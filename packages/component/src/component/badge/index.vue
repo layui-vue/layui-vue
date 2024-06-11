@@ -65,11 +65,10 @@ const badgeStyle = computed(() => {
   return [{ "background-color": props.color }, props.badgeStyle];
 });
 
-const rippleColor = computed(() => {
-  if (layBadge.value) {
-    return getComputedStyle(layBadge.value).backgroundColor;
-  }
-});
+const rippleColor = computed(
+  () =>
+    (layBadge.value && getComputedStyle(layBadge.value).backgroundColor) ?? ""
+);
 const isCondition = computed(() => {
   if (props.type === "dot") return true;
   if (slot.custom) return true;
@@ -102,17 +101,18 @@ const isCondition = computed(() => {
 @import "./index.less";
 
 .layui-badge-dot-ripple {
-  animation: ripple-animation 1.2s linear infinite;
+  pointer-events: none;
+  animation: ripple-animation 1.2s ease-out infinite;
+  background: v-bind(rippleColor);
 }
 
 @keyframes ripple-animation {
   from {
-    box-shadow: 0 0 0.5px 0px v-bind(rippleColor);
     opacity: 0.8;
   }
 
   to {
-    box-shadow: 0 0 0.5px 4.5px v-bind(rippleColor);
+    transform: scale(3);
     opacity: 0;
   }
 }
