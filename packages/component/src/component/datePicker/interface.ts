@@ -1,4 +1,4 @@
-import { Ref } from "vue";
+import type { Ref } from "vue";
 
 export type DatePickerType = "date" | "datetime" | "year" | "time" | "month";
 
@@ -24,7 +24,7 @@ export type provideType = {
   rangeSeparator: string;
   simple: boolean;
   timestamp: boolean;
-  max: string;
-  min: string;
+  max: Ref<string>;
+  min: Ref<string>;
   defaultTime: string | string[];
 };
