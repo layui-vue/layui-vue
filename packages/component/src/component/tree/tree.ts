@@ -132,14 +132,18 @@ class Tree {
     return node;
   }
 
-  treeForeach(tree: any, func: Function) {
-    tree.forEach((data: any) => {
-      data.children && this.treeForeach(data.children, func);
+  treeForeach(tree: TreeData[], func: Function) {
+    const { children } = this.config.replaceFields;
+
+    tree.forEach((data: TreeData) => {
+      data[children] && this.treeForeach(data[children], func);
       func(data);
     });
   }
 
   setChildrenChecked(checked: boolean, nodes: TreeData[]) {
+    const { children } = this.config.replaceFields;
+
     let ableCount = 0;
     let checkCount = 0;
     const len = nodes.length;
@@ -156,26 +160,25 @@ class Tree {
     for (let i = 0; i < len; i++) {
       if (
         !nodes[i].isDisabled ||
-        (nodes[i].isDisabled && nodes[i].children.length > 0)
+        (nodes[i].isDisabled && nodes[i][children].length > 0)
       ) {
         nodes[i].isChecked = checked;
       }
-      nodes[i].children &&
-        nodes[i].children.length > 0 &&
-        this.setChildrenChecked(checked, nodes[i].children);
+      nodes[i][children] &&
+        nodes[i][children].length > 0 &&
+        this.setChildrenChecked(checked, nodes[i][children]);
     }
   }
 
   setParentChecked(checked: boolean, parent: TreeData) {
+    const { children } = this.config.replaceFields;
+
     if (!parent) {
       return;
     }
-    parent.isChecked = checked;
-    const pChild = parent.children;
+    const pChild = parent[children] as TreeData[];
     const pChildChecked = pChild.some((c) => c.isChecked);
-    if (pChildChecked) {
-      parent.isChecked = true;
-    }
+    parent.isChecked = pChildChecked;
     if (parent.parentNode) {
       this.setParentChecked(checked, parent.parentNode);
     }
@@ -186,13 +189,15 @@ class Tree {
     checkStrictly: boolean | string,
     node: TreeData
   ) {
+    const { children } = this.config.replaceFields;
+
     node.isChecked = checked;
     if (!checkStrictly) {
       if (node.parentNode) {
         this.setParentChecked(checked, node.parentNode);
       }
-      if (node.children) {
-        this.setChildrenChecked(checked, node.children);
+      if (node[children]) {
+        this.setChildrenChecked(checked, node[children]);
       }
     }
   }
@@ -203,9 +208,10 @@ class Tree {
 
   getKeys() {
     const expandKeys = [];
-    const checkedKeys = [];
+    const checkedKeys: StringOrNumber[] = [];
     const iterator = this.config.nodeMap[Symbol.iterator]();
-    const { id: fId } = this.config.replaceFields;
+    const { id: fId, children } = this.config.replaceFields;
+
     let next = iterator.next();
     while (!next.done) {
       const [, node] = next.value;
@@ -213,6 +219,16 @@ class Tree {
       if (node.isChecked) {
         checkedKeys.push(id);
       }
+
+      // #I9U1MX 父子节点存在联动，若current节点的所有子节点有未选中的情况，则current节点不选中
+      if (!this.config.checkStrictly && node.isChecked && node[children]) {
+        this.treeForeach(node[children], (child: TreeData) => {
+          if (!child.isChecked) {
+            checkedKeys.pop();
+          }
+        });
+      }
+
       if (node.isLeaf) {
         expandKeys.push(id);
       }
