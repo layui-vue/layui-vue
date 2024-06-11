@@ -23,7 +23,6 @@
     "generate:icons": "pnpm -C packages/icons generate",
     "lint:eslint": "eslint 'packages/**/*.{vue,ts,tsx}' --fix",
     "lint:prettier": "prettier --write \"packages/**/*.{vue,ts}\"",
-    "postinstall": "pnpm run build",
     "prepare": "husky install",
     "commit": "git add . && git-cz && git push"
   },
@@ -70,7 +69,7 @@
     "prettier": "^2.6.2",
     "rimraf": "^3.0.2",
     "rollup": "^4.9.4",
-    "tsx": "^3.10.1",
+    "tsx": "^4.12.0",
     "typescript": "^4.9.5",
     "vite": "5.0.11",
     "vitest": "1.4.0",

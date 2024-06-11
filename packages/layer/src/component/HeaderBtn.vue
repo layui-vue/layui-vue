@@ -10,6 +10,10 @@ export interface HeaderBtnProps {
   closeBtn?: string | boolean;
 }
 
+defineOptions({
+  name: "HeaderBtn",
+});
+
 const props = withDefaults(defineProps<HeaderBtnProps>(), {
   closeBtn: "1",
 });

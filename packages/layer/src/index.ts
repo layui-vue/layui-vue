@@ -1,5 +1,5 @@
 import { render, h, isVNode, AppContext, App } from "vue";
-import LayLayer from "./component/index.vue";
+import LayLayer, { LayerProps } from "./component/index.vue";
 import { InstallOptions } from "./types";
 import { zIndexKey } from "./tokens";
 import { nextId, removeNotifiyFromQueen } from "./utils";
@@ -74,20 +74,20 @@ const layer = {
   _context: <AppContext | null>null,
 
   // 页面
-  open: (option: any, callback?: Function) => {
+  open: (option: LayerProps, callback?: Function) => {
     const defaultOption = {};
     return layer.create(option, defaultOption, callback);
   },
   // 抽屉
-  drawer: (option: any, callback?: Function) => {
-    const defaultOption = {
+  drawer: (option: LayerProps, callback?: Function) => {
+    const defaultOption: LayerProps = {
       type: "drawer",
     };
     return layer.create(option, defaultOption, callback);
   },
   // 消息
-  msg: (message: string, option?: any, callback?: Function) => {
-    const defaultOption = {
+  msg: (message: string, option: LayerProps = {}, callback?: Function) => {
+    const defaultOption: LayerProps = {
       type: 0,
       title: false,
       content: message,
@@ -95,14 +95,14 @@ const layer = {
       closeBtn: false,
       isMessage: true,
       shade: false,
-      btn: false,
+      btn: undefined,
       time: 1000,
     };
     return layer.create(option, defaultOption, callback);
   },
   // 加载
-  load: (load: number, option?: any, callback?: Function) => {
-    const defaultOption = {
+  load: (load: number, option: LayerProps = {}, callback?: Function) => {
+    const defaultOption: LayerProps = {
       type: 3,
       load: load,
       anim: 5,
@@ -112,8 +112,8 @@ const layer = {
     return layer.create(option, defaultOption, callback);
   },
   // 确认
-  confirm: (msg: string, option?: any, callback?: Function) => {
-    const defaultOption = {
+  confirm: (msg: string, option: LayerProps = {}, callback?: Function) => {
+    const defaultOption: LayerProps = {
       type: 0,
       content: msg,
       shadeClose: false,
@@ -121,13 +121,13 @@ const layer = {
     return layer.create(option, defaultOption, callback);
   },
   //图片预览
-  photos: (option: any, callback?: Function) => {
+  photos: (option: string | LayerProps, callback?: Function) => {
     if (typeof option === "string") {
       option = {
         imgList: [{ src: option }],
       };
     }
-    const defaultOption = {
+    const defaultOption: LayerProps = {
       type: 5,
       anim: 2,
       startIndex: 0,
@@ -138,9 +138,9 @@ const layer = {
     return layer.create(option, defaultOption, callback);
   },
   //通知
-  notify: (option: any = {}, callback?: Function) => {
+  notify: (option: LayerProps, callback?: Function) => {
     option.type = 6;
-    const defaultOption = {
+    const defaultOption: LayerProps = {
       offset: "rt",
       time: 2000,
       area: "auto",
@@ -148,8 +148,22 @@ const layer = {
     };
     return layer.create(option, defaultOption, callback);
   },
+  // 输入层
+  prompt: (option: LayerProps, callback?: Function) => {
+    option.type = 7;
+    const defaultOption: LayerProps = {
+      type: "prompt",
+      shadeClose: false,
+      shadeOpacity: "0.2",
+    };
+    return layer.create(option, defaultOption, callback);
+  },
   // 创建弹出层
-  create: (option: any, defaultOption: any, callback?: Function) => {
+  create: (
+    option: LayerProps,
+    defaultOption: LayerProps,
+    callback?: Function
+  ) => {
     // 销毁定时
     let timer: NodeJS.Timeout;
     // 聚合配置 Opt
@@ -278,7 +292,7 @@ const layer = {
 // 全局安装
 const install = (app: App, options?: InstallOptions): void => {
   layer._context = app._context;
-  app.component(LayLayer.name, LayLayer);
+  app.component(LayLayer.name as string, LayLayer);
   app.config.globalProperties.$layer = layer;
   if (options) {
     app.provide(zIndexKey, options.zIndex);

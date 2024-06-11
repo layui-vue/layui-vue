@@ -1,9 +1,3 @@
-<script lang="ts">
-export default {
-  name: "LayLayer",
-};
-</script>
-
 <script lang="ts" setup>
 import type { BtnType, ImgListType } from "../types";
 
@@ -13,6 +7,7 @@ import Title from "./Header.vue";
 import HeaderBtn from "./HeaderBtn.vue";
 import Photos from "./Photos.vue";
 import Notifiy from "./Notifiy.vue";
+import Prompt from "./Prompt.vue";
 import {
   Ref,
   ref,
@@ -24,6 +19,7 @@ import {
   onMounted,
   onUnmounted,
   StyleValue,
+  reactive,
 } from "vue";
 import {
   nextId,
@@ -57,13 +53,15 @@ export interface LayerProps {
     | 4
     | 5
     | 6
+    | 7
     | "dialog"
     | "page"
     | "iframe"
     | "loading"
     | "drawer"
     | "photos"
-    | "notify";
+    | "notify"
+    | "prompt";
   title?: string | boolean | Function;
   titleStyle?: string | StyleValue;
   content?: string | Function | VNodeTypes;
@@ -93,14 +91,18 @@ export interface LayerProps {
   teleportDisabled?: boolean;
   lastPosition?: boolean;
   time?: number;
-  load?: 0 | 1;
+  load?: number;
   yesText?: string;
-
+  formType?: 0 | 1 | 2 | "text" | "password" | "textarea";
+  value?: string;
+  maxLength?: number;
+  placeholder?: string;
+  // 内部函数式layer使用 start
   isMessage?: boolean;
   id?: string;
   isFunction?: boolean;
   appContext?: any;
-
+  // 内部函数式layer使用 end
   success?: Function;
   end?: Function;
   yes?: Function;
@@ -118,14 +120,18 @@ export interface LayerProps {
   internalDestroy?: Function;
 }
 
+defineOptions({
+  name: "LayLayer",
+});
+
 const props = withDefaults(defineProps<LayerProps>(), {
   modelValue: false,
   type: 1,
   title: "标题",
   titleStyle: "",
   isHtmlFragment: false,
-  offset: "auto",
-  area: "auto",
+  offset: () => "auto",
+  area: () => "auto",
   move: true,
   maxmin: false,
   resize: false,
@@ -146,10 +152,11 @@ const props = withDefaults(defineProps<LayerProps>(), {
   time: 0,
   load: 0,
   yesText: "确定",
-
+  formType: "text",
+  value: "",
+  placeholder: "请输入内容",
   isMessage: false,
   isFunction: false,
-
   success: () => {},
   end: () => {},
   beforeClose: () => true,
@@ -192,6 +199,19 @@ const _w: Ref<string> = ref("");
 const _h: Ref<string> = ref("");
 const _t: Ref<string> = ref("");
 const _l: Ref<string> = ref("");
+
+/**
+ * prompt module
+ */
+
+const PromptValue = ref(props.value);
+
+watch(
+  () => props.value,
+  () => {
+    PromptValue.value = props.value;
+  }
+);
 
 const setIndex = () => {
   index.value = props.zIndex ?? nextIndex();
@@ -381,7 +401,7 @@ watch(
 const boxClasses = computed(() => {
   return [
     {
-      "layui-layer-dialog": type === 0,
+      "layui-layer-dialog": type === 0 || type === 7,
       "layui-layer-page": type === 1,
       "layui-layer-iframe": type === 2,
       "layui-layer-loading": type === 3,
@@ -512,11 +532,9 @@ const closeHandle = () => {
 
 /**
  * 确定操作
- * <p>
- * @param null
  */
-const yesHandle = () => {
-  if (typeof props.yes === "function") props.yes(id.value);
+const yesHandle = (...args: Array<any>) => {
+  if (typeof props.yes === "function") props.yes(...args);
   else closeHandle();
 };
 
@@ -804,7 +822,7 @@ defineExpose({ reset, open, close, full, min: mini, revert });
       :opacity="shadeOpacity"
       :teleport="teleport"
       :teleportDisabled="teleportDisabled"
-      @shadeClick="shadeHandle"
+      @shade-click="shadeHandle"
     ></Shade>
     <transition
       :enter-active-class="enterActiveClass"
@@ -852,12 +870,20 @@ defineExpose({ reset, open, close, full, min: mini, revert });
               <template v-else>{{ renderContent(props.content) }}</template>
             </template>
           </template>
+          <template v-if="type === 7">
+            <Prompt
+              v-model:prompt-value="PromptValue"
+              :formType="props.formType"
+              :maxLength="props.maxLength"
+              :placeholder="props.placeholder"
+            ></Prompt>
+          </template>
           <Iframe v-if="type === 2" :src="props.content"></Iframe>
           <Photos
             v-if="type === 5"
             :imgList="props.imgList"
             :startIndex="props.startIndex"
-            @resetCalculationPohtosArea="resetCalculationPohtosArea"
+            @reset-calculation-pohtos-area="resetCalculationPohtosArea"
           ></Photos>
           <Notifiy
             v-if="type === 6"
@@ -888,8 +914,12 @@ defineExpose({ reset, open, close, full, min: mini, revert });
             </div>
           </template>
           <template v-else>
+            <!-- 按钮 -->
             <div
-              v-if="((btn && btn.length > 0) || type === 0) && !isMessage"
+              v-if="
+                ((btn && btn.length > 0) || type === 0 || type === 7) &&
+                !isMessage
+              "
               class="layui-layer-btn"
               :class="[`layui-layer-btn-${btnAlign}`]"
             >
@@ -902,16 +932,23 @@ defineExpose({ reset, open, close, full, min: mini, revert });
                       `layui-layer-btn${index}`,
                       { 'layui-layer-btn-disabled': b.disabled },
                     ]"
-                    @click="!b.disabled && b.callback(id)"
+                    @click="
+                      !b.disabled &&
+                        (type === 7
+                          ? b.callback(id, PromptValue)
+                          : b.callback(id))
+                    "
                     >{{ b.text }}</a
                   >
                 </template>
               </template>
               <template v-else>
-                <template v-if="type === 0">
-                  <a class="layui-layer-btn0" @click="yesHandle()">{{
-                    yesText
-                  }}</a>
+                <template v-if="type === 0 || type === 7">
+                  <a
+                    class="layui-layer-btn0"
+                    @click="yesHandle(id, PromptValue)"
+                    >{{ yesText }}</a
+                  >
                 </template>
               </template>
             </div>

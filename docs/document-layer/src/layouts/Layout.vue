@@ -26,7 +26,7 @@
         <lay-tab type="brief" v-model="active">
           <lay-tab-item title="指南" id="/zh-CN/index"></lay-tab-item>
           <lay-tab-item title="案例" id="/zh-CN/demo"></lay-tab-item>
-          <lay-tab-item title="属性" id="/zh-CN/help"></lay-tab-item>
+          <lay-tab-item title="API和属性" id="/zh-CN/help"></lay-tab-item>
           <lay-tab-item title="常见问题" id="/zh-CN/question"></lay-tab-item>
         </lay-tab>
         <router-view></router-view>
