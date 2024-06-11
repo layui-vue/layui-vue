@@ -115,7 +115,7 @@ function handleIconClick(node: TreeData) {
       });
     });
   } else {
-    node.isLeaf = !node.isLeaf;
+    hasChildren && (node.isLeaf = !node.isLeaf);
   }
 }
 
@@ -193,6 +193,12 @@ const isChildAllSelected = computed(() => {
               ? 'layui-tree-icon'
               : '',
             { 'layui-tree-iconClick': true },
+            {
+              'layui-tree-icon-standalone':
+                nodeIconType(node).length &&
+                node.isLeaf &&
+                !node.children.length,
+            },
           ]"
         >
           <lay-icon
