@@ -1,0 +1,77 @@
+.layui-cascader-panel {
+    height: 300px;
+    display: flex;
+
+    &-container {
+        display: flex;
+    }
+
+    &-list {
+        border: 1px solid #ececec;
+        min-width: 120px;
+        max-width: 200px;
+        overflow: hidden;
+        overflow-y: auto;
+        scrollbar-width: none;
+
+        &:nth-child(n + 2) {
+            border-left: none;
+        }
+
+        &-striped .layui-cascader-panel-item:nth-child(even) {
+            background-color: var(--global-neutral-color-2);
+        }
+    }
+
+    &-item {
+        padding: 8px 16px;
+        height: calc(34px - 16px);
+        cursor: pointer;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        position: relative;
+        user-select: none;
+
+        &-disabled {
+            cursor: not-allowed !important;
+            background-color: var(--global-neutral-color-4);
+        }
+
+        .layui-badge {
+            position: absolute;
+        }
+
+        .layui-icon {
+            position: absolute;
+            right: 0;
+            width: 16px;
+            height: 16px;
+        }
+
+        &:hover {
+            background-color: var(--global-checked-color) !important;
+            color: white;
+
+            span {
+                color: white !important;
+            }
+        }
+
+        &-active {
+            background-color: var(--global-checked-color) !important;
+            color: white;
+
+            span {
+                color: white !important;
+            }
+        }
+
+        &-loading {
+            position: absolute;
+            right: 0;
+            margin-right: 12px;
+            margin-top: 3px;
+        }
+    }
+}

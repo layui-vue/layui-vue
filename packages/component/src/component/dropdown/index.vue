@@ -646,7 +646,6 @@ defineExpose({ show, hide, toggle });
   <LayRender :render="onlyChildRenderFunc" v-bind="$attrs"></LayRender>
   <TeleportWrapper :to="popupContainer" :disabled="disabledTeleport">
     <div
-      v-if="openState"
       ref="contentRef"
       :class="[
         'layui-dropdown-content',
@@ -654,7 +653,10 @@ defineExpose({ show, hide, toggle });
         'layui-anim-upbit',
         props.contentClass,
       ]"
-      :style="[contentStyle, props.contentStyle ?? '']"
+      :style="[contentStyle, props.contentStyle ?? '', {
+        display: openState ? 'block' : 'none',
+        visibility: openState ? 'visible' : 'collapse',
+      }]"
       @mouseenter="handleMouseEnterWithContext"
       @mouseleave="handleMouseLeaveWithContext"
     >

@@ -16,14 +16,17 @@
   <lay-cascader :options="options" v-model="value" placeholder="点我试一试" allow-clear>
   </lay-cascader>
   <span style="margin-left:20px">输出的值：{{value}}</span>
-  <lay-button @click='value="Components/data/progress"' size='sm' style='margin-left:10px'>
+  <lay-button @click="clickSetValue" size='sm' style='margin-left:10px'>
     修改v-model
   </lay-button>
 </template>
 
 <script setup>
 import { ref } from "vue";
-const value=ref()
+const value=ref("Guide / shejiyuanze / yizhi");
+const clickSetValue = () => {
+    value.value="Guide / shejiyuanze / fankui";
+}
 const options = [
 	{
 		value: "Guide",
@@ -325,9 +328,9 @@ const valueLv=ref(null)
 
 ::: title 选择即改变
 :::
-::: demo 使用 `changeOnSelect` 属性开启，该功能不能与`onlyLastLevel`同时开启
+::: demo 使用 `changeOnSelect` 属性开启，但不建议和 `onlyLastLevel` 同时开启，因为这样你看不到实时选中的结果。
 <template>
-  <lay-cascader :options="options" v-model="valueChangeOnSelect" :changeOnSelect="true" allow-clear placeholder="选择即改变" ></lay-cascader>
+  <lay-cascader :options="options" v-model="valueChangeOnSelect" :onlyLastLevel="true" :changeOnSelect="true" allow-clear placeholder="选择即改变" ></lay-cascader>
   <span style="margin-left:20px">输出的值：{{valueChangeOnSelect}}</span>
 </template>
 
@@ -651,7 +654,7 @@ const options2 = [
 :::
 ::: demo 也许你当前数据键名并不是`label`、`value`、`children`,这时只需要使用replaceFields属性来自定义key
 <template>
-  <lay-cascader :options="options3" :replaceFields="replaceFields" placeholder="自义定key" :disabled="true"></lay-cascader>
+  <lay-cascader :options="options3" :replaceFields="replaceFields" placeholder="自定义key"></lay-cascader>
 </template>
 
 <script setup>
@@ -705,13 +708,17 @@ const options3=[
 
 ::: title Cascader 面板
 :::
-::: demo 可以设置 `panel` 为 `true` 来创建一个级联选择器面板。请打开控制台查看输出。
+
+::: demo
 <template>
-  <lay-cascader :panel="true" :options="options4" @change="onLocaleSelect"></lay-cascader>
+  {{curCity}}
+  <lay-cascader-panel :data="options4" :replaceFields="[{label:'label'}]" v-model="curCity" :multiple="true"></lay-cascader-panel>
 </template>
 
 <script setup>
-  const options4 = [
+  import { ref } from "vue";
+  const curCity = ref([]);
+  const options4 = ref([
 	{label: "北京", value: '010000'},
 	{label: "广西壮族自治区", value: '450000', children: [
         {label: "南宁", value: '450100', children: [
@@ -762,9 +769,7 @@ const options3=[
 			{label: "恭城瑶族自治县", value: '450331'},
 		]},
 	]}
-  ];
-
-  const onLocaleSelect = (ev) => console.log(ev);
+  ]);
 </script>
 :::
 
@@ -786,7 +791,6 @@ const options3=[
 | contentStyle             | 内容自定义样式     | `StyleValue` | -- | -- |
 | contentClass             | 内容自定义Class    | `string` `Array<string \| object>` `object` | -- | -- |
 | disabled | 禁用 | `boolean`  |--  |--  |
-| panel | 显示为级联面板 | `boolean` | `false` `true` | `false` |
 :::
 
 ::: title Cascader 事件

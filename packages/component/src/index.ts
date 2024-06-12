@@ -91,6 +91,7 @@ import LayRipple from "./component/ripple/index";
 import LayNoticeBar from "./component/noticeBar/index";
 import LayPageHeader from "./component/pageHeader/index";
 import LayCascader from "./component/cascader/index";
+import LayCascaderPanel from "./component/cascaderPanel/index";
 import LayAffix from "./component/affix/index";
 import LaySpace from "./component/space/index";
 import LayTag from "./component/tag/index";
@@ -190,6 +191,7 @@ const components: Record<string, Plugin> = {
   LayNoticeBar,
   LayPageHeader,
   LayCascader,
+  LayCascaderPanel,
   LayAffix,
   LaySpace,
   LayTag,
@@ -297,6 +299,7 @@ export {
   LayNoticeBar,
   LayPageHeader,
   LayCascader,
+  LayCascaderPanel,
   LayAffix,
   LaySpace,
   LayTag,
