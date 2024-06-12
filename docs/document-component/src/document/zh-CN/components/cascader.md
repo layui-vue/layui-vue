@@ -16,14 +16,17 @@
   <lay-cascader :options="options" v-model="value" placeholder="点我试一试" allow-clear>
   </lay-cascader>
   <span style="margin-left:20px">输出的值：{{value}}</span>
-  <lay-button @click='value="Components/data/progress"' size='sm' style='margin-left:10px'>
+  <lay-button @click="clickSetValue" size='sm' style='margin-left:10px'>
     修改v-model
   </lay-button>
 </template>
 
 <script setup>
 import { ref } from "vue";
-const value=ref()
+const value=ref("Guide / shejiyuanze / yizhi");
+const clickSetValue = () => {
+    value.value="Guide / shejiyuanze / fankui";
+}
 const options = [
 	{
 		value: "Guide",
@@ -325,9 +328,9 @@ const valueLv=ref(null)
 
 ::: title 选择即改变
 :::
-::: demo 使用 `changeOnSelect` 属性开启，该功能不能与`onlyLastLevel`同时开启
+::: demo 使用 `changeOnSelect` 属性开启，但不建议和 `onlyLastLevel` 同时开启，因为这样你看不到实时选中的结果。
 <template>
-  <lay-cascader :options="options" v-model="valueChangeOnSelect" :changeOnSelect="true" allow-clear placeholder="选择即改变" ></lay-cascader>
+  <lay-cascader :options="options" v-model="valueChangeOnSelect" :onlyLastLevel="true" :changeOnSelect="true" allow-clear placeholder="选择即改变" ></lay-cascader>
   <span style="margin-left:20px">输出的值：{{valueChangeOnSelect}}</span>
 </template>
 
@@ -651,7 +654,7 @@ const options2 = [
 :::
 ::: demo 也许你当前数据键名并不是`label`、`value`、`children`,这时只需要使用replaceFields属性来自定义key
 <template>
-  <lay-cascader :options="options3" :replaceFields="replaceFields" placeholder="自义定key" :disabled="true"></lay-cascader>
+  <lay-cascader :options="options3" :replaceFields="replaceFields" placeholder="自定义key"></lay-cascader>
 </template>
 
 <script setup>
@@ -701,6 +704,73 @@ const options3=[
 ]
 </script>
 
+:::
+
+::: title Cascader 面板
+:::
+
+::: demo
+<template>
+  {{curCity}}
+  <lay-cascader-panel :data="options4" :replaceFields="[{label:'label'}]" v-model="curCity" :multiple="true"></lay-cascader-panel>
+</template>
+
+<script setup>
+  import { ref } from "vue";
+  const curCity = ref([]);
+  const options4 = ref([
+	{label: "北京", value: '010000'},
+	{label: "广西壮族自治区", value: '450000', children: [
+        {label: "南宁", value: '450100', children: [
+            {label: "市辖区", value: '450101'},
+            {label: "兴宁区", value: '450102'},
+            {label: "青秀区", value: '450103'},
+            {label: "江南区", value: '450105'},
+            {label: "西乡塘区", value: '450107'},
+            {label: "良庆区", value: '450108'},
+            {label: "邕宁区", value: '450109'},
+            {label: "武鸣区", value: '450122'},
+            {label: "隆安县", value: '450123'},
+            {label: "马山县", value: '450124'},
+            {label: "上林县", value: '450125'},
+            {label: "宾阳县", value: '450126'},
+            {label: "横县", value: '450127'},
+        ]},
+		{label: "柳州", value: '450200', children: [
+			{label: "市辖区", value: '450201'},
+			{label: "城中区", value: '450202'},
+			{label: "鱼峰区", value: '450203'},
+			{label: "柳南区", value: '450204'},
+			{label: "柳北区", value: '450205'},
+			{label: "柳江县", value: '450221'},
+			{label: "鹿寨县", value: '450222'},
+			{label: "融安县", value: '450223'},
+			{label: "融水苗族自治县", value: '450224'},
+			{label: "三江侗族自治县", value: '450225'},
+		]},
+		{label: "桂林", value: '450300', children: [
+			{label: "市辖区", value: '450301'},
+			{label: "秀峰区", value: '450302'},
+			{label: "叠彩区", value: '450303'},
+			{label: "象山区", value: '450304'},
+			{label: "七星区", value: '450305'},
+			{label: "雁山区", value: '450311'},
+			{label: "临桂区", value: '450312'},
+			{label: "阳朔县", value: '450321'},
+			{label: "灵川县", value: '450322'},
+			{label: "全州县", value: '450323'},
+			{label: "兴安县", value: '450324'},
+			{label: "永福县", value: '450325'},
+			{label: "灌阳县", value: '450326'},
+			{label: "龙胜各族自治县", value: '450327'},
+			{label: "资源县", value: '450328'},
+			{label: "平乐县", value: '450329'},
+			{label: "荔浦县", value: '450330'},
+			{label: "恭城瑶族自治县", value: '450331'},
+		]},
+	]}
+  ]);
+</script>
 :::
 
 ::: title Cascader 属性
