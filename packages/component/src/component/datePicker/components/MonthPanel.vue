@@ -82,10 +82,16 @@ const MONTH_NAME = computed(() => [
 const cellDisabled = computed(() => {
   return (item: string) => {
     const month = parseInt(item);
-    if (datePicker.min && month < dayjs(datePicker.min).month() + 1) {
+    if (
+      datePicker.min.value &&
+      month < dayjs(datePicker.min.value).month() + 1
+    ) {
       return true;
     }
-    if (datePicker.max && month > dayjs(datePicker.max).month() + 1) {
+    if (
+      datePicker.max.value &&
+      month > dayjs(datePicker.max.value).month() + 1
+    ) {
       return true;
     }
     return false;
@@ -143,10 +149,10 @@ const footOnOk = () => {
 //现在回调
 const footOnNow = () => {
   const month = dayjs().month() + 1;
-  if (datePicker.min && month < dayjs(datePicker.min).month() + 1) {
+  if (datePicker.min.value && month < dayjs(datePicker.min.value).month() + 1) {
     return;
   }
-  if (datePicker.max && month > dayjs(datePicker.max).month() + 1) {
+  if (datePicker.max.value && month > dayjs(datePicker.max.value).month() + 1) {
     return;
   }
   Month.value = dayjs().month();

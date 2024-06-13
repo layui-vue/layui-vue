@@ -71,10 +71,10 @@ const { t } = useI18n();
 // 判断单元格是否可以点击(禁用)
 const cellDisabled = computed(() => {
   return (item: number) => {
-    if (datePicker.min && item < dayjs(datePicker.min).year()) {
+    if (datePicker.min.value && item < dayjs(datePicker.min.value).year()) {
       return true;
     }
-    if (datePicker.max && item > dayjs(datePicker.max).year()) {
+    if (datePicker.max.value && item > dayjs(datePicker.max.value).year()) {
       return true;
     }
     return false;
@@ -153,10 +153,16 @@ const footOnOk = () => {
 
 //现在回调
 const footOnNow = () => {
-  if (datePicker.max && dayjs().year() > dayjs(datePicker.max).year()) {
+  if (
+    datePicker.max.value &&
+    dayjs().year() > dayjs(datePicker.max.value).year()
+  ) {
     return;
   }
-  if (datePicker.min && dayjs().year() < dayjs(datePicker.min).year()) {
+  if (
+    datePicker.min.value &&
+    dayjs().year() < dayjs(datePicker.min.value).year()
+  ) {
     return;
   }
   Year.value = dayjs().year();

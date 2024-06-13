@@ -100,15 +100,19 @@ const cellDisabled = computed(() => {
     haveValue && (_hms[type!] = value);
     const time = `${_hms.hh}:${_hms.mm}:${_hms.ss}`;
     if (
-      datePicker.min &&
-      dayjs(`${toDay} ${time}`).isBefore(dayjs(`${toDay} ${datePicker.min}`))
+      datePicker.min.value &&
+      dayjs(`${toDay} ${time}`).isBefore(
+        dayjs(`${toDay} ${datePicker.min.value}`)
+      )
     ) {
       return true;
     }
 
     if (
-      datePicker.max &&
-      dayjs(`${toDay} ${time}`).isAfter(dayjs(`${toDay} ${datePicker.max}`))
+      datePicker.max.value &&
+      dayjs(`${toDay} ${time}`).isAfter(
+        dayjs(`${toDay} ${datePicker.max.value}`)
+      )
     ) {
       return true;
     }

@@ -132,10 +132,10 @@ const footOnOk = () => {
 
 //现在回调
 const footOnNow = () => {
-  if (datePicker.max && dayjs().isAfter(dayjs(datePicker.max))) {
+  if (datePicker.max.value && dayjs().isAfter(dayjs(datePicker.max.value))) {
     return;
   }
-  if (datePicker.min && dayjs().isBefore(dayjs(datePicker.min))) {
+  if (datePicker.min.value && dayjs().isBefore(dayjs(datePicker.min.value))) {
     return;
   }
   datePicker.currentYear.value = dayjs().year();
