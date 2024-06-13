@@ -785,6 +785,11 @@ const reset = function () {
 };
 
 const full = function () {
+  if (min.value) {
+    throw new Error(
+      "@layui/layer-vue: layer状态为最小化，无法直接切换为最大化"
+    );
+  }
   if (!max.value) {
     removeListener();
     baseMaxHandle();
@@ -793,6 +798,11 @@ const full = function () {
 };
 
 const mini = function () {
+  if (max.value) {
+    throw new Error(
+      "@layui/layer-vue: layer状态为最大化，无法直接切换为最小化"
+    );
+  }
   if (!min.value) {
     removeListener();
     baseMinHandle();
