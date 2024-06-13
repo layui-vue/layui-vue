@@ -319,9 +319,6 @@ importers:
       '@layui/icons-vue':
         specifier: workspace:*
         version: link:../icons
-      '@layui/layui-vue':
-        specifier: workspace:*
-        version: link:../component
     devDependencies:
       '@babel/plugin-transform-runtime':
         specifier: ^7.18.5

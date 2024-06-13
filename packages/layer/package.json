@@ -37,8 +37,7 @@
     "ie > 10"
   ],
   "dependencies": {
-    "@layui/icons-vue": "workspace:*",
-    "@layui/layui-vue": "workspace:*"
+    "@layui/icons-vue": "workspace:*"
   },
   "devDependencies": {
     "@babel/plugin-transform-runtime": "^7.18.5"

@@ -23,7 +23,7 @@ const inputs = inputsArray.reduce((backObj, pkgName) => {
 
 inputs["index"] = resolve(process.cwd(), "./src/index.ts");
 // todo
-inputs["theme"] = resolve(process.cwd(), "./src/theme/index.less");
+// inputs["theme"] = resolve(process.cwd(), "./src/theme/index.less");
 
 const matchModule: string[] = [
   "input",
