@@ -711,13 +711,12 @@ const options3=[
 
 ::: demo
 <template>
-  {{curCity}}
-  <lay-cascader-panel :data="options4" :replaceFields="[{label:'label'}]" v-model="curCity" :multiple="true"></lay-cascader-panel>
+  {{_selectKeys}}
+  <lay-cascader-panel :data="options4" v-model="_selectKeys" :replaceFields="[{label:'label'}]" :multiple="true"></lay-cascader-panel>
 </template>
 
 <script setup>
-  import { ref } from "vue";
-  const curCity = ref([]);
+  const _selectKeys = ref([]);
   const options4 = ref([
 	{label: "北京", value: '010000'},
 	{label: "广西壮族自治区", value: '450000', children: [

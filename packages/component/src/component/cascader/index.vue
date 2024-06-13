@@ -48,39 +48,34 @@
           :disabled="_disabled"
           v-model="_selectKeys"
           @update:model-value="
-            ({ selectKeys, selectLabel }) => {
-              console.log('onUpdateModelValue', selectKeys, selectLabel);
+            (selectKeys: string[] | string) => {
               _selectKeys = selectKeys;
-              _displayValue = selectLabel;
               dropdownRef.hide();
               emit('update:modelValue', _selectKeys);
             }
           "
-          @multiple-select-item="
+          @update:states="
             ({ selectKeys, selectLabel }) => {
-              console.log(
-                'onUpdateMultipleSelectItem',
-                selectKeys,
-                selectLabel
-              );
+              emit('update:modelValue', selectKeys);
+            }
+          "
+          @update:multiple-select-item="
+            ({ selectKeys, selectLabel }) => {
               _selectKeys = selectKeys;
-              _displayValue = selectLabel.join(decollator);
               emit('update:modelValue', _selectKeys);
             }
           "
-          @change="
+          @select-item="
             ({ index, value, selectKeys, selectLabel }) => {
-              console.log('onChange', index, value, selectKeys, selectLabel);
               if (props.changeOnSelect) {
                 _selectKeys = selectKeys;
-                _displayValue = selectLabel;
                 emit('update:modelValue', _selectKeys);
               }
             }
           "
           :lazy="props.load"
         >
-          <template v-for="(item, key) in $slots" :key="key" #[key]>
+          <template v-for="(item, key) in slots" :key="key" #[key]>
             <template v-if="key != 'default'">
               <slot :name="key"></slot>
             </template>
@@ -92,19 +87,17 @@
 </template>
 
 <script setup lang="ts">
-// TODO 解决初次渲染时未能传递数据到 panel 的问题
-// TODO 解决多选时总是重置悬浮窗的问题
-
 import "./index.less";
 import LayInput from "../input/index.vue";
 import LayDropdown from "../dropdown/index.vue";
-import { ref, useSlots, StyleValue, computed, watch, nextTick } from "vue";
+import { ref, useSlots, StyleValue, computed, watch } from "vue";
 import { CascaderSize } from "./interface";
 import useProps from "./index.hooks";
 import {
   CascaderPanelItemProps,
   CascaderPanelLazyloadFunction,
 } from "../cascaderPanel/interface";
+import useCascaderPanel from "../cascaderPanel/index.hook";
 
 export type DropdownTrigger = "click" | "hover" | "focus" | "contextMenu";
 
@@ -148,7 +141,7 @@ const props = withDefaults(defineProps<CascaderProps>(), {
   }),
   multiple: false,
   lazy: false,
-  load: (_, resolve) => resolve([]),
+  load: () => [],
 });
 
 const hasContent = computed(
@@ -159,7 +152,6 @@ const emit = defineEmits(["update:modelValue", "change", "clear"]);
 
 const slots = useSlots();
 const dropdownRef = ref();
-// const cascaderPanelRef = ref();
 const openState = ref(false);
 
 const _selectKeys = ref<string | Array<string>>(
@@ -167,7 +159,6 @@ const _selectKeys = ref<string | Array<string>>(
     ? props.modelValue.split(props.decollator)
     : props.modelValue
 );
-const _displayValue = ref<string | Array<string>>("");
 const _dataSource = ref(props.options);
 const _multiple = ref(props.multiple);
 const _decollator = ref(props.decollator);
@@ -178,6 +169,16 @@ const _replaceFields = ref({
   value: props.replaceFields?.value ?? "value",
   children: props.replaceFields?.children ?? "children",
 });
+const _displayValue = computed(
+  () =>
+    useCascaderPanel({
+      modelValue: _selectKeys.value,
+      data: props.options,
+      multiple: _multiple.value,
+      replaceFields: _replaceFields.value,
+      decollator: _decollator.value,
+    }).selectLabel.value
+);
 
 const onClear = () => {
   _selectKeys.value = [];

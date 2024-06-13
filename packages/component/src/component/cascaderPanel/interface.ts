@@ -8,12 +8,19 @@ export interface CascaderPanelItemProps {
   [key: string]: any;
 }
 
+export interface CascaderPanelItemPropsInternal {
+  label: any;
+  value: any;
+  slot?: any;
+  checked: boolean;
+  loading: boolean;
+  disabled?: boolean;
+  children?: Array<CascaderPanelItemPropsInternal>;
+}
+
 export type CascaderPanelLazyloadFunction = (
-  node: CascaderPanelItemProps,
-  resolve: (data: any) => void
-) =>
-  | void
-  | ((node: CascaderPanelItemProps) => Promise<Array<CascaderPanelItemProps>>);
+  node: CascaderPanelItemProps
+) => string | Array<CascaderPanelItemProps>;
 
 export interface CascaderPanelProps {
   replaceFields?: {
