@@ -25,7 +25,7 @@
     <lay-button type="primary" @click="openPrompt">输入层</lay-button>
 </template>
 
-<script>
+<script setup>
 import { layer } from "@layui/layui-vue"
 import { reactive, h, resolveComponent } from 'vue'
 
@@ -204,7 +204,7 @@ const openMsg8 = function() {
     <lay-button type="primary" @click="openConfirm2">询问框（2）</lay-button>
 </template>
 
-<script>
+<script setup>
 import { layer } from "@layui/layui-vue";
 
 const openConfirm1 = function() {
@@ -253,7 +253,7 @@ const openConfirm2 = function() {
   </lay-row>
 </template>
 
-<script>
+<script setup>
 import { layer } from  "@layui/layui-vue"
 
 const baseNotifyRT = function() {
@@ -325,7 +325,7 @@ const NotifyInfo=function(){
     <lay-button type="primary" @click="groupImg">查看相册</lay-button>
 </template>
 
-<script>
+<script setup>
 import { layer } from  "@layui/layui-vue"
 
 const signleImg = function() {
@@ -530,7 +530,7 @@ const openAuto = function() {
   </lay-layer>
 </template>
 
-<script>
+<script setup>
 import { ref, reactive } from 'vue'
 import { layer } from '@layui/layui-vue'
 
@@ -883,7 +883,7 @@ const openCallback = () => {
 | *`id`* | ID | `string` | | |
 | *`type`* | 类型 | `string` `number` | `1` | `0 "dialog"` `1 "page"` `2 "iframe"` `3 "loading"` `4 "drawer"` `5 "photos"` `6 "notify"` `7 "prompt"` |
 | *`icon`* | 图标 | `string` `number` | | |
-| *`title`* | 标题 | `string` `boolean` | `"信息"` | |
+| *`title`* | 标题 | `string` `boolean` | `"标题"` | |
 | *`title-style`* | 标题样式 | `string` `StyleValue` | `""` |  |
 | *`skin`* | 颜色模式 | `string` | | |
 | *`layer-classes`* | layer box 类名(原 skin 属性) | `string` | | |
