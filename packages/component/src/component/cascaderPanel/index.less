@@ -1,5 +1,5 @@
 .layui-cascader-panel {
-    height: 300px;
+    min-height: 200px;
     display: flex;
 
     &-container {
@@ -32,6 +32,9 @@
         overflow: hidden;
         position: relative;
         user-select: none;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
 
         &-disabled {
             cursor: not-allowed !important;
@@ -42,19 +45,16 @@
             position: absolute;
         }
 
-        .layui-icon {
-            position: absolute;
-            right: 0;
-            width: 16px;
-            height: 16px;
-        }
-
         &:hover {
             background-color: var(--global-checked-color) !important;
             color: white;
 
             span {
                 color: white !important;
+            }
+
+            .layui-form-checkbox i.layui-icon {
+                border: 1px solid;
             }
         }
 
@@ -64,6 +64,10 @@
 
             span {
                 color: white !important;
+            }
+
+            .layui-form-checkbox i.layui-icon {
+                border: 1px solid;
             }
         }
 

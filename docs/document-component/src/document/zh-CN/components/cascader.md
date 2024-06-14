@@ -13,17 +13,21 @@
 ::: demo 使用 `lay-cascader` 标签创建级联选择器
 
 <template>
-  <lay-cascader :options="options" v-model="value" placeholder="点我试一试" allow-clear>
-  </lay-cascader>
-  <span style="margin-left:20px">输出的值：{{value}}</span>
-  <lay-button @click="clickSetValue" size='sm' style='margin-left:10px'>
-    修改v-model
-  </lay-button>
+  <div>
+    <lay-cascader :options="options" v-model="value" placeholder="点我试一试" allow-clear></lay-cascader>
+    <span style="margin-left:20px">输出的值：{{value}}</span>
+    <lay-button @click="clickSetValue" size='sm' style='margin-left:10px'>修改v-model</lay-button>
+  </div>
+  <div style="margin-top:12px;">
+    <lay-cascader :options="options" :multiple="true" v-model="multipleValue" placeholder="点我试一试" allow-clear></lay-cascader>
+    <span style="margin-left:20px">输出的值：{{multipleValue}}</span>
+  </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
 const value=ref("Guide / shejiyuanze / yizhi");
+const multipleValue=ref([]);
 const clickSetValue = () => {
     value.value="Guide / shejiyuanze / fankui";
 }
@@ -716,7 +720,7 @@ const options3=[
 </template>
 
 <script setup>
-  const _selectKeys = ref([]);
+  const _selectKeys = ref(["450201", "450202", "450101", "450102"]);
   const options4 = ref([
 	{label: "北京", value: '010000'},
 	{label: "广西壮族自治区", value: '450000', children: [

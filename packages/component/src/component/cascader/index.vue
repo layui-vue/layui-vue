@@ -50,7 +50,7 @@
           @update:model-value="
             (selectKeys: string[] | string) => {
               _selectKeys = selectKeys;
-              dropdownRef.hide();
+              if (!_multiple) dropdownRef.hide();
               emit('update:modelValue', _selectKeys);
             }
           "
@@ -75,7 +75,7 @@
           "
           :lazy="props.load"
         >
-          <template v-for="(item, key) in slots" :key="key" #[key]>
+          <template v-for="(_, key) in slots" :key="key" #[key]>
             <template v-if="key != 'default'">
               <slot :name="key"></slot>
             </template>
@@ -154,10 +154,15 @@ const slots = useSlots();
 const dropdownRef = ref();
 const openState = ref(false);
 
-const _selectKeys = ref<string | Array<string>>(
-  typeof props.modelValue === "string"
-    ? props.modelValue.split(props.decollator)
-    : props.modelValue
+const _innerProcess = computed(() =>
+  useCascaderPanel({
+    modelValue: props.modelValue,
+    data: props.options,
+    multiple: _multiple.value,
+    replaceFields: _replaceFields.value,
+    decollator: _decollator.value,
+    onlyLastLevel: _onlyLastLevel.value,
+  })
 );
 const _dataSource = ref(props.options);
 const _multiple = ref(props.multiple);
@@ -169,16 +174,10 @@ const _replaceFields = ref({
   value: props.replaceFields?.value ?? "value",
   children: props.replaceFields?.children ?? "children",
 });
-const _displayValue = computed(
-  () =>
-    useCascaderPanel({
-      modelValue: _selectKeys.value,
-      data: props.options,
-      multiple: _multiple.value,
-      replaceFields: _replaceFields.value,
-      decollator: _decollator.value,
-    }).selectLabel.value
+const _selectKeys = ref<string | Array<string>>(
+  _innerProcess.value.selectKeys.value
 );
+const _displayValue = computed(() => _innerProcess.value.selectLabel.value);
 
 const onClear = () => {
   _selectKeys.value = [];
@@ -188,11 +187,6 @@ const onClear = () => {
 
 watch(
   () => props.modelValue,
-  () => {
-    _selectKeys.value =
-      typeof props.modelValue === "string"
-        ? props.modelValue.split(props.decollator)
-        : props.modelValue;
-  }
+  () => (_selectKeys.value = _innerProcess.value.selectKeys.value)
 );
 </script>

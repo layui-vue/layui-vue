@@ -30,12 +30,25 @@
           >
             <slot>
               <lay-checkbox
-                v-if="
-                  multiple === true && !item.children?.length && !item.loading
-                "
+                v-if="multiple === true && !item.loading"
                 size="md"
                 skin="primary"
                 v-model="item.checked"
+                :isIndeterminate="
+                  (() => {
+                    if (item.children?.length) {
+                      item.children.filter((i) => i.checked).length == 0
+                        ? (item.checked = false)
+                        : (item.checked = true);
+                    }
+                    return (
+                      (item.checked &&
+                        item.children?.length &&
+                        item.children.filter((i) => !i.checked).length > 0) ||
+                      false
+                    );
+                  })()
+                "
                 :value="item.checked ? 1 : 0"
                 :label="item.label"
                 @click.stop="clickSelectItem(item, i)"
@@ -59,6 +72,7 @@
                 :class="{
                   'layui-icon-right': item.children && item.children.length,
                 }"
+                @click.stop="clickSelectItem(item, i)"
               ></i>
             </slot>
           </li>
@@ -70,7 +84,7 @@
 
 <script setup lang="ts">
 import "./index.less";
-import { ref, useSlots, watch } from "vue";
+import { onMounted, ref, useSlots, watch } from "vue";
 import {
   CascaderPanelItemProps,
   CascaderPanelItemPropsInternal,
@@ -155,57 +169,41 @@ const slots = useSlots();
  * 开启条纹
  */
 const stripe = ref(props.style?.stripe);
-/**
- * 监听多选开关变化
- */
-watch(
-  () => multiple.value,
-  () => {
-    const iter = multipleSelectItem.value.values();
-    let tmp = iter.next();
-    do {
-      if (tmp.done) break;
-      tmp.value.checked = false;
-      tmp = iter.next();
-    } while (!tmp.done);
-    multipleSelectItem.value.clear();
-  }
-);
-/**
- * 监听选中数据变化
- */
-watch(
-  () => props.modelValue,
-  () => {
-    if (!props.modelValue?.length) {
-      selectKeys.value = [];
-      return;
-    }
 
-    if (!multiple.value)
-      selectKeys.value =
-        props.modelValue instanceof Array
-          ? props.modelValue
-          : props.modelValue.split(props.decollator);
-    else {
-      if (props.modelValue instanceof Array) {
-        props.modelValue.forEach((v) => {
-          multipleSelectItem.value.set(
-            v,
-            flatData.value.find((c) => c.value === v)!
-          );
-        });
-      }
+onMounted(() => {
+  if (!props.modelValue?.length) {
+    selectKeys.value = [];
+    return;
+  }
+
+  if (!multiple.value)
+    selectKeys.value =
+      props.modelValue instanceof Array
+        ? props.modelValue
+        : props.modelValue.split(props.decollator);
+  else {
+    if (props.modelValue instanceof Array) {
+      props.modelValue.forEach((v) => {
+        const item = flatData.value.find((c) => c.value === v)!;
+        item.checked = true;
+        multipleSelectItem.value.set(v, item);
+      });
     }
   }
-);
+});
 /**
  * 懒加载
  * @param item 当前项
  */
 const doLazyLoad = (item: CascaderPanelItemPropsInternal) => {
   if (props.lazy) {
-    if (!alwaysLazy.value && item.children?.length) return;
+    if (!alwaysLazy.value && item.children?.length) {
+      if (multiple.value) {
+        multipleItemTrigger(item);
+        flushOut();
+      }
+      return;
+    }
     item.loading = true;
     item.children = [];
 
@@ -266,8 +264,16 @@ const flushOut = () => {
  */
 const multipleItemTrigger = (item: CascaderPanelItemPropsInternal) => {
   if (!multiple.value) return;
-  if (item.checked) multipleSelectItem.value.set(item.value, item);
-  else multipleSelectItem.value.delete(item.value);
+
+  if (item.children?.length)
+    item.children.forEach((c) => {
+      c.checked = item.checked;
+      multipleItemTrigger(c);
+    });
+  else {
+    if (item.checked) multipleSelectItem.value.set(item.value, item);
+    else multipleSelectItem.value.delete(item.value);
+  }
 };
 /**
  * 点击事件
@@ -279,10 +285,10 @@ const clickSelectItem = (
   index: number
 ) => {
   if (item.disabled) return;
-  // 回溯，清除n + 2列的内容
+  // 回溯，清除n ~ n + 2列的内容
   if (index < selectKeys.value.length)
     selectKeys.value = selectKeys.value.filter((_, i) => i <= index);
-  // 检查数组长度，并补齐
+  // 检查数组长度，并补齐，避免自动转换成object
   while (selectKeys.value.length < index)
     selectKeys.value.push(multiple.value ? item.value : "");
   selectKeys.value[index] = item.value;
