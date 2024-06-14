@@ -717,8 +717,7 @@ const listenDocument = function () {
             getArea(layerRef.value),
             type
           );
-          t.value = (props.lastPosition && _t.value) || offset.value[0];
-          l.value = (props.lastPosition && _l.value) || offset.value[1];
+          revertPosition();
         }
       });
       resizeObserver.observe(contentRef.value);
@@ -734,6 +733,14 @@ const removeListener = function () {
     resizeObserver.unobserve(contentRef.value);
     resizeObserver = undefined;
   }
+};
+
+/**
+ * 恢复位置 props.lastPosition 返回最后的位置 否则初始位置
+ */
+const revertPosition = function () {
+  t.value = (props.lastPosition && _t.value) || offset.value[0];
+  l.value = (props.lastPosition && _l.value) || offset.value[1];
 };
 
 /**
@@ -774,26 +781,32 @@ const reset = function () {
   }
 };
 
-const full = function () {
+const full = async function () {
   if (min.value) {
-    throw new Error(
-      "@layui/layer-vue: layer状态为最小化，无法直接切换为最大化"
-    );
+    // 最小化>最大化、 先还原状态
+    revert();
+    // listenDocument 存在延迟 无法正常还原到复原状态.
+    // 手动还原
+    revertPosition();
   }
   if (!max.value) {
+    await nextTick();
     removeListener();
     baseMaxHandle();
     max.value = true;
   }
 };
 
-const mini = function () {
+const mini = async function () {
   if (max.value) {
-    throw new Error(
-      "@layui/layer-vue: layer状态为最大化，无法直接切换为最小化"
-    );
+    // 最大化>最小化、 先还原状态
+    revert();
+    // listenDocument 存在延迟 无法正常还原到复原状态.
+    // 手动还原
+    revertPosition();
   }
   if (!min.value) {
+    await nextTick();
     removeListener();
     baseMinHandle();
     min.value = true;
