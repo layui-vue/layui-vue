@@ -1,6 +1,6 @@
 {
   "name": "@layui/json-schema-form",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "Json-schema-form is a high-level component encapsulated on the basis of @layui/layui-vue form.",
   "homepage": "http://www.layui-vue.com/zh-CN/components/jsonSchemaForm",
   "type": "module",
@@ -12,10 +12,14 @@
   },
   "exports": {
     ".": {
+      "types": "./types/index.d.ts",
       "import": "./lib/json-schema-form.es.js",
       "require": "./lib/json-schema-form.umd.js"
     },
-    "./lib/": "./lib/"
+    "./lib/": "./lib/",
+    "./types/*": [
+      "./types/*.d.ts"
+    ]
   },
   "types": "types/index.d.ts",
   "style": "lib/index.css",
@@ -31,10 +35,7 @@
   ],
   "scripts": {
     "build": "vite build --emptyOutDir && npm run build:types",
-    "build:types": "rimraf types && tsc -d",
+    "build:types": "rimraf types && vue-tsc -d",
     "test": "vitest"
-  },
-  "dependencies": {
-    "@layui/layui-vue": "workspace:*"
   }
 }
