@@ -15,6 +15,24 @@
   <lay-timeline>
     <lay-timeline-item title="2.17.x">
       <ul>
+        <a name="2-17-6"></a>
+        <li>
+          <h3>2.17.6 <span class="layui-badge-rim">2024-06-13</span></h3>
+          <ul>
+              <li>[升级] layer 升级至2.4.1。</li>
+              <li>[新增] layer组件 layer.prompt类型。<a href="https://gitee.com/layui-vue/layui-vue/pulls/337">详情</a></li>
+              <li>[修复] layer组件 设置area属性最小化后还原位置错误。<a href="https://gitee.com/layui-vue/layui-vue/pulls/340">详情</a></li>
+              <li>[修复] tree组件 check-strictly为false时checkedKeys值异常。<a href="https://gitee.com/layui-vue/layui-vue/pulls/336">详情</a></li>
+              <li>[修复] date-picker组件 min/max属性丢失响应式。<a href="https://gitee.com/layui-vue/layui-vue/pulls/334">详情</a></li>
+              <li>[修复] badge组件 Ripple 闪动动画异常。<a href="https://gitee.com/layui-vue/layui-vue/pulls/332">详情</a></li>
+              <li>[调整] menu-item组件 删除props.to属性。<a href="https://gitee.com/layui-vue/layui-vue/pulls/331">详情</a></li>
+              <li>[调整] form组件 label-width为0时，label元素不渲染。<a href="https://gitee.com/layui-vue/layui-vue/pulls/330">详情</a></li>
+              <li>[调整] form组件 layui-form-item>block类名调整为layui-form-item>layui-form-item-block。<a href="https://gitee.com/layui-vue/layui-vue/pulls/341">详情</a></li>
+              <li>[样式] tree组件 图标及连线样式调整(轻度调整)。<a href="https://gitee.com/layui-vue/layui-vue/pulls/329">详情</a></li>
+          </ul>
+        </li>
+      </ul>
+      <ul>
         <a name="2-17-5"></a>
         <li>
           <h3>2.17.5 <span class="layui-badge-rim">2024-06-04</span></h3>

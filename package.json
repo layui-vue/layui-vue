@@ -30,6 +30,7 @@
     "@layui/icons-vue": "workspace:*",
     "@layui/layer-vue": "workspace:*",
     "@layui/layui-vue": "workspace:*",
+    "@layui/json-schema-form": "workspace:*",
     "vue": "3.3.4"
   },
   "peerDependencies": {

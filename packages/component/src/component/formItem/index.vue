@@ -247,7 +247,7 @@ const modeStyles = computed<StyleValue>(() => {
 <template>
   <div
     class="layui-form-item"
-    :class="[`layui-form-item-${labelPosition}`, mode]"
+    :class="[`layui-form-item-${labelPosition}`, `layui-form-item-${mode}`]"
     :size="size"
     ref="formItemRef"
   >
