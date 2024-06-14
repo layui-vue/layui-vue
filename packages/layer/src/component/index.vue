@@ -717,7 +717,7 @@ const listenDocument = function () {
             getArea(layerRef.value),
             type
           );
-          revertPosition();
+          resetPosition(true);
         }
       });
       resizeObserver.observe(contentRef.value);
@@ -736,19 +736,13 @@ const removeListener = function () {
 };
 
 /**
- * 恢复位置 props.lastPosition 返回最后的位置 否则初始位置
+ * 重新定位 layer 位置
+ * 当需要还原位置时，isRevert为true && props.lastPosition
+ * @param {boolean} isRevert 是否还原
  */
-const revertPosition = function () {
-  t.value = (props.lastPosition && _t.value) || offset.value[0];
-  l.value = (props.lastPosition && _l.value) || offset.value[1];
-};
-
-/**
- * 根据 offset 重新定位至初始 Dom 位置
- */
-const resetPosition = function () {
-  t.value = offset.value[0];
-  l.value = offset.value[1];
+const resetPosition = function (isRevert = false) {
+  t.value = (isRevert && props.lastPosition && _t.value) || offset.value[0];
+  l.value = (isRevert && props.lastPosition && _l.value) || offset.value[1];
 };
 
 /**
@@ -787,7 +781,7 @@ const full = async function () {
     revert();
     // listenDocument 存在延迟 无法正常还原到复原状态.
     // 手动还原
-    revertPosition();
+    resetPosition(true);
   }
   if (!max.value) {
     await nextTick();
@@ -803,7 +797,7 @@ const mini = async function () {
     revert();
     // listenDocument 存在延迟 无法正常还原到复原状态.
     // 手动还原
-    revertPosition();
+    resetPosition(true);
   }
   if (!min.value) {
     await nextTick();
