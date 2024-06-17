@@ -65,15 +65,56 @@ export const getArrowOffer = ({
       const arrowEl = unref(arrowRef);
       if (!arrowEl) return {};
       const { width, height } = arrowEl.getBoundingClientRect();
-      console.log(width, height, "width, height");
-      console.log(args.rects.floating.width, "args.rects.floating.width");
 
       switch (args.placement) {
         case "bottom":
+        case "top":
           arrowEl.style.transform = `translate(${
             args.rects.floating.width / 2 - width / 2
           }px, 0px)`;
-        // return args.rects.floating.width / 2 - width/2;
+          break;
+
+        case "bottom-start":
+        case "top-start":
+          arrowEl.style.transform = `translate(${
+            args.rects.reference.width / 2 - width / 2
+          }px, 0px)`;
+          break;
+
+        case "bottom-end":
+        case "top-end":
+          arrowEl.style.transform = `translate(${
+            args.rects.floating.width -
+            args.rects.reference.width +
+            (args.rects.reference.width / 2 - width / 2)
+          }px, 0px)`;
+          break;
+
+        case "left":
+        case "right":
+          arrowEl.style.top = "0";
+          arrowEl.style.transform = `translate3d(0px, ${
+            args.rects.floating.height / 2 - height / 2
+          }px, 0px)`;
+          break;
+
+        case "left-start":
+        case "right-start":
+          arrowEl.style.top = "0";
+          arrowEl.style.transform = `translate3d(0px, ${
+            args.rects.reference.height / 2 - height / 2
+          }px, 0px)`;
+          break;
+
+        case "left-end":
+        case "right-end":
+          arrowEl.style.top = "0";
+          arrowEl.style.transform = `translate3d(0px, ${
+            args.rects.floating.height -
+            args.rects.reference.height +
+            (args.rects.reference.height / 2 - height / 2)
+          }px, 0px)`;
+          break;
       }
 
       return {};

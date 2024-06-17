@@ -1,24 +1,24 @@
 <template>
   <Teleport to="body">
-    <transition name="fade">
-      <div
-        class="layui-popper-v2"
-        v-show="visible"
-        :style="popperStyle"
-        ref="ContentRef"
-      >
-        <slot></slot>
-        <div ref="ArrowRef" data-popper-arrow></div>
-      </div>
-    </transition>
+    <div
+      class="layui-popper-v2 layui-anim layui-anim-fadein"
+      v-show="visible"
+      :style="popperStyle"
+      ref="ContentRef"
+      @mouseenter="onContentEnter"
+      @mouseleave="onContentLeave"
+    >
+      <slot></slot>
+      <div ref="ArrowRef" data-popper-arrow v-if="showArrow"></div>
+    </div>
   </Teleport>
 </template>
 
 <script setup lang="ts">
-import type { Placement } from "../usePopper/index";
 import type { Ref } from "vue";
-import { useSlots, ref, computed, inject, watch } from "vue";
-// import { usePopper, flip, hide, arrow, offset } from "@layui/popper-core";
+import type { ContentProps } from "../types";
+
+import { ref, computed, inject, watch } from "vue";
 import { onClickOutside } from "@vueuse/core";
 import { usePopper, flip, hide, arrow, offset } from "../usePopper/index";
 
@@ -29,11 +29,6 @@ import {
   getArrowOffer,
 } from "../utils";
 
-type ContentProps = {
-  modelValue: boolean;
-  placement: Placement;
-};
-
 const props = withDefaults(defineProps<ContentProps>(), {});
 
 const ContentRef = ref<HTMLElement | null>(null);
@@ -41,8 +36,10 @@ const ArrowRef = ref<HTMLDivElement | null>(null);
 
 const { TriggerRef, onShow, onHidden } = inject(POPPER_INJECTION_KEY)!;
 
+const _visible = ref(false);
+
 const visible = computed(() => {
-  return props.modelValue;
+  return props.modelValue || _visible.value;
 });
 
 const { popperStyle, middlewareData } = usePopper(
@@ -51,7 +48,7 @@ const { popperStyle, middlewareData } = usePopper(
   {
     placement: props.placement,
     middleware: [
-      offset(10),
+      offset(props.offset),
       flip(),
       arrowMiddleware({
         arrowRef: ArrowRef,
@@ -64,8 +61,6 @@ const { popperStyle, middlewareData } = usePopper(
   }
 );
 
-console.log(middlewareData.value, "middlewareData");
-
 watch(
   () => middlewareData.value.hide,
   (data) => {
@@ -77,29 +72,35 @@ watch(
   }
 );
 
-onClickOutside(ContentRef, (event) => {
+onClickOutside(ContentRef, (event: PointerEvent) => {
   if (
     !visible.value ||
-    (TriggerRef.value as HTMLElement).contains(event.target)
+    (TriggerRef.value as HTMLElement).contains(event.target as HTMLElement)
   )
     return;
 
   onHidden();
 });
+
+const onContentEnter = () => {
+  if (props.enterable && props.trigger === "hover") {
+    onShow();
+  }
+};
+
+const onContentLeave = () => {
+  if (props.trigger === "hover") {
+    onHidden();
+  }
+};
+
+const show = () => {
+  _visible.value = true;
+};
+
+const hidden = () => {
+  _visible.value = false;
+};
+
+defineExpose({ show, hidden });
 </script>
-
-<style>
-/* .fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
-.fade-enter-to,
-.fade-leave-from {
-  opacity: 1;
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.6s ease;
-} */
-</style>

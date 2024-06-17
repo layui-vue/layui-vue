@@ -1,6 +1,6 @@
 export { usePopper } from "./usePopper";
 
-export type * from "./types";
+export * from "./types";
 
 export {
   offset,

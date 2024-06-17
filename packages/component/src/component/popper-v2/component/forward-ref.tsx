@@ -2,18 +2,18 @@ import { Fragment, defineComponent, ref } from "vue";
 
 import type { Ref, ComponentPublicInstance, VNodeArrayChildren } from "vue";
 
-export type RefSetter = (el: HTMLElement | null) => void;
+type RefSetter = (el: Element | ComponentPublicInstance | undefined) => void;
 
 const isArray = Array.isArray;
-const isFunction = (val) => typeof val === "function";
+const isFunction = (val: unknown): val is Function => typeof val === "function";
 
 const composeRefs = (...refs: (Ref<HTMLElement | undefined> | RefSetter)[]) => {
-  return (el: Element | ComponentPublicInstance | null) => {
-    refs.forEach((_ref) => {
-      if (isFunction(_ref)) {
-        _ref(el as Element | ComponentPublicInstance);
+  return (el: HTMLElement | ComponentPublicInstance | null) => {
+    refs.forEach((ref) => {
+      if (isFunction(ref)) {
+        ref(el as HTMLElement | ComponentPublicInstance);
       } else {
-        _ref.value = el as HTMLElement | undefined;
+        ref.value = el as HTMLElement | undefined;
       }
     });
   };

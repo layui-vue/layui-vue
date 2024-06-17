@@ -58,7 +58,7 @@
     "@rollup/plugin-terser": "0.4.4",
     "@types/qrcode": "1.5.0",
     "@umijs/ssr-darkreader": "^4.9.45",
-    "@vueuse/core": "8.7.3",
+    "@vueuse/core": "9.13.0",
     "async-validator": "^4.1.1",
     "cropperjs": "^1.5.12",
     "dayjs": "^1.11.10",

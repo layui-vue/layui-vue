@@ -31,6 +31,7 @@ import {
   toRef,
   StyleValue,
 } from "vue";
+import type { UseResizeObserverReturn } from "@vueuse/core";
 import {
   onClickOutside,
   useEventListener,
@@ -219,7 +220,7 @@ useResizeObserver(triggerRefEl, () => {
   updatePosistion();
 });
 
-let popperObserver: { stop: any; isSupported?: boolean } | undefined;
+let popperObserver: UseResizeObserverReturn;
 
 watch(innerVisible, (isShow) => {
   updatePosistion();

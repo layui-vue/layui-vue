@@ -11,33 +11,53 @@
 
 .layui-popper-v2 *[data-popper-arrow] {
   &::after{
+    box-sizing: border-box;
     position: absolute;
     content: ' ';
     width: 10px;
     height: 10px;
     transform: rotate(45deg);
-    background-color: red;
+    background-color: #fff;
+    border: 1px solid #cecece;
+    z-index: -1;
+
   }
 
   width: 10px;
   height: 10px;
   position: absolute;
-  z-index: -1;
-
   
 }
   
 .layui-popper-v2[data-popper-placement^=right] > [data-popper-arrow] {
-  left: -5px
+  left: -4px;
+  &::after{
+    border-bottom-color: transparent !important;
+    border-right-color: transparent !important;
+  }
 }
 .layui-popper-v2[data-popper-placement^=left] > [data-popper-arrow] {
-  right: -5px;
+  right: -4px;
+  &::after{
+    border-bottom-color: transparent !important;
+    border-left-color: transparent !important;
+  }
+  
 }
 .layui-popper-v2[data-popper-placement^=top] > [data-popper-arrow] {
-  bottom: -5px
+  bottom: -4px;
+  &::after{
+    border-top-color: transparent !important;
+    border-left-color: transparent !important;
+  }
 }
 .layui-popper-v2[data-popper-placement^=bottom] > [data-popper-arrow] {
-  top: -5px
+  top: -4px;
+  &::after{
+    border-bottom-color: transparent !important;
+    border-right-color: transparent !important;
+  }
+  
 }
   
 
