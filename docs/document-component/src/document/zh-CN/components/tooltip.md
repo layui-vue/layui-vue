@@ -362,32 +362,44 @@ const changeText = () => {
 
 ::: table
 
-| 属性        | 描述     | 类型         | 默认值         | 可选值         |
-| ----------- | -------- | -------------- |-------------- |-------------- |
-| content     | 显示内容 | `string`        | -             |-             |
-| position    | 显示位置 | `string`        | `top`          | `top` `bottom` `left` `right` |
-| isDark      | 是否为黑色主题 | `boolean` | `false` | `true` `false`   |
-| disabled    | 是否禁用 | `boolean` | `false` |`false` `true`   |
-| isCanHide`2.18.0删除`   | 控制是否可以隐藏,可参考`lay-slider`组件 | `boolean` | `true` | `true` `false`   |
-| isAutoShow   | 控制超出文本 `...` 时自动展示， 没有 `...` 时不展示 | `boolean` | `false` | `false` `true`   |
-| visible     | 控制显示/隐藏| `true` `false`(默认值)| `boolean` | `false` | `true` `false` |
-| enterable   | 鼠标能否进入 tooltip 中 | `boolean` | `true` | `true` `false`|
-| trigger     | 触发方式 | `string` | `hover` | `click` `hover` `contextmenu` `focus` `trigger[]`| 
-| popperClass     | popper类名 | `string` `array` `object`  |  | | 
-| popperStyle     | popper样式 | `string` `object` |  | | 
+| 属性        | 描述     | 类型         | 默认值         | 可选值         | 变更说明|
+| ----------- | -------- | -------------- |-------------- |-------------- |--------------|
+| content     | 显示内容 | `string`        | -             |-             | |
+| position    | 显示位置 | `string`        | `top`          | `top-start` `top` `top-end` `bottom-start` `bottom` `bottom-end` `left-start` `left` `left-end` `right-start` `right` `right-end` | |
+| isDark      | 是否为黑色主题 | `boolean` | `false` |    | |
+| disabled    | 是否禁用 | `boolean` | `false` |   | |
+| isCanHide    | 控制是否可以隐藏,可参考`lay-slider`组件 | `boolean` | `true` |    | `2.18.0删除` |
+| isAutoShow   | 控制超出文本 `...` 时自动展示， 没有 `...` 时不展示 | `boolean` | `false` |    | |
+| visible     | 控制显示/隐藏| `boolean`| `false` |  |  | |
+| enterable   | 鼠标能否进入 tooltip 中 | `boolean` | `true` | | |
+| trigger   | 触发方式 | `string` | `hover` | `click` `hover` `contextmenu` `focus` | `2.18.0类型调整为只传string` |
+| popperClass    | popper类名 | `string` `array`  |  | | `2.18.0类型删除object` |
+| popperStyle     | popper样式 | `string` `object` |  | |  |
 
 :::
 
-::: title Tooltip 事件
+::: title Slots
 :::
 
 ::: table
 
-| 插槽    | 描述     | 参数 |
-| ------- | -------- | ------ |
-| show | 手动打开tooltip |  |
-| hide | 手动关闭tooltip | false  |
-| update | tooltip弹出内容隐藏后触发 | false  |
+| 插槽名    | 描述     | 
+| ------- | -------- |
+| default | 触发tooltip开启元素 | 
+| content | 自定义内容 | 
+
+:::
+
+::: title Exposes 事件
+:::
+
+::: table
+
+| 名称    | 描述     | 
+| ------- | -------- | 
+| show | 手动打开tooltip | 
+| hide | 手动关闭tooltip |  
+| update | tooltip弹出内容隐藏后触发 |  
 
 :::
 

@@ -2,7 +2,7 @@
 import type { Ref, StyleValue, CSSProperties } from "vue";
 import type { ContentProps } from "../types";
 
-import { ref, computed, inject, watch, nextTick, onMounted } from "vue";
+import { ref, computed, inject, watch, nextTick, useSlots } from "vue";
 import { onClickOutside } from "@vueuse/core";
 import { usePopper, flip, hide, offset, shift } from "../usePopper/index";
 
@@ -23,6 +23,9 @@ const { TriggerRef, onShow, onHidden } = inject(POPPER_INJECTION_KEY)!;
 const isExist = ref(props.modelValue);
 const _visible = ref(false);
 const innerVisible = ref(props.modelValue);
+const slots = useSlots();
+// content slot中是否有内容
+const hasDefaultContent = slots.default!()[0].children?.length;
 
 watch(
   () => [props.modelValue, _visible.value],
@@ -115,7 +118,7 @@ defineExpose({ show, hidden, update });
 </script>
 
 <template>
-  <Teleport to="body" v-if="isExist">
+  <Teleport to="body" v-if="isExist && hasDefaultContent">
     <div
       :class="classes"
       v-show="innerVisible"

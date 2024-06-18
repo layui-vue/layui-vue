@@ -12,5 +12,3 @@ export {
   hide,
   inline,
 } from "@floating-ui/dom";
-
-export { customError } from "./utils";

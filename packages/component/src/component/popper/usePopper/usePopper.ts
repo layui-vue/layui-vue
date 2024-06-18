@@ -9,7 +9,7 @@ import type { UsePopperOptions } from "./types";
 
 import { computePosition, autoUpdate } from "@floating-ui/dom";
 import { computed, watch, ref, unref, shallowRef } from "vue";
-import { unRefRealElement, customError } from "./utils";
+import { unRefRealElement } from "./utils";
 
 export function usePopper(
   reference: Ref<ReferenceElement>, // 参照元素
@@ -45,8 +45,7 @@ export function usePopper(
   let cleanup: (() => void) | undefined;
 
   function update() {
-    if (referenceElement.value == null || popperElement.value == null) {
-      customError('either "reference" or "popper" is missing');
+    if (referenceElement.value === null || popperElement.value === null) {
       return;
     }
 
@@ -73,7 +72,7 @@ export function usePopper(
   function init() {
     runCleanup();
 
-    if (referenceElement.value != null && popperElement.value != null) {
+    if (referenceElement.value !== null && popperElement.value !== null) {
       cleanup = autoUpdate(referenceElement.value, popperElement.value, update);
     }
   }

@@ -19,7 +19,3 @@ export function unRefRealElement<T>(element: T) {
 
   return element as Exclude<T, ComponentPublicInstance>;
 }
-
-export function customError(error: string) {
-  throw new Error(`vue-popper: ${error}`);
-}
