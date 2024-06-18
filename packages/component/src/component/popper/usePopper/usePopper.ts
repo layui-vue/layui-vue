@@ -17,7 +17,6 @@ export function usePopper(
   options: UsePopperOptions = {}
 ) {
   const customMiddleware = computed(() => unref(options.middleware));
-  const customTransform = computed(() => unref(options.transform) || true);
   const customStrategy = computed(() => unref(options.strategy) || "absolute");
   const customPlacement = computed(() => unref(options.placement) || "bottom");
 
@@ -26,7 +25,6 @@ export function usePopper(
 
   const x = ref(0);
   const y = ref(0);
-  const transform = ref(customTransform.value);
   const strategy = ref(customStrategy.value);
   const placement = ref(customPlacement.value);
   const middlewareData = shallowRef<MiddlewareData>({});
@@ -36,15 +34,6 @@ export function usePopper(
   });
 
   const popperStyle = computed(() => {
-    if (transform.value) {
-      return {
-        position: strategy.value,
-        top: 0,
-        left: 0,
-        transform: `translate(${x.value}px, ${y.value}px)`,
-      };
-    }
-
     return {
       top: `${y.value}px`,
       left: `${x.value}px`,

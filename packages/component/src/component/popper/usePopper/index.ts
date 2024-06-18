@@ -4,6 +4,7 @@ export * from "./types";
 
 export {
   offset,
+  shift,
   flip,
   arrow,
   size,

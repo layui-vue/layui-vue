@@ -1,3 +1,5 @@
+import type { ComponentPublicInstance, StyleValue } from "vue";
+
 import type { Placement, OffsetOptions } from "./usePopper/index";
 
 export type PopperTrigger = "click" | "hover" | "focus" | "contextMenu";
@@ -12,8 +14,16 @@ export type PopperProps = {
   enterable?: boolean;
   showAfter?: number;
   hideAfter?: number;
+  popperClass?: string | Array<string | object> | object;
+  popperStyle?: StyleValue;
 };
 
 export type ContentProps = PopperProps;
 
-export type TriggerProps = PopperProps;
+export type TriggerProps = Pick<PopperProps, "trigger">;
+
+export type ContentComponentInstance = ComponentPublicInstance<{
+  show: () => void;
+  hidden: () => void;
+  update: () => void;
+}>;
