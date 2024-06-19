@@ -8,7 +8,6 @@
 import type {
   SliderTooltipProps,
   DefaultValueSliderPropsType,
-  ToRefsDefaultValueSliderPropsType,
 } from "./types/sliderType";
 import type { Ref, ToRefs } from "vue";
 
@@ -30,7 +29,7 @@ type InitValType = {
   secondVal: number;
 };
 
-interface SliderContext extends ToRefsDefaultValueSliderPropsType {
+interface SliderContext extends ToRefs<DefaultValueSliderPropsType> {
   tooltipProp: Required<SliderTooltipProps>;
   firstVal: Ref<InitValType["firstVal"]>;
   secondVal: Ref<InitValType["secondVal"]>;

@@ -58,8 +58,3 @@ export type DefaultValueSliderPropsType = Required<
   Omit<SliderProps, "marks" | "formatTooltip">
 > &
   Partial<Pick<SliderProps, "marks" | "formatTooltip">>;
-
-export type ToRefsDefaultValueSliderPropsType = ToRefs<
-  Required<Omit<SliderProps, "marks" | "formatTooltip">> &
-    Partial<Pick<SliderProps, "marks" | "formatTooltip">>
->;
