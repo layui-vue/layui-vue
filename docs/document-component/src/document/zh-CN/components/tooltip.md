@@ -107,6 +107,10 @@ const visible = ref(false)
   .tooltip-base-content .center{
     justify-content: center;
   }
+
+  .custom-popper-class{
+    border-color: red;
+  }
 </style>
 :::
 
@@ -357,6 +361,24 @@ const changeText = () => {
 </script>
 :::
 
+::: title tooltip样式
+:::
+
+::: demo 通过 `popper-class` `popper-style` 属性，设置。
+
+<template>
+    <lay-tooltip content="popperClass 边框红色" trigger="click" popperClass="custom-popper-class" >
+      <lay-button>popperClass 边框红色</lay-button>
+    </lay-tooltip>
+    <lay-tooltip content="popperStyle 字体红色" popperStyle="color: red;" >
+      <lay-button>popperStyle 字体红色</lay-button>
+    </lay-tooltip>
+</template>
+
+<style>
+</style>
+:::
+
 ::: title Tooltip 属性
 :::
 
@@ -366,15 +388,15 @@ const changeText = () => {
 | ----------- | -------- | -------------- |-------------- |-------------- |--------------|
 | content     | 显示内容 | `string`        | -             |-             | |
 | position    | 显示位置 | `string`        | `top`          | `top-start` `top` `top-end` `bottom-start` `bottom` `bottom-end` `left-start` `left` `left-end` `right-start` `right` `right-end` | |
-| isDark      | 是否为黑色主题 | `boolean` | `false` |    | |
+| is-dark      | 是否为黑色主题 | `boolean` | `false` |    | |
 | disabled    | 是否禁用 | `boolean` | `false` |   | |
-| isCanHide    | 控制是否可以隐藏,可参考`lay-slider`组件 | `boolean` | `true` |    | `2.18.0删除` |
-| isAutoShow   | 控制超出文本 `...` 时自动展示， 没有 `...` 时不展示 | `boolean` | `false` |    | |
+| is-can-hide    | 控制是否可以隐藏,可参考`lay-slider`组件 | `boolean` | `true` |    | `2.18.0删除` |
+| is-auto-show   | 控制超出文本 `...` 时自动展示， 没有 `...` 时不展示 | `boolean` | `false` |    | |
 | visible     | 控制显示/隐藏| `boolean`| `false` |  |  | |
 | enterable   | 鼠标能否进入 tooltip 中 | `boolean` | `true` | | |
 | trigger   | 触发方式 | `string` | `hover` | `click` `hover` `contextmenu` `focus` | `2.18.0类型调整为只传string` |
-| popperClass    | popper类名 | `string` `array`  |  | | `2.18.0类型删除object` |
-| popperStyle     | popper样式 | `string` `object` |  | |  |
+| popper-class    | tooltip内容box类名 | `string` `array`  |  | | `2.18.0类型删除object` |
+| popper-style     | tooltip内容box类名 | `string` `object` |  | |  |
 
 :::
 
