@@ -956,6 +956,19 @@ const openCallback = () => {
 
 :::
 
+::: title Slot 插槽
+:::
+
+::: table
+
+| 名称 | 描述 |
+| -- | -- |
+| *`default`* | 主体内容 |
+| *`title`* | 标题 |
+| *`footer`* | 底部 |
+
+:::
+
 ::: title Exposes 事件
 :::
 
