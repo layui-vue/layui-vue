@@ -15,7 +15,6 @@
       :disabled="disabled"
       :position="placement"
       ref="tooltip"
-      :is-can-hide="isCanHide"
     >
       <div class="layui-slider-handle-thumb" v-if="slot.thumb">
         <slot name="thumb"></slot>
@@ -32,7 +31,7 @@
 </template>
 
 <script lang="ts" setup>
-import { useSlots, toRefs } from "vue";
+import { useSlots, toRefs, watch } from "vue";
 import LayTooltip from "../../tooltip/index.vue";
 import { useSliderProvide } from "../use-slider";
 import { useSliderBar } from "./use-slider-bar";
@@ -48,10 +47,33 @@ const slot = useSlots();
 const props = withDefaults(defineProps<SliderBarProps>(), {
   modelValue: 0,
 });
-const { tooltipProp } = useSliderProvide();
-const { isDark, placement, disabled, isCanHide } = toRefs(tooltipProp);
-const { wrapperStyle, formatValue, tooltip, setUpDatePos, handleDown } =
-  useSliderBar(props, emit);
+const { tooltipProp, alwayShowTooltip } = useSliderProvide();
+const { isDark, placement, disabled } = toRefs(tooltipProp);
+const {
+  dragging,
+  wrapperStyle,
+  formatValue,
+  tooltip,
+  setUpDatePos,
+  handleDown,
+} = useSliderBar(props, emit);
+
+watch(
+  () => [dragging, alwayShowTooltip, tooltip],
+  () => {
+    if (dragging.value) {
+      tooltip.value?.show();
+    } else {
+      tooltip.value?.hide();
+    }
+
+    if (alwayShowTooltip!.value && tooltip) {
+      tooltip.value?.show();
+    }
+  },
+  { immediate: true, deep: true }
+);
+
 defineExpose({
   setUpDatePos,
 });

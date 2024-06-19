@@ -5,6 +5,13 @@
  * @LastEditors: baobaobao
  */
 
+import type {
+  SliderTooltipProps,
+  DefaultValueSliderPropsType,
+  ToRefsDefaultValueSliderPropsType,
+} from "./types/sliderType";
+import type { Ref, ToRefs } from "vue";
+
 import {
   InjectionKey,
   computed,
@@ -17,19 +24,32 @@ import {
   ComputedRef,
   nextTick,
 } from "vue";
-import { SliderProps } from "./types/sliderType";
 
-export const LAYUI_SLIDER_KEY: InjectionKey<any> = Symbol("layui-slider");
-export const useSliderProvide = () => inject(LAYUI_SLIDER_KEY, {});
+type InitValType = {
+  firstVal: number;
+  secondVal: number;
+};
+
+interface SliderContext extends ToRefsDefaultValueSliderPropsType {
+  tooltipProp: Required<SliderTooltipProps>;
+  firstVal: Ref<InitValType["firstVal"]>;
+  secondVal: Ref<InitValType["secondVal"]>;
+  updateDragging: (v: boolean) => void;
+  getCalcPos: (e: MouseEvent) => number;
+}
+
+export const LAYUI_SLIDER_KEY: InjectionKey<SliderContext> =
+  Symbol("layui-slider");
+export const useSliderProvide = () => inject(LAYUI_SLIDER_KEY) as SliderContext;
 
 export const useSlider = (
-  props: SliderProps,
+  props: DefaultValueSliderPropsType,
   emit: any,
   getSortMarks: ComputedRef<number[]>
 ) => {
-  const initVal = reactive({
-    firstVal: props.min,
-    secondVal: props.max,
+  const initVal = reactive<InitValType>({
+    firstVal: props.min!,
+    secondVal: props.max!,
   });
   const tooltipProp = reactive<Record<string, boolean | string>>({
     isCanHide: true,
@@ -46,11 +66,11 @@ export const useSlider = (
   });
   const barStyle = computed(() => {
     const maxCalc = `${
-      (Math.abs(maxValue.value - minValue.value) / (props.max - props.min)) *
+      (Math.abs(maxValue.value - minValue.value) / (props.max! - props.min!)) *
       100
     }`;
     const minCalc = `${
-      (Math.abs(minValue.value - props.min) / (props.max - props.min)) * 100
+      (Math.abs(minValue.value - props.min!) / (props.max! - props.min!)) * 100
     }`;
     if (props.range) {
       if (props.vertical) {
@@ -83,24 +103,24 @@ export const useSlider = (
     return Math.max(initVal.firstVal, initVal.secondVal);
   });
   const getStop = computed(() => {
-    const stop = (props.max - props.min) / props.step;
+    const stop = (props.max! - props.min!) / props.step!;
     const getAllStop = Array.from({ length: stop - 1 }).map(
-      (_, index) => (index + 1) * props.step
+      (_, index) => (index + 1) * props.step!
     );
     if (props.range) {
-      return getAllStop.filter((e) => e >= props.min && e <= props.max);
+      return getAllStop.filter((e) => e >= props.min! && e <= props.max!);
       // || e >= (100 * (maxValue.value - props.min) / (props.max - props.min)))
     }
-    return getAllStop.filter((e) => e >= props.min && e <= props.max);
+    return getAllStop.filter((e) => e >= props.min! && e <= props.max!);
   });
   watch(
     () => props.tooltipProps,
     () => {
       if (props.tooltipProps) {
         for (const key in props.tooltipProps) {
-          if (key in tooltipProp) {
-            tooltipProp[key] = props.tooltipProps[key];
-          }
+          const _key = key as keyof SliderTooltipProps;
+
+          tooltipProp[_key] = props.tooltipProps[_key]!;
         }
       }
     },
@@ -182,11 +202,9 @@ export const useSlider = (
         isNaN(props.max)
       ) {
         throw new Error("max与min应为数值!");
-        return;
       }
       if (props.max < props.min) {
         throw new Error("max请大于min!");
-        return;
       }
       initValidate();
     }
@@ -233,7 +251,7 @@ export const useSlider = (
     return Math.max.apply(null, precisions);
   });
   const getCalcPos = (e: MouseEvent) => {
-    let domPos = slider.value!.getBoundingClientRect();
+    const domPos = slider.value!.getBoundingClientRect();
     const GETDOM_VALUE_H = props.reverse ? domPos.right : domPos.left;
     const GETDOM_VALUE_V = props.reverse ? domPos.top : domPos.bottom;
     let diff = (e.clientX - GETDOM_VALUE_H) * (props.reverse ? -1 : 1);
@@ -250,9 +268,9 @@ export const useSlider = (
 
     const isSatisfy = props.isFollowMark && getSortMarks.value.length > 0;
     const lengthPerStep =
-      100 / ((props.max - props.min) / (isSatisfy ? 1 : props.step));
+      100 / ((props.max! - props.min!) / (isSatisfy ? 1 : props.step!));
     const steps = Math.round(pos / lengthPerStep);
-    let value = steps * props.step + props.min;
+    let value = steps * props.step! + props.min!;
     value = Number.parseFloat(value.toFixed(precision.value));
 
     if (isSatisfy) {
@@ -286,30 +304,30 @@ export const useSlider = (
     if (props.range) {
       const modelValue = props.modelValue ? props.modelValue : props.rangeValue;
       if (Array.isArray(modelValue)) {
-        let firstVal = Math.min(
-          Math.max(props.min, modelValue[0] ? modelValue[0] : props.min),
-          props.max
+        const firstVal = Math.min(
+          Math.max(props.min!, modelValue[0] ? modelValue[0] : props.min!),
+          props.max!
         );
-        let secondVal = Math.min(
-          Math.max(props.min, modelValue[1] ? modelValue[1] : props.min),
-          props.max
+        const secondVal = Math.min(
+          Math.max(props.min!, modelValue[1] ? modelValue[1] : props.min!),
+          props.max!
         );
         initVal.firstVal = firstVal;
         initVal.secondVal = secondVal;
       } else {
-        initVal.firstVal = props.min;
-        initVal.secondVal = props.max;
+        initVal.firstVal = props.min!;
+        initVal.secondVal = props.max!;
         await nextTick();
         emit("update:modelValue", [props.min, props.max]);
       }
     } else {
       if (typeof props.modelValue !== "number") {
-        initVal.firstVal = props.min;
+        initVal.firstVal = props.min!;
       } else {
-        initVal.secondVal = props.max;
+        initVal.secondVal = props.max!;
         initVal.firstVal = Math.min(
-          props.max,
-          Math.max(props.min, props.modelValue)
+          props.max!,
+          Math.max(props.min!, props.modelValue)
         );
       }
       await nextTick();
@@ -326,7 +344,7 @@ export const useSlider = (
     slider,
     getCalcPos,
     updateDragging,
-    tooltipProp,
+    tooltipProp: tooltipProp as Required<SliderTooltipProps>,
     ...toRefs(initVal),
   };
 };

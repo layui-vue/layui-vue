@@ -5,31 +5,32 @@
  * @LastEditors: baobaobao
  */
 
-import { StyleValue } from "vue";
+import type { StyleValue, ToRefs } from "vue";
+import type { Placement } from "../../popper/index";
 
 export interface MarkList {
   [key: number]: string;
 }
-export interface TooltipProps {
-  isCanHide: boolean;
-  disabled: boolean;
-  placement: string;
-  isDark: boolean;
+export interface SliderTooltipProps {
+  disabled?: boolean;
+  placement?: Placement;
+  isDark?: boolean;
 }
 export interface SliderProps {
-  vertical: boolean;
-  modelValue: number | Array<number>;
+  vertical?: boolean;
+  modelValue?: number | Array<number>;
   rangeValue?: Array<number>;
-  min: number;
-  max: number;
-  step: number;
-  disabled: boolean;
-  range: boolean;
-  showDots: boolean;
+  min?: number;
+  max?: number;
+  step?: number;
+  disabled?: boolean;
+  range?: boolean;
+  showDots?: boolean;
   marks?: Record<number, any>;
   reverse?: boolean;
   isFollowMark?: boolean;
-  tooltipProps?: Record<string, boolean | string>;
+  tooltipProps?: SliderTooltipProps;
+  alwayShowTooltip?: boolean;
   formatTooltip?: (val: number) => number | string;
 }
 
@@ -52,9 +53,13 @@ export interface StyledMark {
 export interface MarkPoints {
   mark: StyledMark;
 }
-export interface tooltipProps {
-  position?: string;
-  isDark?: string;
-  disabled?: boolean;
-  isCanHide?: boolean;
-}
+
+export type DefaultValueSliderPropsType = Required<
+  Omit<SliderProps, "marks" | "formatTooltip">
+> &
+  Partial<Pick<SliderProps, "marks" | "formatTooltip">>;
+
+export type ToRefsDefaultValueSliderPropsType = ToRefs<
+  Required<Omit<SliderProps, "marks" | "formatTooltip">> &
+    Partial<Pick<SliderProps, "marks" | "formatTooltip">>
+>;

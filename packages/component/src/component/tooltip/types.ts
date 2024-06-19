@@ -6,7 +6,6 @@ export type TooltipProps = {
   position?: Placement;
   isDark?: boolean;
   disabled?: boolean;
-  isCanHide?: boolean;
   isAutoShow?: boolean;
   visible?: boolean;
   trigger?: PopperTrigger;

@@ -46,6 +46,7 @@ const contentProps = computed<ContentProps>(() => {
     modelValue: open.value,
     trigger: props.trigger,
     placement: props.placement,
+    disabled: props.disabled,
     showArrow: props.showArrow,
     offset: props.offset,
     enterable: props.enterable,

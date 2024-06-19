@@ -5,9 +5,9 @@
  * @LastEditors: baobaobao
  */
 import { computed, isVNode } from "vue";
-import { Mark, SliderProps, StyledMark } from "../types/sliderType";
+import { StyledMark, DefaultValueSliderPropsType } from "../types/sliderType";
 
-export const useSliderMark = (props: SliderProps) => {
+export const useSliderMark = (props: DefaultValueSliderPropsType) => {
   const marksList = computed(() => {
     if (!props.marks) {
       return [];
