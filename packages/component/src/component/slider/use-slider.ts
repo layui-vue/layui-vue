@@ -47,8 +47,8 @@ export const useSlider = (
   getSortMarks: ComputedRef<number[]>
 ) => {
   const initVal = reactive<InitValType>({
-    firstVal: props.min!,
-    secondVal: props.max!,
+    firstVal: props.min,
+    secondVal: props.max,
   });
   const tooltipProp = reactive<Record<string, boolean | string>>({
     isCanHide: true,
@@ -65,11 +65,11 @@ export const useSlider = (
   });
   const barStyle = computed(() => {
     const maxCalc = `${
-      (Math.abs(maxValue.value - minValue.value) / (props.max! - props.min!)) *
+      (Math.abs(maxValue.value - minValue.value) / (props.max - props.min)) *
       100
     }`;
     const minCalc = `${
-      (Math.abs(minValue.value - props.min!) / (props.max! - props.min!)) * 100
+      (Math.abs(minValue.value - props.min) / (props.max - props.min)) * 100
     }`;
     if (props.range) {
       if (props.vertical) {
@@ -102,15 +102,15 @@ export const useSlider = (
     return Math.max(initVal.firstVal, initVal.secondVal);
   });
   const getStop = computed(() => {
-    const stop = (props.max! - props.min!) / props.step!;
+    const stop = (props.max - props.min) / props.step;
     const getAllStop = Array.from({ length: stop - 1 }).map(
-      (_, index) => (index + 1) * props.step!
+      (_, index) => (index + 1) * props.step
     );
     if (props.range) {
-      return getAllStop.filter((e) => e >= props.min! && e <= props.max!);
+      return getAllStop.filter((e) => e >= props.min && e <= props.max);
       // || e >= (100 * (maxValue.value - props.min) / (props.max - props.min)))
     }
-    return getAllStop.filter((e) => e >= props.min! && e <= props.max!);
+    return getAllStop.filter((e) => e >= props.min && e <= props.max);
   });
   watch(
     () => props.tooltipProps,
@@ -148,7 +148,7 @@ export const useSlider = (
   watch(
     () => dragging,
     (val) => {
-      if (!val.value) {
+      if (val.value) {
         if (props.range) {
           const modelValue = props.modelValue
             ? props.modelValue
@@ -267,9 +267,9 @@ export const useSlider = (
 
     const isSatisfy = props.isFollowMark && getSortMarks.value.length > 0;
     const lengthPerStep =
-      100 / ((props.max! - props.min!) / (isSatisfy ? 1 : props.step!));
+      100 / ((props.max - props.min) / (isSatisfy ? 1 : props.step));
     const steps = Math.round(pos / lengthPerStep);
-    let value = steps * props.step! + props.min!;
+    let value = steps * props.step + props.min;
     value = Number.parseFloat(value.toFixed(precision.value));
 
     if (isSatisfy) {
@@ -304,29 +304,29 @@ export const useSlider = (
       const modelValue = props.modelValue ? props.modelValue : props.rangeValue;
       if (Array.isArray(modelValue)) {
         const firstVal = Math.min(
-          Math.max(props.min!, modelValue[0] ? modelValue[0] : props.min!),
-          props.max!
+          Math.max(props.min, modelValue[0] ? modelValue[0] : props.min),
+          props.max
         );
         const secondVal = Math.min(
-          Math.max(props.min!, modelValue[1] ? modelValue[1] : props.min!),
-          props.max!
+          Math.max(props.min, modelValue[1] ? modelValue[1] : props.min),
+          props.max
         );
         initVal.firstVal = firstVal;
         initVal.secondVal = secondVal;
       } else {
-        initVal.firstVal = props.min!;
-        initVal.secondVal = props.max!;
+        initVal.firstVal = props.min;
+        initVal.secondVal = props.max;
         await nextTick();
         emit("update:modelValue", [props.min, props.max]);
       }
     } else {
       if (typeof props.modelValue !== "number") {
-        initVal.firstVal = props.min!;
+        initVal.firstVal = props.min;
       } else {
-        initVal.secondVal = props.max!;
+        initVal.secondVal = props.max;
         initVal.firstVal = Math.min(
-          props.max!,
-          Math.max(props.min!, props.modelValue)
+          props.max,
+          Math.max(props.min, props.modelValue)
         );
       }
       await nextTick();
