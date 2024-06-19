@@ -36,6 +36,10 @@ export default function useCascaderPanel(props: CascaderPanelProps) {
      * 懒加载 Badge 样式
      */
     const loadingTheme = ref(props.style?.loadingTheme);
+    /**
+     * 级联选择
+     */
+    const checkStrictly = ref(props.checkStrictly);
 
     /**
      * 每列已选中的 key
@@ -109,9 +113,11 @@ export default function useCascaderPanel(props: CascaderPanelProps) {
      * 选中项的 label
      */
     const selectLabel: ComputedRef<string> = computed(() => {
-      const path = flatter(originData.value).flatMap(
-        (v, i) => v.find((c) => c.value === selectKeys.value.at(i))?.label
-      );
+      const path = flatter(originData.value)
+        .flatMap(
+          (v, i) => v.find((c) => c.value === selectKeys.value.at(i))?.label
+        )
+        .filter((a) => a);
       return onlyLastLevel.value ? path.pop() : path.join(props.decollator);
     });
 
@@ -154,6 +160,16 @@ export default function useCascaderPanel(props: CascaderPanelProps) {
       flatter(originData.value);
       return ret;
     });
+
+    watch(
+      () => props.data,
+      () => (originData.value = sanitizer(props.data ?? []))
+    );
+
+    watch(
+      () => props.checkStrictly,
+      (val) => (checkStrictly.value = val ?? false)
+    );
 
     /**
      * 监听多选开关变化
@@ -205,6 +221,7 @@ export default function useCascaderPanel(props: CascaderPanelProps) {
       sanitizer,
       onlyLastLevel,
       multiple,
+      checkStrictly,
       decollator,
       multipleSelectItem,
       alwaysLazy,

@@ -47,6 +47,7 @@
           :only-last-level="_onlyLastLevel"
           :disabled="_disabled"
           v-model="_selectKeys"
+          :check-strictly="_checkStrictly"
           @update:model-value="
             (selectKeys: string[] | string) => {
               _selectKeys = selectKeys;
@@ -118,6 +119,7 @@ export interface CascaderProps {
   multiple?: boolean;
   lazy?: boolean;
   load?: CascaderPanelLazyloadFunction;
+  checkStrictly?: boolean;
 }
 
 defineOptions({
@@ -141,7 +143,8 @@ const props = withDefaults(defineProps<CascaderProps>(), {
   }),
   multiple: false,
   lazy: false,
-  load: () => [],
+  load: () => {},
+  checkStrictly: false,
 });
 
 const hasContent = computed(
@@ -162,6 +165,7 @@ const _innerProcess = computed(() =>
     replaceFields: _replaceFields.value,
     decollator: _decollator.value,
     onlyLastLevel: _onlyLastLevel.value,
+    checkStrictly: _checkStrictly.value,
   })
 );
 const _dataSource = ref(props.options);
@@ -169,6 +173,7 @@ const _multiple = ref(props.multiple);
 const _decollator = ref(props.decollator);
 const _onlyLastLevel = ref(props.onlyLastLevel);
 const _disabled = ref(props.disabled);
+const _checkStrictly = ref(props.checkStrictly);
 const _replaceFields = ref({
   label: props.replaceFields?.label ?? "label",
   value: props.replaceFields?.value ?? "value",

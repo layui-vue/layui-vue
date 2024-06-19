@@ -19,8 +19,9 @@ export interface CascaderPanelItemPropsInternal {
 }
 
 export type CascaderPanelLazyloadFunction = (
-  node: CascaderPanelItemProps
-) => string | Array<CascaderPanelItemProps>;
+  node: CascaderPanelItemPropsInternal,
+  resolve: (data: any) => string | Promise<Array<CascaderPanelItemProps>> | void
+) => string | Promise<Array<CascaderPanelItemProps>> | void;
 
 export interface CascaderPanelProps {
   replaceFields?: {
@@ -40,4 +41,6 @@ export interface CascaderPanelProps {
   data?: Array<CascaderPanelItemProps>;
   decollator?: string;
   value?: string | Array<string>;
+  height?: string | number;
+  checkStrictly?: boolean;
 }

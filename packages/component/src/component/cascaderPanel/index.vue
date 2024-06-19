@@ -16,7 +16,7 @@
             class="layui-cascader-panel-item"
             v-for="(item, j) in list"
             :key="j"
-            @click="clickSelectItem(item, i)"
+            @click.stop="clickSelectItem(item, i)"
             :class="[
               {
                 'layui-cascader-panel-item-active':
@@ -29,50 +29,68 @@
             :title="item.label"
           >
             <slot>
-              <lay-checkbox
-                v-if="multiple === true && !item.loading"
-                size="md"
-                skin="primary"
-                v-model="item.checked"
-                :isIndeterminate="
-                  (() => {
-                    if (item.children?.length) {
-                      item.children.filter((i) => i.checked).length == 0
-                        ? (item.checked = false)
-                        : (item.checked = true);
-                    }
-                    return (
-                      (item.checked &&
-                        item.children?.length &&
-                        item.children.filter((i) => !i.checked).length > 0) ||
-                      false
-                    );
-                  })()
-                "
-                :value="item.checked ? 1 : 0"
-                :label="item.label"
-                @click.stop="clickSelectItem(item, i)"
-              ></lay-checkbox>
-              <span v-else>
+              <div class="layui-cascader-panel-selection">
+                <template v-if="checkStrictly || multiple">
+                  <lay-radio
+                    v-if="!multiple"
+                    @change="
+                      (val) => {
+                        clickSelectItem(item, i);
+                      }
+                    "
+                    :value="selectKeys.at(i) != item.value"
+                  />
+                  <lay-checkbox
+                    v-else-if="!item.loading"
+                    size="md"
+                    skin="primary"
+                    v-model="item.checked"
+                    :isIndeterminate="
+                      (() => {
+                        if (checkStrictly) return;
+                        if (item.children?.length) {
+                          item.children.filter((i) => i.checked).length == 0
+                            ? (item.checked = false)
+                            : (item.checked = true);
+                        }
+                        return (
+                          (item.checked &&
+                            item.children?.length &&
+                            item.children.filter((i) => !i.checked).length >
+                              0) ||
+                          false
+                        );
+                      })()
+                    "
+                    @update:model-value="
+                      (value) => {
+                        item.checked = value;
+                        clickSelectItem(item, i);
+                        multipleItemTrigger(item);
+                        flushOut();
+                      }
+                    "
+                    :value="item.checked ? 1 : 0"
+                  />
+                </template>
                 <slot
                   :name="item.slot"
                   v-if="item.slot && slots[item.slot]"
                 ></slot>
                 <template v-else>{{ item.label }}</template>
-              </span>
+              </div>
               <lay-badge
                 class="layui-cascader-panel-item-loading"
                 type="dot"
                 :theme="loadingTheme"
                 ripple
                 v-if="item.loading"
-              ></lay-badge>
+              />
               <i
                 class="layui-icon"
                 :class="{
                   'layui-icon-right': item.children && item.children.length,
                 }"
-                @click.stop="clickSelectItem(item, i)"
               ></i>
             </slot>
           </li>
@@ -84,7 +102,7 @@
 
 <script setup lang="ts">
 import "./index.less";
-import { onMounted, ref, useSlots, watch } from "vue";
+import { computed, nextTick, onMounted, ref, useSlots, watch } from "vue";
 import {
   CascaderPanelItemProps,
   CascaderPanelItemPropsInternal,
@@ -130,8 +148,9 @@ const props = withDefaults(defineProps<CascaderPanelProps>(), {
   data: () => [],
   alwaysLazy: false,
   multiple: false,
+  checkStrictly: false,
   onlyLastLevel: false,
-  lazy: () => [],
+  lazy: () => {},
   style: () => {
     return {
       stripe: false,
@@ -145,6 +164,7 @@ const props = withDefaults(defineProps<CascaderPanelProps>(), {
   }),
   modelValue: () => [],
   decollator: () => " / ",
+  height: "200px",
 });
 /**
  * Hook
@@ -153,6 +173,7 @@ const {
   dataSource,
   sanitizer,
   multiple,
+  checkStrictly,
   multipleSelectItem,
   alwaysLazy,
   loadingTheme,
@@ -169,6 +190,10 @@ const slots = useSlots();
  * 开启条纹
  */
 const stripe = ref(props.style?.stripe);
+/**
+ * 高度
+ */
+const height = computed(() => props.height ?? "200px");
 
 onMounted(() => {
   if (!props.modelValue?.length) {
@@ -176,17 +201,25 @@ onMounted(() => {
     return;
   }
 
-  if (!multiple.value)
+  if (!multiple.value) {
     selectKeys.value =
       props.modelValue instanceof Array
         ? props.modelValue
         : props.modelValue.split(props.decollator);
-  else {
+
+    dataSource.value.at(0)?.forEach((item) => {
+      doLazyLoad(item);
+    });
+  } else {
     if (props.modelValue instanceof Array) {
       props.modelValue.forEach((v) => {
         const item = flatData.value.find((c) => c.value === v)!;
+        console.log(v, item);
         item.checked = true;
         multipleSelectItem.value.set(v, item);
+      });
+      dataSource.value.at(0)?.forEach((item) => {
+        doLazyLoad(item);
       });
     }
   }
@@ -197,41 +230,37 @@ onMounted(() => {
  */
 const doLazyLoad = (item: CascaderPanelItemPropsInternal) => {
   if (props.lazy) {
-    if (!alwaysLazy.value && item.children?.length) {
-      if (multiple.value) {
-        multipleItemTrigger(item);
-        flushOut();
-      }
-      return;
-    }
+    if (!alwaysLazy.value && item.children?.length) return false;
     item.loading = true;
     item.children = [];
 
-    Promise.resolve(props.lazy(item))
-      .then((res: string | Array<CascaderPanelItemProps>) => {
-        if (typeof res === "string")
-          res = JSON.parse(res) as Array<CascaderPanelItemProps>;
-        item.children = sanitizer(res);
-      })
+    const process = (res: string | Array<CascaderPanelItemProps> | void) => {
+      if (!res) res = [];
+      if (typeof res === "string")
+        res = JSON.parse(res) as Array<CascaderPanelItemProps>;
+      item.children = sanitizer(res);
+    };
+
+    Promise.resolve(props.lazy(item, process))
+      .then(process)
       .then(() => {
         item.loading = false;
-        if (!item.children?.length) {
-          multipleItemTrigger(item);
-          flushOut();
-        } else {
+        if (item.children?.length)
           props.modelValue instanceof Array &&
             props.modelValue.forEach((v) => {
-              multipleSelectItem.value.set(
-                v,
-                flatData.value.find((c) => c.value === v)!
-              );
+              const item = flatData.value.find((c) => c.value === v);
+              item!.checked = true;
+              multipleSelectItem.value.set(v, item!);
             });
-        }
+        multipleItemTrigger(item);
+        if (!multiple.value) flushOut();
       });
+    return true;
   } else {
     multipleItemTrigger(item);
-    flushOut();
+    if (!multiple.value) flushOut();
   }
+  return false;
 };
 /**
  * 刷新
@@ -263,7 +292,7 @@ const flushOut = () => {
  * @param item 当前项
  */
 const multipleItemTrigger = (item: CascaderPanelItemPropsInternal) => {
-  if (!multiple.value) return;
+  if (!multiple.value || checkStrictly.value) return;
 
   if (item.children?.length)
     item.children.forEach((c) => {
@@ -285,20 +314,33 @@ const clickSelectItem = (
   index: number
 ) => {
   if (item.disabled) return;
+  let keys = selectKeys.value;
   // 回溯，清除n ~ n + 2列的内容
-  if (index < selectKeys.value.length)
-    selectKeys.value = selectKeys.value.filter((_, i) => i <= index);
+  if (index < keys.length) keys = keys.filter((_, i) => i <= index);
   // 检查数组长度，并补齐，避免自动转换成object
-  while (selectKeys.value.length < index)
-    selectKeys.value.push(multiple.value ? item.value : "");
+  while (keys.length <= index) keys.push(multiple.value ? item.value : "");
+  selectKeys.value = keys;
   selectKeys.value[index] = item.value;
-  if (!multiple.value)
+
+  if (doLazyLoad(item)) return;
+
+  if (checkStrictly.value)
+    emits("update:states", {
+      selectKeys: selectKeys.value,
+      selectLabel: selectLabel.value,
+    });
+  else if (!multiple.value)
     emits("selectItem", {
       index,
       value: item.value,
       selectKeys: selectKeys.value,
       selectLabel: selectLabel.value,
     });
-  doLazyLoad(item);
 };
 </script>
+
+<style lang="less">
+.layui-cascader-panel {
+  height: v-bind(height);
+}
+</style>

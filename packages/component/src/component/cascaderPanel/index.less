@@ -1,9 +1,36 @@
 .layui-cascader-panel {
-    min-height: 200px;
     display: flex;
 
     &-container {
         display: flex;
+    }
+
+    &-selection {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        text-wrap: nowrap;
+
+        .layui-checkbox-label {
+            padding: 0 !important;
+        }
+
+        .layui-form-radio {
+            scale: 0.8;
+            margin: 0;
+            padding: 0;
+
+            i {
+                margin-right: 4px;
+            }
+
+            span {
+                display: none;
+            }
+        }
     }
 
     &-list {
@@ -56,14 +83,22 @@
             .layui-form-checkbox i.layui-icon {
                 border: 1px solid;
             }
+
+            .layui-form-radio i.layui-icon {
+                color: #fff;
+            }
         }
 
         &-active {
             background-color: var(--global-checked-color) !important;
-            color: white;
+            color: #fff;
 
             span {
-                color: white !important;
+                color: #fff !important;
+            }
+
+            .layui-form-radio i.layui-icon {
+                color: #fff;
             }
 
             .layui-form-checkbox i.layui-icon {

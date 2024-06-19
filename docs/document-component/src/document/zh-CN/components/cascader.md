@@ -19,7 +19,13 @@
     <lay-button @click="clickSetValue" size='sm' style='margin-left:10px'>修改v-model</lay-button>
   </div>
   <div style="margin-top:12px;">
-    <lay-cascader :options="options" :multiple="true" v-model="multipleValue" placeholder="点我试一试" allow-clear></lay-cascader>
+    <span style="margin-right: 12px;">级联单选</span>
+    <lay-cascader :lazy="true" :load="lazyLoad" :options="options" v-model="singleValue" placeholder="点我试一试" :check-strictly="true" allow-clear></lay-cascader>
+    <span style="margin-left:20px">输出的值：{{singleValue}}</span>
+  </div>
+  <div style="margin-top:12px;">
+    <span style="margin-right: 12px;">级联多选</span>
+    <lay-cascader :options="options" v-model="multipleValue" placeholder="点我试一试" :multiple="true" :check-strictly="true" allow-clear></lay-cascader>
     <span style="margin-left:20px">输出的值：{{multipleValue}}</span>
   </div>
 </template>
@@ -27,7 +33,11 @@
 <script setup>
 import { ref } from "vue";
 const value=ref("Guide / shejiyuanze / yizhi");
+const singleValue=ref([]);
 const multipleValue=ref([]);
+const lazyLoad = (node, resolve) => {
+    resolve([{ label: "test", value: "test" }]);
+}
 const clickSetValue = () => {
     value.value="Guide / shejiyuanze / fankui";
 }
