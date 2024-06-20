@@ -2,7 +2,15 @@
 import type { Ref, StyleValue, CSSProperties } from "vue";
 import type { ContentProps } from "../types";
 
-import { ref, computed, inject, watch, nextTick, useSlots } from "vue";
+import {
+  ref,
+  computed,
+  inject,
+  watch,
+  nextTick,
+  useSlots,
+  onBeforeUnmount,
+} from "vue";
 import { onClickOutside } from "@vueuse/core";
 import { usePopper, flip, hide, offset, shift } from "../usePopper/index";
 
@@ -53,6 +61,8 @@ const {
   popperStyle: _popperStyle,
   middlewareData,
   update,
+  stopAutoUpdate,
+  startAutoUpdate,
 } = usePopper(TriggerRef as Ref<HTMLElement>, ContentRef as Ref<HTMLElement>, {
   placement: props.placement,
   middleware: [
@@ -83,6 +93,20 @@ watch(
     }
   }
 );
+
+watch(innerVisible, () => {
+  if (innerVisible.value) {
+    startAutoUpdate.value && startAutoUpdate.value();
+  } else {
+    console.log(stopAutoUpdate, 'stopAutoUpdate');
+    
+    stopAutoUpdate.value && stopAutoUpdate.value();
+  }
+});
+
+onBeforeUnmount(() => {
+  stopAutoUpdate.value && stopAutoUpdate.value();
+});
 
 onClickOutside(ContentRef, (event: PointerEvent) => {
   if (

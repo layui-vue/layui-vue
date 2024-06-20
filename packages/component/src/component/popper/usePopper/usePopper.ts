@@ -42,7 +42,8 @@ export function usePopper(
   });
 
   // return autoUpdate
-  let cleanup: (() => void) | undefined;
+  const cleanup = ref<(() => void) | undefined>();
+  const init = ref<(() => void) | undefined>();
 
   function update() {
     if (referenceElement.value === null || popperElement.value === null) {
@@ -63,21 +64,21 @@ export function usePopper(
   }
 
   function runCleanup() {
-    if (typeof cleanup === "function") {
-      cleanup();
-      cleanup = undefined;
+    if (typeof cleanup.value === "function") {
+      cleanup.value();
+      cleanup.value = undefined;
     }
   }
 
-  function init() {
+  init.value = () => {
     runCleanup();
 
     if (referenceElement.value !== null && popperElement.value !== null) {
-      cleanup = autoUpdate(referenceElement.value, popperElement.value, update);
+      cleanup.value = autoUpdate(referenceElement.value, popperElement.value, update);
     }
   }
 
-  watch([referenceElement, popperElement], init, {
+  watch([referenceElement, popperElement], init.value, {
     flush: "sync",
   });
 
@@ -88,5 +89,7 @@ export function usePopper(
     popperStyle,
     middlewareData,
     update,
+    stopAutoUpdate: cleanup,
+    startAutoUpdate: init,
   };
 }
