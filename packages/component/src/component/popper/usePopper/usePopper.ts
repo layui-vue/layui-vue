@@ -74,9 +74,13 @@ export function usePopper(
     runCleanup();
 
     if (referenceElement.value !== null && popperElement.value !== null) {
-      cleanup.value = autoUpdate(referenceElement.value, popperElement.value, update);
+      cleanup.value = autoUpdate(
+        referenceElement.value,
+        popperElement.value,
+        update
+      );
     }
-  }
+  };
 
   watch([referenceElement, popperElement], init.value, {
     flush: "sync",

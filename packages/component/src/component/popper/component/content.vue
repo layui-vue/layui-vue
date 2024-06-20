@@ -98,8 +98,6 @@ watch(innerVisible, () => {
   if (innerVisible.value) {
     startAutoUpdate.value && startAutoUpdate.value();
   } else {
-    console.log(stopAutoUpdate, 'stopAutoUpdate');
-    
     stopAutoUpdate.value && stopAutoUpdate.value();
   }
 });
