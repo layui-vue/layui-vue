@@ -7,7 +7,7 @@ import Children1 from "./components/Children1.vue";
 import Children2 from "./components/Children2.vue";
 import Children3 from "./components/Children3.vue";
 import Children4 from "./components/Children4.vue";
-import layui from "layui-vue/src/index";
+import layui from "layui-vue/index";
 import layer from "layui-layer/src/index";
 import "./assets/css/index.css";
 

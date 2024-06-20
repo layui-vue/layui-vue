@@ -1,0 +1,73 @@
+.layui-water-ripples-container {
+  position: relative;
+  display: inline-block;
+
+  .layui-slot-container {
+    position: relative;
+    z-index: 2;
+  }
+
+  .layui-out-ripples {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    opacity: 1;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .layui-animate-once--out {
+    animation: ripple-effect 1s forwards;
+  }
+
+  .layui-animate-always--out {
+    animation: ripple-effect 1s infinite;
+  }
+
+  @keyframes ripple-effect {
+    0% {
+      box-shadow: 0 0 0 0px var(--layui-ripple-color);
+      opacity: 0.4;
+    }
+
+    100% {
+      box-shadow: 0 0 0 var(--layui-spread-width) var(--layui-ripple-color);
+      opacity: 0;
+    }
+  }
+
+  .layui-inset-ripples {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 1;
+    width: 0px;
+    height: 0px;
+    background: var(--layui-ripple-color);
+    pointer-events: none;
+  }
+
+  @keyframes size-effect {
+    0% {
+      width: 0px;
+      height: 0px;
+      opacity: 0.8;
+    }
+
+    100% {
+      width: var(--layui-spread-size);
+      height: var(--layui-spread-size);
+      opacity: 0;
+    }
+  }
+
+  .layui-animate-once--inset {
+    animation: size-effect 1s forwards;
+  }
+
+  .layui-animate-always--inset {
+    animation: size-effect 1s infinite;
+  }
+}

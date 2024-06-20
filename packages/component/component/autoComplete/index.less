@@ -1,0 +1,30 @@
+@import "../input/index.less";
+@import "../dropdown/index.less";
+
+.lay-autocomplete {
+  width: 220px;
+}
+
+.lay-autocomplete-loading {
+  text-align: center;
+  padding: 20px;
+}
+
+.lay-autocomplete-option.selected {
+  background-color: var(--global-neutral-color-2);
+}
+
+.lay-autocomplete-option.equals {
+  background-color: var(--global-neutral-color-2) !important;
+  color: var(--global-checked-color) !important;
+  font-weight: 700 !important;
+}
+
+.lay-autocomplete-content {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.lay-autocomplete-content::-webkit-scrollbar { width: 8px; height: 8px; }
+.lay-autocomplete-content::-webkit-scrollbar-thumb { border-radius: 10px; background-color: #eeeeee; }
+.lay-autocomplete-content::-webkit-scrollbar-thumb:hover { background-color: #dddddd; }

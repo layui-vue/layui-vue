@@ -1,0 +1,110 @@
+@import "./cropper.min.css";
+@import "../button/index.less";
+
+.layui-upload-file {
+  opacity: 0.01;
+  position: relative;
+  filter: Alpha(opacity=1);
+  cursor: pointer;
+}
+
+.layui-upload-btn-box {
+  position: relative;
+  overflow: hidden;
+}
+
+.layui-upload-drag,
+.layui-upload-form,
+.layui-upload-wrap {
+  display: inline-block;
+}
+
+.layui-upload-list {
+  margin: 10px 0;
+}
+
+.layui-upload-choose {
+  max-width: 200px;
+  padding: 0 10px;
+  color: #999;
+  font-size: 14px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.layui-upload-drag {
+  position: relative;
+  padding: 30px;
+  border: 1px dashed var(--global-neutral-color-4);
+  background-color: #fff;
+  text-align: center;
+  cursor: pointer;
+  color: #999;
+}
+
+.layui-upload-drag .layui-icon {
+  font-size: 50px;
+  color: var(--global-primary-color);
+}
+
+.layui-upload-drag[lay-over] {
+  border-color: var(--global-primary-color);
+}
+.layui-upload-drag-draging {
+  border-color: var(--global-primary-color);
+}
+
+.layui-upload-iframe {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border: 0;
+  visibility: hidden;
+}
+
+.layui-upload-wrap {
+  position: relative;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.layui-upload-wrap .layui-upload-file {
+  display: block !important;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 10;
+  font-size: 100px;
+  width: 1px;
+  height: 1px;
+  opacity: 0.01;
+  filter: Alpha(opacity=1);
+}
+
+.layui-upload-file-disabled {
+  cursor: not-allowed !important;
+}
+
+.layui-btn-container .layui-upload-choose {
+  padding-left: 0;
+}
+
+.layui-upload-drag-disable {
+  opacity: 0.8;
+  z-index: 1;
+  cursor: not-allowed;
+}
+
+._lay_upload_img {
+  display: block;
+  max-width: 100%;
+}
+
+.layui-upload-list-disabled {
+  width: auto;
+  height: auto;
+  pointer-events: none !important;
+  background-color: #fbfbfb !important;
+  filter: opacity(0.9);
+}

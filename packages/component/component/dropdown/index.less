@@ -1,0 +1,64 @@
+:root {
+  --dropdown-content-border-radius: var(--global-border-radius);
+}
+
+.layui-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.layui-dropdown-content {
+  position: absolute;
+  z-index: 99999999;
+  background-color: #fff;
+  box-sizing: border-box;
+  border: 1px solid #e4e7ed;
+  border-radius: var(--dropdown-content-border-radius);
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1);
+}
+
+.layui-dropdown-content > .layui-dropdown-menu {
+  margin: 5px 0;
+}
+
+.layui-dropdown-content .layui-menu {
+  position: relative;
+  background-color: #fff;
+}
+
+.layui-dropdown-content .layui-menu li,
+.layui-dropdown-content .layui-menu-body-title a {
+  padding: 5px 15px;
+}
+
+.layui-dropdown-content .layui-menu li {
+  position: relative;
+  display: flex;
+  margin: 1px 0;
+  line-height: 26px;
+  color: rgba(0, 0, 0, 0.8);
+  font-size: 14px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.layui-dropdown-content .layui-menu li:hover {
+  background-color: var(--global-neutral-color-2);
+}
+
+.layui-dropdown-content .layui-menu-body-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.layui-dropdown-menu-prefix{
+  margin-right: 8px;
+}
+.layui-dropdown-menu-suffix{
+  margin-left: 15px;
+}
+
+.layui-dropdown-content .layui-menu li.layui-disabled:hover {
+  background-color: inherit;
+}

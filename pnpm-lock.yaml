@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@layui/component':
+        specifier: workspace:*
+        version: link:packages/component
       '@layui/icons-vue':
         specifier: workspace:*
         version: link:packages/icons
@@ -19,7 +22,7 @@ importers:
         version: link:packages/layer
       '@layui/layui-vue':
         specifier: workspace:*
-        version: link:packages/component
+        version: link:packages/layui
       vue:
         specifier: 3.3.4
         version: 3.3.4
@@ -261,7 +264,23 @@ importers:
         specifier: ^0.13.1
         version: 0.13.1(vite@2.9.8)
 
-  packages/component:
+  packages/component: {}
+
+  packages/icons: {}
+
+  packages/json-schema-form: {}
+
+  packages/layer:
+    dependencies:
+      '@layui/icons-vue':
+        specifier: workspace:*
+        version: link:../icons
+    devDependencies:
+      '@babel/plugin-transform-runtime':
+        specifier: ^7.18.5
+        version: 7.18.5(@babel/core@7.23.9)
+
+  packages/layui:
     dependencies:
       '@babel/types':
         specifier: 7.21.0
@@ -308,20 +327,6 @@ importers:
       vue-i18n:
         specifier: 9.6.3
         version: 9.6.3(vue@3.3.4)
-
-  packages/icons: {}
-
-  packages/json-schema-form: {}
-
-  packages/layer:
-    dependencies:
-      '@layui/icons-vue':
-        specifier: workspace:*
-        version: link:../icons
-    devDependencies:
-      '@babel/plugin-transform-runtime':
-        specifier: ^7.18.5
-        version: 7.18.5(@babel/core@7.23.9)
 
   play: {}
 
@@ -2715,15 +2720,10 @@ packages:
     resolution: {integrity: sha512-hov8bUuiLiyFPGyFPE1lwWhmzYbirOXQNNo40+y3zow8aFVTeyn3VWL0VFFfdNddA8S4Vf0Tc062rzyNr7Paag==}
     dev: true
 
-  /@types/node@16.18.76:
-    resolution: {integrity: sha512-/GsO2uv1Z6R42lBr59dtem56gVF/yHKQaScggwU+gLU6DXE25sDmOar4c4IfWb3h+X/7OYZznPOFk7oGF3jQSA==}
-    dev: false
-
   /@types/node@18.19.10:
     resolution: {integrity: sha512-IZD8kAM02AW1HRDTPOlz3npFava678pr8Ie9Vp8uRhBROXAv8MXT2pCnGZZAKYdromsNQLHQcfWQ6EOatVLtqA==}
     dependencies:
       undici-types: 5.26.5
-    dev: true
 
   /@types/normalize-package-data@2.4.4:
     resolution: {integrity: sha512-37i+OaWTh9qeK4LSHPsyRC7NahnGotNuZvjLSgcPzblpHB3rrCJxAOgI5gCdKm7coonsaX1Of0ILiTcnZjbfxA==}
@@ -2740,7 +2740,7 @@ packages:
   /@types/qrcode@1.5.0:
     resolution: {integrity: sha512-x5ilHXRxUPIMfjtM+1vf/GPTRWZ81nqscursm5gMznJeK9M0YnZ1c3bEvRLQ0zSSgedLx1J6MGL231ObQGGhaA==}
     dependencies:
-      '@types/node': 16.18.76
+      '@types/node': 18.19.10
     dev: false
 
   /@types/uuid@8.3.4:
@@ -6736,7 +6736,6 @@ packages:
 
   /undici-types@5.26.5:
     resolution: {integrity: sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==}
-    dev: true
 
   /unicode-canonical-property-names-ecmascript@2.0.0:
     resolution: {integrity: sha512-yY5PpDlfVIU5+y/BSCxAJRBIS1Zc2dDG3Ujq+sR0U+JjUevW2JhocOF+soROYDSaAezOzOKuyyixhD6mBknSmQ==}

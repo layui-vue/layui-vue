@@ -1,8 +1,4 @@
 @import url(./iconfont.css);
-@import url(@layui/layui-vue/es/index/index.css);
-@import url(@layui/layui-vue/es/input/index.css);
-@import url(@layui/layui-vue/es/textarea/index.css);
-
 
 :root {
   --global-primary-color: #16baaa;

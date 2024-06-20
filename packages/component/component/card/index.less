@@ -1,0 +1,46 @@
+:root {
+  --card-border-radius: var(--global-border-radius);
+}
+
+.layui-card {
+  margin-bottom: 15px;
+  background-color: #ffffff;
+  border-radius: var(--card-border-radius);
+}
+
+.layui-card .layui-card-header {
+  height: 42px;
+  line-height: 42px;
+  padding: 0 15px;
+  border-bottom: 1px solid #f6f6f6;
+  font-size: 14px;
+}
+
+.layui-card .layui-card-footer {
+  height: 42px;
+  line-height: 42px;
+  padding: 0 15px;
+  border-top: 1px solid #f6f6f6;
+  font-size: 14px;
+}
+
+.layui-card .layui-card-header .layui-card-header-extra {
+  float: right;
+}
+
+.layui-card .layui-card-body {
+  padding: 10px 15px;
+  line-height: 24px; 
+}
+
+.layui-card:last-child {
+  margin-bottom: 0;
+}
+
+.layui-card.is-hover-shadow:hover {
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.layui-card.shadow {
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}

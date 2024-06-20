@@ -1,0 +1,297 @@
+@width-height-pace: 24px;
+@step-color: @step-success-color;
+@step-fail-color: #ff5722;
+@step-primary-color: var(--global-primary-color);
+@step-warning-color: #ffb800;
+@step-success-color: #5fb878;
+
+.lay-step {
+  display: flex;
+  flex-wrap: nowrap;
+  .lay-step-item {
+    flex-grow: 1;
+    position: relative;
+  }
+
+  .is-item-center {
+    text-align: center;
+  }
+
+  .lay-step-item-last {
+    flex-grow: 0 !important;
+  }
+  .lay-step-item-pace {
+    position: relative;
+    z-index: 10;
+    cursor: pointer;
+    width: @width-height-pace;
+    height: @width-height-pace;
+    border: 1px #8d8d8d solid;
+    border-radius: 50%;
+    text-align: center;
+    line-height: @width-height-pace;
+    background: #ffffff;
+  }
+  .is-center {
+    margin: 0 auto;
+  }
+  .lay-step-item-active {
+    border: 1px @step-color solid;
+    color: @step-color;
+  }
+
+  .lay-step-item-wait {
+    border: 1px #000000 solid;
+    color: #000000;
+  }
+
+  .lay-step-item--success {
+    border: 1px @step-color solid;
+    color: #ffffff;
+    background: @step-color;
+  }
+
+  .lay-step-item--fail {
+    border: 1px @step-fail-color solid;
+    color: #ffffff;
+    background: @step-fail-color;
+  }
+
+  .lay-step-item--warning {
+    border: 1px @step-warning-color solid;
+    color: #ffffff;
+    background: @step-warning-color;
+  }
+  .lay-step-item--primary {
+    border: 1px @step-primary-color solid;
+    color: #ffffff;
+    background: @step-primary-color;
+  }
+
+  .lay-step-item-success {
+    border: 1px @step-color solid;
+    color: #ffffff;
+    background: @step-color;
+  }
+
+  .lay-step-item-fail {
+    border: 1px @step-fail-color solid;
+    color: #ffffff;
+    background: @step-fail-color;
+  }
+
+  .lay-step-item-warning {
+    border: 1px @step-warning-color solid;
+    color: #ffffff;
+    background: @step-warning-color;
+  }
+  .lay-step-item-primary {
+    border: 1px @step-primary-color solid;
+    color: #ffffff;
+    background: @step-primary-color;
+  }
+
+  .lay-step-item-content {
+    color: #8d8d8d;
+    cursor: pointer;
+    .lay-step-item-content-title {
+      font-weight: bold;
+      font-size: 16px;
+    }
+  }
+
+  .lay-step-item-content-row {
+    color: #8d8d8d;
+    position: absolute;
+    top: 5px;
+    left: 24px;
+    width: calc(100% - 26px);
+    .lay-step-item-content-title {
+      word-wrap: break-word;
+      max-width: calc(100% - 8px);
+      font-weight: bold;
+      display: inline-block;
+      margin-left: 2px;
+      background: #ffffff;
+      padding: 0 8px;
+      font-size: 16px;
+    }
+  }
+
+  .lay-step-item-content-active {
+    color: @step-color;
+  }
+
+  .lay-step-item-content--success {
+    color: @step-color;
+  }
+  .lay-step-item-content--fail {
+    color: @step-fail-color;
+  }
+  .lay-step-item-content--warning {
+    color: @step-warning-color;
+  }
+  .lay-step-item-content--primary {
+    color: @step-primary-color;
+  }
+
+  .lay-step-item-content-wait {
+    color: #000000;
+  }
+  .lay-step-item-content-success {
+    color: @step-color;
+  }
+  .lay-step-item-content-fail {
+    color: @step-fail-color;
+  }
+  .lay-step-item-content-warning {
+    color: @step-warning-color;
+  }
+  .lay-step-item-content-primary {
+    color: @step-primary-color;
+  }
+
+  .lay-step-item-line {
+    position: relative;
+  }
+
+  .lay-step-item-line:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    // transform: translateY(-50%);
+    display: block;
+    height: 1px;
+    width: 100%;
+    background: #c9c5c5;
+  }
+  .is-line-center:before {
+    left: 50%;
+  }
+
+  .lay-step-item-line-active:before {
+    transition: background 150ms;
+    background: @step-success-color !important;
+  }
+
+  .lay-step-item-line-fail:before {
+    transition: background 150ms;
+    background: @step-fail-color !important;
+  }
+
+  .lay-step-item-line-warning:before {
+    transition: background 150ms;
+    background: @step-warning-color !important;
+  }
+
+  .lay-step-item-line-primary:before {
+    transition: background 150ms;
+    background: @step-primary-color !important;
+  }
+
+  .lay-step-simple {
+    height: 30px;
+    padding: 0 8px;
+    line-height: 30px;
+    color: #ffffff;
+    background-color: #cecece;
+    cursor: pointer;
+  }
+  .lay-step-item-simple {
+    padding: 0 18px;
+  }
+  .lay-step-item-simple:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: auto;
+    bottom: auto;
+    border: 15px solid;
+    border-color: transparent transparent transparent #cecece;
+    background-color: transparent;
+    border-radius: 0;
+    display: block;
+    height: auto;
+    width: auto;
+  }
+  .lay-step-item-simple:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: auto;
+    bottom: auto;
+    border: 15px solid;
+    border-color: transparent transparent transparent #cecece;
+    background-color: transparent;
+    border-radius: 0;
+    display: block;
+    height: auto;
+    width: auto;
+  }
+  .lay-step-item-simple-border:before {
+    left: 1px;
+    border-color: transparent transparent transparent #ffffff;
+  }
+
+  .lay-step-item-simple-active {
+    background-color: #9fd4ae;
+  }
+  .lay-step-item-simple-success {
+    background-color: @step-color;
+  }
+  .lay-step-item-simple-fail {
+    background-color: @step-fail-color;
+  }
+  .lay-step-item-simple-warning {
+    background-color: @step-warning-color;
+  }
+  .lay-step-item-simple-primary {
+    background-color: @step-primary-color;
+  }
+  .lay-step-item-simple-active-border:after {
+    border-color: transparent transparent transparent #9fd4ae !important;
+  }
+  .lay-step-item-simple-success-border:after {
+    border-color: transparent transparent transparent
+      @step-success-color!important;
+  }
+  .lay-step-item-simple-fail-border:after {
+    border-color: transparent transparent transparent @step-fail-color!important;
+  }
+  .lay-step-item-simple-warning-border:after {
+    border-color: transparent transparent transparent
+      @step-warning-color!important;
+  }
+  .lay-step-item-simple-primary-border:after {
+    border-color: transparent transparent transparent
+      @step-primary-color!important;
+  }
+}
+.lay-step-column {
+  height: 100%;
+  flex-flow: column;
+  .lay-step-item-line {
+    position: relative;
+    height: 100%;
+    width: 24px;
+  }
+  .lay-step-item-line:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    // transform: translateX(-50%);
+    display: block;
+    width: 1px;
+    height: 100%;
+    background: #c9c5c5;
+  }
+  .lay-step-item-content {
+    margin-left: 8px;
+  }
+  .is-vertical {
+    display: flex;
+  }
+}
