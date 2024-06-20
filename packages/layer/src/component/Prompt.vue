@@ -4,7 +4,6 @@ import LayInput from "@layui/component/component/input/index";
 import LayTextarea from "@layui/component/component/textarea/index";
 import "@layui/component/theme/index.less";
 
-
 export interface PromptProps {
   promptValue?: string;
   formType?: 0 | 1 | 2 | "text" | "password" | "textarea";

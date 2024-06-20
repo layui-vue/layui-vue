@@ -1,3 +1,3 @@
-import {resolve} from 'path'
+import { resolve } from "path";
 
-export const componentDir = resolve(process.cwd(), '../component')
+export const componentDir = resolve(process.cwd(), "../component");

@@ -4,7 +4,7 @@ import vueJsx from "@vitejs/plugin-vue-jsx";
 import { resolve } from "path";
 import * as fs from "fs";
 import terser from "@rollup/plugin-terser";
-import { componentDir } from './constant'
+import { componentDir } from "./constant";
 
 const inputDir = resolve(componentDir, "./component");
 
@@ -15,10 +15,7 @@ const inputsArray = fs.readdirSync(inputDir).filter((name) => {
 });
 
 const inputs = inputsArray.reduce((backObj, pkgName) => {
-  backObj[pkgName] = resolve(
-    componentDir,
-    `./component/${pkgName}/index.ts`
-  );
+  backObj[pkgName] = resolve(componentDir, `./component/${pkgName}/index.ts`);
   return backObj;
 }, {});
 
