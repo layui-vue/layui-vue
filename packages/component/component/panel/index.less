@@ -1,0 +1,22 @@
+:root {
+  --panel-border-color: var(--global-neutral-color-3);
+  --panel-border-radius: var(--global-border-radius);
+}
+
+.layui-panel {
+  border-width: 1px;
+  border-style: solid;
+  margin-bottom: 15px;
+  border-radius: var(--panel-border-radius);
+  border-color: var(--panel-border-color);
+  background-color: #fff;
+  padding: 20px;
+}
+
+.layui-panel.is-hover-shadow:hover {
+  box-shadow: 1px 1px 4px rgb(0 0 0 / 8%);
+}
+
+.layui-panel.shadow {
+  box-shadow: 1px 1px 4px rgb(0 0 0 / 8%);
+}

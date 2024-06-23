@@ -1,0 +1,42 @@
+:root {
+  --button-primary-color: var(--global-primary-color);
+  --button-border-radius: var(--global-border-radius);
+}
+
+.layui-btn-group {
+  vertical-align: middle;
+  font-size: 0;
+}
+
+.layui-btn-group .layui-btn {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  border-radius: 0;
+}
+
+.layui-btn-group .layui-btn:not(:last-child) {
+  border-right: none !important;
+}
+
+.layui-btn-group .layui-btn.layui-btn-primary:not(:first-child),
+.layui-btn-group .layui-btn.layui-btn-normal:not(:first-child),
+.layui-btn-group .layui-btn.layui-btn-warm:not(:first-child),
+.layui-btn-group .layui-btn.layui-btn-danger:not(:first-child) {
+  border-left: 1px solid rgba(255, 255, 255, .5)
+}
+
+.layui-btn-group .layui-btn:first-child {
+  border-radius: var(--button-border-radius) 0 0 var(--button-border-radius);
+}
+
+.layui-btn-group .layui-btn:last-child {
+  border-radius: 0 var(--button-border-radius) var(--button-border-radius) 0;
+}
+
+.layui-btn-group .layui-btn + .layui-btn {
+  margin-left: 0;
+}
+
+.layui-btn-group + .layui-btn-group {
+  margin-left: 10px;
+}

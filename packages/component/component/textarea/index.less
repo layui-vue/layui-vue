@@ -1,0 +1,59 @@
+:root {
+  --textarea-border-radius: var(--global-border-radius);
+  --textarea-border-color: var(--global-neutral-color-3);
+}
+
+.layui-textarea {
+  resize: vertical;
+  height: auto;
+  line-height: 20px;
+  border-width: 1px;
+  border-style: solid;
+  background-color: #fff;
+  color: rgba(0, 0, 0, 0.85);
+  border-radius: var(--textarea-border-radius);
+  border-color: var(--textarea-border-color);
+  -webkit-transition: none;
+  position: relative;
+  transition: none;
+  display: block;
+  padding: 6px 10px;
+}
+
+.layui-textarea-wrapper { 
+  position: relative;
+}
+
+.layui-textarea:hover,
+.layui-textarea:focus {
+  border-color: #d2d2d2 !important;
+}
+
+.layui-textarea-clear {
+  display: none;
+  position: absolute;
+  color: rgba(0, 0, 0, 0.45);
+  right: 10px;
+  top: 10px;
+}
+
+.layui-textarea-wrapper:hover .layui-textarea-clear {
+  display: inline-block;
+}
+
+.layui-textarea::-webkit-input-placeholder {
+  line-height: 1.3;
+}
+
+.layui-texterea-count {
+  color: inherit;
+  white-space: nowrap;
+  pointer-events: none;
+  text-align: right;
+  margin-top: 4px;
+}
+
+.layui-textarea-disabled {
+  cursor: not-allowed !important;
+  opacity: 0.6;
+}

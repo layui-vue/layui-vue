@@ -1,0 +1,124 @@
+:root {
+  --button-primary-text-color: #fff;
+  --button-primary-background-color: var(--global-primary-color);
+  --button-primary-border-color: var(--global-primary-color);
+  --button-normal-text-color: #fff;
+  --button-normal-background-color: var(--global-normal-color);
+  --button-normal-border-color: var(--global-normal-color);
+  --button-warm-text-color: #fff;
+  --button-warm-background-color: var(--global-warm-color);
+  --button-warm-border-color: var(--global-warm-color);
+  --button-danger-text-color: #fff;
+  --button-danger-background-color: var(--global-danger-color);
+  --button-danger-border-color: var(--global-danger-color);
+  --button-border-radius: var(--global-border-radius);
+  --button-border-color: var(--global-neutral-color-6);
+  --button-background-color: 0 0;
+  --button-text-color: #666;
+}
+
+.layui-btn {
+  height: 38px;
+  line-height: 36px;
+  padding: 0 18px;
+  font-size: 14px;
+  text-align: center;
+  white-space: nowrap;
+  color: var(--button-text-color);
+  background: var(--button-background-color);
+  border-radius: var(--button-border-radius);
+  border-color: var(--button-border-color);
+  border-width: 1px;
+  border-style: solid;
+  cursor: pointer;
+}
+
+.layui-btn-primary {
+  color: var(--button-primary-text-color);
+  background-color: var(--button-primary-background-color);
+  border-color: var(--button-primary-border-color);
+}
+
+.layui-btn-normal {
+  color: var(--button-normal-text-color);
+  background-color: var(--button-normal-background-color);
+  border-color: var(--button-normal-border-color);
+}
+
+.layui-btn-warm {
+  color: var(--button-warm-text-color);
+  background-color: var(--button-warm-background-color);
+  border-color: var(--button-warm-border-color);
+}
+
+.layui-btn-danger {
+  color: var(--button-danger-text-color);
+  background-color: var(--button-danger-background-color);
+  border-color: var(--button-danger-border-color);
+}
+
+.layui-btn:hover {
+  opacity: 0.8;
+  filter: alpha(opacity=80);
+}
+
+.layui-btn:active {
+  opacity: 1;
+  filter: alpha(opacity=100);
+}
+
+.layui-btn-lg {
+  height: 44px;
+  line-height: 44px;
+  padding: 0 25px;
+  font-size: 16px;
+}
+
+.layui-btn-sm {
+  height: 32px;
+  line-height: 32px;
+  padding: 0 10px;
+  font-size: 12px;
+}
+
+.layui-btn-xs {
+  height: 26px;
+  line-height: 26px;
+  padding: 0 5px;
+  font-size: 12px;
+  i {
+    font-size: 12px !important;
+  }
+}
+
+.layui-btn-fluid {
+  width: 100%;
+}
+
+.layui-btn-radius {
+  border-radius: 100px;
+}
+
+.layui-btn-disabled,
+.layui-btn-disabled:active,
+.layui-btn-disabled:hover {
+  border-color: #eee !important;
+  background-color: #fbfbfb !important;
+  color: #d2d2d2 !important;
+  cursor: not-allowed !important;
+  opacity: 1;
+}
+
+.layui-btn + .layui-btn {
+  margin-left: 10px;
+}
+
+.layui-btn .layui-icon {
+  vertical-align: middle\9;
+  vertical-align: bottom;
+}
+
+.layui-btn span + .layui-icon,
+.layui-btn .layui-icon + span {
+  margin-left: 6px;
+}

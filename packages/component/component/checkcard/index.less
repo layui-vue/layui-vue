@@ -1,0 +1,130 @@
+.layui-checkcard {
+  position: relative;
+  display: inline-block;
+  width: 320px;
+  margin-right: 16px;
+  margin-bottom: 16px;
+  color: rgba(0, 0, 0, 0.88);
+  font-size: 14px;
+  vertical-align: top;
+  background-color: #ffffff;
+  border-radius: var(--global-border-radius);
+  cursor: pointer;
+  transition: all 0.3s;
+
+  &:not(.layui-checkcard-disabled):hover {
+    border-color: var(--global-primary-color);
+  }
+}
+
+.layui-checkcard-content {
+  display: flex;
+  padding: 10px;
+}
+
+.layui-checkcard-left {
+  padding-right: 10px;
+
+  .layui-checkcard-avatar {
+    width: 48px;
+    height: 48px;
+    display: inline-block;
+
+    img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      border-radius: var(--global-border-radius);
+    }
+  }
+}
+
+.layui-checkcard-right {
+  width: 100%;
+
+  &>div:not(:last-child) {
+    padding-bottom: 4px;
+  }
+
+  .layui-checkcard-desc {
+    color: rgba(0, 0, 0, 0.65);
+  }
+}
+
+.layui-checkcard-header {
+  display: flex;
+  align-items: center;
+
+  .layui-checkcard-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.88);
+  }
+
+  .layui-checkcard-is-extra {
+    flex: 1;
+  }
+}
+
+.layui-checkcard-is-cover {
+  padding: 4px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 6px;
+    object-fit: cover;
+  }
+}
+
+.layui-checkcard-is-description {
+  align-items: center;
+}
+
+.layui-checkcard-bordered {
+  border: 1px solid var(--global-neutral-color-3);
+}
+
+.layui-checkcard-checked {
+  border-color: var(--global-primary-color);
+}
+
+.layui-checkcard-checked:after {
+  position: absolute;
+  content: "";
+  border: 6px solid var(--global-primary-color);
+  border-top-right-radius: 2px;
+  right: 4px;
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+  top: 4px;
+}
+
+.layui-checkcard-disabled {
+  cursor: not-allowed;
+  background: rgba(0, 0, 0, 0.04);
+  border-color: #d9d9d9;
+
+  .layui-checkcard-avatar {
+    opacity: .25;
+  }
+
+  .layui-checkcard-title {
+    color: rgba(0, 0, 0, 0.25)
+  }
+
+  .layui-checkcard-desc {
+    color: rgba(0, 0, 0, 0.25)
+  }
+
+  &::after {
+    border: 6px solid rgba(0, 0, 0, 0.25);
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+  }
+}

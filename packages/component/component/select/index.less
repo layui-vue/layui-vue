@@ -1,0 +1,90 @@
+@import "../checkbox/index.less";
+@import "../input/index.less";
+@import "../dropdown/index.less";
+@import "../tagInput/index.less";
+
+.layui-select {
+  width: 220px;
+  cursor: pointer;
+}
+
+.layui-unselect * {
+  cursor: pointer;
+}
+
+.layui-select-content {
+  max-height: 300px;
+  padding: 5px 0px;
+  overflow: auto;
+}
+
+.layui-select .layui-icon-triangle-d {
+  transition: all .3s;
+  -webkit-transition: all .3s;
+  color: var(--global-neutral-color-8);
+}
+
+.layui-select .layui-icon-triangle-d.triangle {
+  transform: rotate(180deg);
+}
+
+.layui-select-content .layui-select-option {
+  padding: 0 10px;
+  line-height: 36px;
+  height: 36px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+
+.layui-select-content .layui-select-option-group-label {
+  padding: 10px 10px;
+  font-size: 14px;
+  color: gray;
+}
+
+.layui-select-content .layui-select-option.layui-disabled {
+  color: var(--global-neutral-color-6)!important;
+  cursor: not-allowed!important;  
+}
+
+.layui-select-content .layui-select-option .layui-form-checkbox[lay-skin="primary"] {
+  padding-left: 0px !important;
+}
+
+.layui-select-content .layui-select-option.layui-this ,
+.layui-select-content .layui-select-option.layui-this .layui-checkbox-label
+{
+  background-color: var(--global-neutral-color-2);
+  color: var(--global-checked-color);
+  font-weight: 700;
+}
+
+.layui-select-content .layui-select-option:hover {
+  background-color: var(--global-neutral-color-2);
+}
+
+.layui-select-content .layui-select-option .layui-checkbox{
+  margin-right: 10px;
+}
+
+.layui-select-search {
+  padding: 5px 10px;
+}
+
+.layui-select.has-content.has-clear:not(.has-disabled):hover .layui-input-suffix,
+.layui-select.has-content.has-clear:not(.has-disabled):hover .layui-tag-input-suffix {
+  display: none;
+}
+
+.layui-select-content::-webkit-scrollbar { width: 8px; height: 8px; }
+.layui-select-content::-webkit-scrollbar-thumb { border-radius: 10px; background-color: #eeeeee; }
+.layui-select-content::-webkit-scrollbar-thumb:hover { background-color: #dddddd; }
+
+.layui-select-content__header{
+  border-bottom: 1px solid var(--global-neutral-color-3);
+}
+.layui-select-content__footer{
+  border-top: 1px solid var(--global-neutral-color-3);
+}

@@ -1,0 +1,35 @@
+@width: 50px;
+@height: @width;
+
+.layui-backtop {
+  position: fixed;
+  right: 30px;
+  bottom: 40px;
+  width: @width;
+  height: @height;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 40px;
+  background-color: #9f9f9f;
+  color: #ffffff;
+  border-radius: var(--global-border-radius);
+  opacity: 0.95;
+  z-index: 999999;
+  :hover {
+    opacity: 0.85;
+  }
+}
+
+.layui-backtop-medium {
+  width: @width - 10px;
+  height: @height - 10px;
+  font-size: 30px;
+}
+
+.layui-backtop-small {
+  width: @width - 20px;
+  height: @height - 20px;
+  font-size: 20px;
+}
