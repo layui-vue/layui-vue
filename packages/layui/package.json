@@ -1,0 +1,80 @@
+{
+  "name": "@layui/layui-vue",
+  "version": "2.17.6",
+  "author": "就眠儀式",
+  "license": "MIT",
+  "description": "a component library for Vue 3 base on layui-vue",
+  "homepage": "http://www.layui-vue.com",
+  "type": "module",
+  "main": "es/index.js",
+  "unpkg": "umd/index.js",
+  "jsdelivr": "umd/index.js",
+  "web-types": "types/web-types.json",
+  "types": "types/index.d.ts",
+  "style": "lib/index.css",
+  "vetur": {
+    "tags": "types/tags.json",
+    "attributes": "types/attributes.json"
+  },
+  "sideEffects": [
+    "lib/*.css",
+    "es/**/*.css",
+    "umd/*.css"
+  ],
+  "keywords": [
+    "vue",
+    "vue-component",
+    "component-library",
+    "layui-vue",
+    "layui"
+  ],
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./types/index.d.ts",
+        "default": "./es/index.js"
+      }
+    },
+    "./lib/": "./lib/",
+    "./es/": "./es/",
+    "./types/*": [
+      "./types/*.d.ts"
+    ]
+  },
+  "scripts": {
+    "build": "npm run build:all && npm run build:es && npm run build:umd && npm run build:dts",
+    "build:all": "vite build --emptyOutDir --config ./script/build.all.ts",
+    "build:es": "vite build --emptyOutDir --config ./script/build.es.ts",
+    "build:umd": "vite build --emptyOutDir --config ./script/build.umd.ts",
+    "build:dts": "vue-tsc -p tsconfig.build.json --declaration --emitDeclarationOnly",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@babel/types": "7.21.0",
+    "@ctrl/tinycolor": "^3.4.1",
+    "@layui/icons-vue": "workspace:*",
+    "@layui/layer-vue": "workspace:*",
+    "@rollup/plugin-terser": "0.4.4",
+    "@types/qrcode": "1.5.0",
+    "@umijs/ssr-darkreader": "^4.9.45",
+    "@vueuse/core": "8.7.3",
+    "async-validator": "^4.1.1",
+    "cropperjs": "^1.5.12",
+    "dayjs": "^1.11.10",
+    "evtd": "^0.2.3",
+    "jsbarcode": "3.11.5",
+    "qrcode": "1.5.0",
+    "vue-i18n": "9.6.3"
+  },
+  "files": [
+    "lib",
+    "es",
+    "umd",
+    "types"
+  ],
+  "browserslist": [
+    "current node",
+    "last 2 versions and > 2%",
+    "ie > 10"
+  ]
+}

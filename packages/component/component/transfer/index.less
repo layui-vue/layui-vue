@@ -1,0 +1,127 @@
+@import "../button/index.less";
+@import "../checkbox/index.less";
+
+:root {
+  --transfer-box-border-radius: var(--global-border-radius);
+}
+
+.layui-transfer {
+  display: flex;
+}
+
+.layui-transfer .layui-btn + .layui-btn {
+  margin-left: 0;
+}
+
+.layui-transfer-box,
+.layui-transfer-header,
+.layui-transfer-search {
+  border-width: 0;
+  border-style: solid;
+  border-color: #eee;
+}
+
+.layui-transfer-box {
+  position: relative;
+  border-width: 1px;
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--transfer-box-border-radius);
+  background-color: #fff;
+}
+
+.layui-transfer-box .layui-form-checkbox {
+  width: 100%;
+  margin: 0 !important;
+}
+
+.layui-transfer-header {
+  height: 38px;
+  line-height: 38px;
+  padding: 0 10px;
+  border-bottom-width: 1px;
+  flex: 0;
+}
+
+.layui-transfer-search {
+  position: relative;
+  padding: 10px;
+  border-bottom-width: 1px;
+  flex: 0;
+}
+
+.layui-transfer-search .layui-input {
+  height: 35px;
+  padding-left: 2px;
+  font-size: 13px;
+  letter-spacing: 1px;
+}
+
+.layui-transfer-search .layui-icon-search {
+  color: #666;
+}
+
+.layui-transfer-active {
+  margin: 0 15px;
+}
+
+.layui-transfer-active .layui-btn {
+  display: block;
+  margin: 0;
+  padding: 0 15px;
+  background-color: var(--global-checked-color);
+  border-color: var(--global-checked-color);
+  color: #fff;
+}
+
+.layui-transfer-active .layui-btn-disabled {
+  background-color: #fbfbfb;
+  border-color: #eee;
+  color: #d2d2d2;
+}
+
+.layui-transfer-active .layui-btn:first-child {
+  margin-bottom: 15px;
+}
+
+.layui-transfer-active .layui-btn .layui-icon {
+  margin: 0;
+  font-size: 14px !important;
+}
+
+.layui-transfer-data {
+  padding: 5px 0;
+  overflow: auto;
+  flex: 1;
+}
+
+.layui-transfer-data li {
+  height: 32px;
+  line-height: 32px;
+  padding: 0 10px;
+}
+
+.layui-transfer-data li:hover {
+  background-color: #f6f6f6;
+  transition: 0.5s all;
+}
+
+.layui-transfer-data .layui-none {
+  padding: 15px 10px;
+  text-align: center;
+  color: #999;
+}
+
+.layui-transfer-active {
+  display: flex;
+  align-items: center;
+  justify-items: center;
+}
+
+.layui-transfer-footer {
+  flex: 0;
+  height: 38px;
+  line-height: 38px;
+  border-top: 1px solid #eee;
+  padding: 0 10px;
+}

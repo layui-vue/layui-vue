@@ -9,17 +9,14 @@
   ],
   "scripts": {
     "dev": "pnpm -C play dev",
-    "dev:docs": "pnpm -C docs/document-component dev",
-    "dev:layer": "pnpm -C docs/document-layer dev",
-    "test": "pnpm -C packages/component test",
-    "build": "pnpm run build:icons && pnpm run build:layer && pnpm run build:component && pnpm run build:document",
-    "build:document": " pnpm run build:document-component && pnpm run build:document-layer",
-    "build:document-component": "pnpm -C docs/document-component build",
-    "build:document-layer": "pnpm -C docs/document-layer build",
-    "build:component": "pnpm -C packages/component build",
+    "dev:docs": "pnpm -C docs dev",
+    "test": "vitest run",
+    "build": "pnpm run build:icons && pnpm run build:layer && pnpm run build:component && pnpm run build:docs",
+    "build:docs": "pnpm -C docs build",
+    "build:component": "pnpm -C packages/layui build",
     "build:icons": "pnpm -C packages/icons build",
     "build:layer": "pnpm -C packages/layer build",
-    "publish:component": "pnpm -C packages/component publish",
+    "publish:component": "pnpm -C packages/layui publish",
     "generate:icons": "pnpm -C packages/icons generate",
     "lint:eslint": "eslint 'packages/**/*.{vue,ts,tsx}' --fix",
     "lint:prettier": "prettier --write \"packages/**/*.{vue,ts}\"",
@@ -27,9 +24,11 @@
     "commit": "git add . && git-cz && git push"
   },
   "dependencies": {
+    "@layui/component": "workspace:*",
     "@layui/icons-vue": "workspace:*",
     "@layui/layer-vue": "workspace:*",
     "@layui/layui-vue": "workspace:*",
+    "@layui/json-schema-form": "workspace:*",
     "vue": "3.3.4"
   },
   "peerDependencies": {

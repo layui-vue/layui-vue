@@ -6,14 +6,13 @@
 
 为了更好地理解项目结构，请参考以下目录说明：
 
-- `docs`：文档目录
-  - `document-component`：官方文档
-  - `document-layer`：弹层文档
+- `docs`：官方文档
 - `packages`：组件源码目录
   - `component`：`Layui-vue` 组件源码
   - `json-schema-form`：`json-schema-form` 组件源码
   - `icons`：图标源码
-  - `layer`：弹层源码
+  - `layer`：`Layer-vue` 弹层源码
+  - `layui`: `Layui-vue` publish目录
 - `play`：组件本地调试目录
 
 ## 提交 PR 的步骤

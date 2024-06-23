@@ -19,7 +19,6 @@ import {
   onMounted,
   onUnmounted,
   StyleValue,
-  reactive,
 } from "vue";
 import {
   nextId,
@@ -42,6 +41,7 @@ import {
 import { useMove, useResize } from "../composable/useDragable";
 import { nextIndex } from "../tokens";
 import "../theme/index.css";
+import "@layui/component/theme/index.less";
 
 export interface LayerProps {
   modelValue?: boolean;
@@ -709,17 +709,7 @@ let resizeObserver: ResizeObserver | undefined;
 
 const listenDocument = function () {
   nextTick(() => {
-    if (
-      contentRef.value &&
-      resizeObserver === undefined &&
-      (props.area == "auto" ||
-        (typeof props.area == "string" && props.area != "auto") ||
-        (Array.isArray(props.area) &&
-          props.area[1] &&
-          props.area[1] == "auto") ||
-        (Array.isArray(props.area) && props.area[1] == undefined)) &&
-      type != 6
-    ) {
+    if (contentRef.value && !resizeObserver && type != 6) {
       resizeObserver = new ResizeObserver((e) => {
         if (layerRef.value) {
           offset.value = calculateOffset(
@@ -740,7 +730,7 @@ const listenDocument = function () {
  * Remove 删除 document 元素
  */
 const removeListener = function () {
-  if (resizeObserver != undefined && contentRef.value) {
+  if (resizeObserver && contentRef.value) {
     resizeObserver.unobserve(contentRef.value);
     resizeObserver = undefined;
   }
