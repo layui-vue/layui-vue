@@ -2,7 +2,6 @@
 import { computed, ref } from "vue";
 import LayInput from "@layui/component/component/input/index";
 import LayTextarea from "@layui/component/component/textarea/index";
-import "@layui/component/theme/index.less";
 
 export interface PromptProps {
   promptValue?: string;

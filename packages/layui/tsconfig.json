@@ -13,7 +13,5 @@
       "declarationDir": "types",
       "jsx": "preserve",
       "lib": ["ESNext","DOM"]
-    },
-    "include": ["../component/**/*","shims-vue.d.ts"],
-    "exclude": ["node_modules", "../component/**/__tests__/**"]
+    }
 }

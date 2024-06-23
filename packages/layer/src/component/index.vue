@@ -19,7 +19,6 @@ import {
   onMounted,
   onUnmounted,
   StyleValue,
-  reactive,
 } from "vue";
 import {
   nextId,
@@ -42,6 +41,7 @@ import {
 import { useMove, useResize } from "../composable/useDragable";
 import { nextIndex } from "../tokens";
 import "../theme/index.css";
+import "@layui/component/theme/index.less";
 
 export interface LayerProps {
   modelValue?: boolean;

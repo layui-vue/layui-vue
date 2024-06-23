@@ -6,5 +6,5 @@
       "emitDeclarationOnly": true
     },
     "include": ["../component/**/*","shims-vue.d.ts"],
-    "exclude": ["node_modules", "package.json"]
+    "exclude": ["node_modules", "../component/**/__tests__/**"]
   }
