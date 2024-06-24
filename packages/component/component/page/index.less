@@ -1,0 +1,214 @@
+@import "../dropdown/index.less";
+@import "../select/index.less";
+@import "../button/index.less";
+@import "../input/index.less";
+
+.disabled() {
+  cursor: not-allowed;
+  color: @dis-color;
+  background-color: #fff;
+}
+@border-color: var(--global-neutral-color-3);
+@active-color: var(--global-primary-color);
+@dis-color: rgba(0, 0, 0, 0.25);
+@height: 30px;
+
+.layui-page {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  flex-direction: row;
+  white-space: nowrap;
+  // flex-wrap: wrap;
+  .layui-page-prev {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: @height;
+    box-sizing: border-box;
+    padding: 0px 10px;
+    border: 1px solid @border-color;
+    border-radius: 2px 0px 0 2px;
+    cursor: pointer;
+    transition: all 0.2s;
+    &:hover {
+      color: @active-color;
+    }
+    &.is-disabled {
+      .disabled();
+    }
+  }
+
+  .layui-pager {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 -1px;
+    .layui-pager-number {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 16px;
+      border: 1px solid @border-color;
+      // border-left: none;
+      cursor: pointer;
+      height: @height;
+      box-sizing: border-box;
+      &:hover {
+        color: @active-color;
+      }
+      &:not(:first-child) {
+        border-left: none;
+      }
+      // &:last-child {
+      //   border-right: none;
+      // }
+      // &:first-child {
+      //   // border-left: none;
+      // }
+      &.is-active {
+        background-color: @active-color;
+        // border: none;
+        color: #fff;
+        border-radius: 2px;
+        // padding: 7px 15px;
+      }
+    }
+  }
+  .layui-page-next {
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: @height;
+    border: 1px solid @border-color;
+    box-sizing: border-box;
+    border-radius: 0px 2px 2px 0px;
+    cursor: pointer;
+    transition: all 0.2s;
+    // border-left: none;
+    &:hover {
+      color: @active-color;
+    }
+    &.is-disabled {
+      .disabled();
+    }
+  }
+
+  .layui-page-total-text {
+    padding: 0 10px;
+  }
+}
+.layui-page-limits {
+  width: 80px;
+  margin: 0 10px;
+  .layui-select {
+    width: 100%;
+    .layui-input {
+      padding: 0 6px;
+      height: @height;
+      input {
+        padding: 0;
+        text-align: center;
+      }
+      .layui-input-suffix {
+        padding: 0;
+        // padding-right: 4px;
+      }
+      &:hover {
+        border-color: @active-color;
+      }
+    }
+  }
+}
+.layui-page-refresh {
+  margin: 0 0 0 10px;
+  &:hover {
+    cursor: pointer;
+    color: @active-color;
+  }
+}
+.layui-pager-jumper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #999;
+  margin: 0 10px;
+  .layui-input.layui-input[size="md"] {
+    width: 40px;
+    height: @height;
+    input {
+      padding: 0 4px;
+      text-align: center;
+    }
+    &:hover {
+      border-color: @active-color;
+    }
+  }
+  .layui-btn {
+    color: #000;
+    &:hover {
+      border-color: @active-color;
+      color: @active-color;
+    }
+  }
+}
+// }
+
+.layui-page-simple {
+  .layui-pager-jumper {
+    // margin-left: 10px;
+    // margin-right: 10px;
+    // display: flex;
+    // align-items: center;
+    // justify-content: center;
+    // gap: 10px;
+    font-size: 14px;
+    color: #333;
+    .layui-input[size="md"] {
+      width: 60px;
+      padding: 0 4px;
+      input {
+        padding: 0;
+        text-align: center;
+      }
+    }
+  }
+}
+
+:where(.layui-page).is-disabled {
+  cursor: not-allowed;
+  & > .layui-page-total-text {
+    color: @dis-color;
+  }
+  & > .layui-pager .layui-pager-number {
+    .disabled();
+    &:hover {
+      color: @dis-color;
+    }
+  }
+  & > .layui-pager .layui-pager-number.is-active {
+    background-color: rgb(250, 250, 252);
+    color: rgba(194, 194, 194, 1);
+  }
+  & .layui-page-prev,
+  & .layui-page-next {
+    .disabled();
+    &:hover {
+      color: @dis-color;
+    }
+  }
+  .layui-page-refresh {
+    color: @dis-color;
+    cursor: not-allowed;
+  }
+  & .layui-pager-jumper {
+    color: @dis-color;
+  }
+}
+
+.layui-dropdown-menu {
+  li {
+    justify-content: center;
+  }
+}

@@ -1,0 +1,143 @@
+ @tagColors: {
+   primary: var(--global-primary-color);
+   normal: #1e9fff;
+   warm: #ffb800;
+   danger: #ff5722;
+ }
+
+ @tagSizes: lg, md, sm, xs;
+
+ @tag-size-default: 26px;
+ @tag-size-default-font-size: 14px;
+ @tag-size-lg: @tag-size-default + 4px;
+ @tag-size-md: @tag-size-default;
+ @tag-size-sm: @tag-size-default - 4px;
+ @tag-size-xs: @tag-size-default - 4px * 2;
+ @tag-size-lg-font-size: @tag-size-default-font-size;
+ @tag-size-md-font-size: @tag-size-default-font-size;
+ @tag-size-sm-font-size: @tag-size-default-font-size - 2px;
+ @tag-size-xs-font-size: @tag-size-default-font-size - 2px;
+ @tag-border-width: 1px;
+
+ .layui-tag {
+   --layui-tag-bg-color: #fafafa;
+   --layui-tag-border-color: #f0f0f0;
+   --layui-tag-hover-color: #FFF;
+   --layui-tag-text-color: currentColor;
+   display: inline-flex;
+   align-items: baseline;
+   vertical-align: middle;
+   box-sizing: border-box;
+   height: @tag-size-md;
+   line-height: @tag-size-md;
+   padding: 0 8px;
+   font-size: @tag-size-md-font-size;
+   font-weight: 500;
+   color: var(--layui-tag-text-color);
+   background-color: var(--layui-tag-bg-color);
+   border-width: @tag-border-width;
+   border-style: solid;
+   border-color: transparent;
+   border-radius: var(--global-border-radius);
+
+   &-icon {
+     margin-right: 4px;
+   }
+
+   &-bordered {
+     border-color: var(--layui-tag-border-color);
+   }
+
+   &-disabled {
+     opacity: 0.4;
+     cursor: not-allowed;
+   }
+
+   &-disabled &-close-icon {
+     .layui-icon {
+
+       &:hover {
+         cursor: not-allowed !important;
+         opacity: 1;
+       }
+     }
+   }
+
+   &-shap {
+     &-square {
+       border-radius: var(--global-border-radius);
+     }
+
+     &-round {
+       border-radius: 12px;
+     }
+   }
+
+   & &-text {
+      overflow: hidden; 
+      text-overflow: ellipsis; 
+      white-space: nowrap
+   }
+
+   & &-close-icon {
+     margin-left: 4px;
+     font-size: @tag-size-default-font-size;
+
+     .layui-icon {
+
+       &:hover {
+         cursor: pointer;
+         opacity: 0.5;
+       }
+     }
+   }
+
+   each(@tagSizes, {
+     &-size-@{value} {
+       height: ~'@{tag-size-@{value}}';
+       font-size: ~'@{tag-size-@{value}-font-size}';
+       line-height: ~'@{tag-size-@{value}}';
+     }
+
+     .layui-icon {
+       font-size: ~'@{tag-size-@{value}-font-size}';
+     }
+
+   }) 
+   
+   each(@tagColors, {
+   &-@{key} {
+     --layui-tag-bg-color: @value;
+     --layui-tag-border-color: transparent;
+     --layui-tag-hover-color: @value;
+     --layui-tag-text-color: #ffffff;
+
+     &-bordered {
+       --layui-tag-border-color: @value;
+     }
+   }
+
+   &-@{key}.layui-tag-variant-light {
+     --layui-tag-bg-color: adjust(@value, 90%);
+     --layui-tag-border-color: transparent;
+     --layui-tag-hover-color: adjust(@value, 90%);
+     --layui-tag-text-color: @value;
+
+     &-bordered {
+       --layui-tag-border-color: adjust(@value, 50%);
+     }
+   }
+
+   &-@{key}.layui-tag-variant-plain {
+     --layui-tag-bg-color: transparent;
+     --layui-tag-hover-color: transparent;
+     --layui-tag-text-color: @value;
+     --layui-tag-border-color: transparent;
+
+     &-bordered {
+       --layui-tag-border-color: @value;
+     }
+   }
+
+ })
+ }

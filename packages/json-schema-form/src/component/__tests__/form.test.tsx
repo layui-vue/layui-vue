@@ -33,7 +33,7 @@ describe("LayJsonSchemaForm", () => {
           },
         });
 
-        return () => <LayForm schema={schema} label-width={"90"}></LayForm>;
+        return () => <LayForm schema={schema} label-width={"90px"}></LayForm>;
       },
     });
 

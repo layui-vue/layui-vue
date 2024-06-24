@@ -1,0 +1,159 @@
+.layui-row:after,
+.layui-row:before {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.generate-space(@a) {
+
+  .layui-col-space@{a} {
+    margin: -0.5px * @a;
+  }
+
+  .layui-col-space@{a} > * {
+    padding: 0.5px * @a;
+  }
+  
+}
+
+.loop-generate-space(@index) when (@index <=30) {
+  .generate-space(@index);
+  .loop-generate-space(@index + 1);
+}
+
+.loop-generate-space(0);
+
+.generate-col-xs(@a) {
+  .layui-col-xs@{a} {
+    float: left;
+    display: block;
+    position: relative;
+    box-sizing: border-box;
+    width: 100% * (@a / 24);
+  }
+
+  .layui-col-xs-offset@{a} {
+    margin-left: 100% * (@a / 24);
+  }
+
+  .layui-col-xs-pull@{a} {
+    right: 100% * (@a / 24);
+  }
+
+  .layui-col-xs-push@{a} {
+    left: 100% * (@a / 24);
+  }
+}
+
+.generate-col-sm(@a) {
+  .layui-col-sm@{a} {
+    float: left;
+    display: block;
+    position: relative;
+    box-sizing: border-box;
+    width: 100% * (@a / 24);
+  }
+
+  .layui-col-sm-offset@{a} {
+    margin-left: 100% * (@a / 24);
+  }
+
+  
+  .layui-col-sm-pull@{a} {
+    right: 100% * (@a / 24);
+  }
+
+  .layui-col-sm-push@{a} {
+    left: 100% * (@a / 24);
+  }
+}
+
+.generate-col-md(@a) {
+  .layui-col-md@{a} {
+    float: left;
+    display: block;
+    position: relative;
+    box-sizing: border-box;
+    width: 100% * (@a / 24);
+  }
+
+  .layui-col-md-offset@{a} {
+    margin-left: 100% * (@a / 24);
+  }
+
+  .layui-col-md-pull@{a} {
+    right: 100% * (@a / 24);
+  }
+
+  .layui-col-md-push@{a} {
+    left: 100% * (@a / 24);
+  }
+}
+
+.generate-col-lg(@a) {
+
+  .layui-col-lg@{a} {
+    float: left;
+    display: block;
+    position: relative;
+    box-sizing: border-box;
+    width: 100% * (@a / 24);
+  }
+
+  .layui-col-lg-offset@{a} {
+    margin-left: 100% * (@a / 24);
+  }
+
+  .layui-col-lg-pull@{a} {
+    right: 100% * (@a / 24);
+  }
+
+  .layui-col-lg-push@{a} {
+    left: 100% * (@a / 24);
+  }
+}
+
+.loop-generate-col-xs(@index) when (@index <=24) {
+  .generate-col-xs(@index);
+  .loop-generate-col-xs(@index + 1);
+}
+
+.loop-generate-col-sm(@index) when (@index <=24) {
+  .generate-col-sm(@index);
+  .loop-generate-col-sm(@index + 1);
+}
+
+.loop-generate-col-md(@index) when (@index <=24) {
+  .generate-col-md(@index);
+  .loop-generate-col-md(@index + 1);
+}
+
+.loop-generate-col-lg(@index) when (@index <=24) {
+  .generate-col-lg(@index);
+  .loop-generate-col-lg(@index + 1);
+}
+
+@media screen and (max-width: 768px) {
+  .loop-generate-col-xs(0);
+}
+
+@media screen and (min-width: 768px) {
+  .loop-generate-col-sm(0);
+}
+
+@media screen and (min-width: 992px) {
+  .loop-generate-col-md(0);
+}
+
+@media screen and (min-width: 1200px) {
+  .loop-generate-col-lg(0);
+}
+
+
+.layui-col-xs0,
+.layui-col-sm0,
+.layui-col-md0,
+.layui-col-lg0 {
+  padding: 0px;
+}

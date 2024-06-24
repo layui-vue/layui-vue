@@ -1,12 +1,12 @@
 <script lang="ts" setup>
 import { computed, ref } from "vue";
-import LayInput from "@layui/layui-vue/es/input/index";
-import LayTextarea from "@layui/layui-vue/es/textarea/index";
+import LayInput from "@layui/component/component/input/index";
+import LayTextarea from "@layui/component/component/textarea/index";
 
 export interface PromptProps {
   promptValue?: string;
   formType?: 0 | 1 | 2 | "text" | "password" | "textarea";
-  maxLength?: number | "";
+  maxLength?: number;
   placeholder?: string;
 }
 

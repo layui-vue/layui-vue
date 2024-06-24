@@ -1,0 +1,33 @@
+@import "../input/index.less";
+@import "../dropdown/index.less";
+@import "../tagInput/index.less";
+@import "../tree/index.less";
+
+.layui-tree-select {
+  width: 220px;
+}
+
+.layui-tree-select-content {
+  padding: 5px;
+  max-height: 300px;
+  overflow: auto;
+}
+
+.layui-tree-select .layui-icon-triangle-d {
+  transition: all 0.3s;
+  -webkit-transition: all 0.3s;
+  color: var(--global-neutral-color-8);
+}
+
+.layui-tree-select .layui-icon-triangle-d.triangle {
+  transform: rotate(180deg);
+}
+
+.layui-tree-select.has-content.has-clear:not(.layui-disabled):hover .layui-input-suffix,
+.layui-tree-select.has-content.has-clear:not(.layui-disabled):hover .layui-tag-input-suffix {
+  display: none;
+}
+
+.layui-tree-select-content::-webkit-scrollbar { width: 8px; height: 8px; }
+.layui-tree-select-content::-webkit-scrollbar-thumb { border-radius: 10px; background-color: #eeeeee; }
+.layui-tree-select-content::-webkit-scrollbar-thumb:hover { background-color: #dddddd; }
