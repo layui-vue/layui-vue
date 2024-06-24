@@ -6,12 +6,12 @@ export default defineConfig({
   resolve: {
     alias: {
       "/@src": path.resolve(__dirname, "./src"),
-      "layui-component": path.resolve(__dirname, "../../packages/component"),
-      "layui-vue": path.resolve(__dirname, "../../packages/layui"),
-      "layui-layer": path.resolve(__dirname, "../../packages/layer"),
+      "layui-component": path.resolve(__dirname, "../packages/component"),
+      "layui-vue": path.resolve(__dirname, "../packages/layui"),
+      "layui-layer": path.resolve(__dirname, "../packages/layer"),
       "json-schema-form": path.resolve(
         __dirname,
-        "../../packages/json-schema-form"
+        "../packages/json-schema-form"
       ),
     },
   },

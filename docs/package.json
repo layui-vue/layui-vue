@@ -10,28 +10,28 @@
     "build": "vite build"
   },
   "dependencies": {
-    "vue-router": "^4.0.15",
-    "vue-i18n": "^9.1.10",
-    "nprogress": "^0.2.0",
     "@vueuse/core": "^8.7.3",
+    "axios": "^0.27.2",
+    "nprogress": "^0.2.0",
     "pinia": "^2.0.14",
     "pinia-plugin-persist": "^1.0.0",
-    "axios": "^0.27.2"
+    "vue-i18n": "^9.1.10",
+    "vue-router": "^4.0.15"
   },
   "devDependencies": {
-    "@types/markdown-it": "^12.2.3",
-    "@types/markdown-it-container": "^2.0.4",
-    "@types/prettier": "^2.4.4",
     "@stackblitz/sdk": "^1.8.0",
+    "@types/linkify-it": "3.0.2",
+    "@types/markdown-it": "^12.2.3",
+    "@types/prettier": "^2.4.4",
     "escape-html": "^1.0.3",
+    "fflate": "^0.7.3",
     "markdown-it-container": "^3.0.0",
     "prismjs": "^1.28.0",
     "rimraf": "^3.0.2",
     "rollup": "^2.70.1",
     "typescript": "^4.6.3",
-    "vite-plugin-md": "^0.13.1",
     "vite": "2.9.8",
-    "fflate": "^0.7.3"
+    "vite-plugin-md": "^0.13.1"
   },
   "files": [
     "types",

@@ -5,7 +5,7 @@
   "homepage": "http://www.layui-vue.com",
   "workspaces": [
     "packages/*",
-    "docs/*"
+    "docs"
   ],
   "scripts": {
     "dev": "pnpm -C play dev",
