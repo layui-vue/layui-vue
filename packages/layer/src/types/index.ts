@@ -1,4 +1,4 @@
-import type { StyleValue } from "vue";
+import type { StyleValue, VNodeTypes } from "vue";
 
 export type StringObject = Record<string, unknown>;
 
@@ -18,3 +18,5 @@ export type ImgListType = {
   alt?: string;
   thumb?: string;
 };
+
+export type PropsContentType = VNodeTypes | (() => VNodeTypes);

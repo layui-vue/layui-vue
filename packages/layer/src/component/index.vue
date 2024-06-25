@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { BtnType, ImgListType } from "../types";
+import type { BtnType, ImgListType, PropsContentType } from "../types";
 
 import Shade from "./Shade.vue";
 import Iframe from "./Iframe.vue";
@@ -14,7 +14,6 @@ import {
   watch,
   computed,
   useSlots,
-  VNodeTypes,
   nextTick,
   onMounted,
   onUnmounted,
@@ -37,9 +36,12 @@ import {
   calculateNotifOffset,
   removeNotifiyFromQueen,
   getNotifyAnimationClass,
+  renderContent,
 } from "../utils";
 import { useMove, useResize } from "../composable/useDragable";
 import { nextIndex } from "../tokens";
+import LayRender from "@layui/component/component/_components/render";
+
 import "../theme/index.css";
 import "@layui/component/theme/index.less";
 
@@ -64,7 +66,7 @@ export interface LayerProps {
     | "prompt";
   title?: string | boolean | Function;
   titleStyle?: string | StyleValue;
-  content?: string | Function | VNodeTypes;
+  content?: PropsContentType;
   isHtmlFragment?: boolean;
   offset?: string | string[];
   area?: string | string[];
@@ -548,18 +550,6 @@ const shadeHandle = () => {
 };
 
 /**
- * 获取内容
- * <p>
- * @param content 文本 / 方法
- */
-const renderContent = function (content: any) {
-  if (content instanceof Function) {
-    return content();
-  }
-  return content;
-};
-
-/**
  * 弹层图标
  * <p>
  * @param icon 图标
@@ -854,10 +844,14 @@ defineExpose({ reset, open, close, full, min: mini, revert });
               <template v-if="isHtmlFragment">
                 <div
                   class="html-fragment"
-                  v-html="renderContent(props.content)"
+                  v-html="renderContent(props.content as string)"
                 ></div>
               </template>
-              <template v-else>{{ renderContent(props.content) }}</template>
+              <template v-else>
+                <LayRender
+                  :render="() => renderContent(props.content as PropsContentType)"
+                ></LayRender>
+              </template>
             </template>
           </template>
           <template v-if="type === 7">
@@ -868,7 +862,7 @@ defineExpose({ reset, open, close, full, min: mini, revert });
               :placeholder="props.placeholder"
             ></Prompt>
           </template>
-          <Iframe v-if="type === 2" :src="props.content"></Iframe>
+          <Iframe v-if="type === 2" :src="props.content as string"></Iframe>
           <Photos
             v-if="type === 5"
             :imgList="props.imgList"
@@ -879,7 +873,7 @@ defineExpose({ reset, open, close, full, min: mini, revert });
             v-if="type === 6"
             @close="closeHandle"
             :title="props.title"
-            :content="props.content"
+            :content="props.content as PropsContentType"
             :isHtmlFragment="props.isHtmlFragment"
             :icon="props.icon"
             :iconClass="iconClass"
