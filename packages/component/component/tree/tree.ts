@@ -252,9 +252,9 @@ class Tree {
       lazy,
     } = this.config;
 
-    const traverse = function (node) {
-      node.forEach((child) => {
-        const childNodes = child[children];
+    const traverse = function (node: TreeData[]) {
+      node.forEach((child: TreeData) => {
+        const childNodes = child[children] as TreeData[];
         child.visible = searchNodeMethod(child, value);
 
         traverse(childNodes);
