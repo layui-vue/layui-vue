@@ -695,7 +695,7 @@ const data9 = ref([{
 | default-expand-all               | 是否默认展开所有节点，开启 `lazy` 懒加载此参数将失效     | false                                                                                  |         |
 | lazy                             | 是否懒加载子节点，需与 `load` 方法结合使用               | false                                                                                  | 2.16.2  |
 | load                             | 加载子树数据的方法，仅当 `lazy` 属性为 true 时生效       | function(node, resolve)，node 为当前点击的节点，resolve 为数据加载完成的回调(必须调用) | 2.16.2  |
-| searchNodeMethod                 | 过滤树节点，配合Exposes事件中的`filter` 使用    | `(node, value) => boolean`，node 节点，value 内容 | 2.18.0  |
+| searchNodeMethod                 | 过滤树节点，配合Exposes事件中的`filter` 使用    | `(node, value) => boolean`，node 节点，value 内容 | 2.17.7  |
 
 
 :::
@@ -723,7 +723,7 @@ const data9 = ref([{
 | Name       | Description     | Accepted Params |Version |
 | ---------- | --------------- | --------------- | --------------- |
 | node-click | 节点 click 事件 | node, checked         |      |
-| check-change | `showCheckbox`为true时，点击checkbox触发 | node, checked   |   `2.18.0`   |
+| check-change | `showCheckbox`为true时，点击checkbox触发 | node, checked   |   `2.17.7`   |
 
 :::
 
@@ -734,7 +734,7 @@ const data9 = ref([{
 
 | Name       | Description     | Accepted Params |Version |
 | ---------- | --------------- | --------------- |--------------- |
-| filter |  过滤树节点，配合`props.searchNodeMethod` |    过滤内容       |   `2.18.0`       |
+| filter |  过滤树节点，配合`props.searchNodeMethod` |    过滤内容       |   `2.17.7`       |
 
 :::
 

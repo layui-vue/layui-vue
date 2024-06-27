@@ -436,9 +436,9 @@ export default {
 | showDots       | 是否显示断点                          | `Boolean`         | -      | `false`   
 | is-follow-mark       | 默认只能拖拽到刻度上, 配合mark使用。     | `Boolean`         | -      | `true`
 | reverse       |  反向     | `Boolean`         | -      | `false`                                        |        |
-| tooltip-props   | tooltip 相关配置属性 | `Object` | -      | `{isCanHide:true,disabled:false,placement:'top',isDark:false}`  |  `2.18.0`~~isCanHide~~|
+| tooltip-props   | tooltip 相关配置属性 | `Object` | -      | `{isCanHide:true,disabled:false,placement:'top',isDark:false}`  |  `2.17.7`~~isCanHide~~|
 | mark           | 刻度                                  | `object`          | -      | `{ label: string、 VNode ,  style: object   }` |
-| alwayShowTooltip  `2.18.0`       |   是否一直显示tooltip               | `boolean`          | -      | `false` |  |
+| alwayShowTooltip  `2.17.7`       |   是否一直显示tooltip               | `boolean`          | -      | `false` |  |
 | format-tooltip | 格式化提示信息                        | `function(value)` | -      | `undefined`                                    |        |
 
 :::
