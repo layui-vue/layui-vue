@@ -19,17 +19,15 @@ export const useSliderBar = (props: SliderBarProps, emit: any) => {
     updateDragging,
     min,
     max,
-    tooltipProp,
   } = useSliderProvide();
-  const isCanHide = ref(tooltipProp.isCanHide);
   const tooltip = shallowRef<any>(null);
   const dragging = ref(false);
   const enableFormat = computed(() => {
-    return formatTooltip.value instanceof Function;
+    return formatTooltip?.value instanceof Function;
   });
   const formatValue = computed(() => {
     return (
-      (enableFormat.value && formatTooltip.value(props.modelValue)) ||
+      (enableFormat.value && formatTooltip?.value?.(props.modelValue)) ||
       props.modelValue
     );
   });
@@ -57,9 +55,6 @@ export const useSliderBar = (props: SliderBarProps, emit: any) => {
     if (disabled.value) return;
     event.preventDefault();
     dragging.value = true;
-    if (isCanHide.value) {
-      tooltipProp.isCanHide = false;
-    }
     window.addEventListener("mousemove", onDragging);
     window.addEventListener("mouseup", onDragEnd);
   };
@@ -76,11 +71,6 @@ export const useSliderBar = (props: SliderBarProps, emit: any) => {
   };
   const onDragEnd = () => {
     if (dragging.value) {
-      if (!isCanHide.value) {
-        tooltipProp.isCanHide = false;
-      } else {
-        tooltipProp.isCanHide = true;
-      }
       setTimeout(() => {
         dragging.value = false;
       }, 0);
@@ -89,6 +79,7 @@ export const useSliderBar = (props: SliderBarProps, emit: any) => {
     }
   };
   return {
+    dragging,
     formatValue,
     setUpDatePos,
     wrapperStyle,

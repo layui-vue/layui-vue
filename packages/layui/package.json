@@ -52,6 +52,7 @@
   "dependencies": {
     "@babel/types": "7.21.0",
     "@ctrl/tinycolor": "^3.4.1",
+    "@floating-ui/dom": "1.6.5",
     "@layui/icons-vue": "workspace:*",
     "@layui/layer-vue": "workspace:*",
     "@rollup/plugin-terser": "0.4.4",

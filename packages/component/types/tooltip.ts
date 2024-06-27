@@ -7,7 +7,6 @@ export interface LayTooltipContext {
   position?: string;
   isDark?: boolean;
   disabled?: boolean;
-  isCanHide?: boolean;
   isAutoShow?: boolean;
   visible?: boolean;
   trigger?: PopperTrigger | PopperTrigger[];

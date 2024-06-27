@@ -1,6 +1,6 @@
 import { createApp } from "vue";
-import layui from "../packages/component/src/index";
-import layer from "../packages/layer/src/index";
+import layui from "../packages/component/index";
+// import layer from "../packages/layer/src/index";
 
 // import LayJsonSchemaForm from "../packages/json-schema-form/src/index";
 // import LayJsonSchemaForm from "../packages/json-schema-form/lib/json-schema-form.es.js";
@@ -18,7 +18,7 @@ import layer from "../packages/layer/src/index";
 
   app.use(layui);
 
-  app.use(layer);
+  // app.use(layer);
 
   // app.use(LayJsonSchemaForm);
 

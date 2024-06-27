@@ -60,6 +60,9 @@
 
 <script lang="ts" setup>
 import "./index.less";
+
+import type { SliderProps as _SliderProps } from "./types/sliderType";
+
 import laySliderBar from "./components/bar.vue";
 import LaySliderMark from "./components/mark.vue";
 
@@ -68,22 +71,7 @@ import { LAYUI_SLIDER_KEY, useSlider } from "./use-slider";
 import { useSliderMark } from "./components/use-slider-mark";
 import { Mark } from "./types/sliderType";
 
-export interface SliderProps {
-  vertical?: boolean;
-  modelValue?: number | Array<number>;
-  min?: number;
-  max?: number;
-  step?: number;
-  disabled?: boolean;
-  range?: boolean;
-  showDots?: boolean;
-  isFollowMark?: boolean;
-  reverse?: boolean;
-  rangeValue?: number[];
-  tooltipProps?: Record<string, boolean | string>;
-  marks?: Record<number, any>;
-  formatTooltip?: (val: number) => number | string;
-}
+export type SliderProps = _SliderProps;
 
 defineOptions({
   name: "LaySlider",
@@ -102,11 +90,11 @@ const props = withDefaults(defineProps<SliderProps>(), {
   isFollowMark: true,
   rangeValue: () => [],
   tooltipProps: () => ({
-    isCanHide: true,
     disabled: false,
     placement: "top",
     isDark: false,
   }),
+  alwayShowTooltip: false,
 });
 
 const emit = defineEmits(["update:modelValue", "update:rangeValue", "change"]);
@@ -146,5 +134,6 @@ const getDotOrMark = computed(() => {
   if (props.showDots) {
     return getStop.value;
   }
+  return [];
 });
 </script>
