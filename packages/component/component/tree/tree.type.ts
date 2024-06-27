@@ -1,3 +1,5 @@
+import type { TreeData } from "./tree";
+
 export type StringFn = () => string;
 export type StringOrNumber = string | number;
 export type KeysType = (number | string)[];
@@ -25,19 +27,26 @@ export interface ReplaceFieldsOptionsOptional {
 
 export interface TreeProps {
   data: OriginalTreeData | OriginalTreeData[];
+  treeOriginData?: TreeData[];
+  disabled?: boolean;
+  edit?: EditType;
   checkedKeys?: KeysType;
   expandKeys?: KeysType;
   checkStrictly?: boolean | string;
-  showCheckbox?: boolean;
-  edit?: EditType;
   collapseTransition?: boolean;
   onlyIconControl?: boolean;
+  selectedKey?: any;
   showLine?: boolean;
-  replaceFields: ReplaceFieldsOptions;
+  showCheckbox?: boolean;
+  replaceFields?: ReplaceFieldsOptionsOptional;
+  tailNodeIcon?: string | boolean;
+  isSelect?: boolean;
   defaultExpandAll?: boolean;
   lazy?: boolean;
-  // load?: LoadFunction;
+  load?: LoadFunction;
+  searchNodeMethod?: SearchNodeMethodType;
 }
+
 export interface TreeEmits {
   (e: "update:checkedKeys", keys: KeysType): void;
   (e: "update:expandKeys", keys: KeysType): void;
@@ -51,3 +60,5 @@ export type LoadFunction = (
   rootNode: OriginalTreeData,
   loadedCallback: (data: OriginalTreeData[]) => void
 ) => void;
+
+export type SearchNodeMethodType = (node: any, value: string) => boolean;

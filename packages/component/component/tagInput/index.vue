@@ -16,6 +16,8 @@ import { isObject, reactiveOmit, useResizeObserver } from "@vueuse/core";
 import { LayIcon } from "@layui/icons-vue";
 import { TagInputSize } from "./inerface";
 
+import { useTreeSelectProvide } from "../treeSelect/useTreeSelect";
+
 export interface TagData {
   value?: string | number;
   label?: string;
@@ -241,6 +243,8 @@ const moreCount = computed(() => {
 
 onMounted(() => {
   handleResize();
+  const treeSelectContext = useTreeSelectProvide();
+  treeSelectContext?.setInputEl?.(inputRefEl.value as HTMLInputElement);
 });
 
 defineExpose({

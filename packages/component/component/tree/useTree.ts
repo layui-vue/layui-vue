@@ -1,5 +1,7 @@
-import { TreeEmits, TreeProps } from "./tree.type";
-import { computed, ComputedRef } from "vue";
+import type { TreeEmits, TreeProps, ReplaceFieldsOptions } from "./tree.type";
+import type { ComputedRef } from "vue";
+import { computed } from "vue";
+
 import { Tree, TreeData } from "./tree";
 
 export declare type UseTree = (
@@ -15,13 +17,14 @@ export const useTree: UseTree = (props: TreeProps, emit: TreeEmits) => {
     {
       nodeMap: new Map(),
       originMap: new Map(),
-      replaceFields: props.replaceFields,
+      replaceFields: props.replaceFields as ReplaceFieldsOptions,
       showCheckbox: props.showCheckbox ?? false,
       checkedKeys: props.checkedKeys ?? [],
       expandKeys: props.expandKeys ?? [],
       checkStrictly: props.checkStrictly ?? false,
       defaultExpandAll: props.defaultExpandAll ?? false,
       lazy: props.lazy ?? false,
+      searchNodeMethod: props.searchNodeMethod!,
     },
     props.data
   );

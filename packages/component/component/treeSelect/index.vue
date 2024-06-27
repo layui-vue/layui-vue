@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import "./index.less";
-import { StyleValue, computed, ref, watch, useSlots } from "vue";
+import { StyleValue, computed, ref, watch, useSlots, provide } from "vue";
 import { useDebounceFn } from "@vueuse/core";
 import { getNode } from "../../utils";
 import { TreeSelectSize } from "./interface";
@@ -11,7 +11,12 @@ import LayDropdown from "../dropdown/index.vue";
 import LayTree from "../tree/index.vue";
 import useProps from "./index.hooks";
 import { fillFieldNames } from "../tree/utils";
-import { ReplaceFieldsOptionsOptional, LoadFunction } from "../tree/tree.type";
+import {
+  ReplaceFieldsOptionsOptional,
+  LoadFunction,
+  SearchNodeMethodType,
+} from "../tree/tree.type";
+import { LAYUI_TREE_SELECT } from "./useTreeSelect";
 
 export interface TreeSelectProps {
   data: any;
@@ -25,7 +30,7 @@ export interface TreeSelectProps {
   size?: TreeSelectSize;
   checkStrictly?: boolean;
   search?: boolean;
-  searchNodeMethod?: Function;
+  searchNodeMethod?: SearchNodeMethodType;
   contentClass?: string | Array<string | object> | object;
   contentStyle?: StyleValue;
   replaceFields?: ReplaceFieldsOptionsOptional;
@@ -72,6 +77,8 @@ const composing = ref(false);
 const emits = defineEmits<TreeSelectEmits>();
 const treeOriginData = ref();
 
+const treeRef = ref();
+
 const _replaceFields = computed(() => fillFieldNames(props.replaceFields));
 
 const selectedValue = computed({
@@ -102,22 +109,24 @@ const slots = useSlots();
 const hasTitleSlot = computed(() => slots.title != null);
 
 watch(
-  [selectedValue, treeData],
+  [selectedValue, checkedKeys],
   () => {
-    const { id, title, children } = _replaceFields.value;
+    const { id, title } = _replaceFields.value;
     if (props.multiple) {
       try {
-        multipleValue.value = selectedValue.value.map((value: any) => {
-          var node: any = getNode(
+        multipleValue.value = checkedKeys.value.map((value: any) => {
+          let node: any = getNode(
             treeOriginData.value || props.data,
             value,
             _replaceFields.value
           );
+
           if (node) {
             node.label = node[title];
             node.value = node[id];
             node.closable = !node.disabled;
           }
+
           if (node == undefined) {
             node = {
               label: value,
@@ -253,11 +262,7 @@ const onCompositionend = (eventParam: Event) => {
 watch(
   searchValue,
   useDebounceFn(() => {
-    if (searchValue.value === "") {
-      treeData.value = props.data;
-    } else {
-      treeData.value = treeFilter(props.data, props.searchNodeMethod);
-    }
+    treeRef.value && treeRef.value.filter(searchValue.value);
   }, 500)
 );
 
@@ -289,6 +294,19 @@ watch(
   },
   { immediate: true, deep: true }
 );
+
+const inputEl = ref<HTMLInputElement | null>(null);
+
+const setInputEl = (el: HTMLInputElement) => {
+  if (props.search) {
+    inputEl.value = el;
+  }
+};
+
+provide(LAYUI_TREE_SELECT, {
+  inputEl,
+  setInputEl,
+});
 </script>
 
 <template>
@@ -368,6 +386,7 @@ watch(
             :defaultExpandAll="defaultExpandAll"
             :lazy="lazy"
             :load="load"
+            :searchNodeMethod="searchNodeMethod"
             @node-click="handleClick"
           >
             <template #title="{ data }">

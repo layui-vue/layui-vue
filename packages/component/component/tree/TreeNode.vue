@@ -1,34 +1,19 @@
 <script setup lang="ts">
+import type { Tree, TreeData as _TreeData } from "./tree";
+
 import { LayIcon } from "@layui/icons-vue";
 import LayCheckbox from "../checkbox/index.vue";
 import { computed, nextTick } from "vue";
-import { Tree } from "./tree";
-import { Nullable } from "../../types";
 import LayTransition from "../transition/index.vue";
 import {
-  StringOrNumber,
-  CustomKey,
-  CustomString,
   ReplaceFieldsOptions,
   LoadFunction,
   OriginalTreeData,
 } from "./tree.type";
 
-export interface TreeData {
-  id: CustomKey;
-  title: CustomString;
-  children: TreeData[];
-  parentKey: Nullable<StringOrNumber>;
-  isRoot: boolean;
-  isChecked: boolean;
-  isDisabled: boolean;
-  isLeaf: boolean;
-  isLazy: boolean;
-  isLoading: boolean;
-  hasNextSibling: boolean;
-  parentNode: Nullable<TreeData>;
-  [key: string]: any;
-}
+import { useTreeSelectProvide } from "../treeSelect/useTreeSelect";
+
+export type TreeData = _TreeData;
 
 export interface TreeNodeProps {
   tree: Tree;
@@ -46,6 +31,7 @@ export interface TreeNodeProps {
 
 interface TreeNodeEmits {
   (e: "node-click", node: TreeData): void;
+  (e: "check-change", node: TreeData, checked: boolean): void;
 }
 
 defineOptions({
@@ -89,8 +75,18 @@ function recursiveNodeClick(node: TreeData) {
   emit("node-click", node);
 }
 
+const handleCheckChange = (node: TreeData, checked: boolean) => {
+  emit("check-change", node, checked);
+};
+
+const treeSelectContext = useTreeSelectProvide();
+
 function handleChange(checked: boolean, node: TreeData) {
   props.tree.setCheckedKeys(checked, props.checkStrictly, node);
+  emit("check-change", node, checked);
+  treeSelectContext &&
+    treeSelectContext?.inputEl &&
+    treeSelectContext?.inputEl.value?.focus();
 }
 
 function handleIconClick(node: TreeData) {
@@ -173,6 +169,7 @@ const isChildAllSelected = computed(() => {
 
 <template>
   <div
+    v-show="node.visible"
     v-for="(node, nodeIndex) in nodeList"
     :key="nodeIndex"
     :class="{
@@ -252,6 +249,7 @@ const isChildAllSelected = computed(() => {
           :replace-fields="replaceFields"
           :load="load"
           @node-click="recursiveNodeClick"
+          @check-change="handleCheckChange"
         >
           <template v-if="$slots.title" #title="slotProp: { data: any }">
             <slot name="title" :data="slotProp.data"></slot>
