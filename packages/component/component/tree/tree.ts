@@ -76,7 +76,7 @@ class Tree {
       const nodeHasChildren = !!Reflect.get(node, children);
 
       if (nodeHasChildren) {
-        Reflect.set(node, "children", this.createTree(nodeChildren, node[id]));
+        Reflect.set(node, children, this.createTree(nodeChildren, node[id]));
       }
 
       nodeList.push(node);
@@ -211,7 +211,7 @@ class Tree {
   }
 
   getKeys() {
-    const expandKeys = [];
+    const expandKeys: any[] = [];
     const checkedKeys: StringOrNumber[] = [];
     const iterator = this.config.nodeMap[Symbol.iterator]();
     const { id: fId, children } = this.config.replaceFields;
@@ -247,7 +247,7 @@ class Tree {
 
   _filter(value: string) {
     const {
-      replaceFields: { id, title, children },
+      replaceFields: { children },
       searchNodeMethod,
       lazy,
     } = this.config;
