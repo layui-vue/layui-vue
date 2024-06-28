@@ -1,0 +1,47 @@
+.layui-line {
+  &-horizontal {
+    position: relative;
+    clear: both;
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+    border-color: var(--global-neutral-color-5);
+
+    &.layui-line-with-text {
+      margin: 14px 0;
+    }
+  }
+
+  &-vertical {
+    display: inline-block;
+    min-width: 1px;
+    max-width: 1px;
+    height: 1em;
+    vertical-align: middle;
+    border-color: var(--global-neutral-color-5);
+  }
+
+  &-text {
+    position: absolute;
+    top: 50%;
+    box-sizing: border-box;
+    padding: 0 10px;
+    color: currentColor;
+    line-height: 2;
+    background-color: #FFF;
+    transform: translateY(-50%);
+
+    &-center {
+      left: var(--layui-line-text-offset);
+      transform: translate(-50%, -50%);
+    }
+
+    &-left {
+      left: var(--layui-line-text-offset);
+    }
+
+    &-right {
+      right: var(--layui-line-text-offset);
+    }
+  }
+}

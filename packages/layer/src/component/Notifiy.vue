@@ -5,29 +5,36 @@
       {{ title }}
     </h2>
     <div class="content" v-if="!isHtmlFragment">
-      <p>{{ content }}</p>
+      <p>
+        <LayRender :render="() => renderContent(props.content)"></LayRender>
+      </p>
     </div>
     <div class="content" v-html="content" v-else></div>
     <LayIcon type="layui-icon-close" size="16" @click="handleClose"></LayIcon>
   </div>
 </template>
-<script lang="ts">
-export default {
-  name: "Notifiy",
-};
-</script>
+
 <script lang="ts" setup>
-import { nextTick, onMounted, ref, shallowRef } from "vue";
+import type { PropsContentType } from "../types";
+import { nextTick, onMounted, shallowRef } from "vue";
+import { renderContent } from "../utils";
+
 import { LayIcon } from "@layui/icons-vue";
+import LayRender from "@layui/component/component/_components/render";
+
 import "@layui/icons-vue/lib/index.css";
 
 export interface LayNotifyProps {
   title: any;
-  content: any;
+  content: PropsContentType;
   isHtmlFragment?: boolean;
   icon?: string | number | undefined;
   iconClass: string[];
 }
+
+defineOptions({
+  name: "Notifiy",
+});
 
 const props = withDefaults(defineProps<LayNotifyProps>(), {
   isHtmlFragment: false,

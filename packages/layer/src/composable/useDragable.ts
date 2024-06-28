@@ -16,9 +16,9 @@ const useMove = function (
   startCallback: Function
 ) {
   let offsetX: number, offsetY: number;
-  var clientX = 0;
-  var clientY = 0;
-  var flag = true;
+  let clientX = 0;
+  let clientY = 0;
+  let flag = true;
   if (el != null) {
     el.addEventListener("mousedown", function (event: any) {
       const path = (event.composedPath && event.composedPath()) || event.path;
@@ -44,12 +44,12 @@ const useMove = function (
 
               let x = event.pageX - offsetX;
               let y = event.pageY - offsetY;
-              let documentWidth = document.documentElement.clientWidth;
-              let documentHeight = document.documentElement.clientHeight;
+              const documentWidth = document.documentElement.clientWidth;
+              const documentHeight = document.documentElement.clientHeight;
 
               if (!moveOut) {
-                var documentX = documentWidth - el.offsetWidth;
-                var documentY = documentHeight - el.offsetHeight;
+                let documentX = documentWidth - el.offsetWidth;
+                let documentY = documentHeight - el.offsetHeight;
 
                 if (el.style.position === "absolute") {
                   const parent = getParentNode(el);
@@ -99,16 +99,16 @@ const useResize = function (
   endCallback: Function,
   startCallback: Function
 ) {
-  var clientX = 0;
-  var clientY = 0;
-  var flag = true;
+  let clientX = 0;
+  let clientY = 0;
+  let flag = true;
   if (el != null) {
     el.addEventListener("mousedown", function (event: any) {
       const path = (event.composedPath && event.composedPath()) || event.path;
       if (path[0].className === "layui-layer-resize") {
         if (event.button == 0 && el != null) {
-          var x = el.offsetLeft;
-          var y = el.offsetTop;
+          const x = el.offsetLeft;
+          const y = el.offsetTop;
           clientX = event.clientX;
           clientY = event.clientY;
           const move = function (moveEvent: any) {
@@ -116,8 +116,8 @@ const useResize = function (
               window.getSelection()?.removeAllRanges();
             }
             if (el != null) {
-              var offsetX = moveEvent.clientX;
-              var offsetY = moveEvent.clientY;
+              const offsetX = moveEvent.clientX;
+              const offsetY = moveEvent.clientY;
               // 按下后的首次偏移，将触发 moveStart() 回调函数
               if (offsetX - clientX != 0 || offsetY - clientY != 0) {
                 if (flag) {
@@ -125,8 +125,8 @@ const useResize = function (
                   startCallback();
                 }
               }
-              var w = offsetX - x;
-              var h = offsetY - y;
+              let w = offsetX - x;
+              let h = offsetY - y;
               w < 260 && (w = 260);
               h < 115 && (h = 115);
               el.style.width = `${w}px`;

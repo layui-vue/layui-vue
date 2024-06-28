@@ -1,0 +1,146 @@
+:root {
+  --input-border-radius: var(--global-border-radius);
+  --input-border-color: var(--global-neutral-color-3);
+}
+
+@input-lg: 44px;
+@input-md: 38px;
+@input-sm: 32px;
+@input-xs: 26px;
+
+.set-size(@size) {
+  & {
+    height: @size;
+    .layui-input {
+      height: @size;
+      line-height: @size;
+    }
+  }
+}
+
+.layui-input {
+  width: 100%;
+  height: 38px;
+  line-height: 38px;
+  border-width: 1px;
+  border-style: solid;
+  background-color: white;
+  border-color: var(--input-border-color);
+  border-radius: var(--input-border-radius);
+  display: inline-flex;
+}
+
+.layui-input input{
+  height: 38px;
+  line-height: 38px;
+  background-color: transparent;
+  color: rgba(0, 0, 0, 0.85);
+  padding-left: 10px;
+  display: inline-block;
+  border: none;
+  height: 100%;
+  width: 100%;
+}
+
+.layui-input-append {
+  background-color: #fafafa;
+  border-left: 1px solid var(--input-border-color);
+  display: flex;
+  padding: 0 15px;
+  flex: none;
+  align-items: center;
+}
+
+.layui-input-prepend {
+  background-color: #fafafa;
+  border-right: 1px solid var(--input-border-color);
+  display: flex;
+  padding: 0 15px;
+  flex: none;
+  align-items: center;
+}
+
+.layui-input-wrapper {
+  width: 100%;
+  display: inline-flex;
+  border: none;
+}
+
+.layui-input:hover,
+.layui-input:focus-within {
+  border-color: #d2d2d2;
+}
+
+.layui-input-clear,
+.layui-input-prefix,
+.layui-input-suffix, 
+.layui-input-password {
+  background-color: transparent;
+}
+
+.layui-input-clear {
+  display: none;
+}
+
+.layui-input:hover .layui-input-clear,
+.layui-input-password,
+.layui-input-prefix,
+.layui-input-suffix {
+  display: flex;
+  flex: none;
+  align-items: center;
+  padding: 0 10px;
+}
+
+.layui-input-has-prefix {
+  input {
+    padding: 0;
+  }
+}
+
+.layui-input-clear,
+.layui-input-password {
+  color: rgba(0, 0, 0, 0.45);
+}
+
+.layui-input-clear:hover {
+  opacity: 0.6;
+}
+
+.layui-input input::-webkit-input-placeholder {
+  line-height: 1.3;
+}
+
+.layui-input input::-ms-reveal {
+  display: none;
+}
+
+.layui-input:has(.layui-input-disabled)  {
+  border-color: var(--input-border-color)!important;
+}
+
+.layui-input-disabled,
+.layui-input-disabled * {
+  cursor: not-allowed !important;
+  opacity: 0.6;
+}
+
+.layui-input{
+  &[size="lg"] {
+    .set-size(@input-lg);
+  }
+  &[size="md"] {
+    .set-size(@input-md);
+  }
+  &[size="sm"] {
+    .set-size(@input-sm);
+  }
+  &[size="xs"] {
+    .set-size(@input-xs);
+  }
+}
+
+.layui-input input::-webkit-outer-spin-button,
+.layui-input input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}

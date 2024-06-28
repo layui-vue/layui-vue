@@ -1,0 +1,129 @@
+@switch-lg: 24px;
+@switch-md: 22px;
+@switch-sm: 20px;
+@switch-xs: 18px;
+
+@switch-lg-min-width: 48px;
+@switch-md-min-width: 44px;
+@switch-sm-min-width: 40px;
+@switch-xs-min-width: 36px;
+
+.set-size(@size, @min-width) {
+  & {
+    .layui-form-switch {
+      height: @size;
+      min-width: @min-width;
+
+      span {
+        width: calc(@size - 4px);
+        height: calc(@size - 4px);
+        transition: all 0.1s linear;
+      }
+
+      em {
+        margin-left: calc(@size - 3px);
+      }
+    }
+
+    .layui-form-onswitch {
+      span {
+        left: calc(100% - calc(@size - 1px));
+      }
+
+      em {
+        margin-right: calc(@size - 3px);
+        margin-left: 0px;
+      }
+    }
+  }
+}
+
+.layui-switch-container {
+  &[size="lg"] {
+    .set-size(@switch-lg, @switch-lg-min-width);
+  }
+
+  &[size="md"] {
+    .set-size(@switch-md, @switch-md-min-width);
+  }
+
+  &[size="sm"] {
+    .set-size(@switch-sm, @switch-sm-min-width);
+  }
+
+  &[size="xs"] {
+    .set-size(@switch-xs, @switch-xs-min-width);
+  }
+}
+
+.layui-switch-container {
+  display: inline-block;
+}
+
+.layui-switch-container .layui-switch-input {
+  display: none;
+}
+
+.layui-form-switch {
+  position: relative;
+  height: 22px;
+  line-height: 22px;
+  box-sizing: border-box;
+  min-width: 35px;
+  padding: 0 4px;
+  border-radius: 20px;
+  cursor: pointer;
+  background-color: var(--global-neutral-color-6);
+  -webkit-transition: all 0.1s linear;
+  transition: all 0.1s linear;
+}
+
+.layui-form-switch span {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  left: 3px;
+  top: 2px;
+  width: 18px;
+  height: 18px;
+  line-height: 18px;
+  border-radius: 20px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px #00230b33;
+  -webkit-transition: all 0.1s linear;
+  transition: all 0.1s linear;
+}
+
+.layui-form-switch em {
+  position: relative;
+  padding: 0 2px;
+  text-align: center !important;
+  color: #999 !important;
+  font-style: normal !important;
+  font-size: 12px;
+  width: 25px;
+  top: 0;
+}
+
+.layui-form-onswitch {
+  border-color: var(--global-checked-color);
+  background-color: var(--global-checked-color);
+}
+
+.layui-form-onswitch span {
+  background-color: #fff;
+}
+
+.layui-form-onswitch em {
+  color: #fff !important;
+}
+
+.layui-switch-disabled {
+  opacity: 0.6;
+}
+
+.layui-switch-disabled,
+.layui-switch-disabled * {
+  cursor: not-allowed !important;
+}

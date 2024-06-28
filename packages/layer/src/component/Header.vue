@@ -1,17 +1,15 @@
-<script lang="ts">
-export default {
-  name: "Title",
-};
-</script>
-
 <script lang="ts" setup>
-import { StyleValue, compile, computed } from "vue";
+import { StyleValue, computed } from "vue";
 
 export interface HeaderProps {
   title: string | boolean | Function;
   titleStyle: string | StyleValue;
-  move: boolean | string;
+  move: boolean;
 }
+
+defineOptions({
+  name: "Title",
+});
 
 const renderContent = function (content: any) {
   if (typeof content === "function") {

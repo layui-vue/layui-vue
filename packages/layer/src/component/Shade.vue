@@ -1,11 +1,5 @@
-<script lang="ts">
-export default {
-  name: "Shade",
-};
-</script>
-
 <script lang="ts" setup>
-import { computed, defineEmits, StyleValue } from "vue";
+import { computed, StyleValue } from "vue";
 
 export interface ShadeProps {
   visible: boolean | string;
@@ -15,6 +9,10 @@ export interface ShadeProps {
   teleportDisabled: boolean;
   shadeStyle?: StyleValue;
 }
+
+defineOptions({
+  name: "Shade",
+});
 
 const props = defineProps<ShadeProps>();
 

@@ -4,6 +4,10 @@ declare module "*.vue" {
   export default comp;
 }
 
+declare module "@layui/layui-vue/es/button/index" {}
+declare module "@layui/layui-vue/es/input/index" {}
+declare module "@layui/layui-vue/es/textarea/index" {}
+
 declare module "*.md" {
   import { DefineComponent } from "vue";
   const comp: DefineComponent;

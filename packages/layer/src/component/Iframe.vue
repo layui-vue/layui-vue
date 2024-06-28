@@ -1,14 +1,13 @@
-<script lang="ts">
-import { computed, VNodeTypes } from "vue";
-export default {
-  name: "Iframe",
-};
-</script>
-
 <script lang="ts" setup>
+import { computed } from "vue";
+
 export interface IframeProps {
-  src?: string | Function | object | VNodeTypes;
+  src?: string;
 }
+
+defineOptions({
+  name: "Iframe",
+});
 
 const props = defineProps<IframeProps>();
 

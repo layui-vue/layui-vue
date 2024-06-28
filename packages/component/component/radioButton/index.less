@@ -1,0 +1,27 @@
+@import "../button/index.less";
+
+:root {
+  --button-primary-color: var(--global-primary-color);
+  --button-border-radius: var(--global-border-radius);
+}
+
+.layui-radio-button input {
+  display: none;
+}
+
+.layui-radio-button .layui-btn {
+  margin: 0px 5px 0px 0px;
+}
+
+.layui-radio-group .layui-radio-button .layui-btn{
+  border-radius: 0px;
+  margin: 0 0 0 0;
+}
+
+.layui-radio-group .layui-radio-button:first-child .layui-btn {
+  border-radius: var(--button-border-radius) 0px 0px var(--button-border-radius);
+}
+
+.layui-radio-group .layui-radio-button:last-child .layui-btn {
+  border-radius: 0px var(--button-border-radius) var(--button-border-radius) 0px;
+}

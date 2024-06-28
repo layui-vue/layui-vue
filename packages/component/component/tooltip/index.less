@@ -1,0 +1,49 @@
+.lay-tooltip-content{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+// 主题颜色
+// 浅色 --> 默认使用
+@ligh-background: #FFF;
+@ligh-color: #3a3a3a;
+
+// 深色
+@dark-background: #353535;
+@dark-color: #FFF;
+
+@border-clor: #cecece;
+// 统一设置四个方向的主题
+.theme(@background-color, @color, @border-color) {
+    background-color: @background-color;
+    color: @color;
+    border: 1px solid @border-color; 
+    > [data-popper-arrow] {
+      &::after{
+        background-color: @background-color;
+        border-color: @border-color; 
+      }
+  }
+}
+
+// 样式开始
+.lay-tooltip {
+    padding: 10px;
+    border-radius: var(--global-border-radius);
+    word-wrap: break-word;
+    min-width: 12px;
+    min-height: 12px;
+    font-size: 14px;
+    box-sizing: border-box;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.15);
+    .theme(@ligh-background, @ligh-color, @border-clor);
+    z-index: 999999;
+
+    /* 深色主题 */
+    &.layui-dark {
+        .theme(@dark-background, @dark-color, @dark-background);
+    }
+
+}

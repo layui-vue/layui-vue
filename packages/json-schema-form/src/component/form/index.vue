@@ -15,6 +15,7 @@ export type JsonSchemaFormProps = _JsonSchemaFormProps;
 const props = withDefaults(defineProps<JsonSchemaFormProps>(), {
   model: () => ({}),
   space: 10,
+  useCN: true,
   schema: () => ({}),
   isGenCommentEl: true,
 });

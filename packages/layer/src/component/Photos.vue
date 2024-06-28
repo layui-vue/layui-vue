@@ -47,18 +47,20 @@
     </div>
   </div>
 </template>
-<script lang="ts">
-export default {
-  name: "Photos",
-};
-</script>
+
 <script lang="ts" setup>
+import type { ImgListType } from "../types";
 import { watch, ref, onMounted, nextTick, computed } from "vue";
 
 export interface LayPhotoProps {
-  imgList: { src: string; alt: string; thumb: string }[];
+  imgList: ImgListType[];
   startIndex: number;
 }
+
+defineOptions({
+  name: "Photos",
+});
+
 const emit = defineEmits(["resetCalculationPohtosArea"]);
 const props = withDefaults(defineProps<LayPhotoProps>(), {
   startIndex: 0,

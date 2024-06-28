@@ -1,22 +1,26 @@
 {
   "name": "@layui/layer-vue",
-  "version": "2.3.2",
+  "version": "2.4.2",
   "description": "a component library for Vue 3 base on layui-vue",
   "homepage": "http://www.layui-vue.com",
   "module": "lib/layer-vue.es.js",
   "main": "lib/layer-vue.umd.js",
   "exports": {
     ".": {
+      "types": "./types/index.d.ts",
       "import": "./lib/layer-vue.es.js",
       "require": "./lib/layer-vue.umd.js"
     },
-    "./lib/": "./lib/"
+    "./lib/": "./lib/",
+    "./types/*": [
+      "./types/*.d.ts"
+    ]
   },
   "types": "types/index.d.ts",
   "style": "lib/index.css",
   "scripts": {
     "build": "vite build --emptyOutDir && npm run build:types",
-    "build:types": "rimraf types && tsc -d"
+    "build:types": "rimraf types && vue-tsc -d"
   },
   "keywords": [
     "layui-vue",
@@ -33,7 +37,7 @@
     "ie > 10"
   ],
   "dependencies": {
-    "@layui/icons-vue": "1.1.1"
+    "@layui/icons-vue": "workspace:*"
   },
   "devDependencies": {
     "@babel/plugin-transform-runtime": "^7.18.5"
