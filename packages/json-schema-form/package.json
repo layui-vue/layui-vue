@@ -1,6 +1,6 @@
 {
   "name": "@layui/json-schema-form",
-  "version": "1.0.11-not-install",
+  "version": "1.0.11-not-install.1",
   "description": "Json-schema-form is a high-level component encapsulated on the basis of @layui/layui-vue form.",
   "homepage": "http://www.layui-vue.com/zh-CN/components/jsonSchemaForm",
   "type": "module",
