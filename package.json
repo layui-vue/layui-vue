@@ -11,7 +11,7 @@
     "dev": "pnpm -C play dev",
     "dev:docs": "pnpm -C docs dev",
     "test": "vitest run",
-    "build": "pnpm run build:icons && pnpm run build:layer && pnpm run build:component && pnpm run build:docs",
+    "build": "pnpm run build:icons && pnpm run build:layer && pnpm run build:component && pnpm run build:docs && sh move.sh",
     "build:docs": "pnpm -C docs build",
     "build:component": "pnpm -C packages/layui build",
     "build:icons": "pnpm -C packages/icons build",
