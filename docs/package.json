@@ -7,7 +7,7 @@
   "homepage": "http://www.layui-vue.com",
   "scripts": {
     "dev": "vite",
-    "build": "vite build"
+    "build": "vite build && sh ./move.sh"
   },
   "dependencies": {
     "@vueuse/core": "^8.7.3",

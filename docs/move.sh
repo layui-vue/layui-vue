@@ -1,0 +1,1 @@
+cp _redirects /dist/
