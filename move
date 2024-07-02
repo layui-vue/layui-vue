@@ -1,1 +1,0 @@
-cp _redirects docs/dist/
