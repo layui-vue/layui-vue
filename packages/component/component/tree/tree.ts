@@ -140,7 +140,7 @@ class Tree {
     const { children } = this.config.replaceFields;
 
     tree.forEach((data: TreeData) => {
-      data[children] && data[children].length;
+      data[children] && this.treeForeach(data[children], func);
       func(data);
     });
   }
@@ -220,7 +220,6 @@ class Tree {
     while (!next.done) {
       const [, node] = next.value;
       const id = Reflect.get(node, fId);
-
       if (node.isChecked) {
         checkedKeys.push(id);
       }
