@@ -140,7 +140,9 @@ class Tree {
     const { children } = this.config.replaceFields;
 
     tree.forEach((data: TreeData) => {
-      data[children] && this.treeForeach(data[children], func);
+      data[children] &&
+        data[children].length &&
+        this.treeForeach(data[children], func);
       func(data);
     });
   }
@@ -220,15 +222,20 @@ class Tree {
     while (!next.done) {
       const [, node] = next.value;
       const id = Reflect.get(node, fId);
+
       if (node.isChecked) {
         checkedKeys.push(id);
       }
+      // console.log(node, this.config.checkStrictly, "node");
 
       // #I9U1MX 父子节点存在联动，若current节点的所有子节点有未选中的情况，则current节点不选中
       if (!this.config.checkStrictly && node.isChecked && node[children]) {
         this.treeForeach(node[children], (child: TreeData) => {
           if (!child.isChecked) {
-            checkedKeys.pop();
+            const index = checkedKeys.findIndex(
+              (key) => key === child.parentKey
+            );
+            index > 0 && checkedKeys.splice(index, 1);
           }
         });
       }
