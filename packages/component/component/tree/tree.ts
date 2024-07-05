@@ -140,9 +140,7 @@ class Tree {
     const { children } = this.config.replaceFields;
 
     tree.forEach((data: TreeData) => {
-      data[children] &&
-        data[children].length &&
-        this.treeForeach(data[children], func);
+      data[children] && data[children].length;
       func(data);
     });
   }
@@ -226,7 +224,6 @@ class Tree {
       if (node.isChecked) {
         checkedKeys.push(id);
       }
-      // console.log(node, this.config.checkStrictly, "node");
 
       // #I9U1MX 父子节点存在联动，若current节点的所有子节点有未选中的情况，则current节点不选中
       if (!this.config.checkStrictly && node.isChecked && node[children]) {
