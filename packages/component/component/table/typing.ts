@@ -1,3 +1,9 @@
+/*
+ * @Author: baobaobao
+ * @Date: 2024-07-07 22:08:19
+ * @LastEditTime: 2024-07-07 22:42:01
+ * @LastEditors: baobaobao
+ */
 export const TableEmit = [
   "change",
   "sort-change",
@@ -8,6 +14,7 @@ export const TableEmit = [
   "row-double",
   "row",
   "cell-double",
+  "resize-change"
 ];
 
 export interface TableColumn {

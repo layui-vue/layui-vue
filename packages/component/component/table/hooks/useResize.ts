@@ -1,13 +1,21 @@
-import { TableColumn } from "../typing";
+/*
+ * @Author: baobaobao
+ * @Date: 2024-07-07 22:08:19
+ * @LastEditTime: 2024-07-07 23:04:30
+ * @LastEditors: baobaobao
+ */
+import { TableColumn, TableEmit } from "../typing";
 import { useThrottleFn } from "@vueuse/core";
 
-let isResizing = false;
-let stashColumn: any = null;
-let targetElem: HTMLElement | null = null;
-let targetElemBody: HTMLElement | null = null;
-let startX = 0;
-let startWidth = 0;
-let colWidthTotal = 0;
+
+export const initResize = (emit) => {
+  let isResizing = false;
+  let stashColumn: any = null;
+  let targetElem: HTMLElement | null = null;
+  let targetElemBody: HTMLElement | null = null;
+  let startX = 0;
+  let startWidth = 0;
+  let colWidthTotal = 0;
 
 const resizing = useThrottleFn((e: MouseEvent) => {
   if (!isResizing) return;
@@ -22,6 +30,10 @@ const resizing = useThrottleFn((e: MouseEvent) => {
 }, 20);
 
 const stopResize = () => {
+  emit('resize-change', {
+    oldWidth: startWidth,
+    ...stashColumn
+  })
   startX = 0;
   startWidth = 0;
   colWidthTotal = 0;
@@ -29,6 +41,8 @@ const stopResize = () => {
   targetElem = null;
   targetElemBody = null;
   isResizing = false;
+  // console.log(1111, stashColumn.width, stashColumn)
+
 };
 
 const removeMouseup = () => {
@@ -37,11 +51,12 @@ const removeMouseup = () => {
   document.removeEventListener("mouseup", removeMouseup);
 };
 
-export const startResize = (
+const startResize = (
   e: MouseEvent,
   column: TableColumn,
   tableHeaderTable: any,
-  tableBodyTable: any
+  tableBodyTable: any,
+  emit
 ) => {
   document.addEventListener("mousemove", resizing);
   document.addEventListener("mouseup", removeMouseup);
@@ -69,3 +84,8 @@ export const startResize = (
     }
   }
 };
+return {
+  startResize
+
+}
+}
