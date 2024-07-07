@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import "./index.less";
+
+import type { TooltipProps } from "../tooltip/types";
+
 import { toRefs, provide, reactive, onMounted, nextTick } from "vue";
 import { Rules, ValidateError, ValidateMessages } from "async-validator";
 import { LayFormItemContext, FormCallback, modelType } from "../../types/form";
-import { LayTooltipContext } from "../../types/tooltip";
 
 export interface FormProps {
   model?: modelType;
@@ -21,7 +23,7 @@ export interface FormProps {
   requiredErrorMessage?: string;
   validateMessage?: ValidateMessages;
   isLabelTooltip?: boolean;
-  tooltipProps?: LayTooltipContext;
+  tooltipProps?: TooltipProps;
 }
 
 defineOptions({

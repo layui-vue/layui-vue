@@ -1,15 +1,13 @@
 <script lang="ts" setup>
 import TreeNode from "./TreeNode.vue";
-import { computed, watch, ref, onMounted, nextTick } from "vue";
+import { computed, watch, ref, onMounted, nextTick, watchEffect } from "vue";
 import { useTree } from "./useTree";
 import { TreeData } from "./tree";
 import {
+  TreeProps as _TreeProps,
   StringFn,
   StringOrNumber,
   KeysType,
-  EditType,
-  ReplaceFieldsOptionsOptional,
-  LoadFunction,
 } from "./tree.type";
 import { fillFieldNames } from "./utils";
 import "./index.less";
@@ -22,26 +20,7 @@ export interface OriginalTreeData {
   [key: string]: any;
 }
 
-export interface TreeProps {
-  data: OriginalTreeData | OriginalTreeData[];
-  treeOriginData?: TreeData[];
-  disabled?: boolean;
-  edit?: EditType;
-  checkedKeys?: KeysType;
-  expandKeys?: KeysType;
-  checkStrictly?: boolean | string;
-  collapseTransition?: boolean;
-  onlyIconControl?: boolean;
-  selectedKey?: any;
-  showLine?: boolean;
-  showCheckbox?: boolean;
-  replaceFields?: ReplaceFieldsOptionsOptional;
-  tailNodeIcon?: string | boolean;
-  isSelect?: boolean;
-  defaultExpandAll?: boolean;
-  lazy?: boolean;
-  load?: LoadFunction;
-}
+export type TreeProps = _TreeProps;
 
 interface TreeEmits {
   (e: "update:expandKeys", keys: KeysType): void;
@@ -49,13 +28,14 @@ interface TreeEmits {
   (e: "node-click", node: OriginalTreeData): void;
   (e: "update:selectedKey", id: string | number): void;
   (e: "update:treeOriginData", treeOriginData: TreeData[]): void;
+  (e: "check-change", node: OriginalTreeData, checked: boolean): void;
 }
 
 defineOptions({
   name: "LayTree",
 });
 
-const props = withDefaults(defineProps<TreeProps>(), {
+const props = withDefaults(defineProps<_TreeProps>(), {
   showCheckbox: false,
   edit: false,
   collapseTransition: true,
@@ -142,22 +122,24 @@ watch(
         emit("update:checkedKeys", checkedKeys);
       }
       // expandKeys 比较
-      if (String(lastExpandKey) != String(expandKeys)) {
+      if (String(lastExpandKey.value) != String(expandKeys)) {
         lastExpandKey.value = expandKeys;
         emit("update:expandKeys", expandKeys);
       }
       setTimeout(() => {
         unWatch.value = false;
       }, 0);
-
-      // todo
-      // 新增懒加载不修改源数据
-      // 暂时用于TreeSelect生成multipleValue.value | singleValue
-      emit("update:treeOriginData", tree.value.treeData);
     }
   },
   { deep: true }
 );
+
+watchEffect(() => {
+  // todo
+  // 新增懒加载不修改源数据
+  // 暂时用于TreeSelect生成multipleValue.value | singleValue
+  emit("update:treeOriginData", tree.value.treeData);
+});
 
 onMounted(() => {
   nextTick(() => {
@@ -173,6 +155,10 @@ function handleClick(node: TreeData) {
   emit("node-click", originNode);
 }
 
+const handleCheckChange = (node: TreeData, checked: boolean) => {
+  emit("check-change", node, checked);
+};
+
 const selectedKey = ref(props.selectedKey);
 
 watch(
@@ -181,6 +167,17 @@ watch(
     selectedKey.value = props.selectedKey;
   }
 );
+
+const filter = (value: string) => {
+  if (!props.searchNodeMethod) {
+    throw new Error("[Layui-vue/Tree] filterNodeMethod为空");
+  }
+  tree.value._filter(value);
+};
+
+defineExpose({
+  filter,
+});
 </script>
 <template>
   <div :class="className">
@@ -197,6 +194,7 @@ watch(
       :replace-fields="_replaceFields"
       :load="load"
       @node-click="handleClick"
+      @check-change="handleCheckChange"
     >
       <template v-if="$slots.title" #title="{ data }">
         <slot name="title" :data="data"></slot>

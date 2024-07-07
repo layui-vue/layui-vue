@@ -1,9 +1,10 @@
-import {
+import type {
   OriginalTreeData,
   StringOrNumber,
   ReplaceFieldsOptions,
+  SearchNodeMethodType,
 } from "./tree.type";
-import { Nullable } from "../../types";
+import type { Nullable } from "../../types";
 
 type CustomKey = string | number;
 type CustomString = (() => string) | string;
@@ -14,6 +15,7 @@ export interface TreeData {
   children: TreeData[];
   parentKey: Nullable<StringOrNumber>;
   isRoot: boolean;
+  visible: boolean;
   isChecked: boolean;
   isDisabled: boolean;
   isLeaf: boolean;
@@ -33,6 +35,7 @@ interface TreeConfig {
   replaceFields: ReplaceFieldsOptions;
   defaultExpandAll: boolean;
   lazy: boolean;
+  searchNodeMethod: SearchNodeMethodType;
 }
 
 class Tree {
@@ -73,7 +76,7 @@ class Tree {
       const nodeHasChildren = !!Reflect.get(node, children);
 
       if (nodeHasChildren) {
-        Reflect.set(node, "children", this.createTree(nodeChildren, node[id]));
+        Reflect.set(node, children, this.createTree(nodeChildren, node[id]));
       }
 
       nodeList.push(node);
@@ -116,6 +119,7 @@ class Tree {
       isLoading: false,
       hasNextSibling: hasNextSibling,
       parentNode: parentNode || null,
+      visible: true,
     });
 
     node.isDisabled = nodeDisabled;
@@ -207,7 +211,7 @@ class Tree {
   }
 
   getKeys() {
-    const expandKeys = [];
+    const expandKeys: any[] = [];
     const checkedKeys: StringOrNumber[] = [];
     const iterator = this.config.nodeMap[Symbol.iterator]();
     const { id: fId, children } = this.config.replaceFields;
@@ -239,6 +243,35 @@ class Tree {
 
   getOriginData(key: StringOrNumber): OriginalTreeData {
     return this.config.originMap.get(key)!;
+  }
+
+  _filter(value: string) {
+    const {
+      replaceFields: { children },
+      searchNodeMethod,
+      lazy,
+    } = this.config;
+
+    const traverse = function (node: TreeData[]) {
+      node.forEach((child: TreeData) => {
+        const childNodes = child[children] as TreeData[];
+        child.visible = searchNodeMethod(child, value);
+
+        traverse(childNodes);
+
+        if (!child.visible && childNodes.length) {
+          let allHidden = true;
+          allHidden = !childNodes.some((child) => child.visible);
+
+          child.visible = allHidden === false;
+        }
+        if (!value) return;
+
+        if (child.visible && !child.isLeaf && !lazy) child.isLeaf = true;
+      });
+    };
+
+    traverse(this.treeData);
   }
 }
 

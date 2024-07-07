@@ -15,6 +15,21 @@
   <lay-timeline>
     <lay-timeline-item title="2.17.x">
       <ul>
+        <a name="2-17-7"></a>
+        <li>
+          <h3>2.17.7 <span class="layui-badge-rim">2024-06-27</span></h3>
+          <ul>
+              <li>[升级] layer 升级至2.4.2。</li>
+              <li>[新增] tree组件 新增props：`searchNodeMethod`、emit： `check-change`、Exposes： `filter`。<a href="https://gitee.com/layui-vue/layui-vue/pulls/345">详情</a></li>
+              <li>[重构] popper组件 影响组件 `tooltip`。<a href="https://gitee.com/layui-vue/layui-vue/pulls/342">详情</a></li>
+              <li>[修复] layer组件 手动调用min/full函数切换状态异常。<a href="https://gitee.com/layui-vue/layui-vue/pulls/339">详情</a></li>
+              <li>[修复] layer组件 content属性在type为6场景下值为VNode失效。<a href="https://gitee.com/layui-vue/layui-vue/pulls/344">详情</a></li>
+              <li>[修复] tree组件 设置replaceFields后，节点联动失效。<a href="https://gitee.com/layui-vue/layui-vue/pulls/345">详情</a></li>
+              <li>[修复] tree-select组件 下拉树多选开始搜索，选中搜索项会导致已选项清空。<a href="https://gitee.com/layui-vue/layui-vue/pulls/345">详情</a></li>
+          </ul>
+        </li>
+      </ul>
+      <ul>
         <a name="2-17-6"></a>
         <li>
           <h3>2.17.6 <span class="layui-badge-rim">2024-06-13</span></h3>

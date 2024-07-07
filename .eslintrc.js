@@ -45,6 +45,7 @@ module.exports = {
     "vue/attribute-hyphenation": "off",
     "vue/require-default-prop": "off",
     "vue/script-setup-uses-vars": "off",
+    "vue/no-v-html": "off",
     "@typescript-eslint/no-unused-vars": [
       "error",
       // we are only using this rule to check for unused arguments since TS

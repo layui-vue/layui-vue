@@ -51,7 +51,7 @@ const changeThemeVariable = () => {
 ::: title Css Variable
 :::
 
-::: describe 以下是一些最常用的通用变量，所有 Css3 变量可以在 <a target="_blank" style="color:#009688;" href="https://gitee.com/layui/layui-vue/blob/master/package/component/src/theme/variable.less">这里</a> 找到。
+::: describe 以下是一些最常用的通用变量，所有 Css3 变量可以在 <a target="_blank" style="color:#009688;" href="https://gitee.com/layui/layui-vue/blob/master/packages/component/theme/variable.less">这里</a> 找到。
 :::
 
 ```css

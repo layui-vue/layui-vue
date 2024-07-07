@@ -1,80 +1,48 @@
 <script lang="ts" setup>
 import "./index.less";
-import LayPopper from "../popper/index.vue";
-import {
-  computed,
-  getCurrentInstance,
-  nextTick,
-  onMounted,
-  PropType,
-  ref,
-  shallowRef,
-  StyleValue,
-} from "vue";
+
+import type { TooltipProps } from "./types";
+import type {
+  PopperTrigger as _PopperTrigger,
+  Placement,
+  ContentComponentInstance,
+} from "../popper/index";
+
+import LayPopper from "../popper/popper.vue";
+import { computed, nextTick, onMounted, ref, shallowRef, unref } from "vue";
 import { useEventListener } from "@vueuse/core";
 
-export type PopperTrigger = "click" | "hover" | "focus" | "contextMenu";
+export type PopperTrigger = _PopperTrigger;
 
 defineOptions({
   name: "LayTooltip",
   inheritAttrs: false,
 });
 
-const props = defineProps({
-  content: {
-    type: [Number, String],
-    required: false,
-  },
-  position: {
-    type: String,
-    default: "top",
-  },
-  isDark: {
-    type: Boolean,
-    default: false,
-  },
-  disabled: {
-    type: Boolean,
-    default: false,
-  },
-  isCanHide: {
-    type: Boolean,
-    default: true,
-  },
-  isAutoShow: {
-    type: Boolean,
-    default: false,
-  },
-  visible: {
-    type: Boolean,
-    default: false,
-  },
-  trigger: {
-    type: String as PropType<PopperTrigger | PopperTrigger[]>,
-    default: "hover",
-  },
-  enterable: {
-    type: Boolean,
-    default: true,
-  },
-  popperClass: {
-    type: [String, Array, Object],
-  },
-  popperStyle: {
-    type: [String, Object] as PropType<StyleValue>,
-  },
+const props = withDefaults(defineProps<TooltipProps>(), {
+  position: "top",
+  trigger: "hover",
+  enterable: true,
 });
 
-const vm = getCurrentInstance()!;
-const isMounted = ref(false);
+const disabledPopper = ref(false);
 const tooltipRef = shallowRef<HTMLElement | undefined>(undefined);
-const popperRef = ref<HTMLElement | undefined>();
+const popperRef = ref<ContentComponentInstance>();
 
-const innerProps = computed(() => {
+const popperProps = computed(() => {
   return {
-    el: vm.proxy!.$el.nextElementSibling,
-    ...vm.proxy!.$props,
-    ...vm.proxy!.$attrs,
+    modelValue: props.visible,
+    trigger: props.trigger as PopperTrigger,
+    placement: props.position as Placement,
+    enterable: props.enterable,
+    showArrow: true,
+    disabled: props.disabled || unref(disabledPopper),
+    popperClass: [
+      "lay-tooltip",
+      { "layui-dark": props.isDark },
+      props.popperClass,
+    ],
+    popperStyle: props.popperStyle,
   };
 });
 
@@ -82,15 +50,15 @@ const setEllipsis = function () {
   if (tooltipRef.value) {
     let tooltipHtml = tooltipRef.value;
     if (
-      tooltipHtml.offsetWidth >=
-      (tooltipHtml.firstChild as HTMLElement)?.offsetWidth
+      tooltipHtml.scrollWidth > tooltipHtml.clientWidth ||
+      tooltipHtml.scrollHeight > tooltipHtml.clientHeight
     ) {
-      isMounted.value = false;
+      disabledPopper.value = false;
     } else {
-      isMounted.value = true;
+      disabledPopper.value = true;
     }
   } else {
-    isMounted.value = true;
+    disabledPopper.value = false;
   }
 };
 
@@ -118,30 +86,40 @@ onMounted(() => {
   });
 });
 
+const show = function () {
+  nextTick(() => {
+    popperRef.value!.show();
+  });
+};
+
 const doHidden = function () {
   nextTick(() => {
-    // @ts-ignore
-    popperRef.value.hide();
+    popperRef.value!.hidden();
   });
 };
 
 const update = function () {
   nextTick(() => {
-    // @ts-ignore
-    popperRef.value.updatePosistion();
+    popperRef.value!.update();
   });
 };
 
-defineExpose({ hide: doHidden, update });
+defineExpose({ show, hide: doHidden, update });
 </script>
 <template>
-  <div ref="tooltipRef" v-if="isAutoShow" class="lay-tooltip-content">
-    <span>
-      <slot></slot>
-    </span>
-  </div>
-  <slot v-else></slot>
-  <lay-popper ref="popperRef" v-if="isMounted" v-bind="innerProps">
-    <slot name="content"></slot>
+  <lay-popper ref="popperRef" v-bind="popperProps">
+    <div ref="tooltipRef" v-if="isAutoShow" class="lay-tooltip-content">
+      <span>
+        <slot></slot>
+      </span>
+    </div>
+    <slot v-else></slot>
+    <template #content>
+      <slot name="content">
+        <span v-if="content">
+          {{ content }}
+        </span>
+      </slot>
+    </template>
   </lay-popper>
 </template>

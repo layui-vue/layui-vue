@@ -5,6 +5,12 @@
  * @LastEditors: baobaobao
  */
 
+import type {
+  SliderTooltipProps,
+  DefaultValueSliderPropsType,
+} from "./types/sliderType";
+import type { Ref, ToRefs } from "vue";
+
 import {
   InjectionKey,
   computed,
@@ -17,17 +23,30 @@ import {
   ComputedRef,
   nextTick,
 } from "vue";
-import { SliderProps } from "./types/sliderType";
 
-export const LAYUI_SLIDER_KEY: InjectionKey<any> = Symbol("layui-slider");
-export const useSliderProvide = () => inject(LAYUI_SLIDER_KEY, {});
+type InitValType = {
+  firstVal: number;
+  secondVal: number;
+};
+
+interface SliderContext extends ToRefs<DefaultValueSliderPropsType> {
+  tooltipProp: Required<SliderTooltipProps>;
+  firstVal: Ref<InitValType["firstVal"]>;
+  secondVal: Ref<InitValType["secondVal"]>;
+  updateDragging: (v: boolean) => void;
+  getCalcPos: (e: MouseEvent) => number;
+}
+
+export const LAYUI_SLIDER_KEY: InjectionKey<SliderContext> =
+  Symbol("layui-slider");
+export const useSliderProvide = () => inject(LAYUI_SLIDER_KEY) as SliderContext;
 
 export const useSlider = (
-  props: SliderProps,
+  props: DefaultValueSliderPropsType,
   emit: any,
   getSortMarks: ComputedRef<number[]>
 ) => {
-  const initVal = reactive({
+  const initVal = reactive<InitValType>({
     firstVal: props.min,
     secondVal: props.max,
   });
@@ -98,9 +117,9 @@ export const useSlider = (
     () => {
       if (props.tooltipProps) {
         for (const key in props.tooltipProps) {
-          if (key in tooltipProp) {
-            tooltipProp[key] = props.tooltipProps[key];
-          }
+          const _key = key as keyof SliderTooltipProps;
+
+          tooltipProp[_key] = props.tooltipProps[_key]!;
         }
       }
     },
@@ -129,7 +148,7 @@ export const useSlider = (
   watch(
     () => dragging,
     (val) => {
-      if (!val.value) {
+      if (val.value) {
         if (props.range) {
           const modelValue = props.modelValue
             ? props.modelValue
@@ -182,11 +201,9 @@ export const useSlider = (
         isNaN(props.max)
       ) {
         throw new Error("max与min应为数值!");
-        return;
       }
       if (props.max < props.min) {
         throw new Error("max请大于min!");
-        return;
       }
       initValidate();
     }
@@ -233,7 +250,7 @@ export const useSlider = (
     return Math.max.apply(null, precisions);
   });
   const getCalcPos = (e: MouseEvent) => {
-    let domPos = slider.value!.getBoundingClientRect();
+    const domPos = slider.value!.getBoundingClientRect();
     const GETDOM_VALUE_H = props.reverse ? domPos.right : domPos.left;
     const GETDOM_VALUE_V = props.reverse ? domPos.top : domPos.bottom;
     let diff = (e.clientX - GETDOM_VALUE_H) * (props.reverse ? -1 : 1);
@@ -286,11 +303,11 @@ export const useSlider = (
     if (props.range) {
       const modelValue = props.modelValue ? props.modelValue : props.rangeValue;
       if (Array.isArray(modelValue)) {
-        let firstVal = Math.min(
+        const firstVal = Math.min(
           Math.max(props.min, modelValue[0] ? modelValue[0] : props.min),
           props.max
         );
-        let secondVal = Math.min(
+        const secondVal = Math.min(
           Math.max(props.min, modelValue[1] ? modelValue[1] : props.min),
           props.max
         );
@@ -326,7 +343,7 @@ export const useSlider = (
     slider,
     getCalcPos,
     updateDragging,
-    tooltipProp,
+    tooltipProp: tooltipProp as Required<SliderTooltipProps>,
     ...toRefs(initVal),
   };
 };

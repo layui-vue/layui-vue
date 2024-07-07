@@ -880,39 +880,40 @@ const openCallback = () => {
 
 | 属性 | 描述 | 类型 | 默认值 | 可选值 |
 | -- | -- | -- | -- | -- |
-| *`id`* | ID | `string` | | |
-| *`type`* | 类型 | `string` `number` | `1` | `0 "dialog"` `1 "page"` `2 "iframe"` `3 "loading"` `4 "drawer"` `5 "photos"` `6 "notify"` `7 "prompt"` |
-| *`icon`* | 图标 | `string` `number` | | |
-| *`title`* | 标题 | `string` `boolean` | `"标题"` | |
-| *`title-style`* | 标题样式 | `string` `StyleValue` | `""` |  |
-| *`skin`* | 颜色模式 | `string` | | |
-| *`layer-classes`* | layer box 类名(原 skin 属性) | `string` | | |
-| *`z-index`* | zIndex，若不设置则内部将从 `99999` 开始递增 | `number` | | |
-| *`content`* | 内容 | `string` `VNode` | | |
-| *`v-model`* | 显示 | `boolean` | `false`  | `true` `false` |
-| *`offset`* | 位置 | `string` `string[]` | `"auto"` | `"auto"` `[top, left]` |
-| *`area`* | 尺寸 | `string` `string[]` | `"auto"`  | `"auto"` `[width, height]` |
-| *`move`* | 允许移动 | `boolean` | `true` | `true` `false` |
-| *`moveOut`* | 是否可以拖出浏览器可视区域 | `boolean` | `false` | `true` `false` |
-| *`maxmin`* | 开启最小/最大化 | `boolean` | `false` | `true` `false` |
-| *`resize`* | 允许拉伸 | `boolean` | `false` | `true` `false` |
-| *`anim`* | 入场动画 | `number` | `0` | `0` - `6` |
-| *`isOutAnim`* | 离场动画 | `boolean` | `true` | `true` `false` |
-| *`animDuration`* | 动画持续时间 | `string` | `"0.3s"` | |
-| *`btn`* | 底部按钮集合 | `Array<BtnType>` `false` | | |
-| *`btnAlign`* | 底部按钮位置 | `string` | `"r"` | `"l"` `"c"` `"r"` |
-| *`closeBtn`* | 关闭按钮 | `boolean` `string` | `"1"` | `false` `"1"` `"2"` |
-| *`time`* | `msg` `notify` 定时关闭 | `number` | `0` | |
-| *`shade`* | 显示遮盖层 | `boolean` | `true` | `true` `false` |
-| *`shade-close`* | 遮盖层关闭 | `boolean` | `true` | `true` `false` |
-| *`shade-style`*   | 遮盖层样式   | `StyleValue` |  |  |
-| *`shade-opacity`* | 遮盖层透明度 | `string` | `"0.1"` | `"0.1"` - `"1"` |
-| *`isHtmlFragment`* | 解析 html 字符 | `boolean` | `false` | `true` `false` |
-| *`teleport`* | layer挂载到目标DOM | `string` | `body`  |  |
-| *`teleportDisabled`* | 禁止挂载到目标DOM，保持原位置 | `boolean` | `false`  | |
-| *`lastPosition`* | 最小/最大化复原位置 `true`上次位置(拖动)、 `false` layer初始位置 | `boolean` | `true`  | |
-| *`load`* | `type` 为3时，loading Icon   | `number` | `0` | `0`, `1` |
-| *`yesText`* | 底部默认按钮文本   | `string` | `确定` |  |
+| *`v-model`* | 显示 | boolean | `false`  |  |
+| *`id`* | layer标识 可不传(内部生成) | `string` | | |
+| *`type`* | 类型 | string | `1` | `0(dialog)` `1(page)` `2(iframe)` `3(loading)` `4(drawer)` `5(photos)` `6(notify)` |
+| *`title`* | 标题 | `string` `boolean` `Function` | `标题` | -- |
+| *`title-style`* | 标题样式 | `string` `StyleValue` | -- | -- |
+| *`content`* | 内容 | `PropsContentType` | -- | -- |
+| *`isHtmlFragment`* | `content` 是否解析html | `boolean` | `false` | -- |
+| *`offset`* | 偏移量 | `string` `string[]` | `auto` | -- |
+| *`area`* | 弹窗宽高 (`auto` 将自适应) | `string` `string[]` | `auto`  | -- |
+| *`move`* | 开启拖拽 | boolean | `true` | -- | 
+| *`maxmin`* | 开启最小/最大化 | boolean | `false` | -- |
+| *`resize`* | 开启左下角拖拽放大缩小 | boolean | `false` | -- |
+| *`shade`* | 显示遮盖层 | boolean | `true` | -- |
+| *`shade-close`* | 遮盖层关闭 | boolean | `true` | -- |
+| *`shade-style`*   | 遮盖层样式   | `StyleValue` | -- | -- |
+| *`shade-opacity`* | 遮盖层透明度 | `string` | `0.1` | `0.1` - `1` |
+| *`layer-classes`* | layer box 类名 (原skin属性) | `string` | -- | -- |
+| *`z-index`* | layer `z-index` 不设置内部将从 `99999` 开始递增 | `number` | -- | -- |
+| *`closeBtn`* | 关闭按钮 | `boolean` `string` | `1` | `false` `1` `2` |
+| *`btn`* | 底部按钮集合 | `BtnType[]` | -- | -- |
+| *`btnAlign`* | 底部按钮位置 | `string` | `r` | `l` `c` `r` |
+| *`anim`* | layer打开动画 | `number` | `0` | `0` - `6` |
+| *`isOutAnim`* | 是否需要离场动画 | `boolean` | `true` | -- |
+| *`icon`* | `msg` `notify` 展示Icon | `string` `number` | -  | `1` `2` `3` `4` `5` `6` `7` `16`  |
+| *`imgList`* | `type` 为5 渲染图片列表 | `ImgListType[]` | -- | -- |
+| *`startIndex`* | 图片初始浏览索引 | `number` | 0 | -- |
+| *`animDuration`* | layer打开关闭动画速率 | `string` | `0.3s`  | -- |
+| *`moveOut`* | 是否可以拖出浏览器可视区域 | `boolean` | `false`  | -- |
+| *`teleport`* | layer挂载到目标DOM | `string` | `body`  | -- |
+| *`teleportDisabled`* | 禁止挂载到目标DOM，保持原位置 | `boolean` | `false`  | -- |
+| *`lastPosition`* | 最小/最大化复原位置 `true`上次位置(拖动)、 `false` layer初始位置 | `boolean` | `true`  | -- |
+| *`time`* | `msg` `notify` 定时关闭   | `number` |  `msg`1000 `notify`2000 | -- |
+| *`load`* | `type` 为3时，loading Icon   | `number` |  0 | `0`, `1` |
+| *`yesText`* | 底部默认按钮文本   | `string` | `确定` | -- |
 
 :::
 
@@ -1309,5 +1310,7 @@ type ImgListType = {
   alt?: string;
   thumb?: string;
 };
+
+type PropsContentType = VNodeTypes | (() => VNodeTypes);
 
 ```

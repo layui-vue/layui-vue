@@ -223,7 +223,6 @@ describe("LayPage.vue", () => {
   test("render tooltip-props	test", async () => {
     const tooltipProps = reactive({
       isDark: false,
-      isCanHide: true,
       placement: "top",
       disabled: false,
     });
@@ -234,7 +233,6 @@ describe("LayPage.vue", () => {
     });
     const LaySliderBar = wrapper.findComponent({ name: "LaySliderBar" });
     expect(LaySliderBar.vm.isDark).toBeFalsy();
-    expect(LaySliderBar.vm.isCanHide).toBeTruthy();
     expect(LaySliderBar.vm.disabled).toBeFalsy();
     expect(LaySliderBar.vm.placement).toEqual("top");
     tooltipProps.placement = "bottom";

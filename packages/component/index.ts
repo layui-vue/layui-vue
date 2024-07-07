@@ -102,6 +102,7 @@ import LayRadioButton from "./component/radioButton/index";
 import LayPopconfirm from "./component/popconfirm/index";
 import LayLoading from "./component/loading/index";
 import LayWatermark from "./component/watermark/index";
+import LayPopper from "./component/popper/index";
 import LayConfigProvider from "./provider";
 import { InstallOptions } from "./types";
 
@@ -203,6 +204,7 @@ const components: Record<string, Plugin> = {
   LayPopconfirm,
   LayLoading,
   LayWatermark,
+  LayPopper,
 };
 
 const install = (app: App, options?: InstallOptions): void => {
@@ -311,6 +313,7 @@ export {
   LayPopconfirm,
   LayLoading,
   LayWatermark,
+  LayPopper,
   install,
 };
 

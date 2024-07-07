@@ -126,7 +126,7 @@ export default {
   <lay-line>主题</lay-line>
   <lay-slider :tooltip-props="tooltipProps1" v-model="value2"></lay-slider>
   <lay-line>始终显示tooltip</lay-line>
-   <lay-slider :tooltip-props="tooltipProps2" v-model="value10"></lay-slider>
+   <lay-slider v-model="value10" alwayShowTooltip></lay-slider>
   <lay-line>是否显示tooltip</lay-line>
   <lay-slider :tooltip-props="tooltipProps3" v-model="value11"></lay-slider>
   <lay-line>tooltip方向</lay-line>
@@ -147,11 +147,9 @@ export default {
     const tooltipProps1 = reactive({
       isDark: true
     })
-    const tooltipProps2 = reactive({
-      isCanHide: false
-    })
     const tooltipProps3 = reactive({
-      disabled: true
+      disabled: true,
+      trigger: 'click'
     })
     const tooltipProps4 = reactive({
       placement: 'bottom'
@@ -438,8 +436,9 @@ export default {
 | showDots       | 是否显示断点                          | `Boolean`         | -      | `false`   
 | is-follow-mark       | 默认只能拖拽到刻度上, 配合mark使用。     | `Boolean`         | -      | `true`
 | reverse       |  反向     | `Boolean`         | -      | `false`                                        |        |
-| tooltip-props   | tooltip 相关配置属性 | `Object` | -      | `{isCanHide:true,disabled:false,placement:'top',isDark:false}`  | 
+| tooltip-props   | tooltip 相关配置属性 | `Object` | -      | `{isCanHide:true,disabled:false,placement:'top',isDark:false}`  |  `2.17.7`~~isCanHide~~|
 | mark           | 刻度                                  | `object`          | -      | `{ label: string、 VNode ,  style: object   }` |
+| alwayShowTooltip  `2.17.7`       |   是否一直显示tooltip               | `boolean`          | -      | `false` |  |
 | format-tooltip | 格式化提示信息                        | `function(value)` | -      | `undefined`                                    |        |
 
 :::

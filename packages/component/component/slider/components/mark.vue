@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, isVNode, StyleValue, useSlots } from "vue";
+import { isVNode, useSlots } from "vue";
 import { StyledMark } from "../types/sliderType";
 
 export interface Mark {

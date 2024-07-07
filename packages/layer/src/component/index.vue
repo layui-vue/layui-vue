@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { BtnType, ImgListType } from "../types";
+import type { BtnType, ImgListType, PropsContentType } from "../types";
 
 import Shade from "./Shade.vue";
 import Iframe from "./Iframe.vue";
@@ -14,7 +14,6 @@ import {
   watch,
   computed,
   useSlots,
-  VNodeTypes,
   nextTick,
   onMounted,
   onUnmounted,
@@ -37,9 +36,12 @@ import {
   calculateNotifOffset,
   removeNotifiyFromQueen,
   getNotifyAnimationClass,
+  renderContent,
 } from "../utils";
 import { useMove, useResize } from "../composable/useDragable";
 import { nextIndex } from "../tokens";
+import LayRender from "@layui/component/component/_components/render";
+
 import "../theme/index.css";
 import "@layui/component/theme/index.less";
 
@@ -64,7 +66,7 @@ export interface LayerProps {
     | "prompt";
   title?: string | boolean | Function;
   titleStyle?: string | StyleValue;
-  content?: string | Function | VNodeTypes;
+  content?: PropsContentType;
   isHtmlFragment?: boolean;
   offset?: string | string[];
   area?: string | string[];
@@ -548,18 +550,6 @@ const shadeHandle = () => {
 };
 
 /**
- * 获取内容
- * <p>
- * @param content 文本 / 方法
- */
-const renderContent = function (content: any) {
-  if (content instanceof Function) {
-    return content();
-  }
-  return content;
-};
-
-/**
  * 弹层图标
  * <p>
  * @param icon 图标
@@ -717,8 +707,7 @@ const listenDocument = function () {
             getArea(layerRef.value),
             type
           );
-          t.value = (props.lastPosition && _t.value) || offset.value[0];
-          l.value = (props.lastPosition && _l.value) || offset.value[1];
+          resetPosition(true);
         }
       });
       resizeObserver.observe(contentRef.value);
@@ -737,11 +726,13 @@ const removeListener = function () {
 };
 
 /**
- * 根据 offset 重新定位至初始 Dom 位置
+ * 重新定位 layer 位置
+ * 当需要还原位置时，isRevert为true && props.lastPosition
+ * @param {boolean} isRevert 是否还原
  */
-const resetPosition = function () {
-  t.value = offset.value[0];
-  l.value = offset.value[1];
+const resetPosition = function (isRevert = false) {
+  t.value = (isRevert && props.lastPosition && _t.value) || offset.value[0];
+  l.value = (isRevert && props.lastPosition && _l.value) || offset.value[1];
 };
 
 /**
@@ -774,16 +765,32 @@ const reset = function () {
   }
 };
 
-const full = function () {
+const full = async function () {
+  if (min.value) {
+    // 最小化>最大化、 先还原状态
+    revert();
+    // listenDocument 存在延迟 无法正常还原到复原状态.
+    // 手动还原
+    resetPosition(true);
+  }
   if (!max.value) {
+    await nextTick();
     removeListener();
     baseMaxHandle();
     max.value = true;
   }
 };
 
-const mini = function () {
+const mini = async function () {
+  if (max.value) {
+    // 最大化>最小化、 先还原状态
+    revert();
+    // listenDocument 存在延迟 无法正常还原到复原状态.
+    // 手动还原
+    resetPosition(true);
+  }
   if (!min.value) {
+    await nextTick();
     removeListener();
     baseMinHandle();
     min.value = true;
@@ -854,10 +861,14 @@ defineExpose({ reset, open, close, full, min: mini, revert });
               <template v-if="isHtmlFragment">
                 <div
                   class="html-fragment"
-                  v-html="renderContent(props.content)"
+                  v-html="renderContent(props.content as string)"
                 ></div>
               </template>
-              <template v-else>{{ renderContent(props.content) }}</template>
+              <template v-else>
+                <LayRender
+                  :render="() => renderContent(props.content as PropsContentType)"
+                ></LayRender>
+              </template>
             </template>
           </template>
           <template v-if="type === 7">
@@ -868,7 +879,7 @@ defineExpose({ reset, open, close, full, min: mini, revert });
               :placeholder="props.placeholder"
             ></Prompt>
           </template>
-          <Iframe v-if="type === 2" :src="props.content"></Iframe>
+          <Iframe v-if="type === 2" :src="props.content as string"></Iframe>
           <Photos
             v-if="type === 5"
             :imgList="props.imgList"
@@ -879,7 +890,7 @@ defineExpose({ reset, open, close, full, min: mini, revert });
             v-if="type === 6"
             @close="closeHandle"
             :title="props.title"
-            :content="props.content"
+            :content="props.content as PropsContentType"
             :isHtmlFragment="props.isHtmlFragment"
             :icon="props.icon"
             :iconClass="iconClass"

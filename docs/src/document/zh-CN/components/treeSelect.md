@@ -692,8 +692,12 @@ const data4 = ref([{
 ::: demo 通过 `search` 属性开启搜索，`searchNodeMethod` 设置对树过滤方法
 
 <template>
-  <lay-tree-select v-model="value8" :data="data8" placeholder="请选择" :allow-clear="true" :search="true" :multiple="false"></lay-tree-select>
-	<lay-tree-select v-model="value8" :data="data8" placeholder="请选择 searchNodeMethod" :allow-clear="true" :search="true" :searchNodeMethod="searchNodeMethod"></lay-tree-select>
+  <lay-space>
+  	<lay-tree-select v-model="value9" :data="data8" placeholder="请选择" :allow-clear="true" :search="true" multiple></lay-tree-select>
+	</lay-space>
+	<lay-space>
+		<lay-tree-select v-model="value8" :data="data8" placeholder="请选择 searchNodeMethod" :allow-clear="true" :search="true" :searchNodeMethod="searchNodeMethod"></lay-tree-select>
+	</lay-space>
 </template>
 
 <script setup>

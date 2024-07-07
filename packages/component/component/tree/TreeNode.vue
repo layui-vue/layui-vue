@@ -1,34 +1,19 @@
 <script setup lang="ts">
+import type { Tree, TreeData as _TreeData } from "./tree";
+
 import { LayIcon } from "@layui/icons-vue";
 import LayCheckbox from "../checkbox/index.vue";
 import { computed, nextTick } from "vue";
-import { Tree } from "./tree";
-import { Nullable } from "../../types";
 import LayTransition from "../transition/index.vue";
 import {
-  StringOrNumber,
-  CustomKey,
-  CustomString,
   ReplaceFieldsOptions,
   LoadFunction,
   OriginalTreeData,
 } from "./tree.type";
 
-export interface TreeData {
-  id: CustomKey;
-  title: CustomString;
-  children: TreeData[];
-  parentKey: Nullable<StringOrNumber>;
-  isRoot: boolean;
-  isChecked: boolean;
-  isDisabled: boolean;
-  isLeaf: boolean;
-  isLazy: boolean;
-  isLoading: boolean;
-  hasNextSibling: boolean;
-  parentNode: Nullable<TreeData>;
-  [key: string]: any;
-}
+import { useTreeSelectProvide } from "../treeSelect/useTreeSelect";
+
+export type TreeData = _TreeData;
 
 export interface TreeNodeProps {
   tree: Tree;
@@ -46,6 +31,7 @@ export interface TreeNodeProps {
 
 interface TreeNodeEmits {
   (e: "node-click", node: TreeData): void;
+  (e: "check-change", node: TreeData, checked: boolean): void;
 }
 
 defineOptions({
@@ -56,13 +42,14 @@ const props = defineProps<TreeNodeProps>();
 const emit = defineEmits<TreeNodeEmits>();
 
 function renderLineShort(node: TreeData) {
+  const { children } = props.replaceFields;
   return (
     !node.hasNextSibling &&
     node.parentNode &&
     // 外层最后一个
     (!node.parentNode.hasNextSibling ||
       //上一层父级有延伸线
-      (node.parentNode.hasNextSibling && !node.parentNode.children))
+      (node.parentNode.hasNextSibling && !node.parentNode[children]))
   );
 }
 /**
@@ -70,13 +57,15 @@ function renderLineShort(node: TreeData) {
  * @param node
  */
 const nodeIconType = (node: TreeData): string => {
+  const { children } = props.replaceFields;
+
   if (!props.showLine) {
-    if (node.children.length > 0 || node.isLazy) {
+    if (node[children].length > 0 || node.isLazy) {
       return !node.isLeaf ? "layui-icon-triangle-r" : "layui-icon-triangle-d";
     }
     return "";
   }
-  if (node.children.length > 0 || node.isLazy) {
+  if (node[children]?.length > 0 || node.isLazy) {
     return !node.isLeaf ? "layui-icon-addition" : "layui-icon-subtraction";
   }
   if (props.tailNodeIcon) {
@@ -89,16 +78,26 @@ function recursiveNodeClick(node: TreeData) {
   emit("node-click", node);
 }
 
+const handleCheckChange = (node: TreeData, checked: boolean) => {
+  emit("check-change", node, checked);
+};
+
+const treeSelectContext = useTreeSelectProvide();
+
 function handleChange(checked: boolean, node: TreeData) {
   props.tree.setCheckedKeys(checked, props.checkStrictly, node);
+  emit("check-change", node, checked);
+  treeSelectContext &&
+    treeSelectContext?.inputEl &&
+    treeSelectContext?.inputEl.value?.focus();
 }
 
 function handleIconClick(node: TreeData) {
-  const Id = node[props.replaceFields.id];
+  const { id, children } = props.replaceFields;
+
+  const Id = node[id];
   const originNode = props.tree.getOriginData(Id);
-  const hasChildren =
-    node[props.replaceFields.children] &&
-    node[props.replaceFields.children].length > 0;
+  const hasChildren = node[children] && node[children].length > 0;
 
   if (props.load && node.isLazy && !hasChildren) {
     node.isLoading = true;
@@ -106,7 +105,7 @@ function handleIconClick(node: TreeData) {
       // todo
       // 不修改tree组件中props.data源数据
       const tree = props.tree.createTree(data, Id);
-      Reflect.set(node, props.replaceFields.children, tree);
+      Reflect.set(node, children, tree);
 
       node.isLoading = false;
       node.isLazy = false;
@@ -139,18 +138,19 @@ function handleRowClick(node: TreeData) {
  */
 const isChildAllSelected = computed(() => {
   function _isChildAllSelected(node: TreeData): boolean {
+    const { children } = props.replaceFields;
     if (!props.showCheckbox) {
       return false;
     }
     let childSelectNum = 0;
     let res = false; // true为半选 false为全选
-    for (const item of node.children) {
+    for (const item of node[children] || []) {
       if (item.isChecked) childSelectNum++;
     }
     if (childSelectNum > 0) node.isChecked = true; //此处的处理与 checkedKeys 有关联
-    if (childSelectNum == node.children.length) {
+    if (childSelectNum === (node[children]?.length || 0)) {
       //继续递归向下判断
-      for (const item of node.children) {
+      for (const item of node[children] || []) {
         res = _isChildAllSelected(item);
         if (res) break;
       }
@@ -173,6 +173,7 @@ const isChildAllSelected = computed(() => {
 
 <template>
   <div
+    v-show="node.visible"
     v-for="(node, nodeIndex) in nodeList"
     :key="nodeIndex"
     :class="{
@@ -189,7 +190,8 @@ const isChildAllSelected = computed(() => {
       <div class="layui-tree-main">
         <span
           :class="[
-            showLine && (node.children.length > 0 || node.isLazy)
+            showLine &&
+            (node[replaceFields.children]?.length > 0 || node.isLazy)
               ? 'layui-tree-icon'
               : '',
             { 'layui-tree-iconClick': true },
@@ -197,7 +199,7 @@ const isChildAllSelected = computed(() => {
               'layui-tree-icon-standalone':
                 nodeIconType(node).length &&
                 node.isLeaf &&
-                !node.children.length,
+                !node[replaceFields.children]?.length,
             },
           ]"
         >
@@ -241,7 +243,7 @@ const isChildAllSelected = computed(() => {
       >
         <tree-node
           :tree="tree"
-          :node-list="node.children"
+          :node-list="node[replaceFields.children] || []"
           :show-checkbox="showCheckbox"
           :show-line="showLine"
           :selected-key="selectedKey"
@@ -252,6 +254,7 @@ const isChildAllSelected = computed(() => {
           :replace-fields="replaceFields"
           :load="load"
           @node-click="recursiveNodeClick"
+          @check-change="handleCheckChange"
         >
           <template v-if="$slots.title" #title="slotProp: { data: any }">
             <slot name="title" :data="slotProp.data"></slot>

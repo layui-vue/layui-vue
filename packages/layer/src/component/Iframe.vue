@@ -1,9 +1,8 @@
 <script lang="ts" setup>
-import type { VNodeTypes } from "vue";
 import { computed } from "vue";
 
 export interface IframeProps {
-  src?: string | Function | object | VNodeTypes;
+  src?: string;
 }
 
 defineOptions({
