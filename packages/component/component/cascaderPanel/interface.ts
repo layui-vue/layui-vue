@@ -1,7 +1,6 @@
 export interface CascaderPanelItemProps {
   label?: any;
   value?: any;
-  checked?: boolean;
   disabled?: boolean;
   slot?: string;
   children?: Array<CascaderPanelItemProps>;
@@ -13,9 +12,11 @@ export interface CascaderPanelItemPropsInternal {
   value: any;
   slot?: any;
   checked: boolean;
+  selected: boolean;
   loading: boolean;
   disabled?: boolean;
   children?: Array<CascaderPanelItemPropsInternal>;
+  parent?: CascaderPanelItemPropsInternal;
 }
 
 export type CascaderPanelLazyloadFunction = (
@@ -43,4 +44,12 @@ export interface CascaderPanelProps {
   value?: string | Array<string>;
   height?: string | number;
   checkStrictly?: boolean;
+  changeOnSelect?: boolean;
+  fullpath?: boolean;
+}
+
+export enum FLUSH_SIGNAL {
+  CHANGE,
+  MULTIPLE,
+  SINGLE,
 }

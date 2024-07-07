@@ -19,13 +19,17 @@
     <lay-button @click="clickSetValue" size='sm' style='margin-left:10px'>修改v-model</lay-button>
   </div>
   <div style="margin-top:12px;">
-    <span style="margin-right: 12px;">级联单选</span>
+    <lay-cascader :options="options" v-model="multipleVal" placeholder="点我试一试" :multiple="true" allow-clear></lay-cascader>
+    <span style="margin-left:20px">输出的值：{{multipleVal}}</span>
+  </div>
+  <div style="margin-top:12px;">
+    <span style="margin-right: 12px;">非严格单选</span>
     <lay-cascader :lazy="true" :load="lazyLoad" :options="options" v-model="singleValue" placeholder="点我试一试" :check-strictly="true" allow-clear></lay-cascader>
     <span style="margin-left:20px">输出的值：{{singleValue}}</span>
   </div>
   <div style="margin-top:12px;">
-    <span style="margin-right: 12px;">级联多选</span>
-    <lay-cascader :options="options" v-model="multipleValue" placeholder="点我试一试" :multiple="true" :check-strictly="true" allow-clear></lay-cascader>
+    <span style="margin-right: 12px;">非严格多选</span>
+    <lay-cascader :options="options" :lazy="true" :load="lazyLoad" v-model="multipleValue" placeholder="点我试一试" :multiple="true" :check-strictly="true" allow-clear></lay-cascader>
     <span style="margin-left:20px">输出的值：{{multipleValue}}</span>
   </div>
 </template>
@@ -33,6 +37,7 @@
 <script setup>
 import { ref } from "vue";
 const value=ref("Guide / shejiyuanze / yizhi");
+const multipleVal=ref([]);
 const singleValue=ref([]);
 const multipleValue=ref([]);
 const lazyLoad = (node, resolve) => {
@@ -344,7 +349,7 @@ const valueLv=ref(null)
 :::
 ::: demo 使用 `changeOnSelect` 属性开启，但不建议和 `onlyLastLevel` 同时开启，因为这样你看不到实时选中的结果。
 <template>
-  <lay-cascader :options="options" v-model="valueChangeOnSelect" :onlyLastLevel="true" :changeOnSelect="true" allow-clear placeholder="选择即改变" ></lay-cascader>
+  <lay-cascader :options="options" v-model="valueChangeOnSelect" :only-last-level="true" :change-on-select="true" allow-clear placeholder="选择即改变" ></lay-cascader>
   <span style="margin-left:20px">输出的值：{{valueChangeOnSelect}}</span>
 </template>
 
@@ -726,11 +731,14 @@ const options3=[
 ::: demo
 <template>
   {{_selectKeys}}
-  <lay-cascader-panel :data="options4" v-model="_selectKeys" :replaceFields="[{label:'label'}]" :multiple="true"></lay-cascader-panel>
+  <lay-cascader-panel :data="options4" v-model="_selectKeys" @update:multiple-select-item="onMultipleSelectItem" :replaceFields="[{label:'label'}]" :multiple="true"></lay-cascader-panel>
 </template>
 
 <script setup>
   const _selectKeys = ref(["450201", "450202", "450101", "450102"]);
+  const onMultipleSelectItem = (item) => {
+    console.log(item);
+  }
   const options4 = ref([
 	{label: "北京", value: '010000'},
 	{label: "广西壮族自治区", value: '450000', children: [

@@ -33,12 +33,13 @@
                 <template v-if="checkStrictly || multiple">
                   <lay-radio
                     v-if="!multiple"
-                    @change="
-                      (val) => {
-                        clickSelectItem(item, i);
-                      }
-                    "
-                    :value="selectKeys.at(i) != item.value"
+                    :value="!item.selected"
+                    @update:model-value="(val: boolean) => {
+                      dataSource.forEach((list, _) => list.forEach((i, _) => (i.selected = false)));
+                      item.selected = !item.selected;
+                      clickSelectItem(item, i);
+                      flushOut(FLUSH_SIGNAL.CHANGE);
+                    }"
                   />
                   <lay-checkbox
                     v-else-if="!item.loading"
@@ -47,27 +48,20 @@
                     v-model="item.checked"
                     :isIndeterminate="
                       (() => {
-                        if (checkStrictly) return;
-                        if (item.children?.length) {
-                          item.children.filter((i) => i.checked).length == 0
-                            ? (item.checked = false)
-                            : (item.checked = true);
-                        }
-                        return (
-                          (item.checked &&
+                        if (checkStrictly) return false;
+                        if (item.children?.length) 
+                          item.checked = item.children.filter((i: CascaderPanelItemPropsInternal) => i.checked).length !== 0;
+
+                        return (item.checked &&
                             item.children?.length &&
-                            item.children.filter((i) => !i.checked).length >
-                              0) ||
-                          false
-                        );
+                            item.children.filter((i: CascaderPanelItemPropsInternal) => !i.checked).length > 0) ||
+                          false;
                       })()
                     "
                     @update:model-value="
-                      (value) => {
-                        item.checked = value;
-                        clickSelectItem(item, i);
+                      () => {
                         multipleItemTrigger(item);
-                        flushOut();
+                        flushOut(FLUSH_SIGNAL.MULTIPLE);
                       }
                     "
                     :value="item.checked ? 1 : 0"
@@ -102,11 +96,12 @@
 
 <script setup lang="ts">
 import "./index.less";
-import { computed, nextTick, onMounted, ref, useSlots, watch } from "vue";
+import { Ref, computed, onMounted, ref, useSlots } from "vue";
 import {
   CascaderPanelItemProps,
   CascaderPanelItemPropsInternal,
   CascaderPanelProps,
+  FLUSH_SIGNAL,
 } from "./interface";
 import useCascaderPanel from "./index.hook";
 
@@ -120,26 +115,15 @@ defineOptions({
 const emits = defineEmits<{
   (event: "update:modelValue", value: Array<string>): void;
   (
-    event: "update:states",
-    value: {
-      selectKeys: Array<string>;
-      selectLabel: Array<string> | string;
-    }
-  ): void;
-  (
     event: "update:multipleSelectItem",
+    value: Map<string, CascaderPanelItemPropsInternal>
+  ): void;
+  (event: "change", value: Array<string>): void;
+  (
+    event: "states",
     value: {
       selectKeys: Array<string>;
       selectLabel: Array<CascaderPanelItemPropsInternal>;
-    }
-  ): void;
-  (
-    event: "selectItem",
-    value: {
-      index: number;
-      value: any;
-      selectKeys: Array<string>;
-      selectLabel: string | Array<string>;
     }
   ): void;
 }>();
@@ -148,7 +132,6 @@ const props = withDefaults(defineProps<CascaderPanelProps>(), {
   data: () => [],
   alwaysLazy: false,
   multiple: false,
-  checkStrictly: false,
   onlyLastLevel: false,
   lazy: () => {},
   style: () => {
@@ -165,6 +148,9 @@ const props = withDefaults(defineProps<CascaderPanelProps>(), {
   modelValue: () => [],
   decollator: () => " / ",
   height: "200px",
+  checkStrictly: false,
+  changeOnSelect: false,
+  fullpath: true,
 });
 /**
  * Hook
@@ -178,9 +164,8 @@ const {
   alwaysLazy,
   loadingTheme,
   selectKeys,
-  selectLabel,
-  iterCollector,
   flatData,
+  changeOnSelect,
 } = useCascaderPanel(props);
 /**
  * 插槽
@@ -193,7 +178,11 @@ const stripe = ref(props.style?.stripe);
 /**
  * 高度
  */
-const height = computed(() => props.height ?? "200px");
+const _height = computed(() =>
+  typeof props.height === "number"
+    ? `${props.height}px`
+    : props.height ?? "200px"
+);
 
 onMounted(() => {
   if (!props.modelValue?.length) {
@@ -202,24 +191,31 @@ onMounted(() => {
   }
 
   if (!multiple.value) {
+    // 非严格且非多选，直接读到选中的键里面
     selectKeys.value =
       props.modelValue instanceof Array
         ? props.modelValue
         : props.modelValue.split(props.decollator);
 
-    dataSource.value.at(0)?.forEach((item) => {
-      doLazyLoad(item);
-    });
+    if (checkStrictly.value) {
+      // 非多选，在非严格模式下，从展平的数据中找到对应的项，然后设置选中
+      const item = flatData.value.find(
+        (c) => c.value === selectKeys.value.at(selectKeys.value.length - 1)
+      );
+      item && (item.selected = true);
+    }
   } else {
-    if (props.modelValue instanceof Array) {
-      props.modelValue.forEach((v) => {
-        const item = flatData.value.find((c) => c.value === v)!;
-        console.log(v, item);
+    let mValue = props.modelValue;
+    if (typeof mValue === "string") mValue = mValue.split(props.decollator);
+
+    if (multiple.value) {
+      // 多选，在此时不管是否严格关系都可以直接读到多选键中
+      // FIXME 某个地方出了问题，导致第一列的LayCheckbox在未展开下一层的时候显示是错误的
+      mValue.forEach((v) => {
+        const item = flatData.value.find((c) => c.value === v);
+        if (!item) return;
         item.checked = true;
         multipleSelectItem.value.set(v, item);
-      });
-      dataSource.value.at(0)?.forEach((item) => {
-        doLazyLoad(item);
       });
     }
   }
@@ -230,61 +226,61 @@ onMounted(() => {
  */
 const doLazyLoad = (item: CascaderPanelItemPropsInternal) => {
   if (props.lazy) {
-    if (!alwaysLazy.value && item.children?.length) return false;
+    if (!alwaysLazy.value && item.children?.length) {
+      return;
+    }
     item.loading = true;
     item.children = [];
 
+    // 追加新数据到数据源
     const process = (res: string | Array<CascaderPanelItemProps> | void) => {
       if (!res) res = [];
       if (typeof res === "string")
         res = JSON.parse(res) as Array<CascaderPanelItemProps>;
-      item.children = sanitizer(res);
+      item.children = sanitizer(res, item);
     };
 
-    Promise.resolve(props.lazy(item, process))
-      .then(process)
-      .then(() => {
-        item.loading = false;
-        if (item.children?.length)
-          props.modelValue instanceof Array &&
-            props.modelValue.forEach((v) => {
-              const item = flatData.value.find((c) => c.value === v);
-              item!.checked = true;
-              multipleSelectItem.value.set(v, item!);
-            });
-        multipleItemTrigger(item);
-        if (!multiple.value) flushOut();
-      });
-    return true;
+    Promise.resolve(props.lazy(item, process)).then(() => {
+      item.loading = false;
+      // 有下层节点
+      if (item.children?.length)
+        props.modelValue instanceof Array &&
+          props.modelValue.forEach((v) => {
+            const item = flatData.value.find((c) => c.value === v);
+            if (item) {
+              // 选中当前的项目，然后添加到已选的多选项中
+              // TODO 讨论：如果存在多个相同 value 值的对象是否抛异常，我认为这一般是用户的业务问题
+              item.checked = true;
+              multipleSelectItem.value.set(v, item);
+            } else multipleSelectItem.value.delete(v);
+          });
+      // 没有下层节点
+      else
+        flushOut(multiple.value ? FLUSH_SIGNAL.MULTIPLE : FLUSH_SIGNAL.SINGLE);
+      multipleItemTrigger(item);
+    });
   } else {
     multipleItemTrigger(item);
-    if (!multiple.value) flushOut();
+    flushOut(multiple.value ? FLUSH_SIGNAL.MULTIPLE : FLUSH_SIGNAL.SINGLE);
   }
-  return false;
 };
 /**
- * 刷新
+ * 刷新输出
  */
-const flushOut = () => {
-  if (multiple.value) {
-    emits(
-      "update:modelValue",
-      iterCollector(multipleSelectItem.value.keys()) as Array<string>
-    );
-    emits("update:multipleSelectItem", {
-      selectKeys: iterCollector(
-        multipleSelectItem.value.keys()
-      ) as Array<string>,
-      selectLabel: iterCollector(
-        multipleSelectItem.value.values()
-      ) as Array<CascaderPanelItemPropsInternal>,
-    });
-  } else {
-    emits("update:modelValue", selectKeys.value);
-    emits("update:states", {
-      selectKeys: selectKeys.value,
-      selectLabel: selectLabel.value,
-    });
+const flushOut = (signal: FLUSH_SIGNAL, source: Ref = selectKeys) => {
+  switch (signal) {
+    case FLUSH_SIGNAL.CHANGE:
+      emits("change", source.value);
+      break;
+
+    case FLUSH_SIGNAL.SINGLE:
+      emits("update:modelValue", source.value);
+      break;
+
+    case FLUSH_SIGNAL.MULTIPLE:
+      emits("update:multipleSelectItem", multipleSelectItem.value);
+      emits("update:modelValue", Array.from(multipleSelectItem.value.keys()));
+      break;
   }
 };
 /**
@@ -292,24 +288,40 @@ const flushOut = () => {
  * @param item 当前项
  */
 const multipleItemTrigger = (item: CascaderPanelItemPropsInternal) => {
-  if (!multiple.value || checkStrictly.value) return;
+  if (!multiple.value) return;
 
-  if (item.children?.length)
+  if (item.children?.length && !checkStrictly.value) {
     item.children.forEach((c) => {
       c.checked = item.checked;
       multipleItemTrigger(c);
     });
-  else {
-    if (item.checked) multipleSelectItem.value.set(item.value, item);
-    else multipleSelectItem.value.delete(item.value);
+    return;
   }
+
+  if (item.checked) multipleSelectItem.value.set(item.value, item);
+  else multipleSelectItem.value.delete(item.value);
 };
 /**
- * 点击事件
+ * 点击 li 事件
+ * @description 点击 li 的时候展开子项，如果配置了懒加载就进行懒加载
  * @param item 当前项
  * @param index 当前列索引
  */
 const clickSelectItem = (
+  item: CascaderPanelItemPropsInternal,
+  index: number
+) => {
+  clickChooseItem(item, index);
+  doLazyLoad(item);
+  if (changeOnSelect.value) flushOut(FLUSH_SIGNAL.CHANGE);
+};
+/**
+ * 选中事件
+ * @description 选中一个项目，并且加入 selectKeys 数组中
+ * @param item 当前项
+ * @param index 当前列索引
+ */
+const clickChooseItem = (
   item: CascaderPanelItemPropsInternal,
   index: number
 ) => {
@@ -321,26 +333,12 @@ const clickSelectItem = (
   while (keys.length <= index) keys.push(multiple.value ? item.value : "");
   selectKeys.value = keys;
   selectKeys.value[index] = item.value;
-
-  if (doLazyLoad(item)) return;
-
-  if (checkStrictly.value)
-    emits("update:states", {
-      selectKeys: selectKeys.value,
-      selectLabel: selectLabel.value,
-    });
-  else if (!multiple.value)
-    emits("selectItem", {
-      index,
-      value: item.value,
-      selectKeys: selectKeys.value,
-      selectLabel: selectLabel.value,
-    });
 };
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 .layui-cascader-panel {
-  height: v-bind(height);
+  height: v-bind(_height);
+  min-height: v-bind(_height);
 }
 </style>

@@ -6,6 +6,7 @@
         'layui-cascader-opend': openState,
         'layui-cascader-disabled': disabled,
         'layui-cascader': true,
+        'layui-cascader-multiple': multiple,
         'has-content': hasContent,
         'has-clear': allowClear,
       },
@@ -23,7 +24,7 @@
       @hide="openState = false"
     >
       <lay-input
-        v-if="!slots.default"
+        v-if="!_multiple"
         v-model="_displayValue"
         suffix-icon="layui-icon-triangle-d"
         :placeholder="placeholder"
@@ -33,9 +34,16 @@
         :size="size"
         @clear="onClear"
       ></lay-input>
+      <lay-tag-input
+        v-model="_displayValue"
+        @clear="onClear"
+        :readonly="true"
+        :placeholder="placeholder"
+        v-else
+      ></lay-tag-input>
 
-      <div class="slot-area" v-else>
-        <slot></slot>
+      <div class="slot-area" v-if="slots.default">
+        <slot name="default"></slot>
       </div>
 
       <template #content>
@@ -48,33 +56,12 @@
           :disabled="_disabled"
           v-model="_selectKeys"
           :check-strictly="_checkStrictly"
-          @update:model-value="
-            (selectKeys: string[] | string) => {
-              _selectKeys = selectKeys;
-              if (!_multiple) dropdownRef.hide();
-              emit('update:modelValue', _selectKeys);
-            }
-          "
-          @update:states="
-            ({ selectKeys, selectLabel }) => {
-              emit('update:modelValue', selectKeys);
-            }
-          "
-          @update:multiple-select-item="
-            ({ selectKeys, selectLabel }) => {
-              _selectKeys = selectKeys;
-              emit('update:modelValue', _selectKeys);
-            }
-          "
-          @select-item="
-            ({ index, value, selectKeys, selectLabel }) => {
-              if (props.changeOnSelect) {
-                _selectKeys = selectKeys;
-                emit('update:modelValue', _selectKeys);
-              }
-            }
-          "
+          @change="_onChange"
+          @update:model-value="_updateValue"
+          @update:multiple-select-item="_updateMultipleSelectItem"
           :lazy="props.load"
+          :changeOnSelect="_changeOnSelect"
+          :fullpath="props.fullpath"
         >
           <template v-for="(_, key) in slots" :key="key" #[key]>
             <template v-if="key != 'default'">
@@ -89,42 +76,19 @@
 
 <script setup lang="ts">
 import "./index.less";
-import LayInput from "../input/index.vue";
 import LayDropdown from "../dropdown/index.vue";
-import { ref, useSlots, StyleValue, computed, watch } from "vue";
-import { CascaderSize } from "./interface";
+import LayTagInput from "../tagInput/index.vue";
+import { ref, useSlots, computed, watch } from "vue";
+import { CascaderProps } from "./interface";
+import { CascaderPanelItemProps } from "../cascaderPanel/interface";
 import useProps from "./index.hooks";
-import {
-  CascaderPanelItemProps,
-  CascaderPanelLazyloadFunction,
-} from "../cascaderPanel/interface";
 import useCascaderPanel from "../cascaderPanel/index.hook";
-
-export type DropdownTrigger = "click" | "hover" | "focus" | "contextMenu";
-
-export interface CascaderProps {
-  options?: Array<CascaderPanelItemProps>;
-  modelValue?: string | Array<string>;
-  decollator?: string;
-  placeholder?: string;
-  onlyLastLevel?: boolean;
-  disabled?: boolean;
-  replaceFields?: { label?: string; value?: string; children?: string };
-  allowClear?: boolean;
-  size?: CascaderSize;
-  trigger?: DropdownTrigger | DropdownTrigger[];
-  contentClass?: string | Array<string | object> | object;
-  contentStyle?: StyleValue;
-  changeOnSelect?: boolean;
-  multiple?: boolean;
-  lazy?: boolean;
-  load?: CascaderPanelLazyloadFunction;
-  checkStrictly?: boolean;
-}
 
 defineOptions({
   name: "LayCascader",
 });
+
+// FIXME 需要修复 slot.default 时出现默认的下拉框的问题
 
 const props = withDefaults(defineProps<CascaderProps>(), {
   options: undefined,
@@ -145,6 +109,7 @@ const props = withDefaults(defineProps<CascaderProps>(), {
   lazy: false,
   load: () => {},
   checkStrictly: false,
+  fullpath: true,
 });
 
 const hasContent = computed(
@@ -166,6 +131,7 @@ const _innerProcess = computed(() =>
     decollator: _decollator.value,
     onlyLastLevel: _onlyLastLevel.value,
     checkStrictly: _checkStrictly.value,
+    fullpath: props.fullpath,
   })
 );
 const _dataSource = ref(props.options);
@@ -182,12 +148,39 @@ const _replaceFields = ref({
 const _selectKeys = ref<string | Array<string>>(
   _innerProcess.value.selectKeys.value
 );
-const _displayValue = computed(() => _innerProcess.value.selectLabel.value);
+const _displayValue = computed({
+  get: () => _innerProcess.value.selectLabel.value,
+  set: (v) => {},
+});
+const _changeOnSelect = ref(props.changeOnSelect);
 
+/**
+ * 清空内容
+ */
 const onClear = () => {
-  _selectKeys.value = [];
-  emit("update:modelValue", null);
+  _innerProcess.value.selectKeys.value = [];
+  emit("update:modelValue", undefined);
   emit("clear");
+};
+
+const _updateValue = (selectKeys: string[] | string) => {
+  _innerProcess.value.selectKeys.value =
+    typeof selectKeys === "string"
+      ? selectKeys.split(props.decollator)
+      : selectKeys;
+  if (!_multiple.value) dropdownRef.value.hide();
+  emit("update:modelValue", selectKeys);
+};
+
+const _updateMultipleSelectItem = (
+  map: Map<string, CascaderPanelItemProps>
+) => {
+  emit("update:modelValue", Array.from(map.keys()));
+};
+
+const _onChange = (selectKeys: string[] | string) => {
+  console.log("changeOnSelect", selectKeys);
+  emit("update:modelValue", selectKeys);
 };
 
 watch(

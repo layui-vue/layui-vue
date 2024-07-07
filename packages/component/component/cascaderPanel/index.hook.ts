@@ -40,6 +40,14 @@ export default function useCascaderPanel(props: CascaderPanelProps) {
      * 级联选择
      */
     const checkStrictly = ref(props.checkStrictly);
+    /**
+     * 即时输出
+     */
+    const changeOnSelect = ref(props.changeOnSelect);
+    /**
+     * `内部` 显示的Keys
+     */
+    const _showKeys: Ref<Array<string>> = ref([]);
 
     /**
      * 每列已选中的 key
@@ -67,23 +75,28 @@ export default function useCascaderPanel(props: CascaderPanelProps) {
      * @param data 数据源
      */
     const sanitizer = (
-      data: Array<CascaderPanelItemProps>
+      data: Array<CascaderPanelItemProps>,
+      parent: CascaderPanelItemPropsInternal | undefined
     ): Array<CascaderPanelItemPropsInternal> => {
       return data.map((item) => {
-        return {
+        const d: any = {
           label: item[replaceFields.value.label],
           value: item[replaceFields.value.value],
           loading: false,
           slot: item.slot,
           checked: false,
+          selected: false,
           disabled: item.disabled,
-          children: item[replaceFields.value.children]
-            ? sanitizer(item[replaceFields.value.children])
-            : undefined,
+          children: undefined,
+          parent,
         };
+        d.children = item[replaceFields.value.children]
+          ? sanitizer(item[replaceFields.value.children], d)
+          : undefined;
+        return d;
       });
     };
-    originData.value = sanitizer(props.data ?? []);
+    originData.value = sanitizer(props.data ?? [], undefined);
 
     /**
      * 单颗树转换成森林
@@ -100,7 +113,7 @@ export default function useCascaderPanel(props: CascaderPanelProps) {
         | Array<CascaderPanelItemPropsInternal>
         | CascaderPanelItemPropsInternal
         | undefined = data;
-      selectKeys.value.forEach((key) => {
+      _showKeys.value.forEach((key) => {
         if (prevLevel instanceof Array)
           prevLevel = prevLevel.find((a) => a.value === key);
         else prevLevel = prevLevel?.children?.find((a) => a.value === key);
@@ -112,13 +125,30 @@ export default function useCascaderPanel(props: CascaderPanelProps) {
     /**
      * 选中项的 label
      */
-    const selectLabel: ComputedRef<string> = computed(() => {
-      const path = flatter(originData.value)
-        .flatMap(
-          (v, i) => v.find((c) => c.value === selectKeys.value.at(i))?.label
-        )
-        .filter((a) => a);
-      return onlyLastLevel.value ? path.pop() : path.join(props.decollator);
+    const selectLabel: ComputedRef<string | Array<string>> = computed(() => {
+      // 从展平的数据中选择，将选中的value映射到每一个原始对象
+      const items: Array<CascaderPanelItemPropsInternal | undefined> =
+        selectKeys.value.map((v) => flatData.value.find((c) => c.value === v));
+
+      const fullpath = (target: CascaderPanelItemPropsInternal | undefined) => {
+        if (!target) return [];
+        let ret: Array<string> = [];
+        if (target.parent) ret = [...fullpath(target.parent), target.label];
+        else ret = [target.label];
+        return ret;
+      };
+
+      const path: Array<string> = items.map((item) =>
+        props.fullpath && multiple.value
+          ? fullpath(item).join(props.decollator)
+          : item?.label ?? ""
+      );
+
+      if (multiple.value) return path;
+
+      return onlyLastLevel.value
+        ? path?.pop() ?? ""
+        : path.join(props.decollator);
     });
 
     /**
@@ -126,7 +156,7 @@ export default function useCascaderPanel(props: CascaderPanelProps) {
      */
     const dataSource = computed(() => {
       return flatter(originData.value).filter(
-        (_, i) => i <= selectKeys.value.length
+        (_, i) => i <= _showKeys.value.length
       );
     });
 
@@ -136,8 +166,8 @@ export default function useCascaderPanel(props: CascaderPanelProps) {
      * @return {Array<T>}
      */
     const iterCollector = (iter: IterableIterator<any>) => {
-      const ret = [];
-      let tmp = iter.next();
+      const ret: Array<any> = [];
+      let tmp: any = iter.next();
       do {
         if (tmp.done) break;
         ret.push(tmp.value);
@@ -163,7 +193,7 @@ export default function useCascaderPanel(props: CascaderPanelProps) {
 
     watch(
       () => props.data,
-      () => (originData.value = sanitizer(props.data ?? []))
+      () => (originData.value = sanitizer(props.data ?? [], undefined))
     );
 
     watch(
@@ -187,6 +217,7 @@ export default function useCascaderPanel(props: CascaderPanelProps) {
         multipleSelectItem.value.clear();
       }
     );
+
     /**
      * 监听选中数据变化
      */
@@ -216,6 +247,20 @@ export default function useCascaderPanel(props: CascaderPanelProps) {
       }
     );
 
+    /**
+     * 监听selectkeys，如果清空或取消选择则不更新showkeys
+     */
+    watch(
+      () => selectKeys.value,
+      (val, _) => {
+        if (!val.length) {
+          selectKeys.value = _showKeys.value;
+          return;
+        }
+        _showKeys.value = val;
+      }
+    );
+
     return {
       dataSource,
       sanitizer,
@@ -230,6 +275,7 @@ export default function useCascaderPanel(props: CascaderPanelProps) {
       selectLabel,
       iterCollector,
       flatData,
+      changeOnSelect,
     };
   })();
 }
