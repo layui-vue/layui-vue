@@ -619,7 +619,6 @@ onMounted(() => {
   });
 
   window.onresize = () => {
-    debugger
     getScrollWidth();
     getFixedColumn();
   };

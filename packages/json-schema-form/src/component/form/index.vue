@@ -62,8 +62,8 @@ defineExpose({ validate, resetFields, clearValidate });
   <lay-form ref="formRef" :model="model" v-bind="formProps">
     <lay-row :space="space">
       <template v-for="(schemaValue, schemaName) in Schema" :key="schemaName">
-        <!-- <template v-if="!isGenCommentEl || !schemaValue.hidden"> -->
-          <lay-col v-bind="schemaValue.colProps" v-show="!isGenCommentEl || !schemaValue.hidden">
+        <template v-if="!isGenCommentEl || !schemaValue.hidden">
+          <lay-col v-bind="schemaValue.colProps" v-show="!schemaValue.hidden">
             <lay-form-item v-bind="schemaValue" :prop="(schemaName as string)">
               <template
                 v-if="
@@ -86,6 +86,7 @@ defineExpose({ validate, resetFields, clearValidate });
             </lay-form-item>
           </lay-col>
         <!-- </template> -->
+        </template>
       </template>
     </lay-row>
   </lay-form>
