@@ -19,10 +19,9 @@ import TableData from "./TableData.vue";
 import TablePage from "./TablePage.vue";
 import useTable from "./hooks/useTable";
 import { TableEmit } from "./typing";
-import { startResize } from "./hooks/useResize";
+import { initResize } from "./hooks/useResize";
 import useAutoColsWidth from "./hooks/useAutoColsWidth";
 import { useI18n } from "../../language";
-
 export interface TableProps {
   id?: string;
   dataSource: Recordable[];
@@ -85,6 +84,7 @@ const props = withDefaults(defineProps<TableProps>(), {
 });
 
 const emit = defineEmits(TableEmit);
+const { startResize } = initResize(emit);
 const { t } = useI18n();
 const slot = useSlots();
 const slots = slot.default && slot.default();
