@@ -26,13 +26,14 @@
   "dependencies": {
     "@layui/component": "workspace:*",
     "@layui/icons-vue": "workspace:*",
+    "@layui/json-schema-form": "workspace:*",
     "@layui/layer-vue": "workspace:*",
     "@layui/layui-vue": "workspace:*",
-    "@layui/json-schema-form": "workspace:*",
-    "vue": "3.3.4"
+    "vue": "3.3.13"
   },
   "peerDependencies": {
-    "vue": "^3.0.0"
+    "@vue/runtime-core": "3.3.13",
+    "vue": "3.3.13"
   },
   "devDependencies": {
     "@babel/core": "^7.17.9",
@@ -48,9 +49,6 @@
     "@typescript-eslint/parser": "^5.8.0",
     "@vitejs/plugin-vue": "^4.6.2",
     "@vitejs/plugin-vue-jsx": "^3.1.0",
-    "@vue/compiler-sfc": "3.3.4",
-    "@vue/runtime-core": "3.3.4",
-    "@vue/server-renderer": "3.3.4",
     "@vue/test-utils": "2.4.5",
     "commitizen": "^4.2.4",
     "commitlint-config-cz": "^0.13.3",

@@ -17,7 +17,7 @@
   "scripts": {
     "generate": "node ./scripts/generate.ts",
     "build": "vite build --emptyOutDir && npm run build:types",
-    "build:types": "rimraf types && tsc -d"
+    "build:types": "rimraf types && vue-tsc -d"
   },
   "keywords": [
     "layui-icon",
