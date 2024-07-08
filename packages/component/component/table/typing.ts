@@ -14,7 +14,7 @@ export const TableEmit = [
   "row-double",
   "row",
   "cell-double",
-  "resize-change"
+  "resize-change",
 ];
 
 export interface TableColumn {
