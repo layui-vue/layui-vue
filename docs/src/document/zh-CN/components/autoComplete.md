@@ -316,6 +316,10 @@ export default {
 | 名称   | 描述                         | 参数           |
 | ------ | ---------------------------- | -------------- |
 | select | 回车选中或手动点击选项时触发 | option: 选中项 |
+| input | 输入框 input 事件     | (value : `string` `number`) |
+| focus | 输入框 focus事件      | event : Event               |
+| blur  | 输入框 blur 事件      | event : Event               |
+| clear | 输入框 clear 事件 | -- |
 
 :::
 

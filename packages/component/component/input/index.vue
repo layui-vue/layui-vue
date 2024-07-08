@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import "./index.less";
+import type { InputSize, InputEmits } from "./interface";
 import { LayIcon } from "@layui/icons-vue";
 import { computed, ref, useSlots, watch, nextTick } from "vue";
-import { InputSize } from "./interface";
 import useProps from "./index.hooks";
 
 export interface InputProps {
@@ -36,15 +36,6 @@ const props = withDefaults(defineProps<InputProps>(), {
   password: false,
   modelValue: "",
 });
-
-interface InputEmits {
-  (e: "blur", eventParam: FocusEvent): void;
-  (e: "input", value: string): void;
-  (e: "update:modelValue", value: string): void;
-  (e: "change", value: string): void;
-  (e: "focus", eventParam: FocusEvent): void;
-  (e: "clear"): void;
-}
 
 const { size } = useProps(props);
 
