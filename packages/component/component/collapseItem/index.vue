@@ -63,7 +63,7 @@ const showHandle = function () {
       ></i>
     </h2>
     <lay-transition :enable="collapseTransition">
-      <div v-if="isShow">
+      <div v-show="isShow">
         <div class="layui-colla-content">
           <p>
             <slot :props="props"></slot>
