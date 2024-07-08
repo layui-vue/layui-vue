@@ -15,6 +15,7 @@ import LayCard from "./component/card/index";
 import LayCheckcard from "./component/checkcard/index";
 import LayCheckcardGroup from "./component/checkcardGroup/index";
 import LayCalendar from "./component/calendar/index";
+import LayCode from "./component/code/index";
 
 import LayLayout from "./component/layout/index";
 import LaySide from "./component/side/index";
@@ -122,6 +123,7 @@ declare module "@vue/runtime-core" {
     LayCascader: typeof LayCascader;
     LayCheckbox: typeof LayCheckbox;
     LayCheckboxGroup: typeof LayCheckboxGroup;
+    LayCode: typeof LayCode;
     LayCol: typeof LayCol;
     LayCollapse: typeof LayCollapse;
     LayCollapseItem: typeof LayCollapseItem;

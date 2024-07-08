@@ -103,6 +103,7 @@ import LayLoading from "./component/loading/index";
 import LayWatermark from "./component/watermark/index";
 import LayPopper from "./component/popper/index";
 import LayConfigProvider from "./provider";
+import LayCode from "./component/code/index";
 import { InstallOptions } from "./types";
 
 const components: Record<string, Plugin> = {
@@ -203,6 +204,7 @@ const components: Record<string, Plugin> = {
   LayLoading,
   LayWatermark,
   LayPopper,
+  LayCode,
 };
 
 const install = (app: App, options?: InstallOptions): void => {
@@ -311,6 +313,7 @@ export {
   LayLoading,
   LayWatermark,
   LayPopper,
+  LayCode,
   install,
 };
 

@@ -1,0 +1,113 @@
+.layui-code {
+  border: 1px solid transparent;
+  border-left-width: 6px;
+
+  &-header {
+    text-align: center;
+    padding: 12px 0;
+    position: relative;
+    font-size: 16px;
+    user-select: none;
+
+    .layui-code-render {
+      position: absolute;
+      left: 6px;
+      top: 0px;
+      line-height: 40px;
+      font-size: 12px;
+      display: flex;
+
+      .layui-code-renderer {
+        scale: 0.8;
+        font-size: 14px;
+        background: transparent;
+        line-height: 40px;
+        border: none;
+      }
+    }
+
+    .layui-code-language {
+      font-size: 8px;
+      text-transform: uppercase;
+    }
+  }
+
+  &-copy {
+    position: absolute;
+    right: 0;
+    margin-right: 12px;
+
+    &-floating {
+      z-index: 1;
+      padding: 4px;
+      border-radius: 4px;
+      margin-top: 6px;
+      border: 1px solid #888;
+      backdrop-filter: blur(3px);
+      opacity: 0.85;
+
+      &:hover {
+        border: 1px solid var(--global-primary-color);
+        opacity: 1;
+      }
+    }
+
+    &:hover {
+      color: var(--global-primary-color);
+      cursor: pointer;
+    }
+  }
+
+  &-wrap {
+    display: flex;
+    overflow: hidden;
+  }
+
+  &-pre {
+    .shiki {
+      background-color: transparent !important;
+    }
+  }
+}
+
+.layui-code-light {
+  border-color: #eee;
+  color: #333;
+
+  .layui-code-language,
+  .layui-code-render,
+  .layui-code-renderer {
+    color: #999;
+  }
+
+  .layui-code-header {
+    background-color: #ddd;
+  }
+}
+
+.layui-code-dark {
+  border-color: #555;
+  color: #ccc;
+
+  .layui-code-language,
+  .layui-code-render,
+  .layui-code-renderer {
+    color: #888;
+  }
+
+  .layui-code-lines {
+    background-color: #222;
+  }
+
+  .layui-code-header {
+    background-color: #111;
+  }
+}
+
+pre {
+  line-height: 24px;
+  width: 100%;
+  overflow: hidden;
+  white-space: pre;
+  word-break: break-all;
+}

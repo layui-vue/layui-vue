@@ -29,7 +29,10 @@
     "@layui/layer-vue": "workspace:*",
     "@layui/layui-vue": "workspace:*",
     "@layui/json-schema-form": "workspace:*",
-    "vue": "3.3.4"
+    "vue": "3.3.4",
+    "prismjs": "^1.29.0",
+    "highlight.js": "^11.10.0",
+    "shiki": "^1.10.3"
   },
   "peerDependencies": {
     "vue": "^3.0.0"
@@ -44,6 +47,7 @@
     "@rollup/plugin-babel": "^6.0.4",
     "@types/node": "^18.11.9",
     "@types/uuid": "^8.3.4",
+    "@types/prismjs": "^1.26.4",
     "@typescript-eslint/eslint-plugin": "^5.8.0",
     "@typescript-eslint/parser": "^5.8.0",
     "@vitejs/plugin-vue": "^4.6.2",
