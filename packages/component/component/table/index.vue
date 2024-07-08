@@ -50,8 +50,7 @@ export interface TableProps {
   getRadioProps?: Function;
   resize?: boolean;
   autoColsWidth?: boolean;
-  emptyDescription?: string
-  ;
+  emptyDescription?: string;
 }
 
 defineOptions({

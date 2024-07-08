@@ -1,3 +1,9 @@
+<!--
+ * @Author: baobaobao
+ * @Date: 2024-07-08 09:53:48
+ * @LastEditTime: 2024-07-08 10:12:16
+ * @LastEditors: baobaobao
+-->
 <script lang="ts" setup>
 import "./index.less";
 import type {
@@ -85,7 +91,6 @@ defineExpose({ validate, resetFields, clearValidate });
               ></form-block>
             </lay-form-item>
           </lay-col>
-        <!-- </template> -->
         </template>
       </template>
     </lay-row>
