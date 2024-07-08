@@ -7,7 +7,9 @@
 import { TableColumn } from "../typing";
 import { useThrottleFn } from "@vueuse/core";
 
-export const initResize = (emit) => {
+type SimpleEmitType = (event: string, ...args: any[]) => void;
+
+export const initResize = (emit: SimpleEmitType) => {
   let isResizing = false;
   let stashColumn: any = null;
   let targetElem: HTMLElement | null = null;
