@@ -11,7 +11,7 @@
     "dev": "pnpm -C play dev",
     "dev:docs": "pnpm -C docs dev",
     "test": "vitest run",
-    "build": "pnpm run build:icons && pnpm run build:layer && pnpm run build:component && pnpm run build:docs",
+    "build": "pnpm run clean && pnpm run build:icons && pnpm run build:layer && pnpm run build:component && pnpm run build:docs",
     "build:docs": "pnpm -C docs build",
     "build:component": "pnpm -C packages/layui build",
     "build:icons": "pnpm -C packages/icons build",
@@ -21,7 +21,13 @@
     "lint:eslint": "eslint 'packages/**/*.{vue,ts,tsx}' --fix",
     "lint:prettier": "prettier --write \"packages/**/*.{vue,ts}\"",
     "prepare": "husky install",
-    "commit": "git add . && git-cz && git push"
+    "commit": "git add . && git-cz && git push",
+    "clean": "pnpm run clean:icons && pnpm run clean:layer && pnpm run clean:component && pnpm run clean:docs",
+    "clean:component": "rimraf packages/layui/es && rimraf packages/layui/lib && rimraf packages/layui/types && rimraf packages/layui/umd",
+    "clean:icons": "rimraf packages/icons/lib && rimraf packages/icons/types",
+    "clean:layer": "rimraf packages/layer/lib && rimraf packages/layer/types",
+    "clean:docs": "rimraf docs/dist",
+    "clean:nodeModules": "rimraf docs/node_modules && rimraf packages/layui/node_modules && rimraf packages/layer/node_modules && rimraf packages/icons/node_modules && rimraf node_modules"
   },
   "dependencies": {
     "@layui/component": "workspace:*",
