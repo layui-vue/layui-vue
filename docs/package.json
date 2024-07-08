@@ -7,7 +7,8 @@
   "homepage": "http://www.layui-vue.com",
   "scripts": {
     "dev": "vite",
-    "build": "vite build"
+    "build": "vite build",
+    "serve": "vite preview"
   },
   "dependencies": {
     "@vueuse/core": "^8.7.3",
@@ -30,7 +31,6 @@
     "rimraf": "^3.0.2",
     "rollup": "^2.70.1",
     "typescript": "^4.6.3",
-    "vite": "2.9.8",
     "vite-plugin-md": "^0.13.1"
   },
   "files": [
