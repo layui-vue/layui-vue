@@ -12,6 +12,7 @@
       "esModuleInterop": true,
       "declarationDir": "types",
       "jsx": "preserve",
+      "jsxImportSource": "vue",
       "lib": ["ESNext","DOM"]
     }
 }

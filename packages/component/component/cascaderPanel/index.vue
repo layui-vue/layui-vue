@@ -35,7 +35,7 @@
                     v-if="!multiple"
                     :value="!item.selected"
                     @update:model-value="(val: boolean) => {
-                      dataSource.forEach((list, _) => list.forEach((i, _) => (i.selected = false)));
+                      dataSource.forEach((list: Array<CascaderPanelItemPropsInternal>) => list.forEach((i: CascaderPanelItemPropsInternal) => (i.selected = false)));
                       item.selected = !item.selected;
                       clickSelectItem(item, i);
                       flushOut(FLUSH_SIGNAL.CHANGE);

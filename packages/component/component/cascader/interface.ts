@@ -1,8 +1,8 @@
+import { StyleValue } from "vue";
 import {
   CascaderPanelItemProps,
   CascaderPanelLazyloadFunction,
-} from "component/cascaderPanel/interface";
-import { StyleValue } from "vue";
+} from "../cascaderPanel/interface";
 
 export type CascaderSize = "lg" | "md" | "sm" | "xs";
 export type DropdownTrigger = "click" | "hover" | "focus" | "contextMenu";
