@@ -201,8 +201,7 @@ const layer = {
     );
     modalInstance.appContext = options.appContext || layer._context;
     // 将虚拟 dom 渲染到 dom 容器
-    // render(modalInstance, modalContainer);
-    createApp(() => modalInstance).mount(modalContainer);
+    render(modalInstance, modalContainer);
     // 调用 open 函数
     modalInstance.component?.exposed?.open();
     // 延时 time 销毁
