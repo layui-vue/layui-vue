@@ -1,7 +1,7 @@
 import type { VNode, Slots } from "vue";
-import type { ColProps } from "@layui/layui-vue/types/component/col/index.vue";
-import type { FormItemProps } from "@layui/layui-vue/types/component/formItem/index.vue";
-import type { FormProps } from "@layui/layui-vue/types/component/form/index.vue";
+import type { ColProps } from "@layui/component/component/col/index.vue";
+import type { FormItemProps } from "@layui/component/component/formItem/index.vue";
+import type { FormProps } from "@layui/component/component/form/index.vue";
 
 import type { ValidateError } from "async-validator";
 
@@ -28,7 +28,7 @@ type customRenderFnParamsOptions = {
 export type customRenderFnType = (param: customRenderFnParamsOptions) => VNode;
 export type customRenderType = string | customRenderFnType;
 
-export interface JsonSchemaFormProps extends FormProps {
+export interface JsonSchemaFormProps extends /** @vue-ignore */ FormProps {
   space?: number | string;
   schema: SchemaProps;
 }
@@ -37,7 +37,7 @@ export interface SchemaProps {
   [key: string]: SchemaValueType;
 }
 
-export interface SchemaValueType extends FormItemProps {
+export interface SchemaValueType extends /** @vue-ignore */ FormItemProps {
   type?: Type;
   hidden?: boolean;
   props?: modelType;

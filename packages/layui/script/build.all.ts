@@ -19,7 +19,7 @@ export default (): UserConfigExport => {
     plugins: [vue(), vueJsx()],
     build: {
       cssCodeSplit: false,
-      outDir: "lib",
+      outDir: resolve("dist", "lib"),
       emptyOutDir: true,
       lib: {
         entry: resolve(componentDir, "./index.ts"),

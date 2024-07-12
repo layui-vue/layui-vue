@@ -19,7 +19,7 @@ export default defineConfig({
   },
   build: {
     target: "es2015",
-    outDir: path.resolve(__dirname, "lib"),
+    outDir: path.resolve(__dirname, "dist", "lib"),
     lib: {
       entry: path.resolve(__dirname, "src/index.ts"),
       name: camelize(name),

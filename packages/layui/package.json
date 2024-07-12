@@ -6,20 +6,20 @@
   "description": "a component library for Vue 3 base on layui-vue",
   "homepage": "http://www.layui-vue.com",
   "type": "module",
-  "main": "es/index.js",
-  "unpkg": "umd/index.js",
-  "jsdelivr": "umd/index.js",
-  "web-types": "types/web-types.json",
-  "types": "types/index.d.ts",
-  "style": "lib/index.css",
+  "main": "dist/es/index.js",
+  "unpkg": "dist/umd/index.js",
+  "jsdelivr": "dist/umd/index.js",
+  "web-types": "dist/types/web-types.json",
+  "types": "dist/types/index.d.ts",
+  "style": "dist/lib/index.css",
   "vetur": {
-    "tags": "types/tags.json",
-    "attributes": "types/attributes.json"
+    "tags": "dist/types/tags.json",
+    "attributes": "dist/types/attributes.json"
   },
   "sideEffects": [
-    "lib/*.css",
-    "es/**/*.css",
-    "umd/*.css"
+    "dist/lib/*.css",
+    "dist/es/**/*.css",
+    "dist/umd/*.css"
   ],
   "keywords": [
     "vue",
@@ -31,14 +31,14 @@
   "exports": {
     ".": {
       "import": {
-        "types": "./types/index.d.ts",
-        "default": "./es/index.js"
+        "types": "./dist/types/index.d.ts",
+        "default": "./dist/es/index.js"
       }
     },
-    "./lib/": "./lib/",
-    "./es/": "./es/",
+    "./lib/": "./dist/lib/",
+    "./es/": "./dist/es/",
     "./types/*": [
-      "./types/*.d.ts"
+      "./dist/types/*.d.ts"
     ]
   },
   "scripts": {
@@ -46,7 +46,7 @@
     "build:all": "vite build --emptyOutDir --config ./script/build.all.ts",
     "build:es": "vite build --emptyOutDir --config ./script/build.es.ts",
     "build:umd": "vite build --emptyOutDir --config ./script/build.umd.ts",
-    "build:dts": "rimraf types && vue-tsc -p tsconfig.build.json --declaration --emitDeclarationOnly",
+    "build:dts": "vue-tsc -p tsconfig.build.json --declaration --emitDeclarationOnly",
     "test": "vitest run"
   },
   "dependencies": {
@@ -68,10 +68,7 @@
     "vue-i18n": "9.6.3"
   },
   "files": [
-    "lib",
-    "es",
-    "umd",
-    "types"
+    "dist"
   ],
   "browserslist": [
     "current node",

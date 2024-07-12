@@ -2,4 +2,5 @@ packages:
   - packages/*
   - docs
   - play
-  
+  - json-schema-form
+  - play

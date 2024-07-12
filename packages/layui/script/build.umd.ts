@@ -23,7 +23,7 @@ export default ({ mode }): UserConfigExport => {
     plugins: [vue(), vueJsx()],
     build: {
       cssCodeSplit: false,
-      outDir: "umd",
+      outDir: resolve("dist", "umd"),
       emptyOutDir: true,
       lib: {
         entry: resolve(componentDir, "./index.ts"),

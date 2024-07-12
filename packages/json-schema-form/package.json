@@ -4,25 +4,25 @@
   "description": "Json-schema-form is a high-level component encapsulated on the basis of @layui/layui-vue form.",
   "homepage": "http://www.layui-vue.com/zh-CN/components/jsonSchemaForm",
   "type": "module",
-  "module": "lib/json-schema-form.es.js",
-  "main": "lib/json-schema-form.umd.js",
+  "module": "dist/lib/json-schema-form.es.js",
+  "main": "dist/lib/json-schema-form.umd.js",
   "license": "MIT",
   "bugs": {
     "url": "https://gitee.com/layui-vue/layui-vue/issues"
   },
   "exports": {
     ".": {
-      "types": "./types/index.d.ts",
-      "import": "./lib/json-schema-form.es.js",
-      "require": "./lib/json-schema-form.umd.js"
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/lib/json-schema-form.es.js",
+      "require": "./dist/lib/json-schema-form.umd.js"
     },
-    "./lib/": "./lib/",
+    "./lib/": "./dist/lib/",
     "./types/*": [
-      "./types/*.d.ts"
+      "./dist/types/*.d.ts"
     ]
   },
-  "types": "types/index.d.ts",
-  "style": "lib/index.css",
+  "types": "dist/types/index.d.ts",
+  "style": "dist/lib/index.css",
   "keywords": [
     "layui-vue",
     "layui",
@@ -30,12 +30,14 @@
     "vue"
   ],
   "files": [
-    "lib",
-    "types"
+    "dist"
   ],
   "scripts": {
     "build": "vite build --emptyOutDir && npm run build:types",
     "build:types": "rimraf types && vue-tsc -d",
     "test": "vitest"
+  },
+  "dependencies": {
+    "@layui/component": "workspace:*"
   }
 }

@@ -10,7 +10,7 @@
     "declaration": true,
     "emitDeclarationOnly": true,
     "esModuleInterop": true,
-    "declarationDir": "types",
+    "declarationDir": "dist/types",
     "jsx": "preserve",
     "lib": ["ESNext", "DOM"]
   },

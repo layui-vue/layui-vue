@@ -5,8 +5,8 @@ import type {
   JsonSchemaFormProps as _JsonSchemaFormProps,
 } from "./types";
 
-import { provide, ref, useSlots } from "vue";
-import { LayForm, LayFormItem, LayRow, LayCol } from "@layui/layui-vue";
+import { provide, Ref, ref, useSlots } from "vue";
+import { LayForm, LayFormItem, LayRow, LayCol } from "@layui/component";
 import FormBlock from "../form-block";
 import { useForm } from "./useForm";
 
@@ -27,7 +27,7 @@ defineOptions({
   inheritAttrs: false,
 });
 
-const formRef = ref();
+const formRef: Ref<any> = ref(undefined);
 /**
  * 验证字段
  */

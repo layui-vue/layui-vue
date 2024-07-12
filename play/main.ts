@@ -1,10 +1,8 @@
 import { createApp } from "vue";
-import layui from "../packages/component/index";
-import layer from "../packages/layer/src/index";
+import layui from "@layui/layui-vue";
+import layer from "@layui/layer-vue";
+import "@layui/layui-vue/lib/index.css";
 
-// import LayJsonSchemaForm from "../packages/json-schema-form/src/index";
-// import LayJsonSchemaForm from "../packages/json-schema-form/lib/json-schema-form.es.js";
-// import "../packages/component/lib/index.css";
 (async () => {
   const apps = import.meta.glob("./src/*.vue");
   const name = location.pathname.replace(/^\//, "") || "App";

@@ -76,7 +76,7 @@ export default (): UserConfigExport => {
     build: {
       cssCodeSplit: true,
       emptyOutDir: true,
-      outDir: "es",
+      outDir: resolve("dist", "es"),
       lib: {
         entry: resolve(componentDir, "./index.ts"),
         formats: ["es"],
