@@ -23,27 +23,29 @@
       @show="openState = true"
       @hide="openState = false"
     >
-      <lay-input
-        v-if="!_multiple"
-        v-model="_displayValue"
-        suffix-icon="layui-icon-triangle-d"
-        :placeholder="placeholder"
-        :allow-clear="allowClear"
-        :disabled="disabled"
-        :readonly="true"
-        :size="size"
-        @clear="onClear"
-      ></lay-input>
-      <lay-tag-input
-        v-model="_displayValue"
-        @clear="onClear"
-        :readonly="true"
-        :placeholder="placeholder"
-        v-else
-      ></lay-tag-input>
-
       <div class="slot-area" v-if="slots.default">
         <slot name="default"></slot>
+      </div>
+
+      <div v-else>
+        <lay-input
+          v-if="!_multiple"
+          v-model="_displayValue"
+          suffix-icon="layui-icon-triangle-d"
+          :placeholder="placeholder"
+          :allow-clear="allowClear"
+          :disabled="disabled"
+          :readonly="true"
+          :size="size"
+          @clear="onClear"
+        ></lay-input>
+        <lay-tag-input
+          v-model="_displayValue"
+          @clear="onClear"
+          :readonly="true"
+          :placeholder="placeholder"
+          v-else
+        ></lay-tag-input>
       </div>
 
       <template #content>
@@ -88,7 +90,8 @@ defineOptions({
   name: "LayCascader",
 });
 
-// FIXME 需要修复 slot.default 时出现默认的下拉框的问题
+// FIXME 需要修复多选时，第一层级勾选状态不正确的问题
+// FIXME 需要修复样式被覆盖的问题，疑似是json-schema-form/form带来的样式错误？
 
 const props = withDefaults(defineProps<CascaderProps>(), {
   options: undefined,

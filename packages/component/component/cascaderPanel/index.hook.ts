@@ -84,6 +84,7 @@ export default function useCascaderPanel(props: CascaderPanelProps) {
           value: item[replaceFields.value.value],
           loading: false,
           slot: item.slot,
+          indeterminate: false,
           checked: false,
           selected: false,
           disabled: item.disabled,

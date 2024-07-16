@@ -11,6 +11,7 @@ export interface CascaderPanelItemPropsInternal {
   label: any;
   value: any;
   slot?: any;
+  indeterminate: boolean;
   checked: boolean;
   selected: boolean;
   loading: boolean;

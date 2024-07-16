@@ -46,25 +46,14 @@
                     size="md"
                     skin="primary"
                     v-model="item.checked"
-                    :isIndeterminate="
-                      (() => {
-                        if (checkStrictly) return false;
-                        if (item.children?.length) 
-                          item.checked = item.children.filter((i: CascaderPanelItemPropsInternal) => i.checked).length !== 0;
-
-                        return (item.checked &&
-                            item.children?.length &&
-                            item.children.filter((i: CascaderPanelItemPropsInternal) => !i.checked).length > 0) ||
-                          false;
-                      })()
-                    "
+                    :value="item.indeterminate ?? item.checked ? 1 : 0"
+                    :isIndeterminate="item.indeterminate"
                     @update:model-value="
                       () => {
                         multipleItemTrigger(item);
                         flushOut(FLUSH_SIGNAL.MULTIPLE);
                       }
                     "
-                    :value="item.checked ? 1 : 0"
                   />
                 </template>
                 <slot
@@ -198,7 +187,7 @@ onMounted(() => {
         : props.modelValue.split(props.decollator);
 
     if (checkStrictly.value) {
-      // 非多选，在非严格模式下，从展平的数据中找到对应的项，然后设置选中
+      // 非多选且严格模式下，从展平的数据中找到对应的项，然后设置选中
       const item = flatData.value.find(
         (c) => c.value === selectKeys.value.at(selectKeys.value.length - 1)
       );
@@ -217,6 +206,7 @@ onMounted(() => {
         item.checked = true;
         multipleSelectItem.value.set(v, item);
       });
+      // buildMultipleStatus();
     }
   }
 });
@@ -280,6 +270,7 @@ const flushOut = (signal: FLUSH_SIGNAL, source: Ref = selectKeys) => {
     case FLUSH_SIGNAL.MULTIPLE:
       emits("update:multipleSelectItem", multipleSelectItem.value);
       emits("update:modelValue", Array.from(multipleSelectItem.value.keys()));
+      buildMultipleStatus();
       break;
   }
 };
@@ -333,6 +324,25 @@ const clickChooseItem = (
   while (keys.length <= index) keys.push(multiple.value ? item.value : "");
   selectKeys.value = keys;
   selectKeys.value[index] = item.value;
+};
+
+const buildMultipleStatus = () => {
+  dataSource.value.forEach((list) => {
+    console.log(list);
+    list.forEach((item) => {
+      if (item.children) {
+        item.checked = item.children.every((i) => i.checked) || false;
+        item.indeterminate = item.children.some((i) => !i.checked);
+
+        if (item.parent) {
+          item.parent.checked =
+            item.parent.children?.every((i) => i.checked) || false;
+          item.parent.indeterminate =
+            item.parent.children?.some((i) => !i.checked) || false;
+        }
+      }
+    });
+  });
 };
 </script>
 
