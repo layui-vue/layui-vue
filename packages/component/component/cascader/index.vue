@@ -42,8 +42,9 @@
         <lay-tag-input
           v-model="_displayValue"
           @clear="onClear"
-          :readonly="true"
+          @remove="onRemove"
           :placeholder="placeholder"
+          :allow-clear="true"
           v-else
         ></lay-tag-input>
       </div>
@@ -80,9 +81,12 @@
 import "./index.less";
 import LayDropdown from "../dropdown/index.vue";
 import LayTagInput from "../tagInput/index.vue";
-import { ref, useSlots, computed, watch } from "vue";
+import { ref, useSlots, computed, watch, onUnmounted } from "vue";
 import { CascaderProps } from "./interface";
-import { CascaderPanelItemProps } from "../cascaderPanel/interface";
+import {
+  CascaderPanelItemProps,
+  CascaderPanelItemPropsInternal,
+} from "../cascaderPanel/interface";
 import useProps from "./index.hooks";
 import useCascaderPanel from "../cascaderPanel/index.hook";
 
@@ -161,9 +165,33 @@ const _changeOnSelect = ref(props.changeOnSelect);
  * 清空内容
  */
 const onClear = () => {
-  _innerProcess.value.selectKeys.value = [];
-  emit("update:modelValue", undefined);
+  if (_multiple.value) {
+    _innerProcess.value.multipleSelectItem.value.clear();
+    emit("update:modelValue", []);
+  } else {
+    _innerProcess.value.selectKeys.value = [];
+    emit("update:modelValue", undefined);
+  }
   emit("clear");
+};
+/**
+ * 删除单个 Tag
+ * @param value Tag的Label路径
+ */
+const onRemove = (value: string) => {
+  let _k = value.split(_decollator.value);
+  let obj: CascaderPanelItemPropsInternal | undefined =
+    _innerProcess.value.flatData.value.find((a) => a.label === _k.shift());
+  while (obj && _k.length) {
+    const k = _k.shift();
+    obj = obj.children?.find((a) => a.label === k);
+  }
+  if (obj !== undefined)
+    _innerProcess.value.selectKeys.value.splice(
+      _innerProcess.value.selectKeys.value.findIndex((a) => a === obj.value),
+      1
+    );
+  emit("update:modelValue", _selectKeys.value);
 };
 
 const _updateValue = (selectKeys: string[] | string) => {
@@ -182,7 +210,6 @@ const _updateMultipleSelectItem = (
 };
 
 const _onChange = (selectKeys: string[] | string) => {
-  console.log("changeOnSelect", selectKeys);
   emit("update:modelValue", selectKeys);
 };
 

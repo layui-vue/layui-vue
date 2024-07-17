@@ -46,7 +46,7 @@
                     size="md"
                     skin="primary"
                     v-model="item.checked"
-                    :value="item.indeterminate ?? item.checked ? 1 : 0"
+                    :value="item.checked ? 1 : 0"
                     :isIndeterminate="item.indeterminate"
                     @update:model-value="
                       () => {
@@ -172,7 +172,9 @@ const _height = computed(() =>
     ? `${props.height}px`
     : props.height ?? "200px"
 );
-
+/**
+ * 自顶向下构建森林
+ */
 onMounted(() => {
   if (!props.modelValue?.length) {
     selectKeys.value = [];
@@ -180,14 +182,14 @@ onMounted(() => {
   }
 
   if (!multiple.value) {
-    // 非严格且非多选，直接读到选中的键里面
+    // 单选且非严格模式下，直接读到选中的键里面
     selectKeys.value =
       props.modelValue instanceof Array
         ? props.modelValue
         : props.modelValue.split(props.decollator);
 
     if (checkStrictly.value) {
-      // 非多选且严格模式下，从展平的数据中找到对应的项，然后设置选中
+      // 单选且严格模式下，从展平的数据中找到对应的项，然后设置选中
       const item = flatData.value.find(
         (c) => c.value === selectKeys.value.at(selectKeys.value.length - 1)
       );
@@ -198,16 +200,16 @@ onMounted(() => {
     if (typeof mValue === "string") mValue = mValue.split(props.decollator);
 
     if (multiple.value) {
-      // 多选，在此时不管是否严格关系都可以直接读到多选键中
-      // FIXME 某个地方出了问题，导致第一列的LayCheckbox在未展开下一层的时候显示是错误的
+      // 多选，此时不管是否严格关系都可以直接读到多选键中，自底向上构建路径
       mValue.forEach((v) => {
         const item = flatData.value.find((c) => c.value === v);
         if (!item) return;
         item.checked = true;
         multipleSelectItem.value.set(v, item);
       });
-      // buildMultipleStatus();
     }
+    // 执行一次自底向上构建
+    buildMultipleStatus();
   }
 });
 /**
@@ -268,9 +270,9 @@ const flushOut = (signal: FLUSH_SIGNAL, source: Ref = selectKeys) => {
       break;
 
     case FLUSH_SIGNAL.MULTIPLE:
+      buildMultipleStatus();
       emits("update:multipleSelectItem", multipleSelectItem.value);
       emits("update:modelValue", Array.from(multipleSelectItem.value.keys()));
-      buildMultipleStatus();
       break;
   }
 };
@@ -325,24 +327,52 @@ const clickChooseItem = (
   selectKeys.value = keys;
   selectKeys.value[index] = item.value;
 };
-
+/**
+ * 自底向上构建森林
+ *
+ * 需要更新的层数为最大为森林深度 n-1
+ */
 const buildMultipleStatus = () => {
-  dataSource.value.forEach((list) => {
-    console.log(list);
-    list.forEach((item) => {
-      if (item.children) {
-        item.checked = item.children.every((i) => i.checked) || false;
-        item.indeterminate = item.children.some((i) => !i.checked);
+  if (checkStrictly.value) return;
 
-        if (item.parent) {
-          item.parent.checked =
-            item.parent.children?.every((i) => i.checked) || false;
+  // Leaf nodes
+  flatData.value
+    .filter((c) => !c.children?.length)
+    .forEach((item) => {
+      if (item.parent) {
+        // chilren 全部勾全的情况
+        item.parent.checked =
+          item.parent.children?.every((a) => a.checked) || false;
+        if (!item.parent.checked)
+          // children 中有勾选，但是没有勾全
           item.parent.indeterminate =
-            item.parent.children?.some((i) => !i.checked) || false;
-        }
+            item.parent.children?.some((a) => a.checked) || false;
       }
     });
-  });
+
+  // Not root nodes & leaf nodes
+  flatData.value
+    .filter((c) => c.parent)
+    .forEach((item) => {
+      // children 全部勾选的情况
+      item.parent!.checked =
+        item.parent!.children?.every((a) => a.checked) || false;
+      // children 中有勾选，但是没有勾全
+      if (!item.parent!.checked)
+        item.parent!.indeterminate =
+          item.parent!.children?.some((a) => a.checked || a.indeterminate) ||
+          false;
+    });
+
+  // Root nodes
+  flatData.value
+    .filter((c) => !c.parent && c.children?.length)
+    .forEach((item) => {
+      item.checked = item.children?.every((a) => a.checked) || false;
+      if (!item.checked)
+        item.indeterminate =
+          item.children?.some((a) => a.indeterminate || a.checked) || false;
+    });
 };
 </script>
 
