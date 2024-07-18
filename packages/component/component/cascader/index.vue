@@ -215,6 +215,7 @@ const onClear = () => {
  * @param value Tag的Label路径
  */
 const onRemove = (value: string, e: KeyboardEvent) => {
+  // TODO 讨论：按下退格键是否删除Tag？
   let _k = value.split(_decollator.value);
   const k = _k.shift();
   let obj: CascaderPanelItemPropsInternal | undefined =
