@@ -94,9 +94,6 @@ defineOptions({
   name: "LayCascader",
 });
 
-// FIXME 需要修复多选时，第一层级勾选状态不正确的问题
-// FIXME 需要修复样式被覆盖的问题，疑似是json-schema-form/form带来的样式错误？
-
 const props = withDefaults(defineProps<CascaderProps>(), {
   options: undefined,
   modelValue: "",
