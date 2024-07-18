@@ -180,15 +180,16 @@ const onClear = () => {
  */
 const onRemove = (value: string) => {
   let _k = value.split(_decollator.value);
+  const k = _k.shift();
   let obj: CascaderPanelItemPropsInternal | undefined =
-    _innerProcess.value.flatData.value.find((a) => a.label === _k.shift());
+    _innerProcess.value.flatData.value.find((a) => a.label === k);
   while (obj && _k.length) {
     const k = _k.shift();
     obj = obj.children?.find((a) => a.label === k);
   }
   if (obj !== undefined)
     _innerProcess.value.selectKeys.value.splice(
-      _innerProcess.value.selectKeys.value.findIndex((a) => a === obj.value),
+      _innerProcess.value.selectKeys.value.findIndex((a) => a === obj!.value),
       1
     );
   emit("update:modelValue", _selectKeys.value);

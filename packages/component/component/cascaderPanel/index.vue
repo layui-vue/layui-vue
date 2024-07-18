@@ -41,7 +41,7 @@
                       flushOut(FLUSH_SIGNAL.CHANGE);
                     }"
                   />
-                  <lay-checkbox
+                  <lay-checkbox-v2
                     v-else-if="!item.loading"
                     size="md"
                     skin="primary"
@@ -93,6 +93,7 @@ import {
   FLUSH_SIGNAL,
 } from "./interface";
 import useCascaderPanel from "./index.hook";
+import LayCheckboxV2 from "../checkboxV2/index.vue";
 
 defineOptions({
   name: "LayCascaderPanel",
