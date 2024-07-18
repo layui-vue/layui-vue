@@ -45,12 +45,22 @@
           @remove="onRemove"
           :placeholder="placeholder"
           :allow-clear="true"
+          v-model:input-value="_searchValue"
+          @update:input-value="
+            (val:string) => {
+              _isSearching = val.length > 0;
+              if (!_isSearching) return;
+              dropdownRef.show();
+              _matchedList = doSearchValue(val);
+            }
+          "
           v-else
         ></lay-tag-input>
       </div>
 
       <template #content>
         <lay-cascader-panel
+          v-show="!_isSearching"
           :data="_dataSource"
           :replace-fields="_replaceFields"
           :multiple="_multiple"
@@ -72,6 +82,29 @@
             </template>
           </template>
         </lay-cascader-panel>
+        <div v-show="_isSearching">
+          <lay-scroll height="200px" class="layui-cascader-search-result-list">
+            <template v-if="_matchedList.length > 0">
+              <div
+                class="layui-cascader-search-result-item"
+                :class="{
+                  'layui-cascader-search-result-item-active':
+                    _selectKeys.includes(item.value),
+                }"
+                v-for="(item, i) in _matchedList"
+                :key="i"
+                @click="clickCheckItem(item)"
+              >
+                {{ buildFullPath(item) }}
+              </div>
+            </template>
+            <template v-else>
+              <lay-empty
+                style="vertical-align: middle; height: 200px"
+              ></lay-empty>
+            </template>
+          </lay-scroll>
+        </div>
       </template>
     </lay-dropdown>
   </div>
@@ -81,7 +114,7 @@
 import "./index.less";
 import LayDropdown from "../dropdown/index.vue";
 import LayTagInput from "../tagInput/index.vue";
-import { ref, useSlots, computed, watch, onUnmounted } from "vue";
+import { ref, useSlots, computed, watch, onUnmounted, Ref } from "vue";
 import { CascaderProps } from "./interface";
 import {
   CascaderPanelItemProps,
@@ -125,6 +158,9 @@ const emit = defineEmits(["update:modelValue", "change", "clear"]);
 const slots = useSlots();
 const dropdownRef = ref();
 const openState = ref(false);
+const _isSearching = ref(false);
+const _searchValue = ref("");
+const _matchedList: Ref<Array<CascaderPanelItemPropsInternal>> = ref([]);
 
 const _innerProcess = computed(() =>
   useCascaderPanel({
@@ -149,14 +185,17 @@ const _replaceFields = ref({
   value: props.replaceFields?.value ?? "value",
   children: props.replaceFields?.children ?? "children",
 });
-const _selectKeys = ref<string | Array<string>>(
-  _innerProcess.value.selectKeys.value
-);
+const _selectKeys = ref<Array<string>>(_innerProcess.value.selectKeys.value);
 const _displayValue = computed({
   get: () => _innerProcess.value.selectLabel.value,
   set: (v) => {},
 });
 const _changeOnSelect = ref(props.changeOnSelect);
+
+const doSearchValue = (str: string) =>
+  _innerProcess.value.flatData.value.filter(
+    (a: CascaderPanelItemPropsInternal) => a.label.includes(str)
+  );
 
 /**
  * 清空内容
@@ -175,7 +214,7 @@ const onClear = () => {
  * 删除单个 Tag
  * @param value Tag的Label路径
  */
-const onRemove = (value: string) => {
+const onRemove = (value: string, e: KeyboardEvent) => {
   let _k = value.split(_decollator.value);
   const k = _k.shift();
   let obj: CascaderPanelItemPropsInternal | undefined =
@@ -190,6 +229,7 @@ const onRemove = (value: string) => {
       1
     );
   emit("update:modelValue", _selectKeys.value);
+  dropdownRef.value.hide();
 };
 
 const _updateValue = (selectKeys: string[] | string) => {
@@ -209,6 +249,49 @@ const _updateMultipleSelectItem = (
 
 const _onChange = (selectKeys: string[] | string) => {
   emit("update:modelValue", selectKeys);
+};
+
+const clickCheckItem = (item: CascaderPanelItemPropsInternal) => {
+  if (_checkStrictly.value) {
+    if (!_selectKeys.value.includes(item.value))
+      (_selectKeys.value as Array<string>).push(item.value);
+    else
+      (_selectKeys.value as Array<string>).splice(
+        _selectKeys.value.indexOf(item.value),
+        1
+      );
+    emit("update:modelValue", _selectKeys.value);
+  } else {
+    let obj: CascaderPanelItemPropsInternal | undefined = item;
+    const leafs: Array<CascaderPanelItemPropsInternal> = [];
+    const onlyLeaf = (item: CascaderPanelItemPropsInternal) => {
+      if (item.children?.length) {
+        item.children.forEach((a) => onlyLeaf(a));
+      } else {
+        leafs.push(item);
+      }
+    };
+    onlyLeaf(obj);
+    leafs.forEach((a) =>
+      _selectKeys.value.includes(a.value)
+        ? (_selectKeys.value as Array<string>).splice(
+            _selectKeys.value.indexOf(a.value),
+            1
+          )
+        : (_selectKeys.value as Array<string>).push(a.value)
+    );
+    emit("update:modelValue", _selectKeys.value);
+  }
+};
+
+const buildFullPath = (item: CascaderPanelItemPropsInternal) => {
+  let obj: CascaderPanelItemPropsInternal | undefined = item;
+  let fullPath = [];
+  while (obj) {
+    fullPath.push(obj.label);
+    obj = obj.parent;
+  }
+  return fullPath.reverse().join(_decollator.value);
 };
 
 watch(
