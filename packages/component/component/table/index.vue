@@ -1252,7 +1252,7 @@ defineExpose({ getCheckData });
                 @row-double="rowDoubleClick"
                 @row-contextmenu="rowContextmenu"
                 @cell-double="cellDoubleClick"
-                @expand="rowExpand"
+                @expand-change="rowExpand"
               >
                 <template
                   v-for="name in columnSlotNames"

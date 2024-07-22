@@ -16,7 +16,7 @@ export const useEmit = (emit) => {
   };
 
   const rowExpand = function (data: any, evt: PointerEvent) {
-    emit("expand", data, evt);
+    emit("expand-change", data, evt);
   };
 
   return {

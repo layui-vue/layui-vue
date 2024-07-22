@@ -677,7 +677,7 @@ const checkboxProps = computed(() => {
         @row-double="rowDoubleClick"
         @cell-double="cellDoubleClick"
         @row-contextmenu="rowContextmenu"
-        @expand="rowExpand"
+        @expand-change="rowExpand"
         v-model:expandKeys="tableExpandKeys"
         v-model:selectedKeys="tableSelectedKeys"
         v-model:selectedKey="tableSelectedKey"
