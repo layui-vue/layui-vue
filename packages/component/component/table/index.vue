@@ -21,6 +21,7 @@ import useTable from "./hooks/useTable";
 import { TableEmit } from "./typing";
 import { startResize } from "./hooks/useResize";
 import useAutoColsWidth from "./hooks/useAutoColsWidth";
+import { useEmit } from "./hooks/useEmit";
 import { useI18n } from "../../language";
 
 export interface TableProps {
@@ -85,6 +86,9 @@ const props = withDefaults(defineProps<TableProps>(), {
 });
 
 const emit = defineEmits(TableEmit);
+
+const { rowClick, rowDoubleClick, rowContextmenu, cellDoubleClick, rowExpand } =
+  useEmit(emit);
 const { t } = useI18n();
 const slot = useSlots();
 const slots = slot.default && slot.default();
@@ -396,22 +400,6 @@ watch(
 
 const change = function (page: any) {
   emit("change", page);
-};
-
-const rowClick = function (data: any, evt: MouseEvent) {
-  emit("row", data, evt);
-};
-
-const rowDoubleClick = function (data: any, evt: MouseEvent) {
-  emit("row-double", data, evt);
-};
-
-const rowContextmenu = (data: any, evt: MouseEvent) => {
-  emit("row-contextmenu", data, evt);
-};
-
-const cellDoubleClick = function (data: any, evt: MouseEvent) {
-  emit("cell-double", data, evt);
 };
 
 // 页面打印
@@ -1264,6 +1252,7 @@ defineExpose({ getCheckData });
                 @row-double="rowDoubleClick"
                 @row-contextmenu="rowContextmenu"
                 @cell-double="cellDoubleClick"
+                @expand="rowExpand"
               >
                 <template
                   v-for="name in columnSlotNames"
