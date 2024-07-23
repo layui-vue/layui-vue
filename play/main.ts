@@ -1,9 +1,10 @@
 import { createApp } from "vue";
-import layui from "../packages/component/index";
-import layer from "../packages/layer/src/index";
+// import layui from "../packages/component/index";
+// import layer from "../packages/layer/src/index";
 
 // import LayJsonSchemaForm from "../packages/json-schema-form/src/index";
-// import LayJsonSchemaForm from "../packages/json-schema-form/lib/json-schema-form.es.js";
+import LayJsonSchemaForm from "../packages/json-schema-form/lib/json-schema-form.es.js";
+import "../packages/json-schema-form/lib/index.css";
 // import "../packages/component/lib/index.css";
 (async () => {
   const apps = import.meta.glob("./src/*.vue");
@@ -16,11 +17,11 @@ import layer from "../packages/layer/src/index";
   const App = (await file()).default;
   const app = createApp(App);
 
-  app.use(layui);
+  // app.use(layui);
 
   // app.use(layer);
 
-  // app.use(LayJsonSchemaForm);
+  app.use(LayJsonSchemaForm);
 
   app.mount("#play");
 })();

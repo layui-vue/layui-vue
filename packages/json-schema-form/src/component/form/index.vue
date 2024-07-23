@@ -6,7 +6,7 @@ import type {
 } from "./types";
 
 import { provide, ref, useSlots } from "vue";
-import { LayForm, LayFormItem, LayRow, LayCol } from "@layui/layui-vue";
+import { LayForm, LayFormItem, LayRow, LayCol } from "@layui/component";
 import FormBlock from "../form-block";
 import { useForm } from "./useForm";
 
