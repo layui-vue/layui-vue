@@ -270,7 +270,6 @@ provide("searchMethod", props.searchMethod);
         @clear="handleClear"
         @input-value-change="handleSearch"
         @keyup.delete.capture.prevent.stop
-        @keyup.backspace.capture.prevent.stop
         @keydown.enter.capture.prevent.stop
       >
         <template v-if="slots.prepend" #prepend>
