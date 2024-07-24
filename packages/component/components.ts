@@ -97,6 +97,9 @@ import LayTreeSelect from "./component/treeSelect/index";
 import LayPopconfirm from "./component/popconfirm/index";
 import LayLoading from "./component/loading/index";
 import LayWatermark from "./component/watermark/index";
+import LayPopper from "./component/popper/index";
+import LayDescriptions from "./component/descriptions/index";
+import LayDescriptionsItem from "./component/descriptionsItem/index";
 
 declare module "@vue/runtime-core" {
   // GlobalComponents for Volar
@@ -197,6 +200,9 @@ declare module "@vue/runtime-core" {
     LayPopconfirm: typeof LayPopconfirm;
     LayLoading: typeof LayLoading;
     LayWatermark: typeof LayWatermark;
+    LayPopper: typeof LayPopper;
+    LayDescriptions: typeof LayDescriptions;
+    LayDescriptionsItem: typeof LayDescriptionsItem;
   }
 
   export interface ComponentCustomProperties {

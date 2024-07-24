@@ -75,3 +75,7 @@ export const isDate = (val: Date): boolean =>
 export const normalizeValue = (val: any[]): any => {
   return val.filter((v) => v !== undefined && v !== null && v !== "");
 };
+
+export const isNil = (val: any): boolean => {
+  return val === undefined || val === null;
+};

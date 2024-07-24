@@ -1,3 +1,6 @@
+import type { VNode } from "vue";
+import { isVNode } from "vue";
+
 /**
  * 获取 top 属性值
  * <p>
@@ -60,3 +63,22 @@ export function off(elem: any, events: any, handler: any) {
     .concat(events)
     .forEach((event) => elem.removeEventListener(event, handler, false));
 }
+
+export const flattedChildren = (children) => {
+  const vNodes = Array.isArray(children) ? children : [children];
+  const result: VNode[] = [];
+
+  vNodes.forEach((child: VNode) => {
+    if (Array.isArray(child)) {
+      result.push(...flattedChildren(child));
+    } else if (isVNode(child) && Array.isArray(child.children)) {
+      result.push(...flattedChildren(child.children));
+    } else {
+      result.push(child);
+      if (isVNode(child) && child.component?.subTree) {
+        result.push(...flattedChildren(child.component.subTree));
+      }
+    }
+  });
+  return result;
+};
