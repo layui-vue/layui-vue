@@ -1,7 +1,7 @@
-import type { VNode, Slots } from "vue";
-import type { ColProps } from "@layui/layui-vue/types/component/col/index.vue";
-import type { FormItemProps } from "@layui/layui-vue/types/component/formItem/index.vue";
-import type { FormProps } from "@layui/layui-vue/types/component/form/index.vue";
+import type { VNode } from "vue";
+import type { ColProps } from "@layui/component/component/col/interface";
+import type { FormItemProps } from "@layui/component/component/formItem/types";
+import type { FormProps } from "@layui/component/component/form/interface";
 
 import type { ValidateError } from "async-validator";
 

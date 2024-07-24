@@ -1,8 +1,8 @@
 import type { PropType } from "vue";
-import type { CheckboxSize } from "@layui/layui-vue/types/component/checkbox/interface";
-import type { Recordable } from "@layui/layui-vue/types/types";
+import type { CheckboxSize } from "@layui/component/component/checkbox/interface";
+import type { Recordable } from "@layui/component/types";
 import { defineComponent, h } from "vue";
-import { LayCheckboxGroup, LayCheckbox } from "@layui/layui-vue";
+import { LayCheckboxGroup, LayCheckbox } from "@layui/component";
 
 interface CheckboxOptions {
   label: string;
