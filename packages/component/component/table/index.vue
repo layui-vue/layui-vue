@@ -328,7 +328,7 @@ const lookForAllId = (data: any[] = [], ids: string[] = []) => {
  * @remark 向内向外，都是响应式
  */
 watch(
-  () => props.defaultExpandAll,
+  () => [props.defaultExpandAll, props.dataSource],
   () => {
     if (props.defaultExpandAll) {
       const ids: string[] = [];
@@ -340,6 +340,7 @@ watch(
   },
   {
     immediate: true,
+    deep: true,
   }
 );
 
