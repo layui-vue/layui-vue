@@ -64,8 +64,8 @@ export function off(elem: any, events: any, handler: any) {
     .forEach((event) => elem.removeEventListener(event, handler, false));
 }
 
-export const flattedChildren = (children) => {
-  const vNodes = Array.isArray(children) ? children : [children];
+export const flattedChildren = (children: any) => {
+  const vNodes = (Array.isArray(children) ? children : [children]) as VNode[];
   const result: VNode[] = [];
 
   vNodes.forEach((child: VNode) => {

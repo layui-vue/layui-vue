@@ -201,6 +201,12 @@ const zhCN = [
             meta: { title: "折叠面板" },
           },
           {
+            path: "/zh-CN/components/descriptions",
+            component: () =>
+              import("../document/zh-CN/components/descriptions.md"),
+            meta: { title: "描述列表" },
+          },
+          {
             path: "/zh-CN/components/step",
             component: () => import("../document/zh-CN/components/step.md"),
             meta: { title: "分步" },

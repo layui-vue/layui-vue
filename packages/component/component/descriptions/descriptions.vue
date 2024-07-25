@@ -1,9 +1,14 @@
-<script setup lang="tsx">
+<script setup lang="ts">
 import "./index.less";
-import type { VNode } from "vue";
-import type { DescriptionsProps as _DescriptionsProps } from "./interface";
+import type {
+  DescriptionsProps as _DescriptionsProps,
+  DataListType,
+} from "./interface";
+import type { DescriptionsItemsNode } from "../descriptionsItem/interface";
 
-import { computed, useSlots, provide } from "vue";
+import { h, computed, useSlots, provide, reactive } from "vue";
+import { reactiveOmit } from "@vueuse/core";
+
 import { flattedChildren } from "../../utils";
 import { DESCRIPTIONS_INJECTION_KEY } from "./descriptions";
 
@@ -13,10 +18,10 @@ import LayDescriptionsRow from "./descriptions-row";
 export type DescriptionsProps = _DescriptionsProps;
 
 const props = withDefaults(defineProps<DescriptionsProps>(), {
-  dataList: [],
   direction: "horizontal",
   size: "md",
   column: 3,
+  border: false,
 });
 
 defineOptions({
@@ -29,14 +34,23 @@ const descriptionsClasses = computed(() => {
   return ["layui-descriptions", `layui-descriptions-${props.size}`];
 });
 
-const generateItemVNode = (dataList): VNode[] => {
+const generateItemVNode = (
+  dataList: DataListType[]
+): DescriptionsItemsNode[] => {
   return dataList.map((data) => {
-    return <LayDescriptionsItem {...data}></LayDescriptionsItem>;
+    return h(
+      LayDescriptionsItem,
+      { ...reactiveOmit(reactive(data), "label", "content") },
+      {
+        default: () => data.content,
+        label: () => data.label,
+      }
+    ) as DescriptionsItemsNode;
   });
 };
 
-const filledNode = (
-  node: VNode,
+const setSpan = (
+  node: DescriptionsItemsNode,
   span: number,
   count: number,
   isLast = false
@@ -48,25 +62,25 @@ const filledNode = (
     node.props.span = count;
   }
   if (isLast) {
-    // set the last span
     node.props.span = span;
   }
   return node;
 };
 
 const getRow = () => {
-  let children: VNode[] = [];
+  let children: DescriptionsItemsNode[] = [];
 
-  if (props.dataList.length) {
+  if (props.dataList && props.dataList.length) {
     children = generateItemVNode(props.dataList);
   } else if (slots?.default) {
     children = flattedChildren(slots.default()).filter(
-      (node: any) => (node!.type!.name = "LayDescriptionsItem")
+      (node): node is DescriptionsItemsNode =>
+        (node as any)!.type!.name === "LayDescriptionsItem"
     );
   }
 
-  const rows: any[][] = [];
-  let group: any[] = [];
+  const rows: DescriptionsItemsNode[][] = [];
+  let group: DescriptionsItemsNode[] = [];
   let count = props.column;
   let totalSpan = 0;
 
@@ -79,7 +93,7 @@ const getRow = () => {
 
     if (index === children.length - 1) {
       const lastSpan = props.column - (totalSpan % props.column);
-      group.push(filledNode(child, lastSpan, count, true));
+      group.push(setSpan(child, lastSpan, count, true));
       rows.push(group);
       return;
     }
@@ -88,7 +102,7 @@ const getRow = () => {
       count -= span;
       group.push(child);
     } else {
-      group.push(filledNode(child, span, count));
+      group.push(setSpan(child, span, count));
       rows.push(group);
       count = props.column;
       group = [];

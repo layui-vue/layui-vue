@@ -1,4 +1,6 @@
+import type { PropType } from "vue";
 import type { DescriptionsContext } from "./descriptions";
+import type { DescriptionsItemsNode } from "../descriptionsItem/interface";
 
 import { inject, h, defineComponent } from "vue";
 import { DESCRIPTIONS_INJECTION_KEY } from "./descriptions";
@@ -9,7 +11,7 @@ export default defineComponent({
   name: "LayDescriptionsRow",
   props: {
     row: {
-      type: Array,
+      type: Array as PropType<DescriptionsItemsNode[]>,
       default: () => [],
     },
   },
@@ -25,7 +27,7 @@ export default defineComponent({
         return [
           h(
             "tr",
-            props.row.map((cell: any) => {
+            props.row.map((cell) => {
               return h(LayDescriptionsCell, {
                 cell,
                 tag: "th",
@@ -35,7 +37,7 @@ export default defineComponent({
           ),
           h(
             "tr",
-            props.row.map((cell: any) => {
+            props.row.map((cell) => {
               return h(LayDescriptionsCell, {
                 cell,
                 tag: "td",
@@ -47,7 +49,7 @@ export default defineComponent({
       } else {
         return h(
           "tr",
-          props.row.map((cell: any) => {
+          props.row.map((cell) => {
             return border
               ? [
                   h(LayDescriptionsCell, {

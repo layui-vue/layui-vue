@@ -1,6 +1,8 @@
+import type { PropType, VNode } from "vue";
 import type { DescriptionsContext } from "./descriptions";
+import type { DescriptionsItemsNode } from "../descriptionsItem/interface";
 
-import { inject, h, defineComponent, ComponentOptions } from "vue";
+import { inject, h, defineComponent } from "vue";
 import { DESCRIPTIONS_INJECTION_KEY } from "./descriptions";
 import { isNil } from "../../utils";
 
@@ -8,7 +10,7 @@ export default defineComponent({
   name: "LayDescriptionsCell",
   props: {
     cell: {
-      type: Object,
+      type: Object as PropType<DescriptionsItemsNode>,
       default: () => ({}),
     },
     tag: {
@@ -26,9 +28,16 @@ export default defineComponent({
       {} as DescriptionsContext
     );
 
-    const itemProps: any = props.cell.props || {};
+    const itemProps = props.cell.props || {};
     const label = props.cell.children?.label?.() || itemProps.label;
     const content = props.cell.children?.default?.();
+    const span = itemProps.span;
+    const align = itemProps.align ? `is-${itemProps.align}` : "";
+    const labelAlign = itemProps.labelAlign ? `is-${itemProps.labelAlign}` : "";
+    const style = itemProps.style;
+    const labelStyle = itemProps.labelStyle;
+    const classes = itemProps.class;
+    const labelClasses = itemProps.labelClass;
 
     const isVertical = direction === "vertical";
     const isLabel = props.type === "label";
@@ -40,19 +49,20 @@ export default defineComponent({
           return h(
             props.tag,
             {
+              style: isLabel ? labelStyle : style,
               class: [
                 "layui-descriptions-cell",
                 `layui-descriptions-${props.type}`,
+                isLabel
+                  ? `${labelClasses} ${labelAlign}`
+                  : `${classes} ${align}`,
+                ,
                 {
                   [`is-border-${props.type}`]: border,
                   [`is-vertical-${props.type}`]: isVertical,
                 },
               ],
-              colSpan: isVertical
-                ? itemProps.span
-                : isLabel
-                ? 1
-                : itemProps.span * 2 - 1,
+              colSpan: isVertical ? span : isLabel ? 1 : span! * 2 - 1,
             },
             isLabel ? label : content
           );
@@ -61,14 +71,19 @@ export default defineComponent({
             "td",
             {
               class: ["layui-descriptions-cell"],
-              colSpan: itemProps.span,
+              colSpan: span,
             },
             [
               !isNil(label)
                 ? h(
                     "span",
                     {
-                      class: ["layui-descriptions-label"],
+                      style: labelStyle,
+                      class: [
+                        "layui-descriptions-label",
+                        labelClasses,
+                        labelAlign,
+                      ],
                     },
                     label
                   )
@@ -76,7 +91,8 @@ export default defineComponent({
               h(
                 "span",
                 {
-                  class: ["layui-descriptions-content"],
+                  style: style,
+                  class: ["layui-descriptions-content", classes, align],
                 },
                 content
               ),

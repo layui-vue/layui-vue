@@ -319,6 +319,17 @@ const menus = [
         path: "/zh-CN/components/collapse",
       },
       {
+        id: 106,
+        title: "描述列表",
+        subTitle: "descriptions",
+        path: "/zh-CN/components/descriptions",
+        badge: {
+          type: "dot",
+          theme: "green",
+          ripple: true,
+        },
+      },
+      {
         id: 22,
         title: "表格",
         subTitle: "table",

@@ -1,6 +1,6 @@
 import vue from "@vitejs/plugin-vue";
 import vueJsx from "@vitejs/plugin-vue-jsx";
-import Markdown from "vite-plugin-md";
+import Markdown from "unplugin-vue-markdown/vite";
 import container from "markdown-it-container";
 import preWrapper from "./pre-wrapper";
 import highlight from "./highlight";

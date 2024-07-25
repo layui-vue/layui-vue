@@ -3,8 +3,10 @@ import type { DescriptionsItemProps as _DescriptionsItemProps } from "./interfac
 
 export type DescriptionsItemProps = _DescriptionsItemProps;
 
-const props = withDefaults(defineProps<DescriptionsItemProps>(), {
+withDefaults(defineProps<DescriptionsItemProps>(), {
   span: 1,
+  align: "left",
+  labelAlign: "left",
 });
 
 defineOptions({
