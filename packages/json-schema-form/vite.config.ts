@@ -1,13 +1,14 @@
 import { defineConfig } from "vite";
 import { name } from "./package.json";
 import vue from "@vitejs/plugin-vue";
+import vueJsx from "@vitejs/plugin-vue-jsx";
 import path from "path";
 
 const camelize = (name: string) =>
   name.replace(/(^|-)(\w)/g, (a, b, c) => c.toUpperCase());
 
 export default defineConfig({
-  plugins: [vue()],
+  plugins: [vue(), vueJsx()],
   build: {
     target: "es2015",
     outDir: path.resolve("dist", "lib"),

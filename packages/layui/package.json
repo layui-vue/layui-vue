@@ -42,7 +42,7 @@
     ]
   },
   "scripts": {
-    "build": "npm run build:all && npm run build:es && npm run build:umd && npm run build:dts",
+    "build": "pnpm run --filter . --parallel /^build:.*/",
     "build:all": "vite build --emptyOutDir --config ./script/build.all.ts",
     "build:es": "vite build --emptyOutDir --config ./script/build.es.ts",
     "build:umd": "vite build --emptyOutDir --config ./script/build.umd.ts",

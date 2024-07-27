@@ -1,8 +1,8 @@
 import type { PropType } from "vue";
+import type { CheckboxSize } from "@layui/component/component/checkbox/interface";
+import type { Recordable } from "@layui/component/types";
 import { defineComponent, h } from "vue";
-import { LayCheckboxGroup, LayCheckbox } from "@layui/layui-vue";
-import { Recordable } from "@layui/component/types";
-import { CheckboxSize } from "@layui/component/component/checkbox/interface";
+import { LayCheckboxGroup, LayCheckbox } from "@layui/component";
 
 interface CheckboxOptions {
   label: string;
@@ -48,7 +48,7 @@ export default defineComponent({
         {
           modelValue: props.modelValue,
           disabled: props.disabled,
-          "onUpdate:modelValue": (v) => updateModelFn.call(undefined, v),
+          "onUpdate:modelValue": (v: any) => updateModelFn.call(undefined, v),
         },
         {
           default: () => children,

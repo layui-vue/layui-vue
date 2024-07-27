@@ -1,30 +1,13 @@
 <script setup lang="ts">
 import "./index.less";
 
-import type { TooltipProps } from "../tooltip/types";
+import type { FormProps as _FormProps } from "./interface";
 
 import { toRefs, provide, reactive, onMounted, nextTick } from "vue";
-import { Rules, ValidateError, ValidateMessages } from "async-validator";
-import { LayFormItemContext, FormCallback, modelType } from "../../types/form";
+import { ValidateError } from "async-validator";
+import { LayFormItemContext, FormCallback } from "../../types/form";
 
-export interface FormProps {
-  model?: modelType;
-  required?: boolean;
-  rules?: Rules;
-  size?: "xs" | "sm" | "md" | "lg";
-  mode?: "block" | "inline";
-  pane?: boolean;
-  initValidate?: boolean;
-  useCN?: boolean;
-  labelPosition?: "right" | "left" | "top";
-  labelWidth?: string | number;
-  inlineWidth?: string | number;
-  requiredIcons?: string;
-  requiredErrorMessage?: string;
-  validateMessage?: ValidateMessages;
-  isLabelTooltip?: boolean;
-  tooltipProps?: TooltipProps;
-}
+export type FormProps = _FormProps;
 
 defineOptions({
   name: "LayForm",
