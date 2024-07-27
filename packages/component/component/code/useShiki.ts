@@ -1,4 +1,4 @@
-import { Highlighter, getHighlighter } from "shiki";
+import { Highlighter, createHighlighter } from "shiki";
 import { Ref } from "vue";
 
 export function useShiki(
@@ -6,9 +6,7 @@ export function useShiki(
   _lang: Ref<string>,
   resolve?: (highlighter: Highlighter) => {}
 ) {
-  getHighlighter({
-    // @ts-ignore
-    warnings: false,
+  createHighlighter({
     themes: [`${_theme.value}-plus`],
     langs: [`${_lang.value}`],
   }).then((highlighter) => resolve?.(highlighter));

@@ -1,6 +1,10 @@
 <template>
-  <iframe class="layui-code-iframe" :srcdoc="code"></iframe>
-  <div class="layui-code-preview">{{ props.code }}</div>
+  <iframe
+    v-if="lang == 'html'"
+    class="layui-code-iframe"
+    :srcdoc="code"
+  ></iframe>
+  <div v-else class="layui-code-preview">{{ props.code }}</div>
 </template>
 
 <script setup lang="ts">

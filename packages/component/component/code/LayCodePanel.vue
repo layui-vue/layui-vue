@@ -155,6 +155,8 @@ onUnmounted(() => {
 
 <style lang="less">
 .layui-code {
+  position: relative;
+
   &-lines {
     width: 100%;
 
