@@ -38,6 +38,7 @@ const avatarText = ref<HTMLElement | null>(null);
 const styles = ref({});
 const resizeObserver = ref<ResizeObserver>();
 const { size, radius, autoFixSize } = toRefs(props);
+const isSrcFailed = ref(false);
 const classes = computed(() => {
   return [
     "layui-avatar",
@@ -69,10 +70,11 @@ onMounted(() => {
   }
 });
 const handleImgErr = (e: Event) => {
-  if (props.fallback) {
+  if (props.fallback && !isSrcFailed.value) {
     const targetElement = e.target as HTMLImageElement;
     targetElement.src = props.fallback!;
   }
+  isSrcFailed.value = true;
 };
 
 onUnmounted(() => {
