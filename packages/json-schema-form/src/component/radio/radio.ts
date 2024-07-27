@@ -1,6 +1,6 @@
 import type { PropType } from "vue";
 import { defineComponent, h } from "vue";
-import { LayRadioGroup, LayRadio, LayRadioButton } from "@layui/layui-vue";
+import { LayRadioGroup, LayRadio, LayRadioButton } from "@layui/component";
 
 interface RadioOptions {
   label: string;

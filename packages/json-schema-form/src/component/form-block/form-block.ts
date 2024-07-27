@@ -16,7 +16,7 @@ import {
   LayTextarea,
   LayDatePicker,
   LaySelect,
-} from "@layui/layui-vue";
+} from "@layui/component";
 import LayRadio from "../radio";
 import LayCheckbox from "../checkbox";
 

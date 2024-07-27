@@ -142,8 +142,9 @@ const handleEnter = (e: KeyboardEvent) => {
 };
 
 const handleBackspaceKeyUp = (e: KeyboardEvent) => {
+  if (e.code !== "Backspace") return;
   if (!tagData.value || !tagData.value.length) return;
-  if (!oldInputValue.value && ["Backspace", "Delete"].includes(e.code)) {
+  if (!oldInputValue.value) {
     const lastIndex = normalizedTags.value.length - 1;
     handleClose(normalizedTags.value[lastIndex].value, lastIndex, e);
   }
@@ -318,7 +319,7 @@ defineExpose({
         :placeholder="placeholder"
         :readonly="readonly"
         @keydown.enter="handleEnter"
-        @keyup="handleBackspaceKeyUp"
+        @keyup.delete="handleBackspaceKeyUp"
         @input="handleInput"
         @focus="handleFocus"
         @blur="handleBlur"
