@@ -11,31 +11,31 @@
     "dev": "pnpm -C play dev",
     "dev:docs": "pnpm -C docs dev",
     "test": "vitest run",
-    "build": "pnpm run build:icons && pnpm run build:layer && pnpm run build:component && pnpm run build:docs",
-    "build:docs": "pnpm -C docs build",
-    "build:component": "pnpm -C packages/layui build",
+    "build": "pnpm --workspace-concurrency=1 run /^build:(?!docs).*/",
     "build:icons": "pnpm -C packages/icons build",
     "build:layer": "pnpm -C packages/layer build",
+    "build:component": "pnpm -C packages/layui build",
+    "build:form": "pnpm -C packages/json-schema-form build",
+    "build:docs": "pnpm -C docs build",
     "publish:component": "pnpm -C packages/layui publish",
     "generate:icons": "pnpm -C packages/icons generate",
     "lint:eslint": "eslint 'packages/**/*.{vue,ts,tsx}' --fix",
     "lint:prettier": "prettier --write \"packages/**/*.{vue,ts}\"",
+    "postinstall": "pnpm run build",
     "prepare": "husky install",
     "commit": "git add . && git-cz && git push"
   },
   "dependencies": {
     "@layui/component": "workspace:*",
     "@layui/icons-vue": "workspace:*",
+    "@layui/json-schema-form": "workspace:*",
     "@layui/layer-vue": "workspace:*",
     "@layui/layui-vue": "workspace:*",
-    "@layui/json-schema-form": "workspace:*",
-    "vue": "3.3.4",
-    "prismjs": "^1.29.0",
-    "highlight.js": "^11.10.0",
-    "shiki": "^1.10.3"
+    "vue": "3.3.13"
   },
   "peerDependencies": {
-    "vue": "^3.0.0"
+    "@vue/runtime-core": "3.3.13",
+    "vue": "3.3.13"
   },
   "devDependencies": {
     "@babel/core": "^7.17.9",
@@ -52,9 +52,6 @@
     "@typescript-eslint/parser": "^5.8.0",
     "@vitejs/plugin-vue": "^4.6.2",
     "@vitejs/plugin-vue-jsx": "^3.1.0",
-    "@vue/compiler-sfc": "3.3.4",
-    "@vue/runtime-core": "3.3.4",
-    "@vue/server-renderer": "3.3.4",
     "@vue/test-utils": "2.4.5",
     "commitizen": "^4.2.4",
     "commitlint-config-cz": "^0.13.3",
