@@ -26,4 +26,6 @@ export interface CascaderProps {
   load?: CascaderPanelLazyloadFunction;
   checkStrictly?: boolean;
   fullpath?: boolean;
+  search?: boolean;
+  searchMethod?: (value: string) => Array<CascaderPanelItemProps>;
 }

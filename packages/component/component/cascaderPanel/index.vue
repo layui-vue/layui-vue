@@ -119,11 +119,12 @@ const emits = defineEmits<{
 }>();
 
 const props = withDefaults(defineProps<CascaderPanelProps>(), {
-  data: () => [],
+  options: () => [],
   alwaysLazy: false,
   multiple: false,
   onlyLastLevel: false,
-  lazy: () => {},
+  lazy: false,
+  load: () => {},
   style: () => {
     return {
       stripe: false,
@@ -148,12 +149,16 @@ const props = withDefaults(defineProps<CascaderPanelProps>(), {
 const {
   dataSource,
   sanitizer,
+  onlyLastLevel,
   multiple,
   checkStrictly,
+  decollator,
   multipleSelectItem,
   alwaysLazy,
   loadingTheme,
   selectKeys,
+  selectLabel,
+  iterCollector,
   flatData,
   changeOnSelect,
 } = useCascaderPanel(props);
@@ -187,7 +192,7 @@ onMounted(() => {
     selectKeys.value =
       props.modelValue instanceof Array
         ? props.modelValue
-        : props.modelValue.split(props.decollator);
+        : props.modelValue.split(decollator.value ?? "");
 
     if (checkStrictly.value) {
       // 单选且严格模式下，从展平的数据中找到对应的项，然后设置选中
@@ -198,7 +203,8 @@ onMounted(() => {
     }
   } else {
     let mValue = props.modelValue;
-    if (typeof mValue === "string") mValue = mValue.split(props.decollator);
+    if (typeof mValue === "string")
+      mValue = mValue.split(decollator.value ?? "");
 
     if (multiple.value) {
       // 多选，此时不管是否严格关系都可以直接读到多选键中，自底向上构建路径
@@ -218,7 +224,7 @@ onMounted(() => {
  * @param item 当前项
  */
 const doLazyLoad = (item: CascaderPanelItemPropsInternal) => {
-  if (props.lazy) {
+  if (props.lazy && props.load) {
     if (!alwaysLazy.value && item.children?.length) {
       return;
     }
@@ -231,9 +237,8 @@ const doLazyLoad = (item: CascaderPanelItemPropsInternal) => {
       if (typeof res === "string")
         res = JSON.parse(res) as Array<CascaderPanelItemProps>;
       item.children = sanitizer(res, item);
-    };
+      item.orig!.children = res;
 
-    Promise.resolve(props.lazy(item, process)).then(() => {
       item.loading = false;
       // 有下层节点
       if (item.children?.length)
@@ -251,16 +256,19 @@ const doLazyLoad = (item: CascaderPanelItemPropsInternal) => {
       else
         flushOut(multiple.value ? FLUSH_SIGNAL.MULTIPLE : FLUSH_SIGNAL.SINGLE);
       multipleItemTrigger(item);
-    });
+    };
+
+    Promise.resolve(props.load(item, process));
   } else {
     multipleItemTrigger(item);
-    flushOut(multiple.value ? FLUSH_SIGNAL.MULTIPLE : FLUSH_SIGNAL.SINGLE);
+    if (!item.children?.length)
+      flushOut(multiple.value ? FLUSH_SIGNAL.MULTIPLE : FLUSH_SIGNAL.SINGLE);
   }
 };
 /**
  * 刷新输出
  */
-const flushOut = (signal: FLUSH_SIGNAL, source: Ref = selectKeys) => {
+const flushOut = (signal: FLUSH_SIGNAL, source: Ref<string[]> = selectKeys) => {
   switch (signal) {
     case FLUSH_SIGNAL.CHANGE:
       emits("change", source.value);

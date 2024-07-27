@@ -347,7 +347,7 @@ const valueLv=ref(null)
 
 ::: title 选择即改变
 :::
-::: demo 使用 `changeOnSelect` 属性开启，但不建议和 `onlyLastLevel` 同时开启，因为这样你看不到实时选中的结果。
+::: demo 使用 `changeOnSelect` 属性开启。
 <template>
   <lay-cascader :options="options" v-model="valueChangeOnSelect" :only-last-level="true" :change-on-select="true" allow-clear placeholder="选择即改变" ></lay-cascader>
   <span style="margin-left:20px">输出的值：{{valueChangeOnSelect}}</span>
@@ -725,17 +725,52 @@ const options3=[
 
 :::
 
-::: title Cascader 面板
+::: title 懒加载
 :::
 
-::: demo
+::: demo 懒加载需要通过 `lazy` 属性与 `load` 方法实现。`lazy` 属性接受一个布尔值，`load` 方法接受一个回调函数，用于动态加载选项，这个回调函数接受两个参数，第一个参数是当前点击的节点，第二个参数是加载完成后的回调函数。
 <template>
-  {{_selectKeys}}
-  <lay-cascader-panel :data="options4" v-model="_selectKeys" @update:multiple-select-item="onMultipleSelectItem" :replaceFields="[{label:'label'}]" :multiple="true"></lay-cascader-panel>
+  <lay-cascader :options="options2" :lazy="true" :load="load"></lay-cascader>
 </template>
 
 <script setup>
+  import { ref } from 'vue';
+  const options2 = ref([
+    {label: "北京", value: '010000'},
+    {label: "广西壮族自治区", value: '450000'},
+  ]);
+  const load = (el, resolve) => {
+    setTimeout(() => {
+    debugger
+      resolve([
+        {label: "南宁", value: '450100'},
+        {label: "柳州", value: '450200'},
+        {label: "桂林", value: '450300'},
+      ]);
+    }, 5000);
+  };
+</script>
+:::
+
+::: title CascaderPanel 级联选择器面板
+:::
+
+::: demo CascaderPanel 是 Cascader 的核心组件，你可以在上面使用部分 Cascader 的参数。
+<template>
+  <div style="padding: 12px;">{{_selectKeys}}</div>
+  <lay-form>
+    <lay-form-item label="严格选择">
+        <lay-switch v-model="checkStrictly"></lay-switch>
+    </lay-form-item>
+  </lay-form>
+  <lay-cascader-panel :options="options4" v-model="_selectKeys" :checkStrictly="checkStrictly" @update:multiple-select-item="onMultipleSelectItem" :replaceFields="[{label:'label'}]" :multiple="true"></lay-cascader-panel>
+</template>
+
+<script setup>
+  import { ref } from 'vue';
+
   const _selectKeys = ref(["450201", "450202", "450101", "450102"]);
+  const checkStrictly = ref(false);
   const onMultipleSelectItem = (item) => {
     console.log(item);
   }
@@ -801,17 +836,23 @@ const options3=[
 
 | 属性                     | 描述                  | 类型                  | 可选值                  | 默认值                  |
 | -----------------------  | -------------------- |-------------------- |-------------------- |-------------------- |
-| placeholder              | 提示信息              |             |             |             | 
-| v-model / modelValue     | 值                   |             |             |             | 
-| decollator               | 分割符号，默认为 /     |            |             |             | 
-| options                  | 选项参数 格式请见上面的demo  |            |             |             | 
-| onlyLastLevel            | 回显display仅显示最后一级，默认为 `false`  |            |             |             | 
-| replaceFields            | 字段名称配置, 配置项为 `label`,`value`,`children`  |            |             |             | 
-| allow-clear              | 默认slot提供清空功能，与lay-input保持一致|            |             |             | 
-| size                     | 尺寸参数，与lay-input保持一致|            |             |             | 
-| contentStyle             | 内容自定义样式     | `StyleValue` | -- | -- |
-| contentClass             | 内容自定义Class    | `string` `Array<string \| object>` `object` | -- | -- |
-| disabled | 禁用 | `boolean`  |--  |--  |
+| placeholder              | 提示信息                                  | `string` | -- | -- | 
+| v-model / modelValue     | 值                                       | `string` `Array<string>` | -- | -- | 
+| decollator               | 分割符号，默认为 /                         | `string` | -- | -- | 
+| options                  | 选项参数 格式请见上面的demo                 | -- | -- | -- | 
+| onlyLastLevel            | 回显display仅显示最后一级                  | `boolean` | -- | `false` | 
+| replaceFields            | 字段别名                                  | `{label: string, value: string, children: string}` | -- | -- | 
+| allow-clear              | 默认slot提供清空功能，与lay-input保持一致    | `boolean` | -- | -- | 
+| size                     | 尺寸参数，与lay-input保持一致               | -- | -- | -- | 
+| contentStyle             | 内容自定义样式                             | `StyleValue` | -- | -- |
+| contentClass             | 内容自定义Class                          | `string` `Array<string \| object>` `object` | -- | -- |
+| disabled                 | 禁用                                    | `boolean`  | --  | --  |
+| checkStrictly            | 严格模式                                 | `boolean` | -- | -- |
+| lazy                     | 是否启用懒加载                            | `boolean` | -- | -- |
+| load                     | 懒加载方法                               | `CascaderPanelLazyloadFunction` | -- | -- |
+| search                   | 是否启用搜索                             | `boolean` | -- | -- |
+| searchMethod             | 搜索方法                                 | `(value: string) => Array<CascaderPanelItemProps>` | -- | -- |
+| multiple                 | 多选模式                                 | `boolean` | -- | -- |
 :::
 
 ::: title Cascader 事件
@@ -821,7 +862,7 @@ const options3=[
 
 | 方法名 | 描述         |用法|
 | ---- | ------------ |--------|
-| change | 选中后数据改变的回调 |onChange( evt ){ <br>	&nbsp;	&nbsp;/* evt.display<br>	&nbsp;	&nbsp;/* evt.value,<br>	&nbsp;	&nbsp;/* evt.label<br>	&nbsp;	&nbsp;/* evt.currentClick<br>}|
+| change | 选中后数据改变的回调 | `({display, value, label, currentClick}) => void`  |
 
 :::
 

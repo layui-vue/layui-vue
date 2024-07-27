@@ -89,15 +89,17 @@ export default function useCascaderPanel(props: CascaderPanelProps) {
           selected: false,
           disabled: item.disabled,
           children: undefined,
+          orig: undefined,
           parent,
         };
         d.children = item[replaceFields.value.children]
           ? sanitizer(item[replaceFields.value.children], d)
           : undefined;
+        d.orig = item;
         return d;
       });
     };
-    originData.value = sanitizer(props.data ?? [], undefined);
+    originData.value = sanitizer(props.options ?? [], undefined);
 
     /**
      * 单颗树转换成森林
@@ -193,8 +195,8 @@ export default function useCascaderPanel(props: CascaderPanelProps) {
     });
 
     watch(
-      () => props.data,
-      () => (originData.value = sanitizer(props.data ?? [], undefined))
+      () => props.options,
+      () => (originData.value = sanitizer(props.options ?? [], undefined))
     );
 
     watch(

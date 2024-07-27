@@ -61,7 +61,7 @@
       <template #content>
         <lay-cascader-panel
           v-show="!_isSearching"
-          :data="_dataSource"
+          :options="_dataSource"
           :replace-fields="_replaceFields"
           :multiple="_multiple"
           :decollator="_decollator"
@@ -72,7 +72,8 @@
           @change="_onChange"
           @update:model-value="_updateValue"
           @update:multiple-select-item="_updateMultipleSelectItem"
-          :lazy="props.load"
+          :lazy="props.lazy"
+          :load="props.load"
           :changeOnSelect="_changeOnSelect"
           :fullpath="props.fullpath"
         >
@@ -114,7 +115,7 @@
 import "./index.less";
 import LayDropdown from "../dropdown/index.vue";
 import LayTagInput from "../tagInput/index.vue";
-import { ref, useSlots, computed, watch, onUnmounted, Ref } from "vue";
+import { ref, useSlots, computed, watch, Ref } from "vue";
 import { CascaderProps } from "./interface";
 import {
   CascaderPanelItemProps,
@@ -165,7 +166,7 @@ const _matchedList: Ref<Array<CascaderPanelItemPropsInternal>> = ref([]);
 const _innerProcess = computed(() =>
   useCascaderPanel({
     modelValue: props.modelValue,
-    data: props.options,
+    options: _dataSource.value,
     multiple: _multiple.value,
     replaceFields: _replaceFields.value,
     decollator: _decollator.value,
@@ -193,6 +194,9 @@ const _displayValue = computed({
 const _changeOnSelect = ref(props.changeOnSelect);
 
 const doSearchValue = (str: string) =>
+  (props.search &&
+    props.searchMethod &&
+    _innerProcess.value.sanitizer(props.searchMethod(str), undefined)) ||
   _innerProcess.value.flatData.value.filter(
     (a: CascaderPanelItemPropsInternal) => a.label.includes(str)
   );
@@ -239,7 +243,14 @@ const _updateValue = (selectKeys: string[] | string) => {
       ? selectKeys.split(props.decollator)
       : selectKeys;
   if (!_multiple.value) dropdownRef.value.hide();
-  emit("update:modelValue", selectKeys);
+
+  let output =
+    typeof props.modelValue === "string"
+      ? typeof selectKeys === "string"
+        ? selectKeys
+        : selectKeys.join(props.decollator)
+      : selectKeys;
+  emit("update:modelValue", output);
 };
 
 const _updateMultipleSelectItem = (

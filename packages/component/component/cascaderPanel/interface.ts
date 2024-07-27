@@ -16,6 +16,7 @@ export interface CascaderPanelItemPropsInternal {
   selected: boolean;
   loading: boolean;
   disabled?: boolean;
+  orig?: CascaderPanelItemProps;
   children?: Array<CascaderPanelItemPropsInternal>;
   parent?: CascaderPanelItemPropsInternal;
 }
@@ -38,9 +39,10 @@ export interface CascaderPanelProps {
   };
   multiple?: boolean;
   onlyLastLevel?: boolean;
-  lazy?: CascaderPanelLazyloadFunction;
+  lazy?: boolean;
+  load?: CascaderPanelLazyloadFunction;
   alwaysLazy?: boolean;
-  data?: Array<CascaderPanelItemProps>;
+  options?: Array<CascaderPanelItemProps>;
   decollator?: string;
   value?: string | Array<string>;
   height?: string | number;
