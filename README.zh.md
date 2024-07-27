@@ -23,6 +23,8 @@ layui - vue（谐音：类 UI) 是 一 套 Vue 3.0 的 桌 面 端 组 件 库
 ## 镜像站
 
 - [https://www.layui-vue.com](https://www.layui-vue.com)
+- [https://layui.ipasokon.work](https://layui.ipasokon.work)
+- [https://layui-vue-b57.pages.dev](https://layui-vue-b57.pages.dev)
 
 ## 贡献者
 
