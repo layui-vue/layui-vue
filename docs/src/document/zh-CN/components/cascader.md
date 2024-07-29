@@ -36,7 +36,7 @@
 
 <script setup>
 import { ref } from "vue";
-const value=ref("Guide / shejiyuanze / yizhi");
+const value=ref("Guide/shejiyuanze/yizhi");
 const multipleVal=ref([]);
 const singleValue=ref([]);
 const multipleValue=ref([]);
@@ -44,7 +44,7 @@ const lazyLoad = (node, resolve) => {
     resolve([{ label: "test", value: "test" }]);
 }
 const clickSetValue = () => {
-    value.value="Guide / shejiyuanze / fankui";
+    value.value="Guide/shejiyuanze/fankui";
 }
 const options = [
 	{

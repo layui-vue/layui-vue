@@ -115,11 +115,12 @@
 import "./index.less";
 import LayDropdown from "../dropdown/index.vue";
 import LayTagInput from "../tagInput/index.vue";
-import { ref, useSlots, computed, watch, Ref } from "vue";
+import { ref, useSlots, computed, watch, Ref, provide, inject } from "vue";
 import { CascaderProps } from "./interface";
 import {
   CascaderPanelItemProps,
   CascaderPanelItemPropsInternal,
+  tCascaderPanel,
 } from "../cascaderPanel/interface";
 import useProps from "./index.hooks";
 import useCascaderPanel from "../cascaderPanel/index.hook";
@@ -131,7 +132,7 @@ defineOptions({
 const props = withDefaults(defineProps<CascaderProps>(), {
   options: undefined,
   modelValue: "",
-  decollator: " / ",
+  decollator: "/",
   placeholder: "",
   onlyLastLevel: false,
   allowClear: false,
@@ -150,6 +151,11 @@ const props = withDefaults(defineProps<CascaderProps>(), {
   fullpath: true,
 });
 
+const _context = useCascaderPanel({
+  ...props,
+});
+provide("CascaderContext", _context);
+
 const hasContent = computed(
   () => props.modelValue != "" && props.modelValue != null
 );
@@ -162,19 +168,7 @@ const openState = ref(false);
 const _isSearching = ref(false);
 const _searchValue = ref("");
 const _matchedList: Ref<Array<CascaderPanelItemPropsInternal>> = ref([]);
-
-const _innerProcess = computed(() =>
-  useCascaderPanel({
-    modelValue: props.modelValue,
-    options: _dataSource.value,
-    multiple: _multiple.value,
-    replaceFields: _replaceFields.value,
-    decollator: _decollator.value,
-    onlyLastLevel: _onlyLastLevel.value,
-    checkStrictly: _checkStrictly.value,
-    fullpath: props.fullpath,
-  })
-);
+const _innerProcess = computed(() => _context);
 const _dataSource = ref(props.options);
 const _multiple = ref(props.multiple);
 const _decollator = ref(props.decollator);
@@ -205,13 +199,13 @@ const doSearchValue = (str: string) =>
  * 清空内容
  */
 const onClear = () => {
-  if (_multiple.value) {
-    _innerProcess.value.multipleSelectItem.value.clear();
-    emit("update:modelValue", []);
-  } else {
-    _innerProcess.value.selectKeys.value = [];
-    emit("update:modelValue", undefined);
-  }
+  _innerProcess.value.multipleSelectItem.value.forEach(
+    (a) => (a.checked = a.indeterminate = false)
+  );
+  _innerProcess.value.buildMultipleStatus();
+  _innerProcess.value.multipleSelectItem.value.clear();
+  _innerProcess.value.selectKeys.value = [];
+  emit("update:modelValue", _multiple.value ? [] : undefined);
   emit("clear");
 };
 /**
@@ -219,7 +213,6 @@ const onClear = () => {
  * @param value Tag的Label路径
  */
 const onRemove = (value: string, e: KeyboardEvent) => {
-  // TODO 讨论：按下退格键是否删除Tag？
   let _k = value.split(_decollator.value);
   const k = _k.shift();
   let obj: CascaderPanelItemPropsInternal | undefined =
@@ -233,6 +226,9 @@ const onRemove = (value: string, e: KeyboardEvent) => {
       _innerProcess.value.selectKeys.value.findIndex((a) => a === obj!.value),
       1
     );
+  obj!.checked = obj!.indeterminate = false;
+  _innerProcess.value.multipleSelectItem.value.delete(obj!.value);
+  _innerProcess.value.buildMultipleStatus();
   emit("update:modelValue", _selectKeys.value);
   dropdownRef.value.hide();
 };
@@ -308,6 +304,8 @@ const buildFullPath = (item: CascaderPanelItemPropsInternal) => {
 
 watch(
   () => props.modelValue,
-  () => (_selectKeys.value = _innerProcess.value.selectKeys.value)
+  () => {
+    _innerProcess.value.modelValue.value = props.modelValue;
+  }
 );
 </script>

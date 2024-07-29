@@ -1,11 +1,14 @@
-import { ComputedRef, Ref, computed, ref, watch } from "vue";
+import { ComputedRef, Ref, computed, onMounted, ref, watch } from "vue";
 import {
   CascaderPanelItemProps,
   CascaderPanelItemPropsInternal,
   CascaderPanelProps,
+  tCascaderPanel,
 } from "./interface";
 
-export default function useCascaderPanel(props: CascaderPanelProps) {
+export default function useCascaderPanel(
+  props: CascaderPanelProps
+): tCascaderPanel {
   return (function () {
     /**
      * 原始数据
@@ -45,18 +48,22 @@ export default function useCascaderPanel(props: CascaderPanelProps) {
      */
     const changeOnSelect = ref(props.changeOnSelect);
     /**
-     * `内部` 显示的Keys
+     * 显示的Keys
      */
-    const _showKeys: Ref<Array<string>> = ref([]);
+    const showKeys: Ref<Array<string>> = ref([]);
+    /**
+     * modelValue
+     */
+    const modelValue: Ref<string | string[]> = ref(props.modelValue ?? []);
 
     /**
      * 每列已选中的 key
      */
     const selectKeys: Ref<Array<string>> = ref(
       (() => {
-        if (typeof props.modelValue === "string")
-          return props.modelValue.split(decollator.value ?? "/");
-        if (Array.isArray(props.modelValue)) return [...props.modelValue];
+        if (typeof modelValue.value === "string")
+          return modelValue.value.split(decollator.value ?? "/");
+        if (Array.isArray(modelValue.value)) return [...modelValue.value];
         return [];
       })()
     );
@@ -116,7 +123,7 @@ export default function useCascaderPanel(props: CascaderPanelProps) {
         | Array<CascaderPanelItemPropsInternal>
         | CascaderPanelItemPropsInternal
         | undefined = data;
-      _showKeys.value.forEach((key) => {
+      showKeys.value.forEach((key) => {
         if (prevLevel instanceof Array)
           prevLevel = prevLevel.find((a) => a.value === key);
         else prevLevel = prevLevel?.children?.find((a) => a.value === key);
@@ -151,7 +158,7 @@ export default function useCascaderPanel(props: CascaderPanelProps) {
 
       return onlyLastLevel.value
         ? path?.pop() ?? ""
-        : path.join(props.decollator);
+        : path.join(` ${props.decollator} `);
     });
 
     /**
@@ -159,7 +166,7 @@ export default function useCascaderPanel(props: CascaderPanelProps) {
      */
     const dataSource = computed(() => {
       return flatter(originData.value).filter(
-        (_, i) => i <= _showKeys.value.length
+        (_, i) => i <= showKeys.value.length
       );
     });
 
@@ -225,21 +232,21 @@ export default function useCascaderPanel(props: CascaderPanelProps) {
      * 监听选中数据变化
      */
     watch(
-      () => props.modelValue,
+      () => modelValue.value,
       () => {
-        if (!props.modelValue?.length) {
+        if (!modelValue.value?.length) {
           selectKeys.value = [];
           return;
         }
 
         if (!multiple.value)
           selectKeys.value =
-            props.modelValue instanceof Array
-              ? props.modelValue
-              : props.modelValue.split(decollator.value ?? " / ");
+            modelValue.value instanceof Array
+              ? modelValue.value
+              : modelValue.value.split(decollator.value ?? " / ");
         else {
-          if (props.modelValue instanceof Array) {
-            props.modelValue.forEach((v) => {
+          if (modelValue.value instanceof Array) {
+            modelValue.value.forEach((v) => {
               multipleSelectItem.value.set(
                 v,
                 flatData.value.find((c) => c.value === v)!
@@ -251,16 +258,115 @@ export default function useCascaderPanel(props: CascaderPanelProps) {
     );
 
     /**
-     * 监听selectkeys，如果清空或取消选择则不更新showkeys
+     * 自底向上构建森林
+     *
+     * 需要更新的层数为最大为森林深度 n-1
      */
-    watch(
-      () => selectKeys.value,
-      (val, _) => {
-        if (!val.length) {
-          selectKeys.value = _showKeys.value;
-          return;
+    const buildMultipleStatus = (): void => {
+      if (checkStrictly.value) return;
+
+      // Leaf nodes
+      flatData.value
+        .filter((c) => !c.children?.length)
+        .forEach((item) => {
+          if (item.parent) {
+            // chilren 全部勾全的情况
+            item.parent.checked =
+              item.parent.children?.every((a) => a.checked) || false;
+            if (!item.parent.checked)
+              // children 中有勾选，但是没有勾全
+              item.parent.indeterminate =
+                item.parent.children?.some((a) => a.checked) || false;
+          }
+        });
+
+      // Not root nodes & leaf nodes
+      flatData.value
+        .filter((c) => c.parent)
+        .forEach((item) => {
+          // children 全部勾选的情况
+          item.parent!.checked =
+            item.parent!.children?.every((a) => a.checked) || false;
+          // children 中有勾选，但是没有勾全
+          if (!item.parent!.checked)
+            item.parent!.indeterminate =
+              item.parent!.children?.some(
+                (a) => a.checked || a.indeterminate
+              ) || false;
+        });
+
+      // Root nodes
+      flatData.value
+        .filter((c) => !c.parent && c.children?.length)
+        .forEach((item) => {
+          item.checked = item.children?.every((a) => a.checked) || false;
+          if (!item.checked)
+            item.indeterminate =
+              item.children?.some((a) => a.indeterminate || a.checked) || false;
+        });
+    };
+
+    const setup = () => {
+      if (!modelValue.value?.length) {
+        selectKeys.value = [];
+        return;
+      }
+
+      if (!multiple.value) {
+        // 单选且非严格模式下，直接读到选中的键里面
+        selectKeys.value =
+          modelValue.value instanceof Array
+            ? modelValue.value
+            : modelValue.value.split(decollator.value ?? "");
+
+        if (checkStrictly.value) {
+          // 单选且严格模式下，从展平的数据中找到对应的项，然后设置选中
+          const item = flatData.value.find(
+            (c) => c.value === selectKeys.value.at(selectKeys.value.length - 1)
+          );
+          item && (item.selected = true);
         }
-        _showKeys.value = val;
+      } else {
+        let mValue = modelValue.value;
+        if (typeof mValue === "string")
+          mValue = mValue.split(decollator.value ?? "");
+
+        if (multiple.value) {
+          // 多选，此时不管是否严格关系都可以直接读到多选键中，自底向上构建路径
+          (mValue as Array<string>).forEach((v: string) => {
+            const item = flatData.value.find((c) => c.value === v);
+            if (!item) return;
+            item.checked = true;
+            multipleSelectItem.value.set(v, item);
+          });
+        }
+        // 执行一次自底向上构建
+        buildMultipleStatus();
+      }
+    };
+
+    watch(
+      () => modelValue.value,
+      (newVal) => {
+        if (multiple.value) {
+          if (newVal instanceof Array) {
+            newVal
+              .filter((a) => !multipleSelectItem.value.has(a))
+              .forEach((v) => {
+                const item = flatData.value.find((c) => c.value === v);
+                if (!item) return;
+                item.checked = true;
+                multipleSelectItem.value.set(v, item);
+              });
+          }
+          buildMultipleStatus();
+        } else {
+          selectKeys.value =
+            newVal instanceof Array
+              ? newVal
+              : newVal.split(decollator.value ?? "");
+          if (selectKeys.value.length) showKeys.value = selectKeys.value;
+        }
       }
     );
 
@@ -275,10 +381,14 @@ export default function useCascaderPanel(props: CascaderPanelProps) {
       alwaysLazy,
       loadingTheme,
       selectKeys,
+      showKeys,
       selectLabel,
       iterCollector,
       flatData,
       changeOnSelect,
+      buildMultipleStatus,
+      modelValue,
+      setup,
     };
   })();
 }

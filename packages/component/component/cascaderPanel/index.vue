@@ -20,7 +20,7 @@
             :class="[
               {
                 'layui-cascader-panel-item-active':
-                  item.value === selectKeys.at(i),
+                  item.value === showKeys.at(i),
               },
               {
                 'layui-cascader-panel-item-disabled': item.disabled,
@@ -84,16 +84,17 @@
 </template>
 
 <script setup lang="ts">
+import { Ref, computed, inject, onMounted, provide, ref, useSlots } from "vue";
+import LayCheckboxV2 from "../checkboxV2/index.vue";
+import useCascaderPanel from "./index.hook";
+import { tCascaderPanel } from "./interface";
 import "./index.less";
-import { Ref, computed, onMounted, ref, useSlots } from "vue";
 import {
   CascaderPanelItemProps,
   CascaderPanelItemPropsInternal,
   CascaderPanelProps,
   FLUSH_SIGNAL,
 } from "./interface";
-import useCascaderPanel from "./index.hook";
-import LayCheckboxV2 from "../checkboxV2/index.vue";
 
 defineOptions({
   name: "LayCascaderPanel",
@@ -137,7 +138,7 @@ const props = withDefaults(defineProps<CascaderPanelProps>(), {
     children: "children",
   }),
   modelValue: () => [],
-  decollator: () => " / ",
+  decollator: () => "/",
   height: "200px",
   checkStrictly: false,
   changeOnSelect: false,
@@ -157,11 +158,16 @@ const {
   alwaysLazy,
   loadingTheme,
   selectKeys,
+  showKeys,
   selectLabel,
   iterCollector,
   flatData,
   changeOnSelect,
-} = useCascaderPanel(props);
+  buildMultipleStatus,
+  modelValue,
+  setup,
+} = (inject("CascaderContext") as tCascaderPanel) ?? useCascaderPanel(props);
+onMounted(() => setup());
 /**
  * 插槽
  */
@@ -178,47 +184,6 @@ const _height = computed(() =>
     ? `${props.height}px`
     : props.height ?? "200px"
 );
-/**
- * 自顶向下构建森林
- */
-onMounted(() => {
-  if (!props.modelValue?.length) {
-    selectKeys.value = [];
-    return;
-  }
-
-  if (!multiple.value) {
-    // 单选且非严格模式下，直接读到选中的键里面
-    selectKeys.value =
-      props.modelValue instanceof Array
-        ? props.modelValue
-        : props.modelValue.split(decollator.value ?? "");
-
-    if (checkStrictly.value) {
-      // 单选且严格模式下，从展平的数据中找到对应的项，然后设置选中
-      const item = flatData.value.find(
-        (c) => c.value === selectKeys.value.at(selectKeys.value.length - 1)
-      );
-      item && (item.selected = true);
-    }
-  } else {
-    let mValue = props.modelValue;
-    if (typeof mValue === "string")
-      mValue = mValue.split(decollator.value ?? "");
-
-    if (multiple.value) {
-      // 多选，此时不管是否严格关系都可以直接读到多选键中，自底向上构建路径
-      mValue.forEach((v) => {
-        const item = flatData.value.find((c) => c.value === v);
-        if (!item) return;
-        item.checked = true;
-        multipleSelectItem.value.set(v, item);
-      });
-    }
-    // 执行一次自底向上构建
-    buildMultipleStatus();
-  }
-});
 /**
  * 懒加载
  * @param item 当前项
@@ -242,40 +207,42 @@ const doLazyLoad = (item: CascaderPanelItemPropsInternal) => {
       item.loading = false;
       // 有下层节点
       if (item.children?.length)
-        props.modelValue instanceof Array &&
-          props.modelValue.forEach((v) => {
+        modelValue.value instanceof Array &&
+          modelValue.value.forEach((v) => {
             const item = flatData.value.find((c) => c.value === v);
             if (item) {
               // 选中当前的项目，然后添加到已选的多选项中
-              // TODO 讨论：如果存在多个相同 value 值的对象是否抛异常，我认为这一般是用户的业务问题
               item.checked = true;
               multipleSelectItem.value.set(v, item);
             } else multipleSelectItem.value.delete(v);
           });
       // 没有下层节点
-      else
+      else {
         flushOut(multiple.value ? FLUSH_SIGNAL.MULTIPLE : FLUSH_SIGNAL.SINGLE);
+      }
       multipleItemTrigger(item);
     };
 
     Promise.resolve(props.load(item, process));
   } else {
     multipleItemTrigger(item);
-    if (!item.children?.length)
+    if (!item.children?.length || checkStrictly.value) {
+      selectKeys.value = showKeys.value;
       flushOut(multiple.value ? FLUSH_SIGNAL.MULTIPLE : FLUSH_SIGNAL.SINGLE);
+    }
   }
 };
 /**
  * 刷新输出
  */
-const flushOut = (signal: FLUSH_SIGNAL, source: Ref<string[]> = selectKeys) => {
+const flushOut = (signal: FLUSH_SIGNAL) => {
   switch (signal) {
     case FLUSH_SIGNAL.CHANGE:
-      emits("change", source.value);
+      emits("change", showKeys.value);
       break;
 
     case FLUSH_SIGNAL.SINGLE:
-      emits("update:modelValue", source.value);
+      emits("update:modelValue", selectKeys.value);
       break;
 
     case FLUSH_SIGNAL.MULTIPLE:
@@ -328,60 +295,13 @@ const clickChooseItem = (
   index: number
 ) => {
   if (item.disabled) return;
-  let keys = selectKeys.value;
+  let keys = showKeys.value;
   // 回溯，清除n ~ n + 2列的内容
   if (index < keys.length) keys = keys.filter((_, i) => i <= index);
   // 检查数组长度，并补齐，避免自动转换成object
   while (keys.length <= index) keys.push(multiple.value ? item.value : "");
-  selectKeys.value = keys;
-  selectKeys.value[index] = item.value;
-};
-/**
- * 自底向上构建森林
- *
- * 需要更新的层数为最大为森林深度 n-1
- */
-const buildMultipleStatus = () => {
-  if (checkStrictly.value) return;
-
-  // Leaf nodes
-  flatData.value
-    .filter((c) => !c.children?.length)
-    .forEach((item) => {
-      if (item.parent) {
-        // chilren 全部勾全的情况
-        item.parent.checked =
-          item.parent.children?.every((a) => a.checked) || false;
-        if (!item.parent.checked)
-          // children 中有勾选，但是没有勾全
-          item.parent.indeterminate =
-            item.parent.children?.some((a) => a.checked) || false;
-      }
-    });
-
-  // Not root nodes & leaf nodes
-  flatData.value
-    .filter((c) => c.parent)
-    .forEach((item) => {
-      // children 全部勾选的情况
-      item.parent!.checked =
-        item.parent!.children?.every((a) => a.checked) || false;
-      // children 中有勾选，但是没有勾全
-      if (!item.parent!.checked)
-        item.parent!.indeterminate =
-          item.parent!.children?.some((a) => a.checked || a.indeterminate) ||
-          false;
-    });
-
-  // Root nodes
-  flatData.value
-    .filter((c) => !c.parent && c.children?.length)
-    .forEach((item) => {
-      item.checked = item.children?.every((a) => a.checked) || false;
-      if (!item.checked)
-        item.indeterminate =
-          item.children?.some((a) => a.indeterminate || a.checked) || false;
-    });
+  showKeys.value = keys;
+  showKeys.value[index] = item.value;
 };
 </script>
 

@@ -1,3 +1,5 @@
+import { ComputedRef, Ref } from "vue";
+
 export interface CascaderPanelItemProps {
   label?: any;
   value?: any;
@@ -27,12 +29,14 @@ export type CascaderPanelLazyloadFunction = (
 ) => string | Promise<Array<CascaderPanelItemProps>> | void;
 
 export interface CascaderPanelProps {
+  options?: Array<CascaderPanelItemProps>;
+  modelValue?: string | Array<string>;
+  decollator?: string;
   replaceFields?: {
     label?: string;
     value?: string;
     children?: string;
   };
-  modelValue?: string | Array<string>;
   style?: {
     stripe?: boolean;
     loadingTheme?: string;
@@ -42,8 +46,6 @@ export interface CascaderPanelProps {
   lazy?: boolean;
   load?: CascaderPanelLazyloadFunction;
   alwaysLazy?: boolean;
-  options?: Array<CascaderPanelItemProps>;
-  decollator?: string;
   value?: string | Array<string>;
   height?: string | number;
   checkStrictly?: boolean;
@@ -56,3 +58,27 @@ export enum FLUSH_SIGNAL {
   MULTIPLE,
   SINGLE,
 }
+
+export type tCascaderPanel = {
+  dataSource: ComputedRef<CascaderPanelItemPropsInternal[][]>;
+  sanitizer: (
+    data: Array<CascaderPanelItemProps>,
+    parent: CascaderPanelItemPropsInternal | undefined
+  ) => Array<CascaderPanelItemPropsInternal>;
+  onlyLastLevel: Ref<boolean | undefined>;
+  multiple: Ref<boolean | undefined>;
+  checkStrictly: Ref<boolean | undefined>;
+  decollator: Ref<string | undefined>;
+  multipleSelectItem: Ref<Map<string, CascaderPanelItemPropsInternal>>;
+  alwaysLazy: Ref<boolean | undefined>;
+  loadingTheme: Ref<string | undefined>;
+  selectKeys: Ref<string[]>;
+  showKeys: Ref<string[]>;
+  selectLabel: ComputedRef<string | string[]>;
+  iterCollector: (iter: IterableIterator<any>) => any[];
+  flatData: ComputedRef<CascaderPanelItemPropsInternal[]>;
+  changeOnSelect: Ref<boolean | undefined>;
+  buildMultipleStatus: () => void;
+  setup: () => void;
+  modelValue: Ref<string | string[]>;
+};
