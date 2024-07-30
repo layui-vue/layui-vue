@@ -125,7 +125,7 @@ const props = withDefaults(defineProps<CascaderPanelProps>(), {
   multiple: false,
   onlyLastLevel: false,
   lazy: false,
-  load: () => {},
+  load: undefined,
   style: () => {
     return {
       stripe: false,
@@ -189,48 +189,37 @@ const _height = computed(() =>
  * @param item 当前项
  */
 const doLazyLoad = (item: CascaderPanelItemPropsInternal) => {
-  if (props.lazy && props.load) {
-    if (!alwaysLazy.value && item.children?.length) {
-      return;
-    }
-    item.loading = true;
-    item.children = [];
-
-    // 追加新数据到数据源
-    const process = (res: string | Array<CascaderPanelItemProps> | void) => {
-      if (!res) res = [];
-      if (typeof res === "string")
-        res = JSON.parse(res) as Array<CascaderPanelItemProps>;
-      item.children = sanitizer(res, item);
-      item.orig!.children = res;
-
-      item.loading = false;
-      // 有下层节点
-      if (item.children?.length)
-        modelValue.value instanceof Array &&
-          modelValue.value.forEach((v) => {
-            const item = flatData.value.find((c) => c.value === v);
-            if (item) {
-              // 选中当前的项目，然后添加到已选的多选项中
-              item.checked = true;
-              multipleSelectItem.value.set(v, item);
-            } else multipleSelectItem.value.delete(v);
-          });
-      // 没有下层节点
-      else {
-        flushOut(multiple.value ? FLUSH_SIGNAL.MULTIPLE : FLUSH_SIGNAL.SINGLE);
-      }
-      multipleItemTrigger(item);
-    };
-
-    Promise.resolve(props.load(item, process));
-  } else {
-    multipleItemTrigger(item);
-    if (!item.children?.length || checkStrictly.value) {
-      selectKeys.value = showKeys.value;
-      flushOut(multiple.value ? FLUSH_SIGNAL.MULTIPLE : FLUSH_SIGNAL.SINGLE);
-    }
+  if (!alwaysLazy.value && item.children?.length) {
+    return;
   }
+  item.loading = true;
+
+  // 追加新数据到数据源
+  const process = (res: string | Array<CascaderPanelItemProps> | void) => {
+    item.children = [];
+    if (!res) res = [];
+    if (typeof res === "string")
+      res = JSON.parse(res) as Array<CascaderPanelItemProps>;
+    item.children = sanitizer(res, item);
+    item.orig!.children = res;
+
+    item.loading = false;
+    // 有下层节点
+    if (item.children?.length)
+      modelValue.value instanceof Array &&
+        modelValue.value.forEach((v) => {
+          const item = flatData.value.find((c) => c.value === v);
+          if (item) {
+            // 选中当前的项目，然后添加到已选的多选项中
+            item.checked = true;
+            multipleSelectItem.value.set(v, item);
+          } else multipleSelectItem.value.delete(v);
+        });
+    // 没有下层节点
+    else flushOut(multiple.value ? FLUSH_SIGNAL.MULTIPLE : FLUSH_SIGNAL.SINGLE);
+  };
+
+  Promise.resolve(props.load?.(item, process));
 };
 /**
  * 刷新输出
@@ -271,8 +260,8 @@ const multipleItemTrigger = (item: CascaderPanelItemPropsInternal) => {
   else multipleSelectItem.value.delete(item.value);
 };
 /**
- * 点击 li 事件
- * @description 点击 li 的时候展开子项，如果配置了懒加载就进行懒加载
+ * 选中当前项目
+ * @description 点击选择当前的项目，如果配置了懒加载就进行懒加载
  * @param item 当前项
  * @param index 当前列索引
  */
@@ -281,11 +270,20 @@ const clickSelectItem = (
   index: number
 ) => {
   clickChooseItem(item, index);
-  doLazyLoad(item);
   if (changeOnSelect.value) flushOut(FLUSH_SIGNAL.CHANGE);
+
+  if (props.lazy && props.load) {
+    doLazyLoad(item);
+  } else {
+    // multipleItemTrigger(item);
+    if (!item.children?.length || checkStrictly.value) {
+      selectKeys.value = showKeys.value;
+      flushOut(multiple.value ? FLUSH_SIGNAL.MULTIPLE : FLUSH_SIGNAL.SINGLE);
+    }
+  }
 };
 /**
- * 选中事件
+ * 展开一个项目
  * @description 选中一个项目，并且加入 selectKeys 数组中
  * @param item 当前项
  * @param index 当前列索引

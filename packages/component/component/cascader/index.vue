@@ -146,7 +146,7 @@ const props = withDefaults(defineProps<CascaderProps>(), {
   }),
   multiple: false,
   lazy: false,
-  load: () => {},
+  load: undefined,
   checkStrictly: false,
   fullpath: true,
 });
