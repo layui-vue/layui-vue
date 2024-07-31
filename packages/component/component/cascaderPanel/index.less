@@ -51,13 +51,13 @@
     }
 
     &-item {
-        padding: 8px 16px;
+        position: relative;
+        padding: 8px 36px 8px 16px;
         height: 34px;
         cursor: pointer;
         text-overflow: ellipsis;
         white-space: nowrap;
         overflow: hidden;
-        position: relative;
         user-select: none;
         display: flex;
         align-items: center;
@@ -106,10 +106,9 @@
             }
         }
 
-        &-loading {
+        &-icon{
             position: absolute;
-            right: 0;
-            margin-right: 12px;
+            right: 10px;
         }
     }
 }

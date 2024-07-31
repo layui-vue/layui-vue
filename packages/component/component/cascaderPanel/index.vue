@@ -55,7 +55,7 @@
               </div>
               <lay-icon
                 :class="[
-                  'layui-cascader-panel-item-loading',
+                  'layui-cascader-panel-item-icon',
                   'layui-anim',
                   'layui-anim-rotate',
                   'layui-anim-loop',
@@ -65,11 +65,9 @@
                 v-if="item.loading"
               />
               <lay-icon
-                :type="
-                  item.children && item.children.length && 'layui-icon-right'
-                    ? 'layui-icon-right'
-                    : ''
-                "
+                v-else-if="item.children && item.children.length"
+                class="layui-cascader-panel-item-icon"
+                type="layui-icon-right"
               ></lay-icon>
             </slot>
           </li>
