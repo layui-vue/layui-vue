@@ -35,9 +35,10 @@
           :placeholder="placeholder"
           :allow-clear="allowClear"
           :disabled="disabled"
-          :readonly="true"
+          :readonly="!search"
           :size="size"
           @clear="onClear"
+          @input="handleInputSearch"
         ></lay-input>
         <lay-tag-input
           v-model="_displayValue"
@@ -45,15 +46,11 @@
           @remove="onRemove"
           :placeholder="placeholder"
           :allow-clear="true"
+          :disabled="disabled"
+          :readonly="!search"
           v-model:input-value="_searchValue"
-          @update:input-value="
-            (val:string) => {
-              _isSearching = val.length > 0;
-              if (!_isSearching) return;
-              dropdownRef.show();
-              _matchedList = doSearchValue(val);
-            }
-          "
+          @update:input-value="handleInputSearch"
+          @keyup.delete.capture.prevent.stop
           v-else
         ></lay-tag-input>
       </div>
@@ -87,11 +84,13 @@
           <lay-scroll height="200px" class="layui-cascader-search-result-list">
             <template v-if="_matchedList.length > 0">
               <div
-                class="layui-cascader-search-result-item"
-                :class="{
-                  'layui-cascader-search-result-item-active':
-                    _selectKeys.includes(item.value),
-                }"
+                :class="[
+                  'layui-cascader-search-result-item',
+                  {
+                    'layui-cascader-search-result-item-active':
+                      _selectKeys.includes(item.value),
+                  },
+                ]"
                 v-for="(item, i) in _matchedList"
                 :key="i"
                 @click="clickCheckItem(item)"
@@ -100,9 +99,7 @@
               </div>
             </template>
             <template v-else>
-              <lay-empty
-                style="vertical-align: middle; height: 200px"
-              ></lay-empty>
+              <lay-empty class="layui-cascader-empty"></lay-empty>
             </template>
           </lay-scroll>
         </div>
@@ -115,14 +112,14 @@
 import "./index.less";
 import LayDropdown from "../dropdown/index.vue";
 import LayTagInput from "../tagInput/index.vue";
-import { ref, useSlots, computed, watch, Ref, provide, inject } from "vue";
+import { ref, useSlots, computed, watch, Ref, provide } from "vue";
 import { CascaderProps } from "./interface";
 import {
   CascaderPanelItemProps,
   CascaderPanelItemPropsInternal,
-  tCascaderPanel,
 } from "../cascaderPanel/interface";
 import useProps from "./index.hooks";
+import { CASCADER_CONTEXT_KEY } from "./cascader";
 import useCascaderPanel from "../cascaderPanel/index.hook";
 
 defineOptions({
@@ -154,10 +151,10 @@ const props = withDefaults(defineProps<CascaderProps>(), {
 const _context = useCascaderPanel({
   ...props,
 });
-provide("CascaderContext", _context);
+provide(CASCADER_CONTEXT_KEY, _context);
 
 const hasContent = computed(
-  () => props.modelValue != "" && props.modelValue != null
+  () => props.modelValue !== "" && props.modelValue !== null
 );
 const { size } = useProps(props);
 const emit = defineEmits(["update:modelValue", "change", "clear"]);
@@ -300,6 +297,13 @@ const buildFullPath = (item: CascaderPanelItemPropsInternal) => {
     obj = obj.parent;
   }
   return fullPath.reverse().join(_decollator.value);
+};
+
+const handleInputSearch = (val: string) => {
+  _isSearching.value = val.length > 0;
+  if (!_isSearching.value) return;
+  dropdownRef.value.show();
+  _matchedList.value = doSearchValue(val);
 };
 
 watch(

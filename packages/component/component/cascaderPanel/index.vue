@@ -1,5 +1,8 @@
 <template>
-  <div class="layui-cascader-panel">
+  <div
+    class="layui-cascader-panel"
+    :style="{ height: _height, minHeight: _height }"
+  >
     <div class="layui-cascader-panel-container">
       <ul
         class="layui-cascader-panel-list"
@@ -21,8 +24,6 @@
               {
                 'layui-cascader-panel-item-active':
                   item.value === showKeys.at(i),
-              },
-              {
                 'layui-cascader-panel-item-disabled': item.disabled,
               },
             ]"
@@ -34,12 +35,7 @@
                   <lay-radio
                     v-if="!multiple"
                     :value="!item.selected"
-                    @update:model-value="(val: boolean) => {
-                      dataSource.forEach((list: Array<CascaderPanelItemPropsInternal>) => list.forEach((i: CascaderPanelItemPropsInternal) => (i.selected = false)));
-                      item.selected = !item.selected;
-                      clickSelectItem(item, i);
-                      flushOut(FLUSH_SIGNAL.CHANGE);
-                    }"
+                    @update:model-value="handleRadioUpdateModelValue(item, i)"
                   />
                   <lay-checkbox-v2
                     v-else-if="!item.loading"
@@ -48,12 +44,7 @@
                     v-model="item.checked"
                     :value="item.checked ? 1 : 0"
                     :isIndeterminate="item.indeterminate"
-                    @update:model-value="
-                      () => {
-                        multipleItemTrigger(item);
-                        flushOut(FLUSH_SIGNAL.MULTIPLE);
-                      }
-                    "
+                    @update:model-value="handleCheckboxUpdateModelValue(item)"
                   />
                 </template>
                 <slot
@@ -62,19 +53,24 @@
                 ></slot>
                 <template v-else>{{ item.label }}</template>
               </div>
-              <lay-badge
-                class="layui-cascader-panel-item-loading"
-                type="dot"
+              <lay-icon
+                :class="[
+                  'layui-cascader-panel-item-loading',
+                  'layui-anim',
+                  'layui-anim-rotate',
+                  'layui-anim-loop',
+                ]"
+                type="layui-icon-loading"
                 :theme="loadingTheme"
-                ripple
                 v-if="item.loading"
               />
-              <i
-                class="layui-icon"
-                :class="{
-                  'layui-icon-right': item.children && item.children.length,
-                }"
-              ></i>
+              <lay-icon
+                :type="
+                  item.children && item.children.length && 'layui-icon-right'
+                    ? 'layui-icon-right'
+                    : ''
+                "
+              ></lay-icon>
             </slot>
           </li>
         </lay-scroll>
@@ -84,8 +80,9 @@
 </template>
 
 <script setup lang="ts">
-import { Ref, computed, inject, onMounted, provide, ref, useSlots } from "vue";
+import { computed, inject, onMounted, ref, useSlots } from "vue";
 import LayCheckboxV2 from "../checkboxV2/index.vue";
+import { LayIcon } from "@layui/icons-vue";
 import useCascaderPanel from "./index.hook";
 import { tCascaderPanel } from "./interface";
 import "./index.less";
@@ -95,6 +92,7 @@ import {
   CascaderPanelProps,
   FLUSH_SIGNAL,
 } from "./interface";
+import { CASCADER_CONTEXT_KEY } from "../cascader/cascader";
 
 defineOptions({
   name: "LayCascaderPanel",
@@ -150,23 +148,19 @@ const props = withDefaults(defineProps<CascaderPanelProps>(), {
 const {
   dataSource,
   sanitizer,
-  onlyLastLevel,
   multiple,
   checkStrictly,
-  decollator,
   multipleSelectItem,
   alwaysLazy,
   loadingTheme,
   selectKeys,
   showKeys,
-  selectLabel,
-  iterCollector,
   flatData,
   changeOnSelect,
   buildMultipleStatus,
   modelValue,
   setup,
-} = (inject("CascaderContext") as tCascaderPanel) ?? useCascaderPanel(props);
+} = (inject(CASCADER_CONTEXT_KEY) as tCascaderPanel) ?? useCascaderPanel(props);
 onMounted(() => setup());
 /**
  * 插槽
@@ -301,11 +295,23 @@ const clickChooseItem = (
   showKeys.value = keys;
   showKeys.value[index] = item.value;
 };
-</script>
 
-<style lang="less" scoped>
-.layui-cascader-panel {
-  height: v-bind(_height);
-  min-height: v-bind(_height);
-}
-</style>
+const handleRadioUpdateModelValue = (
+  item: CascaderPanelItemPropsInternal,
+  i: number
+) => {
+  dataSource.value.forEach((list: Array<CascaderPanelItemPropsInternal>) =>
+    list.forEach((i: CascaderPanelItemPropsInternal) => (i.selected = false))
+  );
+  item.selected = !item.selected;
+  clickSelectItem(item, i);
+  flushOut(FLUSH_SIGNAL.CHANGE);
+};
+
+const handleCheckboxUpdateModelValue = (
+  item: CascaderPanelItemPropsInternal
+) => {
+  multipleItemTrigger(item);
+  flushOut(FLUSH_SIGNAL.MULTIPLE);
+};
+</script>
