@@ -33,6 +33,7 @@
           v-model="_displayValue"
           suffix-icon="layui-icon-triangle-d"
           :placeholder="placeholder"
+          :title="_displayValue"
           :allow-clear="allowClear"
           :disabled="disabled"
           :readonly="!search"
@@ -87,8 +88,9 @@
                 :class="[
                   'layui-cascader-search-result-item',
                   {
-                    'layui-cascader-search-result-item-active':
-                      _selectKeys.includes(item.value),
+                    'layui-cascader-search-result-item-active': !multiple
+                      ? _selectKeys.at(_selectKeys.length - 1) == item.value
+                      : _selectKeys.includes(item.value),
                   },
                 ]"
                 v-for="(item, i) in _matchedList"
@@ -183,7 +185,10 @@ const _displayValue = computed({
   set: (v) => {},
 });
 const _changeOnSelect = ref(props.changeOnSelect);
-
+/**
+ * 执行搜索
+ * @param str 搜索内容
+ */
 const doSearchValue = (str: string) =>
   (props.search &&
     props.searchMethod &&
@@ -229,7 +234,10 @@ const onRemove = (value: string, e: KeyboardEvent) => {
   emit("update:modelValue", _selectKeys.value);
   dropdownRef.value.hide();
 };
-
+/**
+ * 更新事件
+ * @param selectKeys 选中的keys
+ */
 const _updateValue = (selectKeys: string[] | string) => {
   _innerProcess.value.selectKeys.value =
     typeof selectKeys === "string"
@@ -245,67 +253,118 @@ const _updateValue = (selectKeys: string[] | string) => {
       : selectKeys;
   emit("update:modelValue", output);
 };
-
+/**
+ * 多选事件
+ * @param map 内部状态map
+ */
 const _updateMultipleSelectItem = (
   map: Map<string, CascaderPanelItemProps>
 ) => {
   emit("update:modelValue", Array.from(map.keys()));
 };
-
+/**
+ * changeOnSelect 事件
+ * @param selectKeys 选中的keys
+ */
 const _onChange = (selectKeys: string[] | string) => {
   emit("update:modelValue", selectKeys);
 };
-
+/**
+ * 选中搜索结果中的node
+ * @param item 被点击的node
+ */
 const clickCheckItem = (item: CascaderPanelItemPropsInternal) => {
-  if (_checkStrictly.value) {
-    if (!_selectKeys.value.includes(item.value))
-      (_selectKeys.value as Array<string>).push(item.value);
-    else
-      (_selectKeys.value as Array<string>).splice(
-        _selectKeys.value.indexOf(item.value),
-        1
+  if (_multiple.value) {
+    /**
+     * 多选且开启了严格模式时，直接把node装入选中的keys中，等待dropdown面板关闭后更新到内部状态中
+     */
+    if (_checkStrictly.value) {
+      if (!_selectKeys.value.includes(item.value))
+        (_selectKeys.value as Array<string>).push(item.value);
+      else
+        (_selectKeys.value as Array<string>).splice(
+          _selectKeys.value.indexOf(item.value),
+          1
+        );
+    } else {
+      /**
+       * 多选且未开启严格模式时，需要判断是否是叶子节点，如果是叶子节点则直接选中，否则需要递归遍历所有叶子节点并选中
+       */
+      let obj: CascaderPanelItemPropsInternal | undefined = item;
+      const leafs: Array<CascaderPanelItemPropsInternal> = [];
+      const onlyLeaf = (item: CascaderPanelItemPropsInternal) => {
+        if (item.children?.length) {
+          item.children.forEach((a) => onlyLeaf(a));
+        } else {
+          leafs.push(item);
+        }
+      };
+      onlyLeaf(obj);
+      leafs.forEach((a) =>
+        _selectKeys.value.includes(a.value)
+          ? (_selectKeys.value as Array<string>).splice(
+              _selectKeys.value.indexOf(a.value),
+              1
+            )
+          : (_selectKeys.value as Array<string>).push(a.value)
       );
-    emit("update:modelValue", _selectKeys.value);
+    }
   } else {
-    let obj: CascaderPanelItemPropsInternal | undefined = item;
-    const leafs: Array<CascaderPanelItemPropsInternal> = [];
-    const onlyLeaf = (item: CascaderPanelItemPropsInternal) => {
-      if (item.children?.length) {
-        item.children.forEach((a) => onlyLeaf(a));
-      } else {
-        leafs.push(item);
-      }
-    };
-    onlyLeaf(obj);
-    leafs.forEach((a) =>
-      _selectKeys.value.includes(a.value)
-        ? (_selectKeys.value as Array<string>).splice(
-            _selectKeys.value.indexOf(a.value),
-            1
-          )
-        : (_selectKeys.value as Array<string>).push(a.value)
-    );
-    emit("update:modelValue", _selectKeys.value);
+    /**
+     * 单选时，根据选择的node来构建路径
+     */
+    _selectKeys.value = buildFullPath(item, true) as string[];
   }
+  emit("update:modelValue", _selectKeys.value);
 };
-
-const buildFullPath = (item: CascaderPanelItemPropsInternal) => {
+/**
+ * 构建路径
+ * @param item 当前node
+ * @param getVal 是否获取value
+ */
+const buildFullPath = (
+  item: CascaderPanelItemPropsInternal,
+  getVal = false
+): string[] | string => {
   let obj: CascaderPanelItemPropsInternal | undefined = item;
   let fullPath = [];
   while (obj) {
-    fullPath.push(obj.label);
+    fullPath.push(getVal ? obj.value : obj.label);
     obj = obj.parent;
   }
-  return fullPath.reverse().join(_decollator.value);
+  return getVal
+    ? fullPath.reverse()
+    : fullPath.reverse().join(_decollator.value);
 };
-
+/**
+ * 处理搜索
+ * @param val 输入的内容
+ */
 const handleInputSearch = (val: string) => {
   _isSearching.value = val.length > 0;
   if (!_isSearching.value) return;
   dropdownRef.value.show();
   _matchedList.value = doSearchValue(val);
 };
-
+/**
+ * 监听dropdown面板开关
+ */
+watch(
+  () => openState.value,
+  (val) => {
+    if (!val) {
+      // 在这里手工更新内部状态
+      if (!_multiple.value && props.search)
+        _innerProcess.value.selectKeys.value =
+          _innerProcess.value.showKeys.value = _selectKeys.value;
+      _isSearching.value = false;
+      _searchValue.value = "";
+    }
+  }
+);
+/**
+ * 监听modelValue
+ */
 watch(
   () => props.modelValue,
   () => {

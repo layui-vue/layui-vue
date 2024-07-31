@@ -326,6 +326,8 @@ export default function useCascaderPanel(
           );
           item && (item.selected = true);
         }
+
+        if (selectKeys.value.length) showKeys.value = selectKeys.value;
       } else {
         let mValue = modelValue.value;
         if (typeof mValue === "string")
