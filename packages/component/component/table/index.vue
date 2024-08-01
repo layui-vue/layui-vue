@@ -1342,7 +1342,11 @@ defineExpose({ getCheckData });
                       ]"
                       :class="[
                         'layui-table-cell',
-                        renderFixedClassName(column, columnIndex, columns),
+                        renderFixedClassName(
+                          column,
+                          columnIndex,
+                          tableFlattenColumns
+                        ),
                         column.fixed ? `layui-table-fixed-${column.fixed}` : '',
                       ]"
                       v-html="renderTotalRowCell(column)"
