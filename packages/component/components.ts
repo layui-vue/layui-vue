@@ -85,6 +85,7 @@ import LayRipple from "./component/ripple/index";
 import LayNoticeBar from "./component/noticeBar/index";
 import LayPageHeader from "./component/pageHeader/index";
 import LayCascader from "./component/cascader/index";
+import LayCascaderPanel from "./component/cascaderPanel/index";
 import LayAffix from "./component/affix/index";
 import LaySpace from "./component/space/index";
 import LayTag from "./component/tag/index";
@@ -120,6 +121,7 @@ declare module "@vue/runtime-core" {
     LayCarousel: typeof LayCarousel;
     LayCarouselItem: typeof LayCarouselItem;
     LayCascader: typeof LayCascader;
+    LayCascaderPanel: typeof LayCascaderPanel;
     LayCheckbox: typeof LayCheckbox;
     LayCheckboxGroup: typeof LayCheckboxGroup;
     LayCol: typeof LayCol;

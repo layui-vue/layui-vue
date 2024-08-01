@@ -2,10 +2,11 @@
   <div
     :size="size"
     :class="[
-      'layui-cascader',
       {
         'layui-cascader-opend': openState,
         'layui-cascader-disabled': disabled,
+        'layui-cascader': true,
+        'layui-cascader-multiple': multiple,
         'has-content': hasContent,
         'has-clear': allowClear,
       },
@@ -22,54 +23,101 @@
       @show="openState = true"
       @hide="openState = false"
     >
-      <lay-input
-        v-if="!slots.default"
-        v-model="displayValue"
-        suffix-icon="layui-icon-triangle-d"
-        :placeholder="placeholder"
-        :allow-clear="allowClear"
-        :disabled="disabled"
-        :readonly="true"
-        :size="size"
-        @clear="onClear"
-      ></lay-input>
+      <div class="slot-area" v-if="slots.default">
+        <slot name="default"></slot>
+      </div>
 
-      <div class="slot-area" v-else>
-        <slot></slot>
+      <div v-else>
+        <lay-input
+          v-if="!_multiple"
+          v-model="_displayValue"
+          suffix-icon="layui-icon-triangle-d"
+          :placeholder="placeholder"
+          :title="_displayValue"
+          :allow-clear="allowClear"
+          :disabled="disabled"
+          :readonly="!search"
+          :size="size"
+          @clear="onClear"
+          @input="handleInputSearch"
+        >
+          <template #suffix>
+            <lay-icon
+              :class="{ 'is-expand': openState }"
+              type="layui-icon-triangle-d"
+            ></lay-icon>
+          </template>
+        </lay-input>
+        <lay-tag-input
+          v-model="_displayValue"
+          v-model:input-value="_searchValue"
+          :placeholder="placeholder"
+          :allow-clear="allowClear"
+          :disabled="disabled"
+          :readonly="!search"
+          @update:input-value="handleInputSearch"
+          @clear="onClear"
+          @remove="onRemove"
+          @keyup.delete.capture.prevent.stop
+          v-else
+        >
+          <template #suffix>
+            <lay-icon
+              :class="{ 'is-expand': openState }"
+              type="layui-icon-triangle-d"
+            ></lay-icon>
+          </template>
+        </lay-tag-input>
       </div>
 
       <template #content>
-        <div class="layui-cascader-panel">
-          <template v-for="(itemCol, index) in treeData">
-            <lay-scroll
-              height="180px"
-              class="layui-cascader-menu"
-              :key="'cascader-menu' + index"
-              v-if="itemCol.data.length"
-            >
+        <lay-cascader-panel
+          v-model="_selectKeys"
+          v-show="!_isSearching"
+          :options="_dataSource"
+          :replace-fields="_replaceFields"
+          :multiple="_multiple"
+          :decollator="_decollator"
+          :only-last-level="_onlyLastLevel"
+          :disabled="_disabled"
+          :check-strictly="_checkStrictly"
+          :lazy="props.lazy"
+          :load="props.load"
+          :changeOnSelect="_changeOnSelect"
+          :fullpath="props.fullpath"
+          @change="_onChange"
+          @update:model-value="_updateValue"
+          @update:multiple-select-item="_updateMultipleSelectItem"
+        >
+          <template v-for="(_, key) in slots" :key="key" #[key]>
+            <template v-if="key != 'default'">
+              <slot :name="key"></slot>
+            </template>
+          </template>
+        </lay-cascader-panel>
+        <div v-show="_isSearching">
+          <lay-scroll height="200px" class="layui-cascader-search-result-list">
+            <template v-if="_matchedList.length > 0">
               <div
-                class="layui-cascader-menu-item"
-                v-for="(item, i) in itemCol.data"
-                :key="index + i"
-                @click="selectBar(item, i, index, 'click')"
                 :class="[
+                  'layui-cascader-search-result-item',
                   {
-                    'layui-cascader-selected': itemCol.selectIndex === i,
+                    'layui-cascader-search-result-item-active': !multiple
+                      ? _selectKeys.at(_selectKeys.length - 1) == item.value
+                      : _selectKeys.includes(item.value),
                   },
                 ]"
+                v-for="(item, i) in _matchedList"
+                :key="i"
+                @click="clickCheckItem(item)"
               >
-                <slot
-                  :name="item.slot"
-                  v-if="item.slot && slots[item.slot]"
-                ></slot>
-                <template v-else>{{ item.label }}</template>
-                <i
-                  class="layui-icon layui-icon-right"
-                  v-if="item.children && item.children.length"
-                ></i>
+                {{ buildFullPath(item) }}
               </div>
-            </lay-scroll>
-          </template>
+            </template>
+            <template v-else>
+              <lay-empty class="layui-cascader-empty"></lay-empty>
+            </template>
+          </lay-scroll>
         </div>
       </template>
     </lay-dropdown>
@@ -78,37 +126,26 @@
 
 <script setup lang="ts">
 import "./index.less";
-import LayInput from "../input/index.vue";
-import LayScroll from "../scroll/index.vue";
 import LayDropdown from "../dropdown/index.vue";
-import { ref, onMounted, watch, useSlots, StyleValue, computed } from "vue";
-import { CascaderSize } from "./interface";
+import LayTagInput from "../tagInput/index.vue";
+import LayCascaderPanel from "../cascaderPanel/index.vue";
+import { ref, useSlots, computed, watch, Ref, provide, nextTick } from "vue";
+import { CascaderProps } from "./interface";
+import {
+  CascaderPanelItemProps,
+  CascaderPanelItemPropsInternal,
+} from "../cascaderPanel/interface";
 import useProps from "./index.hooks";
-
-export type DropdownTrigger = "click" | "hover" | "focus" | "contextMenu";
-
-export interface CascaderProps {
-  options?: Array<any> | null;
-  modelValue?: string;
-  decollator?: string;
-  placeholder?: string;
-  onlyLastLevel?: boolean;
-  disabled?: boolean;
-  replaceFields?: { label: string; value: string; children: string };
-  allowClear?: boolean;
-  size?: CascaderSize;
-  trigger?: DropdownTrigger | DropdownTrigger[];
-  contentClass?: string | Array<string | object> | object;
-  contentStyle?: StyleValue;
-  changeOnSelect?: boolean;
-}
+import { CASCADER_CONTEXT_KEY } from "./cascader";
+import useCascaderPanel from "../cascaderPanel/index.hook";
+import { isValueArray } from "../../utils";
 
 defineOptions({
   name: "LayCascader",
 });
 
 const props = withDefaults(defineProps<CascaderProps>(), {
-  options: null,
+  options: undefined,
   modelValue: "",
   decollator: "/",
   placeholder: "",
@@ -117,227 +154,245 @@ const props = withDefaults(defineProps<CascaderProps>(), {
   disabled: false,
   trigger: () => ["click"],
   changeOnSelect: false,
-  replaceFields: () => {
-    return {
-      label: "label",
-      value: "value",
-      children: "children",
-    };
-  },
+  replaceFields: () => ({
+    label: "label",
+    value: "value",
+    children: "children",
+  }),
+  multiple: false,
+  lazy: false,
+  load: undefined,
+  checkStrictly: false,
+  fullpath: true,
 });
 
-const { size } = useProps(props);
+const _context = useCascaderPanel({
+  ...props,
+});
+provide(CASCADER_CONTEXT_KEY, _context);
 
+const hasContent = computed(() =>
+  _multiple.value ? isValueArray(props.modelValue) : !!props.modelValue
+);
+const { size } = useProps(props);
 const emit = defineEmits(["update:modelValue", "change", "clear"]);
 
-onMounted(() => {
-  initTreeData();
-  firstInitComplete.value = true; //首次加载结束状态
+const slots = useSlots();
+const dropdownRef = ref();
+const openState = ref(false);
+const _isSearching = ref(false);
+const _searchValue = ref("");
+const _matchedList: Ref<Array<CascaderPanelItemPropsInternal>> = ref([]);
+const _innerProcess = computed(() => _context);
+const _dataSource = ref(props.options);
+const _multiple = ref(props.multiple);
+const _decollator = ref(props.decollator);
+const _onlyLastLevel = ref(props.onlyLastLevel);
+const _disabled = ref(props.disabled);
+const _checkStrictly = ref(props.checkStrictly);
+const _replaceFields = ref({
+  label: props.replaceFields?.label ?? "label",
+  value: props.replaceFields?.value ?? "value",
+  children: props.replaceFields?.children ?? "children",
 });
+const _selectKeys = ref<Array<string>>(_innerProcess.value.selectKeys.value);
+const _displayValue = computed({
+  get: () => _innerProcess.value.selectLabel.value,
+  set: (v) => {},
+});
+const _changeOnSelect = ref(props.changeOnSelect);
+/**
+ * 执行搜索
+ * @param str 搜索内容
+ */
+const doSearchValue = (str: string) =>
+  (props.search &&
+    props.searchMethod &&
+    _innerProcess.value.sanitizer(props.searchMethod(str), undefined)) ||
+  _innerProcess.value.flatData.value.filter(
+    (a: CascaderPanelItemPropsInternal) => a.label.includes(str)
+  );
 
+/**
+ * 清空内容
+ */
+const onClear = () => {
+  _innerProcess.value.multipleSelectItem.value.forEach(
+    (a) => (a.checked = a.indeterminate = false)
+  );
+  _innerProcess.value.buildMultipleStatus();
+  _innerProcess.value.multipleSelectItem.value.clear();
+  _innerProcess.value.selectKeys.value = [];
+  _selectKeys.value = [];
+  emit("update:modelValue", _multiple.value ? [] : undefined);
+  emit("clear");
+};
+/**
+ * 删除单个 Tag
+ * @param value Tag的Label路径
+ */
+const onRemove = (value: string, e: KeyboardEvent) => {
+  let _k = value.split(_decollator.value);
+  const k = _k.shift();
+  let obj: CascaderPanelItemPropsInternal | undefined =
+    _innerProcess.value.flatData.value.find((a) => a.label === k);
+  while (obj && _k.length) {
+    const k = _k.shift();
+    obj = obj.children?.find((a) => a.label === k);
+  }
+  if (obj !== undefined)
+    _innerProcess.value.selectKeys.value.splice(
+      _innerProcess.value.selectKeys.value.findIndex((a) => a === obj!.value),
+      1
+    );
+  obj!.checked = obj!.indeterminate = false;
+  _innerProcess.value.multipleSelectItem.value.delete(obj!.value);
+  _innerProcess.value.buildMultipleStatus();
+  _selectKeys.value = [..._selectKeys.value.filter((v) => v !== obj!.value)];
+  emit("update:modelValue", _selectKeys.value);
+  dropdownRef.value.hide();
+};
+/**
+ * 更新事件
+ * @param selectKeys 选中的keys
+ */
+const _updateValue = (selectKeys: string[] | string) => {
+  _innerProcess.value.selectKeys.value =
+    typeof selectKeys === "string"
+      ? selectKeys.split(props.decollator)
+      : selectKeys;
+  if (!_multiple.value) dropdownRef.value.hide();
+
+  let output =
+    typeof props.modelValue === "string"
+      ? typeof selectKeys === "string"
+        ? selectKeys
+        : selectKeys.join(props.decollator)
+      : selectKeys;
+  emit("update:modelValue", output);
+};
+/**
+ * 多选事件
+ * @param map 内部状态map
+ */
+const _updateMultipleSelectItem = (
+  map: Map<string, CascaderPanelItemProps>
+) => {
+  emit("update:modelValue", Array.from(map.keys()));
+};
+/**
+ * changeOnSelect 事件
+ * @param selectKeys 选中的keys
+ */
+const _onChange = (selectKeys: string[] | string) => {
+  emit("update:modelValue", selectKeys);
+};
+/**
+ * 选中搜索结果中的node
+ * @param item 被点击的node
+ */
+const clickCheckItem = (item: CascaderPanelItemPropsInternal) => {
+  if (_multiple.value) {
+    /**
+     * 多选且开启了严格模式时，直接把node装入选中的keys中，等待dropdown面板关闭后更新到内部状态中
+     */
+    if (_checkStrictly.value) {
+      if (!_selectKeys.value.includes(item.value))
+        (_selectKeys.value as Array<string>).push(item.value);
+      else
+        (_selectKeys.value as Array<string>).splice(
+          _selectKeys.value.indexOf(item.value),
+          1
+        );
+    } else {
+      /**
+       * 多选且未开启严格模式时，需要判断是否是叶子节点，如果是叶子节点则直接选中，否则需要递归遍历所有叶子节点并选中
+       */
+      const itemNode: CascaderPanelItemPropsInternal | undefined = item;
+      const allNode: Array<CascaderPanelItemPropsInternal> = [];
+      const onlyLeaf = (item: CascaderPanelItemPropsInternal) => {
+        if (item.children?.length) {
+          item.children.forEach((a) => onlyLeaf(a));
+        } else {
+          allNode.push(item);
+        }
+      };
+      onlyLeaf(itemNode);
+      allNode.forEach((node) => {
+        if (_selectKeys.value.includes(node.value)) {
+          _selectKeys.value = [
+            ..._selectKeys.value.filter((v) => v !== node.value),
+          ];
+        } else {
+          _selectKeys.value = [..._selectKeys.value, node.value];
+        }
+      });
+    }
+  } else {
+    /**
+     * 单选时，根据选择的node来构建路径
+     */
+    _selectKeys.value = buildFullPath(item, true) as string[];
+  }
+  emit("update:modelValue", _selectKeys.value);
+};
+/**
+ * 构建路径
+ * @param item 当前node
+ * @param getVal 是否获取value
+ */
+const buildFullPath = (
+  item: CascaderPanelItemPropsInternal,
+  getVal = false
+): string[] | string => {
+  let obj: CascaderPanelItemPropsInternal | undefined = item;
+  let fullPath = [];
+  while (obj) {
+    fullPath.push(getVal ? obj.value : obj.label);
+    obj = obj.parent;
+  }
+  return getVal
+    ? fullPath.reverse()
+    : fullPath.reverse().join(_decollator.value);
+};
+/**
+ * 处理搜索
+ * @param val 输入的内容
+ */
+const handleInputSearch = (val: string) => {
+  _isSearching.value = val.length > 0;
+  if (!_isSearching.value) return;
+  dropdownRef.value.show();
+  _matchedList.value = doSearchValue(val);
+};
+
+/**
+ * 监听dropdown面板开关
+ */
 watch(
-  () => props.options,
-  () => {
-    initTreeData();
+  () => openState.value,
+  (val) => {
+    if (!val) {
+      // 在这里手工更新内部状态
+      if (!_multiple.value && props.search) {
+        _innerProcess.value.selectKeys.value = [];
+        nextTick(() => {
+          _innerProcess.value.selectKeys.value =
+            _innerProcess.value.showKeys.value = _selectKeys.value;
+        });
+      }
+      _isSearching.value = false;
+      _searchValue.value = "";
+    }
   }
 );
-
+/**
+ * 监听modelValue
+ */
 watch(
   () => props.modelValue,
   () => {
-    if (props.modelValue === null || props.modelValue === "") {
-      onClear();
-    } else {
-      updateDisplayByModelValue();
-    }
+    _innerProcess.value.modelValue.value = props.modelValue;
   }
 );
-const firstInitComplete = ref(false);
-const treeData = ref<any>([]);
-const initTreeData = () => {
-  let treeLvNum = getMaxFloor(props.options);
-  for (let index = 0; index < treeLvNum; index++) {
-    if (index == 0) {
-      treeData.value[0] = {
-        selectIndex: null,
-        data: findData(props.options, 1),
-      };
-    } else {
-      treeData.value[index] = {
-        selectIndex: null,
-        data: [],
-      };
-    }
-  }
-  updateDisplayByModelValue();
-};
-
-function updateDisplayByModelValue() {
-  if (props.modelValue) {
-    try {
-      let valueData = props.modelValue.split(props.decollator);
-      for (let index = 0; index < valueData.length; index++) {
-        const element = valueData[index];
-        let selectIndex = treeData.value[index].data.findIndex(
-          (e: { value: string }) => e.value === element
-        );
-        if (selectIndex == -1) {
-          break;
-        }
-        selectBar(treeData.value[index].data[selectIndex], selectIndex, index);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  }
-}
-
-function getMaxFloor(treeData: any) {
-  //let floor = 0;
-  let max = 0;
-  function each(data: any, floor: any) {
-    data.forEach((e: any) => {
-      //e.layFloor = floor;
-      if (floor > max) {
-        max = floor;
-      }
-      if (
-        e[props.replaceFields.children] &&
-        e[props.replaceFields.children].length > 0
-      ) {
-        each(e[props.replaceFields.children], floor + 1);
-      }
-    });
-  }
-  each(treeData, 1);
-  return max;
-}
-function findData(orginData: any, level: number) {
-  let data: any[] = [];
-  for (let i = 0; i < orginData.length; i++) {
-    const element = orginData[i];
-    if (level === 1) {
-      data.push({
-        value: element[props.replaceFields.value],
-        label: element[props.replaceFields.label],
-        slot: element.slot || false,
-        children: element[props.replaceFields.children] ?? false,
-        orginData: element,
-      });
-    }
-
-    if (
-      level !== 1 &&
-      element[props.replaceFields.children] &&
-      element[props.replaceFields.children].length > 0
-    ) {
-      findData(element[props.replaceFields.children], level - 1);
-    }
-  }
-  return data;
-}
-
-const dataContainer = ref<any>([]);
-
-const selectBar = (
-  item: any,
-  selectIndex: number,
-  parentIndex: number,
-  action: string | null = null
-) => {
-  treeData.value[parentIndex].selectIndex = selectIndex;
-  if (item.children && item.children.length > 0) {
-    treeData.value[parentIndex + 1].selectIndex = null;
-    treeData.value[parentIndex + 1].data = findData(item.children, 1);
-  }
-  //把数组里后面的数据清空
-  let nextIndex = parentIndex + 2;
-  for (let index = nextIndex; index < treeData.value.length; index++) {
-    treeData.value[index].selectIndex = null;
-    treeData.value[index].data = [];
-  }
-  if (
-    !item.children ||
-    item.children.length === 0 ||
-    (props.changeOnSelect && !props.onlyLastLevel)
-  ) {
-    //触发交互条件，（无子项或者子项长度为0）|| （开启了changeOnSelect选项并且没有设置onlyLastLevel）
-    //输入框数据更新
-    let data: any[] = [];
-    function extractData(orginData: any, dataContainer: any, index: number) {
-      const element = orginData[index].data;
-      const selectIndex = orginData[index].selectIndex;
-      const selectData = element[selectIndex];
-      selectData && dataContainer.push(selectData);
-      if (selectData && selectData.children && selectData.children.length > 0) {
-        extractData(orginData, dataContainer, index + 1);
-      }
-    }
-    extractData(treeData.value, data, 0);
-    let fullLable = data
-      .map((e: any) => {
-        return e.label;
-      })
-      .join(` ${props.decollator} `);
-    if (!props.onlyLastLevel) {
-      //全部展示
-      displayValue.value = fullLable;
-    } else {
-      //仅仅显示最后一级
-      let _data = data.map((e: any) => {
-        return e.label;
-      });
-      displayValue.value = _data[_data.length - 1];
-    }
-    let value = data
-      .map((e: any) => {
-        return e.value;
-      })
-      .join(props.decollator);
-    if (action === "click") {
-      emit("update:modelValue", value);
-      if (firstInitComplete.value) {
-        let evt = {
-          display: displayValue.value,
-          value: value,
-          label: fullLable,
-          currentClick: JSON.parse(JSON.stringify(item.orginData)),
-        };
-        emit("change", evt);
-      }
-    }
-
-    if (dropdownRef.value) {
-      if (props.changeOnSelect && item.children && item.children.length > 0) {
-        return;
-      }
-      // @ts-ignore
-      dropdownRef.value.hide();
-    }
-  }
-};
-
-const displayValue = ref<string | number>("");
-const slots = useSlots();
-const dropdownRef = ref();
-const hasContent = computed(
-  () => props.modelValue != "" && props.modelValue != null
-);
-
-//清除事件
-const onClear = () => {
-  displayValue.value = "";
-  let arr = JSON.parse(JSON.stringify(treeData.value));
-  for (let index = 0; index < arr.length; index++) {
-    arr[index].selectIndex = null;
-    if (index === 0) {
-      continue;
-    }
-    arr[index].data = [];
-  }
-  treeData.value = arr;
-  emit("update:modelValue", null);
-};
-
-const openState = ref(false);
 </script>

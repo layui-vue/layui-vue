@@ -1,0 +1,114 @@
+.layui-cascader-panel {
+    display: flex;
+
+    &-container {
+        display: flex;
+    }
+
+    &-selection {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        text-wrap: nowrap;
+
+        .layui-checkbox-label {
+            padding: 0 !important;
+        }
+
+        .layui-form-radio {
+            scale: 0.8;
+            margin: 0;
+            padding: 0;
+
+            i {
+                margin-right: 4px;
+            }
+
+            span {
+                display: none;
+            }
+        }
+    }
+
+    &-list {
+        border: 1px solid #ececec;
+        min-width: 120px;
+        max-width: 200px;
+        overflow: hidden;
+        overflow-y: auto;
+        scrollbar-width: none;
+
+        &:nth-child(n + 2) {
+            border-left: none;
+        }
+
+        &-striped .layui-cascader-panel-item:nth-child(even) {
+            background-color: var(--global-neutral-color-2);
+        }
+    }
+
+    &-item {
+        position: relative;
+        padding: 8px 36px 8px 16px;
+        height: 34px;
+        cursor: pointer;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        user-select: none;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        &-disabled {
+            cursor: not-allowed !important;
+            background-color: var(--global-neutral-color-4);
+        }
+
+        .layui-badge {
+            position: absolute;
+        }
+
+        &:hover {
+            background-color: var(--global-checked-color) !important;
+            color: white;
+
+            span {
+                color: white !important;
+            }
+
+            .layui-form-checkbox i.layui-icon {
+                border: 1px solid;
+            }
+
+            .layui-form-radio i.layui-icon {
+                color: #fff;
+            }
+        }
+
+        &-active {
+            background-color: var(--global-checked-color) !important;
+            color: #fff;
+
+            span {
+                color: #fff !important;
+            }
+
+            .layui-form-radio i.layui-icon {
+                color: #fff;
+            }
+
+            .layui-form-checkbox i.layui-icon {
+                border: 1px solid;
+            }
+        }
+
+        &-icon{
+            position: absolute;
+            right: 10px;
+        }
+    }
+}

@@ -13,17 +13,39 @@
 ::: demo 使用 `lay-cascader` 标签创建级联选择器
 
 <template>
-  <lay-cascader :options="options" v-model="value" placeholder="点我试一试" allow-clear>
-  </lay-cascader>
-  <span style="margin-left:20px">输出的值：{{value}}</span>
-  <lay-button @click='value="Components/data/progress"' size='sm' style='margin-left:10px'>
-    修改v-model
-  </lay-button>
+  <div>
+    <lay-cascader :options="options" v-model="value" placeholder="点我试一试" allow-clear></lay-cascader>
+    <span style="margin-left:20px">输出的值：{{value}}</span>
+    <lay-button @click="clickSetValue" size='sm' style='margin-left:10px'>修改v-model</lay-button>
+  </div>
+  <div style="margin-top:12px;">
+    <lay-cascader :options="options" v-model="multipleVal" placeholder="点我试一试" :multiple="true" allow-clear></lay-cascader>
+    <span style="margin-left:20px">输出的值：{{multipleVal}}</span>
+  </div>
+  <div style="margin-top:12px;">
+    <span style="margin-right: 12px;">非严格单选</span>
+    <lay-cascader :lazy="true" :load="lazyLoad" :options="options" v-model="singleValue" placeholder="点我试一试" :check-strictly="true" allow-clear></lay-cascader>
+    <span style="margin-left:20px">输出的值：{{singleValue}}</span>
+  </div>
+  <div style="margin-top:12px;">
+    <span style="margin-right: 12px;">非严格多选</span>
+    <lay-cascader :options="options" :lazy="true" :load="lazyLoad" v-model="multipleValue" placeholder="点我试一试" :multiple="true" :check-strictly="true" allow-clear></lay-cascader>
+    <span style="margin-left:20px">输出的值：{{multipleValue}}</span>
+  </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
-const value=ref()
+const value=ref("Guide/shejiyuanze/yizhi");
+const multipleVal=ref([]);
+const singleValue=ref([]);
+const multipleValue=ref([]);
+const lazyLoad = (node, resolve) => {
+    resolve([{ label: "test", value: "test" }]);
+}
+const clickSetValue = () => {
+    value.value="Guide/shejiyuanze/fankui";
+}
 const options = [
 	{
 		value: "Guide",
@@ -325,9 +347,9 @@ const valueLv=ref(null)
 
 ::: title 选择即改变
 :::
-::: demo 使用 `changeOnSelect` 属性开启，该功能不能与`onlyLastLevel`同时开启
+::: demo 使用 `changeOnSelect` 属性开启。
 <template>
-  <lay-cascader :options="options" v-model="valueChangeOnSelect" :changeOnSelect="true" allow-clear placeholder="选择即改变" ></lay-cascader>
+  <lay-cascader :options="options" v-model="valueChangeOnSelect" :only-last-level="true" :change-on-select="true" allow-clear placeholder="选择即改变" ></lay-cascader>
   <span style="margin-left:20px">输出的值：{{valueChangeOnSelect}}</span>
 </template>
 
@@ -651,7 +673,7 @@ const options2 = [
 :::
 ::: demo 也许你当前数据键名并不是`label`、`value`、`children`,这时只需要使用replaceFields属性来自定义key
 <template>
-  <lay-cascader :options="options3" :replaceFields="replaceFields" placeholder="自义定key" :disabled="true"></lay-cascader>
+  <lay-cascader :options="options3" :replaceFields="replaceFields" placeholder="自定义key"></lay-cascader>
 </template>
 
 <script setup>
@@ -703,6 +725,403 @@ const options3=[
 
 :::
 
+::: title 搜索
+:::
+
+::: demo `search` 是否开启搜索，`searchMethod` 控制过滤数据。
+<template>
+  <lay-cascader :options="options4" search></lay-cascader><br />
+	多选:{{multipleValue1}}<br />
+  <lay-cascader v-model="multipleValue1" :options="options4" multiple search></lay-cascader>
+</template>
+
+<script setup>
+	import {ref} from 'vue'
+
+	const multipleValue1 = ref([])
+	const options4 = [
+	{
+		value: "Guide",
+		label: "指南",
+        slot:"Guide",
+		children: [
+			{
+				value: "shejiyuanze",
+				label: "设计原则",
+				children: [
+					{
+						value: "yizhi",
+						label: "一致",
+					},
+					{
+						value: "fankui",
+						label: "反馈",
+					},
+					{
+						value: "xiaolv",
+						label: "效率",
+					},
+					{
+						value: "kekong",
+						label: "可控",
+					},
+				],
+			},
+			{
+				value: "daohang",
+				label: "导航",
+				children: [
+					{
+						value: "cexiangdaohang",
+						label: "侧向导航",
+					},
+					{
+						value: "dingbudaohang",
+						label: "顶部导航",
+					},
+				],
+			},
+		],
+	},
+	{
+		value: "Components",
+		label: "组件",
+        slot:"Components",
+		children: [
+			{
+				value: "basic",
+				label: "Basic",
+				children: [
+					{
+						value: "layout",
+						label: "Layout 布局",
+					},
+					{
+						value: "color",
+						label: "Color 色彩",
+					},
+					{
+						value: "typography",
+						label: "Typography 字体",
+					},
+					{
+						value: "icon",
+						label: "Icon 图标",
+					},
+					{
+						value: "button",
+						label: "Button 按钮",
+					},
+				],
+			},
+			{
+				value: "form",
+				label: "Form",
+				children: [
+					{
+						value: "radio",
+						label: "Radio 单选框",
+					},
+					{
+						value: "checkbox",
+						label: "Checkbox 多选框",
+					},
+					{
+						value: "input",
+						label: "Input 输入框",
+					},
+					{
+						value: "input-number",
+						label: "InputNumber 计数器",
+					},
+					{
+						value: "select",
+						label: "Select 选择器",
+					},
+					{
+						value: "cascader",
+						label: "Cascader 级联选择器",
+					},
+					{
+						value: "switch",
+						label: "Switch 开关",
+					},
+					{
+						value: "slider",
+						label: "Slider 滑块",
+					},
+					{
+						value: "time-picker",
+						label: "TimePicker 时间选择器",
+					},
+					{
+						value: "date-picker",
+						label: "DatePicker 日期选择器",
+					},
+					{
+						value: "datetime-picker",
+						label: "DateTimePicker 日期时间选择器",
+					},
+					{
+						value: "upload",
+						label: "Upload 上传",
+					},
+					{
+						value: "rate",
+						label: "Rate 评分",
+					},
+					{
+						value: "form",
+						label: "Form 表单",
+					},
+				],
+			},
+			{
+				value: "data",
+				label: "Data",
+				children: [
+					{
+						value: "table",
+						label: "Table 表格",
+					},
+					{
+						value: "tag",
+						label: "Tag 标签",
+					},
+					{
+						value: "progress",
+						label: "Progress 进度条",
+					},
+					{
+						value: "tree",
+						label: "Tree 树形控件",
+					},
+					{
+						value: "pagination",
+						label: "Pagination 分页",
+					},
+					{
+						value: "badge",
+						label: "Badge 标记",
+					},
+				],
+			},
+			{
+				value: "notice",
+				label: "Notice",
+				children: [
+					{
+						value: "alert",
+						label: "Alert 警告",
+					},
+					{
+						value: "loading",
+						label: "Loading 加载",
+					},
+					{
+						value: "message",
+						label: "Message 消息提示",
+					},
+					{
+						value: "message-box",
+						label: "MessageBox 弹框",
+					},
+					{
+						value: "notification",
+						label: "Notification 通知",
+					},
+				],
+			},
+			{
+				value: "navigation",
+				label: "Navigation",
+				children: [
+					{
+						value: "menu",
+						label: "NavMenu 导航菜单",
+					},
+					{
+						value: "tabs",
+						label: "Tabs 标签页",
+					},
+					{
+						value: "breadcrumb",
+						label: "Breadcrumb 面包屑",
+					},
+					{
+						value: "dropdown",
+						label: "Dropdown 下拉菜单",
+					},
+					{
+						value: "steps",
+						label: "Steps 步骤条",
+					},
+				],
+			},
+			{
+				value: "others",
+				label: "Others",
+				children: [
+					{
+						value: "dialog",
+						label: "Dialog 对话框",
+					},
+					{
+						value: "tooltip",
+						label: "Tooltip 文字提示",
+					},
+					{
+						value: "popover",
+						label: "Popover 弹出框",
+					},
+					{
+						value: "card",
+						label: "Card 卡片",
+					},
+					{
+						value: "carousel",
+						label: "Carousel 走马灯",
+					},
+					{
+						value: "collapse",
+						label: "Collapse 折叠面板",
+					},
+				],
+			},
+		],
+	},
+	{
+		value: "Resource",
+		label: "资源",
+        slot:"Resource",
+		children: [
+			{
+				value: "axure",
+				label: "Axure Components",
+			},
+			{
+				value: "sketch",
+				label: "Sketch Templates",
+			},
+			{
+				value: "jiaohu",
+				label: "组件交互文档",
+			},
+		],
+	},
+];
+</script>
+:::
+
+::: title 懒加载
+:::
+
+::: demo 懒加载需要通过 `lazy` 属性与 `load` 方法实现。`lazy` 属性接受一个布尔值，`load` 方法接受一个回调函数，用于动态加载选项，这个回调函数接受两个参数，第一个参数是当前点击的节点，第二个参数是加载完成后的回调函数。
+<template>
+  <lay-cascader v-model="searchValue" :options="options2" :lazy="true" :load="load"></lay-cascader>
+</template>
+
+<script setup>
+  import { ref } from 'vue';
+	const searchValue = ref()
+  const options2 = ref([
+    {label: "北京", value: '010000'},
+    {label: "广西壮族自治区", value: '450000'},
+  ]);
+  const load = (el, resolve) => {
+		if(el.value === '450000') {
+			setTimeout(() => {
+				resolve([
+					{label: "南宁", value: '450100'},
+					{label: "柳州", value: '450200'},
+					{label: "桂林", value: '450300'},
+				]);
+			}, 2000);
+		}else {
+			resolve()
+		}
+    
+  };
+</script>
+:::
+
+::: title CascaderPanel 级联选择器面板
+:::
+
+::: demo CascaderPanel 是 Cascader 的核心组件，你可以在上面使用部分 Cascader 的参数。
+<template>
+  <div style="padding: 12px;">{{_selectKeys}}</div>
+  <lay-form>
+    <lay-form-item label="严格选择">
+        <lay-switch v-model="checkStrictly"></lay-switch>
+    </lay-form-item>
+  </lay-form>
+  <lay-cascader-panel :options="options4" v-model="_selectKeys" :checkStrictly="checkStrictly" @update:multiple-select-item="onMultipleSelectItem" :replaceFields="[{label:'label'}]" :multiple="true"></lay-cascader-panel>
+</template>
+
+<script setup>
+  import { ref } from 'vue';
+
+  const _selectKeys = ref(["450201", "450202", "450101", "450102"]);
+  const checkStrictly = ref(false);
+  const onMultipleSelectItem = (item) => {
+    console.log(item);
+  }
+  const options4 = ref([
+	{label: "北京", value: '010000'},
+	{label: "广西壮族自治区", value: '450000', children: [
+        {label: "南宁", value: '450100', children: [
+            {label: "市辖区", value: '450101'},
+            {label: "兴宁区", value: '450102'},
+            {label: "青秀区", value: '450103'},
+            {label: "江南区", value: '450105'},
+            {label: "西乡塘区", value: '450107'},
+            {label: "良庆区", value: '450108'},
+            {label: "邕宁区", value: '450109'},
+            {label: "武鸣区", value: '450122'},
+            {label: "隆安县", value: '450123'},
+            {label: "马山县", value: '450124'},
+            {label: "上林县", value: '450125'},
+            {label: "宾阳县", value: '450126'},
+            {label: "横县", value: '450127'},
+        ]},
+		{label: "柳州", value: '450200', children: [
+			{label: "市辖区", value: '450201'},
+			{label: "城中区", value: '450202'},
+			{label: "鱼峰区", value: '450203'},
+			{label: "柳南区", value: '450204'},
+			{label: "柳北区", value: '450205'},
+			{label: "柳江县", value: '450221'},
+			{label: "鹿寨县", value: '450222'},
+			{label: "融安县", value: '450223'},
+			{label: "融水苗族自治县", value: '450224'},
+			{label: "三江侗族自治县", value: '450225'},
+		]},
+		{label: "桂林", value: '450300', children: [
+			{label: "市辖区", value: '450301'},
+			{label: "秀峰区", value: '450302'},
+			{label: "叠彩区", value: '450303'},
+			{label: "象山区", value: '450304'},
+			{label: "七星区", value: '450305'},
+			{label: "雁山区", value: '450311'},
+			{label: "临桂区", value: '450312'},
+			{label: "阳朔县", value: '450321'},
+			{label: "灵川县", value: '450322'},
+			{label: "全州县", value: '450323'},
+			{label: "兴安县", value: '450324'},
+			{label: "永福县", value: '450325'},
+			{label: "灌阳县", value: '450326'},
+			{label: "龙胜各族自治县", value: '450327'},
+			{label: "资源县", value: '450328'},
+			{label: "平乐县", value: '450329'},
+			{label: "荔浦县", value: '450330'},
+			{label: "恭城瑶族自治县", value: '450331'},
+		]},
+	]}
+  ]);
+</script>
+:::
+
 ::: title Cascader 属性
 :::
 
@@ -710,17 +1129,24 @@ const options3=[
 
 | 属性                     | 描述                  | 类型                  | 可选值                  | 默认值                  |
 | -----------------------  | -------------------- |-------------------- |-------------------- |-------------------- |
-| placeholder              | 提示信息              |             |             |             | 
-| v-model / modelValue     | 值                   |             |             |             | 
-| decollator               | 分割符号，默认为 /     |            |             |             | 
-| options                  | 选项参数 格式请见上面的demo  |            |             |             | 
-| onlyLastLevel            | 回显display仅显示最后一级，默认为 `false`  |            |             |             | 
-| replaceFields            | 字段名称配置, 配置项为 `label`,`value`,`children`  |            |             |             | 
-| allow-clear              | 默认slot提供清空功能，与lay-input保持一致|            |             |             | 
-| size                     | 尺寸参数，与lay-input保持一致|            |             |             | 
-| contentStyle             | 内容自定义样式     | `StyleValue` | -- | -- |
-| contentClass             | 内容自定义Class    | `string` `Array<string \| object>` `object` | -- | -- |
-| disabled | 禁用 | `boolean`  |--  |--  |
+| placeholder              | 提示信息                                  | `string` | -- | -- | 
+| v-model / modelValue     | 值                                       | `string` `Array<string>` | -- | -- | 
+| decollator               | 分割符号，默认为 /                         | `string` | -- | -- | 
+| options                  | 选项参数 格式请见上面的demo                 | -- | -- | -- | 
+| onlyLastLevel            | 回显display仅显示最后一级                  | `boolean` | -- | `false` | 
+| replaceFields            | 字段别名                                  | `{label: string, value: string, children: string}` | -- | -- | 
+| allow-clear              | 默认slot提供清空功能，与lay-input保持一致    | `boolean` | -- | -- | 
+| size                     | 尺寸参数，与lay-input保持一致               | -- | -- | -- | 
+| contentStyle             | 内容自定义样式                             | `StyleValue` | -- | -- |
+| contentClass             | 内容自定义Class                          | `string` `Array<string \| object>` `object` | -- | -- |
+| disabled                 | 禁用                                    | `boolean`  | --  | --  |
+| checkStrictly            | 严格模式                                 | `boolean` | -- | -- |
+| lazy                     | 是否启用懒加载                            | `boolean` | -- | -- |
+| load                     | 懒加载方法                               | `CascaderPanelLazyloadFunction` | -- | -- |
+| search                   | 是否启用搜索                             | `boolean` | -- | -- |
+| searchMethod             | 搜索方法                                 | `(value: string) => Array<CascaderPanelItemProps>` | -- | -- |
+| multiple                 | 多选模式                                 | `boolean` | -- | -- |
+| fullpath                 | 多选模式下显示Tag的完整路径                | `boolean` | -- | -- |
 :::
 
 ::: title Cascader 事件
@@ -730,7 +1156,40 @@ const options3=[
 
 | 方法名 | 描述         |用法|
 | ---- | ------------ |--------|
-| change | 选中后数据改变的回调 |onChange( evt ){ <br>	&nbsp;	&nbsp;/* evt.display<br>	&nbsp;	&nbsp;/* evt.value,<br>	&nbsp;	&nbsp;/* evt.label<br>	&nbsp;	&nbsp;/* evt.currentClick<br>}|
+| change | 选中后数据改变的回调 | `(value: Array<string>) => void`  |
+
+:::
+
+::: title CascaderPanel 属性
+:::
+
+::: table
+
+| 属性                     | 描述                  | 类型                  | 可选值                  | 默认值                  |
+| -----------------------  | -------------------- |-------------------- |-------------------- |-------------------- |
+| v-model / modelValue     | 值                                       | `string` `Array<string>` | -- | -- | 
+| decollator               | 分割符号，默认为 /                         | `string` | -- | -- | 
+| options                  | 选项参数 格式请见上面的demo                 | -- | -- | -- | 
+| onlyLastLevel            | 回显display仅显示最后一级                  | `boolean` | -- | `false` | 
+| replaceFields            | 字段别名                                  | `{label: string, value: string, children: string}` | -- | -- | 
+| allow-clear              | 默认slot提供清空功能，与lay-input保持一致    | `boolean` | -- | -- | 
+| disabled                 | 禁用                                    | `boolean`  | --  | --  |
+| checkStrictly            | 严格模式                                 | `boolean` | -- | -- |
+| lazy                     | 是否启用懒加载                            | `boolean` | -- | -- |
+| load                     | 懒加载方法                               | `CascaderPanelLazyloadFunction` | -- | -- |
+| multiple                 | 多选模式                                 | `boolean` | -- | -- |
+| height                   | 高度                                   | `number` `string` | -- | -- |
+:::
+
+::: title CascaderPanel 事件
+:::
+
+::: table
+
+| 方法名 | 描述         |用法|
+| ---- | ------------ |--------|
+| change | 选中后数据改变的回调 | `(value: Array<string>) => void`  |
+| update:multipleSelectItem | 多选勾选事件 | `(map: Map<string, CascaderPanelItemPropsInternal>) => void` |
 
 :::
 
