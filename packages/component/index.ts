@@ -103,6 +103,8 @@ import LayPopconfirm from "./component/popconfirm/index";
 import LayLoading from "./component/loading/index";
 import LayWatermark from "./component/watermark/index";
 import LayPopper from "./component/popper/index";
+import LayDescriptions from "./component/descriptions/index";
+import LayDescriptionsItem from "./component/descriptionsItem/index";
 import LayConfigProvider from "./provider";
 import { InstallOptions } from "./types";
 
@@ -205,6 +207,8 @@ const components: Record<string, Plugin> = {
   LayLoading,
   LayWatermark,
   LayPopper,
+  LayDescriptions,
+  LayDescriptionsItem,
 };
 
 const install = (app: App, options?: InstallOptions): void => {
@@ -314,6 +318,8 @@ export {
   LayLoading,
   LayWatermark,
   LayPopper,
+  LayDescriptions,
+  LayDescriptionsItem,
   install,
 };
 

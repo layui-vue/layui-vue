@@ -257,3 +257,11 @@ body::-webkit-scrollbar {
   border: 1px solid rgba(0,0,0,.06);
   border-radius: 3px;
 }
+
+.descriptions-class{
+  background-color: #1e9fff !important;
+}
+
+.descriptions-label-class{
+  background-color: #ffb800 !important;
+}

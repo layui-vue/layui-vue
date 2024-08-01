@@ -1,0 +1,109 @@
+@12px: 12px;
+@14px: 14px;
+@16px: 16px;
+@18px: 18px;
+
+.layui-descriptions{
+  font-size: @14px;
+
+  &-sm{
+    font-size: @12px;
+    .layui-descriptions-header{
+      margin-bottom: @12px;
+      &-title {
+        font-size: @14px;
+      }
+    }
+
+    .layui-descriptions-body{
+      .layui-descriptions-cell{
+        padding-bottom: 8px;
+      }
+  
+      .is-vertical-label{
+        padding-bottom: 4px;
+      }
+    }
+   
+  }
+
+  &-lg{
+    font-size: @16px;
+    .layui-descriptions-header{
+      margin-bottom: @18px;
+      &-title {
+        font-size: @18px;
+      }
+    }
+
+    .layui-descriptions-body{
+      .layui-descriptions-cell{
+        padding-bottom: 16px;
+      }
+  
+      .is-vertical-label{
+        padding-bottom: 8px;
+      }
+    }
+   
+  }
+
+  &-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: @16px;
+
+    &-title {
+      font-weight: 600;
+      font-size: @16px;
+    }
+  }
+
+  &-body{
+    table {
+      width: 100%;
+      border-collapse:collapse;
+    }
+
+    .layui-descriptions-cell{
+      padding-bottom: 12px;
+      color: var(--button-text-color);
+      line-height: 23px;
+      text-align: left;
+    }
+
+    .layui-descriptions-label {
+      margin-right: 16px;
+    }
+
+    .is-vertical-label{
+      padding-bottom: 6px;
+    }
+
+    
+    .is-border{
+      .layui-descriptions-cell {
+        border: 1px solid var(--global-neutral-color-5);
+        padding: 8px 11px;
+      }
+    }
+
+    .is-left{
+      text-align: left;
+    }
+
+    .is-center{
+      text-align: center;
+    }
+
+    .is-right{
+      text-align: right;
+    }
+  }
+}
+
+.layui-descriptions-label.layui-descriptions-cell.is-border-label {
+  font-weight: 700;
+  background: var(--global-neutral-color-1);
+}

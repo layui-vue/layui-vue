@@ -29,7 +29,7 @@
                       {{ children.subTitle }}
                     </span>
                     <lay-badge
-                      type="dot"
+                      v-bind="children.badge"
                       v-if="children.badge"
                       style="float: right; margin-top: 11px"
                     ></lay-badge>
