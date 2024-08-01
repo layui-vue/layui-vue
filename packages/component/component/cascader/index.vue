@@ -40,24 +40,39 @@
           :size="size"
           @clear="onClear"
           @input="handleInputSearch"
-        ></lay-input>
+        >
+          <template #suffix>
+            <lay-icon
+              :class="{ 'is-expand': openState }"
+              type="layui-icon-triangle-d"
+            ></lay-icon>
+          </template>
+        </lay-input>
         <lay-tag-input
           v-model="_displayValue"
-          @clear="onClear"
-          @remove="onRemove"
+          v-model:input-value="_searchValue"
           :placeholder="placeholder"
-          :allow-clear="true"
+          :allow-clear="allowClear"
           :disabled="disabled"
           :readonly="!search"
-          v-model:input-value="_searchValue"
           @update:input-value="handleInputSearch"
+          @clear="onClear"
+          @remove="onRemove"
           @keyup.delete.capture.prevent.stop
           v-else
-        ></lay-tag-input>
+        >
+          <template #suffix>
+            <lay-icon
+              :class="{ 'is-expand': openState }"
+              type="layui-icon-triangle-d"
+            ></lay-icon>
+          </template>
+        </lay-tag-input>
       </div>
 
       <template #content>
         <lay-cascader-panel
+          v-model="_selectKeys"
           v-show="!_isSearching"
           :options="_dataSource"
           :replace-fields="_replaceFields"
@@ -65,15 +80,14 @@
           :decollator="_decollator"
           :only-last-level="_onlyLastLevel"
           :disabled="_disabled"
-          v-model="_selectKeys"
           :check-strictly="_checkStrictly"
-          @change="_onChange"
-          @update:model-value="_updateValue"
-          @update:multiple-select-item="_updateMultipleSelectItem"
           :lazy="props.lazy"
           :load="props.load"
           :changeOnSelect="_changeOnSelect"
           :fullpath="props.fullpath"
+          @change="_onChange"
+          @update:model-value="_updateValue"
+          @update:multiple-select-item="_updateMultipleSelectItem"
         >
           <template v-for="(_, key) in slots" :key="key" #[key]>
             <template v-if="key != 'default'">
@@ -114,7 +128,8 @@
 import "./index.less";
 import LayDropdown from "../dropdown/index.vue";
 import LayTagInput from "../tagInput/index.vue";
-import { ref, useSlots, computed, watch, Ref, provide } from "vue";
+import LayCascaderPanel from "../cascaderPanel/index.vue";
+import { ref, useSlots, computed, watch, Ref, provide, nextTick } from "vue";
 import { CascaderProps } from "./interface";
 import {
   CascaderPanelItemProps,
@@ -123,6 +138,7 @@ import {
 import useProps from "./index.hooks";
 import { CASCADER_CONTEXT_KEY } from "./cascader";
 import useCascaderPanel from "../cascaderPanel/index.hook";
+import { isValueArray } from "../../utils";
 
 defineOptions({
   name: "LayCascader",
@@ -155,8 +171,8 @@ const _context = useCascaderPanel({
 });
 provide(CASCADER_CONTEXT_KEY, _context);
 
-const hasContent = computed(
-  () => props.modelValue !== "" && props.modelValue !== null
+const hasContent = computed(() =>
+  _multiple.value ? isValueArray(props.modelValue) : !!props.modelValue
 );
 const { size } = useProps(props);
 const emit = defineEmits(["update:modelValue", "change", "clear"]);
@@ -207,6 +223,7 @@ const onClear = () => {
   _innerProcess.value.buildMultipleStatus();
   _innerProcess.value.multipleSelectItem.value.clear();
   _innerProcess.value.selectKeys.value = [];
+  _selectKeys.value = [];
   emit("update:modelValue", _multiple.value ? [] : undefined);
   emit("clear");
 };
@@ -348,6 +365,7 @@ const handleInputSearch = (val: string) => {
   dropdownRef.value.show();
   _matchedList.value = doSearchValue(val);
 };
+
 /**
  * 监听dropdown面板开关
  */
@@ -356,9 +374,13 @@ watch(
   (val) => {
     if (!val) {
       // 在这里手工更新内部状态
-      if (!_multiple.value && props.search)
-        _innerProcess.value.selectKeys.value =
-          _innerProcess.value.showKeys.value = _selectKeys.value;
+      if (!_multiple.value && props.search) {
+        _innerProcess.value.selectKeys.value = [];
+        nextTick(() => {
+          _innerProcess.value.selectKeys.value =
+            _innerProcess.value.showKeys.value = _selectKeys.value;
+        });
+      }
       _isSearching.value = false;
       _searchValue.value = "";
     }

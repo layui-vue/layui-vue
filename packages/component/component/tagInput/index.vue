@@ -162,7 +162,7 @@ const handleBlur = (e: FocusEvent) => {
 };
 
 const handleClearClick = (e: MouseEvent) => {
-  if (props.disabled || props.readonly || !props.allowClear) {
+  if (props.disabled || !props.allowClear) {
     return;
   }
   tagData.value = [];
@@ -271,7 +271,7 @@ defineExpose({
       >
         <LayTag
           v-bind="tagProps"
-          :closable="!readonly && !disabled && item.closable"
+          :closable="!disabled && item.closable"
           :size="size"
           @close="handleClose(item.value, index, $event)"
         >
@@ -294,7 +294,7 @@ defineExpose({
                 v-for="(item, index) of collapsedTagData"
                 :key="`${item}-${index}`"
                 v-bind="tagProps"
-                :closable="!readonly && !disabled && item.closable"
+                :closable="!disabled && item.closable"
                 :size="size"
                 @close="
                   handleClose(

@@ -1018,23 +1018,29 @@ const options3=[
 
 ::: demo 懒加载需要通过 `lazy` 属性与 `load` 方法实现。`lazy` 属性接受一个布尔值，`load` 方法接受一个回调函数，用于动态加载选项，这个回调函数接受两个参数，第一个参数是当前点击的节点，第二个参数是加载完成后的回调函数。
 <template>
-  <lay-cascader :options="options2" :lazy="true" :load="load"></lay-cascader>
+  <lay-cascader v-model="searchValue" :options="options2" :lazy="true" :load="load"></lay-cascader>
 </template>
 
 <script setup>
   import { ref } from 'vue';
+	const searchValue = ref()
   const options2 = ref([
     {label: "北京", value: '010000'},
     {label: "广西壮族自治区", value: '450000'},
   ]);
   const load = (el, resolve) => {
-    setTimeout(() => {
-      resolve([
-        {label: "南宁", value: '450100'},
-        {label: "柳州", value: '450200'},
-        {label: "桂林", value: '450300'},
-      ]);
-    }, 2000);
+		if(el.value === '450000') {
+			setTimeout(() => {
+				resolve([
+					{label: "南宁", value: '450100'},
+					{label: "柳州", value: '450200'},
+					{label: "桂林", value: '450300'},
+				]);
+			}, 2000);
+		}else {
+			resolve()
+		}
+    
   };
 </script>
 :::

@@ -63,10 +63,32 @@
     height: auto !important;
   }
 
-  &.has-content.has-clear:not(.layui-cascader-disabled):hover
-    .layui-input-suffix {
-    display: none;
+  &.has-content.has-clear:not(.layui-cascader-disabled){
+    .layui-tag-input-clear{
+      display: none;
+    }
+
+    &:hover {
+      .layui-input-suffix {
+        display: none;
+      }
+
+      .layui-tag-input-suffix{
+        display: none;
+      }
+
+      .layui-tag-input-clear{
+        display: flex;
+      }
+    }
   }
+
+  &:not(.has-clear) {
+    .layui-tag-input-clear{
+      display: none !important;
+    }
+  }
+    
 
   .layui-input-suffix {
     padding-right: 10px;
@@ -76,6 +98,10 @@
     transition: all 0.3s ease-in-out;
     transform: rotate(0);
     color: var(--global-neutral-color-8);
+  }
+
+  .layui-icon-triangle-d.is-expand{
+    transform: rotate(180deg);
   }
 
   .layui-cascader-menu {

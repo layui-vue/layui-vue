@@ -187,11 +187,9 @@ const doLazyLoad = (item: CascaderPanelItemPropsInternal) => {
   item.loading = true;
 
   // 追加新数据到数据源
-  const process = (res: string | Array<CascaderPanelItemProps> | void) => {
+  const process = (res?: Array<CascaderPanelItemProps>) => {
     item.children = [];
     if (!res) res = [];
-    if (typeof res === "string")
-      res = JSON.parse(res) as Array<CascaderPanelItemProps>;
     item.children = sanitizer(res, item);
     item.orig!.children = res;
 
@@ -208,10 +206,13 @@ const doLazyLoad = (item: CascaderPanelItemPropsInternal) => {
           } else multipleSelectItem.value.delete(v);
         });
     // 没有下层节点
-    else flushOut(multiple.value ? FLUSH_SIGNAL.MULTIPLE : FLUSH_SIGNAL.SINGLE);
+    else {
+      selectKeys.value = showKeys.value;
+      flushOut(multiple.value ? FLUSH_SIGNAL.MULTIPLE : FLUSH_SIGNAL.SINGLE);
+    }
   };
 
-  Promise.resolve(props.load?.(item, process));
+  props.load?.(item, process);
 };
 /**
  * 刷新输出
