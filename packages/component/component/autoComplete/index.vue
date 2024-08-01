@@ -73,6 +73,8 @@
 </template>
 
 <script lang="ts" setup>
+import type {InputEmits} from "../input/interface";
+
 import { ref, watch, onMounted, onUnmounted, nextTick, StyleValue } from "vue";
 import LayDropdown from "../dropdown/index.vue";
 import LayDropdownMenu from "../dropdownMenu/index.vue";
@@ -110,7 +112,7 @@ const props = withDefaults(defineProps<AutocompleteProps>(), {
   },
 });
 
-interface AutocompleteEmits {
+interface AutocompleteEmits extends InputEmits  {
   (e: "update:modelValue", value: string): void;
   (e: "select", option: any): void;
 }
@@ -149,6 +151,7 @@ watch(
  * 完成：赋值 loading 为 false 值
  */
 const inputHandler = function (value: string) {
+  emits("input", value);
   if (!composing.value) {
     loading.value = true;
     dropdownRef.value.show();
@@ -176,6 +179,7 @@ const inputHandler = function (value: string) {
  */
 const clearHandler = function () {
   emits("update:modelValue", "");
+  emits("clear");
   if (innerOptions.value.length > 0) {
     innerOptions.value = [];
   }
@@ -215,15 +219,17 @@ const clickOptions = function (option: any) {
 /**
  * 维护 isFocus 状态，确保键盘操作只有 isFocus 为 true 时触发
  */
-const focusHandler = function () {
+const focusHandler = function (event: FocusEvent) {
   isFocus.value = true;
+  emits("focus", event)
 };
 
 /**
  * 维护 isFocus 状态，确保键盘操作只有 isFocus 为 true 时触发
  */
-const blurHandler = function () {
+const blurHandler = function (event: FocusEvent) {
   isFocus.value = false;
+  emits("blur", event)
 };
 
 /**
