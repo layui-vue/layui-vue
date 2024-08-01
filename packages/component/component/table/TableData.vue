@@ -14,6 +14,7 @@ import LayTooltip from "../tooltip/index.vue";
 import LayRadio from "../radio/index.vue";
 import LayRender from "../_components/render";
 import { TableEmit } from "./typing";
+import { useEmit } from "./hooks/useEmit";
 
 export interface TableRowProps {
   index: number;
@@ -49,6 +50,9 @@ defineOptions({
 const slot = useSlots();
 
 const emit = defineEmits(TableEmit);
+
+const { rowClick, rowDoubleClick, rowContextmenu, cellDoubleClick, rowExpand } =
+  useEmit(emit);
 
 const props = withDefaults(defineProps<TableRowProps>(), {
   checkbox: false,
@@ -113,27 +117,12 @@ const isExpand: WritableComputedRef<any> = computed({
   },
 });
 
-const rowClick = function (data: any, evt: MouseEvent) {
-  emit("row", data, evt);
-};
-
-const rowDoubleClick = function (data: any, evt: MouseEvent) {
-  emit("row-double", data, evt);
-};
-
-const rowContextmenu = function (data: any, evt: MouseEvent) {
-  emit("row-contextmenu", data, evt);
-};
-
-const cellDoubleClick = function (data: any, evt: MouseEvent) {
-  emit("cell-double", data, evt);
-};
-
 const expandIconType = computed(() => {
   return isExpand.value ? "layui-icon-subtraction" : "layui-icon-addition";
 });
 
-const handleExpand = () => {
+const handleExpand = (e: PointerEvent) => {
+  rowExpand(props.data, e);
   isExpand.value = !isExpand.value;
 };
 
@@ -688,6 +677,7 @@ const checkboxProps = computed(() => {
         @row-double="rowDoubleClick"
         @cell-double="cellDoubleClick"
         @row-contextmenu="rowContextmenu"
+        @expand-change="rowExpand"
         v-model:expandKeys="tableExpandKeys"
         v-model:selectedKeys="tableSelectedKeys"
         v-model:selectedKey="tableSelectedKey"

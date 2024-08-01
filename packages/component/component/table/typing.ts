@@ -8,6 +8,7 @@ export const TableEmit = [
   "row-double",
   "row",
   "cell-double",
+  "expand-change",
 ];
 
 export interface TableColumn {
