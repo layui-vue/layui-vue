@@ -228,7 +228,10 @@ class Tree {
       if (!this.config.checkStrictly && node.isChecked && node[children]) {
         this.treeForeach(node[children], (child: TreeData) => {
           if (!child.isChecked) {
-            checkedKeys.pop();
+            const index = checkedKeys.findIndex(
+              (key) => key === child.parentKey
+            );
+            index > 0 && checkedKeys.splice(index, 1);
           }
         });
       }
