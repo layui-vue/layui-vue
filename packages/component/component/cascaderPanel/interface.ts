@@ -39,6 +39,9 @@ export interface CascaderPanelProps {
   };
   style?: {
     stripe?: boolean;
+    /**
+     * @duplicate
+     */
     loadingTheme?: string;
   };
   multiple?: boolean;

@@ -106,13 +106,6 @@ const emits = defineEmits<{
     value: Map<string, CascaderPanelItemPropsInternal>
   ): void;
   (event: "change", value: Array<string>): void;
-  (
-    event: "states",
-    value: {
-      selectKeys: Array<string>;
-      selectLabel: Array<CascaderPanelItemPropsInternal>;
-    }
-  ): void;
 }>();
 
 const props = withDefaults(defineProps<CascaderPanelProps>(), {

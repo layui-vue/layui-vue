@@ -1146,6 +1146,7 @@ const options3=[
 | search                   | 是否启用搜索                             | `boolean` | -- | -- |
 | searchMethod             | 搜索方法                                 | `(value: string) => Array<CascaderPanelItemProps>` | -- | -- |
 | multiple                 | 多选模式                                 | `boolean` | -- | -- |
+| fullpath                 | 多选模式下显示Tag的完整路径                | `boolean` | -- | -- |
 :::
 
 ::: title Cascader 事件
@@ -1155,7 +1156,40 @@ const options3=[
 
 | 方法名 | 描述         |用法|
 | ---- | ------------ |--------|
-| change | 选中后数据改变的回调 | `({display, value, label, currentClick}) => void`  |
+| change | 选中后数据改变的回调 | `(value: Array<string>) => void`  |
+
+:::
+
+::: title CascaderPanel 属性
+:::
+
+::: table
+
+| 属性                     | 描述                  | 类型                  | 可选值                  | 默认值                  |
+| -----------------------  | -------------------- |-------------------- |-------------------- |-------------------- |
+| v-model / modelValue     | 值                                       | `string` `Array<string>` | -- | -- | 
+| decollator               | 分割符号，默认为 /                         | `string` | -- | -- | 
+| options                  | 选项参数 格式请见上面的demo                 | -- | -- | -- | 
+| onlyLastLevel            | 回显display仅显示最后一级                  | `boolean` | -- | `false` | 
+| replaceFields            | 字段别名                                  | `{label: string, value: string, children: string}` | -- | -- | 
+| allow-clear              | 默认slot提供清空功能，与lay-input保持一致    | `boolean` | -- | -- | 
+| disabled                 | 禁用                                    | `boolean`  | --  | --  |
+| checkStrictly            | 严格模式                                 | `boolean` | -- | -- |
+| lazy                     | 是否启用懒加载                            | `boolean` | -- | -- |
+| load                     | 懒加载方法                               | `CascaderPanelLazyloadFunction` | -- | -- |
+| multiple                 | 多选模式                                 | `boolean` | -- | -- |
+| height                   | 高度                                   | `number` `string` | -- | -- |
+:::
+
+::: title CascaderPanel 事件
+:::
+
+::: table
+
+| 方法名 | 描述         |用法|
+| ---- | ------------ |--------|
+| change | 选中后数据改变的回调 | `(value: Array<string>) => void`  |
+| update:multipleSelectItem | 多选勾选事件 | `(map: Map<string, CascaderPanelItemPropsInternal>) => void` |
 
 :::
 
