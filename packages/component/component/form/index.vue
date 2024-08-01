@@ -36,7 +36,8 @@ onMounted(() => {
 });
 
 // 原生提交表单事件
-const submit = function () {
+const submit = function (e: SubmitEvent) {
+  e.preventDefault();
   let _isValidate = false;
   validate((isValidate, model, errors) => {
     _isValidate = isValidate as boolean;
