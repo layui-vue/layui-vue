@@ -231,6 +231,7 @@ const onRemove = (value: string, e: KeyboardEvent) => {
   obj!.checked = obj!.indeterminate = false;
   _innerProcess.value.multipleSelectItem.value.delete(obj!.value);
   _innerProcess.value.buildMultipleStatus();
+  _selectKeys.value = [..._selectKeys.value.filter((v) => v !== obj!.value)];
   emit("update:modelValue", _selectKeys.value);
   dropdownRef.value.hide();
 };
@@ -290,24 +291,25 @@ const clickCheckItem = (item: CascaderPanelItemPropsInternal) => {
       /**
        * 多选且未开启严格模式时，需要判断是否是叶子节点，如果是叶子节点则直接选中，否则需要递归遍历所有叶子节点并选中
        */
-      let obj: CascaderPanelItemPropsInternal | undefined = item;
-      const leafs: Array<CascaderPanelItemPropsInternal> = [];
+      const itemNode: CascaderPanelItemPropsInternal | undefined = item;
+      const allNode: Array<CascaderPanelItemPropsInternal> = [];
       const onlyLeaf = (item: CascaderPanelItemPropsInternal) => {
         if (item.children?.length) {
           item.children.forEach((a) => onlyLeaf(a));
         } else {
-          leafs.push(item);
+          allNode.push(item);
         }
       };
-      onlyLeaf(obj);
-      leafs.forEach((a) =>
-        _selectKeys.value.includes(a.value)
-          ? (_selectKeys.value as Array<string>).splice(
-              _selectKeys.value.indexOf(a.value),
-              1
-            )
-          : (_selectKeys.value as Array<string>).push(a.value)
-      );
+      onlyLeaf(itemNode);
+      allNode.forEach((node) => {
+        if (_selectKeys.value.includes(node.value)) {
+          _selectKeys.value = [
+            ..._selectKeys.value.filter((v) => v !== node.value),
+          ];
+        } else {
+          _selectKeys.value = [..._selectKeys.value, node.value];
+        }
+      });
     }
   } else {
     /**

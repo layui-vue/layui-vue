@@ -138,7 +138,13 @@ export default function useCascaderPanel(
     const selectLabel: ComputedRef<string | Array<string>> = computed(() => {
       // 从展平的数据中选择，将选中的value映射到每一个原始对象
       const items: Array<CascaderPanelItemPropsInternal | undefined> =
-        selectKeys.value.map((v) => flatData.value.find((c) => c.value === v));
+        multiple.value
+          ? [...multipleSelectItem.value.values()].map((v) =>
+              flatData.value.find((c) => c.value === v.value)
+            )
+          : selectKeys.value.map((v) =>
+              flatData.value.find((c) => c.value === v)
+            );
 
       const fullpath = (target: CascaderPanelItemPropsInternal | undefined) => {
         if (!target) return [];
@@ -231,31 +237,31 @@ export default function useCascaderPanel(
     /**
      * 监听选中数据变化
      */
-    watch(
-      () => modelValue.value,
-      () => {
-        if (!modelValue.value?.length) {
-          selectKeys.value = [];
-          return;
-        }
+    // watch(
+    //   () => modelValue.value,
+    //   () => {
+    //     if (!modelValue.value?.length) {
+    //       selectKeys.value = [];
+    //       return;
+    //     }
 
-        if (!multiple.value)
-          selectKeys.value =
-            modelValue.value instanceof Array
-              ? modelValue.value
-              : modelValue.value.split(decollator.value ?? " / ");
-        else {
-          if (modelValue.value instanceof Array) {
-            modelValue.value.forEach((v) => {
-              multipleSelectItem.value.set(
-                v,
-                flatData.value.find((c) => c.value === v)!
-              );
-            });
-          }
-        }
-      }
-    );
+    //     if (!multiple.value)
+    //       selectKeys.value =
+    //         modelValue.value instanceof Array
+    //           ? modelValue.value
+    //           : modelValue.value.split(decollator.value ?? " / ");
+    //     else {
+    //       if (modelValue.value instanceof Array) {
+    //         modelValue.value.forEach((v) => {
+    //           multipleSelectItem.value.set(
+    //             v,
+    //             flatData.value.find((c) => c.value === v)!
+    //           );
+    //         });
+    //       }
+    //     }
+    //   }
+    // );
 
     /**
      * 自底向上构建森林
@@ -349,17 +355,26 @@ export default function useCascaderPanel(
 
     watch(
       () => modelValue.value,
-      (newVal) => {
+      (newVal, oldVal) => {
         if (multiple.value) {
           if (newVal instanceof Array) {
-            newVal
-              .filter((a) => !multipleSelectItem.value.has(a))
-              .forEach((v) => {
-                const item = flatData.value.find((c) => c.value === v);
-                if (!item) return;
-                item.checked = true;
-                multipleSelectItem.value.set(v, item);
-              });
+            const [addDiff, removeDiff] = _diffValue(
+              newVal,
+              oldVal as string[]
+            );
+            addDiff.forEach((v) => {
+              const item = flatData.value.find((c) => c.value === v);
+              if (!item) return;
+              item.checked = true;
+              multipleSelectItem.value.set(v, item);
+            });
+
+            removeDiff.forEach((v) => {
+              const item = flatData.value.find((c) => c.value === v);
+              if (!item) return;
+              item.checked = false;
+              multipleSelectItem.value.delete(v);
+            });
           }
           buildMultipleStatus();
         } else {
@@ -371,6 +386,12 @@ export default function useCascaderPanel(
         }
       }
     );
+
+    const _diffValue = (array: string[] = [], values: string[] = []) => {
+      const addDiff = array.filter((data) => !values.includes(data)) || [];
+      const removeDiff = values.filter((data) => !array.includes(data)) || [];
+      return [addDiff, removeDiff];
+    };
 
     return {
       dataSource,
