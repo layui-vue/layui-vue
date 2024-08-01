@@ -91,7 +91,6 @@ const props = withDefaults(defineProps<DropdownProps>(), {
   focusDelay: 150,
   alignPoint: false,
   popupContainer: "body",
-  isLazy: true,
 });
 
 const emit = defineEmits(["show", "hide"]);
@@ -113,7 +112,6 @@ const mousePosition = reactive({
 });
 const { x: mouseLeft, y: mouseTop } = toRefs(mousePosition);
 const openState = ref(false);
-const isLazy = ref(props.isLazy);
 let scrollElements: HTMLElement[] | undefined;
 
 const containerRef = computed(() =>
@@ -648,8 +646,8 @@ defineExpose({ show, hide, toggle });
   <LayRender :render="onlyChildRenderFunc" v-bind="$attrs"></LayRender>
   <TeleportWrapper :to="popupContainer" :disabled="disabledTeleport">
     <div
-      ref="contentRef"
       v-if="openState"
+      ref="contentRef"
       :class="[
         'layui-dropdown-content',
         'layui-anim',
