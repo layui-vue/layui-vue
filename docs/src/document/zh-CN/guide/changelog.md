@@ -13,6 +13,27 @@
 ::: demo
 <template>
   <lay-timeline>
+    <lay-timeline-item title="2.18.x">
+      <ul>
+        <a name="2-18-0"></a>
+        <li>
+          <h3>2-18-0 <span class="layui-badge-rim">2024-08-02</span></h3>
+          <ul>
+              <li>[升级] layer 升级至2.4.3。</li>
+              <li>[新增] 新增descriptions(描述列表)组件。<a href="https://gitee.com/layui-vue/layui-vue/pulls/369">详情</a></li>
+              <li>[新增] 新增cascaderPanel组件 cascader组件 新增搜索、多选、懒加载功能。<a href="https://gitee.com/layui-vue/layui-vue/pulls/338">详情</a></li>
+              <li>[新增] auto-complete组件 新增输入框input、focus、blur、clear事件。<a href="https://gitee.com/layui-vue/layui-vue/pulls/360">详情</a></li>
+              <li>[新增] table组件 添加expand(行展开)事件。<a href="https://gitee.com/layui-vue/layui-vue/pulls/364">详情</a></li>
+              <li>[修复] layer组件 修复umd格式下globalIndex无默认值。<a href="https://gitee.com/layui-vue/layui-vue/pulls/374">详情</a></li>
+              <li>[修复] form组件 取消表单submit默认行为。<a href="https://gitee.com/layui-vue/layui-vue/pulls/365">详情</a></li>
+              <li>[修复] table组件 data-source改变default-expand-all未更新。<a href="https://gitee.com/layui-vue/layui-vue/pulls/368">详情</a></li>
+              <li>[修复] table组件 存在多级表头&totalRow开启行统计时设置fixed报错。<a href="https://gitee.com/layui-vue/layui-vue/pulls/373">详情</a></li>
+              <li>[修复] tree组件 checkedKeys异常。<a href="https://gitee.com/layui-vue/layui-vue/pulls/354">详情</a></li>
+              <li>[修复] avatar组件 修复在src和fallback均不能加载图片时的高频请求问题。<a href="https://gitee.com/layui-vue/layui-vue/pulls/372">详情</a></li>
+          </ul>
+        </li>
+      </ul>
+    </lay-timeline-item>
     <lay-timeline-item title="2.17.x">
       <ul>
         <a name="2-17-7"></a>
