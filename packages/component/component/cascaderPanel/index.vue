@@ -80,6 +80,7 @@
 <script setup lang="ts">
 import { computed, inject, onMounted, ref, useSlots } from "vue";
 import LayCheckboxV2 from "../checkboxV2/index.vue";
+import LayScroll from "../scroll/index.vue";
 import { LayIcon } from "@layui/icons-vue";
 import useCascaderPanel from "./index.hook";
 import { tCascaderPanel } from "./interface";
