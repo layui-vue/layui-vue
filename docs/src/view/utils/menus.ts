@@ -263,6 +263,11 @@ const menus = [
         title: "级联选择器",
         subTitle: "cascader",
         path: "/zh-CN/components/cascader",
+        badge: {
+          type: "dot",
+          theme: "green",
+          ripple: true,
+        },
       },
       {
         id: 40,

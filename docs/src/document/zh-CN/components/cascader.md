@@ -4,6 +4,9 @@
 ::: title 基本介绍
 :::
 
+::: describe ### `2.18.0` 版本新增多选、搜索、动态加载功能。
+:::
+
 ::: describe 将数据按照指定的格式传入后分层分级，通过此组件逐级查看并选择。
 :::
 
@@ -1140,13 +1143,13 @@ const options3=[
 | contentStyle             | 内容自定义样式                             | `StyleValue` | -- | -- |
 | contentClass             | 内容自定义Class                          | `string` `Array<string \| object>` `object` | -- | -- |
 | disabled                 | 禁用                                    | `boolean`  | --  | --  |
-| checkStrictly            | 严格模式                                 | `boolean` | -- | -- |
-| lazy                     | 是否启用懒加载                            | `boolean` | -- | -- |
-| load                     | 懒加载方法                               | `CascaderPanelLazyloadFunction` | -- | -- |
-| search                   | 是否启用搜索                             | `boolean` | -- | -- |
-| searchMethod             | 搜索方法                                 | `(value: string) => Array<CascaderPanelItemProps>` | -- | -- |
-| multiple                 | 多选模式                                 | `boolean` | -- | -- |
-| fullpath                 | 多选模式下显示Tag的完整路径                | `boolean` | -- | -- |
+| checkStrictly            | 严格模式   `2.18.0`                              | `boolean` | -- | -- |
+| lazy                     | 是否启用懒加载  `2.18.0`                          | `boolean` | -- | -- |
+| load                     | 懒加载方法  `2.18.0`                             | `CascaderPanelLazyloadFunction` | -- | -- |
+| search                   | 是否启用搜索  `2.18.0`                           | `boolean` | -- | -- |
+| searchMethod             | 搜索方法  `2.18.0`                               | `(value: string) => Array<CascaderPanelItemProps>` | -- | -- |
+| multiple                 | 多选模式  `2.18.0`                               | `boolean` | -- | -- |
+| fullpath                 | 多选模式下显示Tag的完整路径  `2.18.0`              | `boolean` | -- | -- |
 :::
 
 ::: title Cascader 事件
