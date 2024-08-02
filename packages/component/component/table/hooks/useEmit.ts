@@ -1,4 +1,4 @@
-export const useEmit = (emit) => {
+export const useEmit = (emit: any) => {
   const rowClick = function (data: any, evt: MouseEvent) {
     emit("row", data, evt);
   };

@@ -73,7 +73,7 @@
 </template>
 
 <script lang="ts" setup>
-import type {InputEmits} from "../input/interface";
+import type { InputEmits } from "../input/interface";
 
 import { ref, watch, onMounted, onUnmounted, nextTick, StyleValue } from "vue";
 import LayDropdown from "../dropdown/index.vue";
@@ -112,7 +112,7 @@ const props = withDefaults(defineProps<AutocompleteProps>(), {
   },
 });
 
-interface AutocompleteEmits extends InputEmits  {
+interface AutocompleteEmits extends InputEmits {
   (e: "update:modelValue", value: string): void;
   (e: "select", option: any): void;
 }
@@ -221,7 +221,7 @@ const clickOptions = function (option: any) {
  */
 const focusHandler = function (event: FocusEvent) {
   isFocus.value = true;
-  emits("focus", event)
+  emits("focus", event);
 };
 
 /**
@@ -229,7 +229,7 @@ const focusHandler = function (event: FocusEvent) {
  */
 const blurHandler = function (event: FocusEvent) {
   isFocus.value = false;
-  emits("blur", event)
+  emits("blur", event);
 };
 
 /**
