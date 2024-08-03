@@ -79,9 +79,10 @@
 
 <script setup lang="ts">
 import { computed, inject, onMounted, ref, useSlots } from "vue";
+import { LayIcon } from "@layui/icons-vue";
+import LayRadio from "../radio/index.vue";
 import LayCheckboxV2 from "../checkboxV2/index.vue";
 import LayScroll from "../scroll/index.vue";
-import { LayIcon } from "@layui/icons-vue";
 import useCascaderPanel from "./index.hook";
 import { tCascaderPanel } from "./interface";
 import "./index.less";
@@ -152,7 +153,9 @@ const {
   buildMultipleStatus,
   modelValue,
   setup,
-} = (inject(CASCADER_CONTEXT_KEY) as tCascaderPanel) ?? useCascaderPanel(props);
+} =
+  ((inject(CASCADER_CONTEXT_KEY) as tCascaderPanel) || null) ??
+  useCascaderPanel(props);
 onMounted(() => setup());
 /**
  * 插槽

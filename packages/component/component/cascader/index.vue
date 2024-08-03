@@ -126,10 +126,12 @@
 
 <script setup lang="ts">
 import "./index.less";
+import { LayIcon } from "@layui/icons-vue";
 import LayDropdown from "../dropdown/index.vue";
 import LayInput from "../input/index.vue";
 import LayTagInput from "../tagInput/index.vue";
 import LayScroll from "../scroll/index.vue";
+import LayEmpty from "../empty/index.vue";
 import LayCascaderPanel from "../cascaderPanel/index.vue";
 import { ref, useSlots, computed, watch, Ref, provide, nextTick } from "vue";
 import { CascaderProps } from "./interface";
