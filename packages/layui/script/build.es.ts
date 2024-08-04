@@ -5,7 +5,6 @@ import { resolve } from "path";
 import * as fs from "fs";
 import terser from "@rollup/plugin-terser";
 import { componentDir } from "./constant";
-
 const inputDir = resolve(componentDir, "./component");
 
 const inputsArray = fs.readdirSync(inputDir).filter((name) => {
@@ -51,7 +50,21 @@ const matchModule: string[] = [
   "utils",
   "selectOptionGroup",
   "select",
+  "cascaderPanel",
 ];
+
+function replaceImportStatement(text: string) {
+  // 正则表达式模式
+  const pattern =
+    /^@import\s*\(\s*reference\s*\)\s*["'](\.\.\/[^\/]+\/index\.less)["'];/gm;
+  // 替换字符串
+  const replacement = (_: any, p1: string) => {
+    const css = p1.replace(/index\.less$/, "index.css");
+    return `/* less-to-css ${css} */`;
+  };
+  // 进行替换
+  return text.replaceAll(pattern, replacement);
+}
 
 export default (): UserConfigExport => {
   return {
@@ -70,9 +83,37 @@ export default (): UserConfigExport => {
           javascriptEnabled: true,
         },
       },
-      postcss: {},
     },
-    plugins: [vue(), vueJsx()],
+    plugins: [
+      vue(),
+      vueJsx(),
+      {
+        name: "vite-plugin-layui-less-to-css-pre",
+        enforce: "pre",
+        async transform(code, id) {
+          if (id.endsWith("index.less") && !/node_modules/.test(id)) {
+            const CommentsCode = replaceImportStatement(code);
+
+            return CommentsCode;
+          }
+          return code;
+        },
+      },
+      {
+        name: "vite-plugin-layui-less-to-css",
+        async transform(code, id) {
+          if (id.endsWith("index.less") && !/node_modules/.test(id)) {
+            const toCssCode = code.replace(
+              /^\/\*\sless-to-css\s(.*)\s\*\//gm,
+              "@import url($1);"
+            );
+
+            return toCssCode;
+          }
+          return code;
+        },
+      },
+    ],
     build: {
       cssCodeSplit: true,
       emptyOutDir: true,
