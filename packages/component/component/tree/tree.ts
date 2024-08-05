@@ -231,7 +231,7 @@ class Tree {
             const index = checkedKeys.findIndex(
               (key) => key === child.parentKey
             );
-            index > 0 && checkedKeys.splice(index, 1);
+            index >= 0 && checkedKeys.splice(index, 1);
           }
         });
       }
