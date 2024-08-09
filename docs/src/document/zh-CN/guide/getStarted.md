@@ -33,11 +33,11 @@ createApp(App).use(Layui).mount('#app')
 ::: title 自动按需
 :::
 
-::: describe 首先你需要安装 <a href="https://github.com/antfu/unplugin-vue-components" target="_blank" style="color:#5FB878"><code>unplugin-vue-components</code></a> 和 <a href="https://github.com/antfu/unplugin-auto-import" target="_blank" style="color:#5FB878"><code>unplugin-auto-import</code></a> 两款插件。
+::: describe 首先你需要安装 <a href="https://github.com/layui-vue/unplugin-vue-components" target="_blank" style="color:#5FB878"><code>@layui/unplugin-vue-components</code></a> 和 <a href="https://github.com/antfu/unplugin-auto-import" target="_blank" style="color:#5FB878"><code>unplugin-auto-import</code></a> 两款插件。
 :::
 
 ```
-npm install -D unplugin-vue-components unplugin-auto-import
+npm install -D @layui/unplugin-vue-components unplugin-auto-import
 ```
 
 ::: describe 然后修改 vite.config.js 或 vue.config.js 的配置。 
@@ -45,8 +45,8 @@ npm install -D unplugin-vue-components unplugin-auto-import
 
 ```js
 import AutoImport from 'unplugin-auto-import/vite'
-import Components from 'unplugin-vue-components/vite'
-import { LayuiVueResolver } from 'unplugin-vue-components/resolvers'
+import Components from '@layui/unplugin-vue-components/vite'
+import { LayuiVueResolver } from '@layui/unplugin-vue-components/resolvers'
 
 export default {
   plugins: [
@@ -84,6 +84,13 @@ export interface LayuiVueResolverOptions {
    * eg: exclude: ['LayDocTable', /^LayDoc[A-Z]/,]
    */
   exclude?: Array<string | RegExp>;
+
+  /**
+   * 自定义组件样式匹配路径
+   * 
+   * eg: customMatchComponents: [{ pattern: /^LayDescriptionsItem$/, styleDir: undefined }]
+   */
+  customMatchComponents?: Array<MatchComponentsType>;
 }
 ```
 
