@@ -15,9 +15,20 @@
   <lay-timeline>
     <lay-timeline-item title="2.18.x">
       <ul>
+        <a name="2-18-1"></a>
+        <li>
+          <h3>2.18.1 <span class="layui-badge-rim">2024-08-09</span></h3>
+          <ul>
+              <li>[修复] cascader组件 options重新赋值内部panel面板未刷新。<a href="https://gitee.com/layui-vue/layui-vue/pulls/377">详情</a></li>
+              <li>[修复] tree组件 checkedKey值异常。<a href="https://gitee.com/layui-vue/layui-vue/pulls/375">详情</a></li>
+              <li>[修复] tree组件 不存在连线时hover状态整行未居中对齐。<a href="https://gitee.com/layui-vue/layui-vue/pulls/375](https://gitee.com/layui-vue/layui-vue/commit/3b0b138f312cdfc8552414e6e56b535b69825593)">详情</a></li>
+          </ul>
+        </li>
+      </ul>
+      <ul>
         <a name="2-18-0"></a>
         <li>
-          <h3>2-18-0 <span class="layui-badge-rim">2024-08-02</span></h3>
+          <h3>2.18.0 <span class="layui-badge-rim">2024-08-02</span></h3>
           <ul>
               <li>[升级] layer 升级至2.4.3。</li>
               <li>[新增] 新增descriptions(描述列表)组件。<a href="https://gitee.com/layui-vue/layui-vue/pulls/369">详情</a></li>
