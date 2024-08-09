@@ -3,7 +3,10 @@
     class="layui-cascader-panel"
     :style="{ height: _height, minHeight: _height }"
   >
-    <div class="layui-cascader-panel-container">
+    <div
+      v-if="dataSource && dataSource.length"
+      class="layui-cascader-panel-container"
+    >
       <ul
         class="layui-cascader-panel-list"
         v-for="(list, i) in dataSource"
@@ -74,6 +77,8 @@
         </lay-scroll>
       </ul>
     </div>
+
+    <lay-empty v-else></lay-empty>
   </div>
 </template>
 
@@ -83,6 +88,7 @@ import { LayIcon } from "@layui/icons-vue";
 import LayRadio from "../radio/index.vue";
 import LayCheckboxV2 from "../checkboxV2/index.vue";
 import LayScroll from "../scroll/index.vue";
+import LayEmpty from "../empty/index.vue";
 import useCascaderPanel from "./index.hook";
 import { tCascaderPanel } from "./interface";
 import "./index.less";

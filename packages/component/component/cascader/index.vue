@@ -170,9 +170,8 @@ const props = withDefaults(defineProps<CascaderProps>(), {
   fullpath: true,
 });
 
-const _context = useCascaderPanel({
-  ...props,
-});
+const _context = useCascaderPanel(props);
+
 provide(CASCADER_CONTEXT_KEY, _context);
 
 const hasContent = computed(() =>
