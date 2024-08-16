@@ -229,6 +229,7 @@ export default {
 | 属性    | 描述          | 默认值 |
 | ------- | ------------- | ------ |
 | v-model | 选中值        | --     |
+| naive-name | 原始属性 name        | --     |
 | disabled   | 是否整体禁用    | `false`     |
 
 :::
