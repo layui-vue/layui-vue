@@ -14,6 +14,7 @@ export interface QrcodeProps {
   backgroundColor?: string;
   width?: number;
   color?: string;
+  options?: Record<string, any>;
 }
 
 defineOptions({
@@ -44,6 +45,7 @@ const buildQrcode = () => {
       dark: props.color,
       light: props.backgroundColor,
     },
+    ...props.options,
   });
 };
 </script>
