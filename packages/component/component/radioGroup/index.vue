@@ -20,21 +20,18 @@ const emit = defineEmits(["update:modelValue", "change"]);
 const modelValue = ref(props.modelValue);
 const disabled = ref(props.disabled);
 
+const changeRadioGroup = (value: string | boolean | number) => {
+  emit("change", value);
+  emit("update:modelValue", value);
+};
+
 provide("radioGroup", {
   name: "LayRadioGroup",
   modelValue: modelValue,
   naiveName: props.name,
   disabled: disabled,
+  changeRadioGroup,
 });
-
-watch(
-  () => modelValue,
-  (val) => {
-    emit("change", modelValue.value);
-    emit("update:modelValue", modelValue.value);
-  },
-  { deep: true }
-);
 
 watch(
   () => props.modelValue,
