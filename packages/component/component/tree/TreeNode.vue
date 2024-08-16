@@ -2,7 +2,7 @@
 import type { Tree, TreeData as _TreeData } from "./tree";
 
 import { LayIcon } from "@layui/icons-vue";
-import LayCheckbox from "../checkbox/index.vue";
+import LayCheckbox from "../checkboxV2/index.vue";
 import { computed, nextTick } from "vue";
 import LayTransition from "../transition/index.vue";
 import {
@@ -139,29 +139,25 @@ function handleRowClick(node: TreeData) {
 const isChildAllSelected = computed(() => {
   function _isChildAllSelected(node: TreeData): boolean {
     const { children } = props.replaceFields;
-    if (!props.showCheckbox) {
-      return false;
-    }
-    let childSelectNum = 0;
+
     let res = false; // true为半选 false为全选
     for (const item of node[children] || []) {
-      if (item.isChecked) childSelectNum++;
+      if (item.isChecked) {
+        res = true;
+      }
     }
-    if (childSelectNum > 0) node.isChecked = true; //此处的处理与 checkedKeys 有关联
-    if (childSelectNum === (node[children]?.length || 0)) {
-      //继续递归向下判断
+
+    if (!res && node[children]?.length) {
       for (const item of node[children] || []) {
         res = _isChildAllSelected(item);
         if (res) break;
       }
-    } else {
-      res = true;
     }
     return res;
   }
 
   return (node: TreeData): boolean => {
-    if (props.checkStrictly) {
+    if (props.checkStrictly || !props.showCheckbox) {
       return false;
     } else {
       let res = _isChildAllSelected(node);
