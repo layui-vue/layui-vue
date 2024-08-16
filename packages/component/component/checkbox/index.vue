@@ -82,7 +82,7 @@ const setGroupModelValue = function (checked: any) {
   } else {
     groupModelValue.push(props.value);
   }
-  checkboxGroup.modelValue.value = groupModelValue;
+  checkboxGroup.changeCheckboxGroup(groupModelValue);
 };
 
 const setArrayModelValue = function (checked: any) {

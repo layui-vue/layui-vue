@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import { provide, ref, watch } from "vue";
-import { Recordable } from "../../types";
 
 export interface CheckboxGroupProps {
-  modelValue?: Recordable[];
+  modelValue?: Array<string | number | object>;
   disabled?: boolean;
 }
 
@@ -25,16 +24,13 @@ provide("checkboxGroup", {
   name: "LayCheckboxGroup",
   modelValue: modelValue,
   disabled: disabled,
+  changeCheckboxGroup,
 });
 
-watch(
-  () => modelValue,
-  (val) => {
-    emit("update:modelValue", modelValue.value);
-    emit("change", modelValue.value);
-  },
-  { deep: true }
-);
+function changeCheckboxGroup(groupModelValue: any[]) {
+  emit("update:modelValue", groupModelValue);
+  emit("change", groupModelValue);
+}
 
 watch(
   () => props.modelValue,
