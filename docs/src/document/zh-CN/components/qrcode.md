@@ -87,6 +87,7 @@ export default {
 | width        | 宽度     | number  | --        | --                    | --      |
 | color        | 颜色     | string | --    | --                    | --      |
 | background-color       | 背景色     | string | --    | --                      | --      |
+| options       | QRCode其他参数     | object | --    | --                      | --      |
 
 :::
 
