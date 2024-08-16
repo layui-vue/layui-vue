@@ -5,6 +5,7 @@ import type {
   SearchNodeMethodType,
 } from "./tree.type";
 import type { Nullable } from "../../types";
+import { isValueArray } from "../../utils";
 
 type CustomKey = string | number;
 type CustomString = (() => string) | string;
@@ -145,49 +146,6 @@ class Tree {
     });
   }
 
-  setChildrenChecked(checked: boolean, nodes: TreeData[]) {
-    const { children } = this.config.replaceFields;
-
-    let ableCount = 0;
-    let checkCount = 0;
-    const len = nodes.length;
-
-    this.treeForeach(nodes, (node: any) => {
-      if (!node.isDisabled) {
-        ableCount = ableCount + 1;
-        if (node.isChecked) {
-          checkCount = checkCount + 1;
-        }
-      }
-    });
-    checkCount < ableCount ? (checked = true) : (checked = false);
-    for (let i = 0; i < len; i++) {
-      if (
-        !nodes[i].isDisabled ||
-        (nodes[i].isDisabled && nodes[i][children].length > 0)
-      ) {
-        nodes[i].isChecked = checked;
-      }
-      nodes[i][children] &&
-        nodes[i][children].length > 0 &&
-        this.setChildrenChecked(checked, nodes[i][children]);
-    }
-  }
-
-  setParentChecked(checked: boolean, parent: TreeData) {
-    const { children } = this.config.replaceFields;
-
-    if (!parent) {
-      return;
-    }
-    const pChild = parent[children] as TreeData[];
-    const pChildChecked = pChild.some((c) => c.isChecked);
-    parent.isChecked = pChildChecked;
-    if (parent.parentNode) {
-      this.setParentChecked(checked, parent.parentNode);
-    }
-  }
-
   setCheckedKeys(
     checked: boolean,
     checkStrictly: boolean | string,
@@ -195,15 +153,71 @@ class Tree {
   ) {
     const { children } = this.config.replaceFields;
 
-    node.isChecked = checked;
     if (!checkStrictly) {
+      if (isValueArray(node[children])) {
+        let notDisabledCount = 0;
+        let checkCount = 0;
+
+        this.treeForeach(node[children], (node: TreeData) => {
+          if (!node.isDisabled) {
+            notDisabledCount++;
+            if (node.isChecked) {
+              checkCount++;
+            }
+          }
+        });
+        checkCount < notDisabledCount ? (checked = true) : (checked = false);
+
+        checked = this.setChildrenChecked(checked, node[children]);
+      }
+
+      node.isChecked = checked;
+
       if (node.parentNode) {
-        this.setParentChecked(checked, node.parentNode);
+        this.setParentChecked(node.parentNode);
       }
-      if (node[children]) {
-        this.setChildrenChecked(checked, node[children]);
-      }
+    } else node.isChecked = checked;
+  }
+
+  setParentChecked(parent: TreeData) {
+    const { children } = this.config.replaceFields;
+
+    if (!parent) {
+      return;
     }
+    const pChild = parent[children] as TreeData[];
+    const pChildChecked = pChild.every((c) => c.isChecked);
+
+    parent.isChecked = pChildChecked;
+    if (parent.parentNode) {
+      this.setParentChecked(parent.parentNode);
+    }
+  }
+
+  setChildrenChecked(checked: boolean, nodes: TreeData[]): boolean {
+    const { children } = this.config.replaceFields;
+    const len = nodes.length;
+    let currentState = checked;
+
+    for (let i = 0; i < len; i++) {
+      if (isValueArray(nodes[i][children])) {
+        const _checked = this.setChildrenChecked(checked, nodes[i][children]);
+        // children 存在未选中的节点
+        if (!_checked) {
+          currentState = false;
+        }
+        nodes[i].isChecked = _checked;
+        continue;
+      }
+
+      if (!nodes[i].isDisabled) {
+        nodes[i].isChecked = checked;
+        continue;
+      }
+      nodes[i].isChecked = currentState = false;
+    }
+
+    return currentState;
   }
 
   getData() {
