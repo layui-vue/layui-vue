@@ -70,6 +70,12 @@ const menus = [
         subTitle: "jsonSchemaForm",
         path: "/zh-CN/components/jsonSchemaForm",
       },
+      {
+        id: 107,
+        title: "人性化时间",
+        subTitle: "relativeTime",
+        path: "/zh-CN/components/relativeTime",
+      },
     ],
   },
   {
