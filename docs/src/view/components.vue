@@ -105,6 +105,7 @@ export default {
     const handleClick = function (menu) {
       selected.value = menu.id;
       router.push(menu.path);
+      handleMenuOpen(false);
     };
 
     return {
