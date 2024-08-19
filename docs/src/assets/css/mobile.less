@@ -48,7 +48,7 @@
           width: 100%;
           left: 0px;
 
-          & > div:not(.layui-backtop && .layui-menu-toggle) {
+          & > div:not(.layui-backtop) {
             padding: 10px !important;
             margin-right: 0px !important;
             width: calc(100%) !important;
@@ -64,6 +64,10 @@
             border-bottom-right-radius: 8px;
             backdrop-filter: blur(10px);
             z-index: 5;
+          }
+
+          div[class*="language-"] {
+            margin: 0;
           }
 
           .lay-table-box {
