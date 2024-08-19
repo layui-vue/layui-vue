@@ -1,10 +1,17 @@
 /**
  * 获取年份列表
  */
-const getYears = () => {
+const getYears = (date?: Date) => {
   const years = [];
-  for (let i = 1970; i < getYear() + 100; i++) {
-    years.push(i);
+  if (!date)
+    for (let i = 1970; i < getYear() + 100; i++) {
+      years.push(i);
+    }
+  else {
+    const y = date.getFullYear();
+    for (let i = y - 50; i < y + 50; i++) {
+      years.push(i);
+    }
   }
   return years;
 };

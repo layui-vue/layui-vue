@@ -30,6 +30,7 @@
       </ul>
     </div>
     <PanelFoot @ok="footOnOk" @now="footOnNow" @clear="footOnClear">
+      <lay-icon type="layui-icon-up" @click="currentDate = new Date(currentDate.getTime() - 3155760000000)"></lay-icon>
       <span
         v-if="datePicker.type === 'yearmonth'"
         @click="datePicker.showPanel.value = 'month'"
@@ -37,17 +38,20 @@
         >{{ t("datePicker.selectMonth") }}</span
       >
       <template v-else-if="parseInt(Year.toString()) > 0">{{ Year }}</template>
+      <lay-icon type="layui-icon-down" @click="currentDate = new Date(currentDate.getTime() + 3155760000000)"></lay-icon>
     </PanelFoot>
   </div>
 </template>
 
 <script lang="ts" setup>
 import dayjs from "dayjs";
+import { LayIcon } from "../../"
 import { useI18n } from "../../../language";
 import { computed, inject, nextTick, onMounted, ref, watch } from "vue";
 import { getYears } from "../day";
 import { provideType } from "../interface";
 import PanelFoot from "./PanelFoot.vue";
+import LayIcon from "../../icon";
 
 export interface TimePanelProps {
   modelValue: number | string;
@@ -63,7 +67,8 @@ const props = withDefaults(defineProps<TimePanelProps>(), {
 });
 const emits = defineEmits(["update:modelValue", "ok"]);
 const datePicker: provideType = inject("datePicker") as provideType;
-const yearList = ref<number[]>(getYears());
+const currentDate = ref(new Date(datePicker.currentDay.value));
+const yearList = computed<number[]>(() => getYears(currentDate.value ?? new Date()));
 const unWatch = ref(false);
 const Year = ref(props.modelValue);
 const { t } = useI18n();
@@ -112,7 +117,7 @@ const handleYearClick = (item: number) => {
 
 const ScrollRef = ref();
 onMounted(() => {
-  scrollTo();
+  nextTick(() => scrollTo());
 });
 watch(
   () => Year,
