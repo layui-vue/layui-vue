@@ -54,7 +54,7 @@ const isChecked = computed({
   },
   set(val) {
     if (isGroup.value) {
-      radioGroup.modelValue.value = props.value;
+      radioGroup.changeRadioGroup(props.value);
     } else {
       if (val) {
         emit("change", props.value);

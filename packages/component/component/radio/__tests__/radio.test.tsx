@@ -166,4 +166,28 @@ describe("LayRadio", () => {
 
     expect(radioGroupComponents.props("modelValue")).toBe(1);
   });
+
+  test("radio group change事件", async () => {
+    const wrapper = mount({
+      setup() {
+        const value1 = ref(1);
+
+        return () => (
+          <LayRadioGroup modelValue={value1.value}>
+            <LayRadio value={1}>写作</LayRadio>
+            <LayRadio value={2}>画画</LayRadio>
+            <LayRadio value={3}>运动</LayRadio>
+          </LayRadioGroup>
+        );
+      },
+    });
+
+    const radioGroupComponents = wrapper.findComponent(LayRadioGroup);
+    const radioComponents = wrapper.findAllComponents(LayRadio);
+
+    await radioComponents[1].find(".layui-form-radio").trigger("click");
+
+    expect(radioGroupComponents.emitted()).toHaveProperty("change");
+    expect(radioGroupComponents.emitted().change[0]).toEqual([2]);
+  });
 });
