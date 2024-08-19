@@ -1,6 +1,6 @@
 <template>
   <lay-layout>
-    <lay-side>
+    <lay-side class="layui-menu-ref-1">
       <lay-scroll style="overflow-y: scroll">
         <ul class="layui-menu layui-menu-lg layui-menu-docs">
           <li
@@ -43,11 +43,35 @@
     </lay-side>
     <lay-body>
       <div
+        class="layui-menu-toggle"
+        style="
+          position: fixed;
+          width: auto !important;
+          height: auto !important;
+          top: 80px;
+          left: 0;
+          padding: 0 !important;
+          padding-left: 8px;
+          border: 1px solid var(--global-neutral-color-3);
+          color: var(--global-primary-color);
+          border-top-right-radius: 8px;
+          border-bottom-right-radius: 8px;
+          backdrop-filter: blur(10px);
+        "
+        @click="handleMenuOpen(true)"
+      >
+        <lay-icon
+          type="layui-icon-menu-fill"
+          style="font-size: 32px"
+        ></lay-icon>
+      </div>
+      <div
         style="
           padding: 20px;
           margin-right: 180px;
           transition: margin 240ms 60ms;
         "
+        @click="handleMenuOpen(false)"
       >
         <router-view />
       </div>
@@ -56,7 +80,7 @@
   </lay-layout>
 </template>
 <script>
-import { ref, watch } from "vue";
+import { ref, watch, computed } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import menus from "./utils/menus";
 export default {
@@ -64,6 +88,10 @@ export default {
     const route = useRoute();
     const router = useRouter();
     const currentPath = ref("/zh-CN/guide");
+
+    const isMenuDisplay = ref(false);
+
+    const menuDisplay = computed(() => (isMenuDisplay.value ? "200px" : "0px"));
 
     watch(
       () => route.path,
@@ -78,6 +106,10 @@ export default {
 
     const selected = ref(1);
 
+    const handleMenuOpen = function (val) {
+      isMenuDisplay.value = val;
+    };
+
     const handleClick = function (menu) {
       selected.value = menu.id;
       router.push(menu.path);
@@ -88,7 +120,24 @@ export default {
       selected,
       currentPath,
       handleClick,
+      handleMenuOpen,
+      menuDisplay,
     };
   },
 };
 </script>
+
+<style>
+@media screen and (max-width: 768px) {
+  .layui-menu-toggle {
+    display: block !important;
+  }
+
+  .layui-menu-ref-1 {
+    width: v-bind(menuDisplay) !important;
+  }
+}
+.layui-menu-toggle {
+  display: none;
+}
+</style>
