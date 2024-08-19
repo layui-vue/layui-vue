@@ -48,10 +48,28 @@
           width: 100%;
           left: 0px;
 
+          & > div:not(.layui-backtop && .layui-menu-toggle) {
+            padding: 10px !important;
+            margin-right: 0px !important;
+            width: calc(100%) !important;
+          }
+
+          .layui-menu-toggle {
+            position: fixed;
+            top: 80px;
+            left: 0;
+            border: 1px solid var(--global-neutral-color-3);
+            color: var(--global-primary-color);
+            border-top-right-radius: 8px;
+            border-bottom-right-radius: 8px;
+            backdrop-filter: blur(10px);
+            z-index: 5;
+          }
+
           .lay-table-box {
             overflow: scroll;
           }
-          
+
           table {
             width: 100%;
             td {
@@ -59,12 +77,6 @@
               max-width: unset;
               word-break: keep-all;
             }
-          }
-
-          & > div:not(.layui-backtop) {
-            padding: 10px !important;
-            margin-right: 0px !important;
-            width: calc(100%) !important;
           }
 
           .lay-aside {

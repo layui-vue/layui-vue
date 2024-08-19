@@ -38,19 +38,12 @@
     </lay-side>
     <lay-body>
       <div
+        class="layui-menu-toggle"
         style="
-          position: fixed;
           width: auto !important;
           height: auto !important;
-          top: 80px;
-          left: 0;
           padding: 0 !important;
           padding-left: 8px;
-          border: 1px solid var(--global-neutral-color-3);
-          color: var(--global-primary-color);
-          border-top-right-radius: 8px;
-          border-bottom-right-radius: 8px;
-          backdrop-filter: blur(10px);
         "
         @click="handleMenuOpen(true)"
       >
