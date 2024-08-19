@@ -1159,7 +1159,7 @@ const options3=[
 
 | 方法名 | 描述         |用法|
 | ---- | ------------ |--------|
-| change | 选中后数据改变的回调 | `(value: Array<string>) => void`  |
+| change | 选中后数据改变的回调 | `(newVal: Array<string>, oldVal: Array<string>) => void`  |
 
 :::
 
@@ -1191,7 +1191,7 @@ const options3=[
 
 | 方法名 | 描述         |用法|
 | ---- | ------------ |--------|
-| change | 选中后数据改变的回调 | `(value: Array<string>) => void`  |
+| change | 选中后数据改变的回调 | `(newVal: Array<string>, oldVal: Array<string>) => void`  |
 | update:multipleSelectItem | 多选勾选事件 | `(map: Map<string, CascaderPanelItemPropsInternal>) => void` |
 
 :::

@@ -85,7 +85,7 @@
           :load="props.load"
           :changeOnSelect="_changeOnSelect"
           :fullpath="props.fullpath"
-          @change="_onChange"
+          @val-change="_onChange"
           @update:model-value="_updateValue"
           @update:multiple-select-item="_updateMultipleSelectItem"
         >
@@ -397,5 +397,12 @@ watch(
   () => {
     _innerProcess.value.modelValue.value = props.modelValue;
   }
+);
+/**
+ * emit change
+ */
+watch(
+  () => _selectKeys.value,
+  (newVal, oldVal) => emit("change", newVal, oldVal),
 );
 </script>

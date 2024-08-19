@@ -83,7 +83,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, inject, onMounted, ref, useSlots } from "vue";
+import { computed, inject, onMounted, ref, useSlots, watch } from "vue";
 import { LayIcon } from "@layui/icons-vue";
 import LayRadio from "../radio/index.vue";
 import LayCheckboxV2 from "../checkboxV2/index.vue";
@@ -113,7 +113,8 @@ const emits = defineEmits<{
     event: "update:multipleSelectItem",
     value: Map<string, CascaderPanelItemPropsInternal>
   ): void;
-  (event: "change", value: Array<string>): void;
+  (event: "valChange", value: Array<string>): void;
+  (event: "change", newVal: Array<string>, oldVal: Array<string>): void;
 }>();
 
 const props = withDefaults(defineProps<CascaderPanelProps>(), {
@@ -180,6 +181,10 @@ const _height = computed(() =>
     : props.height ?? "200px"
 );
 /**
+ * 多选时选中项的 Keys
+ */
+const multipleSelectKeys = computed(() => Array.from(multipleSelectItem.value.keys()));
+/**
  * 懒加载
  * @param item 当前项
  */
@@ -223,7 +228,7 @@ const doLazyLoad = (item: CascaderPanelItemPropsInternal) => {
 const flushOut = (signal: FLUSH_SIGNAL) => {
   switch (signal) {
     case FLUSH_SIGNAL.CHANGE:
-      emits("change", showKeys.value);
+      emits("valChange", showKeys.value);
       break;
 
     case FLUSH_SIGNAL.SINGLE:
@@ -316,4 +321,13 @@ const handleCheckboxUpdateModelValue = (
   multipleItemTrigger(item);
   flushOut(FLUSH_SIGNAL.MULTIPLE);
 };
+/**
+ * emit change
+ */
+watch(
+  () => [selectKeys.value, multipleSelectKeys.value],
+  (newVal, oldVal) => {
+    emits("change", newVal[multiple.value ? 1 : 0], oldVal[multiple.value ? 1 : 0]);
+  },
+);
 </script>
