@@ -6,8 +6,6 @@ import type { PopperTrigger } from "../index";
 
 import LayPopper from "../popper.vue";
 
-const wait = (ms = 100) =>
-  new Promise((resolve) => setTimeout(() => resolve(0), ms));
 
 const _mount = (props?: any, slots = {}) => {
   return mount(

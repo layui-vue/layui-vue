@@ -10,7 +10,11 @@ import type {
 
 import LayPopper from "../popper/popper.vue";
 import { computed, nextTick, onMounted, ref, shallowRef, unref } from "vue";
-import { useEventListener } from "@vueuse/core";
+import {
+  useEventListener,
+  useResizeObserver,
+  useMutationObserver,
+} from "@vueuse/core";
 
 export type PopperTrigger = _PopperTrigger;
 
@@ -62,23 +66,20 @@ const setEllipsis = function () {
   }
 };
 
-const observer = new MutationObserver(() => {
-  nextTick(() => {
-    setEllipsis();
-  });
-});
-
 onMounted(() => {
   if (props.isAutoShow) {
     useEventListener("resize", () => {
       setEllipsis();
     });
     if (tooltipRef.value) {
-      observer.observe(tooltipRef.value, {
+      useMutationObserver(tooltipRef.value, setEllipsis, {
         childList: true,
+        attributes: true,
         characterData: true,
         subtree: true,
       });
+
+      useResizeObserver(tooltipRef.value, setEllipsis);
     }
   }
   nextTick(() => {
