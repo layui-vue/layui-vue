@@ -36,4 +36,8 @@
   font-weight: 500;
   background-color: #fafafa;
 }
+
+.lay-table-box a{
+  color: #1E9FFF;
+}
 </style>
