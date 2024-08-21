@@ -47,7 +47,7 @@
               {{ t("nav.resources") }}
             </router-link>
           </li>
-          <li class="layui-nav-item">
+          <li class="layui-nav-item layui-docsearch">
             <lay-form>
               <lay-search :datas="menus" />
             </lay-form>
