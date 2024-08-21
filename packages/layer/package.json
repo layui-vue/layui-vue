@@ -3,13 +3,15 @@
   "version": "2.4.3",
   "description": "a component library for Vue 3 base on layui-vue",
   "homepage": "http://www.layui-vue.com",
+  "author": "就眠儀式",
+  "license": "MIT",
   "module": "lib/layer-vue.es.js",
-  "main": "lib/layer-vue.umd.js",
+  "main": "lib/layer-vue.cjs.js",
   "exports": {
     ".": {
       "types": "./types/index.d.ts",
       "import": "./lib/layer-vue.es.js",
-      "require": "./lib/layer-vue.umd.js"
+      "require": "./lib/layer-vue.cjs.js"
     },
     "./lib/": "./lib/",
     "./types/*": [
@@ -18,6 +20,8 @@
   },
   "types": "types/index.d.ts",
   "style": "lib/index.css",
+  "unpkg": "lib/layer-vue.umd.js",
+  "jsdelivr": "lib/layer-vue.umd.js",
   "scripts": {
     "build": "vite build --emptyOutDir && npm run build:types",
     "build:types": "rimraf types && vue-tsc -d"

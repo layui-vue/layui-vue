@@ -3,17 +3,25 @@
   "version": "1.1.1",
   "description": "a component library for Vue 3 base on layui-vue",
   "homepage": "http://www.layui-vue.com",
+  "author": "就眠儀式",
+  "license": "MIT",
   "module": "lib/icons-vue.es.js",
-  "main": "lib/icons-vue.umd.js",
+  "main": "lib/icons-vue.cjs.js",
   "exports": {
     ".": {
+      "types": "./types/index.d.ts",
       "import": "./lib/icons-vue.es.js",
-      "require": "./lib/icons-vue.umd.js"
+      "require": "./lib/icons-vue.cjs.js"
     },
-    "./lib/": "./lib/"
+    "./lib/": "./lib/",
+    "./types/*": [
+      "./types/*.d.ts"
+    ]
   },
   "types": "types/index.d.ts",
   "style": "lib/index.css",
+  "unpkg": "lib/icons-vue.umd.js",
+  "jsdelivr": "lib/icons-vue.umd.js",
   "scripts": {
     "generate": "node ./scripts/generate.ts",
     "build": "vite build --emptyOutDir && npm run build:types",
@@ -24,8 +32,6 @@
     "icons-vue",
     "vue"
   ],
-  "author": "就眠儀式",
-  "license": "MIT",
   "files": [
     "lib",
     "types"

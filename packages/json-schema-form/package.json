@@ -5,7 +5,7 @@
   "homepage": "http://www.layui-vue.com/zh-CN/components/jsonSchemaForm",
   "type": "module",
   "module": "lib/json-schema-form.es.js",
-  "main": "lib/json-schema-form.umd.js",
+  "main": "lib/json-schema-form.cjs.js",
   "license": "MIT",
   "bugs": {
     "url": "https://gitee.com/layui-vue/layui-vue/issues"
@@ -14,7 +14,7 @@
     ".": {
       "types": "./types/index.d.ts",
       "import": "./lib/json-schema-form.es.js",
-      "require": "./lib/json-schema-form.umd.js"
+      "require": "./lib/json-schema-form.cjs.js"
     },
     "./lib/": "./lib/",
     "./types/*": [
@@ -23,6 +23,8 @@
   },
   "types": "types/index.d.ts",
   "style": "lib/index.css",
+  "unpkg": "lib/json-schema-form.umd.js",
+  "jsdelivr": "lib/json-schema-form.umd.js",
   "keywords": [
     "layui-vue",
     "layui",
