@@ -23,7 +23,7 @@ export default defineConfig({
     lib: {
       entry: path.resolve(__dirname, "src/index.ts"),
       name: camelize(name),
-      formats: ['es', 'cjs', 'umd'],
+      formats: ["es", "cjs", "umd"],
       fileName: (format) => `icons-vue.${format}.js`,
     },
     terserOptions: {

@@ -23,7 +23,7 @@ export default defineConfig({
     outDir: path.resolve(__dirname, "lib"),
     lib: {
       entry: path.resolve(__dirname, "src/index.ts"),
-      formats: ['es', 'cjs', 'umd'],
+      formats: ["es", "cjs", "umd"],
       name: camelize(name),
       fileName: (format) => `layer-vue.${format}.js`,
     },
