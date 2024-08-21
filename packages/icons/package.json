@@ -7,10 +7,14 @@
   "main": "lib/icons-vue.umd.js",
   "exports": {
     ".": {
+      "types": "./types/index.d.ts",
       "import": "./lib/icons-vue.es.js",
       "require": "./lib/icons-vue.umd.js"
     },
-    "./lib/": "./lib/"
+    "./lib/": "./lib/",
+    "./types/*": [
+      "./types/*.d.ts"
+    ]
   },
   "types": "types/index.d.ts",
   "style": "lib/index.css",
