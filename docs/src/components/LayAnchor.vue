@@ -132,7 +132,10 @@ onMounted(() => {
 
   if (window.location.hash) {
     const id = decodeURIComponent(location.hash).replace("#", "")
-    scrollToTitle(id)
+    
+    setTimeout(() => {
+      scrollToTitle(id)
+    }, 200)
   }
 });
 
