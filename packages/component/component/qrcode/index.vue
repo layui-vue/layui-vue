@@ -57,7 +57,9 @@ const drawImage = () => {
     const ctx = (qrcode.value as HTMLCanvasElement)?.getContext("2d");
     if (!ctx) return;
 
-    const images = Array.isArray(props.images) ? props.images : [props.images as string];
+    const images = Array.isArray(props.images)
+      ? props.images
+      : [props.images as string];
     images.forEach((i: QrcodeImageProps | string) => {
       let {
         image,
@@ -67,7 +69,7 @@ const drawImage = () => {
         left = ctx.canvas.width / 2 - width / 2,
         size = 32,
         background = true,
-        backgroundColor = "#fff"
+        backgroundColor = "#fff",
       } = isString(i) ? { image: i } : (i as QrcodeImageProps);
 
       if (size) {
