@@ -206,8 +206,8 @@ const handleClear = () => {
   } else {
     selectedValue.value = "";
   }
-  
-  emits("clear")
+
+  emits("clear");
 };
 
 const handleHide = () => {
