@@ -70,7 +70,9 @@ const drawImage = () => {
         size = 32,
         background = true,
         backgroundColor = "#fff",
-      } = isString(i) ? { image: i } : (i as QrcodeImageProps);
+      }: QrcodeImageProps = isString(i)
+        ? { image: i }
+        : (i as QrcodeImageProps);
 
       if (size) {
         width = size;
