@@ -130,7 +130,7 @@ export default {
 ::: title 允许清空
 :::
 
-::: demo 通过 show-search 属性开启内容检索, input 变为可输入状态。在 multiple 模式下, 检索框位于 dropdown 顶部。
+::: demo 通过 allow-clear 属性开启显示清空icon。
 
 <template>
   <lay-select v-model="value5" :allow-clear="true">
@@ -266,7 +266,7 @@ export default {
   </lay-select>
 </template>
 
-<script setu[]>
+<script setup>
 import { ref, watch} from 'vue'
 
 const checkboxValue = ref(false)
@@ -430,6 +430,8 @@ export default {
 | ------ | -------------- | ----------------------- |
 | change | 切换事件       | value                   |
 | search | 关键词变化事件 | 用户输入的关键词 string |
+| remove-tag | 多选场景删除tag | 删除的选项value |
+| clear | 点击清空icon |  |
 
 :::
 
