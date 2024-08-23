@@ -5,9 +5,6 @@ import { mount } from "@vue/test-utils";
 import LayTree from "../index.vue";
 import LayCheckbox from "../../checkboxV2/index.vue";
 
-const wait = (ms = 100) =>
-  new Promise((resolve) => setTimeout(() => resolve(0), ms));
-
 describe("LayTree", () => {
   test("check-strictly为false，子节点未全选，checkedKeys不包含父节点", async () => {
     const wrapper = mount({

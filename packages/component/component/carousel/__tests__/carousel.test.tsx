@@ -1,6 +1,7 @@
 import { reactive, nextTick } from "vue";
 import { describe, expect, test, vi } from "vitest";
 import { mount } from "@vue/test-utils";
+import { sleep } from "../../../test-utils";
 
 import LayCarousel from "../index.vue";
 import LayCarouselItem from "../../carouselItem/index.vue";
@@ -19,9 +20,6 @@ const data = [
     id: "3",
   },
 ];
-
-const wait = (ms = 100) =>
-  new Promise((resolve) => setTimeout(() => resolve(0), ms));
 
 const generateCarouselItems = (_data?: any[]) => {
   _data = _data || data;
@@ -86,7 +84,7 @@ describe("LayCarousel", () => {
     });
 
     await nextTick();
-    await wait();
+    await sleep(100);
     const bodyItems = wrapper.vm.$el
       .querySelector("[carousel-item]")
       .querySelectorAll("li");
@@ -98,7 +96,7 @@ describe("LayCarousel", () => {
     ).toBeTruthy();
     expect(indicatorItems[0].classList.contains("layui-this")).toBeTruthy();
     await nextTick();
-    await wait(600);
+    await sleep(600);
     expect(
       bodyItems[1].getAttribute("style").includes("visibility: inherit")
     ).toBeTruthy();
@@ -112,7 +110,7 @@ describe("LayCarousel", () => {
     });
 
     await nextTick();
-    await wait();
+    await sleep(100);
     const bodyItems = wrapper.vm.$el
       .querySelector("[carousel-item]")
       .querySelectorAll("li");
@@ -123,14 +121,14 @@ describe("LayCarousel", () => {
 
     await wrapper.trigger("mouseenter");
     await nextTick();
-    await wait(600);
+    await sleep(600);
     expect(
       bodyItems[0].getAttribute("style").includes("visibility: inherit")
     ).toBeTruthy();
 
     await wrapper.trigger("mouseleave");
     await nextTick();
-    await wait(600);
+    await sleep(600);
     expect(
       bodyItems[0].getAttribute("style").includes("visibility: inherit")
     ).toBeFalsy();
@@ -147,23 +145,23 @@ describe("LayCarousel", () => {
 
     await btn[1].click();
     await nextTick();
-    await wait();
+    await sleep(100);
     expect(Carousel.props("modelValue")).toBe("2");
 
     await btn[0].click();
     await nextTick();
-    await wait();
+    await sleep(100);
     expect(Carousel.props("modelValue")).toBe("1");
 
     await btn[1].click();
     await btn[1].click();
     await nextTick();
-    await wait();
+    await sleep(100);
     expect(Carousel.props("modelValue")).toBe("3");
 
     await btn[1].click();
     await nextTick();
-    await wait();
+    await sleep(100);
     expect(Carousel.props("modelValue")).toBe("1");
   });
 
@@ -177,17 +175,17 @@ describe("LayCarousel", () => {
 
     CarouselRef.next();
     await nextTick();
-    await wait();
+    await sleep(100);
     expect(Carousel.props("modelValue")).toBe("2");
 
     CarouselRef.prev();
     await nextTick();
-    await wait();
+    await sleep(100);
     expect(Carousel.props("modelValue")).toBe("1");
 
     CarouselRef.setActive("3");
     await nextTick();
-    await wait();
+    await sleep(100);
     expect(Carousel.props("modelValue")).toBe("3");
   });
 });
