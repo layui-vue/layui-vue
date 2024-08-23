@@ -15,6 +15,23 @@
   <lay-timeline>
     <lay-timeline-item title="2.18.x">
       <ul>
+        <a name="2-18-3"></a>
+        <li>
+          <h3>2.18.3 <span class="layui-badge-rim">2024-08-23</span></h3>
+          <ul>
+              <li>[升级] json-schema-form 升级至1.0.14。</li>
+              <li>[新增] qrCode组件 支持内插图片。<a href="https://gitee.com/layui-vue/layui-vue/pulls/382">详情</a></li>
+              <li>[新增] table组件 新增点击th可触发排序。<a href="https://gitee.com/layui-vue/layui-vue/pulls/386">详情</a></li>
+              <li>[新增] table组件 新增initSort属性，用于默认排序显示。<a href="https://gitee.com/layui-vue/layui-vue/pulls/386">详情</a></li>
+              <li>[新增] select组件 新增clear、remove-tag emit 事件。<a href="https://gitee.com/layui-vue/layui-vue/pulls/391">详情</a></li>
+              <li>[修复] table组件 ellipsisTooltip只在文本超出隐藏生效。<a href="https://gitee.com/layui-vue/layui-vue/pulls/389">详情</a></li>
+              <li>[修复] select组件 多选时placeholder不可见。<a href="https://gitee.com/layui-vue/layui-vue/pulls/385">详情</a></li>
+              <li>[修复] treeSelect组件 props.data改变内部未更新。<a href="https://gitee.com/layui-vue/layui-vue/pulls/384">详情</a></li>
+              <li>[修复] radioButton组件 结合radioGroup未触发change事件。<a href="https://gitee.com/layui-vue/layui-vue/pulls/383">详情</a></li>
+          </ul>
+        </li>
+      </ul>
+      <ul>
         <a name="2-18-2"></a>
         <li>
           <h3>2.18.2 <span class="layui-badge-rim">2024-08-16</span></h3>
