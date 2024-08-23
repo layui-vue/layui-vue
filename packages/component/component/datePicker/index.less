@@ -96,7 +96,7 @@ html #layuicss-laydate {
   animation-duration: 0.2s;
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
-  
+
   .layui-laydate-year-control {
     padding: 4px;
   }
@@ -171,6 +171,7 @@ html #layuicss-laydate {
   color: #999;
   font-size: 12px;
   cursor: pointer;
+  user-select: none;
 }
 .layui-laydate-header i.laydate-prev-y {
   left: 15px;
@@ -183,6 +184,27 @@ html #layuicss-laydate {
 }
 .layui-laydate-header i.laydate-next-m {
   right: 45px;
+}
+.layui-laydate-year-panel-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 14px 5px;
+  line-height: 30px;
+  border-bottom: 1px solid #e2e2e2;
+
+  .laydate-set-ym {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    i {
+      cursor: pointer;
+      user-select: none;
+    }
+  }
 }
 .laydate-set-ym {
   width: 100%;
@@ -532,14 +554,14 @@ html #layuicss-laydate {
   height: 71px;
   line-height: 71px;
 }
-.laydate-range-hover{
+.laydate-range-hover {
   background-color: var(--global-neutral-color-2) !important;
 }
-.layui-laydate-content .layui-disabled:hover{
+.layui-laydate-content .layui-disabled:hover {
   background-color: transparent !important;
 }
 
-.laydate-range-inputs{
+.laydate-range-inputs {
   display: flex;
   align-items: center;
   height: 100%;
@@ -551,18 +573,18 @@ html #layuicss-laydate {
   display: inline-flex;
   border-color: var(--input-border-color);
   border-radius: var(--input-border-radius);
-  &:hover{
+  &:hover {
     border-color: #d2d2d2;
   }
-  .range-separator{
+  .range-separator {
     margin: 0 5px;
     color: var(--global-neutral-color-8);
     background-color: transparent;
   }
-  .layui-input-wrapper{
+  .layui-input-wrapper {
     border: none;
     box-sizing: border-box;
-    input{
+    input {
       text-align: center;
       padding: 0;
     }
@@ -571,45 +593,55 @@ html #layuicss-laydate {
     border: none;
   }
 }
-.layui-laydate-range{
-  .laydate-set-ym{
+.layui-laydate-range {
+  .laydate-set-ym {
     overflow: visible;
     white-space: nowrap;
   }
-  .laydate-set-ym .layui-dropdown{
+  .laydate-set-ym .layui-dropdown {
     width: auto !important;
   }
 
-  .time-panel{
-    .layui-laydate-main{
-       width: 272px;
-       display: unset !important;
-     }
-     .layui-laydate-preview{
-       display: none;
-     }
-   }
-   .layui-laydate-content{
-     .laydate-year-list{
-       display: flex;
-       flex-wrap: wrap;
-     }
-   }
-   .layui-laydate-list{
+  .time-panel {
+    .layui-laydate-main {
+      width: 272px;
+      display: unset !important;
+    }
+    .layui-laydate-preview {
+      display: none;
+    }
+  }
+  .layui-laydate-content {
+    .laydate-year-list {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  }
+  .layui-laydate-list {
     display: flex;
     flex-wrap: wrap;
-   }
+  }
 }
-.layui-laydate-range-datetime{
-  .layui-laydate-main{
+.layui-laydate-range-datetime {
+  .layui-laydate-main {
     width: 340px;
   }
 }
-.layui-laydate-current{
+.layui-laydate-current {
   background-color: var(--global-neutral-color-3);
 }
 
-.laydate-time-list > li:hover ol::-webkit-scrollbar { width: 0px;}
-.layui-laydate-content::-webkit-scrollbar { width: 8px; height: 8px; }
-.layui-laydate-content::-webkit-scrollbar-thumb { border-radius: 10px; background-color: #eeeeee; }
-.layui-laydate-content::-webkit-scrollbar-thumb:hover { background-color: #dddddd; }
+.laydate-time-list > li:hover ol::-webkit-scrollbar {
+  width: 0px;
+}
+.layui-laydate-content::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.layui-laydate-content::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #eeeeee;
+}
+.layui-laydate-content::-webkit-scrollbar-thumb:hover {
+  background-color: #dddddd;
+}
