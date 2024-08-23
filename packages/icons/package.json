@@ -1,6 +1,6 @@
 {
   "name": "@layui/icons-vue",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "a component library for Vue 3 base on layui-vue",
   "homepage": "http://www.layui-vue.com",
   "module": "lib/icons-vue.es.js",
