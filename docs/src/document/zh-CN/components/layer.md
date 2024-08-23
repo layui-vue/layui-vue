@@ -1031,6 +1031,7 @@ const openCallback = () => {
 | 属性 | 描述 | 类型 | 默认值 | 可选值 |
 | -- | -- | -- | -- | -- |
 | *`isMessage`* | 是否为消息类型 | `boolean` | `true` | `true` `false` |
+:::
 
 ::: title layer.drawer
 :::
