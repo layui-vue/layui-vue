@@ -1,5 +1,17 @@
 @media screen and (max-width: 768px) {
   #app {
+    .anim .site-doc-icon li {
+      width: 100%;
+    }
+
+    .site-doc-icon li {
+      width: 50%;
+    }
+
+    .describe-plugin {
+      padding: 10px;
+    }
+
     & > .layui-layout {
       & > .layui-header {
         display: flex;
@@ -42,6 +54,7 @@
         & > .layui-side {
           background: #fff;
           transition: all 0.2s ease-out 0s;
+          z-index: 999999;
         }
 
         & > .layui-body {
@@ -63,7 +76,7 @@
             border-top-right-radius: 8px;
             border-bottom-right-radius: 8px;
             backdrop-filter: blur(10px);
-            z-index: 5;
+            z-index: 999998;
           }
 
           div[class*="language-"] {
@@ -86,6 +99,14 @@
 
           .source {
             overflow: scroll;
+            white-space: nowrap;
+            margin: 10px;
+            padding: 15px;
+            padding-left: 0;
+
+            .description {
+              border: none;
+            }
           }
 
           .lay-aside {
