@@ -1,6 +1,10 @@
 .layui-segmented {
   display: flex;
 
+  &-disabled {
+    opacity: 0.6;
+  }
+
   .layui-segmented-item-radio {
     visibility: collapse;
     width: 0;
@@ -20,7 +24,7 @@
 
   &-size-default {
     .layui-segmented-item {
-      padding: 4px 12px;
+      padding: 4px 14px;
       font-size: 14px;
     }
   }
@@ -41,6 +45,11 @@
 
   &-item {
     border-radius: 4px;
+
+    &-slot {
+      user-select: none;
+      pointer-events: none;
+    }
 
     &-label {
       display: block;

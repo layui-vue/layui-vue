@@ -1,5 +1,6 @@
 <template>
   <div class="layui-segmented" :class="[
+    disabled && `layui-segmented-disabled`,
     `layui-segmented-size-${props.size}`,
   ]" ref="segment">
     <div class="layui-segmented-container">
@@ -7,10 +8,12 @@
            class="layui-segmented-item"
            v-for="(item, i) in items"
            :key="i"
-           @click="clickItem($event, item.label, i)">
+           @click.prevent.stop="clickItem($event, item.label, i)">
         <input class="layui-segmented-item-radio" v-if="props.name" type="radio" :name="props.name"
                :value="item?.value ?? item.label">
-        <slot v-if="item.slot" :name="item.slot"></slot>
+        <div class="layui-segmented-item-slot" v-if="item.slot || $slots.default">
+          <slot :name="item.slot || 'default'" v-bind="item"></slot>
+        </div>
         <span v-else class="layui-segmented-item-label">{{ item.label }}</span>
       </div>
       <div class="layui-segmented-indicator" ref="segmentIndicator"></div>
@@ -20,30 +23,18 @@
 
 <script setup lang="ts">
 import { ref, computed, Ref, watch, onMounted, InputHTMLAttributes, ReservedProps } from "vue";
-
-export interface ItemProps {
-  options:
-  | {
-    label: string;
-    slot?: string;
-    [key: string]: any;
-  }[]
-  | string[];
-  modelValue: string;
-  size?: "lg" | "default" | "sm" | "xs";
-  name?: string;
-  disabled?: boolean;
-}
+import { LaySegmentedProps } from "./interfaces";
 
 defineOptions({
   name: "LaySegmented",
 });
+
 const emits = defineEmits<{
   (ev: "change", value: string): void;
   (ev: "update:modelValue", value: string): void;
 }>();
 
-const props = withDefaults(defineProps<ItemProps>(), {
+const props = withDefaults(defineProps<LaySegmentedProps>(), {
   modelValue: "",
   size: "default",
   disabled: false,
@@ -51,6 +42,7 @@ const props = withDefaults(defineProps<ItemProps>(), {
 
 const segmentIndicator: Ref<HTMLElement | undefined> = ref();
 const segment: Ref<HTMLElement | undefined> = ref();
+const disabled = ref(props.disabled);
 const items = ref((() => {
   return props.options.map(a => {
     return typeof a === "string" ? { label: a } : a;
@@ -80,6 +72,7 @@ const setItem = (target: HTMLElement) => {
 };
 
 const clickItem = (ev: Event, label: string, index: number) => {
+  if (disabled.value) return;
   if (props.name) {
     (segment.value?.querySelectorAll('.layui-segmented-item-radio').forEach(radio => {
       (radio as HTMLInputElement).checked = false;
@@ -109,6 +102,16 @@ const init = (val: any) => {
 watch(
   () => props.modelValue,
   (val) => init(val)
+);
+
+watch(
+  () => props.disabled,
+  (val) => disabled.value = val
+);
+
+watch(
+  () => props.options,
+  (val) => items.value = val.map(i => typeof i === "string" ? { label: i } : i),
 );
 
 onMounted(() => {
