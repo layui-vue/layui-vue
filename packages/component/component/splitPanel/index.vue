@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { ref, watch, provide } from "vue";
 import "./index.less";
+
+import type { StepProps as _StepProps, SplitPanelStepsType } from "./interface";
+
 import { useMousePressed } from "@vueuse/core";
 
-export interface StepProps {
-  vertical?: boolean;
-  minSize?: number;
-}
+export type StepProps = _StepProps;
 
 defineOptions({
   name: "LaySplitPanel",
@@ -16,6 +16,10 @@ const props = withDefaults(defineProps<StepProps>(), {
   vertical: false,
   minSize: 50,
 });
+
+// line el width
+const LINE_WIDTH = 3;
+
 const target = ref();
 const { pressed } = useMousePressed({ target: target });
 
@@ -23,9 +27,10 @@ let domEvent = ref();
 let domStatus = ref(pressed);
 let parentVertical = ref();
 
-const handleMousemove = (event: { layerX: any; layerY: any }) => {
+const handleMousemove = (event: MouseEvent) => {
   const boxWidth = target.value.offsetWidth;
   const boxHeight = target.value.offsetHeight;
+  const { left: boxLeft, top: boxTop } = target.value.getBoundingClientRect();
 
   if (window.getSelection != undefined) {
     window.getSelection()?.removeAllRanges();
@@ -34,51 +39,56 @@ const handleMousemove = (event: { layerX: any; layerY: any }) => {
     const prevDom = domEvent.value.target.previousElementSibling;
     const nextDom = domEvent.value.target.nextElementSibling;
     if (!props.vertical) {
+      const _x = event.clientX - boxLeft;
+
       const prevDomLeft =
         domEvent.value.target.previousElementSibling.offsetLeft;
       const prevDomWidth =
         domEvent.value.target.previousElementSibling.offsetWidth;
       const nextDomWidth = domEvent.value.target.nextElementSibling.offsetWidth;
-      const otherWidth = boxWidth - (prevDomWidth + nextDomWidth + 5);
+      const otherWidth = boxWidth - (prevDomWidth + nextDomWidth + LINE_WIDTH);
       const otherWidthPercentage =
-        ((prevDomWidth + nextDomWidth + 5) / boxWidth) * 100;
+        ((prevDomWidth + nextDomWidth + LINE_WIDTH) / boxWidth) * 100;
       if (
-        event.layerX - prevDomLeft < props.minSize ||
-        boxWidth - (event.layerX - prevDomLeft) - otherWidth < props.minSize
+        _x - prevDomLeft < props.minSize ||
+        boxWidth - (_x - prevDomLeft) - otherWidth < props.minSize
       ) {
         return false;
       }
       prevDom.style.flexBasis =
-        ((event.layerX - prevDomLeft) / (prevDomWidth + nextDomWidth + 5)) *
+        ((_x - prevDomLeft) / (prevDomWidth + nextDomWidth + LINE_WIDTH)) *
           otherWidthPercentage +
         "%";
       nextDom.style.flexBasis =
-        ((boxWidth - (event.layerX - prevDomLeft) - otherWidth) /
-          (prevDomWidth + nextDomWidth + 5)) *
+        ((boxWidth - (_x - prevDomLeft) - otherWidth) /
+          (prevDomWidth + nextDomWidth + LINE_WIDTH)) *
           otherWidthPercentage +
         "%";
     } else {
+      const _y = event.clientY - boxTop;
+
       const prevDomTop = domEvent.value.target.previousElementSibling.offsetTop;
       const prevDomHeight =
         domEvent.value.target.previousElementSibling.offsetHeight;
       const nextDomHeight =
         domEvent.value.target.nextElementSibling.offsetHeight;
-      const otherHeight = boxHeight - (prevDomHeight + nextDomHeight + 5);
+      const otherHeight =
+        boxHeight - (prevDomHeight + nextDomHeight + LINE_WIDTH);
       const otherHeightPercentage =
         ((prevDomHeight + nextDomHeight + 5) / boxHeight) * 100;
       if (
-        event.layerY - prevDomTop < props.minSize ||
-        boxHeight - (event.layerY - prevDomTop) - otherHeight < props.minSize
+        _y - prevDomTop < props.minSize ||
+        boxHeight - (_y - prevDomTop) - otherHeight < props.minSize
       ) {
         return false;
       }
 
       prevDom.style.flexBasis =
-        ((event.layerY - prevDomTop) / (prevDomHeight + nextDomHeight + 5)) *
+        ((_y - prevDomTop) / (prevDomHeight + nextDomHeight + LINE_WIDTH)) *
           otherHeightPercentage +
         "%";
       nextDom.style.flexBasis =
-        ((boxHeight - (event.layerY - prevDomTop) - otherHeight) /
+        ((boxHeight - (_y - prevDomTop) - otherHeight) /
           (prevDomHeight + nextDomHeight + 5)) *
           otherHeightPercentage +
         "%";
@@ -101,15 +111,34 @@ const mouseup = () => {
 };
 
 // 定义初始化个数数组
-const steps = ref([]);
+const steps = ref<SplitPanelStepsType[]>([]);
+
 // 监听有几个lay-split-panel-item
-watch(steps, () => {
-  steps.value.forEach(
-    (instance: { setIndex: (arg0: any) => void }, index: any) => {
-      instance.setIndex(index);
-    }
-  );
-});
+watch(
+  () => steps.value,
+  (newVal) => {
+    // 所有设置了space props的总数
+    const spaces = newVal
+      .filter((step) => step.space)
+      .map((step) => step.space);
+
+    const spaceLength = spaces.join(" - ") || "0px";
+    const other = newVal.length - spaces.length;
+
+    newVal.forEach((step, index) => {
+      step.setIndex(index);
+
+      if (step.space) {
+        step.itemEl!.style.flexBasis = `calc(${step.space} - ${LINE_WIDTH}px)`;
+      } else {
+        // 没有设置space 计算逻辑
+        // ((总宽度 - 总spaces) / 没有设置space数量) = 剩下位置平分
+        step.itemEl!.style.flexBasis = `calc(((100% - ${spaceLength}) / ${other}) - ${LINE_WIDTH}px)`;
+      }
+    });
+  },
+  { flush: "post" }
+);
 
 // 向lay-split-panel-item传递参数
 provide("laySplitPanel", {
