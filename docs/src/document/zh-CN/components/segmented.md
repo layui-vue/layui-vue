@@ -198,4 +198,5 @@ export interface LaySegmentedProps {
 }
 ```
 
+::: previousNext segmented
 :::
