@@ -1,5 +1,13 @@
 @media screen and (max-width: 768px) {
   #app {
+    .anim .site-doc-icon li {
+      width: 100%;
+    }
+
+    .site-doc-icon li {
+      width: 50%;
+    }
+
     & > .layui-layout {
       & > .layui-header {
         display: flex;
@@ -42,6 +50,7 @@
         & > .layui-side {
           background: #fff;
           transition: all 0.2s ease-out 0s;
+          z-index: 999999;
         }
 
         & > .layui-body {
@@ -63,7 +72,7 @@
             border-top-right-radius: 8px;
             border-bottom-right-radius: 8px;
             backdrop-filter: blur(10px);
-            z-index: 5;
+            z-index: 999998;
           }
 
           div[class*="language-"] {
