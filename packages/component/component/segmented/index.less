@@ -1,6 +1,13 @@
 .layui-segmented {
   display: flex;
 
+  .layui-segmented-item-radio {
+    visibility: collapse;
+    width: 0;
+    height: 0;
+    position: absolute;
+  }
+
   &-container {
     background-color: #f0f0f0;
     border-radius: 4px;
@@ -11,8 +18,28 @@
     z-index: 0;
   }
 
+  &-size-default {
+    .layui-segmented-item {
+      padding: 4px 12px;
+      font-size: 14px;
+    }
+  }
+
+  &-size-sm {
+    .layui-segmented-item {
+      padding: 2px 12px;
+      font-size: 12px;
+    }
+  }
+
+  &-size-lg {
+    .layui-segmented-item {
+      padding: 6px 16px;
+      font-size: 16px;
+    }
+  }
+
   &-item {
-    padding: 4px 12px;
     border-radius: 4px;
 
     &-label {
