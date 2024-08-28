@@ -99,7 +99,7 @@ const _timeList: Ref<Array<TimeSelectDateTime>> = ref([]);
  * 格式化方法，仅支持 `Y m d H i s` 共 6 个格式
  */
 const formatter = (format: string, time: TimeSelectDateTime) => {
-  return format.replace(/(Y|m|d|H|i|s)/g, (a) => {
+  return format.replace(/(Y|m|d|H|i|s|a)/g, (a) => {
     switch (a) {
       case "Y":
         return `${time.year! < 10 ? "0" : ""}${time.year}`;
@@ -113,6 +113,8 @@ const formatter = (format: string, time: TimeSelectDateTime) => {
         return `${time.minute! < 10 ? "0" : ""}${time.minute}`;
       case "s":
         return `${time.second! < 10 ? "0" : ""}${time.second}`;
+      case "a":
+        return `${toTime(time).getTime()}`;
       default:
         return a;
     }
@@ -158,6 +160,11 @@ const init = () => {
     return list;
   })();
 }
+
+watch(
+  () => props.modelValue,
+  (val) => modelValue.value = val
+);
 
 watch(
   () => [props.interval, props.start, props.end],
