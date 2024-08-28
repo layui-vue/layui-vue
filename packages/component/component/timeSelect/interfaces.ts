@@ -4,7 +4,8 @@ export interface TimeSelectProps extends SelectProps {
   interval?: string;
   format?: string;
   valueFormat?: string;
-  defaultValue?: Date | string;
-  start?: Date | string;
-  end?: Date | string;
+  start?: string;
+  end?: string;
+  withStartTime?: boolean;
+  withEndTime?: boolean;
 }
