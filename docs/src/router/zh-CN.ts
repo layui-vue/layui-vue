@@ -471,6 +471,12 @@ const zhCN = [
               import("../document/zh-CN/components/jsonSchemaForm.md"),
             meta: { title: "高阶表单" },
           },
+          {
+            path: "/zh-CN/components/timeSelect",
+            component: () =>
+              import("../document/zh-CN/components/timeSelect.md"),
+            meta: { title: "时间点选择" },
+          },
         ],
       },
     ],

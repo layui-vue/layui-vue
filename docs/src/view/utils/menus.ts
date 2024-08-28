@@ -299,6 +299,12 @@ const menus = [
         subTitle: "form",
         path: "/zh-CN/components/form",
       },
+      {
+        id: 120,
+        title: "时间点选择",
+        subTitle: "timeSelect",
+        path: "/zh-CN/components/timeSelect",
+      },
     ],
   },
   {
