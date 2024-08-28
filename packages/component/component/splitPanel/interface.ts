@@ -1,4 +1,4 @@
-import type { ComputedRef, Ref } from "vue";
+import type { ComputedRef, Ref, ShallowRef } from "vue";
 
 export interface StepProps {
   vertical?: boolean;
@@ -6,8 +6,15 @@ export interface StepProps {
 }
 
 export interface SplitPanelStepsType {
-  itemId: ComputedRef<string>;
+  itemId: ComputedRef<number>;
   setIndex: (val: number) => void;
   space: ComputedRef<string | number>;
-  itemEl: Ref<HTMLDivElement | null>;
+  itemEl: ShallowRef<HTMLDivElement | null>;
+}
+
+export interface SplitPanelContext {
+  props: Required<StepProps>;
+  steps: Ref<SplitPanelStepsType[]>;
+  target: Ref<HTMLDivElement | null>;
+  moveChange: (event: MouseEvent, status: boolean, isVertical: boolean) => void;
 }

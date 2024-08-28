@@ -5,11 +5,14 @@ import {
   computed,
   getCurrentInstance,
   onBeforeUnmount,
+  shallowRef,
   reactive,
+  unref,
 } from "vue";
 
-import type { ComputedRef } from "vue";
+import type { ComponentInternalInstance } from "vue";
 import type { SplitPanelStepsType } from "../splitPanel/interface";
+import { SPLITPANEL_INJECTION_KEY } from "../splitPanel/splitPanel";
 
 export interface StepItemProps {
   space?: string | number;
@@ -23,18 +26,21 @@ const props = withDefaults(defineProps<StepItemProps>(), {
   space: "",
 });
 
-const laySplitPanelItem = ref<HTMLDivElement | null>(null);
+const SplitPanelContext = inject(SPLITPANEL_INJECTION_KEY)!;
+
+const laySplitPanelItem = shallowRef<HTMLDivElement | null>(null);
 const index = ref(-1);
-const parents: any = inject("laySplitPanel");
-const currentInstance: any = getCurrentInstance();
+const currentInstance: ComponentInternalInstance = getCurrentInstance()!;
 const moveStatus = ref(false);
 
 const setIndex = (val: number) => {
   index.value = val;
 };
 
-const space = computed(() => {
-  return /^\d+$/.test(props.space + "") ? props.space + "px" : props.space;
+const space = computed<string>(() => {
+  return (
+    /^\d+$/.test(props.space + "") ? props.space + "px" : props.space
+  ) as string;
 });
 
 const mouseup = (event: MouseEvent) => {
@@ -43,15 +49,17 @@ const mouseup = (event: MouseEvent) => {
 
 const mousedown = (event: MouseEvent) => {
   moveStatus.value = true;
-  parents.moveChange(event, true, isVertical.value);
+  SplitPanelContext.moveChange(event, true, isVertical.value);
 };
 
 const isVertical = computed(() => {
-  return parents.props.vertical;
+  return SplitPanelContext.props.vertical;
 });
 
-const isStart: ComputedRef<boolean> = computed(() => {
-  return parents.steps.value[0]?.itemId === currentInstance.uid;
+const isStart = computed(() => {
+  return (
+    unref(SplitPanelContext.steps.value[0]?.itemId) === currentInstance.uid
+  );
 });
 
 const stepItemState = reactive<SplitPanelStepsType>({
@@ -59,12 +67,16 @@ const stepItemState = reactive<SplitPanelStepsType>({
   setIndex,
   space: space,
   itemEl: laySplitPanelItem,
-});
-parents.steps.value = [...parents.steps.value, stepItemState];
+}) as unknown as SplitPanelStepsType;
+
+SplitPanelContext.steps.value = [
+  ...SplitPanelContext.steps.value,
+  stepItemState,
+];
 
 onBeforeUnmount(() => {
-  parents.steps.value = parents.steps.value.filter(
-    (instance: { itemId: any }) => instance.itemId !== currentInstance.uid
+  SplitPanelContext.steps.value = SplitPanelContext.steps.value.filter(
+    (step) => step.itemId.value !== currentInstance.uid
   );
 });
 </script>
