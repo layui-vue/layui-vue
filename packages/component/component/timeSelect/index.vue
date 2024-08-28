@@ -18,7 +18,7 @@ defineOptions({
 
 const props = withDefaults(defineProps<TimeSelectProps>(), {
   interval: "00:30:00",
-  format: "H:i:s",
+  format: "H:i",
   valueFormat: "H:i",
   start: "00:00:00",
   end: "00:00:00",
@@ -37,11 +37,11 @@ const _fromTime = computed(() => typeof _start.value === "string" ? Array.from(_
 const _endTime = computed(() => typeof _end.value === "string" ? Array.from(_end.value?.matchAll(/:?(\d+)/g) ?? []).map(a => Number(a[1])) : (() => { let { hour, minute, second } = fromTime(_end.value); return [hour, minute, second]; })());
 const _intervalSeconds = computed(() => _interval.value.map((a, i) => a ? a / 60 * (60 ** (_interval.value.length - i)) : 0).reduce((a, b) => a + b));
 
-const _format = computed(() => props.valueFormat ?? "HH:mm:ss");
-const _valueFormat = computed(() => props.valueFormat ?? "HH:mm:ss");
+const _format = computed(() => props.format ?? "H:i");
+const _valueFormat = computed(() => props.valueFormat ?? "H:i");
 
 const formatter = (format: string, time: TimeSelectDateTime) => {
-  const _format = format.replace(/(Y|m|d|H|i|s)/g, (a) => {
+  return format.replace(/(Y|m|d|H|i|s)/g, (a) => {
     switch (a) {
       case "Y":
         return `${time.year! < 10 ? "0" : ""}${time.year}`;
@@ -59,7 +59,6 @@ const formatter = (format: string, time: TimeSelectDateTime) => {
         return a;
     }
   });
-  return _format;
 }
 
 let _targetTime = toTime(
