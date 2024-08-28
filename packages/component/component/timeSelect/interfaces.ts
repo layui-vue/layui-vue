@@ -8,4 +8,5 @@ export interface TimeSelectProps extends SelectProps {
   end?: string;
   withStartTime?: boolean;
   withEndTime?: boolean;
+  skip?: string[];
 }

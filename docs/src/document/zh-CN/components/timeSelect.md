@@ -66,19 +66,56 @@ const time2 = ref();
 ::: title 自定义时间范围
 :::
 
-::: demo 组件支持自定义时间范围，通过 `start` 和 `end` 属性来设置。
+::: demo 组件支持自定义时间范围，通过 `start` 和 `end` 属性来设置。如果你不希望包含 `start` 或者 `end` 的时间点，你可以分别设置 `with-start-time` 或 `with-end-time` 属性为 `false`。
 
 <template>
   <div class="play-container">
     <lay-space direction="vertical">
       <span>modelValue: {{ time3 }}</span>
-      <lay-time-select
-        v-model="time3"
-        :format="'H:i'"
-        :start="'08:00:00'"
-        :end="'18:30:00'"
-      >
-      </lay-time-select>
+      <lay-space>
+        <lay-time-select
+          v-model="time3"
+          :format="'H:i'"
+          :start="'08:00:00'"
+          :end="'18:30:00'"
+        >
+        </lay-time-select>
+        <span>设置了开始时间和结束时间</span>
+      </lay-space>
+      <lay-space>
+        <lay-time-select
+          v-model="time3"
+          :format="'H:i'"
+          :start="'08:00:00'"
+          :end="'18:30:00'"
+          :with-start-time="false"
+        >
+        </lay-time-select>
+        <span>不显示开始时间点 08:00:00</span>
+      </lay-space>
+      <lay-space>
+        <lay-time-select
+          v-model="time3"
+          :format="'H:i'"
+          :start="'08:00:00'"
+          :end="'18:30:00'"
+          :with-end-time="false"
+        >
+        </lay-time-select>
+        <span>不显示结束时间点 18:30:00</span>
+      </lay-space>
+      <lay-space>
+        <lay-time-select
+          v-model="time3"
+          :format="'H:i'"
+          :start="'08:00:00'"
+          :end="'18:30:00'"
+          :with-start-time="false"
+          :with-end-time="false"
+        >
+        </lay-time-select>
+        <span>不显示开始和结束时间点 08:00:00 和 18:30:00</span>
+      </lay-space>
     </lay-space>
   </div>
 </template>
@@ -87,6 +124,34 @@ const time2 = ref();
 import { ref } from "vue";
 
 const time3 = ref();
+</script>
+
+:::
+
+::: title 跳过时间点
+:::
+
+::: demo 使用 `skip` 属性来跳过某些时间点。
+
+<template>
+  <lay-space direction="vertical">
+    <span>modelValue: {{ time6 }}</span>
+    <lay-time-select
+      v-model="time6"
+      :format="'H:i'"
+      :interval="'30:00'"
+      :start="'08:00:00'"
+      :end="'18:30:00'"
+      :skip="['12:00', '12:30', '13:00', '13:30', '14:00', '14:30']"
+    >
+    </lay-time-select>
+  </lay-space>
+</template>
+
+<script setup lang="ts">
+import { ref } from "vue";
+
+const time6 = ref();
 </script>
 
 :::
@@ -213,16 +278,17 @@ const time5 = ref();
 
 ::: table
 
-| 属性名          | 类型      | 默认值       | 说明                                             |
-| :-------------- | :-------- | :----------- | :----------------------------------------------- |
-| _modelValue_    | `string`  | -            | 绑定的值                                         |
-| _format_        | `string`  | `'H:i'`      | 时间格式                                         |
-| _interval_      | `string`  | `'00:30:00'` | 时间间隔                                         |
-| _start_         | `string`  | `'00:00:00'` | 开始时间                                         |
-| _end_           | `string`  | `'00:00:00'` | 结束时间，如果填写 `'00:00:00'` 则会生成到第二天 |
-| _withStartTime_ | `boolean` | `true`       | 是否显示开始时间                                 |
-| _withEndTime_   | `boolean` | `true`       | 是否显示结束时间                                 |
-| _valueFormat_   | `string`  | `'H:i'`      | 绑定值的格式                                     |
+| 属性名          | 类型            | 默认值       | 说明                                                                        |
+| :-------------- | :-------------- | :----------- | :-------------------------------------------------------------------------- |
+| _modelValue_    | `string`        | -            | 绑定的值                                                                    |
+| _format_        | `string`        | `'H:i'`      | 时间格式                                                                    |
+| _interval_      | `string`        | `'00:30:00'` | 时间间隔                                                                    |
+| _start_         | `string`        | `'00:00:00'` | 开始时间                                                                    |
+| _end_           | `string`        | `'00:00:00'` | 结束时间，如果时分秒加起来等于 0，则会生成到第二天                          |
+| _withStartTime_ | `boolean`       | `true`       | 是否显示开始时间                                                            |
+| _withEndTime_   | `boolean`       | `true`       | 是否显示结束时间                                                            |
+| _valueFormat_   | `string`        | `'H:i'`      | 绑定值的格式                                                                |
+| _skip_          | `Array<string>` | `[]`         | 跳过的值，例如：`['00:00', '30:00']`，需要与绑定值的格式 _valueFormat_ 匹配 |
 
 :::
 
@@ -236,4 +302,5 @@ const time2 = ref();
 const time3 = ref();
 const time4 = ref();
 const time5 = ref();
+const time6 = ref();
 </script>

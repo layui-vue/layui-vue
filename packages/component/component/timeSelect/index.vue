@@ -1,29 +1,41 @@
 <template>
   <div class="layui-time-select">
     <lay-select
-                v-bind="_selectBinds"
-                @change="$emit('change', $event)" v-model="modelValue"
-                @update:model-value="$emit('update:model-value', $event)"
-                @clear="$emit('clear', $event)">
+      v-bind="_selectBinds"
+      @change="$emit('change', $event)"
+      v-model="modelValue"
+      @update:model-value="$emit('update:model-value', $event)"
+      @clear="$emit('clear', $event)"
+    >
       <template #prepend>
         <lay-icon type="layui-icon-time"></lay-icon>
       </template>
-      <lay-select-option v-for="(d, i) in _timeList" :key="i" :label="formatter(_format, d)"
-                         :value="formatter(_valueFormat, d)"></lay-select-option>
+      <lay-select-option
+        v-for="(d, i) in _timeList"
+        :key="i"
+        :label="formatter(_format, d)"
+        :value="formatter(_valueFormat, d)"
+      ></lay-select-option>
     </lay-select>
   </div>
 </template>
 
 <script setup lang="ts">
-import { Ref, computed, onMounted, ref, watch } from 'vue';
-import { TimeSelectProps } from './interfaces';
-import { TimeSelectDateTime, calcInterval, fromTime, timeInterval, toTime } from './useTime';
-import LaySelect from '../select/index';
-import LaySelectOption from '../selectOption/index';
-import { SelectProps } from 'component/select/index.vue';
+import { Ref, computed, onMounted, ref, watch } from "vue";
+import { TimeSelectProps } from "./interfaces";
+import {
+  TimeSelectDateTime,
+  calcInterval,
+  fromTime,
+  timeInterval,
+  toTime,
+} from "./useTime";
+import LaySelect from "../select/index";
+import LaySelectOption from "../selectOption/index";
+import { SelectProps } from "component/select/index.vue";
 
 defineOptions({
-  name: 'LayTimeSelect'
+  name: "LayTimeSelect",
 });
 
 const props = withDefaults(defineProps<TimeSelectProps>(), {
@@ -70,19 +82,47 @@ const _withEndTime = ref(props.withEndTime ?? true);
 /**
  * 间隔时间转成时分秒的数组
  */
-const _intervalDigitArr = computed(() => Array.from(_interval.value?.matchAll(/:?(\d+)/g) ?? []).map(a => Number(a[1])));
+const _intervalDigitArr = computed(() =>
+  Array.from(_interval.value?.matchAll(/:?(\d+)/g) ?? []).map((a) =>
+    Number(a[1])
+  )
+);
 /**
  * 开始时间转成时分秒的数组
  */
-const _fromTime = computed(() => typeof _start.value === "string" ? Array.from(_start.value?.matchAll(/:?(\d+)/g) ?? []).map(a => Number(a[1])) : (() => { let { hour, minute, second } = fromTime(_start.value); return [hour, minute, second]; })());
+const _fromTime = computed(() =>
+  typeof _start.value === "string"
+    ? Array.from(_start.value?.matchAll(/:?(\d+)/g) ?? []).map((a) =>
+        Number(a[1])
+      )
+    : (() => {
+        let { hour, minute, second } = fromTime(_start.value);
+        return [hour, minute, second];
+      })()
+);
 /**
  * 结束时间转成时分秒的数组
  */
-const _endTime = computed(() => typeof _end.value === "string" ? Array.from(_end.value?.matchAll(/:?(\d+)/g) ?? []).map(a => Number(a[1])) : (() => { let { hour, minute, second } = fromTime(_end.value); return [hour, minute, second]; })());
+const _endTime = computed(() =>
+  typeof _end.value === "string"
+    ? Array.from(_end.value?.matchAll(/:?(\d+)/g) ?? []).map((a) =>
+        Number(a[1])
+      )
+    : (() => {
+        let { hour, minute, second } = fromTime(_end.value);
+        return [hour, minute, second];
+      })()
+);
 /**
  * 时间间隔转成秒数
  */
-const _intervalSeconds = computed(() => _intervalDigitArr.value.map((a, i) => a ? a / 60 * (60 ** (_intervalDigitArr.value.length - i)) : 0).reduce((a, b) => a + b));
+const _intervalSeconds = computed(() =>
+  _intervalDigitArr.value
+    .map((a, i) =>
+      a ? (a / 60) * 60 ** (_intervalDigitArr.value.length - i) : 0
+    )
+    .reduce((a, b) => a + b)
+);
 /**
  * 显示值格式化字符串
  */
@@ -95,6 +135,10 @@ const _valueFormat = computed(() => props.valueFormat ?? "H:i");
  * 时间列表
  */
 const _timeList: Ref<Array<TimeSelectDateTime>> = ref([]);
+/**
+ * 跳过的时间点
+ */
+const _skip = ref(props.skip);
 /**
  * 格式化方法，仅支持 `Y m d H i s` 共 6 个格式
  */
@@ -119,51 +163,66 @@ const formatter = (format: string, time: TimeSelectDateTime) => {
         return a;
     }
   });
-}
+};
 /**
  * 初始化时间列表
- * 
+ *
  * @description 通过开始时间、结束时间和时间间隔计算出 ticks，然后从迭代器中收集时间点列表
  */
 const init = () => {
-  let _targetTime = computed(() => toTime(
-    fromTime(new Date(), {
-      hour: _fromTime.value.at(-3),
-      minute: _fromTime.value.at(-2),
-      second: _fromTime.value.at(-1)
-    })
-  ));
-  let _targetTimeEnd = ref(toTime(
-    fromTime(new Date(), {
-      hour: _endTime.value.at(-3),
-      minute: _endTime.value.at(-2),
-      second: _endTime.value.at(-1)
-    })
-  ));
+  let _targetTime = computed(() =>
+    toTime(
+      fromTime(new Date(), {
+        hour: _fromTime.value.at(-3),
+        minute: _fromTime.value.at(-2),
+        second: _fromTime.value.at(-1),
+      })
+    )
+  );
+  let _targetTimeEnd = ref(
+    toTime(
+      fromTime(new Date(), {
+        hour: _endTime.value.at(-3),
+        minute: _endTime.value.at(-2),
+        second: _endTime.value.at(-1),
+      })
+    )
+  );
 
   /**
    * 如果结束时间全部为 0，就跳到第二天
    */
   if (_endTime.value.reduce((a, b) => a + b) === 0) {
-    _targetTimeEnd.value = new Date(_targetTimeEnd.value.getTime() + 24 * 60 * 60 * 1000);
+    _targetTimeEnd.value = new Date(
+      _targetTimeEnd.value.getTime() + 24 * 60 * 60 * 1000
+    );
   }
 
-  let _tick = calcInterval(_targetTime.value, _targetTimeEnd.value, _intervalSeconds.value);
+  let _tick = calcInterval(
+    _targetTime.value,
+    _targetTimeEnd.value,
+    _intervalSeconds.value
+  );
   const _i = timeInterval(_targetTime.value, _intervalSeconds.value * 1000);
   _timeList.value = (() => {
     const list = [];
-    if (_tick && !_withStartTime.value) { _i.next(); _tick--; }
+    if (_tick && !_withStartTime.value) {
+      _i.next();
+      _tick--;
+    }
     if (_tick && _withEndTime.value) _tick++;
     while (_tick-- > 0) {
-      list.push(fromTime(_i.next().value));
+      let item = fromTime(_i.next().value);
+      if (_skip.value?.includes(formatter(_valueFormat.value, item))) continue;
+      list.push(item);
     }
     return list;
   })();
-}
+};
 
 watch(
   () => props.modelValue,
-  (val) => modelValue.value = val
+  (val) => (modelValue.value = val)
 );
 
 watch(
@@ -191,6 +250,14 @@ watch(
     console.log(withStartTime, withEndTime);
     _withStartTime.value = withStartTime;
     _withEndTime.value = withEndTime;
+    init();
+  }
+);
+
+watch(
+  () => [props.skip],
+  ([skip]) => {
+    _skip.value = skip;
     init();
   }
 );
