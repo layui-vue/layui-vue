@@ -83,6 +83,8 @@ const handlerBtnClick = () => {
 const handlerListItemClick = (index: number, id: string) => {
   activeIndex.value = index;
   scrollToTitle(id);
+
+  history.replaceState(null, '', `#${id}`)
 };
 
 /**锚点标签跟随滚动高亮 */
@@ -127,6 +129,14 @@ onMounted(() => {
     // @ts-ignore
     scrollRefEl.value!.firstElementChild!.style.marginRight !== "0px";
   enableAnimation = show.value;
+
+  if (window.location.hash) {
+    const id = decodeURIComponent(location.hash).replace("#", "")
+    
+    setTimeout(() => {
+      scrollToTitle(id)
+    }, 200)
+  }
 });
 
 /**获取滚动高度 */

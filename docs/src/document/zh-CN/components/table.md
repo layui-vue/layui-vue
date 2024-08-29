@@ -944,6 +944,7 @@ export default {
 | v-model:selectedKeys | 复选框选中项                                                     | --                  | --         | --                                           |
 | v-model:selectedKey  | 单选框选中项                                                     | --                  | --         | --                                           |
 | default-toolbar      | 工具栏                                                           | `boolean` `array`   | `false`    | `true` `false` `['filter','export','print']` |
+| page      | 分页配置，同分页组件参数一致 [详情](https://www.layui-vue.com/zh-CN/components/page)      | `object`    |  --   |--  |
 | size                 | 表格大小                                                         | `string`            | `md`       | `lg` `md` `sm`                               |
 | children-column-name | 指定树形结构的列名                                               | `string`            | `children` | --                                           |
 | indent-size          | 指定树形结构的缩进距离                                           | `number`            | `30`       | --                                           |
@@ -966,6 +967,7 @@ export default {
 | defaultToolbar       | 是否启用默认工具栏                                               | `boolean`           | `false`    | `true` `false`                               |
 | loading              | 是否开启加载动画                                                 | `boolean`           | `false`    | `true` `false`                               |
 | emptyDescription     | 当没有数据时，显示的默认文本                                     | `string`            | --         | --                                           |
+| initSort `2.18.3`    | 初始排序状态。用于在数据表格渲染完毕时，按某个字段排序显示。`field` 为 `columns.key` ， `type`可传 `''` `asc` `desc`| `object`            | --         | `{ field: name, type: 'asc' }`                                           |
 
 :::
 
@@ -1026,7 +1028,7 @@ export default {
 | customSlot           | 自定义插槽                     | `string` `function` 参数{row, data, column, rowIndex, columnIndex}    | --      | --                          | `2.17.2`新增`function`       |
 | width                | 宽度                           | --                             | --      | --                          | --       |
 | minWidth             | 最小宽度                       | --                             | `100px` | --                          | --       |
-| sort                 | 排序                           | --                             | --      | --                          | --       |
+| sort                 | 排序                           | `boolean`                             | `false`      | --                          | --       |
 | titleSlot            | 标题插槽                       | 插槽参数 {column, columnIndex} | --      | --                          | --       |
 | align                | 对齐方式                       | `string`                       | `left`  | `left` `right` `center`     | --       |
 | ellipsisTooltip      | 当内容过长被隐藏时显示 tooltip | `boolean`                      | `false` | `true` `false`              | --       |

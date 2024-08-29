@@ -1,0 +1,135 @@
+@media screen and (max-width: 768px) {
+  #app {
+    .anim .site-doc-icon li {
+      width: 100%;
+    }
+
+    .site-doc-icon li {
+      width: 50%;
+    }
+
+    .describe-plugin {
+      padding: 10px;
+    }
+
+    & > .layui-layout {
+      & > .layui-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        & > .layui-logo {
+          width: 70px;
+          .title {
+            display: none;
+          }
+        }
+
+        & > .layui-layout-right {
+          padding: 0;
+          li:not(:nth-child(4)) {
+            display: none;
+          }
+        }
+
+        & > .layui-layout-left {
+          display: flex;
+          left: 50px;
+
+          .layui-docsearch {
+            display: none;
+          }
+
+          & > li {
+            display: block;
+
+            a {
+              padding: 0 10px;
+            }
+          }
+        }
+      }
+
+      & > .layui-layout {
+        & > .layui-side {
+          background: #fff;
+          transition: all 0.2s ease-out 0s;
+          z-index: 999999;
+        }
+
+        & > .layui-body {
+          width: 100%;
+          left: 0px;
+
+          & > div:not(.layui-backtop) {
+            padding: 10px !important;
+            margin-right: 0px !important;
+            width: calc(100%) !important;
+          }
+
+          .layui-menu-toggle {
+            position: fixed;
+            top: 80px;
+            left: 0;
+            border: 1px solid var(--global-neutral-color-3);
+            color: var(--global-primary-color);
+            border-top-right-radius: 8px;
+            border-bottom-right-radius: 8px;
+            backdrop-filter: blur(10px);
+            z-index: 999998;
+          }
+
+          div[class*="language-"] {
+            margin: 0;
+          }
+
+          .lay-table-box {
+            overflow: scroll;
+          }
+
+          table {
+            width: 100%;
+            th, td {
+              width: auto;
+              max-width: unset;
+              word-break: keep-all;
+              white-space: nowrap;
+            }
+          }
+
+          .source {
+            overflow: scroll;
+            white-space: nowrap;
+            margin: 10px;
+            padding: 15px;
+            padding-left: 0;
+
+            .description {
+              border: none;
+            }
+          }
+
+          .lay-aside {
+            display: none;
+          }
+        }
+      }
+
+      .site-container {
+        background-size: 100% 100%;
+      }
+
+      .link-list {
+        padding: 20px 0px;
+      }
+
+      .box-list {
+        padding: 30px 30px;
+      }
+
+      .sponsors {
+        padding: 30px;
+      }
+    }
+  }
+}

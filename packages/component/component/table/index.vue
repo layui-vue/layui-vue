@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import "./index.less";
+import type { TableProps as _TableProps, SortType } from "./typing";
+
 import {
   ref,
   watch,
@@ -11,49 +13,19 @@ import {
   onBeforeUnmount,
   nextTick,
 } from "vue";
-import { Recordable } from "../../types";
 import LayCheckbox from "../checkbox/index.vue";
 import LayDropdown from "../dropdown/index.vue";
 import LayEmpty from "../empty/index.vue";
 import TableData from "./TableData.vue";
 import TablePage from "./TablePage.vue";
 import useTable from "./hooks/useTable";
-import { TableEmit } from "./typing";
+import { TableEmit, sortType } from "./typing";
 import { startResize } from "./hooks/useResize";
 import useAutoColsWidth from "./hooks/useAutoColsWidth";
 import { useEmit } from "./hooks/useEmit";
 import { useI18n } from "../../language";
 
-export interface TableProps {
-  id?: string;
-  dataSource: Recordable[];
-  columns: Recordable[];
-  skin?: string;
-  size?: string;
-  page?: Recordable;
-  defaultToolbar?: boolean | any[];
-  selectedKey?: string;
-  selectedKeys?: string[];
-  indentSize?: number;
-  childrenColumnName?: string;
-  height?: number | string;
-  maxHeight?: string;
-  even?: boolean;
-  expandIndex?: number;
-  rowClassName?: string | Function;
-  cellClassName?: string | Function;
-  rowStyle?: string | Function;
-  cellStyle?: string | Function;
-  spanMethod?: Function;
-  defaultExpandAll?: boolean;
-  expandKeys?: string[];
-  loading?: boolean;
-  getCheckboxProps?: Function;
-  getRadioProps?: Function;
-  resize?: boolean;
-  autoColsWidth?: boolean;
-  emptyDescription?: string;
-}
+export type TableProps = _TableProps;
 
 defineOptions({
   name: "LayTable",
@@ -83,6 +55,10 @@ const props = withDefaults(defineProps<TableProps>(), {
   getRadioProps: () => {},
   resize: false,
   autoColsWidth: false,
+  initSort: () => ({
+    field: "",
+    type: "",
+  }),
 });
 
 const emit = defineEmits(TableEmit);
@@ -492,41 +468,74 @@ function base64(s: string) {
   return window.btoa(unescape(encodeURIComponent(s)));
 }
 
-// 列排序
-const sortTable = (e: any, key: string, sort: string) => {
-  let currentSort = e.target.parentNode.getAttribute("lay-sort");
+const thSort = (e: Event, key: string) => {
+  const spanDom = (e.currentTarget as HTMLElement).querySelector(
+    "span[lay-sort]"
+  ) as HTMLSpanElement;
+
+  const sortValue = spanDom.getAttribute("lay-sort") as SortType;
+
+  const currentIndex = sortType.indexOf(sortValue);
+  const nextSort = sortType[(currentIndex + 1) % sortType.length];
+
+  baseSort(spanDom, key, nextSort);
+};
+
+const iconSort = (e: Event, key: string, sort: Exclude<SortType, "">) => {
+  const spanDom = (e.target as HTMLElement).parentNode as HTMLSpanElement;
+
+  const sortValue = spanDom.getAttribute("lay-sort") as SortType;
+
+  baseSort(spanDom, key, sortValue !== sort ? sort : "");
+};
+
+/**
+ *
+ * @param spanDom 包含lay-sort属性的span dom
+ * @param key column.key
+ * @param nextSort 下一次的sort
+ */
+const baseSort = (
+  spanDom: HTMLSpanElement,
+  key: string,
+  nextSort: SortType
+) => {
+  removeAllSortState();
+  spanDom.setAttribute("lay-sort", nextSort);
+
+  switch (nextSort) {
+    case "":
+      tableDataSource.value = [...props.dataSource];
+      break;
+
+    case "asc":
+      tableDataSource.value.sort((x, y) => {
+        if (x[key] < y[key]) return -1;
+        else if (x[key] > y[key]) return 1;
+        else return 0;
+      });
+      break;
+
+    case "desc":
+      tableDataSource.value.sort((x, y) => {
+        if (x[key] < y[key]) return 1;
+        else if (x[key] > y[key]) return -1;
+        else return 0;
+      });
+      break;
+  }
+
+  emit("sort-change", key, nextSort);
+};
+
+// 清空所有的sort状态
+const removeAllSortState = () => {
   const sortElements = tableRef.value.querySelectorAll("[lay-sort]");
   if (sortElements && sortElements.length > 0) {
     sortElements.forEach((element: HTMLElement) => {
       element.setAttribute("lay-sort", "");
     });
   }
-  if (sort === "desc") {
-    if (currentSort == sort) {
-      e.target.parentNode.setAttribute("lay-sort", "");
-      tableDataSource.value = [...props.dataSource];
-    } else {
-      e.target.parentNode.setAttribute("lay-sort", "desc");
-      tableDataSource.value.sort((x, y) => {
-        if (x[key] < y[key]) return 1;
-        else if (x[key] > y[key]) return -1;
-        else return 0;
-      });
-    }
-  } else {
-    if (currentSort == sort) {
-      e.target.parentNode.setAttribute("lay-sort", "");
-      tableDataSource.value = [...props.dataSource];
-    } else {
-      e.target.parentNode.setAttribute("lay-sort", "asc");
-      tableDataSource.value.sort((x, y) => {
-        if (x[key] < y[key]) return -1;
-        else if (x[key] > y[key]) return 1;
-        else return 0;
-      });
-    }
-  }
-  emit("sort-change", key, e.target.parentNode.getAttribute("lay-sort"));
 };
 
 let tableBody = ref<HTMLElement | null>(null);
@@ -1118,6 +1127,9 @@ defineExpose({ getCheckData });
                         column.type == 'number'
                           ? 'layui-table-cell-number'
                           : '',
+                        {
+                          'layui-table-is-sort': column.sort,
+                        },
                       ]"
                       :style="[
                         {
@@ -1131,6 +1143,7 @@ defineExpose({ getCheckData });
                           tableHeadColumns
                         ),
                       ]"
+                      @click="thSort($event, column.key)"
                     >
                       <template v-if="column.type == 'checkbox'">
                         <lay-checkbox
@@ -1158,15 +1171,17 @@ defineExpose({ getCheckData });
                         <span
                           v-if="column.sort"
                           class="layui-table-sort layui-inline"
-                          lay-sort
+                          :lay-sort="
+                            initSort.field === column.key ? initSort.type : ''
+                          "
                         >
                           <i
-                            @click.stop="sortTable($event, column.key, 'asc')"
+                            @click.stop="iconSort($event, column.key, 'asc')"
                             class="layui-edge layui-table-sort-asc"
                             title="升序"
                           ></i>
                           <i
-                            @click.stop="sortTable($event, column.key, 'desc')"
+                            @click.stop="iconSort($event, column.key, 'desc')"
                             class="layui-edge layui-table-sort-desc"
                             title="降序"
                           ></i>
@@ -1176,7 +1191,7 @@ defineExpose({ getCheckData });
                       <div
                         v-if="props.resize || column.resize"
                         class="lay-table-cols-resize"
-                        @mousedown="
+                        @mousedown.stop="
                           startResize(
                             $event,
                             column,
@@ -1184,6 +1199,7 @@ defineExpose({ getCheckData });
                             tableBodyTable
                           )
                         "
+                        @click.stop
                       ></div>
                     </th>
                   </template>
