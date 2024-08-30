@@ -73,7 +73,10 @@ const emits = defineEmits(["update:modelValue", "ok"]);
 const Year = ref(props.modelValue);
 const currentDate: Ref<number> = ref(dayjs().year());
 if (datePicker.currentYear.value)
-  currentDate.value = datePicker.currentYear.value;
+  currentDate.value =
+    datePicker.currentYear.value === -1
+      ? dayjs().year()
+      : datePicker.currentYear.value;
 const yearList = computed<number[]>(() =>
   getYears(
     currentDate.value ?? new Date(),
