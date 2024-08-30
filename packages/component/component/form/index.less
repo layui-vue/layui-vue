@@ -151,6 +151,16 @@
     color: #888;
     font-size: 14px;
   }
+
+  // layer + form + select (select不挂载在body上)
+  .layui-select{
+    .layui-dropdown-content {
+      .layui-form-checkbox{
+        margin-top: 0;
+      }
+    }
+  }
+
 }
 
 .layui-form-item:has(.layui-input-inline) {

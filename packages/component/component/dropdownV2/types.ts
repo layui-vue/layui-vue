@@ -19,7 +19,7 @@ export interface DropdownProps {
   alignPoint?: boolean;
   popperClass?: string | Array<string | object> | object;
   popperStyle?: StyleValue;
-  teleportProps?: TeleportProps;
+  teleportProps?: Partial<TeleportProps>;
 }
 
 export type DropdownEmits = {

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import "./index.less";
-import type { CSSProperties } from "vue";
+import type { CSSProperties, TeleportProps } from "vue";
 import type {
   ContentProps,
   TriggerProps,
@@ -38,9 +38,6 @@ const props = withDefaults(defineProps<DropdownProps>(), {
   mouseEnterDelay: 150,
   mouseLeaveDelay: 150,
   focusDelay: 150,
-  teleportProps: () => ({
-    to: "body",
-  }),
 });
 
 const emits = defineEmits<DropdownEmits>();
@@ -48,6 +45,14 @@ const emits = defineEmits<DropdownEmits>();
 const _trigger = computed(() => {
   return isArray(props.trigger) ? props.trigger : [props.trigger];
 });
+
+const _teleportProps = computed<TeleportProps>(() => {
+  return {
+    to: props.teleportProps?.to || "body",
+    disabled: props.teleportProps?.disabled ?? false,
+  };
+});
+
 const open = ref(props.visible);
 
 const TriggerRef = ref<HTMLElement | null>(null);
@@ -78,15 +83,14 @@ const triggerProps = computed<TriggerProps>(() => {
 const _contentStyle = computed(() => {
   const style: CSSProperties = {};
 
-  const TriggerDom =
-    (TriggerRef.value?.getBoundingClientRect() as DOMRect) || {};
+  const width = TriggerRef.value?.offsetWidth || 0;
 
   if (props.autoFitMinWidth) {
-    style.minWidth = `${TriggerDom.width}px`;
+    style.minWidth = `${width}px`;
   }
 
   if (props.autoFitWidth) {
-    style.width = `${TriggerDom.width}px`;
+    style.width = `${width}px`;
   }
 
   return style;
@@ -117,10 +121,10 @@ const contentProps = computed<ContentProps>(() => {
       "layui-dropdown-content",
       props.popperClass,
     ],
-    popperStyle: [_contentStyle.value, props.popperStyle],
+    popperStyle: [props.popperStyle, _contentStyle.value],
     clickOutsideToClose: props.clickOutsideToClose,
     middlewares: middlewares.value,
-    teleportProps: props.teleportProps,
+    teleportProps: _teleportProps.value,
   };
 });
 

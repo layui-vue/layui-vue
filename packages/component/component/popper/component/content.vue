@@ -58,8 +58,6 @@ const stylees = computed(() => {
 });
 
 const teleportProps = computed(() => {
-  console.log(props.teleportProps, "props.teleportProps");
-
   return props.teleportProps!;
 });
 
