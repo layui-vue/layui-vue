@@ -394,7 +394,7 @@ const changeText = () => {
 | is-auto-show   | 控制超出文本 `...` 时自动展示， 没有 `...` 时不展示 | `boolean` | `false` |    | |
 | visible     | 控制显示/隐藏| `boolean`| `false` |  |  | |
 | enterable   | 鼠标能否进入 tooltip 中 | `boolean` | `true` | | |
-| trigger   | 触发方式 | `string` | `hover` | `click` `hover` `contextmenu` `focus` | `2.18.0类型调整为只传string` |
+| trigger   | 触发方式 | `string`、`string[]` | `hover` | `click` `hover` `contextmenu` `focus` | - |
 | popper-class    | tooltip内容box类名 | `string` `array`  |  | | `2.18.0类型删除object` |
 | popper-style     | tooltip内容box类名 | `string` `object` |  | |  |
 
