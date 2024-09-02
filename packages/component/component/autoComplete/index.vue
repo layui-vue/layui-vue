@@ -6,7 +6,6 @@
       :autoFitWidth="autoFitWidth"
       :contentClass="contentClass"
       :contentStyle="contentStyle"
-      :update-at-scroll="true"
     >
       <lay-input
         :name="name"
@@ -46,26 +45,26 @@
           </div>
         </template>
         <template v-else>
-          <template v-if="innerOptions.length > 0">
-            <lay-dropdown-menu class="lay-autocomplete-content">
-              <template v-for="(option, index) in innerOptions">
-                <lay-dropdown-menu-item
-                  @click="clickOptions(option)"
-                  :class="[
-                    'lay-autocomplete-option',
-                    {
-                      selected: selectedIndex == index,
-                      equals: innerValue == option[replaceFields.value],
-                    },
-                  ]"
-                >
-                  <slot name="default" :option="option">
-                    {{ option.value }}
-                  </slot>
-                </lay-dropdown-menu-item>
-              </template>
-            </lay-dropdown-menu>
-          </template>
+          <lay-dropdown-menu class="lay-autocomplete-content">
+            <template v-if="innerOptions.length">
+              <lay-dropdown-menu-item
+                v-for="(option, index) in innerOptions"
+                :key="option"
+                @click="clickOptions(option)"
+                :class="[
+                  'lay-autocomplete-option',
+                  {
+                    selected: selectedIndex == index,
+                    equals: innerValue == option[replaceFields.value],
+                  },
+                ]"
+              >
+                <slot name="default" :option="option">
+                  {{ option.value }}
+                </slot>
+              </lay-dropdown-menu-item>
+            </template>
+          </lay-dropdown-menu>
         </template>
       </template>
     </lay-dropdown>
@@ -199,7 +198,8 @@ watch(innerOptions, () => {
  * 兼容点击 input 时不展示 dropdown.
  * 仅在 @input 触发时展示
  */
-const clickHandler = function () {
+const clickHandler = function (e: Event) {
+  e.stopImmediatePropagation();
   nextTick(() => {
     dropdownRef.value.hide();
   });
@@ -251,42 +251,42 @@ watch([innerValue, innerOptions], () => {
   }
 });
 
-/**
- * 监听 keyup 事件
- *
- * @remark ArrowDown 向下操作
- * @remark ArrowUp 向上操作
- * @remark Enter 回车操作
- */
-onMounted(() => {
-  document.addEventListener("keyup", function (e) {
-    if (isFocus.value === true) {
-      if (e.key === "ArrowDown") {
-        if (selectedIndex.value <= innerOptions.value.length - 2) {
-          selectedIndex.value++;
-        }
-      }
-      if (e.key === "ArrowUp") {
-        if (selectedIndex.value > 0) {
-          selectedIndex.value--;
-        }
-      }
-      if (e.key === "Enter") {
-        if (selectedIndex.value != -1) {
-          const option = innerOptions.value[selectedIndex.value];
-          innerValue.value = option[props.replaceFields.value];
-          dropdownRef.value.hide();
-          emits("update:modelValue", option.value);
-          emits("select", option);
-        }
+const handleKeyUp = (e: KeyboardEvent) => {
+  if (isFocus.value === true) {
+    if (e.key === "ArrowDown") {
+      if (selectedIndex.value <= innerOptions.value.length - 2) {
+        selectedIndex.value++;
       }
     }
-  });
+    if (e.key === "ArrowUp") {
+      if (selectedIndex.value > 0) {
+        selectedIndex.value--;
+      }
+    }
+    if (e.key === "Enter") {
+      if (selectedIndex.value != -1) {
+        const option = innerOptions.value[selectedIndex.value];
+        innerValue.value = option[props.replaceFields.value];
+        dropdownRef.value.hide();
+        emits("update:modelValue", option.value);
+        emits("select", option);
+      }
+    }
+  }
+};
+
+// /**
+//  * 监听 keyup 事件
+//  *
+//  * @remark ArrowDown 向下操作
+//  * @remark ArrowUp 向上操作
+//  * @remark Enter 回车操作
+//  */
+onMounted(() => {
+  document.addEventListener("keyup", handleKeyUp);
 });
 
 onUnmounted(() => {
-  document.removeEventListener("keyup", function () {
-    // 注销 keyup 监听
-  });
+  document.removeEventListener("keyup", handleKeyUp);
 });
 </script>

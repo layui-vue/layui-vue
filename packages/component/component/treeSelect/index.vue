@@ -324,7 +324,6 @@ provide(LAYUI_TREE_SELECT, {
       :disabled="disabled"
       :contentClass="contentClass"
       :contentStyle="contentStyle"
-      :update-at-scroll="true"
       :click-to-close="false"
       @show="openState = true"
       @hide="openState = false"

@@ -9,7 +9,6 @@
       :autoFitMinWidth="false"
       :contentClass="contentClass"
       :contentStyle="contentStyle"
-      updateAtScroll
     >
       <lay-input
         :name="name"

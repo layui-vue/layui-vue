@@ -157,7 +157,6 @@ const searchList = (str: string, container: any) => {
     :contentStyle="contentStyle"
     @hide="openState = false"
     @show="openState = true"
-    updateAtScroll
   >
     <div
       class="layui-border-box layui-iconpicker layui-iconpicker-split"

@@ -16,7 +16,6 @@
       ref="dropdownRef"
       :trigger="trigger"
       :autoFitMinWidth="false"
-      :updateAtScroll="true"
       :disabled="disabled"
       :contentClass="contentClass"
       :contentStyle="contentStyle"

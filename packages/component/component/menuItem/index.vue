@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { computed, ComputedRef, inject, Ref, useSlots } from "vue";
-import { DropdownContext, dropdownInjectionKey } from "../dropdown/interface";
+// import { DropdownContext, dropdownInjectionKey } from "../dropdown/interface";
+import type { DropdownContext } from "../dropdown/interface";
+import { DROPDOWN_INJECTION_KEY } from "../dropdown/interface";
 import useLevel from "../menu/useLevel";
 import LayTooltip from "../tooltip/index.vue";
 import { indentHandle } from "../menu/utils";
@@ -26,7 +28,7 @@ const isCollapse = inject("isCollapse") as ComputedRef<boolean | string>;
 const theme = inject("menuTheme") as Ref<string>;
 const indent = inject("indent") as Ref<string | boolean>;
 const dropdownCtx = inject<DropdownContext | undefined>(
-  dropdownInjectionKey,
+  DROPDOWN_INJECTION_KEY,
   undefined
 );
 

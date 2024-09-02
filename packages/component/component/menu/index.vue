@@ -1,5 +1,14 @@
 <script setup lang="ts">
-import { computed, ComputedRef, provide, Ref, ref, watch } from "vue";
+import {
+  computed,
+  ComputedRef,
+  provide,
+  Ref,
+  ref,
+  watch,
+  useSlots,
+  h,
+} from "vue";
 import { provideLevel } from "./useLevel";
 import "./index.less";
 
@@ -84,6 +93,28 @@ watch(
   }
 );
 
+const slots = useSlots();
+
+const defaultSlot = computed(() => {
+  const children = slots.default ? slots.default() : [];
+
+  return h(
+    "div",
+    null,
+    children.map((child) => {
+      if ((child as any)?.type?.name === "LaySubMenu") {
+        child.props = {
+          ...child.props,
+          teleportProps: {
+            disabled: false,
+          },
+        };
+      }
+      return child;
+    })
+  );
+});
+
 provideLevel(1);
 provide("isTree", isTree);
 provide("selectedKey", selectedKey);
@@ -105,6 +136,6 @@ provide("indent", indent);
       collapse ? 'layui-nav-collapse' : '',
     ]"
   >
-    <slot></slot>
+    <defaultSlot></defaultSlot>
   </ul>
 </template>

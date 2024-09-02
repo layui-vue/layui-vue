@@ -16,8 +16,7 @@ import {
 import { LayIcon } from "@layui/icons-vue";
 import LayInput from "../input/index.vue";
 import LayTagInput from "../tagInput/index.vue";
-// import LayDropdown from "../dropdown/index.vue";
-import LayDropdownV2 from "../dropdownV2/dropdownV2.vue";
+import LayDropdown from "../dropdown/index.vue";
 import LaySelectOption, { SelectOptionProps } from "../selectOption/index.vue";
 import { SelectSize } from "./interface";
 import { isArrayChildren } from "../../utils";
@@ -249,12 +248,11 @@ provide("searchMethod", props.searchMethod);
       'has-disabled': disabled,
     }"
   >
-    <lay-dropdown-v2
+    <lay-dropdown
       ref="selectRef"
       :disabled="disabled"
       :contentClass="contentClass"
       :contentStyle="contentStyle"
-      :update-at-scroll="true"
       :autoFitWidth="autoFitWidth"
       @hide="handleHide"
       @show="openState = true"
@@ -336,6 +334,6 @@ provide("searchMethod", props.searchMethod);
           </div>
         </dl>
       </template>
-    </lay-dropdown-v2>
+    </lay-dropdown>
   </div>
 </template>

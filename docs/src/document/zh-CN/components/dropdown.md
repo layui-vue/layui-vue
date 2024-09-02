@@ -14,7 +14,7 @@
 
 <template>
 <lay-space>
-  <lay-dropdown updateAtScroll>
+  <lay-dropdown>
     <lay-button type="primary">下拉菜单</lay-button>
     <template #content>
         <lay-dropdown-menu>
@@ -58,7 +58,7 @@ export default {
 
 <template>
 <lay-space>
-  <lay-dropdown trigger="hover" updateAtScroll>
+  <lay-dropdown trigger="hover">
     <lay-button>Hover 触发</lay-button>
     <template #content>
         <lay-dropdown-menu>
@@ -68,7 +68,7 @@ export default {
         </lay-dropdown-menu>
     </template>
   </lay-dropdown>
-    <lay-dropdown updateAtScroll>
+    <lay-dropdown>
     <lay-button>Click 触发</lay-button>
     <template #content>
         <lay-dropdown-menu>
@@ -78,7 +78,7 @@ export default {
         </lay-dropdown-menu>
     </template>
   </lay-dropdown>
-    <lay-dropdown trigger="contextMenu" updateAtScroll>
+    <lay-dropdown trigger="contextMenu">
     <lay-button>contextMenu 触发</lay-button>
     <template #content>
         <lay-dropdown-menu>
@@ -88,7 +88,7 @@ export default {
         </lay-dropdown-menu>
     </template>
   </lay-dropdown>
-    <lay-dropdown trigger="focus" updateAtScroll>
+    <lay-dropdown trigger="focus" >
     <lay-input placeholder="Focus 触发"></lay-input>
     <template #content>
         <lay-dropdown-menu>
@@ -98,7 +98,7 @@ export default {
         </lay-dropdown-menu>
     </template>
   </lay-dropdown>
-    <lay-dropdown :trigger="['hover','focus','click']" updateAtScroll>
+    <lay-dropdown :trigger="['hover','focus','click']" >
     <lay-input placeholder="hover focus click"></lay-input>
     <template #content>
         <lay-dropdown-menu>
@@ -133,7 +133,7 @@ export default {
   <lay-button @click="manualRef.show()">打开</lay-button>
   <lay-button @click="manualRef.hide()">关闭</lay-button>
   <br><br>
-  <lay-dropdown ref="manualRef" :clickOutsideToClose="false" :clickToClose="false" updateAtScroll>
+  <lay-dropdown ref="manualRef" :clickOutsideToClose="false" :clickToClose="false" >
     <lay-button type="primary">下拉菜单</lay-button>
     <template #content>
         <lay-dropdown-menu>
@@ -167,7 +167,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-dropdown :visible="true" updateAtScroll>
+  <lay-dropdown :visible="true" >
     <lay-button type="primary">下拉菜单</lay-button>
     <template #content>
         <lay-dropdown-menu>
@@ -232,7 +232,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-dropdown @show="stat='开启'" @hide="stat='关闭'" updateAtScroll>
+  <lay-dropdown @show="stat='开启'" @hide="stat='关闭'" >
     <lay-button type="primary" >当前状态:{{stat}}</lay-button>
     <template #content>
         <lay-dropdown-menu>
@@ -266,37 +266,37 @@ export default {
 
 <template>
 <lay-space wrap>
-  <lay-dropdown placement="top-start" updateAtScroll>
+  <lay-dropdown placement="top-start" >
     <lay-button type="primary">top-start</lay-button>
     <template #content>
       <div style="width:300px;height:200px;"></div> 
     </template>
   </lay-dropdown>
-  <lay-dropdown placement="top" updateAtScroll>
+  <lay-dropdown placement="top" >
     <lay-button type="primary">top</lay-button>
     <template #content>
       <div style="width:300px;height:200px;"></div> 
     </template>
   </lay-dropdown>
-  <lay-dropdown placement="top-end" updateAtScroll>
+  <lay-dropdown placement="top-end" >
     <lay-button type="primary">top-end</lay-button>
     <template #content>
       <div style="width:300px;height:200px;"></div> 
     </template>
   </lay-dropdown>
-  <lay-dropdown placement="bottom-start" updateAtScroll>
+  <lay-dropdown placement="bottom-start" >
     <lay-button type="primary">bottom-start</lay-button>
     <template #content>
       <div style="width:300px;height:200px;"></div> 
     </template>
   </lay-dropdown>
-  <lay-dropdown placement="bottom" updateAtScroll>
+  <lay-dropdown placement="bottom" >
     <lay-button type="primary">bottom</lay-button>
     <template #content>
       <div style="width:300px;height:200px;"></div> 
     </template>
   </lay-dropdown>
-  <lay-dropdown placement="bottom-end" updateAtScroll>
+  <lay-dropdown placement="bottom-end" >
     <lay-button type="primary">bottom-end</lay-button>
     <template #content>
       <div style="width:300px;height:200px;"></div> 
@@ -305,37 +305,37 @@ export default {
 </lay-space>
 <br><br>
 <lay-space>
-  <lay-dropdown placement="right-start" updateAtScroll>
+  <lay-dropdown placement="right-start" >
     <lay-button type="primary">right-start</lay-button>
     <template #content>
       <div style="width:300px;height:200px;"></div> 
     </template>
   </lay-dropdown>
-  <lay-dropdown placement="right" updateAtScroll>
+  <lay-dropdown placement="right" >
     <lay-button type="primary">right</lay-button>
     <template #content>
       <div style="width:300px;height:200px;"></div> 
     </template>
   </lay-dropdown>
-  <lay-dropdown placement="right-end" updateAtScroll>
+  <lay-dropdown placement="right-end" >
     <lay-button type="primary">right-end</lay-button>
     <template #content>
       <div style="width:300px;height:200px;"></div> 
     </template>
   </lay-dropdown>
-    <lay-dropdown placement="left-start" updateAtScroll>
+    <lay-dropdown placement="left-start" >
     <lay-button type="primary">left-start</lay-button>
     <template #content>
       <div style="width:300px;height:200px;"></div> 
     </template>
   </lay-dropdown>
-  <lay-dropdown placement="left" updateAtScroll>
+  <lay-dropdown placement="left" >
     <lay-button type="primary">left</lay-button>
     <template #content>
       <div style="width:300px;height:200px;"></div> 
     </template>
   </lay-dropdown>
-  <lay-dropdown placement="left-end" updateAtScroll>
+  <lay-dropdown placement="left-end" >
     <lay-button type="primary">left-end</lay-button>
     <template #content>
       <div style="width:300px;height:200px;"></div> 
@@ -371,7 +371,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-dropdown updateAtScroll>
+  <lay-dropdown >
     <lay-button type="primary">图标菜单</lay-button>
     <template #content>
         <lay-dropdown-menu>
@@ -416,7 +416,7 @@ export default {
 ::: demo
 
 <template>
-  <lay-dropdown updateAtScroll>
+  <lay-dropdown >
     <lay-button type="primary">下拉菜单</lay-button>
     <template #content>
         <lay-dropdown-menu>
@@ -518,24 +518,24 @@ export default {
 
 ::: table
 
-| 属性                | 描述                                              | 类型      | 默认值   | 可选值                                          |
-| ------------------- | ------------------------------------------------- | --------- | -------- | ----------------------------------------------- |
-| visible             | 下拉面板是否可见                                  | `boolean` | `true`   | `true` `false`                                  |
-| trigger             | 触发方式,类型 `string` 或 trigger 数组            | `strine` `string[]`  | `click`  | `click` `hover` `focus` `contextMenu`           |
-| disabled            | 是否禁用触发                                      | `boolean` | `false`  | `true` `false`                                  |
-| placement           | 下拉面板位置                                      | `string`  | `bottom` | `top` `bottom` `right` `left` `*-start` `*-end` |
-| autoFitPosition     | 是否自动调整下拉面板位置                          | `boolean` | `true`   | `true` `false`                                  |
-| autoFitWidth        | 是否将下拉面板宽度设置为触发器宽度                | `boolean` | `false`  | `true` `false`                                  |
-| autoFitMinWidth     | 是否将下拉面板最小宽度设置为触发器宽度            | `boolean` | `true`   | `true` `false`                                  |
-| updateAtScroll      | 是否在容器滚动时更新下拉面板的位置                | `boolean` | `false`  | `true` `false`                                  |
-| autoFixPosition     | 是否在触发器或下拉面板尺寸变化时更新下拉面板位置  | `boolean` | `true`   | `true` `false`                                  |
-| clickToClose        | 是否在点击触发器时关闭面板                        | `boolean` | `true`   | `true` `false`                                  |
-| blurToClose         | 是否在触发器失去焦点时关闭面板                    | `boolean` | `true`   | `true` `false`                                  |
-| clickOutsideToClose | 是否点击外部关闭下拉面板                          | `boolean` | `true`   | `true` `false`                                  |
-| contentOffset       | 下拉面板距离触发器的偏移距离                      | `string`  | `2px`    | -                                               |
-| mouseEnterDelay     | mouseEnter 事件延迟触发的时间, trigger hover 有效 | `number`  | `150`    | -                                               |
-| mouseLeaveDelay     | mouseLeave 事件延迟触发的时间, trigger hover 有效 | `number`  | `150`    | -                                               |
-| focusDelay          | focus 事件延迟触发的时间, trigger focus 有效      | `number`  | `150`    | -                                               |
+| 属性                | 描述                                              | 类型      | 默认值   | 可选值                                          | 版本                  |
+| ------------------- | ------------------------------------------------- | --------- | -------- | ----------------------------------------------- |----------------- |
+| visible             | 下拉面板是否可见                                  | `boolean` | `true`   | `true` `false`                                  | |
+| trigger             | 触发方式,类型 `string` 或 trigger 数组            | `strine` `string[]`  | `click`  | `click` `hover` `focus` `contextMenu`           | |
+| disabled            | 是否禁用触发                                      | `boolean` | `false`  | `true` `false`                                  | |
+| placement           | 下拉面板位置                                      | `string`  | `bottom` | `top` `bottom` `right` `left` `*-start` `*-end` | |
+| autoFitPosition     | 是否自动调整下拉面板位置                          | `boolean` | `true`   | `true` `false`                                  | |
+| autoFitWidth        | 是否将下拉面板宽度设置为触发器宽度                | `boolean` | `false`  | `true` `false`                                  | |
+| autoFitMinWidth     | 是否将下拉面板最小宽度设置为触发器宽度            | `boolean` | `true`   | `true` `false`                                  | |
+| updateAtScroll      | 是否在容器滚动时更新下拉面板的位置                | `boolean` | `false`  | `true` `false`                                  | <lay-tag type="danger">2.19.0删除</lay-tag> |
+| autoFixPosition     | 是否在触发器或下拉面板尺寸变化时更新下拉面板位置  | `boolean` | `true`   | `true` `false`                                  | <lay-tag type="danger">2.19.0删除</lay-tag> |
+| clickToClose        | 是否在点击触发器时关闭面板                        | `boolean` | `true`   | `true` `false`                                  | |
+| blurToClose         | 是否在触发器失去焦点时关闭面板                    | `boolean` | `true`   | `true` `false`                                  | |
+| clickOutsideToClose | 是否点击外部关闭下拉面板                          | `boolean` | `true`   | `true` `false`                                  | |
+| contentOffset       | 下拉面板距离触发器的偏移距离                      | `string`  | `2px`    | -                                               | |
+| mouseEnterDelay     | mouseEnter 事件延迟触发的时间, trigger hover 有效 | `number`  | `150`    | -                                               | |
+| mouseLeaveDelay     | mouseLeave 事件延迟触发的时间, trigger hover 有效 | `number`  | `150`    | -                                               | |
+| focusDelay          | focus 事件延迟触发的时间, trigger focus 有效      | `number`  | `150`    | -                                               | |
 | alignPoint |跟随鼠标|`boolean`|`false`|`true` `false`|
 | contentClass| 弹出内容的类名  | `string`| -| -|
 | contentStyle| 弹出内容的样式  | `string` | - | -|

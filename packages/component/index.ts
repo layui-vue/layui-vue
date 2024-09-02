@@ -57,7 +57,6 @@ import LayEmpty from "./component/empty/index";
 import LayFormItem from "./component/formItem/index";
 import LayRate from "./component/rate/index";
 import LayDropdown from "./component/dropdown/index";
-import LayDropdownV2 from "./component/dropdownV2/index";
 import LayDropdownMenu from "./component/dropdownMenu/index";
 import LayDropdownMenuItem from "./component/dropdownMenuItem/index";
 import LayDropdownSubMenu from "./component/dropdownSubMenu/index";
@@ -160,7 +159,6 @@ const components: Record<string, Plugin> = {
   LayFormItem,
   LayRate,
   LayDropdown,
-  LayDropdownV2,
   LayDropdownMenu,
   LayDropdownMenuItem,
   LayDropdownSubMenu,
@@ -272,7 +270,6 @@ export {
   LayFormItem,
   LayRate,
   LayDropdown,
-  LayDropdownV2,
   LayDropdownMenu,
   LayDropdownMenuItem,
   LayDropdownSubMenu,

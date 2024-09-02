@@ -304,7 +304,7 @@ export default {
     avatar="http://abc.pearadmin.com/logo-png.png"
     title="标题">
      <template #extra>
-     <lay-dropdown placement="top"  updateAtScroll>
+     <lay-dropdown placement="top">
         <lay-icon type="layui-icon-more" @click.stop></lay-icon>
         <template #content>
             <lay-dropdown-menu>

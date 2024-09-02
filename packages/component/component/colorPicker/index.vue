@@ -489,7 +489,6 @@ function hex2rgba(s: any) {
     :disabled="disabled"
     :contentClass="contentClass"
     :contentStyle="contentStyle"
-    updateAtScroll
     @hide="openState = false"
     @show="openState = true"
   >

@@ -22,7 +22,7 @@ const useDelayTrigger = ({
     useTimeoutFn(show, unref(showAfter));
   };
   const onHidden = () => {
-    const state = useTimeoutFn(hidden, hideAfter);
+    const state = useTimeoutFn(hidden, unref(hideAfter));
     hiddenStop = state.stop;
   };
 
