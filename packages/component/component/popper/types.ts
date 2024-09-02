@@ -1,10 +1,10 @@
 import type { ComponentPublicInstance, StyleValue, TeleportProps } from "vue";
 
-import type { Placement, OffsetOptions, Middleware } from "./usePopper/index";
+import type { Placement, OffsetOptions, Middlewares } from "./usePopper/index";
 
 export type PopperTrigger = "click" | "hover" | "focus" | "contextMenu";
 
-export type PopperProps = {
+export interface PopperProps {
   modelValue?: boolean;
   trigger?: PopperTrigger | PopperTrigger[];
   disabled?: boolean;
@@ -17,9 +17,9 @@ export type PopperProps = {
   popperClass?: string | Array<string | object> | object;
   popperStyle?: StyleValue;
   clickOutsideToClose?: boolean;
-  middlewares?: Array<Middleware>;
+  middlewares?: Middlewares;
   teleportProps?: TeleportProps;
-};
+}
 
 export type ContentProps = PopperProps;
 

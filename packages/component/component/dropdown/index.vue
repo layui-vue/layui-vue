@@ -12,7 +12,7 @@ import type {
   pointType,
   DropdownContext,
 } from "./interface";
-import type { Middleware } from "../popper/usePopper/index";
+import type { Middlewares } from "../popper/usePopper/index";
 
 import { ref, provide, computed, nextTick, watch, reactive, inject } from "vue";
 import Trigger from "../popper/component/trigger.vue";
@@ -131,7 +131,7 @@ const middlewares = computed(() => {
     props.autoFitPosition && flip(),
     props.alignPoint && pointMiddleware(point),
     hide(),
-  ].filter(Boolean) as Middleware[];
+  ].filter(Boolean) as Middlewares;
 });
 
 const contentProps = computed<ContentProps>(() => {

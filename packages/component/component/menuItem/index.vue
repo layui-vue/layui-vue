@@ -34,7 +34,7 @@ const dropdownCtx = inject<DropdownContext | undefined>(
 
 const selectHandle = function () {
   selectedKey.value = props.id;
-  dropdownCtx?.hide();
+  dropdownCtx?.hide && dropdownCtx?.hide();
 };
 
 const needTooltip = computed(
