@@ -6,10 +6,14 @@ import type {
   TriggerProps,
   ContentComponentInstance,
 } from "../popper/types";
-import type { DropdownProps as _DropdownProps, DropdownEmits } from "./types";
+import type {
+  DropdownProps as _DropdownProps,
+  DropdownEmits,
+  pointType,
+} from "./interface";
 import type { Middleware } from "../popper/usePopper/index";
 
-import { ref, provide, computed, nextTick, watch } from "vue";
+import { ref, provide, computed, nextTick, watch, reactive } from "vue";
 import Trigger from "../popper/component/trigger.vue";
 import Content from "../popper/component/content.vue";
 import { POPPER_INJECTION_KEY } from "../popper/utils";
@@ -17,6 +21,7 @@ import { flip, hide, offset, shift } from "../popper/usePopper/index";
 
 import useDelayTrigger from "../popper/hook/useDelayTrigger";
 import { isArray } from "../../utils";
+import { pointMiddleware } from "./utils";
 
 defineOptions({
   name: "LayDropdownV2",
@@ -57,33 +62,50 @@ const open = ref(props.visible);
 
 const TriggerRef = ref<HTMLElement | null>(null);
 
+const customEvents = computed(() => {
+  return {
+    click: (e: Event) => {
+      if (!_trigger.value.includes("click")) return;
+      if (open.value && !props.clickToClose) return;
+      if (props.alignPoint) setPoint(e as PointerEvent);
+      toggle();
+    },
+    contextmenu: (e: Event) => {
+      if (!_trigger.value.includes("contextMenu")) return;
+      if (open.value && !props.clickToClose) return;
+      if (props.alignPoint) setPoint(e as PointerEvent);
+
+      e.preventDefault();
+      toggle();
+    },
+    focusout: () => {
+      if (!_trigger.value.includes("focus") || !props.blurToClose) return;
+      onHidden();
+    },
+  };
+});
+
+const point = reactive<pointType>({
+  x: 0,
+  y: 0,
+});
+
+const setPoint = (e: PointerEvent) => {
+  point.x = e.pageX;
+  point.y = e.pageY;
+};
+
 const triggerProps = computed<TriggerProps>(() => {
   return {
     trigger: _trigger.value,
-    customEvents: {
-      click: () => {
-        if (!_trigger.value.includes("click")) return;
-        if (open.value && !props.clickToClose) return;
-        toggle();
-      },
-      contextmenu: (e: Event) => {
-        if (!_trigger.value.includes("contextMenu")) return;
-        if (open.value && !props.clickToClose) return;
-        e.preventDefault();
-        toggle();
-      },
-      focusout: () => {
-        if (!_trigger.value.includes("focus") || !props.blurToClose) return;
-        onHidden();
-      },
-    },
+    customEvents: customEvents.value,
   };
 });
 
 const _contentStyle = computed(() => {
   const style: CSSProperties = {};
 
-  const width = TriggerRef.value?.offsetWidth || 0;
+  const width = props.alignPoint ? 0 : TriggerRef.value?.offsetWidth || 0;
 
   if (props.autoFitMinWidth) {
     style.minWidth = `${width}px`;
@@ -105,6 +127,7 @@ const middlewares = computed(() => {
     offset(offsetValue.value),
     shift(),
     props.autoFitPosition && flip(),
+    props.alignPoint && pointMiddleware(point),
     hide(),
   ].filter(Boolean) as Middleware[];
 });

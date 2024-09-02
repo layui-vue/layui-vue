@@ -25,7 +25,7 @@ export type ContentProps = PopperProps;
 
 export type TriggerProps = Pick<PopperProps, "trigger"> & {
   customEvents?: {
-    click?: () => void;
+    click?: (e: Event) => void;
     mouseenter?: () => void;
     mouseleave?: () => void;
     contextmenu?: (e: Event) => void;
