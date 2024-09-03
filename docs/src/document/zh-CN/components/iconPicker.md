@@ -142,7 +142,7 @@ export default {
 
 ::: table
 
-| 属性           |  说明        |  类型   | 默认值  | 可选值  |
+| 属性           |  说明        |  类型   | 默认值  | 版本  |
 | ---------- | -------- | --- |--- |--- |
 | v-model    | 默认值   | --  |--  |--  |
 | page       | 开启分页 | --  |--  |--  |
@@ -152,6 +152,7 @@ export default {
 | allow-clear | 允许清空 | `boolean`  |--  |--  |
 | contentStyle             | 内容自定义样式     | `StyleValue` | -- | -- |
 | contentClass             | 内容自定义Class    | `string` `Array<string \| object>` `object` | -- | -- |
+| teleport-props        | 继承至 dropdown 组件，下拉面板 `传递` 属性         | `object`         | `{to: 'body', disabled: false}` |  <lay-tag type="primary" size="sm">2.19.0 新增</lay-tag> |
 
 :::
 
