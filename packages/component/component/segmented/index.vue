@@ -43,6 +43,7 @@ import {
   onMounted,
   InputHTMLAttributes,
   ReservedProps,
+  nextTick,
 } from "vue";
 import { LaySegmentedProps } from "./interfaces";
 
@@ -116,6 +117,20 @@ const clickItem = (ev: Event, label: string, index: number) => {
 
 const init = (val: any) => {
   try {
+    if (props.name) {
+      segment.value
+        ?.querySelectorAll(".layui-segmented-item-radio")
+        .forEach((radio) => {
+          (radio as HTMLInputElement).checked = false;
+        });
+      (
+        segment.value
+          ?.querySelectorAll(`.layui-segmented-item-radio`)
+          .item(
+            items.value.findIndex((a) => a.label === props.modelValue)
+          ) as HTMLInputElement
+      ).checked = true;
+    }
     setItem(
       // @ts-ignore
       segment?.value
@@ -145,7 +160,7 @@ watch(
 );
 
 onMounted(() => {
-  init(props.modelValue);
+  nextTick(() => init(props.modelValue));
 });
 
 defineExpose({
