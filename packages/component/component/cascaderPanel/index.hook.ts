@@ -139,11 +139,11 @@ export default function useCascaderPanel(
     const items: Array<CascaderPanelItemPropsInternal | undefined> =
       multiple.value
         ? [...multipleSelectItem.value.values()].map((v) =>
-            flatData.value.find((c) => c.value === v.value)
-          )
+          flatData.value.find((c) => c.value === v.value)
+        )
         : selectKeys.value.map((v) =>
-            flatData.value.find((c) => c.value === v)
-          );
+          flatData.value.find((c) => c.value === v)
+        );
 
     const fullpath = (target: CascaderPanelItemPropsInternal | undefined) => {
       if (!target) return [];
@@ -236,35 +236,6 @@ export default function useCascaderPanel(
   );
 
   /**
-   * 监听选中数据变化
-   */
-  // watch(
-  //   () => modelValue.value,
-  //   () => {
-  //     if (!modelValue.value?.length) {
-  //       selectKeys.value = [];
-  //       return;
-  //     }
-
-  //     if (!multiple.value)
-  //       selectKeys.value =
-  //         modelValue.value instanceof Array
-  //           ? modelValue.value
-  //           : modelValue.value.split(decollator.value ?? " / ");
-  //     else {
-  //       if (modelValue.value instanceof Array) {
-  //         modelValue.value.forEach((v) => {
-  //           multipleSelectItem.value.set(
-  //             v,
-  //             flatData.value.find((c) => c.value === v)!
-  //           );
-  //         });
-  //       }
-  //     }
-  //   }
-  // );
-
-  /**
    * 自底向上构建森林
    *
    * 需要更新的层数为最大为森林深度 n-1
@@ -311,6 +282,16 @@ export default function useCascaderPanel(
             item.children?.some((a) => a.indeterminate || a.checked) || false;
       });
   };
+
+  watch(
+    () => [Array.from(multipleSelectItem.value.values())],
+    ([newVal], [oldVal]) => {
+      const [addDiff, removeDiff] = _diffValue(newVal.map(a => a.value), oldVal.map(a => a.value));
+      removeDiff.forEach((v) => {
+        if (addDiff.includes(v)) console.warn("Duplicated value: ", v);
+      });
+    }
+  );
 
   const setup = () => {
     if (!modelValue.value?.length) {
@@ -389,6 +370,19 @@ export default function useCascaderPanel(
     const removeDiff = values.filter((data) => !array.includes(data)) || [];
     return [addDiff, removeDiff];
   };
+
+  flatData.value.forEach((item) => {
+    const duplicated = flatData.value.filter((a) => a.value === item.value);
+    if (duplicated.length > 1) {
+      console.group("LayCascader: duplicated value founded");
+      console.warn(
+        "This problem can cause some unexpected behavior. You should check your data source to maintain value unique."
+      );
+      console.warn("value: ", item.value);
+      console.warn("item: ", duplicated);
+      console.groupEnd();
+    }
+  });
 
   return {
     dataSource,

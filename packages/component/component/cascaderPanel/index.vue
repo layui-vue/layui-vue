@@ -205,6 +205,8 @@ const doLazyLoad = (item: CascaderPanelItemPropsInternal) => {
           if (item) {
             // 选中当前的项目，然后添加到已选的多选项中
             item.checked = true;
+            if (multipleSelectItem.value.has(v))
+              console.warn("Duplicate value in multiple mode: ", v, item);
             multipleSelectItem.value.set(v, item);
           } else multipleSelectItem.value.delete(v);
         });
@@ -252,8 +254,19 @@ const multipleItemTrigger = (item: CascaderPanelItemPropsInternal) => {
     return;
   }
 
-  if (item.checked) multipleSelectItem.value.set(item.value, item);
-  else multipleSelectItem.value.delete(item.value);
+  if (item.checked) {
+    const duplicated = flatData.value.filter((a) => a.value === item.value);
+    if (duplicated.length > 1) {
+      console.group("LayCascader: duplicated value founded");
+      console.warn(
+        "This problem can cause some unexpected behavior. You should check your data source to maintain values unique."
+      );
+      console.warn("value: ", item.value);
+      console.warn("item: ", duplicated);
+      console.groupEnd();
+    }
+    multipleSelectItem.value.set(item.value, item);
+  } else multipleSelectItem.value.delete(item.value);
 };
 /**
  * 选中当前项目
