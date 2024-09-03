@@ -1,7 +1,10 @@
 import { reactive, nextTick } from "vue";
-import { describe, expect, test } from "vitest";
+import { describe, expect, test, afterEach } from "vitest";
 import { mount } from "@vue/test-utils";
-import LayAutocomplete from "../index";
+import { sleep } from "../../../test-utils";
+
+import LayAutocomplete from "../index.vue";
+import LayDropdown from "../../dropdown/index.vue";
 
 const FETCH_SUGGESTIONS = () => {
   return Promise.resolve([
@@ -11,7 +14,7 @@ const FETCH_SUGGESTIONS = () => {
   ]);
 };
 
-const _mount = (props) => {
+const _mount = (props: any) => {
   const state = reactive({
     value: "",
     fetchSuggestions: function () {
@@ -34,6 +37,13 @@ const _mount = (props) => {
 };
 
 describe("LayAutocomplete.vue", () => {
+  afterEach(() => {
+    const popperDom = document.body.querySelector(".layui-popper");
+    if (popperDom) {
+      popperDom.remove();
+    }
+  });
+
   test("test LayAutocomplete placeholder", async () => {
     const placeholder = "test LayAutocomplete placeholder";
     const wrapper = _mount({
@@ -59,5 +69,55 @@ describe("LayAutocomplete.vue", () => {
       modelValue: "123",
     });
     expect(wrapper.find(".layui-input-clear").exists()).toBe(true);
+  });
+
+  test("是否只有input可触发dropdown", async () => {
+    const wrapper = _mount({});
+
+    const inputComponent = wrapper.find(".layui-input");
+    const inputDom = wrapper.find(".layui-input input");
+    const dropDownDom = wrapper.findComponent(LayDropdown);
+
+    await inputComponent.trigger("click");
+
+    expect((dropDownDom.vm as any).$.setupState.open).toBeFalsy();
+
+    await inputDom.setValue("1");
+    await inputDom.trigger("input");
+
+    await nextTick();
+    await sleep(300);
+
+    expect((dropDownDom.vm as any).$.setupState.open).toBe(true);
+  });
+
+  test("dropdown 是否正常关闭", async () => {
+    const wrapper = _mount({});
+
+    const inputComponent = wrapper.find(".layui-input");
+    const inputDom = wrapper.find(".layui-input input");
+    const dropDownDom = wrapper.findComponent(LayDropdown);
+
+    await inputComponent.trigger("click");
+    await inputDom.setValue("1");
+    await inputDom.trigger("input");
+
+    await nextTick();
+    await sleep(300);
+
+    const selectOptions = document.body.querySelectorAll(
+      ".lay-autocomplete-content .lay-autocomplete-option"
+    );
+
+    // dropdown 数据长度
+    expect(selectOptions.length).toBe(3);
+
+    expect((dropDownDom.vm as any).$.setupState.open).toBe(true);
+    await selectOptions[1].dispatchEvent(new Event("click"));
+    expect((dropDownDom.vm as any).$.setupState.open).toBeFalsy();
+
+    expect(wrapper.findComponent(LayAutocomplete).props("modelValue")).toBe(
+      "test2"
+    );
   });
 });
