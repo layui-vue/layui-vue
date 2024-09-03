@@ -1,11 +1,19 @@
 <template>
   <div class="layui-laydate">
     <div class="layui-laydate-main laydate-main-list-0 laydate-ym-show">
-      <div class="layui-laydate-header">
+      <div class="layui-laydate-year-panel-header">
         <div class="laydate-set-ym">
-          <span class="laydate-time-text">{{
-            t("datePicker.selectYear")
-          }}</span>
+          <lay-icon
+            type="layui-icon-left"
+            @click="currentDate -= datePicker.yearPage.value ?? 15"
+          ></lay-icon>
+          <span class="laydate-time-text">
+            {{ yearRange.join(" - ") }}
+          </span>
+          <lay-icon
+            type="layui-icon-right"
+            @click="currentDate += datePicker.yearPage.value ?? 15"
+          ></lay-icon>
         </div>
       </div>
     </div>
@@ -44,28 +52,49 @@
 <script lang="ts" setup>
 import dayjs from "dayjs";
 import { useI18n } from "../../../language";
-import { computed, inject, nextTick, onMounted, ref, watch } from "vue";
+import { computed, inject, nextTick, onMounted, Ref, ref, watch } from "vue";
 import { getYears } from "../day";
 import { provideType } from "../interface";
 import PanelFoot from "./PanelFoot.vue";
+import LayIcon from "../../icon";
 
 export interface TimePanelProps {
   modelValue: number | string;
-  max?: number;
 }
 
 defineOptions({
   name: "YearPanel",
 });
 
-const props = withDefaults(defineProps<TimePanelProps>(), {
-  max: dayjs().year() + 100,
-});
-const emits = defineEmits(["update:modelValue", "ok"]);
 const datePicker: provideType = inject("datePicker") as provideType;
-const yearList = ref<number[]>(getYears());
-const unWatch = ref(false);
+const props = defineProps<TimePanelProps>();
+const emits = defineEmits(["update:modelValue", "ok"]);
+
 const Year = ref(props.modelValue);
+const currentDate: Ref<number> = ref(dayjs().year());
+if (datePicker.currentYear.value)
+  currentDate.value =
+    datePicker.currentYear.value === -1
+      ? dayjs().year()
+      : datePicker.currentYear.value;
+const yearList = computed<number[]>(() =>
+  getYears(
+    currentDate.value ?? new Date(),
+    datePicker.yearPage.value,
+    datePicker.yearStep.value
+  )
+);
+const yearRange = computed(() => [yearList.value.at(0), yearList.value.at(-1)]);
+const unWatch = ref(false);
+
+watch(
+  () => props.modelValue,
+  (newVal) => {
+    currentDate.value = Number(newVal);
+    scrollTo();
+  }
+);
+
 const { t } = useI18n();
 
 // 判断单元格是否可以点击(禁用)
@@ -112,7 +141,7 @@ const handleYearClick = (item: number) => {
 
 const ScrollRef = ref();
 onMounted(() => {
-  scrollTo();
+  nextTick(() => scrollTo());
 });
 watch(
   () => Year,
@@ -170,6 +199,7 @@ const footOnNow = () => {
     datePicker.currentMonth.value = dayjs().month();
     emits("update:modelValue", Year.value);
   }
+  currentDate.value = Year.value;
   scrollTo();
 };
 

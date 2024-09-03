@@ -1,9 +1,15 @@
 /**
  * 获取年份列表
+ * @param {Date | number} date 时间
+ * @param {Number} page 页数
+ * @param {Number} step 步进
  */
-const getYears = () => {
+const getYears = (date?: Date | number, page = 15, step = 1) => {
   const years = [];
-  for (let i = 1970; i < getYear() + 100; i++) {
+  const y = typeof date === "number" ? date : date?.getFullYear() ?? 1970;
+  console.log(y, page, step);
+  const r = (page % 2 ? page - 1 : page) / 2;
+  for (let i = y - r; i <= y + r; i += step) {
     years.push(i);
   }
   return years;
