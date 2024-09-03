@@ -24,16 +24,6 @@
         </lay-dropdown-menu>
     </template>
   </lay-dropdown>
-  <lay-dropdown>
-    <lay-button type="primary">下拉菜单</lay-button>
-    <template #content>
-        <lay-dropdown-menu>
-          <lay-dropdown-menu-item>选项一</lay-dropdown-menu-item>
-          <lay-dropdown-menu-item>选项二</lay-dropdown-menu-item>
-          <lay-dropdown-menu-item>选项三</lay-dropdown-menu-item>
-        </lay-dropdown-menu>
-    </template>
-  </lay-dropdown>
 </lay-space>
 </template>
 

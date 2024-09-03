@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { computed, ComputedRef, inject, Ref, useSlots } from "vue";
-// import { DropdownContext, dropdownInjectionKey } from "../dropdown/interface";
 import type { DropdownContext } from "../dropdown/interface";
 import { DROPDOWN_INJECTION_KEY } from "../dropdown/interface";
 import useLevel from "../menu/useLevel";
