@@ -1344,22 +1344,25 @@ const data7 = ref([{
 
 ::: table
 
-| 属性                | 描述                                                             | 类型                                                                                   | 可选值 | 默认值 |
-| ------------------- | ---------------------------------------------------------------- | -------------------------------------------------------------------------------------- | ------ | ------ |
-| v-model             | 选中值                                                           | --                                                                                     | --     | --     |
-| data                | 树数据                                                           | --                                                                                     | --     | --     |
-| multiple            | 开启多选                                                         | --                                                                                     | --     | --     |
-| allow-clear         | 允许清空                                                         | --                                                                                     | --     | --     |
-| disabled            | 禁用选择                                                         | --                                                                                     | --     | --     |
-| placeholder         | 输入提示                                                         | --                                                                                     | --     | --     |
-| checkStrictly       | 禁用级联复选                                                     | --                                                                                     | --     | --     |
-| collapseTagsTooltip | 折叠提示                                                         | --                                                                                     | --     | --     |
-| minCollapsedNum     | 超过指定标签后开启折叠                                           | --                                                                                     | --     | --     |
-| size                | 尺寸大小                                                         | --                                                                                     | --     | --     |
-| search              | 是否开启搜索                                                     | `boolean`                                                                              | false  | --     |
-| searchNodeMethod    | 对树节点进行筛选时执行的方法， 返回 false 则表示这个节点会被隐藏 | `Fcuntion(node, value)`                                                                | --     | --     |
-| lazy                | 是否懒加载子节点，需与 `load` 方法结合使用                       | false                                                                                  |        |
-| load                | 加载子树数据的方法，仅当 `lazy` 属性为 true 时生效               | function(node, resolve)，node 为当前点击的节点，resolve 为数据加载完成的回调(必须调用) |        |
+| 属性                  | 描述                                                             | 类型                                                                                     | 可选值                          | 默认值              | 版本                                                    |
+| --------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ------------------------------- | ------------------- | ------------------------------------------------------- |
+| v-model               | 选中值                                                           | `string` `number` `array`                                                                | --                              | --                  |                                                         |
+| data                  | 树数据                                                           | `Array<{}>`                                                                              | --                              | --                  |                                                         |
+| size                  | 尺寸大小                                                         | `string`                                                                                 | `lg` `md` `sm` `xs`             | `md`                |                                                         |
+| multiple              | 开启多选                                                         | `boolean`                                                                                | --                              | `false`             |                                                         |
+| allow-clear           | 允许清空                                                         | `boolean`                                                                                | --                              | `false`             |                                                         |
+| disabled              | 禁用选择                                                         | `boolean`                                                                                | --                              | `false`             |                                                         |
+| placeholder           | 输入提示                                                         | `string`                                                                                 | --                              | --                  |                                                         |
+| check-strictly        | 禁用级联复选                                                     | `boolean`                                                                                | --                              | `true`              |                                                         |
+| collapse-tags-tooltip | 折叠提示                                                         | `boolean`                                                                                | --                              | `true`              |                                                         |
+| min-collapsed-num     | 超过指定标签后开启折叠                                           | `number`                                                                                 | --                              | `3`                 |                                                         |
+| search                | 是否开启搜索                                                     | `boolean`                                                                                | --                              | `false`             |                                                         |
+| search-node-method    | 对树节点进行筛选时执行的方法， 返回 false 则表示这个节点会被隐藏 | `Fcuntion(node, value)`                                                                  | --                              | --                  |                                                         |
+| lazy                  | 是否懒加载子节点，需与 `load` 方法结合使用                       | `boolean`                                                                                | --                              | `false`             |
+| load                  | 加载子树数据的方法，仅当 `lazy` 属性为 `true` 时生效             | `function(node, resolve)`，node 为当前点击的节点，resolve 为数据加载完成的回调(必须调用) | --                              | --                  |
+| replace-fields        | 替换 data 中`id` `title` `children` 字段名                       | --                                         | --                              | `{id: "id", title: "title", children: "children"}`                  |
+| default-expand-all    | 是否展开所有 `tree` 节点                                         | `boolean`                                                                                | --                              | `false`             |
+| teleport-props        | 继承至 dropdown 组件，下拉面板 `传递` 属性                       | `object`                                                                                 | `{to: 'body', disabled: false}` | `vue teleport` 组件 | <lay-tag type="primary" size="sm">2.19.0 新增</lay-tag> |
 
 :::
 
