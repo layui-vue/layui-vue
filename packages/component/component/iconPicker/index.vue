@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import "./index.less";
+import type { DropdownTeleportProps } from "../dropdown/interface";
+
 import { computed, Ref, ref, StyleValue } from "vue";
 import { LayIconList as icons, LayIcon } from "@layui/icons-vue";
 import LayDropdown from "../dropdown/index.vue";
@@ -16,6 +18,7 @@ export interface IconPickerProps {
   allowClear?: boolean;
   contentClass?: string | Array<string | object> | object;
   contentStyle?: StyleValue;
+  teleportProps?: DropdownTeleportProps;
 }
 
 defineOptions({
@@ -155,9 +158,9 @@ const searchList = (str: string, container: any) => {
     :disabled="disabled"
     :contentClass="contentClass"
     :contentStyle="contentStyle"
+    :teleportProps="teleportProps"
     @hide="openState = false"
     @show="openState = true"
-    updateAtScroll
   >
     <div
       class="layui-border-box layui-iconpicker layui-iconpicker-split"

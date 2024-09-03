@@ -128,22 +128,23 @@ const color5 = ref("");
 
 :::
 
-::: title Icon Picker 属性
+::: title Color Picker 属性
 :::
 
 ::: table
 
-|            |          |     |   |   | 
+|   属性         |    说明      |  类型   | 默认值  | 版本  | 
 | ---------- | -------- | --- |--- |--- |
 | v-model    | 选中色   | --  |--  |--  |
 | preset | 预设颜色 | --  |--  |--  |
-| size | 尺寸 | --  |--  |--  |
-| eyeDropper | 取色器 | `boolean`  |--  |--  |
-| disabled | 禁用 | `boolean`  |--  |lfase  |
-| allowClear | 是否允许清空 | `boolean`  |--  | false |
-| simple | 是否即时改变`modelValue` | `boolean`  |--  | true |
-| contentStyle             | 内容自定义样式     | `StyleValue` | -- | -- |
-| contentClass             | 内容自定义Class    | `string` `Array<string \| object>` `object` | -- | -- |
+| size      | 尺寸大小  | `string`    | `lg` `md` `sm` `xs`   |`md`     |  |
+| eye-dropper | 取色器 | `boolean`  | `false`  |--  |
+| disabled | 禁用 | `boolean`  |`false` |  |
+| allow-clear | 是否允许清空 | `boolean`  |`false`  |  |
+| simple | 是否即时改变`modelValue` | `boolean`  |`true`  |  |
+| content-style             | 内容自定义样式     | `StyleValue` | -- | -- |
+| content-class             | 内容自定义Class    | `string` `Array<string \| object>` `object` | -- | -- |
+| teleport-props        | 继承至 dropdown 组件，下拉面板 `传递` 属性         | `object`         | `{to: 'body', disabled: false}` |  <lay-tag type="primary" size="sm">2.19.0 新增</lay-tag> |
 
 :::
 

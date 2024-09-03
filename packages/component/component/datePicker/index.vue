@@ -9,7 +9,6 @@
       :autoFitMinWidth="false"
       :contentClass="contentClass"
       :contentStyle="contentStyle"
-      updateAtScroll
     >
       <lay-input
         :name="name"
@@ -115,7 +114,7 @@ import LayInput from "../input/index.vue";
 import LayDropdown from "../dropdown/index.vue";
 import { getMonth, getYear, getDay } from "./day";
 import type { Ref } from "vue";
-import { ref, watch, reactive, provide, StyleValue, computed } from "vue";
+import { ref, watch, reactive, provide, computed } from "vue";
 import DatePanel from "./components/DatePanel.vue";
 import TimePanel from "./components/TimePanel.vue";
 import YearPanel from "./components/YearPanel.vue";
@@ -124,29 +123,7 @@ import DateRange from "./components/DateRange.vue";
 import MonthRange from "./components/MonthRange.vue";
 import TimeRange from "./components/TimeRange.vue";
 import useProps from "./index.hooks";
-
-export interface DatePickerProps {
-  name?: string;
-  modelValue?: string | number | string[];
-  type?: "date" | "datetime" | "year" | "month" | "time" | "yearmonth";
-  disabled?: boolean;
-  readonly?: boolean;
-  placeholder?: string | string[];
-  allowClear?: boolean;
-  simple?: boolean;
-  max?: string;
-  min?: string;
-  range?: boolean;
-  rangeSeparator?: string;
-  size?: "lg" | "md" | "sm" | "xs";
-  prefixIcon?: string;
-  suffixIcon?: string;
-  timestamp?: boolean;
-  format?: string;
-  defaultTime?: string | string[];
-  contentStyle?: StyleValue;
-  contentClass?: string | Array<string | object> | object;
-}
+import { DatePickerProps } from "./interface";
 
 defineOptions({
   name: "LayDatePicker",
@@ -165,6 +142,8 @@ const props = withDefaults(defineProps<DatePickerProps>(), {
   suffixIcon: "",
   timestamp: false,
   format: "",
+  yearPage: 15,
+  yearStep: 1,
 });
 
 const { size } = useProps(props);
@@ -194,6 +173,8 @@ const $emits = defineEmits([
 const currentYear = ref<number>(0);
 const currentMonth = ref<number>(0);
 const currentDay = ref<number>(0);
+const yearPage = ref<number>(props.yearPage);
+const yearStep = ref<number>(props.yearStep);
 const showPanel = ref<string>("date");
 const rangeValue = reactive({ first: "", last: "" });
 const hms = ref({
@@ -481,5 +462,7 @@ provide("datePicker", {
   min: innerMin,
   max: innerMax,
   defaultTime: props.defaultTime,
+  yearPage: yearPage,
+  yearStep: yearStep,
 });
 </script>

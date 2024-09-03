@@ -390,12 +390,12 @@ const changeText = () => {
 | position    | 显示位置 | `string`        | `top`          | `top-start` `top` `top-end` `bottom-start` `bottom` `bottom-end` `left-start` `left` `left-end` `right-start` `right` `right-end` | |
 | is-dark      | 是否为黑色主题 | `boolean` | `false` |    | |
 | disabled    | 是否禁用 | `boolean` | `false` |   | |
-| is-can-hide    | 控制是否可以隐藏,可参考`lay-slider`组件 | `boolean` | `true` |    | `2.18.0删除` |
+| is-can-hide    | 控制是否可以隐藏,可参考`lay-slider`组件 | `boolean` | `true` |    | `2.17.7删除` |
 | is-auto-show   | 控制超出文本 `...` 时自动展示， 没有 `...` 时不展示 | `boolean` | `false` |    | |
 | visible     | 控制显示/隐藏| `boolean`| `false` |  |  | |
 | enterable   | 鼠标能否进入 tooltip 中 | `boolean` | `true` | | |
-| trigger   | 触发方式 | `string` | `hover` | `click` `hover` `contextmenu` `focus` | `2.18.0类型调整为只传string` |
-| popper-class    | tooltip内容box类名 | `string` `array`  |  | | `2.18.0类型删除object` |
+| trigger   | 触发方式 | `string` | `hover` | `click` `hover` `contextmenu` `focus` | - |
+| popper-class    | tooltip内容box类名 | `string` `array`  |  | | `2.17.7类型删除object` |
 | popper-style     | tooltip内容box类名 | `string` `object` |  | |  |
 
 :::

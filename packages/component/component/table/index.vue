@@ -1018,7 +1018,6 @@ defineExpose({ getCheckData });
         <!-- 筛选 -->
         <lay-dropdown
           v-if="showToolbar('filter')"
-          updateAtScroll
           placement="bottom-end"
           :style="toolbarStyle('filter')"
         >

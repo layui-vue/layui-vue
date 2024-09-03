@@ -42,19 +42,21 @@ watch(
       if (!isExist.value) {
         isExist.value = props.modelValue || _visible.value;
       }
-      nextTick(() => {
-        innerVisible.value = props.modelValue || _visible.value;
-      });
+      innerVisible.value = props.modelValue || _visible.value;
     }
   }
 );
 
 const classes = computed(() => {
-  return ["layui-popper", "layui-anim", "layui-anim-fadein", props.popperClass];
+  return ["layui-popper", "layui-anim", props.popperClass];
 });
 
 const stylees = computed(() => {
   return [_popperStyle.value as CSSProperties, props.popperStyle] as StyleValue;
+});
+
+const teleportProps = computed(() => {
+  return props.teleportProps!;
 });
 
 const {
@@ -65,7 +67,7 @@ const {
   startAutoUpdate,
 } = usePopper(TriggerRef as Ref<HTMLElement>, ContentRef as Ref<HTMLElement>, {
   placement: props.placement,
-  middleware: [
+  middleware: props.middlewares ?? [
     offset(props.offset),
     shift(),
     flip(),
@@ -108,6 +110,7 @@ onBeforeUnmount(() => {
 
 onClickOutside(ContentRef, (event: PointerEvent) => {
   if (
+    !props.clickOutsideToClose ||
     !innerVisible.value ||
     (TriggerRef.value as HTMLElement).contains(event.target as HTMLElement)
   )
@@ -117,13 +120,13 @@ onClickOutside(ContentRef, (event: PointerEvent) => {
 });
 
 const onContentEnter = () => {
-  if (props.enterable && props.trigger === "hover") {
+  if (props.enterable && props.trigger?.includes("hover")) {
     onShow();
   }
 };
 
 const onContentLeave = () => {
-  if (props.trigger === "hover") {
+  if (props.trigger?.includes("hover")) {
     onHidden();
   }
 };
@@ -140,7 +143,11 @@ defineExpose({ show, hidden, update });
 </script>
 
 <template>
-  <Teleport to="body" v-if="isExist && hasDefaultContent">
+  <Teleport
+    :to="teleportProps.to"
+    :disabled="teleportProps.disabled"
+    v-if="isExist && hasDefaultContent"
+  >
     <div
       :class="classes"
       v-show="innerVisible"
