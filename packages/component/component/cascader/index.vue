@@ -48,17 +48,19 @@
           </template>
         </lay-input>
         <lay-tag-input
-          v-model="_displayValue"
+          v-else
+          v-model="(_displayValue as string[])"
           v-model:input-value="_searchValue"
           :placeholder="placeholder"
           :allow-clear="allowClear"
           :disabled="disabled"
           :readonly="!search"
+          :minCollapsedNum="minCollapsedNum"
+          :collapseTagsTooltip="collapseTagsTooltip"
           @update:input-value="handleInputSearch"
           @clear="onClear"
           @remove="onRemove"
           @keyup.delete.capture.prevent.stop
-          v-else
         >
           <template #suffix>
             <lay-icon
@@ -167,6 +169,8 @@ const props = withDefaults(defineProps<CascaderProps>(), {
   load: undefined,
   checkStrictly: false,
   fullpath: true,
+  minCollapsedNum: 3,
+  collapseTagsTooltip: true,
 });
 
 const _context = useCascaderPanel(props);
