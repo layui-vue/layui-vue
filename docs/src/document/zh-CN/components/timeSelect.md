@@ -33,7 +33,7 @@
 <script setup>
 import { ref } from "vue";
 
-const time1 = ref();
+const time1 = ref("08:00:00");
 </script>
 
 :::
@@ -297,7 +297,7 @@ const time5 = ref();
 
 <script setup>
 import { ref } from "vue";
-const time1 = ref();
+const time1 = ref("08:00:00");
 const time2 = ref();
 const time3 = ref();
 const time4 = ref();

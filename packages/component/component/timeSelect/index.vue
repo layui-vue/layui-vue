@@ -4,7 +4,7 @@
       v-bind="_selectBinds"
       @change="$emit('change', $event)"
       v-model="modelValue"
-      @update:model-value="$emit('update:model-value', $event)"
+      @update:model-value="$emit('update:modelValue', $event)"
       @clear="$emit('clear', $event)"
     >
       <template #prepend>
@@ -21,7 +21,7 @@
 </template>
 
 <script setup lang="ts">
-import { Ref, computed, onMounted, ref, watch } from "vue";
+import { Ref, computed, nextTick, onMounted, ref, watch } from "vue";
 import { TimeSelectProps } from "./interfaces";
 import {
   TimeSelectDateTime,
@@ -37,6 +37,7 @@ import { SelectProps } from "../select/index.vue";
 defineOptions({
   name: "LayTimeSelect",
 });
+defineEmits(["change", "update:modelValue", "clear"]);
 
 const props = withDefaults(defineProps<TimeSelectProps>(), {
   interval: "00:30:00",
@@ -126,11 +127,11 @@ const _intervalSeconds = computed(() =>
 /**
  * 显示值格式化字符串
  */
-const _format = computed(() => props.format ?? "H:i");
+const _format = ref(props.format ?? "H:i");
 /**
  * 绑定值格式化字符串
  */
-const _valueFormat = computed(() => props.valueFormat ?? "H:i");
+const _valueFormat = ref(props.valueFormat ?? "H:i");
 /**
  * 时间列表
  */
@@ -170,59 +171,65 @@ const formatter = (format: string, time: TimeSelectDateTime) => {
  * @description 通过开始时间、结束时间和时间间隔计算出 ticks，然后从迭代器中收集时间点列表
  */
 const init = () => {
-  let _targetTime = computed(() =>
-    toTime(
-      fromTime(new Date(), {
-        hour: _fromTime.value.at(-3),
-        minute: _fromTime.value.at(-2),
-        second: _fromTime.value.at(-1),
-      })
-    )
-  );
-  let _targetTimeEnd = ref(
-    toTime(
-      fromTime(new Date(), {
-        hour: _endTime.value.at(-3),
-        minute: _endTime.value.at(-2),
-        second: _endTime.value.at(-1),
-      })
-    )
-  );
-
-  /**
-   * 如果结束时间全部为 0，就跳到第二天
-   */
-  if (_endTime.value.reduce((a, b) => a + b) === 0) {
-    _targetTimeEnd.value = new Date(
-      _targetTimeEnd.value.getTime() + 24 * 60 * 60 * 1000
+  nextTick(() => {
+    let _targetTime = computed(() =>
+      toTime(
+        fromTime(new Date(), {
+          hour: _fromTime.value.at(-3),
+          minute: _fromTime.value.at(-2),
+          second: _fromTime.value.at(-1),
+        })
+      )
     );
-  }
+    let _targetTimeEnd = ref(
+      toTime(
+        fromTime(new Date(), {
+          hour: _endTime.value.at(-3),
+          minute: _endTime.value.at(-2),
+          second: _endTime.value.at(-1),
+        })
+      )
+    );
 
-  let _tick = calcInterval(
-    _targetTime.value,
-    _targetTimeEnd.value,
-    _intervalSeconds.value
-  );
-  const _i = timeInterval(_targetTime.value, _intervalSeconds.value * 1000);
-  _timeList.value = (() => {
-    const list = [];
-    if (_tick && !_withStartTime.value) {
-      _i.next();
-      _tick--;
+    /**
+     * 如果结束时间全部为 0，就跳到第二天
+     */
+    if (_endTime.value.reduce((a, b) => a + b) === 0) {
+      _targetTimeEnd.value = new Date(
+        _targetTimeEnd.value.getTime() + 24 * 60 * 60 * 1000
+      );
     }
-    if (_tick && _withEndTime.value) _tick++;
-    while (_tick-- > 0) {
-      let item = fromTime(_i.next().value);
-      if (_skip.value?.includes(formatter(_valueFormat.value, item))) continue;
-      list.push(item);
-    }
-    return list;
-  })();
+
+    let _tick = calcInterval(
+      _targetTime.value,
+      _targetTimeEnd.value,
+      _intervalSeconds.value
+    );
+    const _i = timeInterval(_targetTime.value, _intervalSeconds.value * 1000);
+    _timeList.value = (() => {
+      const list = [];
+      if (_tick && !_withStartTime.value) {
+        _i.next();
+        _tick--;
+      }
+      if (_tick && _withEndTime.value) _tick++;
+      while (_tick-- > 0) {
+        let item = fromTime(_i.next().value);
+        if (_skip.value?.includes(formatter(_valueFormat.value, item)))
+          continue;
+        list.push(item);
+      }
+      return list;
+    })();
+  });
 };
 
 watch(
   () => props.modelValue,
-  (val) => (modelValue.value = val)
+  (val) => {
+    modelValue.value = val;
+    init();
+  }
 );
 
 watch(
@@ -262,7 +269,18 @@ watch(
   }
 );
 
+watch(
+  () => [props.format, props.valueFormat],
+  ([format, valueFormat]) => {
+    _format.value = format;
+    _valueFormat.value = valueFormat;
+    init();
+  }
+);
+
 onMounted(() => {
-  init();
+  nextTick(() => {
+    init();
+  });
 });
 </script>
