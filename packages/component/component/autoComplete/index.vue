@@ -6,6 +6,7 @@
       :autoFitWidth="autoFitWidth"
       :contentClass="contentClass"
       :contentStyle="contentStyle"
+      :teleportProps="teleportProps"
     >
       <lay-input
         :name="name"
@@ -73,6 +74,7 @@
 
 <script lang="ts" setup>
 import type { InputEmits } from "../input/interface";
+import type { DropdownTeleportProps } from "../dropdown/interface";
 
 import { ref, watch, onMounted, onUnmounted, nextTick, StyleValue } from "vue";
 import LayDropdown from "../dropdown/index.vue";
@@ -96,6 +98,7 @@ export interface AutocompleteProps {
   contentStyle?: StyleValue;
   replaceFields?: { value: string };
   size?: AutocompleteSize;
+  teleportProps?: DropdownTeleportProps;
 }
 
 defineOptions({

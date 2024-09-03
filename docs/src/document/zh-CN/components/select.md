@@ -402,23 +402,24 @@ export default {
 
 ::: table
 
-| 属性                | 描述                               | 类型                                        | 可选值              | 默认值   |
-| ------------------- | ---------------------------------- | ------------------------------------------- | ------------------- | -------- |
-| v-model             | 选中值                             | `string`/`number`/`Array`                   | -                   | -        |
-| name                | 原生 name 属性                     | `string`                                    | -                   | -        |
-| placeholder         | 默认空提示语                       | `string`                                    | -                   | `请选择` |
-| allowClear            | 允许清空                           | `boolean`                                   | `true` `false`      | `false`  |
-| disabled            | 是否禁用                           | `boolean`                                   | `true` `false`      | `false`  |
-| multiple            | 是否为多选                         | `boolean`                                   | `true` `false`      | `false`  |
-| size                | 尺寸                               | `string`                                    | `lg` `md` `sm` `xs` | `md`     |
-| showSearch          | 开启搜索                           | `boolean`                                   | --                  | --       |
-| searchMethod        | 自定义搜索逻辑 (text, optionProps) | `Function`                                  | --                  | --       |
-| searchPlaceholder   | 搜索提示                           | `string`                                    | --                  | --       |
-| minCollapsedNum     | 多选模式最小折叠数量               | `number`                                    | --                  | --       |
-| collapseTagsTooltip | 多选折叠后时候悬浮展示             | `boolean`                                   | --                  | --       |
-| contentStyle        | 内容自定义样式                     | `StyleValue`                                | --                  | --       |
-| contentClass        | 内容自定义 Class                   | `string` `Array<string \| object>` `object` | --                  | --       |
-| options (items)   |  传入选项                | `Array<Object>` | --                  | --       |
+| 属性                | 描述                               | 类型                                        | 可选值              | 默认值   |版本   |
+| ------------------- | ---------------------------------- | ------------------------------------------- | ------------------- | -------- |------ |
+| v-model             | 选中值                             | `string`/`number`/`Array`                   | -                   | -        |    |
+| name                | 原生 name 属性                     | `string`                                    | -                   | -        |    |
+| placeholder         | 默认空提示语                       | `string`                                    | -                   | `请选择` |    |
+| allowClear            | 允许清空                           | `boolean`                                   | `true` `false`      | `false`  |    |
+| disabled            | 是否禁用                           | `boolean`                                   | `true` `false`      | `false`  |    |
+| multiple            | 是否为多选                         | `boolean`                                   | `true` `false`      | `false`  |    |
+| size                | 尺寸                               | `string`                                    | `lg` `md` `sm` `xs` | `md`     |    |
+| showSearch          | 开启搜索                           | `boolean`                                   | --                  | --       |    |
+| searchMethod        | 自定义搜索逻辑 (text, optionProps) | `Function`                                  | --                  | --       |    |
+| searchPlaceholder   | 搜索提示                           | `string`                                    | --                  | --       |    |
+| minCollapsedNum     | 多选模式最小折叠数量               | `number`                                    | --                  | --       |    |
+| collapseTagsTooltip | 多选折叠后时候悬浮展示             | `boolean`                                   | --                  | --       |    |
+| contentStyle        | 内容自定义样式                     | `StyleValue`                                | --                  | --       |    |
+| contentClass        | 内容自定义 Class                   | `string` `Array<string \| object>` `object` | --                  | --       |    |
+| options (items)   |  传入选项                | `Array<Object>` | --                  | --       |    |
+| teleportProps       | 继承至 dropdown 组件，下拉面板 `传递` 属性  | `object`             | `{to: 'body', disabled: false}`   |  `vue teleport` 组件  | <lay-tag type="primary" size="sm">2.19.0新增</lay-tag> |
 :::
 
 ::: title Select 事件
@@ -430,8 +431,8 @@ export default {
 | ------ | -------------- | ----------------------- |-------- |
 | change | 切换事件       | value                   |  - |
 | search | 关键词变化事件 | 用户输入的关键词 string |  -  |
-| remove-tag | 多选场景删除tag | 删除的选项value | `2.18.3`|
-| clear | 点击清空icon | - |`2.18.3`|
+| remove-tag | 多选场景删除tag | 删除的选项value | <lay-tag type="primary" size="sm">2.18.3新增</lay-tag> |
+| clear | 点击清空icon | - |<lay-tag type="primary" size="sm">2.18.3新增</lay-tag>|
 
 :::
 

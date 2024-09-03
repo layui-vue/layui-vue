@@ -527,8 +527,8 @@ export default {
 | autoFitPosition     | 是否自动调整下拉面板位置                          | `boolean` | `true`   | `true` `false`                                  | |
 | autoFitWidth        | 是否将下拉面板宽度设置为触发器宽度                | `boolean` | `false`  | `true` `false`                                  | |
 | autoFitMinWidth     | 是否将下拉面板最小宽度设置为触发器宽度            | `boolean` | `true`   | `true` `false`                                  | |
-| updateAtScroll      | 是否在容器滚动时更新下拉面板的位置                | `boolean` | `false`  | `true` `false`                                  | <lay-tag type="danger">2.19.0删除</lay-tag> |
-| autoFixPosition     | 是否在触发器或下拉面板尺寸变化时更新下拉面板位置  | `boolean` | `true`   | `true` `false`                                  | <lay-tag type="danger">2.19.0删除</lay-tag> |
+| updateAtScroll      | 是否在容器滚动时更新下拉面板的位置                | `boolean` | `false`  | `true` `false`                                  | <lay-tag type="danger" size="sm">2.19.0删除</lay-tag> |
+| autoFixPosition     | 是否在触发器或下拉面板尺寸变化时更新下拉面板位置  | `boolean` | `true`   | `true` `false`                                  | <lay-tag type="danger" size="sm">2.19.0删除</lay-tag> |
 | clickToClose        | 是否在点击触发器时关闭面板                        | `boolean` | `true`   | `true` `false`                                  | |
 | blurToClose         | 是否在触发器失去焦点时关闭面板                    | `boolean` | `true`   | `true` `false`                                  | |
 | clickOutsideToClose | 是否点击外部关闭下拉面板                          | `boolean` | `true`   | `true` `false`                                  | |
@@ -539,6 +539,7 @@ export default {
 | alignPoint |跟随鼠标|`boolean`|`false`|`true` `false`|
 | contentClass| 弹出内容的类名  | `string`| -| -|
 | contentStyle| 弹出内容的样式  | `string` | - | -|
+| teleportProps      | 继承至 dropdown 组件，下拉面板 `传递` 属性  | `object`             | `{to: 'body', disabled: false}`   |  `vue teleport` 组件  | <lay-tag type="primary" size="sm">2.19.0新增</lay-tag> |
 
 :::
 
