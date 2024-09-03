@@ -5,9 +5,7 @@ export type LaySegementedItemType = {
 };
 
 export interface LaySegmentedProps {
-  options:
-  | LaySegementedItemType[]
-  | string[];
+  options: LaySegementedItemType[] | string[];
   modelValue: string;
   size?: "lg" | "default" | "sm" | "xs";
   name?: string;

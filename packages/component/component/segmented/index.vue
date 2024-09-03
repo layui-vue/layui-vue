@@ -1,17 +1,30 @@
 <template>
-  <div class="layui-segmented" :class="[
-    disabled && `layui-segmented-disabled`,
-    `layui-segmented-size-${props.size}`,
-  ]" ref="segment">
+  <div
+    class="layui-segmented"
+    :class="[
+      disabled && `layui-segmented-disabled`,
+      `layui-segmented-size-${props.size}`,
+    ]"
+    ref="segment"
+  >
     <div class="layui-segmented-container">
       <div
-           class="layui-segmented-item"
-           v-for="(item, i) in items"
-           :key="i"
-           @click.prevent.stop="clickItem($event, item.label, i)">
-        <input class="layui-segmented-item-radio" v-if="props.name" type="radio" :name="props.name"
-               :value="item?.value ?? item.label">
-        <div class="layui-segmented-item-slot" v-if="item.slot || $slots.default">
+        class="layui-segmented-item"
+        v-for="(item, i) in items"
+        :key="i"
+        @click.prevent.stop="clickItem($event, item.label, i)"
+      >
+        <input
+          class="layui-segmented-item-radio"
+          v-if="props.name"
+          type="radio"
+          :name="props.name"
+          :value="item?.value ?? item.label"
+        />
+        <div
+          class="layui-segmented-item-slot"
+          v-if="item.slot || $slots.default"
+        >
           <slot :name="item.slot || 'default'" v-bind="item"></slot>
         </div>
         <span v-else class="layui-segmented-item-label">{{ item.label }}</span>
@@ -22,7 +35,15 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, Ref, watch, onMounted, InputHTMLAttributes, ReservedProps } from "vue";
+import {
+  ref,
+  computed,
+  Ref,
+  watch,
+  onMounted,
+  InputHTMLAttributes,
+  ReservedProps,
+} from "vue";
 import { LaySegmentedProps } from "./interfaces";
 
 defineOptions({
@@ -43,11 +64,13 @@ const props = withDefaults(defineProps<LaySegmentedProps>(), {
 const segmentIndicator: Ref<HTMLElement | undefined> = ref();
 const segment: Ref<HTMLElement | undefined> = ref();
 const disabled = ref(props.disabled);
-const items = ref((() => {
-  return props.options.map(a => {
-    return typeof a === "string" ? { label: a } : a;
-  });
-})());
+const items = ref(
+  (() => {
+    return props.options.map((a) => {
+      return typeof a === "string" ? { label: a } : a;
+    });
+  })()
+);
 const currentItem = computed(() => {
   return items.value.find((a) => a.label === props.modelValue);
 });
@@ -74,10 +97,16 @@ const setItem = (target: HTMLElement) => {
 const clickItem = (ev: Event, label: string, index: number) => {
   if (disabled.value) return;
   if (props.name) {
-    (segment.value?.querySelectorAll('.layui-segmented-item-radio').forEach(radio => {
-      (radio as HTMLInputElement).checked = false;
-    }));
-    (segment.value?.querySelectorAll(`.layui-segmented-item-radio`).item(index) as HTMLInputElement).checked = true;
+    segment.value
+      ?.querySelectorAll(".layui-segmented-item-radio")
+      .forEach((radio) => {
+        (radio as HTMLInputElement).checked = false;
+      });
+    (
+      segment.value
+        ?.querySelectorAll(`.layui-segmented-item-radio`)
+        .item(index) as HTMLInputElement
+    ).checked = true;
   }
   let target = ev.target;
   setItem(target as HTMLElement);
@@ -106,12 +135,13 @@ watch(
 
 watch(
   () => props.disabled,
-  (val) => disabled.value = val
+  (val) => (disabled.value = val)
 );
 
 watch(
   () => props.options,
-  (val) => items.value = val.map(i => typeof i === "string" ? { label: i } : i),
+  (val) =>
+    (items.value = val.map((i) => (typeof i === "string" ? { label: i } : i)))
 );
 
 onMounted(() => {
@@ -119,7 +149,7 @@ onMounted(() => {
 });
 
 defineExpose({
-  currentItem
+  currentItem,
 });
 </script>
 
