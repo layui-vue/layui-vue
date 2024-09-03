@@ -15,11 +15,16 @@ const fromTime = (time: Date, mixin?: TimeSelectDateTime) => {
     hour: time.getHours(),
     minute: time.getMinutes(),
     second: time.getSeconds(),
-    ...mixin
+    ...mixin,
   };
 };
 
-const toTime = (time: TimeSelectDateTime) => new Date(`${time.year ?? 1970}-${time.month ?? 1}-${time.day ?? 1} ${time.hour ?? 0}:${time.minute ?? 0}:${time.second ?? 0}`);
+const toTime = (time: TimeSelectDateTime) =>
+  new Date(
+    `${time.year ?? 1970}-${time.month ?? 1}-${time.day ?? 1} ${
+      time.hour ?? 0
+    }:${time.minute ?? 0}:${time.second ?? 0}`
+  );
 
 const timeInterval = function* (time: Date, interval: number) {
   while (true) {
@@ -31,6 +36,6 @@ const timeInterval = function* (time: Date, interval: number) {
 const calcInterval = (time: Date, endTime: Date, interval: number) => {
   const diff = endTime.getTime() - time.getTime();
   return Math.floor(diff / interval / 1000);
-}
+};
 
 export { fromTime, toTime, timeInterval, calcInterval, TimeSelectDateTime };

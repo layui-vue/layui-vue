@@ -32,7 +32,7 @@ import {
 } from "./useTime";
 import LaySelect from "../select/index";
 import LaySelectOption from "../selectOption/index";
-import { SelectProps } from "component/select/index.vue";
+import { SelectProps } from "../select/index.vue";
 
 defineOptions({
   name: "LayTimeSelect",
