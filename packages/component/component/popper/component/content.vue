@@ -42,9 +42,7 @@ watch(
       if (!isExist.value) {
         isExist.value = props.modelValue || _visible.value;
       }
-      nextTick(() => {
-        innerVisible.value = props.modelValue || _visible.value;
-      });
+      innerVisible.value = props.modelValue || _visible.value;
     }
   }
 );
