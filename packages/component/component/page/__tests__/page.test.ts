@@ -1,6 +1,8 @@
 import { mount, shallowMount, config } from "@vue/test-utils";
-import LayPage from "../index.vue";
 import { nextTick } from "vue";
+import { sleep } from "../../../test-utils";
+
+import LayPage from "../index.vue";
 import LayIcon from "../../icon";
 import { describe, expect, test } from "vitest";
 import LayDropdown from "../../dropdown";
@@ -10,6 +12,7 @@ import LaySelectOption from "../../selectOption";
 import LaySelect from "../../select";
 import LayButton from "../../button";
 import LayInput from "../../input";
+
 config.global.components = {
   "lay-select": LaySelect,
   "lay-icon": LayIcon,
@@ -26,6 +29,7 @@ const total = 100;
 const limit = 5;
 const changeTotal = 102;
 const changeLimit = 10;
+
 describe("LayPage.vue", () => {
   test("render modelValue test", async () => {
     const wrapper = mount(LayPage, {
@@ -154,6 +158,7 @@ describe("LayPage.vue", () => {
         ".layui-page-limits  .layui-select .layui-input .layui-input-wrapper"
       )
       .trigger("click");
+    await sleep(200);
 
     const options = wrapper.findAllComponents(LaySelectOption);
     options[3]?.trigger("click");
@@ -279,13 +284,13 @@ describe("LayPage.vue", () => {
     });
     await wrapper.find(".layui-pager-jumper input").setValue(1000);
     await wrapper.find(".layui-pager-jumper input").trigger("blur");
-    let currentPage = wrapper.vm.currentPage;
+    const currentPage = wrapper.vm.currentPage;
 
     expect(currentPage).toBe(Math.ceil(total / 10));
 
     await wrapper.find(".layui-pager-jumper input").setValue(-1);
     await wrapper.find(".layui-pager-jumper input").trigger("blur");
-    let newVal = wrapper.vm.currentPage;
+    const newVal = wrapper.vm.currentPage;
 
     expect(newVal).toBe(1);
     wrapper.unmount();
