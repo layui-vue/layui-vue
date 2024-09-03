@@ -1,5 +1,7 @@
 <script lang="ts" setup>
 import "./index.less";
+import type { DropdownTeleportProps } from "../dropdown/interface";
+
 import LayDropdown from "../dropdown/index.vue";
 import { ref, computed, watch, onMounted, StyleValue, nextTick } from "vue";
 import { useEyeDropper, useDebounceFn } from "@vueuse/core";
@@ -19,6 +21,7 @@ export interface ColorPicker {
   size?: string;
   allowClear?: boolean;
   simple?: boolean;
+  teleportProps?: DropdownTeleportProps;
 }
 
 defineOptions({
@@ -489,6 +492,7 @@ function hex2rgba(s: any) {
     :disabled="disabled"
     :contentClass="contentClass"
     :contentStyle="contentStyle"
+    :teleportProps="teleportProps"
     @hide="openState = false"
     @show="openState = true"
   >
