@@ -91,7 +91,7 @@ export default {
 ::: demo 通过 page 属性开启图标列表的分页展示
 
 <template>
-  <lay-icon-picker v-model="icon" type="layui-icon-face-smile" page></lay-icon-picker>
+  <lay-icon-picker v-model="icon" page></lay-icon-picker>
 </template>
 
 <script>
@@ -117,7 +117,7 @@ export default {
 ::: demo 通过 showSearch 开启图标列表的搜索功能
 
 <template>
-  <lay-icon-picker v-model="icon" type="layui-icon-face-smile" page showSearch></lay-icon-picker>
+  <lay-icon-picker v-model="icon" page showSearch></lay-icon-picker>
 </template>
 
 <script>
