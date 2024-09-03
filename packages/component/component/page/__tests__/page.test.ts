@@ -158,7 +158,7 @@ describe("LayPage.vue", () => {
         ".layui-page-limits  .layui-select .layui-input .layui-input-wrapper"
       )
       .trigger("click");
-    await sleep(200);
+    await sleep();
 
     const options = wrapper.findAllComponents(LaySelectOption);
     options[3]?.trigger("click");

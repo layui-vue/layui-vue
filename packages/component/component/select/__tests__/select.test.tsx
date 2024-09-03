@@ -132,7 +132,7 @@ describe("LaySelect", () => {
 
     await inputComponent.trigger("click");
     await nextTick();
-    await sleep(300);
+    await sleep();
     expect((dropDownDom.vm as any).open).toBe(true);
 
     const selectOptions = document.body.querySelectorAll(
@@ -144,7 +144,7 @@ describe("LaySelect", () => {
 
     await selectOptions[1].dispatchEvent(new Event("click"));
 
-    await sleep(100);
+    await sleep();
 
     expect((dropDownDom.vm as any).open).toBeFalsy();
     expect((wrapper.findComponent(".layui-select") as any).vm.modelValue).toBe(
@@ -178,7 +178,7 @@ describe("LaySelect", () => {
 
     await inputComponent.trigger("click");
     await nextTick();
-    await sleep(200);
+    await sleep();
     expect((dropDownDom.vm as any).open).toBe(true);
 
     const selectOptions = document.body.querySelectorAll(
@@ -190,7 +190,7 @@ describe("LaySelect", () => {
 
     await selectOptions[1].dispatchEvent(new Event("click"));
 
-    await sleep(100);
+    await sleep();
     // 多选不关闭dropdown
     expect((dropDownDom.vm as any).open).toBe(true);
 
@@ -201,7 +201,7 @@ describe("LaySelect", () => {
 
     // 二次点击input关闭dropdown
     await inputComponent.trigger("click");
-    await sleep(200);
+    await sleep();
 
     expect((dropDownDom.vm as any).open).toBeFalsy();
   });

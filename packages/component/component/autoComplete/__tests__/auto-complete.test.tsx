@@ -86,7 +86,7 @@ describe("LayAutocomplete.vue", () => {
     await inputDom.trigger("input");
 
     await nextTick();
-    await sleep(300);
+    await sleep();
 
     expect((dropDownDom.vm as any).$.setupState.open).toBe(true);
   });
@@ -103,7 +103,7 @@ describe("LayAutocomplete.vue", () => {
     await inputDom.trigger("input");
 
     await nextTick();
-    await sleep(300);
+    await sleep();
 
     const selectOptions = document.body.querySelectorAll(
       ".lay-autocomplete-content .lay-autocomplete-option"

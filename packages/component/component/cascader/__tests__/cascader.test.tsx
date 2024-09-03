@@ -118,12 +118,12 @@ describe("LayCascader", () => {
     const dropdown = wrapper.findComponent(LayDropdown);
     component.find(".layui-input").trigger("click");
     await nextTick();
-    await sleep(300);
+    await sleep();
     expect(dropdown).toBeDefined();
     expect((dropdown.vm as any).open).toBe(true);
     document.dispatchEvent(new Event("click"));
     await nextTick();
-    await sleep(300);
+    await sleep();
     expect((dropdown.vm as any).open).toBe(false);
   });
 });
