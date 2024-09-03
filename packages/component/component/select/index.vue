@@ -46,6 +46,8 @@ export interface SelectEmits {
   (e: "update:modelValue", value: string | number | object): void;
   (e: "change", value: string | number | object): void;
   (e: "search", value: string): void;
+  (e: "remove-tag", value: string | number | object): void;
+  (e: "clear"): void;
 }
 
 defineOptions({
@@ -124,7 +126,8 @@ const allOptions = computed(() => {
 
 const handleRemove = (value: any) => {
   if (Array.isArray(selectedValue.value)) {
-    selectedValue.value = selectedValue.value.filter((item) => item != value);
+    selectedValue.value = selectedValue.value.filter((item) => item !== value);
+    emits("remove-tag", value);
   }
 };
 
@@ -203,6 +206,8 @@ const handleClear = () => {
   } else {
     selectedValue.value = "";
   }
+
+  emits("clear");
 };
 
 const handleHide = () => {

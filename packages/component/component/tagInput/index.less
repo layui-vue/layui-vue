@@ -111,7 +111,7 @@
         &:disabled {
           position: relative;
           background: transparent;
-          z-index: -2;
+          z-index: 1;
         }
       }
     
@@ -126,12 +126,14 @@
         left: 0;
         right: 0;
         bottom: 0;
-        z-index: -1;
+        z-index: 2;
       }
 
       .layui-tag {
+        position: relative;
         margin-top: @@tag-margin-top;
         margin-bottom: @@tag-margin-bottom;
+        z-index: 3;
       }
 
     }
@@ -150,8 +152,7 @@
   padding: 0 10px;
 }
 
-.layui-tag-input:not(.layui-tag-input-disabled):hover,
-.layui-tag-input:not(.layui-tag-input-disabled):focus-within {
+.layui-tag-input:not(.layui-tag-input-disabled):hover{
   border-color: #d2d2d2!important;
   .layui-tag-input-clear{
     display: flex;

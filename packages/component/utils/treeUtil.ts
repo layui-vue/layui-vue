@@ -9,13 +9,13 @@ import { ReplaceFieldsOptions } from "../component/tree/tree.type";
  */
 export function getNode(
   root: any,
-  id: string,
+  id: string | number,
   replaceFields: ReplaceFieldsOptions
 ) {
   const { id: idKey, children } = replaceFields;
   let resultNode = null;
   findNode(root, id);
-  function findNode(root: any, id: string) {
+  function findNode(root: any, id: string | number) {
     if (!!root) {
       const type = Object.prototype.toString.call(root);
       if (type === "[object Object]") {

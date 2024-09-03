@@ -109,7 +109,7 @@ const slots = useSlots();
 const hasTitleSlot = computed(() => slots.title != null);
 
 watch(
-  [selectedValue, checkedKeys],
+  [selectedValue, checkedKeys, treeData],
   () => {
     const { id, title } = _replaceFields.value;
     if (props.multiple) {
@@ -150,6 +150,7 @@ watch(
         selectedValue.value,
         _replaceFields.value
       );
+
       if (node) {
         singleValue.value = node[title];
       } else {

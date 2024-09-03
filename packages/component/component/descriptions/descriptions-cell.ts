@@ -1,4 +1,4 @@
-import type { PropType, VNode } from "vue";
+import type { PropType } from "vue";
 import type { DescriptionsContext } from "./descriptions";
 import type { DescriptionsItemsNode } from "../descriptionsItem/interface";
 
@@ -22,15 +22,20 @@ export default defineComponent({
       default: "",
     },
   },
-  setup(props) {
-    const { border, direction } = inject(
+  setup() {
+    const descriptionsContext = inject(
       DESCRIPTIONS_INJECTION_KEY,
       {} as DescriptionsContext
     );
 
-    const itemProps = props.cell.props || {};
-    const label = props.cell.children?.label?.() || itemProps.label;
-    const content = props.cell.children?.default?.();
+    return { descriptionsContext };
+  },
+  render() {
+    const { border, direction } = this.descriptionsContext;
+    const itemProps = this.cell.props || {};
+    const label = this.cell.children?.label?.() || itemProps.label;
+    const content = this.cell.children?.default?.();
+
     const span = itemProps.span;
     const align = itemProps.align ? `is-${itemProps.align}` : "";
     const labelAlign = itemProps.labelAlign ? `is-${itemProps.labelAlign}` : "";
@@ -40,65 +45,61 @@ export default defineComponent({
     const labelClasses = itemProps.labelClass;
 
     const isVertical = direction === "vertical";
-    const isLabel = props.type === "label";
+    const isLabel = this.type === "label";
 
-    return () => {
-      switch (props.type) {
-        case "label":
-        case "content":
-          return h(
-            props.tag,
-            {
-              style: isLabel ? labelStyle : style,
-              class: [
-                "layui-descriptions-cell",
-                `layui-descriptions-${props.type}`,
-                isLabel
-                  ? `${labelClasses} ${labelAlign}`
-                  : `${classes} ${align}`,
-                ,
-                {
-                  [`is-border-${props.type}`]: border,
-                  [`is-vertical-${props.type}`]: isVertical,
-                },
-              ],
-              colSpan: isVertical ? span : isLabel ? 1 : span! * 2 - 1,
-            },
-            isLabel ? label : content
-          );
-        default:
-          return h(
-            "td",
-            {
-              class: ["layui-descriptions-cell"],
-              colSpan: span,
-            },
-            [
-              !isNil(label)
-                ? h(
-                    "span",
-                    {
-                      style: labelStyle,
-                      class: [
-                        "layui-descriptions-label",
-                        labelClasses,
-                        labelAlign,
-                      ],
-                    },
-                    label
-                  )
-                : undefined,
-              h(
-                "span",
-                {
-                  style: style,
-                  class: ["layui-descriptions-content", classes, align],
-                },
-                content
-              ),
-            ]
-          );
-      }
-    };
+    switch (this.type) {
+      case "label":
+      case "content":
+        return h(
+          this.tag,
+          {
+            style: isLabel ? labelStyle : style,
+            class: [
+              "layui-descriptions-cell",
+              `layui-descriptions-${this.type}`,
+              isLabel ? `${labelClasses} ${labelAlign}` : `${classes} ${align}`,
+              ,
+              {
+                [`is-border-${this.type}`]: border,
+                [`is-vertical-${this.type}`]: isVertical,
+              },
+            ],
+            colSpan: isVertical ? span : isLabel ? 1 : span! * 2 - 1,
+          },
+          isLabel ? label : content
+        );
+      default:
+        return h(
+          "td",
+          {
+            class: ["layui-descriptions-cell"],
+            colSpan: span,
+          },
+          [
+            !isNil(label)
+              ? h(
+                  "span",
+                  {
+                    style: labelStyle,
+                    class: [
+                      "layui-descriptions-label",
+                      labelClasses,
+                      labelAlign,
+                    ],
+                  },
+                  label
+                )
+              : undefined,
+            h(
+              "span",
+              {
+                style: style,
+                class: ["layui-descriptions-content", classes, align],
+              },
+              content
+            ),
+          ]
+        );
+    }
   },
 });
