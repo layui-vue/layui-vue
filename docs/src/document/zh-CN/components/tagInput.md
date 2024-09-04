@@ -47,7 +47,9 @@ export default {
 ::: demo 使用 `max` 控制最大标签数量。  
 
 <template>
-  <lay-tag-input v-model="data2" v-model:inputValue="inputValue2" :max="3" placeholder="最多输入3个" style="width:320px"></lay-tag-input>
+  <div>modelValue: {{ data2 }}</div>
+  <br>
+  <lay-tag-input v-model="data2" v-model:inputValue="inputValue2" :max="3" collapseTagsTooltip placeholder="最多输入3个" style="width:320px"></lay-tag-input>
 </template>
 
 <script>
@@ -55,7 +57,7 @@ import { ref,watch } from 'vue'
 
 export default {
   setup() {
-    const data2 = ref([]);
+    const data2 = ref(["1", "2", "3", "4"]);
     const inputValue2 = ref("");
 
     return {
