@@ -1,7 +1,6 @@
 import { mount } from "@vue/test-utils";
 import { describe, expect, test } from "vitest";
 import { nextTick } from "vue";
-import { sleep } from "../../../test-utils";
 
 import LayTagInput from "../index.vue";
 
@@ -46,9 +45,50 @@ describe("LayTagInput", () => {
     });
 
     const component = wrapper.findComponent(LayTagInput);
+    const inputInstance = component.find("input");
     expect(component.exists()).toBe(true);
+    expect(inputInstance.exists()).toBe(true);
     await nextTick();
-    expect((component.vm as any).normalizedTags.length).toBe(2);
+    expect((component.vm as any).normalizedTags.length).toBe(3);
+    wrapper.setProps({
+      inputValue: "D",
+    });
+    await nextTick();
+    inputInstance.trigger("keydown.enter");
+    await nextTick();
+    expect((component.vm as any).tagData.length).toBe(3);
+    expect(component.emitted("exceed")![0].at(0)).toBe("D");
+  });
+
+  test("checkInputValue 按条件创建标签", async () => {
+    const wrapper = mount(LayTagInput, {
+      props: {
+        modelValue: ["标签1", "标签2"],
+        inputValue: "标签3",
+        checkInputValue: (value: string) => value.search(/^标签(.+)/g) > -1,
+      },
+    });
+
+    const component = wrapper.findComponent(LayTagInput);
+    const inputInstance = component.find("input");
+    expect(component.exists()).toBe(true);
+    expect(inputInstance.exists()).toBe(true);
+    await nextTick();
+    inputInstance.trigger("keydown.enter");
+    await nextTick();
+    expect(
+      (component.emitted("update:modelValue")![0][0] as Array<string>)!.length
+    ).toBe(3);
+    wrapper.setProps({
+      inputValue: "Hello!",
+    });
+    await nextTick();
+    inputInstance.trigger("keydown.enter");
+    await nextTick();
+    expect(
+      (component.emitted("update:modelValue")![0][0] as Array<string>)!.length
+    ).toBe(3);
+    expect(component.emitted("checkInputValueFail")![0].at(0)).toBe("Hello!");
   });
 
   test("addTag 增加Tag", async () => {
@@ -90,7 +130,9 @@ describe("LayTagInput", () => {
     expect(component.findAll(".layui-tag-text").length).toBe(2);
     component.find(".layui-tag-close-icon").trigger("click");
     await nextTick();
-    expect(component.emitted("update:modelValue")?.length).toBe(1);
+    expect(
+      (component.emitted("update:modelValue")![0][0] as Array<string>)!.length
+    ).toBe(1);
   });
 
   test("deleteInputValue 删除输入值但不删除Tag", async () => {

@@ -17,6 +17,7 @@ import { LayIcon } from "@layui/icons-vue";
 import { TagInputSize } from "./inerface";
 
 import { useTreeSelectProvide } from "../treeSelect/useTreeSelect";
+import { isArray } from "../../utils";
 
 export interface TagData {
   value?: string | number;
@@ -38,6 +39,7 @@ export interface TagInputProps {
   size?: TagInputSize;
   tagProps?: TagProps;
   disabledInput?: boolean;
+  checkInputValue?: (value: string) => boolean;
 }
 
 defineOptions({
@@ -48,10 +50,13 @@ const props = withDefaults(defineProps<TagInputProps>(), {
   placeholder: undefined,
   minCollapsedNum: 0,
   size: "md",
+  checkInputValue: (value: string) => true,
 });
 
 const emit = defineEmits([
   "change",
+  "exceed",
+  "checkInputValueFail",
   "update:modelValue",
   "update:inputValue",
   "inputValueChange",
@@ -71,15 +76,7 @@ const isComposing = ref(false);
 const inputStyle = reactive({ width: "15px" });
 const _tagProps = reactive(props.tagProps ?? {});
 const tagProps = reactiveOmit(_tagProps, "closable", "size", "disabled");
-const inputValue = computed({
-  get() {
-    return props.inputValue;
-  },
-  set(val) {
-    emit("update:inputValue", val);
-    emit("inputValueChange", val);
-  },
-});
+const inputValue = ref(props.inputValue ?? "");
 
 const tagData = ref();
 
@@ -91,10 +88,7 @@ const flushOut = (val: any) => {
 watch(
   () => props.modelValue,
   (val) => {
-    let limit;
-
     if (props.max) {
-      limit = Number(props.max);
       if (props.minCollapsedNum) {
         if (props.minCollapsedNum > props.max) {
           console.group("LayTagInput: minCollapsedNum > max");
@@ -109,9 +103,24 @@ watch(
       }
     }
 
-    tagData.value = val?.slice(0, limit);
+    tagData.value = val;
   },
   { immediate: true }
+);
+
+watch(
+  () => inputValue.value,
+  (val) => {
+    emit("update:inputValue", val);
+    emit("inputValueChange", val);
+  }
+);
+
+watch(
+  () => props.inputValue,
+  (val) => {
+    inputValue.value = val ?? "";
+  }
 );
 
 const normalizedTags = computed(() => {
@@ -156,16 +165,21 @@ const handleEnter = (e: KeyboardEvent) => {
   e.preventDefault();
   const valueStr = inputValue.value ? String(inputValue.value).trim() : "";
   if (!valueStr || !tagData.value) return;
-  const isLimit = props.max && tagData.value?.length >= props.max;
-  if (!isLimit) {
-    tagData.value =
-      tagData.value instanceof Array
-        ? tagData.value.concat(String(valueStr))
-        : [valueStr];
-    inputValue.value = "";
-    flushOut(tagData.value);
-  }
-  emit("pressEnter", inputValue.value, e);
+  props.max && tagData.value?.length >= props.max
+    ? emit("exceed", valueStr, e)
+    : (() => {
+        if (!props.checkInputValue || props.checkInputValue(valueStr)) {
+          tagData.value = isArray(tagData.value)
+            ? tagData.value.concat(String(valueStr))
+            : [valueStr];
+          inputValue.value = "";
+          oldInputValue.value = "";
+          flushOut(tagData.value);
+        } else {
+          emit("checkInputValueFail", valueStr, e);
+        }
+      })();
+  emit("pressEnter", valueStr, e);
 };
 
 const handleBackspaceKeyUp = (e: KeyboardEvent) => {
