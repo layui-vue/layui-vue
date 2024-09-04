@@ -81,38 +81,41 @@ const inputValue = computed({
   },
 });
 
-const tagData = computed({
-  get() {
-    return props.modelValue;
-  },
-  set(val) {
-    emit("update:modelValue", val);
-    emit("change", val);
-  },
-});
+const tagData = ref();
 
-const normalizedTags = computed(() => {
-  let limit;
+const flushOut = (val: any) => {
+  emit("update:modelValue", val);
+  emit("change", val);
+};
 
-  if (props.max) {
-    limit = Number(props.max);
-    if (props.minCollapsedNum) {
-      if (props.minCollapsedNum > props.max) {
-        console.group("LayTagInput: minCollapsedNum > max");
-        console.warn(
-          `props.minCollapsedNum(${props.minCollapsedNum}) > props.max(${props.max})`
-        );
-        console.warn(
-          `Tips: props.max should be greater than or equals to props.minCollapsedNum.`
-        );
-        console.groupEnd();
+watch(
+  () => props.modelValue,
+  (val) => {
+    let limit;
+
+    if (props.max) {
+      limit = Number(props.max);
+      if (props.minCollapsedNum) {
+        if (props.minCollapsedNum > props.max) {
+          console.group("LayTagInput: minCollapsedNum > max");
+          console.warn(
+            `props.minCollapsedNum(${props.minCollapsedNum}) > props.max(${props.max})`
+          );
+          console.warn(
+            `Tips: props.max should be greater than or equals to props.minCollapsedNum.`
+          );
+          console.groupEnd();
+        }
       }
     }
-    if (tagData?.value?.length ?? 0 > limit)
-      emit("update:modelValue", tagData.value?.slice(0, limit));
-  }
 
-  return normalizedTagData((tagData.value ?? []).slice(0, limit));
+    tagData.value = val?.slice(0, limit);
+  },
+  { immediate: true }
+);
+
+const normalizedTags = computed(() => {
+  return normalizedTagData(tagData.value ?? []);
 });
 
 const computedTagData = computed(() => {
@@ -160,6 +163,7 @@ const handleEnter = (e: KeyboardEvent) => {
         ? tagData.value.concat(String(valueStr))
         : [valueStr];
     inputValue.value = "";
+    flushOut(tagData.value);
   }
   emit("pressEnter", inputValue.value, e);
 };
@@ -190,6 +194,7 @@ const handleClearClick = (e: MouseEvent) => {
     return;
   }
   tagData.value = [];
+  flushOut(tagData.value);
   emit("clear", e);
 };
 
@@ -208,6 +213,7 @@ const handleClose = (
   const arr = [...tagData.value];
   arr.splice(index, 1);
   tagData.value = arr;
+  flushOut(tagData.value);
   emit("remove", value, e);
 };
 
@@ -266,8 +272,8 @@ watch(
 );
 
 const moreCount = computed(() => {
-  if (tagData.value && computedTagData.value) {
-    return tagData.value.length - computedTagData.value.length;
+  if (normalizedTags.value && computedTagData.value) {
+    return normalizedTags.value.length - computedTagData.value.length;
   }
   return "";
 });
