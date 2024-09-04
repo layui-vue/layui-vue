@@ -269,10 +269,31 @@ export default {
       }
     );
 
+    function stringSort(n, m) {
+      if (typeof n === "string" && typeof m === "string") {
+        var a = n.split("").map((a) => a.charCodeAt());
+        var b = m.split("").map((a) => a.charCodeAt());
+        try {
+          a.forEach((a, i) => {
+            if (a - b[i] > 0) {
+              throw new Error(1);
+            } else if (a - b[i] < 0) {
+              throw new Error(-1);
+            }
+          });
+        } catch (e) {
+          return e.message;
+        }
+        return 0;
+      }
+      return n > m ? 1 : n == m ? 0 : -1;
+    }
+
     menu.forEach((m) => {
       m.children.forEach((c) => {
         menus.push(c);
       });
+      m.children.sort((a, b) => stringSort(a.subTitle, b.subTitle));
     });
 
     watch(
