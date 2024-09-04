@@ -1,14 +1,15 @@
 <script setup lang="ts">
 import type { Ref, StyleValue, CSSProperties } from "vue";
-import type { ContentProps } from "../types";
+import { type ContentProps, CONTENT_INJECTION_KEY } from "../types";
 
 import {
   ref,
   computed,
+  provide,
   inject,
   watch,
-  nextTick,
   useSlots,
+  onMounted,
   onBeforeUnmount,
 } from "vue";
 import { onClickOutside } from "@vueuse/core";
@@ -26,14 +27,19 @@ const props = withDefaults(defineProps<ContentProps>(), {});
 const ContentRef = ref<HTMLElement | null>(null);
 const ArrowRef = ref<HTMLDivElement | null>(null);
 
+const subContents = ref<Array<Ref<HTMLElement>>>([]);
+
 const { TriggerRef, onShow, onHidden } = inject(POPPER_INJECTION_KEY)!;
+const { collectorSubContent } = inject(CONTENT_INJECTION_KEY, {});
 
 const isExist = ref(props.modelValue);
 const _visible = ref(false);
 const innerVisible = ref(props.modelValue);
 const slots = useSlots();
 // content slot中是否有内容
-const hasDefaultContent = slots.default!()[0].children?.length;
+const hasDefaultContent = computed(() => {
+  return slots.default!()[0].children?.length;
+});
 
 watch(
   () => [props.modelValue, _visible.value],
@@ -116,6 +122,12 @@ onClickOutside(ContentRef, (event: PointerEvent) => {
   )
     return;
 
+  for (const item of subContents.value) {
+    if (item.value?.contains(event.target as HTMLElement)) {
+      return;
+    }
+  }
+
   onHidden();
 });
 
@@ -138,6 +150,18 @@ const show = () => {
 const hidden = () => {
   _visible.value = false;
 };
+
+onMounted(() => {
+  collectorSubContent?.(ContentRef as Ref<HTMLElement>);
+});
+
+const _collectorSubContent = (sub: Ref<HTMLElement>) => {
+  subContents.value.push(sub);
+};
+
+provide(CONTENT_INJECTION_KEY, {
+  collectorSubContent: _collectorSubContent,
+});
 
 defineExpose({ show, hidden, update });
 </script>

@@ -1,4 +1,10 @@
-import type { ComponentPublicInstance, StyleValue, TeleportProps } from "vue";
+import type {
+  Ref,
+  ComponentPublicInstance,
+  StyleValue,
+  TeleportProps,
+  InjectionKey,
+} from "vue";
 
 import type { Placement, OffsetOptions, Middlewares } from "./usePopper/index";
 
@@ -39,3 +45,10 @@ export type ContentComponentInstance = ComponentPublicInstance<{
   hidden: () => void;
   update: () => void;
 }>;
+
+export type ContentContext = {
+  collectorSubContent?: (sub: Ref<HTMLElement>) => void;
+};
+
+export const CONTENT_INJECTION_KEY: InjectionKey<ContentContext> =
+  Symbol("LayPopperContent");
