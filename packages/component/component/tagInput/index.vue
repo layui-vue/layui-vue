@@ -95,7 +95,7 @@ const normalizedTags = computed(() => {
   let limit;
 
   if (props.max) {
-    limit = props.max;
+    limit = Number(props.max);
     if (props.minCollapsedNum) {
       if (props.minCollapsedNum > props.max) {
         console.group("LayTagInput: minCollapsedNum > max");
@@ -108,6 +108,8 @@ const normalizedTags = computed(() => {
         console.groupEnd();
       }
     }
+    if (tagData?.value?.length ?? 0 > limit)
+      emit("update:modelValue", tagData.value?.slice(0, limit));
   }
 
   return normalizedTagData((tagData.value ?? []).slice(0, limit));
@@ -123,7 +125,8 @@ const computedTagData = computed(() => {
 const collapsedTagData = computed(() => {
   if (!normalizedTags.value) return;
   return props.minCollapsedNum &&
-    normalizedTags.value?.length > props.minCollapsedNum
+    normalizedTags.value?.length >
+      (computedTagData.value?.length ?? 0) - props.minCollapsedNum
     ? normalizedTags.value?.slice(props.minCollapsedNum)
     : [];
 });
@@ -307,6 +310,7 @@ defineExpose({
       </template>
       <template v-if="computedTagData?.length != tagData?.length">
         <LayToopTip
+          v-if="collapsedTagData?.length"
           :isDark="false"
           trigger="hover"
           popperStyle="padding:6px"
