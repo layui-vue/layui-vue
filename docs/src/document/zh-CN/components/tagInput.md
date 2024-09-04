@@ -44,25 +44,31 @@ export default {
 ::: title 数量限制
 :::
 
-::: demo 使用 `max` 控制最大标签数量。
+::: demo 使用 `max` 控制最大标签数量。如果当前标签的数量超过 `max` 则会触发 `exceed` 事件。
 
 <template>
   <div>modelValue: {{ data2 }}</div>
   <br>
-  <lay-tag-input v-model="data2" v-model:inputValue="inputValue2" :max="3" collapseTagsTooltip placeholder="最多输入3个" style="width:320px"></lay-tag-input>
+  <lay-tag-input v-model="data2" v-model:inputValue="inputValue2" :max="3" collapseTagsTooltip placeholder="最多输入3个" style="width:320px" @exceed="handleExceed"></lay-tag-input>
 </template>
 
 <script>
-import { ref,watch } from 'vue'
+import { ref,watch } from 'vue';
+import { layer } from "@layui/layui-vue";
 
 export default {
   setup() {
     const data2 = ref(["1", "2", "3", "4"]);
     const inputValue2 = ref("");
+    const handleExceed = (value, event) => {
+      layer.msg(`最多输入3个`);
+      console.log(event);
+    }
 
     return {
       data2,
-      inputValue2
+      inputValue2,
+      handleExceed,
     }
   }
 }
