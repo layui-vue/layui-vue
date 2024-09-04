@@ -91,7 +91,27 @@ const tagData = computed({
   },
 });
 
-const normalizedTags = computed(() => normalizedTagData(tagData.value ?? []));
+const normalizedTags = computed(() => {
+  let limit;
+
+  if (props.max) {
+    limit = props.max;
+    if (props.minCollapsedNum) {
+      if (props.minCollapsedNum > props.max) {
+        console.group("LayTagInput: minCollapsedNum > max");
+        console.warn(
+          `props.minCollapsedNum(${props.minCollapsedNum}) > props.max(${props.max})`
+        );
+        console.warn(
+          `Tips: props.max should be greater than or equals to props.minCollapsedNum.`
+        );
+        console.groupEnd();
+      }
+    }
+  }
+
+  return normalizedTagData((tagData.value ?? []).slice(0, limit));
+});
 
 const computedTagData = computed(() => {
   if (!normalizedTags.value) return;
@@ -109,10 +129,10 @@ const collapsedTagData = computed(() => {
 });
 
 const handleInput = function (e: Event) {
-  if (isComposing.value) {
-    return;
-  }
+  if (isComposing.value) return;
   inputValue.value = (e.target as HTMLInputElement).value;
+  // fix: 输入单个字符后删除，此时 inputValue.value 和 oldValueInputValue.value 都是空字符串，由此触发 handleClose
+  if (!oldInputValue.value.length) oldInputValue.value = inputValue.value;
 };
 
 const handleComposition = (e: CompositionEvent) => {
@@ -142,11 +162,12 @@ const handleEnter = (e: KeyboardEvent) => {
 };
 
 const handleBackspaceKeyUp = (e: KeyboardEvent) => {
-  if (e.code !== "Backspace") return;
+  if (e.key.toLowerCase() !== "backspace") return;
   if (!tagData.value || !tagData.value.length) return;
-  if (!oldInputValue.value) {
+  if (!inputValue.value?.length && !oldInputValue.value.length) {
     const lastIndex = normalizedTags.value.length - 1;
     handleClose(normalizedTags.value[lastIndex].value, lastIndex, e);
+    return;
   }
   oldInputValue.value = inputValue.value ?? "";
 };
@@ -174,6 +195,12 @@ const handleClose = (
   index: number,
   e: Event
 ) => {
+  // 防止 inputValue.value 或 oldInputValue.value 为空时，删除 tag
+  if (inputValue.value?.length || oldInputValue.value.length) {
+    e.preventDefault();
+    e.stopPropagation();
+    return;
+  }
   if (!tagData.value) return;
   const arr = [...tagData.value];
   arr.splice(index, 1);
