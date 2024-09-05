@@ -84,6 +84,7 @@ import LayException from "./component/exception/index";
 import LayResult from "./component/result/index";
 import LayFullscreen from "./component/fullscreen/index";
 import LayDatePicker from "./component/datePicker/index";
+import LayDatePickerV2 from "./component/datePickerV2/index";
 import LayTransition from "./component/transition/index";
 import LayUpload from "./component/upload/index";
 import LayRipple from "./component/ripple/index";
@@ -187,6 +188,7 @@ const components: Record<string, Plugin> = {
   LayFullscreen,
   LayConfigProvider,
   LayDatePicker,
+  LayDatePickerV2,
   LayTransition,
   LayUpload,
   LayRipple,
