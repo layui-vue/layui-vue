@@ -36,7 +36,7 @@
         <li>
           <h3>2.18.2 <span class="layui-badge-rim">2024-08-16</span></h3>
           <ul>
-              <li>[新增] qrCode组件 添加options参数用于传入qcCode其他参数。<a href="https://gitee.com/layui-vue/layui-vue/pulls/378">详情</a></li>
+              <li>[新增] qrCode组件 添加options参数用于传入qrCode其他参数。<a href="https://gitee.com/layui-vue/layui-vue/pulls/378">详情</a></li>
               <li>[修复] tree组件 checkedKeys回显层级异常。<a href="https://gitee.com/layui-vue/layui-vue/pulls/380">详情</a></li>
               <li>[修复] radioGroup/checkboxGroup组件 单向数据流，选中状态并未跟随modelValue状态。<a href="https://gitee.com/layui-vue/layui-vue/pulls/381">详情</a></li>
           </ul>

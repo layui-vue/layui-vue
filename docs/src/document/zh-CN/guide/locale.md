@@ -54,7 +54,7 @@ const locales = [
 
 | 语言        | 内容                |
 |-------------|-------------------------|
-| zh_CN  | https://gitee.com/layui/layui-vue/blob/master/package/component/src/language/locales/zh_CN.ts |
-| en_US  | https://gitee.com/layui/layui-vue/blob/master/package/component/src/language/locales/en_US.ts |
+| zh_CN  | https://gitee.com/layui-vue/layui-vue/blob/master/packages/component/language/locales/zh_CN.ts |
+| en_US  | https://gitee.com/layui-vue/layui-vue/blob/master/packages/component/language/locales/en_US.ts |
 
 :::
