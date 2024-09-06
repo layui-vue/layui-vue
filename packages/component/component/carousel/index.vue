@@ -40,7 +40,6 @@ const props = withDefaults(defineProps<CarouselProps>(), {
 });
 
 const slot = useSlots() as any;
-const slots = slot.default && (slot.default() as VNode[]);
 
 const active = computed({
   get() {
@@ -55,95 +54,67 @@ const anim = computed(() => props.anim);
 
 const emit = defineEmits(["update:modelValue", "change"]);
 
-const setActive = function (id: string | number) {
-  emit("change", id);
-  active.value = id;
-};
+const setActive = (id: string | number) => (active.value = id);
 
-const childrens: Ref<VNode[]> = ref([]);
+watch(
+  () => active.value,
+  (val) => emit("change", val)
+);
+
+const children: Ref<VNode[]> = ref([]);
 const slotsChange = ref(true);
 
 const setItemInstanceBySlot = function (nodes: VNode[]) {
   const showNodes = nodes?.filter((item: VNode) => {
     return item.children != "v-if";
   });
-  showNodes?.map((item) => {
-    let component = item.type as Component;
-    if (component.name != CarouselItem.name) {
-      setItemInstanceBySlot(item.children as VNode[]);
-    } else {
-      childrens.value.push(item);
-    }
+  showNodes?.forEach((item) => {
+    (item.type as Component).name != CarouselItem.name
+      ? setItemInstanceBySlot(item.children as VNode[])
+      : children.value.push(item);
   });
 };
 
 watch(
   slotsChange,
   () => {
-    childrens.value = [];
+    children.value = [];
     setItemInstanceBySlot((slot.default && slot.default()) as VNode[]);
   },
   { immediate: true, deep: true }
 );
 
 const prev = () => {
-  for (var i = 0; i < childrens.value.length; i++) {
-    if (childrens.value[i].props?.id === active.value) {
-      if (i === 0) {
-        active.value = childrens.value[slots.length - 1].props?.id;
-      } else {
-        active.value = childrens.value[i - 1].props?.id;
-      }
-      break;
-    }
-  }
+  // 直接向前一个取即可，findIndex 总是正常工作的，到达第一个时 0-1 = -1，会自动取最后一个
+  active.value = children.value.at(
+    children.value.findIndex((item) => item.props?.id === active.value) - 1
+  )?.props?.id;
 };
 
 const next = () => {
-  for (var i = 0; i < childrens.value.length; i++) {
-    if (childrens.value[i].props?.id === active.value) {
-      if (i === childrens.value.length - 1) {
-        active.value = childrens.value[0].props?.id;
-      } else {
-        active.value = childrens.value[i + 1].props?.id;
-      }
-      break;
-    }
-  }
+  // 利用取余数的方法，向后移动，如果到达末尾则会自动回到第一个
+  const index =
+    (children.value.findIndex((item) => item.props?.id === active.value) + 1) %
+    (children.value.length);
+  active.value = children.value.at(index)?.props?.id;
 };
 
 const autoplay = () => {
-  for (var i = 0; i < childrens.value.length; i++) {
-    if (childrens.value[i].props?.id === active.value) {
-      if (i === childrens.value.length - 1) {
-        active.value = childrens.value[0].props?.id;
-      } else {
-        active.value = childrens.value[i + 1].props?.id;
-      }
-      break;
-    }
-  }
+  next();
 };
 
 let intervalTimer = 0;
 
-const cleanIntervalTimer = () => {
-  if (intervalTimer) {
-    window.clearInterval(intervalTimer);
-    intervalTimer = 0;
-  }
-};
-
 const handleMouseEnter = () => {
-  if (props.autoplay && props.pauseOnHover) {
-    cleanIntervalTimer();
-  }
+  props.autoplay &&
+    props.pauseOnHover &&
+    (window.clearInterval(intervalTimer), (intervalTimer = 0));
 };
 
 const handleMouseLeave = () => {
-  if (props.autoplay && props.pauseOnHover) {
-    intervalTimer = window.setInterval(autoplay, props.interval);
-  }
+  props.autoplay &&
+    props.pauseOnHover &&
+    (intervalTimer = window.setInterval(autoplay, props.interval));
 };
 
 watch(
@@ -180,11 +151,11 @@ defineExpose({
     <div carousel-item>
       <slot></slot>
     </div>
-    <template v-if="childrens.length > 1">
+    <template v-if="children.length > 1">
       <div class="layui-carousel-ind">
         <ul>
           <li
-            v-for="(child, index) in childrens"
+            v-for="(child, index) in children"
             :key="index"
             :class="[child.props?.id === active ? 'layui-this' : '']"
             @click.stop="setActive(child.props?.id)"
