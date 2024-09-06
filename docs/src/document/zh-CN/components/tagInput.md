@@ -283,7 +283,7 @@ export default {
 | _collapseTagsTooltip_ | 是否悬浮显示折叠标签 | `boolean`                         | `false`                   | `true` `false`      |          |
 | _tagProps_            | tag 属性             | `LayTagProps`                     | -                         | -                   |          |
 | _disabledInput_       | 是否禁用内部输入框   | `boolean`                         | `false`                   | `true` `false`      |          |
-| _checkInputValue_     | 输入框值校验函数     | `(value: string) => boolean`      | `(value: string) => true` | -                   | `2.18.0` |
+| _checkInputValue_     | 输入框值校验函数     | `(value: string) => boolean`      | `(value: string) => true` | -                   | `2.19.0` |
 
 :::
 
@@ -301,8 +301,8 @@ export default {
 | _focus_               | 获得焦点时触发                               | `(e: Event)`                              |          |
 | _blur_                | 失去焦点时触发                               | `(e: Event)`                              |          |
 | _pressEnter_          | 按下 Enter 键时触发                          | `(inputValue: string, e: Event)`          |          |
-| _exceed_              | 按下 Enter 键但标签数量达到 `max` 限制时触发 | `(inputValue: string, e: Event)`          | `2.18.0` |
-| _checkInputValueFail_ | 输入框值校验失败时触发                       | `(inputValue: string, e: Event)`          | `2.18.0` |
+| _exceed_              | 按下 Enter 键但标签数量达到 `max` 限制时触发 | `(inputValue: string, e: Event)`          | `2.19.0` |
+| _checkInputValueFail_ | 输入框值校验失败时触发                       | `(inputValue: string, e: Event)`          | `2.19.0` |
 
 :::
 
