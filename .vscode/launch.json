@@ -27,14 +27,6 @@
       "type": "node"
     },
     {
-      "name": "PLAYGROUND",
-      "request": "launch",
-      "cwd": "${workspaceFolder}/play",
-      "runtimeArgs": ["dev"],
-      "runtimeExecutable": "pnpm",
-      "type": "node"
-    },
-    {
       "name": "RUN CURRENT COMPONENT TEST",
       "request": "launch",
       "runtimeArgs": ["test", "${relativeFileDirname}"],
