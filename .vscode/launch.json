@@ -5,6 +5,36 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "PUBLISH",
+      "request": "launch",
+      "runtimeArgs": ["install"],
+      "runtimeExecutable": "pnpm",
+      "type": "node"
+    },
+    {
+      "name": "COMPOENT DEV SERVER",
+      "request": "launch",
+      "runtimeArgs": ["dev"],
+      "runtimeExecutable": "pnpm",
+      "type": "node"
+    },
+    {
+      "name": "DOCUMENT DEV SERVER",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/docs",
+      "runtimeArgs": ["dev"],
+      "runtimeExecutable": "pnpm",
+      "type": "node"
+    },
+    {
+      "name": "PLAYGROUND",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/play",
+      "runtimeArgs": ["dev"],
+      "runtimeExecutable": "pnpm",
+      "type": "node"
+    },
+    {
       "name": "RUN CURRENT COMPONENT TEST",
       "request": "launch",
       "runtimeArgs": ["test", "${relativeFileDirname}"],
