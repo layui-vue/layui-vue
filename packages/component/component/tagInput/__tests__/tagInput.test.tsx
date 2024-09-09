@@ -159,4 +159,38 @@ describe("LayTagInput", () => {
       (component.emitted("update:inputValue")![0] as Array<string>)!.at(0)
     ).toBe("12");
   });
+
+  test("Chinese input test 中文输入测试", async () => {
+    const wrapper = mount(LayTagInput, {
+      props: {
+        modelValue: ["标签1", "标签2"],
+        inputValue: "",
+      },
+    });
+
+    const component = wrapper.findComponent(LayTagInput);
+    const inputInstance = component.find("input");
+    expect(component.exists()).toBe(true);
+    expect(inputInstance.exists()).toBe(true);
+    await nextTick();
+    expect(component.findAll(".layui-tag-text").length).toBe(2);
+    inputInstance.trigger("compositionstart");
+    wrapper.setProps({
+      inputValue: "H",
+    });
+    inputInstance.trigger("compositionupdate", { data: "H" });
+    await nextTick();
+    expect((component.vm as any).compositionValue).toBe("H");
+    wrapper.setProps({
+      inputValue: "",
+    });
+    inputInstance.trigger("compositionupdate", { data: "" });
+    inputInstance.trigger("keyup.backspace");
+    await nextTick();
+    inputInstance.trigger("compositionend");
+    await nextTick();
+    expect((component.vm as any).compositionValue).toBe("");
+    expect((component.vm as any).oldCompositionValue).toBe("H");
+    expect(component.findAll(".layui-tag-text").length).toBe(2);
+  });
 });

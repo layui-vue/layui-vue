@@ -72,6 +72,7 @@ const mirrorRefEl = shallowRef<HTMLElement | undefined>(undefined);
 const inputRefEl = shallowRef<HTMLInputElement | undefined>(undefined);
 const oldInputValue = ref<string>("");
 const compositionValue = ref<string>("");
+const oldCompositionValue = ref<string>("");
 const isComposing = ref(false);
 const inputStyle = reactive({ width: "15px" });
 const _tagProps = reactive(props.tagProps ?? {});
@@ -157,6 +158,8 @@ const handleComposition = (e: CompositionEvent) => {
     handleInput(e);
   } else {
     isComposing.value = true;
+    if (compositionValue.value.length || e.data?.length)
+      oldCompositionValue.value = compositionValue.value;
     compositionValue.value = inputValue.value + (e.data ?? "");
   }
 };
@@ -165,31 +168,38 @@ const handleEnter = (e: KeyboardEvent) => {
   e.preventDefault();
   const valueStr = inputValue.value ? String(inputValue.value).trim() : "";
   if (!valueStr || !tagData.value) return;
-  props.max && tagData.value?.length >= props.max
-    ? emit("exceed", valueStr, e)
-    : (() => {
-        if (!props.checkInputValue || props.checkInputValue(valueStr)) {
-          tagData.value = isArray(tagData.value)
-            ? tagData.value.concat(String(valueStr))
-            : [valueStr];
-          inputValue.value = "";
-          oldInputValue.value = "";
-          flushOut(tagData.value);
-        } else {
-          emit("checkInputValueFail", valueStr, e);
-        }
-      })();
+  if (!(props.max && tagData.value?.length >= props.max)) {
+    if (!props.checkInputValue || props.checkInputValue(valueStr)) {
+      tagData.value = isArray(tagData.value)
+        ? tagData.value.concat(String(valueStr))
+        : [valueStr];
+      inputValue.value = "";
+      oldInputValue.value = "";
+      flushOut(tagData.value);
+    } else {
+      emit("checkInputValueFail", valueStr, e);
+    }
+  } else {
+    emit("exceed", valueStr, e);
+  }
   emit("pressEnter", valueStr, e);
 };
 
 const handleBackspaceKeyUp = (e: KeyboardEvent) => {
   if (e.key.toLowerCase() !== "backspace") return;
   if (!tagData.value || !tagData.value.length) return;
-  if (!inputValue.value?.length && !oldInputValue.value.length) {
+  if (
+    !oldCompositionValue.value.length &&
+    !inputValue.value?.length &&
+    !oldInputValue.value.length
+  ) {
     const lastIndex = normalizedTags.value.length - 1;
     handleClose(normalizedTags.value[lastIndex].value, lastIndex, e);
     return;
   }
+  oldCompositionValue.value = compositionValue.value.length
+    ? compositionValue.value
+    : "";
   oldInputValue.value = inputValue.value ?? "";
 };
 
@@ -218,7 +228,12 @@ const handleClose = (
   e: Event
 ) => {
   // 防止 inputValue.value 或 oldInputValue.value 为空时，删除 tag
-  if (inputValue.value?.length || oldInputValue.value.length) {
+  if (
+    isComposing.value ||
+    compositionValue.value.length ||
+    inputValue.value?.length ||
+    oldInputValue.value.length
+  ) {
     e.preventDefault();
     e.stopPropagation();
     return;
