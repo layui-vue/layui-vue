@@ -2,20 +2,22 @@ import type { DatePickerProps, DatePickerEmits, TypeMap } from "../interface";
 
 import { computed } from "vue";
 // import dayjs from "dayjs";
-import YearPanel from "../component/YearPanel.vue";
+import YearPanel from "../component/common/Year.vue";
+import MonthPanel from "../component/common/Month.vue";
+import Picker from "../component/Picker.vue";
 
 export const useDatePicker = (
-  props: DatePickerProps,
-  emits: DatePickerEmits
+  props: DatePickerProps
+  // emits: DatePickerEmits
 ) => {
-  const _modelValue = computed({
-    get() {
-      return props.modelValue;
-    },
-    set(val) {
-      return emits("update:modelValue", val as string | Array<string>);
-    },
-  });
+  // const _modelValue = computed({
+  //   get() {
+  //     return props.modelValue;
+  //   },
+  //   set(val) {
+  //     return emits("update:modelValue", val as string | Array<string>);
+  //   },
+  // });
 
   const _format = computed(() => {
     return props.format ?? typeMap.value.format;
@@ -29,10 +31,10 @@ export const useDatePicker = (
   const TYPE_MAP: TypeMap = {
     date: { component: YearPanel, format: "YYYY-MM-DD" },
     datetime: { component: YearPanel, format: "YYYY-MM-DD HH:mm:ss" },
-    year: { component: YearPanel, format: "YYYY" },
-    month: { component: YearPanel, format: "MM" },
+    year: { component: Picker, format: "YYYY" },
+    month: { component: Picker, format: "MM" },
+    yearmonth: { component: Picker, format: "YYYY-MM" },
     time: { component: YearPanel, format: "HH:mm:ss" },
-    yearmonth: { component: YearPanel, format: "YYYY-MM" },
   };
 
   const renderComponentProps = computed<DatePickerProps>(() => {
@@ -52,7 +54,7 @@ export const useDatePicker = (
   });
 
   return {
-    _modelValue,
+    // _modelValue,
     RenderComponent,
     renderComponentProps,
   };

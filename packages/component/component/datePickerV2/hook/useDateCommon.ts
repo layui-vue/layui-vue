@@ -3,10 +3,12 @@ import type { CommonBlockProps } from "../component/interface";
 
 import { computed } from "vue";
 
-export const useDateCommon = (props: DatePickerProps) => {
+export const useDateCommon = (props: DatePickerProps, attrs: any) => {
   const commonBlockProps = computed<CommonBlockProps>(() => {
+    // console.log(props.modelValue, "props.modelValue2");
     return {
       name: props.name!,
+      modelValue: props.modelValue,
       classes: [
         "layui-date-picker",
         { "layui-date-range-picker": props.range },
@@ -21,6 +23,7 @@ export const useDateCommon = (props: DatePickerProps) => {
       suffixIcon: props.suffixIcon,
       contentClass: props.contentClass!,
       contentStyle: props.contentStyle!,
+      ...attrs,
     };
   });
 

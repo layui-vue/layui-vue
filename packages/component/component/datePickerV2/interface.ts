@@ -1,3 +1,4 @@
+import type { Dayjs, ConfigType } from "dayjs";
 import type { Ref, StyleValue, Component, DefineComponent } from "vue";
 import type { CommonSize, CommonClass } from "../../types/common";
 
@@ -16,7 +17,7 @@ export type TypeMap = {
   };
 };
 
-export type DatePickerModelValueSingleType = number | string | Date;
+export type DatePickerModelValueSingleType = ConfigType;
 
 export interface DatePickerProps {
   name?: string;
