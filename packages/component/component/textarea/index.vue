@@ -3,19 +3,7 @@ import { LayIcon } from "@layui/icons-vue";
 import { computed, ref, useAttrs, watch, nextTick, onMounted } from "vue";
 import { isObject } from "@vueuse/shared";
 import "./index.less";
-
-/**
- * @deprecated minHeight 和 maxHeight 并不是最佳的显示方式，请考虑使用 TextareaAutosizeRow
- */
-export type TextareaAutosizeHeight = {
-  minHeight: number;
-  maxHeight: number;
-};
-
-export type TextareaAutosizeRow = {
-  minRow: number;
-  maxRow: number;
-};
+import { TextareaAutosizeHeight, TextareaAutosizeRow } from "./interface";
 
 export interface TextareaProps {
   /**
@@ -79,7 +67,7 @@ interface TextareaEmits {
 }
 
 const emit = defineEmits<TextareaEmits>();
-const textareaRef = ref<HTMLTextAreaElement | HTMLDivElement>();
+const textareaRef = ref<HTMLTextAreaElement>();
 const composing = ref(false);
 const attrs = useAttrs();
 
@@ -240,15 +228,15 @@ defineExpose({ focus, blur });
     <textarea
       ref="textareaRef"
       class="layui-textarea"
-      :rows="props.rows"
-      :cols="props.cols"
-      :value="props.modelValue"
-      :placeholder="props.placeholder"
-      :name="props.name"
-      :disabled="props.disabled"
-      :maxlength="props.maxlength"
+      :rows="rows"
+      :cols="cols"
+      :value="modelValue"
+      :placeholder="placeholder"
+      :name="name"
+      :disabled="disabled"
+      :maxlength="maxlength"
       :style="styles"
-      :class="{ 'layui-textarea-disabled': props.disabled }"
+      :class="{ 'layui-textarea-disabled': disabled }"
       @compositionstart="onCompositionstart"
       @compositionend="onCompositionend"
       @input="onInput"
