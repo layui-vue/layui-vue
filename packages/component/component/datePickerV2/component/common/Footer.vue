@@ -33,10 +33,10 @@ const props = withDefaults(defineProps<PanelFoot>(), {
 
 const { t } = useI18n();
 
-const emits = defineEmits(["ok", "clear", "now"]);
+const emits = defineEmits(["confirm", "clear", "now"]);
 
 const handelOk = () => {
-  emits("ok");
+  emits("confirm");
 };
 
 const handelNow = () => {

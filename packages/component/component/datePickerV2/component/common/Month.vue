@@ -58,7 +58,7 @@ import { useI18n } from "../../../../language";
 import { computed, inject, ref, watch } from "vue";
 import { BaseDateTypeProps } from "../interface";
 import { provideType, DatePickerProps } from "../../interface";
-import PanelFoot from "./PanelFoot.vue";
+import PanelFoot from "./Footer.vue";
 import LayIcon from "../../../icon";
 
 defineOptions({

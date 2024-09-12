@@ -5,14 +5,14 @@
         <div class="laydate-set-ym">
           <lay-icon
             type="layui-icon-left"
-            @click="_currentDate -= yearPage ?? 15"
+            @click="currentDate -= yearPage ?? 15"
           ></lay-icon>
           <span class="laydate-time-text">
             {{ yearRange.join(" - ") }}
           </span>
           <lay-icon
             type="layui-icon-right"
-            @click="_currentDate += yearPage ?? 15"
+            @click="currentDate += yearPage ?? 15"
           ></lay-icon>
         </div>
       </div>
@@ -27,7 +27,7 @@
           v-for="item of yearList"
           :key="item"
           :class="{
-            'layui-this': _currentYear === item,
+            'layui-this': currentYear === item,
             'layui-laydate-current': item === dayjs().year(),
             'layui-disabled': cellDisabled(item),
           }"
@@ -62,12 +62,8 @@ import dayjs, { Dayjs } from "dayjs";
 import { useI18n } from "../../../../language";
 import { computed, inject, ref, watch } from "vue";
 import { getYears } from "../../day";
-import PanelFoot from "./PanelFoot.vue";
+import PanelFoot from "./Footer.vue";
 import LayIcon from "../../../icon";
-
-export interface TimePanelProps {
-  modelValue: number | string;
-}
 
 defineOptions({
   name: "YearPanel",
@@ -92,20 +88,18 @@ const props = withDefaults(defineProps<BaseDateTypeProps>(), {
 
 const emits = defineEmits(["pick"]);
 
-const _currentYear = ref();
-const _currentDate = ref();
+const currentYear = ref();
+const currentDate = ref();
 
 const yearList = computed<number[]>(() =>
-  getYears(_currentDate.value, props.yearPage, props.yearStep)
+  getYears(currentDate.value, props.yearPage, props.yearStep)
 );
 const yearRange = computed(() => [yearList.value.at(0), yearList.value.at(-1)]);
 
 watch(
   () => props.modelValue,
   () => {
-    _currentDate.value = _currentYear.value = (
-      props.modelValue as Dayjs
-    ).year();
+    currentDate.value = currentYear.value = props.modelValue.year();
   },
   {
     immediate: true,
@@ -133,7 +127,7 @@ const handleYearClick = (item: number) => {
     return true;
   }
 
-  _currentYear.value = item;
+  currentYear.value = item;
   emits("pick", item);
 };
 </script>
