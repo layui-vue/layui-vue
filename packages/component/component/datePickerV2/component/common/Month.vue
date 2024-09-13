@@ -41,35 +41,27 @@
         </li>
       </ul>
     </div>
-    <!-- <PanelFoot @ok="footOnOk" @now="footOnNow" @clear="footOnClear">
-      <span
-        v-if="datePicker.type === 'yearmonth'"
-        @click="datePicker.showPanel.value = 'year'"
-        class="laydate-btns-time"
-        >{{ t("datePicker.selectYear") }}</span
-      >
-    </PanelFoot> -->
   </div>
 </template>
 
 <script lang="ts" setup>
-import dayjs, { type Dayjs } from "dayjs";
+import dayjs from "dayjs";
+import { type BasePanelProps } from "../interface";
+import { DATE_PICKER_CONTEXT } from "../../interface";
+
 import { useI18n } from "../../../../language";
-import { computed, inject, ref, watch } from "vue";
-import { BaseDateTypeProps } from "../interface";
-import { provideType, DatePickerProps } from "../../interface";
-import PanelFoot from "./Footer.vue";
+import { computed, ref, watch, inject } from "vue";
+
 import LayIcon from "../../../icon";
 
 defineOptions({
   name: "MonthPanel",
 });
 
-const props = withDefaults(defineProps<BaseDateTypeProps>(), {
-  // max: dayjs().year() + 100,
-});
-
+const props = withDefaults(defineProps<BasePanelProps>(), {});
 const emits = defineEmits(["pick", "year-change", "type-change"]);
+
+const DatePickerContext = inject(DATE_PICKER_CONTEXT)!;
 
 const Month = ref();
 
@@ -94,10 +86,16 @@ const MONTH_NAME = computed(() => [
 const cellDisabled = computed(() => {
   return (item: string) => {
     const month = MONTH_NAME.value.indexOf(item);
-    if (props.min && month < dayjs(props.min).month() + 1) {
+    if (
+      DatePickerContext.min &&
+      month < dayjs(DatePickerContext.min).month() + 1
+    ) {
       return true;
     }
-    if (props.max && month > dayjs(props.max).month() + 1) {
+    if (
+      DatePickerContext.max &&
+      month > dayjs(DatePickerContext.max).month() + 1
+    ) {
       return true;
     }
     return false;
@@ -129,23 +127,4 @@ watch(
 const handleYearChange = (val: number) => {
   emits("year-change", props.modelValue.year() + val);
 };
-
-//关闭回调
-// const footOnOk = () => {
-//   emits(
-//     "update:modelValue",
-//     Month.value || Month.value === 0 ? Month.value : -1
-//   );
-//   if (datePicker.range) {
-//     //关闭菜单
-//     emits("ok");
-//     return;
-//   } else {
-//     if (datePicker.type === "datetime" || datePicker.type === "date") {
-//       datePicker.showPanel.value = datePicker.type;
-//     } else {
-//       datePicker.ok();
-//     }
-//   }
-// };
 </script>

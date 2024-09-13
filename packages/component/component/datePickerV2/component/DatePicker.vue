@@ -1,20 +1,18 @@
 <script setup lang="ts">
-import type { DatePickerProps } from "../interface";
+import type { UniquePickerProps } from "./interface";
 import { computed, ref, watch } from "vue";
 import dayjs, { type Dayjs } from "dayjs";
 
+import Date from "./common/Date.vue";
 import Year from "./common/Year.vue";
 import Month from "./common/Month.vue";
 import Footer from "./common/Footer.vue";
 
-interface PickerProps extends DatePickerProps {
-  modelValue: Dayjs;
-}
-
-const props = defineProps<PickerProps>();
+const props = withDefaults(defineProps<UniquePickerProps>(), {});
 
 const emits = defineEmits(["pick"]);
 
+const inputDate = ref<Dayjs>(dayjs());
 const currentData = ref<Dayjs>(dayjs());
 const currentType = ref();
 
@@ -22,6 +20,7 @@ watch(
   () => props.modelValue,
   () => {
     currentData.value = props.modelValue;
+    inputDate.value = props.modelValue;
   },
   { immediate: true }
 );
@@ -42,11 +41,17 @@ watch(
   { immediate: true }
 );
 
+const handlePickDate = (value: Dayjs) => {
+  currentData.value = value;
+  handleConfirm();
+};
+
 const handlePickYear = (year: number) => {
   const data = currentData.value.year(year);
 
   if (dateType.value === "date") {
-    // Todo
+    currentData.value = data;
+    currentType.value = "date";
   } else if (dateType.value === "yearmonth") {
     currentData.value = data;
     currentType.value = "month";
@@ -60,17 +65,20 @@ const handlePickMonth = (month: number) => {
   const data = currentData.value.month(month);
 
   if (dateType.value === "date") {
-    // Todo
-  } else if (dateType.value === "yearmonth") {
     currentData.value = data;
-    emits("pick", formatValue());
+    currentType.value = "date";
   } else {
+    currentData.value = data;
     handleConfirm();
   }
 };
 
 const handleMonthChangeYear = (year: number) => {
   currentData.value = currentData.value.year(year);
+};
+
+const handleDateChangeYearMonth = (data: Dayjs) => {
+  currentData.value = data;
 };
 
 const handleConfirm = (isConfirm = false) => {
@@ -81,15 +89,31 @@ const handleConfirm = (isConfirm = false) => {
 
 const handleNow = () => {
   currentData.value = dayjs();
+  inputDate.value = dayjs();
 };
 
 const formatValue = () => {
-  return dayjs(currentData.value).format(props.format);
+  // format 正确传 format后的格式，否则传Date对象
+  return props.format
+    ? dayjs(currentData.value).format(props.format)
+    : dayjs(currentData.value).toDate();
+};
+
+const footerValue = () => {
+  return dayjs(currentData.value).format(props.defaultFormat);
 };
 </script>
 
 <template>
-  <div></div>
+  <Date
+    v-if="currentType === 'date'"
+    :modelValue="currentData"
+    :inputDate="inputDate"
+    :dateType="dateType"
+    @pick="handlePickDate"
+    @year-month-change="handleDateChangeYearMonth"
+    @type-change="(type) => (currentType = type)"
+  ></Date>
   <Year
     v-if="currentType === 'year'"
     :modelValue="currentData"
@@ -104,7 +128,11 @@ const formatValue = () => {
     @year-change="handleMonthChangeYear"
     @type-change="currentType = 'year'"
   ></Month>
-  <Footer @confirm="handleConfirm(true)" @now="handleNow">
-    {{ formatValue() }}
+  <Footer
+    :showConfirm="!simple"
+    @confirm="handleConfirm(true)"
+    @now="handleNow"
+  >
+    {{ footerValue() }}
   </Footer>
 </template>

@@ -9,9 +9,13 @@
         @click="handelNow"
         >{{ t("datePicker.now") }}</span
       >
-      <span lay-type="confirm" class="laydate-btns-confirm" @click="handelOk">{{
-        t("datePicker.confirm")
-      }}</span>
+      <span
+        v-if="props.showConfirm"
+        lay-type="confirm"
+        class="laydate-btns-confirm"
+        @click="handelOk"
+        >{{ t("datePicker.confirm") }}</span
+      >
     </div>
   </div>
 </template>
@@ -21,6 +25,7 @@ import { useI18n } from "../../../../language";
 
 export interface PanelFoot {
   showNow?: boolean;
+  showConfirm?: boolean;
 }
 
 defineOptions({
@@ -29,6 +34,7 @@ defineOptions({
 
 const props = withDefaults(defineProps<PanelFoot>(), {
   showNow: true,
+  showConfirm: true,
 });
 
 const { t } = useI18n();

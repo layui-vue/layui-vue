@@ -1,6 +1,7 @@
 import type { Dayjs, ConfigType } from "dayjs";
-import type { Ref, StyleValue, Component, DefineComponent } from "vue";
+import type { StyleValue, Component, InjectionKey, ComputedRef } from "vue";
 import type { CommonSize, CommonClass } from "../../types/common";
+import type { RequiredByKeys } from "../../types/util";
 
 export type DatePickerType =
   | "date"
@@ -55,31 +56,29 @@ export type DatePickerEmits = {
   (e: "clear"): void;
 };
 
-export type provideType = {
-  currentYear: Ref;
-  currentMonth: Ref;
-  currentDay: Ref;
-  dateValue: Ref;
-  hms: Ref;
-  type: string;
-  showPanel: Ref;
-  clear: Function;
-  now: Function;
-  ok: Function;
-  range: boolean;
-  rangeValue: {
-    first: string;
-    last: string;
-    hover: string;
-    firstTime: { hh: number; mm: number; ss: number };
-    lastTime: { hh: number; mm: number; ss: number };
-  };
-  rangeSeparator: string;
-  simple: boolean;
-  timestamp: boolean;
-  max: Ref<string>;
-  min: Ref<string>;
-  defaultTime: string | string[];
-  yearPage: Ref<number>;
-  yearStep: Ref<number>;
-};
+export type RequiredDatePickerProps = RequiredByKeys<
+  DatePickerProps,
+  | "type"
+  | "disabled"
+  | "readonly"
+  | "allowClear"
+  | "simple"
+  | "range"
+  | "rangeSeparator"
+  | "prefixIcon"
+  | "yearPage"
+  | "yearStep"
+>;
+
+export interface PanelPickerProps extends DatePickerProps {
+  modelValue: Dayjs | Array<Dayjs>;
+  defaultFormat: string;
+}
+
+export interface DatePickerContextType extends RequiredDatePickerProps {
+  modelValue: Dayjs | Array<Dayjs>;
+  defaultFormat: string;
+}
+
+export const DATE_PICKER_CONTEXT: InjectionKey<DatePickerContextType> =
+  Symbol("LayDatePicker");

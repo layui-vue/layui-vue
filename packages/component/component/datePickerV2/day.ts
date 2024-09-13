@@ -7,7 +7,7 @@
 const getYears = (date?: Date | number, page = 15, step = 1) => {
   const years = [];
   const y = typeof date === "number" ? date : date?.getFullYear() ?? 1970;
-  console.log(y, page, step);
+  // console.log(y, page, step);
   const r = (page % 2 ? page - 1 : page) / 2;
   for (let i = y - r; i <= y + r; i += step) {
     years.push(i);

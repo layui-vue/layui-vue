@@ -1,23 +1,22 @@
 <script setup lang="ts">
 import "./index.less";
-import dayjs from "dayjs";
-import type {
-  DatePickerProps as _DatePickerProps,
-  DatePickerType,
-  DatePickerEmits,
+import {
+  DATE_PICKER_CONTEXT,
+  type DatePickerProps as _DatePickerProps,
+  type DatePickerType,
 } from "./interface";
 
-import { useDateCommon } from "./hook/useDateCommon";
 import { useDatePicker } from "./hook/useDatePicker";
 
 import InputBlock from "./component/common/InputBlock.vue";
-import { computed, useAttrs } from "vue";
+import { computed, provide } from "vue";
 
 export type DatePickerProps = _DatePickerProps;
 
 const props = withDefaults(defineProps<DatePickerProps>(), {
   modelValue: "",
-  type: "year",
+  size: "md",
+  type: "date",
   disabled: false,
   readonly: false,
   allowClear: false,
@@ -31,18 +30,13 @@ const props = withDefaults(defineProps<DatePickerProps>(), {
   yearStep: 1,
 });
 
-// const emits = defineEmits<DatePickerEmits>();
-const attrs = useAttrs();
-// const { commonBlockProps } = useDateCommon(props, attrs);
-
-const { RenderComponent, renderComponentProps } = useDatePicker(
-  props
-  // emits
-);
+const { RenderComponent, renderComponentProps } = useDatePicker(props);
 
 const format = computed<string>(() => {
   return props.inputFormat ?? renderComponentProps.value.inputFormat!;
 });
+
+provide(DATE_PICKER_CONTEXT, renderComponentProps.value);
 
 defineOptions({
   name: "LayDatePickerV2",
@@ -51,12 +45,8 @@ defineOptions({
 
 <template>
   <InputBlock v-bind="{ ...props, ...$attrs }" :format="format">
-    <template #default="{ initDate, onPick }">
-      <RenderComponent
-        v-bind="renderComponentProps"
-        :modelValue="initDate"
-        @pick="onPick"
-      />
+    <template #default="{ onPick }">
+      <RenderComponent v-bind="renderComponentProps" @pick="onPick" />
     </template>
   </InputBlock>
 </template>

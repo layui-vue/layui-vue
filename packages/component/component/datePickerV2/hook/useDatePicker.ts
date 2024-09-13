@@ -1,23 +1,38 @@
-import type { DatePickerProps, DatePickerEmits, TypeMap } from "../interface";
+import type {
+  // DatePickerProps,
+  RequiredDatePickerProps,
+  TypeMap,
+  DatePickerModelValueSingleType,
+  DatePickerContextType,
+} from "../interface";
+import dayjs, { type Dayjs } from "dayjs";
 
 import { computed } from "vue";
-// import dayjs from "dayjs";
 import YearPanel from "../component/common/Year.vue";
-import MonthPanel from "../component/common/Month.vue";
-import Picker from "../component/Picker.vue";
+import DatePicker from "../component/DatePicker.vue";
 
-export const useDatePicker = (
-  props: DatePickerProps
-  // emits: DatePickerEmits
-) => {
-  // const _modelValue = computed({
-  //   get() {
-  //     return props.modelValue;
-  //   },
-  //   set(val) {
-  //     return emits("update:modelValue", val as string | Array<string>);
-  //   },
-  // });
+import { isArray, isNumber } from "../../../utils";
+
+export const useDatePicker = (props: RequiredDatePickerProps) => {
+  const initDate = computed<Dayjs | Array<Dayjs>>(() => {
+    if (isArray(props.modelValue)) {
+      return props.modelValue.map((date: DatePickerModelValueSingleType) => {
+        return dayjs(date || new Date());
+      });
+    } else {
+      // 兼容之前的 Year | Month 类型 modelValue可传 `2024` | `11` number类型
+      let value = props.modelValue;
+      if (
+        ["year", "month"].includes(props.type!) &&
+        isNumber(props.modelValue) &&
+        (`${props.modelValue}`.length === 4 ||
+          `${props.modelValue}`.length === 2)
+      ) {
+        value += "";
+      }
+      return dayjs(value || new Date());
+    }
+  });
 
   const _format = computed(() => {
     return props.format ?? typeMap.value.format;
@@ -29,24 +44,26 @@ export const useDatePicker = (
 
   // 类型映射
   const TYPE_MAP: TypeMap = {
-    date: { component: YearPanel, format: "YYYY-MM-DD" },
     datetime: { component: YearPanel, format: "YYYY-MM-DD HH:mm:ss" },
-    year: { component: Picker, format: "YYYY" },
-    month: { component: Picker, format: "MM" },
-    yearmonth: { component: Picker, format: "YYYY-MM" },
+    date: { component: DatePicker, format: "YYYY-MM-DD" },
+    year: { component: DatePicker, format: "YYYY" },
+    month: { component: DatePicker, format: "M" },
+    yearmonth: { component: DatePicker, format: "YYYY-MM" },
     time: { component: YearPanel, format: "HH:mm:ss" },
   };
 
-  const renderComponentProps = computed<DatePickerProps>(() => {
+  const renderComponentProps = computed<DatePickerContextType>(() => {
     return {
       ...props,
+      modelValue: initDate.value,
+      defaultFormat: typeMap.value.format,
       format: _format.value,
       inputFormat: _inputFormat.value,
     };
   });
 
   const typeMap = computed(() => {
-    return TYPE_MAP[props.type!];
+    return TYPE_MAP[props.type];
   });
 
   const RenderComponent = computed(() => {
@@ -54,7 +71,6 @@ export const useDatePicker = (
   });
 
   return {
-    // _modelValue,
     RenderComponent,
     renderComponentProps,
   };

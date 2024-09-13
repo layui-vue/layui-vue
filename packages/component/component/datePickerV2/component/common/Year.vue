@@ -5,14 +5,14 @@
         <div class="laydate-set-ym">
           <lay-icon
             type="layui-icon-left"
-            @click="currentDate -= yearPage ?? 15"
+            @click="currentDate -= DatePickerContext.yearPage"
           ></lay-icon>
           <span class="laydate-time-text">
             {{ yearRange.join(" - ") }}
           </span>
           <lay-icon
             type="layui-icon-right"
-            @click="currentDate += yearPage ?? 15"
+            @click="currentDate += DatePickerContext.yearPage"
           ></lay-icon>
         </div>
       </div>
@@ -37,62 +37,38 @@
         </li>
       </ul>
     </div>
-    <!--<PanelFoot @ok="footOnOk" @now="footOnNow">
-       <span
-        v-if="datePicker.type === 'yearmonth'"
-        @click="datePicker.showPanel.value = 'month'"
-        class="laydate-btns-time"
-        >{{ t("datePicker.selectMonth") }}</span
-      >
-      <template v-else-if="parseInt(Year.toString()) > 0">{{ Year }}</template> 
-      {{ _currentYear }}
-    </PanelFoot>-->
   </div>
 </template>
 
 <script lang="ts" setup>
-import { type BaseDateTypeProps } from "../interface";
-import type {
-  provideType,
-  DatePickerProps,
-  DatePickerModelValueSingleType,
-} from "../../interface";
+import type { BasePanelProps } from "../interface";
 
-import dayjs, { Dayjs } from "dayjs";
-import { useI18n } from "../../../../language";
-import { computed, inject, ref, watch } from "vue";
-import { getYears } from "../../day";
-import PanelFoot from "./Footer.vue";
+import dayjs from "dayjs";
+import { computed, ref, watch, inject } from "vue";
+
 import LayIcon from "../../../icon";
+import { useI18n } from "../../../../language";
+import { DATE_PICKER_CONTEXT } from "../../interface";
+import { getYears } from "../../day";
 
 defineOptions({
   name: "YearPanel",
 });
 
-const props = withDefaults(defineProps<BaseDateTypeProps>(), {
-  // modelValue: "",
-  // type: "date",
-  // disabled: false,
-  // readonly: false,
-  // allowClear: false,
-  // simple: false,
-  // range: false,
-  // rangeSeparator: "至",
-  // prefixIcon: "layui-icon-date",
-  // suffixIcon: "",
-  // timestamp: false,
-  // format: "",
-  // yearPage: 15,
-  // yearStep: 1,
-});
-
+const props = withDefaults(defineProps<BasePanelProps>(), {});
 const emits = defineEmits(["pick"]);
+
+const DatePickerContext = inject(DATE_PICKER_CONTEXT)!;
 
 const currentYear = ref();
 const currentDate = ref();
 
 const yearList = computed<number[]>(() =>
-  getYears(currentDate.value, props.yearPage, props.yearStep)
+  getYears(
+    currentDate.value,
+    DatePickerContext.yearPage,
+    DatePickerContext.yearStep
+  )
 );
 const yearRange = computed(() => [yearList.value.at(0), yearList.value.at(-1)]);
 
@@ -111,10 +87,10 @@ const { t } = useI18n();
 // 判断单元格是否可以点击(禁用)
 const cellDisabled = computed(() => {
   return (item: number) => {
-    if (props.min && item < dayjs(props.min).year()) {
+    if (DatePickerContext.min && item < dayjs(DatePickerContext.min).year()) {
       return true;
     }
-    if (props.max && item > dayjs(props.max).year()) {
+    if (DatePickerContext.max && item > dayjs(DatePickerContext.max).year()) {
       return true;
     }
     return false;

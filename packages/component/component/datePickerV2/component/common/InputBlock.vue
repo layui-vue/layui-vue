@@ -1,29 +1,18 @@
 <script setup lang="ts">
-import dayjs, { type Dayjs } from "dayjs";
-import { type CommonBlockProps, COMMON_BLOCK_CONTEXT } from "../interface";
+import dayjs from "dayjs";
 import type {
   DatePickerModelValueSingleType,
   DatePickerProps,
 } from "../../interface";
 import LayDropdown from "../../../dropdown/index.vue";
+import LayInput from "../../../input/index.vue";
 
-import { computed, ref, provide, watchEffect } from "vue";
-import { isArray } from "../../../../utils";
+import { computed, ref } from "vue";
 
 const props = withDefaults(defineProps<DatePickerProps>(), {});
 const emits = defineEmits(["update:modelValue"]);
 
 const dropdownRef = ref<InstanceType<typeof LayDropdown>>();
-
-const initDate = computed<Dayjs | Array<Dayjs>>(() => {
-  if (isArray(props.modelValue)) {
-    return props.modelValue.map((date: DatePickerModelValueSingleType) => {
-      return dayjs(date || new Date());
-    });
-  } else {
-    return dayjs(props.modelValue || new Date());
-  }
-});
 
 const startPlaceholder = "";
 const endPlaceholder = "";
@@ -35,11 +24,6 @@ const classes = computed(() => {
   return ["layui-date-picker", { "layui-date-range-picker": props.range }];
 });
 
-// function setNowDate() {
-//   initDate.value.forEach((date) => {
-//     date = dayjs();
-//   });
-// }
 const dateValue = computed(() => {
   return props.range
     ? (props.modelValue as Array<DatePickerModelValueSingleType>).map(
@@ -54,17 +38,10 @@ const dateValue = computed(() => {
     : "";
 });
 
-function onPick(item) {
-  console.log(item, "inputBlock");
-
+function onPick(item: string | Date) {
   emits("update:modelValue", item);
   dropdownRef.value?.hide();
 }
-
-provide(COMMON_BLOCK_CONTEXT, {
-  // initDate,
-  // setNowDate,
-});
 </script>
 
 <template>
@@ -125,7 +102,7 @@ provide(COMMON_BLOCK_CONTEXT, {
         </lay-input>
       </div>
       <template #content>
-        <slot :initDate="initDate" :onPick="onPick"></slot>
+        <slot :onPick="onPick"></slot>
       </template>
     </lay-dropdown>
   </div>
