@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import "./index.less";
+import dayjs from "dayjs";
+import customParseFormat from "dayjs/plugin/customParseFormat";
+import objectSupport from "dayjs/plugin/objectSupport";
 import {
   DATE_PICKER_CONTEXT,
   type DatePickerProps as _DatePickerProps,
@@ -10,6 +13,9 @@ import { useDatePicker } from "./hook/useDatePicker";
 
 import InputBlock from "./component/common/InputBlock.vue";
 import { computed, provide } from "vue";
+
+dayjs.extend(customParseFormat);
+dayjs.extend(objectSupport);
 
 export type DatePickerProps = _DatePickerProps;
 

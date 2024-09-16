@@ -1,21 +1,22 @@
 <script setup lang="ts">
 import dayjs from "dayjs";
+import { computed, ref } from "vue";
 import type {
   DatePickerModelValueSingleType,
   DatePickerProps,
 } from "../../interface";
 import LayDropdown from "../../../dropdown/index.vue";
 import LayInput from "../../../input/index.vue";
-
-import { computed, ref } from "vue";
+import { isArray, isNumber } from "../../../../utils";
 
 const props = withDefaults(defineProps<DatePickerProps>(), {});
 const emits = defineEmits(["update:modelValue"]);
 
 const dropdownRef = ref<InstanceType<typeof LayDropdown>>();
 
-const startPlaceholder = "";
-const endPlaceholder = "";
+const _Placeholder = computed(() => {
+  return isArray(props.placeholder) ? props.placeholder : [props.placeholder];
+});
 
 const onChange = () => {};
 const handleClear = () => {};
@@ -25,17 +26,29 @@ const classes = computed(() => {
 });
 
 const dateValue = computed(() => {
-  return props.range
-    ? (props.modelValue as Array<DatePickerModelValueSingleType>).map(
-        (data) => {
-          return dayjs(data).format(props.format);
-        }
-      )
-    : props.modelValue
-    ? dayjs(props.modelValue as DatePickerModelValueSingleType).format(
-        props.format
-      )
-    : "";
+  if (props.range) {
+    return (props.modelValue as Array<DatePickerModelValueSingleType>).map(
+      (data) => {
+        return dayjs(data).format(props.format);
+      }
+    );
+  } else {
+    if (!props.modelValue) return "";
+
+    let value = props.modelValue;
+
+    if (
+      ["year", "month"].includes(props.type!) &&
+      isNumber(props.modelValue) &&
+      `${props.modelValue}`.length <= 4
+    ) {
+      value += "";
+    }
+
+    return dayjs(value as DatePickerModelValueSingleType, props.format).format(
+      props.format
+    );
+  }
 });
 
 function onPick(item: string | Date) {
@@ -56,7 +69,7 @@ function onPick(item: string | Date) {
       <lay-input
         :name="name"
         :readonly="readonly"
-        :placeholder="startPlaceholder"
+        :placeholder="_Placeholder[0]"
         :prefix-icon="prefixIcon"
         :suffix-icon="suffixIcon"
         :disabled="disabled"
@@ -75,7 +88,7 @@ function onPick(item: string | Date) {
           :readonly="readonly"
           :name="name"
           :modelValue="dateValue[0]"
-          :placeholder="startPlaceholder"
+          :placeholder="_Placeholder[0]"
           :disabled="disabled"
           @change="onChange"
           @blur="$emit('blur')"
@@ -89,7 +102,7 @@ function onPick(item: string | Date) {
           :readonly="readonly"
           :name="name"
           :allow-clear="!disabled && allowClear"
-          :placeholder="endPlaceholder"
+          :placeholder="_Placeholder[1]"
           :modelValue="dateValue[1]"
           :disabled="disabled"
           @change="onChange"

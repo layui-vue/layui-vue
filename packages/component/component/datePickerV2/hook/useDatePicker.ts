@@ -25,12 +25,12 @@ export const useDatePicker = (props: RequiredDatePickerProps) => {
       if (
         ["year", "month"].includes(props.type!) &&
         isNumber(props.modelValue) &&
-        (`${props.modelValue}`.length === 4 ||
-          `${props.modelValue}`.length === 2)
+        `${props.modelValue}`.length <= 4
       ) {
         value += "";
       }
-      return dayjs(value || new Date());
+
+      return dayjs(value || new Date(), typeMap.value.format);
     }
   });
 
@@ -49,7 +49,7 @@ export const useDatePicker = (props: RequiredDatePickerProps) => {
     year: { component: DatePicker, format: "YYYY" },
     month: { component: DatePicker, format: "M" },
     yearmonth: { component: DatePicker, format: "YYYY-MM" },
-    time: { component: YearPanel, format: "HH:mm:ss" },
+    time: { component: DatePicker, format: "HH:mm:ss" },
   };
 
   const renderComponentProps = computed<DatePickerContextType>(() => {

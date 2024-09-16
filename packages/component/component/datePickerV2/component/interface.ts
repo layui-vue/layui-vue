@@ -3,6 +3,7 @@ import type { DatePickerType, PanelPickerProps } from "../interface";
 
 export interface BasePanelProps {
   modelValue: Dayjs;
+  inputDate: Dayjs;
   dateType: DatePickerType;
 }
 

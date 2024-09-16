@@ -53,10 +53,7 @@ defineOptions({
 });
 
 // inputDate 用于保持 day 日期的状态，不被modelValue改变
-const props = withDefaults(
-  defineProps<BasePanelProps & { inputDate: Dayjs }>(),
-  {}
-);
+const props = withDefaults(defineProps<BasePanelProps>(), {});
 const emits = defineEmits<{
   (e: "year-month-change", data: Dayjs): void;
   (e: "type-change", type: "year" | "month"): void;
@@ -95,7 +92,6 @@ watch(
 
     dateList.value = setDateList(Year.value, Month.value);
   },
-
   {
     immediate: true,
   }
@@ -115,7 +111,15 @@ const handleTypeChange = (type: "year" | "month") => {
 };
 
 const handlePickDay = (val: number) => {
-  emits("pick", dayjs(val));
+  const unixDate = dayjs(val);
+
+  const data = props.modelValue
+    .clone()
+    .set("year", unixDate.year())
+    .set("month", unixDate.month())
+    .set("date", unixDate.date());
+
+  emits("pick", data);
   // 等待 props.modelValue watch 结束
   // 防止 Day.value 被inputData改变
   nextTick(() => {

@@ -4,6 +4,7 @@ import { computed, ref, watch } from "vue";
 import dayjs, { type Dayjs } from "dayjs";
 
 import Date from "./common/Date.vue";
+import Time from "./common/Time.vue";
 import Year from "./common/Year.vue";
 import Month from "./common/Month.vue";
 import Footer from "./common/Footer.vue";
@@ -42,6 +43,11 @@ watch(
 );
 
 const handlePickDate = (value: Dayjs) => {
+  currentData.value = value;
+  handleConfirm();
+};
+
+const handlePickTime = (value: Dayjs) => {
   currentData.value = value;
   handleConfirm();
 };
@@ -114,15 +120,24 @@ const footerValue = () => {
     @year-month-change="handleDateChangeYearMonth"
     @type-change="(type) => (currentType = type)"
   ></Date>
+  <Time
+    v-if="currentType === 'time'"
+    :modelValue="currentData"
+    :inputDate="inputDate"
+    :dateType="dateType"
+    @pick="handlePickTime"
+  ></Time>
   <Year
     v-if="currentType === 'year'"
     :modelValue="currentData"
+    :inputDate="inputDate"
     :dateType="dateType"
     @pick="handlePickYear"
   ></Year>
   <Month
     v-if="currentType === 'month'"
     :modelValue="currentData"
+    :inputDate="inputDate"
     :dateType="dateType"
     @pick="handlePickMonth"
     @year-change="handleMonthChangeYear"
