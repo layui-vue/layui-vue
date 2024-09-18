@@ -41,6 +41,9 @@ export interface DatePickerProps {
   timestamp?: boolean;
   format?: string;
   inputFormat?: string;
+  defaultValue?:
+    | DatePickerModelValueSingleType
+    | Array<DatePickerModelValueSingleType>;
   defaultTime?: string | string[];
   contentStyle?: StyleValue;
   contentClass?: CommonClass;

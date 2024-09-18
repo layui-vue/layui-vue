@@ -17,13 +17,19 @@ export const useDatePicker = (props: RequiredDatePickerProps) => {
   const initDate = computed<Dayjs | Array<Dayjs>>(() => {
     if (isArray(props.modelValue)) {
       return props.modelValue.map((date: DatePickerModelValueSingleType) => {
-        const value = date || new Date();
+        const value =
+          date ||
+          (props.defaultValue as DatePickerModelValueSingleType) ||
+          new Date();
 
         return normalizeDayjsValue(value, typeMap.value.format);
       });
     } else {
       // 兼容之前的 Year | Month 类型 modelValue可传 `2024` | `11` number类型
-      let value = props.modelValue || new Date();
+      let value =
+        props.modelValue ||
+        (props.defaultValue as DatePickerModelValueSingleType) ||
+        new Date();
       if (
         ["year", "month"].includes(props.type!) &&
         isNumber(props.modelValue) &&

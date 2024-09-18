@@ -392,7 +392,7 @@ export default {
 | 属性           | 描述                                         | 类型                                        | 默认值              | 可选值                                              | 版本     |
 | -------------- | -------------------------------------------- | ------------------------------------------- | ------------------- | --------------------------------------------------- | -------- |
 | name           | 原始属性 name                                | `string`                                    | --                  | --                                                  | --       |
-| v-model        | 当前时间                                     | `string` `number` `string[]`                | --                  | --                                                  | --       |
+| v-model        | 当前时间                                     | `DatePickerModelValueSingleType` `Array<DatePickerModelValueSingleType>`                | --                  | --                                                  | --       |
 | type           | 选择类型                                     | `string`                                    | `date`              | `date` `datetime` `year` `month` `time` `yearmonth` | --       |
 | disabled       | 是否禁止修改                                 | `boolean`                                   | `false`             | —                                                   | —        |
 | readonly       | `input` 是否只读                             | `boolean`                                   | `false`             | —                                                   | —        |
@@ -408,6 +408,7 @@ export default {
 | suffix-icon    | 后置图标                                     | `string`                                    | --                  | 内置图标集                                          | `1.4.0`  |
 | timestamp      | 时间戳模式(13 位),仅对 date 和 datetime 有效 | `boolean`                                   | `false`             | `true` `false`                                      | `1.6.5`  |
 | format         | 输出格式化                                   | `string`                                    | --                  | 例如`YYYY-MM-DD`                                    | -        |
+| default-value   | `首次未点击` 时，下拉弹窗打开时默认显示的时间，传空为组件首次 `渲染时间`      | `DatePickerModelValueSingleType` `Array<DatePickerModelValueSingleType>`                    | --                  | --                                      | `2.19.0` |
 | default-time   | 范围日期 `type=datetime` 时分秒默认时间      | `string` `Array<string>`                    | --                  | 例如`12:30:00`                                      | `2.17.2` |
 | contentStyle   | 内容自定义样式                               | `StyleValue`                                | --                  | --                                                  | --       |
 | contentClass   | 内容自定义 Class                             | `string` `Array<string \| object>` `object` | --                  | --                                                  | --       |
@@ -429,6 +430,13 @@ export default {
 | clear  | 原生 clear 事件  |                      |
 
 :::
+
+```ts
+import type { ConfigType } from "dayjs";
+
+type DatePickerModelValueSingleType = ConfigType
+
+```
 
 ::: previousNext datePicker
 :::
