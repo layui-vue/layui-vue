@@ -2,25 +2,28 @@
   <div class="layui-laydate-footer">
     <slot></slot>
     <div class="laydate-footer-btns">
-      <span
+      <LayButton
+        size="xs"
         lay-type="now"
         v-if="props.showNow"
         class="laydate-btns-now"
         @click="handelNow"
-        >{{ t("datePicker.now") }}</span
+        >{{ t("datePicker.now") }}</LayButton
       >
-      <span
+      <LayButton
+        size="xs"
         v-if="props.showConfirm"
         lay-type="confirm"
         class="laydate-btns-confirm"
         @click="handelOk"
-        >{{ t("datePicker.confirm") }}</span
+        >{{ t("datePicker.confirm") }}</LayButton
       >
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
+import LayButton from "../../../button/index.vue";
 import { useI18n } from "../../../../language";
 
 export interface PanelFoot {

@@ -279,33 +279,30 @@ html #layuicss-laydate {
   padding: 10px;
 }
 
-.layui-laydate-footer .laydate-footer-btns span {
-  border-radius: 0px;
+
+.layui-laydate-footer .layui-btn{
+  padding: 0 10px;
+  white-space: nowrap;
+  transition: all 0.3s;
 }
 
-.layui-laydate-footer .laydate-footer-btns span:first-child {
+.layui-laydate-footer .laydate-footer-btns .layui-btn{
+  border-radius: 0;
+}
+
+.layui-laydate-footer .laydate-footer-btns .layui-btn:first-child {
   border-top-left-radius: var(--global-border-radius);
   border-bottom-left-radius: var(--global-border-radius);
 }
 
-.layui-laydate-footer .laydate-footer-btns span:last-child {
+.layui-laydate-footer .laydate-footer-btns .layui-btn:last-child {
   border-top-right-radius: var(--global-border-radius);
   border-bottom-right-radius: var(--global-border-radius);
+  margin-left: -1px;
 }
 
-.layui-laydate-footer span {
-  display: inline-block;
-  vertical-align: top;
-  height: 26px;
-  line-height: 24px;
-  padding: 0 10px;
-  border: 1px solid #c9c9c9;
-  border-radius: 2px;
-  background-color: #fff;
-  font-size: 12px;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: all 0.3s;
+.layui-laydate-footer .layui-btn + .layui-btn {
+  margin-left: 0;
 }
 .layui-laydate-footer span:hover {
   color: var(--global-primary-color);
@@ -325,8 +322,9 @@ html #layuicss-laydate {
   right: 10px;
   top: 10px;
 }
-.laydate-footer-btns span {
-  margin: 0 0 0 -1px;
+
+.layui-laydate-footer .type-time {
+  color: var(--global-primary-color);
 }
 
 /* 年月列表 */

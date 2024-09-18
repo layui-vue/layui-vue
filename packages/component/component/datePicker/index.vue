@@ -108,7 +108,7 @@
 </template>
 
 <script lang="ts" setup>
-import "./index.less";
+// import "./index.less";
 import dayjs from "dayjs";
 import LayInput from "../input/index.vue";
 import LayDropdown from "../dropdown/index.vue";

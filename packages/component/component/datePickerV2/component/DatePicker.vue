@@ -3,6 +3,7 @@ import type { UniquePickerProps } from "./interface";
 import { computed, ref, watch } from "vue";
 import dayjs, { type Dayjs } from "dayjs";
 
+import LayButton from "../../button/index.vue";
 import Date from "./common/Date.vue";
 import Time from "./common/Time.vue";
 import Year from "./common/Year.vue";
@@ -30,9 +31,18 @@ const dateType = computed(() => {
   return props.type!;
 });
 
+// 非一次性选择 || datetime|time 类型
+const showConfirm = computed(() => {
+  return !props.simple || ["datetime", "time"].includes(dateType.value);
+});
+
 watch(
   () => dateType.value,
   (val) => {
+    if (val === "datetime") {
+      currentType.value = "date";
+      return;
+    }
     if (val === "yearmonth") {
       currentType.value = "month";
       return;
@@ -55,7 +65,7 @@ const handlePickTime = (value: Dayjs) => {
 const handlePickYear = (year: number) => {
   const data = currentData.value.year(year);
 
-  if (dateType.value === "date") {
+  if (["datetime", "date"].includes(dateType.value)) {
     currentData.value = data;
     currentType.value = "date";
   } else if (dateType.value === "yearmonth") {
@@ -70,7 +80,7 @@ const handlePickYear = (year: number) => {
 const handlePickMonth = (month: number) => {
   const data = currentData.value.month(month);
 
-  if (dateType.value === "date") {
+  if (["datetime", "date"].includes(dateType.value)) {
     currentData.value = data;
     currentType.value = "date";
   } else {
@@ -87,8 +97,21 @@ const handleDateChangeYearMonth = (data: Dayjs) => {
   currentData.value = data;
 };
 
+const handleToggleTimePanel = () => {
+  currentType.value = currentType.value === "date" ? "time" : "date";
+};
+
+const preCondition = () => {
+  // datetime类型点击确定还原当前panel为date
+  if (dateType.value === "datetime") {
+    currentType.value = "date";
+  }
+};
+
 const handleConfirm = (isConfirm = false) => {
-  if (props.simple || isConfirm) {
+  if (!showConfirm.value || isConfirm) {
+    preCondition();
+
     emits("pick", formatValue());
   }
 };
@@ -144,10 +167,17 @@ const footerValue = () => {
     @type-change="currentType = 'year'"
   ></Month>
   <Footer
-    :showConfirm="!simple"
+    :showConfirm="showConfirm"
     @confirm="handleConfirm(true)"
     @now="handleNow"
   >
-    {{ footerValue() }}
+    <LayButton
+      v-if="dateType === 'datetime'"
+      size="xs"
+      :class="{ 'type-time': currentType === 'time' }"
+      @click="handleToggleTimePanel"
+      >{{ currentType === "date" ? "选择时间" : "选择日期" }}</LayButton
+    >
+    <template v-else>{{ footerValue() }}</template>
   </Footer>
 </template>
