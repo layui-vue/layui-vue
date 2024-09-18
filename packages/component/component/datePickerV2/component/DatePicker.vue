@@ -118,7 +118,7 @@ const footerValue = () => {
     :dateType="dateType"
     @pick="handlePickDate"
     @year-month-change="handleDateChangeYearMonth"
-    @type-change="(type) => (currentType = type)"
+    @type-change="(type: 'year' | 'month') => (currentType = type)"
   ></Date>
   <Time
     v-if="currentType === 'time'"

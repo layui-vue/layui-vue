@@ -7,6 +7,7 @@ import type {
 } from "../../interface";
 import LayDropdown from "../../../dropdown/index.vue";
 import LayInput from "../../../input/index.vue";
+import { normalizeDayjsValue } from "../../util";
 import { isArray, isNumber } from "../../../../utils";
 
 const props = withDefaults(defineProps<DatePickerProps>(), {});
@@ -29,7 +30,7 @@ const dateValue = computed(() => {
   if (props.range) {
     return (props.modelValue as Array<DatePickerModelValueSingleType>).map(
       (data) => {
-        return dayjs(data).format(props.format);
+        return normalizeDayjsValue(data, props.format!).format(props.format);
       }
     );
   } else {
@@ -45,9 +46,10 @@ const dateValue = computed(() => {
       value += "";
     }
 
-    return dayjs(value as DatePickerModelValueSingleType, props.format).format(
-      props.format
-    );
+    return normalizeDayjsValue(
+      value as DatePickerModelValueSingleType,
+      props.format!
+    ).format(props.format);
   }
 });
 
