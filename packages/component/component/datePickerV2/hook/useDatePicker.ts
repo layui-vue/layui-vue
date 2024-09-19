@@ -1,10 +1,15 @@
 import type { DatePickerProps, DatePickerEmits, TypeMap } from "../interface";
 
-import { computed } from "vue";
+import { computed, provide, ref } from "vue";
 // import dayjs from "dayjs";
 import YearPanel from "../component/common/Year.vue";
 import MonthPanel from "../component/common/Month.vue";
 import Picker from "../component/Picker.vue";
+import YearHeader from "../component/header/YearHeader.vue";
+import { useYearPanel } from "./useYearPanel";
+import Footer from "../component/common/Footer.vue";
+import { PICKER_CONTEXT } from "../component/interface";
+import dayjs, { type Dayjs } from "dayjs";
 
 export const useDatePicker = (
   props: DatePickerProps
@@ -29,9 +34,21 @@ export const useDatePicker = (
 
   // 类型映射
   const TYPE_MAP: TypeMap = {
-    date: { component: YearPanel, format: "YYYY-MM-DD" },
+    date: {
+      context: useYearPanel,
+      header: YearHeader,
+      component: YearPanel,
+      footer: Footer,
+      format: "YYYY-MM-DD",
+    },
     datetime: { component: YearPanel, format: "YYYY-MM-DD HH:mm:ss" },
-    year: { component: Picker, format: "YYYY" },
+    year: {
+      context: useYearPanel,
+      header: YearHeader,
+      component: Picker,
+      footer: Footer,
+      format: "YYYY",
+    },
     month: { component: Picker, format: "MM" },
     yearmonth: { component: Picker, format: "YYYY-MM" },
     time: { component: YearPanel, format: "HH:mm:ss" },
@@ -46,16 +63,38 @@ export const useDatePicker = (
   });
 
   const typeMap = computed(() => {
-    return TYPE_MAP[props.type!];
+    const t = TYPE_MAP[props.type!];
+    t.context?.(props);
+    return t;
   });
 
   const RenderComponent = computed(() => {
     return typeMap.value.component;
   });
 
+  const RenderHeader = computed(() => {
+    return typeMap.value.header;
+  });
+
+  const RenderFooter = computed(() => {
+    return typeMap.value.footer;
+  });
+
+  const currentData = ref<Dayjs>(dayjs());
+  const currentType = ref();
+
+  provide(PICKER_CONTEXT, {
+    currentData,
+    currentType,
+  });
+
   return {
     // _modelValue,
+    currentData,
+    currentType,
+    RenderHeader,
     RenderComponent,
+    RenderFooter,
     renderComponentProps,
   };
 };

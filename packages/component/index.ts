@@ -300,6 +300,7 @@ export {
   LayFullscreen,
   LayConfigProvider,
   LayDatePicker,
+  LayDatePickerV2,
   LayTransition,
   LayUpload,
   LayRipple,

@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import type { DatePickerProps } from "../interface";
-import { computed, ref, watch } from "vue";
+import { computed, inject, watch } from "vue";
 import dayjs, { type Dayjs } from "dayjs";
 
 import Year from "./common/Year.vue";
 import Month from "./common/Month.vue";
-import Footer from "./common/Footer.vue";
+import { PICKER_CONTEXT } from "./interface";
 
 interface PickerProps extends DatePickerProps {
   modelValue: Dayjs;
@@ -13,10 +13,9 @@ interface PickerProps extends DatePickerProps {
 
 const props = defineProps<PickerProps>();
 
-const emits = defineEmits(["pick"]);
+const { currentData, currentType } = inject(PICKER_CONTEXT) as any;
 
-const currentData = ref<Dayjs>(dayjs());
-const currentType = ref();
+const emits = defineEmits(["pick"]);
 
 watch(
   () => props.modelValue,
@@ -79,17 +78,12 @@ const handleConfirm = (isConfirm = false) => {
   }
 };
 
-const handleNow = () => {
-  currentData.value = dayjs();
-};
-
 const formatValue = () => {
   return dayjs(currentData.value).format(props.format);
 };
 </script>
 
 <template>
-  <div></div>
   <Year
     v-if="currentType === 'year'"
     :modelValue="currentData"
@@ -104,7 +98,4 @@ const formatValue = () => {
     @year-change="handleMonthChangeYear"
     @type-change="currentType = 'year'"
   ></Month>
-  <Footer @confirm="handleConfirm(true)" @now="handleNow">
-    {{ formatValue() }}
-  </Footer>
 </template>

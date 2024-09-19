@@ -41,14 +41,6 @@
         </li>
       </ul>
     </div>
-    <!-- <PanelFoot @ok="footOnOk" @now="footOnNow" @clear="footOnClear">
-      <span
-        v-if="datePicker.type === 'yearmonth'"
-        @click="datePicker.showPanel.value = 'year'"
-        class="laydate-btns-time"
-        >{{ t("datePicker.selectYear") }}</span
-      >
-    </PanelFoot> -->
   </div>
 </template>
 

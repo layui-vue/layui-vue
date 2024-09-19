@@ -41,16 +41,15 @@ const classes = computed(() => {
 //   });
 // }
 const dateValue = computed(() => {
+  let val = props.modelValue;
+  if (!props.modelValue && !props.modelValue) val = [dayjs(), dayjs()];
+
   return props.range
-    ? (props.modelValue as Array<DatePickerModelValueSingleType>).map(
-        (data) => {
-          return dayjs(data).format(props.format);
-        }
-      )
+    ? (val as Array<DatePickerModelValueSingleType>).map((data) => {
+        return dayjs(data).format(props.format);
+      })
     : props.modelValue
-    ? dayjs(props.modelValue as DatePickerModelValueSingleType).format(
-        props.format
-      )
+    ? dayjs(val as DatePickerModelValueSingleType).format(props.format)
     : "";
 });
 

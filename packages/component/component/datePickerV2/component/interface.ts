@@ -39,5 +39,8 @@ export type CommonBlockContext = {
   // setNowDate: () => void;
 };
 
+export const PICKER_CONTEXT = Symbol("PickerContext");
 export const COMMON_BLOCK_CONTEXT: InjectionKey<CommonBlockContext> =
   Symbol("CommonBlock");
+export const YEAR_CONTEXT = Symbol("YearContext");
+export const HEADER_YEAR_CONTEXT = Symbol("HeaderYearContext");

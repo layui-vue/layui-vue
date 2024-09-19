@@ -1,6 +1,6 @@
-import { defineComponent, VNodeTypes, Slots } from "vue";
+import { defineComponent, VNodeTypes, Slots, defineAsyncComponent } from "vue";
 
-import type { PropType } from "vue";
+import type { Component, PropType } from "vue";
 
 type RenderFunc = (props: Record<string, unknown>) => VNodeTypes;
 
@@ -23,3 +23,11 @@ export default defineComponent({
     };
   },
 });
+
+const AsyncRenderer = (c: Component, delay?: number) =>
+  defineAsyncComponent({
+    loader: () => Promise.resolve(c),
+    delay,
+  });
+
+export { AsyncRenderer };

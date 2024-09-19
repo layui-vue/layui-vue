@@ -1,74 +1,37 @@
 <template>
-  <div class="layui-laydate">
-    <div class="layui-laydate-main laydate-main-list-0 laydate-ym-show">
-      <div class="layui-laydate-year-panel-header">
-        <div class="laydate-set-ym">
-          <lay-icon
-            type="layui-icon-left"
-            @click="currentDate -= yearPage ?? 15"
-          ></lay-icon>
-          <span class="laydate-time-text">
-            {{ yearRange.join(" - ") }}
-          </span>
-          <lay-icon
-            type="layui-icon-right"
-            @click="currentDate += yearPage ?? 15"
-          ></lay-icon>
-        </div>
-      </div>
-    </div>
-    <div
-      class="layui-laydate-content"
-      style="height: 220px; overflow-y: auto"
-      ref="ScrollRef"
-    >
-      <ul class="layui-laydate-list laydate-year-list">
-        <li
-          v-for="item of yearList"
-          :key="item"
-          :class="{
-            'layui-this': currentYear === item,
-            'layui-laydate-current': item === dayjs().year(),
-            'layui-disabled': cellDisabled(item),
-          }"
-          @click="handleYearClick(item)"
-        >
-          {{ item }}
-        </li>
-      </ul>
-    </div>
-    <!--<PanelFoot @ok="footOnOk" @now="footOnNow">
-       <span
-        v-if="datePicker.type === 'yearmonth'"
-        @click="datePicker.showPanel.value = 'month'"
-        class="laydate-btns-time"
-        >{{ t("datePicker.selectMonth") }}</span
+  <div
+    class="layui-laydate-content"
+    style="height: 220px; overflow-y: auto"
+    ref="ScrollRef"
+  >
+    <ul class="layui-laydate-list laydate-year-list">
+      <li
+        v-for="item of yearList"
+        :key="item"
+        :class="{
+          'layui-this': currentYear === item,
+          'layui-laydate-current': item === dayjs().year(),
+          'layui-disabled': cellDisabled(item),
+        }"
+        @click="handleYearClick(item)"
       >
-      <template v-else-if="parseInt(Year.toString()) > 0">{{ Year }}</template> 
-      {{ _currentYear }}
-    </PanelFoot>-->
+        {{ item }}
+      </li>
+    </ul>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { type BaseDateTypeProps } from "../interface";
-import type {
-  provideType,
-  DatePickerProps,
-  DatePickerModelValueSingleType,
-} from "../../interface";
+import { YEAR_CONTEXT, type BaseDateTypeProps } from "../interface";
 
-import dayjs, { Dayjs } from "dayjs";
+import dayjs from "dayjs";
 import { useI18n } from "../../../../language";
-import { computed, inject, ref, watch } from "vue";
-import { getYears } from "../../day";
-import PanelFoot from "./Footer.vue";
-import LayIcon from "../../../icon";
+import { computed, inject, watch } from "vue";
+import { useYearPanel } from "../../hook/useYearPanel";
 
 defineOptions({
   name: "YearPanel",
 });
-
 const props = withDefaults(defineProps<BaseDateTypeProps>(), {
   // modelValue: "",
   // type: "date",
@@ -86,24 +49,14 @@ const props = withDefaults(defineProps<BaseDateTypeProps>(), {
   // yearStep: 1,
 });
 
+const { yearList, currentYear, currentDate } = inject(YEAR_CONTEXT) as any;
+
 const emits = defineEmits(["pick"]);
-
-const currentYear = ref();
-const currentDate = ref();
-
-const yearList = computed<number[]>(() =>
-  getYears(currentDate.value, props.yearPage, props.yearStep)
-);
-const yearRange = computed(() => [yearList.value.at(0), yearList.value.at(-1)]);
 
 watch(
   () => props.modelValue,
-  () => {
-    currentDate.value = currentYear.value = props.modelValue.year();
-  },
-  {
-    immediate: true,
-  }
+  () => (currentDate.value = currentYear.value = props.modelValue.year()),
+  { immediate: true }
 );
 
 const { t } = useI18n();

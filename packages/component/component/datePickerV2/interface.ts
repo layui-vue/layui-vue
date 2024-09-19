@@ -12,7 +12,10 @@ export type DatePickerType =
 
 export type TypeMap = {
   [k in DatePickerType]: {
+    context?: any;
+    header?: Component;
     component: Component;
+    footer?: Component;
     format: string;
   };
 };
