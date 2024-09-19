@@ -412,8 +412,8 @@ export default {
 | default-time   | 范围日期 `type=datetime` 时分秒默认时间      | `string` `Array<string>`                    | --                  | 例如`12:30:00`                                      | `2.17.2` |
 | contentStyle   | 内容自定义样式                               | `StyleValue`                                | --                  | --                                                  | --       |
 | contentClass   | 内容自定义 Class                             | `string` `Array<string \| object>` `object` | --                  | --                                                  | --       |
-| yearPage       | 年份选择器每页年份的个数                     | `2.18.4`                                    | `number`            | `15`                                                | --       |
-| yearStep       | 年份选择器年份的步进值                       | `2.18.4`                                    | `number`            | `1`                                                 | --       |
+| yearPage       | 年份选择器每页年份的个数                     | `2.19.0`                                    | `number`            | `15`                                                | --       |
+| yearStep       | 年份选择器年份的步进值                       | `2.19.0`                                    | `number`            | `1`                                                 | --       |
 
 :::
 
