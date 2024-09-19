@@ -10,6 +10,7 @@ import { type Dayjs } from "dayjs";
 import { computed } from "vue";
 import DatePicker from "../component/DatePicker.vue";
 import MonthRange from "../component/MonthRange.vue";
+import YearRange from "../component/YearRange.vue";
 
 import { normalizeDayjsValue } from "../util";
 import { isArray, isNumber } from "../../../utils";
@@ -60,7 +61,7 @@ export const useDatePicker = (props: RequiredDatePickerProps) => {
   const TYPE_MAP: TypeMap = {
     datetime: { component: DatePicker, format: "YYYY-MM-DD HH:mm:ss" },
     date: { component: DatePicker, format: "YYYY-MM-DD" },
-    year: { component: DatePicker, format: "YYYY" },
+    year: { component: props.range ? YearRange : DatePicker, format: "YYYY" },
     month: { component: props.range ? MonthRange : DatePicker, format: "M" },
     yearmonth: {
       component: props.range ? MonthRange : DatePicker,

@@ -2,19 +2,21 @@
   <div class="layui-laydate">
     <div class="layui-laydate-main">
       <div class="layui-laydate-header">
-        <lay-icon
-          type="layui-icon-prev"
-          @click="currentDate -= DatePickerContext.yearPage"
-        ></lay-icon>
-        <div class="laydate-set-ym">
-          <span class="laydate-time-text">
-            {{ yearRange.join(" - ") }}
-          </span>
-        </div>
-        <lay-icon
-          type="layui-icon-next"
-          @click="currentDate += DatePickerContext.yearPage"
-        ></lay-icon>
+        <slot name="header" :yearList="yearRange">
+          <lay-icon
+            type="layui-icon-prev"
+            @click="currentDate -= DatePickerContext.yearPage"
+          ></lay-icon>
+          <div class="laydate-set-ym">
+            <span class="laydate-time-text">
+              {{ yearRange.join(" - ") }}
+            </span>
+          </div>
+          <lay-icon
+            type="layui-icon-next"
+            @click="currentDate += DatePickerContext.yearPage"
+          ></lay-icon>
+        </slot>
       </div>
 
       <div
@@ -30,8 +32,10 @@
               'layui-this': currentYear === item,
               'layui-laydate-current': item === dayjs().year(),
               'layui-disabled': cellDisabled(item),
+              ...classes?.(dayjs().year(item)),
             }"
             @click="handleYearClick(item)"
+            @mouseenter="handleYearMouseenter(item)"
           >
             {{ item }}
           </li>
@@ -48,7 +52,6 @@ import dayjs from "dayjs";
 import { computed, ref, watch, inject } from "vue";
 
 import LayIcon from "../../../icon";
-import { useI18n } from "../../../../language";
 import { DATE_PICKER_CONTEXT } from "../../interface";
 import { getYears } from "../../day";
 
@@ -57,7 +60,7 @@ defineOptions({
 });
 
 const props = withDefaults(defineProps<BasePanelProps>(), {});
-const emits = defineEmits(["pick"]);
+const emits = defineEmits(["pick", "hover-cell"]);
 
 const DatePickerContext = inject(DATE_PICKER_CONTEXT)!;
 
@@ -103,6 +106,14 @@ const handleYearClick = (item: number) => {
   }
 
   currentYear.value = item;
-  emits("pick", item);
+  emits("pick", DatePickerContext.range ? props.modelValue.year(item) : item);
+};
+
+const handleYearMouseenter = (item: number) => {
+  if (cellDisabled.value(item) || !DatePickerContext.range) {
+    return;
+  }
+
+  emits("hover-cell", dayjs().year(item));
 };
 </script>
