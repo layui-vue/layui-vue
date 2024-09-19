@@ -158,15 +158,20 @@ html #layuicss-laydate {
 /* 头部结构 */
 .layui-laydate-header {
   position: relative;
-  line-height: 30px;
-  padding: 10px 70px 5px;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+  // line-height: 30px;
+  // padding: 10px 70px 5px;
 }
 .layui-laydate-header * {
   vertical-align: bottom;
 }
 .layui-laydate-header i {
-  position: absolute;
-  top: 10px;
+  // position: absolute;
+  // top: 10px;
   padding: 0 5px;
   color: #999;
   font-size: 12px;
@@ -273,8 +278,9 @@ html #layuicss-laydate {
 
 /* 底部结构 */
 .layui-laydate-footer {
-  position: relative;
-  height: 46px;
+  // position: relative;
+  // height: 46px;
+  display: flex;
   line-height: 26px;
   padding: 10px;
 }
@@ -318,9 +324,10 @@ html #layuicss-laydate {
   padding-left: 0;
 }
 .laydate-footer-btns {
-  position: absolute;
-  right: 10px;
-  top: 10px;
+  margin-left: auto;
+  // position: absolute;
+  // right: 10px;
+  // top: 10px;
 }
 
 .layui-laydate-footer .type-time {
@@ -559,7 +566,7 @@ html #layuicss-laydate {
 .laydate-range-hover {
   background-color: var(--global-neutral-color-2) !important;
 }
-.layui-laydate-content .layui-disabled:hover {
+.layui-laydate-content .layui-disabled:not(.layui-laydate-current,.layui-this):hover {
   background-color: transparent !important;
 }
 
@@ -596,6 +603,9 @@ html #layuicss-laydate {
   }
 }
 .layui-laydate-range {
+  &-main {
+    display: flex;
+  }
   .laydate-set-ym {
     overflow: visible;
     white-space: nowrap;

@@ -9,14 +9,16 @@ import { type Dayjs } from "dayjs";
 
 import { computed } from "vue";
 import DatePicker from "../component/DatePicker.vue";
+import MonthRange from "../component/MonthRange.vue";
 
 import { normalizeDayjsValue } from "../util";
-import { isArray, isNumber, isString } from "../../../utils";
+import { isArray, isNumber } from "../../../utils";
 
 export const useDatePicker = (props: RequiredDatePickerProps) => {
   const initDate = computed<Dayjs | Array<Dayjs>>(() => {
-    if (isArray(props.modelValue)) {
-      return props.modelValue.map((date: DatePickerModelValueSingleType) => {
+    if (props.range) {
+      const modelValue = isArray(props.modelValue) ? props.modelValue : [];
+      return modelValue.map((date: DatePickerModelValueSingleType) => {
         const value =
           date ||
           (props.defaultValue as DatePickerModelValueSingleType) ||
@@ -39,7 +41,10 @@ export const useDatePicker = (props: RequiredDatePickerProps) => {
       }
 
       // 处理CustomParseFormat插件可能造成解析Date, number, '', undefined...错误
-      return normalizeDayjsValue(value, typeMap.value.format);
+      return normalizeDayjsValue(
+        value as DatePickerModelValueSingleType,
+        typeMap.value.format
+      );
     }
   });
 
@@ -56,8 +61,11 @@ export const useDatePicker = (props: RequiredDatePickerProps) => {
     datetime: { component: DatePicker, format: "YYYY-MM-DD HH:mm:ss" },
     date: { component: DatePicker, format: "YYYY-MM-DD" },
     year: { component: DatePicker, format: "YYYY" },
-    month: { component: DatePicker, format: "M" },
-    yearmonth: { component: DatePicker, format: "YYYY-MM" },
+    month: { component: props.range ? MonthRange : DatePicker, format: "M" },
+    yearmonth: {
+      component: props.range ? MonthRange : DatePicker,
+      format: "YYYY-MM",
+    },
     time: { component: DatePicker, format: "HH:mm:ss" },
   };
 

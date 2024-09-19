@@ -28,11 +28,10 @@ const classes = computed(() => {
 
 const dateValue = computed(() => {
   if (props.range) {
-    return (props.modelValue as Array<DatePickerModelValueSingleType>).map(
-      (data) => {
-        return normalizeDayjsValue(data, props.format!).format(props.format);
-      }
-    );
+    const modelValue = isArray(props.modelValue) ? props.modelValue : [];
+    return modelValue.map((data) => {
+      return normalizeDayjsValue(data, props.format!).format(props.format);
+    });
   } else {
     if (!props.modelValue) return "";
 
@@ -65,6 +64,7 @@ function onPick(item: string | Date) {
       ref="dropdownRef"
       :disabled="disabled"
       :autoFitMinWidth="false"
+      :click-to-close="false"
       :contentClass="contentClass"
       :contentStyle="contentStyle"
     >

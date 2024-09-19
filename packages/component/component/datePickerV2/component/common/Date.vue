@@ -85,12 +85,20 @@ const MONTH_NAME = computed(() => [
 watch(
   () => props.modelValue,
   () => {
-    Day.value = dayjs(props.inputDate).startOf("day").valueOf(); //unix
-
     Year.value = dayjs(props.modelValue).year();
     Month.value = dayjs(props.modelValue).month();
 
     dateList.value = setDateList(Year.value, Month.value);
+  },
+  {
+    immediate: true,
+  }
+);
+
+watch(
+  () => props.inputDate,
+  () => {
+    Day.value = dayjs(props.inputDate).startOf("day").valueOf(); //unix
   },
   {
     immediate: true,
