@@ -134,8 +134,12 @@ const footerValue = () => {
 </script>
 
 <template>
+  <!-- 当datetime模式下 切换为time时，只通过css隐藏date模块，不销毁date模块。 -->
+  <!-- 防止date内部inputDate watch 因重新渲染而再次执行。 -->
+  <!-- 再次执行会导致在非simple模式下切换日期重新赋值datepicker.modelValue -->
   <Date
-    v-if="currentType === 'date'"
+    v-if="currentType === 'date' || currentType === 'time'"
+    v-show="currentType === 'date'"
     :modelValue="currentData"
     :inputDate="inputDate"
     :dateType="dateType"

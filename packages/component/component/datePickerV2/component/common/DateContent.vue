@@ -96,15 +96,17 @@ const cellDisabled = computed(() => {
     if (item.type !== "current" && DatePickerContext.range) {
       return true;
     }
+
     if (
       DatePickerContext.min &&
-      dayjs(item.value).isBefore(dayjs(DatePickerContext.min))
+      dayjs(item.value).isBefore(dayjs(DatePickerContext.min), "day")
     ) {
       return true;
     }
+
     if (
       DatePickerContext.max &&
-      dayjs(item.value).isAfter(dayjs(DatePickerContext.max))
+      dayjs(item.value).isAfter(dayjs(DatePickerContext.max), "day")
     ) {
       return true;
     }

@@ -25,7 +25,7 @@
                 :key="it"
                 :class="{
                   num: true,
-                  'layui-this': index == hms[item.type as keyof HmsType],
+                  'layui-this': index == hms[item.type],
                   'layui-disabled': cellDisabled(item.type, index),
                 }"
               >
@@ -40,7 +40,7 @@
 </template>
 
 <script lang="ts" setup>
-import dayjs, { type Dayjs } from "dayjs";
+import dayjs from "dayjs";
 import { inject, onMounted, ref, nextTick, watch, computed } from "vue";
 
 import type { BasePanelProps } from "../interface";
@@ -64,7 +64,10 @@ const emits = defineEmits(["pick"]);
 const DatePickerContext = inject(DATE_PICKER_CONTEXT)!;
 const { t } = useI18n();
 
-const els = [
+const els: Array<{
+  count: number;
+  type: keyof typeof hmsMap;
+}> = [
   { count: 24, type: "hh" },
   { count: 60, type: "mm" },
   { count: 60, type: "ss" },
@@ -75,21 +78,35 @@ const hms = ref<HmsType>({
   ss: props.modelValue.second(),
 });
 
+const hmsMap = {
+  hh: "hour",
+  mm: "minute",
+  ss: "second",
+} as const;
+
 const cellDisabled = computed(() => {
-  return (type?: string, value?: number) => {
+  return (type: keyof typeof hmsMap, value: number) => {
     const haveValue = typeof value !== "undefined";
-    const toDay = dayjs().format("YYY-MM-DD");
     const _hms: Record<string, number> = {
       hh: haveValue ? hms.value.hh : dayjs().hour(),
       mm: haveValue ? hms.value.mm : dayjs().minute(),
       ss: haveValue ? hms.value.ss : dayjs().second(),
     };
     haveValue && (_hms[type!] = value);
-    const time = `${_hms.hh}:${_hms.mm}:${_hms.ss}`;
+
+    const currentDate = props.modelValue
+      .startOf("day")
+      .hour(_hms.hh)
+      .minute(_hms.mm)
+      .second(_hms.ss);
+
+    const diffType = hmsMap[type] as (typeof hmsMap)[keyof typeof hmsMap];
+
     if (
       DatePickerContext.min &&
-      dayjs(`${toDay} ${time}`).isBefore(
-        dayjs(`${toDay} ${DatePickerContext.min}`)
+      currentDate.isBefore(
+        dayjs(DatePickerContext.min, DatePickerContext.format),
+        diffType
       )
     ) {
       return true;
@@ -97,8 +114,9 @@ const cellDisabled = computed(() => {
 
     if (
       DatePickerContext.max &&
-      dayjs(`${toDay} ${time}`).isAfter(
-        dayjs(`${toDay} ${DatePickerContext.max}`)
+      currentDate.isAfter(
+        dayjs(DatePickerContext.max, DatePickerContext.format),
+        diffType
       )
     ) {
       return true;
