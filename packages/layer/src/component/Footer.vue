@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { PropsContentType } from "../../types";
+import { PropsContentType } from "../types";
 import { RenderFunction, StyleValue, computed } from "vue";
 import LayRender from "../../../component/component/_components/render";
 

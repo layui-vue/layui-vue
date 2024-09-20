@@ -88,8 +88,9 @@ const openPageData = reactive({
 const openPage = function() {
     layer.open({
         type: "page",
-        title: "组件页面",
-        content: h(Children, { data: openPageData })
+        title: h("div", { style: "color: #f00; pointer-events: none;" }, "组件页面"),
+        content: h(Children, { data: openPageData }),
+        footer: h("div", { style: "color: #0f0; pointer-events: none;" }, "组件底部")
     })
 }
 
@@ -137,14 +138,14 @@ npm install @layui/layer-vue
 :::
 
 ```js
-import { createApp } from 'vue';
-import layer from '@layui/layer-vue';
-import '@layui/layer-vue/lib/index.css';
-import App from './App.vue';
+import { createApp } from "vue";
+import layer from "@layui/layer-vue";
+import "@layui/layer-vue/lib/index.css";
+import App from "./App.vue";
 
 const app = createApp(App);
 app.use(layer);
-app.mount('#app');
+app.mount("#app");
 ```
 
 ::: title 普通消息
@@ -343,6 +344,7 @@ const groupImg = function() {
   })
 }
 </script>
+
 :::
 
 ::: title 加载弹层
@@ -373,12 +375,13 @@ const loading2 = function() {
     layer.load(2, {time: 3000})
 }
 </script>
+
 :::
 
 ::: title 模态弹层
 :::
 
-::: demo 通过 layer.open(option) 创建模态窗, 目前支持 `iframe` `page` 等类型, 你可以使用options选项开启 `resize` `offset` 等更多特性。
+::: demo 通过 layer.open(option) 创建模态窗, 目前支持 `iframe` `page` 等类型, 你可以使用 options 选项开启 `resize` `offset` 等更多特性。
 
 <template>
     <lay-row :space="30" >
@@ -492,6 +495,7 @@ const openAuto = function() {
     })
 }
 </script>
+
 :::
 
 ::: title 模板调用
@@ -568,11 +572,12 @@ const action11 = ref([
 :::
 
 ::: demo 通过 layer.drawer(options) 创建抽屉层, 参数 `options` 为可选配置。 抽屉本质上是一个特殊的模态窗, 你可以使用 `offset` 选项来打开方向。
+
 <template>
-    <lay-button @click="openTopDrawer" type="primary">上</lay-button>
-    <lay-button @click="openBottomDrawer" type="primary">下</lay-button>
-    <lay-button @click="openLeftDrawer" type="primary">左</lay-button>
-    <lay-button @click="openRightDrawer" type="primary">右</lay-button>
+<lay-button @click="openTopDrawer" type="primary">上</lay-button>
+<lay-button @click="openBottomDrawer" type="primary">下</lay-button>
+<lay-button @click="openLeftDrawer" type="primary">左</lay-button>
+<lay-button @click="openRightDrawer" type="primary">右</lay-button>
 </template>
 
 <script setup>
@@ -607,6 +612,7 @@ const openRightDrawer = function() {
     })
 }
 </script>
+
 :::
 
 ::: title 局部使用
@@ -644,6 +650,7 @@ const changeFeatureVisible2 = () => {
     })
 }
 </script>
+
 :::
 
 ::: title 高级通讯
@@ -678,7 +685,7 @@ const openComponent1 = () => {
 
 :::
 
-::: demo 查看 [Children2.vue](https://layui-vue.github.io/layui-vue-playground/#eNqNksFum0AQhl9lxAWsYmPnSG2UKOoTtLfSA4Yh3hZ2VzC4sRDnSO2h1x6jPkQP7esklfoWnQXWAaWHcGJmv5n9d+ZvnSutV8cGndDZEpa6SAijWAJs9w2RknCZFiL9tIsdpVFeq1IriZIuYid6+PX14ffPbTCAQ5GQuiGgk0auILyl2IHjslQZFpyQTbnnRMDsNpjcxmGdVkITFIm8MZU1YzVSo/lU8J0VQQsVJimJI/pw8DnIoYO8UiW4rN+dcEVywup8eMlhI4I+uZyR1wdRZBXKd5/VyK4Cm7swQ2E0lqmSNYGulIbdWYLXdgt7ZF7VH+XeZr1ec96ezEfGjLeAXQStGVWvZ2UIr48BSFCBIbh/7u/+/vju+kOWOxFXh3DwJnr9oYn5jLKRBVDyKsu8CuvFEwC9wtUxKRpkDZPgFWws1E1avG32L26xfN6iW/Q/ZkCdWfSwWl6k4zvD5JdlolcfayXZdW08JnnlYdt1DM128NyYuarK/u/JpKPhhoitczZtkmXs1Mcv9zObvqCwbtip0ePdt7m/g/HymX2tea1h7fqxFMTTyjAXEt9wUHvvXVbk+i63dz9MnMLZuT2gr/Z6fBikRbn0/6jpadHJ1I0+OhUIdcpuyzhj3jCUam4v5E0Im7W+fW33ZejI6f4B7opkgw==), 通过 h() 函数的第二个参数声明 onXxx() 形式的函数完成 Children2.vue 的事件监听。 
+::: demo 查看 [Children2.vue](https://layui-vue.github.io/layui-vue-playground/#eNqNksFum0AQhl9lxAWsYmPnSG2UKOoTtLfSA4Yh3hZ2VzC4sRDnSO2h1x6jPkQP7esklfoWnQXWAaWHcGJmv5n9d+ZvnSutV8cGndDZEpa6SAijWAJs9w2RknCZFiL9tIsdpVFeq1IriZIuYid6+PX14ffPbTCAQ5GQuiGgk0auILyl2IHjslQZFpyQTbnnRMDsNpjcxmGdVkITFIm8MZU1YzVSo/lU8J0VQQsVJimJI/pw8DnIoYO8UiW4rN+dcEVywup8eMlhI4I+uZyR1wdRZBXKd5/VyK4Cm7swQ2E0lqmSNYGulIbdWYLXdgt7ZF7VH+XeZr1ec96ezEfGjLeAXQStGVWvZ2UIr48BSFCBIbh/7u/+/vju+kOWOxFXh3DwJnr9oYn5jLKRBVDyKsu8CuvFEwC9wtUxKRpkDZPgFWws1E1avG32L26xfN6iW/Q/ZkCdWfSwWl6k4zvD5JdlolcfayXZdW08JnnlYdt1DM128NyYuarK/u/JpKPhhoitczZtkmXs1Mcv9zObvqCwbtip0ePdt7m/g/HymX2tea1h7fqxFMTTyjAXEt9wUHvvXVbk+i63dz9MnMLZuT2gr/Z6fBikRbn0/6jpadHJ1I0+OhUIdcpuyzhj3jCUam4v5E0Im7W+fW33ZejI6f4B7opkgw==), 通过 h() 函数的第二个参数声明 onXxx() 形式的函数完成 Children2.vue 的事件监听。
 
 <template>
   <lay-input type="text" v-model="numb" >
@@ -834,16 +841,16 @@ const openCallback = () => {
 
 ::: table
 
-| 函数签名 | 描述 |
-| ------- | --- |
-| `create: (option: LayerProps, defaultOption: LayerProps, callback?: Function)` | 创建一个弹层 |
-| `open: (option: LayerProps, callback?: Function)` | 打开一个弹层 |
-| `close: (id: string)` | 关闭指定 ID 的弹层 |
-| `closeAll: ()` | 关闭当前上下文中全部的弹层 |
-| `reset: (id: string)` | 重置某个弹层的位置和大小 |
-| `full: (id: string)` | 最大化某个弹层 |
-| `min: (id: string)` | 最小化某个弹层 |
-| `revert: (id: string)` | 最大/最小化时复原弹层 |
+| 函数签名                                                                       | 描述                       |
+| ------------------------------------------------------------------------------ | -------------------------- |
+| `create: (option: LayerProps, defaultOption: LayerProps, callback?: Function)` | 创建一个弹层               |
+| `open: (option: LayerProps, callback?: Function)`                              | 打开一个弹层               |
+| `close: (id: string)`                                                          | 关闭指定 ID 的弹层         |
+| `closeAll: ()`                                                                 | 关闭当前上下文中全部的弹层 |
+| `reset: (id: string)`                                                          | 重置某个弹层的位置和大小   |
+| `full: (id: string)`                                                           | 最大化某个弹层             |
+| `min: (id: string)`                                                            | 最小化某个弹层             |
+| `revert: (id: string)`                                                         | 最大/最小化时复原弹层      |
 
 :::
 
@@ -858,62 +865,64 @@ const openCallback = () => {
 
 ::: table
 
-| 函数签名 | 描述 |
-| ------- | --- |
-| `msg: (message: string, option: LayerProps = {}, callback?: Function)` | 消息 |
-| `drawer: (option: LayerProps, callback?: Function)` | 抽屉 |
-| `load: (load: number, option: LayerProps = {}, callback?: Function)` | 加载 |
-| `confirm: (msg: string, option: LayerProps = {}, callback?: Function)` | 确认 |
-| `photos: (option: string \| LayerProps, callback?: Function)` | 图片预览 |
-| `notify: (option: LayerProps, callback?: Function)` | 通知 |
-| `prompt: (option: LayerProps, callback?: Function)` | 输入框 |
+| 函数签名                                                               | 描述     |
+| ---------------------------------------------------------------------- | -------- |
+| `msg: (message: string, option: LayerProps = {}, callback?: Function)` | 消息     |
+| `drawer: (option: LayerProps, callback?: Function)`                    | 抽屉     |
+| `load: (load: number, option: LayerProps = {}, callback?: Function)`   | 加载     |
+| `confirm: (msg: string, option: LayerProps = {}, callback?: Function)` | 确认     |
+| `photos: (option: string \| LayerProps, callback?: Function)`          | 图片预览 |
+| `notify: (option: LayerProps, callback?: Function)`                    | 通知     |
+| `prompt: (option: LayerProps, callback?: Function)`                    | 输入框   |
 
 :::
 
 ::: title Properity 属性
 :::
 
-::: describe 以下是 layer 支持的基础属性 `LayerProps`。根据 *`type`* 的不同，对基础属性的扩充也各不同，`(通用属性 + 回调) + 可选属性 = LayerProps`。
+::: describe 以下是 layer 支持的基础属性 `LayerProps`。根据 _type_ 的不同，对基础属性的扩充也各不同，`(通用属性 + 回调) + 可选属性 = LayerProps`。
 :::
 
 ::: table
 
-| 属性 | 描述 | 类型 | 默认值 | 可选值 |
-| -- | -- | -- | -- | -- |
-| *`v-model`* | 显示 | boolean | `false`  |  |
-| *`id`* | layer标识 可不传(内部生成) | `string` | | |
-| *`type`* | 类型 | string | `1` | `0(dialog)` `1(page)` `2(iframe)` `3(loading)` `4(drawer)` `5(photos)` `6(notify)` |
-| *`title`* | 标题 | `string` `boolean` `Function` | `标题` | -- |
-| *`title-style`* | 标题样式 | `string` `StyleValue` | -- | -- |
-| *`content`* | 内容 | `PropsContentType` | -- | -- |
-| *`isHtmlFragment`* | `content` 是否解析html | `boolean` | `false` | -- |
-| *`offset`* | 偏移量 | `string` `string[]` | `auto` | -- |
-| *`area`* | 弹窗宽高 (`auto` 将自适应) | `string` `string[]` | `auto`  | -- |
-| *`move`* | 开启拖拽 | boolean | `true` | -- | 
-| *`maxmin`* | 开启最小/最大化 | boolean | `false` | -- |
-| *`resize`* | 开启左下角拖拽放大缩小 | boolean | `false` | -- |
-| *`shade`* | 显示遮盖层 | boolean | `true` | -- |
-| *`shade-close`* | 遮盖层关闭 | boolean | `true` | -- |
-| *`shade-style`*   | 遮盖层样式   | `StyleValue` | -- | -- |
-| *`shade-opacity`* | 遮盖层透明度 | `string` | `0.1` | `0.1` - `1` |
-| *`layer-classes`* | layer box 类名 (原skin属性) | `string` | -- | -- |
-| *`z-index`* | layer `z-index` 不设置内部将从 `99999` 开始递增 | `number` | -- | -- |
-| *`closeBtn`* | 关闭按钮 | `boolean` `string` | `1` | `false` `1` `2` |
-| *`btn`* | 底部按钮集合 | `BtnType[]` | -- | -- |
-| *`btnAlign`* | 底部按钮位置 | `string` | `r` | `l` `c` `r` |
-| *`anim`* | layer打开动画 | `number` | `0` | `0` - `6` |
-| *`isOutAnim`* | 是否需要离场动画 | `boolean` | `true` | -- |
-| *`icon`* | `msg` `notify` 展示Icon | `string` `number` | -  | `1` `2` `3` `4` `5` `6` `7` `16`  |
-| *`imgList`* | `type` 为5 渲染图片列表 | `ImgListType[]` | -- | -- |
-| *`startIndex`* | 图片初始浏览索引 | `number` | 0 | -- |
-| *`animDuration`* | layer打开关闭动画速率 | `string` | `0.3s`  | -- |
-| *`moveOut`* | 是否可以拖出浏览器可视区域 | `boolean` | `false`  | -- |
-| *`teleport`* | layer挂载到目标DOM | `string` | `body`  | -- |
-| *`teleportDisabled`* | 禁止挂载到目标DOM，保持原位置 | `boolean` | `false`  | -- |
-| *`lastPosition`* | 最小/最大化复原位置 `true`上次位置(拖动)、 `false` layer初始位置 | `boolean` | `true`  | -- |
-| *`time`* | `msg` `notify` 定时关闭   | `number` |  `msg`1000 `notify`2000 | -- |
-| *`load`* | `type` 为3时，loading Icon   | `number` |  0 | `0`, `1` |
-| *`yesText`* | 底部默认按钮文本   | `string` | `确定` | -- |
+| 属性                | 描述                                                              | 类型                                                      | 默认值                 | 可选值                                                                             | 版本     |
+| ------------------- | ----------------------------------------------------------------- | --------------------------------------------------------- | ---------------------- | ---------------------------------------------------------------------------------- | -------- |
+| _v-model_           | 显示                                                              | boolean                                                   | `false`                |                                                                                    |          |
+| _id_                | layer 标识 可不传(内部生成)                                       | `string`                                                  |                        |                                                                                    |          |
+| _type_              | 类型                                                              | string                                                    | `1`                    | `0(dialog)` `1(page)` `2(iframe)` `3(loading)` `4(drawer)` `5(photos)` `6(notify)` |          |
+| _title_             | 标题                                                              | `string` `boolean` `Function` `PropsContentType (2.19.0)` | `标题`                 | --                                                                                 |          |
+| _title-style_       | 标题样式                                                          | `string` `StyleValue`                                     | --                     | --                                                                                 |          |
+| _footer_            | 底部                                                              | `string` `boolean` `Function` `PropsContentType`          |                        |                                                                                    | `2.19.0` |
+| _footer-style_      | 底部样式                                                          | `string` `StyleValue`                                     | --                     | --                                                                                 | `2.19.0` |
+| _content_           | 内容                                                              | `PropsContentType`                                        | --                     | --                                                                                 |          |
+| _is-html-fragment_  | `content` 是否解析 html                                           | `boolean`                                                 | `false`                | --                                                                                 |          |
+| _offset_            | 偏移量                                                            | `string` `string[]`                                       | `auto`                 | --                                                                                 |          |
+| _area_              | 弹窗宽高 (`auto` 将自适应)                                        | `string` `string[]`                                       | `auto`                 | --                                                                                 |          |
+| _move_              | 开启拖拽                                                          | boolean                                                   | `true`                 | --                                                                                 |          |
+| _maxmin_            | 开启最小/最大化                                                   | boolean                                                   | `false`                | --                                                                                 |          |
+| _resize_            | 开启左下角拖拽放大缩小                                            | boolean                                                   | `false`                | --                                                                                 |          |
+| _shade_             | 显示遮盖层                                                        | boolean                                                   | `true`                 | --                                                                                 |          |
+| _shade-close_       | 遮盖层关闭                                                        | boolean                                                   | `true`                 | --                                                                                 |          |
+| _shade-style_       | 遮盖层样式                                                        | `StyleValue`                                              | --                     | --                                                                                 |          |
+| _shade-opacity_     | 遮盖层透明度                                                      | `string`                                                  | `0.1`                  | `0.1` - `1`                                                                        |          |
+| _layer-classes_     | layer box 类名 (原 skin 属性)                                     | `string`                                                  | --                     | --                                                                                 |          |
+| _z-index_           | layer `z-index` 不设置内部将从 `99999` 开始递增                   | `number`                                                  | --                     | --                                                                                 |          |
+| _close-btn_         | 关闭按钮                                                          | `boolean` `string`                                        | `1`                    | `false` `1` `2`                                                                    |          |
+| _btn_               | 底部按钮集合                                                      | `BtnType[]`                                               | --                     | --                                                                                 |          |
+| _btn-align_         | 底部按钮位置                                                      | `string`                                                  | `r`                    | `l` `c` `r`                                                                        |          |
+| _anim_              | layer 打开动画                                                    | `number`                                                  | `0`                    | `0` - `6`                                                                          |          |
+| _is-out-anim_       | 是否需要离场动画                                                  | `boolean`                                                 | `true`                 | --                                                                                 |          |
+| _icon_              | `msg` `notify` 展示 Icon                                          | `string` `number`                                         | -                      | `1` `2` `3` `4` `5` `6` `7` `16`                                                   |          |
+| _img-list_          | `type` 为 5 渲染图片列表                                          | `ImgListType[]`                                           | --                     | --                                                                                 |          |
+| _start-index_       | 图片初始浏览索引                                                  | `number`                                                  | 0                      | --                                                                                 |          |
+| _anim-duration_     | layer 打开关闭动画速率                                            | `string`                                                  | `0.3s`                 | --                                                                                 |          |
+| _move-out_          | 是否可以拖出浏览器可视区域                                        | `boolean`                                                 | `false`                | --                                                                                 |          |
+| _teleport_          | layer 挂载到目标 DOM                                              | `string`                                                  | `body`                 | --                                                                                 |          |
+| _teleport-disabled_ | 禁止挂载到目标 DOM，保持原位置                                    | `boolean`                                                 | `false`                | --                                                                                 |          |
+| _last-position_     | 最小/最大化复原位置 `true`上次位置(拖动)、 `false` layer 初始位置 | `boolean`                                                 | `true`                 | --                                                                                 |          |
+| _time_              | `msg` `notify` 定时关闭                                           | `number`                                                  | `msg`1000 `notify`2000 | --                                                                                 |          |
+| _load_              | `type` 为 3 时，loading Icon                                      | `number`                                                  | 0                      | `0`, `1`                                                                           |          |
+| _yes-text_          | 底部默认按钮文本                                                  | `string`                                                  | `确定`                 | --                                                                                 |          |
 
 :::
 
@@ -922,13 +931,13 @@ const openCallback = () => {
 
 ::: table
 
-| 参数 | 描述 | 类型 | 默认值 | 可选值 |
-| -- | -- | -- | -- | -- |
-| *`text`* | 按钮文本 | `string` | | |
-| *`callback`* | 回调 | `Function` | | |
-| *`style`* | 按钮样式 | `string` `StyleValue` | `""` | |
-| *`class`* | 按钮类 | `string` | `""` | |
-| *`disabled`* | 是否禁用 | `boolean` | `false` | |
+| 参数       | 描述     | 类型                  | 默认值  | 可选值 |
+| ---------- | -------- | --------------------- | ------- | ------ |
+| _text_     | 按钮文本 | `string`              |         |        |
+| _callback_ | 回调     | `Function`            |         |        |
+| _style_    | 按钮样式 | `string` `StyleValue` | `""`    |        |
+| _class_    | 按钮类   | `string`              | `""`    |        |
+| _disabled_ | 是否禁用 | `boolean`             | `false` |        |
 
 :::
 
@@ -937,23 +946,23 @@ const openCallback = () => {
 
 ::: table
 
-| 属性 | 描述 | 类型 | 默认值 | 可选值 |
-| -- | -- | -- | -- | -- |
-| *`full`* | 最大化回调 | `function` | `(id) => {}` | |
-| *`min`* | 最小化回调 | `function` | `(id) => {}` | |
-| *`revert`* | 恢复最小/最大化回调 | `function` | `(id) => {}` | |
-| *`success`* | layer打开回调 | `function` | `(id) => {}` | |
-| *`end`* | layer关闭回调 | `function` | `(id) => {}` | |
-| *`close`* | 内部(右上角/点击遮罩/默认确认按钮)关闭回调 | `function` | `(id) => {}` | |
-| *`beforeClose`* | 内部(右上角/点击遮罩/默认确认按钮)关闭前回调，返回值为 `true` 内部才会关闭 | `function` | `(id) => boolean` | |
-| *`destroy`* | 销毁回调 | `function` | `() => {}` | |
-| *`yes`* | 点击底部默认按钮 | `function` | `id` | | |
-| *`moveStart`* | 弹窗拖动位置开始回调 | `function` | `id`| - |
-| *`moving`* | 弹窗拖动位置回调 | `function` | `id`| - |
-| *`moveEnd`* | 弹窗拖动位置结束回调 | `function` | `id`| - |
-| *`resizeStart`* | 弹窗拉伸位置开始回调 | `function` | `id`| - |
-| *`resizing`* | 弹窗拉伸位置开始回调 | `function` | `id`| - |
-| *`resizeEnd`* | 弹窗拉伸位置开始回调 | `function` | `id`| - |
+| 属性           | 描述                                                                       | 类型       | 默认值            | 可选值 |
+| -------------- | -------------------------------------------------------------------------- | ---------- | ----------------- | ------ | --- |
+| _full_         | 最大化回调                                                                 | `function` | `(id) => {}`      |        |
+| _min_          | 最小化回调                                                                 | `function` | `(id) => {}`      |        |
+| _revert_       | 恢复最小/最大化回调                                                        | `function` | `(id) => {}`      |        |
+| _success_      | layer 打开回调                                                             | `function` | `(id) => {}`      |        |
+| _end_          | layer 关闭回调                                                             | `function` | `(id) => {}`      |        |
+| _close_        | 内部(右上角/点击遮罩/默认确认按钮)关闭回调                                 | `function` | `(id) => {}`      |        |
+| _before-close_ | 内部(右上角/点击遮罩/默认确认按钮)关闭前回调，返回值为 `true` 内部才会关闭 | `function` | `(id) => boolean` |        |
+| _destroy_      | 销毁回调                                                                   | `function` | `() => {}`        |        |
+| _yes_          | 点击底部默认按钮                                                           | `function` | `id`              |        |     |
+| _move-start_   | 弹窗拖动位置开始回调                                                       | `function` | `id`              | -      |
+| _moving_       | 弹窗拖动位置回调                                                           | `function` | `id`              | -      |
+| _move-end_     | 弹窗拖动位置结束回调                                                       | `function` | `id`              | -      |
+| _resize-start_ | 弹窗拉伸位置开始回调                                                       | `function` | `id`              | -      |
+| _resizing_     | 弹窗拉伸位置开始回调                                                       | `function` | `id`              | -      |
+| _resize-end_   | 弹窗拉伸位置开始回调                                                       | `function` | `id`              | -      |
 
 :::
 
@@ -962,11 +971,11 @@ const openCallback = () => {
 
 ::: table
 
-| 名称 | 描述 |
-| -- | -- |
-| *`default`* | 主体内容 |
-| *`title`* | 标题 |
-| *`footer`* | 底部 |
+| 名称      | 描述     |
+| --------- | -------- |
+| _default_ | 主体内容 |
+| _title_   | 标题     |
+| _footer_  | 底部     |
 
 :::
 
@@ -975,14 +984,14 @@ const openCallback = () => {
 
 ::: table
 
-| 名称 | 描述 |
-| -- | -- |
-| *`reset`* | 重置弹窗 `modelValue` 为false 弹窗将打开 |
-| *`open`* | 打开弹窗 |
-| *`close`* | 关闭弹窗 |
-| *`full`* | 最大化 |
-| *`min`* | 最小化 |
-| *`reset`* | 复原最小/最大化 |
+| 名称    | 描述                                      |
+| ------- | ----------------------------------------- |
+| _reset_ | 重置弹窗 `modelValue` 为 false 弹窗将打开 |
+| _open_  | 打开弹窗                                  |
+| _close_ | 关闭弹窗                                  |
+| _full_  | 最大化                                    |
+| _min_   | 最小化                                    |
+| _reset_ | 复原最小/最大化                           |
 
 :::
 
@@ -997,11 +1006,11 @@ const openCallback = () => {
 
 ::: table
 
-| 参数名 | 描述 | 类型 | 默认值 |
-| --- | --- | ---- | ----- |
-| *`message`* | 要显示的消息 | `string` | `""` |
-| *`option`* | 配置 | `LayerProps` | `{}` |
-| *`callback`* | 弹层创建后的回调 | `Function` | `(id) => {}` |
+| 参数名     | 描述             | 类型         | 默认值       |
+| ---------- | ---------------- | ------------ | ------------ |
+| _message_  | 要显示的消息     | `string`     | `""`         |
+| _option_   | 配置             | `LayerProps` | `{}`         |
+| _callback_ | 弹层创建后的回调 | `Function`   | `(id) => {}` |
 
 :::
 
@@ -1010,16 +1019,16 @@ const openCallback = () => {
 
 ::: table
 
-| 参数名 | 描述 | 值 |
-| --- | --- | -- |
-| *`type`* | 类型 | `0` |
-| *`title`* | 标题 | `false` |
-| *`content`* | 内容 | *`message`* |
-| *`shade-close`* | 遮盖层关闭 | `false` |
-| *`closeBtn`* | 关闭按钮 | `false` |
-| *`isMessage`* | 是否为消息类型 | `true` |
-| *`shade`* | 遮盖层 | `false` |
-| *`time`* | 关闭时间 | `1000` |
+| 参数名        | 描述           | 值        |
+| ------------- | -------------- | --------- |
+| _type_        | 类型           | `0`       |
+| _title_       | 标题           | `false`   |
+| _content_     | 内容           | _message_ |
+| _shade-close_ | 遮盖层关闭     | `false`   |
+| _close-btn_   | 关闭按钮       | `false`   |
+| _is-message_  | 是否为消息类型 | `true`    |
+| _shade_       | 遮盖层         | `false`   |
+| _time_        | 关闭时间       | `1000`    |
 
 :::
 
@@ -1028,9 +1037,10 @@ const openCallback = () => {
 
 ::: table
 
-| 属性 | 描述 | 类型 | 默认值 | 可选值 |
-| -- | -- | -- | -- | -- |
-| *`isMessage`* | 是否为消息类型 | `boolean` | `true` | `true` `false` |
+| 属性         | 描述           | 类型      | 默认值 | 可选值         |
+| ------------ | -------------- | --------- | ------ | -------------- |
+| _is-message_ | 是否为消息类型 | `boolean` | `true` | `true` `false` |
+
 :::
 
 ::: title layer.drawer
@@ -1044,10 +1054,10 @@ const openCallback = () => {
 
 ::: table
 
-| 参数名 | 描述 | 类型 | 默认值 |
-| --- | --- | ---- | ----- |
-| *`option`* | 配置 | `LayerProps` |  |
-| *`callback`* | 弹层创建后的回调 | `Function` | `(id) => {}` |
+| 参数名     | 描述             | 类型         | 默认值       |
+| ---------- | ---------------- | ------------ | ------------ |
+| _option_   | 配置             | `LayerProps` |              |
+| _callback_ | 弹层创建后的回调 | `Function`   | `(id) => {}` |
 
 :::
 
@@ -1056,9 +1066,9 @@ const openCallback = () => {
 
 ::: table
 
-| 属性 | 描述 | 值 |
-| --- | --- | -- |
-| *`type`* | 类型 | `"drawer"` |
+| 属性   | 描述 | 值         |
+| ------ | ---- | ---------- |
+| _type_ | 类型 | `"drawer"` |
 
 :::
 
@@ -1079,11 +1089,11 @@ const openCallback = () => {
 
 :::table
 
-| 参数名 | 描述 | 类型 | 默认值 |
-| --- | --- | ---- | ----- |
-| *`load`* | 加载层样式 | `number` | |
-| *`option`* | 配置 | `LayerProps` | |
-| *`callback`* | 弹层创建后的回调 | `Function` | `(id) => {}` |
+| 参数名     | 描述             | 类型         | 默认值       |
+| ---------- | ---------------- | ------------ | ------------ |
+| _load_     | 加载层样式       | `number`     |              |
+| _option_   | 配置             | `LayerProps` |              |
+| _callback_ | 弹层创建后的回调 | `Function`   | `(id) => {}` |
 
 :::
 
@@ -1092,13 +1102,13 @@ const openCallback = () => {
 
 ::: table
 
-| 属性 | 描述 | 值 |
-| --- | --- | -- |
-| *`type`* | 类型 | `3` |
-| *`load`* | 加载层样式 | *`load`* |
-| *`anim`* | 入场动画 | `5` |
-| *`isOutAnim`* | 出场动画 | `false` |
-| *`shade-close`* | 遮盖层关闭 | `false` |
+| 属性          | 描述       | 值      |
+| ------------- | ---------- | ------- |
+| _type_        | 类型       | `3`     |
+| _load_        | 加载层样式 | _load_  |
+| _anim_        | 入场动画   | `5`     |
+| _is-out-anim_ | 出场动画   | `false` |
+| _shade-close_ | 遮盖层关闭 | `false` |
 
 :::
 
@@ -1107,9 +1117,9 @@ const openCallback = () => {
 
 ::: table
 
-| 属性 | 描述 | 类型 | 默认值 | 可选值 |
-| -- | -- | -- | -- | -- |
-| *`load`* | 加载层样式 | `number` | `0` | `0` - `6` |
+| 属性   | 描述       | 类型     | 默认值 | 可选值    |
+| ------ | ---------- | -------- | ------ | --------- |
+| _load_ | 加载层样式 | `number` | `0`    | `0` - `6` |
 
 :::
 
@@ -1124,11 +1134,11 @@ const openCallback = () => {
 
 ::: table
 
-| 参数名 | 描述 | 类型 | 默认值 |
-| --- | --- | ---- | ----- |
-| *`msg`* | 要显示的消息 | `string` | `""` |
-| *`option`* | 配置 | `LayerProps` | `{}` |
-| *`callback`* | 弹层创建后的回调 | `Function` | `(id) => {}` |
+| 参数名     | 描述             | 类型         | 默认值       |
+| ---------- | ---------------- | ------------ | ------------ |
+| _msg_      | 要显示的消息     | `string`     | `""`         |
+| _option_   | 配置             | `LayerProps` | `{}`         |
+| _callback_ | 弹层创建后的回调 | `Function`   | `(id) => {}` |
 
 :::
 
@@ -1137,11 +1147,11 @@ const openCallback = () => {
 
 ::: table
 
-| 属性 | 描述 | 值 |
-| --- | --- | -- |
-| *`type`* | 类型 | `0` |
-| *`content`* | 内容 | *`msg`* |
-| *`shade-close`* | 遮罩层关闭 | `false` |
+| 属性          | 描述       | 值      |
+| ------------- | ---------- | ------- |
+| _type_        | 类型       | `0`     |
+| _content_     | 内容       | _msg_   |
+| _shade-close_ | 遮罩层关闭 | `false` |
 
 :::
 
@@ -1162,10 +1172,10 @@ const openCallback = () => {
 
 ::: table
 
-| 参数名 | 描述 | 类型 | 默认值 |
-| --- | --- | ---- | ----- |
-| *`option`* | 配置 | `string` `ImgListType` | |
-| *`callback`* | 弹层创建后的回调 | `Function` | `(id) => {}` |
+| 参数名     | 描述             | 类型                   | 默认值       |
+| ---------- | ---------------- | ---------------------- | ------------ |
+| _option_   | 配置             | `string` `ImgListType` |              |
+| _callback_ | 弹层创建后的回调 | `Function`             | `(id) => {}` |
 
 :::
 
@@ -1174,14 +1184,14 @@ const openCallback = () => {
 
 ::: table
 
-| 属性 | 描述 | 值 |
-| --- | --- | -- |
-| *`type`* | 类型 | `5` |
-| *`anim`* | 入场动画 | `2` |
-| *`startIndex`* | 初始图片索引 | `0` |
-| *`isOutAnim`* | 出场动画 | `true` |
-| *`shade-close`* | 遮罩层关闭 | `true` |
-| *`shade-opacity`* | 遮罩层透明度 | `"0.2"`|
+| 属性            | 描述         | 值      |
+| --------------- | ------------ | ------- |
+| _type_          | 类型         | `5`     |
+| _anim_          | 入场动画     | `2`     |
+| _start-index_   | 初始图片索引 | `0`     |
+| _is-out-anim_   | 出场动画     | `true`  |
+| _shade-close_   | 遮罩层关闭   | `true`  |
+| _shade-opacity_ | 遮罩层透明度 | `"0.2"` |
 
 :::
 
@@ -1190,10 +1200,10 @@ const openCallback = () => {
 
 ::: table
 
-| 属性 | 描述 | 类型 | 默认值 | 可选值 |
-| -- | -- | -- | -- | -- |
-| *`startIndex`* | 初始图片索引 | `number` | `0` |  |
-| *`imgList`* | 图片列表 | `Array<ImgListType>` | `[]` |  |
+| 属性          | 描述         | 类型                 | 默认值 | 可选值 |
+| ------------- | ------------ | -------------------- | ------ | ------ |
+| _start-index_ | 初始图片索引 | `number`             | `0`    |        |
+| _img-list_    | 图片列表     | `Array<ImgListType>` | `[]`   |        |
 
 :::
 
@@ -1202,11 +1212,11 @@ const openCallback = () => {
 
 ::: table
 
-| 属性 | 描述 | 类型 | 默认值 | 可选值 |
-| -- | -- | -- | -- | -- |
-| *`src`* | 图片地址 | `string` | | |
-| *`alt`* | 图片描述 | `string` | `""` | |
-| *`thumb`* | 缩略图 | `string` | `""` | |
+| 属性    | 描述     | 类型     | 默认值 | 可选值 |
+| ------- | -------- | -------- | ------ | ------ |
+| _src_   | 图片地址 | `string` |        |        |
+| _alt_   | 图片描述 | `string` | `""`   |        |
+| _thumb_ | 缩略图   | `string` | `""`   |        |
 
 :::
 
@@ -1221,10 +1231,10 @@ const openCallback = () => {
 
 ::: table
 
-| 参数名 | 描述 | 类型 | 默认值 |
-| --- | --- | ---- | ----- |
-| *`option`* | 配置 | `LayerProps` | |
-| *`callback`* | 弹层创建后的回调 | `Function` | `(id) => {}` |
+| 参数名     | 描述             | 类型         | 默认值       |
+| ---------- | ---------------- | ------------ | ------------ |
+| _option_   | 配置             | `LayerProps` |              |
+| _callback_ | 弹层创建后的回调 | `Function`   | `(id) => {}` |
 
 :::
 
@@ -1233,12 +1243,12 @@ const openCallback = () => {
 
 ::: table
 
-| 属性 | 描述 | 值 |
-| --- | --- | -- |
-| *`offset`* | 位置 | `"rt"` |
-| *`time`* | 关闭时间 | `2000` |
-| *`area`* | 尺寸 | `"auto"` |
-| *`shade`* | 遮罩层 | `false` |
+| 属性     | 描述     | 值       |
+| -------- | -------- | -------- |
+| _offset_ | 位置     | `"rt"`   |
+| _time_   | 关闭时间 | `2000`   |
+| _area_   | 尺寸     | `"auto"` |
+| _shade_  | 遮罩层   | `false`  |
 
 :::
 
@@ -1259,10 +1269,10 @@ const openCallback = () => {
 
 ::: table
 
-| 参数名 | 描述 | 类型 | 默认值 |
-| --- | --- | ---- | ----- |
-| *`option`* | 配置 | `LayerProps` | |
-| *`callback`* | 弹层创建后的回调 | `Function` | `(id) => {}` |
+| 参数名     | 描述             | 类型         | 默认值       |
+| ---------- | ---------------- | ------------ | ------------ |
+| _option_   | 配置             | `LayerProps` |              |
+| _callback_ | 弹层创建后的回调 | `Function`   | `(id) => {}` |
 
 :::
 
@@ -1271,11 +1281,11 @@ const openCallback = () => {
 
 ::: table
 
-| 属性 | 描述 | 值 |
-| --- | --- | -- |
-| *`type`* | 类型 | `"prompt"` |
-| *`shade-close`* | 遮罩层关闭 | `false` |
-| *`shade-opacity`* | 遮罩层透明度 | `"0.2"` |
+| 属性            | 描述         | 值         |
+| --------------- | ------------ | ---------- |
+| _type_          | 类型         | `"prompt"` |
+| _shade-close_   | 遮罩层关闭   | `false`    |
+| _shade-opacity_ | 遮罩层透明度 | `"0.2"`    |
 
 :::
 
@@ -1284,12 +1294,12 @@ const openCallback = () => {
 
 ::: table
 
-| 属性 | 描述 | 类型 | 默认值 | 可选值 |
-| -- | -- | -- | -- | -- |
-| *`formType`* | 表单类型 | `string` `number` | `"text"` | `0` `1` `2` `"text"` `"password"` `"textarea"` |
-| *`value`* | 表单初始值 | `string` | `""` | |
-| *`maxLength`* | 最大输入长度 | `number` | | |
-| *`placeholder`* | 占位符 | `string` | `"请输入内容"` | |
+| 属性          | 描述         | 类型              | 默认值         | 可选值                                         |
+| ------------- | ------------ | ----------------- | -------------- | ---------------------------------------------- |
+| _form-type_   | 表单类型     | `string` `number` | `"text"`       | `0` `1` `2` `"text"` `"password"` `"textarea"` |
+| _value_       | 表单初始值   | `string`          | `""`           |                                                |
+| _max-length_  | 最大输入长度 | `number`          |                |                                                |
+| _placeholder_ | 占位符       | `string`          | `"请输入内容"` |                                                |
 
 :::
 
@@ -1297,14 +1307,13 @@ const openCallback = () => {
 :::
 
 ```ts
-
 type BtnType = {
   text: string;
   style?: string | StyleValue;
   class?: string;
   disabled?: boolean;
   callback: (id: string, ...args: any) => void;
-}
+};
 
 type ImgListType = {
   src: string;
@@ -1313,5 +1322,4 @@ type ImgListType = {
 };
 
 type PropsContentType = VNodeTypes | (() => VNodeTypes);
-
 ```
