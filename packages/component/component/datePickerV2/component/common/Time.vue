@@ -3,9 +3,11 @@
     <div class="layui-laydate-main laydate-main-list-0 laydate-time-show">
       <div class="layui-laydate-header">
         <div class="laydate-set-ym">
-          <span class="laydate-time-text">{{
-            t("datePicker.selectTime")
-          }}</span>
+          <slot name="header">
+            <span class="laydate-time-text">{{
+              t("datePicker.selectTime")
+            }}</span>
+          </slot>
         </div>
       </div>
       <div class="layui-laydate-content" style="height: 210px">
