@@ -4,6 +4,7 @@ import type { BtnType, ImgListType, PropsContentType } from "../types";
 import Shade from "./Shade.vue";
 import Iframe from "./Iframe.vue";
 import Title from "./Header.vue";
+import Footer from "./Footer.vue";
 import HeaderBtn from "./HeaderBtn.vue";
 import Photos from "./Photos.vue";
 import Notifiy from "./Notifiy.vue";
@@ -64,8 +65,10 @@ export interface LayerProps {
     | "photos"
     | "notify"
     | "prompt";
-  title?: string | boolean | Function;
+  title?: string | boolean | Function | PropsContentType;
+  footer?: string | boolean | Function | PropsContentType;
   titleStyle?: string | StyleValue;
+  footerStyle?: string | StyleValue;
   content?: PropsContentType;
   isHtmlFragment?: boolean;
   offset?: string | string[];
@@ -913,6 +916,10 @@ defineExpose({ reset, open, close, full, min: mini, revert });
             <div class="layui-layer-footer">
               <slot name="footer"></slot>
             </div>
+          </template>
+          <template v-else-if="props.footer">
+            <Footer :footer="props.footer" :footerStyle="props.footerStyle">
+            </Footer>
           </template>
           <template v-else>
             <!-- 按钮 -->
