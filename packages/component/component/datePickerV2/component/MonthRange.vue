@@ -6,7 +6,9 @@ import type { RangePickerProps } from "./interface";
 import { useI18n } from "../../../language";
 
 import LayIcon from "../../icon";
+import LayDropdown from "../../dropdown";
 import Month from "./common/Month.vue";
+import Year from "./common/Year.vue";
 import Footer from "./common/Footer.vue";
 
 const props = withDefaults(defineProps<RangePickerProps>(), {});
@@ -18,6 +20,9 @@ const startDate = ref();
 const endDate = ref();
 const leftDate = ref(dayjs());
 const rightDate = ref(dayjs());
+
+const yearLeftRef = ref<InstanceType<typeof LayDropdown>>();
+const yearRightRef = ref<InstanceType<typeof LayDropdown>>();
 
 const hoverMonth = ref<Dayjs | undefined>();
 
@@ -84,6 +89,16 @@ const handleMonthHover = (date: Dayjs) => {
   hoverMonth.value = date;
 };
 
+const handleLeftYearChange = (year: Dayjs) => {
+  leftDate.value = year;
+  yearLeftRef.value?.hide();
+};
+
+const handleRightYearChange = (year: Dayjs) => {
+  leftDate.value = year.subtract(1, "year");
+  yearRightRef.value?.hide();
+};
+
 const formatValue = () => {
   // format 正确传 format后的格式，否则传Date对象
   if (startDate.value && endDate.value) {
@@ -114,8 +129,15 @@ const handleConfirm = () => {
             type="layui-icon-prev"
             @click="leftDate = leftDate.subtract(1, 'year')"
           />
-          <span>{{ leftDate.year() }} {{ t("datePicker.year") }}</span>
-          <LayIcon type="layui-icon-next" style="visibility: hidden" />
+
+          <LayDropdown ref="yearLeftRef">
+            <div class="laydate-set-ym">
+              <span>{{ leftDate.year() }} {{ t("datePicker.year") }}</span>
+            </div>
+            <template #content>
+              <Year :modelValue="leftDate" @pick="handleLeftYearChange"></Year>
+            </template>
+          </LayDropdown>
         </template>
       </Month>
       <Month
@@ -126,11 +148,18 @@ const handleConfirm = () => {
         @hover-cell="handleMonthHover"
       >
         <template #header>
-          <LayIcon type="layui-icon-prev" style="visibility: hidden" />
-          <span>
-            {{ leftDate.add(1, "year").year() }}
-            {{ t("datePicker.year") }}</span
-          >
+          <LayDropdown ref="yearRightRef">
+            <div class="laydate-set-ym">
+              <span>
+                {{ leftDate.add(1, "year").year() }}
+                {{ t("datePicker.year") }}</span
+              >
+            </div>
+            <template #content>
+              <Year :modelValue="leftDate" @pick="handleRightYearChange"></Year>
+            </template>
+          </LayDropdown>
+
           <LayIcon
             type="layui-icon-next"
             @click="leftDate = leftDate.add(1, 'year')"

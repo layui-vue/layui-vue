@@ -4,7 +4,7 @@
       <div class="layui-laydate-header">
         <slot name="header">
           <div class="laydate-set-ym" v-if="dateType === 'month'">
-            <span>{{
+            <span class="laydate-time-text">{{
               typeof Month !== "string"
                 ? MONTH_NAME[Month]
                 : t("datePicker.selectMonth")
