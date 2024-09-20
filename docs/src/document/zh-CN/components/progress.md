@@ -235,5 +235,19 @@ export default {
 
 :::
 
+::: title Types
+
+```typescript
+export type ProgressLineProps = {
+  percent: number | string;
+  theme?: string;
+  color?: string;
+  showText?: boolean;
+  text?: string;
+};
+```
+
+:::
+
 ::: previousNext progress
 :::
