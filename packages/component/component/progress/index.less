@@ -1,7 +1,11 @@
+:root {
+  --progress-bar-border-radius: 20px;
+}
+
 .layui-progress {
   position: relative;
   height: 6px;
-  border-radius: 20px;
+  border-radius: var(--progress-bar-border-radius);
   background-color: var(--global-neutral-color-3);
 }
 
@@ -12,11 +16,20 @@
   width: 0;
   max-width: 100%;
   height: 6px;
-  border-radius: 20px;
+  border-radius: var(--progress-bar-border-radius);
   text-align: right;
   background-color: var(--global-checked-color);
-  transition: all 0.3s;
-  -webkit-transition: all 0.3s;
+  transition: width 0.3s ease-out;
+}
+
+.layui-progress-bar:not(:last-child) {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.layui-progress-bar:not(:first-child) {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
 }
 
 .layui-progress-big,
@@ -43,7 +56,7 @@
   display: inline-block;
 }
 
-.lay-progress-circle{
+.lay-progress-circle {
   position: relative;
   border-radius: 50%;
   display: inline-block;
@@ -55,4 +68,3 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
-
