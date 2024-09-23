@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import dayjs from "dayjs";
-import { computed, ref } from "vue";
+import { computed, nextTick, ref } from "vue";
 import type {
   DatePickerModelValueSingleType,
   DatePickerProps,
@@ -11,7 +11,13 @@ import { normalizeDayjsValue } from "../../util";
 import { isArray, isNumber } from "../../../../utils";
 
 const props = withDefaults(defineProps<DatePickerProps>(), {});
-const emits = defineEmits(["update:modelValue"]);
+const emits = defineEmits([
+  "update:modelValue",
+  "change",
+  "focus",
+  "blur",
+  "clear",
+]);
 
 const dropdownRef = ref<InstanceType<typeof LayDropdown>>();
 
@@ -20,7 +26,25 @@ const _Placeholder = computed(() => {
 });
 
 const onChange = () => {};
-const handleClear = () => {};
+const handleClear = () => {
+  emits("update:modelValue", props.range ? [] : "");
+  emits("clear");
+};
+
+const handleBlur = (e: FocusEvent) => {
+  isFocus.value = false;
+  setTimeout(() => {
+    if (!isFocus.value) {
+      emits("blur", e);
+    }
+  }, 0);
+};
+
+const isFocus = ref(false);
+const handleFocus = (e: FocusEvent) => {
+  isFocus.value = true;
+  emits("focus", e);
+};
 
 const classes = computed(() => {
   return ["layui-date-picker", { "layui-date-range-picker": props.range }];
@@ -54,6 +78,7 @@ const dateValue = computed(() => {
 
 function onPick(item: string | Date) {
   emits("update:modelValue", item);
+  emits("change", item);
   dropdownRef.value?.hide();
 }
 </script>
@@ -78,8 +103,8 @@ function onPick(item: string | Date) {
         :modelValue="dateValue"
         v-if="!range"
         @change="onChange"
-        @blur="$emit('blur')"
-        @focus="$emit('focus')"
+        @blur="handleBlur"
+        @focus="handleFocus"
         :allow-clear="!disabled && allowClear"
         :size="size"
         @clear="handleClear"
@@ -93,8 +118,8 @@ function onPick(item: string | Date) {
           :placeholder="_Placeholder[0]"
           :disabled="disabled"
           @change="onChange"
-          @blur="$emit('blur')"
-          @focus="$emit('focus')"
+          @blur="handleBlur"
+          @focus="handleFocus"
           class="start-input"
           :size="size"
         >
@@ -108,8 +133,8 @@ function onPick(item: string | Date) {
           :modelValue="dateValue[1]"
           :disabled="disabled"
           @change="onChange"
-          @blur="$emit('blur')"
-          @focus="$emit('focus')"
+          @blur="handleBlur"
+          @focus="handleFocus"
           class="end-input"
           :size="size"
           @clear="handleClear"

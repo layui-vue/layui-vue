@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import "./index.less";
 import dayjs from "dayjs";
+import { computed, provide } from "vue";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import IsSameOrBefore from "dayjs/plugin/IsSameOrBefore";
 import IsSameOrAfter from "dayjs/plugin/IsSameOrAfter";
@@ -14,7 +15,6 @@ import {
 import { useDatePicker } from "./hook/useDatePicker";
 
 import InputBlock from "./component/common/InputBlock.vue";
-import { computed, provide } from "vue";
 
 dayjs.extend(customParseFormat);
 dayjs.extend(IsSameOrBefore);
