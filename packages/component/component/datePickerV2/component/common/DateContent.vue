@@ -20,18 +20,14 @@
               :data-unix="item.value"
               :class="{
                 'laydate-day-prev': item.type !== 'current',
-                'layui-this':
-                  item.value === modelValue ||
-                  (DatePickerContext.range &&
-                    item.type === 'current' &&
-                    (item.value == startDate || item.value == endDate)),
-                'laydate-range-hover': ifHasRangeHoverClass(item),
+                'layui-this': item.value === modelValue,
                 'layui-disabled': cellDisabled(item),
                 'layui-laydate-current':
                   item.value === dayjs().startOf('day').valueOf(),
+                ...classes(item),
               }"
               @click="handleDayClick(item)"
-              @mouseenter="dayItemMouseEnter($event, item)"
+              @mouseenter="dayItemMouseEnter(item)"
             >
               {{ item.day }}
             </td>
@@ -51,9 +47,7 @@ import dayjs from "dayjs";
 export interface DateContentProps {
   dateList: any;
   modelValue?: number;
-  startDate?: number;
-  endDate?: number;
-  hoverDate?: number;
+  classes?: (val: any) => Record<string, boolean>;
 }
 
 defineOptions({
@@ -63,9 +57,7 @@ defineOptions({
 const props = withDefaults(defineProps<DateContentProps>(), {
   dateList: [],
   modelValue: -1,
-  hoverDate: -1,
-  startDate: -1,
-  endDate: -1,
+  classes: () => ({}),
 });
 
 const { t } = useI18n();
@@ -82,13 +74,7 @@ const WEEK_NAME = computed(() => [
 
 const DatePickerContext = inject(DATE_PICKER_CONTEXT)!;
 
-const emits = defineEmits([
-  "update:modelValue",
-  "update:startDate",
-  "update:endDate",
-  "update:hoverDate",
-  "simple",
-]);
+const emits = defineEmits(["update:modelValue", "hover-cell"]);
 
 // 判断日期是否可以点击
 const cellDisabled = computed(() => {
@@ -116,84 +102,16 @@ const cellDisabled = computed(() => {
 
 // 点击日期
 const handleDayClick = (item: any) => {
-  if (cellDisabled.value(item)) {
-    return;
-  }
-  if (DatePickerContext.range) {
-    if (item.type !== "current") {
-      return;
-    }
+  if (cellDisabled.value(item)) return;
 
-    if (props.startDate === -1 && props.endDate === -1) {
-      emits("update:startDate", item.value);
-    } else if (props.startDate !== -1 && props.endDate !== -1) {
-      emits("update:hoverDate", item.value);
-      emits("update:startDate", item.value);
-      emits("update:endDate", -1);
-    } else if (props.startDate !== -1 && props.endDate === -1) {
-      emits("update:endDate", item.value);
-      if (item.value < props.startDate) {
-        //swap
-        const first = props.startDate;
-        const last = item.value;
-        emits("update:startDate", last);
-        emits("update:endDate", first);
-      }
-    }
-  } else {
-    emits("update:modelValue", item.value);
-    // if (item.type !== "current") {
-    //   datePicker.currentMonth.value =
-    //     item.type === "prev"
-    //       ? datePicker.currentMonth.value - 1
-    //       : datePicker.currentMonth.value + 1;
-    // }
-    // if (datePicker.simple) {
-    //   emits("simple");
-    // }
-  }
+  if (DatePickerContext.range && item.type !== "current") return;
+
+  emits("update:modelValue", item.value);
 };
 
-const dayItemMouseEnter = (event: MouseEvent, item: any) => {
-  if (!DatePickerContext.range) {
-    return;
-  }
-  if (props.startDate === -1) {
-    return;
-  }
-  if (item.type !== "current") {
-    return;
-  }
-  if (props.startDate !== -1 && props.endDate !== -1) {
-    emits("update:hoverDate", -1);
-    return;
-  }
-  emits(
-    "update:hoverDate",
-    parseInt((event.target as HTMLElement).dataset.unix as string)
-  );
+const dayItemMouseEnter = (item: any) => {
+  if (!DatePickerContext.range || cellDisabled.value(item)) return;
+
+  emits("hover-cell", item.value);
 };
-const ifHasRangeHoverClass = computed(() => {
-  return function (item: any) {
-    if (!DatePickerContext.range) {
-      return false;
-    }
-    if (props.startDate === -1) {
-      return false;
-    }
-    if (item.type !== "current") {
-      return false;
-    }
-    if (props.hoverDate === -1 && props.endDate === -1) {
-      return false;
-    }
-    let hover = props.endDate !== -1 ? props.endDate : props.hoverDate;
-    let max = props.startDate > hover ? props.startDate : hover;
-    let min = props.startDate < hover ? props.startDate : hover;
-    if (item.value >= min && item.value <= max) {
-      return true;
-    }
-    return false;
-  };
-});
 </script>

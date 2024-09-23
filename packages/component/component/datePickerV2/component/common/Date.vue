@@ -1,6 +1,6 @@
 <template>
   <div class="layui-laydate">
-    <div class="layui-laydate-main laydate-main-list-0">
+    <div class="layui-laydate-main">
       <div class="layui-laydate-header">
         <LayIcon
           type="layui-icon-prev"

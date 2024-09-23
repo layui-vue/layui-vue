@@ -1,6 +1,6 @@
 <template>
   <div class="layui-laydate">
-    <div class="layui-laydate-main laydate-main-list-0 laydate-time-show">
+    <div class="layui-laydate-main laydate-time-show">
       <div class="layui-laydate-header">
         <div class="laydate-set-ym">
           <slot name="header">
