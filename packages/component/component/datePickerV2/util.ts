@@ -16,7 +16,11 @@ export const dayjsToString = (
 ) => {
   const date = dayjs(value, format);
 
-  return date.isValid() ? dayjs(value, format).format(format) : "";
+  return date.isValid()
+    ? dayjs(value, format).format(format)
+    : dayjs(value).isValid()
+    ? dayjs(value).format(format)
+    : "";
 };
 
 export const checkRangeValue = (values: Array<Dayjs | null>) => {

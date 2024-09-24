@@ -189,6 +189,11 @@ const formatOutPutValue = (dates: Dayjs | Array<Dayjs>) => {
       });
     } else return [];
   } else {
+    // 兼容 timestamp属性
+    if (["date", "datetime"].includes(props.type!) && props.timestamp) {
+      return dates.valueOf();
+    }
+
     return DatePickerContext.format
       ? dates.format(DatePickerContext.format)
       : dates.toDate();
