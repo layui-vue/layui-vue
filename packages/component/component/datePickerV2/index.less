@@ -54,22 +54,6 @@
   }
 }
 
-@font-face {
-  font-family: "laydate-icon";
-  src: url("./font/iconfont.eot");
-  src: url("./font/iconfont.eot#iefix") format("embedded-opentype"),
-    url("./font/iconfont.svg#iconfont") format("svg"),
-    url("./font/iconfont.woff") format("woff"),
-    url("./font/iconfont.ttf") format("truetype");
-}
-
-.laydate-icon {
-  font-family: "laydate-icon" !important;
-  font-size: 16px;
-  font-style: normal;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
 
 html #layuicss-laydate {
   display: none;
@@ -178,19 +162,15 @@ html #layuicss-laydate {
   cursor: pointer;
   user-select: none;
 }
-.layui-laydate-header i.laydate-prev-y,
 .layui-laydate-header .layui-icon-prev{
   left: 15px;
 }
-.layui-laydate-header i.laydate-prev-m,
 .layui-laydate-header .layui-icon-left {
   left: 45px;
 }
-.layui-laydate-header i.laydate-next-y,
 .layui-laydate-header .layui-icon-next {
   right: 15px;
 }
-.layui-laydate-header i.laydate-next-m,
 .layui-laydate-header .layui-icon-right {
   right: 45px;
 }
@@ -657,4 +637,26 @@ html #layuicss-laydate {
 }
 .layui-laydate-content::-webkit-scrollbar-thumb:hover {
   background-color: #dddddd;
+}
+
+.layui-date-range-picker{
+  .end-input{
+    .layui-input-clear{
+      opacity: 0;
+      visibility: hidden;
+      display: block;
+      padding: 0 10px;
+    }
+  }
+
+  .laydate-range-inputs{
+    &:hover {
+      .end-input{
+        .layui-input-clear{
+          opacity: 1;
+          visibility: visible;
+        }
+      }
+    }
+  }
 }
