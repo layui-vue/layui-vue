@@ -99,16 +99,6 @@ const handleRightYearChange = (year: Dayjs) => {
   yearRightRef.value?.hide();
 };
 
-const formatValue = () => {
-  // format 正确传 format后的格式，否则传Date对象
-  if (startDate.value && endDate.value) {
-    return [startDate.value, endDate.value].map((date: Dayjs) => {
-      return props.format ? date.format(props.format) : date.toDate();
-    });
-  } else {
-    return [];
-  }
-};
 const handleConfirm = () => {
   emits("pick", [startDate.value, endDate.value]);
 };

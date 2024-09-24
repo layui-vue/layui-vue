@@ -19,10 +19,10 @@ const emits = defineEmits(["pick"]);
 
 const { t } = useI18n();
 
-const startDate = ref();
-const endDate = ref();
-const leftDate = ref(dayjs().startOf("day"));
-const rightDate = ref(dayjs().startOf("day").add(1, "month"));
+const startDate = ref<Dayjs | null>();
+const endDate = ref<Dayjs | null>();
+const leftDate = ref<Dayjs>(dayjs().startOf("day"));
+const rightDate = ref<Dayjs>(dayjs().startOf("day").add(1, "month"));
 
 const hoverDate = ref<Dayjs | null>();
 
@@ -165,7 +165,7 @@ const handleChangeYearMonthPick = (
   dropdownEl: DropdownRef
 ) => {
   const DateValue = val[type]();
-  leftDate.value = leftDate.value[type](DateValue);
+  leftDate.value = leftDate.value[type](DateValue) as Dayjs;
 
   dropdownEl.hide();
 };
@@ -202,16 +202,6 @@ const handleChangeRightTimePick = (hmsDate: Dayjs) => {
   }
 };
 
-const formatValue = () => {
-  // format 正确传 format后的格式，否则传Date对象
-  if (startDate.value && endDate.value) {
-    return [startDate.value, endDate.value].map((date: Dayjs) => {
-      return props.format ? date.format(props.format) : date.toDate();
-    });
-  } else {
-    return [];
-  }
-};
 const handleConfirm = () => {
   emits("pick", [startDate.value, endDate.value]);
 };
