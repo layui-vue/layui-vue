@@ -95,7 +95,7 @@ const formatValue = () => {
   }
 };
 const handleConfirm = () => {
-  emits("pick", formatValue());
+  emits("pick", [startDate.value, endDate.value]);
 };
 </script>
 

@@ -112,13 +112,18 @@ const handleConfirm = (isConfirm = false) => {
   if (!showConfirm.value || isConfirm) {
     preCondition();
 
-    emits("pick", formatValue());
+    emits("pick", currentData.value); // formatValue()
   }
 };
 
 const handleNow = () => {
-  currentData.value = dayjs();
-  inputDate.value = dayjs();
+  if (dayjs().isBefore(dayjs(props.min, props.format))) {
+    inputDate.value = currentData.value = dayjs(props.min, props.format);
+  } else if (dayjs().isAfter(dayjs(props.max, props.format))) {
+    inputDate.value = currentData.value = dayjs(props.max, props.format);
+  } else {
+    inputDate.value = currentData.value = dayjs();
+  }
 };
 
 const formatValue = () => {
