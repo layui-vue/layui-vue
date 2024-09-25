@@ -38,7 +38,7 @@
 </template>
 
 <script lang="ts" setup>
-import { type BasePanelProps } from "../interface";
+import type { BasePanelProps, DateContentSingleDateObject } from "../interface";
 
 import { computed, nextTick, ref, watch } from "vue";
 import dayjs, { type Dayjs } from "dayjs";
@@ -65,7 +65,7 @@ const { t } = useI18n();
 const Day = ref();
 const Year = ref();
 const Month = ref();
-const dateList = ref<any>([]);
+const dateList = ref<Array<DateContentSingleDateObject>>([]);
 
 const MONTH_NAME = computed(() => [
   t("datePicker.january"),

@@ -8,7 +8,7 @@
       </thead>
       <tbody>
         <template
-          v-for="(o, i) of dateList.length % 7 == 0
+          v-for="(_, i) of dateList.length % 7 == 0
             ? dateList.length / 7
             : Math.floor(dateList.length / 7) + 1"
           :key="i"
@@ -39,23 +39,25 @@
 </template>
 
 <script lang="ts" setup>
-import { useI18n } from "../../../../language";
-import { computed, inject } from "vue";
-import { DATE_PICKER_CONTEXT } from "../../interface";
 import dayjs from "dayjs";
+import { computed, inject } from "vue";
+
+import { useI18n } from "../../../../language";
+import { DATE_PICKER_CONTEXT } from "../../interface";
+import type { DateContentSingleDateObject } from "../interface";
 
 export interface DateContentProps {
-  dateList: any;
+  dateList: Array<DateContentSingleDateObject>;
   modelValue?: number;
-  classes?: (val: any) => Record<string, boolean>;
+  classes?: (val: DateContentSingleDateObject) => Record<string, boolean>;
 }
 
 defineOptions({
   name: "DateContent",
 });
 
-const props = withDefaults(defineProps<DateContentProps>(), {
-  dateList: [],
+withDefaults(defineProps<DateContentProps>(), {
+  dateList: () => [],
   modelValue: -1,
   classes: () => ({}),
 });
@@ -78,7 +80,7 @@ const emits = defineEmits(["update:modelValue", "hover-cell"]);
 
 // 判断日期是否可以点击
 const cellDisabled = computed(() => {
-  return (item: { type: string; value: number }) => {
+  return (item: DateContentSingleDateObject) => {
     if (item.type !== "current" && DatePickerContext.range) {
       return true;
     }
@@ -101,7 +103,7 @@ const cellDisabled = computed(() => {
 });
 
 // 点击日期
-const handleDayClick = (item: any) => {
+const handleDayClick = (item: DateContentSingleDateObject) => {
   if (cellDisabled.value(item)) return;
 
   if (DatePickerContext.range && item.type !== "current") return;
@@ -109,7 +111,7 @@ const handleDayClick = (item: any) => {
   emits("update:modelValue", item.value);
 };
 
-const dayItemMouseEnter = (item: any) => {
+const dayItemMouseEnter = (item: DateContentSingleDateObject) => {
   if (!DatePickerContext.range || cellDisabled.value(item)) return;
 
   emits("hover-cell", item.value);

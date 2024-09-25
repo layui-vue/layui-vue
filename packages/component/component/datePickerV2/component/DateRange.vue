@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import dayjs, { type Dayjs } from "dayjs";
 import { computed, ref, watch } from "vue";
-import type { RangePickerProps } from "./interface";
+import type { RangePickerProps, DateContentSingleDateObject } from "./interface";
 
 import { useI18n } from "../../../language";
 import { setDateList } from "../day";
@@ -83,7 +83,7 @@ watch(
 );
 
 const classes = computed(() => {
-  return (item: any) => {
+  return (item: DateContentSingleDateObject) => {
     const Date = dayjs(item.value);
     const _endDate = endDate.value || hoverDate.value;
 

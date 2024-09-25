@@ -15,3 +15,11 @@ export interface UniquePickerProps extends PanelPickerProps {
 export interface RangePickerProps extends PanelPickerProps {
   modelValue: Array<Dayjs>;
 }
+
+export interface DateContentSingleDateObject {
+  day: number;
+  value: number;
+  isRange: boolean;
+  isSelected: boolean;
+  type: "prev" | "current" | "next";
+}

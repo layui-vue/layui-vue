@@ -1,3 +1,5 @@
+import { DateContentSingleDateObject } from "./component/interface";
+
 /**
  * 获取年份列表
  * @param {Date | number} date 时间
@@ -59,11 +61,15 @@ const getDayLength = (year: number, month: number): number => {
 };
 
 // 设置日期列表
-const setDateList = (year: number, month: number) => {
+const setDateList = (
+  year: number,
+  month: number
+): Array<DateContentSingleDateObject> => {
   const curDays = getDayLength(year, month); // 当月天数
   const prevDays = getDayLength(year, month - 1); // 上月天数
   const curFirstDayWeek = new Date(year, month, 1).getDay(); // 当月第一天星期几
-  const list: any[] = [];
+  const list: Array<DateContentSingleDateObject> = [];
+
   // 填充上月天数
   for (let i = prevDays - curFirstDayWeek + 1; i <= prevDays; i++) {
     list.push({
