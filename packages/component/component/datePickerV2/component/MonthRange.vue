@@ -68,6 +68,8 @@ const classes = computed(() => {
   };
 });
 
+const isYearMonth = computed(() => props.type === "yearmonth");
+
 const handleMonthPick = (date: Dayjs) => {
   if (!startDate.value || (startDate.value && endDate.value)) {
     startDate.value = date;
@@ -105,7 +107,7 @@ const handleConfirm = () => {
 </script>
 
 <template>
-  <div class="layui-laydate-range">
+  <div :class="{ 'layui-laydate-range': isYearMonth }">
     <div class="layui-laydate-range-main">
       <Month
         :modelValue="leftDate"
@@ -115,22 +117,31 @@ const handleConfirm = () => {
         @hover-cell="handleMonthHover"
       >
         <template #header>
-          <LayIcon
-            type="layui-icon-prev"
-            @click="leftDate = leftDate.subtract(1, 'year')"
-          />
+          <template v-if="isYearMonth">
+            <LayIcon
+              type="layui-icon-prev"
+              @click="leftDate = leftDate.subtract(1, 'year')"
+            />
 
-          <LayDropdown ref="yearLeftRef">
-            <div class="laydate-set-ym">
-              <span>{{ leftDate.year() }} {{ t("datePicker.year") }}</span>
-            </div>
-            <template #content>
-              <Year :modelValue="leftDate" @pick="handleLeftYearChange"></Year>
-            </template>
-          </LayDropdown>
+            <LayDropdown ref="yearLeftRef">
+              <div class="laydate-set-ym">
+                <span>{{ leftDate.year() }} {{ t("datePicker.year") }}</span>
+              </div>
+              <template #content>
+                <Year
+                  :modelValue="leftDate"
+                  @pick="handleLeftYearChange"
+                ></Year>
+              </template>
+            </LayDropdown>
+          </template>
+          <div v-else class="laydate-set-ym">
+            <span>选择月份范围</span>
+          </div>
         </template>
       </Month>
       <Month
+        v-if="isYearMonth"
         :modelValue="rightDate"
         :inputDate="rightDate"
         :classes="classes"
