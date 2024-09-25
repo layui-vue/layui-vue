@@ -13,6 +13,7 @@ import {
   onBeforeUnmount,
   nextTick,
 } from "vue";
+import { useResizeObserver, type UseResizeObserverReturn } from "@vueuse/core";
 import LayCheckbox from "../checkbox/index.vue";
 import LayDropdown from "../dropdown/index.vue";
 import LayEmpty from "../empty/index.vue";
@@ -596,6 +597,8 @@ watch(
   }
 );
 
+let resizeInstance: UseResizeObserverReturn | null;
+
 onMounted(() => {
   nextTick(() => {
     getScrollWidth();
@@ -615,10 +618,10 @@ onMounted(() => {
     getScrollWidth();
   });
 
-  window.onresize = () => {
+  resizeInstance = useResizeObserver(tableBody, () => {
     getScrollWidth();
     getFixedColumn();
-  };
+  });
 });
 
 const getFixedColumn = () => {
@@ -965,7 +968,7 @@ const toolbarStyle = (toolbarName: string) => {
 };
 
 onBeforeUnmount(() => {
-  window.onresize = null;
+  resizeInstance?.stop();
 });
 
 const getCheckData = () => {
