@@ -113,6 +113,7 @@ const handleConfirm = () => {
         :modelValue="leftDate"
         :inputDate="leftDate"
         :classes="classes"
+        :dateType="props.type"
         @pick="handleMonthPick"
         @hover-cell="handleMonthHover"
       >
@@ -144,6 +145,7 @@ const handleConfirm = () => {
         v-if="isYearMonth"
         :modelValue="rightDate"
         :inputDate="rightDate"
+        :dateType="props.type"
         :classes="classes"
         @pick="handleMonthPick"
         @hover-cell="handleMonthHover"

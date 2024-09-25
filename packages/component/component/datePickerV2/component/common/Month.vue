@@ -95,13 +95,13 @@ const cellDisabled = computed(() => {
     return (month: number) => {
       if (
         DatePickerContext.min &&
-        month < dayjs(DatePickerContext.min).month()
+        month < dayjs(DatePickerContext.min, DatePickerContext.format).month()
       ) {
         return true;
       }
       if (
         DatePickerContext.max &&
-        month > dayjs(DatePickerContext.max).month()
+        month > dayjs(DatePickerContext.max, DatePickerContext.format).month()
       ) {
         return true;
       }
@@ -113,14 +113,14 @@ const cellDisabled = computed(() => {
 
       if (
         DatePickerContext.min &&
-        fullMonth.isSameOrBefore(DatePickerContext.min, "month")
+        fullMonth.isBefore(DatePickerContext.min, "month")
       ) {
         return true;
       }
 
       if (
         DatePickerContext.max &&
-        fullMonth.isSameOrAfter(DatePickerContext.max, "month")
+        fullMonth.isAfter(DatePickerContext.max, "month")
       ) {
         return true;
       }
