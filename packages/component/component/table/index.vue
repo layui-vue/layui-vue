@@ -473,6 +473,8 @@ const thSort = (e: Event, key: string) => {
     "span[lay-sort]"
   ) as HTMLSpanElement;
 
+  if (!spanDom) return;
+
   const sortValue = spanDom.getAttribute("lay-sort") as SortType;
 
   const currentIndex = sortType.indexOf(sortValue);
