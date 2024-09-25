@@ -26,5 +26,7 @@ describe("LayTable", () => {
     await thDom[1].trigger("click");
 
     expect(errorSpy).not.toHaveBeenCalled();
+
+    errorSpy.mockRestore();
   });
 });
