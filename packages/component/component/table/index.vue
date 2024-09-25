@@ -436,7 +436,7 @@ const exportData = () => {
             // 如果 rowspan 和 colspan 是 0 说明该列作为合并列的辅助列。
             // 则不再进行结构拼接。
             if (rowspan != 0 && colspan != 0) {
-              tableStr += `<td colspan=${colspan} rowspan=${rowspan}>${
+              tableStr += `<td colspan=${colspan} rowspan=${rowspan} x:str>${
                 columnData ? columnData[tableColumn.key] : ""
               }</td>`;
             }
