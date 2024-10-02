@@ -1,4 +1,6 @@
-export default [
+import { IconProp } from "../../../component/component/iconPicker/index.vue";
+
+const LayuiIconList: IconProp[] = [
   { name: "实心", class: "layui-icon-heart-fill" },
   { name: "空心", class: "layui-icon-heart" },
   { name: "亮度/晴", class: "layui-icon-light" },
@@ -187,3 +189,5 @@ export default [
   { name: "闭眼", class: "layui-icon-eye-invisible" },
   { name: "眼睛", class: "layui-icon-eye" },
 ];
+
+export default LayuiIconList;
