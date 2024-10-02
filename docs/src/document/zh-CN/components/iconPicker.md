@@ -137,23 +137,195 @@ export default {
 
 :::
 
-::: title icon-picker 属性
+::: title 自定义图标集
+:::
+
+::: demo 通过 `icon-sets` 属性传入注册自定义图标集，传入 `show-icon-sets` 可以展示图标集选择器，传入 `current-icon-set` 可以设置默认图标集（只有注册的图标集才可指定默认图标集）
+
+<template>
+  <lay-space direction="vertical">
+    <lay-space>
+      <lay-checkbox v-model="showIconSets">展示图标集</lay-checkbox>
+      <lay-select v-model="currentIconSet">
+        <lay-select-option value="layui">Layui</lay-select-option>
+        <lay-select-option value="bs">Bootstrap Icons</lay-select-option>
+      </lay-select>
+    </lay-space>
+    <lay-icon-picker
+      v-model="icon10"
+      type="layui-icon-face-smile"
+      :icon-sets="iconSet"
+      :show-icon-sets="showIconSets"
+      :current-icon-set="currentIconSet"
+    ></lay-icon-picker>
+  </lay-space>
+</template>
+
+<style>
+@import url("https://unpkg.com/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
+</style>
+
+<script>
+import { ref } from "vue";
+
+export default {
+  setup() {
+    const showIconSets = ref(true);
+    const icon10 = ref("bi-0-circle");
+    const currentIconSet = ref("bs");
+    const iconSet = ref([
+      "layui",
+      {
+        name: "bs",
+        title: "Bootstrap Icons",
+        prefix: "bi",
+        icons: [
+          {
+            name: "圆圈 0",
+            class: "bi-0-circle",
+          },
+          {
+            name: "圆圈 1",
+            class: "bi-1-circle",
+          },
+          {
+            name: "圆圈 2",
+            class: "bi-2-circle",
+          },
+          {
+            name: "圆圈 3",
+            class: "bi-3-circle",
+          },
+          {
+            name: "圆圈 4",
+            class: "bi-4-circle",
+          },
+          {
+            name: "圆圈 5",
+            class: "bi-5-circle",
+          },
+          {
+            name: "圆圈 6",
+            class: "bi-6-circle",
+          },
+          {
+            name: "圆圈 7",
+            class: "bi-7-circle",
+          },
+          {
+            name: "圆圈 8",
+            class: "bi-8-circle",
+          },
+          {
+            name: "圆圈 9",
+            class: "bi-9-circle",
+          },
+          {
+            name: "苹果",
+            class: "bi-apple",
+          },
+          {
+            name: "安卓",
+            class: "bi-android",
+          },
+          {
+            name: "圆圈 0",
+            class: "bi-0-circle-fill",
+          },
+          {
+            name: "圆圈 1",
+            class: "bi-1-circle-fill",
+          },
+          {
+            name: "圆圈 2",
+            class: "bi-2-circle-fill",
+          },
+          {
+            name: "圆圈 3",
+            class: "bi-3-circle-fill",
+          },
+          {
+            name: "圆圈 4",
+            class: "bi-4-circle-fill",
+          },
+          {
+            name: "圆圈 5",
+            class: "bi-5-circle-fill",
+          },
+          {
+            name: "圆圈 6",
+            class: "bi-6-circle-fill",
+          },
+          {
+            name: "圆圈 7",
+            class: "bi-7-circle-fill",
+          },
+          {
+            name: "圆圈 8",
+            class: "bi-8-circle-fill",
+          },
+          {
+            name: "圆圈 9",
+            class: "bi-9-circle-fill",
+          },
+        ],
+      },
+    ]);
+
+    return {
+      icon10,
+      iconSet,
+      showIconSets,
+      currentIconSet
+    };
+  },
+};
+</script>
+
+:::
+
+::: quote 目前内置了 Layui 图标集
+未指定 `iconSet` 时，默认使用 Layui 图标集
+:::
+
+::: title Property 属性
 :::
 
 ::: table
 
-| 属性           |  说明        |  类型   | 默认值  | 可选值  |
-| ---------- | -------- | --- |--- |--- |
-| v-model    | 默认值   | --  |--  |--  |
-| page       | 开启分页 | --  |--  |--  |
-| size       | 尺寸 | --  |--  |--  |
-| showSearch | 启用搜索 | --  |--  |--  |
-| disabled | 禁用 | `boolean`  |--  |--  |
-| allow-clear | 允许清空 | `boolean`  |--  |--  |
-| contentStyle             | 内容自定义样式     | `StyleValue` | -- | -- |
-| contentClass             | 内容自定义Class    | `string` `Array<string \| object>` `object` | -- | -- |
+| 属性             | 说明             | 类型                                        | 默认值      | 可选值 | 版本     |
+| ---------------- | ---------------- | ------------------------------------------- | ----------- | ------ | -------- |
+| v-model          | 默认值           | --                                          | --          | --     |          |
+| page             | 开启分页         | `boolean`                                   | --          | --     |          |
+| size             | 尺寸             | `"lg"`\|`"md"`\|`"sm"`\|`"xs"`              | --          | --     |          |
+| show-search      | 启用搜索         | `boolean`                                   | --          | --     |          |
+| disabled         | 禁用             | `boolean`                                   | --          | --     |          |
+| allow-clear      | 允许清空         | `boolean`                                   | --          | --     |          |
+| content-style    | 内容自定义样式   | `StyleValue`                                | --          | --     |          |
+| content-class    | 内容自定义 Class | `string` `Array<string \| object>` `object` | --          | --     |          |
+| icon-sets        | 图标集           | `Array<string \| IconSets>`                 | `["layui"]` | --     | `2.19.0` |
+| show-icon-sets   | 显示图标集切换器 | `boolean`                                   | `false`     | --     | `2.19.0` |
+| current-icon-set | 当前图标集       | `string`                                    | `"layui"`   | --     | `2.19.0` |
 
 :::
+
+::: title Types
+:::
+
+```typescript
+export interface IconProp {
+  name: string;
+  class: string;
+  prefix?: string;
+}
+
+export interface IconSets {
+  name: string;
+  title?: string;
+  prefix?: string;
+  icons: IconProp[];
+}
+```
 
 ::: previousNext iconPicker
 :::
