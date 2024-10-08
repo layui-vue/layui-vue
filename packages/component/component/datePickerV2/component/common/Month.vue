@@ -1,49 +1,47 @@
 <template>
-  <div class="layui-laydate">
-    <div class="layui-laydate-main">
-      <div class="layui-laydate-header">
-        <slot name="header">
-          <div class="laydate-set-ym" v-if="dateType === 'month'">
-            <span class="laydate-time-text">{{
-              typeof Month !== "string"
-                ? MONTH_NAME[Month]
-                : t("datePicker.selectMonth")
-            }}</span>
+  <div class="layui-laydate-main">
+    <div class="layui-laydate-header">
+      <slot name="header">
+        <div class="laydate-set-ym" v-if="dateType === 'month'">
+          <span class="laydate-time-text">{{
+            typeof Month !== "string"
+              ? MONTH_NAME[Month]
+              : t("datePicker.selectMonth")
+          }}</span>
+        </div>
+        <template v-else>
+          <lay-icon
+            type="layui-icon-prev"
+            @click="handleYearChange(-1)"
+          ></lay-icon>
+          <div class="laydate-set-ym">
+            <span @click="emits('type-change')">{{ modelValue.year() }}</span>
           </div>
-          <template v-else>
-            <lay-icon
-              type="layui-icon-prev"
-              @click="handleYearChange(-1)"
-            ></lay-icon>
-            <div class="laydate-set-ym">
-              <span @click="emits('type-change')">{{ modelValue.year() }}</span>
-            </div>
-            <lay-icon
-              type="layui-icon-next"
-              @click="handleYearChange(1)"
-            ></lay-icon>
-          </template>
-        </slot>
-      </div>
+          <lay-icon
+            type="layui-icon-next"
+            @click="handleYearChange(1)"
+          ></lay-icon>
+        </template>
+      </slot>
+    </div>
 
-      <div class="layui-laydate-content" style="height: 220px">
-        <ul class="layui-laydate-list laydate-month-list">
-          <li
-            v-for="(item, month) of MONTH_NAME"
-            :key="item"
-            :class="{
-              'layui-this': isActive(month, currentDate),
-              'layui-laydate-current': isActive(month, dayjs()),
-              'layui-disabled': cellDisabled(month),
-              ...classes?.(fullMonthDay(month)),
-            }"
-            @click="handleMonthClick(month)"
-            @mouseenter="handleMonthMouseenter(month)"
-          >
-            {{ item.slice(0, 3) }}
-          </li>
-        </ul>
-      </div>
+    <div class="layui-laydate-content" style="height: 220px">
+      <ul class="layui-laydate-list laydate-month-list">
+        <li
+          v-for="(item, month) of MONTH_NAME"
+          :key="item"
+          :class="{
+            'layui-this': isActive(month, currentDate),
+            'layui-laydate-current': isActive(month, dayjs()),
+            'layui-disabled': cellDisabled(month),
+            ...classes?.(fullMonthDay(month)),
+          }"
+          @click="handleMonthClick(month)"
+          @mouseenter="handleMonthMouseenter(month)"
+        >
+          {{ item.slice(0, 3) }}
+        </li>
+      </ul>
     </div>
   </div>
 </template>

@@ -28,7 +28,7 @@ export interface DatePickerProps {
   type?: DatePickerType;
   disabled?: boolean;
   readonly?: boolean;
-  placeholder?: string | string[];
+  placeholder?: string | Array<string>;
   allowClear?: boolean;
   simple?: boolean;
   max?: string;
@@ -44,11 +44,12 @@ export interface DatePickerProps {
   defaultValue?:
     | DatePickerModelValueSingleType
     | Array<DatePickerModelValueSingleType>;
-  defaultTime?: string | string[];
+  defaultTime?: string | Array<string>;
   contentStyle?: StyleValue;
   contentClass?: CommonClass;
   yearPage?: number;
   yearStep?: number;
+  shortcuts?: Array<Shortcuts>;
 }
 
 export type DatePickerEmits = {
@@ -85,3 +86,12 @@ export interface DatePickerContextType extends RequiredDatePickerProps {
 
 export const DATE_PICKER_CONTEXT: InjectionKey<DatePickerContextType> =
   Symbol("LayDatePicker");
+
+export interface Shortcuts {
+  text: string | number;
+  value:
+    | DatePickerModelValueSingleType
+    | Array<DatePickerModelValueSingleType>
+    | (() => DatePickerModelValueSingleType)
+    | (() => Array<DatePickerModelValueSingleType>);
+}

@@ -660,3 +660,30 @@ html #layuicss-laydate {
     }
   }
 }
+
+.layui-laydate-shortcut{
+  width: 80px;
+  padding: 6px 0;
+  display: inline-block;
+  vertical-align: top;
+  overflow: auto;
+  max-height: 276px;
+  text-align: center;
+}
+
+.layui-laydate-shortcut+.layui-laydate-main {
+  display: inline-block;
+  border-left: 1px solid #e2e2e2;
+}
+
+.layui-laydate-shortcut>li {
+  padding: 5px 8px;
+  cursor: pointer;
+  line-height: 18px;
+
+  &:hover {
+    background-color: #eee;
+    color: #333;
+    transition: all .3s;
+  }
+}

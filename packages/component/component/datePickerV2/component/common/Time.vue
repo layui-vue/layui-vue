@@ -1,42 +1,40 @@
 <template>
-  <div class="layui-laydate">
-    <div class="layui-laydate-main laydate-time-show">
-      <div class="layui-laydate-header">
-        <div class="laydate-set-ym">
-          <slot name="header">
-            <span class="laydate-time-text">{{
-              t("datePicker.selectTime")
-            }}</span>
-          </slot>
-        </div>
+  <div class="layui-laydate-main laydate-time-show">
+    <div class="layui-laydate-header">
+      <div class="laydate-set-ym">
+        <slot name="header">
+          <span class="laydate-time-text">{{
+            t("datePicker.selectTime")
+          }}</span>
+        </slot>
       </div>
-      <div class="layui-laydate-content" style="height: 210px">
-        <ul class="layui-laydate-list laydate-time-list" ref="timePanelRef">
-          <li
-            class="num-list"
-            v-for="item in els"
-            :key="item.type"
-            :data-type="item.type"
-          >
-            <ol class="scroll" @click="chooseTime">
-              <li
-                v-for="(it, index) in item.count"
-                :id="item.type + index.toString()"
-                :data-value="index.toString().padStart(2, '0')"
-                :data-type="item.type"
-                :key="it"
-                :class="{
-                  num: true,
-                  'layui-this': index == hms[item.type],
-                  'layui-disabled': cellDisabled(item.type, index),
-                }"
-              >
-                {{ index.toString().padStart(2, "0") }}
-              </li>
-            </ol>
-          </li>
-        </ul>
-      </div>
+    </div>
+    <div class="layui-laydate-content" style="height: 210px">
+      <ul class="layui-laydate-list laydate-time-list" ref="timePanelRef">
+        <li
+          class="num-list"
+          v-for="item in els"
+          :key="item.type"
+          :data-type="item.type"
+        >
+          <ol class="scroll" @click="chooseTime">
+            <li
+              v-for="(it, index) in item.count"
+              :id="item.type + index.toString()"
+              :data-value="index.toString().padStart(2, '0')"
+              :data-type="item.type"
+              :key="it"
+              :class="{
+                num: true,
+                'layui-this': index == hms[item.type],
+                'layui-disabled': cellDisabled(item.type, index),
+              }"
+            >
+              {{ index.toString().padStart(2, "0") }}
+            </li>
+          </ol>
+        </li>
+      </ul>
     </div>
   </div>
 </template>

@@ -1,39 +1,37 @@
 <template>
-  <div class="layui-laydate">
-    <div class="layui-laydate-main">
-      <div class="layui-laydate-header">
-        <LayIcon
-          type="layui-icon-prev"
-          @click="handleYearMonthChange('subtract', 'year')"
-        ></LayIcon>
-        <LayIcon
-          type="layui-icon-left"
-          @click="handleYearMonthChange('subtract', 'month')"
-        ></LayIcon>
-        <div class="laydate-set-ym">
-          <span @click="handleTypeChange('year')"
-            >{{ Year }} {{ t("datePicker.year") }}</span
-          >
-          <span @click="handleTypeChange('month')">
-            {{ MONTH_NAME[Month] }}
-          </span>
-        </div>
-        <LayIcon
-          type="layui-icon-right"
-          @click="handleYearMonthChange('add', 'month')"
-        ></LayIcon>
-        <LayIcon
-          type="layui-icon-next"
-          @click="handleYearMonthChange('add', 'year')"
-        ></LayIcon>
+  <div class="layui-laydate-main">
+    <div class="layui-laydate-header">
+      <LayIcon
+        type="layui-icon-prev"
+        @click="handleYearMonthChange('subtract', 'year')"
+      ></LayIcon>
+      <LayIcon
+        type="layui-icon-left"
+        @click="handleYearMonthChange('subtract', 'month')"
+      ></LayIcon>
+      <div class="laydate-set-ym">
+        <span @click="handleTypeChange('year')"
+          >{{ Year }} {{ t("datePicker.year") }}</span
+        >
+        <span @click="handleTypeChange('month')">
+          {{ MONTH_NAME[Month] }}
+        </span>
       </div>
-
-      <DateContent
-        :date-list="dateList"
-        :model-value="Day"
-        @update:model-value="handlePickDay"
-      ></DateContent>
+      <LayIcon
+        type="layui-icon-right"
+        @click="handleYearMonthChange('add', 'month')"
+      ></LayIcon>
+      <LayIcon
+        type="layui-icon-next"
+        @click="handleYearMonthChange('add', 'year')"
+      ></LayIcon>
     </div>
+
+    <DateContent
+      :date-list="dateList"
+      :model-value="Day"
+      @update:model-value="handlePickDay"
+    ></DateContent>
   </div>
 </template>
 

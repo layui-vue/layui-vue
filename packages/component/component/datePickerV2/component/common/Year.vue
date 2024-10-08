@@ -1,46 +1,44 @@
 <template>
-  <div class="layui-laydate">
-    <div class="layui-laydate-main">
-      <div class="layui-laydate-header">
-        <slot name="header" :yearList="yearRange">
-          <lay-icon
-            type="layui-icon-prev"
-            @click="currentDate -= DatePickerContext.yearPage"
-          ></lay-icon>
-          <div class="laydate-set-ym">
-            <span class="laydate-time-text">
-              {{ yearRange.join(" - ") }}
-            </span>
-          </div>
-          <lay-icon
-            type="layui-icon-next"
-            @click="currentDate += DatePickerContext.yearPage"
-          ></lay-icon>
-        </slot>
-      </div>
+  <div class="layui-laydate-main">
+    <div class="layui-laydate-header">
+      <slot name="header" :yearList="yearRange">
+        <lay-icon
+          type="layui-icon-prev"
+          @click="currentDate -= DatePickerContext.yearPage"
+        ></lay-icon>
+        <div class="laydate-set-ym">
+          <span class="laydate-time-text">
+            {{ yearRange.join(" - ") }}
+          </span>
+        </div>
+        <lay-icon
+          type="layui-icon-next"
+          @click="currentDate += DatePickerContext.yearPage"
+        ></lay-icon>
+      </slot>
+    </div>
 
-      <div
-        class="layui-laydate-content"
-        style="height: 220px; overflow-y: auto"
-        ref="ScrollRef"
-      >
-        <ul class="layui-laydate-list laydate-year-list">
-          <li
-            v-for="item of yearList"
-            :key="item"
-            :class="{
-              'layui-this': currentYear === item,
-              'layui-laydate-current': item === dayjs().year(),
-              'layui-disabled': cellDisabled(item),
-              ...classes?.(dayjs().year(item)),
-            }"
-            @click="handleYearClick(item)"
-            @mouseenter="handleYearMouseenter(item)"
-          >
-            {{ item }}
-          </li>
-        </ul>
-      </div>
+    <div
+      class="layui-laydate-content"
+      style="height: 220px; overflow-y: auto"
+      ref="ScrollRef"
+    >
+      <ul class="layui-laydate-list laydate-year-list">
+        <li
+          v-for="item of yearList"
+          :key="item"
+          :class="{
+            'layui-this': currentYear === item,
+            'layui-laydate-current': item === dayjs().year(),
+            'layui-disabled': cellDisabled(item),
+            ...classes?.(dayjs().year(item)),
+          }"
+          @click="handleYearClick(item)"
+          @mouseenter="handleYearMouseenter(item)"
+        >
+          {{ item }}
+        </li>
+      </ul>
     </div>
   </div>
 </template>

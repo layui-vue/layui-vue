@@ -1,7 +1,11 @@
 <script setup lang="ts">
 import dayjs, { type Dayjs } from "dayjs";
 import { computed, ref, watch } from "vue";
-import type { RangePickerProps, DateContentSingleDateObject } from "./interface";
+import type {
+  RangePickerProps,
+  DateContentSingleDateObject,
+} from "./interface";
+import type { Shortcuts as ShortcutsType } from "../interface";
 
 import { useI18n } from "../../../language";
 import { setDateList } from "../day";
@@ -13,11 +17,15 @@ import Time from "./common/Time.vue";
 import Year from "./common/Year.vue";
 import Month from "./common/Month.vue";
 import Footer from "./common/Footer.vue";
+import Shortcuts from "./common/Shortcuts.vue";
+
+import { useShortcutsRange } from "../hook/useShortcutsRange";
 
 const props = withDefaults(defineProps<RangePickerProps>(), {});
 const emits = defineEmits(["pick"]);
 
 const { t } = useI18n();
+const hookChangeShortcut = useShortcutsRange();
 
 const startDate = ref<Dayjs | null>();
 const endDate = ref<Dayjs | null>();
@@ -202,146 +210,144 @@ const handleChangeRightTimePick = (hmsDate: Dayjs) => {
   }
 };
 
+const handleChangeShortcut = (shortcuts: ShortcutsType) => {
+  const shortcutsValues = hookChangeShortcut(shortcuts);
+
+  leftDate.value = shortcutsValues[0];
+  rightDate.value = shortcutsValues[1];
+  startDate.value = shortcutsValues[0];
+  endDate.value = shortcutsValues[1];
+};
+
 const handleConfirm = () => {
   emits("pick", [startDate.value, endDate.value]);
 };
 </script>
 
 <template>
-  <div class="layui-laydate-range" :class="'layui-laydate-range-' + props.type">
+  <div
+    class="layui-laydate layui-laydate-range"
+    :class="'layui-laydate-range-' + props.type"
+  >
     <div class="layui-laydate-range-main">
-      <div class="layui-laydate">
-        <div class="layui-laydate-main">
-          <div class="layui-laydate-header">
-            <LayIcon
-              type="layui-icon-prev"
-              @click="handleChangeYearMonth('subtract', 'year')"
-            ></LayIcon>
-            <LayIcon
-              type="layui-icon-left"
-              @click="handleChangeYearMonth('subtract', 'month')"
-            ></LayIcon>
-            <div class="laydate-set-ym">
-              <LayDropdown ref="yearLeftRef">
-                <span>{{ leftDate.year() }} {{ t("datePicker.year") }}</span>
-                <template #content>
-                  <Year
-                    :modelValue="leftDate"
-                    @pick="(val: Dayjs) => handleChangeYearMonthPick(val, 'year', yearLeftRef!)"
-                  ></Year>
-                </template>
-              </LayDropdown>
+      <Shortcuts @change-shortcut="handleChangeShortcut"></Shortcuts>
 
-              <LayDropdown ref="monthLeftRef">
-                <span>{{ MONTH_NAME[leftDate.month()] }}</span>
+      <div class="layui-laydate-main">
+        <div class="layui-laydate-header">
+          <LayIcon
+            type="layui-icon-prev"
+            @click="handleChangeYearMonth('subtract', 'year')"
+          ></LayIcon>
+          <LayIcon
+            type="layui-icon-left"
+            @click="handleChangeYearMonth('subtract', 'month')"
+          ></LayIcon>
+          <div class="laydate-set-ym">
+            <LayDropdown ref="yearLeftRef">
+              <span>{{ leftDate.year() }} {{ t("datePicker.year") }}</span>
+              <template #content>
+                <Year
+                  :modelValue="leftDate"
+                  @pick="(val: Dayjs) => handleChangeYearMonthPick(val, 'year', yearLeftRef!)"
+                ></Year>
+              </template>
+            </LayDropdown>
 
-                <template #content>
-                  <Month
-                    :modelValue="leftDate"
-                    :inputDate="leftDate"
-                    dateType="month"
-                    @pick="(val: Dayjs) => handleChangeYearMonthPick(val, 'month', monthLeftRef!)"
-                  ></Month>
-                </template>
-              </LayDropdown>
+            <LayDropdown ref="monthLeftRef">
+              <span>{{ MONTH_NAME[leftDate.month()] }}</span>
 
-              <LayDropdown ref="timeLeftRef" v-if="props.type === 'datetime'">
-                <span>{{ leftDate.format("HH:mm:ss") }}</span>
+              <template #content>
+                <Month
+                  :modelValue="leftDate"
+                  :inputDate="leftDate"
+                  dateType="month"
+                  @pick="(val: Dayjs) => handleChangeYearMonthPick(val, 'month', monthLeftRef!)"
+                ></Month>
+              </template>
+            </LayDropdown>
 
-                <template #content>
-                  <Time
-                    :modelValue="startDate || leftDate"
-                    :inputDate="startDate || leftDate"
-                    @pick="handleChangeLeftTimePick"
-                  ></Time>
-                </template>
-              </LayDropdown>
-            </div>
+            <LayDropdown ref="timeLeftRef" v-if="props.type === 'datetime'">
+              <span>{{ leftDate.format("HH:mm:ss") }}</span>
 
-            <LayIcon
-              type="layui-icon-right"
-              style="visibility: hidden"
-            ></LayIcon>
-            <LayIcon
-              type="layui-icon-next"
-              style="visibility: hidden"
-            ></LayIcon>
+              <template #content>
+                <Time
+                  :modelValue="startDate || leftDate"
+                  :inputDate="startDate || leftDate"
+                  @pick="handleChangeLeftTimePick"
+                ></Time>
+              </template>
+            </LayDropdown>
           </div>
-          <DateContent
-            :classes="classes"
-            :dateList="leftDataList"
-            @update:model-value="handleDatePick"
-            @hover-cell="handleDateHover"
-          >
-          </DateContent>
+
+          <LayIcon type="layui-icon-right" style="visibility: hidden"></LayIcon>
+          <LayIcon type="layui-icon-next" style="visibility: hidden"></LayIcon>
         </div>
+        <DateContent
+          :classes="classes"
+          :dateList="leftDataList"
+          @update:model-value="handleDatePick"
+          @hover-cell="handleDateHover"
+        >
+        </DateContent>
       </div>
 
-      <div class="layui-laydate">
-        <div class="layui-laydate-main">
-          <div class="layui-laydate-header">
-            <LayIcon
-              type="layui-icon-prev"
-              style="visibility: hidden"
-            ></LayIcon>
-            <LayIcon
-              type="layui-icon-left"
-              style="visibility: hidden"
-            ></LayIcon>
-            <div class="laydate-set-ym">
-              <LayDropdown ref="yearRightRef">
-                <span>{{ rightDate.year() }} {{ t("datePicker.year") }}</span>
-                <template #content>
-                  <Year
-                    :modelValue="leftDate"
-                    @pick="(val: Dayjs) => handleChangeYearMonthPick(val, 'year', yearRightRef!)"
-                  ></Year>
-                </template>
-              </LayDropdown>
+      <div class="layui-laydate-main">
+        <div class="layui-laydate-header">
+          <LayIcon type="layui-icon-prev" style="visibility: hidden"></LayIcon>
+          <LayIcon type="layui-icon-left" style="visibility: hidden"></LayIcon>
+          <div class="laydate-set-ym">
+            <LayDropdown ref="yearRightRef">
+              <span>{{ rightDate.year() }} {{ t("datePicker.year") }}</span>
+              <template #content>
+                <Year
+                  :modelValue="leftDate"
+                  @pick="(val: Dayjs) => handleChangeYearMonthPick(val, 'year', yearRightRef!)"
+                ></Year>
+              </template>
+            </LayDropdown>
 
-              <LayDropdown ref="monthRightRef">
-                <span>{{ MONTH_NAME[rightDate.month()] }}</span>
+            <LayDropdown ref="monthRightRef">
+              <span>{{ MONTH_NAME[rightDate.month()] }}</span>
 
-                <template #content>
-                  <Month
-                    :modelValue="leftDate"
-                    :inputDate="leftDate"
-                    dateType="month"
-                    @pick="(val: Dayjs) => handleChangeYearMonthPick(val.subtract(1, 'month'), 'month', monthRightRef!)"
-                  ></Month>
-                </template>
-              </LayDropdown>
+              <template #content>
+                <Month
+                  :modelValue="leftDate"
+                  :inputDate="leftDate"
+                  dateType="month"
+                  @pick="(val: Dayjs) => handleChangeYearMonthPick(val.subtract(1, 'month'), 'month', monthRightRef!)"
+                ></Month>
+              </template>
+            </LayDropdown>
 
-              <LayDropdown ref="timeRightRef" v-if="props.type === 'datetime'">
-                <span>{{ rightDate.format("HH:mm:ss") }}</span>
+            <LayDropdown ref="timeRightRef" v-if="props.type === 'datetime'">
+              <span>{{ rightDate.format("HH:mm:ss") }}</span>
 
-                <template #content>
-                  <Time
-                    :modelValue="endDate || rightDate"
-                    :inputDate="endDate || rightDate"
-                    @pick="handleChangeRightTimePick"
-                  ></Time>
-                </template>
-              </LayDropdown>
-            </div>
-
-            <LayIcon
-              type="layui-icon-right"
-              @click="handleChangeYearMonth('add', 'month')"
-            ></LayIcon>
-            <LayIcon
-              type="layui-icon-next"
-              @click="handleChangeYearMonth('add', 'year')"
-            ></LayIcon>
+              <template #content>
+                <Time
+                  :modelValue="endDate || rightDate"
+                  :inputDate="endDate || rightDate"
+                  @pick="handleChangeRightTimePick"
+                ></Time>
+              </template>
+            </LayDropdown>
           </div>
-          <DateContent
-            :classes="classes"
-            :dateList="rightDataList"
-            @update:model-value="handleDatePick"
-            @hover-cell="handleDateHover"
-          >
-          </DateContent>
+
+          <LayIcon
+            type="layui-icon-right"
+            @click="handleChangeYearMonth('add', 'month')"
+          ></LayIcon>
+          <LayIcon
+            type="layui-icon-next"
+            @click="handleChangeYearMonth('add', 'year')"
+          ></LayIcon>
         </div>
+        <DateContent
+          :classes="classes"
+          :dateList="rightDataList"
+          @update:model-value="handleDatePick"
+          @hover-cell="handleDateHover"
+        >
+        </DateContent>
       </div>
     </div>
     <Footer :showNow="false" @confirm="handleConfirm">

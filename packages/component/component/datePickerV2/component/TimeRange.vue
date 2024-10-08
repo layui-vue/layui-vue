@@ -2,16 +2,21 @@
 import dayjs, { type Dayjs } from "dayjs";
 import { ref, watch } from "vue";
 import type { RangePickerProps } from "./interface";
+import type { Shortcuts as ShortcutsType } from "../interface";
 
 import { useI18n } from "../../../language";
 
 import Time from "./common/Time.vue";
 import Footer from "./common/Footer.vue";
+import Shortcuts from "./common/Shortcuts.vue";
+
+import { useShortcutsRange } from "../hook/useShortcutsRange";
 
 const props = withDefaults(defineProps<RangePickerProps>(), {});
 const emits = defineEmits(["pick"]);
 
 const { t } = useI18n();
+const hookChangeShortcut = useShortcutsRange();
 
 const startDate = ref();
 const endDate = ref();
@@ -44,14 +49,23 @@ const handleRightTimePick = (date: Dayjs) => {
   }
 };
 
+const handleChangeShortcut = (shortcuts: ShortcutsType) => {
+  const shortcutsValues = hookChangeShortcut(shortcuts);
+
+  startDate.value = shortcutsValues[0];
+  endDate.value = shortcutsValues[1];
+};
+
 const handleConfirm = () => {
   emits("pick", [startDate.value, endDate.value]);
 };
 </script>
 
 <template>
-  <div class="layui-laydate-range">
+  <div class="layui-laydate layui-laydate-range">
     <div class="layui-laydate-range-main">
+      <Shortcuts @change-shortcut="handleChangeShortcut"></Shortcuts>
+
       <Time
         :modelValue="startDate"
         :inputDate="startDate"

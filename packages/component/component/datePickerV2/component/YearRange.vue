@@ -2,17 +2,19 @@
 import dayjs, { type Dayjs } from "dayjs";
 import { computed, ref, watch } from "vue";
 import type { RangePickerProps } from "./interface";
-
-import { useI18n } from "../../../language";
+import type { Shortcuts as ShortcutsType } from "../interface";
 
 import LayIcon from "../../icon";
 import Year from "./common/Year.vue";
 import Footer from "./common/Footer.vue";
+import Shortcuts from "./common/Shortcuts.vue";
+
+import { useShortcutsRange } from "../hook/useShortcutsRange";
 
 const props = withDefaults(defineProps<RangePickerProps>(), {});
 const emits = defineEmits(["pick"]);
 
-const { t } = useI18n();
+const hookChangeShortcut = useShortcutsRange();
 
 const startDate = ref();
 const endDate = ref();
@@ -84,14 +86,25 @@ const handleYearHover = (date: Dayjs) => {
   hoverYear.value = date;
 };
 
+const handleChangeShortcut = (shortcuts: ShortcutsType) => {
+  const shortcutsValues = hookChangeShortcut(shortcuts);
+
+  leftDate.value = shortcutsValues[0];
+  rightDate.value = shortcutsValues[1];
+  startDate.value = shortcutsValues[0];
+  endDate.value = shortcutsValues[1];
+};
+
 const handleConfirm = () => {
   emits("pick", [startDate.value, endDate.value]);
 };
 </script>
 
 <template>
-  <div class="layui-laydate-range">
+  <div class="layui-laydate layui-laydate-range">
     <div class="layui-laydate-range-main">
+      <Shortcuts @change-shortcut="handleChangeShortcut"></Shortcuts>
+
       <Year
         :modelValue="leftDate"
         :inputDate="leftDate"
