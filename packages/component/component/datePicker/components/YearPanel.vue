@@ -80,8 +80,8 @@ if (datePicker.currentYear.value)
 const yearList = computed<number[]>(() =>
   getYears(
     currentDate.value ?? new Date(),
-    datePicker.yearPage.value,
-    datePicker.yearStep.value
+    datePicker.yearPage.value
+    // datePicker.yearStep.value
   )
 );
 const yearRange = computed(() => [yearList.value.at(0), yearList.value.at(-1)]);

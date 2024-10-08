@@ -48,7 +48,7 @@ export interface DatePickerProps {
   contentStyle?: StyleValue;
   contentClass?: CommonClass;
   yearPage?: number;
-  yearStep?: number;
+  // yearStep?: number;
   shortcuts?: Array<Shortcuts>;
 }
 
@@ -71,7 +71,7 @@ export type RequiredDatePickerProps = RequiredByKeys<
   | "rangeSeparator"
   | "prefixIcon"
   | "yearPage"
-  | "yearStep"
+  // | "yearStep"
 >;
 
 export interface PanelPickerProps extends DatePickerProps {

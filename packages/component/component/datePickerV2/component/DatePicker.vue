@@ -137,7 +137,8 @@ const handleChangeShortcut = (shortcuts: ShortcutsType) => {
   const date = (
     isFunction(shortcuts.value) ? shortcuts.value() : shortcuts.value
   ) as DatePickerModelValueSingleType;
-  currentData.value = dayjs(date, props.format);
+
+  currentData.value = dayjs(date, props.defaultFormat);
 
   handleConfirm();
 };

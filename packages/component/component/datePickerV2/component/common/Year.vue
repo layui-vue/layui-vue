@@ -68,8 +68,8 @@ const currentDate = ref();
 const yearList = computed<number[]>(() =>
   getYears(
     currentDate.value,
-    DatePickerContext.yearPage,
-    DatePickerContext.yearStep
+    DatePickerContext.yearPage
+    // DatePickerContext.yearStep
   )
 );
 const yearRange = computed(() => [yearList.value.at(0), yearList.value.at(-1)]);

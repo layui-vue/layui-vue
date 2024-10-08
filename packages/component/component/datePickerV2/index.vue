@@ -37,7 +37,7 @@ const props = withDefaults(defineProps<DatePickerProps>(), {
   suffixIcon: "",
   timestamp: false,
   yearPage: 15,
-  yearStep: 1,
+  // yearStep: 1,
 });
 
 const { RenderComponent, renderComponentProps } = useDatePicker(props);
