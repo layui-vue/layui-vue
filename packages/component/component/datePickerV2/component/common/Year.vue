@@ -51,7 +51,7 @@ import { computed, ref, watch, inject } from "vue";
 
 import LayIcon from "../../../icon";
 import { DATE_PICKER_CONTEXT } from "../../interface";
-import { getYears } from "../../day";
+import { getYears } from "../../util";
 
 defineOptions({
   name: "YearPanel",

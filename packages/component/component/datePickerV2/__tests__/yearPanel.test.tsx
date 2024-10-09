@@ -8,7 +8,7 @@ import LayDropdown from "../../dropdown/index.vue";
 import Year from "../component/common/Year.vue";
 import Footer from "../component/common/Footer.vue";
 import Shortcuts from "../component/common/Shortcuts.vue";
-import { getYears } from "../day";
+import { getYears } from "../util";
 
 const mockInputClick = async (wrapper: any) => {
   await wrapper.find(".layui-input").trigger("click");

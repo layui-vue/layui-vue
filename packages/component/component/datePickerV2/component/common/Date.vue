@@ -42,7 +42,7 @@ import { computed, nextTick, ref, watch } from "vue";
 import dayjs, { type Dayjs } from "dayjs";
 import { useI18n } from "../../../../language";
 
-import { setDateList } from "../../day";
+import { setDateList } from "../../util";
 import LayIcon from "../../../icon";
 import DateContent from "./DateContent.vue";
 

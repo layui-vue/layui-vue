@@ -8,7 +8,7 @@ import type {
 import type { Shortcuts as ShortcutsType } from "../interface";
 
 import { useI18n } from "../../../language";
-import { setDateList } from "../day";
+import { setDateList } from "../util";
 
 import LayIcon from "../../icon";
 import LayDropdown from "../../dropdown";
