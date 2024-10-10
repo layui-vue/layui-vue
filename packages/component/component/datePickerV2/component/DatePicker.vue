@@ -21,15 +21,23 @@ const props = withDefaults(defineProps<UniquePickerProps>(), {});
 
 const emits = defineEmits(["pick"]);
 
-const inputDate = ref<Dayjs>(dayjs());
-const currentData = ref<Dayjs>(dayjs());
+const currentData = ref<UniquePickerProps["modelValue"]>();
+const showDate = ref<Dayjs>(dayjs());
 const currentType = ref();
+
+const getDefaultValue = () => {
+  const _defaultValue = dayjs(
+    props.defaultValue as DatePickerModelValueSingleType
+  );
+
+  return _defaultValue.isValid() ? _defaultValue : dayjs().startOf("day");
+};
 
 watch(
   () => props.modelValue,
   () => {
     currentData.value = props.modelValue;
-    inputDate.value = props.modelValue;
+    showDate.value = props.modelValue || getDefaultValue();
   },
   { immediate: true }
 );
@@ -70,13 +78,13 @@ const handlePickTime = (value: Dayjs) => {
 };
 
 const handlePickYear = (year: number) => {
-  const data = currentData.value.year(year);
+  const data = showDate.value.year(year);
 
   if (["datetime", "date"].includes(dateType.value)) {
-    currentData.value = data;
+    showDate.value = data;
     currentType.value = "date";
   } else if (dateType.value === "yearmonth") {
-    currentData.value = data;
+    showDate.value = data;
     currentType.value = "month";
   } else {
     currentData.value = data;
@@ -85,23 +93,24 @@ const handlePickYear = (year: number) => {
 };
 
 const handlePickMonth = (month: number) => {
-  const data = currentData.value.month(month);
+  const data = showDate.value.month(month);
 
   if (["datetime", "date"].includes(dateType.value)) {
-    currentData.value = data;
+    showDate.value = data;
     currentType.value = "date";
   } else {
     currentData.value = data;
+    showDate.value = data;
     handleConfirm();
   }
 };
 
 const handleMonthChangeYear = (year: number) => {
-  currentData.value = currentData.value.year(year);
+  showDate.value = showDate.value.year(year);
 };
 
 const handleDateChangeYearMonth = (data: Dayjs) => {
-  currentData.value = data;
+  showDate.value = data;
 };
 
 const handleToggleTimePanel = () => {
@@ -125,11 +134,11 @@ const handleConfirm = (isConfirm = false) => {
 
 const handleNow = () => {
   if (dayjs().isBefore(dayjs(props.min, props.format))) {
-    inputDate.value = currentData.value = dayjs(props.min, props.format);
+    showDate.value = currentData.value = dayjs(props.min, props.format);
   } else if (dayjs().isAfter(dayjs(props.max, props.format))) {
-    inputDate.value = currentData.value = dayjs(props.max, props.format);
+    showDate.value = currentData.value = dayjs(props.max, props.format);
   } else {
-    inputDate.value = currentData.value = dayjs();
+    showDate.value = currentData.value = dayjs();
   }
 };
 
@@ -151,7 +160,9 @@ const handleChangeShortcut = (shortcuts: ShortcutsType) => {
 // };
 
 const footerValue = () => {
-  return dayjs(currentData.value).format(props.defaultFormat);
+  return currentData.value
+    ? dayjs(currentData.value).format(props.defaultFormat)
+    : "";
 };
 </script>
 
@@ -165,7 +176,7 @@ const footerValue = () => {
       v-if="currentType === 'date' || currentType === 'time'"
       v-show="currentType === 'date'"
       :modelValue="currentData"
-      :inputDate="inputDate"
+      :showDate="showDate"
       :dateType="dateType"
       @pick="handlePickDate"
       @year-month-change="handleDateChangeYearMonth"
@@ -174,21 +185,21 @@ const footerValue = () => {
     <Time
       v-if="currentType === 'time'"
       :modelValue="currentData"
-      :inputDate="inputDate"
+      :showDate="showDate"
       :dateType="dateType"
       @pick="handlePickTime"
     ></Time>
     <Year
       v-if="currentType === 'year'"
       :modelValue="currentData"
-      :inputDate="inputDate"
+      :showDate="showDate"
       :dateType="dateType"
       @pick="handlePickYear"
     ></Year>
     <Month
       v-if="currentType === 'month'"
       :modelValue="currentData"
-      :inputDate="inputDate"
+      :showDate="showDate"
       :dateType="dateType"
       @pick="handlePickMonth"
       @year-change="handleMonthChangeYear"
@@ -196,6 +207,7 @@ const footerValue = () => {
     ></Month>
     <Footer
       :showConfirm="showConfirm"
+      :disabledConfirm="!currentData"
       @confirm="handleConfirm(true)"
       @now="handleNow"
     >

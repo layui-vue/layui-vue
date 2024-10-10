@@ -57,13 +57,13 @@ defineOptions({
   name: "YearPanel",
 });
 
-const props = withDefaults(defineProps<BasePanelProps>(), {});
+const props = defineProps<BasePanelProps>();
 const emits = defineEmits(["pick", "hover-cell"]);
 
 const DatePickerContext = inject(DATE_PICKER_CONTEXT)!;
 
-const currentYear = ref();
-const currentDate = ref();
+const currentYear = ref<number | null>();
+const currentDate = ref<number>(dayjs().year());
 
 const yearList = computed<number[]>(() =>
   getYears(
@@ -75,9 +75,11 @@ const yearList = computed<number[]>(() =>
 const yearRange = computed(() => [yearList.value.at(0), yearList.value.at(-1)]);
 
 watch(
-  () => props.modelValue,
-  () => {
-    currentDate.value = currentYear.value = props.modelValue.year();
+  [() => props.modelValue, () => props.showDate],
+  ([modelValue, showDate]) => {
+    currentYear.value = modelValue ? modelValue.year() : null;
+
+    currentDate.value = (modelValue || showDate)?.year();
   },
   {
     immediate: true,
@@ -104,7 +106,7 @@ const handleYearClick = (item: number) => {
   }
 
   currentYear.value = item;
-  emits("pick", DatePickerContext.range ? props.modelValue.year(item) : item);
+  emits("pick", DatePickerContext.range ? dayjs().year(item) : item);
 };
 
 const handleYearMouseenter = (item: number) => {

@@ -74,13 +74,15 @@ export type RequiredDatePickerProps = RequiredByKeys<
   // | "yearStep"
 >;
 
+export type DatePickerValue = Dayjs | Array<Dayjs> | null | undefined;
+
 export interface PanelPickerProps extends DatePickerProps {
-  modelValue: Dayjs | Array<Dayjs>;
+  modelValue: DatePickerValue;
   defaultFormat: string;
 }
 
 export interface DatePickerContextType extends RequiredDatePickerProps {
-  modelValue: Dayjs | Array<Dayjs>;
+  modelValue: DatePickerValue;
   defaultFormat: string;
 }
 

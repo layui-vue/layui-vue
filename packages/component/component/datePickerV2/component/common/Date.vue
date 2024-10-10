@@ -11,10 +11,10 @@
       ></LayIcon>
       <div class="laydate-set-ym">
         <span @click="handleTypeChange('year')"
-          >{{ Year }} {{ t("datePicker.year") }}</span
+          >{{ showDate.year() }} {{ t("datePicker.year") }}</span
         >
         <span @click="handleTypeChange('month')">
-          {{ MONTH_NAME[Month] }}
+          {{ MONTH_NAME[showDate.month()] }}
         </span>
       </div>
       <LayIcon
@@ -38,7 +38,7 @@
 <script lang="ts" setup>
 import type { BasePanelProps, DateContentSingleDateObject } from "../interface";
 
-import { computed, nextTick, ref, watch } from "vue";
+import { computed, ref, watch } from "vue";
 import dayjs, { type Dayjs } from "dayjs";
 import { useI18n } from "../../../../language";
 
@@ -50,7 +50,6 @@ defineOptions({
   name: "DatePanel",
 });
 
-// inputDate 用于保持 day 日期的状态，不被modelValue改变
 const props = withDefaults(defineProps<BasePanelProps>(), {});
 const emits = defineEmits<{
   (e: "year-month-change", data: Dayjs): void;
@@ -60,9 +59,9 @@ const emits = defineEmits<{
 
 const { t } = useI18n();
 
-const Day = ref();
-const Year = ref();
-const Month = ref();
+const currentDate = ref<Dayjs>(dayjs());
+const Day = ref<number | null>();
+
 const dateList = ref<Array<DateContentSingleDateObject>>([]);
 
 const MONTH_NAME = computed(() => [
@@ -81,22 +80,12 @@ const MONTH_NAME = computed(() => [
 ]);
 
 watch(
-  () => props.modelValue,
-  () => {
-    Year.value = dayjs(props.modelValue).year();
-    Month.value = dayjs(props.modelValue).month();
+  [() => props.modelValue, () => props.showDate],
+  ([modelValue, showDate]) => {
+    dateList.value = setDateList(showDate.year(), showDate.month());
+    currentDate.value = modelValue || showDate;
 
-    dateList.value = setDateList(Year.value, Month.value);
-  },
-  {
-    immediate: true,
-  }
-);
-
-watch(
-  () => props.inputDate,
-  () => {
-    Day.value = dayjs(props.inputDate).startOf("day").valueOf(); //unix
+    Day.value = modelValue ? modelValue.startOf("day").valueOf() : null; //unix
   },
   {
     immediate: true,
@@ -107,7 +96,7 @@ const handleYearMonthChange = (
   calc: "add" | "subtract",
   type: "year" | "month"
 ) => {
-  const date = props.modelValue[calc](1, type);
+  const date = props.showDate[calc](1, type);
 
   emits("year-month-change", date);
 };
@@ -119,17 +108,12 @@ const handleTypeChange = (type: "year" | "month") => {
 const handlePickDay = (val: number) => {
   const unixDate = dayjs(val);
 
-  const data = props.modelValue
+  const data = currentDate.value
     .clone()
     .set("year", unixDate.year())
     .set("month", unixDate.month())
     .set("date", unixDate.date());
 
   emits("pick", data);
-  // 等待 props.modelValue watch 结束
-  // 防止 Day.value 被inputData改变
-  nextTick(() => {
-    Day.value = val;
-  });
 };
 </script>

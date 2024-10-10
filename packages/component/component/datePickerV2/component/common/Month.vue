@@ -4,8 +4,8 @@
       <slot name="header">
         <div class="laydate-set-ym" v-if="dateType === 'month'">
           <span class="laydate-time-text">{{
-            typeof Month !== "string"
-              ? MONTH_NAME[Month]
+            currentMonth
+              ? MONTH_NAME[currentMonth]
               : t("datePicker.selectMonth")
           }}</span>
         </div>
@@ -15,7 +15,7 @@
             @click="handleYearChange(-1)"
           ></lay-icon>
           <div class="laydate-set-ym">
-            <span @click="emits('type-change')">{{ modelValue.year() }}</span>
+            <span @click="emits('type-change')">{{ currentDate.year() }}</span>
           </div>
           <lay-icon
             type="layui-icon-next"
@@ -31,7 +31,7 @@
           v-for="(item, month) of MONTH_NAME"
           :key="item"
           :class="{
-            'layui-this': isActive(month, currentDate),
+            'layui-this': isActive(month, modelValue),
             'layui-laydate-current': isActive(month, dayjs()),
             'layui-disabled': cellDisabled(month),
             ...classes?.(fullMonthDay(month)),
@@ -67,8 +67,8 @@ const emits = defineEmits(["pick", "year-change", "type-change", "hover-cell"]);
 
 const DatePickerContext = inject(DATE_PICKER_CONTEXT)!;
 
-const currentDate = ref();
-const Month = ref();
+const currentMonth = ref<number | null>();
+const currentDate = ref<Dayjs>(dayjs());
 
 const { t } = useI18n();
 
@@ -129,10 +129,10 @@ const cellDisabled = computed(() => {
 });
 
 const isActive = computed(() => {
-  return (month: number, value: Dayjs) => {
+  return (month: number, value: BasePanelProps["modelValue"]) => {
     const fullMonth = fullMonthDay(month);
 
-    return value.isSame(fullMonth, "month");
+    return value && value.isSame(fullMonth, "month");
   };
 });
 
@@ -144,7 +144,7 @@ const handleMonthClick = (month: number) => {
 
   const fullMonth = fullMonthDay(month);
 
-  Month.value = month;
+  currentMonth.value = month;
   currentDate.value = fullMonth;
 
   emits("pick", DatePickerContext.range ? fullMonth : month);
@@ -161,23 +161,15 @@ const handleMonthMouseenter = (month: number) => {
 };
 
 const fullMonthDay = (month: number) => {
-  return props.modelValue.startOf("year").month(month);
+  return currentDate.value.startOf("year").month(month);
 };
 
 watch(
-  () => props.modelValue,
-  () => {
-    Month.value = props.modelValue.month();
-  },
-  {
-    immediate: true,
-  }
-);
+  [() => props.modelValue, () => props.showDate],
+  ([modelValue, showDate]) => {
+    currentMonth.value = modelValue ? modelValue.month() : null;
 
-watch(
-  () => props.inputDate,
-  () => {
-    currentDate.value = props.inputDate;
+    currentDate.value = showDate;
   },
   {
     immediate: true,
@@ -185,6 +177,6 @@ watch(
 );
 
 const handleYearChange = (val: number) => {
-  emits("year-change", props.modelValue.year() + val);
+  emits("year-change", currentDate.value.year() + val);
 };
 </script>

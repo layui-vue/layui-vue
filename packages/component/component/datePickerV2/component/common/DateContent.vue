@@ -48,7 +48,7 @@ import type { DateContentSingleDateObject } from "../interface";
 
 export interface DateContentProps {
   dateList: Array<DateContentSingleDateObject>;
-  modelValue?: number;
+  modelValue?: number | null;
   classes?: (val: DateContentSingleDateObject) => Record<string, boolean>;
 }
 

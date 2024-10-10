@@ -290,8 +290,16 @@ html #layuicss-laydate {
 .layui-laydate-footer .layui-btn + .layui-btn {
   margin-left: 0;
 }
-.layui-laydate-footer span:hover {
-  color: var(--global-primary-color);
+.layui-laydate-footer {
+  .laydate-footer-btns {
+    .layui-btn:not(.layui-btn-disabled) {
+      span:hover {
+        color: var(--global-primary-color);
+      }
+    }
+    
+  }
+  
 }
 .layui-laydate-footer span.layui-laydate-preview {
   cursor: default;

@@ -3,18 +3,19 @@
     <slot></slot>
     <div class="laydate-footer-btns">
       <LayButton
-        size="xs"
         lay-type="now"
-        v-if="props.showNow"
         class="laydate-btns-now"
+        v-if="props.showNow"
+        size="xs"
         @click="handelNow"
         >{{ t("datePicker.now") }}</LayButton
       >
       <LayButton
-        size="xs"
-        v-if="props.showConfirm"
         lay-type="confirm"
         class="laydate-btns-confirm"
+        v-if="props.showConfirm"
+        size="xs"
+        :disabled="disabledConfirm"
         @click="handelOk"
         >{{ t("datePicker.confirm") }}</LayButton
       >
@@ -29,6 +30,7 @@ import { useI18n } from "../../../../language";
 export interface PanelFoot {
   showNow?: boolean;
   showConfirm?: boolean;
+  disabledConfirm?: boolean;
 }
 
 defineOptions({

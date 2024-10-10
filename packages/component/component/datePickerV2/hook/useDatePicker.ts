@@ -18,23 +18,17 @@ import { normalizeDayjsValue } from "../util";
 import { isArray, isNumber } from "../../../utils";
 
 export const useDatePicker = (props: RequiredDatePickerProps) => {
-  const initDate = computed<Dayjs | Array<Dayjs>>(() => {
+  const initDate = computed<Dayjs | Array<Dayjs> | null>(() => {
     if (props.range) {
       const modelValue = isArray(props.modelValue) ? props.modelValue : [];
-      return modelValue.map((date: DatePickerModelValueSingleType) => {
-        const value =
-          date ||
-          (props.defaultValue as DatePickerModelValueSingleType) ||
-          new Date();
 
-        return normalizeDayjsValue(value, typeMap.value.format);
-      });
+      return modelValue.map((date: DatePickerModelValueSingleType) => {
+        return normalizeDayjsValue(date, typeMap.value.format);
+      }) as Array<Dayjs>;
     } else {
+      let value = props.modelValue;
+
       // 兼容之前的 Year | Month 类型 modelValue可传 `2024` | `11` number类型
-      let value =
-        props.modelValue ||
-        (props.defaultValue as DatePickerModelValueSingleType) ||
-        new Date();
       if (
         ["year", "month"].includes(props.type!) &&
         isNumber(props.modelValue) &&
@@ -44,6 +38,7 @@ export const useDatePicker = (props: RequiredDatePickerProps) => {
       }
 
       // 处理CustomParseFormat插件可能造成解析Date, number, '', undefined...错误
+
       return normalizeDayjsValue(
         value as DatePickerModelValueSingleType,
         typeMap.value.format

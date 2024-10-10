@@ -5,10 +5,10 @@ import { DateContentSingleDateObject } from "./component/interface";
 export const normalizeDayjsValue = (
   value: DatePickerModelValueSingleType,
   format: string
-) => {
+): Dayjs | null => {
   const date = dayjs(value, format);
 
-  return date.isValid() ? date : dayjs(value);
+  return date.isValid() ? date : dayjs(value).isValid() ? dayjs(value) : null;
 };
 
 export const dayjsToString = (
