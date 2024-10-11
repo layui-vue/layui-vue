@@ -24,7 +24,7 @@ dayjs.extend(objectSupport);
 export type DatePickerProps = _DatePickerProps;
 
 const props = withDefaults(defineProps<DatePickerProps>(), {
-  modelValue: "",
+  modelValue: null,
   size: "md",
   type: "date",
   disabled: false,

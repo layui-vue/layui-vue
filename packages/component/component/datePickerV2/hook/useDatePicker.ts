@@ -37,7 +37,7 @@ export const useDatePicker = (props: RequiredDatePickerProps) => {
         value += "";
       }
 
-      // 处理CustomParseFormat插件可能造成解析Date, number, '', undefined...错误
+      // 处理CustomParseFormat插件可能造成解析Date, number, '', null...错误
 
       return normalizeDayjsValue(
         value as DatePickerModelValueSingleType,
