@@ -114,8 +114,8 @@ describe("YearPanel", () => {
     expect(datePicker.emitted()).toHaveProperty("update:modelValue");
     expect(datePicker.emitted()).toHaveProperty("change");
 
-    expect(datePicker.emitted().change[0]).toEqual(["2017"]);
-    expect(datePicker.emitted()["update:modelValue"][0]).toEqual(["2017"]);
+    expect(datePicker.emitted().change[0]).toEqual(["2011"]);
+    expect(datePicker.emitted()["update:modelValue"][0]).toEqual(["2011"]);
   });
 
   test("year 手动改变input 触发改变modelValue", async () => {
@@ -173,14 +173,14 @@ describe("YearPanel", () => {
     await lis[0].trigger("click");
 
     const datePicker = wrapper.findComponent(LayDatePicker);
-    expect(datePicker.props("modelValue")).toBe("2017");
+    expect(datePicker.props("modelValue")).toBe("2011");
   });
 
   test("year min/max", async () => {
     const wrapper = mount({
       setup() {
         return () => (
-          <LayDatePicker type="year" min="2023" max="2025"></LayDatePicker>
+          <LayDatePicker type="year" min="2023" max="2024"></LayDatePicker>
         );
       },
     });
@@ -194,7 +194,7 @@ describe("YearPanel", () => {
 
     const preLi =
       currentLi.element.previousElementSibling?.previousElementSibling;
-    const nextLi = currentLi.element.nextElementSibling?.nextElementSibling;
+    const nextLi = currentLi.element.nextElementSibling;
 
     expect(preLi?.className).toBe("layui-disabled");
     expect(nextLi?.className).toBe("layui-disabled");

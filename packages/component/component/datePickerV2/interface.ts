@@ -43,7 +43,9 @@ export interface DatePickerProps {
   defaultValue?:
     | DatePickerModelValueSingleType
     | Array<DatePickerModelValueSingleType>;
-  defaultTime?: string | Array<string>;
+  defaultTime?:
+    | DatePickerModelValueSingleType
+    | Array<DatePickerModelValueSingleType>;
   contentStyle?: StyleValue;
   contentClass?: CommonClass;
   yearPage?: number;
@@ -78,7 +80,6 @@ export type DatePickerValue = Dayjs | Array<Dayjs> | null | undefined;
 
 export interface DatePickerContextType extends RequiredDatePickerProps {
   modelValue: DatePickerValue;
-  defaultFormat: string;
 }
 
 export const DATE_PICKER_CONTEXT: InjectionKey<DatePickerContextType> =

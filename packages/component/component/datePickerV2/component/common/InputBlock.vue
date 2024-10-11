@@ -11,7 +11,7 @@ import LayDropdown from "../../../dropdown/index.vue";
 import LayInput from "../../../input/index.vue";
 
 import { dayjsToString, checkRangeValue } from "../../util";
-import { isArray, isNumber } from "../../../../utils";
+import { isArray, isNumber, isUndefined } from "../../../../utils";
 
 const props = withDefaults(defineProps<DatePickerProps>(), {});
 const emits = defineEmits([
@@ -97,7 +97,7 @@ const handleChange = () => {
     const checkDate = dayjs(inputValue.value as string, props.format);
 
     if (checkDate.isValid()) {
-      emits("update:modelValue", checkDate.format(props.format));
+      emits("update:modelValue", formatOutPutValue(checkDate)); //checkDate.format(props.format)
       currentInputValue.value = null;
     }
   } else {
@@ -183,9 +183,9 @@ const formatOutPutValue = (dates: Dayjs | Array<Dayjs>) => {
 
     if (startDate && endDate) {
       return [startDate, endDate].map((date: Dayjs) => {
-        return DatePickerContext.format
-          ? date.format(DatePickerContext.format)
-          : date.toDate();
+        return isUndefined(DatePickerContext.format)
+          ? date.toDate()
+          : date.format(DatePickerContext.format);
       });
     } else return [];
   } else {
@@ -196,9 +196,9 @@ const formatOutPutValue = (dates: Dayjs | Array<Dayjs>) => {
         : dates.valueOf();
     }
 
-    return DatePickerContext.format
-      ? dates.format(DatePickerContext.format)
-      : dates.toDate();
+    return isUndefined(DatePickerContext.format)
+      ? dates.toDate()
+      : dates.format(DatePickerContext.format);
   }
 };
 

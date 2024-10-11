@@ -21,12 +21,22 @@ const hookChangeShortcut = useShortcutsRange();
 const startDate = ref();
 const endDate = ref();
 
+const minMaxTime = (time: Dayjs) => {
+  if (time.isBefore(dayjs(props.min, props.format))) {
+    return dayjs(props.min, props.format);
+  } else if (time.isAfter(dayjs(props.max, props.format))) {
+    return dayjs(props.max, props.format);
+  }
+  return time;
+};
+
 watch(
   () => props.modelValue,
   () => {
     const [start, end] = props.modelValue;
-    startDate.value = start || dayjs();
-    endDate.value = end || dayjs().add(1, "hour");
+
+    startDate.value = start || minMaxTime(dayjs());
+    endDate.value = end || minMaxTime(dayjs().add(1, "hour"));
   },
   { immediate: true }
 );
@@ -68,7 +78,7 @@ const handleConfirm = () => {
 
       <Time
         :modelValue="startDate"
-        :inputDate="startDate"
+        :showDate="startDate"
         @pick="handleLeftTimePick"
       >
         <template #header>
@@ -77,7 +87,7 @@ const handleConfirm = () => {
       </Time>
       <Time
         :modelValue="endDate"
-        :inputDate="endDate"
+        :showDate="endDate"
         @pick="handleRightTimePick"
       >
         <template #header>

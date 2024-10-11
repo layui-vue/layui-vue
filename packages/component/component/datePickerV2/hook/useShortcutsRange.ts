@@ -6,6 +6,7 @@ import {
   type DatePickerModelValueSingleType,
 } from "../interface";
 
+import { normalizeDayjsValue } from "../util";
 import { isFunction } from "../../../utils";
 
 export const useShortcutsRange = () => {
@@ -17,9 +18,9 @@ export const useShortcutsRange = () => {
     ) as Array<DatePickerModelValueSingleType>;
 
     return [
-      dayjs(dates[0], DatePickerContext.format),
-      dayjs(dates[1], DatePickerContext.format),
-    ];
+      normalizeDayjsValue(dates[0], DatePickerContext.format!),
+      normalizeDayjsValue(dates[1], DatePickerContext.format!),
+    ].filter(Boolean) as Array<Dayjs>;
   };
 
   return handleChangeShortcut;

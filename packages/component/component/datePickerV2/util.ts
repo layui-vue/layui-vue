@@ -4,11 +4,12 @@ import { DateContentSingleDateObject } from "./component/interface";
 
 export const normalizeDayjsValue = (
   value: DatePickerModelValueSingleType,
-  format: string
+  format: string | undefined
 ): Dayjs | null => {
   const date = dayjs(value, format);
 
-  return date.isValid() ? date : dayjs(value).isValid() ? dayjs(value) : null;
+  // return date.isValid() ? date : dayjs(value).isValid() ? dayjs(value) : null;
+  return date.isValid() ? date : null;
 };
 
 export const dayjsToString = (
@@ -39,12 +40,22 @@ export const checkRangeValue = (values: Array<Dayjs | null>) => {
 export const getYears = (date?: Date | number, page = 15, step = 1) => {
   const years = [];
   const y = typeof date === "number" ? date : date?.getFullYear() ?? 1970;
-  // console.log(y, page, step);
-  const r = (page % 2 ? page - 1 : page) / 2;
-  for (let i = y - r; i <= y + (page % 2 ? r : r - 1); i += step) {
+  const currentIndex = getPosition(y, page);
+
+  for (
+    let i = y - (currentIndex - 1);
+    i <= y + page - currentIndex;
+    i += step
+  ) {
     years.push(i);
   }
   return years;
+};
+
+const getPosition = (year: number, length: number): number => {
+  if (year === 0) return length;
+
+  return ((((year - 1) % length) + length) % length) + 1;
 };
 
 /**

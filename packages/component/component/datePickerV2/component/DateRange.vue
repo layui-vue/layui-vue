@@ -8,7 +8,8 @@ import type {
 import type { Shortcuts as ShortcutsType } from "../interface";
 
 import { useI18n } from "../../../language";
-import { setDateList } from "../util";
+import { normalizeDayjsValue, setDateList } from "../util";
+import { isArray } from "../../../utils";
 
 import LayIcon from "../../icon";
 import LayDropdown from "../../dropdown";
@@ -19,18 +20,20 @@ import Month from "./common/Month.vue";
 import Footer from "./common/Footer.vue";
 import Shortcuts from "./common/Shortcuts.vue";
 
+import { useBaseDatePicker } from "../hook/useBaseDatePicker";
 import { useShortcutsRange } from "../hook/useShortcutsRange";
 
 const props = withDefaults(defineProps<RangePickerProps>(), {});
 const emits = defineEmits(["pick"]);
 
 const { t } = useI18n();
+const { getDefaultValue } = useBaseDatePicker(props);
 const hookChangeShortcut = useShortcutsRange();
 
 const startDate = ref<Dayjs | null>();
 const endDate = ref<Dayjs | null>();
-const leftDate = ref<Dayjs>(dayjs().startOf("day"));
-const rightDate = ref<Dayjs>(dayjs().startOf("day").add(1, "month"));
+const leftDate = ref<Dayjs>(getDefaultValue());
+const rightDate = ref<Dayjs>(getDefaultValue().add(1, "month"));
 
 const hoverDate = ref<Dayjs | null>();
 
@@ -42,14 +45,6 @@ const monthLeftRef = ref<DropdownRef>();
 const monthRightRef = ref<DropdownRef>();
 const timeLeftRef = ref<DropdownRef>();
 const timeRightRef = ref<DropdownRef>();
-
-const leftDataList = computed(() => {
-  return setDateList(leftDate.value.year(), leftDate.value.month()) || [];
-});
-
-const rightDataList = computed(() => {
-  return setDateList(rightDate.value.year(), rightDate.value.month()) || [];
-});
 
 const MONTH_NAME = computed(() => [
   t("datePicker.january"),
@@ -66,29 +61,65 @@ const MONTH_NAME = computed(() => [
   t("datePicker.december"),
 ]);
 
+const _defaultTime = computed(() => {
+  if (props.type !== "datetime") return [];
+
+  const times = isArray(props.defaultTime)
+    ? props.defaultTime
+    : [props.defaultTime, props.defaultTime];
+
+  return times.map((t) => normalizeDayjsValue(t, "HH:mm:ss"));
+});
+
+const setHMS = (date: Dayjs, referDate: Dayjs) => {
+  return date
+    .hour(referDate.hour())
+    .minute(referDate.minute())
+    .second(referDate.second());
+};
+
 watch(
   () => props.modelValue,
   () => {
     const [start, end] = props.modelValue;
     startDate.value = start;
     endDate.value = end;
-    leftDate.value = start || leftDate.value;
-    rightDate.value = end || rightDate.value;
+
+    const _defaultDate = getDefaultValue();
+    const _leftDate = _defaultTime.value[0]
+      ? setHMS(_defaultDate, _defaultTime.value[0])
+      : _defaultDate;
+
+    const _rightDate = _defaultTime.value[1]
+      ? setHMS(_defaultDate.add(1, "month"), _defaultTime.value[1])
+      : _defaultDate.add(1, "month");
+
+    leftDate.value = start || _leftDate;
+    rightDate.value = end || _rightDate;
   },
   { immediate: true }
 );
 
 watch(
   () => leftDate.value,
-  () => {
+  (leftDate) => {
     const old = rightDate.value.clone();
-    rightDate.value = leftDate.value
-      .add(1!, "month")
+
+    rightDate.value = leftDate
+      .add(1, "month")
       .set("hour", old.hour())
       .set("minute", old.minute())
       .set("second", old.second());
   }
 );
+
+const leftDataList = computed(() => {
+  return setDateList(leftDate.value.year(), leftDate.value.month()) || [];
+});
+
+const rightDataList = computed(() => {
+  return setDateList(rightDate.value.year(), rightDate.value.month()) || [];
+});
 
 const classes = computed(() => {
   return (item: DateContentSingleDateObject) => {
@@ -247,7 +278,9 @@ const handleConfirm = () => {
               <span>{{ leftDate.year() }} {{ t("datePicker.year") }}</span>
               <template #content>
                 <Year
+                  class="layui-laydate"
                   :modelValue="leftDate"
+                  :showDate="leftDate"
                   @pick="(val: Dayjs) => handleChangeYearMonthPick(val, 'year', yearLeftRef!)"
                 ></Year>
               </template>
@@ -258,8 +291,9 @@ const handleConfirm = () => {
 
               <template #content>
                 <Month
+                  class="layui-laydate"
                   :modelValue="leftDate"
-                  :inputDate="leftDate"
+                  :showDate="leftDate"
                   dateType="month"
                   @pick="(val: Dayjs) => handleChangeYearMonthPick(val, 'month', monthLeftRef!)"
                 ></Month>
@@ -271,8 +305,9 @@ const handleConfirm = () => {
 
               <template #content>
                 <Time
+                  class="layui-laydate"
                   :modelValue="startDate || leftDate"
-                  :inputDate="startDate || leftDate"
+                  :showDate="startDate || leftDate"
                   @pick="handleChangeLeftTimePick"
                 ></Time>
               </template>
@@ -300,7 +335,9 @@ const handleConfirm = () => {
               <span>{{ rightDate.year() }} {{ t("datePicker.year") }}</span>
               <template #content>
                 <Year
-                  :modelValue="leftDate"
+                  class="layui-laydate"
+                  :modelValue="rightDate"
+                  :showDate="rightDate"
                   @pick="(val: Dayjs) => handleChangeYearMonthPick(val, 'year', yearRightRef!)"
                 ></Year>
               </template>
@@ -311,8 +348,9 @@ const handleConfirm = () => {
 
               <template #content>
                 <Month
-                  :modelValue="leftDate"
-                  :inputDate="leftDate"
+                  class="layui-laydate"
+                  :modelValue="rightDate"
+                  :showDate="rightDate"
                   dateType="month"
                   @pick="(val: Dayjs) => handleChangeYearMonthPick(val.subtract(1, 'month'), 'month', monthRightRef!)"
                 ></Month>
@@ -324,8 +362,9 @@ const handleConfirm = () => {
 
               <template #content>
                 <Time
+                  class="layui-laydate"
                   :modelValue="endDate || rightDate"
-                  :inputDate="endDate || rightDate"
+                  :showDate="endDate || rightDate"
                   @pick="handleChangeRightTimePick"
                 ></Time>
               </template>

@@ -41,7 +41,7 @@
 
 <script lang="ts" setup>
 import dayjs from "dayjs";
-import { inject, onMounted, ref, nextTick, watch, computed } from "vue";
+import { inject, ref, nextTick, watch, computed } from "vue";
 
 import type { BasePanelProps } from "../interface";
 

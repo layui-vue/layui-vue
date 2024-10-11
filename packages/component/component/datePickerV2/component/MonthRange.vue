@@ -2,7 +2,10 @@
 import dayjs, { type Dayjs } from "dayjs";
 import { computed, ref, watch } from "vue";
 import type { RangePickerProps } from "./interface";
-import type { Shortcuts as ShortcutsType } from "../interface";
+import type {
+  DatePickerModelValueSingleType,
+  Shortcuts as ShortcutsType,
+} from "../interface";
 
 import { useI18n } from "../../../language";
 
@@ -31,13 +34,22 @@ const yearRightRef = ref<InstanceType<typeof LayDropdown>>();
 
 const hoverMonth = ref<Dayjs | undefined>();
 
+const getDefaultValue = () => {
+  const _defaultValue = dayjs(
+    props.defaultValue as DatePickerModelValueSingleType
+  );
+
+  return _defaultValue.isValid() ? _defaultValue : dayjs().startOf("day");
+};
+
 watch(
   () => props.modelValue,
   () => {
     const [start, end] = props.modelValue;
     startDate.value = start;
     endDate.value = end;
-    leftDate.value = start || dayjs();
+
+    leftDate.value = start || getDefaultValue();
   },
   { immediate: true }
 );
@@ -111,6 +123,7 @@ const handleChangeShortcut = (shortcuts: ShortcutsType) => {
 
   leftDate.value = shortcutsValues[0];
   rightDate.value = shortcutsValues[1];
+
   startDate.value = shortcutsValues[0];
   endDate.value = shortcutsValues[1];
 };
@@ -126,8 +139,8 @@ const handleConfirm = () => {
       <Shortcuts @change-shortcut="handleChangeShortcut"></Shortcuts>
 
       <Month
-        :modelValue="leftDate"
-        :inputDate="leftDate"
+        :modelValue="startDate"
+        :showDate="leftDate"
         :classes="classes"
         :dateType="props.type"
         @pick="handleMonthPick"
@@ -146,7 +159,9 @@ const handleConfirm = () => {
               </div>
               <template #content>
                 <Year
+                  class="layui-laydate"
                   :modelValue="leftDate"
+                  :showDate="leftDate"
                   @pick="handleLeftYearChange"
                 ></Year>
               </template>
@@ -159,8 +174,8 @@ const handleConfirm = () => {
       </Month>
       <Month
         v-if="isYearMonth"
-        :modelValue="rightDate"
-        :inputDate="rightDate"
+        :modelValue="endDate"
+        :showDate="rightDate"
         :dateType="props.type"
         :classes="classes"
         @pick="handleMonthPick"
@@ -175,7 +190,12 @@ const handleConfirm = () => {
               >
             </div>
             <template #content>
-              <Year :modelValue="leftDate" @pick="handleRightYearChange"></Year>
+              <Year
+                class="layui-laydate"
+                :modelValue="rightDate"
+                :showDate="rightDate"
+                @pick="handleRightYearChange"
+              ></Year>
             </template>
           </LayDropdown>
 

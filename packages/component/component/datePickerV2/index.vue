@@ -36,6 +36,8 @@ const props = withDefaults(defineProps<DatePickerProps>(), {
   prefixIcon: "layui-icon-date",
   suffixIcon: "",
   timestamp: false,
+  defaultValue: null,
+  defaultTime: null,
   yearPage: 15,
   // yearStep: 1,
 });

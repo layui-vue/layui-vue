@@ -1,13 +1,15 @@
 <script setup lang="ts">
 import type { UniquePickerProps } from "./interface";
 import type {
-  Shortcuts as ShortcutsType,
   DatePickerModelValueSingleType,
+  Shortcuts as ShortcutsType,
 } from "../interface";
 import { computed, ref, watch } from "vue";
 import dayjs, { type Dayjs } from "dayjs";
 
 import { isFunction } from "../../../utils";
+
+import { useBaseDatePicker } from "../hook/useBaseDatePicker";
 
 import LayButton from "../../button/index.vue";
 import Date from "./common/Date.vue";
@@ -25,13 +27,7 @@ const currentData = ref<UniquePickerProps["modelValue"]>();
 const showDate = ref<Dayjs>(dayjs());
 const currentType = ref();
 
-const getDefaultValue = () => {
-  const _defaultValue = dayjs(
-    props.defaultValue as DatePickerModelValueSingleType
-  );
-
-  return _defaultValue.isValid() ? _defaultValue : dayjs().startOf("day");
-};
+const { getDefaultValue } = useBaseDatePicker(props);
 
 watch(
   () => props.modelValue,
@@ -147,21 +143,14 @@ const handleChangeShortcut = (shortcuts: ShortcutsType) => {
     isFunction(shortcuts.value) ? shortcuts.value() : shortcuts.value
   ) as DatePickerModelValueSingleType;
 
-  currentData.value = dayjs(date, props.defaultFormat);
+  currentData.value = dayjs(date, props.format);
 
   handleConfirm();
 };
 
-// const formatValue = () => {
-//   // format 正确传 format后的格式，否则传Date对象
-//   return props.format
-//     ? dayjs(currentData.value).format(props.format)
-//     : dayjs(currentData.value).toDate();
-// };
-
 const footerValue = () => {
   return currentData.value
-    ? dayjs(currentData.value).format(props.defaultFormat)
+    ? dayjs(currentData.value).format(props.inputFormat)
     : "";
 };
 </script>

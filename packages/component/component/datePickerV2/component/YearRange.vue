@@ -2,18 +2,23 @@
 import dayjs, { type Dayjs } from "dayjs";
 import { computed, ref, watch } from "vue";
 import type { RangePickerProps } from "./interface";
-import type { Shortcuts as ShortcutsType } from "../interface";
+import type {
+  DatePickerModelValueSingleType,
+  Shortcuts as ShortcutsType,
+} from "../interface";
 
 import LayIcon from "../../icon";
 import Year from "./common/Year.vue";
 import Footer from "./common/Footer.vue";
 import Shortcuts from "./common/Shortcuts.vue";
 
+import { useBaseDatePicker } from "../hook/useBaseDatePicker";
 import { useShortcutsRange } from "../hook/useShortcutsRange";
 
 const props = withDefaults(defineProps<RangePickerProps>(), {});
 const emits = defineEmits(["pick"]);
 
+const { getDefaultValue } = useBaseDatePicker(props);
 const hookChangeShortcut = useShortcutsRange();
 
 const startDate = ref();
@@ -29,7 +34,8 @@ watch(
     const [start, end] = props.modelValue;
     startDate.value = start;
     endDate.value = end;
-    leftDate.value = start || dayjs();
+
+    leftDate.value = start || getDefaultValue();
   },
   { immediate: true }
 );
@@ -91,6 +97,7 @@ const handleChangeShortcut = (shortcuts: ShortcutsType) => {
 
   leftDate.value = shortcutsValues[0];
   rightDate.value = shortcutsValues[1];
+
   startDate.value = shortcutsValues[0];
   endDate.value = shortcutsValues[1];
 };
@@ -107,7 +114,7 @@ const handleConfirm = () => {
 
       <Year
         :modelValue="leftDate"
-        :inputDate="leftDate"
+        :showDate="leftDate"
         :classes="classes"
         @pick="handleYearPick"
         @hover-cell="handleYearHover"
@@ -127,7 +134,7 @@ const handleConfirm = () => {
       </Year>
       <Year
         :modelValue="rightDate"
-        :inputDate="rightDate"
+        :showDate="rightDate"
         :classes="classes"
         @pick="handleYearPick"
         @hover-cell="handleYearHover"
