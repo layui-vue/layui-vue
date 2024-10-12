@@ -1,103 +1,156 @@
 import { mount } from "@vue/test-utils";
 import { afterEach, describe, expect, test } from "vitest";
+import { sleep } from "../../../test-utils";
 
 import LayDatePicker from "../index.vue";
+import Date from "../component/common/Date.vue";
+import Year from "../component/common/Year.vue";
+import Footer from "../component/common/Footer.vue";
+// import Month from "../component/common/Month.vue";
 import { nextTick } from "vue";
 
-describe("LayDatePicker", () => {
+const mockInputClick = async (wrapper: any) => {
+  await wrapper.find(".layui-input").trigger("click");
+  await nextTick();
+  await sleep();
+};
+
+describe("LayDatePicker date type", () => {
   afterEach(() => {
-    const popperDom = document.body.querySelector(".layui-popper");
-    if (popperDom) {
-      popperDom.remove();
-    }
+    document.querySelectorAll(".layui-popper").forEach((el) => el.remove());
   });
 
   test("modelValue", async () => {
     const wrapper = mount(LayDatePicker, {
       props: {
-        modelValue: "2024/10/01 10:00:00",
+        modelValue: "2025/11/12 10:00:00",
       },
     });
 
+    await mockInputClick(wrapper);
+
     const component = wrapper.findComponent(LayDatePicker);
-    await nextTick();
-    expect((component.props() as any).modelValue).toBe("2024/10/01 10:00:00");
-    expect((component.vm as any).currentYear).toBe(2024);
-    expect((component.vm as any).currentMonth).toBe(10 - 1);
-    expect((component.vm as any).currentDay).toBe(
-      new Date("2024/10/01 00:00:00").getTime()
+    const DateInstance = wrapper.findComponent(Date);
+
+    const [YearSpan, MonthSpan] = DateInstance.findAll(
+      ".layui-laydate-header .laydate-set-ym span"
     );
+
+    expect((component.props() as any).modelValue).toBe("2025/11/12 10:00:00");
+
+    expect(YearSpan.text()).toContain("2025");
+    expect(MonthSpan.text()).toContain("11");
+
+    const dateCurrent = DateInstance.find(".layui-laydate-content .layui-this");
+
+    expect(dateCurrent.exists()).toBeTruthy();
+    expect(dateCurrent.text()).toBe("12");
+
+    await YearSpan.trigger("click");
+    await sleep();
+
+    const YearInstance = wrapper.findComponent(Year);
+
+    expect((YearInstance.vm as any).currentYear).toBe(2025);
+
+    const YearCurrent = YearInstance.find(".layui-laydate-content .layui-this");
+
+    expect(YearCurrent.exists()).toBeTruthy();
+    expect(YearCurrent.text()).toBe("2025");
   });
 
-  test("modelValue 修改", async () => {
+  test("外部修改 modelValue 内部选中改变", async () => {
     const wrapper = mount(LayDatePicker, {
       props: {
-        modelValue: "2024/10/01 10:00:00",
+        modelValue: "2025/11/12",
       },
     });
 
-    const component = wrapper.findComponent(LayDatePicker);
-    await nextTick();
-    wrapper.setProps({
-      modelValue: "2024/10/02 10:00:00",
+    await mockInputClick(wrapper);
+
+    await wrapper.setProps({
+      modelValue: "2024/10/02",
     });
+
     await nextTick();
-    expect((component.props() as any).modelValue).toBe("2024/10/02 10:00:00");
-    expect((component.vm as any).currentYear).toBe(2024);
-    expect((component.vm as any).currentMonth).toBe(10 - 1);
-    expect((component.vm as any).currentDay).toBe(
-      new Date("2024/10/02 00:00:00").getTime()
+
+    const component = wrapper.findComponent(LayDatePicker);
+
+    expect((component.props() as any).modelValue).toBe("2024/10/02");
+
+    const DateInstance = wrapper.findComponent(Date);
+    const [YearSpan, MonthSpan] = DateInstance.findAll(
+      ".layui-laydate-header .laydate-set-ym span"
     );
+    const dateCurrent = DateInstance.find(".layui-laydate-content .layui-this");
+
+    expect(YearSpan.text()).toContain("2024");
+    expect(MonthSpan.text()).toContain("10");
+    expect(dateCurrent.text()).toBe("2");
+
+    await YearSpan.trigger("click");
+    await sleep();
+
+    const YearInstance = wrapper.findComponent(Year);
+
+    expect((YearInstance.vm as any).currentYear).toBe(2024);
   });
 
-  test("modelValue 负数时间", async () => {
+  test("update:modelValue", async () => {
     const wrapper = mount(LayDatePicker, {
       props: {
-        modelValue: "1970/01/01 00:00:00",
+        modelValue: "2025/11/12",
       },
     });
+    const datePicker = wrapper.findComponent(LayDatePicker);
 
-    const component = wrapper.findComponent(LayDatePicker);
-    await nextTick();
-    expect((component.props() as any).modelValue).toBe("1970/01/01 00:00:00");
-    expect((component.vm as any).currentYear).toBe(1970);
-    expect((component.vm as any).currentMonth).toBe(1 - 1);
-    expect((component.vm as any).currentDay).toBe(
-      new Date("1970/01/01 00:00:00").getTime()
+    await mockInputClick(wrapper);
+    const DateInstance = wrapper.findComponent(Date);
+
+    const dateCurrent = DateInstance.findAll(
+      ".layui-laydate-content td:not(.laydate-day-prev)"
     );
+
+    // click 2号
+    await dateCurrent[1].trigger("click");
+
+    const confirmBtn = wrapper
+      .findComponent(Footer)
+      .find(".laydate-footer-btns .laydate-btns-confirm");
+
+    await confirmBtn.trigger("click");
+
+    expect(datePicker.emitted()).toHaveProperty("update:modelValue");
+    expect(datePicker.emitted()["update:modelValue"][0]).toEqual([
+      "2025-11-02",
+    ]);
   });
 
-  test("timestamp 负数时间", async () => {
-    const wrapper = mount(LayDatePicker, {
-      props: {
-        timestamp: true,
-        modelValue: -1,
+  test("min/max", async () => {
+    const wrapper = mount({
+      setup() {
+        return () => (
+          <LayDatePicker min="2024/10/2" max="2024/10/13"></LayDatePicker>
+        );
       },
     });
 
-    const component = wrapper.findComponent(LayDatePicker);
-    await nextTick();
-    expect((component.vm as any).currentYear).toBe(1970);
-    expect((component.vm as any).currentMonth).toBe(1 - 1);
-    expect((component.vm as any).currentDay).toBe(
-      new Date("1970/01/01 00:00:00").getTime()
-    );
-  });
+    await mockInputClick(wrapper);
+    const DateInstance = wrapper.findComponent(Date);
 
-  test("format", async () => {
-    const wrapper = mount(LayDatePicker, {
-      props: {
-        modelValue: "2024/10/01 10:00:00",
-        format: "MM-dd",
-      },
-    });
-
-    const component = wrapper.findComponent(LayDatePicker);
-    await nextTick();
-    expect((component.vm as any).currentYear).toBe(2024);
-    expect((component.vm as any).currentMonth).toBe(10 - 1);
-    expect((component.vm as any).currentDay).toBe(
-      new Date("2024/10/01 00:00:00").getTime()
+    const dateCurrent = DateInstance.findAll(
+      ".layui-laydate-content td:not(.laydate-day-prev)"
     );
+
+    expect(
+      dateCurrent[0].element.classList.contains("layui-disabled")
+    ).toBeTruthy();
+    expect(
+      dateCurrent[13].element.classList.contains("layui-disabled")
+    ).toBeTruthy();
+
+    expect(
+      dateCurrent[12].element.classList.contains("layui-disabled")
+    ).toBeFalsy();
   });
 });

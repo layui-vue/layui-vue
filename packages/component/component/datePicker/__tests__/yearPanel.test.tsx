@@ -16,7 +16,7 @@ const mockInputClick = async (wrapper: any) => {
   await sleep();
 };
 
-describe("YearPanel", () => {
+describe("LayDatePicker year type", () => {
   afterEach(() => {
     document.querySelectorAll(".layui-popper").forEach((el) => el.remove());
   });
