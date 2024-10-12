@@ -8,8 +8,7 @@ export const normalizeDayjsValue = (
 ): Dayjs | null => {
   const date = dayjs(value, format);
 
-  // return date.isValid() ? date : dayjs(value).isValid() ? dayjs(value) : null;
-  return date.isValid() ? date : null;
+  return dayjs(value).isValid() ? dayjs(value) : date.isValid() ? date : null;
 };
 
 export const dayjsToString = (
@@ -18,10 +17,10 @@ export const dayjsToString = (
 ) => {
   const date = dayjs(value, format);
 
-  return date.isValid()
-    ? dayjs(value, format).format(format)
-    : dayjs(value).isValid()
+  return dayjs(value).isValid()
     ? dayjs(value).format(format)
+    : date.isValid()
+    ? date.format(format)
     : "";
 };
 

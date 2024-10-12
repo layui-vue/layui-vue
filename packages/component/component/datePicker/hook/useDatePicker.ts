@@ -15,7 +15,7 @@ import MonthRange from "../component/MonthRange.vue";
 import YearRange from "../component/YearRange.vue";
 
 import { normalizeDayjsValue } from "../util";
-import { isArray, isNumber, isUndefined } from "../../../utils";
+import { isArray, isNumber } from "../../../utils";
 
 export const useDatePicker = (props: RequiredDatePickerProps) => {
   const initDate = computed<Dayjs | Array<Dayjs> | null>(() => {
@@ -37,8 +37,6 @@ export const useDatePicker = (props: RequiredDatePickerProps) => {
         value += "";
       }
 
-      // 处理CustomParseFormat插件可能造成解析Date, number, '', null...错误
-
       return normalizeDayjsValue(
         value as DatePickerModelValueSingleType,
         _format.value
@@ -47,16 +45,7 @@ export const useDatePicker = (props: RequiredDatePickerProps) => {
   });
 
   const _format = computed(() => {
-    if (!(props.format || isUndefined(props.format))) {
-      console.error(
-        "[Layui-vue/DatePicker] format格式错误。应为dayjs.format支持的格式化占位符列表或者undefined！"
-      );
-    }
-
-    // undefined 兼容dayjs_CustomParseFormat 第一参数为Date对象
-    return props.format || !isUndefined(props.format)
-      ? props.format
-      : typeMap.value.format;
+    return props.format || typeMap.value.format;
   });
 
   const _inputFormat = computed(() => {

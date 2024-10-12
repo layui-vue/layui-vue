@@ -183,22 +183,21 @@ const formatOutPutValue = (dates: Dayjs | Array<Dayjs>) => {
 
     if (startDate && endDate) {
       return [startDate, endDate].map((date: Dayjs) => {
-        return isUndefined(DatePickerContext.format)
-          ? date.toDate()
-          : date.format(DatePickerContext.format);
+        return date.format(DatePickerContext.format);
       });
     } else return [];
   } else {
     // 兼容 timestamp属性
     if (["date", "datetime"].includes(props.type!) && props.timestamp) {
-      return props.type === "date"
-        ? dates.startOf("day").valueOf()
-        : dates.valueOf();
+      const unix =
+        props.type === "date"
+          ? dates.startOf("day").valueOf()
+          : dates.valueOf();
+
+      return Math.floor(unix / 1000) * 1000;
     }
 
-    return isUndefined(DatePickerContext.format)
-      ? dates.toDate()
-      : dates.format(DatePickerContext.format);
+    return dates.format(DatePickerContext.format);
   }
 };
 
