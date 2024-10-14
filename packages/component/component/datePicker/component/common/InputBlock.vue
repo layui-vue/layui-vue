@@ -30,7 +30,9 @@ const classes = computed(() => {
   return ["layui-date-picker", { "layui-date-range-picker": props.range }];
 });
 const _Placeholder = computed(() => {
-  return isArray(props.placeholder) ? props.placeholder : [props.placeholder];
+  return isArray(props.placeholder)
+    ? props.placeholder
+    : [props.placeholder, props.placeholder];
 });
 
 const inputValue = computed(() => {
