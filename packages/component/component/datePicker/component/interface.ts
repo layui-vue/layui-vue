@@ -12,11 +12,13 @@ export interface BasePanelProps {
   classes?: (val: Dayjs) => Record<string, boolean>;
 }
 
-export interface UniquePickerProps extends DatePickerContextType {
+export interface UniquePickerProps
+  extends /* @vue-ignore */ DatePickerContextType {
   modelValue: Exclude<DatePickerValue, Array<Dayjs>>;
 }
 
-export interface RangePickerProps extends DatePickerContextType {
+export interface RangePickerProps
+  extends /* @vue-ignore */ DatePickerContextType {
   modelValue: Array<Dayjs>;
 }
 

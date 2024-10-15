@@ -35,29 +35,15 @@
   </lay-form>
 </template>
 
-<script>
+<script setup>
 import { ref, onMounted } from 'vue'
 
-export default {
-  setup() {
-
-    const endTime = ref(null);
-    const endTime2 = ref(null);
-    const endTime3 = ref(null);
-    const endTime4 = ref(null);
-    const endTime5 = ref(null);
-    const endTime6 = ref(null);
-
-    return {
-      endTime,
-      endTime2,
-      endTime3,
-      endTime4,
-      endTime5,
-      endTime6
-    }
-  }
-}
+const endTime = ref(null);
+const endTime2 = ref(null);
+const endTime3 = ref(null);
+const endTime4 = ref(null);
+const endTime5 = ref(null);
+const endTime6 = ref(null);
 </script>
 
 :::
@@ -117,19 +103,10 @@ const defaultTime1 = '12:30:00'
   <lay-date-picker disabled type="year" v-model="endTimeDisabled"></lay-date-picker>
 </template>
 
-<script>
+<script setup>
 import { ref } from 'vue'
 
-export default {
-  setup() {
-
-   const endTimeDisabled = ref("2022-03-04 17:35:00");
-
-    return {
-      endTimeDisabled
-    }
-  }
-}
+const endTimeDisabled = ref("2022-03-04 17:35:00");
 </script>
 
 :::
@@ -147,19 +124,10 @@ export default {
   </lay-space>
 </template>
 
-<script>
+<script setup>
 import { ref } from 'vue'
 
-export default {
-  setup() {
-
-   const endTimeYearRange = ref("2022");
-
-    return {
-      endTimeYearRange
-    }
-  }
-}
+const endTimeYearRange = ref("2022");
 </script>
 
 :::
@@ -186,15 +154,15 @@ export default {
   </lay-form>
 </template>
 
-<script>
+<script setup>
 import { ref } from 'vue'
 
-export default {
-  setup() {
-    return {
-    }
-  }
-}
+const endTime = ref(null);
+const endTime2 = ref(null);
+const endTime3 = ref(null);
+const endTime4 = ref(null);
+const endTime5 = ref(null);
+const endTime6 = ref(null);
 </script>
 
 :::
@@ -217,20 +185,11 @@ export default {
   </lay-space>
 </template>
 
-<script>
+<script setup>
 import { ref } from 'vue'
 
-export default {
-  setup() {
-
-   const timestamp1 = ref(new Date().getTime());
-   const timestamp2 = ref(new Date().getTime());
-
-    return {
-      timestamp1,timestamp2
-    }
-  }
-}
+const timestamp1 = ref(new Date().getTime());
+const timestamp2 = ref(new Date().getTime());
 </script>
 
 :::
@@ -238,7 +197,7 @@ export default {
 ::: title 限制可选范围
 :::
 
-::: demo 通过预设`min`、`max`属性限制组件选择的最大值与最小值,目前仅支持`date`、`year`、`month`、`time(不包含range)`模式，且无法在初始化时强制变更 modelValue,在未来的版本中将补齐这一特性并支持更多模式
+::: demo 通过预设`min`、`max`属性限制组件选择的最大值与最小值。
 
 <template>
   <lay-space direction="vertical">
@@ -265,31 +224,18 @@ export default {
   </lay-space>
 </template>
 
-<script>
+<script setup>
 import { ref } from 'vue'
 import dayjs from "dayjs";
-export default {
-  setup() {
-   const minDate = dayjs().startOf('month').add(10,'day').format('YYYY-MM-DD HH:mm');
-   const maxDate = dayjs().endOf('month').subtract(10,'day').format('YYYY-MM-DD HH:mm');
-   const limitDate=ref(dayjs().startOf('month').add(11,'day').format('YYYY-MM-DD HH:mm'));
-   const limitYear=ref(dayjs().year());
-   const limitMonth=ref(dayjs().month()+1);
-   const limitDateRange=ref([])
-   const maxLimitDate = dayjs().add(1,'month').endOf('month').subtract(10,'day').format('YYYY-MM-DD HH:mm');
-   const limitTimeRange = ref([]);
-    return {
-      minDate,
-      maxDate,
-      limitDate,
-      limitYear,
-      limitMonth,
-      limitDateRange,
-      maxLimitDate,
-      limitTimeRange
-    }
-  }
-}
+
+const minDate = dayjs().startOf('month').add(10,'day').format('YYYY-MM-DD HH:mm');
+const maxDate = dayjs().endOf('month').subtract(10,'day').format('YYYY-MM-DD HH:mm');
+const limitDate=ref(dayjs().startOf('month').add(11,'day').format('YYYY-MM-DD HH:mm'));
+const limitYear=ref(dayjs().year());
+const limitMonth=ref(dayjs().month()+1);
+const limitDateRange=ref([])
+const maxLimitDate = dayjs().add(1,'month').endOf('month').subtract(10,'day').format('YYYY-MM-DD HH:mm');
+const limitTimeRange = ref([]);
 </script>
 
 :::
@@ -300,23 +246,77 @@ export default {
 ::: demo 目前在 type 等于`year`、`month`这类输出值为非组合值时无效，使用`format`属性任意组合吧
 
 <template>
-  <lay-date-picker v-model="endTimeFormat" simple type="date" :format="'DD/MM/YYYY'" placeholder="click me"></lay-date-picker>
+  endTimeFormat: {{endTimeFormat}}
+  <lay-date-picker v-model="endTimeFormat" simple type="date" :format="'DD/MM/YYYY'" placeholder="format"></lay-date-picker>
+  endTimeInputFormat: {{endTimeInputFormat}}
+  <lay-date-picker v-model="endTimeInputFormat" simple type="date" :inputFormat="'DD/MM/YYYY'" placeholder="inputFormat"></lay-date-picker>
 </template>
 
-<script>
+<script setup>
 import { ref } from 'vue'
 
-export default {
-  setup() {
-   const endTimeFormat = ref(null);
-    return {
-      endTimeFormat
-    }
-  }
-}
+const endTimeFormat = ref(null);
+const endTimeInputFormat = ref(null);
 </script>
 
 :::
+
+::: title 快捷选项
+:::
+
+::: demo 通过 `shortcuts` 在左侧添加快捷选项
+
+<template>
+  <lay-space>
+    <lay-date-picker v-model="value1" :shortcuts="shortcuts1" type="date" placeholder="format"></lay-date-picker>
+    <lay-date-picker v-model="value2" :shortcuts="shortcuts2" type="date" range  placeholder="范围"></lay-date-picker>
+  </lay-space>
+</template>
+
+<script setup>
+import { ref } from 'vue'
+
+const value1 = ref(null);
+const value2 = ref(null);
+
+const shortcuts1 = [
+  {text: '明天', value: new Date(new Date().setDate(new Date().getDate() + 1))},
+  {text: '后天', value: new Date(new Date().setDate(new Date().getDate() + 2))}
+]
+
+const shortcuts2 = [
+  {
+    text: '上周',
+    value: () => {
+      const end1 = new Date()
+      const start1 = new Date()
+      start1.setTime(start1.getTime() - 3600 * 1000 * 24 * 7)
+      return [start1, end1]
+    },
+  },
+  {
+    text: '上月',
+    value: () => {
+      const end2 = new Date()
+      const start2 = new Date()
+      start2.setTime(start2.getTime() - 3600 * 1000 * 24 * 30)
+      return [start2, end2]
+    },
+  },
+  {
+    text: '之前3个月',
+    value: () => {
+      const end3 = new Date()
+      const start3 = new Date()
+      start3.setTime(start3.getTime() - 3600 * 1000 * 24 * 90)
+      return [start3, end3]
+    },
+  },
+]
+</script>
+
+:::
+
 ::: title Date Picker 属性
 :::
 
@@ -341,12 +341,14 @@ export default {
 | suffix-icon     | 后置图标                                                                 | `string`                                                                 | --                  | 内置图标集                                          | `1.4.0`  |
 | timestamp       | 时间戳模式(13 位),仅对 date 和 datetime 有效                             | `boolean`                                                                | `false`             | `true` `false`                                      | `1.6.5`  |
 | format          | 输出格式化                                                               | `string`                                                                 | --                  | 例如`YYYY-MM-DD`                                    | -        |
+| input-format          | 输入框格式化                                                               | `string`                                                                 | --                  | 例如`YYYY-MM-DD`                                    | `2.19.0`    |
 | default-value   | `首次未点击` 时，下拉弹窗打开时默认显示的时间，传空为组件首次 `渲染时间` | `DatePickerModelValueSingleType` `Array<DatePickerModelValueSingleType>` | --                  | --                                                  | `2.19.0` |
 | default-time    | 范围日期 `type=datetime` 时分秒默认时间                                  | `string` `Array<string>`                                                 | --                  | 例如`12:30:00`                                      | `2.17.2` |
 | content-style   | 内容自定义样式                                                           | `StyleValue`                                                             | --                  | --                                                  | --       |
 | content-class   | 内容自定义 Class                                                         | `string` `Array<string \| object>` `object`                              | --                  | --                                                  | --       |
-| year-page       | 年份选择器每页年份的个数                                                 | `2.19.0`                                                                 | `number`            | `15`                                                | --       |
-| year-step       | 年份选择器年份的步进值                                                   | `2.19.0`                                                                 | `number`            | `1`                                                 | --       |
+| year-page       | 年份选择器每页年份的个数           |  `number`            | `15`             | --|              `2.19.0`                    |      
+| shortcuts       | 设置快捷选项，需要传入数组对象       |  `Array<Shortcuts>`            | `15`             | --|              `2.19.0`                    |  
+
 
 :::
 
@@ -364,10 +366,23 @@ export default {
 
 :::
 
+::: title Types
+
 ```ts
+
 import type { ConfigType } from "dayjs";
 
 type DatePickerModelValueSingleType = ConfigType;
+
+interface Shortcuts {
+  text: string | number;
+  value:
+    | DatePickerModelValueSingleType
+    | Array<DatePickerModelValueSingleType>
+    | (() => DatePickerModelValueSingleType)
+    | (() => Array<DatePickerModelValueSingleType>);
+}
+
 ```
 
 ::: previousNext datePicker

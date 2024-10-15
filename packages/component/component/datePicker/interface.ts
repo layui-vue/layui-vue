@@ -66,7 +66,8 @@ export interface DatePickerProps {
   static?: boolean;
 }
 
-export interface RequiredDatePickerProps extends DatePickerProps {
+export interface RequiredDatePickerProps
+  extends /* @vue-ignore */ DatePickerProps {
   size: CommonSize;
   type: DatePickerType;
   disabled: boolean;
@@ -91,7 +92,8 @@ export type DatePickerEmits = {
 
 export type DatePickerValue = Dayjs | Array<Dayjs> | null | undefined;
 
-export interface DatePickerContextType extends RequiredDatePickerProps {
+export interface DatePickerContextType
+  extends /* @vue-ignore */ RequiredDatePickerProps {
   modelValue: DatePickerValue;
 }
 
@@ -103,10 +105,6 @@ export interface Shortcuts {
   value:
     | DatePickerModelValueSingleType
     | Array<DatePickerModelValueSingleType>
-    | Date
-    | Array<Date>
     | (() => DatePickerModelValueSingleType)
-    | (() => Array<DatePickerModelValueSingleType>)
-    | (() => Date)
-    | (() => Array<Date>);
+    | (() => Array<DatePickerModelValueSingleType>);
 }
