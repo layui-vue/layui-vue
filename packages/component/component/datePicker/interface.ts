@@ -48,9 +48,22 @@ export interface DatePickerProps {
     | Array<DatePickerModelValueSingleType>;
   contentStyle?: StyleValue;
   contentClass?: CommonClass;
+  /**
+   * 年份分页
+   * @version 2.19.0
+   */
   yearPage?: number;
   // yearStep?: number;
+  /**
+   * 快捷选项
+   * @version 2.19.0
+   */
   shortcuts?: Array<Shortcuts>;
+  /**
+   * 静态面板
+   * @version 2.19.0
+   */
+  static?: boolean;
 }
 
 export interface RequiredDatePickerProps extends DatePickerProps {
@@ -90,6 +103,10 @@ export interface Shortcuts {
   value:
     | DatePickerModelValueSingleType
     | Array<DatePickerModelValueSingleType>
+    | Date
+    | Array<Date>
     | (() => DatePickerModelValueSingleType)
-    | (() => Array<DatePickerModelValueSingleType>);
+    | (() => Array<DatePickerModelValueSingleType>)
+    | (() => Date)
+    | (() => Array<Date>);
 }

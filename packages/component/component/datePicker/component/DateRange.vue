@@ -178,6 +178,10 @@ const handleDatePick = (value: number) => {
   } else {
     endDate.value = _endDate;
   }
+
+  if (props.simple && startDate.value && endDate.value) {
+    handleConfirm();
+  }
 };
 
 const handleDateHover = (val: number) => {
@@ -389,10 +393,17 @@ const handleConfirm = () => {
         </DateContent>
       </div>
     </div>
-    <Footer :showNow="false" @confirm="handleConfirm">
+    <Footer
+      :showNow="false"
+      :showConfirm="!props.simple"
+      @confirm="handleConfirm"
+    >
       {{ startDate?.format(props.inputFormat) }}
       {{ props.rangeSeparator }}
       {{ endDate?.format(props.inputFormat) }}
+      <template #footer>
+        <slot name="footer"> </slot>
+      </template>
     </Footer>
   </div>
 </template>

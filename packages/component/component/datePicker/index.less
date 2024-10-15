@@ -54,7 +54,6 @@
   }
 }
 
-
 html #layuicss-laydate {
   display: none;
   position: absolute;
@@ -162,7 +161,7 @@ html #layuicss-laydate {
   cursor: pointer;
   user-select: none;
 }
-.layui-laydate-header .layui-icon-prev{
+.layui-laydate-header .layui-icon-prev {
   left: 15px;
 }
 .layui-laydate-header .layui-icon-left {
@@ -265,14 +264,13 @@ html #layuicss-laydate {
   padding: 10px;
 }
 
-
-.layui-laydate-footer .layui-btn{
+.layui-laydate-footer .layui-btn {
   padding: 0 10px;
   white-space: nowrap;
   transition: all 0.3s;
 }
 
-.layui-laydate-footer .laydate-footer-btns .layui-btn{
+.layui-laydate-footer .laydate-footer-btns .layui-btn {
   border-radius: 0;
 }
 
@@ -297,9 +295,7 @@ html #layuicss-laydate {
         color: var(--global-primary-color);
       }
     }
-    
   }
-  
 }
 .layui-laydate-footer span.layui-laydate-preview {
   cursor: default;
@@ -554,7 +550,8 @@ html #layuicss-laydate {
 .laydate-range-hover {
   background-color: var(--global-neutral-color-2) !important;
 }
-.layui-laydate-content .layui-disabled:not(.layui-laydate-current,.layui-this):hover {
+.layui-laydate-content
+  .layui-disabled:not(.layui-laydate-current, .layui-this):hover {
   background-color: transparent !important;
 }
 
@@ -647,9 +644,9 @@ html #layuicss-laydate {
   background-color: #dddddd;
 }
 
-.layui-date-range-picker{
-  .end-input{
-    .layui-input-clear{
+.layui-date-range-picker {
+  .end-input {
+    .layui-input-clear {
       opacity: 0;
       visibility: hidden;
       display: block;
@@ -657,10 +654,10 @@ html #layuicss-laydate {
     }
   }
 
-  .laydate-range-inputs{
+  .laydate-range-inputs {
     &:hover {
-      .end-input{
-        .layui-input-clear{
+      .end-input {
+        .layui-input-clear {
           opacity: 1;
           visibility: visible;
         }
@@ -669,7 +666,7 @@ html #layuicss-laydate {
   }
 }
 
-.layui-laydate-shortcut{
+.layui-laydate-shortcut {
   width: 80px;
   padding: 6px 0;
   display: inline-block;
@@ -679,19 +676,26 @@ html #layuicss-laydate {
   text-align: center;
 }
 
-.layui-laydate-shortcut+.layui-laydate-main {
+.layui-laydate-shortcut + .layui-laydate-main {
   display: inline-block;
   border-left: 1px solid #e2e2e2;
 }
 
-.layui-laydate-shortcut>li {
+.layui-laydate-shortcut > li {
   padding: 5px 8px;
   cursor: pointer;
   line-height: 18px;
+  user-select: none;
 
   &:hover {
     background-color: #eee;
     color: #333;
-    transition: all .3s;
+    transition: all 0.3s;
   }
+}
+/* 静态面板 */
+.layui-date-picker-static {
+  width: auto !important;
+  height: 100% !important;
+  border: 1px solid var(--input-border-color);
 }

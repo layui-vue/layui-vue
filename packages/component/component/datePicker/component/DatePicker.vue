@@ -136,6 +136,7 @@ const handleNow = () => {
   } else {
     showDate.value = currentData.value = dayjs();
   }
+  if (props.simple) handleConfirm();
 };
 
 const handleChangeShortcut = (shortcuts: ShortcutsType) => {
@@ -143,9 +144,9 @@ const handleChangeShortcut = (shortcuts: ShortcutsType) => {
     isFunction(shortcuts.value) ? shortcuts.value() : shortcuts.value
   ) as DatePickerModelValueSingleType;
 
-  currentData.value = dayjs(date, props.format);
+  currentData.value = dayjs(date);
 
-  handleConfirm();
+  if (props.simple) handleConfirm();
 };
 
 const footerValue = () => {
@@ -155,12 +156,13 @@ const footerValue = () => {
 };
 </script>
 
+<!-- 当datetime模式下 切换为time时，只通过css隐藏date模块，不销毁date模块。 -->
+<!-- 防止date内部inputDate watch 因重新渲染而再次执行。 -->
+<!-- 再次执行会导致在非simple模式下切换日期重新赋值datepicker.modelValue -->
+
 <template>
   <div class="layui-laydate">
     <Shortcuts @change-shortcut="handleChangeShortcut"></Shortcuts>
-    <!-- 当datetime模式下 切换为time时，只通过css隐藏date模块，不销毁date模块。 -->
-    <!-- 防止date内部inputDate watch 因重新渲染而再次执行。 -->
-    <!-- 再次执行会导致在非simple模式下切换日期重新赋值datepicker.modelValue -->
     <Date
       v-if="currentType === 'date' || currentType === 'time'"
       v-show="currentType === 'date'"
@@ -200,14 +202,17 @@ const footerValue = () => {
       @confirm="handleConfirm(true)"
       @now="handleNow"
     >
-      <LayButton
-        v-if="dateType === 'datetime'"
-        size="xs"
-        :class="{ 'type-time': currentType === 'time' }"
-        @click="handleToggleTimePanel"
-        >{{ currentType === "date" ? "选择时间" : "选择日期" }}</LayButton
-      >
-      <template v-else>{{ footerValue() }}</template>
+      <slot name="footer">
+        <LayButton
+          v-if="dateType === 'datetime'"
+          size="xs"
+          :class="{ 'type-time': currentType === 'time' }"
+          @click="handleToggleTimePanel"
+        >
+          {{ currentType === "date" ? "选择时间" : "选择日期" }}
+        </LayButton>
+        <template v-else>{{ footerValue() }}</template>
+      </slot>
     </Footer>
   </div>
 </template>

@@ -4,8 +4,8 @@
       <slot name="header">
         <div class="laydate-set-ym" v-if="dateType === 'month'">
           <span class="laydate-time-text">{{
-            currentMonth
-              ? MONTH_NAME[currentMonth]
+            (Number(currentMonth) ?? -1) > -1
+              ? MONTH_NAME[Number(currentMonth)]
               : t("datePicker.selectMonth")
           }}</span>
         </div>

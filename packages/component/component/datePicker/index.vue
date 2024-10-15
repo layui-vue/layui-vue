@@ -41,6 +41,7 @@ const props = withDefaults(defineProps<DatePickerProps>(), {
   defaultTime: null,
   yearPage: 15,
   // yearStep: 1,
+  static: false,
 });
 
 const { size } = useProps(props);
@@ -60,7 +61,11 @@ defineOptions({
 <template>
   <InputBlock v-bind="{ ...props, ...$attrs }" :format="format" :size="size">
     <template #default="{ onPick }">
-      <RenderComponent v-bind="renderComponentProps" @pick="onPick" />
+      <RenderComponent v-bind="renderComponentProps" @pick="onPick">
+        <template #footer>
+          <slot name="footer" v-bind="{ props }"></slot>
+        </template>
+      </RenderComponent>
     </template>
   </InputBlock>
 </template>

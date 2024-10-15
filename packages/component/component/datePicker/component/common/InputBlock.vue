@@ -11,7 +11,7 @@ import LayDropdown from "../../../dropdown/index.vue";
 import LayInput from "../../../input/index.vue";
 
 import { dayjsToString, checkRangeValue } from "../../util";
-import { isArray, isNumber, isUndefined } from "../../../../utils";
+import { isArray, isNumber } from "../../../../utils";
 
 const props = withDefaults(defineProps<DatePickerProps>(), {});
 const emits = defineEmits([
@@ -27,7 +27,13 @@ const DatePickerContext = inject(DATE_PICKER_CONTEXT)!;
 const dropdownRef = ref<InstanceType<typeof LayDropdown>>();
 
 const classes = computed(() => {
-  return ["layui-date-picker", { "layui-date-range-picker": props.range }];
+  return [
+    "layui-date-picker",
+    {
+      "layui-date-range-picker": props.range,
+      "layui-date-picker-static": props.static,
+    },
+  ];
 });
 const _Placeholder = computed(() => {
   return isArray(props.placeholder)
@@ -215,6 +221,7 @@ function onPick(dates: Dayjs | Array<Dayjs>) {
 <template>
   <div :class="classes" :size="size">
     <lay-dropdown
+      v-if="!props.static"
       ref="dropdownRef"
       :disabled="disabled"
       :autoFitMinWidth="false"
@@ -277,5 +284,8 @@ function onPick(dates: Dayjs | Array<Dayjs>) {
         <slot :onPick="onPick"></slot>
       </template>
     </lay-dropdown>
+    <template v-else>
+      <slot :onPick="onPick"></slot>
+    </template>
   </div>
 </template>

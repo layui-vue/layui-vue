@@ -81,6 +81,9 @@ const handleYearPick = (date: Dayjs) => {
   } else {
     endDate.value = date;
   }
+  if (props.simple && startDate.value && endDate.value) {
+    handleConfirm();
+  }
 };
 
 const handleYearHover = (date: Dayjs) => {
@@ -153,10 +156,16 @@ const handleConfirm = () => {
         </template>
       </Year>
     </div>
-    <Footer :showNow="false" @confirm="handleConfirm">
-      {{ startDate?.format(props.inputFormat) }}
-      {{ props.rangeSeparator }}
-      {{ endDate?.format(props.inputFormat) }}
+    <Footer
+      :showNow="false"
+      :showConfirm="!props.simple"
+      @confirm="handleConfirm"
+    >
+      <slot name="footer">
+        {{ startDate?.format(props.inputFormat) }}
+        {{ props.rangeSeparator }}
+        {{ endDate?.format(props.inputFormat) }}
+      </slot>
     </Footer>
   </div>
 </template>
