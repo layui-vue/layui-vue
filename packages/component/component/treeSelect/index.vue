@@ -3,7 +3,7 @@ import "./index.less";
 import { StyleValue, computed, ref, watch, useSlots, provide } from "vue";
 import { useDebounceFn } from "@vueuse/core";
 import { getNode } from "../../utils";
-import { TreeSelectSize } from "./interface";
+import type { TreeSelectSize, TreeSelectCacheData } from "./interface";
 import { LayIcon } from "@layui/icons-vue";
 import LayInput from "../input/index.vue";
 import LayTagInput from "../tagInput/index.vue";
@@ -12,9 +12,11 @@ import LayTree from "../tree/index.vue";
 import useProps from "./index.hooks";
 import { fillFieldNames } from "../tree/utils";
 import {
+  StringOrNumber,
   ReplaceFieldsOptionsOptional,
   LoadFunction,
   SearchNodeMethodType,
+  OriginalTreeData,
 } from "../tree/tree.type";
 import { LAYUI_TREE_SELECT } from "./useTreeSelect";
 
@@ -37,6 +39,7 @@ export interface TreeSelectProps {
   defaultExpandAll?: boolean;
   lazy?: boolean;
   load?: LoadFunction;
+  cacheData?: TreeSelectCacheData[];
 }
 
 export interface TreeSelectEmits {
@@ -63,8 +66,10 @@ const props = withDefaults(defineProps<TreeSelectProps>(), {
     return node.title.includes(value);
   },
   defaultExpandAll: false,
+  cacheData: () => [],
 });
 
+const _cacheData = ref(props.cacheData);
 const { size } = useProps(props);
 
 const treeData = ref();
@@ -114,28 +119,34 @@ watch(
     const { id, title } = _replaceFields.value;
     if (props.multiple) {
       try {
-        multipleValue.value = checkedKeys.value.map((value: any) => {
-          let node: any = getNode(
-            treeOriginData.value || props.data,
-            value,
-            _replaceFields.value
-          );
+        multipleValue.value = checkedKeys.value
+          .map((value: any) => {
+            let node: any = getNode(
+              treeOriginData.value || props.data,
+              value,
+              _replaceFields.value
+            );
 
-          if (node) {
-            node.label = node[title];
-            node.value = node[id];
-            node.closable = !node.disabled;
-          }
+            if (node) {
+              node.label = node[title];
+              node.value = node[id];
+              node.closable = !node.disabled;
+            }
 
-          if (node == undefined) {
-            node = {
-              label: value,
-              value: value,
-              closable: true,
-            };
-          }
-          return node;
-        });
+            const cacheData = _cacheData.value.find(
+              (date) => value === date.value
+            );
+
+            if (cacheData) {
+              node = {
+                label: cacheData.label,
+                value: cacheData.value,
+                closable: true,
+              };
+            }
+            return node;
+          })
+          .filter(Boolean);
       } catch (e) {
         throw new Error("v-model / model-value is not an array type");
       }
@@ -154,7 +165,11 @@ watch(
       if (node) {
         singleValue.value = node[title];
       } else {
-        singleValue.value = "";
+        const cacheData = _cacheData.value.find(
+          (date) => selectedValue.value === date.value
+        );
+
+        singleValue.value = cacheData ? cacheData.label : "";
       }
     }
   },
@@ -176,7 +191,7 @@ const onClear = function () {
  *
  * @param node 当前节点
  */
-const handleClick = (node: any) => {
+const handleClick = (node: OriginalTreeData) => {
   if (!props.multiple) {
     dropdownRef.value.hide();
   }
@@ -304,6 +319,27 @@ const setInputEl = (el: HTMLInputElement) => {
   }
 };
 
+const handleUpdateCheckedKeys = (data: Array<StringOrNumber>) => {
+  _cacheData.value.forEach((_data) => {
+    const node: any = getNode(
+      treeOriginData.value,
+      _data.value,
+      _replaceFields.value
+    );
+
+    if (!node && !data.includes(_data.value)) {
+      data.push(_data.value);
+    } else {
+      _cacheData.value.splice(
+        _cacheData.value.findIndex((data) => data.value === _data.value),
+        1
+      );
+    }
+  });
+
+  checkedKeys.value = data;
+};
+
 provide(LAYUI_TREE_SELECT, {
   inputEl,
   setInputEl,
@@ -381,13 +417,14 @@ provide(LAYUI_TREE_SELECT, {
             :show-checkbox="multiple"
             :check-strictly="checkStrictly"
             v-model:selectedKey="selectedValue"
-            v-model:checkedKeys="checkedKeys"
+            :checkedKeys="checkedKeys"
             :tail-node-icon="!hasTitleSlot"
             :replaceFields="_replaceFields"
             :defaultExpandAll="defaultExpandAll"
             :lazy="lazy"
             :load="load"
             :searchNodeMethod="searchNodeMethod"
+            @update:checked-keys="handleUpdateCheckedKeys"
             @node-click="handleClick"
           >
             <template #title="{ data }">

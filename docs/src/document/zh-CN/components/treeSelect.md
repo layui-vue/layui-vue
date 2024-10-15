@@ -1339,6 +1339,109 @@ const data7 = ref([{
 
 :::
 
+::: title 渲染懒加载数据
+:::
+
+::: demo tree 组件 使用 `cacheData` 预渲染懒加载的数据
+
+<template>
+ <lay-space>
+		<lay-tree-select
+			v-model="value11"
+			:data="data10"
+			lazy
+			multiple
+			:check-strictly="false"
+			:load="handleLoad"
+			:cacheData="cacheData"
+		></lay-tree-select>
+		<lay-tree-select
+			v-model="value13"
+			:data="data10"
+			lazy
+			multiple
+			:load="handleLoad"
+			:cacheData="cacheData"
+		></lay-tree-select>
+		<lay-tree-select
+			v-model="value12"
+			:data="data10"
+			lazy
+			:load="handleLoad"
+			:cacheData="cacheData"
+		></lay-tree-select>
+ </lay-space>
+</template>
+
+<script setup>
+import { ref } from "vue";
+
+const cacheData = [
+  {
+    label: "一级1-1",
+    value: 11,
+  },
+];
+
+const data10 = ref([
+  {
+    title: "一级1",
+    id: 1,
+  },
+  {
+    title: "一级2",
+    id: 2,
+    children: [
+      {
+        title: "一级2-1",
+        id: 21,
+      },
+    ],
+  },
+  {
+    title: "一级3",
+    id: 32,
+  },
+]);
+
+const value11 = ref([1, 11]);
+const value13 = ref([1, 11]);
+const value12 = ref(11);
+
+const handleLoad = (node, resolve) => {
+  console.log(node);
+  if (node.id === 1) {
+    setTimeout(() => {
+      resolve([
+        {
+          title: "一级1-1",
+          id: 11,
+        },
+        {
+          title: "一级1-2",
+          id: 12,
+        },
+      ]);
+    }, 2000);
+  } else if (node.id === 11) {
+    resolve([
+      {
+        title: "一级1-1-1",
+        id: 111,
+      },
+      {
+        title: "一级1-2-1",
+        id: 121,
+      },
+    ]);
+  } else {
+    resolve([]);
+  }
+};
+</script>
+
+:::
+
 ::: title Tree Select 属性
 :::
 
@@ -1360,6 +1463,7 @@ const data7 = ref([{
 | searchNodeMethod    | 对树节点进行筛选时执行的方法， 返回 false 则表示这个节点会被隐藏 | `Fcuntion(node, value)`                                                                | --     | --     |
 | lazy                | 是否懒加载子节点，需与 `load` 方法结合使用                       | false                                                                                  |        |
 | load                | 加载子树数据的方法，仅当 `lazy` 属性为 true 时生效               | function(node, resolve)，node 为当前点击的节点，resolve 为数据加载完成的回调(必须调用) |        |
+| cacheData `2.19.0`           | 预渲染懒加载节点数据               | `Array<TreeSelectCacheData>` |        |
 
 :::
 
@@ -1373,6 +1477,16 @@ const data7 = ref([{
 | change | 选中值变化事件 | --   |
 
 :::
+
+::: title types
+:::
+
+```ts
+interface TreeSelectCacheData {
+  label: string;
+  value: StringOrNumber;
+}
+```
 
 ::: previousNext transition
 :::

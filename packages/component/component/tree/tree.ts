@@ -220,6 +220,10 @@ class Tree {
     return currentState;
   }
 
+  refreshData(data: Array<TreeData>) {
+    return (this.treeData = data);
+  }
+
   getData() {
     return this.treeData;
   }

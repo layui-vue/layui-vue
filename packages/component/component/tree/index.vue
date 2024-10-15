@@ -72,8 +72,9 @@ const initStatus = ref(false);
 
 const loadNodeList = () => {
   let { tree: _tree, nodeList: _nodeList } = useTree(
-    Object.assign({}, props, { replaceFields: _replaceFields.value }),
-    emit
+    props,
+    emit,
+    _replaceFields.value
   );
   tree.value = _tree;
   nodeList.value = _nodeList.value;
@@ -148,7 +149,10 @@ onMounted(() => {
 });
 
 function handleClick(node: TreeData) {
-  const originNode = tree.value.getOriginData(node[_replaceFields.value.id]);
+  const originNode = tree.value.getOriginData(
+    node[_replaceFields.value.id]
+  ) as OriginalTreeData;
+
   if (props.isSelect) {
     emit("update:selectedKey", node[_replaceFields.value.id]);
   }
@@ -156,7 +160,11 @@ function handleClick(node: TreeData) {
 }
 
 const handleCheckChange = (node: TreeData, checked: boolean) => {
-  emit("check-change", node, checked);
+  const originNode = tree.value.getOriginData(
+    node[_replaceFields.value.id]
+  ) as OriginalTreeData;
+
+  emit("check-change", originNode, checked);
 };
 
 const selectedKey = ref(props.selectedKey);
