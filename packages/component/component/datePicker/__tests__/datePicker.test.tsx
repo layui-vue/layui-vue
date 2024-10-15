@@ -8,6 +8,7 @@ import Year from "../component/common/Year.vue";
 import Footer from "../component/common/Footer.vue";
 // import Month from "../component/common/Month.vue";
 import { nextTick } from "vue";
+import { dayjsToString } from "../util";
 
 const mockInputClick = async (wrapper: any) => {
   await wrapper.find(".layui-input").trigger("click");
@@ -152,5 +153,43 @@ describe("LayDatePicker date type", () => {
     expect(
       dateCurrent[12].element.classList.contains("layui-disabled")
     ).toBeFalsy();
+  });
+
+  test("shortcuts", async () => {
+    const time = new window.Date();
+    const wrapper = mount({
+      setup() {
+        return () => (
+          <LayDatePicker
+            type="date"
+            simple={true}
+            shortcuts={[
+              {
+                text: "今天",
+                value: time,
+              },
+              {
+                text: "昨天",
+                value: () => time.getTime() - 86400000,
+              },
+            ]}
+          ></LayDatePicker>
+        );
+      },
+    });
+
+    const datePickerInstance = wrapper.findComponent(LayDatePicker);
+    await mockInputClick(wrapper);
+    const shortcuts = document.body.querySelectorAll(
+      ".layui-laydate-shortcut li"
+    );
+
+    await shortcuts[1].dispatchEvent(new MouseEvent("click"));
+    await nextTick();
+    await sleep();
+
+    expect(document.body.querySelector(".layui-this")?.textContent).toBe(
+      dayjsToString(time.getTime() - 86400000, "D")
+    );
   });
 });
