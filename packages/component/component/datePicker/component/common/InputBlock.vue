@@ -31,7 +31,7 @@ const classes = computed(() => {
     "layui-date-picker",
     {
       "layui-date-range-picker": props.range,
-      "layui-date-picker-static": props.static,
+      // "layui-date-picker-static": props.static,
     },
   ];
 });
@@ -284,8 +284,5 @@ function onPick(dates: Dayjs | Array<Dayjs>) {
         <slot :onPick="onPick"></slot>
       </template>
     </lay-dropdown>
-    <template v-else>
-      <slot :onPick="onPick"></slot>
-    </template>
   </div>
 </template>

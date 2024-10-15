@@ -59,15 +59,14 @@ export interface DatePickerProps {
    * @version 2.19.0
    */
   shortcuts?: Array<Shortcuts>;
-  /**
-   * 静态面板
-   * @version 2.19.0
-   */
-  static?: boolean;
+  // /**
+  //  * 静态面板
+  //  * @version 2.19.0
+  //  */
+  // static?: boolean;
 }
 
-export interface RequiredDatePickerProps
-  extends /* @vue-ignore */ DatePickerProps {
+export interface RequiredDatePickerProps extends DatePickerProps {
   size: CommonSize;
   type: DatePickerType;
   disabled: boolean;
@@ -92,10 +91,9 @@ export type DatePickerEmits = {
 
 export type DatePickerValue = Dayjs | Array<Dayjs> | null | undefined;
 
-export interface DatePickerContextType
-  extends /* @vue-ignore */ RequiredDatePickerProps {
+export type DatePickerContextType = RequiredDatePickerProps & {
   modelValue: DatePickerValue;
-}
+};
 
 export const DATE_PICKER_CONTEXT: InjectionKey<DatePickerContextType> =
   Symbol("LayDatePicker");

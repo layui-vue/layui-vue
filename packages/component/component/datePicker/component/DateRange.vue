@@ -393,11 +393,7 @@ const handleConfirm = () => {
         </DateContent>
       </div>
     </div>
-    <Footer
-      :showNow="false"
-      :showConfirm="!props.simple"
-      @confirm="handleConfirm"
-    >
+    <Footer :showNow="false" :showConfirm="!simple" @confirm="handleConfirm">
       {{ startDate?.format(props.inputFormat) }}
       {{ props.rangeSeparator }}
       {{ endDate?.format(props.inputFormat) }}

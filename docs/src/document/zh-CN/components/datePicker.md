@@ -114,13 +114,12 @@ const endTimeDisabled = ref("2022-03-04 17:35:00");
 ::: title 年份选择
 :::
 
-::: demo 将 `type` 设置成 `"year"` 使用年份选择模式。可以用 `year-page` 指定每页展示年份的数量，用 `year-step` 指定生成年份的步进值。
+::: demo 将 `type` 设置成 `"year"` 使用年份选择模式。可以用 `year-page` 指定每页展示年份的数量。
 
 <template>
   <lay-space>
     <lay-date-picker type="year" v-model="endTimeYearRange"></lay-date-picker>
     <lay-date-picker type="year" v-model="endTimeYearRange" :year-page="32"></lay-date-picker>
-    <lay-date-picker type="year" v-model="endTimeYearRange" :year-page="29" :year-step="2"></lay-date-picker>
   </lay-space>
 </template>
 
@@ -138,18 +137,30 @@ const endTimeYearRange = ref("2022");
 ::: demo 设置 `simple` 属性后，只需要点击一次后自动关闭，无需点击确认按钮。
 
 <template>
-<lay-form>
+  <lay-form>
     <lay-form-item label="日期" mode="inline">
       <lay-date-picker simple v-model="endTime" placeholder="click me" allow-clear></lay-date-picker>
+    </lay-form-item>
+    <lay-form-item label="日期 range" mode="inline">
+      <lay-date-picker simple range v-model="endTimeRange" placeholder="click me" allow-clear></lay-date-picker>
     </lay-form-item>
     <lay-form-item label="年份" mode="inline">
       <lay-date-picker simple type="year" v-model="endTime4" placeholder="click me" allow-clear></lay-date-picker>
     </lay-form-item>
+    <lay-form-item label="年份" mode="inline">
+      <lay-date-picker simple type="year" range v-model="endTime4Range" placeholder="click me" allow-clear></lay-date-picker>
+    </lay-form-item>
     <lay-form-item label="月份" mode="inline">
       <lay-date-picker simple type="month" v-model="endTime5" placeholder="click me" allow-clear></lay-date-picker>
     </lay-form-item>
+    <lay-form-item label="月份" mode="inline">
+      <lay-date-picker simple type="month" range v-model="endTime5Range" placeholder="click me" allow-clear></lay-date-picker>
+    </lay-form-item>
     <lay-form-item label="年份月份" mode="inline">
       <lay-date-picker simple type="yearmonth" v-model="endTime6" placeholder="click me" allow-clear></lay-date-picker>
+    </lay-form-item>
+     <lay-form-item label="年份月份range" mode="inline">
+      <lay-date-picker simple type="yearmonth" range v-model="endTime6Range" placeholder="click me" allow-clear></lay-date-picker>
     </lay-form-item>
   </lay-form>
 </template>
@@ -158,11 +169,13 @@ const endTimeYearRange = ref("2022");
 import { ref } from 'vue'
 
 const endTime = ref(null);
-const endTime2 = ref(null);
-const endTime3 = ref(null);
+const endTimeRange = ref(null);
 const endTime4 = ref(null);
+const endTime4Range = ref(null);
 const endTime5 = ref(null);
+const endTime5Range = ref(null);
 const endTime6 = ref(null);
+const endTime6Range = ref(null);
 </script>
 
 :::
