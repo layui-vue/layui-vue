@@ -542,6 +542,7 @@ const shortcuts2 = [
 | placeholder     | `input` 占位符                           | `string` `Array<string>`                           | --                  | —                                                   | —        |
 | allow-clear     | 允许清空                                                                 | `boolean`                                                                | `false`             | --                                                  | --       |
 | simple          | 一次性选择，无需点击确认按钮                                             | `boolean`                                                                | `false`             | --                                                  | --       |
+| disabled-date       | 判断是否禁止日期的函数，接收一个 `Date` 对象参数，并返回一个 `boolean` 用于是否禁止           |  `(value: Date)=> boolean`            | --             | --|              `2.19.0`                    |      
 | max             | 最大可选日期 存在 `disabled-date` 此属性无效                                          | `DatePickerModelValueSingleType `                                                                 | --                  | --                                                  | --       |
 | min             | 最小可选日期 存在 `disabled-date` 此属性无效                                         | `DatePickerModelValueSingleType `                                                                 | --                  | --                                                  | --       |
 | range            | 是否范围选择                                                             | `boolean`                                                                | `false`             | --                                                  | --       |
@@ -556,7 +557,6 @@ const shortcuts2 = [
 | default-time    | 范围日期 `type=datetime` 时分秒默认时间                                  | `string` `Array<string>`                                                 | --                  | 例如`12:30:00`                                      | `2.17.2` |
 | content-style   | 内容自定义样式                                                           | `StyleValue`                                                             | --                  | --                                                  | --       |
 | content-class   | 内容自定义 Class                                                         | `string` `Array<string \| object>` `object`                              | --                  | --                                                  | --       |
-| disabled-date       | 判断是否禁止日期的函数，接收一个 `Date` 对象参数，并返回一个 `boolean` 用于是否禁止。           |  `(value: Date)=> boolean`            | --             | --|              `2.19.0`                    |      
 | year-page       | 年份选择器每页年份的个数           |  `number`            | `15`             | --|              `2.19.0`                    |      
 | shortcuts       | 设置快捷选项，需要传入数组对象       |  `Array<Shortcuts>`            | --             | --|              `2.19.0`                    |  
 
