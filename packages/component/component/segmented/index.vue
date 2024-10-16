@@ -35,16 +35,7 @@
 </template>
 
 <script setup lang="ts">
-import {
-  ref,
-  computed,
-  Ref,
-  watch,
-  onMounted,
-  InputHTMLAttributes,
-  ReservedProps,
-  nextTick,
-} from "vue";
+import { ref, computed, Ref, watch, onMounted, nextTick } from "vue";
 import { LaySegmentedProps } from "./interfaces";
 
 defineOptions({
@@ -58,7 +49,7 @@ const emits = defineEmits<{
 
 const props = withDefaults(defineProps<LaySegmentedProps>(), {
   modelValue: "",
-  size: "default",
+  size: "md",
   disabled: false,
 });
 

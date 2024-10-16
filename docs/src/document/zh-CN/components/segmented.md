@@ -1,13 +1,16 @@
 ::: anchor
 :::
 
-::: title Segmented 分段器
+::: title 基本介绍
 :::
 
-::: describe 分段器用于在多个选项中进行选择，是列表项的抽象表达。
+::: describe Segmented 分段器 用于在多个选项中进行选择，是列表项的抽象表达。
 :::
 
-::: demo 基础使用
+::: title 基础使用
+:::
+
+::: demo  基础使用
 
 <template>
   <div style="gap: 8px; display: flex; flex-direction: column">
@@ -51,10 +54,10 @@ watch(
 
 :::
 
-::: describe 可以使用 slot 进行自定义渲染
+::: title 自定义渲染
 :::
 
-::: demo
+::: demo 可以使用 slot 进行自定义渲染
 
 <template>
   <div>
@@ -82,15 +85,16 @@ const options3 = ref(["A", "B", {
 
 :::
 
-::: describe 可以使用 `size` 属性来设置分段器的大小
+
+::: title 尺寸
 :::
 
-::: demo
+::: demo 可以使用 `size` 属性来设置分段器的大小
 
 <template>
   <div style="gap: 8px; display: flex; flex-direction: column">
     <lay-segmented :options="items2" v-model="s1" size="lg"></lay-segmented>
-    <lay-segmented :options="items2" v-model="s2" size="default"></lay-segmented>
+    <lay-segmented :options="items2" v-model="s2" ></lay-segmented>
     <lay-segmented :options="items2" v-model="s3" size="sm"></lay-segmented>
   </div>
 </template>
@@ -124,10 +128,10 @@ watch(
 
 :::
 
-::: describe 可以使用 `disabled` 属性来禁用分段器
+::: title 禁用 
 :::
 
-::: demo
+::: demo 可以使用 `disabled` 属性来禁用分段器
 
 <template>
   <div style="gap: 8px; display: flex; flex-direction: column">
@@ -164,7 +168,7 @@ watch(
 
 :::
 
-::: title Property 属性
+::: title Segmented 属性
 :::
 
 ::: table
@@ -172,10 +176,21 @@ watch(
 | 属性       | 类型                                     | 默认值  | 可选值              | 说明         |
 | ---------- | ---------------------------------------- | ------- | ------------------- | ------------ |
 | _v-model_  | `string`                                 | -       | -                   | 绑定值       |
-| _options_  | `Array<string \| LaySegementedItemType>` | -       | -                   | 分段器选项   |
+| _options_  | `Array<string \| LaySegmentedItemType>` | -       | -                   | 分段器选项   |
 | _name_     | `string`                                 | -       | -                   | 分段器表单名 |
-| _size_     | `string`                                 | -       | `lg` `default` `sm` | 尺寸         |
+| _size_     | `string`                                 | `md`      | `lg` `md` `sm` | 尺寸         |
 | _disabled_ | `boolean`                                | `false` | -                   | 是否禁用     |
+
+:::
+
+::: title Segmented 事件
+:::
+
+::: table
+
+| 属性       | 描述                                     | 参数  | 
+| ---------- | ---------------------------------------- | ------- |
+| _change_  | 点击某段触发                           | `label`       |
 
 :::
 
@@ -183,16 +198,16 @@ watch(
 :::
 
 ```ts
-export type LaySegementedItemType = {
+export type LaySegmentedItemType = {
   label: string;
   slot?: string;
   [key: string]: any;
 };
 
 export interface LaySegmentedProps {
-  options: LaySegementedItemType[] | string[];
+  options: LaySegmentedItemType[] | string[];
   modelValue: string;
-  size?: "lg" | "default" | "sm" | "xs";
+  size?: "lg" | "md" | "sm";
   name?: string;
   disabled?: boolean;
 }
