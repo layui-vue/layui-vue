@@ -253,16 +253,41 @@ const limitTimeRange = ref([]);
 
 :::
 
+::: title 默认日期
+:::
+
+::: demo `default-value` 可用于在 `modelValue` 为空时，面板展示的默认日期。 在 `range` 模式时，会设置 `左侧` 面板默认日期。
+
+<template>
+  <lay-space direction="vertical">
+    <lay-date-picker v-model="date1" type="date" :defaultValue="defaultValue" placeholder="defaultValue 2000-01-01"></lay-date-picker>
+    <lay-date-picker v-model="date1" type="date" :defaultValue="defaultValue" range placeholder="defaultValue 2000-01-01"></lay-date-picker>
+    <lay-date-picker v-model="date1" type="datetime" :defaultValue="defaultValue" defaultTime="12:30:00" range placeholder="defaultTime 12:30:00"></lay-date-picker>
+  </lay-space>
+</template>
+
+<script setup>
+import { ref } from 'vue'
+
+const date1 = ref();
+const date2 = ref([]);
+const defaultValue = '2000-01-01'
+</script>
+
+:::
+
 ::: title 格式化
 :::
 
 ::: demo `format` 用于格式化输出 `modelValue`，`inputFormat` 用于格式化输入框显示。
 
 <template>
-  endTimeFormat: {{endTimeFormat}}
-  <lay-date-picker v-model="endTimeFormat" simple type="date" :format="'DD/MM/YYYY'" placeholder="format"></lay-date-picker>
-  endTimeInputFormat: {{endTimeInputFormat}}
-  <lay-date-picker v-model="endTimeInputFormat" simple type="date" :inputFormat="'DD/MM/YYYY'" placeholder="inputFormat"></lay-date-picker>
+  <lay-space direction="vertical">
+    endTimeFormat: {{endTimeFormat}}
+    <lay-date-picker v-model="endTimeFormat" simple type="date" :format="'DD/MM/YYYY'" placeholder="format"></lay-date-picker>
+    endTimeInputFormat: {{endTimeInputFormat}}
+    <lay-date-picker v-model="endTimeInputFormat" simple type="date" :inputFormat="'DD/MM/YYYY'" placeholder="inputFormat"></lay-date-picker>
+  </lay-space>
 </template>
 
 <script setup>
