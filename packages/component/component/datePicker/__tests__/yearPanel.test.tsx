@@ -249,4 +249,35 @@ describe("LayDatePicker year type", () => {
 
     expect(DatePicker.props("modelValue")).toBe("2026");
   });
+
+  test("year disabled-date", async () => {
+    const wrapper = mount({
+      setup() {
+        const disabledDate = (date: Date): boolean => {
+          return !!(date.getFullYear() % 2);
+        };
+
+        return () => (
+          <LayDatePicker
+            modelValue="2024"
+            type="year"
+            disabledDate={disabledDate}
+          ></LayDatePicker>
+        );
+      },
+    });
+
+    await mockInputClick(wrapper);
+
+    const YearInstance = wrapper.findComponent(Year);
+    const currentLi = YearInstance.find(
+      ".laydate-year-list .layui-laydate-current"
+    );
+
+    const preLi = currentLi.element.previousElementSibling;
+    const nextLi = currentLi.element.nextElementSibling;
+
+    expect(preLi?.className).toBe("layui-disabled");
+    expect(nextLi?.className).toBe("layui-disabled");
+  });
 });

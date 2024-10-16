@@ -221,7 +221,6 @@ function onPick(dates: Dayjs | Array<Dayjs>) {
 <template>
   <div :class="classes" :size="size">
     <lay-dropdown
-      v-if="!props.static"
       ref="dropdownRef"
       :disabled="disabled"
       :autoFitMinWidth="false"

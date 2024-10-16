@@ -4,7 +4,7 @@
       <slot name="header" :yearList="yearRange">
         <lay-icon
           type="layui-icon-prev"
-          @click="currentDate -= DatePickerContext.yearPage"
+          @click="handleChangeShowYear(-DatePickerContext.yearPage)"
         ></lay-icon>
         <div class="laydate-set-ym">
           <span class="laydate-time-text">
@@ -13,7 +13,7 @@
         </div>
         <lay-icon
           type="layui-icon-next"
-          @click="currentDate += DatePickerContext.yearPage"
+          @click="handleChangeShowYear(DatePickerContext.yearPage)"
         ></lay-icon>
       </slot>
     </div>
@@ -46,7 +46,7 @@
 <script lang="ts" setup>
 import type { BasePanelProps } from "../interface";
 
-import dayjs from "dayjs";
+import dayjs, { type Dayjs } from "dayjs";
 import { computed, ref, watch, inject } from "vue";
 
 import LayIcon from "../../../icon";
@@ -63,11 +63,11 @@ const emits = defineEmits(["pick", "hover-cell"]);
 const DatePickerContext = inject(DATE_PICKER_CONTEXT)!;
 
 const currentYear = ref<number | null>();
-const currentDate = ref<number>(dayjs().year());
+const currentDate = ref<Dayjs>(dayjs());
 
 const yearList = computed<number[]>(() =>
   getYears(
-    currentDate.value,
+    currentDate.value.year(),
     DatePickerContext.yearPage
     // DatePickerContext.yearStep
   )
@@ -79,7 +79,7 @@ watch(
   ([modelValue, showDate]) => {
     currentYear.value = modelValue ? modelValue.year() : null;
 
-    currentDate.value = (modelValue || showDate)?.year();
+    currentDate.value = modelValue || showDate;
   },
   {
     immediate: true,
@@ -87,21 +87,25 @@ watch(
 );
 
 // 判断单元格是否可以点击(禁用)
-const cellDisabled = computed(() => {
-  return (item: number) => {
-    if (DatePickerContext.min && item < dayjs(DatePickerContext.min).year()) {
-      return true;
-    }
-    if (DatePickerContext.max && item > dayjs(DatePickerContext.max).year()) {
-      return true;
-    }
-    return false;
-  };
-});
+const cellDisabled = (item: number) => {
+  if (DatePickerContext.disabledDate) {
+    return DatePickerContext.disabledDate(
+      currentDate.value.year(item).toDate()
+    );
+  }
+
+  if (DatePickerContext.min && item < dayjs(DatePickerContext.min).year()) {
+    return true;
+  }
+  if (DatePickerContext.max && item > dayjs(DatePickerContext.max).year()) {
+    return true;
+  }
+  return false;
+};
 
 // 点击年份
 const handleYearClick = (item: number) => {
-  if (cellDisabled.value(item)) {
+  if (cellDisabled(item)) {
     return true;
   }
 
@@ -110,10 +114,14 @@ const handleYearClick = (item: number) => {
 };
 
 const handleYearMouseenter = (item: number) => {
-  if (cellDisabled.value(item) || !DatePickerContext.range) {
+  if (cellDisabled(item) || !DatePickerContext.range) {
     return;
   }
 
   emits("hover-cell", dayjs().year(item));
+};
+
+const handleChangeShowYear = (value: number) => {
+  currentDate.value = currentDate.value.year(currentDate.value.year() + value);
 };
 </script>

@@ -7,7 +7,7 @@ import type {
 } from "../interface";
 import { type Dayjs } from "dayjs";
 
-import { computed } from "vue";
+import { computed, reactive, toRefs } from "vue";
 import DatePicker from "../component/DatePicker.vue";
 import DateRange from "../component/DateRange.vue";
 import TimeRange from "../component/TimeRange.vue";
@@ -42,6 +42,10 @@ export const useDatePicker = (props: RequiredDatePickerProps) => {
         _format.value
       );
     }
+  });
+
+  const typeMap = computed(() => {
+    return TYPE_MAP[props.type];
   });
 
   const _format = computed(() => {
@@ -83,8 +87,11 @@ export const useDatePicker = (props: RequiredDatePickerProps) => {
     };
   });
 
-  const typeMap = computed(() => {
-    return TYPE_MAP[props.type];
+  const datePickerContext = reactive({
+    ...toRefs(props),
+    modelValue: initDate,
+    format: _format,
+    inputFormat: _inputFormat,
   });
 
   const RenderComponent = computed(() => {
@@ -94,5 +101,6 @@ export const useDatePicker = (props: RequiredDatePickerProps) => {
   return {
     RenderComponent,
     renderComponentProps,
+    datePickerContext,
   };
 };

@@ -12,13 +12,13 @@ export interface BasePanelProps {
   classes?: (val: Dayjs) => Record<string, boolean>;
 }
 
-export type UniquePickerProps = DatePickerContextType & {
+export interface UniquePickerProps extends DatePickerContextType {
   modelValue: Exclude<DatePickerValue, Array<Dayjs>>;
-};
+}
 
-export type RangePickerProps = DatePickerContextType & {
+export interface RangePickerProps extends DatePickerContextType {
   modelValue: Array<Dayjs>;
-};
+}
 
 export interface DateContentSingleDateObject {
   day: number;

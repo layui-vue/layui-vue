@@ -85,54 +85,56 @@ const hmsMap = {
   ss: "second",
 } as const;
 
-const cellDisabled = computed(() => {
-  return (type: keyof typeof hmsMap, value: number) => {
-    const haveValue = typeof value !== "undefined";
-    const _hms: Record<string, number | null> = {
-      hh: haveValue ? hms.value.hh : dayjs().hour(),
-      mm: haveValue ? hms.value.mm : dayjs().minute(),
-      ss: haveValue ? hms.value.ss : dayjs().second(),
-    };
-    haveValue && (_hms[type!] = value);
-
-    const currentDate = (props.modelValue || props.showDate)
-      .startOf("day")
-      .hour(_hms.hh as number)
-      .minute(_hms.mm as number)
-      .second(_hms.ss as number);
-
-    const diffType = hmsMap[type] as (typeof hmsMap)[keyof typeof hmsMap];
-
-    if (
-      DatePickerContext.min &&
-      currentDate.isBefore(
-        dayjs(DatePickerContext.min, DatePickerContext.format),
-        diffType
-      )
-    ) {
-      return true;
-    }
-
-    if (
-      DatePickerContext.max &&
-      currentDate.isAfter(
-        dayjs(DatePickerContext.max, DatePickerContext.format),
-        diffType
-      )
-    ) {
-      return true;
-    }
-
-    return false;
+const cellDisabled = (type: keyof typeof hmsMap, value: number) => {
+  const haveValue = typeof value !== "undefined";
+  const _hms: Record<string, number | null> = {
+    hh: haveValue ? hms.value.hh : dayjs().hour(),
+    mm: haveValue ? hms.value.mm : dayjs().minute(),
+    ss: haveValue ? hms.value.ss : dayjs().second(),
   };
-});
+  haveValue && (_hms[type!] = value);
+
+  const currentDate = (props.modelValue || props.showDate)
+    .startOf("day")
+    .hour(_hms.hh as number)
+    .minute(_hms.mm as number)
+    .second(_hms.ss as number);
+
+  const diffType = hmsMap[type] as (typeof hmsMap)[keyof typeof hmsMap];
+
+  if (DatePickerContext.disabledDate) {
+    return DatePickerContext.disabledDate(currentDate.toDate());
+  }
+
+  if (
+    DatePickerContext.min &&
+    currentDate.isBefore(
+      dayjs(DatePickerContext.min, DatePickerContext.format),
+      diffType
+    )
+  ) {
+    return true;
+  }
+
+  if (
+    DatePickerContext.max &&
+    currentDate.isAfter(
+      dayjs(DatePickerContext.max, DatePickerContext.format),
+      diffType
+    )
+  ) {
+    return true;
+  }
+
+  return false;
+};
 
 // 点击时间 - hms
 const chooseTime = (e: any) => {
   if (e.target.nodeName == "LI") {
     let { value, type } = e.target.dataset;
 
-    if (cellDisabled.value(type, parseInt(value))) {
+    if (cellDisabled(type, parseInt(value))) {
       return;
     }
 

@@ -207,7 +207,179 @@ const timestamp2 = ref(new Date().getTime());
 
 :::
 
-::: title 限制可选范围
+::: title 禁止任何日期
+:::
+
+::: demo 通过 `disabled-date` 可禁止任何日期，优先级大于 `max` `min`。
+
+<template>
+  <lay-space direction="vertical">
+    <lay-space>
+      年份：
+      <lay-date-picker
+        type="year"
+        :disabledDate="disabledDateYear"
+        v-model="date1"
+        placeholder="2的倍数年份禁止"
+      ></lay-date-picker>
+      <lay-date-picker
+        type="year"
+        :disabledDate="disabledDateYear"
+        range
+        v-model="date1range"
+        placeholder="2的倍数年份禁止 range"
+      ></lay-date-picker>
+    </lay-space>
+    <lay-space>
+      月份：
+      <lay-date-picker
+        type="month"
+        :disabledDate="disabledDateMonth"
+        v-model="date2"
+        placeholder="4月或者6月不可选"
+      ></lay-date-picker>
+      <lay-date-picker
+        type="month"
+        :disabledDate="disabledDateMonth"
+        range
+        v-model="date2range"
+        placeholder="4月或者6月不可选 range"
+      ></lay-date-picker>
+    </lay-space>
+    <lay-space>
+      年月份：
+      <lay-date-picker
+        type="yearmonth"
+        :disabledDate="disabledDateYearMonth"
+        v-model="date3"
+        defaultValue="2024-01"
+        placeholder="2024-01/2023-03不可选"
+      ></lay-date-picker>
+      <lay-date-picker
+        type="yearmonth"
+        :disabledDate="disabledDateYearMonth"
+        range
+        v-model="date3range"
+        defaultValue="2024-01"
+        placeholder="2024-01/2023-03不可选 range"
+      ></lay-date-picker>
+    </lay-space>
+    <lay-space>
+      日期：
+      <lay-date-picker
+        type="date"
+        :disabledDate="disabledDate"
+        v-model="date4"
+        defaultValue="2024-10-16"
+        placeholder="2024-10-01/02、2024-09-02"
+      ></lay-date-picker>
+      <lay-date-picker
+        type="date"
+        :disabledDate="disabledDate"
+        range
+        defaultValue="2024-10-16"
+        v-model="date4range"
+        placeholder="2024-10-01/02、2024-09-02 range"
+      ></lay-date-picker>
+    </lay-space>
+    <lay-space>
+      日期时分秒：
+      <lay-date-picker
+        type="datetime"
+        :disabledDate="disabledDateTime"
+        v-model="date5"
+        defaultValue="2024-10-16"
+        placeholder="2024-10-12 01:00:00"
+      ></lay-date-picker>
+      <lay-date-picker
+        type="datetime"
+        :disabledDate="disabledDateTime"
+        range
+        defaultValue="2024-10-16"
+        v-model="date5range"
+        placeholder="2024-10-12 01:00:00"
+      ></lay-date-picker>
+    </lay-space>
+    <lay-space>
+      时分秒：
+      <lay-date-picker
+        type="time"
+        :disabledDate="disabledTime"
+        v-model="date6"
+        defaultValue="2024-10-16"
+        placeholder="当前之后时间禁止"
+      ></lay-date-picker>
+      <lay-date-picker
+        type="time"
+        :disabledDate="disabledTime"
+        range
+        defaultValue="2024-10-16"
+        v-model="date6range"
+        placeholder="当前之后时间禁止"
+      ></lay-date-picker>
+    </lay-space>
+  </lay-space>
+</template>
+
+<script setup>
+import { ref } from "vue";
+
+const date1 = ref();
+const date1range = ref();
+const date2 = ref();
+const date2range = ref();
+const date3 = ref();
+const date3range = ref();
+const date4 = ref();
+const date4range = ref();
+const date5 = ref();
+const date5range = ref();
+const date6 = ref();
+const date6range = ref();
+
+const disabledDateYear = (date) => {
+  return date.getFullYear() % 2;
+};
+
+const disabledDateMonth = (date) => {
+  return date.getMonth() + 1 === 4 || date.getMonth() + 1 === 6;
+};
+
+const disabledDateYearMonth = (date) => {
+  return date.getFullYear() === 2024 && [1, 3].includes(date.getMonth() + 1)
+};
+
+const isSameDay = (dateA, dateB) => {
+    return (
+      dateA.getFullYear() === dateB.getFullYear() &&
+      dateA.getMonth() === dateB.getMonth() &&
+      dateA.getDate() === dateB.getDate()
+    );
+  };
+const disabledS = [
+  new Date("2024-10-01"),
+  new Date("2024-10-03"),
+  new Date("2024-09-02"),
+];
+
+const disabledDate = (date) => {
+  return disabledS.some((itemDate) => {
+    return isSameDay(itemDate, date);
+  });
+};
+
+const disabledDateTime = (date) => {
+  return date.getTime() === new Date("2024-10-12T01:00:00").getTime();
+}
+
+const disabledTime = (date) => {
+  return date.getTime() > Date.now();
+}
+</script>
+ 
+:::
+
+::: title 最大或最小日期
 :::
 
 ::: demo 通过预设`min`、`max`属性限制组件选择的最大值与最小值。
@@ -370,8 +542,8 @@ const shortcuts2 = [
 | placeholder     | `input` 占位符                           | `string` `Array<string>`                           | --                  | —                                                   | —        |
 | allow-clear     | 允许清空                                                                 | `boolean`                                                                | `false`             | --                                                  | --       |
 | simple          | 一次性选择，无需点击确认按钮                                             | `boolean`                                                                | `false`             | --                                                  | --       |
-| max             | 最大可选日期                                            | `DatePickerModelValueSingleType `                                                                 | --                  | --                                                  | --       |
-| min             | 最小可选日期                                           | `DatePickerModelValueSingleType `                                                                 | --                  | --                                                  | --       |
+| max             | 最大可选日期 存在 `disabled-date` 此属性无效                                          | `DatePickerModelValueSingleType `                                                                 | --                  | --                                                  | --       |
+| min             | 最小可选日期 存在 `disabled-date` 此属性无效                                         | `DatePickerModelValueSingleType `                                                                 | --                  | --                                                  | --       |
 | range            | 是否范围选择                                                             | `boolean`                                                                | `false`             | --                                                  | --       |
 | range-separator | 范围分隔符                                                               | `string`                                                                 | `至`                | --                                                  | --       |
 | size            | 尺寸                                                                     | `string`                                                                 | `lg` `md` `sm` `xs` | `md`                                                | --       |
@@ -384,6 +556,7 @@ const shortcuts2 = [
 | default-time    | 范围日期 `type=datetime` 时分秒默认时间                                  | `string` `Array<string>`                                                 | --                  | 例如`12:30:00`                                      | `2.17.2` |
 | content-style   | 内容自定义样式                                                           | `StyleValue`                                                             | --                  | --                                                  | --       |
 | content-class   | 内容自定义 Class                                                         | `string` `Array<string \| object>` `object`                              | --                  | --                                                  | --       |
+| disabled-date       | 判断是否禁止日期的函数，接收一个 `Date` 对象参数，并返回一个 `boolean` 用于是否禁止。           |  `(value: Date)=> boolean`            | --             | --|              `2.19.0`                    |      
 | year-page       | 年份选择器每页年份的个数           |  `number`            | `15`             | --|              `2.19.0`                    |      
 | shortcuts       | 设置快捷选项，需要传入数组对象       |  `Array<Shortcuts>`            | --             | --|              `2.19.0`                    |  
 

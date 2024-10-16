@@ -45,13 +45,14 @@ const props = withDefaults(defineProps<DatePickerProps>(), {
 });
 
 const { size } = useProps(props);
-const { RenderComponent, renderComponentProps } = useDatePicker(props);
+const { RenderComponent, renderComponentProps, datePickerContext } =
+  useDatePicker(props);
 
 const format = computed<string>(() => {
   return props.inputFormat ?? renderComponentProps.value.inputFormat!;
 });
 
-provide(DATE_PICKER_CONTEXT, renderComponentProps.value);
+provide(DATE_PICKER_CONTEXT, datePickerContext);
 
 defineOptions({
   name: "LayDatePicker",

@@ -79,32 +79,34 @@ const DatePickerContext = inject(DATE_PICKER_CONTEXT)!;
 const emits = defineEmits(["update:modelValue", "hover-cell"]);
 
 // 判断日期是否可以点击
-const cellDisabled = computed(() => {
-  return (item: DateContentSingleDateObject) => {
-    if (item.type !== "current" && DatePickerContext.range) {
-      return true;
-    }
+const cellDisabled = (item: DateContentSingleDateObject) => {
+  if (item.type !== "current" && DatePickerContext.range) {
+    return true;
+  }
 
-    if (
-      DatePickerContext.min &&
-      dayjs(item.value).isBefore(dayjs(DatePickerContext.min), "day")
-    ) {
-      return true;
-    }
+  if (DatePickerContext.disabledDate) {
+    return DatePickerContext.disabledDate(dayjs(item.value).toDate());
+  }
 
-    if (
-      DatePickerContext.max &&
-      dayjs(item.value).isAfter(dayjs(DatePickerContext.max), "day")
-    ) {
-      return true;
-    }
-    return false;
-  };
-});
+  if (
+    DatePickerContext.min &&
+    dayjs(item.value).isBefore(dayjs(DatePickerContext.min), "day")
+  ) {
+    return true;
+  }
+
+  if (
+    DatePickerContext.max &&
+    dayjs(item.value).isAfter(dayjs(DatePickerContext.max), "day")
+  ) {
+    return true;
+  }
+  return false;
+};
 
 // 点击日期
 const handleDayClick = (item: DateContentSingleDateObject) => {
-  if (cellDisabled.value(item)) return;
+  if (cellDisabled(item)) return;
 
   if (DatePickerContext.range && item.type !== "current") return;
 
@@ -112,7 +114,7 @@ const handleDayClick = (item: DateContentSingleDateObject) => {
 };
 
 const dayItemMouseEnter = (item: DateContentSingleDateObject) => {
-  if (!DatePickerContext.range || cellDisabled.value(item)) return;
+  if (!DatePickerContext.range || cellDisabled(item)) return;
 
   emits("hover-cell", item.value);
 };

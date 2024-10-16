@@ -3,7 +3,7 @@ import { afterEach, describe, expect, test } from "vitest";
 import { sleep } from "../../../test-utils";
 
 import LayDatePicker from "../index.vue";
-import Date from "../component/common/Date.vue";
+import DateComponent from "../component/common/Date.vue";
 import Year from "../component/common/Year.vue";
 import Footer from "../component/common/Footer.vue";
 // import Month from "../component/common/Month.vue";
@@ -31,7 +31,7 @@ describe("LayDatePicker date type", () => {
     await mockInputClick(wrapper);
 
     const component = wrapper.findComponent(LayDatePicker);
-    const DateInstance = wrapper.findComponent(Date);
+    const DateInstance = wrapper.findComponent(DateComponent);
 
     const [YearSpan, MonthSpan] = DateInstance.findAll(
       ".layui-laydate-header .laydate-set-ym span"
@@ -79,7 +79,7 @@ describe("LayDatePicker date type", () => {
 
     expect((component.props() as any).modelValue).toBe("2024/10/02");
 
-    const DateInstance = wrapper.findComponent(Date);
+    const DateInstance = wrapper.findComponent(DateComponent);
     const [YearSpan, MonthSpan] = DateInstance.findAll(
       ".layui-laydate-header .laydate-set-ym span"
     );
@@ -106,7 +106,7 @@ describe("LayDatePicker date type", () => {
     const datePicker = wrapper.findComponent(LayDatePicker);
 
     await mockInputClick(wrapper);
-    const DateInstance = wrapper.findComponent(Date);
+    const DateInstance = wrapper.findComponent(DateComponent);
 
     const dateCurrent = DateInstance.findAll(
       ".layui-laydate-content td:not(.laydate-day-prev)"
@@ -137,7 +137,7 @@ describe("LayDatePicker date type", () => {
     });
 
     await mockInputClick(wrapper);
-    const DateInstance = wrapper.findComponent(Date);
+    const DateInstance = wrapper.findComponent(DateComponent);
 
     const dateCurrent = DateInstance.findAll(
       ".layui-laydate-content td:not(.laydate-day-prev)"
@@ -191,5 +191,71 @@ describe("LayDatePicker date type", () => {
     expect(document.body.querySelector(".layui-this")?.textContent).toBe(
       dayjsToString(time.getTime() - 86400000, "D")
     );
+  });
+
+  test("disabled-date", async () => {
+    const wrapper = mount({
+      setup() {
+        const isSameDay = (dateA: Date, dateB: Date) => {
+          return (
+            dateA.getFullYear() === dateB.getFullYear() &&
+            dateA.getMonth() === dateB.getMonth() &&
+            dateA.getDate() === dateB.getDate()
+          );
+        };
+        const disabledS = [
+          new Date("2024-10-01"),
+          new Date("2024-10-03"),
+          new Date("2024-09-02"),
+        ];
+
+        const disabledDate = (date: Date): boolean => {
+          return disabledS.some((itemDate: any) => {
+            return isSameDay(itemDate, date);
+          });
+        };
+
+        return () => (
+          <LayDatePicker
+            type="date"
+            defaultValue="2024-10-16"
+            disabledDate={disabledDate}
+          ></LayDatePicker>
+        );
+      },
+    });
+
+    await mockInputClick(wrapper);
+
+    const DateInstance = wrapper.findComponent(DateComponent);
+
+    const dateCurrent202410 = DateInstance.findAll(
+      ".layui-laydate-content td:not(.laydate-day-prev)"
+    );
+
+    dateCurrent202410.forEach((date, index) => {
+      // 2024-10 1/3 日禁止
+      if (index === 0 || index === 2) {
+        expect(date.element.classList.contains("layui-disabled")).toBeTruthy();
+      } else {
+        expect(date.element.classList.contains("layui-disabled")).toBeFalsy();
+      }
+    });
+
+    const preMonth = DateInstance.find(".layui-icon-left");
+    await preMonth.trigger("click");
+
+    const dateCurrent202409 = DateInstance.findAll(
+      ".layui-laydate-content td:not(.laydate-day-prev)"
+    );
+
+    dateCurrent202409.forEach((date, index) => {
+      // 2024-09-02 日禁止
+      if (index === 1) {
+        expect(date.element.classList.contains("layui-disabled")).toBeTruthy();
+      } else {
+        expect(date.element.classList.contains("layui-disabled")).toBeFalsy();
+      }
+    });
   });
 });

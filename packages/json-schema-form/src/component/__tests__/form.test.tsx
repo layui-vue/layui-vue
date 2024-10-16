@@ -190,6 +190,7 @@ describe("LayJsonSchemaForm", () => {
     inputDom.setValue("456");
     dateDom.setValue("2024-03-05");
     await nextTick();
+    await nextTick();
     expect(inputDom.element.value).toBe("456");
     expect(dateDom.element.value).toBe("2024-03-05");
 

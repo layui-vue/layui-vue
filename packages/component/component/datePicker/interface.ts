@@ -48,6 +48,7 @@ export interface DatePickerProps {
     | Array<DatePickerModelValueSingleType>;
   contentStyle?: StyleValue;
   contentClass?: CommonClass;
+  disabledDate?: (date: Date) => boolean;
   /**
    * 年份分页
    * @version 2.19.0
@@ -91,9 +92,9 @@ export type DatePickerEmits = {
 
 export type DatePickerValue = Dayjs | Array<Dayjs> | null | undefined;
 
-export type DatePickerContextType = RequiredDatePickerProps & {
+export interface DatePickerContextType extends RequiredDatePickerProps {
   modelValue: DatePickerValue;
-};
+}
 
 export const DATE_PICKER_CONTEXT: InjectionKey<DatePickerContextType> =
   Symbol("LayDatePicker");

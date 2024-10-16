@@ -5,6 +5,8 @@ import { nextTick } from "vue";
 import { sleep } from "../../../test-utils";
 import { getYears } from "../util";
 
+import Month from "../component/common/Month.vue";
+
 const getInputElementValue = (el: VueWrapper) => el.get("input").element.value;
 const getInstanceModelValue = (el: VueWrapper) =>
   (el.vm.$props as any).modelValue!;
@@ -149,5 +151,44 @@ describe("LayDatePicker yearmonth type", () => {
     expect(datePickerInstance.emitted("update:modelValue")![0][0]).toBe(
       "2022-04"
     );
+  });
+
+  it("yearmonth disabled-date", async () => {
+    const wrapper = mount(LayDatePicker, {
+      props: {
+        type: "yearmonth",
+        modelValue: "2024-01",
+        disabledDate(date: Date): boolean {
+          return (
+            date.getFullYear() === 2023 && [1, 3].includes(date.getMonth() + 1)
+          );
+        },
+      },
+    });
+
+    await clickInput(wrapper);
+
+    const MonthInstance = wrapper.findComponent(Month);
+    const Lis2024 = MonthInstance.findAll(".laydate-month-list list");
+
+    Lis2024.forEach((li) => {
+      expect(li.element.classList.contains("layui-disabled")).toBeFalsy();
+    });
+
+    // 切换至上一年
+    const preBtn = MonthInstance.find(".layui-icon-prev");
+    await preBtn.trigger("click");
+    await sleep();
+
+    const Lis2023 = MonthInstance.findAll(".laydate-month-list list");
+
+    Lis2023.forEach((li, index) => {
+      // 1/3 月禁止
+      if (index === 0 || index === 2) {
+        expect(li.element.classList.contains("layui-disabled")).toBeTruthy();
+      } else {
+        expect(li.element.classList.contains("layui-disabled")).toBeFalsy();
+      }
+    });
   });
 });
