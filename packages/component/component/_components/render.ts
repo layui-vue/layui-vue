@@ -7,6 +7,9 @@ type RenderFunc = (props: Record<string, unknown>) => VNodeTypes;
 export default defineComponent({
   name: "LayRender",
   props: {
+    outProps: {
+      type: Object as PropType<Record<string, unknown>>,
+    },
     render: {
       type: [String, Function] as PropType<string | RenderFunc>,
     },
@@ -17,9 +20,13 @@ export default defineComponent({
   setup(props, ctx) {
     return () => {
       if (typeof props.render === "string") {
-        return props.slots?.[props.render]?.(ctx.attrs);
+        return (props.slots ?? ctx.slots)?.[props.render]?.(
+          Object.assign({}, props.outProps, ctx.attrs)
+        );
       }
-      return (props.render as RenderFunc)(ctx.attrs);
+      return (props.render as RenderFunc)(
+        Object.assign({}, props.outProps, ctx.attrs)
+      );
     };
   },
 });

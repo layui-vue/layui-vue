@@ -1,0 +1,212 @@
+@import "../checkbox/index.less";
+
+.layui-tree {
+  line-height: 22px;
+  overflow: hidden;
+
+  .layui-form-checkbox {
+    margin: 0 !important;
+  }
+
+  .layui-tree-loading {
+    font-size: 14px !important;
+    margin-right: 5px;
+  }
+
+  .layui-this .layui-tree-txt {
+    color: var(--global-checked-color) !important;
+  }
+
+  .layui-tree-iconClick {
+    position: relative;
+    margin: 0 10px;
+    color: #c0c4cc;
+  }
+
+  .layui-tree-set {
+    width: 100%;
+    position: relative;
+
+    .layui-tree-entry {
+      position: relative;
+      padding: 3px 0;
+      height: 26px;
+      line-height: 26px;
+      white-space: nowrap;
+
+      &:hover {
+        background-color: #eee;
+        border-radius: var(--global-border-radius);
+      }
+    }
+
+    .layui-tree-pack {
+      display: none;
+      padding-left: 20px;
+      position: relative;
+    }
+  }
+
+  &.layui-tree-line {
+    .layui-tree-pack .layui-tree-icon-no-pad-left {
+      margin-left: 0.4rem !important;
+    }
+
+    .layui-tree-icon-no-pad-left {
+      margin-left: 0rem !important;
+    }
+
+    .layui-tree-set:has(.layui-tree-icon-border) {
+      &.layui-tree-set:before {
+        content: "";
+        position: absolute;
+        top: 0px;
+        left: -0.6rem;
+        width: 0;
+        height: 100%;
+        border-left: 1px dotted #c0c4cc;
+      }
+
+      .layui-tree-icon-border {
+        height: 12px;
+        line-height: 12px;
+        width: 12px;
+        text-align: center;
+        border: 1px solid #c0c4cc;
+      }
+
+      .layui-icon {
+        font-size: 12px;
+        color: #666;
+      }
+    }
+
+    .layui-tree-set:has(.layui-tree-icon-no-border) {
+      &.layui-tree-set:before {
+        content: "";
+        position: absolute;
+        top: 0px;
+        left: -0.6rem;
+        width: 0;
+        height: 100%;
+        border-left: 1px dotted #c0c4cc;
+      }
+
+      .layui-tree-icon-no-border {
+        border: 1px solid transparent;
+        margin: 0 8px;
+      }
+
+      .layui-tree-pack .layui-tree-icon-no-border {
+        margin: 0 10px;
+      }
+    }
+
+    .layui-tree-pack {
+      border-left: 1px solid transparent;
+      padding-left: 25px !important;
+    }
+
+    .layui-tree-set .layui-tree-set:after {
+      content: "";
+      position: absolute;
+      top: 14px;
+      left: -0.6rem;
+      width: 17px;
+      height: 0;
+      border-top: 1px dotted #c0c4cc;
+    }
+
+    .layui-tree-pack
+      .layui-tree-set:last-child
+      .layui-tree-set:last-child::before {
+      height: 14px;
+    }
+
+    .layui-tree-set.layui-tree-set-end .layui-tree-set:last-child::before {
+      height: 14px;
+    }
+
+    .layui-tree-entry:hover {
+      background-color: rgba(0, 0, 0, 0);
+
+      .layui-tree-txt {
+        color: #999;
+        transition: 0.3s;
+      }
+    }
+  }
+
+  &.layui-tree-unline {
+    .layui-tree-iconClick {
+      width: 32px;
+      text-align: center;
+      margin: 0px;
+      display: inline-block;
+      vertical-align: middle;
+    }
+  }
+
+  .layui-tree-main {
+    height: 100%;
+    cursor: pointer;
+    padding-right: 10px;
+    display: flex;
+    align-items: center;
+    vertical-align: middle;
+
+    .layui-checkbox-label {
+      padding-right: 0px !important;
+    }
+  }
+}
+
+.layui-tree-iconClick .layui-icon-triangle-d,
+.layui-tree-iconClick .layui-icon-triangle-r {
+  font-size: 12px;
+}
+
+.layui-tree-btnGroup,
+.layui-tree-editInput {
+  position: relative;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.layui-tree-txt {
+  color: #555;
+}
+
+.layui-tree-search {
+  margin-bottom: 15px;
+  color: #666;
+}
+
+.layui-tree-btnGroup .layui-icon {
+  display: inline-block;
+  vertical-align: middle;
+  padding: 0 2px;
+  cursor: pointer;
+}
+
+.layui-tree-btnGroup .layui-icon:hover {
+  color: #999;
+  transition: 0.3s;
+}
+
+.layui-tree-entry:hover .layui-tree-btnGroup {
+  visibility: visible;
+}
+
+.layui-tree-editInput {
+  height: 26px;
+  line-height: 26px;
+  padding: 0 3px;
+  border: none;
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.layui-tree-emptyText {
+  text-align: center;
+  color: #999;
+}
