@@ -581,9 +581,9 @@ const shortcuts2 = [
 
 ```ts
 
-import type { ConfigType } from "dayjs";
+import type { Dayjs } from "dayjs";
 
-type DatePickerModelValueSingleType = ConfigType;
+type DatePickerModelValueSingleType = string | number | Date | Dayjs | null | undefined;
 
 interface Shortcuts {
   text: string | number;
