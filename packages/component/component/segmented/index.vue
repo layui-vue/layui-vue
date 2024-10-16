@@ -12,7 +12,7 @@
         class="layui-segmented-item"
         v-for="(item, i) in items"
         :key="i"
-        @click.prevent.stop="clickItem($event, item.label, i)"
+        @click.prevent.stop="clickItem(item.label)"
       >
         <input
           class="layui-segmented-item-radio"
@@ -35,8 +35,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, Ref, watch, onMounted, nextTick } from "vue";
+import { type Ref, ref, computed, watchEffect } from "vue";
 import { LaySegmentedProps } from "./interfaces";
+
+import { isString } from "../../utils";
 
 defineOptions({
   name: "LaySegmented",
@@ -55,16 +57,12 @@ const props = withDefaults(defineProps<LaySegmentedProps>(), {
 
 const segmentIndicator: Ref<HTMLElement | undefined> = ref();
 const segment: Ref<HTMLElement | undefined> = ref();
-const disabled = ref(props.disabled);
-const items = ref(
-  (() => {
-    return props.options.map((a) => {
-      return typeof a === "string" ? { label: a } : a;
-    });
-  })()
-);
-const currentItem = computed(() => {
-  return items.value.find((a) => a.label === props.modelValue);
+const _disabled = computed(() => props.disabled);
+
+const items = computed(() => {
+  return props.options.map((option) => {
+    return isString(option) ? { label: option } : option;
+  });
 });
 
 const rect = ref({
@@ -86,76 +84,37 @@ const setItem = (target: HTMLElement) => {
   rect.value.top = `${target.offsetTop ?? 0}px`;
 };
 
-const clickItem = (ev: Event, label: string, index: number) => {
-  if (disabled.value) return;
+const clickItem = (label: string) => {
+  if (_disabled.value) return;
+
+  emits("change", label);
+  emits("update:modelValue", label);
+};
+
+watchEffect(() => {
   if (props.name) {
     segment.value
       ?.querySelectorAll(".layui-segmented-item-radio")
       .forEach((radio) => {
         (radio as HTMLInputElement).checked = false;
       });
-    (
-      segment.value
-        ?.querySelectorAll(`.layui-segmented-item-radio`)
-        .item(index) as HTMLInputElement
-    ).checked = true;
-  }
-  let target = ev.target;
-  setItem(target as HTMLElement);
-  emits("change", label);
-  emits("update:modelValue", label);
-};
 
-const init = (val: any) => {
-  try {
-    if (props.name) {
-      segment.value
-        ?.querySelectorAll(".layui-segmented-item-radio")
-        .forEach((radio) => {
-          (radio as HTMLInputElement).checked = false;
-        });
-      (
-        segment.value
-          ?.querySelectorAll(`.layui-segmented-item-radio`)
-          .item(
-            items.value.findIndex((a) => a.label === props.modelValue)
-          ) as HTMLInputElement
-      ).checked = true;
+    const radioDom = segment.value
+      ?.querySelectorAll(`.layui-segmented-item-radio`)
+      .item(
+        items.value.findIndex((a) => a.label === props.modelValue)
+      ) as HTMLInputElement;
+
+    if (radioDom) {
+      radioDom.checked = true;
     }
-    setItem(
-      // @ts-ignore
-      segment?.value
-        ?.querySelectorAll(".layui-segmented-item")
-        // @ts-ignore
-        .item(items.value?.findIndex((a) => a.label === props.modelValue))
-    );
-  } catch (e) {
-    console.warn(`Cannot find label`, props.modelValue, `in`, items.value);
   }
-};
+  const itemDom = (segment?.value
+    ?.querySelectorAll(".layui-segmented-item")
+    .item(items.value?.findIndex((a) => a.label === props.modelValue)) ||
+    {}) as HTMLElement;
 
-watch(
-  () => props.modelValue,
-  (val) => init(val)
-);
-
-watch(
-  () => props.disabled,
-  (val) => (disabled.value = val)
-);
-
-watch(
-  () => props.options,
-  (val) =>
-    (items.value = val.map((i) => (typeof i === "string" ? { label: i } : i)))
-);
-
-onMounted(() => {
-  nextTick(() => init(props.modelValue));
-});
-
-defineExpose({
-  currentItem,
+  setItem(itemDom);
 });
 </script>
 
