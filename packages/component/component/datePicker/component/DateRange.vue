@@ -46,6 +46,10 @@ const monthRightRef = ref<DropdownRef>();
 const timeLeftRef = ref<DropdownRef>();
 const timeRightRef = ref<DropdownRef>();
 
+const _simple = computed(() => {
+  return props.simple && props.type !== "datetime";
+});
+
 const MONTH_NAME = computed(() => [
   t("datePicker.january"),
   t("datePicker.february"),
@@ -179,7 +183,7 @@ const handleDatePick = (value: number) => {
     endDate.value = _endDate;
   }
 
-  if (props.simple && startDate.value && endDate.value) {
+  if (_simple.value && startDate.value && endDate.value) {
     handleConfirm();
   }
 };
@@ -393,7 +397,7 @@ const handleConfirm = () => {
         </DateContent>
       </div>
     </div>
-    <Footer :showNow="false" :showConfirm="!simple" @confirm="handleConfirm">
+    <Footer :showNow="false" :showConfirm="!_simple" @confirm="handleConfirm">
       {{ startDate?.format(props.inputFormat) }}
       {{ props.rangeSeparator }}
       {{ endDate?.format(props.inputFormat) }}

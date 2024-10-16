@@ -134,7 +134,7 @@ const endTimeYearRange = ref("2022");
 ::: title 快速选择
 :::
 
-::: demo 设置 `simple` 属性后，只需要点击一次后自动关闭，无需点击确认按钮。
+::: demo 设置 `simple` 属性后，只需要点击一次后自动关闭，无需点击确认按钮。 对于 `datetime` 、 `time` 与对应 `range` 模式因交互影响无效。
 
 <template>
   <lay-form>
@@ -256,7 +256,7 @@ const limitTimeRange = ref([]);
 ::: title 格式化
 :::
 
-::: demo 目前在 type 等于`year`、`month`这类输出值为非组合值时无效，使用`format`属性任意组合吧
+::: demo `format` 用于格式化输出 `modelValue`，`inputFormat` 用于格式化输入框显示。
 
 <template>
   endTimeFormat: {{endTimeFormat}}
@@ -342,25 +342,25 @@ const shortcuts2 = [
 | type            | 选择类型                                                                 | `string`                                                                 | `date`              | `date` `datetime` `year` `month` `time` `yearmonth` | --       |
 | disabled        | 是否禁止修改                                                             | `boolean`                                                                | `false`             | —                                                   | —        |
 | readonly        | `input` 是否只读                                                         | `boolean`                                                                | `false`             | —                                                   | —        |
-| placeholder     | `input` 占位符                                                           | `string`                                                                 | --                  | —                                                   | —        |
+| placeholder     | `input` 占位符                           | `string` `Array<string>`                           | --                  | —                                                   | —        |
 | allow-clear     | 允许清空                                                                 | `boolean`                                                                | `false`             | --                                                  | --       |
 | simple          | 一次性选择，无需点击确认按钮                                             | `boolean`                                                                | `false`             | --                                                  | --       |
-| max             | 最大可选日期                                                             | `string`                                                                 | --                  | --                                                  | --       |
-| min             | 最小可选日期                                                             | `string`                                                                 | --                  | --                                                  | --       |
-| rang            | 是否范围选择                                                             | `boolean`                                                                | `false`             | --                                                  | --       |
+| max             | 最大可选日期                                            | `DatePickerModelValueSingleType `                                                                 | --                  | --                                                  | --       |
+| min             | 最小可选日期                                           | `DatePickerModelValueSingleType `                                                                 | --                  | --                                                  | --       |
+| range            | 是否范围选择                                                             | `boolean`                                                                | `false`             | --                                                  | --       |
 | range-separator | 范围分隔符                                                               | `string`                                                                 | `至`                | --                                                  | --       |
 | size            | 尺寸                                                                     | `string`                                                                 | `lg` `md` `sm` `xs` | `md`                                                | --       |
 | prefix-icon     | 前置图标                                                                 | `string`                                                                 | `layui-icon-date`   | 内置图标集                                          | `1.4.0`  |
 | suffix-icon     | 后置图标                                                                 | `string`                                                                 | --                  | 内置图标集                                          | `1.4.0`  |
 | timestamp       | 时间戳模式(13 位),仅对 date 和 datetime 有效                             | `boolean`                                                                | `false`             | `true` `false`                                      | `1.6.5`  |
-| format          | 输出格式化                                                               | `string`                                                                 | --                  | 例如`YYYY-MM-DD`                                    | -        |
-| input-format          | 输入框格式化                                                               | `string`                                                                 | --                  | 例如`YYYY-MM-DD`                                    | `2.19.0`    |
+| format          | 输出格式化                                                               | `string`                                                                 |   [查看映射](https://gitee.com/layui-vue/layui-vue/tree/master/packages/component/component/datePicker/hook/useDatePicker.ts#L56)                | 参考[dayjs format](https://day.js.org/docs/en/display/format#list-of-all-available-formats)                                    | -        |
+| input-format          | 输入框格式化                                                               | `string`                                                                 | [查看映射](https://gitee.com/layui-vue/layui-vue/tree/master/packages/component/component/datePicker/hook/useDatePicker.ts#L56)                  | 参考[dayjs format](https://day.js.org/docs/en/display/format#list-of-all-available-formats)                                    | `2.19.0`    |
 | default-value   | `首次未点击` 时，下拉弹窗打开时默认显示的时间，传空为组件首次 `渲染时间` | `DatePickerModelValueSingleType` `Array<DatePickerModelValueSingleType>` | --                  | --                                                  | `2.19.0` |
 | default-time    | 范围日期 `type=datetime` 时分秒默认时间                                  | `string` `Array<string>`                                                 | --                  | 例如`12:30:00`                                      | `2.17.2` |
 | content-style   | 内容自定义样式                                                           | `StyleValue`                                                             | --                  | --                                                  | --       |
 | content-class   | 内容自定义 Class                                                         | `string` `Array<string \| object>` `object`                              | --                  | --                                                  | --       |
 | year-page       | 年份选择器每页年份的个数           |  `number`            | `15`             | --|              `2.19.0`                    |      
-| shortcuts       | 设置快捷选项，需要传入数组对象       |  `Array<Shortcuts>`            | `15`             | --|              `2.19.0`                    |  
+| shortcuts       | 设置快捷选项，需要传入数组对象       |  `Array<Shortcuts>`            | --             | --|              `2.19.0`                    |  
 
 
 :::
