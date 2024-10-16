@@ -100,11 +100,26 @@ const handleEndInput = (value: string) => {
   }
 };
 
+const checkIsDisabled = (date: Dayjs) => {
+  if (props.disabledDate) {
+    return props.disabledDate(date.toDate());
+  }
+
+  if (props.min && date.isBefore(DatePickerContext.min)) {
+    return true;
+  }
+
+  if (props.max && date.isAfter(DatePickerContext.max)) {
+    return true;
+  }
+  return false;
+};
+
 const handleChange = () => {
   if (currentInputValue.value) {
     const checkDate = dayjs(inputValue.value as string, props.format);
 
-    if (checkDate.isValid()) {
+    if (checkDate.isValid() && !checkIsDisabled(checkDate)) {
       emits("update:modelValue", formatOutPutValue(checkDate)); //checkDate.format(props.format)
       currentInputValue.value = null;
     }
@@ -120,7 +135,10 @@ const handleStartChange = () => {
     props.format
   );
 
-  if (date.isValid()) {
+  if (
+    date.isValid() &&
+    (inputValue.value?.[1] ? date.isBefore(inputValue.value?.[1]) : true)
+  ) {
     currentInputValue.value = [
       date.format(props.format),
       inputValue.value?.[1] || null,
@@ -131,7 +149,10 @@ const handleStartChange = () => {
       dayjs(currentInputValue.value[1] || null, props.format),
     ];
 
-    if (checkRangeValue(modelValue)) {
+    if (
+      checkRangeValue(modelValue) &&
+      modelValue.every((date) => !checkIsDisabled(date))
+    ) {
       emits("update:modelValue", formatOutPutValue(modelValue));
       currentInputValue.value = null;
     }
@@ -144,7 +165,10 @@ const handleEndChange = () => {
     props.format
   );
 
-  if (date.isValid()) {
+  if (
+    date.isValid() &&
+    (inputValue.value?.[0] ? date.isAfter(inputValue.value?.[0]) : true)
+  ) {
     currentInputValue.value = [
       inputValue.value?.[0] || null,
       date.format(props.format),
@@ -155,7 +179,10 @@ const handleEndChange = () => {
       date,
     ];
 
-    if (checkRangeValue(modelValue)) {
+    if (
+      checkRangeValue(modelValue) &&
+      modelValue.every((date) => !checkIsDisabled(date))
+    ) {
       emits("update:modelValue", formatOutPutValue(modelValue));
       currentInputValue.value = null;
     }

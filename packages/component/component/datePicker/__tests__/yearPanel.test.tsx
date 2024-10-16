@@ -279,5 +279,15 @@ describe("LayDatePicker year type", () => {
 
     expect(preLi?.className).toBe("layui-disabled");
     expect(nextLi?.className).toBe("layui-disabled");
+
+    const inputDom = wrapper.find("input");
+
+    inputDom.element.value = "2025";
+    await inputDom.trigger("input");
+    await inputDom.trigger("change");
+
+    await sleep();
+    const datePicker = wrapper.findComponent(LayDatePicker);
+    expect(datePicker.props("modelValue")).toEqual("2024");
   });
 });
