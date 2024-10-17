@@ -22,7 +22,7 @@ export interface ProgressProps {
   circleSize?: number;
   circleWidth?: number;
   animated?: boolean;
-  fullAnimated?: boolean;
+  animationDuration?: number;
   indeterminate?: boolean;
 }
 
@@ -34,6 +34,9 @@ const props = withDefaults(defineProps<ProgressProps>(), {
   circle: false,
   circleSize: 150,
   circleWidth: 6,
+  size: "md",
+  theme: "",
+  animationDuration: 3000,
 });
 
 const getColorByTheme = (theme?: string) => {
@@ -97,6 +100,7 @@ const normalizePercent = () => {
 };
 
 const percents = computed(() => normalizePercent());
+const animateDuration = computed(() => `${props.animationDuration ?? 3000}ms`);
 
 const percentsTotal = computed(() =>
   percents.value.map((i) => i.percent).reduce((a, b) => a + b, 0)
@@ -174,24 +178,35 @@ const getPathD = computed(() => {
     :class="[
       'layui-progress-' + size,
       {
-        'layui-progress-animated':
-          animated && !indeterminate && (percentsTotal < 100 || fullAnimated),
+        'layui-progress-animated': animated && !indeterminate,
+        'layui-progress-indeterminate': indeterminate,
       },
-      { 'layui-progress-indeterminate': indeterminate },
     ]"
     v-else
   >
     <div class="layui-progress-bar-container">
-      <div
-        class="layui-progress-bar"
-        :style="linearStyles.at(v)"
-        v-for="(i, v) in percents"
-        :key="v"
+      <template v-if="!indeterminate">
+        <div
+          class="layui-progress-bar"
+          :style="linearStyles.at(v)"
+          v-for="(i, v) in percents"
+          :key="v"
+        >
+          <span v-if="i.showText" class="layui-progress-text">
+            {{ i.text ? i.text : i.percent + "%" }}
+          </span>
+        </div></template
       >
-        <span v-if="i.showText" class="layui-progress-text">
-          {{ i.text ? i.text : i.percent + "%" }}
-        </span>
-      </div>
+      <template v-else>
+        <div
+          :style="{ backgroundColor: color ?? getColorByTheme(theme) }"
+          class="layui-progress-infinite-bar1"
+        ></div>
+        <div
+          :style="{ backgroundColor: color ?? getColorByTheme(theme) }"
+          class="layui-progress-infinite-bar2"
+        ></div>
+      </template>
     </div>
   </div>
 </template>
@@ -202,19 +217,27 @@ const getPathD = computed(() => {
   position: absolute;
   background-color: #fff;
   height: 100%;
+  top: 0;
+  left: 0;
   width: v-bind(percentMaxWidth);
   border-radius: var(--progress-bar-border-radius);
-  animation: progressMove 2s ease-in-out infinite;
+  animation: progressMove ease-in-out infinite;
+  animation-duration: v-bind(animateDuration);
 }
 
-.layui-progress-indeterminate::after {
-  content: "";
+.layui-progress-infinite-bar1 {
   position: absolute;
-  background-color: #fff;
-  opacity: 0.8;
   height: 100%;
-  border-radius: calc(var(--progress-bar-border-radius) * -1);
-  animation: progressIndeterminate 3s linear infinite;
+  border-radius: var(--progress-bar-border-radius);
+  animation: progressIndeterminate1 2.5s ease-in infinite;
+}
+
+.layui-progress-infinite-bar2 {
+  position: absolute;
+  height: 100%;
+  border-radius: var(--progress-bar-border-radius);
+  animation: progressIndeterminate2 2.5s ease-out infinite;
+  animation-delay: 1.2s;
 }
 
 @keyframes progressMove {
@@ -233,40 +256,37 @@ const getPathD = computed(() => {
   }
 }
 
-@keyframes progressIndeterminate {
+@keyframes progressIndeterminate1 {
   0% {
-    left: 0;
-    width: 0;
-  }
-
-  20% {
-    left: 50%;
-    width: 50%;
-  }
-
-  40% {
-    left: 100%;
-    width: 0;
-  }
-
-  50% {
-    left: 0;
-    width: 0;
+    left: -35%;
+    right: 100%;
   }
 
   60% {
-    left: 0%;
-    width: 100%;
-  }
-
-  80% {
-    left: 60%;
-    width: 40%;
+    left: 100%;
+    right: -90%;
   }
 
   100% {
     left: 100%;
-    width: 0%;
+    right: -90%;
+  }
+}
+
+@keyframes progressIndeterminate2 {
+  0% {
+    left: -200%;
+    right: 100%;
+  }
+
+  60% {
+    left: 107%;
+    right: -8%;
+  }
+
+  100% {
+    left: 107%;
+    right: -8%;
   }
 }
 </style>

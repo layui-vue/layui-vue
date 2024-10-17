@@ -35,18 +35,26 @@ export default {
 ::: title 动画
 :::
 
-::: demo 使用 `animated` 开启动画。**不可与 `indeterminate` 共用。** 默认在进度达到 100% 时停止动画，你可以指定 `full-animated` 属性来保持动画。
+::: demo 使用 `animated` 开启动画。**不可与 `indeterminate` 共用。**
 
 <template>
   <div style="display: flex; flex-direction: column; gap: 8px;">
     <LayProgress animated :percent="50"></LayProgress>
-    <LayProgress animated :percent="100"></LayProgress>
-    <LayProgress animated full-animated :percent="100"></LayProgress>
+    <LayProgress animated :percent="percent1"></LayProgress>
+    <LayProgress :animated="percent1<100" :percent="percent1"></LayProgress>
   </div>
 </template>
 
 <script lang="ts">
 import { ref } from "vue";
+export default {
+  setup() {
+    const percent1 = ref(100);
+    return {
+      percent1
+    }
+  }
+}
 </script>
 
 :::
@@ -54,10 +62,16 @@ import { ref } from "vue";
 ::: title 无限进度条
 :::
 
-::: demo 使用 `indeterminate` 属性创建无限进度条。**不可与 `animated` 共用。**
+::: demo 使用 `indeterminate` 属性创建无限进度条。**不可与 `animated` 共用。** 通过 `theme` 或 `color` 改变颜色
 
 <template>
-  <LayProgress indeterminate></LayProgress>
+  <div style="display: flex; flex-direction: column; gap: 8px;">
+    <LayProgress indeterminate></LayProgress>
+    <LayProgress indeterminate theme="green"></LayProgress>
+    <LayProgress indeterminate theme="orange"></LayProgress>
+    <LayProgress indeterminate theme="cyan"></LayProgress>
+    <LayProgress indeterminate color="#de0123"></LayProgress>
+  </div>
 </template>
 
 <script lang="ts">
@@ -218,20 +232,20 @@ export default {
 
 ::: table
 
-| 属性           | 描述               | 类型              | 可选值                                        | 默认值  | 版本     |
-| -------------- | ------------------ | ----------------- | --------------------------------------------- | ------- | -------- |
-| percent        | 进度               | `number` `string` | --                                            |         |          |
-| theme          | 主题               | `string`          | `orange` `green` `cyan` `blue` `black` `gray` |         |          |
-| size           | 尺寸               | `string`          | `big`                                         |         |          |
-| text           | 提示               | `string`          | --                                            |         |          |
-| color          | 颜色               | `string`          | --                                            |         |          |
-| show-text      | 展示描述           | `boolean`         | --                                            |         |          |
-| circle         | 环形进度条         | `boolean`         |                                               | `false` |          |
-| circle-size    | 环形进度条尺寸     | `number`          | 默认为 `150` 单位是 px                        | `150`   |          |
-| circle-width   | 环形进度条线条宽度 | `number`          | 默认为 `6` 单位是 px                          | `6`     |          |
-| animated       | 是否开启动画       | `boolean`         | --                                            | `false` | `2.19.0` |
-| full-animated  | 是否开启全动画     | `boolean`         | --                                            | `false` | `2.19.0` |
-| indeeterminate | 是否为无限进度条   | `boolean`         | --                                            | `false` | `2.19.0` |
+| 属性               | 描述               | 类型              | 可选值                                        | 默认值  | 版本     |
+| ------------------ | ------------------ | ----------------- | --------------------------------------------- | ------- | -------- |
+| percent            | 进度               | `number` `string` | --                                            |         |          |
+| theme              | 主题               | `string`          | `orange` `green` `cyan` `blue` `black` `gray` |         |          |
+| size               | 尺寸               | `string`          | `big`                                         |         |          |
+| text               | 提示               | `string`          | --                                            |         |          |
+| color              | 颜色               | `string`          | --                                            |         |          |
+| show-text          | 展示描述           | `boolean`         | --                                            |         |          |
+| circle             | 环形进度条         | `boolean`         |                                               | `false` |          |
+| circle-size        | 环形进度条尺寸     | `number`          | 默认为 `150` 单位是 px                        | `150`   |          |
+| circle-width       | 环形进度条线条宽度 | `number`          | 默认为 `6` 单位是 px                          | `6`     |          |
+| animated           | 是否开启动画       | `boolean`         | --                                            | `false` | `2.19.0` |
+| animation-duration | 动画时长（毫秒）   | `number`          | --                                            | `3000`  | `2.19.0` |
+| indeeterminate     | 是否为无限进度条   | `boolean`         | --                                            | `false` | `2.19.0` |
 
 :::
 
