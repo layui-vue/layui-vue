@@ -1362,7 +1362,7 @@ const data7 = ref([{
 | load                  | 加载子树数据的方法，仅当 `lazy` 属性为 `true` 时生效             | `function(node, resolve)`，node 为当前点击的节点，resolve 为数据加载完成的回调(必须调用) | --                              | --                  |
 | replace-fields        | 替换 data 中`id` `title` `children` 字段名                       | --                                         | --                              | `{id: "id", title: "title", children: "children"}`                  |
 | default-expand-all    | 是否展开所有 `tree` 节点                                         | `boolean`                                                                                | --                              | `false`             |
-| teleport-props        | 继承至 dropdown 组件，下拉面板 `传递` 属性                       | `object`                                                                                 | `{to: 'body', disabled: false}` | `vue teleport` 组件 | <lay-tag type="primary" size="sm">2.19.0 新增</lay-tag> |
+| teleport-props        | 继承至 dropdown 组件，下拉面板 `传递` 属性                       | `object`                                                                                 | `{to: 'body', disabled: false}` | `vue teleport` 组件 | `2.19.0` |
 
 :::
 

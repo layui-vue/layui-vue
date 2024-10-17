@@ -15,7 +15,7 @@ import {
   StyleValue,
 } from "vue";
 
-export interface AiffxProps {
+export interface AffixProps {
   offset?: number;
   target?: HTMLElement;
   position?: string;
@@ -25,7 +25,7 @@ defineOptions({
   name: "LayAffix",
 });
 
-const props = withDefaults(defineProps<AiffxProps>(), {
+const props = withDefaults(defineProps<AffixProps>(), {
   offset: 0,
   position: "top",
   target: () => {

@@ -1,10 +1,15 @@
 import { mount } from "@vue/test-utils";
 import { afterEach, describe, expect, test } from "vitest";
+<<<<<<< HEAD
 import { nextTick, ref } from "vue";
+=======
+import { nextTick } from "vue";
+>>>>>>> 2.x
 import { sleep } from "../../../test-utils";
 
 import LayDatePicker from "../index.vue";
 import LayDropdown from "../../dropdown/index.vue";
+<<<<<<< HEAD
 import Year from "../component/common/Year.vue";
 import Footer from "../component/common/Footer.vue";
 import Shortcuts from "../component/common/Shortcuts.vue";
@@ -17,11 +22,21 @@ const mockInputClick = async (wrapper: any) => {
 };
 
 describe("LayDatePicker year type", () => {
+=======
+import YearPanel from "../components/YearPanel.vue";
+import { getYears } from "../day";
+
+describe("YearPanel", () => {
+>>>>>>> 2.x
   afterEach(() => {
     document.querySelectorAll(".layui-popper").forEach((el) => el.remove());
   });
 
+<<<<<<< HEAD
   test("year render", async () => {
+=======
+  test("render", async () => {
+>>>>>>> 2.x
     const wrapper = mount(LayDatePicker, {
       props: {
         type: "year",
@@ -32,6 +47,7 @@ describe("LayDatePicker year type", () => {
     const datePickerInstance = wrapper.findComponent(LayDatePicker);
     const dropdownInstance = datePickerInstance.findComponent(LayDropdown);
     await nextTick();
+<<<<<<< HEAD
 
     await datePickerInstance.find(".layui-input").trigger("click");
     await nextTick();
@@ -39,12 +55,22 @@ describe("LayDatePicker year type", () => {
 
     const yearPanelInstance = datePickerInstance.findComponent(Year);
 
+=======
+    datePickerInstance.find(".layui-input").trigger("click");
+    await nextTick();
+    await sleep();
+    const yearPanelInstance = datePickerInstance.findComponent(YearPanel);
+>>>>>>> 2.x
     expect(dropdownInstance.exists()).toBe(true);
     expect((dropdownInstance.vm as any).open).toBe(true);
     expect(yearPanelInstance.findAll("li").length).toBe(getYears().length);
   });
 
+<<<<<<< HEAD
   test("year 外部修改modelValue 内部状态更新", async () => {
+=======
+  test("year 修改", async () => {
+>>>>>>> 2.x
     const wrapper = mount(LayDatePicker, {
       props: {
         type: "year",
@@ -54,6 +80,7 @@ describe("LayDatePicker year type", () => {
 
     const datePickerInstance = wrapper.findComponent(LayDatePicker);
     await nextTick();
+<<<<<<< HEAD
     await datePickerInstance.find(".layui-input").trigger("click");
     await nextTick();
     await sleep();
@@ -61,11 +88,20 @@ describe("LayDatePicker year type", () => {
     const yearPanelInstance = datePickerInstance.findComponent(Year);
     expect(yearPanelInstance.exists()).toBe(true);
     expect((yearPanelInstance.vm as any).currentYear).toBe(2024);
+=======
+    datePickerInstance.find(".layui-input").trigger("click");
+    await nextTick();
+    await sleep();
+    const yearPanelInstance = datePickerInstance.findComponent(YearPanel);
+    expect(yearPanelInstance.exists()).toBe(true);
+    expect((yearPanelInstance.vm as any).Year).toBe(2024);
+>>>>>>> 2.x
 
     wrapper.setProps({
       modelValue: "2023/10/01 10:00:00",
     });
     await nextTick();
+<<<<<<< HEAD
     await sleep();
 
     expect((yearPanelInstance.vm as any).currentYear).toBe(2023);
@@ -289,5 +325,9 @@ describe("LayDatePicker year type", () => {
     await sleep();
     const datePicker = wrapper.findComponent(LayDatePicker);
     expect(datePicker.props("modelValue")).toEqual("2024");
+=======
+    // FIXME : 修改 modelValue 后，YearPanel 的 Year 属性没有更新
+    // expect((yearPanelInstance.vm as any).Year).toBe(2023);
+>>>>>>> 2.x
   });
 });

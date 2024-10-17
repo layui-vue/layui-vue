@@ -13,6 +13,7 @@ import {
   onBeforeUnmount,
   nextTick,
 } from "vue";
+import { useResizeObserver, type UseResizeObserverReturn } from "@vueuse/core";
 import LayCheckbox from "../checkbox/index.vue";
 import LayDropdown from "../dropdown/index.vue";
 import LayEmpty from "../empty/index.vue";
@@ -436,7 +437,7 @@ const exportData = () => {
             // 如果 rowspan 和 colspan 是 0 说明该列作为合并列的辅助列。
             // 则不再进行结构拼接。
             if (rowspan != 0 && colspan != 0) {
-              tableStr += `<td colspan=${colspan} rowspan=${rowspan}>${
+              tableStr += `<td colspan=${colspan} rowspan=${rowspan} x:str>${
                 columnData ? columnData[tableColumn.key] : ""
               }</td>`;
             }
@@ -472,6 +473,8 @@ const thSort = (e: Event, key: string) => {
   const spanDom = (e.currentTarget as HTMLElement).querySelector(
     "span[lay-sort]"
   ) as HTMLSpanElement;
+
+  if (!spanDom) return;
 
   const sortValue = spanDom.getAttribute("lay-sort") as SortType;
 
@@ -596,6 +599,8 @@ watch(
   }
 );
 
+let resizeInstance: UseResizeObserverReturn | null;
+
 onMounted(() => {
   nextTick(() => {
     getScrollWidth();
@@ -615,10 +620,10 @@ onMounted(() => {
     getScrollWidth();
   });
 
-  window.onresize = () => {
+  resizeInstance = useResizeObserver(tableBody, () => {
     getScrollWidth();
     getFixedColumn();
-  };
+  });
 });
 
 const getFixedColumn = () => {
@@ -965,7 +970,7 @@ const toolbarStyle = (toolbarName: string) => {
 };
 
 onBeforeUnmount(() => {
-  window.onresize = null;
+  resizeInstance?.stop();
 });
 
 const getCheckData = () => {

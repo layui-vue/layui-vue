@@ -419,7 +419,7 @@ export default {
 | contentStyle        | 内容自定义样式                     | `StyleValue`                                | --                  | --       |    |
 | contentClass        | 内容自定义 Class                   | `string` `Array<string \| object>` `object` | --                  | --       |    |
 | options (items)   |  传入选项                | `Array<Object>` | --                  | --       |    |
-| teleportProps       | 继承至 dropdown 组件，下拉面板 `传递` 属性  | `object`             | `{to: 'body', disabled: false}`   |  `vue teleport` 组件  | <lay-tag type="primary" size="sm">2.19.0新增</lay-tag> |
+| teleportProps       | 继承至 dropdown 组件，下拉面板 `传递` 属性  | `object`             | `{to: 'body', disabled: false}`   |  `vue teleport` 组件  | `2.19.0` |
 :::
 
 ::: title Select 事件
@@ -431,8 +431,8 @@ export default {
 | ------ | -------------- | ----------------------- |-------- |
 | change | 切换事件       | value                   |  - |
 | search | 关键词变化事件 | 用户输入的关键词 string |  -  |
-| remove-tag | 多选场景删除tag | 删除的选项value | <lay-tag type="primary" size="sm">2.18.3新增</lay-tag> |
-| clear | 点击清空icon | - |<lay-tag type="primary" size="sm">2.18.3新增</lay-tag>|
+| remove-tag | 多选场景删除tag | 删除的选项value | `2.18.3` |
+| clear | 点击清空icon | - | `2.18.3` |
 
 :::
 

@@ -601,7 +601,7 @@ const schema5 = reactive({
 |slots | 插槽集合 `object` | -|
 |listeners | listeners 事件集合 | `object` | - |
 |colProps | 栅格布局 `props`集合<br>可查看[gridProps](http://www.layui-vue.com/zh-CN/components/grid) | `ColProps` | - |
-| 支持所有 form-item 中的 props 属性<br>[formItemProps 快捷查看](http://www.layui-vue.com/zh-CN/components/formItem)|
+| 支持所有 form-item 中的 props 属性<br>[formItemProps 快捷查看](https://www.layui-vue.com/zh-CN/components/form#表单项(form-item)属性)|
 :::
 
 ::: title slots

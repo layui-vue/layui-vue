@@ -1,6 +1,7 @@
 import { nextTick, ref } from "vue";
 import { describe, expect, test } from "vitest";
 import { mount } from "@vue/test-utils";
+import { sleep } from "../../../test-utils";
 
 import LayTree from "../index.vue";
 import LayCheckbox from "../../checkboxV2/index.vue";
@@ -244,5 +245,58 @@ describe("LayTree", () => {
     expect(vm.props("checkedKeys")).toEqual([
       1, 2, 5, 6, 7, 3, 8, 12, 13, 9, 4, 10, 11,
     ]);
+  });
+
+  test("show-line 为false时， 点击最后一级展开报错", async () => {
+    const wrapper = mount({
+      setup() {
+        const data = ref([
+          {
+            title: "一级1",
+            id: 1,
+            children1: [
+              {
+                title: "二级1-1",
+                id: 3,
+              },
+            ],
+          },
+        ]);
+
+        const replaceFields = {
+          title: "title",
+          id: "id",
+          children: "children1",
+        };
+
+        return () => (
+          <LayTree
+            data={data.value}
+            tailNodeIcon={false}
+            onlyIconControl={false}
+            replaceFields={replaceFields}
+            show-line={false}
+          ></LayTree>
+        );
+      },
+    });
+
+    await nextTick();
+
+    const expandIcon = wrapper.findAll(
+      ".layui-tree-entry .layui-tree-iconClick .layui-icon"
+    );
+
+    expect(expandIcon.length).toBe(1);
+
+    await expandIcon[0].trigger("click");
+
+    await nextTick();
+    await sleep(200);
+
+    // 获取展开之后的dom数，正常应为2
+    const NewDom = wrapper.findAll(".layui-tree-entry");
+
+    expect(NewDom.length).toBe(2);
   });
 });
