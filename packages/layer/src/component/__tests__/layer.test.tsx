@@ -1,8 +1,7 @@
 import { nextTick, h, defineComponent } from "vue";
-import { describe, expect, it, test } from "vitest";
-import { layer } from "../index";
-import { afterEach } from "node:test";
-import { sleep } from "../../../component/test-utils";
+import { afterEach, describe, expect, it, test } from "vitest";
+import { layer } from "../../index";
+import { sleep } from "../../../../component/test-utils";
 
 const CustomComponent = defineComponent({
   setup(props, ctx) {
