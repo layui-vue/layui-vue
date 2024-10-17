@@ -65,8 +65,8 @@ export interface LayerProps {
     | "photos"
     | "notify"
     | "prompt";
-  title?: string | boolean | Function | PropsContentType;
-  footer?: string | boolean | Function | PropsContentType;
+  title?: PropsContentType;
+  footer?: PropsContentType;
   titleStyle?: string | StyleValue;
   footerStyle?: string | StyleValue;
   content?: PropsContentType;
@@ -912,13 +912,9 @@ defineExpose({ reset, open, close, full, min: mini, revert });
         ></HeaderBtn>
         <!-- 操作栏 -->
         <div :style="min === true ? 'display:none' : ''">
-          <template v-if="slots.footer">
-            <div class="layui-layer-footer">
+          <template v-if="slots.footer || props.footer">
+            <Footer :footer="props.footer!" :footerStyle="props.footerStyle">
               <slot name="footer"></slot>
-            </div>
-          </template>
-          <template v-else-if="props.footer">
-            <Footer :footer="props.footer" :footerStyle="props.footerStyle">
             </Footer>
           </template>
           <template v-else>

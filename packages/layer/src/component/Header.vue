@@ -1,10 +1,12 @@
 <script lang="ts" setup>
 import { PropsContentType } from "../types";
-import { RenderFunction, StyleValue, computed } from "vue";
-import LayRender from "../../../component/component/_components/render";
+import { StyleValue, computed } from "vue";
+import LayRender from "@layui/component/component/_components/render";
+
+import { renderContent } from "../utils";
 
 export interface HeaderProps {
-  title: string | boolean | Function | PropsContentType;
+  title: PropsContentType;
   titleStyle: string | StyleValue;
   move: boolean;
 }
@@ -22,6 +24,8 @@ const titleStyle = computed(() => {
 
 <template>
   <div class="layui-layer-title" :style="titleStyle">
-    <LayRender :render="() => (title as RenderFunction)"></LayRender>
+    <slot>
+      <LayRender :render="() => renderContent(title)"></LayRender>
+    </slot>
   </div>
 </template>

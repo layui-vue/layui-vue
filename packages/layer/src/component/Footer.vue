@@ -1,10 +1,12 @@
 <script lang="ts" setup>
 import { PropsContentType } from "../types";
-import { RenderFunction, StyleValue, computed } from "vue";
-import LayRender from "../../../component/component/_components/render";
+import { StyleValue } from "vue";
+import LayRender from "@layui/component/component/_components/render";
+
+import { renderContent } from "../utils";
 
 export interface FooterProps {
-  footer: string | boolean | Function | PropsContentType;
+  footer: PropsContentType;
   footerStyle: string | StyleValue;
 }
 
@@ -17,6 +19,8 @@ const props = defineProps<FooterProps>();
 
 <template>
   <div class="layui-layer-footer" :style="footerStyle">
-    <LayRender :render="() => (footer as RenderFunction)"></LayRender>
+    <slot>
+      <LayRender :render="() => renderContent(footer)"></LayRender>
+    </slot>
   </div>
 </template>
