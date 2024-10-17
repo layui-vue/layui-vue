@@ -149,7 +149,10 @@ provide(SPLITPANEL_INJECTION_KEY, {
 <template>
   <div
     ref="target"
-    :class="['lay-split-panel', vertical ? 'lay-split-panel-vertical' : '']"
+    :class="[
+      'lay-split-panel',
+      `lay-split-panel-${vertical ? 'vertical' : 'horizontal'}`,
+    ]"
     :style="{
       cursor: domStatus ? (!vertical ? 'col-resize' : 'row-resize') : '',
     }"

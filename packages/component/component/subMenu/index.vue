@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { DropdownTeleportProps } from "../dropdown/interface";
+
 import { computed, inject, ref, Ref, useSlots, watchEffect } from "vue";
 import LayTransition from "../transition/index.vue";
 import SubMenuPopup from "./SubMenuPopup.vue";
@@ -8,6 +10,7 @@ import { provideLevel, default as useLevel } from "../menu/useLevel";
 export interface SubMenuProps {
   id?: string;
   title?: string;
+  teleportProps?: DropdownTeleportProps;
 }
 
 defineOptions({
@@ -15,7 +18,11 @@ defineOptions({
 });
 
 const slots = useSlots();
-const props = defineProps<SubMenuProps>();
+const props = withDefaults(defineProps<SubMenuProps>(), {
+  teleportProps: () => ({
+    disabled: true,
+  }),
+});
 
 const { level } = useLevel();
 const isTree: Ref<boolean> = inject("isTree") as Ref<boolean>;
@@ -106,7 +113,7 @@ const openHandle = function () {
       </lay-transition>
     </template>
   </li>
-  <SubMenuPopup v-else :id="id">
+  <SubMenuPopup v-else :id="id" :teleportProps="teleportProps">
     <template v-if="slots.icon" #icon>
       <slot name="icon"></slot>
     </template>

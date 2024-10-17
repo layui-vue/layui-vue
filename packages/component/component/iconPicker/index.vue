@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import "./index.less";
-import { computed, h, ref, StyleValue } from "vue";
-import { LayIcon, LayIconList } from "@layui/icons-vue";
+import type { DropdownTeleportProps } from "../dropdown/interface";
+import { computed, h, Ref, ref, StyleValue } from "vue";
+import { LayIconList as icons, LayIcon } from "@layui/icons-vue";
 import LayDropdown from "../dropdown/index.vue";
 import useProps from "./index.hooks";
 import LayRender from "../_components/render";
@@ -35,19 +36,20 @@ export interface IconPickerProps {
   contentStyle?: StyleValue;
   /**
    * 图标集
-   * @version 2.19.0
+   * @version 2.19.1
    */
   iconSets?: Array<string | IconSets>;
   /**
    * 当前图标集
-   * @version 2.19.0
+   * @version 2.19.1
    */
   currentIconSet?: string;
   /**
    * 是否显示图标集
-   * @version 2.19.0
+   * @version 2.19.1
    */
   showIconSets?: boolean;
+  teleportProps?: DropdownTeleportProps;
 }
 
 defineOptions({
@@ -70,7 +72,7 @@ props.iconSets?.forEach((element) => {
         _iconSets.set("layui", {
           name: "layui",
           title: "Layui",
-          icons: LayIconList,
+          icons,
         });
         break;
 
@@ -160,9 +162,9 @@ const renderWrapper = () => {
     :disabled="disabled"
     :contentClass="contentClass"
     :contentStyle="contentStyle"
+    :teleportProps="teleportProps"
     @hide="openState = false"
     @show="openState = true"
-    updateAtScroll
   >
     <div
       class="layui-border-box layui-iconpicker layui-iconpicker-split"

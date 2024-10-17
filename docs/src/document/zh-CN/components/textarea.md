@@ -193,10 +193,13 @@ export default {
 ::: title 自动高度
 :::
 
-::: demo 使用 `lay-textarea` 标签, 创建文本域
+::: demo 使用 `lay-textarea` 标签, 创建文本域。支持指定最小高度与最大高度，也可以提供最小行数和最大行数。
 
 <template>
-  <lay-textarea placeholder="请输入描述" :autosize="{minHeight: 100, maxHeight: 200}"  v-model="data1"></lay-textarea>
+  <lay-space direction="vertical" style="width: 100%;">
+    <lay-textarea placeholder="请输入描述" :autosize="{minHeight: 100, maxHeight: 200}" v-model="data1"></lay-textarea>
+    <lay-textarea placeholder="请输入描述" :autosize="{minRow: 3, maxRow: 5}" v-model="data1"></lay-textarea>
+  </lay-space>
 </template>
 
 <script>
@@ -214,6 +217,11 @@ export default {
 }
 </script>
 
+:::
+
+::: quote 
+建议优先使用最小行数和最大行数，这样就不必担心某一行文本正好卡在中间导致显示不全了。
+**不要**与 `rows` 同时使用。
 :::
 
 ::: title 固定行列
@@ -242,22 +250,27 @@ export default {
 
 :::
 
+::: quote
+**不要**与 `autosize` 同时使用。
+:::
+
 ::: title Textarea 属性
 :::
 
 ::: table
 
-| 属性        | 描述          | 可选值         |可选值         |
-| ----------- | ------------- | -------------- | -------------- |
-| name        | 原始属性 name | --             | |
-| placeholder | 提示信息      | --             | |
-| show-count  | 显示字数       | `true` `false`  | |
-| disabled    | 禁用          | `true` `false` | |
-| v-model     | 值            | --             | |
-| maxlength   | 限制输入长度   | --             | |
-| rows   | 原生 rows 属性       | --             | 1.8.7 |
-| cols   | 原生 cols 属性      | --             | 1.8.7 |
-| autosize | 高度自适应 { maxHeight: 300, minHeight: 100 }      | --             | 2.3.8 |
+| 属性          | 描述           | 默认值  | 可选值                                                                  | 版本  |
+| ------------- | -------------- | ------- | ----------------------------------------------------------------------- | ----- |
+| _name_        | 原始属性 name  |         | --                                                                      |       |
+| _placeholder_ | 提示信息       |         | --                                                                      |       |
+| _show-count_  | 显示字数       | `false` | `true` `false`                                                          |       |
+| _disabled_    | 禁用           | `false` | `true` `false`                                                          |       |
+| _v-model_     | 绑定值         |         | --                                                                      |       |
+| _maxlength_   | 限制输入长度   |         | --                                                                      |       |
+| _rows_        | 原生 rows 属性 |         | --                                                                      | 1.8.7 |
+| _cols_        | 原生 cols 属性 |         | --                                                                      | 1.8.7 |
+| _autosize_    | 高度自适应     | `false` | `false` `TextareaAutosizeHeight (2.3.8)` `TextareaAutosizeRow (2.19.0)` |       |
+
 :::
 
 ::: title Textarea 事件
@@ -265,11 +278,11 @@ export default {
 
 ::: table
 
-| 事件  | 描述            | 可选值           |
-| ----- | --------------- | ---------------- |
-| input | 原生 input 事件 | event : 事件对象 |
-| foucs | 原生 foucs 事件 | event : 事件对象 |
-| blur  | 原生 blur 事件  | --               |
+| 事件    | 描述            | 可选值           | 版本 |
+| ------- | --------------- | ---------------- | ---- |
+| _input_ | 原生 input 事件 | event : 事件对象 |      |
+| _foucs_ | 原生 foucs 事件 | event : 事件对象 |      |
+| _blur_  | 原生 blur 事件  | --               |      |
 
 :::
 
@@ -278,10 +291,28 @@ export default {
 
 ::: table
 
-| 名称  | 描述                | 参数                        |
-| ----- | -------------------| -------------------------- |
-| focus | 原生 focus事件      | --                         |
-| blur  | 原生 blur 事件      | --                         |
+| 名称    | 描述            | 参数 | 版本 |
+| ------- | --------------- | ---- | ---- |
+| _focus_ | 原生 focus 事件 | --   |      |
+| _blur_  | 原生 blur 事件  | --   |      |
+
+::: title Types
+:::
+
+```ts
+/**
+ * @deprecated minHeight 和 maxHeight 并不是最佳的显示方式，请考虑使用 TextareaAutosizeRow
+ */
+export type TextareaAutosizeHeight = {
+  minHeight: number;
+  maxHeight: number;
+};
+
+export type TextareaAutosizeRow = {
+  minRow: number;
+  maxRow: number;
+};
+```
 
 ::: previousNext textarea
 :::

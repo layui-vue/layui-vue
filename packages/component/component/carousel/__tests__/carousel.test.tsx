@@ -1,4 +1,4 @@
-import { reactive, nextTick } from "vue";
+import { reactive, nextTick, h, Fragment, Text, render, renderList } from "vue";
 import { describe, expect, test, vi } from "vitest";
 import { mount } from "@vue/test-utils";
 import { sleep } from "../../../test-utils";
@@ -187,5 +187,68 @@ describe("LayCarousel", () => {
     await nextTick();
     await sleep(100);
     expect(Carousel.props("modelValue")).toBe("3");
+  });
+
+  test("carousel item edge switching 轮播项目边界切换测试", async () => {
+    const wrapper = _mount({
+      autoplay: false,
+    });
+
+    const component = wrapper.findComponent(LayCarousel);
+    expect(component.exists()).toBe(true);
+    expect((component.vm as any).active).toBe("1");
+    (component.vm as any).prev();
+    await nextTick();
+    expect((component.vm as any).active).toBe("3");
+    (component.vm as any).next();
+    await nextTick();
+    expect((component.vm as any).active).toBe("1");
+  });
+
+  test("carousel item edge switching with async children 轮播项目边界切换 + 异步加载测试", async () => {
+    const defaultSlot = h(Fragment, []);
+    const data = reactive({
+      modelValue: 1,
+      autoplay: false,
+    });
+    const wrapper = mount(LayCarousel, {
+      props: {
+        modelValue: data.modelValue,
+        autoplay: data.autoplay,
+      },
+      slots: {
+        default: defaultSlot,
+      },
+    });
+
+    const component = wrapper.findComponent(LayCarousel);
+    expect(component.exists()).toBe(true);
+    expect((component.vm as any).active).toBe(1);
+    await nextTick();
+    setTimeout(() => {
+      defaultSlot.children = [
+        h(LayCarouselItem, { id: 1 }, [h(Text, "1")]),
+        h(LayCarouselItem, { id: 2 }, [h(Text, "2")]),
+        h(LayCarouselItem, { id: 3 }, [h(Text, "3")]),
+      ];
+      (component.vm as any).setItemInstanceBySlot(defaultSlot.children);
+    }, 1);
+    await sleep(5);
+    await nextTick();
+    expect((component.vm as any).children.length).toBe(3);
+    expect(component.find('.layui-carousel-item[data-id="1"]').exists()).toBe(
+      true
+    );
+    expect(data.modelValue).toBe(1);
+    (component.vm as any).prev();
+    await nextTick();
+    expect(component.emitted("update:modelValue")![0][0]).toBe(3);
+    wrapper.setProps({
+      modelValue: 3,
+    });
+    await nextTick();
+    (component.vm as any).next();
+    await nextTick();
+    expect(component.emitted("update:modelValue")![1][0]).toBe(1);
   });
 });

@@ -65,7 +65,7 @@
 </script>
 :::
 
-::: title Aiffx 属性
+::: title Affix 属性
 :::
 
 ::: table
@@ -78,7 +78,7 @@
 
 :::
 
-::: title Aiffx 事件
+::: title Affix 事件
 :::
 
 ::: table
