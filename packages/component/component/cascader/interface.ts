@@ -1,4 +1,6 @@
 import { StyleValue } from "vue";
+import type { DropdownTeleportProps } from "../dropdown/interface";
+
 import {
   CascaderPanelItemProps,
   CascaderPanelLazyloadFunction,
@@ -28,4 +30,7 @@ export interface CascaderProps {
   fullpath?: boolean;
   search?: boolean;
   searchMethod?: (value: string) => Array<CascaderPanelItemProps>;
+  minCollapsedNum?: number;
+  collapseTagsTooltip?: boolean;
+  teleportProps?: DropdownTeleportProps;
 }

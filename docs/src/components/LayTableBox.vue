@@ -29,7 +29,7 @@
 .lay-table-box table th code,
 .lay-table-box table td code {
   line-height: 26px;
-  white-space: nowrap;
+  white-space: pre-wrap;
 }
 .lay-table-box table th {
   color: #666;
@@ -37,7 +37,7 @@
   background-color: #fafafa;
 }
 
-.lay-table-box a{
-  color: #1E9FFF;
+.lay-table-box a {
+  color: #1e9fff;
 }
 </style>

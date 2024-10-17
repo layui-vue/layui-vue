@@ -31,33 +31,33 @@ watch(TriggerRef, (newEl, oldEl) => {
 });
 
 const onClick = () => {
-  if (props.trigger !== "click") return;
+  if (!props.trigger?.includes("click")) return;
   onShow();
 };
 
 const onMouseenter = () => {
-  if (props.trigger !== "hover") return;
+  if (!props.trigger?.includes("hover")) return;
   onShow();
 };
 
 const onMouseleave = () => {
-  if (props.trigger !== "hover") return;
+  if (!props.trigger?.includes("hover")) return;
   onHidden();
 };
 
 const onContextMenu = function (e: Event) {
-  if (props.trigger !== "contextMenu") return;
+  if (!props.trigger?.includes("contextMenu")) return;
   e.preventDefault();
   onShow();
 };
 
 const onFocusin = () => {
-  if (props.trigger !== "focus") return;
+  if (!props.trigger?.includes("focus")) return;
   onShow();
 };
 
-const onfocusout = () => {
-  if (props.trigger !== "focus") return;
+const onFocusout = () => {
+  if (!props.trigger?.includes("focus")) return;
   onHidden();
 };
 
@@ -67,7 +67,8 @@ const events = {
   mouseleave: onMouseleave,
   contextmenu: onContextMenu,
   focusin: onFocusin,
-  focusout: onfocusout,
+  focusout: onFocusout,
+  ...props.customEvents,
 };
 </script>
 

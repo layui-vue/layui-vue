@@ -12,6 +12,7 @@ import Trigger from "./component/trigger.vue";
 import Content from "./component/content.vue";
 import { POPPER_INJECTION_KEY } from "./utils";
 import useDelayTrigger from "./hook/useDelayTrigger";
+import { isArray } from "../../utils";
 
 defineOptions({
   name: "LayPopper",
@@ -27,6 +28,10 @@ const props = withDefaults(defineProps<PopperProps>(), {
   enterable: true,
   showAfter: 0,
   hideAfter: 200,
+  clickOutsideToClose: true,
+  teleportProps: () => ({
+    to: "body",
+  }),
 });
 
 const emit = defineEmits(["update:modelValue"]);
@@ -37,14 +42,18 @@ const TriggerRef = ref<HTMLElement | null>(null);
 
 const triggerProps = computed<TriggerProps>(() => {
   return {
-    trigger: props.trigger,
+    trigger: _trigger.value,
   };
+});
+
+const _trigger = computed(() => {
+  return isArray(props.trigger) ? props.trigger : [props.trigger];
 });
 
 const contentProps = computed<ContentProps>(() => {
   return {
     modelValue: open.value,
-    trigger: props.trigger,
+    trigger: _trigger.value,
     placement: props.placement,
     disabled: props.disabled,
     showArrow: props.showArrow,
@@ -52,6 +61,8 @@ const contentProps = computed<ContentProps>(() => {
     enterable: props.enterable,
     popperClass: props.popperClass,
     popperStyle: props.popperStyle,
+    clickOutsideToClose: props.clickOutsideToClose,
+    teleportProps: props.teleportProps,
   };
 });
 

@@ -91,7 +91,7 @@ export default {
 ::: demo 通过 page 属性开启图标列表的分页展示
 
 <template>
-  <lay-icon-picker v-model="icon" type="layui-icon-face-smile" page></lay-icon-picker>
+  <lay-icon-picker v-model="icon" page></lay-icon-picker>
 </template>
 
 <script>
@@ -117,7 +117,7 @@ export default {
 ::: demo 通过 showSearch 开启图标列表的搜索功能
 
 <template>
-  <lay-icon-picker v-model="icon" type="layui-icon-face-smile" page showSearch></lay-icon-picker>
+  <lay-icon-picker v-model="icon" page showSearch></lay-icon-picker>
 </template>
 
 <script>
@@ -142,16 +142,17 @@ export default {
 
 ::: table
 
-| 属性           |  说明        |  类型   | 默认值  | 可选值  |
+| 属性           |  说明        |  类型   | 默认值  | 版本  |
 | ---------- | -------- | --- |--- |--- |
 | v-model    | 默认值   | --  |--  |--  |
 | page       | 开启分页 | --  |--  |--  |
-| size       | 尺寸 | --  |--  |--  |
-| showSearch | 启用搜索 | --  |--  |--  |
+| size      | 尺寸大小  | `string`    | `lg` `md` `sm` `xs`   |`md`     |  |
+| show-search | 启用搜索 | --  |--  |--  |
 | disabled | 禁用 | `boolean`  |--  |--  |
 | allow-clear | 允许清空 | `boolean`  |--  |--  |
-| contentStyle             | 内容自定义样式     | `StyleValue` | -- | -- |
-| contentClass             | 内容自定义Class    | `string` `Array<string \| object>` `object` | -- | -- |
+| content-style             | 内容自定义样式     | `StyleValue` | -- | -- |
+| content-class             | 内容自定义Class    | `string` `Array<string \| object>` `object` | -- | -- |
+| teleport-props        | 继承至 dropdown 组件，下拉面板 `传递` 属性         | `object`         | `{to: 'body', disabled: false}` |  `2.19.0` |
 
 :::
 

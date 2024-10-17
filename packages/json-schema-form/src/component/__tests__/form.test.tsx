@@ -1,11 +1,19 @@
 import { nextTick, reactive, h } from "vue";
 
-import { describe, expect, test } from "vitest";
+import { describe, expect, test, afterEach } from "vitest";
 import { mount } from "@vue/test-utils";
+import { sleep } from "@layui/component/test-utils";
 
 import LayForm from "../form";
 
 describe("LayJsonSchemaForm", () => {
+  afterEach(() => {
+    const popperDom = document.body.querySelector(".layui-popper");
+    if (popperDom) {
+      popperDom.remove();
+    }
+  });
+
   test("label width", async () => {
     const wrapper = mount({
       setup() {
@@ -191,6 +199,7 @@ describe("LayJsonSchemaForm", () => {
       .find<HTMLDivElement>(".layui-unselect")
       .element.click();
     await nextTick();
+    await sleep(300);
 
     const optionsDom = wrapper.findAllComponents(".layui-select-option");
     await (optionsDom[1].element as HTMLElement).click();

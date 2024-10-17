@@ -42,6 +42,8 @@ export type {
 
 import type { Strategy, Placement, Middleware } from "@floating-ui/dom";
 
+export type Middlewares = Middleware[];
+
 export type UsePopperOptions = {
   // isAutoUpdate？
   transform?: boolean;
@@ -56,5 +58,5 @@ export type UsePopperOptions = {
    *
    * */
   placement?: Placement;
-  middleware?: Middleware[];
+  middleware?: Middlewares;
 };

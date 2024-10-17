@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { inject, Ref } from "vue";
-import { DropdownContext, dropdownInjectionKey } from "../dropdown/interface";
+import type { DropdownContext } from "../dropdown/interface";
+import { DROPDOWN_INJECTION_KEY } from "../dropdown/interface";
 
 export interface DropdownMenuItemProps {
   disabled?: boolean;
@@ -14,17 +15,13 @@ const props = withDefaults(defineProps<DropdownMenuItemProps>(), {
   disabled: false,
 });
 
-const openState: Ref<boolean> = inject("openState") as Ref<boolean>;
-const dropdownCtx = inject<DropdownContext | undefined>(
-  dropdownInjectionKey,
-  undefined
-);
+const dropdownCtx = inject<DropdownContext>(DROPDOWN_INJECTION_KEY, {});
 
 const handleClick = () => {
   if (props.disabled) {
     return;
   }
-  dropdownCtx?.hide();
+  dropdownCtx?.hide && dropdownCtx?.hide();
 };
 </script>
 

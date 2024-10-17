@@ -32,7 +32,9 @@
 
 <script lang="ts" setup>
 import "./index.less";
-import { onMounted, nextTick, reactive, onUnmounted, ref } from "vue";
+import { onMounted, reactive, onUnmounted, ref } from "vue";
+
+import { useResizeObserver } from "@vueuse/core";
 
 export interface ScrollProps {
   height?: string;
@@ -71,17 +73,28 @@ let trackHeight = 0; // 滚动条轨道高度
 let wrapHeight = 0; // 容器高度（可视高度）
 let wrapContentHeight = 0; // 内容高度（可滚动内容的高度）
 
+let scrollStop: () => void;
+let barStop: () => void;
+
 onMounted(() => {
   monitorWindow();
   monitorScrollBar();
-  nextTick(() => {
-    calculationLength();
-  });
+
+  const { stop: _scrollStop } = useResizeObserver(
+    scrollRef.value,
+    initScrollListner
+  );
+  scrollStop = _scrollStop;
+
+  const { stop: _barStop } = useResizeObserver(barRef.value, initScrollListner);
+  barStop = barStop;
 });
 
 // 页面卸载清除定时器
 onUnmounted(() => {
   window.clearInterval(time);
+  scrollStop && scrollStop();
+  barStop && barStop();
 });
 
 // 监听页面尺寸改变计算滚动条
@@ -114,21 +127,6 @@ const monitorScrollBar = function () {
     childList: true,
     subtree: true,
   });
-};
-
-// 初始化延迟监听滚动条
-const calculationLength = function () {
-  // 直接执行initScrollListner函数，获取滚动条长度部准确
-  // 因为页面渲染有延迟，获取dom元素需要延迟
-  // 每间隔10毫秒更新滑块长度
-  time = setInterval(() => {
-    // 计算滚动条长度
-    initScrollListner();
-  }, 50);
-  // 间隔500毫秒清除定时器，滑块缩短会有动画效果，时间可延长没有影响
-  setTimeout(() => {
-    window.clearInterval(time);
-  }, 2000);
 };
 
 // 计算滚动条高度
