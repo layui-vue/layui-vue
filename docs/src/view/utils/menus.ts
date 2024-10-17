@@ -299,6 +299,17 @@ const menus = [
         subTitle: "form",
         path: "/zh-CN/components/form",
       },
+      {
+        id: 108,
+        title: "分段器",
+        subTitle: "segmented",
+        path: "/zh-CN/components/segmented",
+        badge: {
+          type: "dot",
+          theme: "green",
+          ripple: true,
+        },
+      },
     ],
   },
   {
