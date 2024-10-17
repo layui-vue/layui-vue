@@ -890,7 +890,7 @@ const openCallback = () => {
 | _v-model_           | 显示                                                              | boolean                                                   | `false`                |                                                                                    |          |
 | _id_                | layer 标识 可不传(内部生成)                                       | `string`                                                  |                        |                                                                                    |          |
 | _type_              | 类型                                                              | string                                                    | `1`                    | `0(dialog)` `1(page)` `2(iframe)` `3(loading)` `4(drawer)` `5(photos)` `6(notify)` |          |
-| _title_             | 标题                                                              |  `boolean` `PropsContentType (2.19.0)` | `标题`                 | --                                                                                 |          |
+| _title_             | 标题  **当传入组件时，会影响内部寻找拖拽节点，需要给根元素设置 `pointer-events: none`**          |  `boolean` `PropsContentType (2.19.0)` | `标题`                 | --                                                                                 |          |
 | _title-style_       | 标题样式                                                          | `string` `StyleValue`                                     | --                     | --                                                                                 |          |
 | _footer_            | 底部                            |  `boolean` `PropsContentType (2.19.0)`          |                        |                                                                                    | `2.19.0` |
 | _footer-style_      | 底部样式                                                          | `string` `StyleValue`                                     | --                     | --                                                                                 | `2.19.0` |
@@ -974,7 +974,7 @@ const openCallback = () => {
 | 名称      | 描述     |
 | --------- | -------- |
 | _default_ | 主体内容 |
-| _title_   | 标题     |
+| _title_   | 标题 **当传入组件时，会影响内部寻找拖拽节点，需要给根元素设置 `pointer-events: none`**     |
 | _footer_  | 底部     |
 
 :::
