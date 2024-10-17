@@ -1,7 +1,8 @@
 import { nextTick, h, defineComponent } from "vue";
-import { describe, expect, test } from "vitest";
+import { describe, expect, it, test } from "vitest";
 import { layer } from "../index";
-// import { sleep } from "../../../component/test-utils";
+import { afterEach } from "node:test";
+import { sleep } from "../../../component/test-utils";
 
 const CustomComponent = defineComponent({
   setup(props, ctx) {
@@ -10,6 +11,29 @@ const CustomComponent = defineComponent({
 });
 
 describe("Layer", () => {
+  afterEach(async () => {
+    layer.closeAll();
+    await nextTick();
+    await sleep();
+  });
+
+  it("should work", async () => {
+    const open = () => {
+      layer.open({
+        title: "Hello",
+      });
+    };
+
+    open();
+    await nextTick();
+
+    const dom = document.querySelector(
+      ".layui-layer .layui-layer-title"
+    ) as HTMLDivElement;
+    expect(dom).toBeTruthy();
+    expect(dom.innerText).toBe("Hello");
+  });
+
   test("layer.open 支持title/footer渲染组件", async () => {
     const open = () => {
       layer.open({
