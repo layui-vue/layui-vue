@@ -30,6 +30,7 @@ import {
   timeInterval,
   toTime,
 } from "./util";
+import LayIcon from "../icon/index";
 import LaySelect from "../select/index";
 import LaySelectOption from "../selectOption/index";
 import { SelectProps } from "../select/index.vue";
