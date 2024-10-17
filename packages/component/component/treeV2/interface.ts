@@ -66,6 +66,9 @@ export interface TreeProps {
   lazy?: boolean;
   load?: LoadFunction;
   searchNodeMethod?: SearchNodeMethodType;
+  nodeClick?: (node: TreeData) => boolean | undefined;
+  nodeDblClick?: (node: TreeData) => boolean | undefined;
+  nodeContextMenu?: (node: TreeData) => boolean | undefined;
 }
 
 export const TREE_CONTEXT = Symbol("TREE_CONTEXT");

@@ -71,8 +71,6 @@
             @update-expanded-keys="emitExpandedKeys"
             @node-check="emitNodeCheck"
             @node-click="emitNodeClick"
-            @node-dblclick="emitNodeDblclick"
-            @node-contextmenu="emitNodeContextmenu"
             v-bind="props"
             :slots="slots"
             :tree="item.children"
@@ -106,9 +104,7 @@ const emit = defineEmits<{
   (e: "update-selected-key", key: TreeData): void;
   (e: "update-checked-keys", keys: Array<string | number>): void;
   (e: "update-expanded-keys", keys: Array<string | number>): void;
-  (e: "node-contextmenu", key: TreeData, callback: () => void): void;
-  (e: "node-dblclick", key: TreeData, callback: () => void): void;
-  (e: "node-click", key: TreeData, callback: () => void): void;
+  (e: "node-click", key: TreeData): void;
   (e: "node-check", key: TreeData): void;
 }>();
 
@@ -153,12 +149,7 @@ const shouldIconBorder = (node: TreeData) => {
 };
 
 const emitSelectedKey = (node: TreeData) => emit("update-selected-key", node);
-const emitNodeClick = (node: TreeData, callback: () => void) =>
-  emit("node-click", node, callback);
-const emitNodeDblclick = (node: TreeData, callback: () => void) =>
-  emit("node-dblclick", node, callback);
-const emitNodeContextmenu = (item: TreeData, callback: () => void) =>
-  emit("node-contextmenu", item, callback);
+const emitNodeClick = (node: TreeData) => emit("node-click", node);
 const emitNodeCheck = (node: TreeData) => emit("node-check", node);
 const emitCheckedKeys = () =>
   emit("update-checked-keys", checkedKeys.value ?? []);
@@ -176,12 +167,11 @@ const stopEventPopup = (e: Event) => {
 };
 
 const handleIconClick = (e: MouseEvent, item: TreeData) => {
-  emitNodeClick(item, () => {
-    stopEventPopup(e);
-    item.expanded = !item.expanded;
-    _lazyLoad(item).catch(() => {});
-    emitExpandedKeys();
-  });
+  emitNodeClick(item);
+  if (props.nodeClick && props.nodeClick(item)) return stopEventPopup(e);
+  item.expanded = !item.expanded;
+  _lazyLoad(item).catch(() => {});
+  emitExpandedKeys();
 };
 
 const handleItemClick = (e: MouseEvent, item: TreeData) => {
@@ -191,15 +181,12 @@ const handleItemClick = (e: MouseEvent, item: TreeData) => {
 };
 
 const handleItemDblclick = (e: MouseEvent, item: TreeData) => {
-  emitNodeDblclick(item, () => {
-    stopEventPopup(e);
-  });
+  if (props.nodeDblClick && props.nodeDblClick(item)) return stopEventPopup(e);
 };
 
 const handleItemContextmenu = (e: MouseEvent, item: TreeData) => {
-  emitNodeContextmenu(item, () => {
-    stopEventPopup(e);
-  });
+  if (props.nodeContextMenu && props.nodeContextMenu(item))
+    return stopEventPopup(e);
 };
 
 const handleItemCheck = (checked: boolean, item: TreeData) => {
