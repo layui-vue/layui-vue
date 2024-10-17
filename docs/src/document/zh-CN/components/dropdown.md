@@ -517,8 +517,8 @@ export default {
 | autoFitPosition     | 是否自动调整下拉面板位置                          | `boolean` | `true`   | `true` `false`                                  | |
 | autoFitWidth        | 是否将下拉面板宽度设置为触发器宽度                | `boolean` | `false`  | `true` `false`                                  | |
 | autoFitMinWidth     | 是否将下拉面板最小宽度设置为触发器宽度            | `boolean` | `true`   | `true` `false`                                  | |
-| updateAtScroll      | 是否在容器滚动时更新下拉面板的位置                | `boolean` | `false`  | `true` `false`                                  | `2.19.0` |
-| autoFixPosition     | 是否在触发器或下拉面板尺寸变化时更新下拉面板位置  | `boolean` | `true`   | `true` `false`                                  | `2.19.0` |
+| updateAtScroll      | 是否在容器滚动时更新下拉面板的位置                | `boolean` | `false`  | `true` `false`                                  | `2.19.0删除` |
+| autoFixPosition     | 是否在触发器或下拉面板尺寸变化时更新下拉面板位置  | `boolean` | `true`   | `true` `false`                                  | `2.19.0删除` |
 | clickToClose        | 是否在点击触发器时关闭面板                        | `boolean` | `true`   | `true` `false`                                  | |
 | blurToClose         | 是否在触发器失去焦点时关闭面板                    | `boolean` | `true`   | `true` `false`                                  | |
 | clickOutsideToClose | 是否点击外部关闭下拉面板                          | `boolean` | `true`   | `true` `false`                                  | |

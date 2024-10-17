@@ -300,6 +300,17 @@ const menus = [
         path: "/zh-CN/components/form",
       },
       {
+        id: 120,
+        title: "时间点选择",
+        subTitle: "timeSelect",
+        path: "/zh-CN/components/timeSelect",
+        badge: {
+          type: "dot",
+          theme: "green",
+          ripple: true,
+        },
+      },
+      {
         id: 108,
         title: "分段器",
         subTitle: "segmented",
