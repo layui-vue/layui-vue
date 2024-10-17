@@ -6,7 +6,7 @@ import LayRender from "@layui/component/component/_components/render";
 import { renderContent } from "../utils";
 
 export interface FooterProps {
-  footer: PropsContentType;
+  footer: PropsContentType | boolean;
   footerStyle: string | StyleValue;
 }
 
@@ -20,7 +20,9 @@ const props = defineProps<FooterProps>();
 <template>
   <div class="layui-layer-footer" :style="footerStyle">
     <slot>
-      <LayRender :render="() => renderContent(footer)"></LayRender>
+      <LayRender
+        :render="() => renderContent(footer as PropsContentType)"
+      ></LayRender>
     </slot>
   </div>
 </template>
