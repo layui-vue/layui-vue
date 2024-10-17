@@ -172,16 +172,18 @@ const useTree = (props: TreeProps): UseTree => {
    * @param node 节点
    */
   const _lazyLoad = (node?: TreeData) => {
-    return new Promise(() => {
+    return new Promise<void>((s, e) => {
       if (props.lazy) {
         if (!node) {
-          props.load?.(undefined, (data: Array<OriginalTreeData>) =>
-            mixin(data)
-          );
-          return;
+          props.load?.(undefined, (data: Array<OriginalTreeData>) => {
+            data = data.filter((a) => a); // 过滤无效节点
+            if (!data.length) return e("Tree lazyload failed: No data");
+            mixin(data);
+          });
+          return s();
         }
 
-        if (node?.children.length || node.leaf) return;
+        if (node?.children.length || node.leaf) return s();
         node.loading = true;
         const disabled = node.disabled;
         if (!disabled) node.disabled = true;
@@ -190,7 +192,10 @@ const useTree = (props: TreeProps): UseTree => {
           if (!disabled) node.disabled = false;
           data = data.filter((a) => a); // 过滤无效节点
           mixin(data, node.id);
-          if (!data.length) node.leaf = true;
+          if (!data.length) {
+            node.leaf = true;
+            return e("Tree lazyload failed: No data");
+          } else s();
         });
       }
     });
@@ -384,7 +389,7 @@ const useTree = (props: TreeProps): UseTree => {
     _flatTree.value.filter((d) => d.expanded).map((d) => d.id)
   );
 
-  if (!_data.value.length) _lazyLoad();
+  if (!_data.value.length) _lazyLoad().catch(console.error);
   else mixin(_data.value);
   if (props.cacheData) mixin(props.cacheData, undefined, true);
 
@@ -406,22 +411,34 @@ const useTree = (props: TreeProps): UseTree => {
   );
   watch(
     () => props.checkedKeys,
-    (val) => {
-      val?.forEach((k) => _find_node(k) && (_find_node(k)!.checked = true));
-      val?.forEach((k) =>
-        _find_mock_nodes(k)?.forEach((a) => (a.checked = true))
-      );
+    (val, oldVal) => {
+      oldVal
+        ?.filter((a) => !val?.includes(a))
+        ?.forEach((k) => {
+          _find_node(k) && (_find_node(k)!.checked = false);
+          _find_mock_nodes(k)?.forEach((a) => (a.checked = false));
+        });
+      val?.forEach((k) => {
+        _find_node(k) && (_find_node(k)!.checked = true);
+        _find_mock_nodes(k)?.forEach((a) => (a.checked = true));
+      });
       if (!props.checkStrictly) _reloadNodeStatus();
     },
     { immediate: true }
   );
   watch(
     () => props.expandKeys,
-    (val) => {
-      val?.forEach((k) => _find_node(k) && (_find_node(k)!.expanded = true));
-      val?.forEach((k) =>
-        _find_mock_nodes(k)?.forEach((n) => (n.expanded = true))
-      );
+    (val, oldVal) => {
+      oldVal
+        ?.filter((a) => !val?.includes(a))
+        ?.forEach((k) => {
+          _find_node(k) && (_find_node(k)!.expanded = false);
+          _find_mock_nodes(k)?.forEach((n) => (n.expanded = false));
+        });
+      val?.forEach((k) => {
+        _find_node(k) && (_find_node(k)!.expanded = true);
+        _find_mock_nodes(k)?.forEach((n) => (n.expanded = true));
+      });
       if (!props.checkStrictly) _reloadNodeStatus();
     },
     { immediate: true }

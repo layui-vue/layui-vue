@@ -28,7 +28,7 @@
               nodeIconType(item).length ? 'pad-left' : 'no-pad-left'
             }`,
           ]"
-          @click.stop="handleIconClick(item)"
+          @click.capture="handleIconClick($event, item)"
         >
           <lay-icon :type="nodeIconType(item)" />
         </span>
@@ -47,9 +47,13 @@
           type="layui-icon-loading"
         />
         <LayRender :outProps="{ item }" :render="slots.title ?? 'default'">
-          <span @click.self="handleItemClick(item)" class="layui-tree-txt">{{
-            item.title
-          }}</span>
+          <span
+            @dblclick="handleItemDblclick($event, item)"
+            @contextmenu="handleItemContextmenu($event, item)"
+            @click="handleItemClick($event, item)"
+            class="layui-tree-txt"
+            >{{ item.title }}</span
+          >
         </LayRender>
       </div>
     </div>
@@ -65,8 +69,10 @@
             @update-checked-keys="emitCheckedKeys"
             @update-selected-key="emitSelectedKey"
             @update-expanded-keys="emitExpandedKeys"
-            @node-click="emitNodeClick"
             @node-check="emitNodeCheck"
+            @node-click="emitNodeClick"
+            @node-dblclick="emitNodeDblclick"
+            @node-contextmenu="emitNodeContextmenu"
             v-bind="props"
             :slots="slots"
             :tree="item.children"
@@ -96,11 +102,13 @@ const props = withDefaults(
   {}
 );
 
-const emits = defineEmits<{
+const emit = defineEmits<{
   (e: "update-selected-key", key: TreeData): void;
   (e: "update-checked-keys", keys: Array<string | number>): void;
   (e: "update-expanded-keys", keys: Array<string | number>): void;
-  (e: "node-click", key: TreeData): void;
+  (e: "node-contextmenu", key: TreeData, callback: () => void): void;
+  (e: "node-dblclick", key: TreeData, callback: () => void): void;
+  (e: "node-click", key: TreeData, callback: () => void): void;
   (e: "node-check", key: TreeData): void;
 }>();
 
@@ -113,9 +121,6 @@ let {
   _reloadNodeStatus,
   checkedKeys,
   expandedKeys,
-  checkedPath,
-  checkedTitle,
-  checkedTitlePath,
 } = inject(TREE_CONTEXT) as UseTree;
 
 const hasShortDash = (node: TreeData) => {
@@ -147,81 +152,100 @@ const shouldIconBorder = (node: TreeData) => {
     : false;
 };
 
-const emitSelectedKey = (node: TreeData) => {
-  emits("update-selected-key", node);
-};
-
-const emitNodeClick = (node: TreeData) => {
-  emits("node-click", node);
-};
-
-const emitNodeCheck = (node: TreeData) => {
-  emits("node-check", node);
-};
-
-const emitCheckedKeys = () => {
-  emits("update-checked-keys", checkedKeys.value ?? []);
-};
-
+const emitSelectedKey = (node: TreeData) => emit("update-selected-key", node);
+const emitNodeClick = (node: TreeData, callback: () => void) =>
+  emit("node-click", node, callback);
+const emitNodeDblclick = (node: TreeData, callback: () => void) =>
+  emit("node-dblclick", node, callback);
+const emitNodeContextmenu = (item: TreeData, callback: () => void) =>
+  emit("node-contextmenu", item, callback);
+const emitNodeCheck = (node: TreeData) => emit("node-check", node);
+const emitCheckedKeys = () =>
+  emit("update-checked-keys", checkedKeys.value ?? []);
 const emitExpandedKeys = () => {
-  emits(
+  emit(
     "update-expanded-keys",
     _flatTree.value.filter((i) => i.expanded).map((i) => i.id) ?? []
   );
 };
 
-const handleIconClick = (item: TreeData) => {
-  item.expanded = !item.expanded;
-  _lazyLoad(item);
-  emitExpandedKeys();
+const stopEventPopup = (e: Event) => {
+  e.stopPropagation();
+  e.stopImmediatePropagation();
+  e.preventDefault();
 };
 
-const handleItemClick = (item: TreeData) => {
+const handleIconClick = (e: MouseEvent, item: TreeData) => {
+  emitNodeClick(item, () => {
+    stopEventPopup(e);
+    item.expanded = !item.expanded;
+    _lazyLoad(item).catch(() => {});
+    emitExpandedKeys();
+  });
+};
+
+const handleItemClick = (e: MouseEvent, item: TreeData) => {
   if (props.onlyIconControl) return;
   if (!props.showCheckbox) emitSelectedKey(item);
-  handleIconClick(item);
+  handleIconClick(e, item);
+};
+
+const handleItemDblclick = (e: MouseEvent, item: TreeData) => {
+  emitNodeDblclick(item, () => {
+    stopEventPopup(e);
+  });
+};
+
+const handleItemContextmenu = (e: MouseEvent, item: TreeData) => {
+  emitNodeContextmenu(item, () => {
+    stopEventPopup(e);
+  });
 };
 
 const handleItemCheck = (checked: boolean, item: TreeData) => {
-  if (item.disabled) return;
-  // 如果当前节点可能是叶子节点，则执行懒加载，必须确定状态
-  if (!item.leaf && !item.children.length) {
-    _lazyLoad(item);
-    return;
-  }
+  const job = (item: TreeData) => {
+    // 严格模式下直接勾选，然后更新状态
+    if (props.checkStrictly) {
+      item.checked = checked;
+      emitNodeCheck(item);
+      emitCheckedKeys();
+      return;
+    }
 
-  // 严格模式下直接勾选，然后更新状态
-  if (props.checkStrictly) {
-    item.checked = checked;
-    emitNodeCheck(item);
+    const leafs = _findLeafs(item.id);
+    // 非严格模式下，要检查这个节点下面的叶子节点是否有禁用的，如果有禁用的就跳过
+    if (leafs && item.indeterminated && checked)
+      checked = leafs.every((i) => !i.disabled);
+
+    leafs
+      ?.filter((i) => !i.disabled)
+      .forEach((i) => (i.checked = checked) && emitNodeCheck(i));
+
+    // 如果没有更深的叶子，那说明是节点自己勾选了就把自身emit出去
+    if (!leafs?.length) emitNodeCheck(item);
     emitCheckedKeys();
-    return;
-  }
+    _reloadNodeStatus();
+  };
 
-  const leafs = _findLeafs(item.id);
-  // 非严格模式下，要检查这个节点下面的叶子节点是否有禁用的，如果有禁用的就跳过
-  if (leafs && item.indeterminated && checked)
-    checked = leafs.every((i) => !i.disabled);
-
-  leafs?.filter((i) => !i.disabled).forEach((i) => (i.checked = checked));
-  emitNodeCheck(item);
-  emitCheckedKeys();
-  _reloadNodeStatus();
+  if (item.disabled) return;
+  _lazyLoad(item)
+    .catch(console.warn)
+    .finally(() => job(item));
 };
 
 watch(
   () => checkedKeys.value,
-  (val) => emits("update-checked-keys", val)
+  (val) => emit("update-checked-keys", val)
 );
 
 watch(
   () => expandedKeys.value,
-  (val) => emits("update-expanded-keys", val)
+  (val) => emit("update-expanded-keys", val)
 );
 
 onMounted(() => {
-  if (props.checkedKeys) emits("update-checked-keys", checkedKeys.value);
-  if (props.expandKeys) emits("update-expanded-keys", expandedKeys.value);
+  if (props.checkedKeys) emit("update-checked-keys", checkedKeys.value);
+  if (props.expandKeys) emit("update-expanded-keys", expandedKeys.value);
 });
 
 defineOptions({

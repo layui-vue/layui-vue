@@ -3,8 +3,10 @@
     <tree-node
       v-bind="props"
       :slots="slots"
-      @node-click="handleNodeClick"
       @node-check="handleNodeCheck"
+      @node-click="handleNodeClick"
+      @node-dblclick="handleNodeDblclick"
+      @node-contextmenu="handleNodeContextmenu"
       @update-expanded-keys="handleUpdateExpandedKeys"
       @update-checked-keys="handleUpdateCheckedKeys"
       @update-selected-key="handleUpdateSelectedKey"
@@ -45,10 +47,12 @@ const props = withDefaults(defineProps<TreeProps>(), {
 });
 const emit = defineEmits<{
   (e: "update:selected-key", key: string | number): void;
-  (e: "update:checked-keys", key: Array<string | number>): void;
-  (e: "update:expand-keys", key: Array<string | number>): void;
-  (e: "node-click", node: TreeData): void;
+  (e: "update:checked-keys", keys: Array<string | number>): void;
+  (e: "update:expand-keys", keys: Array<string | number>): void;
   (e: "node-check", node: TreeData): void;
+  (e: "node-click", node: TreeData, callback: () => void): void;
+  (e: "node-dblclick", node: TreeData, callback: () => void): void;
+  (e: "node-contextmenu", node: TreeData, callback: () => void): void;
 }>();
 
 const context = useTree(props);
@@ -56,12 +60,17 @@ provide(TREE_CONTEXT, context);
 
 const handleUpdateSelectedKey = (node: TreeData) =>
   emit("update:selected-key", node.id);
-const handleNodeClick = (node: TreeData) => emit("node-click", node);
-const handleUpdateCheckedKeys = (nodes: Array<string | number>) =>
-  emit("update:checked-keys", nodes);
-const handleUpdateExpandedKeys = (nodes: Array<string | number>) =>
-  emit("update:expand-keys", nodes);
-const handleNodeCheck = (nodes: TreeData) => emit("node-check", nodes);
+const handleUpdateCheckedKeys = (keys: Array<string | number>) =>
+  emit("update:checked-keys", keys);
+const handleUpdateExpandedKeys = (keys: Array<string | number>) =>
+  emit("update:expand-keys", keys);
+const handleNodeCheck = (node: TreeData) => emit("node-check", node);
+const handleNodeClick = (node: TreeData, callback: () => void) =>
+  emit("node-click", node, callback);
+const handleNodeDblclick = (node: TreeData, callback: () => void) =>
+  emit("node-dblclick", node, callback);
+const handleNodeContextmenu = (node: TreeData, callback: () => void) =>
+  emit("node-contextmenu", node, callback);
 
 const classes = computed(() => [
   "layui-tree",
