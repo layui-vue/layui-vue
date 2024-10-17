@@ -4,3 +4,4 @@ export * from "./arrayUtil";
 export * from "./vueUtil";
 export * from "./treeUtil";
 export * from "./uuidUtil";
+export * from "./type";

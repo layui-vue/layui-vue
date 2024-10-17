@@ -1,57 +1,109 @@
-import type { Ref, StyleValue } from "vue";
+import type { Dayjs, ConfigType } from "dayjs";
+import type { StyleValue, Component, InjectionKey } from "vue";
+import type { CommonSize, CommonClass } from "../../types/common";
 
-export type DatePickerType = "date" | "datetime" | "year" | "time" | "month";
+export type DatePickerType =
+  | "date"
+  | "datetime"
+  | "year"
+  | "month"
+  | "time"
+  | "yearmonth";
 
-export type provideType = {
-  currentYear: Ref;
-  currentMonth: Ref;
-  currentDay: Ref;
-  dateValue: Ref;
-  hms: Ref;
-  type: string;
-  showPanel: Ref;
-  clear: Function;
-  now: Function;
-  ok: Function;
-  range: boolean;
-  rangeValue: {
-    first: string;
-    last: string;
-    hover: string;
-    firstTime: { hh: number; mm: number; ss: number };
-    lastTime: { hh: number; mm: number; ss: number };
+export type TypeMap = {
+  [k in DatePickerType]: {
+    component: Component;
+    format: string;
   };
-  rangeSeparator: string;
-  simple: boolean;
-  timestamp: boolean;
-  max: Ref<string>;
-  min: Ref<string>;
-  defaultTime: string | string[];
-  yearPage: Ref<number>;
-  yearStep: Ref<number>;
 };
+
+export type DatePickerModelValueSingleType = ConfigType;
 
 export interface DatePickerProps {
   name?: string;
-  modelValue?: string | number | string[];
-  type?: "date" | "datetime" | "year" | "month" | "time" | "yearmonth";
+  modelValue?:
+    | DatePickerModelValueSingleType
+    | Array<DatePickerModelValueSingleType>;
+  type?: DatePickerType;
   disabled?: boolean;
   readonly?: boolean;
-  placeholder?: string | string[];
+  placeholder?: string | Array<string>;
   allowClear?: boolean;
   simple?: boolean;
   max?: string;
   min?: string;
   range?: boolean;
   rangeSeparator?: string;
-  size?: "lg" | "md" | "sm" | "xs";
+  size?: CommonSize;
   prefixIcon?: string;
   suffixIcon?: string;
   timestamp?: boolean;
   format?: string;
-  defaultTime?: string | string[];
+  inputFormat?: string;
+  defaultValue?:
+    | DatePickerModelValueSingleType
+    | Array<DatePickerModelValueSingleType>;
+  defaultTime?:
+    | DatePickerModelValueSingleType
+    | Array<DatePickerModelValueSingleType>;
   contentStyle?: StyleValue;
-  contentClass?: string | Array<string | object> | object;
+  contentClass?: CommonClass;
+  disabledDate?: (date: Date) => boolean;
+  /**
+   * 年份分页
+   * @version 2.19.0
+   */
   yearPage?: number;
-  yearStep?: number;
+  // yearStep?: number;
+  /**
+   * 快捷选项
+   * @version 2.19.0
+   */
+  shortcuts?: Array<Shortcuts>;
+  // /**
+  //  * 静态面板
+  //  * @version 2.19.0
+  //  */
+  // static?: boolean;
+}
+
+export interface RequiredDatePickerProps extends DatePickerProps {
+  size: CommonSize;
+  type: DatePickerType;
+  disabled: boolean;
+  readonly: boolean;
+  allowClear: boolean;
+  simple: boolean;
+  range: boolean;
+  rangeSeparator: string;
+  prefixIcon: string;
+  suffixIcon: string;
+  timestamp: boolean;
+  yearPage: number;
+}
+
+export type DatePickerEmits = {
+  (e: "update:modelValue", value: string | Array<string>): void;
+  (e: "change", value: string | Array<string>): void;
+  (e: "blur", event: Event): void;
+  (e: "focus", event: Event): void;
+  (e: "clear"): void;
+};
+
+export type DatePickerValue = Dayjs | Array<Dayjs> | null | undefined;
+
+export interface DatePickerContextType extends RequiredDatePickerProps {
+  modelValue: DatePickerValue;
+}
+
+export const DATE_PICKER_CONTEXT: InjectionKey<DatePickerContextType> =
+  Symbol("LayDatePicker");
+
+export interface Shortcuts {
+  text: string | number;
+  value:
+    | DatePickerModelValueSingleType
+    | Array<DatePickerModelValueSingleType>
+    | (() => DatePickerModelValueSingleType)
+    | (() => Array<DatePickerModelValueSingleType>);
 }

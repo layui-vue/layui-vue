@@ -1,7 +1,9 @@
-import { LayFormContext } from "../../types";
+import type { LayFormContext } from "../../../types";
 import { computed, inject } from "vue";
 
-export default function useProps(props: any) {
+import type { DatePickerProps } from "../interface";
+
+export function useProps(props: DatePickerProps) {
   const size = computed(() => {
     const formContext = inject("LayForm", {} as LayFormContext);
 
