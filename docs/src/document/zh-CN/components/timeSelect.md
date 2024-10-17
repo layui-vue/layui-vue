@@ -18,13 +18,13 @@
     <lay-time-select
       v-model="time1"
       :allow-clear="true"
-      :format="'H:i'"
+      :input-format="'H:i'"
       :interval="'30:00'"
       :start="'08:00:00'"
       :end="'18:30:00'"
       :with-start-time="true"
       :with-end-time="true"
-      :value-format="'H:i:s'"
+      :format="'H:i:s'"
     >
     </lay-time-select>
   </lay-space>
@@ -41,16 +41,16 @@ const time1 = ref("08:00:00");
 ::: title 自定义事件格式
 :::
 
-::: demo 组件支持自定义时间格式，通过 `format` 和 `valueFormat` 属性来设置。
+::: demo 组件支持自定义时间格式，通过 `inputFormat` 和 `format` 属性来设置。
 
 <template>
   <lay-space direction="vertical">
     <span>modelValue: {{ time2 }}</span>
     <lay-time-select
       v-model="time2"
-      :format="'Y-m-d H:i'"
+      :input-format="'Y-m-d H:i'"
       :interval="'30:00'"
-      :value-format="'a'"
+      :format="'a'"
       ></lay-time-select>
   </lay-space>
 </template>
@@ -75,7 +75,7 @@ const time2 = ref();
       <lay-space>
         <lay-time-select
           v-model="time3"
-          :format="'H:i'"
+          :input-format="'H:i'"
           :start="'08:00:00'"
           :end="'18:30:00'"
         >
@@ -85,7 +85,7 @@ const time2 = ref();
       <lay-space>
         <lay-time-select
           v-model="time3"
-          :format="'H:i'"
+          :input-format="'H:i'"
           :start="'08:00:00'"
           :end="'18:30:00'"
           :with-start-time="false"
@@ -96,7 +96,7 @@ const time2 = ref();
       <lay-space>
         <lay-time-select
           v-model="time3"
-          :format="'H:i'"
+          :input-format="'H:i'"
           :start="'08:00:00'"
           :end="'18:30:00'"
           :with-end-time="false"
@@ -107,7 +107,7 @@ const time2 = ref();
       <lay-space>
         <lay-time-select
           v-model="time3"
-          :format="'H:i'"
+          :input-format="'H:i'"
           :start="'08:00:00'"
           :end="'18:30:00'"
           :with-start-time="false"
@@ -138,7 +138,7 @@ const time3 = ref();
     <span>modelValue: {{ time6 }}</span>
     <lay-time-select
       v-model="time6"
-      :format="'H:i'"
+      :input-format="'H:i'"
       :interval="'30:00'"
       :start="'08:00:00'"
       :end="'18:30:00'"
@@ -169,7 +169,7 @@ const time6 = ref();
       :multiple="true"
       :minCollapsedNum="5"
       :allowClear="true"
-      :format="'H:i'"
+      :input-format="'H:i'"
       :interval="'30:00'"
       :start="'08:00:00'"
       :end="'18:30:00'"
@@ -197,7 +197,7 @@ const time4 = ref();
     <lay-time-select
       v-model="time5"
       :size="'lg'"
-      :format="'H:i'"
+      :input-format="'H:i'"
       :interval="'30:00'"
       :start="'08:00:00'"
       :end="'18:30:00'"
@@ -206,7 +206,7 @@ const time4 = ref();
     <lay-time-select
       v-model="time5"
       :size="'md'"
-      :format="'H:i'"
+      :input-format="'H:i'"
       :interval="'30:00'"
       :start="'08:00:00'"
       :end="'18:30:00'"
@@ -215,7 +215,7 @@ const time4 = ref();
     <lay-time-select
       v-model="time5"
       :size="'sm'"
-      :format="'H:i'"
+      :input-format="'H:i'"
       :interval="'30:00'"
       :start="'08:00:00'"
       :end="'18:30:00'"
@@ -224,7 +224,7 @@ const time4 = ref();
     <lay-time-select
       v-model="time5"
       :size="'xs'"
-      :format="'H:i'"
+      :input-format="'H:i'"
       :interval="'30:00'"
       :start="'08:00:00'"
       :end="'18:30:00'"
@@ -244,7 +244,7 @@ const time5 = ref();
 ::: title 时间格式
 :::
 
-::: describe 组件只能使用下面的时间格式，应用于 `format` 和 `valueFormat` 属性。
+::: describe 组件只能使用下面的时间格式，应用于 `input-format` 和 `format` 属性。
 :::
 
 <lay-quote>年份为<b>完整年份</b>；月、日、时、分、秒会<b>自动补零</b>。</lay-quote>
@@ -281,13 +281,13 @@ const time5 = ref();
 | 属性名          | 类型            | 默认值       | 说明                                                                        |
 | :-------------- | :-------------- | :----------- | :-------------------------------------------------------------------------- |
 | _modelValue_    | `string`        | -            | 绑定的值                                                                    |
-| _format_        | `string`        | `'H:i'`      | 时间格式                                                                    |
+| _inputFormat_   | `string`        | `'H:i'`      | 时间格式                                                                    |
 | _interval_      | `string`        | `'00:30:00'` | 时间间隔                                                                    |
 | _start_         | `string`        | `'00:00:00'` | 开始时间                                                                    |
 | _end_           | `string`        | `'00:00:00'` | 结束时间，如果时分秒加起来等于 0，则会生成到第二天                          |
 | _withStartTime_ | `boolean`       | `true`       | 是否显示开始时间                                                            |
 | _withEndTime_   | `boolean`       | `true`       | 是否显示结束时间                                                            |
-| _valueFormat_   | `string`        | `'H:i'`      | 绑定值的格式                                                                |
+| _format_        | `string`        | `'H:i'`      | 绑定值的格式                                                                |
 | _skip_          | `Array<string>` | `[]`         | 跳过的值，例如：`['00:00', '30:00']`，需要与绑定值的格式 _valueFormat_ 匹配 |
 
 :::

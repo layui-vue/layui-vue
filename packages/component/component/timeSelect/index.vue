@@ -41,8 +41,8 @@ defineEmits(["change", "update:modelValue", "clear"]);
 
 const props = withDefaults(defineProps<TimeSelectProps>(), {
   interval: "00:30:00",
+  inputFormat: "H:i",
   format: "H:i",
-  valueFormat: "H:i",
   start: "00:00:00",
   end: "00:00:00",
   withStartTime: true,
@@ -127,11 +127,11 @@ const _intervalSeconds = computed(() =>
 /**
  * 显示值格式化字符串
  */
-const _format = ref(props.format ?? "H:i");
+const _format = ref(props.inputFormat ?? "H:i");
 /**
  * 绑定值格式化字符串
  */
-const _valueFormat = ref(props.valueFormat ?? "H:i");
+const _valueFormat = ref(props.format ?? "H:i");
 /**
  * 时间列表
  */
@@ -270,7 +270,7 @@ watch(
 );
 
 watch(
-  () => [props.format, props.valueFormat],
+  () => [props.inputFormat, props.format],
   ([format, valueFormat]) => {
     _format.value = format;
     _valueFormat.value = valueFormat;
