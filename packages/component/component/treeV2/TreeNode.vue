@@ -66,6 +66,7 @@
             @update-selected-key="emitSelectedKey"
             @update-expanded-keys="emitExpandedKeys"
             @node-click="emitNodeClick"
+            @node-check="emitNodeCheck"
             v-bind="props"
             :slots="slots"
             :tree="item.children"
@@ -77,7 +78,7 @@
 </template>
 
 <script lang="ts" setup>
-import { inject, onMounted } from "vue";
+import { inject, onMounted, watch } from "vue";
 import { TREE_CONTEXT, TreeData, TreeProps } from "./interface";
 import { UseTree } from "./index.hook";
 import LayCheckbox from "../checkboxV2/index";
@@ -95,11 +96,12 @@ const props = withDefaults(
   {}
 );
 
-const emit = defineEmits<{
+const emits = defineEmits<{
   (e: "update-selected-key", key: TreeData): void;
   (e: "update-checked-keys", keys: Array<string | number>): void;
   (e: "update-expanded-keys", keys: Array<string | number>): void;
   (e: "node-click", key: TreeData): void;
+  (e: "node-check", key: TreeData): void;
 }>();
 
 let {
@@ -111,6 +113,9 @@ let {
   _reloadNodeStatus,
   checkedKeys,
   expandedKeys,
+  checkedPath,
+  checkedTitle,
+  checkedTitlePath,
 } = inject(TREE_CONTEXT) as UseTree;
 
 const hasShortDash = (node: TreeData) => {
@@ -143,19 +148,23 @@ const shouldIconBorder = (node: TreeData) => {
 };
 
 const emitSelectedKey = (node: TreeData) => {
-  emit("update-selected-key", node);
+  emits("update-selected-key", node);
 };
 
 const emitNodeClick = (node: TreeData) => {
-  emit("node-click", node);
+  emits("node-click", node);
+};
+
+const emitNodeCheck = (node: TreeData) => {
+  emits("node-check", node);
 };
 
 const emitCheckedKeys = () => {
-  emit("update-checked-keys", checkedKeys.value ?? []);
+  emits("update-checked-keys", checkedKeys.value ?? []);
 };
 
 const emitExpandedKeys = () => {
-  emit(
+  emits(
     "update-expanded-keys",
     _flatTree.value.filter((i) => i.expanded).map((i) => i.id) ?? []
   );
@@ -175,25 +184,44 @@ const handleItemClick = (item: TreeData) => {
 
 const handleItemCheck = (checked: boolean, item: TreeData) => {
   if (item.disabled) return;
-  const leafs = _findLeafs(item.id);
+  // 如果当前节点可能是叶子节点，则执行懒加载，必须确定状态
+  if (!item.leaf && !item.children.length) {
+    _lazyLoad(item);
+    return;
+  }
 
-  // 当想要全勾选时，检查这个节点下面的叶子节点是否有禁用的
-  if (leafs && item.indeterminated && checked)
-    checked = leafs.every((i) => !i.disabled);
+  // 严格模式下直接勾选，然后更新状态
   if (props.checkStrictly) {
     item.checked = checked;
+    emitNodeCheck(item);
     emitCheckedKeys();
     return;
   }
 
+  const leafs = _findLeafs(item.id);
+  // 非严格模式下，要检查这个节点下面的叶子节点是否有禁用的，如果有禁用的就跳过
+  if (leafs && item.indeterminated && checked)
+    checked = leafs.every((i) => !i.disabled);
+
   leafs?.filter((i) => !i.disabled).forEach((i) => (i.checked = checked));
-  _reloadNodeStatus();
+  emitNodeCheck(item);
   emitCheckedKeys();
+  _reloadNodeStatus();
 };
 
+watch(
+  () => checkedKeys.value,
+  (val) => emits("update-checked-keys", val)
+);
+
+watch(
+  () => expandedKeys.value,
+  (val) => emits("update-expanded-keys", val)
+);
+
 onMounted(() => {
-  if (props.checkedKeys) emit("update-checked-keys", checkedKeys.value);
-  if (props.expandKeys) emit("update-expanded-keys", expandedKeys.value);
+  if (props.checkedKeys) emits("update-checked-keys", checkedKeys.value);
+  if (props.expandKeys) emits("update-expanded-keys", expandedKeys.value);
 });
 
 defineOptions({

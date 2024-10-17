@@ -188,6 +188,7 @@ const useTree = (props: TreeProps): UseTree => {
         props.load?.(node, (data: Array<OriginalTreeData>) => {
           node.loading = false;
           if (!disabled) node.disabled = false;
+          data = data.filter((a) => a); // 过滤无效节点
           mixin(data, node.id);
           if (!data.length) node.leaf = true;
         });
