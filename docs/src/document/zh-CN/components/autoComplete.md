@@ -293,18 +293,19 @@ export default {
 
 ::: table
 
-| 属性                 | 描述                                                                                                             | 类型                                        | 默认值  | 可选值              |
-| -------------------- | ---------------------------------------------------------------------------------------------------------------- | ------------------------------------------- | ------- | ------------------- |
-| name                 | 原始属性 name                                                                                                    | `string`                                    | --      | --                  |
-| placeholder          | 提示信息                                                                                                         | `string`                                    | --      | --                  |
-| disabled             | 禁用状态                                                                                                         | `boolean`                                   | `false` | `true` `false`      |
-| v-model / modelValue | 值                                                                                                               | `string` `number`                           | --      | --                  |
-| allow-clear          | 清空操作                                                                                                         | `boolean`                                   | `false` | `true` `false`      |
-| fetchSuggestions     | 查询建议回调方法，用于加载建议列表 (value: string)，参数 value 为 input 输入内容，其返回值规定为 Promise 对象 。 | `Function`                                  | --      | --                  |
-| contentStyle         | 继承至 dropdown 组件，用于设置下拉面板的 style 属性                                                              | `StyleValue`                                | --      | --                  |
-| contentClass         | 继承至 dropdown 组件，用于设置下拉面板的 class 属性                                                              | `string` `Array<string \| object>` `object` | --      | --                  |
-| autoFitWidth         | 继承至 dropdown 组件，用于设置下拉面板是否与输入框宽度相同                                                       | `boolean`                                   | `false` | `true` `false`      |
-| size                 | 尺寸 (1.9.4 新增)                                                                                                | `string`                                    | `md`    | `lg` `md` `sm` `xs` |
+| 属性                 | 描述                            | 类型                                        | 默认值  | 可选值              |版本        |
+| -------------------- | ---------------------------------------------------------------------------------------------------------------- | ------------------------------------------- | ------- | ------------------- |--------- |
+| name                 | 原始属性 name                                                                                                    | `string`                                    | --      | --                  |           |
+| placeholder          | 提示信息                                                                                                         | `string`                                    | --      | --                  |           |
+| disabled             | 禁用状态                                                                                                         | `boolean`                                   | `false` | `true` `false`      |           |
+| v-model / modelValue | 值                                                                                                               | `string` `number`                           | --      | --                  |           |
+| allow-clear          | 清空操作                                                                                                         | `boolean`                                   | `false` | `true` `false`      |           |
+| fetchSuggestions     | 查询建议回调方法，用于加载建议列表 (value: string)，参数 value 为 input 输入内容，其返回值规定为 Promise 对象 。 | `Function`                                  | --      | --                  |           |
+| contentStyle         | 继承至 dropdown 组件，用于设置下拉面板的 style 属性                                                              | `StyleValue`                                | --      | --                   |          |
+| contentClass         | 继承至 dropdown 组件，用于设置下拉面板的 class 属性                                                              | `string` `Array<string \| object>` `object` | --      | --                  |           |
+| autoFitWidth         | 继承至 dropdown 组件，用于设置下拉面板是否与输入框宽度相同                                                       | `boolean`                                   | `false` | `true` `false`      |           |
+| size                 | 尺寸 (1.9.4 新增)          | `string`                                    | `md`    | `lg` `md` `sm` `xs` |           |
+| teleportProps       | 继承至 dropdown 组件，下拉面板 `传递` 属性  | `object`             | `{to: 'body', disabled: false}`   |  `vue teleport` 组件  | `2.19.0` |
 
 :::
 

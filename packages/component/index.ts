@@ -105,6 +105,8 @@ import LayWatermark from "./component/watermark/index";
 import LayPopper from "./component/popper/index";
 import LayDescriptions from "./component/descriptions/index";
 import LayDescriptionsItem from "./component/descriptionsItem/index";
+import LayTimeSelect from "./component/timeSelect/index";
+import LaySegmented from "./component/segmented/index";
 import LayConfigProvider from "./provider";
 import { InstallOptions } from "./types";
 
@@ -209,6 +211,8 @@ const components: Record<string, Plugin> = {
   LayPopper,
   LayDescriptions,
   LayDescriptionsItem,
+  LayTimeSelect,
+  LaySegmented,
 };
 
 const install = (app: App, options?: InstallOptions): void => {
@@ -320,6 +324,8 @@ export {
   LayPopper,
   LayDescriptions,
   LayDescriptionsItem,
+  LayTimeSelect,
+  LaySegmented,
   install,
 };
 

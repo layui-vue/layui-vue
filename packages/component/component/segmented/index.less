@@ -1,0 +1,70 @@
+.layui-segmented {
+  display: flex;
+
+  &-disabled {
+    opacity: 0.6;
+  }
+
+  .layui-segmented-item-radio {
+    visibility: collapse;
+    width: 0;
+    height: 0;
+    position: absolute;
+  }
+
+  &-container {
+    background-color: #f0f0f0;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    padding: 4px;
+    position: relative;
+    z-index: 0;
+  }
+
+  &-size-md {
+    .layui-segmented-item {
+      padding: 4px 14px;
+      font-size: 14px;
+    }
+  }
+
+  &-size-sm {
+    .layui-segmented-item {
+      padding: 2px 12px;
+      font-size: 12px;
+    }
+  }
+
+  &-size-lg {
+    .layui-segmented-item {
+      padding: 6px 16px;
+      font-size: 16px;
+    }
+  }
+
+  &-item {
+    border-radius: 4px;
+
+    &-slot {
+      user-select: none;
+      pointer-events: none;
+    }
+
+    &-label {
+      display: block;
+      z-index: 0;
+      pointer-events: none;
+      user-select: none;
+    }
+  }
+
+  &-indicator {
+    transition: all 0.25s cubic-bezier(0.35, 1, 0.35, 1) 0s;
+    position: absolute;
+    border-radius: 4px;
+    background-color: #fff;
+    z-index: -1;
+    pointer-events: none;
+  }
+}

@@ -67,7 +67,7 @@ const drawImage = () => {
         height = 32,
         top = ctx.canvas.height / 2 - height / 2,
         left = ctx.canvas.width / 2 - width / 2,
-        size = 32,
+        size,
         background = true,
         backgroundColor = "#fff",
       }: QrcodeImageProps = isString(i)
@@ -77,6 +77,8 @@ const drawImage = () => {
       if (size) {
         width = size;
         height = size;
+        top = ctx.canvas.height / 2 - height / 2;
+        left = ctx.canvas.width / 2 - width / 2;
       }
 
       const el = document.createElement("img");
@@ -93,6 +95,9 @@ const drawImage = () => {
           width, // src width
           height // src height
         );
+      };
+      el.onerror = () => {
+        console.error(`LayQrcode images:${image} Parsing failed`);
       };
     });
   });
