@@ -6,7 +6,7 @@ import LayRender from "@layui/component/component/_components/render";
 import { renderContent } from "../utils";
 
 export interface HeaderProps {
-  title: PropsContentType;
+  title: PropsContentType | boolean;
   titleStyle: string | StyleValue;
   move: boolean;
 }
@@ -25,7 +25,9 @@ const titleStyle = computed(() => {
 <template>
   <div class="layui-layer-title" :style="titleStyle">
     <slot>
-      <LayRender :render="() => renderContent(title)"></LayRender>
+      <LayRender
+        :render="() => renderContent(title as PropsContentType)"
+      ></LayRender>
     </slot>
   </div>
 </template>
