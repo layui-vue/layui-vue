@@ -95,7 +95,7 @@ const next = () => {
   // 利用取余数的方法，向后移动，如果到达末尾则会自动回到第一个
   const index =
     (children.value.findIndex((item) => item.props?.id === active.value) + 1) %
-    (children.value.length);
+    children.value.length;
   active.value = children.value.at(index)?.props?.id;
 };
 
