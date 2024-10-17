@@ -152,7 +152,7 @@ export default {
 | allow-clear | 允许清空 | `boolean`  |--  |--  |
 | content-style             | 内容自定义样式     | `StyleValue` | -- | -- |
 | content-class             | 内容自定义Class    | `string` `Array<string \| object>` `object` | -- | -- |
-| teleport-props        | 继承至 dropdown 组件，下拉面板 `传递` 属性         | `object`         | `{to: 'body', disabled: false}` |  <lay-tag type="primary" size="sm">2.19.0 新增</lay-tag> |
+| teleport-props        | 继承至 dropdown 组件，下拉面板 `传递` 属性         | `object`         | `{to: 'body', disabled: false}` |  `2.19.0` |
 
 :::
 

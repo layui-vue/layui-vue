@@ -1143,16 +1143,16 @@ const options3=[
 | contentStyle             | 内容自定义样式                             | `StyleValue` | -- | -- |
 | contentClass             | 内容自定义Class                          | `string` `Array<string \| object>` `object` | -- | -- |
 | disabled                 | 禁用                                    | `boolean`  | --  | --  |
-| checkStrictly            | 严格模式        | `boolean` | -- | <lay-tag type="primary" size="sm">2.18.0 新增</lay-tag> |
-| lazy                     | 是否启用懒加载       | `boolean` | -- | <lay-tag type="primary" size="sm">2.18.0 新增</lay-tag> |
-| load                     | 懒加载方法           | `CascaderPanelLazyloadFunction` | -- | <lay-tag type="primary" size="sm">2.18.0 新增</lay-tag> |
-| search                   | 是否启用搜索           | `boolean` | -- | <lay-tag type="primary" size="sm">2.18.0 新增</lay-tag> |
-| searchMethod             | 搜索方法            | `(value: string) => Array<CascaderPanelItemProps>` | -- | <lay-tag type="primary" size="sm">2.18.0 新增</lay-tag> |
-| multiple                 | 多选模式           | `boolean` | -- | <lay-tag type="primary" size="sm">2.18.0 新增</lay-tag> |
-| fullpath                 | 多选模式下显示Tag的完整路径               | `boolean` | -- | <lay-tag type="primary" size="sm">2.18.0 新增</lay-tag> |
-| min-collapsed-num        | 多选模式下显示Tag超过指定标签后开启折叠       | `number` | `3` | <lay-tag type="primary" size="sm">2.19.0 新增</lay-tag>  |
-| collapse-tags-tooltip    | 多选模式下显示Tag折叠提示      | `boolean` | -- | <lay-tag type="primary" size="sm">2.19.0 新增</lay-tag> |
-| teleport-props        | 继承至 dropdown 组件，下拉面板 `传递` 属性              | `object`   | `{to: 'body', disabled: false}` | <lay-tag type="primary" size="sm">2.19.0 新增</lay-tag>|
+| checkStrictly            | 严格模式        | `boolean` | -- | `2.18.0` |
+| lazy                     | 是否启用懒加载       | `boolean` | -- | `2.18.0` |
+| load                     | 懒加载方法           | `CascaderPanelLazyloadFunction` | -- | `2.18.0` |
+| search                   | 是否启用搜索           | `boolean` | -- | `2.18.0` |
+| searchMethod             | 搜索方法            | `(value: string) => Array<CascaderPanelItemProps>` | -- | `2.18.0` |
+| multiple                 | 多选模式           | `boolean` | -- | `2.18.0` |
+| fullpath                 | 多选模式下显示Tag的完整路径               | `boolean` | -- | `2.18.0` |
+| min-collapsed-num        | 多选模式下显示Tag超过指定标签后开启折叠       | `number` | `3` | `2.19.0`  |
+| collapse-tags-tooltip    | 多选模式下显示Tag折叠提示      | `boolean` | -- | `2.19.0` |
+| teleport-props        | 继承至 dropdown 组件，下拉面板 `传递` 属性              | `object`   | `{to: 'body', disabled: false}` | `2.19.0` |
 :::
 
 ::: title Cascader 事件
