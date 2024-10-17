@@ -65,8 +65,8 @@ export interface LayerProps {
     | "photos"
     | "notify"
     | "prompt";
-  title?: PropsContentType;
-  footer?: PropsContentType;
+  title?: PropsContentType | boolean;
+  footer?: PropsContentType | boolean;
   titleStyle?: string | StyleValue;
   footerStyle?: string | StyleValue;
   content?: PropsContentType;

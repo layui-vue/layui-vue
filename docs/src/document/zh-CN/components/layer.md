@@ -890,9 +890,9 @@ const openCallback = () => {
 | _v-model_           | 显示                                                              | boolean                                                   | `false`                |                                                                                    |          |
 | _id_                | layer 标识 可不传(内部生成)                                       | `string`                                                  |                        |                                                                                    |          |
 | _type_              | 类型                                                              | string                                                    | `1`                    | `0(dialog)` `1(page)` `2(iframe)` `3(loading)` `4(drawer)` `5(photos)` `6(notify)` |          |
-| _title_             | 标题                                                              | `string` `boolean` `Function` `PropsContentType (2.19.0)` | `标题`                 | --                                                                                 |          |
+| _title_             | 标题                                                              |  `boolean` `PropsContentType (2.19.0)` | `标题`                 | --                                                                                 |          |
 | _title-style_       | 标题样式                                                          | `string` `StyleValue`                                     | --                     | --                                                                                 |          |
-| _footer_            | 底部                                                              | `string` `boolean` `Function` `PropsContentType`          |                        |                                                                                    | `2.19.0` |
+| _footer_            | 底部                            |  `boolean` `PropsContentType (2.19.0)`          |                        |                                                                                    | `2.19.0` |
 | _footer-style_      | 底部样式                                                          | `string` `StyleValue`                                     | --                     | --                                                                                 | `2.19.0` |
 | _content_           | 内容                                                              | `PropsContentType`                                        | --                     | --                                                                                 |          |
 | _is-html-fragment_  | `content` 是否解析 html                                           | `boolean`                                                 | `false`                | --                                                                                 |          |
@@ -947,7 +947,7 @@ const openCallback = () => {
 ::: table
 
 | 属性           | 描述                                                                       | 类型       | 默认值            | 可选值 |
-| -------------- | -------------------------------------------------------------------------- | ---------- | ----------------- | ------ | --- |
+| -------------- | -------------------------------------------------------------------------- | ---------- | ----------------- | ------ | 
 | _full_         | 最大化回调                                                                 | `function` | `(id) => {}`      |        |
 | _min_          | 最小化回调                                                                 | `function` | `(id) => {}`      |        |
 | _revert_       | 恢复最小/最大化回调                                                        | `function` | `(id) => {}`      |        |
@@ -956,7 +956,7 @@ const openCallback = () => {
 | _close_        | 内部(右上角/点击遮罩/默认确认按钮)关闭回调                                 | `function` | `(id) => {}`      |        |
 | _before-close_ | 内部(右上角/点击遮罩/默认确认按钮)关闭前回调，返回值为 `true` 内部才会关闭 | `function` | `(id) => boolean` |        |
 | _destroy_      | 销毁回调                                                                   | `function` | `() => {}`        |        |
-| _yes_          | 点击底部默认按钮                                                           | `function` | `id`              |        |     |
+| _yes_          | 点击底部默认按钮                                                           | `function` | `id`              |        |     
 | _move-start_   | 弹窗拖动位置开始回调                                                       | `function` | `id`              | -      |
 | _moving_       | 弹窗拖动位置回调                                                           | `function` | `id`              | -      |
 | _move-end_     | 弹窗拖动位置结束回调                                                       | `function` | `id`              | -      |
