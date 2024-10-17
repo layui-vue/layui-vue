@@ -245,7 +245,7 @@ export default {
 | circle-width       | 环形进度条线条宽度 | `number`          | 默认为 `6` 单位是 px                          | `6`     |          |
 | animated           | 是否开启动画       | `boolean`         | --                                            | `false` | `2.19.0` |
 | animation-duration | 动画时长（毫秒）   | `number`          | --                                            | `3000`  | `2.19.0` |
-| indeeterminate     | 是否为无限进度条   | `boolean`         | --                                            | `false` | `2.19.0` |
+| indeterminate     | 是否为无限进度条   | `boolean`         | --                                            | `false` | `2.19.0` |
 
 :::
 
