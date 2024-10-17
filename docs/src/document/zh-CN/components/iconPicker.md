@@ -10,7 +10,7 @@
 ::: title 基础使用
 :::
 
-::: demo 使用 lay-icon-picker 标签, 创建图标选择器
+::: demo 使用 `lay-icon-picker` 标签, 创建图标选择器
 
 <template>
   <lay-icon-picker v-model="icon"></lay-icon-picker>
@@ -36,10 +36,10 @@ export default {
 ::: title 禁用选择
 :::
 
-::: demo 使用 lay-icon-picker 标签, 创建图标选择器
+::: demo 使用 `disabled` 属性, 禁用图标选择器
 
 <template>
-  <lay-icon-picker v-model="icon" :disabled="true"></lay-icon-picker>
+  <lay-icon-picker v-model="icon" disabled></lay-icon-picker>
 </template>
 
 <script>
@@ -62,7 +62,7 @@ export default {
 ::: title 选择清空
 :::
 
-::: demo 使用 lay-icon-picker 标签, 创建图标选择器
+::: demo 可以传入 `allow-clear` 属性来开启选择清空功能
 
 <template>
   <lay-icon-picker v-model="icon" :allow-clear="true"></lay-icon-picker>
@@ -114,10 +114,10 @@ export default {
 ::: title 开启搜索
 :::
 
-::: demo 通过 showSearch 开启图标列表的搜索功能
+::: demo 通过 `show-search` 开启图标列表的搜索功能
 
 <template>
-  <lay-icon-picker v-model="icon" page showSearch></lay-icon-picker>
+  <lay-icon-picker v-model="icon" page show-search></lay-icon-picker>
 </template>
 
 <script>
@@ -146,6 +146,8 @@ export default {
   <lay-space direction="vertical">
     <lay-space>
       <lay-checkbox v-model="showIconSets">展示图标集</lay-checkbox>
+      <lay-checkbox v-model="allowSearch">允许搜索</lay-checkbox>
+      <lay-checkbox v-model="enablePage">开启分页</lay-checkbox>
       <lay-select v-model="currentIconSet">
         <lay-select-option value="layui">Layui</lay-select-option>
         <lay-select-option value="bs">Bootstrap Icons</lay-select-option>
@@ -155,6 +157,8 @@ export default {
       v-model="icon10"
       type="layui-icon-face-smile"
       :icon-sets="iconSet"
+      :show-search="allowSearch"
+      :page="enablePage"
       :show-icon-sets="showIconSets"
       :current-icon-set="currentIconSet"
     ></lay-icon-picker>
@@ -173,6 +177,8 @@ export default {
     const showIconSets = ref(true);
     const icon10 = ref("bi-0-circle");
     const currentIconSet = ref("bs");
+    const allowSearch = ref(true);
+    const enablePage = ref(true);
     const iconSet = ref([
       "layui",
       {
@@ -276,7 +282,9 @@ export default {
       icon10,
       iconSet,
       showIconSets,
-      currentIconSet
+      currentIconSet,
+      allowSearch,
+      enablePage,
     };
   },
 };

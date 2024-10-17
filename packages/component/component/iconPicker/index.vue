@@ -133,6 +133,7 @@ const renderWrapper = () => {
     wrapper = h(
       LayTab,
       {
+        type: "brief",
         modelValue: _tabIndex.value,
         "onUpdate:modelValue": (index) => (_tabIndex.value = index),
         tabPosition: "left",
