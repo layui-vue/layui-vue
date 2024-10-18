@@ -22,6 +22,11 @@ export type UseTree = {
    */
   _flatTree: ComputedRef<TreeData[]>;
   /**
+   * 查找节点路径
+   * @param id 节点id
+   */
+  _findNodePath: (id: string | number) => TreeData[];
+  /**
    * 查找父节点
    * @param id 节点id
    */
@@ -74,6 +79,10 @@ export type UseTree = {
    * 已展开的节点ID
    */
   expandedKeys: ComputedRef<(string | number)[]>;
+  /**
+   * 已展开的节点ID路径
+   */
+  expandedPath: ComputedRef<(string | number)[][]>;
 };
 
 const useTree = (props: TreeProps): UseTree => {
@@ -388,6 +397,12 @@ const useTree = (props: TreeProps): UseTree => {
   const expandedKeys = computed(() =>
     _flatTree.value.filter((d) => d.expanded).map((d) => d.id)
   );
+  /**
+   * 已展开的节点ID路径
+   */
+  const expandedPath = computed(() =>
+    expandedKeys.value.map((d) => _find_path(d).map((e) => e.id))
+  );
 
   if (!_data.value.length) _lazyLoad().catch(console.error);
   else mixin(_data.value);
@@ -449,12 +464,14 @@ const useTree = (props: TreeProps): UseTree => {
     _flatTree,
     _findNode: _find_node,
     _findMockNodes: _find_mock_nodes,
+    _findNodePath: _find_path,
     _findParent,
     _findSiblings,
     _findLeafs,
     _lazyLoad,
     _reloadNodeStatus,
     expandedKeys,
+    expandedPath,
     checkedKeys,
     checkedPath,
     checkedTitle,

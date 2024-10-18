@@ -69,6 +69,7 @@ export interface TreeProps {
   nodeClick?: (node: TreeData) => boolean | undefined;
   nodeDblClick?: (node: TreeData) => boolean | undefined;
   nodeContextMenu?: (node: TreeData) => boolean | undefined;
+  accordion?: boolean;
 }
 
 export const TREE_CONTEXT = Symbol("TREE_CONTEXT");

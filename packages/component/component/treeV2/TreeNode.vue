@@ -112,11 +112,14 @@ let {
   _tree,
   _flatTree,
   _lazyLoad,
+  _findNode,
+  _findNodePath,
   _findSiblings,
   _findLeafs,
   _reloadNodeStatus,
   checkedKeys,
   expandedKeys,
+  expandedPath,
 } = inject(TREE_CONTEXT) as UseTree;
 
 const hasShortDash = (node: TreeData) => {
@@ -171,6 +174,34 @@ const handleIconClick = (e: MouseEvent, item: TreeData) => {
   if (props.nodeClick && props.nodeClick(item)) return stopEventPopup(e);
   item.expanded = !item.expanded;
   _lazyLoad(item).catch(() => {});
+
+  if (props.accordion) {
+    const _curNodeIdPath = _findNodePath(item.id).map((a) => a.id);
+    const _expandedPath = expandedPath.value;
+
+    // 异树，在根节点切换
+    const _diff_tree = _expandedPath
+      .filter((a) => a.at(0) !== _curNodeIdPath.at(0))
+      .map((b) => _findNode(b.at(0)))
+      .filter((c) => !!c);
+    // 同树，在同层节点切换
+    const _same_tree =
+      _curNodeIdPath.length >= 2 &&
+      _expandedPath
+        .filter(
+          (a) =>
+            a.length === _curNodeIdPath.length &&
+            a.at(0) === _curNodeIdPath.at(0) &&
+            a.at(-1) !== _curNodeIdPath.at(-1)
+        )
+        .map((b) => _findNode(b.at(-1)))
+        .filter((d) => !!d)
+        .filter((e) => e.expanded);
+
+    _diff_tree.forEach((a) => (a.expanded = false));
+    _same_tree && _same_tree.forEach((a) => (a.expanded = false));
+  }
+
   emitExpandedKeys();
 };
 
