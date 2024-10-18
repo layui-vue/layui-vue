@@ -137,7 +137,7 @@
           <lay-tooltip content="layui" position="top">
             <a
               style="height: 40px; display: inline-block"
-              href="https://layui.gitee.io/v2"
+              href="https://layui.dev/"
               target="_blank"
             >
               <lay-avatar
@@ -151,7 +151,7 @@
           <lay-tooltip content="furion" position="top">
             <a
               style="height: 40px; display: inline-block"
-              href="https://dotnetchina.gitee.io/furion"
+              href="https://furion.net/"
               target="_blank"
             >
               <lay-avatar
@@ -179,11 +179,11 @@
           <lay-tooltip content="aizuda" position="top">
             <a
               style="height: 40px; display: inline-block"
-              href="http://doc.aizuda.com"
+              href="https://aizuda.com/home"
               target="_blank"
             >
               <lay-avatar
-                src="http://doc.aizuda.com//img/azd.png"
+                src="https://aizuda.com/favicon.svg"
                 style="background: transparent"
               ></lay-avatar>
             </a>
@@ -235,12 +235,12 @@
           <lay-tooltip content="流之云" position="top">
             <a
               style="height: 40px; width: 40px; display: inline-block"
-              href="https://gitee.com/ntdgg/tpflow"
+              href="https://www.gadmin8.com/"
               target="_blank"
             >
               <lay-avatar
-                src="https://portrait.gitee.com/uploads/avatars/namespace/118/356797_ntdgg_1635818279.png!avatar100"
-                style="background: transparent; width: 50px"
+                src="https://www.gadmin8.com/favicon.ico"
+                style="background: transparent; width: 32px; height: 32px"
               ></lay-avatar>
             </a>
           </lay-tooltip>
