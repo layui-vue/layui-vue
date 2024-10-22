@@ -17,7 +17,7 @@ export default function createContainer(klass: string): ContainerArgs {
         if (token.nesting === 1) {
           const anchors = [];
           for (const token of tokens) {
-            if (token.nesting === 1 && token.info.startsWith("title")) {
+            if (token.nesting === 1 && token.info.trim().startsWith("title")) {
               const info = token.info.trim().slice(klass.length).trim();
               anchors.push(info);
             }

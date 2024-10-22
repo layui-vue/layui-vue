@@ -13,6 +13,46 @@
 ::: demo
 <template>
   <lay-timeline>
+    <lay-timeline-item title="2.19.x">
+      <ul>
+        <a name="2-19-0"></a>
+        <li>
+          <h3>2.19.0 <span class="layui-badge-rim">2024-10-22</span></h3>
+          <ul>
+              <li>[升级] @layui/icons-vue 升级至1.1.3。</li>
+              <li>[调整] @layui/icons-vue 调整umd包全局变量名为LayuiIcons。</li>
+              <li>[升级] @layui/layer-vue 升级至2.4.4。</li>
+              <li>[调整] @layui/layer-vue 调整umd包全局变量名为LayuiLayer。</li>
+              <li>[新增] @layui/layer-vue 使用函数调用支持title/footer传入VNode形式。</li>
+              <li>[升级] @layui/json-schema-form 升级至1.0.15。</li>
+              <li>[调整] @layui/json-schema-form 调整umd包全局变量名为LayuiJsonSchemaForm。</li>
+              <li>------------------------------以下为 @layui/layui-vue 调整------------------------------</li>
+              <li>[调整] affix组件 内部props类型名称修正：AiffxProps > AffixProps。<a href="https://gitee.com/layui-vue/layui-vue/pulls/408">详情</a></li>
+              <li>[新增] 新增timeSelect(时间点选择器)组件。<a href="https://www.layui-vue.com/zh-CN/components/timeSelect">详情</a></li>
+              <li>[新增] 新增segmented(分段选择器)组件。<a href="https://www.layui-vue.com/zh-CN/components/segmented">详情</a></li>
+              <li>[新增] datePicker组件 年份范围选择模式、允许选择任意年份。<a href="https://www.layui-vue.com/zh-CN/components/datepicker#范围选择">详情</a></li>
+              <li>[新增] datePicker组件 disabled-date属性 用于禁止任何日期。<a href="https://www.layui-vue.com/zh-CN/components/datepicker#禁止任何日期">详情</a></li>
+              <li>[新增] datePicker组件 input-format属性 用于首次未点击时，下拉弹窗打开时默认显示的时间，传空为组件首次渲染时间。<a href="https://www.layui-vue.com/zh-CN/components/datepicker#默认日期">详情</a></li>
+              <li>[新增] datePicker组件 year-page属性 用于年份选择器每页年份的个数。<a href="https://www.layui-vue.com/zh-CN/components/datepicker#年份选择">详情</a></li>
+              <li>[新增] datePicker组件 shortcuts属性 用于设置快捷选项。<a href="https://www.layui-vue.com/zh-CN/components/datepicker#快捷选项">详情</a></li>
+              <li>[新增] tagInput组件 新增tag新增校验、tag触及最大数量事件。<a href="https://gitee.com/layui-vue/layui-vue/pulls/405">详情</a></li>
+              <li>[新增] textArea组件 新增autosize.minRow/autosize.maxRow用于设置高度。<a href="https://gitee.com/layui-vue/layui-vue/pulls/409">详情</a></li>
+              <li>[新增] progress组件 支持分段与动画。<a href="https://gitee.com/layui-vue/layui-vue/pulls/419">详情</a></li>
+              <li>[修复] table组件 设置导出excel文件单元格为文本。<a href="https://gitee.com/layui-vue/layui-vue/pulls/425">详情</a></li>
+              <li>[修复] table组件 切换default-expand-all属性标题与主体单元格为对齐。<a href="https://gitee.com/layui-vue/layui-vue/pulls/424">详情</a></li>
+              <li>[修复] table组件 点击未设置sort列程序报错。<a href="https://gitee.com/layui-vue/layui-vue/pulls/423">详情</a></li>
+              <li>[修复] tagInput组件 修复按下删除键误删tag。<a href="https://gitee.com/layui-vue/layui-vue/pulls/405">详情</a></li>
+              <li>[修复] splitPanel组件 垂直布局嵌套水平布局line方向错误。<a href="https://gitee.com/layui-vue/layui-vue/pulls/422">详情</a></li>
+              <li>[修复] descriptions组件 渲染内部descriptions-item丢失响应式。<a href="https://gitee.com/layui-vue/layui-vue/pulls/399">详情</a></li>
+              <li>[修复] descriptions组件 存在title/extra渲染header部分。<a href="https://gitee.com/layui-vue/layui-vue/pulls/421">详情</a></li>
+              <li>[修复] qrCode组件 设置width/height未生效与图片未居中。<a href="https://gitee.com/layui-vue/layui-vue/pulls/415">详情</a></li>
+              <li>[修复] tree组件 show-line为false时展开最后一级报错。<a href="https://gitee.com/layui-vue/layui-vue/pulls/411">详情</a></li>
+              <li>[修复] carousel组件 延迟渲染CarouselItem导致无法无缝轮播。<a href="https://gitee.com/layui-vue/layui-vue/pulls/410">详情</a></li>
+              <li>[修复] tooltip组件 arrow箭头位置异常。<a href="https://gitee.com/layui-vue/layui-vue/pulls/403">详情</a></li>
+          </ul>
+        </li>
+      </ul>
+    </lay-timeline-item>
     <lay-timeline-item title="2.18.x">
       <ul>
         <a name="2-18-3"></a>
