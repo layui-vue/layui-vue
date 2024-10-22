@@ -3,8 +3,8 @@ import "./index.less";
 import dayjs from "dayjs";
 import { computed, provide } from "vue";
 import customParseFormat from "dayjs/plugin/customParseFormat";
-import IsSameOrBefore from "dayjs/plugin/IsSameOrBefore";
-import IsSameOrAfter from "dayjs/plugin/IsSameOrAfter";
+import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
+import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
 import objectSupport from "dayjs/plugin/objectSupport";
 import {
   DATE_PICKER_CONTEXT,
@@ -18,8 +18,8 @@ import { useDatePicker } from "./hook/useDatePicker";
 import InputBlock from "./component/common/InputBlock.vue";
 
 dayjs.extend(customParseFormat);
-dayjs.extend(IsSameOrBefore);
-dayjs.extend(IsSameOrAfter);
+dayjs.extend(isSameOrBefore);
+dayjs.extend(isSameOrAfter);
 dayjs.extend(objectSupport);
 
 export type DatePickerProps = _DatePickerProps;
