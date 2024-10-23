@@ -1,15 +1,14 @@
-import { UserConfigExport, loadEnv } from "vite";
+import type { UserConfigExport, UserConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import vueJsx from "@vitejs/plugin-vue-jsx";
 import { resolve } from "path";
 import terser from "@rollup/plugin-terser";
 import { componentDir } from "./constant";
 
-export default ({ mode }): UserConfigExport => {
-  const env = loadEnv(mode, componentDir, "");
+export default ({ mode }: UserConfig): UserConfigExport => {
   return {
     define: {
-      "process.env": env,
+      "process.env.NODE_ENV": mode,
     },
     publicDir: false,
     resolve: {

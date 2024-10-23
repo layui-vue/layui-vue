@@ -1,14 +1,12 @@
-import { defineConfig, mergeConfig, loadEnv } from "vite";
+import { defineConfig, mergeConfig } from "vite";
 import { babel } from "@rollup/plugin-babel";
 
 import baseConfig from "../../build/baseConfig";
 
 export default defineConfig(({ mode }) => {
-  const env = loadEnv(mode, "./");
-
   return mergeConfig(baseConfig(__dirname), {
     define: {
-      "process.env": env,
+      "process.env.NODE_ENV": mode,
     },
     build: {
       lib: {
