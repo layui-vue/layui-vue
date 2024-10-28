@@ -44,7 +44,7 @@ export default {
 <template>
 <lay-space direction="vertical" fill wrap size="lg">
     <lay-switch v-model="ellipsisTooltip"></lay-switch>
-    <lay-page v-model="currentPage2"  :ellipsisTooltip="ellipsisTooltip" :limit="limit" :total="total_new"></lay-page>
+    <lay-page v-model="currentPage2" :ellipsis-tooltip="ellipsisTooltip" :limit="limit" :total="total_new"></lay-page>
 </lay-space>
 </template>
 
@@ -391,7 +391,7 @@ export default {
 | pages               | 显示切页按钮数量             | `5`                                  |
 | limits              | 切换每页数量的选择项         | `[10,20,30,40,50]`                   |
 | hide-on-single-page | 只有一页时隐藏               | `false`                              |
-| ellipsisTooltip     | 显示更多翻页内容             | `false`                              |
+| ellipsis-tooltip    | 显示更多翻页内容             | `false`                              |
 | disabled            | 分页禁用                     | `false`                              |
 | theme               | 主题色                       | `green`                              |
 
