@@ -246,9 +246,12 @@ const handleItemCheck = (checked: boolean, item: TreeData) => {
   };
 
   if (item.disabled) return;
-  _lazyLoad(item)
-    .catch(console.warn)
-    .finally(() => job(item));
+
+  if (props.loadOnCheck)
+    _lazyLoad(item)
+      .catch(console.warn)
+      .finally(() => job(item));
+  else job(item);
 };
 
 watch(

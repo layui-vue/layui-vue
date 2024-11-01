@@ -65,6 +65,7 @@ export interface TreeProps {
   cacheData?: Array<OriginalTreeData>;
   lazy?: boolean;
   load?: LoadFunction;
+  loadOnCheck?: boolean;
   searchNodeMethod?: SearchNodeMethodType;
   nodeClick?: (node: TreeData) => boolean | undefined;
   nodeDblClick?: (node: TreeData) => boolean | undefined;
