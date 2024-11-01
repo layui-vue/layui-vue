@@ -15,6 +15,21 @@
   <lay-timeline>
     <lay-timeline-item title="2.19.x">
       <ul>
+        <a name="2-19-1"></a>
+        <li>
+          <h3>2.19.1 <span class="layui-badge-rim">2024-11-01</span></h3>
+          <ul>
+              <li>[新增] form组件 新增表单校验对于asyncValidator的支持。<a href="https://gitee.com/layui-vue/layui-vue/pulls/435">详情</a></li>
+              <li>[新增] select组件 新增autoFitMinWidth属性。<a href="https://gitee.com/layui-vue/layui-vue/pulls/437">详情</a></li>
+              <li>[修复] datePicker组件 date/range 模式下modelValue初始化下拉右侧看板日期错误。<a href="https://gitee.com/layui-vue/layui-vue/pulls/438">详情</a></li>
+              <li>[修复] table组件 开启 default-toolbar 控制台存在警告。<a href="https://gitee.com/layui-vue/layui-vue/pulls/436">详情</a></li>
+              <li>[修复] table组件 树形表格无法导出children的问题。<a href="https://gitee.com/layui-vue/layui-vue/pulls/430">详情</a></li>
+              <li>[修复] page组件 开启ellipsisTooltip 前置翻页信息跳转不准确。<a href="https://gitee.com/layui-vue/layui-vue/pulls/434">详情</a></li>
+              <li>[修复] tab组件 切换后tab-item中的select下拉未正常渲染。<a href="https://gitee.com/layui-vue/layui-vue/pulls/433">详情</a></li>
+          </ul>
+        </li>
+      </ul>
+      <ul>
         <a name="2-19-0"></a>
         <li>
           <h3>2.19.0 <span class="layui-badge-rim">2024-10-22</span></h3>
