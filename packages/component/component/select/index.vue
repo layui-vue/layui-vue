@@ -35,6 +35,7 @@ export interface SelectProps {
   multiple?: boolean;
   options?: SelectOptionProps[];
   autoFitWidth?: boolean;
+  autoFitMinWidth?: boolean;
   size?: SelectSize;
   collapseTagsTooltip?: boolean;
   minCollapsedNum?: number;
@@ -62,6 +63,7 @@ const props = withDefaults(defineProps<SelectProps>(), {
   minCollapsedNum: 3,
   allowClear: false,
   autoFitWidth: true,
+  autoFitMinWidth: true,
   showSearch: false,
   modelValue: null,
   disabled: false,
@@ -257,6 +259,7 @@ provide("searchMethod", props.searchMethod);
       :contentClass="contentClass"
       :contentStyle="contentStyle"
       :autoFitWidth="autoFitWidth"
+      :autoFitMinWidth="autoFitMinWidth"
       :teleportProps="teleportProps"
       @hide="handleHide"
       @show="openState = true"
