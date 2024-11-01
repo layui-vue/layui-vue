@@ -408,45 +408,49 @@ const exportData = () => {
     }
     tableStr += "</tr>";
   }
-  tableDataSource.value.forEach((item, rowIndex) => {
-    tableStr += "<tr>";
-    tableBodyColumns.value.forEach((tableColumn, columnIndex) => {
-      if (!tableColumn.ignoreExport) {
-        // 如果该列是特殊列，并且类型为 number 时，特殊处理
-        if (tableColumn.type && tableColumn.type == "number") {
-          tableStr += `<td>${rowIndex + 1}</td>`;
-        } else {
-          // 如果不是特殊列，进行字段匹配处理
-          if (tableColumn.type == undefined) {
-            var columnData = undefined;
-            Object.keys(item).forEach((name) => {
-              if (tableColumn.key === name) {
-                columnData = item;
-              }
-            });
-            // 拼接列
-            const rowColSpan = props.spanMethod(
-              item,
-              tableColumn,
-              rowIndex,
-              columnIndex
-            );
-            const rowspan = rowColSpan ? rowColSpan[0] : 1;
-            const colspan = rowColSpan ? rowColSpan[1] : 1;
+  const doExport = (source: Array<any>) => {
+    source.forEach((item, rowIndex) => {
+      tableStr += "<tr>";
+      tableBodyColumns.value.forEach((tableColumn, columnIndex) => {
+        if (!tableColumn.ignoreExport) {
+          // 如果该列是特殊列，并且类型为 number 时，特殊处理
+          if (tableColumn.type && tableColumn.type == "number") {
+            tableStr += `<td>${rowIndex + 1}</td>`;
+          } else {
+            // 如果不是特殊列，进行字段匹配处理
+            if (tableColumn.type == undefined) {
+              var columnData = undefined;
+              Object.keys(item).forEach((name) => {
+                if (tableColumn.key === name) {
+                  columnData = item;
+                }
+              });
+              // 拼接列
+              const rowColSpan = props.spanMethod(
+                item,
+                tableColumn,
+                rowIndex,
+                columnIndex
+              );
+              const rowspan = rowColSpan ? rowColSpan[0] : 1;
+              const colspan = rowColSpan ? rowColSpan[1] : 1;
 
-            // 如果 rowspan 和 colspan 是 0 说明该列作为合并列的辅助列。
-            // 则不再进行结构拼接。
-            if (rowspan != 0 && colspan != 0) {
-              tableStr += `<td colspan=${colspan} rowspan=${rowspan} x:str>${
-                columnData ? columnData[tableColumn.key] : ""
-              }</td>`;
+              // 如果 rowspan 和 colspan 是 0 说明该列作为合并列的辅助列。
+              // 则不再进行结构拼接。
+              if (rowspan != 0 && colspan != 0) {
+                tableStr += `<td colspan=${colspan} rowspan=${rowspan} x:str>${
+                  columnData ? columnData[tableColumn.key] : ""
+                }</td>`;
+              }
             }
           }
         }
-      }
+      });
+      tableStr += "</tr>";
+      if (item.children) doExport(item.children);
     });
-    tableStr += "</tr>";
-  });
+  };
+  doExport(tableDataSource.value);
   var worksheet = "Sheet1";
   var uri = "data:application/vnd.ms-excel;base64,";
   var exportTemplate = `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel"
