@@ -229,10 +229,11 @@ const handleClose = (
 ) => {
   // 防止 inputValue.value 或 oldInputValue.value 为空时，删除 tag
   if (
-    isComposing.value ||
-    compositionValue.value.length ||
-    inputValue.value?.length ||
-    oldInputValue.value.length
+    e.type !== "click" &&
+    (isComposing.value ||
+      compositionValue.value.length ||
+      inputValue.value?.length ||
+      oldInputValue.value.length)
   ) {
     e.preventDefault();
     e.stopPropagation();
