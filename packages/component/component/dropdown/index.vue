@@ -14,7 +14,17 @@ import type {
 } from "./interface";
 import type { Middlewares } from "../popper/usePopper/index";
 
-import { ref, provide, computed, nextTick, watch, reactive, inject } from "vue";
+import {
+  ref,
+  provide,
+  computed,
+  nextTick,
+  watch,
+  reactive,
+  inject,
+  onUnmounted,
+} from "vue";
+import { useResizeObserver } from "@vueuse/core";
 import Trigger from "../popper/component/trigger.vue";
 import Content from "../popper/component/content.vue";
 import { POPPER_INJECTION_KEY } from "../popper/utils";
@@ -104,10 +114,23 @@ const triggerProps = computed<TriggerProps>(() => {
   };
 });
 
+const triggerWidth = ref<number>();
+
+const { stop: triggerStop } = useResizeObserver(TriggerRef, (entries) => {
+  const entry = entries[0];
+  const { width } = entry.contentRect;
+
+  triggerWidth.value = width;
+});
+
+onUnmounted(() => {
+  triggerStop && triggerStop();
+});
+
 const _contentStyle = computed(() => {
   const style: CSSProperties = {};
 
-  const width = props.alignPoint ? 0 : TriggerRef.value?.offsetWidth || 0;
+  const width = props.alignPoint ? 0 : triggerWidth.value || 0;
 
   if (props.autoFitMinWidth) {
     style.minWidth = `${width}px`;
