@@ -6,7 +6,7 @@ import baseConfig from "../../build/baseConfig";
 export default defineConfig(({ mode }) => {
   return mergeConfig(baseConfig(__dirname), {
     define: {
-      "process.env.NODE_ENV": mode,
+      "process.env.NODE_ENV": JSON.stringify(mode),
     },
     build: {
       lib: {

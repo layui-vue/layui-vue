@@ -8,7 +8,7 @@ import { componentDir } from "./constant";
 export default ({ mode }: UserConfig): UserConfigExport => {
   return {
     define: {
-      "process.env.NODE_ENV": mode,
+      "process.env.NODE_ENV": JSON.stringify(mode),
     },
     publicDir: false,
     resolve: {
