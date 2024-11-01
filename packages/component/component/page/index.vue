@@ -194,9 +194,9 @@ const setPage = computed(() => {
     currentPage.value = pageCount.value;
   }
   // 不包括 1 和 start
-  pageOpionData.value.resetLeft = Array.from({ length: start - 2 }).map(
-    (_, index) => index + 2
-  );
+  pageOpionData.value.resetLeft = Array.from({ length: start - 2 })
+    .map((_, index) => index + 2)
+    .reverse();
   pageOpionData.value.resetRight = Array.from({
     length: pageCount.value - end - 1,
   }).map((_, index) => end + index + 1);
