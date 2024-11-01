@@ -134,7 +134,7 @@ const renderWrapper = () => {
       LayTab,
       {
         type: "brief",
-        modelValue: _tabIndex.value,
+        modelValue: _tabIndex.value ?? "layui",
         "onUpdate:modelValue": (index) => (_tabIndex.value = index),
         tabPosition: "left",
       },
@@ -192,7 +192,7 @@ const renderWrapper = () => {
       ></span>
     </div>
     <template #content>
-      <lay-render :render="renderWrapper"></lay-render>
+      <lay-render v-if="openState" :render="renderWrapper"></lay-render>
     </template>
   </lay-dropdown>
 </template>
