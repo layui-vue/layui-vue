@@ -114,7 +114,8 @@ watch(
       .set("hour", old.hour())
       .set("minute", old.minute())
       .set("second", old.second());
-  }
+  },
+  { immediate: true }
 );
 
 const leftDataList = computed(() => {
@@ -132,8 +133,9 @@ const classes = computed(() => {
 
     return {
       "layui-this":
-        startDate.value?.startOf("day").valueOf() === item.value ||
-        endDate.value?.startOf("day").valueOf() === item.value,
+        item.type === "current" &&
+        (startDate.value?.startOf("day").valueOf() === item.value ||
+          endDate.value?.startOf("day").valueOf() === item.value),
       "laydate-range-hover":
         item.type === "current" &&
         // 当前日期在开始时间之后 && 当前日期再结束(hover)时间之前 (第一次点击在前>第二次点击(hover)在后)
