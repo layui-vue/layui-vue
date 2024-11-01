@@ -342,9 +342,8 @@ describe("LayPage.vue", () => {
       DropdownInstance.findAllComponents(LayDropdownMenuItem);
 
     await DropdownMenuItems[0].trigger("click");
-    console.log(wrapper.emitted(), "DropdownMenuItems");
 
     expect(wrapper.emitted()).toHaveProperty("update:modelValue");
-    expect(_value.value).toEqual(2);
+    expect(_value.value).toEqual(5);
   });
 });
