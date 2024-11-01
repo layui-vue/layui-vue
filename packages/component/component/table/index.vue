@@ -1021,12 +1021,13 @@ defineExpose({ getCheckData });
       </div>
       <div v-if="defaultToolbar" class="layui-table-tool-self">
         <!-- 筛选 -->
-        <lay-dropdown
-          v-if="showToolbar('filter')"
-          placement="bottom-end"
-          :style="toolbarStyle('filter')"
-        >
-          <div class="layui-inline" :title="t('table.filter')" lay-event>
+        <lay-dropdown v-if="showToolbar('filter')" placement="bottom-end">
+          <div
+            class="layui-inline"
+            :title="t('table.filter')"
+            lay-event
+            :style="toolbarStyle('filter')"
+          >
             <i class="layui-icon layui-icon-slider"></i>
           </div>
           <template #content>
