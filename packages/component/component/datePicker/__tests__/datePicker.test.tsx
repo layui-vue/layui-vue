@@ -131,7 +131,11 @@ describe("LayDatePicker date type", () => {
     const wrapper = mount({
       setup() {
         return () => (
-          <LayDatePicker min="2024/10/2" max="2024/10/13"></LayDatePicker>
+          <LayDatePicker
+            defaultValue="2024/10/1"
+            min="2024/10/2"
+            max="2024/10/13"
+          ></LayDatePicker>
         );
       },
     });
