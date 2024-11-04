@@ -15,6 +15,15 @@
   <lay-timeline>
     <lay-timeline-item title="2.19.x">
       <ul>
+        <a name="2-19-2"></a>
+        <li>
+          <h3>2.19.2 <span class="layui-badge-rim">2024-11-04</span></h3>
+          <ul>
+              <li>[修复] @layui/layui-vue umd版本，存在 production 为空报错。
+          </ul>
+        </li>
+      </ul>
+      <ul>
         <a name="2-19-1"></a>
         <li>
           <h3>2.19.1 <span class="layui-badge-rim">2024-11-01</span></h3>
