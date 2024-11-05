@@ -289,6 +289,19 @@ const time5 = ref();
 | _withEndTime_   | `boolean`       | `true`       | 是否显示结束时间                                                            |
 | _format_   | `string`        | `'H:i'`      | 绑定值的格式                                                                |
 | _skip_          | `Array<string>` | `[]`         | 跳过的值，例如：`['00:00', '30:00']`，需要与绑定值的格式 _valueFormat_ 匹配 |
+| 支持所有 select 中的 props 属性<br>[selectProps 快捷查看](https://www.layui-vue.com/zh-CN/components/select#Select%20%E5%B1%9E%E6%80%A7)|
+
+:::
+
+::: title 事件
+:::
+
+::: table
+
+| 属性   | 描述           | 接收值                  | 
+| ------ | -------------- | ----------------------- |
+| _change_ | 选择事件       | value                   |  
+| _clear_ |清空事件 | - |  |
 
 :::
 

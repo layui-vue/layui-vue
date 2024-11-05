@@ -48,6 +48,10 @@ const props = withDefaults(defineProps<TimeSelectProps>(), {
   end: "00:00:00",
   withStartTime: true,
   withEndTime: true,
+  collapseTagsTooltip: true,
+  minCollapsedNum: 3,
+  autoFitWidth: true,
+  autoFitMinWidth: true,
 });
 
 type Distinct<T, K extends keyof any> = {
