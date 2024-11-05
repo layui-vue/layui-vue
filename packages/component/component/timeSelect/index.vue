@@ -16,6 +16,7 @@
         :label="formatter(_inputFormat, d)"
         :value="formatter(_format, d)"
       ></lay-select-option>
+      <slot></slot>
     </lay-select>
   </div>
 </template>
