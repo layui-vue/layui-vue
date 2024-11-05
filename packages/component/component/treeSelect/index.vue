@@ -40,6 +40,7 @@ export interface TreeSelectProps {
   replaceFields?: ReplaceFieldsOptionsOptional;
   defaultExpandAll?: boolean;
   teleportProps?: DropdownTeleportProps;
+  tailNodeIcon?: string;
 }
 
 export interface TreeSelectEmits {
@@ -109,7 +110,6 @@ const checkedKeys = computed({
 });
 
 const slots = useSlots();
-const hasTitleSlot = computed(() => slots.title != null);
 
 watch(
   [selectedValue, checkedKeys, treeData],
@@ -387,7 +387,7 @@ provide(LAYUI_TREE_SELECT, {
             :check-strictly="checkStrictly"
             v-model:selectedKey="selectedValue"
             v-model:checkedKeys="checkedKeys"
-            :tail-node-icon="!hasTitleSlot"
+            :tail-node-icon="tailNodeIcon"
             :replaceFields="_replaceFields"
             :defaultExpandAll="defaultExpandAll"
             :lazy="lazy"
@@ -395,11 +395,7 @@ provide(LAYUI_TREE_SELECT, {
             :searchNodeMethod="searchNodeMethod"
             @node-click="handleClick"
           >
-            <template #title="{ data }">
-              <slot name="title" :data="data">
-                {{ data.title }}
-              </slot>
-            </template>
+            <slot></slot>
           </lay-tree>
         </div>
       </template>
