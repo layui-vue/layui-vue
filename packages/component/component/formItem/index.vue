@@ -34,6 +34,7 @@ defineOptions({
 const props = withDefaults(defineProps<FormItemProps>(), {
   // mode: "block",
   tips: "",
+  required: undefined,
 });
 
 export type FormItemProps = _FormItemProps;
@@ -60,7 +61,7 @@ const ruleItems = computed(() => {
     return {};
   }
   let rulesArrs: RuleItem[] = [];
-  if (props.required || layForm.required) {
+  if (props.required || (props.required !== false && layForm.required)) {
     rulesArrs.push({ required: true });
   }
   if (props.rules) {

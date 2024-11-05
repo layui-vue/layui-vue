@@ -27,7 +27,7 @@ export default function useProps(props: any) {
 
   const isRequired = computed(() => {
     const formContext = inject("LayForm", {} as LayFormContext);
-    return props.required || formContext.required;
+    return props.required || (props.required !== false && formContext.required);
   });
 
   const tooltipProps = computed(() => {
