@@ -278,18 +278,18 @@ const time5 = ref();
 
 ::: table
 
-| 属性名          | 类型            | 默认值       | 说明                                                                        |
-| :-------------- | :-------------- | :----------- | :-------------------------------------------------------------------------- |
-| _modelValue_    | `string`        | -            | 绑定的值                                                                    |
-| _inputFormat_        | `string`        | `'H:i'`      | 输入框时间格式                                                                    |
-| _interval_      | `string`        | `'00:30:00'` | 时间间隔                                                                    |
-| _start_         | `string`        | `'00:00:00'` | 开始时间                                                                    |
-| _end_           | `string`        | `'00:00:00'` | 结束时间，如果时分秒加起来等于 0，则会生成到第二天                          |
-| _withStartTime_ | `boolean`       | `true`       | 是否显示开始时间                                                            |
-| _withEndTime_   | `boolean`       | `true`       | 是否显示结束时间                                                            |
-| _format_   | `string`        | `'H:i'`      | 绑定值的格式                                                                |
-| _skip_          | `Array<string>` | `[]`         | 跳过的值，例如：`['00:00', '30:00']`，需要与绑定值的格式 _valueFormat_ 匹配 |
-| 支持所有 select 中的 props 属性<br>[selectProps 快捷查看](https://www.layui-vue.com/zh-CN/components/select#Select%20%E5%B1%9E%E6%80%A7)|
+| 属性名                                                                                                                                   | 类型            | 默认值       | 说明                                                                        |
+| :--------------------------------------------------------------------------------------------------------------------------------------- | :-------------- | :----------- | :-------------------------------------------------------------------------- |
+| _modelValue_                                                                                                                             | `string`        | -            | 绑定的值                                                                    |
+| _inputFormat_                                                                                                                            | `string`        | `'H:i'`      | 输入框时间格式                                                              |
+| _interval_                                                                                                                               | `string`        | `'00:30:00'` | 时间间隔                                                                    |
+| _start_                                                                                                                                  | `string`        | `'00:00:00'` | 开始时间                                                                    |
+| _end_                                                                                                                                    | `string`        | `'00:00:00'` | 结束时间，如果时分秒加起来等于 0，则会生成到第二天                          |
+| _withStartTime_                                                                                                                          | `boolean`       | `true`       | 是否显示开始时间                                                            |
+| _withEndTime_                                                                                                                            | `boolean`       | `true`       | 是否显示结束时间                                                            |
+| _format_                                                                                                                                 | `string`        | `'H:i'`      | 绑定值的格式                                                                |
+| _skip_                                                                                                                                   | `Array<string>` | `[]`         | 跳过的值，例如：`['00:00', '30:00']`，需要与绑定值的格式 _valueFormat_ 匹配 |
+| 支持所有 select 中的 props 属性<br>[selectProps 快捷查看](https://www.layui-vue.com/zh-CN/components/select#Select%20%E5%B1%9E%E6%80%A7) |
 
 :::
 
@@ -298,10 +298,10 @@ const time5 = ref();
 
 ::: table
 
-| 属性   | 描述           | 接收值                  | 
-| ------ | -------------- | ----------------------- |
-| _change_ | 选择事件       | value                   |  
-| _clear_ |清空事件 | - |  |
+| 属性     | 描述     | 接收值 |
+| -------- | -------- | ------ |
+| _change_ | 选择事件 | value  |
+| _clear_  | 清空事件 | -      |
 
 :::
 
