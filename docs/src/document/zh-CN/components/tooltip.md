@@ -397,6 +397,7 @@ const changeText = () => {
 | trigger   | 触发方式 | `string` | `hover` | `click` `hover` `contextmenu` `focus` | - |
 | popper-class    | tooltip内容box类名 | `string` `array`  |  | | `2.17.7类型删除object` |
 | popper-style     | tooltip内容box类名 | `string` `object` |  | |  |
+| teleportProps    | 下拉面板 `传递` 属性  | `object`             | `{to: 'body', disabled: false}`   |  `vue teleport` 组件  | `2.19.3` |
 
 :::
 
