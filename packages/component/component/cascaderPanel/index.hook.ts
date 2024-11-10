@@ -210,7 +210,8 @@ export default function useCascaderPanel(
     () => props.options,
     () => {
       originData.value = sanitizer(props.options ?? [], undefined);
-    }
+    },
+    { deep: true }
   );
 
   watch(
