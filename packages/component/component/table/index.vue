@@ -68,7 +68,6 @@ const { rowClick, rowDoubleClick, rowContextmenu, cellDoubleClick, rowExpand } =
   useEmit(emit);
 const { t } = useI18n();
 const slot = useSlots();
-const slots = slot.default && slot.default();
 const tableRef = ref();
 
 const s = "";
@@ -315,8 +314,6 @@ watch(
       const ids: string[] = [];
       lookForAllId(props.dataSource, ids);
       tableExpandKeys.value = ids;
-    } else {
-      tableExpandKeys.value = [];
     }
   },
   {
