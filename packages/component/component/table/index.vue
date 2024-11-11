@@ -68,10 +68,8 @@ const { rowClick, rowDoubleClick, rowContextmenu, cellDoubleClick, rowExpand } =
   useEmit(emit);
 const { t } = useI18n();
 const slot = useSlots();
-const slots = slot.default && slot.default();
 const tableRef = ref();
 
-const s = "";
 const allChecked = ref(false);
 const hasChecked = ref(false);
 const tableDataSource = ref<any[]>([...props.dataSource]);
