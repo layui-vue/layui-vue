@@ -2,6 +2,8 @@ import type {
   ValidateCallback,
   ValidateError,
   ValidateMessages,
+  ValidateFieldsError,
+  Values,
 } from "async-validator";
 import { LayTooltipContext } from "./tooltip";
 
@@ -30,7 +32,7 @@ export interface LayFormItemContext {
   $el: HTMLDivElement;
   required?: boolean;
   rules?: Record<string, unknown>;
-  validate(callback?: ValidateCallback): void;
+  validate(callback?: ValidateCallback): Promise<FormItemValidateReturn>;
   clearValidate(): void;
 }
 
@@ -43,3 +45,10 @@ export declare interface FormCallback {
 export declare interface FieldValidateError extends ValidateError {
   label?: string;
 }
+
+export type FormItemValidateReturn =
+  | {
+      errors: FieldValidateError[];
+      fields: ValidateFieldsError | Values;
+    }
+  | undefined;

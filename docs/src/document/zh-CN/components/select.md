@@ -418,6 +418,8 @@ export default {
 | collapseTagsTooltip | 多选折叠后时候悬浮展示             | `boolean`                                   | --                  | --       |    |
 | contentStyle        | 内容自定义样式                     | `StyleValue`                                | --                  | --       |    |
 | contentClass        | 内容自定义 Class                   | `string` `Array<string \| object>` `object` | --                  | --       |    |
+| autoFitWidth        | 是否将下拉面板宽度设置为触发器宽度    | `boolean` | --                  | `true`      |    |
+| autoFitMinWidth        | 是否将下拉面板最小宽度设置为触发器宽度    | `boolean` | --                  | `true`      |  `2.19.1`  |
 | options (items)   |  传入选项                | `Array<Object>` | --                  | --       |    |
 | teleportProps       | 继承至 dropdown 组件，下拉面板 `传递` 属性  | `object`             | `{to: 'body', disabled: false}`   |  `vue teleport` 组件  | `2.19.0` |
 :::

@@ -119,7 +119,7 @@ provide(DESCRIPTIONS_INJECTION_KEY, {
 
 <template>
   <div :class="descriptionsClasses">
-    <div class="layui-descriptions-header">
+    <div class="layui-descriptions-header" v-if="title || extra">
       <div class="layui-descriptions-header-title">
         <slot name="title">{{ title }}</slot>
       </div>

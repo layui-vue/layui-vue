@@ -755,13 +755,16 @@ const reset4 = () => {
     <lay-form-item label="年龄" prop="age">
       <lay-input v-model.number="model5.age" type="number" :allow-clear="true"></lay-input>
     </lay-form-item>
+		<lay-form-item label="异步校验" prop="sync">
+      <lay-input v-model.number="model5.sync" type="number" :allow-clear="true"></lay-input>
+    </lay-form-item>
     <lay-form-item style="text-align: center">
       <lay-button @click="submit5" type="primary">提交</lay-button>
     </lay-form-item>
   </lay-form>
 </template>
 
-<script>
+<script setup>
 import { ref, reactive } from 'vue'
 import {layer} from '@layui/layer-vue'
 
@@ -773,6 +776,7 @@ const model5 = reactive({
   date: "",
   username: "",
   age: null,
+	sync: 0,
 })
 
 const rules5 = ref({
@@ -798,7 +802,21 @@ const rules5 = ref({
         return true;
       }
     }
-  }
+  },
+	sync: {
+		 asyncValidator: (rule, value) => {
+      return new Promise((resolve, reject) => {
+        if (value < 18) {
+					// 模拟接口
+          setTimeout(() => {
+						reject('年龄不能小于18岁');  // reject with error message
+					}, 1000)
+        } else {
+          resolve();
+        }
+      });
+    },
+	}
 })
 
 const submit5 = function() {

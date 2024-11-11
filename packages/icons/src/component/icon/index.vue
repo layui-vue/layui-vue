@@ -1,11 +1,9 @@
-<script lang="ts">
-export default {
-  name: "LayIcon",
-};
-</script>
-
 <script setup lang="ts">
 import { computed } from "vue";
+
+defineOptions({
+  name: "LayIcon",
+});
 
 export interface LayIconProps {
   size?: string;

@@ -1,5 +1,5 @@
 import { mount, shallowMount, config } from "@vue/test-utils";
-import { nextTick } from "vue";
+import { nextTick, ref } from "vue";
 import { sleep } from "../../../test-utils";
 
 import LayPage from "../index.vue";
@@ -306,5 +306,44 @@ describe("LayPage.vue", () => {
     });
     expect(wrapper.text()).toBe("");
     wrapper.unmount();
+  });
+
+  // https://gitee.com/layui-vue/layui-vue/issues/IB0ANQ
+  test("前置 ellipsisTooltip", async () => {
+    const _value = ref(1);
+
+    const wrapper = mount(LayPage, {
+      props: {
+        modelValue: _value.value,
+        limit: 10,
+        total: 100,
+        ellipsisTooltip: true,
+        "onUpdate:modelValue": (value) => {
+          _value.value = value;
+        },
+      },
+    });
+
+    const lis = wrapper.findAll(".layui-pager li");
+
+    await lis[lis.length - 1].trigger("click");
+
+    expect(wrapper.emitted()).toHaveProperty("update:modelValue");
+    expect(_value.value).toBe(10);
+
+    const prevLi = wrapper.find(".layui-pager .layui-page-left-number");
+
+    await prevLi.trigger("mouseenter");
+    await sleep(400);
+
+    const DropdownInstance = wrapper.findComponent(LayDropdown);
+
+    const DropdownMenuItems =
+      DropdownInstance.findAllComponents(LayDropdownMenuItem);
+
+    await DropdownMenuItems[0].trigger("click");
+
+    expect(wrapper.emitted()).toHaveProperty("update:modelValue");
+    expect(_value.value).toEqual(5);
   });
 });
