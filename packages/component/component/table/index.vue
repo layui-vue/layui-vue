@@ -70,7 +70,6 @@ const { t } = useI18n();
 const slot = useSlots();
 const tableRef = ref();
 
-const s = "";
 const allChecked = ref(false);
 const hasChecked = ref(false);
 const tableDataSource = ref<any[]>([...props.dataSource]);
