@@ -54,3 +54,7 @@
 #nprogress .spinner-icon {
   border-top-color: var(--global-primary-color);
 }
+
+.layui-space {
+  flex-wrap: wrap;
+}
