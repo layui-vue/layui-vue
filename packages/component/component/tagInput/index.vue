@@ -311,6 +311,10 @@ onMounted(() => {
   handleResize();
   const treeSelectContext = useTreeSelectProvide();
   treeSelectContext?.setInputEl?.(inputRefEl.value as HTMLInputElement);
+
+  if (inputRefEl.value) {
+    inputRefEl.value!.value = inputValue.value;
+  }
 });
 
 defineExpose({
