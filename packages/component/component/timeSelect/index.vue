@@ -16,6 +16,7 @@
         :label="formatter(_inputFormat, d)"
         :value="formatter(_format, d)"
       ></lay-select-option>
+      <slot></slot>
     </lay-select>
   </div>
 </template>
@@ -48,6 +49,10 @@ const props = withDefaults(defineProps<TimeSelectProps>(), {
   end: "00:00:00",
   withStartTime: true,
   withEndTime: true,
+  collapseTagsTooltip: true,
+  minCollapsedNum: 3,
+  autoFitWidth: true,
+  autoFitMinWidth: true,
 });
 
 type Distinct<T, K extends keyof any> = {

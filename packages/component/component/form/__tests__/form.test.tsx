@@ -113,4 +113,44 @@ describe("LayForm", () => {
       expect(fn.mock.calls[0][0]).toBeTruthy();
     });
   });
+
+  describe("validator", () => {
+    function createForm() {
+      const model = reactive({
+        account: "",
+        password: "",
+      });
+
+      const wrapper = mount({
+        setup() {
+          return () => (
+            <LayForm model={model}>
+              <LayFormItem label="账号" prop="account">
+                <LayInput v-model={model.account}></LayInput>
+              </LayFormItem>
+              <LayFormItem label="密码" prop="password" required={true}>
+                <LayInput v-model={model.password}></LayInput>
+              </LayFormItem>
+            </LayForm>
+          );
+        },
+      });
+
+      return wrapper;
+    }
+
+    test("单个 required form-item是否触发校验", async () => {
+      const wrapper = createForm();
+
+      const formComponent = wrapper.findComponent(LayForm);
+
+      const fn = vi.fn();
+
+      formComponent.vm.validate(fn);
+      await sleep(300);
+
+      expect(fn).toHaveBeenCalled();
+      expect(fn.mock.calls[0][0]).toBeFalsy();
+    });
+  });
 });
