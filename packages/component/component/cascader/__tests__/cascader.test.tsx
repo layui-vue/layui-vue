@@ -4,6 +4,7 @@ import { mount } from "@vue/test-utils";
 
 import LayCascader from "../index.vue";
 import LayDropdown from "../../dropdown/index.vue";
+import LayTagInput from "../../tagInput/index.vue";
 import { sleep } from "../../../test-utils";
 
 describe("LayCascader", () => {
@@ -125,6 +126,38 @@ describe("LayCascader", () => {
     await nextTick();
     await sleep();
     expect((dropdown.vm as any).open).toBe(false);
+  });
+
+  test("multiple tag-input 初始化tag", async () => {
+    const wrapper = mount({
+      setup() {
+        const modelValue: Ref<string | string[]> = ref(["1", "2"]);
+        const options = [
+          {
+            label: "label1",
+            value: "1",
+          },
+          { label: "label2", value: "2" },
+          { label: "label3", value: "3" },
+        ];
+
+        return () => (
+          <LayCascader
+            multiple={true}
+            options={options}
+            modelValue={modelValue.value}
+          ></LayCascader>
+        );
+      },
+    });
+
+    await nextTick();
+    const tagInputInstance = wrapper.findComponent(LayTagInput);
+    const tags = tagInputInstance.findAll(".layui-tag");
+
+    expect(tags.length).toBe(2);
+    expect(tags[0].text()).toBe("label1");
+    expect(tags[1].text()).toBe("label2");
   });
 
   test("options 数据源通过push方法改变未刷新", async () => {

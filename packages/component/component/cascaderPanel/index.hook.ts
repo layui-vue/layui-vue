@@ -391,6 +391,8 @@ export default function useCascaderPanel(
     return [addDiff, removeDiff];
   };
 
+  onMounted(() => setup());
+
   return {
     dataSource,
     sanitizer,
