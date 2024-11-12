@@ -126,4 +126,30 @@ describe("LayCascader", () => {
     await sleep();
     expect((dropdown.vm as any).open).toBe(false);
   });
+
+  test("options 数据源通过push方法改变未刷新", async () => {
+    const wrapper = mount({
+      setup() {
+        const options = ref<any>([]);
+
+        onMounted(() => {
+          options.value.push(
+            ...[
+              { label: "label1", value: "1" },
+              { label: "label2", value: "2" },
+              { label: "label3", value: "3" },
+            ]
+          );
+        });
+
+        return () => <LayCascader options={options.value}></LayCascader>;
+      },
+    });
+
+    const component = wrapper.getComponent(LayCascader);
+
+    await nextTick();
+
+    expect((component.vm as any)._context.flatData.value.length).toBe(3);
+  });
 });
