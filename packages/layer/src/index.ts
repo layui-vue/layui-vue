@@ -221,10 +221,6 @@ const layer = {
         }, 2000);
         // 销毁实例
         delInstance(modalContainer.id);
-        //Notifiy特殊处理
-        if (options.type === 6) {
-          removeNotifiyFromQueen(options.id);
-        }
       }, defaultOption.time);
     }
     // 维护实例
