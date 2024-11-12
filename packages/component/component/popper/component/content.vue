@@ -144,10 +144,13 @@ const onContentLeave = () => {
 };
 
 const show = () => {
+  onShow();
   _visible.value = true;
 };
 
 const hidden = () => {
+  // TODO 兼容popConfirm组件使用当前函数关闭popper，造成modelValue未改变弹窗依然显示
+  onHidden();
   _visible.value = false;
 };
 

@@ -529,7 +529,7 @@ export default {
 | alignPoint |跟随鼠标|`boolean`|`false`|`true` `false`|
 | contentClass| 弹出内容的类名  | `string`| -| -|
 | contentStyle| 弹出内容的样式  | `string` | - | -|
-| teleportProps      | 继承至 dropdown 组件，下拉面板 `传递` 属性  | `object`             | `{to: 'body', disabled: false}`   |  `vue teleport` 组件  | `2.19.0` |
+| teleportProps      | 下拉面板 `传递` 属性  | `object`             | `{to: 'body', disabled: false}`   |  `vue teleport` 组件  | `2.19.0` |
 
 :::
 
