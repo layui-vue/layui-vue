@@ -177,6 +177,8 @@ const validate = (
           clearValidate();
         }
       });
+    } else {
+      resolve(undefined);
     }
   });
 };
