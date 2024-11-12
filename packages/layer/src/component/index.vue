@@ -524,10 +524,6 @@ const closeHandle = () => {
       // 函数式调用专用.
       // 不对外使用
       props.internalDestroy && props.internalDestroy();
-      if (type === 6) {
-        // @ts-ignore
-        removeNotifiyFromQueen(id.value);
-      }
       if (min.value) {
         updateMinArrays(id.value, !min.value);
       }
@@ -602,8 +598,13 @@ const open = () => {
  * 关闭弹层
  * <p>
  */
+// eslint-disable-next-line vue/no-dupe-keys
 const close = () => {
   visible.value = false;
+
+  if (type === 6) {
+    removeNotifiyFromQueen(id.value);
+  }
 };
 
 /**
@@ -768,6 +769,7 @@ const reset = function () {
   }
 };
 
+// eslint-disable-next-line vue/no-dupe-keys
 const full = async function () {
   if (min.value) {
     // 最小化>最大化、 先还原状态
@@ -800,6 +802,7 @@ const mini = async function () {
   }
 };
 
+// eslint-disable-next-line vue/no-dupe-keys
 const revert = () => {
   listenDocument();
   updateMinArrays(id.value, false);
