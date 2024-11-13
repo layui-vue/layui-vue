@@ -74,9 +74,7 @@ const validate = async function (
   // 通过调用每个子项进行校验
   let errorsArrs: ValidateError[] = [];
 
-  for (const item in validateItems) {
-    const filed = validateItems[item];
-
+  for (const filed of validateItems) {
     const result = await filed.validate();
 
     errorsArrs = errorsArrs
