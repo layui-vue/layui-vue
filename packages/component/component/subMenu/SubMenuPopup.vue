@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { DropdownTeleportProps } from "../dropdown/interface";
+
 import { computed, inject, Ref } from "vue";
 import LayDropdown from "../dropdown/index.vue";
 import { LayIcon } from "@layui/icons-vue";
@@ -7,6 +9,7 @@ import useLevel from "../menu/useLevel";
 export interface SubMenuPopupProps {
   id?: string;
   title?: string;
+  teleportProps?: DropdownTeleportProps;
 }
 
 defineOptions({
@@ -36,13 +39,12 @@ const computedPlacement = computed(() => {
 <template>
   <lay-dropdown
     trigger="hover"
-    class="layui-sub-menu-popup"
     :placement="computedPlacement"
     :autoFitMinWidth="false"
-    :updateAtScroll="true"
+    :teleportProps="teleportProps"
     :contentOffset="3"
   >
-    <li class="layui-nav-item">
+    <li class="layui-nav-item layui-sub-menu-popup">
       <a href="javascript:void(0)" style="justify-content: space-between">
         <div>
           <i v-if="$slots.icon" class="layui-sub-menu-icon">

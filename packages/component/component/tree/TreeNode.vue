@@ -60,7 +60,7 @@ const nodeIconType = (node: TreeData): string => {
   const { children } = props.replaceFields;
 
   if (!props.showLine) {
-    if (node[children].length > 0 || node.isLazy) {
+    if (node[children]?.length > 0 || node.isLazy) {
       return !node.isLeaf ? "layui-icon-triangle-r" : "layui-icon-triangle-d";
     }
     return "";

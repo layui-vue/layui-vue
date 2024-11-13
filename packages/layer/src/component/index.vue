@@ -4,6 +4,7 @@ import type { BtnType, ImgListType, PropsContentType } from "../types";
 import Shade from "./Shade.vue";
 import Iframe from "./Iframe.vue";
 import Title from "./Header.vue";
+import Footer from "./Footer.vue";
 import HeaderBtn from "./HeaderBtn.vue";
 import Photos from "./Photos.vue";
 import Notifiy from "./Notifiy.vue";
@@ -64,8 +65,10 @@ export interface LayerProps {
     | "photos"
     | "notify"
     | "prompt";
-  title?: string | boolean | Function;
+  title?: PropsContentType | boolean;
+  footer?: PropsContentType | boolean;
   titleStyle?: string | StyleValue;
+  footerStyle?: string | StyleValue;
   content?: PropsContentType;
   isHtmlFragment?: boolean;
   offset?: string | string[];
@@ -521,10 +524,6 @@ const closeHandle = () => {
       // 函数式调用专用.
       // 不对外使用
       props.internalDestroy && props.internalDestroy();
-      if (type === 6) {
-        // @ts-ignore
-        removeNotifiyFromQueen(id.value);
-      }
       if (min.value) {
         updateMinArrays(id.value, !min.value);
       }
@@ -599,8 +598,13 @@ const open = () => {
  * 关闭弹层
  * <p>
  */
+// eslint-disable-next-line vue/no-dupe-keys
 const close = () => {
   visible.value = false;
+
+  if (type === 6) {
+    removeNotifiyFromQueen(id.value);
+  }
 };
 
 /**
@@ -765,6 +769,7 @@ const reset = function () {
   }
 };
 
+// eslint-disable-next-line vue/no-dupe-keys
 const full = async function () {
   if (min.value) {
     // 最小化>最大化、 先还原状态
@@ -797,6 +802,7 @@ const mini = async function () {
   }
 };
 
+// eslint-disable-next-line vue/no-dupe-keys
 const revert = () => {
   listenDocument();
   updateMinArrays(id.value, false);
@@ -909,10 +915,10 @@ defineExpose({ reset, open, close, full, min: mini, revert });
         ></HeaderBtn>
         <!-- 操作栏 -->
         <div :style="min === true ? 'display:none' : ''">
-          <template v-if="slots.footer">
-            <div class="layui-layer-footer">
+          <template v-if="slots.footer || props.footer">
+            <Footer :footer="props.footer!" :footerStyle="props.footerStyle">
               <slot name="footer"></slot>
-            </div>
+            </Footer>
           </template>
           <template v-else>
             <!-- 按钮 -->

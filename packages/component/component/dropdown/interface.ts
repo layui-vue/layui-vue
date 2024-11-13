@@ -1,49 +1,42 @@
-export type DropdownTrigger = "click" | "hover" | "focus" | "contextMenu";
+import type { InjectionKey, StyleValue, TeleportProps } from "vue";
+import type { PopperTrigger, Placement } from "../popper/index";
 
-export type DropdownPlacementLegacy =
-  | "top-left"
-  | "top-right"
-  | "bottom-left"
-  | "bottom-right"
-  | "right-top"
-  | "right-bottom"
-  | "left-top"
-  | "left-bottom";
+export type DropdownContext = {
+  hide?: () => void;
+};
 
-export type DropdownPlacement =
-  | "top"
-  | "top-start"
-  | "top-end"
-  | "bottom"
-  | "bottom-start"
-  | "bottom-end"
-  | "right"
-  | "right-start"
-  | "right-end"
-  | "left"
-  | "left-start"
-  | "left-end"
-  | DropdownPlacementLegacy;
+export const DROPDOWN_INJECTION_KEY: InjectionKey<DropdownContext> =
+  Symbol("LayDropdown");
 
-export interface ElementScrollRect {
-  top: number;
-  bottom: number;
-  left: number;
-  right: number;
-  scrollTop: number;
-  scrollBottom: number;
-  scrollLeft: number;
-  scrollRight: number;
-  width: number;
-  height: number;
+export type DropdownTeleportProps = Partial<TeleportProps>;
+
+export interface DropdownProps {
+  visible?: boolean;
+  trigger?: PopperTrigger | Array<PopperTrigger>;
+  placement?: Placement;
+  disabled?: boolean;
+  autoFitPosition?: boolean;
+  autoFitWidth?: boolean;
+  autoFitMinWidth?: boolean;
+  clickToClose?: boolean;
+  blurToClose?: boolean;
+  clickOutsideToClose?: boolean;
+  contentOffset?: string | number;
+  mouseEnterDelay?: number;
+  mouseLeaveDelay?: number;
+  focusDelay?: number;
+  alignPoint?: boolean;
+  contentClass?: string | Array<string | object> | object;
+  contentStyle?: StyleValue;
+  teleportProps?: DropdownTeleportProps;
 }
 
-export interface DropdownContext {
-  onMouseenter: Function;
-  onMouseleave: Function;
-  addChildRef: Function;
-  removeChildRef: Function;
-  hide: Function;
-}
+export type DropdownEmits = {
+  show: [value: boolean];
+  hide: [value: boolean];
+};
 
-export const dropdownInjectionKey = Symbol("dropdownInjectKey");
+export interface pointType {
+  x: number;
+  y: number;
+}

@@ -14,6 +14,8 @@ import {
   StyleValue,
 } from "vue";
 import { LayIcon } from "@layui/icons-vue";
+import type { DropdownTeleportProps } from "../dropdown/interface";
+
 import LayInput from "../input/index.vue";
 import LayTagInput from "../tagInput/index.vue";
 import LayDropdown from "../dropdown/index.vue";
@@ -33,6 +35,7 @@ export interface SelectProps {
   multiple?: boolean;
   options?: SelectOptionProps[];
   autoFitWidth?: boolean;
+  autoFitMinWidth?: boolean;
   size?: SelectSize;
   collapseTagsTooltip?: boolean;
   minCollapsedNum?: number;
@@ -40,6 +43,7 @@ export interface SelectProps {
   showSearch?: boolean;
   contentClass?: string | Array<string | object> | object;
   contentStyle?: StyleValue;
+  teleportProps?: DropdownTeleportProps;
 }
 
 export interface SelectEmits {
@@ -59,6 +63,7 @@ const props = withDefaults(defineProps<SelectProps>(), {
   minCollapsedNum: 3,
   allowClear: false,
   autoFitWidth: true,
+  autoFitMinWidth: true,
   showSearch: false,
   modelValue: null,
   disabled: false,
@@ -74,7 +79,7 @@ const singleValue = ref("");
 const multipleValue: Ref<any[]> = ref([]);
 const emits = defineEmits<SelectEmits>();
 const openState: Ref<boolean> = ref(false);
-const options = ref<any>([]);
+const _options = ref<any>([]);
 const composing = ref(false);
 var timer: any;
 
@@ -115,8 +120,8 @@ const intOption = () => {
     getOption(slots.default(), newOptions);
   }
   Object.assign(newOptions, props.options);
-  if (JSON.stringify(newOptions) != JSON.stringify(options.value)) {
-    options.value = newOptions;
+  if (JSON.stringify(newOptions) != JSON.stringify(_options.value)) {
+    _options.value = newOptions;
   }
 };
 
@@ -144,12 +149,12 @@ onMounted(() => {
   intOption();
   timer = setInterval(intOption, 500);
   watch(
-    [selectedValue, options],
+    [selectedValue, _options],
     () => {
       if (multiple.value) {
         try {
           multipleValue.value = selectedValue.value?.map((value: any) => {
-            var option = options.value.find((item: any) => {
+            var option = _options.value.find((item: any) => {
               item.disabled == "" || item.disabled == true
                 ? (item.closable = false)
                 : (item.closable = true);
@@ -167,7 +172,7 @@ onMounted(() => {
         }
       } else {
         searchValue.value = "";
-        singleValue.value = options.value.find((item: any) => {
+        singleValue.value = _options.value.find((item: any) => {
           return item.value === selectedValue.value;
         })?.label;
       }
@@ -253,8 +258,9 @@ provide("searchMethod", props.searchMethod);
       :disabled="disabled"
       :contentClass="contentClass"
       :contentStyle="contentStyle"
-      :update-at-scroll="true"
       :autoFitWidth="autoFitWidth"
+      :autoFitMinWidth="autoFitMinWidth"
+      :teleportProps="teleportProps"
       @hide="handleHide"
       @show="openState = true"
     >
@@ -301,7 +307,7 @@ provide("searchMethod", props.searchMethod);
         :class="{ 'layui-unselect': !showSearch }"
         @compositionstart="onCompositionstart"
         @compositionend="onCompositionend"
-        @Input="handleSearch"
+        @input="handleSearch"
         @clear="handleClear"
       >
         <template v-if="slots.prepend" #prepend>

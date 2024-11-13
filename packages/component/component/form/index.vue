@@ -53,7 +53,7 @@ const submit = function (e: SubmitEvent) {
  * @param fields 需要校验的表单字段(string|string[]); 该字段如果为function, 则默认为回调函数，校验全部字段;
  * @param callback 校验表单之后的回调函数
  **/
-const validate = function (
+const validate = async function (
   fields?: string | string[] | FormCallback | null,
   callback?: FormCallback | null
 ) {
@@ -73,11 +73,14 @@ const validate = function (
   }
   // 通过调用每个子项进行校验
   let errorsArrs: ValidateError[] = [];
-  validateItems.forEach((filed) => {
-    filed.validate((errors, _fields) => {
-      errorsArrs = errorsArrs.concat(errors as ValidateError[]);
-    });
-  });
+
+  for (const filed of validateItems) {
+    const result = await filed.validate();
+
+    errorsArrs = errorsArrs
+      .concat(result?.errors as ValidateError[])
+      .filter(Boolean);
+  }
   const isValidate = errorsArrs.length === 0;
   // 有回调则进行回调
   if (typeof callback === "function") {

@@ -1,5 +1,7 @@
 <script lang="ts" setup>
 import "./index.less";
+import type { DropdownTeleportProps } from "../dropdown/interface";
+
 import { StyleValue, computed, ref, watch, useSlots, provide } from "vue";
 import { useDebounceFn } from "@vueuse/core";
 import { getNode } from "../../utils";
@@ -21,24 +23,25 @@ import {
 import { LAYUI_TREE_SELECT } from "./useTreeSelect";
 
 export interface TreeSelectProps {
-  data: any;
   modelValue: any;
-  disabled?: boolean;
-  placeholder?: string;
+  data: any;
+  size?: TreeSelectSize;
   multiple?: boolean;
   allowClear?: boolean;
+  disabled?: boolean;
+  placeholder?: string;
+  checkStrictly?: boolean;
   collapseTagsTooltip?: boolean;
   minCollapsedNum?: number;
-  size?: TreeSelectSize;
-  checkStrictly?: boolean;
   search?: boolean;
   searchNodeMethod?: SearchNodeMethodType;
+  lazy?: boolean;
+  load?: LoadFunction;
   contentClass?: string | Array<string | object> | object;
   contentStyle?: StyleValue;
   replaceFields?: ReplaceFieldsOptionsOptional;
   defaultExpandAll?: boolean;
-  lazy?: boolean;
-  load?: LoadFunction;
+  teleportProps?: DropdownTeleportProps;
   cacheData?: TreeSelectCacheData[];
 }
 
@@ -360,12 +363,14 @@ provide(LAYUI_TREE_SELECT, {
       :disabled="disabled"
       :contentClass="contentClass"
       :contentStyle="contentStyle"
-      :update-at-scroll="true"
+      :teleportProps="teleportProps"
       :click-to-close="false"
       @show="openState = true"
       @hide="openState = false"
     >
       <lay-tag-input
+        v-if="multiple"
+        v-model="multipleValue"
         :size="size"
         :allow-clear="allowClear"
         :placeholder="_placeholder"
@@ -376,8 +381,8 @@ provide(LAYUI_TREE_SELECT, {
         @input-value-change="onSearch"
         @remove="handleRemove"
         @clear="onClear"
-        v-model="multipleValue"
-        v-if="multiple"
+        @keyup.delete.capture.prevent.stop
+        @keydown.enter.capture.prevent.stop
       >
         <template #suffix>
           <lay-icon

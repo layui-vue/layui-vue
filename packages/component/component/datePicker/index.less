@@ -54,23 +54,6 @@
   }
 }
 
-@font-face {
-  font-family: "laydate-icon";
-  src: url("./font/iconfont.eot");
-  src: url("./font/iconfont.eot#iefix") format("embedded-opentype"),
-    url("./font/iconfont.svg#iconfont") format("svg"),
-    url("./font/iconfont.woff") format("woff"),
-    url("./font/iconfont.ttf") format("truetype");
-}
-
-.laydate-icon {
-  font-family: "laydate-icon" !important;
-  font-size: 16px;
-  font-style: normal;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
 html #layuicss-laydate {
   display: none;
   position: absolute;
@@ -126,14 +109,14 @@ html #layuicss-laydate {
 .layui-laydate {
   animation-name: laydate-downbit;
 }
-.layui-laydate-static {
-  position: relative;
-  z-index: 0;
-  display: inline-block;
-  margin: 0;
-  -webkit-animation: none;
-  animation: none;
-}
+// .layui-laydate-static {
+//   position: relative;
+//   z-index: 0;
+//   display: inline-block;
+//   margin: 0;
+//   -webkit-animation: none;
+//   animation: none;
+// }
 
 /* 展开年月列表时 */
 .laydate-ym-show .laydate-prev-m,
@@ -158,31 +141,36 @@ html #layuicss-laydate {
 /* 头部结构 */
 .layui-laydate-header {
   position: relative;
-  line-height: 30px;
-  padding: 10px 70px 5px;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+  // line-height: 30px;
+  // padding: 10px 70px 5px;
 }
 .layui-laydate-header * {
   vertical-align: bottom;
 }
 .layui-laydate-header i {
-  position: absolute;
-  top: 10px;
+  // position: absolute;
+  // top: 10px;
   padding: 0 5px;
   color: #999;
   font-size: 12px;
   cursor: pointer;
   user-select: none;
 }
-.layui-laydate-header i.laydate-prev-y {
+.layui-laydate-header .layui-icon-prev {
   left: 15px;
 }
-.layui-laydate-header i.laydate-prev-m {
+.layui-laydate-header .layui-icon-left {
   left: 45px;
 }
-.layui-laydate-header i.laydate-next-y {
+.layui-laydate-header .layui-icon-next {
   right: 15px;
 }
-.layui-laydate-header i.laydate-next-m {
+.layui-laydate-header .layui-icon-right {
   right: 45px;
 }
 .layui-laydate-year-panel-header {
@@ -269,42 +257,45 @@ html #layuicss-laydate {
 
 /* 底部结构 */
 .layui-laydate-footer {
-  position: relative;
-  height: 46px;
+  // position: relative;
+  // height: 46px;
+  display: flex;
   line-height: 26px;
   padding: 10px;
 }
 
-.layui-laydate-footer .laydate-footer-btns span {
-  border-radius: 0px;
+.layui-laydate-footer .layui-btn {
+  padding: 0 10px;
+  white-space: nowrap;
+  transition: all 0.3s;
 }
 
-.layui-laydate-footer .laydate-footer-btns span:first-child {
+.layui-laydate-footer .laydate-footer-btns .layui-btn {
+  border-radius: 0;
+}
+
+.layui-laydate-footer .laydate-footer-btns .layui-btn:first-child {
   border-top-left-radius: var(--global-border-radius);
   border-bottom-left-radius: var(--global-border-radius);
 }
 
-.layui-laydate-footer .laydate-footer-btns span:last-child {
+.layui-laydate-footer .laydate-footer-btns .layui-btn:last-child {
   border-top-right-radius: var(--global-border-radius);
   border-bottom-right-radius: var(--global-border-radius);
+  margin-left: -1px;
 }
 
-.layui-laydate-footer span {
-  display: inline-block;
-  vertical-align: top;
-  height: 26px;
-  line-height: 24px;
-  padding: 0 10px;
-  border: 1px solid #c9c9c9;
-  border-radius: 2px;
-  background-color: #fff;
-  font-size: 12px;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: all 0.3s;
+.layui-laydate-footer .layui-btn + .layui-btn {
+  margin-left: 0;
 }
-.layui-laydate-footer span:hover {
-  color: var(--global-primary-color);
+.layui-laydate-footer {
+  .laydate-footer-btns {
+    .layui-btn:not(.layui-btn-disabled) {
+      span:hover {
+        color: var(--global-primary-color);
+      }
+    }
+  }
 }
 .layui-laydate-footer span.layui-laydate-preview {
   cursor: default;
@@ -317,12 +308,14 @@ html #layuicss-laydate {
   padding-left: 0;
 }
 .laydate-footer-btns {
-  position: absolute;
-  right: 10px;
-  top: 10px;
+  margin-left: auto;
+  // position: absolute;
+  // right: 10px;
+  // top: 10px;
 }
-.laydate-footer-btns span {
-  margin: 0 0 0 -1px;
+
+.layui-laydate-footer .type-time {
+  color: var(--global-primary-color);
 }
 
 /* 年月列表 */
@@ -557,7 +550,8 @@ html #layuicss-laydate {
 .laydate-range-hover {
   background-color: var(--global-neutral-color-2) !important;
 }
-.layui-laydate-content .layui-disabled:hover {
+.layui-laydate-content
+  .layui-disabled:not(.layui-laydate-current, .layui-this):hover {
   background-color: transparent !important;
 }
 
@@ -594,9 +588,13 @@ html #layuicss-laydate {
   }
 }
 .layui-laydate-range {
+  &-main {
+    display: flex;
+  }
   .laydate-set-ym {
     overflow: visible;
     white-space: nowrap;
+    line-height: 46px;
   }
   .laydate-set-ym .layui-dropdown {
     width: auto !important;
@@ -645,3 +643,59 @@ html #layuicss-laydate {
 .layui-laydate-content::-webkit-scrollbar-thumb:hover {
   background-color: #dddddd;
 }
+
+.layui-date-range-picker {
+  .end-input {
+    .layui-input-clear {
+      opacity: 0;
+      visibility: hidden;
+      display: block;
+      padding: 0 10px;
+    }
+  }
+
+  .laydate-range-inputs {
+    &:hover {
+      .end-input {
+        .layui-input-clear {
+          opacity: 1;
+          visibility: visible;
+        }
+      }
+    }
+  }
+}
+
+.layui-laydate-shortcut {
+  width: 80px;
+  padding: 6px 0;
+  display: inline-block;
+  vertical-align: top;
+  overflow: auto;
+  max-height: 276px;
+  text-align: center;
+}
+
+.layui-laydate-shortcut + .layui-laydate-main {
+  display: inline-block;
+  border-left: 1px solid #e2e2e2;
+}
+
+.layui-laydate-shortcut > li {
+  padding: 5px 8px;
+  cursor: pointer;
+  line-height: 18px;
+  user-select: none;
+
+  &:hover {
+    background-color: #eee;
+    color: #333;
+    transition: all 0.3s;
+  }
+}
+/* 静态面板 */
+// .layui-date-picker-static {
+//   width: auto !important;
+//   height: 100% !important;
+//   border: 1px solid var(--input-border-color);
+// }

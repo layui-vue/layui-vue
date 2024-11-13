@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import { inject, Ref } from "vue";
+import type { DropdownTeleportProps } from "../dropdown/interface";
+
 import LayDropdown from "../dropdown/index.vue";
 import LayDropdownMenu from "../dropdownMenu/index.vue";
 import LayDropdownMenuItem from "../dropdownMenuItem/index.vue";
 import { LayIcon } from "@layui/icons-vue";
-import { DropdownPlacement } from "../dropdown/interface";
-
-export type DropdownTrigger = "click" | "hover" | "focus" | "contextMenu";
+import type { PopperTrigger, Placement } from "../popper/index";
 
 export interface DropdownSubMenuProps {
-  trigger?: DropdownTrigger | DropdownTrigger[];
-  placement?: DropdownPlacement;
+  trigger?: PopperTrigger | Array<PopperTrigger>;
+  placement?: Placement;
   disabled?: boolean;
   contentOffset?: number;
+  teleportProps?: DropdownTeleportProps;
 }
 
 defineOptions({
@@ -20,10 +20,13 @@ defineOptions({
 });
 
 const props = withDefaults(defineProps<DropdownSubMenuProps>(), {
-  trigger: "hover",
+  trigger: () => ["hover"],
   disabled: false,
   placement: "right-start",
   contentOffset: 2,
+  teleportProps: () => ({
+    disabled: true,
+  }),
 });
 </script>
 
@@ -33,8 +36,8 @@ const props = withDefaults(defineProps<DropdownSubMenuProps>(), {
     :placement="placement"
     :auto-fit-min-width="false"
     :contentOffset="contentOffset"
+    :teleportProps="teleportProps"
     :disabled="disabled"
-    updateAtScroll
   >
     <lay-dropdown-menu-item :disabled="disabled">
       <template v-if="$slots.prefix" #prefix>

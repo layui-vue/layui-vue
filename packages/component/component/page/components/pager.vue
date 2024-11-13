@@ -44,7 +44,7 @@
             <lay-dropdown-menu-item
               v-for="page of pageOpionData.resetLeft"
               :key="page"
-              @click="handlePage(currentPage - 3)"
+              @click="handlePage(page)"
             >
               {{ page }}
             </lay-dropdown-menu-item>

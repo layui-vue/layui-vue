@@ -35,15 +35,15 @@ createApp(App).use(LayJsonSchemaForm).mount("#app");
 ::: describe <font color="red">特别说明</font>
 :::
 
-::: describe 当您使用 `unplugin-vue-components/resolvers` 默认注册 `layui-vue` 所有组件时，需要排除 `LayJsonSchemaForm。`
+::: describe 当您使用 `@layui/unplugin-vue-components/resolvers` 默认注册 `layui-vue` 所有组件时，需要排除 `LayJsonSchemaForm。`
 :::
 
 ::: describe `vite.config.js`
 :::
 
 ```js
-import Components from "unplugin-vue-components/vite";
-import { LayuiVueResolver } from "unplugin-vue-components/resolvers";
+import Components from "@layui/unplugin-vue-components/vite";
+import { LayuiVueResolver } from "@layui/unplugin-vue-components/resolvers";
 
 export default defineConfig({
   plugins: [

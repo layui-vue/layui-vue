@@ -1,6 +1,8 @@
 import { mount, shallowMount, config } from "@vue/test-utils";
+import { nextTick, ref } from "vue";
+import { sleep } from "../../../test-utils";
+
 import LayPage from "../index.vue";
-import { nextTick } from "vue";
 import LayIcon from "../../icon";
 import { describe, expect, test } from "vitest";
 import LayDropdown from "../../dropdown";
@@ -10,6 +12,7 @@ import LaySelectOption from "../../selectOption";
 import LaySelect from "../../select";
 import LayButton from "../../button";
 import LayInput from "../../input";
+
 config.global.components = {
   "lay-select": LaySelect,
   "lay-icon": LayIcon,
@@ -26,6 +29,7 @@ const total = 100;
 const limit = 5;
 const changeTotal = 102;
 const changeLimit = 10;
+
 describe("LayPage.vue", () => {
   test("render modelValue test", async () => {
     const wrapper = mount(LayPage, {
@@ -154,6 +158,7 @@ describe("LayPage.vue", () => {
         ".layui-page-limits  .layui-select .layui-input .layui-input-wrapper"
       )
       .trigger("click");
+    await sleep();
 
     const options = wrapper.findAllComponents(LaySelectOption);
     options[3]?.trigger("click");
@@ -279,13 +284,13 @@ describe("LayPage.vue", () => {
     });
     await wrapper.find(".layui-pager-jumper input").setValue(1000);
     await wrapper.find(".layui-pager-jumper input").trigger("blur");
-    let currentPage = wrapper.vm.currentPage;
+    const currentPage = wrapper.vm.currentPage;
 
     expect(currentPage).toBe(Math.ceil(total / 10));
 
     await wrapper.find(".layui-pager-jumper input").setValue(-1);
     await wrapper.find(".layui-pager-jumper input").trigger("blur");
-    let newVal = wrapper.vm.currentPage;
+    const newVal = wrapper.vm.currentPage;
 
     expect(newVal).toBe(1);
     wrapper.unmount();
@@ -301,5 +306,44 @@ describe("LayPage.vue", () => {
     });
     expect(wrapper.text()).toBe("");
     wrapper.unmount();
+  });
+
+  // https://gitee.com/layui-vue/layui-vue/issues/IB0ANQ
+  test("前置 ellipsisTooltip", async () => {
+    const _value = ref(1);
+
+    const wrapper = mount(LayPage, {
+      props: {
+        modelValue: _value.value,
+        limit: 10,
+        total: 100,
+        ellipsisTooltip: true,
+        "onUpdate:modelValue": (value) => {
+          _value.value = value;
+        },
+      },
+    });
+
+    const lis = wrapper.findAll(".layui-pager li");
+
+    await lis[lis.length - 1].trigger("click");
+
+    expect(wrapper.emitted()).toHaveProperty("update:modelValue");
+    expect(_value.value).toBe(10);
+
+    const prevLi = wrapper.find(".layui-pager .layui-page-left-number");
+
+    await prevLi.trigger("mouseenter");
+    await sleep(400);
+
+    const DropdownInstance = wrapper.findComponent(LayDropdown);
+
+    const DropdownMenuItems =
+      DropdownInstance.findAllComponents(LayDropdownMenuItem);
+
+    await DropdownMenuItems[0].trigger("click");
+
+    expect(wrapper.emitted()).toHaveProperty("update:modelValue");
+    expect(_value.value).toEqual(5);
   });
 });

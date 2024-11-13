@@ -17,6 +17,7 @@ import { LayIcon } from "@layui/icons-vue";
 import { TagInputSize } from "./inerface";
 
 import { useTreeSelectProvide } from "../treeSelect/useTreeSelect";
+import { isArray } from "../../utils";
 
 export interface TagData {
   value?: string | number;
@@ -38,6 +39,7 @@ export interface TagInputProps {
   size?: TagInputSize;
   tagProps?: TagProps;
   disabledInput?: boolean;
+  checkInputValue?: (value: string) => boolean;
 }
 
 defineOptions({
@@ -48,10 +50,13 @@ const props = withDefaults(defineProps<TagInputProps>(), {
   placeholder: undefined,
   minCollapsedNum: 0,
   size: "md",
+  checkInputValue: (value: string) => true,
 });
 
 const emit = defineEmits([
   "change",
+  "exceed",
+  "checkInputValueFail",
   "update:modelValue",
   "update:inputValue",
   "inputValueChange",
@@ -67,31 +72,61 @@ const mirrorRefEl = shallowRef<HTMLElement | undefined>(undefined);
 const inputRefEl = shallowRef<HTMLInputElement | undefined>(undefined);
 const oldInputValue = ref<string>("");
 const compositionValue = ref<string>("");
+const oldCompositionValue = ref<string>("");
 const isComposing = ref(false);
 const inputStyle = reactive({ width: "15px" });
 const _tagProps = reactive(props.tagProps ?? {});
 const tagProps = reactiveOmit(_tagProps, "closable", "size", "disabled");
-const inputValue = computed({
-  get() {
-    return props.inputValue;
+const inputValue = ref(props.inputValue ?? "");
+
+const tagData = ref();
+
+const flushOut = (val: any) => {
+  emit("update:modelValue", val);
+  emit("change", val);
+};
+
+watch(
+  () => props.modelValue,
+  (val) => {
+    if (props.max) {
+      if (props.minCollapsedNum) {
+        if (props.minCollapsedNum > props.max) {
+          console.group("LayTagInput: minCollapsedNum > max");
+          console.warn(
+            `props.minCollapsedNum(${props.minCollapsedNum}) > props.max(${props.max})`
+          );
+          console.warn(
+            `Tips: props.max should be greater than or equals to props.minCollapsedNum.`
+          );
+          console.groupEnd();
+        }
+      }
+    }
+
+    tagData.value = val;
   },
-  set(val) {
+  { immediate: true }
+);
+
+watch(
+  () => inputValue.value,
+  (val) => {
     emit("update:inputValue", val);
     emit("inputValueChange", val);
-  },
-});
+  }
+);
 
-const tagData = computed({
-  get() {
-    return props.modelValue;
-  },
-  set(val) {
-    emit("update:modelValue", val);
-    emit("change", val);
-  },
-});
+watch(
+  () => props.inputValue,
+  (val) => {
+    inputValue.value = val ?? "";
+  }
+);
 
-const normalizedTags = computed(() => normalizedTagData(tagData.value ?? []));
+const normalizedTags = computed(() => {
+  return normalizedTagData(tagData.value ?? []);
+});
 
 const computedTagData = computed(() => {
   if (!normalizedTags.value) return;
@@ -103,16 +138,17 @@ const computedTagData = computed(() => {
 const collapsedTagData = computed(() => {
   if (!normalizedTags.value) return;
   return props.minCollapsedNum &&
-    normalizedTags.value?.length > props.minCollapsedNum
+    normalizedTags.value?.length >
+      (computedTagData.value?.length ?? 0) - props.minCollapsedNum
     ? normalizedTags.value?.slice(props.minCollapsedNum)
     : [];
 });
 
 const handleInput = function (e: Event) {
-  if (isComposing.value) {
-    return;
-  }
+  if (isComposing.value) return;
   inputValue.value = (e.target as HTMLInputElement).value;
+  // fix: 输入单个字符后删除，此时 inputValue.value 和 oldValueInputValue.value 都是空字符串，由此触发 handleClose
+  if (!oldInputValue.value.length) oldInputValue.value = inputValue.value;
 };
 
 const handleComposition = (e: CompositionEvent) => {
@@ -122,6 +158,8 @@ const handleComposition = (e: CompositionEvent) => {
     handleInput(e);
   } else {
     isComposing.value = true;
+    if (compositionValue.value.length || e.data?.length)
+      oldCompositionValue.value = compositionValue.value;
     compositionValue.value = inputValue.value + (e.data ?? "");
   }
 };
@@ -130,24 +168,38 @@ const handleEnter = (e: KeyboardEvent) => {
   e.preventDefault();
   const valueStr = inputValue.value ? String(inputValue.value).trim() : "";
   if (!valueStr || !tagData.value) return;
-  const isLimit = props.max && tagData.value?.length >= props.max;
-  if (!isLimit) {
-    tagData.value =
-      tagData.value instanceof Array
+  if (!(props.max && tagData.value?.length >= props.max)) {
+    if (!props.checkInputValue || props.checkInputValue(valueStr)) {
+      tagData.value = isArray(tagData.value)
         ? tagData.value.concat(String(valueStr))
         : [valueStr];
-    inputValue.value = "";
+      inputValue.value = "";
+      oldInputValue.value = "";
+      flushOut(tagData.value);
+    } else {
+      emit("checkInputValueFail", valueStr, e);
+    }
+  } else {
+    emit("exceed", valueStr, e);
   }
-  emit("pressEnter", inputValue.value, e);
+  emit("pressEnter", valueStr, e);
 };
 
 const handleBackspaceKeyUp = (e: KeyboardEvent) => {
-  if (e.code !== "Backspace") return;
+  if (e.key.toLowerCase() !== "backspace") return;
   if (!tagData.value || !tagData.value.length) return;
-  if (!oldInputValue.value) {
+  if (
+    !oldCompositionValue.value.length &&
+    !inputValue.value?.length &&
+    !oldInputValue.value.length
+  ) {
     const lastIndex = normalizedTags.value.length - 1;
     handleClose(normalizedTags.value[lastIndex].value, lastIndex, e);
+    return;
   }
+  oldCompositionValue.value = compositionValue.value.length
+    ? compositionValue.value
+    : "";
   oldInputValue.value = inputValue.value ?? "";
 };
 
@@ -166,6 +218,7 @@ const handleClearClick = (e: MouseEvent) => {
     return;
   }
   tagData.value = [];
+  flushOut(tagData.value);
   emit("clear", e);
 };
 
@@ -174,10 +227,23 @@ const handleClose = (
   index: number,
   e: Event
 ) => {
+  // 防止 inputValue.value 或 oldInputValue.value 为空时，删除 tag
+  if (
+    e.type !== "click" &&
+    (isComposing.value ||
+      compositionValue.value.length ||
+      inputValue.value?.length ||
+      oldInputValue.value.length)
+  ) {
+    e.preventDefault();
+    e.stopPropagation();
+    return;
+  }
   if (!tagData.value) return;
   const arr = [...tagData.value];
   arr.splice(index, 1);
   tagData.value = arr;
+  flushOut(tagData.value);
   emit("remove", value, e);
 };
 
@@ -236,8 +302,8 @@ watch(
 );
 
 const moreCount = computed(() => {
-  if (tagData.value && computedTagData.value) {
-    return tagData.value.length - computedTagData.value.length;
+  if (normalizedTags.value && computedTagData.value) {
+    return normalizedTags.value.length - computedTagData.value.length;
   }
   return "";
 });
@@ -246,6 +312,10 @@ onMounted(() => {
   handleResize();
   const treeSelectContext = useTreeSelectProvide();
   treeSelectContext?.setInputEl?.(inputRefEl.value as HTMLInputElement);
+
+  if (inputRefEl.value) {
+    inputRefEl.value!.value = inputValue.value;
+  }
 });
 
 defineExpose({
@@ -280,6 +350,7 @@ defineExpose({
       </template>
       <template v-if="computedTagData?.length != tagData?.length">
         <LayToopTip
+          v-if="collapsedTagData?.length"
           :isDark="false"
           trigger="hover"
           popperStyle="padding:6px"

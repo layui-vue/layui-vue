@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import "./index.less";
+import type { Placement } from "../popper/index";
 import LayTooltip from "../tooltip/index.vue";
 import LayButton from "../button/index.vue";
-import { computed, ref } from "vue";
+import { computed, ref, type TeleportProps } from "vue";
 
 export interface PopconfirmProps {
   content?: string;
@@ -10,8 +11,9 @@ export interface PopconfirmProps {
   btnAlign?: string;
   confirmText?: string;
   cancelText?: string;
-  position?: string;
+  position?: Placement;
   trigger?: "click" | "hover" | "focus" | "contextMenu";
+  teleportProps?: TeleportProps;
 }
 
 defineOptions({
@@ -24,19 +26,17 @@ const props = withDefaults(defineProps<PopconfirmProps>(), {
   cancelText: "取消",
 });
 
-const tooltipRef = ref<HTMLElement | undefined>();
+const tooltipRef = ref<InstanceType<typeof LayTooltip>>();
 
 const emits = defineEmits(["confirm", "cancel"]);
 
 const handleConfirm = () => {
-  // @ts-ignore
-  tooltipRef.value?.hide();
+  tooltipRef.value && tooltipRef.value.hide();
   emits("confirm");
 };
 
 const handleCancel = () => {
-  // @ts-ignore
-  tooltipRef.value?.hide();
+  tooltipRef.value && tooltipRef.value.hide();
   emits("cancel");
 };
 
@@ -51,6 +51,7 @@ const footerStyle = computed(() => {
     :disabled="disabled"
     :position="position"
     :trigger="trigger"
+    :teleportProps="teleportProps"
   >
     <slot></slot>
     <template #content>

@@ -43,10 +43,12 @@ const popperProps = computed(() => {
     disabled: props.disabled || unref(disabledPopper),
     popperClass: [
       "lay-tooltip",
+      "layui-anim-fadein",
       { "layui-dark": props.isDark },
       props.popperClass,
     ],
     popperStyle: props.popperStyle,
+    teleportProps: props.teleportProps,
   };
 });
 
