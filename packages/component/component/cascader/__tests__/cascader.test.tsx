@@ -185,4 +185,81 @@ describe("LayCascader", () => {
 
     expect((component.vm as any)._context.flatData.value.length).toBe(3);
   });
+
+  test("expose selectLabel", async () => {
+    const wrapper = mount({
+      setup() {
+        const modelValue = ref("1/1-1/1-1-1");
+        const options = [
+          {
+            label: "label1",
+            value: "1",
+            children: [
+              {
+                label: "label1-1",
+                value: "1-1",
+                children: [{ label: "label1-1-1", value: "1-1-1" }],
+              },
+            ],
+          },
+          { label: "label2", value: "2" },
+          { label: "label3", value: "3" },
+        ];
+
+        return () => (
+          <LayCascader
+            ref="cascaderRef"
+            options={options}
+            v-model={modelValue.value}
+          ></LayCascader>
+        );
+      },
+    });
+
+    await nextTick();
+
+    const component = wrapper.findComponent(LayCascader);
+
+    expect(component.vm.selectLabel).toBe("label1 / label1-1 / label1-1-1");
+  });
+
+  test("expose selectLabel multiple", async () => {
+    const wrapper = mount({
+      setup() {
+        const modelValue = ref(["1-1-1", "2"]);
+        const options = [
+          {
+            label: "label1",
+            value: "1",
+            children: [
+              {
+                label: "label1-1",
+                value: "1-1",
+                children: [{ label: "label1-1-1", value: "1-1-1" }],
+              },
+            ],
+          },
+          { label: "label2", value: "2" },
+          { label: "label3", value: "3" },
+        ];
+
+        return () => (
+          <LayCascader
+            ref="cascaderRef"
+            options={options}
+            v-model={modelValue.value}
+            multiple
+          ></LayCascader>
+        );
+      },
+    });
+
+    const component = wrapper.findComponent(LayCascader);
+
+    await nextTick();
+    expect(component.vm.selectLabel).toEqual([
+      "label1/label1-1/label1-1-1",
+      "label2",
+    ]);
+  });
 });

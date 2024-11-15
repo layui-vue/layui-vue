@@ -189,7 +189,6 @@ const openState = ref(false);
 const _isSearching = ref(false);
 const _searchValue = ref("");
 const _matchedList: Ref<Array<CascaderPanelItemPropsInternal>> = ref([]);
-const _innerProcess = computed(() => _context);
 const _dataSource = ref(props.options);
 const _multiple = ref(props.multiple);
 const _decollator = ref(props.decollator);
@@ -201,11 +200,8 @@ const _replaceFields = ref({
   value: props.replaceFields?.value ?? "value",
   children: props.replaceFields?.children ?? "children",
 });
-const _selectKeys = ref<Array<string>>(_innerProcess.value.selectKeys.value);
-const _displayValue = computed({
-  get: () => _innerProcess.value.selectLabel.value,
-  set: (v) => {},
-});
+const _selectKeys = ref<Array<string>>(_context.selectKeys.value);
+const _displayValue = computed(() => _context.selectLabel.value);
 const _changeOnSelect = ref(props.changeOnSelect);
 /**
  * 执行搜索
@@ -214,21 +210,21 @@ const _changeOnSelect = ref(props.changeOnSelect);
 const doSearchValue = (str: string) =>
   (props.search &&
     props.searchMethod &&
-    _innerProcess.value.sanitizer(props.searchMethod(str), undefined)) ||
-  _innerProcess.value.flatData.value.filter(
-    (a: CascaderPanelItemPropsInternal) => a.label.includes(str)
+    _context.sanitizer(props.searchMethod(str), undefined)) ||
+  _context.flatData.value.filter((a: CascaderPanelItemPropsInternal) =>
+    a.label.includes(str)
   );
 
 /**
  * 清空内容
  */
 const onClear = () => {
-  _innerProcess.value.multipleSelectItem.value.forEach(
+  _context.multipleSelectItem.value.forEach(
     (a) => (a.checked = a.indeterminate = false)
   );
-  _innerProcess.value.buildMultipleStatus();
-  _innerProcess.value.multipleSelectItem.value.clear();
-  _innerProcess.value.selectKeys.value = [];
+  _context.buildMultipleStatus();
+  _context.multipleSelectItem.value.clear();
+  _context.selectKeys.value = [];
   _selectKeys.value = [];
   emit("update:modelValue", _multiple.value ? [] : undefined);
   emit("clear");
@@ -241,19 +237,19 @@ const onRemove = (value: string, e: KeyboardEvent) => {
   let _k = value.split(_decollator.value);
   const k = _k.shift();
   let obj: CascaderPanelItemPropsInternal | undefined =
-    _innerProcess.value.flatData.value.find((a) => a.label === k);
+    _context.flatData.value.find((a) => a.label === k);
   while (obj && _k.length) {
     const k = _k.shift();
     obj = obj.children?.find((a) => a.label === k);
   }
   if (obj !== undefined)
-    _innerProcess.value.selectKeys.value.splice(
-      _innerProcess.value.selectKeys.value.findIndex((a) => a === obj!.value),
+    _context.selectKeys.value.splice(
+      _context.selectKeys.value.findIndex((a) => a === obj!.value),
       1
     );
   obj!.checked = obj!.indeterminate = false;
-  _innerProcess.value.multipleSelectItem.value.delete(obj!.value);
-  _innerProcess.value.buildMultipleStatus();
+  _context.multipleSelectItem.value.delete(obj!.value);
+  _context.buildMultipleStatus();
   _selectKeys.value = [..._selectKeys.value.filter((v) => v !== obj!.value)];
   emit("update:modelValue", _selectKeys.value);
   dropdownRef.value.hide();
@@ -263,7 +259,7 @@ const onRemove = (value: string, e: KeyboardEvent) => {
  * @param selectKeys 选中的keys
  */
 const _updateValue = (selectKeys: string[] | string) => {
-  _innerProcess.value.selectKeys.value =
+  _context.selectKeys.value =
     typeof selectKeys === "string"
       ? selectKeys.split(props.decollator)
       : selectKeys;
@@ -381,10 +377,10 @@ watch(
     if (!val) {
       // 在这里手工更新内部状态
       if (!_multiple.value && props.search) {
-        _innerProcess.value.selectKeys.value = [];
+        _context.selectKeys.value = [];
         nextTick(() => {
-          _innerProcess.value.selectKeys.value =
-            _innerProcess.value.showKeys.value = _selectKeys.value;
+          _context.selectKeys.value = _context.showKeys.value =
+            _selectKeys.value;
         });
       }
       _isSearching.value = false;
@@ -398,7 +394,11 @@ watch(
 watch(
   () => props.modelValue,
   () => {
-    _innerProcess.value.modelValue.value = props.modelValue;
+    _context.modelValue.value = props.modelValue;
   }
 );
+
+defineExpose({
+  selectLabel: _context.selectLabel,
+});
 </script>
