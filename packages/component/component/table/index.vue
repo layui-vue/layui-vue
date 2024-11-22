@@ -20,11 +20,13 @@ import LayEmpty from "../empty/index.vue";
 import TableData from "./TableData.vue";
 import TablePage from "./TablePage.vue";
 import useTable from "./hooks/useTable";
+import { useTableColumns } from "./hooks/useTableColumns";
 import { TableEmit, sortType } from "./typing";
 import { startResize } from "./hooks/useResize";
 import useAutoColsWidth from "./hooks/useAutoColsWidth";
 import { useEmit } from "./hooks/useEmit";
 import { useI18n } from "../../language";
+import { isValueArray } from "../../utils";
 
 export type TableProps = _TableProps;
 
@@ -78,6 +80,7 @@ const tableColumns = computed(() => {
 });
 
 const { columnSlotNames, dataSourceCount, needSelectedKeys } = useTable(props);
+const { formatColumns } = useTableColumns(props);
 
 const tableColumnKeys = ref<any[]>([]);
 const tableHeadColumns = ref<any[]>([]);
@@ -244,10 +247,21 @@ watch(
     tableFlattenColumns.value = [];
     findFindNode(tableColumns.value);
     findFindNodes(tableColumns.value);
-    findFinalNode(0, tableColumns.value, undefined);
+    // findFinalNode(0, tableColumns.value, undefined);
     tableFlattenColumns.value = flattenColumns(tableColumns.value);
   },
   { immediate: true, deep: true }
+);
+
+watch(
+  () => formatColumns.value,
+  (value) => {
+    findFinalNode(0, value, undefined);
+  },
+  {
+    immediate: true,
+    deep: true,
+  }
 );
 
 /**
@@ -665,39 +679,39 @@ const childrenExpandSpace = computed(() => {
   );
 });
 
-const renderFixedStyle = (column: any, columnIndex: number) => {
+const renderFixedStyle = (column: any, columnIndex: number, columns: any) => {
   if (column.fixed) {
     if (column.fixed == "left") {
       var left = 0;
       for (var i = 0; i < columnIndex; i++) {
         if (
-          props.columns[i].fixed &&
-          props.columns[i].fixed == "left" &&
-          tableColumnKeys.value.includes(props.columns[i].key)
+          columns[i].fixed &&
+          columns[i].fixed == "left" &&
+          tableColumnKeys.value.includes(columns[i].key)
         ) {
-          left = left + Number(props.columns[i]?.width?.replace("px", ""));
+          left = left + Number(columns[i]?.width?.replace("px", ""));
         }
       }
       return { left: `${left}px` } as StyleValue;
     } else {
       var right = 0;
-      for (var i = columnIndex + 1; i < props.columns.length; i++) {
+      for (var i = columnIndex + 1; i < columns.length; i++) {
         if (
-          props.columns[i].fixed &&
-          props.columns[i].fixed == "right" &&
-          tableColumnKeys.value.includes(props.columns[i].key)
+          columns[i].fixed &&
+          columns[i].fixed == "right" &&
+          tableColumnKeys.value.includes(columns[i].key)
         ) {
-          right = right + Number(props.columns[i]?.width?.replace("px", ""));
+          right = right + Number(columns[i]?.width?.replace("px", ""));
         }
       }
       return { right: `${right}px` } as StyleValue;
     }
   } else {
     var isLast = true;
-    for (var i = columnIndex + 1; i < props.columns.length; i++) {
+    for (var i = columnIndex + 1; i < columns.length; i++) {
       if (
-        props.columns[i].fixed == undefined &&
-        tableColumnKeys.value.includes(props.columns[i].key)
+        columns[i].fixed == undefined &&
+        tableColumnKeys.value.includes(columns[i].key)
       ) {
         isLast = false;
       }
@@ -735,6 +749,23 @@ const findTopicParent = (data: any[], target: any) => {
   return parents[0];
 };
 
+const getWidthNumber = (width: string) => Number(width.replace("px", ""));
+
+const getChildrenFixedTotalWidth = (column: any): number => {
+  const traverse = (column: any) => {
+    if (!isValueArray(column.children)) {
+      return getWidthNumber(column.width);
+    }
+
+    return column.children.reduce(
+      (sum: number, child: any) => sum + traverse(child),
+      0
+    );
+  };
+
+  return traverse(column);
+};
+
 /**
  * 计算 td 的 style 属性
  *
@@ -762,7 +793,7 @@ const renderHeadFixedStyle = (
             props.columns[i].fixed == "left" &&
             tableColumnKeys.value.includes(props.columns[i].key)
           ) {
-            left = left + Number(props.columns[i]?.width?.replace("px", ""));
+            left = left + getChildrenFixedTotalWidth(props.columns[i]);
           }
         }
         return { left: `${left}px` } as StyleValue;
@@ -776,14 +807,14 @@ const renderHeadFixedStyle = (
         // 累加父级位置
         for (var i = 0; i < index; i++) {
           if (topicColumns[i].fixed && topicColumns[i].fixed == "left") {
-            left = left + Number(topicColumns[i]?.width?.replace("px", ""));
+            left = left + getChildrenFixedTotalWidth(topicColumns[i]);
           }
         }
 
         // 累加当前位置
         for (var i = 0; i < columnIndex; i++) {
           if (tableHeadColumn[i].fixed && tableHeadColumn[i].fixed == "left") {
-            left = left + Number(tableHeadColumn[i]?.width?.replace("px", ""));
+            left = left + getChildrenFixedTotalWidth(tableHeadColumn[i]);
           }
         }
         return { left: `${left}px` } as StyleValue;
@@ -799,7 +830,7 @@ const renderHeadFixedStyle = (
             props.columns[i].fixed == "right" &&
             tableColumnKeys.value.includes(props.columns[i].key)
           ) {
-            right = right + Number(props.columns[i]?.width?.replace("px", ""));
+            right = right + getChildrenFixedTotalWidth(props.columns[i]);
           }
         }
         return { right: `${right}px` } as StyleValue;
@@ -813,15 +844,14 @@ const renderHeadFixedStyle = (
         // 累计右侧列宽。
         for (var i = index + 1; i < topicColumns.length; i++) {
           if (topicColumns[i].fixed && topicColumns[i].fixed == "right") {
-            right = right + Number(topicColumns[i]?.width?.replace("px", ""));
+            right = right + getChildrenFixedTotalWidth(topicColumns[i]);
           }
         }
 
         // 累加当前位置
         for (var i = columnIndex + 1; i < tableHeadColumn.length; i++) {
           if (tableHeadColumn[i].fixed && tableHeadColumn[i].fixed == "right") {
-            right =
-              right + Number(tableHeadColumn[i]?.width?.replace("px", ""));
+            right = right + getChildrenFixedTotalWidth(tableHeadColumn[i]);
           }
         }
 
@@ -1119,11 +1149,16 @@ defineExpose({ getCheckData });
                       :rowspan="column.rowspan"
                       class="layui-table-cell"
                       :class="[
-                        renderFixedClassName(
-                          column,
-                          columnIndex,
-                          tableHeadColumn
-                        ),
+                        {
+                          'layui-table-fixed-left-last': column._isLastColumn,
+                          'layui-table-fixed-right-first':
+                            column._isFirstColumn,
+                        },
+                        // renderFixedClassName(
+                        //   column,
+                        //   columnIndex,
+                        //   tableHeadColumn
+                        // ),
                         column.fixed ? `layui-table-fixed-${column.fixed}` : '',
                         column.type == 'checkbox'
                           ? 'layui-table-cell-checkbox'
@@ -1139,14 +1174,15 @@ defineExpose({ getCheckData });
                       :style="[
                         {
                           textAlign: column.align,
+                          left: column._leftStyle && `${column._leftStyle}px`,
                         },
-                        renderHeadFixedStyle(
-                          column,
-                          columnIndex,
-                          tableHeadColumn,
-                          tableHeadColumnIndex,
-                          tableHeadColumns
-                        ),
+                        // renderHeadFixedStyle(
+                        //   column,
+                        //   columnIndex,
+                        //   tableHeadColumn,
+                        //   tableHeadColumnIndex,
+                        //   tableHeadColumns
+                        // ),
                       ]"
                       @click="thSort($event, column.key)"
                     >
@@ -1359,7 +1395,11 @@ defineExpose({ getCheckData });
                             ? 'nowrap'
                             : 'normal',
                         },
-                        renderFixedStyle(column, columnIndex),
+                        renderFixedStyle(
+                          column,
+                          columnIndex,
+                          tableFlattenColumns
+                        ),
                       ]"
                       :class="[
                         'layui-table-cell',

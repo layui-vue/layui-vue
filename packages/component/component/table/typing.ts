@@ -3,7 +3,7 @@ import type { Recordable } from "../../types";
 export interface TableProps {
   id?: string;
   dataSource: Recordable[];
-  columns: Recordable[];
+  columns: TableColumn[];
   skin?: string;
   size?: string;
   page?: Recordable;
@@ -64,9 +64,24 @@ export interface TableColumn {
   titleSl?: string;
   align?: string;
   ellipsisTooltip?: boolean;
-  fixed?: string;
+  ellipsisTooltipTheme?: boolean;
+  fixed?: "left" | "right";
   type?: string;
   children?: TableColumn[];
-  rowspan: number;
+  rowspan?: number;
   resize?: boolean;
+  hide?: boolean;
+  ignoreExport?: boolean;
+  totalRow?: boolean | string | number;
+  totalRowMethod: () => void;
 }
+
+export interface WithTableColumn extends TableColumn {
+  children?: WithTableColumn[];
+  _leftStyle?: number;
+  _isLastColumn?: boolean; // last fixed left
+  _isFirstColumn?: boolean; // first fixed right
+  _currentTotalWidth?: number;
+}
+
+export type FixedDirectionType = "_isLastColumn" | "_isFirstColumn";
