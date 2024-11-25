@@ -74,4 +74,51 @@ describe("LayTable", () => {
     expect(trs.length).toBe(4);
     expect(expandKeys.value).toEqual(["1", "1-1"]);
   });
+
+  test("多级表头 expand插槽 colspan正确", async () => {
+    const columns = [
+      { title: "班级", width: "120px", key: "classes" },
+      {
+        title: "分数",
+        key: "total",
+        children: [
+          { title: "语文", width: "80px", key: "chinese", totalRow: true },
+        ],
+      },
+    ];
+    const dataSource = [
+      {
+        id: "1",
+        name: "张三1",
+        classes: "六年级一班",
+        chinese: 80,
+        mathematics: 50,
+        english: 60,
+        organism: 80,
+        geography: 22,
+        history: 55,
+        politics: 53,
+        score: 454,
+      },
+    ];
+    const wrapper = mount({
+      setup() {
+        return () => (
+          <LayTable
+            columns={columns}
+            dataSource={dataSource}
+            expandKeys={["1"]}
+            v-slots={{
+              expand: () => 1,
+            }}
+          ></LayTable>
+        );
+      },
+    });
+    await nextTick();
+
+    const td = wrapper.find(".layui-table-cell-expand .layui-table-cell");
+    const colspan = td.attributes("colspan");
+    expect(colspan).toBe("2");
+  });
 });
