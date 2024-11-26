@@ -643,7 +643,7 @@ const checkboxProps = computed(() => {
   <tr class="layui-table-cell-expand" v-if="slot.expand && isExpand">
     <td
       class="layui-table-cell"
-      :colspan="columns.filter((column) => !column.hide).length"
+      :colspan="columns.filter((column: any) => !column.hide).length"
     >
       <slot name="expand" :data="data" :row="data"></slot>
     </td>
