@@ -102,7 +102,7 @@ import LayPopper from "./component/popper/index";
 import LayDescriptions from "./component/descriptions/index";
 import LayDescriptionsItem from "./component/descriptionsItem/index";
 
-declare module "@vue/runtime-core" {
+declare module "vue" {
   // GlobalComponents for Volar
   export interface GlobalComponents {
     LayAffix: typeof LayAffix;
