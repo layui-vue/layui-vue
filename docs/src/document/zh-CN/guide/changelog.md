@@ -25,6 +25,7 @@
               <li>[修复] dropdown 和 tooltip 按需模式 popper 样式丢失。</li>
               <li>[修复] docs 文档中因网络协议导致的图片资源丢失。</li>
               <li>[修复] table 组件多级表格头部 expand 插槽错位。</li> 
+              <li></li>
           </ul>
         </li>
       </ul>
