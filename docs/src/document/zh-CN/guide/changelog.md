@@ -13,6 +13,22 @@
 ::: demo
 <template>
   <lay-timeline>
+    <lay-timeline-item title="2.20.x">
+      <ul>
+        <a name="2-20-0"></a>
+        <li>
+          <h3>2.20.0 <span class="layui-badge-rim">2024-11-12</span></h3>
+          <ul>
+              <li>[修复] layer 组件拖拽至 iframe 时 mousemove 事件停止。</li>
+              <li>[修复] table 组件部分场景下底部边框不存在的问题。</li>
+              <li>[修复] timeSelect 与 Segmented 组件类型未生成的问题。</li>
+              <li>[修复] dropdown 和 tooltip 按需模式 popper 样式丢失。</li>
+              <li>[修复] docs 文档中因网络协议导致的图片资源丢失。</li>
+              <li>[修复] table 组件多级表格头部 expand 插槽错位。</li> 
+          </ul>
+        </li>
+      </ul>
+    </lay-timeline-item>
     <lay-timeline-item title="2.19.x">
       <ul>
         <a name="2-19-3"></a>
