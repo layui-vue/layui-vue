@@ -1,5 +1,11 @@
 <script lang="ts" setup>
-import type { BtnType, ImgListType, PropsContentType } from "../types";
+import type {
+  BtnType,
+  ImgListType,
+  PropsContentType,
+  MoveEndFn,
+  ResizeEndFn,
+} from "../types";
 
 import Shade from "./Shade.vue";
 import Iframe from "./Iframe.vue";
@@ -118,10 +124,10 @@ export interface LayerProps {
   revert?: Function;
   moveStart?: Function;
   moving?: Function;
-  moveEnd?: Function;
+  moveEnd?: MoveEndFn;
   resizeStart?: Function;
   resizing?: Function;
-  resizeEnd?: Function;
+  resizeEnd?: ResizeEndFn;
   internalDestroy?: Function;
 }
 
@@ -171,10 +177,10 @@ const props = withDefaults(defineProps<LayerProps>(), {
   revert: () => {},
   moveStart: () => {},
   moving: () => {},
-  moveEnd: () => {},
+  moveEnd: () => undefined,
   resizeStart: () => {},
   resizing: () => {},
-  resizeEnd: () => {},
+  resizeEnd: () => undefined,
 });
 
 const emit = defineEmits(["close", "update:modelValue"]);
@@ -440,14 +446,25 @@ const supportMove = function () {
               _l.value = left;
               _t.value = top;
             }
-            props.moving(id.value, { top: top, left: left });
+            props.moving(id.value, { top, left });
           },
           () => {
             // 拖拽结束
-            props.moveEnd(id.value);
+            const options = {
+              left: l.value,
+              top: t.value,
+              isMin: min.value,
+              isMax: max.value,
+            };
+            const [left, top] = props.moveEnd(id.value, options) || [];
+
+            if (top && left) {
+              l.value = left;
+              t.value = top;
+            }
           },
+          // 拖拽开始
           () => {
-            // 拖拽开始
             props.moveStart(id.value);
           }
         );
@@ -462,8 +479,17 @@ const supportMove = function () {
             props.resizing(id.value, { width: width, height: height });
           },
           () => {
+            const options = {
+              width: w.value,
+              height: h.value,
+            };
             // 拉伸结束
-            props.resizeEnd(id.value);
+            const [width, height] = props.resizeEnd(id.value, options) || [];
+
+            if (width && height) {
+              w.value = width;
+              h.value = height;
+            }
           },
           () => {
             // 拉伸开始
