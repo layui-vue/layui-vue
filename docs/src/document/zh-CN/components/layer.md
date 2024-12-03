@@ -776,11 +776,36 @@ const revert = () => {
 
 <template>
   <lay-button @click="openCallback" type="primary">打开</lay-button>
+  <lay-button @click="openMoveEnd" type="primary">moveEnd设置最终位置</lay-button>
+  <lay-button @click="openResizeEnd" type="primary">resizeEnd设置最终宽高</lay-button>
 </template>
 
 <script setup>
 import { ref, watch } from "vue";
 import { layer } from "@layui/layui-vue"
+
+const openMoveEnd = () => {
+    layer.open({
+        title:"移动结束",
+        content:"移动结束最终位置固定为top50px/left50px",
+        moveEnd(id, { left, top, isMin, isMax }) {
+            console.log(left, top, isMin, isMax, "left, top, isMin, isMax");
+            return ["50px", "50px"];
+        },
+    })
+}
+
+const openResizeEnd = () => {
+    layer.open({
+        title:"缩放结束",
+        content:"缩放结束最终宽高固定为top500px/left500px",
+        resize: true,
+        resizeEnd(id, { width, height }) {
+            console.log(width, height, "width, height");
+            return ["500px", "500px"];
+        },
+    })
+}
 
 const openCallback = () => {
     layer.open({
@@ -959,10 +984,10 @@ const openCallback = () => {
 | _yes_          | 点击底部默认按钮(不会主动关闭 `layer` 需要手动关闭，可用于一些逻辑判断)         | `function` | `id`     |        |     
 | _move-start_   | 弹窗拖动位置开始回调                                                       | `function` | `id`              | -      |
 | _moving_       | 弹窗拖动位置回调                                                           | `function` | `id`              | -      |
-| _move-end_     | 弹窗拖动位置结束回调                                                       | `function` | `id`              | -      |
+| _move-end_     | 弹窗拖动位置结束回调（支持返回最终left/top值）                                | [MoveEndFn](https://www.layui-vue.com/zh-CN/components/layer#types) | `() => undefined`              | -      |
 | _resize-start_ | 弹窗拉伸位置开始回调                                                       | `function` | `id`              | -      |
 | _resizing_     | 弹窗拉伸位置开始回调                                                       | `function` | `id`              | -      |
-| _resize-end_   | 弹窗拉伸位置开始回调                                                       | `function` | `id`              | -      |
+| _resize-end_   | 弹窗拉伸位置开始回调（支持返回最终width/height值）                                | [ResizeEndFn](https://www.layui-vue.com/zh-CN/components/layer#types) | `() => undefined`              | -      |
 
 :::
 
@@ -1318,4 +1343,29 @@ type ImgListType = {
 };
 
 type PropsContentType = VNodeTypes | (() => VNodeTypes);
+
+type OperateEndReturn = void | [string, string] | undefined;
+
+interface MoveEndFnOptions {
+  left: string;
+  top: string;
+  isMax: boolean;
+  isMin: boolean;
+}
+
+type MoveEndFn = (
+  id: string,
+  options: MoveEndFnOptions
+) => OperateEndReturn;
+
+interface ResizeEndFnOptions {
+  width: string;
+  height: string;
+}
+
+type ResizeEndFn = (
+  id: string,
+  options: ResizeEndFnOptions
+) => OperateEndReturn;
+
 ```
