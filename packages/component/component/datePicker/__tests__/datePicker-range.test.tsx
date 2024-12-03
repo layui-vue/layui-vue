@@ -9,7 +9,7 @@ import Shortcuts from "../component/common/Shortcuts.vue";
 // import DateComponent from "../component/common/Date.vue";
 // import Year from "../component/common/Year.vue";
 // import Footer from "../component/common/Footer.vue";
-// import Month from "../component/common/Month.vue";
+import Month from "../component/common/Month.vue";
 import { nextTick } from "vue";
 import { dayjsToString } from "../util";
 
@@ -85,5 +85,43 @@ describe("LayDatePicker date type", () => {
     await sleep();
     const dropdownInstance2 = wrapper.findComponent(LayDropdown);
     expect((dropdownInstance2.vm as any).open).toBeFalsy();
+  });
+
+  // https://gitee.com/layui-vue/layui-vue/issues/IB5P5N
+  test("min 月份禁用错误", async () => {
+    const wrapper = mount(LayDatePicker, {
+      props: {
+        range: true,
+        simple: true,
+        defaultValue: "2024-11-01",
+        min: "2019-11-20",
+        max: "2024-11-20",
+      },
+    });
+
+    await mockInputClick(wrapper);
+
+    const DateRangeInstance = wrapper.findComponent(DateRangeComponent);
+
+    const [leftDate] = DateRangeInstance.findAll(
+      ".layui-laydate-range-main .layui-laydate-main"
+    );
+
+    const [_, leftMonth] = leftDate.findAll(
+      ".layui-laydate-header .laydate-set-ym span"
+    );
+
+    await leftMonth.trigger("click");
+    await sleep(200);
+
+    const MonthInstance = wrapper.findComponent(Month);
+    const monthLis = MonthInstance.findAll(".laydate-month-list li") as any[];
+
+    expect(
+      monthLis.at(-1).element.classList.contains("layui-disabled")
+    ).toBeTruthy(); // 12月
+    expect(
+      monthLis.at(-3).element.classList.contains("layui-disabled")
+    ).toBeFalsy(); // 10月
   });
 });

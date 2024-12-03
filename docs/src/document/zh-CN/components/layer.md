@@ -844,7 +844,7 @@ const openCallback = () => {
 | 函数签名                                                                       | 描述                       |
 | ------------------------------------------------------------------------------ | -------------------------- |
 | `create: (option: LayerProps, defaultOption: LayerProps, callback?: Function)` | 创建一个弹层               |
-| `open: (option: LayerProps, callback?: Function)`                              | 打开一个弹层               |
+| `open: (option: LayerProps)`                              | 打开一个弹层               |
 | `close: (id: string)`                                                          | 关闭指定 ID 的弹层         |
 | `closeAll: ()`                                                                 | 关闭当前上下文中全部的弹层 |
 | `reset: (id: string)`                                                          | 重置某个弹层的位置和大小   |
@@ -889,7 +889,7 @@ const openCallback = () => {
 | ------------------- | ----------------------------------------------------------------- | --------------------------------------------------------- | ---------------------- | ---------------------------------------------------------------------------------- | -------- |
 | _v-model_           | 显示                                                              | boolean                                                   | `false`                |                                                                                    |          |
 | _id_                | layer 标识 可不传(内部生成)                                       | `string`                                                  |                        |                                                                                    |          |
-| _type_              | 类型                                                              | string                                                    | `1`                    | `0(dialog)` `1(page)` `2(iframe)` `3(loading)` `4(drawer)` `5(photos)` `6(notify)` |          |
+| _type_              | 类型                                                              | string                                                    | `1`                    | `0(dialog)` `1(page)` `2(iframe)` `3(loading)` `4(drawer)` `5(photos)` `6(notify)` `7(prompt)` |          |
 | _title_             | 标题  **当传入组件时，会影响内部寻找拖拽节点，需要给根元素设置 `pointer-events: none`**          |  `boolean` `PropsContentType (2.19.0)` | `标题`                 | --                                                                                 |          |
 | _title-style_       | 标题样式                                                          | `string` `StyleValue`                                     | --                     | --                                                                                 |          |
 | _footer_            | 底部                            |  `boolean` `PropsContentType (2.19.0)`          |                        |                                                                                    | `2.19.0` |
@@ -956,7 +956,7 @@ const openCallback = () => {
 | _close_        | 内部(右上角/点击遮罩/默认确认按钮)关闭回调                                 | `function` | `(id) => {}`      |        |
 | _before-close_ | 内部(右上角/点击遮罩/默认确认按钮)关闭前回调，返回值为 `true` 内部才会关闭 | `function` | `(id) => boolean` |        |
 | _destroy_      | 销毁回调                                                                   | `function` | `() => {}`        |        |
-| _yes_          | 点击底部默认按钮                                                           | `function` | `id`              |        |     
+| _yes_          | 点击底部默认按钮(不会主动关闭 `layer` 需要手动关闭，可用于一些逻辑判断)         | `function` | `id`     |        |     
 | _move-start_   | 弹窗拖动位置开始回调                                                       | `function` | `id`              | -      |
 | _moving_       | 弹窗拖动位置回调                                                           | `function` | `id`              | -      |
 | _move-end_     | 弹窗拖动位置结束回调                                                       | `function` | `id`              | -      |
@@ -1057,7 +1057,6 @@ const openCallback = () => {
 | 参数名     | 描述             | 类型         | 默认值       |
 | ---------- | ---------------- | ------------ | ------------ |
 | _option_   | 配置             | `LayerProps` |              |
-| _callback_ | 弹层创建后的回调 | `Function`   | `(id) => {}` |
 
 :::
 
@@ -1093,7 +1092,6 @@ const openCallback = () => {
 | ---------- | ---------------- | ------------ | ------------ |
 | _load_     | 加载层样式       | `number`     |              |
 | _option_   | 配置             | `LayerProps` |              |
-| _callback_ | 弹层创建后的回调 | `Function`   | `(id) => {}` |
 
 :::
 
@@ -1138,7 +1136,6 @@ const openCallback = () => {
 | ---------- | ---------------- | ------------ | ------------ |
 | _msg_      | 要显示的消息     | `string`     | `""`         |
 | _option_   | 配置             | `LayerProps` | `{}`         |
-| _callback_ | 弹层创建后的回调 | `Function`   | `(id) => {}` |
 
 :::
 
@@ -1175,7 +1172,6 @@ const openCallback = () => {
 | 参数名     | 描述             | 类型                   | 默认值       |
 | ---------- | ---------------- | ---------------------- | ------------ |
 | _option_   | 配置             | `string` `ImgListType` |              |
-| _callback_ | 弹层创建后的回调 | `Function`             | `(id) => {}` |
 
 :::
 
@@ -1272,7 +1268,6 @@ const openCallback = () => {
 | 参数名     | 描述             | 类型         | 默认值       |
 | ---------- | ---------------- | ------------ | ------------ |
 | _option_   | 配置             | `LayerProps` |              |
-| _callback_ | 弹层创建后的回调 | `Function`   | `(id) => {}` |
 
 :::
 
@@ -1283,7 +1278,7 @@ const openCallback = () => {
 
 | 属性            | 描述         | 值         |
 | --------------- | ------------ | ---------- |
-| _type_          | 类型         | `"prompt"` |
+| _type_          | 类型         | `7(prompt)` |
 | _shade-close_   | 遮罩层关闭   | `false`    |
 | _shade-opacity_ | 遮罩层透明度 | `"0.2"`    |
 
@@ -1300,6 +1295,7 @@ const openCallback = () => {
 | _value_       | 表单初始值   | `string`          | `""`           |                                                |
 | _max-length_  | 最大输入长度 | `number`          |                |                                                |
 | _placeholder_ | 占位符       | `string`          | `"请输入内容"` |                                                |
+| _yes_         | 点击底部默认按钮(回调第 `2` 个参数可以拿到输入框内容)  | `(id, PromptValue) => void` |      |        |  
 
 :::
 

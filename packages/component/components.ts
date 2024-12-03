@@ -101,8 +101,10 @@ import LayWatermark from "./component/watermark/index";
 import LayPopper from "./component/popper/index";
 import LayDescriptions from "./component/descriptions/index";
 import LayDescriptionsItem from "./component/descriptionsItem/index";
+import LayTimeSelect from "./component/timeSelect/index";
+import LaySegmented from "./component/segmented/index";
 
-declare module "@vue/runtime-core" {
+declare module "vue" {
   // GlobalComponents for Volar
   export interface GlobalComponents {
     LayAffix: typeof LayAffix;
@@ -205,6 +207,8 @@ declare module "@vue/runtime-core" {
     LayPopper: typeof LayPopper;
     LayDescriptions: typeof LayDescriptions;
     LayDescriptionsItem: typeof LayDescriptionsItem;
+    LayTimeSelect: typeof LayTimeSelect;
+    LaySegmented: typeof LaySegmented;
   }
 
   export interface ComponentCustomProperties {

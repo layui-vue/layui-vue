@@ -208,13 +208,29 @@ const handleChangeYearMonth = (
 };
 
 // 点击year/month进行切换
-const handleChangeYearMonthPick = (
+const handleChangeYearMonthLeftPick = (
   val: Dayjs,
   type: "year" | "month",
   dropdownEl: DropdownRef
 ) => {
   const DateValue = val[type]();
+
   leftDate.value = leftDate.value[type](DateValue) as Dayjs;
+
+  dropdownEl.hide();
+};
+
+const handleChangeYearMonthRightPick = (
+  val: Dayjs,
+  type: "year" | "month",
+  dropdownEl: DropdownRef
+) => {
+  const DateValue = val[type]();
+
+  leftDate.value = (rightDate.value[type](DateValue) as Dayjs).subtract(
+    1,
+    "month"
+  );
 
   dropdownEl.hide();
 };
@@ -293,7 +309,7 @@ const handleConfirm = () => {
                   class="layui-laydate"
                   :modelValue="leftDate"
                   :showDate="leftDate"
-                  @pick="(val: Dayjs) => handleChangeYearMonthPick(val, 'year', yearLeftRef!)"
+                  @pick="(val: Dayjs) => handleChangeYearMonthLeftPick(val, 'year', yearLeftRef!)"
                 ></Year>
               </template>
             </LayDropdown>
@@ -306,8 +322,7 @@ const handleConfirm = () => {
                   class="layui-laydate"
                   :modelValue="leftDate"
                   :showDate="leftDate"
-                  dateType="month"
-                  @pick="(val: Dayjs) => handleChangeYearMonthPick(val, 'month', monthLeftRef!)"
+                  @pick="(val: Dayjs) => handleChangeYearMonthLeftPick(val, 'month', monthLeftRef!)"
                 ></Month>
               </template>
             </LayDropdown>
@@ -350,7 +365,7 @@ const handleConfirm = () => {
                   class="layui-laydate"
                   :modelValue="rightDate"
                   :showDate="rightDate"
-                  @pick="(val: Dayjs) => handleChangeYearMonthPick(val, 'year', yearRightRef!)"
+                  @pick="(val: Dayjs) => handleChangeYearMonthRightPick(val, 'year', yearRightRef!)"
                 ></Year>
               </template>
             </LayDropdown>
@@ -364,7 +379,7 @@ const handleConfirm = () => {
                   :modelValue="rightDate"
                   :showDate="rightDate"
                   dateType="month"
-                  @pick="(val: Dayjs) => handleChangeYearMonthPick(val.subtract(1, 'month'), 'month', monthRightRef!)"
+                  @pick="(val: Dayjs) => handleChangeYearMonthRightPick(val, 'month', monthRightRef!)"
                 ></Month>
               </template>
             </LayDropdown>
