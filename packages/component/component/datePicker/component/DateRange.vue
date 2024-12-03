@@ -227,7 +227,10 @@ const handleChangeYearMonthRightPick = (
 ) => {
   const DateValue = val[type]();
 
-  leftDate.value = rightDate.value[type](DateValue).subtract(1, "month");
+  leftDate.value = (rightDate.value[type](DateValue) as Dayjs).subtract(
+    1,
+    "month"
+  );
 
   dropdownEl.hide();
 };
