@@ -23,6 +23,7 @@
               <li>[修复] layer 组件拖拽至 iframe 时 mousemove 事件中断的问题。</li>
               <li>[修复] timeSelect 与 Segmented 组件类型未生成的问题。</li>
               <li>[修复] dropdown 和 tooltip 按需模式 popper 样式丢失。</li>
+              <li>[修复] date-picker 组件日期范围类型，月份禁用异常。</li>
               <li>[修复] docs 文档中因网络协议导致的图片资源丢失。</li>
               <li>[修复] table 组件多级表格头部 expand 插槽错位。</li> 
               <li>[升级] layer 到 1.4.6 版本。</li>
