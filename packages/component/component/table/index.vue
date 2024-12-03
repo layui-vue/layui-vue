@@ -628,7 +628,11 @@ onMounted(() => {
 
 const getFixedColumn = () => {
   tableHeader.value!.scrollLeft = tableBody.value?.scrollLeft || 0;
-  tableTotal.value!.scrollLeft = tableBody.value?.scrollLeft || 0;
+
+  if (tableTotal.value) {
+    tableTotal.value.scrollLeft = tableBody.value?.scrollLeft || 0;
+  }
+
   // @ts-ignore
   if (tableBody.value?.scrollWidth > tableBody.value?.clientWidth) {
     if (tableBody.value?.scrollLeft == 0) {
