@@ -48,6 +48,7 @@ const popperProps = computed(() => {
       props.popperClass,
     ],
     popperStyle: props.popperStyle,
+    teleportProps: props.teleportProps,
   };
 });
 

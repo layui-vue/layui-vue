@@ -8,6 +8,15 @@ function getParentNode(el: any) {
   return null;
 }
 
+// 处理mousemove到iframe区域会造成事件中断
+const handleIframeEvent = (value: "none" | "auto") => {
+  const iframeDoms = document.querySelectorAll(".layui-layer iframe");
+
+  iframeDoms.forEach((iframe) => {
+    (iframe as HTMLIFrameElement).style.pointerEvents = value;
+  });
+};
+
 const useMove = function (
   el: HTMLElement,
   moveOut: boolean,
@@ -24,6 +33,8 @@ const useMove = function (
       const path = (event.composedPath && event.composedPath()) || event.path;
       if (path[0].className === "layui-layer-title") {
         if (event.button == 0 && el != null) {
+          handleIframeEvent("none");
+
           const cs: any = getComputedStyle(el);
           offsetX = event.pageX - el.offsetLeft + parseInt(cs["margin-left"]);
           offsetY = event.pageY - el.offsetTop + parseInt(cs["margin-right"]);
@@ -81,6 +92,7 @@ const useMove = function (
             flag = true;
             // 说明结束，传递 moveEnd 事件
             endCallback();
+            handleIframeEvent("auto");
             document.removeEventListener("mousemove", move);
             document.removeEventListener("mouseup", stop);
           };
@@ -107,6 +119,8 @@ const useResize = function (
       const path = (event.composedPath && event.composedPath()) || event.path;
       if (path[0].className === "layui-layer-resize") {
         if (event.button == 0 && el != null) {
+          handleIframeEvent("none");
+
           const x = el.offsetLeft;
           const y = el.offsetTop;
           clientX = event.clientX;
@@ -141,6 +155,7 @@ const useResize = function (
             flag = true;
             // 说明结束，传递 moveEnd 事件
             endCallback();
+            handleIframeEvent("auto");
             document.removeEventListener("mousemove", move);
             document.removeEventListener("mouseup", stop);
           };

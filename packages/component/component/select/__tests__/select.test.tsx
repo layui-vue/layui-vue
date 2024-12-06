@@ -205,4 +205,42 @@ describe("LaySelect", () => {
 
     expect((dropDownDom.vm as any).open).toBeFalsy();
   });
+
+  test("开启多选，处于搜索中时，点击input中的选中项无法删除", async () => {
+    const value1 = ref([1]);
+
+    const wrapper = mount({
+      setup() {
+        const options = [
+          { label: "学习", value: 1 },
+          { label: "复习", value: 2 },
+        ];
+
+        return () => (
+          <LaySelect
+            v-model={value1.value}
+            options={options}
+            multiple
+            show-search
+          ></LaySelect>
+        );
+      },
+    });
+
+    const inputComponent = wrapper.findComponent(".layui-tag-input");
+
+    await inputComponent.trigger("click");
+    await nextTick();
+    await sleep();
+
+    const tags = wrapper.findAll(".layui-tag-input-inner .layui-tag");
+    expect(tags.length).toBe(1);
+
+    await inputComponent.find(".layui-tag-input-inner input").setValue("学习");
+
+    await tags[0].find(".layui-tag-close-icon").trigger("click");
+    const tags1 = wrapper.findAll(".layui-tag-input-inner .layui-tag");
+    expect(tags1.length).toBe(0);
+    expect(value1.value.length).toBe(0);
+  });
 });

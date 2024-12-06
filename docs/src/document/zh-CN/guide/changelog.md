@@ -13,7 +13,58 @@
 ::: demo
 <template>
   <lay-timeline>
+    <lay-timeline-item title="2.21.x">
+      <ul>
+        <a name="2-21-0"></a>
+        <li>
+          <h3>2.21.0 <span class="layui-badge-rim">2024-12-3</span></h3>
+          <ul>
+              <li>[升级] layer 到 2.4.7 版本。</li>
+              <li>[新增] layer 新增moveEnd/resizeEnd返回值。<a href="https://gitee.com/layui-vue/layui-vue/pulls/453">详情</a></li>
+              <li>[修复] layui 2.20.0版本无法install问题。</li>
+          </ul>
+        </li>
+      </ul>
+    </lay-timeline-item>
+    <lay-timeline-item title="2.20.x">
+      <ul>
+        <a name="2-20-0"></a>
+        <li>
+          <h3>2.20.0 <span class="layui-badge-rim">2024-11-12</span></h3>
+          <ul>
+              <li>[修复] table 组件部分场景下底部边框不存在的问题。</li>
+              <li>[修复] layer 组件拖拽至 iframe 时 mousemove 事件中断的问题。</li>
+              <li>[修复] timeSelect 与 Segmented 组件类型未生成的问题。</li>
+              <li>[修复] dropdown 和 tooltip 按需模式 popper 样式丢失。</li>
+              <li>[修复] date-picker 组件日期范围类型，月份禁用异常。</li>
+              <li>[修复] docs 文档中因网络协议导致的图片资源丢失。</li>
+              <li>[修复] table 组件多级表格头部 expand 插槽错位。</li> 
+              <li>[升级] layer 到 2.4.6 版本。</li>
+          </ul>
+        </li>
+      </ul>
+    </lay-timeline-item>
     <lay-timeline-item title="2.19.x">
+      <ul>
+        <a name="2-19-3"></a>
+        <li>
+          <h3>2.19.3 <span class="layui-badge-rim">2024-11-12</span></h3>
+          <ul>
+              <li>[升级] @layui/layer-vue 升级至2.4.5。</li>
+              <li>[修复] @layui/layer-vue closeAll关闭notify，二次打开存在异常。<a href="https://gitee.com/layui-vue/layui-vue/pulls/448">详情</a></li>
+              <li>------------------------------以下为 @layui/layui-vue 调整------------------------------</li>
+              <li>[修复] form组件，同时存在需要与不需要校验的表单项时，form.validate方法失效。<a href="https://gitee.com/layui-vue/layui-vue/pulls/440">详情</a></li>
+              <li>[修复] table组件，初始化赋值expandKeys未生效。<a href="https://gitee.com/layui-vue/layui-vue/pulls/445">详情</a></li>
+              <li>[修复] table组件，columns存在hide，expand插槽展开内容错位。<a href="https://gitee.com/layui-vue/layui-vue/pulls/445">详情</a></li>
+              <li>[修复] tagInput组件，初始化inputValue未反填至输入框。<a href="https://gitee.com/layui-vue/layui-vue/pulls/447">详情</a></li>
+              <li>[修复] cascader组件，开启multiple，输入框未初始modelValue值。<a href="https://gitee.com/layui-vue/layui-vue/pulls/449">详情</a></li>
+              <li>[修复] cascader组件，options未深度监听变化。<a href="https://gitee.com/layui-vue/layui-vue/pulls/443">详情</a></li>
+              <li>[修复] popConfirm组件，点击确认/取消按钮无法关闭弹窗。<a href="https://gitee.com/layui-vue/layui-vue/pulls/442">详情</a></li>
+              <li>[优化] datePicker组件，开启simple/range后点击快捷选项无需确认。<a href="https://gitee.com/layui-vue/layui-vue/pulls/444">详情</a></li>
+              <li>[优化] timeSelect组件，补充 select.props默认值。<a href="https://gitee.com/layui-vue/layui-vue/pulls/441">详情</a></li>
+          </ul>
+        </li>
+      </ul>
       <ul>
         <a name="2-19-2"></a>
         <li>

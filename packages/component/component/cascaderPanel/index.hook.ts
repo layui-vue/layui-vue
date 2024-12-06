@@ -210,7 +210,8 @@ export default function useCascaderPanel(
     () => props.options,
     () => {
       originData.value = sanitizer(props.options ?? [], undefined);
-    }
+    },
+    { deep: true }
   );
 
   watch(
@@ -389,6 +390,8 @@ export default function useCascaderPanel(
     const removeDiff = values.filter((data) => !array.includes(data)) || [];
     return [addDiff, removeDiff];
   };
+
+  onMounted(() => setup());
 
   return {
     dataSource,

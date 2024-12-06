@@ -74,16 +74,16 @@ const layer = {
   _context: <AppContext | null>null,
 
   // 页面
-  open: (option: LayerProps, callback?: Function) => {
+  open: (option: LayerProps) => {
     const defaultOption = {};
-    return layer.create(option, defaultOption, callback);
+    return layer.create(option, defaultOption);
   },
   // 抽屉
-  drawer: (option: LayerProps, callback?: Function) => {
+  drawer: (option: LayerProps) => {
     const defaultOption: LayerProps = {
       type: "drawer",
     };
-    return layer.create(option, defaultOption, callback);
+    return layer.create(option, defaultOption);
   },
   // 消息
   msg: (message: string, option: LayerProps = {}, callback?: Function) => {
@@ -101,7 +101,7 @@ const layer = {
     return layer.create(option, defaultOption, callback);
   },
   // 加载
-  load: (load: number, option: LayerProps = {}, callback?: Function) => {
+  load: (load: number, option: LayerProps = {}) => {
     const defaultOption: LayerProps = {
       type: 3,
       load: load,
@@ -109,19 +109,19 @@ const layer = {
       isOutAnim: false,
       shadeClose: false,
     };
-    return layer.create(option, defaultOption, callback);
+    return layer.create(option, defaultOption);
   },
   // 确认
-  confirm: (msg: string, option: LayerProps = {}, callback?: Function) => {
+  confirm: (msg: string, option: LayerProps = {}) => {
     const defaultOption: LayerProps = {
       type: 0,
       content: msg,
       shadeClose: false,
     };
-    return layer.create(option, defaultOption, callback);
+    return layer.create(option, defaultOption);
   },
   //图片预览
-  photos: (option: string | LayerProps, callback?: Function) => {
+  photos: (option: string | LayerProps) => {
     if (typeof option === "string") {
       option = {
         imgList: [{ src: option }],
@@ -135,7 +135,7 @@ const layer = {
       shadeClose: true,
       shadeOpacity: "0.2",
     };
-    return layer.create(option, defaultOption, callback);
+    return layer.create(option, defaultOption);
   },
   //通知
   notify: (option: LayerProps, callback?: Function) => {
@@ -149,14 +149,14 @@ const layer = {
     return layer.create(option, defaultOption, callback);
   },
   // 输入层
-  prompt: (option: LayerProps, callback?: Function) => {
+  prompt: (option: LayerProps) => {
     option.type = 7;
     const defaultOption: LayerProps = {
       type: "prompt",
       shadeClose: false,
       shadeOpacity: "0.2",
     };
-    return layer.create(option, defaultOption, callback);
+    return layer.create(option, defaultOption);
   },
   // 创建弹出层
   create: (
@@ -221,10 +221,6 @@ const layer = {
         }, 2000);
         // 销毁实例
         delInstance(modalContainer.id);
-        //Notifiy特殊处理
-        if (options.type === 6) {
-          removeNotifiyFromQueen(options.id);
-        }
       }, defaultOption.time);
     }
     // 维护实例

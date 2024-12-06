@@ -193,4 +193,16 @@ describe("LayTagInput", () => {
     expect((component.vm as any).oldCompositionValue).toBe("H");
     expect(component.findAll(".layui-tag-text").length).toBe(2);
   });
+
+  test("inputValue 初始化反填", async () => {
+    const wrapper = mount(LayTagInput, {
+      props: {
+        inputValue: "123",
+      },
+    });
+
+    const component = wrapper.findComponent(LayTagInput);
+    const inputInstance = component.find("input");
+    expect(inputInstance.element.value).toBe("123");
+  });
 });
