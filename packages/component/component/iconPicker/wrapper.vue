@@ -53,7 +53,7 @@
         </a>
         <a
           href="javascript:;"
-          :class="[_currentPage === _totalPage ? 'layui-disabled' : '']"
+          :class="[_currentPage >= _totalPage ? 'layui-disabled' : '']"
           class="layui-laypage-next"
           @click="next()"
         >
@@ -108,7 +108,7 @@ watch(
 );
 
 const next = () => {
-  if (_currentPage.value === _totalPage.value) return;
+  if (_currentPage.value >= _totalPage.value) return;
   _currentPage.value = _currentPage.value + 1;
 };
 
@@ -143,10 +143,12 @@ const clear = () => search("");
 if (props.page) {
   pager(1);
 
+  const _iconCurPos = _iconSrc.value.findIndex(
+    (a) => a.class === props.selectedIcon
+  );
+
   props.selectedIcon &&
     (_currentPage.value =
-      Math.ceil(
-        _iconSrc.value.findIndex((a) => a.class === props.selectedIcon) / 12
-      ) || 1);
+      Math.ceil(_iconCurPos / 12) + (_iconCurPos % 12 ? 0 : 1) || 1);
 }
 </script>
