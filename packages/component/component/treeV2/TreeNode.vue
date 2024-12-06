@@ -1,6 +1,6 @@
 <template>
   <div
-    v-for="(item, index) in tree ?? _tree"
+    v-for="(item, index) in tree ?? _tree ?? []"
     :key="index"
     :class="[
       'layui-tree-set',
@@ -146,6 +146,7 @@ const shouldIconBorder = (node: TreeData) => {
   const _iconName = nodeIconType(node);
   if (["layui-icon-subtraction", "layui-icon-addition"].includes(_iconName))
     return true;
+  if (_iconName.includes("border")) return true;
   return isFunction(props.shouldIconBorder)
     ? Boolean(props.shouldIconBorder(_iconName))
     : false;
@@ -169,8 +170,7 @@ const stopEventPopup = (e: Event) => {
   e.preventDefault();
 };
 
-const handleIconClick = (e: MouseEvent, item: TreeData) => {
-  emitNodeClick(item);
+const doNodeSwitch = (e: MouseEvent, item: TreeData) => {
   if (props.nodeClick && props.nodeClick(item)) return stopEventPopup(e);
   item.expanded = !item.expanded;
   _lazyLoad(item).catch(() => {});
@@ -205,10 +205,15 @@ const handleIconClick = (e: MouseEvent, item: TreeData) => {
   emitExpandedKeys();
 };
 
+const handleIconClick = (e: MouseEvent, item: TreeData) => {
+  emitNodeClick(item);
+  doNodeSwitch(e, item);
+};
+
 const handleItemClick = (e: MouseEvent, item: TreeData) => {
-  if (props.onlyIconControl) return;
   if (!props.showCheckbox) emitSelectedKey(item);
-  handleIconClick(e, item);
+  emitNodeClick(item);
+  if (!props.onlyIconControl) doNodeSwitch(e, item);
 };
 
 const handleItemDblclick = (e: MouseEvent, item: TreeData) => {
@@ -231,18 +236,19 @@ const handleItemCheck = (checked: boolean, item: TreeData) => {
     }
 
     const leafs = _findLeafs(item.id);
-    // 非严格模式下，要检查这个节点下面的叶子节点是否有禁用的，如果有禁用的就跳过
-    if (leafs && item.indeterminated && checked)
-      checked = leafs.every((i) => !i.disabled);
-
+    // 非严格模式下，如果在子节点有禁用的，子树根节点必然不是 checked，此时简单置 checked 为 false 即可
+    if (item.indeterminated) checked = false;
     leafs
       ?.filter((i) => !i.disabled)
-      .forEach((i) => (i.checked = checked) && emitNodeCheck(i));
+      .forEach((i) => {
+        i.checked = checked;
+        emitNodeCheck(i);
+      });
 
     // 如果没有更深的叶子，那说明是节点自己勾选了就把自身emit出去
     if (!leafs?.length) emitNodeCheck(item);
-    emitCheckedKeys();
     _reloadNodeStatus();
+    emitCheckedKeys();
   };
 
   if (item.disabled) return;
@@ -253,21 +259,6 @@ const handleItemCheck = (checked: boolean, item: TreeData) => {
       .finally(() => job(item));
   else job(item);
 };
-
-watch(
-  () => checkedKeys.value,
-  (val) => emit("update-checked-keys", val)
-);
-
-watch(
-  () => expandedKeys.value,
-  (val) => emit("update-expanded-keys", val)
-);
-
-onMounted(() => {
-  if (props.checkedKeys) emit("update-checked-keys", checkedKeys.value);
-  if (props.expandKeys) emit("update-expanded-keys", expandedKeys.value);
-});
 
 defineOptions({
   name: "TreeNode",

@@ -136,6 +136,7 @@ const useTree = (props: TreeProps): UseTree => {
       original: d,
       mock: d.mock ?? false,
       slot: d.slot,
+      icon: d.icon,
     } as TreeData;
   };
 
