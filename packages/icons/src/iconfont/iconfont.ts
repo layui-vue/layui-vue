@@ -1,6 +1,4 @@
-import { IconProp } from "../../../component/component/iconPicker/index.vue";
-
-const LayuiIconList: IconProp[] = [
+const LayuiIconList = [
   { name: "实心", class: "layui-icon-heart-fill" },
   { name: "空心", class: "layui-icon-heart" },
   { name: "亮度/晴", class: "layui-icon-light" },

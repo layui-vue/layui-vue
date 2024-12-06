@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import "./index.less";
 import type { DropdownTeleportProps } from "../dropdown/interface";
-import { computed, h, Ref, ref, StyleValue } from "vue";
+import { computed, h, ref, StyleValue } from "vue";
 import { LayIconList as icons, LayIcon } from "@layui/icons-vue";
 import LayDropdown from "../dropdown/index.vue";
 import useProps from "./index.hooks";
@@ -138,18 +138,14 @@ const renderWrapper = () => {
         "onUpdate:modelValue": (index) => (_tabIndex.value = index),
         tabPosition: "left",
       },
-      Array.from(_iconSets.entries()).map(([k, s]) => {
-        return h(
-          LayTabItem,
-          {
-            id: k,
-            title: s.title ?? s.name,
-          },
-          {
-            default: () => IconPickerFactory(s),
-          }
-        );
-      })
+      () =>
+        Array.from(_iconSets.entries()).map(([k, s]) => {
+          return h(
+            LayTabItem,
+            { id: k, title: s.title ?? s.name },
+            { default: () => IconPickerFactory(s) }
+          );
+        })
     );
   }
 
