@@ -642,7 +642,11 @@ onMounted(() => {
 
 const getFixedColumn = () => {
   tableHeader.value!.scrollLeft = tableBody.value?.scrollLeft || 0;
-  tableTotal.value!.scrollLeft = tableBody.value?.scrollLeft || 0;
+
+  if (tableTotal.value) {
+    tableTotal.value.scrollLeft = tableBody.value?.scrollLeft || 0;
+  }
+
   // @ts-ignore
   if (tableBody.value?.scrollWidth > tableBody.value?.clientWidth) {
     if (tableBody.value?.scrollLeft == 0) {
@@ -1362,63 +1366,67 @@ defineExpose({ getCheckData });
           </div>
         </template>
       </div>
-      <div class="table-total-wrapper" :style="totalWrapperStyles">
-        <div class="table-total-wrapper-main" ref="tableTotal">
-          <table class="layui-table">
-            <colgroup>
-              <template
-                v-for="(column, columnIndex) in tableBodyColumns"
-                :key="columnIndex"
-              >
-                <template v-if="tableColumnKeys.includes(column.key)">
-                  <col
-                    :width="column.width"
-                    :style="{
-                      minWidth: column.minWidth ? column.minWidth : '50px',
-                    }"
-                  />
-                </template>
-              </template>
-            </colgroup>
-            <tbody>
-              <tr v-if="hasTotalRow" class="layui-table-total">
+      <template v-if="hasTotalRow">
+        <div class="table-total-wrapper" :style="totalWrapperStyles">
+          <div class="table-total-wrapper-main" ref="tableTotal">
+            <table class="layui-table">
+              <colgroup>
                 <template
-                  v-for="(column, columnIndex) in tableFlattenColumns"
+                  v-for="(column, columnIndex) in tableBodyColumns"
                   :key="columnIndex"
                 >
                   <template v-if="tableColumnKeys.includes(column.key)">
-                    <td
-                      :style="[
-                        {
-                          textAlign: column.align,
-                          whiteSpace: column.ellipsisTooltip
-                            ? 'nowrap'
-                            : 'normal',
-                        },
-                        renderFixedStyle(
-                          column,
-                          columnIndex,
-                          tableFlattenColumns
-                        ),
-                      ]"
-                      :class="[
-                        'layui-table-cell',
-                        renderFixedClassName(
-                          column,
-                          columnIndex,
-                          tableFlattenColumns
-                        ),
-                        column.fixed ? `layui-table-fixed-${column.fixed}` : '',
-                      ]"
-                      v-html="renderTotalRowCell(column)"
-                    ></td>
+                    <col
+                      :width="column.width"
+                      :style="{
+                        minWidth: column.minWidth ? column.minWidth : '50px',
+                      }"
+                    />
                   </template>
                 </template>
-              </tr>
-            </tbody>
-          </table>
+              </colgroup>
+              <tbody>
+                <tr class="layui-table-total">
+                  <template
+                    v-for="(column, columnIndex) in tableFlattenColumns"
+                    :key="columnIndex"
+                  >
+                    <template v-if="tableColumnKeys.includes(column.key)">
+                      <td
+                        :style="[
+                          {
+                            textAlign: column.align,
+                            whiteSpace: column.ellipsisTooltip
+                              ? 'nowrap'
+                              : 'normal',
+                          },
+                          renderFixedStyle(
+                            column,
+                            columnIndex,
+                            tableFlattenColumns
+                          ),
+                        ]"
+                        :class="[
+                          'layui-table-cell',
+                          renderFixedClassName(
+                            column,
+                            columnIndex,
+                            tableFlattenColumns
+                          ),
+                          column.fixed
+                            ? `layui-table-fixed-${column.fixed}`
+                            : '',
+                        ]"
+                        v-html="renderTotalRowCell(column)"
+                      ></td>
+                    </template>
+                  </template>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
-      </div>
+      </template>
       <div class="layui-table-footer" v-if="slot.footer">
         <slot name="footer"></slot>
       </div>

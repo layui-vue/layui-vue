@@ -13,13 +13,10 @@
         <ul class="layui-row layui-col-space20">
           <li class="layui-col-sm12">
             <div class="alone">
-              <router-link to="/zh-CN/components/layer"
-                >layer - vue
+              <router-link to="/zh-CN/components/layer">
+                layer - vue
                 <cite>通用型弹出层组件</cite>
-                <img
-                  src="https://img.shields.io/badge/npm-v2.3.2-blue"
-                  alt="Version"
-                />
+                <img src="https://img.shields.io/badge/npm-v2.4.6-blue" alt="Version"/>
                 <img src="https://img.shields.io/badge/license-MIT-green" />
               </router-link>
             </div>

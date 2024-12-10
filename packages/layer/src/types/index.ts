@@ -20,3 +20,27 @@ export type ImgListType = {
 };
 
 export type PropsContentType = VNodeTypes | (() => VNodeTypes);
+
+type OperateEndReturn = void | [string, string] | undefined;
+
+interface MoveEndFnOptions {
+  left: string;
+  top: string;
+  isMax: boolean;
+  isMin: boolean;
+}
+
+export type MoveEndFn = (
+  id: string,
+  options: MoveEndFnOptions
+) => OperateEndReturn;
+
+interface ResizeEndFnOptions {
+  width: string;
+  height: string;
+}
+
+export type ResizeEndFn = (
+  id: string,
+  options: ResizeEndFnOptions
+) => OperateEndReturn;
