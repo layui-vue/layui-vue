@@ -11,6 +11,7 @@ module.exports = {
     { value: "refactor", name: "重构:    代码重构，注意和特性、修复区分开" },
     { value: "ci", name: "工具:    开发工具变动(构建、脚手架工具等)" },
     { value: "revert", name: "回滚:    代码回退" },
+    { value: "wip", name: "进行中:    编码中" },
   ],
   // scopes: [
   //   { name: "component" },
