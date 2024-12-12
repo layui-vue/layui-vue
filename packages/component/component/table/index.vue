@@ -164,6 +164,18 @@ watch(
   }
 );
 
+watch(
+  () => [props.defaultExpandAll],
+  () => {
+    if (!props.defaultExpandAll) {
+      tableExpandKeys.value = [];
+    }
+  },
+  {
+    deep: true,
+  }
+);
+
 const tableSelectedKey: WritableComputedRef<string> = computed({
   get() {
     return props.selectedKey;
