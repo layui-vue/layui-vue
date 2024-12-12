@@ -121,4 +121,48 @@ describe("LayTable", () => {
     const colspan = td.attributes("colspan");
     expect(colspan).toBe("2");
   });
+
+  test("切换defaultExpandAll ", async () => {
+    const defaultExpandAll = ref(true);
+
+    const columns = [
+      { title: "姓名", width: "80px", key: "name", sort: "desc" },
+      { title: "状态", width: "180px", key: "status" },
+    ];
+    const dataSource = [
+      {
+        id: "1",
+        name: "张三",
+        children: [
+          {
+            id: "1-1",
+            name: "张三",
+          },
+        ],
+      },
+      { id: "2", name: "张三" },
+    ];
+    const wrapper = mount({
+      setup() {
+        return () => (
+          <LayTable
+            columns={columns}
+            dataSource={dataSource}
+            defaultExpandAll={defaultExpandAll.value}
+          ></LayTable>
+        );
+      },
+    });
+    await nextTick();
+
+    const trs1 = wrapper.findAll(".layui-table-body table tbody tr");
+    expect(trs1.length).toBe(3);
+
+    defaultExpandAll.value = false;
+
+    await nextTick();
+
+    const trs2 = wrapper.findAll(".layui-table-body table tbody tr");
+    expect(trs2.length).toBe(2);
+  });
 });

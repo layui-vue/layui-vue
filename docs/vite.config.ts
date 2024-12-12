@@ -9,10 +9,7 @@ export default defineConfig({
       "layui-component": path.resolve(__dirname, "../packages/component"),
       "layui-vue": path.resolve(__dirname, "../packages/layui"),
       "layui-layer": path.resolve(__dirname, "../packages/layer"),
-      "json-schema-form": path.resolve(
-        __dirname,
-        "../packages/json-schema-form"
-      ),
+      "json-schema-form": path.resolve(__dirname,"../packages/json-schema-form"),
     },
   },
   build: {

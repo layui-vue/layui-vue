@@ -15,6 +15,16 @@
   <lay-timeline>
     <lay-timeline-item title="2.21.x">
       <ul>
+        <a name="2-21-1"></a>
+        <li>
+          <h3>2.21.1 <span class="layui-badge-rim">2024-12-11</span></h3>
+          <ul>
+              <li>[修复] table 组件 defaultExpandAll 切换异常。</li>
+              <li>[修复] table 组件 cell 内 progress 组件无法正常加载的问题。</li>
+          </ul>
+        </li>
+      </ul>
+      <ul>
         <a name="2-21-0"></a>
         <li>
           <h3>2.21.0 <span class="layui-badge-rim">2024-12-3</span></h3>
