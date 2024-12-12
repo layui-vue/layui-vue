@@ -205,7 +205,7 @@ const renderFixedStyle = (column: any, columnIndex: number) => {
         isLast = false;
       }
     }
-    return isLast ? ({ "border-right": "none" } as StyleValue) : {};
+    // return isLast ? ({ "border-right": "none" } as StyleValue) : {};
   }
   return {} as StyleValue;
 };

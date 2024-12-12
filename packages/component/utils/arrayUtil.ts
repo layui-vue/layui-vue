@@ -24,6 +24,10 @@ export function isArray(val: any): val is Array<any> {
   return val && Array.isArray(val);
 }
 
-export function isValueArray(val: any): boolean {
+export function isValueArray(val: unknown): val is ArrayLike<unknown> {
   return isArray(val) && val.length > 0;
+}
+
+export function normalizeArray<T>(value?: T | T[]): T[] {
+  return isArray(value) ? value : ([value] as T[]);
 }

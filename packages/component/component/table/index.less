@@ -309,7 +309,7 @@
 
 .layui-table-cell,
 .layui-table-tool-panel li {
-  overflow: hidden;
+  // overflow: hidden;
   text-overflow: ellipsis;
 }
 
@@ -502,8 +502,10 @@
   z-index: 2;
   background: white;
   position: sticky !important;
-  border-left: 1px solid #eee !important;
-  border-right: none !important;
+  
+  &:last-child{
+    border-right: none !important;
+  }
 }
 
 .layui-table-tool-checkbox {
@@ -524,11 +526,36 @@
 .layui-table-has-fixed-left .layui-table-fixed-left-last {
   overflow: initial !important;
   border-right: none !important;
+  &::after{
+    box-shadow: inset 10px 0 8px -8px #00000026;
+  }
 }
 
 .layui-table-has-fixed-right .layui-table-fixed-right-first {
   overflow: initial !important;
   border-left: 1px solid transparent !important;
+
+  &::after{
+    border-right: none;
+    box-shadow: inset -10px 0 8px -8px #00000026;
+  }
+}
+
+.layui-table-has-fixed-right .layui-table-fixed-right{
+  position: relative;
+
+  &::after{
+    border-right: 1px solid #eee;
+    position: absolute;
+    top: 0;
+    bottom: -1px;
+    left: 0;
+    width: 30px;
+    transform: translateX(-100%);
+    content: "";
+    pointer-events: none;
+  }
+  
 }
 
 .layui-table-fixed-left-last::after {
@@ -541,7 +568,6 @@
   transition: box-shadow 0.3s;
   content: "";
   pointer-events: none;
-  box-shadow: inset 10px 0 8px -8px #00000026;
 }
 
 .layui-table-fixed-right-first::after {
@@ -554,7 +580,6 @@
   transition: box-shadow 0.3s;
   content: "";
   pointer-events: none;
-  box-shadow: inset -10px 0 8px -8px #00000026;
 }
 
 .layui-table-tool {

@@ -59,9 +59,9 @@ export interface TableColumn {
   key: string;
   customSlot?: string;
   width?: string;
-  minWidt?: string;
+  minWidth?: string;
   sort?: string;
-  titleSl?: string;
+  titleSlot?: string;
   align?: string;
   ellipsisTooltip?: boolean;
   ellipsisTooltipTheme?: boolean;
@@ -78,7 +78,10 @@ export interface TableColumn {
 
 export interface WithTableColumn extends TableColumn {
   children?: WithTableColumn[];
-  _leftStyle?: number;
+  _left?: number;
+  _right?: number;
+  colspan?: number;
+  rowspan?: number;
   _isLastColumn?: boolean; // last fixed left
   _isFirstColumn?: boolean; // first fixed right
   _currentTotalWidth?: number;

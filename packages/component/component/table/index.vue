@@ -12,20 +12,22 @@ import {
   computed,
   onBeforeUnmount,
   nextTick,
+  shallowRef,
+  watchEffect,
 } from "vue";
 import { useResizeObserver, type UseResizeObserverReturn } from "@vueuse/core";
 import LayCheckbox from "../checkbox/index.vue";
-import LayDropdown from "../dropdown/index.vue";
 import LayEmpty from "../empty/index.vue";
 import TableData from "./TableData.vue";
 import TablePage from "./TablePage.vue";
+import TableToolbar from "./components/Toolbar.vue";
+
 import useTable from "./hooks/useTable";
-import { useTableColumns } from "./hooks/useTableColumns";
+import { useNextTable } from "./hooks/useNextTable";
 import { TableEmit, sortType } from "./typing";
 import { startResize } from "./hooks/useResize";
 import useAutoColsWidth from "./hooks/useAutoColsWidth";
 import { useEmit } from "./hooks/useEmit";
-import { useI18n } from "../../language";
 import { isValueArray } from "../../utils";
 
 export type TableProps = _TableProps;
@@ -68,9 +70,8 @@ const emit = defineEmits(TableEmit);
 
 const { rowClick, rowDoubleClick, rowContextmenu, cellDoubleClick, rowExpand } =
   useEmit(emit);
-const { t } = useI18n();
 const slot = useSlots();
-const tableRef = ref();
+const tableRef = shallowRef<HTMLDivElement | undefined>();
 
 const allChecked = ref(false);
 const hasChecked = ref(false);
@@ -80,152 +81,9 @@ const tableColumns = computed(() => {
 });
 
 const { columnSlotNames, dataSourceCount, needSelectedKeys } = useTable(props);
-const { formatColumns } = useTableColumns(props);
 
-const tableColumnKeys = ref<any[]>([]);
-const tableHeadColumns = ref<any[]>([]);
-const tableBodyColumns = ref<any[]>([]);
-const tableFlattenColumns = ref<any[]>([]);
-
-/**
- * 获取叶节点集合
- *
- * @param columns 原始 columns 配置结构
- */
-const flattenColumns = (columns: any[]) => {
-  let result: any[] = [];
-  for (const item of columns) {
-    if (item.children && item.children.length > 0) {
-      // 如果存在子项，则使用 concat 方法将子项的遍历结果合并到当前结果中
-      result = result.concat(flattenColumns(item.children));
-    } else {
-      // 否则，将当前项添加到结果集合中
-      result.push(item);
-    }
-  }
-  return result;
-};
-
-/**
- * 获取数组深度
- *
- * @param arr 数组
- */
-const getLevel = (arr: any[]) => {
-  let maxLevel = 0;
-  (function callBack(arr, level) {
-    ++level;
-    maxLevel = Math.max(level, maxLevel);
-    for (let i = 0; i < arr.length; i++) {
-      let item = arr[i];
-      if (item.children && item.children.length > 0) {
-        callBack(item.children, level);
-      } else {
-        delete item.children;
-      }
-    }
-  })(arr, 0);
-  return maxLevel;
-};
-
-/**
- * 获取叶节点的数量
- *
- * @param json 当前节点
- */
-function getLeafCountTree(json: any) {
-  if (!json.children || json.children.length == 0) {
-    json.colspan = 1;
-    return 1;
-  } else {
-    var leafCount = 0;
-    for (var i = 0; i < json.children.length; i++) {
-      leafCount = leafCount + getLeafCountTree(json.children[i]);
-    }
-    json.colspan = leafCount;
-    return leafCount;
-  }
-}
-
-/**
- * 计算内容列
- *
- * @param columns 原始列
- */
-const findFindNode = (columns: any[]) => {
-  columns.forEach((column) => {
-    if (column.children) {
-      findFindNode(column.children);
-    } else {
-      tableBodyColumns.value.push(column);
-    }
-  });
-};
-
-/**
- * 计算显示列
- *
- * @param columns 原始列
- */
-const findFindNodes = (columns: any[]) => {
-  columns.forEach((column) => {
-    if (column.children) {
-      tableColumnKeys.value.push(column.key);
-      findFindNodes(column.children);
-    } else {
-      if (!column.hide) {
-        tableColumnKeys.value.push(column.key);
-      }
-    }
-  });
-};
-
-/**
- * 将 columns 复杂表头，分割为多维度数组。
- *
- * @param level 层级, 用于决定会被 push 到的目标数组
- * @remark 注意：当父层级为 fixed 属性时, 子集将自动继承
- */
-const findFinalNode = (
-  level: number,
-  columns: any[],
-  parentFixed: string | undefined
-) => {
-  columns.forEach((column) => {
-    if (parentFixed != undefined) {
-      column.fixed = parentFixed;
-    }
-    if (column.children) {
-      const colSpan = getLeafCountTree(column);
-      column.colspan = colSpan;
-      if (!tableHeadColumns.value[level]) {
-        tableHeadColumns.value[level] = [];
-      }
-      // 如果列固定，并且 width 不存在, 设置默认值
-      if (column.fixed && !column.width) {
-        column.type ? (column.width = "50px") : (column.width = "100px");
-      }
-      tableHeadColumns.value[level].push(column);
-      // 如果 level = 0, 并且 column.fixed 不为 undefined 向下传递，否则 undefined.
-      findFinalNode(
-        level + 1,
-        column.children,
-        level === 0 && column.fixed != undefined ? column.fixed : undefined
-      );
-    } else {
-      const rowSpan = getLevel(columns);
-      column.rowspan = rowSpan;
-      if (!tableHeadColumns.value[level]) {
-        tableHeadColumns.value[level] = [];
-      }
-      // 如果列固定，并且 width 不存在, 设置默认值
-      if (column.fixed && !column.width) {
-        column.type ? (column.width = "50px") : (column.width = "100px");
-      }
-      tableHeadColumns.value[level].push(column);
-    }
-  });
-};
+const { tableColumnKeys, tableHeadColumns, tableBodyColumns } =
+  useNextTable(props);
 
 const tableExpandKeys = ref<string[]>([...props.expandKeys]);
 const tableSelectedKeys = ref<string[]>([...props.selectedKeys]);
@@ -234,35 +92,6 @@ const tableSelectedKeys = ref<string[]>([...props.selectedKeys]);
  * 对 width 属性的预处理
  */
 props.autoColsWidth && useAutoColsWidth(tableColumns, tableDataSource);
-
-/**
- * 监听 columns 变化
- */
-watch(
-  tableColumns,
-  () => {
-    tableColumnKeys.value = [];
-    tableBodyColumns.value = [];
-    tableHeadColumns.value = [];
-    tableFlattenColumns.value = [];
-    findFindNode(tableColumns.value);
-    findFindNodes(tableColumns.value);
-    // findFinalNode(0, tableColumns.value, undefined);
-    tableFlattenColumns.value = flattenColumns(tableColumns.value);
-  },
-  { immediate: true, deep: true }
-);
-
-watch(
-  () => formatColumns.value,
-  (value) => {
-    findFinalNode(0, value, undefined);
-  },
-  {
-    immediate: true,
-    deep: true,
-  }
-);
 
 /**
  * 监听 props.selectedKeys 变化，响应内部
@@ -390,99 +219,6 @@ const change = function (page: any) {
   emit("change", page);
 };
 
-// 页面打印
-const print = () => {
-  let subOutputRankPrint = tableRef.value as HTMLElement;
-  let newContent = subOutputRankPrint.innerHTML;
-  let oldContent = document.body.innerHTML;
-  document.body.innerHTML = newContent;
-  window.print();
-  window.location.reload();
-  document.body.innerHTML = oldContent;
-};
-
-// 报表导出
-const exportData = () => {
-  var tableStr = ``;
-  for (let tableHeadColumn of tableHeadColumns.value) {
-    tableStr += "<tr>";
-    for (let column of tableHeadColumn) {
-      if (!column.ignoreExport) {
-        // 如果 column.type 等于 checkbox 或 radio 时，该列不导出
-        if ((column.type && column.type === "number") || !column.type) {
-          tableStr += `<td colspan=${column.colspan} rowspan=${
-            column.rowspan
-          }>${column.title || ""}</td>`;
-        }
-      }
-    }
-    tableStr += "</tr>";
-  }
-  const doExport = (source: Array<any>) => {
-    source.forEach((item, rowIndex) => {
-      tableStr += "<tr>";
-      tableBodyColumns.value.forEach((tableColumn, columnIndex) => {
-        if (!tableColumn.ignoreExport) {
-          // 如果该列是特殊列，并且类型为 number 时，特殊处理
-          if (tableColumn.type && tableColumn.type == "number") {
-            tableStr += `<td>${rowIndex + 1}</td>`;
-          } else {
-            // 如果不是特殊列，进行字段匹配处理
-            if (tableColumn.type == undefined) {
-              var columnData = undefined;
-              Object.keys(item).forEach((name) => {
-                if (tableColumn.key === name) {
-                  columnData = item;
-                }
-              });
-              // 拼接列
-              const rowColSpan = props.spanMethod(
-                item,
-                tableColumn,
-                rowIndex,
-                columnIndex
-              );
-              const rowspan = rowColSpan ? rowColSpan[0] : 1;
-              const colspan = rowColSpan ? rowColSpan[1] : 1;
-
-              // 如果 rowspan 和 colspan 是 0 说明该列作为合并列的辅助列。
-              // 则不再进行结构拼接。
-              if (rowspan != 0 && colspan != 0) {
-                tableStr += `<td colspan=${colspan} rowspan=${rowspan} x:str>${
-                  columnData ? columnData[tableColumn.key] : ""
-                }</td>`;
-              }
-            }
-          }
-        }
-      });
-      tableStr += "</tr>";
-      if (item.children) doExport(item.children);
-    });
-  };
-  doExport(tableDataSource.value);
-  var worksheet = "Sheet1";
-  var uri = "data:application/vnd.ms-excel;base64,";
-  var exportTemplate = `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel"
-        xmlns="http://www.w3.org/TR/REC-html40">
-        <head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet>
-            <x:Name>${worksheet}</x:Name>
-                <x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet>
-            </x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]-->
-        </head>
-        <body>
-            <table syle="table-layout: fixed;word-wrap: break-word; word-break: break-all;">${tableStr}</table>
-        </body>
-    </html>`;
-  window.location.href = uri + base64(exportTemplate);
-  return;
-};
-
-// BASE64编码
-function base64(s: string) {
-  return window.btoa(unescape(encodeURIComponent(s)));
-}
-
 const thSort = (e: Event, key: string) => {
   const spanDom = (e.currentTarget as HTMLElement).querySelector(
     "span[lay-sort]"
@@ -547,9 +283,9 @@ const baseSort = (
 
 // 清空所有的sort状态
 const removeAllSortState = () => {
-  const sortElements = tableRef.value.querySelectorAll("[lay-sort]");
+  const sortElements = tableRef.value!.querySelectorAll("[lay-sort]");
   if (sortElements && sortElements.length > 0) {
-    sortElements.forEach((element: HTMLElement) => {
+    sortElements.forEach((element) => {
       element.setAttribute("lay-sort", "");
     });
   }
@@ -720,7 +456,7 @@ const renderFixedStyle = (column: any, columnIndex: number, columns: any) => {
         isLast = false;
       }
     }
-    return isLast ? ({ "border-right": "none" } as StyleValue) : {};
+    // return isLast ? ({ "border-right": "none" } as StyleValue) : {};
   }
 };
 
@@ -777,133 +513,133 @@ const getChildrenFixedTotalWidth = (column: any): number => {
  * @param columnIndex 列索引
  * @param tableHeadColumn 列集合 (current)
  */
-const renderHeadFixedStyle = (
-  column: any,
-  columnIndex: number,
-  tableHeadColumn: any[],
-  tableHeadColumnIndex: number,
-  tableHeadColumns: any[]
-) => {
-  if (column.fixed) {
-    if (column.fixed == "left") {
-      // 如果是简单固定列
-      if (tableHeadColumnIndex == 0) {
-        // 如果是左固定。
-        var left = 0;
-        // 累加左侧列宽。
-        for (var i = 0; i < columnIndex; i++) {
-          if (
-            props.columns[i].fixed &&
-            props.columns[i].fixed == "left" &&
-            tableColumnKeys.value.includes(props.columns[i].key)
-          ) {
-            left = left + getChildrenFixedTotalWidth(props.columns[i]);
-          }
-        }
-        return { left: `${left}px` } as StyleValue;
-      } else {
-        // 复杂表头固定
-        var left = 0;
-        var topicColumns = tableHeadColumns[0];
-        var topicColumn = findTopicParent(topicColumns, column);
-        var index: number = topicColumns.indexOf(topicColumn);
+// const renderHeadFixedStyle = (
+//   column: any,
+//   columnIndex: number,
+//   tableHeadColumn: any[],
+//   tableHeadColumnIndex: number,
+//   tableHeadColumns: any[]
+// ) => {
+//   if (column.fixed) {
+//     if (column.fixed == "left") {
+//       // 如果是简单固定列
+//       if (tableHeadColumnIndex == 0) {
+//         // 如果是左固定。
+//         var left = 0;
+//         // 累加左侧列宽。
+//         for (var i = 0; i < columnIndex; i++) {
+//           if (
+//             props.columns[i].fixed &&
+//             props.columns[i].fixed == "left" &&
+//             tableColumnKeys.value.includes(props.columns[i].key)
+//           ) {
+//             left = left + getChildrenFixedTotalWidth(props.columns[i]);
+//           }
+//         }
+//         return { left: `${left}px` } as StyleValue;
+//       } else {
+//         // 复杂表头固定
+//         var left = 0;
+//         var topicColumns = tableHeadColumns[0];
+//         var topicColumn = findTopicParent(topicColumns, column);
+//         var index: number = topicColumns.indexOf(topicColumn);
 
-        // 累加父级位置
-        for (var i = 0; i < index; i++) {
-          if (topicColumns[i].fixed && topicColumns[i].fixed == "left") {
-            left = left + getChildrenFixedTotalWidth(topicColumns[i]);
-          }
-        }
+//         // 累加父级位置
+//         for (var i = 0; i < index; i++) {
+//           if (topicColumns[i].fixed && topicColumns[i].fixed == "left") {
+//             left = left + getChildrenFixedTotalWidth(topicColumns[i]);
+//           }
+//         }
 
-        // 累加当前位置
-        for (var i = 0; i < columnIndex; i++) {
-          if (tableHeadColumn[i].fixed && tableHeadColumn[i].fixed == "left") {
-            left = left + getChildrenFixedTotalWidth(tableHeadColumn[i]);
-          }
-        }
-        return { left: `${left}px` } as StyleValue;
-      }
-    } else {
-      if (tableHeadColumnIndex == 0) {
-        // 如果是右固定。
-        var right = 0;
-        // 累计右侧列宽。
-        for (var i = columnIndex + 1; i < props.columns.length; i++) {
-          if (
-            props.columns[i].fixed &&
-            props.columns[i].fixed == "right" &&
-            tableColumnKeys.value.includes(props.columns[i].key)
-          ) {
-            right = right + getChildrenFixedTotalWidth(props.columns[i]);
-          }
-        }
-        return { right: `${right}px` } as StyleValue;
-      } else {
-        // 复杂表头固定
-        var right = 0;
-        var topicColumns = tableHeadColumns[0];
-        var topicColumn = findTopicParent(topicColumns, column);
-        var index: number = topicColumns.indexOf(topicColumn);
+//         // 累加当前位置
+//         for (var i = 0; i < columnIndex; i++) {
+//           if (tableHeadColumn[i].fixed && tableHeadColumn[i].fixed == "left") {
+//             left = left + getChildrenFixedTotalWidth(tableHeadColumn[i]);
+//           }
+//         }
+//         return { left: `${left}px` } as StyleValue;
+//       }
+//     } else {
+//       if (tableHeadColumnIndex == 0) {
+//         // 如果是右固定。
+//         var right = 0;
+//         // 累计右侧列宽。
+//         for (var i = columnIndex + 1; i < props.columns.length; i++) {
+//           if (
+//             props.columns[i].fixed &&
+//             props.columns[i].fixed == "right" &&
+//             tableColumnKeys.value.includes(props.columns[i].key)
+//           ) {
+//             right = right + getChildrenFixedTotalWidth(props.columns[i]);
+//           }
+//         }
+//         return { right: `${right}px` } as StyleValue;
+//       } else {
+//         // 复杂表头固定
+//         var right = 0;
+//         var topicColumns = tableHeadColumns[0];
+//         var topicColumn = findTopicParent(topicColumns, column);
+//         var index: number = topicColumns.indexOf(topicColumn);
 
-        // 累计右侧列宽。
-        for (var i = index + 1; i < topicColumns.length; i++) {
-          if (topicColumns[i].fixed && topicColumns[i].fixed == "right") {
-            right = right + getChildrenFixedTotalWidth(topicColumns[i]);
-          }
-        }
+//         // 累计右侧列宽。
+//         for (var i = index + 1; i < topicColumns.length; i++) {
+//           if (topicColumns[i].fixed && topicColumns[i].fixed == "right") {
+//             right = right + getChildrenFixedTotalWidth(topicColumns[i]);
+//           }
+//         }
 
-        // 累加当前位置
-        for (var i = columnIndex + 1; i < tableHeadColumn.length; i++) {
-          if (tableHeadColumn[i].fixed && tableHeadColumn[i].fixed == "right") {
-            right = right + getChildrenFixedTotalWidth(tableHeadColumn[i]);
-          }
-        }
+//         // 累加当前位置
+//         for (var i = columnIndex + 1; i < tableHeadColumn.length; i++) {
+//           if (tableHeadColumn[i].fixed && tableHeadColumn[i].fixed == "right") {
+//             right = right + getChildrenFixedTotalWidth(tableHeadColumn[i]);
+//           }
+//         }
 
-        return { right: `${right}px` } as StyleValue;
-      }
-    }
-  } else {
-    // 如果是简单表头，则判定当前列是否为尾列。
-    if (tableHeadColumnIndex == 0) {
-      var isLast = true;
-      for (var i = columnIndex + 1; i < tableHeadColumn.length; i++) {
-        if (
-          tableHeadColumn[i].fixed == undefined &&
-          tableColumnKeys.value.includes(tableHeadColumn[i].key)
-        ) {
-          isLast = false;
-        }
-      }
-      return isLast ? ({ "border-right": "none" } as StyleValue) : {};
-    } else {
-      // 如果是复杂表头，则判定根节点与子节点是否同时为尾节点。
-      var topicColumns = tableHeadColumns[0];
-      var topicColumn = findTopicParent(topicColumns, column);
-      var index: number = topicColumns.indexOf(topicColumn);
-      var isLast = true;
-      // 父节点是否为当前层级的尾节点。
-      for (var i = index + 1; i < topicColumns.length; i++) {
-        if (
-          topicColumns[i].fixed == undefined &&
-          tableColumnKeys.value.includes(topicColumns[i].key)
-        ) {
-          isLast = false;
-        }
-      }
-      // 子节点是否为当前层级的尾节点。
-      for (var i = columnIndex + 1; i < tableHeadColumn.length; i++) {
-        if (
-          tableHeadColumn[i].fixed == undefined &&
-          tableColumnKeys.value.includes(tableHeadColumn[i].key)
-        ) {
-          isLast = false;
-        }
-      }
-      // 当前两者满足条件时，去掉右侧边框显示。
-      return isLast ? ({ "border-right": "none" } as StyleValue) : {};
-    }
-  }
-};
+//         return { right: `${right}px` } as StyleValue;
+//       }
+//     }
+//   } else {
+//     // 如果是简单表头，则判定当前列是否为尾列。
+//     if (tableHeadColumnIndex == 0) {
+//       var isLast = true;
+//       for (var i = columnIndex + 1; i < tableHeadColumn.length; i++) {
+//         if (
+//           tableHeadColumn[i].fixed == undefined &&
+//           tableColumnKeys.value.includes(tableHeadColumn[i].key)
+//         ) {
+//           isLast = false;
+//         }
+//       }
+//       return isLast ? ({ "border-right": "none" } as StyleValue) : {};
+//     } else {
+//       // 如果是复杂表头，则判定根节点与子节点是否同时为尾节点。
+//       var topicColumns = tableHeadColumns[0];
+//       var topicColumn = findTopicParent(topicColumns, column);
+//       var index: number = topicColumns.indexOf(topicColumn);
+//       var isLast = true;
+//       // 父节点是否为当前层级的尾节点。
+//       for (var i = index + 1; i < topicColumns.length; i++) {
+//         if (
+//           topicColumns[i].fixed == undefined &&
+//           tableColumnKeys.value.includes(topicColumns[i].key)
+//         ) {
+//           isLast = false;
+//         }
+//       }
+//       // 子节点是否为当前层级的尾节点。
+//       for (var i = columnIndex + 1; i < tableHeadColumn.length; i++) {
+//         if (
+//           tableHeadColumn[i].fixed == undefined &&
+//           tableColumnKeys.value.includes(tableHeadColumn[i].key)
+//         ) {
+//           isLast = false;
+//         }
+//       }
+//       // 当前两者满足条件时，去掉右侧边框显示。
+//       return isLast ? ({ "border-right": "none" } as StyleValue) : {};
+//     }
+//   }
+// };
 
 /**
  * 在 fixed 为 left 时，如果是尾列，增加阴影。
@@ -990,19 +726,6 @@ const totalRowMethod = (column: any, dataSource: any[]) => {
   }, 0);
 };
 
-const showToolbar = (toolbarName: string) => {
-  if (props.defaultToolbar instanceof Array) {
-    return props.defaultToolbar.includes(toolbarName);
-  }
-  return props.defaultToolbar;
-};
-
-const toolbarStyle = (toolbarName: string) => {
-  if (props.defaultToolbar instanceof Array) {
-    return { order: props.defaultToolbar.indexOf(toolbarName) } as StyleValue;
-  }
-};
-
 onBeforeUnmount(() => {
   resizeInstance?.stop();
 });
@@ -1035,9 +758,17 @@ const getCheckDataInner = (
   });
 };
 
-const handleToolbarFilterCheck = (value: string[], column: any) => {
-  column.hide = !value.some((v) => v === column.key);
-};
+const tableToolbarProps = computed(() => {
+  return {
+    defaultToolbar: props.defaultToolbar,
+    spanMethod: props.spanMethod,
+    tableHeadColumns: tableHeadColumns.value,
+    tableBodyColumns: tableBodyColumns.value,
+    tableDataSource: tableDataSource.value,
+    tableColumnKeys: tableColumnKeys.value,
+    tableRef: tableRef.value,
+  };
+});
 
 defineExpose({ getCheckData });
 </script>
@@ -1049,62 +780,10 @@ defineExpose({ getCheckData });
     :class="classes"
     :style="{ height: height, maxHeight: maxHeight }"
   >
-    <div v-if="defaultToolbar || slot.toolbar" class="layui-table-tool">
-      <div class="layui-table-tool-temp">
-        <slot name="toolbar"></slot>
-      </div>
-      <div v-if="defaultToolbar" class="layui-table-tool-self">
-        <!-- 筛选 -->
-        <lay-dropdown v-if="showToolbar('filter')" placement="bottom-end">
-          <div
-            class="layui-inline"
-            :title="t('table.filter')"
-            lay-event
-            :style="toolbarStyle('filter')"
-          >
-            <i class="layui-icon layui-icon-slider"></i>
-          </div>
-          <template #content>
-            <div class="layui-table-tool-checkbox">
-              <lay-checkbox
-                v-for="column in tableHeadColumns[0]"
-                v-model="tableColumnKeys"
-                skin="primary"
-                :disabled="column.children"
-                :key="column.key"
-                :value="column.key"
-                @change="(value: string[]) => handleToolbarFilterCheck(value, column)"
-                >{{ column.title }}</lay-checkbox
-              >
-            </div>
-          </template>
-        </lay-dropdown>
-
-        <!-- 导出 -->
-        <div
-          v-if="showToolbar('export')"
-          class="layui-inline"
-          :title="t('table.export')"
-          lay-event
-          :style="toolbarStyle('export')"
-          @click="exportData()"
-        >
-          <i class="layui-icon layui-icon-export"></i>
-        </div>
-
-        <!-- 打印 -->
-        <div
-          v-if="showToolbar('print')"
-          :style="toolbarStyle('print')"
-          class="layui-inline"
-          :title="t('table.print')"
-          lay-event
-          @click="print()"
-        >
-          <i class="layui-icon layui-icon-print"></i>
-        </div>
-      </div>
-    </div>
+    <!-- 工具栏 -->
+    <TableToolbar v-bind="tableToolbarProps">
+      <slot name="toolbar"></slot>
+    </TableToolbar>
 
     <div class="layui-table-box-header" v-if="slot.header">
       <slot name="header"></slot>
@@ -1178,8 +857,9 @@ defineExpose({ getCheckData });
                       :style="[
                         {
                           textAlign: column.align,
-                          left: column._leftStyle && `${column._leftStyle}px`,
-                        },
+                          left: column._left && `${column._left}px`,
+                          right: column._right && `${column._right}px`,
+                        } as StyleValue,
                         // renderHeadFixedStyle(
                         //   column,
                         //   columnIndex,
@@ -1254,6 +934,7 @@ defineExpose({ getCheckData });
           </table>
         </div>
       </div>
+
       <!-- 表身 -->
       <div
         class="layui-table-body layui-table-main"
@@ -1366,6 +1047,7 @@ defineExpose({ getCheckData });
           </div>
         </template>
       </div>
+
       <template v-if="hasTotalRow">
         <div class="table-total-wrapper" :style="totalWrapperStyles">
           <div class="table-total-wrapper-main" ref="tableTotal">
@@ -1388,7 +1070,7 @@ defineExpose({ getCheckData });
               <tbody>
                 <tr class="layui-table-total">
                   <template
-                    v-for="(column, columnIndex) in tableFlattenColumns"
+                    v-for="(column, columnIndex) in tableBodyColumns"
                     :key="columnIndex"
                   >
                     <template v-if="tableColumnKeys.includes(column.key)">
@@ -1403,7 +1085,7 @@ defineExpose({ getCheckData });
                           renderFixedStyle(
                             column,
                             columnIndex,
-                            tableFlattenColumns
+                            tableBodyColumns
                           ),
                         ]"
                         :class="[
@@ -1411,7 +1093,7 @@ defineExpose({ getCheckData });
                           renderFixedClassName(
                             column,
                             columnIndex,
-                            tableFlattenColumns
+                            tableBodyColumns
                           ),
                           column.fixed
                             ? `layui-table-fixed-${column.fixed}`
