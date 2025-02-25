@@ -7,6 +7,7 @@ import type {
 import { computed, ref, watch } from "vue";
 import dayjs, { type Dayjs } from "dayjs";
 
+import { useI18n } from "../../../language";
 import { isFunction } from "../../../utils";
 
 import { useBaseDatePicker } from "../hook/useBaseDatePicker";
@@ -28,6 +29,7 @@ const showDate = ref<Dayjs>(dayjs());
 const currentType = ref();
 
 const { getDefaultValue } = useBaseDatePicker(props);
+const { t } = useI18n();
 
 watch(
   () => props.modelValue,
@@ -209,7 +211,11 @@ const footerValue = () => {
           :class="{ 'type-time': currentType === 'time' }"
           @click="handleToggleTimePanel"
         >
-          {{ currentType === "date" ? "选择时间" : "选择日期" }}
+          {{
+            currentType === "date"
+              ? t("datePicker.selectTime")
+              : t("datePicker.selectDate")
+          }}
         </LayButton>
         <template v-else>{{ footerValue() }}</template>
       </slot>
