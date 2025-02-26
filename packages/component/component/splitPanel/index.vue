@@ -6,8 +6,6 @@ import "./index.less";
 import type { StepProps as _StepProps, SplitPanelStepsType } from "./interface";
 import { SPLITPANEL_INJECTION_KEY } from "./splitPanel";
 
-import { useMousePressed } from "@vueuse/core";
-
 export type StepProps = _StepProps;
 
 defineOptions({
@@ -23,11 +21,10 @@ const props = withDefaults(defineProps<StepProps>(), {
 const LINE_WIDTH = 3;
 
 const target = ref();
-const { pressed } = useMousePressed({ target: target });
 
-let domEvent = ref();
-let domStatus = ref(pressed);
-let parentVertical = ref();
+const domEvent = ref();
+const domStatus = ref();
+const parentVertical = ref();
 
 const handleMousemove = (event: MouseEvent) => {
   const { left: boxLeft, top: boxTop } = target.value.getBoundingClientRect();
