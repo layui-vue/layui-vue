@@ -3,6 +3,7 @@ import LayTable from "../index.vue";
 
 import { describe, expect, test, vi } from "vitest";
 import { nextTick, ref } from "vue";
+import { sleep } from "../../../test-utils";
 
 describe("LayTable", () => {
   test("点击不可排序表头 是否报错", async () => {
@@ -164,5 +165,58 @@ describe("LayTable", () => {
 
     const trs2 = wrapper.findAll(".layui-table-body table tbody tr");
     expect(trs2.length).toBe(2);
+  });
+
+  test("服务器排序 ", async () => {
+    const columns = [
+      { title: "姓名", width: "80px", key: "name", sort: "custom" },
+      { title: "状态", width: "180px", key: "status" },
+    ];
+
+    const dataSource = ref([
+      {
+        id: "1",
+        name: "张三1",
+      },
+      { id: "2", name: "张三2" },
+      { id: "3", name: "张三3" },
+    ]);
+
+    const onSortChange = () => {
+      // mock request
+      setTimeout(() => {
+        dataSource.value = dataSource.value.reverse();
+      }, 500);
+    };
+
+    const wrapper = mount({
+      setup() {
+        return () => (
+          <LayTable
+            columns={columns}
+            dataSource={dataSource.value}
+            onSortChange={onSortChange}
+          ></LayTable>
+        );
+      },
+    });
+
+    await nextTick();
+
+    const trDom1 = wrapper.findAll(".layui-table-body .layui-table tr");
+    const tDDom1 = trDom1[0].findAll("td");
+    expect(tDDom1[0].text()).toBe("张三1");
+
+    const thDom = wrapper.findAll(
+      ".layui-table-header .layui-table-header-wrapper th"
+    );
+
+    await thDom[0].trigger("click");
+
+    await sleep(800);
+
+    const trDom2 = wrapper.findAll(".layui-table-body .layui-table tr");
+    const tDDom2 = trDom2[0].findAll("td");
+    expect(tDDom2[0].text()).toBe("张三3");
   });
 });
