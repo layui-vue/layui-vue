@@ -46,6 +46,7 @@ export interface TextareaProps {
    * 自动高度
    */
   autosize?: boolean | TextareaAutosizeHeight | TextareaAutosizeRow;
+  readonly?: boolean;
 }
 
 defineOptions({
@@ -234,6 +235,7 @@ defineExpose({ focus, blur });
       :placeholder="placeholder"
       :name="name"
       :disabled="disabled"
+      :readonly="readonly"
       :maxlength="maxlength"
       :style="styles"
       :class="{ 'layui-textarea-disabled': disabled }"
