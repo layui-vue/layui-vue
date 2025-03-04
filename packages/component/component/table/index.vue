@@ -517,32 +517,28 @@ const baseSort = (
 ) => {
   const { key, sort } = column;
 
-  emit("sort-change", key, nextSort);
-
   removeAllSortState();
   spanDom.setAttribute("lay-sort", nextSort);
 
-  if (sort === "custom") return;
+  if (sort !== "custom") {
+    defaultSort(key, nextSort);
+  }
 
-  switch (nextSort) {
+  emit("sort-change", key, nextSort);
+};
+
+const defaultSort = (key: string, sortType: SortType) => {
+  switch (sortType) {
     case "":
       tableDataSource.value = [...props.dataSource];
       break;
 
     case "asc":
-      tableDataSource.value.sort((x, y) => {
-        if (x[key] < y[key]) return -1;
-        else if (x[key] > y[key]) return 1;
-        else return 0;
-      });
+      tableDataSource.value.sort((a, b) => a[key] - b[key]);
       break;
 
     case "desc":
-      tableDataSource.value.sort((x, y) => {
-        if (x[key] < y[key]) return 1;
-        else if (x[key] > y[key]) return -1;
-        else return 0;
-      });
+      tableDataSource.value.sort((a, b) => b[key] - a[key]);
       break;
   }
 };
@@ -1153,7 +1149,7 @@ defineExpose({ getCheckData });
                           ? 'layui-table-cell-number'
                           : '',
                         {
-                          'layui-table-is-sort': column.sort,
+                          'layui-table-is-sort': !!column.sort,
                         },
                       ]"
                       :style="[
@@ -1194,7 +1190,7 @@ defineExpose({ getCheckData });
                         </span>
                         <!-- 插槽 -->
                         <span
-                          v-if="column.sort"
+                          v-if="!!column.sort"
                           class="layui-table-sort layui-inline"
                           :lay-sort="
                             initSort.field === column.key ? initSort.type : ''
