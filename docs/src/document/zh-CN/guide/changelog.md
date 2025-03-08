@@ -15,6 +15,21 @@
   <lay-timeline>
     <lay-timeline-item title="2.21.x">
       <ul>
+        <a name="2-21-2"></a>
+        <li>
+          <h3>2.21.2 <span class="layui-badge-rim">2024-03-08</span></h3>
+          <ul>
+              <li>[升级] layer 到 2.4.8 版本。</li>
+              <li>[修复] layer 组件 prompt模式输入类型为textarea时placeholder无效。<a href="https://gitee.com/layui-vue/layui-vue/pulls/459">详情</a></li>
+              <li>[新增] upload 组件 新增directory参数，用于文件夹上传。<a href="https://gitee.com/layui-vue/layui-vue/pulls/463">详情</a></li>
+              <li>[新增] textarea 组件 新增readonly参数。<a href="https://gitee.com/layui-vue/layui-vue/pulls/461">详情</a></li>
+              <li>[新增] tableColumns 组件 sort属性支持custom参数值。<a href="https://gitee.com/layui-vue/layui-vue/pulls/462">详情</a></li>
+              <li>[新增] datePicker 组件 新增类型为datetime底部选择日期/时间，i18翻译。<a href="https://gitee.com/layui-vue/layui-vue/pulls/458">详情</a></li>
+              <li>[修复] splitPanel 组件 当鼠标不在分割线按下时，cursor依旧会变化。<a href="https://gitee.com/layui-vue/layui-vue/pulls/460">详情</a></li>
+          </ul>
+        </li>
+      </ul>
+      <ul>
         <a name="2-21-1"></a>
         <li>
           <h3>2.21.1 <span class="layui-badge-rim">2024-12-11</span></h3>

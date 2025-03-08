@@ -286,7 +286,7 @@ const beforeUpload10 = (file) => {
 | drag            | 是否接受拖拽的文件上传，设置 false 可禁用。不支持 ie8/9 | boolean                          | true                         | --          |
 | disabled        | 设置文件禁用                                            | boolean                          | false                        | --          |
 | disabledPreview | 设置文件预览插槽区域为禁用状态                          | boolean                          | false                        | --          |
-| directory `2.22.0`      | 支持上传文件夹                | boolean                          | false                        | --          |
+| directory `2.21.2`      | 支持上传文件夹                | boolean                          | false                        | --          |
 | cut             | 开启裁剪(`acceptMime`为image类型生效)                 | boolean                          | false                        | --          |
 | cutOptions      | 开启剪裁的模态弹窗与剪裁框的配置                        | object                           | { layerOption,copperOption } | --          |
 | text            | 普通上传描述                                            | string                           | --                           | --          |

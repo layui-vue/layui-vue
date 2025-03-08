@@ -265,7 +265,7 @@ export default {
 | _placeholder_ | 提示信息       |         | --                                                                      |       |
 | _show-count_  | 显示字数       | `false` | `true` `false`                                                          |       |
 | _disabled_    | 禁用           | `false` | `true` `false`                                                          |       |
-| _readonly_ `2.22.0`   | 只读           | `false` | `true` `false`                                                          |       |
+| _readonly_ `2.21.2`   | 只读           | `false` | `true` `false`                                                          |       |
 | _v-model_     | 绑定值         |         | --                                                                      |       |
 | _maxlength_   | 限制输入长度   |         | --                                                                      |       |
 | _rows_        | 原生 rows 属性 |         | --                                                                      | 1.8.7 |
