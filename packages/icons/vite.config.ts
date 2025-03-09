@@ -3,6 +3,7 @@ import { babel } from "@rollup/plugin-babel";
 import path from "path";
 
 import baseConfig from "../../build/baseConfig";
+import { getFullFormatName } from "../../build/util";
 
 export default defineConfig(
   mergeConfig(baseConfig(__dirname), {
@@ -18,7 +19,7 @@ export default defineConfig(
     build: {
       lib: {
         name: "LayuiIcons",
-        fileName: (format) => `icons-vue.${format}.js`,
+        fileName: (format) => getFullFormatName("icons-vue", format),
       },
       rollupOptions: {
         plugins: [

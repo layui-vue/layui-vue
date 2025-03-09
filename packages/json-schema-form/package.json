@@ -4,7 +4,7 @@
   "description": "Json-schema-form is a high-level component encapsulated on the basis of @layui/layui-vue form.",
   "homepage": "http://www.layui-vue.com/zh-CN/components/jsonSchemaForm",
   "type": "module",
-  "module": "lib/json-schema-form.es.js",
+  "module": "lib/json-schema-form.js",
   "main": "lib/json-schema-form.umd.js",
   "license": "MIT",
   "bugs": {
@@ -12,11 +12,12 @@
   },
   "exports": {
     ".": {
-      "types": "./types/index.d.ts",
-      "import": "./lib/json-schema-form.es.js",
-      "require": "./lib/json-schema-form.umd.js"
+      "import": {
+        "types": "./types/index.d.ts",
+        "default": "./lib/json-schema-form.js"
+      }
     },
-    "./lib/": "./lib/",
+    "./lib/*": "./lib/*",
     "./types/*": [
       "./types/*.d.ts"
     ]
