@@ -1,4 +1,11 @@
-import { Component, ComponentInternalInstance, VNode, VNodeTypes } from "vue";
+import type {
+  Component,
+  ComponentInternalInstance,
+  VNode,
+  VNodeTypes,
+} from "vue";
+
+import { isArray } from "./arrayUtil";
 
 export enum ShapeFlags {
   ELEMENT = 1,
@@ -55,3 +62,18 @@ export function kebabCase(key: string) {
   const result = key.replace(/([A-Z])/g, " $1").trim();
   return result.split(" ").join("-").toLowerCase();
 }
+
+export const flattedVNode = (children: VNode[]) => {
+  const vNodes = isArray(children) ? children : [children];
+  const result: VNode[] = [];
+
+  vNodes.forEach((vNode) => {
+    if (isArrayChildren(vNode, vNode.children)) {
+      result.push(...flattedVNode(vNode.children));
+    } else {
+      result.push(vNode);
+    }
+  });
+
+  return result;
+};
