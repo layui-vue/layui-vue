@@ -1,5 +1,4 @@
-import type { ComputedRef, Ref, ShallowRef } from "vue";
-
+import type { ComputedRef, Ref, ShallowRef, InjectionKey } from "vue";
 export interface StepProps {
   vertical?: boolean;
   minSize?: number;
@@ -15,6 +14,7 @@ export interface SplitPanelStepsType {
 export interface SplitPanelContext {
   props: Required<StepProps>;
   steps: Ref<SplitPanelStepsType[]>;
-  target: Ref<HTMLDivElement | null>;
-  moveChange: (event: MouseEvent, status: boolean, isVertical: boolean) => void;
 }
+
+export const SPLITPANEL_INJECTION_KEY: InjectionKey<SplitPanelContext> =
+  Symbol("LaySplitPanel");
