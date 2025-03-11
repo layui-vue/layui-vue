@@ -17,7 +17,7 @@
       <ul>
         <a name="2-21-2"></a>
         <li>
-          <h3>2.21.2 <span class="layui-badge-rim">2024-03-08</span></h3>
+          <h3>2.21.2 <span class="layui-badge-rim">2025-03-08</span></h3>
           <ul>
               <li>[升级] layer 到 2.4.8 版本。</li>
               <li>[修复] layer 组件 prompt模式输入类型为textarea时placeholder无效。<a href="https://gitee.com/layui-vue/layui-vue/pulls/459">详情</a></li>
