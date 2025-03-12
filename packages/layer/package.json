@@ -1,17 +1,20 @@
 {
   "name": "@layui/layer-vue",
-  "version": "2.4.7",
+  "version": "2.4.8",
   "description": "a component library for Vue 3 base on layui-vue",
+  "license": "MIT",
+  "type": "module",
   "homepage": "http://www.layui-vue.com",
-  "module": "lib/layer-vue.es.js",
+  "module": "lib/layer-vue.js",
   "main": "lib/layer-vue.umd.js",
   "exports": {
     ".": {
-      "types": "./types/index.d.ts",
-      "import": "./lib/layer-vue.es.js",
-      "require": "./lib/layer-vue.umd.js"
+      "import": {
+        "types": "./types/index.d.ts",
+        "default": "./lib/layer-vue.js"
+      }
     },
-    "./lib/": "./lib/",
+    "./lib/*": "./lib/*",
     "./types/*": [
       "./types/*.d.ts"
     ]

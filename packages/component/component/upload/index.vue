@@ -67,6 +67,7 @@ export interface UploadProps {
   dragText?: string;
   modelValue?: any;
   auto?: boolean;
+  directory?: boolean;
   beforeUpload?: Function;
   onProgress?: Function;
 }
@@ -221,9 +222,11 @@ let computedCutCropperOption: ComputedRef<Cropper.Options> = computed(() => {
   return defaultCutCropperOption.value;
 });
 
-interface localUploadTransaction {
+type FileType = FileList | Blob[];
+
+interface LocalUploadTransactionOptionType {
   url: string;
-  files: File[] | Blob[];
+  files: FileType;
   [propMame: string]: any;
 }
 
@@ -234,7 +237,7 @@ interface localUploadOption {
 
 const innerCutVisible = ref<boolean>(false);
 
-const localUploadTransaction = (option: localUploadTransaction) => {
+const localUploadTransaction = (option: LocalUploadTransactionOptionType) => {
   const { url, files } = option;
   let formData = new FormData();
   if (url.length <= 5) {
@@ -390,12 +393,17 @@ const isCut = computed(() => {
   return props.cut && /image/i.test(props.acceptMime);
 });
 
-const uploadChange = (e: any) => {
+const uploadChange = (e: Event) => {
   e.preventDefault();
-  const _files = [...(e.target.files || e.dataTransfer.files)];
-  if (_files.length === 0) {
+
+  const _files: FileList | undefined =
+    (e.target as HTMLInputElement).files ||
+    (e as DragEvent).dataTransfer?.files;
+
+  if (!_files || _files.length === 0) {
     return;
   }
+
   cutImageType.value = _files[0].type;
   if (props.multiple && props.number != 0 && props.number < _files.length) {
     errorF(numberErrorMsg.value);
@@ -419,7 +427,7 @@ const uploadChange = (e: any) => {
     if (props.multiple) {
       console.warn(cannotSupportCutMsg.value);
     } else {
-      for (let item of _files) {
+      for (let item of Array.from(_files)) {
         activeUploadFiles.value.push(item);
         filetoDataURL(item, function (res: any) {
           activeUploadFilesImgs.value.push(res);
@@ -449,7 +457,7 @@ const uploadChange = (e: any) => {
   commonUploadTransaction(_files);
 };
 
-const commonUploadTransaction = (_files: any[]) => {
+const commonUploadTransaction = (_files: FileType) => {
   let currentTimeStamp = new Date().valueOf();
   let successText = uploadSuccess;
   if (props.url) {
@@ -535,6 +543,7 @@ defineExpose({
       :multiple="multiple"
       :accept="acceptMime"
       :disabled="disabled"
+      :webkitdirectory="directory"
       @click="clickOrgInput"
       @change="uploadChange"
     />

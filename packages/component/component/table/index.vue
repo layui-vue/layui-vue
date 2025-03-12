@@ -231,7 +231,7 @@ const change = function (page: any) {
   emit("change", page);
 };
 
-const thSort = (e: Event, key: string) => {
+const thSort = (e: Event, column: any) => {
   const spanDom = (e.currentTarget as HTMLElement).querySelector(
     "span[lay-sort]"
   ) as HTMLSpanElement;
@@ -243,54 +243,54 @@ const thSort = (e: Event, key: string) => {
   const currentIndex = sortType.indexOf(sortValue);
   const nextSort = sortType[(currentIndex + 1) % sortType.length];
 
-  baseSort(spanDom, key, nextSort);
+  baseSort(spanDom, column, nextSort);
 };
 
-const iconSort = (e: Event, key: string, sort: Exclude<SortType, "">) => {
+const iconSort = (e: Event, column: any, sort: Exclude<SortType, "">) => {
   const spanDom = (e.target as HTMLElement).parentNode as HTMLSpanElement;
 
   const sortValue = spanDom.getAttribute("lay-sort") as SortType;
 
-  baseSort(spanDom, key, sortValue !== sort ? sort : "");
+  baseSort(spanDom, column, sortValue !== sort ? sort : "");
 };
 
 /**
  *
  * @param spanDom 包含lay-sort属性的span dom
- * @param key column.key
+ * @param column column
  * @param nextSort 下一次的sort
  */
 const baseSort = (
   spanDom: HTMLSpanElement,
-  key: string,
+  column: any,
   nextSort: SortType
 ) => {
+  const { key, sort } = column;
+
   removeAllSortState();
   spanDom.setAttribute("lay-sort", nextSort);
 
-  switch (nextSort) {
+  if (sort !== "custom") {
+    defaultSort(key, nextSort);
+  }
+
+  emit("sort-change", key, nextSort);
+};
+
+const defaultSort = (key: string, sortType: SortType) => {
+  switch (sortType) {
     case "":
       tableDataSource.value = [...props.dataSource];
       break;
 
     case "asc":
-      tableDataSource.value.sort((x, y) => {
-        if (x[key] < y[key]) return -1;
-        else if (x[key] > y[key]) return 1;
-        else return 0;
-      });
+      tableDataSource.value.sort((a, b) => a[key] - b[key]);
       break;
 
     case "desc":
-      tableDataSource.value.sort((x, y) => {
-        if (x[key] < y[key]) return 1;
-        else if (x[key] > y[key]) return -1;
-        else return 0;
-      });
+      tableDataSource.value.sort((a, b) => b[key] - a[key]);
       break;
   }
-
-  emit("sort-change", key, nextSort);
 };
 
 // 清空所有的sort状态
@@ -863,7 +863,7 @@ defineExpose({ getCheckData });
                           ? 'layui-table-cell-number'
                           : '',
                         {
-                          'layui-table-is-sort': column.sort,
+                          'layui-table-is-sort': !!column.sort,
                         },
                       ]"
                       :style="[
@@ -880,7 +880,7 @@ defineExpose({ getCheckData });
                         //   tableHeadColumns
                         // ),
                       ]"
-                      @click="thSort($event, column.key)"
+                      @click="thSort($event, column)"
                     >
                       <template v-if="column.type == 'checkbox'">
                         <lay-checkbox
@@ -906,19 +906,19 @@ defineExpose({ getCheckData });
                         </span>
                         <!-- 插槽 -->
                         <span
-                          v-if="column.sort"
+                          v-if="!!column.sort"
                           class="layui-table-sort layui-inline"
                           :lay-sort="
                             initSort.field === column.key ? initSort.type : ''
                           "
                         >
                           <i
-                            @click.stop="iconSort($event, column.key, 'asc')"
+                            @click.stop="iconSort($event, column, 'asc')"
                             class="layui-edge layui-table-sort-asc"
                             title="升序"
                           ></i>
                           <i
-                            @click.stop="iconSort($event, column.key, 'desc')"
+                            @click.stop="iconSort($event, column, 'desc')"
                             class="layui-edge layui-table-sort-desc"
                             title="降序"
                           ></i>

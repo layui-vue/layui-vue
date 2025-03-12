@@ -40,103 +40,88 @@
 </div>
 </template>
 
-<script>
+<script setup>
 import { ref, watch, reactive } from 'vue';
 import { layer } from '@layui/layui-vue';
 
-export default {
-  setup() {
+const loading = ref(false);
 
-    const loading = ref(false);
+const selectedKeys = ref([]);
 
-    const selectedKeys = ref([]);
+const page = reactive({ current: 1, limit: 10, total: 100 });
 
-    const page = reactive({ current: 1, limit: 10, total: 100 });
+const columns = ref([
+  { title:"选项", width: "55px", type: "checkbox", fixed: "left" },
+  { title:"编号", width: "80px", key:"id", fixed: "left", sort: "desc" },
+  { title:"姓名", width: "80px", key:"name", sort: "desc" },
+  { title:"状态", width: "180px", key:"status", customSlot: "status"},
+  { title:"邮箱", width: "120px", key:"email" },
+  { title:"性别", width: "80px", key:"sex" },
+  { title:"年龄", width: "80px", key:"age", totalRow: true},
+  { title:"城市", width: "120px", key:"city" },
+  { title:"签名", width: "260px", key:"remark" },
+  { title:"隐藏", width: "260px", key:"hide", hide: true, totalRow: "自定义" },
+  { title:"时间", width: "120px", key:"joinTime"},
+  { title:"操作", width: "150px", customSlot:"operator", key:"operator", fixed: "right", ignoreExport: true }
+]);
 
-    const columns = ref([
-      { title:"选项", width: "55px", type: "checkbox", fixed: "left" },
-      { title:"编号", width: "80px", key:"id", fixed: "left", sort: "desc" },
-      { title:"姓名", width: "80px", key:"name", sort: "desc" },
-      { title:"状态", width: "180px", key:"status", customSlot: "status"},
-      { title:"邮箱", width: "120px", key:"email" },
-      { title:"性别", width: "80px", key:"sex" },
-      { title:"年龄", width: "80px", key:"age", totalRow: true},
-      { title:"城市", width: "120px", key:"city" },
-      { title:"签名", width: "260px", key:"remark" },
-      { title:"隐藏", width: "260px", key:"hide", hide: true, totalRow: "自定义" },
-      { title:"时间", width: "120px", key:"joinTime"},
-      { title:"操作", width: "150px", customSlot:"operator", key:"operator", fixed: "right", ignoreExport: true }
-    ]);
+const change = (page) => {
+  loading.value = true;
+  setTimeout(() => {
+    dataSource.value = loadDataSource(page.current, page.limit);
+    loading.value = false;
+  }, 1000);
+}
 
-    const change = (page) => {
-      loading.value = true;
-      setTimeout(() => {
-        dataSource.value = loadDataSource(page.current, page.limit);
-        loading.value = false;
-      }, 1000);
-    }
+const sortChange = (key, sort) => {
+  layer.msg(`字段${key} - 排序${sort}, 你可以利用 sort-change 实现服务端排序`)
+}
 
-    const sortChange = (key, sort) => {
-      layer.msg(`字段${key} - 排序${sort}, 你可以利用 sort-change 实现服务端排序`)
-    }
+const dataSource = ref([
+  {id:"1", name:"张三1", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"18",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09", status: true},
+  {id:"2", name:"张三2", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"20",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09", status: true},
+  {id:"3", name:"张三3", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"20",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09", status: true},
+  {id:"4", name:"张三4", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"20",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09", status: true},
+  {id:"5", name:"张三5", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"20",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09", status: true},
+  {id:"6", name:"张三6", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"20",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09", status: true},
+  {id:"7", name:"张三7", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"18",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09", status: true},
+  {id:"8", name:"张三8", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"20",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09", status: true},
+  {id:"9", name:"张三9", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"20",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09", status: true},
+  {id:"10", name:"张三10", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"20",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09", status: true}
+])
 
-    const dataSource = ref([
-      {id:"1", name:"张三1", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"18",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09", status: true},
-      {id:"2", name:"张三2", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"20",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09", status: true},
-      {id:"3", name:"张三3", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"20",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09", status: true},
-      {id:"4", name:"张三4", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"20",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09", status: true},
-      {id:"5", name:"张三5", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"20",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09", status: true},
-      {id:"6", name:"张三6", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"20",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09", status: true},
-      {id:"7", name:"张三7", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"18",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09", status: true},
-      {id:"8", name:"张三8", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"20",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09", status: true},
-      {id:"9", name:"张三9", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"20",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09", status: true},
-      {id:"10", name:"张三10", email: "test@qq.com", sex: "男", city: "浙江杭州", age:"20",remark: '花开堪折直须折,莫待无花空折枝.', joinTime: "2022-02-09", status: true}
-    ])
-
-    const changeStatus = (isChecked, row) => {
-      dataSource.value.forEach((item) => {
-        if(item.id === row.id) {
-          layer.msg("Success", { icon: 1 }, () => {
-            item.status = isChecked;
-          })
-        }
+const changeStatus = (isChecked, row) => {
+  dataSource.value.forEach((item) => {
+    if(item.id === row.id) {
+      layer.msg("Success", { icon: 1 }, () => {
+        item.status = isChecked;
       })
     }
+  })
+}
 
-    const remove = () => {
-      layer.msg(selectedKeys.value, { area: '50%'})
-    }
+const remove = () => {
+  layer.msg(selectedKeys.value, { area: '50%'})
+}
 
-    const loadDataSource = (page, pageSize) => {
-      var response = [];
-      var startIndex = ((page - 1) * pageSize) + 1;
-      var endIndex = page * pageSize;
-      for (var i = startIndex; i <= endIndex; i++) {
-          response.push({
-            id:`${i}`, 
-            age:"18",
-            sex: "男", 
-            name:`张三${i}`, 
-            email: "test@qq.com",
-            remark: '花开堪折直须折,莫待无花空折枝.',  
-            joinTime: "2022-02-09", 
-            city: "浙江杭州", 
-            status: true
-          })
-      }
-      return response;
-    }
-
-    return {
-      columns,
-      dataSource,
-      selectedKeys,
-      page,
-      change,
-      changeStatus,
-      remove
-    }
+const loadDataSource = (page, pageSize) => {
+  var response = [];
+  var startIndex = ((page - 1) * pageSize) + 1;
+  var endIndex = page * pageSize;
+  for (var i = startIndex; i <= endIndex; i++) {
+      response.push({
+        id:`${i}`, 
+        age:"18",
+        sex: "男", 
+        name:`张三${i}`, 
+        email: "test@qq.com",
+        remark: '花开堪折直须折,莫待无花空折枝.',  
+        joinTime: "2022-02-09", 
+        city: "浙江杭州", 
+        status: true
+      })
   }
+  return response;
 }
 </script>
 
@@ -163,55 +148,45 @@ export default {
   </lay-table>
 </template>
 
-<script>
+<script setup>
 import { ref } from 'vue'
 
-export default {
-  setup() {
+const columns2 = [
+  { title:"编号", width:"80px", key:"id", fixed: "left", sort: "desc" },
+  { title:"姓名", width:"80px", key:"name" },
+  { title:"班级", width:"120px", key:"classes" },
+  { title:"语文", width:"80px", key:"chinese" },
+  { title:"数学", width:"80px", key:"mathematics" },
+  { title:"英语", width:"80px", key:"english" },
+  { title:"生物", width:"80px", key:"organism" },
+  { title:"地理", width:"80px", key:"geography" },
+  { title:"历史", width:"80px", key:"history" },
+  { title:"政治", width:"80px", key:"politics" },
+  { title:"总分", width: "180px", key:"score" }
+]
 
-    const columns2 = [
-      { title:"编号", width:"80px", key:"id", fixed: "left", sort: "desc" },
-      { title:"姓名", width:"80px", key:"name" },
-      { title:"班级", width:"120px", key:"classes" },
-      { title:"语文", width:"80px", key:"chinese" },
-      { title:"数学", width:"80px", key:"mathematics" },
-      { title:"英语", width:"80px", key:"english" },
-      { title:"生物", width:"80px", key:"organism" },
-      { title:"地理", width:"80px", key:"geography" },
-      { title:"历史", width:"80px", key:"history" },
-      { title:"政治", width:"80px", key:"politics" },
-      { title:"总分", width: "180px", key:"score" }
-    ]
+const dataSource2 = [
+  {id:"1", name:"张三1", classes:"六年级一班", chinese: 80, mathematics: 50, english: 60, organism: 80, geography: 22, history:55, politics: 53, score:454},
+  {id:"2", name:"张三2", classes:"六年级二班", chinese: 80, mathematics: 50, english: 60, organism: 80, geography: 22, history:55, politics: 53, score:432},
+  {id:"3", name:"张三3", classes:"六年级三班", chinese: 80, mathematics: 50, english: 60, organism: 80, geography: 22, history:55, politics: 53, score:534},
+  {id:"4", name:"张三4", classes:"六年级四班", chinese: 80, mathematics: 50, english: 60, organism: 80, geography: 22, history:55, politics: 53, score:342},
+  {id:"5", name:"张三5", classes:"六年级五班", chinese: 80, mathematics: 50, english: 60, organism: 80, geography: 22, history:55, politics: 53, score:653},
+  {id:"6", name:"张三6", classes:"六年级六班", chinese: 80, mathematics: 50, english: 60, organism: 80, geography: 22, history:55, politics: 53, score:632},
+]
 
-    const dataSource2 = [
-      {id:"1", name:"张三1", classes:"六年级一班", chinese: 80, mathematics: 50, english: 60, organism: 80, geography: 22, history:55, politics: 53, score:454},
-      {id:"2", name:"张三2", classes:"六年级二班", chinese: 80, mathematics: 50, english: 60, organism: 80, geography: 22, history:55, politics: 53, score:432},
-      {id:"3", name:"张三3", classes:"六年级三班", chinese: 80, mathematics: 50, english: 60, organism: 80, geography: 22, history:55, politics: 53, score:534},
-      {id:"4", name:"张三4", classes:"六年级四班", chinese: 80, mathematics: 50, english: 60, organism: 80, geography: 22, history:55, politics: 53, score:342},
-      {id:"5", name:"张三5", classes:"六年级五班", chinese: 80, mathematics: 50, english: 60, organism: 80, geography: 22, history:55, politics: 53, score:653},
-      {id:"6", name:"张三6", classes:"六年级六班", chinese: 80, mathematics: 50, english: 60, organism: 80, geography: 22, history:55, politics: 53, score:632},
-    ]
+const expandKeys2 = ref([])
+const defaultExpandAll2 = ref(false)
 
-    const expandKeys2 = ref([])
-    const defaultExpandAll2 = ref(false)
-
-    return {
-      columns2,
-      dataSource2,
-      expandKeys2,
-      defaultExpandAll2
-    }
-  }
-}
 </script>
 
-<style lang="less">
+<style>
 .expand-content {
   width: 100%;
   padding: 0px 20px 20px 0px;
-  .layui-progress {
-    margin-top: 24px;
-  }
+}
+
+.expand-content .layui-progress{
+  margin-top: 24px;
 }
 </style>
 
@@ -240,82 +215,66 @@ export default {
   </lay-table>
 </template>
 
-<script>
+<script setup>
 import { ref } from 'vue';
 import { layer } from "@layui/layui-vue";
 
-export default {
-  setup() {
+const tableRef3 = ref();
 
-    const tableRef3 = ref();
+const selectedKey3 = ref("1");
 
-    const selectedKey3 = ref("1");
+const selectedKeys3 = ref(["2", "3", "6", "7"]);
 
-    const selectedKeys3 = ref(["2", "3", "6", "7"]);
-
-    const changeSelectedKeys3 = () => {
-      selectedKeys3.value = ["1", "2", "3"]
-    }
-
-    const clearSelectedKeys3 = () => {
-      selectedKeys3.value = []
-    }
-
-    const getSelectedKeys3 = () => {
-      layer.msg(selectedKeys3.value);
-    }
-
-    const getCheckData3 = () => {
-      layer.msg(tableRef3.value.getCheckData());
-    }
-
-    const columns3 = [
-      { fixed: "left", type: "checkbox", title: "复选"},
-      { fixed: "left", type: "radio", title: "单选" },
-      { title:"用户", width:"80px", key:"name"},
-      { title:"城市", width: "80px", key:"city" },
-      { title:"性别", key:"sex", width: "80px" },
-      { title:"年龄", width: "80px", key:"age" },
-      { title:"积分", width: "80px", key:"score" },
-      { title:"签到", width: "80px", key:"sign" },
-      { title:"加入时间", width: "120px", key:"joinTime" },
-      { title:"签名", width: "300px", key:"remark" }
-    ]
-
-    const dataSource3 = ref([
-      {id:"1", name:"张三1", city: "城市-1", sex:"男", age:"18", remark: '屈指古今多少事，都只是、镜中春', score: 100, sign: "已签到", joinTime: "2022-02-09"},
-      {id:"2", name:"张三2", city: "城市-2", sex:"男", age:"18", remark: '屈指古今多少事，都只是、镜中春', score: 100, sign: "已签到", joinTime: "2022-02-09"},
-      {id:"3", name:"张三3", city: "城市-3", sex:"男", age:"20", remark: '屈指古今多少事，都只是、镜中春', score: 100, sign: "已签到", joinTime: "2022-02-09"},
-      {id:"4", name:"张三4", city: "城市-4", sex:"男", age:"20", remark: '屈指古今多少事，都只是、镜中春', score: 100, sign: "已签到", joinTime: "2022-02-09"},
-      {id:"5", name:"张三5", city: "城市-5", sex:"男", age:"20", remark: '屈指古今多少事，都只是、镜中春', score: 100, sign: "已签到", joinTime: "2022-02-09"},
-      {id:"6", name:"张三6", city: "城市-6", sex:"男", age:"18", remark: '屈指古今多少事，都只是、镜中春', score: 100, sign: "已签到", joinTime: "2022-02-09"},
-      {id:"7", name:"张三7", city: "城市-7", sex:"男", age:"18", remark: '屈指古今多少事，都只是、镜中春', score: 100, sign: "已签到", joinTime: "2022-02-09"},
-      {id:"8", name:"张三8", city: "城市-8", sex:"男", age:"20", remark: '屈指古今多少事，都只是、镜中春', score: 100, sign: "已签到", joinTime: "2022-02-09"},
-      {id:"9", name:"张三9", city: "城市-9", sex:"男", age:"20", remark: '屈指古今多少事，都只是、镜中春', score: 100, sign: "已签到", joinTime: "2022-02-09"},
-      {id:"10", name:"张三10", city: "城市-10", sex:"男", age:"18", remark: '屈指古今多少事，都只是、镜中春', score: 100, sign: "已签到", joinTime: "2022-02-09"},
-      {id:"11", name:"张三11", city: "城市-11", sex:"男", age:"18", remark: '屈指古今多少事，都只是、镜中春', score: 100, sign: "已签到", joinTime: "2022-02-09"},
-      {id:"12", name:"张三12", city: "城市-12", sex:"男", age:"20", remark: '屈指古今多少事，都只是、镜中春', score: 100, sign: "已签到", joinTime: "2022-02-09"},
-      {id:"13", name:"张三13", city: "城市-13", sex:"男", age:"20", remark: '屈指古今多少事，都只是、镜中春', score: 100, sign: "已签到", joinTime: "2022-02-09"},
-      {id:"14", name:"张三14", city: "城市-14", sex:"男", age:"20", remark: '屈指古今多少事，都只是、镜中春', score: 100, sign: "已签到", joinTime: "2022-02-09"},
-      {id:"15", name:"张三15", city: "城市-15", sex:"男", age:"18", remark: '屈指古今多少事，都只是、镜中春', score: 100, sign: "已签到", joinTime: "2022-02-09"},
-      {id:"16", name:"张三16", city: "城市-16", sex:"男", age:"18", remark: '屈指古今多少事，都只是、镜中春', score: 100, sign: "已签到", joinTime: "2022-02-09"},
-      {id:"17", name:"张三17", city: "城市-17", sex:"男", age:"20", remark: '屈指古今多少事，都只是、镜中春', score: 100, sign: "已签到", joinTime: "2022-02-09"},
-      {id:"18", name:"张三18", city: "城市-18", sex:"男", age:"20", remark: '屈指古今多少事，都只是、镜中春', score: 100, sign: "已签到", joinTime: "2022-02-09"},
-    ])
-
-    return {
-      columns3,
-      dataSource3,
-      selectedKeys3,
-      getSelectedKeys3,
-      getCheckData3,
-      tableRef3,
-      changeSelectedKeys3,
-      clearSelectedKeys3,
-      selectedKey3
-    }
-  }
+const changeSelectedKeys3 = () => {
+  selectedKeys3.value = ["1", "2", "3"]
 }
+
+const clearSelectedKeys3 = () => {
+  selectedKeys3.value = []
+}
+
+const getSelectedKeys3 = () => {
+  layer.msg(selectedKeys3.value);
+}
+
+const getCheckData3 = () => {
+  layer.msg(tableRef3.value.getCheckData());
+}
+
+const columns3 = [
+  { fixed: "left", type: "checkbox", title: "复选"},
+  { fixed: "left", type: "radio", title: "单选" },
+  { title:"用户", width:"80px", key:"name"},
+  { title:"城市", width: "80px", key:"city" },
+  { title:"性别", key:"sex", width: "80px" },
+  { title:"年龄", width: "80px", key:"age" },
+  { title:"积分", width: "80px", key:"score" },
+  { title:"签到", width: "80px", key:"sign" },
+  { title:"加入时间", width: "120px", key:"joinTime" },
+  { title:"签名", width: "300px", key:"remark" }
+]
+
+const dataSource3 = ref([
+  {id:"1", name:"张三1", city: "城市-1", sex:"男", age:"18", remark: '屈指古今多少事，都只是、镜中春', score: 100, sign: "已签到", joinTime: "2022-02-09"},
+  {id:"2", name:"张三2", city: "城市-2", sex:"男", age:"18", remark: '屈指古今多少事，都只是、镜中春', score: 100, sign: "已签到", joinTime: "2022-02-09"},
+  {id:"3", name:"张三3", city: "城市-3", sex:"男", age:"20", remark: '屈指古今多少事，都只是、镜中春', score: 100, sign: "已签到", joinTime: "2022-02-09"},
+  {id:"4", name:"张三4", city: "城市-4", sex:"男", age:"20", remark: '屈指古今多少事，都只是、镜中春', score: 100, sign: "已签到", joinTime: "2022-02-09"},
+  {id:"5", name:"张三5", city: "城市-5", sex:"男", age:"20", remark: '屈指古今多少事，都只是、镜中春', score: 100, sign: "已签到", joinTime: "2022-02-09"},
+  {id:"6", name:"张三6", city: "城市-6", sex:"男", age:"18", remark: '屈指古今多少事，都只是、镜中春', score: 100, sign: "已签到", joinTime: "2022-02-09"},
+  {id:"7", name:"张三7", city: "城市-7", sex:"男", age:"18", remark: '屈指古今多少事，都只是、镜中春', score: 100, sign: "已签到", joinTime: "2022-02-09"},
+  {id:"8", name:"张三8", city: "城市-8", sex:"男", age:"20", remark: '屈指古今多少事，都只是、镜中春', score: 100, sign: "已签到", joinTime: "2022-02-09"},
+  {id:"9", name:"张三9", city: "城市-9", sex:"男", age:"20", remark: '屈指古今多少事，都只是、镜中春', score: 100, sign: "已签到", joinTime: "2022-02-09"},
+  {id:"10", name:"张三10", city: "城市-10", sex:"男", age:"18", remark: '屈指古今多少事，都只是、镜中春', score: 100, sign: "已签到", joinTime: "2022-02-09"},
+  {id:"11", name:"张三11", city: "城市-11", sex:"男", age:"18", remark: '屈指古今多少事，都只是、镜中春', score: 100, sign: "已签到", joinTime: "2022-02-09"},
+  {id:"12", name:"张三12", city: "城市-12", sex:"男", age:"20", remark: '屈指古今多少事，都只是、镜中春', score: 100, sign: "已签到", joinTime: "2022-02-09"},
+  {id:"13", name:"张三13", city: "城市-13", sex:"男", age:"20", remark: '屈指古今多少事，都只是、镜中春', score: 100, sign: "已签到", joinTime: "2022-02-09"},
+  {id:"14", name:"张三14", city: "城市-14", sex:"男", age:"20", remark: '屈指古今多少事，都只是、镜中春', score: 100, sign: "已签到", joinTime: "2022-02-09"},
+  {id:"15", name:"张三15", city: "城市-15", sex:"男", age:"18", remark: '屈指古今多少事，都只是、镜中春', score: 100, sign: "已签到", joinTime: "2022-02-09"},
+  {id:"16", name:"张三16", city: "城市-16", sex:"男", age:"18", remark: '屈指古今多少事，都只是、镜中春', score: 100, sign: "已签到", joinTime: "2022-02-09"},
+  {id:"17", name:"张三17", city: "城市-17", sex:"男", age:"20", remark: '屈指古今多少事，都只是、镜中春', score: 100, sign: "已签到", joinTime: "2022-02-09"},
+  {id:"18", name:"张三18", city: "城市-18", sex:"男", age:"20", remark: '屈指古今多少事，都只是、镜中春', score: 100, sign: "已签到", joinTime: "2022-02-09"},
+])
+
 </script>
 
 :::
@@ -357,79 +316,67 @@ export default {
   </lay-table>
 </template>
 
-<script>
+<script setup>
 import { ref } from 'vue'
 
-export default {
-  setup() {
+const edingKeys4 = ref([])
 
-    const edingKeys4 = ref([])
-
-    const editHandle4 = (data) => {
-      edingKeys4.value.push(data);
-    }
-
-    const deleteEdit4 = (data) => {
-      edingKeys4.value.splice(edingKeys4.value.indexOf(data),1);
-    }
-
-    const columns4 = [
-      {
-        title:"编号",
-        width:"80px",
-        key:"id",
-        fixed: "left"
-      },{
-        title:"用户",
-        width: "120px",
-        key:"name",
-        customSlot: "name"
-      },{
-        title:"开关",
-        width: "50px",
-        key:"switch",
-        customSlot: "switch"
-      },{
-        title:"日期",
-        width: "140px",
-        key:"date",
-        customSlot: "date"
-      },{
-        title:"朝代",
-        width: "140px",
-        key:"dynasty",
-        customSlot: "dynasty"
-      },{
-        title:"颜色",
-        width: "50px",
-        key:"color",
-        customSlot: "color"
-      },{
-        title:"输入框",
-        width: "220px",
-        key:"motto",
-        customSlot: "motto",
-      }
-    ]
-
-    const dataSource4 = [
-      {id: 10000, name:"张三-1", switch: true, date: "2020-02-09", color: "#009688", dynasty: 1, motto: "知身无究竟，任运了残年。"},
-      {id: 10001, name:"张三-2", switch: true, date: "2020-02-09", color: "#009688", dynasty: 2, motto: "知身无究竟，任运了残年。"},
-      {id: 10002, name:"张三-3", switch: true, date: "2020-02-09", color: "#009688", dynasty: 3, motto: "知身无究竟，任运了残年。"},
-      {id: 10003, name:"张三-4", switch: true, date: "2020-02-09", color: "#009688", dynasty: 1, motto: "知身无究竟，任运了残年。"},
-      {id: 10004, name:"张三-5", switch: true, date: "2020-02-09", color: "#009688", dynasty: 2, motto: "知身无究竟，任运了残年。"},
-      {id: 10005, name:"张三-6", switch: true, date: "2020-02-09", color: "#009688", dynasty: 3, motto: "知身无究竟，任运了残年。"},
-    ]
-
-    return {
-      columns4,
-      dataSource4,
-      edingKeys4,
-      editHandle4,
-      deleteEdit4,
-    }
-  }
+const editHandle4 = (data) => {
+  edingKeys4.value.push(data);
 }
+
+const deleteEdit4 = (data) => {
+  edingKeys4.value.splice(edingKeys4.value.indexOf(data),1);
+}
+
+const columns4 = [
+  {
+    title:"编号",
+    width:"80px",
+    key:"id",
+    fixed: "left"
+  },{
+    title:"用户",
+    width: "120px",
+    key:"name",
+    customSlot: "name"
+  },{
+    title:"开关",
+    width: "50px",
+    key:"switch",
+    customSlot: "switch"
+  },{
+    title:"日期",
+    width: "140px",
+    key:"date",
+    customSlot: "date"
+  },{
+    title:"朝代",
+    width: "140px",
+    key:"dynasty",
+    customSlot: "dynasty"
+  },{
+    title:"颜色",
+    width: "50px",
+    key:"color",
+    customSlot: "color"
+  },{
+    title:"输入框",
+    width: "220px",
+    key:"motto",
+    customSlot: "motto",
+  }
+]
+
+const dataSource4 = [
+  {id: 10000, name:"张三-1", switch: true, date: "2020-02-09", color: "#009688", dynasty: 1, motto: "知身无究竟，任运了残年。"},
+  {id: 10001, name:"张三-2", switch: true, date: "2020-02-09", color: "#009688", dynasty: 2, motto: "知身无究竟，任运了残年。"},
+  {id: 10002, name:"张三-3", switch: true, date: "2020-02-09", color: "#009688", dynasty: 3, motto: "知身无究竟，任运了残年。"},
+  {id: 10003, name:"张三-4", switch: true, date: "2020-02-09", color: "#009688", dynasty: 1, motto: "知身无究竟，任运了残年。"},
+  {id: 10004, name:"张三-5", switch: true, date: "2020-02-09", color: "#009688", dynasty: 2, motto: "知身无究竟，任运了残年。"},
+  {id: 10005, name:"张三-6", switch: true, date: "2020-02-09", color: "#009688", dynasty: 3, motto: "知身无究竟，任运了残年。"},
+]
+
 </script>
 
 :::
@@ -443,60 +390,51 @@ export default {
   <lay-table :default-toolbar="true" :columns="columns5" :data-source="dataSource5"></lay-table>
 </template>
 
-<script>
+<script setup>
 import { ref } from 'vue'
 
-export default {
-  setup() {
-
-    const columns5 = [
-      {
-        title:"编号",
-        width:"120px",
-        key:"id"
-      },
-      {
-        title:"名称",
-        width:"100px",
-        key:"name"
-      },
-      {
-        title:"性别",
-        width:"100px",
-        key:"sex"
-      },
-      {
-        title:"地址",
-        children: [
-          { title: "省", key: "prov", width: "100px" },
-          { title: "市", key: "city", width: "100px" },
-          { title: "区", key: "area", width: "100px" },
-        ]
-      },
-      {
-        title:"签名",
-        width:"240px",
-        key:"remark"
-      },
+const columns5 = [
+  {
+    title:"编号",
+    width:"120px",
+    key:"id"
+  },
+  {
+    title:"名称",
+    width:"100px",
+    key:"name"
+  },
+  {
+    title:"性别",
+    width:"100px",
+    key:"sex"
+  },
+  {
+    title:"地址",
+    children: [
+      { title: "省", key: "prov", width: "100px" },
+      { title: "市", key: "city", width: "100px" },
+      { title: "区", key: "area", width: "100px" },
     ]
+  },
+  {
+    title:"签名",
+    width:"240px",
+    key:"remark"
+  },
+]
 
-    const dataSource5 = [
-      {id:"10001", name:"夏娜1", prov:"浙江", sex:"女", city:"杭州", area: "西湖区", remark: '不知江月待何人，但见长江送流水。'},
-      {id:"10002", name:"夏娜2", prov:"浙江", sex:"女", city:"杭州", area: "西湖区", remark: '不知江月待何人，但见长江送流水。'},
-      {id:"10003", name:"夏娜3", prov:"浙江", sex:"女", city:"杭州", area: "西湖区", remark: '不知江月待何人，但见长江送流水。'},
-      {id:"10004", name:"夏娜4", prov:"浙江", sex:"女", city:"杭州", area: "西湖区", remark: '不知江月待何人，但见长江送流水。'},
-      {id:"10005", name:"夏娜5", prov:"浙江", sex:"女", city:"杭州", area: "西湖区", remark: '不知江月待何人，但见长江送流水。'},      
-      {id:"10006", name:"夏娜6", prov:"浙江", sex:"女", city:"杭州", area: "西湖区", remark: '不知江月待何人，但见长江送流水。'},
-      {id:"10007", name:"夏娜7", prov:"浙江", sex:"女", city:"杭州", area: "西湖区", remark: '不知江月待何人，但见长江送流水。'},
-      {id:"10008", name:"夏娜8", prov:"浙江", sex:"女", city:"杭州", area: "西湖区", remark: '不知江月待何人，但见长江送流水。'}
-    ]
+const dataSource5 = [
+  {id:"10001", name:"夏娜1", prov:"浙江", sex:"女", city:"杭州", area: "西湖区", remark: '不知江月待何人，但见长江送流水。'},
+  {id:"10002", name:"夏娜2", prov:"浙江", sex:"女", city:"杭州", area: "西湖区", remark: '不知江月待何人，但见长江送流水。'},
+  {id:"10003", name:"夏娜3", prov:"浙江", sex:"女", city:"杭州", area: "西湖区", remark: '不知江月待何人，但见长江送流水。'},
+  {id:"10004", name:"夏娜4", prov:"浙江", sex:"女", city:"杭州", area: "西湖区", remark: '不知江月待何人，但见长江送流水。'},
+  {id:"10005", name:"夏娜5", prov:"浙江", sex:"女", city:"杭州", area: "西湖区", remark: '不知江月待何人，但见长江送流水。'},      
+  {id:"10006", name:"夏娜6", prov:"浙江", sex:"女", city:"杭州", area: "西湖区", remark: '不知江月待何人，但见长江送流水。'},
+  {id:"10007", name:"夏娜7", prov:"浙江", sex:"女", city:"杭州", area: "西湖区", remark: '不知江月待何人，但见长江送流水。'},
+  {id:"10008", name:"夏娜8", prov:"浙江", sex:"女", city:"杭州", area: "西湖区", remark: '不知江月待何人，但见长江送流水。'}
+]
 
-    return {
-      columns5,
-      dataSource5,
-    }
-  }
-}
 </script>
 
 :::
@@ -515,143 +453,130 @@ export default {
   </lay-table>
 </template>
 
-<script>
+<script setup>
 import { ref } from 'vue'
 
-export default {
-  setup() {
+const tableRef6 = ref();
 
-    const tableRef6 = ref();
+const columns6 = [
+  { 
+    fixed: "left", 
+    type: "checkbox", 
+    title: "复选"
+  },
+  {
+    title:"编号",
+    width:"100px",
+    key:"id"
+  },
+  {
+    title:"名称",
+    width:"200px",
+    key:"name"
+  },
+  {
+    title:"性别",
+    width:"100px",
+    key:"sex"
+  },
+  {
+    title:"城市",
+    width:"120px",
+    key:"city"
+  },
+  {
+    title:"签到",
+    width:"100px",
+    key:"sign"
+  },
+  {
+    title:"签名",
+    width:"240px",
+    key:"remark"
+  },
+]
 
-    const columns6 = [
-      { 
-        fixed: "left", 
-        type: "checkbox", 
-        title: "复选"
-      },
+const dataSource6 = [
+  {
+    id:"10001", name:"张三 1", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。', children: [
       {
-        title:"编号",
-        width:"100px",
-        key:"id"
-      },
-      {
-        title:"名称",
-        width:"200px",
-        key:"name"
-      },
-      {
-        title:"性别",
-        width:"100px",
-        key:"sex"
-      },
-      {
-        title:"城市",
-        width:"120px",
-        key:"city"
-      },
-      {
-        title:"签到",
-        width:"100px",
-        key:"sign"
-      },
-      {
-        title:"签名",
-        width:"240px",
-        key:"remark"
-      },
-    ]
-
-    const dataSource6 = [
-      {
-        id:"10001", name:"张三 1", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。', children: [
+        id:"10009", name:"张三 1-1", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。', children: [
           {
-            id:"10009", name:"张三 1-1", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。', children: [
-              {
-                id:"10010", name:"张三 1-1-1", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。', children: [
-                  {id:"10029", name:"张三 1-1-1-1", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'},
-                  {id:"10030", name:"张三 1-1-1-2", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'}
-                ]
-              },
-              {
-                id:"10011", name:"张三 1-1-2", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。', children: [
-                  {id:"10031", name:"张三 1-1-2-1", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'},
-                  {id:"10032", name:"张三 1-1-2-2", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'}
-                ]
-              }
+            id:"10010", name:"张三 1-1-1", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。', children: [
+              {id:"10029", name:"张三 1-1-1-1", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'},
+              {id:"10030", name:"张三 1-1-1-2", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'}
             ]
           },
           {
-            id:"10012", name:"张三 1-2", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。', children: [
-              {id:"10013", name:"张三 1-2-1", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'},
-              {id:"10014", name:"张三 1-2-2", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'}
+            id:"10011", name:"张三 1-1-2", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。', children: [
+              {id:"10031", name:"张三 1-1-2-1", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'},
+              {id:"10032", name:"张三 1-1-2-2", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'}
             ]
           }
         ]
       },
       {
-        id:"10002", name:"张三 2", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。', children: [
-          {id:"10015", name:"张三 2-1", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'},
-          {id:"10016", name:"张三 2-2", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'}
-        ]
-      },
-      {
-        id:"10003", name:"张三 3", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。', children: [
-          {id:"10017", name:"张三 3-1", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'},
-          {id:"10018", name:"张三 3-2", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'}
-        ]
-      },
-      {
-        id:"10004", name:"张三 4", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。', children: [
-          {id:"10019", name:"张三 4-1", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'},
-          {id:"10020", name:"张三 4-2", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'}
-        ]
-      },
-      {
-        id:"10005", name:"张三 5", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。', children: [
-          {id:"10021", name:"张三 5-1", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'},
-          {id:"10022", name:"张三 5-2", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'}
-        ]
-      },      
-      {
-        id:"10006", name:"张三 6", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。', children: [
-          {id:"10023", name:"张三 6-1", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'},
-          {id:"10024", name:"张三 6-2", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'}
-        ]
-      },
-      {
-        id:"10007", name:"张三 7", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。', children: [
-          {id:"10025", name:"张三 7-1", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'},
-          {id:"10026", name:"张三 7-2", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'}
-        ]
-      },
-      {
-        id:"10008", name:"张三 8", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。', children: [
-          {id:"10027", name:"张三 8-1", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'},
-          {id:"10028", name:"张三 8-2", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'}
+        id:"10012", name:"张三 1-2", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。', children: [
+          {id:"10013", name:"张三 1-2-1", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'},
+          {id:"10014", name:"张三 1-2-2", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'}
         ]
       }
     ]
-
-    const getCheckData6 = function() {
-      layer.msg(tableRef6.value.getCheckData());
-    }
-
-    const defaultExpandAll6 = ref(false);
-
-    const expandAll6 = function() {
-      defaultExpandAll6.value = !defaultExpandAll6.value;
-    }
-
-    return {
-      columns6,
-      dataSource6,
-      defaultExpandAll6,
-      tableRef6, 
-      getCheckData6,
-      expandAll6
-    }
+  },
+  {
+    id:"10002", name:"张三 2", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。', children: [
+      {id:"10015", name:"张三 2-1", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'},
+      {id:"10016", name:"张三 2-2", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'}
+    ]
+  },
+  {
+    id:"10003", name:"张三 3", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。', children: [
+      {id:"10017", name:"张三 3-1", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'},
+      {id:"10018", name:"张三 3-2", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'}
+    ]
+  },
+  {
+    id:"10004", name:"张三 4", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。', children: [
+      {id:"10019", name:"张三 4-1", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'},
+      {id:"10020", name:"张三 4-2", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'}
+    ]
+  },
+  {
+    id:"10005", name:"张三 5", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。', children: [
+      {id:"10021", name:"张三 5-1", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'},
+      {id:"10022", name:"张三 5-2", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'}
+    ]
+  },      
+  {
+    id:"10006", name:"张三 6", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。', children: [
+      {id:"10023", name:"张三 6-1", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'},
+      {id:"10024", name:"张三 6-2", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'}
+    ]
+  },
+  {
+    id:"10007", name:"张三 7", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。', children: [
+      {id:"10025", name:"张三 7-1", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'},
+      {id:"10026", name:"张三 7-2", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'}
+    ]
+  },
+  {
+    id:"10008", name:"张三 8", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。', children: [
+      {id:"10027", name:"张三 8-1", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'},
+      {id:"10028", name:"张三 8-2", sex:"男", age: 22, city: "浙江杭州", sign:"已签到", remark: '人生若只如初见，何事秋风悲画扇。'}
+    ]
   }
+]
+
+const getCheckData6 = function() {
+  layer.msg(tableRef6.value.getCheckData());
 }
+
+const defaultExpandAll6 = ref(false);
+
+const expandAll6 = function() {
+  defaultExpandAll6.value = !defaultExpandAll6.value;
+}
+
 </script>
 
 :::
@@ -665,79 +590,69 @@ export default {
   <lay-table :columns="columns7" :data-source="dataSource7" :span-method="spanMethod7" :default-toolbar="true"></lay-table>
 </template>
 
-<script>
+<script setup>
 import { ref } from 'vue'
 
-export default {
-  setup() {
+const columns7 = [
+  { 
+    fixed: "left", 
+    type: "checkbox", 
+    title: "复选"
+  },
+  {
+    title:"编号",
+    width:"80px",
+    key:"id"
+  },
+  {
+    title:"名称",
+    width: "100px",
+    key:"name"
+  },{
+    title:"性别",
+    width: "100px",
+    key:"sex"
+  },{
+    title:"年龄",
+    width: "100px",
+    key:"age"
+  },{
+    title:"城市",
+    width: "100px",
+    key:"city"
+  },{
+    title:"签名",
+    width: "240px",
+    key:"remark"
+  }
+]
 
-    const columns7 = [
-      { 
-        fixed: "left", 
-        type: "checkbox", 
-        title: "复选"
-      },
-      {
-        title:"编号",
-        width:"80px",
-        key:"id"
-      },
-      {
-        title:"名称",
-        width: "100px",
-        key:"name"
-      },{
-        title:"性别",
-        width: "100px",
-        key:"sex"
-      },{
-        title:"年龄",
-        width: "100px",
-        key:"age"
-      },{
-        title:"城市",
-        width: "100px",
-        key:"city"
-      },{
-        title:"签名",
-        width: "240px",
-        key:"remark"
-      }
-    ]
+const dataSource7 = [
+  {id:"10001",name:"夏娜-1", email:"test@email.com", city:"北京朝阳", sex:"男", age:"20", remark: '欲买桂花同载酒, 终不似, 少年游。'},
+  {id:"10002",name:"夏娜-1", email:"test@email.com", city:"北京朝阳", sex:"男", age:"20", remark: '欲买桂花同载酒, 终不似, 少年游。'},
+  {id:"10003",name:"夏娜-2", email:"test@email.com", city:"北京朝阳", sex:"男", age:"21", remark: '欲买桂花同载酒, 终不似, 少年游。'},
+  {id:"10004",name:"夏娜-2", email:"test@email.com", city:"北京朝阳", sex:"男", age:"21", remark: '欲买桂花同载酒, 终不似, 少年游。'},
+  {id:"10005",name:"夏娜-3", email:"test@email.com", city:"北京朝阳", sex:"男", age:"22", remark: '欲买桂花同载酒, 终不似, 少年游。'},
+  {id:"10006",name:"夏娜-3", email:"test@email.com", city:"北京朝阳", sex:"男", age:"22", remark: '欲买桂花同载酒, 终不似, 少年游。'}
+]
 
-    const dataSource7 = [
-      {id:"10001",name:"夏娜-1", email:"test@email.com", city:"北京朝阳", sex:"男", age:"20", remark: '欲买桂花同载酒, 终不似, 少年游。'},
-      {id:"10002",name:"夏娜-1", email:"test@email.com", city:"北京朝阳", sex:"男", age:"20", remark: '欲买桂花同载酒, 终不似, 少年游。'},
-      {id:"10003",name:"夏娜-2", email:"test@email.com", city:"北京朝阳", sex:"男", age:"21", remark: '欲买桂花同载酒, 终不似, 少年游。'},
-      {id:"10004",name:"夏娜-2", email:"test@email.com", city:"北京朝阳", sex:"男", age:"21", remark: '欲买桂花同载酒, 终不似, 少年游。'},
-      {id:"10005",name:"夏娜-3", email:"test@email.com", city:"北京朝阳", sex:"男", age:"22", remark: '欲买桂花同载酒, 终不似, 少年游。'},
-      {id:"10006",name:"夏娜-3", email:"test@email.com", city:"北京朝阳", sex:"男", age:"22", remark: '欲买桂花同载酒, 终不似, 少年游。'}
-    ]
-
-    const spanMethod7 = (
-      row,
-      column,
-      rowIndex,
-      columnIndex,
-    ) => {
-      if (rowIndex % 2 === 0) {
-        if (columnIndex === 2) {
-          return [2, 1]
-        } 
-      } else {
-        if (columnIndex === 2) {
-          return [0, 0]
-        } 
-      }
-    }
-
-    return {
-      columns7,
-      dataSource7,
-      spanMethod7,
-    }
+const spanMethod7 = (
+  row,
+  column,
+  rowIndex,
+  columnIndex,
+) => {
+  if (rowIndex % 2 === 0) {
+    if (columnIndex === 2) {
+      return [2, 1]
+    } 
+  } else {
+    if (columnIndex === 2) {
+      return [0, 0]
+    } 
   }
 }
+
 </script>
 
 :::
@@ -751,61 +666,52 @@ export default {
   <lay-table :columns="columns8" :data-source="dataSource8" even></lay-table>
 </template>
 
-<script>
+<script setup>
 import { ref } from 'vue'
 
-export default {
-  setup() {
-
-    const columns8 = [
-      {
-        title:"编号",
-        width:"80px",
-        key:"id"
-      },
-      {
-        title:"用户",
-        width:"200px",
-        key:"name"
-      },{
-        title:"邮箱",
-        width: "180px",
-        key:"email"
-      },
-      {
-        title:"年龄",
-        width: "100px",
-        key:"age"
-      },
-      {
-        title:"城市",
-        width: "180px",
-        key:"city"
-      },{
-        title:"备注",
-        width: "400px",
-        key:"remark",
-        ellipsisTooltip: true,
-      }
-    ]
-
-    const dataSource8 = [
-      {id: "10001", name:"张三1", city: "浙江杭州", email:"test@email.com", age:"18", remark: '以创造性的行为实践于人世。若能以写作为工具，为道途，先帮助自己一程，再以领悟帮助他人一程。这是一种服务'},
-      {id: "10002", name:"张三2", city: "浙江杭州", email:"test@email.com", age:"18", remark: '以创造性的行为实践于人世。若能以写作为工具，为道途，先帮助自己一程，再以领悟帮助他人一程。这是一种服务'},
-      {id: "10003", name:"张三3", city: "浙江杭州", email:"test@email.com", age:"20", remark: '以创造性的行为实践于人世。若能以写作为工具，为道途，先帮助自己一程，再以领悟帮助他人一程。这是一种服务'},
-      {id: "10004", name:"张三4", city: "浙江杭州", email:"test@email.com", age:"20", remark: '以创造性的行为实践于人世。若能以写作为工具，为道途，先帮助自己一程，再以领悟帮助他人一程。这是一种服务'},
-      {id: "10005", name:"张三5", city: "浙江杭州", email:"test@email.com", age:"20", remark: '以创造性的行为实践于人世。若能以写作为工具，为道途，先帮助自己一程，再以领悟帮助他人一程。这是一种服务'},
-      {id: "10006", name:"张三6", city: "浙江杭州", email:"test@email.com", age:"20", remark: '以创造性的行为实践于人世。若能以写作为工具，为道途，先帮助自己一程，再以领悟帮助他人一程。这是一种服务'},
-      {id: "10007", name:"张三7", city: "浙江杭州", email:"test@email.com", age:"20", remark: '以创造性的行为实践于人世。若能以写作为工具，为道途，先帮助自己一程，再以领悟帮助他人一程。这是一种服务'},
-      {id: "10008", name:"张三8", city: "浙江杭州", email:"test@email.com", age:"20", remark: '以创造性的行为实践于人世。若能以写作为工具，为道途，先帮助自己一程，再以领悟帮助他人一程。这是一种服务'}
-    ]
-
-    return {
-      columns8,
-      dataSource8
-    }
+const columns8 = [
+  {
+    title:"编号",
+    width:"80px",
+    key:"id"
+  },
+  {
+    title:"用户",
+    width:"200px",
+    key:"name"
+  },{
+    title:"邮箱",
+    width: "180px",
+    key:"email"
+  },
+  {
+    title:"年龄",
+    width: "100px",
+    key:"age"
+  },
+  {
+    title:"城市",
+    width: "180px",
+    key:"city"
+  },{
+    title:"备注",
+    width: "400px",
+    key:"remark",
+    ellipsisTooltip: true,
   }
-}
+]
+
+const dataSource8 = [
+  {id: "10001", name:"张三1", city: "浙江杭州", email:"test@email.com", age:"18", remark: '以创造性的行为实践于人世。若能以写作为工具，为道途，先帮助自己一程，再以领悟帮助他人一程。这是一种服务'},
+  {id: "10002", name:"张三2", city: "浙江杭州", email:"test@email.com", age:"18", remark: '以创造性的行为实践于人世。若能以写作为工具，为道途，先帮助自己一程，再以领悟帮助他人一程。这是一种服务'},
+  {id: "10003", name:"张三3", city: "浙江杭州", email:"test@email.com", age:"20", remark: '以创造性的行为实践于人世。若能以写作为工具，为道途，先帮助自己一程，再以领悟帮助他人一程。这是一种服务'},
+  {id: "10004", name:"张三4", city: "浙江杭州", email:"test@email.com", age:"20", remark: '以创造性的行为实践于人世。若能以写作为工具，为道途，先帮助自己一程，再以领悟帮助他人一程。这是一种服务'},
+  {id: "10005", name:"张三5", city: "浙江杭州", email:"test@email.com", age:"20", remark: '以创造性的行为实践于人世。若能以写作为工具，为道途，先帮助自己一程，再以领悟帮助他人一程。这是一种服务'},
+  {id: "10006", name:"张三6", city: "浙江杭州", email:"test@email.com", age:"20", remark: '以创造性的行为实践于人世。若能以写作为工具，为道途，先帮助自己一程，再以领悟帮助他人一程。这是一种服务'},
+  {id: "10007", name:"张三7", city: "浙江杭州", email:"test@email.com", age:"20", remark: '以创造性的行为实践于人世。若能以写作为工具，为道途，先帮助自己一程，再以领悟帮助他人一程。这是一种服务'},
+  {id: "10008", name:"张三8", city: "浙江杭州", email:"test@email.com", age:"20", remark: '以创造性的行为实践于人世。若能以写作为工具，为道途，先帮助自己一程，再以领悟帮助他人一程。这是一种服务'}
+]
+
 </script>
 
 :::
@@ -871,61 +777,51 @@ const dataSource9 = ref([
   </lay-table>
 </template>
 
-<script>
+<script setup>
 import { ref } from 'vue'
 
-export default {
-  setup() {
-
-    const columns2 = [
-      { title:"编号", width:"80px", key:"id", fixed: "left", sort: "desc"},
-      { title:"姓名", width:"80px", key:"name" },
-      { title:"班级", width:"120px", key:"classes" },
-      {
-        title: "分数",
-        key: "total",
-        children: [
-          { title:"语文", width:"80px", key:"chinese", totalRow: true },
-          { title:"数学", width:"80px", key:"mathematics", totalRow: true  },
-          { title:"英语", width:"80px", key:"english", totalRow: true  },
-          { title:"生物", width:"80px", key:"organism", totalRow: true  },
-          { title:"地理", width:"80px", key:"geography", totalRow: true  },
-          { title:"历史", width:"80px", key:"history", totalRow: true  },
-          { title:"政治", width:"80px", key:"politics", totalRow: true  },
-          { title:"总分", width: "180px", key:"score", totalRow: true  }
-        ]
-      }
+const columns2 = [
+  { title:"编号", width:"80px", key:"id", fixed: "left", sort: "desc"},
+  { title:"姓名", width:"80px", key:"name" },
+  { title:"班级", width:"120px", key:"classes" },
+  {
+    title: "分数",
+    key: "total",
+    children: [
+      { title:"语文", width:"80px", key:"chinese", totalRow: true },
+      { title:"数学", width:"80px", key:"mathematics", totalRow: true  },
+      { title:"英语", width:"80px", key:"english", totalRow: true  },
+      { title:"生物", width:"80px", key:"organism", totalRow: true  },
+      { title:"地理", width:"80px", key:"geography", totalRow: true  },
+      { title:"历史", width:"80px", key:"history", totalRow: true  },
+      { title:"政治", width:"80px", key:"politics", totalRow: true  },
+      { title:"总分", width: "180px", key:"score", totalRow: true  }
     ]
-
-    const dataSource2 = [
-      {id:"1", name:"张三1", classes:"六年级一班", chinese: 80, mathematics: 50, english: 60, organism: 80, geography: 22, history:55, politics: 53, score:454},
-      {id:"2", name:"张三2", classes:"六年级二班", chinese: 80, mathematics: 50, english: 60, organism: 80, geography: 22, history:55, politics: 53, score:432},
-      {id:"3", name:"张三3", classes:"六年级三班", chinese: 80, mathematics: 50, english: 60, organism: 80, geography: 22, history:55, politics: 53, score:534},
-      {id:"4", name:"张三4", classes:"六年级四班", chinese: 80, mathematics: 50, english: 60, organism: 80, geography: 22, history:55, politics: 53, score:342},
-      {id:"5", name:"张三5", classes:"六年级五班", chinese: 80, mathematics: 50, english: 60, organism: 80, geography: 22, history:55, politics: 53, score:653},
-      {id:"6", name:"张三6", classes:"六年级六班", chinese: 80, mathematics: 50, english: 60, organism: 80, geography: 22, history:55, politics: 53, score:632},
-    ]
-
-    const expandKeys2 = ref([])
-    const defaultExpandAll2 = ref(false)
-
-    return {
-      columns2,
-      dataSource2,
-      expandKeys2,
-      defaultExpandAll2
-    }
   }
-}
+]
+
+const dataSource2 = [
+  {id:"1", name:"张三1", classes:"六年级一班", chinese: 80, mathematics: 50, english: 60, organism: 80, geography: 22, history:55, politics: 53, score:454},
+  {id:"2", name:"张三2", classes:"六年级二班", chinese: 80, mathematics: 50, english: 60, organism: 80, geography: 22, history:55, politics: 53, score:432},
+  {id:"3", name:"张三3", classes:"六年级三班", chinese: 80, mathematics: 50, english: 60, organism: 80, geography: 22, history:55, politics: 53, score:534},
+  {id:"4", name:"张三4", classes:"六年级四班", chinese: 80, mathematics: 50, english: 60, organism: 80, geography: 22, history:55, politics: 53, score:342},
+  {id:"5", name:"张三5", classes:"六年级五班", chinese: 80, mathematics: 50, english: 60, organism: 80, geography: 22, history:55, politics: 53, score:653},
+  {id:"6", name:"张三6", classes:"六年级六班", chinese: 80, mathematics: 50, english: 60, organism: 80, geography: 22, history:55, politics: 53, score:632},
+]
+
+const expandKeys2 = ref([])
+const defaultExpandAll2 = ref(false)
+
 </script>
 
-<style lang="less">
+<style>
 .expand-content {
   width: 100%;
   padding: 0px 20px 20px 0px;
-  .layui-progress {
-    margin-top: 24px;
-  }
+}
+
+.expand-content .layui-progress{
+  margin-top: 24px;
 }
 </style>
 
@@ -1028,7 +924,7 @@ export default {
 | customSlot           | 自定义插槽                     | `string` `function` 参数{row, data, column, rowIndex, columnIndex}    | --      | --                          | `2.17.2`新增`function`       |
 | width                | 宽度                           | --                             | --      | --                          | --       |
 | minWidth             | 最小宽度                       | --                             | `100px` | --                          | --       |
-| sort                 | 排序                           | `boolean`                             | `false`      | --                          | --       |
+| sort                 | 排序，当值为字符串 `custom` 可通过 `sort-change` 事件自定义/服务端设置排序解结果                          | `boolean`/ `string`            | `false`      | --                          | --       |
 | titleSlot            | 标题插槽                       | 插槽参数 {column, columnIndex} | --      | --                          | --       |
 | align                | 对齐方式                       | `string`                       | `left`  | `left` `right` `center`     | --       |
 | ellipsisTooltip      | 当内容过长被隐藏时显示 tooltip | `boolean`                      | `false` | `true` `false`              | --       |

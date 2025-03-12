@@ -2,6 +2,7 @@ import { defineConfig, mergeConfig } from "vite";
 import { babel } from "@rollup/plugin-babel";
 
 import baseConfig from "../../build/baseConfig";
+import { getFullFormatName } from "../../build/util";
 
 export default defineConfig(({ mode }) => {
   return mergeConfig(baseConfig(__dirname), {
@@ -11,7 +12,7 @@ export default defineConfig(({ mode }) => {
     build: {
       lib: {
         name: "LayuiJsonSchemaForm",
-        fileName: (format) => `json-schema-form.${format}.js`,
+        fileName: (format) => getFullFormatName("json-schema-form", format),
       },
       rollupOptions: {
         plugins: [
