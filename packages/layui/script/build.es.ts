@@ -1,10 +1,11 @@
 import { UserConfigExport } from "vite";
 import vue from "@vitejs/plugin-vue";
 import vueJsx from "@vitejs/plugin-vue-jsx";
+import terser from "@rollup/plugin-terser";
 import { resolve } from "path";
 import * as fs from "fs";
-import terser from "@rollup/plugin-terser";
 import { componentDir } from "./constant";
+import packages from "../package.json";
 
 const inputDir = resolve(componentDir, "./component");
 
@@ -14,20 +15,25 @@ const inputsArray = fs.readdirSync(inputDir).filter((name) => {
   return isDir && fs.readdirSync(componentDir).includes("index.ts");
 });
 
-// const inputs = {};
-const inputs = inputsArray.reduce((backObj, pkgName) => {
-  backObj[pkgName] = resolve(componentDir, `./component/${pkgName}/index.ts`);
-  return backObj;
-}, {});
+const inputs = inputsArray.reduce(
+  (backObj: Record<string, string>, pkgName) => {
+    backObj[pkgName] = resolve(componentDir, `./component/${pkgName}/index.ts`);
+    return backObj;
+  },
+  {}
+);
 
 inputs["index"] = resolve(componentDir, "./index.ts");
-// inputs["splitPanel"] = resolve(componentDir, `./component/splitPanel/index.ts`);
-// inputs["splitPanelItem"] = resolve(
-//   componentDir,
-//   `./component/splitPanelItem/index.ts`
-// );
 
-// inputs["datePicker"] = resolve(componentDir, `./component/datePicker/index.ts`);
+const getDependencies = () => {
+  return (id: string) => {
+    const dependencies = ["@vue", "vue", ...Object.keys(packages.dependencies)];
+
+    return dependencies.some((name) => {
+      return name === id || id.startsWith(`${name}/`);
+    });
+  };
+};
 
 export default (): UserConfigExport => {
   return {
@@ -61,21 +67,6 @@ export default (): UserConfigExport => {
         plugins: [terser()],
         output: {
           entryFileNames: (chunkInfo) => {
-            // console.log(chunkInfo.name, "entryFileNames");
-            // node_modules
-            if (chunkInfo.name.includes("node_modules")) {
-              const chunksName = "_chunks/";
-              return (
-                chunksName +
-                chunkInfo.name
-                  .toString()
-                  .split("node_modules/")[2]
-                  .split("/")[0]
-                  .toString() +
-                "/index.js"
-              );
-            }
-
             const result = chunkInfo.name.replace(/\.vue$/, "").split("/");
             const name = result.join("/");
 
@@ -90,41 +81,20 @@ export default (): UserConfigExport => {
                 return `${name.replace("packages/component/", "")}.js`;
               }
 
-              /**
-               * packages/layer
-               * packages/icons
-               */
-              if (/packages\/(component|layer|icons)/.test(name)) {
-                return `${name.replace("packages/", "")}.js`;
-              }
-
               return `${name}.js`;
             }
           },
           assetFileNames: (assetInfo) => {
-            /**
-             * button/index.css
-             * form/index.css
-             */
-            if (/^[a-zA-Z]+\/index\.css$/.test(assetInfo.name!)) {
-              return "[name].css";
+            if (assetInfo.name?.startsWith("theme")) {
+              return "index/index.css";
+            } else {
+              return assetInfo.name?.split("/")[0] + "/index.css";
             }
-
-            /**
-             * packages/layer/lib/index -> layer/lib/index
-             * packages/icons/lib/index -> icons/lib/index
-             */
-            if (/^packages\/.*$/.test(assetInfo.name!)) {
-              return `${assetInfo.name?.replace(/packages\//, "")}`;
-            }
-
-            return `index/${assetInfo.name?.replace(/packages\//, "")}.css`;
           },
-          // assetFileNames: "[name].css",
           preserveModules: true,
           preserveModulesRoot: resolve(componentDir, "./component"),
         },
-        external: ["vue"],
+        external: getDependencies(),
       },
     },
   };
