@@ -1,5 +1,5 @@
 import type { ComponentPublicInstance } from "vue";
-import { getNodeName, isNode } from "@floating-ui/utils/dom";
+import { getNodeName, isNode } from "../../../utils";
 
 /**
  * 判断target是否为组件
