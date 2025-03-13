@@ -82,3 +82,23 @@ export const flattedChildren = (children: any) => {
   });
   return result;
 };
+
+export function getWindow(node: any) {
+  let _node$ownerDocument;
+  return (
+    (node == null || (_node$ownerDocument = node.ownerDocument) == null
+      ? void 0
+      : _node$ownerDocument.defaultView) || window
+  );
+}
+
+export function getNodeName(node: any) {
+  if (isNode(node)) {
+    return (node.nodeName || "").toLowerCase();
+  }
+  return "#document";
+}
+
+export function isNode(value: any): value is Node {
+  return value instanceof Node || value instanceof getWindow(value).Node;
+}
