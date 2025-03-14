@@ -4,6 +4,7 @@ import type {
   VNode,
   VNodeTypes,
 } from "vue";
+import { camelize } from "vue";
 
 import { isArray } from "./arrayUtil";
 
@@ -45,17 +46,13 @@ export const isArrayChildren = (
  * @param name 插槽名
  */
 export function convertSlotName(vm: ComponentInternalInstance, name: string) {
-  const camelCaseName = camelCase(name);
+  const camelCaseName = camelize(name);
   const kebabCaseName = kebabCase(name);
   return vm.slots[camelCaseName]
     ? camelCaseName
     : vm.slots[kebabCaseName]
     ? kebabCaseName
     : name;
-}
-
-export function camelCase(str: string) {
-  return str.replace(/-(\w)/g, (_, c) => (c ? c.toUpperCase() : ""));
 }
 
 export function kebabCase(key: string) {
@@ -76,4 +73,15 @@ export const flattedVNode = (children: VNode[]) => {
   });
 
   return result;
+};
+
+/**
+ * 将props对象的key从kebab-case转换为camelCase
+ * @param props props集合
+ */
+export const normalizeProps = <T extends Record<string, any>>(props: T): T => {
+  return Object.keys(props).reduce((pre, next) => {
+    pre[camelize(next) as keyof T] = props[next];
+    return pre;
+  }, {} as T);
 };
