@@ -4,7 +4,7 @@ import type { DescriptionsItemsNode } from "../descriptionsItem/interface";
 
 import { inject, h, defineComponent } from "vue";
 import { DESCRIPTIONS_INJECTION_KEY } from "./descriptions";
-import { isNil } from "../../utils";
+import { isNil, normalizeProps } from "../../utils";
 
 export default defineComponent({
   name: "LayDescriptionsCell",
@@ -32,7 +32,7 @@ export default defineComponent({
   },
   render() {
     const { border, direction } = this.descriptionsContext;
-    const itemProps = this.cell.props || {};
+    const itemProps = normalizeProps(this.cell.props);
     const label = this.cell.children?.label?.() || itemProps.label;
     const content = this.cell.children?.default?.();
 
@@ -41,8 +41,8 @@ export default defineComponent({
     const labelAlign = itemProps.labelAlign ? `is-${itemProps.labelAlign}` : "";
     const style = itemProps.style;
     const labelStyle = itemProps.labelStyle;
-    const classes = itemProps.class;
-    const labelClasses = itemProps.labelClass;
+    const classes = itemProps.class ?? "";
+    const labelClasses = itemProps.labelClass ?? "";
 
     const isVertical = direction === "vertical";
     const isLabel = this.type === "label";
