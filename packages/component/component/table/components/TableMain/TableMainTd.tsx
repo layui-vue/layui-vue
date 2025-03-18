@@ -159,6 +159,7 @@ export default defineComponent({
               <LayIcon
                 class="layui-table-cell-expand-icon"
                 type={expandIconType.value}
+                // @ts-ignore
                 onClick={handleExpand}
               ></LayIcon>
             )}

@@ -70,6 +70,8 @@ const {
   lastLevelAllColumns,
   lastLevelShowColumns,
 
+  tableDataSource,
+
   columnsState,
   /**
    * selected
@@ -127,7 +129,7 @@ function getScrollWidth() {
 }
 
 watch(
-  () => [props.height, props.maxHeight, props.dataSource],
+  () => [props.height, props.maxHeight, tableDataSource],
   () => {
     nextTick(() => {
       getScrollWidth();
@@ -215,7 +217,7 @@ const currentIndentSize = ref(0);
 
 const childrenExpandSpace = computed(() => {
   return (
-    props.dataSource.find((value: any) => {
+    tableDataSource.find((value: any) => {
       if (value[props.childrenColumnName]) {
         return true;
       }
@@ -227,9 +229,9 @@ const tableToolbarProps = computed(() => {
   return {
     defaultToolbar: props.defaultToolbar,
     spanMethod: props.spanMethod,
+    tableDataSource,
     hierarchicalColumns: hierarchicalColumns.value,
     lastLevelAllColumns: lastLevelAllColumns.value,
-    tableDataSource: props.dataSource,
     tableRef: tableRef.value,
   };
 });
@@ -246,6 +248,7 @@ provide(LAY_TABLE_CONTEXT, {
   tableHeaderTableRef,
   tableTotalRef,
 
+  tableDataSource,
   columnsState,
   selectedState,
   expandState,
@@ -274,7 +277,6 @@ provide(LAY_TABLE_CONTEXT, {
     <div class="layui-table-box">
       <!-- 表头 -->
       <TableHeader
-        :tableProps="props"
         :tableHeaderRef="tableHeaderRef"
         :lastLevelShowColumns="lastLevelShowColumns"
         :hierarchicalColumns="hierarchicalColumns"
@@ -305,7 +307,7 @@ provide(LAY_TABLE_CONTEXT, {
           </colgroup>
           <tbody>
             <!-- 渲染 -->
-            <template v-for="(children, index) in dataSource" :key="index">
+            <template v-for="(children, index) in tableDataSource" :key="index">
               <TableMain
                 :id="id"
                 :index="index"
@@ -331,7 +333,7 @@ provide(LAY_TABLE_CONTEXT, {
           </tbody>
         </table>
 
-        <template v-if="dataSource.length == 0 && loading == false">
+        <template v-if="tableDataSource.length == 0 && loading == false">
           <slot name="empty">
             <lay-empty :description="emptyDescription"></lay-empty>
           </slot>
@@ -350,7 +352,7 @@ provide(LAY_TABLE_CONTEXT, {
       <TableTotal
         v-if="hasTotalRow"
         :columns="lastLevelShowColumns"
-        :dataSource="dataSource"
+        :dataSource="tableDataSource"
         :tableBodyScrollWidth="tableBodyScrollWidth"
       ></TableTotal>
 

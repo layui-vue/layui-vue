@@ -50,6 +50,18 @@ export function useTable(props: RequiredTableProps, emit: TableEmit) {
    */
   useTablePage(props);
 
+  const tableDataSource = reactive([...props.dataSource]);
+
+  watch(
+    () => props.dataSource,
+    (newValue) => {
+      tableDataSource.splice(0, tableDataSource.length, ...newValue);
+    },
+    {
+      deep: true,
+    }
+  );
+
   /**
    * props.columns 变化时，重新计算
    */
@@ -58,7 +70,7 @@ export function useTable(props: RequiredTableProps, emit: TableEmit) {
     (newValue) => {
       const _newValue = isReactive(newValue) ? newValue : reactive(newValue);
 
-      props.autoColsWidth && useAutoColsWidth(_newValue, props.dataSource);
+      props.autoColsWidth && useAutoColsWidth(_newValue, tableDataSource);
 
       setColumnMap(_newValue, []);
       // console.log(columnMap, "column");
@@ -283,8 +295,8 @@ export function useTable(props: RequiredTableProps, emit: TableEmit) {
     let lastLeftClassName = "";
     let firstRightClassName = "";
 
-    const topLastLeft = props.columns.findLast(
-      (column) => column.fixed === "left"
+    const topLastLeft = (props.columns as any).findLast(
+      (column: T) => column.fixed === "left"
     );
     const topFirstRight = props.columns.find(
       (column) => column.fixed === "right"
@@ -300,7 +312,10 @@ export function useTable(props: RequiredTableProps, emit: TableEmit) {
         (firstRightClassName = firstRightClassNameConstant);
     }
 
-    function loopJudge(diffColumn: TableColumn, fixed: "left" | "right") {
+    function loopJudge(
+      diffColumn: TableColumn,
+      fixed: "left" | "right"
+    ): boolean {
       if (isEqual(diffColumn, column)) {
         return true;
       }
@@ -334,6 +349,8 @@ export function useTable(props: RequiredTableProps, emit: TableEmit) {
     hierarchicalColumns,
     lastLevelAllColumns,
     lastLevelShowColumns,
+
+    tableDataSource,
 
     columnsState,
     selectedState,

@@ -1,9 +1,13 @@
-import type { StyleValue } from "vue";
+import { type StyleValue, inject } from "vue";
 import type { TableToolBarType } from "../components/types";
 
-import { useI18n } from "../../../language";
+import { LAY_TABLE_CONTEXT } from "../constant";
+
+import { useI18n } from "@layui/component/language";
 
 export const useToolBar = (props: TableToolBarType) => {
+  const { columnsState } = inject(LAY_TABLE_CONTEXT)!;
+
   const { t } = useI18n();
 
   const showToolbar = (toolbarName: string) => {
@@ -28,9 +32,11 @@ export const useToolBar = (props: TableToolBarType) => {
         if (!column.ignoreExport) {
           // 如果 column.type 等于 checkbox 或 radio 时，该列不导出
           if ((column.type && column.type === "number") || !column.type) {
-            tableStr += `<td colspan=${column.colspan} rowspan=${
-              column.rowspan
-            }>${column.title || ""}</td>`;
+            tableStr += `<td colspan=${columnsState.setColSpanValue(
+              column
+            )} rowspan=${columnsState.setRowSpanValue(column)}>${
+              column.title || ""
+            }</td>`;
           }
         }
       }

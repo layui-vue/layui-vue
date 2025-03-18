@@ -5,6 +5,6 @@ export interface TableToolBarType {
   spanMethod: TableProps["spanMethod"];
   hierarchicalColumns: Array<Array<TableColumn>>;
   lastLevelAllColumns: Array<TableColumn>;
-  tableDataSource: any;
+  tableDataSource: TableProps["dataSource"];
   tableRef: HTMLDivElement | null;
 }

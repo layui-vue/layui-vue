@@ -23,6 +23,8 @@ interface LayTableContextType {
   tableHeaderTableRef: ShallowRef<HTMLElement | null>;
   tableTotalRef: ShallowRef<HTMLElement | null>;
 
+  tableDataSource: TableProps["dataSource"];
+
   columnsState: UseTableColumnsReturn;
   selectedState: UseTableSelectedReturn;
   expandState: UseTableExpandReturn;

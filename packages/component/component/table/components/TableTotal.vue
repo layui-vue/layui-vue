@@ -8,12 +8,11 @@ defineOptions({
   name: "LayTableTotal",
 });
 
-const { tableTotalRef, commonGetClasses, commonGetStylees } =
+const { tableTotalRef, tableDataSource, commonGetClasses, commonGetStylees } =
   inject(LAY_TABLE_CONTEXT)!;
 
 const props = defineProps<{
   columns: TableColumn[];
-  dataSource: TableProps["dataSource"];
   tableBodyScrollWidth: number;
 }>();
 
@@ -23,9 +22,9 @@ const renderTotalRowCell = (column: TableColumn) => {
       return column.totalRow;
     } else {
       if (column.totalRowMethod) {
-        return column.totalRowMethod(column, props.dataSource);
+        return column.totalRowMethod(column, tableDataSource);
       } else {
-        return totalRowMethod(column, props.dataSource);
+        return totalRowMethod(column, tableDataSource);
       }
     }
   }

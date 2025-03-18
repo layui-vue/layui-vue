@@ -1,11 +1,6 @@
 <script setup lang="ts">
-import { type StyleValue, inject } from "vue";
-import {
-  type TableProps,
-  type TableColumn,
-  type SortType,
-  sortType,
-} from "../typing";
+import { inject } from "vue";
+import { type TableColumn, type SortType, sortType } from "../typing";
 import { LAY_TABLE_CONTEXT } from "../constant";
 import LayCheckboxV2 from "@layui/component/component/checkboxV2/index.vue";
 import { startResize } from "../hooks/useResize";
@@ -15,9 +10,10 @@ defineOptions({
 });
 
 const {
+  tableProps,
   tableEmits,
 
-  // tableDataSource,
+  tableDataSource,
   tableRef,
   tableBodyTableRef,
   tableHeaderTableRef,
@@ -31,7 +27,6 @@ const {
 
 defineProps<{
   tableHeaderRef: HTMLDivElement | null;
-  tableProps: TableProps;
   lastLevelShowColumns: TableColumn[];
   hierarchicalColumns: TableColumn[][];
   tableBodyScrollWidth: number;
@@ -84,17 +79,21 @@ const baseSort = (
 };
 
 const defaultSort = (key: string, sortType: SortType) => {
-  // switch (sortType) {
-  //   case "":
-  //     tableDataSource.value = [...props.tableProps.dataSource];
-  //     break;
-  //   case "asc":
-  //     tableDataSource.value.sort((a: any, b: any) => a[key] - b[key]);
-  //     break;
-  //   case "desc":
-  //     tableDataSource.value.sort((a: any, b: any) => b[key] - a[key]);
-  //     break;
-  // }
+  switch (sortType) {
+    case "":
+      tableDataSource.splice(
+        0,
+        tableDataSource.length,
+        ...tableProps.dataSource
+      );
+      break;
+    case "asc":
+      tableDataSource.sort((a: any, b: any) => a[key] - b[key]);
+      break;
+    case "desc":
+      tableDataSource.sort((a: any, b: any) => b[key] - a[key]);
+      break;
+  }
 };
 
 // 清空所有的sort状态
