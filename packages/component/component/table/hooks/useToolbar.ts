@@ -22,7 +22,7 @@ export const useToolBar = (props: TableToolBarType) => {
   // 报表导出
   const exportData = () => {
     let tableStr = ``;
-    for (const tableHeadColumn of props.tableHeadColumns) {
+    for (const tableHeadColumn of props.hierarchicalColumns) {
       tableStr += "<tr>";
       for (const column of tableHeadColumn) {
         if (!column.ignoreExport) {
@@ -39,7 +39,7 @@ export const useToolBar = (props: TableToolBarType) => {
     const doExport = (source: Array<any>) => {
       source.forEach((item, rowIndex) => {
         tableStr += "<tr>";
-        props.tableBodyColumns.forEach((tableColumn, columnIndex) => {
+        props.lastLevelAllColumns.forEach((tableColumn, columnIndex) => {
           if (!tableColumn.ignoreExport) {
             // 如果该列是特殊列，并且类型为 number 时，特殊处理
             if (tableColumn.type && tableColumn.type == "number") {
@@ -107,16 +107,11 @@ export const useToolBar = (props: TableToolBarType) => {
     document.body.innerHTML = oldContent;
   };
 
-  const handleToolbarFilterCheck = (value: string[], column: any) => {
-    column.hide = !value.some((v) => v === column.key);
-  };
-
   return {
     t,
     showToolbar,
     toolbarStyle,
     exportData,
     print,
-    handleToolbarFilterCheck,
   };
 };

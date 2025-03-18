@@ -7,6 +7,7 @@
 
 <script setup lang="ts">
 import "./index.less";
+import { PageProps as _PageProps, LayoutKey as _LayOutKey } from "./interface";
 import {
   Ref,
   ref,
@@ -32,34 +33,13 @@ export interface PageOtionInfo {
   resetLeft?: number[];
   resetRight?: number[];
 }
-export type LayoutKey =
-  | "count"
-  | "prev"
-  | "page"
-  | "limits"
-  | "next"
-  | "limits"
-  | "refresh"
-  | "skip";
+export type LayoutKey = _LayOutKey;
 export interface ComponentVnode {
   name: LayoutKey;
   componentName: VNode | null;
   show: boolean;
 }
-export interface PageProps {
-  total: number;
-  limit?: number;
-  theme?: string;
-  pages?: number;
-  limits?: number[];
-  simple?: boolean;
-  modelValue?: number;
-  hideOnSinglePage?: boolean;
-  // mode?: MODE;
-  ellipsisTooltip?: boolean;
-  disabled?: boolean;
-  layout?: LayoutKey[];
-}
+export type PageProps = _PageProps;
 
 defineOptions({
   name: "LayPage",

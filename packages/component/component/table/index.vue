@@ -1,34 +1,34 @@
 <script setup lang="ts">
 import "./index.less";
-import type { TableProps as _TableProps, SortType } from "./typing";
+import type { TableProps as _TableProps, RequiredTableProps } from "./typing";
 
 import {
+  type StyleValue,
+  type WritableComputedRef,
   ref,
   watch,
   useSlots,
   onMounted,
-  StyleValue,
-  WritableComputedRef,
   computed,
   onBeforeUnmount,
   nextTick,
   shallowRef,
-  watchEffect,
+  provide,
 } from "vue";
 import { useResizeObserver, type UseResizeObserverReturn } from "@vueuse/core";
-import LayCheckbox from "../checkbox/index.vue";
-import LayEmpty from "../empty/index.vue";
-import TableData from "./TableData.vue";
-import TablePage from "./TablePage.vue";
-import TableToolbar from "./components/Toolbar.vue";
 
-import useTable from "./hooks/useTable";
-import { useNextTable } from "./hooks/useNextTable";
-import { TableEmit, sortType } from "./typing";
+import LayEmpty from "../empty/index.vue";
+import TableMain from "./components/TableMain";
+import TableHeader from "./components/TableHeader.vue";
+import TablePage from "./components/TablePage.vue";
+import TableToolbar from "./components/TableToolbar.vue";
+import TableTotal from "./components/TableTotal.vue";
+
+import { useTable } from "./hooks/useTable";
+import { tableEmits } from "./typing";
 import { startResize } from "./hooks/useResize";
-import useAutoColsWidth from "./hooks/useAutoColsWidth";
-import { useEmit } from "./hooks/useEmit";
 import { isValueArray } from "../../utils";
+import { LAY_TABLE_CONTEXT } from "./constant";
 
 export type TableProps = _TableProps;
 
@@ -66,291 +66,69 @@ const props = withDefaults(defineProps<TableProps>(), {
   }),
 });
 
-const emit = defineEmits(TableEmit);
+const emit = defineEmits(tableEmits);
+const slots = useSlots();
 
-const { rowClick, rowDoubleClick, rowContextmenu, cellDoubleClick, rowExpand } =
-  useEmit(emit);
-const slot = useSlots();
-const tableRef = shallowRef<HTMLDivElement | undefined>();
+const {
+  hierarchicalColumns,
+  lastLevelAllColumns,
+  lastLevelShowColumns,
 
-const allChecked = ref(false);
-const hasChecked = ref(false);
-const tableDataSource = ref<any[]>([...props.dataSource]);
-const tableColumns = computed(() => {
-  return [...props.columns];
-});
+  columnsState,
+  /**
+   * selected
+   */
+  selectedState,
+  expandState,
 
-const { columnSlotNames, dataSourceCount, needSelectedKeys } = useTable(props);
+  /**
+   * total
+   */
+  hasTotalRow,
 
-const { tableColumnKeys, tableHeadColumns, tableBodyColumns } =
-  useNextTable(props);
+  commonGetClasses,
+  commonGetStylees,
+} = useTable(props, emit);
 
-const tableExpandKeys = ref<string[]>([...props.expandKeys]);
-const tableSelectedKeys = ref<string[]>([...props.selectedKeys]);
+const tableRef = shallowRef<HTMLDivElement | null>(null);
 
-/**
- * 对 width 属性的预处理
- */
-props.autoColsWidth && useAutoColsWidth(tableColumns, tableDataSource);
-
-/**
- * 监听 props.selectedKeys 变化，响应内部
- */
-watch(
-  () => props.selectedKeys,
-  () => {
-    tableSelectedKeys.value = props.selectedKeys;
-  },
-  { deep: true }
-);
-
-/**
- * 监听 props.expandKeys 变化，响应内容
- */
-watch(
-  () => props.expandKeys,
-  () => {
-    tableExpandKeys.value = props.expandKeys;
-  },
-  { deep: true }
-);
-
-/**
- * 监听 tableExpandKeys 变化，响应外部
- */
-watch(
-  tableExpandKeys,
-  () => {
-    if (props.expandKeys !== tableExpandKeys.value) {
-      emit("update:expandKeys", tableExpandKeys.value);
-    }
-  },
-  { deep: true, immediate: true }
-);
-
-/**
- * 获取可展开的节点编码
- *
- * @param data
- * @param ids
- */
-const lookForAllId = (data: any[] = [], ids: string[] = []) => {
-  for (let item of data) {
-    if (item[props.childrenColumnName]) {
-      ids.push(item[props.id]);
-      lookForAllId(item[props.childrenColumnName], ids);
-    }
-  }
-  return ids;
-};
-
-/**
- * 监听 default-expand-all 变化，修改 expandKeys 内部属性
- *
- * @remark 向内向外，都是响应式
- */
-watch(
-  () => [props.defaultExpandAll, props.dataSource],
-  () => {
-    if (props.defaultExpandAll) {
-      const ids: string[] = [];
-      lookForAllId(props.dataSource, ids);
-      tableExpandKeys.value = ids;
-    }
-  },
-  {
-    immediate: true,
-    deep: true,
-  }
-);
-
-watch(
-  () => [props.defaultExpandAll],
-  () => {
-    if (!props.defaultExpandAll) {
-      tableExpandKeys.value = [];
-    }
-  },
-  {
-    deep: true,
-  }
-);
-
-const tableSelectedKey: WritableComputedRef<string> = computed({
-  get() {
-    return props.selectedKey;
-  },
-  set(val) {
-    emit("update:selectedKey", val);
-  },
-});
-
-watch(
-  () => props.dataSource,
-  () => {
-    tableDataSource.value = [...props.dataSource];
-  },
-  { deep: true }
-);
-
-const changeAll = (isChecked: boolean) => {
-  if (isChecked) {
-    tableSelectedKeys.value = [...needSelectedKeys.value];
-  } else {
-    tableSelectedKeys.value = [];
-  }
-};
-
-watch(
-  tableSelectedKeys,
-  () => {
-    if (props.page) {
-      if (tableSelectedKeys.value.length === props.page.total) {
-        allChecked.value = true;
-      } else {
-        allChecked.value = false;
-      }
-    } else {
-      if (tableSelectedKeys.value.length === dataSourceCount.value) {
-        allChecked.value = true;
-      } else {
-        allChecked.value = false;
-      }
-    }
-    if (tableSelectedKeys.value.length > 0) {
-      hasChecked.value = true;
-    } else {
-      hasChecked.value = false;
-    }
-    emit("update:selectedKeys", tableSelectedKeys.value);
-  },
-  { deep: true, immediate: true }
-);
-
-const change = function (page: any) {
-  emit("change", page);
-};
-
-const thSort = (e: Event, column: any) => {
-  const spanDom = (e.currentTarget as HTMLElement).querySelector(
-    "span[lay-sort]"
-  ) as HTMLSpanElement;
-
-  if (!spanDom) return;
-
-  const sortValue = spanDom.getAttribute("lay-sort") as SortType;
-
-  const currentIndex = sortType.indexOf(sortValue);
-  const nextSort = sortType[(currentIndex + 1) % sortType.length];
-
-  baseSort(spanDom, column, nextSort);
-};
-
-const iconSort = (e: Event, column: any, sort: Exclude<SortType, "">) => {
-  const spanDom = (e.target as HTMLElement).parentNode as HTMLSpanElement;
-
-  const sortValue = spanDom.getAttribute("lay-sort") as SortType;
-
-  baseSort(spanDom, column, sortValue !== sort ? sort : "");
-};
-
-/**
- *
- * @param spanDom 包含lay-sort属性的span dom
- * @param column column
- * @param nextSort 下一次的sort
- */
-const baseSort = (
-  spanDom: HTMLSpanElement,
-  column: any,
-  nextSort: SortType
-) => {
-  const { key, sort } = column;
-
-  removeAllSortState();
-  spanDom.setAttribute("lay-sort", nextSort);
-
-  if (sort !== "custom") {
-    defaultSort(key, nextSort);
-  }
-
-  emit("sort-change", key, nextSort);
-};
-
-const defaultSort = (key: string, sortType: SortType) => {
-  switch (sortType) {
-    case "":
-      tableDataSource.value = [...props.dataSource];
-      break;
-
-    case "asc":
-      tableDataSource.value.sort((a, b) => a[key] - b[key]);
-      break;
-
-    case "desc":
-      tableDataSource.value.sort((a, b) => b[key] - a[key]);
-      break;
-  }
-};
-
-// 清空所有的sort状态
-const removeAllSortState = () => {
-  const sortElements = tableRef.value!.querySelectorAll("[lay-sort]");
-  if (sortElements && sortElements.length > 0) {
-    sortElements.forEach((element) => {
-      element.setAttribute("lay-sort", "");
-    });
-  }
-};
-
-let tableBody = ref<HTMLElement | null>(null);
-let tableHeader = ref<HTMLElement | null>(null);
-let tableTotal = ref<HTMLElement | null>(null);
-let tableHeaderTable = ref<HTMLElement | null>(null);
-let tableBodyTable = ref<HTMLElement | null>(null);
+const tableBodyRef = shallowRef<HTMLDivElement | null>(null);
+const tableBodyTableRef = shallowRef<HTMLElement | null>(null);
 const tableBodyEmptyWidth = ref();
-let scrollWidthCell = ref(0);
+const tableBodyScrollWidth = ref(0);
 
-const getScrollWidth = () => {
-  const clientWidth: number = tableBody.value?.clientWidth || 0;
-  const offsetWidth: number = tableBody.value?.offsetWidth || 0;
-  if (clientWidth < offsetWidth) {
-    scrollWidthCell.value = offsetWidth - clientWidth;
-  } else {
-    scrollWidthCell.value = 0;
-  }
-  tableBodyEmptyWidth.value = tableHeaderTable.value?.offsetWidth + "px";
-};
+const tableHeaderRef = shallowRef<HTMLDivElement | null>(null);
+const tableHeaderTableRef = shallowRef<HTMLElement | null>(null);
 
-const hasl = ref(false);
-const hasr = ref(false);
+const tableTotalRef = shallowRef<HTMLDivElement | null>(null);
+
+const fixedLeftState = ref(false);
+const fixedRightState = ref(false);
 
 const classes = computed(() => {
   return [
-    hasl.value ? "layui-table-has-fixed-left" : "",
-    hasr.value ? "layui-table-has-fixed-right" : "",
-    hasTotalRow.value || (props.page && props.page.total > 0)
-      ? ""
-      : "layui-table-has-bottom-width",
+    fixedLeftState.value ? "layui-table-has-fixed-left" : "",
+    fixedRightState.value ? "layui-table-has-fixed-right" : "",
+    {
+      "layui-table-has-bottom-width": !(
+        hasTotalRow.value ||
+        (props.page && props.page.total > 0) ||
+        slots.footer
+      ),
+    },
   ];
 });
 
-const totalWrapperStyles = computed(() => {
-  return [
-    {
-      "padding-right": `${scrollWidthCell.value}px`,
-      "margin-top": `${!scrollWidthCell.value ? 0 : 1}px`,
-    },
-  ] as StyleValue;
-});
-
-const tablePageStyles = computed(() => {
-  return [
-    {
-      "border-width": `${hasTotalRow.value ? 1 : 0}px 0 0 `,
-    },
-  ] as StyleValue;
-});
+function getScrollWidth() {
+  const clientWidth: number = tableBodyRef.value?.clientWidth || 0;
+  const offsetWidth: number = tableBodyRef.value?.offsetWidth || 0;
+  if (clientWidth < offsetWidth) {
+    tableBodyScrollWidth.value = offsetWidth - clientWidth;
+  } else {
+    tableBodyScrollWidth.value = 0;
+  }
+  tableBodyEmptyWidth.value = tableHeaderTableRef.value?.offsetWidth + "px";
+}
 
 watch(
   () => [props.height, props.maxHeight, props.dataSource],
@@ -361,7 +139,8 @@ watch(
   }
 );
 
-let resizeInstance: UseResizeObserverReturn | null;
+let tableBodyRefInstance: UseResizeObserverReturn | null;
+let tableHeaderTableRefInstance: UseResizeObserverReturn | null;
 
 onMounted(() => {
   nextTick(() => {
@@ -369,7 +148,7 @@ onMounted(() => {
   });
   getFixedColumn();
 
-  tableBody.value?.addEventListener("scroll", () => {
+  tableBodyRef.value?.addEventListener("scroll", () => {
     // todo issue中开发者小新笔记本 滚动X轴 Y轴会出现滚动条
     // 但子元素高度未变，暂时在滚动回调中重新计算scrollWidthCell
     // https://gitee.com/layui/layui-vue/issues/I8TSK1
@@ -378,46 +157,62 @@ onMounted(() => {
     getFixedColumn();
   });
 
-  tableBody.value?.addEventListener("transitionend", () => {
+  tableBodyRef.value?.addEventListener("transitionend", () => {
     getScrollWidth();
   });
 
-  resizeInstance = useResizeObserver(tableBody, () => {
+  tableBodyRefInstance = useResizeObserver(tableBodyRef, () => {
+    getScrollWidth();
+    getFixedColumn();
+  });
+
+  tableHeaderTableRefInstance = useResizeObserver(tableHeaderTableRef, () => {
     getScrollWidth();
     getFixedColumn();
   });
 });
 
-const getFixedColumn = () => {
-  tableHeader.value!.scrollLeft = tableBody.value?.scrollLeft || 0;
+onBeforeUnmount(() => {
+  tableBodyRefInstance?.stop();
+  tableHeaderTableRefInstance?.stop();
+});
 
-  if (tableTotal.value) {
-    tableTotal.value.scrollLeft = tableBody.value?.scrollLeft || 0;
+function getFixedColumn() {
+  const tableBodyScrollLeft = tableBodyRef.value?.scrollLeft || 0;
+  const tableBodyScrollWidth = tableBodyRef.value?.scrollWidth || 0;
+  const tableBodyClientWidth = tableBodyRef.value?.clientWidth || 0;
+  const tableBodyOffsetWidth = tableBodyRef.value?.offsetWidth || 0;
+
+  tableHeaderRef.value!.scrollLeft = tableBodyScrollLeft;
+
+  if (tableTotalRef.value) {
+    tableTotalRef.value.scrollLeft = tableBodyScrollLeft;
   }
 
-  // @ts-ignore
-  if (tableBody.value?.scrollWidth > tableBody.value?.clientWidth) {
-    if (tableBody.value?.scrollLeft == 0) {
-      hasl.value = false;
-      hasr.value = true;
+  if (tableBodyScrollWidth > tableBodyClientWidth) {
+    // tableBody scrollBar最左边
+    if (tableBodyScrollLeft == 0) {
+      fixedLeftState.value = false;
+      fixedRightState.value = true;
     } else {
-      // @ts-ignore
-      const t = tableBody.value?.scrollLeft + tableBody.value?.offsetWidth + 2;
-      const s = tableBody.value?.scrollWidth;
-      // @ts-ignore
-      if (t > s) {
-        hasl.value = true;
-        hasr.value = false;
+      if (
+        tableBodyScrollLeft + tableBodyOffsetWidth + 2 >
+        tableBodyScrollWidth
+      ) {
+        // tableBody scrollBar最左边
+        fixedLeftState.value = true;
+        fixedRightState.value = false;
       } else {
-        hasl.value = true;
-        hasr.value = true;
+        // tableBody scrollBar 中间
+        fixedLeftState.value = true;
+        fixedRightState.value = true;
       }
     }
   } else {
-    hasl.value = false;
-    hasr.value = false;
+    fixedLeftState.value = false;
+    fixedRightState.value = false;
   }
-};
+}
 
 const currentIndentSize = ref(0);
 
@@ -431,358 +226,37 @@ const childrenExpandSpace = computed(() => {
   );
 });
 
-const renderFixedStyle = (column: any, columnIndex: number, columns: any) => {
-  if (column.fixed) {
-    if (column.fixed == "left") {
-      var left = 0;
-      for (var i = 0; i < columnIndex; i++) {
-        if (
-          columns[i].fixed &&
-          columns[i].fixed == "left" &&
-          tableColumnKeys.value.includes(columns[i].key)
-        ) {
-          left = left + Number(columns[i]?.width?.replace("px", ""));
-        }
-      }
-      return { left: `${left}px` } as StyleValue;
-    } else {
-      var right = 0;
-      for (var i = columnIndex + 1; i < columns.length; i++) {
-        if (
-          columns[i].fixed &&
-          columns[i].fixed == "right" &&
-          tableColumnKeys.value.includes(columns[i].key)
-        ) {
-          right = right + Number(columns[i]?.width?.replace("px", ""));
-        }
-      }
-      return { right: `${right}px` } as StyleValue;
-    }
-  } else {
-    var isLast = true;
-    for (var i = columnIndex + 1; i < columns.length; i++) {
-      if (
-        columns[i].fixed == undefined &&
-        tableColumnKeys.value.includes(columns[i].key)
-      ) {
-        isLast = false;
-      }
-    }
-    // return isLast ? ({ "border-right": "none" } as StyleValue) : {};
-  }
-};
-
-/**
- * 根据目标列查找它的父级
- *
- * @param data 查找的数据
- * @param target 目标节点
- */
-const findTopicParent = (data: any[], target: any) => {
-  const parents: any[] = [];
-  const findParent = (data: any[], target: any, result: any[]) => {
-    for (let i in data) {
-      let item = data[i];
-      if (item.key === target.key) {
-        result.unshift(item);
-        return true;
-      }
-      if (item.children && item.children.length > 0) {
-        let ok = findParent(item.children, target, result);
-        if (ok) {
-          result.unshift(item);
-          return true;
-        }
-      }
-    }
-    return false;
-  };
-  findParent(data, target, parents);
-  return parents[0];
-};
-
-const getWidthNumber = (width: string) => Number(width.replace("px", ""));
-
-const getChildrenFixedTotalWidth = (column: any): number => {
-  const traverse = (column: any) => {
-    if (!isValueArray(column.children)) {
-      return getWidthNumber(column.width);
-    }
-
-    return column.children.reduce(
-      (sum: number, child: any) => sum + traverse(child),
-      0
-    );
-  };
-
-  return traverse(column);
-};
-
-/**
- * 计算 td 的 style 属性
- *
- * @param column 列信息
- * @param columnIndex 列索引
- * @param tableHeadColumn 列集合 (current)
- */
-// const renderHeadFixedStyle = (
-//   column: any,
-//   columnIndex: number,
-//   tableHeadColumn: any[],
-//   tableHeadColumnIndex: number,
-//   tableHeadColumns: any[]
-// ) => {
-//   if (column.fixed) {
-//     if (column.fixed == "left") {
-//       // 如果是简单固定列
-//       if (tableHeadColumnIndex == 0) {
-//         // 如果是左固定。
-//         var left = 0;
-//         // 累加左侧列宽。
-//         for (var i = 0; i < columnIndex; i++) {
-//           if (
-//             props.columns[i].fixed &&
-//             props.columns[i].fixed == "left" &&
-//             tableColumnKeys.value.includes(props.columns[i].key)
-//           ) {
-//             left = left + getChildrenFixedTotalWidth(props.columns[i]);
-//           }
-//         }
-//         return { left: `${left}px` } as StyleValue;
-//       } else {
-//         // 复杂表头固定
-//         var left = 0;
-//         var topicColumns = tableHeadColumns[0];
-//         var topicColumn = findTopicParent(topicColumns, column);
-//         var index: number = topicColumns.indexOf(topicColumn);
-
-//         // 累加父级位置
-//         for (var i = 0; i < index; i++) {
-//           if (topicColumns[i].fixed && topicColumns[i].fixed == "left") {
-//             left = left + getChildrenFixedTotalWidth(topicColumns[i]);
-//           }
-//         }
-
-//         // 累加当前位置
-//         for (var i = 0; i < columnIndex; i++) {
-//           if (tableHeadColumn[i].fixed && tableHeadColumn[i].fixed == "left") {
-//             left = left + getChildrenFixedTotalWidth(tableHeadColumn[i]);
-//           }
-//         }
-//         return { left: `${left}px` } as StyleValue;
-//       }
-//     } else {
-//       if (tableHeadColumnIndex == 0) {
-//         // 如果是右固定。
-//         var right = 0;
-//         // 累计右侧列宽。
-//         for (var i = columnIndex + 1; i < props.columns.length; i++) {
-//           if (
-//             props.columns[i].fixed &&
-//             props.columns[i].fixed == "right" &&
-//             tableColumnKeys.value.includes(props.columns[i].key)
-//           ) {
-//             right = right + getChildrenFixedTotalWidth(props.columns[i]);
-//           }
-//         }
-//         return { right: `${right}px` } as StyleValue;
-//       } else {
-//         // 复杂表头固定
-//         var right = 0;
-//         var topicColumns = tableHeadColumns[0];
-//         var topicColumn = findTopicParent(topicColumns, column);
-//         var index: number = topicColumns.indexOf(topicColumn);
-
-//         // 累计右侧列宽。
-//         for (var i = index + 1; i < topicColumns.length; i++) {
-//           if (topicColumns[i].fixed && topicColumns[i].fixed == "right") {
-//             right = right + getChildrenFixedTotalWidth(topicColumns[i]);
-//           }
-//         }
-
-//         // 累加当前位置
-//         for (var i = columnIndex + 1; i < tableHeadColumn.length; i++) {
-//           if (tableHeadColumn[i].fixed && tableHeadColumn[i].fixed == "right") {
-//             right = right + getChildrenFixedTotalWidth(tableHeadColumn[i]);
-//           }
-//         }
-
-//         return { right: `${right}px` } as StyleValue;
-//       }
-//     }
-//   } else {
-//     // 如果是简单表头，则判定当前列是否为尾列。
-//     if (tableHeadColumnIndex == 0) {
-//       var isLast = true;
-//       for (var i = columnIndex + 1; i < tableHeadColumn.length; i++) {
-//         if (
-//           tableHeadColumn[i].fixed == undefined &&
-//           tableColumnKeys.value.includes(tableHeadColumn[i].key)
-//         ) {
-//           isLast = false;
-//         }
-//       }
-//       return isLast ? ({ "border-right": "none" } as StyleValue) : {};
-//     } else {
-//       // 如果是复杂表头，则判定根节点与子节点是否同时为尾节点。
-//       var topicColumns = tableHeadColumns[0];
-//       var topicColumn = findTopicParent(topicColumns, column);
-//       var index: number = topicColumns.indexOf(topicColumn);
-//       var isLast = true;
-//       // 父节点是否为当前层级的尾节点。
-//       for (var i = index + 1; i < topicColumns.length; i++) {
-//         if (
-//           topicColumns[i].fixed == undefined &&
-//           tableColumnKeys.value.includes(topicColumns[i].key)
-//         ) {
-//           isLast = false;
-//         }
-//       }
-//       // 子节点是否为当前层级的尾节点。
-//       for (var i = columnIndex + 1; i < tableHeadColumn.length; i++) {
-//         if (
-//           tableHeadColumn[i].fixed == undefined &&
-//           tableColumnKeys.value.includes(tableHeadColumn[i].key)
-//         ) {
-//           isLast = false;
-//         }
-//       }
-//       // 当前两者满足条件时，去掉右侧边框显示。
-//       return isLast ? ({ "border-right": "none" } as StyleValue) : {};
-//     }
-//   }
-// };
-
-/**
- * 在 fixed 为 left 时，如果是尾列，增加阴影。
- * 在 fixed 为 right 时，如果是首列，增加阴影。
- *
- * @remark 排除 hide 列
- */
-const renderFixedClassName = (
-  column: any,
-  columnIndex: number,
-  currentColumns: any[]
-) => {
-  if (column.fixed) {
-    if (column.fixed == "left") {
-      var left = true;
-      for (var i = columnIndex + 1; i < currentColumns.length; i++) {
-        if (
-          currentColumns[i].fixed &&
-          currentColumns[i].fixed == "left" &&
-          tableColumnKeys.value.includes(currentColumns[i].key)
-        ) {
-          left = false;
-        }
-      }
-      return left ? `layui-table-fixed-left-last` : "";
-    } else {
-      var right = true;
-      for (var i = 0; i < columnIndex; i++) {
-        if (
-          currentColumns[i].fixed &&
-          currentColumns[i].fixed == "right" &&
-          tableColumnKeys.value.includes(currentColumns[i].key)
-        ) {
-          right = false;
-        }
-      }
-      return right ? `layui-table-fixed-right-first` : "";
-    }
-  }
-};
-
-const hasTotalRow = computed(() => {
-  const checkTotalRow = (columns: any[]) => {
-    for (const item of columns) {
-      if (item.totalRow) {
-        return true;
-      }
-      if (item.children && item.children.length > 0) {
-        if (checkTotalRow(item.children)) {
-          return true;
-        }
-      }
-    }
-    return false;
-  };
-  return checkTotalRow(props.columns);
-});
-
-const renderTotalRowCell = (column: any) => {
-  if (column.totalRow) {
-    if (column.totalRow != true) {
-      return column.totalRow;
-    } else {
-      if (column.totalRowMethod) {
-        return column.totalRowMethod(column, tableDataSource.value);
-      } else {
-        return totalRowMethod(column, tableDataSource.value);
-      }
-    }
-  }
-};
-
-const totalRowMethod = (column: any, dataSource: any[]) => {
-  let precision = 0;
-  const values = dataSource.map((item) => Number(item[column.key]));
-
-  values.forEach((value) => {
-    const decimal = `${value}`.split(".")[1];
-    precision = Math.max(precision, decimal ? decimal.length : 0);
-  });
-
-  return values.reduce((pre, next) => {
-    return Number.parseFloat((pre + next).toFixed(Math.min(precision, 20)));
-  }, 0);
-};
-
-onBeforeUnmount(() => {
-  resizeInstance?.stop();
-});
-
-const getCheckData = () => {
-  const ids = [tableSelectedKey.value, ...tableSelectedKeys.value];
-  const checkDataSources: any[] = [];
-  getCheckDataInner(ids, props.dataSource, checkDataSources);
-  return checkDataSources;
-};
-
-const getCheckDataInner = (
-  ids: string[],
-  dataSources: any[],
-  checkDataSources: any[]
-) => {
-  dataSources.forEach((dataSource) => {
-    if (dataSource[props.childrenColumnName]) {
-      getCheckDataInner(
-        ids,
-        dataSource[props.childrenColumnName],
-        checkDataSources
-      );
-    }
-    if (ids.includes(dataSource[props.id])) {
-      const checkDataSource = { ...dataSource };
-      delete checkDataSource[props.childrenColumnName];
-      checkDataSources.push(checkDataSource);
-    }
-  });
-};
-
 const tableToolbarProps = computed(() => {
   return {
     defaultToolbar: props.defaultToolbar,
     spanMethod: props.spanMethod,
-    tableHeadColumns: tableHeadColumns.value,
-    tableBodyColumns: tableBodyColumns.value,
-    tableDataSource: tableDataSource.value,
-    tableColumnKeys: tableColumnKeys.value,
+    hierarchicalColumns: hierarchicalColumns.value,
+    lastLevelAllColumns: lastLevelAllColumns.value,
+    tableDataSource: props.dataSource,
     tableRef: tableRef.value,
   };
 });
 
-defineExpose({ getCheckData });
+defineExpose({ getCheckData: selectedState.getAllSelectedDataSource });
+
+provide(LAY_TABLE_CONTEXT, {
+  tableEmits: emit,
+  tableProps: props as RequiredTableProps,
+  tableSlots: slots,
+
+  tableRef,
+  tableBodyTableRef,
+  tableHeaderRef,
+  tableHeaderTableRef,
+  tableTotalRef,
+
+  columnsState,
+  selectedState,
+  expandState,
+
+  commonGetClasses,
+  commonGetStylees,
+});
 </script>
 
 <template>
@@ -797,161 +271,24 @@ defineExpose({ getCheckData });
       <slot name="toolbar"></slot>
     </TableToolbar>
 
-    <div class="layui-table-box-header" v-if="slot.header">
+    <div class="layui-table-box-header" v-if="slots.header">
       <slot name="header"></slot>
     </div>
 
     <div class="layui-table-box">
       <!-- 表头 -->
-      <div
-        class="layui-table-header"
-        :style="[{ 'padding-right': `${scrollWidthCell}px` }]"
-      >
-        <div class="layui-table-header-wrapper" ref="tableHeader">
-          <table
-            class="layui-table"
-            :lay-size="size"
-            :lay-skin="skin"
-            ref="tableHeaderTable"
-          >
-            <colgroup>
-              <template v-for="column in tableBodyColumns" :key="column">
-                <template v-if="tableColumnKeys.includes(column.key)">
-                  <col
-                    :width="column.width"
-                    :style="{
-                      minWidth: column.minWidth ? column.minWidth : '50px',
-                    }"
-                  />
-                </template>
-              </template>
-            </colgroup>
-            <thead>
-              <template
-                v-for="(
-                  tableHeadColumn, tableHeadColumnIndex
-                ) in tableHeadColumns"
-                :key="tableHeadColumnIndex"
-              >
-                <tr>
-                  <template
-                    v-for="(column, columnIndex) in tableHeadColumn"
-                    :key="column"
-                  >
-                    <th
-                      v-if="tableColumnKeys.includes(column.key)"
-                      :colspan="column.colspan"
-                      :rowspan="column.rowspan"
-                      class="layui-table-cell"
-                      :class="[
-                        {
-                          'layui-table-fixed-left-last': column._isLastColumn,
-                          'layui-table-fixed-right-first':
-                            column._isFirstColumn,
-                        },
-                        // renderFixedClassName(
-                        //   column,
-                        //   columnIndex,
-                        //   tableHeadColumn
-                        // ),
-                        column.fixed ? `layui-table-fixed-${column.fixed}` : '',
-                        column.type == 'checkbox'
-                          ? 'layui-table-cell-checkbox'
-                          : '',
-                        column.type == 'radio' ? 'layui-table-cell-radio' : '',
-                        column.type == 'number'
-                          ? 'layui-table-cell-number'
-                          : '',
-                        {
-                          'layui-table-is-sort': !!column.sort,
-                        },
-                      ]"
-                      :style="[
-                        {
-                          textAlign: column.align,
-                          left: column._left && `${column._left}px`,
-                          right: column._right && `${column._right}px`,
-                        } as StyleValue,
-                        // renderHeadFixedStyle(
-                        //   column,
-                        //   columnIndex,
-                        //   tableHeadColumn,
-                        //   tableHeadColumnIndex,
-                        //   tableHeadColumns
-                        // ),
-                      ]"
-                      @click="thSort($event, column)"
-                    >
-                      <template v-if="column.type == 'checkbox'">
-                        <lay-checkbox
-                          v-model="hasChecked"
-                          :is-indeterminate="!allChecked"
-                          skin="primary"
-                          value="all"
-                          @change="changeAll"
-                        />
-                      </template>
-                      <template v-else>
-                        <span>
-                          <template v-if="column.titleSlot">
-                            <slot
-                              :name="column.titleSlot"
-                              :column="column"
-                              :columnIndex="columnIndex"
-                            ></slot>
-                          </template>
-                          <template v-else>
-                            {{ column.title }}
-                          </template>
-                        </span>
-                        <!-- 插槽 -->
-                        <span
-                          v-if="!!column.sort"
-                          class="layui-table-sort layui-inline"
-                          :lay-sort="
-                            initSort.field === column.key ? initSort.type : ''
-                          "
-                        >
-                          <i
-                            @click.stop="iconSort($event, column, 'asc')"
-                            class="layui-edge layui-table-sort-asc"
-                            title="升序"
-                          ></i>
-                          <i
-                            @click.stop="iconSort($event, column, 'desc')"
-                            class="layui-edge layui-table-sort-desc"
-                            title="降序"
-                          ></i>
-                        </span>
-                      </template>
-                      <!-- 列宽拖动区 -->
-                      <div
-                        v-if="props.resize || column.resize"
-                        class="lay-table-cols-resize"
-                        @mousedown.stop="
-                          startResize(
-                            $event,
-                            column,
-                            tableHeaderTable,
-                            tableBodyTable
-                          )
-                        "
-                        @click.stop
-                      ></div>
-                    </th>
-                  </template>
-                </tr>
-              </template>
-            </thead>
-          </table>
-        </div>
-      </div>
+      <TableHeader
+        :tableProps="props"
+        :lastLevelShowColumns="lastLevelShowColumns"
+        :hierarchicalColumns="hierarchicalColumns"
+        :tableBodyScrollWidth="tableBodyScrollWidth"
+      ></TableHeader>
 
       <!-- 表身 -->
       <div
         class="layui-table-body layui-table-main"
         :class="{ 'layui-table-body-loading': props.loading }"
-        ref="tableBody"
+        ref="tableBodyRef"
       >
         <table
           class="layui-table"
@@ -959,36 +296,27 @@ defineExpose({ getCheckData });
           :class="{ 'layui-table-even': props.even }"
           :lay-size="size"
           :lay-skin="skin"
-          ref="tableBodyTable"
+          ref="tableBodyTableRef"
         >
           <colgroup>
-            <template
-              v-for="(column, columnIndex) in tableBodyColumns"
-              :key="columnIndex"
-            >
-              <template v-if="tableColumnKeys.includes(column.key)">
-                <col
-                  :width="column.width"
-                  :style="{
-                    minWidth: column.minWidth ? column.minWidth : '50px',
-                  }"
-                />
-              </template>
-            </template>
+            <col
+              v-for="column in lastLevelShowColumns"
+              :key="column.key"
+              :width="column.width"
+              :style="{ minWidth: column.minWidth }"
+            />
           </colgroup>
           <tbody>
             <!-- 渲染 -->
-            <template v-for="(children, index) in tableDataSource" :key="index">
-              <table-data
+            <template v-for="(children, index) in dataSource" :key="index">
+              <TableMain
                 :id="id"
                 :index="index"
                 :data="children"
                 :page="page"
-                :columns="tableBodyColumns"
-                :columnSlotNames="columnSlotNames"
+                :columns="lastLevelShowColumns"
                 :indent-size="indentSize"
                 :currentIndentSize="currentIndentSize"
-                :tableColumnKeys="tableColumnKeys"
                 :expandSpace="childrenExpandSpace"
                 :expandIndex="expandIndex"
                 :cellStyle="cellStyle"
@@ -1000,51 +328,13 @@ defineExpose({ getCheckData });
                 :getCheckboxProps="getCheckboxProps"
                 :getRadioProps="getRadioProps"
                 :childrenColumnName="childrenColumnName"
-                v-model:expandKeys="tableExpandKeys"
-                v-model:selectedKeys="tableSelectedKeys"
-                v-model:selectedKey="tableSelectedKey"
-                @row="rowClick"
-                @row-double="rowDoubleClick"
-                @row-contextmenu="rowContextmenu"
-                @cell-double="cellDoubleClick"
-                @expand-change="rowExpand"
               >
-                <template
-                  v-for="name in columnSlotNames"
-                  #[name]="slotProp: {
-                    data: any,
-                    column: any,
-                    row: any,
-                    rowIndex: number,
-                    columnIndex: number,
-                  }"
-                >
-                  <slot
-                    :name="name"
-                    :row="slotProp.data"
-                    :data="slotProp.data"
-                    :column="slotProp.column"
-                    :rowIndex="slotProp.rowIndex"
-                    :columnIndex="slotProp.columnIndex"
-                  >
-                  </slot>
-                </template>
-                <template
-                  v-if="slot.expand"
-                  #expand="slotProp: { data: any, row: any }"
-                >
-                  <slot
-                    name="expand"
-                    :data="slotProp.data"
-                    :row="slotProp.row"
-                  ></slot>
-                </template>
-              </table-data>
+              </TableMain>
             </template>
           </tbody>
         </table>
 
-        <template v-if="tableDataSource.length == 0 && loading == false">
+        <template v-if="dataSource.length == 0 && loading == false">
           <slot name="empty">
             <lay-empty :description="emptyDescription"></lay-empty>
           </slot>
@@ -1060,77 +350,20 @@ defineExpose({ getCheckData });
         </template>
       </div>
 
-      <template v-if="hasTotalRow">
-        <div class="table-total-wrapper" :style="totalWrapperStyles">
-          <div class="table-total-wrapper-main" ref="tableTotal">
-            <table class="layui-table">
-              <colgroup>
-                <template
-                  v-for="(column, columnIndex) in tableBodyColumns"
-                  :key="columnIndex"
-                >
-                  <template v-if="tableColumnKeys.includes(column.key)">
-                    <col
-                      :width="column.width"
-                      :style="{
-                        minWidth: column.minWidth ? column.minWidth : '50px',
-                      }"
-                    />
-                  </template>
-                </template>
-              </colgroup>
-              <tbody>
-                <tr class="layui-table-total">
-                  <template
-                    v-for="(column, columnIndex) in tableBodyColumns"
-                    :key="columnIndex"
-                  >
-                    <template v-if="tableColumnKeys.includes(column.key)">
-                      <td
-                        :style="[
-                          {
-                            textAlign: column.align,
-                            whiteSpace: column.ellipsisTooltip
-                              ? 'nowrap'
-                              : 'normal',
-                          },
-                          renderFixedStyle(
-                            column,
-                            columnIndex,
-                            tableBodyColumns
-                          ),
-                        ]"
-                        :class="[
-                          'layui-table-cell',
-                          renderFixedClassName(
-                            column,
-                            columnIndex,
-                            tableBodyColumns
-                          ),
-                          column.fixed
-                            ? `layui-table-fixed-${column.fixed}`
-                            : '',
-                        ]"
-                        v-html="renderTotalRowCell(column)"
-                      ></td>
-                    </template>
-                  </template>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </template>
-      <div class="layui-table-footer" v-if="slot.footer">
+      <TableTotal
+        v-if="hasTotalRow"
+        :columns="lastLevelShowColumns"
+        :dataSource="dataSource"
+        :tableBodyScrollWidth="tableBodyScrollWidth"
+      ></TableTotal>
+
+      <div class="layui-table-footer" v-if="slots.footer">
         <slot name="footer"></slot>
       </div>
     </div>
-    <div
-      v-if="page && page.total > 0"
-      class="layui-table-page"
-      :style="tablePageStyles"
-    >
-      <table-page
+
+    <div v-if="page && page.total > 0" class="layui-table-page">
+      <TablePage
         :total="page.total"
         :pages="page.pages"
         :theme="page.theme"
@@ -1141,9 +374,8 @@ defineExpose({ getCheckData });
         :hide-on-single-page="page.hideOnSinglePage"
         v-model:current="page.current"
         v-model:limit="page.limit"
-        @change="change"
       >
-      </table-page>
+      </TablePage>
     </div>
   </div>
 </template>

@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import type { TableToolBarType } from "./types";
-import { useToolBar } from "../hooks/useToolbar";
-import LayIcon from "../../icon";
-import LayDropdown from "../../dropdown/index.vue";
+import type { TableColumn } from "../typing";
 
-import { isValueArray } from "../../../utils";
+import { useToolBar } from "../hooks/useToolbar";
+import LayIcon from "@layui/component/component/icon";
+import LayDropdown from "@layui/component/component/dropdown/index.vue";
+
+import { isValueArray } from "@layui/component/utils";
 
 defineOptions({
   name: "LayTableToolBar",
@@ -12,14 +14,11 @@ defineOptions({
 
 const props = defineProps<TableToolBarType>();
 
-const {
-  t,
-  showToolbar,
-  toolbarStyle,
-  exportData,
-  print,
-  handleToolbarFilterCheck,
-} = useToolBar(props);
+const { t, showToolbar, toolbarStyle, exportData, print } = useToolBar(props);
+
+function handleCheckChange(column: TableColumn) {
+  column.hide = !column.hide;
+}
 </script>
 
 <template>
@@ -43,13 +42,13 @@ const {
         <template #content>
           <div class="layui-table-tool-checkbox">
             <LayCheckbox
-              v-for="column in tableHeadColumns[0]"
-              :modelValue="tableColumnKeys"
+              v-for="(column, index) in hierarchicalColumns[0]"
+              :modelValue="!column.hide"
               skin="primary"
               :disabled="isValueArray(column.children)"
-              :key="column.key"
-              :value="column.key"
-              @change="(value: string[]) => handleToolbarFilterCheck(value, column)"
+              :key="index"
+              :value="index as number"
+              @change="() => handleCheckChange(column)"
               >{{ column.title }}</LayCheckbox
             >
           </div>

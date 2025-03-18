@@ -77,7 +77,8 @@
   border-bottom: 1px solid #eee;
 }
 
-.layui-table-footer {
+.layui-table-box .layui-table-footer {
+  border-width: 1px 0 0 0;
   min-height: 50px;
   line-height: 30px;
   background-color: #fafafa;
@@ -110,6 +111,7 @@
 .layui-table-tool,
 .layui-table-total,
 .layui-table-view,
+.layui-table-footer,
 .layui-table[lay-skin="line"],
 .layui-table[lay-skin="row"] {
   border-width: 1px;
@@ -606,7 +608,7 @@
 .layui-table-page {
   position: relative;
   width: 100%;
-  border-width: 0 0 0;
+  // border-width: 0 0 0;
   flex-shrink: 0;
   padding: 7px 7px 0;
   height: 41px;

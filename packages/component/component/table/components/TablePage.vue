@@ -1,7 +1,8 @@
 <script lang="ts" setup>
 import { LayIcon } from "@layui/icons-vue";
-import LayPage from "../page/index.vue";
-import { computed, WritableComputedRef } from "vue";
+import LayPage from "@layui/component/component/page/index.vue";
+import { type WritableComputedRef, computed, inject } from "vue";
+import { LAY_TABLE_CONTEXT } from "../constant";
 
 export type LayoutKey =
   | "count"
@@ -27,14 +28,16 @@ export interface TablePageProps {
 }
 
 defineOptions({
-  name: "TablePage",
+  name: "LayTablePage",
 });
+
+const { tableEmits } = inject(LAY_TABLE_CONTEXT)!;
 
 const props = withDefaults(defineProps<TablePageProps>(), {
   layout: () => ["prev", "page", "next", "limits", "skip"],
 });
 
-const emit = defineEmits(["update:current", "update:limit", "change"]);
+const emit = defineEmits(["update:current", "update:limit"]);
 
 const current: WritableComputedRef<number> = computed({
   get() {
@@ -55,7 +58,7 @@ const limit: WritableComputedRef<number> = computed({
 });
 
 const change = (pageData: any) => {
-  emit("change", pageData);
+  tableEmits("change", pageData);
 };
 </script>
 

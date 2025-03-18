@@ -1,6 +1,6 @@
-import { Recordable } from "../../../types";
-import { TableColumn } from "../typing";
-import { Ref, watchEffect, ComputedRef } from "vue";
+import { type Recordable } from "../../../types";
+import { type TableColumn } from "../typing";
+import { type Ref, watchEffect } from "vue";
 
 /**
  * 列自动设置宽度
@@ -12,21 +12,21 @@ import { Ref, watchEffect, ComputedRef } from "vue";
  * @param columns 表格列
  * @param dataSource 表格数据
  */
-export default function useAutoColsWidth(
-  columns: ComputedRef<Recordable[]>,
-  dataSource: Ref<any[]>
+export function useAutoColsWidth(
+  columns: Recordable[],
+  dataSource: any[]
 ): void {
   watchEffect(() => {
     // 如果 columns 或 dataSource 为空，停止计算
-    if (columns.value.length === 0 || dataSource.value.length === 0) return;
+    if (columns.length === 0 || dataSource.length === 0) return;
 
     // 标记列配置：不处理带有width、不处理没有key、对有children递归
     const colsMap: Map<string, TableColumn> = new Map();
-    handleCols(columns.value, colsMap); // 时间复杂度 n
+    handleCols(columns, colsMap); // 时间复杂度 n
 
     // 基于编辑列配置colsMap，记录数据最长的字段
     const longestMap: Map<string, string> = new Map();
-    handleLongest(dataSource.value, longestMap, colsMap); // 最大时间复杂度 100n
+    handleLongest(dataSource, longestMap, colsMap); // 最大时间复杂度 100n
 
     // 单元格内距
     const padding = 16;

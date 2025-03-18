@@ -1,11 +1,10 @@
-import type { TableProps, WithTableColumn } from "../typing";
+import type { TableProps, TableColumn } from "../typing";
 
 export interface TableToolBarType {
   defaultToolbar: TableProps["defaultToolbar"];
   spanMethod: TableProps["spanMethod"];
-  tableHeadColumns: Array<Array<WithTableColumn>>;
-  tableBodyColumns: Array<WithTableColumn>;
+  hierarchicalColumns: Array<Array<TableColumn>>;
+  lastLevelAllColumns: Array<TableColumn>;
   tableDataSource: any;
-  tableColumnKeys: any;
-  tableRef: HTMLDivElement | undefined;
+  tableRef: HTMLDivElement | null;
 }

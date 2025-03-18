@@ -40,18 +40,18 @@ const removeMouseup = () => {
 export const startResize = (
   e: MouseEvent,
   column: TableColumn,
-  tableHeaderTable: any,
-  tableBodyTable: any
+  tableHeaderTableRef: any,
+  tableBodyTableRef: any
 ) => {
   document.addEventListener("mousemove", resizing);
   document.addEventListener("mouseup", removeMouseup);
 
-  targetElem = tableHeaderTable;
-  targetElemBody = tableBodyTable;
+  targetElem = tableHeaderTableRef;
+  targetElemBody = tableBodyTableRef;
   stashColumn = column;
   startX = e.clientX;
   const colWidthArr: any[] = [];
-  tableHeaderTable.firstChild.childNodes.forEach((item: any) => {
+  tableHeaderTableRef.firstChild.childNodes.forEach((item: any) => {
     if (item.clientWidth) {
       colWidthArr.push(item.clientWidth);
     }

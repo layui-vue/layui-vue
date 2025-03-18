@@ -1,4 +1,5 @@
-import type { Recordable } from "../../types";
+import type { Recordable, CommonAlign } from "@layui/component/types";
+import type { PageProps } from "@layui/component/component/page/interface";
 
 export interface TableProps {
   id?: string;
@@ -6,10 +7,10 @@ export interface TableProps {
   columns: TableColumn[];
   skin?: string;
   size?: string;
-  page?: Recordable;
+  page?: PageProps;
   defaultToolbar?: boolean | any[];
-  selectedKey?: string;
-  selectedKeys?: string[];
+  selectedKey?: string | number;
+  selectedKeys?: (string | number)[];
   indentSize?: number;
   childrenColumnName?: string;
   height?: number | string;
@@ -22,7 +23,7 @@ export interface TableProps {
   cellStyle?: string | Function;
   spanMethod?: Function;
   defaultExpandAll?: boolean;
-  expandKeys?: string[];
+  expandKeys?: (string | number)[];
   loading?: boolean;
   getCheckboxProps?: Function;
   getRadioProps?: Function;
@@ -31,6 +32,11 @@ export interface TableProps {
   emptyDescription?: string;
   initSort?: initSort;
 }
+
+type OptionalKeys = "skin" | "page" | "height" | "emptyDescription";
+
+export type RequiredTableProps = Required<Omit<TableProps, OptionalKeys>> &
+  Partial<Pick<TableProps, OptionalKeys>>;
 
 export interface initSort {
   field: string;
@@ -41,7 +47,7 @@ export const sortType = ["", "asc", "desc"] as const;
 
 export type SortType = (typeof sortType)[number];
 
-export const TableEmit = [
+export const tableEmits = [
   "change",
   "sort-change",
   "update:expandKeys",
@@ -54,6 +60,8 @@ export const TableEmit = [
   "expand-change",
 ];
 
+export type TableEmit = (event: string, ...args: any[]) => void;
+
 export interface TableColumn {
   title: string;
   key: string;
@@ -62,7 +70,7 @@ export interface TableColumn {
   minWidth?: string;
   sort?: string;
   titleSlot?: string;
-  align?: string;
+  align?: CommonAlign;
   ellipsisTooltip?: boolean;
   ellipsisTooltipTheme?: boolean;
   fixed?: "left" | "right";
@@ -73,18 +81,27 @@ export interface TableColumn {
   hide?: boolean;
   ignoreExport?: boolean;
   totalRow?: boolean | string | number;
-  totalRowMethod: () => void;
+  totalRowMethod: (
+    column: TableColumn,
+    dataSource: TableProps["dataSource"]
+  ) => void;
 }
 
-export interface WithTableColumn extends TableColumn {
-  children?: WithTableColumn[];
-  _left?: number;
-  _right?: number;
+export interface TableColumn extends TableColumn {
+  children?: TableColumn[];
+
   colspan?: number;
   rowspan?: number;
-  _isLastColumn?: boolean; // last fixed left
-  _isFirstColumn?: boolean; // first fixed right
+  _left?: number;
+  _right?: number;
+  _isLastFixedRightColumn?: boolean; // last fixed left
+  _isFirstFixedLeftColumn?: boolean; // first fixed right
   _currentTotalWidth?: number;
+  _parent?: Omit<TableColumn, "children">;
 }
 
-export type FixedDirectionType = "_isLastColumn" | "_isFirstColumn";
+export type FixedDirectionType =
+  | "_isLastFixedRightColumn"
+  | "_isFirstFixedLeftColumn";
+
+export type ColumnWeakMap = WeakMap<TableColumn, TableColumn[]>;
