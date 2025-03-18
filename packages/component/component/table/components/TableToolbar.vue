@@ -5,6 +5,7 @@ import type { TableColumn } from "../typing";
 import { useToolBar } from "../hooks/useToolbar";
 import LayIcon from "@layui/component/component/icon";
 import LayDropdown from "@layui/component/component/dropdown/index.vue";
+import LayCheckboxV2 from "@layui/component/component/checkboxV2/index.vue";
 
 import { isValueArray } from "@layui/component/utils";
 
@@ -41,7 +42,7 @@ function handleCheckChange(column: TableColumn) {
         </div>
         <template #content>
           <div class="layui-table-tool-checkbox">
-            <LayCheckbox
+            <LayCheckboxV2
               v-for="(column, index) in hierarchicalColumns[0]"
               :modelValue="!column.hide"
               skin="primary"
@@ -49,7 +50,7 @@ function handleCheckChange(column: TableColumn) {
               :key="index"
               :value="index as number"
               @change="() => handleCheckChange(column)"
-              >{{ column.title }}</LayCheckbox
+              >{{ column.title }}</LayCheckboxV2
             >
           </div>
         </template>

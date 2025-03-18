@@ -1,7 +1,7 @@
 import { type RequiredTableProps, type TableEmit } from "../typing";
 import { ref, reactive, toRaw, watch, computed } from "vue";
 
-import { loopForEach } from "@layui/component/utils";
+import { isValueArray, loopForEach } from "@layui/component/utils";
 
 export function useTableSelected(props: RequiredTableProps, emit: TableEmit) {
   /**
@@ -39,6 +39,9 @@ export function useTableSelected(props: RequiredTableProps, emit: TableEmit) {
     const getKeys = (dataList: RequiredTableProps["dataSource"]) => {
       dataList.forEach((data) => {
         keys.push(data[props.id!] as number | string);
+        if (isValueArray(data[props.childrenColumnName])) {
+          getKeys(data[props.childrenColumnName]);
+        }
       });
     };
 

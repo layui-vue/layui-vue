@@ -5,7 +5,7 @@ import type {
   RequiredTableProps,
   ColumnWeakMap,
 } from "../typing";
-import { ref, watch } from "vue";
+import { reactive, isReactive, ref, watch } from "vue";
 
 import { useTableColumns } from "./useTableColumns";
 import { useTableSelected } from "./useTableSelected";
@@ -56,18 +56,20 @@ export function useTable(props: RequiredTableProps, emit: TableEmit) {
   watch(
     () => props.columns,
     (newValue) => {
-      props.autoColsWidth && useAutoColsWidth(newValue, props.dataSource);
+      const _newValue = isReactive(newValue) ? newValue : reactive(newValue);
 
-      setColumnMap(newValue, []);
+      props.autoColsWidth && useAutoColsWidth(_newValue, props.dataSource);
+
+      setColumnMap(_newValue, []);
       // console.log(columnMap, "column");
 
       hierarchicalColumns.value = [];
       lastLevelAllColumns.value = [];
       lastLevelShowColumns.value = [];
 
-      loopForEach(newValue, [getLastLevelColumns, checkHasTotal]);
+      loopForEach(_newValue, [getLastLevelColumns, checkHasTotal]);
 
-      getHierarchicalColumns(newValue);
+      getHierarchicalColumns(_newValue);
     },
     {
       immediate: true,

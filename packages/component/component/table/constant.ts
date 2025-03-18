@@ -20,7 +20,6 @@ interface LayTableContextType {
 
   tableRef: ShallowRef<HTMLDivElement | null>;
   tableBodyTableRef: ShallowRef<HTMLElement | null>;
-  tableHeaderRef: ShallowRef<HTMLDivElement | null>;
   tableHeaderTableRef: ShallowRef<HTMLElement | null>;
   tableTotalRef: ShallowRef<HTMLElement | null>;
 

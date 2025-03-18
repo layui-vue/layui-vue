@@ -20,7 +20,6 @@ const {
   // tableDataSource,
   tableRef,
   tableBodyTableRef,
-  tableHeaderRef,
   tableHeaderTableRef,
 
   columnsState,
@@ -30,7 +29,8 @@ const {
   commonGetStylees,
 } = inject(LAY_TABLE_CONTEXT)!;
 
-const props = defineProps<{
+defineProps<{
+  tableHeaderRef: HTMLDivElement | null;
   tableProps: TableProps;
   lastLevelShowColumns: TableColumn[];
   hierarchicalColumns: TableColumn[][];

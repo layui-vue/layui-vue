@@ -1,27 +1,7 @@
-import { computed, watch } from "vue";
-import type {
-  RequiredTableProps,
-  TableColumn,
-  FixedDirectionType,
-  ColumnWeakMap,
-} from "../typing";
+import type { TableColumn, ColumnWeakMap } from "../typing";
+import { computed, toRaw, watch } from "vue";
 
-import {
-  isValueArray,
-  normalizeArray,
-  loopForEach,
-  isEqual,
-} from "@layui/component/utils";
-
-type GetChildrenTotalWidthOptions<T> = {
-  parentColumn: T | undefined;
-  paramsName: "_left" | "_right";
-};
-
-export type ForEachColumnsCallbackCbFn = (
-  column: TableColumn,
-  columns: Array<TableColumn>
-) => void;
+import { isValueArray, loopForEach, isEqual } from "@layui/component/utils";
 
 export function useTableColumns(
   columns: Array<TableColumn>,
@@ -37,8 +17,6 @@ export function useTableColumns(
       deep: true,
     }
   );
-  /** run fn start */
-  /** run fn end */
 
   /**
    * 设置默认宽度

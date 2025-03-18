@@ -81,23 +81,10 @@ export interface TableColumn {
   hide?: boolean;
   ignoreExport?: boolean;
   totalRow?: boolean | string | number;
-  totalRowMethod: (
+  totalRowMethod?: (
     column: TableColumn,
     dataSource: TableProps["dataSource"]
   ) => void;
-}
-
-export interface TableColumn extends TableColumn {
-  children?: TableColumn[];
-
-  colspan?: number;
-  rowspan?: number;
-  _left?: number;
-  _right?: number;
-  _isLastFixedRightColumn?: boolean; // last fixed left
-  _isFirstFixedLeftColumn?: boolean; // first fixed right
-  _currentTotalWidth?: number;
-  _parent?: Omit<TableColumn, "children">;
 }
 
 export type FixedDirectionType =

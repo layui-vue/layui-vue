@@ -183,7 +183,8 @@ function getFixedColumn() {
   const tableBodyClientWidth = tableBodyRef.value?.clientWidth || 0;
   const tableBodyOffsetWidth = tableBodyRef.value?.offsetWidth || 0;
 
-  tableHeaderRef.value!.scrollLeft = tableBodyScrollLeft;
+  tableHeaderRef.value &&
+    (tableHeaderRef.value.scrollLeft = tableBodyScrollLeft);
 
   if (tableTotalRef.value) {
     tableTotalRef.value.scrollLeft = tableBodyScrollLeft;
@@ -246,7 +247,6 @@ provide(LAY_TABLE_CONTEXT, {
 
   tableRef,
   tableBodyTableRef,
-  tableHeaderRef,
   tableHeaderTableRef,
   tableTotalRef,
 
@@ -279,6 +279,7 @@ provide(LAY_TABLE_CONTEXT, {
       <!-- 表头 -->
       <TableHeader
         :tableProps="props"
+        :tableHeaderRef="tableHeaderRef"
         :lastLevelShowColumns="lastLevelShowColumns"
         :hierarchicalColumns="hierarchicalColumns"
         :tableBodyScrollWidth="tableBodyScrollWidth"
