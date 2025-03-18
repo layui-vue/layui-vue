@@ -1,8 +1,9 @@
-import { mount } from "@vue/test-utils";
+import { type VueWrapper, mount } from "@vue/test-utils";
 import LayTable from "../index.vue";
+import LayCheckboxV2 from "@layui/component/component/checkboxV2/index.vue";
 
 import { describe, expect, test, vi } from "vitest";
-import { nextTick, ref } from "vue";
+import { nextTick, reactive, ref } from "vue";
 import { sleep } from "../../../test-utils";
 
 describe("LayTable", () => {
@@ -218,5 +219,156 @@ describe("LayTable", () => {
     const trDom2 = wrapper.findAll(".layui-table-body .layui-table tr");
     const tDDom2 = trDom2[0].findAll("td");
     expect(tDDom2[0].text()).toBe("张三3");
+  });
+
+  test("tree形 全选 childrenColumnName", async () => {
+    const columns = [
+      {
+        fixed: "left" as const,
+        type: "checkbox",
+        title: "复选",
+        key: "checkbox",
+      },
+      {
+        title: "编号",
+        width: "100px",
+        key: "id",
+      },
+    ];
+
+    const dataSource = ref([
+      {
+        id: "1",
+        name: "张三1",
+        children1: [
+          {
+            id: "2",
+            name: "张三2",
+          },
+        ],
+      },
+    ]);
+
+    const selectedKeys = ref([]);
+
+    const wrapper = mount({
+      setup() {
+        return () => (
+          <LayTable
+            columns={columns}
+            dataSource={dataSource.value}
+            v-model:selectedKeys={selectedKeys.value}
+            childrenColumnName="children1"
+          ></LayTable>
+        );
+      },
+    });
+
+    await nextTick();
+
+    const allCheckbox = wrapper.find(
+      ".layui-table-header .layui-table-cell-checkbox .layui-checkbox"
+    );
+
+    allCheckbox.trigger("click");
+
+    await nextTick();
+
+    expect(selectedKeys.value).toEqual(["1", "2"]);
+  });
+
+  test("分页切换 selectedKeys的数据保留、并且全选状态正确", async () => {
+    const columns = [
+      {
+        fixed: "left" as const,
+        type: "checkbox",
+        title: "复选",
+        key: "checkbox",
+      },
+      {
+        title: "编号",
+        width: "100px",
+        key: "id",
+      },
+    ];
+
+    const dataSource = ref([
+      {
+        id: "1",
+      },
+      {
+        id: "2",
+      },
+    ]);
+
+    const selectedKeys = ref(["1"]);
+
+    const handleChange = (page: any) => {
+      if (page.current === 1) {
+        dataSource.value = [
+          {
+            id: "1",
+          },
+          {
+            id: "2",
+          },
+        ];
+      }
+      if (page.current === 2) {
+        dataSource.value = [
+          {
+            id: "3",
+          },
+          {
+            id: "4",
+          },
+        ];
+      }
+    };
+
+    const wrapper = mount({
+      setup() {
+        return () => (
+          <LayTable
+            page={{ current: 1, limit: 10, total: 100 }}
+            columns={columns}
+            dataSource={dataSource.value}
+            v-model:selectedKeys={selectedKeys.value}
+            onChange={handleChange}
+          ></LayTable>
+        );
+      },
+    });
+
+    const allCheckbox = wrapper.findComponent(
+      ".layui-table-header .layui-table-cell-checkbox .layui-checkbox"
+    ) as VueWrapper<typeof LayCheckboxV2>;
+
+    expect(allCheckbox.vm.isIndeterminate).toBeTruthy();
+    expect(allCheckbox.vm.modelValue).toBeFalsy();
+
+    await allCheckbox.trigger("click");
+
+    expect(selectedKeys.value).toEqual(["1", "2"]);
+    expect(allCheckbox.vm.modelValue).toBeTruthy();
+
+    const nextPage = wrapper.find(".layui-table-page .layui-page-next");
+    await nextPage.trigger("click");
+
+    await nextTick();
+
+    expect(allCheckbox.vm.isIndeterminate).toBeFalsy();
+    expect(allCheckbox.vm.modelValue).toBeFalsy();
+
+    await allCheckbox.trigger("click");
+
+    expect(selectedKeys.value).toEqual(["1", "2", "3", "4"]);
+
+    const prePage = wrapper.find(".layui-table-page .layui-page-prev");
+
+    await prePage.trigger("click");
+
+    expect(allCheckbox.vm.isIndeterminate).toBeTruthy();
+    expect(allCheckbox.vm.modelValue).toBeTruthy();
   });
 });

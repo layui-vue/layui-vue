@@ -7,7 +7,7 @@ export interface TableProps {
   columns: TableColumn[];
   skin?: string;
   size?: string;
-  page?: PageProps;
+  page?: TablePageProps;
   defaultToolbar?: boolean | any[];
   selectedKey?: string | number;
   selectedKeys?: (string | number)[];
@@ -92,3 +92,8 @@ export type FixedDirectionType =
   | "_isFirstFixedLeftColumn";
 
 export type ColumnWeakMap = WeakMap<TableColumn, TableColumn[]>;
+
+export type TablePageProps = Omit<PageProps, "simple" | "modelValue"> & {
+  current: number;
+  limit: number;
+};

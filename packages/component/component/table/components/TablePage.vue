@@ -1,31 +1,11 @@
 <script lang="ts" setup>
+import { type WritableComputedRef, computed, inject } from "vue";
+import { type TablePageProps as _TablePageProps } from "../typing";
 import { LayIcon } from "@layui/icons-vue";
 import LayPage from "@layui/component/component/page/index.vue";
-import { type WritableComputedRef, computed, inject } from "vue";
 import { LAY_TABLE_CONTEXT } from "../constant";
 
-export type LayoutKey =
-  | "count"
-  | "prev"
-  | "page"
-  | "limits"
-  | "next"
-  | "limits"
-  | "refresh"
-  | "skip";
-
-export interface TablePageProps {
-  current: number;
-  layout?: LayoutKey[];
-  total: number;
-  limit: number;
-  limits?: number[];
-  pages?: number;
-  theme?: string;
-  disabled?: boolean;
-  hideOnSinglePage?: boolean;
-  ellipsisTooltip?: boolean;
-}
+export type TablePageProps = _TablePageProps;
 
 defineOptions({
   name: "LayTablePage",

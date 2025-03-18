@@ -3,8 +3,6 @@ import "./index.less";
 import type { TableProps as _TableProps, RequiredTableProps } from "./typing";
 
 import {
-  type StyleValue,
-  type WritableComputedRef,
   ref,
   watch,
   useSlots,
@@ -26,8 +24,6 @@ import TableTotal from "./components/TableTotal.vue";
 
 import { useTable } from "./hooks/useTable";
 import { tableEmits } from "./typing";
-import { startResize } from "./hooks/useResize";
-import { isValueArray } from "../../utils";
 import { LAY_TABLE_CONTEXT } from "./constant";
 
 export type TableProps = _TableProps;

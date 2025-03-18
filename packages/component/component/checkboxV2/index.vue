@@ -124,7 +124,7 @@ defineExpose({ toggle: handleClick });
       class="layui-form-checkbox"
       :class="{
         'layui-form-checked': isChecked,
-        'layui-checkbox-indeterminate': props.isIndeterminate,
+        'layui-checkbox-indeterminate': !isChecked && props.isIndeterminate,
         'layui-checkbox-disabled layui-disabled': isDisabled,
       }"
       :lay-skin="skin"
