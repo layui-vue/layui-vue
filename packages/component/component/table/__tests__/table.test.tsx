@@ -371,4 +371,74 @@ describe("LayTable", () => {
     expect(allCheckbox.vm.isIndeterminate).toBeTruthy();
     expect(allCheckbox.vm.modelValue).toBeTruthy();
   });
+
+  test("emit checkbox and checkbox-all", async () => {
+    const columns = [
+      {
+        fixed: "left" as const,
+        type: "checkbox",
+        title: "复选",
+        key: "checkbox",
+      },
+      {
+        title: "编号",
+        width: "100px",
+        key: "id",
+      },
+    ];
+
+    const dataSource = ref([
+      {
+        id: "1",
+      },
+      {
+        id: "2",
+      },
+    ]);
+
+    const wrapper = mount({
+      setup() {
+        return () => (
+          <LayTable columns={columns} dataSource={dataSource.value}></LayTable>
+        );
+      },
+    });
+
+    const tableInstance = wrapper.findComponent(LayTable);
+
+    const allCheckbox = wrapper.findComponent(
+      ".layui-table-header .layui-table-cell-checkbox .layui-checkbox"
+    ) as VueWrapper<typeof LayCheckboxV2>;
+
+    const signCheckbox = wrapper
+      .findAll(".layui-table-body .layui-table-cell-checkbox")[0]
+      .findComponent(".layui-checkbox") as VueWrapper<typeof LayCheckboxV2>;
+
+    await signCheckbox.trigger("click");
+
+    await nextTick();
+
+    expect(tableInstance.emitted()).toHaveProperty("checkbox");
+    expect(tableInstance.emitted().checkbox[0][0]).toBeTruthy();
+    expect(tableInstance.emitted().checkbox[0][1]).toEqual(dataSource.value[0]);
+
+    await signCheckbox.trigger("click");
+    await nextTick();
+
+    expect(tableInstance.emitted()).toHaveProperty("checkbox");
+    expect(tableInstance.emitted().checkbox[1][0]).toBeFalsy();
+    expect(tableInstance.emitted().checkbox[1][1]).toEqual(dataSource.value[0]);
+
+    await allCheckbox.trigger("click");
+
+    expect(tableInstance.emitted()).toHaveProperty("checkbox-all");
+    expect(tableInstance.emitted()["checkbox-all"][0][0]).toEqual(
+      dataSource.value.map((item) => item.id)
+    );
+
+    await allCheckbox.trigger("click");
+
+    expect(tableInstance.emitted()).toHaveProperty("checkbox-all");
+    expect(tableInstance.emitted()["checkbox-all"][1][0]).toEqual([]);
+  });
 });

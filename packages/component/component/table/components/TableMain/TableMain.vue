@@ -136,7 +136,7 @@ const checkboxProps = computed(() => {
           <LayCheckboxV2
             v-if="column.type === 'checkbox'"
             :modelValue="selectedState.tableMSelectedKeys.includes(data[id])"
-            @change="(value: boolean) => selectedState.toggleMSelected(data[id], value)"
+            @change="(value: boolean) => selectedState.toggleMSelected(data, value)"
             v-bind="checkboxProps"
             :value="data[id]"
             skin="primary"

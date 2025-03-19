@@ -58,6 +58,8 @@ export const tableEmits = [
   "row",
   "cell-double",
   "expand-change",
+  "checkbox",
+  "checkbox-all",
 ];
 
 export type TableEmit = (event: string, ...args: any[]) => void;

@@ -880,7 +880,9 @@ const defaultExpandAll2 = ref(false)
 | cell-double     | 单元格双击 | data:当前单元格信息, event             |
 | change          | 分页事件   | { current: 当前页码, limit: 每页数量 } |
 | sort-change     | 排序事件   | sort: string                           |
-| expand-change  `2.18.0`   | 行展开/收起   | data:当前单元格信息, event                     |
+| expand-change  `2.18.0`   | 行展开/收起   | data:当前单元格信息, event        |
+| checkbox  `2.22.0`   |  单行 checkbox 事件   | state: 是否选中, data: 点击行数据源  |
+| checkbox-all  `2.22.0`   | 全选 checkbox 事件   | selectedKeys: 选中数据        |
 
 :::
 

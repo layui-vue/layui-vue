@@ -105,20 +105,24 @@ export function useTableSelected(props: RequiredTableProps, emit: TableEmit) {
         ...tableMSelectedKeys.filter((key) => !allKeys.value.includes(key))
       );
     }
+
+    emit("checkbox-all", value ? allKeys.value : []);
   }
 
   /**
    * 切换单个选中状态
    */
   function toggleMSelected(
-    key: NonNullable<RequiredTableProps["selectedKey"]>,
+    data: RequiredTableProps["dataSource"][number],
     state: boolean
   ) {
     if (state) {
-      tableMSelectedKeys.push(key);
+      tableMSelectedKeys.push(data[props.id]);
     } else {
-      tableMSelectedKeys.splice(tableMSelectedKeys.indexOf(key), 1);
+      tableMSelectedKeys.splice(tableMSelectedKeys.indexOf(data[props.id]), 1);
     }
+
+    emit("checkbox", state, toRaw(data));
   }
 
   function getAllSelectedDataSource(): RequiredTableProps["dataSource"] {
