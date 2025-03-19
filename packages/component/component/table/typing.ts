@@ -8,7 +8,7 @@ export interface TableProps {
   skin?: string;
   size?: string;
   page?: TablePageProps;
-  defaultToolbar?: boolean | any[];
+  defaultToolbar?: boolean | TableDefaultToolbar[];
   selectedKey?: string | number;
   selectedKeys?: (string | number)[];
   indentSize?: number;
@@ -99,3 +99,15 @@ export type TablePageProps = Omit<PageProps, "simple" | "modelValue"> & {
   current: number;
   limit: number;
 };
+
+export type TableDefaultToolbar =
+  | "filter"
+  | "export"
+  | "print"
+  | TableDefaultToolbarComplex;
+
+export interface TableDefaultToolbarComplex {
+  title: string;
+  icon: string;
+  onClick?: () => void;
+}

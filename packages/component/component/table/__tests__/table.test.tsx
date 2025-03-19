@@ -441,4 +441,65 @@ describe("LayTable", () => {
     expect(tableInstance.emitted()).toHaveProperty("checkbox-all");
     expect(tableInstance.emitted()["checkbox-all"][1][0]).toEqual([]);
   });
+
+  test("default-toolbar 拓展其他icon", async () => {
+    const columns = [
+      {
+        fixed: "left" as const,
+        type: "checkbox",
+        title: "复选",
+        key: "checkbox",
+      },
+      {
+        title: "编号",
+        width: "100px",
+        key: "id",
+      },
+    ];
+
+    const dataSource = ref([
+      {
+        id: "1",
+      },
+      {
+        id: "2",
+      },
+    ]);
+
+    let value = 1;
+
+    const defaultToolbars = [
+      "filter" as const,
+      {
+        icon: "layui-icon-refresh",
+        title: "刷新",
+        onClick: () => {
+          value++;
+        },
+      },
+      "print" as const,
+    ];
+
+    const wrapper = mount({
+      setup() {
+        return () => (
+          <LayTable
+            columns={columns}
+            dataSource={dataSource.value}
+            defaultToolbar={defaultToolbars}
+          ></LayTable>
+        );
+      },
+    });
+    const iconBoxs = wrapper.findAll(
+      ".layui-table-view .layui-table-tool-self .layui-inline"
+    );
+
+    expect(iconBoxs.length).toBe(3);
+    expect(iconBoxs[1].attributes().title).toBe("刷新");
+
+    await iconBoxs[1].trigger("click");
+
+    expect(value).toBe(2);
+  });
 });

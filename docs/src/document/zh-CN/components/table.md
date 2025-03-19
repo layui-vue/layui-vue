@@ -827,6 +827,47 @@ const defaultExpandAll2 = ref(false)
 
 :::
 
+::: title 添加工具栏图标
+:::
+
+::: demo 通过 `default-toolbar` 新增其他配置。
+
+<template>
+  <lay-table :columns="columns2" :data-source="dataSource2" :default-toolbar="defaultToolbars">
+  </lay-table>
+</template>
+
+<script setup>
+import { ref } from 'vue'
+
+const columns2 = [
+  { title:"编号", width:"80px", key:"id", fixed: "left", sort: "desc"},
+  { title:"姓名", width:"80px", key:"name" },
+]
+
+const dataSource1 = [
+  {id:"1", name:"张三1"},
+  {id:"2", name:"张三2"},
+]
+
+const defaultToolbars = [
+  "filter",
+  {
+    icon: "layui-icon-refresh",
+    title: "刷新",
+    onClick: () => {
+      console.log("导出")
+    }
+  },
+  "export",
+  "print"
+]
+
+
+</script>
+
+:::
+
 ::: title Table 属性
 :::
 
@@ -839,7 +880,7 @@ const defaultExpandAll2 = ref(false)
 | id                   | 数据主键                                                         | `string`            | --         | --                                           |
 | v-model:selectedKeys | 复选框选中项                                                     | --                  | --         | --                                           |
 | v-model:selectedKey  | 单选框选中项                                                     | --                  | --         | --                                           |
-| default-toolbar      | 工具栏                                                           | `boolean` `array`   | `false`    | `true` `false` `['filter','export','print']` |
+| default-toolbar      | 工具栏                                                           | `boolean` `Array<TableDefaultToolbar>`   | `false`    | [TableDefaultToolbar](https://www.layui-vue.com/zh-CN/components/table#Types) `2.22.0` |
 | page      | 分页配置，同分页组件参数一致 [详情](https://www.layui-vue.com/zh-CN/components/page)      | `object`    |  --   |--  |
 | size                 | 表格大小                                                         | `string`            | `md`       | `lg` `md` `sm`                               |
 | children-column-name | 指定树形结构的列名                                               | `string`            | `children` | --                                           |
@@ -941,6 +982,24 @@ const defaultExpandAll2 = ref(false)
 | totalRowMethod   | 自定义统计                       | `function` 参数{column, dataSource }  |  |           |  |
 
 :::
+
+::: title Types
+
+```ts
+
+export type TableDefaultToolbar =
+  | "filter"
+  | "export"
+  | "print"
+  | TableDefaultToolbarComplex;
+
+export interface TableDefaultToolbarComplex {
+  title: string;
+  icon: string;
+  onClick?: () => void;
+}
+
+```
 
 ::: previousNext table
 :::

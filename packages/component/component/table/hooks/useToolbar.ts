@@ -1,25 +1,34 @@
-import { type StyleValue, inject } from "vue";
+import { type StyleValue, computed, inject } from "vue";
+import type { TableDefaultToolbar } from "../typing";
 import type { TableToolBarType } from "../components/types";
 
-import { LAY_TABLE_CONTEXT } from "../constant";
-
 import { useI18n } from "@layui/component/language";
+import { isArray, isValueArray } from "@layui/component/utils";
+
+import { LAY_TABLE_CONTEXT } from "../constant";
 
 export const useToolBar = (props: TableToolBarType) => {
   const { columnsState } = inject(LAY_TABLE_CONTEXT)!;
 
   const { t } = useI18n();
 
-  const showToolbar = (toolbarName: string) => {
-    if (props.defaultToolbar instanceof Array) {
-      return props.defaultToolbar.includes(toolbarName);
-    }
-    return props.defaultToolbar;
-  };
+  const showToolbars = computed<TableDefaultToolbar[]>(() => {
+    if (
+      !props.defaultToolbar ||
+      (isArray(props.defaultToolbar) && props.defaultToolbar.length === 0)
+    )
+      return [];
 
-  const toolbarStyle = (toolbarName: string) => {
-    if (props.defaultToolbar instanceof Array) {
-      return { order: props.defaultToolbar.indexOf(toolbarName) } as StyleValue;
+    if (isValueArray(props.defaultToolbar)) {
+      return props.defaultToolbar;
+    }
+
+    return ["filter", "export", "print"];
+  });
+
+  const toolbarStyle = (toolbarName: TableDefaultToolbar) => {
+    if (isValueArray(showToolbars.value)) {
+      return { order: showToolbars.value.indexOf(toolbarName) } as StyleValue;
     }
   };
 
@@ -115,7 +124,7 @@ export const useToolBar = (props: TableToolBarType) => {
 
   return {
     t,
-    showToolbar,
+    showToolbars,
     toolbarStyle,
     exportData,
     print,

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { TableToolBarType } from "./types";
-import type { TableColumn } from "../typing";
+import type { TableColumn, TableDefaultToolbarComplex } from "../typing";
 
 import { useToolBar } from "../hooks/useToolbar";
 import LayIcon from "@layui/component/component/icon";
@@ -15,7 +15,7 @@ defineOptions({
 
 const props = defineProps<TableToolBarType>();
 
-const { t, showToolbar, toolbarStyle, exportData, print } = useToolBar(props);
+const { t, showToolbars, toolbarStyle, exportData, print } = useToolBar(props);
 
 function handleCheckChange(column: TableColumn) {
   column.hide = !column.hide;
@@ -23,62 +23,76 @@ function handleCheckChange(column: TableColumn) {
 </script>
 
 <template>
-  <div v-if="defaultToolbar || $slots.default" class="layui-table-tool">
+  <div
+    v-if="isValueArray(showToolbars) || $slots.default"
+    class="layui-table-tool"
+  >
     <div class="layui-table-tool-temp">
       <slot></slot>
     </div>
 
-    <div v-if="defaultToolbar" class="layui-table-tool-self">
-      <!-- 筛选 -->
-      <LayDropdown v-if="showToolbar('filter')" placement="bottom-end">
-        <div
-          class="layui-inline"
-          :title="t('table.filter')"
-          lay-event
-          :style="toolbarStyle('filter')"
-        >
-          <LayIcon />
-          <i class="layui-icon layui-icon-slider"></i>
-        </div>
-        <template #content>
-          <div class="layui-table-tool-checkbox">
-            <LayCheckboxV2
-              v-for="(column, index) in hierarchicalColumns[0]"
-              :modelValue="!column.hide"
-              skin="primary"
-              :disabled="isValueArray(column.children)"
-              :key="index"
-              :value="index as number"
-              @change="() => handleCheckChange(column)"
-              >{{ column.title }}</LayCheckboxV2
-            >
+    <div v-if="isValueArray(showToolbars)" class="layui-table-tool-self">
+      <template v-for="(toolbar, index) in showToolbars" :key="index">
+        <!-- 筛选 -->
+        <LayDropdown v-if="toolbar === 'filter'" placement="bottom-end">
+          <div
+            class="layui-inline"
+            :title="t('table.filter')"
+            lay-event
+            :style="toolbarStyle(toolbar)"
+          >
+            <LayIcon type="layui-icon-slider" />
           </div>
-        </template>
-      </LayDropdown>
+          <template #content>
+            <div class="layui-table-tool-checkbox">
+              <LayCheckboxV2
+                v-for="(column, columnIndex) in hierarchicalColumns[0]"
+                :modelValue="!column.hide"
+                skin="primary"
+                :disabled="isValueArray(column.children)"
+                :key="columnIndex"
+                :value="columnIndex"
+                @change="() => handleCheckChange(column)"
+                >{{ column.title }}</LayCheckboxV2
+              >
+            </div>
+          </template>
+        </LayDropdown>
 
-      <!-- 导出 -->
-      <div
-        v-if="showToolbar('export')"
-        class="layui-inline"
-        :title="t('table.export')"
-        lay-event
-        :style="toolbarStyle('export')"
-        @click="exportData()"
-      >
-        <i class="layui-icon layui-icon-export"></i>
-      </div>
+        <div
+          v-else-if="toolbar === 'export'"
+          class="layui-inline"
+          :title="t('table.export')"
+          lay-event
+          :style="toolbarStyle(toolbar)"
+          @click="exportData()"
+        >
+          <LayIcon type="layui-icon-export" />
+        </div>
 
-      <!-- 打印 -->
-      <div
-        v-if="showToolbar('print')"
-        :style="toolbarStyle('print')"
-        class="layui-inline"
-        :title="t('table.print')"
-        lay-event
-        @click="print()"
-      >
-        <i class="layui-icon layui-icon-print"></i>
-      </div>
+        <!-- 打印 -->
+        <div
+          v-else-if="toolbar === 'print'"
+          :style="toolbarStyle(toolbar)"
+          class="layui-inline"
+          :title="t('table.print')"
+          lay-event
+          @click="print()"
+        >
+          <LayIcon type="layui-icon-print" />
+        </div>
+
+        <div
+          v-else
+          :style="toolbarStyle(toolbar)"
+          class="layui-inline"
+          :title="(toolbar as TableDefaultToolbarComplex).title"
+          lay-event
+          @click="(toolbar as TableDefaultToolbarComplex)?.onClick?.()"
+        >
+          <LayIcon :type="(toolbar as TableDefaultToolbarComplex).icon" />
+        </div>
+      </template>
     </div>
   </div>
 </template>
