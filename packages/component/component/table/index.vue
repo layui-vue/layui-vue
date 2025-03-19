@@ -270,9 +270,7 @@ provide(LAY_TABLE_CONTEXT, {
     :style="{ height: height, maxHeight: maxHeight }"
   >
     <!-- 工具栏 -->
-    <TableToolbar v-bind="tableToolbarProps">
-      <slot name="toolbar"></slot>
-    </TableToolbar>
+    <TableToolbar v-bind="tableToolbarProps"></TableToolbar>
 
     <div class="layui-table-box-header" v-if="slots.header">
       <slot name="header"></slot>
@@ -310,7 +308,10 @@ provide(LAY_TABLE_CONTEXT, {
           </colgroup>
           <tbody>
             <!-- 渲染 -->
-            <template v-for="(children, index) in tableDataSource" :key="index">
+            <template
+              v-for="(children, index) in tableDataSource"
+              :key="children[id]"
+            >
               <TableMain
                 :id="id"
                 :index="index"

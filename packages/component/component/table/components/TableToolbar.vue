@@ -1,19 +1,24 @@
 <script setup lang="ts">
+import { inject } from "vue";
 import type { TableToolBarType } from "./types";
 import type { TableColumn, TableDefaultToolbarComplex } from "../typing";
 
-import { useToolBar } from "../hooks/useToolbar";
 import LayIcon from "@layui/component/component/icon";
 import LayDropdown from "@layui/component/component/dropdown/index.vue";
 import LayCheckboxV2 from "@layui/component/component/checkboxV2/index.vue";
-
+import LayRender from "@layui/component/component/_components/render";
 import { isValueArray } from "@layui/component/utils";
+
+import { useToolBar } from "../hooks/useToolbar";
+import { LAY_TABLE_CONTEXT } from "../constant";
 
 defineOptions({
   name: "LayTableToolBar",
 });
 
 const props = defineProps<TableToolBarType>();
+
+const { tableSlots } = inject(LAY_TABLE_CONTEXT)!;
 
 const { t, showToolbars, toolbarStyle, exportData, print } = useToolBar(props);
 
@@ -24,11 +29,11 @@ function handleCheckChange(column: TableColumn) {
 
 <template>
   <div
-    v-if="isValueArray(showToolbars) || $slots.default"
+    v-if="isValueArray(showToolbars) || tableSlots.toolbar"
     class="layui-table-tool"
   >
     <div class="layui-table-tool-temp">
-      <slot></slot>
+      <LayRender :slots="tableSlots" render="toolbar"></LayRender>
     </div>
 
     <div v-if="isValueArray(showToolbars)" class="layui-table-tool-self">

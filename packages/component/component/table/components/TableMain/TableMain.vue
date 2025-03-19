@@ -213,7 +213,7 @@ const checkboxProps = computed(() => {
   <template v-if="data[childrenColumnName] && isExpand">
     <template
       v-for="(children, childrenIndex) in data[childrenColumnName]"
-      :key="childrenIndex"
+      :key="children[id]"
     >
       <LayTableMain
         v-bind="props"

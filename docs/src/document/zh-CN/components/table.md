@@ -238,7 +238,7 @@ const getSelectedKeys3 = () => {
 }
 
 const getCheckData3 = () => {
-  layer.msg(tableRef3.value.getCheckData());
+  layer.msg(JSON.stringify(tableRef3.value.getCheckData()));
 }
 
 const columns3 = [
@@ -414,7 +414,13 @@ const columns5 = [
     children: [
       { title: "省", key: "prov", width: "100px" },
       { title: "市", key: "city", width: "100px" },
-      { title: "区", key: "area", width: "100px" },
+      { title: "区", key: "area", width: "100px",
+        children: [
+          { title: "区1", key: "area1", width: "100px" },
+          { title: "区2", key: "area2", width: "100px" },
+          { title: "区3", key: "area3", width: "100px" },
+        ] 
+      },
     ]
   },
   {
@@ -425,14 +431,14 @@ const columns5 = [
 ]
 
 const dataSource5 = [
-  {id:"10001", name:"夏娜1", prov:"浙江", sex:"女", city:"杭州", area: "西湖区", remark: '不知江月待何人，但见长江送流水。'},
-  {id:"10002", name:"夏娜2", prov:"浙江", sex:"女", city:"杭州", area: "西湖区", remark: '不知江月待何人，但见长江送流水。'},
-  {id:"10003", name:"夏娜3", prov:"浙江", sex:"女", city:"杭州", area: "西湖区", remark: '不知江月待何人，但见长江送流水。'},
-  {id:"10004", name:"夏娜4", prov:"浙江", sex:"女", city:"杭州", area: "西湖区", remark: '不知江月待何人，但见长江送流水。'},
-  {id:"10005", name:"夏娜5", prov:"浙江", sex:"女", city:"杭州", area: "西湖区", remark: '不知江月待何人，但见长江送流水。'},      
-  {id:"10006", name:"夏娜6", prov:"浙江", sex:"女", city:"杭州", area: "西湖区", remark: '不知江月待何人，但见长江送流水。'},
-  {id:"10007", name:"夏娜7", prov:"浙江", sex:"女", city:"杭州", area: "西湖区", remark: '不知江月待何人，但见长江送流水。'},
-  {id:"10008", name:"夏娜8", prov:"浙江", sex:"女", city:"杭州", area: "西湖区", remark: '不知江月待何人，但见长江送流水。'}
+  {id:"10001", name:"夏娜1", area1: '区1', area2: "区2", area3: "区3", prov:"浙江", sex:"女", city:"杭州", area: "西湖区", remark: '不知江月待何人，但见长江送流水。'},
+  {id:"10002", name:"夏娜2", area1: '区1', area2: "区2", area3: "区3", prov:"浙江", sex:"女", city:"杭州", area: "西湖区", remark: '不知江月待何人，但见长江送流水。'},
+  {id:"10003", name:"夏娜3", area1: '区1', area2: "区2", area3: "区3", prov:"浙江", sex:"女", city:"杭州", area: "西湖区", remark: '不知江月待何人，但见长江送流水。'},
+  {id:"10004", name:"夏娜4", area1: '区1', area2: "区2", area3: "区3", prov:"浙江", sex:"女", city:"杭州", area: "西湖区", remark: '不知江月待何人，但见长江送流水。'},
+  {id:"10005", name:"夏娜5", area1: '区1', area2: "区2", area3: "区3", prov:"浙江", sex:"女", city:"杭州", area: "西湖区", remark: '不知江月待何人，但见长江送流水。'},      
+  {id:"10006", name:"夏娜6", area1: '区1', area2: "区2", area3: "区3", prov:"浙江", sex:"女", city:"杭州", area: "西湖区", remark: '不知江月待何人，但见长江送流水。'},
+  {id:"10007", name:"夏娜7", area1: '区1', area2: "区2", area3: "区3", prov:"浙江", sex:"女", city:"杭州", area: "西湖区", remark: '不知江月待何人，但见长江送流水。'},
+  {id:"10008", name:"夏娜8", area1: '区1', area2: "区2", area3: "区3", prov:"浙江", sex:"女", city:"杭州", area: "西湖区", remark: '不知江月待何人，但见长江送流水。'},
 ]
 
 </script>
@@ -568,7 +574,7 @@ const dataSource6 = [
 ]
 
 const getCheckData6 = function() {
-  layer.msg(tableRef6.value.getCheckData());
+  layer.msg(JSON.stringify(tableRef6.value.getCheckData()));
 }
 
 const defaultExpandAll6 = ref(false);
@@ -833,19 +839,19 @@ const defaultExpandAll2 = ref(false)
 ::: demo 通过 `default-toolbar` 新增其他配置。
 
 <template>
-  <lay-table :columns="columns2" :data-source="dataSource2" :default-toolbar="defaultToolbars">
+  <lay-table :columns="columns11" :data-source="dataSource11" :default-toolbar="defaultToolbars">
   </lay-table>
 </template>
 
 <script setup>
 import { ref } from 'vue'
 
-const columns2 = [
+const columns11 = [
   { title:"编号", width:"80px", key:"id", fixed: "left", sort: "desc"},
   { title:"姓名", width:"80px", key:"name" },
 ]
 
-const dataSource1 = [
+const dataSource11 = [
   {id:"1", name:"张三1"},
   {id:"2", name:"张三2"},
 ]
