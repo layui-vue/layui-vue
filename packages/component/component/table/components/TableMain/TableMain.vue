@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { type TableColumn } from "../../typing";
 
-import { computed, useSlots, inject } from "vue";
+import { computed, inject } from "vue";
 
 import LayCheckboxV2 from "@layui/component/component/checkboxV2/index.vue";
 import LayTooltip from "@layui/component/component/tooltip/index.vue";
@@ -13,25 +13,24 @@ import LayTableMainTd from "./TableMainTd";
 import { LAY_TABLE_CONTEXT, columnsTypeList } from "../../constant";
 
 export interface TableRowProps {
+  id: string;
   index: number;
+  data: any;
+  page?: any;
+  columns: TableColumn[];
   indentSize: number;
   currentIndentSize: number;
   expandSpace: boolean;
   expandIndex: number;
-  childrenColumnName?: string;
-  page?: any;
-  columns: TableColumn[];
-  checkbox?: boolean;
-  cellClassName: string | Function;
   cellStyle: string | Function;
-  rowClassName: string | Function;
+  cellClassName: string | Function;
   rowStyle: string | Function;
-  id: string;
-  data: any;
+  rowClassName: string | Function;
   spanMethod: Function;
   defaultExpandAll: boolean;
   getCheckboxProps: Function;
   getRadioProps: Function;
+  childrenColumnName?: string;
 }
 
 defineOptions({
@@ -41,10 +40,7 @@ defineOptions({
 const { tableEmits, tableSlots, selectedState, expandState } =
   inject(LAY_TABLE_CONTEXT)!;
 
-const slot = useSlots();
-
 const props = withDefaults(defineProps<TableRowProps>(), {
-  checkbox: false,
   childrenColumnName: "children",
   cellStyle: "",
   cellClassName: "",
@@ -53,30 +49,6 @@ const props = withDefaults(defineProps<TableRowProps>(), {
 const isExpand = computed(() => {
   return expandState.checkExpand(props.data[props.id]);
 });
-
-const renderCellStyle = (
-  row: any,
-  column: any,
-  rowIndex: number,
-  columnIndex: number
-) => {
-  if (typeof props.cellStyle === "string") {
-    return props.cellStyle;
-  }
-  return props.cellStyle(row, column, rowIndex, columnIndex);
-};
-
-const renderCellClassName = (
-  row: any,
-  column: any,
-  rowIndex: number,
-  columnIndex: number
-) => {
-  if (typeof props.cellClassName === "string") {
-    return props.cellClassName;
-  }
-  return props.cellClassName(row, column, rowIndex, columnIndex);
-};
 
 const renderRowStyle = (data: any, index: number) => {
   if (typeof props.rowStyle === "string") {
@@ -244,25 +216,10 @@ const checkboxProps = computed(() => {
       :key="childrenIndex"
     >
       <LayTableMain
-        :id="id"
-        :data="children"
+        v-bind="props"
         :index="childrenIndex"
-        :page="page"
-        :columns="columns"
-        :indent-size="indentSize"
+        :data="children"
         :current-indent-size="childrenIndentSize"
-        :checkbox="checkbox"
-        :expandSpace="expandSpace"
-        :expandIndex="expandIndex"
-        :cellStyle="cellStyle"
-        :cellClassName="cellClassName"
-        :rowStyle="rowStyle"
-        :rowClassName="rowClassName"
-        :spanMethod="spanMethod"
-        :defaultExpandAll="defaultExpandAll"
-        :getCheckboxProps="getCheckboxProps"
-        :childrenColumnName="childrenColumnName"
-        :getRadioProps="getRadioProps"
       >
       </LayTableMain>
     </template>

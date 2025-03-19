@@ -74,7 +74,7 @@ export interface TableColumn {
   titleSlot?: string;
   align?: CommonAlign;
   ellipsisTooltip?: boolean;
-  ellipsisTooltipTheme?: boolean;
+  ellipsisTooltipTheme?: string;
   fixed?: "left" | "right";
   type?: string;
   children?: TableColumn[];
