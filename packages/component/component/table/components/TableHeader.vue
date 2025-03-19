@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { inject } from "vue";
 import { type TableColumn, type SortType, sortType } from "../typing";
-import { LAY_TABLE_CONTEXT } from "../constant";
 import LayCheckboxV2 from "@layui/component/component/checkboxV2/index.vue";
+
+import { isValueArray } from "@layui/component/utils";
 import { startResize } from "../hooks/useResize";
+import { LAY_TABLE_CONTEXT } from "../constant";
 
 defineOptions({
   name: "LayTableHeader",
@@ -16,7 +18,9 @@ const {
   tableDataSource,
   tableRef,
   tableBodyTableRef,
+  tableHeaderRef,
   tableHeaderTableRef,
+  tableTotalTableRef,
 
   columnsState,
   selectedState,
@@ -26,7 +30,6 @@ const {
 } = inject(LAY_TABLE_CONTEXT)!;
 
 defineProps<{
-  tableHeaderRef: HTMLDivElement | null;
   lastLevelShowColumns: TableColumn[];
   hierarchicalColumns: TableColumn[][];
   tableBodyScrollWidth: number;
@@ -197,14 +200,18 @@ const removeAllSortState = () => {
                 </template>
                 <!-- 列宽拖动区 -->
                 <div
-                  v-if="tableProps.resize || column.resize"
+                  v-if="
+                    (tableProps.resize || column.resize) &&
+                    !isValueArray(column.children)
+                  "
                   class="lay-table-cols-resize"
                   @mousedown.stop="
                     startResize(
                       $event,
                       column,
                       tableHeaderTableRef,
-                      tableBodyTableRef
+                      tableBodyTableRef,
+                      tableTotalTableRef
                     )
                   "
                   @click.stop

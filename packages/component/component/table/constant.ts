@@ -20,8 +20,10 @@ interface LayTableContextType {
 
   tableRef: ShallowRef<HTMLDivElement | null>;
   tableBodyTableRef: ShallowRef<HTMLElement | null>;
+  tableHeaderRef: ShallowRef<HTMLDivElement | null>;
   tableHeaderTableRef: ShallowRef<HTMLElement | null>;
-  tableTotalRef: ShallowRef<HTMLElement | null>;
+  tableTotalRef: ShallowRef<HTMLDivElement | null>;
+  tableTotalTableRef: ShallowRef<HTMLElement | null>;
 
   tableDataSource: TableProps["dataSource"];
 

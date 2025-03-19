@@ -8,11 +8,16 @@ defineOptions({
   name: "LayTableTotal",
 });
 
-const { tableTotalRef, tableDataSource, commonGetClasses, commonGetStylees } =
-  inject(LAY_TABLE_CONTEXT)!;
+const {
+  tableTotalRef,
+  tableTotalTableRef,
+  tableDataSource,
+  commonGetClasses,
+  commonGetStylees,
+} = inject(LAY_TABLE_CONTEXT)!;
 
 const props = defineProps<{
-  columns: TableColumn[];
+  lastLevelShowColumns: TableColumn[];
   tableBodyScrollWidth: number;
 }>();
 
@@ -55,21 +60,19 @@ const stylees = computed(() => {
 <template>
   <div class="table-total-wrapper" :style="stylees">
     <div class="table-total-wrapper-main" ref="tableTotalRef">
-      <table class="layui-table">
+      <table class="layui-table" ref="tableTotalTableRef">
         <colgroup>
           <col
-            v-for="(column, columnIndex) in columns"
+            v-for="(column, columnIndex) in lastLevelShowColumns"
             :key="columnIndex"
             :width="column.width"
-            :style="{
-              minWidth: column.minWidth ? column.minWidth : '50px',
-            }"
+            :style="{ minWidth: column.minWidth }"
           />
         </colgroup>
         <tbody>
           <tr class="layui-table-total">
             <template
-              v-for="(column, columnIndex) in columns"
+              v-for="(column, columnIndex) in lastLevelShowColumns"
               :key="columnIndex"
             >
               <td

@@ -99,6 +99,7 @@ const tableHeaderRef = shallowRef<HTMLDivElement | null>(null);
 const tableHeaderTableRef = shallowRef<HTMLElement | null>(null);
 
 const tableTotalRef = shallowRef<HTMLDivElement | null>(null);
+const tableTotalTableRef = shallowRef<HTMLElement | null>(null);
 
 const fixedLeftState = ref(false);
 const fixedRightState = ref(false);
@@ -181,8 +182,9 @@ function getFixedColumn() {
   const tableBodyClientWidth = tableBodyRef.value?.clientWidth || 0;
   const tableBodyOffsetWidth = tableBodyRef.value?.offsetWidth || 0;
 
-  tableHeaderRef.value &&
-    (tableHeaderRef.value.scrollLeft = tableBodyScrollLeft);
+  if (tableHeaderRef.value) {
+    tableHeaderRef.value.scrollLeft = tableBodyScrollLeft;
+  }
 
   if (tableTotalRef.value) {
     tableTotalRef.value.scrollLeft = tableBodyScrollLeft;
@@ -245,8 +247,10 @@ provide(LAY_TABLE_CONTEXT, {
 
   tableRef,
   tableBodyTableRef,
+  tableHeaderRef,
   tableHeaderTableRef,
   tableTotalRef,
+  tableTotalTableRef,
 
   tableDataSource,
   columnsState,
@@ -277,7 +281,6 @@ provide(LAY_TABLE_CONTEXT, {
     <div class="layui-table-box">
       <!-- 表头 -->
       <TableHeader
-        :tableHeaderRef="tableHeaderRef"
         :lastLevelShowColumns="lastLevelShowColumns"
         :hierarchicalColumns="hierarchicalColumns"
         :tableBodyScrollWidth="tableBodyScrollWidth"
@@ -351,8 +354,7 @@ provide(LAY_TABLE_CONTEXT, {
 
       <TableTotal
         v-if="hasTotalRow"
-        :columns="lastLevelShowColumns"
-        :dataSource="tableDataSource"
+        :lastLevelShowColumns="lastLevelShowColumns"
         :tableBodyScrollWidth="tableBodyScrollWidth"
       ></TableTotal>
 
