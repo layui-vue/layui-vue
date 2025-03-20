@@ -978,7 +978,8 @@ const defaultToolbars = [
 | titleSlot            | 标题插槽                       | 插槽参数 {column, columnIndex} | --      | --                          | --       |
 | align                | 对齐方式                       | `string`                       | `left`  | `left` `right` `center`     | --       |
 | ellipsisTooltip      | 当内容过长被隐藏时显示 tooltip | `boolean`                      | `false` | `true` `false`              | --       |
-| ellipsisTooltipTheme | tooltip 主题                   | `string`                       | `light` | `dark` `light`              | --       |
+| ellipsisTooltipTheme | tooltip 主题 !!!建议替换为 `ellipsisTooltipProps.isDark` 属性，将在未来版本删除                   | `string`                       | `light` | `dark` `light`              | --       |
+| ellipsisTooltipProps `2.22.0` | tooltip props          | [TooltipProps](https://www.layui-vue.com/zh-CN/components/tooltip#Tooltip%20%E5%B1%9E%E6%80%A7)                       | -- | --              | --       |
 | fixed                | 列固定                         | `string`                       | --      | `left` `right`              | --       |
 | type                 | 列类型                         | `string`                       | --      | `number` `checkbox` `radio` | --       |
 | children             | 表头分组                       | `string`                       | --      | `number` `checkbox` `radio` | `1.4.0`  |

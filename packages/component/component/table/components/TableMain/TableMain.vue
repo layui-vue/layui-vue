@@ -139,6 +139,7 @@ const checkboxProps = computed(() => {
             v-if="column.ellipsisTooltip"
             :isAutoShow="true"
             :isDark="column.ellipsisTooltipTheme === 'dark' ? true : false"
+            v-bind="column.ellipsisTooltipProps"
           >
             <lay-render
               :row="data"
@@ -186,9 +187,10 @@ const checkboxProps = computed(() => {
         >
           <lay-tooltip
             v-if="column.ellipsisTooltip"
-            :content="data[column.key]"
             :isDark="column.ellipsisTooltipTheme === 'dark' ? true : false"
             :isAutoShow="true"
+            v-bind="column.ellipsisTooltipProps"
+            :content="data[column.key]"
           >
             {{ data[column.key] }}
           </lay-tooltip>

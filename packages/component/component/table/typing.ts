@@ -1,5 +1,6 @@
 import type { Recordable, CommonAlign } from "@layui/component/types";
 import type { PageProps } from "@layui/component/component/page/interface";
+import type { TooltipProps } from "@layui/component/component/tooltip/types";
 
 export interface TableProps {
   id?: string;
@@ -75,6 +76,7 @@ export interface TableColumn {
   align?: CommonAlign;
   ellipsisTooltip?: boolean;
   ellipsisTooltipTheme?: string;
+  ellipsisTooltipProps?: Omit<TooltipProps, "content">;
   fixed?: "left" | "right";
   type?: string;
   children?: TableColumn[];
