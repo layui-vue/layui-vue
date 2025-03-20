@@ -607,6 +607,8 @@
 
 .layui-table-page {
   position: relative;
+  display: flex;
+  align-items: flex-start;
   width: 100%;
   // border-width: 0 0 0;
   flex-shrink: 0;
@@ -614,6 +616,10 @@
   height: 41px;
   font-size: 12px;
   white-space: nowrap;
+}
+
+.layui-table-page-slot{
+  flex: 1;
 }
 
 .layui-table-page .layui-page .layui-pager .layui-pager-number,

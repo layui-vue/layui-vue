@@ -502,4 +502,107 @@ describe("LayTable", () => {
 
     expect(value).toBe(2);
   });
+
+  test("page change", async () => {
+    const columns = [
+      {
+        fixed: "left" as const,
+        type: "checkbox",
+        title: "复选",
+        key: "checkbox",
+      },
+      {
+        title: "编号",
+        width: "100px",
+        key: "id",
+      },
+    ];
+
+    const dataSource = ref([
+      {
+        id: "1",
+      },
+      {
+        id: "2",
+      },
+    ]);
+
+    let current = 1;
+
+    const wrapper = mount({
+      setup() {
+        return () => (
+          <LayTable
+            page={{
+              current: 1,
+              limit: 10,
+              total: 100,
+              change: (pageData) => {
+                current = pageData.current;
+              },
+            }}
+            columns={columns}
+            dataSource={dataSource.value}
+          ></LayTable>
+        );
+      },
+    });
+
+    const nextPage = wrapper.find(".layui-table-page .layui-page-next");
+    await nextPage.trigger("click");
+
+    await nextTick();
+
+    expect(current).toBe(2);
+  });
+
+  test("slots page", async () => {
+    const columns = [
+      {
+        fixed: "left" as const,
+        type: "checkbox",
+        title: "复选",
+        key: "checkbox",
+      },
+      {
+        title: "编号",
+        width: "100px",
+        key: "id",
+      },
+    ];
+
+    const dataSource = ref([
+      {
+        id: "1",
+      },
+      {
+        id: "2",
+      },
+    ]);
+
+    const wrapper = mount({
+      setup() {
+        return () => (
+          <LayTable
+            page={{
+              current: 1,
+              limit: 10,
+              total: 100,
+            }}
+            columns={columns}
+            dataSource={dataSource.value}
+            v-slots={{
+              page: () => 123,
+            }}
+          ></LayTable>
+        );
+      },
+    });
+    const pageSlot = wrapper.find(
+      ".layui-table-view .layui-table-page .layui-table-page-slot"
+    );
+
+    expect(pageSlot.exists()).toBeTruthy();
+    expect(pageSlot.text()).toBe("123");
+  });
 });

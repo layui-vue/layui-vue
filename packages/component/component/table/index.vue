@@ -366,18 +366,14 @@ provide(LAY_TABLE_CONTEXT, {
 
     <div v-if="page && page.total > 0" class="layui-table-page">
       <TablePage
-        :total="page.total"
-        :pages="page.pages"
-        :theme="page.theme"
-        :limits="page.limits"
-        :layout="page.layout"
-        :disabled="page.disabled"
-        :ellipsisTooltip="page.ellipsisTooltip"
-        :hide-on-single-page="page.hideOnSinglePage"
+        v-bind="page"
         v-model:current="page.current"
         v-model:limit="page.limit"
       >
       </TablePage>
+      <div class="layui-table-page-slot" v-if="slots.page">
+        <slot name="page"></slot>
+      </div>
     </div>
   </div>
 </template>

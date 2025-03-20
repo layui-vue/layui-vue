@@ -945,6 +945,7 @@ const defaultToolbars = [
 | expand     | 嵌套面板          | { row } 在 1.8.6 版本，data 参数由 row 替代，但 data 仍然可用                                                                                           | `1.4.4`  |
 | customSlot | 自定义列插槽      | { row，rowIndex，column，columnIndex } 在 1.8.6 版本，data 参数由 row 替代，但 data 仍然可用，新增 rowIndex 行索引 columnIndex 列索引 column 列信息参数 | `1.4.4`  |
 | empty      | 无数据时显示的 UI | 此插槽意在替换整个无数据时的显示 UI，如果只是单纯替换文字，保留无数据时的图像，请使用`table`的`emptyDescription`属性                                    | `2.11.6` |
+| page      | 分页组件右侧区域 | --                                    | `2.22.0` |
 
 :::
 
