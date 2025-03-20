@@ -98,6 +98,7 @@ export type ColumnWeakMap = WeakMap<TableColumn, TableColumn[]>;
 export type TablePageProps = Omit<PageProps, "simple" | "modelValue"> & {
   current: number;
   limit: number;
+  change?: (pageData: { current: number; limit: number }) => void;
 };
 
 export type TableDefaultToolbar =

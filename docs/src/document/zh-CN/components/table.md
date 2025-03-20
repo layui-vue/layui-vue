@@ -887,7 +887,7 @@ const defaultToolbars = [
 | v-model:selectedKeys | 复选框选中项                                                     | --                  | --         | --                                           |
 | v-model:selectedKey  | 单选框选中项                                                     | --                  | --         | --                                           |
 | default-toolbar      | 工具栏                                                           | `boolean` `Array<TableDefaultToolbar>`   | `false`    | [TableDefaultToolbar](https://www.layui-vue.com/zh-CN/components/table#Types) `2.22.0` |
-| page      | 分页配置，同分页组件参数一致 [详情](https://www.layui-vue.com/zh-CN/components/page)      | `object`    |  --   |--  |
+| page      | 分页配置 `2.22.0`新增`page.change`      | [TablePageProps](https://www.layui-vue.com/zh-CN/components/table#Types)    |  --   |--  |
 | size                 | 表格大小                                                         | `string`            | `md`       | `lg` `md` `sm`                               |
 | children-column-name | 指定树形结构的列名                                               | `string`            | `children` | --                                           |
 | indent-size          | 指定树形结构的缩进距离                                           | `number`            | `30`       | --                                           |
@@ -925,7 +925,7 @@ const defaultToolbars = [
 | row-double      | 行双击     | { row: 当前行数据 }                    |
 | row-contextmenu | 行右击     | { row: 当前行数据 }                    |
 | cell-double     | 单元格双击 | data:当前单元格信息, event             |
-| change          | 分页事件   | { current: 当前页码, limit: 每页数量 } |
+| change          | 分页事件。<span style="color: red;">将在未来版本废弃，请替换为`page.change`</span>   | { current: 当前页码, limit: 每页数量 } |
 | sort-change     | 排序事件   | sort: string                           |
 | expand-change  `2.18.0`   | 行展开/收起   | data:当前单元格信息, event        |
 | checkbox  `2.22.0`   |  单行 checkbox 事件   | state: 是否选中, data: 点击行数据源  |
@@ -993,13 +993,28 @@ const defaultToolbars = [
 
 ```ts
 
-export type TableDefaultToolbar =
+interface TablePageProps = {
+  current: number;
+  limit: number;
+  total: number;
+  limit?: number;
+  theme?: string;
+  pages?: number;
+  limits?: number[];
+  hideOnSinglePage?: boolean;
+  ellipsisTooltip?: boolean;
+  disabled?: boolean;
+  layout?: LayoutKey[];
+  change?: (pageData: { current: number; limit: number }) => void;
+}
+
+type TableDefaultToolbar =
   | "filter"
   | "export"
   | "print"
   | TableDefaultToolbarComplex;
 
-export interface TableDefaultToolbarComplex {
+interface TableDefaultToolbarComplex {
   title: string;
   icon: string;
   onClick?: () => void;

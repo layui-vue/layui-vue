@@ -38,7 +38,12 @@ const limit: WritableComputedRef<number> = computed({
 });
 
 const change = (pageData: any) => {
+  console.warn(
+    "layui-vue： LayTable的change事件，将在未来版本中废弃，请将回调函数移至为props.page中的change属性。"
+  );
+
   tableEmits("change", pageData);
+  props.change && props.change(pageData);
 };
 </script>
 
