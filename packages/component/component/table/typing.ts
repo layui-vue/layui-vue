@@ -76,7 +76,12 @@ export interface TableColumn {
   align?: CommonAlign;
   ellipsisTooltip?: boolean;
   ellipsisTooltipTheme?: string;
-  ellipsisTooltipProps?: Omit<TooltipProps, "content">;
+  /**
+   * 使用TooltipProps会导致TS递归报错
+   * 等待后续升级TS版本解决
+   * Omit<TooltipProps, "content">
+   */
+  ellipsisTooltipProps?: Record<string, any>;
   fixed?: "left" | "right";
   type?: string;
   children?: TableColumn[];

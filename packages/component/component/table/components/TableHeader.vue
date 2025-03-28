@@ -125,7 +125,7 @@ const removeAllSortState = () => {
         <colgroup>
           <col
             v-for="(column, index) in lastLevelShowColumns"
-            :key="index"
+            :key="column.key || column.type || index"
             :width="column.width"
             :style="{ minWidth: column.minWidth }"
           />
@@ -139,11 +139,10 @@ const removeAllSortState = () => {
           >
             <template
               v-for="(column, columnIndex) in tableHeadColumn"
-              :key="columnIndex"
+              :key="column.key || column.type || columnIndex"
             >
               <th
                 v-if="!column.hide"
-                :key="columnIndex + tableHeadColumnIndex"
                 :colspan="columnsState.setColSpanValue(column)"
                 :rowspan="columnsState.setRowSpanValue(column)"
                 :class="

@@ -301,7 +301,7 @@ provide(LAY_TABLE_CONTEXT, {
           <colgroup>
             <col
               v-for="column in lastLevelShowColumns"
-              :key="column.key"
+              :key="column.key || column.type"
               :width="column.width"
               :style="{ minWidth: column.minWidth }"
             />

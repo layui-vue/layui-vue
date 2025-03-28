@@ -10,7 +10,7 @@ import {
 import type { Recordable } from "@layui/component/types";
 import { type TableColumn } from "../../typing";
 
-import { LayIcon } from "@layui/icons-vue";
+import LayIcon  from "@layui/component/component/icon";
 import { isString } from "@layui/component/utils";
 
 import { LAY_TABLE_CONTEXT, columnsTypeList } from "../../constant";

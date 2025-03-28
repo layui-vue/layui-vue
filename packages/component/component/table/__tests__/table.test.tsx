@@ -605,4 +605,65 @@ describe("LayTable", () => {
     expect(pageSlot.exists()).toBeTruthy();
     expect(pageSlot.text()).toBe("123");
   });
+
+  test("点击default-toolbar 字段隐藏", async () => {
+    const columns = [
+      {
+        fixed: "left" as const,
+        type: "checkbox",
+        title: "复选",
+        key: "checkbox",
+      },
+      {
+        title: "编号",
+        width: "100px",
+        key: "id",
+      },
+    ];
+
+    const dataSource = ref([
+      {
+        id: "1",
+      },
+      {
+        id: "2",
+      },
+    ]);
+
+    const wrapper = mount({
+      setup() {
+        return () => (
+          <LayTable
+            columns={columns}
+            dataSource={dataSource.value}
+            default-toolbar
+          ></LayTable>
+        );
+      },
+    });
+    const filter = wrapper.find('.layui-table-tool-self [title="筛选"]');
+
+    await filter.trigger("click");
+    await nextTick();
+    await sleep();
+
+    const checkboxLists = document.body.querySelectorAll(
+      ".layui-table-tool-checkbox .layui-checkbox"
+    );
+
+    expect(checkboxLists.length).toBe(2);
+
+    await checkboxLists[0].dispatchEvent(new MouseEvent("click"));
+    await nextTick();
+
+    const headerTr = wrapper.findAll(".layui-table-header tr");
+    const headerTh = headerTr[0].findAll("th");
+    expect(headerTh.length).toBe(1);
+
+    const bodyTr = wrapper.findAll(".layui-table-main tr");
+    expect(bodyTr.length).toBe(2);
+
+    const bodyTd = bodyTr[0].findAll("td");
+    expect(bodyTd.length).toBe(1);
+  });
 });

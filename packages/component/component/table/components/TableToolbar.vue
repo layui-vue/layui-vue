@@ -55,7 +55,7 @@ function handleCheckChange(column: TableColumn) {
                 :modelValue="!column.hide"
                 skin="primary"
                 :disabled="isValueArray(column.children)"
-                :key="columnIndex"
+                :key="column.key || column.type || columnIndex"
                 :value="columnIndex"
                 @change="() => handleCheckChange(column)"
                 >{{ column.title }}</LayCheckboxV2

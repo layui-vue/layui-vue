@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { LayIcon } from "@layui/icons-vue";
 import { computed, inject, useSlots } from "vue";
-import "./index.less";
+import "@layui/component/component/checkbox/index.less";
 import { CheckboxSize } from "./interface";
 import useProps from "./index.hooks";
 

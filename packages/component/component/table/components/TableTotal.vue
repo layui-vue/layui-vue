@@ -64,7 +64,7 @@ const stylees = computed(() => {
         <colgroup>
           <col
             v-for="(column, columnIndex) in lastLevelShowColumns"
-            :key="columnIndex"
+            :key="column.key || column.type || columnIndex"
             :width="column.width"
             :style="{ minWidth: column.minWidth }"
           />
@@ -73,7 +73,7 @@ const stylees = computed(() => {
           <tr class="layui-table-total">
             <template
               v-for="(column, columnIndex) in lastLevelShowColumns"
-              :key="columnIndex"
+              :key="column.key || column.type || columnIndex"
             >
               <td
                 :class="

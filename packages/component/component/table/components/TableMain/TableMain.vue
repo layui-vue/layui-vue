@@ -85,7 +85,10 @@ const checkboxProps = computed(() => {
     @dblclick="tableEmits('row-double', data, $event)"
     @contextmenu.stop="tableEmits('row-contextmenu', data, $event)"
   >
-    <template v-for="(column, columnIndex) in columns" :key="columnIndex">
+    <template
+      v-for="(column, columnIndex) in columns"
+      :key="column.key || column.type"
+    >
       <template v-if="column.type && columnsTypeList.includes(column.type)">
         <LayTableMainTd
           :class="`layui-table-cell-${column.type}`"

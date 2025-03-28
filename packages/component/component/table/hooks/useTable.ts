@@ -5,7 +5,14 @@ import type {
   RequiredTableProps,
   ColumnWeakMap,
 } from "../typing";
-import { reactive, isReactive, ref, watch } from "vue";
+import {
+  type StyleValue,
+  reactive,
+  isReactive,
+  ref,
+  watch,
+  watchEffect,
+} from "vue";
 
 import { useTableColumns } from "./useTableColumns";
 import { useTableSelected } from "./useTableSelected";
@@ -62,32 +69,35 @@ export function useTable(props: RequiredTableProps, emit: TableEmit) {
     }
   );
 
+  const _columns = ref<TableColumn[]>([]);
+
   /**
    * props.columns 变化时，重新计算
    */
   watch(
     () => props.columns,
     (newValue) => {
-      const _newValue = isReactive(newValue) ? newValue : reactive(newValue);
-
-      props.autoColsWidth && useAutoColsWidth(_newValue, tableDataSource);
-
-      setColumnMap(_newValue, []);
-      // console.log(columnMap, "column");
-
-      hierarchicalColumns.value = [];
-      lastLevelAllColumns.value = [];
-      lastLevelShowColumns.value = [];
-
-      loopForEach(_newValue, [getLastLevelColumns, checkHasTotal]);
-
-      getHierarchicalColumns(_newValue);
+      _columns.value = isReactive(newValue) ? newValue : reactive(newValue);
     },
     {
       immediate: true,
       deep: true,
     }
   );
+
+  watchEffect(() => {
+    props.autoColsWidth && useAutoColsWidth(_columns.value, tableDataSource);
+
+    setColumnMap(_columns.value, []);
+
+    hierarchicalColumns.value = [];
+    lastLevelAllColumns.value = [];
+    lastLevelShowColumns.value = [];
+
+    loopForEach(_columns.value, [getLastLevelColumns, checkHasTotal]);
+
+    getHierarchicalColumns(_columns.value);
+  });
 
   function setColumnMap<T extends TableColumn[]>(columns: T, parentColumns: T) {
     for (let index = 0; index < columns.length; index++) {
@@ -166,7 +176,7 @@ export function useTable(props: RequiredTableProps, emit: TableEmit) {
         ...getLeftOrRight(column),
       },
       ...age,
-    ];
+    ] as StyleValue;
   }
 
   function getLeftOrRight<T extends TableColumn>(column: T) {
