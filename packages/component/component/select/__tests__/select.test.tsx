@@ -243,4 +243,56 @@ describe("LaySelect", () => {
     expect(tags1.length).toBe(0);
     expect(value1.value.length).toBe(0);
   });
+
+  test("输入内容，自动弹出下拉框", async () => {
+    const teleportProps = { to: "body", disabled: true };
+
+    const value1 = ref([1]);
+
+    const wrapper = mount(
+      {
+        setup() {
+          const options = [
+            { label: "学习", value: 1 },
+            { label: "复习", value: 2 },
+          ];
+
+          return () => (
+            <LaySelect
+              v-model={value1.value}
+              options={options}
+              multiple
+              show-search
+              teleportProps={teleportProps}
+            ></LaySelect>
+          );
+        },
+      },
+      { attachTo: document.body }
+    );
+
+    const inputComponent = wrapper.findComponent(".layui-tag-input");
+
+    await inputComponent.trigger("click");
+    await nextTick();
+    await sleep();
+
+    const tooltip1 = wrapper.find(".layui-popper");
+    expect(tooltip1.exists()).toBeTruthy();
+    expect(tooltip1.isVisible()).toBeTruthy();
+
+    await inputComponent.trigger("click");
+    await nextTick();
+    await sleep();
+    expect(tooltip1.isVisible()).toBeFalsy();
+
+    const inputInstance = wrapper.find(
+      ".layui-tag-input .layui-tag-input-inner input"
+    );
+    await inputInstance.setValue("hello");
+
+    await nextTick();
+    await sleep();
+    expect(tooltip1.isVisible()).toBeTruthy();
+  });
 });
