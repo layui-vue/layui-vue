@@ -5,16 +5,16 @@
 @hover-border-color: var(--global-primary-color);
 
 @input-number-lg: 44px;
-@input-number-lg-wdith: 200px;
+@input-number-lg-width: 200px;
 @input-number-lg-right: 22px;
 @input-number-md: 38px;
-@input-number-md-wdith: 160px;
+@input-number-md-width: 160px;
 @input-number-md-right: 19px;
 @input-number-sm: 32px;
-@input-number-sm-wdith: 140px;
+@input-number-sm-width: 140px;
 @input-number-sm-right: 16px;
 @input-number-xs: 26px;
-@input-number-xs-wdith: 120px;
+@input-number-xs-width: 120px;
 @input-number-xs-right: 13px;
 
 .set-size(@width, @size, @right-size) {
@@ -25,12 +25,12 @@
     .layui-input-number-indicator {
       pointer-events: none;
       position: absolute;
+      width: 100%;
       height: 100%;
       top: 0;
       line-height: @size;
       text-align: center;
       background-color: #fff;
-      width: @width;
       overflow: hidden;
     }
 
@@ -48,18 +48,14 @@
     }
 
     &[position="right"] {
-      .layui-input {
+      .layui-input,
+      .layui-input-number-indicator {
         padding: 0 @size 0 0;
       }
 
       .layui-control-btn {
         height: @right-size;
         line-height: @right-size;
-      }
-
-      .layui-input-number-indicator {
-        left: 0;
-        width: calc(@width - @right-size - calc(@size / 2));
       }
 
       .layui-subtraction-btn {
@@ -142,15 +138,15 @@
   }
 
   &[size="lg"] {
-    .set-size(@input-number-lg-wdith, @input-number-lg, @input-number-lg-right);
+    .set-size(@input-number-lg-width, @input-number-lg, @input-number-lg-right);
   }
   &[size="md"] {
-    .set-size(@input-number-md-wdith, @input-number-md, @input-number-md-right);
+    .set-size(@input-number-md-width, @input-number-md, @input-number-md-right);
   }
   &[size="sm"] {
-    .set-size(@input-number-sm-wdith, @input-number-sm, @input-number-sm-right);
+    .set-size(@input-number-sm-width, @input-number-sm, @input-number-sm-right);
   }
   &[size="xs"] {
-    .set-size(@input-number-xs-wdith, @input-number-xs, @input-number-xs-right);
+    .set-size(@input-number-xs-width, @input-number-xs, @input-number-xs-right);
   }
 }
