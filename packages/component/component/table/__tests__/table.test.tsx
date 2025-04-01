@@ -1,4 +1,4 @@
-import { type VueWrapper, mount } from "@vue/test-utils";
+import { DOMWrapper, type VueWrapper, mount } from "@vue/test-utils";
 import LayTable from "../index.vue";
 import LayCheckboxV2 from "@layui/component/component/checkboxV2/index.vue";
 
@@ -665,5 +665,104 @@ describe("LayTable", () => {
 
     const bodyTd = bodyTr[0].findAll("td");
     expect(bodyTd.length).toBe(1);
+  });
+
+  test("分页切换 slots数据正确", async () => {
+    const columns = [
+      { title: "姓名", width: "80px", key: "name" },
+      {
+        title: "操作",
+        width: "150px",
+        customSlot: "operator",
+        key: "operator",
+      },
+    ];
+    const loading = ref(false);
+
+    const dataSource = ref([
+      { id: "1", name: "张三1" },
+      { id: "2", name: "张三2" },
+      { id: "3", name: "张三3" },
+      { id: "4", name: "张三4" },
+      { id: "5", name: "张三5" },
+      { id: "6", name: "张三6" },
+      { id: "7", name: "张三7" },
+      { id: "8", name: "张三8" },
+      { id: "9", name: "张三9" },
+      { id: "10", name: "张三10" },
+    ]);
+
+    const change = (page) => {
+      loading.value = true;
+      setTimeout(() => {
+        dataSource.value = loadDataSource(page.current, page.limit);
+        loading.value = false;
+      }, 100);
+    };
+
+    const loadDataSource = (page, pageSize) => {
+      const response = [];
+      const startIndex = (page - 1) * pageSize + 1;
+      const endIndex = page * pageSize;
+      for (let i = startIndex; i <= endIndex; i++) {
+        response.push({
+          id: `${i}`,
+          name: `张三${i}`,
+        });
+      }
+      return response;
+    };
+
+    let name = "";
+
+    const handleClick = (row: any) => {
+      name = row.name;
+    };
+
+    const wrapper = mount({
+      setup() {
+        return () => (
+          <LayTable
+            page={{ current: 1, limit: 10, total: 100 }}
+            columns={columns}
+            dataSource={dataSource.value}
+            default-toolbar
+            loading={loading.value}
+            onChange={change}
+            v-slots={{
+              operator: ({ row }: any) => (
+                <div class={"custom-operator"} onClick={() => handleClick(row)}>
+                  click
+                </div>
+              ),
+            }}
+          ></LayTable>
+        );
+      },
+    });
+
+    let operatorDoms: any;
+    operatorDoms = wrapper.findAll(".custom-operator");
+    expect(operatorDoms.length).toBe(10);
+    await operatorDoms[1].trigger("click");
+    expect(name).toBe("张三2");
+
+    const nextPageDom = wrapper.find(".layui-table-page .layui-page-next");
+    await nextPageDom.trigger("click");
+    await sleep(200);
+
+    operatorDoms = wrapper.findAll(".custom-operator");
+    expect(operatorDoms.length).toBe(10);
+    await operatorDoms[1].trigger("click");
+    expect(name).toBe("张三12");
+
+    const prevPageDom = wrapper.find(".layui-table-page .layui-page-prev");
+    await prevPageDom.trigger("click");
+    await sleep(200);
+
+    operatorDoms = wrapper.findAll(".custom-operator");
+    expect(operatorDoms.length).toBe(10);
+    await operatorDoms[1].trigger("click");
+    expect(name).toBe("张三2");
   });
 });
