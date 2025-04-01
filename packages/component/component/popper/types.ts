@@ -47,7 +47,7 @@ export type ContentComponentInstance = ComponentPublicInstance<{
 }>;
 
 export type ContentContext = {
-  collectorSubContent?: (sub: Ref<HTMLElement>) => void;
+  allContents?: Ref<HTMLElement>[][];
 };
 
 export const CONTENT_INJECTION_KEY: InjectionKey<ContentContext> =
