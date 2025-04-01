@@ -73,7 +73,7 @@ const props = withDefaults(defineProps<SelectProps>(), {
 const { size } = useProps(props);
 
 const slots = useSlots();
-const selectRef = ref();
+const selectRef = ref<typeof LayDropdown | null>(null);
 const searchValue = ref("");
 const singleValue = ref("");
 const multipleValue: Ref<any[]> = ref([]);
@@ -203,6 +203,11 @@ const handleSearch = (value: string) => {
   if (composing.value) return;
   emits("search", value);
   searchValue.value = value;
+
+  // 当拉下关闭 | 用户输入，弹出弹窗
+  if (value && !openState.value) {
+    selectRef.value && selectRef.value.show();
+  }
 };
 
 const handleClear = () => {
