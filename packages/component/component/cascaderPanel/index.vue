@@ -158,11 +158,9 @@ const {
   changeOnSelect,
   buildMultipleStatus,
   modelValue,
-  setup,
 } =
   ((inject(CASCADER_CONTEXT_KEY) as tCascaderPanel) || null) ??
   useCascaderPanel(props);
-onMounted(() => setup());
 /**
  * 插槽
  */

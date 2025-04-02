@@ -43,9 +43,9 @@ export const viteConfigCode = `
   import { defineConfig } from 'vite';
   import vue from '@vitejs/plugin-vue';
   import vueJsx from '@vitejs/plugin-vue-jsx';
-  import Components from 'unplugin-vue-components/vite';
+  import Components from '@layui/unplugin-vue-components/vite';
   import AutoImport from 'unplugin-auto-import/vite';
-  import { LayuiVueResolver } from 'unplugin-vue-components/resolvers';
+  import { LayuiVueResolver } from '@layui/unplugin-vue-components/resolvers';
 
   const pathSrc = path.resolve(process.cwd(), 'src')
 
@@ -95,7 +95,7 @@ export const packageJSONCode = JSON.stringify(
       "@vitejs/plugin-vue": "^2.3.2",
       "@vitejs/plugin-vue-jsx": "^1.3.10",
       "unplugin-auto-import": "0.11.1",
-      "unplugin-vue-components": "0.22.4",
+      "@layui/unplugin-vue-components": "0.0.3",
     },
   },
   null,

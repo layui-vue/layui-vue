@@ -142,6 +142,8 @@ const cancel = () => {
 | position    | 显示位置 | `top`(默认值)、`bottom`、`left`、`right` |
 | disabled    | 是否禁用 | `false`(默认值)、`true`(禁用)   |
 | trigger     | 触发方式 | `click` `hover`(默认值) `contextmenu` `focus` `trigger[]`| 
+| teleportProps  | 继承至 `tooltip` 组件 下拉面板 `传递` 属性  | `object`  | `{to: 'body', disabled: false}`   |  `vue teleport` 组件  | `2.19.3` |
+
 
 :::
 

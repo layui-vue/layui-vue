@@ -68,10 +68,8 @@ const { rowClick, rowDoubleClick, rowContextmenu, cellDoubleClick, rowExpand } =
   useEmit(emit);
 const { t } = useI18n();
 const slot = useSlots();
-const slots = slot.default && slot.default();
 const tableRef = ref();
 
-const s = "";
 const allChecked = ref(false);
 const hasChecked = ref(false);
 const tableDataSource = ref<any[]>([...props.dataSource]);
@@ -315,12 +313,22 @@ watch(
       const ids: string[] = [];
       lookForAllId(props.dataSource, ids);
       tableExpandKeys.value = ids;
-    } else {
-      tableExpandKeys.value = [];
     }
   },
   {
     immediate: true,
+    deep: true,
+  }
+);
+
+watch(
+  () => [props.defaultExpandAll],
+  () => {
+    if (!props.defaultExpandAll) {
+      tableExpandKeys.value = [];
+    }
+  },
+  {
     deep: true,
   }
 );
@@ -408,45 +416,49 @@ const exportData = () => {
     }
     tableStr += "</tr>";
   }
-  tableDataSource.value.forEach((item, rowIndex) => {
-    tableStr += "<tr>";
-    tableBodyColumns.value.forEach((tableColumn, columnIndex) => {
-      if (!tableColumn.ignoreExport) {
-        // 如果该列是特殊列，并且类型为 number 时，特殊处理
-        if (tableColumn.type && tableColumn.type == "number") {
-          tableStr += `<td>${rowIndex + 1}</td>`;
-        } else {
-          // 如果不是特殊列，进行字段匹配处理
-          if (tableColumn.type == undefined) {
-            var columnData = undefined;
-            Object.keys(item).forEach((name) => {
-              if (tableColumn.key === name) {
-                columnData = item;
-              }
-            });
-            // 拼接列
-            const rowColSpan = props.spanMethod(
-              item,
-              tableColumn,
-              rowIndex,
-              columnIndex
-            );
-            const rowspan = rowColSpan ? rowColSpan[0] : 1;
-            const colspan = rowColSpan ? rowColSpan[1] : 1;
+  const doExport = (source: Array<any>) => {
+    source.forEach((item, rowIndex) => {
+      tableStr += "<tr>";
+      tableBodyColumns.value.forEach((tableColumn, columnIndex) => {
+        if (!tableColumn.ignoreExport) {
+          // 如果该列是特殊列，并且类型为 number 时，特殊处理
+          if (tableColumn.type && tableColumn.type == "number") {
+            tableStr += `<td>${rowIndex + 1}</td>`;
+          } else {
+            // 如果不是特殊列，进行字段匹配处理
+            if (tableColumn.type == undefined) {
+              var columnData = undefined;
+              Object.keys(item).forEach((name) => {
+                if (tableColumn.key === name) {
+                  columnData = item;
+                }
+              });
+              // 拼接列
+              const rowColSpan = props.spanMethod(
+                item,
+                tableColumn,
+                rowIndex,
+                columnIndex
+              );
+              const rowspan = rowColSpan ? rowColSpan[0] : 1;
+              const colspan = rowColSpan ? rowColSpan[1] : 1;
 
-            // 如果 rowspan 和 colspan 是 0 说明该列作为合并列的辅助列。
-            // 则不再进行结构拼接。
-            if (rowspan != 0 && colspan != 0) {
-              tableStr += `<td colspan=${colspan} rowspan=${rowspan} x:str>${
-                columnData ? columnData[tableColumn.key] : ""
-              }</td>`;
+              // 如果 rowspan 和 colspan 是 0 说明该列作为合并列的辅助列。
+              // 则不再进行结构拼接。
+              if (rowspan != 0 && colspan != 0) {
+                tableStr += `<td colspan=${colspan} rowspan=${rowspan} x:str>${
+                  columnData ? columnData[tableColumn.key] : ""
+                }</td>`;
+              }
             }
           }
         }
-      }
+      });
+      tableStr += "</tr>";
+      if (item.children) doExport(item.children);
     });
-    tableStr += "</tr>";
-  });
+  };
+  doExport(tableDataSource.value);
   var worksheet = "Sheet1";
   var uri = "data:application/vnd.ms-excel;base64,";
   var exportTemplate = `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel"
@@ -469,7 +481,7 @@ function base64(s: string) {
   return window.btoa(unescape(encodeURIComponent(s)));
 }
 
-const thSort = (e: Event, key: string) => {
+const thSort = (e: Event, column: any) => {
   const spanDom = (e.currentTarget as HTMLElement).querySelector(
     "span[lay-sort]"
   ) as HTMLSpanElement;
@@ -481,54 +493,54 @@ const thSort = (e: Event, key: string) => {
   const currentIndex = sortType.indexOf(sortValue);
   const nextSort = sortType[(currentIndex + 1) % sortType.length];
 
-  baseSort(spanDom, key, nextSort);
+  baseSort(spanDom, column, nextSort);
 };
 
-const iconSort = (e: Event, key: string, sort: Exclude<SortType, "">) => {
+const iconSort = (e: Event, column: any, sort: Exclude<SortType, "">) => {
   const spanDom = (e.target as HTMLElement).parentNode as HTMLSpanElement;
 
   const sortValue = spanDom.getAttribute("lay-sort") as SortType;
 
-  baseSort(spanDom, key, sortValue !== sort ? sort : "");
+  baseSort(spanDom, column, sortValue !== sort ? sort : "");
 };
 
 /**
  *
  * @param spanDom 包含lay-sort属性的span dom
- * @param key column.key
+ * @param column column
  * @param nextSort 下一次的sort
  */
 const baseSort = (
   spanDom: HTMLSpanElement,
-  key: string,
+  column: any,
   nextSort: SortType
 ) => {
+  const { key, sort } = column;
+
   removeAllSortState();
   spanDom.setAttribute("lay-sort", nextSort);
 
-  switch (nextSort) {
+  if (sort !== "custom") {
+    defaultSort(key, nextSort);
+  }
+
+  emit("sort-change", key, nextSort);
+};
+
+const defaultSort = (key: string, sortType: SortType) => {
+  switch (sortType) {
     case "":
       tableDataSource.value = [...props.dataSource];
       break;
 
     case "asc":
-      tableDataSource.value.sort((x, y) => {
-        if (x[key] < y[key]) return -1;
-        else if (x[key] > y[key]) return 1;
-        else return 0;
-      });
+      tableDataSource.value.sort((a, b) => a[key] - b[key]);
       break;
 
     case "desc":
-      tableDataSource.value.sort((x, y) => {
-        if (x[key] < y[key]) return 1;
-        else if (x[key] > y[key]) return -1;
-        else return 0;
-      });
+      tableDataSource.value.sort((a, b) => b[key] - a[key]);
       break;
   }
-
-  emit("sort-change", key, nextSort);
 };
 
 // 清空所有的sort状态
@@ -628,7 +640,11 @@ onMounted(() => {
 
 const getFixedColumn = () => {
   tableHeader.value!.scrollLeft = tableBody.value?.scrollLeft || 0;
-  tableTotal.value!.scrollLeft = tableBody.value?.scrollLeft || 0;
+
+  if (tableTotal.value) {
+    tableTotal.value.scrollLeft = tableBody.value?.scrollLeft || 0;
+  }
+
   // @ts-ignore
   if (tableBody.value?.scrollWidth > tableBody.value?.clientWidth) {
     if (tableBody.value?.scrollLeft == 0) {
@@ -1021,12 +1037,13 @@ defineExpose({ getCheckData });
       </div>
       <div v-if="defaultToolbar" class="layui-table-tool-self">
         <!-- 筛选 -->
-        <lay-dropdown
-          v-if="showToolbar('filter')"
-          placement="bottom-end"
-          :style="toolbarStyle('filter')"
-        >
-          <div class="layui-inline" :title="t('table.filter')" lay-event>
+        <lay-dropdown v-if="showToolbar('filter')" placement="bottom-end">
+          <div
+            class="layui-inline"
+            :title="t('table.filter')"
+            lay-event
+            :style="toolbarStyle('filter')"
+          >
             <i class="layui-icon layui-icon-slider"></i>
           </div>
           <template #content>
@@ -1132,7 +1149,7 @@ defineExpose({ getCheckData });
                           ? 'layui-table-cell-number'
                           : '',
                         {
-                          'layui-table-is-sort': column.sort,
+                          'layui-table-is-sort': !!column.sort,
                         },
                       ]"
                       :style="[
@@ -1147,7 +1164,7 @@ defineExpose({ getCheckData });
                           tableHeadColumns
                         ),
                       ]"
-                      @click="thSort($event, column.key)"
+                      @click="thSort($event, column)"
                     >
                       <template v-if="column.type == 'checkbox'">
                         <lay-checkbox
@@ -1173,19 +1190,19 @@ defineExpose({ getCheckData });
                         </span>
                         <!-- 插槽 -->
                         <span
-                          v-if="column.sort"
+                          v-if="!!column.sort"
                           class="layui-table-sort layui-inline"
                           :lay-sort="
                             initSort.field === column.key ? initSort.type : ''
                           "
                         >
                           <i
-                            @click.stop="iconSort($event, column.key, 'asc')"
+                            @click.stop="iconSort($event, column, 'asc')"
                             class="layui-edge layui-table-sort-asc"
                             title="升序"
                           ></i>
                           <i
-                            @click.stop="iconSort($event, column.key, 'desc')"
+                            @click.stop="iconSort($event, column, 'desc')"
                             class="layui-edge layui-table-sort-desc"
                             title="降序"
                           ></i>
@@ -1325,59 +1342,63 @@ defineExpose({ getCheckData });
           </div>
         </template>
       </div>
-      <div class="table-total-wrapper" :style="totalWrapperStyles">
-        <div class="table-total-wrapper-main" ref="tableTotal">
-          <table class="layui-table">
-            <colgroup>
-              <template
-                v-for="(column, columnIndex) in tableBodyColumns"
-                :key="columnIndex"
-              >
-                <template v-if="tableColumnKeys.includes(column.key)">
-                  <col
-                    :width="column.width"
-                    :style="{
-                      minWidth: column.minWidth ? column.minWidth : '50px',
-                    }"
-                  />
-                </template>
-              </template>
-            </colgroup>
-            <tbody>
-              <tr v-if="hasTotalRow" class="layui-table-total">
+      <template v-if="hasTotalRow">
+        <div class="table-total-wrapper" :style="totalWrapperStyles">
+          <div class="table-total-wrapper-main" ref="tableTotal">
+            <table class="layui-table">
+              <colgroup>
                 <template
-                  v-for="(column, columnIndex) in tableFlattenColumns"
+                  v-for="(column, columnIndex) in tableBodyColumns"
                   :key="columnIndex"
                 >
                   <template v-if="tableColumnKeys.includes(column.key)">
-                    <td
-                      :style="[
-                        {
-                          textAlign: column.align,
-                          whiteSpace: column.ellipsisTooltip
-                            ? 'nowrap'
-                            : 'normal',
-                        },
-                        renderFixedStyle(column, columnIndex),
-                      ]"
-                      :class="[
-                        'layui-table-cell',
-                        renderFixedClassName(
-                          column,
-                          columnIndex,
-                          tableFlattenColumns
-                        ),
-                        column.fixed ? `layui-table-fixed-${column.fixed}` : '',
-                      ]"
-                      v-html="renderTotalRowCell(column)"
-                    ></td>
+                    <col
+                      :width="column.width"
+                      :style="{
+                        minWidth: column.minWidth ? column.minWidth : '50px',
+                      }"
+                    />
                   </template>
                 </template>
-              </tr>
-            </tbody>
-          </table>
+              </colgroup>
+              <tbody>
+                <tr class="layui-table-total">
+                  <template
+                    v-for="(column, columnIndex) in tableFlattenColumns"
+                    :key="columnIndex"
+                  >
+                    <template v-if="tableColumnKeys.includes(column.key)">
+                      <td
+                        :style="[
+                          {
+                            textAlign: column.align,
+                            whiteSpace: column.ellipsisTooltip
+                              ? 'nowrap'
+                              : 'normal',
+                          },
+                          renderFixedStyle(column, columnIndex),
+                        ]"
+                        :class="[
+                          'layui-table-cell',
+                          renderFixedClassName(
+                            column,
+                            columnIndex,
+                            tableFlattenColumns
+                          ),
+                          column.fixed
+                            ? `layui-table-fixed-${column.fixed}`
+                            : '',
+                        ]"
+                        v-html="renderTotalRowCell(column)"
+                      ></td>
+                    </template>
+                  </template>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
-      </div>
+      </template>
       <div class="layui-table-footer" v-if="slot.footer">
         <slot name="footer"></slot>
       </div>

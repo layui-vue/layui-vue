@@ -114,7 +114,8 @@ watch(
       .set("hour", old.hour())
       .set("minute", old.minute())
       .set("second", old.second());
-  }
+  },
+  { immediate: true }
 );
 
 const leftDataList = computed(() => {
@@ -132,8 +133,9 @@ const classes = computed(() => {
 
     return {
       "layui-this":
-        startDate.value?.startOf("day").valueOf() === item.value ||
-        endDate.value?.startOf("day").valueOf() === item.value,
+        item.type === "current" &&
+        (startDate.value?.startOf("day").valueOf() === item.value ||
+          endDate.value?.startOf("day").valueOf() === item.value),
       "laydate-range-hover":
         item.type === "current" &&
         // 当前日期在开始时间之后 && 当前日期再结束(hover)时间之前 (第一次点击在前>第二次点击(hover)在后)
@@ -206,13 +208,29 @@ const handleChangeYearMonth = (
 };
 
 // 点击year/month进行切换
-const handleChangeYearMonthPick = (
+const handleChangeYearMonthLeftPick = (
   val: Dayjs,
   type: "year" | "month",
   dropdownEl: DropdownRef
 ) => {
   const DateValue = val[type]();
+
   leftDate.value = leftDate.value[type](DateValue) as Dayjs;
+
+  dropdownEl.hide();
+};
+
+const handleChangeYearMonthRightPick = (
+  val: Dayjs,
+  type: "year" | "month",
+  dropdownEl: DropdownRef
+) => {
+  const DateValue = val[type]();
+
+  leftDate.value = (rightDate.value[type](DateValue) as Dayjs).subtract(
+    1,
+    "month"
+  );
 
   dropdownEl.hide();
 };
@@ -256,6 +274,8 @@ const handleChangeShortcut = (shortcuts: ShortcutsType) => {
   rightDate.value = shortcutsValues[1];
   startDate.value = shortcutsValues[0];
   endDate.value = shortcutsValues[1];
+
+  if (props.simple) handleConfirm();
 };
 
 const handleConfirm = () => {
@@ -289,7 +309,7 @@ const handleConfirm = () => {
                   class="layui-laydate"
                   :modelValue="leftDate"
                   :showDate="leftDate"
-                  @pick="(val: Dayjs) => handleChangeYearMonthPick(val, 'year', yearLeftRef!)"
+                  @pick="(val: Dayjs) => handleChangeYearMonthLeftPick(val, 'year', yearLeftRef!)"
                 ></Year>
               </template>
             </LayDropdown>
@@ -302,8 +322,7 @@ const handleConfirm = () => {
                   class="layui-laydate"
                   :modelValue="leftDate"
                   :showDate="leftDate"
-                  dateType="month"
-                  @pick="(val: Dayjs) => handleChangeYearMonthPick(val, 'month', monthLeftRef!)"
+                  @pick="(val: Dayjs) => handleChangeYearMonthLeftPick(val, 'month', monthLeftRef!)"
                 ></Month>
               </template>
             </LayDropdown>
@@ -346,7 +365,7 @@ const handleConfirm = () => {
                   class="layui-laydate"
                   :modelValue="rightDate"
                   :showDate="rightDate"
-                  @pick="(val: Dayjs) => handleChangeYearMonthPick(val, 'year', yearRightRef!)"
+                  @pick="(val: Dayjs) => handleChangeYearMonthRightPick(val, 'year', yearRightRef!)"
                 ></Year>
               </template>
             </LayDropdown>
@@ -360,7 +379,7 @@ const handleConfirm = () => {
                   :modelValue="rightDate"
                   :showDate="rightDate"
                   dateType="month"
-                  @pick="(val: Dayjs) => handleChangeYearMonthPick(val.subtract(1, 'month'), 'month', monthRightRef!)"
+                  @pick="(val: Dayjs) => handleChangeYearMonthRightPick(val, 'month', monthRightRef!)"
                 ></Month>
               </template>
             </LayDropdown>

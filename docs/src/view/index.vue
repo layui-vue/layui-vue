@@ -30,9 +30,9 @@
           </cite></span
         >
         <span
-          >{{ t("home.download") }}：<em class="site-showdowns"
-            >199,627</em
-          ></span
+          >{{ t("home.download") }}：<em class="site-showdowns">{{
+            npmDownloadValue
+          }}</em></span
         >
       </div>
       <div class="site-banner-other">
@@ -42,7 +42,7 @@
           rel="nofollow"
           class="site-star"
         >
-          <i class="layui-icon"></i> Star <cite id="getStars">3059</cite>
+          <i class="layui-icon"></i> Star <cite id="getStars">3174</cite>
         </a>
         <a
           href="https://gitee.com/layui/layui-vue"
@@ -137,7 +137,7 @@
           <lay-tooltip content="layui" position="top">
             <a
               style="height: 40px; display: inline-block"
-              href="https://layui.gitee.io/v2"
+              href="https://layui.dev/"
               target="_blank"
             >
               <lay-avatar
@@ -151,7 +151,7 @@
           <lay-tooltip content="furion" position="top">
             <a
               style="height: 40px; display: inline-block"
-              href="https://dotnetchina.gitee.io/furion"
+              href="https://furion.net/"
               target="_blank"
             >
               <lay-avatar
@@ -179,11 +179,11 @@
           <lay-tooltip content="aizuda" position="top">
             <a
               style="height: 40px; display: inline-block"
-              href="http://doc.aizuda.com"
+              href="https://aizuda.com/home"
               target="_blank"
             >
               <lay-avatar
-                src="http://doc.aizuda.com//img/azd.png"
+                src="https://aizuda.com/favicon.svg"
                 style="background: transparent"
               ></lay-avatar>
             </a>
@@ -235,12 +235,12 @@
           <lay-tooltip content="流之云" position="top">
             <a
               style="height: 40px; width: 40px; display: inline-block"
-              href="https://gitee.com/ntdgg/tpflow"
+              href="https://www.gadmin8.com/"
               target="_blank"
             >
               <lay-avatar
-                src="https://portrait.gitee.com/uploads/avatars/namespace/118/356797_ntdgg_1635818279.png!avatar100"
-                style="background: transparent; width: 50px"
+                src="https://www.gadmin8.com/favicon.ico"
+                style="background: transparent; width: 32px; height: 32px"
               ></lay-avatar>
             </a>
           </lay-tooltip>
@@ -273,7 +273,7 @@
 </template>
 
 <script>
-import { inject, onMounted } from "vue";
+import { inject, onMounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { useAppStore } from "../store/app";
 import { layer } from "layui-layer/src/index";
@@ -283,6 +283,77 @@ export default {
   setup() {
     const { t } = useI18n();
     const appStore = useAppStore();
+
+    const npmDownloadValue = ref("...");
+
+    /**
+     * 从2021-9-28开始，获取每年的日期范围
+     * 需要分段获取，接口不支持一次性获取所有数据
+     * return [
+        ["2021-09-28", "2021-12-31"],
+        ["2022-01-01", "2022-12-31"],
+        ["2023-01-01", "2023-12-31"],
+        ["2024-01-01", "2024-12-31"],
+        ["2025-01-01", "2025-03-09"]
+       ]
+     */
+    function getYearlyDateRanges() {
+      const startDate = new Date(2021, 9, 28);
+      const today = new Date();
+      const result = [];
+
+      const formatDate = (date) => {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, "0");
+        const day = String(date.getDate()).padStart(2, "0");
+        return `${year}-${month}-${day}`;
+      };
+
+      const startYear = startDate.getFullYear();
+      const endYear = today.getFullYear();
+
+      for (let year = startYear; year <= endYear; year++) {
+        let rangeStart, rangeEnd;
+
+        if (year === startYear) {
+          rangeStart = startDate;
+          rangeEnd = year === endYear ? today : new Date(year, 11, 31);
+        } else if (year === endYear) {
+          rangeStart = new Date(year, 0, 1);
+          rangeEnd = today;
+        } else {
+          rangeStart = new Date(year, 0, 1);
+          rangeEnd = new Date(year, 11, 31);
+        }
+
+        result.push([formatDate(rangeStart), formatDate(rangeEnd)]);
+      }
+
+      return result;
+    }
+
+    async function getNpmDownloadValue() {
+      const timeRanges = getYearlyDateRanges();
+
+      // https://api.npmjs.org/downloads/point/2023-09-08:2025-03-09/@layui/layui-vue
+      const results = await Promise.all(
+        timeRanges.map((range) => {
+          return fetch(
+            `https://api.npmjs.org/downloads/point/${range.join(
+              ":"
+            )}/@layui/layui-vue`
+          );
+        })
+      );
+
+      let num = 0;
+      for (const result of results) {
+        const data = await result.json();
+        num += data.downloads;
+      }
+
+      npmDownloadValue.value = num.toLocaleString("en-US");
+    }
 
     const changeTheme = () => {
       if (appStore.theme === "dark") {
@@ -295,6 +366,8 @@ export default {
     const version = inject("version");
 
     onMounted(() => {
+      getNpmDownloadValue();
+
       if (appStore.documentVersion != version) {
         appStore.documentVersion = version;
         layer.notify({
@@ -313,6 +386,7 @@ export default {
       version,
       appStore,
       changeTheme,
+      npmDownloadValue,
     };
   },
 };

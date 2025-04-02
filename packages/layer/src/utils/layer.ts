@@ -468,10 +468,12 @@ export function calculateNotifOffset(offset: any, area: any, layerId: string) {
 
 //移除Notify队列中某项，并且重新计算其他Notify位置
 export function removeNotifiyFromQueen(layerId: string) {
-  // 间隙
-  const transOffsetTop = 15;
   // 删除项的高度
   const notifiyDom = compareElementId("layui-layer", layerId) as HTMLElement;
+  if (!notifiyDom) return;
+
+  // 间隙
+  const transOffsetTop = 15;
   const offsetHeight = notifiyDom.offsetHeight;
   (window as any).NotifiyQueen = (window as any).NotifiyQueen || [];
   const notifiyQueen = (window as any).NotifiyQueen;

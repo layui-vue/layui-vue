@@ -41,6 +41,7 @@ export type {
 } from "@floating-ui/dom";
 
 import type { Strategy, Placement, Middleware } from "@floating-ui/dom";
+import {} from "@floating-ui/utils";
 
 export type Middlewares = Middleware[];
 

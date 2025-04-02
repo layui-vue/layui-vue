@@ -43,6 +43,7 @@ const emits = defineEmits(["update:promptValue"]);
       @input="$emit('update:promptValue', inputValue)"
       v-model="inputValue"
       :maxlength="props.maxLength"
+      :placeholder="props.placeholder"
     >
     </lay-textarea>
   </template>

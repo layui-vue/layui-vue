@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { LayIcon } from "@layui/icons-vue";
 import { computed, ref, useAttrs, watch, nextTick, onMounted } from "vue";
-import { isObject } from "@vueuse/shared";
+import { isObject } from "@vueuse/core";
 import "./index.less";
 import { TextareaAutosizeHeight, TextareaAutosizeRow } from "./interface";
 
@@ -46,6 +46,7 @@ export interface TextareaProps {
    * 自动高度
    */
   autosize?: boolean | TextareaAutosizeHeight | TextareaAutosizeRow;
+  readonly?: boolean;
 }
 
 defineOptions({
@@ -234,6 +235,7 @@ defineExpose({ focus, blur });
       :placeholder="placeholder"
       :name="name"
       :disabled="disabled"
+      :readonly="readonly"
       :maxlength="maxlength"
       :style="styles"
       :class="{ 'layui-textarea-disabled': disabled }"

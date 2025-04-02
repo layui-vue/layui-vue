@@ -1,3 +1,11 @@
+## [1.0.15] (2024-10-22)
+
+### Layui-vue Upgrade V2.19.0
+
+### Bug Fixes
+* 调整 `umd` 版本全局变量名为 `LayuiJsonSchemaForm`
+* 修复 `umd` 版本中使用报错
+
 ## [1.0.14] (2024-8-02)
 
 ### Layui-vue Upgrade V2.18.3

@@ -180,7 +180,12 @@ describe("LayDatePicker year type", () => {
     const wrapper = mount({
       setup() {
         return () => (
-          <LayDatePicker type="year" min="2023" max="2024"></LayDatePicker>
+          <LayDatePicker
+            type="year"
+            min="2023"
+            max="2024"
+            modelValue={"2024"}
+          ></LayDatePicker>
         );
       },
     });
@@ -188,16 +193,14 @@ describe("LayDatePicker year type", () => {
     await mockInputClick(wrapper);
 
     const YearInstance = wrapper.findComponent(Year);
-    const currentLi = YearInstance.find(
-      ".laydate-year-list .layui-laydate-current"
-    );
+    const currentLi = YearInstance.find(".laydate-year-list .layui-this");
 
     const preLi =
       currentLi.element.previousElementSibling?.previousElementSibling;
     const nextLi = currentLi.element.nextElementSibling;
 
-    expect(preLi?.className).toBe("layui-disabled");
-    expect(nextLi?.className).toBe("layui-disabled");
+    expect(preLi?.className).toContain("layui-disabled");
+    expect(nextLi?.className).toContain("layui-disabled");
   });
 
   test("year shortcuts", async () => {
@@ -270,15 +273,13 @@ describe("LayDatePicker year type", () => {
     await mockInputClick(wrapper);
 
     const YearInstance = wrapper.findComponent(Year);
-    const currentLi = YearInstance.find(
-      ".laydate-year-list .layui-laydate-current"
-    );
+    const currentLi = YearInstance.find(".laydate-year-list .layui-this");
 
     const preLi = currentLi.element.previousElementSibling;
     const nextLi = currentLi.element.nextElementSibling;
 
-    expect(preLi?.className).toBe("layui-disabled");
-    expect(nextLi?.className).toBe("layui-disabled");
+    expect(preLi?.className).toContain("layui-disabled");
+    expect(nextLi?.className).toContain("layui-disabled");
 
     const inputDom = wrapper.find("input");
 

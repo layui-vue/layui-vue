@@ -35,6 +35,7 @@ export interface SelectProps {
   multiple?: boolean;
   options?: SelectOptionProps[];
   autoFitWidth?: boolean;
+  autoFitMinWidth?: boolean;
   size?: SelectSize;
   collapseTagsTooltip?: boolean;
   minCollapsedNum?: number;
@@ -62,6 +63,7 @@ const props = withDefaults(defineProps<SelectProps>(), {
   minCollapsedNum: 3,
   allowClear: false,
   autoFitWidth: true,
+  autoFitMinWidth: true,
   showSearch: false,
   modelValue: null,
   disabled: false,
@@ -71,7 +73,7 @@ const props = withDefaults(defineProps<SelectProps>(), {
 const { size } = useProps(props);
 
 const slots = useSlots();
-const selectRef = ref();
+const selectRef = ref<typeof LayDropdown | null>(null);
 const searchValue = ref("");
 const singleValue = ref("");
 const multipleValue: Ref<any[]> = ref([]);
@@ -201,6 +203,11 @@ const handleSearch = (value: string) => {
   if (composing.value) return;
   emits("search", value);
   searchValue.value = value;
+
+  // 当拉下关闭 | 用户输入，弹出弹窗
+  if (value && !openState.value) {
+    selectRef.value && selectRef.value.show();
+  }
 };
 
 const handleClear = () => {
@@ -257,6 +264,7 @@ provide("searchMethod", props.searchMethod);
       :contentClass="contentClass"
       :contentStyle="contentStyle"
       :autoFitWidth="autoFitWidth"
+      :autoFitMinWidth="autoFitMinWidth"
       :teleportProps="teleportProps"
       @hide="handleHide"
       @show="openState = true"

@@ -20,25 +20,15 @@
   </lay-upload>
 </template>
 
-<script>
+<script setup>
 import { ref,reactive } from 'vue'
 
-export default {
-  setup() {
+const data = ref();
 
-    const data = ref();
-
-    const doneHandle = (result) => {
-      data.value = JSON.parse(result.data);
-      console.log(data.value.url)
-    };
-
-    return {
-      doneHandle,
-      data,
-    }
-  }
-}
+const doneHandle = (result) => {
+  data.value = JSON.parse(result.data);
+  console.log(data.value.url)
+};
 </script>
 
 :::
@@ -59,24 +49,14 @@ export default {
   </div>
 </template>
 
-<script>
+<script setup>
 import { ref,reactive } from 'vue'
 
-export default {
-  setup() {
+const file1 = ref([]);
+const uploadRef = ref(null)
 
-    const file1 = ref([]);
-    const uploadRef = ref(null)
-
-    const handleUpload = () => {
-      uploadRef.value.submit()
-    }
-
-    return {
-      file1,
-      handleUpload
-    }
-  }
+const handleUpload = () => {
+  uploadRef.value.submit()
 }
 </script>
 
@@ -100,41 +80,32 @@ export default {
   </lay-upload>
 </template>
 
-<script>
+<script setup>
 import { ref,reactive } from 'vue'
 
-export default {
-  setup() {
-    const picList = ref([]);
-    const filetoDataURL=(file,fn)=>{
-      const reader = new FileReader();
-      reader.onloadend = function(e){
-        fn(e.target.result);
-      };
-      reader.readAsDataURL(file);
-    };
-    const getUploadFile=(files)=>{
-      if(Array.isArray(files)&&files.length>0){
-        files.forEach((file,index,array)=>{
-          filetoDataURL(file,(res)=>{
-            console.log(res);
-            picList.value.push(res);
-            console.log(picList.value);
-          });
-        });
-      }
-    };
-    const beginChoose =(e)=>{
-      console.log("beginChoose",e);
-    };
-    return {
-      getUploadFile,
-      filetoDataURL,
-      beginChoose,
-      picList
-    }
-  }
-}
+const picList = ref([]);
+const filetoDataURL=(file,fn)=>{
+  const reader = new FileReader();
+  reader.onloadend = function(e){
+    fn(e.target.result);
+  };
+  reader.readAsDataURL(file);
+};
+const getUploadFile=(files)=>{
+  if(Array.isArray(files)&&files.length>0){
+    files.forEach((file,index,array)=>{
+      filetoDataURL(file,(res)=>{
+        console.log(res);
+        picList.value.push(res);
+        console.log(picList.value);
+      });
+    });
+  }
+};
+const beginChoose =(e)=>{
+  console.log("beginChoose",e);
+};
+
 </script>
 
 :::
@@ -148,17 +119,6 @@ export default {
   <lay-upload :multiple="true"></lay-upload>
 </template>
 
-<script>
-import { ref } from 'vue'
-
-export default {
-  setup() {
-    return {
-    }
-  }
-}
-</script>
-
 :::
 
 ::: title 拖拽上传
@@ -170,16 +130,24 @@ export default {
   <lay-upload :drag="true"></lay-upload>
 </template>
 
-<script>
-import { ref } from 'vue'
+:::
 
-export default {
-  setup() {
+::: title 文件夹上传
+:::
 
-    return {
-    }
-  }
+::: demo 使用 `directory` 开启文件夹上传
+
+<template>
+  <lay-upload directory @onChange="handleChange"></lay-upload>
+</template>
+
+<script setup>
+
+const handleChange = (file) => {
+  console.log(file, "文件")
+  console.log(file.length, "文件数量")
 }
+
 </script>
 
 :::
@@ -203,18 +171,12 @@ export default {
   </lay-upload>
 </template>
 
-<script>
+<script setup>
 import { ref } from 'vue'
-export default {
-  setup() {
-    const getUploadFile2 = (file)=>{
-      console.log(file);
-    };
-    return {
-      getUploadFile2
-    }
-  }
-}
+
+const getUploadFile2 = (file)=>{
+  console.log(file);
+};
 </script>
 
 :::
@@ -233,50 +195,39 @@ export default {
   </lay-upload>
 </template>
 
-<script>
+<script setup>
 import { ref } from 'vue'
-export default {
-  setup() {
-    const cutUrl = ref("");
 
-    const cutOptions = {
-      copperOption: {
-        center: false,
-        aspectRatio: 1,
-        crop: function(event) {
-          console.log(event.detail.x);
-          console.log(event.detail.y);
-          console.log(event.detail.width);
-          console.log(event.detail.height);
-          console.log(event.detail.rotate);
-          console.log(event.detail.scaleX);
-          console.log(event.detail.scaleY);
-        },
-      }
-    }
+const cutUrl = ref("");
 
-    const getCutDone=(res)=>{
-      console.log("getCutDone",res);
-      cutUrl.value = res.msg;
-    };
-
-    const getCutCancel=(res)=>{
-      console.log("getCutCancel",res);
-    };
-
-    const getFileDone=(res)=>{
-      console.log("getFileDone",res);
-    };
-
-    return {
-      getCutDone,
-      getCutCancel,
-      getFileDone,
-      cutUrl,
-      cutOptions
-    }
-  }
+const cutOptions = {
+  copperOption: {
+    center: false,
+    aspectRatio: 1,
+    crop: function(event) {
+      console.log(event.detail.x);
+      console.log(event.detail.y);
+      console.log(event.detail.width);
+      console.log(event.detail.height);
+      console.log(event.detail.rotate);
+      console.log(event.detail.scaleX);
+      console.log(event.detail.scaleY);
+    },
+  }
 }
+
+const getCutDone=(res)=>{
+  console.log("getCutDone",res);
+  cutUrl.value = res.msg;
+};
+
+const getCutCancel=(res)=>{
+  console.log("getCutCancel",res);
+};
+
+const getFileDone=(res)=>{
+  console.log("getFileDone",res);
+};
 </script>
 
 :::
@@ -293,35 +244,25 @@ export default {
   </lay-upload>
 </template>
 
-<script>
+<script setup>
 import { ref,reactive } from 'vue'
 import { layer } from "@layui/layer-vue";
 
-export default {
-  setup() {
+const data10 = ref();
 
-    const data10 = ref();
+const doneHandle10 = (result) => {
+  data.value = JSON.parse(result.data);
+};
 
-    const doneHandle10 = (result) => {
-      data.value = JSON.parse(result.data);
-    };
-
-    const beforeUpload10 = (file) => {
-      var isOver = false;
-      if(file.size > 1000) {
-        isOver = true;
-        layer.msg(`file size over 1000 KB`, { icon: 2})
-      } 
-      return new Promise((resolver) => resolver(true));
-    }
-
-    return {
-      beforeUpload10,
-      doneHandle10,
-      data10,
-    }
-  }
+const beforeUpload10 = (file) => {
+  var isOver = false;
+  if(file.size > 1000) {
+    isOver = true;
+    layer.msg(`file size over 1000 KB`, { icon: 2})
+  } 
+  return new Promise((resolver) => resolver(true));
 }
+
 </script>
 
 :::
@@ -345,6 +286,7 @@ export default {
 | drag            | 是否接受拖拽的文件上传，设置 false 可禁用。不支持 ie8/9 | boolean                          | true                         | --          |
 | disabled        | 设置文件禁用                                            | boolean                          | false                        | --          |
 | disabledPreview | 设置文件预览插槽区域为禁用状态                          | boolean                          | false                        | --          |
+| directory `2.21.2`      | 支持上传文件夹                | boolean                          | false                        | --          |
 | cut             | 开启裁剪(`acceptMime`为image类型生效)                 | boolean                          | false                        | --          |
 | cutOptions      | 开启剪裁的模态弹窗与剪裁框的配置                        | object                           | { layerOption,copperOption } | --          |
 | text            | 普通上传描述                                            | string                           | --                           | --          |

@@ -27,10 +27,13 @@ const props = withDefaults(defineProps<ContentProps>(), {});
 const ContentRef = ref<HTMLElement | null>(null);
 const ArrowRef = ref<HTMLDivElement | null>(null);
 
-const subContents = ref<Array<Ref<HTMLElement>>>([]);
+const currentContents: Array<Ref<HTMLElement>> = [];
 
 const { TriggerRef, onShow, onHidden } = inject(POPPER_INJECTION_KEY)!;
-const { collectorSubContent } = inject(CONTENT_INJECTION_KEY, {});
+const { allContents: parentAllContents = [] } = inject(
+  CONTENT_INJECTION_KEY,
+  {}
+);
 
 const isExist = ref(props.modelValue);
 const _visible = ref(false);
@@ -110,8 +113,30 @@ watch(innerVisible, () => {
   }
 });
 
+const removeCurrentContentLink = () => {
+  /**
+   * 删除当前 `currentContents` 管理的队列
+   */
+  parentAllContents.splice(
+    parentAllContents.findIndex((contents) => contents === currentContents),
+    1
+  );
+
+  /**
+   * 删除在其他队列中的当前 `ContentRef`
+   */
+  parentAllContents.forEach((contents) => {
+    contents.splice(
+      contents.findIndex((content) => content.value === ContentRef.value),
+      1
+    );
+  });
+};
+
 onBeforeUnmount(() => {
   stopAutoUpdate.value && stopAutoUpdate.value();
+
+  removeCurrentContentLink();
 });
 
 onClickOutside(ContentRef, (event: PointerEvent) => {
@@ -122,7 +147,7 @@ onClickOutside(ContentRef, (event: PointerEvent) => {
   )
     return;
 
-  for (const item of subContents.value) {
+  for (const item of currentContents) {
     if (item.value?.contains(event.target as HTMLElement)) {
       return;
     }
@@ -144,23 +169,24 @@ const onContentLeave = () => {
 };
 
 const show = () => {
+  onShow();
   _visible.value = true;
 };
 
 const hidden = () => {
+  // TODO 兼容popConfirm组件使用当前函数关闭popper，造成modelValue未改变弹窗依然显示
+  onHidden();
   _visible.value = false;
 };
 
 onMounted(() => {
-  collectorSubContent?.(ContentRef as Ref<HTMLElement>);
+  parentAllContents.forEach((content) => {
+    content.push(ContentRef as Ref<HTMLElement>);
+  });
 });
 
-const _collectorSubContent = (sub: Ref<HTMLElement>) => {
-  subContents.value.push(sub);
-};
-
 provide(CONTENT_INJECTION_KEY, {
-  collectorSubContent: _collectorSubContent,
+  allContents: [...parentAllContents, currentContents],
 });
 
 defineExpose({ show, hidden, update });

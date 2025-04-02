@@ -1,4 +1,4 @@
-import type { StyleValue } from "vue";
+import type { StyleValue, TeleportProps } from "vue";
 import type { PopperTrigger, Placement } from "../popper/index";
 
 export type TooltipProps = {
@@ -12,4 +12,5 @@ export type TooltipProps = {
   enterable?: boolean;
   popperClass?: string | Array<string>;
   popperStyle?: StyleValue;
+  teleportProps?: TeleportProps;
 };

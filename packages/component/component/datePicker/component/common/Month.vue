@@ -92,40 +92,23 @@ const cellDisabled = (month: number) => {
   if (DatePickerContext.disabledDate) {
     return DatePickerContext.disabledDate(fullMonthDay(month).toDate());
   }
+  const fullMonth = fullMonthDay(month);
 
-  if (props.dateType === "month") {
-    if (
-      DatePickerContext.min &&
-      month < dayjs(DatePickerContext.min, DatePickerContext.format).month()
-    ) {
-      return true;
-    }
-    if (
-      DatePickerContext.max &&
-      month > dayjs(DatePickerContext.max, DatePickerContext.format).month()
-    ) {
-      return true;
-    }
-    return false;
-  } else {
-    const fullMonth = fullMonthDay(month);
-
-    if (
-      DatePickerContext.min &&
-      fullMonth.isBefore(DatePickerContext.min, "month")
-    ) {
-      return true;
-    }
-
-    if (
-      DatePickerContext.max &&
-      fullMonth.isAfter(DatePickerContext.max, "month")
-    ) {
-      return true;
-    }
-
-    return false;
+  if (
+    DatePickerContext.min &&
+    fullMonth.isBefore(DatePickerContext.min, "month")
+  ) {
+    return true;
   }
+
+  if (
+    DatePickerContext.max &&
+    fullMonth.isAfter(DatePickerContext.max, "month")
+  ) {
+    return true;
+  }
+
+  return false;
 };
 
 const isActive = computed(() => {

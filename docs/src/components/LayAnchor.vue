@@ -84,7 +84,7 @@ const handlerListItemClick = (index: number, id: string) => {
   activeIndex.value = index;
   scrollToTitle(id);
 
-  history.replaceState(null, '', `#${id}`)
+  history.replaceState(null, "", `#${id}`);
 };
 
 /**锚点标签跟随滚动高亮 */
@@ -131,11 +131,11 @@ onMounted(() => {
   enableAnimation = show.value;
 
   if (window.location.hash) {
-    const id = decodeURIComponent(location.hash).replace("#", "")
-    
+    const id = decodeURIComponent(location.hash).replace("#", "");
+
     setTimeout(() => {
-      scrollToTitle(id)
-    }, 200)
+      scrollToTitle(id);
+    }, 200);
   }
 });
 

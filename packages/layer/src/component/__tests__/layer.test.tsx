@@ -1,5 +1,5 @@
 import { nextTick, h, defineComponent } from "vue";
-import { afterEach, describe, expect, it, test } from "vitest";
+import { afterEach, describe, expect, it, test, vi } from "vitest";
 import { layer } from "../../index";
 import { sleep } from "../../../../component/test-utils";
 
@@ -58,5 +58,31 @@ describe("Layer", () => {
 
     expect(titleDom.innerText).toBe("title");
     expect(footerDom.innerText).toBe("footer");
+  });
+
+  test("notify类型 通过closeAll关闭 二次打开存在异常", async () => {
+    const consoleErrorMock = vi
+      .spyOn(console, "error")
+      .mockImplementation(() => {});
+
+    layer.notify({
+      title: "这是标题",
+      content: "默认就是右上，也是用得最多的",
+    });
+
+    setTimeout(() => {
+      layer.closeAll();
+    }, 500);
+
+    await sleep(1000);
+
+    layer.notify({
+      title: "这是标题",
+      content: "默认就是右上，也是用得最多的",
+    });
+
+    await sleep();
+
+    expect(consoleErrorMock).not.toHaveBeenCalled();
   });
 });

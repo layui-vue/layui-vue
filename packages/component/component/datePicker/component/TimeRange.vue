@@ -64,6 +64,8 @@ const handleChangeShortcut = (shortcuts: ShortcutsType) => {
 
   startDate.value = shortcutsValues[0];
   endDate.value = shortcutsValues[1];
+
+  if (props.simple) handleConfirm();
 };
 
 const handleConfirm = () => {

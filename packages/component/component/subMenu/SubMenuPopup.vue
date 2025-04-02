@@ -39,13 +39,12 @@ const computedPlacement = computed(() => {
 <template>
   <lay-dropdown
     trigger="hover"
-    class="layui-sub-menu-popup"
     :placement="computedPlacement"
     :autoFitMinWidth="false"
     :teleportProps="teleportProps"
     :contentOffset="3"
   >
-    <li class="layui-nav-item">
+    <li class="layui-nav-item layui-sub-menu-popup">
       <a href="javascript:void(0)" style="justify-content: space-between">
         <div>
           <i v-if="$slots.icon" class="layui-sub-menu-icon">
