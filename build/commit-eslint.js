@@ -2,6 +2,9 @@ const { execSync, spawnSync } = require('node:child_process')
 const path = require('node:path')
 const process = require('node:process')
 
+/**
+ * 获取 `暂存区` 所有文件
+ */
 function getStagedFiles() {
   try {
     const output = execSync(
@@ -24,7 +27,6 @@ function getStagedFiles() {
 
 async function processFilesWithESLint(stagedFiles) {
   try {
-    // 并行处理（控制并发）
     const results = await Promise.allSettled(
       stagedFiles.map(file =>
         eslintFix(file).then(() => runGitAdd(file)),
@@ -34,9 +36,7 @@ async function processFilesWithESLint(stagedFiles) {
     // 处理错误结果
     const errors = results.filter(r => r.status === 'rejected')
     if (errors.length > 0) {
-      console.error('\x1B[31mESLint 校验未通过：\x1B[0m')
-      errors.forEach((e, i) => console.error(`${i + 1}. ${e.reason}`))
-      process.exit(1) // 退出码非零阻止提交
+      process.exit(1)
     }
   }
   catch (error) {
@@ -52,7 +52,7 @@ function eslintFix(filePath) {
   return new Promise((resolve, reject) => {
     const eslint = spawnSync(
       'npx eslint',
-      ['--fix', filePath],
+      ['--fix', '--quiet', filePath],
       {
         stdio: 'inherit',
         shell: true,
