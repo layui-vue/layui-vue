@@ -19,8 +19,8 @@
     "build:docs": "pnpm -C docs build",
     "publish:component": "pnpm -C packages/layui publish",
     "generate:icons": "pnpm -C packages/icons generate",
-    "lint:eslint": "eslint 'packages/**/*.{vue,ts,tsx}' --fix",
-    "lint:prettier": "prettier --write \"packages/**/*.{vue,ts}\"",
+    "lint:eslint": "eslint --fix",
+    "commit:eslint": "node ./build/commit-eslint.js",
     "postinstall": "pnpm run build",
     "prepare": "husky install",
     "commit": "git add . && git-cz && git push"
