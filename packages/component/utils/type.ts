@@ -21,3 +21,12 @@ export const normalizeValue = (val: any[]): any => {
 export const isNil = (val: any): boolean => {
   return val === undefined || val === null;
 };
+
+/**
+ * Object.is
+ * @param value
+ * @param diffValue
+ */
+export const isEqual = (value: any, diffValue: any): boolean => {
+  return Object.is(value, diffValue);
+};

@@ -238,7 +238,7 @@ const getSelectedKeys3 = () => {
 }
 
 const getCheckData3 = () => {
-  layer.msg(tableRef3.value.getCheckData());
+  layer.msg(JSON.stringify(tableRef3.value.getCheckData()));
 }
 
 const columns3 = [
@@ -414,7 +414,13 @@ const columns5 = [
     children: [
       { title: "省", key: "prov", width: "100px" },
       { title: "市", key: "city", width: "100px" },
-      { title: "区", key: "area", width: "100px" },
+      { title: "区", key: "area", width: "100px",
+        children: [
+          { title: "区1", key: "area1", width: "100px" },
+          { title: "区2", key: "area2", width: "100px" },
+          { title: "区3", key: "area3", width: "100px" },
+        ] 
+      },
     ]
   },
   {
@@ -425,14 +431,14 @@ const columns5 = [
 ]
 
 const dataSource5 = [
-  {id:"10001", name:"夏娜1", prov:"浙江", sex:"女", city:"杭州", area: "西湖区", remark: '不知江月待何人，但见长江送流水。'},
-  {id:"10002", name:"夏娜2", prov:"浙江", sex:"女", city:"杭州", area: "西湖区", remark: '不知江月待何人，但见长江送流水。'},
-  {id:"10003", name:"夏娜3", prov:"浙江", sex:"女", city:"杭州", area: "西湖区", remark: '不知江月待何人，但见长江送流水。'},
-  {id:"10004", name:"夏娜4", prov:"浙江", sex:"女", city:"杭州", area: "西湖区", remark: '不知江月待何人，但见长江送流水。'},
-  {id:"10005", name:"夏娜5", prov:"浙江", sex:"女", city:"杭州", area: "西湖区", remark: '不知江月待何人，但见长江送流水。'},      
-  {id:"10006", name:"夏娜6", prov:"浙江", sex:"女", city:"杭州", area: "西湖区", remark: '不知江月待何人，但见长江送流水。'},
-  {id:"10007", name:"夏娜7", prov:"浙江", sex:"女", city:"杭州", area: "西湖区", remark: '不知江月待何人，但见长江送流水。'},
-  {id:"10008", name:"夏娜8", prov:"浙江", sex:"女", city:"杭州", area: "西湖区", remark: '不知江月待何人，但见长江送流水。'}
+  {id:"10001", name:"夏娜1", area1: '区1', area2: "区2", area3: "区3", prov:"浙江", sex:"女", city:"杭州", area: "西湖区", remark: '不知江月待何人，但见长江送流水。'},
+  {id:"10002", name:"夏娜2", area1: '区1', area2: "区2", area3: "区3", prov:"浙江", sex:"女", city:"杭州", area: "西湖区", remark: '不知江月待何人，但见长江送流水。'},
+  {id:"10003", name:"夏娜3", area1: '区1', area2: "区2", area3: "区3", prov:"浙江", sex:"女", city:"杭州", area: "西湖区", remark: '不知江月待何人，但见长江送流水。'},
+  {id:"10004", name:"夏娜4", area1: '区1', area2: "区2", area3: "区3", prov:"浙江", sex:"女", city:"杭州", area: "西湖区", remark: '不知江月待何人，但见长江送流水。'},
+  {id:"10005", name:"夏娜5", area1: '区1', area2: "区2", area3: "区3", prov:"浙江", sex:"女", city:"杭州", area: "西湖区", remark: '不知江月待何人，但见长江送流水。'},      
+  {id:"10006", name:"夏娜6", area1: '区1', area2: "区2", area3: "区3", prov:"浙江", sex:"女", city:"杭州", area: "西湖区", remark: '不知江月待何人，但见长江送流水。'},
+  {id:"10007", name:"夏娜7", area1: '区1', area2: "区2", area3: "区3", prov:"浙江", sex:"女", city:"杭州", area: "西湖区", remark: '不知江月待何人，但见长江送流水。'},
+  {id:"10008", name:"夏娜8", area1: '区1', area2: "区2", area3: "区3", prov:"浙江", sex:"女", city:"杭州", area: "西湖区", remark: '不知江月待何人，但见长江送流水。'},
 ]
 
 </script>
@@ -568,7 +574,7 @@ const dataSource6 = [
 ]
 
 const getCheckData6 = function() {
-  layer.msg(tableRef6.value.getCheckData());
+  layer.msg(JSON.stringify(tableRef6.value.getCheckData()));
 }
 
 const defaultExpandAll6 = ref(false);
@@ -827,6 +833,47 @@ const defaultExpandAll2 = ref(false)
 
 :::
 
+::: title 添加工具栏图标
+:::
+
+::: demo 通过 `default-toolbar` 新增其他配置。
+
+<template>
+  <lay-table :columns="columns11" :data-source="dataSource11" :default-toolbar="defaultToolbars">
+  </lay-table>
+</template>
+
+<script setup>
+import { ref } from 'vue'
+
+const columns11 = [
+  { title:"编号", width:"80px", key:"id", fixed: "left", sort: "desc"},
+  { title:"姓名", width:"80px", key:"name" },
+]
+
+const dataSource11 = [
+  {id:"1", name:"张三1"},
+  {id:"2", name:"张三2"},
+]
+
+const defaultToolbars = [
+  "filter",
+  {
+    icon: "layui-icon-refresh",
+    title: "刷新",
+    onClick: () => {
+      console.log("导出")
+    }
+  },
+  "export",
+  "print"
+]
+
+
+</script>
+
+:::
+
 ::: title Table 属性
 :::
 
@@ -839,8 +886,8 @@ const defaultExpandAll2 = ref(false)
 | id                   | 数据主键                                                         | `string`            | --         | --                                           |
 | v-model:selectedKeys | 复选框选中项                                                     | --                  | --         | --                                           |
 | v-model:selectedKey  | 单选框选中项                                                     | --                  | --         | --                                           |
-| default-toolbar      | 工具栏                                                           | `boolean` `array`   | `false`    | `true` `false` `['filter','export','print']` |
-| page      | 分页配置，同分页组件参数一致 [详情](https://www.layui-vue.com/zh-CN/components/page)      | `object`    |  --   |--  |
+| default-toolbar      | 工具栏                                                           | `boolean` `Array<TableDefaultToolbar>`   | `false`    | [TableDefaultToolbar](https://www.layui-vue.com/zh-CN/components/table#Types) `2.22.0` |
+| page      | 分页配置 `2.22.0`新增`page.change`      | [TablePageProps](https://www.layui-vue.com/zh-CN/components/table#Types)    |  --   |--  |
 | size                 | 表格大小                                                         | `string`            | `md`       | `lg` `md` `sm`                               |
 | children-column-name | 指定树形结构的列名                                               | `string`            | `children` | --                                           |
 | indent-size          | 指定树形结构的缩进距离                                           | `number`            | `30`       | --                                           |
@@ -878,9 +925,11 @@ const defaultExpandAll2 = ref(false)
 | row-double      | 行双击     | { row: 当前行数据 }                    |
 | row-contextmenu | 行右击     | { row: 当前行数据 }                    |
 | cell-double     | 单元格双击 | data:当前单元格信息, event             |
-| change          | 分页事件   | { current: 当前页码, limit: 每页数量 } |
+| change          | 分页事件。<span style="color: red;">将在未来版本废弃，请替换为`page.change`</span>   | { current: 当前页码, limit: 每页数量 } |
 | sort-change     | 排序事件   | sort: string                           |
-| expand-change  `2.18.0`   | 行展开/收起   | data:当前单元格信息, event                     |
+| expand-change  `2.18.0`   | 行展开/收起   | data:当前单元格信息, event        |
+| checkbox  `2.22.0`   |  单行 checkbox 事件   | state: 是否选中, data: 点击行数据源  |
+| checkbox-all  `2.22.0`   | 全选 checkbox 事件   | selectedKeys: 选中数据        |
 
 :::
 
@@ -896,6 +945,7 @@ const defaultExpandAll2 = ref(false)
 | expand     | 嵌套面板          | { row } 在 1.8.6 版本，data 参数由 row 替代，但 data 仍然可用                                                                                           | `1.4.4`  |
 | customSlot | 自定义列插槽      | { row，rowIndex，column，columnIndex } 在 1.8.6 版本，data 参数由 row 替代，但 data 仍然可用，新增 rowIndex 行索引 columnIndex 列索引 column 列信息参数 | `1.4.4`  |
 | empty      | 无数据时显示的 UI | 此插槽意在替换整个无数据时的显示 UI，如果只是单纯替换文字，保留无数据时的图像，请使用`table`的`emptyDescription`属性                                    | `2.11.6` |
+| page      | 分页组件右侧区域 | --                                    | `2.22.0` |
 
 :::
 
@@ -928,7 +978,8 @@ const defaultExpandAll2 = ref(false)
 | titleSlot            | 标题插槽                       | 插槽参数 {column, columnIndex} | --      | --                          | --       |
 | align                | 对齐方式                       | `string`                       | `left`  | `left` `right` `center`     | --       |
 | ellipsisTooltip      | 当内容过长被隐藏时显示 tooltip | `boolean`                      | `false` | `true` `false`              | --       |
-| ellipsisTooltipTheme | tooltip 主题                   | `string`                       | `light` | `dark` `light`              | --       |
+| ellipsisTooltipTheme | tooltip 主题 !!!建议替换为 `ellipsisTooltipProps.isDark` 属性，将在未来版本删除                   | `string`                       | `light` | `dark` `light`              | --       |
+| ellipsisTooltipProps `2.22.0` | tooltip props          | [TooltipProps](https://www.layui-vue.com/zh-CN/components/tooltip#Tooltip%20%E5%B1%9E%E6%80%A7)                       | -- | --              | --       |
 | fixed                | 列固定                         | `string`                       | --      | `left` `right`              | --       |
 | type                 | 列类型                         | `string`                       | --      | `number` `checkbox` `radio` | --       |
 | children             | 表头分组                       | `string`                       | --      | `number` `checkbox` `radio` | `1.4.0`  |
@@ -939,6 +990,39 @@ const defaultExpandAll2 = ref(false)
 | totalRowMethod   | 自定义统计                       | `function` 参数{column, dataSource }  |  |           |  |
 
 :::
+
+::: title Types
+
+```ts
+
+interface TablePageProps = {
+  current: number;
+  limit: number;
+  total: number;
+  limit?: number;
+  theme?: string;
+  pages?: number;
+  limits?: number[];
+  hideOnSinglePage?: boolean;
+  ellipsisTooltip?: boolean;
+  disabled?: boolean;
+  layout?: LayoutKey[];
+  change?: (pageData: { current: number; limit: number }) => void;
+}
+
+type TableDefaultToolbar =
+  | "filter"
+  | "export"
+  | "print"
+  | TableDefaultToolbarComplex;
+
+interface TableDefaultToolbarComplex {
+  title: string;
+  icon: string;
+  onClick?: () => void;
+}
+
+```
 
 ::: previousNext table
 :::

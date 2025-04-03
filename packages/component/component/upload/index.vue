@@ -608,6 +608,7 @@ defineExpose({
       </div>
     </lay-layer>
     <div
+      v-if="$slots.preview"
       class="layui-upload-list"
       :class="disabledPreview ? 'layui-upload-list-disabled' : ''"
     >

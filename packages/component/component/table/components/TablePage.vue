@@ -1,40 +1,23 @@
 <script lang="ts" setup>
+import { type WritableComputedRef, computed, inject } from "vue";
+import { type TablePageProps as _TablePageProps } from "../typing";
 import { LayIcon } from "@layui/icons-vue";
-import LayPage from "../page/index.vue";
-import { computed, WritableComputedRef } from "vue";
+import LayPage from "@layui/component/component/page/index.vue";
+import { LAY_TABLE_CONTEXT } from "../constant";
 
-export type LayoutKey =
-  | "count"
-  | "prev"
-  | "page"
-  | "limits"
-  | "next"
-  | "limits"
-  | "refresh"
-  | "skip";
-
-export interface TablePageProps {
-  current: number;
-  layout?: LayoutKey[];
-  total: number;
-  limit: number;
-  limits?: number[];
-  pages?: number;
-  theme?: string;
-  disabled?: boolean;
-  hideOnSinglePage?: boolean;
-  ellipsisTooltip?: boolean;
-}
+export type TablePageProps = _TablePageProps;
 
 defineOptions({
-  name: "TablePage",
+  name: "LayTablePage",
 });
+
+const { tableEmits } = inject(LAY_TABLE_CONTEXT)!;
 
 const props = withDefaults(defineProps<TablePageProps>(), {
   layout: () => ["prev", "page", "next", "limits", "skip"],
 });
 
-const emit = defineEmits(["update:current", "update:limit", "change"]);
+const emit = defineEmits(["update:current", "update:limit"]);
 
 const current: WritableComputedRef<number> = computed({
   get() {
@@ -55,7 +38,14 @@ const limit: WritableComputedRef<number> = computed({
 });
 
 const change = (pageData: any) => {
-  emit("change", pageData);
+  if (!props.change) {
+    console.warn(
+      "layui-vue： LayTable的change事件，将在未来版本中废弃，请将回调函数移至为props.page中的change属性。"
+    );
+  }
+
+  tableEmits("change", pageData);
+  props.change && props.change(pageData);
 };
 </script>
 
