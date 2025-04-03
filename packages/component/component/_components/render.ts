@@ -6,6 +6,7 @@ type RenderFunc = (props: Record<string, unknown>) => VNodeTypes;
 
 export default defineComponent({
   name: "LayRender",
+  inheritAttrs: false,
   props: {
     render: {
       type: [String, Function] as PropType<string | RenderFunc>,

@@ -5,6 +5,7 @@ let isResizing = false;
 let stashColumn: any = null;
 let targetElem: HTMLElement | null = null;
 let targetElemBody: HTMLElement | null = null;
+let targetElemTotal: HTMLElement | null = null;
 let startX = 0;
 let startWidth = 0;
 let colWidthTotal = 0;
@@ -15,10 +16,11 @@ const resizing = useThrottleFn((e: MouseEvent) => {
   const newWidth = startWidth + offset;
   if (newWidth < 0) return false;
   stashColumn.width = newWidth + "px";
-  if (targetElem && targetElemBody) {
-    targetElem.style.width = colWidthTotal + offset + "px";
-    targetElemBody.style.width = colWidthTotal + offset + "px";
-  }
+  targetElem && (targetElem.style.width = colWidthTotal + offset + "px");
+  targetElemBody &&
+    (targetElemBody.style.width = colWidthTotal + offset + "px");
+  targetElemTotal &&
+    (targetElemTotal.style.width = colWidthTotal + offset + "px");
 }, 20);
 
 const stopResize = () => {
@@ -40,22 +42,25 @@ const removeMouseup = () => {
 export const startResize = (
   e: MouseEvent,
   column: TableColumn,
-  tableHeaderTable: any,
-  tableBodyTable: any
+  tableHeaderTableRef: HTMLElement | null,
+  tableBodyTableRef: HTMLElement | null,
+  tableTotalTableRef: HTMLElement | null
 ) => {
   document.addEventListener("mousemove", resizing);
   document.addEventListener("mouseup", removeMouseup);
 
-  targetElem = tableHeaderTable;
-  targetElemBody = tableBodyTable;
+  targetElem = tableHeaderTableRef;
+  targetElemBody = tableBodyTableRef;
+  targetElemTotal = tableTotalTableRef;
   stashColumn = column;
   startX = e.clientX;
   const colWidthArr: any[] = [];
-  tableHeaderTable.firstChild.childNodes.forEach((item: any) => {
-    if (item.clientWidth) {
-      colWidthArr.push(item.clientWidth);
-    }
-  });
+  tableHeaderTableRef &&
+    tableHeaderTableRef.firstChild?.childNodes?.forEach((item: any) => {
+      if (item.clientWidth) {
+        colWidthArr.push(item.clientWidth);
+      }
+    });
   colWidthTotal = colWidthArr.reduce((sum, item) => sum + item, 0);
 
   isResizing = true;

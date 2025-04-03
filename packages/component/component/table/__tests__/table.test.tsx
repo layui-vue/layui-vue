@@ -1,8 +1,9 @@
-import { mount } from "@vue/test-utils";
+import { DOMWrapper, type VueWrapper, mount } from "@vue/test-utils";
 import LayTable from "../index.vue";
+import LayCheckboxV2 from "@layui/component/component/checkboxV2/index.vue";
 
 import { describe, expect, test, vi } from "vitest";
-import { nextTick, ref } from "vue";
+import { nextTick, reactive, ref } from "vue";
 import { sleep } from "../../../test-utils";
 
 describe("LayTable", () => {
@@ -218,5 +219,550 @@ describe("LayTable", () => {
     const trDom2 = wrapper.findAll(".layui-table-body .layui-table tr");
     const tDDom2 = trDom2[0].findAll("td");
     expect(tDDom2[0].text()).toBe("张三3");
+  });
+
+  test("tree形 全选 childrenColumnName", async () => {
+    const columns = [
+      {
+        fixed: "left" as const,
+        type: "checkbox",
+        title: "复选",
+        key: "checkbox",
+      },
+      {
+        title: "编号",
+        width: "100px",
+        key: "id",
+      },
+    ];
+
+    const dataSource = ref([
+      {
+        id: "1",
+        name: "张三1",
+        children1: [
+          {
+            id: "2",
+            name: "张三2",
+          },
+        ],
+      },
+    ]);
+
+    const selectedKeys = ref([]);
+
+    const wrapper = mount({
+      setup() {
+        return () => (
+          <LayTable
+            columns={columns}
+            dataSource={dataSource.value}
+            v-model:selectedKeys={selectedKeys.value}
+            childrenColumnName="children1"
+          ></LayTable>
+        );
+      },
+    });
+
+    await nextTick();
+
+    const allCheckbox = wrapper.find(
+      ".layui-table-header .layui-table-cell-checkbox .layui-checkbox"
+    );
+
+    allCheckbox.trigger("click");
+
+    await nextTick();
+
+    expect(selectedKeys.value).toEqual(["1", "2"]);
+  });
+
+  test("分页切换 selectedKeys的数据保留、并且全选状态正确", async () => {
+    const columns = [
+      {
+        fixed: "left" as const,
+        type: "checkbox",
+        title: "复选",
+        key: "checkbox",
+      },
+      {
+        title: "编号",
+        width: "100px",
+        key: "id",
+      },
+    ];
+
+    const dataSource = ref([
+      {
+        id: "1",
+      },
+      {
+        id: "2",
+      },
+    ]);
+
+    const selectedKeys = ref(["1"]);
+
+    const handleChange = (page: any) => {
+      if (page.current === 1) {
+        dataSource.value = [
+          {
+            id: "1",
+          },
+          {
+            id: "2",
+          },
+        ];
+      }
+      if (page.current === 2) {
+        dataSource.value = [
+          {
+            id: "3",
+          },
+          {
+            id: "4",
+          },
+        ];
+      }
+    };
+
+    const wrapper = mount({
+      setup() {
+        return () => (
+          <LayTable
+            page={{ current: 1, limit: 10, total: 100 }}
+            columns={columns}
+            dataSource={dataSource.value}
+            v-model:selectedKeys={selectedKeys.value}
+            onChange={handleChange}
+          ></LayTable>
+        );
+      },
+    });
+
+    const allCheckbox = wrapper.findComponent(
+      ".layui-table-header .layui-table-cell-checkbox .layui-checkbox"
+    ) as VueWrapper<typeof LayCheckboxV2>;
+
+    expect(allCheckbox.vm.isIndeterminate).toBeTruthy();
+    expect(allCheckbox.vm.modelValue).toBeFalsy();
+
+    await allCheckbox.trigger("click");
+
+    expect(selectedKeys.value).toEqual(["1", "2"]);
+    expect(allCheckbox.vm.modelValue).toBeTruthy();
+
+    const nextPage = wrapper.find(".layui-table-page .layui-page-next");
+    await nextPage.trigger("click");
+
+    await nextTick();
+
+    expect(allCheckbox.vm.isIndeterminate).toBeFalsy();
+    expect(allCheckbox.vm.modelValue).toBeFalsy();
+
+    await allCheckbox.trigger("click");
+
+    expect(selectedKeys.value).toEqual(["1", "2", "3", "4"]);
+
+    const prePage = wrapper.find(".layui-table-page .layui-page-prev");
+
+    await prePage.trigger("click");
+
+    expect(allCheckbox.vm.isIndeterminate).toBeTruthy();
+    expect(allCheckbox.vm.modelValue).toBeTruthy();
+  });
+
+  test("emit checkbox and checkbox-all", async () => {
+    const columns = [
+      {
+        fixed: "left" as const,
+        type: "checkbox",
+        title: "复选",
+        key: "checkbox",
+      },
+      {
+        title: "编号",
+        width: "100px",
+        key: "id",
+      },
+    ];
+
+    const dataSource = ref([
+      {
+        id: "1",
+      },
+      {
+        id: "2",
+      },
+    ]);
+
+    const wrapper = mount({
+      setup() {
+        return () => (
+          <LayTable columns={columns} dataSource={dataSource.value}></LayTable>
+        );
+      },
+    });
+
+    const tableInstance = wrapper.findComponent(LayTable);
+
+    const allCheckbox = wrapper.findComponent(
+      ".layui-table-header .layui-table-cell-checkbox .layui-checkbox"
+    ) as VueWrapper<typeof LayCheckboxV2>;
+
+    const signCheckbox = wrapper
+      .findAll(".layui-table-body .layui-table-cell-checkbox")[0]
+      .findComponent(".layui-checkbox") as VueWrapper<typeof LayCheckboxV2>;
+
+    await signCheckbox.trigger("click");
+
+    await nextTick();
+
+    expect(tableInstance.emitted()).toHaveProperty("checkbox");
+    expect(tableInstance.emitted().checkbox[0][0]).toBeTruthy();
+    expect(tableInstance.emitted().checkbox[0][1]).toEqual(dataSource.value[0]);
+
+    await signCheckbox.trigger("click");
+    await nextTick();
+
+    expect(tableInstance.emitted()).toHaveProperty("checkbox");
+    expect(tableInstance.emitted().checkbox[1][0]).toBeFalsy();
+    expect(tableInstance.emitted().checkbox[1][1]).toEqual(dataSource.value[0]);
+
+    await allCheckbox.trigger("click");
+
+    expect(tableInstance.emitted()).toHaveProperty("checkbox-all");
+    expect(tableInstance.emitted()["checkbox-all"][0][0]).toEqual(
+      dataSource.value.map((item) => item.id)
+    );
+
+    await allCheckbox.trigger("click");
+
+    expect(tableInstance.emitted()).toHaveProperty("checkbox-all");
+    expect(tableInstance.emitted()["checkbox-all"][1][0]).toEqual([]);
+  });
+
+  test("default-toolbar 拓展其他icon", async () => {
+    const columns = [
+      {
+        fixed: "left" as const,
+        type: "checkbox",
+        title: "复选",
+        key: "checkbox",
+      },
+      {
+        title: "编号",
+        width: "100px",
+        key: "id",
+      },
+    ];
+
+    const dataSource = ref([
+      {
+        id: "1",
+      },
+      {
+        id: "2",
+      },
+    ]);
+
+    let value = 1;
+
+    const defaultToolbars = [
+      "filter" as const,
+      {
+        icon: "layui-icon-refresh",
+        title: "刷新",
+        onClick: () => {
+          value++;
+        },
+      },
+      "print" as const,
+    ];
+
+    const wrapper = mount({
+      setup() {
+        return () => (
+          <LayTable
+            columns={columns}
+            dataSource={dataSource.value}
+            defaultToolbar={defaultToolbars}
+          ></LayTable>
+        );
+      },
+    });
+    const iconBoxs = wrapper.findAll(
+      ".layui-table-view .layui-table-tool-self .layui-inline"
+    );
+
+    expect(iconBoxs.length).toBe(3);
+    expect(iconBoxs[1].attributes().title).toBe("刷新");
+
+    await iconBoxs[1].trigger("click");
+
+    expect(value).toBe(2);
+  });
+
+  test("page change", async () => {
+    const columns = [
+      {
+        fixed: "left" as const,
+        type: "checkbox",
+        title: "复选",
+        key: "checkbox",
+      },
+      {
+        title: "编号",
+        width: "100px",
+        key: "id",
+      },
+    ];
+
+    const dataSource = ref([
+      {
+        id: "1",
+      },
+      {
+        id: "2",
+      },
+    ]);
+
+    let current = 1;
+
+    const wrapper = mount({
+      setup() {
+        return () => (
+          <LayTable
+            page={{
+              current: 1,
+              limit: 10,
+              total: 100,
+              change: (pageData) => {
+                current = pageData.current;
+              },
+            }}
+            columns={columns}
+            dataSource={dataSource.value}
+          ></LayTable>
+        );
+      },
+    });
+
+    const nextPage = wrapper.find(".layui-table-page .layui-page-next");
+    await nextPage.trigger("click");
+
+    await nextTick();
+
+    expect(current).toBe(2);
+  });
+
+  test("slots page", async () => {
+    const columns = [
+      {
+        fixed: "left" as const,
+        type: "checkbox",
+        title: "复选",
+        key: "checkbox",
+      },
+      {
+        title: "编号",
+        width: "100px",
+        key: "id",
+      },
+    ];
+
+    const dataSource = ref([
+      {
+        id: "1",
+      },
+      {
+        id: "2",
+      },
+    ]);
+
+    const wrapper = mount({
+      setup() {
+        return () => (
+          <LayTable
+            page={{
+              current: 1,
+              limit: 10,
+              total: 100,
+            }}
+            columns={columns}
+            dataSource={dataSource.value}
+            v-slots={{
+              page: () => 123,
+            }}
+          ></LayTable>
+        );
+      },
+    });
+    const pageSlot = wrapper.find(
+      ".layui-table-view .layui-table-page .layui-table-page-slot"
+    );
+
+    expect(pageSlot.exists()).toBeTruthy();
+    expect(pageSlot.text()).toBe("123");
+  });
+
+  test("点击default-toolbar 字段隐藏", async () => {
+    const columns = [
+      {
+        fixed: "left" as const,
+        type: "checkbox",
+        title: "复选",
+        key: "checkbox",
+      },
+      {
+        title: "编号",
+        width: "100px",
+        key: "id",
+      },
+    ];
+
+    const dataSource = ref([
+      {
+        id: "1",
+      },
+      {
+        id: "2",
+      },
+    ]);
+
+    const wrapper = mount({
+      setup() {
+        return () => (
+          <LayTable
+            columns={columns}
+            dataSource={dataSource.value}
+            default-toolbar
+          ></LayTable>
+        );
+      },
+    });
+    const filter = wrapper.find('.layui-table-tool-self [title="筛选"]');
+
+    await filter.trigger("click");
+    await nextTick();
+    await sleep();
+
+    const checkboxLists = document.body.querySelectorAll(
+      ".layui-table-tool-checkbox .layui-checkbox"
+    );
+
+    expect(checkboxLists.length).toBe(2);
+
+    await checkboxLists[0].dispatchEvent(new MouseEvent("click"));
+    await nextTick();
+
+    const headerTr = wrapper.findAll(".layui-table-header tr");
+    const headerTh = headerTr[0].findAll("th");
+    expect(headerTh.length).toBe(1);
+
+    const bodyTr = wrapper.findAll(".layui-table-main tr");
+    expect(bodyTr.length).toBe(2);
+
+    const bodyTd = bodyTr[0].findAll("td");
+    expect(bodyTd.length).toBe(1);
+  });
+
+  test("分页切换 slots数据正确", async () => {
+    const columns = [
+      { title: "姓名", width: "80px", key: "name" },
+      {
+        title: "操作",
+        width: "150px",
+        customSlot: "operator",
+        key: "operator",
+      },
+    ];
+    const loading = ref(false);
+
+    const dataSource = ref([
+      { id: "1", name: "张三1" },
+      { id: "2", name: "张三2" },
+      { id: "3", name: "张三3" },
+      { id: "4", name: "张三4" },
+      { id: "5", name: "张三5" },
+      { id: "6", name: "张三6" },
+      { id: "7", name: "张三7" },
+      { id: "8", name: "张三8" },
+      { id: "9", name: "张三9" },
+      { id: "10", name: "张三10" },
+    ]);
+
+    const change = (page) => {
+      loading.value = true;
+      setTimeout(() => {
+        dataSource.value = loadDataSource(page.current, page.limit);
+        loading.value = false;
+      }, 100);
+    };
+
+    const loadDataSource = (page, pageSize) => {
+      const response = [];
+      const startIndex = (page - 1) * pageSize + 1;
+      const endIndex = page * pageSize;
+      for (let i = startIndex; i <= endIndex; i++) {
+        response.push({
+          id: `${i}`,
+          name: `张三${i}`,
+        });
+      }
+      return response;
+    };
+
+    let name = "";
+
+    const handleClick = (row: any) => {
+      name = row.name;
+    };
+
+    const wrapper = mount({
+      setup() {
+        return () => (
+          <LayTable
+            page={{ current: 1, limit: 10, total: 100 }}
+            columns={columns}
+            dataSource={dataSource.value}
+            default-toolbar
+            loading={loading.value}
+            onChange={change}
+            v-slots={{
+              operator: ({ row }: any) => (
+                <div class={"custom-operator"} onClick={() => handleClick(row)}>
+                  click
+                </div>
+              ),
+            }}
+          ></LayTable>
+        );
+      },
+    });
+
+    let operatorDoms: any;
+    operatorDoms = wrapper.findAll(".custom-operator");
+    expect(operatorDoms.length).toBe(10);
+    await operatorDoms[1].trigger("click");
+    expect(name).toBe("张三2");
+
+    const nextPageDom = wrapper.find(".layui-table-page .layui-page-next");
+    await nextPageDom.trigger("click");
+    await sleep(200);
+
+    operatorDoms = wrapper.findAll(".custom-operator");
+    expect(operatorDoms.length).toBe(10);
+    await operatorDoms[1].trigger("click");
+    expect(name).toBe("张三12");
+
+    const prevPageDom = wrapper.find(".layui-table-page .layui-page-prev");
+    await prevPageDom.trigger("click");
+    await sleep(200);
+
+    operatorDoms = wrapper.findAll(".custom-operator");
+    expect(operatorDoms.length).toBe(10);
+    await operatorDoms[1].trigger("click");
+    expect(name).toBe("张三2");
   });
 });
