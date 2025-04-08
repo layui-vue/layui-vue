@@ -107,11 +107,13 @@ function handleIconClick(e: MouseEvent, item: TreeData) {
 }
 
 function handleNodeClick(e: MouseEvent, item: TreeData) {
-  // if (!props.showCheckbox) {
-  treeEmits("update:selected-key", item.id);
-  // }
+  if (!item.disabled) {
+    // if (!props.showCheckbox) {
+    treeEmits("update:selected-key", item.id);
+    // }
 
-  treeEmits("node-click", item.original);
+    treeEmits("node-click", item.original);
+  }
 
   if (!props.onlyIconControl) {
     doNodeSwitch(e, item);
@@ -226,6 +228,7 @@ function handleCheckboxChange(checked: boolean, item: TreeData) {
 
           <span
             class="layui-tree-txt"
+            :class="[node.disabled && 'layui-disabled']"
             @dblclick="handleItemDblclick($event, node)"
             @contextmenu="handleItemContextmenu($event, node)"
             @click="handleNodeClick($event, node)"
