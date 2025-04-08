@@ -88,7 +88,7 @@ describe("LayTagInput", () => {
     expect(
       (component.emitted("update:modelValue")![0][0] as Array<string>)!.length
     ).toBe(3);
-    expect(component.emitted("checkInputValueFail")![0].at(0)).toBe("Hello!");
+    expect(component.emitted("check-input-value-fail")![0].at(0)).toBe("Hello!");
   });
 
   test("addTag 增加Tag", async () => {

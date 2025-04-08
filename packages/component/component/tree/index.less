@@ -2,141 +2,169 @@
 
 .layui-tree {
   line-height: 22px;
-}
+  overflow: hidden;
 
-.layui-tree .layui-form-checkbox {
-  margin: 0 !important;
-}
+  .layui-form-checkbox {
+    margin: 0 !important;
+  }
 
-.layui-tree-set {
-  width: 100%;
-  position: relative;
-}
+  .layui-tree-loading {
+    font-size: 14px !important;
+    margin-right: 5px;
+  }
 
-.layui-tree-loading {
-  font-size: 14px !important;
-  margin-right: 5px;
-}
+  .layui-this .layui-tree-txt {
+    color: var(--global-checked-color) !important;
+  }
 
-.layui-tree .layui-this .layui-tree-txt {
-  color: var(--global-checked-color) !important;
-}
+  .layui-tree-iconClick {
+    position: relative;
+    margin: 0 10px;
+    color: #c0c4cc;
+  }
 
-.layui-tree-unline .layui-tree-iconClick {
-  width: 32px;
-  text-align: center;
-  margin: 0px;
-}
+  .layui-tree-set {
+    width: 100%;
+    position: relative;
 
-.layui-tree-pack {
-  display: none;
-  padding-left: 20px;
-  position: relative;
-}
+    .layui-tree-entry {
+      position: relative;
+      padding: 3px 0;
+      height: 26px;
+      line-height: 26px;
+      white-space: nowrap;
 
-.layui-tree-iconClick,
-.layui-tree-main {
-  display: inline-block;
-  vertical-align: middle;
-}
+      &:hover {
+        background-color: #eee;
+        border-radius: var(--global-border-radius);
+      }
+    }
 
-.layui-tree-line .layui-tree-pack {
-  border-left: 1px solid transparent;
-  padding-left: 25px !important;
-}
+    .layui-tree-pack {
+      padding-left: 20px;
+      position: relative;
+    }
+  }
 
-.layui-tree-line .layui-tree-set .layui-tree-set:after {
-  content: "";
-  position: absolute;
-  top: 14px;
-  left: -9px;
-  width: 17px;
-  height: 0;
-  border-top: 1px dotted #c0c4cc;
-}
+  &.layui-tree-line {
+    .layui-tree-pack .layui-tree-icon-no-pad-left {
+      margin-left: 0.4rem !important;
+    }
 
-.layui-tree-entry {
-  position: relative;
-  padding: 3px 0;
-  height: 26px;
-  line-height: 26px;
-  white-space: nowrap;
-}
+    .layui-tree-icon-no-pad-left {
+      margin-left: 0rem !important;
+    }
 
-.layui-tree-entry:hover {
-  background-color: #eee;
-  border-radius: var(--global-border-radius);
-}
+    .layui-tree-set:has(.layui-tree-icon-border) {
+      &.layui-tree-set:before {
+        content: "";
+        position: absolute;
+        top: 0px;
+        left: -0.6rem;
+        width: 0;
+        height: 100%;
+        border-left: 1px dotted #c0c4cc;
+      }
 
-.layui-tree-line .layui-tree-entry:hover {
-  background-color: rgba(0, 0, 0, 0);
-}
+      .layui-tree-icon-border {
+        height: 12px;
+        line-height: 12px;
+        width: 12px;
+        text-align: center;
+        border: 1px solid #c0c4cc;
+        > .layui-icon {
+          font-size: 12px;
+        }
+      }
 
-.layui-tree-line .layui-tree-entry:hover .layui-tree-txt {
-  color: #999;
-  transition: 0.3s;
-}
+      .layui-tree-iconClick {
+        color: #666;
+      }
+    }
 
-.layui-tree-main {
-  height: 100%;
-  cursor: pointer;
-  padding-right: 10px;
-  display: flex;
-  align-items: center;
-}
+    .layui-tree-set:has(.layui-tree-icon-no-border) {
+      &.layui-tree-set:before {
+        content: "";
+        position: absolute;
+        top: 0px;
+        left: -0.6rem;
+        width: 0;
+        height: 100%;
+        border-left: 1px dotted #c0c4cc;
+      }
 
-.layui-tree-line .layui-tree-set:before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -9px;
-  width: 0;
-  height: 100%;
-  border-left: 1px dotted #c0c4cc;
-}
+      .layui-tree-icon-no-border {
+        border: none;
+        margin: 0 8px;
+      }
 
-.layui-tree-main .layui-checkbox-label {
-  padding-right: 0px !important;
-}
+      .layui-tree-pack .layui-tree-icon-no-border {
+        margin: 0 10px;
+      }
+    }
 
-.layui-tree-line .layui-tree-set.layui-tree-setLineShort:before {
-  height: 13px;
-}
+    .layui-tree-pack {
+      border-left: 1px solid transparent;
+      padding-left: 25px !important;
+    }
 
-.layui-tree-line .layui-tree-set.layui-tree-setHide:before {
-  height: 0;
-}
+    .layui-tree-set .layui-tree-set:after {
+      content: "";
+      position: absolute;
+      top: 14px;
+      left: -0.6rem;
+      width: 17px;
+      height: 0;
+      border-top: 1px dotted #c0c4cc;
+    }
 
-.layui-tree-iconClick {
-  position: relative;
-  margin: 0 10px;
-  color: #c0c4cc;
-}
+    .layui-tree-pack
+      .layui-tree-set:last-child
+      .layui-tree-set:last-child::before {
+      height: 14px;
+    }
 
-.layui-tree-icon-standalone {
-  transform: translateX(-2px);
-  width: 12px;
-  border-left: 1px solid transparent;
-  border-right: 1px solid transparent;
-  margin-left: 10px;
-}
+    .layui-tree-set.layui-tree-set-end .layui-tree-set:last-child::before {
+      height: 14px;
+    }
 
-.layui-tree-icon {
-  height: 12px;
-  line-height: 12px;
-  width: 12px;
-  text-align: center;
-  border: 1px solid #c0c4cc;
+    .layui-tree-entry:hover {
+      background-color: rgba(0, 0, 0, 0);
+
+      .layui-tree-txt {
+        color: #999;
+        transition: 0.3s;
+      }
+    }
+  }
+
+  &.layui-tree-unline {
+    .layui-tree-iconClick {
+      width: 32px;
+      text-align: center;
+      margin: 0px;
+      display: inline-block;
+      vertical-align: middle;
+    }
+  }
+
+  .layui-tree-main {
+    height: 100%;
+    cursor: pointer;
+    padding-right: 10px;
+    display: flex;
+    align-items: center;
+    vertical-align: middle;
+
+    .layui-checkbox-label {
+      padding-right: 0px !important;
+    }
+  }
 }
 
 .layui-tree-iconClick .layui-icon-triangle-d,
 .layui-tree-iconClick .layui-icon-triangle-r {
   font-size: 12px;
-}
-
-.layui-tree-icon .layui-icon {
-  font-size: 12px;
-  color: #666;
 }
 
 .layui-tree-btnGroup,
@@ -148,6 +176,7 @@
 
 .layui-tree-txt {
   color: #555;
+  user-select: none;
 }
 
 .layui-tree-search {
