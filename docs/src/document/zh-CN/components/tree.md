@@ -10,10 +10,10 @@
 ::: title 基础使用
 :::
 
-::: demo 使用 `lay-tree-v2` 标签, 创建树形组件, @node-click 监听节点点击。
+::: demo 使用 `lay-tree` 标签, 创建树形组件, @node-click 监听节点点击。
 
 <template>
-  <lay-tree-v2
+  <lay-tree
     :data="data"
 		:tail-node-icon="false"
 		:onlyIconControl="true"
@@ -21,7 +21,7 @@
 		v-model:selectedKey="selectedKey"
     @node-click="handleClick"
   >
-  </lay-tree-v2>
+  </lay-tree>
 </template>
 
 <script setup>
@@ -176,12 +176,12 @@ function handleClick(node) {
 ::: demo 使用 `showCheckbox` 属性开启复选框, `checkedKeys` 属性设置选中项。
 
 <template>
-  <lay-tree-v2
+  <lay-tree
     :data="data2"
 		:showCheckbox="showCheckbox2"
 		v-model:checkedKeys="checkedKeys2"
   >
-  </lay-tree-v2>
+  </lay-tree>
 </template>
 
 <script setup>
@@ -331,13 +331,13 @@ const data2 = ref([{
 ::: demo 通过 `checkStrictly` 属性禁用父子关联选择, 让每个复选框都是独立的。
 
 <template>
-  <lay-tree-v2
+  <lay-tree
 		v-model:checkedKeys="checkedKeys3"
     :checkStrictly="true"
 		:showCheckbox="true"
 		:data="data3"
   >
-  </lay-tree-v2>
+  </lay-tree>
 </template>
 
 <script setup>
@@ -486,12 +486,12 @@ const checkedKeys3 = ref([2,3])
 ::: demo 使用 `showLine` 属性关闭节点连线
 
 <template>
-  <lay-tree-v2
+  <lay-tree
     :data="data"
 		v-model:selectedKey="selectedKey"
 	:showLine="showLine"
   >
-  </lay-tree-v2>
+  </lay-tree>
 </template>
 
 <script setup>
@@ -508,11 +508,11 @@ const showLine=ref(false)
 ::: demo 使用插槽自定义节点标题
 
 <template>
-  <lay-tree-v2 :data="data">
+  <lay-tree :data="data">
 	<template #title="{ data }">
 		{{ data.title }}
 	</template>
-  </lay-tree-v2>
+  </lay-tree>
 </template>
 
 <script setup>
@@ -529,11 +529,11 @@ import { ref } from 'vue';
 <template>
   <lay-row>
 		<lay-col>
-			<lay-tree-v2 :data="data10" lazy :load="handleLoad" default-expand-all> </lay-tree-v2>
+			<lay-tree :data="data10" lazy :load="handleLoad" default-expand-all> </lay-tree>
 		</lay-col>
 		<lay-col>
 			<h5>loadOnCheck</h5>
-			<lay-tree-v2 :data="data10" loadOnCheck showCheckbox lazy :load="handleLoad" default-expand-all> </lay-tree-v2>
+			<lay-tree :data="data10" loadOnCheck showCheckbox lazy :load="handleLoad" default-expand-all> </lay-tree>
 		</lay-col>
 	</lay-row>
 </template>
@@ -598,13 +598,13 @@ const handleLoad = (node, resolve) => {
 ::: demo 使用 `replaceFields` 替换 `data` 中的字段名
 
 <template>
-  <lay-tree-v2
+  <lay-tree
     :data="data9"
 		:showCheckbox="showCheckbox2"
 		v-model:checkedKeys="checkedKeys2"
 		:replaceFields="replaceFields"
   >
-  </lay-tree-v2>
+  </lay-tree>
 </template>
 
 <script setup>
@@ -688,11 +688,11 @@ const data9 = ref([{
 ::: demo 使用 `accordion` 开启手风琴
 
 <template>
-  <lay-tree-v2
+  <lay-tree
     :data="data11"
 		accordion
   >
-  </lay-tree-v2>
+  </lay-tree>
 </template>
 
 <script setup>

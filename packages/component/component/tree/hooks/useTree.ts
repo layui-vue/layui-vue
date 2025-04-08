@@ -458,13 +458,6 @@ export function useTree(props: TreeProps, emits: TreeEmits) {
       !props.lazy && isBoolean(val) && nextTick(() => {
         flatTree.value.forEach((d) => {
           d.expanded = val;
-
-          if (
-            props.lazy
-            && !d.children.length
-          ) {
-            d.expanded = false;
-          }
         });
 
         if (!props.checkStrictly) {
