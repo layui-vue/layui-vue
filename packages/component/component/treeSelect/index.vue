@@ -1,55 +1,35 @@
 <script lang="ts" setup>
-import "./index.less";
-import type { DropdownTeleportProps } from "../dropdown/interface";
+import type {
+  TagInputData,
+} from "@layui/component/component/tagInput/interface";
+import type {
+  OriginalTreeData,
+  ReplaceFieldsOptions,
+  TreeProps,
+} from "@layui/component/component/tree/interface";
+import type {
+  TreeSelectEmits as _TreeSelectEmits,
+  TreeSelectProps as _TreeSelectProps,
+} from "./interface";
 
-import { StyleValue, computed, ref, watch, useSlots, provide } from "vue";
-import { useDebounceFn } from "@vueuse/core";
-import { getNode } from "../../utils";
-import { TreeSelectSize } from "./interface";
+import LayRender from "@layui/component/component/_components/render";
+import LayDropdown from "@layui/component/component/dropdown/index.vue";
+import LayInput from "@layui/component/component/input/index.vue";
+import LayTagInput from "@layui/component/component/tagInput/index.vue";
+import { treeReplaceFields } from "@layui/component/component/tree/constant";
+import LayTree from "@layui/component/component/tree/index.vue";
+import { isArray } from "@layui/component/utils";
 import { LayIcon } from "@layui/icons-vue";
-import LayInput from "../input/index.vue";
-import LayTagInput from "../tagInput/index.vue";
-import LayDropdown from "../dropdown/index.vue";
-import LayTree from "../tree/index.vue";
+import { useDebounceFn } from "@vueuse/core";
+import { computed, provide, ref, useSlots, watch } from "vue";
 import useProps from "./index.hooks";
-import { fillFieldNames } from "../tree/utils";
-import {
-  ReplaceFieldsOptionsOptional,
-  LoadFunction,
-  SearchNodeMethodType,
-} from "../tree/tree.type";
 import { LAYUI_TREE_SELECT } from "./useTreeSelect";
 
-export interface TreeSelectProps {
-  modelValue: any;
-  data: any;
-  size?: TreeSelectSize;
-  multiple?: boolean;
-  allowClear?: boolean;
-  disabled?: boolean;
-  placeholder?: string;
-  checkStrictly?: boolean;
-  collapseTagsTooltip?: boolean;
-  minCollapsedNum?: number;
-  search?: boolean;
-  searchNodeMethod?: SearchNodeMethodType;
-  lazy?: boolean;
-  load?: LoadFunction;
-  contentClass?: string | Array<string | object> | object;
-  contentStyle?: StyleValue;
-  replaceFields?: ReplaceFieldsOptionsOptional;
-  defaultExpandAll?: boolean;
-  teleportProps?: DropdownTeleportProps;
-  tailNodeIcon?: string;
-}
+import "./index.less";
 
-export interface TreeSelectEmits {
-  (e: "update:modelValue", value: string | string[]): void;
+export type TreeSelectProps = _TreeSelectProps;
 
-  (e: "change", value: string | string[]): void;
-
-  (e: "search", value: string | string[]): void;
-}
+export type TreeSelectEmits = _TreeSelectEmits;
 
 defineOptions({
   name: "LayTreeSelect",
@@ -66,131 +46,181 @@ const props = withDefaults(defineProps<TreeSelectProps>(), {
   searchNodeMethod: (node: any, value: string) => {
     return node.title.includes(value);
   },
-  defaultExpandAll: false,
+  defaultExpandAll: undefined,
 });
+
+const emits = defineEmits<TreeSelectEmits>();
+const slots = useSlots();
 
 const { size } = useProps(props);
 
-const treeData = ref();
+const _replaceFields = computed<ReplaceFieldsOptions>(() => {
+  return Object.assign(
+    {},
+    treeReplaceFields,
+    props.replaceFields,
+  );
+});
+
 const searchValue = ref("");
 const singleValue = ref("");
-const multipleValue = ref([]);
+const multipleValue = ref<TagInputData[]>([]);
 const openState = ref(false);
 const dropdownRef = ref();
 const composing = ref(false);
-const emits = defineEmits<TreeSelectEmits>();
-const treeOriginData = ref();
 
-const treeRef = ref();
+const treeRef = ref<InstanceType<typeof LayTree>>();
 
-const _replaceFields = computed(() => fillFieldNames(props.replaceFields));
+/**
+ * 将props.data and props.cacheData 转成一维数组
+ */
+const flatData = computed(() => {
+  const ret: Array<OriginalTreeData> = [];
+
+  const flatter = <K extends OriginalTreeData>(target: Array<K>) => {
+    target.forEach((item) => {
+      ret.push(item);
+      if (item.children?.length) {
+        flatter(item.children);
+      }
+    });
+  };
+  flatter(isArray(props.data) ? props.data : [props.data]);
+
+  return [...ret, ...props.cacheData || []];
+});
+
+/**
+ * 寻找节点
+ * 当tree 已初始化，从tree中寻找节点(可以找出懒加载的数据)
+ * 否则从当前selectTree数据源中寻找
+ */
+function findNode(value: OriginalTreeData["id"]) {
+  const { id } = _replaceFields.value;
+
+  return treeRef.value
+    ? treeRef.value.getFlatTree().value.find(tree => tree.id === value)?.original
+    : flatData.value.find(node => node[id] === value);
+}
+
+/**
+ * 在第一次tree初始化时，tree内部会统一checkedKeys/selectedKeys与节点中checked/spread 为true的所有集合
+ * 并emit事件出来，导致treeSelect中会一开始就触发 emit.change
+ * notFirstChange 将阻断首次change
+ */
+const notFirstChange = ref(false);
 
 const selectedValue = computed({
   get() {
-    return props.multiple && props.modelValue == null ? [] : props.modelValue;
+    return (!props.multiple
+      ? props.modelValue
+      : "") as NonNullable<TreeProps["selectedKey"]>;
+
+    // props.multiple && props.modelValue == null ? [] : props.modelValue;
   },
   set(value) {
-    if (props.modelValue !== value) {
+    if (!props.multiple && props.modelValue !== value) {
       emits("update:modelValue", value);
-      emits("change", value);
+      notFirstChange.value && emits("change", value);
+    }
+
+    if (!notFirstChange.value) {
+      notFirstChange.value = true;
     }
   },
 });
 
 const checkedKeys = computed({
   get() {
-    return props.multiple ? props.modelValue : [];
+    return (props.multiple ? props.modelValue : []) as NonNullable<TreeProps["checkedKeys"]>;
   },
   set(value) {
     if (props.multiple) {
       emits("update:modelValue", value);
-      emits("change", value);
+      notFirstChange.value && emits("change", value);
+    }
+
+    if (!notFirstChange.value) {
+      notFirstChange.value = true;
     }
   },
 });
 
-const slots = useSlots();
-
 watch(
-  [selectedValue, checkedKeys, treeData],
+  () => [selectedValue.value, checkedKeys.value, props.data],
   () => {
-    const { id, title } = _replaceFields.value;
     if (props.multiple) {
       try {
-        multipleValue.value = checkedKeys.value.map((value: any) => {
-          let node: any = getNode(
-            treeOriginData.value || props.data,
-            value,
-            _replaceFields.value
-          );
+        multipleValue.value = checkedKeys.value.map((value) => {
+          let node = findNode(value)!;
 
           if (node) {
-            node.label = node[title];
-            node.value = node[id];
-            node.closable = !node.disabled;
+            node = {
+              label: node.title || node[_replaceFields.value.title],
+              value: node.id,
+              closable: !node.disabled,
+            } as TagInputData;
           }
-
-          if (node == undefined) {
+          else {
             node = {
               label: value,
-              value: value,
+              value,
               closable: true,
-            };
+            } as TagInputData;
           }
           return node;
         });
-      } catch (e) {
+      }
+      catch {
         throw new Error("v-model / model-value is not an array type");
       }
-    } else {
+    }
+    else {
       /**
        * 根据 id 查找 node 节点
        *
        * 备注：如果找不到这个节点, 说明存在 BUG 或 空值, 对 singleValue 清空
        */
-      const node: any = getNode(
-        treeOriginData.value || props.data,
-        selectedValue.value,
-        _replaceFields.value
-      );
+
+      const node = findNode(selectedValue.value);
 
       if (node) {
-        singleValue.value = node[title];
-      } else {
+        singleValue.value = String(node.title || node[_replaceFields.value.title]);
+      }
+      else {
         singleValue.value = "";
       }
     }
   },
-  { immediate: true, deep: true }
+  { immediate: true, deep: true },
 );
 
-const onClear = function () {
+function onClear() {
   if (props.multiple) {
     emits("update:modelValue", []);
-  } else {
+  }
+  else {
     emits("update:modelValue", "");
   }
-};
+}
 
 /**
  * Tree 节点单击事件
  *
  * 备注：单选模式需要执行的逻辑，多选模式禁用。
- *
- * @param node 当前节点
  */
-const handleClick = (node: any) => {
+function handleClick() {
   if (!props.multiple) {
     dropdownRef.value.hide();
   }
-};
+}
 
 /**
  * Tag 标签的删除事件
  *
  * 备注: 多选模式需要考虑 checkStrictly 为 false 的情况，删除当前节点，是否需要删除子节点, 如果为 true 时，仅删除当前节点
  */
-const handleRemove = (value: any) => {
+function handleRemove(value: any) {
   // 关闭 dropdown 前置操作
   dropdownRef.value.hide();
 
@@ -198,20 +228,21 @@ const handleRemove = (value: any) => {
   if (props.checkStrictly) {
     emits(
       "update:modelValue",
-      checkedKeys.value.filter((item: any) => item != value)
+      checkedKeys.value.filter((item: any) => item !== value),
     );
-  } else {
+  }
+  else {
     // 当 checkStrictly 配置为 false 时, 删除内容为 当前节点 与 关联子集
-    const node = getNode(props.data, value, _replaceFields.value);
+    const node = findNode(value);
     const nodeIds = filterNodeIds(node);
     emits(
       "update:modelValue",
-      checkedKeys.value.filter((item: any) => !nodeIds.includes(item))
+      checkedKeys.value.filter((item: any) => !nodeIds.includes(item)),
     );
   }
-};
+}
 
-const filterNodeIds = (node: any) => {
+function filterNodeIds(node: any) {
   const nodeIds: any[] = [];
   const { id, children } = _replaceFields.value;
 
@@ -226,7 +257,7 @@ const filterNodeIds = (node: any) => {
 
   _findNodeIds(node, nodeIds);
   return nodeIds;
-};
+}
 
 /**
  * 实时标识，是否存在数据
@@ -236,7 +267,8 @@ const filterNodeIds = (node: any) => {
 const hasContent = computed(() => {
   if (props.multiple) {
     return checkedKeys.value.length > 0;
-  } else {
+  }
+  else {
     return Array.isArray(selectedValue.value)
       ? selectedValue.value.length
       : selectedValue.value;
@@ -247,41 +279,29 @@ const _placeholder = computed(() => {
   return hasContent.value ? "" : props.placeholder;
 });
 
-const onSearch = (value: string) => {
-  if (composing.value) return;
+function onSearch(value: string) {
+  if (composing.value)
+    return;
   emits("search", value);
   searchValue.value = value;
-};
+}
 
-const onCompositionstart = () => {
+function onCompositionstart() {
   composing.value = true;
-};
+}
 
-const onCompositionend = (eventParam: Event) => {
+function onCompositionend(eventParam: Event) {
   composing.value = false;
   onSearch((eventParam.target as HTMLInputElement).value);
-};
+}
 
 // 监听 searchValue 刷新 tree 数据
 watch(
   searchValue,
   useDebounceFn(() => {
     treeRef.value && treeRef.value.filter(searchValue.value);
-  }, 500)
+  }, 500),
 );
-
-const treeFilter = (tree: any[], fn: Function) => {
-  const { children } = _replaceFields.value;
-  return tree
-    .map((node) => ({ ...node }))
-    .filter((node) => {
-      node[children] = node[children] && treeFilter(node[children], fn);
-      if (node[children] && node[children].length) node.spread = true;
-      return (
-        fn(node, searchValue.value) || (node[children] && node[children].length)
-      );
-    });
-};
 
 watch(openState, () => {
   if (!openState.value) {
@@ -289,23 +309,13 @@ watch(openState, () => {
   }
 });
 
-watch(
-  () => props.data,
-  () => {
-    if (props.data !== treeData.value) {
-      treeData.value = props.data;
-    }
-  },
-  { immediate: true, deep: true }
-);
-
 const inputEl = ref<HTMLInputElement | null>(null);
 
-const setInputEl = (el: HTMLInputElement) => {
+function setInputEl(el: HTMLInputElement) {
   if (props.search) {
     inputEl.value = el;
   }
-};
+}
 
 provide(LAYUI_TREE_SELECT, {
   inputEl,
@@ -322,26 +332,26 @@ provide(LAYUI_TREE_SELECT, {
       'has-clear': allowClear,
     }"
   >
-    <lay-dropdown
+    <LayDropdown
       ref="dropdownRef"
       :disabled="disabled"
-      :contentClass="contentClass"
-      :contentStyle="contentStyle"
-      :teleportProps="teleportProps"
+      :content-class="contentClass"
+      :content-style="contentStyle"
+      :teleport-props="teleportProps"
       :click-to-close="false"
       @show="openState = true"
       @hide="openState = false"
     >
-      <lay-tag-input
+      <LayTagInput
         v-if="multiple"
         v-model="multipleValue"
         :size="size"
         :allow-clear="allowClear"
         :placeholder="_placeholder"
-        :collapseTagsTooltip="collapseTagsTooltip"
-        :minCollapsedNum="minCollapsedNum"
-        :disabledInput="!search"
-        :inputValue="searchValue"
+        :collapse-tags-tooltip="collapseTagsTooltip"
+        :min-collapsed-num="minCollapsedNum"
+        :disabled-input="!search"
+        :input-value="searchValue"
         @input-value-change="onSearch"
         @remove="handleRemove"
         @clear="onClear"
@@ -349,15 +359,15 @@ provide(LAYUI_TREE_SELECT, {
         @keydown.enter.capture.prevent.stop
       >
         <template #suffix>
-          <lay-icon
+          <LayIcon
             type="layui-icon-triangle-d"
             :class="{ triangle: openState }"
-          ></lay-icon>
+          />
         </template>
-      </lay-tag-input>
-      <lay-input
+      </LayTagInput>
+      <LayInput
         v-else
-        :modelValue="singleValue"
+        :model-value="singleValue"
         :allow-clear="allowClear"
         :placeholder="_placeholder"
         :disabled="disabled"
@@ -369,36 +379,34 @@ provide(LAYUI_TREE_SELECT, {
         @compositionend="onCompositionend"
       >
         <template #suffix>
-          <lay-icon
+          <LayIcon
             type="layui-icon-triangle-d"
             :class="{ triangle: openState }"
-          ></lay-icon>
+          />
         </template>
-      </lay-input>
+      </LayInput>
       <template #content>
         <div class="layui-tree-select-content">
-          <lay-tree
+          <LayTree
             ref="treeRef"
-            :data="treeData"
-            v-model:treeOriginData="treeOriginData"
-            :is-select="!multiple"
-            :onlyIconControl="true"
+            v-bind="props"
+            v-model:selected-key="selectedValue"
+            v-model:checked-keys="checkedKeys"
+            :only-icon-control="true"
             :show-checkbox="multiple"
-            :check-strictly="checkStrictly"
-            v-model:selectedKey="selectedValue"
-            v-model:checkedKeys="checkedKeys"
-            :tail-node-icon="tailNodeIcon"
-            :replaceFields="_replaceFields"
-            :defaultExpandAll="defaultExpandAll"
-            :lazy="lazy"
-            :load="load"
-            :searchNodeMethod="searchNodeMethod"
+            :replace-fields="_replaceFields"
             @node-click="handleClick"
           >
-            <slot></slot>
-          </lay-tree>
+            <template v-for="(_, slot) in slots" #[slot]="arg" :key="slot">
+              <LayRender
+                :slots="slots"
+                :render="slot"
+                v-bind="arg"
+              />
+            </template>
+          </LayTree>
         </div>
       </template>
-    </lay-dropdown>
+    </LayDropdown>
   </div>
 </template>

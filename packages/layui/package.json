@@ -1,32 +1,22 @@
 {
   "name": "@layui/layui-vue",
-  "version": "2.21.3-alpha.10",
+  "type": "module",
+  "version": "2.21.3-alpha.11",
+  "description": "a component library for Vue 3 base on layui-vue",
   "author": "就眠儀式",
   "license": "MIT",
-  "description": "a component library for Vue 3 base on layui-vue",
   "homepage": "http://www.layui-vue.com",
-  "type": "module",
-  "main": "es/index.js",
-  "unpkg": "umd/index.js",
-  "jsdelivr": "umd/index.js",
-  "web-types": "types/web-types.json",
-  "types": "types/index.d.ts",
-  "style": "lib/index.css",
-  "vetur": {
-    "tags": "types/tags.json",
-    "attributes": "types/attributes.json"
-  },
-  "sideEffects": [
-    "lib/*.css",
-    "es/**/*.css",
-    "umd/*.css"
-  ],
   "keywords": [
     "vue",
     "vue-component",
     "component-library",
     "layui-vue",
     "layui"
+  ],
+  "sideEffects": [
+    "lib/*.css",
+    "es/**/*.css",
+    "umd/*.css"
   ],
   "exports": {
     ".": {
@@ -41,6 +31,22 @@
       "./types/*.d.ts"
     ]
   },
+  "main": "es/index.js",
+  "unpkg": "umd/index.js",
+  "jsdelivr": "umd/index.js",
+  "web-types": "types/web-types.json",
+  "types": "types/index.d.ts",
+  "style": "lib/index.css",
+  "vetur": {
+    "tags": "types/tags.json",
+    "attributes": "types/attributes.json"
+  },
+  "files": [
+    "es",
+    "lib",
+    "types",
+    "umd"
+  ],
   "scripts": {
     "build": "pnpm run --filter . --parallel \"/^build:.*/\"",
     "build:all": "vite build --emptyOutDir --config ./script/build.all.ts",
@@ -67,12 +73,6 @@
     "qrcode": "1.5.0",
     "vue-i18n": "9.6.3"
   },
-  "files": [
-    "lib",
-    "es",
-    "umd",
-    "types"
-  ],
   "browserslist": [
     "current node",
     "last 2 versions and > 2%",

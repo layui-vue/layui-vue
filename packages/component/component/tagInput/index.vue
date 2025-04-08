@@ -1,30 +1,26 @@
 <script lang="ts" setup>
-import "./index.less";
-import LayTag, { TagProps } from "../tag/index.vue";
-import LayToopTip from "../tooltip/index.vue";
-import {
-  onMounted,
-  shallowRef,
-  ref,
-  watch,
-  computed,
-  reactive,
-  nextTick,
-  useSlots,
-} from "vue";
-import { isObject, reactiveOmit, useResizeObserver } from "@vueuse/core";
+import type { TagProps } from "../tag/index.vue";
+import type { TagInputData, TagInputSize } from "./interface";
 import { LayIcon } from "@layui/icons-vue";
-import { TagInputSize } from "./inerface";
+import { isObject, reactiveOmit, useResizeObserver } from "@vueuse/core";
+import {
+  computed,
+  nextTick,
+  onMounted,
+  reactive,
+  ref,
+  shallowRef,
+  useSlots,
+  watch,
+} from "vue";
+import { isArray } from "../../utils";
+import LayTag from "../tag/index.vue";
+import LayToopTip from "../tooltip/index.vue";
 
 import { useTreeSelectProvide } from "../treeSelect/useTreeSelect";
-import { isArray } from "../../utils";
+import "./index.less";
 
-export interface TagData {
-  value?: string | number;
-  label?: string;
-  closable?: boolean;
-  [other: string]: any;
-}
+export type TagData = TagInputData;
 
 export interface TagInputProps {
   modelValue?: (string | number | TagData)[];
@@ -50,17 +46,17 @@ const props = withDefaults(defineProps<TagInputProps>(), {
   placeholder: undefined,
   minCollapsedNum: 0,
   size: "md",
-  checkInputValue: (value: string) => true,
+  checkInputValue: (_: string) => true,
 });
 
 const emit = defineEmits([
   "change",
   "exceed",
-  "checkInputValueFail",
+  "check-input-value-fail",
   "update:modelValue",
   "update:inputValue",
-  "inputValueChange",
-  "pressEnter",
+  "input-value-change",
+  "press-enter",
   "remove",
   "clear",
   "focus",
@@ -81,10 +77,10 @@ const inputValue = ref(props.inputValue ?? "");
 
 const tagData = ref();
 
-const flushOut = (val: any) => {
+function flushOut(val: any) {
   emit("update:modelValue", val);
   emit("change", val);
-};
+}
 
 watch(
   () => props.modelValue,
@@ -92,13 +88,15 @@ watch(
     if (props.max) {
       if (props.minCollapsedNum) {
         if (props.minCollapsedNum > props.max) {
+          // eslint-disable-next-line no-console
           console.group("LayTagInput: minCollapsedNum > max");
           console.warn(
-            `props.minCollapsedNum(${props.minCollapsedNum}) > props.max(${props.max})`
+            `props.minCollapsedNum(${props.minCollapsedNum}) > props.max(${props.max})`,
           );
           console.warn(
-            `Tips: props.max should be greater than or equals to props.minCollapsedNum.`
+            `Tips: props.max should be greater than or equals to props.minCollapsedNum.`,
           );
+          // eslint-disable-next-line no-console
           console.groupEnd();
         }
       }
@@ -106,22 +104,22 @@ watch(
 
     tagData.value = val;
   },
-  { immediate: true }
+  { immediate: true },
 );
 
 watch(
   () => inputValue.value,
   (val) => {
     emit("update:inputValue", val);
-    emit("inputValueChange", val);
-  }
+    emit("input-value-change", val);
+  },
 );
 
 watch(
   () => props.inputValue,
   (val) => {
     inputValue.value = val ?? "";
-  }
+  },
 );
 
 const normalizedTags = computed(() => {
@@ -129,45 +127,51 @@ const normalizedTags = computed(() => {
 });
 
 const computedTagData = computed(() => {
-  if (!normalizedTags.value) return;
+  if (!normalizedTags.value)
+    return;
   return props.minCollapsedNum
     ? normalizedTags.value?.slice(0, props.minCollapsedNum)
     : normalizedTags.value;
 });
 
 const collapsedTagData = computed(() => {
-  if (!normalizedTags.value) return;
-  return props.minCollapsedNum &&
-    normalizedTags.value?.length >
-      (computedTagData.value?.length ?? 0) - props.minCollapsedNum
+  if (!normalizedTags.value)
+    return;
+  return props.minCollapsedNum
+    && normalizedTags.value?.length
+    > (computedTagData.value?.length ?? 0) - props.minCollapsedNum
     ? normalizedTags.value?.slice(props.minCollapsedNum)
     : [];
 });
 
-const handleInput = function (e: Event) {
-  if (isComposing.value) return;
+function handleInput(e: Event) {
+  if (isComposing.value)
+    return;
   inputValue.value = (e.target as HTMLInputElement).value;
   // fix: 输入单个字符后删除，此时 inputValue.value 和 oldValueInputValue.value 都是空字符串，由此触发 handleClose
-  if (!oldInputValue.value.length) oldInputValue.value = inputValue.value;
-};
+  if (!oldInputValue.value.length)
+    oldInputValue.value = inputValue.value;
+}
 
-const handleComposition = (e: CompositionEvent) => {
+function handleComposition(e: CompositionEvent) {
   if (e.type === "compositionend") {
     isComposing.value = false;
     compositionValue.value = "";
     handleInput(e);
-  } else {
+  }
+  else {
     isComposing.value = true;
     if (compositionValue.value.length || e.data?.length)
       oldCompositionValue.value = compositionValue.value;
     compositionValue.value = inputValue.value + (e.data ?? "");
   }
-};
+}
 
-const handleEnter = (e: KeyboardEvent) => {
+function handleEnter(e: KeyboardEvent) {
   e.preventDefault();
   const valueStr = inputValue.value ? String(inputValue.value).trim() : "";
-  if (!valueStr || !tagData.value) return;
+  if (!valueStr || !tagData.value)
+    return;
   if (!(props.max && tagData.value?.length >= props.max)) {
     if (!props.checkInputValue || props.checkInputValue(valueStr)) {
       tagData.value = isArray(tagData.value)
@@ -176,22 +180,26 @@ const handleEnter = (e: KeyboardEvent) => {
       inputValue.value = "";
       oldInputValue.value = "";
       flushOut(tagData.value);
-    } else {
-      emit("checkInputValueFail", valueStr, e);
     }
-  } else {
+    else {
+      emit("check-input-value-fail", valueStr, e);
+    }
+  }
+  else {
     emit("exceed", valueStr, e);
   }
-  emit("pressEnter", valueStr, e);
-};
+  emit("press-enter", valueStr, e);
+}
 
-const handleBackspaceKeyUp = (e: KeyboardEvent) => {
-  if (e.key.toLowerCase() !== "backspace") return;
-  if (!tagData.value || !tagData.value.length) return;
+function handleBackspaceKeyUp(e: KeyboardEvent) {
+  if (e.key.toLowerCase() !== "backspace")
+    return;
+  if (!tagData.value || !tagData.value.length)
+    return;
   if (
-    !oldCompositionValue.value.length &&
-    !inputValue.value?.length &&
-    !oldInputValue.value.length
+    !oldCompositionValue.value.length
+    && !inputValue.value?.length
+    && !oldInputValue.value.length
   ) {
     const lastIndex = normalizedTags.value.length - 1;
     handleClose(normalizedTags.value[lastIndex].value, lastIndex, e);
@@ -201,72 +209,70 @@ const handleBackspaceKeyUp = (e: KeyboardEvent) => {
     ? compositionValue.value
     : "";
   oldInputValue.value = inputValue.value ?? "";
-};
+}
 
-const handleFocus = (e: FocusEvent) => {
+function handleFocus(e: FocusEvent) {
   emit("focus", e);
   (inputRefEl.value as HTMLInputElement)?.focus();
-};
+}
 
-const handleBlur = (e: FocusEvent) => {
+function handleBlur(e: FocusEvent) {
   emit("blur", e);
   (inputRefEl.value as HTMLInputElement)?.blur();
-};
+}
 
-const handleClearClick = (e: MouseEvent) => {
+function handleClearClick(e: MouseEvent) {
   if (props.disabled || !props.allowClear) {
     return;
   }
   tagData.value = [];
   flushOut(tagData.value);
   emit("clear", e);
-};
+}
 
-const handleClose = (
-  value: string | number | undefined,
-  index: number,
-  e: Event
-) => {
+function handleClose(value: string | number | undefined, index: number, e: Event) {
   // 防止 inputValue.value 或 oldInputValue.value 为空时，删除 tag
   if (
-    e.type !== "click" &&
-    (isComposing.value ||
-      compositionValue.value.length ||
-      inputValue.value?.length ||
-      oldInputValue.value.length)
+    e.type !== "click"
+    && (isComposing.value
+      || compositionValue.value.length
+      || inputValue.value?.length
+      || oldInputValue.value.length)
   ) {
     e.preventDefault();
     e.stopPropagation();
     return;
   }
-  if (!tagData.value) return;
+  if (!tagData.value)
+    return;
   const arr = [...tagData.value];
   arr.splice(index, 1);
   tagData.value = arr;
   flushOut(tagData.value);
   emit("remove", value, e);
-};
+}
 
-const handleMouseDown = (e: MouseEvent) => {
+function handleMouseDown(e: MouseEvent) {
   if (inputRefEl.value) {
     e.preventDefault();
     inputRefEl.value.focus();
   }
-};
+}
 
-const setInputWidth = (width: number) => {
+function setInputWidth(width: number) {
   if (width > 15) {
     inputStyle.width = `${width}px`;
-  } else {
+  }
+  else {
     inputStyle.width = "15px";
   }
-};
+}
 
-const handleResize = () => {
+function handleResize() {
   if (mirrorRefEl.value) {
     setInputWidth(mirrorRefEl.value.offsetWidth);
   }
-};
+}
 
 const cls = computed(() => [
   `layui-tag-input`,
@@ -276,15 +282,17 @@ const cls = computed(() => [
   },
 ]);
 
-const normalizedTagData = (value: Array<string | number | TagData>) =>
-  value.map((item) => {
-    if (isObject(item)) return item;
+function normalizedTagData(value: Array<string | number | TagData>) {
+  return value.map((item) => {
+    if (isObject(item))
+      return item;
     return {
       value: item,
       label: String(item),
       closable: true,
     };
   });
+}
 
 useResizeObserver(mirrorRefEl, () => {
   handleResize();
@@ -298,7 +306,7 @@ watch(
         inputRefEl.value!.value = val ?? "";
       });
     }
-  }
+  },
 );
 
 const moreCount = computed(() => {
@@ -323,16 +331,17 @@ defineExpose({
   blur: handleBlur,
 });
 </script>
+
 <template>
   <div :class="cls" @mousedown="handleMouseDown">
     <span ref="mirrorRefEl" class="layui-tag-input-mirror">
       {{ compositionValue || inputValue || placeholder }}
     </span>
-    <div class="layui-tag-input-prepend" v-if="slots.prepend">
-      <slot name="prepend"></slot>
+    <div v-if="slots.prepend" class="layui-tag-input-prepend">
+      <slot name="prepend" />
     </div>
     <span v-if="$slots.prefix">
-      <slot name="prefix"></slot>
+      <slot name="prefix" />
     </span>
     <span class="layui-tag-input-inner">
       <template
@@ -348,12 +357,12 @@ defineExpose({
           {{ item.label }}
         </LayTag>
       </template>
-      <template v-if="computedTagData?.length != tagData?.length">
+      <template v-if="computedTagData?.length !== tagData?.length">
         <LayToopTip
           v-if="collapsedTagData?.length"
-          :isDark="false"
+          :is-dark="false"
           trigger="hover"
-          popperStyle="padding:6px"
+          popper-style="padding:6px"
           :disabled="!collapseTagsTooltip"
         >
           <LayTag v-bind="tagProps" key="more" :closable="false" :size="size">
@@ -371,7 +380,7 @@ defineExpose({
                   handleClose(
                     item.value,
                     index + (minCollapsedNum ?? 0),
-                    $event
+                    $event,
                   )
                 "
               >
@@ -397,23 +406,23 @@ defineExpose({
         @compositionstart="handleComposition"
         @compositionupdate="handleComposition"
         @compositionend="handleComposition"
-      />
+      >
       <div
         v-if="disabledInput"
         class="layui-tag-input-inner-disabled-input"
-      ></div>
+      />
     </span>
     <span
       v-if="allowClear && tagData?.length && !disabled"
       class="layui-tag-input-clear"
     >
-      <lay-icon type="layui-icon-close-fill" @click.stop="handleClearClick" />
+      <LayIcon type="layui-icon-close-fill" @click.stop="handleClearClick" />
     </span>
-    <span class="layui-tag-input-suffix" v-if="$slots.suffix">
-      <slot name="suffix"></slot>
+    <span v-if="$slots.suffix" class="layui-tag-input-suffix">
+      <slot name="suffix" />
     </span>
-    <div class="layui-tag-input-append" v-if="slots.append">
-      <slot name="append"></slot>
+    <div v-if="slots.append" class="layui-tag-input-append">
+      <slot name="append" />
     </div>
   </div>
 </template>

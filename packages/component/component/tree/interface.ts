@@ -1,62 +1,77 @@
-export type OriginalTreeData = {
+import type { NumberOrString } from "@layui/component/types";
+import type { VNode } from "vue";
+
+export type KeysType = (NumberOrString)[];
+
+export interface OriginalTreeData {
+  id?: NumberOrString;
+  title?: NumberOrString;
+  children?: OriginalTreeData[];
+  disabled?: boolean;
+  checked?: boolean;
+  spread?: boolean;
+  leaf?: boolean;
   [key: string]: any;
-};
+}
 
-export type EditType = boolean | ("add" | "update" | "delete");
-
-export type KeysType = (number | string)[];
-
-type _ReplaceFieldsOptions = {
+export interface ReplaceFieldsOptions {
   id: string;
   title: string;
-  parent: string;
   children: string;
-  checked: string;
   disabled: string;
+  checked: string;
   expanded: string;
   leaf: string;
-  [key: string]: string;
-};
+}
 
-export type TreeData = {
+export type ReplaceFieldsOptionsOptional = Partial<ReplaceFieldsOptions>;
+
+export interface TreeData {
   id: string | number;
   title: string;
   children: Array<TreeData>;
   parent?: string | number;
+
+  /**
+   * 是否禁止
+   */
   disabled: boolean;
+
+  /**
+   * 单行是否选中
+   */
   checked: boolean;
-  indeterminated: boolean;
+  isIndeterminate: boolean;
+
+  /**
+   * 是否展开子节点
+   */
   expanded: boolean;
   loading: boolean;
+
+  /**
+   * 是否没有子节点
+   * props.lazy为true时，为false，将有一次注入的机会
+   */
   leaf: boolean;
   original: OriginalTreeData;
-  slot: string;
-  icon?: string[] | string;
+  slot: string | ((data: OriginalTreeData) => VNode);
+  visible: boolean;
   [key: string]: any;
-};
-
-export type ReplaceFields = Partial<_ReplaceFieldsOptions>;
+}
 
 export type LoadFunction = (
   rootNode: OriginalTreeData | undefined,
   loadedCallback: (data: Array<OriginalTreeData>) => void
 ) => void;
 
-export type SearchNodeMethodType = (node: any, value: string) => boolean;
+export type SearchNodeMethodType = (node: OriginalTreeData, value: string) => boolean;
 
 export interface TreeProps {
   /**
    * 原始数据
    */
-  data?: Array<OriginalTreeData>;
-  /**
-   * 规范化数据
-   */
-  tree?: Array<TreeData>;
-  /**
-   * 是否禁用
-   */
-  disabled?: boolean;
+  data?: OriginalTreeData | Array<OriginalTreeData>;
   /**
    * 选中的节点ID数组
    */
@@ -80,7 +95,7 @@ export interface TreeProps {
   /**
    * 当前选择的节点ID
    */
-  selectedKey?: any;
+  selectedKey?: NumberOrString;
   /**
    * 是否显示连接线
    */
@@ -96,7 +111,7 @@ export interface TreeProps {
   /**
    * 替换字段
    */
-  replaceFields?: ReplaceFields;
+  replaceFields?: ReplaceFieldsOptionsOptional;
   /**
    * 图标是否带边框
    * @param iconName 图标名称
@@ -132,27 +147,24 @@ export interface TreeProps {
    */
   searchNodeMethod?: SearchNodeMethodType;
   /**
-   * 节点单击事件
-   * @param node 当前节点
-   * @returns `boolean` 返回 true 则拦截单击事件
-   */
-  nodeClick?: (node: TreeData) => boolean | undefined;
-  /**
-   * 节点双击事件
-   * @param node 当前节点
-   * @returns `boolean` 返回 true 则拦截双击事件
-   */
-  nodeDblClick?: (node: TreeData) => boolean | undefined;
-  /**
-   * 节点右键事件
-   * @param node 当前节点
-   * @returns `boolean` 返回 true 则拦截右键事件
-   */
-  nodeContextMenu?: (node: TreeData) => boolean | undefined;
-  /**
    * 手风琴模式
    */
   accordion?: boolean;
 }
 
-export const TREE_CONTEXT = Symbol("TREE_CONTEXT");
+export interface TreeNodeProps extends TreeProps {
+  /**
+   * 规范化数据
+   */
+  tree: Array<TreeData>;
+};
+
+export interface TreeEmits {
+  (e: "update:selected-key", key: string | number): void;
+  (e: "update:checked-keys", keys: Array<string | number>): void;
+  (e: "update:expand-keys", keys: Array<string | number>): void;
+  (e: "node-click", node: OriginalTreeData): void;
+  (e: "check-change", node: OriginalTreeData, checked: boolean): void;
+  (e: "node-double", event: MouseEvent, node: OriginalTreeData): void;
+  (e: "node-contextmenu", event: MouseEvent, node: OriginalTreeData): void;
+}

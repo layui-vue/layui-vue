@@ -1087,6 +1087,86 @@ const handleLoad = (node, resolve) => {
 
 :::
 
+::: title cacheData
+:::
+
+::: demo 支持在 `输入框` 中渲染未加载的数据
+
+<template>
+  <lay-tree-select
+    v-model="value11"
+		multiple
+    :data="data11"
+		:cacheData="cacheData1"
+    lazy
+    :load="handleLoad"
+  ></lay-tree-select>
+</template>
+
+<script setup>
+import { ref } from 'vue';
+
+const value11 = ref([1, 11])
+
+const data11 = ref([
+  {
+    title: "一级1",
+    id: 1,
+  },
+	{
+    title: "一级2",
+    id: 2,
+		children: [
+			{
+				title: "一级2-1",
+				id: 21,
+			}
+		]
+  },
+]);
+
+const cacheData1 = [
+	{
+    title: "一级1-1",
+    id: 11,
+  },
+]
+
+
+const handleLoad = (node, resolve) => {
+  console.log(node);
+  if (node.id === 1) {
+    setTimeout(() => {
+      resolve([
+        {
+          title: "一级1-1",
+          id: 11,
+        },
+        {
+          title: "一级1-2",
+          id: 12,
+        },
+      ]);
+    }, 2000);
+  } else if (node.id === 11) {
+    resolve([
+      {
+        title: "一级1-1-1",
+        id: 111,
+      },
+      {
+        title: "一级1-2-1",
+        id: 121,
+      },
+    ]);
+  } else {
+    resolve([]);
+  }
+};
+</script>
+
+:::
+
 ::: title Title 插槽
 :::
 
@@ -1362,6 +1442,7 @@ const data7 = ref([{
 | load                  | 加载子树数据的方法，仅当 `lazy` 属性为 `true` 时生效             | `function(node, resolve)`，node 为当前点击的节点，resolve 为数据加载完成的回调(必须调用) | --                              | --                  |
 | replace-fields        | 替换 data 中`id` `title` `children` 字段名                       | --                                         | --                              | `{id: "id", title: "title", children: "children"}`                  |
 | default-expand-all    | 是否展开所有 `tree` 节点                                         | `boolean`                                                                                | --                              | `false`             |
+| cacheData    | 预渲染懒加载数据                  | `Array<OriginalTreeData>`           | --                              | --             | `2.22.0`            |
 | teleport-props        | 继承至 dropdown 组件，下拉面板 `传递` 属性                       | `object`                                                                                 | `{to: 'body', disabled: false}` | `vue teleport` 组件 | `2.19.0` |
 
 :::

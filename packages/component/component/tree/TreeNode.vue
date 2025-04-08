@@ -1,262 +1,261 @@
-<script setup lang="ts">
-import type { Tree, TreeData as _TreeData } from "./tree";
+<script lang="ts" setup>
+import type { TreeData, TreeNodeProps } from "./interface";
 
+import LayRender from "@layui/component/component/_components/render";
+import LayCheckbox from "@layui/component/component/checkboxV2/index";
+import LayTransition from "@layui/component/component/transition/index";
+import { isFunction, isString, normalizeValue } from "@layui/component/utils";
 import { LayIcon } from "@layui/icons-vue";
-import LayCheckbox from "../checkboxV2/index.vue";
-import { computed, nextTick } from "vue";
-import LayTransition from "../transition/index.vue";
-import {
-  ReplaceFieldsOptions,
-  LoadFunction,
-  OriginalTreeData,
-} from "./tree.type";
+import { inject } from "vue";
 
-import { useTreeSelectProvide } from "../treeSelect/useTreeSelect";
-
-export type TreeData = _TreeData;
-
-export interface TreeNodeProps {
-  tree: Tree;
-  nodeList: TreeData[];
-  showCheckbox: boolean;
-  showLine: boolean;
-  selectedKey: any;
-  checkStrictly: boolean | string;
-  collapseTransition: boolean;
-  onlyIconControl: boolean;
-  tailNodeIcon: string | boolean;
-  replaceFields: ReplaceFieldsOptions;
-  load?: LoadFunction;
-}
-
-interface TreeNodeEmits {
-  (e: "node-click", node: TreeData): void;
-  (e: "check-change", node: TreeData, checked: boolean): void;
-}
+import { LAY_TREE_CONTEXT } from "./constant";
 
 defineOptions({
-  name: "TreeNode",
+  name: "LayTreeNode",
 });
 
-const props = defineProps<TreeNodeProps>();
-const emit = defineEmits<TreeNodeEmits>();
+const props = withDefaults(defineProps<TreeNodeProps>(), {});
 
-function renderLineShort(node: TreeData) {
-  const { children } = props.replaceFields;
-  return (
-    !node.hasNextSibling &&
-    node.parentNode &&
-    // 外层最后一个
-    (!node.parentNode.hasNextSibling ||
-      //上一层父级有延伸线
-      (node.parentNode.hasNextSibling && !node.parentNode[children]))
-  );
+const {
+  treeEmits,
+  treeSlots,
+
+  useTreeData:
+  { treeData, flatTree, lazyLoad, findNode, findNodePath, findSiblingsNodes, findAllLeafNodes, reloadAllNodeStatus, checkedKeys, expandedPath },
+} = inject(LAY_TREE_CONTEXT)!;
+
+function hasShortDash(node: TreeData) {
+  const siblings = findSiblingsNodes(node.parent) ?? [];
+  return siblings.findIndex(i => i.id === node.id) === siblings.length - 1;
 }
-/**
- * 展开收起 icon样式
- * @param node
- */
-const nodeIconType = (node: TreeData): string => {
-  const { children } = props.replaceFields;
 
-  if (!props.showLine) {
-    if (node[children]?.length > 0 || node.isLazy) {
-      return !node.isLeaf ? "layui-icon-triangle-r" : "layui-icon-triangle-d";
+function nodeIconType(node: TreeData): string {
+  if (isFunction(props.tailNodeIcon)) {
+    return props.tailNodeIcon(node) as string;
+  }
+
+  if (node.children.length || !node.leaf) {
+    if (!props.showLine) {
+      return node.expanded ? "layui-icon-triangle-d" : "layui-icon-triangle-r";
     }
+    else {
+      return node.expanded ? "layui-icon-subtraction" : "layui-icon-addition";
+    }
+  }
+  else if (!props.showLine) {
     return "";
   }
-  if (node[children]?.length > 0 || node.isLazy) {
-    return !node.isLeaf ? "layui-icon-addition" : "layui-icon-subtraction";
-  }
-  if (props.tailNodeIcon) {
+
+  else if (props.tailNodeIcon) {
     return props.tailNodeIcon as string;
   }
+
   return "";
-};
-
-function recursiveNodeClick(node: TreeData) {
-  emit("node-click", node);
 }
 
-const handleCheckChange = (node: TreeData, checked: boolean) => {
-  emit("check-change", node, checked);
-};
-
-const treeSelectContext = useTreeSelectProvide();
-
-function handleChange(checked: boolean, node: TreeData) {
-  props.tree.setCheckedKeys(checked, props.checkStrictly, node);
-  emit("check-change", node, checked);
-  treeSelectContext &&
-    treeSelectContext?.inputEl &&
-    treeSelectContext?.inputEl.value?.focus();
-}
-
-function handleIconClick(node: TreeData) {
-  const { id, children } = props.replaceFields;
-
-  const Id = node[id];
-  const originNode = props.tree.getOriginData(Id);
-  const hasChildren = node[children] && node[children].length > 0;
-
-  if (props.load && node.isLazy && !hasChildren) {
-    node.isLoading = true;
-    props.load(originNode, (data: OriginalTreeData[]) => {
-      // todo
-      // 不修改tree组件中props.data源数据
-      const tree = props.tree.createTree(data, Id);
-      Reflect.set(node, children, tree);
-
-      node.isLoading = false;
-      node.isLazy = false;
-      nextTick(() => {
-        node.isLeaf = !node.isLeaf;
-      });
-    });
-  } else {
-    hasChildren && (node.isLeaf = !node.isLeaf);
+function shouldIconBorder(node: TreeData) {
+  const _iconName = nodeIconType(node);
+  if (["layui-icon-subtraction", "layui-icon-addition"].includes(_iconName)) {
+    return true;
   }
+
+  return isFunction(props.shouldIconBorder)
+    ? Boolean(props.shouldIconBorder(_iconName))
+    : false;
 }
 
-function handleTitleClick(node: TreeData) {
+async function doNodeSwitch(e: MouseEvent, item: TreeData) {
+  await lazyLoad(item);
+  item.expanded = !item.expanded;
+
+  if (props.accordion) {
+    const _curNodeIdPath = findNodePath(item.id).map(a => a.id);
+    const _expandedPath = expandedPath.value;
+
+    // 异树，在根节点切换
+    const _diff_tree = normalizeValue(_expandedPath
+      .filter(a => a.at(0) !== _curNodeIdPath.at(0))
+      .map(b => findNode(b.at(0))));
+
+    // 同树，在同层节点切换
+    const _same_tree
+      = _curNodeIdPath.length >= 2
+        && normalizeValue(_expandedPath
+          .filter(
+            a =>
+              a.length === _curNodeIdPath.length
+              && a.at(0) === _curNodeIdPath.at(0)
+              && a.at(-1) !== _curNodeIdPath.at(-1),
+          )
+          .map(b => findNode(b.at(-1))))
+          .filter(e => e.expanded);
+
+    _diff_tree.forEach(a => (a.expanded = false));
+    _same_tree && _same_tree.forEach(a => (a.expanded = false));
+  }
+
+  treeEmits(
+    "update:expand-keys",
+    flatTree.value.filter(i => i.expanded).map(i => i.id) ?? [],
+  );
+
+  treeEmits("update:checked-keys", checkedKeys.value);
+}
+
+function handleIconClick(e: MouseEvent, item: TreeData) {
+  doNodeSwitch(e, item);
+}
+
+function handleNodeClick(e: MouseEvent, item: TreeData) {
+  // if (!props.showCheckbox) {
+  treeEmits("update:selected-key", item.id);
+  // }
+
+  treeEmits("node-click", item.original);
+
   if (!props.onlyIconControl) {
-    handleIconClick(node);
-  }
-  if (!node.isDisabled) {
-    emit("node-click", node);
+    doNodeSwitch(e, item);
   }
 }
 
-function handleRowClick(node: TreeData) {
-  if (!props.showLine) {
-    handleTitleClick(node);
-  }
+function handleItemDblclick(e: MouseEvent, item: TreeData) {
+  e.stopPropagation();
+  e.preventDefault();
+
+  treeEmits("node-double", e, item.original);
 }
 
-/**
- * is-all-selected
- */
-const isChildAllSelected = computed(() => {
-  function _isChildAllSelected(node: TreeData): boolean {
-    const { children } = props.replaceFields;
+function handleItemContextmenu(e: MouseEvent, item: TreeData) {
+  e.stopPropagation();
+  e.preventDefault();
 
-    let res = false; // true为半选 false为全选
-    for (const item of node[children] || []) {
-      if (item.isChecked) {
-        res = true;
-      }
+  treeEmits("node-contextmenu", e, item.original);
+}
+
+function handleCheckboxChange(checked: boolean, item: TreeData) {
+  const job = (item: TreeData) => {
+    // 严格模式下直接勾选，然后更新状态
+    if (props.checkStrictly) {
+      item.checked = checked;
+
+      treeEmits("check-change", item.original, checked);
+
+      treeEmits("update:checked-keys", checkedKeys.value ?? []);
+      return;
     }
 
-    if (!res && node[children]?.length) {
-      for (const item of node[children] || []) {
-        res = _isChildAllSelected(item);
-        if (res) break;
-      }
-    }
-    return res;
-  }
+    const leafs = findAllLeafNodes(item.id);
+    // 非严格模式下，如果在子节点有禁用的，子树根节点必然不是 checked，此时简单置 checked 为 false 即可
+    if (item.isIndeterminate) {
+      checked = false;
+    };
+    leafs
+      ?.filter(i => !i.disabled)
+      .forEach((i) => {
+        i.checked = checked;
+      });
 
-  return (node: TreeData): boolean => {
-    if (props.checkStrictly || !props.showCheckbox) {
-      return false;
-    } else {
-      let res = _isChildAllSelected(node);
-      return res;
-    }
+    reloadAllNodeStatus();
+
+    // 等待 reloadAllNodeStatus 所有节点状态更新完，再emit当前节点checked状态
+    treeEmits("check-change", item.original, item.checked);
+    treeEmits("update:checked-keys", checkedKeys.value);
   };
-});
+
+  if (props.loadOnCheck) {
+    lazyLoad(item)
+      .catch(console.warn)
+      .finally(() => job(item));
+  }
+  else {
+    job(item);
+  }
+}
 </script>
 
 <template>
-  <div
-    v-show="node.visible"
-    v-for="(node, nodeIndex) in nodeList"
-    :key="nodeIndex"
-    :class="{
-      'layui-tree-set': true,
-      'layui-tree-setLineShort': renderLineShort(node),
-      'layui-tree-setHide': node.isRoot,
-    }"
-  >
+  <div class="layui-tree-block">
     <div
-      class="layui-tree-entry"
-      :class="{ 'layui-this': selectedKey === node[replaceFields.id] }"
-      @click="handleRowClick(node)"
+      v-for="(node, index) in tree ?? treeData ?? []"
+      v-show="!node.mock && node.visible"
+      :key="index"
+      class="layui-tree-set" :class="[
+        {
+          'layui-tree-set-end': !props.standalone ? hasShortDash(node) : false,
+        },
+      ]"
     >
-      <div class="layui-tree-main">
-        <span
-          :class="[
-            showLine &&
-            (node[replaceFields.children]?.length > 0 || node.isLazy)
-              ? 'layui-tree-icon'
-              : '',
-            { 'layui-tree-iconClick': true },
-            {
-              'layui-tree-icon-standalone':
-                nodeIconType(node).length &&
-                node.isLeaf &&
-                !node[replaceFields.children]?.length,
-            },
-          ]"
-        >
-          <lay-icon
-            :type="nodeIconType(node)"
-            @click.stop="handleIconClick(node)"
-          />
-        </span>
-        <lay-checkbox
-          value=""
-          skin="primary"
-          :modelValue="node.isChecked"
-          :disabled="node.isDisabled"
-          :isIndeterminate="isChildAllSelected(node)"
-          @change="(checked: boolean) => handleChange(checked, node)"
-          v-if="showCheckbox"
-        />
-        <lay-icon
-          v-if="node.isLoading"
-          class="layui-tree-loading layui-anim layui-anim-rotate layui-anim-loop"
-          type="layui-icon-loading"
-        />
-        <span
-          :class="{
-            'layui-tree-txt': true,
-            'layui-disabled': node.isDisabled,
-          }"
-          @click.stop="handleTitleClick(node)"
-        >
-          <slot name="title" :data="node">{{
-            node[props.replaceFields.title]
-          }}</slot>
-        </span>
-      </div>
-    </div>
-    <lay-transition :enable="collapseTransition">
       <div
-        v-if="node.isLeaf"
-        class="layui-tree-pack layui-tree-showLine"
-        style="display: block"
+        class="layui-tree-entry" :class="[
+          {
+            'layui-this': selectedKey === node.id,
+          },
+        ]"
       >
-        <tree-node
-          :tree="tree"
-          :node-list="node[replaceFields.children] || []"
-          :show-checkbox="showCheckbox"
-          :show-line="showLine"
-          :selected-key="selectedKey"
-          :collapse-transition="collapseTransition"
-          :checkStrictly="checkStrictly"
-          :only-icon-control="onlyIconControl"
-          :tail-node-icon="tailNodeIcon"
-          :replace-fields="replaceFields"
-          :load="load"
-          @node-click="recursiveNodeClick"
-          @check-change="handleCheckChange"
-        >
-          <template v-if="$slots.title" #title="slotProp: { data: any }">
-            <slot name="title" :data="slotProp.data"></slot>
-          </template>
-        </tree-node>
+        <div class="layui-tree-main">
+          <span
+            class="layui-tree-iconClick"
+            :class="[
+              `layui-tree-icon-${
+                shouldIconBorder(node) ? 'border' : 'no-border'
+              }`,
+              `layui-tree-icon-${
+                nodeIconType(node).length ? 'pad-left' : 'no-pad-left'
+              }`,
+            ]"
+            @click.capture="handleIconClick($event, node)"
+          >
+            <LayIcon :type="nodeIconType(node)" />
+          </span>
+
+          <LayCheckbox
+            v-if="showCheckbox"
+            v-model="node.checked"
+            :value="node.checked ? 1 : 0"
+            skin="primary"
+            :disabled="node.disabled"
+            :is-indeterminate="node.isIndeterminate"
+            @change="handleCheckboxChange($event, node)"
+          />
+
+          <LayIcon
+            v-if="node.loading"
+            class="layui-tree-loading layui-anim layui-anim-rotate layui-anim-loop"
+            type="layui-icon-loading"
+          />
+
+          <span
+            class="layui-tree-txt"
+            @dblclick="handleItemDblclick($event, node)"
+            @contextmenu="handleItemContextmenu($event, node)"
+            @click="handleNodeClick($event, node)"
+          >
+            <LayRender v-if="treeSlots.title" :data="node.original" :slots="treeSlots" render="title" />
+            <template v-else>{{ node.title }}</template>
+          </span>
+        </div>
       </div>
-    </lay-transition>
+
+      <LayTransition :enable="collapseTransition">
+        <div
+          v-if="node.expanded"
+          class="layui-tree-pack"
+          :class="[{ 'layui-tree-showLine': showLine }]"
+        >
+          <LayRender
+            v-if="(isString(node.slot) && treeSlots[node.slot]) || isFunction(node.slot)"
+            :render="node.slot"
+            :slots="treeSlots"
+            :data="node.original"
+          />
+
+          <tree-node
+            v-else
+            v-bind="props"
+            :tree="node.children"
+          />
+        </div>
+      </LayTransition>
+    </div>
   </div>
 </template>

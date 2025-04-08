@@ -6,6 +6,10 @@ import type { VueWrapper } from "@vue/test-utils";
 
 import LayTreeSelect from "../index.vue";
 import LayInput from "../../input/index.vue";
+import LayTagInput from "@layui/component/component/tagInput/index.vue";
+import { sleep } from "@layui/component/test-utils";
+
+const teleportProps = { to: "body", disabled: true };
 
 describe("LayTreeSelect", () => {
   test("LayTreeSelect 基础使用", async () => {
@@ -130,4 +134,88 @@ describe("LayTreeSelect", () => {
     await nextTick();
     expect(InputVm.props("modelValue")).toBe("title-1");
   });
+
+  test("cacheData", async () => {
+  
+      const wrapper = mount({
+        setup() {
+          const value1 = ref([1, 11])
+
+          const data = ref([
+            {
+              title: "一级1",
+              id: 1,
+            },
+            {
+              title: "一级2",
+              id: 2,
+              children: [
+                {
+                  title: "一级2-1",
+                  id: 21,
+                }
+              ]
+            },
+          ]);
+
+          const cacheData1 = [
+            {
+              title: "一级1-1",
+              id: 11,
+            },
+          ]
+
+          const handleLoad = (node, resolve) => {
+            console.log(node);
+            if (node.id === 1) {
+              setTimeout(() => {
+                resolve([
+                  {
+                    title: "一级1-1",
+                    id: 11,
+                  },
+                  {
+                    title: "一级1-2",
+                    id: 12,
+                  },
+                ]);
+              }, 200);
+            }
+          };
+  
+          return () => (
+            <LayTreeSelect
+              v-model={value1.value}
+              multiple
+              data={data.value}
+              cacheData={cacheData1}
+              teleportProps={teleportProps}
+              lazy
+              load={handleLoad}
+            ></LayTreeSelect>
+          );
+        },
+      }, {attachTo: document.body});
+  
+      await nextTick();
+  
+      const tagInput = wrapper.findComponent(LayTagInput);
+      expect(tagInput.props('modelValue')?.length).toBe(2)
+
+      await tagInput.trigger('click')
+      await sleep(300)
+
+      const popper = wrapper.find('.layui-popper')
+      expect(popper.isVisible()).toBeTruthy()
+
+      expect(tagInput.props('modelValue')?.length).toBe(2)
+
+      const treeNode = popper.findAll('.layui-tree-set')
+      const expandIcon = treeNode[0].find('.layui-tree-iconClick')
+
+      await expandIcon.trigger('click')
+      await sleep(300)
+
+      expect(tagInput.props('modelValue')?.length).toBe(2)
+    });
 });
