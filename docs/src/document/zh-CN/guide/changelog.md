@@ -13,6 +13,34 @@
 ::: demo
 <template>
   <lay-timeline>
+    <lay-timeline-item title="2.22.x">
+      <ul>
+        <a name="2-22-0"></a >
+        <li>
+          <h3>2.22.0 <span class="layui-badge-rim">2024-4-11</span></h3>
+          <ul>
+              <li>[新增] table 组件 page 插槽，分页右侧区域。<a href="https://gitee.com/layui-vue/layui-vue/pulls/469">详情</a></li>
+              <li>[新增] table 组件 page.change 回调，在未来版本中将删除 @change事件。<a href="https://gitee.com/layui-vue/layui-vue/pulls/469">详情</a></li>
+              <li>[新增] table 组件 checkbox 与 checkbox-all emit，用于触发点击 单行checkbox 与 全选。<a href="https://gitee.com/layui-vue/layui-vue/pulls/469">详情</a></li>
+              <li>[新增] table 组件 default-toolbar 可自定义配置图标(icon)。<a href="https://gitee.com/layui-vue/layui-vue/pulls/469">详情</a></li>
+              <li>[新增] table 组件 column.ellipsisTooltipProps 可自定义 tooltip 样式。<a href="https://gitee.com/layui-vue/layui-vue/pulls/469">详情</a></li>
+              <li>[新增] tree 和 tree-select 组件 data 属性 checked spread leaf slot icon 配置项。<a href="https://gitee.com/layui-vue/layui-vue/pulls/429">详情</a></li>
+              <li>[新增] tree 和 tree-select 组件 replaceField 属性 disabled checked expanded leaf 配置项。<a href="https://gitee.com/layui-vue/layui-vue/pulls/429">详情</a></li>
+              <li>[新增] tree 和 tree-select 组件 cacheData 属性，支持传入节点缓存数据。<a href="https://gitee.com/layui-vue/layui-vue/pulls/429">详情</a></li>
+              <li>[新增] tree 组件 accordion 属性开启手风琴模式。<a href="https://gitee.com/layui-vue/layui-vue/pulls/429">详情</a></li>
+              <li>[新增] tree 组件 loadOnCheck 属性，在点击 checkbox 时，触发懒加载。<a href="https://gitee.com/layui-vue/layui-vue/pulls/429">详情</a></li>
+              <li>[新增] tree 组件 node-double 节点双击、node-contextmenu 节点右键事件。<a href="https://gitee.com/layui-vue/layui-vue/pulls/429">详情</a></li>
+              <li>[修复] table 组件 多级表头与fixed属性结合，表头滑动偏移位置错误。<a href="https://gitee.com/layui-vue/layui-vue/issues/I9IQQB">issue</a></li>
+              <li>[修复] input-number 组件自定义宽度，indicator显示异常。<a href="https://gitee.com/layui-vue/layui-vue/pulls/472">详情</a></li>
+              <li>[修复] popper 组件多层级点击外部隐藏失效。<a href="https://gitee.com/layui-vue/layui-vue/pulls/473">详情</a></li>
+              <li>[修复] descriptionsItem umd中使用labelStyle/labelClass未生效。<a href="https://gitee.com/layui-vue/layui-vue/pulls/471">详情</a></li>
+              <li>[修复] splitPanel 组件 splitPanelItem无法设置style/class与splitPanel可渲染非splitPanelItem组件。<a href="https://gitee.com/layui-vue/layui-vue/pulls/468">详情</a></li>
+              <li>[优化] select 组件当下拉弹窗隐藏，用户输入自动显示下拉弹窗。<a href="https://gitee.com/layui-vue/layui-vue/pulls/470">详情</a></li>
+              <li>[优化] upload 组件 slots.preview 为空时，不渲染相关元素。<a href="https://gitee.com/layui-vue/layui-vue/pulls/471">详情</a></li>
+          </ul>
+        </li>
+      </ul>
+    </lay-timeline-item>
     <lay-timeline-item title="2.21.x">
       <ul>
         <a name="2-21-2"></a>

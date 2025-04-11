@@ -1,7 +1,7 @@
 {
   "name": "@layui/layui-vue",
   "type": "module",
-  "version": "2.21.3-alpha.11",
+  "version": "2.22.0",
   "description": "a component library for Vue 3 base on layui-vue",
   "author": "就眠儀式",
   "license": "MIT",
