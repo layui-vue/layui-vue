@@ -186,7 +186,16 @@ const getUploadFile2 = (file)=>{
 ::: demo 使用 `lay-upload` 标签, 添加 `cut` 开启 选择文件后剪裁功能
 
 <template>
-  <lay-upload  url="https://www.mocky.io/v2/5cc8019d300000980a055e76" @cutdone="getCutDone" :beforeUpload="beforeUpload10" acceptMime="images" @cutcancel="getCutCancel" :cut="true" :cutOptions="cutOptions" @done="getFileDone">
+  <lay-upload  
+    url="https://www.mocky.io/v2/5cc8019d300000980a055e76" 
+    @cutdone="getCutDone" 
+    :beforeUpload="beforeUpload10"
+    acceptMime="images" 
+    @cutcancel="getCutCancel" 
+    :cut="true" 
+    :cutOptions="cutOptions" 
+    @done="getFileDone"
+  >
     <template #preview>
       <div class="easy-wrap" v-if="cutUrl">
         <img :src="cutUrl"/>
