@@ -50,7 +50,7 @@ const openIframe = function() {
         type: "iframe",
         title: "远程页面",
         area: ['90%','90%'],
-        content: "http://www.layui-vue.com"
+        content: "https://www.layui-vue.com"
     })
 }
 
@@ -437,7 +437,7 @@ const openIframe = function() {
         title: "标题",
         resize: true,
         area: ['90%','90%'],
-        content: "http://www.layui-vue.com"
+        content: "https://www.layui-vue.com"
     })
 }
 

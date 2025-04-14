@@ -17,7 +17,7 @@
       <ul>
         <a name="2-22-0"></a >
         <li>
-          <h3>2.22.0 <span class="layui-badge-rim">2024-4-11</span></h3>
+          <h3>2.22.0 <span class="layui-badge-rim">2025-4-11</span></h3>
           <ul>
               <li>[新增] table 组件 page 插槽，分页右侧区域。<a href="https://gitee.com/layui-vue/layui-vue/pulls/469">详情</a></li>
               <li>[新增] table 组件 page.change 回调，在未来版本中将删除 @change事件。<a href="https://gitee.com/layui-vue/layui-vue/pulls/469">详情</a></li>
