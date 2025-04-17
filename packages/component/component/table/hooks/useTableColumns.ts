@@ -1,11 +1,11 @@
-import type { TableColumn, ColumnWeakMap } from "../typing";
-import { computed, toRaw, watch } from "vue";
+import type { ColumnWeakMap, TableColumn } from "../typing";
+import { isEqual, isValueArray, loopForEach } from "@layui/component/utils";
 
-import { isValueArray, loopForEach, isEqual } from "@layui/component/utils";
+import { computed, watch } from "vue";
 
 export function useTableColumns(
   columns: Array<TableColumn>,
-  columnMap: ColumnWeakMap
+  columnMap: ColumnWeakMap,
 ) {
   watch(
     () => columns,
@@ -15,7 +15,7 @@ export function useTableColumns(
     {
       immediate: true,
       deep: true,
-    }
+    },
   );
 
   /**
@@ -24,9 +24,9 @@ export function useTableColumns(
   function setDefaultWidth(
     column: TableColumn,
     _: number,
-    parent: TableColumn | undefined
+    parent: TableColumn | undefined,
   ) {
-    if (column.children?.every((child) => child.hide)) {
+    if (column.children?.every(child => child.hide)) {
       column.hide = true;
     }
 
@@ -59,7 +59,7 @@ export function useTableColumns(
         maxDepth = Math.max(maxDepth, depth);
       }
 
-      return columns.every((column) => column.hide) ? maxDepth : maxDepth + 1;
+      return columns.every(column => column.hide) ? maxDepth : maxDepth + 1;
     }
 
     return _totalRow(columns);
@@ -70,14 +70,14 @@ export function useTableColumns(
    */
   function setRowSpanValue(column: TableColumn) {
     const mapValueColumns = columnMap.get(
-      column
+      column,
     ) as unknown as Array<TableColumn>;
 
     const rowspan = isValueArray(column.children)
       ? 1 // 存在children rowspan只需为1
       : mapValueColumns.length > 1
-      ? totalRow.value - mapValueColumns.length - 1 // 存在父级column，需要减去父级层级
-      : totalRow.value;
+        ? totalRow.value - mapValueColumns.length - 1 // 存在父级column，需要减去父级层级
+        : totalRow.value;
 
     return rowspan;
   }
@@ -89,7 +89,8 @@ export function useTableColumns(
     let colspan = 0;
     if (!isValueArray(column.children)) {
       colspan = 1;
-    } else {
+    }
+    else {
       colspan = totalCol(column.children);
     }
 
@@ -97,7 +98,8 @@ export function useTableColumns(
       return columns!.reduce((total, column): number => {
         if (isValueArray(column.children)) {
           return (total += totalCol(column.children));
-        } else {
+        }
+        else {
           !column.hide && (total += 1);
           return total;
         }

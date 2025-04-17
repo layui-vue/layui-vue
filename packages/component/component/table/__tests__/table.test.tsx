@@ -765,4 +765,37 @@ describe("LayTable", () => {
     await operatorDoms[1].trigger("click");
     expect(name).toBe("张三2");
   });
+
+  test("columns titleSlot", async () => {
+    const columns = [
+      { title: '', titleSlot: "titleSlot1", width: "80px", key: "name1" },
+      { title: '', titleSlot: () => ('titleSlot2'), width: "80px", key: "name2" },
+    ];
+
+    const dataSource = ref([]);
+
+    const wrapper = mount({
+      setup() {
+        return () => (
+          <LayTable
+            page={{ current: 1, limit: 10, total: 100 }}
+            columns={columns}
+            dataSource={dataSource.value}
+            v-slots={{
+              titleSlot1: ({ row }: any) => (
+                'titleSlot1'
+              ),
+            }}
+          ></LayTable>
+        );
+      },
+    });
+
+    await nextTick()
+
+    const thS = wrapper.findAll(".layui-table-header .layui-table-header-wrapper tr th");
+
+    expect(thS[0].text()).toBe('titleSlot1')
+    expect(thS[1].text()).toBe('titleSlot2')
+  });
 });

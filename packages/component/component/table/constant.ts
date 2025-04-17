@@ -1,15 +1,10 @@
-import { type InjectionKey, type Ref, type ShallowRef, type Slots } from "vue";
-import {
-  type TableColumn,
-  type TableProps,
-  type RequiredTableProps,
-  type TableEmit,
-} from "./typing";
-
+import type { InjectionKey, ShallowRef, Slots } from "vue";
 import type { UseTableReturn } from "./hooks/useTable";
-import type { UseTableSelectedReturn } from "./hooks/useTableSelected";
+
+import type { UseTableColumnsReturn } from "./hooks/useTableColumns";
 import type { UseTableExpandReturn } from "./hooks/useTableExpand";
-import { UseTableColumnsReturn } from "./hooks/useTableColumns";
+import type { UseTableSelectedReturn } from "./hooks/useTableSelected";
+import type { RequiredTableProps, TableEmit, TableProps } from "./typing";
 
 export const columnsTypeList = ["radio", "checkbox", "number"];
 
@@ -35,5 +30,5 @@ interface LayTableContextType {
   commonGetStylees: UseTableReturn["commonGetStylees"];
 }
 
-export const LAY_TABLE_CONTEXT: InjectionKey<LayTableContextType> =
-  Symbol("LayTableContext");
+export const LAY_TABLE_CONTEXT: InjectionKey<LayTableContextType>
+  = Symbol("LayTableContext");

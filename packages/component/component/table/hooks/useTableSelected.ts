@@ -1,21 +1,21 @@
-import { type RequiredTableProps, type TableEmit } from "../typing";
-import { ref, reactive, toRaw, watch, computed } from "vue";
-
+import type { RequiredTableProps, TableEmit } from "../typing";
 import { isValueArray, loopForEach } from "@layui/component/utils";
+
+import { computed, reactive, ref, toRaw, watch } from "vue";
 
 export function useTableSelected(props: RequiredTableProps, emit: TableEmit) {
   /**
    * radio
    */
   const tableSelectedKey = ref<RequiredTableProps["selectedKey"]>(
-    props.selectedKey
+    props.selectedKey,
   );
 
   watch(
     () => props.selectedKey,
     (newValue) => {
       tableSelectedKey.value = newValue;
-    }
+    },
   );
 
   function toggleSelected(key: RequiredTableProps["selectedKey"]) {
@@ -55,23 +55,23 @@ export function useTableSelected(props: RequiredTableProps, emit: TableEmit) {
       tableMSelectedKeys.splice(
         0,
         tableMSelectedKeys.length,
-        ...toRaw(newValue || [])
+        ...toRaw(newValue || []),
       );
     },
     {
       immediate: true,
       deep: true,
-    }
+    },
   );
 
   watch(
     () => [tableMSelectedKeys, allKeys.value],
     ([tableMultipleSelectedKeysValue, allKeysValue]) => {
-      allMSelected.value = allKeysValue.every((key) =>
-        tableMultipleSelectedKeysValue.includes(key)
+      allMSelected.value = allKeysValue.every(key =>
+        tableMultipleSelectedKeysValue.includes(key),
       );
-      someMSelected.value = allKeysValue.some((key) =>
-        tableMultipleSelectedKeysValue.includes(key)
+      someMSelected.value = allKeysValue.some(key =>
+        tableMultipleSelectedKeysValue.includes(key),
       );
 
       if (
@@ -83,7 +83,7 @@ export function useTableSelected(props: RequiredTableProps, emit: TableEmit) {
     {
       immediate: true,
       deep: true,
-    }
+    },
   );
 
   /**
@@ -93,16 +93,17 @@ export function useTableSelected(props: RequiredTableProps, emit: TableEmit) {
     if (value) {
       // 添加当前数据源中不存在的key
       tableMSelectedKeys.push(
-        ...allKeys.value.filter((key) => !tableMSelectedKeys.includes(key))
+        ...allKeys.value.filter(key => !tableMSelectedKeys.includes(key)),
       );
-    } else {
+    }
+    else {
       // 移除dataSource中的所有id
       // 这里需要保留不是dataSource的id 所以不能直接清空tableMultipleSelectedKeys
       // 列如 tableMSelectedKeys = [1,2,3]. dataSource = [{id: 1}, {id: 2}]. 这里需要保留 `3`
       tableMSelectedKeys.splice(
         0,
         tableMSelectedKeys.length,
-        ...tableMSelectedKeys.filter((key) => !allKeys.value.includes(key))
+        ...tableMSelectedKeys.filter(key => !allKeys.value.includes(key)),
       );
     }
 
@@ -114,11 +115,12 @@ export function useTableSelected(props: RequiredTableProps, emit: TableEmit) {
    */
   function toggleMSelected(
     data: RequiredTableProps["dataSource"][number],
-    state: boolean
+    state: boolean,
   ) {
     if (state) {
       tableMSelectedKeys.push(data[props.id]);
-    } else {
+    }
+    else {
       tableMSelectedKeys.splice(tableMSelectedKeys.indexOf(data[props.id]), 1);
     }
 

@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import { inject } from "vue";
-import type { TableToolBarType } from "./types";
 import type { TableColumn, TableDefaultToolbarComplex } from "../typing";
-
-import LayIcon from "@layui/component/component/icon";
-import LayDropdown from "@layui/component/component/dropdown/index.vue";
-import LayCheckboxV2 from "@layui/component/component/checkboxV2/index.vue";
+import type { TableToolBarType } from "./types";
 import LayRender from "@layui/component/component/_components/render";
-import { isValueArray } from "@layui/component/utils";
 
-import { useToolBar } from "../hooks/useToolbar";
+import LayCheckboxV2 from "@layui/component/component/checkboxV2/index.vue";
+import LayDropdown from "@layui/component/component/dropdown/index.vue";
+import LayIcon from "@layui/component/component/icon";
+import { isValueArray } from "@layui/component/utils";
+import { inject } from "vue";
+
 import { LAY_TABLE_CONTEXT } from "../constant";
+import { useToolBar } from "../hooks/useToolbar";
 
 defineOptions({
   name: "LayTableToolBar",
@@ -33,7 +33,7 @@ function handleCheckChange(column: TableColumn) {
     class="layui-table-tool"
   >
     <div class="layui-table-tool-temp">
-      <LayRender :slots="tableSlots" render="toolbar"></LayRender>
+      <LayRender :slots="tableSlots" render="toolbar" />
     </div>
 
     <div v-if="isValueArray(showToolbars)" class="layui-table-tool-self">
@@ -52,14 +52,15 @@ function handleCheckChange(column: TableColumn) {
             <div class="layui-table-tool-checkbox">
               <LayCheckboxV2
                 v-for="(column, columnIndex) in hierarchicalColumns[0]"
-                :modelValue="!column.hide"
+                :key="column.key || column.type || columnIndex"
+                :model-value="!column.hide"
                 skin="primary"
                 :disabled="isValueArray(column.children)"
-                :key="column.key || column.type || columnIndex"
                 :value="columnIndex"
                 @change="() => handleCheckChange(column)"
-                >{{ column.title }}</LayCheckboxV2
               >
+                {{ column.title }}
+              </LayCheckboxV2>
             </div>
           </template>
         </LayDropdown>

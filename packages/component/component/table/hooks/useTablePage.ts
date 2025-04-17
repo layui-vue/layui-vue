@@ -1,7 +1,7 @@
-import { type TableProps } from "../typing";
+import type { TableProps } from "../typing";
 
 // TODO
-export function useTablePage(props: TableProps) {
+export function useTablePage(_: TableProps) {
   return {};
 }
 

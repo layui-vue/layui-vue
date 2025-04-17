@@ -1,26 +1,26 @@
+import type { StyleValue } from "vue";
 import type {
-  TableProps,
+  ColumnWeakMap,
+  RequiredTableProps,
   TableColumn,
   TableEmit,
-  RequiredTableProps,
-  ColumnWeakMap,
 } from "../typing";
+
+import { isEqual, isValueArray, loopForEach } from "@layui/component/utils";
 import {
-  type StyleValue,
-  reactive,
   isReactive,
+  reactive,
   ref,
+
   watch,
   watchEffect,
 } from "vue";
-
+import { useAutoColsWidth } from "./useAutoColsWidth";
 import { useTableColumns } from "./useTableColumns";
-import { useTableSelected } from "./useTableSelected";
 import { useTableExpand } from "./useTableExpand";
 import { useTablePage } from "./useTablePage";
-import { useAutoColsWidth } from "./useAutoColsWidth";
 
-import { isValueArray, isEqual, loopForEach } from "@layui/component/utils";
+import { useTableSelected } from "./useTableSelected";
 
 export function useTable(props: RequiredTableProps, emit: TableEmit) {
   const columnMap: ColumnWeakMap = new WeakMap();
@@ -66,7 +66,7 @@ export function useTable(props: RequiredTableProps, emit: TableEmit) {
     },
     {
       deep: true,
-    }
+    },
   );
 
   const _columns = ref<TableColumn[]>([]);
@@ -82,7 +82,7 @@ export function useTable(props: RequiredTableProps, emit: TableEmit) {
     {
       immediate: true,
       deep: true,
-    }
+    },
   );
 
   watchEffect(() => {
@@ -128,7 +128,7 @@ export function useTable(props: RequiredTableProps, emit: TableEmit) {
    */
   function getHierarchicalColumns<T extends TableColumn>(
     columns: Array<T>,
-    level = 0
+    level = 0,
   ) {
     if (!hierarchicalColumns.value[level]) {
       hierarchicalColumns.value[level] = [];
@@ -162,9 +162,9 @@ export function useTable(props: RequiredTableProps, emit: TableEmit) {
       getLastLeftAndFirstRight(column),
       // layui-table-fixed-left/right
       getFixedLeftRight(column),
-      column.type == "checkbox" ? "layui-table-cell-checkbox" : "",
-      column.type == "radio" ? "layui-table-cell-radio" : "",
-      column.type == "number" ? "layui-table-cell-number" : "",
+      column.type === "checkbox" ? "layui-table-cell-checkbox" : "",
+      column.type === "radio" ? "layui-table-cell-radio" : "",
+      column.type === "number" ? "layui-table-cell-number" : "",
       ...args,
     ];
   }
@@ -186,18 +186,18 @@ export function useTable(props: RequiredTableProps, emit: TableEmit) {
     if (topColumn.fixed && topColumn.fixed === "left") {
       return {
         left:
-          getCurrentColumnOtherColumnTotalWidth(mapValueColumns) +
-          getCurrentTopColumnBeforeColumnsTotalWidth(mapValueColumns) +
-          "px",
+          `${getCurrentColumnOtherColumnTotalWidth(mapValueColumns)
+          + getCurrentTopColumnBeforeColumnsTotalWidth(mapValueColumns)
+          }px`,
       };
     }
 
     if (topColumn.fixed && topColumn.fixed === "right") {
       return {
         right:
-          getCurrentColumnOtherColumnTotalWidth(mapValueColumns, false) +
-          getCurrentTopColumnBeforeColumnsTotalWidth(mapValueColumns, false) +
-          "px",
+          `${getCurrentColumnOtherColumnTotalWidth(mapValueColumns, false)
+          + getCurrentTopColumnBeforeColumnsTotalWidth(mapValueColumns, false)
+          }px`,
       };
     }
     return {};
@@ -226,7 +226,7 @@ export function useTable(props: RequiredTableProps, emit: TableEmit) {
      */
     function getCurrentColumnOtherColumnTotalWidth(
       mapValueColumns: TableColumn[],
-      isLeft = true
+      isLeft = true,
     ): number {
       if (mapValueColumns.length > 1) {
         let width = 0;
@@ -237,13 +237,16 @@ export function useTable(props: RequiredTableProps, emit: TableEmit) {
           for (let index = 0; index < _children.length; index++) {
             const _column = _children[index];
 
-            if (isEqual(_column, column)) return true;
+            if (isEqual(_column, column))
+              return true;
 
             if (!isValueArray(_column?.children)) {
               width += getWidthNumber(_column);
-            } else {
+            }
+            else {
               const result = getBeforeTotal(_column.children);
-              if (result) return true;
+              if (result)
+                return true;
             }
           }
           return false;
@@ -263,14 +266,14 @@ export function useTable(props: RequiredTableProps, emit: TableEmit) {
      */
     function getCurrentTopColumnBeforeColumnsTotalWidth(
       mapValueColumns: TableColumn[],
-      isLeft = true
+      isLeft = true,
     ) {
       const [topColumn] = mapValueColumns;
 
       const _columns = isLeft ? props.columns : [...props.columns].reverse();
 
-      let index =
-        _columns.findIndex((column) => isEqual(column, topColumn)) - 1;
+      let index
+        = _columns.findIndex(column => isEqual(column, topColumn)) - 1;
       const fixedColumns = [];
 
       while (index > -1) {
@@ -287,7 +290,8 @@ export function useTable(props: RequiredTableProps, emit: TableEmit) {
         return columns.reduce((total, column) => {
           if (!isValueArray(column.children)) {
             total += getWidthNumber(column);
-          } else {
+          }
+          else {
             loopAllWidthTotal(column.children, total);
           }
           return total;
@@ -306,25 +310,25 @@ export function useTable(props: RequiredTableProps, emit: TableEmit) {
     let firstRightClassName = "";
 
     const topLastLeft = (props.columns as any).findLast(
-      (column: T) => column.fixed === "left"
+      (column: T) => column.fixed === "left",
     );
     const topFirstRight = props.columns.find(
-      (column) => column.fixed === "right"
+      column => column.fixed === "right",
     );
 
     if (isEqual(topColumn, topLastLeft)) {
-      loopJudge(topColumn, "left") &&
-        (lastLeftClassName = lastLeftClassNameConstant);
+      loopJudge(topColumn, "left")
+      && (lastLeftClassName = lastLeftClassNameConstant);
     }
 
     if (isEqual(topColumn, topFirstRight)) {
-      loopJudge(topColumn, "right") &&
-        (firstRightClassName = firstRightClassNameConstant);
+      loopJudge(topColumn, "right")
+      && (firstRightClassName = firstRightClassNameConstant);
     }
 
     function loopJudge(
       diffColumn: TableColumn,
-      fixed: "left" | "right"
+      fixed: "left" | "right",
     ): boolean {
       if (isEqual(diffColumn, column)) {
         return true;
@@ -334,7 +338,7 @@ export function useTable(props: RequiredTableProps, emit: TableEmit) {
           fixed === "left"
             ? diffColumn.children.at(-1)!
             : diffColumn.children[0]!,
-          fixed
+          fixed,
         );
       }
       return false;

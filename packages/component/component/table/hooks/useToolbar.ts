@@ -1,23 +1,25 @@
-import { type StyleValue, computed, inject } from "vue";
-import type { TableDefaultToolbar } from "../typing";
+import type { StyleValue } from "vue";
 import type { TableToolBarType } from "../components/types";
+import type { TableDefaultToolbar } from "../typing";
 
 import { useI18n } from "@layui/component/language";
 import { isArray, isValueArray } from "@layui/component/utils";
+import { computed, inject } from "vue";
 
 import { LAY_TABLE_CONTEXT } from "../constant";
 
-export const useToolBar = (props: TableToolBarType) => {
+export function useToolBar(props: TableToolBarType) {
   const { columnsState } = inject(LAY_TABLE_CONTEXT)!;
 
   const { t } = useI18n();
 
   const showToolbars = computed<TableDefaultToolbar[]>(() => {
     if (
-      !props.defaultToolbar ||
-      (isArray(props.defaultToolbar) && props.defaultToolbar.length === 0)
-    )
+      !props.defaultToolbar
+      || (isArray(props.defaultToolbar) && props.defaultToolbar.length === 0)
+    ) {
       return [];
+    }
 
     if (isValueArray(props.defaultToolbar)) {
       return props.defaultToolbar;
@@ -42,7 +44,7 @@ export const useToolBar = (props: TableToolBarType) => {
           // 如果 column.type 等于 checkbox 或 radio 时，该列不导出
           if ((column.type && column.type === "number") || !column.type) {
             tableStr += `<td colspan=${columnsState.setColSpanValue(
-              column
+              column,
             )} rowspan=${columnsState.setRowSpanValue(column)}>${
               column.title || ""
             }</td>`;
@@ -57,12 +59,13 @@ export const useToolBar = (props: TableToolBarType) => {
         props.lastLevelAllColumns.forEach((tableColumn, columnIndex) => {
           if (!tableColumn.ignoreExport) {
             // 如果该列是特殊列，并且类型为 number 时，特殊处理
-            if (tableColumn.type && tableColumn.type == "number") {
+            if (tableColumn.type && tableColumn.type === "number") {
               tableStr += `<td>${rowIndex + 1}</td>`;
-            } else {
+            }
+            else {
               // 如果不是特殊列，进行字段匹配处理
-              if (tableColumn.type == undefined) {
-                let columnData = undefined;
+              if (tableColumn.type === undefined) {
+                let columnData;
                 Object.keys(item).forEach((name) => {
                   if (tableColumn.key === name) {
                     columnData = item;
@@ -73,14 +76,14 @@ export const useToolBar = (props: TableToolBarType) => {
                   item,
                   tableColumn,
                   rowIndex,
-                  columnIndex
+                  columnIndex,
                 );
                 const rowspan = rowColSpan ? rowColSpan[0] : 1;
                 const colspan = rowColSpan ? rowColSpan[1] : 1;
 
                 // 如果 rowspan 和 colspan 是 0 说明该列作为合并列的辅助列。
                 // 则不再进行结构拼接。
-                if (rowspan != 0 && colspan != 0) {
+                if (rowspan !== 0 && colspan !== 0) {
                   tableStr += `<td colspan=${colspan} rowspan=${rowspan} x:str>${
                     columnData ? columnData[tableColumn.key] : ""
                   }</td>`;
@@ -90,7 +93,8 @@ export const useToolBar = (props: TableToolBarType) => {
           }
         });
         tableStr += "</tr>";
-        if (item.children) doExport(item.children);
+        if (item.children)
+          doExport(item.children);
       });
     };
     doExport(props.tableDataSource);
@@ -107,9 +111,8 @@ export const useToolBar = (props: TableToolBarType) => {
             <table syle="table-layout: fixed;word-wrap: break-word; word-break: break-all;">${tableStr}</table>
         </body>
     </html>`;
-    window.location.href =
-      uri + window.btoa(unescape(encodeURIComponent(exportTemplate)));
-    return;
+    window.location.href
+      = uri + window.btoa(unescape(encodeURIComponent(exportTemplate)));
   };
 
   const print = () => {
@@ -129,4 +132,4 @@ export const useToolBar = (props: TableToolBarType) => {
     exportData,
     print,
   };
-};
+}

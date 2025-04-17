@@ -975,7 +975,7 @@ const defaultToolbars = [
 | width                | 宽度                           | --                             | --      | --                          | --       |
 | minWidth             | 最小宽度                       | --                             | `100px` | --                          | --       |
 | sort                 | 排序，当值为字符串 `custom` 可通过 `sort-change` 事件自定义/服务端设置排序解结果                          | `boolean`/ `string`            | `false`      | --                          | --       |
-| titleSlot            | 标题插槽                       | 插槽参数 {column, columnIndex} | --      | --                          | --       |
+| titleSlot            | 标题自定义插槽                 | `string` `function` 参数{column, columnIndex} | --      | --                          | `2.22.1`新增`function`       |
 | align                | 对齐方式                       | `string`                       | `left`  | `left` `right` `center`     | --       |
 | ellipsisTooltip      | 当内容过长被隐藏时显示 tooltip | `boolean`                      | `false` | `true` `false`              | --       |
 | ellipsisTooltipTheme | tooltip 主题 !!!建议替换为 `ellipsisTooltipProps.isDark` 属性，将在未来版本删除                   | `string`                       | `light` | `dark` `light`              | --       |

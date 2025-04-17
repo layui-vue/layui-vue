@@ -1,19 +1,29 @@
 <script setup lang="ts">
-import { inject } from "vue";
-import { type TableColumn, type SortType, sortType } from "../typing";
+import type { SortType, TableColumn } from "../typing";
+import LayRender from "@layui/component/component/_components/render";
 import LayCheckboxV2 from "@layui/component/component/checkboxV2/index.vue";
 
 import { isValueArray } from "@layui/component/utils";
-import { startResize } from "../hooks/useResize";
+
+import { inject } from "vue";
 import { LAY_TABLE_CONTEXT } from "../constant";
+import { startResize } from "../hooks/useResize";
+import { sortType } from "../typing";
 
 defineOptions({
   name: "LayTableHeader",
 });
 
+defineProps<{
+  lastLevelShowColumns: TableColumn[];
+  hierarchicalColumns: TableColumn[][];
+  tableBodyScrollWidth: number;
+}>();
+
 const {
   tableProps,
   tableEmits,
+  tableSlots,
 
   tableDataSource,
   tableRef,
@@ -29,18 +39,13 @@ const {
   commonGetStylees,
 } = inject(LAY_TABLE_CONTEXT)!;
 
-defineProps<{
-  lastLevelShowColumns: TableColumn[];
-  hierarchicalColumns: TableColumn[][];
-  tableBodyScrollWidth: number;
-}>();
-
-const thSort = (e: Event, column: any) => {
+function thSort(e: Event, column: any) {
   const spanDom = (e.currentTarget as HTMLElement).querySelector(
-    "span[lay-sort]"
+    "span[lay-sort]",
   ) as HTMLSpanElement;
 
-  if (!spanDom) return;
+  if (!spanDom)
+    return;
 
   const sortValue = spanDom.getAttribute("lay-sort") as SortType;
 
@@ -48,15 +53,15 @@ const thSort = (e: Event, column: any) => {
   const nextSort = sortType[(currentIndex + 1) % sortType.length];
 
   baseSort(spanDom, column, nextSort);
-};
+}
 
-const iconSort = (e: Event, column: any, sort: Exclude<SortType, "">) => {
+function iconSort(e: Event, column: any, sort: Exclude<SortType, "">) {
   const spanDom = (e.target as HTMLElement).parentNode as HTMLSpanElement;
 
   const sortValue = spanDom.getAttribute("lay-sort") as SortType;
 
   baseSort(spanDom, column, sortValue !== sort ? sort : "");
-};
+}
 
 /**
  *
@@ -64,11 +69,7 @@ const iconSort = (e: Event, column: any, sort: Exclude<SortType, "">) => {
  * @param column column
  * @param nextSort 下一次的sort
  */
-const baseSort = (
-  spanDom: HTMLSpanElement,
-  column: any,
-  nextSort: SortType
-) => {
+function baseSort(spanDom: HTMLSpanElement, column: any, nextSort: SortType) {
   const { key, sort } = column;
 
   removeAllSortState();
@@ -79,15 +80,15 @@ const baseSort = (
   }
 
   tableEmits("sort-change", key, nextSort);
-};
+}
 
-const defaultSort = (key: string, sortType: SortType) => {
+function defaultSort(key: string, sortType: SortType) {
   switch (sortType) {
     case "":
       tableDataSource.splice(
         0,
         tableDataSource.length,
-        ...tableProps.dataSource
+        ...tableProps.dataSource,
       );
       break;
     case "asc":
@@ -97,17 +98,17 @@ const defaultSort = (key: string, sortType: SortType) => {
       tableDataSource.sort((a: any, b: any) => b[key] - a[key]);
       break;
   }
-};
+}
 
 // 清空所有的sort状态
-const removeAllSortState = () => {
+function removeAllSortState() {
   const sortElements = tableRef.value!.querySelectorAll("[lay-sort]");
   if (sortElements && sortElements.length > 0) {
     sortElements.forEach((element) => {
       element.setAttribute("lay-sort", "");
     });
   }
-};
+}
 </script>
 
 <template>
@@ -115,12 +116,12 @@ const removeAllSortState = () => {
     class="layui-table-header"
     :style="[{ 'padding-right': `${tableBodyScrollWidth}px` }]"
   >
-    <div class="layui-table-header-wrapper" ref="tableHeaderRef">
+    <div ref="tableHeaderRef" class="layui-table-header-wrapper">
       <table
+        ref="tableHeaderTableRef"
         class="layui-table"
         :lay-size="tableProps.size"
         :lay-skin="tableProps.skin"
-        ref="tableHeaderTableRef"
       >
         <colgroup>
           <col
@@ -128,7 +129,7 @@ const removeAllSortState = () => {
             :key="column.key || column.type || index"
             :width="column.width"
             :style="{ minWidth: column.minWidth }"
-          />
+          >
         </colgroup>
         <thead>
           <tr
@@ -153,9 +154,9 @@ const removeAllSortState = () => {
                 :style="commonGetStylees(column)"
                 @click="thSort($event, column)"
               >
-                <template v-if="column.type == 'checkbox'">
-                  <layCheckboxV2
-                    :modelValue="selectedState.allMSelected.value"
+                <template v-if="column.type === 'checkbox'">
+                  <LayCheckboxV2
+                    :model-value="selectedState.allMSelected.value"
                     :is-indeterminate="selectedState.someMSelected.value"
                     skin="primary"
                     value="all"
@@ -164,13 +165,14 @@ const removeAllSortState = () => {
                 </template>
                 <template v-else>
                   <span>
-                    <template v-if="column.titleSlot">
-                      <slot
-                        :name="column.titleSlot"
-                        :column="column"
-                        :columnIndex="columnIndex"
-                      ></slot>
-                    </template>
+                    <LayRender
+                      v-if="column.titleSlot"
+                      :slots="tableSlots"
+                      :render="column.titleSlot"
+                      :column="column"
+                      :column-index="columnIndex"
+                    />
+
                     <template v-else>
                       {{ column.title }}
                     </template>
@@ -186,22 +188,22 @@ const removeAllSortState = () => {
                     "
                   >
                     <i
-                      @click.stop="iconSort($event, column, 'asc')"
                       class="layui-edge layui-table-sort-asc"
                       title="升序"
-                    ></i>
+                      @click.stop="iconSort($event, column, 'asc')"
+                    />
                     <i
-                      @click.stop="iconSort($event, column, 'desc')"
                       class="layui-edge layui-table-sort-desc"
                       title="降序"
-                    ></i>
+                      @click.stop="iconSort($event, column, 'desc')"
+                    />
                   </span>
                 </template>
                 <!-- 列宽拖动区 -->
                 <div
                   v-if="
-                    (tableProps.resize || column.resize) &&
-                    !isValueArray(column.children)
+                    (tableProps.resize || column.resize)
+                      && !isValueArray(column.children)
                   "
                   class="lay-table-cols-resize"
                   @mousedown.stop="
@@ -210,11 +212,11 @@ const removeAllSortState = () => {
                       column,
                       tableHeaderTableRef,
                       tableBodyTableRef,
-                      tableTotalTableRef
+                      tableTotalTableRef,
                     )
                   "
                   @click.stop
-                ></div>
+                />
               </th>
             </template>
           </tr>

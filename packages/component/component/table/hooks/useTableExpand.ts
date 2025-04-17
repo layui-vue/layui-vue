@@ -1,7 +1,7 @@
-import { type RequiredTableProps, type TableEmit } from "../typing";
-import { reactive, watch } from "vue";
-
+import type { RequiredTableProps, TableEmit } from "../typing";
 import { loopForEach } from "@layui/component/utils";
+
+import { reactive, watch } from "vue";
 
 type KeyType = string | number;
 
@@ -15,7 +15,7 @@ export function useTableExpand(props: RequiredTableProps, emit: TableEmit) {
     },
     {
       deep: true,
-    }
+    },
   );
 
   /**
@@ -39,7 +39,7 @@ export function useTableExpand(props: RequiredTableProps, emit: TableEmit) {
     {
       immediate: true,
       deep: true,
-    }
+    },
   );
 
   watch(
@@ -51,7 +51,7 @@ export function useTableExpand(props: RequiredTableProps, emit: TableEmit) {
     },
     {
       deep: true,
-    }
+    },
   );
 
   function checkExpand(key: KeyType) {
@@ -61,7 +61,8 @@ export function useTableExpand(props: RequiredTableProps, emit: TableEmit) {
   function toggleExpand(key: KeyType, state: boolean) {
     if (state) {
       tableExpandKeys.push(key);
-    } else {
+    }
+    else {
       tableExpandKeys.splice(tableExpandKeys.indexOf(key), 1);
     }
 
