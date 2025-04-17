@@ -1,30 +1,31 @@
 <script setup lang="ts">
-import "./index.less";
+import type { UseResizeObserverReturn } from "@vueuse/core";
 import type { TableProps as _TableProps, RequiredTableProps } from "./typing";
+import { useResizeObserver } from "@vueuse/core";
 
 import {
-  ref,
-  watch,
-  useSlots,
-  onMounted,
   computed,
-  onBeforeUnmount,
   nextTick,
-  shallowRef,
+  onBeforeUnmount,
+  onMounted,
   provide,
+  ref,
+  shallowRef,
+  useSlots,
+  watch,
 } from "vue";
-import { useResizeObserver, type UseResizeObserverReturn } from "@vueuse/core";
-
 import LayEmpty from "../empty/index.vue";
-import TableMain from "./components/TableMain";
+
 import TableHeader from "./components/TableHeader.vue";
+import TableMain from "./components/TableMain";
 import TablePage from "./components/TablePage.vue";
 import TableToolbar from "./components/TableToolbar.vue";
 import TableTotal from "./components/TableTotal.vue";
+import { LAY_TABLE_CONTEXT } from "./constant";
 
 import { useTable } from "./hooks/useTable";
 import { tableEmits } from "./typing";
-import { LAY_TABLE_CONTEXT } from "./constant";
+import "./index.less";
 
 export type TableProps = _TableProps;
 
@@ -110,9 +111,9 @@ const classes = computed(() => {
     fixedRightState.value ? "layui-table-has-fixed-right" : "",
     {
       "layui-table-has-bottom-width": !(
-        hasTotalRow.value ||
-        (props.page && props.page.total > 0) ||
-        slots.footer
+        hasTotalRow.value
+        || (props.page && props.page.total > 0)
+        || slots.footer
       ),
     },
   ];
@@ -123,10 +124,11 @@ function getScrollWidth() {
   const offsetWidth: number = tableBodyRef.value?.offsetWidth || 0;
   if (clientWidth < offsetWidth) {
     tableBodyScrollWidth.value = offsetWidth - clientWidth;
-  } else {
+  }
+  else {
     tableBodyScrollWidth.value = 0;
   }
-  tableBodyEmptyWidth.value = tableHeaderTableRef.value?.offsetWidth + "px";
+  tableBodyEmptyWidth.value = `${tableHeaderTableRef.value?.offsetWidth}px`;
 }
 
 watch(
@@ -135,7 +137,7 @@ watch(
     nextTick(() => {
       getScrollWidth();
     });
-  }
+  },
 );
 
 let tableBodyRefInstance: UseResizeObserverReturn | null;
@@ -192,24 +194,27 @@ function getFixedColumn() {
 
   if (tableBodyScrollWidth > tableBodyClientWidth) {
     // tableBody scrollBar最左边
-    if (tableBodyScrollLeft == 0) {
+    if (tableBodyScrollLeft === 0) {
       fixedLeftState.value = false;
       fixedRightState.value = true;
-    } else {
+    }
+    else {
       if (
-        tableBodyScrollLeft + tableBodyOffsetWidth + 2 >
-        tableBodyScrollWidth
+        tableBodyScrollLeft + tableBodyOffsetWidth + 2
+        > tableBodyScrollWidth
       ) {
         // tableBody scrollBar最左边
         fixedLeftState.value = true;
         fixedRightState.value = false;
-      } else {
+      }
+      else {
         // tableBody scrollBar 中间
         fixedLeftState.value = true;
         fixedRightState.value = true;
       }
     }
-  } else {
+  }
+  else {
     fixedLeftState.value = false;
     fixedRightState.value = false;
   }
@@ -220,10 +225,8 @@ const currentIndentSize = ref(0);
 const childrenExpandSpace = computed(() => {
   return (
     tableDataSource.find((value: any) => {
-      if (value[props.childrenColumnName]) {
-        return true;
-      }
-    }) != undefined
+      return value[props.childrenColumnName];
+    }) !== undefined
   );
 });
 
@@ -267,36 +270,36 @@ provide(LAY_TABLE_CONTEXT, {
     ref="tableRef"
     class="layui-form layui-border-box layui-table-view"
     :class="classes"
-    :style="{ height: height, maxHeight: maxHeight }"
+    :style="{ height, maxHeight }"
   >
     <!-- 工具栏 -->
-    <TableToolbar v-bind="tableToolbarProps"></TableToolbar>
+    <TableToolbar v-bind="tableToolbarProps" />
 
-    <div class="layui-table-box-header" v-if="slots.header">
-      <slot name="header"></slot>
+    <div v-if="slots.header" class="layui-table-box-header">
+      <slot name="header" />
     </div>
 
     <div class="layui-table-box">
       <!-- 表头 -->
       <TableHeader
-        :lastLevelShowColumns="lastLevelShowColumns"
-        :hierarchicalColumns="hierarchicalColumns"
-        :tableBodyScrollWidth="tableBodyScrollWidth"
-      ></TableHeader>
+        :last-level-show-columns="lastLevelShowColumns"
+        :hierarchical-columns="hierarchicalColumns"
+        :table-body-scroll-width="tableBodyScrollWidth"
+      />
 
       <!-- 表身 -->
       <div
+        ref="tableBodyRef"
         class="layui-table-body layui-table-main"
         :class="{ 'layui-table-body-loading': props.loading }"
-        ref="tableBodyRef"
       >
         <table
+          v-show="!loading"
+          ref="tableBodyTableRef"
           class="layui-table"
-          v-show="loading == false"
           :class="{ 'layui-table-even': props.even }"
           :lay-size="size"
           :lay-skin="skin"
-          ref="tableBodyTableRef"
         >
           <colgroup>
             <col
@@ -304,7 +307,7 @@ provide(LAY_TABLE_CONTEXT, {
               :key="column.key || column.type"
               :width="column.width"
               :style="{ minWidth: column.minWidth }"
-            />
+            >
           </colgroup>
           <tbody>
             <!-- 渲染 -->
@@ -319,48 +322,47 @@ provide(LAY_TABLE_CONTEXT, {
                 :page="page"
                 :columns="lastLevelShowColumns"
                 :indent-size="indentSize"
-                :currentIndentSize="currentIndentSize"
-                :expandSpace="childrenExpandSpace"
-                :expandIndex="expandIndex"
-                :cellStyle="cellStyle"
-                :cellClassName="cellClassName"
-                :rowStyle="rowStyle"
-                :rowClassName="rowClassName"
-                :spanMethod="spanMethod"
-                :defaultExpandAll="defaultExpandAll"
-                :getCheckboxProps="getCheckboxProps"
-                :getRadioProps="getRadioProps"
-                :childrenColumnName="childrenColumnName"
-              >
-              </TableMain>
+                :current-indent-size="currentIndentSize"
+                :expand-space="childrenExpandSpace"
+                :expand-index="expandIndex"
+                :cell-style="cellStyle"
+                :cell-class-name="cellClassName"
+                :row-style="rowStyle"
+                :row-class-name="rowClassName"
+                :span-method="spanMethod"
+                :default-expand-all="defaultExpandAll"
+                :get-checkbox-props="getCheckboxProps"
+                :get-radio-props="getRadioProps"
+                :children-column-name="childrenColumnName"
+              />
             </template>
           </tbody>
         </table>
 
-        <template v-if="tableDataSource.length == 0 && loading == false">
+        <template v-if="tableDataSource.length === 0 && !loading">
           <slot name="empty">
-            <lay-empty :description="emptyDescription"></lay-empty>
+            <LayEmpty :description="emptyDescription" />
           </slot>
-          <div :style="{ width: tableBodyEmptyWidth }"></div>
+          <div :style="{ width: tableBodyEmptyWidth }" />
         </template>
-        <template v-if="loading == true">
+        <template v-if="loading">
           <!-- 根据 table 实际高度，设置 loading 位置 -->
           <div class="layui-table-loading">
             <i
               class="layui-icon-loading layui-icon layui-anim layui-anim-rotate layui-anim-loop"
-            ></i>
+            />
           </div>
         </template>
       </div>
 
       <TableTotal
         v-if="hasTotalRow"
-        :lastLevelShowColumns="lastLevelShowColumns"
-        :tableBodyScrollWidth="tableBodyScrollWidth"
-      ></TableTotal>
+        :last-level-show-columns="lastLevelShowColumns"
+        :table-body-scroll-width="tableBodyScrollWidth"
+      />
 
-      <div class="layui-table-footer" v-if="slots.footer">
-        <slot name="footer"></slot>
+      <div v-if="slots.footer" class="layui-table-footer">
+        <slot name="footer" />
       </div>
     </div>
 
@@ -369,10 +371,9 @@ provide(LAY_TABLE_CONTEXT, {
         v-bind="page"
         v-model:current="page.current"
         v-model:limit="page.limit"
-      >
-      </TablePage>
-      <div class="layui-table-page-slot" v-if="slots.page">
-        <slot name="page"></slot>
+      />
+      <div v-if="slots.page" class="layui-table-page-slot">
+        <slot name="page" />
       </div>
     </div>
   </div>

@@ -1,5 +1,4 @@
 import antfu from "@antfu/eslint-config";
-import stylistic from "@stylistic/eslint-plugin";
 
 export default antfu(
   {
@@ -17,10 +16,15 @@ export default antfu(
       "docs/",
       "**/*.test.*",
     ],
-  },
 
-  stylistic.configs.customize({
-    semi: true,
-    quotes: "double",
-  }),
+    stylistic: {
+      semi: true,
+      quotes: "double",
+
+    },
+
+    rules: {
+      "ts/no-unsafe-function-type": "off",
+    },
+  },
 );

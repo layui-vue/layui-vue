@@ -1,12 +1,17 @@
 <script setup lang="ts">
-import type { TableColumn, TableProps } from "../typing";
-import { inject, computed } from "vue";
+import type { TableColumn } from "../typing";
+import { computed, inject } from "vue";
 
 import { LAY_TABLE_CONTEXT } from "../constant";
 
 defineOptions({
   name: "LayTableTotal",
 });
+
+const props = defineProps<{
+  lastLevelShowColumns: TableColumn[];
+  tableBodyScrollWidth: number;
+}>();
 
 const {
   tableTotalRef,
@@ -16,28 +21,25 @@ const {
   commonGetStylees,
 } = inject(LAY_TABLE_CONTEXT)!;
 
-const props = defineProps<{
-  lastLevelShowColumns: TableColumn[];
-  tableBodyScrollWidth: number;
-}>();
-
-const renderTotalRowCell = (column: TableColumn) => {
+function renderTotalRowCell(column: TableColumn) {
   if (column.totalRow) {
-    if (column.totalRow != true) {
+    if (column.totalRow !== true) {
       return column.totalRow;
-    } else {
+    }
+    else {
       if (column.totalRowMethod) {
         return column.totalRowMethod(column, tableDataSource);
-      } else {
+      }
+      else {
         return totalRowMethod(column, tableDataSource);
       }
     }
   }
-};
+}
 
-const totalRowMethod = (column: TableColumn, dataSource: any[]) => {
+function totalRowMethod(column: TableColumn, dataSource: any[]) {
   let precision = 0;
-  const values = dataSource.map((item) => Number(item[column.key]));
+  const values = dataSource.map(item => Number(item[column.key]));
 
   values.forEach((value) => {
     const decimal = `${value}`.split(".")[1];
@@ -47,7 +49,7 @@ const totalRowMethod = (column: TableColumn, dataSource: any[]) => {
   return values.reduce((pre, next) => {
     return Number.parseFloat((pre + next).toFixed(Math.min(precision, 20)));
   }, 0);
-};
+}
 
 const stylees = computed(() => {
   return {
@@ -59,15 +61,15 @@ const stylees = computed(() => {
 
 <template>
   <div class="table-total-wrapper" :style="stylees">
-    <div class="table-total-wrapper-main" ref="tableTotalRef">
-      <table class="layui-table" ref="tableTotalTableRef">
+    <div ref="tableTotalRef" class="table-total-wrapper-main">
+      <table ref="tableTotalTableRef" class="layui-table">
         <colgroup>
           <col
             v-for="(column, columnIndex) in lastLevelShowColumns"
             :key="column.key || column.type || columnIndex"
             :width="column.width"
             :style="{ minWidth: column.minWidth }"
-          />
+          >
         </colgroup>
         <tbody>
           <tr class="layui-table-total">
@@ -87,7 +89,7 @@ const stylees = computed(() => {
                   })
                 "
                 v-html="renderTotalRowCell(column)"
-              ></td>
+              />
             </template>
           </tr>
         </tbody>

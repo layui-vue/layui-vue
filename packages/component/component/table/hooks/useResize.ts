@@ -1,4 +1,4 @@
-import { TableColumn } from "../typing";
+import type { TableColumn } from "../typing";
 import { useThrottleFn } from "@vueuse/core";
 
 let isResizing = false;
@@ -11,19 +11,21 @@ let startWidth = 0;
 let colWidthTotal = 0;
 
 const resizing = useThrottleFn((e: MouseEvent) => {
-  if (!isResizing) return;
+  if (!isResizing)
+    return;
   const offset = e.clientX - startX;
   const newWidth = startWidth + offset;
-  if (newWidth < 0) return false;
-  stashColumn.width = newWidth + "px";
-  targetElem && (targetElem.style.width = colWidthTotal + offset + "px");
-  targetElemBody &&
-    (targetElemBody.style.width = colWidthTotal + offset + "px");
-  targetElemTotal &&
-    (targetElemTotal.style.width = colWidthTotal + offset + "px");
+  if (newWidth < 0)
+    return false;
+  stashColumn.width = `${newWidth}px`;
+  targetElem && (targetElem.style.width = `${colWidthTotal + offset}px`);
+  targetElemBody
+  && (targetElemBody.style.width = `${colWidthTotal + offset}px`);
+  targetElemTotal
+  && (targetElemTotal.style.width = `${colWidthTotal + offset}px`);
 }, 20);
 
-const stopResize = () => {
+function stopResize() {
   startX = 0;
   startWidth = 0;
   colWidthTotal = 0;
@@ -31,21 +33,15 @@ const stopResize = () => {
   targetElem = null;
   targetElemBody = null;
   isResizing = false;
-};
+}
 
-const removeMouseup = () => {
+function removeMouseup() {
   stopResize();
   document.removeEventListener("mousemove", resizing);
   document.removeEventListener("mouseup", removeMouseup);
-};
+}
 
-export const startResize = (
-  e: MouseEvent,
-  column: TableColumn,
-  tableHeaderTableRef: HTMLElement | null,
-  tableBodyTableRef: HTMLElement | null,
-  tableTotalTableRef: HTMLElement | null
-) => {
+export function startResize(e: MouseEvent, column: TableColumn, tableHeaderTableRef: HTMLElement | null, tableBodyTableRef: HTMLElement | null, tableTotalTableRef: HTMLElement | null) {
   document.addEventListener("mousemove", resizing);
   document.addEventListener("mouseup", removeMouseup);
 
@@ -55,12 +51,12 @@ export const startResize = (
   stashColumn = column;
   startX = e.clientX;
   const colWidthArr: any[] = [];
-  tableHeaderTableRef &&
-    tableHeaderTableRef.firstChild?.childNodes?.forEach((item: any) => {
-      if (item.clientWidth) {
-        colWidthArr.push(item.clientWidth);
-      }
-    });
+  tableHeaderTableRef
+  && tableHeaderTableRef.firstChild?.childNodes?.forEach((item: any) => {
+    if (item.clientWidth) {
+      colWidthArr.push(item.clientWidth);
+    }
+  });
   colWidthTotal = colWidthArr.reduce((sum, item) => sum + item, 0);
 
   isResizing = true;
@@ -73,4 +69,4 @@ export const startResize = (
       startWidth = +match[1];
     }
   }
-};
+}

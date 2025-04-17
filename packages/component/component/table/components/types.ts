@@ -1,4 +1,4 @@
-import type { TableProps, TableColumn } from "../typing";
+import type { TableColumn, TableProps } from "../typing";
 
 export interface TableToolBarType {
   defaultToolbar: TableProps["defaultToolbar"];
