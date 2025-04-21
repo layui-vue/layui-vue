@@ -1,6 +1,7 @@
-const { execSync, spawnSync } = require("node:child_process");
+const { execSync, spawn } = require("node:child_process");
 const path = require("node:path");
 const process = require("node:process");
+const { consola } = require("consola");
 
 /**
  * 获取 `暂存区` 所有文件（过滤以删除的文件）
@@ -26,8 +27,8 @@ function getStagedFiles() {
 async function processFilesWithESLint(stagedFiles) {
   try {
     const results = await Promise.allSettled(
-      stagedFiles.map(file =>
-        eslintFix(file).then(() => runGitAdd(file)),
+      stagedFiles.map((file, index) =>
+        eslintFix(file, stagedFiles.length, index + 1).then(() => runGitAdd(file)),
       ),
     );
 
@@ -46,23 +47,32 @@ async function processFilesWithESLint(stagedFiles) {
 /**
  * 执行 ESLint 修复单个文件
  */
-function eslintFix(filePath) {
+function eslintFix(filePath, length, index) {
   return new Promise((resolve, reject) => {
-    const eslint = spawnSync(
+    consola.start(`[${index}/${length}] Eslint Formatting... [filePath: ${filePath}] `);
+
+    // 使用异步的 spawn
+    const eslintProcess = spawn(
       "npx eslint",
       ["--fix", "--quiet", filePath],
-      {
-        stdio: "inherit",
-        shell: true,
-      },
+      { shell: true, stdio: "inherit" }, // stdio: 'inherit' 直接输出到控制台
     );
 
-    if (eslint.status !== 0) {
-      reject(new Error(`ESLint 修复失败: ${filePath}`));
-    }
-    else {
-      resolve();
-    }
+    eslintProcess.on("close", (code) => {
+      if (code === 0) {
+        consola.success(`[${index}/${length}] Eslint Format successfully! [filePath: ${filePath}]`);
+        resolve();
+      }
+      else {
+        consola.error(`[${index}/${length}] Eslint Format failed! [filePath: ${filePath}]`);
+        reject(new Error(`ESLint 修复失败: ${filePath}`));
+      }
+    });
+
+    eslintProcess.on("error", (error) => {
+      consola.error(`[${index}/${length}] Eslint Execution Error! [filePath: ${filePath}]`);
+      reject(error);
+    });
   });
 }
 
@@ -70,7 +80,7 @@ function eslintFix(filePath) {
  * 执行 `git add ` 将 `eslint --fix` 的文件推送至暂存区
  */
 function runGitAdd(filePath) {
-  spawnSync(
+  spawn(
     "git",
     ["add", "--", path.normalize(filePath)],
     {
