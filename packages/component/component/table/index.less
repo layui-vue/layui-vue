@@ -492,18 +492,19 @@
   background-color: #fafafa;
 }
 
-.layui-table-fixed-left {
-  left: 0;
-  z-index: 2;
+.layui-table-fixed-left,
+.layui-table-fixed-right{
+  z-index: 3;
   background: white;
   position: sticky !important;
 }
 
+.layui-table-fixed-left {
+  left: 0;
+}
+
 .layui-table-fixed-right {
   right: 0;
-  z-index: 2;
-  background: white;
-  position: sticky !important;
   
   &:last-child{
     border-right: none !important;
