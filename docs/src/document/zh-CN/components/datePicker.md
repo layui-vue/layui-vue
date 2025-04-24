@@ -527,6 +527,32 @@ const shortcuts2 = [
 
 :::
 
+::: title 静态面板
+:::
+
+::: demo 通过 `static` 开启静态面板模式
+
+<template>
+  <lay-space direction="vertical">
+    modelValue: {{value11}}
+    <lay-date-picker v-model="value11" static type="date" placeholder="format"></lay-date-picker>
+  </lay-space>
+  <lay-space style="margin-top: 10px" direction="vertical">
+    modelValue: {{value12}}
+    <lay-date-picker v-model="value12" static type="date" range  placeholder="范围"></lay-date-picker>
+  </lay-space>
+</template>
+
+<script setup>
+import { ref } from 'vue'
+
+const value11 = ref(null);
+const value12 = ref([]);
+
+</script>
+
+:::
+
 ::: title Date Picker 属性
 :::
 
@@ -559,6 +585,8 @@ const shortcuts2 = [
 | content-class   | 内容自定义 Class                                                         | `string` `Array<string \| object>` `object`                              | --                  | --                                                  | --       |
 | year-page       | 年份选择器每页年份的个数           |  `number`            | `15`             | --|              `2.19.0`                    |      
 | shortcuts       | 设置快捷选项，需要传入数组对象       |  `Array<Shortcuts>`            | --             | --|              `2.19.0`                    |  
+| static          | 静态日期面板模式       |  `boolean`            | `false`            | --|              `2.22.1`                    |  
+| teleportProps   | 继承至 dropdown 组件，下拉面板 `传递` 属性  | `object`             | `{to: 'body', disabled: false}`   |  --  | `2.22.1` |
 
 
 :::

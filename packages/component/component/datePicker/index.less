@@ -75,10 +75,6 @@ html #layuicss-laydate {
   z-index: 66666666;
   border-radius: var(--global-border-radius);
   font-size: 14px;
-  -webkit-animation-duration: 0.2s;
-  animation-duration: 0.2s;
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
 
   .layui-laydate-year-control {
     padding: 4px;
@@ -93,30 +89,6 @@ html #layuicss-laydate {
   transition-duration: 0.3s;
   -webkit-transition-duration: 0.3s;
 }
-
-/* 微微往下滑入 */
-@keyframes laydate-downbit {
-  0% {
-    opacity: 0.3;
-    transform: translate3d(0, -5px, 0);
-  }
-  100% {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-  }
-}
-
-.layui-laydate {
-  animation-name: laydate-downbit;
-}
-// .layui-laydate-static {
-//   position: relative;
-//   z-index: 0;
-//   display: inline-block;
-//   margin: 0;
-//   -webkit-animation: none;
-//   animation: none;
-// }
 
 /* 展开年月列表时 */
 .laydate-ym-show .laydate-prev-m,
@@ -693,9 +665,14 @@ html #layuicss-laydate {
     transition: all 0.3s;
   }
 }
-/* 静态面板 */
-// .layui-date-picker-static {
-//   width: auto !important;
-//   height: 100% !important;
-//   border: 1px solid var(--input-border-color);
-// }
+
+.layui-date-picker-static {
+  &[size] {
+    display: inline-flex;
+    width: auto;
+    height: auto;
+    background-color: #fff;
+    border: 1px solid #e4e7ed;
+    border-radius: var(--global-border-radius);
+  }
+}
