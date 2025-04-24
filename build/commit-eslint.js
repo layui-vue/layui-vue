@@ -1,5 +1,4 @@
 const { execSync, spawn } = require("node:child_process");
-const path = require("node:path");
 const process = require("node:process");
 const { consola } = require("consola");
 
@@ -28,7 +27,7 @@ async function processFilesWithESLint(stagedFiles) {
   try {
     const results = await Promise.allSettled(
       stagedFiles.map((file, index) =>
-        eslintFix(file, stagedFiles.length, index + 1).then(() => runGitAdd(file)),
+        eslintFix(file, stagedFiles.length, index + 1),
       ),
     );
 
@@ -74,20 +73,6 @@ function eslintFix(filePath, length, index) {
       reject(error);
     });
   });
-}
-
-/**
- * 执行 `git add ` 将 `eslint --fix` 的文件推送至暂存区
- */
-function runGitAdd(filePath) {
-  spawn(
-    "git",
-    ["add", "--", path.normalize(filePath)],
-    {
-      stdio: "inherit",
-      shell: true,
-    },
-  );
 }
 
 ;(() => {
