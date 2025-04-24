@@ -1,53 +1,9 @@
-<template>
-  <div class="layui-laydate-main">
-    <div class="layui-laydate-header">
-      <slot name="header" :yearList="yearRange">
-        <lay-icon
-          type="layui-icon-prev"
-          @click="handleChangeShowYear(-DatePickerContext.yearPage)"
-        ></lay-icon>
-        <div class="laydate-set-ym">
-          <span class="laydate-time-text">
-            {{ yearRange.join(" - ") }}
-          </span>
-        </div>
-        <lay-icon
-          type="layui-icon-next"
-          @click="handleChangeShowYear(DatePickerContext.yearPage)"
-        ></lay-icon>
-      </slot>
-    </div>
-
-    <div
-      class="layui-laydate-content"
-      style="height: 220px; overflow-y: auto"
-      ref="ScrollRef"
-    >
-      <ul class="layui-laydate-list laydate-year-list">
-        <li
-          v-for="item of yearList"
-          :key="item"
-          :class="{
-            'layui-this': currentYear === item,
-            'layui-laydate-current': item === dayjs().year(),
-            'layui-disabled': cellDisabled(item),
-            ...classes?.(dayjs().year(item)),
-          }"
-          @click="handleYearClick(item)"
-          @mouseenter="handleYearMouseenter(item)"
-        >
-          {{ item }}
-        </li>
-      </ul>
-    </div>
-  </div>
-</template>
-
 <script lang="ts" setup>
-import type { BasePanelProps } from "../interface";
+import type { Dayjs } from "dayjs";
 
-import dayjs, { type Dayjs } from "dayjs";
-import { computed, ref, watch, inject } from "vue";
+import type { BasePanelProps } from "../interface";
+import dayjs from "dayjs";
+import { computed, inject, ref, watch } from "vue";
 
 import LayIcon from "../../../icon";
 import { DATE_PICKER_CONTEXT } from "../../interface";
@@ -68,9 +24,9 @@ const currentDate = ref<Dayjs>(dayjs());
 const yearList = computed<number[]>(() =>
   getYears(
     currentDate.value.year(),
-    DatePickerContext.yearPage
+    DatePickerContext.yearPage,
     // DatePickerContext.yearStep
-  )
+  ),
 );
 const yearRange = computed(() => [yearList.value.at(0), yearList.value.at(-1)]);
 
@@ -83,14 +39,14 @@ watch(
   },
   {
     immediate: true,
-  }
+  },
 );
 
 // 判断单元格是否可以点击(禁用)
-const cellDisabled = (item: number) => {
+function cellDisabled(item: number) {
   if (DatePickerContext.disabledDate) {
     return DatePickerContext.disabledDate(
-      currentDate.value.year(item).toDate()
+      currentDate.value.year(item).toDate(),
     );
   }
 
@@ -101,27 +57,71 @@ const cellDisabled = (item: number) => {
     return true;
   }
   return false;
-};
+}
 
 // 点击年份
-const handleYearClick = (item: number) => {
+function handleYearClick(item: number) {
   if (cellDisabled(item)) {
     return true;
   }
 
   currentYear.value = item;
   emits("pick", DatePickerContext.range ? dayjs().year(item) : item);
-};
+}
 
-const handleYearMouseenter = (item: number) => {
+function handleYearMouseenter(item: number) {
   if (cellDisabled(item) || !DatePickerContext.range) {
     return;
   }
 
   emits("hover-cell", dayjs().year(item));
-};
+}
 
-const handleChangeShowYear = (value: number) => {
+function handleChangeShowYear(value: number) {
   currentDate.value = currentDate.value.year(currentDate.value.year() + value);
-};
+}
 </script>
+
+<template>
+  <div class="layui-laydate-main">
+    <div class="layui-laydate-header">
+      <slot name="header" :year-list="yearRange">
+        <LayIcon
+          type="layui-icon-prev"
+          @click="handleChangeShowYear(-DatePickerContext.yearPage)"
+        />
+        <div class="laydate-set-ym">
+          <span class="laydate-time-text">
+            {{ yearRange.join(" - ") }}
+          </span>
+        </div>
+        <LayIcon
+          type="layui-icon-next"
+          @click="handleChangeShowYear(DatePickerContext.yearPage)"
+        />
+      </slot>
+    </div>
+
+    <div
+      class="layui-laydate-content"
+      style="height: 220px; overflow-y: auto"
+    >
+      <ul class="layui-laydate-list laydate-year-list">
+        <li
+          v-for="item of yearList"
+          :key="item"
+          :class="{
+            'layui-this': currentYear === item,
+            'layui-laydate-current': item === dayjs().year(),
+            'layui-disabled': cellDisabled(item),
+            ...classes?.(dayjs().year(item)),
+          }"
+          @click="handleYearClick(item)"
+          @mouseenter="handleYearMouseenter(item)"
+        >
+          {{ item }}
+        </li>
+      </ul>
+    </div>
+  </div>
+</template>

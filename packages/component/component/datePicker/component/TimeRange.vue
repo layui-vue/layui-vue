@@ -1,16 +1,17 @@
 <script setup lang="ts">
-import dayjs, { type Dayjs } from "dayjs";
-import { ref, watch } from "vue";
-import type { RangePickerProps } from "./interface";
+import type { Dayjs } from "dayjs";
 import type { Shortcuts as ShortcutsType } from "../interface";
+import type { RangePickerProps } from "./interface";
+import dayjs from "dayjs";
+import { ref, watch } from "vue";
 
 import { useI18n } from "../../../language";
 
-import Time from "./common/Time.vue";
+import { useShortcutsRange } from "../hook/useShortcutsRange";
 import Footer from "./common/Footer.vue";
 import Shortcuts from "./common/Shortcuts.vue";
 
-import { useShortcutsRange } from "../hook/useShortcutsRange";
+import Time from "./common/Time.vue";
 
 const props = withDefaults(defineProps<RangePickerProps>(), {});
 const emits = defineEmits(["pick"]);
@@ -21,14 +22,15 @@ const hookChangeShortcut = useShortcutsRange();
 const startDate = ref();
 const endDate = ref();
 
-const minMaxTime = (time: Dayjs) => {
+function minMaxTime(time: Dayjs) {
   if (time.isBefore(dayjs(props.min, props.format))) {
     return dayjs(props.min, props.format);
-  } else if (time.isAfter(dayjs(props.max, props.format))) {
+  }
+  else if (time.isAfter(dayjs(props.max, props.format))) {
     return dayjs(props.max, props.format);
   }
   return time;
-};
+}
 
 watch(
   () => props.modelValue,
@@ -38,49 +40,52 @@ watch(
     startDate.value = start || minMaxTime(dayjs());
     endDate.value = end || minMaxTime(dayjs().add(1, "hour"));
   },
-  { immediate: true }
+  { immediate: true },
 );
 
-const handleLeftTimePick = (date: Dayjs) => {
+function handleLeftTimePick(date: Dayjs) {
   if (date.isSameOrAfter(endDate.value)) {
     startDate.value = endDate.value;
     endDate.value = date;
-  } else {
+  }
+  else {
     startDate.value = date;
   }
-};
+}
 
-const handleRightTimePick = (date: Dayjs) => {
+function handleRightTimePick(date: Dayjs) {
   if (date.isSameOrBefore(startDate.value)) {
     endDate.value = startDate.value;
     startDate.value = date;
-  } else {
+  }
+  else {
     endDate.value = date;
   }
-};
+}
 
-const handleChangeShortcut = (shortcuts: ShortcutsType) => {
+function handleChangeShortcut(shortcuts: ShortcutsType) {
   const shortcutsValues = hookChangeShortcut(shortcuts);
 
   startDate.value = shortcutsValues[0];
   endDate.value = shortcutsValues[1];
 
-  if (props.simple) handleConfirm();
-};
+  if (props.simple)
+    handleConfirm();
+}
 
-const handleConfirm = () => {
+function handleConfirm() {
   emits("pick", [startDate.value, endDate.value]);
-};
+}
 </script>
 
 <template>
   <div class="layui-laydate layui-laydate-range">
     <div class="layui-laydate-range-main">
-      <Shortcuts @change-shortcut="handleChangeShortcut"></Shortcuts>
+      <Shortcuts @change-shortcut="handleChangeShortcut" />
 
       <Time
-        :modelValue="startDate"
-        :showDate="startDate"
+        :model-value="startDate"
+        :show-date="startDate"
         @pick="handleLeftTimePick"
       >
         <template #header>
@@ -88,8 +93,8 @@ const handleConfirm = () => {
         </template>
       </Time>
       <Time
-        :modelValue="endDate"
-        :showDate="endDate"
+        :model-value="endDate"
+        :show-date="endDate"
         @pick="handleRightTimePick"
       >
         <template #header>
@@ -97,7 +102,7 @@ const handleConfirm = () => {
         </template>
       </Time>
     </div>
-    <Footer :showNow="false" @confirm="handleConfirm">
+    <Footer :show-now="false" @confirm="handleConfirm">
       <slot name="footer">
         {{ startDate?.format(props.inputFormat) }}
         {{ props.rangeSeparator }}

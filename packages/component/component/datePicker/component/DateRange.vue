@@ -1,27 +1,28 @@
 <script setup lang="ts">
-import dayjs, { type Dayjs } from "dayjs";
-import { computed, ref, watch } from "vue";
-import type {
-  RangePickerProps,
-  DateContentSingleDateObject,
-} from "./interface";
+import type { Dayjs } from "dayjs";
 import type { Shortcuts as ShortcutsType } from "../interface";
+import type {
+  DateContentSingleDateObject,
+  RangePickerProps,
+} from "./interface";
+import dayjs from "dayjs";
+import { computed, ref, watch } from "vue";
 
 import { useI18n } from "../../../language";
-import { normalizeDayjsValue, setDateList } from "../util";
 import { isArray } from "../../../utils";
+import LayDropdown from "../../dropdown";
 
 import LayIcon from "../../icon";
-import LayDropdown from "../../dropdown";
-import DateContent from "./common/DateContent.vue";
-import Time from "./common/Time.vue";
-import Year from "./common/Year.vue";
-import Month from "./common/Month.vue";
-import Footer from "./common/Footer.vue";
-import Shortcuts from "./common/Shortcuts.vue";
-
 import { useBaseDatePicker } from "../hook/useBaseDatePicker";
 import { useShortcutsRange } from "../hook/useShortcutsRange";
+import { normalizeDayjsValue, setDateList } from "../util";
+import DateContent from "./common/DateContent.vue";
+import Footer from "./common/Footer.vue";
+import Month from "./common/Month.vue";
+import Shortcuts from "./common/Shortcuts.vue";
+
+import Time from "./common/Time.vue";
+import Year from "./common/Year.vue";
 
 const props = withDefaults(defineProps<RangePickerProps>(), {});
 const emits = defineEmits(["pick"]);
@@ -66,21 +67,22 @@ const MONTH_NAME = computed(() => [
 ]);
 
 const _defaultTime = computed(() => {
-  if (props.type !== "datetime") return [];
+  if (props.type !== "datetime")
+    return [];
 
   const times = isArray(props.defaultTime)
     ? props.defaultTime
     : [props.defaultTime, props.defaultTime];
 
-  return times.map((t) => normalizeDayjsValue(t, "HH:mm:ss"));
+  return times.map(t => normalizeDayjsValue(t, "HH:mm:ss"));
 });
 
-const setHMS = (date: Dayjs, referDate: Dayjs) => {
+function setHMS(date: Dayjs, referDate: Dayjs) {
   return date
     .hour(referDate.hour())
     .minute(referDate.minute())
     .second(referDate.second());
-};
+}
 
 watch(
   () => props.modelValue,
@@ -101,7 +103,7 @@ watch(
     leftDate.value = start || _leftDate;
     rightDate.value = end || _rightDate;
   },
-  { immediate: true }
+  { immediate: true },
 );
 
 watch(
@@ -115,7 +117,7 @@ watch(
       .set("minute", old.minute())
       .set("second", old.second());
   },
-  { immediate: true }
+  { immediate: true },
 );
 
 const leftDataList = computed(() => {
@@ -133,29 +135,29 @@ const classes = computed(() => {
 
     return {
       "layui-this":
-        item.type === "current" &&
-        (startDate.value?.startOf("day").valueOf() === item.value ||
-          endDate.value?.startOf("day").valueOf() === item.value),
+        item.type === "current"
+        && (startDate.value?.startOf("day").valueOf() === item.value
+          || endDate.value?.startOf("day").valueOf() === item.value),
       "laydate-range-hover":
-        item.type === "current" &&
+        item.type === "current"
         // 当前日期在开始时间之后 && 当前日期再结束(hover)时间之前 (第一次点击在前>第二次点击(hover)在后)
         // ||
         // 当前日期在开始时间之前 && 当前日期在结束(hover)时间之后 (第一次点击在后>第二次点击(hover)在前)
-        (!!(
-          startDate.value &&
-          Date.isSameOrAfter(startDate.value, "day") &&
-          Date.isSameOrBefore(_endDate, "day")
-        ) ||
-          !!(
-            startDate.value &&
-            Date.isSameOrBefore(startDate.value, "day") &&
-            Date.isSameOrAfter(_endDate, "day")
-          )),
+        && (!!(
+          startDate.value
+          && Date.isSameOrAfter(startDate.value, "day")
+          && Date.isSameOrBefore(_endDate, "day")
+        )
+        || !!(
+          startDate.value
+          && Date.isSameOrBefore(startDate.value, "day")
+          && Date.isSameOrAfter(_endDate, "day")
+        )),
     };
   };
 });
 
-const handleDatePick = (value: number) => {
+function handleDatePick(value: number) {
   const unixDate = dayjs(value);
   const _startDate = (startDate.value || leftDate.value)
     .clone()
@@ -173,7 +175,8 @@ const handleDatePick = (value: number) => {
   if (!startDate.value || (startDate.value && endDate.value)) {
     startDate.value = _startDate;
     endDate.value = undefined;
-  } else if (unixDate.isSameOrBefore(startDate.value, "day")) {
+  }
+  else if (unixDate.isSameOrBefore(startDate.value, "day")) {
     // 二次点击的时间在开始时间之前
     endDate.value = startDate.value
       .clone()
@@ -181,62 +184,52 @@ const handleDatePick = (value: number) => {
       .set("minute", rightDate.value.minute())
       .set("second", rightDate.value.second());
     startDate.value = _startDate;
-  } else {
+  }
+  else {
     endDate.value = _endDate;
   }
 
   if (_simple.value && startDate.value && endDate.value) {
     handleConfirm();
   }
-};
+}
 
-const handleDateHover = (val: number) => {
+function handleDateHover(val: number) {
   if (!startDate.value || endDate.value) {
     hoverDate.value = null;
     return;
   }
 
   hoverDate.value = dayjs(val);
-};
+}
 
 // 点击year/month icon 进行切换
-const handleChangeYearMonth = (
-  diffType: "add" | "subtract",
-  type: "year" | "month"
-) => {
+function handleChangeYearMonth(diffType: "add" | "subtract", type: "year" | "month") {
   leftDate.value = leftDate.value[diffType](1, type);
-};
+}
 
 // 点击year/month进行切换
-const handleChangeYearMonthLeftPick = (
-  val: Dayjs,
-  type: "year" | "month",
-  dropdownEl: DropdownRef
-) => {
+function handleChangeYearMonthLeftPick(val: Dayjs, type: "year" | "month", dropdownEl: DropdownRef) {
   const DateValue = val[type]();
 
   leftDate.value = leftDate.value[type](DateValue) as Dayjs;
 
   dropdownEl.hide();
-};
+}
 
-const handleChangeYearMonthRightPick = (
-  val: Dayjs,
-  type: "year" | "month",
-  dropdownEl: DropdownRef
-) => {
+function handleChangeYearMonthRightPick(val: Dayjs, type: "year" | "month", dropdownEl: DropdownRef) {
   const DateValue = val[type]();
 
   leftDate.value = (rightDate.value[type](DateValue) as Dayjs).subtract(
     1,
-    "month"
+    "month",
   );
 
   dropdownEl.hide();
-};
+}
 
 // 切换左侧time
-const handleChangeLeftTimePick = (hmsDate: Dayjs) => {
+function handleChangeLeftTimePick(hmsDate: Dayjs) {
   leftDate.value = leftDate.value
     .clone()
     .set("hour", hmsDate.hour())
@@ -249,10 +242,10 @@ const handleChangeLeftTimePick = (hmsDate: Dayjs) => {
       .set("minute", leftDate.value.minute())
       .set("second", leftDate.value.second());
   }
-};
+}
 
 // 切换右侧time
-const handleChangeRightTimePick = (hmsDate: Dayjs) => {
+function handleChangeRightTimePick(hmsDate: Dayjs) {
   rightDate.value = rightDate.value
     .clone()
     .set("hour", hmsDate.hour())
@@ -265,9 +258,9 @@ const handleChangeRightTimePick = (hmsDate: Dayjs) => {
       .set("minute", rightDate.value.minute())
       .set("second", rightDate.value.second());
   }
-};
+}
 
-const handleChangeShortcut = (shortcuts: ShortcutsType) => {
+function handleChangeShortcut(shortcuts: ShortcutsType) {
   const shortcutsValues = hookChangeShortcut(shortcuts);
 
   leftDate.value = shortcutsValues[0];
@@ -275,42 +268,43 @@ const handleChangeShortcut = (shortcuts: ShortcutsType) => {
   startDate.value = shortcutsValues[0];
   endDate.value = shortcutsValues[1];
 
-  if (props.simple) handleConfirm();
-};
+  if (props.simple)
+    handleConfirm();
+}
 
-const handleConfirm = () => {
+function handleConfirm() {
   emits("pick", [startDate.value, endDate.value]);
-};
+}
 </script>
 
 <template>
   <div
     class="layui-laydate layui-laydate-range"
-    :class="'layui-laydate-range-' + props.type"
+    :class="`layui-laydate-range-${props.type}`"
   >
     <div class="layui-laydate-range-main">
-      <Shortcuts @change-shortcut="handleChangeShortcut"></Shortcuts>
+      <Shortcuts @change-shortcut="handleChangeShortcut" />
 
       <div class="layui-laydate-main">
         <div class="layui-laydate-header">
           <LayIcon
             type="layui-icon-prev"
             @click="handleChangeYearMonth('subtract', 'year')"
-          ></LayIcon>
+          />
           <LayIcon
             type="layui-icon-left"
             @click="handleChangeYearMonth('subtract', 'month')"
-          ></LayIcon>
+          />
           <div class="laydate-set-ym">
             <LayDropdown ref="yearLeftRef">
               <span>{{ leftDate.year() }} {{ t("datePicker.year") }}</span>
               <template #content>
                 <Year
                   class="layui-laydate"
-                  :modelValue="leftDate"
-                  :showDate="leftDate"
+                  :model-value="leftDate"
+                  :show-date="leftDate"
                   @pick="(val: Dayjs) => handleChangeYearMonthLeftPick(val, 'year', yearLeftRef!)"
-                ></Year>
+                />
               </template>
             </LayDropdown>
 
@@ -320,53 +314,52 @@ const handleConfirm = () => {
               <template #content>
                 <Month
                   class="layui-laydate"
-                  :modelValue="leftDate"
-                  :showDate="leftDate"
+                  :model-value="leftDate"
+                  :show-date="leftDate"
                   @pick="(val: Dayjs) => handleChangeYearMonthLeftPick(val, 'month', monthLeftRef!)"
-                ></Month>
+                />
               </template>
             </LayDropdown>
 
-            <LayDropdown ref="timeLeftRef" v-if="props.type === 'datetime'">
+            <LayDropdown v-if="props.type === 'datetime'" ref="timeLeftRef">
               <span>{{ leftDate.format("HH:mm:ss") }}</span>
 
               <template #content>
                 <Time
                   class="layui-laydate"
-                  :modelValue="startDate || leftDate"
-                  :showDate="startDate || leftDate"
+                  :model-value="startDate || leftDate"
+                  :show-date="startDate || leftDate"
                   @pick="handleChangeLeftTimePick"
-                ></Time>
+                />
               </template>
             </LayDropdown>
           </div>
 
-          <LayIcon type="layui-icon-right" style="visibility: hidden"></LayIcon>
-          <LayIcon type="layui-icon-next" style="visibility: hidden"></LayIcon>
+          <LayIcon type="layui-icon-right" style="visibility: hidden" />
+          <LayIcon type="layui-icon-next" style="visibility: hidden" />
         </div>
         <DateContent
           :classes="classes"
-          :dateList="leftDataList"
+          :date-list="leftDataList"
           @update:model-value="handleDatePick"
           @hover-cell="handleDateHover"
-        >
-        </DateContent>
+        />
       </div>
 
       <div class="layui-laydate-main">
         <div class="layui-laydate-header">
-          <LayIcon type="layui-icon-prev" style="visibility: hidden"></LayIcon>
-          <LayIcon type="layui-icon-left" style="visibility: hidden"></LayIcon>
+          <LayIcon type="layui-icon-prev" style="visibility: hidden" />
+          <LayIcon type="layui-icon-left" style="visibility: hidden" />
           <div class="laydate-set-ym">
             <LayDropdown ref="yearRightRef">
               <span>{{ rightDate.year() }} {{ t("datePicker.year") }}</span>
               <template #content>
                 <Year
                   class="layui-laydate"
-                  :modelValue="rightDate"
-                  :showDate="rightDate"
+                  :model-value="rightDate"
+                  :show-date="rightDate"
                   @pick="(val: Dayjs) => handleChangeYearMonthRightPick(val, 'year', yearRightRef!)"
-                ></Year>
+                />
               </template>
             </LayDropdown>
 
@@ -376,24 +369,24 @@ const handleConfirm = () => {
               <template #content>
                 <Month
                   class="layui-laydate"
-                  :modelValue="rightDate"
-                  :showDate="rightDate"
-                  dateType="month"
+                  :model-value="rightDate"
+                  :show-date="rightDate"
+                  date-type="month"
                   @pick="(val: Dayjs) => handleChangeYearMonthRightPick(val, 'month', monthRightRef!)"
-                ></Month>
+                />
               </template>
             </LayDropdown>
 
-            <LayDropdown ref="timeRightRef" v-if="props.type === 'datetime'">
+            <LayDropdown v-if="props.type === 'datetime'" ref="timeRightRef">
               <span>{{ rightDate.format("HH:mm:ss") }}</span>
 
               <template #content>
                 <Time
                   class="layui-laydate"
-                  :modelValue="endDate || rightDate"
-                  :showDate="endDate || rightDate"
+                  :model-value="endDate || rightDate"
+                  :show-date="endDate || rightDate"
                   @pick="handleChangeRightTimePick"
-                ></Time>
+                />
               </template>
             </LayDropdown>
           </div>
@@ -401,27 +394,26 @@ const handleConfirm = () => {
           <LayIcon
             type="layui-icon-right"
             @click="handleChangeYearMonth('add', 'month')"
-          ></LayIcon>
+          />
           <LayIcon
             type="layui-icon-next"
             @click="handleChangeYearMonth('add', 'year')"
-          ></LayIcon>
+          />
         </div>
         <DateContent
           :classes="classes"
-          :dateList="rightDataList"
+          :date-list="rightDataList"
           @update:model-value="handleDatePick"
           @hover-cell="handleDateHover"
-        >
-        </DateContent>
+        />
       </div>
     </div>
-    <Footer :showNow="false" :showConfirm="!_simple" @confirm="handleConfirm">
+    <Footer :show-now="false" :show-confirm="!_simple" @confirm="handleConfirm">
       {{ startDate?.format(props.inputFormat) }}
       {{ props.rangeSeparator }}
       {{ endDate?.format(props.inputFormat) }}
       <template #footer>
-        <slot name="footer"> </slot>
+        <slot name="footer" />
       </template>
     </Footer>
   </div>

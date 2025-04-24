@@ -1,49 +1,13 @@
-<template>
-  <div class="layui-laydate-main">
-    <div class="layui-laydate-header">
-      <LayIcon
-        type="layui-icon-prev"
-        @click="handleYearMonthChange('subtract', 'year')"
-      ></LayIcon>
-      <LayIcon
-        type="layui-icon-left"
-        @click="handleYearMonthChange('subtract', 'month')"
-      ></LayIcon>
-      <div class="laydate-set-ym">
-        <span @click="handleTypeChange('year')"
-          >{{ showDate.year() }} {{ t("datePicker.year") }}</span
-        >
-        <span @click="handleTypeChange('month')">
-          {{ MONTH_NAME[showDate.month()] }}
-        </span>
-      </div>
-      <LayIcon
-        type="layui-icon-right"
-        @click="handleYearMonthChange('add', 'month')"
-      ></LayIcon>
-      <LayIcon
-        type="layui-icon-next"
-        @click="handleYearMonthChange('add', 'year')"
-      ></LayIcon>
-    </div>
-
-    <DateContent
-      :date-list="dateList"
-      :model-value="Day"
-      @update:model-value="handlePickDay"
-    ></DateContent>
-  </div>
-</template>
-
 <script lang="ts" setup>
-import type { BasePanelProps, DateContentSingleDateObject } from "../interface";
+import type { Dayjs } from "dayjs";
 
+import type { BasePanelProps, DateContentSingleDateObject } from "../interface";
+import dayjs from "dayjs";
 import { computed, ref, watch } from "vue";
-import dayjs, { type Dayjs } from "dayjs";
 import { useI18n } from "../../../../language";
 
-import { setDateList } from "../../util";
 import LayIcon from "../../../icon";
+import { setDateList } from "../../util";
 import DateContent from "./DateContent.vue";
 
 defineOptions({
@@ -85,27 +49,24 @@ watch(
     dateList.value = setDateList(showDate.year(), showDate.month());
     currentDate.value = modelValue || showDate;
 
-    Day.value = modelValue ? modelValue.startOf("day").valueOf() : null; //unix
+    Day.value = modelValue ? modelValue.startOf("day").valueOf() : null; // unix
   },
   {
     immediate: true,
-  }
+  },
 );
 
-const handleYearMonthChange = (
-  calc: "add" | "subtract",
-  type: "year" | "month"
-) => {
+function handleYearMonthChange(calc: "add" | "subtract", type: "year" | "month") {
   const date = props.showDate[calc](1, type);
 
   emits("year-month-change", date);
-};
+}
 
-const handleTypeChange = (type: "year" | "month") => {
+function handleTypeChange(type: "year" | "month") {
   emits("type-change", type);
-};
+}
 
-const handlePickDay = (val: number) => {
+function handlePickDay(val: number) {
   const unixDate = dayjs(val);
 
   const data = currentDate.value
@@ -115,5 +76,40 @@ const handlePickDay = (val: number) => {
     .set("date", unixDate.date());
 
   emits("pick", data);
-};
+}
 </script>
+
+<template>
+  <div class="layui-laydate-main">
+    <div class="layui-laydate-header">
+      <LayIcon
+        type="layui-icon-prev"
+        @click="handleYearMonthChange('subtract', 'year')"
+      />
+      <LayIcon
+        type="layui-icon-left"
+        @click="handleYearMonthChange('subtract', 'month')"
+      />
+      <div class="laydate-set-ym">
+        <span @click="handleTypeChange('year')">{{ showDate.year() }} {{ t("datePicker.year") }}</span>
+        <span @click="handleTypeChange('month')">
+          {{ MONTH_NAME[showDate.month()] }}
+        </span>
+      </div>
+      <LayIcon
+        type="layui-icon-right"
+        @click="handleYearMonthChange('add', 'month')"
+      />
+      <LayIcon
+        type="layui-icon-next"
+        @click="handleYearMonthChange('add', 'year')"
+      />
+    </div>
+
+    <DateContent
+      :date-list="dateList"
+      :model-value="Day"
+      @update:model-value="handlePickDay"
+    />
+  </div>
+</template>

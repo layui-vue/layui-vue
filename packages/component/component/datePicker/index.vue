@@ -1,28 +1,22 @@
 <script setup lang="ts">
-import "./index.less";
+import type { DatePickerProps as _DatePickerProps } from "./interface";
 import dayjs from "dayjs";
-import { computed, provide } from "vue";
 import customParseFormat from "dayjs/plugin/customParseFormat.js";
-import isSameOrBefore from "dayjs/plugin/isSameOrBefore.js";
 import isSameOrAfter from "dayjs/plugin/isSameOrAfter.js";
+import isSameOrBefore from "dayjs/plugin/isSameOrBefore.js";
 import objectSupport from "dayjs/plugin/objectSupport.js";
-import {
-  DATE_PICKER_CONTEXT,
-  type DatePickerProps as _DatePickerProps,
-  type DatePickerType,
-} from "./interface";
-
-import { useProps } from "./hook/useProps";
-import { useDatePicker } from "./hook/useDatePicker";
-
+import { computed, provide } from "vue";
 import InputBlock from "./component/common/InputBlock.vue";
 
-dayjs.extend(customParseFormat);
-dayjs.extend(isSameOrBefore);
-dayjs.extend(isSameOrAfter);
-dayjs.extend(objectSupport);
+import { useDatePicker } from "./hook/useDatePicker";
+import { useProps } from "./hook/useProps";
+import { DATE_PICKER_CONTEXT } from "./interface";
 
-export type DatePickerProps = _DatePickerProps;
+import "./index.less";
+
+defineOptions({
+  name: "LayDatePicker",
+});
 
 const props = withDefaults(defineProps<DatePickerProps>(), {
   modelValue: null,
@@ -44,19 +38,22 @@ const props = withDefaults(defineProps<DatePickerProps>(), {
   // static: false,
 });
 
+dayjs.extend(customParseFormat);
+dayjs.extend(isSameOrBefore);
+dayjs.extend(isSameOrAfter);
+dayjs.extend(objectSupport);
+
+export type DatePickerProps = _DatePickerProps;
+
 const { size } = useProps(props);
-const { RenderComponent, renderComponentProps, datePickerContext } =
-  useDatePicker(props);
+const { RenderComponent, renderComponentProps, datePickerContext }
+  = useDatePicker(props);
 
 const format = computed<string>(() => {
   return props.inputFormat ?? renderComponentProps.value.inputFormat!;
 });
 
 provide(DATE_PICKER_CONTEXT, datePickerContext);
-
-defineOptions({
-  name: "LayDatePicker",
-});
 </script>
 
 <template>
@@ -64,7 +61,7 @@ defineOptions({
     <template #default="{ onPick }">
       <RenderComponent v-bind="renderComponentProps" @pick="onPick">
         <template #footer>
-          <slot name="footer" v-bind="{ props }"></slot>
+          <slot name="footer" v-bind="{ props }" />
         </template>
       </RenderComponent>
     </template>

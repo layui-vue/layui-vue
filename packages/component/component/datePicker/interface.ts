@@ -1,6 +1,6 @@
-import type { Dayjs, ConfigType } from "dayjs";
-import type { StyleValue, Component, InjectionKey } from "vue";
-import type { CommonSize, CommonClass } from "../../types/common";
+import type { ConfigType, Dayjs } from "dayjs";
+import type { Component, InjectionKey, StyleValue } from "vue";
+import type { CommonClass, CommonSize } from "../../types/common";
 
 export type DatePickerType =
   | "date"
@@ -82,13 +82,13 @@ export interface RequiredDatePickerProps extends DatePickerProps {
   yearPage: number;
 }
 
-export type DatePickerEmits = {
+export interface DatePickerEmits {
   (e: "update:modelValue", value: string | Array<string>): void;
   (e: "change", value: string | Array<string>): void;
   (e: "blur", event: Event): void;
   (e: "focus", event: Event): void;
   (e: "clear"): void;
-};
+}
 
 export type DatePickerValue = Dayjs | Array<Dayjs> | null | undefined;
 
@@ -96,8 +96,8 @@ export interface DatePickerContextType extends RequiredDatePickerProps {
   modelValue: DatePickerValue;
 }
 
-export const DATE_PICKER_CONTEXT: InjectionKey<DatePickerContextType> =
-  Symbol("LayDatePicker");
+export const DATE_PICKER_CONTEXT: InjectionKey<DatePickerContextType>
+  = Symbol("LayDatePicker");
 
 export interface Shortcuts {
   text: string | number;

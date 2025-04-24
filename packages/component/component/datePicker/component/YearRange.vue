@@ -1,19 +1,19 @@
 <script setup lang="ts">
-import dayjs, { type Dayjs } from "dayjs";
-import { computed, ref, watch } from "vue";
-import type { RangePickerProps } from "./interface";
+import type { Dayjs } from "dayjs";
 import type {
-  DatePickerModelValueSingleType,
   Shortcuts as ShortcutsType,
 } from "../interface";
+import type { RangePickerProps } from "./interface";
+import dayjs from "dayjs";
+import { computed, ref, watch } from "vue";
 
 import LayIcon from "../../icon";
-import Year from "./common/Year.vue";
-import Footer from "./common/Footer.vue";
-import Shortcuts from "./common/Shortcuts.vue";
-
 import { useBaseDatePicker } from "../hook/useBaseDatePicker";
 import { useShortcutsRange } from "../hook/useShortcutsRange";
+import Footer from "./common/Footer.vue";
+
+import Shortcuts from "./common/Shortcuts.vue";
+import Year from "./common/Year.vue";
 
 const props = withDefaults(defineProps<RangePickerProps>(), {});
 const emits = defineEmits(["pick"]);
@@ -37,7 +37,7 @@ watch(
 
     leftDate.value = start || getDefaultValue();
   },
-  { immediate: true }
+  { immediate: true },
 );
 
 watch(
@@ -45,7 +45,7 @@ watch(
   () => {
     rightDate.value = leftDate.value.add(props.yearPage!, "year");
   },
-  { immediate: true }
+  { immediate: true },
 );
 
 const classes = computed(() => {
@@ -54,48 +54,50 @@ const classes = computed(() => {
 
     return {
       "layui-this":
-        startDate.value?.isSame(Date, "year") ||
-        endDate.value?.isSame(Date, "year"),
+        startDate.value?.isSame(Date, "year")
+        || endDate.value?.isSame(Date, "year"),
       "laydate-range-hover":
         !!(
-          startDate.value &&
-          Date.isSameOrAfter(startDate.value, "year") &&
-          Date.isSameOrBefore(_endDate, "year")
-        ) ||
-        !!(
-          startDate.value &&
-          Date.isSameOrBefore(startDate.value, "year") &&
-          Date.isSameOrAfter(_endDate, "year")
+          startDate.value
+          && Date.isSameOrAfter(startDate.value, "year")
+          && Date.isSameOrBefore(_endDate, "year")
+        )
+        || !!(
+          startDate.value
+          && Date.isSameOrBefore(startDate.value, "year")
+          && Date.isSameOrAfter(_endDate, "year")
         ),
     };
   };
 });
 
-const handleYearPick = (date: Dayjs) => {
+function handleYearPick(date: Dayjs) {
   if (!startDate.value || (startDate.value && endDate.value)) {
     startDate.value = date;
     endDate.value = undefined;
-  } else if (date.isSameOrBefore(startDate.value, "year")) {
+  }
+  else if (date.isSameOrBefore(startDate.value, "year")) {
     endDate.value = startDate.value;
     startDate.value = date;
-  } else {
+  }
+  else {
     endDate.value = date;
   }
   if (props.simple && startDate.value && endDate.value) {
     handleConfirm();
   }
-};
+}
 
-const handleYearHover = (date: Dayjs) => {
+function handleYearHover(date: Dayjs) {
   if (!startDate.value || endDate.value) {
     hoverYear.value = undefined;
     return;
   }
 
   hoverYear.value = date;
-};
+}
 
-const handleChangeShortcut = (shortcuts: ShortcutsType) => {
+function handleChangeShortcut(shortcuts: ShortcutsType) {
   const shortcutsValues = hookChangeShortcut(shortcuts);
 
   leftDate.value = shortcutsValues[0];
@@ -104,22 +106,23 @@ const handleChangeShortcut = (shortcuts: ShortcutsType) => {
   startDate.value = shortcutsValues[0];
   endDate.value = shortcutsValues[1];
 
-  if (props.simple) handleConfirm();
-};
+  if (props.simple)
+    handleConfirm();
+}
 
-const handleConfirm = () => {
+function handleConfirm() {
   emits("pick", [startDate.value, endDate.value]);
-};
+}
 </script>
 
 <template>
   <div class="layui-laydate layui-laydate-range">
     <div class="layui-laydate-range-main">
-      <Shortcuts @change-shortcut="handleChangeShortcut"></Shortcuts>
+      <Shortcuts @change-shortcut="handleChangeShortcut" />
 
       <Year
-        :modelValue="leftDate"
-        :showDate="leftDate"
+        :model-value="leftDate"
+        :show-date="leftDate"
         :classes="classes"
         @pick="handleYearPick"
         @hover-cell="handleYearHover"
@@ -138,8 +141,8 @@ const handleConfirm = () => {
         </template>
       </Year>
       <Year
-        :modelValue="rightDate"
-        :showDate="rightDate"
+        :model-value="rightDate"
+        :show-date="rightDate"
         :classes="classes"
         @pick="handleYearPick"
         @hover-cell="handleYearHover"
@@ -159,8 +162,8 @@ const handleConfirm = () => {
       </Year>
     </div>
     <Footer
-      :showNow="false"
-      :showConfirm="!props.simple"
+      :show-now="false"
+      :show-confirm="!props.simple"
       @confirm="handleConfirm"
     >
       <slot name="footer">

@@ -1,22 +1,23 @@
 <script setup lang="ts">
-import dayjs, { type Dayjs } from "dayjs";
-import { computed, ref, watch } from "vue";
-import type { RangePickerProps } from "./interface";
+import type { Dayjs } from "dayjs";
 import type {
   DatePickerModelValueSingleType,
   Shortcuts as ShortcutsType,
 } from "../interface";
+import type { RangePickerProps } from "./interface";
+import dayjs from "dayjs";
+import { computed, ref, watch } from "vue";
 
 import { useI18n } from "../../../language";
 
-import LayIcon from "../../icon";
 import LayDropdown from "../../dropdown";
-import Month from "./common/Month.vue";
-import Year from "./common/Year.vue";
+import LayIcon from "../../icon";
+import { useShortcutsRange } from "../hook/useShortcutsRange";
 import Footer from "./common/Footer.vue";
+import Month from "./common/Month.vue";
 import Shortcuts from "./common/Shortcuts.vue";
 
-import { useShortcutsRange } from "../hook/useShortcutsRange";
+import Year from "./common/Year.vue";
 
 const props = withDefaults(defineProps<RangePickerProps>(), {});
 const emits = defineEmits(["pick"]);
@@ -34,13 +35,13 @@ const yearRightRef = ref<InstanceType<typeof LayDropdown>>();
 
 const hoverMonth = ref<Dayjs | undefined>();
 
-const getDefaultValue = () => {
+function getDefaultValue() {
   const _defaultValue = dayjs(
-    props.defaultValue as DatePickerModelValueSingleType
+    props.defaultValue as DatePickerModelValueSingleType,
   );
 
   return _defaultValue.isValid() ? _defaultValue : dayjs().startOf("day");
-};
+}
 
 watch(
   () => props.modelValue,
@@ -51,7 +52,7 @@ watch(
 
     leftDate.value = start || getDefaultValue();
   },
-  { immediate: true }
+  { immediate: true },
 );
 
 watch(
@@ -59,7 +60,7 @@ watch(
   () => {
     rightDate.value = leftDate.value.add(1, "year");
   },
-  { immediate: true }
+  { immediate: true },
 );
 
 const classes = computed(() => {
@@ -68,18 +69,18 @@ const classes = computed(() => {
 
     return {
       "layui-this":
-        startDate.value?.isSame(Date, "month") ||
-        endDate.value?.isSame(Date, "month"),
+        startDate.value?.isSame(Date, "month")
+        || endDate.value?.isSame(Date, "month"),
       "laydate-range-hover":
         !!(
-          startDate.value &&
-          Date.isSameOrAfter(startDate.value, "month") &&
-          Date.isSameOrBefore(_endDate, "month")
-        ) ||
-        !!(
-          startDate.value &&
-          Date.isSameOrBefore(startDate.value, "month") &&
-          Date.isSameOrAfter(_endDate, "month")
+          startDate.value
+          && Date.isSameOrAfter(startDate.value, "month")
+          && Date.isSameOrBefore(_endDate, "month")
+        )
+        || !!(
+          startDate.value
+          && Date.isSameOrBefore(startDate.value, "month")
+          && Date.isSameOrAfter(_endDate, "month")
         ),
     };
   };
@@ -87,41 +88,43 @@ const classes = computed(() => {
 
 const isYearMonth = computed(() => props.type === "yearmonth");
 
-const handleMonthPick = (date: Dayjs) => {
+function handleMonthPick(date: Dayjs) {
   if (!startDate.value || (startDate.value && endDate.value)) {
     startDate.value = date;
     endDate.value = undefined;
-  } else if (date.isSameOrBefore(startDate.value, "month")) {
+  }
+  else if (date.isSameOrBefore(startDate.value, "month")) {
     endDate.value = startDate.value;
     startDate.value = date;
-  } else {
+  }
+  else {
     endDate.value = date;
   }
   if (props.simple && startDate.value && endDate.value) {
     handleConfirm();
   }
-};
+}
 
-const handleMonthHover = (date: Dayjs) => {
+function handleMonthHover(date: Dayjs) {
   if (!startDate.value || endDate.value) {
     hoverMonth.value = undefined;
     return;
   }
 
   hoverMonth.value = date;
-};
+}
 
-const handleLeftYearChange = (year: Dayjs) => {
+function handleLeftYearChange(year: Dayjs) {
   leftDate.value = year;
   yearLeftRef.value?.hide();
-};
+}
 
-const handleRightYearChange = (year: Dayjs) => {
+function handleRightYearChange(year: Dayjs) {
   leftDate.value = year.subtract(1, "year");
   yearRightRef.value?.hide();
-};
+}
 
-const handleChangeShortcut = (shortcuts: ShortcutsType) => {
+function handleChangeShortcut(shortcuts: ShortcutsType) {
   const shortcutsValues = hookChangeShortcut(shortcuts);
 
   leftDate.value = shortcutsValues[0];
@@ -130,24 +133,25 @@ const handleChangeShortcut = (shortcuts: ShortcutsType) => {
   startDate.value = shortcutsValues[0];
   endDate.value = shortcutsValues[1];
 
-  if (props.simple) handleConfirm();
-};
+  if (props.simple)
+    handleConfirm();
+}
 
-const handleConfirm = () => {
+function handleConfirm() {
   emits("pick", [startDate.value, endDate.value]);
-};
+}
 </script>
 
 <template>
   <div class="layui-laydate" :class="{ 'layui-laydate-range': isYearMonth }">
     <div class="layui-laydate-range-main">
-      <Shortcuts @change-shortcut="handleChangeShortcut"></Shortcuts>
+      <Shortcuts @change-shortcut="handleChangeShortcut" />
 
       <Month
-        :modelValue="startDate"
-        :showDate="leftDate"
+        :model-value="startDate"
+        :show-date="leftDate"
         :classes="classes"
-        :dateType="props.type"
+        :date-type="props.type"
         @pick="handleMonthPick"
         @hover-cell="handleMonthHover"
       >
@@ -165,10 +169,10 @@ const handleConfirm = () => {
               <template #content>
                 <Year
                   class="layui-laydate"
-                  :modelValue="leftDate"
-                  :showDate="leftDate"
+                  :model-value="leftDate"
+                  :show-date="leftDate"
                   @pick="handleLeftYearChange"
-                ></Year>
+                />
               </template>
             </LayDropdown>
           </template>
@@ -179,9 +183,9 @@ const handleConfirm = () => {
       </Month>
       <Month
         v-if="isYearMonth"
-        :modelValue="endDate"
-        :showDate="rightDate"
-        :dateType="props.type"
+        :model-value="endDate"
+        :show-date="rightDate"
+        :date-type="props.type"
         :classes="classes"
         @pick="handleMonthPick"
         @hover-cell="handleMonthHover"
@@ -191,16 +195,15 @@ const handleConfirm = () => {
             <div class="laydate-set-ym">
               <span>
                 {{ leftDate.add(1, "year").year() }}
-                {{ t("datePicker.year") }}</span
-              >
+                {{ t("datePicker.year") }}</span>
             </div>
             <template #content>
               <Year
                 class="layui-laydate"
-                :modelValue="rightDate"
-                :showDate="rightDate"
+                :model-value="rightDate"
+                :show-date="rightDate"
                 @pick="handleRightYearChange"
-              ></Year>
+              />
             </template>
           </LayDropdown>
 
@@ -212,8 +215,8 @@ const handleConfirm = () => {
       </Month>
     </div>
     <Footer
-      :showNow="false"
-      :showConfirm="!props.simple"
+      :show-now="false"
+      :show-confirm="!props.simple"
       @confirm="handleConfirm"
     >
       <slot name="footer">

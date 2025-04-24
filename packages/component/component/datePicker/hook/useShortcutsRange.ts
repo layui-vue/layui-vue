@@ -1,15 +1,12 @@
-import dayjs, { type Dayjs } from "dayjs";
+import type { Dayjs } from "dayjs";
+import type { DatePickerModelValueSingleType, Shortcuts } from "../interface";
 import { inject } from "vue";
-import {
-  DATE_PICKER_CONTEXT,
-  type Shortcuts,
-  type DatePickerModelValueSingleType,
-} from "../interface";
 
-import { normalizeDayjsValue } from "../util";
 import { isFunction } from "../../../utils";
+import { DATE_PICKER_CONTEXT } from "../interface";
+import { normalizeDayjsValue } from "../util";
 
-export const useShortcutsRange = () => {
+export function useShortcutsRange() {
   const DatePickerContext = inject(DATE_PICKER_CONTEXT)!;
 
   const handleChangeShortcut = (shortcuts: Shortcuts): Array<Dayjs> => {
@@ -24,4 +21,4 @@ export const useShortcutsRange = () => {
   };
 
   return handleChangeShortcut;
-};
+}

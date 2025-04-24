@@ -1,42 +1,38 @@
-import dayjs, { type Dayjs } from "dayjs";
+import type { Dayjs } from "dayjs";
+import type { DateContentSingleDateObject } from "./component/interface";
 import type { DatePickerModelValueSingleType } from "./interface";
-import { DateContentSingleDateObject } from "./component/interface";
+import dayjs from "dayjs";
 
-export const normalizeDayjsValue = (
-  value: DatePickerModelValueSingleType,
-  format: string | undefined
-): Dayjs | null => {
+export function normalizeDayjsValue(value: DatePickerModelValueSingleType, format: string | undefined): Dayjs | null {
   const date = dayjs(value, format);
 
   return dayjs(value).isValid() ? dayjs(value) : date.isValid() ? date : null;
-};
+}
 
-export const dayjsToString = (
-  value: DatePickerModelValueSingleType,
-  format: string
-) => {
+export function dayjsToString(value: DatePickerModelValueSingleType, format: string) {
   const date = dayjs(value, format);
 
   return dayjs(value).isValid()
     ? dayjs(value).format(format)
     : date.isValid()
-    ? date.format(format)
-    : "";
-};
+      ? date.format(format)
+      : "";
+}
 
-export const checkRangeValue = (values: Array<Dayjs | null>) => {
+export function checkRangeValue(values: Array<Dayjs | null>) {
   const [start, end] = values;
-  if (!start || !end) return false;
+  if (!start || !end)
+    return false;
   return start.isValid() && end.isValid();
-};
+}
 
 /**
  * 获取年份列表
  * @param {Date | number} date 时间
- * @param {Number} page 页数
- * @param {Number} step 步进
+ * @param {number} page 页数
+ * @param {number} step 步进
  */
-export const getYears = (date?: Date | number, page = 15, step = 1) => {
+export function getYears(date?: Date | number, page = 15, step = 1) {
   const years = [];
   const y = typeof date === "number" ? date : date?.getFullYear() ?? 1970;
   const currentIndex = getPosition(y, page);
@@ -49,46 +45,49 @@ export const getYears = (date?: Date | number, page = 15, step = 1) => {
     years.push(i);
   }
   return years;
-};
+}
 
-const getPosition = (year: number, length: number): number => {
-  if (year === 0) return length;
+function getPosition(year: number, length: number): number {
+  if (year === 0)
+    return length;
 
   return ((((year - 1) % length) + length) % length) + 1;
-};
+}
 
 /**
  * 获取当前日期
  */
-export const getDate = (val = "") => {
+export function getDate(val = "") {
   if (val) {
     return new Date(val);
-  } else {
+  }
+  else {
     return new Date();
   }
-};
+}
 
 /**
  * 获取当前年份
  */
-export const getYear = (val = "") => {
+export function getYear(val = "") {
   return getDate(val).getFullYear();
-};
+}
 
 /**
  * 获取当前月份
  */
-export const getMonth = (val = "") => {
+export function getMonth(val = "") {
   return getDate(val).getMonth();
-};
+}
 
-export const getDay = (val = "") => {
+export function getDay(val = "") {
   if (val) {
     return new Date(getDate(val).toDateString()).getTime();
-  } else {
+  }
+  else {
     return -1;
   }
-};
+}
 
 /**
  * 获取月份天数
@@ -96,15 +95,12 @@ export const getDay = (val = "") => {
  * @param year
  * @param month
  */
-export const getDayLength = (year: number, month: number): number => {
+export function getDayLength(year: number, month: number): number {
   return new Date(year, month + 1, 0).getDate();
-};
+}
 
 // 设置日期列表
-export const setDateList = (
-  year: number,
-  month: number
-): Array<DateContentSingleDateObject> => {
+export function setDateList(year: number, month: number): Array<DateContentSingleDateObject> {
   const curDays = getDayLength(year, month); // 当月天数
   const prevDays = getDayLength(year, month - 1); // 上月天数
   const curFirstDayWeek = new Date(year, month, 1).getDay(); // 当月第一天星期几
@@ -144,4 +140,4 @@ export const setDateList = (
     }
   }
   return list;
-};
+}

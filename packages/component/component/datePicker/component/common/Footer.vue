@@ -1,31 +1,6 @@
-<template>
-  <div class="layui-laydate-footer">
-    <slot></slot>
-    <div class="laydate-footer-btns">
-      <LayButton
-        lay-type="now"
-        class="laydate-btns-now"
-        v-if="props.showNow"
-        size="xs"
-        @click="handelNow"
-        >{{ t("datePicker.now") }}</LayButton
-      >
-      <LayButton
-        lay-type="confirm"
-        class="laydate-btns-confirm"
-        v-if="props.showConfirm"
-        size="xs"
-        :disabled="disabledConfirm"
-        @click="handelOk"
-        >{{ t("datePicker.confirm") }}</LayButton
-      >
-    </div>
-  </div>
-</template>
-
 <script lang="ts" setup>
-import LayButton from "../../../button/index.vue";
-import { useI18n } from "../../../../language";
+import LayButton from "@layui/component/component/button/index.vue";
+import { useI18n } from "@layui/component/language";
 
 export interface PanelFoot {
   showNow?: boolean;
@@ -42,15 +17,42 @@ const props = withDefaults(defineProps<PanelFoot>(), {
   showConfirm: true,
 });
 
-const { t } = useI18n();
-
 const emits = defineEmits(["confirm", "clear", "now"]);
 
-const handelOk = () => {
-  emits("confirm");
-};
+const { t } = useI18n();
 
-const handelNow = () => {
+function handelOk() {
+  emits("confirm");
+}
+
+function handelNow() {
   emits("now");
-};
+}
 </script>
+
+<template>
+  <div class="layui-laydate-footer">
+    <slot />
+    <div class="laydate-footer-btns">
+      <LayButton
+        v-if="props.showNow"
+        lay-type="now"
+        class="laydate-btns-now"
+        size="xs"
+        @click="handelNow"
+      >
+        {{ t("datePicker.now") }}
+      </LayButton>
+      <LayButton
+        v-if="props.showConfirm"
+        lay-type="confirm"
+        class="laydate-btns-confirm"
+        size="xs"
+        :disabled="disabledConfirm"
+        @click="handelOk"
+      >
+        {{ t("datePicker.confirm") }}
+      </LayButton>
+    </div>
+  </div>
+</template>

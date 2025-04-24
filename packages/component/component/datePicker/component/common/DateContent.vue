@@ -1,14 +1,100 @@
+<script lang="ts" setup>
+import type { DateContentSingleDateObject } from "../interface";
+import dayjs from "dayjs";
+
+import { computed, inject } from "vue";
+import { useI18n } from "../../../../language";
+import { DATE_PICKER_CONTEXT } from "../../interface";
+
+export interface DateContentProps {
+  dateList: Array<DateContentSingleDateObject>;
+  modelValue?: number | null;
+  classes?: (val: DateContentSingleDateObject) => Record<string, boolean>;
+}
+
+defineOptions({
+  name: "DateContent",
+});
+
+withDefaults(defineProps<DateContentProps>(), {
+  modelValue: -1,
+  classes: () => ({}),
+});
+
+const emits = defineEmits(["update:modelValue", "hover-cell"]);
+
+const { t } = useI18n();
+
+const WEEK_NAME = computed(() => [
+  t("datePicker.sunday"),
+  t("datePicker.monday"),
+  t("datePicker.tuesday"),
+  t("datePicker.wednesday"),
+  t("datePicker.thursday"),
+  t("datePicker.friday"),
+  t("datePicker.saturday"),
+]);
+
+const DatePickerContext = inject(DATE_PICKER_CONTEXT)!;
+
+// 判断日期是否可以点击
+function cellDisabled(item: DateContentSingleDateObject) {
+  if (item.type !== "current" && DatePickerContext.range) {
+    return true;
+  }
+
+  if (DatePickerContext.disabledDate) {
+    return DatePickerContext.disabledDate(dayjs(item.value).toDate());
+  }
+
+  if (
+    DatePickerContext.min
+    && dayjs(item.value).isBefore(dayjs(DatePickerContext.min), "day")
+  ) {
+    return true;
+  }
+
+  if (
+    DatePickerContext.max
+    && dayjs(item.value).isAfter(dayjs(DatePickerContext.max), "day")
+  ) {
+    return true;
+  }
+  return false;
+}
+
+// 点击日期
+function handleDayClick(item: DateContentSingleDateObject) {
+  if (cellDisabled(item))
+    return;
+
+  if (DatePickerContext.range && item.type !== "current")
+    return;
+
+  emits("update:modelValue", item.value);
+}
+
+function dayItemMouseEnter(item: DateContentSingleDateObject) {
+  if (!DatePickerContext.range || cellDisabled(item))
+    return;
+
+  emits("hover-cell", item.value);
+}
+</script>
+
 <template>
   <div class="layui-laydate-content">
     <table style="width: 100%">
       <thead>
         <tr>
-          <th v-for="item of WEEK_NAME" :key="item">{{ item }}</th>
+          <th v-for="item of WEEK_NAME" :key="item">
+            {{ item }}
+          </th>
         </tr>
       </thead>
       <tbody>
         <template
-          v-for="(_, i) of dateList.length % 7 == 0
+          v-for="(_, i) of dateList.length % 7 === 0
             ? dateList.length / 7
             : Math.floor(dateList.length / 7) + 1"
           :key="i"
@@ -37,85 +123,3 @@
     </table>
   </div>
 </template>
-
-<script lang="ts" setup>
-import dayjs from "dayjs";
-import { computed, inject } from "vue";
-
-import { useI18n } from "../../../../language";
-import { DATE_PICKER_CONTEXT } from "../../interface";
-import type { DateContentSingleDateObject } from "../interface";
-
-export interface DateContentProps {
-  dateList: Array<DateContentSingleDateObject>;
-  modelValue?: number | null;
-  classes?: (val: DateContentSingleDateObject) => Record<string, boolean>;
-}
-
-defineOptions({
-  name: "DateContent",
-});
-
-withDefaults(defineProps<DateContentProps>(), {
-  dateList: () => [],
-  modelValue: -1,
-  classes: () => ({}),
-});
-
-const { t } = useI18n();
-
-const WEEK_NAME = computed(() => [
-  t("datePicker.sunday"),
-  t("datePicker.monday"),
-  t("datePicker.tuesday"),
-  t("datePicker.wednesday"),
-  t("datePicker.thursday"),
-  t("datePicker.friday"),
-  t("datePicker.saturday"),
-]);
-
-const DatePickerContext = inject(DATE_PICKER_CONTEXT)!;
-
-const emits = defineEmits(["update:modelValue", "hover-cell"]);
-
-// 判断日期是否可以点击
-const cellDisabled = (item: DateContentSingleDateObject) => {
-  if (item.type !== "current" && DatePickerContext.range) {
-    return true;
-  }
-
-  if (DatePickerContext.disabledDate) {
-    return DatePickerContext.disabledDate(dayjs(item.value).toDate());
-  }
-
-  if (
-    DatePickerContext.min &&
-    dayjs(item.value).isBefore(dayjs(DatePickerContext.min), "day")
-  ) {
-    return true;
-  }
-
-  if (
-    DatePickerContext.max &&
-    dayjs(item.value).isAfter(dayjs(DatePickerContext.max), "day")
-  ) {
-    return true;
-  }
-  return false;
-};
-
-// 点击日期
-const handleDayClick = (item: DateContentSingleDateObject) => {
-  if (cellDisabled(item)) return;
-
-  if (DatePickerContext.range && item.type !== "current") return;
-
-  emits("update:modelValue", item.value);
-};
-
-const dayItemMouseEnter = (item: DateContentSingleDateObject) => {
-  if (!DatePickerContext.range || cellDisabled(item)) return;
-
-  emits("hover-cell", item.value);
-};
-</script>

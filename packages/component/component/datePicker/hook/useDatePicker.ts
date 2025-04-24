@@ -1,61 +1,23 @@
+import type { Dayjs } from "dayjs";
 import type {
+  DatePickerContextType,
+  DatePickerModelValueSingleType,
   // DatePickerProps,
   RequiredDatePickerProps,
   TypeMap,
-  DatePickerModelValueSingleType,
-  DatePickerContextType,
 } from "../interface";
-import { type Dayjs } from "dayjs";
 
 import { computed, reactive, toRefs } from "vue";
+import { isArray, isNumber } from "../../../utils";
 import DatePicker from "../component/DatePicker.vue";
 import DateRange from "../component/DateRange.vue";
-import TimeRange from "../component/TimeRange.vue";
 import MonthRange from "../component/MonthRange.vue";
+import TimeRange from "../component/TimeRange.vue";
+
 import YearRange from "../component/YearRange.vue";
-
 import { normalizeDayjsValue } from "../util";
-import { isArray, isNumber } from "../../../utils";
 
-export const useDatePicker = (props: RequiredDatePickerProps) => {
-  const initDate = computed<Dayjs | Array<Dayjs> | null>(() => {
-    if (props.range) {
-      const modelValue = isArray(props.modelValue) ? props.modelValue : [];
-
-      return modelValue.map((date: DatePickerModelValueSingleType) => {
-        return normalizeDayjsValue(date, _format.value);
-      }) as Array<Dayjs>;
-    } else {
-      let value = props.modelValue;
-
-      // 兼容之前的 Year | Month 类型 modelValue可传 `2024` | `11` number类型
-      if (
-        ["year", "month"].includes(props.type!) &&
-        isNumber(props.modelValue) &&
-        `${props.modelValue}`.length <= 4
-      ) {
-        value += "";
-      }
-
-      return normalizeDayjsValue(
-        value as DatePickerModelValueSingleType,
-        _format.value
-      );
-    }
-  });
-
-  const typeMap = computed(() => {
-    return TYPE_MAP[props.type];
-  });
-
-  const _format = computed(() => {
-    return props.format || typeMap.value.format;
-  });
-
-  const _inputFormat = computed(() => {
-    return props.inputFormat ?? typeMap.value.format;
-  });
-
+export function useDatePicker(props: RequiredDatePickerProps) {
   // 类型映射
   const TYPE_MAP: TypeMap = {
     year: { component: props.range ? YearRange : DatePicker, format: "YYYY" },
@@ -77,6 +39,45 @@ export const useDatePicker = (props: RequiredDatePickerProps) => {
       format: "HH:mm:ss",
     },
   };
+
+  const typeMap = computed(() => {
+    return TYPE_MAP[props.type];
+  });
+
+  const _format = computed(() => {
+    return props.format || typeMap.value.format;
+  });
+
+  const initDate = computed<Dayjs | Array<Dayjs> | null>(() => {
+    if (props.range) {
+      const modelValue = isArray(props.modelValue) ? props.modelValue : [];
+
+      return modelValue.map((date: DatePickerModelValueSingleType) => {
+        return normalizeDayjsValue(date, _format.value);
+      }) as Array<Dayjs>;
+    }
+    else {
+      let value = props.modelValue;
+
+      // 兼容之前的 Year | Month 类型 modelValue可传 `2024` | `11` number类型
+      if (
+        ["year", "month"].includes(props.type!)
+        && isNumber(props.modelValue)
+        && `${props.modelValue}`.length <= 4
+      ) {
+        value += "";
+      }
+
+      return normalizeDayjsValue(
+        value as DatePickerModelValueSingleType,
+        _format.value,
+      );
+    }
+  });
+
+  const _inputFormat = computed(() => {
+    return props.inputFormat ?? typeMap.value.format;
+  });
 
   const renderComponentProps = computed<DatePickerContextType>(() => {
     return {
@@ -103,4 +104,4 @@ export const useDatePicker = (props: RequiredDatePickerProps) => {
     renderComponentProps,
     datePickerContext,
   };
-};
+}

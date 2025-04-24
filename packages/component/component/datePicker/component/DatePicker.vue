@@ -1,24 +1,25 @@
 <script setup lang="ts">
-import type { UniquePickerProps } from "./interface";
+import type { Dayjs } from "dayjs";
 import type {
   DatePickerModelValueSingleType,
   Shortcuts as ShortcutsType,
 } from "../interface";
+import type { UniquePickerProps } from "./interface";
+import dayjs from "dayjs";
 import { computed, ref, watch } from "vue";
-import dayjs, { type Dayjs } from "dayjs";
 
 import { useI18n } from "../../../language";
 import { isFunction } from "../../../utils";
 
-import { useBaseDatePicker } from "../hook/useBaseDatePicker";
-
 import LayButton from "../../button/index.vue";
+
+import { useBaseDatePicker } from "../hook/useBaseDatePicker";
 import Date from "./common/Date.vue";
+import Footer from "./common/Footer.vue";
+import Month from "./common/Month.vue";
+import Shortcuts from "./common/Shortcuts.vue";
 import Time from "./common/Time.vue";
 import Year from "./common/Year.vue";
-import Month from "./common/Month.vue";
-import Footer from "./common/Footer.vue";
-import Shortcuts from "./common/Shortcuts.vue";
 
 const props = withDefaults(defineProps<UniquePickerProps>(), {});
 
@@ -37,7 +38,7 @@ watch(
     currentData.value = props.modelValue;
     showDate.value = props.modelValue || getDefaultValue();
   },
-  { immediate: true }
+  { immediate: true },
 );
 
 const dateType = computed(() => {
@@ -62,100 +63,107 @@ watch(
     }
     currentType.value = val;
   },
-  { immediate: true }
+  { immediate: true },
 );
 
-const handlePickDate = (value: Dayjs) => {
+function handlePickDate(value: Dayjs) {
   currentData.value = value;
   handleConfirm();
-};
+}
 
-const handlePickTime = (value: Dayjs) => {
+function handlePickTime(value: Dayjs) {
   currentData.value = value;
   handleConfirm();
-};
+}
 
-const handlePickYear = (year: number) => {
+function handlePickYear(year: number) {
   const data = showDate.value.year(year);
 
   if (["datetime", "date"].includes(dateType.value)) {
     showDate.value = data;
     currentType.value = "date";
-  } else if (dateType.value === "yearmonth") {
+  }
+  else if (dateType.value === "yearmonth") {
     showDate.value = data;
     currentType.value = "month";
-  } else {
+  }
+  else {
     currentData.value = data;
     handleConfirm();
   }
-};
+}
 
-const handlePickMonth = (month: number) => {
+function handlePickMonth(month: number) {
   const data = showDate.value.month(month);
 
   if (["datetime", "date"].includes(dateType.value)) {
     showDate.value = data;
     currentType.value = "date";
-  } else {
+  }
+  else {
     currentData.value = data;
     showDate.value = data;
     handleConfirm();
   }
-};
+}
 
-const handleMonthChangeYear = (year: number) => {
+function handleMonthChangeYear(year: number) {
   showDate.value = showDate.value.year(year);
-};
+}
 
-const handleDateChangeYearMonth = (data: Dayjs) => {
+function handleDateChangeYearMonth(data: Dayjs) {
   showDate.value = data;
-};
+}
 
-const handleToggleTimePanel = () => {
+function handleToggleTimePanel() {
   currentType.value = currentType.value === "date" ? "time" : "date";
-};
+}
 
-const preCondition = () => {
+function preCondition() {
   // datetime类型点击确定还原当前panel为date
   if (dateType.value === "datetime") {
     currentType.value = "date";
   }
-};
+}
 
-const handleConfirm = (isConfirm = false) => {
+function handleConfirm(isConfirm = false) {
   if (!showConfirm.value || isConfirm) {
     preCondition();
 
     emits("pick", currentData.value); // formatValue()
   }
-};
+}
 
-const handleNow = () => {
+function handleNow() {
   if (dayjs().isBefore(dayjs(props.min, props.format))) {
     showDate.value = currentData.value = dayjs(props.min, props.format);
-  } else if (dayjs().isAfter(dayjs(props.max, props.format))) {
+  }
+  else if (dayjs().isAfter(dayjs(props.max, props.format))) {
     showDate.value = currentData.value = dayjs(props.max, props.format);
-  } else {
+  }
+  else {
     showDate.value = currentData.value = dayjs();
   }
-  if (props.simple) handleConfirm();
-};
+  if (props.simple)
+    handleConfirm();
+}
 
-const handleChangeShortcut = (shortcuts: ShortcutsType) => {
+function handleChangeShortcut(shortcuts: ShortcutsType) {
   const date = (
     isFunction(shortcuts.value) ? shortcuts.value() : shortcuts.value
   ) as DatePickerModelValueSingleType;
 
   currentData.value = dayjs(date);
 
-  if (props.simple) handleConfirm();
-};
+  if (props.simple)
+    handleConfirm();
+}
 
-const footerValue = () => {
+function footerValue() {
   return currentData.value
     ? dayjs(currentData.value).format(props.inputFormat)
     : "";
-};
+}
 </script>
 
 <!-- 当datetime模式下 切换为time时，只通过css隐藏date模块，不销毁date模块。 -->
@@ -164,43 +172,43 @@ const footerValue = () => {
 
 <template>
   <div class="layui-laydate">
-    <Shortcuts @change-shortcut="handleChangeShortcut"></Shortcuts>
+    <Shortcuts @change-shortcut="handleChangeShortcut" />
     <Date
       v-if="currentType === 'date' || currentType === 'time'"
       v-show="currentType === 'date'"
-      :modelValue="currentData"
-      :showDate="showDate"
-      :dateType="dateType"
+      :model-value="currentData"
+      :show-date="showDate"
+      :date-type="dateType"
       @pick="handlePickDate"
       @year-month-change="handleDateChangeYearMonth"
       @type-change="(type: 'year' | 'month') => (currentType = type)"
-    ></Date>
+    />
     <Time
       v-if="currentType === 'time'"
-      :modelValue="currentData"
-      :showDate="showDate"
-      :dateType="dateType"
+      :model-value="currentData"
+      :show-date="showDate"
+      :date-type="dateType"
       @pick="handlePickTime"
-    ></Time>
+    />
     <Year
       v-if="currentType === 'year'"
-      :modelValue="currentData"
-      :showDate="showDate"
-      :dateType="dateType"
+      :model-value="currentData"
+      :show-date="showDate"
+      :date-type="dateType"
       @pick="handlePickYear"
-    ></Year>
+    />
     <Month
       v-if="currentType === 'month'"
-      :modelValue="currentData"
-      :showDate="showDate"
-      :dateType="dateType"
+      :model-value="currentData"
+      :show-date="showDate"
+      :date-type="dateType"
       @pick="handlePickMonth"
       @year-change="handleMonthChangeYear"
       @type-change="currentType = 'year'"
-    ></Month>
+    />
     <Footer
-      :showConfirm="showConfirm"
-      :disabledConfirm="!currentData"
+      :show-confirm="showConfirm"
+      :disabled-confirm="!currentData"
       @confirm="handleConfirm(true)"
       @now="handleNow"
     >
@@ -217,7 +225,9 @@ const footerValue = () => {
               : t("datePicker.selectDate")
           }}
         </LayButton>
-        <template v-else>{{ footerValue() }}</template>
+        <template v-else>
+          {{ footerValue() }}
+        </template>
       </slot>
     </Footer>
   </div>

@@ -1,17 +1,15 @@
 <script setup lang="ts">
-import dayjs, { type Dayjs } from "dayjs";
-import { computed, nextTick, ref, inject } from "vue";
-import {
-  DATE_PICKER_CONTEXT,
-  type DatePickerModelValueSingleType,
-  type DatePickerProps,
-} from "../../interface";
+import type { Dayjs } from "dayjs";
+import type { DatePickerModelValueSingleType, DatePickerProps } from "../../interface";
+import dayjs from "dayjs";
+import { computed, inject, ref } from "vue";
 
-import LayDropdown from "../../../dropdown/index.vue";
-import LayInput from "../../../input/index.vue";
-
-import { dayjsToString, checkRangeValue } from "../../util";
 import { isArray, isNumber } from "../../../../utils";
+import LayDropdown from "../../../dropdown/index.vue";
+
+import LayInput from "../../../input/index.vue";
+import { DATE_PICKER_CONTEXT } from "../../interface";
+import { checkRangeValue, dayjsToString } from "../../util";
 
 const props = withDefaults(defineProps<DatePickerProps>(), {});
 const emits = defineEmits([
@@ -41,6 +39,8 @@ const _Placeholder = computed(() => {
     : [props.placeholder, props.placeholder];
 });
 
+const currentInputValue = ref<string | Array<string | null> | null>(null);
+
 const inputValue = computed(() => {
   let _inputValue: string | Array<string>;
 
@@ -49,20 +49,21 @@ const inputValue = computed(() => {
     _inputValue = modelValue.map((data) => {
       return dayjsToString(data, props.format!);
     });
-  } else {
+  }
+  else {
     let value = props.modelValue;
 
     if (
-      ["year", "month"].includes(props.type!) &&
-      isNumber(props.modelValue) &&
-      `${props.modelValue}`.length <= 4
+      ["year", "month"].includes(props.type!)
+      && isNumber(props.modelValue)
+      && `${props.modelValue}`.length <= 4
     ) {
       value += "";
     }
 
     _inputValue = dayjsToString(
       value as DatePickerModelValueSingleType,
-      props.format!
+      props.format!,
     );
   }
 
@@ -71,36 +72,37 @@ const inputValue = computed(() => {
       currentInputValue.value[0] || (_inputValue && _inputValue[0]) || "",
       currentInputValue.value[1] || (_inputValue && _inputValue[1]) || "",
     ];
-  } else if (currentInputValue.value !== null) {
+  }
+  else if (currentInputValue.value !== null) {
     return currentInputValue.value;
   }
 
   return _inputValue;
 });
 
-const currentInputValue = ref<string | Array<string | null> | null>(null);
-
-const handleInput = (value: string) => {
+function handleInput(value: string) {
   currentInputValue.value = value;
-};
+}
 
-const handleStartInput = (value: string) => {
+function handleStartInput(value: string) {
   if (currentInputValue.value) {
     currentInputValue.value = [value, currentInputValue.value[1]];
-  } else {
+  }
+  else {
     currentInputValue.value = [value, null];
   }
-};
+}
 
-const handleEndInput = (value: string) => {
+function handleEndInput(value: string) {
   if (currentInputValue.value) {
     currentInputValue.value = [currentInputValue.value[0], value];
-  } else {
+  }
+  else {
     currentInputValue.value = [null, value];
   }
-};
+}
 
-const checkIsDisabled = (date: Dayjs) => {
+function checkIsDisabled(date: Dayjs) {
   if (props.disabledDate) {
     return props.disabledDate(date.toDate());
   }
@@ -113,31 +115,32 @@ const checkIsDisabled = (date: Dayjs) => {
     return true;
   }
   return false;
-};
+}
 
-const handleChange = () => {
+function handleChange() {
   if (currentInputValue.value) {
     const checkDate = dayjs(inputValue.value as string, props.format);
 
     if (checkDate.isValid() && !checkIsDisabled(checkDate)) {
-      emits("update:modelValue", formatOutPutValue(checkDate)); //checkDate.format(props.format)
+      emits("update:modelValue", formatOutPutValue(checkDate)); // checkDate.format(props.format)
       currentInputValue.value = null;
     }
-  } else {
+  }
+  else {
     emits("update:modelValue", "");
     currentInputValue.value = null;
   }
-};
+}
 
-const handleStartChange = () => {
+function handleStartChange() {
   const date = dayjs(
     currentInputValue.value && currentInputValue.value[0],
-    props.format
+    props.format,
   );
 
   if (
-    date.isValid() &&
-    (inputValue.value?.[1] ? date.isBefore(inputValue.value?.[1]) : true)
+    date.isValid()
+    && (inputValue.value?.[1] ? date.isBefore(inputValue.value?.[1]) : true)
   ) {
     currentInputValue.value = [
       date.format(props.format),
@@ -150,24 +153,24 @@ const handleStartChange = () => {
     ];
 
     if (
-      checkRangeValue(modelValue) &&
-      modelValue.every((date) => !checkIsDisabled(date))
+      checkRangeValue(modelValue)
+      && modelValue.every(date => !checkIsDisabled(date))
     ) {
       emits("update:modelValue", formatOutPutValue(modelValue));
       currentInputValue.value = null;
     }
   }
-};
+}
 
-const handleEndChange = () => {
+function handleEndChange() {
   const date = dayjs(
     currentInputValue.value && currentInputValue.value[1],
-    props.format
+    props.format,
   );
 
   if (
-    date.isValid() &&
-    (inputValue.value?.[0] ? date.isAfter(inputValue.value?.[0]) : true)
+    date.isValid()
+    && (inputValue.value?.[0] ? date.isAfter(inputValue.value?.[0]) : true)
   ) {
     currentInputValue.value = [
       inputValue.value?.[0] || null,
@@ -180,22 +183,24 @@ const handleEndChange = () => {
     ];
 
     if (
-      checkRangeValue(modelValue) &&
-      modelValue.every((date) => !checkIsDisabled(date))
+      checkRangeValue(modelValue)
+      && modelValue.every(date => !checkIsDisabled(date))
     ) {
       emits("update:modelValue", formatOutPutValue(modelValue));
       currentInputValue.value = null;
     }
   }
-};
+}
 
-const handleClear = () => {
+function handleClear() {
   currentInputValue.value = null;
   emits("update:modelValue", props.range ? [] : "");
   emits("clear");
-};
+}
 
-const handleBlur = (e: FocusEvent) => {
+const isFocus = ref(false);
+
+function handleBlur(e: FocusEvent) {
   isFocus.value = false;
   setTimeout(() => {
     if (!isFocus.value) {
@@ -203,16 +208,14 @@ const handleBlur = (e: FocusEvent) => {
       emits("blur", e);
     }
   }, 0);
-};
+}
 
-const isFocus = ref(false);
-
-const handleFocus = (e: FocusEvent) => {
+function handleFocus(e: FocusEvent) {
   isFocus.value = true;
   emits("focus", e);
-};
+}
 
-const formatOutPutValue = (dates: Dayjs | Array<Dayjs>) => {
+function formatOutPutValue(dates: Dayjs | Array<Dayjs>) {
   if (isArray(dates)) {
     const [startDate, endDate] = dates;
 
@@ -220,12 +223,16 @@ const formatOutPutValue = (dates: Dayjs | Array<Dayjs>) => {
       return [startDate, endDate].map((date: Dayjs) => {
         return date.format(DatePickerContext.format);
       });
-    } else return [];
-  } else {
+    }
+    else {
+      return [];
+    }
+  }
+  else {
     // 兼容 timestamp属性
     if (["date", "datetime"].includes(props.type!) && props.timestamp) {
-      const unix =
-        props.type === "date"
+      const unix
+        = props.type === "date"
           ? dates.startOf("day").valueOf()
           : dates.valueOf();
 
@@ -234,7 +241,7 @@ const formatOutPutValue = (dates: Dayjs | Array<Dayjs>) => {
 
     return dates.format(DatePickerContext.format);
   }
-};
+}
 
 function onPick(dates: Dayjs | Array<Dayjs>) {
   const value = formatOutPutValue(dates);
@@ -247,68 +254,65 @@ function onPick(dates: Dayjs | Array<Dayjs>) {
 
 <template>
   <div :class="classes" :size="size">
-    <lay-dropdown
+    <LayDropdown
       ref="dropdownRef"
       :disabled="disabled"
-      :autoFitMinWidth="false"
+      :auto-fit-min-width="false"
       :click-to-close="false"
-      :contentClass="contentClass"
-      :contentStyle="contentStyle"
+      :content-class="contentClass"
+      :content-style="contentStyle"
     >
-      <lay-input
+      <LayInput
+        v-if="!range"
         :name="name"
         :readonly="readonly"
         :placeholder="_Placeholder[0]"
         :prefix-icon="prefixIcon"
         :suffix-icon="suffixIcon"
         :disabled="disabled"
-        :modelValue="inputValue"
-        v-if="!range"
+        :model-value="inputValue"
+        :allow-clear="!disabled && allowClear"
+        :size="size"
         @input="handleInput"
         @change="handleChange"
         @blur="handleBlur"
         @focus="handleFocus"
-        :allow-clear="!disabled && allowClear"
-        :size="size"
         @clear="handleClear"
-      >
-      </lay-input>
-      <div class="laydate-range-inputs" v-else>
-        <lay-input
+      />
+      <div v-else class="laydate-range-inputs">
+        <LayInput
           :readonly="readonly"
           :name="name"
-          :modelValue="inputValue && inputValue[0]"
+          :model-value="inputValue && inputValue[0]"
           :placeholder="_Placeholder[0]"
           :disabled="disabled"
+          class="start-input"
+          :size="size"
           @input="handleStartInput"
           @change="handleStartChange"
           @blur="handleBlur"
           @focus="handleFocus"
-          class="start-input"
-          :size="size"
-        >
-        </lay-input>
+        />
         <span class="range-separator">{{ rangeSeparator }}</span>
-        <lay-input
+        <LayInput
           :readonly="readonly"
           :name="name"
           :allow-clear="!disabled && allowClear"
           :placeholder="_Placeholder[1]"
-          :modelValue="inputValue && inputValue[1]"
+          :model-value="inputValue && inputValue[1]"
           :disabled="disabled"
+          class="end-input"
+          :size="size"
           @input="handleEndInput"
           @change="handleEndChange"
           @blur="handleBlur"
           @focus="handleFocus"
-          class="end-input"
-          :size="size"
           @clear="handleClear"
-        >
-        </lay-input>
+        />
       </div>
       <template #content>
-        <slot :onPick="onPick"></slot>
+        <slot :on-pick="onPick" />
       </template>
-    </lay-dropdown>
+    </LayDropdown>
   </div>
 </template>
