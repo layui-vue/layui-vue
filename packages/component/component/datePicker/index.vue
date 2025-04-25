@@ -35,7 +35,7 @@ const props = withDefaults(defineProps<DatePickerProps>(), {
   defaultTime: null,
   yearPage: 15,
   // yearStep: 1,
-  // static: false,
+  static: false,
 });
 
 dayjs.extend(customParseFormat);

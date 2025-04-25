@@ -262,4 +262,45 @@ describe("LayDatePicker date type", () => {
       }
     });
   });
+
+  test("static model > modelValue", async () => {
+    const wrapper = mount(LayDatePicker, {
+      props: {
+        modelValue: "2025/11/12 10:00:00",
+        static: true
+      },
+    });
+
+    await nextTick()
+
+    const component = wrapper.findComponent(LayDatePicker);
+    const DateInstance = wrapper.findComponent(DateComponent);
+
+    const [YearSpan, MonthSpan] = DateInstance.findAll(
+      ".layui-laydate-header .laydate-set-ym span"
+    );
+
+    expect((component.props() as any).modelValue).toBe("2025/11/12 10:00:00");
+
+    expect(YearSpan.text()).toContain("2025");
+    expect(MonthSpan.text()).toContain("11");
+
+    const dateCurrent = DateInstance.find(".layui-laydate-content .layui-this");
+
+    expect(dateCurrent.exists()).toBeTruthy();
+    expect(dateCurrent.text()).toBe("12");
+
+    await YearSpan.trigger("click");
+    await sleep();
+
+    const YearInstance = wrapper.findComponent(Year);
+
+    expect((YearInstance.vm as any).currentYear).toBe(2025);
+
+    const YearCurrent = YearInstance.find(".layui-laydate-content .layui-this");
+
+    expect(YearCurrent.exists()).toBeTruthy();
+    expect(YearCurrent.text()).toBe("2025");
+  });
+
 });

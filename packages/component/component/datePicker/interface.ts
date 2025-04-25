@@ -1,6 +1,7 @@
+import type { DropdownTeleportProps } from "@layui/component/component/dropdown/interface";
+import type { CommonClass, CommonSize } from "@layui/component/types/common";
 import type { ConfigType, Dayjs } from "dayjs";
 import type { Component, InjectionKey, StyleValue } from "vue";
-import type { CommonClass, CommonSize } from "../../types/common";
 
 export type DatePickerType =
   | "date"
@@ -60,11 +61,12 @@ export interface DatePickerProps {
    * @version 2.19.0
    */
   shortcuts?: Array<Shortcuts>;
-  // /**
-  //  * 静态面板
-  //  * @version 2.19.0
-  //  */
-  // static?: boolean;
+  /**
+   * 静态面板
+   * @version 2.22.1
+   */
+  static?: boolean;
+  teleportProps?: DropdownTeleportProps;
 }
 
 export interface RequiredDatePickerProps extends DatePickerProps {
