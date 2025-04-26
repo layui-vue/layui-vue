@@ -798,4 +798,29 @@ describe("LayTable", () => {
     expect(thS[0].text()).toBe('titleSlot1')
     expect(thS[1].text()).toBe('titleSlot2')
   });
+
+  test("dataSource为空，表头checkbox状态应为空", async () => {
+    const columns = [
+      { type: 'checkbox', title: 'title', key: 'id'},
+    ];
+
+    const dataSource = ref([]);
+
+    const wrapper = mount({
+      setup() {
+        return () => (
+          <LayTable
+            columns={columns}
+            dataSource={dataSource.value}
+          ></LayTable>
+        );
+      },
+    });
+
+    await nextTick()
+
+    const checkboxComponent = wrapper.findComponent(".layui-table-header .layui-table-header-wrapper tr th .layui-checkbox");
+
+    expect((checkboxComponent as any).vm.modelValue).toBeFalsy();
+  });
 });
