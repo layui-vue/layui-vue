@@ -67,10 +67,10 @@ export function useTableSelected(props: RequiredTableProps, emit: TableEmit) {
   watch(
     () => [tableMSelectedKeys, allKeys.value],
     ([tableMultipleSelectedKeysValue, allKeysValue]) => {
-      allMSelected.value = allKeysValue.every(key =>
+      allMSelected.value = allKeysValue.length > 0 && allKeysValue.every(key =>
         tableMultipleSelectedKeysValue.includes(key),
       );
-      someMSelected.value = allKeysValue.some(key =>
+      someMSelected.value = allKeysValue.length > 0 && allKeysValue.some(key =>
         tableMultipleSelectedKeysValue.includes(key),
       );
 
