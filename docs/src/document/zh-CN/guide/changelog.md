@@ -15,6 +15,19 @@
   <lay-timeline>
     <lay-timeline-item title="2.22.x">
       <ul>
+        <a name="2-22-1"></a>
+        <li>
+          <h3>2.22.1 <span class="layui-badge-rim">2025-04-26</span></h3>
+          <ul>
+              <li>[新增] datePicker 组件 static(静态面板)模式。<a href="https://gitee.com/layui-vue/layui-vue/pulls/479">详情</a></li>
+              <li>[新增] table 组件 columns.titleSlot支持 function 类型渲染方式。<a href="https://gitee.com/layui-vue/layui-vue/pulls/476">详情</a></li>
+              <li>[修复] table 组件 dataSource为空，表头checkbox状态应为空。<a href="https://gitee.com/layui-vue/layui-vue/pulls/475">详情</a></li>
+              <li>[修复] table 组件 columns.titleSlot失效。<a href="https://gitee.com/layui-vue/layui-vue/pulls/476">详情</a></li>
+              <li>[修复] table 组件 fixed column异常显示resize dom。<a href="https://gitee.com/layui-vue/layui-vue/pulls/478">详情</a></li>
+          </ul>
+        </li>
+      </ul>
+      <ul>
         <a name="2-22-0"></a >
         <li>
           <h3>2.22.0 <span class="layui-badge-rim">2025-4-11</span></h3>
