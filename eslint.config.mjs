@@ -26,6 +26,7 @@ export default antfu(
 
     rules: {
       "ts/no-unsafe-function-type": "off",
+      "ts/prefer-literal-enum-member": "off",
     },
   },
 );

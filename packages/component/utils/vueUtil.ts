@@ -22,23 +22,17 @@ export enum ShapeFlags {
   COMPONENT_KEPT_ALIVE = 1 << 9,
 }
 
-export const isElement = (vn: VNode) => {
+export function isElement(vn: VNode) {
   return Boolean(vn && vn.shapeFlag & ShapeFlags.ELEMENT);
-};
+}
 
-export const isComponent = (
-  vn: VNode,
-  type?: VNodeTypes
-): type is Component => {
+export function isComponent(vn: VNode, type?: VNodeTypes): type is Component {
   return Boolean(vn && vn.shapeFlag & ShapeFlags.COMPONENT);
-};
+}
 
-export const isArrayChildren = (
-  vn: VNode,
-  children: VNode["children"]
-): children is VNode[] => {
+export function isArrayChildren(vn: VNode, children: VNode["children"]): children is VNode[] {
   return Boolean(vn && vn.shapeFlag & ShapeFlags.ARRAY_CHILDREN);
-};
+}
 
 /**
  * 同时支持驼峰命名和破折号命名的插槽，示例：back-icon 和 backIcon
@@ -51,8 +45,8 @@ export function convertSlotName(vm: ComponentInternalInstance, name: string) {
   return vm.slots[camelCaseName]
     ? camelCaseName
     : vm.slots[kebabCaseName]
-    ? kebabCaseName
-    : name;
+      ? kebabCaseName
+      : name;
 }
 
 export function kebabCase(key: string) {
@@ -60,28 +54,29 @@ export function kebabCase(key: string) {
   return result.split(" ").join("-").toLowerCase();
 }
 
-export const flattedVNode = (children: VNode[]) => {
+export function flattedVNode(children: VNode[]) {
   const vNodes = isArray(children) ? children : [children];
   const result: VNode[] = [];
 
   vNodes.forEach((vNode) => {
     if (isArrayChildren(vNode, vNode.children)) {
       result.push(...flattedVNode(vNode.children));
-    } else {
+    }
+    else {
       result.push(vNode);
     }
   });
 
   return result;
-};
+}
 
 /**
  * 将props对象的key从kebab-case转换为camelCase
  * @param props props集合
  */
-export const normalizeProps = <T extends Record<string, any>>(props: T): T => {
+export function normalizeProps<T extends Record<string, any>>(props: T): T {
   return Object.keys(props).reduce((pre, next) => {
     pre[camelize(next) as keyof T] = props[next];
     return pre;
   }, {} as T);
-};
+}
