@@ -3,7 +3,7 @@ import type { TableToolBarType } from "../components/types";
 import type { TableDefaultToolbar } from "../typing";
 
 import { useI18n } from "@layui/component/language";
-import { isArray, isValueArray } from "@layui/component/utils";
+import { isArray, isNumber, isValueArray } from "@layui/component/utils";
 import { computed, inject } from "vue";
 
 import { LAY_TABLE_CONTEXT } from "../constant";
@@ -60,7 +60,7 @@ export function useToolBar(props: TableToolBarType) {
           if (!tableColumn.ignoreExport) {
             // 如果该列是特殊列，并且类型为 number 时，特殊处理
             if (tableColumn.type && tableColumn.type === "number") {
-              tableStr += `<td>${rowIndex + 1}</td>`;
+              tableStr += `<td ss:Type="Number">${rowIndex + 1}</td>`;
             }
             else {
               // 如果不是特殊列，进行字段匹配处理
@@ -84,9 +84,10 @@ export function useToolBar(props: TableToolBarType) {
                 // 如果 rowspan 和 colspan 是 0 说明该列作为合并列的辅助列。
                 // 则不再进行结构拼接。
                 if (rowspan !== 0 && colspan !== 0) {
-                  tableStr += `<td colspan=${colspan} rowspan=${rowspan} x:str>${
-                    columnData ? columnData[tableColumn.key] : ""
-                  }</td>`;
+                  const text = columnData ? columnData[tableColumn.key] : "";
+                  const xType = isNumber(text) ? "ss:Type='Number'" : "x:str";
+
+                  tableStr += `<td colspan=${colspan} rowspan=${rowspan} ${xType}>${text}</td>`;
                 }
               }
             }
