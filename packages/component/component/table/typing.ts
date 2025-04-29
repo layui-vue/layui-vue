@@ -66,9 +66,8 @@ export const tableEmits = [
 
 export type TableEmit = (event: string, ...args: any[]) => void;
 
-export interface TableColumn {
+interface TableBaseColumn {
   title: string;
-  key: string;
   customSlot?: Render;
   width?: string;
   minWidth?: string;
@@ -84,7 +83,6 @@ export interface TableColumn {
    */
   ellipsisTooltipProps?: Record<string, any>;
   fixed?: "left" | "right";
-  type?: string;
   children?: TableColumn[];
   rowspan?: number;
   resize?: boolean;
@@ -96,6 +94,10 @@ export interface TableColumn {
     dataSource: TableProps["dataSource"]
   ) => void;
 }
+
+export type TableColumn =
+  (TableBaseColumn & { type: undefined; key: string }) |
+  (TableBaseColumn & { type: string; key?: string });
 
 export type FixedDirectionType =
   | "_isLastFixedRightColumn"

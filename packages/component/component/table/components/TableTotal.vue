@@ -39,7 +39,7 @@ function renderTotalRowCell(column: TableColumn) {
 
 function totalRowMethod(column: TableColumn, dataSource: any[]) {
   let precision = 0;
-  const values = dataSource.map(item => Number(item[column.key]));
+  const values = dataSource.map(item => Number(item[column.key as string]));
 
   values.forEach((value) => {
     const decimal = `${value}`.split(".")[1];
