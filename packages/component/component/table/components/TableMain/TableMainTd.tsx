@@ -211,7 +211,7 @@ export default defineComponent({
             }
             onDblclick={
               isValidType.value
-                ? e => tableEmits("cell-double", data[column.key], e)
+                ? e => tableEmits("cell-double", column.key ? data[column.key] : undefined, e)
                 : undefined
             }
           >
