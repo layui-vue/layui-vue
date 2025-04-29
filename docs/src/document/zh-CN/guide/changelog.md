@@ -15,6 +15,16 @@
   <lay-timeline>
     <lay-timeline-item title="2.22.x">
       <ul>
+        <a name="2-22-2"></a>
+        <li>
+          <h3>2.22.2 <span class="layui-badge-rim">2025-04-29</span></h3>
+          <ul>
+              <li>[修复] table 组件 columns.customSlot获取不到 rowIndex/columnIndex 参数。<a href="https://gitee.com/layui-vue/layui-vue/commit/7e63441051fb056596fa7277b795e7358228f98d">详情</a></li>
+              <li>[修复] table 组件 TableColumn(types)中 type 存在时 key 仍为必填的问题。<a href="https://gitee.com/layui-vue/layui-vue/pulls/480">详情</a></li>
+          </ul>
+        </li>
+      </ul>
+      <ul>
         <a name="2-22-1"></a>
         <li>
           <h3>2.22.1 <span class="layui-badge-rim">2025-04-26</span></h3>
