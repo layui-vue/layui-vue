@@ -383,7 +383,7 @@ const valueChangeOnSelect=ref(null)
       <lay-badge theme="orange" v-if="displayValue" style="margin-left:10px">{{displayValue}}</lay-badge>
     </div>
   </lay-cascader>
-  <lay-cascader :options="options2" v-model="value" placeholder="动态插槽案例" style="width:250px;margin-left:20px">
+  <lay-cascader :options="options5" v-model="value" placeholder="动态插槽案例" style="width:250px;margin-left:20px">
     <template #Guide>🤨😐😑😶😏😒🙄😬🤥😌</template>
     <template #Components>👋🤚🖐️✋🖖👌🤌🤏🤞🤟</template>
     <template #Resource>📱📲📶📳📴☎📞📟📠🤳</template>
@@ -397,11 +397,11 @@ const displayValue=ref(null)
 const onChange=(evt)=>{
   displayValue.value=evt.display
 }
-const options2 = [
+const options5 = [
 	{
 		value: "Guide",
 		label: "指南",
-        slot:"Guide",
+		slot:"Guide",
 		children: [
 			{
 				value: "shejiyuanze",
@@ -444,7 +444,7 @@ const options2 = [
 	{
 		value: "Components",
 		label: "组件",
-        slot:"Components",
+		slot:"Components",
 		children: [
 			{
 				value: "basic",
@@ -651,7 +651,7 @@ const options2 = [
 	{
 		value: "Resource",
 		label: "资源",
-        slot:"Resource",
+		slot:"Resource",
 		children: [
 			{
 				value: "axure",
