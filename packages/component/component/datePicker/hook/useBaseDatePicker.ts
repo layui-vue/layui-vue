@@ -1,11 +1,11 @@
 import type {
-  DatePickerContextType,
   DatePickerModelValueSingleType,
+  DatePickerRenderComponentProps,
 } from "../interface";
 
 import dayjs from "dayjs";
 
-export function useBaseDatePicker(props: DatePickerContextType) {
+export function useBaseDatePicker(props: DatePickerRenderComponentProps) {
   const getDefaultValue = () => {
     const _defaultValue = dayjs(
       props.defaultValue as DatePickerModelValueSingleType,

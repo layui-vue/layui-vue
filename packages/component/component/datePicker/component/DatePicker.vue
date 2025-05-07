@@ -15,6 +15,7 @@ import LayButton from "../../button/index.vue";
 
 import { useBaseDatePicker } from "../hook/useBaseDatePicker";
 import Date from "./common/Date.vue";
+import DatePickerRender from "./common/DatePickerRender.vue";
 import Footer from "./common/Footer.vue";
 import Month from "./common/Month.vue";
 import Shortcuts from "./common/Shortcuts.vue";
@@ -159,11 +160,11 @@ function handleChangeShortcut(shortcuts: ShortcutsType) {
     handleConfirm();
 }
 
-function footerValue() {
+const footerValue = computed(() => {
   return currentData.value
     ? dayjs(currentData.value).format(props.inputFormat)
     : "";
-}
+});
 </script>
 
 <!-- 当datetime模式下 切换为time时，只通过css隐藏date模块，不销毁date模块。 -->
@@ -212,23 +213,22 @@ function footerValue() {
       @confirm="handleConfirm(true)"
       @now="handleNow"
     >
-      <slot name="footer">
-        <LayButton
-          v-if="dateType === 'datetime'"
-          size="xs"
-          :class="{ 'type-time': currentType === 'time' }"
-          @click="handleToggleTimePanel"
-        >
-          {{
-            currentType === "date"
-              ? t("datePicker.selectTime")
-              : t("datePicker.selectDate")
-          }}
-        </LayButton>
-        <template v-else>
-          {{ footerValue() }}
-        </template>
-      </slot>
+      <LayButton
+        v-if="dateType === 'datetime'"
+        size="xs"
+        :class="{ 'type-time': currentType === 'time' }"
+        @click="handleToggleTimePanel"
+      >
+        {{
+          currentType === "date"
+            ? t("datePicker.selectTime")
+            : t("datePicker.selectDate")
+        }}
+      </LayButton>
+
+      <DatePickerRender v-else render="footer" :current="currentData">
+        {{ footerValue }}
+      </DatePickerRender>
     </Footer>
   </div>
 </template>

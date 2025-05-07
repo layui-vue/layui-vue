@@ -2,12 +2,13 @@
 import type { Dayjs } from "dayjs";
 
 import type { BasePanelProps } from "../interface";
+import LayIcon from "@layui/component/component/icon";
 import dayjs from "dayjs";
-import { computed, inject, ref, watch } from "vue";
 
-import LayIcon from "../../../icon";
+import { computed, inject, ref, watch } from "vue";
 import { DATE_PICKER_CONTEXT } from "../../interface";
 import { getYears } from "../../util";
+import DatePickerRender from "./DatePickerRender.vue";
 
 defineOptions({
   name: "YearPanel",
@@ -83,7 +84,7 @@ function handleChangeShowYear(value: number) {
 </script>
 
 <template>
-  <div class="layui-laydate-main">
+  <div class="layui-laydate-main layui-laydate-main-year">
     <div class="layui-laydate-header">
       <slot name="header" :year-list="yearRange">
         <LayIcon
@@ -119,7 +120,9 @@ function handleChangeShowYear(value: number) {
           @click="handleYearClick(item)"
           @mouseenter="handleYearMouseenter(item)"
         >
-          {{ item }}
+          <DatePickerRender type="year" :unix="dayjs(`${item}`).valueOf()" :dayjs="dayjs(`${item}`)">
+            {{ item }}
+          </DatePickerRender>
         </li>
       </ul>
     </div>

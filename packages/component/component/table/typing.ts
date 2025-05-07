@@ -1,4 +1,4 @@
-import type { Render } from "@layui/component/component/_components/render";
+import type { RenderProps } from "@layui/component/component/_components/render";
 import type { PageProps } from "@layui/component/component/page/interface";
 // import type { TooltipProps } from "@layui/component/component/tooltip/types";
 import type { CommonAlign, Recordable } from "@layui/component/types";
@@ -68,11 +68,11 @@ export type TableEmit = (event: string, ...args: any[]) => void;
 
 interface TableBaseColumn {
   title: string;
-  customSlot?: Render;
+  customSlot?: RenderProps["render"];
   width?: string;
   minWidth?: string;
   sort?: string;
-  titleSlot?: Render;
+  titleSlot?: RenderProps["render"];
   align?: CommonAlign;
   ellipsisTooltip?: boolean;
   ellipsisTooltipTheme?: string;

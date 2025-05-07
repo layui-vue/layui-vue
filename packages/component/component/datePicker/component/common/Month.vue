@@ -1,13 +1,14 @@
 <script lang="ts" setup>
 import type { Dayjs } from "dayjs";
 import type { BasePanelProps } from "../interface";
+import LayIcon from "@layui/component/component/icon";
+import { useI18n } from "@layui/component/language";
+
 import dayjs from "dayjs";
 import { computed, inject, ref, watch } from "vue";
 
-import { useI18n } from "../../../../language";
-import LayIcon from "../../../icon";
-
 import { DATE_PICKER_CONTEXT } from "../../interface";
+import DatePickerRender from "./DatePickerRender.vue";
 
 defineOptions({
   name: "MonthPanel",
@@ -118,7 +119,7 @@ function handleYearChange(val: number) {
 </script>
 
 <template>
-  <div class="layui-laydate-main">
+  <div class="layui-laydate-main layui-laydate-main-month">
     <div class="layui-laydate-header">
       <slot name="header">
         <div v-if="dateType === 'month'" class="laydate-set-ym">
@@ -158,7 +159,9 @@ function handleYearChange(val: number) {
           @click="handleMonthClick(month)"
           @mouseenter="handleMonthMouseenter(month)"
         >
-          {{ item.slice(0, 3) }}
+          <DatePickerRender type="month" :unix="fullMonthDay(month).valueOf()" :dayjs="fullMonthDay(month)">
+            {{ item.slice(0, 3) }}
+          </DatePickerRender>
         </li>
       </ul>
     </div>

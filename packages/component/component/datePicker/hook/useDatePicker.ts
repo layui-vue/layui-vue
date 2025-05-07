@@ -1,8 +1,7 @@
 import type { Dayjs } from "dayjs";
 import type {
-  DatePickerContextType,
   DatePickerModelValueSingleType,
-  // DatePickerProps,
+  DatePickerRenderComponentProps,
   RequiredDatePickerProps,
   TypeMap,
 } from "../interface";
@@ -79,7 +78,7 @@ export function useDatePicker(props: RequiredDatePickerProps) {
     return props.inputFormat ?? typeMap.value.format;
   });
 
-  const renderComponentProps = computed<DatePickerContextType>(() => {
+  const renderComponentProps = computed<DatePickerRenderComponentProps>(() => {
     return {
       ...props,
       modelValue: initDate.value,

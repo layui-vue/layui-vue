@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import type { DatePickerProps as _DatePickerProps } from "./interface";
+import type { DatePickerProps as _DatePickerProps, DatePickerRenderProps } from "./interface";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat.js";
 import isSameOrAfter from "dayjs/plugin/isSameOrAfter.js";
 import isSameOrBefore from "dayjs/plugin/isSameOrBefore.js";
 import objectSupport from "dayjs/plugin/objectSupport.js";
-import { computed, provide } from "vue";
+import { computed, provide, reactive, toRefs } from "vue";
 import InputBlock from "./component/common/InputBlock.vue";
 
 import { useDatePicker } from "./hook/useDatePicker";
@@ -38,6 +38,11 @@ const props = withDefaults(defineProps<DatePickerProps>(), {
   static: false,
 });
 
+const datePickerSlots = defineSlots<{
+  default: (props: DatePickerRenderProps) => any;
+  footer: () => any;
+}>();
+
 dayjs.extend(customParseFormat);
 dayjs.extend(isSameOrBefore);
 dayjs.extend(isSameOrAfter);
@@ -53,17 +58,16 @@ const format = computed<string>(() => {
   return props.inputFormat ?? renderComponentProps.value.inputFormat!;
 });
 
-provide(DATE_PICKER_CONTEXT, datePickerContext);
+provide(DATE_PICKER_CONTEXT, reactive({
+  ...toRefs(datePickerContext),
+  datePickerSlots,
+}));
 </script>
 
 <template>
   <InputBlock v-bind="{ ...props, ...$attrs }" :format="format" :size="size">
     <template #default="{ onPick }">
-      <RenderComponent v-bind="renderComponentProps" @pick="onPick">
-        <template #footer>
-          <slot name="footer" v-bind="{ props }" />
-        </template>
-      </RenderComponent>
+      <RenderComponent v-bind="renderComponentProps" @pick="onPick" />
     </template>
   </InputBlock>
 </template>

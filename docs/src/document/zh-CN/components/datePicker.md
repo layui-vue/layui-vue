@@ -46,6 +46,19 @@ const endTime5 = ref(null);
 const endTime6 = ref(null);
 </script>
 
+<style>
+.layui-date-picker-static .layui-laydate-main-date{
+  width: auto;
+}
+
+.date-cell {
+  width: 44px;
+  height: 40px;
+  display: flex;
+  flex-direction: column;
+}
+</style>
+
 :::
 
 ::: title 范围选择
@@ -553,6 +566,49 @@ const value12 = ref([]);
 
 :::
 
+::: title 自定义内容
+:::
+
+::: demo 通过 `static` 开启静态面板模式
+
+<template>
+  <lay-date-picker static v-model="value13" content-class="custom-date-picker" placeholder="click me" allow-clear>
+    <template #default="{ type, unix, dayjs }">
+      <div v-if="type === 'date'" class="date-cell">
+        {{ `${dayjs.format('D')}` }}
+        <span>{{ dayjs.day() === 0 || dayjs.day() === 6 ? '休息' : '上班' }}</span>
+      </div>
+      <template v-if="type === 'month'">
+        {{ `${dayjs.month() + 1}月` }}
+      </template>
+      <template v-if="type === 'year'">
+        {{ `${dayjs.year() + 1}年` }}
+      </template>
+    </template>
+  </lay-date-picker>
+</template>
+
+<script setup>
+import { ref } from 'vue'
+
+const value13 = ref()
+</script>
+
+<style>
+.layui-date-picker-static .layui-laydate-main-date{
+  width: auto;
+}
+
+.date-cell {
+  width: 44px;
+  height: 40px;
+  display: flex;
+  flex-direction: column;
+}
+</style>
+
+:::
+
 ::: title Date Picker 属性
 :::
 
@@ -605,6 +661,18 @@ const value12 = ref([]);
 
 :::
 
+::: title Date Picker 插槽
+:::
+
+::: table
+
+| 插槽       | 描述              | 参数              | 版本     |
+| ---------- | -----------------| ----------------- | -------- |
+| default    |  默认             | `DatePickerDefaultSlotParams` | `2.22.3` |
+| footer     |  底部            | `DatePickerFooterSlotParams` | `2.22.3` |
+
+:::
+
 ::: title Types
 
 ```ts
@@ -620,6 +688,21 @@ interface Shortcuts {
     | Array<DatePickerModelValueSingleType>
     | (() => DatePickerModelValueSingleType)
     | (() => Array<DatePickerModelValueSingleType>);
+}
+
+interface DatePickerDefaultSlotParams {
+  type: "date" | "month" | "year";
+  unix: number; // 字符戳(毫秒)
+  dayjs: Dayjs; // dayjs
+}
+
+interface DatePickerFooterSlotParams {
+  // 非范围选择选中日期
+  current: Dayjs | null | undefined;
+  // 范围选择 左侧面板选中日期
+  start: Dayjs | null | undefined;
+  // 范围选择 右侧面板选中日期
+  end: Dayjs | null | undefined;
 }
 
 ```

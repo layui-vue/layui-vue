@@ -1,10 +1,11 @@
 <script lang="ts" setup>
 import type { DateContentSingleDateObject } from "../interface";
-import dayjs from "dayjs";
+import { useI18n } from "@layui/component/language";
 
+import dayjs from "dayjs";
 import { computed, inject } from "vue";
-import { useI18n } from "../../../../language";
 import { DATE_PICKER_CONTEXT } from "../../interface";
+import DatePickerRender from "./DatePickerRender.vue";
 
 export interface DateContentProps {
   dateList: Array<DateContentSingleDateObject>;
@@ -115,7 +116,9 @@ function dayItemMouseEnter(item: DateContentSingleDateObject) {
               @click="handleDayClick(item)"
               @mouseenter="dayItemMouseEnter(item)"
             >
-              {{ item.day }}
+              <DatePickerRender type="date" :unix="item.value" :dayjs="dayjs(item.value)">
+                {{ item.day }}
+              </DatePickerRender>
             </td>
           </tr>
         </template>
