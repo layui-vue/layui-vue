@@ -569,7 +569,7 @@ const value12 = ref([]);
 ::: title 自定义内容
 :::
 
-::: demo 通过 `static` 开启静态面板模式
+::: demo 通过 `default` 插槽自定义渲染内容。
 
 <template>
   <lay-date-picker static v-model="value13" content-class="custom-date-picker" placeholder="click me" allow-clear>
