@@ -116,13 +116,13 @@ export interface Shortcuts {
     | (() => Array<DatePickerModelValueSingleType>);
 }
 
-interface DatePickerDefaultSlotParams {
+export interface DatePickerDefaultSlotParams {
   type: "date" | "month" | "year";
   unix: number;
   dayjs: Dayjs;
 }
 
-interface DatePickerFooterSlotParams {
+export interface DatePickerFooterSlotParams {
   current: DatePickerValueNotArray;
   start: DatePickerValueNotArray;
   end: DatePickerValueNotArray;

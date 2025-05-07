@@ -1,5 +1,10 @@
 <script setup lang="ts">
-import type { DatePickerProps as _DatePickerProps, DatePickerRenderProps } from "./interface";
+import type {
+  DatePickerProps as _DatePickerProps,
+  DatePickerDefaultSlotParams,
+  DatePickerFooterSlotParams,
+} from "./interface";
+
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat.js";
 import isSameOrAfter from "dayjs/plugin/isSameOrAfter.js";
@@ -39,8 +44,8 @@ const props = withDefaults(defineProps<DatePickerProps>(), {
 });
 
 const datePickerSlots = defineSlots<{
-  default: (props: DatePickerRenderProps) => any;
-  footer: () => any;
+  default: (props: DatePickerDefaultSlotParams) => any;
+  footer: (props: DatePickerFooterSlotParams) => any;
 }>();
 
 dayjs.extend(customParseFormat);
