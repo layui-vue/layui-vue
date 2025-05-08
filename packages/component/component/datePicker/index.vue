@@ -44,8 +44,8 @@ const props = withDefaults(defineProps<DatePickerProps>(), {
 });
 
 const datePickerSlots = defineSlots<{
-  default: (props: DatePickerDefaultSlotParams) => any;
-  footer: (props: DatePickerFooterSlotParams) => any;
+  default?: (props: DatePickerDefaultSlotParams) => any;
+  footer?: (props: DatePickerFooterSlotParams) => any;
 }>();
 
 dayjs.extend(customParseFormat);

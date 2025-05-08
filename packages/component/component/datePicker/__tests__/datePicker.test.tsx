@@ -303,4 +303,40 @@ describe("LayDatePicker date type", () => {
     expect(YearCurrent.text()).toBe("2025");
   });
 
+  test("default slot for date/month/year types", async () => {
+    const types = ["date", "month", "year"] as const;
+    for (const type of types) {
+      const wrapper = mount(LayDatePicker, {
+        props: {
+          type,
+          modelValue: "2025/11/12",
+          static: true
+        },
+        slots: {
+          default: `<div class="custom-slot">自定义内容</div>`,
+        },
+      });
+      await nextTick();
+
+      expect(wrapper.find(".custom-slot").exists()).toBeTruthy();
+      expect(wrapper.find(".custom-slot").text()).toBe("自定义内容");
+    }
+  });
+
+  test("footer slot", async () => {
+    const wrapper = mount(LayDatePicker, {
+      props: {
+        modelValue: "2025/11/12",
+        static: true
+      },
+      slots: {
+        footer: `<div class="custom-footer">自定义底部</div>`,
+      },
+    });
+    await nextTick();
+    
+    expect(wrapper.find(".custom-footer").exists()).toBeTruthy();
+    expect(wrapper.find(".custom-footer").text()).toBe("自定义底部");
+  });
+
 });
