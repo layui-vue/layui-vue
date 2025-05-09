@@ -1,20 +1,20 @@
 <script lang="ts" setup>
-import "./index.less";
-
-import type { TooltipProps } from "./types";
 import type {
   PopperTrigger as _PopperTrigger,
-  Placement,
   ContentComponentInstance,
+  Placement,
 } from "../popper/index";
 
-import LayPopper from "../popper/popper.vue";
-import { computed, nextTick, onMounted, ref, shallowRef, unref } from "vue";
+import type { TooltipProps } from "./types";
 import {
   useEventListener,
-  useResizeObserver,
   useMutationObserver,
+  useResizeObserver,
 } from "@vueuse/core";
+
+import { computed, nextTick, onMounted, ref, shallowRef, unref } from "vue";
+import LayPopper from "../popper/popper.vue";
+import "./index.less";
 
 export type PopperTrigger = _PopperTrigger;
 
@@ -52,21 +52,23 @@ const popperProps = computed(() => {
   };
 });
 
-const setEllipsis = function () {
+function setEllipsis() {
   if (tooltipRef.value) {
-    let tooltipHtml = tooltipRef.value;
+    const tooltipHtml = tooltipRef.value;
     if (
-      tooltipHtml.scrollWidth > tooltipHtml.clientWidth ||
-      tooltipHtml.scrollHeight > tooltipHtml.clientHeight
+      tooltipHtml.scrollWidth > tooltipHtml.clientWidth
+      || tooltipHtml.scrollHeight > tooltipHtml.clientHeight
     ) {
       disabledPopper.value = false;
-    } else {
+    }
+    else {
       disabledPopper.value = true;
     }
-  } else {
+  }
+  else {
     disabledPopper.value = false;
   }
-};
+}
 
 onMounted(() => {
   if (props.isAutoShow) {
@@ -89,34 +91,35 @@ onMounted(() => {
   });
 });
 
-const show = function () {
+function show() {
   nextTick(() => {
     popperRef.value!.show();
   });
-};
+}
 
-const doHidden = function () {
+function doHidden() {
   nextTick(() => {
     popperRef.value!.hidden();
   });
-};
+}
 
-const update = function () {
+function update() {
   nextTick(() => {
     popperRef.value!.update();
   });
-};
+}
 
 defineExpose({ show, hide: doHidden, update });
 </script>
+
 <template>
-  <lay-popper ref="popperRef" v-bind="popperProps">
-    <div ref="tooltipRef" v-if="isAutoShow" class="lay-tooltip-content">
+  <LayPopper ref="popperRef" v-bind="popperProps">
+    <div v-if="isAutoShow" ref="tooltipRef" class="lay-tooltip-content">
       <span>
-        <slot></slot>
+        <slot />
       </span>
     </div>
-    <slot v-else></slot>
+    <slot v-else />
     <template #content>
       <slot name="content">
         <span v-if="content">
@@ -124,5 +127,5 @@ defineExpose({ show, hide: doHidden, update });
         </span>
       </slot>
     </template>
-  </lay-popper>
+  </LayPopper>
 </template>

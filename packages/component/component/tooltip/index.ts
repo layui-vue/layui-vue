@@ -1,4 +1,4 @@
-import { withInstall } from "../../utils";
+import { withInstall } from "@layui/component/utils";
 import Component from "./index.vue";
 
 const component = withInstall(Component);
