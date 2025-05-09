@@ -17,7 +17,7 @@ export function usePopper(
   options: UsePopperOptions = {},
 ) {
   const customMiddleware = computed(() => unref(options.middleware));
-  const customStrategy = computed(() => unref(options.strategy) || "absolute");
+  const customStrategy = computed(() => unref(options.strategy) || "fixed");
   const customPlacement = computed(() => unref(options.placement) || "bottom");
 
   const referenceElement = computed(() => unRefRealElement(reference.value));
