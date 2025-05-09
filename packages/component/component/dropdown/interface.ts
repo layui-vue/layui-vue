@@ -1,12 +1,12 @@
+import type { Placement, PopperTrigger } from "@layui/component/component/popper/index";
 import type { InjectionKey, StyleValue, TeleportProps } from "vue";
-import type { PopperTrigger, Placement } from "../popper/index";
 
-export type DropdownContext = {
+export interface DropdownContext {
   hide?: () => void;
-};
+}
 
-export const DROPDOWN_INJECTION_KEY: InjectionKey<DropdownContext> =
-  Symbol("LayDropdown");
+export const DROPDOWN_INJECTION_KEY: InjectionKey<DropdownContext>
+  = Symbol("LayDropdown");
 
 export type DropdownTeleportProps = Partial<TeleportProps>;
 
@@ -31,10 +31,10 @@ export interface DropdownProps {
   teleportProps?: DropdownTeleportProps;
 }
 
-export type DropdownEmits = {
-  show: [value: boolean];
-  hide: [value: boolean];
-};
+export interface DropdownEmits {
+  (e: "show", value: boolean): void;
+  (e: "hide", value: boolean): void;
+}
 
 export interface pointType {
   x: number;

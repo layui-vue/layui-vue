@@ -1,6 +1,6 @@
 import type { pointType } from "./interface";
 
-export const pointMiddleware = (point: pointType) => {
+export function pointMiddleware(point: pointType) {
   return {
     name: "pointMiddleware",
     fn: () => {
@@ -10,4 +10,4 @@ export const pointMiddleware = (point: pointType) => {
       };
     },
   };
-};
+}

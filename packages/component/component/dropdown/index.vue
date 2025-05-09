@@ -1,45 +1,42 @@
 <script setup lang="ts">
-import "./index.less";
 import type { CSSProperties, TeleportProps } from "vue";
 import type {
+  ContentComponentInstance,
   ContentProps,
   TriggerProps,
-  ContentComponentInstance,
 } from "../popper/types";
+import type { Middlewares } from "../popper/usePopper/index";
 import type {
   DropdownProps as _DropdownProps,
+  DropdownContext,
   DropdownEmits,
   pointType,
-  DropdownContext,
 } from "./interface";
-import type { Middlewares } from "../popper/usePopper/index";
+import { useResizeObserver } from "@vueuse/core";
 
 import {
-  ref,
-  provide,
   computed,
-  nextTick,
-  watch,
-  reactive,
   inject,
   onUnmounted,
+  provide,
+  reactive,
+  ref,
+  watch,
 } from "vue";
-import { useResizeObserver } from "@vueuse/core";
-import Trigger from "../popper/component/trigger.vue";
-import Content from "../popper/component/content.vue";
-import { POPPER_INJECTION_KEY } from "../popper/utils";
-import { flip, hide, offset, shift } from "../popper/usePopper/index";
-import { DROPDOWN_INJECTION_KEY } from "./interface";
-
-import useDelayTrigger from "../popper/hook/useDelayTrigger";
 import { isArray } from "../../utils";
+import Content from "../popper/component/content.vue";
+import Trigger from "../popper/component/trigger.vue";
+import useDelayTrigger from "../popper/hook/useDelayTrigger";
+import { flip, hide, offset, shift } from "../popper/usePopper/index";
+import { POPPER_INJECTION_KEY } from "../popper/utils";
+
+import { DROPDOWN_INJECTION_KEY } from "./interface";
 import { pointMiddleware } from "./utils";
+import "./index.less";
 
 defineOptions({
   name: "LayDropdown",
 });
-
-export type DropdownProps = _DropdownProps;
 
 const props = withDefaults(defineProps<DropdownProps>(), {
   visible: false,
@@ -59,6 +56,8 @@ const props = withDefaults(defineProps<DropdownProps>(), {
 
 const emits = defineEmits<DropdownEmits>();
 
+export type DropdownProps = _DropdownProps;
+
 const _trigger = computed(() => {
   return isArray(props.trigger) ? props.trigger : [props.trigger];
 });
@@ -74,24 +73,54 @@ const open = ref(props.visible);
 
 const TriggerRef = ref<HTMLElement | null>(null);
 
+const showAfter = computed(() => {
+  return _trigger.value.includes("hover")
+    ? props.mouseEnterDelay
+    : _trigger.value.includes("focus")
+      ? props.focusDelay
+      : 0;
+});
+
+const hideAfter = computed(() => {
+  return _trigger.value.includes("hover")
+    ? props.mouseLeaveDelay
+    : _trigger.value.includes("focus")
+      ? props.focusDelay
+      : 0;
+});
+
+const { onShow, onHidden } = useDelayTrigger({
+  showAfter: showAfter.value,
+  hideAfter: hideAfter.value,
+  show,
+  hidden,
+});
+
 const customEvents = computed(() => {
   return {
     click: (e: Event) => {
-      if (!_trigger.value.includes("click")) return;
-      if (open.value && !props.clickToClose) return;
-      if (props.alignPoint) setPoint(e as PointerEvent);
+      if (!_trigger.value.includes("click"))
+        return;
+      if (open.value && !props.clickToClose)
+        return;
+      if (props.alignPoint)
+        setPoint(e as PointerEvent);
       toggle();
     },
     contextmenu: (e: Event) => {
-      if (!_trigger.value.includes("contextMenu")) return;
-      if (open.value && !props.clickToClose) return;
-      if (props.alignPoint) setPoint(e as PointerEvent);
+      if (!_trigger.value.includes("contextMenu"))
+        return;
+      if (open.value && !props.clickToClose)
+        return;
+      if (props.alignPoint)
+        setPoint(e as PointerEvent);
 
       e.preventDefault();
       toggle();
     },
     focusout: () => {
-      if (!_trigger.value.includes("focus") || !props.blurToClose) return;
+      if (!_trigger.value.includes("focus") || !props.blurToClose)
+        return;
       onHidden();
     },
   };
@@ -102,10 +131,10 @@ const point = reactive<pointType>({
   y: 0,
 });
 
-const setPoint = (e: PointerEvent) => {
+function setPoint(e: PointerEvent) {
   point.x = e.pageX;
   point.y = e.pageY;
-};
+}
 
 const triggerProps = computed<TriggerProps>(() => {
   return {
@@ -176,48 +205,27 @@ const contentProps = computed<ContentProps>(() => {
   };
 });
 
-const show = () => {
-  if (props.disabled) return;
+function show() {
+  if (props.disabled)
+    return;
   open.value = true;
-};
+}
 
-const hidden = () => {
+function hidden() {
   open.value = false;
-};
+}
 
 watch(
   () => open.value,
   (newVal) => {
     if (newVal) {
       emits("show", newVal);
-    } else {
+    }
+    else {
       emits("hide", newVal);
     }
-  }
+  },
 );
-
-const showAfter = computed(() => {
-  return _trigger.value.includes("hover")
-    ? props.mouseEnterDelay
-    : _trigger.value.includes("focus")
-    ? props.focusDelay
-    : 0;
-});
-
-const hideAfter = computed(() => {
-  return _trigger.value.includes("hover")
-    ? props.mouseLeaveDelay
-    : _trigger.value.includes("focus")
-    ? props.focusDelay
-    : 0;
-});
-
-const { onShow, onHidden } = useDelayTrigger({
-  showAfter: showAfter.value,
-  hideAfter: hideAfter.value,
-  show,
-  hidden,
-});
 
 provide(POPPER_INJECTION_KEY, {
   TriggerRef,
@@ -227,34 +235,29 @@ provide(POPPER_INJECTION_KEY, {
 
 const ContentRef = ref<ContentComponentInstance>();
 
-const exposeShow = function () {
-  // nextTick(() => {
+function exposeShow() {
   onShow();
-  // });
-};
+}
 
-const exposeHide = function () {
-  // nextTick(() => {
+function exposeHide() {
   onHidden();
-  // });
-};
+}
 
-const toggle = function () {
-  // nextTick(() => {
+function toggle() {
   if (open.value) {
     onHidden();
-  } else {
+  }
+  else {
     onShow();
   }
-  // });
-};
+}
 
 const dropdownContext = inject<DropdownContext>(DROPDOWN_INJECTION_KEY, {});
 
-const provideHide = () => {
+function provideHide() {
   hidden();
   dropdownContext?.hide && dropdownContext?.hide();
-};
+}
 
 provide(DROPDOWN_INJECTION_KEY, {
   hide: provideHide,
@@ -265,9 +268,9 @@ defineExpose({ show: exposeShow, hide: exposeHide, toggle });
 
 <template>
   <Trigger v-bind="triggerProps">
-    <slot></slot>
+    <slot />
   </Trigger>
   <Content v-bind="contentProps" ref="ContentRef">
-    <slot name="content"></slot>
+    <slot name="content" />
   </Content>
 </template>
