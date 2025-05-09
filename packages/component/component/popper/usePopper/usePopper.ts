@@ -1,20 +1,20 @@
 import type {
   FloatingElement,
-  ReferenceElement,
   MiddlewareData,
+  ReferenceElement,
 } from "@floating-ui/dom";
 import type { Ref } from "vue";
 
 import type { UsePopperOptions } from "./types";
 
-import { computePosition, autoUpdate } from "@floating-ui/dom";
-import { computed, watch, ref, unref, shallowRef } from "vue";
+import { autoUpdate, computePosition } from "@floating-ui/dom";
+import { computed, ref, shallowRef, unref, watch } from "vue";
 import { unRefRealElement } from "./utils";
 
 export function usePopper(
   reference: Ref<ReferenceElement>, // 参照元素
   popper: Ref<FloatingElement>, // 定位元素
-  options: UsePopperOptions = {}
+  options: UsePopperOptions = {},
 ) {
   const customMiddleware = computed(() => unref(options.middleware));
   const customStrategy = computed(() => unref(options.strategy) || "absolute");
@@ -77,7 +77,7 @@ export function usePopper(
       cleanup.value = autoUpdate(
         referenceElement.value,
         popperElement.value,
-        update
+        update,
       );
     }
   };

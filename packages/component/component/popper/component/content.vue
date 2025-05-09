@@ -1,25 +1,26 @@
 <script setup lang="ts">
-import type { Ref, StyleValue, CSSProperties } from "vue";
-import { type ContentProps, CONTENT_INJECTION_KEY } from "../types";
+import type { CSSProperties, Ref, StyleValue } from "vue";
+import type { ContentProps } from "../types";
 
-import {
-  ref,
-  computed,
-  provide,
-  inject,
-  watch,
-  useSlots,
-  onMounted,
-  onBeforeUnmount,
-} from "vue";
 import { onClickOutside } from "@vueuse/core";
-import { usePopper, flip, hide, offset, shift } from "../usePopper/index";
+import {
+  computed,
+  inject,
+  onBeforeUnmount,
+  onMounted,
+  provide,
+  ref,
+  useSlots,
+  watch,
+} from "vue";
+import { CONTENT_INJECTION_KEY } from "../types";
+import { flip, hide, offset, shift, usePopper } from "../usePopper/index";
 
 import {
-  POPPER_INJECTION_KEY,
   arrowMiddleware,
-  getArrowPlacement,
   getArrowOffer,
+  getArrowPlacement,
+  POPPER_INJECTION_KEY,
 } from "../utils";
 
 const props = withDefaults(defineProps<ContentProps>(), {});
@@ -32,7 +33,7 @@ const currentContents: Array<Ref<HTMLElement>> = [];
 const { TriggerRef, onShow, onHidden } = inject(POPPER_INJECTION_KEY)!;
 const { allContents: parentAllContents = [] } = inject(
   CONTENT_INJECTION_KEY,
-  {}
+  {},
 );
 
 const isExist = ref(props.modelValue);
@@ -53,16 +54,8 @@ watch(
       }
       innerVisible.value = props.modelValue || _visible.value;
     }
-  }
+  },
 );
-
-const classes = computed(() => {
-  return ["layui-popper", "layui-anim", props.popperClass];
-});
-
-const stylees = computed(() => {
-  return [_popperStyle.value as CSSProperties, props.popperStyle] as StyleValue;
-});
 
 const teleportProps = computed(() => {
   return props.teleportProps!;
@@ -90,6 +83,14 @@ const {
   ],
 });
 
+const classes = computed(() => {
+  return ["layui-popper", "layui-anim", props.popperClass];
+});
+
+const stylees = computed(() => {
+  return [_popperStyle.value as CSSProperties, props.popperStyle] as StyleValue;
+});
+
 watch(
   () => middlewareData.value.hide,
   (data) => {
@@ -98,28 +99,29 @@ watch(
         display: data!.referenceHidden
           ? "none"
           : !innerVisible.value
-          ? "none"
-          : "block",
+              ? "none"
+              : "block",
       });
     }
-  }
+  },
 );
 
 watch(innerVisible, () => {
   if (innerVisible.value) {
     startAutoUpdate.value && startAutoUpdate.value();
-  } else {
+  }
+  else {
     stopAutoUpdate.value && stopAutoUpdate.value();
   }
 });
 
-const removeCurrentContentLink = () => {
+function removeCurrentContentLink() {
   /**
    * 删除当前 `currentContents` 管理的队列
    */
   parentAllContents.splice(
-    parentAllContents.findIndex((contents) => contents === currentContents),
-    1
+    parentAllContents.findIndex(contents => contents === currentContents),
+    1,
   );
 
   /**
@@ -127,11 +129,11 @@ const removeCurrentContentLink = () => {
    */
   parentAllContents.forEach((contents) => {
     contents.splice(
-      contents.findIndex((content) => content.value === ContentRef.value),
-      1
+      contents.findIndex(content => content.value === ContentRef.value),
+      1,
     );
   });
-};
+}
 
 onBeforeUnmount(() => {
   stopAutoUpdate.value && stopAutoUpdate.value();
@@ -141,11 +143,12 @@ onBeforeUnmount(() => {
 
 onClickOutside(ContentRef, (event: PointerEvent) => {
   if (
-    !props.clickOutsideToClose ||
-    !innerVisible.value ||
-    (TriggerRef.value as HTMLElement).contains(event.target as HTMLElement)
-  )
+    !props.clickOutsideToClose
+    || !innerVisible.value
+    || (TriggerRef.value as HTMLElement).contains(event.target as HTMLElement)
+  ) {
     return;
+  }
 
   for (const item of currentContents) {
     if (item.value?.contains(event.target as HTMLElement)) {
@@ -156,28 +159,28 @@ onClickOutside(ContentRef, (event: PointerEvent) => {
   onHidden();
 });
 
-const onContentEnter = () => {
+function onContentEnter() {
   if (props.enterable && props.trigger?.includes("hover")) {
     onShow();
   }
-};
+}
 
-const onContentLeave = () => {
+function onContentLeave() {
   if (props.trigger?.includes("hover")) {
     onHidden();
   }
-};
+}
 
-const show = () => {
+function show() {
   onShow();
   _visible.value = true;
-};
+}
 
-const hidden = () => {
+function hidden() {
   // TODO 兼容popConfirm组件使用当前函数关闭popper，造成modelValue未改变弹窗依然显示
   onHidden();
   _visible.value = false;
-};
+}
 
 onMounted(() => {
   parentAllContents.forEach((content) => {
@@ -194,20 +197,20 @@ defineExpose({ show, hidden, update });
 
 <template>
   <Teleport
+    v-if="isExist && hasDefaultContent"
     :to="teleportProps.to"
     :disabled="teleportProps.disabled"
-    v-if="isExist && hasDefaultContent"
   >
     <div
-      :class="classes"
       v-show="innerVisible"
-      :style="stylees"
       ref="ContentRef"
+      :class="classes"
+      :style="stylees"
       @mouseenter="onContentEnter"
       @mouseleave="onContentLeave"
     >
-      <slot></slot>
-      <div ref="ArrowRef" data-popper-arrow v-if="showArrow"></div>
+      <slot />
+      <div v-if="showArrow" ref="ArrowRef" data-popper-arrow />
     </div>
   </Teleport>
 </template>

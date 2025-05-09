@@ -1,32 +1,31 @@
 import type { InjectionKey, Ref } from "vue";
 import type {
   Middleware,
-  Padding,
-  Placement,
   MiddlewareState,
+  Padding,
 } from "./usePopper/index";
 
 import { unref } from "vue";
 import { arrow } from "./usePopper/index";
 
-export type PopperContext = {
+export interface PopperContext {
   TriggerRef: Ref<HTMLElement | null>;
   onShow: () => void;
   onHidden: () => void;
-};
+}
 
-export const POPPER_INJECTION_KEY: InjectionKey<PopperContext> =
-  Symbol("LayPopperV2");
+export const POPPER_INJECTION_KEY: InjectionKey<PopperContext>
+  = Symbol("LayPopperV2");
 
-type arrowMiddlewareParamsType = {
+interface arrowMiddlewareParamsType {
   arrowRef: Ref<HTMLDivElement | null>;
   padding?: Padding;
-};
+}
 
-export const arrowMiddleware = ({
+export function arrowMiddleware({
   arrowRef,
   padding,
-}: arrowMiddlewareParamsType): Middleware => {
+}: arrowMiddlewareParamsType): Middleware {
   return {
     name: "arrow",
     options: {
@@ -36,7 +35,8 @@ export const arrowMiddleware = ({
 
     fn(args) {
       const arrowEl = unref(arrowRef);
-      if (!arrowEl) return {};
+      if (!arrowEl)
+        return {};
 
       return arrow({
         element: arrowEl,
@@ -44,9 +44,9 @@ export const arrowMiddleware = ({
       }).fn(args);
     },
   };
-};
+}
 
-export const getArrowPlacement = () => {
+export function getArrowPlacement() {
   return {
     name: "ArrowPlacement",
     fn: (args: MiddlewareState) => {
@@ -55,16 +55,17 @@ export const getArrowPlacement = () => {
       return {};
     },
   };
-};
+}
 
-export const getArrowOffer = ({
+export function getArrowOffer({
   arrowRef,
-}: Pick<arrowMiddlewareParamsType, "arrowRef">) => {
+}: Pick<arrowMiddlewareParamsType, "arrowRef">) {
   return {
     name: "ArrowOffer",
     fn: (args: MiddlewareState) => {
       const arrowEl = unref(arrowRef);
-      if (!arrowEl) return {};
+      if (!arrowEl)
+        return {};
 
       arrowEl.style.cssText = "";
 
@@ -93,4 +94,4 @@ export const getArrowOffer = ({
       return {};
     },
   };
-};
+}

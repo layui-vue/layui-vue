@@ -1,20 +1,20 @@
-import { unref } from "vue";
-
 import { useTimeoutFn } from "@vueuse/core";
 
-type UseDelayedToggleProps = {
+import { unref } from "vue";
+
+interface UseDelayedToggleProps {
   showAfter: number;
   hideAfter: number;
   show: () => void;
   hidden: () => void;
-};
+}
 
-const useDelayTrigger = ({
+function useDelayTrigger({
   showAfter,
   hideAfter,
   show,
   hidden,
-}: UseDelayedToggleProps) => {
+}: UseDelayedToggleProps) {
   let hiddenStop: () => void;
 
   const onShow = () => {
@@ -27,6 +27,6 @@ const useDelayTrigger = ({
   };
 
   return { onShow, onHidden };
-};
+}
 
 export default useDelayTrigger;

@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import "./index.less";
 import type {
-  PopperProps,
-  ContentProps,
-  TriggerProps,
   ContentComponentInstance,
+  ContentProps,
+  PopperProps,
+  TriggerProps,
 } from "./types";
+import { isArray } from "@layui/component/utils";
+import { computed, provide, ref, watch } from "vue";
 
-import { ref, provide, computed, watch } from "vue";
-import Trigger from "./component/trigger.vue";
 import Content from "./component/content.vue";
-import { POPPER_INJECTION_KEY } from "./utils";
+import Trigger from "./component/trigger.vue";
 import useDelayTrigger from "./hook/useDelayTrigger";
-import { isArray } from "../../utils";
+import { POPPER_INJECTION_KEY } from "./utils";
+import "./index.less";
 
 defineOptions({
   name: "LayPopper",
@@ -40,14 +40,14 @@ const open = ref(props.modelValue);
 
 const TriggerRef = ref<HTMLElement | null>(null);
 
+const _trigger = computed(() => {
+  return isArray(props.trigger) ? props.trigger : [props.trigger];
+});
+
 const triggerProps = computed<TriggerProps>(() => {
   return {
     trigger: _trigger.value,
   };
-});
-
-const _trigger = computed(() => {
-  return isArray(props.trigger) ? props.trigger : [props.trigger];
 });
 
 const contentProps = computed<ContentProps>(() => {
@@ -70,19 +70,20 @@ watch(
   () => props.modelValue,
   () => {
     open.value = props.modelValue;
-  }
+  },
 );
 
-const show = () => {
-  if (props.disabled) return;
+function show() {
+  if (props.disabled)
+    return;
   open.value = true;
   emit("update:modelValue", true);
-};
+}
 
-const hidden = () => {
+function hidden() {
   open.value = false;
   emit("update:modelValue", false);
-};
+}
 
 const { onShow, onHidden } = useDelayTrigger({
   showAfter: props.showAfter,
@@ -108,9 +109,9 @@ defineExpose({
 
 <template>
   <Trigger v-bind="triggerProps">
-    <slot></slot>
+    <slot />
   </Trigger>
   <Content v-bind="contentProps" ref="ContentRef">
-    <slot name="content"></slot>
+    <slot name="content" />
   </Content>
 </template>

@@ -1,11 +1,11 @@
 import type { ComponentPublicInstance } from "vue";
-import { getNodeName, isNode } from "../../../utils";
+import { getNodeName, isNode } from "@layui/component/utils";
 
 /**
  * 判断target是否为组件
  */
 function isComponentPublicInstance(
-  target: unknown
+  target: unknown,
 ): target is ComponentPublicInstance {
   return target != null && typeof target === "object" && "$el" in target;
 }

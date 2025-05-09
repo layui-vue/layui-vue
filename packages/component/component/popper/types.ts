@@ -1,12 +1,12 @@
 import type {
-  Ref,
   ComponentPublicInstance,
+  InjectionKey,
+  Ref,
   StyleValue,
   TeleportProps,
-  InjectionKey,
 } from "vue";
 
-import type { Placement, OffsetOptions, Middlewares } from "./usePopper/index";
+import type { Middlewares, OffsetOptions, Placement } from "./usePopper/index";
 
 export type PopperTrigger = "click" | "hover" | "focus" | "contextMenu";
 
@@ -46,9 +46,9 @@ export type ContentComponentInstance = ComponentPublicInstance<{
   update: () => void;
 }>;
 
-export type ContentContext = {
+export interface ContentContext {
   allContents?: Ref<HTMLElement>[][];
-};
+}
 
-export const CONTENT_INJECTION_KEY: InjectionKey<ContentContext> =
-  Symbol("LayPopperContent");
+export const CONTENT_INJECTION_KEY: InjectionKey<ContentContext>
+  = Symbol("LayPopperContent");

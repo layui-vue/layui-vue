@@ -1,3 +1,6 @@
+import type { Middleware, Placement, Strategy } from "@floating-ui/dom";
+import {} from "@floating-ui/utils";
+
 export type {
   AlignedPlacement,
   Alignment,
@@ -40,24 +43,21 @@ export type {
   VirtualElement,
 } from "@floating-ui/dom";
 
-import type { Strategy, Placement, Middleware } from "@floating-ui/dom";
-import {} from "@floating-ui/utils";
-
 export type Middlewares = Middleware[];
 
-export type UsePopperOptions = {
+export interface UsePopperOptions {
   // isAutoUpdate？
   transform?: boolean;
 
   /**
    * @default absolute
    *
-   * */
+   */
   strategy?: Strategy;
   /**
    * @default bottom
    *
-   * */
+   */
   placement?: Placement;
   middleware?: Middlewares;
-};
+}
