@@ -88,8 +88,8 @@ export default {
         </lay-dropdown-menu>
     </template>
   </lay-dropdown>
-    <lay-dropdown :trigger="['hover','focus','click']" >
-    <lay-input placeholder="hover focus click"></lay-input>
+    <lay-dropdown :trigger="['hover','click']" >
+    <lay-input placeholder="hover click"></lay-input>
     <template #content>
         <lay-dropdown-menu>
           <lay-dropdown-menu-item>选项一</lay-dropdown-menu-item>

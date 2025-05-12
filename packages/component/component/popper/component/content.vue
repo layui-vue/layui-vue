@@ -58,7 +58,7 @@ watch(
 );
 
 const teleportProps = computed(() => {
-  return props.teleportProps!;
+  return Object.assign({}, { to: "body", disabled: false }, props.teleportProps);
 });
 
 const {
