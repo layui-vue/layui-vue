@@ -25,20 +25,21 @@ export interface PopperProps {
   clickOutsideToClose?: boolean;
   middlewares?: Middlewares;
   teleportProps?: TeleportProps;
+  triggerCustomEvents?: TriggerCustomEvents;
 }
 
 export type ContentProps = PopperProps;
 
-export type TriggerProps = Pick<PopperProps, "trigger"> & {
-  customEvents?: {
-    click?: (e: Event) => void;
-    mouseenter?: () => void;
-    mouseleave?: () => void;
-    contextmenu?: (e: Event) => void;
-    focusin?: () => void;
-    focusout?: () => void;
-  };
-};
+interface TriggerCustomEvents {
+  click?: (e: Event) => void;
+  mouseenter?: () => void;
+  mouseleave?: () => void;
+  contextmenu?: (e: Event) => void;
+  focusin?: () => void;
+  focusout?: () => void;
+}
+
+export type TriggerProps = Pick<PopperProps, "trigger" | "triggerCustomEvents">;
 
 export type ContentComponentInstance = ComponentPublicInstance<{
   show: () => void;

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { computed, useSlots, h, onMounted } from "vue";
+import { computed, h, useSlots } from "vue";
 
 defineOptions({
   name: "LayDropdownMenu",
@@ -23,13 +23,13 @@ const defaultSlot = computed(() => {
         };
       }
       return child;
-    })
+    }),
   );
 });
 </script>
 
 <template>
   <ul class="layui-menu layui-dropdown-menu">
-    <defaultSlot></defaultSlot>
+    <defaultSlot />
   </ul>
 </template>

@@ -5,7 +5,7 @@ import type {
   PopperProps,
   TriggerProps,
 } from "./types";
-import { isArray } from "@layui/component/utils";
+import { normalizeArray } from "@layui/component/utils";
 import { computed, provide, ref, watch } from "vue";
 
 import Content from "./component/content.vue";
@@ -40,20 +40,17 @@ const open = ref(props.modelValue);
 
 const TriggerRef = ref<HTMLElement | null>(null);
 
-const _trigger = computed(() => {
-  return isArray(props.trigger) ? props.trigger : [props.trigger];
-});
-
 const triggerProps = computed<TriggerProps>(() => {
   return {
-    trigger: _trigger.value,
+    trigger: normalizeArray(props.trigger),
+    triggerCustomEvents: props.triggerCustomEvents,
   };
 });
 
 const contentProps = computed<ContentProps>(() => {
   return {
     modelValue: open.value,
-    trigger: _trigger.value,
+    trigger: normalizeArray(props.trigger),
     placement: props.placement,
     disabled: props.disabled,
     showArrow: props.showArrow,
@@ -62,6 +59,7 @@ const contentProps = computed<ContentProps>(() => {
     popperClass: props.popperClass,
     popperStyle: props.popperStyle,
     clickOutsideToClose: props.clickOutsideToClose,
+    middlewares: props.middlewares,
     teleportProps: props.teleportProps,
   };
 });
@@ -74,8 +72,10 @@ watch(
 );
 
 function show() {
-  if (props.disabled)
+  if (props.disabled) {
     return;
+  }
+
   open.value = true;
   emit("update:modelValue", true);
 }
@@ -104,6 +104,9 @@ defineExpose({
   show: () => ContentRef.value?.show(),
   hidden: () => ContentRef.value?.hidden(),
   update: () => ContentRef.value?.update(),
+
+  TriggerRef,
+  ContentRef,
 });
 </script>
 

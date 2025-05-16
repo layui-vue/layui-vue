@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { inject, Ref } from "vue";
 import type { DropdownContext } from "../dropdown/interface";
+import { inject } from "vue";
 import { DROPDOWN_INJECTION_KEY } from "../dropdown/interface";
 
 export interface DropdownMenuItemProps {
@@ -17,19 +17,19 @@ const props = withDefaults(defineProps<DropdownMenuItemProps>(), {
 
 const dropdownCtx = inject<DropdownContext>(DROPDOWN_INJECTION_KEY, {});
 
-const handleClick = () => {
+function handleClick() {
   if (props.disabled) {
     return;
   }
   dropdownCtx?.hide && dropdownCtx?.hide();
-};
+}
 </script>
 
 <template>
   <li
-    @click="handleClick"
     :class="{ 'layui-disabled': disabled }"
     :style="$slots.suffix ? `justify-content: space-between;` : ''"
+    @click="handleClick"
   >
     <span class="layui-menu-body-title">
       <span v-if="$slots.prefix" class="layui-dropdown-menu-prefix">

@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import type { DropdownTeleportProps } from "../dropdown/interface";
+import type { DropdownTeleportProps } from "@layui/component/component/dropdown/interface";
+import type { Placement, PopperTrigger } from "@layui/component/component/popper/index";
 
-import LayDropdown from "../dropdown/index.vue";
-import LayDropdownMenu from "../dropdownMenu/index.vue";
-import LayDropdownMenuItem from "../dropdownMenuItem/index.vue";
+import LayDropdown from "@layui/component/component/dropdown/index.vue";
+import LayDropdownMenu from "@layui/component/component/dropdownMenu/index.vue";
+import LayDropdownMenuItem from "@layui/component/component/dropdownMenuItem/index.vue";
 import { LayIcon } from "@layui/icons-vue";
-import type { PopperTrigger, Placement } from "../popper/index";
 
 export interface DropdownSubMenuProps {
   trigger?: PopperTrigger | Array<PopperTrigger>;
@@ -19,7 +19,7 @@ defineOptions({
   name: "LayDropdownSubMenu",
 });
 
-const props = withDefaults(defineProps<DropdownSubMenuProps>(), {
+withDefaults(defineProps<DropdownSubMenuProps>(), {
   trigger: () => ["hover"],
   disabled: false,
   placement: "right-start",
@@ -31,15 +31,15 @@ const props = withDefaults(defineProps<DropdownSubMenuProps>(), {
 </script>
 
 <template>
-  <lay-dropdown
+  <LayDropdown
     :trigger="trigger"
     :placement="placement"
     :auto-fit-min-width="false"
-    :contentOffset="contentOffset"
-    :teleportProps="teleportProps"
+    :content-offset="contentOffset"
+    :teleport-props="teleportProps"
     :disabled="disabled"
   >
-    <lay-dropdown-menu-item :disabled="disabled">
+    <LayDropdownMenuItem :disabled="disabled">
       <template v-if="$slots.prefix" #prefix>
         <slot name="prefix" />
       </template>
@@ -48,14 +48,14 @@ const props = withDefaults(defineProps<DropdownSubMenuProps>(), {
       </template>
       <template #suffix>
         <slot name="suffix">
-          <lay-icon type="layui-icon-right" size="14px"></lay-icon>
+          <LayIcon type="layui-icon-right" size="14px" />
         </slot>
       </template>
-    </lay-dropdown-menu-item>
+    </LayDropdownMenuItem>
     <template #content>
-      <lay-dropdown-menu>
+      <LayDropdownMenu>
         <slot name="content" />
-      </lay-dropdown-menu>
+      </LayDropdownMenu>
     </template>
-  </lay-dropdown>
+  </LayDropdown>
 </template>

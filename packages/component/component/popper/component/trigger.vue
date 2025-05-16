@@ -16,7 +16,7 @@ const events = {
   contextmenu: onContextMenu,
   focusin: onFocusin,
   focusout: onFocusout,
-  ...props.customEvents,
+  ...props.triggerCustomEvents,
 };
 
 function setTriggerRef(el: HTMLElement | null) {

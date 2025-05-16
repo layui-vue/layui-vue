@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import type { CSSProperties, TeleportProps } from "vue";
+import type { UseResizeObserverReturn } from "@vueuse/core";
+
+import type { CSSProperties } from "vue";
 import type {
-  ContentComponentInstance,
-  ContentProps,
-  TriggerProps,
+  PopperProps,
 } from "../popper/types";
 import type { Middlewares } from "../popper/usePopper/index";
 import type {
@@ -12,25 +12,24 @@ import type {
   DropdownEmits,
   pointType,
 } from "./interface";
-import { useResizeObserver } from "@vueuse/core";
+import LayPopper from "@layui/component/component/popper/popper.vue";
 
+import { normalizeArray } from "@layui/component/utils";
+import { useResizeObserver } from "@vueuse/core";
 import {
   computed,
   inject,
+  onMounted,
   onUnmounted,
   provide,
   reactive,
   ref,
   watch,
 } from "vue";
-import { isArray } from "../../utils";
-import Content from "../popper/component/content.vue";
-import Trigger from "../popper/component/trigger.vue";
-import useDelayTrigger from "../popper/hook/useDelayTrigger";
 import { flip, hide, offset, shift } from "../popper/usePopper/index";
-import { POPPER_INJECTION_KEY } from "../popper/utils";
 
 import { DROPDOWN_INJECTION_KEY } from "./interface";
+
 import { pointMiddleware } from "./utils";
 import "./index.less";
 
@@ -59,69 +58,52 @@ const emits = defineEmits<DropdownEmits>();
 export type DropdownProps = _DropdownProps;
 
 const _trigger = computed(() => {
-  return isArray(props.trigger) ? props.trigger : [props.trigger];
-});
-
-const _teleportProps = computed<TeleportProps>(() => {
-  return {
-    to: props.teleportProps?.to || "body",
-    disabled: props.teleportProps?.disabled ?? false,
-  };
+  return normalizeArray(props.trigger);
 });
 
 const open = ref(props.visible);
 
-const TriggerRef = ref<HTMLElement | null>(null);
+const popperRef = ref<InstanceType<typeof LayPopper>>();
 
-const showAfter = computed(() => {
-  return _trigger.value.includes("hover")
-    ? props.mouseEnterDelay
-    : _trigger.value.includes("focus")
-      ? props.focusDelay
-      : 0;
-});
-
-const hideAfter = computed(() => {
-  return _trigger.value.includes("hover")
-    ? props.mouseLeaveDelay
-    : _trigger.value.includes("focus")
-      ? props.focusDelay
-      : 0;
-});
-
-const { onShow, onHidden } = useDelayTrigger({
-  showAfter: showAfter.value,
-  hideAfter: hideAfter.value,
-  show,
-  hidden,
-});
-
-const customEvents = computed(() => {
+const triggerCustomEvents = computed(() => {
   return {
     click: (e: Event) => {
-      if (!_trigger.value.includes("click"))
+      if (!_trigger.value.includes("click")) {
         return;
-      if (open.value && !props.clickToClose)
+      }
+
+      if (open.value && !props.clickToClose) {
         return;
-      if (props.alignPoint)
+      }
+
+      if (props.alignPoint) {
         setPoint(e as PointerEvent);
+      }
+
       toggle();
     },
     contextmenu: (e: Event) => {
-      if (!_trigger.value.includes("contextMenu"))
+      if (!_trigger.value.includes("contextMenu")) {
         return;
-      if (open.value && !props.clickToClose)
+      }
+
+      if (open.value && !props.clickToClose) {
         return;
-      if (props.alignPoint)
+      }
+
+      if (props.alignPoint) {
         setPoint(e as PointerEvent);
+      }
 
       e.preventDefault();
       toggle();
     },
     focusout: () => {
-      if (!_trigger.value.includes("focus") || !props.blurToClose)
+      if (!_trigger.value.includes("focus") || !props.blurToClose) {
         return;
-      onHidden();
+      }
+
+      doHidden();
     },
   };
 });
@@ -136,24 +118,21 @@ function setPoint(e: PointerEvent) {
   point.y = e.pageY;
 }
 
-const triggerProps = computed<TriggerProps>(() => {
-  return {
-    trigger: _trigger.value,
-    customEvents: customEvents.value,
-  };
-});
-
 const triggerWidth = ref<number>();
 
-const { stop: triggerStop } = useResizeObserver(TriggerRef, (entries) => {
-  const entry = entries[0];
-  const { width } = entry.contentRect;
+let triggerStop: UseResizeObserverReturn | null;
 
-  triggerWidth.value = width;
+onMounted(() => {
+  triggerStop = useResizeObserver(popperRef.value?.TriggerRef, (entries) => {
+    const entry = entries[0];
+    const { width } = entry.contentRect;
+
+    triggerWidth.value = width;
+  });
 });
 
 onUnmounted(() => {
-  triggerStop && triggerStop();
+  triggerStop && triggerStop.stop();
 });
 
 const _contentStyle = computed(() => {
@@ -176,6 +155,22 @@ const offsetValue = computed(() => {
   return Number(`${props.contentOffset}`.replace("px", "") ?? 0);
 });
 
+const showAfter = computed(() => {
+  return _trigger.value.includes("hover")
+    ? props.mouseEnterDelay
+    : _trigger.value.includes("focus")
+      ? props.focusDelay
+      : 0;
+});
+
+const hideAfter = computed(() => {
+  return _trigger.value.includes("hover")
+    ? props.mouseLeaveDelay
+    : _trigger.value.includes("focus")
+      ? props.focusDelay
+      : 0;
+});
+
 const middlewares = computed(() => {
   return [
     offset(offsetValue.value),
@@ -186,7 +181,7 @@ const middlewares = computed(() => {
   ].filter(Boolean) as Middlewares;
 });
 
-const contentProps = computed<ContentProps>(() => {
+const popperProps = computed<PopperProps>(() => {
   return {
     modelValue: open.value,
     trigger: _trigger.value,
@@ -198,22 +193,15 @@ const contentProps = computed<ContentProps>(() => {
       "layui-dropdown-content",
       props.contentClass,
     ],
+    showAfter: showAfter.value,
+    hideAfter: hideAfter.value,
     popperStyle: [props.contentStyle, _contentStyle.value],
     clickOutsideToClose: props.clickOutsideToClose,
     middlewares: middlewares.value,
-    teleportProps: _teleportProps.value,
+    teleportProps: props.teleportProps,
+    triggerCustomEvents: triggerCustomEvents.value,
   };
 });
-
-function show() {
-  if (props.disabled)
-    return;
-  open.value = true;
-}
-
-function hidden() {
-  open.value = false;
-}
 
 watch(
   () => open.value,
@@ -227,35 +215,10 @@ watch(
   },
 );
 
-provide(POPPER_INJECTION_KEY, {
-  TriggerRef,
-  onShow,
-  onHidden,
-});
-
-const ContentRef = ref<ContentComponentInstance>();
-
-function exposeShow() {
-  onShow();
-}
-
-function exposeHide() {
-  onHidden();
-}
-
-function toggle() {
-  if (open.value) {
-    onHidden();
-  }
-  else {
-    onShow();
-  }
-}
-
 const dropdownContext = inject<DropdownContext>(DROPDOWN_INJECTION_KEY, {});
 
 function provideHide() {
-  hidden();
+  doHidden();
   dropdownContext?.hide && dropdownContext?.hide();
 }
 
@@ -263,14 +226,27 @@ provide(DROPDOWN_INJECTION_KEY, {
   hide: provideHide,
 });
 
-defineExpose({ show: exposeShow, hide: exposeHide, toggle });
+function show() {
+  open.value = true;
+}
+
+function doHidden() {
+  open.value = false;
+}
+
+function toggle() {
+  open.value = !open.value;
+}
+
+defineExpose({ show, hide: doHidden, toggle });
 </script>
 
 <template>
-  <Trigger v-bind="triggerProps">
+  <LayPopper ref="popperRef" v-model="open" v-bind="popperProps">
     <slot />
-  </Trigger>
-  <Content v-bind="contentProps" ref="ContentRef">
-    <slot name="content" />
-  </Content>
+
+    <template #content>
+      <slot name="content" />
+    </template>
+  </LayPopper>
 </template>
