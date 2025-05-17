@@ -24,13 +24,13 @@ export interface PopperProps {
   popperStyle?: StyleValue;
   clickOutsideToClose?: boolean;
   middlewares?: Middlewares;
-  teleportProps?: TeleportProps;
+  teleportProps?: Partial<TeleportProps>;
   triggerCustomEvents?: TriggerCustomEvents;
 }
 
 export type ContentProps = PopperProps;
 
-interface TriggerCustomEvents {
+export interface TriggerCustomEvents {
   click?: (e: Event) => void;
   mouseenter?: () => void;
   mouseleave?: () => void;

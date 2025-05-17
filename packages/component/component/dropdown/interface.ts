@@ -1,5 +1,5 @@
-import type { Placement, PopperTrigger } from "@layui/component/component/popper/index";
-import type { InjectionKey, StyleValue, TeleportProps } from "vue";
+import type { Placement, PopperProps, PopperTrigger } from "@layui/component/component/popper/index";
+import type { InjectionKey, StyleValue } from "vue";
 
 export interface DropdownContext {
   hide?: () => void;
@@ -8,7 +8,7 @@ export interface DropdownContext {
 export const DROPDOWN_INJECTION_KEY: InjectionKey<DropdownContext>
   = Symbol("LayDropdown");
 
-export type DropdownTeleportProps = Partial<TeleportProps>;
+export type DropdownTeleportProps = PopperProps["teleportProps"];
 
 export interface DropdownProps {
   visible?: boolean;
