@@ -1,3 +1,10 @@
+## [1.0.16] (2025-05-17)
+
+### Layui-vue Upgrade V2.22.2
+
+### Bug Fixes
+* 具名导出 `install` 函数
+
 ## [1.0.15] (2024-10-22)
 
 ### Layui-vue Upgrade V2.19.0

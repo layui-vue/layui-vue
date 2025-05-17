@@ -59,6 +59,67 @@ export default defineConfig({
 });
 ```
 
+::: title 在线安装
+:::
+
+::: describe 根据不同的 CDN 提供商有不同的引入方式，我们在这里以 unpkg 举例。
+:::
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="//unpkg.com/@layui/json-schema-form/lib/index.css" />
+    <script src="//unpkg.com/vue@3"></script>
+    <script src="//unpkg.com/@layui/json-schema-form"></script>
+</head>
+<body>
+    <div id="app">
+        {{message}}
+        <lay-json-schema-form :model="form" :schema="schema"></lay-json-schema-form>
+    </div>
+
+    <script>
+        const { createApp, ref, reactive } = Vue
+
+        const app = createApp({
+            setup() {
+                const message = reactive('Hello vue!')
+                const form = ref({})
+                const schema = reactive({
+                    name: {
+                        label: '姓名',
+                        type: 'input',
+                        props: {
+                            type: 'text',
+                            placeholder: '请输入姓名',
+                        }
+                    },
+                    password: {
+                        label: '密码',
+                        type: 'input',
+                        props: {
+                            type: 'password',
+                            autocomplete: "off",
+                            placeholder: '请输入密码',
+                        }
+                    },
+                })
+                return {
+                    message,
+                    schema,
+                    form,
+                }
+            }
+        })
+        app.use(LayuiJsonSchemaForm)
+        app.mount('#app')
+    </script>
+</body>
+</html>
+```
+
 ::: title 基本使用
 :::
 
