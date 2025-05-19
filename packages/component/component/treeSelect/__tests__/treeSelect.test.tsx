@@ -7,6 +7,7 @@ import type { VueWrapper } from "@vue/test-utils";
 import LayTreeSelect from "../index.vue";
 import LayInput from "../../input/index.vue";
 import LayTagInput from "@layui/component/component/tagInput/index.vue";
+import LayTag from "@layui/component/component/tag/index.vue";
 import { sleep } from "@layui/component/test-utils";
 
 const teleportProps = { to: "body", disabled: true };
@@ -218,4 +219,91 @@ describe("LayTreeSelect", () => {
 
       expect(tagInput.props('modelValue')?.length).toBe(2)
     });
+
+  test("replaceFields + 输入反填多级数据", async () => {
+
+    const wrapper = mount({
+      setup() {
+        const value1 = ref(11)
+
+        const data = ref([{
+          name: "一级1",
+          key: 1,
+          spread: true,
+          child: [
+            {
+              name: "一级1-1",
+              key: 11,
+            },
+          ],
+        }]);
+
+        const replaceFields = {
+          id: "key",
+          title: "name",
+          children: "child",
+        };
+
+
+        return () => (
+          <LayTreeSelect
+            v-model={value1.value}
+            data={data.value}
+            replaceFields={replaceFields}
+          ></LayTreeSelect>
+        );
+      },
+    });
+
+    await nextTick();
+
+    const InputVm = wrapper.findComponent(LayInput);
+
+    expect(InputVm.props("modelValue")).toBe("一级1-1");
+  });
+
+  test("replaceFields + 输入反填多级数据 + 多选", async () => {
+
+    const wrapper = mount({
+      setup() {
+        const value1 = ref([11])
+
+        const data = ref([{
+          name: "一级1",
+          key: 1,
+          spread: true,
+          child: [
+            {
+              name: "一级1-1",
+              key: 11,
+            },
+          ],
+        }]);
+
+        const replaceFields = {
+          id: "key",
+          title: "name",
+          children: "child",
+        };
+
+
+        return () => (
+          <LayTreeSelect
+            v-model={value1.value}
+            multiple
+            data={data.value}
+            replaceFields={replaceFields}
+          ></LayTreeSelect>
+        );
+      },
+    });
+
+    await nextTick();
+
+    const tagInput = wrapper.findComponent(LayTagInput);
+    expect(tagInput.props('modelValue')?.length).toBe(1)
+
+    const tagComponent = tagInput.findComponent(LayTag);
+    expect(tagComponent.text()).toBe('一级1-1')
+  });
 });

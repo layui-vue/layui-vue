@@ -18,7 +18,7 @@ import LayInput from "@layui/component/component/input/index.vue";
 import LayTagInput from "@layui/component/component/tagInput/index.vue";
 import { treeReplaceFields } from "@layui/component/component/tree/constant";
 import LayTree from "@layui/component/component/tree/index.vue";
-import { isArray } from "@layui/component/utils";
+import { isArray, isValueArray } from "@layui/component/utils";
 import { LayIcon } from "@layui/icons-vue";
 import { useDebounceFn } from "@vueuse/core";
 import { computed, provide, ref, useSlots, watch } from "vue";
@@ -80,8 +80,10 @@ const flatData = computed(() => {
   const flatter = <K extends OriginalTreeData>(target: Array<K>) => {
     target.forEach((item) => {
       ret.push(item);
-      if (item.children?.length) {
-        flatter(item.children);
+
+      const children: OriginalTreeData[] = item[_replaceFields.value.children];
+      if (isValueArray(children)) {
+        flatter(children);
       }
     });
   };
