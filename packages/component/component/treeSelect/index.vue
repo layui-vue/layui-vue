@@ -81,7 +81,7 @@ const flatData = computed(() => {
     target.forEach((item) => {
       ret.push(item);
 
-      const children: OriginalTreeData[] = item[_replaceFields.value.children];
+      const children: K[] = item[_replaceFields.value.children];
       if (isValueArray(children)) {
         flatter(children);
       }
