@@ -1,7 +1,7 @@
 import type { DropdownTeleportProps } from "@layui/component/component/dropdown/interface";
 import type { CommonClass, CommonSize } from "@layui/component/types/common";
 import type { ConfigType, Dayjs } from "dayjs";
-import type { Component, InjectionKey, StyleValue } from "vue";
+import type { Component, InjectionKey, Slots, StyleValue } from "vue";
 
 export type DatePickerType =
   | "date"
@@ -93,9 +93,15 @@ export interface DatePickerEmits {
 }
 
 export type DatePickerValue = Dayjs | Array<Dayjs> | null | undefined;
+export type DatePickerValueNotArray = Exclude<DatePickerValue, Array<Dayjs>>;
+
+export interface DatePickerRenderComponentProps extends RequiredDatePickerProps {
+  modelValue: DatePickerValue;
+}
 
 export interface DatePickerContextType extends RequiredDatePickerProps {
   modelValue: DatePickerValue;
+  datePickerSlots: Slots;
 }
 
 export const DATE_PICKER_CONTEXT: InjectionKey<DatePickerContextType>
@@ -109,3 +115,23 @@ export interface Shortcuts {
     | (() => DatePickerModelValueSingleType)
     | (() => Array<DatePickerModelValueSingleType>);
 }
+
+export interface DatePickerDefaultSlotParams {
+  type: "date" | "month" | "year";
+  unix: number;
+  dayjs: Dayjs;
+}
+
+export interface DatePickerFooterSlotParams {
+  current: DatePickerValueNotArray;
+  start: DatePickerValueNotArray;
+  end: DatePickerValueNotArray;
+}
+
+export type DatePickerRenderProps = Partial<DatePickerDefaultSlotParams> & Partial<DatePickerFooterSlotParams> & {
+  /**
+   * @type base
+   * DatePicker组件插槽名
+   */
+  render?: string;
+};

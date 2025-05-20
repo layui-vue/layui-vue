@@ -2,21 +2,21 @@
 import type { Dayjs } from "dayjs";
 import type {
   DatePickerModelValueSingleType,
+  DatePickerValueNotArray,
   Shortcuts as ShortcutsType,
 } from "../interface";
 import type { RangePickerProps } from "./interface";
+import LayDropdown from "@layui/component/component/dropdown";
+import LayIcon from "@layui/component/component/icon";
+import { useI18n } from "@layui/component/language";
 import dayjs from "dayjs";
 import { computed, ref, watch } from "vue";
 
-import { useI18n } from "../../../language";
-
-import LayDropdown from "../../dropdown";
-import LayIcon from "../../icon";
 import { useShortcutsRange } from "../hook/useShortcutsRange";
+import DatePickerRender from "./common/DatePickerRender.vue";
 import Footer from "./common/Footer.vue";
 import Month from "./common/Month.vue";
 import Shortcuts from "./common/Shortcuts.vue";
-
 import Year from "./common/Year.vue";
 
 const props = withDefaults(defineProps<RangePickerProps>(), {});
@@ -25,8 +25,8 @@ const emits = defineEmits(["pick"]);
 const { t } = useI18n();
 const hookChangeShortcut = useShortcutsRange();
 
-const startDate = ref();
-const endDate = ref();
+const startDate = ref<DatePickerValueNotArray>();
+const endDate = ref<DatePickerValueNotArray>();
 const leftDate = ref(dayjs());
 const rightDate = ref(dayjs());
 
@@ -69,8 +69,8 @@ const classes = computed(() => {
 
     return {
       "layui-this":
-        startDate.value?.isSame(Date, "month")
-        || endDate.value?.isSame(Date, "month"),
+        !!(startDate.value?.isSame(Date, "month")
+          || endDate.value?.isSame(Date, "month")),
       "laydate-range-hover":
         !!(
           startDate.value
@@ -219,11 +219,11 @@ function handleConfirm() {
       :show-confirm="!props.simple"
       @confirm="handleConfirm"
     >
-      <slot name="footer">
+      <DatePickerRender render="footer" :start="startDate" :end="endDate">
         {{ startDate?.format(props.inputFormat) }}
         {{ props.rangeSeparator }}
         {{ endDate?.format(props.inputFormat) }}
-      </slot>
+      </DatePickerRender>
     </Footer>
   </div>
 </template>

@@ -1,22 +1,22 @@
 import type { Dayjs } from "dayjs";
 import type {
-  DatePickerContextType,
+  DatePickerRenderComponentProps,
   DatePickerType,
-  DatePickerValue,
+  DatePickerValueNotArray,
 } from "../interface";
 
 export interface BasePanelProps {
-  modelValue: Exclude<DatePickerValue, Array<Dayjs>>;
+  modelValue: DatePickerValueNotArray;
   showDate: Dayjs;
   dateType?: DatePickerType;
   classes?: (val: Dayjs) => Record<string, boolean>;
 }
 
-export interface UniquePickerProps extends DatePickerContextType {
-  modelValue: Exclude<DatePickerValue, Array<Dayjs>>;
+export interface UniquePickerProps extends DatePickerRenderComponentProps {
+  modelValue: DatePickerValueNotArray;
 }
 
-export interface RangePickerProps extends DatePickerContextType {
+export interface RangePickerProps extends DatePickerRenderComponentProps {
   modelValue: Array<Dayjs>;
 }
 

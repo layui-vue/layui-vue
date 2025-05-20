@@ -1,17 +1,18 @@
 <script setup lang="ts">
 import type { Dayjs } from "dayjs";
 import type {
+  DatePickerValueNotArray,
   Shortcuts as ShortcutsType,
 } from "../interface";
 import type { RangePickerProps } from "./interface";
+import LayIcon from "@layui/component/component/icon";
 import dayjs from "dayjs";
 import { computed, ref, watch } from "vue";
 
-import LayIcon from "../../icon";
 import { useBaseDatePicker } from "../hook/useBaseDatePicker";
 import { useShortcutsRange } from "../hook/useShortcutsRange";
+import DatePickerRender from "./common/DatePickerRender.vue";
 import Footer from "./common/Footer.vue";
-
 import Shortcuts from "./common/Shortcuts.vue";
 import Year from "./common/Year.vue";
 
@@ -21,8 +22,8 @@ const emits = defineEmits(["pick"]);
 const { getDefaultValue } = useBaseDatePicker(props);
 const hookChangeShortcut = useShortcutsRange();
 
-const startDate = ref();
-const endDate = ref();
+const startDate = ref<DatePickerValueNotArray>();
+const endDate = ref<DatePickerValueNotArray>();
 const leftDate = ref(dayjs());
 const rightDate = ref(dayjs());
 
@@ -54,8 +55,8 @@ const classes = computed(() => {
 
     return {
       "layui-this":
-        startDate.value?.isSame(Date, "year")
-        || endDate.value?.isSame(Date, "year"),
+        !!(startDate.value?.isSame(Date, "year")
+          || endDate.value?.isSame(Date, "year")),
       "laydate-range-hover":
         !!(
           startDate.value
@@ -166,11 +167,11 @@ function handleConfirm() {
       :show-confirm="!props.simple"
       @confirm="handleConfirm"
     >
-      <slot name="footer">
+      <DatePickerRender render="footer" :start="startDate" :end="endDate">
         {{ startDate?.format(props.inputFormat) }}
         {{ props.rangeSeparator }}
         {{ endDate?.format(props.inputFormat) }}
-      </slot>
+      </DatePickerRender>
     </Footer>
   </div>
 </template>

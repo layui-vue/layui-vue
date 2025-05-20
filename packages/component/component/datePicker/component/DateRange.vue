@@ -1,26 +1,26 @@
 <script setup lang="ts">
 import type { Dayjs } from "dayjs";
-import type { Shortcuts as ShortcutsType } from "../interface";
+import type { DatePickerValueNotArray, Shortcuts as ShortcutsType } from "../interface";
 import type {
   DateContentSingleDateObject,
   RangePickerProps,
 } from "./interface";
+
+import LayDropdown from "@layui/component/component/dropdown";
+import LayIcon from "@layui/component/component/icon";
+import { useI18n } from "@layui/component/language";
+import { isArray } from "@layui/component/utils";
 import dayjs from "dayjs";
+
 import { computed, ref, watch } from "vue";
-
-import { useI18n } from "../../../language";
-import { isArray } from "../../../utils";
-import LayDropdown from "../../dropdown";
-
-import LayIcon from "../../icon";
 import { useBaseDatePicker } from "../hook/useBaseDatePicker";
 import { useShortcutsRange } from "../hook/useShortcutsRange";
 import { normalizeDayjsValue, setDateList } from "../util";
 import DateContent from "./common/DateContent.vue";
+import DatePickerRender from "./common/DatePickerRender.vue";
 import Footer from "./common/Footer.vue";
 import Month from "./common/Month.vue";
 import Shortcuts from "./common/Shortcuts.vue";
-
 import Time from "./common/Time.vue";
 import Year from "./common/Year.vue";
 
@@ -31,8 +31,8 @@ const { t } = useI18n();
 const { getDefaultValue } = useBaseDatePicker(props);
 const hookChangeShortcut = useShortcutsRange();
 
-const startDate = ref<Dayjs | null>();
-const endDate = ref<Dayjs | null>();
+const startDate = ref<DatePickerValueNotArray>();
+const endDate = ref<DatePickerValueNotArray>();
 const leftDate = ref<Dayjs>(getDefaultValue());
 const rightDate = ref<Dayjs>(getDefaultValue().add(1, "month"));
 
@@ -285,7 +285,7 @@ function handleConfirm() {
     <div class="layui-laydate-range-main">
       <Shortcuts @change-shortcut="handleChangeShortcut" />
 
-      <div class="layui-laydate-main">
+      <div class="layui-laydate-main layui-laydate-main-date">
         <div class="layui-laydate-header">
           <LayIcon
             type="layui-icon-prev"
@@ -346,7 +346,7 @@ function handleConfirm() {
         />
       </div>
 
-      <div class="layui-laydate-main">
+      <div class="layui-laydate-main layui-laydate-main-date">
         <div class="layui-laydate-header">
           <LayIcon type="layui-icon-prev" style="visibility: hidden" />
           <LayIcon type="layui-icon-left" style="visibility: hidden" />
@@ -409,12 +409,18 @@ function handleConfirm() {
       </div>
     </div>
     <Footer :show-now="false" :show-confirm="!_simple" @confirm="handleConfirm">
-      {{ startDate?.format(props.inputFormat) }}
+      <DatePickerRender render="footer" :start="startDate" :end="endDate">
+        {{ startDate?.format(props.inputFormat) }}
+        {{ props.rangeSeparator }}
+        {{ endDate?.format(props.inputFormat) }}
+      </DatePickerRender>
+
+      <!-- {{ startDate?.format(props.inputFormat) }}
       {{ props.rangeSeparator }}
       {{ endDate?.format(props.inputFormat) }}
       <template #footer>
         <slot name="footer" />
-      </template>
+      </template> -->
     </Footer>
   </div>
 </template>

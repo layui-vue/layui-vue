@@ -80,7 +80,7 @@ function handlePickDay(val: number) {
 </script>
 
 <template>
-  <div class="layui-laydate-main">
+  <div class="layui-laydate-main layui-laydate-main-date">
     <div class="layui-laydate-header">
       <LayIcon
         type="layui-icon-prev"

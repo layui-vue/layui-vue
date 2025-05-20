@@ -1,16 +1,16 @@
 <script setup lang="ts">
 import type { Dayjs } from "dayjs";
-import type { Shortcuts as ShortcutsType } from "../interface";
+import type { DatePickerValueNotArray, Shortcuts as ShortcutsType } from "../interface";
 import type { RangePickerProps } from "./interface";
+import { useI18n } from "@layui/component/language";
 import dayjs from "dayjs";
+
 import { ref, watch } from "vue";
 
-import { useI18n } from "../../../language";
-
 import { useShortcutsRange } from "../hook/useShortcutsRange";
+import DatePickerRender from "./common/DatePickerRender.vue";
 import Footer from "./common/Footer.vue";
 import Shortcuts from "./common/Shortcuts.vue";
-
 import Time from "./common/Time.vue";
 
 const props = withDefaults(defineProps<RangePickerProps>(), {});
@@ -19,8 +19,8 @@ const emits = defineEmits(["pick"]);
 const { t } = useI18n();
 const hookChangeShortcut = useShortcutsRange();
 
-const startDate = ref();
-const endDate = ref();
+const startDate = ref<NonNullable<DatePickerValueNotArray>>(dayjs());
+const endDate = ref<NonNullable<DatePickerValueNotArray>>(dayjs());
 
 function minMaxTime(time: Dayjs) {
   if (time.isBefore(dayjs(props.min, props.format))) {
@@ -103,11 +103,11 @@ function handleConfirm() {
       </Time>
     </div>
     <Footer :show-now="false" @confirm="handleConfirm">
-      <slot name="footer">
+      <DatePickerRender render="footer" :start="startDate" :end="endDate">
         {{ startDate?.format(props.inputFormat) }}
         {{ props.rangeSeparator }}
         {{ endDate?.format(props.inputFormat) }}
-      </slot>
+      </DatePickerRender>
     </Footer>
   </div>
 </template>
