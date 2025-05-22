@@ -823,4 +823,62 @@ describe("LayTable", () => {
 
     expect((checkboxComponent as any).vm.modelValue).toBeFalsy();
   });
+
+  // https://gitee.com/layui-vue/layui-vue/issues/IC9S5Q
+  test("一级表头存在两个fixed为left表头，第二个表头会覆盖第一列", async () => {
+    const columns = [
+      { title: "用户", width: "80px", key: "name", fixed: "left" as const },
+      { title: "城市", width: "80px", key: "city", fixed: "left" as const },
+    ];
+
+    const dataSource = ref([]);
+
+    const wrapper = mount({
+      setup() {
+        return () => (
+          <LayTable
+            columns={columns}
+            dataSource={dataSource.value}
+          ></LayTable>
+        );
+      },
+    });
+
+    await nextTick()
+
+    const ths = wrapper.findAll(".layui-table-header .layui-table-header-wrapper tr th");
+
+    const style = ths[1].attributes().style
+
+    expect(style).toMatch(/left/)
+    expect(style).toMatch(/80px/)
+  });
+
+  test("一级表头存在两个fixed为left表头，存在 layui-table-fixed-left-last 类名", async () => {
+    const columns = [
+      { title: "用户", width: "80px", key: "name", fixed: "left" as const },
+      { title: "城市", width: "80px", key: "city", fixed: "left" as const },
+    ];
+
+    const dataSource = ref([]);
+
+    const wrapper = mount({
+      setup() {
+        return () => (
+          <LayTable
+            columns={columns}
+            dataSource={dataSource.value}
+          ></LayTable>
+        );
+      },
+    });
+
+    await nextTick()
+
+    const ths = wrapper.findAll(".layui-table-header .layui-table-header-wrapper tr th");
+
+    const _class = ths[1].attributes().class
+
+    expect(_class).toMatch(/layui-table-fixed-left-last/)
+  });
 });
