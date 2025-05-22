@@ -11,7 +11,7 @@ import {
   isReactive,
   reactive,
   ref,
-
+  toRaw,
   watch,
   watchEffect,
 } from "vue";
@@ -273,7 +273,7 @@ export function useTable(props: RequiredTableProps, emit: TableEmit) {
       const _columns = isLeft ? props.columns : [...props.columns].reverse();
 
       let index
-        = _columns.findIndex(column => isEqual(column, topColumn)) - 1;
+        = _columns.findIndex(column => isEqual(column, toRaw(topColumn))) - 1;
       const fixedColumns = [];
 
       while (index > -1) {
@@ -316,12 +316,12 @@ export function useTable(props: RequiredTableProps, emit: TableEmit) {
       column => column.fixed === "right",
     );
 
-    if (isEqual(topColumn, topLastLeft)) {
+    if (isEqual(toRaw(topColumn), topLastLeft)) {
       loopJudge(topColumn, "left")
       && (lastLeftClassName = lastLeftClassNameConstant);
     }
 
-    if (isEqual(topColumn, topFirstRight)) {
+    if (isEqual(toRaw(topColumn), topFirstRight)) {
       loopJudge(topColumn, "right")
       && (firstRightClassName = firstRightClassNameConstant);
     }

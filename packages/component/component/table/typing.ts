@@ -96,7 +96,7 @@ interface TableBaseColumn {
 }
 
 export type TableColumn =
-  (TableBaseColumn & { type: undefined; key: string }) |
+  (TableBaseColumn & { type?: undefined; key: string }) |
   (TableBaseColumn & { type: string; key?: string });
 
 export type FixedDirectionType =
