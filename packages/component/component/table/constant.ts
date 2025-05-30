@@ -8,7 +8,7 @@ import type { RequiredTableProps, TableEmit, TableProps } from "./typing";
 
 export const columnsTypeList = ["radio", "checkbox", "number"];
 
-interface LayTableContextType {
+export interface LayTableContextType {
   tableEmits: TableEmit;
   tableProps: RequiredTableProps;
   tableSlots: Slots;

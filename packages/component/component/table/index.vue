@@ -19,7 +19,7 @@ import LayEmpty from "../empty/index.vue";
 import TableHeader from "./components/TableHeader.vue";
 import TableMain from "./components/TableMain";
 import TablePage from "./components/TablePage.vue";
-import TableToolbar from "./components/TableToolbar.vue";
+import TableToolbar from "./components/TableToolbar";
 import TableTotal from "./components/TableTotal.vue";
 import { LAY_TABLE_CONTEXT } from "./constant";
 

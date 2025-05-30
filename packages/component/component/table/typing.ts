@@ -2,6 +2,7 @@ import type { RenderProps } from "@layui/component/component/_components/render"
 import type { PageProps } from "@layui/component/component/page/interface";
 // import type { TooltipProps } from "@layui/component/component/tooltip/types";
 import type { CommonAlign, Recordable } from "@layui/component/types";
+import type { VNode } from "vue";
 
 export interface TableProps {
   id?: string;
@@ -121,4 +122,5 @@ export interface TableDefaultToolbarComplex {
   title: string;
   icon: string;
   onClick?: () => void;
+  render?: () => VNode;
 }

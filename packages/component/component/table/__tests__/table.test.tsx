@@ -1,9 +1,10 @@
 import { DOMWrapper, type VueWrapper, mount } from "@vue/test-utils";
 import LayTable from "../index.vue";
 import LayCheckboxV2 from "@layui/component/component/checkboxV2/index.vue";
+import Button from '@layui/component/component/button/index.vue'
 
 import { describe, expect, test, vi } from "vitest";
-import { nextTick, reactive, ref } from "vue";
+import {h, nextTick, reactive, ref} from "vue";
 import { sleep } from "../../../test-utils";
 
 describe("LayTable", () => {
@@ -492,15 +493,75 @@ describe("LayTable", () => {
       },
     });
     const iconBoxs = wrapper.findAll(
-      ".layui-table-view .layui-table-tool-self .layui-inline"
+      ".layui-table-view .layui-table-tool-self .layui-space-item"
     );
 
     expect(iconBoxs.length).toBe(3);
-    expect(iconBoxs[1].attributes().title).toBe("刷新");
+    expect(iconBoxs[1].find('div').attributes().title).toBe("刷新");
 
-    await iconBoxs[1].trigger("click");
+    await iconBoxs[1].find('div').trigger("click");
 
     expect(value).toBe(2);
+  });
+
+  test("default-toolbar 渲染自定义组件", async () => {
+    const columns = [
+      {
+        fixed: "left" as const,
+        type: "checkbox",
+        title: "复选",
+        key: "checkbox",
+      },
+      {
+        title: "编号",
+        width: "100px",
+        key: "id",
+      },
+    ];
+
+    const dataSource = ref([
+      {
+        id: "1",
+      },
+      {
+        id: "2",
+      },
+    ]);
+
+    let value = 1;
+
+    const defaultToolbars = [
+      "filter",
+      {
+        render: () => h(Button, {
+          onClick: () => {
+            value++;
+          },
+        })
+      },
+    ];
+
+    const wrapper = mount({
+      setup() {
+        return () => (
+            <LayTable
+                columns={columns}
+                dataSource={dataSource.value}
+                defaultToolbar={defaultToolbars}
+            ></LayTable>
+        );
+      },
+    });
+
+    const iconBoxs = wrapper.findAll(
+        ".layui-table-view .layui-table-tool-self .layui-space-item"
+    );
+
+    expect(iconBoxs[1].find('.layui-btn').attributes().type).toBe('button')
+
+    await iconBoxs[1].find('.layui-btn').trigger("click");
+
+    expect(value).toBe(2)
   });
 
   test("page change", async () => {

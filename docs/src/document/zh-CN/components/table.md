@@ -235,11 +235,11 @@ const clearSelectedKeys3 = () => {
 
 const getSelectedKeys3 = () => {
   layer.msg(selectedKeys3.value);
-}
+} 
 
 const getCheckData3 = () => {
   layer.msg(JSON.stringify(tableRef3.value.getCheckData()));
-}
+}   
 
 const columns3 = [
   { fixed: "left", type: "checkbox", title: "复选"},
@@ -1020,6 +1020,7 @@ interface TableDefaultToolbarComplex {
   title: string;
   icon: string;
   onClick?: () => void;
+  render?: () => VNode;
 }
 
 ```
