@@ -1,0 +1,21 @@
+import type { Component } from "vue";
+import type { TabItemVNode } from "../components/interface";
+import LayTabItem from "@layui/component/component/tabItem";
+
+import { flattedVNode } from "@layui/component/utils";
+import { computed, useSlots } from "vue";
+
+export function useTabSlot() {
+  const slots = useSlots();
+
+  const defaultSlot = computed(() => {
+    return (!slots.default
+      ? []
+      : flattedVNode(slots.default())
+        ?.filter((slot) => {
+          return (slot.type as Component)?.name === LayTabItem.name;
+        })) as TabItemVNode[];
+  });
+
+  return { defaultSlot };
+}

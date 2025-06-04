@@ -1,12 +1,24 @@
-import { Slots } from "vue";
+import type { TabItemProps } from "@layui/component/component/tabItem/interface";
+import type { NumberOrString } from "@layui/component/types";
+import type { Slots } from "vue";
 
 export const TabInjectKey = Symbol("layuiTab");
 
+export interface TabProps {
+  type?: "brief" | "card";
+  modelValue: TabItemProps["id"];
+  allowClose?: boolean;
+  tabPosition?: TabPosition;
+  beforeClose?: Function;
+  beforeLeave?: Function;
+  activeBarTransition?: boolean;
+}
+
 export interface TabData {
-  id: string;
+  id: NumberOrString;
   title?: string | Function;
   icon?: string | Function;
-  closable?: string | boolean;
+  closable?: boolean;
   slots: Slots;
 }
 
