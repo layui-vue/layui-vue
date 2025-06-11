@@ -175,7 +175,7 @@ export function useTabHeader(props: TabHeaderProps) {
       return;
     }
 
-    // ul视图宽
+    // ul视图宽/高
     const size = getHorizontalVerticalValue(ulRef.value.getBoundingClientRect(), ["width", "height"]);
 
     const originTransformValue = transformValue.value;
@@ -262,12 +262,12 @@ export function useTabHeader(props: TabHeaderProps) {
     const ulWidthOrHeight = getHorizontalVerticalValue(ulRef.value.getBoundingClientRect(), ["width", "height"]);
     const currentNodeLeftOrTop = getHorizontalVerticalValue(currentNode.getBoundingClientRect(), ["left", "top"]);
 
-    // 点击的 `li左侧` 距离 `ul左侧`
+    // 点击的 `li左/上侧` 距离 `ul左/上侧`
     const diff = currentNodeLeftOrTop - ulLeftOrTop;
 
     /**
      * 小于视图一半的距离
-     * 移动到最左侧
+     * 移动到最左/上侧
      */
     if (diff < ulWidthOrHeight / 2) {
       transformValue.value = 0;
@@ -275,7 +275,7 @@ export function useTabHeader(props: TabHeaderProps) {
     }
 
     /**
-     * 大于 （li总宽度 - 视图一半距离）
+     * 大于 （li总宽/高度 - 视图一半距离）
      * 移动到最右侧
      */
     if (diff > (ulScrollWidthOrHeight - ulWidthOrHeight / 2)) {
