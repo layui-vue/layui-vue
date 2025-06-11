@@ -1,5 +1,5 @@
 import { withInstall } from "../../utils";
-import Component from "./tab.vue";
+import Component from "./index.vue";
 
 const component = withInstall(Component);
 export default component;

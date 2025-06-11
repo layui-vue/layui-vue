@@ -1,7 +1,9 @@
 import type { InjectionKey, Ref } from "vue";
-import type { TabProps } from "./interface";
+import type { TabEmits, TabProps } from "./interface";
 
 export interface LayTabContextType {
+  emits: TabEmits;
+
   modelValue: Ref<TabProps["modelValue"]>;
 }
 

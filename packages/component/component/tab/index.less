@@ -28,6 +28,12 @@
 .layui-tab-head {
   display: inline-block;
   overflow: hidden;
+  position: relative;
+}
+
+.layui-tab-head.is-left,
+.layui-tab-head.is-right {
+  height: 100%;
 }
 
 .layui-tab-card .layui-tab-head {
@@ -40,10 +46,10 @@
   height: 40px;
   white-space: nowrap;
   font-size: 0;
-  border-bottom-width: 1px;
-  border-bottom-style: solid;
+  border-bottom: none; // 替换为after实现下划线
   transition: all 0.2s;
   -webkit-transition: all 0.2s;
+  z-index: 2;
 }
 
 .layui-tab-title li {
@@ -65,6 +71,37 @@
   display: block;
   padding: 0 15px;
   margin: 0 -15px;
+}
+
+.layui-tab-head {
+  &::after{
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    border-bottom: 1px solid var(--global-neutral-color-3);
+    z-index: 1;
+  }
+}
+
+.layui-tab-head.is-left,
+.layui-tab-head.is-right{
+  &::after{
+    height: 100%;
+    border-bottom: none
+  }
+}
+
+.layui-tab-head.is-left{
+  &::after{
+    border-right: 1px solid var(--global-neutral-color-3);
+  }
+}
+.layui-tab-head.is-right {
+  &::after{
+    border-left: 1px solid var(--global-neutral-color-3);
+  }
 }
 
 .layui-tab-head.is-top,
@@ -92,11 +129,6 @@
   margin-left: -1px;
 }
 
-.layui-tab-title.is-top li,
-.layui-tab-title.is-bottom li {
-  border-bottom: 1px solid #eeeeee;
-}
-
 .layui-tab-title.is-right {
   border-left: 1px solid var(--global-neutral-color-3);
 }
@@ -110,13 +142,13 @@
   background-color: #fff;
 }
 
-.layui-tab-title .layui-this:after {
+.layui-tab-head .layui-tab-title .layui-this:after {
   position: absolute;
   left: 0;
   top: 0;
   content: "";
   width: 100%;
-  height: 41px;
+  height: 100%;
   border-width: 1px;
   border-style: solid;
   border-bottom-color: #fff;
@@ -178,10 +210,17 @@
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1);
 }
 
-.layui-tab-card>.layui-tab-head>.layui-tab-title.is-top {
-  margin-top: -1px;
-  margin-left: -1px;
+.layui-tab-card .layui-tab-head .layui-tab-title.is-top,
+.layui-tab-card .layui-tab-head .layui-tab-title.is-bottom{
+  li{
+    &:first-child {
+      &::after{
+        border-left: none !important;
+      }
+    }
+  }
 }
+ 
 
 .layui-tab-card>.layui-tab-head>.layui-tab-title.is-right,
 .layui-tab-card>.layui-tab-head>.layui-tab-title.is-left {
@@ -212,11 +251,13 @@
 .layui-tab-card>.layui-tab-head>.layui-tab-title.is-top .layui-this:after {
   border: 1px solid var(--global-neutral-color-3);
   border-bottom-color: #fff;
+  border-top: none;
 }
 
 .layui-tab-card>.layui-tab-head>.layui-tab-title.is-bottom .layui-this:after {
   border: 1px solid var(--global-neutral-color-3);
   border-top-color: #fff;
+  border-bottom: none;
 }
 
 .layui-tab-card>.layui-tab-head>.layui-tab-title.is-left .layui-this:after {
@@ -231,10 +272,27 @@
 
 .layui-tab-card>.layui-tab-head .layui-tab-bar {
   width: 40px;
-  line-height: 40px;
   border-radius: 0;
-  border-top: none;
-  border-right: none;
+}
+
+.layui-tab-card>.layui-tab-head.is-top,
+.layui-tab-card>.layui-tab-head.is-bottom {
+  .layui-tab-bar {
+    border-right: none;
+  }
+}
+
+.layui-tab-card>.layui-tab-head.is-top {
+  .layui-tab-bar {
+    border-top: none;
+  }
+}
+
+.layui-tab-card .layui-tab-head.is-left,
+.layui-tab-card .layui-tab-head.is-right{
+  .prev{
+    border-top: none;
+  }
 }
 
 .layui-tab-card>.layui-tab-more .layui-this {
@@ -247,34 +305,50 @@
 }
 
 .layui-tab-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: absolute;
   right: 0;
   top: 0;
   z-index: 10;
   width: 30px;
-  height: 39px;
-  line-height: 39px;
+  height: 40px;
   border-width: 1px;
   border-style: solid;
-  border-radius: 2px;
-  text-align: center;
+  border-radius: 2px 2px 0 0;
   background-color: #fff;
   cursor: pointer;
+  border-bottom-color: #fff;
 }
 
 .layui-tab-bar.prev{
   left: 0;
-  right:auto;
   border-right: 1px solid var(--global-neutral-color-3) !important;
+}
+
+.layui-tab-card .layui-tab-bar{
   border-left: none !important;
 }
 
 .layui-tab-bar .layui-icon {
-  top: 3px;
   font-size: 13.6px;
-  display: inline-block;
   transition: all 0.3s;
   -webkit-transition: all 0.3s;
+}
+
+
+.layui-tab-head.is-left .layui-tab-bar,
+.layui-tab-head.is-right .layui-tab-bar{
+  width: 100%;
+  bottom: 0;
+  top: unset;
+
+}
+
+.layui-tab-head.is-left .layui-tab-bar.prev,
+.layui-tab-head.is-right .layui-tab-bar.prev{
+  top: 0;
 }
 
 .layui-tab-item {
@@ -346,7 +420,7 @@
 }
 
 .is-top .layui-tab-active-bar{
-  bottom: -1px;
+  bottom: 0px;
   height: 1.5px;
 }
 
