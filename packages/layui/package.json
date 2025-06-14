@@ -52,7 +52,7 @@
     "build:all": "vite build --emptyOutDir --config ./script/build.all.ts",
     "build:es": "vite build --emptyOutDir --config ./script/build.es.ts",
     "build:umd": "vite build --emptyOutDir --config ./script/build.umd.ts",
-    "build:dts": "vue-tsc -p tsconfig.build.json --declaration --emitDeclarationOnly",
+    "build:dts": "rimraf types && vue-tsc -p tsconfig.build.json --declaration --emitDeclarationOnly",
     "test": "vitest run"
   },
   "dependencies": {
