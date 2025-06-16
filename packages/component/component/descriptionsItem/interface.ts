@@ -1,6 +1,6 @@
 import type { CSSProperties, VNode, Slot } from "vue";
 
-export type BaseAlignType = "left" | "center" | " right";
+export type BaseAlignType = "left" | "center" | "right";
 
 export interface DescriptionsItemProps {
   label?: string;
