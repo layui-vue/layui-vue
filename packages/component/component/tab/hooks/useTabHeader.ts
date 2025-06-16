@@ -101,6 +101,10 @@ export function useTabHeader(props: TabHeaderProps) {
 
   const styleTabBar = ref<StyleValue>();
   function setTabBarStyle() {
+    if (props.type !== "brief") {
+      return;
+    }
+
     let currentSize = 0;
     let totalSize = 0;
 
@@ -121,7 +125,7 @@ export function useTabHeader(props: TabHeaderProps) {
       [direction.value]: `${currentSize}px`,
       transform: `translate${axis.value}(${totalSize}px)`,
       transition: props.activeBarTransition ? "transform .3s" : undefined,
-    } as StyleValue;
+    };
   }
 
   /**
@@ -217,7 +221,7 @@ export function useTabHeader(props: TabHeaderProps) {
   }
 
   watch(
-    () => [props.modelValue, props.tabPosition],
+    () => [props.modelValue, props.tabPosition, props.type],
     async () => {
       await nextTick();
       handleUlRefResizeObserver();
