@@ -11,6 +11,8 @@ import { useTab } from "./hooks/useTab";
 import { useTabSlot } from "./hooks/useTabSlot";
 import "./index.less";
 
+export type { TabProps };
+
 defineOptions({
   name: "LayTab",
 });
