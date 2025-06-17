@@ -9,6 +9,7 @@ import LayDropdown from "@layui/component/component/dropdown/index.vue";
 import LayIcon from "@layui/component/component/icon";
 import LaySpace from "@layui/component/component/space/index.vue";
 import { clsPrefix, isValueArray } from "@layui/component/utils";
+
 import { defineComponent, h, inject } from "vue";
 import { LAY_TABLE_CONTEXT } from "../constant";
 import { useToolBar } from "../hooks/useToolbar";
@@ -109,7 +110,7 @@ const TableToolbar = defineComponent({
   props: {
     defaultToolbar: {
       required: true,
-      type: Array as PropType<TableToolBarType["defaultToolbar"]>,
+      type: [Array, Boolean] as PropType<TableToolBarType["defaultToolbar"]>,
     },
 
     hierarchicalColumns: {
@@ -134,7 +135,7 @@ const TableToolbar = defineComponent({
 
     tableRef: {
       required: true,
-      type: Object as PropType<TableToolBarType["tableRef"]>,
+      type: [Object, null] as PropType<TableToolBarType["tableRef"]>,
     },
   },
 

@@ -16,6 +16,7 @@ export default antfu(
       "**/*.md",
       "docs/",
       "**/*.test.*",
+      "**/*.d.ts",
     ],
 
     stylistic: {
