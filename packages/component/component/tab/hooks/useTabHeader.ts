@@ -38,7 +38,11 @@ export function useTabHeader(props: TabHeaderProps) {
   let ulRefObserver: UseResizeObserverReturn | null = null;
 
   onMounted(() => {
-    ulRefObserver = useResizeObserver(ulRef, handleUlRefResizeObserver);
+    ulRefObserver = useResizeObserver(ulRef, () => {
+      handleUlRefResizeObserver();
+      translateToCurrentTabItem();
+      setTabBarStyle();
+    });
   });
 
   onUnmounted(() => {
@@ -49,10 +53,10 @@ export function useTabHeader(props: TabHeaderProps) {
    * li内容是否超出视图尺寸
    */
   function handleUlRefResizeObserver() {
-    const scroll = getHorizontalVerticalValue(ulRef.value, ["scrollWidth", "scrollHeight"]);
-    const offset = getHorizontalVerticalValue(ulRef.value, ["offsetWidth", "offsetHeight"]);
+    const ulScrollWidthOrHeight = getHorizontalVerticalValue(ulRef.value, ["scrollWidth", "scrollHeight"]);
+    const ulViewWidthOrHeight = getHorizontalVerticalValue(ulRef.value, ["offsetWidth", "offsetHeight"]);
 
-    isShowPreNext.value = !!(ulRef.value && scroll > offset);
+    isShowPreNext.value = !!(ulRef.value && ulScrollWidthOrHeight > ulViewWidthOrHeight);
   }
 
   const classTabHead = computed(() => {
@@ -69,8 +73,8 @@ export function useTabHeader(props: TabHeaderProps) {
       return undefined;
     }
 
-    const preSize = getHorizontalVerticalValue(preRef.value!.getBoundingClientRect(), ["width", "height"]);
-    const nextSize = getHorizontalVerticalValue(nextRef.value!.getBoundingClientRect(), ["width", "height"]);
+    const preSize = getHorizontalVerticalValue(preRef.value, ["offsetWidth", "offsetHeight"]);
+    const nextSize = getHorizontalVerticalValue(nextRef.value, ["offsetWidth", "offsetHeight"]);
 
     return isHorizontal.value
       ? {
@@ -110,7 +114,7 @@ export function useTabHeader(props: TabHeaderProps) {
 
     for (let index = 0; index < liSRefS.value.length; index++) {
       const li = liSRefS.value[index];
-      const value = li.getBoundingClientRect()[direction.value];
+      const value = getHorizontalVerticalValue(li, ["offsetWidth", "offsetHeight"]);
 
       if (li.classList.contains(clsPrefix("this"))) {
         currentSize = value;
@@ -180,7 +184,7 @@ export function useTabHeader(props: TabHeaderProps) {
     }
 
     // ul视图宽/高
-    const size = getHorizontalVerticalValue(ulRef.value.getBoundingClientRect(), ["width", "height"]);
+    const ulViewWidthOrHeight = getHorizontalVerticalValue(ulRef.value, ["offsetWidth", "offsetHeight"]);
 
     const originTransformValue = transformValue.value;
 
@@ -188,8 +192,8 @@ export function useTabHeader(props: TabHeaderProps) {
       return;
     }
 
-    const v = originTransformValue > size
-      ? originTransformValue - size
+    const v = originTransformValue > ulViewWidthOrHeight
+      ? originTransformValue - ulViewWidthOrHeight
       : 0;
 
     transformValue.value = v;
@@ -205,17 +209,17 @@ export function useTabHeader(props: TabHeaderProps) {
 
     const originTransformValue = transformValue.value;
     // ul实际宽高
-    const ulTotalSize = getHorizontalVerticalValue(ulRef.value, ["scrollWidth", "scrollHeight"]);
+    const ulScrollWidthOrHeight = getHorizontalVerticalValue(ulRef.value, ["scrollWidth", "scrollHeight"]);
     // ul视图宽高
-    const ulViewSize = getHorizontalVerticalValue(ulRef.value.getBoundingClientRect(), ["width", "height"]);
+    const ulViewWidthOrHeight = getHorizontalVerticalValue(ulRef.value, ["offsetWidth", "offsetHeight"]);
 
-    if (ulTotalSize - originTransformValue <= ulViewSize) {
+    if (ulScrollWidthOrHeight - originTransformValue <= ulViewWidthOrHeight) {
       return;
     }
 
-    const v = ulTotalSize - originTransformValue > ulViewSize * 2
-      ? originTransformValue + ulViewSize
-      : ulTotalSize - ulViewSize;
+    const v = ulScrollWidthOrHeight - originTransformValue > ulViewWidthOrHeight * 2
+      ? originTransformValue + ulViewWidthOrHeight
+      : ulScrollWidthOrHeight - ulViewWidthOrHeight;
 
     transformValue.value = v;
   }
@@ -224,7 +228,6 @@ export function useTabHeader(props: TabHeaderProps) {
     () => [props.modelValue, props.tabPosition, props.type],
     async () => {
       await nextTick();
-      handleUlRefResizeObserver();
       translateToCurrentTabItem();
       setTabBarStyle();
     },
@@ -261,9 +264,12 @@ export function useTabHeader(props: TabHeaderProps) {
       return;
     }
 
+    // ul实际宽or高
     const ulScrollWidthOrHeight = getHorizontalVerticalValue(ulRef.value, ["scrollWidth", "scrollHeight"]);
+    // ul视图宽or高
+    const ulViewWidthOrHeight = getHorizontalVerticalValue(ulRef.value, ["offsetWidth", "offsetHeight"]);
+
     const ulLeftOrTop = getHorizontalVerticalValue(ulRef.value.getBoundingClientRect(), ["left", "top"]);
-    const ulWidthOrHeight = getHorizontalVerticalValue(ulRef.value.getBoundingClientRect(), ["width", "height"]);
     const currentNodeLeftOrTop = getHorizontalVerticalValue(currentNode.getBoundingClientRect(), ["left", "top"]);
 
     // 点击的 `li左/上侧` 距离 `ul左/上侧`
@@ -273,7 +279,7 @@ export function useTabHeader(props: TabHeaderProps) {
      * 小于视图一半的距离
      * 移动到最左/上侧
      */
-    if (diff < ulWidthOrHeight / 2) {
+    if (diff < ulViewWidthOrHeight / 2) {
       transformValue.value = 0;
       return;
     }
@@ -282,12 +288,12 @@ export function useTabHeader(props: TabHeaderProps) {
      * 大于 （li总宽/高度 - 视图一半距离）
      * 移动到最右侧
      */
-    if (diff > (ulScrollWidthOrHeight - ulWidthOrHeight / 2)) {
-      transformValue.value = ulScrollWidthOrHeight - ulWidthOrHeight;
+    if (diff > (ulScrollWidthOrHeight - ulViewWidthOrHeight / 2)) {
+      transformValue.value = ulScrollWidthOrHeight - ulViewWidthOrHeight;
       return;
     }
 
-    transformValue.value = diff - ulWidthOrHeight / 2;
+    transformValue.value = diff - ulViewWidthOrHeight / 2;
   }
 
   /**
@@ -302,10 +308,9 @@ export function useTabHeader(props: TabHeaderProps) {
     }
 
     // ul实际宽or高
-    const ulTotalWidthOrHeight = getHorizontalVerticalValue(ulRef.value, ["scrollWidth", "scrollHeight"]);
-
+    const ulScrollWidthOrHeight = getHorizontalVerticalValue(ulRef.value, ["scrollWidth", "scrollHeight"]);
     // ul视图宽or高
-    const ulViewWidthOrHeight = getHorizontalVerticalValue(ulRef.value.getBoundingClientRect(), ["width", "height"]);
+    const ulViewWidthOrHeight = getHorizontalVerticalValue(ulRef.value, ["offsetWidth", "offsetHeight"]);
 
     const originTransformValue = transformValue.value;
 
@@ -315,7 +320,7 @@ export function useTabHeader(props: TabHeaderProps) {
 
     const newValue = Math.min(
       Math.max(originTransformValue + distance, 0),
-      ulTotalWidthOrHeight - ulViewWidthOrHeight,
+      ulScrollWidthOrHeight - ulViewWidthOrHeight,
     );
 
     transformValue.value = newValue;

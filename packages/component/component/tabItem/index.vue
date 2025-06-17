@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import type { TabItemProps as _TabItemProps } from "./interface";
+import type { TabItemProps } from "./interface";
 
 import { clsPrefix } from "@layui/component/utils";
 import { inject } from "vue";
 
 import { LAY_TAB_CONTEXT } from "../tab/constant";
 
-export type TabItemProps = _TabItemProps;
+export type { TabItemProps };
 
 defineOptions({
   name: "LayTabItem",
