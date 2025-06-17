@@ -8,13 +8,11 @@ import LayCheckboxV2 from "@layui/component/component/checkboxV2/index.vue";
 import LayDropdown from "@layui/component/component/dropdown/index.vue";
 import LayIcon from "@layui/component/component/icon";
 import LaySpace from "@layui/component/component/space/index.vue";
-import { isValueArray } from "@layui/component/utils";
+import { clsPrefix, isValueArray } from "@layui/component/utils";
 
 import { defineComponent, h, inject } from "vue";
 import { LAY_TABLE_CONTEXT } from "../constant";
 import { useToolBar } from "../hooks/useToolbar";
-
-const clsPrefix = (cls: string) => `layui-${cls}`;
 
 function handleCheckChange(column: TableColumn) {
   column.hide = !column.hide;

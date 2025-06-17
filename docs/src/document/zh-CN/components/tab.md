@@ -238,8 +238,8 @@ export default {
 
 <template>
   <lay-tab type="card" v-model="current5" allow-close @change="change5" @close="close5" :beforeClose="beforeClose">
-    <lay-tab-item title="选项一" id="1" closable="true"><div style="padding:20px">选项一</div></lay-tab-item>
-    <lay-tab-item title="选项二" id="2" closable="false"><div style="padding:20px">选项二</div></lay-tab-item>
+    <lay-tab-item title="选项一" id="1" :closable="true"><div style="padding:20px">选项一</div></lay-tab-item>
+    <lay-tab-item title="选项二" id="2" :closable="false"><div style="padding:20px">选项二</div></lay-tab-item>
     <lay-tab-item title="选项三" id="3"><div style="padding:20px">选项三</div></lay-tab-item>
     <lay-tab-item title="选项四" id="4"><div style="padding:20px">选项四</div></lay-tab-item>
     <lay-tab-item title="选项五" id="5"><div style="padding:20px">选项五</div></lay-tab-item>
@@ -421,12 +421,12 @@ export default {
 | 属性                | 描述                                               | 类型                                      | 默认值   | 可选值                        |
 | ------------------- | -------------------------------------------------- | ----------------------------------------- | -------- | ----------------------------- |
 | v-model             | 当前激活                                           | `string`                                  | -        | -                             |
-| type                | 主题样式                                           | `string`                                  | -        | `brief` `card`                            |
+| type                | 主题样式                                           | `string`                                  | `default`   | `default` `brief` `card`          |
 | tabPosition         | 位置                                               | `string`                                  | `bottom` | `top` `bottom` `left` `right` |
-| allow-close         | 允许关闭                                           | `boolean`                                 | `false`  | `true` `false`                |
+| allow-close         | 允许关闭                                           | `boolean`                                 | `false`  | -                |
 | before-close        | 关闭之前的回调钩子函数,参数(`id`), `return false` 表示不进行关闭                  | `Function` | -        | -                             |
 | before-leave        | 切换标签之前的回调钩子函数,  参数(`id`), `return false` 表示不进行关闭              | `Function` | -        | -                             |
-| activeBarTransition | 是否开启 activeBar 动画,仅 brief 有效,默认 `false` | `boolean`                                 | `false`  | `true` `false`                |
+| activeBarTransition | 是否开启 activeBar 动画,仅 brief 有效,默认 `false` | `boolean`                                 | `false`  | -                |
 
 :::
 

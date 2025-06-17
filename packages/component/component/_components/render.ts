@@ -1,9 +1,9 @@
-import type { PropType, Slots, VNodeTypes } from "vue";
+import type { PropType, Slots, VNodeChild } from "vue";
 
 import { normalizeProps } from "@layui/component/utils";
 import { defineComponent } from "vue";
 
-type RenderFunc = (props: Record<string, unknown>) => VNodeTypes;
+export type RenderFunc = (props: Record<string, unknown>) => VNodeChild;
 
 export interface RenderProps {
   render: string | RenderFunc;
