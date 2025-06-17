@@ -52,8 +52,8 @@ const page = reactive({ current: 1, limit: 10, total: 100 });
 
 const columns = ref([
   { title:"选项", width: "55px", type: "checkbox", fixed: "left" },
-  { title:"编号", width: "80px", key:"id", fixed: "left", sort: "desc" },
-  { title:"姓名", width: "80px", key:"name", sort: "desc" },
+  { title:"编号", width: "80px", key:"id", fixed: "left", sort: true },
+  { title:"姓名", width: "80px", key:"name", sort: true },
   { title:"状态", width: "180px", key:"status", customSlot: "status"},
   { title:"邮箱", width: "120px", key:"email" },
   { title:"性别", width: "80px", key:"sex" },
@@ -152,7 +152,7 @@ const loadDataSource = (page, pageSize) => {
 import { ref } from 'vue'
 
 const columns2 = [
-  { title:"编号", width:"80px", key:"id", fixed: "left", sort: "desc" },
+  { title:"编号", width:"80px", key:"id", fixed: "left", sort: true },
   { title:"姓名", width:"80px", key:"name" },
   { title:"班级", width:"120px", key:"classes" },
   { title:"语文", width:"80px", key:"chinese" },
@@ -787,7 +787,7 @@ const dataSource9 = ref([
 import { ref } from 'vue'
 
 const columns2 = [
-  { title:"编号", width:"80px", key:"id", fixed: "left", sort: "desc"},
+  { title:"编号", width:"80px", key:"id", fixed: "left", sort: true},
   { title:"姓名", width:"80px", key:"name" },
   { title:"班级", width:"120px", key:"classes" },
   {
@@ -847,7 +847,7 @@ const defaultExpandAll2 = ref(false)
 import { ref } from 'vue'
 
 const columns11 = [
-  { title:"编号", width:"80px", key:"id", fixed: "left", sort: "desc"},
+  { title:"编号", width:"80px", key:"id", fixed: "left", sort: true},
   { title:"姓名", width:"80px", key:"name" },
 ]
 
@@ -926,7 +926,7 @@ const defaultToolbars = [
 | row-contextmenu | 行右击     | { row: 当前行数据 }                    |
 | cell-double     | 单元格双击 | data:当前单元格信息, event             |
 | change          | 分页事件。<span style="color: red;">将在未来版本废弃，请替换为`page.change`</span>   | { current: 当前页码, limit: 每页数量 } |
-| sort-change     | 排序事件   | sort: string                           |
+| sort-change     | 点击排序事件   | key: 当前column.key， nextSort: 排序字段                 |
 | expand-change  `2.18.0`   | 行展开/收起   | data:当前单元格信息, event        |
 | checkbox  `2.22.0`   |  单行 checkbox 事件   | state: 是否选中, data: 点击行数据源  |
 | checkbox-all  `2.22.0`   | 全选 checkbox 事件   | selectedKeys: 选中数据        |
@@ -974,7 +974,7 @@ const defaultToolbars = [
 | customSlot           | 自定义插槽                     | `string` `function` 参数{row, data, column, rowIndex, columnIndex}    | --      | --                          | `2.17.2`新增`function`       |
 | width                | 宽度                           | --                             | --      | --                          | --       |
 | minWidth             | 最小宽度                       | --                             | `100px` | --                          | --       |
-| sort                 | 排序，当值为字符串 `custom` 可通过 `sort-change` 事件自定义/服务端设置排序解结果                          | `boolean`/ `string`            | `false`      | --                          | --       |
+| sort                 | 是否排序，当值为字符串 `custom` 不会触发内部排序逻辑，可通过 `sort-change` 事件自定义/服务端设置排序解结果                          | `boolean`/ `custom`            | `false`      | --                          | --       |
 | titleSlot            | 标题自定义插槽                 | `string` `function` 参数{column, columnIndex} | --      | --                          | `2.22.1`新增`function`       |
 | align                | 对齐方式                       | `string`                       | `left`  | `left` `right` `center`     | --       |
 | ellipsisTooltip      | 当内容过长被隐藏时显示 tooltip | `boolean`                      | `false` | `true` `false`              | --       |

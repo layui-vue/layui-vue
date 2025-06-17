@@ -72,7 +72,7 @@ interface TableBaseColumn {
   customSlot?: RenderProps["render"];
   width?: string;
   minWidth?: string;
-  sort?: string;
+  sort?: boolean | string;
   titleSlot?: RenderProps["render"];
   align?: CommonAlign;
   ellipsisTooltip?: boolean;
