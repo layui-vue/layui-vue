@@ -41,7 +41,7 @@ const ToolbarItem = defineComponent({
 
   setup(props) {
     return () => {
-      const { toolbar, resetParams: { t, exportData, hierarchicalColumns } } = props;
+      const { toolbar, resetParams: { t, exportData, hierarchicalColumns, print } } = props;
 
       // filter
       if (toolbar === "filter") {
