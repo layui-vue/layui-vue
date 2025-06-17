@@ -94,6 +94,7 @@ interface TableBaseColumn {
     column: TableColumn,
     dataSource: TableProps["dataSource"]
   ) => void;
+  exportCellType?: string;
 }
 
 export type TableColumn =

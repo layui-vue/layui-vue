@@ -85,7 +85,7 @@ export function useToolBar(props: TableToolBarType) {
                 // 则不再进行结构拼接。
                 if (rowspan !== 0 && colspan !== 0) {
                   const text = columnData ? columnData[tableColumn.key] : "";
-                  const xType = isNumber(text) ? "ss:Type='Number'" : "x:str";
+                  const xType = tableColumn.exportCellType ?? (isNumber(text) ? "ss:Type='Number'" : "x:str");
 
                   tableStr += `<td colspan=${colspan} rowspan=${rowspan} ${xType}>${text}</td>`;
                 }
