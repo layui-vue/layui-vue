@@ -4,7 +4,7 @@ function utoa(data: string): string {
   return btoa(unescape(encodeURIComponent(data)));
 }
 
-export const openPlayground = (source: string) => {
+export function openPlayground(source: string) {
   const code = decodeURIComponent(source);
   const originCode = {
     [MAIN_FILE_NAME]: code,
@@ -16,4 +16,4 @@ export const openPlayground = (source: string) => {
     encoded,
     link,
   };
-};
+}

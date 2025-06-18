@@ -1,12 +1,8 @@
-<template>
-  <div id="docsearch"></div>
-</template>
-
 <script setup name="LaySelect" lang="ts">
 import { onMounted } from "vue";
 
 onMounted(() => {
-  // @ts-ignore
+  // @ts-expect-error TODO
   docsearch({
     appId: "BIYZTK0F0Q",
     apiKey: "de599990b844bc1b325310f61ad19a78",
@@ -16,6 +12,10 @@ onMounted(() => {
   });
 });
 </script>
+
+<template>
+  <div id="docsearch" />
+</template>
 
 <style>
 .DocSearch-Button {

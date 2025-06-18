@@ -1,4 +1,4 @@
-const menus = [
+export default [
   {
     id: 1,
     title: "通用",
@@ -515,5 +515,3 @@ const menus = [
     ],
   },
 ];
-
-export default menus;

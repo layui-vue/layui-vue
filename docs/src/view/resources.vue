@@ -8,7 +8,9 @@
       - 庆山
     </blockquote>
     <fieldset class="layui-field layui-field-title">
-      <legend style="margin-bottom: 20px; text-align: center">独立组件</legend>
+      <legend style="margin-bottom: 20px; text-align: center">
+        独立组件
+      </legend>
       <div class="layui-field-box">
         <ul class="layui-row layui-col-space20">
           <li class="layui-col-sm12">
@@ -16,28 +18,32 @@
               <router-link to="/zh-CN/components/layer">
                 layer - vue
                 <cite>通用型弹出层组件</cite>
-                <img src="https://img.shields.io/badge/npm-v2.4.6-blue" alt="Version"/>
-                <img src="https://img.shields.io/badge/license-MIT-green" />
+                <img src="https://img.shields.io/badge/npm-v2.4.6-blue" alt="Version">
+                <img src="https://img.shields.io/badge/license-MIT-green">
               </router-link>
             </div>
           </li>
           <li class="layui-col-sm12">
             <div class="alone">
-              <router-link to="/zh-CN/components/icon"
-                >icons - vue<cite>图标组件化解决方案</cite>
+              <router-link to="/zh-CN/components/icon">
+                icons - vue<cite>图标组件化解决方案</cite>
                 <img
                   src="https://img.shields.io/npm/v/@layui/icons-vue.svg?sanitize=true"
-                  alt="Version" />
+                  alt="Version"
+                >
                 <img
                   src="https://img.shields.io/npm/l/@layui/icons-vue.svg?sanitize=true"
-              /></router-link>
+                >
+              </router-link>
             </div>
           </li>
         </ul>
       </div>
     </fieldset>
     <fieldset class="layui-field layui-field-title">
-      <legend style="margin-bottom: 20px; text-align: center">研发产品</legend>
+      <legend style="margin-bottom: 20px; text-align: center">
+        研发产品
+      </legend>
       <div class="layui-field-box">
         <ul class="layui-row layui-col-space6">
           <li class="layui-col-sm24">
@@ -45,14 +51,13 @@
               <a
                 href="https://gitee.com/layui-vue/layui-vue-admin"
                 target="_blank"
-                >layui - vue - admin<cite
-                  >开箱即用的 vue 3.0 后台管理模板
-                </cite>
+              >layui - vue - admin<cite>开箱即用的 vue 3.0 后台管理模板
+              </cite>
                 <img
                   src="https://img.shields.io/badge/version-v2.1.0-blue"
                   alt="Version"
-                />
-                <img src="https://img.shields.io/badge/license-MIT-green" />
+                >
+                <img src="https://img.shields.io/badge/license-MIT-green">
               </a>
             </div>
           </li>
@@ -60,19 +65,23 @@
       </div>
     </fieldset>
     <fieldset class="layui-field layui-field-title">
-      <legend style="margin-bottom: 20px; text-align: center">高阶组件</legend>
+      <legend style="margin-bottom: 20px; text-align: center">
+        高阶组件
+      </legend>
       <div class="layui-field-box">
         <ul class="layui-row layui-col-space6">
           <li class="layui-col-sm24">
             <div class="alone">
-              <router-link to="/zh-CN/components/jsonSchemaForm"
-                >json - schema - form<cite>配 置 化 高 级 表 单 组 件</cite>
+              <router-link to="/zh-CN/components/jsonSchemaForm">
+                json - schema - form<cite>配 置 化 高 级 表 单 组 件</cite>
                 <img
                   src="https://img.shields.io/npm/v/@layui/json-schema-form.svg?sanitize=true"
-                  alt="Version" />
+                  alt="Version"
+                >
                 <img
                   src="https://img.shields.io/npm/l/@layui/json-schema-form.svg?sanitize=true"
-              /></router-link>
+                >
+              </router-link>
             </div>
           </li>
         </ul>
@@ -87,18 +96,15 @@
       <a
         href="https://www.oschina.net"
         style="color: #16b777; font-weight: 800; margin: 0px 5px"
-        >Oschina</a
-      >
+      >Oschina</a>
       <a
         href="https://gitee.com"
         style="color: #c71d23; font-weight: 800; margin: 0px 5px"
-        >Gitee</a
-      >
+      >Gitee</a>
       <a
         href="https://www.iconfont.cn/"
         style="color: #9b16ff; font-weight: 800; margin: 0px 5px"
-        >iconfont</a
-      >
+      >iconfont</a>
     </p>
   </div>
 </template>

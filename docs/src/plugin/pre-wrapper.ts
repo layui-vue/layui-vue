@@ -1,4 +1,4 @@
-import MarkdownIt from "markdown-it";
+import type MarkdownIt from "markdown-it";
 
 export default (md: MarkdownIt): void => {
   const fence = md.renderer.rules.fence!;

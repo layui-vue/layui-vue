@@ -1,20 +1,25 @@
-<template>
-  <form>
-    <button type="button" @click="add" style="width: 50%">加</button>
-    <button type="button" @click="sub" style="width: 50%">减</button>
-  </form>
-</template>
 <script setup>
 const emit = defineEmits(["add", "sub"]);
 
-const add = () => {
+function add() {
   emit("add");
-};
+}
 
-const sub = () => {
+function sub() {
   emit("sub");
-};
+}
 </script>
+
+<template>
+  <form>
+    <button type="button" style="width: 50%" @click="add">
+      加
+    </button>
+    <button type="button" style="width: 50%" @click="sub">
+      减
+    </button>
+  </form>
+</template>
 
 <style scoped>
 form {

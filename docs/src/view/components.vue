@@ -1,3 +1,49 @@
+<script setup lang="ts">
+import { computed, ref, watch } from "vue";
+import { useRoute, useRouter } from "vue-router";
+import menusData from "./utils/menus";
+
+const route = useRoute();
+const router = useRouter();
+const currentPath = ref("/zh-CN/guide");
+
+const isMenuDisplay = ref(false);
+
+const menuDisplay = computed(() => (isMenuDisplay.value ? "200px" : "0px"));
+
+watch(
+  () => route.path,
+  (val) => {
+    currentPath.value = val;
+  },
+  {
+    immediate: true,
+    deep: true,
+  },
+);
+
+const menus = computed(() => {
+  return menusData.map((menu) => {
+    return {
+      ...menu,
+      children: [...(menu.children || [])].sort((a, b) => a.subTitle.localeCompare(b.subTitle)),
+    };
+  });
+});
+
+const selected = ref(1);
+
+function handleMenuOpen(val: boolean) {
+  isMenuDisplay.value = val;
+}
+
+function handleClick(menu: (typeof menus.value)[number]["children"][number]) {
+  selected.value = menu.id;
+  router.push(menu.path);
+  handleMenuOpen(false);
+}
+</script>
+
 <template>
   <lay-layout>
     <lay-side class="layui-menu-ref-1">
@@ -9,12 +55,14 @@
             class="layui-menu-item-group"
             lay-options="{type: 'group', isAllowSpread: true}"
           >
-            <div class="layui-menu-body-title">{{ menu.title }}</div>
-            <hr />
+            <div class="layui-menu-body-title">
+              {{ menu.title }}
+            </div>
+            <hr>
             <ul>
               <li
                 v-for="children in menu.children"
-                :key="children"
+                :key="children.subTitle"
                 :class="[
                   currentPath === children.path
                     ? 'layui-menu-item-checked2'
@@ -29,10 +77,10 @@
                       {{ children.subTitle }}
                     </span>
                     <lay-badge
-                      v-bind="children.badge"
                       v-if="children.badge"
+                      v-bind="children.badge"
                       style="float: right; margin-top: 11px"
-                    ></lay-badge>
+                    />
                   </router-link>
                 </div>
               </li>
@@ -55,7 +103,7 @@
         <lay-icon
           type="layui-icon-menu-fill"
           style="font-size: 32px"
-        ></lay-icon>
+        />
       </div>
       <div
         style="
@@ -67,58 +115,10 @@
       >
         <router-view />
       </div>
-      <lay-backtop></lay-backtop>
+      <lay-backtop />
     </lay-body>
   </lay-layout>
 </template>
-<script>
-import { ref, watch, computed } from "vue";
-import { useRouter, useRoute } from "vue-router";
-import menus from "./utils/menus";
-export default {
-  setup() {
-    const route = useRoute();
-    const router = useRouter();
-    const currentPath = ref("/zh-CN/guide");
-
-    const isMenuDisplay = ref(false);
-
-    const menuDisplay = computed(() => (isMenuDisplay.value ? "200px" : "0px"));
-
-    watch(
-      () => route.path,
-      (val) => {
-        currentPath.value = val;
-      },
-      {
-        immediate: true,
-        deep: true,
-      }
-    );
-
-    const selected = ref(1);
-
-    const handleMenuOpen = function (val) {
-      isMenuDisplay.value = val;
-    };
-
-    const handleClick = function (menu) {
-      selected.value = menu.id;
-      router.push(menu.path);
-      handleMenuOpen(false);
-    };
-
-    return {
-      menus,
-      selected,
-      currentPath,
-      handleClick,
-      handleMenuOpen,
-      menuDisplay,
-    };
-  },
-};
-</script>
 
 <style>
 @media screen and (max-width: 768px) {

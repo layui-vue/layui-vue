@@ -1,6 +1,6 @@
+import escapeHtml from "escape-html";
 import prism from "prismjs";
 import loadLanguages from "prismjs/components/index";
-import escapeHtml from "escape-html";
 
 loadLanguages(["markup", "css", "javascript"]);
 
@@ -32,7 +32,8 @@ export default (str: string, lang: string): string => {
   if (!prism.languages[lang]) {
     try {
       loadLanguages([lang]);
-    } catch (e) {
+    }
+    catch (e) {
       console.warn(lang, e);
     }
   }

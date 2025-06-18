@@ -1,6 +1,6 @@
-import fs from "fs";
-import MarkdownIt from "markdown-it";
-import { RuleBlock } from "markdown-it/lib/parser_block";
+import type MarkdownIt from "markdown-it";
+import type { RuleBlock } from "markdown-it/lib/parser_block";
+import fs from "node:fs";
 
 export default (md: MarkdownIt): void => {
   const parser: RuleBlock = (state, startLine, endLine, silent) => {
@@ -12,7 +12,8 @@ export default (md: MarkdownIt): void => {
     }
     for (let i = 0; i < 3; ++i) {
       const ch = state.src.charCodeAt(pos + i);
-      if (ch !== CH || pos + i >= max) return false;
+      if (ch !== CH || pos + i >= max)
+        return false;
     }
     if (silent) {
       return true;
@@ -22,10 +23,11 @@ export default (md: MarkdownIt): void => {
     const rawPath = state.src
       .slice(start, end)
       .trim()
+      // eslint-disable-next-line node/prefer-global/process
       .replace(/^@/, process.cwd());
     const content = fs.existsSync(rawPath)
       ? fs.readFileSync(rawPath).toString()
-      : "Not found: " + rawPath;
+      : `Not found: ${rawPath}`;
     const meta = rawPath.replace(rawPath, "");
     state.line = startLine + 1;
     const token = state.push("fence", "code", 0);

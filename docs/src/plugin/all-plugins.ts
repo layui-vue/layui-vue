@@ -1,18 +1,19 @@
 import vue from "@vitejs/plugin-vue";
 import vueJsx from "@vitejs/plugin-vue-jsx";
-import Markdown from "vite-plugin-md";
+// @ts-expect-error TODO
 import container from "markdown-it-container";
-import preWrapper from "./pre-wrapper";
-import highlight from "./highlight";
-import snippet from "./snippet";
-import demo from "./create-demo";
-import createTitle from "./create-title";
-import createQuote from "./create-quote";
-import createDescribe from "./create-describe";
-import createTable from "./create-table";
+import Markdown from "vite-plugin-md";
 import createAnchor from "./create-anchor";
-import createPreviousNext from "./create-previous-next";
 import createContributor from "./create-contributor";
+import demo from "./create-demo";
+import createDescribe from "./create-describe";
+import createPreviousNext from "./create-previous-next";
+import createQuote from "./create-quote";
+import createTable from "./create-table";
+import createTitle from "./create-title";
+import highlight from "./highlight";
+import preWrapper from "./pre-wrapper";
+import snippet from "./snippet";
 
 const plugins = [
   vue({

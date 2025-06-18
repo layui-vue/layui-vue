@@ -1,3 +1,115 @@
+<script setup lang="ts">
+import { layer } from "@layui/layer-vue";
+import { onMounted, onUnmounted, ref, watch } from "vue";
+import { openPlayground } from "../utils/code-playground";
+import { openStackblitz } from "../utils/code-stackblitz";
+
+const meta = ref<HTMLElement>({} as HTMLElement);
+const isFixContorl = ref(false);
+const codeAreaHeight = ref(0);
+
+const show = ref(false);
+
+function toggle() {
+  show.value = !show.value;
+}
+
+async function onPlayground() {
+  const foundCodes = meta.value.getElementsByClassName("language-html");
+  const foundCode = foundCodes[0];
+  const SourceCode = foundCode.textContent || "";
+
+  const { link } = await openPlayground(encodeURIComponent(SourceCode));
+  window.open(link);
+}
+
+function onStackblitz() {
+  const foundCodes = meta.value.getElementsByClassName("language-html");
+  const foundCode = foundCodes[0];
+  const SourceCode = foundCode.textContent || "";
+  openStackblitz(SourceCode);
+}
+
+function copy() {
+  const foundCodes = meta.value.getElementsByClassName("language-html");
+  const foundCode = foundCodes[0];
+  let successful = false;
+  // 使用原生系统剪贴板，只适用被授权安全的站点，http下不能使用
+  if (navigator.clipboard && document.hasFocus()) {
+    const text = foundCode.textContent || "";
+    navigator.clipboard.writeText(text);
+    successful = true;
+  }
+  else if (window.getSelection()) {
+    // 使用 document.execCommand
+    const range = document.createRange();
+    let copyDiv;
+    if (show.value) {
+      range.selectNode(foundCode);
+    }
+    else {
+      copyDiv = document.createElement("div");
+      copyDiv.innerHTML = foundCode.innerHTML;
+      copyDiv.style.position = "fixed";
+      copyDiv.style.left = "-9999px";
+      document.body.appendChild(copyDiv);
+      range.selectNode(copyDiv);
+    }
+    window.getSelection()?.addRange(range);
+    try {
+      successful = document.execCommand("copy");
+    }
+    catch (err) {
+      successful = false;
+      console.error(err);
+    }
+    window.getSelection()?.removeAllRanges();
+    copyDiv?.remove();
+  }
+
+  if (successful) {
+    layer.msg("复制成功", { icon: 1, time: 1000 }, () => {});
+  }
+  else {
+    layer.msg("复制失败", { icon: 2, time: 1000 }, () => {});
+  }
+}
+
+onMounted(() => {
+  const foundDescs = meta.value.getElementsByClassName("description");
+  const foundCodes = meta.value.getElementsByClassName("language-html");
+
+  if (foundDescs.length) {
+    codeAreaHeight.value
+      = foundDescs[0].clientHeight + foundCodes[0].clientHeight + 30;
+  }
+  else {
+    codeAreaHeight.value = foundCodes[0].clientHeight + 20;
+  }
+});
+
+onUnmounted(() => {
+  window.removeEventListener("scroll", handleScroll);
+});
+
+watch(show, (value) => {
+  if (value) {
+    meta.value.style.height = `${codeAreaHeight.value}px`;
+    window.addEventListener("scroll", handleScroll);
+    setTimeout(handleScroll, 100);
+  }
+  else {
+    meta.value.style.height = "0";
+    window.removeEventListener("scroll", handleScroll);
+  }
+});
+
+function handleScroll() {
+  const { top, bottom } = meta.value.getBoundingClientRect();
+  isFixContorl.value = bottom > window.innerHeight && top + 44 <= window.innerHeight;
+}
+</script>
+
 <template>
   <div class="lay-code">
     <div id="source" class="source">
@@ -14,135 +126,27 @@
     <div :class="{ 'is-fixed': isFixContorl }" class="control">
       <i
         class="layui-icon layui-icon-file btn"
-        @click="copy"
         title="复制代码"
+        @click="copy"
       />
       <i
         class="layui-icon layui-icon-fonts-code btn"
-        @click="toggle"
         title="查看代码"
+        @click="toggle"
       />
       <i
         class="layui-icon layui-icon-component btn"
-        @click="onPlayground"
         title="在 Playground 打开"
+        @click="onPlayground"
       />
       <i
         class="layui-icon layui-icon-chart btn"
         title="在 stackblitz 打开"
         @click="onStackblitz"
-      >
-      </i>
+      />
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import { layer } from "@layui/layer-vue";
-import { onMounted, onUnmounted, ref, watch } from "vue";
-import { openPlayground } from "../utils/code-playground";
-import { openStackblitz } from "../utils/code-stackblitz";
-
-const meta = ref<HTMLElement>({} as HTMLElement);
-const isFixContorl = ref(false);
-const codeAreaHeight = ref(0);
-
-const show = ref(false);
-
-const toggle = function () {
-  show.value = !show.value;
-};
-
-const onPlayground = async function () {
-  const foundCodes = meta.value.getElementsByClassName("language-html");
-  const foundCode = foundCodes[0];
-  const SourceCode = foundCode.textContent || "";
-
-  const { link } = await openPlayground(encodeURIComponent(SourceCode));
-  window.open(link);
-};
-
-const onStackblitz = function () {
-  const foundCodes = meta.value.getElementsByClassName("language-html");
-  const foundCode = foundCodes[0];
-  const SourceCode = foundCode.textContent || "";
-  openStackblitz(SourceCode);
-};
-
-const copy = function () {
-  const foundCodes = meta.value.getElementsByClassName("language-html");
-  const foundCode = foundCodes[0];
-  let successful = false;
-  // 使用原生系统剪贴板，只适用被授权安全的站点，http下不能使用
-  if (navigator.clipboard && document.hasFocus()) {
-    const text = foundCode.textContent || "";
-    navigator.clipboard.writeText(text);
-    successful = true;
-  } else if (window.getSelection()) {
-    // 使用 document.execCommand
-    var range = document.createRange();
-    let copyDiv;
-    if (show.value) {
-      range.selectNode(foundCode);
-    } else {
-      copyDiv = document.createElement("div");
-      copyDiv.innerHTML = foundCode.innerHTML;
-      copyDiv.style.position = "fixed";
-      copyDiv.style.left = "-9999px";
-      document.body.appendChild(copyDiv);
-      range.selectNode(copyDiv);
-    }
-    window.getSelection()?.addRange(range);
-    try {
-      successful = document.execCommand("copy");
-    } catch (err) {
-      successful = false;
-      console.error(err);
-    }
-    window.getSelection()?.removeAllRanges();
-    copyDiv?.remove();
-  }
-
-  if (successful) {
-    layer.msg("复制成功", { icon: 1, time: 1000 }, () => {});
-  } else {
-    layer.msg("复制失败", { icon: 2, time: 1000 }, () => {});
-  }
-};
-
-onMounted(() => {
-  const foundDescs = meta.value.getElementsByClassName("description");
-  const foundCodes = meta.value.getElementsByClassName("language-html");
-
-  if (foundDescs.length) {
-    codeAreaHeight.value =
-      foundDescs[0].clientHeight + foundCodes[0].clientHeight + 30;
-  } else {
-    codeAreaHeight.value = foundCodes[0].clientHeight + 20;
-  }
-});
-
-onUnmounted(() => {
-  window.removeEventListener("scroll", handleScroll);
-});
-
-watch(show, (value) => {
-  if (value) {
-    meta.value.style.height = `${codeAreaHeight.value}px`;
-    window.addEventListener("scroll", handleScroll);
-    setTimeout(handleScroll, 100);
-  } else {
-    meta.value.style.height = "0";
-    window.removeEventListener("scroll", handleScroll);
-  }
-});
-
-function handleScroll() {
-  const { top, bottom } = meta.value.getBoundingClientRect();
-  isFixContorl.value =
-    bottom > window.innerHeight && top + 44 <= window.innerHeight;
-}
-</script>
 
 <style>
 .lay-code {

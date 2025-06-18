@@ -1,3 +1,117 @@
+<script setup lang="ts">
+import { layer } from "layui-layer/src/index";
+import { inject, onMounted, ref } from "vue";
+import { useI18n } from "vue-i18n";
+import { useAppStore } from "../store/app";
+
+defineOptions({
+  name: "Index",
+});
+
+const { t } = useI18n();
+const appStore = useAppStore();
+
+const npmDownloadValue = ref("...");
+
+/**
+ * 从2021-9-28开始，获取每年的日期范围
+ * 需要分段获取，接口不支持一次性获取所有数据
+ * return [
+        ["2021-09-28", "2021-12-31"],
+        ["2022-01-01", "2022-12-31"],
+        ["2023-01-01", "2023-12-31"],
+        ["2024-01-01", "2024-12-31"],
+        ["2025-01-01", "2025-03-09"]
+       ]
+ */
+function getYearlyDateRanges() {
+  const startDate = new Date(2021, 9, 28);
+  const today = new Date();
+  const result = [];
+
+  const formatDate = (date: Date) => {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  };
+
+  const startYear = startDate.getFullYear();
+  const endYear = today.getFullYear();
+
+  for (let year = startYear; year <= endYear; year++) {
+    let rangeStart, rangeEnd;
+
+    if (year === startYear) {
+      rangeStart = startDate;
+      rangeEnd = year === endYear ? today : new Date(year, 11, 31);
+    }
+    else if (year === endYear) {
+      rangeStart = new Date(year, 0, 1);
+      rangeEnd = today;
+    }
+    else {
+      rangeStart = new Date(year, 0, 1);
+      rangeEnd = new Date(year, 11, 31);
+    }
+
+    result.push([formatDate(rangeStart), formatDate(rangeEnd)]);
+  }
+
+  return result;
+}
+
+async function getNpmDownloadValue() {
+  const timeRanges = getYearlyDateRanges();
+
+  // https://api.npmjs.org/downloads/point/2023-09-08:2025-03-09/@layui/layui-vue
+  const results = await Promise.all(
+    timeRanges.map((range) => {
+      return fetch(
+        `https://api.npmjs.org/downloads/point/${range.join(
+          ":",
+        )}/@layui/layui-vue`,
+      );
+    }),
+  );
+
+  let num = 0;
+  for (const result of results) {
+    const data = await result.json();
+    num += data.downloads;
+  }
+
+  npmDownloadValue.value = num.toLocaleString("en-US");
+}
+
+function changeTheme() {
+  if (appStore.theme === "dark") {
+    appStore.theme = "light";
+  }
+  else {
+    appStore.theme = "dark";
+  }
+}
+
+const version: string = inject("version")!;
+
+onMounted(() => {
+  getNpmDownloadValue();
+
+  if (appStore.documentVersion !== version) {
+    appStore.documentVersion = version;
+    layer.notify({
+      title: "更新公告",
+      content: `layui - vue ${version} 已发布，请前往 <a style="color:#16baaa;" href="http://www.layui-vue.com/zh-CN/guide/changelog">[ 查看 ]</a>`,
+      isHtmlFragment: true,
+      offset: "rb",
+      time: 10000,
+      icon: 1,
+    });
+  }
+});
+</script>
+
 <template>
   <div class="site-container">
     <div class="site-layui-main">
@@ -5,10 +119,12 @@
         <img
           src="../assets/logo.jpg"
           style="width: 172px; border-radius: 20px; border: 5px solid #e2e2e2"
-        />
+        >
       </div>
       <div class="layui-anim site-desc site-desc-anim">
-        <p class="web-font-desc">layui - vue</p>
+        <p class="web-font-desc">
+          layui - vue
+        </p>
         <cite>{{ t("home.description") }}</cite>
       </div>
       <div class="site-download">
@@ -24,16 +140,12 @@
         </a>
       </div>
       <div class="site-version">
-        <span
-          >{{ t("home.version") }}：<cite class="site-showv">
-            {{ version }}
-          </cite></span
-        >
-        <span
-          >{{ t("home.download") }}：<em class="site-showdowns">{{
-            npmDownloadValue
-          }}</em></span
-        >
+        <span>{{ t("home.version") }}：<cite class="site-showv">
+          {{ version }}
+        </cite></span>
+        <span>{{ t("home.download") }}：<em class="site-showdowns">{{
+          npmDownloadValue
+        }}</em></span>
       </div>
       <div class="site-banner-other">
         <a
@@ -72,7 +184,7 @@
               target="_blank"
               style="display: flex; justify-content: center"
             >
-              <img style="width: 200px" src="../assets/lubase-logo.png" />
+              <img style="width: 200px" src="../assets/lubase-logo.png">
             </a>
           </lay-col>
         </lay-row>
@@ -89,44 +201,80 @@
       <lay-row :space="30">
         <lay-col :md="8" :sm="12" :xs="12">
           <div class="box">
-            <div class="icon">🐼</div>
-            <h2 class="title">Classic design</h2>
-            <p class="details">layui css.</p>
+            <div class="icon">
+              🐼
+            </div>
+            <h2 class="title">
+              Classic design
+            </h2>
+            <p class="details">
+              layui css.
+            </p>
           </div>
         </lay-col>
         <lay-col :md="8" :sm="12" :xs="12">
           <div class="box">
-            <div class="icon">🐝</div>
-            <h2 class="title">Small volume</h2>
-            <p class="details">only 14.9 MB.</p>
+            <div class="icon">
+              🐝
+            </div>
+            <h2 class="title">
+              Small volume
+            </h2>
+            <p class="details">
+              only 14.9 MB.
+            </p>
           </div>
         </lay-col>
         <lay-col :md="8" :sm="12" :xs="12">
           <div class="box">
-            <div class="icon">☀️</div>
-            <h2 class="title">Dark theme</h2>
-            <p class="details">provide theme variables.</p>
+            <div class="icon">
+              ☀️
+            </div>
+            <h2 class="title">
+              Dark theme
+            </h2>
+            <p class="details">
+              provide theme variables.
+            </p>
           </div>
         </lay-col>
         <lay-col :md="8" :sm="12" :xs="12">
           <div class="box">
-            <div class="icon">🚀</div>
-            <h2 class="title">Piu allegro</h2>
-            <p class="details">provide vscode plugin.</p>
+            <div class="icon">
+              🚀
+            </div>
+            <h2 class="title">
+              Piu allegro
+            </h2>
+            <p class="details">
+              provide vscode plugin.
+            </p>
           </div>
         </lay-col>
         <lay-col :md="8" :sm="12" :xs="12">
           <div class="box">
-            <div class="icon">☁️</div>
-            <h2 class="title">Complete ecology</h2>
-            <p class="details">admin and form design.</p>
+            <div class="icon">
+              ☁️
+            </div>
+            <h2 class="title">
+              Complete ecology
+            </h2>
+            <p class="details">
+              admin and form design.
+            </p>
           </div>
         </lay-col>
         <lay-col :md="8" :sm="12" :xs="12">
           <div class="box">
-            <div class="icon">⚡</div>
-            <h2 class="title">Setup script</h2>
-            <p class="details">use grammar sugar.</p>
+            <div class="icon">
+              ⚡
+            </div>
+            <h2 class="title">
+              Setup script
+            </h2>
+            <p class="details">
+              use grammar sugar.
+            </p>
           </div>
         </lay-col>
       </lay-row>
@@ -143,7 +291,7 @@
               <lay-avatar
                 src="https://unpkg.com/outeres@0.0.6/img/layui/icon-1.png"
                 style="border-radius: 2px"
-              ></lay-avatar>
+              />
             </a>
           </lay-tooltip>
         </lay-col>
@@ -157,7 +305,7 @@
               <lay-avatar
                 src="https://foruda.gitee.com/avatar/1676938478360257103/974299_monksoul_1578937227.png"
                 style="background: transparent"
-              ></lay-avatar>
+              />
             </a>
           </lay-tooltip>
         </lay-col>
@@ -171,7 +319,7 @@
               <lay-avatar
                 src="https://baomidou.com/assets/asset.cIbiVTt_.svg"
                 style="background: transparent"
-              ></lay-avatar>
+              />
             </a>
           </lay-tooltip>
         </lay-col>
@@ -185,7 +333,7 @@
               <lay-avatar
                 src="https://aizuda.com/favicon.svg"
                 style="background: transparent"
-              ></lay-avatar>
+              />
             </a>
           </lay-tooltip>
         </lay-col>
@@ -199,7 +347,7 @@
               <lay-avatar
                 src="https://liteflow.yomahub.com//img/logo.svg"
                 style="background: transparent"
-              ></lay-avatar>
+              />
             </a>
           </lay-tooltip>
         </lay-col>
@@ -213,7 +361,7 @@
               <lay-avatar
                 src="https://sa-token.cc/logo.png"
                 style="background: transparent"
-              ></lay-avatar>
+              />
             </a>
           </lay-tooltip>
         </lay-col>
@@ -227,7 +375,7 @@
               <lay-avatar
                 src="https://jpom.top/images/logo/jpom_logo_small.svg"
                 style="background: transparent; width: 40px"
-              ></lay-avatar>
+              />
             </a>
           </lay-tooltip>
         </lay-col>
@@ -241,7 +389,7 @@
               <lay-avatar
                 src="https://www.gadmin8.com/favicon.ico"
                 style="background: transparent; width: 32px; height: 32px"
-              ></lay-avatar>
+              />
             </a>
           </lay-tooltip>
         </lay-col>
@@ -255,142 +403,20 @@
         <a
           href="https://www.oschina.net"
           style="color: #16b777; font-weight: 800; margin: 0px 5px"
-          >Oschina</a
-        >
+        >Oschina</a>
         <a
           href="https://gitee.com"
           style="color: #c71d23; font-weight: 800; margin: 0px 5px"
-          >Gitee</a
-        >
+        >Gitee</a>
         <a
           href="https://www.iconfont.cn/"
           style="color: #9b16ff; font-weight: 800; margin: 0px 5px"
-          >iconfont</a
-        >
+        >iconfont</a>
       </p>
     </div>
   </div>
 </template>
 
-<script>
-import { inject, onMounted, ref } from "vue";
-import { useI18n } from "vue-i18n";
-import { useAppStore } from "../store/app";
-import { layer } from "layui-layer/src/index";
-
-export default {
-  name: "Index",
-  setup() {
-    const { t } = useI18n();
-    const appStore = useAppStore();
-
-    const npmDownloadValue = ref("...");
-
-    /**
-     * 从2021-9-28开始，获取每年的日期范围
-     * 需要分段获取，接口不支持一次性获取所有数据
-     * return [
-        ["2021-09-28", "2021-12-31"],
-        ["2022-01-01", "2022-12-31"],
-        ["2023-01-01", "2023-12-31"],
-        ["2024-01-01", "2024-12-31"],
-        ["2025-01-01", "2025-03-09"]
-       ]
-     */
-    function getYearlyDateRanges() {
-      const startDate = new Date(2021, 9, 28);
-      const today = new Date();
-      const result = [];
-
-      const formatDate = (date) => {
-        const year = date.getFullYear();
-        const month = String(date.getMonth() + 1).padStart(2, "0");
-        const day = String(date.getDate()).padStart(2, "0");
-        return `${year}-${month}-${day}`;
-      };
-
-      const startYear = startDate.getFullYear();
-      const endYear = today.getFullYear();
-
-      for (let year = startYear; year <= endYear; year++) {
-        let rangeStart, rangeEnd;
-
-        if (year === startYear) {
-          rangeStart = startDate;
-          rangeEnd = year === endYear ? today : new Date(year, 11, 31);
-        } else if (year === endYear) {
-          rangeStart = new Date(year, 0, 1);
-          rangeEnd = today;
-        } else {
-          rangeStart = new Date(year, 0, 1);
-          rangeEnd = new Date(year, 11, 31);
-        }
-
-        result.push([formatDate(rangeStart), formatDate(rangeEnd)]);
-      }
-
-      return result;
-    }
-
-    async function getNpmDownloadValue() {
-      const timeRanges = getYearlyDateRanges();
-
-      // https://api.npmjs.org/downloads/point/2023-09-08:2025-03-09/@layui/layui-vue
-      const results = await Promise.all(
-        timeRanges.map((range) => {
-          return fetch(
-            `https://api.npmjs.org/downloads/point/${range.join(
-              ":"
-            )}/@layui/layui-vue`
-          );
-        })
-      );
-
-      let num = 0;
-      for (const result of results) {
-        const data = await result.json();
-        num += data.downloads;
-      }
-
-      npmDownloadValue.value = num.toLocaleString("en-US");
-    }
-
-    const changeTheme = () => {
-      if (appStore.theme === "dark") {
-        appStore.theme = "light";
-      } else {
-        appStore.theme = "dark";
-      }
-    };
-
-    const version = inject("version");
-
-    onMounted(() => {
-      getNpmDownloadValue();
-
-      if (appStore.documentVersion != version) {
-        appStore.documentVersion = version;
-        layer.notify({
-          title: "更新公告",
-          content: `layui - vue ${version} 已发布，请前往 <a style="color:#16baaa;" href="http://www.layui-vue.com/zh-CN/guide/changelog">[ 查看 ]</a>`,
-          isHtmlFragment: true,
-          offset: "rb",
-          time: 10000,
-          icon: 1,
-        });
-      }
-    });
-
-    return {
-      t,
-      version,
-      appStore,
-      changeTheme,
-      npmDownloadValue,
-    };
-  },
-};
-</script>
 <style>
 #app,
 html,

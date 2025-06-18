@@ -1,35 +1,3 @@
-<template>
-  <aside :class="classAside">
-    <div class="lay-aside-top">
-      <lay-button
-        type="primary"
-        size="xs"
-        :class="classAsideBtn"
-        @click="handlerBtnClick()"
-      >
-        <lay-icon :type="iconType" size="40"> </lay-icon>
-      </lay-button>
-    </div>
-    <lay-scroll :thumbWidth="0">
-      <ul>
-        <li
-          v-for="(anchor, index) in anchorList"
-          :key="index"
-          class="lay-aside-list"
-          :class="{ active: index === activeIndex }"
-          @click.prevent="handlerListItemClick(index, anchor)"
-        >
-          <a
-            :href="`#${anchor}`"
-            class="lay-aside-link"
-            :class="{ active: index === activeIndex }"
-            >{{ anchor }}</a
-          >
-        </li>
-      </ul>
-    </lay-scroll>
-  </aside>
-</template>
 <script setup lang="ts">
 import { computed, onMounted, ref, shallowRef, watch } from "vue";
 
@@ -39,7 +7,7 @@ const props = defineProps<{
   show: boolean;
 }>();
 
-let activeIndex = ref<number>(0);
+const activeIndex = ref<number>(0);
 const show = ref<boolean>(props.show);
 const iconType = ref<string>("layui-icon-right");
 const anchors: string | string[] | undefined = props.anchors;
@@ -65,7 +33,8 @@ const classAsideBtn = computed(() => {
       "lay-aside-animation",
       { "lay-aside-collapse-btn-collapse": !show.value },
     ];
-  } else {
+  }
+  else {
     classBtn = [
       "lay-aside-collapse-btn",
       { "lay-aside-collapse-btn-collapse": !show.value },
@@ -76,19 +45,19 @@ const classAsideBtn = computed(() => {
   return classBtn;
 });
 
-const handlerBtnClick = () => {
+function handlerBtnClick() {
   show.value = !show.value;
-};
+}
 
-const handlerListItemClick = (index: number, id: string) => {
+function handlerListItemClick(index: number, id: string) {
   activeIndex.value = index;
   scrollToTitle(id);
 
   history.replaceState(null, "", `#${id}`);
-};
+}
 
-/**锚点标签跟随滚动高亮 */
-const handlerScroll = () => {
+/** 锚点标签跟随滚动高亮 */
+function handlerScroll() {
   // 距离顶部 90 改变 activeIndex
   scrollTop.value = getScrollTop(scrollRefEl.value) + 90;
   anchorList.value?.forEach((item, index) => {
@@ -96,27 +65,28 @@ const handlerScroll = () => {
     if (elOffsetTop) {
       if (index === 0 && scrollTop.value < elOffsetTop) {
         activeIndex.value = 0;
-      } else if (scrollTop.value >= elOffsetTop) {
+      }
+      else if (scrollTop.value >= elOffsetTop) {
         activeIndex.value = index;
       }
     }
   });
-};
+}
 
-const handlerCollapse = () => {
+function handlerCollapse() {
   iconType.value = show.value ? "layui-icon-right" : "layui-icon-left";
-  // @ts-ignore
+  // @ts-expect-error TODO
   scrollRefEl.value!.firstElementChild!.style.marginRight = show.value
     ? "180px"
     : "0px";
-};
+}
 
 watch(show, () => {
   handlerCollapse();
 });
 
 onMounted(() => {
-  // @ts-ignore TODO 封装 hooks
+  // @ts-expect-error TODO 封装 hooks
   scrollRefEl.value = document.querySelector(".layui-body");
   if (!scrollRefEl.value) {
     throw new Error(`scroll element is not existed: ".layui-body"`);
@@ -124,10 +94,8 @@ onMounted(() => {
   scrollRefEl.value.scrollTop = 0;
   scrollRefEl.value?.addEventListener("scroll", throttle(handlerScroll, 500));
   // 如果已折叠,关闭组件初始渲染时的动画,然后自动开启
-  // @ts-ignore
-  show.value =
-    // @ts-ignore
-    scrollRefEl.value!.firstElementChild!.style.marginRight !== "0px";
+  // @ts-expect-error TODO
+  show.value = scrollRefEl.value!.firstElementChild!.style.marginRight !== "0px";
   enableAnimation = show.value;
 
   if (window.location.hash) {
@@ -139,37 +107,70 @@ onMounted(() => {
   }
 });
 
-/**获取滚动高度 */
-const getScrollTop = (el: HTMLElement | undefined): number => {
+/** 获取滚动高度 */
+function getScrollTop(el: HTMLElement | undefined): number {
   return el
     ? el.scrollTop
-    : window.pageYOffset ||
-        document.documentElement.scrollTop ||
-        document.body.scrollTop ||
-        0;
-};
+    : window.pageYOffset
+      || document.documentElement.scrollTop
+      || document.body.scrollTop
+      || 0;
+}
 
-/**平滑滚动 */
-const scrollToTitle = (id: string): void => {
+/** 平滑滚动 */
+function scrollToTitle(id: string): void {
   document.getElementById(id)?.scrollIntoView({
     behavior: "smooth",
     block: "start",
     inline: "nearest",
   });
-};
+}
 
-const throttle = (func: Function, wait: number) => {
-  var timer: any = null;
+function throttle(func: Function, wait: number) {
+  let timer: any = null;
   return (...args: any) => {
     if (!timer) {
       timer = setTimeout(() => {
         timer = null;
+        // @ts-expect-error TODO
         func.apply(this, args);
       }, wait);
     }
   };
-};
+}
 </script>
+
+<template>
+  <aside :class="classAside">
+    <div class="lay-aside-top">
+      <lay-button
+        type="primary"
+        size="xs"
+        :class="classAsideBtn"
+        @click="handlerBtnClick()"
+      >
+        <lay-icon :type="iconType" size="40" />
+      </lay-button>
+    </div>
+    <lay-scroll :thumb-width="0">
+      <ul>
+        <li
+          v-for="(anchor, index) in anchorList"
+          :key="index"
+          class="lay-aside-list"
+          :class="{ active: index === activeIndex }"
+          @click.prevent="handlerListItemClick(index, anchor)"
+        >
+          <a
+            :href="`#${anchor}`"
+            class="lay-aside-link"
+            :class="{ active: index === activeIndex }"
+          >{{ anchor }}</a>
+        </li>
+      </ul>
+    </lay-scroll>
+  </aside>
+</template>
 
 <style lang="less" scoped>
 .lay-aside {

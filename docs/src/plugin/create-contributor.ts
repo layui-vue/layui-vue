@@ -1,12 +1,13 @@
-import container from "markdown-it-container";
 import type Token from "markdown-it/lib/token";
+// @ts-expect-error TODO
+import container from "markdown-it-container";
 
 type ContainerArgs = [
   typeof container,
   string,
   {
-    render(tokens: Token[], idx: number): string;
-  }
+    render: (tokens: Token[], idx: number) => string;
+  },
 ];
 
 export default function createContainer(klass: string): ContainerArgs {
@@ -19,7 +20,8 @@ export default function createContainer(klass: string): ContainerArgs {
         const info = token.info.trim().slice(klass.length).trim();
         if (token.nesting === 1) {
           return `<lay-contributor file-path='${info}'></lay-contributor>`;
-        } else {
+        }
+        else {
           return ``;
         }
       },

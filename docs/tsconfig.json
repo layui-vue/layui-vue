@@ -1,19 +1,19 @@
 {
-    "compilerOptions": {
-      "baseUrl": ".",
-      "module": "esnext",
-      "target": "es2015",
-      "moduleResolution": "Node",
-      "strict": true,
-      "allowJs": true,
-      "resolveJsonModule": true,
-      "declaration": true,
-      "emitDeclarationOnly": true,
-      "esModuleInterop": true,
-      "declarationDir": "types",
-      "jsx": "preserve",
-      "lib": ["ESNext","DOM"]
-    },
-    "include": ["src/**/*","shims-vue.d.ts"],
-    "exclude": ["node_modules"]
+  "compilerOptions": {
+    "target": "es2015",
+    "jsx": "preserve",
+    "lib": ["ESNext", "DOM"],
+    "baseUrl": ".",
+    "module": "esnext",
+    "moduleResolution": "Node",
+    "resolveJsonModule": true,
+    "allowJs": true,
+    "strict": true,
+    "declaration": true,
+    "declarationDir": "types",
+    "emitDeclarationOnly": true,
+    "esModuleInterop": true
+  },
+  "include": ["src/**/*", "shims-vue.d.ts"],
+  "exclude": ["node_modules"]
 }

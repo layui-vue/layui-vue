@@ -1,10 +1,16 @@
 {
   "name": "@layui/layui-doc",
   "version": "1.0.0",
+  "description": "a component library for Vue 3 base on layui-vue",
   "author": "就眠儀式",
   "license": "MIT",
-  "description": "a component library for Vue 3 base on layui-vue",
   "homepage": "http://www.layui-vue.com",
+  "files": [
+    "es",
+    "lib",
+    "types",
+    "umd"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -33,12 +39,6 @@
     "vite": "npm:rolldown-vite@6.3.11",
     "vite-plugin-md": "^0.13.1"
   },
-  "files": [
-    "types",
-    "umd",
-    "lib",
-    "es"
-  ],
   "browserslist": [
     "current node",
     "last 2 versions and > 2%",

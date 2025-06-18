@@ -85,12 +85,12 @@ export const packageJSONCode = JSON.stringify(
       preview: "vite preview",
     },
     dependencies: {
-      vue: "^3.2.0",
+      "vue": "^3.2.0",
       "@layui/layui-vue": "latest",
       "@layui/json-schema-form": "latest",
     },
     devDependencies: {
-      vite: "^2.9.8",
+      "vite": "^2.9.8",
       "@vue/compiler-sfc": "^3.2.0",
       "@vitejs/plugin-vue": "^2.3.2",
       "@vitejs/plugin-vue-jsx": "^1.3.10",
@@ -99,10 +99,10 @@ export const packageJSONCode = JSON.stringify(
     },
   },
   null,
-  2
+  2,
 );
 
-export const openStackblitz = (content: string) => {
+export function openStackblitz(content: string) {
   stackblitzSdk.openProject(
     {
       title: `layui-vue-demo`,
@@ -120,6 +120,6 @@ export const openStackblitz = (content: string) => {
     },
     {
       openFile: "src/App.vue",
-    }
+    },
   );
-};
+}

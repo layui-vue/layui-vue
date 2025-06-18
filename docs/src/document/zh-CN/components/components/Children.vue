@@ -1,15 +1,15 @@
-<template>
-  <form>
-    <textarea v-model="data.remark" :rows="10" :cols="40" />
-  </form>
-</template>
 <script setup>
-const emit = defineEmits("called");
-
-const props = defineProps({
+defineProps({
   data: Object,
 });
 </script>
+
+<template>
+  <form>
+    <!-- eslint-disable-next-line vue/no-mutating-props -->
+    <textarea v-model="data.remark" :rows="10" :cols="40" />
+  </form>
+</template>
 
 <style scoped>
 form {

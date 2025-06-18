@@ -1,6 +1,6 @@
 <template>
   <div class="lay-table-box">
-    <slot></slot>
+    <slot />
   </div>
 </template>
 

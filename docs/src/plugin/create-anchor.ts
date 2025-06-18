@@ -1,10 +1,11 @@
-import container from "markdown-it-container";
 import type Token from "markdown-it/lib/token";
+// @ts-expect-error TODO
+import container from "markdown-it-container";
 
 type ContainerArgs = [
   typeof container,
   string,
-  { render(tokens: Token[], idx: number): string }
+  { render: (tokens: Token[], idx: number) => string },
 ];
 
 export default function createContainer(klass: string): ContainerArgs {
@@ -24,7 +25,8 @@ export default function createContainer(klass: string): ContainerArgs {
           }
           // 此处仅支持 string | number | boolean 类型
           return `<lay-anchor anchors="${anchors}" :currIndex="-1" :show="true">`;
-        } else {
+        }
+        else {
           return "</lay-anchor>\n";
         }
       },

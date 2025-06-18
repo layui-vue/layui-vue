@@ -9,12 +9,10 @@ export default antfu(
     },
 
     formatters: {
-      markdown: "Prettier",
+      markdown: "dprint",
     },
 
     ignores: [
-      "**/*.md",
-      "docs/",
       "**/*.test.*",
       "**/*.d.ts",
     ],

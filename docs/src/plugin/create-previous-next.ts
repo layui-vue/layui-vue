@@ -1,12 +1,14 @@
-import container from "markdown-it-container";
 import type Token from "markdown-it/lib/token";
+// @ts-expect-error TODO
+import container from "markdown-it-container";
 import menus from "../view/utils/menus";
+
 type ContainerArgs = [
   typeof container,
   string,
   {
-    render(tokens: Token[], idx: number): string;
-  }
+    render: (tokens: Token[], idx: number) => string;
+  },
 ];
 
 export default function createContainer(klass: string): ContainerArgs {
@@ -17,7 +19,7 @@ export default function createContainer(klass: string): ContainerArgs {
       render(tokens, idx) {
         const token = tokens[idx];
         const info = token.info.trim().slice(klass.length).trim();
-        const menusChild = menus.map((item) => item.children).flat(1);
+        const menusChild = menus.map(item => item.children).flat(1);
         let prevIndex = 0;
         let nextIndex = 0;
         menusChild.forEach((item, index) => {
@@ -31,19 +33,20 @@ export default function createContainer(klass: string): ContainerArgs {
                 <div><router-link to="${
                   menusChild[prevIndex]?.path
                 }" class="lay-link" style="display: ${
-            prevIndex < 0 ? "none" : ""
-          }"> <lay-icon type="layui-icon-left"/>${
-            menusChild[prevIndex]?.title
-          }</router-link></div>
+                  prevIndex < 0 ? "none" : ""
+                }"> <lay-icon type="layui-icon-left"/>${
+                  menusChild[prevIndex]?.title
+                }</router-link></div>
                     <div><router-link to="${
                       menusChild[nextIndex]?.path
                     }" class="lay-link" style="display: ${
-            nextIndex >= menusChild.length ? "none" : ""
-          }">${
-            menusChild[nextIndex]?.title
-          } <lay-icon type="layui-icon-right"/></router-link> </div>
+                      nextIndex >= menusChild.length ? "none" : ""
+                    }">${
+                      menusChild[nextIndex]?.title
+                    } <lay-icon type="layui-icon-right"/></router-link> </div>
                 </div>`;
-        } else {
+        }
+        else {
           return ``;
         }
       },

@@ -1,18 +1,19 @@
+import type Token from "markdown-it/lib/token";
 import markdown from "markdown-it";
 import highlight from "./highlight";
-import type Token from "markdown-it/lib/token";
 
 function assignScript(script: string) {
   const dependencies = {} as Record<string, string[]>;
   const attrs = {} as Record<string, string>;
   const content = script
     .replace(/import\s?\{.*\}.*/g, (item) => {
-      const key = getInnerString(item.replace(/'/g, '"'), '"', '"');
+      const key = getInnerString(item.replace(/'/g, "\""), "\"", "\"");
       const value = getInnerString(item.replace(/\s+/g, ""), "{", "}");
       const list = value ? value.split(",") : [];
       if (key && dependencies[key]) {
         dependencies[key] = dependencies[key].concat(list);
-      } else if (key) {
+      }
+      else if (key) {
         dependencies[key] = list;
       }
       return "";
@@ -28,16 +29,17 @@ function assignScript(script: string) {
       if (attr && !(attr in attrs)) {
         attrs[attr] = attr;
         return `let ${attr} =`;
-      } else {
-        return attr + " =";
+      }
+      else {
+        return `${attr} =`;
       }
     })
     // Remove extra line breaks
-    .replace(/\n+/gm, "\n");
+    .replace(/\n+/g, "\n");
   // Combine the import
   const reImport = Object.keys(dependencies).reduce((all, item) => {
     const filterAttrs = [...new Set(dependencies[item])];
-    return all + `import {${filterAttrs + ","}} from '${item}';\n`;
+    return `${all}import {${`${filterAttrs},`}} from '${item}';\n`;
   }, "");
 
   return reImport + content;
@@ -54,7 +56,7 @@ function getInnerString(
   string: string,
   prefix: string,
   postfix = "",
-  type: "i" | "g" | "m" = "i"
+  type: "i" | "g" | "m" = "i",
 ): string | undefined {
   const result = new RegExp(`${prefix}(.*)${postfix}`, type);
   const match = string.match(result);
@@ -66,18 +68,19 @@ let script = ""; // Record the <script> label of the current page
 export default {
   render: (tokens: Token[], idx: number): string => {
     // the `demo` block of the current page
-    const htmlBlock = tokens.filter((item) => item.type === "html_block");
+    const htmlBlock = tokens.filter(item => item.type === "html_block");
     const { nesting, info = "", map } = tokens[idx];
 
     if (nesting === -1) {
       return "</lay-code>";
     }
 
+    // eslint-disable-next-line regexp/no-super-linear-backtracking
     const matchedInfo = info.trim().match(/^demo\s+(.*)$/);
     const description = matchedInfo && matchedInfo[1];
     const descTemplate = markdown().render(description || "");
     let str = ""; // copy the current `demo` block code
-    let lastLine = NaN;
+    let lastLine = Number.NaN;
 
     for (let i = 0; i < htmlBlock.length; i++) {
       const item = htmlBlock[i];
@@ -95,28 +98,31 @@ export default {
           script = "";
         }
         // Remove top <template>
-        if (/^<template>/.test(content)) {
-          const reContent = content.match(/^<template>((\s|\S)*)<\/template>/m);
+        if (content.startsWith("<template>")) {
+          const reContent = content.match(/^<template>(([\s\S])*)<\/template>/m);
 
           htmlBlock[i].content = (reContent && reContent[1]) || "";
         }
         // Extract the <script> label content
         if (content.includes("<script")) {
-          if (/export\sdefault\s?\{/m.test(content)) {
+          if (/export\sdefault\s?\{/.test(content)) {
             const setup = content.match(
-              /setup\s?\(\)\s?\{((\s|\S)*)return\s?\{/m
+              /setup\s?\(\)\s?\{(([\s\S])*)return\s?\{/,
             );
             const reContent = content.replace(
-              /export\sdefault\s?\{((\s|\S)*)\}/m,
-              (setup && setup[1]) || ""
+              /export\sdefault\s?\{(([\s\S])*)\}/,
+              (setup && setup[1]) || "",
             );
             const reScript = reContent.match(
-              /^<script\s?.*?>((\s|\S)*)<\/script>/m
+              // eslint-disable-next-line regexp/no-super-linear-backtracking
+              /^<script\s?.*?>(([\s\S])*)<\/script>/m,
             );
             script += (reScript && reScript[1]) || "";
-          } else {
+          }
+          else {
             const reScript = content.match(
-              /^<script\s?.*?>((\s|\S)*)<\/script>/m
+              // eslint-disable-next-line regexp/no-super-linear-backtracking
+              /^<script\s?.*?>(([\s\S])*)<\/script>/m,
             );
             script += (reScript && reScript[1]) || "";
           }
