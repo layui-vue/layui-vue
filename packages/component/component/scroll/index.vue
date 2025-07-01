@@ -206,4 +206,8 @@ const moveEnd = function () {
     }
   };
 };
+
+defineExpose({
+  scrollRef,
+});
 </script>

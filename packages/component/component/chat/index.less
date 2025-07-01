@@ -1,0 +1,61 @@
+.center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.layui-chat-content {
+  .layui-chat-content-wrapper {
+    min-height: 300px;
+    width: 100%;
+    border-left: 1px solid #e6e6e6;
+    border-right: 1px solid #e6e6e6;
+
+    .layui-chat-content-item {
+      padding: 4px 10px;
+      margin-bottom: 0;
+      border: none;
+      display: flex;
+      align-items: center;
+
+      &-right {
+        flex-direction: row-reverse;
+
+        .layui-chat-content-item-wrapper {
+          flex-direction: row-reverse;
+        }
+      }
+    }
+
+    .layui-chat-content-item-wrapper {
+      gap: 4px;
+      display: flex;
+      align-items: flex-start;
+      line-height: 32px;
+    }
+
+    .layui-chat-content-message {
+      border: 1px solid #e6e6e6;
+      border-radius: 4px;
+      padding: 0 4px;
+      white-space: pre-wrap;
+      text-overflow: clip;
+      line-break: auto;
+      line-height: 32px;
+      width: calc(100% - 36px);
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+  }
+}
+
+.layui-chat-input-box {
+  border-right: unset;
+
+  .layui-input-suffix {
+    padding: 0;
+    padding-left: 10px;
+  }
+}
