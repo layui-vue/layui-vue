@@ -1,149 +1,24 @@
-<template>
-  <div
-    :size="size"
-    :class="[
-      {
-        'layui-cascader-opend': openState,
-        'layui-cascader-disabled': disabled,
-        'layui-cascader': true,
-        'layui-cascader-multiple': multiple,
-        'has-content': hasContent,
-        'has-clear': allowClear,
-      },
-    ]"
-  >
-    <lay-dropdown
-      ref="dropdownRef"
-      :trigger="trigger"
-      :autoFitMinWidth="false"
-      :disabled="disabled"
-      :contentClass="contentClass"
-      :contentStyle="contentStyle"
-      @show="openState = true"
-      @hide="openState = false"
-    >
-      <div class="slot-area" v-if="slots.default">
-        <slot name="default"></slot>
-      </div>
-
-      <div v-else>
-        <lay-input
-          v-if="!_multiple"
-          v-model="_displayValue"
-          suffix-icon="layui-icon-triangle-d"
-          :placeholder="placeholder"
-          :title="_displayValue"
-          :allow-clear="allowClear"
-          :disabled="disabled"
-          :readonly="!search"
-          :size="size"
-          @clear="onClear"
-          @input="handleInputSearch"
-        >
-          <template #suffix>
-            <lay-icon
-              :class="{ 'is-expand': openState }"
-              type="layui-icon-triangle-d"
-            ></lay-icon>
-          </template>
-        </lay-input>
-        <lay-tag-input
-          v-else
-          v-model="(_displayValue as string[])"
-          v-model:input-value="_searchValue"
-          :placeholder="placeholder"
-          :allow-clear="allowClear"
-          :disabled="disabled"
-          :readonly="!search"
-          :minCollapsedNum="minCollapsedNum"
-          :collapseTagsTooltip="collapseTagsTooltip"
-          @update:input-value="handleInputSearch"
-          @clear="onClear"
-          @remove="onRemove"
-          @keyup.delete.capture.prevent.stop
-        >
-          <template #suffix>
-            <lay-icon
-              :class="{ 'is-expand': openState }"
-              type="layui-icon-triangle-d"
-            ></lay-icon>
-          </template>
-        </lay-tag-input>
-      </div>
-
-      <template #content>
-        <lay-cascader-panel
-          v-model="_selectKeys"
-          v-show="!_isSearching"
-          :options="_dataSource"
-          :replace-fields="_replaceFields"
-          :multiple="_multiple"
-          :decollator="_decollator"
-          :only-last-level="_onlyLastLevel"
-          :disabled="_disabled"
-          :check-strictly="_checkStrictly"
-          :lazy="props.lazy"
-          :load="props.load"
-          :changeOnSelect="_changeOnSelect"
-          :fullpath="props.fullpath"
-          @change="_onChange"
-          @update:model-value="_updateValue"
-          @update:multiple-select-item="_updateMultipleSelectItem"
-        >
-          <template v-for="(_, key) in slots" :key="key" #[key]>
-            <template v-if="key != 'default'">
-              <slot :name="key"></slot>
-            </template>
-          </template>
-        </lay-cascader-panel>
-        <div v-show="_isSearching">
-          <lay-scroll height="200px" class="layui-cascader-search-result-list">
-            <template v-if="_matchedList.length > 0">
-              <div
-                :class="[
-                  'layui-cascader-search-result-item',
-                  {
-                    'layui-cascader-search-result-item-active': !multiple
-                      ? _selectKeys.at(_selectKeys.length - 1) == item.value
-                      : _selectKeys.includes(item.value),
-                  },
-                ]"
-                v-for="(item, i) in _matchedList"
-                :key="i"
-                @click="clickCheckItem(item)"
-              >
-                {{ buildFullPath(item) }}
-              </div>
-            </template>
-            <template v-else>
-              <lay-empty class="layui-cascader-empty"></lay-empty>
-            </template>
-          </lay-scroll>
-        </div>
-      </template>
-    </lay-dropdown>
-  </div>
-</template>
-
 <script setup lang="ts">
-import "./index.less";
-import { LayIcon } from "@layui/icons-vue";
-import LayDropdown from "../dropdown/index.vue";
-import LayInput from "../input/index.vue";
-import LayTagInput from "../tagInput/index.vue";
-import LayScroll from "../scroll/index.vue";
-import LayEmpty from "../empty/index.vue";
-import LayCascaderPanel from "../cascaderPanel/index.vue";
-import { ref, useSlots, computed, watch, Ref, provide, nextTick } from "vue";
-import { CascaderProps } from "./interface";
-import {
+import type {
   CascaderPanelItemProps,
   CascaderPanelItemPropsInternal,
-} from "../cascaderPanel/interface";
-import useProps from "./index.hooks";
+} from "@layui/component/component/cascaderPanel/interface";
+import type { Ref } from "vue";
+import type { CascaderProps } from "./interface";
+
+import useCascaderPanel from "@layui/component/component/cascaderPanel/index.hook";
+import LayCascaderPanel from "@layui/component/component/cascaderPanel/index.vue";
+import LayDropdown from "@layui/component/component/dropdown/index.vue";
+import LayEmpty from "@layui/component/component/empty/index.vue";
+import LayInput from "@layui/component/component/input/index.vue";
+import LayScroll from "@layui/component/component/scroll/index.vue";
+import LayTagInput from "@layui/component/component/tagInput/index.vue";
+import { isValueArray } from "@layui/component/utils";
+import { LayIcon } from "@layui/icons-vue";
+import { computed, nextTick, provide, ref, useSlots, watch } from "vue";
 import { CASCADER_CONTEXT_KEY } from "./cascader";
-import useCascaderPanel from "../cascaderPanel/index.hook";
-import { isValueArray } from "../../utils";
+import useProps from "./index.hooks";
+import "./index.less";
 
 defineOptions({
   name: "LayCascader",
@@ -173,16 +48,13 @@ const props = withDefaults(defineProps<CascaderProps>(), {
   collapseTagsTooltip: true,
 });
 
+const emit = defineEmits(["update:modelValue", "change", "clear"]);
+
 const _context = useCascaderPanel(props);
 
 provide(CASCADER_CONTEXT_KEY, _context);
 
-const hasContent = computed(() =>
-  _multiple.value ? isValueArray(props.modelValue) : !!props.modelValue
-);
 const { size } = useProps(props);
-const emit = defineEmits(["update:modelValue", "change", "clear"]);
-
 const slots = useSlots();
 const dropdownRef = ref();
 const openState = ref(false);
@@ -203,24 +75,30 @@ const _replaceFields = ref({
 const _selectKeys = ref<Array<string>>(_context.selectKeys.value);
 const _displayValue = computed(() => _context.selectLabel.value);
 const _changeOnSelect = ref(props.changeOnSelect);
+
+const hasContent = computed(() =>
+  _multiple.value ? isValueArray(props.modelValue) : !!props.modelValue,
+);
+
 /**
  * 执行搜索
  * @param str 搜索内容
  */
-const doSearchValue = (str: string) =>
-  (props.search &&
-    props.searchMethod &&
-    _context.sanitizer(props.searchMethod(str), undefined)) ||
-  _context.flatData.value.filter((a: CascaderPanelItemPropsInternal) =>
-    a.label.includes(str)
+function doSearchValue(str: string) {
+  return (props.search
+    && props.searchMethod
+    && _context.sanitizer(props.searchMethod(str), undefined))
+  || _context.flatData.value.filter((a: CascaderPanelItemPropsInternal) =>
+    a.label.includes(str),
   );
+}
 
 /**
  * 清空内容
  */
-const onClear = () => {
+function onClear() {
   _context.multipleSelectItem.value.forEach(
-    (a) => (a.checked = a.indeterminate = false)
+    a => (a.checked = a.indeterminate = false),
   );
   _context.buildMultipleStatus();
   _context.multipleSelectItem.value.clear();
@@ -228,85 +106,88 @@ const onClear = () => {
   _selectKeys.value = [];
   emit("update:modelValue", _multiple.value ? [] : undefined);
   emit("clear");
-};
+}
 /**
  * 删除单个 Tag
  * @param value Tag的Label路径
  */
-const onRemove = (value: string, e: KeyboardEvent) => {
-  let _k = value.split(_decollator.value);
+function onRemove(value: string) {
+  const _k = value.split(_decollator.value);
   const k = _k.shift();
-  let obj: CascaderPanelItemPropsInternal | undefined =
-    _context.flatData.value.find((a) => a.label === k);
+  let obj: CascaderPanelItemPropsInternal | undefined
+    = _context.flatData.value.find(a => a.label === k);
   while (obj && _k.length) {
     const k = _k.shift();
-    obj = obj.children?.find((a) => a.label === k);
+    obj = obj.children?.find(a => a.label === k);
   }
-  if (obj !== undefined)
+  if (obj !== undefined) {
     _context.selectKeys.value.splice(
-      _context.selectKeys.value.findIndex((a) => a === obj!.value),
-      1
+      _context.selectKeys.value.findIndex(a => a === obj!.value),
+      1,
     );
+  }
   obj!.checked = obj!.indeterminate = false;
   _context.multipleSelectItem.value.delete(obj!.value);
   _context.buildMultipleStatus();
-  _selectKeys.value = [..._selectKeys.value.filter((v) => v !== obj!.value)];
+  _selectKeys.value = [..._selectKeys.value.filter(v => v !== obj!.value)];
   emit("update:modelValue", _selectKeys.value);
   dropdownRef.value.hide();
-};
+}
 /**
  * 更新事件
  * @param selectKeys 选中的keys
  */
-const _updateValue = (selectKeys: string[] | string) => {
-  _context.selectKeys.value =
-    typeof selectKeys === "string"
+function _updateValue(selectKeys: string[] | string) {
+  _context.selectKeys.value
+    = typeof selectKeys === "string"
       ? selectKeys.split(props.decollator)
       : selectKeys;
-  if (!_multiple.value) dropdownRef.value.hide();
+  if (!_multiple.value)
+    dropdownRef.value.hide();
 
-  let output =
-    typeof props.modelValue === "string"
+  const output
+    = typeof props.modelValue === "string"
       ? typeof selectKeys === "string"
         ? selectKeys
         : selectKeys.join(props.decollator)
       : selectKeys;
   emit("update:modelValue", output);
-};
+}
 /**
  * 多选事件
  * @param map 内部状态map
  */
-const _updateMultipleSelectItem = (
-  map: Map<string, CascaderPanelItemProps>
-) => {
+function _updateMultipleSelectItem(map: Map<string, CascaderPanelItemProps>) {
   emit("update:modelValue", Array.from(map.keys()));
-};
+}
 /**
  * changeOnSelect 事件
  * @param selectKeys 选中的keys
  */
-const _onChange = (selectKeys: string[] | string) => {
+function _onChange(selectKeys: string[] | string) {
   emit("update:modelValue", selectKeys);
-};
+}
 /**
  * 选中搜索结果中的node
  * @param item 被点击的node
  */
-const clickCheckItem = (item: CascaderPanelItemPropsInternal) => {
+function clickCheckItem(item: CascaderPanelItemPropsInternal) {
   if (_multiple.value) {
     /**
      * 多选且开启了严格模式时，直接把node装入选中的keys中，等待dropdown面板关闭后更新到内部状态中
      */
     if (_checkStrictly.value) {
-      if (!_selectKeys.value.includes(item.value))
+      if (!_selectKeys.value.includes(item.value)) {
         (_selectKeys.value as Array<string>).push(item.value);
-      else
+      }
+      else {
         (_selectKeys.value as Array<string>).splice(
           _selectKeys.value.indexOf(item.value),
-          1
+          1,
         );
-    } else {
+      }
+    }
+    else {
       /**
        * 多选且未开启严格模式时，需要判断是否是叶子节点，如果是叶子节点则直接选中，否则需要递归遍历所有叶子节点并选中
        */
@@ -314,8 +195,9 @@ const clickCheckItem = (item: CascaderPanelItemPropsInternal) => {
       const allNode: Array<CascaderPanelItemPropsInternal> = [];
       const onlyLeaf = (item: CascaderPanelItemPropsInternal) => {
         if (item.children?.length) {
-          item.children.forEach((a) => onlyLeaf(a));
-        } else {
+          item.children.forEach(a => onlyLeaf(a));
+        }
+        else {
           allNode.push(item);
         }
       };
@@ -323,32 +205,31 @@ const clickCheckItem = (item: CascaderPanelItemPropsInternal) => {
       allNode.forEach((node) => {
         if (_selectKeys.value.includes(node.value)) {
           _selectKeys.value = [
-            ..._selectKeys.value.filter((v) => v !== node.value),
+            ..._selectKeys.value.filter(v => v !== node.value),
           ];
-        } else {
+        }
+        else {
           _selectKeys.value = [..._selectKeys.value, node.value];
         }
       });
     }
-  } else {
+  }
+  else {
     /**
      * 单选时，根据选择的node来构建路径
      */
     _selectKeys.value = buildFullPath(item, true) as string[];
   }
   emit("update:modelValue", _selectKeys.value);
-};
+}
 /**
  * 构建路径
  * @param item 当前node
  * @param getVal 是否获取value
  */
-const buildFullPath = (
-  item: CascaderPanelItemPropsInternal,
-  getVal = false
-): string[] | string => {
+function buildFullPath(item: CascaderPanelItemPropsInternal, getVal = false): string[] | string {
   let obj: CascaderPanelItemPropsInternal | undefined = item;
-  let fullPath = [];
+  const fullPath = [];
   while (obj) {
     fullPath.push(getVal ? obj.value : obj.label);
     obj = obj.parent;
@@ -356,17 +237,18 @@ const buildFullPath = (
   return getVal
     ? fullPath.reverse()
     : fullPath.reverse().join(_decollator.value);
-};
+}
 /**
  * 处理搜索
  * @param val 输入的内容
  */
-const handleInputSearch = (val: string) => {
+function handleInputSearch(val: string) {
   _isSearching.value = val.length > 0;
-  if (!_isSearching.value) return;
+  if (!_isSearching.value)
+    return;
   dropdownRef.value.show();
   _matchedList.value = doSearchValue(val);
-};
+}
 
 /**
  * 监听dropdown面板开关
@@ -379,14 +261,14 @@ watch(
       if (!_multiple.value && props.search) {
         _context.selectKeys.value = [];
         nextTick(() => {
-          _context.selectKeys.value = _context.showKeys.value =
-            _selectKeys.value;
+          _context.selectKeys.value = _context.showKeys.value
+            = _selectKeys.value;
         });
       }
       _isSearching.value = false;
       _searchValue.value = "";
     }
-  }
+  },
 );
 /**
  * 监听modelValue
@@ -395,10 +277,135 @@ watch(
   () => props.modelValue,
   () => {
     _context.modelValue.value = props.modelValue;
-  }
+  },
 );
 
 defineExpose({
   selectLabel: _context.selectLabel,
 });
 </script>
+
+<template>
+  <div
+    :size="size"
+    class="layui-cascader" :class="[
+      {
+        'layui-cascader-opend': openState,
+        'layui-cascader-disabled': disabled,
+        'layui-cascader-multiple': multiple,
+        'has-content': hasContent,
+        'has-clear': allowClear,
+      },
+    ]"
+  >
+    <LayDropdown
+      ref="dropdownRef"
+      :trigger="trigger"
+      :auto-fit-min-width="false"
+      :disabled="disabled"
+      :content-class="contentClass"
+      :content-style="contentStyle"
+      @show="openState = true"
+      @hide="openState = false"
+    >
+      <div v-if="slots.default" class="slot-area">
+        <slot name="default" />
+      </div>
+
+      <div v-else>
+        <LayInput
+          v-if="!_multiple"
+          v-model="_displayValue"
+          suffix-icon="layui-icon-triangle-d"
+          :placeholder="placeholder"
+          :title="_displayValue"
+          :allow-clear="allowClear"
+          :disabled="disabled"
+          :readonly="!search"
+          :size="size"
+          @clear="onClear"
+          @input="handleInputSearch"
+        >
+          <template #suffix>
+            <LayIcon
+              :class="{ 'is-expand': openState }"
+              type="layui-icon-triangle-d"
+            />
+          </template>
+        </LayInput>
+        <LayTagInput
+          v-else
+          v-model="(_displayValue as string[])"
+          v-model:input-value="_searchValue"
+          :placeholder="placeholder"
+          :allow-clear="allowClear"
+          :disabled="disabled"
+          :readonly="!search"
+          :min-collapsed-num="minCollapsedNum"
+          :collapse-tags-tooltip="collapseTagsTooltip"
+          @update:input-value="handleInputSearch"
+          @clear="onClear"
+          @remove="onRemove"
+          @keyup.delete.capture.prevent.stop
+        >
+          <template #suffix>
+            <LayIcon
+              :class="{ 'is-expand': openState }"
+              type="layui-icon-triangle-d"
+            />
+          </template>
+        </LayTagInput>
+      </div>
+
+      <template #content>
+        <LayCascaderPanel
+          v-show="!_isSearching"
+          v-model="_selectKeys"
+          :options="_dataSource"
+          :replace-fields="_replaceFields"
+          :multiple="_multiple"
+          :decollator="_decollator"
+          :only-last-level="_onlyLastLevel"
+          :disabled="_disabled"
+          :check-strictly="_checkStrictly"
+          :lazy="props.lazy"
+          :load="props.load"
+          :change-on-select="_changeOnSelect"
+          :fullpath="props.fullpath"
+          @change="_onChange"
+          @update:model-value="_updateValue"
+          @update:multiple-select-item="_updateMultipleSelectItem"
+        >
+          <template v-for="(_, key) in slots" :key="key" #[key]>
+            <template v-if="key !== 'default'">
+              <slot :name="key" />
+            </template>
+          </template>
+        </LayCascaderPanel>
+        <div v-show="_isSearching">
+          <LayScroll height="200px" class="layui-cascader-search-result-list">
+            <template v-if="_matchedList.length > 0">
+              <div
+                v-for="(item, i) in _matchedList" :key="i"
+                class="layui-cascader-search-result-item"
+                :class="[
+                  {
+                    'layui-cascader-search-result-item-active': !multiple
+                      ? _selectKeys.at(_selectKeys.length - 1) === item.value
+                      : _selectKeys.includes(item.value),
+                  },
+                ]"
+                @click="clickCheckItem(item)"
+              >
+                {{ buildFullPath(item) }}
+              </div>
+            </template>
+            <template v-else>
+              <LayEmpty class="layui-cascader-empty" />
+            </template>
+          </LayScroll>
+        </div>
+      </template>
+    </LayDropdown>
+  </div>
+</template>

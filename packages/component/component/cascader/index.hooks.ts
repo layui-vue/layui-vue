@@ -1,4 +1,4 @@
-import { LayFormContext } from "../../types";
+import type { LayFormContext } from "../../types";
 import { computed, inject } from "vue";
 
 export default function useProps(props: any) {

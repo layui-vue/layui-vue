@@ -1,4 +1,4 @@
-import { ComputedRef, Ref } from "vue";
+import type { ComputedRef, Ref } from "vue";
 
 export interface CascaderPanelItemProps {
   label?: any;
@@ -62,7 +62,7 @@ export enum FLUSH_SIGNAL {
   SINGLE,
 }
 
-export type tCascaderPanel = {
+export interface tCascaderPanel {
   dataSource: ComputedRef<CascaderPanelItemPropsInternal[][]>;
   sanitizer: (
     data: Array<CascaderPanelItemProps>,
@@ -84,4 +84,4 @@ export type tCascaderPanel = {
   buildMultipleStatus: () => void;
   setup: () => void;
   modelValue: Ref<string | string[]>;
-};
+}

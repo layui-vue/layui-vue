@@ -1,10 +1,10 @@
-import { StyleValue } from "vue";
-import type { DropdownTeleportProps } from "../dropdown/interface";
-
-import {
+import type {
   CascaderPanelItemProps,
   CascaderPanelLazyloadFunction,
-} from "../cascaderPanel/interface";
+} from "@layui/component/component/cascaderPanel/interface";
+import type { DropdownTeleportProps } from "@layui/component/component/dropdown/interface";
+
+import type { StyleValue } from "vue";
 
 export type CascaderSize = "lg" | "md" | "sm" | "xs";
 export type DropdownTrigger = "click" | "hover" | "focus" | "contextMenu";
