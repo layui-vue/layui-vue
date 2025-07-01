@@ -281,7 +281,7 @@ watch(
 );
 
 defineExpose({
-  selectLabel: _context.selectLabel,
+  getSelectLabel: _context.selectLabel,
 });
 </script>
 

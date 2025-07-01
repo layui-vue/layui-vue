@@ -1173,7 +1173,7 @@ const options3=[
 
 | 属性 | 描述         | 属性类型 | 版本 |
 | ---- | -------------- |--------|-------|
-| selectLabel | 选中值对应的文本 | `ComputedRef<string \| string[]>`  | `2.19.4` |
+| getSelectLabel | 选中值对应的文本 | `ComputedRef<string \| string[]>`  | `2.23.0` |
 
 :::
 
