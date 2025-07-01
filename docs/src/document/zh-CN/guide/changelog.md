@@ -13,6 +13,25 @@
 ::: demo
 <template>
   <lay-timeline>
+    <lay-timeline-item title="2.23.x">
+      <ul>
+        <a name="2-23-0"></a>
+        <li>
+          <h3>2.23.0 <span class="layui-badge-rim">2025-07-01</span></h3>
+          <ul>
+              <li>[升级] @layui/json-schema-form 升级至1.0.16。</li>
+              <li>[新增] datePicker 组件  新增 default与footer 插槽。<a href="https://gitee.com/layui-vue/layui-vue/pulls/482">详情</a></li>
+              <li>[新增] cascader 组件  新增 getSelectLabel 方法。<a href="https://gitee.com/layui-vue/layui-vue/pulls/451">详情</a></li>
+              <li>[新增] table 组件 新增 column.exportCellType 用于导出 xls 自定义单元格类型。<a href="https://gitee.com/layui-vue/layui-vue/pulls/488">详情</a></li>
+              <li>[新增] table 组件 default-toolbar 新增 render 属性，用于自定义渲染。<a href="https://gitee.com/layui-vue/layui-vue/pulls/488">详情</a></li>
+              <li>[修复] tab 组件 与 layer 结合样式异常。<a href="https://gitee.com/layui-vue/layui-vue/pulls/492">详情</a></li>
+              <li>[修复] table 组件 导出数据为 Number 时，xls 单元格类型固定为数字。<a href="https://gitee.com/layui-vue/layui-vue/pulls/481">详情</a></li>
+              <li>[修复] table 组件 存在多个 fixed 表头，固定表头偏移异常。<a href="https://gitee.com/layui-vue/layui-vue/pulls/486">详情</a></li>
+              <li>[修复] treeSelect 组件 设置 replaceFields.children 输入框未反填二级内容。<a href="https://gitee.com/layui-vue/layui-vue/pulls/484">详情</a></li>
+          </ul>
+        </li>
+      </ul>
+    </lay-timeline-item>
     <lay-timeline-item title="2.22.x">
       <ul>
         <a name="2-22-2"></a>

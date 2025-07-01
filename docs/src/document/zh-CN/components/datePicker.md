@@ -668,8 +668,8 @@ const value13 = ref()
 
 | 插槽       | 描述              | 参数              | 版本     |
 | ---------- | -----------------| ----------------- | -------- |
-| default    |  默认             | `DatePickerDefaultSlotParams` | `2.22.3` |
-| footer     |  底部            | `DatePickerFooterSlotParams` | `2.22.3` |
+| default    |  默认             | `DatePickerDefaultSlotParams` | `2.23.0` |
+| footer     |  底部            | `DatePickerFooterSlotParams` | `2.23.0` |
 
 :::
 
