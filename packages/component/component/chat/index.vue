@@ -1,27 +1,55 @@
 <script lang="ts" setup>
-import { nextTick, ref, watch } from "vue";
+import type { Message } from "./interface";
+import { computed, nextTick, ref, watch } from "vue";
 import "./index.less";
 
+export interface ChatProps {
+  contentHeight: string | number;
+  title?: string;
+  messages?: Message[];
+  backgroundColor?: string;
+};
+
+defineOptions({
+  name: "LayChat",
+});
+
+const props = withDefaults(
+  defineProps<ChatProps>(),
+  {
+    contentHeight: 300,
+    messages: () => [],
+    title: undefined,
+    backgroundColor: 'transparent',
+  },
+);
+
+const emits = defineEmits<{
+  (e: "beforeSend", message: Message): boolean | void;
+  (e: "sent", message: Message): boolean | void;
+}>();
+
 const chatInput = ref("");
-const messageQueue = ref<string[]>([]);
-const messages = ref<{
-  id: number;
-  content: string;
-  avatar: string;
-  direction: "left" | "right";
-}[]>([]);
+const messages = ref<Message[]>(props.messages);
+const messageMap = new Map<string | number | bigint, Message>();
+messages.value.forEach(m => messageMap.set(m.id, m));
+const contentHeight = computed(() => typeof props.contentHeight == "number" ? `${props.contentHeight}px` : props.contentHeight);
 const messageScroll = ref<HTMLElement>();
 
 function handleSendClick() {
   if (chatInput.value.length > 0) {
-    messages.value.push({
+    const msg: Message = {
       id: Date.now(),
+      type: "text",
       content: chatInput.value,
-      avatar: "",
-      direction: "right",
-    });
-    messageQueue.value.push(chatInput.value);
+      direction: "out",
+    };
     chatInput.value = "";
+    if (emits("beforeSend", msg) === false)
+      return;
+    messageMap.set(msg.id, msg);
+    messages.value.push(msg);
+    emits("sent", msg);
   }
 }
 
@@ -37,75 +65,76 @@ watch(
   },
 );
 
-watch(
-  () => messageQueue.value.length,
-  (_) => {
-    const m = messageQueue.value.shift();
-    if (m) {
-      (new Promise(r => setTimeout(r, 1000))).then(() => {
-        messages.value.push({
-          id: Date.now(),
-          content: `收到消息 ${m}`,
-          avatar: "",
-          direction: "left",
-        });
-      });
-    }
+defineExpose({
+  onMessage: (msg: Message) => {
+    if (messageMap.has(msg.id))
+      Object.assign(messages.value.find(m => m.id === msg.id) ?? {}, msg);
+    else
+      messages.value.push(msg);
+    messageMap.set(msg.id, msg);
   },
-);
+  exportMessages: () => JSON.stringify(messages.value),
+});
 </script>
 
 <template>
-  <div class="center">
-    <div class="layui-chat" style="width: 350px;">
-      <LayRow>
-        <div class="layui-chat-header">
-          <LayCol :md="24">
-            <LayPanel shadow="never" style="margin-bottom: 0;">
-              <span>LayChat</span>
-            </LayPanel>
+  <div class="layui-chat">
+    <LayRow>
+      <slot name="header">
+        <template v-if="props.title">
+          <LayCol :md="24" class="layui-chat-header">
+            <span v-if="props.title">{{ props.title }}</span>
           </LayCol>
-        </div>
-        <div class="layui-chat-content">
-          <LayCol :md="24" class="layui-chat-content-wrapper" style="position: relative;">
-            <template v-if="!messages.length">
-              <div style="inset: 0; display: flex; align-items: center; justify-content: center; position: absolute;">
+        </template>
+      </slot>
+      <div class="layui-chat-content">
+        <LayCol :md="24" class="layui-chat-content-wrapper" style="position: relative;">
+          <template v-if="!messages.length">
+            <div style="inset: 0; display: flex; align-items: center; justify-content: center; position: absolute;">
+              <slot name="empty">
                 <LayEmpty />
-              </div>
-            </template>
-            <template v-else>
-              <LayScroll ref="messageScroll" height="300px">
-                <div
-                  v-for="message in messages" :key="message.id" class="layui-chat-content-item" :class="[
-                    `layui-chat-content-item-${message.direction}`,
-                  ]"
-                >
-                  <div class="layui-chat-content-item-wrapper">
-                    <div style="width: 32px; height: 32px;">
-                      <LayAvatar />
-                    </div>
-                    <span class="layui-chat-content-message">
-                      {{ message.content }}
-                    </span>
-                    <LayIcon type="layui-icon-ok" />
+              </slot>
+            </div>
+          </template>
+          <template v-else>
+            <LayScroll ref="messageScroll" :height="contentHeight">
+              <div v-for="message in messages" :key="message.id" class="layui-chat-content-item" :class="[
+                `layui-chat-content-item-${message.direction}`,
+              ]">
+                <div class="layui-chat-content-item-wrapper">
+                  <div v-if="message.direction !== 'system'" style="width: 32px; height: 32px;">
+                    <LayAvatar :src="message.avatar ?? ''" />
                   </div>
+                  <span class="layui-chat-content-message">
+                    {{ message.content }}
+                  </span>
+                  <LayIcon v-if="message.direction !== 'system' && message.icon" :type="message.icon" />
                 </div>
-              </LayScroll>
+              </div>
+            </LayScroll>
+          </template>
+        </LayCol>
+      </div>
+      <div class="layui-chat-input">
+        <LayCol :md="24">
+          <LayInput @keydown="(ev: KeyboardEvent) => ev.keyCode === 13 && handleSendClick()" v-model="chatInput"
+            placeholder="Input..." class="layui-chat-input-box">
+            <template #prefix>
+              <slot name="shortcuts" />
             </template>
-          </LayCol>
-        </div>
-        <div class="layui-chat-input">
-          <LayCol :md="24">
-            <LayInput v-model="chatInput" placeholder="Input..." class="layui-chat-input-box">
-              <template #suffix>
-                <LayButton @click="handleSendClick">
-                  Send
-                </LayButton>
-              </template>
-            </LayInput>
-          </LayCol>
-        </div>
-      </LayRow>
-    </div>
+            <template #suffix>
+              <LayButton @click="handleSendClick">
+                Send
+              </LayButton>
+            </template>
+          </LayInput>
+        </LayCol>
+      </div>
+      <div class="layui-chat-footer">
+        <LayCol :md="24">
+          <slot name="footer" />
+        </LayCol>
+      </div>
+    </LayRow>
   </div>
 </template>
