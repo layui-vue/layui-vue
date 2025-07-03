@@ -11,6 +11,16 @@
     border: 1px solid #e6e6e6;
     border-bottom: unset;
 
+    .layui-chat-content-empty {
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      pointer-events: none;
+      user-select: none;
+    }
+
     .layui-chat-content-item {
       padding: 4px 10px;
       margin-bottom: 0;
@@ -22,6 +32,16 @@
         width: calc(100% - 36px);
       }
 
+      .layui-chat-content-image {
+        width: 200px;
+        border: 1px solid #e6e6e6;
+        border-radius: 4px;
+      }
+
+      .layui-chat-content-audio {
+        width: 200px;
+      }
+
       &-system {
         justify-content: center;
         text-align: center;
@@ -29,6 +49,7 @@
 
         .layui-chat-content-message {
           background: #f6f6f6;
+          border-radius: 4px;
           width: 100%;
         }
       }
