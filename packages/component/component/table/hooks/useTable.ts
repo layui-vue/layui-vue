@@ -8,10 +8,8 @@ import type {
 
 import { isEqual, isValueArray, loopForEach } from "@layui/component/utils";
 import {
-  isReactive,
   reactive,
   ref,
-  toRaw,
   watch,
   watchEffect,
 } from "vue";
@@ -77,7 +75,7 @@ export function useTable(props: RequiredTableProps, emit: TableEmit) {
   watch(
     () => props.columns,
     (newValue) => {
-      _columns.value = isReactive(newValue) ? newValue : reactive(newValue);
+      _columns.value = newValue;
     },
     {
       immediate: true,
@@ -270,14 +268,14 @@ export function useTable(props: RequiredTableProps, emit: TableEmit) {
     ) {
       const [topColumn] = mapValueColumns;
 
-      const _columns = isLeft ? props.columns : [...props.columns].reverse();
+      const columnsValue = isLeft ? _columns.value : [..._columns.value].reverse();
 
       let index
-        = _columns.findIndex(column => isEqual(column, toRaw(topColumn))) - 1;
+        = columnsValue.findIndex(column => isEqual(column, topColumn)) - 1;
       const fixedColumns = [];
 
       while (index > -1) {
-        const column = _columns[index];
+        const column = columnsValue[index];
         if (column.fixed && column.fixed === (isLeft ? "left" : "right")) {
           fixedColumns.push(column);
         }
@@ -309,19 +307,20 @@ export function useTable(props: RequiredTableProps, emit: TableEmit) {
     let lastLeftClassName = "";
     let firstRightClassName = "";
 
-    const topLastLeft = (props.columns as any).findLast(
+    const topLastLeft = (_columns.value as any).findLast(
       (column: T) => column.fixed === "left",
     );
-    const topFirstRight = props.columns.find(
+
+    const topFirstRight = _columns.value.find(
       column => column.fixed === "right",
     );
 
-    if (isEqual(toRaw(topColumn), topLastLeft)) {
+    if (isEqual(topColumn, topLastLeft)) {
       loopJudge(topColumn, "left")
       && (lastLeftClassName = lastLeftClassNameConstant);
     }
 
-    if (isEqual(toRaw(topColumn), topFirstRight)) {
+    if (isEqual(topColumn, topFirstRight)) {
       loopJudge(topColumn, "right")
       && (firstRightClassName = firstRightClassNameConstant);
     }
