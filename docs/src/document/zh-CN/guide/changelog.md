@@ -15,6 +15,16 @@
   <lay-timeline>
     <lay-timeline-item title="2.23.x">
       <ul>
+        <a name="2-23-1"></a>
+        <li>
+          <h3>2.23.1 <span class="layui-badge-rim">2025-07-03</span></h3>
+          <ul>
+              <li>[修复] table 组件 按需引入时，default-toolbar 样式问题。</li>
+              <li>[修复] table 组件 props.columns 为响应式变量时， fixed 列异常。<a href="https://gitee.com/layui-vue/layui-vue/pulls/496">详情</a></li>
+          </ul>
+        </li>
+      </ul>
+      <ul>
         <a name="2-23-0"></a>
         <li>
           <h3>2.23.0 <span class="layui-badge-rim">2025-07-01</span></h3>
