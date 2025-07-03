@@ -186,7 +186,7 @@ describe("LayCascader", () => {
     expect((component.vm as any)._context.flatData.value.length).toBe(3);
   });
 
-  test("expose selectLabel", async () => {
+  test("expose getSelectLabel", async () => {
     const wrapper = mount({
       setup() {
         const modelValue = ref("1/1-1/1-1-1");
@@ -220,7 +220,7 @@ describe("LayCascader", () => {
 
     const component = wrapper.findComponent(LayCascader);
 
-    expect(component.vm.selectLabel).toBe("label1 / label1-1 / label1-1-1");
+    expect(component.vm.getSelectLabel).toBe("label1 / label1-1 / label1-1-1");
   });
 
   test("expose selectLabel multiple", async () => {
@@ -257,7 +257,7 @@ describe("LayCascader", () => {
     const component = wrapper.findComponent(LayCascader);
 
     await nextTick();
-    expect(component.vm.selectLabel).toEqual([
+    expect(component.vm.getSelectLabel).toEqual([
       "label1/label1-1/label1-1-1",
       "label2",
     ]);
