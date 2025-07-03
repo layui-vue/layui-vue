@@ -916,10 +916,10 @@ describe("LayTable", () => {
   });
 
   test("一级表头存在两个fixed为left表头，存在 layui-table-fixed-left-last 类名", async () => {
-    const columns = [
+    const columns = reactive([
       { title: "用户", width: "80px", key: "name", fixed: "left" as const },
       { title: "城市", width: "80px", key: "city", fixed: "left" as const },
-    ];
+    ]);
 
     const dataSource = ref([]);
 
