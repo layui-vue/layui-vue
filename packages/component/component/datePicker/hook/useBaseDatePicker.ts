@@ -3,7 +3,10 @@ import type {
   DatePickerRenderComponentProps,
 } from "../interface";
 
+import { isArray } from "@layui/component/utils";
 import dayjs from "dayjs";
+import { computed } from "vue";
+import { normalizeDayjsValue } from "../util";
 
 export function useBaseDatePicker(props: DatePickerRenderComponentProps) {
   const getDefaultValue = () => {
@@ -16,5 +19,18 @@ export function useBaseDatePicker(props: DatePickerRenderComponentProps) {
       : dayjs().startOf("day");
   };
 
-  return { getDefaultValue };
+  const defaultTimeValue = computed(() => {
+    if (props.type !== "datetime")
+      return [];
+
+    const times = isArray(props.defaultTime)
+      ? props.defaultTime
+      : [props.defaultTime, props.defaultTime];
+
+    return times.map(t => normalizeDayjsValue(t, "HH:mm:ss"));
+  });
+
+  return { defaultTimeValue, getDefaultValue };
 }
+
+export type UseBaseDatePicker = ReturnType<typeof useBaseDatePicker>;

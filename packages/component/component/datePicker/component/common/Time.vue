@@ -156,12 +156,14 @@ function scrollTo() {
 }
 
 watch(
-  () => props.modelValue,
-  (modelValue) => {
+  () => [props.modelValue, props.showDate],
+  ([modelValue, showDate]) => {
+    const dateValue = modelValue || showDate;
+
     hms.value = {
-      hh: modelValue ? modelValue.hour() : null,
-      mm: modelValue ? modelValue.minute() : null,
-      ss: modelValue ? modelValue.second() : null,
+      hh: dateValue ? dateValue.hour() : null,
+      mm: dateValue ? dateValue.minute() : null,
+      ss: dateValue ? dateValue.second() : null,
     };
 
     scrollTo();
