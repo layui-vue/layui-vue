@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import type { Dayjs } from "dayjs";
 import type {
-  DatePickerModelValueSingleType,
   DatePickerValueNotArray,
   Shortcuts as ShortcutsType,
 } from "../interface";
@@ -12,6 +11,7 @@ import { useI18n } from "@layui/component/language";
 import dayjs from "dayjs";
 import { computed, ref, watch } from "vue";
 
+import { useBaseDatePicker } from "../hook/useBaseDatePicker";
 import { useShortcutsRange } from "../hook/useShortcutsRange";
 import DatePickerRender from "./common/DatePickerRender.vue";
 import Footer from "./common/Footer.vue";
@@ -23,6 +23,9 @@ const props = withDefaults(defineProps<RangePickerProps>(), {});
 const emits = defineEmits(["pick"]);
 
 const { t } = useI18n();
+const {
+  getDefaultValue,
+} = useBaseDatePicker(props);
 const hookChangeShortcut = useShortcutsRange();
 
 const startDate = ref<DatePickerValueNotArray>();
@@ -34,14 +37,6 @@ const yearLeftRef = ref<InstanceType<typeof LayDropdown>>();
 const yearRightRef = ref<InstanceType<typeof LayDropdown>>();
 
 const hoverMonth = ref<Dayjs | undefined>();
-
-function getDefaultValue() {
-  const _defaultValue = dayjs(
-    props.defaultValue as DatePickerModelValueSingleType,
-  );
-
-  return _defaultValue.isValid() ? _defaultValue : dayjs().startOf("day");
-}
 
 watch(
   () => props.modelValue,

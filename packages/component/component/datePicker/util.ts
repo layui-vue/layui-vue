@@ -141,3 +141,10 @@ export function setDateList(year: number, month: number): Array<DateContentSingl
   }
   return list;
 }
+
+export function setHMS(date: Dayjs, referDate: Dayjs) {
+  return date
+    .hour(referDate.hour())
+    .minute(referDate.minute())
+    .second(referDate.second());
+}

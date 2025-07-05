@@ -5,15 +5,15 @@ import type {
   Shortcuts as ShortcutsType,
 } from "../interface";
 import type { UniquePickerProps } from "./interface";
+import LayButton from "@layui/component/component/button/index.vue";
+import { useI18n } from "@layui/component/language";
+
+import { isFunction } from "@layui/component/utils";
 import dayjs from "dayjs";
 import { computed, ref, watch } from "vue";
 
-import { useI18n } from "../../../language";
-import { isFunction } from "../../../utils";
-
-import LayButton from "../../button/index.vue";
-
 import { useBaseDatePicker } from "../hook/useBaseDatePicker";
+import { setHMS } from "../util";
 import Date from "./common/Date.vue";
 import DatePickerRender from "./common/DatePickerRender.vue";
 import Footer from "./common/Footer.vue";
@@ -30,14 +30,20 @@ const currentData = ref<UniquePickerProps["modelValue"]>();
 const showDate = ref<Dayjs>(dayjs());
 const currentType = ref();
 
-const { getDefaultValue } = useBaseDatePicker(props);
+const { defaultTimeValue, getDefaultValue } = useBaseDatePicker(props);
 const { t } = useI18n();
 
 watch(
   () => props.modelValue,
   () => {
     currentData.value = props.modelValue;
-    showDate.value = props.modelValue || getDefaultValue();
+    let _defaultValue = getDefaultValue();
+
+    _defaultValue = defaultTimeValue.value[0]
+      ? setHMS(_defaultValue, defaultTimeValue.value[0])
+      : _defaultValue;
+
+    showDate.value = props.modelValue || _defaultValue;
   },
   { immediate: true },
 );

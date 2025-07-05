@@ -339,4 +339,36 @@ describe("LayDatePicker date type", () => {
     expect(wrapper.find(".custom-footer").text()).toBe("自定义底部");
   });
 
+   test("default-time", async () => {
+    const wrapper = mount(LayDatePicker, {
+      props: {
+        type: 'datetime',
+        modelValue: "",
+        defaultTime: '12:30:00',
+        static: true
+      },
+    });
+    await nextTick();
+    
+    const checkTimeDom = wrapper.find(".layui-laydate-footer > .layui-btn")
+    expect(checkTimeDom.exists()).toBeTruthy();
+
+    await checkTimeDom.trigger('click')
+
+  
+    const timeDom = wrapper.find(".laydate-time-show")
+    expect(timeDom.exists()).toBeTruthy();
+    
+    const currentHH = timeDom.find(".num-list[data-type='hh'] .layui-this")
+    const currentMM = timeDom.find(".num-list[data-type='mm'] .layui-this")
+    const currentSS = timeDom.find(".num-list[data-type='ss'] .layui-this")
+
+    expect(currentHH.exists()).toBeTruthy();
+    expect(currentMM.exists()).toBeTruthy();
+    expect(currentSS.exists()).toBeTruthy();
+
+    expect(currentHH.text()).toBe('12');
+    expect(currentMM.text()).toBe('30');
+    expect(currentSS.text()).toBe('00');
+  });
 });

@@ -9,13 +9,12 @@ import type {
 import LayDropdown from "@layui/component/component/dropdown";
 import LayIcon from "@layui/component/component/icon";
 import { useI18n } from "@layui/component/language";
-import { isArray } from "@layui/component/utils";
 import dayjs from "dayjs";
 
 import { computed, ref, watch } from "vue";
 import { useBaseDatePicker } from "../hook/useBaseDatePicker";
 import { useShortcutsRange } from "../hook/useShortcutsRange";
-import { normalizeDayjsValue, setDateList } from "../util";
+import { setDateList, setHMS } from "../util";
 import DateContent from "./common/DateContent.vue";
 import DatePickerRender from "./common/DatePickerRender.vue";
 import Footer from "./common/Footer.vue";
@@ -28,7 +27,10 @@ const props = withDefaults(defineProps<RangePickerProps>(), {});
 const emits = defineEmits(["pick"]);
 
 const { t } = useI18n();
-const { getDefaultValue } = useBaseDatePicker(props);
+const {
+  defaultTimeValue,
+  getDefaultValue,
+} = useBaseDatePicker(props);
 const hookChangeShortcut = useShortcutsRange();
 
 const startDate = ref<DatePickerValueNotArray>();
@@ -66,24 +68,6 @@ const MONTH_NAME = computed(() => [
   t("datePicker.december"),
 ]);
 
-const _defaultTime = computed(() => {
-  if (props.type !== "datetime")
-    return [];
-
-  const times = isArray(props.defaultTime)
-    ? props.defaultTime
-    : [props.defaultTime, props.defaultTime];
-
-  return times.map(t => normalizeDayjsValue(t, "HH:mm:ss"));
-});
-
-function setHMS(date: Dayjs, referDate: Dayjs) {
-  return date
-    .hour(referDate.hour())
-    .minute(referDate.minute())
-    .second(referDate.second());
-}
-
 watch(
   () => props.modelValue,
   () => {
@@ -92,12 +76,12 @@ watch(
     endDate.value = end;
 
     const _defaultDate = getDefaultValue();
-    const _leftDate = _defaultTime.value[0]
-      ? setHMS(_defaultDate, _defaultTime.value[0])
+    const _leftDate = defaultTimeValue.value[0]
+      ? setHMS(_defaultDate, defaultTimeValue.value[0])
       : _defaultDate;
 
-    const _rightDate = _defaultTime.value[1]
-      ? setHMS(_defaultDate.add(1, "month"), _defaultTime.value[1])
+    const _rightDate = defaultTimeValue.value[1]
+      ? setHMS(_defaultDate.add(1, "month"), defaultTimeValue.value[1])
       : _defaultDate.add(1, "month");
 
     leftDate.value = start || _leftDate;
