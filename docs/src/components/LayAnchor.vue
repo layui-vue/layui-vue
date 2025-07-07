@@ -1,5 +1,5 @@
 <template>
-  <aside :class="classAside">
+  <aside :class="classAside" style="display: flex;flex-direction: column;">
     <div class="lay-aside-top">
       <lay-button
         type="primary"
@@ -28,6 +28,9 @@
         </li>
       </ul>
     </lay-scroll>
+    <div style="padding-top: 10px; padding-bottom: 10px; border-top: 1px solid whitesmoke;">
+      <img src="../assets/lubase-logo.png" />
+    </div>
   </aside>
 </template>
 <script setup lang="ts">
