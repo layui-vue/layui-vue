@@ -62,29 +62,6 @@
         </a>
       </div>
     </div>
-    <section class="sponsors">
-      <h1>{{ t("home.sponsors") }}</h1>
-      <div class="sponsors-main">
-        <lay-row :space="30" class="sponsors-row">
-          <lay-col :md="6" :sm="12" :xs="12">
-            <a
-              href="https://gitee.com/lubase"
-              target="_blank"
-              style="display: flex; justify-content: center"
-            >
-              <img style="width: 200px" src="../assets/lubase-logo.png" />
-            </a>
-          </lay-col>
-        </lay-row>
-      </div>
-      <div class="sponsors-btn">
-        <lay-button size="sm" radius>
-          <a class="join-sponsors" href="mailto:contact@layui-vue.com">
-            {{ t("home.join_sponsors") }}
-          </a>
-        </lay-button>
-      </div>
-    </section>
     <div class="box-list">
       <lay-row :space="30">
         <lay-col :md="8" :sm="12" :xs="12">
