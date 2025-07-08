@@ -1,5 +1,5 @@
 import type { RequiredTableProps, TableEmit } from "../typing";
-import { isValueArray, loopForEach } from "@layui/component/utils";
+import { arrayEverySame, isValueArray, loopForEach } from "@layui/component/utils";
 
 import { computed, reactive, ref, toRaw, watch } from "vue";
 
@@ -24,14 +24,9 @@ export function useTableSelected(props: RequiredTableProps, emit: TableEmit) {
     emit("update:selectedKey", key);
   }
 
-  /**
-   * Multiple checkbox
-   */
-  const allMSelected = ref(false);
-  const someMSelected = ref(false);
   const tableMSelectedKeys = reactive<
     NonNullable<RequiredTableProps["selectedKeys"]>
-  >([]);
+  >(props.selectedKeys);
 
   const allKeys = computed(() => {
     const keys: RequiredTableProps["selectedKeys"] = [];
@@ -59,29 +54,33 @@ export function useTableSelected(props: RequiredTableProps, emit: TableEmit) {
       );
     },
     {
-      immediate: true,
       deep: true,
     },
   );
 
-  watch(
-    () => [tableMSelectedKeys, allKeys.value],
-    ([tableMultipleSelectedKeysValue, allKeysValue]) => {
-      allMSelected.value = allKeysValue.length > 0 && allKeysValue.every(key =>
-        tableMultipleSelectedKeysValue.includes(key),
-      );
-      someMSelected.value = allKeysValue.length > 0 && allKeysValue.some(key =>
-        tableMultipleSelectedKeysValue.includes(key),
-      );
+  /**
+   * Multiple checkbox
+   */
+  const allMSelected = computed(() => {
+    return allKeys.value.length > 0 && allKeys.value.every(key =>
+      tableMSelectedKeys.includes(key),
+    );
+  });
 
-      if (
-        tableMultipleSelectedKeysValue.length !== props.selectedKeys?.length
-      ) {
+  const someMSelected = computed(() => {
+    return allKeys.value.length > 0 && allKeys.value.some(key =>
+      tableMSelectedKeys.includes(key),
+    );
+  });
+
+  watch(
+    tableMSelectedKeys,
+    (tableMultipleSelectedKeysValue) => {
+      if (!arrayEverySame(tableMultipleSelectedKeysValue, props.selectedKeys)) {
         emit("update:selectedKeys", [...tableMultipleSelectedKeysValue]);
       }
     },
     {
-      immediate: true,
       deep: true,
     },
   );

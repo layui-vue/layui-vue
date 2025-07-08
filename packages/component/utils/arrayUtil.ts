@@ -1,26 +1,12 @@
 import { isFunction, isNumber } from "./type";
 
-export const check = (arr: any[], value: any) => {
-  return arr.indexOf(value) > -1;
-};
-
-/**
- * 计算数组差异
- *
- * @param arr1 数组
- * @param arr2 数组
- */
-function diff(arr1: any[], arr2: any[]) {
-  let newArr = [];
-  arr1 = Array.from(new Set(arr1)); // 去重
-  arr2 = Array.from(new Set(arr2)); // 去重
-  newArr = arr1.concat(arr2);
-  return newArr.filter((x) => !(arr1.includes(x) && arr2.includes(x)));
+export function check(arr: any[], value: any) {
+  return arr.includes(value);
 }
 
-export const isValueNull = (v: any) => {
+export function isValueNull(v: any) {
   return Array.isArray(v) ? !v.length : !v;
-};
+}
 
 export function isArray(val: any): val is Array<any> {
   return val && Array.isArray(val);
@@ -58,9 +44,10 @@ export function loopForEach(
   array: any[] | undefined,
   children: string | loopForEachCallback,
   callback: loopForEachCallback,
-  parent?: any
+  parent?: any,
 ) {
-  if (!isValueArray(array)) return;
+  if (!isValueArray(array))
+    return;
 
   let _children: string;
   let _callback: callback[];
@@ -70,12 +57,13 @@ export function loopForEach(
     _children = "children";
     _callback = isFunction(children) ? [children] : children;
     _parent = callback;
-  } else {
+  }
+  else {
     _children = children;
     _callback = isFunction(callback) ? [callback] : callback;
   }
 
-  if (!isValueArray(_callback) || _callback.some((cb) => !isFunction(cb)))
+  if (!isValueArray(_callback) || _callback.some(cb => !isFunction(cb)))
     return;
 
   for (let index = 0; index < array.length; index++) {
@@ -106,7 +94,7 @@ export function loopSomeLevelALLChildren(
 export function loopSomeLevelALLChildren(
   lists: any[],
   childrenKey: string | number,
-  level = 1
+  level = 1,
 ): any[] {
   let _childrenKey: string;
   let _level: number = level;
@@ -133,4 +121,8 @@ export function loopSomeLevelALLChildren(
   }
 
   return result;
+}
+
+export function arrayEverySame<T extends any[]>(arr1: T, arr2: T): boolean {
+  return arr1.every(i => arr2.includes(i)) && arr2.every(i => arr1.includes(i));
 }

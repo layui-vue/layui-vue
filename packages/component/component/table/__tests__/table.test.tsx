@@ -1,10 +1,10 @@
 import { DOMWrapper, type VueWrapper, mount } from "@vue/test-utils";
 import LayTable from "../index.vue";
 import LayCheckboxV2 from "@layui/component/component/checkboxV2/index.vue";
-import Button from '@layui/component/component/button/index.vue'
+import LayButton from '@layui/component/component/button/index.vue'
 
 import { describe, expect, test, vi } from "vitest";
-import {h, nextTick, reactive, ref} from "vue";
+import {h, nextTick, reactive, ref, watch} from "vue";
 import { sleep } from "../../../test-utils";
 
 describe("LayTable", () => {
@@ -533,7 +533,7 @@ describe("LayTable", () => {
     const defaultToolbars = [
       "filter",
       {
-        render: () => h(Button, {
+        render: () => h(LayButton, {
           onClick: () => {
             value++;
           },
@@ -941,5 +941,83 @@ describe("LayTable", () => {
     const _class = ths[1].attributes().class
 
     expect(_class).toMatch(/layui-table-fixed-left-last/)
+  });
+
+  // https://gitee.com/layui-vue/layui-vue/issues/ICKILA
+  test("selectedKeys制空未生效", async () => {
+    const columns = reactive([
+      { type: "checkbox", title: "复选" },
+      { title: "用户", width: "80px", key: "name" },
+    ]);
+
+    const dataSource = ref<any>([]);
+    const selectedKeys = ref([]);
+
+
+    watch([dataSource], () => {
+      selectedKeys.value = []
+    });
+
+    function generateData1() {
+      dataSource.value = [
+        { id: "3", name: "张三3", city: "城市-3", sex: "男", age: "20", remark: "屈指古今多少事，都只是、镜中春", score: 100, sign: "已签到", joinTime: "2022-02-09" },
+        { id: "4", name: "张三4", city: "城市-4", sex: "男", age: "20", remark: "屈指古今多少事，都只是、镜中春", score: 100, sign: "已签到", joinTime: "2022-02-09" }, 
+        { id: "5", name: "张三5", city: "城市-5", sex: "男", age: "20", remark: "屈指古今多少事，都只是、镜中春", score: 100, sign: "已签到", joinTime: "2022-02-09" }
+      ];
+    }
+
+    function generateData2() {
+      dataSource.value = [
+        { id: "9", name: "张三9", city: "城市-9", sex: "男", age: "20", remark: "屈指古今多少事，都只是、镜中春", score: 100, sign: "已签到", joinTime: "2022-02-09" },
+        { id: "10", name: "张三10", city: "城市-10", sex: "男", age: "18", remark: "屈指古今多少事，都只是、镜中春", score: 100, sign: "已签到", joinTime: "2022-02-09" },
+        { id: "11", name: "张三11", city: "城市-11", sex: "男", age: "18", remark: "屈指古今多少事，都只是、镜中春", score: 100, sign: "已签到", joinTime: "2022-02-09" },
+        { id: "12", name: "张三12", city: "城市-12", sex: "男", age: "20", remark: "屈指古今多少事，都只是、镜中春", score: 100, sign: "已签到", joinTime: "2022-02-09" },
+      ];
+    }
+
+
+
+    const wrapper = mount({
+      setup() {
+        return () => (
+          <div>
+            <LayButton class='custom-btn1' size="sm" onClick={generateData1}>
+              数据1
+            </LayButton>
+            <LayButton class='custom-btn2' size="sm" onClick={generateData2}>
+              数据2
+            </LayButton>
+            <LayTable
+              columns={columns}
+              dataSource={dataSource.value}
+              v-model:selectedKeys={selectedKeys.value}
+            ></LayTable>
+          </div>
+        );
+      },
+    });
+
+    await nextTick()
+
+    const btn1 = wrapper.find('.custom-btn1')
+    const btn2 = wrapper.find('.custom-btn2')
+
+    await btn1.trigger('click')
+
+    const trs1 = wrapper.findAll('.layui-table-body .layui-table tbody tr')
+    expect(trs1.length).toBe(3)
+
+    await trs1[0].findComponent('.layui-checkbox').trigger('click')
+    expect(selectedKeys.value.length).toBe(1)
+
+    await trs1[1].findComponent('.layui-checkbox').trigger('click')
+    expect(selectedKeys.value.length).toBe(2)
+
+    await btn2.trigger('click')
+    const trs2 = wrapper.findAll('.layui-table-body .layui-table tbody tr')
+    expect(trs2.length).toBe(4)
+
+    expect(selectedKeys.value.length).toBe(0)
+
   });
 });
