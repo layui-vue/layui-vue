@@ -945,40 +945,38 @@ describe("LayTable", () => {
 
   // https://gitee.com/layui-vue/layui-vue/issues/ICKILA
   test("selectedKeys制空未生效", async () => {
-    const columns = reactive([
-      { type: "checkbox", title: "复选" },
-      { title: "用户", width: "80px", key: "name" },
-    ]);
 
-    const dataSource = ref<any>([]);
     const selectedKeys = ref([]);
-
-
-    watch([dataSource], () => {
-      selectedKeys.value = []
-    });
-
-    function generateData1() {
-      dataSource.value = [
-        { id: "3", name: "张三3", city: "城市-3", sex: "男", age: "20", remark: "屈指古今多少事，都只是、镜中春", score: 100, sign: "已签到", joinTime: "2022-02-09" },
-        { id: "4", name: "张三4", city: "城市-4", sex: "男", age: "20", remark: "屈指古今多少事，都只是、镜中春", score: 100, sign: "已签到", joinTime: "2022-02-09" }, 
-        { id: "5", name: "张三5", city: "城市-5", sex: "男", age: "20", remark: "屈指古今多少事，都只是、镜中春", score: 100, sign: "已签到", joinTime: "2022-02-09" }
-      ];
-    }
-
-    function generateData2() {
-      dataSource.value = [
-        { id: "9", name: "张三9", city: "城市-9", sex: "男", age: "20", remark: "屈指古今多少事，都只是、镜中春", score: 100, sign: "已签到", joinTime: "2022-02-09" },
-        { id: "10", name: "张三10", city: "城市-10", sex: "男", age: "18", remark: "屈指古今多少事，都只是、镜中春", score: 100, sign: "已签到", joinTime: "2022-02-09" },
-        { id: "11", name: "张三11", city: "城市-11", sex: "男", age: "18", remark: "屈指古今多少事，都只是、镜中春", score: 100, sign: "已签到", joinTime: "2022-02-09" },
-        { id: "12", name: "张三12", city: "城市-12", sex: "男", age: "20", remark: "屈指古今多少事，都只是、镜中春", score: 100, sign: "已签到", joinTime: "2022-02-09" },
-      ];
-    }
-
-
 
     const wrapper = mount({
       setup() {
+         const columns = reactive([
+          { type: "checkbox", title: "复选" },
+          { title: "用户", width: "80px", key: "name" },
+        ]);
+        const dataSource = ref<any>([]);
+
+        function generateData1() {
+          dataSource.value = [
+            { id: "3", name: "张三3", city: "城市-3", sex: "男", age: "20", remark: "屈指古今多少事，都只是、镜中春", score: 100, sign: "已签到", joinTime: "2022-02-09" },
+            { id: "4", name: "张三4", city: "城市-4", sex: "男", age: "20", remark: "屈指古今多少事，都只是、镜中春", score: 100, sign: "已签到", joinTime: "2022-02-09" }, 
+            { id: "5", name: "张三5", city: "城市-5", sex: "男", age: "20", remark: "屈指古今多少事，都只是、镜中春", score: 100, sign: "已签到", joinTime: "2022-02-09" }
+          ];
+        }
+
+        function generateData2() {
+          dataSource.value = [
+            { id: "9", name: "张三9", city: "城市-9", sex: "男", age: "20", remark: "屈指古今多少事，都只是、镜中春", score: 100, sign: "已签到", joinTime: "2022-02-09" },
+            { id: "10", name: "张三10", city: "城市-10", sex: "男", age: "18", remark: "屈指古今多少事，都只是、镜中春", score: 100, sign: "已签到", joinTime: "2022-02-09" },
+            { id: "11", name: "张三11", city: "城市-11", sex: "男", age: "18", remark: "屈指古今多少事，都只是、镜中春", score: 100, sign: "已签到", joinTime: "2022-02-09" },
+            { id: "12", name: "张三12", city: "城市-12", sex: "男", age: "20", remark: "屈指古今多少事，都只是、镜中春", score: 100, sign: "已签到", joinTime: "2022-02-09" },
+          ];
+        }
+
+        watch([dataSource], () => {
+          selectedKeys.value = []
+        });
+
         return () => (
           <div>
             <LayButton class='custom-btn1' size="sm" onClick={generateData1}>
@@ -1018,6 +1016,5 @@ describe("LayTable", () => {
     expect(trs2.length).toBe(4)
 
     expect(selectedKeys.value.length).toBe(0)
-
   });
 });
