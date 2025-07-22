@@ -15,6 +15,18 @@
   <lay-timeline>
     <lay-timeline-item title="2.23.x">
       <ul>
+        <a name="2-23-2"></a>
+        <li>
+          <h3>2.23.2 <span class="layui-badge-rim">2025-07-22</span></h3>
+          <ul>
+              <li>[新增] datePicker 组件 default-time在非range模式下生效。<a href="https://gitee.com/layui-vue/layui-vue/pulls/497">详情</a></li>
+              <li>[修复] table 组件 清空dataSource与selectedKeys同时进行，selectedKeys清空异常。<a href="https://gitee.com/layui-vue/layui-vue/pulls/499">详情</a></li>
+              <li>[修复] menu 组件 高度异常。<a href="https://gitee.com/layui-vue/layui-vue/pulls/498">详情</a></li>
+              <li>[修复] tree 组件 展开/收起 图标异常。<a href="https://gitee.com/layui-vue/layui-vue/pulls/500">详情</a></li>
+          </ul>
+        </li>
+      </ul>
+      <ul>
         <a name="2-23-1"></a>
         <li>
           <h3>2.23.1 <span class="layui-badge-rim">2025-07-03</span></h3>
