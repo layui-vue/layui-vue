@@ -1,0 +1,24 @@
+version: '1.0'
+name: pipeline-20250723
+displayName: pipeline-20250723
+triggers:
+  trigger: auto
+  push:
+    branches:
+      prefix:
+        - ''
+stages:
+  - name: stage-299c076c
+    displayName: 未命名
+    strategy: naturally
+    trigger: auto
+    executor: []
+    steps:
+      - step: sc@sbom
+        name: sbom
+        displayName: SBOM 扫描
+        scan: code
+        codePath: ./
+        notify: []
+        strategy:
+          retry: '0'
