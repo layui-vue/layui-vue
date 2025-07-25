@@ -1,88 +1,37 @@
-<!--
- * @Author: baobaobao
- * @Date: 2023-04-24 16:23:33
- * @LastEditTime: 2023-05-23 13:41:46
- * @LastEditors: baobaobao
--->
-<template>
-  <div :style="containerStyle" :class="getStyle" @click="handleCheck">
-    <div class="layui-checkcard-is-cover" v-if="$slots.cover || cover">
-      <img :src="cover" v-if="cover" />
-      <slot name="cover" v-if="$slots.cover">
-        {{ cover }}
-      </slot>
-    </div>
-    <div :class="getContentStyle" v-else>
-      <div class="layui-checkcard-left" v-if="$slots.avatar || avatar">
-        <span class="layui-checkcard-avatar" v-if="avatar">
-          <img :src="avatar" />
-        </span>
-        <slot name="avatar" v-if="$slots.avatar">
-          {{ avatar }}
-        </slot>
-      </div>
-      <div class="layui-checkcard-right">
-        <div class="layui-checkcard-header" v-if="$slots.title || title">
-          <span :class="getExtraStyle">
-            <slot name="title">{{ title }}</slot>
-          </span>
-          <div class="layui-checkcard-extra" v-if="$slots.extra">
-            <slot name="extra">{{ extra }}</slot>
-          </div>
-        </div>
-        <div
-          class="layui-checkcard-desc"
-          v-if="$slots.description || description"
-        >
-          <slot name="description">{{ description }}</slot>
-        </div>
-      </div>
-    </div>
-  </div>
-</template>
+<script setup lang="ts">
+import type { CheckCard } from "./interface";
 
-<script lang="ts" setup>
 import {
-  ref,
-  watch,
   computed,
-  StyleValue,
-  useAttrs,
   inject,
+  ref,
   useSlots,
+  watch,
 } from "vue";
 import "./index.less";
-export interface CheckCard {
-  title?: string;
-  avatar?: string;
-  description?: string;
-  cover?: string;
-  extra?: string;
-  disabled?: boolean;
-  value?: string | number;
-  modelValue?: boolean;
-}
+
+export type { CheckCard };
 
 defineOptions({
   name: "LayCheckcard",
 });
 
-const attrs = useAttrs();
-const slot = useSlots();
-const emit = defineEmits(["change", "update:modelValue"]);
 const props = withDefaults(defineProps<CheckCard>(), {
   disabled: false,
   modelValue: false,
 });
+
+const emit = defineEmits(["change", "update:modelValue"]);
+
+const slot = useSlots();
 const initValue = ref(props.modelValue);
 const checkcardGroup: any = inject("checkcardGroup", {});
 const getIsGroup = computed(
-  () => checkcardGroup && checkcardGroup.name === "LayCheckCardGroup"
+  () => checkcardGroup && checkcardGroup.name === "LayCheckCardGroup",
 );
-const containerStyle = computed(() => attrs.style as StyleValue);
-const getDisabled = ref<boolean | undefined>(
-  props.disabled || checkcardGroup.disabled
-);
+const disabledValue = computed(() => {
+  return props.disabled || checkcardGroup.disabled?.value;
+});
 const getContentStyle = computed(() => {
   return {
     "layui-checkcard-is-description": !props.description && !slot.description,
@@ -100,10 +49,12 @@ const getCheckState = computed({
     if (getIsGroup.value) {
       if (!Array.isArray(checkcardGroup.modelVal.value)) {
         return checkcardGroup.modelVal.value === props.value;
-      } else {
+      }
+      else {
         return checkcardGroup.modelVal.value.includes(props.value);
       }
-    } else {
+    }
+    else {
       return initValue.value;
     }
   },
@@ -111,10 +62,12 @@ const getCheckState = computed({
     if (getIsGroup.value) {
       if (!Array.isArray(checkcardGroup.modelVal.value)) {
         checkcardGroup.modelVal.value = props.value;
-      } else {
+      }
+      else {
         checkcardGroup.modelVal.value = getNewArr();
       }
-    } else {
+    }
+    else {
       initValue.value = val;
       emit("change", val);
       emit("update:modelValue", val);
@@ -125,43 +78,82 @@ const getValArr = computed(() => {
   if (getIsGroup.value) {
     return checkcardGroup.modelVal.value;
   }
+  return [];
 });
-const getNewArr = () => {
-  let newsArr = [...getValArr.value];
-  const findIndex = newsArr.findIndex((key) => key === props.value);
+function getNewArr() {
+  const newsArr = [...getValArr.value];
+  const findIndex = newsArr.findIndex(key => key === props.value);
   if (findIndex < 0) {
     newsArr.push(props.value);
-  } else {
+  }
+  else {
     newsArr.splice(findIndex, 1);
   }
   return newsArr;
-};
+}
 
-const handleCheck = (event: Event) => {
-  if (!getDisabled.value) {
+function handleCheck() {
+  if (!disabledValue.value) {
     getCheckState.value = !getCheckState.value;
   }
-};
-watch(
-  () => props.disabled,
-  (val) => {
-    if (!getIsGroup.value) {
-      getDisabled.value = val;
-    }
-  }
-);
+}
+
 watch(
   () => props.modelValue,
   (val) => {
     initValue.value = val;
-  }
+  },
 );
-const getStyle = computed(() => {
-  return {
-    "layui-checkcard-checked": getCheckState.value,
-    "layui-checkcard": true,
-    "layui-checkcard-bordered": true,
-    "layui-checkcard-disabled": getDisabled.value,
-  };
+
+const classes = computed(() => {
+  return [
+    "layui-checkcard",
+    "layui-checkcard-bordered",
+    {
+      "layui-checkcard-checked": getCheckState.value,
+      "layui-checkcard-disabled": disabledValue.value,
+    },
+  ];
 });
 </script>
+
+<template>
+  <div :class="classes" @click="handleCheck">
+    <div v-if="$slots.cover || cover" class="layui-checkcard-is-cover">
+      <img v-if="cover" :src="cover">
+      <slot v-if="$slots.cover" name="cover">
+        {{ cover }}
+      </slot>
+    </div>
+    <div v-else :class="getContentStyle">
+      <div v-if="$slots.avatar || avatar" class="layui-checkcard-left">
+        <span v-if="avatar" class="layui-checkcard-avatar">
+          <img :src="avatar">
+        </span>
+        <slot v-if="$slots.avatar" name="avatar">
+          {{ avatar }}
+        </slot>
+      </div>
+      <div class="layui-checkcard-right">
+        <div v-if="$slots.title || title" class="layui-checkcard-header">
+          <span :class="getExtraStyle">
+            <slot name="title">{{ title }}</slot>
+          </span>
+          <div v-if="$slots.extra" class="layui-checkcard-extra">
+            <slot name="extra">
+              {{ extra }}
+            </slot>
+          </div>
+        </div>
+        <div
+          v-if="$slots.description || description"
+          class="layui-checkcard-desc"
+        >
+          <slot name="description">
+            {{ description }}
+          </slot>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
