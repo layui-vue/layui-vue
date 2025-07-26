@@ -1,7 +1,7 @@
 {
   "name": "@layui/layui-vue",
   "type": "module",
-  "version": "2.23.2",
+  "version": "2.23.3-alpha.1",
   "description": "a component library for Vue 3 base on layui-vue",
   "author": "就眠儀式",
   "license": "MIT",
@@ -56,22 +56,22 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@babel/types": "7.21.0",
     "@ctrl/tinycolor": "^3.4.1",
     "@floating-ui/dom": "1.6.5",
     "@layui/icons-vue": "workspace:*",
     "@layui/layer-vue": "workspace:*",
-    "@rollup/plugin-terser": "0.4.4",
-    "@types/qrcode": "1.5.0",
     "@umijs/ssr-darkreader": "^4.9.45",
     "@vueuse/core": "8.7.3",
     "async-validator": "^4.1.1",
     "cropperjs": "^1.5.12",
     "dayjs": "^1.11.10",
-    "evtd": "^0.2.3",
     "jsbarcode": "3.11.5",
     "qrcode": "1.5.0",
     "vue-i18n": "9.6.3"
+  },
+  "devDependencies": {
+    "@rollup/plugin-terser": "0.4.4",
+    "@types/qrcode": "1.5.0"
   },
   "browserslist": [
     "current node",
