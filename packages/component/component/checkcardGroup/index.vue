@@ -1,17 +1,5 @@
-<!--
- * @Author: baobaobao
- * @Date: 2023-04-26 13:28:17
- * @LastEditTime: 2023-05-23 13:38:22
- * @LastEditors: baobaobao
--->
-<template>
-  <div class="layui-checkcard-group">
-    <slot></slot>
-  </div>
-</template>
-
-<script lang="ts" setup>
-import { ref, watch, provide } from "vue";
+<script setup lang="ts">
+import { provide, ref, watch } from "vue";
 import "./index.less";
 
 export interface CheckCardGroup {
@@ -47,12 +35,12 @@ watch(
   {
     deep: true,
     immediate: true,
-  }
+  },
 );
 provide("checkcardGroup", {
   name: "LayCheckCardGroup",
-  modelVal: modelVal,
-  disabled: disabled,
+  modelVal,
+  disabled,
 });
 
 watch(
@@ -61,7 +49,7 @@ watch(
     emit("update:modelValue", val.value);
     emit("change", val.value);
   },
-  { deep: true }
+  { deep: true },
 );
 
 watch(
@@ -71,7 +59,7 @@ watch(
   },
   {
     deep: true,
-  }
+  },
 );
 
 watch(
@@ -81,6 +69,12 @@ watch(
   },
   {
     deep: true,
-  }
+  },
 );
 </script>
+
+<template>
+  <div class="layui-checkcard-group">
+    <slot />
+  </div>
+</template>

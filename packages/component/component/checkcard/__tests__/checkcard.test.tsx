@@ -6,7 +6,10 @@
  */
 import { mount, shallowMount } from "@vue/test-utils";
 import LayCheckCard from "../index.vue";
+import LayCheckcardGroup from "../../checkcardGroup/index.vue";
 import { describe, expect, test } from "vitest";
+import {ref, h, nextTick} from 'vue'
+
 const IMAGE_URL = "https://img.com";
 const title = "test checkcard text";
 const description = "test checkcard description";
@@ -135,5 +138,41 @@ describe("LayCheckCard.vue", () => {
     expect(wrapper.emitted()).toHaveProperty("click");
 
     wrapper.unmount();
+  });
+
+  test("disabled", async () => {
+    const disabledGroup = ref(true)
+    const disabled = ref(true)
+
+    const wrapper = mount(
+      {
+        setup() {
+          return () => (
+            <LayCheckcardGroup disabled={disabledGroup.value}>
+              <LayCheckCard title="标题" disabled={disabled.value}></LayCheckCard>
+            </LayCheckcardGroup>
+          );
+        },
+      },
+      {}
+    );
+
+    await nextTick()
+    expect(wrapper.find(".layui-checkcard").classes()).toContain(
+      "layui-checkcard-disabled"
+    );
+
+    // await wrapper.setProps({ disabled: false })
+    disabledGroup.value = false
+    await nextTick()
+    expect(wrapper.find(".layui-checkcard").classes()).toContain(
+      "layui-checkcard-disabled"
+    );
+
+    disabled.value = false
+    await nextTick()
+    expect(wrapper.find(".layui-checkcard").classes()).not.toContain(
+      "layui-checkcard-disabled"
+    );
   });
 });
