@@ -15,6 +15,16 @@
   <lay-timeline>
     <lay-timeline-item title="2.23.x">
       <ul>
+        <a name="2-23-3"></a>
+        <li>
+          <h3>2.23.3 <span class="layui-badge-rim">2025-07-28</span></h3>
+          <ul>
+              <li>[修复] checkcard 组件 disabled属性变化未生效。<a href="https://gitee.com/layui-vue/layui-vue/pulls/501">详情</a></li>
+              <li>[修复] menu 组件 展开/收起图标位置异常。<a href="https://gitee.com/layui-vue/layui-vue/pulls/502">详情</a></li>
+          </ul>
+        </li>
+      </ul>
+      <ul>
         <a name="2-23-2"></a>
         <li>
           <h3>2.23.2 <span class="layui-badge-rim">2025-07-22</span></h3>
