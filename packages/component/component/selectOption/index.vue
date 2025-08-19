@@ -1,13 +1,15 @@
 <script setup lang="ts">
-import LayCheckbox from "../checkbox/index.vue";
+import type {
+  ComputedRef,
+  Ref,
+  WritableComputedRef,
+} from "vue";
 import {
   computed,
-  ComputedRef,
   inject,
-  WritableComputedRef,
-  Ref,
   ref,
 } from "vue";
+import LayCheckbox from "../checkbox/index.vue";
 
 export interface SelectOptionProps {
   label?: string;
@@ -29,30 +31,32 @@ const searchValue: Ref<string> = inject("searchValue") as Ref<string>;
 const selectRef: Ref<HTMLElement> = inject("selectRef") as Ref<HTMLElement>;
 const searchMethod: Function = inject("searchMethod") as Function;
 const selectedValue: WritableComputedRef<any> = inject(
-  "selectedValue"
+  "selectedValue",
 ) as WritableComputedRef<any>;
 const multiple: ComputedRef = inject("multiple") as ComputedRef;
 const checkboxRef = ref<HTMLElement>();
 
-const handleSelect = () => {
+function handleSelect() {
   if (multiple.value) {
     if (!props.disabled) {
-      // @ts-ignore
+      // @ts-expect-error TODO
       checkboxRef.value?.toggle();
     }
-  } else {
+  }
+  else {
     if (!props.disabled) {
-      // @ts-ignore
+      // @ts-expect-error TODO
       selectRef.value.hide();
       selectedValue.value = props.value;
     }
   }
-};
+}
 
 const selected = computed(() => {
   if (multiple.value) {
-    return selectedValue.value.indexOf(props.value) != -1;
-  } else {
+    return selectedValue.value.includes(props.value);
+  }
+  else {
     return selectedValue.value === props.value;
   }
 });
@@ -63,10 +67,11 @@ const display = computed(() => {
   if (searchMethod && !first.value) {
     return searchMethod(searchValue.value, props);
   }
+  // eslint-disable-next-line vue/no-side-effects-in-computed-properties
   first.value = false;
   return (
-    props.keyword?.toString().indexOf(searchValue.value) > -1 ||
-    props.label?.toString().indexOf(searchValue.value) > -1
+    props.keyword?.toString().includes(searchValue.value)
+    || props.label?.toString().includes(searchValue.value)
   );
 });
 
@@ -84,14 +89,13 @@ const classes = computed(() => {
 <template>
   <dd v-show="display" :class="classes" @click="handleSelect">
     <template v-if="multiple">
-      <lay-checkbox
-        skin="primary"
+      <LayCheckbox
         ref="checkboxRef"
         v-model="selectedValue"
+        skin="primary"
         :disabled="disabled"
         :value="value"
-      >
-      </lay-checkbox>
+      />
     </template>
     <slot>{{ label }}</slot>
   </dd>

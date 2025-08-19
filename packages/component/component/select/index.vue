@@ -1,29 +1,32 @@
 <script setup lang="ts">
-import "./index.less";
-import {
-  provide,
-  computed,
-  ref,
-  Ref,
-  useSlots,
-  onMounted,
-  VNode,
+import type {
   Component,
-  watch,
-  onUnmounted,
+  Ref,
   StyleValue,
+  VNode,
 } from "vue";
-import { LayIcon } from "@layui/icons-vue";
 import type { DropdownTeleportProps } from "../dropdown/interface";
+import type { SelectOptionProps } from "../selectOption/index.vue";
+import type { SelectSize } from "./interface";
+import { LayIcon } from "@layui/icons-vue";
 
-import LayInput from "../input/index.vue";
-import LayTagInput from "../tagInput/index.vue";
-import LayDropdown from "../dropdown/index.vue";
-import LaySelectOption, { SelectOptionProps } from "../selectOption/index.vue";
-import { SelectSize } from "./interface";
+import {
+  computed,
+  onMounted,
+  onUnmounted,
+  provide,
+  ref,
+  useSlots,
+  watch,
+} from "vue";
 import { isArrayChildren } from "../../utils";
+import LayDropdown from "../dropdown/index.vue";
+import LayInput from "../input/index.vue";
+import LaySelectOption from "../selectOption/index.vue";
 import LaySelectOptionGroup from "../selectOptionGroup/index.vue";
+import LayTagInput from "../tagInput/index.vue";
 import useProps from "./index.hooks";
+import "./index.less";
 
 export interface SelectProps {
   name?: string;
@@ -70,6 +73,8 @@ const props = withDefaults(defineProps<SelectProps>(), {
   multiple: false,
 });
 
+const emits = defineEmits<SelectEmits>();
+
 const { size } = useProps(props);
 
 const slots = useSlots();
@@ -77,26 +82,27 @@ const selectRef = ref<typeof LayDropdown | null>(null);
 const searchValue = ref("");
 const singleValue = ref("");
 const multipleValue: Ref<any[]> = ref([]);
-const emits = defineEmits<SelectEmits>();
 const openState: Ref<boolean> = ref(false);
 const _options = ref<any>([]);
 const composing = ref(false);
-var timer: any;
+let timer: any;
 
-const getOption = (nodes: VNode[], newOptions: any[]) => {
+function getOption(nodes: VNode[], newOptions: any[]) {
+  // eslint-disable-next-line array-callback-return
   nodes?.map((item) => {
     // 如果使用 v-for 嵌套，会有一些问题
     if (isArrayChildren(item, item.children)) {
       getOption(item.children as VNode[], newOptions);
-    } else {
+    }
+    else {
       // 如果是 Select Option 遍历选项到结果
-      if ((item.type as Component).name == LaySelectOption.name) {
+      if ((item.type as Component).name === LaySelectOption.name) {
         // 如果存在插槽，优先级将大于 label 属性
         if (item.children) {
-          // @ts-ignore
+          // @ts-expect-error TODO
           const label = item.children.default()[0].children;
           if (typeof label == "string") {
-            // @ts-ignore
+            // @ts-expect-error TODO
             item.props.label = label;
           }
         }
@@ -104,85 +110,29 @@ const getOption = (nodes: VNode[], newOptions: any[]) => {
       }
 
       // 如果是 Select Option Group 深层遍历
-      if ((item.type as Component).name == LaySelectOptionGroup.name) {
+      if ((item.type as Component).name === LaySelectOptionGroup.name) {
         if (item.children) {
-          // @ts-ignore
+          // @ts-expect-error TODO
           getOption(item.children.default() as VNode[], newOptions);
         }
       }
     }
   });
-};
+}
 
-const intOption = () => {
+function intOption() {
   const newOptions: any[] = [];
   if (slots.default) {
     getOption(slots.default(), newOptions);
   }
   Object.assign(newOptions, props.options);
-  if (JSON.stringify(newOptions) != JSON.stringify(_options.value)) {
+  if (JSON.stringify(newOptions) !== JSON.stringify(_options.value)) {
     _options.value = newOptions;
   }
-};
+}
 
 const allOptions = computed(() => {
   return props.options;
-});
-
-const handleRemove = (value: any) => {
-  if (Array.isArray(selectedValue.value)) {
-    selectedValue.value = selectedValue.value.filter((item) => item !== value);
-    emits("remove-tag", value);
-  }
-};
-
-const onCompositionstart = () => {
-  composing.value = true;
-};
-
-const onCompositionend = (eventParam: Event) => {
-  composing.value = false;
-  handleSearch((eventParam.target as HTMLInputElement).value);
-};
-
-onMounted(() => {
-  intOption();
-  timer = setInterval(intOption, 500);
-  watch(
-    [selectedValue, _options],
-    () => {
-      if (multiple.value) {
-        try {
-          multipleValue.value = selectedValue.value?.map((value: any) => {
-            var option = _options.value.find((item: any) => {
-              item.disabled == "" || item.disabled == true
-                ? (item.closable = false)
-                : (item.closable = true);
-              return item.value === value;
-            });
-
-            if (option == undefined) {
-              option = { label: value, value: value, closable: true };
-            }
-
-            return option;
-          });
-        } catch (e) {
-          throw new Error("v-model / model-value is not an array type");
-        }
-      } else {
-        searchValue.value = "";
-        singleValue.value = _options.value.find((item: any) => {
-          return item.value === selectedValue.value;
-        })?.label;
-      }
-    },
-    { immediate: true, deep: true }
-  );
-});
-
-onUnmounted(() => {
-  clearInterval(timer);
 });
 
 const selectedValue = computed({
@@ -199,8 +149,69 @@ const multiple = computed(() => {
   return props.multiple;
 });
 
-const handleSearch = (value: string) => {
-  if (composing.value) return;
+function handleRemove(value: any) {
+  if (Array.isArray(selectedValue.value)) {
+    selectedValue.value = selectedValue.value.filter(item => item !== value);
+    emits("remove-tag", value);
+  }
+}
+
+function onCompositionstart() {
+  composing.value = true;
+}
+
+function onCompositionend(eventParam: Event) {
+  composing.value = false;
+  handleSearch((eventParam.target as HTMLInputElement).value);
+}
+
+onMounted(() => {
+  intOption();
+  timer = setInterval(intOption, 500);
+  watch(
+    [selectedValue, _options],
+    () => {
+      if (multiple.value) {
+        try {
+          multipleValue.value = selectedValue.value?.map((value: any) => {
+            let option = _options.value.find((item: any) => {
+              // eslint-disable-next-line eqeqeq
+              item.disabled == "" || item.disabled == true
+                ? (item.closable = false)
+                : (item.closable = true);
+              return item.value === value;
+            });
+
+            // eslint-disable-next-line eqeqeq
+            if (option == undefined) {
+              option = { label: value, value, closable: true };
+            }
+
+            return option;
+          });
+        }
+        catch {
+          throw new Error("v-model / model-value is not an array type");
+        }
+      }
+      else {
+        searchValue.value = "";
+        singleValue.value = _options.value.find((item: any) => {
+          return item.value === selectedValue.value;
+        })?.label;
+      }
+    },
+    { immediate: true, deep: true },
+  );
+});
+
+onUnmounted(() => {
+  clearInterval(timer);
+});
+
+function handleSearch(value: string) {
+  if (composing.value)
+    return;
   emits("search", value);
   searchValue.value = value;
 
@@ -208,31 +219,33 @@ const handleSearch = (value: string) => {
   if (value && !openState.value) {
     selectRef.value && selectRef.value.show();
   }
-};
+}
 
-const handleClear = () => {
+function handleClear() {
   if (multiple.value) {
     selectedValue.value = [];
-  } else {
+  }
+  else {
     selectedValue.value = "";
   }
 
   emits("clear");
-};
+}
 
-const handleHide = () => {
+function handleHide() {
   searchValue.value = "";
   openState.value = false;
-};
+}
 
 const hasContent = computed(() => {
   if (Array.isArray(selectedValue.value)) {
     return selectedValue.value.length > 0;
-  } else {
+  }
+  else {
     return (
-      selectedValue.value !== "" &&
-      selectedValue.value !== undefined &&
-      selectedValue.value !== null
+      selectedValue.value !== ""
+      && selectedValue.value !== undefined
+      && selectedValue.value !== null
     );
   }
 });
@@ -258,29 +271,29 @@ provide("searchMethod", props.searchMethod);
       'has-disabled': disabled,
     }"
   >
-    <lay-dropdown
+    <LayDropdown
       ref="selectRef"
       :disabled="disabled"
-      :contentClass="contentClass"
-      :contentStyle="contentStyle"
-      :autoFitWidth="autoFitWidth"
-      :autoFitMinWidth="autoFitMinWidth"
-      :teleportProps="teleportProps"
+      :content-class="contentClass"
+      :content-style="contentStyle"
+      :auto-fit-width="autoFitWidth"
+      :auto-fit-min-width="autoFitMinWidth"
+      :teleport-props="teleportProps"
       @hide="handleHide"
       @show="openState = true"
     >
-      <lay-tag-input
+      <LayTagInput
         v-if="multiple"
         v-model="multipleValue"
         v-model:input-value="searchValue"
         :allow-clear="allowClear"
         :placeholder="_placeholder"
-        :collapseTagsTooltip="collapseTagsTooltip"
-        :minCollapsedNum="minCollapsedNum"
+        :collapse-tags-tooltip="collapseTagsTooltip"
+        :min-collapsed-num="minCollapsedNum"
         :disabled="disabled"
-        :disabledInput="!showSearch"
+        :disabled-input="!showSearch"
         :size="size"
-        :class="{ 'layui-unselect': true }"
+        class="layui-unselect"
         :style="{ width: '100%' }"
         @remove="handleRemove"
         @clear="handleClear"
@@ -289,24 +302,24 @@ provide("searchMethod", props.searchMethod);
         @keydown.enter.capture.prevent.stop
       >
         <template v-if="slots.prepend" #prepend>
-          <slot name="prepend"></slot>
+          <slot name="prepend" />
         </template>
         <template v-if="slots.append" #append>
-          <slot name="append"></slot>
+          <slot name="append" />
         </template>
         <template #suffix>
-          <lay-icon
+          <LayIcon
             type="layui-icon-triangle-d"
             :class="{ triangle: openState }"
-          ></lay-icon>
+          />
         </template>
-      </lay-tag-input>
-      <lay-input
+      </LayTagInput>
+      <LayInput
         v-else
         :size="size"
         :disabled="disabled"
         :readonly="!showSearch"
-        :modelValue="singleValue"
+        :model-value="singleValue"
         :allow-clear="allowClear"
         :placeholder="_placeholder"
         :class="{ 'layui-unselect': !showSearch }"
@@ -316,36 +329,36 @@ provide("searchMethod", props.searchMethod);
         @clear="handleClear"
       >
         <template v-if="slots.prepend" #prepend>
-          <slot name="prepend"></slot>
+          <slot name="prepend" />
         </template>
         <template v-if="slots.append" #append>
-          <slot name="append"></slot>
+          <slot name="append" />
         </template>
         <template #suffix>
-          <lay-icon
+          <LayIcon
             type="layui-icon-triangle-d"
             :class="{ triangle: openState }"
-          ></lay-icon>
+          />
         </template>
-      </lay-input>
+      </LayInput>
       <template #content>
         <dl class="layui-select-content">
-          <div class="layui-select-content__header" v-if="slots.header">
-            <slot name="header"></slot>
+          <div v-if="slots.header" class="layui-select-content__header">
+            <slot name="header" />
           </div>
           <template v-if="options">
-            <lay-select-option
+            <LaySelectOption
               v-for="(item, index) in allOptions"
               v-bind="item"
               :key="index"
-            ></lay-select-option>
+            />
           </template>
-          <slot></slot>
-          <div class="layui-select-content__footer" v-if="slots.footer">
-            <slot name="footer"></slot>
+          <slot />
+          <div v-if="slots.footer" class="layui-select-content__footer">
+            <slot name="footer" />
           </div>
         </dl>
       </template>
-    </lay-dropdown>
+    </LayDropdown>
   </div>
 </template>
