@@ -1,45 +1,40 @@
-<!--
- * @Author: baobaobao
- * @Date: 2023-07-07 15:34:38
- * @LastEditTime: 2023-10-23 18:00:53
- * @LastEditors: baobaobao
--->
-
 <script setup lang="ts">
-import "./index.less";
-import { PageProps as _PageProps, LayoutKey as _LayOutKey } from "./interface";
-import {
-  Ref,
-  ref,
-  watch,
-  useSlots,
-  computed,
+import type {
   ComputedRef,
-  h,
-  provide,
+  Ref,
   VNode,
 } from "vue";
+import type { LayoutKey, PageProps } from "./interface";
+import {
+  computed,
+  h,
+  provide,
+  ref,
+  useSlots,
+  watch,
+} from "vue";
 import LayPageCount from "./components/count.vue";
-import LayPagePrev from "./components/prev.vue";
-import LayPager from "./components/pager.vue";
-import LayPageNext from "./components/next.vue";
 import LayPageLimits from "./components/limits.vue";
+import LayPageNext from "./components/next.vue";
+import LayPager from "./components/pager.vue";
+import LayPagePrev from "./components/prev.vue";
 import LayPageRefresh from "./components/refresh.vue";
-import LayPageSkip from "./components/skip.vue";
 import LayPageSimple from "./components/simple.vue";
+import LayPageSkip from "./components/skip.vue";
 import { LAYUI_PAGE_KEY } from "./usePage";
+import "./index.less";
 // export type MODE = "border" | "background" | "none";
 export interface PageOtionInfo {
   resetLeft?: number[];
   resetRight?: number[];
 }
-export type LayoutKey = _LayOutKey;
+export type { LayoutKey };
 export interface ComponentVnode {
   name: LayoutKey;
   componentName: VNode | null;
   show: boolean;
 }
-export type PageProps = _PageProps;
+export type { PageProps };
 
 defineOptions({
   name: "LayPage",
@@ -58,6 +53,7 @@ const props = withDefaults(defineProps<PageProps>(), {
   layout: () => ["prev", "page", "next", "limits"],
 });
 
+const emit = defineEmits(["update:modelValue", "change", "update:limit"]);
 const slots = useSlots();
 const limits: Ref<number[]> = ref(props.limits);
 const groups: Ref<number> = ref(props.pages);
@@ -66,16 +62,16 @@ const currentPage: Ref<number> = ref(props.modelValue);
 const inlimit: Ref<number> = ref(props.limit);
 const theme: Ref<string | undefined> = ref(props.theme);
 const ellipsisTooltip: Ref<boolean> = ref(props.ellipsisTooltip);
-const emit = defineEmits(["update:modelValue", "change", "update:limit"]);
 const iconPrevHover: Ref<boolean> = ref<boolean>(true);
 const iconNextHover: Ref<boolean> = ref<boolean>(true);
-let pageOpionData = ref<PageOtionInfo>({
+const pageOpionData = ref<PageOtionInfo>({
   resetLeft: [],
   resetRight: [],
 });
 const jumpNumber: Ref<number> = ref(props.modelValue);
 const simple: ComputedRef<boolean> = computed(() => props.simple);
 const disabled: Ref<boolean> = ref(props.disabled);
+const pageCount = computed(() => Math.ceil(props.total / inlimit.value) || 1);
 const getHideOnSinglePage: ComputedRef<boolean> = computed(() => {
   return !(pageCount.value < 2 && props.hideOnSinglePage);
 });
@@ -83,25 +79,25 @@ watch(
   () => props.limit,
   () => {
     inlimit.value = props.limit;
-  }
+  },
 );
 watch(
   () => props.disabled,
   () => {
     disabled.value = props.disabled;
-  }
+  },
 );
 watch(
   () => props.theme,
   () => {
     theme.value = props.theme;
-  }
+  },
 );
 watch(
   () => props.ellipsisTooltip,
   () => {
     ellipsisTooltip.value = props.ellipsisTooltip;
-  }
+  },
 );
 watch(
   () => inlimit,
@@ -111,20 +107,20 @@ watch(
   },
   {
     deep: true,
-  }
+  },
 );
 
 watch(
   () => props.layout,
   () => {
     getLayout.value = props.layout;
-  }
+  },
 );
 watch(
   () => props.modelValue,
   () => {
     currentPage.value = props.modelValue;
-  }
+  },
 );
 
 watch(currentPage, (val) => {
@@ -134,25 +130,25 @@ watch(currentPage, (val) => {
 });
 // 分页
 const pageTotal = computed(() => props.total);
-const pageCount = computed(() => Math.ceil(props.total / inlimit.value) || 1);
 const setPage = computed(() => {
-  let joinPage = [];
+  const joinPage = [];
   // 解释如下, 向上取值(当前值 + 1)/要连续出现的页数 如果等于1, 则代表从最小值为1,
   // 这里加1进行边界处理, 当前值等于要连续出现的页数时, 页数最小值不从1开始, 这种方式代表一种约定吧。
   // 如当前值 4, 连续出现的页数 为5时, 一定要满足从1开始取5个。
   if (groups.value <= 0) {
+    // eslint-disable-next-line vue/no-side-effects-in-computed-properties
     groups.value = 1;
   }
-  const index =
-    pageCount.value > groups.value
+  const index
+    = pageCount.value > groups.value
       ? Math.ceil((currentPage.value + 1) / groups.value)
       : 1;
   // 根据当前值一分为2, 算出当前值最小值, 要连续出现的页数 一定包含当前值
   const halve = Math.floor((groups.value - 1) / 2);
   // 当前值 - 左边值
   let start = index > 1 ? currentPage.value - halve : 1;
-  let end =
-    index > 1
+  let end
+    = index > 1
       ? (() => {
           // 算出右边 值
           const max = currentPage.value + (groups.value - halve - 1);
@@ -171,24 +167,30 @@ const setPage = computed(() => {
     }
   }
   if (currentPage.value > pageCount.value) {
+    // eslint-disable-next-line vue/no-side-effects-in-computed-properties
     currentPage.value = pageCount.value;
   }
   // 不包括 1 和 start
+  // eslint-disable-next-line vue/no-side-effects-in-computed-properties
   pageOpionData.value.resetLeft = Array.from({ length: start - 2 })
     .map((_, index) => index + 2)
     .reverse();
+
+  // eslint-disable-next-line vue/no-side-effects-in-computed-properties
   pageOpionData.value.resetRight = Array.from({
     length: pageCount.value - end - 1,
   }).map((_, index) => end + index + 1);
   for (let index = start; index <= end; index++) {
     joinPage.push(index);
   }
+
   return joinPage;
 });
 
 // 分页事件
-const handlePage = (page: number) => {
-  if (disabled.value) return;
+function handlePage(page: number) {
+  if (disabled.value)
+    return;
   if (page <= 0) {
     page = 1;
   }
@@ -198,25 +200,27 @@ const handlePage = (page: number) => {
   iconNextHover.value = true;
   iconPrevHover.value = true;
   currentPage.value = page;
-};
+}
 // 下一页
-const handleNext = () => {
-  if (disabled.value) return;
+function handleNext() {
+  if (disabled.value)
+    return;
   if (currentPage.value === pageCount.value) {
     return;
   }
   currentPage.value++;
-};
+}
 // 上一页
-const handlePrev = () => {
-  if (disabled.value) return;
+function handlePrev() {
+  if (disabled.value)
+    return;
   if (currentPage.value <= 1) {
     return;
   }
   currentPage.value--;
-};
+}
 // 失去焦点
-const handleBlur = () => {
+function handleBlur() {
   if (simple.value) {
     if (currentPage.value >= pageCount.value) {
       currentPage.value = pageCount.value;
@@ -224,7 +228,8 @@ const handleBlur = () => {
     if (currentPage.value <= 1) {
       currentPage.value = 1;
     }
-  } else {
+  }
+  else {
     if (+jumpNumber.value >= pageCount.value) {
       jumpNumber.value = pageCount.value;
     }
@@ -232,13 +237,13 @@ const handleBlur = () => {
       jumpNumber.value = 1;
     }
   }
-};
-const handleRefresh = () => {
+}
+function handleRefresh() {
   emit("change", { current: currentPage.value, limit: inlimit.value });
-};
-const handleJumpPage = () => {
+}
+function handleJumpPage() {
   handlePage(+jumpNumber.value);
-};
+}
 
 const PAGE_TEMPLATE: Record<string, VNode | null> = {
   count: h(LayPageCount),
@@ -254,7 +259,7 @@ const getPageComponent: ComputedRef<ComponentVnode[]> = computed(() => {
   return getLayout.value.reduce((init: ComponentVnode[], element) => {
     init.push({
       componentName: PAGE_TEMPLATE[element],
-      show: PAGE_TEMPLATE[element] ? true : false,
+      show: !!PAGE_TEMPLATE[element],
       name: element,
     });
     return init;
@@ -287,8 +292,7 @@ provide(LAYUI_PAGE_KEY, {
 <template>
   <div
     v-if="getHideOnSinglePage"
-    :class="[
-      'layui-page',
+    class="layui-page" :class="[
       disabled ? 'is-disabled' : '',
       simple ? 'layui-page-simple' : '',
     ]"
@@ -298,12 +302,12 @@ provide(LAYUI_PAGE_KEY, {
         <component
           :is="component.componentName"
           v-if="component.show"
-        ></component>
+        />
       </template>
     </template>
     <!-- simple -->
     <template v-else>
-      <lay-page-simple></lay-page-simple>
+      <LayPageSimple />
     </template>
   </div>
 </template>
